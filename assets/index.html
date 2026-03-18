@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hangeul Valley – Level Mode</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;700;900&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --wood-l:   #c4893a;
+      --wood-m:   #8b5a2b;
+      --wood-d:   #4a2a0d;
+      --parch:    #f4d6a0;
+      --parch-d:  #e8c07a;
+      --grass:    #3d7a1a;
+      --gold:     #f9c74f;
+      --green-l:  #4ade80;
+      --green-d:  #16a34a;
+    }
+    body { margin: 0; overflow: hidden; background: #1a3a0f;
+      font-family: 'Be Vietnam Pro', 'Nunito', 'Segoe UI', system-ui, sans-serif; }
+    /* Vietnamese-safe font rule: any element with vn text must use non-pixel font */
+    .vn-text, p, span:not(.quiz-crop-icon):not(.key-badge),
+    div:not(#hud):not(#hud *), button:not(.hud-btn) {
+      font-family: 'Be Vietnam Pro', 'Nunito', system-ui, sans-serif;
+    }
+
+    /* ── LEVEL SELECT ─────────────────────────────────────────────────────── */
+    #level-select-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background:
+        radial-gradient(ellipse at 20% 10%, rgba(90,160,48,.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 90%, rgba(60,100,20,.35) 0%, transparent 50%),
+        linear-gradient(160deg, #1c2e0f 0%, #0e1a07 100%);
+      display: flex; flex-direction: column; align-items: center;
+      overflow-y: auto; padding: 36px 24px 60px;
+      animation: fadeIn .35s ease;
+    }
+    #level-select-overlay.hidden { display: none; }
+
+    .ls-title-wrap { text-align: center; margin-bottom: 36px; }
+    .ls-logo { font-size: 56px; margin-bottom: 10px; filter: drop-shadow(0 4px 12px rgba(249,199,79,.4)); }
+    .ls-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 26px; letter-spacing: 1px;
+      background: linear-gradient(135deg, #f9c74f 20%, #f3722c 80%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      text-shadow: none;
+      filter: drop-shadow(0 2px 8px rgba(249,199,79,.35));
+    }
+    .ls-subtitle {
+      font-family: 'VT323', monospace;
+      font-size: 18px; color: rgba(255,255,255,.5); margin-top: 8px; letter-spacing: 2px;
+    }
+
+    .ls-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+      gap: 18px; width: 100%; max-width: 960px;
+    }
+
+    /* ── RESUME CARD ── */
+    .ls-resume-card {
+      grid-column: 1 / -1;
+      display: flex; align-items: center; gap: 18px;
+      background: linear-gradient(135deg,rgba(74,200,50,.18),rgba(34,197,94,.08));
+      border: 2px solid #4ade80; border-radius: 14px; padding: 18px 24px;
+      cursor: pointer; transition: transform .15s, box-shadow .15s;
+      box-shadow: 0 0 30px rgba(74,200,50,.15);
+      animation: pulseGreen 2s ease-in-out infinite;
+    }
+    @keyframes pulseGreen {
+      0%,100%{box-shadow:0 0 20px rgba(74,200,50,.15);}
+      50%{box-shadow:0 0 40px rgba(74,200,50,.35);}
+    }
+    .ls-resume-card:hover { transform:translateY(-3px); box-shadow:0 6px 30px rgba(74,200,50,.4); }
+    .lsr-icon { font-size:32px; color:#4ade80; font-weight:900; flex-shrink:0; }
+    .lsr-title { font-family:'Press Start 2P',monospace; font-size:11px; color:#4ade80; margin-bottom:6px; }
+    .lsr-sub { font-family:'Be Vietnam Pro',sans-serif; font-size:13px; color:rgba(255,255,255,.65); }
+    .ls-sep {
+      grid-column: 1 / -1; text-align:center;
+      font-family:'Be Vietnam Pro',sans-serif; font-size:12px;
+      color:rgba(255,255,255,.25); margin: -4px 0;
+    }
+
+    /* Wood-grain card effect */
+    .level-card {
+      background: linear-gradient(170deg, #2e1a0a 0%, #3d2510 50%, #2a1508 100%);
+      border: 3px solid var(--wood-m);
+      border-top-color: var(--wood-l);
+      border-left-color: var(--wood-l);
+      border-radius: 12px; padding: 22px 20px;
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: transform .18s, box-shadow .18s;
+      user-select: none;
+      box-shadow: 0 4px 0 var(--wood-d), 0 6px 20px rgba(0,0,0,.5);
+    }
+    /* Subtle wood grain lines */
+    .level-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        91deg, transparent 0, transparent 14px,
+        rgba(255,255,255,.025) 14px, rgba(255,255,255,.025) 15px
+      );
+      pointer-events: none;
+    }
+    .level-card:hover:not(.locked) {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 0 var(--wood-d), 0 14px 36px rgba(0,0,0,.6), 0 0 0 2px var(--gold);
+    }
+    .level-card.locked { opacity: .4; cursor: not-allowed; filter: grayscale(.8); }
+    .level-card.completed { border-color: var(--green-d); border-top-color: var(--green-l); }
+    .level-card.completed:hover { box-shadow: 0 8px 0 #0f4a22, 0 14px 36px rgba(0,0,0,.6), 0 0 0 2px var(--green-l); }
+
+    .lc-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .lc-icon { font-size: 34px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
+    .lc-meta { flex: 1; }
+    .lc-num {
+      font-family: 'VT323', monospace; font-size: 13px; letter-spacing: 2px;
+      color: var(--wood-l); text-transform: uppercase;
+    }
+    .lc-name {
+      font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--parch);
+      line-height: 1.5; margin-top: 2px;
+    }
+    .lc-badge { font-size: 18px; position: absolute; top: 12px; right: 14px; }
+    .lc-desc {
+      font-family: 'VT323', monospace; font-size: 16px;
+      color: rgba(244,214,160,.6); margin-bottom: 14px; line-height: 1.4;
+    }
+    .lc-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .lc-tag {
+      background: rgba(0,0,0,.3); border: 1px solid rgba(196,137,58,.3);
+      border-radius: 6px; padding: 3px 9px;
+      font-family: 'VT323', monospace; font-size: 14px; color: var(--parch-d);
+    }
+    .lc-tag.words { border-color: rgba(125,211,252,.3); color: #7dd3fc; }
+    .lc-tag.target { border-color: rgba(249,199,79,.3); color: var(--gold); }
+    .lc-stars { margin-left: auto; font-size: 14px; letter-spacing: 1px; }
+
+    /* ── HUD (wooden plank) ───────────────────────────────────────────────── */
+    #hud {
+      position: absolute; top: 14px; left: 14px; z-index: 100;
+      background: linear-gradient(180deg, #4a2e10 0%, #3a2008 100%);
+      border: 3px solid var(--wood-m);
+      border-top-color: var(--wood-l); border-left-color: var(--wood-l);
+      border-radius: 10px; padding: 8px 14px;
+      color: var(--parch); font-size: 13px; font-weight: 700;
+      box-shadow: 0 3px 0 var(--wood-d), 0 6px 18px rgba(0,0,0,.5);
+      display: flex; align-items: center; gap: 10px;
+      user-select: none;
+    }
+    #hud-level  { font-family: 'VT323', monospace; font-size: 17px; color: var(--parch); letter-spacing: .5px; }
+    #hud-sep    { opacity: .35; }
+    #hud-progress {
+      font-family: 'VT323', monospace; font-size: 17px; color: var(--gold);
+      background: rgba(0,0,0,.25); border-radius: 6px; padding: 1px 9px;
+    }
+    .hud-btn {
+      background: linear-gradient(180deg, var(--wood-m), var(--wood-d));
+      border: 2px solid var(--wood-l); border-bottom-color: var(--wood-d);
+      border-radius: 7px; color: var(--parch);
+      font-family: 'VT323', monospace; font-size: 15px;
+      cursor: pointer; padding: 3px 10px; letter-spacing: .5px;
+      box-shadow: 0 2px 0 var(--wood-d);
+      transition: transform .1s, box-shadow .1s;
+      pointer-events: all;
+    }
+    .hud-btn:hover  { transform: translateY(-1px); box-shadow: 0 3px 0 var(--wood-d); filter: brightness(1.15); }
+    .hud-btn:active { transform: translateY(1px);  box-shadow: 0 1px 0 var(--wood-d); }
+
+    /* Progress bar */
+    #progress-bar-wrap {
+      position: absolute; top: 14px; right: 14px; z-index: 100;
+      background: linear-gradient(180deg, #2e1a0a, #1e1006);
+      border: 2px solid var(--wood-m); border-radius: 10px;
+      padding: 7px 14px 7px 12px;
+      color: var(--parch-d); font-family: 'VT323', monospace; font-size: 15px;
+      display: flex; align-items: center; gap: 10px; pointer-events: none;
+      box-shadow: 0 3px 0 var(--wood-d);
+    }
+    #progress-bar-bg {
+      width: 130px; height: 12px;
+      background: rgba(0,0,0,.4); border-radius: 8px; overflow: hidden;
+      border: 1px solid rgba(196,137,58,.2);
+    }
+    #progress-bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #77b147, #f9c74f);
+      border-radius: 8px;
+      transition: width .45s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 0 6px rgba(119,177,71,.6);
+    }
+
+    /* Controls tip */
+    #controls-tip {
+      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 100;
+      background: rgba(30,16,6,.75); border: 1.5px solid rgba(196,137,58,.3);
+      border-radius: 8px; padding: 5px 16px;
+      font-family: 'VT323', monospace; font-size: 15px;
+      color: rgba(244,214,160,.7); letter-spacing: .5px;
+      pointer-events: none; user-select: none; white-space: nowrap;
+    }
+    .key-badge {
+      display: inline-block;
+      background: linear-gradient(180deg,var(--wood-m),var(--wood-d));
+      border: 1.5px solid var(--wood-l); border-radius: 4px;
+      padding: 0 6px; font-size: 12px; font-family: 'Press Start 2P', monospace;
+      color: var(--parch);
+    }
+
+    /* ── QUIZ MODAL (parchment / wood) ────────────────────────────────────── */
+    #quiz-backdrop {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(10,6,2,.78); backdrop-filter: blur(6px);
+    }
+    #quiz-backdrop.visible { display: flex; align-items: center; justify-content: center; animation: fadeIn .2s ease; }
+
+    #quiz-ui {
+      background: linear-gradient(160deg, #3a2208 0%, #2c1a06 100%);
+      border: 4px solid var(--wood-m);
+      border-top-color: var(--wood-l); border-left-color: var(--wood-l);
+      border-radius: 16px; padding: 24px 32px 24px;
+      width: min(460px, 92vw);
+      box-shadow: 0 6px 0 var(--wood-d), 0 16px 50px rgba(0,0,0,.7);
+      display: flex; flex-direction: column; gap: 14px;
+      animation: slideUp .25s cubic-bezier(.4,0,.2,1);
+    }
+
+    #quiz-hint-box {
+      background: linear-gradient(160deg, var(--parch) 0%, var(--parch-d) 100%);
+      border: 3px solid var(--wood-m);
+      border-top-color: var(--parch-d); border-left-color: var(--parch-d);
+      border-radius: 12px; padding: 16px; text-align: center;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,.15);
+      position: relative;
+    }
+    #hint-emoji { font-size: 72px; line-height: 1; display: block; margin-bottom: 4px; filter: drop-shadow(0 3px 6px rgba(0,0,0,.25)); }
+    #hint-category {
+      font-family: 'VT323', monospace; font-size: 14px; letter-spacing: 1.5px;
+      color: rgba(92,51,24,.6); text-transform: uppercase;
+    }
+    #quiz-flip-btn { display: none; }
+
+    .quiz-header {
+      display: flex; align-items: center; gap: 12px; padding-bottom: 10px;
+      border-bottom: 2px solid rgba(196,137,58,.25);
+    }
+    .quiz-crop-icon { font-size: 24px; }
+    .quiz-title {
+      font-family: 'VT323', monospace; font-size: 16px; font-weight: normal;
+      color: var(--wood-l); letter-spacing: 2px; text-transform: uppercase;
+    }
+    #question-text {
+      font-family: 'VT323', monospace; font-size: 18px;
+      color: var(--parch-d); text-align: center; opacity: .8;
+    }
+    #en-word-display {
+      font-family: 'Press Start 2P', monospace; font-size: 18px; font-weight: normal;
+      color: var(--parch); display: block; margin-top: 6px;
+      text-shadow: 0 2px 8px rgba(0,0,0,.5);
+    }
+
+    #answer-input {
+      width: 100%;
+      background: linear-gradient(180deg, var(--parch) 0%, var(--parch-d) 100%);
+      border: 3px solid var(--wood-m);
+      border-top-color: var(--wood-d); border-left-color: var(--wood-d);
+      border-radius: 10px; padding: 12px 18px;
+      font-size: 26px; font-family: 'Noto Sans KR', 'Nunito', sans-serif; font-weight: 700;
+      color: #2a1508; outline: none; text-align: center; ime-mode: active;
+      transition: border-color .2s, box-shadow .2s;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,.2);
+    }
+    #answer-input:focus {
+      border-color: var(--green-d);
+      box-shadow: inset 0 2px 6px rgba(0,0,0,.2), 0 0 0 3px rgba(74,222,128,.25);
+    }
+    #answer-input::placeholder { color: rgba(92,51,24,.35); font-size: 15px; }
+
+    #feedback-text {
+      font-family: 'VT323', monospace; font-size: 18px;
+      color: #e87c7c; text-align: center; min-height: 22px; letter-spacing: .5px;
+    }
+    #feedback-text.correct { color: var(--green-l); }
+
+    .quiz-buttons { display: flex; gap: 10px; }
+    #submit-btn, #cancel-btn {
+      flex: 1; border-radius: 10px; padding: 12px 0;
+      font-family: 'VT323', monospace; font-size: 18px; font-weight: normal;
+      cursor: pointer; letter-spacing: 1px;
+      transition: transform .1s, box-shadow .1s; border-width: 3px; border-style: solid;
+    }
+    #submit-btn {
+      background: linear-gradient(180deg, #5ea32a, #3d7a1a);
+      border-color: #8ecf58; border-bottom-color: #2a5a0e; border-right-color: #2a5a0e;
+      color: #fff; box-shadow: 0 3px 0 #1a3a08;
+      text-shadow: 0 1px 3px rgba(0,0,0,.4);
+    }
+    #submit-btn:hover  { transform: translateY(-2px); box-shadow: 0 5px 0 #1a3a08; filter: brightness(1.1); }
+    #submit-btn:active { transform: translateY(1px);  box-shadow: 0 1px 0 #1a3a08; }
+    #cancel-btn {
+      background: linear-gradient(180deg, var(--wood-m), var(--wood-d));
+      border-color: var(--wood-l); border-bottom-color: var(--wood-d); border-right-color: var(--wood-d);
+      color: var(--parch-d); box-shadow: 0 3px 0 #1e0d04;
+    }
+    #cancel-btn:hover  { filter: brightness(1.12); }
+
+    /* ── VOCAB BOOK ───────────────────────────────────────────────────────── */
+    #vocab-overlay {
+      display: none; position: fixed; inset: 0; z-index: 400;
+      background: rgba(8,4,1,.88); backdrop-filter: blur(7px);
+      flex-direction: column;
+    }
+    #vocab-overlay.visible { display: flex; animation: fadeIn .25s ease; }
+
+    #vocab-panel {
+      display: flex; flex-direction: column;
+      width: min(900px, 96vw); margin: auto;
+      height: 90vh; max-height: 820px;
+      background: linear-gradient(160deg, #2e1a0a, #1e1006);
+      border: 3px solid var(--wood-m);
+      border-top-color: var(--wood-l); border-left-color: var(--wood-l);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 0 var(--wood-d), 0 24px 60px rgba(0,0,0,.8);
+      animation: slideUp .28s cubic-bezier(.4,0,.2,1);
+    }
+
+    #vocab-header {
+      padding: 18px 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05) 0%, transparent);
+      border-bottom: 2px solid rgba(196,137,58,.25);
+      display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+    }
+    #vocab-title-wrap { flex: 1; }
+    #vocab-title {
+      font-family: 'Press Start 2P', monospace; font-size: 13px; color: var(--gold);
+    }
+    #vocab-subtitle {
+      font-family: 'VT323', monospace; font-size: 15px; color: var(--wood-l);
+      margin-top: 4px; letter-spacing: 1px;
+    }
+    #vocab-close-btn {
+      background: linear-gradient(180deg,var(--wood-m),var(--wood-d));
+      border: 2px solid var(--wood-l); border-radius: 8px;
+      color: var(--parch-d); font-size: 18px; width: 36px; height: 36px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: filter .15s; box-shadow: 0 2px 0 var(--wood-d);
+    }
+    #vocab-close-btn:hover { filter: brightness(1.2); background: linear-gradient(180deg,#a04040,#7a2020); border-color: #e07070; }
+
+    #vocab-controls {
+      padding: 12px 22px; display: flex; gap: 10px; flex-shrink: 0;
+      border-bottom: 1px solid rgba(196,137,58,.15); flex-wrap: wrap;
+    }
+    #vocab-search {
+      flex: 1; min-width: 180px;
+      background: linear-gradient(180deg, var(--parch), var(--parch-d));
+      border: 2px solid var(--wood-m); border-top-color: var(--wood-d);
+      border-radius: 8px; padding: 8px 13px;
+      font-family: 'VT323', monospace; font-size: 17px;
+      color: #2a1508; outline: none;
+    }
+    #vocab-search::placeholder { color: rgba(92,51,24,.4); }
+    .cat-filter-btn {
+      border: 2px solid rgba(196,137,58,.3); border-radius: 7px;
+      background: rgba(0,0,0,.2); color: var(--parch-d);
+      padding: 6px 11px; font-family: 'VT323', monospace; font-size: 15px;
+      cursor: pointer; letter-spacing: .5px; white-space: nowrap;
+      transition: background .15s, border-color .15s;
+    }
+    .cat-filter-btn.active { background: rgba(249,199,79,.15); border-color: var(--gold); color: var(--gold); }
+    .cat-filter-btn:hover:not(.active) { background: rgba(255,255,255,.07); color: var(--parch); }
+
+    #vocab-grid-wrap { flex: 1; overflow-y: auto; padding: 14px 18px 18px; }
+    #vocab-grid-wrap::-webkit-scrollbar { width: 6px; }
+    #vocab-grid-wrap::-webkit-scrollbar-thumb { background: var(--wood-m); border-radius: 6px; }
+    #vocab-count { font-family: 'VT323', monospace; font-size: 14px; color: rgba(244,214,160,.4); margin-bottom: 10px; letter-spacing: 1px; }
+
+    #vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 9px;
+    }
+    .vocab-card {
+      background: linear-gradient(160deg, #2e1a0a, #221207);
+      border: 2px solid rgba(196,137,58,.3);
+      border-radius: 10px; padding: 13px 8px 11px;
+      text-align: center;
+      transition: transform .14s, border-color .14s;
+      cursor: default; position: relative;
+    }
+    .vocab-card:hover { transform: translateY(-3px); border-color: var(--wood-l); }
+    .vocab-card.planted { border-color: var(--green-d); background: linear-gradient(160deg,#1a3010,#0f2008); }
+    .vocab-card.planted::after {
+      content: '✓'; position: absolute; top: 5px; right: 7px;
+      font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--green-l);
+    }
+    .vc-emoji { font-size: 36px; display: block; line-height: 1; margin-bottom: 8px; }
+    .vc-ko {
+      font-size: 17px; font-weight: 900; color: var(--parch);
+      font-family: 'Noto Sans KR', sans-serif; display: block; margin-bottom: 3px;
+    }
+    .vc-en { font-family: 'VT323', monospace; font-size: 14px; color: var(--wood-l); display: block; letter-spacing: .3px; }
+    .vc-cat { font-family: 'VT323', monospace; font-size: 12px; color: rgba(196,137,58,.35); display: block; margin-top: 4px; }
+
+    /* ── LEVEL-UP & ALL-DONE ──────────────────────────────────────────────── */
+    #levelup-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(8,4,1,.78); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center;
+    }
+    #levelup-overlay.visible { display: flex; animation: fadeIn .3s ease; }
+    #levelup-card {
+      background: linear-gradient(160deg, #3a2208, #2a1806);
+      border: 4px solid var(--wood-m);
+      border-top-color: var(--gold); border-left-color: var(--gold);
+      border-radius: 18px; padding: 40px 48px; text-align: center;
+      box-shadow: 0 6px 0 var(--wood-d), 0 24px 60px rgba(0,0,0,.8), 0 0 40px rgba(249,199,79,.12);
+      animation: popIn .35s cubic-bezier(.4,0,.2,1);
+    }
+    #levelup-card .trophy { font-size: 58px; margin-bottom: 14px; filter: drop-shadow(0 4px 12px rgba(249,199,79,.5)); }
+    #levelup-card h1 {
+      font-family: 'Press Start 2P', monospace; font-size: 18px; color: var(--gold); margin-bottom: 10px;
+    }
+    #levelup-card p  { font-family: 'VT323', monospace; font-size: 18px; color: var(--parch-d); margin-bottom: 24px; }
+    .levelup-btns { display: flex; gap: 12px; }
+    #levelup-next-btn, #levelup-menu-btn {
+      flex: 1; border-radius: 10px; padding: 12px 0;
+      font-family: 'VT323', monospace; font-size: 20px; font-weight: normal;
+      cursor: pointer; letter-spacing: 1px; border-width: 3px; border-style: solid;
+      transition: transform .1s, filter .1s; box-shadow: 0 3px 0 rgba(0,0,0,.4);
+    }
+    #levelup-next-btn {
+      background: linear-gradient(180deg, #f9c74f, #e5a820);
+      border-color: #fde68a; border-bottom-color: #a0760e; border-right-color: #a0760e;
+      color: #2a1508;
+    }
+    #levelup-next-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    #levelup-menu-btn {
+      background: linear-gradient(180deg,var(--wood-m),var(--wood-d));
+      border-color: var(--wood-l); border-bottom-color: var(--wood-d); border-right-color: var(--wood-d);
+      color: var(--parch-d);
+    }
+    #levelup-menu-btn:hover { filter: brightness(1.12); }
+
+    #alldone-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: radial-gradient(ellipse at center, rgba(60,120,20,.3) 0%, rgba(8,4,1,.88) 70%);
+      backdrop-filter: blur(7px); align-items: center; justify-content: center;
+    }
+    #alldone-overlay.visible { display: flex; animation: fadeIn .4s ease; }
+    #alldone-card {
+      background: linear-gradient(160deg, #1a3010, #0e2008);
+      border: 4px solid var(--green-d);
+      border-top-color: var(--green-l); border-left-color: var(--green-l);
+      border-radius: 18px; padding: 44px 52px; text-align: center;
+      box-shadow: 0 6px 0 #0a1806, 0 24px 60px rgba(0,0,0,.8);
+      animation: popIn .4s cubic-bezier(.4,0,.2,1);
+    }
+    #alldone-card .star { font-size: 64px; margin-bottom: 14px; filter: drop-shadow(0 4px 12px rgba(249,199,79,.5)); }
+    #alldone-card h1 { font-family: 'Press Start 2P', monospace; font-size: 18px; color: var(--green-l); margin-bottom: 10px; }
+    #alldone-card p  { font-family: 'VT323', monospace; font-size: 18px; color: var(--parch-d); margin-bottom: 24px; }
+    .alldone-btns { display: flex; gap: 12px; }
+    #replay-btn, #menu-btn {
+      flex: 1; border-radius: 10px; padding: 12px 0;
+      font-family: 'VT323', monospace; font-size: 20px;
+      cursor: pointer; letter-spacing: 1px; border-width: 3px; border-style: solid;
+      transition: transform .1s, filter .1s; box-shadow: 0 3px 0 rgba(0,0,0,.4);
+    }
+    #replay-btn {
+      background: linear-gradient(180deg, var(--green-l), var(--green-d));
+      border-color: #86efac; border-bottom-color: #0a4018; border-right-color: #0a4018;
+      color: #fff;
+    }
+    #replay-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    #menu-btn {
+      background: linear-gradient(180deg,var(--wood-m),var(--wood-d));
+      border-color: var(--wood-l); border-bottom-color: var(--wood-d); border-right-color: var(--wood-d);
+      color: var(--parch-d);
+    }
+    #menu-btn:hover { filter: brightness(1.12); }
+
+    /* ── Animations ──────────────────────────────────────────────────────── */
+    @keyframes catBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+    @keyframes tailWag { 0%{transform-origin:top; transform:rotate(-8deg)} 100%{transform-origin:top; transform:rotate(8deg)} }
+    /* ── CAT DIALOG ─────────────────────────────────────────────────── */
+    #cat-dialog {
+      position:fixed; inset:0; z-index:490; display:none;
+      background:rgba(5,15,5,.8); align-items:flex-end; justify-content:center;
+      padding-bottom:60px; animation:fadeIn .18s;
+    }
+    #cat-dialog.visible { display:flex; }
+    #cat-dialog-inner {
+      background:linear-gradient(160deg,#2a1508,#1a0d04);
+      border:3px solid var(--wood-l); border-radius:18px;
+      padding:0; max-width:520px; width:92%;
+      box-shadow:0 12px 48px rgba(0,0,0,.85);
+      overflow:hidden;
+    }
+    #cat-dialog-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 18px; background:rgba(249,199,79,.12);
+      border-bottom:2px solid rgba(249,199,79,.2);
+    }
+    #cat-dialog-name {
+      font-family:'Press Start 2P',monospace; font-size:9px; color:var(--gold);
+    }
+    #cat-dialog-close {
+      background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+      color:#fff; border-radius:8px; padding:4px 10px; font-size:14px; cursor:pointer;
+    }
+    #cat-dialog-body {
+      display:flex; gap:0; align-items:center;
+    }
+    #cat-portrait-wrap {
+      position:relative; padding:20px 8px 20px 20px; flex-shrink:0;
+    }
+    #cat-portrait-canvas {
+      image-rendering:pixelated; image-rendering:crisp-edges;
+      display:block; filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));
+      animation:catBob 2s ease-in-out infinite;
+    }
+    #cat-speech-tail {
+      position:absolute; right:-8px; top:50%; transform:translateY(-50%);
+      width:0; height:0;
+      border-top:10px solid transparent; border-bottom:10px solid transparent;
+      border-left:12px solid rgba(249,199,79,.15);
+    }
+    #cat-word-wrap {
+      flex:1; padding:18px 20px 18px 16px;
+    }
+    #cat-dialog-label {
+      font-family:'Press Start 2P',monospace; font-size:7px;
+      color:rgba(255,255,255,.4); margin-bottom:12px; text-transform:uppercase;
+    }
+    #cat-dialog-emoji-word {
+      display:flex; align-items:center; gap:14px; margin-bottom:14px;
+    }
+    #cat-emoji { font-size:44px; }
+    #cat-ko {
+      font-family:'Noto Sans KR',sans-serif; font-size:28px; font-weight:900;
+      color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.5); line-height:1.2;
+    }
+    #cat-en {
+      font-size:14px; color:var(--gold); font-weight:700;
+      font-family:'Nunito',sans-serif; margin-top:2px;
+    }
+    #cat-dialog-tip {
+      font-size:11px; color:rgba(255,255,255,.35); font-style:italic;
+      font-family:'Nunito',sans-serif;
+    }
+    #cat-dialog-footer {
+      display:flex; gap:10px; padding:12px 20px;
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+    #cat-another-btn {
+      flex:1; background:linear-gradient(180deg,var(--wood-m),var(--wood-d));
+      border:2px solid var(--wood-l); border-radius:10px; padding:8px;
+      font-family:'Press Start 2P',monospace; font-size:8px; color:var(--parch);
+      cursor:pointer; transition:filter .15s;
+    }
+    #cat-another-btn:hover { filter:brightness(1.2); }
+    #cat-close-btn2 {
+      flex:1; background:linear-gradient(180deg,#f59e0b,#d97706);
+      border:2px solid #fcd34d; border-radius:10px; padding:8px;
+      font-family:'Press Start 2P',monospace; font-size:8px; color:#1a1a00;
+      cursor:pointer; transition:filter .15s;
+    }
+    #cat-close-btn2:hover { filter:brightness(1.15); }
+
+    /* ── VOCAB FUN FACT MODAL ──────────────────────────────────────────── */
+    #vocab-ff-modal {
+      position:fixed; inset:0; z-index:600; display:none;
+      background:rgba(0,0,0,.82); backdrop-filter:blur(8px);
+      align-items:center; justify-content:center; animation:fadeIn .2s;
+    }
+    #vocab-ff-modal.visible { display:flex; }
+    #vff-inner {
+      background:linear-gradient(155deg,#1a2e10,#0d1a07);
+      border:3px solid #4a8a22; border-radius:20px;
+      max-width:480px; width:92%; overflow:hidden;
+      box-shadow:0 0 60px rgba(74,200,50,.25), 0 16px 48px rgba(0,0,0,.9);
+    }
+    #vff-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 18px; background:rgba(74,200,50,.12);
+      border-bottom:2px solid rgba(74,200,50,.25);
+    }
+    #vff-title {
+      font-family:'Press Start 2P',monospace; font-size:8px; color:#4ade80;
+    }
+    #vff-header button {
+      background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
+      color:#fff; border-radius:8px; padding:4px 10px; font-size:14px; cursor:pointer;
+    }
+    #vff-word-row {
+      display:flex; align-items:center; gap:14px; padding:16px 20px;
+      border-bottom:1px solid rgba(74,200,50,.15);
+    }
+    #vff-emoji { font-size:42px; flex-shrink:0; }
+    #vff-en {
+      font-size:22px; font-weight:800; color:#fff;
+      font-family:'Be Vietnam Pro','Nunito',sans-serif;
+    }
+    #vff-cat {
+      font-size:11px; color:#4ade80; margin-top:2px;
+      font-family:'Be Vietnam Pro',sans-serif;
+    }
+    #vff-status { margin-left:auto; text-align:right; }
+    #vff-phase {
+      font-size:11px; color:var(--gold); font-weight:700;
+      font-family:'Be Vietnam Pro',sans-serif;
+    }
+    #vff-harvests {
+      font-size:10px; color:rgba(255,255,255,.4); margin-top:3px;
+      font-family:'Be Vietnam Pro',sans-serif;
+    }
+    .vff-section { padding:14px 20px; border-bottom:1px solid rgba(255,255,255,.06); }
+    .vff-section-title {
+      font-family:'Press Start 2P',monospace; font-size:7px;
+      color:rgba(255,255,255,.35); margin-bottom:8px; text-transform:uppercase;
+    }
+    .vff-fact-text {
+      font-size:13px; line-height:1.7; color:rgba(255,255,255,.88);
+      font-family:'Be Vietnam Pro','Nunito',sans-serif;
+    }
+    .vff-hint-box {
+      background:rgba(249,199,79,.08); border:1px solid rgba(249,199,79,.25);
+      border-radius:10px; padding:12px 14px; color:#fde68a;
+      font-weight:600;
+    }
+    #vff-close-btn {
+      display:block; width:calc(100% - 40px); margin:14px 20px;
+      background:linear-gradient(180deg,#22c55e,#16a34a);
+      border:2px solid #4ade80; border-radius:12px; padding:10px;
+      font-family:'Be Vietnam Pro',sans-serif; font-size:13px; font-weight:800;
+      color:#fff; cursor:pointer; transition:filter .15s;
+    }
+    #vff-close-btn:hover { filter:brightness(1.15); }
+    /* Fun Fact hint tag on vocab cards */
+    .vc-ff-hint {
+      font-size:9px; color:rgba(249,199,79,.6);
+      font-family:'Press Start 2P',monospace;
+      display:block; margin-top:3px;
+    }
+    .vocab-card:hover .vc-ff-hint { color:var(--gold); }
+    .vocab-card { transition:transform .15s, box-shadow .15s; }
+    .vocab-card:hover { transform:translateY(-2px) scale(1.02); box-shadow:0 6px 20px rgba(249,199,79,.2); }
+
+
+    /* ── SRS PHASE BAR ──────────────────────────────────────────────── */
+    #quiz-phase-bar {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:6px 12px; background:rgba(0,0,0,.35); border-radius:8px;
+      margin-bottom:12px; font-family:'Press Start 2P',monospace; font-size:7px;
+    }
+    #quiz-phase-name { color:#a8f0c6; }
+    #quiz-phase-dots { color:var(--gold); letter-spacing:5px; font-size:10px; }
+    #quiz-gold-reward { color:var(--gold); opacity:.7; }
+    /* Phase 2: blur English word — player must recall from emoji only */
+    #quiz-ui.phase-2 #en-word-display {
+      filter:blur(6px); user-select:none; pointer-events:none;
+      color:rgba(255,255,255,.3);
+    }
+    #quiz-ui.phase-2 #hint-category { display:none; }
+    #quiz-ui.phase-2 #hint-emoji { opacity:.55; }
+    /* Phase 3: no hints at all — pure recall */
+    #quiz-ui.phase-3 #quiz-hint-box { opacity:0; pointer-events:none; transition:.3s; }
+    #quiz-ui.phase-3 #en-word-display { visibility:hidden; }
+    #quiz-ui.phase-3 #question-text::after { content:' (Không gợi ý!)'; color:#ff8888; font-size:0.8em; }
+        /* ── GOLD HUD ─────────────────────────────────────────────────────── */
+    #hud-gold {
+      display:inline-flex; align-items:center; gap:5px; background:rgba(0,0,0,.35);
+      border-radius:20px; padding:2px 12px; font-size:14px; font-family:'Press Start 2P',monospace;
+      color:var(--gold); border:1px solid rgba(249,199,79,.4); transition:transform .25s;
+    }
+    #hud-gold.pop { transform:scale(1.25); }
+    .gold-coin-anim { animation: coinPop .3s; }
+    /* ── SHOP OVERLAY ─────────────────────────────────────────────────── */
+    #shop-overlay {
+      position:fixed; inset:0; z-index:480; display:none;
+      background:rgba(10,20,5,.88); align-items:center; justify-content:center;
+      animation:fadeIn .2s;
+    }
+    #shop-overlay.visible { display:flex; }
+    #shop-panel {
+      background:linear-gradient(160deg,#4a2a0d,#2a1508);
+      border:3px solid var(--wood-l); border-radius:18px; padding:28px;
+      max-width:680px; width:94%; max-height:88vh; overflow-y:auto;
+      box-shadow:0 16px 48px rgba(0,0,0,.7);
+    }
+    #shop-header {
+      display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;
+    }
+    #shop-title { font-family:'Press Start 2P',monospace; font-size:13px; color:var(--gold); }
+    #shop-gold-badge {
+      display:flex; align-items:center; gap:7px; background:rgba(249,199,79,.15);
+      border:2px solid var(--gold); border-radius:20px; padding:4px 16px;
+      font-family:'Press Start 2P',monospace; font-size:12px; color:var(--gold);
+    }
+    #shop-close-btn {
+      background:rgba(255,255,255,.1); border:2px solid rgba(255,255,255,.2);
+      color:#fff; border-radius:10px; padding:6px 14px; font-size:18px; cursor:pointer;
+    }
+    #shop-close-btn:hover { background:rgba(255,0,0,.25); }
+    #shop-level-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+    .shop-card {
+      background:linear-gradient(160deg,rgba(255,255,255,.07),transparent);
+      border:2px solid rgba(255,255,255,.12); border-radius:14px; padding:16px;
+      transition:transform .15s,border-color .15s;
+    }
+    .shop-card:not(.owned):not(.too-expensive):hover { transform:translateY(-2px); border-color:var(--gold); cursor:pointer; }
+    .shop-card.owned { border-color:#4ade80; opacity:.9; }
+    .shop-card.too-expensive { opacity:.45; }
+    .shop-card-icon { font-size:36px; text-align:center; margin-bottom:8px; }
+    .shop-card-name { font-family:'Press Start 2P',monospace; font-size:9px; color:var(--parch); margin-bottom:4px; }
+    .shop-card-desc { font-size:11px; color:rgba(255,255,255,.55); margin-bottom:10px; }
+    .shop-card-price {
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .shop-card-cost {
+      font-family:'Press Start 2P',monospace; font-size:10px; color:var(--gold);
+    }
+    .shop-buy-btn {
+      background:linear-gradient(180deg,var(--gold),#d4a017);
+      border:none; border-radius:8px; padding:5px 14px;
+      font-family:'Press Start 2P',monospace; font-size:8px; color:#1a1a00;
+      cursor:pointer; transition:filter .15s;
+    }
+    .shop-buy-btn:hover { filter:brightness(1.15); }
+    .shop-buy-btn:disabled { opacity:.4; cursor:default; }
+    .shop-owned-badge { font-size:11px; color:#4ade80; font-weight:800; }
+    /* ── TOAST ───────────────────────────────────────────────────────── */
+    #toast {
+      position:fixed; bottom:90px; left:50%; transform:translateX(-50%);
+      background:rgba(0,0,0,.85); color:var(--gold); border:2px solid var(--gold);
+      border-radius:10px; padding:10px 20px; font-family:'Press Start 2P',monospace;
+      font-size:9px; z-index:600; pointer-events:none; opacity:0; transition:opacity .3s;
+    }
+    #toast.show { opacity:1; }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════ LEVEL SELECT ═════════════════════════════════ -->
+  <div id="level-select-overlay">
+    <div class="ls-title-wrap">
+      <div class="ls-logo">🌾</div>
+      <div class="ls-title">Hangeul Valley</div>
+      <div class="ls-subtitle">SELECT A LEVEL TO BEGIN</div>
+    </div>
+    <div class="ls-grid" id="ls-grid">
+      <!-- Cards generated by JS -->
+    </div>
+  </div>
+
+  <!-- ══════════════ HUD ═══════════════════════════════════════════ -->
+  <div id="hud" style="display:none">
+    <span style="font-size:20px">🌾</span>
+    <span id="hud-level">Level 1</span>
+    <span id="hud-sep">|</span>
+    <span id="hud-progress">🌱 0</span>
+    <span id="hud-gold">💰 <span id="gold-val">0</span></span>
+    <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
+    <button class="hud-btn" id="shop-btn" title="Seed shop">🏪 Shop</button>
+    <button class="hud-btn" id="vocab-btn" title="Vocabulary Book">📖 Vocab</button>
+    <button class="hud-btn" id="hud-menu-btn" title="Level Menu">☰ Menu</button>
+  </div>
+
+  <!-- Progress bar -->
+  <div id="progress-bar-wrap" style="display:none">
+    <span>Progress</span>
+    <div id="progress-bar-bg"><div id="progress-bar-fill"></div></div>
+  </div>
+
+  <!-- Controls tip -->
+  <div id="controls-tip" style="display:none">
+    Move: <span class="key-badge">W</span><span class="key-badge">A</span><span class="key-badge">S</span><span class="key-badge">D</span>
+    &nbsp;|&nbsp; Near plot 🟤 → <span class="key-badge">SPACE</span> plant &nbsp;|&nbsp; Near ripe crop ✨ → <span class="key-badge">SPACE</span> harvest 💰
+  </div>
+
+  <!-- ══════════════ QUIZ MODAL ════════════════════════════════════ -->
+  <div id="quiz-backdrop">
+    <div id="quiz-ui">
+      <div class="quiz-header">
+        <span class="quiz-crop-icon" id="quiz-phase-icon">🌱</span>
+        <span class="quiz-title" id="quiz-phase-title">Gieo Hạt</span>
+        <span style="margin-left:auto; font-size:11px; color:rgba(255,255,255,.3); font-weight:700" id="quiz-level-tag"></span>
+      </div>
+
+      <!-- SRS Phase indicator bar -->
+      <div id="quiz-phase-bar">
+        <span id="quiz-phase-name">🌱 Học Từ Mới</span>
+        <span id="quiz-phase-dots">●○○</span>
+        <span id="quiz-gold-reward"></span>
+      </div>
+
+      <!-- Big emoji hint card -->
+      <div id="quiz-hint-box">
+        <span id="hint-emoji">❓</span>
+        <span id="hint-category"></span>
+        <button id="quiz-flip-btn" style="display:none">👁 Xem gợi ý</button>
+      </div>
+
+      <!-- Question -->
+      <div style="text-align:center">
+        <div id="question-text">Type in Korean for:</div>
+        <span id="en-word-display"></span>
+      </div>
+
+      <input
+        type="text" id="answer-input"
+        autocomplete="off" autocorrect="off" autocapitalize="off"
+        spellcheck="false" inputmode="text"
+        placeholder="한글로 입력하세요…" lang="ko"
+      />
+      <p id="feedback-text"></p>
+      <div class="quiz-buttons">
+        <button id="submit-btn">🌱 Plant</button>
+        <button id="cancel-btn">Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ VOCABULARY BOOK ══════════════════════════════ -->
+  <div id="vocab-overlay">
+    <div id="vocab-panel">
+      <div id="vocab-header">
+        <div style="font-size:28px">📖</div>
+        <div id="vocab-title-wrap">
+          <div id="vocab-title">Vocabulary Book</div>
+          <div id="vocab-subtitle">Level 1 – Basic Nouns</div>
+        </div>
+        <button id="vocab-close-btn">✕</button>
+      </div>
+      <div id="vocab-controls">
+        <input type="search" id="vocab-search" placeholder="🔍  Search..." />
+        <div id="cat-filters">
+          <!-- Category filter buttons generated by JS -->
+        </div>
+      </div>
+      <div id="vocab-grid-wrap">
+        <div id="vocab-count"></div>
+        <div id="vocab-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ LEVEL-UP ══════════════════════════════════════ -->
+  <div id="levelup-overlay">
+    <div id="levelup-card">
+      <div class="trophy">🏆</div>
+      <h1>Complete!</h1>
+      <p id="levelup-msg">Excellent!</p>
+      <div class="levelup-btns">
+        <button id="levelup-next-btn">Next Level →</button>
+        <button id="levelup-menu-btn">☰ Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SHOP OVERLAY ════════════════════════════════ -->
+  <div id="shop-overlay">
+    <div id="shop-panel">
+      <div id="shop-header">
+        <div>
+          <div id="shop-title">🏪 Seed Shop</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:4px">Use gold to unlock new vocabulary packs</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div id="shop-gold-badge">💰 <span id="shop-gold-val">0</span></div>
+          <button id="shop-close-btn">✕</button>
+        </div>
+      </div>
+      <div id="shop-level-grid"></div>
+    </div>
+  </div>
+
+  <!-- TOAST notification -->
+  <div id="toast"></div>
+
+  <!-- ══════════ VOCAB FUN FACT MODAL ══════════ -->
+  <div id="vocab-ff-modal">
+    <div id="vff-inner">
+      <div id="vff-header">
+        <span id="vff-title">💡 Fun Fact & Gợi Ý</span>
+        <button onclick="closeVocabFunFact()">✕</button>
+      </div>
+      <div id="vff-word-row">
+        <span id="vff-emoji">📝</span>
+        <div>
+          <div id="vff-en"></div>
+          <div id="vff-cat"></div>
+        </div>
+        <div id="vff-status">
+          <div id="vff-phase"></div>
+          <div id="vff-harvests"></div>
+        </div>
+      </div>
+      <div class="vff-section">
+        <div class="vff-section-title">🇻🇳 Korean Culture</div>
+        <div id="vff-fact-vi" class="vff-fact-text"></div>
+      </div>
+      <div class="vff-section">
+        <div class="vff-section-title">🔤 Recall Hints (Phase 3)</div>
+        <div id="vff-fact-ko" class="vff-fact-text vff-hint-box"></div>
+      </div>
+      <button id="vff-close-btn" onclick="closeVocabFunFact()">👍 Got it, close!</button>
+    </div>
+  </div>
+
+  <!-- ══════════ CAT NPC DIALOG ══════════ -->
+  <div id="cat-dialog">
+    <div id="cat-dialog-inner">
+      <div id="cat-dialog-header">
+        <span id="cat-dialog-name">🐱 Muop says...</span>
+        <button id="cat-dialog-close" onclick="closeCatDialog()">✕</button>
+      </div>
+      <div id="cat-dialog-body">
+        <div id="cat-portrait-wrap">
+          <!-- Pixel art cat portrait drawn by Phaser canvas, embedded here -->
+          <canvas id="cat-portrait-canvas" width="72" height="96"></canvas>
+          <div id="cat-speech-tail"></div>
+        </div>
+        <div id="cat-word-wrap">
+          <div id="cat-dialog-label">Today's word 📖</div>
+          <div id="cat-dialog-emoji-word">
+            <span id="cat-emoji">📝</span>
+            <div>
+              <div id="cat-ko">사과</div>
+              <div id="cat-en">Apple</div>
+            </div>
+          </div>
+          <div id="cat-dialog-tip">야옹~ Remember this one! Nyaa~</div>
+        </div>
+      </div>
+      <div id="cat-dialog-footer">
+        <button id="cat-another-btn" onclick="catAnotherWord()">🎲 Another Word</button>
+        <button id="cat-close-btn2" onclick="closeCatDialog()">👋 Thanks Muop!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- All-done -->
+  <div id="alldone-overlay">
+    <div id="alldone-card">
+      <div class="star">🌟</div>
+      <h1>Excellent!</h1>
+      <p>You have completed all levels! Your Korean is blossoming.</p>
+      <div class="alldone-btns">
+        <button id="replay-btn">🔄 Play Again</button>
+        <button id="menu-btn">☰ Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phaser 3 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

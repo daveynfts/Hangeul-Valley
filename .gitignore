@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+save_data.json
+webview_data/
+node_modules/
+.DS_Store
