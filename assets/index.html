@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,6 +48,7 @@
       font-family: 'Press Start 2P', monospace;
       font-size: 26px; letter-spacing: 1px;
       background: linear-gradient(135deg, #f9c74f 20%, #f3722c 80%);
+      background-clip: text;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       text-shadow: none;
       filter: drop-shadow(0 2px 8px rgba(249,199,79,.35));
@@ -489,17 +490,18 @@
     /* ── Animations ──────────────────────────────────────────────────────── */
     @keyframes catBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
     @keyframes tailWag { 0%{transform-origin:top; transform:rotate(-8deg)} 100%{transform-origin:top; transform:rotate(8deg)} }
-    /* ── CAT DIALOG ─────────────────────────────────────────────────── */
+    /* ── CAT DIALOG ────────────────────────────────────────── */
     #cat-dialog {
       position:fixed; inset:0; z-index:490; display:none;
-      background:rgba(5,15,5,.8); align-items:flex-end; justify-content:center;
-      padding-bottom:60px; animation:fadeIn .18s;
+      background:rgba(5,15,5,.82); backdrop-filter:blur(5px);
+      align-items:flex-end; justify-content:center;
+      padding-bottom:50px; animation:fadeIn .18s;
     }
     #cat-dialog.visible { display:flex; }
     #cat-dialog-inner {
       background:linear-gradient(160deg,#2a1508,#1a0d04);
       border:3px solid var(--wood-l); border-radius:18px;
-      padding:0; max-width:520px; width:92%;
+      padding:0; max-width:600px; width:96%;
       box-shadow:0 12px 48px rgba(0,0,0,.85);
       overflow:hidden;
     }
@@ -514,65 +516,83 @@
     #cat-dialog-close {
       background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2);
       color:#fff; border-radius:8px; padding:4px 10px; font-size:14px; cursor:pointer;
+      line-height:1; flex-shrink:0;
     }
+    /* Body: portrait LEFT, content RIGHT */
     #cat-dialog-body {
-      display:flex; gap:0; align-items:center;
+      display:flex; gap:0; align-items:stretch;
     }
+    /* Portrait column — wide enough for the 2× scaled canvas */
     #cat-portrait-wrap {
-      position:relative; padding:20px 8px 20px 20px; flex-shrink:0;
+      flex-shrink:0; width:160px; min-height:240px;
+      display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+      padding:12px 0 12px 12px;
+      background:linear-gradient(180deg,rgba(249,199,79,.04),rgba(249,199,79,.01));
+      border-right:1px solid rgba(249,199,79,.12);
+      position:relative;
     }
+    /* 2× scaled canvas: native 72×108 shown at 144×216px so every 6px block = 12px crisp */
     #cat-portrait-canvas {
       image-rendering:pixelated; image-rendering:crisp-edges;
-      display:block; filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));
+      width:144px; height:216px;
+      display:block;
+      filter:drop-shadow(0 6px 14px rgba(0,0,0,.7));
       animation:catBob 2s ease-in-out infinite;
     }
     #cat-speech-tail {
-      position:absolute; right:-8px; top:50%; transform:translateY(-50%);
-      width:0; height:0;
-      border-top:10px solid transparent; border-bottom:10px solid transparent;
-      border-left:12px solid rgba(249,199,79,.15);
+      display:none; /* replaced by border-right on portrait wrap */
     }
+    /* Content column */
     #cat-word-wrap {
-      flex:1; padding:18px 20px 18px 16px;
+      flex:1; padding:18px 20px 14px 18px; min-width:0;
+      display:flex; flex-direction:column; justify-content:center;
     }
     #cat-dialog-label {
-      font-family:'Press Start 2P',monospace; font-size:7px;
+      font-family:'Press Start 2P',monospace; font-size:6px;
       color:rgba(255,255,255,.4); margin-bottom:12px; text-transform:uppercase;
+      letter-spacing:1px;
     }
     #cat-dialog-emoji-word {
-      display:flex; align-items:center; gap:14px; margin-bottom:14px;
+      display:flex; align-items:center; gap:12px; margin-bottom:12px;
     }
-    #cat-emoji { font-size:44px; }
+    #cat-emoji { font-size:42px; flex-shrink:0; }
     #cat-ko {
       font-family:'Noto Sans KR',sans-serif; font-size:28px; font-weight:900;
       color:#fff; text-shadow:0 2px 8px rgba(0,0,0,.5); line-height:1.2;
     }
     #cat-en {
       font-size:14px; color:var(--gold); font-weight:700;
-      font-family:'Nunito',sans-serif; margin-top:2px;
+      font-family:'Be Vietnam Pro','Nunito',sans-serif; margin-top:3px;
     }
     #cat-dialog-tip {
-      font-size:11px; color:rgba(255,255,255,.35); font-style:italic;
-      font-family:'Nunito',sans-serif;
+      font-size:11.5px; color:rgba(255,255,255,.78); font-style:normal;
+      font-family:'Be Vietnam Pro','Nunito',sans-serif;
+      line-height:1.65; padding:9px 11px;
+      background:rgba(249,199,79,.07); border-radius:8px;
+      border-left:3px solid rgba(249,199,79,.35);
     }
     #cat-dialog-footer {
-      display:flex; gap:10px; padding:12px 20px;
+      display:flex; gap:8px; padding:10px 16px;
       border-top:1px solid rgba(255,255,255,.08);
     }
     #cat-another-btn {
       flex:1; background:linear-gradient(180deg,var(--wood-m),var(--wood-d));
-      border:2px solid var(--wood-l); border-radius:10px; padding:8px;
-      font-family:'Press Start 2P',monospace; font-size:8px; color:var(--parch);
-      cursor:pointer; transition:filter .15s;
+      border:2px solid var(--wood-l); border-radius:10px; padding:10px 8px;
+      font-family:'Be Vietnam Pro','Nunito',sans-serif; font-size:13px;
+      font-weight:800; color:var(--parch);
+      cursor:pointer; transition:filter .15s, transform .1s; white-space:nowrap;
     }
-    #cat-another-btn:hover { filter:brightness(1.2); }
+    #cat-another-btn:hover { filter:brightness(1.2); transform:translateY(-1px); }
+    #cat-another-btn:active { transform:translateY(1px); }
     #cat-close-btn2 {
       flex:1; background:linear-gradient(180deg,#f59e0b,#d97706);
-      border:2px solid #fcd34d; border-radius:10px; padding:8px;
-      font-family:'Press Start 2P',monospace; font-size:8px; color:#1a1a00;
-      cursor:pointer; transition:filter .15s;
+      border:2px solid #fcd34d; border-radius:10px; padding:10px 8px;
+      font-family:'Be Vietnam Pro','Nunito',sans-serif; font-size:13px;
+      font-weight:800; color:#1a1a00;
+      cursor:pointer; transition:filter .15s, transform .1s; white-space:nowrap;
     }
-    #cat-close-btn2:hover { filter:brightness(1.15); }
+    #cat-close-btn2:hover { filter:brightness(1.15); transform:translateY(-1px); }
+    #cat-close-btn2:active { transform:translateY(1px); }
 
     /* ── VOCAB FUN FACT MODAL ──────────────────────────────────────────── */
     #vocab-ff-modal {
@@ -670,10 +690,32 @@
     }
     #quiz-ui.phase-2 #hint-category { display:none; }
     #quiz-ui.phase-2 #hint-emoji { opacity:.55; }
-    /* Phase 3: no hints at all — pure recall */
+    /* Phase 3: hide emoji/category hints but show fun-fact recall hint */
     #quiz-ui.phase-3 #quiz-hint-box { opacity:0; pointer-events:none; transition:.3s; }
     #quiz-ui.phase-3 #en-word-display { visibility:hidden; }
-    #quiz-ui.phase-3 #question-text::after { content:' (Không gợi ý!)'; color:#ff8888; font-size:0.8em; }
+    #quiz-ui.phase-3 #question-text::after { content:' (Recall from hint!)'; color:#fde68a; font-size:0.8em; }
+    /* Quiz fun-fact hint section — only visible in Phase 3 */
+    #quiz-funfact-box {
+      display:none; background:rgba(249,199,79,.08); border:1.5px solid rgba(249,199,79,.25);
+      border-radius:12px; padding:12px 16px; margin-top:2px;
+      animation:slideUp .3s cubic-bezier(.4,0,.2,1);
+    }
+    #quiz-ui.phase-3 #quiz-funfact-box { display:block; }
+    #quiz-funfact-title {
+      font-family:'Press Start 2P',monospace; font-size:7px;
+      color:rgba(249,199,79,.7); margin-bottom:8px; text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    #quiz-funfact-text {
+      font-size:13px; line-height:1.7; color:#fde68a; font-weight:600;
+      font-family:'Be Vietnam Pro','Nunito',sans-serif;
+    }
+    #quiz-funfact-culture {
+      font-size:11px; line-height:1.6; color:rgba(255,255,255,.55);
+      font-family:'Be Vietnam Pro','Nunito',sans-serif;
+      margin-top:8px; padding-top:8px;
+      border-top:1px solid rgba(249,199,79,.15);
+    }
         /* ── GOLD HUD ─────────────────────────────────────────────────────── */
     #hud-gold {
       display:inline-flex; align-items:center; gap:5px; background:rgba(0,0,0,.35);
@@ -790,13 +832,13 @@
     <div id="quiz-ui">
       <div class="quiz-header">
         <span class="quiz-crop-icon" id="quiz-phase-icon">🌱</span>
-        <span class="quiz-title" id="quiz-phase-title">Gieo Hạt</span>
+        <span class="quiz-title" id="quiz-phase-title">Plant Seed</span>
         <span style="margin-left:auto; font-size:11px; color:rgba(255,255,255,.3); font-weight:700" id="quiz-level-tag"></span>
       </div>
 
       <!-- SRS Phase indicator bar -->
       <div id="quiz-phase-bar">
-        <span id="quiz-phase-name">🌱 Học Từ Mới</span>
+        <span id="quiz-phase-name">🌱 Plant Seed</span>
         <span id="quiz-phase-dots">●○○</span>
         <span id="quiz-gold-reward"></span>
       </div>
@@ -805,13 +847,20 @@
       <div id="quiz-hint-box">
         <span id="hint-emoji">❓</span>
         <span id="hint-category"></span>
-        <button id="quiz-flip-btn" style="display:none">👁 Xem gợi ý</button>
+        <button id="quiz-flip-btn" style="display:none">👁 View Hint</button>
       </div>
 
       <!-- Question -->
       <div style="text-align:center">
         <div id="question-text">Type in Korean for:</div>
         <span id="en-word-display"></span>
+      </div>
+
+      <!-- Fun Fact hint (Phase 3 only, populated by JS) -->
+      <div id="quiz-funfact-box">
+        <div id="quiz-funfact-title">💡 Recall Hint</div>
+        <div id="quiz-funfact-text"></div>
+        <div id="quiz-funfact-culture"></div>
       </div>
 
       <input
@@ -889,7 +938,7 @@
   <div id="vocab-ff-modal">
     <div id="vff-inner">
       <div id="vff-header">
-        <span id="vff-title">💡 Fun Fact & Gợi Ý</span>
+        <span id="vff-title">💡 Fun Fact & Hints</span>
         <button onclick="closeVocabFunFact()">✕</button>
       </div>
       <div id="vff-word-row">
@@ -904,7 +953,7 @@
         </div>
       </div>
       <div class="vff-section">
-        <div class="vff-section-title">🇻🇳 Korean Culture</div>
+        <div class="vff-section-title">🇰🇷 Korean Culture</div>
         <div id="vff-fact-vi" class="vff-fact-text"></div>
       </div>
       <div class="vff-section">
@@ -924,8 +973,8 @@
       </div>
       <div id="cat-dialog-body">
         <div id="cat-portrait-wrap">
-          <!-- Pixel art cat portrait drawn by Phaser canvas, embedded here -->
-          <canvas id="cat-portrait-canvas" width="72" height="96"></canvas>
+          <!-- Canvas: 12 cols × 18 rows × scale 6 = 72×108px — includes ears at row 0 -->
+          <canvas id="cat-portrait-canvas" width="72" height="108"></canvas>
           <div id="cat-speech-tail"></div>
         </div>
         <div id="cat-word-wrap">
@@ -941,8 +990,8 @@
         </div>
       </div>
       <div id="cat-dialog-footer">
-        <button id="cat-another-btn" onclick="catAnotherWord()">🎲 Another Word</button>
-        <button id="cat-close-btn2" onclick="closeCatDialog()">👋 Thanks Muop!</button>
+        <button id="cat-another-btn" onclick="catAnotherWord()">🎲 New Word</button>
+        <button id="cat-close-btn2" onclick="closeCatDialog()">👋 Thanks!</button>
       </div>
     </div>
   </div>

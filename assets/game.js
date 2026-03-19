@@ -92,7 +92,8 @@ function collectSave(){
   const hcObj={}; harvestCounts.forEach((v,k)=>hcObj[k]=v);
   const plots = sceneRef?.plots.filter(p=>p.ko)
     .map(p=>({i:p.index, ko:p.ko, sState:p.sState, plantedAt:p.plantedAt||0})) || plotSave;
-  return { v:2, gold, unlockedLevels, harvests:hcObj, srs:srsData, plots, lastLevel:currentLevelIndex };
+  const apple = sceneRef ? { ripeAt: sceneRef.appleRipeAt, ripe: sceneRef.appleRipe } : appleTreeSave;
+  return { v:2, gold, unlockedLevels, harvests:hcObj, srs:srsData, plots, lastLevel:currentLevelIndex, apple };
 }
 // Apply a save snapshot to the in-memory state
 function applySave(d){
@@ -103,6 +104,7 @@ function applySave(d){
   if(d.srs) srsData = d.srs;
   if(d.plots) plotSave = d.plots;
   if(typeof d.lastLevel==='number') currentLevelIndex = d.lastLevel;
+  if(d.apple) appleTreeSave = d.apple;
   return true;
 }
 // Write to file (pywebview) AND localStorage backup
@@ -214,6 +216,13 @@ if(window.addEventListener){
 let quizOpen=false, currentWord=null, currentPlot=null;
 let playerLocked=false, plantedWords=new Set(); // words currently ON a plot
 let shopOpen=false, catDialogOpen=false;
+let appleTreeSave = {}; // { ripeAt, ripe } persisted across sessions
+let appleTreeQuizPending = false; // true when harvesting apple tree (not a crop plot)
+
+function _saveAppleTree(scene){
+  appleTreeSave = { ripeAt: scene.appleRipeAt, ripe: scene.appleRipe };
+  persistSave();
+}
 
 // ══════════════ CAT NPC DIALOG ════════════════════════════════════════════════
 // Draw the ginger tabby cat portrait pixel-by-pixel onto the <canvas> element
@@ -221,62 +230,48 @@ function drawCatPortrait(){
   const canvas=document.getElementById('cat-portrait-canvas');
   if(!canvas) return;
   const ctx=canvas.getContext('2d');
-  const S=6; // pixel scale (6px per dot → 72×96 canvas for 12×16 cat)
-  const p=(x,y,col)=>{ ctx.fillStyle=col; ctx.fillRect(x*S,y*S,S,S); };
-  // Colors
-  const GO='#F5813F', GD='#B84E10', GL='#FFBB66'; // ginger shades
-  const WH='#FFFFFF', EY='#FFCC44', PU='#1A0800'; // white, amber eye, pupil
-  const PK='#FFAA99', SK='#FF8877'; // pink nose/inner ear
-  const SH='#3A1800'; // shadow/outline
+  const S=6; // pixel scale (6px per dot)
+  // yOff=2 → shifts entire sprite down by 2 rows so ears at row 0 aren't clipped
+  const yOff=2;
+  const p=(x,y,col)=>{ ctx.fillStyle=col; ctx.fillRect(x*S,(y+yOff)*S,S,S); };
+  const GO='#F5813F', GD='#B84E10', GL='#FFBB66';
+  const WH='#FFFFFF', EY='#FFCC44', PU='#1A0800';
+  const PK='#FFAA99';
+  const SH='#3A1800';
 
   ctx.clearRect(0,0,canvas.width,canvas.height);
 
   // === BODY (rows 8-15) ===
-  // Main ginger torso
   [[1,8,10,8,GO],[2,9,8,6,GO]].forEach(([x,y,w,h,c])=>{for(let i=0;i<w;i++)for(let j=0;j<h;j++)p(x+i,y+j,c);});
-  // White belly stripe
   for(let j=9;j<16;j++) for(let i=3;i<9;i++) p(i,j,WH);
-  // Dark tabby stripes on body
   [0,1].forEach(i=>{ for(let j=9;j<15;j++) p(i===0?1:10,j,GD); });
   [3,[3,14,GD],[3,11,GD],[8,14,GD],[8,11,GD]].forEach(([x,y,c])=>{ if(c)p(x,y,c); });
-  for(let j=10;j<15;j+=2){ p(2,j,GD); p(9,j,GD); } // flank stripes
+  for(let j=10;j<15;j+=2){ p(2,j,GD); p(9,j,GD); }
 
-  // === FRONT PAWS (rows 14-15) - white socks ===
+  // === FRONT PAWS (rows 14-15) ===
   [[2,14,2,2,WH],[8,14,2,2,WH]].forEach(([x,y,w,h,c])=>{ for(let i=0;i<w;i++)for(let j=0;j<h;j++)p(x+i,y+j,c); });
-  p(2,15,PK); p(3,15,PK); p(8,15,PK); p(9,15,PK); // toe pads
+  p(2,15,PK); p(3,15,PK); p(8,15,PK); p(9,15,PK);
 
   // === HEAD (rows 2-7) ===
   for(let j=2;j<8;j++) for(let i=1;i<11;i++) p(i,j,GO);
-  // Forehead M marking
   p(3,2,GD);p(4,2,GD); p(5,2,GO); p(6,2,GO); p(7,2,GD);p(8,2,GD);
   p(4,3,GD); p(6,3,GD); p(7,3,GD);
-  // White face blaze (muzzle, chin)
   for(let j=5;j<8;j++) for(let i=3;i<9;i++) p(i,j,WH);
-  // Amber eyes (big & round)
   [[2,4,EY],[3,4,EY],[4,4,EY],[2,5,EY],[3,5,EY],[4,5,EY]].forEach(([x,y,c])=>p(x,y,c));
   [[7,4,EY],[8,4,EY],[9,4,EY],[7,5,EY],[8,5,EY],[9,5,EY]].forEach(([x,y,c])=>p(x,y,c));
-  // Pupils
   p(3,4,PU); p(8,4,PU);
-  // Eye outline (thick lashes)
   [2,3,4].forEach(x=>p(x,3,SH)); [7,8,9].forEach(x=>p(x,3,SH));
-  // Pink nose
   p(5,6,PK); p(6,6,PK);
-  // Whisker dots (subtle)
   p(1,6,GL); p(10,6,GL);
 
-  // === EARS - airplane style (spread sideways) ===
-  // Left ear
+  // === EARS (row 0-2) — now visible thanks to yOff ===
   [[0,0,GO],[1,0,GO],[0,1,GO],[1,1,GO],[0,2,GD],[1,2,GD]].forEach(([x,y,c])=>p(x,y,c));
-  p(0,1,PK); // inner ear
-  // Right ear
+  p(0,1,PK);
   [[10,0,GO],[11,0,GO],[10,1,GO],[11,1,GO],[10,2,GD],[11,2,GD]].forEach(([x,y,c])=>p(x,y,c));
-  p(11,1,PK); // inner ear
-
-  // === TAIL (drawn to the right, curling up) ===
-  // Omitted (Phaser draws it as part of in-world sprite)
+  p(11,1,PK);
 
   // === NECK ===
-  for(let i=3;i<9;i++) p(i,8,WH); // white chest/neck connection
+  for(let i=3;i<9;i++) p(i,8,WH);
 }
 
 function showCatDialog(){
@@ -298,19 +293,16 @@ function catSetWord(){
   document.getElementById('cat-emoji').textContent = w.hint||'📝';
   document.getElementById('cat-ko').textContent    = w.ko;
   document.getElementById('cat-en').textContent    = w.en;
-  // Rotate cat's meow phrase
-  const meows=[
-    '야옹~ Remember this one! Nyaa~',
-    '냐옹~ Muop is teaching you! 🐾',
-    '미야~ Memorize it now! Purr...',
-    '냐~ This is a rare word! 🌟',
-  ];
-  document.getElementById('cat-dialog-tip').textContent=meows[Math.floor(Math.random()*meows.length)];
+  // Show the VOCAB_FACTS recall hint OR cultural fun fact — whichever is richer
+  const fact = getFunFact(w);
+  // Alternate between cultural context and recall hint for variety
+  const useKo = Math.random() < 0.5;
+  const tipText = (useKo ? fact.ko : fact.vi) || fact.vi || fact.ko || '야옹~ Memorize this word!';
+  document.getElementById('cat-dialog-tip').textContent = tipText;
 }
 function catAnotherWord(){
-  // Quick pop animation on the word
   const ko=document.getElementById('cat-ko');
-  ko.animate([{opacity:0,transform:'scale(.5)'},{opacity:1,transform:'scale(1)'}],{duration:250,easing:'back.out(2)'});
+  ko.animate([{opacity:0,transform:'scale(.5)'},{opacity:1,transform:'scale(1)'}],{duration:250,easing:'ease-out'});
   catSetWord();
 }
 document.getElementById('cat-dialog').addEventListener('keydown',e=>e.stopPropagation());
@@ -473,12 +465,24 @@ function openQuiz(word, plot, phase=1){
   hintCategory.textContent  = word.category||'';
   enWordDisplay.textContent = word.en;
   quizLevelTag.textContent  = 'P'+phase+'/3';
+  // Phase 3: populate fun-fact recall hints
+  const ffText=$('quiz-funfact-text'), ffCulture=$('quiz-funfact-culture');
+  if(ffText && ffCulture){
+    if(phase===3){
+      const fact = getFunFact(word);
+      ffText.textContent    = fact.ko || '';
+      ffCulture.textContent = fact.vi || '';
+    } else {
+      ffText.textContent = ''; ffCulture.textContent = '';
+    }
+  }
   answerInput.value=''; feedbackText.textContent=''; feedbackText.className='';
   quizBackdrop.classList.add('visible');
   setTimeout(()=>answerInput.focus(),80);
 }
 function closeQuiz(){
   quizOpen=playerLocked=false;
+  appleTreeQuizPending=false; // always reset on close
   quizBackdrop.classList.remove('visible');
   const qui=$('quiz-ui'); if(qui) qui.className='';
   currentWord=currentPlot=null;
@@ -487,24 +491,31 @@ function submitAnswer(){
   if(!currentWord) return;
   const typed=answerInput.value.trim();
   if(typed===currentWord.ko){
-    const msgs=[
-      '🌱 Planted! Remember to water!',
-      '💧 Watered! Almost ripe!',
-      '🍎 Excellent! +Gold earned!'
-    ];
+    // ── Apple Tree harvest (special Phase 3 quiz) ─────────────────────────
+    if(appleTreeQuizPending){
+      feedbackText.textContent='🍎 Harvested! Excellent Korean!'; feedbackText.className='correct';
+      appleTreeQuizPending=false;
+      setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.onAppleHarvested(); },700);
+      return;
+    }
+    // ── Normal crop quiz ──────────────────────────────────────────────────
+    const msgs=['🌱 Planted! Remember to water!','💧 Watered! Almost ripe!','🍎 Excellent! +Gold earned!'];
     feedbackText.textContent=msgs[currentPhase-1]; feedbackText.className='correct';
     const cp=currentPlot, cw=currentWord, ph=currentPhase;
     if(ph===1){plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();}
     setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph); },650);
   } else {
-    const wrong=currentPhase===3?'❌ Wrong! Plant regressed to Phase 2!':'❌ Wrong! Try again.';
+    const isApple = appleTreeQuizPending;
+    const wrong = isApple ? '❌ Wrong! Try again to harvest!' : (currentPhase===3?'❌ Wrong! Plant regressed to Phase 2!':'❌ Wrong! Try again.');
     feedbackText.textContent=wrong; feedbackText.className='';
     answerInput.value=''; answerInput.focus();
     answerInput.animate(
       [{transform:'translateX(-7px)'},{transform:'translateX(7px)'},{transform:'translateX(0)'}],
       {duration:260,easing:'ease-out'});
-    if(currentPhase===3){
+    // Apple tree quiz: no regression, just retry
+    if(!isApple && currentPhase===3){
       const cp=currentPlot, cw=currentWord;
+      appleTreeQuizPending=false;
       setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.regressionPlot(cp,cw); },1400);
     }
   }
@@ -595,73 +606,109 @@ function buildVocabBook() {
   renderVocabCards();
 }
 // ══════ FUN FACT DATABASE (keyed by word.en lowercase) ══════════════════════
-// Facts must NOT reveal the Korean spelling directly.
-// They provide cultural context, mnemonics, syllable hints for Phase 3.
+// vi = vivid cultural hook  (surprising/emotional anchor — makes the word stick)
+// ko = smart mnemonic       (sound-alike, syllable count, visual/physical cue)
 const VOCAB_FACTS = {
-  // ── DRINKS / FOOD ───────────────────────────────────────────────────────────
-  'water':    {vi:'💧 Koreans always drink warm water or tea, rarely cold water. This word has only 2 Hangul letters and 1 short syllable — like a drop of water!', ko:'🔤 Hint: single syllable, starts with a consonant that looks like an upside-down M!'},
-  'milk':     {vi:'🥛 In K-dramas, drinking milk together is an intimate gesture! Korea produces high-quality milk from the Gangwon mountain region.', ko:'🔤 Hint: 2 syllables, sounds close to "U-yu" — try singing along!'},
-  'apple':    {vi:'🍎 SECRET: This word sounds exactly like "apology" in Korean! Koreans give apples to apologize — a famous wordplay 사과=사과!', ko:'🔤 Hint: 2 syllables, Sa-... Think of the red color of the apple and "sagwa"!'},
-  'bread':    {vi:'🥖 Korean bread is sweeter than Western bread! Bakeries (빵집) are on every corner in Seoul.', ko:'🔤 Hint: just 1 syllable, sounds like "pang" — imagine bread going "pang"!'},
-  'rice':     {vi:'🍚 Rice is the center of Korean meals. "Have you eaten rice?" (밥 먹었어?) is how Koreans ask "How are you?"!', ko:'🔤 Hint: 1 short syllable with a "p" ending — sticky rice, compact word!'},
-  'fish':     {vi:'🐟 Korea has the highest seafood consumption per capita in the world. Noryangjin fish market in Seoul runs 24/7!', ko:'🔤 Hint: 3 syllables, starts with a consonant that looks like two crossed sticks!'},
-  'meat':     {vi:'🥩 Samgyeopsal (grilled pork belly) is Korea\'s national dish! Koreans eat BBQ with lettuce wraps and dipping sauce.', ko:'🔤 Hint: 2 syllables, starts with the sound "ko" — meat is ko-gi!'},
-  'egg':      {vi:'🥚 Rolled egg omelette (계란말이) is the most common side dish in Korean bento. Fresh eggs are sold right at the farm!', ko:'🔤 Hint: 2 syllables, the first sounds like "kye" — think of a chicken clucking!'},
-  'vegetable':{vi:'🥬 Koreans eat fermented vegetables (kimchi) daily like rice! Korea has over 100 different types of kimchi.', ko:'🔤 Hint: 2 long syllables — think of a lush green vegetable garden!'},
-  'fruit':    {vi:'🍊 Fruit in Korea is incredibly expensive — a watermelon can cost $30! Each piece is polished before selling like jewelry!', ko:'🔤 Hint: 2 syllables, first sound "gwa" — like "gourd" or "squash"!'},
-  'coffee':   {vi:'☕ Korea has the most cafes per capita in the world! Seoul has cat cafes, rabbit cafes, raccoon cafes...', ko:'🔤 Hint: 2 syllables, transliterated from English "coffee" so it sounds very familiar!'},
-  'tea':      {vi:'🍵 Jeju green tea (녹차) is famous across all of Asia. Jeju Island has stunning green tea plantations!', ko:'🔤 Hint: 1 very short syllable — like a tiny sip of tea, done in one gulp!'},
-  'juice':    {vi:'🥤 Smoothies and fruit juices are booming in Korea! Persimmon (홍시) and pear juice (배즙) are specialties.', ko:'🔤 Hint: 2 syllables, close to the transliteration "ju-seu" from English!'},
-  // ── NATURE ──────────────────────────────────────────────────────────────────
-  'sun':      {vi:'☀️ The name Korea (한국) means "great nation". But its beautiful nickname is "Land of the Morning Calm"!', ko:'🔤 Hint: 2 syllables — think of the sun rising in the East!'},
-  'moon':     {vi:'🌙 Korean Thanksgiving (Chuseok) is a harvest festival under the full moon. Families gather to watch the moon and eat songpyeon!', ko:'🔤 Hint: 1 syllable — short like a slender crescent moon!'},
-  'star':     {vi:'⭐ K-pop idols are called "별" (star). Korean music awards go to the "brightest star" of the year!', ko:'🔤 Hint: 1 syllable "byeol" — try singing "byeol byeol byeol" like counting stars!'},
-  'sky':      {vi:'🌤️ Korea\'s blue autumn sky is famous in Korean poetry. They say "높고 푸른 하늘" (high and blue sky)!', ko:'🔤 Hint: 2 syllables, starts with "ha" — ha like laughing happily under the sky!'},
-  'mountain': {vi:'🏔️ 70% of Korea is mountains! Mt. Hallasan on Jeju Island is the highest peak — Koreans hike on weekends like daily walks!', ko:'🔤 Hint: 1 syllable "san" — similar to the Chinese character for mountain!'},
-  'sea':      {vi:'🌊 Haeundae beach (Busan) is Korea\'s most famous beach. Every summer, millions flock there — the water is barely visible!', ko:'🔤 Hint: "bada" — 2 syllables, gentle like waves lapping!'},
-  'river':    {vi:'🌊 The Han River (Hangang) flows through Seoul — people picnic, bike, and watch fireworks there. It\'s the heart of the city!', ko:'🔤 Hint: 1 short syllable — a short but powerful river!'},
-  'tree':     {vi:'🌳 Cherry blossoms blooming in Korea mark the arrival of spring. The whole country flocks to parks — the biggest unofficial festival!', ko:'🔤 Hint: "na-mu" — 2 syllables, rhythmic like tapping on wood!'},
-  'flower':   {vi:'🌸 Korea\'s national flower is the Mugunghwa (Rose of Sharon). It appears on the national emblem and everywhere!', ko:'🔤 Hint: "kkot" — 1 syllable, short and beautiful like a falling petal!'},
-  // ── BODY / PEOPLE ────────────────────────────────────────────────────────────
-  'eye':      {vi:'👁️ Big eyes are the Korean beauty standard! Korea\'s colored contact lens and eyeliner industry exports worldwide.', ko:'🔤 Hint: 1 syllable "nun" — sounds like English "noon" but means something completely different!'},
-  'nose':     {vi:'👃 Nose surgery is the most popular in Korea. There\'s a joke: "a tall nose is your passport in Gangnam"!', ko:'🔤 Hint: 1 syllable "ko" — short and simple!'},
-  'mouth':    {vi:'👄 Korean lipstick is world-famous! K-beauty exports gradient (ombre) lipstick as official cultural export.', ko:'🔤 Hint: 1 syllable "ip" — short like a mouth snap shut!'},
-  'hand':     {vi:'🤝 Bowing and shaking hands with both hands is important etiquette in Korea! Using one hand to shake with elders is considered rude.', ko:'🔤 Hint: 1 syllable "son" — sounds like English "son" but means something totally different!'},
-  'foot':     {vi:'🦶 Koreans remove shoes before entering homes — Korean floors have underfloor heating (온돌), so feet are always warm!', ko:'🔤 Hint: 1 syllable "bal" — think of feet stepping on a warm floor!'},
-  'head':     {vi:'🤯 Bowing (머리 숙이기) is the most important greeting and apology in Korea! Lower bow = more respect.', ko:'🔤 Hint: 2 syllables "meo-ri" — sounds like "meow" then "ri" — cats often shake their heads!'},
-  'heart':    {vi:'💖 The thumb-and-index finger heart (🤞) is Korea\'s signature love gesture, originating from K-pop idols!', ko:'🔤 Hint: 2 syllables "ma-eum" — soul and heart combined into one!'},
-  // ── ANIMALS ──────────────────────────────────────────────────────────────────
-  'cat':      {vi:'🐱 Korean cats say "야옹" (yaong)! Cat cafes (고양이 카페) are extremely popular in Seoul.', ko:'🔤 Hint: 3 syllables "go-yang-i" — long but fun like a cat\'s meow!'},
-  'dog':      {vi:'🐶 Korean dogs say "멍멍" (meongmeong)! The Jindo dog is a rare purebred Korean breed, protected as cultural heritage.', ko:'🔤 Hint: "gae" — 1 short syllable, like a quick bark!'},
-  'bird':     {vi:'🐦 Cranes (두루미) symbolize luck and longevity in Korea — often seen in traditional ink paintings.', ko:'🔤 Hint: "sae" — 1 light syllable like a bird in flight!'},
-  // ── PLACES ───────────────────────────────────────────────────────────────────
-  'school':   {vi:'🏫 Korean students study until 10-11 PM at hagwons (cram schools)! Exam pressure in Korea is among the highest in the world.', ko:'🔤 Hint: 2 syllables "hak-gyo" — "hak" = study, "gyo" = school — similar to Chinese!'},
-  'hospital': {vi:'🏥 Korean hospitals are world-renowned for their medical technology. Medical tourism to Korea (mainly cosmetic) brings in billions of USD annually!', ko:'🔤 Hint: 3 syllables "byeong-won" — "byeong" = illness, similar to Chinese origins!'},
-  'market':   {vi:'🛒 Night markets in Myeongdong and Dongdaemun stay open until 5 AM! Koreans love late-night shopping — shopping and snacking together.', ko:'🔤 Hint: 2 syllables "si-jang" — "si-jang" also means "mayor"!'},
-  // ── OBJECTS / DAILY ──────────────────────────────────────────────────────────
-  'phone':    {vi:'📱 Korea has the fastest 5G internet speed in the world! Samsung and LG come from here — Koreans change phones every 1.5 years on average.', ko:'🔤 Hint: 3 syllables "hyu-dae-pon" — a Korean transliteration of "hand phone"!'},
-  'book':     {vi:'📚 Koreans read books on the subway a lot! Seoul has hundreds of 24/7 bookstores, open all night like convenience stores.', ko:'🔤 Hint: 1 syllable "chaek" — short like a thin book cover!'},
-  'music':    {vi:'🎵 K-pop accounts for 60% of Asian music revenue! BTS alone contributes $5B/year to Korea\'s economy — more than beer revenue!', ko:'🔤 Hint: 2 syllables "eum-ak" — "eum" = sound, "ak" = music — pure Chinese origin!'},
-  'money':    {vi:'💰 The Korean Won (원) has no cents — smallest unit is 10 won. Newcomers get "shock" seeing prices like 10,000 won!', ko:'🔤 Hint: 1 syllable "don" — sounds close to English "done"!'},
+  'water':    {vi:'💧 Koreans almost never drink cold water — restaurants serve warm water by default. Cold water is considered bad for digestion!',
+               ko:'🧠 1 syllable, sounds like "mull". Picture a single raindrop — one crisp sound: MUL.'},
+  'milk':     {vi:'🥛 In Korean dramas, the character who drinks milk every morning = the reliable, warm personality type. It is a whole archetype!',
+               ko:'🧠 2 syllables: U · yu. Imagine a cow going "Uuu~yuu~". Let the syllables moo out slowly.'},
+  'apple':    {vi:'🍎 BOMBSHELL: Korean words for "apple" and "apology" are IDENTICAL! Koreans gift apples to apologize — sagwa = sagwa!',
+               ko:'🧠 2 syllables: sa · gwa. "Sa" = number 4 in Korean. Count four, then go "GWAK!" like a startled duck. Sa-gwa!'},
+  'bread':    {vi:'🥖 The word traveled: Portuguese "pao" → Japanese "pan" → Korean. Bakeries (빵집 = bread-house) line every Seoul street!',
+               ko:'🧠 1 tense syllable that POPS: PPANG! Slap a puffed-up loaf. That double-p burst is the sound.'},
+  'rice':     {vi:'🍚 "Did you eat rice?" (밥 먹었어?) is the Korean way of asking "How are you?" to someone you care about. Rice = love.',
+               ko:'🧠 1 syllable: "bap" — bouncy like a music beat. BAP BAP BAP. Compact like a grain of sticky rice.'},
+  'fish':     {vi:'🐟 Seoul Noryangjin fish market runs 24/7 — you can eat fresh sashimi at 3 AM, minutes from the tank!',
+               ko:'🧠 2 syllables: saeng · seon. "Saeng" = raw/living (same in saeng-juice = fresh-squeezed). Living fish = saeng-seon!'},
+  'meat':     {vi:'🥩 Samgyeopsal (pork belly BBQ) nights are a social INSTITUTION in Korea. The grill is just the excuse to sit together for hours!',
+               ko:'🧠 2 syllables: go · gi. Chant it like a hungry stomach — "gogi gogi gogi"!'},
+  'egg':      {vi:'🥚 Rolled egg omelette (계란말이) appears in 90% of Korean lunchboxes — the most universal Korean side dish!',
+               ko:'🧠 2 syllables: gye · ran. "GYEEE-RAN!" — like a rooster crowing at dawn. Loud and proud!'},
+  'vegetable':{vi:'🥬 Korea has 180+ documented kimchi varieties — every vegetable gets fermented! Korean astronaut Yi So-yeon brought kimchi to the ISS.',
+               ko:'🧠 2 syllables: chae · so. "Chae" = colorful, "so" = small. Colorful small garden things = chae-so!'},
+  'fruit':    {vi:'🍊 Premium Korean melons are sold in velvet gift boxes — a 10-apple luxury set can cost $80. Fruit as jewelry is real!',
+               ko:'🧠 2 syllables: gwa · il. "GWA!" — gasp at the price! Then "il" = one. One gasp-worthy fruit. Gwa-il.'},
+  'coffee':   {vi:'☕ Seoul has more coffee shops per capita than ANY city on Earth — roughly 1 cafe per 100 residents. Coffee is survival infrastructure!',
+               ko:'🧠 2 syllables: keo · pi. Just say "coffee" in a Korean accent — KEO-PI! Same word, rounder vowels.'},
+  'tea':      {vi:'🍵 The oldest tea garden still operating is on Jeju Island — cultivated since 828 AD! Jeju green tea is Korea most famous drink export.',
+               ko:'🧠 1 syllable: cha. Same root as British slang "a cup of cha"! Tea kept its name crossing the silk road.'},
+  'juice':    {vi:'🥤 Korean convenience stores (open 24/7) stock 50+ juice flavors. Persimmon juice (홍시즙) has FIVE simultaneous flavors at once!',
+               ko:'🧠 2 syllables: ju · seu. Read "juice" in a Korean accent — joo-suh. Your ears already know this!'},
+  'sun':      {vi:'☀️ Korea ancient poetic name is "Dongbang" (동방) — Eastern Land — where the sun rises first. Sunrise pilgrimages happen every New Year!',
+               ko:'🧠 2 syllables: tae · yang. "Yang" is literally the Yang in Yin-Yang — solar force! "Tae" = great. The Great Solar!'},
+  'moon':     {vi:'🌙 Korea celebrates TWO New Years: January 1st AND Lunar New Year (설날). The moon governs the entire traditional festival calendar!',
+               ko:'🧠 1 syllable: dal. Crisp and perfectly round like the full moon. D·A·L. Three letters, one breath.'},
+  'star':     {vi:'⭐ Korean celebrities are literally called "byeol" (star). The highest K-pop award crowns the brightest star each year!',
+               ko:'🧠 1 syllable: byeol. Like a shooting star: "BYEOL!" — a quick burst of light across the night sky.'},
+  'sky':      {vi:'🌤️ Korean proverb: "The sky is high and horses grow fat" — describing the perfect abundance of autumn harvest season.',
+               ko:'🧠 2 syllables: ha · neul. "Ha!" = laughing in awe of the sky. "Neul" = always. A sky that always makes you go "HA!"'},
+  'mountain': {vi:'🏔️ Korea is 70% mountains! Bukhansan mountain is inside Seoul city limits. Hiking is so normal grocery stores sell trail food next to soju.',
+               ko:'🧠 1 syllable: san. SAME as Japanese 山 (san) — ancient East Asian shared root! The character shows three mountain peaks.'},
+  'sea':      {vi:'🌊 Korea has THREE seas on three sides. Koreans debate passionately which is most beautiful: East (deep blue), Yellow (golden), South (islands).',
+               ko:'🧠 2 syllables: ba · da. Soft and rolling like ocean waves — "baaaaa-da". Let the vowels wash over you.'},
+  'river':    {vi:'🌊 The Han River flows 60km through Seoul — millions gather on its banks for chicken delivery, beer, and fireworks every weekend.',
+               ko:'🧠 1 syllable: gang. Like a GANG of water rushing powerfully forward. Strong. Direct. Unstoppable. GANG!'},
+  'tree':     {vi:'🌳 The Korean pine (소나무) stays evergreen through brutal winters — symbol of loyalty. It appears on currency, poetry, and folk paintings.',
+               ko:'🧠 2 syllables: na · mu. Tap a wooden surface twice — NA · MU. The rhythm of knocking on wood for luck!'},
+  'flower':   {vi:'🌸 Cherry blossom tunnels form naturally on university paths every spring. Students literally attend class inside pink clouds!',
+               ko:'🧠 1 syllable: kkot. The double-consonant is tense — say it with a POP: KKOT! Like a bud suddenly bursting open.'},
+  'eye':      {vi:'👁️ Korea "aegyo-sal" (애교살) — the puffy under-eye cushion — is considered CUTE, not tired. People surgically ADD it!',
+               ko:'🧠 1 syllable: nun. Also means "snow"! Close your eyes in the falling snow — same word for both. NUN.'},
+  'nose':     {vi:'👃 Traditional Korean face-reading (관상) uses nose shape to predict wealth. High nose bridge = prosperity. Real fortune-tellers specialize in this!',
+               ko:'🧠 1 syllable: ko. Upright and prominent like the nose itself. Short, bold, unmissable. KO.'},
+  'mouth':    {vi:'👄 "입이 무겁다" = "your mouth is heavy" = you keep secrets well. In Korean, body parts carry moral and social weight!',
+               ko:'🧠 1 syllable: ip. Your lips come together then POP open — "IP!" The word physically mirrors its own action.'},
+  'hand':     {vi:'🤝 Using ONE hand to receive anything from a Korean elder is genuinely rude. Gifts, money, business cards — BOTH hands = respect!',
+               ko:'🧠 1 syllable: son. Sounds like English "son"! Picture your son handing you something with both hands respectfully — SON.'},
+  'foot':     {vi:'🦶 Korean ondol (온돌) warms floors from underneath. Koreans traditionally sleep on heated floors in winter — feet are always pampered!',
+               ko:'🧠 1 syllable: bal. Like "ball" without the double-L — BAL. Picture a ball rolling off your warm foot.'},
+  'head':     {vi:'🤯 The Korean bow communicates hierarchy through angle: 15 degrees = greeting, 45 degrees = apology, 90 degrees = deepest respect.',
+               ko:'🧠 2 syllables: meo · ri. "Meo" sounds exactly like a cat meowing — then "ri"! A cat nodding its head: MEO-ri!'},
+  'heart':    {vi:'💖 Koreans developed "nunchi" (눈치) — the art of sensing others emotions without being told. Being heart-aware is a core social skill!',
+               ko:'🧠 2 syllables: ma · eum. "Ma!" = surprised call for your mum. "Eum" = sound/tone. Heart = the sound of calling for love.'},
+  'cat':      {vi:'🐱 Korean cats say "야옹!" (yaong) — longer and moodier than meow! Cat cafes in Seoul have waitlists on weekends. Muop says hi! 🐾',
+               ko:'🧠 3 syllables: go · yang · i. "Go" = go! "Yang" = sheep baa! "I" = subject marker. The cat who goes and baa-s — GO-YANG-I!'},
+  'dog':      {vi:'🐶 Korean dogs say "멍멍!" (meong-meong). The Jindo dog famously walked 300km home after being sold — a national loyalty legend!',
+               ko:'🧠 1 syllable: gae. Sharp as a bark — GAE! One bark, one syllable. Done.'},
+  'bird':     {vi:'🐦 The Korean crane (두루미) symbolizes 1000 years of life. Folding 1000 paper cranes grants one wish — still practiced today!',
+               ko:'🧠 1 syllable: sae. Light as a feather — SAE. A bird taking flight barely disturbs the air.'},
+  'school':   {vi:'🏫 Korean school uniforms are so fashionable they are sold to non-students as streetwear. K-drama school arcs launched global fashion trends!',
+               ko:'🧠 2 syllables: hak · gyo. "Hak" (학) = learning — also in university (대학) and student (학생). Learning-place!'},
+  'hospital': {vi:'🏥 Gangnam has more cosmetic surgery clinics per block than anywhere on Earth. Some look like luxury hotel lobbies. Medical tourism earns $1B+ yearly.',
+               ko:'🧠 2 syllables: byeong · won. "Byeong" = sick. "Won" = institution. Like hagwon (learning institution). Sick-institution!'},
+  'market':   {vi:'🛒 Gwangjang Market has operated continuously since 1905! At 2 AM you can eat fresh kimbap while vendors still negotiate prices!',
+               ko:'🧠 2 syllables: si · jang. TRICK: "sijang" ALSO means "mayor"! Same sounds, completely different jobs!'},
+  'phone':    {vi:'📱 Korea launched the world first 5G network AND invented the foldable smartphone. Koreans upgrade phones every 16 months — faster than any nation!',
+               ko:'🧠 3 syllables: hyu · dae · pon. "Hyu-dae" = portable/handheld. "Pon" from English phone. Handheld-phone!'},
+  'book':     {vi:'📚 Kyobo Bookstore in Seoul spans 4 underground floors with its own signature scent (cedarwood and ink). Koreans famously read on the subway.',
+               ko:'🧠 1 syllable: chaek. Sounds like "CHECK!" — you check a book out of the library. CHAEK! Stamped.'},
+  'music':    {vi:'🎵 BTS contributes $5 BILLION to Korea economy per year — exceeding the entire beer and soju export industry combined. K-pop is financial power!',
+               ko:'🧠 2 syllables: eum · ak. "Eum" (음) = sound/tone in music theory. "Ak" = enjoyment. Sound-enjoyment = music. Perfect logic!'},
+  'money':    {vi:'💰 The 50000 won bill features Shin Saimdang — one of the world first female artists ever on a banknote. Korea honored a 16th-century woman painter!',
+               ko:'🧠 1 syllable: don. Like "dun-dun-DUN!" in a movie — but compact. DON. Money drama in one punchy syllable.'},
 };
 
-// Generate a fun fact for any word (fallback if not in database)
+// Generate a fun fact for any word (smart fallback if not in database)
 function getFunFact(word) {
   const key = (word.en || '').toLowerCase();
   if(VOCAB_FACTS[key]) return VOCAB_FACTS[key];
-  // Category-based fallback
+  // Smart fallback using syllable count
+  const koLen = (word.ko||'').length;
+  const syllables = koLen <= 2 ? '1 syllable — very short, one quick breath!'
+                  : koLen <= 4 ? '2 syllables — clap twice as you say it!'
+                  : '3+ syllables — break it into pieces and conquer each!';
   const catTips = {
-    '식품':   {vi:`🍽️ Korean cuisine is famous for balancing five flavors: spicy, salty, sweet, sour, bitter. "${word.en}" is an essential part!`, ko:'🔤 Connect this word with your favorite Korean food image!'},
-    '동물':   {vi:`🐾 Koreans love animals — animal-themed cafes are very popular. "${word.en}" can be found there too!`,           ko:'🔤 Try imitating this animal\'s sound in Korean!'},
-    '자연':   {vi:`🌿 Korea has 4 distinct seasons with stunning changes. "${word.en}" has appeared in Korean poetry for thousands of years!`,           ko:'🔤 This word appears in many romantic Korean ballads!'},
-    '신체':   {vi:`💪 Korean has many nuanced body-related words. "${word.en}" is a body part Koreans pay special attention to in language!`, ko:'🔤 Think about the physical sensation of this body part when you pronounce it!'},
-    '장소':   {vi:`📍 Korea is one of the safest countries in Asia. "${word.en}" is a place you can find in any Korean city!`,                ko:'🔤 Think about the sounds you hear at this place when pronouncing the word!'},
+    'food':    {vi:`🍽️ Korean cuisine balances 5 flavors: spicy, salty, sweet, sour, bitter. "${word.en}" fits right into this harmony!`,       ko:`🧠 ${syllables} Picture this food at a Korean dinner table.`},
+    'animal':  {vi:`🐾 Animal cafes are huge in Korea — cat, dog, rabbit, otter... "${word.en}" might even have its own cafe!`,                   ko:`🧠 ${syllables} Try imitating the sound this animal makes — Korean onomatopoeia often matches!`},
+    'nature':  {vi:`🌿 Korea 4 seasons make every natural element look different each quarter. "${word.en}" appears in Korean poetry across centuries!`, ko:`🧠 ${syllables} Imagine this element in Korea landscape as you say each syllable.`},
+    'body':    {vi:`💪 Korean body-part words carry social meaning — how you move each body part communicates respect and emotion!`,               ko:`🧠 ${syllables} Feel the physical sensation of this body part as you pronounce each syllable.`},
+    'place':   {vi:`📍 Korea is one of the safest countries in Asia — "${word.en}" is a place you can freely explore at any hour!`,               ko:`🧠 ${syllables} Close your eyes and imagine the sounds and smells of this place.`},
   };
-  const fallback = catTips[word.category] || {
-    vi:`✨ "${word.en}" is a very commonly used word in daily Korean conversation and K-dramas!`,
-    ko:`🔤 Hint: count the syllables of this word (${word.ko.length <= 2 ? 'very short!' : word.ko.length <= 4 ? 'medium length' : 'a bit long'}) and create a rhythm with it!`
+  return catTips[word.category] || {
+    vi: `✨ "${word.en}" is used constantly in Korean daily life and K-dramas — once you recognize it, you will hear it everywhere!`,
+    ko: `🧠 ${syllables} Clap for each syllable as you say it out loud — your body will remember the rhythm!`,
   };
-  return fallback;
 }
 
 function showVocabFunFact(word) {
@@ -725,6 +772,10 @@ class FarmScene extends Phaser.Scene {
   constructor(){ super({key:'FarmScene'}); }
   preload(){ this.load.json('levels','levels.json'); }
 
+  // ── APPLE TREE constants ──────────────────────────────────────────────────
+  // Time for apple tree to ripen after last harvest (or game start)
+  static get APPLE_RIPEN_MS() { return 2 * 60 * 1000; } // 2 minutes
+
   create(){
     sceneRef = this;
     levelsData = this.cache.json.get('levels') || [];
@@ -737,6 +788,7 @@ class FarmScene extends Phaser.Scene {
     this._createPlayer(W, H); this._addPlotLabels();
     this._createShopNPC(W, H);
     this._createCatNPC(W, H);
+    this._createAppleTree(W, H);
 
     this.keys = {
       W:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
@@ -754,6 +806,29 @@ class FarmScene extends Phaser.Scene {
   // ── BAKE TEXTURES ──────────────────────────────────────────────────────────
   _bakeTextures(){
     const mk = () => this.make.graphics({add:false});
+    // Apple Tree texture (18×30 pixels) — ginger-red apples peeking through crown
+    const gat=mk();
+    const crown2=['......lLLLl.......','....lLLLLLLl......','...LLLLLLLLLLL....',
+     '..LLLLLLLLlLLLL...','..lLLLRALLllLLLl..','.LLLLLRALLllLLLLL.',
+     'lLLRRALllMlLLLLLL','lLLRRALlMMLllLLLL','lLLLLllMMMlllLLLL',
+     'lLLRRAllllllLLLLL','mLlRRAMMMlllllLLL','mRRAMMMMMllllllLL',
+     'mMMMMMMMMMllllllL','.MMMMMMMMmmllllL.','.mMMMMMMmmmlll..','.mmmmmmmmmmll...',
+     '...mmmmmmmmm.....','....kKKKk........'];
+    // Override some cells with red apple color
+    const R=0xEE2222, RA=0xFF5555;
+    drawS(gat,crown2); // draw base crown
+    // Paint apple spots red on top of crown
+    [[3,5,3,2,R],[2,9,3,2,R],[8,10,3,2,R]].forEach(([x,y,w,h,c])=>pR(gat,x,y,w,h,c));
+    [[3,5,1,1,RA],[2,9,1,1,RA],[8,10,1,1,RA]].forEach(([x,y,w,h,c])=>pR(gat,x,y,w,h,c));
+    pR(gat,7,17,4,11,K.K); pR(gat,7,17,1,11,K.k); pR(gat,10,17,1,11,K.s);
+    gat.generateTexture('apple_tree',18*PS,30*PS); gat.destroy();
+    // Ripe apple tree variant — brighter more saturated apples
+    const gatr=mk();
+    drawS(gatr,crown2);
+    [[3,5,3,2,0xFF0000],[2,9,3,2,0xFF0000],[8,10,3,2,0xFF0000]].forEach(([x,y,w,h,c])=>pR(gatr,x,y,w,h,c));
+    [[3,5,1,1,0xFF6666],[2,9,1,1,0xFF6666],[8,10,1,1,0xFF6666]].forEach(([x,y,w,h,c])=>pR(gatr,x,y,w,h,c));
+    pR(gatr,7,17,4,11,K.K); pR(gatr,7,17,1,11,K.k); pR(gatr,10,17,1,11,K.s);
+    gatr.generateTexture('apple_tree_ripe',18*PS,30*PS); gatr.destroy();
 
     GRASS.forEach((rows,i)=>{ const g=mk(); drawS(g,rows); g.generateTexture('grs'+i,16*PS,16*PS); g.destroy(); });
     const gd=mk(); drawS(gd,DIRT_DRY); gd.generateTexture('drt_dry',16*PS,16*PS); gd.destroy();
@@ -917,25 +992,7 @@ class FarmScene extends Phaser.Scene {
         this.add.image(tx, ty, 'tree').setOrigin(0.5,1).setDepth(ty);
       });
 
-    // Fence perimeter
-    const fx=this.farm.x-16, fy=this.farm.y-16, fw2=fW+32, fh2=fH+32;
-    const RW=14*PS;
-    for(let px=fx; px<fx+fw2-RW; px+=RW){
-      this.add.image(px+RW/2, fy,      'fnc_rail').setDepth(fy);
-      this.add.image(px+RW/2, fy+fh2,  'fnc_rail').setDepth(fy+fh2);
-    }
-    for(let py=fy; py<fy+fh2; py+=RW){
-      this.add.image(fx,     py+RW/2, 'fnc_rail').setAngle(90).setDepth(py);
-      this.add.image(fx+fw2, py+RW/2, 'fnc_rail').setAngle(90).setDepth(py);
-    }
-    for(let px=fx; px<=fx+fw2; px+=RW){
-      this.add.image(px, fy,     'fnc_post').setDepth(fy+1);
-      this.add.image(px, fy+fh2, 'fnc_post').setDepth(fy+fh2+1);
-    }
-    for(let py=fy; py<=fy+fh2; py+=RW){
-      this.add.image(fx,     py, 'fnc_post').setDepth(py+1);
-      this.add.image(fx+fw2, py, 'fnc_post').setDepth(py+1);
-    }
+    // Fence removed — open world feel
   }
 
   // ── SHOP NPC ───────────────────────────────────────────────────────────────
@@ -970,18 +1027,116 @@ class FarmScene extends Phaser.Scene {
       .setOrigin(0.5,1).setScale(1.8).setDepth(cy);
     // Gentle sitting bob
     this.tweens.add({ targets:this.catSprite, y:cy-3, duration:1200, yoyo:true, repeat:-1, ease:'Sine.InOut' });
-    // "Danh gia" floating meow hint
+    // Floating meow hint
     this.catHint = this.add.text(cx, cy-52, '🐱 야옹\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'6px',
       color:'#FFCC44', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(cy+1).setAlpha(0);
     this.tweens.add({ targets:this.catHint, y:this.catHint.y-3, duration:700, yoyo:true, repeat:-1 });
     // Name label always visible
-    this.add.text(cx, cy+6, 'Meo Muop', {
+    this.add.text(cx, cy+6, 'Muop', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'5px',
       color:'#FFD700', stroke:'#000', strokeThickness:2
     }).setOrigin(0.5,0).setDepth(cy+1);
     this.catX=cx; this.catY=cy;
+  }
+
+  // ── APPLE TREE ─────────────────────────────────────────────────────────────
+  _createAppleTree(W, H){
+    // Position: upper-left corner of farm
+    const ax = this.farm.x - 30;
+    const ay = this.farm.y - 40;
+    // Shadow
+    this.add.ellipse(ax, ay+18, 56, 14, 0, 0.3).setDepth(ay);
+    // Tree sprite (starts with unripe texture)
+    this.appleTreeSprite = this.add.image(ax, ay, 'apple_tree')
+      .setOrigin(0.5, 1).setScale(1.0).setDepth(ay+1);
+    // Gentle sway
+    this.tweens.add({
+      targets: this.appleTreeSprite,
+      angle: { from: -1.5, to: 1.5 },
+      duration: 2800, yoyo: true, repeat: -1, ease: 'Sine.InOut'
+    });
+    // Floating label (hidden until ripe)
+    this.appleTreeLabel = this.add.text(ax, ay - 30, '🍎 READY!\n[SPACE]', {
+      fontFamily: '"Press Start 2P",monospace', fontSize: '7px',
+      color: '#FF4444', stroke: '#000', strokeThickness: 3, align: 'center'
+    }).setOrigin(0.5, 1).setDepth(ay + 100).setAlpha(0);
+    this.tweens.add({ targets: this.appleTreeLabel, y: this.appleTreeLabel.y - 4,
+      duration: 600, yoyo: true, repeat: -1 });
+    // Glow ring (hidden until ripe)
+    this.appleTreeGlow = this.add.graphics().setDepth(ay - 1);
+    this.tweens.add({ targets: this.appleTreeGlow, alpha: { from: 1, to: 0.1 },
+      duration: 750, yoyo: true, repeat: -1 });
+    // Timer countdown label
+    this.appleTreeTimer = this.add.text(ax, ay + 22, '', {
+      fontFamily: '"Press Start 2P",monospace', fontSize: '5px',
+      color: '#AAFFAA', stroke: '#000', strokeThickness: 2, align: 'center'
+    }).setOrigin(0.5, 0).setDepth(ay + 10);
+    // Name tag
+    this.add.text(ax, ay + 34, '🍎 Apple Tree', {
+      fontFamily: '"Press Start 2P",monospace', fontSize: '5px',
+      color: '#FFD700', stroke: '#000', strokeThickness: 2, align: 'center'
+    }).setOrigin(0.5, 0).setDepth(ay + 10);
+    // State
+    this.appleX = ax; this.appleY = ay;
+    this.appleRipeAt  = appleTreeSave.ripeAt  || (Date.now() + FarmScene.APPLE_RIPEN_MS);
+    this.appleRipe    = appleTreeSave.ripe     || false;
+    this._updateAppleTree();
+  }
+
+  _updateAppleTree(){
+    if(!this.appleTreeSprite) return;
+    if(this.appleRipe){
+      this.appleTreeSprite.setTexture('apple_tree_ripe');
+      this.appleTreeLabel.setAlpha(1);
+      this.appleTreeGlow.clear();
+      this.appleTreeGlow.lineStyle(5, 0xFF2222, 1);
+      this.appleTreeGlow.strokeCircle(this.appleX, this.appleY - 40, 48);
+      this.appleTreeTimer.setText('');
+    } else {
+      this.appleTreeSprite.setTexture('apple_tree');
+      this.appleTreeLabel.setAlpha(0);
+      this.appleTreeGlow.clear();
+    }
+  }
+
+  _tickAppleTree(){
+    if(this.appleRipe) return;
+    const now = Date.now();
+    const rem = Math.max(0, this.appleRipeAt - now);
+    if(rem <= 0){
+      this.appleRipe = true;
+      _saveAppleTree(this);
+      this._updateAppleTree();
+      showToast('🍎 Apple Tree is ripe! Go harvest it!');
+      return;
+    }
+    const secs = Math.ceil(rem / 1000);
+    const m = Math.floor(secs / 60), s = secs % 60;
+    this.appleTreeTimer.setText(`🍎 ${m}m ${String(s).padStart(2,'0')}s`);
+  }
+
+  harvestAppleTree(){
+    if(!this.appleRipe) return;
+    // Pick a random word from unlocked levels for Phase 3 quiz
+    const word = this._pickWord();
+    appleTreeQuizPending = true;
+    openQuiz(word, null, 3);
+  }
+
+  onAppleHarvested(){
+    // Reward: big gold bonus
+    const bonus = 15 + Math.floor(Math.random() * 6); // 15-20 gold
+    addGold(bonus);
+    this._flyCoins(this.appleX, this.appleY - 30, Math.min(bonus, 8));
+    this._label(this.appleX, this.appleY - 30, `+${bonus} 🍎 BONUS!`);
+    // Start regrowth timer
+    this.appleRipe    = false;
+    this.appleRipeAt  = Date.now() + FarmScene.APPLE_RIPEN_MS;
+    _saveAppleTree(this);
+    this._updateAppleTree();
+    showToast(`🍎 Harvested! +${bonus} gold! Tree will regrow in 2 min.`, 4000);
   }
 
   // ── PLOTS ──────────────────────────────────────────────────────────────────
@@ -1075,6 +1230,9 @@ class FarmScene extends Phaser.Scene {
     // SRS timer: check every 8s if any plant needs state advance
     this._timerAcc=(this._timerAcc||0)+(dt||16);
     if(this._timerAcc>8000){this._timerAcc=0;this._checkSRS();}
+    // Apple tree timer: update every second
+    this._appleAcc=(this._appleAcc||0)+(dt||16);
+    if(this._appleAcc>1000){this._appleAcc=0;this._tickAppleTree();}
     // SPACE target indicator (shows which object will be targeted)
     if(!playerLocked&&!quizOpen&&!shopOpen&&!catDialogOpen) this._updateTargetHighlight();
     else if(this._tHL){ this._tHL.clear(); if(this._tLbl) this._tLbl.setAlpha(0); }
@@ -1097,21 +1255,24 @@ class FarmScene extends Phaser.Scene {
     this._tHL.clear();
     let hx=null,hy=null,lbl='',col=0xFFD700,hw=PLOT_SIZE,hh=PLOT_SIZE;
 
-    // Priority mirrors _interact(): ripe > wilt > cat > shop > empty
-    for(const p of this.plots){
-      if(p.sState==='4'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Thu hoach +Gold';col=0xFFD700;break;}
+    // Priority mirrors _interact(): apple > ripe > wilt > cat > shop > empty
+    if(this.appleRipe&&this.appleX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<90){
+      hx=this.appleX;hy=this.appleY-50;lbl='[SPACE] Harvest 🍎 Bonus!';col=0xFF3333;hw=60;hh=70;
     }
     if(hx===null) for(const p of this.plots){
-      if(p.sState==='2'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Tuoi nuoc';col=0x55CCFF;break;}
+      if(p.sState==='4'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Harvest +Gold';col=0xFFD700;break;}
+    }
+    if(hx===null) for(const p of this.plots){
+      if(p.sState==='2'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Water';col=0x55CCFF;break;}
     }
     if(hx===null&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<82){
-      hx=this.catX;hy=this.catY-20;lbl='[SPACE] Noi chuyen voi Muop';col=0xFF88CC;hw=44;hh=44;
+      hx=this.catX;hy=this.catY-20;lbl='[SPACE] Talk to Muop';col=0xFF88CC;hw=44;hh=44;
     }
     if(hx===null&&this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<92){
-      hx=this.shopX;hy=this.shopY-20;lbl='[SPACE] Mo cua hang';col=0xFFAA44;hw=50;hh=60;
+      hx=this.shopX;hy=this.shopY-20;lbl='[SPACE] Open Shop';col=0xFFAA44;hw=50;hh=60;
     }
     if(hx===null) for(const p of this.plots){
-      if(p.sState===''&&p.active&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Trong cay moi';col=0x44FF88;break;}
+      if(p.sState===''&&p.active&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Plant new';col=0x44FF88;break;}
     }
 
     if(hx!==null){
@@ -1149,13 +1310,18 @@ class FarmScene extends Phaser.Scene {
   // ── INTERACT (SRS-aware priority) ─────────────────────────────────────────
   _interact(){
     const near=p=>Phaser.Math.Distance.Between(this.player.x,this.player.y,p.x,p.y)<PLOT_SIZE+24;
-    // P1: ripe plants (Phase 3 harvest, no hints)
+    // Apple Tree harvest (highest priority when ripe)
+    if(this.appleRipe&&this.appleX&&
+       Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<90){
+      this.tweens.add({targets:this.appleTreeSprite,angle:12,duration:80,yoyo:true,repeat:2});
+      this.harvestAppleTree(); return;
+    }
+    // P1: ripe crop plots (Phase 3 harvest)
     for(const p of this.plots){ if(p.sState==='4'&&near(p)){openQuiz(p.word,p,3);return;} }
-    // P2: wilting plants (Phase 2 review, emoji only)
+    // P2: wilting plants (Phase 2 review)
     for(const p of this.plots){ if(p.sState==='2'&&near(p)){openQuiz(p.word,p,2);return;} }
     // Cat NPC
     if(this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<80){
-      // Cat bounce animation
       this.tweens.add({targets:this.catSprite,scale:{from:1.8,to:2.2},duration:100,yoyo:true,ease:'Back.Out(2)'});
       showCatDialog(); return;
     }
@@ -1181,7 +1347,7 @@ class FarmScene extends Phaser.Scene {
       const crop=this.add.image(plot.x,plot.y-4,`cr_${t}_1`).setOrigin(0.5,0.85).setScale(0).setDepth(plot.y+5);
       plot.plant=crop;
       this.tweens.add({targets:crop,scale:1,duration:300,ease:'Back.Out(3)'});
-      this._sparkle(plot.x,plot.y); this._label(plot.x,plot.y,'Gieo hat!');
+      this._sparkle(plot.x,plot.y); this._label(plot.x,plot.y,'Planted!');
       this._setState(plot,'1',ko);
     } else if(phase===2){
       // P2 correct: grow to sprout, set P3 timer
