@@ -28,7 +28,7 @@ except ImportError:
 # ─── Constants ─────────────────────────────────────────────────────────────────
 PORT      = 8742
 BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
-ASSETS    = os.path.join(BASE_DIR, 'assets')
+ASSETS    = BASE_DIR                                   # serve directly from root
 SAVE_FILE = os.path.join(BASE_DIR, 'save_data.json')   # persistent save file
 DATA_DIR  = os.path.join(BASE_DIR, 'webview_data')     # WebView2 user profile
 
@@ -52,7 +52,7 @@ class GameSaveAPI:
             with self._lock:
                 with open(SAVE_FILE, 'w', encoding='utf-8') as f:
                     json.dump(data, f, ensure_ascii=False, indent=2)
-            print(f"[Save] Game saved → {SAVE_FILE}")
+            print(f"[Save] Game saved -> {SAVE_FILE}")
             return True
         except Exception as e:
             print(f"[Save ERROR] {e}")
@@ -65,7 +65,7 @@ class GameSaveAPI:
                     return None
                 with open(SAVE_FILE, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-            print(f"[Load] Game loaded ← {SAVE_FILE}")
+            print(f"[Load] Game loaded <- {SAVE_FILE}")
             return data
         except Exception as e:
             print(f"[Load ERROR] {e}")
@@ -100,7 +100,7 @@ def main():
 
     # Start HTTP server in background thread
     threading.Thread(target=_start_server, daemon=True).start()
-    print(f"[Hangeul Valley] Server → http://127.0.0.1:{PORT}")
+    print(f"[Hangeul Valley] Server -> http://127.0.0.1:{PORT}")
     if os.path.exists(SAVE_FILE):
         print(f"[Hangeul Valley] Save file found: {SAVE_FILE}")
     else:
@@ -112,10 +112,11 @@ def main():
         url         = url,
         js_api      = GameSaveAPI(),   # ← exposes save/load to JavaScript
         width       = 1280,
-        height      = 800,
+        height      = 720,
         min_size    = (800, 600),
         resizable   = True,
         text_select = False,
+        fullscreen  = True,
     )
     webview.start(debug=False)
     print("[Hangeul Valley] Game closed. Goodbye!")
