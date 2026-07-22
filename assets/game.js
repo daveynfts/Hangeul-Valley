@@ -87,13 +87,15 @@ let srsData  = {}; // { ko: { p2At, p3At, harvests } }
 let plotSave = []; // [{ i, ko, sState, plantedAt }]
 
 // ── Unified File-Based Save (pywebview API → file, localStorage as backup) ─────
+let fishAlbumSave = {}; // { ko: count }
+
 // Collect ALL game state into ONE object
 function collectSave(){
   const hcObj={}; harvestCounts.forEach((v,k)=>hcObj[k]=v);
   const plots = sceneRef?.plots.filter(p=>p.ko)
     .map(p=>({i:p.index, ko:p.ko, sState:p.sState, plantedAt:p.plantedAt||0})) || plotSave;
   const apple = sceneRef ? { ripeAt: sceneRef.appleRipeAt, ripe: sceneRef.appleRipe } : appleTreeSave;
-  return { v:3, gold, unlockedLevels, unlockedTrophies, harvests:hcObj, srs:srsData, plots, lastLevel:currentLevelIndex, apple };
+  return { v:3, gold, unlockedLevels, unlockedTrophies, harvests:hcObj, srs:srsData, plots, lastLevel:currentLevelIndex, apple, fishAlbum:fishAlbumSave };
 }
 // Apply a save snapshot to the in-memory state
 function applySave(d){
@@ -106,6 +108,7 @@ function applySave(d){
   if(d.plots) plotSave = d.plots;
   if(typeof d.lastLevel==='number') currentLevelIndex = d.lastLevel;
   if(d.apple) appleTreeSave = d.apple;
+  if(d.fishAlbum) fishAlbumSave = d.fishAlbum;
   return true;
 }
 // Write to file (pywebview) AND localStorage backup
@@ -220,8 +223,20 @@ if(window.addEventListener){
 }
 let quizOpen=false, currentWord=null, currentPlot=null;
 let playerLocked=false, plantedWords=new Set(); // words currently ON a plot
-let shopOpen=false, catDialogOpen=false, memoryOpen=false, trophyOpen=false, duelOpen=false;
+let shopOpen=false, catDialogOpen=false, memoryOpen=false, trophyOpen=false, duelOpen=false, fishAlbumOpen=false;
 let appleTreeSave = {}; // { ripeAt, ripe } persisted across sessions
+
+// ══════════════ FISH DATABASE ═════════════════════════════════════════════════
+const FISH_DB = [
+  { ko:'연어', en:'Salmon', hint:'🍣', rarity:'Common', weight:'2.4 kg', rom:'yeon-eo' },
+  { ko:'고등어', en:'Mackerel', hint:'🐟', rarity:'Common', weight:'1.1 kg', rom:'go-deung-eo' },
+  { ko:'오징어', en:'Squid', hint:'🦑', rarity:'Rare', weight:'0.8 kg', rom:'o-jing-eo' },
+  { ko:'잉어', en:'Carp', hint:'🎏', rarity:'Rare', weight:'3.2 kg', rom:'ing-eo' },
+  { ko:'새우', en:'Shrimp', hint:'🦐', rarity:'Common', weight:'0.1 kg', rom:'sae-u' },
+  { ko:'문어', en:'Octopus', hint:'🐙', rarity:'Epic', weight:'4.5 kg', rom:'mun-eo' },
+  { ko:'조개', en:'Clam', hint:'🐚', rarity:'Common', weight:'0.2 kg', rom:'jo-gae' },
+  { ko:'황금물고기', en:'Golden Fish', hint:'🌟', rarity:'Legendary', weight:'5.0 kg', rom:'hwang-geum-mul-go-gi' }
+];
 let appleTreeQuizPending = false; // true when harvesting apple tree (not a crop plot)
 
 function _saveAppleTree(scene){
@@ -889,6 +904,7 @@ class FarmScene extends Phaser.Scene {
     this._createCatNPC(W, H);
     this._createAppleTree(W, H);
     this._createPortalNPC(W, H);
+    this._createFishingSpot(W, H);
 
     this.keys = {
       W:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
@@ -1062,6 +1078,13 @@ class FarmScene extends Phaser.Scene {
     pR(gport, 4, 8, 12, 20, 0xA855F7); pR(gport, 6, 10, 8, 16, 0x6D28D9);
     pR(gport, 8, 12, 4, 12, 0x06B6D4); pR(gport, 9, 14, 2, 8, 0xFFFFFF);
     gport.generateTexture('dungeon_portal', 20*PS, 28*PS); gport.destroy();
+
+    // Fishing Dock Pier texture 24x16
+    const gdock = mk();
+    pR(gdock, 0, 0, 24, 16, 0x78350F); pR(gdock, 1, 1, 22, 14, 0x92400E);
+    pR(gdock, 0, 0, 24, 2, 0xB45309); pR(gdock, 0, 8, 24, 2, 0x78350F);
+    pR(gdock, 2, 2, 2, 12, 0x475569); pR(gdock, 20, 2, 2, 12, 0x475569); // bolts
+    gdock.generateTexture('fishing_dock', 24*PS, 16*PS); gdock.destroy();
 
     // Arcade Machine texture 16x22 with CRT scanline details
     const ga = mk();
@@ -1459,6 +1482,37 @@ class FarmScene extends Phaser.Scene {
     this.portalX = px; this.portalY = py;
   }
 
+  // ── FISHING SPOT NPC / DOCK ────────────────────────────────────────────────
+  _createFishingSpot(W, H){
+    const fx = this.farm.x + this.farm.w / 2;
+    const fy = this.farm.y + this.farm.h + 165;
+
+    // Crystal Pond Blue Water Ellipse
+    const pond = this.add.ellipse(fx, fy + 20, 240, 70, 0x0284C7, 0.85).setDepth(fy - 5);
+    this.tweens.add({ targets: pond, scaleX: 1.05, scaleY: 0.95, duration: 1800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+
+    // Floating Lily Pads
+    this.add.text(fx - 60, fy + 15, '🪷', {fontSize:'18px'}).setDepth(fy-4);
+    this.add.text(fx + 70, fy + 25, '🪷', {fontSize:'16px'}).setDepth(fy-4);
+
+    // Fishing Dock Pier
+    this.add.ellipse(fx, fy+8, 60, 14, 0, 0.4).setDepth(fy-1);
+    this.dockSprite = this.add.image(fx, fy, 'fishing_dock').setOrigin(0.5,1).setScale(1.5).setDepth(fy);
+    
+    this.fishHint = this.add.text(fx, fy-60, '🎣 CRYSTAL POND\n[SPACE]', {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+      color:'#38BDF8', stroke:'#000', strokeThickness:3, align:'center'
+    }).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
+    this.tweens.add({ targets: this.fishHint, y: this.fishHint.y - 3, duration: 700, yoyo: true, repeat: -1 });
+
+    this.add.text(fx, fy+6, 'Fishing Dock', {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
+      color:'#7DD3FC', stroke:'#000', strokeThickness:2
+    }).setOrigin(0.5,0).setDepth(fy+1);
+
+    this.fishX = fx; this.fishY = fy;
+  }
+
   // ── APPLE TREE ─────────────────────────────────────────────────────────────
   _createAppleTree(W, H){
     const ax = this.farm.x - 130;
@@ -1678,6 +1732,11 @@ class FarmScene extends Phaser.Scene {
       const nearPortal = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY) < 85;
       this.portalHint.setAlpha(nearPortal ? 1 : 0);
     }
+    // Show fishing hint label when nearby
+    if(this.fishHint){
+      const nearFish = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY) < 85;
+      this.fishHint.setAlpha(nearFish ? 1 : 0);
+    }
 
     if(Phaser.Input.Keyboard.JustDown(this.spaceKey)&&!playerLocked&&!quizOpen&&!shopOpen&&!memoryOpen&&!trophyOpen&&!duelOpen) this._interact();
     // SRS timer: check every 8s if any plant needs state advance
@@ -1726,6 +1785,9 @@ class FarmScene extends Phaser.Scene {
     }
     if(hx===null&&this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<85){
       hx=this.portalX;hy=this.portalY-30;lbl='[SPACE] Enter Dungeon';col=0xEC4899;hw=50;hh=60;
+    }
+    if(hx===null&&this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
+      hx=this.fishX;hy=this.fishY-25;lbl='[SPACE] Start Fishing';col=0x38BDF8;hw=50;hh=50;
     }
     if(hx===null&&this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
       hx=this.arcadeX;hy=this.arcadeY-30;lbl='[SPACE] Play Retro Shooter';col=0x00FFFF;hw=44;hh=50;
@@ -1796,6 +1858,13 @@ class FarmScene extends Phaser.Scene {
       this.tweens.add({targets:this.portalSprite,scale:{from:1.5,to:1.8},duration:120,yoyo:true,ease:'Back.Out(2)'});
       this.scene.pause();
       this.scene.launch('DungeonScene');
+      return;
+    }
+    // Fishing Dock
+    if(this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
+      this.tweens.add({targets:this.dockSprite,scale:{from:1.5,to:1.7},duration:120,yoyo:true,ease:'Back.Out(2)'});
+      this.scene.pause();
+      this.scene.launch('FishingScene');
       return;
     }
     // Arcade
@@ -2447,6 +2516,276 @@ class DungeonScene extends Phaser.Scene {
   }
 }
 
+// ═══════════════ STARDEW-STYLE FISHING MINIGAME SCENE ════════════════════════
+class FishingScene extends Phaser.Scene {
+  constructor(){ super({key:'FishingScene'}); }
+
+  create(){
+    this.W = this.scale.width;
+    this.H = this.scale.height;
+
+    // Deep water pond background
+    this.add.rectangle(0, 0, this.W, this.H, 0x0284C7).setOrigin(0);
+    for(let i=0; i<30; i++){
+      const w = this.add.ellipse(Math.random()*this.W, Math.random()*this.H, 60, 16, 0, 0.25);
+      this.tweens.add({ targets:w, scaleX:1.2, alpha:0.1, duration:2000+Math.random()*1000, yoyo:true, repeat:-1 });
+    }
+
+    // Dock & Fisherman
+    this.add.rectangle(this.W/2, this.H - 60, this.W, 120, 0x78350F).setOrigin(0.5);
+    this.player = this.add.text(this.W/2, this.H - 120, '🎣', {fontSize:'48px'}).setOrigin(0.5);
+
+    // State: 'CASTING', 'WAITING', 'REELING', 'CATCH_QUIZ'
+    this.state = 'CASTING';
+    this.catchProgress = 0;
+    this.targetFish = null;
+
+    // UI Info Toast
+    this.infoTxt = this.add.text(this.W/2, 60, '🎣 CLICK or PRESS SPACE TO CAST YOUR LINE!', {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#FDE047', stroke:'#000', strokeThickness:4, align:'center'
+    }).setOrigin(0.5);
+
+    const exitBtn = this.add.text(this.W - 20, 20, '[ESC] LEAVE POND', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#7DD3FC'})
+      .setOrigin(1,0).setInteractive({useHandCursor:true}).setDepth(100);
+    exitBtn.on('pointerdown', () => this.exitFishing());
+    this.input.keyboard.on('keydown-ESC', () => this.exitFishing());
+
+    // Input handlers for casting & tension bar control
+    this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    this.input.on('pointerdown', () => this.handleAction());
+
+    // Build Tension Meter Bar UI (hidden initially)
+    this.buildTensionBar();
+  }
+
+  buildTensionBar(){
+    this.barX = this.W/2 + 180;
+    this.barY = this.H/2;
+    this.barHeight = 240;
+    this.barWidth = 36;
+
+    this.meterBg = this.add.rectangle(this.barX, this.barY, this.barWidth, this.barHeight, 0x0F172A, 0.85)
+      .setStrokeStyle(3, 0x38BDF8).setVisible(false);
+
+    // Green Catching Zone
+    this.catchZoneHeight = 70;
+    this.catchZoneY = this.barY + this.barHeight/2 - this.catchZoneHeight/2;
+    this.catchZone = this.add.rectangle(this.barX, this.catchZoneY, this.barWidth - 4, this.catchZoneHeight, 0x22C55E, 0.7)
+      .setOrigin(0.5, 0).setVisible(false);
+
+    // Fish Icon inside bar
+    this.fishIconY = this.barY;
+    this.fishIcon = this.add.text(this.barX, this.fishIconY, '🐟', {fontSize:'22px'})
+      .setOrigin(0.5).setVisible(false);
+
+    // Progress Bar (Left of tension bar)
+    this.pbBg = this.add.rectangle(this.barX - 30, this.barY, 14, this.barHeight, 0x1E293B).setVisible(false);
+    this.pbFill = this.add.rectangle(this.barX - 30, this.barY + this.barHeight/2, 12, 0, 0x38BDF8)
+      .setOrigin(0.5, 1).setVisible(false);
+  }
+
+  handleAction(){
+    if(this.state === 'CASTING'){
+      this.castLine();
+    }
+  }
+
+  castLine(){
+    this.state = 'WAITING';
+    this.infoTxt.setText('⏳ Waiting for a bite...');
+
+    // Floating bobber
+    this.bobber = this.add.text(this.W/2 + Phaser.Math.Between(-80, 80), this.H/2, '🔴', {fontSize:'24px'}).setOrigin(0.5);
+    this.tweens.add({ targets: this.bobber, y: this.H/2 + 8, duration: 600, yoyo: true, repeat: -1 });
+
+    // Random bite delay
+    const waitTime = Phaser.Math.Between(1800, 3500);
+    this.time.delayedCall(waitTime, () => {
+      if(this.state !== 'WAITING') return;
+      this.triggerBite();
+    });
+  }
+
+  triggerBite(){
+    this.state = 'REELING';
+    this.infoTxt.setText('❗ BITE! Hold SPACE / Click to keep fish in Green Zone!');
+
+    // Exclamation mark splash
+    const ex = this.add.text(this.bobber.x, this.bobber.y - 30, '❗ BITE!', {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'22px', color:'#EF4444', stroke:'#000', strokeThickness:4
+    }).setOrigin(0.5);
+    this.tweens.add({ targets:ex, scale:1.4, alpha:0, duration:800, onComplete:()=>ex.destroy() });
+
+    // Show Tension Bar
+    this.meterBg.setVisible(true);
+    this.catchZone.setVisible(true);
+    this.fishIcon.setVisible(true);
+    this.pbBg.setVisible(true);
+    this.pbFill.setVisible(true);
+
+    this.catchProgress = 0.3;
+    this.targetFish = Phaser.Utils.Array.GetRandom(FISH_DB);
+    this.fishIcon.setText(this.targetFish.hint);
+
+    this.fishVelocity = 0;
+    this.catchZoneVelocity = 0;
+  }
+
+  update(t, dt){
+    if(this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey) && this.state === 'CASTING'){
+      this.castLine();
+    }
+
+    if(this.state !== 'REELING') return;
+
+    // Control Catching Zone with SPACE or Mouse Hold
+    const isHolding = this.spaceKey.isDown || this.input.activePointer.isDown;
+    if(isHolding){
+      this.catchZoneVelocity -= 0.6;
+    } else {
+      this.catchZoneVelocity += 0.5;
+    }
+    this.catchZoneVelocity *= 0.92;
+    this.catchZoneY = Phaser.Math.Clamp(this.catchZoneY + this.catchZoneVelocity, this.barY - this.barHeight/2, this.barY + this.barHeight/2 - this.catchZoneHeight);
+    this.catchZone.setY(this.catchZoneY);
+
+    // Fish Random Movement
+    this.fishVelocity += (Math.random() - 0.5) * 1.4;
+    this.fishVelocity *= 0.94;
+    this.fishIconY = Phaser.Math.Clamp(this.fishIconY + this.fishVelocity, this.barY - this.barHeight/2 + 10, this.barY + this.barHeight/2 - 10);
+    this.fishIcon.setY(this.fishIconY);
+
+    // Check if Fish is inside Catch Zone
+    const fishTop = this.fishIconY - 10, fishBot = this.fishIconY + 10;
+    const zoneTop = this.catchZoneY, zoneBot = this.catchZoneY + this.catchZoneHeight;
+    const inside = fishTop >= zoneTop && fishBot <= zoneBot;
+
+    if(inside){
+      this.catchProgress = Math.min(1.0, this.catchProgress + 0.006);
+      this.catchZone.setFillStyle(0x22C55E, 0.85);
+    } else {
+      this.catchProgress = Math.max(0.0, this.catchProgress - 0.004);
+      this.catchZone.setFillStyle(0xEF4444, 0.85);
+    }
+
+    // Update Progress Bar
+    const currentH = this.barHeight * this.catchProgress;
+    this.pbFill.setSize(12, currentH);
+
+    if(this.catchProgress >= 1.0){
+      this.startVocabChallenge();
+    } else if(this.catchProgress <= 0.0){
+      this.loseFish();
+    }
+  }
+
+  startVocabChallenge(){
+    this.state = 'CATCH_QUIZ';
+    this.hideTensionBar();
+
+    const fish = this.targetFish;
+    this.infoTxt.setText(`🐟 Reeled in ${fish.hint} ${fish.ko} [${fish.rom}]! Answer to Catch!`);
+
+    // Pick 3 random wrong fish choices
+    const wrongs = FISH_DB.filter(f => f.ko !== fish.ko);
+    Phaser.Utils.Array.Shuffle(wrongs);
+    const choices = Phaser.Utils.Array.Shuffle([fish, wrongs[0], wrongs[1], wrongs[2]]);
+
+    // Render Quiz Card Overlay
+    const container = this.add.container(this.W/2, this.H/2).setDepth(200);
+    const bg = this.add.rectangle(0, 0, 360, 240, 0x0F172A, 0.95).setStrokeStyle(3, 0x38BDF8).setOrigin(0.5);
+    const title = this.add.text(0, -90, `What is the English for "${fish.ko}"?`, {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'12px', color:'#38BDF8', align:'center'
+    }).setOrigin(0.5);
+
+    container.add([bg, title]);
+
+    choices.forEach((c, idx) => {
+      const cx = (idx % 2 === 0 ? -85 : 85);
+      const cy = (idx < 2 ? -30 : 30);
+      const btnBg = this.add.rectangle(cx, cy, 150, 44, 0x1E293B).setStrokeStyle(2, 0x0284C7).setInteractive({useHandCursor:true});
+      const txt = this.add.text(cx, cy, c.en, {fontFamily:'"Be Vietnam Pro",sans-serif', fontSize:'15px', color:'#FFFFFF', fontWeight:'bold'}).setOrigin(0.5);
+      
+      btnBg.on('pointerdown', () => {
+        if(c.ko === fish.ko){
+          btnBg.setFillStyle(0x15803D);
+          this.time.delayedCall(400, () => {
+            container.destroy();
+            this.catchSuccess(fish);
+          });
+        } else {
+          btnBg.setFillStyle(0xB91C1C);
+          this.cameras.main.shake(150, 0.01);
+        }
+      });
+
+      container.add([btnBg, txt]);
+    });
+  }
+
+  catchSuccess(fish){
+    fishAlbumSave[fish.ko] = (fishAlbumSave[fish.ko] || 0) + 1;
+    addGold(35);
+
+    if(this.bobber) this.bobber.destroy();
+
+    showToast(`🎉 Caught ${fish.hint} ${fish.ko} (${fish.en})! +35 Gold!`, 4000);
+
+    this.state = 'CASTING';
+    this.infoTxt.setText('🎣 Caught! Press SPACE / Click to Cast Again!');
+  }
+
+  loseFish(){
+    this.state = 'CASTING';
+    this.hideTensionBar();
+    if(this.bobber) this.bobber.destroy();
+    showToast('💨 The fish got away! Try again.');
+    this.infoTxt.setText('🎣 Click or Press SPACE to Cast Line Again!');
+  }
+
+  hideTensionBar(){
+    this.meterBg.setVisible(false);
+    this.catchZone.setVisible(false);
+    this.fishIcon.setVisible(false);
+    this.pbBg.setVisible(false);
+    this.pbFill.setVisible(false);
+  }
+
+  exitFishing(){
+    this.scene.stop();
+    this.scene.resume('FarmScene');
+  }
+}
+
+// ══════════════ FISH ALBUM OVERLAY LOGIC ══════════════════════════════════════
+window.openFishAlbum = function(){
+  const overlay = document.getElementById('fish-album-overlay');
+  const grid = document.getElementById('fish-album-grid');
+  if(!overlay || !grid) return;
+
+  grid.innerHTML = '';
+  FISH_DB.forEach(f => {
+    const count = fishAlbumSave[f.ko] || 0;
+    const unlocked = count > 0;
+    const card = document.createElement('div');
+    card.className = `fish-card ${unlocked ? 'unlocked' : 'locked'}`;
+    card.innerHTML = `
+      <div class="fish-card-icon">${f.hint}</div>
+      <div class="fish-card-ko">${unlocked ? f.ko : '???'}</div>
+      <div class="fish-card-rom">[${f.rom}]</div>
+      <div class="fish-card-en">${unlocked ? f.en : 'Locked'}</div>
+      <div class="fish-card-catches">${unlocked ? `Caught ×${count}` : '🔒 Uncaught'}</div>`;
+    grid.appendChild(card);
+  });
+
+  overlay.classList.add('visible');
+};
+
+window.closeFishAlbum = function(){
+  const overlay = document.getElementById('fish-album-overlay');
+  if(overlay) overlay.classList.remove('visible');
+};
+
 // ═══════════════ PHASER CONFIG ════════════════════════════════════════════════
 const config={
   type:Phaser.AUTO,
@@ -2454,7 +2793,7 @@ const config={
   backgroundColor:'#3A7015',
   render:{pixelArt:true, antialias:false, antialiasGL:false, roundPixels:true},
   physics:{default:'arcade',arcade:{gravity:{y:0},debug:false}},
-  scene:[FarmScene, ArcadeScene, DungeonScene],
+  scene:[FarmScene, ArcadeScene, DungeonScene, FishingScene],
   parent:document.body,
   scale:{mode:Phaser.Scale.RESIZE, autoCenter:Phaser.Scale.CENTER_BOTH},
 };
