@@ -12,6 +12,104 @@ let sceneRef = null;
 let currentLevelIndex = 0;
 let progress = 0;
 
+// ═══════════════ WEB AUDIO API CHIPTUNE SYNTHESIZER ═════════════════════════
+class ChiptuneSynthEngine {
+  constructor() {
+    this.ctx = null;
+  }
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+    if (this.ctx && this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+  }
+  play(type) {
+    this.init();
+    if (!this.ctx) return;
+    const now = this.ctx.currentTime;
+    if (type === 'click') {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(800, now);
+      osc.frequency.exponentialRampToValueAtTime(1600, now + 0.04);
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.04);
+      osc.connect(gain); gain.connect(this.ctx.destination);
+      osc.start(now); osc.stop(now + 0.04);
+    } else if (type === 'harvest') {
+      [659.25, 987.77, 1318.51].forEach((freq, i) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + i * 0.06);
+        gain.gain.setValueAtTime(0.2, now + i * 0.06);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.06 + 0.12);
+        osc.connect(gain); gain.connect(this.ctx.destination);
+        osc.start(now + i * 0.06); osc.stop(now + i * 0.06 + 0.12);
+      });
+    } else if (type === 'fishing_pull') {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(200, now);
+      osc.frequency.linearRampToValueAtTime(800, now + 0.15);
+      gain.gain.setValueAtTime(0.2, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.15);
+      osc.connect(gain); gain.connect(this.ctx.destination);
+      osc.start(now); osc.stop(now + 0.15);
+    } else if (type === 'sword_swing') {
+      const bufferSize = this.ctx.sampleRate * 0.12;
+      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+      const noise = this.ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = this.ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1200, now);
+      filter.frequency.exponentialRampToValueAtTime(300, now + 0.12);
+      const gain = this.ctx.createGain();
+      gain.gain.setValueAtTime(0.25, now);
+      gain.gain.exponentialRampToValueAtTime(0.01, now + 0.12);
+      noise.connect(filter); filter.connect(gain); gain.connect(this.ctx.destination);
+      noise.start(now);
+    } else if (type === 'quiz_correct') {
+      [523.25, 659.25, 783.99, 1046.50].forEach((freq, i) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(freq, now + i * 0.07);
+        gain.gain.setValueAtTime(0.18, now + i * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.07 + 0.18);
+        osc.connect(gain); gain.connect(this.ctx.destination);
+        osc.start(now + i * 0.07); osc.stop(now + i * 0.07 + 0.18);
+      });
+    } else if (type === 'quiz_wrong') {
+      [150, 120].forEach((freq, i) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, now + i * 0.1);
+        gain.gain.setValueAtTime(0.2, now + i * 0.1);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.1 + 0.15);
+        osc.connect(gain); gain.connect(this.ctx.destination);
+        osc.start(now + i * 0.1); osc.stop(now + i * 0.1 + 0.15);
+      });
+    }
+  }
+}
+const ChiptuneSynth = new ChiptuneSynthEngine();
+function playChiptuneSFX(type) { ChiptuneSynth.play(type); }
+if (typeof window !== 'undefined') {
+  const unlockAudio = () => { ChiptuneSynth.init(); window.removeEventListener('pointerdown', unlockAudio); window.removeEventListener('click', unlockAudio); };
+  window.addEventListener('pointerdown', unlockAudio);
+  window.addEventListener('click', unlockAudio);
+}
+
 // ═══════════════ PIXEL ENGINE ════════════════════════════════════════════════
 const PS = 3;
 const K = {
@@ -296,6 +394,7 @@ function drawCatPortrait(){
 
 function showCatDialog(){
   if(catDialogOpen) return;
+  playChiptuneSFX('click');
   catDialogOpen=playerLocked=true;
   catSetWord(); // pick random word
   document.getElementById('cat-dialog').classList.add('visible');
@@ -303,6 +402,7 @@ function showCatDialog(){
   setTimeout(drawCatPortrait, 30);
 }
 function closeCatDialog(){
+  playChiptuneSFX('click');
   catDialogOpen=playerLocked=false;
   document.getElementById('cat-dialog').classList.remove('visible');
 }
@@ -510,6 +610,7 @@ function getRoman(ko){
 
 function revealQuizHint(tier){
   if(!currentWord) return;
+  playChiptuneSFX('click');
   const box = $('quiz-hint-reveal-card');
   if(!box) return;
   
@@ -570,6 +671,7 @@ function openQuiz(word, plot, phase=1){
   setTimeout(()=>answerInput.focus(),80);
 }
 function closeQuiz(){
+  playChiptuneSFX('click');
   quizOpen=playerLocked=false;
   appleTreeQuizPending=false; // always reset on close
   const hc = $('quiz-hint-reveal-card'); if(hc) { hc.innerHTML = ''; hc.classList.add('hidden'); }
@@ -581,6 +683,7 @@ function submitAnswer(){
   if(!currentWord) return;
   const typed=answerInput.value.trim();
   if(typed===currentWord.ko){
+    playChiptuneSFX('quiz_correct');
     // ── Apple Tree harvest (special Phase 3 quiz) ─────────────────────────
     if(appleTreeQuizPending){
       feedbackText.textContent='🍎 Harvested! Excellent Korean!'; feedbackText.className='correct';
@@ -595,6 +698,7 @@ function submitAnswer(){
     if(ph===1){plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();}
     setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph); },650);
   } else {
+    playChiptuneSFX('quiz_wrong');
     const isApple = appleTreeQuizPending;
     const wrong = isApple ? '❌ Wrong! Try again to harvest!' : (currentPhase===3?'❌ Wrong! Plant regressed to Phase 2!':'❌ Wrong! Try again.');
     feedbackText.textContent=wrong; feedbackText.className='';
@@ -622,12 +726,14 @@ quizBackdrop.addEventListener('keyup',   e => e.stopPropagation());
 
 // ═══════════════ SHOP ════════════════════════════════════════════════════════
 function openShop() {
+  playChiptuneSFX('click');
   shopOpen = playerLocked = true;
   updateGoldHUD();
   buildShopGrid();
   $('shop-overlay').classList.add('visible');
 }
 function closeShop() {
+  playChiptuneSFX('click');
   shopOpen = playerLocked = false;
   $('shop-overlay').classList.remove('visible');
 }
@@ -643,6 +749,7 @@ function _doLevelPurchase(idx) {
   return true;
 }
 function buyLevel(idx) {
+  playChiptuneSFX('click');
   if(!_doLevelPurchase(idx)) return;
   buildShopGrid();
   // Auto-switch to the newly bought level
@@ -889,12 +996,25 @@ class FarmScene extends Phaser.Scene {
 
   create(){
     sceneRef = this;
+    this.cameras.main.fadeIn(300, 0, 0, 0);
     levelsData = this.cache.json.get('levels') || [];
     if(!levelsData.length){ console.error('levels.json missing'); return; }
 
     this._bakeTextures();
     const W = this.scale.width, H = this.scale.height;
     this._drawWorld(W, H);
+
+    // Ambient Day/Night Lighting Overlay (60s cycle between golden warm and dark blue)
+    const dayNightOverlay = this.add.rectangle(W/2, H/2, W*2, H*2, 0x0B132B, 0.04).setDepth(999).setScrollFactor(0);
+    this.tweens.add({
+      targets: dayNightOverlay,
+      fillAlpha: 0.30,
+      duration: 30000,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut'
+    });
+
     this.plots = []; this._createPlots(W, H);
     this._createPlayer(W, H); this._addPlotLabels();
     this._createShopNPC(W, H);
@@ -1410,6 +1530,7 @@ class FarmScene extends Phaser.Scene {
     const ay = this.farm.y + 20;
     this.add.ellipse(ax, ay+6, 40, 10, 0, 0.35).setDepth(ay-1);
     this.arcadeSprite = this.add.image(ax, ay, 'arcade_machine').setOrigin(0.5,1).setScale(1.5).setDepth(ay);
+    this.tweens.add({ targets: this.arcadeSprite, scaleY: { from: 1.5, to: 1.54 }, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     this.arcadeHint = this.add.text(ax, ay-60, '👾 ARCADE\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#00FFFF', stroke:'#000', strokeThickness:3, align:'center'
@@ -1498,6 +1619,7 @@ class FarmScene extends Phaser.Scene {
     // Fishing Dock Pier
     this.add.ellipse(fx, fy+8, 60, 14, 0, 0.4).setDepth(fy-1);
     this.dockSprite = this.add.image(fx, fy, 'fishing_dock').setOrigin(0.5,1).setScale(1.5).setDepth(fy);
+    this.tweens.add({ targets: this.dockSprite, y: fy - 2, duration: 1500, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
     this.fishHint = this.add.text(fx, fy-60, '🎣 CRYSTAL POND\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
@@ -1601,6 +1723,7 @@ class FarmScene extends Phaser.Scene {
   }
 
   onAppleHarvested(){
+    playChiptuneSFX('harvest');
     // Reward: big gold bonus
     const bonus = 15 + Math.floor(Math.random() * 6); // 15-20 gold
     addGold(bonus);
@@ -1856,6 +1979,7 @@ class FarmScene extends Phaser.Scene {
     // Dungeon Portal
     if(this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<85){
       this.tweens.add({targets:this.portalSprite,scale:{from:1.5,to:1.8},duration:120,yoyo:true,ease:'Back.Out(2)'});
+      this.cameras.main.fadeOut(300, 0, 0, 0);
       this.scene.pause();
       this.scene.launch('DungeonScene');
       return;
@@ -1863,6 +1987,7 @@ class FarmScene extends Phaser.Scene {
     // Fishing Dock
     if(this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
       this.tweens.add({targets:this.dockSprite,scale:{from:1.5,to:1.7},duration:120,yoyo:true,ease:'Back.Out(2)'});
+      this.cameras.main.fadeOut(300, 0, 0, 0);
       this.scene.pause();
       this.scene.launch('FishingScene');
       return;
@@ -1870,6 +1995,7 @@ class FarmScene extends Phaser.Scene {
     // Arcade
     if(this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
       this.tweens.add({targets:this.arcadeSprite,scale:{from:1.5,to:1.6},duration:100,yoyo:true});
+      this.cameras.main.fadeOut(300, 0, 0, 0);
       this.scene.pause();
       this.scene.launch('ArcadeScene');
       return;
@@ -1915,6 +2041,7 @@ class FarmScene extends Phaser.Scene {
       this._setState(plot,'3',ko);
     } else {
       // P3 correct: HARVEST! Gold!
+      playChiptuneSFX('harvest');
       const prev=harvestCounts.get(ko)||0;
       const reward=Math.max(3, Math.floor(10 * Math.pow(0.85, prev)));
       // Curve: 10→8→7→6→5→4→4→3→3→3... (smooth diminishing returns)
@@ -2083,6 +2210,7 @@ class ArcadeScene extends Phaser.Scene {
   constructor(){ super({key:'ArcadeScene'}); }
 
   create(){
+    this.cameras.main.fadeIn(300, 0, 0, 0);
     this.W = this.scale.width;
     this.H = this.scale.height;
 
@@ -2372,6 +2500,7 @@ class ArcadeScene extends Phaser.Scene {
     if(this.spellBanner) this.spellBanner.destroy();
 
     if(isCorrect){
+      playChiptuneSFX('quiz_correct');
       // Shield Shatter & Boss Stun!
       this.bossShielded = false;
       this.bossBarrier.setVisible(false);
@@ -2381,6 +2510,7 @@ class ArcadeScene extends Phaser.Scene {
       showToast(`🎯 CRITICAL HIT! "${w.ko}" (${w.en}) SHATTERED SHIELD! +120 DMG!`, 3500);
       this.cameras.main.flash(200, 56, 189, 248);
     } else {
+      playChiptuneSFX('quiz_wrong');
       showToast(`❌ WRONG WORD! Shield Reflected Damage!`, 2000);
       this.bossShielded = false;
       this.bossBarrier.setVisible(false);
@@ -2454,6 +2584,7 @@ class ArcadeScene extends Phaser.Scene {
       addGold(earned);
       showToast(`🕹️ Arcade Cleared: +${earned} Gold!`);
     }
+    this.cameras.main.fadeOut(300, 0, 0, 0);
     this.scene.stop();
     this.scene.resume('FarmScene');
   }
@@ -2464,6 +2595,7 @@ class DungeonScene extends Phaser.Scene {
   constructor(){ super({key:'DungeonScene'}); }
   
   create(){
+    this.cameras.main.fadeIn(300, 0, 0, 0);
     this.W = this.scale.width;
     this.H = this.scale.height;
     
@@ -2574,6 +2706,7 @@ class DungeonScene extends Phaser.Scene {
 
   playerSlash(){
     if(!this.player || !this.player.active) return;
+    playChiptuneSFX('sword_swing');
 
     // Sword slash arc visual
     const slash = this.add.text(this.player.x, this.player.y - 10, '⚔️', {fontSize:'44px'}).setOrigin(0.5).setDepth(50);
@@ -2744,6 +2877,7 @@ class DungeonScene extends Phaser.Scene {
       showToast(`⚔️ Dungeon Cleared! Defeated ${this.monstersKilled} Monsters & Looted +${this.lootedGold} Gold!`, 4000);
     }
 
+    this.cameras.main.fadeOut(300, 0, 0, 0);
     this.scene.stop();
     this.scene.resume('FarmScene');
   }
@@ -2754,6 +2888,7 @@ class FishingScene extends Phaser.Scene {
   constructor(){ super({key:'FishingScene'}); }
 
   create(){
+    this.cameras.main.fadeIn(300, 0, 0, 0);
     this.W = this.scale.width;
     this.H = this.scale.height;
 
@@ -2858,6 +2993,7 @@ class FishingScene extends Phaser.Scene {
   }
 
   castLine(){
+    playChiptuneSFX('fishing_pull');
     this.state = 'WAITING';
     this.infoTxt.setText('⏳ Waiting for a bite...');
 
@@ -2873,6 +3009,7 @@ class FishingScene extends Phaser.Scene {
   }
 
   triggerBite(){
+    playChiptuneSFX('fishing_pull');
     this.state = 'REELING';
     this.infoTxt.setText('❗ BITE! Hold SPACE to keep fish in Green Zone!');
 
@@ -2974,12 +3111,14 @@ class FishingScene extends Phaser.Scene {
       
       btnBg.on('pointerdown', () => {
         if(c.ko === fish.ko){
+          playChiptuneSFX('quiz_correct');
           btnBg.setFillStyle(0x15803D);
           this.time.delayedCall(400, () => {
             container.destroy();
             this.catchSuccess(fish);
           });
         } else {
+          playChiptuneSFX('quiz_wrong');
           btnBg.setFillStyle(0xB91C1C);
           this.cameras.main.shake(150, 0.01);
         }
@@ -2990,6 +3129,8 @@ class FishingScene extends Phaser.Scene {
   }
 
   catchSuccess(fish){
+    playChiptuneSFX('quiz_correct');
+    playChiptuneSFX('harvest');
     fishAlbumSave[fish.ko] = (fishAlbumSave[fish.ko] || 0) + 1;
     addGold(35);
 
@@ -3019,6 +3160,7 @@ class FishingScene extends Phaser.Scene {
   }
 
   exitFishing(){
+    this.cameras.main.fadeOut(300, 0, 0, 0);
     this.scene.stop();
     this.scene.resume('FarmScene');
   }
@@ -3026,6 +3168,7 @@ class FishingScene extends Phaser.Scene {
 
 // ══════════════ FISH ALBUM OVERLAY LOGIC ══════════════════════════════════════
 window.openFishAlbum = function(){
+  playChiptuneSFX('click');
   const overlay = document.getElementById('fish-album-overlay');
   const grid = document.getElementById('fish-album-grid');
   if(!overlay || !grid) return;
@@ -3049,6 +3192,7 @@ window.openFishAlbum = function(){
 };
 
 window.closeFishAlbum = function(){
+  playChiptuneSFX('click');
   const overlay = document.getElementById('fish-album-overlay');
   if(overlay) overlay.classList.remove('visible');
 };
@@ -3074,6 +3218,7 @@ let memoryFlips = 0;
 
 window.openMemoryGame = function(){
   if(memoryOpen) return;
+  playChiptuneSFX('click');
   playerLocked = true; memoryOpen = true;
   const overlay = document.getElementById('memory-overlay');
   const grid = document.getElementById('memory-grid');
@@ -3130,6 +3275,7 @@ window.onMemoryCardClick = function(idx, cardEl){
     
     if(c1.id === c2.id && c1.type !== c2.type){
       // Match!
+      playChiptuneSFX('quiz_correct');
       setTimeout(()=>{
         document.getElementById('memory-grid').children[i1].classList.add('matched');
         document.getElementById('memory-grid').children[i2].classList.add('matched');
@@ -3148,6 +3294,7 @@ window.onMemoryCardClick = function(idx, cardEl){
       }, 500);
     } else {
       // No match
+      playChiptuneSFX('quiz_wrong');
       setTimeout(()=>{
         const grid = document.getElementById('memory-grid');
         grid.children[i1].classList.remove('flipped');
@@ -3159,6 +3306,7 @@ window.onMemoryCardClick = function(idx, cardEl){
 };
 
 window.closeMemoryGame = function(){
+  playChiptuneSFX('click');
   document.getElementById('memory-overlay').classList.remove('visible');
   setTimeout(()=>{
     playerLocked = false; memoryOpen = false;
@@ -3182,12 +3330,14 @@ window.getTotalHarvests = function() {
 
 window.openTrophies = function() {
   if(trophyOpen) return;
+  playChiptuneSFX('click');
   playerLocked = true; trophyOpen = true;
   document.getElementById('trophy-overlay').classList.add('visible');
   window.renderTrophies();
 };
 
 window.closeTrophies = function() {
+  playChiptuneSFX('click');
   document.getElementById('trophy-overlay').classList.remove('visible');
   playerLocked = false; trophyOpen = false;
 };
@@ -3258,6 +3408,7 @@ const DUEL_ENEMIES = [
 
 window.openSpellDuel = function(){
   if(duelOpen) return;
+  playChiptuneSFX('click');
   
   const all = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
   if(all.length < 4){
@@ -3382,6 +3533,7 @@ window.selectDuelOption = function(idx){
   });
 
   if(isCorrect){
+    playChiptuneSFX('quiz_correct');
     duelState.combo++;
     const dmg = 25 + duelState.combo * 5;
     duelState.enemyHP = Math.max(0, duelState.enemyHP - dmg);
@@ -3405,6 +3557,7 @@ window.selectDuelOption = function(idx){
       return;
     }
   } else {
+    playChiptuneSFX('quiz_wrong');
     duelState.combo = 0;
     const dmg = 22;
     duelState.playerHP = Math.max(0, duelState.playerHP - dmg);
@@ -3458,6 +3611,7 @@ function endDuel(victory){
 
 window.closeSpellDuel = function(){
   if(duelState.timer) clearTimeout(duelState.timer);
+  playChiptuneSFX('click');
   document.getElementById('duel-overlay').classList.remove('visible');
   setTimeout(() => {
     playerLocked = false; duelOpen = false;
