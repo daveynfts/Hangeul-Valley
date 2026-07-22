@@ -2524,64 +2524,98 @@ class FishingScene extends Phaser.Scene {
     this.W = this.scale.width;
     this.H = this.scale.height;
 
-    // Deep water pond background
-    this.add.rectangle(0, 0, this.W, this.H, 0x0284C7).setOrigin(0);
-    for(let i=0; i<30; i++){
-      const w = this.add.ellipse(Math.random()*this.W, Math.random()*this.H, 60, 16, 0, 0.25);
-      this.tweens.add({ targets:w, scaleX:1.2, alpha:0.1, duration:2000+Math.random()*1000, yoyo:true, repeat:-1 });
+    // Rich Ocean Water Environment Gradient (Dark Teal to Deep Ocean)
+    const bg = this.add.graphics();
+    bg.fillGradientStyle(0x0284C7, 0x0284C7, 0x0F172A, 0x0F172A, 1);
+    bg.fillRect(0, 0, this.W, this.H);
+
+    // Sunlight Caustics Light Rays
+    for(let i=0; i<6; i++){
+      const ray = this.add.polygon(i * (this.W/5), 0, [0,0, 80,0, 140,this.H, 0,this.H], 0x38BDF8, 0.08).setOrigin(0);
+      this.tweens.add({ targets:ray, alpha:0.18, duration:3000+i*500, yoyo:true, repeat:-1, ease:'Sine.InOut' });
     }
 
-    // Dock & Fisherman
-    this.add.rectangle(this.W/2, this.H - 60, this.W, 120, 0x78350F).setOrigin(0.5);
-    this.player = this.add.text(this.W/2, this.H - 120, '🎣', {fontSize:'48px'}).setOrigin(0.5);
+    // Floating Water Bubbles & Lily Pads
+    for(let i=0; i<20; i++){
+      const bx = Math.random()*this.W, by = Math.random()*this.H;
+      const bubble = this.add.circle(bx, by, Phaser.Math.Between(2, 5), 0x67E8F9, 0.4);
+      this.tweens.add({
+        targets: bubble,
+        y: by - 100,
+        alpha: 0.1,
+        duration: 3000 + Math.random()*2000,
+        repeat: -1,
+        ease: 'Sine.InOut'
+      });
+    }
+
+    // Wooden Pier Dock with Lanterns
+    this.add.rectangle(this.W/2, this.H - 50, this.W, 100, 0x78350F).setOrigin(0.5).setStrokeStyle(4, 0x92400E);
+    this.add.rectangle(this.W/2, this.H - 95, 200, 10, 0x92400E).setOrigin(0.5);
+    
+    // Lanterns on Dock Posts
+    [this.W/2 - 240, this.W/2 + 240].forEach(lx => {
+      this.add.rectangle(lx, this.H - 90, 14, 40, 0x57534E).setOrigin(0.5);
+      const l = this.add.text(lx, this.H - 120, '🔥', {fontSize:'28px'}).setOrigin(0.5);
+      this.tweens.add({ targets:l, scale:{from:0.9,to:1.25}, duration:400, yoyo:true, repeat:-1 });
+    });
+
+    this.player = this.add.text(this.W/2, this.H - 110, '🎣', {fontSize:'52px'}).setOrigin(0.5);
 
     // State: 'CASTING', 'WAITING', 'REELING', 'CATCH_QUIZ'
     this.state = 'CASTING';
     this.catchProgress = 0;
     this.targetFish = null;
 
-    // UI Info Toast
-    this.infoTxt = this.add.text(this.W/2, 60, '🎣 CLICK or PRESS SPACE TO CAST YOUR LINE!', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#FDE047', stroke:'#000', strokeThickness:4, align:'center'
+    // UI Header Frame
+    const infoBg = this.add.rectangle(this.W/2, 60, 520, 50, 0x0F172A, 0.9)
+      .setStrokeStyle(3, 0x38BDF8).setOrigin(0.5);
+    this.infoTxt = this.add.text(this.W/2, 60, '🎣 CLICK OR PRESS SPACE TO CAST LINE!', {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'13px', color:'#FDE047', align:'center'
     }).setOrigin(0.5);
 
-    const exitBtn = this.add.text(this.W - 20, 20, '[ESC] LEAVE POND', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#7DD3FC'})
-      .setOrigin(1,0).setInteractive({useHandCursor:true}).setDepth(100);
+    const exitBtn = this.add.text(this.W - 20, 20, '[ESC] LEAVE POND', {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'13px', color:'#7DD3FC', backgroundColor:'rgba(15,23,42,0.8)', padding:{x:8,y:4}
+    }).setOrigin(1,0).setInteractive({useHandCursor:true}).setDepth(100);
     exitBtn.on('pointerdown', () => this.exitFishing());
     this.input.keyboard.on('keydown-ESC', () => this.exitFishing());
 
-    // Input handlers for casting & tension bar control
     this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.input.on('pointerdown', () => this.handleAction());
 
-    // Build Tension Meter Bar UI (hidden initially)
     this.buildTensionBar();
   }
 
   buildTensionBar(){
-    this.barX = this.W/2 + 180;
+    this.barX = this.W/2 + 200;
     this.barY = this.H/2;
-    this.barHeight = 240;
-    this.barWidth = 36;
+    this.barHeight = 260;
+    this.barWidth = 44;
 
-    this.meterBg = this.add.rectangle(this.barX, this.barY, this.barWidth, this.barHeight, 0x0F172A, 0.85)
+    this.meterBg = this.add.rectangle(this.barX, this.barY, this.barWidth, this.barHeight, 0x0F172A, 0.9)
       .setStrokeStyle(3, 0x38BDF8).setVisible(false);
 
-    // Green Catching Zone
-    this.catchZoneHeight = 70;
+    // Green Catching Zone (WIDER 110px FOR EASY & SMOOTH GAMEPLAY)
+    this.catchZoneHeight = 110;
     this.catchZoneY = this.barY + this.barHeight/2 - this.catchZoneHeight/2;
-    this.catchZone = this.add.rectangle(this.barX, this.catchZoneY, this.barWidth - 4, this.catchZoneHeight, 0x22C55E, 0.7)
-      .setOrigin(0.5, 0).setVisible(false);
+    this.catchZone = this.add.rectangle(this.barX, this.catchZoneY, this.barWidth - 4, this.catchZoneHeight, 0x22C55E, 0.75)
+      .setStrokeStyle(2, 0x4ADE80).setOrigin(0.5, 0).setVisible(false);
 
     // Fish Icon inside bar
     this.fishIconY = this.barY;
-    this.fishIcon = this.add.text(this.barX, this.fishIconY, '🐟', {fontSize:'22px'})
+    this.fishIcon = this.add.text(this.barX, this.fishIconY, '🐟', {fontSize:'26px'})
       .setOrigin(0.5).setVisible(false);
 
     // Progress Bar (Left of tension bar)
-    this.pbBg = this.add.rectangle(this.barX - 30, this.barY, 14, this.barHeight, 0x1E293B).setVisible(false);
-    this.pbFill = this.add.rectangle(this.barX - 30, this.barY + this.barHeight/2, 12, 0, 0x38BDF8)
+    this.pbBg = this.add.rectangle(this.barX - 35, this.barY, 16, this.barHeight, 0x1E293B)
+      .setStrokeStyle(2, 0x38BDF8).setVisible(false);
+    this.pbFill = this.add.rectangle(this.barX - 35, this.barY + this.barHeight/2, 14, 0, 0x38BDF8)
       .setOrigin(0.5, 1).setVisible(false);
+
+    // Dynamic "HOLD SPACE" helper label next to tension bar
+    this.holdTip = this.add.text(this.barX - 110, this.barY, 'HOLD SPACE\nTO REEL!', {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'10px', color:'#4ADE80', align:'center', stroke:'#000', strokeThickness:3
+    }).setOrigin(0.5).setVisible(false);
   }
 
   handleAction(){
@@ -2594,12 +2628,11 @@ class FishingScene extends Phaser.Scene {
     this.state = 'WAITING';
     this.infoTxt.setText('⏳ Waiting for a bite...');
 
-    // Floating bobber
-    this.bobber = this.add.text(this.W/2 + Phaser.Math.Between(-80, 80), this.H/2, '🔴', {fontSize:'24px'}).setOrigin(0.5);
-    this.tweens.add({ targets: this.bobber, y: this.H/2 + 8, duration: 600, yoyo: true, repeat: -1 });
+    // Floating bobber with water ripples
+    this.bobber = this.add.text(this.W/2 + Phaser.Math.Between(-60, 60), this.H/2 + 20, '🔴', {fontSize:'28px'}).setOrigin(0.5);
+    this.tweens.add({ targets: this.bobber, y: this.H/2 + 28, duration: 600, yoyo: true, repeat: -1 });
 
-    // Random bite delay
-    const waitTime = Phaser.Math.Between(1800, 3500);
+    const waitTime = Phaser.Math.Between(1500, 3000);
     this.time.delayedCall(waitTime, () => {
       if(this.state !== 'WAITING') return;
       this.triggerBite();
@@ -2608,26 +2641,25 @@ class FishingScene extends Phaser.Scene {
 
   triggerBite(){
     this.state = 'REELING';
-    this.infoTxt.setText('❗ BITE! Hold SPACE / Click to keep fish in Green Zone!');
+    this.infoTxt.setText('❗ BITE! Hold SPACE to keep fish in Green Zone!');
 
-    // Exclamation mark splash
-    const ex = this.add.text(this.bobber.x, this.bobber.y - 30, '❗ BITE!', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'22px', color:'#EF4444', stroke:'#000', strokeThickness:4
+    const ex = this.add.text(this.bobber.x, this.bobber.y - 35, '💦 BITE!', {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'24px', color:'#EF4444', stroke:'#000', strokeThickness:4
     }).setOrigin(0.5);
     this.tweens.add({ targets:ex, scale:1.4, alpha:0, duration:800, onComplete:()=>ex.destroy() });
 
-    // Show Tension Bar
+    // Show Tension Bar & Helpers
     this.meterBg.setVisible(true);
     this.catchZone.setVisible(true);
     this.fishIcon.setVisible(true);
     this.pbBg.setVisible(true);
     this.pbFill.setVisible(true);
+    this.holdTip.setVisible(true);
 
-    this.catchProgress = 0.3;
+    this.catchProgress = 0.45; // Start 45% full
     this.targetFish = Phaser.Utils.Array.GetRandom(FISH_DB);
     this.fishIcon.setText(this.targetFish.hint);
 
-    this.fishVelocity = 0;
     this.catchZoneVelocity = 0;
   }
 
@@ -2638,21 +2670,20 @@ class FishingScene extends Phaser.Scene {
 
     if(this.state !== 'REELING') return;
 
-    // Control Catching Zone with SPACE or Mouse Hold
+    // Smooth Tension Zone control with SPACE or Mouse Hold
     const isHolding = this.spaceKey.isDown || this.input.activePointer.isDown;
     if(isHolding){
-      this.catchZoneVelocity -= 0.6;
+      this.catchZoneVelocity -= 0.5;
     } else {
-      this.catchZoneVelocity += 0.5;
+      this.catchZoneVelocity += 0.4;
     }
-    this.catchZoneVelocity *= 0.92;
+    this.catchZoneVelocity *= 0.90;
     this.catchZoneY = Phaser.Math.Clamp(this.catchZoneY + this.catchZoneVelocity, this.barY - this.barHeight/2, this.barY + this.barHeight/2 - this.catchZoneHeight);
     this.catchZone.setY(this.catchZoneY);
 
-    // Fish Random Movement
-    this.fishVelocity += (Math.random() - 0.5) * 1.4;
-    this.fishVelocity *= 0.94;
-    this.fishIconY = Phaser.Math.Clamp(this.fishIconY + this.fishVelocity, this.barY - this.barHeight/2 + 10, this.barY + this.barHeight/2 - 10);
+    // Smooth Sinewave Fish Movement (Smooth & Predictable!)
+    const fishTargetY = this.barY + Math.sin(t / 600) * 75;
+    this.fishIconY += (fishTargetY - this.fishIconY) * 0.08;
     this.fishIcon.setY(this.fishIconY);
 
     // Check if Fish is inside Catch Zone
@@ -2661,16 +2692,18 @@ class FishingScene extends Phaser.Scene {
     const inside = fishTop >= zoneTop && fishBot <= zoneBot;
 
     if(inside){
-      this.catchProgress = Math.min(1.0, this.catchProgress + 0.006);
+      this.catchProgress = Math.min(1.0, this.catchProgress + 0.012); // Fills fast in ~2 seconds!
       this.catchZone.setFillStyle(0x22C55E, 0.85);
+      this.holdTip.setText('🟢 REELING IN!').setColor('#4ADE80');
     } else {
-      this.catchProgress = Math.max(0.0, this.catchProgress - 0.004);
+      this.catchProgress = Math.max(0.0, this.catchProgress - 0.0015); // Very forgiving penalty!
       this.catchZone.setFillStyle(0xEF4444, 0.85);
+      this.holdTip.setText('⚠️ HOLD SPACE!').setColor('#EF4444');
     }
 
     // Update Progress Bar
     const currentH = this.barHeight * this.catchProgress;
-    this.pbFill.setSize(12, currentH);
+    this.pbFill.setSize(14, currentH);
 
     if(this.catchProgress >= 1.0){
       this.startVocabChallenge();
@@ -2749,6 +2782,7 @@ class FishingScene extends Phaser.Scene {
     this.fishIcon.setVisible(false);
     this.pbBg.setVisible(false);
     this.pbFill.setVisible(false);
+    if(this.holdTip) this.holdTip.setVisible(false);
   }
 
   exitFishing(){
