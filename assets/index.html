@@ -968,9 +968,249 @@
       #memory-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
       .mem-card-front { font-size: 15px; padding: 4px; }
     }
+
+    /* ── 64-BIT RETRO GLASSMORPHISM UTILITIES & QUEST / QUIZ / BOSS MODALS ── */
+    .glass-modal {
+      background: rgba(15, 23, 42, 0.92) !important;
+      backdrop-filter: var(--glass-blur) !important;
+      -webkit-backdrop-filter: var(--glass-blur) !important;
+      border: 2px solid var(--neon-gold);
+      border-radius: 18px;
+      box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 20px 60px rgba(0,0,0,.9);
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-hud {
+      background: rgba(15, 23, 42, 0.85) !important;
+      backdrop-filter: var(--glass-blur) !important;
+      -webkit-backdrop-filter: var(--glass-blur) !important;
+      border: 1.5px solid rgba(245, 158, 11, 0.4);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
+    }
+    .neon-border {
+      border-color: var(--neon-gold) !important;
+      box-shadow: var(--glow-gold) !important;
+    }
+    .pixel-art-detail {
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
+    }
+
+    /* ── QUEST LOG OVERLAY ────────────────────────────────────────────────── */
+    #quest-overlay {
+      position: fixed; inset: 0; z-index: 880; display: none;
+      background: rgba(10, 15, 30, 0.88); backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      align-items: center; justify-content: center; animation: fadeIn .2s;
+    }
+    #quest-overlay.visible { display: flex; }
+    #quest-panel {
+      background: rgba(15, 23, 42, 0.94);
+      border: 2px solid var(--neon-gold); border-radius: 20px; padding: 24px;
+      max-width: 760px; width: 94%; max-height: 88vh; overflow-y: auto;
+      box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 20px 60px rgba(0,0,0,.9);
+      position: relative;
+    }
+    #quest-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 14px; border-bottom: 1.5px solid rgba(245, 158, 11, 0.3); margin-bottom: 16px;
+    }
+    #quest-title { font-family: 'Press Start 2P', monospace; font-size: 16px; color: var(--neon-gold); }
+    #quest-close-btn {
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff; border-radius: 8px; padding: 4px 12px; font-size: 16px; cursor: pointer; transition: all .15s;
+    }
+    #quest-close-btn:hover { background: rgba(244, 63, 94, 0.3); border-color: var(--neon-pink); }
+    
+    .quest-tabs { display: flex; gap: 10px; margin-bottom: 18px; }
+    .quest-tab-btn {
+      flex: 1; padding: 10px 8px; background: rgba(30, 41, 59, 0.7);
+      border: 1.5px solid rgba(245, 158, 11, 0.3); border-radius: 10px;
+      color: #cbd5e1; font-family: 'Press Start 2P', monospace; font-size: 10px;
+      cursor: pointer; transition: all .15s; text-align: center;
+    }
+    .quest-tab-btn.active {
+      background: rgba(245, 158, 11, 0.2); border-color: var(--neon-gold); color: #fff;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+    }
+    .quest-tab-btn:hover { border-color: var(--neon-gold); }
+
+    .quest-list { display: flex; flex-direction: column; gap: 14px; }
+    .quest-card {
+      background: rgba(30, 41, 59, 0.6); border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px;
+      transition: transform .15s, border-color .15s;
+    }
+    .quest-card.completed { border-color: var(--neon-green); background: rgba(15, 35, 20, 0.6); }
+    .quest-card-header { display: flex; justify-content: space-between; align-items: center; }
+    .quest-card-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: #fff; }
+    .quest-card-badge {
+      font-family: 'Press Start 2P', monospace; font-size: 9px; padding: 3px 8px; border-radius: 6px;
+      background: rgba(245, 158, 11, 0.15); border: 1px solid var(--neon-gold); color: var(--neon-gold);
+    }
+    .quest-card-desc { font-size: 13px; color: rgba(226, 232, 240, 0.8); font-family: 'Be Vietnam Pro', sans-serif; }
+    
+    .quest-progress-bg {
+      width: 100%; height: 12px; background: rgba(0, 0, 0, 0.5); border-radius: 6px; overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15); position: relative;
+    }
+    .quest-progress-fill { height: 100%; background: linear-gradient(90deg, var(--neon-gold), #fde047); transition: width .3s ease; }
+    .quest-progress-text { font-family: 'VT323', monospace; font-size: 15px; color: #cbd5e1; text-align: right; }
+
+    .quest-rewards-row { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
+    .quest-reward-tags { display: flex; gap: 10px; font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--neon-gold); }
+    .quest-claim-btn {
+      background: linear-gradient(180deg, var(--neon-green), #16a34a);
+      border: 1.5px solid #86efac; border-radius: 8px; padding: 6px 16px;
+      font-family: 'Press Start 2P', monospace; font-size: 10px; color: #0f172a;
+      cursor: pointer; transition: all .15s; font-weight: bold;
+    }
+    .quest-claim-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
+    .quest-claim-btn:disabled { opacity: 0.4; cursor: default; }
+
+    /* ── SHOP QUIZ GATE OVERLAY ──────────────────────────────────────────── */
+    #shop-quiz-overlay {
+      position: fixed; inset: 0; z-index: 900; display: none;
+      background: rgba(10, 15, 30, 0.92); backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      align-items: center; justify-content: center; animation: fadeIn .2s;
+    }
+    #shop-quiz-overlay.visible { display: flex; }
+    #shop-quiz-panel {
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid var(--neon-cyan); border-radius: 20px; padding: 24px;
+      max-width: 540px; width: 92%; box-shadow: 0 0 0 2px #0f172a, var(--glow-cyan), 0 20px 60px rgba(0,0,0,.95);
+      text-align: center; position: relative;
+    }
+
+    /* ── BOSS GATE OVERLAY ───────────────────────────────────────────────── */
+    #boss-gate-overlay {
+      position: fixed; inset: 0; z-index: 910; display: none;
+      background: rgba(20, 5, 15, 0.93); backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      align-items: center; justify-content: center; animation: fadeIn .2s;
+    }
+    #boss-gate-overlay.visible { display: flex; }
+    #boss-gate-panel {
+      background: rgba(35, 15, 25, 0.95);
+      border: 2px solid var(--neon-pink); border-radius: 20px; padding: 24px;
+      max-width: 560px; width: 92%; box-shadow: 0 0 0 2px #0f172a, var(--glow-pink), 0 20px 60px rgba(0,0,0,.95);
+      text-align: center; position: relative;
+    }
+    /* ── R3 CRAFTING/COOKING & R4 PET OVERLAYS ──────────────────────────────── */
+    #recipe-overlay, #cooking-minigame-overlay, #cultural-fact-overlay, #pet-overlay {
+      position: fixed; inset: 0; z-index: 890; display: none;
+      background: rgba(10, 15, 30, 0.88); backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      align-items: center; justify-content: center; animation: fadeIn .2s;
+    }
+    #recipe-overlay.visible, #cooking-minigame-overlay.visible, #cultural-fact-overlay.visible, #pet-overlay.visible {
+      display: flex;
+    }
+    .recipe-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; margin-top: 14px;
+    }
+    .recipe-card {
+      background: rgba(30, 41, 59, 0.7); border: 1.5px solid rgba(245, 158, 11, 0.4);
+      border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: transform 0.15s, border-color 0.15s;
+    }
+    .recipe-card:hover { transform: translateY(-2px); border-color: var(--neon-gold); }
+    .recipe-card-icon { font-size: 32px; text-align: center; }
+    .recipe-card-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--neon-gold); text-align: center; }
+    .recipe-card-sub { font-size: 11px; color: #cbd5e1; text-align: center; }
+    .recipe-req-list { font-size: 10px; color: #94a3b8; background: rgba(15,23,42,0.6); padding: 8px; border-radius: 8px; }
+    .recipe-buff-badge { font-size: 10px; color: var(--neon-cyan); background: rgba(6,182,212,0.15); border: 1px solid var(--neon-cyan); border-radius: 6px; padding: 4px; text-align: center; font-weight: bold; }
+    .cook-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706); border: none; border-radius: 8px;
+      color: #fff; font-family: 'Press Start 2P', monospace; font-size: 10px; padding: 8px;
+      cursor: pointer; transition: opacity 0.15s, transform 0.1s; text-align: center;
+    }
+    .cook-btn:hover { opacity: 0.9; transform: scale(1.02); }
+    .cook-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .pet-roster-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-top: 14px;
+    }
+    .pet-card {
+      background: rgba(30, 41, 59, 0.7); border: 1.5px solid rgba(168, 85, 247, 0.4);
+      border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px;
+      align-items: center; box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: all 0.15s;
+    }
+    .pet-card.active { border-color: var(--neon-gold); box-shadow: 0 0 16px rgba(245, 158, 11, 0.5); }
+    .pet-card-avatar { font-size: 40px; }
+    .pet-card-name { font-family: 'Press Start 2P', monospace; font-size: 11px; color: #fff; }
+    .pet-card-level { font-size: 10px; color: var(--neon-pink); font-weight: bold; }
+    .pet-card-passive { font-size: 10px; color: #94a3b8; text-align: center; background: rgba(15,23,42,0.6); padding: 6px; border-radius: 6px; width: 100%; }
+    .pet-bar-bg { width: 100%; height: 10px; background: rgba(15,23,42,0.8); border-radius: 5px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+    .pet-bar-fill-xp { height: 100%; background: linear-gradient(90deg, #a855f7, #ec4899); transition: width 0.3s; }
+    .pet-bar-fill-happy { height: 100%; background: linear-gradient(90deg, #22c55e, #10b981); transition: width 0.3s; }
+
+    .buff-badge {
+      background: rgba(15, 23, 42, 0.9); border: 1px solid var(--neon-cyan); color: var(--neon-cyan);
+      border-radius: 6px; padding: 2px 6px; font-size: 10px; font-weight: bold; display: flex; align-items: center; gap: 4px;
+    }
+
+    /* ── R5 SEASONAL EVENTS & LOCAL LEADERBOARD OVERLAYS ────────────────────── */
+    #event-banner {
+      position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 850;
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      width: max-content; max-width: 94vw; padding: 6px 16px;
+      background: rgba(15, 23, 42, 0.9); backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1.5px solid var(--neon-gold); border-radius: 24px;
+      box-shadow: var(--glow-gold), 0 8px 24px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+    #event-banner.hidden { display: none; }
+    .eb-left { display: flex; align-items: center; gap: 10px; }
+    .eb-icon { font-size: 22px; filter: drop-shadow(0 0 8px var(--neon-gold)); }
+    .eb-title { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--neon-gold); }
+    .eb-subtitle { font-size: 11px; color: #cbd5e1; }
+    .eb-right { display: flex; align-items: center; gap: 8px; }
+    .eb-pts-badge { font-family: 'Press Start 2P', monospace; font-size: 9px; background: rgba(245, 158, 11, 0.2); border: 1px solid var(--neon-gold); color: #fff; padding: 4px 8px; border-radius: 12px; }
+    .eb-btn { background: linear-gradient(135deg, #f59e0b, #d97706); border: none; border-radius: 12px; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 9px; padding: 6px 12px; cursor: pointer; transition: transform 0.1s; }
+    .eb-btn:hover { opacity: 0.9; transform: scale(1.04); }
+    .eb-btn-switch { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer; }
+
+    #seasonal-overlay, #leaderboard-overlay {
+      position: fixed; inset: 0; z-index: 890; display: none;
+      background: rgba(10, 15, 30, 0.88); backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      align-items: center; justify-content: center; animation: fadeIn .2s;
+    }
+    #seasonal-overlay.visible, #leaderboard-overlay.visible { display: flex; }
+
+    .lb-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 8px; }
+    .lb-tab-btn { background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; color: #cbd5e1; font-family: 'Press Start 2P', monospace; font-size: 9px; padding: 6px 10px; cursor: pointer; transition: all 0.15s; }
+    .lb-tab-btn.active { background: rgba(56, 189, 248, 0.2); border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: var(--glow-cyan); }
+
+    .lb-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .lb-table th { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--neon-gold); text-align: left; padding: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .lb-table td { font-size: 12px; padding: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .lb-row-player { background: rgba(245, 158, 11, 0.18); font-weight: bold; border-left: 3px solid var(--neon-gold); }
+
+    .seasonal-vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; margin-top: 10px; }
+    .seasonal-vocab-card { background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px; padding: 10px; text-align: center; }
   </style>
 </head>
 <body>
+
+  <!-- ══════════════ SEASONAL EVENT BANNER UI ══════════════════════ -->
+  <div id="event-banner" class="glass-hud neon-border-gold">
+    <div class="eb-left">
+      <span class="eb-icon" id="eb-icon">🌾</span>
+      <div>
+        <div class="eb-title" id="eb-title">추석 (Chuseok) Harvest Festival</div>
+        <div class="eb-subtitle" id="eb-desc">Bake Songpyeon & earn +50% Bonus Honor!</div>
+      </div>
+    </div>
+    <div class="eb-right">
+      <div class="eb-pts-badge">Pts: <span id="eb-pts-val">0</span> ⭐</div>
+      <button class="eb-btn" onclick="openSeasonalOverlay()">🎉 Festival</button>
+      <button class="eb-btn-switch" onclick="cycleSeasonalEvent()" title="Cycle Active Event Season">🔄</button>
+    </div>
+  </div>
 
   <!-- ══════════════ LEVEL SELECT ═════════════════════════════════ -->
   <div id="level-select-overlay">
@@ -985,12 +1225,20 @@
   </div>
 
   <!-- ══════════════ HUD ═══════════════════════════════════════════ -->
-  <div id="hud" style="display:none">
+  <div id="hud" class="glass-hud" style="display:none">
     <span style="font-size:20px">🌾</span>
     <span id="hud-level">Level 1</span>
     <span id="hud-sep">|</span>
     <span id="hud-progress">🌱 0</span>
-    <span id="hud-gold">💰 <span id="gold-val">0</span></span>
+    <span id="hud-gold" title="Coins">🪙 <span id="gold-val">0</span></span>
+    <span id="hud-gems" style="margin-left:6px;" title="Gems">💎 <span id="gems-val">0</span></span>
+    <span id="hud-honor" style="margin-left:6px;" title="Honor">🎖️ <span id="honor-val">0</span></span>
+    <div id="active-buff-bar" style="display:inline-flex; gap:6px; margin-left:8px; align-items:center;"></div>
+    <button class="hud-btn" id="recipe-btn" title="Recipe Book (요리책)" onclick="openRecipeBook()">🍳 Cook</button>
+    <button class="hud-btn" id="pet-btn" title="Pet Companions (반려동물)" onclick="openPetOverlay()">🐾 Pets</button>
+    <button class="hud-btn" id="seasonal-btn" title="Seasonal Events" onclick="openSeasonalOverlay()">🎉 Event</button>
+    <button class="hud-btn" id="leaderboard-btn" title="Local Leaderboard" onclick="openLeaderboard()">🏅 Ranks</button>
+    <button class="hud-btn" id="quest-btn" title="Quest Log" onclick="openQuestOverlay()">📜 Quests</button>
     <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
     <button class="hud-btn" id="duel-btn" title="Spell Duel" onclick="openSpellDuel()">⚡ Duel</button>
     <button class="hud-btn" id="fish-album-btn" title="Fish Encyclopedia" onclick="openFishAlbum()">🐟 Fish</button>
@@ -998,6 +1246,7 @@
     <button class="hud-btn" id="shop-btn" title="Seed shop">🏪 Shop</button>
     <button class="hud-btn" id="vocab-btn" title="Vocabulary Book">📖 Vocab</button>
     <button class="hud-btn" id="hud-menu-btn" title="Level Menu">☰ Menu</button>
+
   </div>
 
   <!-- Progress bar -->
@@ -1311,8 +1560,232 @@
     </div>
   </div>
 
+  <!-- ══════════════ QUEST LOG OVERLAY ═════════════════════════════ -->
+  <div id="quest-overlay">
+    <div id="quest-panel" class="glass-modal">
+      <div id="quest-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:26px">📜</span>
+          <div>
+            <div id="quest-title">HANGEUL QUEST LOG</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Earn Coins, Gems & Honor!</div>
+          </div>
+        </div>
+        <button id="quest-close-btn" onclick="closeQuestOverlay()">✕</button>
+      </div>
+
+      <div class="quest-tabs">
+        <button class="quest-tab-btn active" id="qtab-main" onclick="switchQuestTab('main')">📖 Main Story</button>
+        <button class="quest-tab-btn" id="qtab-daily" onclick="switchQuestTab('daily')">⏰ Daily Quests</button>
+        <button class="quest-tab-btn" id="qtab-weekly" onclick="switchQuestTab('weekly')">📅 Weekly Quests</button>
+      </div>
+
+      <div class="quest-list" id="quest-list-container">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SHOP QUIZ GATE CHALLENGE OVERLAY ══════════════ -->
+  <div id="shop-quiz-overlay">
+    <div id="shop-quiz-panel" class="glass-modal">
+      <div style="font-size:36px; margin-bottom:8px">🛍️ Quiz Gate Challenge</div>
+      <div style="font-family:'Press Start 2P',monospace; font-size:14px; color:var(--neon-cyan); margin-bottom:12px" id="sq-title">Unlock Pack Quiz Gate</div>
+      <div style="font-size:14px; color:rgba(226,232,240,0.8); margin-bottom:16px" id="sq-subtitle">Answer 3 Korean translation questions to complete your purchase!</div>
+      
+      <div style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-cyan); border-radius:14px; padding:18px; margin-bottom:16px" id="sq-qbox">
+        <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:8px" id="sq-step-indicator">Question 1 of 3</div>
+        <div style="font-family:'Noto Sans KR',sans-serif; font-size:32px; font-weight:900; color:#fff; margin-bottom:6px" id="sq-word-ko">사과</div>
+        <div style="font-size:14px; color:#cbd5e1" id="sq-prompt">Select the correct English translation:</div>
+      </div>
+
+      <div id="sq-options-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px">
+        <!-- JS generated 4 options -->
+      </div>
+
+      <button style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:8px 16px; font-size:12px; cursor:pointer" onclick="cancelShopQuizGate()">Cancel Purchase</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ BOSS ENTRANCE GATE OVERLAY ════════════════════ -->
+  <div id="boss-gate-overlay">
+    <div id="boss-gate-panel" class="glass-modal">
+      <div style="font-size:42px; margin-bottom:8px">👑 Gate Challenge</div>
+      <div style="font-family:'Press Start 2P',monospace; font-size:15px; color:var(--neon-pink); margin-bottom:10px" id="bg-title">BOSS ENTRANCE GATE</div>
+      <div style="font-size:14px; color:rgba(226,232,240,0.8); margin-bottom:16px" id="bg-subtitle">Prove your Korean mastery to enter the Boss Chamber!</div>
+
+      <div style="background:rgba(40,15,30,0.85); border:1.5px solid var(--neon-pink); border-radius:14px; padding:18px; margin-bottom:16px" id="bg-qbox">
+        <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:8px" id="bg-step-indicator">Gate Challenge 1 of 3</div>
+        <div style="font-family:'Noto Sans KR',sans-serif; font-size:32px; font-weight:900; color:#fff; margin-bottom:6px" id="bg-word-ko">나무</div>
+        <div style="font-size:14px; color:#cbd5e1" id="bg-prompt">Select the correct English translation:</div>
+      </div>
+
+      <div id="bg-options-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px">
+        <!-- JS generated options -->
+      </div>
+
+      <button style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:8px 16px; font-size:12px; cursor:pointer" onclick="cancelBossGate()">Retreat</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ RECIPE BOOK (요리책) OVERLAY ══════════════ -->
+  <div id="recipe-overlay">
+    <div id="recipe-panel" class="glass-modal" style="max-width:780px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(245,158,11,0.3); padding-bottom:14px; margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:32px">🍳</span>
+          <div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:var(--neon-gold)">KOREAN RECIPE BOOK (요리책)</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Craft authentic Hansik dishes & gain powerful gameplay buffs!</div>
+          </div>
+        </div>
+        <button onclick="closeRecipeBook()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- Ingredient Inventory Summary Bar -->
+      <div id="recipe-pantry-bar" style="background:rgba(30,41,59,0.7); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px; margin-bottom:16px;">
+        <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:6px">🧺 My Ingredients Stock (재료):</div>
+        <div id="recipe-pantry-list" style="display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:#cbd5e1;"></div>
+      </div>
+
+      <!-- Recipe Grid -->
+      <div id="recipe-grid-container" class="recipe-grid"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ COOKING MINIGAME OVERLAY ══════════════ -->
+  <div id="cooking-minigame-overlay">
+    <div id="cooking-minigame-panel" class="glass-modal" style="max-width:540px; width:92%; padding:24px; text-align:center;">
+      <div style="font-size:42px; margin-bottom:8px" id="cmg-dish-icon">🍳</div>
+      <div style="font-family:'Press Start 2P',monospace; font-size:15px; color:var(--neon-gold); margin-bottom:8px" id="cmg-dish-name">COOKING DISH</div>
+      <div style="font-size:12px; color:rgba(226,232,240,0.8); margin-bottom:16px" id="cmg-step-desc">Step 1: Match Korean Ingredient</div>
+
+      <div id="cmg-stage-container" style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-gold); border-radius:14px; padding:18px; margin-bottom:16px; min-height:140px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <!-- Interactive stage elements rendered by JS -->
+      </div>
+
+      <button style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:8px 16px; font-size:12px; cursor:pointer" onclick="closeCookingMinigame()">Cancel Cooking</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ CULTURAL FACT OVERLAY ══════════════ -->
+  <div id="cultural-fact-overlay">
+    <div class="glass-modal" style="max-width:560px; width:92%; padding:24px; text-align:center;">
+      <div style="font-size:44px; margin-bottom:8px" id="cf-icon">🏺</div>
+      <div style="font-family:'Press Start 2P',monospace; font-size:14px; color:var(--neon-gold); margin-bottom:10px" id="cf-title">Korean Culinary Culture</div>
+      <div style="font-size:14px; color:#e2e8f0; line-height:1.6; background:rgba(30,41,59,0.8); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:16px; margin-bottom:18px;" id="cf-text">Fact content</div>
+      <button style="background:linear-gradient(135deg, var(--neon-gold), #d97706); border:none; border-radius:8px; padding:10px 24px; font-family:'Press Start 2P',monospace; font-size:11px; color:#0f172a; cursor:pointer; font-weight:bold" onclick="closeCulturalFact()">Delicious! 😋</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ PET COMPANION (반려동물) OVERLAY ══════════════ -->
+  <div id="pet-overlay">
+    <div id="pet-panel" class="glass-modal" style="max-width:760px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(168,85,247,0.4); padding-bottom:14px; margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:32px">🐾</span>
+          <div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:#c084fc">PET COMPANIONS (반려동물)</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Collect cute companions, level up with Korean quizzes & earn passive bonuses!</div>
+          </div>
+        </div>
+        <button onclick="closePetOverlay()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- Active Pet Overview Card -->
+      <div id="pet-active-card" style="background:rgba(30,41,59,0.8); border:2px solid var(--neon-purple); border-radius:16px; padding:18px; margin-bottom:18px; display:flex; gap:16px; align-items:center;">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Pet Roster -->
+      <div style="font-family:'Press Start 2P',monospace; font-size:11px; color:#c084fc; margin-bottom:8px">🐾 Pet Roster & Adoption:</div>
+      <div id="pet-roster-container" class="pet-roster-grid"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ SEASONAL EVENT MODAL ══════════════ -->
+  <div id="seasonal-overlay">
+    <div id="seasonal-panel" class="glass-modal" style="max-width:760px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(245,158,11,0.4); padding-bottom:14px; margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:32px" id="so-icon">🌾</span>
+          <div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:15px; color:var(--neon-gold)" id="so-title">SEASONAL FESTIVAL</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace" id="so-subtitle">Complete quests & learn festival Korean!</div>
+          </div>
+        </div>
+        <button onclick="closeSeasonalOverlay()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- Festival Active Buff Banner -->
+      <div id="so-buff-banner" style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-gold); border-radius:14px; padding:14px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold)">✨ FESTIVAL ACTIVE PERK</div>
+          <div style="font-size:13px; color:#fff; margin-top:4px" id="so-buff-text">+50% Honor Rewards on Quests & Harvests</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-family:'Press Start 2P',monospace; font-size:9px; color:#cbd5e1">Season Points</div>
+          <div style="font-family:'Press Start 2P',monospace; font-size:14px; color:var(--neon-gold)" id="so-pts-display">0 ⭐</div>
+        </div>
+      </div>
+
+      <!-- Festival Quests Section -->
+      <div style="font-family:'Press Start 2P',monospace; font-size:11px; color:var(--neon-gold); margin-bottom:10px">📜 Seasonal Festival Quests:</div>
+      <div id="so-quests-list" style="display:flex; flex-direction:column; gap:10px; margin-bottom:18px;">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Themed Vocabulary Flashcards -->
+      <div style="font-family:'Press Start 2P',monospace; font-size:11px; color:var(--neon-cyan); margin-bottom:8px">📖 Festival Vocabulary Theme:</div>
+      <div id="so-vocab-grid" class="seasonal-vocab-grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ LOCAL LEADERBOARD MODAL ══════════════ -->
+  <div id="leaderboard-overlay">
+    <div id="leaderboard-panel" class="glass-modal" style="max-width:800px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(56,189,248,0.4); padding-bottom:14px; margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:32px">🏅</span>
+          <div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:15px; color:var(--neon-cyan)">LOCAL LEADERBOARDS</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Hangeul Valley Offline Local Rankings</div>
+          </div>
+        </div>
+        <button onclick="closeLeaderboard()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+      </div>
+
+      <!-- Personal Best Stats Summary Bar -->
+      <div id="lb-pb-summary" style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-cyan); border-radius:14px; padding:14px; margin-bottom:16px;">
+        <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-cyan); margin-bottom:8px">⭐ MY PERSONAL BEST RECORDS:</div>
+        <div id="lb-pb-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; font-size:11px;">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Leaderboard Tabs -->
+      <div class="lb-tabs" id="lb-tabs-container">
+        <button class="lb-tab-btn active" id="lbtab-vocab" onclick="switchLeaderboardTab('vocab')">📖 Vocab Master</button>
+        <button class="lb-tab-btn" id="lbtab-honor" onclick="switchLeaderboardTab('honor')">🎖️ Total Honor</button>
+        <button class="lb-tab-btn" id="lbtab-cooking" onclick="switchLeaderboardTab('cooking')">🍳 Cooking Tier</button>
+        <button class="lb-tab-btn" id="lbtab-pets" onclick="switchLeaderboardTab('pets')">🐾 Pet Collection</button>
+        <button class="lb-tab-btn" id="lbtab-arcade" onclick="switchLeaderboardTab('arcade')">👾 Arcade Score</button>
+        <button class="lb-tab-btn" id="lbtab-dungeon" onclick="switchLeaderboardTab('dungeon')">🗡️ Dungeon Floor</button>
+        <button class="lb-tab-btn" id="lbtab-duel" onclick="switchLeaderboardTab('duel')">⚡ Duel Streak</button>
+      </div>
+
+      <!-- Leaderboard Table -->
+      <div id="lb-table-container">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
   <!-- Phaser 3 CDN -->
   <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
   <script src="game.js"></script>
 </body>
+
 </html>

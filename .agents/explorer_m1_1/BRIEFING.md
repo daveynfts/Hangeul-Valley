@@ -1,38 +1,36 @@
-# BRIEFING — 2026-07-22T08:45:48Z
+# BRIEFING — 2026-07-22T09:58:56Z
 
 ## Mission
-Analyze existing HUD, DOM overlays, and modal structures in `index.html` and `game.js`, and outline integration strategy for retro 64-bit glassmorphic styling, neon glows, responsive layouts, and pixel art details.
+Investigate game.js, save_data.json, and index.html for Economy Refactoring (R1) & Save Persistence.
 
 ## 🔒 My Identity
 - Archetype: Explorer
-- Roles: Codebase Analyzer & Architecture Inspector
+- Roles: Teamwork Explorer
 - Working directory: C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\
-- Original parent: 71db6c92-afcf-469c-95a4-70ce9b7707d2
-- Milestone: Milestone 1 (Codebase Analysis)
+- Original parent: 1ed8fa99-4393-43b4-b954-c485a864f0e6
+- Milestone: M1 / R1
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT modify game code or files outside working directory
-- Provide thorough evidence chain with exact line numbers and DOM selectors
-- Formulate concrete handoff report (`analysis.md` and `handoff.md`) with 5-component structure
+- Read-only investigation — do NOT implement changes to source code
+- Document all findings in handoff.md following 5-component report format
+- Send summary to parent via send_message when complete
 
 ## Current Parent
-- Conversation ID: 71db6c92-afcf-469c-95a4-70ce9b7707d2
-- Updated: 2026-07-22T08:45:48Z
+- Conversation ID: 1ed8fa99-4393-43b4-b954-c485a864f0e6
+- Updated: 2026-07-22T09:58:56Z
 
 ## Investigation State
-- **Explored paths**: `index.html`, `game.js`
-- **Key findings**:
-  - Cataloged all 14 HUD & modal overlay components with exact line numbers, DOM IDs/classes, z-index hierarchy, and JS event triggers.
-  - Mapped dual-layer architecture: Phaser 3 canvas engine + DOM HTML/CSS overlays.
-  - Formulated full integration blueprint for 64-bit retro glassmorphism, neon glow effects, pixel art scanline/bevel detailing, and responsive mobile breakpoints.
-- **Unexplored areas**: None. Investigation 100% complete.
+- **Explored paths**: `game.js` (all 4 Phaser scenes + 3 minigame overlays), `save_data.json`, `index.html`, `main.py`
+- **Key findings**: Complete mapping of `gold` calculations across 7 gameplay modes, diminishing returns formula analysis, PyWebView disk save architecture, and backward-compatible Version 4 schema proposal (`gold` -> `coins`, `gems`, `honor`, quests, inventory, recipes, pets, seasonal, leaderboards).
+- **Unexplored areas**: None for M1/R1 scope.
 
 ## Key Decisions Made
-- Produced detailed reports in `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\analysis.md` and `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\handoff.md`.
+- Finalized 5-component handoff report in `handoff.md`.
+- Verified migration script in Python (`script_test_migration.py`) confirming 100% backward compatibility for `v2`/`v3` saves.
 
 ## Artifact Index
-- `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\ORIGINAL_REQUEST.md` — User task definition
-- `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\BRIEFING.md` — Agent working memory
-- `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\progress.md` — Liveness heartbeat log
-- `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\analysis.md` — Detailed handoff report
-- `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\handoff.md` — Standard handoff report
+- ORIGINAL_REQUEST.md — Task prompt
+- BRIEFING.md — Context memory
+- progress.md — Liveness heartbeat
+- handoff.md — Final investigation report
+- script_test_migration.py — Python test script for save schema v4 migration

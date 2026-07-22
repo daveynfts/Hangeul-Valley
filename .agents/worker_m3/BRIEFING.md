@@ -1,47 +1,54 @@
-# BRIEFING — 2026-07-22T15:59:11Z
+# BRIEFING — 2026-07-22T10:07:56Z
 
 ## Mission
-Implement pure JavaScript Web Audio API Chiptune Synth and wire audio feedback into all specified game interaction points in Hangeul Valley.
+Implement Requirements R3 (Crafting/Cooking System with Korean Culture) & R4 (Pet Companion System) in `game.js`, `index.html`, and `save_data.json`.
 
 ## 🔒 My Identity
-- Archetype: worker
+- Archetype: implementer/qa/specialist
 - Roles: implementer, qa, specialist
 - Working directory: C:\VibeCode\Hangeul Valley\.agents\worker_m3
-- Original parent: 71db6c92-afcf-469c-95a4-70ce9b7707d2
-- Milestone: Milestone 3 (R2: Web Audio API Synthesized Sound Effects & Audio Feedback)
+- Original parent: 1ed8fa99-4393-43b4-b954-c485a864f0e6
+- Milestone: Requirements R3 & R4 Implementation Complete
 
 ## 🔒 Key Constraints
-- Pure JavaScript Web Audio API without external audio/MP3 files.
-- 0 syntax errors (`node -c game.js` must pass 100%).
-- All implementations must be genuine, maintain real state, produce real sound synthesized with Web Audio API.
-- Do not cheat or facade any implementations.
+- Execute `node -c game.js` and `node -c assets/game.js` to ensure zero syntax errors.
+- Ensure all save state extensions (`inventory`, `recipes`, `pets`, `activeBuffs`) serialize cleanly in `v4` schema.
+- Write handoff report to `C:/VibeCode/Hangeul Valley/.agents/worker_m3/handoff.md`.
+- Send final summary to orchestrator via `send_message`.
+- Integrity Mandate: Genuine logic, no hardcoded cheating.
 
 ## Current Parent
-- Conversation ID: 71db6c92-afcf-469c-95a4-70ce9b7707d2
-- Updated: 2026-07-22T15:59:11Z
+- Conversation ID: 1ed8fa99-4393-43b4-b954-c485a864f0e6
+- Updated: 2026-07-22T10:07:56Z
 
 ## Task Summary
-- **What to build**: Pure JS Web Audio API `ChiptuneSynth` module supporting SFX types: click, harvest, fishing_pull, sword_swing, quiz_correct, quiz_wrong.
-- **Success criteria**: AudioContext autoplay unlock, sound triggers wired into all specified interaction points in `game.js` and button clicks in HTML/JS, 0 syntax errors, verified functionality.
-- **Interface contracts**: `playChiptuneSFX(type)` global trigger function.
-- **Code layout**: `game.js`, `index.html`
-
-## Key Decisions Made
-- [TBD]
+- **What to build**: R3 Cooking/Crafting (Korean ingredients, 9 recipes, minigame, buffs, cultural facts, UI) and R4 Pets (5 pets, acquisition, leveling with vocab quiz, happiness & feeding cooked dishes, pet UI).
+- **Success criteria**: Functional R3 & R4 systems fully integrated into game loop, save/load, HUD, and overlays with clean syntax & tests.
+- **Interface contracts**: `save_data.json` schema v4.
 
 ## Change Tracker
-- **Files modified**: None yet
-- **Build status**: Untested
-- **Pending issues**: Initial synthesis and integration pending
+- **Files modified**:
+  - `game.js` (State structures, recipe DB, pet DB, cooking minigame, buff engine, pet overlay UI logic, ingredient drop hooks)
+  - `index.html` (64-bit retro glassmorphism CSS, HUD buttons & buff bar, #recipe-overlay, #cooking-minigame-overlay, #cultural-fact-overlay, #pet-overlay)
+  - `save_data.json` (v4 schema extended with ingredients, unlockedRecipes, pet collection, activeBuffs)
+  - `assets/game.js`, `assets/index.html`, `assets/save_data.json` (Mirrored copies synchronized)
+- **Build status**: PASS (node -c game.js & node -c assets/game.js)
+- **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: Pending
-- **Lint status**: Pending
-- **Tests added/modified**: Pending
+- **Build/test result**: All unit tests in `test_r3_r4_systems.js` PASSED
+- **Lint status**: Zero syntax errors
+- **Tests added/modified**: `test_r3_r4_systems.js`
 
 ## Loaded Skills
 - None
 
+## Key Decisions Made
+- Integrated 9 authentic Korean recipes with real cultural facts (Kimchi, Bibimbap, Bulgogi, Tteokbokki, Samgyeopsal, Seafood Pajeon, Japchae, Samgyetang, Gimbap).
+- Implemented 5 collectible pets (Dog, Cat, Rabbit, Hamster, Parrot) with passives, level-up quizzes, and happiness decay.
+
 ## Artifact Index
-- `C:\VibeCode\Hangeul Valley\.agents\worker_m3\ORIGINAL_REQUEST.md` — Original prompt request
-- `C:\VibeCode\Hangeul Valley\.agents\worker_m3\BRIEFING.md` — Briefing state
+- `.agents/worker_m3/ORIGINAL_REQUEST.md` — Original prompt request
+- `.agents/worker_m3/BRIEFING.md` — Agent briefing state
+- `.agents/worker_m3/progress.md` — Progress log
+- `.agents/worker_m3/handoff.md` — Handoff report

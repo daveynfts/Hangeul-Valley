@@ -1,7 +1,8 @@
-# Handoff & Review Report — Reviewer 2 (Milestone 2: R1: 64-Bit Retro Glassmorphic HUD & Modal Design System)
+# Handoff & Review Report — Reviewer M2-2 (Milestone 2: UI/UX & Save System Backward Compatibility Review)
 
 **Working Directory**: `C:\VibeCode\Hangeul Valley\.agents\reviewer_m2_2\`  
-**Target Files**: `C:\VibeCode\Hangeul Valley\index.html`, `C:\VibeCode\Hangeul Valley\game.js`  
+**Target Files**: `index.html`, `game.js`, `test_currency_save.js`, `save_data.json`  
+**Reviewer Identity**: Reviewer M2-2 (`teamwork_preview_reviewer`)  
 **Execution Date**: 2026-07-22  
 **Final Verdict**: **APPROVE** (PASS)
 
@@ -9,58 +10,80 @@
 
 ## 1. Observation
 
-- **`index.html` CSS Architecture Inspection**:
-  - **CSS Custom Properties (`:root`, lines 14–51)**:
-    - 64-Bit Pixel Glass palette defined: `--glass-bg-primary` (`rgba(15, 23, 42, 0.85)`), `--glass-bg-darker`, `--glass-bg-purple`, `--glass-bg-green`, `--glass-bg-pink`, `--glass-bg-blue`.
-    - Glass blur variables: `--glass-blur: blur(16px);`, `--glass-blur-webkit: blur(16px);`.
-    - Neon color accents & glows: `--neon-cyan` (`#38bdf8`), `--neon-purple` (`#c084fc`), `--neon-gold` (`#f59e0b`), `--neon-green` (`#4ade80`), `--neon-pink` (`#f43f5e`), `--neon-blue` (`#60a5fa`), alongside matching `--glow-*` box-shadow tokens.
-    - Fallback retro wood and parchment design tokens (`--wood-l`, `--wood-m`, `--wood-d`, `--parch`, etc.).
-  - **Backdrop Filters (lines 119, 213, 259, 284, 305, 420, 514, 566, 605, 648, 711, 758, 803, 865)**:
-    - Applied consistently using both `backdrop-filter: var(--glass-blur);` and `-webkit-backdrop-filter: var(--glass-blur);` across all 12 modal overlays, HUD bar, progress bar wrapper, and controls tip.
-  - **64-Bit CRT Scanlines Texture Overlay (lines 68–102)**:
-    - Pseudo-element `::before` with `repeating-linear-gradient` applied to 12 modal containers (`#level-select-overlay`, `#quiz-ui`, `#vocab-panel`, `#shop-panel`, `#fish-album-panel`, `#trophy-panel`, `#duel-panel`, `#memory-panel`, `#vff-inner`, `#cat-dialog-inner`, `#levelup-card`, `#alldone-card`).
-    - Configured with `pointer-events: none; z-index: 1;` and child elements elevated to `position: relative; z-index: 2;` to guarantee crisp interaction and text selection.
-  - **Grid Layouts**:
-    - `.ls-grid` (line 142): `display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px;`
-    - `#vocab-grid` (line 480): `display: grid; grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 12px;`
-    - `#shop-level-grid` (line 539): `display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;`
-    - `#fish-album-grid` (line 589): `display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;`
-    - `.trophy-grid` (line 624): `display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px;`
-    - `#duel-options-grid` (line 698): `display: grid; grid-template-columns: 1fr 1fr; gap: 12px;`
-    - `#memory-grid` (line 737): `display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;`
-  - **Typography & Responsive Fluid Scaling**:
-    - Google Fonts embedded link (line 9) imports `Be Vietnam Pro`, `Nunito`, `Noto Sans KR`, `Press Start 2P`, and `VT323`.
-    - Korean text targeted with `font-family: 'Noto Sans KR', 'Be Vietnam Pro', sans-serif !important;` (`.ko-text`, `#cat-ko`, `.vc-ko`, `#duel-target-word`, `.fish-card-ko`).
-    - Fluid typography utilizes `clamp()` (e.g. `.ls-logo`: `font-size: clamp(48px, 6vw, 64px);`, `.ls-title`: `font-size: clamp(22px, 3.5vw, 32px);`).
-  - **Mobile Responsiveness (`@media (max-width: 768px)` & `@media (max-width: 480px)`, lines 914–970)**:
-    - All 12 modal containers capped at `width: 96vw !important; max-height: 90vh !important; margin: auto !important;` (and `98vw / 92vh` on `<480px`).
-    - Grid columns dynamically collapse to 1-column layouts (`.ls-grid`, `#shop-level-grid`, `#duel-options-grid`) or reduced minmax widths (`#vocab-grid`, `#fish-album-grid`, `.trophy-grid`).
-    - `#cat-dialog-body` transforms from side-by-side flex layout to stacked column layout.
-    - `#hud` converts to a scrollable top bar (`max-width: calc(100vw - 16px); overflow-x: auto; white-space: nowrap;`).
+A comprehensive UI/UX and Save System Backward Compatibility review was conducted for Milestone 2.
 
-- **JavaScript Syntax Validation (`game.js`)**:
-  - Ran `node -c game.js`. Result: Exit code 0, 0 syntax errors.
+### 1.1 UI/UX 64-Bit Retro Glassmorphism Audit
+- **HUD Bar (`#hud`) & Currency Displays**:
+  - `#hud` container uses `class="glass-hud"` with `backdrop-filter: blur(16px);`, `-webkit-backdrop-filter: blur(16px);`, dark glass background `rgba(15, 23, 42, 0.85)`, neon gold border `border: 2px solid var(--neon-gold);`, and neon glow box shadow `var(--glow-gold)` (lines 210–221 & 983–989 in `index.html`).
+  - Contains all three currency displays:
+    - **Coins 🪙**: `<span id="hud-gold" title="Coins">🪙 <span id="gold-val">0</span></span>` styled with neon gold border & pill background (`rgba(245, 158, 11, 0.12)`).
+    - **Gems 💎**: `<span id="hud-gems" style="margin-left:6px;" title="Gems">💎 <span id="gems-val">0</span></span>`.
+    - **Honor 🏅**: `<span id="hud-honor" style="margin-left:6px;" title="Honor">🎖️ <span id="honor-val">0</span></span>`.
+  - JS updater `updateCurrencyHUD()` in `game.js` (lines 383–400) dynamically updates `#gold-val`, `#gems-val`, `#honor-val`, `#shop-gold-val`, and `#trophy-gold-val`, keeping in-memory currency state (`playerCurrencies = { coins, gems, honor }`) in 100% sync with the UI.
 
-- **Integrity & Adversarial Audit**:
-  - Evaluated code for hardcoded test results, facade implementations, or bypassed logic. None found. All modal markup and JS event handlers connect directly to functional state.
+- **UI Overlays (`#quest-overlay`, `#shop-quiz-overlay`, `#boss-gate-overlay`)**:
+  - `#quest-overlay`: Inner panel `<div id="quest-panel" class="glass-modal">` (line 1449). Features quest category tabs (`Main Story`, `Daily`, `Weekly`), custom progress bars, and reward claim buttons.
+  - `#shop-quiz-overlay`: Inner panel `<div id="shop-quiz-panel" class="glass-modal">` (line 1475). Features quiz gate step indicators, Korean prompt display, 2x2 option button grid, and cancel purchase handler.
+  - `#boss-gate-overlay`: Inner panel `<div id="boss-gate-panel" class="glass-modal">` (line 1496). Features gate challenge headers, step indicators, Korean vocabulary prompt, 2x2 option button grid, and retreat handler.
+  - All three panels inherit `.glass-modal` (lines 973–982) providing 64-Bit Retro Glassmorphism styling:
+    - `background: rgba(15, 23, 42, 0.92) !important;`
+    - `backdrop-filter: blur(16px) !important;`
+    - `border: 2px solid var(--neon-gold);`
+    - `box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 20px 60px rgba(0,0,0,.9);`
+    - Rounded 18px corners and position containment.
+
+### 1.2 Save System Backward Compatibility Audit
+- **`migrateSaveData(d)` in `game.js` (lines 205–236)**:
+  ```js
+  function migrateSaveData(d) {
+    if (!d) return null;
+    const data = JSON.parse(JSON.stringify(d));
+    if (!data.v || data.v < 4) {
+      console.log(`[Save Migration] Upgrading schema from v${data.v || 1} -> v4`);
+      const legacyGold = typeof data.gold === 'number' ? data.gold : 0;
+      data.currencies = data.currencies || {};
+      data.currencies.coins = typeof data.currencies.coins === 'number' ? data.currencies.coins : legacyGold;
+      data.currencies.gems = typeof data.currencies.gems === 'number' ? data.currencies.gems : 0;
+      data.currencies.honor = typeof data.currencies.honor === 'number' ? data.currencies.honor : 0;
+      data.gold = data.currencies.coins;
+      // ... initializes missing schema sections (quests, inventory, recipes, pets, seasonal, leaderboards)
+      data.v = 4;
+    }
+    return data;
+  }
+  ```
+- **Data Integrity & Backward Compatibility**:
+  - Legacy `v2` / `v3` / unversioned save files with legacy `gold` values (e.g. `350` or `1200`) migrate cleanly without loss, setting `currencies.coins` to legacy gold and `gold` alias to `currencies.coins`.
+  - Unlocked level arrays (`unlockedLevels`, e.g. `[0, 1, 2, 3]`), unlocked trophies (`unlockedTrophies`), harvest counts (`harvests`), SRS memory state (`srs`), crop plots (`plots`), fish album (`fishAlbum`), and current level index (`lastLevel`) are preserved with 100% fidelity without reset or corruption.
+  - In-memory state and alias synchronization (`syncGoldAlias()`, `applySave()`, `collectSave()`) ensure `gold === playerCurrencies.coins` at all times.
+
+### 1.3 Test Suite Execution & Syntax Validation
+- **Syntax Check**: `node -c game.js` -> Passed with 0 errors.
+- **Automated Test Suite (`test_currency_save.js`)**: Executed via Node.js.
+  - Test Suite 1 (Save Migration v3 -> v4): Passed all 5 test cases.
+  - Test Suite 2 (Currency Transactions & Alias Sync): Passed all 7 transaction test cases.
+  - Test Suite 3 (Edge Cases & 1,000 Step Stress Test): Passed all stress transaction invariance checks.
+  - Independent VM script execution for legacy `v2` (`gold: 350`, `unlockedLevels: [0,1,2]`) and `v3` (`gold: 1200`, `unlockedLevels: [0,1,2,3,4]`) confirmed flawless migration and state loading.
 
 ---
 
 ## 2. Logic Chain
 
-1. **Design System & Backdrop Filter Conformance**:
-   - The use of CSS variables in `:root` provides a centralized design system. The 64-bit Pixel Glass theme correctly blends dark glass surfaces (`rgba(15, 23, 42, 0.85)`) with backdrop blur (`blur(16px)`) and multi-color neon glows.
-   - Preserving `-webkit-backdrop-filter` alongside `backdrop-filter` ensures cross-browser compatibility (Safari / WebKit mobile engines).
+1. **Glassmorphism Design Tokens & Class Application**:
+   - The UI specification calls for 64-Bit Retro Glassmorphism across HUD elements and modal overlays.
+   - Inspection confirms `.glass-hud` is applied to `#hud`, and `.glass-modal` is applied to `#quest-panel`, `#shop-quiz-panel`, and `#boss-gate-panel`.
+   - The CSS rules provide dark glass backgrounds, 16px backdrop blur, neon gold borders, dual-layer glow shadows, and pixelated font details.
 
-2. **Scanline Rendering & Interaction Stack**:
-   - The `::before` pseudo-element with `pointer-events: none` ensures scanlines render seamlessly on top of glass backgrounds without capturing pointer clicks. Elevating children to `z-index: 2` guarantees text contrast and clickability.
+2. **Save System Migration & Non-Destructive Upgrades**:
+   - `migrateSaveData()` handles all legacy save formats (`v1`, `v2`, `v3`, and unversioned saves lacking `v`).
+   - Legacy single-currency `gold` is mapped directly to `playerCurrencies.coins`, preventing gold loss.
+   - `playerCurrencies.gems` and `playerCurrencies.honor` are safely defaulted to 0 if not present in legacy saves.
+   - All legacy game progress fields (`unlockedLevels`, `harvests`, `srs`, `plots`, `fishAlbum`) are preserved by `applySave()`.
+   - Reverse compatibility is maintained via `collectSave()`, which outputs `v: 4`, `currencies`, and `gold` alias.
 
-3. **Mobile Overflow & Responsive Constraints**:
-   - Setting `max-height: 90vh` paired with `width: 96vw` on `@media (max-width: 768px)` guarantees modal containers fit within mobile viewport bounds.
-   - `overflow-y: auto` on content-heavy panels (`#quiz-ui`, `#shop-panel`, `#fish-album-panel`, `#trophy-panel`, `#vff-inner`, `#level-select-overlay`) and inner flex scrollable containers (`#vocab-grid-wrap`) enables smooth touch scrolling without screen overflow.
-
-4. **Integrity & Quality Assessment**:
-   - Verification confirmed genuine CSS implementation without mock or shortcut styling. Syntax validation on `game.js` confirms JavaScript integrity.
+3. **Adversarial Integrity & Code Quality Assessment**:
+   - Tested for hardcoded test returns, facade implementations, or dummy functions. None were found.
+   - Verification commands and unit tests execute against actual source functions in `game.js`.
 
 ---
 
@@ -71,11 +94,11 @@
 
 ### Findings
 
-#### [Minor] Finding 1: Explicit `overflow-y: auto` on Compact Modals for Extremely Short Viewports
-- **What**: On `@media (max-width: 768px)`, modals `#duel-panel` and `#memory-panel` rely on their default overflow properties (`overflow: hidden` on `#duel-panel`, unspecified on `#memory-panel`).
-- **Where**: `index.html` lines 657, 720, 933.
-- **Why**: On standard mobile devices (e.g., 375×667 or 390×844), content height (~400–450px) comfortably fits inside 90vh. On extremely short viewports (<450px height, e.g., mobile landscape), `overflow: hidden` might clip the bottom button or cards.
-- **Suggestion**: Add `overflow-y: auto` explicitly to line 935 in the `@media (max-width: 768px)` block for full resilience in landscape mobile modes.
+#### [Minor] Finding 1: Dedicated Pill Styling for Gems and Honor HUD Elements
+- **What**: `#hud-gold` has a dedicated CSS pill class (`#hud-gold`) with gold border and background, whereas `#hud-gems` and `#hud-honor` rely on inline spacing (`margin-left:6px`) within the `#hud` container.
+- **Where**: `index.html` lines 1123–1124.
+- **Why**: Both `#hud-gems` and `#hud-honor` render clearly and legibly inside the glass HUD bar, but adding dedicated cyan and purple/gold pill styling matching `#hud-gold` would further enhance visual symmetry.
+- **Suggestion**: Consider adding dedicated `#hud-gems` and `#hud-honor` CSS pill rules in future UI updates.
 
 ---
 
@@ -83,34 +106,35 @@
 
 | Claim | Verification Method | Result |
 |---|---|---|
-| CSS Custom Properties `:root` palette & neon tokens | Inspected `index.html` lines 14–51 | **PASS** |
-| Backdrop filters (`backdrop-filter` & `-webkit-backdrop-filter`) | Inspected `index.html` backdrop filter rules across all 12 modals & HUD | **PASS** |
-| 64-Bit CRT Scanlines `::before` pseudo-elements | Inspected `index.html` lines 68–102 (`repeating-linear-gradient`) | **PASS** |
-| Mobile media queries (`@media (max-width: 768px)`) & modal bounds | Inspected `index.html` lines 914–970 (`width: 96vw`, `max-height: 90vh`) | **PASS** |
-| Horizontal scrolling on `#hud` on small screens | Inspected `index.html` line 917 (`overflow-x: auto; white-space: nowrap;`) | **PASS** |
-| `game.js` JavaScript Syntax Validation | Ran `node -c game.js` | **PASS** (Exit code 0) |
-| Integrity Check (No hardcoded/dummy facades) | Audited source files for fake test returns or stub code | **PASS** (No violations found) |
+| 64-Bit Retro Glassmorphism CSS styling (`.glass-modal`, `.glass-hud`, `.neon-border`, `.pixel-art-detail`) | Inspected `index.html` lines 973–997 and overlay markup (lines 1117, 1449, 1475, 1496) | **PASS** |
+| HUD Currency Displays (Coins 🪙, Gems 💎, Honor 🏅) | Inspected HTML lines 1122–1124 and `updateCurrencyHUD()` in `game.js` | **PASS** |
+| Legacy Save Migration (`v2`/`v3`/unversioned -> `v4`) | Audited `migrateSaveData()` & `applySave()` in `game.js`; executed `test_currency_save.js` and custom Node VM migration test | **PASS** |
+| No Loss of Gold or Unlocked Levels | Verified `v2` (gold 350, levels [0,1,2]) & `v3` (gold 1200, levels [0,1,2,3,4]) load accurately into in-memory state | **PASS** |
+| Syntax Validation | Executed `node -c game.js` | **PASS** (0 errors) |
+| Integrity Check | Audited source code for facade/fake returns or hardcoded test bypasses | **PASS** (No violations found) |
 
 ---
 
 ## 5. Coverage Gaps
 
-- **GPU Performance under Heavy Blur on Low-End Mobile Devices**: High blur radius (`blur(16px)`) on low-end GPUs during active Phaser 3 canvas rendering may experience minor frame drops.
+- **Low-End Mobile WebGL Backdrop Blur Performance**: Devices without hardware GPU support for `backdrop-filter: blur(16px)` will fall back to translucent solid background `rgba(15, 23, 42, 0.92)`.
   - *Risk level*: Low.
-  - *Recommendation*: Accept risk; fallback solid surface opacity handles non-supporting devices.
+  - *Recommendation*: Accept risk; fallback styling ensures full readability and usability.
 
 ---
 
 ## 6. Caveats
 
-- No changes were made to core game mechanics or Phaser engine logic.
-- All original DOM IDs, classes, and Z-index values were preserved.
+- Save migration defaults new `gems` and `honor` balances to 0 for legacy `v2`/`v3` saves, while preserving existing legacy `gold` as `coins`.
 
 ---
 
 ## 7. Conclusion
 
-Milestone 2 (R1: 64-Bit Retro Glassmorphic HUD & Modal Design System) passes all review criteria. CSS design tokens, backdrop filters, CRT scanlines, grid layouts, typography, responsive media queries, and mobile modal overflow rules are correctly and robustly implemented in `index.html`. Syntax validation on `game.js` passed with 0 errors. The implementation contains no integrity violations or dummy facades.
+Milestone 2 UI/UX and Save System Backward Compatibility implementation meets all requirements.
+1. The new HUD currency displays and UI overlays (`#quest-overlay`, `#shop-quiz-overlay`, `#boss-gate-overlay`) are styled in 64-Bit Retro Glassmorphism using `.glass-modal` and `.glass-hud`.
+2. `migrateSaveData()` and `applySave()` in `game.js` guarantee existing `v2`/`v3` save files load seamlessly without data corruption or loss of gold or unlocked levels.
+3. Automated unit tests (`test_currency_save.js`) and syntax checks (`node -c game.js`) pass with zero errors. No integrity violations or dummy facades exist.
 
 **Final Verdict**: **APPROVE**
 
@@ -120,11 +144,13 @@ Milestone 2 (R1: 64-Bit Retro Glassmorphic HUD & Modal Design System) passes all
 
 To re-verify independently:
 
-1. **Syntax Check**:
+1. **Run Syntax Check**:
    ```powershell
    node -c game.js
    ```
-   *Expected output*: Exit code 0, no errors.
 
-2. **CSS Inspection**:
-   - Inspect `index.html` lines 14–51 (`:root` tokens), lines 68–102 (CRT scanlines), and lines 914–970 (mobile responsiveness).
+2. **Run Currency & Save Migration Test Suite**:
+   ```powershell
+   node test_currency_save.js
+   ```
+   *Expected output*: `ALL TESTS PASSED SUCCESSFULLY! ✓`

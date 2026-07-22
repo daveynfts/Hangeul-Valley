@@ -1,86 +1,125 @@
-# Handoff Report — Challenger M3/M4 Phase 1
-
-**Target File**: `C:\VibeCode\Hangeul Valley\game.js`  
-**Verdict**: **PASS (VERIFIED 100%)**
-
----
+# Handoff Report — Challenger M5 Final E2E & Asset Verification
 
 ## 1. Observation
 
-1. **Syntax Verification**:
-   - Command executed: `node -c game.js` in `C:\VibeCode\Hangeul Valley`
-   - Exit code: `0`
-   - Output: 0 errors, 0 warnings (stdout and stderr empty).
+### Command 1: Syntax Verification
+- **Command**: `node -c "C:/VibeCode/Hangeul Valley/game.js"; node -c "C:/VibeCode/Hangeul Valley/assets/game.js"`
+- **Result**: Exit code `0` (Zero stdout / stderr).
+- **Status**: PASSED. Both root and mirror files are syntactically valid JavaScript.
 
-2. **Web Audio API & Synthesizer Inspection**:
-   - `AudioContext`: Present on Line 22:
-     ```javascript
-     const AudioCtx = window.AudioContext || window.webkitAudioContext;
-     ```
-   - `createOscillator`: Present on Lines 34, 45, 55, 82, 93.
-   - `createGain`: Present on Lines 35, 46, 56, 75, 83, 94.
-   - `playChiptuneSFX`: Present on Line 106:
-     ```javascript
-     function playChiptuneSFX(type) { ChiptuneSynth.play(type); }
-     ```
-   - **All 6 Sound Effect Types**:
-     1. `'click'`: Line 33 (`square` oscillator, frequency ramp 800Hz → 1600Hz)
-     2. `'harvest'`: Line 43 (3-note `triangle` arpeggio: 659.25Hz, 987.77Hz, 1318.51Hz)
-     3. `'fishing_pull'`: Line 54 (`sawtooth` oscillator, frequency ramp 200Hz → 800Hz)
-     4. `'sword_swing'`: Line 64 (white noise buffer + `bandpass` filter 1200Hz → 300Hz)
-     5. `'quiz_correct'`: Line 80 (4-note `square` arpeggio: 523.25Hz, 659.25Hz, 783.99Hz, 1046.50Hz)
-     6. `'quiz_wrong'`: Line 91 (2-note `sawtooth` descending tone: 150Hz → 120Hz)
+### Command 2: Test Suite Executions
+- **Command**: `node test_r3_r4_systems.js`
+  - **Result**: Exit code `0`.
+  - **Output snippet**:
+    ```
+    === ALL R3 & R4 VERIFICATION TESTS PASSED SUCCESSFULLY! ===
+    ```
+  - **Status**: PASSED (100%).
 
-3. **Camera Transitions (`fadeIn` & `fadeOut`)**:
-   - Registered Scenes in Phaser Config (`game.js:3207`): `[FarmScene, ArcadeScene, DungeonScene, FishingScene]`
-   - **FarmScene**:
-     - Entry: Line 999: `this.cameras.main.fadeIn(300, 0, 0, 0);`
-     - Exit to Dungeon: Line 1982: `this.cameras.main.fadeOut(300, 0, 0, 0);`
-     - Exit to Fishing: Line 1991: `this.cameras.main.fadeOut(300, 0, 0, 0);`
-     - Exit to Arcade: Line 1998: `this.cameras.main.fadeOut(300, 0, 0, 0);`
-   - **ArcadeScene**:
-     - Entry: Line 2213: `this.cameras.main.fadeIn(300, 0, 0, 0);`
-     - Exit: Line 2587: `this.cameras.main.fadeOut(300, 0, 0, 0);`
-   - **DungeonScene**:
-     - Entry: Line 2598: `this.cameras.main.fadeIn(300, 0, 0, 0);`
-     - Exit: Line 2880: `this.cameras.main.fadeOut(300, 0, 0, 0);`
-   - **FishingScene**:
-     - Entry: Line 2891: `this.cameras.main.fadeIn(300, 0, 0, 0);`
-     - Exit: Line 3163: `this.cameras.main.fadeOut(300, 0, 0, 0);`
+- **Command**: `node test_currency_save.js`
+  - **Result**: Exit code `1`.
+  - **Output snippet**:
+    ```
+    --- Test Suite 2: Currency Transactions & Alias Sync ---
+    ❌ TEST FAILED: coins should be 150
+    157 !== 150
+    AssertionError [ERR_ASSERTION]: coins should be 150
+        at testFile (C:\VibeCode\Hangeul Valley\test_currency_save.js:154:10)
+    ```
+  - **Status**: FAILED.
 
----
+- **Command**: `node test_gating_quests.js`
+  - **Result**: Exit code `1`.
+  - **Output snippet**:
+    ```
+    --- Suite 4: Quest System Logic & Timestamps ---
+    ❌ TEST FAILED: Coins increased by dq_1 reward (+30)
+    445 !== 440
+    AssertionError [ERR_ASSERTION]: Coins increased by dq_1 reward (+30)
+        at testFile (C:\VibeCode\Hangeul Valley\test_gating_quests.js:402:10)
+    ```
+  - **Status**: FAILED.
+
+### Command 3: Binary Equality Verification (MD5 Hashes)
+- **Command**: `Get-FileHash -Algorithm MD5 'C:\VibeCode\Hangeul Valley\index.html', 'C:\VibeCode\Hangeul Valley\assets\index.html', 'C:\VibeCode\Hangeul Valley\game.js', 'C:\VibeCode\Hangeul Valley\assets\game.js', 'C:\VibeCode\Hangeul Valley\levels.json', 'C:\VibeCode\Hangeul Valley\assets\levels.json', 'C:\VibeCode\Hangeul Valley\save_data.json', 'C:\VibeCode\Hangeul Valley\assets\save_data.json'`
+- **Hashes**:
+  - `index.html`: `122852A5E55956E83C6A8414140339DE`
+  - `assets/index.html`: `122852A5E55956E83C6A8414140339DE`
+  - `game.js`: `2FBB1FC776F309D92132B3491D860394`
+  - `assets/game.js`: `2FBB1FC776F309D92132B3491D860394`
+  - `levels.json`: `FD176CF8E63F3F520D3686C9705354C7`
+  - `assets/levels.json`: `FD176CF8E63F3F520D3686C9705354C7`
+  - `save_data.json`: `00C3F089A2CAD2036FA6BF279FB8621B`
+  - `assets/save_data.json`: `00C3F089A2CAD2036FA6BF279FB8621B`
+- **Status**: PASSED. 100% binary equality across all 4 root/assets pairs.
+
+### Empirical Isolate Test (Pet Active Multiplier)
+- **Code**:
+  ```js
+  // Running addCoins(50) with default state (activePet: 'dog'):
+  // playerCurrencies.coins -> 157
+  // Running addCoins(50) with petState.activePet = null:
+  // playerCurrencies.coins -> 150
+  ```
+- **Code locations in `game.js`**:
+  - Line 206: `activePet: 'dog'` in initial `petState` schema.
+  - Lines 346-358:
+    ```javascript
+    function addCoins(amount) {
+      let finalAmt = amount;
+      if (amount > 0) {
+        ...
+        if (typeof isPetActive === 'function' && isPetActive('dog')) {
+          finalAmt = Math.round(finalAmt * (1.0 + 0.15 * getPetPassiveMultiplier('dog')));
+        }
+      }
+      playerCurrencies.coins = Math.max(0, playerCurrencies.coins + finalAmt);
+    ...
+    ```
 
 ## 2. Logic Chain
 
-1. Execution of `node -c game.js` produced exit code `0` with no stdout/stderr output, proving `game.js` has zero syntax errors under V8 JavaScript engine parser.
-2. Inspection of `ChiptuneSynthEngine` (lines 16–106) confirms the presence of `AudioContext`, `createOscillator`, `createGain`, `playChiptuneSFX`, and all 6 distinct sound effect branches (`click`, `harvest`, `fishing_pull`, `sword_swing`, `quiz_correct`, `quiz_wrong`).
-3. Inspection of scene definitions confirms that all 4 Phaser scenes (`FarmScene`, `ArcadeScene`, `DungeonScene`, `FishingScene`) invoke `this.cameras.main.fadeIn` upon entry (`create()`) and `this.cameras.main.fadeOut` upon exit transitions (`exit...` or sub-scene launch).
-
----
+1. **Observation 1**: `node -c` checks passed with exit code 0 for both `game.js` and `assets/game.js`, proving syntax validity.
+2. **Observation 2**: MD5 hashes of `index.html`, `game.js`, `levels.json`, and `save_data.json` match their `assets/` counterparts perfectly, confirming 100% binary mirror equality.
+3. **Observation 3**: `test_r3_r4_systems.js` passed all test cases, verifying R3 recipes, R4 pet system, ingredient acquisition, and buff system.
+4. **Observation 4 & Empirical Isolate**: In `game.js`, the default `petState` initializes `activePet: 'dog'`. The R4 pet system defines the `dog` companion passive as **Coin Magnet (+15% Coins)**.
+5. **Observation 5**: `addCoins(amount)` calculates `finalAmt = Math.round(amount * 1.15)` whenever `isPetActive('dog')` is true.
+6. **Observation 6**: In `test_currency_save.js`, Test 2.1 calls `addCoins(50)`. It expects `100 + 50 = 150`, but because `activePet` defaults to `'dog'`, `addCoins(50)` adds `Math.round(50 * 1.15) = 57` coins, yielding `157` instead of `150`.
+7. **Observation 7**: In `test_gating_quests.js`, Suite 4 claims quest `dq_1` (+30 coins reward). It expects `410 + 30 = 440`, but with `dog` active, it adds `Math.round(30 * 1.15) = 35` coins, yielding `445` instead of `440`.
+8. **Conclusion**: The test failures in `test_currency_save.js` and `test_gating_quests.js` are NOT syntax errors or broken core logic, but rather a test harness incompatibility with the newly introduced R4 pet passive multiplier: the legacy tests assume `petState.activePet` is `null` when testing raw coin math.
 
 ## 3. Caveats
 
-- **Runtime Audio Unlocking**: Web Audio API requires a user gesture (`click` or `pointerdown`) to resume suspended audio contexts on modern browsers. Lines 107–111 include listener handlers for `pointerdown` and `click` to unlock `AudioContext`.
-- **No caveats** regarding requested checklist items.
-
----
+- **No code modification performed**: As per Challenger role constraints ("Review-only — do NOT modify implementation code"), no changes were made to `game.js`, `test_currency_save.js`, or `test_gating_quests.js`.
+- **Mitigation path**: To make `test_currency_save.js` and `test_gating_quests.js` pass, test setups should explicitly set `petState.activePet = null` before raw currency math tests, OR `game.js` default `petState.activePet` should default to `null` instead of `'dog'`.
 
 ## 4. Conclusion
 
-`game.js` successfully passes all verification criteria for Milestone 3 & Milestone 4 features:
-- Syntax correctness: **PASSED** (0 errors)
-- Web Audio API Chiptune SFX Engine: **PASSED** (All 6 sound effects implemented with synthesizers)
-- Camera Scene Fades: **PASSED** (All 4 scenes implement `fadeIn` on entry and `fadeOut` on exit)
-
----
+- **Syntax verification**: 100% PASSED (`node -c` clean on root & assets).
+- **Binary equality**: 100% PASSED (All 4 mirror pairs match MD5 hashes).
+- **R3/R4 systems test**: 100% PASSED.
+- **Legacy test suite stress test**: 2 FAILED due to R4 `dog` pet passive multiplier (`+15% Coins`) interacting with raw `addCoins()` assertions in `test_currency_save.js` and `test_gating_quests.js`.
 
 ## 5. Verification Method
 
-1. Run syntax check in terminal:
-   ```powershell
-   node -c "C:\VibeCode\Hangeul Valley\game.js"
+To independently verify these findings:
+
+1. **Syntax Check**:
+   ```cmd
+   node -c "C:/VibeCode/Hangeul Valley/game.js"
+   node -c "C:/VibeCode/Hangeul Valley/assets/game.js"
    ```
-2. Verify audio symbols in `game.js`:
-   - Search for `ChiptuneSynthEngine` at lines 16–106 of `game.js`.
-3. Verify camera transition calls in `game.js`:
-   - Inspect lines 999, 1982, 1991, 1998 (`FarmScene`), lines 2213, 2587 (`ArcadeScene`), lines 2598, 2880 (`DungeonScene`), lines 2891, 3163 (`FishingScene`).
+2. **Binary Mirror Check**:
+   ```powershell
+   Get-FileHash -Algorithm MD5 'C:\VibeCode\Hangeul Valley\index.html', 'C:\VibeCode\Hangeul Valley\assets\index.html', 'C:\VibeCode\Hangeul Valley\game.js', 'C:\VibeCode\Hangeul Valley\assets\game.js', 'C:\VibeCode\Hangeul Valley\levels.json', 'C:\VibeCode\Hangeul Valley\assets\levels.json', 'C:\VibeCode\Hangeul Valley\save_data.json', 'C:\VibeCode\Hangeul Valley\assets\save_data.json'
+   ```
+3. **Execute Test Suites**:
+   ```cmd
+   node test_r3_r4_systems.js
+   node test_currency_save.js
+   node test_gating_quests.js
+   ```
+4. **Isolate Pet Multiplier Test**:
+   ```cmd
+   node -e "const fs = require('fs'); const vm = require('vm'); const dummyElem = { textContent: '', classList: { add: () => {}, remove: () => {} }, appendChild: () => {}, addEventListener: () => {}, setAttribute: () => {}, style: {} }; const sandbox = { console: { log: () => {}, warn: () => {}, error: console.error }, window: { addEventListener: () => {} }, document: { getElementById: () => dummyElem, querySelector: () => dummyElem, querySelectorAll: () => [], createElement: () => dummyElem, addEventListener: () => {}, body: dummyElem }, localStorage: { getItem: () => null, setItem: () => {}, removeItem: () => {} }, setTimeout: () => {}, clearTimeout: () => {}, setInterval: () => {}, clearInterval: () => {}, AudioContext: class {}, webkitAudioContext: class {}, Phaser: { Scene: class {}, AUTO: 0, Game: class {}, Scale: { RESIZE: 0, CENTER_BOTH: 0 } } }; const ctx = vm.createContext(sandbox); vm.runInContext(fs.readFileSync('C:/VibeCode/Hangeul Valley/game.js', 'utf8'), ctx); vm.runInContext('petState.activePet = null; playerCurrencies = { coins: 100, gems: 10, honor: 5 }; addCoins(50);', ctx); console.log('Coins with pet=null:', ctx.playerCurrencies.coins);"
+   ```

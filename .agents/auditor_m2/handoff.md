@@ -1,77 +1,81 @@
-# Forensic Audit Report — Milestone 2 (R1: 64-Bit Retro Glassmorphic HUD & Modal Design System)
+# Forensic Audit Handoff Report — Milestone 2
 
-**Work Product**: `index.html`, `game.js`  
-**Profile**: General Project  
-**Verdict**: **CLEAN**  
-**Auditor**: `auditor_m2`  
-**Date**: 2026-07-22  
+**Work Product**: `game.js`, `index.html`, `save_data.json`  
+**Profile**: General Project / Integrity Forensics  
+**Audit Type**: Milestone 2 Implementation Forensic Audit  
+**Auditor**: Forensic Auditor M2 (`teamwork_preview_auditor`)  
+**Verdict**: **CLEAN**
 
 ---
 
 ## 1. Observation
 
-- **Source Integrity & Hardcode Audit**:
-  - Direct inspection of `index.html` (1,319 lines) and `game.js` (3,480 lines) verified authentic, functional implementations across all HUD elements and 12 UI modal panels.
-  - Zero hardcoded test outputs, dummy implementations, or fake glassmorphism mocks were found.
-  - All interactive elements (Seed Shop, Vocab Book, Fish Album, Trophy Room, Spell Quiz Duel, Memory Match, Cat NPC Dialog, Vocab Fun Fact, Level Select, Level Up, All Done, Quiz Modal) utilize live JavaScript handlers, dynamic DOM rendering, and real game state bindings.
+### Empirical Test Execution Output
+1. **Node Syntax Verification**:
+   - Executed: `node -c "C:\VibeCode\Hangeul Valley\game.js"`
+   - Result: Exit code `0` (Zero syntax errors).
 
-- **Design System Implementation (`index.html`)**:
-  - CSS `:root` tokens correctly define the 64-Bit Pixel Glass palette (`--glass-bg-primary`, `--glass-bg-darker`, `--glass-bg-purple`, `--glass-bg-green`, `--glass-bg-pink`, `--glass-bg-blue`), backdrop blur filter (`--glass-blur`), multi-color neon accents (`--neon-cyan`, `--neon-purple`, `--neon-gold`, `--neon-green`, `--neon-pink`, `--neon-blue`), and neon glow box shadows.
-  - 64-Bit CRT scanlines texture overlay (`repeating-linear-gradient`) is applied via `::before` pseudo-elements across all 12 modal containers (`#level-select-overlay`, `#quiz-ui`, `#vocab-panel`, `#shop-panel`, `#fish-album-panel`, `#trophy-panel`, `#duel-panel`, `#memory-panel`, `#vff-inner`, `#cat-dialog-inner`, `#levelup-card`, `#alldone-card`).
-  - Korean (`Noto Sans KR`) and Vietnamese (`Be Vietnam Pro`) typography rules are properly declared with font scaling (`clamp()`).
-  - Responsive layout media queries (`@media (max-width: 768px)` and `@media (max-width: 480px)`) enforce max dimensions (`width: 96vw; max-height: 90vh/92vh; overflow-y: auto`), single-column grid collapses, stacked flex layouts for NPC dialogs, and horizontal scrolling for the HUD bar.
+2. **Save Data JSON Validation**:
+   - Parsed `save_data.json` with Node `JSON.parse`.
+   - Verified schema version `v: 4`, containing keys `v`, `currencies` (`coins: 85`, `gems: 0`, `honor: 0`), `gold`, `unlockedLevels`, `unlockedTrophies`, `harvests`, `srs`, `plots`, `lastLevel`, `apple`, `fishAlbum`, `quests`, `inventory`, `recipes`, `pets`, `seasonal`, `leaderboards`.
 
-- **Syntax & Execution Verification**:
-  - Command: `node -c game.js`
-  - Output: Exit code 0, 0 syntax errors, 0 warnings.
+3. **Programmatic Logic Verification Suite (`test_runner.js`)**:
+   - **Test 1 (Save Migration)**: Upgraded legacy `{ v: 1, gold: 500 }` to `v: 4`. Result: `PASS` (`currencies.coins = 500`, `gold = 500`).
+   - **Test 2 (Currency Management)**: Tested `addCoins()`, `spendCoins()`, `syncGoldAlias()`. Spending 40 from 100 succeeded (`coins: 60`), spending 100 failed. Result: `PASS`.
+   - **Test 3 (SRS 80% Mastery Calculation)**: Tested `calcLevelMastery(0)` with 4 out of 5 words harvested >= 3 times. Result: `PASS` (Calculated exactly `80%`).
+   - **Test 4 (Zone Locking / Quiz Gating)**: Tested `isZoneUnlocked('arcade')` at 80% SRS mastery vs 60% SRS mastery. Result: `PASS` (`80%`: `unlocked: true`, `60%`: `unlocked: false`).
+   - **Test 5 (Quest Progression)**: Triggered `checkQuestProgress('harvest', { count: 3 })`. Result: `PASS` (`mainProgress.harvests` incremented to 3).
+
+4. **Code Inspection Findings (`game.js` & `index.html`)**:
+   - `migrateSaveData(d)`: Located at lines 205–236 in `game.js`. Safely handles legacy `gold` migration to multi-currency `coins`, initializes missing subsystem schemas, upgrades schema version to `v: 4`.
+   - Currency Management: Located at lines 332–404 in `game.js`. Functions `addCoins`, `addGems`, `addHonor`, `spendCoins`, `spendGems`, `addGold`, `updateCurrencyHUD`, `checkAffordablePacks` handle balances, alias synchronization (`gold = playerCurrencies.coins`), save persistence, and HUD updates.
+   - SRS 80% Mastery Calculation: `calcLevelMastery(levelIdx)` at line 415 computes dynamic mastery based on `(harvestCounts.get(w.ko) || 0) >= 3`.
+   - Quiz Gating: `isZoneUnlocked(zoneKey)` at line 426 enforces 80% mastery lock on Arcade, Fishing, Dungeon, and Duel zones. `startShopQuizGate(idx)` at line 448 dynamically generates 3-question Korean translation quizzes before shop level purchases.
+   - Boss Entrance Gates: `startBossGateChallenge(type, questionsCount, callback)` at line 520 forces multi-question Korean vocabulary entrance challenges before entering Boss encounters.
+   - Quest Progression: `MAIN_STORYLINE` (Acts I–VI) and `initQuestState()` manage storyline and daily/weekly reset intervals. Progression updated via `checkQuestProgress(type, data)`. Rewards claimed via `claimMainQuest()` and `claimSideQuest()`.
+   - Anti-Cheating Inspection: Searched `game.js` and `index.html` for hardcoded quiz answers, bypass flags, dummy return values, or pre-baked passes. None found. `loadSRS()` and `loadEconomy()` are no-op legacy placeholders remaining from save system unification into `applySave()`.
 
 ---
 
 ## 2. Logic Chain
 
-1. **Empirical Verification of No Hardcoding**:
-  - Automated regex and text searches for prohibited patterns (`dummy`, `mock`, `fake`, `FIXME`, `TODO`, hardcoded PASS/FAIL returns) yielded no suspicious mock logic or bypass shortcuts.
-  - Function definitions (`buildLevelSelectScreen`, `buildShopGrid`, `renderVocabCards`, `openFishAlbum`, `openMemoryGame`, `renderTrophies`, `nextDuelTurn`, `catSetWord`, `showVocabFunFact`) execute authentic algorithmic computations (e.g. data fetching from `levels.json`, random distractor selection, combo damage calculation, local storage persistence).
-
-2. **Compliance with Design & UI Requirements**:
-  - All requested 64-bit retro glassmorphism features (backdrop blur, CRT scanlines, multi-color neon glow borders, double-beveled pixel frames, Korean/Vietnamese font stacks, mobile media queries) are fully implemented in native CSS without relying on pre-baked image mocks or external UI frame libraries.
-
-3. **Multi-Mode Integrity Check**:
-  - **Development Mode**: PASS (No fake outputs or broken facades).
-  - **Demo Mode**: PASS (Implementation is genuine; no copied external core logic or hardcoded mock fixtures).
-  - **Benchmark Mode**: PASS (All UI CSS and game interaction code built directly for the project).
+1. **Syntax & Data Integrity**: `game.js` evaluates cleanly under Node without syntax errors. `save_data.json` complies with schema version 4.
+2. **Schema Migration**: `migrateSaveData()` actively transforms legacy save objects by populating currency structures and sub-system state defaults, maintaining backward compatibility.
+3. **Currency & Economy Mechanics**: Currency operations maintain invariant checks (non-negative balances, atomic deductions), sync gold alias, and trigger UI updates.
+4. **Pedagogical Gating (SRS & Quizzes)**: Mastery calculation `calcLevelMastery()` computes actual progress from player harvest records (`harvestCounts`). Zone unlocks (`isZoneUnlocked`) strictly check if mastery meets or exceeds 80%. Shop purchase quiz gates and boss entrance gates generate dynamic translation choices from unlocked vocabulary pools rather than static fixtures.
+5. **Quest Progression**: Quest progression tracks genuine player events (harvests, kills, fish, duels, scores) and enforces both active task completion and level SRS mastery thresholds before allowing reward claims.
+6. **No Integrity Violations**: No hardcoded quiz answers, fake pass conditions, or facade logic were present in the source files.
 
 ---
 
 ## 3. Caveats
 
-- High backdrop-filter blur radii (`blur(16px)`) may reduce framerates on low-end hardware without hardware-accelerated CSS rendering. Fallback dark glass background colors (`rgba(15, 23, 42, 0.95)`) ensure readability regardless of backdrop-filter support.
+- `loadSRS()` and `loadEconomy()` at lines 322–323 are empty functions. They are harmless legacy functions retained during save modularization; all save loading is routed through `loadSave()` and `applySave()`.
+- Browser UI popups and chiptune audio calls rely on browser DOM environment (`document.getElementById`) and web audio context, which were mocked during standalone Node headless execution.
 
 ---
 
 ## 4. Conclusion
 
-**Verdict: CLEAN**
+The Milestone 2 implementation (`game.js`, `index.html`, `save_data.json`) has been verified empirically and forensically. All required features (`migrateSaveData()`, currency management, SRS 80% mastery calculation, quiz gating, boss gates, quest progression) are genuinely implemented without facade patterns, hardcoded test results, or cheating shortcuts.
 
-Milestone 2 (R1: 64-Bit Retro Glassmorphic HUD & Modal Design System) passes all forensic integrity checks. The code in `index.html` and `game.js` is authentic, syntactically valid, free of fake mocks or hardcoded test results, and compliant with all project requirements.
+**Final Verdict**: **CLEAN**
 
 ---
 
 ## 5. Verification Method
 
-To independently re-verify the forensic verdict:
+To independently verify these audit results:
 
 1. **Syntax Check**:
-   ```powershell
+   ```bash
    node -c "C:\VibeCode\Hangeul Valley\game.js"
    ```
-   *Expected Output*: Exit code 0 with empty output.
-
-2. **Prohibited Pattern Search**:
-   ```powershell
-   Select-String -Path "C:\VibeCode\Hangeul Valley\game.js" -Pattern "dummy|mock|fake|TODO|FIXME"
+2. **Save Data Parse**:
+   ```bash
+   node -e "const fs = require('fs'); JSON.parse(fs.readFileSync('C:/VibeCode/Hangeul Valley/save_data.json', 'utf8')); console.log('Save data JSON valid');"
    ```
-   *Expected Output*: Zero matches for implementation code.
-
-3. **CSS Design Tokens & CRT Overlay Inspection**:
-   Inspect `C:\VibeCode\Hangeul Valley\index.html` lines 14–95 for `:root` variables and `.glass-panel-64bit::before` CRT scanline definitions.
+3. **Empirical Logic Test Suite**:
+   ```bash
+   node "C:\VibeCode\Hangeul Valley\.agents\auditor_m2\test_runner.js"
+   ```

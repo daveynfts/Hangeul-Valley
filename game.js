@@ -187,48 +187,141 @@ let plotSave = []; // [{ i, ko, sState, plantedAt }]
 // ── Unified File-Based Save (pywebview API → file, localStorage as backup) ─────
 let fishAlbumSave = {}; // { ko: count }
 
+// ═══════════════ R1: TRIPLE CURRENCY ECONOMY & SAVE V4 ═══════════════════════
+var playerCurrencies = { coins: 85, gems: 10, honor: 0 };
+var gold = 85; // kept in sync for 100% backward compatibility
+var quizStreak = 0; // consecutive correct quiz streak
+
+var inventoryState = {
+  ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 },
+  seeds: {},
+  scrolls: 0,
+  cookedDishes: {}
+};
+var recipeState = {
+  unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap']
+};
+var petState = {
+  collection: [{ id: 'dog', name: '강아지', enName: 'Puppy', level: 1, xp: 0, happiness: 100, lastDecayTime: Date.now() }],
+  activePet: 'dog'
+};
+var activeBuffs = {};
+let seasonalState = { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, claimedRewards: [] };
+let leaderboardState = { personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 } };
+
+function syncGoldAlias() {
+  gold = playerCurrencies.coins;
+}
+
+function migrateSaveData(d) {
+  if (!d) return null;
+  const data = JSON.parse(JSON.stringify(d));
+  if (!data.v || data.v < 4) {
+    console.log(`[Save Migration] Upgrading schema from v${data.v || 1} -> v4`);
+    const legacyGold = typeof data.gold === 'number' ? data.gold : 0;
+    data.currencies = data.currencies || {};
+    data.currencies.coins = typeof data.currencies.coins === 'number' ? data.currencies.coins : legacyGold;
+    data.currencies.gems = typeof data.currencies.gems === 'number' ? data.currencies.gems : 0;
+    data.currencies.honor = typeof data.currencies.honor === 'number' ? data.currencies.honor : 0;
+
+    data.gold = data.currencies.coins;
+    data.quests = data.quests || {
+      mainStep: 1,
+      mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0, duels: 0 },
+      mainCompleted: [],
+      daily: [],
+      weekly: [],
+      lastDailyReset: 0,
+      lastWeeklyReset: 0
+    };
+    data.inventory = data.inventory || { ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 }, seeds: {}, scrolls: 0, cookedDishes: {} };
+    data.recipes = data.recipes || { unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap'] };
+    data.pets = data.pets || { collection: [{ id: 'dog', name: '강아지', enName: 'Puppy', level: 1, xp: 0, happiness: 100, lastDecayTime: Date.now() }], activePet: 'dog' };
+    data.activeBuffs = data.activeBuffs || {};
+    data.seasonal = data.seasonal || { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, claimedRewards: [] };
+    data.leaderboards = data.leaderboards || {
+      personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 }
+    };
+    data.v = 4;
+  }
+  return data;
+}
+
 // Collect ALL game state into ONE object
 function collectSave(){
   const hcObj={}; harvestCounts.forEach((v,k)=>hcObj[k]=v);
   const plots = sceneRef?.plots.filter(p=>p.ko)
     .map(p=>({i:p.index, ko:p.ko, sState:p.sState, plantedAt:p.plantedAt||0})) || plotSave;
   const apple = sceneRef ? { ripeAt: sceneRef.appleRipeAt, ripe: sceneRef.appleRipe } : appleTreeSave;
-  return { v:3, gold, unlockedLevels, unlockedTrophies, harvests:hcObj, srs:srsData, plots, lastLevel:currentLevelIndex, apple, fishAlbum:fishAlbumSave };
+  return {
+    v: 4,
+    currencies: playerCurrencies,
+    gold: playerCurrencies.coins,
+    unlockedLevels,
+    unlockedTrophies,
+    harvests: hcObj,
+    srs: srsData,
+    plots,
+    lastLevel: currentLevelIndex,
+    apple,
+    fishAlbum: fishAlbumSave,
+    quests: questState,
+    inventory: inventoryState,
+    recipes: recipeState,
+    pets: petState,
+    activeBuffs: activeBuffs,
+    seasonal: seasonalState,
+    leaderboards: leaderboardState
+  };
 }
+
 // Apply a save snapshot to the in-memory state
 function applySave(d){
-  if(!d||(d.v!==2 && d.v!==3)) return false;
-  gold = d.gold||0;
-  unlockedLevels = Array.isArray(d.unlockedLevels)?d.unlockedLevels:[0];
-  unlockedTrophies = Array.isArray(d.unlockedTrophies)?d.unlockedTrophies:[];
-  if(d.harvests) Object.entries(d.harvests).forEach(([k,v])=>harvestCounts.set(k,v));
-  if(d.srs) srsData = d.srs;
-  if(d.plots) plotSave = d.plots;
-  if(typeof d.lastLevel==='number') currentLevelIndex = d.lastLevel;
-  if(d.apple) appleTreeSave = d.apple;
-  if(d.fishAlbum) fishAlbumSave = d.fishAlbum;
+  if(!d) return false;
+  const migrated = migrateSaveData(d);
+  if(!migrated) return false;
+  
+  playerCurrencies = migrated.currencies || { coins: migrated.gold || 0, gems: 0, honor: 0 };
+  syncGoldAlias();
+  
+  unlockedLevels = Array.isArray(migrated.unlockedLevels) ? migrated.unlockedLevels : [0];
+  unlockedTrophies = Array.isArray(migrated.unlockedTrophies) ? migrated.unlockedTrophies : [];
+  if(migrated.harvests) Object.entries(migrated.harvests).forEach(([k,v])=>harvestCounts.set(k,v));
+  if(migrated.srs) srsData = migrated.srs;
+  if(migrated.plots) plotSave = migrated.plots;
+  if(typeof migrated.lastLevel==='number') currentLevelIndex = migrated.lastLevel;
+  if(migrated.apple) appleTreeSave = migrated.apple;
+  if(migrated.fishAlbum) fishAlbumSave = migrated.fishAlbum;
+  if(migrated.quests) questState = migrated.quests;
+  if(migrated.inventory) inventoryState = migrated.inventory;
+  if(migrated.recipes) recipeState = migrated.recipes;
+  if(migrated.pets) petState = migrated.pets;
+  if(migrated.activeBuffs) activeBuffs = migrated.activeBuffs;
+  if(migrated.seasonal) seasonalState = migrated.seasonal;
+  if(migrated.leaderboards) leaderboardState = migrated.leaderboards;
+
+  initQuestState();
+  updateCurrencyHUD();
   return true;
 }
+
 // Write to file (pywebview) AND localStorage backup
 async function persistSave(){
   const data = collectSave();
-  // localStorage backup (always works)
   try{ localStorage.setItem('hv_save_v2', JSON.stringify(data)); }catch{}
-  // File save via pywebview API (reliable across sessions)
   if(window.pywebview?.api){
     try{ await window.pywebview.api.save(data); }catch(e){ console.warn('File save failed:',e); }
   }
 }
+
 // Read from file first, then localStorage backup
 async function loadSave(){
-  // Try file first
   if(window.pywebview?.api){
     try{
       const d = await window.pywebview.api.load();
       if(d && applySave(d)){ console.log('[Save] Loaded from file ✓'); return; }
     }catch(e){ console.warn('File load failed:',e); }
   }
-  // localStorage fallback
   try{
     const s = localStorage.getItem('hv_save_v2');
     if(s && applySave(JSON.parse(s))){ console.log('[Save] Loaded from localStorage ✓'); return; }
@@ -236,33 +329,531 @@ async function loadSave(){
   console.log('[Save] No save found – fresh start.');
 }
 
-// Legacy aliases (used throughout code – now delegate to persistSave)
+// Legacy aliases
 function saveSRS()   { persistSave(); }
 function savePlotsFn() { persistSave(); }
 function saveEconomy() { persistSave(); }
-function loadSRS()   {} // no-op (loading is done once at startup by initSave)
-function loadEconomy() {} // no-op
+function loadSRS()   {}
+function loadEconomy() {}
 function getSrs(ko){ return srsData[ko]||{}; }
 function setSrs(ko,u){ srsData[ko]={...getSrs(ko),...u}; saveSRS(); }
 
-
-// ═══════════════ ECONOMY STATE ═══════════════════════════════════════════════
-let gold = 0;
+// ═══════════════ ECONOMY STATE & CURRENCY HELPERS ════════════════════════════
 let unlockedLevels = [0];  // Level indices the player has bought
 let unlockedTrophies = []; // IDs of the trophies the player has bought
 const harvestCounts = new Map(); // word.ko → how many times harvested
 
-// (Duplicate loadEconomy/saveEconomy/addGold/updateGoldHUD removed
-//  → unified save system via persistSave() at lines 130-134)
+function addCoins(amount) {
+  let finalAmt = amount;
+  if (amount > 0) {
+    if (typeof isBuffActive === 'function' && isBuffActive('coin_boost')) {
+      finalAmt = Math.round(finalAmt * 2.0);
+    }
+    if (typeof seasonalState !== 'undefined' && seasonalState?.activeSeasonId === 'childrens_day') {
+      finalAmt = Math.round(finalAmt * 2.0);
+    }
+    if (typeof isPetActive === 'function' && isPetActive('dog')) {
+      finalAmt = Math.round(finalAmt * (1.0 + 0.15 * getPetPassiveMultiplier('dog')));
+    }
+  }
+  playerCurrencies.coins = Math.max(0, playerCurrencies.coins + finalAmt);
+  syncGoldAlias();
+  persistSave();
+  updateCurrencyHUD(true);
+  checkAffordablePacks();
+}
+
+function addGems(amount) {
+  let finalGems = amount;
+  if (amount > 0 && typeof seasonalState !== 'undefined' && seasonalState?.activeSeasonId === 'seollal') {
+    finalGems += 1;
+  }
+  playerCurrencies.gems = Math.max(0, playerCurrencies.gems + finalGems);
+  syncGoldAlias();
+  persistSave();
+  updateCurrencyHUD(true);
+  showToast(`💎 Earned +${finalGems} Gem${finalGems > 1 ? 's' : ''}!`);
+}
+
+function addHonor(amount) {
+  let finalHonor = amount;
+  if (amount > 0 && typeof seasonalState !== 'undefined' && seasonalState?.activeSeasonId === 'chuseok') {
+    finalHonor = Math.round(finalHonor * 1.5);
+  }
+  playerCurrencies.honor = Math.max(0, playerCurrencies.honor + finalHonor);
+  syncGoldAlias();
+  persistSave();
+  updateCurrencyHUD(true);
+  showToast(`🎖️ Earned +${finalHonor} Honor!`);
+  checkQuestProgress('honor', { total: playerCurrencies.honor });
+  if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
+}
+
+function spendCoins(amount) {
+  if (playerCurrencies.coins >= amount) {
+    playerCurrencies.coins -= amount;
+    syncGoldAlias();
+    persistSave();
+    updateCurrencyHUD();
+    return true;
+  }
+  return false;
+}
+
+function spendGems(amount) {
+  if (playerCurrencies.gems >= amount) {
+    playerCurrencies.gems -= amount;
+    syncGoldAlias();
+    persistSave();
+    updateCurrencyHUD();
+    return true;
+  }
+  return false;
+}
+
+function addGold(amount) {
+  addCoins(amount);
+}
+
+function updateCurrencyHUD(pop = false) {
+  const el = document.getElementById('gold-val');
+  if (el) el.textContent = playerCurrencies.coins;
+  const bg = document.getElementById('shop-gold-val');
+  if (bg) bg.textContent = playerCurrencies.coins;
+  const tz = document.getElementById('trophy-gold-val');
+  if (tz) tz.textContent = playerCurrencies.coins;
+
+  const gVal = document.getElementById('gems-val');
+  if (gVal) gVal.textContent = playerCurrencies.gems;
+  const hVal = document.getElementById('honor-val');
+  if (hVal) hVal.textContent = playerCurrencies.honor;
+
+  if (pop) {
+    const hg = document.getElementById('hud-gold');
+    if (hg) { hg.classList.add('pop'); setTimeout(() => hg.classList.remove('pop'), 300); }
+  }
+}
+
+function updateGoldHUD(pop = false) {
+  updateCurrencyHUD(pop);
+}
+
+function checkAffordablePacks() {
+  if (levelsData && levelsData.length) {
+    const affordable = levelsData.findIndex((_, i) =>
+      !unlockedLevels.includes(i) && playerCurrencies.coins >= LEVEL_COST(i));
+    if (affordable >= 0) showToast(`💡 You can afford "${levelsData[affordable].name}"! Visit 🏪 Shop!`);
+  }
+}
+
+// ═══════════════ R2: KOREAN-GATED PROGRESSION & HARD LOCKS ════════════════════
+function calcLevelMastery(levelIdx) {
+  if (!levelsData || !levelsData[levelIdx] || !levelsData[levelIdx].words) return 0;
+  const words = levelsData[levelIdx].words;
+  if (words.length === 0) return 100;
+  let mastered = 0;
+  words.forEach(w => {
+    if ((harvestCounts.get(w.ko) || 0) >= 3) mastered++;
+  });
+  return Math.floor((mastered / words.length) * 100);
+}
+
+function isZoneUnlocked(zoneKey) {
+  const reqs = {
+    arcade:  { reqLevel: 0, minPct: 80, name: levelsData[0]?.name || 'Level 1: Basic Nouns' },
+    fishing: { reqLevel: 1, minPct: 80, name: levelsData[1]?.name || 'Level 2: Animals' },
+    dungeon: { reqLevel: 2, minPct: 80, name: levelsData[2]?.name || 'Level 3: Colors' },
+    duel:    { reqLevel: 3, minPct: 80, name: levelsData[3]?.name || 'Level 4: Family' }
+  };
+  const req = reqs[zoneKey];
+  if (!req) return { unlocked: true };
+  const pct = calcLevelMastery(req.reqLevel);
+  return { unlocked: pct >= req.minPct, pct, targetPct: req.minPct, reqName: req.name };
+}
+
+function showHardLockToast(zoneKey) {
+  const check = isZoneUnlocked(zoneKey);
+  playChiptuneSFX('quiz_wrong');
+  showToast(`🔒 HARD LOCK: Reach ${check.targetPct}% SRS Mastery in ${check.reqName}! (Current: ${check.pct}%)`, 4000);
+}
+
+// ═══════════════ R2: SHOP PURCHASE QUIZ GATE ══════════════════════════════════
+let shopQuizState = { targetIdx: null, questions: [], currentQ: 0, correctCount: 0 };
+
+function startShopQuizGate(idx) {
+  const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
+  const pool = allWords.length >= 4 ? allWords : (levelsData[0]?.words || []);
+
+  const shuffled = Phaser.Utils.Array.Shuffle([...pool]);
+  const questions = shuffled.slice(0, 3).map(target => {
+    const distractors = pool.filter(w => w.ko !== target.ko);
+    Phaser.Utils.Array.Shuffle(distractors);
+    const options = [target, ...distractors.slice(0, 3)];
+    Phaser.Utils.Array.Shuffle(options);
+    return { target, options };
+  });
+
+  shopQuizState = { targetIdx: idx, questions, currentQ: 0, correctCount: 0 };
+  playerLocked = true;
+  document.getElementById('shop-quiz-overlay').classList.add('visible');
+  renderShopQuizQuestion();
+}
+
+function renderShopQuizQuestion() {
+  const q = shopQuizState.questions[shopQuizState.currentQ];
+  if (!q) return;
+
+  const ind = document.getElementById('sq-step-indicator');
+  if (ind) ind.textContent = `Question ${shopQuizState.currentQ + 1} of 3`;
+  const wKo = document.getElementById('sq-word-ko');
+  if (wKo) wKo.textContent = q.target.ko;
+
+  const grid = document.getElementById('sq-options-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  q.options.forEach((opt) => {
+    const btn = document.createElement('button');
+    btn.className = 'duel-option-btn';
+    btn.textContent = opt.en;
+    btn.onclick = () => answerShopQuiz(opt.ko === q.target.ko);
+    grid.appendChild(btn);
+  });
+}
+
+function answerShopQuiz(isCorrect) {
+  if (isCorrect) {
+    playChiptuneSFX('quiz_correct');
+    shopQuizState.correctCount++;
+    shopQuizState.currentQ++;
+    if (shopQuizState.currentQ >= 3) {
+      document.getElementById('shop-quiz-overlay').classList.remove('visible');
+      playerLocked = false;
+      const targetIdx = shopQuizState.targetIdx;
+      if (_doLevelPurchase(targetIdx)) {
+        const lsOverlay = document.getElementById('level-select-overlay');
+        if (lsOverlay && !lsOverlay.classList.contains('hidden')) {
+          buildLevelSelectScreen();
+        }
+        const shopOverlay = document.getElementById('shop-overlay');
+        if (shopOverlay && shopOverlay.classList.contains('visible')) {
+          buildShopGrid();
+          closeShop();
+          setTimeout(() => startLevel(targetIdx), 300);
+        }
+      }
+    } else {
+      renderShopQuizQuestion();
+    }
+  } else {
+    playChiptuneSFX('quiz_wrong');
+    document.getElementById('shop-quiz-overlay').classList.remove('visible');
+    playerLocked = false;
+    showToast(`❌ Quiz Gate Failed! 0 Coins deducted. Practice in farm to unlock!`, 4000);
+  }
+}
+
+function cancelShopQuizGate() {
+  document.getElementById('shop-quiz-overlay').classList.remove('visible');
+  playerLocked = false;
+  showToast('Purchase challenge cancelled.');
+}
+
+// ═══════════════ R2: BOSS ENTRANCE GATE CHALLENGE ═════════════════════════════
+let bossGateState = { type: null, questions: [], currentQ: 0, callback: null };
+
+function startBossGateChallenge(type, questionsCount, onCompleteCallback) {
+  const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
+  const pool = allWords.length >= 4 ? allWords : (levelsData[0]?.words || []);
+
+  const shuffled = Phaser.Utils.Array.Shuffle([...pool]);
+  const questions = shuffled.slice(0, questionsCount).map(target => {
+    const distractors = pool.filter(w => w.ko !== target.ko);
+    Phaser.Utils.Array.Shuffle(distractors);
+    const options = [target, ...distractors.slice(0, 3)];
+    Phaser.Utils.Array.Shuffle(options);
+    return { target, options };
+  });
+
+  bossGateState = { type, questions, currentQ: 0, callback: onCompleteCallback };
+  playerLocked = true;
+  document.getElementById('boss-gate-overlay').classList.add('visible');
+  const tit = document.getElementById('bg-title');
+  if (tit) tit.textContent = type === 'dungeon' ? 'DUNGEON BOSS ENTRANCE GATE' : 'GRAND NECROMANCER ENTRANCE GATE';
+  renderBossGateQuestion();
+}
+
+function renderBossGateQuestion() {
+  const q = bossGateState.questions[bossGateState.currentQ];
+  if (!q) return;
+
+  const ind = document.getElementById('bg-step-indicator');
+  if (ind) ind.textContent = `Gate Challenge ${bossGateState.currentQ + 1} of ${bossGateState.questions.length}`;
+  const wKo = document.getElementById('bg-word-ko');
+  if (wKo) wKo.textContent = q.target.ko;
+
+  const grid = document.getElementById('bg-options-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  q.options.forEach((opt) => {
+    const btn = document.createElement('button');
+    btn.className = 'duel-option-btn';
+    btn.textContent = opt.en;
+    btn.onclick = () => answerBossGate(opt.ko === q.target.ko);
+    grid.appendChild(btn);
+  });
+}
+
+function answerBossGate(isCorrect) {
+  if (isCorrect) {
+    playChiptuneSFX('quiz_correct');
+    bossGateState.currentQ++;
+    if (bossGateState.currentQ >= bossGateState.questions.length) {
+      document.getElementById('boss-gate-overlay').classList.remove('visible');
+      playerLocked = false;
+      if (bossGateState.callback) bossGateState.callback(true);
+    } else {
+      renderBossGateQuestion();
+    }
+  } else {
+    playChiptuneSFX('quiz_wrong');
+    document.getElementById('boss-gate-overlay').classList.remove('visible');
+    playerLocked = false;
+    showToast(`❌ Entrance Gate Challenge Failed! Defeat review minions to try again.`, 4000);
+    if (bossGateState.callback) bossGateState.callback(false);
+  }
+}
+
+function cancelBossGate() {
+  document.getElementById('boss-gate-overlay').classList.remove('visible');
+  playerLocked = false;
+  showToast('Retreated from Entrance Gate.');
+}
+
+// ═══════════════ R2: QUEST SYSTEM ═════════════════════════════════════════════
+let questOverlayOpen = false;
+let activeQuestTab = 'main';
+
+let questState = {
+  mainStep: 1,
+  mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0, duels: 0 },
+  mainCompleted: [],
+  daily: [],
+  weekly: [],
+  lastDailyReset: 0,
+  lastWeeklyReset: 0
+};
+
+const MAIN_STORYLINE = [
+  { act: 1, id: 'act_1', title: 'Act I: Harvest of Hangeul', desc: 'Harvest 3 ripe words in farm. Reach 80% SRS Mastery in Level 1 (Basic Nouns).', target: 3, reqLevel: 0, minPct: 80, rCoins: 100, rGems: 10, rHonor: 50 },
+  { act: 2, id: 'act_2', title: 'Act II: Beast Master', desc: 'Defeat 5 Dungeon beasts. Reach 80% SRS Mastery in Level 2 (Animals).', target: 5, reqLevel: 1, minPct: 80, rCoins: 150, rGems: 15, rHonor: 75 },
+  { act: 3, id: 'act_3', title: 'Act III: Bonds of Hangeul', desc: 'Win 3 Spell Duels. Reach 80% SRS Mastery in Level 4 (Family).', target: 3, reqLevel: 3, minPct: 80, rCoins: 200, rGems: 20, rHonor: 100 },
+  { act: 4, id: 'act_4', title: 'Act IV: Chromatic Angler', desc: 'Catch 5 fish in Crystal Pond. Reach 80% SRS Mastery in Level 3 (Colors).', target: 5, reqLevel: 2, minPct: 80, rCoins: 250, rGems: 25, rHonor: 125 },
+  { act: 5, id: 'act_5', title: 'Act V: Numeric Dominion', desc: 'Score 500+ in Arcade Machine. Reach 80% SRS Mastery in Level 6 (Numbers).', target: 500, reqLevel: 5, minPct: 80, rCoins: 300, rGems: 30, rHonor: 150 },
+  { act: 6, id: 'act_6', title: 'Act VI: Grand Sovereign', desc: 'Defeat Grand Necromancer Boss with 100% SRS Mastery across all levels.', target: 1, reqLevel: 0, minPct: 100, rCoins: 500, rGems: 50, rHonor: 300 }
+];
+
+function initQuestState() {
+  const now = Date.now();
+  const DAY_MS = 24 * 3600 * 1000;
+  const WEEK_MS = 7 * DAY_MS;
+
+  if (!questState.lastDailyReset || now - questState.lastDailyReset > DAY_MS) {
+    questState.lastDailyReset = now;
+    questState.daily = [
+      { id: 'dq_1', title: '🌾 Daily Harvest', desc: 'Harvest 3 ripe crops in your farm.', current: 0, target: 3, rCoins: 30, rGems: 2, rHonor: 10, claimed: false },
+      { id: 'dq_2', title: '📖 Daily Scholar', desc: 'Answer 5 SRS review quizzes correctly.', current: 0, target: 5, rCoins: 40, rGems: 3, rHonor: 15, claimed: false },
+      { id: 'dq_3', title: '⚔️ Daily Explorer', desc: 'Defeat 2 monsters or catch 2 fish.', current: 0, target: 2, rCoins: 50, rGems: 5, rHonor: 20, claimed: false }
+    ];
+  }
+
+  if (!questState.lastWeeklyReset || now - questState.lastWeeklyReset > WEEK_MS) {
+    questState.lastWeeklyReset = now;
+    questState.weekly = [
+      { id: 'wq_1', title: '🟣 Master Scholar', desc: 'Master 5 Korean words (harvest count >= 5).', current: 0, target: 5, rCoins: 150, rGems: 15, rHonor: 50, claimed: false },
+      { id: 'wq_2', title: '⚡ Arena Champion', desc: 'Win 3 Spell Duels.', current: 0, target: 3, rCoins: 200, rGems: 20, rHonor: 60, claimed: false },
+      { id: 'wq_3', title: '🎣 Master Angler', desc: 'Catch 10 fish in Crystal Pond.', current: 0, target: 10, rCoins: 180, rGems: 18, rHonor: 55, claimed: false }
+    ];
+  }
+}
+
+function checkQuestProgress(type, data = {}) {
+  initQuestState();
+  if (type === 'harvest') {
+    questState.mainProgress.harvests += (data.count || 1);
+    questState.daily.forEach(q => { if (q.id === 'dq_1') q.current = Math.min(q.target, q.current + (data.count || 1)); });
+  } else if (type === 'quiz') {
+    questState.daily.forEach(q => { if (q.id === 'dq_2') q.current = Math.min(q.target, q.current + 1); });
+  } else if (type === 'kill') {
+    questState.mainProgress.kills += (data.count || 1);
+    questState.daily.forEach(q => { if (q.id === 'dq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
+  } else if (type === 'fish') {
+    questState.mainProgress.fish += (data.count || 1);
+    questState.daily.forEach(q => { if (q.id === 'dq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
+    questState.weekly.forEach(q => { if (q.id === 'wq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
+  } else if (type === 'duel') {
+    questState.mainProgress.duels += (data.count || 1);
+    questState.weekly.forEach(q => { if (q.id === 'wq_2') q.current = Math.min(q.target, q.current + (data.count || 1)); });
+  } else if (type === 'score') {
+    if (data.score > questState.mainProgress.score) questState.mainProgress.score = data.score;
+  }
+
+  let totalMastered = 0;
+  harvestCounts.forEach((count) => { if (count >= 5) totalMastered++; });
+  questState.weekly.forEach(q => { if (q.id === 'wq_1') q.current = Math.min(q.target, totalMastered); });
+
+  persistSave();
+  if (questOverlayOpen) renderQuestList();
+}
+
+function openQuestOverlay() {
+  playChiptuneSFX('click');
+  initQuestState();
+  questOverlayOpen = playerLocked = true;
+  document.getElementById('quest-overlay').classList.add('visible');
+  renderQuestList();
+}
+
+function closeQuestOverlay() {
+  playChiptuneSFX('click');
+  questOverlayOpen = playerLocked = false;
+  document.getElementById('quest-overlay').classList.remove('visible');
+}
+
+function switchQuestTab(tab) {
+  playChiptuneSFX('click');
+  activeQuestTab = tab;
+  ['main', 'daily', 'weekly'].forEach(t => {
+    const btn = document.getElementById(`qtab-${t}`);
+    if (btn) btn.classList.toggle('active', t === tab);
+  });
+  renderQuestList();
+}
+
+function renderQuestList() {
+  const container = document.getElementById('quest-list-container');
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (activeQuestTab === 'main') {
+    const act = MAIN_STORYLINE.find(a => a.act === questState.mainStep) || MAIN_STORYLINE[MAIN_STORYLINE.length - 1];
+    const isCompleted = questState.mainCompleted.includes(act.id);
+
+    let curr = 0;
+    if (act.act === 1) curr = questState.mainProgress.harvests;
+    else if (act.act === 2) curr = questState.mainProgress.kills;
+    else if (act.act === 3) curr = questState.mainProgress.duels;
+    else if (act.act === 4) curr = questState.mainProgress.fish;
+    else if (act.act === 5) curr = questState.mainProgress.score;
+    else if (act.act === 6) curr = questState.mainProgress.duels >= 1 ? 1 : 0;
+
+    const srsPct = calcLevelMastery(act.reqLevel);
+    const reqMet = curr >= act.target && srsPct >= act.minPct;
+
+    const card = document.createElement('div');
+    card.className = 'quest-card' + (isCompleted ? ' completed' : '');
+    card.innerHTML = `
+      <div class="quest-card-header">
+        <span class="quest-card-title">${act.title}</span>
+        <span class="quest-card-badge">${isCompleted ? 'COMPLETED' : `SRS Mastery ${srsPct}% / ${act.minPct}%`}</span>
+      </div>
+      <div class="quest-card-desc">${act.desc}</div>
+      <div class="quest-progress-bg">
+        <div class="quest-progress-fill" style="width:${Math.min(100, Math.floor((curr / act.target) * 100))}%"></div>
+      </div>
+      <div class="quest-progress-text">Progress: ${curr} / ${act.target}</div>
+      <div class="quest-rewards-row">
+        <div class="quest-reward-tags">
+          <span>🪙 +${act.rCoins}</span>
+          <span>💎 +${act.rGems}</span>
+          <span>🎖️ +${act.rHonor}</span>
+        </div>
+        ${isCompleted ? '<span style="color:var(--neon-green);font-weight:bold">✅ Claimed</span>' :
+          `<button class="quest-claim-btn" ${reqMet ? '' : 'disabled'} onclick="claimMainQuest(${act.act})">Claim Rewards</button>`}
+      </div>
+    `;
+    container.appendChild(card);
+  } else {
+    const list = activeQuestTab === 'daily' ? questState.daily : questState.weekly;
+    list.forEach(q => {
+      const card = document.createElement('div');
+      card.className = 'quest-card' + (q.claimed ? ' completed' : '');
+      const pct = Math.min(100, Math.floor((q.current / q.target) * 100));
+      card.innerHTML = `
+        <div class="quest-card-header">
+          <span class="quest-card-title">${q.title}</span>
+          <span class="quest-card-badge">${q.claimed ? 'CLAIMED' : `${pct}%`}</span>
+        </div>
+        <div class="quest-card-desc">${q.desc}</div>
+        <div class="quest-progress-bg">
+          <div class="quest-progress-fill" style="width:${pct}%"></div>
+        </div>
+        <div class="quest-progress-text">Progress: ${q.current} / ${q.target}</div>
+        <div class="quest-rewards-row">
+          <div class="quest-reward-tags">
+            <span>🪙 +${q.rCoins}</span>
+            <span>💎 +${q.rGems}</span>
+            <span>🎖️ +${q.rHonor}</span>
+          </div>
+          ${q.claimed ? '<span style="color:var(--neon-green);font-weight:bold">✅ Claimed</span>' :
+            `<button class="quest-claim-btn" ${q.current >= q.target ? '' : 'disabled'} onclick="claimSideQuest('${activeQuestTab}', '${q.id}')">Claim Rewards</button>`}
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+}
+
+function claimMainQuest(actNum) {
+  const act = MAIN_STORYLINE.find(a => a.act === actNum);
+  if (!act || questState.mainCompleted.includes(act.id)) return;
+
+  let curr = 0;
+  if (act.act === 1) curr = questState.mainProgress.harvests;
+  else if (act.act === 2) curr = questState.mainProgress.kills;
+  else if (act.act === 3) curr = questState.mainProgress.duels;
+  else if (act.act === 4) curr = questState.mainProgress.fish;
+  else if (act.act === 5) curr = questState.mainProgress.score;
+  else if (act.act === 6) curr = questState.mainProgress.duels >= 1 ? 1 : 0;
+
+  const srsPct = calcLevelMastery(act.reqLevel);
+  if (curr < act.target || srsPct < act.minPct) {
+    showToast('⚠️ Quest requirements not met!');
+    return;
+  }
+
+  questState.mainCompleted.push(act.id);
+  if (questState.mainStep <= actNum && actNum < MAIN_STORYLINE.length) {
+    questState.mainStep = actNum + 1;
+  }
+
+  addCoins(act.rCoins);
+  addGems(act.rGems);
+  addHonor(act.rHonor);
+
+  showToast(`🎉 Main Story ${act.title} Complete! Earned rewards!`, 4000);
+  renderQuestList();
+}
+
+function claimSideQuest(tab, qId) {
+  const list = tab === 'daily' ? questState.daily : questState.weekly;
+  const q = list.find(item => item.id === qId);
+  if (!q || q.claimed || q.current < q.target) return;
+
+  q.claimed = true;
+  addCoins(q.rCoins);
+  addGems(q.rGems);
+  addHonor(q.rHonor);
+
+  showToast(`🎉 Quest "${q.title}" Claimed! +${q.rCoins} Coins, +${q.rGems} Gems, +${q.rHonor} Honor!`, 4000);
+  renderQuestList();
+}
 
 const PHASE_CFG = [
   {icon:'🌱', title:'Plant Seed', dots:'●○○', reward:'',    btn:'🌱 Plant Seed'},
   {icon:'💧', title:'Water',      dots:'●●○', reward:'',    btn:'💧 Water'},
-  {icon:'🍎', title:'Harvest',    dots:'●●●', reward:'+💰', btn:'🍎 Harvest'},
+  {icon:'🍎', title:'Harvest',    dots:'●●●', reward:'+🪙', btn:'🍎 Harvest'},
 ];
 
-// ── Economy helpers ───────────────────────────────────────────────────────────
-// ── Manual Save button ────────────────────────────────────────────────────────
 function saveAllGame(){
   persistSave();
   const btn=$('save-btn');
@@ -275,30 +866,8 @@ function saveAllGame(){
   showToast('💾 Game saved successfully!', 2200);
 }
 
-
-function addGold(amount) {
-  gold += amount;
-  persistSave();
-  updateGoldHUD(true);
-  if(levelsData.length) {
-    const affordable = levelsData.findIndex((_,i) =>
-      !unlockedLevels.includes(i) && gold >= LEVEL_COST(i));
-    if(affordable >= 0) showToast(`💡 You can afford "${levelsData[affordable].name}"! Visit 🏪 Shop!`);
-  }
-}
-function updateGoldHUD(pop=false) {
-  const el = document.getElementById('gold-val');
-  if(el) el.textContent = gold;
-  const bg = document.getElementById('shop-gold-val');
-  if(bg) bg.textContent = gold;
-  const tz = document.getElementById('trophy-gold-val');
-  if(tz) tz.textContent = gold;
-  if(pop) {
-    const hg = document.getElementById('hud-gold');
-    if(hg){ hg.classList.add('pop'); setTimeout(()=>hg.classList.remove('pop'),300); }
-  }
-}
 // Run save load once pywebview is ready (or immediately if in browser)
+
 function initSave(){
   // Always try file-based load first, localStorage as fallback
   if(window.pywebview?.api){
@@ -311,6 +880,8 @@ function initSave(){
 function _afterLoad(){
   updateGoldHUD();
   buildLevelSelectScreen();
+  if (typeof initSeasonalEvents === 'function') initSeasonalEvents();
+  if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
   console.log('[Save] gold='+gold+', levels='+JSON.stringify(unlockedLevels)+', plots='+plotSave.length);
 }
 // pywebview fires this event when API is ready; otherwise we init on DOMLoaded
@@ -553,8 +1124,11 @@ function hideLevelSelect() {
   playerLocked = false;
 }
 function buyLevelFromSelect(idx) {
-  if(!_doLevelPurchase(idx)) return;
-  buildLevelSelectScreen();
+  playChiptuneSFX('click');
+  const cost = LEVEL_COST(idx);
+  if (unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return; }
+  if (playerCurrencies.coins < cost) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return; }
+  startShopQuizGate(idx);
 }
 
 // ═══════════════ START LEVEL / RESUME ═════════════════════════════════════════
@@ -618,13 +1192,11 @@ function revealQuizHint(tier){
     const rom = getRoman(currentWord.ko);
     box.innerHTML = `🔤 <b>Phiên Âm:</b> <span style="color:#67e8f9; font-weight:bold">[${rom}]</span>`;
   } else if(tier === 'chosung'){
-    if(gold < 5){ showToast('Cần 5 Vàng 💰 để mở gợi ý Phụ âm đầu!'); return; }
-    gold -= 5; persistSave(); updateGoldHUD();
+    if(!spendCoins(5)){ showToast('Need 5 Coins 🪙 for Chosung hint!'); return; }
     const ch = getChosung(currentWord.ko);
     box.innerHTML = `🔠 <b>Phụ Âm Đầu (초성):</b> <span style="color:#fde047; font-size:18px; font-weight:bold; letter-spacing:3px">${ch}</span>`;
   } else if(tier === 'fact'){
-    if(gold < 10){ showToast('Cần 10 Vàng 💰 để mở Mẹo Hán-Việt & Ngữ cảnh!'); return; }
-    gold -= 10; persistSave(); updateGoldHUD();
+    if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 for Han-Viet hint!'); return; }
     const fact = getFunFact(currentWord);
     box.innerHTML = `💡 <b>Mẹo Nhớ:</b> ${fact.vi || fact.ko || 'Từ vựng Tiếng Hàn thông dụng!'}`;
   }
@@ -740,21 +1312,18 @@ function closeShop() {
 function _doLevelPurchase(idx) {
   const cost = LEVEL_COST(idx);
   if(unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return false; }
-  if(gold < cost) { showToast(`Need ${cost} gold! You have ${gold} 💰`); return false; }
-  gold -= cost;
+  if(!spendCoins(cost)) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return false; }
   unlockedLevels.push(idx);
-  persistSave(); updateGoldHUD();
   if(sceneRef) sceneRef.refreshPlotAccess();
   showToast(`🎉 Unlocked "${levelsData[idx].name}"! Welcome to Level ${levelsData[idx].level}!`, 4500);
   return true;
 }
 function buyLevel(idx) {
   playChiptuneSFX('click');
-  if(!_doLevelPurchase(idx)) return;
-  buildShopGrid();
-  // Auto-switch to the newly bought level
-  closeShop();
-  setTimeout(() => startLevel(idx), 300);
+  const cost = LEVEL_COST(idx);
+  if (unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return; }
+  if (playerCurrencies.coins < cost) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return; }
+  startShopQuizGate(idx);
 }
 function buildShopGrid() {
   const grid = $('shop-level-grid'); grid.innerHTML = '';
@@ -1729,6 +2298,15 @@ class FarmScene extends Phaser.Scene {
     addGold(bonus);
     this._flyCoins(this.appleX, this.appleY - 30, Math.min(bonus, 8));
     this._label(this.appleX, this.appleY - 30, `+${bonus} 🍎 BONUS!`);
+
+    let yieldCount = 1;
+    if (typeof isPetActive === 'function' && isPetActive('hamster') && Math.random() < 0.30 * getPetPassiveMultiplier('hamster')) {
+      yieldCount = 2;
+      showToast(`🐹 Hamster Pouch Duplicator! Double harvest (+2 사과)!`);
+    }
+    if (typeof addIngredient === 'function') addIngredient('사과', yieldCount);
+    if (typeof addPetXP === 'function') addPetXP(10);
+
     // Start regrowth timer
     this.appleRipe    = false;
     this.appleRipeAt  = Date.now() + FarmScene.APPLE_RIPEN_MS;
@@ -1974,11 +2552,15 @@ class FarmScene extends Phaser.Scene {
     // Wizard NPC
     if(this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
       this.tweens.add({targets:this.wizardSprite,scale:{from:1.6,to:1.9},duration:120,yoyo:true,ease:'Back.Out(2)'});
+      const chk = isZoneUnlocked('duel');
+      if(!chk.unlocked){ showHardLockToast('duel'); return; }
       openSpellDuel(); return;
     }
     // Dungeon Portal
     if(this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<85){
       this.tweens.add({targets:this.portalSprite,scale:{from:1.5,to:1.8},duration:120,yoyo:true,ease:'Back.Out(2)'});
+      const chk = isZoneUnlocked('dungeon');
+      if(!chk.unlocked){ showHardLockToast('dungeon'); return; }
       this.cameras.main.fadeOut(300, 0, 0, 0);
       this.scene.pause();
       this.scene.launch('DungeonScene');
@@ -1987,6 +2569,8 @@ class FarmScene extends Phaser.Scene {
     // Fishing Dock
     if(this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
       this.tweens.add({targets:this.dockSprite,scale:{from:1.5,to:1.7},duration:120,yoyo:true,ease:'Back.Out(2)'});
+      const chk = isZoneUnlocked('fishing');
+      if(!chk.unlocked){ showHardLockToast('fishing'); return; }
       this.cameras.main.fadeOut(300, 0, 0, 0);
       this.scene.pause();
       this.scene.launch('FishingScene');
@@ -1995,6 +2579,8 @@ class FarmScene extends Phaser.Scene {
     // Arcade
     if(this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
       this.tweens.add({targets:this.arcadeSprite,scale:{from:1.5,to:1.6},duration:100,yoyo:true});
+      const chk = isZoneUnlocked('arcade');
+      if(!chk.unlocked){ showHardLockToast('arcade'); return; }
       this.cameras.main.fadeOut(300, 0, 0, 0);
       this.scene.pause();
       this.scene.launch('ArcadeScene');
@@ -2040,17 +2626,50 @@ class FarmScene extends Phaser.Scene {
       this._leaves(plot.x,plot.y-8); this._label(plot.x,plot.y,'Watered!');
       this._setState(plot,'3',ko);
     } else {
-      // P3 correct: HARVEST! Gold!
+      // P3 correct: HARVEST! Coins, Gems, Honor!
       playChiptuneSFX('harvest');
       const prev=harvestCounts.get(ko)||0;
-      const reward=Math.max(3, Math.floor(10 * Math.pow(0.85, prev)));
-      // Curve: 10→8→7→6→5→4→4→3→3→3... (smooth diminishing returns)
-      harvestCounts.set(ko,prev+1);
+      const newHarvests = prev + 1;
+      harvestCounts.set(ko, newHarvests);
+
+      // Anti-farm diminishing returns formula:
+      // Decays smoothly down to 1 coin if harvested >= 15 times
+      const reward = Math.max(1, Math.floor(10 * Math.pow(0.85, prev)));
       setSrs(ko,{p2At:null,p3At:null,harvests:(getSrs(ko).harvests||0)+1});
       plantedWords.delete(ko);
-      this._flyCoins(plot.x,plot.y,reward);
-      this._label(plot.x,plot.y,prev===0?`+${reward} GOLD! NEW!`:`+${reward} GOLD!`);
-      this.time.delayedCall(350,()=>{addGold(reward);updateVocabBook();});
+      this._sparkle(plot.x,plot.y);
+      this._label(plot.x,plot.y,prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`);
+
+      // Legendary tier mastery check (>= 10 harvests) -> +10 Honor
+      if (newHarvests === 10) {
+        addHonor(10);
+        showToast(`👑 Word "${ko}" reached Legendary Tier! +10 Honor!`, 4500);
+      }
+
+      // Quiz streak tracking: +3 Gems every 10 consecutive correct answers
+      quizStreak++;
+      if (quizStreak % 10 === 0) {
+        addGems(3);
+        showToast(`🔥 10-Quiz Perfect Streak! +3 Gems!`, 4000);
+      }
+
+      this.time.delayedCall(350,()=>{
+        addCoins(reward);
+        updateVocabBook();
+        checkQuestProgress('harvest', { count: 1 });
+        checkQuestProgress('quiz');
+
+        const cropIngredients = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근'];
+        const ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
+
+        let yieldCount = 1;
+        if (typeof isPetActive === 'function' && isPetActive('hamster') && Math.random() < 0.30 * getPetPassiveMultiplier('hamster')) {
+          yieldCount = 2;
+          showToast(`🐹 Hamster Pouch Duplicator! Double harvest (+2 ${ingName})!`);
+        }
+        if (typeof addIngredient === 'function') addIngredient(ingName, yieldCount);
+        if (typeof addPetXP === 'function') addPetXP(10);
+      });
       this._clearPlot(plot);
     }
     savePlotsFn();
@@ -2058,7 +2677,9 @@ class FarmScene extends Phaser.Scene {
 
   // Wrong answer at P3 -> regression back to P2 wilting
   regressionPlot(plot,word){
+    quizStreak = 0;
     const ko=word.ko, t=plot.index%5;
+
     setSrs(ko,{p3At:null,p2At:null}); // state '2' is enough, p2At meaningless here
     if(plot.glow){plot.glow.destroy();plot.glow=null;}
     if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
@@ -2579,6 +3200,12 @@ class ArcadeScene extends Phaser.Scene {
   }
 
   exitGame(){
+    if (typeof leaderboardState !== 'undefined' && leaderboardState.personalBests) {
+      if (this.score > (leaderboardState.personalBests.arcadeHighScore || 0)) {
+        leaderboardState.personalBests.arcadeHighScore = this.score;
+        if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
+      }
+    }
     const earned = Math.floor(this.score / 15);
     if(earned > 0){
       addGold(earned);
@@ -2776,9 +3403,26 @@ class DungeonScene extends Phaser.Scene {
   killMonster(m){
     const mx = m.x, my = m.y;
     const word = m.word;
+    const isBoss = m.isBoss;
     m.destroy();
 
     this.monstersKilled++;
+    checkQuestProgress('kill', { count: 1 });
+
+    if (isBoss) {
+      addCoins(200);
+      addGems(10);
+      addHonor(50);
+      if (this.playerHP >= 100) {
+        addGems(15);
+        showToast('🛡️ ZERO-DAMAGE DUNGEON BOSS KILL! +15 Bonus Gems!', 4500);
+      }
+      showToast('🎉 DUNGEON BOSS DEFEATED! +200 Coins, +10 Gems, +50 Honor!', 5000);
+    }
+
+    if (this.monstersKilled >= 5 && !this.bossPortal) {
+      this.spawnBossPortal();
+    }
 
     for(let i=0; i<8; i++){
       const p = this.add.rectangle(mx, my, 5, 5, 0xA855F7).setDepth(20);
@@ -2805,6 +3449,45 @@ class DungeonScene extends Phaser.Scene {
     this.lootGroup.add(loot);
   }
 
+  spawnBossPortal(){
+    if(this.bossPortal) return;
+    const portal = this.add.text(this.W/2, 100, '👑', {fontSize:'48px'}).setOrigin(0.5).setDepth(20);
+    this.physics.add.existing(portal);
+    portal.body.setSize(48, 48);
+    this.bossPortal = portal;
+
+    this.add.text(this.W/2, 140, 'BOSS CHAMBER PORTAL', {
+      fontFamily:'"Press Start 2P",monospace', fontSize:'12px', color:'#EC4899', stroke:'#000', strokeThickness:3
+    }).setOrigin(0.5).setDepth(21);
+
+    this.physics.add.overlap(this.player, portal, () => {
+      if(this.bossTriggered) return;
+      this.bossTriggered = true;
+      startBossGateChallenge('dungeon', 3, (passed) => {
+        if(passed){
+          this.spawnDungeonBoss();
+        } else {
+          this.bossTriggered = false;
+          this.spawnMonster();
+          this.spawnMonster();
+        }
+      });
+    }, null, this);
+  }
+
+  spawnDungeonBoss(){
+    if(this.bossPortal) this.bossPortal.destroy();
+    showToast('👹 KING SEJONG\'S CORRUPTED SENTINEL SPAWNED!', 4000);
+    const boss = this.add.text(this.W/2, 120, '👹', {fontSize:'64px'}).setOrigin(0.5).setDepth(30);
+    this.physics.add.existing(boss);
+    boss.body.setSize(60, 60);
+    boss.hp = 300;
+    boss.moveSpeed = 85;
+    boss.isBoss = true;
+    boss.word = { ko: '왕', en: 'King' };
+    this.monsters.add(boss);
+  }
+
   collectLoot(player, loot){
     const word = loot.word;
     if(loot.sparkle) loot.sparkle.destroy();
@@ -2813,7 +3496,7 @@ class DungeonScene extends Phaser.Scene {
     this.lootedScrolls++;
     this.lootedGold += 25;
 
-    this.goldText.setText(`💰 GOLD: ${this.lootedGold}`);
+    this.goldText.setText(`💰 COINS: ${this.lootedGold}`);
     this.scrollText.setText(`📜 SCROLLS: ${this.lootedScrolls}`);
 
     this.showLootFlashcard(word);
@@ -2867,20 +3550,29 @@ class DungeonScene extends Phaser.Scene {
   }
 
   exitDungeon(failed = false){
+    const floorReached = Math.floor((this.monstersKilled || 0) / 5) + 1;
+    if (typeof leaderboardState !== 'undefined' && leaderboardState.personalBests) {
+      if (floorReached > (leaderboardState.personalBests.dungeonMaxFloor || 0)) {
+        leaderboardState.personalBests.dungeonMaxFloor = floorReached;
+        if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
+      }
+    }
+
     if(this.lootedGold > 0){
-      addGold(this.lootedGold);
+      addCoins(this.lootedGold);
     }
 
     if(failed){
-      showToast(`💀 Defeated in Dungeon! Earned +${this.lootedGold} Gold & ${this.lootedScrolls} Vocab Scrolls!`, 4000);
+      showToast(`💀 Defeated in Dungeon! Earned +${this.lootedGold} Coins & ${this.lootedScrolls} Vocab Scrolls!`, 4000);
     } else {
-      showToast(`⚔️ Dungeon Cleared! Defeated ${this.monstersKilled} Monsters & Looted +${this.lootedGold} Gold!`, 4000);
+      showToast(`⚔️ Dungeon Cleared! Defeated ${this.monstersKilled} Monsters & Looted +${this.lootedGold} Coins!`, 4000);
     }
 
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.scene.stop();
     this.scene.resume('FarmScene');
   }
+
 }
 
 // ═══════════════ STARDEW-STYLE FISHING MINIGAME SCENE ════════════════════════
@@ -3132,15 +3824,26 @@ class FishingScene extends Phaser.Scene {
     playChiptuneSFX('quiz_correct');
     playChiptuneSFX('harvest');
     fishAlbumSave[fish.ko] = (fishAlbumSave[fish.ko] || 0) + 1;
-    addGold(35);
+    addCoins(35);
+
+    if (typeof addIngredient === 'function') addIngredient(fish.ko, 1);
+    if (typeof addPetXP === 'function') addPetXP(15);
+
+    if (fish.rarity === 'Legendary' || fish.ko === '황금물고기') {
+      addGems(5);
+      showToast(`🌟 LEGENDARY CATCH! ${fish.hint} ${fish.ko} (${fish.en})! +35 Coins & +5 Gems!`, 4500);
+    } else {
+      showToast(`🎉 Caught ${fish.hint} ${fish.ko} (${fish.en})! +35 Coins!`, 4000);
+    }
+
+    checkQuestProgress('fish', { count: 1 });
 
     if(this.bobber) this.bobber.destroy();
-
-    showToast(`🎉 Caught ${fish.hint} ${fish.ko} (${fish.en})! +35 Gold!`, 4000);
 
     this.state = 'CASTING';
     this.infoTxt.setText('🎣 Caught! Press SPACE / Click to Cast Again!');
   }
+
 
   loseFish(){
     this.state = 'CASTING';
@@ -3371,10 +4074,8 @@ window.renderTrophies = function() {
     
     if(!isBought && reqMet && canAfford) {
       div.querySelector('.trophy-buy-btn').addEventListener('click', () => {
-         gold -= t.cost;
+         if (!spendCoins(t.cost)) return;
          unlockedTrophies.push(t.id);
-         persistSave();
-         updateGoldHUD(true);
          window.renderTrophies();
          showToast('🏆 Chúc mừng! Bạn đã nhận cúp ' + t.name + '!');
       });
@@ -3417,6 +4118,21 @@ window.openSpellDuel = function(){
   }
 
   duelState.enemyIndex = Math.floor(Math.random() * DUEL_ENEMIES.length);
+
+  // If Grand Necromancer Boss (index 3), trigger 5-word Entrance Gate!
+  if (duelState.enemyIndex === 3) {
+    startBossGateChallenge('necromancer', 5, (passed) => {
+      if (passed) {
+        openSpellDuelDirect();
+      }
+    });
+    return;
+  }
+
+  openSpellDuelDirect();
+};
+
+function openSpellDuelDirect() {
   const enemy = DUEL_ENEMIES[duelState.enemyIndex];
   
   duelState.playerHP = 100;
@@ -3436,7 +4152,7 @@ window.openSpellDuel = function(){
   document.getElementById('duel-overlay').classList.add('visible');
 
   nextDuelTurn();
-};
+}
 
 function updateDuelHP(){
   const pFill = document.getElementById('duel-player-hp-fill');
@@ -3598,16 +4314,38 @@ function showDmgPopup(parentEl, text, typeClass){
 }
 
 function endDuel(victory){
+  if (typeof duelState.winStreak !== 'number') duelState.winStreak = 0;
   if(victory){
+    duelState.winStreak++;
+    if (typeof leaderboardState !== 'undefined' && leaderboardState.personalBests) {
+      if (duelState.winStreak > (leaderboardState.personalBests.duelMaxWinStreak || 0)) {
+        leaderboardState.personalBests.duelMaxWinStreak = duelState.winStreak;
+        if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
+      }
+    }
     const enemyInfo = DUEL_ENEMIES[duelState.enemyIndex];
-    const reward = enemyInfo.goldBonus + duelState.combo * 5 + Math.floor(duelState.playerHP / 2);
-    addGold(reward);
-    showToast(`⚡ VICTORY! Defeated ${enemyInfo.name}! +${reward} Gold!`, 3500);
+    const baseReward = enemyInfo.goldBonus + duelState.combo * 5 + Math.floor(duelState.playerHP / 2);
+    addCoins(baseReward);
+
+    if (duelState.enemyIndex === 3) {
+      addGems(50);
+      addHonor(100);
+      if (duelState.playerHP >= 100) {
+        addGems(15);
+        showToast('🛡️ ZERO-DAMAGE BOSS KILL! +15 Bonus Gems!', 4500);
+      }
+      showToast(`💀 GRAND NECROMANCER DEFEATED! +${baseReward} Coins, +50 Gems, +100 Honor!`, 5000);
+    } else {
+      showToast(`⚡ VICTORY! Defeated ${enemyInfo.name}! +${baseReward} Coins!`, 3500);
+    }
+    checkQuestProgress('duel', { count: 1 });
   } else {
+    duelState.winStreak = 0;
     showToast(`💀 DEFEAT! Practice more words and try again!`, 3500);
   }
   closeSpellDuel();
 }
+
 
 window.closeSpellDuel = function(){
   if(duelState.timer) clearTimeout(duelState.timer);
@@ -3631,3 +4369,990 @@ if(window.addEventListener){
     }
   });
 }
+
+// ═══════════════ R3: CRAFTING / COOKING SYSTEM & BUFFS ════════════════════════
+var KOREAN_INGREDIENTS = [
+  '배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근', '사과',
+  '연어', '고등어', '오징어', '잉어', '새우', '문어', '조개', '황금물고기'
+];
+
+var RECIPE_DB = [
+  {
+    id: 'kimchi', name: '김치', enName: 'Kimchi', icon: '🥬',
+    req: { '배추': 1, '고추': 1, '마늘': 1 },
+    buff: { type: 'coin_boost', name: '2x Coin Rate (김치 파워)', durationMs: 300000, value: 2.0 },
+    culturalFact: 'Kimchi (김치) is Korea’s national fermented dish. Kimjang (김장), the collective winter Kimchi-making tradition, is inscribed on UNESCO’s Intangible Cultural Heritage list!'
+  },
+  {
+    id: 'bibimbap', name: '비빔밥', enName: 'Bibimbap', icon: '🥗',
+    req: { '쌀': 1, '당근': 1, '콩': 1 },
+    buff: { type: 'crop_speed', name: '+50% Crop Speed (비빔밥 에너지)', durationMs: 360000, value: 0.50 },
+    culturalFact: 'Bibimbap (비빔밥) translates to "mixed rice". Famous in Jeonju, it combines vegetables and gochujang, reflecting the five traditional Korean cardinal colors (오방색).'
+  },
+  {
+    id: 'bulgogi', name: '불고기', enName: 'Bulgogi', icon: '🍖',
+    req: { '파': 1, '마늘': 1, '콩': 1 },
+    buff: { type: 'combat_damage', name: '+25% Combat Damage (불고기 힘)', durationMs: 420000, value: 0.25 },
+    culturalFact: 'Bulgogi (불고기 - "fire meat") traces back over 1,000 years to Goguryeo as maekjeok. Thinly sliced beef is marinated in soy sauce, garlic, and sesame oil.'
+  },
+  {
+    id: 'tteokbokki', name: '떡볶이', enName: 'Tteokbokki', icon: '🍢',
+    req: { '쌀': 1, '고추': 1, '파': 1 },
+    buff: { type: 'quiz_hints', name: '+1 Extra Quiz Hint (떡볶이 열정)', durationMs: 300000, value: 1 },
+    culturalFact: 'Tteokbokki (떡볶이) originated as royal court soy sauce rice cakes. The iconic spicy gochujang street-food version was created in Seoul in 1953!'
+  },
+  {
+    id: 'samgyeopsal', name: '삼겹살', enName: 'Samgyeopsal', icon: '🥓',
+    req: { '마늘': 2, '파': 1 },
+    buff: { type: 'combat_damage', name: '+25% Combat Damage (삼겹살 활력)', durationMs: 480000, value: 0.25 },
+    culturalFact: 'Samgyeopsal (삼겹살 - "three-layer pork belly") is Korea’s favorite tabletop grill dish, eaten wrapped in lettuce with grilled garlic and ssamjang paste.'
+  },
+  {
+    id: 'haemul_pajeon', name: '해물파전', enName: 'Seafood Pajeon', icon: '🥞',
+    req: { '파': 2, '오징어': 1, '새우': 1 },
+    buff: { type: 'fishing_luck', name: '+50% Fishing Luck (해물파전 행운)', durationMs: 360000, value: 0.50 },
+    culturalFact: 'Haemul Pajeon (해물파전) is a crispy green onion pancake filled with fresh squid and shrimp. Koreans famously love eating Pajeon on rainy days!'
+  },
+  {
+    id: 'japchae', name: '잡채', enName: 'Japchae', icon: '🍜',
+    req: { '당근': 1, '파': 1, '무': 1 },
+    buff: { type: 'coin_boost', name: '2x Coin Rate (잡채 잔치)', durationMs: 300000, value: 2.0 },
+    culturalFact: 'Japchae (잡채) was created in the 17th century for King Gwanghaegun. Glass noodles stir-fried with sweet carrot and veggies are served at every festive celebration.'
+  },
+  {
+    id: 'samgyetang', name: '삼계탕', enName: 'Samgyetang', icon: '🍲',
+    req: { '쌀': 1, '마늘': 2, '무': 1 },
+    buff: { type: 'crop_speed', name: '+50% Crop Speed (삼계탕 보양)', durationMs: 480000, value: 0.50 },
+    culturalFact: 'Samgyetang (삼계탕 - ginseng chicken soup) is traditional stamina food eaten during Sambok (삼복), the peak heat of summer, to "fight heat with heat" (이열치열).'
+  },
+  {
+    id: 'gimbap', name: '김밥', enName: 'Gimbap', icon: '🍱',
+    req: { '쌀': 1, '당근': 1, '무': 1 },
+    buff: { type: 'quiz_hints', name: '+1 Extra Quiz Hint (김밥 소풍)', durationMs: 300000, value: 1 },
+    culturalFact: 'Gimbap (김밥) is dried seaweed (김) rolled with rice (밥) and pickled radish. It is the quintessential Korean picnic and travel comfort food!'
+  }
+];
+
+function addIngredient(name, count = 1) {
+  inventoryState.ingredients = inventoryState.ingredients || {};
+  inventoryState.ingredients[name] = (inventoryState.ingredients[name] || 0) + count;
+  persistSave();
+}
+
+function getBuff(type) {
+  if (!activeBuffs || !activeBuffs[type]) return null;
+  if (Date.now() > activeBuffs[type].expiresAt) {
+    delete activeBuffs[type];
+    persistSave();
+    return null;
+  }
+  return activeBuffs[type];
+}
+
+function isBuffActive(type) {
+  return getBuff(type) !== null;
+}
+
+function applyBuff(type, name, durationMs, value, icon) {
+  activeBuffs[type] = {
+    name,
+    expiresAt: Date.now() + durationMs,
+    value,
+    icon
+  };
+  persistSave();
+  updateBuffHUD();
+  showToast(`✨ Active Buff: ${name}!`);
+}
+
+function updateBuffHUD() {
+  const bar = document.getElementById('active-buff-bar');
+  if (!bar) return;
+  bar.innerHTML = '';
+  const now = Date.now();
+  Object.keys(activeBuffs).forEach(type => {
+    const buff = activeBuffs[type];
+    if (now > buff.expiresAt) {
+      delete activeBuffs[type];
+      return;
+    }
+    const remSec = Math.ceil((buff.expiresAt - now) / 1000);
+    const m = Math.floor(remSec / 60);
+    const s = remSec % 60;
+    const badge = document.createElement('div');
+    badge.className = 'buff-badge';
+    badge.innerHTML = `<span>${buff.icon || '✨'}</span> <span>${m}:${String(s).padStart(2, '0')}</span>`;
+    badge.title = buff.name;
+    bar.appendChild(badge);
+  });
+}
+
+// Tick active buffs every second
+setInterval(() => {
+  if (typeof activeBuffs !== 'undefined' && Object.keys(activeBuffs).length > 0) {
+    updateBuffHUD();
+  }
+  decayPetHappiness();
+}, 1000);
+
+// Open Recipe Overlay
+window.openRecipeBook = function() {
+  playChiptuneSFX('click');
+  const overlay = document.getElementById('recipe-overlay');
+  const pantryList = document.getElementById('recipe-pantry-list');
+  const grid = document.getElementById('recipe-grid-container');
+  if (!overlay || !grid || !pantryList) return;
+
+  // Render pantry stock
+  pantryList.innerHTML = '';
+  const ingMap = inventoryState.ingredients || {};
+  const entries = Object.entries(ingMap).filter(([_, count]) => count > 0);
+  if (entries.length === 0) {
+    pantryList.innerHTML = '<span style="color:#94a3b8;">No ingredients yet. Harvest crops or catch fish!</span>';
+  } else {
+    entries.forEach(([ing, cnt]) => {
+      const tag = document.createElement('span');
+      tag.style.cssText = 'background:rgba(15,23,42,0.8); border:1px solid rgba(255,255,255,0.15); border-radius:6px; padding:3px 8px;';
+      tag.textContent = `${ing}: ×${cnt}`;
+      pantryList.appendChild(tag);
+    });
+  }
+
+  // Render Recipe Cards
+  grid.innerHTML = '';
+  RECIPE_DB.forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'recipe-card';
+    
+    let canCook = true;
+    let reqText = [];
+    Object.entries(r.req).forEach(([ing, needed]) => {
+      const have = (inventoryState.ingredients || {})[ing] || 0;
+      if (have < needed) canCook = false;
+      reqText.push(`${ing} ${have}/${needed}`);
+    });
+
+    card.innerHTML = `
+      <div class="recipe-card-icon">${r.icon}</div>
+      <div class="recipe-card-title">${r.name}</div>
+      <div class="recipe-card-sub">${r.enName}</div>
+      <div class="recipe-req-list"><b>Req:</b> ${reqText.join(', ')}</div>
+      <div class="recipe-buff-badge">⚡ ${r.buff.name}</div>
+      <div style="display:flex; gap:6px; margin-top:4px;">
+        <button class="cook-btn" style="flex:1;" ${canCook ? '' : 'disabled'} onclick="startCookingMinigame('${r.id}')">🍳 Cook</button>
+        <button class="hud-btn" style="padding:4px 8px; font-size:10px;" onclick="showCulturalFact('${r.id}')">🏺 Info</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  overlay.classList.add('visible');
+};
+
+window.closeRecipeBook = function() {
+  const overlay = document.getElementById('recipe-overlay');
+  if (overlay) overlay.classList.remove('visible');
+};
+
+// ── COOKING MINIGAME LOGIC ────────────────────────────────────────────────────
+let currentCookingRecipe = null;
+let cookingStage = 0;
+let cookingScore = 0;
+
+window.startCookingMinigame = function(recipeId) {
+  const recipe = RECIPE_DB.find(r => r.id === recipeId);
+  if (!recipe) return;
+
+  // Check ingredients
+  const ingMap = inventoryState.ingredients || {};
+  for (const [ing, needed] of Object.entries(recipe.req)) {
+    if ((ingMap[ing] || 0) < needed) {
+      showToast(`⚠️ Missing required ingredient: ${ing}!`);
+      return;
+    }
+  }
+
+  // Deduct ingredients
+  for (const [ing, needed] of Object.entries(recipe.req)) {
+    ingMap[ing] -= needed;
+  }
+  persistSave();
+
+  currentCookingRecipe = recipe;
+  cookingStage = 1;
+  cookingScore = 0;
+
+  closeRecipeBook();
+  const overlay = document.getElementById('cooking-minigame-overlay');
+  if (overlay) overlay.classList.add('visible');
+
+  renderCookingStage();
+};
+
+function renderCookingStage() {
+  const dishIcon = document.getElementById('cmg-dish-icon');
+  const dishName = document.getElementById('cmg-dish-name');
+  const stepDesc = document.getElementById('cmg-step-desc');
+  const container = document.getElementById('cmg-stage-container');
+
+  if (!currentCookingRecipe || !container) return;
+
+  dishIcon.textContent = currentCookingRecipe.icon;
+  dishName.textContent = `${currentCookingRecipe.name} (${currentCookingRecipe.enName})`;
+
+  if (cookingStage === 1) {
+    stepDesc.textContent = 'Stage 1/2: Prep Ingredients - Select the correct Korean name!';
+    const correctTarget = Object.keys(currentCookingRecipe.req)[0];
+    const choices = [correctTarget];
+    KOREAN_INGREDIENTS.forEach(ing => {
+      if (ing !== correctTarget && choices.length < 4) choices.push(ing);
+    });
+    Phaser.Utils.Array.Shuffle(choices);
+
+    container.innerHTML = `
+      <div style="font-size:16px; color:#fff; margin-bottom:12px;">Which ingredient is needed first?</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%;">
+        ${choices.map(choice => `
+          <button class="cook-btn" style="padding:12px; font-size:14px;" onclick="handleCookingStage1('${choice}', '${correctTarget}')">${choice}</button>
+        `).join('')}
+      </div>
+    `;
+  } else if (cookingStage === 2) {
+    stepDesc.textContent = 'Stage 2/2: Heat Adjustment - Click when heat is IN THE GREEN ZONE!';
+    
+    let sliderPos = 0;
+    let direction = 1;
+    container.innerHTML = `
+      <div style="font-size:14px; color:#fff; margin-bottom:12px;">Adjust Cooking Temperature (불 조절):</div>
+      <div style="width:100%; height:24px; background:#1e293b; border-radius:12px; position:relative; overflow:hidden; border:1px solid var(--neon-gold); margin-bottom:16px;">
+        <div style="position:absolute; left:40%; width:20%; height:100%; background:rgba(34,197,94,0.6);"></div>
+        <div id="heat-indicator" style="position:absolute; left:0%; width:10px; height:100%; background:#ef4444;"></div>
+      </div>
+      <button class="cook-btn" style="padding:12px 24px; font-size:12px;" id="heat-click-btn">🔥 STOP HEAT!</button>
+    `;
+
+    const indicator = document.getElementById('heat-indicator');
+    const heatBtn = document.getElementById('heat-click-btn');
+
+    const heatInterval = setInterval(() => {
+      sliderPos += direction * 4;
+      if (sliderPos >= 95) direction = -1;
+      if (sliderPos <= 0) direction = 1;
+      if (indicator) indicator.style.left = sliderPos + '%';
+    }, 30);
+
+    if (heatBtn) {
+      heatBtn.onclick = () => {
+        clearInterval(heatInterval);
+        if (sliderPos >= 40 && sliderPos <= 60) {
+          cookingScore += 50; // Perfect heat!
+          playChiptuneSFX('quiz_correct');
+        } else {
+          cookingScore += 20;
+          playChiptuneSFX('quiz_wrong');
+        }
+        finishCookingMinigame();
+      };
+    }
+  }
+}
+
+window.handleCookingStage1 = function(selected, target) {
+  if (selected === target) {
+    cookingScore += 50;
+    playChiptuneSFX('quiz_correct');
+  } else {
+    cookingScore += 10;
+    playChiptuneSFX('quiz_wrong');
+  }
+  cookingStage = 2;
+  renderCookingStage();
+};
+
+function finishCookingMinigame() {
+  closeCookingMinigame();
+
+  let grade = 'B';
+  let mult = 1.0;
+  if (cookingScore >= 90) { grade = 'S'; mult = 1.5; }
+  else if (cookingScore >= 70) { grade = 'A'; mult = 1.25; }
+  else if (cookingScore < 40) { grade = 'F'; mult = 0.5; }
+
+  const b = currentCookingRecipe.buff;
+  const duration = Math.round(b.durationMs * mult);
+  applyBuff(b.type, `${b.name} (${grade} Grade)`, duration, b.value, currentCookingRecipe.icon);
+
+  // Store cooked dish for pet feeding
+  inventoryState.cookedDishes = inventoryState.cookedDishes || {};
+  inventoryState.cookedDishes[currentCookingRecipe.id] = (inventoryState.cookedDishes[currentCookingRecipe.id] || 0) + 1;
+  persistSave();
+
+  // Add pet XP if active pet exists
+  addPetXP(20);
+
+  // Show cultural fact modal!
+  showCulturalFact(currentCookingRecipe.id, grade);
+}
+
+window.closeCookingMinigame = function() {
+  const overlay = document.getElementById('cooking-minigame-overlay');
+  if (overlay) overlay.classList.remove('visible');
+};
+
+window.showCulturalFact = function(recipeId, grade = null) {
+  const recipe = RECIPE_DB.find(r => r.id === recipeId);
+  if (!recipe) return;
+
+  const iconEl = document.getElementById('cf-icon');
+  const titleEl = document.getElementById('cf-title');
+  const textEl = document.getElementById('cf-text');
+
+  if (iconEl) iconEl.textContent = recipe.icon;
+  if (titleEl) titleEl.textContent = grade ? `Grade ${grade}! ${recipe.name} (${recipe.enName})` : `${recipe.name} (${recipe.enName})`;
+  if (textEl) textEl.textContent = recipe.culturalFact;
+
+  const overlay = document.getElementById('cultural-fact-overlay');
+  if (overlay) overlay.classList.add('visible');
+};
+
+window.closeCulturalFact = function() {
+  const overlay = document.getElementById('cultural-fact-overlay');
+  if (overlay) overlay.classList.remove('visible');
+};
+
+// ═══════════════ R4: PET COMPANION SYSTEM ═════════════════════════════════════
+var PET_DB = [
+  {
+    id: 'dog', name: '강아지', enName: 'Puppy / Dog', icon: '🐶', costGems: 10,
+    desc: 'Coin Magnet (+15% Coins) & 15% Auto-Water Crops when wilting.'
+  },
+  {
+    id: 'cat', name: '고양이', enName: 'Cat', icon: '🐱', costGems: 15,
+    desc: 'Feline Nunchi (+25% Combat Damage in Dungeon & Spell Duel).'
+  },
+  {
+    id: 'rabbit', name: '토끼', enName: 'Rabbit', icon: '🐰', costGems: 15,
+    desc: 'Rapid Hop (+50% Crop Growth Speed).'
+  },
+  {
+    id: 'hamster', name: '햄스터', enName: 'Hamster', icon: '🐹', costGems: 20,
+    desc: 'Pouch Duplicator (+30% Double Harvest on all crops & apples).'
+  },
+  {
+    id: 'parrot', name: '앵무새', enName: 'Parrot', icon: '🦜', costGems: 25,
+    desc: 'Echo Scholar (+1 Extra Free Quiz Hint & +20% Fishing Luck).'
+  }
+];
+
+function isPetActive(petId) {
+  if (!petState || petState.activePet !== petId) return false;
+  const pet = petState.collection.find(p => p.id === petId);
+  if (!pet) return false;
+  return pet.happiness > 0; // pet gives passive if happiness > 0
+}
+
+function getPetPassiveMultiplier(petId) {
+  if (!isPetActive(petId)) return 0;
+  const pet = petState.collection.find(p => p.id === petId);
+  if (!pet) return 0;
+  const happinessRatio = pet.happiness >= 50 ? 1.0 : 0.5; // reduced passive if unhappy < 50%
+  const levelBonus = 1.0 + (pet.level - 1) * 0.2; // +20% power per level
+  return happinessRatio * levelBonus;
+}
+
+function decayPetHappiness() {
+  if (!petState || !petState.collection || petState.collection.length === 0) return;
+  const now = Date.now();
+  petState.collection.forEach(pet => {
+    pet.lastDecayTime = pet.lastDecayTime || now;
+    // Decays 5% every 5 minutes (300,000 ms)
+    if (now - pet.lastDecayTime >= 300000) {
+      pet.happiness = Math.max(0, pet.happiness - 5);
+      pet.lastDecayTime = now;
+      persistSave();
+    }
+  });
+}
+
+function addPetXP(amount) {
+  if (!petState || !petState.activePet) return;
+  const pet = petState.collection.find(p => p.id === petState.activePet);
+  if (!pet) return;
+  pet.xp = (pet.xp || 0) + amount;
+  persistSave();
+}
+
+window.openPetOverlay = function() {
+  playChiptuneSFX('click');
+  const overlay = document.getElementById('pet-overlay');
+  const activeCard = document.getElementById('pet-active-card');
+  const rosterContainer = document.getElementById('pet-roster-container');
+
+  if (!overlay || !activeCard || !rosterContainer) return;
+
+  // Render Active Pet Card
+  const activePetObj = petState.collection.find(p => p.id === petState.activePet);
+  const activePetDef = activePetObj ? PET_DB.find(p => p.id === activePetObj.id) : null;
+
+  if (activePetObj && activePetDef) {
+    const maxXp = activePetObj.level * 50;
+    const xpPct = Math.min(100, Math.round((activePetObj.xp / maxXp) * 100));
+    const happyPct = activePetObj.happiness;
+
+    activeCard.innerHTML = `
+      <div style="font-size:48px;">${activePetDef.icon}</div>
+      <div style="flex:1;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-family:'Press Start 2P',monospace; font-size:14px; color:#fff;">${activePetObj.name}</span>
+          <span class="pet-card-level">Lv.${activePetObj.level}</span>
+          <span style="font-size:16px;">${happyPct >= 70 ? '😊' : happyPct >= 30 ? '😐' : '😿'}</span>
+        </div>
+        <div style="font-size:11px; color:#94a3b8; margin:4px 0;">${activePetDef.desc}</div>
+        
+        <div style="margin-top:6px;">
+          <div style="font-size:9px; color:#c084fc; margin-bottom:2px;">XP: ${activePetObj.xp} / ${maxXp}</div>
+          <div class="pet-bar-bg"><div class="pet-bar-fill-xp" style="width:${xpPct}%;"></div></div>
+        </div>
+
+        <div style="margin-top:6px;">
+          <div style="font-size:9px; color:#4ade80; margin-bottom:2px;">Happiness: ${happyPct}% ${happyPct < 50 ? '(Reduced Bonus!)' : ''}</div>
+          <div class="pet-bar-bg"><div class="pet-bar-fill-happy" style="width:${happyPct}%;"></div></div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <button class="cook-btn" onclick="feedActivePet()">🍎 Feed Dish</button>
+        ${activePetObj.xp >= maxXp ? `<button class="cook-btn" style="background:linear-gradient(135deg,#ec4899,#a855f7);" onclick="startPetLevelUpQuiz('${activePetObj.id}')">🎓 Level Up Quiz!</button>` : ''}
+      </div>
+    `;
+  } else {
+    activeCard.innerHTML = '<div style="color:#94a3b8;">No active companion equipped. Select one from the roster below!</div>';
+  }
+
+  // Render Roster Grid
+  rosterContainer.innerHTML = '';
+  PET_DB.forEach(def => {
+    const owned = petState.collection.find(p => p.id === def.id);
+    const isActive = petState.activePet === def.id;
+
+    const card = document.createElement('div');
+    card.className = `pet-card ${isActive ? 'active' : ''}`;
+    card.innerHTML = `
+      <div class="pet-card-avatar">${def.icon}</div>
+      <div class="pet-card-name">${def.name}</div>
+      <div style="font-size:11px; color:#cbd5e1;">${def.enName}</div>
+      <div class="pet-card-passive">${def.desc}</div>
+      ${owned ? `
+        <div style="font-size:10px; color:var(--neon-pink); font-weight:bold;">Lv.${owned.level} | ${owned.happiness}% 😊</div>
+        <button class="cook-btn" style="width:100%; margin-top:4px;" ${isActive ? 'disabled' : ''} onclick="equipPet('${def.id}')">${isActive ? 'Equipped' : 'Equip'}</button>
+      ` : `
+        <button class="cook-btn" style="width:100%; margin-top:4px; background:linear-gradient(135deg,#06b6d4,#0284c7);" onclick="adoptPet('${def.id}')">💎 Adopt (${def.costGems} Gems)</button>
+      `}
+    `;
+    rosterContainer.appendChild(card);
+  });
+
+  overlay.classList.add('visible');
+};
+
+window.closePetOverlay = function() {
+  const overlay = document.getElementById('pet-overlay');
+  if (overlay) overlay.classList.remove('visible');
+};
+
+window.adoptPet = function(petId) {
+  const def = PET_DB.find(p => p.id === petId);
+  if (!def) return;
+  if (!spendGems(def.costGems)) {
+    showToast(`⚠️ Need ${def.costGems} Gems to adopt ${def.name}!`);
+    return;
+  }
+
+  petState.collection.push({
+    id: def.id,
+    name: def.name,
+    enName: def.enName,
+    level: 1,
+    xp: 0,
+    happiness: 100,
+    lastDecayTime: Date.now()
+  });
+  petState.activePet = def.id;
+
+  showToast(`🎉 Adopted ${def.icon} ${def.name}! Set as active companion!`);
+  openPetOverlay();
+};
+
+window.equipPet = function(petId) {
+  petState.activePet = petId;
+  persistSave();
+  showToast(`🐾 Equipped ${petId} as active companion!`);
+  openPetOverlay();
+};
+
+window.feedActivePet = function() {
+  if (!petState || !petState.activePet) return;
+  const pet = petState.collection.find(p => p.id === petState.activePet);
+  if (!pet) return;
+
+  const dishes = inventoryState.cookedDishes || {};
+  const availableDishes = Object.entries(dishes).filter(([_, count]) => count > 0);
+
+  if (availableDishes.length === 0) {
+    // Fallback: check raw ingredients
+    const ings = inventoryState.ingredients || {};
+    const availIngs = Object.entries(ings).filter(([_, count]) => count > 0);
+
+    if (availIngs.length === 0) {
+      showToast('⚠️ No cooked dishes or ingredients to feed your pet! Cook a dish first.');
+      return;
+    }
+
+    const [ingName, cnt] = availIngs[0];
+    ings[ingName]--;
+    pet.happiness = Math.min(100, pet.happiness + 30);
+    pet.xp += 10;
+    persistSave();
+    showToast(`😋 Fed ${ingName} to ${pet.name}! (+30% Happiness, +10 XP)`);
+    openPetOverlay();
+    return;
+  }
+
+  const [dishId, cnt] = availableDishes[0];
+  const recipe = RECIPE_DB.find(r => r.id === dishId);
+  dishes[dishId]--;
+  pet.happiness = Math.min(100, pet.happiness + 50);
+  pet.xp += 25;
+  persistSave();
+
+  showToast(`😋 Fed delicious ${recipe ? recipe.name : dishId} to ${pet.name}! (+50% Happiness, +25 XP)`);
+  openPetOverlay();
+};
+
+window.startPetLevelUpQuiz = function(petId) {
+  const pet = petState.collection.find(p => p.id === petId);
+  const def = PET_DB.find(p => p.id === petId);
+  if (!pet || !def) return;
+
+  closePetOverlay();
+
+  // Create pet vocab question
+  const targetWord = { ko: def.name, en: def.enName.split('/')[0].trim() };
+  openQuiz(targetWord, null, 3);
+};
+
+// ═══════════════ R5 SEASONAL EVENTS & LOCAL LEADERBOARD SYSTEM ═════════════════
+
+const SEASONAL_EVENTS_CONFIG = {
+  chuseok: {
+    id: 'chuseok',
+    name: '추석 (Chuseok - Harvest Festival)',
+    icon: '🌾',
+    themeColor: '#f59e0b',
+    borderClass: 'neon-border-gold',
+    desc: 'Harvest Festival: Bake Songpyeon 🍡, light Lunar Lanterns 🏮, and earn +50% Bonus Honor 🏅 on Quests!',
+    buffText: '+50% Honor Rewards 🏅 on Quests & Harvests',
+    themedVocab: [
+      { ko: '추석', en: 'Chuseok (Harvest Festival)' },
+      { ko: '송편', en: 'Songpyeon (Rice Cake)' },
+      { ko: '달', en: 'Moon' },
+      { ko: '한가위', en: 'Midautumn Festival' },
+      { ko: '보름달', en: 'Full Moon' },
+      { ko: '결실', en: 'Harvest Yield' }
+    ],
+    quests: [
+      { id: 'chuseok_q1', title: '🌾 Harvest Festival Prep', desc: 'Harvest 5 crops during Chuseok', target: 5, reward: { honor: 50, coins: 100 }, icon: '🌾' },
+      { id: 'chuseok_q2', title: '🍡 Bake Songpyeon', desc: 'Cook any dish in Recipe Book', target: 1, reward: { honor: 100, gems: 10 }, icon: '🍡' },
+      { id: 'chuseok_q3', title: '🌕 Full Moon Wishes', desc: 'Earn 100 Season Points', target: 100, reward: { honor: 150, gems: 25 }, icon: '🌕' }
+    ]
+  },
+  seollal: {
+    id: 'seollal',
+    name: '설날 (Seollal - Lunar New Year)',
+    icon: '🧧',
+    themeColor: '#38bdf8',
+    borderClass: 'neon-border-cyan',
+    desc: 'Lunar New Year: Cook Tteokguk 🥣, perform Sebae 🙇‍♂️ bowing, and earn Bonus Gems 💎!',
+    buffText: '+1 Bonus Gem 💎 on Quests & Minigames',
+    themedVocab: [
+      { ko: '설날', en: 'Seollal (Lunar New Year)' },
+      { ko: '떡국', en: 'Tteokguk (Rice Cake Soup)' },
+      { ko: '세배', en: 'Sebae (New Year Bow)' },
+      { ko: '복주머니', en: 'Lucky Pouch' },
+      { ko: '덕담', en: 'New Year Blessing' },
+      { ko: '연날리기', en: 'Kite Flying' }
+    ],
+    quests: [
+      { id: 'seollal_q1', title: '🥣 New Year Tteokguk', desc: 'Cook 1 dish in Recipe Book', target: 1, reward: { gems: 15, coins: 150 }, icon: '🥣' },
+      { id: 'seollal_q2', title: '🙇‍♂️ Sebae Bowing', desc: 'Complete 3 Korean Quizzes correctly', target: 3, reward: { gems: 25, honor: 50 }, icon: '🙇‍♂️' },
+      { id: 'seollal_q3', title: '🧧 Lucky Pouch Collector', desc: 'Earn 100 Season Points', target: 100, reward: { gems: 50, honor: 200 }, icon: '🧧' }
+    ]
+  },
+  childrens_day: {
+    id: 'childrens_day',
+    name: '어린이날 (Children\'s Day - May 5th)',
+    icon: '🎈',
+    themeColor: '#f43f5e',
+    borderClass: 'neon-border-pink',
+    desc: 'Children\'s Day: Play Dalgona minigame 🍭, unlock Balloon Auras 🎈 & enjoy 2x Coins 🪙 rate!',
+    buffText: '2x Coins 🪙 Rate from all activities',
+    themedVocab: [
+      { ko: '어린이', en: 'Child / Children' },
+      { ko: '달고나', en: 'Dalgona Candy' },
+      { ko: '풍선', en: 'Balloon' },
+      { ko: '장난감', en: 'Toy' },
+      { ko: '선물', en: 'Gift / Present' },
+      { ko: '동심', en: 'Childlike Innocence' }
+    ],
+    quests: [
+      { id: 'childrens_q1', title: '🍭 Dalgona Challenge', desc: 'Complete 3 Quizzes without hints', target: 3, reward: { coins: 300, honor: 30 }, icon: '🍭' },
+      { id: 'childrens_q2', title: '🎈 Balloon Party', desc: 'Earn 200 Coins from activities', target: 200, reward: { coins: 500, gems: 15 }, icon: '🎈' },
+      { id: 'childrens_q3', title: '🧸 Happy Companion', desc: 'Feed your Pet companion 1 time', target: 1, reward: { gems: 30, honor: 100 }, icon: '🧸' }
+    ]
+  }
+};
+
+let currentLeaderboardTab = 'vocab';
+
+function initSeasonalEvents() {
+  if (typeof seasonalState === 'undefined' || !seasonalState) {
+    seasonalState = { activeSeasonId: 'chuseok', seasonPoints: 0, claimedRewards: [] };
+  }
+  if (!seasonalState.activeSeasonId || !SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId]) {
+    seasonalState.activeSeasonId = 'chuseok';
+  }
+  updateSeasonalBanner();
+}
+
+function updateSeasonalBanner() {
+  const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId] || SEASONAL_EVENTS_CONFIG.chuseok;
+  const bannerEl = document.getElementById('event-banner');
+  if (!bannerEl) return;
+
+  bannerEl.style.borderColor = cfg.themeColor;
+  const iconEl = document.getElementById('eb-icon');
+  if (iconEl) iconEl.textContent = cfg.icon;
+  const titleEl = document.getElementById('eb-title');
+  if (titleEl) {
+    titleEl.textContent = cfg.name;
+    titleEl.style.color = cfg.themeColor;
+  }
+  const descEl = document.getElementById('eb-desc');
+  if (descEl) descEl.textContent = cfg.buffText;
+  const ptsEl = document.getElementById('eb-pts-val');
+  if (ptsEl) ptsEl.textContent = seasonalState.seasonPoints || 0;
+
+  bannerEl.style.display = 'flex';
+}
+
+function cycleSeasonalEvent() {
+  const seasons = ['chuseok', 'seollal', 'childrens_day'];
+  const curIdx = seasons.indexOf(seasonalState.activeSeasonId);
+  const nextIdx = (curIdx + 1) % seasons.length;
+  seasonalState.activeSeasonId = seasons[nextIdx];
+
+  const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId];
+  showToast(`🎉 Festival Changed to ${cfg.name}!`, 3500);
+  persistSave();
+  updateSeasonalBanner();
+  const modal = document.getElementById('seasonal-overlay');
+  if (modal && modal.classList.contains('visible')) {
+    openSeasonalOverlay();
+  }
+}
+
+function openSeasonalOverlay() {
+  initSeasonalEvents();
+  const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId];
+  if (!cfg) return;
+
+  const iconEl = document.getElementById('so-icon');
+  if (iconEl) iconEl.textContent = cfg.icon;
+  const titleEl = document.getElementById('so-title');
+  if (titleEl) {
+    titleEl.textContent = cfg.name;
+    titleEl.style.color = cfg.themeColor;
+  }
+  const subEl = document.getElementById('so-subtitle');
+  if (subEl) subEl.textContent = cfg.desc;
+
+  const buffTextEl = document.getElementById('so-buff-text');
+  if (buffTextEl) buffTextEl.textContent = cfg.buffText;
+
+  const ptsEl = document.getElementById('so-pts-display');
+  if (ptsEl) ptsEl.textContent = `${seasonalState.seasonPoints || 0} ⭐`;
+
+  // Render Quests
+  const qListContainer = document.getElementById('so-quests-list');
+  if (qListContainer) {
+    qListContainer.innerHTML = '';
+    cfg.quests.forEach(q => {
+      const isClaimed = (seasonalState.claimedRewards || []).includes(q.id);
+      const qCard = document.createElement('div');
+      qCard.style.cssText = 'background:rgba(30,41,59,0.7); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center;';
+      
+      let rewardStr = '';
+      if (q.reward.coins) rewardStr += `🪙+${q.reward.coins} `;
+      if (q.reward.gems) rewardStr += `💎+${q.reward.gems} `;
+      if (q.reward.honor) rewardStr += `🎖️+${q.reward.honor} `;
+
+      qCard.innerHTML = `
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:24px">${q.icon}</span>
+          <div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:#fff">${q.title}</div>
+            <div style="font-size:11px; color:#cbd5e1; margin-top:2px">${q.desc}</div>
+            <div style="font-size:10px; color:var(--neon-gold); margin-top:4px">Reward: ${rewardStr} +50 Pts ⭐</div>
+          </div>
+        </div>
+        <button class="eb-btn" ${isClaimed ? 'disabled style="opacity:0.5;cursor:default;"' : `onclick="claimSeasonalQuest('${q.id}')"`}>
+          ${isClaimed ? 'Claimed ✓' : 'Claim Reward'}
+        </button>
+      `;
+      qListContainer.appendChild(qCard);
+    });
+  }
+
+  // Render Themed Vocabulary Flashcards
+  const vGridContainer = document.getElementById('so-vocab-grid');
+  if (vGridContainer) {
+    vGridContainer.innerHTML = '';
+    cfg.themedVocab.forEach(v => {
+      const vCard = document.createElement('div');
+      vCard.className = 'seasonal-vocab-card';
+      vCard.innerHTML = `
+        <div style="font-family:'Noto Sans KR',sans-serif; font-size:18px; font-weight:bold; color:var(--neon-gold);">${v.ko}</div>
+        <div style="font-size:11px; color:#e2e8f0; margin-top:4px;">${v.en}</div>
+      `;
+      vGridContainer.appendChild(vCard);
+    });
+  }
+
+  const modal = document.getElementById('seasonal-overlay');
+  if (modal) modal.classList.add('visible');
+}
+
+function closeSeasonalOverlay() {
+  const modal = document.getElementById('seasonal-overlay');
+  if (modal) modal.classList.remove('visible');
+}
+
+function claimSeasonalQuest(questId) {
+  const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId];
+  if (!cfg) return;
+
+  const quest = cfg.quests.find(q => q.id === questId);
+  if (!quest) return;
+
+  if (!seasonalState.claimedRewards) seasonalState.claimedRewards = [];
+  if (seasonalState.claimedRewards.includes(questId)) return;
+
+  seasonalState.claimedRewards.push(questId);
+  seasonalState.seasonPoints = (seasonalState.seasonPoints || 0) + 50;
+
+  if (quest.reward.coins) addCoins(quest.reward.coins);
+  if (quest.reward.gems) addGems(quest.reward.gems);
+  if (quest.reward.honor) addHonor(quest.reward.honor);
+
+  persistSave();
+  showToast(`🎉 Claimed Quest Reward: ${quest.title}! (+50 Event Pts ⭐)`);
+  updateSeasonalBanner();
+  openSeasonalOverlay();
+  updateLeaderboardMetrics();
+}
+
+// ══════════════ LOCAL LEADERBOARD SYSTEM ═════════════════════════════════════
+
+const LOCAL_RIVALS = [
+  { name: 'Min-jun (민준)', title: 'Valley Veteran 🌾', words: 24, honor: 850, cookingTier: 'Sous Chef 🍲', petsPct: 80, arcade: 1450, dungeon: 8, duelStreak: 7 },
+  { name: 'Seo-yeon (서연)', title: 'Hansik Scholar 👑', words: 18, honor: 620, cookingTier: 'Apprentice Chef 👨‍🍳', petsPct: 60, arcade: 1100, dungeon: 6, duelStreak: 5 },
+  { name: 'Ji-hoon (지훈)', title: 'Spell Duelist ⚡', words: 12, honor: 450, cookingTier: 'Novice Cook 🍳', petsPct: 40, arcade: 850, dungeon: 4, duelStreak: 4 },
+  { name: 'Ha-eun (하은)', title: 'Pet Companion 🎨', words: 8, honor: 280, cookingTier: 'Novice Cook 🍳', petsPct: 40, arcade: 520, dungeon: 2, duelStreak: 2 }
+];
+
+function computeCookingTier() {
+  const dishes = inventoryState?.cookedDishes || {};
+  const totalCooked = Object.values(dishes).reduce((a, b) => a + b, 0);
+  if (totalCooked >= 50) return 'Grand Hansik Master 👑';
+  if (totalCooked >= 30) return 'Master Chef 🌟';
+  if (totalCooked >= 15) return 'Sous Chef 🍲';
+  if (totalCooked >= 5) return 'Apprentice Chef 👨‍🍳';
+  return 'Novice Cook 🍳';
+}
+
+function computeCookingTierScore(tierStr) {
+  if (!tierStr) return 0;
+  if (tierStr.includes('Grand')) return 500;
+  if (tierStr.includes('Master Chef')) return 300;
+  if (tierStr.includes('Sous Chef')) return 150;
+  if (tierStr.includes('Apprentice')) return 50;
+  return 10;
+}
+
+function updateLeaderboardMetrics() {
+  if (typeof leaderboardState === 'undefined' || !leaderboardState) leaderboardState = { personalBests: {} };
+  if (!leaderboardState.personalBests) leaderboardState.personalBests = {};
+
+  // Total Words Mastered (words with >= 5 harvests)
+  let masteredCount = 0;
+  if (typeof harvestCounts !== 'undefined' && harvestCounts) {
+    harvestCounts.forEach((count) => {
+      if (count >= 5) masteredCount++;
+    });
+  }
+
+  leaderboardState.personalBests.totalWordsMastered = masteredCount;
+  leaderboardState.personalBests.totalHonor = playerCurrencies?.honor || 0;
+  leaderboardState.personalBests.highestCookingTier = computeCookingTier();
+  
+  const petCount = (petState?.collection || []).length;
+  leaderboardState.personalBests.petCollectionPct = Math.round((petCount / 5) * 100);
+
+  if (typeof leaderboardState.personalBests.arcadeHighScore !== 'number') {
+    leaderboardState.personalBests.arcadeHighScore = 0;
+  }
+  if (typeof leaderboardState.personalBests.dungeonMaxFloor !== 'number') {
+    leaderboardState.personalBests.dungeonMaxFloor = 0;
+  }
+  if (typeof leaderboardState.personalBests.duelMaxWinStreak !== 'number') {
+    leaderboardState.personalBests.duelMaxWinStreak = 0;
+  }
+
+  persistSave();
+}
+
+function openLeaderboard(tab = 'vocab') {
+  updateLeaderboardMetrics();
+
+  // Render Personal Best Grid
+  const pbGrid = document.getElementById('lb-pb-grid');
+  if (pbGrid) {
+    const pb = leaderboardState.personalBests;
+    pbGrid.innerHTML = `
+      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">📖 Words Mastered: <b style="color:var(--neon-gold)">${pb.totalWordsMastered}</b></div>
+      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🎖️ Total Honor: <b style="color:var(--neon-gold)">${pb.totalHonor}</b></div>
+      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🍳 Cooking Tier: <b style="color:var(--neon-gold)">${pb.highestCookingTier}</b></div>
+      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🐾 Pets Collected: <b style="color:var(--neon-gold)">${pb.petCollectionPct}%</b></div>
+      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">👾 Arcade Score: <b style="color:var(--neon-gold)">${pb.arcadeHighScore}</b></div>
+      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🗡️ Dungeon Floor: <b style="color:var(--neon-gold)">Floor ${pb.dungeonMaxFloor}</b></div>
+      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">⚡ Duel Streak: <b style="color:var(--neon-gold)">${pb.duelMaxWinStreak} Wins</b></div>
+    `;
+  }
+
+  switchLeaderboardTab(tab);
+
+  const modal = document.getElementById('leaderboard-overlay');
+  if (modal) modal.classList.add('visible');
+}
+
+function closeLeaderboard() {
+  const modal = document.getElementById('leaderboard-overlay');
+  if (modal) modal.classList.remove('visible');
+}
+
+function switchLeaderboardTab(tabId) {
+  currentLeaderboardTab = tabId;
+
+  const tabBtns = document.querySelectorAll('.lb-tab-btn');
+  tabBtns.forEach(btn => {
+    if (btn.id === `lbtab-${tabId}` || btn.getAttribute('onclick')?.includes(`'${tabId}'`)) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  const pb = leaderboardState.personalBests;
+  const playerEntry = {
+    name: 'Player (Hero Player) 🌟',
+    title: 'Hangeul Learner',
+    words: pb.totalWordsMastered || 0,
+    honor: pb.totalHonor || 0,
+    cookingTier: pb.highestCookingTier || 'Novice Cook 🍳',
+    petsPct: pb.petCollectionPct || 20,
+    arcade: pb.arcadeHighScore || 0,
+    dungeon: pb.dungeonMaxFloor || 0,
+    duelStreak: pb.duelMaxWinStreak || 0,
+    isPlayer: true
+  };
+
+  const allEntries = [...LOCAL_RIVALS, playerEntry];
+
+  // Sort based on active tab
+  allEntries.sort((a, b) => {
+    if (tabId === 'vocab') return b.words - a.words;
+    if (tabId === 'honor') return b.honor - a.honor;
+    if (tabId === 'cooking') return computeCookingTierScore(b.cookingTier) - computeCookingTierScore(a.cookingTier);
+    if (tabId === 'pets') return b.petsPct - a.petsPct;
+    if (tabId === 'arcade') return b.arcade - a.arcade;
+    if (tabId === 'dungeon') return b.dungeon - a.dungeon;
+    if (tabId === 'duel') return b.duelStreak - a.duelStreak;
+    return 0;
+  });
+
+  let valColHeader = 'Score';
+  if (tabId === 'vocab') valColHeader = 'Words Mastered (>=5 Harvests)';
+  if (tabId === 'honor') valColHeader = 'Total Honor 🏅';
+  if (tabId === 'cooking') valColHeader = 'Cooking Rank';
+  if (tabId === 'pets') valColHeader = 'Pet Collection %';
+  if (tabId === 'arcade') valColHeader = 'Arcade High Score';
+  if (tabId === 'dungeon') valColHeader = 'Dungeon Max Floor';
+  if (tabId === 'duel') valColHeader = 'Spell Duel Win Streak';
+
+  let html = `
+    <table class="lb-table">
+      <thead>
+        <tr>
+          <th style="width:10%">Rank</th>
+          <th style="width:35%">Valley Resident</th>
+          <th style="width:25%">Title</th>
+          <th style="width:30%">${valColHeader}</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  allEntries.forEach((entry, idx) => {
+    let rankBadge = `${idx + 1}`;
+    if (idx === 0) rankBadge = '🥇 1st';
+    if (idx === 1) rankBadge = '🥈 2nd';
+    if (idx === 2) rankBadge = '🥉 3rd';
+
+    let displayVal = '';
+    if (tabId === 'vocab') displayVal = `${entry.words} words`;
+    if (tabId === 'honor') displayVal = `${entry.honor} Honor 🏅`;
+    if (tabId === 'cooking') displayVal = entry.cookingTier;
+    if (tabId === 'pets') displayVal = `${entry.petsPct}%`;
+    if (tabId === 'arcade') displayVal = `${entry.arcade} pts`;
+    if (tabId === 'dungeon') displayVal = `Floor ${entry.dungeon}`;
+    if (tabId === 'duel') displayVal = `${entry.duelStreak} Win Streak`;
+
+    const rowClass = entry.isPlayer ? 'class="lb-row-player"' : '';
+
+    html += `
+      <tr ${rowClass}>
+        <td style="font-family:'Press Start 2P',monospace; font-size:10px">${rankBadge}</td>
+        <td>${entry.name}</td>
+        <td style="color:#94a3b8">${entry.title}</td>
+        <td style="font-weight:bold; color:var(--neon-gold)">${displayVal}</td>
+      </tr>
+    `;
+  });
+
+  html += `
+      </tbody>
+    </table>
+  `;
+
+  const container = document.getElementById('lb-table-container');
+  if (container) container.innerHTML = html;
+}
+
+// Global window exports for HTML event bindings
+window.openSeasonalOverlay = openSeasonalOverlay;
+window.closeSeasonalOverlay = closeSeasonalOverlay;
+window.cycleSeasonalEvent = cycleSeasonalEvent;
+window.claimSeasonalQuest = claimSeasonalQuest;
+window.openLeaderboard = openLeaderboard;
+window.closeLeaderboard = closeLeaderboard;
+window.switchLeaderboardTab = switchLeaderboardTab;

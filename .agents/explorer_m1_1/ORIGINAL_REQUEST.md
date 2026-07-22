@@ -1,13 +1,14 @@
-## 2026-07-22T08:45:48Z
+## 2026-07-22T09:57:32Z
+You are Explorer 1 (teamwork_preview_explorer).
+Your working directory is `C:/VibeCode/Hangeul Valley/.agents/explorer_m1_1/`.
 
-You are Explorer 1 for Milestone 1 (Codebase Analysis).
-Working Directory: C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\
-Project Root: C:\VibeCode\Hangeul Valley
+Task: Investigate `C:/VibeCode/Hangeul Valley/game.js`, `save_data.json`, and `index.html` for Economy Refactoring (R1) & Save Persistence.
 
-Tasks:
-1. Examine `index.html` and `game.js` to analyze existing HUD and Modal structures (Shop, Vocab Book, Quiz, Level Select, Fish Album).
-2. Identify CSS styles, DOM element IDs/classes, and Phaser UI code currently managing these modals and HUD.
-3. Identify how retro 64-bit glassmorphic styling, neon glows, responsive layouts, and pixel art details can be integrated into `index.html` and `game.js`.
-4. Produce a detailed handoff report in `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_1\analysis.md` and send a summary message back to orchestrator.
+Instructions:
+1. Search and map all instances of currency (`gold`, `playerData.gold`, reward calculations, shop item costs) across all 7 Phaser scenes in `game.js`.
+2. Analyze current diminishing returns, reward functions, and spending sinks.
+3. Inspect `save_data.json` and save/load logic (`saveGame`, `loadGame`, pywebview API, localStorage).
+4. Propose the exact save schema refactor to add Coins (동전), Gems (보석), Honor (명예), quest progress, ingredient inventory, unlocked recipes, pet collection, active pet, seasonal events, and leaderboard records while keeping 100% backward compatibility for existing save files (e.g. migrating `gold` -> `coins`).
+5. Write your complete analysis and recommendations to `C:/VibeCode/Hangeul Valley/.agents/explorer_m1_1/handoff.md`.
 
-Do NOT modify game code or files outside your working directory.
+Send your final summary to orchestrator via `send_message`.

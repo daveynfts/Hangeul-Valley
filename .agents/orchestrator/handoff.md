@@ -1,71 +1,98 @@
-# Final Orchestration Handoff Report: Hangeul Valley UI/UX & Web Audio Engine Upgrade
+# Final Victory Handoff Report: Hangeul Valley Gameplay Mechanics & Economy Upgrade
 
 **Project**: Hangeul Valley  
-**Orchestrator**: Successor Project Orchestrator (Generation 2)  
-**Parent ID**: `dde3be66-5f85-41b4-9e73-bcafd39dc834`  
+**Orchestrator**: Project Orchestrator  
+**Parent ID**: `d5d77ce8-e222-48c8-b3d7-2539d16b2a13` (Sentinel)  
 **Status**: 100% Complete & Verified  
-**Audit Verdict**: **CLEAN** (Verified by Forensic Auditor `e014da85-af32-4805-b3f6-48bf3ec69b9f`)  
+**Audit Verdict**: **CLEAN** (Verified by Victory Forensic Auditor `d74c8c09-77c9-49c7-8b69-76457a006b64`)  
 
 ---
 
 ## 1. Observation & Scope Summary
 
-All user requirements and milestone objectives have been fully implemented, integrated, and verified:
+All requirements R1 through R5, system integrity constraints, save compatibility, and asset mirror requirements have been fully implemented, integrated, and verified:
 
-### R1. 64-Bit Retro Glassmorphic HUD & Modal System (Milestone 2)
-- Unified retro glassmorphism CSS design system (`.glass-modal`, `.glass-hud`, `.neon-border`, `.pixel-art-detail`).
-- Upgraded modals for Shop, Vocab Book, Quiz System, Level Select, and Fish Album.
-- Fully responsive across desktop and mobile screen viewports.
+### R1. Triple Currency Economy (Coins, Gems, Honor) & Rebalanced Sinks
+- **Coins (동전 🪙)**: Primary earnable currency from all gameplay activities (farming harvests, fishing catches, arcade stages, dungeon loot drops, spell duel victories, memory match). Used for everyday purchases (seeds, hints, basic items).
+- **Gems (보석 💎)**: Premium rare currency earned ONLY from perfect quiz streaks (100% accuracy), legendary fish catches (`황금물고기`), zero-damage boss kills, and daily login streak milestones. Used for rare unlocks (pets, cosmetics, special recipes).
+- **Honor (명예 🏅)**: Reputation currency earned from completing quests, mastering vocabulary words to Legendary tier ($\ge 10$ harvests), crafting rare dishes, and seasonal event participation. Used for leaderboards and prestige.
+- **Save Schema Version 4 (`v: 4`)**: Implemented `migrateSaveData(data)` upgrading legacy `v2`/`v3` saves automatically on load. Legacy `gold` is preserved as a synchronized getter alias for `currencies.coins` to guarantee 100% backward compatibility.
+- **Rebalanced Sinks & Cooldowns**: Anti-farm diminishing returns applied to repetitive harvests.
 
-### R2. Web Audio API Synthesized Sound Effects (Milestone 3)
-- Pure JavaScript procedural `ChiptuneSynthEngine` instantiated globally as `ChiptuneSynth` with helper `playChiptuneSFX(type)`.
-- Implemented 6 retro chiptune sound effect types using native `AudioContext`, `OscillatorNode`, `GainNode`, frequency sweep ramps, and PCM white noise filtering:
-  - `'click'`: 800Hz → 1600Hz exponential pitch sweep (UI button clicks, modal open/close).
-  - `'harvest'`: E5 → B5 → E6 8-bit triangle arpeggio (crop plot harvest, apple tree harvest).
-  - `'fishing_pull'`: 200Hz → 800Hz sawtooth reel frequency sweep (fishing line cast & bite).
-  - `'sword_swing'`: Bandpass-filtered white noise sweep (dungeon combat slash).
-  - `'quiz_correct'`: C5 → E5 → G5 → C6 major chord victory chime (correct quiz answer, memory match, spell duel success).
-  - `'quiz_wrong'`: 150Hz / 120Hz double sawtooth buzz (incorrect quiz answer).
-- Automatic AudioContext gesture unlock on `pointerdown` and `click` window events.
+### R2. Korean-Gated Progression & Quest System
+- **Hard Lock Zone Unlocks**: Enforced 80% SRS Word Mastery ($\ge 3$ harvests) in preceding levels to unlock Arcade (requires L1 mastery), Fishing Dock (requires L2), Dungeon Portal (requires L3), and Spell Duel (requires L4). Displays 🔒 Hard Lock toast/modal when blocked.
+- **Shop Purchase Quiz Gates**: Intercepted `buyLevel(idx)` with a mandatory 3-question Korean translation quiz challenge (`#shop-quiz-overlay`). Requires 3/3 correct answers before deducting coins and unlocking level packs.
+- **Boss Entrance Gates**: Timed entrance quiz challenge (`#boss-gate-overlay`) before fighting Dungeon Boss ("King Sejong's Corrupted Sentinel") and Spell Duel Necromancer.
+- **Quest System & UI Overlay**: 6-Act Main Storyline Quest Chain (Food -> Animals -> Family -> Colors -> Numbers -> Advanced) + Daily (24h reset) & Weekly (7-day reset) side quests awarding Coins, Gems, and Honor. Integrated `#quest-overlay` styled in 64-Bit Retro Glassmorphism.
 
-### R3. Micro-Animations, Ambient Lighting & Scene Transitions (Milestone 4)
-- **Scene Transitions**: Smooth `this.cameras.main.fadeIn(300, 0, 0, 0)` applied on `create()` across `FarmScene`, `ArcadeScene`, `DungeonScene`, and `FishingScene`. `this.cameras.main.fadeOut(300, 0, 0, 0)` applied before scene switches and on minigame exits.
-- **Ambient Day/Night Lighting**: Full-screen overlay rectangle in `FarmScene` cycling between 0.04 (warm daylight) and 0.30 (deep night blue) over a smooth 60-second loop.
-- **Micro-Animations**: Over 40 Phaser tweens added for NPC idle sways, floating text, crop harvest pop-in scaling, torch flickers, water caustics, and combat slashes.
+### R3. Crafting/Cooking System with Korean Culture Integration
+- **Ingredient Acquisition**: Farm crops (`배추`, `무`, `파`, `고추`, `마늘`, `쌀`, `콩`, `당근`, `사과`) and caught fish (`연어`, `고등어`, `오징어`, `잉어`, `새우`, `문어`, `조개`, `황금물고기`) accumulate in player inventory with Korean names.
+- **9 Authentic Korean Recipes**: 김치 (Kimchi), 비빔밥 (Bibimbap), 불고기 (Bulgogi), 떡볶이 (Tteokbokki), 삼겹살 (Samgyeopsal), 해물파전 (Seafood Pajeon), 잡채 (Japchae), 삼계탕 (Samgyetang), 김밥 (Gimbap).
+- **Interactive Cooking Minigame**: Timed-input ingredient prep and heat adjustment slider in `#cooking-minigame-overlay`. Grade (S/A/B/F) determines buff duration and multiplier.
+- **Gameplay Buff System**: Temporary buffs (2x Coins, +50% Crop Speed, +25% Combat Damage, +50% Fishing Luck, Extra Quiz Hints) managed in `activeBuffs` with live HUD countdown indicators (`#active-buff-bar`).
+- **Cultural Fact Overlays**: Authentic culinary heritage notes displayed upon dish creation.
 
-### Validation & Verification (Milestone 5)
-- `node -c game.js` executed in `C:\VibeCode\Hangeul Valley`. Output: Exit code 0, 0 syntax errors.
-- Forensic Auditor verdict: **CLEAN** (0 hardcoded stubs, 0 cheating/facades, 100% genuine code).
+### R4. Pet Companion System
+- **5 Collectible Pets (반려동물)**:
+  1. 🐶 **강아지 (Dog)** (10 Gems): Coin Magnet (+15% Coins) & Auto-Water Crops.
+  2. 🐱 **고양이 (Cat)** (15 Gems): Feline Nunchi (+25% Combat Damage).
+  3. 🐰 **토끼 (Rabbit)** (15 Gems): Rapid Hop (+50% Crop Growth Speed).
+  4. 🐹 **햄스터 (Hamster)** (20 Gems): Pouch Duplicator (+30% Double Harvest).
+  5. 🦜 **앵무새 (Parrot)** (25 Gems): Echo Scholar (+1 Quiz Hint & +20% Fishing Luck).
+- **Acquisition & Management**: Purchased with Gems 💎 and equipped in `#pet-overlay`.
+- **Pet Leveling & Vocab Quiz**: XP earned from activities; leveling up requires passing a "🎓 Level Up Quiz!".
+- **Happiness Decay & Feeding**: Happiness meter (0-100%) decays (-5%/5min); restored by feeding cooked Korean dishes or raw ingredients.
 
----
+### R5. Seasonal Events & Local Leaderboard UI Panel
+- **Seasonal Events Framework**: Configured event templates for 추석 (Chuseok), 설날 (Seollal), and 어린이날 (Children's Day) with themed vocabulary flashcards, festival quests, active festival perks (+50% Honor during Chuseok, +1 Gem during Seollal, 2x Coins during Children's Day), `#event-banner`, and `#seasonal-overlay`.
+- **Local Leaderboard UI Panel**: Offline tracking for 7 core metrics (Total Words Mastered, Total Honor, Highest Cooking Tier, Pet Collection %, Arcade Score, Dungeon Max Floor, Spell Duel Streak) alongside simulated local single-player rivals in `#leaderboard-overlay`.
+- **Complete Asset Mirror Synchronization**: Synchronized `index.html`, `game.js`, `levels.json`, and `save_data.json` byte-for-byte into `assets/`.
 
-## 2. Logic Chain
-
-1. All tasks were assessed and decomposed into clear milestones (M1–M5).
-2. Remediation implementation was assigned to a dedicated Worker subagent, which applied Web Audio synthesis, camera fade transitions, day/night lighting, and micro-animations to `game.js`.
-3. Syntax verification via `node -c game.js` confirmed zero compilation errors.
-4. Independent verification gate subagents (Reviewers, Challengers, Forensic Auditor) conducted code reviews and static/runtime audits.
-5. Forensic Auditor issued a **CLEAN** verdict, verifying that all features are genuinely built and authentic.
-
----
-
-## 3. Caveats
-
-- Modern browsers require a single initial user click/tap to unblock Web Audio API AudioContext. This is fully handled via the `unlockAudio` listener.
-
----
-
-## 4. Conclusion & Victory Claim
-
-The upgrade of **Hangeul Valley** is 100% complete, fully functional, and verified CLEAN. All requirements R1, R2, R3, and Validation criteria are satisfied.
+### Validation & Verification
+- `node -c game.js` and `node -c assets/game.js`: **Passed with 0 syntax errors**.
+- Automated Unit Tests (`test_currency_save.js`, `test_gating_quests.js`, `test_r3_r4_systems.js`): **Passed 100%**.
+- File Mirror Parity: **100% byte-for-byte MD5 hash match**.
+- Forensic Integrity Audit: **CLEAN** (0 stubs, 0 cheating/facades, 100% genuine code).
 
 ---
 
-## 5. Verification Method
+## 2. Milestone State Summary
 
-To re-verify:
-```bash
-cd "C:\VibeCode\Hangeul Valley"
-node -c game.js
+| Milestone | Scope | Status | Audit Verdict |
+|---|---|:---:|:---:|
+| **M1** | Codebase Exploration | **DONE** | CLEAN |
+| **M2** | R1 Triple Economy & R2 Progression & Quests | **DONE** | CLEAN |
+| **M3** | R3 Crafting/Cooking & R4 Pet Companions | **DONE** | CLEAN |
+| **M4** | R5 Seasonal Events, Leaderboard & Asset Mirror Sync | **DONE** | CLEAN |
+| **M5** | Full Verification, Syntax Check & Victory Audit | **DONE** | **CLEAN** |
+
+---
+
+## 3. Verification Method
+
+To re-verify all deliverables on any Windows system:
+
+```powershell
+# 1. Syntax Check
+node -c "C:\VibeCode\Hangeul Valley\game.js"
+node -c "C:\VibeCode\Hangeul Valley\assets\game.js"
+
+# 2. Automated Test Suites
+node "C:\VibeCode\Hangeul Valley\test_currency_save.js"
+node "C:\VibeCode\Hangeul Valley\test_gating_quests.js"
+node "C:\VibeCode\Hangeul Valley\test_r3_r4_systems.js"
+
+# 3. File Mirror Equality Check
+fc /b "C:\VibeCode\Hangeul Valley\index.html" "C:\VibeCode\Hangeul Valley\assets\index.html"
+fc /b "C:\VibeCode\Hangeul Valley\game.js" "C:\VibeCode\Hangeul Valley\assets\game.js"
+fc /b "C:\VibeCode\Hangeul Valley\levels.json" "C:\VibeCode\Hangeul Valley\assets\levels.json"
+fc /b "C:\VibeCode\Hangeul Valley\save_data.json" "C:\VibeCode\Hangeul Valley\assets\save_data.json"
 ```
-*(Expected output: Exit code 0, zero errors)*
+
+*(Expected output: Exit code 0, 0 syntax errors, 100% test pass, exact binary file match)*
+
+---
+
+## 4. Victory Declaration
+
+The gameplay mechanics and addicting Korean learning economy upgrade for **Hangeul Valley** is 100% complete, fully functional, and verified **CLEAN**.

@@ -1,10 +1,13 @@
-## 2026-07-22T08:53:58Z
-You are Challenger 1 for Milestone 2 (R1: 64-Bit Retro Glassmorphic HUD & Modal Design System).
-Working Directory: C:\VibeCode\Hangeul Valley\.agents\challenger_m2_1\
-Project Root: C:\VibeCode\Hangeul Valley
+## 2026-07-22T17:02:23+07:00
+You are Challenger M2-1 (teamwork_preview_challenger).
+Your working directory is `C:/VibeCode/Hangeul Valley/.agents/challenger_m2_1/`.
 
-Tasks:
-1. Empirically verify `index.html` CSS syntax and `game.js` execution validity.
-2. Run `node -c game.js` and verify node output.
-3. Check DOM modal structural integrity in `index.html` for missing closing tags, broken CSS selectors, or invalid attributes.
-4. Document test findings in `C:\VibeCode\Hangeul Valley\.agents\challenger_m2_1\handoff.md` and send a summary message back to orchestrator.
+Task: Perform code-executing stress testing of save migration, currency transactions, and syntax integrity.
+
+Actions:
+1. Run syntax check: `node -c "C:/VibeCode/Hangeul Valley/game.js"` and `node -c "C:/VibeCode/Hangeul Valley/assets/game.js"`.
+2. Write and run a test script (`test_currency_save.js`) to verify:
+   - Migration of legacy `v3` save to `v4` populates `currencies.coins = gold`, `gems = 0`, `honor = 0`.
+   - `addCoins`, `addGems`, `addHonor`, `spendCoins`, `spendGems` accurately update `playerCurrencies` and maintain `gold` alias.
+3. Write your report to `C:/VibeCode/Hangeul Valley/.agents/challenger_m2_1/handoff.md`.
+Send your final summary to orchestrator via `send_message`.

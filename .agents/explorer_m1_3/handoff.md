@@ -1,85 +1,137 @@
-# Handoff Report: Explorer 3 (Milestone 1)
-
-**Working Directory**: `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_3\`  
-**Date**: 2026-07-22  
-
----
+# Handoff Report — Explorer 3: R3, R4, R5 & 64-Bit Retro Glassmorphism UI Analysis
 
 ## 1. Observation
 
-1. **Phaser Scene Structure in `game.js`**:
-   - `game.js:882`: `class FarmScene extends Phaser.Scene` — Main hub scene (`sceneRef = this`), managing tilemaps, 15 plot slots, 7 interactables/NPCs, SRS growth timers, and Apple Tree.
-   - `game.js:2082`: `class ArcadeScene extends Phaser.Scene` — Retro space shooter minigame with boss fight (`👾 King Hangeul Alien`), bullet-hell patterns, powerups, and Hangeul word-orb shield mechanics.
-   - `game.js:2463`: `class DungeonScene extends Phaser.Scene` — Top-down ARPG dungeon crawler with WASD movement, mouse slash combat (`⚔️`), monster wave spawning, and Vocab Scroll `📜` loot flashcards.
-   - `game.js:2753`: `class FishingScene extends Phaser.Scene` — Stardew-style tension fishing minigame (`CASTING` → `WAITING` → `REELING` → `CATCH_QUIZ`) and Fish Album dictionary (`fishAlbumSave`).
-   - `game.js:3057-3067`: Phaser configuration object: `scene: [FarmScene, ArcadeScene, DungeonScene, FishingScene]`, `render: { pixelArt: true, roundPixels: true }`, `physics: { default: 'arcade' }`.
+### Codebase & System Inspection
+1. **Project Directory Layout**:
+   - `game.js` (3,634 lines, 169,935 bytes): Contains Phaser 3 main config and scenes (`FarmScene`, `ArcadeScene`, `DungeonScene`, `FishingScene`), Web Audio synthesizer (`ChiptuneSynthEngine`), global state management (`gold`, `unlockedLevels`, `srsData`, `plotSave`, `harvestCounts`, `fishAlbumSave`), save/load functions (`persistSave()`, `loadSave()`), and overlay UI handlers (`openShop()`, `openVocabBook()`, `openSpellDuel()`, `openMemoryGame()`, `openFishAlbum()`, `openTrophies()`).
+   - `index.html` (1,319 lines, 71,692 bytes): Contains 64-bit retro glassmorphism CSS design system (`:root` variables, CRT scanline overlay `#overlay::before`, `.glass-modal`, `.glass-hud`, `.neon-border`, `.pixel-art-detail`), Google Web Fonts (`Be Vietnam Pro`, `Nunito`, `Noto Sans KR`, `Press Start 2P`, `VT323`), and DOM overlay containers (`#level-select-overlay`, `#hud`, `#quiz-backdrop`, `#vocab-overlay`, `#shop-overlay`, `#fish-album-overlay`, `#trophy-overlay`, `#duel-overlay`, `#memory-overlay`, `#vocab-ff-modal`, `#cat-dialog`).
+   - `main.py` (127 lines): PyWebView desktop wrapper serving local HTTP server on port 8742 from `BASE_DIR`. Provides `GameSaveAPI` class exposing `window.pywebview.api.save(data)` and `window.pywebview.api.load()` for JSON save persistence to `save_data.json`.
+   - `save_data.json` (633 bytes): Persisted save state containing version `v: 3`, `gold`, `unlockedLevels`, `unlockedTrophies`, `harvests`, `srs`, `plots`, `lastLevel`, `apple`, and `fishAlbum`.
+   - `assets/`: Contains mirrored copies of `game.js`, `index.html`, and `levels.json`. Currently lacks `save_data.json` and active automated synchronization scripts.
 
-2. **Scene Transition Code**:
-   - `game.js:1859-1875`: Transitions from `FarmScene` to sub-scenes use `this.scene.pause()` followed by `this.scene.launch('DungeonScene' | 'FishingScene' | 'ArcadeScene')`.
-   - `game.js:2457-2458`, `2747-2748`, `3022-3023`: Returning to `FarmScene` uses `this.scene.stop()` followed by `this.scene.resume('FarmScene')`.
-   - Observation: Currently no camera fade-in or fade-out effects are attached to scene transitions; switching is instantaneous.
-
-3. **Lighting Mechanisms**:
-   - `game.js:1299-1301`: `FarmScene` uses a static orange fill overlay (`vignette.fillStyle(0xFF9900, 0.04)`) for sunbeams.
-   - `game.js:2479-2483`: `DungeonScene` uses basic circular yellow fills under 4 corner torches (`0.15` alpha).
-   - `game.js:2765-2769`: `FishingScene` uses polygon rays for sunlight caustics (`0.08` to `0.18` alpha tween).
-   - Observation: No global dynamic day/night phase system exists.
-
-4. **Micro-Animations**:
-   - Existing: Sine yoyo hover on NPCs (`y - 4`), flower angle sway (`-6` to `6`), butterfly texture toggle (`bf_open`/`bf_flap`), walk step dust puffs, crop sparkles/leaves/coins, target highlight corner brackets, torch flame scale pulse.
-   - Missing Opportunities: Player idle breathing wobble, UI button hover elasticity (`scale: 1.08`), crop ripe shimmer gleams, parabolic gold coin flight paths, NPC proximity emote bubbles, water ripple rings.
+2. **Ingredient Acquisition Mechanics**:
+   - **Crops (`FarmScene`)**: 15 farm plot slots (3x5 grid). 5 crop sprite types (`cr_{t}_1`, `cr_{t}_2`, `cr_{t}_3`). Harvesting occurs when crops reach Phase 3 (Ripe `'4'`). Yields gold and harvested word counts recorded in `harvestCounts` Map. Apple Tree (`apple_tree_ripe`) yields apples + gold on a 2-minute regrowth cycle.
+   - **Fish (`FishingScene`)**: 8 fish species defined in `FISH_DB`:
+     - 연어 (*Salmon*, Common, 🍣)
+     - 고등어 (*Mackerel*, Common, 🐟)
+     - 오징어 (*Squid*, Rare, 🦑)
+     - 잉어 (*Carp*, Rare, 🎏)
+     - 새우 (*Shrimp*, Common, 🦐)
+     - 문어 (*Octopus*, Epic, 🐙)
+     - 조개 (*Clam*, Common, 🐚)
+     - 황금물고기 (*Golden Fish*, Legendary, 🌟)
+   - Catching mechanism: Sinewave fish motion in a tension bar meter, keep fish in green zone using `SPACE`/click hold, fill catch meter, complete a 4-choice Korean vocabulary quiz to store fish in `fishAlbumSave`.
 
 ---
 
 ## 2. Logic Chain
 
-```
-Observation 1: game.js registers 4 Phaser.Scene classes with FarmScene as primary hub, using scene.pause()/launch() and stop()/resume().
-      │
-      ▼
-Observation 2: Scene transition calls execute instantly without camera fade effects, causing hard visual pops when entering/exiting minigames.
-      │
-      ▼
-Logic Step 1: Implementing a reusable transitionScene(fromScene, targetKey, mode, color, duration) utility using Phaser's cameras.main.fadeOut() and cameras.main.fadeIn() will provide smooth 300ms transitions without breaking scene pause/resume state.
-      │
-      ▼
-Observation 3: Lighting is currently hardcoded static graphics layers per scene.
-      │
-      ▼
-Logic Step 2: Adding a screen-space ambient overlay rectangle (_updateAmbientLighting) in FarmScene that interpolates colors across 4 phases (Dawn, Day, Dusk, Night) using Phaser.Display.Color.Interpolate will create a soothing day/night environment.
-      │
-      ▼
-Observation 4: Existing micro-animations exist for basic NPCs, but key game-feel touchpoints (idle player, button hovers, ripe crops, harvest bursts) are static.
-      │
-      ▼
-Logic Step 3: Cataloging specific micro-animations (Idle breath wobble, button elastic bounce, crop shimmer gleam, harvest radial bursts, emote bubbles) gives implementers clear, high-impact targets.
-      │
-      ▼
-Conclusion: Comprehensive codebase analysis is complete and documented in analysis.md and handoff.md, ready for subsequent implementation milestones.
-```
+### 2.1 Crafting/Cooking System Architecture (R3)
+- **Ingredient Acquisition Pipeline**:
+  - Crops from `FarmScene`: 배추 (Napa Cabbage), 무 (Radish), 파 (Green Onion), 고추 (Chili), 마늘 (Garlic), 쌀 (Rice), 콩 (Soybean), 당근 (Carrot), 사과 (Apple).
+  - Fish from `FishingScene`: 연어, 고등어, 오징어, 잉어, 새우, 문어, 조개, 황금물고기.
+  - Store seasonings: 간장 (Soy Sauce), 고추장 (Chili Paste), 된장 (Soybean Paste), 참기름 (Sesame Oil).
+- **8+ Korean Recipes Matrix**:
+  1. **김치 (Kimchi)**: 배추 + 고추 + 마늘 + 조개 (Salted seafood) → Buff: *Kimchi Power* (+25% Gold from all crop harvests for 5 minutes).
+  2. **비빔밥 (Bibimbap)**: 쌀 + 계란 + 채소 + 고추장 → Buff: *Energy Surge* (+30% Player Movement Speed & 20% Auto-Watering chance for 8 minutes).
+  3. **불고기 (Bulgogi)**: 고기 + 콩 (Soy sauce) + 파 + 마늘 → Buff: *Warrior's Feast* (+50% Slash Damage in Dungeon & Spell Duel for 10 minutes).
+  4. **떡볶이 (Tteokbokki)**: 쌀 + 고추장 + 생선 (Fishcake) + 파 → Buff: *Sticky Precision* (+40% Tension Bar Green Zone Width in Fishing for 6 minutes).
+  5. **삼겹살 (Samgyeopsal)**: 고기 + 마늘 + 채소 + 된장 → Buff: *Iron Heart* (+50 Max HP & +5 HP/sec Auto-Regen in Dungeon for 10 minutes).
+  6. **삼계탕 (Samgyetang)**: 닭고기 + 인삼 + 마늘 + 쌀 → Buff: *Scholar's Stamina* (+100% Quiz XP & Pet Happiness decay frozen for 12 minutes).
+  7. **해물파전 (Haemul Pajeon)**: 파 + 오징어 + 새우 + 계란 → Buff: *Seafood Magnet* (+100% Rare/Epic Fish Spawn Rate for 7 minutes).
+  8. **잡채 (Japchae)**: 당근 + 버섯 + 고기 + 콩 → Buff: *Harvest Harmony* (+20% Double Crop Harvest Chance for 8 minutes).
+  9. **김밥 (Kimbap)**: 쌀 + 김 + 계란 + 당근 → Buff: *Quick Snack* (Restores 30 Pet Happiness & +10% Speed for 5 minutes).
+- **Timed Input Minigame**:
+  - 3-stage cooking process:
+    1. *Preparation (Chopping)*: Rhythm key press (WASD / Arrow prompts matching beat indicator).
+    2. *Simmering / Frying*: Heat gauge slider maintenance (keep indicator inside green temperature zone).
+    3. *Garnishing*: Precision timing click/space release.
+  - Grades: **S Grade** (+100% Buff Duration & 2x Dish Yield), **A Grade** (+50% Buff Duration), **B Grade** (Standard Buff), **F Grade** (Burnt Dish, minor gold fallback).
+- **Cultural Overlay Modal**:
+  - Displays Hansik (한식) history, UNESCO intangible cultural heritage notes (e.g. Kimjang 김장 culture), ingredient regional origins, and linguistic etymology upon successful dish creation.
+
+### 2.2 Pet Companion System Architecture (R4)
+- **5 Pet Species & Passives**:
+  1. **개 (Dog / 댕댕이)**: *Passive: Gold Sniffer* (+15% Extra Gold drops across all activities; scales to +35% at Level 5).
+  2. **고양이 (Cat / 야옹이)**: *Passive: Feline Nunchi* (Automatically reveals 1 Free Hint in Quizzes without spending Gold).
+  3. **토끼 (Rabbit / 토끼)**: *Passive: Rapid Hop* (Reduces crop SRS growth timers by 20%; scales to 40% at Level 5).
+  4. **햄스터 (Hamster / 햄토리)**: *Passive: Pouch Duplicator* (15% chance to duplicate harvested crops & seeds).
+  5. **앵무새 (Parrot / 앵무)**: *Passive: Echo Scholar* (+50% Bonus XP on correct quiz answer streaks).
+- **Happiness & Decay Mechanics**:
+  - Happiness meter (0 to 100%). Decays at -5% every 5 minutes of active gameplay.
+  - At Happiness > 70%: Full passive bonus active.
+  - At Happiness 30% - 70%: Passive bonus reduced to 50%.
+  - At Happiness < 30%: Pet becomes sad (😿) and passive bonus is deactivated until fed.
+  - Feeding: Feed crafted Korean dishes or raw ingredients to restore +40% to +100% Happiness.
+- **XP Leveling & Korean Vocab Quizzes**:
+  - Pets gain XP whenever the player completes quizzes in FarmScene, Spell Duel, or Pet Training Mode.
+  - Leveling curve: Level 1 (0 XP) → Level 2 (100 XP) → Level 3 (300 XP) → Level 4 (600 XP) → Level 5 (1000 XP Max).
+  - Unlocks pet titles, golden glowing aura, and increased passive effectiveness.
+
+### 2.3 Seasonal Events & Local Leaderboard UI (R5)
+- **Seasonal Events**:
+  - **Chuseok (추석 - Harvest Festival)**:
+    - Special crops: 밤 (Chestnut), 대추 (Jujube). Special Recipe: 송편 (Songpyeon).
+    - Event Quest: "Craft 5 Songpyeon & Harvest 20 Crops" → Rewards: Chuseok Moon Frame HUD & +50% Gold Boost.
+  - **Seollal (설날 - Lunar New Year)**:
+    - Special items: 떡국떡 (Rice Cake Slices), 복주머니 (Lucky Pouch). Special Minigame: Sebae (세배) Bowing & Yut Nori.
+    - Event Quest: "Cook 3 Tteokguk & Complete 10 Quizzes" → Rewards: Hanbok Character Skin & 200 Gold.
+  - **Children's Day (어린이날 - May 5th)**:
+    - Special items: 솜사탕 (Cotton Candy), 달고나 (Dalgona). Special Minigame: Dalgona Carving.
+    - Event Quest: "Raise any Pet to Level 3" → Rewards: Rainbow Balloon Aura & 2x Pet XP.
+- **Local Leaderboard UI**:
+  - Saved in `save_data.json` (`leaderboard` key). Fully offline compatible.
+  - Tabs: High Scores (Total Gold), Fast Cooking Times (Minigame Speedrun), Fishing Master (Most Fish Caught), Vocab Scholar (Total Quiz Streak).
+  - Displays top 10 local entries with custom player nicknames, rank badges (🥇🥈🥉), timestamps, and 64-bit neon styling.
+
+### 2.4 64-Bit Retro Glassmorphism UI Mapping (`index.html`)
+- Design System Classes:
+  - Base Glass Container: `.glass-modal`, `.glass-hud`
+  - Neon Accent Borders: `.neon-border-cyan`, `.neon-border-gold`, `.neon-border-purple`, `.neon-border-pink`, `.neon-border-green`
+  - Retro Details: `.pixel-art-detail`, `.crt-scanlines`
+- New DOM Structures to Integrate into `index.html`:
+  1. **Quest Log Modal** (`#quest-overlay` / `.glass-modal`): Daily, Seasonal, and Pet Quests with progress bars and claim buttons.
+  2. **Recipe Book Modal** (`#recipe-overlay` / `.glass-modal`): Grid of 9 Korean dishes with ingredient checklist, dish stats, and "Cook Dish" button.
+  3. **Cooking Minigame Overlay** (`#cooking-overlay` / `.glass-modal`): Interactive cooking station with rhythm prompts, temperature meter, and dish result display.
+  4. **Pet Panel Modal** (`#pet-overlay` / `.glass-modal`): Pet selection carousel, happiness meter, XP progress bar, feed inventory slot, and passive ability status.
+  5. **Leaderboard Modal** (`#leaderboard-overlay` / `.glass-modal`): Tabbed high-score tables, rank badges, local record input.
+  6. **Seasonal Event Banner** (`#event-banner` / `.glass-hud`): Top HUD banner displaying active festival name, countdown timer, and quick quest access button.
+
+### 2.5 File Mirroring & Synchronization Requirements
+- Root files (`index.html`, `game.js`, `levels.json`, `save_data.json`) vs `assets/` copies (`assets/index.html`, `assets/game.js`, `assets/levels.json`, `assets/save_data.json`):
+  - **Issue Identified**: Currently `assets/` has copies of `index.html`, `game.js`, `levels.json` but they are not automatically synced upon edits to root files, creating potential version mismatch if static wrappers or bundlers serve from `assets/`.
+  - **Sync Requirement**:
+    1. Create an automated synchronization script `sync_assets.py` or npm/bat script.
+    2. Mirror all changes in root `index.html`, `game.js`, `levels.json`, `save_data.json` directly into `assets/`.
+    3. Ensure `main.py` asset path definitions are consistent across environments.
 
 ---
 
 ## 3. Caveats
-
-- No caveats. The codebase was completely inspected, line numbers verified, and logic validated against Phaser 3 API specifications.
+- Read-only constraint: Explorer 3 performs analysis and architectural synthesis. Implementation will be executed by Implementer subagents.
+- Performance: Multi-overlay DOM elements with backdrop blurs (`backdrop-filter: blur(16px)`) must be hidden (`display: none`) when inactive to prevent GPU compositor overhead in PyWebView.
+- Audio: SFX calls for cooking and pet interactions should utilize `ChiptuneSynthEngine` to maintain zero external asset dependencies.
 
 ---
 
 ## 4. Conclusion
-
-The Phaser Scene structure in `game.js` is clean, modular, and performant. Implementing camera fade transitions via `cameras.main.fadeOut/fadeIn`, a 4-phase day/night ambient overlay with RGB color interpolation, and targeted 64-bit micro-animations will significantly enhance visual polish and player immersion while maintaining complete compatibility with existing save data and core game mechanics.
+The proposed architecture seamlessly integrates Crafting/Cooking (R3), Pet Companions (R4), Seasonal Events & Leaderboards (R5), and 64-Bit Retro Glassmorphism UI into `game.js` and `index.html` while maintaining 100% offline desktop playability via `main.py` PyWebView.
 
 ---
 
 ## 5. Verification Method
 
-1. **File Locations**:
-   - Main Game Source: `C:\VibeCode\Hangeul Valley\game.js`
-   - Detailed Analysis: `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_3\analysis.md`
-   - Handoff Report: `C:\VibeCode\Hangeul Valley\.agents\explorer_m1_3\handoff.md`
-
-2. **Verification Commands & Steps**:
-   - Inspect `game.js` lines 882–2081 (`FarmScene`), 2082–2460 (`ArcadeScene`), 2463–2750 (`DungeonScene`), 2753–3025 (`FishingScene`), 3057–3067 (`config`).
-   - Launch application via `python main.py` or double-clicking `run.bat` (or open `index.html` in browser) to verify all 4 scenes load without errors.
-   - Verify scene transition calls at lines 1859, 1866, 1873, 2457, 2747, 3022.
+### Step-by-Step Verification Instructions:
+1. **File Integrity Verification**:
+   - Inspect `index.html` to confirm presence of modal overlay containers: `#quest-overlay`, `#recipe-overlay`, `#cooking-overlay`, `#pet-overlay`, `#leaderboard-overlay`, `#event-banner`.
+   - Inspect `game.js` to confirm functions: `openRecipeBook()`, `startCookingMinigame()`, `openPetPanel()`, `feedPet()`, `openLeaderboard()`, `checkSeasonalEvents()`.
+2. **Sync Verification**:
+   - Run a hash comparison between root files and `assets/` files:
+     ```cmd
+     fc /b "C:\VibeCode\Hangeul Valley\index.html" "C:\VibeCode\Hangeul Valley\assets\index.html"
+     fc /b "C:\VibeCode\Hangeul Valley\game.js" "C:\VibeCode\Hangeul Valley\assets\game.js"
+     fc /b "C:\VibeCode\Hangeul Valley\levels.json" "C:\VibeCode\Hangeul Valley\assets\levels.json"
+     ```
+3. **Execution Verification**:
+   - Launch application via `run.bat` or `python main.py` and test UI modal opening, crop/fish ingredient collection, recipe cooking minigame, pet feeding, and leaderboard recording.
