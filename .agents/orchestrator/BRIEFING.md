@@ -1,72 +1,77 @@
-# BRIEFING — 2026-07-23T09:13:40Z
+# BRIEFING — 2026-07-23T10:22:00Z
 
 ## Mission
-Character design upgrade for Hangeul Valley: create 3+ frame procedural pixel art action animations for Farmer (Watering, Harvesting, Fruit Picking) and tool sprites; redesign Cat NPC from "Muop" to "Ginger Cat" with rich pixel art and 4+ animation states; hook animations to gameplay triggers; maintain 12-frame walk cycle and 100% sync between `game.js` and `assets/game.js`.
+Orchestrate professional pixel art quality upgrade for all sprites in Hangeul Valley (`game.js` & `assets/game.js`):
+1. Character sprites: Farmer (12 walk + 9 action frames), Ginger Cat (8 frames), Wizard Merlin (2 frames) with multi-tone shading (≥3 tones), 1px dark outline, anatomical detail, clothing folds, dithering/AA, sub-pixel animation poses.
+2. Environment & entity sprites: 5 crops × 4 growth stages, 11 fish species, dungeon monsters, arcade enemies with professional shading and detailed textures.
+3. Zero external image files (100% procedural `PixelArtRenderer.drawMatrix` / Graphics API `generateTexture()`).
+4. Retain 100% existing texture keys, animation keys, gameplay triggers.
+5. Synchronize `game.js` and `assets/game.js`. Validate with `node -c game.js`. Skip victory audit phase.
 
 ## 🔒 My Identity
 - Archetype: Project Orchestrator
 - Roles: orchestrator, user_liaison, human_reporter, successor
 - Working directory: C:\VibeCode\Hangeul Valley\.agents\orchestrator
 - Original parent: top-level
-- Original parent conversation ID: 3ff373f0-285d-49f3-a9c1-762a64e6f951
+- Original parent conversation ID: 2e596daa-9447-48df-b80a-96eb3091b561
 
 ## 🔒 My Workflow
-- **Pattern**: Project Pattern (Orchestrator → Explorer → Worker → Reviewer → Challenger → Forensic Auditor)
+- **Pattern**: Project Pattern (Orchestrator → Explorer → Worker → Reviewer → Challenger)
 - **Scope document**: C:\VibeCode\Hangeul Valley\.agents\orchestrator\PROJECT.md
-1. **Decompose**: Split into milestone phases (M1: Exploration & Architecture, M2: Implementation & Synchronization, M3: Verification, Challenge & Audit)
-2. **Dispatch & Execute**: Direct (iteration loop: Explorer -> Worker -> Reviewer -> Challenger -> Auditor)
+1. **Decompose**: Split scope into milestones:
+   - M1: Exploration & Palette/Matrix Specification (completed)
+   - M2: Character & Entity Sprites Redesign Implementation (completed)
+   - M3: Verification, Challenge & Code Synchronization (`game.js` ↔ `assets/game.js`, `node -c game.js`) (completed)
+2. **Dispatch & Execute**: Direct iteration loop per milestone
 3. **On failure**: Retry -> Replace -> Skip -> Redistribute -> Redesign
 4. **Succession**: Self-succeed at 16 spawns
 - **Work items**:
-  1. Milestone 1: Exploration of `PixelArtRenderer`, Farmer/Cat sprite matrices & FarmScene trigger points [completed]
-  2. Milestone 2: Implementation of Farmer actions, Ginger Cat redesign, renaming, gameplay triggers & code sync [completed]
-  3. Milestone 3: Review, Challenge & Forensic Audit [completed]
+  1. M1: Exploration & Detailed Matrix Specs [completed]
+  2. M2: Implementation of Pixel Art Redesign [completed]
+  3. M3: Verification & Sync Validation [completed]
 - **Current phase**: 4
-- **Current focus**: Final reporting & user delivery
+- **Current focus**: Project Completion & Reporting to Parent
 
 ## 🔒 Key Constraints
 - NEVER write or modify source code files directly as orchestrator
 - NEVER run build/test commands directly as orchestrator
 - All pixel art MUST be generated procedurally via Phaser Graphics API (`fillRect()` grid patterns in `PixelArtRenderer`) — zero external image files
-- Must replace all 3 hardcoded instances of "Muop" with "Ginger Cat"
-- Must preserve Farmer 12-frame walk cycle
+- Must use ≥3 distinct color tones per major color area, 1px dark outlines, anatomical details, dithering/AA
+- Must preserve all existing texture keys, animation keys, and gameplay triggers
 - Must synchronize `game.js` and `assets/game.js`
 - Must pass `node -c game.js` with zero errors
+- Skip victory audit phase per user instruction
 
 ## Current Parent
-- Conversation ID: 3ff373f0-285d-49f3-a9c1-762a64e6f951
-- Updated: 2026-07-23T09:13:40Z
+- Conversation ID: 2e596daa-9447-48df-b80a-96eb3091b561
+- Updated: 2026-07-23T10:22:00Z
 
 ## Key Decisions Made
-- Decomposing the Character Design Upgrade task into M1 (Exploration), M2 (Implementation & Sync), M3 (Verification & Audit).
-- Explorers 1, 2, and 3 completed comprehensive specifications.
-- Worker M2 completed code implementation and synchronization.
-- Reviewer 1 (PASS), Reviewer 2 (PASS), Challenger 1 (PASS), Challenger 2 (PASS), Auditor M3 (CLEAN).
-- Worker M2 Fix trimmed `player_pick_down_2` to 16x16. All 44/44 tests passing.
+- Skipping victory audit phase per user instructions.
+- Milestone 1 completed: Explorers 1, 2, and 3 delivered complete matrix specs & key inventory (177 keys).
+- Milestone 2 completed: Worker M2 applied all upgraded palettes and matrices to `game.js`, synced `assets/game.js`, and validated syntax with `node -c game.js`.
+- Milestone 3 completed: Reviewer 1 (PASS), Reviewer 2 (PASS), Challenger 1 (PASS - 52/52 tests).
 
 ## Team Roster
 | Agent | Type | Work Item | Status | Conv ID |
 |-------|------|-----------|--------|---------|
-| Explorer 1 | teamwork_preview_explorer | Farmer Action Matrices & Tool Sprites | completed | 85f11c1d-72ef-45e8-9374-88708ffae864 |
-| Explorer 2 | teamwork_preview_explorer | Ginger Cat Redesign & "Muop" Renaming | completed | 79de34cc-b2dc-4d48-83ab-4aee63860e45 |
-| Explorer 3 | teamwork_preview_explorer | FarmScene Triggers & Cat AI Integration | completed | 1a9ead85-5955-416e-b432-013dcde2258a |
-| Worker M2 | teamwork_preview_worker | Implementation & Code Synchronization | completed | 209f1702-c6b6-428c-a942-b67bf795ae2e |
-| Reviewer 1 | teamwork_preview_reviewer | Code Quality & Sync Review | completed (PASS) | 8cb90244-4883-491f-9b1a-6f4592361c90 |
-| Reviewer 2 | teamwork_preview_reviewer | Requirements & Parity Review | completed (PASS) | 85f56caf-3a3f-4f5a-a842-69bcd16ceaed |
-| Challenger 1 | teamwork_preview_challenger | Automated Test Script Verification | completed (PASS) | e06920c0-3252-4479-b5cf-bcb52d97a7e4 |
-| Challenger 2 | teamwork_preview_challenger | Trigger & Naming Parity Challenge | completed (PASS) | 3aa2772e-2af7-4007-b267-aeabc1c5986b |
-| Auditor M3 | teamwork_preview_auditor | Forensic Integrity Audit | completed (CLEAN) | 6398cb51-7379-4506-9853-422a1a4855a6 |
-| Worker M2 Fix | teamwork_preview_worker | Trim player_pick_down_2 to 16x16 | completed | 142eb774-d96c-4793-ac90-102bc50bab69 |
+| Explorer 1 | teamwork_preview_explorer | Character Sprites Spec | completed | ff863e4b-71a6-4982-9dbb-a63a1b818cd3 |
+| Explorer 2 | teamwork_preview_explorer | Crop & Fish Sprites Spec | completed | 1ab27f7f-627d-4565-b95e-75452d161937 |
+| Explorer 3 | teamwork_preview_explorer | Monsters & Registry Spec | completed | 79b9ed05-930b-4176-b76f-483fe3e21122 |
+| Worker M2 | teamwork_preview_worker | Implementation & Code Sync | completed | f084eecf-e882-4a72-9e1c-c2e5bd6cabc2 |
+| Reviewer 1 | teamwork_preview_reviewer | Code Quality & Key Parity Review | completed (PASS) | fb8b30f2-d0bd-43cc-92a3-fc10fede93ea |
+| Reviewer 2 | teamwork_preview_reviewer | Art Quality & Requirement Compliance | completed (PASS) | e19d45da-4c0a-4ab9-8086-5fefea9a8bd4 |
+| Challenger 1 | teamwork_preview_challenger | Empirical Verification & Sync Test | completed (PASS 52/52) | b14a7ec1-5a47-418a-ac9b-5dbf4727a087 |
 
 ## Succession Status
 - Succession required: no
-- Spawn count: 10 / 16
+- Spawn count: 7 / 16
 - Pending subagents: none
 - Predecessor: none
 - Successor: not yet spawned
 
 ## Active Timers
-- Heartbeat cron: 1eaeaf43-aeda-40fe-8cdf-1284cd6a557d/task-37 (to be stopped)
+- Heartbeat cron: task-41 (to be killed)
 - Safety timer: none
 
 ## Artifact Index

@@ -22,4 +22,19 @@ Test Script Requirements:
 
 Write your findings and test script output to C:/VibeCode/Hangeul Valley/.agents/challenger_m3_1/challenge_report.md and handoff.md.
 Send a message to parent reporting completion.
+
+
+## 2026-07-23T03:20:11Z
+<USER_REQUEST>
+You are Challenger 1 (Empirical Verification Challenger) for the Hangeul Valley Pixel Art Quality Upgrade project.
+Your working directory is: C:/VibeCode/Hangeul Valley/.agents/challenger_m3_1/
+Please create your working directory if it does not exist, and initialize your BRIEFING.md and progress.md there.
+
+Your mission is to empirically test and verify C:/VibeCode/Hangeul Valley/game.js and C:/VibeCode/Hangeul Valley/assets/game.js:
+1. Write an automated Node.js test script to verify `node -c game.js` and `node -c assets/game.js` return 0 errors.
+2. Programmatically verify that PixelArtRenderer matrices exist, are valid 16x16 arrays, and that all Phaser animation keys ('player-walk-down/up/left/right', 'player-water', 'player-harvest', 'player-pick', 'cat-idle', 'cat-walk', 'cat-sit', 'cat-sleep', 'wizard-idle') are created properly.
+3. Verify 100% file synchronization (SHA256 match) between game.js and assets/game.js.
+
+Write your test results and report to C:/VibeCode/Hangeul Valley/.agents/challenger_m3_1/handoff.md and send a handoff message with your verdict (PASS/FAIL).
 </USER_REQUEST>
+

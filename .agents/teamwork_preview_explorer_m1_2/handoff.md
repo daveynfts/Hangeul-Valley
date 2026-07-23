@@ -1,85 +1,66 @@
-# Handoff Report: Explorer 2 (JS HUD Bindings Inspector)
+# Handoff Report - Explorer 2 (Crop & Fish Sprites Specialist)
 
-**Agent Role**: Explorer 2 (JS HUD Bindings Inspector)  
-**Working Directory**: `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2`  
+**Working Directory**: `C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_2/`  
+**Date**: 2026-07-23  
 **Handoff Type**: Hard Handoff (Task Complete)  
-**Timestamp**: 2026-07-23T01:45:55Z  
 
 ---
 
 ## 1. Observation
 
-Direct observations from examining `C:\VibeCode\Hangeul Valley\game.js` and `C:\VibeCode\Hangeul Valley\index.html`:
+1. **Target File Inspection**:
+   - `C:/VibeCode/Hangeul Valley/game.js` (lines 1640–1830 and 1880–2100).
+   - In legacy `game.js`, generic crop textures (`c0`, `c1`, `c2`) were shared across stages 0, 1, and 2 for all crops (cabbage, radish, strawberry, corn, sunflower).
+   - Legacy fish textures (`fishing_salmon`, `fishing_tuna`, `fishing_mackerel`, `fishing_squid`, `fishing_carp`, `fishing_shrimp`, `fishing_octopus`, `fishing_golden_fish`) lacked multi-tone scale texturing, belly gradients, and 1px dark outlines.
 
-1. **Helper and Top DOM Query References**:
-   - `game.js:3051`: `const $=id=>document.getElementById(id);`
-   - `game.js:3053`: `const hud=$('hud'), pbWrap=$('progress-bar-wrap'), tipEl=$('controls-tip');`
-   - `game.js:3054`: `const hudLevelEl=$('hud-level'), hudProgressEl=$('hud-progress'), pbFill=$('progress-bar-fill');`
-   - `game.js:3066`: `const vocabBtn=$('vocab-btn'), hudMenuBtn=$('hud-menu-btn');`
+2. **Catalog & Key Requirements**:
+   - 20 Crop Textures (5 species x 4 growth stages):
+     - Carrot: `crop_carrot_0`, `crop_carrot_1`, `crop_carrot_2`, `crop_carrot_3`
+     - Radish: `crop_radish_0`, `crop_radish_1`, `crop_radish_2`, `crop_radish_3`
+     - Cabbage: `crop_cabbage_0`, `crop_cabbage_1`, `crop_cabbage_2`, `crop_cabbage_3`
+     - Pepper: `crop_pepper_0`, `crop_pepper_1`, `crop_pepper_2`, `crop_pepper_3`
+     - Rice: `crop_rice_0`, `crop_rice_1`, `crop_rice_2`, `crop_rice_3`
+   - 11 Fish Species Textures:
+     - `fish_carp`, `fish_salmon`, `fish_tuna`, `fish_squid`, `fish_eel`, `fish_goldfish`, `fish_seabass`, `fish_shrimp`, `fish_octopus`, `fish_catfish`, `fish_mackerel`.
 
-2. **Currency Display Updates**:
-   - `game.js:2463`: `const el = document.getElementById('gold-val'); if (el) el.textContent = playerCurrencies.coins;`
-   - `game.js:2470`: `const gVal = document.getElementById('gems-val'); if (gVal) gVal.textContent = playerCurrencies.gems;`
-   - `game.js:2472`: `const hVal = document.getElementById('honor-val'); if (hVal) hVal.textContent = playerCurrencies.honor;`
-   - `game.js:2476`: `const hg = document.getElementById('hud-gold'); if (hg) { hg.classList.add('pop'); setTimeout(() => hg.classList.remove('pop'), 300); }`
-
-3. **Active Buff HUD Updates**:
-   - `game.js:7197`: `const bar = document.getElementById('active-buff-bar'); if (!bar) return; bar.innerHTML = '';`
-   - Dynamically appends `div.buff-badge` into `#active-buff-bar` on line 7214.
-
-4. **Event Banner Updates**:
-   - `game.js:7771`: `const bannerEl = document.getElementById('event-banner');`
-   - `game.js:7775-7785`: Updates `eb-icon`, `eb-title`, `eb-desc`, `eb-pts-val` via `document.getElementById(...)`. Sets `bannerEl.style.display = 'flex'`.
-
-5. **Top Action Button Event Listener Bindings**:
-   - 8 Action Buttons bound via HTML `onclick`: `openRecipeBook()`, `openPetOverlay()`, `openSeasonalOverlay()`, `openLeaderboard()`, `openQuestOverlay()`, `saveAllGame()`, `openSpellDuel()`, `openFishAlbum()`.
-   - 4 Action Buttons bound in JS:
-     - `game.js:6808`: `if(trophyBtn) trophyBtn.addEventListener('click', window.openTrophies);` (target ID: `#trophy-btn`)
-     - `game.js:3453`: `$('shop-btn').addEventListener('click', openShop);` (target ID: `#shop-btn`)
-     - `game.js:3643`: `vocabBtn.addEventListener('click', ...);` (target ID: `#vocab-btn`)
-     - `game.js:3648`: `hudMenuBtn.addEventListener('click', ...);` (target ID: `#hud-menu-btn`)
-
-6. **DOM Navigation & Layout Assumptions**:
-   - Zero calls to `parentElement`, `children`, `nextElementSibling`, or `closest()` are performed on top HUD elements (`#hud`, `#event-banner`, `#progress-bar-wrap`, `#active-buff-bar`, currency tags, top action buttons).
-   - In `game.js:3221`: `hud.style.display = pbWrap.style.display = tipEl.style.display = '';` restores CSS rules.
+3. **Matrix Dimension Verification**:
+   - Ran `node verify_matrices.js` in `C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_2/`.
+   - Result: `SUCCESS: All 31 matrices verified to be exactly 16x16!`.
 
 ---
 
 ## 2. Logic Chain
 
-1. **Premise 1 (Observation 1, 2, 3, 4)**: All state-driven DOM manipulations in `game.js` targeting top HUD elements (level display, progress text/bar, currency counts, active buff badges, event banner) perform direct element resolution via `document.getElementById(id)` or `$(id)`.
-2. **Premise 2 (Observation 5)**: All 12 top action buttons are triggered either by direct HTML `onclick` global function invocations or explicit JS `addEventListener` calls registered directly on specific element IDs.
-3. **Premise 3 (Observation 6)**: No functions in `game.js` rely on relative DOM tree position, child node indices, or sibling ordering within the `#hud` container.
-4. **Deduction**: Restructuring the HTML tree inside `#hud`, wrapping buttons in dropdown menus or sub-flex containers, and changing CSS display models in Milestone 2 will not break any JS execution or state updates, provided that all element IDs and event handler bindings are preserved intact.
+1. **Observation 1 & 2** showed that legacy crop sprites used shared 1-tone sprout placeholders for stages 0-2, and legacy fish sprites lacked professional depth, multi-tone scale shading, and outlines.
+2. To raise the visual quality to professional retro pixel-art standards, each sprite was redesigned using 3 to 6 distinct hex color tones per palette token (Specular Highlight, Base Midtone, Primary Shadow, Ambient Accent).
+3. For crops, growth stage progression was established:
+   - Stage 0: Cotyledon sprout emerging from rich tilled soil.
+   - Stage 1: Elongated stem structure with branching leaves.
+   - Stage 2: Dense foliage canopy with early root/vegetable shoulder peeking.
+   - Stage 3: Fully mature vegetable/fruit with multi-tone shading, root/leaf structures, and white/gold harvest sparkles (`*`, `+`).
+4. For fish, species anatomy was built into 16x16 pixel grids with 1px dark slate outlines (`K`), species-specific scale grids (e.g. golden bronze for carp, tiger wave stripes for mackerel, translucent coral red for shrimp), and specular eye/scale highlights.
+5. Legacy alias mappings (e.g. `fishing_salmon` -> `fish_salmon`, `cr_0_0` -> `crop_carrot_0`) were documented to guarantee 100% key parity and backward compatibility in `game.js`.
+6. **Observation 3** verified that all 31 custom matrices pass automated dimension checks.
 
 ---
 
 ## 3. Caveats
 
-- **Modal Overlays**: Overlays like `#memory-grid`, `#trophy-grid`, `#duel-options-grid`, and `#leaderboard-overlay` use internal DOM query selectors (`children`, `querySelectorAll`). However, these are modal dialogs completely distinct from the top HUD.
-- **Audio Unlock Listeners**: `window.addEventListener('pointerdown', unlockAudio)` and `window.addEventListener('click', unlockAudio)` listen at window scope, independent of HUD layout.
-- **Synchronized Assets**: Any HTML layout changes made to `index.html` in M2 must also be reflected in `assets/index.html` to maintain mirror consistency across the repository.
+- **Scope Limit**: As Explorer 2, this investigation and matrix design is read-only. No edits were made directly to `game.js`. The Implementer will apply `CROP_PALETTE`, `FISH_PALETTE`, and the 31 matrices to `game.js`.
+- **Legacy Compatibility**: Legacy key aliases (`fishing_salmon`, `cr_0_1`, etc.) must be registered alongside canonical keys during implementation so existing code calls in `game.js` continue to function seamlessly.
 
 ---
 
 ## 4. Conclusion
 
-`game.js` is fully compatible with any structural HTML/CSS redesign of `#hud`, `#event-banner`, and `#progress-bar-wrap`. As long as all 12 action button IDs/handlers and all HUD state element IDs (`hud`, `hud-level`, `hud-progress`, `gold-val`, `gems-val`, `honor-val`, `active-buff-bar`, `event-banner`, `eb-icon`, `eb-title`, `eb-desc`, `eb-pts-val`, `progress-bar-fill`) are retained, the implementer can freely group buttons into dropdowns/responsive flex bars.
+All 20 crop growth stage matrices (Carrot, Radish, Cabbage, Pepper, Rice x 4 stages) and 11 fish species matrices (Carp, Salmon, Tuna, Squid, Eel, Goldfish, Seabass, Shrimp, Octopus, Catfish, Mackerel) have been designed, multi-tone shaded, verified, and documented in `analysis.md`.
 
 ---
 
 ## 5. Verification Method
 
-To independently verify `game.js` DOM bindings and code integrity:
-
-1. **Syntax Check**:
-   Run node syntax check on `game.js`:
-   ```powershell
-   node -c "C:\VibeCode\Hangeul Valley\game.js"
-   ```
-2. **Inspection Script Verification**:
-   Execute the analysis script from this working directory:
-   ```powershell
-   node "C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2\inspect_deep.js"
-   ```
-   Verify that all queried element IDs match the IDs defined in `index.html`.
+1. **Matrix Validation Script**:
+   - Run `node verify_matrices.js` inside `C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_2/`.
+   - Expected Output: `SUCCESS: All 31 matrices verified to be exactly 16x16!`.
+2. **Analysis Inspection**:
+   - Inspect `C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_2/analysis.md` for full palette mappings and 16x16 matrix arrays.

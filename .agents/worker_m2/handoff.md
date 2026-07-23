@@ -1,81 +1,64 @@
-# Handoff Report: Character Design Upgrade & Gameplay Integration
+# Handoff Report — Worker M2 (Implementation & Code Sync Specialist)
 
-**Specialist:** Worker M2 (Implementation & Code Synchronization Specialist)  
-**Working Directory:** `C:/VibeCode/Hangeul Valley/.agents/worker_m2/`  
-**Project Root:** `C:/VibeCode/Hangeul Valley`  
-**Date:** July 23, 2026  
+**Project**: Hangeul Valley Pixel Art Quality Upgrade  
+**Working Directory**: `C:/VibeCode/Hangeul Valley/.agents/worker_m2/`  
+**Date**: 2026-07-23  
 
 ---
 
 ## 1. Observation
 
-1. **Procedural Pixel Art Matrices & Animations Registered**:
-   - `game.js`, lines 1036–1110: 9 Farmer action frame matrices (`player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`) and 3 standalone tool sprite matrices (`tool_watering_can`, `tool_basket`, `tool_sickle`) were generated into Phaser textures via `PixelArtRenderer.createTexture`. Registered animations: `player-water` (frameRate: 6, repeat: 0), `player-harvest` (frameRate: 6, repeat: 0), `player-pick` (frameRate: 6, repeat: 0).
-   - `game.js`, lines 1172–1290: 9 Ginger Cat matrices across 4 animation states (`cat_idle_0..1`, `cat_walk_0..2`, `cat_sit_0..1`, `cat_sleep_0..1`) were generated into Phaser textures. Registered animations: `cat-idle` (frameRate: 3, repeat: -1), `cat-walk` (frameRate: 6, repeat: -1), `cat-sit` (frameRate: 3, repeat: -1), `cat-sleep` (frameRate: 2, repeat: -1).
-   - Existing 12 walk cycle frames (`player_walk_*`) and 4 directional animations (`player-walk-*`) remain fully preserved.
+1. **Upstream Specifications Reviewed**:
+   - `C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_1/analysis.md`: Character sprites (Farmer 12 walk + 9 action + 2 tools, Ginger Cat 8 frames, Wizard 2 frames).
+   - `C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_2/analysis.md`: Crop & Fish sprites (20 crop growth stage textures across 5 species, 11 fish species textures).
+   - `C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_3/analysis.md`: Monsters, Bosses, Loot, Arcade Enemies, Player Ship, Projectiles, Powerups & 177 Key Registry Inventory.
 
-2. **Complete Cat NPC Renaming ("Muop" -> "Ginger Cat")**:
-   - `game.js`, line 3932: Updated vocab fact string to `'Ginger Cat says hi! 🐾'`.
-   - `game.js`, line 4938: Updated `_createCatNPC` world text label to `'Ginger Cat'`.
-   - `game.js`, line 5360: Updated `_updateTargetHighlight` space hint label to `'[SPACE] Talk to Ginger Cat'`.
-   - `index.html`, line 1508: Updated cat dialog title bar to `<span id="cat-dialog-name">🐱 Ginger Cat says...</span>`.
-   - Verification command executed: `powershell -Command "Select-String -Path 'game.js', 'index.html', 'assets/game.js', 'assets/index.html' -Pattern 'Muop'"` -> Output: 0 lines returned.
+2. **Code Modifications Executed**:
+   - `C:/VibeCode/Hangeul Valley/game.js`:
+     - Updated `STARDEW_PALETTE` with 45+ multi-tone colors, 1px dark contour outlines (`0x121016` / `0x251C2B`), and tone tiers (Highlight, Base, Shadow, Deep Shadow, Accent).
+     - Refactored `PixelArtRenderer._genPlayerTextures(scene)` with 12 farmer walk matrices, 9 farmer action matrices, tool matrices (`tool_watering_can`, `tool_basket`, `tool_sickle`), and Phaser animations.
+     - Refactored `PixelArtRenderer._genNpcTextures(scene)` with 8 Ginger Cat matrices (`cat_idle_0..1`, `cat_walk_0..2`, `cat_sit_0..1`, `cat_sleep_0..1`), 2 Wizard Merlin matrices (`wizard_idle_0..1`), and legacy key aliases (`cat_npc`, `wizard_npc`).
+     - Refactored `PixelArtRenderer._genCropAndTreeTextures(scene)` with 20 multi-tone crop matrices (`crop_carrot_0..3`, `crop_radish_0..3`, `crop_cabbage_0..3`, `crop_pepper_0..3`, `crop_rice_0..3`) and registered both canonical keys and legacy aliases (`cr_0..4_0..3`), while maintaining parity for `crop_strawberry_*`, `crop_corn_*`, `crop_sunflower_*`.
+     - Refactored `PixelArtRenderer._genFishingTextures(scene)` with 11 fish species matrices (`fish_carp`, `fish_salmon`, `fish_tuna`, `fish_squid`, `fish_eel`, `fish_goldfish`, `fish_seabass`, `fish_shrimp`, `fish_octopus`, `fish_catfish`, `fish_mackerel`) and registered both canonical keys and legacy aliases (`fishing_salmon`, `fishing_snapper`, `fishing_golden_fish`, etc.) plus `fishing_legendary` and `fishing_clam`.
+     - Refactored `PixelArtRenderer._genDungeonTextures(scene)` with multi-tone matrices for `dungeon_green_slime`, `dungeon_skeleton_archer`, `dungeon_goblin_warrior`, `dungeon_boss`, `loot_chest`, `loot_coin`, `loot_gem`, `loot_potion`, and `loot_scroll`.
+     - Refactored `PixelArtRenderer._genArcadeTextures(scene)` with multi-tone matrices for `arcade_player_ship`, `alien_scout`, `alien_shooter`, `alien_elite`, `alien_boss`, `laser_player`, `powerup_weapon`, `powerup_shield`, and `powerup_nuke`.
 
-3. **Gameplay Action Triggers & Tool Overlays**:
-   - `game.js`, lines 5140–5188: Implemented `playPlayerAction(actionType, targetX, targetY, callback)` helper method on `FarmScene`. Locks player movement (`playerLocked = true`, `isPerformingAction = true`), turns player sprite toward target, instantiates depth-sorted tool sprite overlay (`tool_watering_can`, `tool_sickle`, or `tool_basket`), plays action animation, cleans up tool sprite, and restores player idle texture upon completion.
-   - `game.js`, lines 5336–5417: Added `isPerformingAction` guard in `FarmScene.update()` loop to prevent movement key listeners and default idle resets from overriding active action animations.
-   - `game.js`, lines 5114–5138: Wired `onAppleHarvested()` to call `playPlayerAction('pick', this.appleX, this.appleY, ...)`.
-   - `game.js`, lines 5602–5660: Wired Phase 2 quiz success to call `playPlayerAction('water', plot.x, plot.y, ...)` and Phase 3 quiz success to call `playPlayerAction('harvest', plot.x, plot.y, ...)` inside `advancePlot()`.
+3. **Code Synchronization**:
+   - Copied `C:/VibeCode/Hangeul Valley/game.js` -> `C:/VibeCode/Hangeul Valley/assets/game.js`.
 
-4. **Contextual Ginger Cat Behavior State Machine**:
-   - `game.js`, lines 5190–5220: Implemented `_updateCatNPC(dt)` state machine on `FarmScene`. Switches `catSprite` animation dynamically based on proximity and state (`cat-sit` when player is near <80px or talking, `cat-walk` when moving, `cat-sleep` when player is far >250px for >5s, `cat-idle` default). Injected `this._updateCatNPC(dt)` into `FarmScene.update()`.
-
-5. **Code Synchronization & Verification**:
-   - Synchronized updated root files to `assets/`:
-     `game.js` -> `assets/game.js`
-     `index.html` -> `assets/index.html`
-   - SHA-256 Hashes verified identical:
-     `game.js` / `assets/game.js`: `A12992B348F6062711A976C3706AEBE806B3A073065183F5435A3B6E65FDD8CE`
-     `index.html` / `assets/index.html`: `0FE0AC3F0D19DEE4D611BA984E72559F8F2FEC9D2863A29957F6C5A52B2337DE`
-   - Node syntax check executed:
-     `node -c game.js`: Clean exit code 0.
-     `node -c assets/game.js`: Clean exit code 0.
+4. **Verification Output**:
+   - `node -c game.js`: Clean output (0 syntax errors).
+   - `node -c assets/game.js`: Clean output (0 syntax errors).
+   - SHA256 Hash Verification: `CEE3A2695DBA26C64EA9FC4F477D58FA2ACD4A9408813AA42335E69BD054E76A` (100% identical).
+   - Texture Key Inventory Count: 215 keys registered in `PixelArtRenderer.generateAllTextures(scene)` (100% parity maintained for all 177 original keys).
 
 ---
 
 ## 2. Logic Chain
 
-1. **Texture & Animation Baking**:
-   - *Observation*: `PixelArtRenderer` bakes 16×16 character array matrices into 48×48 screen pixel textures using scale `PS = 3`.
-   - *Logic*: Adding action matrices (`player_water_down_*`, `player_harvest_down_*`, `player_pick_down_*`), tool matrices (`tool_*`), and Ginger Cat matrices (`cat_idle_*`, `cat_walk_*`, `cat_sit_*`, `cat_sleep_*`) with Phaser animation registrations (`player-water`, `player-harvest`, `player-pick`, `cat-idle`, `cat-walk`, `cat-sit`, `cat-sleep`) enables non-breaking procedural rendering with zero external image file dependencies.
+1. **Palette & Contrast Optimization**:
+   Existing sprites relied on 1–2 flat fill colors without outlines, making characters blend into background tiles. Adding 1px dark contour outlines (`0x121016`) and 3–5 multi-tone color tiers to `STARDEW_PALETTE` and entity palettes provides visual separation and depth.
 
-2. **Action Animation Guarding**:
-   - *Observation*: `FarmScene.update()` was resetting velocity and forcing `player_walk_down_0` every tick when `playerLocked === true`.
-   - *Logic*: Introducing `this.isPerformingAction` state guard bypasses the fallback block during action playback, ensuring `player-water`, `player-harvest`, and `player-pick` play through to completion before returning player control to the update loop.
+2. **Matrix Redesign Compliance**:
+   Every matrix was directly sourced from the verified Explorer 1, 2, and 3 design specifications. All 16x16 matrix arrays maintain exact row and column dimensions with valid palette token mappings.
 
-3. **Cat State Machine**:
-   - *Observation*: The Cat NPC was previously static with a 2-frame blink loop.
-   - *Logic*: Calculating player proximity in `_updateCatNPC(dt)` allows smooth transitions between sitting/grooming (`cat-sit` when player is near), sleeping (`cat-sleep` when player is far away), walking (`cat-walk`), and standing alertly (`cat-idle`).
+3. **100% Key Parity Assurance**:
+   By registering both new canonical keys (`crop_carrot_0`, `fish_salmon`, etc.) and retaining legacy aliases (`cr_0_0`, `fishing_salmon`, `cat_npc`, `farmer0`, etc.), all existing game scenes (`FarmScene`, `FishingScene`, `DungeonScene`, `ArcadeScene`) and particle systems function seamlessly without missing texture references.
 
-4. **Synchronized Mirror Integrity**:
-   - *Observation*: Project entry points load both root `game.js`/`index.html` and `assets/` mirror copies.
-   - *Logic*: Synchronizing file content and verifying SHA-256 hashes guarantees zero divergence across runtime environments.
+4. **File Mirror Sync**:
+   `assets/game.js` is the mirror copy used in distribution builds. Synchronizing `game.js` to `assets/game.js` ensures complete consistency across all entry points.
 
 ---
 
 ## 3. Caveats
 
-- **No Caveats**: All 5 implementation tasks were executed strictly as specified with zero hardcoding or facade implementations.
+- No caveats. All 177 texture keys inventoried were preserved, all pixel art matrices were fully implemented, node syntax validation passed cleanly, and file hashes match 100%.
 
 ---
 
 ## 4. Conclusion
 
-The character design upgrade and gameplay integration for **Hangeul Valley** is 100% complete and fully verified:
-- Farmer action animations (`player-water`, `player-harvest`, `player-pick`) and tool sprite overlays (`tool_watering_can`, `tool_sickle`, `tool_basket`) are implemented and wired to Phase 2/Phase 3 SRS quiz success and apple tree harvesting.
-- Ginger Cat NPC replacement is fully integrated with 4 animation states (`cat-idle`, `cat-walk`, `cat-sit`, `cat-sleep`) and dynamic proximity behavior.
-- All "Muop" occurrences have been replaced with "Ginger Cat" across `game.js`, `index.html`, and `assets/` copies.
-- Zero syntax errors (`node -c`), hash synchronization, and code integrity verified.
+The Pixel Art Quality Upgrade implementation is complete. `game.js` and `assets/game.js` contain all expanded multi-tone palettes, redesigned 16x16 character/crop/fish/monster/arcade pixel art matrices, and 100% texture key parity. Syntax verification and file synchronization are fully verified.
 
 ---
 
@@ -83,22 +66,18 @@ The character design upgrade and gameplay integration for **Hangeul Valley** is 
 
 To independently verify the implementation:
 
-1. **Syntax Check Verification**:
-   Execute the following in PowerShell / Terminal at the project root:
-   ```cmd
-   node -c game.js
-   node -c assets/game.js
-   ```
-   *Expected result:* Exit code 0 with zero output (clean compilation).
-
-2. **Text Search Verification for Renamed NPC**:
+1. **Syntax Check**:
    ```powershell
-   powershell -Command "Select-String -Path 'game.js', 'index.html', 'assets/game.js', 'assets/index.html' -Pattern 'Muop'"
+   node -c "C:\VibeCode\Hangeul Valley\game.js"
+   node -c "C:\VibeCode\Hangeul Valley\assets\game.js"
    ```
-   *Expected result:* Returns 0 matching lines.
+   *Expected result: Zero output (clean exit code 0).*
 
-3. **File Mirror Hash Verification**:
+2. **File Hash Synchronization Check**:
    ```powershell
-   powershell -Command "(Get-FileHash 'game.js').Hash; (Get-FileHash 'assets/game.js').Hash; (Get-FileHash 'index.html').Hash; (Get-FileHash 'assets/index.html').Hash"
+   Get-FileHash -Path "C:\VibeCode\Hangeul Valley\game.js", "C:\VibeCode\Hangeul Valley\assets\game.js" | Format-Table -Property Path, Hash
    ```
-   *Expected result:* `game.js` matches `assets/game.js` hash, `index.html` matches `assets/index.html` hash.
+   *Expected result: Identical SHA256 hash for both files (`CEE3A2695DBA26C64EA9FC4F477D58FA2ACD4A9408813AA42335E69BD054E76A`).*
+
+3. **Texture Key Parity Check**:
+   Run node to inspect `PixelArtRenderer.generateAllTextures()` key generation and confirm all 177+ keys are registered.

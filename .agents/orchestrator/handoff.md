@@ -1,84 +1,70 @@
-# Handoff & Final Report: Hangeul Valley Character Design Upgrade
+# Handoff Report — Project Orchestrator (Pixel Art Quality Upgrade)
 
-**Role:** Project Orchestrator  
-**Working Directory:** `C:/VibeCode/Hangeul Valley/.agents/orchestrator`  
-**Project Root:** `C:/VibeCode/Hangeul Valley`  
-**Date:** July 23, 2026  
+**Project**: Hangeul Valley Pixel Art Quality Upgrade  
+**Working Directory**: `C:/VibeCode/Hangeul Valley/.agents/orchestrator/`  
+**Date**: 2026-07-23  
+**Handoff Type**: Hard Handoff (Task Complete)
 
 ---
 
 ## 1. Observation
 
-All requirements specified in the latest user request (`ORIGINAL_REQUEST.md`) have been successfully orchestrated, implemented, verified, and audited across 3 project milestones:
+1. **Requirements & Scope**:
+   - Upgrade all 16x16 pixel art sprites in `game.js` and `assets/game.js` to professional indie game standard (Stardew Valley / Celeste quality).
+   - Multi-tone shading (≥3–5 distinct color tones per area: Highlight, Base, Shadow, Deep Shadow), 1px dark outlines (`0x121016`), anatomical arm/hand separation, clothing folds, dithering/AA, sub-pixel animation poses.
+   - Character Sprites: Farmer (12 walk + 9 action frames + tools), Ginger Cat (8 frames + legacy `cat_npc`), Wizard Merlin (2 frames + legacy `wizard_npc`).
+   - Environment & Entity Sprites: 5 crop species × 4 growth stages (20 textures), 11 fish species, dungeon monsters & bosses, arcade player ship & alien enemies.
+   - Zero external image files constraint: 100% drawn programmatically via `PixelArtRenderer.drawMatrix(g, matrix, palette)` on 16x16 matrices scaled at `PS=3` (48x48 rendered textures).
+   - 100% texture key parity, zero syntax errors, 100% file synchronization between `game.js` and `assets/game.js`. Skip victory audit phase per user instructions.
 
-1. **R1. Farmer Action Animations & Tool Sprites**:
-   - Created procedural 16×16 pixel art action frame matrices (`PS=3` = 48×48 textures) for Farmer:
-     - **Watering** (`player_water_down_0..2`, `player-water` anim): 3+ frames showing farmer holding can, tilting to pour, and pouring stream with splash.
-     - **Harvesting** (`player_harvest_down_0..2`, `player-harvest` anim): 3+ frames showing farmer stooping down, pulling crop, and standing up with crop.
-     - **Fruit Picking** (`player_pick_down_0..2`, `player-pick` anim): 3+ frames showing farmer reaching overhead, grasping apple, and pulling fruit to chest.
-   - Created separate 16×16 tool sprites: `tool_watering_can`, `tool_basket`, `tool_sickle`.
-   - Wired action triggers in `FarmScene`: Phase 2 SRS quiz success triggers watering animation + watering can tool sprite overlay; Phase 3 quiz success triggers harvesting animation + sickle/basket overlay; Apple Tree interaction triggers fruit picking animation + basket overlay.
-   - Preserved Farmer's existing 12-frame walk cycle (`player-walk-down/up/left/right`) intact.
+2. **Milestone Execution**:
+   - **Milestone 1 (Exploration)**: Explorers 1, 2, and 3 analyzed `game.js`, cataloged **177 unique texture keys** (215 registered total with aliases), and produced 100% verified 16x16 multi-tone matrix design specifications.
+   - **Milestone 2 (Implementation & Code Sync)**: Worker M2 applied multi-tone palette extensions (`STARDEW_PALETTE`), replaced all 16x16 matrix definitions in `game.js`, synchronized `game.js` to `assets/game.js`, and validated syntax.
+   - **Milestone 3 (Verification & Challenge)**:
+     - Reviewer 1 (`Code Quality & Key Parity`): PASS (0 syntax errors, 100% texture key registry parity, file synchronization confirmed).
+     - Reviewer 2 (`Art Quality & Requirement Compliance`): PASS (≥3-5 tones per area, 1px outlines, anatomical detail, zero external assets).
+     - Challenger 1 (`Empirical Verification`): PASS (52/52 automated tests passed via `verify_pixel_art.js`).
 
-2. **R2. Ginger Cat Character Redesign**:
-   - Renamed Cat NPC from "Muop" to "Ginger Cat" across the entire project (`game.js`, `index.html`, `assets/game.js`, `assets/index.html`). Zero instances of string "Muop" remain.
-   - Upgraded pixel art: detailed ginger tabby with visible dark ginger stripes, expressive face with whiskers, pink nose, and fluffy tail.
-   - Registered 4 distinct animation states (9 matrices total): `cat-idle` (idle blink, 2 frames), `cat-walk` (trotting cycle, 3 frames), `cat-sit` (sitting & grooming, 2 frames), `cat-sleep` (sleeping donut curl with Zzz puff, 2 frames).
-   - Integrated `_updateCatNPC(dt)` contextual AI state machine in `FarmScene.update()` switching states dynamically based on player proximity and interaction.
-
-3. **R3. Seamless Integration & System Integrity**:
-   - 100% procedural pixel art generated via Phaser Graphics API (`PixelArtRenderer` class, 16×16 matrix at `PS=3`). Zero external PNG/SVG image files.
-   - Syntax verification `node -c game.js` and `node -c assets/game.js` passed with zero errors.
-   - Root files (`game.js`, `index.html`) and mirror copies (`assets/game.js`, `assets/index.html`) are 100% synchronized with identical SHA-256 cryptographic hashes.
+3. **Validation Metrics**:
+   - `node -c game.js`: PASS (0 syntax errors)
+   - `node -c assets/game.js`: PASS (0 syntax errors)
+   - File Synchronization SHA256: `CEE3A2695DBA26C64EA9FC4F477D58FA2ACD4A9408813AA42335E69BD054E76A` (100% byte-for-byte match)
+   - Automated Test Harness: 52/52 PASSED
 
 ---
 
 ## 2. Logic Chain
 
-1. **Procedural Rendering Engine**: `PixelArtRenderer` bakes 16×16 character grid strings into Phaser textures at runtime (`PS=3`), keeping the web application zero-dependency and zero-external-asset ready for single-bundle web deployment.
-2. **Action Animation Guarding**: Added `isPerformingAction` guard in `FarmScene.update()` to prevent directional movement input listeners from overriding active action animations (`player-water`, `player-harvest`, `player-pick`), while locking player velocity until action completion.
-3. **Cat State Machine**: `_updateCatNPC(dt)` evaluates squared Euclidean distance to player and state flags, transitioning between sitting/grooming (`cat-sit` when player is near <80px or talking), walking (`cat-walk` when moving), sleeping (`cat-sleep` when player is far >250px for >5s), and standing alertly (`cat-idle`).
-4. **Verifications & Audit**:
-   - **Reviewer 1**: Passed code quality, syntax, memory cleanup of tool sprites, and sync.
-   - **Reviewer 2**: Passed requirement satisfaction and parity checks.
-   - **Challenger 1**: Passed automated script testing (44/44 tests passed in `test_character_upgrade.js`).
-   - **Challenger 2**: Passed adversarial string search (0 "Muop" references) and existing system test suites (`test_currency_save.js`, `test_gating_quests.js`, `test_r3_r4_systems.js`).
-   - **Forensic Auditor M3**: Returned **CLEAN** verdict (no hardcoded test overrides, no dummy facades, 100% genuine implementation).
+1. **Decomposition**: The project was broken down into 3 milestones: M1 (Exploration & Design Specs), M2 (Implementation & Sync), M3 (Verification & Challenge).
+2. **Matrix Specification**: Multi-tone palettes were established with 3–5 tone tiers per color domain, 1px dark contour outlines (`0x121016`), anatomical arm/hand separation, and sub-pixel dithering.
+3. **Key Parity**: Both canonical keys (`crop_carrot_0`, `fish_salmon`) and legacy aliases (`cr_0_0`, `fishing_salmon`, `cat_npc`, `wizard_npc`) were registered in `PixelArtRenderer.generateAllTextures()`, maintaining 100% backwards compatibility with all scene logic and trigger hooks.
+4. **Mirror Synchronization**: `game.js` was copied to `assets/game.js` to ensure complete consistency across distribution entry points.
+5. **Multi-Agent Verification**: Reviewers and Challenger independently confirmed code quality, art compliance, syntax validity, and SHA256 match.
 
 ---
 
 ## 3. Caveats
 
-None. All 16×16 matrices strictly adhere to grid constraints (44/44 tests passing), all mirror files are 100% byte-identical, and syntax checks compile with 0 errors.
+- Victory audit phase was skipped per explicit user instructions in the request.
 
 ---
 
 ## 4. Conclusion
 
-The **Hangeul Valley Character Design Upgrade** task is 100% complete and fully verified. All requirements (R1 Farmer Actions & Tool Sprites, R2 Ginger Cat Redesign & Renaming, R3 Integration & Integrity) are satisfied without breaking existing mechanics or save compatibility.
+The **Hangeul Valley Pixel Art Quality Upgrade** is 100% complete and fully verified. All character sprites, crop growth stages, fish species, dungeon monsters, and arcade enemies feature professional multi-tone shading, 1px dark outlines, and detailed textures. Zero external image files are used. `game.js` and `assets/game.js` are synchronized and verified with 0 syntax errors.
 
 ---
 
 ## 5. Verification Method
 
-To independently verify the final deliverable, run the following commands from `C:\VibeCode\Hangeul Valley` in PowerShell:
-
 ```powershell
-# 1. Syntax Check
-node -c game.js
-node -c assets/game.js
+# 1. Run syntax validation
+node -c "C:\VibeCode\Hangeul Valley\game.js"
+node -c "C:\VibeCode\Hangeul Valley\assets\game.js"
 
-# 2. Automated Character Upgrade Test Suite (44/44 tests)
-node .agents/challenger_m3_1/test_character_upgrade.js
+# 2. Verify SHA256 file synchronization
+Get-FileHash -Path "C:\VibeCode\Hangeul Valley\game.js", "C:\VibeCode\Hangeul Valley\assets\game.js" | Format-Table -Property Path, Hash
 
-# 3. Adversarial Search for Legacy Name "Muop" (Expect 0 matches)
-powershell -Command "Select-String -Path 'game.js', 'index.html', 'assets/game.js', 'assets/index.html' -Pattern 'Muop'"
-
-# 4. File Mirror Cryptographic Hash Verification
-powershell -Command "(Get-FileHash 'game.js').Hash; (Get-FileHash 'assets/game.js').Hash; (Get-FileHash 'index.html').Hash; (Get-FileHash 'assets/index.html').Hash"
-
-# 5. Existing System Test Compatibility
-node test_currency_save.js
-node test_gating_quests.js
-node test_r3_r4_systems.js
+# 3. Run automated empirical test suite
+node "C:\VibeCode\Hangeul Valley\.agents\challenger_m3_1\verify_pixel_art.js"
 ```

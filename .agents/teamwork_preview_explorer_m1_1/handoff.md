@@ -1,56 +1,30 @@
-# Handoff Report — Explorer 1 (HTML Top Area Inspector)
-
-**Working Directory**: `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1`  
-**Target Files**: `index.html`, `assets/index.html`, `game.js`  
-**Status**: Hard Handoff (Investigation Complete)
-
----
+# Handoff Report — Explorer 1 (Character Sprites Specialist)
 
 ## 1. Observation
-1. **File Locations & Parity**:
-   - `index.html` (1799 lines, 104,428 bytes) and `assets/index.html` (1799 lines, 104,428 bytes) are 100% identical copies.
-2. **HUD Elements Count**:
-   - Total of **32 distinct elements** identified in the top area floating overlay space across 4 main structures:
-     - `#event-banner` (7 elements: container, `#eb-icon`, `#eb-title`, `#eb-desc`, `#eb-pts-val`, `.eb-btn`, `.eb-btn-switch`)
-     - `#hud` (21 elements: container, logo icon, `#hud-level`, `#hud-sep`, `#hud-progress`, `#hud-gold` + `#gold-val`, `#hud-gems` + `#gems-val`, `#hud-honor` + `#honor-val`, `#active-buff-bar`, and 12 buttons: `#recipe-btn`, `#pet-btn`, `#seasonal-btn`, `#leaderboard-btn`, `#quest-btn`, `#save-btn`, `#duel-btn`, `#fish-album-btn`, `#trophy-btn`, `#shop-btn`, `#vocab-btn`, `#hud-menu-btn`)
-     - `#progress-bar-wrap` (3 elements: container, label, `#progress-bar-bg` with `#progress-bar-fill`)
-     - `#controls-tip` (1 bottom-center floating tip bar)
-3. **CSS & Positioning Rules**:
-   - `#hud`: `position: fixed; top: 14px; left: 14px; z-index: 100; display: flex; gap: 10px;` (Line 217 in `index.html`).
-   - `#event-banner`: `position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 850;` (Line 1162 in `index.html`).
-   - `#progress-bar-wrap`: `position: fixed; top: 14px; right: 14px; z-index: 100;` (Line 263 in `index.html`).
-   - Responsive Media Query (`max-width: 768px`, Line 921 in `index.html`): `#hud` gets `top: 8px !important; left: 8px !important; right: 8px !important; max-width: calc(100vw - 16px); overflow-x: auto;`, while `#progress-bar-wrap` shifts to `top: 54px; right: 8px;`.
-4. **Button Click Handlers**:
-   - **Inline `onclick`** in `index.html`: 8 HUD buttons (`#recipe-btn`, `#pet-btn`, `#seasonal-btn`, `#leaderboard-btn`, `#quest-btn`, `#save-btn`, `#duel-btn`, `#fish-album-btn`) + 2 event banner buttons (`.eb-btn`, `.eb-btn-switch`).
-   - **`addEventListener` in `game.js`**: 4 HUD buttons (`#trophy-btn`, `#shop-btn`, `#vocab-btn`, `#hud-menu-btn`).
-
----
+- **Target File**: `C:/VibeCode/Hangeul Valley/game.js` (lines 808–1566)
+- **Existing Deficiencies**:
+  - Existing character sprite matrices (`player_walk_down_0..2`, `cat_idle_0..1`, `wizard_idle_0..1`, etc.) lack dark contour outlines (`0x121016`). Characters appear flat against tiled backgrounds.
+  - Major color regions rely on 1–2 flat colors (e.g. overalls `#3B4D7A`, hat `#D4AA63`, cat fur `#F5813F`, wizard robe `#7C3AED`).
+  - Anatomical details (arm separation, leg weight shifts during walk cycle, tool interactions) were simplified or missing.
+- **Verification Script Output**:
+  - Created `validate_matrices.js` which programmatically verified 34 out of 34 designed 16x16 matrices.
+  - 100% matrix height (16 rows) and line length (16 chars) compliance confirmed.
+  - 100% symbol-to-color mapping verified for all Farmer, Cat, and Wizard palettes.
 
 ## 2. Logic Chain
-1. **Observation**: `#event-banner` is fixed at `top: 10px; left: 50%` with `z-index: 850`, while `#hud` is fixed at `top: 14px; left: 14px` with `z-index: 100`.
-2. **Reasoning**: `#hud` contains 18 child nodes horizontally. On viewports between 769px and 1200px width, `#hud` expands rightwards across the center. Because `#event-banner` has `z-index: 850` (higher than `#hud`'s 100), the banner overlaps on top of `#hud`'s middle buttons.
-3. **Observation**: On mobile (`<=768px`), `#hud` takes `left: 8px; right: 8px; top: 8px`, expanding across the full screen width.
-4. **Reasoning**: `#event-banner` remains centered at `top: 10px` with `z-index: 850`, directly floating over `#hud`. `#progress-bar-wrap` drops down to `top: 54px` to avoid right-side collision with `#hud`.
-
----
+1. **Observation**: Existing sprites lack 1px outlines and high-contrast shading.
+2. **Step 1**: Expand `STARDEW_PALETTE` in `game.js` with 45+ multi-tone hex additions (`outlineDark = 0x121016`, 4-tone skin system, 4-tone straw hat system, 4-tone denim system, 3-tone leather system, 5-tone ginger fur system, and 5-tone wizard robe/beard system).
+3. **Step 2**: Redesign all 34 character matrices in 16x16 format using sub-pixel anti-aliasing, 1px dark contour wrapping (`K`), arm/leg weight shifts, and action fluid poses.
+4. **Step 3**: Maintain 100% texture key parity (`player_walk_down_0/1/2`, `player_walk_up_0/1/2`, `player_walk_left_0/1/2`, `player_walk_right_0/1/2`, `player_water_down_0/1/2`, `player_harvest_down_0/1/2`, `player_pick_down_0/1/2`, `tool_watering_can`, `tool_basket`, `cat_idle_0/1`, `cat_walk_0/1/2`, `cat_sit_0/1`, `cat_sleep_0/1`, `cat_npc`, `wizard_idle_0/1`, `wizard_npc`, `farmer0..3`).
+5. **Conclusion**: The complete design specifications in `analysis.md` provide drop-in ready code matrices and palette definitions for the Implementer agent.
 
 ## 3. Caveats
-- Read-only analysis: No source files (`index.html`, `game.js`, `assets/index.html`) were altered.
-- Dynamic runtime rendering (canvas coordinate transforms, dynamic DOM additions into `#active-buff-bar` during active gameplay) was inspected statically and via script execution of `game.js` code paths.
-
----
+- No source code in `game.js` was modified (strictly adhering to read-only investigation constraint).
+- Additional NPC character directions (e.g. Cat/Wizard walk left/right) can be added in future iterations if requested, but all existing 34 texture keys are fully covered and upgraded.
 
 ## 4. Conclusion
-The HTML top area structure is rich and comprehensive, comprising 32 UI components across 4 overlay containers (`#hud`, `#event-banner`, `#progress-bar-wrap`, `#controls-tip`). Event handlers are split between inline HTML `onclick` (10 handlers) and `game.js` event listeners (4 handlers). There is a critical layout conflict where `#event-banner` (`z-index: 850`) visually overlaps `#hud` (`z-index: 100`) on medium (769px–1200px) and mobile (`<=768px`) screen sizes.
-
----
+All required 16x16 pixel art matrices for the Farmer character (12 walk + 9 action + 2 tools), Ginger Cat NPC (8 animation frames + legacy key), and Wizard Merlin NPC (2 idle frames + legacy key) have been designed, multi-tone shaded, anatomically detailed, and programmatically validated.
 
 ## 5. Verification Method
-1. Inspect files directly:
-   - View `index.html` lines 216–286 for CSS rules of `#hud` and `#progress-bar-wrap`.
-   - View `index.html` lines 1162–1182 for CSS rules of `#event-banner`.
-   - View `index.html` lines 1207–1270 for HTML markup of top area.
-2. Run inspection script:
-   - `node "C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\inspect_hud.js"`
-3. Check detailed report:
-   - Read `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\analysis.md`.
+- **Automated Validation**: Run `node .agents/teamwork_preview_explorer_m1_1/validate_matrices.js` from `C:/VibeCode/Hangeul Valley`.
+- **Full Specs Inspection**: Review `C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_1/analysis.md`.

@@ -74,4 +74,62 @@ All new animations must integrate with the existing `PixelArtRenderer` class and
 - [ ] `node -c game.js` passes with zero syntax errors.
 - [ ] Farmer's existing 12-frame walk cycle animations continue to work unchanged.
 - [ ] Farmer action animations play at the correct gameplay triggers (watering → Phase 2 success, harvesting → Phase 3 success, fruit picking → apple tree interaction).
+## Follow-up — 2026-07-23T09:04:25Z
+
+Nâng cấp character design chuyên nghiệp cho game **Hangeul Valley**: thiết kế lại Farmer (nhân vật chính) với animation hành động mới (tưới nước, thu hoạch, hái quả), và đổi tên Cat NPC từ "Muop" thành "Ginger Cat" với character design phong phú hơn. Tất cả sprites phải được vẽ procedurally bằng Phaser Graphics API (zero external image files).
+
+Working directory: C:/VibeCode/Hangeul Valley
+Integrity mode: development
+
+## Follow-up — 2026-07-23T03:12:42Z
+
+Nâng cấp toàn bộ chất lượng pixel art trong game **Hangeul Valley** lên đẳng cấp chuyên nghiệp. Hiện tại các sprites 16×16 quá đơn giản — thiếu shading, thiếu chi tiết giải phẫu, màu sắc phẳng. Mục tiêu: đạt chất lượng pixel art ngang tầm game indie chuyên nghiệp (Stardew Valley, Celeste, Eastward) với kỹ thuật shading nhiều tầng, dithering, anti-aliasing pixel, và sub-pixel animation.
+
+Working directory: C:/VibeCode/Hangeul Valley
+Integrity mode: development
+
+## Current Architecture Context
+
+- **Sprite system**: `PixelArtRenderer.drawMatrix(g, matrix, palette)` → `generateTexture(key, w, h)` — 16×16 character matrix × PS=3 = 48×48 pixel textures
+- **Key constraint**: Zero external image files — all pixel art must be generated via `fillRect()` grid patterns
+- **Existing characters**: Farmer (12 walk + 9 action frames), Ginger Cat (8 frames), Wizard Merlin (2 frames), 11 fish species, 5 crop types × 4 growth stages, arcade enemies, dungeon monsters
+- **Color palette**: `STARDEW_PALETTE` object with earthy warm tones
+
+## Requirements
+
+### R1. Professional-Grade Character Sprite Redesign
+Redesign ALL character sprites (Farmer, Ginger Cat, Wizard Merlin) with professional pixel art techniques:
+- **Multi-tone shading**: Each color area must use at least 3 tones (highlight, base, shadow) instead of current flat 1-2 tone fills
+- **Anatomical detail**: Visible arms/hands separate from body, proper head-to-body proportions, distinguishable clothing folds
+- **Pixel-level polish**: Consistent 1px dark outline on all characters, anti-aliasing pixels at curves (selectively placed intermediate-color pixels), dithering patterns for texture on clothing/fur
+- **Animation fluidity**: Walk cycles should show weight shift, arm swing, and head bob. Action animations (watering, harvesting, picking) should have clear anticipation-action-follow-through poses
+- **Ginger Cat**: Detailed tabby stripe patterns with fur texture dithering, visible whiskers, expressive tail positions per animation state, ear movement
+- **Wizard Merlin**: Flowing robe with fabric fold shading, beard detail with individual hair strands, staff crystal with inner glow effect (multiple translucent color layers)
+
+### R2. Enhanced Environment & Entity Sprites
+Upgrade crop sprites, fish sprites, dungeon monsters, and arcade enemies with the same professional shading treatment:
+- **Crops**: Each growth stage should be visually distinct with detailed leaf shapes, stem structure, and harvest-ready sparkle/color richness
+- **Fish**: Distinct scale patterns, fin detail, species-specific coloring with iridescent highlights
+- **Dungeon monsters**: Menacing character design with animated idle breathing/pulsing, detailed weapon/armor on skeleton/goblin
+- **Arcade enemies**: Sleek sci-fi design with engine glow effects, distinct silhouettes per enemy type
+
+### R3. Maintain All Existing Functionality
+All existing texture keys, animation keys, gameplay triggers, and scene integrations must remain intact. The upgrade is purely visual — no gameplay logic changes. Existing walk cycles, action animations, and idle animations must continue to work with the same keys.
+
+## Acceptance Criteria
+
+### Sprite Quality
+- [ ] Every character sprite (Farmer, Ginger Cat, Wizard) uses ≥3 distinct color tones per major color area (e.g., hat has highlight, base, shadow; overalls have highlight, base, shadow, deep shadow).
+- [ ] Farmer sprites have visible separate arms in at least the down-facing walk frames.
+- [ ] Ginger Cat sprites show visible stripe/tabby pattern using dithering or alternating color pixels.
+- [ ] All character sprites have a consistent 1px dark outline on their outer edges.
+
+### Technical Integrity
+- [ ] `node -c game.js` passes with zero syntax errors.
+- [ ] All existing texture keys (`player_walk_down_0` through `player_pick_down_2`, `cat_idle_0/1`, `cat_walk_0/1`, `cat_sit_0/1`, `cat_sleep_0/1`, `wizard_idle_0/1`, all fish/crop/enemy keys) remain registered and functional.
 - [ ] Root `game.js` and `assets/game.js` are synchronized.
+- [ ] Total number of registered textures is ≥ the current count (no textures removed).
+
+### Process
+- [ ] Skip victory audit phase — user will visually audit the results themselves.
+

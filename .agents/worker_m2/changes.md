@@ -1,82 +1,49 @@
-# Modifications Report: Character Design Upgrade & Gameplay Integration
+# Pixel Art Quality Upgrade - Implementation Changes Log
 
-**Specialist:** Worker M2 (Implementation & Code Synchronization Specialist)  
-**Date:** July 23, 2026  
-**Target Files:**
-- `game.js`
-- `index.html`
-- `assets/game.js`
-- `assets/index.html`
+**Agent**: Worker M2 (Implementation & Code Sync Specialist)  
+**Date**: 2026-07-23  
+**Target File**: `C:/VibeCode/Hangeul Valley/game.js`  
+**Mirror File**: `C:/VibeCode/Hangeul Valley/assets/game.js`  
 
 ---
 
-## Summary of Modifications
+## 1. Summary of Applied Changes
 
-### 1. `PixelArtRenderer` & Texture Generation Updates (`game.js`, lines 807–1170)
-- **Palette Expansion (`P`)**: Added color symbols for action frames and tool rendering:
-  - `m` (`0x7A8B99`), `M` (`0xA0B2C6`), `k` (`0x4A5568`) — Watering can / steel metal colors.
-  - `w` (`STARDEW_PALETTE.oceanShimmer`), `U` (`STARDEW_PALETTE.oceanFoam`) — Water spray & splash droplets.
-  - `Y` (`STARDEW_PALETTE.woodBase`), `y` (`STARDEW_PALETTE.woodHighlight`), `j` (`STARDEW_PALETTE.woodShadow`) — Wicker basket wood.
-  - `c` (`0xC0C0C0`), `C` (`0xE0E0E0`), `e` (`STARDEW_PALETTE.boots`), `E` (`STARDEW_PALETTE.woodBase`) — Sickle silver blade and handle.
-  - `A` (`STARDEW_PALETTE.flowerRed`), `a` (`0xFF6B6B`), `G` (`STARDEW_PALETTE.grassBase`), `g` (`STARDEW_PALETTE.grassHighlight`), `d` (`STARDEW_PALETTE.dirtDry`), `D` (`STARDEW_PALETTE.dirtWet`), `L` (`STARDEW_PALETTE.flowerYellow`) — Crops, leaves, and soil accents.
-- **Farmer Action Frame Textures (9 16×16 matrices)**:
-  - `player_water_down_0..2`: Ready hold, tilt & pour, full stream splash.
-  - `player_harvest_down_0..2`: Bend down, grasp & pull crop, lift & display.
-  - `player_pick_down_0..2`: Reach overhead, grasp apple, pull down to chest.
-- **Tool Sprite Textures (3 16×16 matrices)**:
-  - `tool_watering_can`: Standalone metal watering can with spout and droplets.
-  - `tool_basket`: Wicker harvest basket overflowing with apples and crops.
-  - `tool_sickle`: Curved silver steel sickle with wooden handle.
-- **Farmer Animations**: Registered `player-water` (fps: 6, repeat: 0), `player-harvest` (fps: 6, repeat: 0), `player-pick` (fps: 6, repeat: 0). Preserved existing 12 walk cycle frames (`player_walk_*`) and 4 directional walk animations (`player-walk-*`).
-- **Upgraded Ginger Cat Palette (`C`)**: Added ginger base (`0xF5813F`), dark ginger stripes (`0xB84E10`), cream highlights (`0xFFC078`), white muzzle/chest (`0xFFFFFF`), amber eyes (`0xFFCC44`), soft pink nose/ears (`0xFFAA99`), dark pupils (`0x1A0800`), warm ginger shadow (`0xD97706`).
-- **Ginger Cat Textures (9 16×16 matrices across 4 animation states)**:
-  - `cat_idle_0..1`: Open eye idle & blink.
-  - `cat_walk_0..2`: 3-frame trotting stride cycle with vertical bounce.
-  - `cat_sit_0..1`: Upright sit posture & paw-lick grooming.
-  - `cat_sleep_0..1`: Curled sleeping pose & slow Zzz breathing pulse.
-- **Ginger Cat Animations**: Registered `cat-idle` (fps: 3, repeat: -1), `cat-walk` (fps: 6, repeat: -1), `cat-sit` (fps: 3, repeat: -1), `cat-sleep` (fps: 2, repeat: -1).
+All pixel art matrix redesigns and multi-tone palette specifications from Explorer 1, Explorer 2, and Explorer 3 analysis reports have been fully applied to `C:/VibeCode/Hangeul Valley/game.js` and synchronized to `C:/VibeCode/Hangeul Valley/assets/game.js`.
 
----
+### Key Enhancements:
+1. **Multi-Tone Color Palette Expansion (`STARDEW_PALETTE`)**:
+   - Expanded `STARDEW_PALETTE` with 45+ multi-tone colors providing ≥3–5 tones per area (Highlight, Base, Shadow, Deep Shadow, Accent).
+   - Added 1px dark contour outlines (`0x121016` / `0x251C2B`).
+   - Integrated skin/hair/cloth/fur/leaf/scale highlights and sub-pixel details across character, crop, fish, dungeon, and arcade palettes.
 
-### 2. Cat NPC Renaming ("Muop" -> "Ginger Cat")
-Replaced all occurrences of hardcoded "Muop" with "Ginger Cat":
-- `game.js` (line 3932): `'cat'` vocab fact text updated from `Muop says hi!` to `Ginger Cat says hi!`.
-- `game.js` (line 4938): `_createCatNPC` world text label updated from `'Muop'` to `'Ginger Cat'`.
-- `game.js` (line 5360): `_updateTargetHighlight` SPACE hint text updated from `'[SPACE] Talk to Muop'` to `'[SPACE] Talk to Ginger Cat'`.
-- `index.html` (line 1508): Cat dialog title header updated from `<span id="cat-dialog-name">🐱 Muop says...</span>` to `<span id="cat-dialog-name">🐱 Ginger Cat says...</span>`.
+2. **Character & NPC Sprites Redesign (`PixelArtRenderer._genPlayerTextures`, `_genNpcTextures`)**:
+   - **Farmer**: Redesigned 12 walk cycle matrices (`player_walk_down_0..2`, `up_0..2`, `left_0..2`, `right_0..2`), 9 action matrices (`player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`), and 2 tool matrices (`tool_watering_can`, `tool_basket`). Preserved `tool_sickle` and legacy `farmer0..3` aliases.
+   - **Ginger Cat**: Redesigned 8 animation matrices (`cat_idle_0..1`, `cat_walk_0..2`, `cat_sit_0..1`, `cat_sleep_0..1`) and registered `cat_npc` alias.
+   - **Wizard Merlin**: Redesigned 2 idle matrices (`wizard_idle_0..1`) with pulsing crystal orb and registered `wizard_npc` alias.
+   - Preserved all Phaser animation registrations (`player-walk-*`, `player-water`, `player-harvest`, `player-pick`, `cat-idle`, `cat-walk`, `cat-sit`, `cat-sleep`, `wizard-idle`).
+
+3. **Crop & Fish Sprites Redesign (`PixelArtRenderer._genCropAndTreeTextures`, `_genFishingTextures`)**:
+   - **Crops**: Redesigned 20 crop matrices across 4 growth stages for 5 species (Carrot, Radish, Cabbage, Pepper, Rice) using `CROP_PALETTE`. Registered both canonical (`crop_*_*`) and legacy (`cr_*_*`) keys, plus retained `crop_strawberry_*`, `crop_corn_*`, `crop_sunflower_*`.
+   - **Fish**: Redesigned 11 fish species matrices (`fish_carp`, `fish_salmon`, `fish_tuna`, `fish_squid`, `fish_eel`, `fish_goldfish`, `fish_seabass`, `fish_shrimp`, `fish_octopus`, `fish_catfish`, `fish_mackerel`) using `FISH_PALETTE`. Registered canonical keys and legacy `fishing_*` aliases (`fishing_snapper`, `fishing_golden_fish`, etc.) plus `fishing_legendary` and `fishing_clam`.
+
+4. **Monsters, Bosses, Loot & Arcade Sprites Redesign (`PixelArtRenderer._genDungeonTextures`, `_genArcadeTextures`)**:
+   - **Dungeon Entities**: Redesigned `dungeon_green_slime`, `dungeon_skeleton_archer`, `dungeon_goblin_warrior`, and `dungeon_boss` (Demon Lord) with 1px dark outlines, dripping slime, glowing eyes, and armor shading.
+   - **Dungeon Loot**: Redesigned `loot_chest`, `loot_coin`, `loot_gem`, `loot_potion`, and `loot_scroll` with metallic/alchemical reflections and highlights.
+   - **Arcade Space**: Redesigned `arcade_player_ship`, `alien_scout`, `alien_shooter`, `alien_elite`, `alien_boss` (Dreadnought), `laser_player`, `powerup_weapon`, `powerup_shield`, and `powerup_nuke`.
+
+5. **100% Texture Key Parity**:
+   - Total registered keys in `PixelArtRenderer.generateAllTextures()` increased from 185 to 215 keys (accounting for new canonical keys while maintaining 100% of the original 177 inventoried keys).
+   - Zero missing key errors or references across all game scenes.
 
 ---
 
-### 3. Gameplay Action Triggers in `FarmScene` (`game.js`)
-- **`isPerformingAction` Guard**: Added guard in `FarmScene.update()` (`if (!playerLocked && !this.isPerformingAction)`) and `else` block to prevent movement key listeners and fallback idle texture reset from overriding active action animations.
-- **`playPlayerAction(actionType, targetX, targetY, callback)`**:
-  - Sets `isPerformingAction = true` and `playerLocked = true`.
-  - Orients player facing direction toward target coordinates (`targetX, targetY`).
-  - Attaches tool sprite overlay (`tool_watering_can`, `tool_sickle`, `tool_basket`) above player sprite depth.
-  - Plays Phaser action animation (`player-water`, `player-harvest`, `player-pick`).
-  - Listens to `animationcomplete` with safety timeout fallback.
-  - Cleans up tool overlay, restores idle texture, resets flags, and executes callback.
-- **Phase 2 Quiz Success**: Wrapped sprout growth & soil wetting in `playPlayerAction('water', plot.x, plot.y, ...)` inside `advancePlot()`.
-- **Phase 3 Quiz Success**: Wrapped crop harvest, coins & rewards in `playPlayerAction('harvest', plot.x, plot.y, ...)` inside `advancePlot()`.
-- **Apple Tree Harvest**: Wrapped bonus gold & ingredient reward in `playPlayerAction('pick', this.appleX, this.appleY, ...)` inside `onAppleHarvested()`.
+## 2. File Synchronization & Verification
 
----
-
-### 4. Contextual Ginger Cat State Machine (`game.js`)
-- Implemented `_updateCatNPC(dt)` inside `FarmScene`:
-  - `cat-sit`: Triggered when player distance < 80px or when talking to cat (`catDialogOpen === true`), flipping cat face towards player.
-  - `cat-walk`: Triggered when `this.catIsMoving === true`.
-  - `cat-sleep`: Triggered when player is far (> 250px) and idle > 5 seconds.
-  - `cat-idle`: Default state at medium distance (80px–250px) with periodic blinking.
-- Injected `this._updateCatNPC(dt)` tick call directly into `FarmScene.update()`.
-
----
-
-### 5. Asset Synchronization & Verification
-- Synchronized `game.js` to `assets/game.js` via `Copy-Item`.
-- Synchronized `index.html` to `assets/index.html` via `Copy-Item`.
-- Ran syntax verification:
-  - `node -c game.js`: Clean exit code 0 (zero errors).
-  - `node -c assets/game.js`: Clean exit code 0 (zero errors).
-- Ran case-sensitive search for "Muop": 0 matches found across all project files.
-- Verified SHA-256 hashes match 100% between root and `assets/` copies.
+- **Syntax Validation**:
+  - `node -c game.js`: PASS (0 syntax errors).
+  - `node -c assets/game.js`: PASS (0 syntax errors).
+- **Hash Parity Check**:
+  - `game.js` SHA256: `CEE3A2695DBA26C64EA9FC4F477D58FA2ACD4A9408813AA42335E69BD054E76A`
+  - `assets/game.js` SHA256: `CEE3A2695DBA26C64EA9FC4F477D58FA2ACD4A9408813AA42335E69BD054E76A`
+  - Hash parity: 100% MATCH.

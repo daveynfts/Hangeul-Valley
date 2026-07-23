@@ -46,3 +46,31 @@ Specific Implementation Tasks:
 Write a complete report of all modifications and verification results to `C:/VibeCode/Hangeul Valley/.agents/worker_m2/changes.md` and `C:/VibeCode/Hangeul Valley/.agents/worker_m2/handoff.md`.
 Then send a message to parent reporting completion.
 </USER_REQUEST>
+
+## 2026-07-23T10:16:45Z
+<USER_REQUEST>
+You are Worker M2 (Implementation & Code Sync Specialist) for the Hangeul Valley Pixel Art Quality Upgrade project.
+Your working directory is: C:/VibeCode/Hangeul Valley/.agents/worker_m2/
+Please create your working directory if it does not exist, and initialize your BRIEFING.md and progress.md there.
+
+MANDATORY INTEGRITY WARNING: DO NOT CHEAT. All implementations must be genuine. DO NOT hardcode test results, create dummy/facade implementations, or circumvent the intended task. Integrity violations WILL be detected and rejected.
+
+Your mission is to apply all pixel art matrix and multi-tone palette redesigns to C:/VibeCode/Hangeul Valley/game.js, synchronize assets/game.js, and validate with `node -c game.js`:
+
+1. Read the full design specifications from:
+   - C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_1/analysis.md (Character Sprites: Farmer 12 walk + 9 action + 2 tools, Ginger Cat 8 frames, Wizard 2 frames)
+   - C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_2/analysis.md (Crop & Fish Sprites: 20 crop textures, 11 fish species)
+   - C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_3/analysis.md (Monsters, Bosses, Loot, Arcade Enemies, Player Ship, Projectiles, Powerups & 177 Key Inventory)
+
+2. Update C:/VibeCode/Hangeul Valley/game.js:
+   - Extend STARDEW_PALETTE and entity palette objects with multi-tone colors (≥3 tones per color area, 1px dark outline 0x121016, skin/hair/cloth/fur/leaf/scale highlights & shadows).
+   - Update PixelArtRenderer matrix definitions for ALL character sprites, crops, fish, dungeon monsters, arcade enemies, loot items, and powerups as specified in analysis.md files.
+   - Maintain 100% texture key parity — ensure all 177 texture keys inventoried by Explorer 3 remain registered and functional in `PixelArtRenderer.generateAllTextures()`.
+
+3. Synchronize C:/VibeCode/Hangeul Valley/game.js to C:/VibeCode/Hangeul Valley/assets/game.js so both files are 100% identical.
+
+4. Verify syntax with `node -c game.js`.
+
+5. Write your implementation report to C:/VibeCode/Hangeul Valley/.agents/worker_m2/handoff.md and send a handoff message to the orchestrator.
+</USER_REQUEST>
+

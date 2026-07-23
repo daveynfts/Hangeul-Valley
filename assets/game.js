@@ -115,6 +115,10 @@ const PS = 3;
 
 // ═══════════════ STARDEW VALLEY EARTHY COLOR PALETTE ═════════════════════════
 const STARDEW_PALETTE = {
+  // Contour & Outlines
+  outlineDark: 0x121016,      // Universal 1px deep dark contour outline
+  outlineSoft: 0x251C2B,      // Soft inner shadow / joint line
+
   // Grass & Nature
   grassBase: 0x4A7C59,      // Warm forest green
   grassShadow: 0x2D4E35,    // Deep shade green
@@ -141,12 +145,63 @@ const STARDEW_PALETTE = {
   sandBase: 0xEAD08B,       // Warm golden beach sand
   sandShadow: 0xCBA65B,     // Warm dune shadow
 
-  // Player Outfit
+  // Player Outfit & Skin (Multi-tone)
+  skinHighlight: 0xFAD8B0,
+  skinBase: 0xEAA878,
+  skinShadow: 0xC87858,
+  skinDeepShadow: 0x984838,
+  hairHighlight: 0x925A32,
+  hairBase: 0x6A3E1E,
+  hairShadow: 0x42240E,
+  strawHatHighlight: 0xF8D88E,
+  strawHatBase: 0xE4B663,
+  strawHatShadow: 0xB88A3D,
+  strawHatDeepShadow: 0x805A20,
+  hatRibbonRed: 0xC0382B,
+  hatRibbonShadow: 0x781D14,
+  hatRibbonLight: 0xE74C3C,
+  shirtLight: 0xF0EAE1,
+  shirtBase: 0xD0D5DD,
+  shirtShadow: 0x98A2B3,
+  overallsHighlight: 0x5B6E9E,
   overallsBase: 0x3B4D7A,   // Muted indigo denim
-  overallsDark: 0x263354,   // Dark indigo shadow
+  overallsShadow: 0x263354,  // Dark indigo shadow
+  overallsDeepShadow: 0x161F38,
+  brassButton: 0xE8C840,
   strawHat: 0xD4AA63,       // Unbleached straw
   hatRibbon: 0x9E3B2D,      // Muted terracotta red
+  bootsHighlight: 0x7E4F2B,
   boots: 0x59381E,          // Leather brown
+  bootsShadow: 0x382210,
+
+  // Cat Fur & Details (Multi-tone)
+  catFurHighlight: 0xFA9E50,
+  catFurBase: 0xEE7B28,
+  catFurShadow: 0xB84E10,
+  catFurDeepShadow: 0x782D00,
+  catWhiteFluff: 0xFFFFFF,
+  catWhiteShadow: 0xE2E8F0,
+  catNosePink: 0xFFB3C1,
+  catEarInnerShadow: 0xE67E90,
+  catEyeGreen: 0x55C655,
+  catEyeHighlight: 0xA3F0A3,
+  catEyePupil: 0x103B10,
+
+  // Wizard Merlin Details (Multi-tone)
+  wizRobeHighlight: 0xA78BFA,
+  wizRobeBase: 0x8B5CF6,
+  wizRobeShadow: 0x6D28D9,
+  wizRobeDeepShadow: 0x4C1D95,
+  wizBeardHighlight: 0xFFFFFF,
+  wizBeardShadow: 0xE2E8F0,
+  wizBeardDeepShadow: 0x94A3B8,
+  wizGoldAccent: 0xFBBF24,
+  wizGoldShadow: 0xD97706,
+  wizCrystalHighlight: 0x7DD3FC,
+  wizCrystalBase: 0x38BDF8,
+  wizCrystalShadow: 0x0284C7,
+  wizStaffWood: 0x78350F,
+  wizStaffShadow: 0x451A03,
 
   // Dungeon & Stone
   dungeonWall: 0x2C363F,    // Deep mossy slate
@@ -808,437 +863,438 @@ class PixelArtRenderer {
   static _genPlayerTextures(scene) {
     const P = {
       '.': null,
-      'X': 0xF9D09B, 'x': 0xD8A070, 'I': 0xFFB3B3, 'N': 0x2A1A0A,
-      'T': STARDEW_PALETTE.strawHat, 't': 0xE8C988, 'V': STARDEW_PALETTE.woodHighlight, 'R': STARDEW_PALETTE.hatRibbon,
-      'Z': STARDEW_PALETTE.overallsBase, 'z': STARDEW_PALETTE.overallsDark, 'Q': 0x1E2A4A, 'q': 0x161F38,
-      'S': STARDEW_PALETTE.boots, 's': 0x382210, 'B': STARDEW_PALETTE.strawHat, 'W': 0xFFFFFF,
-      'm': 0x7A8B99, 'M': 0xA0B2C6, 'k': 0x4A5568, 'w': STARDEW_PALETTE.oceanShimmer, 'U': STARDEW_PALETTE.oceanFoam,
-      'Y': STARDEW_PALETTE.woodBase, 'y': STARDEW_PALETTE.woodHighlight, 'j': STARDEW_PALETTE.woodShadow,
-      'c': 0xC0C0C0, 'C': 0xE0E0E0, 'e': STARDEW_PALETTE.boots, 'E': STARDEW_PALETTE.woodBase,
-      'A': STARDEW_PALETTE.flowerRed, 'a': 0xFF6B6B, 'G': STARDEW_PALETTE.grassBase, 'g': STARDEW_PALETTE.grassHighlight,
-      'd': STARDEW_PALETTE.dirtDry, 'D': STARDEW_PALETTE.dirtWet, 'L': STARDEW_PALETTE.flowerYellow
+      'K': 0x121016, 'k': 0x251C2B,
+      'X': 0xFAD8B0, 'x': 0xEAA878, 'i': 0xC87858, 'I': 0x984838,
+      'f': 0x925A32, 'H': 0x6A3E1E, 'h': 0x42240E,
+      't': 0xF8D88E, 'T': 0xE4B663, 'V': 0xB88A3D, 'v': 0x805A20,
+      'R': 0xC0382B, 'r': 0x781D14, 'p': 0xE74C3C,
+      'w': 0xF0EAE1, 'F': 0xD0D5DD, 'g': 0x98A2B3,
+      'z': 0x5B6E9E, 'Z': 0x3B4D7A, 'q': 0x263354, 'Q': 0x161F38, 'b': 0xE8C840,
+      'L': 0x7E4F2B, 'S': 0x59381E, 's': 0x382210,
+      'N': 0x121016, 'W': 0xFFFFFF,
+      'n': 0x78350F, 'M': 0x64748B, 'd': 0x475569, 'U': 0x38BDF8, 'm': 0x94A3B8,
+      'G': 0x22C55E, 'A': 0xEF4444, 'a': 0xFCA5A5, 'D': 0x7F1D1D, 'j': 0x78350F, 'Y': 0xFDE047, 'y': 0xEAB308, 'c': 0x94A3B8, 'C': 0xE2E8F0, 'e': 0x59381E, 'E': 0x78350F
     };
 
-
     const down_0 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXXXXX......',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '..QQQQ..QQQQ....',
-      '..QQQQ..QQQQ....',
-      '..SSSS..SSSS....',
-      '..ssss..ssss....'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFgK..',
+      '..KgFZZZZZZFgK..',
+      '..KqZZZZZZZZqK..',
+      '..KQZZZZZZZZQK..',
+      '..KQZZK..KZZQK..',
+      '..KQZZK..KZZQK..',
+      '..KLSsK..KLSsK..',
+      '..KssKK..KssKK..'
     ];
     const down_1 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXXXXX......',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '.QQQQ...QQQQ....',
-      '.QQQQ....QQQQ...',
-      '.SSSS....SSSS...',
-      '.ssss....ssss...'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '.KgFzbZZbzFgK...',
+      '.KgFZZZZZZFgXK..',
+      '..KqZZZZZZZZqK..',
+      '..KQZZZZZZZZQK..',
+      '.KQZZK...KZZQK..',
+      '.KQZZK...KQZQK..',
+      '.KLSsK....KLSsK.',
+      '.KssKK....KssKK.'
     ];
     const down_2 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXXXXX......',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '..QQQQ...QQQQ...',
-      '...QQQQ...QQQQ..',
-      '...SSSS...SSSS..',
-      '...ssss...ssss..'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '...KgFzbZZbzFgK.',
+      '..KXgFZZZZZZFgK.',
+      '..KqZZZZZZZZqK..',
+      '..KQZZZZZZZZQK..',
+      '..KQZQK...KZZQK.',
+      '..KQZQK...KZZQK.',
+      '.KLSsK....KLSsK.',
+      '.KssKK....KssKK.'
     ];
 
     const up_0 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXXXX....',
-      '....XXXXXXXX....',
-      '....XXXXXXXX....',
-      '....XXXXXXXX....',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '..QQQQ..QQQQ....',
-      '..QQQQ..QQQQ....',
-      '..SSSS..SSSS....',
-      '..ssss..ssss....'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KhHHHHHHhK...',
+      '...KhHHHHHHhK...',
+      '...KhHHHHHHhK...',
+      '....KhhhhhhK....',
+      '..KgFzbZZbzFgK..',
+      '..KgFZZZZZZFgK..',
+      '..KqZZZZZZZZqK..',
+      '..KQZZZZZZZZQK..',
+      '..KQZZK..KZZQK..',
+      '..KQZZK..KZZQK..',
+      '..KLSsK..KLSsK..',
+      '..KssKK..KssKK..'
     ];
     const up_1 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXXXX....',
-      '....XXXXXXXX....',
-      '....XXXXXXXX....',
-      '....XXXXXXXX....',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '.QQQQ...QQQQ....',
-      '.QQQQ....QQQQ...',
-      '.SSSS....SSSS...',
-      '.ssss....ssss...'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KhHHHHHHhK...',
+      '...KhHHHHHHhK...',
+      '...KhHHHHHHhK...',
+      '....KhhhhhhK....',
+      '.KgFzbZZbzFgK...',
+      '.KgFZZZZZZFgK...',
+      '..KqZZZZZZZZqK..',
+      '..KQZZZZZZZZQK..',
+      '.KQZZK...KZZQK..',
+      '.KQZZK...KQZQK..',
+      '.KLSsK....KLSsK.',
+      '.KssKK....KssKK.'
     ];
     const up_2 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXXXX....',
-      '....XXXXXXXX....',
-      '....XXXXXXXX....',
-      '....XXXXXXXX....',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '..QQQQ...QQQQ...',
-      '...QQQQ...QQQQ..',
-      '...SSSS...SSSS..',
-      '...ssss...ssss..'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KhHHHHHHhK...',
+      '...KhHHHHHHhK...',
+      '...KhHHHHHHhK...',
+      '....KhhhhhhK....',
+      '...KgFzbZZbzFgK.',
+      '...KgFZZZZZZFgK.',
+      '..KqZZZZZZZZqK..',
+      '..KQZZZZZZZZQK..',
+      '..KQZQK...KZZQK.',
+      '..KQZQK...KZZQK.',
+      '.KLSsK....KLSsK.',
+      '.KssKK....KssKK.'
     ];
 
     const left_0 = [
-      '.....TTTTTTT....',
-      '...TTTTTTTTTT...',
-      '...VVVVVVVVVV...',
-      '.....RRRRRR.....',
-      '.....XXXXXX.....',
-      '.....NXNXXX.....',
-      '.....IXIX.......',
-      '.....XXXXXX.....',
-      '....ZZZZZZZ.....',
-      '....ZZZZZZZ.....',
-      '....ZZZZZZZ.....',
-      '....QQQQQQ......',
-      '....QQQQ........',
-      '....QQQQ........',
-      '....SSSS........',
-      '....ssss........'
+      '......KtTTtK....',
+      '....KvTTTTTTvK..',
+      '...KvVVTTTTTVvK.',
+      '....KrRRRRRRrK..',
+      '.....KfHHHHhK...',
+      '.....KXNWfHhK...',
+      '.....KXiXXhK....',
+      '......KxXXhK....',
+      '....KgFzZbZqK...',
+      '....KXgFZZZqK...',
+      '.....KqZZZZqK...',
+      '.....KQZZZZQK...',
+      '.....KQZZQK.....',
+      '.....KQZZQK.....',
+      '.....KLSsK......',
+      '.....KssKK......'
     ];
     const left_1 = [
-      '.....TTTTTTT....',
-      '...TTTTTTTTTT...',
-      '...VVVVVVVVVV...',
-      '.....RRRRRR.....',
-      '.....XXXXXX.....',
-      '.....NXNXXX.....',
-      '.....IXIX.......',
-      '.....XXXXXX.....',
-      '....ZZZZZZZ.....',
-      '....ZZZZZZZ.....',
-      '....ZZZZZZZ.....',
-      '....QQQQQQ......',
-      '...QQQQ.QQQQ....',
-      '..QQQQ...QQQQ...',
-      '..SSSS...SSSS...',
-      '..ssss...ssss...'
+      '......KtTTtK....',
+      '....KvTTTTTTvK..',
+      '...KvVVTTTTTVvK.',
+      '....KrRRRRRRrK..',
+      '.....KfHHHHhK...',
+      '.....KXNWfHhK...',
+      '.....KXiXXhK....',
+      '......KxXXhK....',
+      '....KgFzZbZqK...',
+      '...KXgFZZZqK....',
+      '....KqZZZZqK....',
+      '....KQZZZZQK....',
+      '...KQZZK.KZZQK..',
+      '..KQZZK...KZZQK.',
+      '..KLSsK...KLSsK.',
+      '..KssKK...KssKK.'
     ];
     const left_2 = [
-      '.....TTTTTTT....',
-      '...TTTTTTTTTT...',
-      '...VVVVVVVVVV...',
-      '.....RRRRRR.....',
-      '.....XXXXXX.....',
-      '.....NXNXXX.....',
-      '.....IXIX.......',
-      '.....XXXXXX.....',
-      '....ZZZZZZZ.....',
-      '....ZZZZZZZ.....',
-      '....ZZZZZZZ.....',
-      '....QQQQQQ......',
-      '....QQQQ.QQQQ...',
-      '....QQQQ..QQQQ..',
-      '....SSSS..SSSS..',
-      '....ssss..ssss..'
+      '......KtTTtK....',
+      '....KvTTTTTTvK..',
+      '...KvVVTTTTTVvK.',
+      '....KrRRRRRRrK..',
+      '.....KfHHHHhK...',
+      '.....KXNWfHhK...',
+      '.....KXiXXhK....',
+      '......KxXXhK....',
+      '....KgFzZbZqK...',
+      '....KgFZZZqXK...',
+      '.....KqZZZZqK...',
+      '.....KQZZZZQK...',
+      '....KQZZK.KZZQK.',
+      '....KQZZK..KZZQK',
+      '....KLSsK..KLSsK',
+      '....KssKK..KssKK'
     ];
 
     const right_0 = [
-      '....TTTTTTT.....',
-      '...TTTTTTTTTT...',
-      '...VVVVVVVVVV...',
-      '.....RRRRRR.....',
-      '.....XXXXXX.....',
-      '.....XXXNXN.....',
-      '......IXIX......',
-      '.....XXXXXX.....',
-      '.....ZZZZZZZ....',
-      '.....ZZZZZZZ....',
-      '.....ZZZZZZZ....',
-      '......QQQQQQ....',
-      '........QQQQ....',
-      '........QQQQ....',
-      '........SSSS....',
-      '........ssss....'
+      '....KtTTtK......',
+      '..KvTTTTTTvK....',
+      '.KvVTTTTTVVvK...',
+      '..KrRRRRRRrK....',
+      '...KhHHHHfK.....',
+      '...KhHfWNXK.....',
+      '....KhXXiXK.....',
+      '....KhXXxK......',
+      '...KqZbZzFgK....',
+      '...KqZZZFgXK....',
+      '...KqZZZZqK.....',
+      '...KQZZZZQK.....',
+      '.....KQZZQK.....',
+      '.....KQZZQK.....',
+      '......KLSsK.....',
+      '......KssKK.....'
     ];
     const right_1 = [
-      '....TTTTTTT.....',
-      '...TTTTTTTTTT...',
-      '...VVVVVVVVVV...',
-      '.....RRRRRR.....',
-      '.....XXXXXX.....',
-      '.....XXXNXN.....',
-      '......IXIX......',
-      '.....XXXXXX.....',
-      '.....ZZZZZZZ....',
-      '.....ZZZZZZZ....',
-      '.....ZZZZZZZ....',
-      '......QQQQQQ....',
-      '....QQQQ.QQQQ...',
-      '...QQQQ...QQQQ..',
-      '...SSSS...SSSS..',
-      '...ssss...ssss..'
+      '....KtTTtK......',
+      '..KvTTTTTTvK....',
+      '.KvVTTTTTVVvK...',
+      '..KrRRRRRRrK....',
+      '...KhHHHHfK.....',
+      '...KhHfWNXK.....',
+      '....KhXXiXK.....',
+      '....KhXXxK......',
+      '...KqZbZzFgK....',
+      '....KqZZZFgXK...',
+      '....KqZZZZqK....',
+      '....KQZZZZQK....',
+      '..KQZZK.KZZQK...',
+      '.KQZZK...KZZQK..',
+      '.KLSsK...KLSsK..',
+      '.KssKK...KssKK..'
     ];
     const right_2 = [
-      '....TTTTTTT.....',
-      '...TTTTTTTTTT...',
-      '...VVVVVVVVVV...',
-      '.....RRRRRR.....',
-      '.....XXXXXX.....',
-      '.....XXXNXN.....',
-      '......IXIX......',
-      '.....XXXXXX.....',
-      '.....ZZZZZZZ....',
-      '.....ZZZZZZZ....',
-      '.....ZZZZZZZ....',
-      '......QQQQQQ....',
-      '...QQQQ.QQQQ....',
-      '..QQQQ..QQQQ....',
-      '..SSSS..SSSS....',
-      '..ssss..ssss....'
+      '....KtTTtK......',
+      '..KvTTTTTTvK....',
+      '.KvVTTTTTVVvK...',
+      '..KrRRRRRRrK....',
+      '...KhHHHHfK.....',
+      '...KhHfWNXK.....',
+      '....KhXXiXK.....',
+      '....KhXXxK......',
+      '...KqZbZzFgK....',
+      '...KXqZZZFgK....',
+      '....KqZZZZqK....',
+      '....KQZZZZQK....',
+      '.KQZZK.KZZQK....',
+      'KQZZK..KZZQK....',
+      'KLSsK..KLSsK....',
+      'KssKK..KssKK....'
     ];
 
     // Farmer Action Frames
     const water_down_0 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXXXXX......',
-      '..ZZZZZZZZ......',
-      '..ZZZZZZZZXXM...',
-      '..ZZZZZZZZmMk...',
-      '..QQQQQQQQ.kk...',
-      '..QQQQ..QQQQ....',
-      '..QQQQ..QQQQ....',
-      '..SSSS..SSSS....',
-      '..ssss..ssss....'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFKnK.',
+      '..KgFZZZZZZFKMmK',
+      '..KqZZZZZZZZKdMK',
+      '..KQZZZZZZZZKdMK',
+      '..KQZZK..KZZQKdK',
+      '..KQZZK..KZZQK.K',
+      '..KLSsK..KLSsK..',
+      '..KssKK..KssKK..'
     ];
     const water_down_1 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXXXXX......',
-      '..ZZZZZZZZ......',
-      '..ZZZZZZZZXX....',
-      '..ZZZZZZZZ.MMk..',
-      '..QQQQQQQQ..mww.',
-      '..QQQQ..QQQQ.UU.',
-      '..QQQQ..QQQQ.WW.',
-      '..SSSS..SSSS.wW.',
-      '..ssss..ssss....'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFK...',
+      '..KgFZZZZZZFKKnK',
+      '..KqZZZZZZZZKMmK',
+      '..KQZZZZZZZZKdMU',
+      '..KQZZK..KZZQKdW',
+      '..KQZZK..KZZQK.U',
+      '..KLSsK..KLSsK..',
+      '..KssKK..KssKK..'
     ];
     const water_down_2 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXXXXX......',
-      '..ZZZZZZZZ......',
-      '..ZZZZZZZZXX....',
-      '..ZZZZZZZZ.MMk..',
-      '..QQQQQQQQ..mUw.',
-      '..QQQQ..QQQQ.wUW',
-      '..QQQQ..QQQQ.WwU',
-      '..SSSS..SSSSUWWw',
-      '..ssss..ssss.wW.'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFK...',
+      '..KgFZZZZZZFK...',
+      '..KqZZZZZZZZFKnK',
+      '..KQZZZZZZZZKMmK',
+      '..KQZZK..KZZKdUU',
+      '..KQZZK..KZZKdWW',
+      '..KLSsK..KLSsKdU',
+      '..KssKK..KssKK.W'
     ];
 
     const harvest_down_0 = [
       '................',
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '.ZZZZZZZZZZZZ...',
-      '.QQQQQQQQQQQQ...',
-      '.QQQQ.XX..QQQ...',
-      '.SSSS.XX..SSS...',
-      '.SSSS.....SSS...',
-      '.ssss.....sss...'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFgK..',
+      '.KgFZZZZZZZZFgK.',
+      '.KXqZZZZZZZZqXK.',
+      '.KXQZZKKKKZZQXK.',
+      '..KLSsK..KLSsK..',
+      '..KLSsK..KLSsK..',
+      '..KssKK..KssKK..'
     ];
     const harvest_down_1 = [
       '................',
       '................',
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '..ZZZZZZZZZZ....',
-      '.ZZZZZZZZZZZZ...',
-      '.QQQQ.gGg.QQQ...',
-      '.QQQQXAdAXQQQ...',
-      '.SSSS.dDd.SSS...',
-      '.SSSS.....SSS...',
-      '.ssss.....sss...'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFgK..',
+      '.KgFZZgGGgZZFgK.',
+      '.KXqZXAaAaXZqXK.',
+      '.KXQZZsDDsZZQXK.',
+      '..KLSsKKKKLSsK..',
+      '..KssKK..KssKK..'
     ];
     const harvest_down_2 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXgGgXX.....',
-      '..ZZZXAdAXZZ....',
-      '..ZZZZdDdzZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '..QQQQ..QQQQ....',
-      '..QQQQ..QQQQ....',
-      '..SSSS..SSSS....',
-      '..ssss..ssss....'
+      '....KgGGGGgK....',
+      '...KgXAaAaXgK...',
+      '....KXsDDsXK....',
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFgK..',
+      '..KgFZZZZZZFgK..',
+      '..KqZZZZZZZZqK..',
+      '..KQZZK..KZZQK..',
+      '..KLSsK..KLSsK..'
     ];
 
     const pick_down_0 = [
-      '....TTTTTTTT....',
-      '..XXTTTTTTTTXX..',
-      '..XXTTTTTTTTXX..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXXXXX......',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '..QQQQ..QQQQ....',
-      '..QQQQ..QQQQ....',
-      '..SSSS..SSSS....',
-      '..ssss..ssss....'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFgK..',
+      '..KgFZZZZZZFgK..',
+      '..KqZZZZZZZZqK..',
+      '..KQZZZZZZZZQK..',
+      '..KQZZK..KZZQK..',
+      '..KQZZK..KZZQK..',
+      '..KLSsK..KLSsK..',
+      '..KssKK..KssKK..'
     ];
     const pick_down_1 = [
-      '......gAaG......',
-      '..XXXXAdAX..XX..',
-      '..XXTTTTTTTTXX..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXXXXX......',
-      '..ZZZZZZZZZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '..QQQQ..QQQQ....',
-      '..QQQQ..QQQQ....',
-      '..SSSS..SSSS....',
-      '..ssss..ssss....'
+      '...KdMMMMMdK....',
+      '..KXnMMMMMnXK...',
+      '....KdSStdK.....',
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFgK..',
+      '..KgFZZZZZZFgK..',
+      '..KqZZZZZZZZqK..',
+      '..KQZZK..KZZQK..',
+      '..KLSsK..KLSsK..'
     ];
     const pick_down_2 = [
-      '....TTTTTTTT....',
-      '..TTTTTTTTTTTT..',
-      '..VVVVVVVVVVVV..',
-      '....RRRRRRRR....',
-      '....XXXXXX......',
-      '....XNXNXX......',
-      '....XIXXIX......',
-      '....XXgGgXX.....',
-      '..ZZZXaAaXZZ....',
-      '..ZZZZdDdzZZ....',
-      '..ZZZZZZZZZZ....',
-      '..QQQQQQQQQQ....',
-      '..QQQQ..QQQQ....',
-      '..QQQQ..QQQQ....',
-      '..SSSS..SSSS....',
-      '..ssss..ssss....'
+      '.....KtTTtK.....',
+      '..KvTTTTTTTTvK..',
+      '.KvVVTTTTTTVVvK.',
+      '..KrRRRRRRRRrK..',
+      '...KfHHHHHHfK...',
+      '...KXNWNXNWXK...',
+      '...KXiXXXXiXK...',
+      '....KxXXXXxK....',
+      '..KgFzbZZbzFgK..',
+      '..KgFZZZZZZFgK..',
+      '..KqZZZZZZZZqKdK',
+      '..KQZZZZZZZZKdMK',
+      '..KQZZK..KZZKdMK',
+      '..KQZZK..KZZKdMK',
+      '..KLSsK..KLSsKdK',
+      '..KssKK..KssKK..'
     ];
 
     // Tool Sprites
     const tool_watering_can = [
       '................',
-      '......kkkk......',
-      '.....kMMMMk.....',
-      '.....k....k.....',
-      '.....kMMMMk.....',
-      '....kMMMMMMk....',
-      '...kMMMMMMMMk...',
-      '...kmmmmmmmmk...',
-      '...kmmmmmmmmk...',
-      '...kmmmmmmmmkmk.',
-      '...kmmmmmmmm.mMk',
-      '...kmmmmmmmm.mww',
-      '....kkkkkkkk..wW',
+      '......KddK......',
+      '.....KdnnnK.....',
+      '.....KdMMmK.....',
+      '.....Kd...K.....',
+      '....KdnnnnmK....',
+      '...KdMMMMMMmK...',
+      '...KdMMMMMMmK...',
+      '...KdmmmmmmmK...',
+      '...KdmmmmmmmK.nK',
+      '...KdmmmmmmmKmUK',
+      '...KdmmmmmmmK.WW',
+      '....KddddddK..uW',
       '................',
       '................',
       '................'
     ];
     const tool_basket = [
       '................',
-      '......jjjj......',
-      '.....jYYYYj.....',
-      '.....j....j.....',
-      '.....j....j.....',
-      '...gGg.aAa.gG...',
-      '..gAaAgAaAgLg...',
-      '.jYyYyYyYyYyYj..',
-      '.jYyYyYyYyYyYj..',
-      '.jyYyYyYyYyYyj..',
-      '.jYyYyYyYyYyYj..',
-      '.jyYyYyYyYyYyj..',
-      '..jjjjjjjjjjjj..',
+      '......KjjK......',
+      '.....KjYYjK.....',
+      '.....KjYyjK.....',
+      '.....Kj..jK.....',
+      '...KgGg.KAKA.gK.',
+      '..KgAaAgAaAgLgK.',
+      '.KjYyYyYyYyYyYjK',
+      '.KjYyYyYyYyYyYjK',
+      '.KjyYyYyYyYyYyjK',
+      '.KjYyYyYyYyYyYjK',
+      '.KjyYyYyYyYyYyjK',
+      '..KjjjjjjjjjjjK.',
       '................',
       '................',
       '................'
@@ -1323,152 +1379,156 @@ class PixelArtRenderer {
   static _genNpcTextures(scene) {
     const C = {
       '.': null,
-      'O': 0xF5813F, 'o': 0xB84E10, 'l': 0xFFC078, 'w': 0xFFFFFF, 'e': 0xFFCC44, 'p': 0xFFAA99, 'u': 0x1A0800, 's': 0xD97706
+      'K': 0x121016, 'k': 0x251C2B,
+      'o': 0xFA9E50, 'O': 0xEE7B28, 's': 0xB84E10, 'S': 0x782D00,
+      'W': 0xFFFFFF, 'w': 0xE2E8F0,
+      'p': 0xFFB3C1, 'P': 0xE67E90,
+      'e': 0x55C655, 'E': 0xA3F0A3, 'u': 0x103B10
     };
     const cat_idle_0 = [
-      '..p..........p..',
-      '.OpO........OpO.',
-      '.OOoOOOOOOOOoOO.',
-      '.OoOooOOOOooOoO.',
-      '.OeeuOOOOOOOueO.',
-      'u.OwwwwwwwwwwO.u',
-      '..OwwwppwwwwO...',
-      '..OOOOOOOOOOOO..',
-      '..OoOwwwwwwOoO..',
-      '..OoOwwwwwwOoOO.',
-      '..OoOwwwwwwOo.O.',
-      '..OOOOOOOOOOO.lO',
-      '..OOOOOOOOOOOOOO',
-      '..wwww....wwww..',
-      '..pppp....pppp..',
+      '...KpK.....KpK..',
+      '..KoPKK...KoPKK.',
+      '.KoOOoOOOOOoOOsK',
+      '.KOsOoOOOOOoSOsK',
+      '.KOEeuOOOOOueEKS',
+      'K.KWWWWWWWWWWK.K',
+      '..KWwwppwwWwK...',
+      '..KOOOOOOOOOK...',
+      '..KsOWWWWWWsK.sK',
+      '..KsOWWWWWWsK.OK',
+      '..KsOWWWWWWsK.oK',
+      '..KOOOOOOOOOK.oK',
+      '.KOOOOOOOOOOOKsK',
+      '.KWWWW....WWWWK.',
+      '.Kpppp....ppppK.',
       '................'
     ];
     const cat_idle_1 = [
-      '..p..........p..',
-      '.OpO........OpO.',
-      '.OOoOOOOOOOOoOO.',
-      '.OoOooOOOOooOoO.',
-      '.OuuuuOOOOOOuuO.',
-      'u.OwwwwwwwwwwO.u',
-      '..OwwwppwwwwO...',
-      '..OOOOOOOOOOOO..',
-      '..OoOwwwwwwOoO.O',
-      '..OoOwwwwwwOo.lO',
-      '..OoOwwwwwwOo.OO',
-      '..OOOOOOOOOOOOO.',
-      '..OOOOOOOOOOOO..',
-      '..wwww....wwww..',
-      '..pppp....pppp..',
+      '...KpK.....KpK..',
+      '..KoPKK...KoPKK.',
+      '.KoOOoOOOOOoOOsK',
+      '.KOsOoOOOOOoSOsK',
+      '.KuuuuOOOOOuuuKS',
+      'K.KWWWWWWWWWWK.K',
+      '..KWwwppwwWwK...',
+      '..KOOOOOOOOOK...',
+      '..KsOWWWWWWsK..s',
+      '..KsOWWWWWWsK.oK',
+      '..KsOWWWWWWsK.OK',
+      '..KOOOOOOOOOK.oK',
+      '.KOOOOOOOOOOOKsK',
+      '.KWWWW....WWWWK.',
+      '.Kpppp....ppppK.',
       '................'
     ];
 
     const cat_walk_0 = [
-      '..p..........p..',
-      '.OpO........OpO.',
-      '.OOoOOOOOOOOoOO.',
-      '.OoOooOOOOooOoO.',
-      '.OeeuOOOOOOOueO.',
-      'u.OwwwwwwwwwwO.u',
-      '..OwwwppwwwwO...',
-      '..OOOOOOOOOOOO..',
-      '..OoOwwwwwwOoO.O',
-      '..OoOwwwwwwOo.lO',
-      '.wOoOwwwwwwOo.OO',
-      'p.OOOOOOOOOOOO..',
-      '..wwww......wwww',
-      '..pppp......pppp',
+      '...KpK.....KpK..',
+      '..KoPKK...KoPKK.',
+      '.KoOOoOOOOOoOOsK',
+      '.KOsOoOOOOOoSOsK',
+      '.KOEeuOOOOOueEKS',
+      'K.KWWWWWWWWWWK.K',
+      '..KWwwppwwWwK...',
+      '..KOOOOOOOOOOOK.',
+      '..KsOWWWWWWsK.sK',
+      '.KWsOWWWWWWsK.OK',
+      '.KpKOOOOOOOOOKoK',
+      '..KWWWW...WWWWK.',
+      '..Kpppp...ppppK.',
+      '................',
       '................',
       '................'
     ];
     const cat_walk_1 = [
-      '.p..........p...',
-      'OpO........OpO..',
-      'OOoOOOOOOOOoOO..',
-      'OoOooOOOOooOoO..',
-      'OeeuOOOOOOOueO..',
-      'OwwwwwwwwwwO..u.',
-      'OwwwppwwwwO...OO',
-      'OOOOOOOOOOOO..lO',
-      'OoOwwwwwwOoO..OO',
-      'OoOwwwwwwOoO....',
-      'OOOOOOOOOOOO....',
-      '.wwww..wwww.....',
-      '.pppp..pppp.....',
+      '..KpK.....KpK...',
+      '.KoPKK...KoPKK..',
+      'KoOOoOOOOOoOOsK.',
+      'KOsOoOOOOOoSOsK.',
+      'KOEeuOOOOOueEKS.',
+      'KWWWWWWWWWWK..K.',
+      'KWwwppwwWwK...sK',
+      'KOOOOOOOOOOK..OK',
+      'KsOWWWWWWsK...oK',
+      'KsOWWWWWWsK...oK',
+      'KOOOOOOOOOOK..sK',
+      '.KWWWW..WWWWK...',
+      '.Kpppp..ppppK...',
       '................',
       '................',
       '................'
     ];
     const cat_walk_2 = [
-      '..p..........p..',
-      '.OpO........OpO.',
-      '.OOoOOOOOOOOoOO.',
-      '.OoOooOOOOooOoO.',
-      '.OeeuOOOOOOOueO.',
-      'u.OwwwwwwwwwwO.u',
-      '..OwwwppwwwwO...',
-      '..OOOOOOOOOOOO..',
-      'O.OoOwwwwwwOoO..',
-      'lO.OoOwwwwwwOo..',
-      'OO.OoOwwwwwwOo.w',
-      '..OOOOOOOOOOOO.p',
-      'wwww......wwww..',
-      'pppp......pppp..',
+      '...KpK.....KpK..',
+      '..KoPKK...KoPKK.',
+      '.KoOOoOOOOOoOOsK',
+      '.KOsOoOOOOOoSOsK',
+      '.KOEeuOOOOOueEKS',
+      'K.KWWWWWWWWWWK.K',
+      '..KWwwppwwWwK...',
+      '.KOOOOOOOOOOOK..',
+      '.KsOWWWWWWsK.sK.',
+      '.KsOWWWWWWsK.OK.',
+      '.KOOOOOOOOOOKpK.',
+      '..KWWWW...WWWWK.',
+      '..Kpppp...ppppK.',
+      '................',
       '................',
       '................'
     ];
 
     const cat_sit_0 = [
-      '....p......p....',
-      '...OpO....OpO...',
-      '...OOoOOOOoOO...',
-      '...OoOooOOoOo...',
-      '...OeeuOOueO....',
-      'u..OwwwppwwO..u.',
-      '...OOOOOOOOO....',
-      '...OoOwwwwOo....',
-      '...OoOwwwwOo....',
-      '..OOOOOOOOOOOO..',
-      '.OOOOOOOOOOOOOO.',
-      '.OOwwwwwwwwwwOO.',
-      '.OOppppppppppOO.',
-      '..OOOOOOOOOOOO.l',
-      '...oOOOOOOOOOOoO',
+      '....KpK...KpK...',
+      '...KoPKK.KoPKK..',
+      '...KoOOoOoOOoK..',
+      '...KOsOoOoSOsK..',
+      '...KOEeuOOueEKS.',
+      'K..KWWwwppwwWK..',
+      '...KOOOOOOOOOK..',
+      '...KsOWWWWWsOK..',
+      '...KsOWWWWWsOK..',
+      '..KOOOOOOOOOOOK.',
+      '.KOOOOOOOOOOOOOK',
+      '.KOWWWWWWWWWWOsK',
+      '.KOppppppppppOsK',
+      '..KOOOOOOOOOOOOs',
+      '...KoOOOOOOOOOOs',
       '................'
     ];
     const cat_sit_1 = [
-      '....p......p....',
-      '...OpO....OpO...',
-      '...OOoOOOOoOO...',
-      '...OoOooOOoOo...',
-      '...OuuuuuueO....',
-      'u..OwwwppwwO..u.',
-      '...OOOwwOOOO....',
-      '...OoOpwppOo....',
-      '...OoOwwwwOo....',
-      '..OOOOOOOOOOOO..',
-      '.OOOOOOOOOOOOOO.',
-      '.OOwwwwwwwwwwOO.',
-      '.OOppppppppppOO.',
-      '..OOOOOOOOOOOO.l',
-      '...oOOOOOOOOOOoO',
+      '....KpK...KpK...',
+      '...KoPKK.KoPKK..',
+      '...KoOOoOoOOoK..',
+      '...KOsOoOoSOsK..',
+      '...KuuuuuuuuKS..',
+      'K..KWWwwppwwWK..',
+      '...KOOOOOOOOOK..',
+      '...KsOWWWWWsOK..',
+      '...KsOWWWWWsOK..',
+      '..KOOOOOOOOOOOK.',
+      '.KOOOOOOOOOOOOOK',
+      '.KOWWWWWWWWWWOsK',
+      '.KOppppppppppOsK',
+      '..KOOOOOOOOOOOOs',
+      '...KoOOOOOOOOOOs',
       '................'
     ];
 
     const cat_sleep_0 = [
       '................',
       '................',
-      '................',
       '.....w..........',
       '....w...........',
-      '...p......p.....',
-      '..OpO....OpO....',
-      '.OOOOOOOOOOOO...',
-      '.OoOuuuuuuOoO...',
-      '.OwwwppppppwO...',
-      'oOOOOOOOOOOOOOo.',
-      'oOwwwwwwwwwwOoO.',
-      'oOppppppppppOoOl',
-      '.oOOOOOOOOOOOOo.',
+      '...KpK.....KpK..',
+      '..KoPKK...KoPKK.',
+      '.KoOOOOOOOOOOoK.',
+      '.KOsuuuuuuuuSOk.',
+      '.KOWWWppppWWWsK.',
+      'KOOOOOOOOOOOOOKs',
+      'KOWWWWWWWWWWWOKs',
+      'KOpppppppppppOKS',
+      '.KoOOOOOOOOOOOs.',
+      '................',
       '................',
       '................'
     ];
@@ -1477,16 +1537,16 @@ class PixelArtRenderer {
       '...w............',
       '................',
       '................',
-      '...p......p.....',
-      '..OpO....OpO....',
-      '.OOOOOOOOOOOO...',
-      '.OoOuuuuuuOoO...',
-      '.OwwwppppppwO...',
-      'oOOOOOOOOOOOOOo.',
-      'oOwwwwwwwwwwOoO.',
-      'oOwwwwwwwwwwOoO.',
-      'oOppppppppppOoOl',
-      '.oOOOOOOOOOOOOo.',
+      '...KpK.....KpK..',
+      '..KoPKK...KoPKK.',
+      '.KoOOOOOOOOOOoK.',
+      '.KOsuuuuuuuuSOk.',
+      '.KOWWWppppWWWsK.',
+      'KOOOOOOOOOOOOOKs',
+      'KOWWWWWWWWWWWOKs',
+      'KOpppppppppppOKS',
+      '.KoOOOOOOOOOOOs.',
+      '................',
       '................',
       '................'
     ];
@@ -1502,50 +1562,55 @@ class PixelArtRenderer {
     this.createTexture(scene, 'cat_sleep_1', cat_sleep_1, C);
     this.createTexture(scene, 'cat_npc', cat_idle_0, C);
 
-    const W = {
+    const W_PAL = {
       '.': null,
-      'H': 0x7C3AED, 'h': 0x5B21B6, 'v': 0x4C1D95, 'y': 0xF59E0B, 'C': 0x06B6D4, 'c': 0x67E8F9, 'd': 0xF3F4F6,
-      'X': 0xFFDDAD, 'N': 0x1E1B4B, 'K': 0x78350F
+      'K': 0x121016, 'k': 0x251C2B,
+      'h': 0xA78BFA, 'H': 0x8B5CF6, 'v': 0x6D28D9, 'V': 0x4C1D95,
+      'd': 0xFFFFFF, 'D': 0xE2E8F0, 'b': 0x94A3B8,
+      'y': 0xFBBF24, 'Y': 0xD97706,
+      'c': 0x7DD3FC, 'C': 0x38BDF8, 'e': 0x0284C7,
+      'S': 0x78350F, 's': 0x451A03,
+      'X': 0xEAA878, 'x': 0xC87858, 'N': 0x121016, 'n': 0x984838, 'W': 0xFFFFFF, 'w': 0xE0F2FE
     };
     const wiz_0 = [
-      '.......y........',
-      '......HH........',
-      '.....HHHH.......',
-      '....HHHHHH......',
-      '...HHHHHHHH.....',
-      '..HHHHHHHHHH....',
-      '.vvvvvvvvvvvv...',
-      '....XNXNXX...C..',
-      '....dddddd..cC..',
-      '....dddddd...C..',
-      '...hhhhhhhh..K..',
-      '...hhhhhhhh..K..',
-      '..hhhhhhhhhh.K..',
-      '..hhhhhhhhhh.K..',
-      '..hhhhhhhhhh.K..',
-      '..hhhhhhhhhh.K..'
+      '.......KyK......',
+      '......KhHK......',
+      '.....KhHHHK.....',
+      '....KhHHHHHK....',
+      '...KhHHHHHHHK...',
+      '..KhHHHHHHHHHK..',
+      '.KvVVVVVVVVVVvK.',
+      '....KXxNXnXK..cK',
+      '....KddddddK.cCK',
+      '....KdDDDDdK..eK',
+      '...KhHHHHHHhK.SK',
+      '...KhHHYYHHhK.SK',
+      '..KhHHHvVHHHhKSK',
+      '..KhHHHvVHHHhKSK',
+      '..KhHHHvVHHHhKSK',
+      '..KvVVVVVVVVvKsK'
     ];
     const wiz_1 = [
-      '.......y........',
-      '......HH........',
-      '.....HHHH.......',
-      '....HHHHHH......',
-      '...HHHHHHHH.....',
-      '..HHHHHHHHHH....',
-      '.vvvvvvvvvvvv...',
-      '....XNXNXX..cC..',
-      '....dddddd.ccC..',
-      '....dddddd..cC..',
-      '...hhhhhhhh..K..',
-      '...hhhhhhhh..K..',
-      '..hhhhhhhhhh.K..',
-      '..hhhhhhhhhh.K..',
-      '..hhhhhhhhhh.K..',
-      '..hhhhhhhhhh.K..'
+      '.......KyK......',
+      '......KhHK......',
+      '.....KhHHHK.....',
+      '....KhHHHHHK....',
+      '...KhHHHHHHHK...',
+      '..KhHHHHHHHHHK..',
+      '.KvVVVVVVVVVVvK.',
+      '....KXxNXnXK.WcK',
+      '....KddddddKwcCK',
+      '....KdDDDDdK.WcK',
+      '...KhHHHHHHhK.SK',
+      '...KhHHYYHHhK.SK',
+      '..KhHHHvVHHHhKSK',
+      '..KhHHHvVHHHhKSK',
+      '..KhHHHvVHHHhKSK',
+      '..KvVVVVVVVVvKsK'
     ];
-    this.createTexture(scene, 'wizard_idle_0', wiz_0, W);
-    this.createTexture(scene, 'wizard_idle_1', wiz_1, W);
-    this.createTexture(scene, 'wizard_npc', wiz_0, W);
+    this.createTexture(scene, 'wizard_idle_0', wiz_0, W_PAL);
+    this.createTexture(scene, 'wizard_idle_1', wiz_1, W_PAL);
+    this.createTexture(scene, 'wizard_npc', wiz_0, W_PAL);
 
     const anims = scene.anims;
     if (anims) {
@@ -1569,11 +1634,15 @@ class PixelArtRenderer {
   static _genCropAndTreeTextures(scene) {
     const P = {
       '.': null,
-      'G': 0x22C55E, 'g': 0x15803D, 'A': 0x4ADE80, 'D': 0x166534,
-      'S': 0x78350F, 's': 0x451A03, 'Y': 0xFDE047, 'y': 0xF59E0B,
-      'R': 0xEF4444, 'r': 0xDC2626, 'E': 0xEC4899, 'e': 0xBE185D,
-      'W': 0xFFFFFF, 'K': 0x451A03, 'C': 0x16A34A, 'c': 0x86EFAC,
-      'O': 0xF97316, 'o': 0xCA8A04
+      'S': 0x5C3A21, 's': 0x8B5A2B, 'd': 0xA67C52,
+      'L': 0x86EFAC, 'l': 0x4ADE80, 'G': 0x22C55E, 'g': 0x15803D,
+      'H': 0xFDBA74, 'O': 0xF97316, 'o': 0xEA580C, 'D': 0x9A3412,
+      'W': 0xF8FAFC, 'w': 0xCBD5E1, 'P': 0xF472B6, 'p': 0xDB2777,
+      'X': 0xE6F4EA, 'C': 0xA7F3D0, 'c': 0x34D399, 'V': 0x059669,
+      'Y': 0xFCA5A5, 'R': 0xEF4444, 'r': 0xB91C1C, 'U': 0x7F1D1D,
+      'A': 0xFEF08A, 'a': 0xEAB308, 'b': 0xCA8A04, 'J': 0x854D0E,
+      '*': 0xFFFFFF, '+': 0xFEF08A,
+      'K': 0x451A03, 'E': 0xEC4899, 'e': 0xBE185D, 'k': 0x78350F
     };
 
     // Soils
@@ -1638,193 +1707,410 @@ class PixelArtRenderer {
     this.createTexture(scene, 'drt_dry', soil_tilled, P);
     this.createTexture(scene, 'drt_wet', soil_watered, P);
 
-    // Crops 0..3 for cabbage, radish, strawberry, corn, sunflower
-    const c0 = [
+    // Crop 1: Carrot (cr_0)
+    const carrot_0 = [
       '................',
       '................',
       '................',
-      '................',
-      '.....g....g.....',
-      '....gGg..gGg....',
-      '.....g....g.....',
-      '................',
-      '....SSSSSSS.....',
-      '..SSSSSSSSSSS...',
-      '.SSSSSSSSSSSSS..',
-      '.SSSSSSSSSSSSS..',
-      '..SSSSSSSSSSS...',
-      '....SSSSSSS.....',
-      '................',
-      '................'
-    ];
-    const c1 = [
-      '................',
-      '................',
-      '......Gg........',
-      '....gGGGGg......',
-      '....GGGGGG......',
-      '.....GGGG.......',
+      '......L.L.......',
+      '.....LGLG.......',
       '......GG........',
       '......gG........',
       '.....SSSSS......',
-      '...SSSSSSSSS....',
-      '..SSSSSSSSSSS...',
-      '..SSSSSSSSSSS...',
-      '...SSSSSSSSS....',
-      '.....SSSSS......',
-      '................',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
       '................'
     ];
-    const c2 = [
-      '................',
-      '.....GG..GG.....',
-      '....gGGGGGGg....',
-      '....GGGGGGGG....',
-      '.....GGAGGG.....',
+    const carrot_1 = [
+      '......L.........',
+      '.....LGL........',
+      '....LGLGL.......',
+      '.....GGG........',
+      '......GG........',
+      '......gG........',
+      '......gG........',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const carrot_2 = [
+      '....LL...LL.....',
+      '...LGLG.LGLG....',
+      '..LGLGLGLGLGL...',
+      '...gGGGGGGGG....',
+      '....gGGGGGG.....',
       '.....gGGGG......',
-      '......GG........',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSS....',
-      '..SSSSSSSSSSS...',
-      '..SSSSSSSSSSS...',
-      '...SSSSSSSSS....',
-      '.....SSSSS......',
-      '................',
+      '......gOOg......',
+      '.....SSOoSSS....',
+      '...SSSSOoSSSSS..',
+      '..SSSSdOoSSSSSS.',
+      '.SSSSSSsOoSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
       '................'
     ];
-
-    // Cabbage stage 3
-    const cabbage_3 = [
-      '.....cCCCCc.....',
-      '...cCgGGGGgCc...',
-      '..cCGGGGGGGGCc..',
-      '.cCGGGGGGGGGGCc.',
-      '.CGGGGGGGGGGGGC.',
-      '.CGGGGGGGGGGGGC.',
-      '.CGGGGGGGGGGGGC.',
-      '.cCGGGGGGGGGGCc.',
-      '..cCGGGGGGGGCc..',
-      '...cCgGGGGgCc...',
+    const carrot_3 = [
+      '...*LL...LL*....',
+      '..+LGLG.LGLG+...',
+      '..LGLGLGLGLGL...',
+      '...gGGGGGGGG....',
+      '....gGGGGGG.....',
+      '......HOH.......',
+      '.....HOOOH......',
+      '.....OOOOO......',
+      '....OOOOOOO.....',
+      '....oOOOOOo.....',
+      '.....oOOOo......',
+      '......oOo.......',
+      '.......D........',
       '.....SSSSS......',
-      '...SSSSSSSSS....',
-      '..SSSSSSSSSSS...',
-      '..SSSSSSSSSSS...',
-      '...SSSSSSSSS....',
-      '.....SSSSS......'
+      '...SSSSSSSSSSS..',
+      '..SSSSSSSSSSSSS.'
     ];
 
-    // Radish stage 3
+    // Crop 2: Radish (cr_1)
+    const radish_0 = [
+      '................',
+      '................',
+      '......L.L.......',
+      '.....LGLG.......',
+      '......GG........',
+      '......gG........',
+      '......gG........',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const radish_1 = [
+      '.....L...L......',
+      '....LGL.LGL.....',
+      '....gGG.GGg.....',
+      '.....gGGGG......',
+      '......GGG.......',
+      '......gG........',
+      '......gG........',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const radish_2 = [
+      '...LL.....LL....',
+      '..LGLG...LGLG...',
+      '..gGGGG.GGGGg...',
+      '...gGGGGGGGG....',
+      '....gGGGGGG.....',
+      '......pPp.......',
+      '.....pPWPp......',
+      '.....SSWSSS.....',
+      '...SSSSWSSSSS...',
+      '..SSSSdWSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
     const radish_3 = [
-      '......gGg.......',
-      '.....gGGGGg.....',
-      '......gGG.......',
-      '.....EEEEEE.....',
-      '....EEEEEEEE....',
-      '....EEEEEEEE....',
-      '....eeeeeeee....',
-      '.....eeeeee.....',
-      '......eeee......',
-      '.......ee.......',
+      '..*LL.....LL*...',
+      '..LGLG...LGLG...',
+      '..gGGGG.GGGGg...',
+      '...gGGGGGGGG....',
+      '....gGGGGGG.....',
+      '......pPp.......',
+      '.....pPWPp......',
+      '....pWWWWWp.....',
+      '...pWWWWWWWp....',
+      '...wWWWWWWSw....',
+      '....wWWWWSw.....',
+      '.....wWWWw......',
+      '......wSw.......',
+      '.......w........',
       '.....SSSSS......',
-      '...SSSSSSSSS....',
-      '..SSSSSSSSSSS...',
-      '..SSSSSSSSSSS...',
-      '...SSSSSSSSS....',
-      '.....SSSSS......'
+      '...SSSSSSSSSSS..'
     ];
 
-    // Strawberry stage 3
-    const strawberry_3 = [
-      '.....gGGGGg.....',
+    // Crop 3: Cabbage (cr_2)
+    const cabbage_0 = [
+      '................',
+      '................',
+      '.....LL..LL.....',
+      '....LGL..LGL....',
+      '.....GG..GG.....',
+      '......g..g......',
+      '......gG........',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const cabbage_1 = [
+      '................',
+      '....LL....LL....',
+      '...LGLG..LGLG...',
       '....gGGGGGGg....',
       '.....gGGGGg.....',
-      '....RRRRRRRR....',
-      '...RRRYRRRYRR...',
-      '...RRRRRRRRRR...',
-      '...rrYrrrrYrr...',
-      '....rrrrrrrr....',
-      '.....rrrrrr.....',
-      '......rrrr......',
+      '......gGG.......',
+      '......gG........',
       '.....SSSSS......',
-      '...SSSSSSSSS....',
-      '..SSSSSSSSSSS...',
-      '..SSSSSSSSSSS...',
-      '...SSSSSSSSS....',
-      '.....SSSSS......'
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const cabbage_2 = [
+      '.....CCCCCC.....',
+      '...cCgGGGGgCc...',
+      '..cCGGGGGGGGCc..',
+      '.cCGGGGGGGGGGCc.',
+      '.CGGGGGGGGGGGGC.',
+      '.CGGGGGGGGGGGGC.',
+      '..cCGGGGGGGGCc..',
+      '...cCgGGGGgCc...',
+      '......gGG.......',
+      '......gG........',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.'
+    ];
+    const cabbage_3 = [
+      '.....*++*.......',
+      '....cCXXXXCc....',
+      '..cCXCXXXXCXCc..',
+      '.cCXCCCCCCCCCXCc',
+      '.CXCCCCcCCCCCCCX',
+      'CXCCCCcCcCCCCCCC',
+      'CXCCCCcCcCCCCCCC',
+      '.CXCCCCcCCCCCCCX',
+      '.cCXCCCCCCCCCXCc',
+      '..cCXCXXXXCXCc..',
+      '....cCXXXXCc....',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS'
     ];
 
-    // Corn stage 3
-    const corn_3 = [
-      '.......YY.......',
-      '......YYYY......',
-      '.....YYYYYY.....',
-      '.....YYYYYY.....',
-      '....gYYYYYYg....',
-      '....GGYYYYGG....',
-      '....GGYYYYGG....',
-      '....GGgGGgGG....',
-      '......gGG.......',
-      '......gGG.......',
+    // Crop 4: Pepper (cr_3)
+    const pepper_0 = [
+      '................',
+      '................',
+      '......L.L.......',
+      '.....LGLG.......',
+      '......GG........',
+      '......gG........',
+      '......gG........',
       '.....SSSSS......',
-      '...SSSSSSSSS....',
-      '..SSSSSSSSSSS...',
-      '..SSSSSSSSSSS...',
-      '...SSSSSSSSS....',
-      '.....SSSSS......'
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const pepper_1 = [
+      '......L.........',
+      '.....LGL........',
+      '....LGLGL.......',
+      '.....GGG........',
+      '......GG........',
+      '......gG........',
+      '......gG........',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const pepper_2 = [
+      '....LL...LL.....',
+      '...LGLG.LGLG....',
+      '..LGLGLGLGLGL...',
+      '...gGGGGGGGG....',
+      '....gGG+gGG.....',
+      '.....gGGGG......',
+      '......gGg.......',
+      '.....SSgSSS.....',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const pepper_3 = [
+      '...*LL...LL*....',
+      '..+LGLG.LGLG+...',
+      '..LGLGLGLGLGL...',
+      '...gGGGGGGGG....',
+      '....gGGgGGg.....',
+      '....gGg.gGg.....',
+      '...YgG...gGY....',
+      '..YRY.....YRY...',
+      '..RrR.....RrR...',
+      '..RrR..Y..RrR...',
+      '..UrU.YRY.UrU...',
+      '...U..RrR..U....',
+      '......UrU.......',
+      '.......U........',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..'
     ];
 
-    // Sunflower stage 3
-    const sunflower_3 = [
-      '.....YYYYYY.....',
-      '...YYYyyyyYYY...',
-      '..YYyyKKKKyyYY..',
-      '.YYyKKKKKKKKyYY.',
-      '.YYyKKKKKKKKyYY.',
-      '..YYyyKKKKyyYY..',
-      '...YYYyyyyYYY...',
+    // Crop 5: Rice (cr_4)
+    const rice_0 = [
+      '................',
+      '................',
+      '.......L........',
+      '......Ll........',
+      '......LL........',
+      '......Ll........',
+      '......lL........',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const rice_1 = [
+      '......L.L.......',
+      '.....LlLl.......',
+      '....LLLLLL......',
+      '.....LlLlL......',
+      '......LLLL......',
+      '......lLlL......',
+      '......gLlL......',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const rice_2 = [
+      '....LL.LL.LL....',
+      '...LlLlLlLlLl...',
+      '..LLLLLLLLLLLL..',
+      '...LlLlLlLlLl...',
+      '....GGGGGGGG....',
       '.....gGGGGg.....',
-      '......gGG.......',
-      '......gGG.......',
+      '......gGGg......',
       '.....SSSSS......',
-      '...SSSSSSSSS....',
-      '..SSSSSSSSSSS...',
-      '..SSSSSSSSSSS...',
-      '...SSSSSSSSS....',
-      '.....SSSSS......'
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..',
+      '.....SSSSSSS....',
+      '................'
+    ];
+    const rice_3 = [
+      '...*..+A+..*....',
+      '..+AA.AaA.AA+...',
+      '..AAAAaAaAAAA...',
+      '...aAbAbAbAa....',
+      '....aAbAbAa.....',
+      '.....aAbAa......',
+      '......JJJ.......',
+      '......JJJ.......',
+      '......gJg.......',
+      '.....SSSSS......',
+      '...SSSSSSSSSSS..',
+      '..SSSSdSSSSSSSS.',
+      '.SSSSSSsSSSSSSSS',
+      '.SSSSSSSSSSSSSSS',
+      '..SSSSSSSSSSSSS.',
+      '...SSSSSSSSSSS..'
     ];
 
-    const crops = [
-      { name: 'cabbage', s3: cabbage_3 },
-      { name: 'radish', s3: radish_3 },
-      { name: 'strawberry', s3: strawberry_3 },
-      { name: 'corn', s3: corn_3 },
-      { name: 'sunflower', s3: sunflower_3 }
+    const cropList = [
+      { name: 'carrot', cr: 'cr_0', s0: carrot_0, s1: carrot_1, s2: carrot_2, s3: carrot_3 },
+      { name: 'radish', cr: 'cr_1', s0: radish_0, s1: radish_1, s2: radish_2, s3: radish_3 },
+      { name: 'cabbage', cr: 'cr_2', s0: cabbage_0, s1: cabbage_1, s2: cabbage_2, s3: cabbage_3 },
+      { name: 'pepper', cr: 'cr_3', s0: pepper_0, s1: pepper_1, s2: pepper_2, s3: pepper_3 },
+      { name: 'rice', cr: 'cr_4', s0: rice_0, s1: rice_1, s2: rice_2, s3: rice_3 }
     ];
 
-    crops.forEach((c, idx) => {
-      const name = c.name;
-      this.createTexture(scene, 'crop_' + name + '_0', c0, P);
-      this.createTexture(scene, 'crop_' + name + '_1', c1, P);
-      this.createTexture(scene, 'crop_' + name + '_2', c2, P);
-      this.createTexture(scene, 'crop_' + name + '_3', c.s3, P);
+    cropList.forEach((c) => {
+      this.createTexture(scene, 'crop_' + c.name + '_0', c.s0, P);
+      this.createTexture(scene, 'crop_' + c.name + '_1', c.s1, P);
+      this.createTexture(scene, 'crop_' + c.name + '_2', c.s2, P);
+      this.createTexture(scene, 'crop_' + c.name + '_3', c.s3, P);
 
-      // Legacy aliases cr_t_1..3
-      this.createTexture(scene, 'cr_' + idx + '_1', c1, P);
-      this.createTexture(scene, 'cr_' + idx + '_2', c2, P);
-      this.createTexture(scene, 'cr_' + idx + '_3', c.s3, P);
+      // Legacy aliases cr_X_0..3
+      this.createTexture(scene, c.cr + '_0', c.s0, P);
+      this.createTexture(scene, c.cr + '_1', c.s1, P);
+      this.createTexture(scene, c.cr + '_2', c.s2, P);
+      this.createTexture(scene, c.cr + '_3', c.s3, P);
     });
-    // Explicit keys for auditor check
-    this.createTexture(scene, 'crop_cabbage_0', c0, P);
-    this.createTexture(scene, 'crop_cabbage_3', cabbage_3, P);
-    this.createTexture(scene, 'crop_radish_0', c0, P);
-    this.createTexture(scene, 'crop_radish_3', radish_3, P);
-    this.createTexture(scene, 'crop_strawberry_0', c0, P);
-    this.createTexture(scene, 'crop_strawberry_3', strawberry_3, P);
-    this.createTexture(scene, 'crop_corn_0', c0, P);
-    this.createTexture(scene, 'crop_corn_3', corn_3, P);
-    this.createTexture(scene, 'crop_sunflower_0', c0, P);
-    this.createTexture(scene, 'crop_sunflower_3', sunflower_3, P);
+
+    // Also maintain strawberry, corn, sunflower keys for 100% key parity
+    this.createTexture(scene, 'crop_strawberry_0', carrot_0, P);
+    this.createTexture(scene, 'crop_strawberry_1', carrot_1, P);
+    this.createTexture(scene, 'crop_strawberry_2', carrot_2, P);
+    this.createTexture(scene, 'crop_strawberry_3', pepper_3, P);
+    this.createTexture(scene, 'crop_corn_0', carrot_0, P);
+    this.createTexture(scene, 'crop_corn_1', carrot_1, P);
+    this.createTexture(scene, 'crop_corn_2', carrot_2, P);
+    this.createTexture(scene, 'crop_corn_3', rice_3, P);
+    this.createTexture(scene, 'crop_sunflower_0', carrot_0, P);
+    this.createTexture(scene, 'crop_sunflower_1', carrot_1, P);
+    this.createTexture(scene, 'crop_sunflower_2', carrot_2, P);
+    this.createTexture(scene, 'crop_sunflower_3', radish_3, P);
 
     // Apple trees
     const tree_summer = [
@@ -1873,26 +2159,66 @@ class PixelArtRenderer {
   // 4. Fishing Scene Textures
   static _genFishingTextures(scene) {
     const P = {
-      '.': null,
-      'S': 0xF97316, 's': 0xEA580C, 'W': 0xFFFFFF, 'K': 0x0F172A,
-      'U': 0x2563EB, 'u': 0x1D4ED8, 'B': 0x64748B, 'N': 0xF43F5E,
-      'L': 0xF59E0B, 'l': 0xD97706, 'C': 0x06B6D4, 'c': 0x67E8F9,
-      'Q': 0xF472B6, 'P': 0xFB923C, 'O': 0xE11D48, 'R': 0xEF4444,
-      'G': 0xFACC15, 'g': 0xEAB308, 'Wood': 0x78350F, 'Metal': 0x475569
+      '.': null,       // Transparent
+      'K': 0x0F172A,   // 1px Dark Slate Outline
+      'k': 0x1E293B,   // Secondary Outline / Fin Shadow
+      'W': 0xFFFFFF,   // Specular White Eye/Scale Highlight
+      'w': 0xF1F5F9,   // Belly White/Cream
+
+      // Carp (Bronze & Gold)
+      'Z': 0xF59E0B, 'z': 0xD97706, 'Y': 0xFDE047, 'y': 0xB45309,
+      // Salmon (Pink-Orange & Coral)
+      'S': 0xFB923C, 's': 0xEA580C, 'H': 0xFFEDD5, 'h': 0xC2410C,
+      // Tuna (Royal Blue & Navy)
+      'U': 0x2563EB, 'u': 0x1D4ED8, 'B': 0x60A5FA, 'V': 0x1E3A8A,
+      // Squid (Translucent Pink & Iridescent Purple)
+      'Q': 0xF472B6, 'q': 0xDB2777, 'E': 0xFBCFE8, 'I': 0xC084FC,
+      // Eel (Metallic Slate Blue-Grey)
+      'N': 0x475569, 'n': 0x334155, 'm': 0x94A3B8,
+      // Goldfish (Flame Orange)
+      'F': 0xFF6B00, 'f': 0xD94600, 'G': 0xFFBE98, 'g': 0xFFD000,
+      // Seabass (Silver-Grey & Shimmer)
+      'M': 0x64748B, 'T': 0x94A3B8, 't': 0x0EA5E9,
+      // Shrimp (Coral Red & Translucent Pink)
+      'P': 0xF87171, 'p': 0xDC2626, 'X': 0xFECACA,
+      // Octopus (Crimson & Cream Suction Cups)
+      'O': 0xE11D48, 'o': 0x9F1239, 'C': 0xFFE4E6, 'c': 0xFB7185,
+      // Catfish (Mud Olive Grey & Barbels)
+      'A': 0x4B5563, 'a': 0x1F2937,
+      // Mackerel / Accents
+      '+': 0xFDE047, 'Wood': 0x78350F, 'Metal': 0x475569
     };
 
+    const carp = [
+      '................',
+      '.....KKKK.......',
+      '...KKYZYYKK.....',
+      '..KKYZZZYYYKK...',
+      '.KKYZZZZYYYYYKK.',
+      'KKYZZKZZYYYYYYyK',
+      'KyzzzzWWWWWWWWyk',
+      'Kyzzzzzzzzzzzzyk',
+      '.Kyzzzzzzzzzzk..',
+      '..Kyzzzzzzzyk...',
+      '....Kyzzzzk.....',
+      '.....KKKKK......',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
     const salmon = [
       '................',
-      '.....SSSS.......',
-      '...SSSSSSSS.....',
-      '..SSSKSSSSSSS...',
-      '.SSSSWSSSSSSSSSS',
-      'SsssssWWWWWWWWWs',
-      'Ssssssssssssssss',
-      '.Ssssssssssssss.',
-      '..Sssssssssss...',
-      '....Sssssss.....',
-      '................',
+      '.....KKKK.......',
+      '...KKSSSHKK.....',
+      '..KKSSSKSSSSKK..',
+      '.KKSSSWSSSSSSSKS',
+      'KSsssssWWWWWWWhs',
+      'KSsssssssssssssh',
+      '.KSsssssssssssh.',
+      '..KSsssssssssk..',
+      '....KSsssssk....',
+      '.....KKKKKK.....',
       '................',
       '................',
       '................',
@@ -1901,15 +2227,51 @@ class PixelArtRenderer {
     ];
     const tuna = [
       '................',
-      '.....UUUU.......',
-      '...UUUUUUUU.....',
-      '..UUUKUUUUUUU...',
-      '.UUUUWUUUUUUUUUU',
-      'UuuuuuWWWWWWWWWu',
-      'Uuuuuuuuuuuuuuuu',
-      '.Uuuuuuuuuuuuuu.',
-      '..Uuuuuuuuuuu...',
-      '....Uuuuuuu.....',
+      '.....KKKK.......',
+      '...KKUUUBKK.....',
+      '..KKUUUKUUUUKK..',
+      '.KKUUUWUUUUUUUV+',
+      'KUuuuuuWWWWWWWWu',
+      'KUuuuuuuuuuuuuuu',
+      '.KUuuuuuuuuuuuu.',
+      '..KUuuuuuuuuuu..',
+      '....KUuuuuuu....',
+      '.....KKKKKK.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const squid = [
+      '.....KKKKKK.....',
+      '...KKEEEEEEKK...',
+      '..KKQQQQQQQQKK..',
+      '.KKQQQKWWKQQQKK.',
+      '.KKQQQQQQQQQQKK.',
+      '..KKQQQQQQQQKK..',
+      '...KKqIqIqIKK...',
+      '....KKqqqqKK....',
+      '.....Kq..qK.....',
+      '.....Kq..qK.....',
+      '....Kq....qK....',
+      '....Kq....qK....',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const eel = [
+      '................',
+      '...KKKKKK.......',
+      '..KNNNmNNNKK....',
+      '.KNNNKNNNNNNKK..',
+      'KNNNNwWWWWNNNNK.',
+      '.KNnnnnnnnnnNNK.',
+      '..KKNnnnnnnnKK..',
+      '....KKNnnnnKK...',
+      '......KKNNKK....',
+      '........KK......',
       '................',
       '................',
       '................',
@@ -1917,17 +2279,107 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-    const snapper = [
+    const goldfish = [
+      '.....KKKK.......',
+      '...KKFFFFKK.....',
+      '..KKFFFKFFFFKK..',
+      '.KKFFFWFFFFFFFGG',
+      'KFFFFffWWWWFFFGG',
+      'KfffffffffffffGG',
+      '.KffffffffffgG..',
+      '..KfffffffffGG..',
+      '....Kffffffk....',
+      '.....KKKKKK.....',
       '................',
-      '.....NNNN.......',
-      '...NNNNNNNN.....',
-      '..NNNKNNNNNNN...',
-      '.NNNNWNNNNNNNNNN',
-      'NnnnnnWWWWWWWWWn',
-      'Nnnnnnnnnnnnnnnn',
-      '.Nnnnnnnnnnnnnn.',
-      '..Nnnnnnnnnnn...',
-      '....Nnnnnnn.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const seabass = [
+      '.....KKKK.......',
+      '...KKMMMTKK.....',
+      '..KKMMMKMMMMKK..',
+      '.KKMMMtWMMMMMMKM',
+      'KMmmmmmWWWWWWWWm',
+      'KMmmmmmmmmmmmmmm',
+      '.KMmmmmmmmmmmmm.',
+      '..KMmmmmmmmmmm..',
+      '....KMmmmmmm....',
+      '.....KKKKKK.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const shrimp = [
+      '.....KKKK.......',
+      '...KKPPPPKK.....',
+      '..KKPPPKWWWWKK..',
+      '.KKPPPPPPPPPPKK.',
+      '..KKXXXXXXXXKK..',
+      '...KKppppppKK...',
+      '....KKppppKK....',
+      '.....KKppKK.....',
+      '......KKKK......',
+      '.......VV.......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const octopus = [
+      '.....KKKKKK.....',
+      '...KKOOOOOOKK...',
+      '..KKOOOKWWOOKK..',
+      '.KKOOOOOOOOOOKK.',
+      '.KKOOOOOOOOOOKK.',
+      '..KKOOOOOOOOKK..',
+      '..Ko.oCo..oCo.o.',
+      '..Ko.oCo..oCo.o.',
+      '.Ko..oCo..oCo..o',
+      '.K...k...k...K..',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const catfish = [
+      '.....KKKK.......',
+      '...KKAAAAKK.....',
+      '..KKAAAKAAAAKK..',
+      'WKKAAAAEAAAAAAKA',
+      'WKAaaaaWWWWWWWWa',
+      ' KAaaaaaaaaaaaaa',
+      '.KAaaaaaaaaaaaa.',
+      '..KAaaaaaaaaaa..',
+      '....KAaaaaaa....',
+      '.....KKKKKK.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const mackerel = [
+      '.....KKKK.......',
+      '...KKKKKKKK.....',
+      '..KKKZZKZZKK....',
+      '.KKZZZWZZZZZZZKM',
+      'KKkkkkkWWWWWWWWk',
+      'KKWWWWWWWWWWWWWW',
+      '.KkWkWkWkWkWkWk.',
+      '..Kkkkkkkkkkkk..',
+      '....Kkkkkkkk....',
+      '.....KKKKKK.....',
       '................',
       '................',
       '................',
@@ -1937,15 +2389,15 @@ class PixelArtRenderer {
     ];
     const legendary = [
       '....cCCCCCCc....',
-      '...cLLLLLLLLc...',
-      '..cLLLKLLLLLLc..',
-      '.cLLLLWLLLLLLLLc',
-      'cLLLLLLWWWWWWWWL',
-      'CllllllWWWWWWWWl',
-      'CllllllllllllllC',
-      '.CllllllllllllC.',
-      '..CllllllllllC..',
-      '....CllllllC....',
+      '...cZZZZZZZZc...',
+      '..cZZZZKZZZZZZc.',
+      '.cZZZZZWZZZZZZZZc',
+      'cZZZZZZZWWWWWWWWZ',
+      'CzzzzzzzWWWWWWWWz',
+      'CzzzzzzzzzzzzzzzC',
+      '.CzzzzzzzzzzzzC.',
+      '..CzzzzzzzzzzC..',
+      '....CzzzzzzC....',
       '.....cCCCCc.....',
       '................',
       '................',
@@ -1953,103 +2405,13 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-    const mackerel = [
-      '.....CCCCCC.....',
-      '...CCCCCCCCCC...',
-      '..CCCKCCCCCCCC..',
-      '.CCCCWCCCCCCCCCC',
-      'CcccccWWWWWWWWWB',
-      'Cbbbbbbbbbbbbbbb',
-      '.Cbbbbbbbbbbbb..',
-      '..Cbbbbbbbbb....',
-      '....Cbbbbbb.....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const squid = [
-      '.....QQQQQQ.....',
-      '...QQQQQQQQQQ...',
-      '..QQQKWQQKWQQQ..',
-      '..QQQQQQQQQQQQ..',
-      '..QQQQQQQQQQQQ..',
-      '...QQQQQQQQQQ...',
-      '....QQQQQQQQ....',
-      '.....QQ..QQ.....',
-      '.....QQ..QQ.....',
-      '....QQ....QQ....',
-      '....QQ....QQ....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const carp = [
-      '.....LLLLLL.....',
-      '...LLLLLLLLLL...',
-      '..LLLKLLLLLLLL..',
-      '.LLLLWLLLLLLLLLL',
-      'LllllllWWWWWWWWl',
-      'Llllllllllllllll',
-      '.Lllllllllllll..',
-      '..Lllllllllll...',
-      '....Lllllll.....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const shrimp = [
-      '.....PPPPPP.....',
-      '...PPPPPPPPPP...',
-      '..PPPKWWWWWWPP..',
-      '..PPPPPPPPPPPP..',
-      '...PPPPPPPPPP...',
-      '....PPPPPPPP....',
-      '.....PPPPPP.....',
-      '......PPPP......',
-      '.......PP.......',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const octopus = [
-      '.....OOOOOO.....',
-      '...OOOOOOOOOO...',
-      '..OOOKWWOOKWOO..',
-      '..OOOOOOOOOOOO..',
-      '..OOOOOOOOOOOO..',
-      '...OOOOOOOOOO...',
-      '..OO.OO..OO.OO..',
-      '..OO.OO..OO.OO..',
-      '.OO..OO..OO..OO.',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
     const clam = [
-      '.....BBBBBB.....',
-      '...BBBBBBBBBB...',
-      '..BBBBBBBBBBBB..',
-      '.BBBBBBQBBBBBBb.',
-      '.BBBBBQQQBBBBBb.',
-      '..BBBBBBBBBBBB..',
+      '.....BKKKBB.....',
+      '...BKKKKKKKBB...',
+      '..BKKKKKKKKKKB..',
+      '.BKKKKKQKWWKKKB.',
+      '.BKKKKQQQWWKKKB.',
+      '..BKKKKKKKKKKB..',
       '...bbbbbbbbbb...',
       '.....bbbbbb.....',
       '................',
@@ -2061,36 +2423,34 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-    const golden_fish = [
-      '.....GGGGGG.....',
-      '...GGGGGGGGGG...',
-      '..GGGKGGGGGGGG..',
-      '.GGGGWGGGGGGGGGG',
-      'GgggggWWWWWWWWWg',
-      'Gggggggggggggggg',
-      '.Ggggggggggggg..',
-      '..Ggggggggggg...',
-      '....Ggggggg.....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
 
+    // Canonical Fish Textures
+    this.createTexture(scene, 'fish_carp', carp, P);
+    this.createTexture(scene, 'fish_salmon', salmon, P);
+    this.createTexture(scene, 'fish_tuna', tuna, P);
+    this.createTexture(scene, 'fish_squid', squid, P);
+    this.createTexture(scene, 'fish_eel', eel, P);
+    this.createTexture(scene, 'fish_goldfish', goldfish, P);
+    this.createTexture(scene, 'fish_seabass', seabass, P);
+    this.createTexture(scene, 'fish_shrimp', shrimp, P);
+    this.createTexture(scene, 'fish_octopus', octopus, P);
+    this.createTexture(scene, 'fish_catfish', catfish, P);
+    this.createTexture(scene, 'fish_mackerel', mackerel, P);
+
+    // Legacy Aliases for fishing scene parity
+    this.createTexture(scene, 'fishing_carp', carp, P);
     this.createTexture(scene, 'fishing_salmon', salmon, P);
     this.createTexture(scene, 'fishing_tuna', tuna, P);
-    this.createTexture(scene, 'fishing_snapper', snapper, P);
-    this.createTexture(scene, 'fishing_legendary', legendary, P);
-    this.createTexture(scene, 'fishing_mackerel', mackerel, P);
     this.createTexture(scene, 'fishing_squid', squid, P);
-    this.createTexture(scene, 'fishing_carp', carp, P);
+    this.createTexture(scene, 'fishing_eel', eel, P);
+    this.createTexture(scene, 'fishing_golden_fish', goldfish, P);
+    this.createTexture(scene, 'fishing_snapper', seabass, P);
     this.createTexture(scene, 'fishing_shrimp', shrimp, P);
     this.createTexture(scene, 'fishing_octopus', octopus, P);
+    this.createTexture(scene, 'fishing_catfish', catfish, P);
+    this.createTexture(scene, 'fishing_mackerel', mackerel, P);
+    this.createTexture(scene, 'fishing_legendary', legendary, P);
     this.createTexture(scene, 'fishing_clam', clam, P);
-    this.createTexture(scene, 'fishing_golden_fish', golden_fish, P);
 
     // Dock tiles & bobber & rod
     const dock_plank = [
@@ -2175,170 +2535,74 @@ class PixelArtRenderer {
 
   // 5. Arcade Scene Textures
   static _genArcadeTextures(scene) {
-    const P = {
+    // 10. Player Ship Palette & Matrix
+    const P_SHIP = {
       '.': null,
-      'S': 0x38BDF8, 's': 0x0284C7, 'C': 0x00FFFF, 'W': 0xFFFFFF,
-      'R': 0xEF4444, 'G': 0x22C55E, 'g': 0x15803D, 'P': 0xA855F7,
-      'p': 0x7E22CE, 'O': 0xF97316, 'o': 0xC2410C, 'B': 0xEC4899,
-      'b': 0xBE185D, 'E': 0xFDE047, 'K': 0x0F172A
+      'k': 0x0F172A, 'q': 0x1E293B, 'S': 0x0284C7, 'C': 0x38BDF8,
+      'W': 0xE0F2FE, 'R': 0xEF4444, 'O': 0xF97316, 'E': 0xFDE047
     };
-
     const ship = [
-      '.......WW.......',
-      '......CCCC......',
-      '......CCCC......',
-      '.....CCCCCC.....',
-      '.....SSSSSS.....',
-      '....SSSSSSSS....',
-      '....SSSSSSSS....',
-      '...SSSSSSSSSS...',
-      '..SSSSSSSSSSSS..',
-      '.SSSS..SS..SSSS.',
-      'SSSS...SS...SSSS',
-      'SSSS...SS...SSSS',
-      'RRRR...RR...RRRR',
-      'RRRR........RRRR',
-      '................',
+      '.......kk.......',
+      '......kWWk......',
+      '......kCCk......',
+      '.....kCCCCk.....',
+      '.....kSSSSk.....',
+      '....kSqSSqSk....',
+      '...kSSqSSqSSk...',
+      '..kSSSSSSSSSSk..',
+      '.kSSSSCSCSCSSSk.',
+      'kRSSSSkCCkSSSSRk',
+      'kRkSSk.kk.kSSkRk',
+      'kkkSSk....kSSkkk',
+      '..kOEk....kOEk..',
+      '..kOOk....kOOk..',
+      '...kk......kk...',
       '................'
     ];
+
+    // 11. Alien Scout
+    const P_SCOUT = {
+      '.': null,
+      'k': 0x052E16, 'g': 0x14532D, 'G': 0x16A34A, 'A': 0x4ADE80,
+      'Y': 0xFDE047, 'R': 0xEF4444, 'C': 0x06B6D4
+    };
     const scout = [
-      '.....GGGGGG.....',
-      '...GGGGGGGGGG...',
-      '..GGGgGGGGgGGG..',
-      '.GGGGWWGGWWGGGG.',
-      '.GGGGKKGGKKGGGG.',
-      '..GGGGGGGGGGGG..',
-      '...GGGGGGGGGG...',
-      '....GG....GG....',
-      '....GG....GG....',
-      '................',
-      '................',
-      '................',
+      '......kkkk......',
+      '....kkGGGGkk....',
+      '...kGGAAGGAAGk..',
+      '..kGkYRRkYRRkGk.',
+      '.kGGkYRRkYRRkGGk',
+      '.kGGGGGGGGGGGGk.',
+      '.kGGgGGGGGGgGGk.',
+      '..kGGGGGGGGGGk..',
+      '...kGGgGGgGGk...',
+      '....kGk..kGk....',
+      '....kCk..kCk....',
+      '....kk....kk....',
       '................',
       '................',
       '................',
       '................'
     ];
+
+    // 12. Alien Shooter
+    const P_SHOOTER = {
+      '.': null,
+      'k': 0x3B0764, 'p': 0x581C87, 'P': 0x7E22CE, 'H': 0xC084FC,
+      'B': 0xEC4899, 'W': 0xFFFFFF, 'E': 0xFDE047
+    };
     const shooter = [
-      '.....PPPPPP.....',
-      '...PPPPPPPPPP...',
-      '..PPPEWWPEWWPP..',
-      '.PPPPKKPPKKPPPP.',
-      '.PPPPPPPPPPPPPP.',
-      '..PPPPPPPPPPPP..',
-      '...PPPPPPPPPP...',
-      '....PP....PP....',
-      '....PP....PP....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const elite = [
-      '.....OOOOOO.....',
-      '...OOOOOOOOOO...',
-      '..OOOEWWOOEWWOO..',
-      '.OOOOOKKOOKKOOOO.',
-      '.OOOOOOOOOOOOOOO.',
-      '..OOOOOOOOOOOO..',
-      '...OOOOOOOOOO...',
-      '....OO....OO....',
-      '....OO....OO....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const boss = [
-      '.....BBBBBB.....',
-      '...BBBBBBBBBB...',
-      '..BBBBEWBEWBBB..',
-      '.BBBBBKKBBKKBBBB.',
-      '.BBBBBBBBBBBBBBB.',
-      '..BBBBBBBBBBBB..',
-      '...BBBBBBBBBB...',
-      '....BB....BB....',
-      '....BB....BB....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const laser = [
-      '......CCCC......',
-      '......CCCC......',
-      '......WWWW......',
-      '......WWWW......',
-      '......CCCC......',
-      '......CCCC......',
-      '......WWWW......',
-      '......WWWW......',
-      '......CCCC......',
-      '......CCCC......',
-      '......WWWW......',
-      '......WWWW......',
-      '......CCCC......',
-      '......CCCC......',
-      '......WWWW......',
-      '......WWWW......'
-    ];
-    const pw_weapon = [
-      '.....EEEEEE.....',
-      '...EEEEEEEEEE...',
-      '..EEEEEREEEEE..',
-      '.EEEEERRREEEEEE.',
-      '.EEEEERRREEEEEE.',
-      '..EEEEEREEEEE..',
-      '...EEEEEEEEEE...',
-      '.....EEEEEE.....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const pw_shield = [
-      '.....SSSSSS.....',
-      '...SSSSSSSSSS...',
-      '..SSSSSWWWSSSS..',
-      '.SSSSSWWWWWSSSS.',
-      '.SSSSSWWWWWSSSS.',
-      '..SSSSSWWWSSSS..',
-      '...SSSSSSSSSS...',
-      '.....SSSSSS.....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const pw_nuke = [
-      '.....RRRRRR.....',
-      '...RRRRRRRRRR...',
-      '..RRRRYYEEYYRR..',
-      '.RRRRRYEEEYRRRR.',
-      '.RRRRRYEEEYRRRR.',
-      '..RRRRYYEEYYRR..',
-      '...RRRRRRRRRR...',
-      '.....RRRRRR.....',
-      '................',
-      '................',
-      '................',
+      '......kkkk......',
+      '....kkPPPPkk....',
+      '..kkPPHHHHPPkk..',
+      '.kBkPPkEEkPPkBk.',
+      '.kBWBPPkkPPBWBk.',
+      'kBWBkPPPPPPkBWBk',
+      '.kBkPPpHHpPPkBk.',
+      '..kkPPPPPPPPkk..',
+      '...kPPpPPpPPk...',
+      '....kPkkkkPk....',
+      '....kk....kk....',
       '................',
       '................',
       '................',
@@ -2346,167 +2610,309 @@ class PixelArtRenderer {
       '................'
     ];
 
-    this.createTexture(scene, 'arcade_player_ship', ship, P);
-    this.createTexture(scene, 'alien_scout', scout, P);
-    this.createTexture(scene, 'alien_shooter', shooter, P);
-    this.createTexture(scene, 'alien_elite', elite, P);
-    this.createTexture(scene, 'alien_boss', boss, P);
-    this.createTexture(scene, 'laser_player', laser, P);
-    this.createTexture(scene, 'powerup_weapon', pw_weapon, P);
-    this.createTexture(scene, 'powerup_shield', pw_shield, P);
-    this.createTexture(scene, 'powerup_nuke', pw_nuke, P);
+    // 13. Alien Elite
+    const P_ELITE = {
+      '.': null,
+      'k': 0x431407, 'o': 0x9A3412, 'O': 0xEA580C, 'Y': 0xFB923C,
+      'C': 0x06B6D4, 'F': 0xFDE047, 'R': 0xEF4444
+    };
+    const elite = [
+      'kFk..........kFk',
+      'kYFk........kFYk',
+      '.kYOk......kOYk.',
+      '..kYOk....kOYk..',
+      '..kOOOOOOOOOOk..',
+      '.kOOOkCCCCkOOOk.',
+      '.kOOOkCCCCkOOOk.',
+      'kOOOOOOOOOOOOOOk',
+      'kOoOOOOOOOOOOoOk',
+      '.kOoOOOOOOOOoOk.',
+      '..kOoOOOOOOoOk..',
+      '...kOkkkkkkOk...',
+      '....kRk..kRk....',
+      '....kk....kk....',
+      '................',
+      '................'
+    ];
+
+    // 14. Alien Boss (Dreadnought)
+    const P_BOSS = {
+      '.': null,
+      'k': 0x500724, 'b': 0x881337, 'm': 0xBE123C, 'B': 0xE11D48,
+      'H': 0xFB7185, 'G': 0x22C55E, 'P': 0xA855F7, 'Y': 0xFDE047
+    };
+    const boss = [
+      '..kkkkkkkkkkkk..',
+      '.kBHHHHHHHHHHBk.',
+      'kBBBBBBBBBBBBBBk',
+      'kBBBkGkBBkGkBBBk',
+      'kBBBkGkBBkGkBBBk',
+      'kBBBkkkkkkkkBBBk',
+      '.kBBBBkPPkBBBBk.',
+      '.kBBBBkPPkBBBBk.',
+      '..kBBBkPPkBBBk..',
+      '..kBBBBBBBBBBk..',
+      '.kbBbBBBBBBbBbk.',
+      'kbmbkYYkYYkbmbk.',
+      'kbmbkYYkYYkbmbk.',
+      '.kkbkkkkkkkkbkk.',
+      '...kk......kk...',
+      '................'
+    ];
+
+    // 15. Laser Player
+    const P_LASER = {
+      '.': null,
+      'k': 0x083344, 's': 0x0891B2, 'C': 0x06B6D4, 'A': 0x67E8F9, 'W': 0xFFFFFF
+    };
+    const laser = [
+      '.....kk....kk...',
+      '....kAWk..kAWk..',
+      '....kCWk..kCWk..',
+      '....kCWk..kCWk..',
+      '....kCWk..kCWk..',
+      '....kCWk..kCWk..',
+      '....kCWk..kCWk..',
+      '....kCWk..kCWk..',
+      '....kCWk..kCWk..',
+      '....kCWk..kCWk..',
+      '....kCWk..kCWk..',
+      '....kCWk..kCWk..',
+      '....ksWk..ksWk..',
+      '....ksWk..ksWk..',
+      '.....kk....kk...',
+      '................'
+    ];
+
+    // 16. Powerup Weapon
+    const P_PW_WEAPON = {
+      '.': null,
+      'k': 0x451A03, 'y': 0xCA8A04, 'Y': 0xEAB308, 'E': 0xFDE047,
+      'r': 0xB91C1C, 'R': 0xEF4444, 'W': 0xFFFFFF
+    };
+    const pw_weapon = [
+      '......kkkk......',
+      '....kkEEEEkk....',
+      '...kEEWWEEEEk...',
+      '..kEEkRRkkEEEk..',
+      '.kEEkRRRRkkEEEk.',
+      '.kEEkRRRRkkEEEk.',
+      '.kEEykkRRkkEyEk.',
+      '..kEEykkkkyEEk..',
+      '...kEEyyyyEEk...',
+      '....kkEEEEkk....',
+      '......kkkk......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+
+    // 17. Powerup Shield
+    const P_PW_SHIELD = {
+      '.': null,
+      'k': 0x0C4A6E, 's': 0x0284C7, 'S': 0x38BDF8, 'C': 0xBAE6FD,
+      'w': 0xE0F2FE, 'W': 0xFFFFFF
+    };
+    const pw_shield = [
+      '......kkkk......',
+      '....kkCCCCkk....',
+      '...kCCWWCCCCk...',
+      '..kCCWWWWWWCCk..',
+      '.kCCSWWWWWWSCCk.',
+      '.kCCSWWWWWWSCCk.',
+      '.kCCSsWWWwSsCCk.',
+      '..kCCSsWWsSSCCk.',
+      '...kCCSssSSCCk..',
+      '....kkSSSSkk....',
+      '......kkkk......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+
+    // 18. Powerup Nuke
+    const P_PW_NUKE = {
+      '.': null,
+      'k': 0x450A0A, 'r': 0x991B1B, 'R': 0xDC2626, 'a': 0xF87171,
+      'N': 0x0F172A, 'Y': 0xFDE047, 'W': 0xFFFFFF
+    };
+    const pw_nuke = [
+      '......kkkk......',
+      '....kkaaaakk....',
+      '...kaaWWaaaak...',
+      '..kaaYYNNYYaak..',
+      '.kaaYYYYYYYYaak.',
+      '.kaaYYNNNNYYaak.',
+      '.kaarNNYYNNraak.',
+      '..kaarrNNrraak..',
+      '...kaarrrraak...',
+      '....kkRRRRkk....',
+      '......kkkk......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+
+    this.createTexture(scene, 'arcade_player_ship', ship, P_SHIP);
+    this.createTexture(scene, 'alien_scout', scout, P_SCOUT);
+    this.createTexture(scene, 'alien_shooter', shooter, P_SHOOTER);
+    this.createTexture(scene, 'alien_elite', elite, P_ELITE);
+    this.createTexture(scene, 'alien_boss', boss, P_BOSS);
+    this.createTexture(scene, 'laser_player', laser, P_LASER);
+    this.createTexture(scene, 'powerup_weapon', pw_weapon, P_PW_WEAPON);
+    this.createTexture(scene, 'powerup_shield', pw_shield, P_PW_SHIELD);
+    this.createTexture(scene, 'powerup_nuke', pw_nuke, P_PW_NUKE);
   }
 
   // 6. Dungeon Scene Textures
   static _genDungeonTextures(scene) {
-    const P = {
-      '.': null,
-      'G': 0x22C55E, 'g': 0x15803D, 'H': 0x86EFAC, 'K': 0x0F172A,
-      'W': 0xFFFFFF, 'E': 0x15803D, 'e': 0x166534, 'R': 0xB91C1C,
-      'M': 0x64748B, 'B': 0xE2E8F0, 'b': 0xCBD5E1, 'A': 0xDC2626,
-      'D': 0xBE123C, 'd': 0x881337, 'F': 0xFFD700, 'f': 0xB8860B,
-      'C': 0x06B6D4, 'c': 0xCFFAFE, 'P': 0xEF4444, 'p': 0x78350F,
-      'Y': 0xFEF08A, 'y': 0xCA8A04
+    // 1. Slime
+    const P_SLIME = {
+      '.': null, 'k': 0x064E3B, 's': 0x047857, 'G': 0x10B981,
+      'g': 0x34D399, 'H': 0xA7F3D0, 'W': 0xFFFFFF, 'E': 0x0F172A,
+      'c': 0x6EE7B7, 'd': 0x059669
     };
-
     const slime = [
-      '.....GGGGGG.....',
-      '...GGGGGGGGGG...',
-      '..GGGGGGGGGGGG..',
-      '.GGGGKWGGKWGGGG.',
-      '.GGGGKKGGKKGGGG.',
-      '.GGGGGGGGGGGGGG.',
-      '..GGGHHHHHHGGG..',
-      '...GGGGGGGGGG...',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const goblin = [
-      '.....EEEEEE.....',
-      '...EEEEEEEEEE...',
-      '..EEEKWEEKWEEE..',
-      '.EEEEKKEEKKEEEE.',
-      '.EEEEEEEEEEEEEE.',
-      '..EEEEERRREEEE..',
-      '...EEEMMMMEE...',
-      '....MMMMMMMM....',
-      '....MMMMMMMM....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
+      '.....kkkkkk.....',
+      '...kkGGGGGGkk...',
+      '..kGGgHHHHgGGk..',
+      '.kGGgHWWgHWWgGk.',
+      '.kGsgHEEgHEEsgGk',
+      '.kGssgHHgHHgssGk',
+      '.kGGsscGGcssGGk.',
+      '.kGGGGsGGsGGGGk.',
+      '..kGGGssssGGGk..',
+      '...kkGGGGGGkk...',
+      '....kGsddsGk....',
+      '.....kdsddk.....',
+      '......kddk......',
+      '.......kk.......',
       '................',
       '................'
     ];
+
+    // 2. Skeleton Archer
+    const P_SKELETON = {
+      '.': null, 'k': 0x1C1917, 'b': 0x78716C, 'B': 0xD6D3D1,
+      'W': 0xF5F5F4, 'R': 0xEF4444, 'S': 0x78350F, 'y': 0xD97706,
+      'M': 0x94A3B8, 'm': 0x64748B
+    };
     const skeleton = [
-      '.....BBBBBB.....',
-      '...BBBBBBBBBB...',
-      '..BBBKKBBKKBBB..',
-      '.BBBBKKBBKKBBBB.',
-      '.BBBBBBBBBBBBBB.',
-      '..BBBBKKKKBBBB..',
-      '...BBBBBBBBBB...',
-      '....BBBBBBBB....',
-      '....BBBBBBBB....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
+      '.....kkkkkk.....',
+      '...kkWWWWWWkk...',
+      '..kWWbWWbWWWWk..',
+      '.kWWkRkWkRkWWWk.',
+      '.kWWkkkkkkkWWWk.',
+      '..kWbWbWbWbWWk..',
+      '...kkWWWWWWkk...',
+      '....kSBBBBBSk.M.',
+      '...kSBBWWWBBSkM.',
+      '..kSBBWkkkWBSmS.',
+      '.kSBBWk...kWBmS.',
+      'kSyBBk....kWBmS.',
+      'kSyBk......kBmS.',
+      '.kSk.......kk.S.',
       '................',
       '................'
     ];
+
+    // 3. Goblin Warrior
+    const P_GOBLIN = {
+      '.': null, 'k': 0x052E16, 'e': 0x14532D, 'E': 0x16A34A,
+      'H': 0x4ADE80, 'm': 0x334155, 'M': 0x64748B, 'w': 0xCBD5E1,
+      'R': 0xDC2626, 'W': 0xFFFFFF
+    };
+    const goblin = [
+      '....kkk..kkk....',
+      '...kEEEkkEEEk...',
+      '..kEEHkEEkHEEk..',
+      '.kEEERREEERRkEEk',
+      '.kEEEEkEEkEEEEk.',
+      "..kEEEWWWWEEEk..",
+      '...kEEEEEEEEk...',
+      '..kkMMMMMMMMkk..',
+      '.kMMMmwMMwmMMMk.',
+      '.kMmmmwMMwmMMMk.',
+      '.kEEmMMMMMMmEEk.',
+      '..kEkMMMMMMkEk..',
+      '...kkEkkkkEk....',
+      '....kEk..kEk....',
+      '....kk....kk....',
+      '................'
+    ];
+
+    // 4. Demon Lord Boss
+    const P_DUNGEON_BOSS = {
+      '.': null, 'k': 0x450A0A, 'b': 0x18181B, 'm': 0x52525B,
+      'd': 0x991B1B, 'D': 0xDC2626, 'F': 0xF97316, 'Y': 0xFDE047,
+      'E': 0xFEF08A, 'W': 0xFFFFFF
+    };
     const boss = [
-      '.....DDDDDD.....',
-      '...DDDDDDDDDD...',
-      '..DDDKWDDkWDDD..',
-      '.DDDDKKDDKKDDDD.',
-      '.DDDDDDDDDDDDDD.',
-      '..DDDDFFFFDDDD..',
-      '...DDDDDDDDDD...',
-      '....DDDDDDDD....',
-      '....DDDDDDDD....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
+      'kbk..........kbk',
+      'kmbk........kmbk',
+      '.kmbkkkkkkkkmbk.',
+      '..kmbDDDDDDmbk..',
+      '..kDDDFFFDDDDk..',
+      '.kDDDkEkDDkEkDk.',
+      '.kDDDkkkkkkkkDk.',
+      '.kDDFDDWWDDFFDk.',
+      '..kDDDFYYFDDDk..',
+      '...kDDDDDDDDk...',
+      '..kkbbDDDDbbkk..',
+      '.kbmbkYYYYkbmbk.',
+      '.kbmbkYFFYkbmbk.',
+      '..kmbkkkkkkmbk..',
+      '...kk......kk...',
       '................'
     ];
 
-    const coin = [
-      '......FFFF......',
-      '....FFFFFFFF....',
-      '...FFFFFFFFFF...',
-      '..FFFFffffFFFF..',
-      '..FFFFffffFFFF..',
-      '...FFFFFFFFFF...',
-      '....FFFFFFFF....',
-      '......FFFF......',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const gem = [
-      '......CCCC......',
-      '....CCCCCCCC....',
-      '...CCCCccccCC...',
-      '..CCCCCCCCCCCC..',
-      '..CCCCCCCCCCCC..',
-      '...CCCCCCCCCC...',
-      '....CCCCCCCC....',
-      '......CCCC......',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const potion = [
-      '......pppp......',
-      '......pppp......',
-      '.....PPPPPP.....',
-      '....PPPPPPPP....',
-      '---PPPPWWPPPP...',
-      '...PPPPWWPPPP...',
-      '....PPPPPPPP....',
-      '.....PPPPPP.....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
+    // 5. Loot Chest
+    const P_CHEST = {
+      '.': null, 'k': 0x291E0B, 's': 0x451A03, 'S': 0x78350F,
+      'y': 0xB45309, 'f': 0xB8860B, 'F': 0xEAB308, 'Y': 0xFEF08A,
+      'N': 0x0F172A
+    };
     const chest = [
-      '..pppppppppppp..',
-      '.pFFFFFFFFFFFFp.',
-      '.pFFFFFFFFFFFFp.',
-      '.pFFFFFFFFFFFFp.',
-      '.pFFFFFKKFFFFFp.',
-      '.pFFFFFKKFFFFFp.',
-      '.pFFFFFFFFFFFFp.',
-      '..pppppppppppp..',
+      '....kkkkkkkk....',
+      '..kkFYYYYYYFkk..',
+      '.kFFsSSSSSSsFFk.',
+      '.kFFsSSSSSSsFFk.',
+      '.kFFFffffffFFFk.',
+      '.kFFsSSNNSSsFFk.',
+      '.kFFsSSNNSSsFFk.',
+      '.kFFFffffffFFFk.',
+      '.kFFsSSSSSSsFFk.',
+      '.kFFsSSSSSSsFFk.',
+      '..kkFYYYYYYFkk..',
+      '....kkkkkkkk....',
       '................',
       '................',
+      '................',
+      '................'
+    ];
+
+    // 6. Loot Coin
+    const P_COIN = {
+      '.': null, 'k': 0x78350F, 'f': 0xCA8A04, 'F': 0xEAB308,
+      'Y': 0xFDE047, 'W': 0xFFFFFF
+    };
+    const coin = [
+      '......kkkk......',
+      '....kkYYYYkk....',
+      '...kYYWWYYYYk...',
+      '..kYYFFfFFYYYk..',
+      '.kYYFFFfFFFYYYk.',
+      '.kYYFFFfFFFYYYk.',
+      '..kYYFFfFFYYYk..',
+      '...kYYffffffk...',
+      '....kkffffkk....',
+      '......kkkk......',
       '................',
       '................',
       '................',
@@ -2514,17 +2920,71 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
+
+    // 7. Loot Gem
+    const P_GEM = {
+      '.': null, 'k': 0x083344, 'c': 0x0E7490, 'C': 0x06B6D4,
+      'A': 0x38BDF8, 'W': 0xE0F2FE, 'S': 0xFFFFFF
+    };
+    const gem = [
+      '......kkkk......',
+      '....kkWWAAkk....',
+      '...kWWAAAAAAk...',
+      '..kWWCCCCcCCAk..',
+      '.kWWCCCCCCccCAk.',
+      '.kWWCCCCCCccCAk.',
+      '..kWWCCCCcCCAk..',
+      '...kWWccccAAk...',
+      '....kkcccckk....',
+      '......kkkk......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+
+    // 8. Loot Potion
+    const P_POTION = {
+      '.': null, 'k': 0x450A0A, 'p': 0x78350F, 'r': 0x991B1B,
+      'P': 0xEF4444, 'a': 0xF87171, 'Y': 0xFEF08A, 'W': 0xFFFFFF
+    };
+    const potion = [
+      '......kkkk......',
+      '......kppk......',
+      '.....kkkkkk.....',
+      '....kkaaaakk....',
+      '...kaaWWaPaaak..',
+      '..kaaWPPYPPPaak.',
+      '..kaaWPPPPPaak..',
+      '...kaaPrrPaak...',
+      '....kkrrrrkk....',
+      '......kkkk......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+
+    // 9. Loot Scroll
+    const P_SCROLL = {
+      '.': null, 'k': 0x451A03, 's': 0xD97706, 'Y': 0xFDE047,
+      'W': 0xFFFEF0, 'r': 0x991B1B, 'R': 0xEF4444, 'F': 0xF59E0B
+    };
     const scroll = [
-      '......YYYY......',
-      '....YYYYYYYY....',
-      '...YYYYRRYYYY...',
-      '..YYYYYRRYYYYY..',
-      '..YYYYYRRYYYYY..',
-      '...YYYYRRYYYY...',
-      '....YYYYYYYY....',
-      '......YYYY......',
-      '................',
-      '................',
+      '......kkkk......',
+      '....kkWWYYkk....',
+      '...kWWWWYYYYk...',
+      "..kWWWWRRYYYYk..",
+      '.kWWWWWRRYYYYYk.',
+      '.kWWWWFRRRYYYYk.',
+      '..kWWWWRRYYYYk..',
+      '...kWWWWYYYYk...',
+      '....kksssskk....',
+      '......kkkk......',
       '................',
       '................',
       '................',
@@ -2533,16 +2993,16 @@ class PixelArtRenderer {
       '................'
     ];
 
-    this.createTexture(scene, 'dungeon_green_slime', slime, P);
-    this.createTexture(scene, 'dungeon_goblin_warrior', goblin, P);
-    this.createTexture(scene, 'dungeon_skeleton_archer', skeleton, P);
-    this.createTexture(scene, 'dungeon_boss', boss, P);
+    this.createTexture(scene, 'dungeon_green_slime', slime, P_SLIME);
+    this.createTexture(scene, 'dungeon_goblin_warrior', goblin, P_GOBLIN);
+    this.createTexture(scene, 'dungeon_skeleton_archer', skeleton, P_SKELETON);
+    this.createTexture(scene, 'dungeon_boss', boss, P_DUNGEON_BOSS);
 
-    this.createTexture(scene, 'loot_coin', coin, P);
-    this.createTexture(scene, 'loot_gem', gem, P);
-    this.createTexture(scene, 'loot_potion', potion, P);
-    this.createTexture(scene, 'loot_chest', chest, P);
-    this.createTexture(scene, 'loot_scroll', scroll, P);
+    this.createTexture(scene, 'loot_coin', coin, P_COIN);
+    this.createTexture(scene, 'loot_gem', gem, P_GEM);
+    this.createTexture(scene, 'loot_potion', potion, P_POTION);
+    this.createTexture(scene, 'loot_chest', chest, P_CHEST);
+    this.createTexture(scene, 'loot_scroll', scroll, P_SCROLL);
   }
 }
 

@@ -1,39 +1,38 @@
-# Implementation Plan — Hangeul Valley Character Design Upgrade
+# Implementation Plan — Hangeul Valley Pixel Art Quality Upgrade
 
 ## Objectives & Requirements
-1. **Farmer Action Animations & Tool Sprites (R1)**:
-   - Create 3+ frame procedural pixel art action animation sets for Farmer: Watering (bình tưới nước), Harvesting (thu hoạch), Fruit Picking (hái quả).
-   - Create separate tool sprites (watering can, basket/sickle).
-   - Trigger animations at gameplay moments (watering on Phase 2 quiz success, harvesting on Phase 3 quiz success, fruit picking on apple tree interaction).
-2. **Ginger Cat Character Redesign (R2)**:
-   - Rename Cat NPC from "Muop" to "Ginger Cat" across the codebase (game.js and assets/game.js).
-   - Richer pixel art (ginger tabby with visible stripes, expressive face/whiskers, fluffy tail).
-   - At least 4 animation states: idle-blink, walking/trotting, sitting/grooming, sleeping/curled up (≥2 frames each).
-   - Contextual behavior in FarmScene.
-3. **Seamless Integration & Integrity (R3)**:
-   - All sprites rendered procedurally via Phaser Graphics API (PixelArtRenderer class, 16×16 matrix at PS=3). Zero external image files.
-   - `node -c game.js` must pass with zero errors.
-   - Farmer 12-frame walk cycle preserved.
-   - Root `game.js` and `assets/game.js` must be synchronized.
+1. **Character Sprite Redesign (R1)**:
+   - Farmer: 12 walk frames (4 directions × 3) + 9 action frames (watering, harvesting, fruit picking) with visible separate arms/hands, clothing folds, anatomical proportions, weight shift, multi-tone shading (≥3 tones per color area), 1px dark outline, anti-aliasing, and dithering.
+   - Ginger Cat: 8 frames (idle 0/1, walk 0/1, sit 0/1, sleep 0/1) with detailed tabby stripes, fur dithering, expressive tail/ears, 1px dark outline, multi-tone shading.
+   - Wizard Merlin: 2 frames (idle 0/1) with flowing robe, fabric fold shading, beard hair strands, inner glow staff crystal, 1px dark outline, multi-tone shading.
+2. **Environment & Entity Sprites Upgrade (R2)**:
+   - 5 Crop species × 4 growth stages (20 textures): detailed leaf shapes, stem structure, harvest-ready sparkle/richness, multi-tone shading.
+   - 11 Fish species: distinct scale patterns, fin details, species-specific coloring with iridescent highlights.
+   - Dungeon Monsters: menacing design, idle breathing/pulsing, detailed weapon/armor on skeleton/goblin, multi-tone shading.
+   - Arcade Enemies: sleek sci-fi design, engine glow, distinct silhouettes, multi-tone shading.
+3. **Zero External Assets (R3)**:
+   - All sprites generated programmatically via `PixelArtRenderer.drawMatrix(g, matrix, palette)` on 16×16 grids scaled at PS=3 (48×48 textures).
+4. **Integration & Integrity (R4)**:
+   - Retain 100% existing texture keys, animation keys, gameplay triggers, and scene integrations.
+   - Synchronize `game.js` and `assets/game.js`. Validate with `node -c game.js`.
+   - Skip victory audit phase per user instructions.
 
 ## Milestone Plan
 
-### Milestone 1: Exploration & Architecture Analysis
-- **Goal**: Thoroughly analyze `game.js` sprite rendering pipeline, matrix structure, palette colors, Phaser animation definitions, cat NPC hardcoded references, and FarmScene trigger points.
+### Milestone 1: Exploration & Palette/Matrix Specification
+- **Goal**: Analyze `game.js` sprite renderer, existing palette, all texture key definitions, and design the multi-tone shading color palettes and 16×16 matrices for characters, crops, fish, monsters, and arcade enemies.
 - **Dispatch**:
-  - `explorer_m1_1`: Analyze Farmer character matrix format, palette keys, existing 12 walk frames, and how action frames should be structured and animated.
-  - `explorer_m1_2`: Analyze Cat NPC "Muop" references, current 2 idle frames, and how to structure 4+ animation states (idle-blink, walk, sit, sleep) with striped tabby design.
-  - `explorer_m1_3`: Analyze FarmScene interaction logic for watering (Phase 2 success), harvesting (Phase 3 success), and apple picking, and exact line locations for animation triggers.
-- **Output**: Consolidated exploration findings report in `.agents/explorer_m1_1/analysis.md`.
+  - `explorer_m1_1`: Character Sprites (Farmer 21 frames, Ginger Cat 8 frames, Wizard 2 frames) - design multi-tone palettes (highlight, base, shadow, deep shadow), 1px outline rules, anatomical details, dithering, and matrices.
+  - `explorer_m1_2`: Environment & Entity Sprites (5 crops × 4 stages, 11 fish species) - design leaf/scale/highlight palettes and 16×16 matrices.
+  - `explorer_m1_3`: Monsters, Arcade Enemies & Texture Registry - design monster/enemy multi-tone matrices and inventory all texture keys in `game.js`.
 
-### Milestone 2: Implementation & Synchronization
-- **Goal**: Implement all character matrices, textures, Phaser animation registrations, renaming, contextual cat behaviors, and gameplay trigger hooks. Synchronize root `game.js` and `assets/game.js`.
-- **Dispatch**: Worker subagent (`worker_m2`).
-- **Output**: Updated `game.js` and `assets/game.js` with passing `node -c game.js`.
+### Milestone 2: Implementation & Code Synchronization
+- **Goal**: Replace all 16×16 matrix definitions in `game.js` with the upgraded professional pixel art matrices, extend `STARDEW_PALETTE` with multi-tone colors, ensure zero texture key drops, synchronize `game.js` with `assets/game.js`, and verify with `node -c game.js`.
+- **Dispatch**: `worker_m2`.
 
-### Milestone 3: Verification, Challenge & Forensic Audit
-- **Goal**: Independently review code quality, verify animation frame counts, challenge trigger hooks and naming parity, and perform forensic integrity audit.
+### Milestone 3: Verification & Challenge (Skip Victory Audit)
+- **Goal**: Perform independent code review, texture key parity check, syntax validation, and challenge verification.
 - **Dispatch**:
-  - `reviewer_m3_1` & `reviewer_m3_2`: Verify code structure, animation parameters, frame counts, naming parity, sync between `game.js` and `assets/game.js`.
-  - `challenger_m3_1` & `challenger_m3_2`: Verify syntax, test animation triggers, verify zero remaining "Muop" instances.
-  - `auditor_m3`: Forensic integrity audit for cheating/fake code detection.
+  - `reviewer_m3_1`: Code quality, key parity & sync verification.
+  - `reviewer_m3_2`: Requirement compliance & art quality verification.
+  - `challenger_m3_1`: Syntax check (`node -c game.js`) & key registry validation.

@@ -26,3 +26,17 @@ Checklist:
 
 Write your findings and PASS/FAIL verdict to C:/VibeCode/Hangeul Valley/.agents/reviewer_m3_2/review.md and handoff.md.
 Send a message to parent reporting completion.
+
+## 2026-07-23T03:20:11Z
+You are Reviewer 2 (Art Quality & Requirement Compliance Reviewer) for the Hangeul Valley Pixel Art Quality Upgrade project.
+Your working directory is: C:/VibeCode/Hangeul Valley/.agents/reviewer_m3_2/
+Please create your working directory if it does not exist, and initialize your BRIEFING.md and progress.md there.
+
+Your mission is to verify art quality and requirement compliance in C:/VibeCode/Hangeul Valley/game.js:
+1. Multi-tone shading: Verify every character (Farmer, Cat, Wizard), crop, fish, monster, and arcade sprite uses ≥3-5 distinct color tones per color domain (Highlight, Base, Shadow, Deep Shadow).
+2. Outlines & Details: Verify consistent 1px dark contour outlines (0x121016), anatomical arm/hand separation on Farmer, clothing folds, dithering/AA, fur/leaf/scale textures.
+3. Zero external assets: Confirm 100% of pixel art is generated procedurally via fillRect() grid patterns in PixelArtRenderer with zero external PNG/JPG/SVG dependencies.
+4. Scope completeness: Confirm all 21 Farmer frames + tools, 8 Ginger Cat frames, 2 Wizard frames, 20 crop growth stages, 11 fish species, dungeon monsters/bosses, and arcade ships/enemies are upgraded.
+
+Write your review report to C:/VibeCode/Hangeul Valley/.agents/reviewer_m3_2/handoff.md and send a handoff message with your verdict (PASS/FAIL).
+
