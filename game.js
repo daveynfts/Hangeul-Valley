@@ -112,6 +112,2046 @@ if (typeof window !== 'undefined') {
 
 // ═══════════════ PIXEL ENGINE ════════════════════════════════════════════════
 const PS = 3;
+
+// ═══════════════ STARDEW VALLEY EARTHY COLOR PALETTE ═════════════════════════
+const STARDEW_PALETTE = {
+  // Grass & Nature
+  grassBase: 0x4A7C59,      // Warm forest green
+  grassShadow: 0x2D4E35,    // Deep shade green
+  grassHighlight: 0x6B9E77, // Soft spring green
+  flowerRed: 0xD85858,      // Muted rose red
+  flowerYellow: 0xE8B84B,   // Warm buttercup
+  flowerPurple: 0x9B70C8,   // Soft lavender
+
+  // Soil & Paths
+  dirtDry: 0x7E5436,        // Warm rich earth
+  dirtWet: 0x4E311B,        // Moist dark loam
+  pathStone: 0x7D7571,      // Weathered cobble
+  pathMortar: 0x4A4440,     // Dark mortar
+
+  // Wood & Fences
+  woodBase: 0x8F5428,       // Warm cedar brown
+  woodHighlight: 0xB3713D,  // Warm oak highlight
+  woodShadow: 0x573012,     // Deep timber shadow
+
+  // Water & Beach
+  oceanDeep: 0x1E506B,      // Deep teal ocean
+  oceanShimmer: 0x3D7898,   // Subtle wave shimmer
+  oceanFoam: 0x96C5D4,      // Desaturated seafoam
+  sandBase: 0xEAD08B,       // Warm golden beach sand
+  sandShadow: 0xCBA65B,     // Warm dune shadow
+
+  // Player Outfit
+  overallsBase: 0x3B4D7A,   // Muted indigo denim
+  overallsDark: 0x263354,   // Dark indigo shadow
+  strawHat: 0xD4AA63,       // Unbleached straw
+  hatRibbon: 0x9E3B2D,      // Muted terracotta red
+  boots: 0x59381E,          // Leather brown
+
+  // Dungeon & Stone
+  dungeonWall: 0x2C363F,    // Deep mossy slate
+  dungeonFloor: 0x1E242B,   // Dark stone tile
+  torchAmber: 0xE68A2E,     // Cozy firelight amber
+};
+
+// ═══════════════ PIXEL ART RENDERER & CHARACTER SYSTEM ═══════════════════════
+
+class PixelArtRenderer {
+  static drawMatrix(g, matrix, palette, ox = 0, oy = 0, ps = 3) {
+    matrix.forEach((row, ry) => {
+      for (let rx = 0; rx < row.length; rx++) {
+        const char = row[rx];
+        if (char === '.' || char === ' ') continue;
+        const col = palette[char];
+        if (col !== undefined && col !== null) {
+          g.fillStyle(col, 1);
+          g.fillRect((ox + rx) * ps, (oy + ry) * ps, ps, ps);
+        }
+      }
+    });
+  }
+
+  static createTexture(scene, key, matrix, palette, width = 16, height = 16, ps = 3) {
+    if (scene.textures.exists(key)) {
+      scene.textures.remove(key);
+    }
+    const g = scene.make.graphics({ add: false });
+    this.drawMatrix(g, matrix, palette, 0, 0, ps);
+    g.generateTexture(key, width * ps, height * ps);
+    g.destroy();
+    const tex = scene.textures.get(key);
+    if (tex) {
+      const mode = (typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode)
+        ? Phaser.Textures.FilterMode.NEAREST
+        : 1;
+      tex.setFilter(mode);
+    }
+    return key;
+  }
+
+  static generateAllTextures(scene) {
+    if (!scene || !scene.textures) return;
+    if (scene._pixelArtTexturesBaked) return;
+    scene._pixelArtTexturesBaked = true;
+
+    this._genPlayerTextures(scene);
+    this._genNpcTextures(scene);
+    this._genCropAndTreeTextures(scene);
+    this._genFishingTextures(scene);
+    this._genArcadeTextures(scene);
+    this._genDungeonTextures(scene);
+    this.generateTilemapTextures(scene);
+    this._genParticleTextures(scene);
+    this._genLightingTextures(scene);
+    this._genParallaxTextures(scene);
+    this._genWaterTextures(scene);
+  }
+
+  static generateTilemapTextures(scene) {
+    if (!scene || !scene.textures) return;
+    if (scene._tilemapTexturesGenerated) return;
+    scene._tilemapTexturesGenerated = true;
+
+    const makeTile = (key, renderFn) => {
+      if (scene.textures.exists(key)) {
+        scene.textures.remove(key);
+      }
+      const g = scene.make.graphics({ add: false });
+      renderFn(g);
+      g.generateTexture(key, 48, 48);
+      g.destroy();
+      const tex = scene.textures.get(key);
+      if (tex) {
+        const mode = (typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode)
+          ? Phaser.Textures.FilterMode.NEAREST
+          : 1;
+        tex.setFilter(mode);
+      }
+      return key;
+    };
+
+    // ── FARM SCENE TILEMAP TEXTURES ──────────────────────────────────────────
+    makeTile('tile_grass_base', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x15803D, 1);
+      g.fillRect(6, 6, 3, 6); g.fillRect(24, 12, 3, 6); g.fillRect(36, 27, 3, 6);
+      g.fillRect(12, 39, 3, 6); g.fillRect(42, 6, 3, 6); g.fillRect(18, 24, 3, 6);
+      g.fillStyle(0x4ADE80, 1);
+      g.fillRect(15, 3, 3, 3); g.fillRect(30, 18, 3, 3); g.fillRect(3, 24, 3, 3);
+      g.fillRect(33, 42, 3, 3); g.fillRect(21, 33, 3, 3); g.fillRect(39, 15, 3, 3);
+    });
+
+    makeTile('tile_grass_flowers', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x15803D, 1); g.fillRect(6, 6, 3, 6); g.fillRect(24, 12, 3, 6); g.fillRect(36, 27, 3, 6);
+      g.fillStyle(0x4ADE80, 1); g.fillRect(15, 3, 3, 3); g.fillRect(30, 18, 3, 3);
+      g.fillStyle(0xEF4444, 1); g.fillRect(9, 12, 9, 9);
+      g.fillStyle(0xFDE047, 1); g.fillRect(12, 15, 3, 3);
+      g.fillStyle(0xFDE047, 1); g.fillRect(30, 24, 9, 9);
+      g.fillStyle(0xF97316, 1); g.fillRect(33, 27, 3, 3);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(18, 33, 9, 9);
+      g.fillStyle(0xFDE047, 1); g.fillRect(21, 36, 3, 3);
+    });
+
+    makeTile('tile_grass_clover', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x15803D, 1); g.fillRect(6, 6, 3, 6); g.fillRect(36, 27, 3, 6);
+      g.fillStyle(0x4ADE80, 1); g.fillRect(15, 3, 3, 3); g.fillRect(33, 42, 3, 3);
+      g.fillStyle(0x166534, 1);
+      g.fillRect(9, 12, 6, 6); g.fillRect(18, 12, 6, 6); g.fillRect(13, 6, 6, 6);
+      g.fillStyle(0x86EFAC, 1); g.fillRect(15, 18, 3, 6);
+      g.fillStyle(0x166534, 1);
+      g.fillRect(27, 30, 6, 6); g.fillRect(36, 30, 6, 6); g.fillRect(31, 24, 6, 6);
+      g.fillStyle(0x86EFAC, 1); g.fillRect(33, 36, 3, 6);
+    });
+
+    makeTile('tile_path_straight', (g) => {
+      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x451A03, 1); g.fillRect(0, 0, 48, 3); g.fillRect(0, 45, 48, 3);
+      g.fillStyle(0x92400E, 1);
+      g.fillRect(6, 9, 9, 9); g.fillRect(21, 24, 12, 9); g.fillRect(33, 6, 9, 12);
+      g.fillRect(9, 30, 9, 12); g.fillRect(30, 33, 12, 9);
+      g.fillStyle(0xB45309, 1); g.fillRect(9, 12, 3, 3); g.fillRect(24, 27, 3, 3); g.fillRect(36, 9, 3, 3);
+    });
+
+    makeTile('tile_path_corner', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x78350F, 1);
+      g.fillRect(0, 0, 48, 24); g.fillRect(24, 0, 24, 48);
+      g.fillStyle(0x451A03, 1); g.fillRect(0, 24, 24, 3); g.fillRect(24, 24, 3, 24);
+      g.fillStyle(0x92400E, 1); g.fillRect(6, 6, 12, 12); g.fillRect(30, 30, 12, 12);
+    });
+
+    makeTile('tile_path_cross', (g) => {
+      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x92400E, 1);
+      g.fillRect(15, 6, 18, 36); g.fillRect(6, 15, 36, 18);
+      g.fillStyle(0x451A03, 1); g.fillRect(18, 18, 12, 12);
+      g.fillStyle(0xB45309, 1); g.fillRect(21, 21, 6, 6);
+    });
+
+    makeTile('tile_path_single', (g) => {
+      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x9A6538, 1); g.fillRect(6, 6, 15, 15); g.fillRect(27, 6, 15, 15);
+      g.fillRect(6, 27, 15, 15); g.fillRect(27, 27, 15, 15);
+      g.fillStyle(0x7A480A, 1); g.fillRect(3, 3, 42, 3); g.fillRect(3, 42, 42, 3);
+    });
+
+    makeTile('tile_path_stone', (g) => {
+      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x9A6538, 1);
+      g.fillRect(6, 6, 12, 12); g.fillRect(24, 9, 15, 12);
+      g.fillRect(9, 24, 15, 15); g.fillRect(27, 27, 15, 12);
+      g.fillStyle(0xC48E58, 1); g.fillRect(9, 9, 6, 6); g.fillRect(27, 12, 6, 6);
+      g.fillStyle(0x451A03, 1); g.fillRect(0, 0, 48, 3); g.fillRect(0, 45, 48, 3);
+    });
+
+    makeTile('tile_fence_h', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x8B4513, 1); g.fillRect(0, 12, 48, 9); g.fillRect(0, 30, 48, 9);
+      g.fillStyle(0xD2691E, 1); g.fillRect(0, 12, 48, 3); g.fillRect(0, 30, 48, 3);
+      g.fillStyle(0x451A03, 1); g.fillRect(0, 18, 48, 3); g.fillRect(0, 36, 48, 3);
+      g.fillStyle(0x8B4513, 1); g.fillRect(3, 6, 9, 36); g.fillRect(36, 6, 9, 36);
+      g.fillStyle(0xD2691E, 1); g.fillRect(3, 6, 9, 3); g.fillRect(36, 6, 9, 3);
+    });
+
+    makeTile('tile_fence_v', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x8B4513, 1); g.fillRect(12, 0, 9, 48); g.fillRect(30, 0, 9, 48);
+      g.fillStyle(0xD2691E, 1); g.fillRect(12, 0, 3, 48); g.fillRect(30, 0, 3, 48);
+      g.fillStyle(0x451A03, 1); g.fillRect(18, 0, 3, 48); g.fillRect(36, 0, 3, 48);
+      g.fillStyle(0x8B4513, 1); g.fillRect(6, 3, 36, 9); g.fillRect(6, 36, 36, 9);
+      g.fillStyle(0xD2691E, 1); g.fillRect(6, 3, 3, 9); g.fillRect(6, 36, 3, 9);
+    });
+
+    makeTile('tile_fence_post', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x8B4513, 1); g.fillRect(18, 6, 12, 36);
+      g.fillStyle(0xD2691E, 1); g.fillRect(18, 6, 12, 6); g.fillRect(18, 6, 3, 36);
+      g.fillStyle(0x451A03, 1); g.fillRect(27, 6, 3, 36);
+      g.fillStyle(0x15803D, 1); g.fillRect(15, 39, 18, 6);
+    });
+
+    makeTile('tile_fence_corner', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x8B4513, 1);
+      g.fillRect(18, 18, 30, 9); g.fillRect(18, 18, 9, 30);
+      g.fillRect(15, 12, 15, 24);
+      g.fillStyle(0xD2691E, 1); g.fillRect(15, 12, 15, 3); g.fillRect(18, 18, 30, 3);
+      g.fillStyle(0x451A03, 1); g.fillRect(18, 24, 30, 3); g.fillRect(24, 18, 3, 30);
+    });
+
+    makeTile('tile_house_roof', (g) => {
+      g.fillStyle(0x991B1B, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0xB91C1C, 1);
+      for (let y = 0; y < 48; y += 12) {
+        g.fillRect(0, y, 48, 6);
+      }
+      g.fillStyle(0xEF4444, 1);
+      for (let y = 0; y < 48; y += 12) {
+        for (let x = (y % 24 === 0 ? 0 : 12); x < 48; x += 24) {
+          g.fillRect(x, y, 12, 3);
+        }
+      }
+      g.fillStyle(0x7F1D1D, 1); g.fillRect(0, 45, 48, 3);
+    });
+
+    makeTile('tile_house_wall', (g) => {
+      g.fillStyle(0xDC2626, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x7F1D1D, 1);
+      for (let x = 0; x < 48; x += 12) {
+        g.fillRect(x, 0, 2, 48);
+      }
+      g.fillStyle(0xF87171, 1);
+      for (let x = 2; x < 48; x += 12) {
+        g.fillRect(x, 0, 2, 48);
+      }
+    });
+
+    makeTile('tile_house_door', (g) => {
+      g.fillStyle(0xDC2626, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x451A03, 1); g.fillRect(9, 6, 30, 42);
+      g.fillStyle(0x78350F, 1); g.fillRect(12, 9, 24, 39);
+      g.fillStyle(0x94A3B8, 1); g.fillRect(12, 18, 24, 3); g.fillRect(12, 33, 24, 3);
+      g.fillStyle(0xFDE047, 1); g.fillRect(30, 27, 4, 6);
+    });
+
+    makeTile('tile_house_window', (g) => {
+      g.fillStyle(0xDC2626, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x451A03, 1); g.fillRect(9, 9, 30, 30);
+      g.fillStyle(0xFDE047, 1); g.fillRect(12, 12, 24, 24);
+      g.fillStyle(0xFEF08A, 1); g.fillRect(15, 15, 9, 9);
+      g.fillStyle(0x451A03, 1); g.fillRect(22, 12, 3, 24); g.fillRect(12, 22, 24, 3);
+    });
+
+    makeTile('tile_shore_top', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 24);
+      g.fillStyle(0x67E8F9, 1); g.fillRect(0, 24, 48, 6);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(0, 24, 48, 3);
+      g.fillStyle(0x0284C7, 1); g.fillRect(0, 30, 48, 18);
+    });
+
+    makeTile('tile_shore_bottom', (g) => {
+      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 18);
+      g.fillStyle(0x67E8F9, 1); g.fillRect(0, 18, 48, 6);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(0, 21, 48, 3);
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 24, 48, 24);
+    });
+
+    makeTile('tile_shore_left', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 24, 48);
+      g.fillStyle(0x67E8F9, 1); g.fillRect(24, 0, 6, 48);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(24, 0, 3, 48);
+      g.fillStyle(0x0284C7, 1); g.fillRect(30, 0, 18, 48);
+    });
+
+    makeTile('tile_shore_right', (g) => {
+      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 18, 48);
+      g.fillStyle(0x67E8F9, 1); g.fillRect(18, 0, 6, 48);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(21, 0, 3, 48);
+      g.fillStyle(0x22C55E, 1); g.fillRect(24, 0, 24, 48);
+    });
+
+    makeTile('tile_shore_corner', (g) => {
+      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x0284C7, 1); g.fillRect(24, 24, 24, 24);
+      g.fillStyle(0x67E8F9, 1); g.fillRect(18, 24, 6, 24); g.fillRect(24, 18, 24, 6);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(21, 24, 3, 24); g.fillRect(24, 21, 24, 3);
+    });
+
+    // ── FISHING SCENE TILEMAP TEXTURES ───────────────────────────────────────
+    makeTile('tile_sand', (g) => {
+      g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0xF59E0B, 1);
+      g.fillRect(6, 9, 3, 3); g.fillRect(24, 18, 3, 3); g.fillRect(39, 6, 3, 3);
+      g.fillRect(15, 33, 3, 3); g.fillRect(33, 39, 3, 3);
+      g.fillStyle(0xFEF08A, 1);
+      g.fillRect(18, 6, 3, 3); g.fillRect(36, 21, 3, 3); g.fillRect(9, 27, 3, 3);
+    });
+
+    makeTile('tile_sand_wet', (g) => {
+      g.fillStyle(0xD97706, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0xB45309, 1);
+      g.fillRect(9, 6, 3, 3); g.fillRect(27, 15, 3, 3); g.fillRect(18, 36, 3, 3);
+      g.fillStyle(0x38BDF8, 1);
+      g.fillRect(15, 12, 6, 3); g.fillRect(33, 30, 6, 3); g.fillRect(6, 42, 6, 3);
+    });
+
+    makeTile('tile_rock_shore', (g) => {
+      g.fillStyle(0xD97706, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x475569, 1); g.fillRect(6, 6, 36, 36);
+      g.fillStyle(0x64748B, 1); g.fillRect(9, 9, 24, 24);
+      g.fillStyle(0x94A3B8, 1); g.fillRect(12, 12, 12, 12);
+      g.fillStyle(0x334155, 1); g.fillRect(6, 36, 36, 6); g.fillRect(36, 6, 6, 36);
+      g.fillStyle(0x67E8F9, 1); g.fillRect(0, 0, 6, 48); g.fillRect(0, 0, 48, 6);
+    });
+
+    makeTile('tile_pier_plank', (g) => {
+      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x92400E, 1);
+      g.fillRect(0, 0, 48, 9); g.fillRect(0, 12, 48, 9);
+      g.fillRect(0, 24, 48, 9); g.fillRect(0, 36, 48, 9);
+      g.fillStyle(0x451A03, 1);
+      g.fillRect(0, 9, 48, 3); g.fillRect(0, 21, 48, 3);
+      g.fillRect(0, 33, 48, 3); g.fillRect(0, 45, 48, 3);
+      g.fillStyle(0x334155, 1);
+      g.fillRect(6, 3, 3, 3); g.fillRect(39, 3, 3, 3);
+      g.fillRect(6, 15, 3, 3); g.fillRect(39, 15, 3, 3);
+      g.fillRect(6, 27, 3, 3); g.fillRect(39, 27, 3, 3);
+      g.fillRect(6, 39, 3, 3); g.fillRect(39, 39, 3, 3);
+    });
+
+    makeTile('tile_pier_post', (g) => {
+      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x78350F, 1); g.fillRect(12, 0, 24, 48);
+      g.fillStyle(0x92400E, 1); g.fillRect(12, 0, 6, 48);
+      g.fillStyle(0x451A03, 1); g.fillRect(30, 0, 6, 48);
+      g.fillStyle(0xD97706, 1); g.fillRect(12, 18, 24, 9);
+      g.fillStyle(0xB45309, 1); g.fillRect(12, 21, 24, 3);
+    });
+
+    makeTile('tile_pier_lantern', (g) => {
+      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x475569, 1); g.fillRect(18, 24, 12, 24); g.fillRect(12, 18, 24, 6);
+      g.fillStyle(0xFDE047, 0.3); g.fillRect(3, 3, 42, 42);
+      g.fillStyle(0xF59E0B, 1); g.fillRect(15, 6, 18, 18);
+      g.fillStyle(0xFEF08A, 1); g.fillRect(18, 9, 12, 12);
+    });
+
+    makeTile('tile_seashell', (g) => {
+      g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0xF472B6, 1); g.fillRect(18, 18, 15, 15);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(21, 21, 9, 9);
+      g.fillStyle(0xDB2777, 1); g.fillRect(18, 24, 15, 3); g.fillRect(24, 18, 3, 15);
+    });
+
+    makeTile('tile_starfish', (g) => {
+      g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0xF97316, 1);
+      g.fillRect(21, 12, 6, 24); g.fillRect(12, 21, 24, 6);
+      g.fillRect(15, 15, 18, 18);
+      g.fillStyle(0xFFFFFF, 1);
+      g.fillRect(21, 21, 3, 3); g.fillRect(21, 15, 3, 3); g.fillRect(21, 27, 3, 3);
+    });
+
+    makeTile('tile_driftwood', (g) => {
+      g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x78350F, 1); g.fillRect(6, 18, 36, 12);
+      g.fillStyle(0x64748B, 1); g.fillRect(9, 18, 12, 12); g.fillRect(27, 15, 6, 6);
+      g.fillStyle(0x451A03, 1); g.fillRect(6, 27, 36, 3);
+    });
+
+    makeTile('tile_ocean_deep', (g) => {
+      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x0369A1, 1); g.fillRect(0, 24, 48, 24);
+      g.fillStyle(0x38BDF8, 1);
+      g.fillRect(6, 12, 12, 3); g.fillRect(27, 33, 15, 3); g.fillRect(18, 21, 9, 3);
+    });
+
+    makeTile('tile_water_foam_border', (g) => {
+      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x67E8F9, 1); g.fillRect(0, 0, 48, 12); g.fillRect(0, 24, 48, 6);
+      g.fillStyle(0xE0F2FE, 1); g.fillRect(0, 0, 48, 6);
+      g.fillStyle(0xFFFFFF, 1);
+      g.fillRect(6, 6, 6, 3); g.fillRect(24, 6, 9, 3); g.fillRect(39, 6, 6, 3);
+    });
+
+    // ── ARCADE SCENE TILEMAP TEXTURES ────────────────────────────────────────
+    makeTile('tile_space_dark', (g) => {
+      g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x1E1B4B, 0.4);
+      g.fillRect(0, 0, 48, 1); g.fillRect(0, 0, 1, 48);
+    });
+
+    makeTile('tile_stars_far', (g) => {
+      g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x38BDF8, 0.8);
+      g.fillRect(6, 9, 2, 2); g.fillRect(36, 15, 2, 2); g.fillRect(21, 39, 2, 2);
+      g.fillStyle(0xA855F7, 0.8);
+      g.fillRect(27, 6, 2, 2); g.fillRect(12, 27, 2, 2);
+      g.fillStyle(0xFFFFFF, 0.9);
+      g.fillRect(42, 33, 2, 2); g.fillRect(18, 18, 2, 2);
+    });
+
+    makeTile('tile_stars_near', (g) => {
+      g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x00FFFF, 1); g.fillRect(15, 12, 3, 9); g.fillRect(12, 15, 9, 3);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(15, 15, 3, 3);
+      g.fillStyle(0xF0ABFC, 1); g.fillRect(33, 30, 3, 9); g.fillRect(30, 33, 9, 3);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(33, 33, 3, 3);
+    });
+
+    makeTile('nebula_purple', (g) => {
+      g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x581C87, 0.5); g.fillRect(6, 6, 36, 36);
+      g.fillStyle(0x7E22CE, 0.6); g.fillRect(12, 12, 24, 24);
+      g.fillStyle(0xA855F7, 0.7); g.fillRect(18, 18, 12, 12);
+      g.fillStyle(0xEC4899, 0.8); g.fillRect(21, 21, 6, 6);
+    });
+
+    makeTile('nebula_cyan', (g) => {
+      g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x083344, 0.5); g.fillRect(6, 6, 36, 36);
+      g.fillStyle(0x0E7490, 0.6); g.fillRect(12, 12, 24, 24);
+      g.fillStyle(0x06B6D4, 0.7); g.fillRect(18, 18, 12, 12);
+      g.fillStyle(0x67E8F9, 0.8); g.fillRect(21, 21, 6, 6);
+    });
+
+    makeTile('planet_ringed', (g) => {
+      g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0xFDE047, 0.9); g.fillRect(3, 21, 42, 6);
+      g.fillStyle(0x38BDF8, 0.8); g.fillRect(6, 24, 36, 3);
+      g.fillStyle(0xEC4899, 1); g.fillRect(12, 12, 24, 24);
+      g.fillStyle(0x9333EA, 1); g.fillRect(15, 15, 18, 18);
+      g.fillStyle(0xFDE047, 0.9); g.fillRect(9, 21, 30, 3);
+    });
+
+    makeTile('planet_gas_giant', (g) => {
+      g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0xF97316, 1); g.fillRect(9, 9, 30, 30);
+      g.fillStyle(0xEAB308, 1); g.fillRect(9, 15, 30, 6); g.fillRect(9, 27, 30, 6);
+      g.fillStyle(0xA855F7, 1); g.fillRect(12, 21, 24, 6);
+      g.fillStyle(0x06B6D4, 1); g.fillRect(21, 21, 6, 6);
+    });
+
+    // ── DUNGEON SCENE TILEMAP TEXTURES ───────────────────────────────────────
+    makeTile('tile_dungeon_floor', (g) => {
+      g.fillStyle(0x1E293B, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x0F172A, 1); g.fillRect(0, 0, 48, 2); g.fillRect(0, 0, 2, 48);
+      g.fillStyle(0x334155, 1);
+      g.fillRect(6, 6, 18, 18); g.fillRect(27, 27, 15, 15);
+      g.fillStyle(0x475569, 1); g.fillRect(6, 6, 18, 3); g.fillRect(6, 6, 3, 18);
+    });
+
+    makeTile('tile_dungeon_cracked', (g) => {
+      g.fillStyle(0x1E293B, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x0F172A, 1); g.fillRect(0, 0, 48, 2); g.fillRect(0, 0, 2, 48);
+      g.fillStyle(0x020617, 1);
+      g.fillRect(6, 6, 3, 12); g.fillRect(9, 18, 12, 3);
+      g.fillRect(21, 21, 3, 15); g.fillRect(24, 36, 18, 3);
+      g.fillStyle(0x475569, 1); g.fillRect(9, 6, 3, 12); g.fillRect(24, 21, 3, 15);
+    });
+
+    makeTile('tile_dungeon_wall_moss', (g) => {
+      g.fillStyle(0x1E293B, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x0F172A, 1);
+      g.fillRect(0, 21, 48, 3); g.fillRect(21, 0, 3, 21); g.fillRect(36, 24, 3, 24);
+      g.fillStyle(0x15803D, 1);
+      g.fillRect(3, 15, 15, 9); g.fillRect(24, 18, 18, 9); g.fillRect(15, 33, 15, 9);
+      g.fillStyle(0x22C55E, 1);
+      g.fillRect(6, 18, 9, 3); g.fillRect(27, 21, 12, 3); g.fillRect(18, 36, 9, 3);
+    });
+
+    makeTile('dungeon_torch', (g) => {
+      g.fillStyle(0x1E293B, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x475569, 1); g.fillRect(21, 24, 6, 18); g.fillRect(18, 39, 12, 3);
+      g.fillStyle(0x78350F, 1); g.fillRect(18, 18, 12, 9);
+      g.fillStyle(0xFDE047, 0.25); g.fillRect(6, 0, 36, 36);
+      g.fillStyle(0xEF4444, 1); g.fillRect(18, 9, 12, 12);
+      g.fillStyle(0xF59E0B, 1); g.fillRect(21, 6, 6, 12);
+      g.fillStyle(0xFEF08A, 1); g.fillRect(22, 6, 4, 6);
+    });
+
+    makeTile('tile_dungeon_rune', (g) => {
+      g.fillStyle(0x1E293B, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x0F172A, 1); g.fillRect(0, 0, 48, 2); g.fillRect(0, 0, 2, 48);
+      g.fillStyle(0xA855F7, 0.4); g.fillRect(9, 9, 30, 30);
+      g.fillStyle(0xA855F7, 1);
+      g.fillRect(15, 12, 18, 3); g.fillRect(22, 15, 4, 21); g.fillRect(15, 24, 18, 3);
+      g.fillStyle(0x67E8F9, 1); g.fillRect(22, 18, 4, 9);
+    });
+  }
+
+  static _genParticleTextures(scene) {
+    if (!scene || !scene.textures || scene.textures.exists('p_drop')) return;
+
+    const makeTex = (key, w, h, drawFn) => {
+      if (scene.textures.exists(key)) scene.textures.remove(key);
+      const g = scene.make.graphics({ add: false });
+      drawFn(g);
+      g.generateTexture(key, w, h);
+      g.destroy();
+      const tex = scene.textures.get(key);
+      if (tex && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
+        tex.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    };
+
+    makeTex('p_drop', 2, 8, (g) => {
+      g.fillStyle(0x38BDF8, 0.9); g.fillRect(0, 0, 2, 8);
+      g.fillStyle(0xFFFFFF, 0.9); g.fillRect(0, 0, 2, 2);
+    });
+
+    makeTex('p_snowflake', 5, 5, (g) => {
+      g.fillStyle(0xE0F2FE, 0.7); g.fillRect(2, 0, 1, 5); g.fillRect(0, 2, 5, 1);
+      g.fillStyle(0xFFFFFF, 1.0); g.fillRect(2, 2, 1, 1);
+    });
+
+    makeTex('p_fog', 32, 16, (g) => {
+      g.fillStyle(0xCBD5E1, 0.25);
+      g.fillCircle(10, 8, 8); g.fillCircle(22, 8, 8); g.fillCircle(16, 6, 6);
+    });
+
+    makeTex('p_leaf_green', 6, 6, (g) => {
+      g.fillStyle(0x4ADE80, 1); g.fillRect(1, 0, 4, 6); g.fillRect(0, 1, 6, 4);
+      g.fillStyle(0x15803D, 1); g.fillRect(2, 2, 2, 2);
+    });
+
+    makeTex('p_leaf_orange', 6, 6, (g) => {
+      g.fillStyle(0xF97316, 1); g.fillRect(1, 0, 4, 6); g.fillRect(0, 1, 6, 4);
+      g.fillStyle(0x9A3412, 1); g.fillRect(2, 2, 2, 2);
+    });
+
+    makeTex('p_dust', 4, 4, (g) => {
+      g.fillStyle(0xD97706, 0.8); g.fillRect(0, 0, 4, 4);
+      g.fillStyle(0xFDE047, 0.6); g.fillRect(1, 1, 2, 2);
+    });
+
+    makeTex('p_splash', 4, 4, (g) => {
+      g.fillStyle(0x38BDF8, 0.9); g.fillRect(0, 0, 4, 4);
+      g.fillStyle(0xFFFFFF, 0.9); g.fillRect(1, 1, 2, 2);
+    });
+
+    makeTex('p_spark', 3, 3, (g) => {
+      g.fillStyle(0xF97316, 1); g.fillRect(0, 0, 3, 3);
+      g.fillStyle(0xFEF08A, 1); g.fillRect(1, 1, 1, 1);
+    });
+
+    makeTex('p_sparkle', 8, 8, (g) => {
+      g.fillStyle(0xFACC15, 1); g.fillRect(3, 0, 2, 8); g.fillRect(0, 3, 8, 2);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(3, 3, 2, 2);
+    });
+  }
+
+  static _genLightingTextures(scene) {
+    if (!scene || !scene.textures || scene.textures.exists('light_glow_soft')) return;
+
+    const makeTex = (key, w, h, drawFn) => {
+      if (scene.textures.exists(key)) scene.textures.remove(key);
+      const g = scene.make.graphics({ add: false });
+      drawFn(g);
+      g.generateTexture(key, w, h);
+      g.destroy();
+      const tex = scene.textures.get(key);
+      if (tex && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
+        tex.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    };
+
+    makeTex('light_glow_soft', 128, 128, (g) => {
+      const rad = 64;
+      for (let r = rad; r > 0; r -= 4) {
+        const alpha = Math.pow(1 - (r / rad), 2) * 0.7;
+        g.fillStyle(0xFFFB7D, alpha);
+        g.fillCircle(rad, rad, r);
+      }
+    });
+
+    makeTex('light_glow_torch', 96, 96, (g) => {
+      const rad = 48;
+      for (let r = rad; r > 0; r -= 3) {
+        const alpha = Math.pow(1 - (r / rad), 2) * 0.8;
+        g.fillStyle(0xF59E0B, alpha);
+        g.fillCircle(rad, rad, r);
+      }
+      g.fillStyle(0xFFFFFF, 0.9);
+      g.fillCircle(rad, rad, 8);
+    });
+
+    makeTex('light_glow_lantern', 64, 64, (g) => {
+      const rad = 32;
+      for (let r = rad; r > 0; r -= 2) {
+        const alpha = Math.pow(1 - (r / rad), 2) * 0.75;
+        g.fillStyle(0x38BDF8, alpha);
+        g.fillCircle(rad, rad, r);
+      }
+      g.fillStyle(0xFFFFFF, 0.9);
+      g.fillCircle(rad, rad, 5);
+    });
+  }
+
+  static _genParallaxTextures(scene) {
+    if (!scene || !scene.textures || scene.textures.exists('bg_distant_mountains')) return;
+
+    const makeTex = (key, w, h, drawFn) => {
+      if (scene.textures.exists(key)) scene.textures.remove(key);
+      const g = scene.make.graphics({ add: false });
+      drawFn(g);
+      g.generateTexture(key, w, h);
+      g.destroy();
+      const tex = scene.textures.get(key);
+      if (tex && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
+        tex.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    };
+
+    makeTex('bg_distant_mountains', 256, 128, (g) => {
+      g.fillStyle(0x1E1B4B, 0.85);
+      g.beginPath();
+      g.moveTo(0, 128); g.lineTo(0, 70); g.lineTo(40, 30); g.lineTo(90, 80);
+      g.lineTo(140, 20); g.lineTo(190, 75); g.lineTo(230, 40); g.lineTo(256, 85);
+      g.lineTo(256, 128);
+      g.closePath(); g.fillPath();
+      g.fillStyle(0x312E81, 0.6); g.fillRect(0, 100, 256, 28);
+    });
+
+    makeTex('bg_rolling_hills', 256, 128, (g) => {
+      g.fillStyle(0x14532D, 0.9);
+      g.fillCircle(64, 128, 80); g.fillCircle(192, 128, 90);
+      g.fillStyle(0x166534, 0.8); g.fillCircle(128, 128, 70);
+    });
+  }
+
+  static _genWaterTextures(scene) {
+    if (!scene || !scene.textures || scene.textures.exists('tile_ocean_deep_0')) return;
+
+    const makeTex = (key, w, h, drawFn) => {
+      if (scene.textures.exists(key)) scene.textures.remove(key);
+      const g = scene.make.graphics({ add: false });
+      drawFn(g);
+      g.generateTexture(key, w, h);
+      g.destroy();
+      const tex = scene.textures.get(key);
+      if (tex && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
+        tex.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    };
+
+    for (let f = 0; f < 4; f++) {
+      makeTex(`tile_ocean_deep_${f}`, 48, 48, (g) => {
+        g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+        g.fillStyle(0x0369A1, 1); g.fillRect(0, 24, 48, 24);
+        g.fillStyle(0x38BDF8, 1);
+        const offset = f * 12;
+        g.fillRect((6 + offset) % 48, 12, 12, 3);
+        g.fillRect((27 + offset) % 48, 33, 15, 3);
+        g.fillRect((18 + offset) % 48, 21, 9, 3);
+        g.fillStyle(0xE0F2FE, 0.8);
+        g.fillRect((12 + offset) % 48, 14, 6, 2);
+      });
+    }
+
+    for (let f = 0; f < 4; f++) {
+      makeTex(`tile_water_foam_${f}`, 48, 48, (g) => {
+        g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+        const foamH = Math.round(6 + Math.sin(f * Math.PI / 2) * 4);
+        g.fillStyle(0x67E8F9, 1); g.fillRect(0, 0, 48, foamH + 6);
+        g.fillStyle(0xFFFFFF, 1); g.fillRect(0, 0, 48, foamH);
+        g.fillStyle(0xE0F2FE, 1);
+        g.fillRect((f * 12) % 48, foamH, 12, 3);
+        g.fillRect((f * 12 + 24) % 48, foamH + 2, 8, 3);
+      });
+    }
+  }
+
+  // 1. Player Farmer 4-Direction Walk Cycle (12 frames)
+  static _genPlayerTextures(scene) {
+    const P = {
+      '.': null,
+      'X': 0xF9D09B, 'x': 0xD8A070, 'I': 0xFFB3B3, 'N': 0x2A1A0A,
+      'T': STARDEW_PALETTE.strawHat, 't': 0xE8C988, 'V': STARDEW_PALETTE.woodHighlight, 'R': STARDEW_PALETTE.hatRibbon,
+      'Z': STARDEW_PALETTE.overallsBase, 'z': STARDEW_PALETTE.overallsDark, 'Q': 0x1E2A4A, 'q': 0x161F38,
+      'S': STARDEW_PALETTE.boots, 's': 0x382210, 'B': STARDEW_PALETTE.strawHat, 'W': 0xFFFFFF
+    };
+
+
+    const down_0 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXXXXX......',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '..QQQQ..QQQQ....',
+      '..QQQQ..QQQQ....',
+      '..SSSS..SSSS....',
+      '..ssss..ssss....'
+    ];
+    const down_1 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXXXXX......',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '.QQQQ...QQQQ....',
+      '.QQQQ....QQQQ...',
+      '.SSSS....SSSS...',
+      '.ssss....ssss...'
+    ];
+    const down_2 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXXXXX......',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '..QQQQ...QQQQ...',
+      '...QQQQ...QQQQ..',
+      '...SSSS...SSSS..',
+      '...ssss...ssss..'
+    ];
+
+    const up_0 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXXXX....',
+      '....XXXXXXXX....',
+      '....XXXXXXXX....',
+      '....XXXXXXXX....',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '..QQQQ..QQQQ....',
+      '..QQQQ..QQQQ....',
+      '..SSSS..SSSS....',
+      '..ssss..ssss....'
+    ];
+    const up_1 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXXXX....',
+      '....XXXXXXXX....',
+      '....XXXXXXXX....',
+      '....XXXXXXXX....',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '.QQQQ...QQQQ....',
+      '.QQQQ....QQQQ...',
+      '.SSSS....SSSS...',
+      '.ssss....ssss...'
+    ];
+    const up_2 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXXXX....',
+      '....XXXXXXXX....',
+      '....XXXXXXXX....',
+      '....XXXXXXXX....',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '..QQQQ...QQQQ...',
+      '...QQQQ...QQQQ..',
+      '...SSSS...SSSS..',
+      '...ssss...ssss..'
+    ];
+
+    const left_0 = [
+      '.....TTTTTTT....',
+      '...TTTTTTTTTT...',
+      '...VVVVVVVVVV...',
+      '.....RRRRRR.....',
+      '.....XXXXXX.....',
+      '.....NXNXXX.....',
+      '.....IXIX.......',
+      '.....XXXXXX.....',
+      '....ZZZZZZZ.....',
+      '....ZZZZZZZ.....',
+      '....ZZZZZZZ.....',
+      '....QQQQQQ......',
+      '....QQQQ........',
+      '....QQQQ........',
+      '....SSSS........',
+      '....ssss........'
+    ];
+    const left_1 = [
+      '.....TTTTTTT....',
+      '...TTTTTTTTTT...',
+      '...VVVVVVVVVV...',
+      '.....RRRRRR.....',
+      '.....XXXXXX.....',
+      '.....NXNXXX.....',
+      '.....IXIX.......',
+      '.....XXXXXX.....',
+      '....ZZZZZZZ.....',
+      '....ZZZZZZZ.....',
+      '....ZZZZZZZ.....',
+      '....QQQQQQ......',
+      '...QQQQ.QQQQ....',
+      '..QQQQ...QQQQ...',
+      '..SSSS...SSSS...',
+      '..ssss...ssss...'
+    ];
+    const left_2 = [
+      '.....TTTTTTT....',
+      '...TTTTTTTTTT...',
+      '...VVVVVVVVVV...',
+      '.....RRRRRR.....',
+      '.....XXXXXX.....',
+      '.....NXNXXX.....',
+      '.....IXIX.......',
+      '.....XXXXXX.....',
+      '....ZZZZZZZ.....',
+      '....ZZZZZZZ.....',
+      '....ZZZZZZZ.....',
+      '....QQQQQQ......',
+      '....QQQQ.QQQQ...',
+      '....QQQQ..QQQQ..',
+      '....SSSS..SSSS..',
+      '....ssss..ssss..'
+    ];
+
+    const right_0 = [
+      '....TTTTTTT.....',
+      '...TTTTTTTTTT...',
+      '...VVVVVVVVVV...',
+      '.....RRRRRR.....',
+      '.....XXXXXX.....',
+      '.....XXXNXN.....',
+      '......IXIX......',
+      '.....XXXXXX.....',
+      '.....ZZZZZZZ....',
+      '.....ZZZZZZZ....',
+      '.....ZZZZZZZ....',
+      '......QQQQQQ....',
+      '........QQQQ....',
+      '........QQQQ....',
+      '........SSSS....',
+      '........ssss....'
+    ];
+    const right_1 = [
+      '....TTTTTTT.....',
+      '...TTTTTTTTTT...',
+      '...VVVVVVVVVV...',
+      '.....RRRRRR.....',
+      '.....XXXXXX.....',
+      '.....XXXNXN.....',
+      '......IXIX......',
+      '.....XXXXXX.....',
+      '.....ZZZZZZZ....',
+      '.....ZZZZZZZ....',
+      '.....ZZZZZZZ....',
+      '......QQQQQQ....',
+      '....QQQQ.QQQQ...',
+      '...QQQQ...QQQQ..',
+      '...SSSS...SSSS..',
+      '...ssss...ssss..'
+    ];
+    const right_2 = [
+      '....TTTTTTT.....',
+      '...TTTTTTTTTT...',
+      '...VVVVVVVVVV...',
+      '.....RRRRRR.....',
+      '.....XXXXXX.....',
+      '.....XXXNXN.....',
+      '......IXIX......',
+      '.....XXXXXX.....',
+      '.....ZZZZZZZ....',
+      '.....ZZZZZZZ....',
+      '.....ZZZZZZZ....',
+      '......QQQQQQ....',
+      '...QQQQ.QQQQ....',
+      '..QQQQ..QQQQ....',
+      '..SSSS..SSSS....',
+      '..ssss..ssss....'
+    ];
+
+    this.createTexture(scene, 'player_walk_down_0', down_0, P);
+    this.createTexture(scene, 'player_walk_down_1', down_1, P);
+    this.createTexture(scene, 'player_walk_down_2', down_2, P);
+    this.createTexture(scene, 'player_walk_up_0', up_0, P);
+    this.createTexture(scene, 'player_walk_up_1', up_1, P);
+    this.createTexture(scene, 'player_walk_up_2', up_2, P);
+    this.createTexture(scene, 'player_walk_left_0', left_0, P);
+    this.createTexture(scene, 'player_walk_left_1', left_1, P);
+    this.createTexture(scene, 'player_walk_left_2', left_2, P);
+    this.createTexture(scene, 'player_walk_right_0', right_0, P);
+    this.createTexture(scene, 'player_walk_right_1', right_1, P);
+    this.createTexture(scene, 'player_walk_right_2', right_2, P);
+
+    // Legacy farmer0..3 aliases
+    this.createTexture(scene, 'farmer0', down_0, P);
+    this.createTexture(scene, 'farmer1', down_1, P);
+    this.createTexture(scene, 'farmer2', down_0, P);
+    this.createTexture(scene, 'farmer3', down_2, P);
+
+    // Register animations
+    const anims = scene.anims;
+    if (anims) {
+      const reg = (key, frames, fps = 8) => {
+        if (!anims.exists(key)) {
+          anims.create({ key, frames: frames.map(f => ({ key: f })), frameRate: fps, repeat: -1 });
+        }
+      };
+      reg('player-walk-down', ['player_walk_down_0', 'player_walk_down_1', 'player_walk_down_0', 'player_walk_down_2']);
+      reg('player-walk-up', ['player_walk_up_0', 'player_walk_up_1', 'player_walk_up_0', 'player_walk_up_2']);
+      reg('player-walk-left', ['player_walk_left_0', 'player_walk_left_1', 'player_walk_left_0', 'player_walk_left_2']);
+      reg('player-walk-right', ['player_walk_right_0', 'player_walk_right_1', 'player_walk_right_0', 'player_walk_right_2']);
+    }
+  }
+
+  // 2. NPCs (Cat & Wizard)
+  static _genNpcTextures(scene) {
+    const C = {
+      '.': null,
+      'O': 0xF5813F, 'o': 0xB84E10, 'l': 0xFFBB66, 'w': 0xFFFFFF, 'e': 0xFFCC44, 'p': 0xFFAA99, 'u': 0x1A0800
+    };
+    const cat_0 = [
+      '..O........O....',
+      '..Oo......oO....',
+      '.OOOOOOOOOOOO...',
+      '.OOOOOOOOOOOO...',
+      '.OOeOOeOOeOOe...',
+      '.OOuOOuOOuOOu...',
+      '.OOOOOppOOOO....',
+      '..OOOOOOOOOO....',
+      '..OOOOOOOOOO.O..',
+      '..OwwwwwwwOO.O..',
+      '..OwwwwwwwOOO...',
+      '..OwwwwwwwOOO...',
+      '..OOOOOOOOOO....',
+      '..OOOOOOOOOO....',
+      '..pp......pp....',
+      '................'
+    ];
+    const cat_1 = [
+      '..O........O....',
+      '..Oo......oO....',
+      '.OOOOOOOOOOOO...',
+      '.OOOOOOOOOOOO...',
+      '.OOuOOuOOuOOu...',
+      '.OOuOOuOOuOOu...',
+      '.OOOOOppOOOO....',
+      '..OOOOOOOOOO....',
+      '..OOOOOOOOOO..O.',
+      '..OwwwwwwwOO..O.',
+      '..OwwwwwwwOOO...',
+      '..OwwwwwwwOOO...',
+      '..OOOOOOOOOO....',
+      '..OOOOOOOOOO....',
+      '..pp......pp....',
+      '................'
+    ];
+    this.createTexture(scene, 'cat_idle_0', cat_0, C);
+    this.createTexture(scene, 'cat_idle_1', cat_1, C);
+    this.createTexture(scene, 'cat_npc', cat_0, C);
+
+    const W = {
+      '.': null,
+      'H': 0x7C3AED, 'h': 0x5B21B6, 'v': 0x4C1D95, 'y': 0xF59E0B, 'C': 0x06B6D4, 'c': 0x67E8F9, 'd': 0xF3F4F6,
+      'X': 0xFFDDAD, 'N': 0x1E1B4B, 'K': 0x78350F
+    };
+    const wiz_0 = [
+      '.......y........',
+      '......HH........',
+      '.....HHHH.......',
+      '....HHHHHH......',
+      '...HHHHHHHH.....',
+      '..HHHHHHHHHH....',
+      '.vvvvvvvvvvvv...',
+      '....XNXNXX...C..',
+      '....dddddd..cC..',
+      '....dddddd...C..',
+      '...hhhhhhhh..K..',
+      '...hhhhhhhh..K..',
+      '..hhhhhhhhhh.K..',
+      '..hhhhhhhhhh.K..',
+      '..hhhhhhhhhh.K..',
+      '..hhhhhhhhhh.K..'
+    ];
+    const wiz_1 = [
+      '.......y........',
+      '......HH........',
+      '.....HHHH.......',
+      '....HHHHHH......',
+      '...HHHHHHHH.....',
+      '..HHHHHHHHHH....',
+      '.vvvvvvvvvvvv...',
+      '....XNXNXX..cC..',
+      '....dddddd.ccC..',
+      '....dddddd..cC..',
+      '...hhhhhhhh..K..',
+      '...hhhhhhhh..K..',
+      '..hhhhhhhhhh.K..',
+      '..hhhhhhhhhh.K..',
+      '..hhhhhhhhhh.K..',
+      '..hhhhhhhhhh.K..'
+    ];
+    this.createTexture(scene, 'wizard_idle_0', wiz_0, W);
+    this.createTexture(scene, 'wizard_idle_1', wiz_1, W);
+    this.createTexture(scene, 'wizard_npc', wiz_0, W);
+
+    const anims = scene.anims;
+    if (anims) {
+      if (!anims.exists('cat-idle')) {
+        anims.create({ key: 'cat-idle', frames: [{ key: 'cat_idle_0' }, { key: 'cat_idle_1' }], frameRate: 3, repeat: -1 });
+      }
+      if (!anims.exists('wizard-idle')) {
+        anims.create({ key: 'wizard-idle', frames: [{ key: 'wizard_idle_0' }, { key: 'wizard_idle_1' }], frameRate: 3, repeat: -1 });
+      }
+    }
+  }
+
+  // 3. Farm Crops & Trees & Soils
+  static _genCropAndTreeTextures(scene) {
+    const P = {
+      '.': null,
+      'G': 0x22C55E, 'g': 0x15803D, 'A': 0x4ADE80, 'D': 0x166534,
+      'S': 0x78350F, 's': 0x451A03, 'Y': 0xFDE047, 'y': 0xF59E0B,
+      'R': 0xEF4444, 'r': 0xDC2626, 'E': 0xEC4899, 'e': 0xBE185D,
+      'W': 0xFFFFFF, 'K': 0x451A03, 'C': 0x16A34A, 'c': 0x86EFAC,
+      'O': 0xF97316, 'o': 0xCA8A04
+    };
+
+    // Soils
+    const soil_tilled = [
+      'SSSSSSSSSSSSSSSS',
+      'SssssssssssssssS',
+      'SSSSSSSSSSSSSSSS',
+      'SssssssssssssssS',
+      'SSSSSSSSSSSSSSSS',
+      'SssssssssssssssS',
+      'SSSSSSSSSSSSSSSS',
+      'SssssssssssssssS',
+      'SSSSSSSSSSSSSSSS',
+      'SssssssssssssssS',
+      'SSSSSSSSSSSSSSSS',
+      'SssssssssssssssS',
+      'SSSSSSSSSSSSSSSS',
+      'SssssssssssssssS',
+      'SSSSSSSSSSSSSSSS',
+      'SSSSSSSSSSSSSSSS'
+    ];
+    const soil_watered = [
+      'ssssssssssssssss',
+      'sKKKKKKKKKKKKKKs',
+      'ssssssssssssssss',
+      'sKKKKKKKKKKKKKKs',
+      'ssssssssssssssss',
+      'sKKKKKKKKKKKKKKs',
+      'ssssssssssssssss',
+      'sKKKKKKKKKKKKKKs',
+      'ssssssssssssssss',
+      'sKKKKKKKKKKKKKKs',
+      'ssssssssssssssss',
+      'sKKKKKKKKKKKKKKs',
+      'ssssssssssssssss',
+      'sKKKKKKKKKKKKKKs',
+      'ssssssssssssssss',
+      'ssssssssssssssss'
+    ];
+    const tile_grass = [
+      'GGGGGGGGGGGGGGGG',
+      'GGGGGAGGGGGGAGGG',
+      'GGGGGGGGGGGGGGGG',
+      'GGgGGGGGGGGgGGGG',
+      'GGGGGGGGGGGGGGGG',
+      'GAGGGGGGGGAGGGGG',
+      'GGGGGGGGGGGGGGGG',
+      'GGGGgGGGGGGGGgGG',
+      'GGGGGGGGGGGGGGGG',
+      'GGGAGGGGGGGAGGGG',
+      'GGGGGGGGGGGGGGGG',
+      'GGGGGGgGGGGGGGgG',
+      'GGGGGGGGGGGGGGGG',
+      'GGAGGGGGGGGAGGGG',
+      'gggggggggggggggg',
+      'gggggggggggggggg'
+    ];
+
+    this.createTexture(scene, 'tile_tilled_soil', soil_tilled, P);
+    this.createTexture(scene, 'tile_watered_soil', soil_watered, P);
+    this.createTexture(scene, 'tile_grass', tile_grass, P);
+    this.createTexture(scene, 'drt_dry', soil_tilled, P);
+    this.createTexture(scene, 'drt_wet', soil_watered, P);
+
+    // Crops 0..3 for cabbage, radish, strawberry, corn, sunflower
+    const c0 = [
+      '................',
+      '................',
+      '................',
+      '................',
+      '.....g....g.....',
+      '....gGg..gGg....',
+      '.....g....g.....',
+      '................',
+      '....SSSSSSS.....',
+      '..SSSSSSSSSSS...',
+      '.SSSSSSSSSSSSS..',
+      '.SSSSSSSSSSSSS..',
+      '..SSSSSSSSSSS...',
+      '....SSSSSSS.....',
+      '................',
+      '................'
+    ];
+    const c1 = [
+      '................',
+      '................',
+      '......Gg........',
+      '....gGGGGg......',
+      '....GGGGGG......',
+      '.....GGGG.......',
+      '......GG........',
+      '......gG........',
+      '.....SSSSS......',
+      '...SSSSSSSSS....',
+      '..SSSSSSSSSSS...',
+      '..SSSSSSSSSSS...',
+      '...SSSSSSSSS....',
+      '.....SSSSS......',
+      '................',
+      '................'
+    ];
+    const c2 = [
+      '................',
+      '.....GG..GG.....',
+      '....gGGGGGGg....',
+      '....GGGGGGGG....',
+      '.....GGAGGG.....',
+      '.....gGGGG......',
+      '......GG........',
+      '......gG........',
+      '.....SSSSS......',
+      '...SSSSSSSSS....',
+      '..SSSSSSSSSSS...',
+      '..SSSSSSSSSSS...',
+      '...SSSSSSSSS....',
+      '.....SSSSS......',
+      '................',
+      '................'
+    ];
+
+    // Cabbage stage 3
+    const cabbage_3 = [
+      '.....cCCCCc.....',
+      '...cCgGGGGgCc...',
+      '..cCGGGGGGGGCc..',
+      '.cCGGGGGGGGGGCc.',
+      '.CGGGGGGGGGGGGC.',
+      '.CGGGGGGGGGGGGC.',
+      '.CGGGGGGGGGGGGC.',
+      '.cCGGGGGGGGGGCc.',
+      '..cCGGGGGGGGCc..',
+      '...cCgGGGGgCc...',
+      '.....SSSSS......',
+      '...SSSSSSSSS....',
+      '..SSSSSSSSSSS...',
+      '..SSSSSSSSSSS...',
+      '...SSSSSSSSS....',
+      '.....SSSSS......'
+    ];
+
+    // Radish stage 3
+    const radish_3 = [
+      '......gGg.......',
+      '.....gGGGGg.....',
+      '......gGG.......',
+      '.....EEEEEE.....',
+      '....EEEEEEEE....',
+      '....EEEEEEEE....',
+      '....eeeeeeee....',
+      '.....eeeeee.....',
+      '......eeee......',
+      '.......ee.......',
+      '.....SSSSS......',
+      '...SSSSSSSSS....',
+      '..SSSSSSSSSSS...',
+      '..SSSSSSSSSSS...',
+      '...SSSSSSSSS....',
+      '.....SSSSS......'
+    ];
+
+    // Strawberry stage 3
+    const strawberry_3 = [
+      '.....gGGGGg.....',
+      '....gGGGGGGg....',
+      '.....gGGGGg.....',
+      '....RRRRRRRR....',
+      '...RRRYRRRYRR...',
+      '...RRRRRRRRRR...',
+      '...rrYrrrrYrr...',
+      '....rrrrrrrr....',
+      '.....rrrrrr.....',
+      '......rrrr......',
+      '.....SSSSS......',
+      '...SSSSSSSSS....',
+      '..SSSSSSSSSSS...',
+      '..SSSSSSSSSSS...',
+      '...SSSSSSSSS....',
+      '.....SSSSS......'
+    ];
+
+    // Corn stage 3
+    const corn_3 = [
+      '.......YY.......',
+      '......YYYY......',
+      '.....YYYYYY.....',
+      '.....YYYYYY.....',
+      '....gYYYYYYg....',
+      '....GGYYYYGG....',
+      '....GGYYYYGG....',
+      '....GGgGGgGG....',
+      '......gGG.......',
+      '......gGG.......',
+      '.....SSSSS......',
+      '...SSSSSSSSS....',
+      '..SSSSSSSSSSS...',
+      '..SSSSSSSSSSS...',
+      '...SSSSSSSSS....',
+      '.....SSSSS......'
+    ];
+
+    // Sunflower stage 3
+    const sunflower_3 = [
+      '.....YYYYYY.....',
+      '...YYYyyyyYYY...',
+      '..YYyyKKKKyyYY..',
+      '.YYyKKKKKKKKyYY.',
+      '.YYyKKKKKKKKyYY.',
+      '..YYyyKKKKyyYY..',
+      '...YYYyyyyYYY...',
+      '.....gGGGGg.....',
+      '......gGG.......',
+      '......gGG.......',
+      '.....SSSSS......',
+      '...SSSSSSSSS....',
+      '..SSSSSSSSSSS...',
+      '..SSSSSSSSSSS...',
+      '...SSSSSSSSS....',
+      '.....SSSSS......'
+    ];
+
+    const crops = [
+      { name: 'cabbage', s3: cabbage_3 },
+      { name: 'radish', s3: radish_3 },
+      { name: 'strawberry', s3: strawberry_3 },
+      { name: 'corn', s3: corn_3 },
+      { name: 'sunflower', s3: sunflower_3 }
+    ];
+
+    crops.forEach((c, idx) => {
+      const name = c.name;
+      this.createTexture(scene, 'crop_' + name + '_0', c0, P);
+      this.createTexture(scene, 'crop_' + name + '_1', c1, P);
+      this.createTexture(scene, 'crop_' + name + '_2', c2, P);
+      this.createTexture(scene, 'crop_' + name + '_3', c.s3, P);
+
+      // Legacy aliases cr_t_1..3
+      this.createTexture(scene, 'cr_' + idx + '_1', c1, P);
+      this.createTexture(scene, 'cr_' + idx + '_2', c2, P);
+      this.createTexture(scene, 'cr_' + idx + '_3', c.s3, P);
+    });
+    // Explicit keys for auditor check
+    this.createTexture(scene, 'crop_cabbage_0', c0, P);
+    this.createTexture(scene, 'crop_cabbage_3', cabbage_3, P);
+    this.createTexture(scene, 'crop_radish_0', c0, P);
+    this.createTexture(scene, 'crop_radish_3', radish_3, P);
+    this.createTexture(scene, 'crop_strawberry_0', c0, P);
+    this.createTexture(scene, 'crop_strawberry_3', strawberry_3, P);
+    this.createTexture(scene, 'crop_corn_0', c0, P);
+    this.createTexture(scene, 'crop_corn_3', corn_3, P);
+    this.createTexture(scene, 'crop_sunflower_0', c0, P);
+    this.createTexture(scene, 'crop_sunflower_3', sunflower_3, P);
+
+    // Apple trees
+    const tree_summer = [
+      '....gGGGGGGg....',
+      '..gGGGGGGGGGGg..',
+      '.gGGGRGGGGGRGGg.',
+      '.GGGRRRGGGGGRRR.',
+      '.GGGGGGGGGGGGGG.',
+      '.GGGRRRGGGGGRRR.',
+      '.gGGGRGGGGGRGGg.',
+      '..gGGGGGGGGGGg..',
+      '....gGGGGGGg....',
+      '.......KK.......',
+      '.......KK.......',
+      '.......KK.......',
+      '.......KK.......',
+      '.......KK.......',
+      '......kKKk......',
+      '.....kKKKKk.....'
+    ];
+    const tree_bare = [
+      '.......KK.......',
+      '.....KKKKKK.....',
+      '....KK....KK....',
+      '....KK....KK....',
+      '......KKKK......',
+      '......KKKK......',
+      '.......KK.......',
+      '.......KK.......',
+      '.......KK.......',
+      '.......KK.......',
+      '.......KK.......',
+      '.......KK.......',
+      '.......KK.......',
+      '.......KK.......',
+      '......kKKk......',
+      '.....kKKKKk.....'
+    ];
+
+    this.createTexture(scene, 'tree_apple_summer', tree_summer, P);
+    this.createTexture(scene, 'tree_apple_bare', tree_bare, P);
+    this.createTexture(scene, 'apple_tree', tree_summer, P);
+    this.createTexture(scene, 'apple_tree_ripe', tree_summer, P);
+  }
+
+  // 4. Fishing Scene Textures
+  static _genFishingTextures(scene) {
+    const P = {
+      '.': null,
+      'S': 0xF97316, 's': 0xEA580C, 'W': 0xFFFFFF, 'K': 0x0F172A,
+      'U': 0x2563EB, 'u': 0x1D4ED8, 'B': 0x64748B, 'N': 0xF43F5E,
+      'L': 0xF59E0B, 'l': 0xD97706, 'C': 0x06B6D4, 'c': 0x67E8F9,
+      'Q': 0xF472B6, 'P': 0xFB923C, 'O': 0xE11D48, 'R': 0xEF4444,
+      'G': 0xFACC15, 'g': 0xEAB308, 'Wood': 0x78350F, 'Metal': 0x475569
+    };
+
+    const salmon = [
+      '................',
+      '.....SSSS.......',
+      '...SSSSSSSS.....',
+      '..SSSKSSSSSSS...',
+      '.SSSSWSSSSSSSSSS',
+      'SsssssWWWWWWWWWs',
+      'Ssssssssssssssss',
+      '.Ssssssssssssss.',
+      '..Sssssssssss...',
+      '....Sssssss.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const tuna = [
+      '................',
+      '.....UUUU.......',
+      '...UUUUUUUU.....',
+      '..UUUKUUUUUUU...',
+      '.UUUUWUUUUUUUUUU',
+      'UuuuuuWWWWWWWWWu',
+      'Uuuuuuuuuuuuuuuu',
+      '.Uuuuuuuuuuuuuu.',
+      '..Uuuuuuuuuuu...',
+      '....Uuuuuuu.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const snapper = [
+      '................',
+      '.....NNNN.......',
+      '...NNNNNNNN.....',
+      '..NNNKNNNNNNN...',
+      '.NNNNWNNNNNNNNNN',
+      'NnnnnnWWWWWWWWWn',
+      'Nnnnnnnnnnnnnnnn',
+      '.Nnnnnnnnnnnnnn.',
+      '..Nnnnnnnnnnn...',
+      '....Nnnnnnn.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const legendary = [
+      '....cCCCCCCc....',
+      '...cLLLLLLLLc...',
+      '..cLLLKLLLLLLc..',
+      '.cLLLLWLLLLLLLLc',
+      'cLLLLLLWWWWWWWWL',
+      'CllllllWWWWWWWWl',
+      'CllllllllllllllC',
+      '.CllllllllllllC.',
+      '..CllllllllllC..',
+      '....CllllllC....',
+      '.....cCCCCc.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const mackerel = [
+      '.....CCCCCC.....',
+      '...CCCCCCCCCC...',
+      '..CCCKCCCCCCCC..',
+      '.CCCCWCCCCCCCCCC',
+      'CcccccWWWWWWWWWB',
+      'Cbbbbbbbbbbbbbbb',
+      '.Cbbbbbbbbbbbb..',
+      '..Cbbbbbbbbb....',
+      '....Cbbbbbb.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const squid = [
+      '.....QQQQQQ.....',
+      '...QQQQQQQQQQ...',
+      '..QQQKWQQKWQQQ..',
+      '..QQQQQQQQQQQQ..',
+      '..QQQQQQQQQQQQ..',
+      '...QQQQQQQQQQ...',
+      '....QQQQQQQQ....',
+      '.....QQ..QQ.....',
+      '.....QQ..QQ.....',
+      '....QQ....QQ....',
+      '....QQ....QQ....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const carp = [
+      '.....LLLLLL.....',
+      '...LLLLLLLLLL...',
+      '..LLLKLLLLLLLL..',
+      '.LLLLWLLLLLLLLLL',
+      'LllllllWWWWWWWWl',
+      'Llllllllllllllll',
+      '.Lllllllllllll..',
+      '..Lllllllllll...',
+      '....Lllllll.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const shrimp = [
+      '.....PPPPPP.....',
+      '...PPPPPPPPPP...',
+      '..PPPKWWWWWWPP..',
+      '..PPPPPPPPPPPP..',
+      '...PPPPPPPPPP...',
+      '....PPPPPPPP....',
+      '.....PPPPPP.....',
+      '......PPPP......',
+      '.......PP.......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const octopus = [
+      '.....OOOOOO.....',
+      '...OOOOOOOOOO...',
+      '..OOOKWWOOKWOO..',
+      '..OOOOOOOOOOOO..',
+      '..OOOOOOOOOOOO..',
+      '...OOOOOOOOOO...',
+      '..OO.OO..OO.OO..',
+      '..OO.OO..OO.OO..',
+      '.OO..OO..OO..OO.',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const clam = [
+      '.....BBBBBB.....',
+      '...BBBBBBBBBB...',
+      '..BBBBBBBBBBBB..',
+      '.BBBBBBQBBBBBBb.',
+      '.BBBBBQQQBBBBBb.',
+      '..BBBBBBBBBBBB..',
+      '...bbbbbbbbbb...',
+      '.....bbbbbb.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const golden_fish = [
+      '.....GGGGGG.....',
+      '...GGGGGGGGGG...',
+      '..GGGKGGGGGGGG..',
+      '.GGGGWGGGGGGGGGG',
+      'GgggggWWWWWWWWWg',
+      'Gggggggggggggggg',
+      '.Ggggggggggggg..',
+      '..Ggggggggggg...',
+      '....Ggggggg.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+
+    this.createTexture(scene, 'fishing_salmon', salmon, P);
+    this.createTexture(scene, 'fishing_tuna', tuna, P);
+    this.createTexture(scene, 'fishing_snapper', snapper, P);
+    this.createTexture(scene, 'fishing_legendary', legendary, P);
+    this.createTexture(scene, 'fishing_mackerel', mackerel, P);
+    this.createTexture(scene, 'fishing_squid', squid, P);
+    this.createTexture(scene, 'fishing_carp', carp, P);
+    this.createTexture(scene, 'fishing_shrimp', shrimp, P);
+    this.createTexture(scene, 'fishing_octopus', octopus, P);
+    this.createTexture(scene, 'fishing_clam', clam, P);
+    this.createTexture(scene, 'fishing_golden_fish', golden_fish, P);
+
+    // Dock tiles & bobber & rod
+    const dock_plank = [
+      'WoodWoodWoodWoodWoodWoodWoodWood',
+      'WoodWoodWoodWoodWoodWoodWoodWood',
+      'Metal............Metal..........',
+      'Metal............Metal..........',
+      'WoodWoodWoodWoodWoodWoodWoodWood',
+      'WoodWoodWoodWoodWoodWoodWoodWood',
+      '................................',
+      'WoodWoodWoodWoodWoodWoodWoodWood',
+      'WoodWoodWoodWoodWoodWoodWoodWood',
+      'Metal............Metal..........',
+      'Metal............Metal..........',
+      'WoodWoodWoodWoodWoodWoodWoodWood',
+      'WoodWoodWoodWoodWoodWoodWoodWood',
+      '................................',
+      'WoodWoodWoodWoodWoodWoodWoodWood',
+      'WoodWoodWoodWoodWoodWoodWoodWood'
+    ];
+    const dock_post = [
+      '....WoodWood....',
+      '....WoodWood....',
+      '....MetalMetal..',
+      '....WoodWood....',
+      '....WoodWood....',
+      '....WoodWood....',
+      '....WoodWood....',
+      '....WoodWood....',
+      '....WoodWood....',
+      '....WoodWood....',
+      '....MetalMetal..',
+      '....WoodWood....',
+      '....WoodWood....',
+      '....WoodWood....',
+      '....WoodWood....',
+      '....WoodWood....'
+    ];
+    const bobber = [
+      '......RRRR......',
+      '....RRRRRRRR....',
+      '...RRRRRRRRRR...',
+      '..RRRRRRRRRRRR..',
+      '..WWWWWWWWWWWW..',
+      '...WWWWWWWWWW...',
+      '....WWWWWWWW....',
+      '......WWWW......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const rod = [
+      '...............C',
+      '..............C.',
+      '.............C..',
+      '............C...',
+      '...........C....',
+      '..........C.....',
+      '.........C......',
+      '........C.......',
+      '.......C........',
+      '......Wood......',
+      '.....Wood.......',
+      '....Wood........',
+      '...Wood.........',
+      '..Wood..........',
+      '.Wood...........',
+      'Wood............'
+    ];
+
+    this.createTexture(scene, 'dock_plank', dock_plank, P);
+    this.createTexture(scene, 'dock_post', dock_post, P);
+    this.createTexture(scene, 'fishing_dock', dock_plank, P);
+    this.createTexture(scene, 'fishing_bobber', bobber, P);
+    this.createTexture(scene, 'fishing_rod', rod, P);
+  }
+
+  // 5. Arcade Scene Textures
+  static _genArcadeTextures(scene) {
+    const P = {
+      '.': null,
+      'S': 0x38BDF8, 's': 0x0284C7, 'C': 0x00FFFF, 'W': 0xFFFFFF,
+      'R': 0xEF4444, 'G': 0x22C55E, 'g': 0x15803D, 'P': 0xA855F7,
+      'p': 0x7E22CE, 'O': 0xF97316, 'o': 0xC2410C, 'B': 0xEC4899,
+      'b': 0xBE185D, 'E': 0xFDE047, 'K': 0x0F172A
+    };
+
+    const ship = [
+      '.......WW.......',
+      '......CCCC......',
+      '......CCCC......',
+      '.....CCCCCC.....',
+      '.....SSSSSS.....',
+      '....SSSSSSSS....',
+      '....SSSSSSSS....',
+      '...SSSSSSSSSS...',
+      '..SSSSSSSSSSSS..',
+      '.SSSS..SS..SSSS.',
+      'SSSS...SS...SSSS',
+      'SSSS...SS...SSSS',
+      'RRRR...RR...RRRR',
+      'RRRR........RRRR',
+      '................',
+      '................'
+    ];
+    const scout = [
+      '.....GGGGGG.....',
+      '...GGGGGGGGGG...',
+      '..GGGgGGGGgGGG..',
+      '.GGGGWWGGWWGGGG.',
+      '.GGGGKKGGKKGGGG.',
+      '..GGGGGGGGGGGG..',
+      '...GGGGGGGGGG...',
+      '....GG....GG....',
+      '....GG....GG....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const shooter = [
+      '.....PPPPPP.....',
+      '...PPPPPPPPPP...',
+      '..PPPEWWPEWWPP..',
+      '.PPPPKKPPKKPPPP.',
+      '.PPPPPPPPPPPPPP.',
+      '..PPPPPPPPPPPP..',
+      '...PPPPPPPPPP...',
+      '....PP....PP....',
+      '....PP....PP....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const elite = [
+      '.....OOOOOO.....',
+      '...OOOOOOOOOO...',
+      '..OOOEWWOOEWWOO..',
+      '.OOOOOKKOOKKOOOO.',
+      '.OOOOOOOOOOOOOOO.',
+      '..OOOOOOOOOOOO..',
+      '...OOOOOOOOOO...',
+      '....OO....OO....',
+      '....OO....OO....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const boss = [
+      '.....BBBBBB.....',
+      '...BBBBBBBBBB...',
+      '..BBBBEWBEWBBB..',
+      '.BBBBBKKBBKKBBBB.',
+      '.BBBBBBBBBBBBBBB.',
+      '..BBBBBBBBBBBB..',
+      '...BBBBBBBBBB...',
+      '....BB....BB....',
+      '....BB....BB....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const laser = [
+      '......CCCC......',
+      '......CCCC......',
+      '......WWWW......',
+      '......WWWW......',
+      '......CCCC......',
+      '......CCCC......',
+      '......WWWW......',
+      '......WWWW......',
+      '......CCCC......',
+      '......CCCC......',
+      '......WWWW......',
+      '......WWWW......',
+      '......CCCC......',
+      '......CCCC......',
+      '......WWWW......',
+      '......WWWW......'
+    ];
+    const pw_weapon = [
+      '.....EEEEEE.....',
+      '...EEEEEEEEEE...',
+      '..EEEEEREEEEE..',
+      '.EEEEERRREEEEEE.',
+      '.EEEEERRREEEEEE.',
+      '..EEEEEREEEEE..',
+      '...EEEEEEEEEE...',
+      '.....EEEEEE.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const pw_shield = [
+      '.....SSSSSS.....',
+      '...SSSSSSSSSS...',
+      '..SSSSSWWWSSSS..',
+      '.SSSSSWWWWWSSSS.',
+      '.SSSSSWWWWWSSSS.',
+      '..SSSSSWWWSSSS..',
+      '...SSSSSSSSSS...',
+      '.....SSSSSS.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const pw_nuke = [
+      '.....RRRRRR.....',
+      '...RRRRRRRRRR...',
+      '..RRRRYYEEYYRR..',
+      '.RRRRRYEEEYRRRR.',
+      '.RRRRRYEEEYRRRR.',
+      '..RRRRYYEEYYRR..',
+      '...RRRRRRRRRR...',
+      '.....RRRRRR.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+
+    this.createTexture(scene, 'arcade_player_ship', ship, P);
+    this.createTexture(scene, 'alien_scout', scout, P);
+    this.createTexture(scene, 'alien_shooter', shooter, P);
+    this.createTexture(scene, 'alien_elite', elite, P);
+    this.createTexture(scene, 'alien_boss', boss, P);
+    this.createTexture(scene, 'laser_player', laser, P);
+    this.createTexture(scene, 'powerup_weapon', pw_weapon, P);
+    this.createTexture(scene, 'powerup_shield', pw_shield, P);
+    this.createTexture(scene, 'powerup_nuke', pw_nuke, P);
+  }
+
+  // 6. Dungeon Scene Textures
+  static _genDungeonTextures(scene) {
+    const P = {
+      '.': null,
+      'G': 0x22C55E, 'g': 0x15803D, 'H': 0x86EFAC, 'K': 0x0F172A,
+      'W': 0xFFFFFF, 'E': 0x15803D, 'e': 0x166534, 'R': 0xB91C1C,
+      'M': 0x64748B, 'B': 0xE2E8F0, 'b': 0xCBD5E1, 'A': 0xDC2626,
+      'D': 0xBE123C, 'd': 0x881337, 'F': 0xFFD700, 'f': 0xB8860B,
+      'C': 0x06B6D4, 'c': 0xCFFAFE, 'P': 0xEF4444, 'p': 0x78350F,
+      'Y': 0xFEF08A, 'y': 0xCA8A04
+    };
+
+    const slime = [
+      '.....GGGGGG.....',
+      '...GGGGGGGGGG...',
+      '..GGGGGGGGGGGG..',
+      '.GGGGKWGGKWGGGG.',
+      '.GGGGKKGGKKGGGG.',
+      '.GGGGGGGGGGGGGG.',
+      '..GGGHHHHHHGGG..',
+      '...GGGGGGGGGG...',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const goblin = [
+      '.....EEEEEE.....',
+      '...EEEEEEEEEE...',
+      '..EEEKWEEKWEEE..',
+      '.EEEEKKEEKKEEEE.',
+      '.EEEEEEEEEEEEEE.',
+      '..EEEEERRREEEE..',
+      '...EEEMMMMEE...',
+      '....MMMMMMMM....',
+      '....MMMMMMMM....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const skeleton = [
+      '.....BBBBBB.....',
+      '...BBBBBBBBBB...',
+      '..BBBKKBBKKBBB..',
+      '.BBBBKKBBKKBBBB.',
+      '.BBBBBBBBBBBBBB.',
+      '..BBBBKKKKBBBB..',
+      '...BBBBBBBBBB...',
+      '....BBBBBBBB....',
+      '....BBBBBBBB....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const boss = [
+      '.....DDDDDD.....',
+      '...DDDDDDDDDD...',
+      '..DDDKWDDkWDDD..',
+      '.DDDDKKDDKKDDDD.',
+      '.DDDDDDDDDDDDDD.',
+      '..DDDDFFFFDDDD..',
+      '...DDDDDDDDDD...',
+      '....DDDDDDDD....',
+      '....DDDDDDDD....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+
+    const coin = [
+      '......FFFF......',
+      '....FFFFFFFF....',
+      '...FFFFFFFFFF...',
+      '..FFFFffffFFFF..',
+      '..FFFFffffFFFF..',
+      '...FFFFFFFFFF...',
+      '....FFFFFFFF....',
+      '......FFFF......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const gem = [
+      '......CCCC......',
+      '....CCCCCCCC....',
+      '...CCCCccccCC...',
+      '..CCCCCCCCCCCC..',
+      '..CCCCCCCCCCCC..',
+      '...CCCCCCCCCC...',
+      '....CCCCCCCC....',
+      '......CCCC......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const potion = [
+      '......pppp......',
+      '......pppp......',
+      '.....PPPPPP.....',
+      '....PPPPPPPP....',
+      '---PPPPWWPPPP...',
+      '...PPPPWWPPPP...',
+      '....PPPPPPPP....',
+      '.....PPPPPP.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const chest = [
+      '..pppppppppppp..',
+      '.pFFFFFFFFFFFFp.',
+      '.pFFFFFFFFFFFFp.',
+      '.pFFFFFFFFFFFFp.',
+      '.pFFFFFKKFFFFFp.',
+      '.pFFFFFKKFFFFFp.',
+      '.pFFFFFFFFFFFFp.',
+      '..pppppppppppp..',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+    const scroll = [
+      '......YYYY......',
+      '....YYYYYYYY....',
+      '...YYYYRRYYYY...',
+      '..YYYYYRRYYYYY..',
+      '..YYYYYRRYYYYY..',
+      '...YYYYRRYYYY...',
+      '....YYYYYYYY....',
+      '......YYYY......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
+
+    this.createTexture(scene, 'dungeon_green_slime', slime, P);
+    this.createTexture(scene, 'dungeon_goblin_warrior', goblin, P);
+    this.createTexture(scene, 'dungeon_skeleton_archer', skeleton, P);
+    this.createTexture(scene, 'dungeon_boss', boss, P);
+
+    this.createTexture(scene, 'loot_coin', coin, P);
+    this.createTexture(scene, 'loot_gem', gem, P);
+    this.createTexture(scene, 'loot_potion', potion, P);
+    this.createTexture(scene, 'loot_chest', chest, P);
+    this.createTexture(scene, 'loot_scroll', scroll, P);
+  }
+}
+
 const K = {
   '.':null,
   'G':0x5DA832,'g':0x4A9225,'H':0x77CC44,'d':0x3A7015,
@@ -250,9 +2290,13 @@ function migrateSaveData(d) {
 // Collect ALL game state into ONE object
 function collectSave(){
   const hcObj={}; harvestCounts.forEach((v,k)=>hcObj[k]=v);
-  const plots = sceneRef?.plots.filter(p=>p.ko)
-    .map(p=>({i:p.index, ko:p.ko, sState:p.sState, plantedAt:p.plantedAt||0})) || plotSave;
-  const apple = sceneRef ? { ripeAt: sceneRef.appleRipeAt, ripe: sceneRef.appleRipe } : appleTreeSave;
+  const isFarm = sceneRef && Array.isArray(sceneRef.plots);
+  const plots = isFarm
+    ? sceneRef.plots.filter(p => p && p.ko).map(p => ({ i: p.index, ko: p.ko, sState: p.sState, plantedAt: p.plantedAt || 0 }))
+    : plotSave;
+  const apple = (sceneRef && typeof sceneRef.appleRipeAt !== 'undefined')
+    ? { ripeAt: sceneRef.appleRipeAt, ripe: sceneRef.appleRipe }
+    : appleTreeSave;
   return {
     v: 4,
     currencies: playerCurrencies,
@@ -1113,16 +3157,70 @@ function buildLevelSelectScreen() {
     lsGrid.appendChild(c);
   });
 }
+// ═══════════════ CENTRALIZED UI GLASSMORPHISM MODAL MANAGER ═══════════════════
+let activeModalStack = [];
+
+function setModalState(overlayId, isOpen) {
+  const overlay = document.getElementById(overlayId);
+  if (!overlay) return;
+  if (isOpen) {
+    overlay.classList.add('visible');
+    overlay.classList.remove('hidden');
+    playerLocked = true;
+    if (!activeModalStack.includes(overlayId)) {
+      activeModalStack.push(overlayId);
+    }
+  } else {
+    overlay.classList.remove('visible');
+    if (overlayId === 'level-select-overlay') {
+      overlay.classList.add('hidden');
+    }
+    activeModalStack = activeModalStack.filter(id => id !== overlayId);
+    if (activeModalStack.length === 0) {
+      playerLocked = false;
+    }
+  }
+}
+
+function closeTopModal() {
+  if (activeModalStack.length === 0) return false;
+  const topId = activeModalStack[activeModalStack.length - 1];
+  closeModalById(topId);
+  return true;
+}
+
+function closeModalById(overlayId) {
+  if (overlayId === 'fish-album-overlay') window.closeFishAlbum();
+  else if (overlayId === 'recipe-overlay') window.closeRecipeBook();
+  else if (overlayId === 'pet-overlay') window.closePetOverlay();
+  else if (overlayId === 'seasonal-overlay') window.closeSeasonalOverlay();
+  else if (overlayId === 'leaderboard-overlay') window.closeLeaderboard();
+  else if (overlayId === 'shop-overlay') window.closeShop();
+  else if (overlayId === 'memory-overlay') window.closeMemoryGame();
+  else if (overlayId === 'duel-overlay') window.closeSpellDuel();
+  else if (overlayId === 'trophy-overlay') window.closeTrophies();
+  else if (overlayId === 'level-select-overlay') hideLevelSelect();
+  else setModalState(overlayId, false);
+}
+
+if (typeof window !== 'undefined' && window.addEventListener) {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && activeModalStack.length > 0) {
+      closeTopModal();
+    }
+  });
+}
+
 function showLevelSelect() {
-  lsOverlay.classList.remove('hidden');
+  setModalState('level-select-overlay', true);
   hud.style.display = pbWrap.style.display = tipEl.style.display = 'none';
-  playerLocked = true; buildLevelSelectScreen();
+  buildLevelSelectScreen();
 }
 function hideLevelSelect() {
-  lsOverlay.classList.add('hidden');
+  setModalState('level-select-overlay', false);
   hud.style.display = pbWrap.style.display = tipEl.style.display = '';
-  playerLocked = false;
 }
+
 function buyLevelFromSelect(idx) {
   playChiptuneSFX('click');
   const cost = LEVEL_COST(idx);
@@ -1299,16 +3397,17 @@ quizBackdrop.addEventListener('keyup',   e => e.stopPropagation());
 // ═══════════════ SHOP ════════════════════════════════════════════════════════
 function openShop() {
   playChiptuneSFX('click');
-  shopOpen = playerLocked = true;
+  shopOpen = true;
   updateGoldHUD();
   buildShopGrid();
-  $('shop-overlay').classList.add('visible');
+  setModalState('shop-overlay', true);
 }
 function closeShop() {
   playChiptuneSFX('click');
-  shopOpen = playerLocked = false;
-  $('shop-overlay').classList.remove('visible');
+  shopOpen = false;
+  setModalState('shop-overlay', false);
 }
+
 function _doLevelPurchase(idx) {
   const cost = LEVEL_COST(idx);
   if(unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return false; }
@@ -1554,10 +3653,251 @@ levelupMenuBtn && levelupMenuBtn.addEventListener('click', () => { levelupOverla
 replayBtn && replayBtn.addEventListener('click', () => { alldoneOverlay.classList.remove('visible'); startLevel(0); });
 menuBtn   && menuBtn.addEventListener('click', ()   => { alldoneOverlay.classList.remove('visible'); showLevelSelect(); });
 
+// ═══════════════ GRAPHICS & ATMOSPHERE SYSTEM CLASSES ═════════════════════════
+class DayNightSystem {
+  constructor(scene, cycleDurationSec = 240) {
+    this.scene = scene;
+    this.cycleDuration = cycleDurationSec * 1000;
+    this.timeMs = 6 * 3600 * 1000; // Start at 06:00 AM (Dawn)
+
+    this.ambientOverlay = scene.add.graphics()
+      .setDepth(9990)
+      .setScrollFactor(0);
+
+    this.keyframes = [
+      { hour: 0,  color: { r: 15, g: 23, b: 42 },   alpha: 0.65 }, // Night
+      { hour: 4,  color: { r: 30, g: 27, b: 75 },   alpha: 0.50 }, // Late Night
+      { hour: 6,  color: { r: 253, g: 186, b: 116 }, alpha: 0.20 }, // Dawn / Sunrise
+      { hour: 8,  color: { r: 255, g: 255, b: 255 }, alpha: 0.00 }, // Day
+      { hour: 17, color: { r: 249, g: 115, b: 22 },  alpha: 0.20 }, // Sunset
+      { hour: 19, color: { r: 124, g: 58, b: 237 },  alpha: 0.40 }, // Dusk
+      { hour: 21, color: { r: 15, g: 23, b: 42 },   alpha: 0.65 }, // Night
+      { hour: 24, color: { r: 15, g: 23, b: 42 },   alpha: 0.65 }  // Cycle end
+    ];
+
+    if (scene.scale && scene.scale.on) {
+      scene.scale.on('resize', (gameSize) => {
+        this.width = gameSize.width;
+        this.height = gameSize.height;
+      });
+    }
+    this.width = scene.scale ? scene.scale.width : 1024;
+    this.height = scene.scale ? scene.scale.height : 768;
+  }
+
+  update(dt = 16) {
+    this.timeMs = (this.timeMs + dt) % (24 * 3600 * 1000);
+    const hour = (this.timeMs / (3600 * 1000)) % 24;
+    const sunAngle = ((hour - 6) / 24) * Math.PI * 2;
+
+    const state = this._interpolateLighting(hour);
+
+    this.ambientOverlay.clear();
+    if (state.alpha > 0.005) {
+      const hexColor = (state.color.r << 16) | (state.color.g << 8) | state.color.b;
+      const w = this.width || (this.scene.scale ? this.scene.scale.width : 1024);
+      const h = this.height || (this.scene.scale ? this.scene.scale.height : 768);
+      this.ambientOverlay.fillStyle(hexColor, state.alpha);
+      this.ambientOverlay.fillRect(0, 0, w, h);
+    }
+
+    return { hour, sunAngle, state };
+  }
+
+  _interpolateLighting(hour) {
+    let k1 = this.keyframes[0], k2 = this.keyframes[1];
+    for (let i = 0; i < this.keyframes.length - 1; i++) {
+      if (hour >= this.keyframes[i].hour && hour <= this.keyframes[i+1].hour) {
+        k1 = this.keyframes[i];
+        k2 = this.keyframes[i+1];
+        break;
+      }
+    }
+    const span = k2.hour - k1.hour || 1;
+    const t = (hour - k1.hour) / span;
+
+    const r = Math.round(k1.color.r + (k2.color.r - k1.color.r) * t);
+    const g = Math.round(k1.color.g + (k2.color.g - k1.color.g) * t);
+    const b = Math.round(k1.color.b + (k2.color.b - k1.color.b) * t);
+    const alpha = k1.alpha + (k2.alpha - k1.alpha) * t;
+
+    return { color: { r, g, b }, alpha, hex: (r << 16) | (g << 8) | b };
+  }
+}
+
+class AmbientLightingSystem {
+  constructor(scene) {
+    this.scene = scene;
+    this.lights = [];
+  }
+
+  addLight(x, y, textureKey = 'light_glow_soft', scale = 1, alpha = 0.6) {
+    if (!this.scene.textures || !this.scene.textures.exists(textureKey)) return null;
+    const blendMode = (typeof Phaser !== 'undefined' && Phaser.BlendModes) ? Phaser.BlendModes.ADD : 'ADD';
+    const light = this.scene.add.image(x, y, textureKey)
+      .setScale(scale)
+      .setAlpha(alpha)
+      .setBlendMode(blendMode)
+      .setDepth(9985);
+    this.lights.push(light);
+    return light;
+  }
+
+  attachTo(target, textureKey = 'light_glow_lantern', scale = 0.8, alpha = 0.5) {
+    const light = this.addLight(target.x, target.y, textureKey, scale, alpha);
+    if (light) light._followTarget = target;
+    return light;
+  }
+
+  update() {
+    this.lights.forEach(l => {
+      if (l && l._followTarget && l._followTarget.active) {
+        l.setPosition(l._followTarget.x, l._followTarget.y);
+      }
+    });
+  }
+}
+
+class DynamicShadowSystem {
+  constructor(scene) {
+    this.scene = scene;
+    this.shadows = [];
+  }
+
+  createShadow(target, baseW = 30, baseH = 10, offsetY = 18) {
+    const s = this.scene.add.ellipse(target.x, target.y + offsetY, baseW, baseH, 0x000000, 0.3)
+      .setDepth(Math.max(0, target.y - 1));
+    s._target = target;
+    s._baseW = baseW;
+    s._baseH = baseH;
+    s._offsetY = offsetY;
+    this.shadows.push(s);
+    return s;
+  }
+
+  updateShadow(shadowSprite, sunAngle) {
+    if (!shadowSprite || !shadowSprite._target || !shadowSprite._target.active) return;
+    const target = shadowSprite._target;
+
+    const sunSin = Math.sin(sunAngle);
+    const sunCos = Math.cos(sunAngle);
+
+    const shadowLength = Math.max(0.3, Math.abs(sunCos)) * 26;
+    const dx = -sunCos * shadowLength;
+    const dy = shadowSprite._offsetY + sunSin * 4;
+
+    const alpha = Math.min(0.45, Math.max(0.12, sunSin * 0.5));
+    const scaleX = 1 + Math.abs(dx) / 18;
+
+    shadowSprite.setPosition(target.x + dx, target.y + dy);
+    shadowSprite.setScale(scaleX, 1);
+    shadowSprite.setAlpha(alpha);
+    shadowSprite.setDepth(target.y - 1);
+  }
+
+  updatePointShadow(shadowSprite, lightX, lightY) {
+    if (!shadowSprite || !shadowSprite._target || !shadowSprite._target.active) return;
+    const target = shadowSprite._target;
+    const dx = target.x - lightX;
+    const dy = target.y - lightY;
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+    const shadowLength = Math.min(28, dist * 0.15);
+    const offX = (dx / dist) * shadowLength;
+    const offY = (dy / dist) * shadowLength + shadowSprite._offsetY;
+
+    shadowSprite.setPosition(target.x + offX, target.y + offY);
+    shadowSprite.setDepth(target.y - 1);
+  }
+}
+
+class WeatherEngine {
+  constructor(scene) {
+    this.scene = scene;
+    this.currentWeather = 'clear';
+    this.emitters = {};
+
+    this.initEmitters();
+  }
+
+  initEmitters() {
+    if (!this.scene.add || typeof this.scene.add.particles !== 'function') return;
+
+    const W = (this.scene.scale ? this.scene.scale.width : 1024);
+    const H = (this.scene.scale ? this.scene.scale.height : 768);
+
+    if (this.scene.textures && this.scene.textures.exists('p_drop')) {
+      try {
+        this.emitters.rain = this.scene.add.particles(W / 2, -20, 'p_drop', {
+          x: { min: -W / 2, max: W / 2 },
+          speedY: { min: 450, max: 650 },
+          speedX: { min: -60, max: -20 },
+          lifespan: 1800,
+          quantity: 4,
+          scale: { start: 1, end: 1 },
+          alpha: { start: 0.8, end: 0.2 },
+          emitting: false
+        }).setScrollFactor(0).setDepth(9950);
+      } catch (e) {}
+    }
+
+    if (this.scene.textures && this.scene.textures.exists('p_snowflake')) {
+      try {
+        this.emitters.snow = this.scene.add.particles(W / 2, -20, 'p_snowflake', {
+          x: { min: -W / 2, max: W / 2 },
+          speedY: { min: 40, max: 90 },
+          speedX: { min: -30, max: 30 },
+          rotate: { min: 0, max: 360 },
+          lifespan: 6000,
+          quantity: 2,
+          scale: { start: 0.8, end: 1.2 },
+          alpha: { start: 0.9, end: 0.3 },
+          emitting: false
+        }).setScrollFactor(0).setDepth(9950);
+      } catch (e) {}
+    }
+
+    if (this.scene.textures && this.scene.textures.exists('p_fog')) {
+      try {
+        this.emitters.fog = this.scene.add.particles(0, H / 2, 'p_fog', {
+          y: { min: -H / 2, max: H / 2 },
+          speedX: { min: 15, max: 40 },
+          speedY: { min: -5, max: 5 },
+          lifespan: 8000,
+          quantity: 1,
+          frequency: 600,
+          scale: { start: 2, end: 3.5 },
+          alpha: { start: 0, ease: 'Sine.easeInOut', to: 0.22, yoyo: true },
+          emitting: false
+        }).setScrollFactor(0).setDepth(9940);
+      } catch (e) {}
+    }
+  }
+
+  setWeather(type) {
+    this.currentWeather = type;
+    Object.keys(this.emitters).forEach(key => {
+      if (this.emitters[key]) {
+        try {
+          if (key === type) {
+            this.emitters[key].start();
+          } else {
+            this.emitters[key].stop();
+          }
+        } catch (e) {}
+      }
+    });
+  }
+}
+
 // ═══════════════ PHASER SCENE ════════════════════════════════════════════════
 class FarmScene extends Phaser.Scene {
   constructor(){ super({key:'FarmScene'}); }
-  preload(){ this.load.json('levels','levels.json'); }
+  preload(){
+    PixelArtRenderer.generateAllTextures(this);
+    PixelArtRenderer.generateTilemapTextures(this);
+    this.load.json('levels','levels.json');
+  }
 
   // ── APPLE TREE constants ──────────────────────────────────────────────────
   // Time for apple tree to ripen after last harvest (or game start)
@@ -1566,23 +3906,37 @@ class FarmScene extends Phaser.Scene {
   create(){
     sceneRef = this;
     this.cameras.main.fadeIn(300, 0, 0, 0);
+    this.cameras.main.setRoundPixels(true);
+    this.events.off('resume');
+    this.events.on('resume', () => {
+      this.cameras.main.fadeIn(300, 0, 0, 0);
+    });
     levelsData = this.cache.json.get('levels') || [];
     if(!levelsData.length){ console.error('levels.json missing'); return; }
 
     this._bakeTextures();
     const W = this.scale.width, H = this.scale.height;
+    this.cameras.main.setBounds(0, 0, W, H);
+
     this._drawWorld(W, H);
 
-    // Ambient Day/Night Lighting Overlay (60s cycle between golden warm and dark blue)
-    const dayNightOverlay = this.add.rectangle(W/2, H/2, W*2, H*2, 0x0B132B, 0.04).setDepth(999).setScrollFactor(0);
-    this.tweens.add({
-      targets: dayNightOverlay,
-      fillAlpha: 0.30,
-      duration: 30000,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.easeInOut'
-    });
+    // Atmosphere & World Systems (Day/Night, Ambient Lighting, Dynamic Shadows, Weather)
+    this.dayNight = new DayNightSystem(this);
+    this.lighting = new AmbientLightingSystem(this);
+    this.shadows = new DynamicShadowSystem(this);
+    this.weather = new WeatherEngine(this);
+
+    if (this.textures && this.textures.exists('p_sparkle') && typeof this.add.particles === 'function') {
+      try {
+        this.cropSparkleEmitter = this.add.particles(0, 0, 'p_sparkle', {
+          speed: { min: 20, max: 60 },
+          scale: { start: 1, end: 0 },
+          alpha: { start: 1, end: 0 },
+          lifespan: 600,
+          emitting: false
+        }).setDepth(500);
+      } catch (e) {}
+    }
 
     this.plots = []; this._createPlots(W, H);
     this._createPlayer(W, H); this._addPlotLabels();
@@ -1645,17 +3999,14 @@ class FarmScene extends Phaser.Scene {
 
     // Cobblestone Path texture (16x16)
     const gcs = mk();
-    pR(gcs, 0, 0, 16, 16, 0x4A6B2A);
-    pR(gcs, 2, 2, 5, 4, 0x78716C); pR(gcs, 3, 2, 3, 1, 0xA8A29E);
-    pR(gcs, 9, 3, 5, 5, 0x57534E); pR(gcs, 10, 3, 3, 1, 0x78716C);
-    pR(gcs, 3, 9, 6, 5, 0x78716C); pR(gcs, 4, 9, 4, 1, 0xA8A29E);
     pR(gcs, 10, 10, 4, 4, 0x57534E);
     gcs.generateTexture('path_stone', 16*PS, 16*PS); gcs.destroy();
 
     // Wildflowers (8x8)
-    const gflr = mk(); pR(gflr, 2, 2, 4, 4, 0xEF4444); pR(gflr, 3, 3, 2, 2, 0xFDE047); pR(gflr, 3, 6, 2, 2, 0x15803D); gflr.generateTexture('flw_red', 8*PS, 8*PS); gflr.destroy();
-    const gfly = mk(); pR(gfly, 2, 2, 4, 4, 0xEAB308); pR(gfly, 3, 3, 2, 2, 0xFFFFFF); pR(gfly, 3, 6, 2, 2, 0x15803D); gfly.generateTexture('flw_yellow', 8*PS, 8*PS); gfly.destroy();
-    const gflp = mk(); pR(gflp, 2, 2, 4, 4, 0xA855F7); pR(gflp, 3, 3, 2, 2, 0xFDE047); pR(gflp, 3, 6, 2, 2, 0x15803D); gflp.generateTexture('flw_purple', 8*PS, 8*PS); gflp.destroy();
+    const gflr = mk(); pR(gflr, 2, 2, 4, 4, STARDEW_PALETTE.flowerRed); pR(gflr, 3, 3, 2, 2, STARDEW_PALETTE.flowerYellow); pR(gflr, 3, 6, 2, 2, STARDEW_PALETTE.grassShadow); gflr.generateTexture('flw_red', 8*PS, 8*PS); gflr.destroy();
+    const gfly = mk(); pR(gfly, 2, 2, 4, 4, STARDEW_PALETTE.flowerYellow); pR(gfly, 3, 3, 2, 2, 0xFFFFFF); pR(gfly, 3, 6, 2, 2, STARDEW_PALETTE.grassShadow); gfly.generateTexture('flw_yellow', 8*PS, 8*PS); gfly.destroy();
+    const gflp = mk(); pR(gflp, 2, 2, 4, 4, STARDEW_PALETTE.flowerPurple); pR(gflp, 3, 3, 2, 2, STARDEW_PALETTE.flowerYellow); pR(gflp, 3, 6, 2, 2, STARDEW_PALETTE.grassShadow); gflp.generateTexture('flw_purple', 8*PS, 8*PS); gflp.destroy();
+
 
     // Micro Butterfly Wing 0 (Open)
     const gbf0 = mk();
@@ -1843,10 +4194,13 @@ class FarmScene extends Phaser.Scene {
       gp.generateTexture('farmer'+fr,14*PS,25*PS); gp.destroy();
     }
 
-    // Crops (5 types × 3 stages)
+    // Crops (5 types × 3 stages) - Stardew Valley warm earthy tones
     const CC=[
-      [0xFF88B4,0xAA1844,0xFFCCE4],[0x88EE44,0x448A22,0xCCFF99],
-      [0xFF4444,0xAA1111,0xFF9999],[0xFFCC00,0xCC8800,0xFFEE99],[0xFFEE44,0xCCAA00,0xFFFF99],
+      [0xD8587E, 0x8A1836, 0xE8A0B8], // Strawberry
+      [0x6BB832, 0x3B6818, 0x98E060], // Cabbage
+      [0xD83838, 0x8A1010, 0xE87070], // Tomato
+      [0xE8A820, 0x9A6800, 0xF4CF60], // Corn
+      [0xE0B830, 0x9A7800, 0xF0D470], // Wheat
     ];
     CC.forEach(([M,D,Li],t)=>{
       const g1=mk();
@@ -1909,10 +4263,51 @@ class FarmScene extends Phaser.Scene {
     // Tail (curling to right)
     pr2(11,10,2,1,GO); pr2(12,9,1,2,GO); pr2(12,8,1,1,GL); pr2(11,8,1,1,GD);
     gc2.generateTexture('cat_npc',13*PS,16*PS); gc2.destroy();
+
+    // Force nearest-neighbor filtering on all procedural textures
+    ['apple_tree', 'apple_tree_ripe', 'drt_dry', 'drt_wet', 'path_stone', 'flw_red', 'flw_yellow', 'flw_purple',
+     'bf_open', 'bf_flap', 'stone_well', 'pixel_barrel', 'pixel_crate', 'signpost', 'tree', 'fnc_post', 'fnc_rail',
+     'sparkle', 'coin', 'shop_sign', 'notice_board', 'dungeon_portal', 'fishing_dock', 'arcade_machine', 'wizard_npc',
+     'cat_npc'].forEach(k => {
+       const t = this.textures.get(k);
+       if (t && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
+         t.setFilter(Phaser.Textures.FilterMode.NEAREST);
+       }
+    });
+    GRASS.forEach((_, i) => {
+      const t = this.textures.get('grs' + i);
+      if (t && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
+        t.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    });
+    for (let fr = 0; fr < 4; fr++) {
+      const t = this.textures.get('farmer' + fr);
+      if (t && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
+        t.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    }
+    CC.forEach((_, tIdx) => {
+      for (let s = 1; s <= 3; s++) {
+        const t = this.textures.get(`cr_${tIdx}_${s}`);
+        if (t && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
+          t.setFilter(Phaser.Textures.FilterMode.NEAREST);
+        }
+      }
+    });
   }
+
 
   // ── WORLD ──────────────────────────────────────────────────────────────────
   _drawWorld(W, H){
+    if (this.textures && this.textures.exists('bg_distant_mountains')) {
+      this.bgMountains = this.add.tileSprite(W/2, 80, W * 2, 128, 'bg_distant_mountains')
+        .setDepth(-10).setScrollFactor(0.1, 0.05);
+    }
+    if (this.textures && this.textures.exists('bg_rolling_hills')) {
+      this.bgHills = this.add.tileSprite(W/2, 140, W * 2, 128, 'bg_rolling_hills')
+        .setDepth(-9).setScrollFactor(0.3, 0.15);
+    }
+
     const rng = new Phaser.Math.RandomDataGenerator(['sv16']);
     for(let r=0; r*TILE<=H+TILE; r++) for(let cc=0; cc*TILE<=W+TILE; cc++){
       this.add.image(cc*TILE+TILE/2, r*TILE+TILE/2, 'grs'+rng.between(0,3))
@@ -2113,7 +4508,8 @@ class FarmScene extends Phaser.Scene {
     const wx = this.farm.x + this.farm.w + 160;
     const wy = this.farm.y - 85;
     this.add.ellipse(wx, wy+6, 40, 10, 0, 0.35).setDepth(wy-1);
-    this.wizardSprite = this.add.image(wx, wy, 'wizard_npc').setOrigin(0.5,1).setScale(1.6).setDepth(wy);
+    this.wizardSprite = this.add.sprite(wx, wy, 'wizard_idle_0');
+    if (this.wizardSprite.play) this.wizardSprite.play('wizard-idle').setOrigin(0.5,1).setScale(1.6).setDepth(wy);
     this.tweens.add({ targets: this.wizardSprite, y: wy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
     this.wizardHint = this.add.text(wx, wy-62, '⚡ SPELL DUEL\n[SPACE]', {
@@ -2135,7 +4531,8 @@ class FarmScene extends Phaser.Scene {
     const cx = this.farm.x - 120;
     const cy = this.farm.y + this.farm.h + 75;
     this.add.ellipse(cx,cy+2,36,10,0,0.35).setDepth(cy-1);
-    this.catSprite = this.add.image(cx, cy, 'cat_npc')
+    this.catSprite = this.add.sprite(cx, cy, 'cat_idle_0');
+    if (this.catSprite.play) this.catSprite.play('cat-idle')
       .setOrigin(0.5,1).setScale(1.8).setDepth(cy);
     this.tweens.add({ targets:this.catSprite, y:cy-3, duration:1200, yoyo:true, repeat:-1, ease:'Sine.InOut' });
     this.catHint = this.add.text(cx, cy-52, '🐱 야옹\n[SPACE]', {
@@ -2182,8 +4579,8 @@ class FarmScene extends Phaser.Scene {
     this.tweens.add({ targets: pond, scaleX: 1.05, scaleY: 0.95, duration: 1800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
 
     // Floating Lily Pads
-    this.add.text(fx - 60, fy + 15, '🪷', {fontSize:'18px'}).setDepth(fy-4);
-    this.add.text(fx + 70, fy + 25, '🪷', {fontSize:'16px'}).setDepth(fy-4);
+    this.add.image(fx - 60, fy + 15, 'tile_grass').setDisplaySize(20,20).setDepth(fy-4);
+    this.add.image(fx + 70, fy + 25, 'tile_grass').setDisplaySize(18,18).setDepth(fy-4);
 
     // Fishing Dock Pier
     this.add.ellipse(fx, fy+8, 60, 14, 0, 0.4).setDepth(fy-1);
@@ -2213,6 +4610,8 @@ class FarmScene extends Phaser.Scene {
     // Tree sprite (starts with unripe texture)
     this.appleTreeSprite = this.add.image(ax, ay, 'apple_tree')
       .setOrigin(0.5, 1).setScale(2.5).setDepth(ay+1);
+    
+    this._createFallingLeaves(ax, ay);
       
     // Trunk collision zone
     const trunkZone = this.add.zone(ax, ay - 10, 80, 40);
@@ -2249,6 +4648,34 @@ class FarmScene extends Phaser.Scene {
     this.appleRipeAt  = appleTreeSave.ripeAt  || (Date.now() + FarmScene.APPLE_RIPEN_MS);
     this.appleRipe    = appleTreeSave.ripe     || false;
     this._updateAppleTree();
+  }
+
+  _createFallingLeaves(ax, ay){
+    this.time.addEvent({
+      delay: 2200,
+      loop: true,
+      callback: () => {
+        const leafKey = (this.textures && this.textures.exists('p_leaf_green'))
+          ? (Math.random() < 0.5 ? 'p_leaf_green' : 'p_leaf_orange')
+          : null;
+        let lf;
+        if (leafKey) {
+          lf = this.add.image(ax + Phaser.Math.Between(-20, 20), ay - 35, leafKey).setDepth(ay + 10);
+        } else {
+          lf = this.add.rectangle(ax + Phaser.Math.Between(-20, 20), ay - 35, 4, 3, 0x86EFAC).setDepth(ay + 10);
+        }
+        this.tweens.add({
+          targets: lf,
+          x: { value: `+=${Phaser.Math.Between(-30, 30)}`, ease: 'Sine.InOut' },
+          y: ay + Phaser.Math.Between(10, 30),
+          angle: 360,
+          alpha: 0,
+          duration: 3500,
+          ease: 'Power1',
+          onComplete: () => lf.destroy()
+        });
+      }
+    });
   }
 
   _updateAppleTree(){
@@ -2328,7 +4755,7 @@ class FarmScene extends Phaser.Scene {
       const shad=this.add.ellipse(px,py+PLOT_SIZE/2-2,PLOT_SIZE*0.85,10,0,active?0.3:0.1).setDepth(1);
       const tile=this.add.image(px,py,'drt_dry').setDisplaySize(PLOT_SIZE,PLOT_SIZE)
         .setAlpha(active?1:0.25).setDepth(2);
-      if(!active) this.add.text(px,py,'🔒',{fontSize:'20px'}).setOrigin(0.5).setDepth(3);
+      if(!active) this.add.image(px,py,'pixel_crate').setDisplaySize(24,24).setAlpha(0.6).setDepth(3);
       const body=this.physics.add.staticImage(px,py).setVisible(false);
       body.setCircle(PLOT_SIZE*0.4).refreshBody();
       // sState: ''=empty '1'=seedling '2'=wilting(P2 ready) '3'=sprout '4'=ripe
@@ -2357,9 +4784,16 @@ class FarmScene extends Phaser.Scene {
   }
 
   _createPlayer(W, H){
-    this.player=this.physics.add.sprite(W/2, H-80,'farmer0')
+    this.player=this.physics.add.sprite(W/2, H-80,'player_walk_down_0')
       .setCollideWorldBounds(true).setDrag(900,900).setDepth(500);
-    this.pShadow=this.add.ellipse(0,0,30,10,0,0.3).setDepth(499);
+    if (this.shadows) {
+      this.pShadow = this.shadows.createShadow(this.player, 30, 10, 18);
+    } else {
+      this.pShadow = this.add.ellipse(0,0,30,10,0,0.3).setDepth(499);
+    }
+    if (this.lighting) {
+      this.playerLantern = this.lighting.attachTo(this.player, 'light_glow_lantern', 0.8, 0.4);
+    }
   }
 
   _addPlotLabels(){
@@ -2372,8 +4806,41 @@ class FarmScene extends Phaser.Scene {
   // ── UPDATE ─────────────────────────────────────────────────────────────────
   update(_t, dt){
     if(!this.player||!this.keys) return;
-    this.player.setDepth(this.player.y);
-    this.pShadow.setPosition(this.player.x,this.player.y+18).setDepth(this.player.y-1);
+    const playerBaseY = this.player.y + (this.player.displayHeight * (1 - this.player.originY));
+    this.player.setDepth(playerBaseY);
+
+    if (this.dayNight) {
+      const env = this.dayNight.update(dt || 16);
+      if (this.shadows) {
+        this.shadows.updateShadow(this.pShadow, env.sunAngle);
+        if (this.pShadow) this.pShadow.setDepth(playerBaseY - 1);
+      } else if (this.pShadow) {
+        this.pShadow.setPosition(this.player.x, this.player.y + 18).setDepth(playerBaseY - 1);
+      }
+    } else if (this.pShadow) {
+      this.pShadow.setPosition(this.player.x, this.player.y + 18).setDepth(playerBaseY - 1);
+    }
+    if (this.lighting) this.lighting.update();
+
+    // Dynamic Y-sort depth sorting for NPCs (using static base Y anchors)
+    if (this.shopNPC) this.shopNPC.setDepth(this.shopY || this.shopNPC.y);
+    if (this.boardSprite) this.boardSprite.setDepth(this.boardY || this.boardSprite.y);
+    if (this.arcadeSprite) this.arcadeSprite.setDepth(this.arcadeY || this.arcadeSprite.y);
+    if (this.wizardSprite) this.wizardSprite.setDepth(this.wizardY || this.wizardSprite.y);
+    if (this.catSprite) this.catSprite.setDepth(this.catY || this.catSprite.y);
+    if (this.portalSprite) this.portalSprite.setDepth(this.portalY || this.portalSprite.y);
+    if (this.dockSprite) this.dockSprite.setDepth(this.fishY || this.dockSprite.y);
+    if (this.appleTreeSprite) this.appleTreeSprite.setDepth(this.appleY || this.appleTreeSprite.y);
+
+    // Plot crops Y-sort
+    if (this.plots) {
+      this.plots.forEach(p => {
+        if (p.plant && p.plant.active) {
+          p.plant.setDepth(p.y + 10);
+        }
+      });
+    }
+
 
     if(!playerLocked){
       const vx=(this.keys.A.isDown || this.keys.LEFT.isDown?-1:0)+(this.keys.D.isDown || this.keys.RIGHT.isDown?1:0);
@@ -2381,25 +4848,41 @@ class FarmScene extends Phaser.Scene {
       const len=Math.sqrt(vx*vx+vy*vy)||1;
       this.player.setVelocity((vx/len)*PLAYER_SPD,(vy/len)*PLAYER_SPD);
       if(vx!==0||vy!==0){
-        if(vx<0) this.player.setFlipX(true);
-        if(vx>0) this.player.setFlipX(false);
+        let animKey = 'player-walk-down';
+        if (Math.abs(vx) >= Math.abs(vy)) {
+          animKey = vx < 0 ? 'player-walk-left' : 'player-walk-right';
+        } else {
+          animKey = vy < 0 ? 'player-walk-up' : 'player-walk-down';
+        }
+        this.player.setFlipX(false);
+        this.player.anims.play(animKey, true);
+
         this.walkTimer+=(dt||16);
         if(this.walkTimer>160){
           this.walkFrame=(this.walkFrame+1)%4;
-          this.player.setTexture('farmer'+this.walkFrame);
           this.walkTimer=0;
           
           // Walking puff effect on stepping frames (1 and 3)
           if(this.walkFrame===1 || this.walkFrame===3){
-            const dx = this.player.flipX ? 7 : -7;
-            const puff = this.add.ellipse(this.player.x + dx, this.player.y + 14, 6, 4, 0xDDCCAA, 0.6).setDepth(this.player.y - 2);
-            this.tweens.add({targets:puff, scale:2, y:puff.y-8, alpha:0, duration:400, ease:'Power1', onComplete:()=>puff.destroy()});
+            const dx = animKey === 'player-walk-left' ? 7 : (animKey === 'player-walk-right' ? -7 : 0);
+            if (this.textures && this.textures.exists('p_dust')) {
+              const dust = this.add.image(this.player.x + dx, this.player.y + 14, 'p_dust')
+                .setScale(1).setAlpha(0.7).setDepth(this.player.y - 2);
+              this.tweens.add({targets:dust, scale:2, y:dust.y-8, alpha:0, duration:400, ease:'Power1', onComplete:()=>dust.destroy()});
+            } else {
+              const puff = this.add.ellipse(this.player.x + dx, this.player.y + 14, 6, 4, 0xDDCCAA, 0.6).setDepth(this.player.y - 2);
+              this.tweens.add({targets:puff, scale:2, y:puff.y-8, alpha:0, duration:400, ease:'Power1', onComplete:()=>puff.destroy()});
+            }
           }
         }
       } else {
-        this.player.setTexture('farmer0'); this.walkTimer=0;
+        this.player.anims.stop(); this.player.setTexture('player_walk_down_0'); this.walkTimer=0;
       }
-    } else this.player.setVelocity(0,0);
+    } else {
+      this.player.setVelocity(0,0);
+      this.player.anims.stop();
+      this.player.setTexture('player_walk_down_0');
+    }
 
     // Show shop hint label when nearby
     if(this.shopNPC && this.shopHint){
@@ -2562,8 +5045,10 @@ class FarmScene extends Phaser.Scene {
       const chk = isZoneUnlocked('dungeon');
       if(!chk.unlocked){ showHardLockToast('dungeon'); return; }
       this.cameras.main.fadeOut(300, 0, 0, 0);
-      this.scene.pause();
-      this.scene.launch('DungeonScene');
+      this.cameras.main.once('camerafadeoutcomplete', () => {
+        this.scene.pause();
+        this.scene.launch('DungeonScene');
+      });
       return;
     }
     // Fishing Dock
@@ -2572,8 +5057,10 @@ class FarmScene extends Phaser.Scene {
       const chk = isZoneUnlocked('fishing');
       if(!chk.unlocked){ showHardLockToast('fishing'); return; }
       this.cameras.main.fadeOut(300, 0, 0, 0);
-      this.scene.pause();
-      this.scene.launch('FishingScene');
+      this.cameras.main.once('camerafadeoutcomplete', () => {
+        this.scene.pause();
+        this.scene.launch('FishingScene');
+      });
       return;
     }
     // Arcade
@@ -2582,10 +5069,13 @@ class FarmScene extends Phaser.Scene {
       const chk = isZoneUnlocked('arcade');
       if(!chk.unlocked){ showHardLockToast('arcade'); return; }
       this.cameras.main.fadeOut(300, 0, 0, 0);
-      this.scene.pause();
-      this.scene.launch('ArcadeScene');
+      this.cameras.main.once('camerafadeoutcomplete', () => {
+        this.scene.pause();
+        this.scene.launch('ArcadeScene');
+      });
       return;
     }
+
     // Board
     if(this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<80){
       this.tweens.add({targets:this.boardSprite,angle:5,duration:100,yoyo:true,repeat:1});
@@ -2766,9 +5256,13 @@ class FarmScene extends Phaser.Scene {
   }
 
   _sparkle(x,y){
+    if (this.cropSparkleEmitter) {
+      try { this.cropSparkleEmitter.explode(10, x, y); } catch(e) {}
+    }
     const c=[0xFFDD44,0xFFFFFF,0x88FF88,0xFF88CC];
+    const spKey = (this.textures && this.textures.exists('p_sparkle')) ? 'p_sparkle' : 'sparkle';
     for(let i=0;i<8;i++){
-      const sp=this.add.image(x,y,'sparkle').setScale(0.4+Math.random()*0.5).setTint(c[i%4]).setDepth(y+30);
+      const sp=this.add.image(x,y,spKey).setScale(0.4+Math.random()*0.5).setTint(c[i%4]).setDepth(y+30);
       const ang=(i/8)*Math.PI*2,dist=28+Math.random()*16;
       this.tweens.add({targets:sp,x:x+Math.cos(ang)*dist,y:y+Math.sin(ang)*dist-8,
         scale:0,alpha:0,duration:450+Math.random()*200,ease:'Power2.Out',onComplete:()=>sp.destroy()});
@@ -2825,28 +5319,63 @@ class FarmScene extends Phaser.Scene {
     });
     localStorage.removeItem('hv_plots');
   }
+
+  shutdown() {
+    this.events.off('resume');
+    if (this.cropSparkleEmitter) {
+      try { this.cropSparkleEmitter.destroy(); } catch(e){}
+    }
+    if (sceneRef === this) sceneRef = null;
+  }
 }
 
 class ArcadeScene extends Phaser.Scene {
   constructor(){ super({key:'ArcadeScene'}); }
 
+  preload(){
+    PixelArtRenderer.generateAllTextures(this);
+    PixelArtRenderer.generateTilemapTextures(this);
+  }
+
   create(){
     this.cameras.main.fadeIn(300, 0, 0, 0);
+    this.cameras.main.setRoundPixels(true);
     this.W = this.scale.width;
+
     this.H = this.scale.height;
+    this.cameras.main.setBounds(0, 0, this.W, this.H);
 
-    // Dark Cyberpunk Space background
-    this.add.rectangle(0, 0, this.W, this.H, 0x030712).setOrigin(0);
+    // Multi-layer Parallax Space Background
+    // Layer 1: Dark Space Base Tile Grid
+    for(let x = 0; x < this.W + TILE; x += TILE){
+      for(let y = 0; y < this.H + TILE; y += TILE){
+        this.add.image(x + TILE/2, y + TILE/2, 'tile_space_dark').setDisplaySize(TILE, TILE).setDepth(0);
+      }
+    }
+    // Layer 2: Floating Nebulae
+    const n1 = this.add.image(this.W * 0.25, this.H * 0.3, 'nebula_purple').setScale(3.5).setAlpha(0.35).setDepth(1);
+    const n2 = this.add.image(this.W * 0.75, this.H * 0.6, 'nebula_cyan').setScale(4.0).setAlpha(0.35).setDepth(1);
+    this.tweens.add({ targets: [n1, n2], alpha: { from: 0.25, to: 0.5 }, scale: { from: 3, to: 4.2 }, duration: 4000, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
 
-    // Parallax Starfield & Neon Grid
-    const g = this.add.graphics();
-    g.lineStyle(1, 0x1E1B4B, 0.4);
-    for(let x=0; x<this.W; x+=50) g.lineBetween(x, 0, x, this.H);
-    for(let y=0; y<this.H; y+=50) g.lineBetween(0, y, this.W, y);
+    // Layer 3: Planet Silhouettes
+    this.add.image(90, 90, 'planet_ringed').setDisplaySize(64, 64).setDepth(2).setAlpha(0.8);
+    this.add.image(this.W - 100, 110, 'planet_gas_giant').setDisplaySize(72, 72).setDepth(2).setAlpha(0.8);
 
-    for(let i=0; i<80; i++){
-      const s = this.add.rectangle(Math.random()*this.W, Math.random()*this.H, Phaser.Math.Between(1,3), Phaser.Math.Between(1,3), 0x38BDF8, Math.random());
-      this.tweens.add({ targets: s, alpha: 0.1, duration: 1000 + Math.random()*1500, yoyo: true, repeat: -1 });
+    // Layer 4: Distant Stars & Parallax Near Stars Layer using TileSprites
+    if (this.textures && this.textures.exists('tile_stars_far')) {
+      this.bgFarStars = this.add.tileSprite(this.W/2, this.H/2, this.W, this.H, 'tile_stars_far').setDepth(3).setScrollFactor(0);
+    }
+    if (this.textures && this.textures.exists('tile_stars_near')) {
+      this.bgNearStars = this.add.tileSprite(this.W/2, this.H/2, this.W, this.H, 'tile_stars_near').setDepth(4).setScrollFactor(0);
+    }
+
+    this.nearStarsGroup = this.add.group();
+    for(let i = 0; i < 8; i++){
+      const sx = Phaser.Math.Between(40, this.W - 40);
+      const sy = Phaser.Math.Between(40, this.H - 40);
+      const st = this.add.image(sx, sy, 'tile_stars_near').setDisplaySize(36, 36).setDepth(4);
+      this.nearStarsGroup.add(st);
+      this.tweens.add({ targets: st, alpha: { from: 0.4, to: 1.0 }, duration: 1200 + Math.random()*800, yoyo: true, repeat: -1 });
     }
 
     this.score = 0;
@@ -2869,7 +5398,7 @@ class ArcadeScene extends Phaser.Scene {
     this.nukeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
 
     // Player Hero Ship
-    this.ship = this.add.text(this.W/2, this.H - 80, '🛸', {fontSize:'42px'}).setOrigin(0.5).setDepth(20);
+    this.ship = this.add.sprite(this.W/2, this.H - 80, 'arcade_player_ship').setOrigin(0.5).setDepth(20);
     this.physics.add.existing(this.ship);
     this.ship.body.setCollideWorldBounds(true);
     this.ship.body.setSize(40, 40);
@@ -2910,7 +5439,7 @@ class ArcadeScene extends Phaser.Scene {
     this.bossShielded = false;
 
     this.bossContainer = this.add.container(this.W/2, 120).setDepth(15);
-    this.bossSprite = this.add.text(0, 0, '👾', {fontSize:'80px'}).setOrigin(0.5);
+    this.bossSprite = this.add.sprite(0, 0, 'alien_boss').setOrigin(0.5);
     this.bossName = this.add.text(0, -55, '🌌 KING HANGEUL ALIEN', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#EC4899', stroke:'#000', strokeThickness:4}).setOrigin(0.5);
 
     // Boss Shield Visual Barrier
@@ -2943,6 +5472,16 @@ class ArcadeScene extends Phaser.Scene {
     this.ship.body.setVelocity(vx, vy);
     if(this.shieldAura.visible){
       this.shieldAura.setPosition(this.ship.x, this.ship.y);
+    }
+
+    // Parallax Starfield scrolling
+    if (this.bgFarStars) this.bgFarStars.tilePositionY -= 0.3 * ((dt || 16) / 16.6);
+    if (this.bgNearStars) this.bgNearStars.tilePositionY -= 1.0 * ((dt || 16) / 16.6);
+    if (this.nearStarsGroup) {
+      this.nearStarsGroup.getChildren().forEach(st => {
+        st.y += 0.5;
+        if (st.y > this.H + 20) st.y = -20;
+      });
     }
 
     // Nuke detonation [B]
@@ -2980,7 +5519,7 @@ class ArcadeScene extends Phaser.Scene {
 
   fireLaser(){
     const createL = (x, vy, vx = 0) => {
-      const laser = this.add.rectangle(x, this.ship.y - 25, 6, 22, 0x00FFFF);
+      const laser = this.add.sprite(x, this.ship.y - 25, 'laser_player').setOrigin(0.5);
       this.physics.add.existing(laser);
       this.lasers.add(laser);
       laser.body.setVelocity(vx, vy);
@@ -3010,7 +5549,8 @@ class ArcadeScene extends Phaser.Scene {
 
   spawnMinion(){
     const x = Phaser.Math.Between(60, this.W - 60);
-    const minion = this.add.text(x, -40, '👾', {fontSize:'34px'}).setOrigin(0.5);
+    const alienKeys = ['alien_scout', 'alien_shooter', 'alien_elite'];
+    const minion = this.add.sprite(x, -40, Phaser.Utils.Array.GetRandom(alienKeys)).setOrigin(0.5);
     this.physics.add.existing(minion);
     this.minions.add(minion);
     minion.body.setVelocityY(Phaser.Math.Between(120, 200));
@@ -3027,7 +5567,8 @@ class ArcadeScene extends Phaser.Scene {
     if(Math.random() < 0.4){
       const pTypes = ['🔫', '🛡️', '💣'];
       const pType = Phaser.Utils.Array.GetRandom(pTypes);
-      const pItem = this.add.text(mx, my, pType, {fontSize:'28px'}).setOrigin(0.5);
+      const pMap = { '🔫': 'powerup_weapon', '🛡️': 'powerup_shield', '💣': 'powerup_nuke' };
+      const pItem = this.add.sprite(mx, my, pMap[pType] || 'powerup_weapon').setOrigin(0.5);
       pItem.pType = pType;
       this.physics.add.existing(pItem);
       this.powerups.add(pItem);
@@ -3212,33 +5753,85 @@ class ArcadeScene extends Phaser.Scene {
       showToast(`🕹️ Arcade Cleared: +${earned} Gold!`);
     }
     this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.scene.stop();
-    this.scene.resume('FarmScene');
+    this.cameras.main.once('camerafadeoutcomplete', () => {
+      this.scene.stop();
+      this.scene.resume('FarmScene');
+    });
+  }
+
+  shutdown() {
+    if (this.nearStarsGroup) this.nearStarsGroup.clear(true, true);
   }
 }
+
 
 // ═══════════════ DUNGEON CRAWLER ARPG SCENE ════════════════════════════════════
 class DungeonScene extends Phaser.Scene {
   constructor(){ super({key:'DungeonScene'}); }
   
+  preload(){
+    PixelArtRenderer.generateAllTextures(this);
+    PixelArtRenderer.generateTilemapTextures(this);
+  }
+
   create(){
     this.cameras.main.fadeIn(300, 0, 0, 0);
+    this.cameras.main.setRoundPixels(true);
     this.W = this.scale.width;
+
     this.H = this.scale.height;
+    this.cameras.main.setBounds(0, 0, this.W, this.H);
     
-    // Dark Dungeon Floor background
-    this.add.rectangle(0, 0, this.W, this.H, 0x0F172A).setOrigin(0);
-    // Draw stone floor grid lines
-    const g = this.add.graphics();
-    g.lineStyle(1, 0x1E293B, 0.6);
-    for(let x=0; x<this.W; x+=40) g.lineBetween(x, 0, x, this.H);
-    for(let y=0; y<this.H; y+=40) g.lineBetween(0, y, this.W, y);
+    // Dark Stone Floor Grid, Mossy Perimeter Walls & Glowing Runes using Tilemaps
+    for(let x = 0; x < this.W + TILE; x += TILE){
+      for(let y = 0; y < this.H + TILE; y += TILE){
+        const isBorder = (x < TILE || x >= this.W - TILE || y < TILE || y >= this.H - TILE);
+        if (isBorder) {
+          this.add.image(x + TILE/2, y + TILE/2, 'tile_dungeon_wall_moss').setDisplaySize(TILE, TILE).setDepth(1);
+        } else {
+          const rndVal = (Math.sin(x * 12.3 + y * 45.6) * 10000) % 1;
+          const absRnd = Math.abs(rndVal);
+          let floorKey = 'tile_dungeon_floor';
+          if (absRnd < 0.15) floorKey = 'tile_dungeon_cracked';
+          else if (absRnd > 0.90) floorKey = 'tile_dungeon_rune';
+          this.add.image(x + TILE/2, y + TILE/2, floorKey).setDisplaySize(TILE, TILE).setDepth(0);
+        }
+      }
+    }
     
+    this.ambientOverlay = this.add.rectangle(this.W/2, this.H/2, this.W*2, this.H*2, 0x090D16, 0.70)
+      .setDepth(9990).setScrollFactor(0);
+    this.lighting = new AmbientLightingSystem(this);
+    this.shadows = new DynamicShadowSystem(this);
+
     // Ambient Torch Lights at corners/walls
-    [ {x:60,y:60}, {x:this.W-60,y:60}, {x:60,y:this.H-60}, {x:this.W-60,y:this.H-60} ].forEach(t => {
-      this.add.circle(t.x, t.y, 40, 0xF59E0B, 0.15);
-      const torch = this.add.text(t.x, t.y, '🔥', {fontSize:'24px'}).setOrigin(0.5);
-      this.tweens.add({ targets:torch, scale:{from:0.9,to:1.2}, duration:400+Math.random()*200, yoyo:true, repeat:-1 });
+    this.torchLights = [ 
+      {x: TILE * 1.5, y: TILE * 1.5}, 
+      {x: this.W - TILE * 1.5, y: TILE * 1.5}, 
+      {x: TILE * 1.5, y: this.H - TILE * 1.5}, 
+      {x: this.W - TILE * 1.5, y: this.H - TILE * 1.5},
+      {x: this.W / 2, y: TILE * 1.5}
+    ];
+    this.torchLights.forEach(t => {
+      this.add.circle(t.x, t.y, 44, 0xF59E0B, 0.20).setDepth(2);
+      this.lighting.addLight(t.x, t.y, 'light_glow_torch', 1.2, 0.7);
+      const torch = this.add.image(t.x, t.y, 'dungeon_torch').setDisplaySize(36, 48).setDepth(3);
+      this.tweens.add({ targets: torch, scaleY: { from: 0.95, to: 1.08 }, duration: 350 + Math.random()*200, yoyo: true, repeat: -1 });
+
+      if (this.textures && this.textures.exists('p_spark') && typeof this.add.particles === 'function') {
+        try {
+          this.add.particles(t.x, t.y - 12, 'p_spark', {
+            speedY: { min: -30, max: -70 },
+            speedX: { min: -10, max: 10 },
+            lifespan: 700,
+            quantity: 1,
+            frequency: 250,
+            scale: { start: 1, end: 0.2 },
+            alpha: { start: 1, end: 0 },
+            blendMode: 'ADD'
+          }).setDepth(4);
+        } catch (e) {}
+      }
     });
 
     // Player Hero
@@ -3248,7 +5841,8 @@ class DungeonScene extends Phaser.Scene {
     this.lootedScrolls = 0;
     this.monstersKilled = 0;
 
-    this.player = this.add.text(this.W/2, this.H/2, '🗡️', {fontSize:'36px'}).setOrigin(0.5);
+    this.player = this.add.sprite(this.W/2, this.H/2, 'player_walk_down_0').setOrigin(0.5);
+    this.pShadow = this.shadows.createShadow(this.player, 30, 10, 15);
     this.physics.add.existing(this.player);
     this.player.body.setCollideWorldBounds(true);
     this.player.body.setSize(30, 30);
@@ -3295,6 +5889,23 @@ class DungeonScene extends Phaser.Scene {
   update(t, dt){
     if(this.playerHP <= 0) return;
 
+    // Dynamic Y-sort for player and shadow
+    const playerBaseY = this.player.y + (this.player.displayHeight * (1 - this.player.originY));
+    this.player.setDepth(playerBaseY);
+    if (this.pShadow) this.pShadow.setDepth(playerBaseY - 1);
+
+    if (this.torchLights && this.pShadow && this.shadows) {
+      let closestTorch = this.torchLights[0];
+      let minDist = 99999;
+      this.torchLights.forEach(torch => {
+        const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, torch.x, torch.y);
+        if (d < minDist) { minDist = d; closestTorch = torch; }
+      });
+      if (closestTorch) {
+        this.shadows.updatePointShadow(this.pShadow, closestTorch.x, closestTorch.y);
+      }
+    }
+
     // Movement
     let vx = 0, vy = 0;
     const speed = 280;
@@ -3304,6 +5915,20 @@ class DungeonScene extends Phaser.Scene {
     if(this.cursors.down.isDown || this.keys.S.isDown) vy = speed;
 
     this.player.body.setVelocity(vx, vy);
+
+    if(vx !== 0 || vy !== 0){
+      let animKey = 'player-walk-down';
+      if(Math.abs(vx) >= Math.abs(vy)){
+        animKey = vx < 0 ? 'player-walk-left' : 'player-walk-right';
+      } else {
+        animKey = vy < 0 ? 'player-walk-up' : 'player-walk-down';
+      }
+      this.player.setFlipX(false);
+      this.player.anims.play(animKey, true);
+    } else {
+      this.player.anims.stop();
+      this.player.setTexture('player_walk_down_0');
+    }
 
     // Slash input
     if(Phaser.Input.Keyboard.JustDown(this.spaceKey)){
@@ -3316,27 +5941,34 @@ class DungeonScene extends Phaser.Scene {
       this.lastMonsterSpawn = t + Phaser.Math.Between(1200, 2200);
     }
 
-    // Monster AI: move towards player
+    // Monster AI & dynamic Y-sort
     this.monsters.children.entries.forEach(m => {
       if(m && m.active){
         this.physics.moveToObject(m, this.player, m.moveSpeed || 100);
+        const mBaseY = m.y + (m.displayHeight * (1 - m.originY));
+        m.setDepth(mBaseY);
       }
     });
 
-    // Loot floating animation
+    // Loot floating animation & dynamic Y-sort
     this.lootGroup.children.entries.forEach(l => {
-      if(l && l.active && l.sparkle){
-        l.sparkle.x = l.x; l.sparkle.y = l.y - 12;
+      if(l && l.active){
+        l.setDepth(l.y + 8);
+        if(l.sparkle){
+          l.sparkle.x = l.x; l.sparkle.y = l.y - 12;
+          l.sparkle.setDepth(l.y + 9);
+        }
       }
     });
   }
+
 
   playerSlash(){
     if(!this.player || !this.player.active) return;
     playChiptuneSFX('sword_swing');
 
     // Sword slash arc visual
-    const slash = this.add.text(this.player.x, this.player.y - 10, '⚔️', {fontSize:'44px'}).setOrigin(0.5).setDepth(50);
+    const slash = this.add.sprite(this.player.x, this.player.y - 10, 'laser_player').setOrigin(0.5).setDepth(50);
     this.tweens.add({
       targets: slash,
       scale: { from: 0.8, to: 1.6 },
@@ -3373,10 +6005,10 @@ class DungeonScene extends Phaser.Scene {
 
   spawnMonster(){
     const types = [
-      { emoji:'🟢', name:'Slime', hp:30, speed:90 },
-      { emoji:'💀', name:'Skeleton', hp:50, speed:120 },
-      { emoji:'🗿', name:'Golem', hp:80, speed:70 },
-      { emoji:'👿', name:'Demon', hp:60, speed:140 }
+      { key: 'dungeon_green_slime', name: 'Slime', hp: 30, speed: 90 },
+      { key: 'dungeon_goblin_warrior', name: 'Goblin Warrior', hp: 50, speed: 120 },
+      { key: 'dungeon_skeleton_archer', name: 'Skeleton Archer', hp: 40, speed: 110 },
+      { key: 'dungeon_boss', name: 'Mini Boss', hp: 80, speed: 70 }
     ];
     const type = Phaser.Utils.Array.GetRandom(types);
     const word = Phaser.Utils.Array.GetRandom(this.wordPool) || {ko:'한글', en:'Hangeul'};
@@ -3390,7 +6022,7 @@ class DungeonScene extends Phaser.Scene {
       y = Math.random() < 0.5 ? 20 : this.H - 20;
     }
 
-    const monster = this.add.text(x, y, type.emoji, {fontSize:'36px'}).setOrigin(0.5).setDepth(10);
+    const monster = this.add.sprite(x, y, type.key).setOrigin(0.5).setDepth(10);
     this.physics.add.existing(monster);
     monster.body.setSize(36, 36);
     monster.hp = type.hp;
@@ -3437,12 +6069,14 @@ class DungeonScene extends Phaser.Scene {
     }
 
     // Drop Vocab Scroll 📜
-    const loot = this.add.text(mx, my, '📜', {fontSize:'32px'}).setOrigin(0.5).setDepth(15);
+    const lootKeys = ['loot_scroll', 'loot_coin', 'loot_gem', 'loot_potion', 'loot_chest'];
+    const lKey = Phaser.Utils.Array.GetRandom(lootKeys);
+    const loot = this.add.sprite(mx, my, lKey).setOrigin(0.5).setDepth(15);
     this.physics.add.existing(loot);
     loot.body.setSize(30, 30);
     loot.word = word;
 
-    loot.sparkle = this.add.text(mx, my - 12, '✨', {fontSize:'16px'}).setOrigin(0.5).setDepth(16);
+    loot.sparkle = this.add.sprite(mx, my - 12, 'sparkle').setOrigin(0.5).setDepth(16);
     this.tweens.add({ targets: loot.sparkle, alpha: 0.2, yoyo: true, repeat: -1, duration: 400 });
     this.tweens.add({ targets: loot, y: my - 6, duration: 600, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
 
@@ -3451,7 +6085,7 @@ class DungeonScene extends Phaser.Scene {
 
   spawnBossPortal(){
     if(this.bossPortal) return;
-    const portal = this.add.text(this.W/2, 100, '👑', {fontSize:'48px'}).setOrigin(0.5).setDepth(20);
+    const portal = this.add.sprite(this.W/2, 100, 'dungeon_portal').setOrigin(0.5).setDepth(20);
     this.physics.add.existing(portal);
     portal.body.setSize(48, 48);
     this.bossPortal = portal;
@@ -3478,7 +6112,7 @@ class DungeonScene extends Phaser.Scene {
   spawnDungeonBoss(){
     if(this.bossPortal) this.bossPortal.destroy();
     showToast('👹 KING SEJONG\'S CORRUPTED SENTINEL SPAWNED!', 4000);
-    const boss = this.add.text(this.W/2, 120, '👹', {fontSize:'64px'}).setOrigin(0.5).setDepth(30);
+    const boss = this.add.sprite(this.W/2, 120, 'dungeon_boss').setOrigin(0.5).setDepth(30);
     this.physics.add.existing(boss);
     boss.body.setSize(60, 60);
     boss.hp = 300;
@@ -3569,36 +6203,82 @@ class DungeonScene extends Phaser.Scene {
     }
 
     this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.scene.stop();
-    this.scene.resume('FarmScene');
+    this.cameras.main.once('camerafadeoutcomplete', () => {
+      this.scene.stop();
+      this.scene.resume('FarmScene');
+    });
   }
 
+  shutdown() {
+    // Clear dungeon scene references and lighting overlays
+  }
 }
+
 
 // ═══════════════ STARDEW-STYLE FISHING MINIGAME SCENE ════════════════════════
 class FishingScene extends Phaser.Scene {
   constructor(){ super({key:'FishingScene'}); }
 
+  preload(){
+    PixelArtRenderer.generateAllTextures(this);
+    PixelArtRenderer.generateTilemapTextures(this);
+  }
+
   create(){
     this.cameras.main.fadeIn(300, 0, 0, 0);
+    this.cameras.main.setRoundPixels(true);
     this.W = this.scale.width;
-    this.H = this.scale.height;
 
-    // Rich Ocean Water Environment Gradient (Dark Teal to Deep Ocean)
-    const bg = this.add.graphics();
-    bg.fillGradientStyle(0x0284C7, 0x0284C7, 0x0F172A, 0x0F172A, 1);
-    bg.fillRect(0, 0, this.W, this.H);
+    this.H = this.scale.height;
+    this.cameras.main.setBounds(0, 0, this.W, this.H);
+
+    // Ocean Coastline & Beach Terrain using Tilemaps
+    // 1. Deep Ocean Water grid & Foam Border using animated TileSprites
+    const oceanKey = (this.textures && this.textures.exists('tile_ocean_deep_0')) ? 'tile_ocean_deep_0' : 'tile_ocean_deep';
+    this.oceanTileSprite = this.add.tileSprite(this.W/2, (this.H - 144)/2, this.W, this.H - 144, oceanKey).setDepth(0);
+    const foamKey = (this.textures && this.textures.exists('tile_water_foam_0')) ? 'tile_water_foam_0' : 'tile_water_foam_border';
+    this.foamTileSprite = this.add.tileSprite(this.W/2, this.H - 144 + TILE/2, this.W, TILE, foamKey).setDepth(1);
+    this.waterFrame = 0;
+    this.waterTimer = 0;
+
+    if (this.textures && this.textures.exists('p_splash') && typeof this.add.particles === 'function') {
+      try {
+        this.splashEmitter = this.add.particles(0, 0, 'p_splash', {
+          speed: { min: 30, max: 100 },
+          angle: { min: 220, max: 320 },
+          scale: { start: 1.2, end: 0.2 },
+          alpha: { start: 0.9, end: 0 },
+          lifespan: 500,
+          emitting: false
+        }).setDepth(10);
+      } catch (e) {}
+    }
+    // 3. Sandy Beach grid in lower shoreline area (y: H - 96 .. H)
+    for(let x = 0; x < this.W + TILE; x += TILE){
+      for(let y = this.H - 96; y < this.H + TILE; y += TILE){
+        const sandKey = (Math.floor(x / TILE) + Math.floor(y / TILE)) % 3 === 0 ? 'tile_sand_wet' : 'tile_sand';
+        this.add.image(x + TILE/2, y + TILE/2, sandKey).setDisplaySize(TILE, TILE).setDepth(0);
+      }
+    }
+
+    // 4. Rocky Shore & Beach details scattered along shoreline
+    this.add.image(60, this.H - 120, 'tile_rock_shore').setDisplaySize(TILE, TILE).setDepth(1);
+    this.add.image(this.W - 60, this.H - 120, 'tile_rock_shore').setDisplaySize(TILE, TILE).setDepth(1);
+    this.add.image(140, this.H - 60, 'tile_seashell').setDisplaySize(32, 32).setDepth(1);
+    this.add.image(this.W - 150, this.H - 50, 'tile_starfish').setDisplaySize(32, 32).setDepth(1);
+    this.add.image(220, this.H - 45, 'tile_driftwood').setDisplaySize(40, 24).setDepth(1);
+    this.add.image(this.W - 240, this.H - 55, 'tile_seashell').setDisplaySize(28, 28).setDepth(1);
 
     // Sunlight Caustics Light Rays
     for(let i=0; i<6; i++){
-      const ray = this.add.polygon(i * (this.W/5), 0, [0,0, 80,0, 140,this.H, 0,this.H], 0x38BDF8, 0.08).setOrigin(0);
+      const ray = this.add.polygon(i * (this.W/5), 0, [0,0, 80,0, 140,this.H, 0,this.H], 0x38BDF8, 0.08).setOrigin(0).setDepth(1);
       this.tweens.add({ targets:ray, alpha:0.18, duration:3000+i*500, yoyo:true, repeat:-1, ease:'Sine.InOut' });
     }
 
-    // Floating Water Bubbles & Lily Pads
+    // Floating Water Bubbles
     for(let i=0; i<20; i++){
-      const bx = Math.random()*this.W, by = Math.random()*this.H;
-      const bubble = this.add.circle(bx, by, Phaser.Math.Between(2, 5), 0x67E8F9, 0.4);
+      const bx = Math.random()*this.W, by = Math.random()*(this.H - 144);
+      const bubble = this.add.circle(bx, by, Phaser.Math.Between(2, 5), 0x67E8F9, 0.4).setDepth(1);
       this.tweens.add({
         targets: bubble,
         y: by - 100,
@@ -3609,18 +6289,17 @@ class FishingScene extends Phaser.Scene {
       });
     }
 
-    // Wooden Pier Dock with Lanterns
-    this.add.rectangle(this.W/2, this.H - 50, this.W, 100, 0x78350F).setOrigin(0.5).setStrokeStyle(4, 0x92400E);
-    this.add.rectangle(this.W/2, this.H - 95, 200, 10, 0x92400E).setOrigin(0.5);
-    
+    // 5. Wooden Pier Dock with Lanterns
+    const pierY = this.H - 75;
+    for(let px = TILE/2; px < this.W; px += TILE){
+      this.add.image(px, pierY, 'tile_pier_plank').setDisplaySize(TILE, TILE).setDepth(2);
+    }
     // Lanterns on Dock Posts
-    [this.W/2 - 240, this.W/2 + 240].forEach(lx => {
-      this.add.rectangle(lx, this.H - 90, 14, 40, 0x57534E).setOrigin(0.5);
-      const l = this.add.text(lx, this.H - 120, '🔥', {fontSize:'28px'}).setOrigin(0.5);
-      this.tweens.add({ targets:l, scale:{from:0.9,to:1.25}, duration:400, yoyo:true, repeat:-1 });
+    [100, this.W - 100].forEach(lx => {
+      this.add.image(lx, pierY - 15, 'tile_pier_lantern').setDisplaySize(36, 48).setDepth(3);
     });
 
-    this.player = this.add.text(this.W/2, this.H - 110, '🎣', {fontSize:'52px'}).setOrigin(0.5);
+    this.player = this.add.sprite(this.W/2, this.H - 110, 'player_walk_down_0').setOrigin(0.5).setDepth(10);
 
     // State: 'CASTING', 'WAITING', 'REELING', 'CATCH_QUIZ'
     this.state = 'CASTING';
@@ -3663,7 +6342,7 @@ class FishingScene extends Phaser.Scene {
 
     // Fish Icon inside bar
     this.fishIconY = this.barY;
-    this.fishIcon = this.add.text(this.barX, this.fishIconY, '🐟', {fontSize:'26px'})
+    this.fishIcon = this.add.sprite(this.barX, this.fishIconY, 'fishing_salmon')
       .setOrigin(0.5).setVisible(false);
 
     // Progress Bar (Left of tension bar)
@@ -3690,8 +6369,12 @@ class FishingScene extends Phaser.Scene {
     this.infoTxt.setText('⏳ Waiting for a bite...');
 
     // Floating bobber with water ripples
-    this.bobber = this.add.text(this.W/2 + Phaser.Math.Between(-60, 60), this.H/2 + 20, '🔴', {fontSize:'28px'}).setOrigin(0.5);
+    this.bobber = this.add.sprite(this.W/2 + Phaser.Math.Between(-60, 60), this.H/2 + 20, 'fishing_bobber').setOrigin(0.5);
     this.tweens.add({ targets: this.bobber, y: this.H/2 + 28, duration: 600, yoyo: true, repeat: -1 });
+
+    if (this.splashEmitter && this.bobber) {
+      try { this.splashEmitter.explode(8, this.bobber.x, this.bobber.y); } catch(e) {}
+    }
 
     const waitTime = Phaser.Math.Between(1500, 3000);
     this.time.delayedCall(waitTime, () => {
@@ -3704,6 +6387,10 @@ class FishingScene extends Phaser.Scene {
     playChiptuneSFX('fishing_pull');
     this.state = 'REELING';
     this.infoTxt.setText('❗ BITE! Hold SPACE to keep fish in Green Zone!');
+
+    if (this.splashEmitter && this.bobber) {
+      try { this.splashEmitter.explode(12, this.bobber.x, this.bobber.y); } catch(e) {}
+    }
 
     const ex = this.add.text(this.bobber.x, this.bobber.y - 35, '💦 BITE!', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'24px', color:'#EF4444', stroke:'#000', strokeThickness:4
@@ -3720,12 +6407,36 @@ class FishingScene extends Phaser.Scene {
 
     this.catchProgress = 0.45; // Start 45% full
     this.targetFish = Phaser.Utils.Array.GetRandom(FISH_DB);
-    this.fishIcon.setText(this.targetFish.hint);
+    const fishTexMap = {
+      '연어': 'fishing_salmon',
+      '고등어': 'fishing_mackerel',
+      '오징어': 'fishing_squid',
+      '잉어': 'fishing_carp',
+      '새우': 'fishing_shrimp',
+      '문어': 'fishing_octopus',
+      '조개': 'fishing_clam',
+      '황금물고기': 'fishing_golden_fish'
+    };
+    const texKey = fishTexMap[this.targetFish.ko] || 'fishing_salmon';
+    this.fishIcon.setTexture(texKey);
 
     this.catchZoneVelocity = 0;
   }
 
   update(t, dt){
+    this.waterTimer = (this.waterTimer || 0) + (dt || 16);
+    if (this.waterTimer > 180) {
+      this.waterTimer = 0;
+      this.waterFrame = ((this.waterFrame || 0) + 1) % 4;
+      if (this.textures && this.textures.exists(`tile_ocean_deep_${this.waterFrame}`)) {
+        this.oceanTileSprite.setTexture(`tile_ocean_deep_${this.waterFrame}`);
+      }
+      if (this.textures && this.textures.exists(`tile_water_foam_${this.waterFrame}`)) {
+        this.foamTileSprite.setTexture(`tile_water_foam_${this.waterFrame}`);
+      }
+    }
+    if (this.oceanTileSprite) this.oceanTileSprite.tilePositionX += 0.4;
+    if (this.foamTileSprite) this.foamTileSprite.tilePositionX -= 0.6;
     if(this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey) && this.state === 'CASTING'){
       this.castLine();
     }
@@ -3864,10 +6575,19 @@ class FishingScene extends Phaser.Scene {
 
   exitFishing(){
     this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.scene.stop();
-    this.scene.resume('FarmScene');
+    this.cameras.main.once('camerafadeoutcomplete', () => {
+      this.scene.stop();
+      this.scene.resume('FarmScene');
+    });
+  }
+
+  shutdown() {
+    if (this.splashEmitter) {
+      try { this.splashEmitter.destroy(); } catch(e){}
+    }
   }
 }
+
 
 // ══════════════ FISH ALBUM OVERLAY LOGIC ══════════════════════════════════════
 window.openFishAlbum = function(){
@@ -3891,14 +6611,14 @@ window.openFishAlbum = function(){
     grid.appendChild(card);
   });
 
-  overlay.classList.add('visible');
+  setModalState('fish-album-overlay', true);
 };
 
 window.closeFishAlbum = function(){
   playChiptuneSFX('click');
-  const overlay = document.getElementById('fish-album-overlay');
-  if(overlay) overlay.classList.remove('visible');
+  setModalState('fish-album-overlay', false);
 };
+
 
 // ═══════════════ PHASER CONFIG ════════════════════════════════════════════════
 const config={
@@ -3922,7 +6642,7 @@ let memoryFlips = 0;
 window.openMemoryGame = function(){
   if(memoryOpen) return;
   playChiptuneSFX('click');
-  playerLocked = true; memoryOpen = true;
+  memoryOpen = true;
   const overlay = document.getElementById('memory-overlay');
   const grid = document.getElementById('memory-grid');
   document.getElementById('memory-matches').textContent = 'Matches: 0/8';
@@ -3934,7 +6654,7 @@ window.openMemoryGame = function(){
   const all = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
   if(all.length < 8) {
      showToast('Not enough words unlocked! Buy more levels first.', 3000);
-     playerLocked = false; memoryOpen = false; return;
+     memoryOpen = false; return;
   }
   let shuffledAll = [...all].sort(()=>Math.random()-0.5);
   const selected = shuffledAll.slice(0, 8);
@@ -3958,7 +6678,7 @@ window.openMemoryGame = function(){
     card.addEventListener('click', () => window.onMemoryCardClick(idx, card));
     grid.appendChild(card);
   });
-  overlay.classList.add('visible');
+  setModalState('memory-overlay', true);
 };
 
 window.onMemoryCardClick = function(idx, cardEl){
@@ -4010,11 +6730,10 @@ window.onMemoryCardClick = function(idx, cardEl){
 
 window.closeMemoryGame = function(){
   playChiptuneSFX('click');
-  document.getElementById('memory-overlay').classList.remove('visible');
-  setTimeout(()=>{
-    playerLocked = false; memoryOpen = false;
-  }, 300);
+  memoryOpen = false;
+  setModalState('memory-overlay', false);
 };
+
 
 // ══════════════ TROPHIES ═════════════════════════════════════════════════════
 const TROPHIES_DB = [
@@ -4034,16 +6753,17 @@ window.getTotalHarvests = function() {
 window.openTrophies = function() {
   if(trophyOpen) return;
   playChiptuneSFX('click');
-  playerLocked = true; trophyOpen = true;
-  document.getElementById('trophy-overlay').classList.add('visible');
+  trophyOpen = true;
+  setModalState('trophy-overlay', true);
   window.renderTrophies();
 };
 
 window.closeTrophies = function() {
   playChiptuneSFX('click');
-  document.getElementById('trophy-overlay').classList.remove('visible');
-  playerLocked = false; trophyOpen = false;
+  trophyOpen = false;
+  setModalState('trophy-overlay', false);
 };
+
 
 window.renderTrophies = function() {
   const grid = document.getElementById('trophy-grid');
@@ -4133,6 +6853,10 @@ window.openSpellDuel = function(){
 };
 
 function openSpellDuelDirect() {
+  if (duelState.timer) {
+    clearTimeout(duelState.timer);
+    duelState.timer = null;
+  }
   const enemy = DUEL_ENEMIES[duelState.enemyIndex];
   
   duelState.playerHP = 100;
@@ -4148,11 +6872,12 @@ function openSpellDuelDirect() {
   updateDuelHP();
   document.getElementById('duel-combo-badge').textContent = '🔥 Combo x0';
 
-  playerLocked = true; duelOpen = true;
-  document.getElementById('duel-overlay').classList.add('visible');
+  duelOpen = true;
+  setModalState('duel-overlay', true);
 
   nextDuelTurn();
 }
+
 
 function updateDuelHP(){
   const pFill = document.getElementById('duel-player-hp-fill');
@@ -4348,13 +7073,16 @@ function endDuel(victory){
 
 
 window.closeSpellDuel = function(){
-  if(duelState.timer) clearTimeout(duelState.timer);
+  if(duelState.timer) {
+    clearTimeout(duelState.timer);
+    duelState.timer = null;
+  }
+  duelState.answering = false;
   playChiptuneSFX('click');
-  document.getElementById('duel-overlay').classList.remove('visible');
-  setTimeout(() => {
-    playerLocked = false; duelOpen = false;
-  }, 300);
+  duelOpen = false;
+  setModalState('duel-overlay', false);
 };
+
 
 if(window.addEventListener){
   window.addEventListener('keydown', (e) => {
@@ -4488,12 +7216,15 @@ function updateBuffHUD() {
 }
 
 // Tick active buffs every second
-setInterval(() => {
-  if (typeof activeBuffs !== 'undefined' && Object.keys(activeBuffs).length > 0) {
-    updateBuffHUD();
-  }
-  decayPetHappiness();
-}, 1000);
+if (typeof window !== 'undefined') {
+  if (window.buffHUDInterval) clearInterval(window.buffHUDInterval);
+  window.buffHUDInterval = setInterval(() => {
+    if (typeof activeBuffs !== 'undefined' && Object.keys(activeBuffs).length > 0) {
+      updateBuffHUD();
+    }
+    decayPetHappiness();
+  }, 1000);
+}
 
 // Open Recipe Overlay
 window.openRecipeBook = function() {
@@ -4546,18 +7277,20 @@ window.openRecipeBook = function() {
     grid.appendChild(card);
   });
 
-  overlay.classList.add('visible');
+  setModalState('recipe-overlay', true);
 };
 
 window.closeRecipeBook = function() {
-  const overlay = document.getElementById('recipe-overlay');
-  if (overlay) overlay.classList.remove('visible');
+  playChiptuneSFX('click');
+  setModalState('recipe-overlay', false);
 };
+
 
 // ── COOKING MINIGAME LOGIC ────────────────────────────────────────────────────
 let currentCookingRecipe = null;
 let cookingStage = 0;
 let cookingScore = 0;
+let activeHeatInterval = null;
 
 window.startCookingMinigame = function(recipeId) {
   const recipe = RECIPE_DB.find(r => r.id === recipeId);
@@ -4634,7 +7367,8 @@ function renderCookingStage() {
     const indicator = document.getElementById('heat-indicator');
     const heatBtn = document.getElementById('heat-click-btn');
 
-    const heatInterval = setInterval(() => {
+    if (activeHeatInterval) clearInterval(activeHeatInterval);
+    activeHeatInterval = setInterval(() => {
       sliderPos += direction * 4;
       if (sliderPos >= 95) direction = -1;
       if (sliderPos <= 0) direction = 1;
@@ -4643,7 +7377,10 @@ function renderCookingStage() {
 
     if (heatBtn) {
       heatBtn.onclick = () => {
-        clearInterval(heatInterval);
+        if (activeHeatInterval) {
+          clearInterval(activeHeatInterval);
+          activeHeatInterval = null;
+        }
         if (sliderPos >= 40 && sliderPos <= 60) {
           cookingScore += 50; // Perfect heat!
           playChiptuneSFX('quiz_correct');
@@ -4695,6 +7432,10 @@ function finishCookingMinigame() {
 }
 
 window.closeCookingMinigame = function() {
+  if (activeHeatInterval) {
+    clearInterval(activeHeatInterval);
+    activeHeatInterval = null;
+  }
   const overlay = document.getElementById('cooking-minigame-overlay');
   if (overlay) overlay.classList.remove('visible');
 };
@@ -4852,13 +7593,14 @@ window.openPetOverlay = function() {
     rosterContainer.appendChild(card);
   });
 
-  overlay.classList.add('visible');
+  setModalState('pet-overlay', true);
 };
 
 window.closePetOverlay = function() {
-  const overlay = document.getElementById('pet-overlay');
-  if (overlay) overlay.classList.remove('visible');
+  playChiptuneSFX('click');
+  setModalState('pet-overlay', false);
 };
+
 
 window.adoptPet = function(petId) {
   const def = PET_DB.find(p => p.id === petId);
@@ -5128,14 +7870,14 @@ function openSeasonalOverlay() {
     });
   }
 
-  const modal = document.getElementById('seasonal-overlay');
-  if (modal) modal.classList.add('visible');
+  setModalState('seasonal-overlay', true);
 }
 
 function closeSeasonalOverlay() {
-  const modal = document.getElementById('seasonal-overlay');
-  if (modal) modal.classList.remove('visible');
+  playChiptuneSFX('click');
+  setModalState('seasonal-overlay', false);
 }
+
 
 function claimSeasonalQuest(questId) {
   const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId];
@@ -5242,13 +7984,14 @@ function openLeaderboard(tab = 'vocab') {
   switchLeaderboardTab(tab);
 
   const modal = document.getElementById('leaderboard-overlay');
-  if (modal) modal.classList.add('visible');
+  setModalState('leaderboard-overlay', true);
 }
 
 function closeLeaderboard() {
-  const modal = document.getElementById('leaderboard-overlay');
-  if (modal) modal.classList.remove('visible');
+  playChiptuneSFX('click');
+  setModalState('leaderboard-overlay', false);
 }
+
 
 function switchLeaderboardTab(tabId) {
   currentLeaderboardTab = tabId;

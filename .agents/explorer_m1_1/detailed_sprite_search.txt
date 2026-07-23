@@ -1,0 +1,73 @@
+=== ALL SCENES ===
+Line 1558: class FarmScene extends Phaser.Scene {
+Line 2830: class ArcadeScene extends Phaser.Scene {
+Line 3221: class DungeonScene extends Phaser.Scene {
+Line 3579: class FishingScene extends Phaser.Scene {
+
+=== ALL INSTANCES OF PLAYER CREATION AND RENDERING ===
+Line 2220: this.physics.add.collider(this.player, trunkZone);
+Line 2360: this.player=this.physics.add.sprite(W/2, H-80,'farmer0')
+Line 2374: if(!this.player||!this.keys) return;
+Line 2375: this.player.setDepth(this.player.y);
+Line 2376: this.pShadow.setPosition(this.player.x,this.player.y+18).setDepth(this.player.y-1);
+Line 2382: this.player.setVelocity((vx/len)*PLAYER_SPD,(vy/len)*PLAYER_SPD);
+Line 2384: if(vx<0) this.player.setFlipX(true);
+Line 2385: if(vx>0) this.player.setFlipX(false);
+Line 2389: this.player.setTexture('farmer'+this.walkFrame);
+Line 2394: const dx = this.player.flipX ? 7 : -7;
+Line 2395: const puff = this.add.ellipse(this.player.x + dx, this.player.y + 14, 6, 4, 0xDDCCAA, 0.6).setDepth(this.player.y - 2);
+Line 2400: this.player.setTexture('farmer0'); this.walkTimer=0;
+Line 2402: } else this.player.setVelocity(0,0);
+Line 2406: const nearShop = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY) < 90;
+Line 2411: const nearCat = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY) < 80;
+Line 2413: if(this.catSprite) this.catSprite.setFlipX(this.player.x < this.catX ? true : false);
+Line 2418: const nearBoard = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY) < 80;
+Line 2423: const nearArcade = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY) < 80;
+Line 2428: const nearWizard = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY) < 85;
+Line 2433: const nearPortal = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY) < 85;
+Line 2438: const nearFish = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY) < 85;
+Line 2466: const near=p=>Phaser.Math.Distance.Between(this.player.x,this.player.y,p.x,p.y)<PLOT_SIZE+26;
+Line 2472: if(this.appleRipe&&this.appleX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<90)
+Line 2481: if(hx===null&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<82){
+Line 2484: if(hx===null&&this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
+Line 2487: if(hx===null&&this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<85){
+Line 2490: if(hx===null&&this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
+Line 2493: if(hx===null&&this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
+Line 2496: if(hx===null&&this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<82){
+Line 2499: if(hx===null&&this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<92){
+Line 2536: const near=p=>Phaser.Math.Distance.Between(this.player.x,this.player.y,p.x,p.y)<PLOT_SIZE+24;
+Line 2539: Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<90){
+Line 2548: if(this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<80){
+Line 2553: if(this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
+Line 2560: if(this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<85){
+Line 2570: if(this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
+Line 2580: if(this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
+Line 2590: if(this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<80){
+Line 2595: if(this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<90){openShop();return;}
+Line 2853: this.playerHP = 100;
+Line 3189: this.playerHP = Math.max(0, this.playerHP - 20);
+Line 3190: this.hpText.setText(`❤️ HP: ${this.playerHP}/100`);
+Line 3196: if(this.playerHP <= 0){
+Line 3245: this.playerHP = 100;
+Line 3251: this.player = this.add.text(this.W/2, this.H/2, '🗡️', {fontSize:'36px'}).setOrigin(0.5);
+Line 3252: this.physics.add.existing(this.player);
+Line 3253: this.player.body.setCollideWorldBounds(true);
+Line 3254: this.player.body.setSize(30, 30);
+Line 3264: this.physics.add.overlap(this.player, this.lootGroup, this.collectLoot, null, this);
+Line 3265: this.physics.add.overlap(this.player, this.monsters, this.hitPlayer, null, this);
+Line 3292: this.input.on('pointerdown', () => this.playerSlash());
+Line 3296: if(this.playerHP <= 0) return;
+Line 3306: this.player.body.setVelocity(vx, vy);
+Line 3310: this.playerSlash();
+Line 3322: this.physics.moveToObject(m, this.player, m.moveSpeed || 100);
+Line 3335: if(!this.player || !this.player.active) return;
+Line 3339: const slash = this.add.text(this.player.x, this.player.y - 10, '⚔️', {fontSize:'44px'}).setOrigin(0.5).setDepth(50);
+Line 3354: const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, m.x, m.y);
+Line 3416: if (this.playerHP >= 100) {
+Line 3463: this.physics.add.overlap(this.player, portal, () => {
+Line 3540: this.playerHP = Math.max(0, this.playerHP - 15);
+Line 3541: this.hpText.setText(`❤️ HP: ${this.playerHP}/100`);
+Line 3544: this.player.setTint(0xFF0000);
+Line 3545: this.time.delayedCall(200, () => { if(this.player.active) this.player.clearTint(); });
+Line 3547: if(this.playerHP <= 0){
+Line 3623: this.player = this.add.text(this.W/2, this.H - 110, '🎣', {fontSize:'52px'}).setOrigin(0.5);

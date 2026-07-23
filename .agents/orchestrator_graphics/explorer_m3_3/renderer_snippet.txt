@@ -1,0 +1,385 @@
+=== PIXELART RENDERER (lines 117-500) ===
+117: class PixelArtRenderer {
+118:   static drawMatrix(g, matrix, palette, ox = 0, oy = 0, ps = 3) {
+119:     matrix.forEach((row, ry) => {
+120:       for (let rx = 0; rx < row.length; rx++) {
+121:         const char = row[rx];
+122:         if (char === '.' || char === ' ') continue;
+123:         const col = palette[char];
+124:         if (col !== undefined && col !== null) {
+125:           g.fillStyle(col, 1);
+126:           g.fillRect((ox + rx) * ps, (oy + ry) * ps, ps, ps);
+127:         }
+128:       }
+129:     });
+130:   }
+131: 
+132:   static createTexture(scene, key, matrix, palette, width = 16, height = 16, ps = 3) {
+133:     if (scene.textures.exists(key)) {
+134:       scene.textures.remove(key);
+135:     }
+136:     const g = scene.make.graphics({ add: false });
+137:     this.drawMatrix(g, matrix, palette, 0, 0, ps);
+138:     g.generateTexture(key, width * ps, height * ps);
+139:     g.destroy();
+140:     const tex = scene.textures.get(key);
+141:     if (tex) {
+142:       const mode = (typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode)
+143:         ? Phaser.Textures.FilterMode.NEAREST
+144:         : 1;
+145:       tex.setFilter(mode);
+146:     }
+147:     return key;
+148:   }
+149: 
+150:   static generateAllTextures(scene) {
+151:     if (!scene || !scene.textures) return;
+152:     if (scene._pixelArtTexturesBaked) return;
+153:     scene._pixelArtTexturesBaked = true;
+154: 
+155:     this._genPlayerTextures(scene);
+156:     this._genNpcTextures(scene);
+157:     this._genCropAndTreeTextures(scene);
+158:     this._genFishingTextures(scene);
+159:     this._genArcadeTextures(scene);
+160:     this._genDungeonTextures(scene);
+161:     this.generateTilemapTextures(scene);
+162:   }
+163: 
+164:   static generateTilemapTextures(scene) {
+165:     if (!scene || !scene.textures) return;
+166:     if (scene._tilemapTexturesGenerated) return;
+167:     scene._tilemapTexturesGenerated = true;
+168: 
+169:     const makeTile = (key, renderFn) => {
+170:       if (scene.textures.exists(key)) {
+171:         scene.textures.remove(key);
+172:       }
+173:       const g = scene.make.graphics({ add: false });
+174:       renderFn(g);
+175:       g.generateTexture(key, 48, 48);
+176:       g.destroy();
+177:       const tex = scene.textures.get(key);
+178:       if (tex) {
+179:         const mode = (typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode)
+180:           ? Phaser.Textures.FilterMode.NEAREST
+181:           : 1;
+182:         tex.setFilter(mode);
+183:       }
+184:       return key;
+185:     };
+186: 
+187:     // ── FARM SCENE TILEMAP TEXTURES ──────────────────────────────────────────
+188:     makeTile('tile_grass_base', (g) => {
+189:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+190:       g.fillStyle(0x15803D, 1);
+191:       g.fillRect(6, 6, 3, 6); g.fillRect(24, 12, 3, 6); g.fillRect(36, 27, 3, 6);
+192:       g.fillRect(12, 39, 3, 6); g.fillRect(42, 6, 3, 6); g.fillRect(18, 24, 3, 6);
+193:       g.fillStyle(0x4ADE80, 1);
+194:       g.fillRect(15, 3, 3, 3); g.fillRect(30, 18, 3, 3); g.fillRect(3, 24, 3, 3);
+195:       g.fillRect(33, 42, 3, 3); g.fillRect(21, 33, 3, 3); g.fillRect(39, 15, 3, 3);
+196:     });
+197: 
+198:     makeTile('tile_grass_flowers', (g) => {
+199:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+200:       g.fillStyle(0x15803D, 1); g.fillRect(6, 6, 3, 6); g.fillRect(24, 12, 3, 6); g.fillRect(36, 27, 3, 6);
+201:       g.fillStyle(0x4ADE80, 1); g.fillRect(15, 3, 3, 3); g.fillRect(30, 18, 3, 3);
+202:       g.fillStyle(0xEF4444, 1); g.fillRect(9, 12, 9, 9);
+203:       g.fillStyle(0xFDE047, 1); g.fillRect(12, 15, 3, 3);
+204:       g.fillStyle(0xFDE047, 1); g.fillRect(30, 24, 9, 9);
+205:       g.fillStyle(0xF97316, 1); g.fillRect(33, 27, 3, 3);
+206:       g.fillStyle(0xFFFFFF, 1); g.fillRect(18, 33, 9, 9);
+207:       g.fillStyle(0xFDE047, 1); g.fillRect(21, 36, 3, 3);
+208:     });
+209: 
+210:     makeTile('tile_grass_clover', (g) => {
+211:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+212:       g.fillStyle(0x15803D, 1); g.fillRect(6, 6, 3, 6); g.fillRect(36, 27, 3, 6);
+213:       g.fillStyle(0x4ADE80, 1); g.fillRect(15, 3, 3, 3); g.fillRect(33, 42, 3, 3);
+214:       g.fillStyle(0x166534, 1);
+215:       g.fillRect(9, 12, 6, 6); g.fillRect(18, 12, 6, 6); g.fillRect(13, 6, 6, 6);
+216:       g.fillStyle(0x86EFAC, 1); g.fillRect(15, 18, 3, 6);
+217:       g.fillStyle(0x166534, 1);
+218:       g.fillRect(27, 30, 6, 6); g.fillRect(36, 30, 6, 6); g.fillRect(31, 24, 6, 6);
+219:       g.fillStyle(0x86EFAC, 1); g.fillRect(33, 36, 3, 6);
+220:     });
+221: 
+222:     makeTile('tile_path_straight', (g) => {
+223:       g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+224:       g.fillStyle(0x451A03, 1); g.fillRect(0, 0, 48, 3); g.fillRect(0, 45, 48, 3);
+225:       g.fillStyle(0x92400E, 1);
+226:       g.fillRect(6, 9, 9, 9); g.fillRect(21, 24, 12, 9); g.fillRect(33, 6, 9, 12);
+227:       g.fillRect(9, 30, 9, 12); g.fillRect(30, 33, 12, 9);
+228:       g.fillStyle(0xB45309, 1); g.fillRect(9, 12, 3, 3); g.fillRect(24, 27, 3, 3); g.fillRect(36, 9, 3, 3);
+229:     });
+230: 
+231:     makeTile('tile_path_corner', (g) => {
+232:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+233:       g.fillStyle(0x78350F, 1);
+234:       g.fillRect(0, 0, 48, 24); g.fillRect(24, 0, 24, 48);
+235:       g.fillStyle(0x451A03, 1); g.fillRect(0, 24, 24, 3); g.fillRect(24, 24, 3, 24);
+236:       g.fillStyle(0x92400E, 1); g.fillRect(6, 6, 12, 12); g.fillRect(30, 30, 12, 12);
+237:     });
+238: 
+239:     makeTile('tile_path_cross', (g) => {
+240:       g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+241:       g.fillStyle(0x92400E, 1);
+242:       g.fillRect(15, 6, 18, 36); g.fillRect(6, 15, 36, 18);
+243:       g.fillStyle(0x451A03, 1); g.fillRect(18, 18, 12, 12);
+244:       g.fillStyle(0xB45309, 1); g.fillRect(21, 21, 6, 6);
+245:     });
+246: 
+247:     makeTile('tile_path_single', (g) => {
+248:       g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+249:       g.fillStyle(0x9A6538, 1); g.fillRect(6, 6, 15, 15); g.fillRect(27, 6, 15, 15);
+250:       g.fillRect(6, 27, 15, 15); g.fillRect(27, 27, 15, 15);
+251:       g.fillStyle(0x7A480A, 1); g.fillRect(3, 3, 42, 3); g.fillRect(3, 42, 42, 3);
+252:     });
+253: 
+254:     makeTile('tile_path_stone', (g) => {
+255:       g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+256:       g.fillStyle(0x9A6538, 1);
+257:       g.fillRect(6, 6, 12, 12); g.fillRect(24, 9, 15, 12);
+258:       g.fillRect(9, 24, 15, 15); g.fillRect(27, 27, 15, 12);
+259:       g.fillStyle(0xC48E58, 1); g.fillRect(9, 9, 6, 6); g.fillRect(27, 12, 6, 6);
+260:       g.fillStyle(0x451A03, 1); g.fillRect(0, 0, 48, 3); g.fillRect(0, 45, 48, 3);
+261:     });
+262: 
+263:     makeTile('tile_fence_h', (g) => {
+264:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+265:       g.fillStyle(0x8B4513, 1); g.fillRect(0, 12, 48, 9); g.fillRect(0, 30, 48, 9);
+266:       g.fillStyle(0xD2691E, 1); g.fillRect(0, 12, 48, 3); g.fillRect(0, 30, 48, 3);
+267:       g.fillStyle(0x451A03, 1); g.fillRect(0, 18, 48, 3); g.fillRect(0, 36, 48, 3);
+268:       g.fillStyle(0x8B4513, 1); g.fillRect(3, 6, 9, 36); g.fillRect(36, 6, 9, 36);
+269:       g.fillStyle(0xD2691E, 1); g.fillRect(3, 6, 9, 3); g.fillRect(36, 6, 9, 3);
+270:     });
+271: 
+272:     makeTile('tile_fence_v', (g) => {
+273:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+274:       g.fillStyle(0x8B4513, 1); g.fillRect(12, 0, 9, 48); g.fillRect(30, 0, 9, 48);
+275:       g.fillStyle(0xD2691E, 1); g.fillRect(12, 0, 3, 48); g.fillRect(30, 0, 3, 48);
+276:       g.fillStyle(0x451A03, 1); g.fillRect(18, 0, 3, 48); g.fillRect(36, 0, 3, 48);
+277:       g.fillStyle(0x8B4513, 1); g.fillRect(6, 3, 36, 9); g.fillRect(6, 36, 36, 9);
+278:       g.fillStyle(0xD2691E, 1); g.fillRect(6, 3, 3, 9); g.fillRect(6, 36, 3, 9);
+279:     });
+280: 
+281:     makeTile('tile_fence_post', (g) => {
+282:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+283:       g.fillStyle(0x8B4513, 1); g.fillRect(18, 6, 12, 36);
+284:       g.fillStyle(0xD2691E, 1); g.fillRect(18, 6, 12, 6); g.fillRect(18, 6, 3, 36);
+285:       g.fillStyle(0x451A03, 1); g.fillRect(27, 6, 3, 36);
+286:       g.fillStyle(0x15803D, 1); g.fillRect(15, 39, 18, 6);
+287:     });
+288: 
+289:     makeTile('tile_fence_corner', (g) => {
+290:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+291:       g.fillStyle(0x8B4513, 1);
+292:       g.fillRect(18, 18, 30, 9); g.fillRect(18, 18, 9, 30);
+293:       g.fillRect(15, 12, 15, 24);
+294:       g.fillStyle(0xD2691E, 1); g.fillRect(15, 12, 15, 3); g.fillRect(18, 18, 30, 3);
+295:       g.fillStyle(0x451A03, 1); g.fillRect(18, 24, 30, 3); g.fillRect(24, 18, 3, 30);
+296:     });
+297: 
+298:     makeTile('tile_house_roof', (g) => {
+299:       g.fillStyle(0x991B1B, 1); g.fillRect(0, 0, 48, 48);
+300:       g.fillStyle(0xB91C1C, 1);
+301:       for (let y = 0; y < 48; y += 12) {
+302:         g.fillRect(0, y, 48, 6);
+303:       }
+304:       g.fillStyle(0xEF4444, 1);
+305:       for (let y = 0; y < 48; y += 12) {
+306:         for (let x = (y % 24 === 0 ? 0 : 12); x < 48; x += 24) {
+307:           g.fillRect(x, y, 12, 3);
+308:         }
+309:       }
+310:       g.fillStyle(0x7F1D1D, 1); g.fillRect(0, 45, 48, 3);
+311:     });
+312: 
+313:     makeTile('tile_house_wall', (g) => {
+314:       g.fillStyle(0xDC2626, 1); g.fillRect(0, 0, 48, 48);
+315:       g.fillStyle(0x7F1D1D, 1);
+316:       for (let x = 0; x < 48; x += 12) {
+317:         g.fillRect(x, 0, 2, 48);
+318:       }
+319:       g.fillStyle(0xF87171, 1);
+320:       for (let x = 2; x < 48; x += 12) {
+321:         g.fillRect(x, 0, 2, 48);
+322:       }
+323:     });
+324: 
+325:     makeTile('tile_house_door', (g) => {
+326:       g.fillStyle(0xDC2626, 1); g.fillRect(0, 0, 48, 48);
+327:       g.fillStyle(0x451A03, 1); g.fillRect(9, 6, 30, 42);
+328:       g.fillStyle(0x78350F, 1); g.fillRect(12, 9, 24, 39);
+329:       g.fillStyle(0x94A3B8, 1); g.fillRect(12, 18, 24, 3); g.fillRect(12, 33, 24, 3);
+330:       g.fillStyle(0xFDE047, 1); g.fillRect(30, 27, 4, 6);
+331:     });
+332: 
+333:     makeTile('tile_house_window', (g) => {
+334:       g.fillStyle(0xDC2626, 1); g.fillRect(0, 0, 48, 48);
+335:       g.fillStyle(0x451A03, 1); g.fillRect(9, 9, 30, 30);
+336:       g.fillStyle(0xFDE047, 1); g.fillRect(12, 12, 24, 24);
+337:       g.fillStyle(0xFEF08A, 1); g.fillRect(15, 15, 9, 9);
+338:       g.fillStyle(0x451A03, 1); g.fillRect(22, 12, 3, 24); g.fillRect(12, 22, 24, 3);
+339:     });
+340: 
+341:     makeTile('tile_shore_top', (g) => {
+342:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 24);
+343:       g.fillStyle(0x67E8F9, 1); g.fillRect(0, 24, 48, 6);
+344:       g.fillStyle(0xFFFFFF, 1); g.fillRect(0, 24, 48, 3);
+345:       g.fillStyle(0x0284C7, 1); g.fillRect(0, 30, 48, 18);
+346:     });
+347: 
+348:     makeTile('tile_shore_bottom', (g) => {
+349:       g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 18);
+350:       g.fillStyle(0x67E8F9, 1); g.fillRect(0, 18, 48, 6);
+351:       g.fillStyle(0xFFFFFF, 1); g.fillRect(0, 21, 48, 3);
+352:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 24, 48, 24);
+353:     });
+354: 
+355:     makeTile('tile_shore_left', (g) => {
+356:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 24, 48);
+357:       g.fillStyle(0x67E8F9, 1); g.fillRect(24, 0, 6, 48);
+358:       g.fillStyle(0xFFFFFF, 1); g.fillRect(24, 0, 3, 48);
+359:       g.fillStyle(0x0284C7, 1); g.fillRect(30, 0, 18, 48);
+360:     });
+361: 
+362:     makeTile('tile_shore_right', (g) => {
+363:       g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 18, 48);
+364:       g.fillStyle(0x67E8F9, 1); g.fillRect(18, 0, 6, 48);
+365:       g.fillStyle(0xFFFFFF, 1); g.fillRect(21, 0, 3, 48);
+366:       g.fillStyle(0x22C55E, 1); g.fillRect(24, 0, 24, 48);
+367:     });
+368: 
+369:     makeTile('tile_shore_corner', (g) => {
+370:       g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
+371:       g.fillStyle(0x0284C7, 1); g.fillRect(24, 24, 24, 24);
+372:       g.fillStyle(0x67E8F9, 1); g.fillRect(18, 24, 6, 24); g.fillRect(24, 18, 24, 6);
+373:       g.fillStyle(0xFFFFFF, 1); g.fillRect(21, 24, 3, 24); g.fillRect(24, 21, 24, 3);
+374:     });
+375: 
+376:     // ── FISHING SCENE TILEMAP TEXTURES ───────────────────────────────────────
+377:     makeTile('tile_sand', (g) => {
+378:       g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
+379:       g.fillStyle(0xF59E0B, 1);
+380:       g.fillRect(6, 9, 3, 3); g.fillRect(24, 18, 3, 3); g.fillRect(39, 6, 3, 3);
+381:       g.fillRect(15, 33, 3, 3); g.fillRect(33, 39, 3, 3);
+382:       g.fillStyle(0xFEF08A, 1);
+383:       g.fillRect(18, 6, 3, 3); g.fillRect(36, 21, 3, 3); g.fillRect(9, 27, 3, 3);
+384:     });
+385: 
+386:     makeTile('tile_sand_wet', (g) => {
+387:       g.fillStyle(0xD97706, 1); g.fillRect(0, 0, 48, 48);
+388:       g.fillStyle(0xB45309, 1);
+389:       g.fillRect(9, 6, 3, 3); g.fillRect(27, 15, 3, 3); g.fillRect(18, 36, 3, 3);
+390:       g.fillStyle(0x38BDF8, 1);
+391:       g.fillRect(15, 12, 6, 3); g.fillRect(33, 30, 6, 3); g.fillRect(6, 42, 6, 3);
+392:     });
+393: 
+394:     makeTile('tile_rock_shore', (g) => {
+395:       g.fillStyle(0xD97706, 1); g.fillRect(0, 0, 48, 48);
+396:       g.fillStyle(0x475569, 1); g.fillRect(6, 6, 36, 36);
+397:       g.fillStyle(0x64748B, 1); g.fillRect(9, 9, 24, 24);
+398:       g.fillStyle(0x94A3B8, 1); g.fillRect(12, 12, 12, 12);
+399:       g.fillStyle(0x334155, 1); g.fillRect(6, 36, 36, 6); g.fillRect(36, 6, 6, 36);
+400:       g.fillStyle(0x67E8F9, 1); g.fillRect(0, 0, 6, 48); g.fillRect(0, 0, 48, 6);
+401:     });
+402: 
+403:     makeTile('tile_pier_plank', (g) => {
+404:       g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
+405:       g.fillStyle(0x92400E, 1);
+406:       g.fillRect(0, 0, 48, 9); g.fillRect(0, 12, 48, 9);
+407:       g.fillRect(0, 24, 48, 9); g.fillRect(0, 36, 48, 9);
+408:       g.fillStyle(0x451A03, 1);
+409:       g.fillRect(0, 9, 48, 3); g.fillRect(0, 21, 48, 3);
+410:       g.fillRect(0, 33, 48, 3); g.fillRect(0, 45, 48, 3);
+411:       g.fillStyle(0x334155, 1);
+412:       g.fillRect(6, 3, 3, 3); g.fillRect(39, 3, 3, 3);
+413:       g.fillRect(6, 15, 3, 3); g.fillRect(39, 15, 3, 3);
+414:       g.fillRect(6, 27, 3, 3); g.fillRect(39, 27, 3, 3);
+415:       g.fillRect(6, 39, 3, 3); g.fillRect(39, 39, 3, 3);
+416:     });
+417: 
+418:     makeTile('tile_pier_post', (g) => {
+419:       g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+420:       g.fillStyle(0x78350F, 1); g.fillRect(12, 0, 24, 48);
+421:       g.fillStyle(0x92400E, 1); g.fillRect(12, 0, 6, 48);
+422:       g.fillStyle(0x451A03, 1); g.fillRect(30, 0, 6, 48);
+423:       g.fillStyle(0xD97706, 1); g.fillRect(12, 18, 24, 9);
+424:       g.fillStyle(0xB45309, 1); g.fillRect(12, 21, 24, 3);
+425:     });
+426: 
+427:     makeTile('tile_pier_lantern', (g) => {
+428:       g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+429:       g.fillStyle(0x475569, 1); g.fillRect(18, 24, 12, 24); g.fillRect(12, 18, 24, 6);
+430:       g.fillStyle(0xFDE047, 0.3); g.fillRect(3, 3, 42, 42);
+431:       g.fillStyle(0xF59E0B, 1); g.fillRect(15, 6, 18, 18);
+432:       g.fillStyle(0xFEF08A, 1); g.fillRect(18, 9, 12, 12);
+433:     });
+434: 
+435:     makeTile('tile_seashell', (g) => {
+436:       g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
+437:       g.fillStyle(0xF472B6, 1); g.fillRect(18, 18, 15, 15);
+438:       g.fillStyle(0xFFFFFF, 1); g.fillRect(21, 21, 9, 9);
+439:       g.fillStyle(0xDB2777, 1); g.fillRect(18, 24, 15, 3); g.fillRect(24, 18, 3, 15);
+440:     });
+441: 
+442:     makeTile('tile_starfish', (g) => {
+443:       g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
+444:       g.fillStyle(0xF97316, 1);
+445:       g.fillRect(21, 12, 6, 24); g.fillRect(12, 21, 24, 6);
+446:       g.fillRect(15, 15, 18, 18);
+447:       g.fillStyle(0xFFFFFF, 1);
+448:       g.fillRect(21, 21, 3, 3); g.fillRect(21, 15, 3, 3); g.fillRect(21, 27, 3, 3);
+449:     });
+450: 
+451:     makeTile('tile_driftwood', (g) => {
+452:       g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
+453:       g.fillStyle(0x78350F, 1); g.fillRect(6, 18, 36, 12);
+454:       g.fillStyle(0x64748B, 1); g.fillRect(9, 18, 12, 12); g.fillRect(27, 15, 6, 6);
+455:       g.fillStyle(0x451A03, 1); g.fillRect(6, 27, 36, 3);
+456:     });
+457: 
+458:     makeTile('tile_ocean_deep', (g) => {
+459:       g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+460:       g.fillStyle(0x0369A1, 1); g.fillRect(0, 24, 48, 24);
+461:       g.fillStyle(0x38BDF8, 1);
+462:       g.fillRect(6, 12, 12, 3); g.fillRect(27, 33, 15, 3); g.fillRect(18, 21, 9, 3);
+463:     });
+464: 
+465:     makeTile('tile_water_foam_border', (g) => {
+466:       g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
+467:       g.fillStyle(0x67E8F9, 1); g.fillRect(0, 0, 48, 12); g.fillRect(0, 24, 48, 6);
+468:       g.fillStyle(0xE0F2FE, 1); g.fillRect(0, 0, 48, 6);
+469:       g.fillStyle(0xFFFFFF, 1);
+470:       g.fillRect(6, 6, 6, 3); g.fillRect(24, 6, 9, 3); g.fillRect(39, 6, 6, 3);
+471:     });
+472: 
+473:     // ── ARCADE SCENE TILEMAP TEXTURES ────────────────────────────────────────
+474:     makeTile('tile_space_dark', (g) => {
+475:       g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+476:       g.fillStyle(0x1E1B4B, 0.4);
+477:       g.fillRect(0, 0, 48, 1); g.fillRect(0, 0, 1, 48);
+478:     });
+479: 
+480:     makeTile('tile_stars_far', (g) => {
+481:       g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+482:       g.fillStyle(0x38BDF8, 0.8);
+483:       g.fillRect(6, 9, 2, 2); g.fillRect(36, 15, 2, 2); g.fillRect(21, 39, 2, 2);
+484:       g.fillStyle(0xA855F7, 0.8);
+485:       g.fillRect(27, 6, 2, 2); g.fillRect(12, 27, 2, 2);
+486:       g.fillStyle(0xFFFFFF, 0.9);
+487:       g.fillRect(42, 33, 2, 2); g.fillRect(18, 18, 2, 2);
+488:     });
+489: 
+490:     makeTile('tile_stars_near', (g) => {
+491:       g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+492:       g.fillStyle(0x00FFFF, 1); g.fillRect(15, 12, 3, 9); g.fillRect(12, 15, 9, 3);
+493:       g.fillStyle(0xFFFFFF, 1); g.fillRect(15, 15, 3, 3);
+494:       g.fillStyle(0xF0ABFC, 1); g.fillRect(33, 30, 3, 9); g.fillRect(30, 33, 9, 3);
+495:       g.fillStyle(0xFFFFFF, 1); g.fillRect(33, 33, 3, 3);
+496:     });
+497: 
+498:     makeTile('nebula_purple', (g) => {
+499:       g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+500:       g.fillStyle(0x581C87, 0.5); g.fillRect(6, 6, 36, 36);

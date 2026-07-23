@@ -1,0 +1,425 @@
+4652: class ArcadeScene extends Phaser.Scene {
+4653:   constructor(){ super({key:'ArcadeScene'}); }
+4654: 
+4655:   preload(){
+4656:     PixelArtRenderer.generateAllTextures(this);
+4657:     PixelArtRenderer.generateTilemapTextures(this);
+4658:   }
+4659: 
+4660:   create(){
+4661:     this.cameras.main.fadeIn(300, 0, 0, 0);
+4662:     this.W = this.scale.width;
+4663:     this.H = this.scale.height;
+4664: 
+4665:     // Multi-layer Parallax Space Background
+4666:     // Layer 1: Dark Space Base Tile Grid
+4667:     for(let x = 0; x < this.W + TILE; x += TILE){
+4668:       for(let y = 0; y < this.H + TILE; y += TILE){
+4669:         this.add.image(x + TILE/2, y + TILE/2, 'tile_space_dark').setDisplaySize(TILE, TILE).setDepth(0);
+4670:       }
+4671:     }
+4672:     // Layer 2: Floating Nebulae
+4673:     const n1 = this.add.image(this.W * 0.25, this.H * 0.3, 'nebula_purple').setScale(3.5).setAlpha(0.35).setDepth(1);
+4674:     const n2 = this.add.image(this.W * 0.75, this.H * 0.6, 'nebula_cyan').setScale(4.0).setAlpha(0.35).setDepth(1);
+4675:     this.tweens.add({ targets: [n1, n2], alpha: { from: 0.25, to: 0.5 }, scale: { from: 3, to: 4.2 }, duration: 4000, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+4676: 
+4677:     // Layer 3: Planet Silhouettes
+4678:     this.add.image(90, 90, 'planet_ringed').setDisplaySize(64, 64).setDepth(2).setAlpha(0.8);
+4679:     this.add.image(this.W - 100, 110, 'planet_gas_giant').setDisplaySize(72, 72).setDepth(2).setAlpha(0.8);
+4680: 
+4681:     // Layer 4: Distant Stars & Parallax Near Stars Layer
+4682:     for(let x = 0; x < this.W + TILE; x += TILE * 2){
+4683:       for(let y = 0; y < this.H + TILE; y += TILE * 2){
+4684:         if((Math.floor(x/TILE) + Math.floor(y/TILE)) % 3 === 0){
+4685:           this.add.image(x + TILE/2, y + TILE/2, 'tile_stars_far').setDisplaySize(TILE, TILE).setDepth(3);
+4686:         }
+4687:       }
+4688:     }
+4689:     this.nearStarsGroup = this.add.group();
+4690:     for(let i = 0; i < 8; i++){
+4691:       const sx = Phaser.Math.Between(40, this.W - 40);
+4692:       const sy = Phaser.Math.Between(40, this.H - 40);
+4693:       const st = this.add.image(sx, sy, 'tile_stars_near').setDisplaySize(36, 36).setDepth(4);
+4694:       this.nearStarsGroup.add(st);
+4695:       this.tweens.add({ targets: st, alpha: { from: 0.4, to: 1.0 }, duration: 1200 + Math.random()*800, yoyo: true, repeat: -1 });
+4696:     }
+4697: 
+4698:     this.score = 0;
+4699:     this.playerHP = 100;
+4700:     this.hasTripleShot = false;
+4701:     this.hasShield = false;
+4702:     this.nukeCount = 1;
+4703: 
+4704:     // UI Header
+4705:     this.scoreText = this.add.text(20, 20, 'SCORE: 0', {fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#00FFFF'}).setDepth(10);
+4706:     this.hpText = this.add.text(20, 48, '❤️ HP: 100/100', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#EF4444'}).setDepth(10);
+4707:     this.powerText = this.add.text(20, 72, '💣 NUKES: 1 [PRESS B]', {fontFamily:'"Press Start 2P",monospace', fontSize:'12px', color:'#FDE047'}).setDepth(10);
+4708: 
+4709:     const exitTxt = this.add.text(this.W - 20, 20, '[ESC] EXIT', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#FF00FF', backgroundColor:'rgba(15,23,42,0.8)', padding:{x:8,y:4}})
+4710:       .setOrigin(1,0).setInteractive({useHandCursor:true}).setDepth(100);
+4711:     exitTxt.on('pointerdown', ()=>this.exitGame());
+4712:     this.input.keyboard.on('keydown-ESC', ()=>this.exitGame());
+4713: 
+4714:     // Nuke key [B]
+4715:     this.nukeKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
+4716: 
+4717:     // Player Hero Ship
+4718:     this.ship = this.add.sprite(this.W/2, this.H - 80, 'arcade_player_ship').setOrigin(0.5).setDepth(20);
+4719:     this.physics.add.existing(this.ship);
+4720:     this.ship.body.setCollideWorldBounds(true);
+4721:     this.ship.body.setSize(40, 40);
+4722: 
+4723:     // Shield aura graphic
+4724:     this.shieldAura = this.add.circle(this.ship.x, this.ship.y, 32, 0x38BDF8, 0.35).setStrokeStyle(3, 0x38BDF8).setVisible(false).setDepth(19);
+4725: 
+4726:     this.cursors = this.input.keyboard.createCursorKeys();
+4727:     this.keys = this.input.keyboard.addKeys('W,A,S,D');
+4728: 
+4729:     // Groups
+4730:     this.lasers = this.physics.add.group();
+4731:     this.bossBullets = this.physics.add.group();
+4732:     this.minions = this.physics.add.group();
+4733:     this.powerups = this.physics.add.group();
+4734:     this.wordOrbs = this.physics.add.group();
+4735: 
+4736:     this.physics.add.overlap(this.lasers, this.minions, this.hitMinion, null, this);
+4737:     this.physics.add.overlap(this.lasers, this.wordOrbs, this.hitWordOrb, null, this);
+4738:     this.physics.add.overlap(this.ship, this.bossBullets, this.hitPlayerWithBullet, null, this);
+4739:     this.physics.add.overlap(this.ship, this.powerups, this.collectPowerup, null, this);
+4740: 
+4741:     this.lastFired = 0;
+4742:     this.lastMinionSpawn = 0;
+4743:     this.lastBossBullet = 0;
+4744: 
+4745:     const all = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
+4746:     this.wordPool = all.length > 0 ? all : [{ko:'사과', en:'Apple'}, {ko:'우유', en:'Milk'}, {ko:'빵', en:'Bread'}];
+4747: 
+4748:     // Spawn BOSS
+4749:     this.spawnBoss();
+4750:   }
+4751: 
+4752:   spawnBoss(){
+4753:     this.bossHP = 600;
+4754:     this.maxBossHP = 600;
+4755:     this.bossPhase = 1; // 1: Bullet Hell, 2: Shield Spell Lock
+4756:     this.bossShielded = false;
+4757: 
+4758:     this.bossContainer = this.add.container(this.W/2, 120).setDepth(15);
+4759:     this.bossSprite = this.add.sprite(0, 0, 'alien_boss').setOrigin(0.5);
+4760:     this.bossName = this.add.text(0, -55, '🌌 KING HANGEUL ALIEN', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#EC4899', stroke:'#000', strokeThickness:4}).setOrigin(0.5);
+4761: 
+4762:     // Boss Shield Visual Barrier
+4763:     this.bossBarrier = this.add.circle(0, 0, 75, 0x38BDF8, 0.4).setStrokeStyle(4, 0x38BDF8).setVisible(false);
+4764: 
+4765:     this.bossContainer.add([this.bossSprite, this.bossName, this.bossBarrier]);
+4766:     this.physics.add.existing(this.bossContainer);
+4767:     this.bossContainer.body.setSize(120, 100);
+4768: 
+4769:     // Boss Health Bar Top HUD
+4770:     this.bossBarBg = this.add.rectangle(this.W/2, 35, 400, 16, 0x1E293B).setStrokeStyle(2, 0xEC4899).setDepth(50);
+4771:     this.bossBarFill = this.add.rectangle(this.W/2 - 200, 35, 400, 14, 0xEC4899).setOrigin(0, 0.5).setDepth(51);
+4772: 
+4773:     // Move Boss Left & Right
+4774:     this.tweens.add({ targets: this.bossContainer, x: {from: 140, to: this.W - 140}, duration: 4000, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+4775: 
+4776:     // Enable overlap between Lasers and Boss
+4777:     this.physics.add.overlap(this.lasers, this.bossContainer, this.hitBoss, null, this);
+4778:   }
+4779: 
+4780:   update(t, dt){
+4781:     // Player Movement
+4782:     let vx = 0, vy = 0;
+4783:     const speed = 420;
+4784:     if(this.cursors.left.isDown || this.keys.A.isDown) vx = -speed;
+4785:     if(this.cursors.right.isDown || this.keys.D.isDown) vx = speed;
+4786:     if(this.cursors.up.isDown || this.keys.W.isDown) vy = -speed;
+4787:     if(this.cursors.down.isDown || this.keys.S.isDown) vy = speed;
+4788: 
+4789:     this.ship.body.setVelocity(vx, vy);
+4790:     if(this.shieldAura.visible){
+4791:       this.shieldAura.setPosition(this.ship.x, this.ship.y);
+4792:     }
+4793: 
+4794:     // Parallax Starfield scrolling
+4795:     if (this.nearStarsGroup) {
+4796:       this.nearStarsGroup.getChildren().forEach(st => {
+4797:         st.y += 0.5;
+4798:         if (st.y > this.H + 20) st.y = -20;
+4799:       });
+4800:     }
+4801: 
+4802:     // Nuke detonation [B]
+4803:     if(Phaser.Input.Keyboard.JustDown(this.nukeKey) && this.nukeCount > 0){
+4804:       this.detonateNuke();
+4805:     }
+4806: 
+4807:     // Firing Lasers
+4808:     if(t > this.lastFired) {
+4809:       this.fireLaser();
+4810:       this.lastFired = t + (this.hasTripleShot ? 180 : 240);
+4811:     }
+4812: 
+4813:     // Boss Bullet Spawns (Phase 1 Bullet Hell)
+4814:     if(this.bossHP > 0 && !this.bossShielded && t > this.lastBossBullet){
+4815:       this.fireBossBulletPattern(t);
+4816:       this.lastBossBullet = t + 700;
+4817:     }
+4818: 
+4819:     // Spawn Minion invaders
+4820:     if(t > this.lastMinionSpawn){
+4821:       this.spawnMinion();
+4822:       this.lastMinionSpawn = t + Phaser.Math.Between(2500, 4500);
+4823:     }
+4824: 
+4825:     // Trigger Phase 2 Shield Spell Lock periodically
+4826:     if(!this.bossShielded && this.bossHP > 0 && Math.random() < 0.003){
+4827:       this.triggerShieldSpellLock();
+4828:     }
+4829: 
+4830:     // Clean up offscreen bullets
+4831:     this.lasers.children.entries.forEach(l => { if(l && l.y < -50) l.destroy(); });
+4832:     this.bossBullets.children.entries.forEach(b => { if(b && b.y > this.H + 50) b.destroy(); });
+4833:   }
+4834: 
+4835:   fireLaser(){
+4836:     const createL = (x, vy, vx = 0) => {
+4837:       const laser = this.add.sprite(x, this.ship.y - 25, 'laser_player').setOrigin(0.5);
+4838:       this.physics.add.existing(laser);
+4839:       this.lasers.add(laser);
+4840:       laser.body.setVelocity(vx, vy);
+4841:     };
+4842: 
+4843:     if(this.hasTripleShot){
+4844:       createL(this.ship.x - 15, -600, -100);
+4845:       createL(this.ship.x, -650, 0);
+4846:       createL(this.ship.x + 15, -600, 100);
+4847:     } else {
+4848:       createL(this.ship.x, -650, 0);
+4849:     }
+4850:   }
+4851: 
+4852:   fireBossBulletPattern(t){
+4853:     // Spiral & Radial Bullet Spreads
+4854:     const count = 7;
+4855:     for(let i=0; i<count; i++){
+4856:       const angle = (i / count) * Math.PI + Math.sin(t/300) * 0.5;
+4857:       const bullet = this.add.circle(this.bossContainer.x, this.bossContainer.y + 40, 8, 0xEC4899);
+4858:       this.physics.add.existing(bullet);
+4859:       this.bossBullets.add(bullet);
+4860:       const speed = 220;
+4861:       bullet.body.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
+4862:     }
+4863:   }
+4864: 
+4865:   spawnMinion(){
+4866:     const x = Phaser.Math.Between(60, this.W - 60);
+4867:     const alienKeys = ['alien_scout', 'alien_shooter', 'alien_elite'];
+4868:     const minion = this.add.sprite(x, -40, Phaser.Utils.Array.GetRandom(alienKeys)).setOrigin(0.5);
+4869:     this.physics.add.existing(minion);
+4870:     this.minions.add(minion);
+4871:     minion.body.setVelocityY(Phaser.Math.Between(120, 200));
+4872:   }
+4873: 
+4874:   hitMinion(laser, minion){
+4875:     laser.destroy();
+4876:     const mx = minion.x, my = minion.y;
+4877:     minion.destroy();
+4878:     this.score += 15;
+4879:     this.scoreText.setText('SCORE: ' + this.score);
+4880: 
+4881:     // Drop Power-up chance (40%)
+4882:     if(Math.random() < 0.4){
+4883:       const pTypes = ['🔫', '🛡️', '💣'];
+4884:       const pType = Phaser.Utils.Array.GetRandom(pTypes);
+4885:       const pMap = { '🔫': 'powerup_weapon', '🛡️': 'powerup_shield', '💣': 'powerup_nuke' };
+4886:       const pItem = this.add.sprite(mx, my, pMap[pType] || 'powerup_weapon').setOrigin(0.5);
+4887:       pItem.pType = pType;
+4888:       this.physics.add.existing(pItem);
+4889:       this.powerups.add(pItem);
+4890:       pItem.body.setVelocityY(100);
+4891:     }
+4892:   }
+4893: 
+4894:   collectPowerup(ship, powerup){
+4895:     const type = powerup.pType;
+4896:     powerup.destroy();
+4897: 
+4898:     if(type === '🔫'){
+4899:       this.hasTripleShot = true;
+4900:       showToast('🔫 TRIPLE SHOT POWER-UP!', 2000);
+4901:       this.time.delayedCall(8000, () => this.hasTripleShot = false);
+4902:     } else if(type === '🛡️'){
+4903:       this.hasShield = true;
+4904:       this.shieldAura.setVisible(true);
+4905:       showToast('🛡️ ENERGY SHIELD ACTIVATED!', 2000);
+4906:     } else if(type === '💣'){
+4907:       this.nukeCount++;
+4908:       this.powerText.setText(`💣 NUKES: ${this.nukeCount} [PRESS B]`);
+4909:       showToast('💣 ATOMIC BOMB ACQUIRED!', 2000);
+4910:     }
+4911:   }
+4912: 
+4913:   detonateNuke(){
+4914:     this.nukeCount--;
+4915:     this.powerText.setText(`💣 NUKES: ${this.nukeCount} [PRESS B]`);
+4916:     this.cameras.main.flash(300, 255, 255, 255);
+4917:     this.cameras.main.shake(300, 0.03);
+4918: 
+4919:     // Clear all boss bullets & minions
+4920:     this.bossBullets.clear(true, true);
+4921:     this.minions.clear(true, true);
+4922:     showToast('💣 BOOM! SCREEN CLEARED!', 2500);
+4923:   }
+4924: 
+4925:   triggerShieldSpellLock(){
+4926:     this.bossShielded = true;
+4927:     this.bossBarrier.setVisible(true);
+4928: 
+4929:     const targetWord = Phaser.Utils.Array.GetRandom(this.wordPool);
+4930:     const wrongs = this.wordPool.filter(w => w.ko !== targetWord.ko);
+4931:     Phaser.Utils.Array.Shuffle(wrongs);
+4932:     const options = Phaser.Utils.Array.Shuffle([targetWord, wrongs[0]||{ko:'우유'}, wrongs[1]||{ko:'빵'}, wrongs[2]||{ko:'밥'}]);
+4933: 
+4934:     // Show Spell Prompt Banner
+4935:     this.spellBanner = this.add.container(this.W/2, 170).setDepth(40);
+4936:     const sBg = this.add.rectangle(0, 0, 480, 45, 0x0F172A, 0.95).setStrokeStyle(3, 0x38BDF8);
+4937:     const sTxt = this.add.text(0, 0, `🎯 SHOOT THE KOREAN WORD FOR: "${targetWord.en}"`, {
+4938:       fontFamily:'"Press Start 2P",monospace', fontSize:'11px', color:'#FDE047'
+4939:     }).setOrigin(0.5);
+4940:     this.spellBanner.add([sBg, sTxt]);
+4941: 
+4942:     // Spawn 4 Word Orbs orbiting around Boss
+4943:     options.forEach((opt, idx) => {
+4944:       const angle = (idx / 4) * Math.PI * 2;
+4945:       const ox = this.bossContainer.x + Math.cos(angle) * 160;
+4946:       const oy = this.bossContainer.y + Math.sin(angle) * 160;
+4947: 
+4948:       const orbBg = this.add.rectangle(ox, oy, 110, 36, 0x1E293B, 0.9).setStrokeStyle(2, 0x38BDF8);
+4949:       const orbTxt = this.add.text(ox, oy, opt.ko, {
+4950:         fontFamily:'"Noto Sans KR",sans-serif', fontSize:'18px', color:'#FFFFFF', fontWeight:'bold'
+4951:       }).setOrigin(0.5);
+4952: 
+4953:       const container = this.add.container(0,0, [orbBg, orbTxt]).setDepth(35);
+4954:       container.word = opt;
+4955:       container.isCorrect = (opt.ko === targetWord.ko);
+4956:       this.physics.add.existing(container);
+4957:       container.body.setSize(110, 36);
+4958:       this.wordOrbs.add(container);
+4959: 
+4960:       // Orbit animation
+4961:       this.tweens.add({
+4962:         targets: container,
+4963:         x: { from: ox, to: ox + 40 },
+4964:         y: { from: oy, to: oy + 20 },
+4965:         duration: 2000 + idx*300,
+4966:         yoyo: true, repeat: -1, ease: 'Sine.InOut'
+4967:       });
+4968:     });
+4969:   }
+4970: 
+4971:   hitWordOrb(laser, orb){
+4972:     laser.destroy();
+4973:     const isCorrect = orb.isCorrect;
+4974:     const w = orb.word;
+4975: 
+4976:     this.wordOrbs.clear(true, true);
+4977:     if(this.spellBanner) this.spellBanner.destroy();
+4978: 
+4979:     if(isCorrect){
+4980:       playChiptuneSFX('quiz_correct');
+4981:       // Shield Shatter & Boss Stun!
+4982:       this.bossShielded = false;
+4983:       this.bossBarrier.setVisible(false);
+4984:       this.bossHP = Math.max(0, this.bossHP - 120);
+4985:       this.updateBossHPBar();
+4986: 
+4987:       showToast(`🎯 CRITICAL HIT! "${w.ko}" (${w.en}) SHATTERED SHIELD! +120 DMG!`, 3500);
+4988:       this.cameras.main.flash(200, 56, 189, 248);
+4989:     } else {
+4990:       playChiptuneSFX('quiz_wrong');
+4991:       showToast(`❌ WRONG WORD! Shield Reflected Damage!`, 2000);
+4992:       this.bossShielded = false;
+4993:       this.bossBarrier.setVisible(false);
+4994:     }
+4995:   }
+4996: 
+4997:   hitBoss(laser, boss){
+4998:     laser.destroy();
+4999:     if(this.bossShielded){
+5000:       showToast('🛡️ BOSS IS SHIELDED! SHOOT THE CORRECT WORD ORB!');
+5001:       return;
+5002:     }
+5003: 
+5004:     this.bossHP = Math.max(0, this.bossHP - 15);
+5005:     this.score += 10;
+5006:     this.scoreText.setText('SCORE: ' + this.score);
+5007:     this.updateBossHPBar();
+5008: 
+5009:     this.bossSprite.setTint(0xFF0000);
+5010:     this.time.delayedCall(100, () => this.bossSprite.clearTint());
+5011: 
+5012:     if(this.bossHP <= 0){
+5013:       this.bossDefeated();
+5014:     }
+5015:   }
+5016: 
+5017:   updateBossHPBar(){
+5018:     const pct = Math.max(0, this.bossHP / this.maxBossHP);
+5019:     this.bossBarFill.setSize(400 * pct, 14);
+5020:   }
+5021: 
+5022:   bossDefeated(){
+5023:     this.bossContainer.destroy();
+5024:     this.bossBarBg.destroy();
+5025:     this.bossBarFill.destroy();
+5026: 
+5027:     this.cameras.main.flash(500, 253, 224, 71);
+5028:     this.cameras.main.shake(400, 0.03);
+5029: 
+5030:     addGold(150);
+5031:     showToast('🎉 BOSS DEFEATED! VICTORY! +150 GOLD REWARD!', 5000);
+5032: 
+5033:     this.time.delayedCall(3000, () => this.exitGame());
+5034:   }
+5035: 
+5036:   hitPlayerWithBullet(ship, bullet){
+5037:     bullet.destroy();
+5038:     if(this.hasShield){
+5039:       this.hasShield = false;
+5040:       this.shieldAura.setVisible(false);
+5041:       showToast('🛡️ SHIELD ABSORBED HIT!');
+5042:       return;
+5043:     }
+5044: 
+5045:     this.playerHP = Math.max(0, this.playerHP - 20);
+5046:     this.hpText.setText(`❤️ HP: ${this.playerHP}/100`);
+5047:     this.cameras.main.shake(150, 0.02);
+5048: 
+5049:     this.ship.setTint(0xFF0000);
+5050:     this.time.delayedCall(150, () => this.ship.clearTint());
+5051: 
+5052:     if(this.playerHP <= 0){
+5053:       showToast('💀 SHIP DESTROYED IN SPACE!');
+5054:       this.exitGame();
+5055:     }
+5056:   }
+5057: 
+5058:   exitGame(){
+5059:     if (typeof leaderboardState !== 'undefined' && leaderboardState.personalBests) {
+5060:       if (this.score > (leaderboardState.personalBests.arcadeHighScore || 0)) {
+5061:         leaderboardState.personalBests.arcadeHighScore = this.score;
+5062:         if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
+5063:       }
+5064:     }
+5065:     const earned = Math.floor(this.score / 15);
+5066:     if(earned > 0){
+5067:       addGold(earned);
+5068:       showToast(`🕹️ Arcade Cleared: +${earned} Gold!`);
+5069:     }
+5070:     this.cameras.main.fadeOut(300, 0, 0, 0);
+5071:     this.scene.stop();
+5072:     this.scene.resume('FarmScene');
+5073:   }
+5074: }
+5075: 
+5076: // ═══════════════ DUNGEON CRAWLER ARPG SCENE ════════════════════════════════════

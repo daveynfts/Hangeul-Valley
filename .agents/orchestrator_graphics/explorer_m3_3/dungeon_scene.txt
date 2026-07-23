@@ -1,0 +1,394 @@
+5077: class DungeonScene extends Phaser.Scene {
+5078:   constructor(){ super({key:'DungeonScene'}); }
+5079:   
+5080:   preload(){
+5081:     PixelArtRenderer.generateAllTextures(this);
+5082:     PixelArtRenderer.generateTilemapTextures(this);
+5083:   }
+5084: 
+5085:   create(){
+5086:     this.cameras.main.fadeIn(300, 0, 0, 0);
+5087:     this.W = this.scale.width;
+5088:     this.H = this.scale.height;
+5089:     
+5090:     // Dark Stone Floor Grid, Mossy Perimeter Walls & Glowing Runes using Tilemaps
+5091:     for(let x = 0; x < this.W + TILE; x += TILE){
+5092:       for(let y = 0; y < this.H + TILE; y += TILE){
+5093:         const isBorder = (x < TILE || x >= this.W - TILE || y < TILE || y >= this.H - TILE);
+5094:         if (isBorder) {
+5095:           this.add.image(x + TILE/2, y + TILE/2, 'tile_dungeon_wall_moss').setDisplaySize(TILE, TILE).setDepth(1);
+5096:         } else {
+5097:           const rndVal = (Math.sin(x * 12.3 + y * 45.6) * 10000) % 1;
+5098:           const absRnd = Math.abs(rndVal);
+5099:           let floorKey = 'tile_dungeon_floor';
+5100:           if (absRnd < 0.15) floorKey = 'tile_dungeon_cracked';
+5101:           else if (absRnd > 0.90) floorKey = 'tile_dungeon_rune';
+5102:           this.add.image(x + TILE/2, y + TILE/2, floorKey).setDisplaySize(TILE, TILE).setDepth(0);
+5103:         }
+5104:       }
+5105:     }
+5106:     
+5107:     // Ambient Torch Lights at corners/walls
+5108:     [ 
+5109:       {x: TILE * 1.5, y: TILE * 1.5}, 
+5110:       {x: this.W - TILE * 1.5, y: TILE * 1.5}, 
+5111:       {x: TILE * 1.5, y: this.H - TILE * 1.5}, 
+5112:       {x: this.W - TILE * 1.5, y: this.H - TILE * 1.5},
+5113:       {x: this.W / 2, y: TILE * 1.5}
+5114:     ].forEach(t => {
+5115:       this.add.circle(t.x, t.y, 44, 0xF59E0B, 0.20).setDepth(2);
+5116:       const torch = this.add.image(t.x, t.y, 'dungeon_torch').setDisplaySize(36, 48).setDepth(3);
+5117:       this.tweens.add({ targets: torch, scaleY: { from: 0.95, to: 1.08 }, duration: 350 + Math.random()*200, yoyo: true, repeat: -1 });
+5118:     });
+5119: 
+5120:     // Player Hero
+5121:     this.playerHP = 100;
+5122:     this.maxPlayerHP = 100;
+5123:     this.lootedGold = 0;
+5124:     this.lootedScrolls = 0;
+5125:     this.monstersKilled = 0;
+5126: 
+5127:     this.player = this.add.sprite(this.W/2, this.H/2, 'player_walk_down_0').setOrigin(0.5);
+5128:     this.physics.add.existing(this.player);
+5129:     this.player.body.setCollideWorldBounds(true);
+5130:     this.player.body.setSize(30, 30);
+5131: 
+5132:     this.cursors = this.input.keyboard.createCursorKeys();
+5133:     this.keys = this.input.keyboard.addKeys('W,A,S,D');
+5134:     this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+5135: 
+5136:     this.monsters = this.physics.add.group();
+5137:     this.lootGroup = this.physics.add.group();
+5138: 
+5139:     // Physics overlaps
+5140:     this.physics.add.overlap(this.player, this.lootGroup, this.collectLoot, null, this);
+5141:     this.physics.add.overlap(this.player, this.monsters, this.hitPlayer, null, this);
+5142: 
+5143:     // Spawn timer for monsters
+5144:     this.lastMonsterSpawn = 0;
+5145:     this.invulnerableTime = 0;
+5146: 
+5147:     // Vocab pool
+5148:     const all = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
+5149:     this.wordPool = all.length > 0 ? all : [{ko:'한글', en:'Hangeul', hint:'📝'}];
+5150: 
+5151:     // HUD Header
+5152:     this.hpText = this.add.text(20, 20, '❤️ HP: 100/100', {fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#EF4444'}).setDepth(100);
+5153:     this.goldText = this.add.text(20, 50, '💰 GOLD: 0', {fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#F59E0B'}).setDepth(100);
+5154:     this.scrollText = this.add.text(20, 80, '📜 SCROLLS: 0', {fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#A855F7'}).setDepth(100);
+5155: 
+5156:     const exitBtn = this.add.text(this.W - 20, 20, '[ESC] LEAVE DUNGEON', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#EC4899'})
+5157:       .setOrigin(1,0).setInteractive({useHandCursor:true}).setDepth(100);
+5158:     exitBtn.on('pointerdown', () => this.exitDungeon());
+5159:     this.input.keyboard.on('keydown-ESC', () => this.exitDungeon());
+5160: 
+5161:     // Title Toast
+5162:     const title = this.add.text(this.W/2, this.H/2 - 60, '⚔️ ANCIENT DUNGEON\nWASD to Move | SPACE / Click to Slash!', {
+5163:       fontFamily:'"Press Start 2P",monospace', fontSize:'18px', color:'#EC4899', align:'center', lineHeight:1.5, stroke:'#000', strokeThickness:4
+5164:     }).setOrigin(0.5).setDepth(100);
+5165:     this.tweens.add({ targets:title, alpha:0, delay:2500, duration:1000, onComplete:()=>title.destroy() });
+5166: 
+5167:     // Click to Slash
+5168:     this.input.on('pointerdown', () => this.playerSlash());
+5169:   }
+5170: 
+5171:   update(t, dt){
+5172:     if(this.playerHP <= 0) return;
+5173: 
+5174:     // Movement
+5175:     let vx = 0, vy = 0;
+5176:     const speed = 280;
+5177:     if(this.cursors.left.isDown || this.keys.A.isDown) vx = -speed;
+5178:     if(this.cursors.right.isDown || this.keys.D.isDown) vx = speed;
+5179:     if(this.cursors.up.isDown || this.keys.W.isDown) vy = -speed;
+5180:     if(this.cursors.down.isDown || this.keys.S.isDown) vy = speed;
+5181: 
+5182:     this.player.body.setVelocity(vx, vy);
+5183: 
+5184:     if(vx !== 0 || vy !== 0){
+5185:       let animKey = 'player-walk-down';
+5186:       if(Math.abs(vx) >= Math.abs(vy)){
+5187:         animKey = vx < 0 ? 'player-walk-left' : 'player-walk-right';
+5188:       } else {
+5189:         animKey = vy < 0 ? 'player-walk-up' : 'player-walk-down';
+5190:       }
+5191:       this.player.setFlipX(false);
+5192:       this.player.anims.play(animKey, true);
+5193:     } else {
+5194:       this.player.anims.stop();
+5195:       this.player.setTexture('player_walk_down_0');
+5196:     }
+5197: 
+5198:     // Slash input
+5199:     if(Phaser.Input.Keyboard.JustDown(this.spaceKey)){
+5200:       this.playerSlash();
+5201:     }
+5202: 
+5203:     // Spawn Monster loop
+5204:     if(t > this.lastMonsterSpawn){
+5205:       this.spawnMonster();
+5206:       this.lastMonsterSpawn = t + Phaser.Math.Between(1200, 2200);
+5207:     }
+5208: 
+5209:     // Monster AI: move towards player
+5210:     this.monsters.children.entries.forEach(m => {
+5211:       if(m && m.active){
+5212:         this.physics.moveToObject(m, this.player, m.moveSpeed || 100);
+5213:       }
+5214:     });
+5215: 
+5216:     // Loot floating animation
+5217:     this.lootGroup.children.entries.forEach(l => {
+5218:       if(l && l.active && l.sparkle){
+5219:         l.sparkle.x = l.x; l.sparkle.y = l.y - 12;
+5220:       }
+5221:     });
+5222:   }
+5223: 
+5224:   playerSlash(){
+5225:     if(!this.player || !this.player.active) return;
+5226:     playChiptuneSFX('sword_swing');
+5227: 
+5228:     // Sword slash arc visual
+5229:     const slash = this.add.sprite(this.player.x, this.player.y - 10, 'laser_player').setOrigin(0.5).setDepth(50);
+5230:     this.tweens.add({
+5231:       targets: slash,
+5232:       scale: { from: 0.8, to: 1.6 },
+5233:       alpha: { from: 1, to: 0 },
+5234:       angle: { from: -45, to: 45 },
+5235:       duration: 220,
+5236:       ease: 'Power1',
+5237:       onComplete: () => slash.destroy()
+5238:     });
+5239: 
+5240:     // Check hit monsters in range (90px)
+5241:     const deadMonsters = [];
+5242:     this.monsters.children.entries.forEach(m => {
+5243:       if(m && m.active){
+5244:         const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, m.x, m.y);
+5245:         if(dist < 95){
+5246:           m.hp -= 35;
+5247:           m.setTint(0xFF0000);
+5248:           this.time.delayedCall(120, () => { if(m.active) m.clearTint(); });
+5249:           
+5250:           // Floating damage text
+5251:           const dmg = this.add.text(m.x, m.y - 20, '-35', {
+5252:             fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#22C55E', stroke:'#000', strokeThickness:3
+5253:           }).setOrigin(0.5).setDepth(60);
+5254:           this.tweens.add({ targets:dmg, y:m.y-50, alpha:0, duration:600, onComplete:()=>dmg.destroy() });
+5255: 
+5256:           if(m.hp <= 0) deadMonsters.push(m);
+5257:         }
+5258:       }
+5259:     });
+5260: 
+5261:     deadMonsters.forEach(m => this.killMonster(m));
+5262:   }
+5263: 
+5264:   spawnMonster(){
+5265:     const types = [
+5266:       { key: 'dungeon_green_slime', name: 'Slime', hp: 30, speed: 90 },
+5267:       { key: 'dungeon_goblin_warrior', name: 'Goblin Warrior', hp: 50, speed: 120 },
+5268:       { key: 'dungeon_skeleton_archer', name: 'Skeleton Archer', hp: 40, speed: 110 },
+5269:       { key: 'dungeon_boss', name: 'Mini Boss', hp: 80, speed: 70 }
+5270:     ];
+5271:     const type = Phaser.Utils.Array.GetRandom(types);
+5272:     const word = Phaser.Utils.Array.GetRandom(this.wordPool) || {ko:'한글', en:'Hangeul'};
+5273: 
+5274:     let x, y;
+5275:     if(Math.random() < 0.5){
+5276:       x = Math.random() < 0.5 ? 20 : this.W - 20;
+5277:       y = Phaser.Math.Between(40, this.H - 40);
+5278:     } else {
+5279:       x = Phaser.Math.Between(40, this.W - 40);
+5280:       y = Math.random() < 0.5 ? 20 : this.H - 20;
+5281:     }
+5282: 
+5283:     const monster = this.add.sprite(x, y, type.key).setOrigin(0.5).setDepth(10);
+5284:     this.physics.add.existing(monster);
+5285:     monster.body.setSize(36, 36);
+5286:     monster.hp = type.hp;
+5287:     monster.moveSpeed = type.speed;
+5288:     monster.word = word;
+5289: 
+5290:     this.monsters.add(monster);
+5291:   }
+5292: 
+5293:   killMonster(m){
+5294:     const mx = m.x, my = m.y;
+5295:     const word = m.word;
+5296:     const isBoss = m.isBoss;
+5297:     m.destroy();
+5298: 
+5299:     this.monstersKilled++;
+5300:     checkQuestProgress('kill', { count: 1 });
+5301: 
+5302:     if (isBoss) {
+5303:       addCoins(200);
+5304:       addGems(10);
+5305:       addHonor(50);
+5306:       if (this.playerHP >= 100) {
+5307:         addGems(15);
+5308:         showToast('🛡️ ZERO-DAMAGE DUNGEON BOSS KILL! +15 Bonus Gems!', 4500);
+5309:       }
+5310:       showToast('🎉 DUNGEON BOSS DEFEATED! +200 Coins, +10 Gems, +50 Honor!', 5000);
+5311:     }
+5312: 
+5313:     if (this.monstersKilled >= 5 && !this.bossPortal) {
+5314:       this.spawnBossPortal();
+5315:     }
+5316: 
+5317:     for(let i=0; i<8; i++){
+5318:       const p = this.add.rectangle(mx, my, 5, 5, 0xA855F7).setDepth(20);
+5319:       this.tweens.add({
+5320:         targets: p,
+5321:         x: mx + Phaser.Math.Between(-50, 50),
+5322:         y: my + Phaser.Math.Between(-50, 50),
+5323:         scale: 0,
+5324:         duration: 500,
+5325:         onComplete: () => p.destroy()
+5326:       });
+5327:     }
+5328: 
+5329:     // Drop Vocab Scroll 📜
+5330:     const lootKeys = ['loot_scroll', 'loot_coin', 'loot_gem', 'loot_potion', 'loot_chest'];
+5331:     const lKey = Phaser.Utils.Array.GetRandom(lootKeys);
+5332:     const loot = this.add.sprite(mx, my, lKey).setOrigin(0.5).setDepth(15);
+5333:     this.physics.add.existing(loot);
+5334:     loot.body.setSize(30, 30);
+5335:     loot.word = word;
+5336: 
+5337:     loot.sparkle = this.add.sprite(mx, my - 12, 'sparkle').setOrigin(0.5).setDepth(16);
+5338:     this.tweens.add({ targets: loot.sparkle, alpha: 0.2, yoyo: true, repeat: -1, duration: 400 });
+5339:     this.tweens.add({ targets: loot, y: my - 6, duration: 600, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+5340: 
+5341:     this.lootGroup.add(loot);
+5342:   }
+5343: 
+5344:   spawnBossPortal(){
+5345:     if(this.bossPortal) return;
+5346:     const portal = this.add.sprite(this.W/2, 100, 'dungeon_portal').setOrigin(0.5).setDepth(20);
+5347:     this.physics.add.existing(portal);
+5348:     portal.body.setSize(48, 48);
+5349:     this.bossPortal = portal;
+5350: 
+5351:     this.add.text(this.W/2, 140, 'BOSS CHAMBER PORTAL', {
+5352:       fontFamily:'"Press Start 2P",monospace', fontSize:'12px', color:'#EC4899', stroke:'#000', strokeThickness:3
+5353:     }).setOrigin(0.5).setDepth(21);
+5354: 
+5355:     this.physics.add.overlap(this.player, portal, () => {
+5356:       if(this.bossTriggered) return;
+5357:       this.bossTriggered = true;
+5358:       startBossGateChallenge('dungeon', 3, (passed) => {
+5359:         if(passed){
+5360:           this.spawnDungeonBoss();
+5361:         } else {
+5362:           this.bossTriggered = false;
+5363:           this.spawnMonster();
+5364:           this.spawnMonster();
+5365:         }
+5366:       });
+5367:     }, null, this);
+5368:   }
+5369: 
+5370:   spawnDungeonBoss(){
+5371:     if(this.bossPortal) this.bossPortal.destroy();
+5372:     showToast('👹 KING SEJONG\'S CORRUPTED SENTINEL SPAWNED!', 4000);
+5373:     const boss = this.add.sprite(this.W/2, 120, 'dungeon_boss').setOrigin(0.5).setDepth(30);
+5374:     this.physics.add.existing(boss);
+5375:     boss.body.setSize(60, 60);
+5376:     boss.hp = 300;
+5377:     boss.moveSpeed = 85;
+5378:     boss.isBoss = true;
+5379:     boss.word = { ko: '왕', en: 'King' };
+5380:     this.monsters.add(boss);
+5381:   }
+5382: 
+5383:   collectLoot(player, loot){
+5384:     const word = loot.word;
+5385:     if(loot.sparkle) loot.sparkle.destroy();
+5386:     loot.destroy();
+5387: 
+5388:     this.lootedScrolls++;
+5389:     this.lootedGold += 25;
+5390: 
+5391:     this.goldText.setText(`💰 COINS: ${this.lootedGold}`);
+5392:     this.scrollText.setText(`📜 SCROLLS: ${this.lootedScrolls}`);
+5393: 
+5394:     this.showLootFlashcard(word);
+5395:   }
+5396: 
+5397:   showLootFlashcard(w){
+5398:     if(this.currentCard) this.currentCard.destroy();
+5399: 
+5400:     const card = this.add.container(this.W/2, 70).setDepth(200);
+5401:     const bg = this.add.rectangle(0, 0, 280, 70, 0x1E1B4B, 0.95).setStrokeStyle(3, 0xA855F7).setOrigin(0.5);
+5402:     const tk = this.add.text(0, -12, w.ko, {fontFamily:'"Noto Sans KR", sans-serif', fontSize:'28px', color:'#FFFFFF', fontWeight:'bold'}).setOrigin(0.5);
+5403:     const te = this.add.text(0, 16, w.en, {fontFamily:'"Be Vietnam Pro", sans-serif', fontSize:'15px', color:'#C084FC', fontWeight:'bold'}).setOrigin(0.5);
+5404:     card.add([bg, tk, te]);
+5405: 
+5406:     this.currentCard = card;
+5407: 
+5408:     this.tweens.add({
+5409:       targets: card,
+5410:       scale: { from: 0.8, to: 1 },
+5411:       duration: 200,
+5412:       ease: 'Back.Out'
+5413:     });
+5414: 
+5415:     this.time.delayedCall(2200, () => {
+5416:       if(this.currentCard === card){
+5417:         this.tweens.add({
+5418:           targets: card,
+5419:           alpha: 0,
+5420:           y: 40,
+5421:           duration: 400,
+5422:           onComplete: () => card.destroy()
+5423:         });
+5424:       }
+5425:     });
+5426:   }
+5427: 
+5428:   hitPlayer(player, monster){
+5429:     if(this.time.now < this.invulnerableTime) return;
+5430:     this.invulnerableTime = this.time.now + 800;
+5431: 
+5432:     this.playerHP = Math.max(0, this.playerHP - 15);
+5433:     this.hpText.setText(`❤️ HP: ${this.playerHP}/100`);
+5434: 
+5435:     this.cameras.main.shake(200, 0.02);
+5436:     this.player.setTint(0xFF0000);
+5437:     this.time.delayedCall(200, () => { if(this.player.active) this.player.clearTint(); });
+5438: 
+5439:     if(this.playerHP <= 0){
+5440:       this.exitDungeon(true);
+5441:     }
+5442:   }
+5443: 
+5444:   exitDungeon(failed = false){
+5445:     const floorReached = Math.floor((this.monstersKilled || 0) / 5) + 1;
+5446:     if (typeof leaderboardState !== 'undefined' && leaderboardState.personalBests) {
+5447:       if (floorReached > (leaderboardState.personalBests.dungeonMaxFloor || 0)) {
+5448:         leaderboardState.personalBests.dungeonMaxFloor = floorReached;
+5449:         if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
+5450:       }
+5451:     }
+5452: 
+5453:     if(this.lootedGold > 0){
+5454:       addCoins(this.lootedGold);
+5455:     }
+5456: 
+5457:     if(failed){
+5458:       showToast(`💀 Defeated in Dungeon! Earned +${this.lootedGold} Coins & ${this.lootedScrolls} Vocab Scrolls!`, 4000);
+5459:     } else {
+5460:       showToast(`⚔️ Dungeon Cleared! Defeated ${this.monstersKilled} Monsters & Looted +${this.lootedGold} Coins!`, 4000);
+5461:     }
+5462: 
+5463:     this.cameras.main.fadeOut(300, 0, 0, 0);
+5464:     this.scene.stop();
+5465:     this.scene.resume('FarmScene');
+5466:   }
+5467: 
+5468: }
+5469: 
+5470: // ═══════════════ STARDEW-STYLE FISHING MINIGAME SCENE ════════════════════════

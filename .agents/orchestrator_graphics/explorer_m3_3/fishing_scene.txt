@@ -1,0 +1,372 @@
+5471: class FishingScene extends Phaser.Scene {
+5472:   constructor(){ super({key:'FishingScene'}); }
+5473: 
+5474:   preload(){
+5475:     PixelArtRenderer.generateAllTextures(this);
+5476:     PixelArtRenderer.generateTilemapTextures(this);
+5477:   }
+5478: 
+5479:   create(){
+5480:     this.cameras.main.fadeIn(300, 0, 0, 0);
+5481:     this.W = this.scale.width;
+5482:     this.H = this.scale.height;
+5483: 
+5484:     // Ocean Coastline & Beach Terrain using Tilemaps
+5485:     // 1. Deep Ocean Water grid in upper/middle area (y: 0 .. H - 144)
+5486:     for(let x = 0; x < this.W + TILE; x += TILE){
+5487:       for(let y = 0; y < this.H - 144; y += TILE){
+5488:         this.add.image(x + TILE/2, y + TILE/2, 'tile_ocean_deep').setDisplaySize(TILE, TILE).setDepth(0);
+5489:       }
+5490:     }
+5491:     // 2. Water Foam Border transition at y = H - 144
+5492:     for(let x = 0; x < this.W + TILE; x += TILE){
+5493:       this.add.image(x + TILE/2, this.H - 144 + TILE/2, 'tile_water_foam_border').setDisplaySize(TILE, TILE).setDepth(0);
+5494:     }
+5495:     // 3. Sandy Beach grid in lower shoreline area (y: H - 96 .. H)
+5496:     for(let x = 0; x < this.W + TILE; x += TILE){
+5497:       for(let y = this.H - 96; y < this.H + TILE; y += TILE){
+5498:         const sandKey = (Math.floor(x / TILE) + Math.floor(y / TILE)) % 3 === 0 ? 'tile_sand_wet' : 'tile_sand';
+5499:         this.add.image(x + TILE/2, y + TILE/2, sandKey).setDisplaySize(TILE, TILE).setDepth(0);
+5500:       }
+5501:     }
+5502: 
+5503:     // 4. Rocky Shore & Beach details scattered along shoreline
+5504:     this.add.image(60, this.H - 120, 'tile_rock_shore').setDisplaySize(TILE, TILE).setDepth(1);
+5505:     this.add.image(this.W - 60, this.H - 120, 'tile_rock_shore').setDisplaySize(TILE, TILE).setDepth(1);
+5506:     this.add.image(140, this.H - 60, 'tile_seashell').setDisplaySize(32, 32).setDepth(1);
+5507:     this.add.image(this.W - 150, this.H - 50, 'tile_starfish').setDisplaySize(32, 32).setDepth(1);
+5508:     this.add.image(220, this.H - 45, 'tile_driftwood').setDisplaySize(40, 24).setDepth(1);
+5509:     this.add.image(this.W - 240, this.H - 55, 'tile_seashell').setDisplaySize(28, 28).setDepth(1);
+5510: 
+5511:     // Sunlight Caustics Light Rays
+5512:     for(let i=0; i<6; i++){
+5513:       const ray = this.add.polygon(i * (this.W/5), 0, [0,0, 80,0, 140,this.H, 0,this.H], 0x38BDF8, 0.08).setOrigin(0).setDepth(1);
+5514:       this.tweens.add({ targets:ray, alpha:0.18, duration:3000+i*500, yoyo:true, repeat:-1, ease:'Sine.InOut' });
+5515:     }
+5516: 
+5517:     // Floating Water Bubbles
+5518:     for(let i=0; i<20; i++){
+5519:       const bx = Math.random()*this.W, by = Math.random()*(this.H - 144);
+5520:       const bubble = this.add.circle(bx, by, Phaser.Math.Between(2, 5), 0x67E8F9, 0.4).setDepth(1);
+5521:       this.tweens.add({
+5522:         targets: bubble,
+5523:         y: by - 100,
+5524:         alpha: 0.1,
+5525:         duration: 3000 + Math.random()*2000,
+5526:         repeat: -1,
+5527:         ease: 'Sine.InOut'
+5528:       });
+5529:     }
+5530: 
+5531:     // 5. Wooden Pier Dock with Lanterns
+5532:     const pierY = this.H - 75;
+5533:     for(let px = TILE/2; px < this.W; px += TILE){
+5534:       this.add.image(px, pierY, 'tile_pier_plank').setDisplaySize(TILE, TILE).setDepth(2);
+5535:     }
+5536:     // Lanterns on Dock Posts
+5537:     [100, this.W - 100].forEach(lx => {
+5538:       this.add.image(lx, pierY - 15, 'tile_pier_lantern').setDisplaySize(36, 48).setDepth(3);
+5539:     });
+5540: 
+5541:     this.player = this.add.sprite(this.W/2, this.H - 110, 'player_walk_down_0').setOrigin(0.5).setDepth(10);
+5542: 
+5543:     // State: 'CASTING', 'WAITING', 'REELING', 'CATCH_QUIZ'
+5544:     this.state = 'CASTING';
+5545:     this.catchProgress = 0;
+5546:     this.targetFish = null;
+5547: 
+5548:     // UI Header Frame
+5549:     const infoBg = this.add.rectangle(this.W/2, 60, 520, 50, 0x0F172A, 0.9)
+5550:       .setStrokeStyle(3, 0x38BDF8).setOrigin(0.5);
+5551:     this.infoTxt = this.add.text(this.W/2, 60, '🎣 CLICK OR PRESS SPACE TO CAST LINE!', {
+5552:       fontFamily:'"Press Start 2P",monospace', fontSize:'13px', color:'#FDE047', align:'center'
+5553:     }).setOrigin(0.5);
+5554: 
+5555:     const exitBtn = this.add.text(this.W - 20, 20, '[ESC] LEAVE POND', {
+5556:       fontFamily:'"Press Start 2P",monospace', fontSize:'13px', color:'#7DD3FC', backgroundColor:'rgba(15,23,42,0.8)', padding:{x:8,y:4}
+5557:     }).setOrigin(1,0).setInteractive({useHandCursor:true}).setDepth(100);
+5558:     exitBtn.on('pointerdown', () => this.exitFishing());
+5559:     this.input.keyboard.on('keydown-ESC', () => this.exitFishing());
+5560: 
+5561:     this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+5562:     this.input.on('pointerdown', () => this.handleAction());
+5563: 
+5564:     this.buildTensionBar();
+5565:   }
+5566: 
+5567:   buildTensionBar(){
+5568:     this.barX = this.W/2 + 200;
+5569:     this.barY = this.H/2;
+5570:     this.barHeight = 260;
+5571:     this.barWidth = 44;
+5572: 
+5573:     this.meterBg = this.add.rectangle(this.barX, this.barY, this.barWidth, this.barHeight, 0x0F172A, 0.9)
+5574:       .setStrokeStyle(3, 0x38BDF8).setVisible(false);
+5575: 
+5576:     // Green Catching Zone (WIDER 110px FOR EASY & SMOOTH GAMEPLAY)
+5577:     this.catchZoneHeight = 110;
+5578:     this.catchZoneY = this.barY + this.barHeight/2 - this.catchZoneHeight/2;
+5579:     this.catchZone = this.add.rectangle(this.barX, this.catchZoneY, this.barWidth - 4, this.catchZoneHeight, 0x22C55E, 0.75)
+5580:       .setStrokeStyle(2, 0x4ADE80).setOrigin(0.5, 0).setVisible(false);
+5581: 
+5582:     // Fish Icon inside bar
+5583:     this.fishIconY = this.barY;
+5584:     this.fishIcon = this.add.sprite(this.barX, this.fishIconY, 'fishing_salmon')
+5585:       .setOrigin(0.5).setVisible(false);
+5586: 
+5587:     // Progress Bar (Left of tension bar)
+5588:     this.pbBg = this.add.rectangle(this.barX - 35, this.barY, 16, this.barHeight, 0x1E293B)
+5589:       .setStrokeStyle(2, 0x38BDF8).setVisible(false);
+5590:     this.pbFill = this.add.rectangle(this.barX - 35, this.barY + this.barHeight/2, 14, 0, 0x38BDF8)
+5591:       .setOrigin(0.5, 1).setVisible(false);
+5592: 
+5593:     // Dynamic "HOLD SPACE" helper label next to tension bar
+5594:     this.holdTip = this.add.text(this.barX - 110, this.barY, 'HOLD SPACE\nTO REEL!', {
+5595:       fontFamily:'"Press Start 2P",monospace', fontSize:'10px', color:'#4ADE80', align:'center', stroke:'#000', strokeThickness:3
+5596:     }).setOrigin(0.5).setVisible(false);
+5597:   }
+5598: 
+5599:   handleAction(){
+5600:     if(this.state === 'CASTING'){
+5601:       this.castLine();
+5602:     }
+5603:   }
+5604: 
+5605:   castLine(){
+5606:     playChiptuneSFX('fishing_pull');
+5607:     this.state = 'WAITING';
+5608:     this.infoTxt.setText('⏳ Waiting for a bite...');
+5609: 
+5610:     // Floating bobber with water ripples
+5611:     this.bobber = this.add.sprite(this.W/2 + Phaser.Math.Between(-60, 60), this.H/2 + 20, 'fishing_bobber').setOrigin(0.5);
+5612:     this.tweens.add({ targets: this.bobber, y: this.H/2 + 28, duration: 600, yoyo: true, repeat: -1 });
+5613: 
+5614:     const waitTime = Phaser.Math.Between(1500, 3000);
+5615:     this.time.delayedCall(waitTime, () => {
+5616:       if(this.state !== 'WAITING') return;
+5617:       this.triggerBite();
+5618:     });
+5619:   }
+5620: 
+5621:   triggerBite(){
+5622:     playChiptuneSFX('fishing_pull');
+5623:     this.state = 'REELING';
+5624:     this.infoTxt.setText('❗ BITE! Hold SPACE to keep fish in Green Zone!');
+5625: 
+5626:     const ex = this.add.text(this.bobber.x, this.bobber.y - 35, '💦 BITE!', {
+5627:       fontFamily:'"Press Start 2P",monospace', fontSize:'24px', color:'#EF4444', stroke:'#000', strokeThickness:4
+5628:     }).setOrigin(0.5);
+5629:     this.tweens.add({ targets:ex, scale:1.4, alpha:0, duration:800, onComplete:()=>ex.destroy() });
+5630: 
+5631:     // Show Tension Bar & Helpers
+5632:     this.meterBg.setVisible(true);
+5633:     this.catchZone.setVisible(true);
+5634:     this.fishIcon.setVisible(true);
+5635:     this.pbBg.setVisible(true);
+5636:     this.pbFill.setVisible(true);
+5637:     this.holdTip.setVisible(true);
+5638: 
+5639:     this.catchProgress = 0.45; // Start 45% full
+5640:     this.targetFish = Phaser.Utils.Array.GetRandom(FISH_DB);
+5641:     const fishTexMap = {
+5642:       '연어': 'fishing_salmon',
+5643:       '고등어': 'fishing_mackerel',
+5644:       '오징어': 'fishing_squid',
+5645:       '잉어': 'fishing_carp',
+5646:       '새우': 'fishing_shrimp',
+5647:       '문어': 'fishing_octopus',
+5648:       '조개': 'fishing_clam',
+5649:       '황금물고기': 'fishing_golden_fish'
+5650:     };
+5651:     const texKey = fishTexMap[this.targetFish.ko] || 'fishing_salmon';
+5652:     this.fishIcon.setTexture(texKey);
+5653: 
+5654:     this.catchZoneVelocity = 0;
+5655:   }
+5656: 
+5657:   update(t, dt){
+5658:     if(this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey) && this.state === 'CASTING'){
+5659:       this.castLine();
+5660:     }
+5661: 
+5662:     if(this.state !== 'REELING') return;
+5663: 
+5664:     // Smooth Tension Zone control with SPACE or Mouse Hold
+5665:     const isHolding = this.spaceKey.isDown || this.input.activePointer.isDown;
+5666:     if(isHolding){
+5667:       this.catchZoneVelocity -= 0.5;
+5668:     } else {
+5669:       this.catchZoneVelocity += 0.4;
+5670:     }
+5671:     this.catchZoneVelocity *= 0.90;
+5672:     this.catchZoneY = Phaser.Math.Clamp(this.catchZoneY + this.catchZoneVelocity, this.barY - this.barHeight/2, this.barY + this.barHeight/2 - this.catchZoneHeight);
+5673:     this.catchZone.setY(this.catchZoneY);
+5674: 
+5675:     // Smooth Sinewave Fish Movement (Smooth & Predictable!)
+5676:     const fishTargetY = this.barY + Math.sin(t / 600) * 75;
+5677:     this.fishIconY += (fishTargetY - this.fishIconY) * 0.08;
+5678:     this.fishIcon.setY(this.fishIconY);
+5679: 
+5680:     // Check if Fish is inside Catch Zone
+5681:     const fishTop = this.fishIconY - 10, fishBot = this.fishIconY + 10;
+5682:     const zoneTop = this.catchZoneY, zoneBot = this.catchZoneY + this.catchZoneHeight;
+5683:     const inside = fishTop >= zoneTop && fishBot <= zoneBot;
+5684: 
+5685:     if(inside){
+5686:       this.catchProgress = Math.min(1.0, this.catchProgress + 0.012); // Fills fast in ~2 seconds!
+5687:       this.catchZone.setFillStyle(0x22C55E, 0.85);
+5688:       this.holdTip.setText('🟢 REELING IN!').setColor('#4ADE80');
+5689:     } else {
+5690:       this.catchProgress = Math.max(0.0, this.catchProgress - 0.0015); // Very forgiving penalty!
+5691:       this.catchZone.setFillStyle(0xEF4444, 0.85);
+5692:       this.holdTip.setText('⚠️ HOLD SPACE!').setColor('#EF4444');
+5693:     }
+5694: 
+5695:     // Update Progress Bar
+5696:     const currentH = this.barHeight * this.catchProgress;
+5697:     this.pbFill.setSize(14, currentH);
+5698: 
+5699:     if(this.catchProgress >= 1.0){
+5700:       this.startVocabChallenge();
+5701:     } else if(this.catchProgress <= 0.0){
+5702:       this.loseFish();
+5703:     }
+5704:   }
+5705: 
+5706:   startVocabChallenge(){
+5707:     this.state = 'CATCH_QUIZ';
+5708:     this.hideTensionBar();
+5709: 
+5710:     const fish = this.targetFish;
+5711:     this.infoTxt.setText(`🐟 Reeled in ${fish.hint} ${fish.ko} [${fish.rom}]! Answer to Catch!`);
+5712: 
+5713:     // Pick 3 random wrong fish choices
+5714:     const wrongs = FISH_DB.filter(f => f.ko !== fish.ko);
+5715:     Phaser.Utils.Array.Shuffle(wrongs);
+5716:     const choices = Phaser.Utils.Array.Shuffle([fish, wrongs[0], wrongs[1], wrongs[2]]);
+5717: 
+5718:     // Render Quiz Card Overlay
+5719:     const container = this.add.container(this.W/2, this.H/2).setDepth(200);
+5720:     const bg = this.add.rectangle(0, 0, 360, 240, 0x0F172A, 0.95).setStrokeStyle(3, 0x38BDF8).setOrigin(0.5);
+5721:     const title = this.add.text(0, -90, `What is the English for "${fish.ko}"?`, {
+5722:       fontFamily:'"Press Start 2P",monospace', fontSize:'12px', color:'#38BDF8', align:'center'
+5723:     }).setOrigin(0.5);
+5724: 
+5725:     container.add([bg, title]);
+5726: 
+5727:     choices.forEach((c, idx) => {
+5728:       const cx = (idx % 2 === 0 ? -85 : 85);
+5729:       const cy = (idx < 2 ? -30 : 30);
+5730:       const btnBg = this.add.rectangle(cx, cy, 150, 44, 0x1E293B).setStrokeStyle(2, 0x0284C7).setInteractive({useHandCursor:true});
+5731:       const txt = this.add.text(cx, cy, c.en, {fontFamily:'"Be Vietnam Pro",sans-serif', fontSize:'15px', color:'#FFFFFF', fontWeight:'bold'}).setOrigin(0.5);
+5732:       
+5733:       btnBg.on('pointerdown', () => {
+5734:         if(c.ko === fish.ko){
+5735:           playChiptuneSFX('quiz_correct');
+5736:           btnBg.setFillStyle(0x15803D);
+5737:           this.time.delayedCall(400, () => {
+5738:             container.destroy();
+5739:             this.catchSuccess(fish);
+5740:           });
+5741:         } else {
+5742:           playChiptuneSFX('quiz_wrong');
+5743:           btnBg.setFillStyle(0xB91C1C);
+5744:           this.cameras.main.shake(150, 0.01);
+5745:         }
+5746:       });
+5747: 
+5748:       container.add([btnBg, txt]);
+5749:     });
+5750:   }
+5751: 
+5752:   catchSuccess(fish){
+5753:     playChiptuneSFX('quiz_correct');
+5754:     playChiptuneSFX('harvest');
+5755:     fishAlbumSave[fish.ko] = (fishAlbumSave[fish.ko] || 0) + 1;
+5756:     addCoins(35);
+5757: 
+5758:     if (typeof addIngredient === 'function') addIngredient(fish.ko, 1);
+5759:     if (typeof addPetXP === 'function') addPetXP(15);
+5760: 
+5761:     if (fish.rarity === 'Legendary' || fish.ko === '황금물고기') {
+5762:       addGems(5);
+5763:       showToast(`🌟 LEGENDARY CATCH! ${fish.hint} ${fish.ko} (${fish.en})! +35 Coins & +5 Gems!`, 4500);
+5764:     } else {
+5765:       showToast(`🎉 Caught ${fish.hint} ${fish.ko} (${fish.en})! +35 Coins!`, 4000);
+5766:     }
+5767: 
+5768:     checkQuestProgress('fish', { count: 1 });
+5769: 
+5770:     if(this.bobber) this.bobber.destroy();
+5771: 
+5772:     this.state = 'CASTING';
+5773:     this.infoTxt.setText('🎣 Caught! Press SPACE / Click to Cast Again!');
+5774:   }
+5775: 
+5776: 
+5777:   loseFish(){
+5778:     this.state = 'CASTING';
+5779:     this.hideTensionBar();
+5780:     if(this.bobber) this.bobber.destroy();
+5781:     showToast('💨 The fish got away! Try again.');
+5782:     this.infoTxt.setText('🎣 Click or Press SPACE to Cast Line Again!');
+5783:   }
+5784: 
+5785:   hideTensionBar(){
+5786:     this.meterBg.setVisible(false);
+5787:     this.catchZone.setVisible(false);
+5788:     this.fishIcon.setVisible(false);
+5789:     this.pbBg.setVisible(false);
+5790:     this.pbFill.setVisible(false);
+5791:     if(this.holdTip) this.holdTip.setVisible(false);
+5792:   }
+5793: 
+5794:   exitFishing(){
+5795:     this.cameras.main.fadeOut(300, 0, 0, 0);
+5796:     this.scene.stop();
+5797:     this.scene.resume('FarmScene');
+5798:   }
+5799: }
+5800: 
+5801: // ══════════════ FISH ALBUM OVERLAY LOGIC ══════════════════════════════════════
+5802: window.openFishAlbum = function(){
+5803:   playChiptuneSFX('click');
+5804:   const overlay = document.getElementById('fish-album-overlay');
+5805:   const grid = document.getElementById('fish-album-grid');
+5806:   if(!overlay || !grid) return;
+5807: 
+5808:   grid.innerHTML = '';
+5809:   FISH_DB.forEach(f => {
+5810:     const count = fishAlbumSave[f.ko] || 0;
+5811:     const unlocked = count > 0;
+5812:     const card = document.createElement('div');
+5813:     card.className = `fish-card ${unlocked ? 'unlocked' : 'locked'}`;
+5814:     card.innerHTML = `
+5815:       <div class="fish-card-icon">${f.hint}</div>
+5816:       <div class="fish-card-ko">${unlocked ? f.ko : '???'}</div>
+5817:       <div class="fish-card-rom">[${f.rom}]</div>
+5818:       <div class="fish-card-en">${unlocked ? f.en : 'Locked'}</div>
+5819:       <div class="fish-card-catches">${unlocked ? `Caught ×${count}` : '🔒 Uncaught'}</div>`;
+5820:     grid.appendChild(card);
+5821:   });
+5822: 
+5823:   overlay.classList.add('visible');
+5824: };
+5825: 
+5826: window.closeFishAlbum = function(){
+5827:   playChiptuneSFX('click');
+5828:   const overlay = document.getElementById('fish-album-overlay');
+5829:   if(overlay) overlay.classList.remove('visible');
+5830: };
+5831: 
+5832: // ═══════════════ PHASER CONFIG ════════════════════════════════════════════════
+5833: const config={
+5834:   type:Phaser.AUTO,
+5835:   width:window.innerWidth, height:window.innerHeight,
+5836:   backgroundColor:'#3A7015',
+5837:   render:{pixelArt:true, antialias:false, antialiasGL:false, roundPixels:true},
+5838:   physics:{default:'arcade',arcade:{gravity:{y:0},debug:false}},
+5839:   scene:[FarmScene, ArcadeScene, DungeonScene, FishingScene],
+5840:   parent:document.body,
+5841:   scale:{mode:Phaser.Scale.RESIZE, autoCenter:Phaser.Scale.CENTER_BOTH},
+5842: };

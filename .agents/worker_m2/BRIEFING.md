@@ -1,53 +1,57 @@
-# BRIEFING — 2026-07-22T16:59:21Z
+# BRIEFING — 2026-07-22T17:58:11Z
 
 ## Mission
-Implement Requirements R1 (Triple Currency Economy: Coins, Gems, Honor; save v4 migration; rebalanced sinks & anti-farm diminishing returns) & R2 (Korean-Gated Progression & Quest System: Hard Lock zones, Shop purchase quiz gates, Boss attempt gates, 6-Act Main Story + Daily/Weekly side quests, Quest Log UI overlay in 64-Bit Retro Glassmorphism).
+Implement Milestone R2: Tilemap Terrain & Environment Art in `game.js`. Generate 48x48 procedural tilemap textures via Phaser 3 Graphics API in `PixelArtRenderer.generateTilemapTextures(scene)` and integrate into `FarmScene`, `FishingScene`, `ArcadeScene`, and `DungeonScene`. Sync to `assets/game.js` and verify tests.
 
 ## 🔒 My Identity
 - Archetype: implementer, qa, specialist
 - Roles: implementer, qa, specialist
 - Working directory: C:\VibeCode\Hangeul Valley\.agents\worker_m2\
-- Original parent: 1ed8fa99-4393-43b4-b954-c485a864f0e6
-- Milestone: Milestone 2 R1 & R2 (Triple Currency & Progression/Quests)
+- Original parent: ef5d12a7-5e12-4e31-bc78-fb6dde5a6b17
+- Milestone: Milestone R2 (Tilemap Terrain & Environment Art)
 
 ## 🔒 Key Constraints
 - CODE_ONLY mode, no external internet queries.
 - Do not cheat, do not hardcode mock results. Genuine implementation only.
-- Node syntax check: `node -c game.js` must pass with 0 syntax errors.
-- Save data migration: upgrade save schema `v` to `4`, preserve `gold` getter/setter alias for backward compatibility.
-- Hard lock UI toast/modal when attempting locked zones.
-- Quest overlay `#quest-overlay` styled in 64-Bit Retro Glassmorphism (`.glass-modal`, `.glass-hud`, `.neon-border`, `.pixel-art-detail`).
+- Node syntax check: `node -c game.js` and `node -c assets/game.js` must pass.
+- Sync `game.js` to `assets/game.js`.
+- All test suites (`test_currency_save.js`, `test_gating_quests.js`, `test_r3_r4_systems.js`) must pass 100%.
 
 ## Current Parent
-- Conversation ID: 1ed8fa99-4393-43b4-b954-c485a864f0e6
-- Updated: 2026-07-22T16:59:21Z
+- Conversation ID: ef5d12a7-5e12-4e31-bc78-fb6dde5a6b17
+- Updated: 2026-07-22T17:58:11Z
 
 ## Task Summary
 - **What to build**:
-  - Triple Currency Economy (Coins, Gems, Honor), Save schema v4 migration, backward compatible gold alias. Rebalanced sinks & anti-farm diminishing returns.
-  - Hard Lock Zone Unlocks (80% SRS Word Mastery in preceding level to unlock Arcade (L1), Fishing (L2), Dungeon (L3), Spell Duel (L4)).
-  - Shop Purchase Quiz Gates (3-question Korean translation quiz on `buyLevel`).
-  - Boss Attempt Gates (3-word timed quiz for Dungeon Boss, 5-word quiz for Spell Duel Necromancer).
-  - Quest System (6-Act Main Storyline + Daily 24h & Weekly 7d reset side quests) + Quest Log UI overlay (`#quest-overlay`).
+  1. `PixelArtRenderer.generateTilemapTextures(scene)` in `game.js` building 48x48 procedural textures via `make.graphics()`, `fillRect()`, `generateTexture()` for:
+     - `FarmScene`: `tile_grass_base`, `tile_grass_flowers`, `tile_grass_clover`, `tile_path_*`, `tile_fence_*`, `tile_house_*`, `tile_shore_*`.
+     - `FishingScene`: `tile_sand`, `tile_sand_wet`, `tile_rock_shore`, `tile_pier_plank`, `tile_pier_post`, `tile_pier_lantern`, beach details (seashells, starfish, driftwood), `tile_ocean_deep`, `tile_water_foam_border`.
+     - `ArcadeScene`: `tile_space_dark`, `tile_stars_far`, `tile_stars_near`, `nebula_purple`, `nebula_cyan`, `planet_ringed`, `planet_gas_giant`.
+     - `DungeonScene`: `tile_dungeon_floor`, `tile_dungeon_cracked`, `tile_dungeon_wall_moss`, `dungeon_torch`, `tile_dungeon_rune`.
+  2. Integrate tilemaps into scenes:
+     - Refactor `FarmScene._drawWorld()`
+     - Refactor `FishingScene.create()`
+     - Refactor `ArcadeScene.create()`
+     - Refactor `DungeonScene.create()`
+  3. Call `PixelArtRenderer.generateTilemapTextures(this)` in scene `preload()`/`create()` methods.
+  4. Run syntax checks and test suite. Sync to `assets/game.js`.
 - **Success criteria**:
-  - `node -c game.js` passes with 0 syntax errors.
-  - Save data migration from v3 to v4 tested and working.
-  - All R1 & R2 requirements implemented cleanly and accurately.
+  - `node -c game.js` and `node -c assets/game.js` pass with 0 syntax errors.
+  - Test suites pass 100%.
   - Handoff report written to `C:/VibeCode/Hangeul Valley/.agents/worker_m2/handoff.md`.
 
 ## Change Tracker
 - **Files modified**:
-  - `C:\VibeCode\Hangeul Valley\save_data.json`: Upgraded schema to version 4 (`v: 4`) with `currencies: { coins: 85, gems: 0, honor: 0 }`, `gold: 85`, `quests: { ... }`.
-  - `C:\VibeCode\Hangeul Valley\index.html`: Added 64-Bit Retro Glassmorphism styles, multi-currency HUD elements, `#quest-overlay` modal, `#shop-quiz-overlay`, `#boss-gate-overlay`.
-  - `C:\VibeCode\Hangeul Valley\game.js`: Implemented Triple Currency Economy, save v4 migration (`migrateSaveData`), 80% SRS Mastery hard lock zone gating (`isZoneUnlocked`), shop quiz gate (`startShopQuizGate`), boss entrance gates (`startBossGateChallenge`), 6-Act Main Storyline + Daily/Weekly side quest system (`checkQuestProgress`, `openQuestOverlay`), and anti-farm diminishing returns.
-  - `C:\VibeCode\Hangeul Valley\.agents\worker_m2\handoff.md`: Created detailed 5-component handoff report.
-- **Build status**: PASS (`node -c game.js` exited with 0 syntax errors)
+  - `C:\VibeCode\Hangeul Valley\game.js`: Added `PixelArtRenderer.generateTilemapTextures(scene)` generating 44 procedural 48x48 tilemap textures via Phaser 3 Graphics API. Refactored `FarmScene._drawWorld()`, `FishingScene.create()`, `ArcadeScene.create()`, and `DungeonScene.create()` to integrate rich tilemaps, parallax space scrolling, ocean coastlines, and dungeon stone walls. Called `generateTilemapTextures(this)` in scene `preload()` methods.
+  - `C:\VibeCode\Hangeul Valley\assets\game.js`: Synced from `game.js`.
+  - `C:\VibeCode\Hangeul Valley\.agents\worker_m2\handoff.md`: Handoff report.
+- **Build status**: PASS (`node -c game.js` & `node -c assets/game.js` exited with 0 syntax errors)
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: PASS (0 syntax errors, save v3 -> v4 migration verified)
+- **Build/test result**: PASS (0 syntax errors, 100% test suite pass rate across `test_currency_save.js`, `test_gating_quests.js`, `test_r3_r4_systems.js`)
 - **Lint status**: 0 errors
-- **Tests added/modified**: `node -c game.js` and Node.js save migration unit test verified 100%.
+- **Tests added/modified**: Verified against all test suites.
 
 ## Loaded Skills
 - None explicitly loaded.
@@ -56,5 +60,6 @@ Implement Requirements R1 (Triple Currency Economy: Coins, Gems, Honor; save v4 
 - `.agents/worker_m2/ORIGINAL_REQUEST.md` — Original request log
 - `.agents/worker_m2/progress.md` — Progress heartbeat log
 - `.agents/worker_m2/handoff.md` — Handoff report
+
 
 

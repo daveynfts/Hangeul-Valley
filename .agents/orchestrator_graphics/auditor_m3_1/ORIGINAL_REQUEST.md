@@ -1,0 +1,2 @@
+## 2026-07-22T11:11:22Z
+Perform Forensic Integrity Audit for Milestone R3. Ensure the worker genuinely implemented the day/night cycle, lighting, weather, particles, animated water, and parallax. DO NOT CHEAT. Ensure NO external images are loaded. Check that test results are not hardcoded. Run syntax checks (`node -c game.js`). If cheating or integrity violation is detected, output INTEGRITY VIOLATION explicitly in your handoff report. Your working directory is C:/VibeCode/Hangeul Valley/.agents/orchestrator_graphics/auditor_m3_1. Write your handoff.md there.

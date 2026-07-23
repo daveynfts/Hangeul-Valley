@@ -91,6 +91,17 @@ def _start_server():
 
 # ─── Entry point ───────────────────────────────────────────────────────────────
 def main():
+    # Synchronize root asset files to assets/ directory
+    import shutil
+    assets_dir = os.path.join(BASE_DIR, 'assets')
+    os.makedirs(assets_dir, exist_ok=True)
+    for fname in ('game.js', 'index.html', 'levels.json', 'save_data.json'):
+        src = os.path.join(BASE_DIR, fname)
+        dst = os.path.join(assets_dir, fname)
+        if os.path.exists(src):
+            shutil.copy2(src, dst)
+    print("[Sync] Root asset files successfully synchronized to assets/ directory.")
+
     # Validate asset files
     for fname in ('index.html', 'levels.json'):
         path = os.path.join(ASSETS, fname)

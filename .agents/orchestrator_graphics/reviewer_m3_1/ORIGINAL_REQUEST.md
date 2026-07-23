@@ -1,0 +1,2 @@
+## 2026-07-22T11:11:22Z
+Review Milestone R3 implementation (Day/night cycle, lighting, shadows, weather, particles, animated water, parallax) for correctness, completeness, and interface conformance. Run syntax checks (`node -c game.js`), verify root-assets sync. Ensure no external images were used. Check integration with scenes. Your working directory is C:/VibeCode/Hangeul Valley/.agents/orchestrator_graphics/reviewer_m3_1. Write your handoff.md there.

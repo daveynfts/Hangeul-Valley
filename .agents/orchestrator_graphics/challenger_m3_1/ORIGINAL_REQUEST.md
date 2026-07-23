@@ -1,0 +1,2 @@
+## 2026-07-22T18:11:22Z
+Empirically verify Milestone R3. Write tests to confirm `DayNightSystem`, `AmbientLightingSystem`, `DynamicShadowSystem`, `WeatherEngine`, particle emitters, and animated water/parallax are correctly instantiated and usable in Phaser 3. Must check syntax (`node -c game.js`). Your working directory is C:/VibeCode/Hangeul Valley/.agents/orchestrator_graphics/challenger_m3_1. Write your handoff.md there.

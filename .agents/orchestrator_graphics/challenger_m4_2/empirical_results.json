@@ -1,0 +1,34 @@
+{
+  "syntax": {
+    "status": "PASS",
+    "details": [
+      "node -c game.js executed cleanly without syntax errors."
+    ]
+  },
+  "memoryLeaks": {
+    "status": "FAIL",
+    "details": [
+      "Phaser event listener leak: 'resume' listener duplicated on scene create (1 -> 2).",
+      "Uncleared global setInterval tickers present: 2 global intervals running continuously."
+    ]
+  },
+  "cameraBounds": {
+    "status": "FAIL",
+    "details": [
+      "FarmScene does not call setBounds(). Camera target or shake/zoom transitions can scroll beyond tilemap/world boundaries.",
+      "ArcadeScene does not call setBounds(). Camera target or shake/zoom transitions can scroll beyond tilemap/world boundaries.",
+      "DungeonScene does not call setBounds(). Camera target or shake/zoom transitions can scroll beyond tilemap/world boundaries.",
+      "FishingScene does not call setBounds(). Camera target or shake/zoom transitions can scroll beyond tilemap/world boundaries.",
+      "Unbounded camera allows negative scroll coordinates (-50, -50), rendering empty canvas area."
+    ]
+  },
+  "stateTransitions": {
+    "status": "FAIL",
+    "details": [
+      "Level transition error: Cannot read properties of undefined (reading 'forEach')",
+      "Spell Duel transition exception: startSpellDuel is not defined",
+      "Cooking minigame state machine error: openCookingMinigame is not defined",
+      "Memory card game state error: openMemoryGame is not defined"
+    ]
+  }
+}

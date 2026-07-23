@@ -1,0 +1,600 @@
+1601:       S:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
+1602:       D:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+1603:       UP:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP),
+1604:       DOWN:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN),
+1605:       LEFT:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT),
+1606:       RIGHT:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT),
+1607:     };
+1608:     this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+1609:     this.walkFrame = 0; this.walkTimer = 0;
+1610: 
+1611:     buildLevelSelectScreen(); playerLocked = true;
+1612:     updateGoldHUD();
+1613:   }
+1614: 
+1615:   // ── BAKE TEXTURES ──────────────────────────────────────────────────────────
+1616:   _bakeTextures(){
+1617:     const mk = () => this.make.graphics({add:false});
+1618:     // Apple Tree texture (18×30 pixels) — ginger-red apples peeking through crown
+1619:     const gat=mk();
+1620:     const crown2=['......lLLLl.......','....lLLLLLLl......','...LLLLLLLLLLL....',
+1621:      '..LLLLLLLLlLLLL...','..lLLLRALLllLLLl..','.LLLLLRALLllLLLLL.',
+1622:      'lLLRRALllMlLLLLLL','lLLRRALlMMLllLLLL','lLLLLllMMMlllLLLL',
+1623:      'lLLRRAllllllLLLLL','mLlRRAMMMlllllLLL','mRRAMMMMMllllllLL',
+1624:      'mMMMMMMMMMllllllL','.MMMMMMMMmmllllL.','.mMMMMMMmmmlll..','.mmmmmmmmmmll...',
+1625:      '...mmmmmmmmm.....','....kKKKk........'];
+1626:     // Override some cells with red apple color
+1627:     const R=0xEE2222, RA=0xFF5555;
+1628:     drawS(gat,crown2); // draw base crown
+1629:     // Paint apple spots red on top of crown
+1630:     [[3,5,3,2,R],[2,9,3,2,R],[8,10,3,2,R]].forEach(([x,y,w,h,c])=>pR(gat,x,y,w,h,c));
+1631:     [[3,5,1,1,RA],[2,9,1,1,RA],[8,10,1,1,RA]].forEach(([x,y,w,h,c])=>pR(gat,x,y,w,h,c));
+1632:     pR(gat,7,17,4,11,K.K); pR(gat,7,17,1,11,K.k); pR(gat,10,17,1,11,K.s);
+1633:     gat.generateTexture('apple_tree',18*PS,30*PS); gat.destroy();
+1634:     // Ripe apple tree variant — brighter more saturated apples
+1635:     const gatr=mk();
+1636:     drawS(gatr,crown2);
+1637:     [[3,5,3,2,0xFF0000],[2,9,3,2,0xFF0000],[8,10,3,2,0xFF0000]].forEach(([x,y,w,h,c])=>pR(gatr,x,y,w,h,c));
+1638:     [[3,5,1,1,0xFF6666],[2,9,1,1,0xFF6666],[8,10,1,1,0xFF6666]].forEach(([x,y,w,h,c])=>pR(gatr,x,y,w,h,c));
+1639:     pR(gatr,7,17,4,11,K.K); pR(gatr,7,17,1,11,K.k); pR(gatr,10,17,1,11,K.s);
+1640:     gatr.generateTexture('apple_tree_ripe',18*PS,30*PS); gatr.destroy();
+1641: 
+1642:     GRASS.forEach((rows,i)=>{ const g=mk(); drawS(g,rows); g.generateTexture('grs'+i,16*PS,16*PS); g.destroy(); });
+1643:     const gd=mk(); drawS(gd,DIRT_DRY); gd.generateTexture('drt_dry',16*PS,16*PS); gd.destroy();
+1644:     const gw=mk(); drawS(gw,DIRT_WET); gw.generateTexture('drt_wet',16*PS,16*PS); gw.destroy();
+1645: 
+1646:     // Cobblestone Path texture (16x16)
+1647:     const gcs = mk();
+1648:     pR(gcs, 0, 0, 16, 16, 0x4A6B2A);
+1649:     pR(gcs, 2, 2, 5, 4, 0x78716C); pR(gcs, 3, 2, 3, 1, 0xA8A29E);
+1650:     pR(gcs, 9, 3, 5, 5, 0x57534E); pR(gcs, 10, 3, 3, 1, 0x78716C);
+1651:     pR(gcs, 3, 9, 6, 5, 0x78716C); pR(gcs, 4, 9, 4, 1, 0xA8A29E);
+1652:     pR(gcs, 10, 10, 4, 4, 0x57534E);
+1653:     gcs.generateTexture('path_stone', 16*PS, 16*PS); gcs.destroy();
+1654: 
+1655:     // Wildflowers (8x8)
+1656:     const gflr = mk(); pR(gflr, 2, 2, 4, 4, 0xEF4444); pR(gflr, 3, 3, 2, 2, 0xFDE047); pR(gflr, 3, 6, 2, 2, 0x15803D); gflr.generateTexture('flw_red', 8*PS, 8*PS); gflr.destroy();
+1657:     const gfly = mk(); pR(gfly, 2, 2, 4, 4, 0xEAB308); pR(gfly, 3, 3, 2, 2, 0xFFFFFF); pR(gfly, 3, 6, 2, 2, 0x15803D); gfly.generateTexture('flw_yellow', 8*PS, 8*PS); gfly.destroy();
+1658:     const gflp = mk(); pR(gflp, 2, 2, 4, 4, 0xA855F7); pR(gflp, 3, 3, 2, 2, 0xFDE047); pR(gflp, 3, 6, 2, 2, 0x15803D); gflp.generateTexture('flw_purple', 8*PS, 8*PS); gflp.destroy();
+1659: 
+1660:     // Micro Butterfly Wing 0 (Open)
+1661:     const gbf0 = mk();
+1662:     pR(gbf0, 0, 0, 2, 2, 0x38BDF8); pR(gbf0, 4, 0, 2, 2, 0x38BDF8);
+1663:     pR(gbf0, 1, 2, 2, 2, 0x0284C7); pR(gbf0, 3, 2, 2, 2, 0x0284C7);
+1664:     pR(gbf0, 2, 1, 2, 4, 0x0F172A);
+1665:     gbf0.generateTexture('bf_open', 6*PS, 6*PS); gbf0.destroy();
+1666: 
+1667:     // Micro Butterfly Wing 1 (Flap/Up)
+1668:     const gbf1 = mk();
+1669:     pR(gbf1, 1, 0, 2, 3, 0x38BDF8); pR(gbf1, 3, 0, 2, 3, 0x38BDF8);
+1670:     pR(gbf1, 2, 1, 2, 4, 0x0F172A);
+1671:     gbf1.generateTexture('bf_flap', 6*PS, 6*PS); gbf1.destroy();
+1672: 
+1673:     // Stone Well / Water Shrine (16x16)
+1674:     const gsw = mk();
+1675:     pR(gsw, 2, 2, 12, 12, 0x57534E); pR(gsw, 3, 3, 10, 10, 0x78716C);
+1676:     pR(gsw, 4, 4, 8, 8, 0x0284C7); pR(gsw, 5, 5, 6, 6, 0x0369A1);
+1677:     pR(gsw, 5, 5, 2, 2, 0x38BDF8); pR(gsw, 6, 6, 1, 1, 0xFFFFFF); // water sparkle
+1678:     pR(gsw, 1, 1, 3, 14, 0x78350F); pR(gsw, 12, 1, 3, 14, 0x78350F); // posts
+1679:     pR(gsw, 1, 1, 14, 3, 0x92400E); // top winch bar
+1680:     gsw.generateTexture('stone_well', 16*PS, 16*PS); gsw.destroy();
+1681: 
+1682:     // Pixel Barrel (10x12)
+1683:     const gbar = mk();
+1684:     pR(gbar, 1, 0, 8, 12, 0x78350F); pR(gbar, 0, 1, 10, 10, 0x92400E);
+1685:     pR(gbar, 0, 3, 10, 2, 0x475569); pR(gbar, 0, 8, 10, 2, 0x475569); // metal hoops
+1686:     gbar.generateTexture('pixel_barrel', 10*PS, 12*PS); gbar.destroy();
+1687: 
+1688:     // Pixel Crate (12x12)
+1689:     const gcrat = mk();
+1690:     pR(gcrat, 0, 0, 12, 12, 0x92400E); pR(gcrat, 1, 1, 10, 10, 0xB45309);
+1691:     pR(gcrat, 0, 0, 12, 1, 0x78350F); pR(gcrat, 0, 11, 12, 1, 0x78350F);
+1692:     pR(gcrat, 0, 0, 1, 12, 0x78350F); pR(gcrat, 11, 0, 1, 12, 0x78350F);
+1693:     pR(gcrat, 1, 1, 10, 10, 0x78350F); pR(gcrat, 2, 2, 8, 8, 0xB45309); // X-brace
+1694:     gcrat.generateTexture('pixel_crate', 12*PS, 12*PS); gcrat.destroy();
+1695: 
+1696:     // Directional Signpost (12x14)
+1697:     const gsgn = mk();
+1698:     pR(gsgn, 5, 4, 2, 10, 0x78350F); // post
+1699:     pR(gsgn, 1, 1, 10, 4, 0x92400E); pR(gsgn, 1, 1, 1, 4, 0xB45309); // sign 1
+1700:     pR(gsgn, 2, 7, 9, 4, 0x92400E); pR(gsgn, 10, 7, 1, 4, 0xB45309); // sign 2
+1701:     gsgn.generateTexture('signpost', 12*PS, 14*PS); gsgn.destroy();
+1702: 
+1703:     // Tree
+1704:     const gt=mk();
+1705:     const crown=['......lLLLl.......','....lLLLLLLl......','...LLLLLLLLLLL....',
+1706:      '..LLLLLLLLlLLLL...','.lLLLLLLLllLLLLl.','.LLLLLLLLllLLLLLL',
+1707:      'lLLLLLLLllMlLLLLL','lLLLLLLlMMLllLLLL','lLLLLllMMMlllLLLL',
+1708:      'lLLLlMMMMllllLLLL','mLlMMMMMMlllllLLL','mMMMMMMMMllllllLL',
+1709:      'mMMMMMMMMMllllllL','.MMMMMMMMmmllllL.','.mMMMMMMmmmlll..','.mmmmmmmmmmll...',
+1710:      '...mmmmmmmmm.....','....kKKKk........'];
+1711:     drawS(gt,crown); pR(gt,7,17,4,11,K.K); pR(gt,7,17,1,11,K.k); pR(gt,10,17,1,11,K.s);
+1712:     gt.generateTexture('tree',18*PS,28*PS); gt.destroy();
+1713: 
+1714:     // Fence
+1715:     const gfp=mk();
+1716:     pR(gfp,0,0,4,12,K.O); pR(gfp,0,0,1,12,K.o); pR(gfp,3,0,1,12,K.U); pR(gfp,0,0,4,1,K.o);
+1717:     [3,6,9].forEach(y=>pR(gfp,1,y,3,1,K.U));
+1718:     gfp.generateTexture('fnc_post',4*PS,12*PS); gfp.destroy();
+1719:     const gfr=mk();
+1720:     pR(gfr,0,0,14,4,K.O); pR(gfr,0,0,14,1,K.o); pR(gfr,0,3,14,1,K.U);
+1721:     [3,7,11].forEach(x=>pR(gfr,x,0,1,4,K.U));
+1722:     gfr.generateTexture('fnc_rail',14*PS,4*PS); gfr.destroy();
+1723: 
+1724:     // Sparkle
+1725:     const gsp=mk();
+1726:     gsp.fillStyle(0xFFFFFF,1); gsp.fillRect(6,0,4,16); gsp.fillRect(0,6,16,4);
+1727:     gsp.fillRect(3,3,2,2); gsp.fillRect(11,3,2,2); gsp.fillRect(3,11,2,2); gsp.fillRect(11,11,2,2);
+1728:     gsp.generateTexture('sparkle',16,16); gsp.destroy();
+1729: 
+1730:     // Gold coin 8×8
+1731:     const gc=mk();
+1732:     pR(gc,1,0,6,1,0xFFDD00); pR(gc,0,1,8,6,0xFFDD00); pR(gc,1,7,6,1,0xFFDD00);
+1733:     pR(gc,1,1,3,2,0xFFFF88); pR(gc,2,3,1,1,0xCC9900);
+1734:     gc.generateTexture('coin',8*PS,8*PS); gc.destroy();
+1735: 
+1736:     // Shop sign texture 14×18
+1737:     const gs=mk();
+1738:     pR(gs,0,0,14,2,K.O);  // roof
+1739:     pR(gs,1,0,12,2,K.o);  // roof highlight
+1740:     pR(gs,0,2,14,12,K.T); // board body
+1741:     pR(gs,0,2,1,12,K.t);  // left highlight
+1742:     pR(gs,13,2,1,12,K.V); // right shadow
+1743:     pR(gs,1,3,12,1,K.t);  // stripe
+1744:     // Coin icon on sign
+1745:     pR(gs,4,5,6,6,0xFFDD00); pR(gs,5,4,4,1,0xFFDD00); pR(gs,5,11,4,1,0xFFDD00);
+1746:     pR(gs,5,5,2,2,0xFFFF88);
+1747:     pR(gs,0,14,14,4,K.K); // post
+1748:     pR(gs,6,14,2,4,K.k);
+1749:     gs.generateTexture('shop_sign',14*PS,18*PS); gs.destroy();
+1750: 
+1751:     // Notice Board texture 18x16 with micro corkboard grain & colored pushpins
+1752:     const gb = mk();
+1753:     pR(gb,0,0,18,12,K.O); pR(gb,1,1,16,10,0xD97706);
+1754:     pR(gb,2,12,2,4,K.K); pR(gb,14,12,2,4,K.K);
+1755:     // Papers with micro text lines
+1756:     pR(gb,2,2,5,5,K.J); pR(gb,3,3,3,1,0x525252); pR(gb,3,5,3,1,0x525252);
+1757:     pR(gb,10,3,6,6,0xFFF3C7); pR(gb,11,4,4,1,0x525252); pR(gb,11,6,4,1,0x525252);
+1758:     pR(gb,4,8,8,3,0xDDFFDD); pR(gb,5,9,6,1,0x525252);
+1759:     // Colored Pushpins
+1760:     pR(gb,4,1,1,1,0xEF4444); pR(gb,12,2,1,1,0x06B6D4); pR(gb,7,7,1,1,0xEAB308);
+1761:     gb.generateTexture('notice_board',18*PS,16*PS); gb.destroy();
+1762: 
+1763:     // Dungeon Portal texture 20x28
+1764:     const gport = mk();
+1765:     pR(gport, 0, 4, 20, 24, 0x334155); pR(gport, 2, 6, 16, 22, 0x1E293B);
+1766:     pR(gport, 0, 0, 20, 6, 0x475569); pR(gport, 2, 2, 16, 4, 0x334155);
+1767:     pR(gport, 4, 8, 12, 20, 0xA855F7); pR(gport, 6, 10, 8, 16, 0x6D28D9);
+1768:     pR(gport, 8, 12, 4, 12, 0x06B6D4); pR(gport, 9, 14, 2, 8, 0xFFFFFF);
+1769:     gport.generateTexture('dungeon_portal', 20*PS, 28*PS); gport.destroy();
+1770: 
+1771:     // Fishing Dock Pier texture 24x16
+1772:     const gdock = mk();
+1773:     pR(gdock, 0, 0, 24, 16, 0x78350F); pR(gdock, 1, 1, 22, 14, 0x92400E);
+1774:     pR(gdock, 0, 0, 24, 2, 0xB45309); pR(gdock, 0, 8, 24, 2, 0x78350F);
+1775:     pR(gdock, 2, 2, 2, 12, 0x475569); pR(gdock, 20, 2, 2, 12, 0x475569); // bolts
+1776:     gdock.generateTexture('fishing_dock', 24*PS, 16*PS); gdock.destroy();
+1777: 
+1778:     // Arcade Machine texture 16x22 with CRT scanline details
+1779:     const ga = mk();
+1780:     pR(ga,2,0,12,22,0x222222); pR(ga,3,1,10,20,0x444455);
+1781:     // Screen glowing with scanlines
+1782:     pR(ga,4,4,8,6,0x00FFFF); pR(ga,5,5,6,4,0xFFFFFF);
+1783:     pR(ga,4,6,8,1,0x06B6D4); pR(ga,4,8,8,1,0x0891B2);
+1784:     // Control panel (slanted)
+1785:     pR(ga,3,10,10,4,0xFF00FF);
+1786:     pR(ga,5,11,1,1,0xFF0000); pR(ga,5,10,1,1,0xFF8888); // joystick + knob
+1787:     pR(ga,10,12,2,1,0xFFFF00); pR(ga,8,12,1,1,0x00FF00); // buttons
+1788:     // Marquee with glowing text line
+1789:     pR(ga,4,1,8,2,0xFF00FF); pR(ga,5,1,6,1,0xFFFFFF);
+1790:     // Coin slot
+1791:     pR(ga,5,16,2,3,0x777777); pR(ga,6,17,1,1,0x000000);
+1792:     ga.generateTexture('arcade_machine',16*PS,22*PS); ga.destroy();
+1793: 
+1794:     // Wizard NPC texture 16x22
+1795:     const gwiz = mk();
+1796:     // Robe / Body (Dark purple)
+1797:     pR(gwiz, 4, 8, 8, 12, 0x5B21B6); pR(gwiz, 3, 10, 10, 10, 0x4C1D95);
+1798:     pR(gwiz, 5, 9, 6, 11, 0x6D28D9);
+1799:     // Face & Beard
+1800:     pR(gwiz, 5, 5, 6, 4, 0xFFDDAD);
+1801:     pR(gwiz, 6, 6, 1, 1, 0x1E1B4B); pR(gwiz, 9, 6, 1, 1, 0x1E1B4B);
+1802:     pR(gwiz, 4, 8, 8, 6, 0xF3F4F6);
+1803:     pR(gwiz, 5, 14, 6, 3, 0xE5E7EB);
+1804:     // Pointy Wizard Hat
+1805:     pR(gwiz, 1, 5, 14, 2, 0x7C3AED); pR(gwiz, 2, 5, 12, 1, 0x8B5CF6);
+1806:     pR(gwiz, 4, 3, 8, 2, 0x7C3AED); pR(gwiz, 5, 1, 6, 2, 0x6D28D9); pR(gwiz, 6, 0, 4, 1, 0x8B5CF6);
+1807:     pR(gwiz, 7, 2, 2, 2, 0xF59E0B);
+1808:     // Staff & Glowing Orb
+1809:     pR(gwiz, 13, 4, 2, 16, 0x78350F);
+1810:     pR(gwiz, 12, 2, 4, 4, 0x06B6D4); pR(gwiz, 13, 3, 2, 2, 0x67E8F9);
+1811:     gwiz.generateTexture('wizard_npc', 16*PS, 22*PS); gwiz.destroy();
+1812: 
+1813:     // Player (4 walk frames)
+1814:     for(let fr=0; fr<4; fr++){
+1815:       const gp=mk();
+1816:       const by = (fr===1 || fr===3) ? 1 : 0; // Body down 1px when stepping
+1817: 
+1818:       pR(gp,3,0+by,8,1,K.T); pR(gp,2,1+by,10,3,K.T); pR(gp,2,1+by,1,3,K.t); pR(gp,11,1+by,1,3,K.V);
+1819:       pR(gp,2,1+by,10,1,K.t); pR(gp,2,3+by,10,1,K.V);
+1820:       pR(gp,1,4+by,12,2,K.T); pR(gp,1,4+by,12,1,K.t); pR(gp,1,5+by,12,1,K.V);
+1821:       pR(gp,2,4+by,10,1,0xEF4444); // Straw hat red ribbon
+1822:       pR(gp,3,6+by,8,5,K.X); pR(gp,3,6+by,1,5,K.x); pR(gp,10,6+by,1,5,K.x);
+1823:       pR(gp,4,8+by,1,1,K.J); pR(gp,5,8+by,1,1,K.N); pR(gp,8,8+by,1,1,K.J); pR(gp,9,8+by,1,1,K.N);
+1824:       pR(gp,3,9+by,1,1,0xF472B6); pR(gp,10,9+by,1,1,0xF472B6); // Rosy cheeks
+1825:       pR(gp,4,9+by,1,1,K.I); pR(gp,9,9+by,1,1,K.I); pR(gp,6,10+by,2,1,K.x);
+1826:       pR(gp,2,11+by,10,4,K.Z); pR(gp,2,11+by,1,4,K.z); pR(gp,11,11+by,1,4,K.z);
+1827:       pR(gp,0,11+by,3,4,K.Z); pR(gp,11,11+by,3,4,K.Z);
+1828:       pR(gp,0,14+by,3,1,K.X); pR(gp,11,14+by,3,1,K.X);
+1829:       pR(gp,4,12+by,6,2,K.q);
+1830:       pR(gp,6,15+by,2,1,0xF59E0B); // Overalls bronze belt buckle
+1831:       pR(gp,2,15+by,10,4,K.Q); pR(gp,2,15+by,1,4,K.q); pR(gp,11,15+by,1,4,K.q);
+1832: 
+1833:       let ly=0, ry=0;
+1834:       let lL=K.Q, rL=K.q, lB=K.R, rB=K.r; // Stand / idle shading
+1835:       if(fr===1) { ly=-2; lL=K.q; rL=K.Q; lB=K.r; rB=K.R; } // Left foot step
+1836:       else if(fr===3) { ry=-2; lL=K.Q; rL=K.q; lB=K.R; rB=K.r; } // Right foot step
+1837:       else if(fr===2) { lL=K.q; rL=K.Q; lB=K.r; rB=K.R; } // Opposite stand phase
+1838: 
+1839:       pR(gp,2,19+by+ly,4,3,lL); pR(gp,8,19+by+ry,4,3,rL);
+1840:       pR(gp,2,22+by+ly,5,2,lB); pR(gp,8,22+by+ry,5,2,rB);
+1841:       pR(gp,2,23+by+ly,5,1,K.r); pR(gp,8,23+by+ry,5,1,K.r);
+1842: 
+1843:       gp.generateTexture('farmer'+fr,14*PS,25*PS); gp.destroy();
+1844:     }
+1845: 
+1846:     // Crops (5 types × 3 stages)
+1847:     const CC=[
+1848:       [0xFF88B4,0xAA1844,0xFFCCE4],[0x88EE44,0x448A22,0xCCFF99],
+1849:       [0xFF4444,0xAA1111,0xFF9999],[0xFFCC00,0xCC8800,0xFFEE99],[0xFFEE44,0xCCAA00,0xFFFF99],
+1850:     ];
+1851:     CC.forEach(([M,D,Li],t)=>{
+1852:       const g1=mk();
+1853:       pR(g1,5,14,2,6,K.P); pR(g1,5,14,1,6,K.v);
+1854:       pR(g1,3,12,4,3,K.P); pR(g1,6,12,3,3,K.p); pR(g1,5,11,2,2,K.v);
+1855:       g1.generateTexture(`cr_${t}_1`,12*PS,20*PS); g1.destroy();
+1856: 
+1857:       const g2=mk();
+1858:       pR(g2,5,8,2,12,K.P); pR(g2,5,8,1,12,K.v);
+1859:       pR(g2,1,8,5,5,K.p); pR(g2,1,8,1,1,K.P); pR(g2,6,8,5,5,K.P); pR(g2,10,8,1,1,K.p);
+1860:       pR(g2,2,12,4,3,K.p); pR(g2,6,12,4,3,K.P);
+1861:       g2.generateTexture(`cr_${t}_2`,12*PS,20*PS); g2.destroy();
+1862: 
+1863:       const g3=mk();
+1864:       pR(g3,5,6,2,14,K.P); pR(g3,5,6,1,14,K.v);
+1865:       pR(g3,1,9,5,6,K.p); pR(g3,6,9,5,6,K.P);
+1866:       pR(g3,2,14,4,4,K.p); pR(g3,6,14,4,4,K.P);
+1867:       g3.fillStyle(D,1); g3.fillRect(3*PS,0,6*PS,6*PS);
+1868:       g3.fillStyle(M,1); g3.fillRect(4*PS,0,4*PS,5*PS); g3.fillRect(3*PS,1*PS,6*PS,3*PS);
+1869:       g3.fillStyle(Li,0.8); g3.fillRect(4*PS,0,2*PS,2*PS);
+1870:       g3.generateTexture(`cr_${t}_3`,12*PS,20*PS); g3.destroy();
+1871:     });
+1872: 
+1873:     // ── GINGER TABBY CAT NPC (12×16 pixels) ─────────────────────────────────
+1874:     const GC=()=>this.make.graphics({add:false});
+1875:     const gc2=GC();
+1876:     const GO=0xF5813F, GD=0xB84E10, GL=0xFFBB66;
+1877:     const WH2=0xFFFFFF, EY=0xFFCC44, PU=0x1A0800;
+1878:     const PK2=0xFFAA99;
+1879:     const pr2=(x,y,w,h,c)=>pR(gc2,x,y,w,h,c);
+1880:     // Ginger body
+1881:     pr2(1,8,10,8,GO);
+1882:     // White belly/chest
+1883:     pr2(3,9,6,7,WH2); pr2(3,8,6,1,WH2);
+1884:     // Dark tabby flank stripes
+1885:     pr2(1,9,1,6,GD); pr2(10,9,1,6,GD);
+1886:     pr2(2,11,1,1,GD); pr2(9,11,1,1,GD);
+1887:     pr2(2,13,1,1,GD); pr2(9,13,1,1,GD);
+1888:     // White front-paw socks
+1889:     pr2(2,14,2,2,WH2); pr2(8,14,2,2,WH2);
+1890:     pr2(2,15,1,1,PK2); pr2(3,15,1,1,PK2); pr2(8,15,1,1,PK2); pr2(9,15,1,1,PK2);
+1891:     // Ginger head
+1892:     pr2(1,2,10,6,GO);
+1893:     // White muzzle / chin blaze
+1894:     pr2(3,5,6,3,WH2);
+1895:     // M-mark forehead stripes
+1896:     pr2(3,2,2,2,GD); pr2(7,2,2,2,GD); pr2(5,2,2,1,GO); pr2(5,3,2,2,GD);
+1897:     // Amber eyes (big round)
+1898:     pr2(2,4,3,2,EY); pr2(7,4,3,2,EY);
+1899:     pr2(3,4,1,2,PU); pr2(8,4,1,2,PU); // pupils
+1900:     pr2(2,3,3,1,PU); pr2(7,3,3,1,PU); // eyelash outline
+1901:     // Pink nose
+1902:     pr2(5,6,2,1,PK2);
+1903:     // Whisker accent
+1904:     pr2(1,6,1,1,GL); pr2(10,6,1,1,GL);
+1905:     // Airplane ears (spread sideways flat)
+1906:     pr2(0,0,2,2,GO); pr2(10,0,2,2,GO);
+1907:     pr2(0,2,2,1,GD); pr2(10,2,2,1,GD); // ear tip stripe
+1908:     pr2(0,1,1,1,PK2); pr2(11,1,1,1,PK2); // inner ear pink
+1909:     // Tail (curling to right)
+1910:     pr2(11,10,2,1,GO); pr2(12,9,1,2,GO); pr2(12,8,1,1,GL); pr2(11,8,1,1,GD);
+1911:     gc2.generateTexture('cat_npc',13*PS,16*PS); gc2.destroy();
+1912:   }
+1913: 
+1914:   // ── WORLD ──────────────────────────────────────────────────────────────────
+1915:   _drawWorld(W, H){
+1916:     const rng = new Phaser.Math.RandomDataGenerator(['sv16']);
+1917:     for(let r=0; r*TILE<=H+TILE; r++) for(let cc=0; cc*TILE<=W+TILE; cc++){
+1918:       this.add.image(cc*TILE+TILE/2, r*TILE+TILE/2, 'grs'+rng.between(0,3))
+1919:         .setDisplaySize(TILE,TILE).setDepth(0);
+1920:     }
+1921:     const fW=PLOT_COLS*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP, fH=3*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP;
+1922:     this.farm = {x:W/2-fW/2, y:H/2-fH/2-30, w:fW, h:fH};
+1923: 
+1924:     // Cobblestone connecting paths (Widened & Spaced)
+1925:     const bx = this.farm.x + this.farm.w / 2;
+1926:     const by = this.farm.y - 95;
+1927:     const sx = this.farm.x + this.farm.w + 175;
+1928:     const sy = this.farm.y + this.farm.h / 2 + 25;
+1929:     const ax = this.farm.x - 200;
+1930:     const ay = this.farm.y + 20;
+1931:     const wx = this.farm.x + this.farm.w + 160;
+1932:     const wy = this.farm.y - 85;
+1933:     const apx = this.farm.x - 130;
+1934:     const apy = this.farm.y - 85;
+1935: 
+1936:     const pathPoints = [
+1937:       {x: bx, y: by+25}, {x: sx, y: sy}, {x: ax, y: ay}, {x: wx, y: wy}, {x: apx, y: apy+25}
+1938:     ];
+1939:     pathPoints.forEach(pt => {
+1940:       for(let dx = -20; dx <= 20; dx += 20){
+1941:         for(let dy = -20; dy <= 20; dy += 20){
+1942:           if(Math.random() < 0.65){
+1943:             this.add.image(pt.x + dx, pt.y + dy, 'path_stone')
+1944:               .setDisplaySize(TILE, TILE).setDepth(1).setAlpha(0.85);
+1945:           }
+1946:         }
+1947:       }
+1948:     });
+1949: 
+1950:     // Scatter wildflowers naturally
+1951:     const flowers = ['flw_red', 'flw_yellow', 'flw_purple'];
+1952:     const flowerList = [];
+1953:     for(let i=0; i<35; i++){
+1954:       const fx = Phaser.Math.Between(40, W-40);
+1955:       const fy = Phaser.Math.Between(40, H-40);
+1956:       if(fx < this.farm.x - 20 || fx > this.farm.x + this.farm.w + 20 || fy < this.farm.y - 20 || fy > this.farm.y + this.farm.h + 20){
+1957:         const fl = this.add.image(fx, fy, Phaser.Utils.Array.GetRandom(flowers))
+1958:           .setScale(1.2).setDepth(fy);
+1959:         flowerList.push(fl);
+1960:         this.tweens.add({ targets: fl, angle: { from: -6, to: 6 }, duration: 1500 + Math.random()*1000, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+1961:       }
+1962:     }
+1963: 
+1964:     // Micro World Details: Stone Well & Water Sparkles (Widened Placement)
+1965:     const wellX = this.farm.x - 190;
+1966:     const wellY = this.farm.y + this.farm.h + 85;
+1967:     this.add.ellipse(wellX, wellY+8, 44, 12, 0, 0.35).setDepth(wellY-1);
+1968:     this.add.image(wellX, wellY, 'stone_well').setOrigin(0.5, 1).setScale(1.5).setDepth(wellY);
+1969:     // Water sparkles inside well
+1970:     for(let i=0; i<4; i++){
+1971:       const sp = this.add.circle(wellX + (Math.random()-0.5)*18, wellY - 12 + (Math.random()-0.5)*12, 1.5, 0x67E8F9, 0.9).setDepth(wellY+1);
+1972:       this.tweens.add({ targets: sp, alpha: 0.2, scale: 1.8, duration: 800 + i*300, yoyo: true, repeat: -1 });
+1973:     }
+1974: 
+1975:     // Micro World Details: Barrels & Crates next to Shop
+1976:     const bxl = sx + 28, byl = sy - 10;
+1977:     this.add.image(bxl, byl, 'pixel_barrel').setOrigin(0.5, 1).setScale(1.4).setDepth(byl);
+1978:     this.add.image(bxl + 18, byl + 6, 'pixel_crate').setOrigin(0.5, 1).setScale(1.3).setDepth(byl+6);
+1979: 
+1980:     // Micro World Details: Directional Signpost
+1981:     const spX = bx - 60, spY = by + 20;
+1982:     this.add.image(spX, spY, 'signpost').setOrigin(0.5, 1).setScale(1.4).setDepth(spY);
+1983: 
+1984:     // Micro Animated Fauna: Fluttering Butterflies
+1985:     this._createButterflies(flowerList);
+1986: 
+1987:     // Warm Sunbeam Lighting Overlay
+1988:     const vignette = this.add.graphics().setDepth(9980).setScrollFactor(0);
+1989:     vignette.fillStyle(0xFF9900, 0.04);
+1990:     vignette.fillRect(0, 0, W, H);
+1991: 
+1992:     // Micro Ambient Particle: Falling Leaves from Apple Tree
+1993:     this._createFallingLeaves(apx, apy);
+1994:   }
+1995: 
+1996:   _createFallingLeaves(ax, ay){
+1997:     this.time.addEvent({
+1998:       delay: 2200,
+1999:       loop: true,
+2000:       callback: () => {
+2001:         const lf = this.add.rectangle(ax + Phaser.Math.Between(-20, 20), ay - 35, 4, 3, 0x86EFAC).setDepth(ay + 10);
+2002:         this.tweens.add({
+2003:           targets: lf,
+2004:           x: { value: `+=${Phaser.Math.Between(-30, 30)}`, ease: 'Sine.InOut' },
+2005:           y: ay + Phaser.Math.Between(10, 30),
+2006:           angle: 360,
+2007:           alpha: 0,
+2008:           duration: 3500,
+2009:           ease: 'Power1',
+2010:           onComplete: () => lf.destroy()
+2011:         });
+2012:       }
+2013:     });
+2014:   }
+2015: 
+2016:   _createButterflies(flowerList){
+2017:     if(!flowerList || !flowerList.length) return;
+2018:     for(let i=0; i<5; i++){
+2019:       const targetFlw = Phaser.Utils.Array.GetRandom(flowerList);
+2020:       const bf = this.add.image(targetFlw.x, targetFlw.y - 12, 'bf_open').setDepth(targetFlw.y + 50);
+2021: 
+2022:       // Flapping wings animation using texture toggle
+2023:       this.time.addEvent({
+2024:         delay: 180 + Math.random()*60,
+2025:         loop: true,
+2026:         callback: () => {
+2027:           if(bf && bf.active){
+2028:             bf.setTexture(bf.texture.key === 'bf_open' ? 'bf_flap' : 'bf_open');
+2029:           }
+2030:         }
+2031:       });
+2032: 
+2033:       // Gentle fluttering path
+2034:       this.tweens.add({
+2035:         targets: bf,
+2036:         x: { value: `+=${Phaser.Math.Between(-60, 60)}`, ease: 'Sine.InOut' },
+2037:         y: { value: `+=${Phaser.Math.Between(-40, 40)}`, ease: 'Sine.InOut' },
+2038:         duration: 3000 + Math.random()*2000,
+2039:         yoyo: true,
+2040:         repeat: -1
+2041:       });
+2042:     }
+2043:   }
+2044: 
+2045:   _createAmbientParticles(W, H){
+2046:     for(let i=0; i<30; i++){
+2047:       const px = Phaser.Math.Between(0, W);
+2048:       const py = Phaser.Math.Between(0, H);
+2049:       const col = Math.random() < 0.4 ? 0xFDE047 : (Math.random() < 0.7 ? 0xA855F7 : 0x67E8F9);
+2050:       const p = this.add.circle(px, py, Phaser.Math.Between(2, 4), col, Math.random()*0.6 + 0.2).setDepth(9985);
+2051: 
+2052:       this.tweens.add({
+2053:         targets: p,
+2054:         x: px + Phaser.Math.Between(-40, 40),
+2055:         y: py + Phaser.Math.Between(-60, 20),
+2056:         alpha: { from: p.alpha, to: 0.1 },
+2057:         duration: 3000 + Math.random()*3000,
+2058:         yoyo: true,
+2059:         repeat: -1,
+2060:         ease: 'Sine.InOut'
+2061:       });
+2062:     }
+2063:   }
+2064: 
+2065:   // ── SHOP NPC ───────────────────────────────────────────────────────────────
+2066:   _createShopNPC(W, H){
+2067:     const sx = this.farm.x + this.farm.w + 175;
+2068:     const sy = this.farm.y + this.farm.h / 2 + 25;
+2069:     this.shopNPC = this.add.image(sx, sy, 'shop_sign')
+2070:       .setOrigin(0.5, 1).setScale(1.2).setDepth(sy);
+2071: 
+2072:     this.tweens.add({ targets: this.shopNPC, y: sy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+2073: 
+2074:     this.shopHint = this.add.text(sx, sy + 10, '🏪 SHOP\n[SPACE]', {
+2075:       fontFamily:'"Press Start 2P",monospace', fontSize:'14px',
+2076:       color:'#FFD700', stroke:'#000', strokeThickness:3, align:'center'
+2077:     }).setOrigin(0.5, 0).setDepth(sy+1).setAlpha(0);
+2078: 
+2079:     this.shopX = sx; this.shopY = sy;
+2080:   }
+2081: 
+2082:   // ── NOTICE BOARD ───────────────────────────────────────────────────────────
+2083:   _createBoardNPC(W, H){
+2084:     const bx = this.farm.x + this.farm.w / 2;
+2085:     const by = this.farm.y - 95;
+2086:     this.add.ellipse(bx, by+6, 40, 10, 0, 0.3).setDepth(by-1);
+2087:     this.boardSprite = this.add.image(bx, by, 'notice_board').setOrigin(0.5,1).setScale(1.5).setDepth(by);
+2088:     this.boardHint = this.add.text(bx, by-40, '📋 Minigame\n[SPACE]', {
+2089:       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+2090:       color:'#FF88FF', stroke:'#000', strokeThickness:3, align:'center'
+2091:     }).setOrigin(0.5,1).setDepth(by+1).setAlpha(0);
+2092:     this.tweens.add({targets:this.boardHint, y:this.boardHint.y-3, duration:700, yoyo:true, repeat:-1});
+2093:     this.boardX = bx; this.boardY = by;
+2094:   }
+2095: 
+2096:   // ── ARCADE MACHINE ─────────────────────────────────────────────────────────
+2097:   _createArcadeNPC(W, H){
+2098:     const ax = this.farm.x - 200;
+2099:     const ay = this.farm.y + 20;
+2100:     this.add.ellipse(ax, ay+6, 40, 10, 0, 0.35).setDepth(ay-1);
+2101:     this.arcadeSprite = this.add.image(ax, ay, 'arcade_machine').setOrigin(0.5,1).setScale(1.5).setDepth(ay);
+2102:     this.tweens.add({ targets: this.arcadeSprite, scaleY: { from: 1.5, to: 1.54 }, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+2103:     this.arcadeHint = this.add.text(ax, ay-60, '👾 ARCADE\n[SPACE]', {
+2104:       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+2105:       color:'#00FFFF', stroke:'#000', strokeThickness:3, align:'center'
+2106:     }).setOrigin(0.5,1).setDepth(ay+1).setAlpha(0);
+2107:     this.tweens.add({targets:this.arcadeHint, y:this.arcadeHint.y-3, duration:600, yoyo:true, repeat:-1});
+2108:     this.arcadeX = ax; this.arcadeY = ay;
+2109:   }
+2110: 
+2111:   // ── WIZARD NPC ─────────────────────────────────────────────────────────────
+2112:   _createWizardNPC(W, H){
+2113:     const wx = this.farm.x + this.farm.w + 160;
+2114:     const wy = this.farm.y - 85;
+2115:     this.add.ellipse(wx, wy+6, 40, 10, 0, 0.35).setDepth(wy-1);
+2116:     this.wizardSprite = this.add.image(wx, wy, 'wizard_npc').setOrigin(0.5,1).setScale(1.6).setDepth(wy);
+2117:     this.tweens.add({ targets: this.wizardSprite, y: wy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+2118: 
+2119:     this.wizardHint = this.add.text(wx, wy-62, '⚡ SPELL DUEL\n[SPACE]', {
+2120:       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+2121:       color:'#A855F7', stroke:'#000', strokeThickness:3, align:'center'
+2122:     }).setOrigin(0.5,1).setDepth(wy+1).setAlpha(0);
+2123:     this.tweens.add({ targets: this.wizardHint, y: this.wizardHint.y - 3, duration: 600, yoyo: true, repeat: -1 });
+2124: 
+2125:     this.add.text(wx, wy+6, 'Merlin', {
+2126:       fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
+2127:       color:'#C084FC', stroke:'#000', strokeThickness:2
+2128:     }).setOrigin(0.5,0).setDepth(wy+1);
+2129: 
+2130:     this.wizardX = wx; this.wizardY = wy;
+2131:   }
+2132: 
+2133:   // ── CAT NPC ────────────────────────────────────────────────────────────────
+2134:   _createCatNPC(W, H){
+2135:     const cx = this.farm.x - 120;
+2136:     const cy = this.farm.y + this.farm.h + 75;
+2137:     this.add.ellipse(cx,cy+2,36,10,0,0.35).setDepth(cy-1);
+2138:     this.catSprite = this.add.image(cx, cy, 'cat_npc')
+2139:       .setOrigin(0.5,1).setScale(1.8).setDepth(cy);
+2140:     this.tweens.add({ targets:this.catSprite, y:cy-3, duration:1200, yoyo:true, repeat:-1, ease:'Sine.InOut' });
+2141:     this.catHint = this.add.text(cx, cy-52, '🐱 야옹\n[SPACE]', {
+2142:       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+2143:       color:'#FFCC44', stroke:'#000', strokeThickness:3, align:'center'
+2144:     }).setOrigin(0.5,1).setDepth(cy+1).setAlpha(0);
+2145:     this.tweens.add({ targets:this.catHint, y:this.catHint.y-3, duration:700, yoyo:true, repeat:-1 });
+2146:     this.add.text(cx, cy+6, 'Muop', {
+2147:       fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
+2148:       color:'#FFD700', stroke:'#000', strokeThickness:2
+2149:     }).setOrigin(0.5,0).setDepth(cy+1);
+2150:     this.catX=cx; this.catY=cy;
+2151:   }
+2152: 
+2153:   // ── DUNGEON PORTAL NPC ─────────────────────────────────────────────────────
+2154:   _createPortalNPC(W, H){
+2155:     const px = this.farm.x + this.farm.w + 140;
+2156:     const py = this.farm.y + this.farm.h + 80;
+2157:     this.add.ellipse(px, py+6, 50, 12, 0, 0.4).setDepth(py-1);
+2158:     this.portalSprite = this.add.image(px, py, 'dungeon_portal').setOrigin(0.5,1).setScale(1.5).setDepth(py);
+2159:     this.tweens.add({ targets: this.portalSprite, scaleX: 1.55, scaleY: 1.45, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+2160: 
+2161:     this.portalHint = this.add.text(px, py-75, '🌀 DUNGEON\n[SPACE]', {
+2162:       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+2163:       color:'#EC4899', stroke:'#000', strokeThickness:3, align:'center'
+2164:     }).setOrigin(0.5,1).setDepth(py+1).setAlpha(0);
+2165:     this.tweens.add({ targets: this.portalHint, y: this.portalHint.y - 3, duration: 600, yoyo: true, repeat: -1 });
+2166: 
+2167:     this.add.text(px, py+6, 'Dungeon Portal', {
+2168:       fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
+2169:       color:'#F472B6', stroke:'#000', strokeThickness:2
+2170:     }).setOrigin(0.5,0).setDepth(py+1);
+2171: 
+2172:     this.portalX = px; this.portalY = py;
+2173:   }
+2174: 
+2175:   // ── FISHING SPOT NPC / DOCK ────────────────────────────────────────────────
+2176:   _createFishingSpot(W, H){
+2177:     const fx = this.farm.x + this.farm.w / 2;
+2178:     const fy = this.farm.y + this.farm.h + 165;
+2179: 
+2180:     // Crystal Pond Blue Water Ellipse
+2181:     const pond = this.add.ellipse(fx, fy + 20, 240, 70, 0x0284C7, 0.85).setDepth(fy - 5);
+2182:     this.tweens.add({ targets: pond, scaleX: 1.05, scaleY: 0.95, duration: 1800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+2183: 
+2184:     // Floating Lily Pads
+2185:     this.add.text(fx - 60, fy + 15, '🪷', {fontSize:'18px'}).setDepth(fy-4);
+2186:     this.add.text(fx + 70, fy + 25, '🪷', {fontSize:'16px'}).setDepth(fy-4);
+2187: 
+2188:     // Fishing Dock Pier
+2189:     this.add.ellipse(fx, fy+8, 60, 14, 0, 0.4).setDepth(fy-1);
+2190:     this.dockSprite = this.add.image(fx, fy, 'fishing_dock').setOrigin(0.5,1).setScale(1.5).setDepth(fy);
+2191:     this.tweens.add({ targets: this.dockSprite, y: fy - 2, duration: 1500, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+2192: 
+2193:     this.fishHint = this.add.text(fx, fy-60, '🎣 CRYSTAL POND\n[SPACE]', {
+2194:       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+2195:       color:'#38BDF8', stroke:'#000', strokeThickness:3, align:'center'
+2196:     }).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
+2197:     this.tweens.add({ targets: this.fishHint, y: this.fishHint.y - 3, duration: 700, yoyo: true, repeat: -1 });
+2198: 
+2199:     this.add.text(fx, fy+6, 'Fishing Dock', {
+2200:       fontFamily:'"Press Start 2P",monospace', fontSize:'10px',

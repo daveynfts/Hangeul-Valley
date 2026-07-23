@@ -56,6 +56,13 @@
       color: #e2e8f0;
     }
 
+    canvas {
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+      -ms-interpolation-mode: nearest-neighbor;
+    }
+
     /* Korean & Vietnamese Typography Rules */
     .vn-text, p, span:not(.quiz-crop-icon):not(.key-badge),
     div:not(#hud):not(#hud *), button:not(.hud-btn) {
