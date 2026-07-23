@@ -88,3 +88,29 @@ Execute independent test verification:
 
 Deliver a structured final audit report (`handoff.md` and `audit_report.md` in your working directory) containing a clear verdict:
 `VICTORY CONFIRMED` or `VICTORY REJECTED`.
+
+## 2026-07-23T14:22:23Z
+
+You are the Victory Auditor for the Ginger Cat pixel art redesign task in Hangeul Valley.
+Working directory: C:\VibeCode\Hangeul Valley
+
+Your Mission:
+Conduct an independent post-victory audit verifying that all user requirements and acceptance criteria have been fully satisfied.
+
+Requirements to verify:
+1. Cutest & Most Distinct Ginger Cat Silhouette:
+   - Triangular ears, cute eyes, pink nose, whiskers.
+   - Warm ginger body, tabby stripes, cream chest/belly/paws.
+   - Crisp 1px dark outline separating the cat silhouette from background tiles.
+2. Animation States:
+   - Idle (`cat_idle_0`, `cat_idle_1`)
+   - Walk (`cat_walk_0`, `cat_walk_1`, `cat_walk_2`)
+   - Sit (`cat_sit_0`, `cat_sit_1`)
+   - Sleep (`cat_sleep_0`, `cat_sleep_1`)
+3. Technical & Compatibility Integrity:
+   - All texture keys (`cat_idle_0`, `cat_idle_1`, `cat_walk_0`, `cat_walk_1`, `cat_walk_2`, `cat_sit_0`, `cat_sit_1`, `cat_sleep_0`, `cat_sleep_1`, `cat_npc`) registered and valid.
+   - All 16x16 matrices have exact 16x16 dimensions.
+   - Syntax validation: `node -c game.js` succeeds with exit code 0.
+   - File synchronization: `game.js` ↔ `assets/game.js` are 100% byte-identical.
+
+Please conduct your 3-phase audit independently and return your structured verdict (VICTORY CONFIRMED or VICTORY REJECTED) with detailed findings.

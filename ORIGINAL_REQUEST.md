@@ -416,3 +416,44 @@ All existing gameplay, sprite rendering, animations, and UI must remain intact. 
 - [ ] Root `game.js` and `assets/game.js` are synchronized.
 - [ ] Skip audit phase — user will visually verify.
 
+## Follow-up — 2026-07-23T14:15:48Z
+
+Thiết kế lại toàn bộ pixel art cho nhân vật **Ginger Cat** trong game **Hangeul Valley** để trở thành một chú mèo cam cực kỳ dễ thương, rõ nét, dễ nhận biết và nổi bật trên bản đồ.
+
+Working directory: C:/VibeCode/Hangeul Valley
+Integrity mode: development
+
+## Current Context & Problems
+- Các frame cũ của Ginger Cat (`cat_idle_0/1`, `cat_walk_0..2`, `cat_sit_0/1`, `cat_sleep_0/1`) đang bị rối hình, mờ nhòe, khó nhận diện đường nét con mèo khi nhìn ở khoảng cách chơi game thực tế trên Phaser Canvas.
+- Tất cả sprites đều vẽ bằng 16×16 pixel matrix grid với `PixelArtRenderer.drawMatrix(g, matrix, palette)`.
+
+## Requirements
+
+### R1. Cutest & Most Distinct Ginger Cat Silhouette
+- **Facial Features**: Tai mèo nhọn hình tam giác rõ ràng, đôi mắt to mầm tròn lanh lợi, mũi hồng xinh xắn và râu mèo (whiskers) nổi bật.
+- **Body & Color Contrast**: Thân hình tròn trịa đáng yêu, bộ lông màu cam ấm áp (warm ginger/terracotta) phối sọc mướp cam đậm (ginger tabby stripes) cùng phần ngực/bụng/chân lông màu trắng kem tương phản rõ rệt để không bị lẫn vào nền cỏ.
+- **Crisp Outlines**: Đường viền (outline) 1px sắc nét giúp hình dáng chú mèo tách biệt rõ ràng khỏi gạch nền/cỏ ở bất kỳ góc nhìn nào.
+
+### R2. Expressive & Fluid Animation States
+- **Idle State** (`cat_idle_0`, `cat_idle_1`): Mèo đứng/ngồi thở nhẹ nhàng, chớp mắt đáng yêu, đuôi khẽ đung đưa.
+- **Walk Cycle** (`cat_walk_0`, `cat_walk_1`, `cat_walk_2`): Dáng bước đi/lon ton nhịp nhàng, chân trước/sau di chuyển rõ ràng, đuôi vẫy vui vẻ.
+- **Sit Pose** (`cat_sit_0`, `cat_sit_1`): Dáng ngồi ngoan ngoãn, 2 chân trước khép sát, đuôi quấn quanh thân.
+- **Sleep Pose** (`cat_sleep_0`, `cat_sleep_1`): Cuộn tròn ngủ ngon lành như một cuộn len cam xinh xắn.
+
+### R3. Maintain Total System & Texture Key Compatibility
+- Tất cả các texture key cũ (`cat_idle_0`, `cat_idle_1`, `cat_walk_0`, `cat_walk_1`, `cat_walk_2`, `cat_sit_0`, `cat_sit_1`, `cat_sleep_0`, `cat_sleep_1`, `cat_npc`) và animation key Phaser phải được giữ nguyên 100% để không làm hỏng game logic.
+- `node -c game.js` phải chạy qua không có lỗi syntax.
+- Đồng bộ toàn bộ nội dung giữa `game.js` và `assets/game.js`.
+
+## Acceptance Criteria
+
+### Visual Clarity & Cute Factor
+- [ ] Mèo Ginger Cat có tai nhọn, sọc cam mướp, ngực trắng và viền sắc nét, dễ dàng nhận diện ngay lập tức trên canvas game.
+- [ ] Cả 4 trạng thái animation (idle, walk, sit, sleep) đều có tạo hình riêng biệt và hoạt họa mượt mà.
+
+### Technical Integrity
+- [ ] `node -c game.js` đạt 0 lỗi syntax.
+- [ ] Tất cả texture keys của Ginger Cat đều được tạo thành công và giữ đúng tham chiếu.
+- [ ] Sync hoàn toàn `game.js` ↔ `assets/game.js`.
+
+
