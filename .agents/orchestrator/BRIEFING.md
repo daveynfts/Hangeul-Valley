@@ -1,70 +1,72 @@
-# BRIEFING — 2026-07-23T08:50:30Z
+# BRIEFING — 2026-07-23T09:13:40Z
 
 ## Mission
-Redesign top HUD layout and UI/UX for Hangeul Valley: fix top element overlaps (#hud, #event-banner, #progress-bar-wrap), reorganize 15+ HUD items into clean scannable logical groups with ≤8 top-level buttons while retaining 100% functional parity and retro glassmorphism style.
+Character design upgrade for Hangeul Valley: create 3+ frame procedural pixel art action animations for Farmer (Watering, Harvesting, Fruit Picking) and tool sprites; redesign Cat NPC from "Muop" to "Ginger Cat" with rich pixel art and 4+ animation states; hook animations to gameplay triggers; maintain 12-frame walk cycle and 100% sync between `game.js` and `assets/game.js`.
 
 ## 🔒 My Identity
 - Archetype: Project Orchestrator
 - Roles: orchestrator, user_liaison, human_reporter, successor
 - Working directory: C:\VibeCode\Hangeul Valley\.agents\orchestrator
 - Original parent: top-level
-- Original parent conversation ID: 8ef8b7f4-ce9c-4e52-ad89-50ad5b5c7e13
+- Original parent conversation ID: 3ff373f0-285d-49f3-a9c1-762a64e6f951
 
 ## 🔒 My Workflow
 - **Pattern**: Project Pattern (Orchestrator → Explorer → Worker → Reviewer → Challenger → Forensic Auditor)
 - **Scope document**: C:\VibeCode\Hangeul Valley\.agents\orchestrator\PROJECT.md
-1. **Decompose**: Split into milestone phases (Phase 1: Investigation & Layout Architecture, Phase 2: Implementation & Synchronization, Phase 3: Verification & Auditing)
+1. **Decompose**: Split into milestone phases (M1: Exploration & Architecture, M2: Implementation & Synchronization, M3: Verification, Challenge & Audit)
 2. **Dispatch & Execute**: Direct (iteration loop: Explorer -> Worker -> Reviewer -> Challenger -> Auditor)
 3. **On failure**: Retry -> Replace -> Skip -> Redistribute -> Redesign
 4. **Succession**: Self-succeed at 16 spawns
 - **Work items**:
-  1. Phase 1: Exploration of HTML/CSS/JS top layout & button structure [completed]
-  2. Phase 2: Reorganization & CSS layout fix implementation [completed]
-  3. Phase 3: Review, Challenge & Forensic Audit [completed]
+  1. Milestone 1: Exploration of `PixelArtRenderer`, Farmer/Cat sprite matrices & FarmScene trigger points [completed]
+  2. Milestone 2: Implementation of Farmer actions, Ginger Cat redesign, renaming, gameplay triggers & code sync [completed]
+  3. Milestone 3: Review, Challenge & Forensic Audit [completed]
 - **Current phase**: 4
-- **Current focus**: Victory reporting & project completion
+- **Current focus**: Final reporting & user delivery
 
 ## 🔒 Key Constraints
 - NEVER write or modify source code files directly as orchestrator
 - NEVER run build/test commands directly as orchestrator
-- All HTML/CSS changes in index.html MUST be mirrored to assets/index.html
-- All element IDs and onclick handlers must be preserved
-- Must pass `node -c game.js`
-- Must pass zero-overlap requirement at 1024px+ and 768px viewports
-- Must have ≤8 visible top-level action buttons
+- All pixel art MUST be generated procedurally via Phaser Graphics API (`fillRect()` grid patterns in `PixelArtRenderer`) — zero external image files
+- Must replace all 3 hardcoded instances of "Muop" with "Ginger Cat"
+- Must preserve Farmer 12-frame walk cycle
+- Must synchronize `game.js` and `assets/game.js`
+- Must pass `node -c game.js` with zero errors
 
 ## Current Parent
-- Conversation ID: 8ef8b7f4-ce9c-4e52-ad89-50ad5b5c7e13
-- Updated: 2026-07-23T08:50:30Z
+- Conversation ID: 3ff373f0-285d-49f3-a9c1-762a64e6f951
+- Updated: 2026-07-23T09:13:40Z
 
 ## Key Decisions Made
-- Dispatched 3 Explorer subagents in parallel for HTML, JS, and CSS architecture investigation.
-- Adopted Explorer 3's 2-Tier Responsive Floating Dock Architecture.
-- Worker M2 completed initial implementation and fix pass (`max-width: calc(100vw - 300px)`).
+- Decomposing the Character Design Upgrade task into M1 (Exploration), M2 (Implementation & Sync), M3 (Verification & Audit).
+- Explorers 1, 2, and 3 completed comprehensive specifications.
+- Worker M2 completed code implementation and synchronization.
 - Reviewer 1 (PASS), Reviewer 2 (PASS), Challenger 1 (PASS), Challenger 2 (PASS), Auditor M3 (CLEAN).
+- Worker M2 Fix trimmed `player_pick_down_2` to 16x16. All 44/44 tests passing.
 
 ## Team Roster
 | Agent | Type | Work Item | Status | Conv ID |
 |-------|------|-----------|--------|---------|
-| Explorer 1 | teamwork_preview_explorer | HTML Top Area Inspection | completed | 04bc177d-8f02-4e40-bed2-db8754fbace9 |
-| Explorer 2 | teamwork_preview_explorer | JS HUD Bindings Inspection | completed | 3540dfdf-0717-45c3-8968-6eb952f49991 |
-| Explorer 3 | teamwork_preview_explorer | CSS & UX Layout Architecture | completed | 155af5b7-49a9-4d1c-b7f6-5116c72e3519 |
-| Worker M2 | teamwork_preview_worker | HUD Layout Implementation & Fix | completed | b621f088-b6dc-4ce5-95eb-daf0c3ed4331 |
-| Reviewer 1 | teamwork_preview_reviewer | HTML/CSS & Sync Review | completed (PASS) | ec9df78a-f87c-4aa2-9d75-841ce679f809 |
-| Reviewer 2 | teamwork_preview_reviewer | UI/UX & Feature Parity Review | completed (PASS) | 64dfb043-57ad-4305-b215-41168052d0b1 |
-| Challenger 1 | teamwork_preview_challenger | Responsive Overlap Verification | completed (PASS) | a0931687-764e-45af-8dc7-876fe838d59a |
-| Challenger 2 | teamwork_preview_challenger | Button Interactivity & Parity | completed (PASS) | 86bc03e9-752c-4f3b-8699-92956bb5e65d |
-| Auditor M3 | teamwork_preview_auditor | Forensic Integrity Audit | completed (CLEAN) | f0d52377-d4c0-4167-8975-d25131f8e979 |
+| Explorer 1 | teamwork_preview_explorer | Farmer Action Matrices & Tool Sprites | completed | 85f11c1d-72ef-45e8-9374-88708ffae864 |
+| Explorer 2 | teamwork_preview_explorer | Ginger Cat Redesign & "Muop" Renaming | completed | 79de34cc-b2dc-4d48-83ab-4aee63860e45 |
+| Explorer 3 | teamwork_preview_explorer | FarmScene Triggers & Cat AI Integration | completed | 1a9ead85-5955-416e-b432-013dcde2258a |
+| Worker M2 | teamwork_preview_worker | Implementation & Code Synchronization | completed | 209f1702-c6b6-428c-a942-b67bf795ae2e |
+| Reviewer 1 | teamwork_preview_reviewer | Code Quality & Sync Review | completed (PASS) | 8cb90244-4883-491f-9b1a-6f4592361c90 |
+| Reviewer 2 | teamwork_preview_reviewer | Requirements & Parity Review | completed (PASS) | 85f56caf-3a3f-4f5a-a842-69bcd16ceaed |
+| Challenger 1 | teamwork_preview_challenger | Automated Test Script Verification | completed (PASS) | e06920c0-3252-4479-b5cf-bcb52d97a7e4 |
+| Challenger 2 | teamwork_preview_challenger | Trigger & Naming Parity Challenge | completed (PASS) | 3aa2772e-2af7-4007-b267-aeabc1c5986b |
+| Auditor M3 | teamwork_preview_auditor | Forensic Integrity Audit | completed (CLEAN) | 6398cb51-7379-4506-9853-422a1a4855a6 |
+| Worker M2 Fix | teamwork_preview_worker | Trim player_pick_down_2 to 16x16 | completed | 142eb774-d96c-4793-ac90-102bc50bab69 |
 
 ## Succession Status
 - Succession required: no
-- Spawn count: 11 / 16
+- Spawn count: 10 / 16
 - Pending subagents: none
 - Predecessor: none
 - Successor: not yet spawned
 
 ## Active Timers
-- Heartbeat cron: 8ef8b7f4-ce9c-4e52-ad89-50ad5b5c7e13/task-23
+- Heartbeat cron: 1eaeaf43-aeda-40fe-8cdf-1284cd6a557d/task-37 (to be stopped)
 - Safety timer: none
 
 ## Artifact Index

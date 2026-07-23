@@ -1,25 +1,26 @@
-# BRIEFING — 2026-07-22T17:41:35+07:00
+# BRIEFING — 2026-07-23T09:04:25Z
 
 ## Mission
-Sentinel monitoring and orchestration launcher for Hangeul Valley HD Pixel Art (Stardew Valley style) Graphics Upgrade.
+Orchestrate character design upgrade (Farmer action animations, Ginger Cat redesign) for Hangeul Valley.
 
 ## 🔒 My Identity
 - Archetype: sentinel
-- Working directory: C:\VibeCode\Hangeul Valley\.agents\sentinel\
-- Orchestrator: 4bc62855-0618-46cf-8675-744ef5a9946f
-- Victory Auditor: d67e10a7-2552-4181-b676-2b639a1f9aa6
+- Working directory: C:/VibeCode/Hangeul Valley/.agents/sentinel
+- Orchestrator: 1eaeaf43-aeda-40fe-8cdf-1284cd6a557d
+- Victory Auditor: 0fd275c1-331e-4dae-a2ea-337ef9c4b343
 
 ## 🔒 Key Constraints
 - No technical decisions — relay only
 - Victory Audit is MANDATORY before reporting completion
+- Must not write code or make technical decisions
 
 ## User Context
-- **Last user request**: Upgrade all game graphics to 48x48 HD Pixel Art (Stardew Valley style) using Phaser 3 Graphics API, plus day/night cycle, weather, particle effects, animated water, parallax scrolling across all 7 scenes.
+- **Last user request**: Upgrade character design (Farmer action animations: watering, harvesting, fruit picking; Ginger Cat redesign with 4 animation states and renaming from Muop).
 - **Pending clarifications**: none
-- **Delivered results**: Orchestrator claimed scope completion across all 4 milestones (R1-R4). Independent Victory Audit in progress.
+- **Delivered results**: Character design upgrade complete & verified with VICTORY CONFIRMED.
 
 ## Project Status
-- **Phase**: complete (VICTORY CONFIRMED by independent Victory Auditor)
+- **Phase**: complete
 
 ## Victory Audit Status
 - **Triggered**: yes
@@ -27,5 +28,4 @@ Sentinel monitoring and orchestration launcher for Hangeul Valley HD Pixel Art (
 - **Retry count**: 0
 
 ## Artifact Index
-- ORIGINAL_REQUEST.md — Verbatim user request record
-
+- C:/VibeCode/Hangeul Valley/ORIGINAL_REQUEST.md — Verbatim user request history

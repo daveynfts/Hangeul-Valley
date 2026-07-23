@@ -1,21 +1,22 @@
-# Project: Hangeul Valley Top HUD Redesign
+# Project: Hangeul Valley Character Design Upgrade
 
 ## Architecture
 - Single Page Web App (Phaser 3 + vanilla HTML/CSS/JS)
-- `index.html` (and mirrored `assets/index.html`): Top UI layout containing `#hud`, `#event-banner`, `#progress-bar-wrap`, modal overlays, HUD action buttons.
-- `game.js`: References UI elements by ID (e.g. currency updates, progress updates, buff badges, event banner visibility).
+- `game.js` (and mirrored `assets/game.js`): Contains `PixelArtRenderer` procedural matrix definitions, texture generation, animation registration, character controllers, NPC behavior, and FarmScene interaction logic.
 
 ## Milestones
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
-| 1 | Exploration & Architecture | Analyze `#hud`, `#event-banner`, `#progress-bar-wrap` structure in `index.html` & `game.js` references | none | DONE |
-| 2 | HUD Redesign Implementation | Redesign CSS flex/grid layout to eliminate top-area overlap at 1024px+ and 768px; group HUD buttons (≤8 top-level visible + dropdown/more menu for remaining); preserve IDs & onclick handlers; sync `index.html` and `assets/index.html` | M1 | DONE |
-| 3 | Verification, Challenge & Audit | Verify code syntax (`node -c game.js`), verify HTML sync, perform adversarial challenge & forensic audit | M2 | DONE |
+| 1 | Exploration & Architecture | Inspect `PixelArtRenderer` matrices, palette colors, Phaser animation definitions, cat NPC implementation, and FarmScene trigger points in `game.js`. | none | DONE |
+| 2 | Implementation & Sync | Implement Farmer action animations (watering, harvesting, fruit picking) & tool sprites; redesign Ginger Cat with 4 animation states & rename "Muop" -> "Ginger Cat"; hook animations to gameplay triggers & contextual behaviors; sync `game.js` and `assets/game.js`. | M1 | DONE |
+| 3 | Verification, Challenge & Audit | Run `node -c game.js`, verify code quality & animation frame counts, challenge gameplay triggers and naming parity, perform forensic audit. | M2 | DONE |
 
 ## Interface Contracts
-- CSS classes: `.glass-bg`, `.neon-border`, `Press Start 2P` font.
-- Element IDs: `#hud`, `#event-banner`, `#progress-bar-wrap`, `#hud-level-name`, `#hud-progress`, `#coins-val`, `#gems-val`, `#honor-val`, `#active-buffs`, and all 12 action button IDs/handlers.
+- `PixelArtRenderer` matrix format: 16×16 character grid strings, `PS=3` (48×48 textures).
+- Palette usage: `STARDEW_PALETTE` and harmonious color codes.
+- Phaser texture keys & animation keys: `player_water_*`, `player_harvest_*`, `player_pick_*`, `tool_watering_can`, `tool_basket`, `cat_idle_*`, `cat_walk_*`, `cat_sit_*`, `cat_sleep_*`, `player-water`, `player-harvest`, `player-pick`, `cat-idle`, `cat-walk`, `cat-sit`, `cat-sleep`.
+- Cat NPC name: "Ginger Cat" across all UI labels, dialogs, and text highlights (0 instances of "Muop").
 
 ## Code Layout
-- Root: `index.html`, `game.js`
-- Assets: `assets/index.html`
+- Root: `game.js`, `index.html`
+- Assets: `assets/game.js`, `assets/index.html`

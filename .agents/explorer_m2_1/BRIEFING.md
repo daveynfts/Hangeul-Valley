@@ -1,39 +1,40 @@
-# BRIEFING — 2026-07-22T10:57:55Z
+# BRIEFING — 2026-07-23T09:07:00Z
 
 ## Mission
-Analyze FarmScene background & terrain drawing logic in game.js, plan 48x48 procedural tilemap terrain textures using Phaser 3 Graphics API, and document integration into FarmScene.create() and _renderTerrain().
+Investigate game.js to design upgraded Ginger Cat NPC procedural pixel art matrices (16x16), 4 animation states (idle, walk, sit, sleep), and identify all code locations for renaming "Muop" to "Ginger Cat".
 
 ## 🔒 My Identity
 - Archetype: Explorer
-- Roles: Explorer 1 for Milestone R2: Tilemap Terrain & Environment Art
+- Roles: Explorer 2 (Ginger Cat Specialist)
 - Working directory: C:\VibeCode\Hangeul Valley\.agents\explorer_m2_1
-- Original parent: ef5d12a7-5e12-4e31-bc78-fb6dde5a6b17
-- Milestone: Milestone R2 (Tilemap Terrain & Environment Art)
+- Original parent: 1eaeaf43-aeda-40fe-8cdf-1284cd6a557d
+- Milestone: Hangeul Valley Character Design Upgrade
 
 ## 🔒 Key Constraints
 - Read-only investigation — do NOT modify game.js directly
-- Tilemap terrain textures must use 48x48 pixel resolution
-- Use Phaser 3 Graphics API (`make.graphics()`, `fillRect()`, `generateTexture()`)
-- Output comprehensive analysis report to `C:/VibeCode/Hangeul Valley/.agents/explorer_m2_1/analysis.md` and send handoff report to parent
+- Design upgraded 16x16 matrix specifications with rich ginger tabby details (dark ginger stripe patterns, expressive face, pink nose, whiskers, fluffy tail)
+- 4 animation states (≥2 frames each): cat-idle, cat-walk, cat-sit, cat-sleep
+- Complete ASCII diagrams, hex colors, texture keys, Phaser anims.create parameters
+- Identify all occurrences of "Muop" in game.js and other files for replacement with "Ginger Cat"
+- Output report to `analysis.md` and `handoff.md` in working directory.
 
 ## Current Parent
-- Conversation ID: ef5d12a7-5e12-4e31-bc78-fb6dde5a6b17
-- Updated: 2026-07-22T10:57:55Z
+- Conversation ID: 1eaeaf43-aeda-40fe-8cdf-1284cd6a557d
+- Updated: 2026-07-23T09:07:00Z
 
 ## Investigation State
-- **Explored paths**:
-  - `C:/VibeCode/Hangeul Valley/game.js`: `FarmScene` (line 2953), `_bakeTextures()` (line 3014), `_drawWorld()` (line 3313), `_createPlots()` (line 3719), constants `PS=3`, `TILE=48`, `PLOT_SIZE=48`.
+- **Explored paths**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`.
 - **Key findings**:
-  - Current terrain uses basic grass tiles `grs0..3` without structured path tilemap, farmhouse structure, or shoreline tiles.
-  - Complete 48x48 pixel procedural tilemap specification developed for grass variants, dirt path network, wooden fences, 5x4 Stardew Valley red barn farmhouse, and crystal pond shoreline border.
-  - Integration blueprint provided for `_bakeTerrainTiles()` and `_renderTerrain(W, H)`.
+  - Found 4 active runtime occurrences of "Muop" (`game.js`: lines 3537, 4543, 4965; `index.html`: line 1508; plus mirror asset files).
+  - Designed 9 validated 16x16 matrix specifications for 4 animation states (`cat-idle`, `cat-walk`, `cat-sit`, `cat-sleep`).
+  - Specified expanded color palette `C` and Phaser `anims.create` configuration parameters.
 - **Unexplored areas**: None.
 
 ## Key Decisions Made
-- Completed detailed analysis report in `analysis.md` and handoff report in `handoff.md`.
+- Completed full analysis report in `analysis.md` and handoff report in `handoff.md`.
 
 ## Artifact Index
-- `C:/VibeCode/Hangeul Valley/.agents/explorer_m2_1/ORIGINAL_REQUEST.md` — Original prompt
-- `C:/VibeCode/Hangeul Valley/.agents/explorer_m2_1/BRIEFING.md` — Context index
-- `C:/VibeCode/Hangeul Valley/.agents/explorer_m2_1/analysis.md` — Full technical analysis & texture specification report
-- `C:/VibeCode/Hangeul Valley/.agents/explorer_m2_1/handoff.md` — 5-component handoff report for parent/implementer
+- `C:/VibeCode/Hangeul Valley/.agents/explorer_m2_1/ORIGINAL_REQUEST.md` — Original request log
+- `C:/VibeCode/Hangeul Valley/.agents/explorer_m2_1/BRIEFING.md` — Agent briefing index
+- `C:/VibeCode/Hangeul Valley/.agents/explorer_m2_1/analysis.md` — Full technical analysis & Ginger Cat spec report
+- `C:/VibeCode/Hangeul Valley/.agents/explorer_m2_1/handoff.md` — Handoff report for parent/implementer

@@ -1,52 +1,50 @@
-# BRIEFING — 2026-07-22T10:05:00Z
+# BRIEFING — 2026-07-23T09:13:20+07:00
 
 ## Mission
-Fix 2 Critical Reviewer Findings in `game.js` and `assets/game.js` (Shop Quiz Gate Bypass & Currency State Desync), sync `assets/game.js`, and verify with `node -c`.
+Fix 17-row height anomaly in `player_pick_down_2` in `game.js` to make it strictly 16x16, synchronize `game.js` to `assets/game.js`, verify syntax and test compliance.
 
 ## 🔒 My Identity
-- Archetype: teamwork_preview_worker
+- Archetype: worker_m2_fix
 - Roles: implementer, qa, specialist
-- Working directory: C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/
-- Original parent: 1ed8fa99-4393-43b4-b954-c485a864f0e6
-- Milestone: M2 Fix
+- Working directory: C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix
+- Original parent: 1eaeaf43-aeda-40fe-8cdf-1284cd6a557d
+- Milestone: M2 Fix / Character Design Upgrade
 
 ## 🔒 Key Constraints
-- Fix Critical Finding 1: Ensure `buyLevel(idx)` and `buyLevelFromSelect(idx)` call `startShopQuizGate(idx)` instead of `_doLevelPurchase(idx)` directly.
-- Fix Critical Finding 2: Replace direct `gold -= cost` / `gold += reward` with `spendCoins(cost)` / `addCoins(reward)`. Ensure `spendCoins` checks for balance, updates `playerCurrencies.coins`, calls `syncGoldAlias()`, updates HUD, saves via `persistSave()`.
-- Add internal guard check inside `claimMainQuest(actNum)` to verify `act.progress >= act.target` (and SRS mastery requirements if applicable) before awarding rewards.
-- Mirror all changes from `game.js` to `assets/game.js`.
-- Zero syntax errors verified via `node -c game.js` and `node -c assets/game.js`.
-- Minimal change principle. No unrequested refactoring.
+- DO NOT CHEAT. All implementations must be genuine.
+- Fix 17-row height anomaly in `player_pick_down_2` matrix in `game.js` so it is strictly 16 rows (16x16).
+- Synchronize `game.js` -> `assets/game.js`.
+- Run syntax checks and test suite to confirm 100% matrix grid compliance.
+- Write report to `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/handoff.md` and send message to parent.
 
 ## Current Parent
-- Conversation ID: 1ed8fa99-4393-43b4-b954-c485a864f0e6
-- Updated: 2026-07-22T10:05:00Z
+- Conversation ID: 1eaeaf43-aeda-40fe-8cdf-1284cd6a557d
+- Updated: 2026-07-23T09:13:20+07:00
 
 ## Task Summary
-- **What to build**: Fix critical shop quiz gate bypass and currency state desync in game.js and assets/game.js.
-- **Success criteria**: Level purchases trigger shop quiz gate modal; currency operations use unified `spendCoins`/`addCoins` functions; `assets/game.js` is perfectly in sync with `game.js`; `node -c` passes cleanly.
-
-## Change Tracker
-- **Files modified**:
-  - `game.js`: Wired `buyLevel`/`buyLevelFromSelect` to `startShopQuizGate`, replaced primitive `gold -=` with `spendCoins`, added guard check to `claimMainQuest`, updated `adoptPet` to use `spendGems`.
-  - `assets/game.js`: Mirror copy of `game.js`.
-- **Build status**: PASS (`node -c game.js; node -c assets/game.js`)
-- **Pending issues**: None
-
-## Quality Status
-- **Build/test result**: PASS (zero syntax errors in node -c)
-- **Lint status**: N/A
-- **Tests added/modified**: Verified zero `gold -=` mutations remaining and correct `startShopQuizGate` calls via node assertion script.
-
-## Loaded Skills
-- None
+- **What to build**: Fix `player_pick_down_2` row count anomaly in `game.js`, sync to `assets/game.js`.
+- **Success criteria**: All matrices 16x16, node syntax check passes, test scripts pass 100%.
 
 ## Key Decisions Made
-- Initialized briefing and task environment.
-- Replaced direct primitive `gold -=` with encapsulation helper `spendCoins(cost)` to ensure `playerCurrencies.coins` is properly decremented and saved.
-- Wired shop and level select purchase buttons to `startShopQuizGate(idx)` so levels cannot be unlocked without passing the 3-question Korean vocabulary quiz.
-- Added internal guard check in `claimMainQuest(actNum)` checking `curr >= act.target` and `srsPct >= act.minPct` to prevent programmatic claim exploits.
+- Removed extra `'..VVVVVVVVVVVV..'` row from `player_pick_down_2` array in `game.js`.
+- Synchronized `game.js` to `assets/game.js` via byte copy.
+- Confirmed syntax with `node -c` and full pass with `test_character_upgrade.js` (44/44 passed) and `test_matrices.py`.
+
+## Change Tracker
+- **Files modified**: `game.js`, `assets/game.js`
+- **Build status**: PASS (node -c clean)
+- **Pending issues**: none
+
+## Quality Status
+- **Build/test result**: PASS (44/44 tests passed in `test_character_upgrade.js`, `test_matrices.py` SUCCESS)
+- **Lint status**: clean
+- **Tests added/modified**: none (used existing challenger and explorer test scripts)
+
+## Loaded Skills
+- None required.
 
 ## Artifact Index
-- C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/ORIGINAL_REQUEST.md — Original user request log
-- C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/BRIEFING.md — Worker briefing and state tracking
+- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/ORIGINAL_REQUEST.md`
+- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/BRIEFING.md`
+- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/progress.md`
+- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/handoff.md`

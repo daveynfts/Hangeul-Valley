@@ -1,29 +1,39 @@
-# Execution Plan — Top HUD Redesign & Overlap Fix
+# Implementation Plan — Hangeul Valley Character Design Upgrade
 
-## Objective
-Fix top area layout overlaps (#hud, #event-banner, #progress-bar-wrap) for 1024px+ and 768px viewports, reorganize 15+ HUD items into scannable logical groups with ≤8 visible top-level action buttons, preserve retro glassmorphism design system & functional JS parity, and keep `index.html` and `assets/index.html` 100% synchronized.
+## Objectives & Requirements
+1. **Farmer Action Animations & Tool Sprites (R1)**:
+   - Create 3+ frame procedural pixel art action animation sets for Farmer: Watering (bình tưới nước), Harvesting (thu hoạch), Fruit Picking (hái quả).
+   - Create separate tool sprites (watering can, basket/sickle).
+   - Trigger animations at gameplay moments (watering on Phase 2 quiz success, harvesting on Phase 3 quiz success, fruit picking on apple tree interaction).
+2. **Ginger Cat Character Redesign (R2)**:
+   - Rename Cat NPC from "Muop" to "Ginger Cat" across the codebase (game.js and assets/game.js).
+   - Richer pixel art (ginger tabby with visible stripes, expressive face/whiskers, fluffy tail).
+   - At least 4 animation states: idle-blink, walking/trotting, sitting/grooming, sleeping/curled up (≥2 frames each).
+   - Contextual behavior in FarmScene.
+3. **Seamless Integration & Integrity (R3)**:
+   - All sprites rendered procedurally via Phaser Graphics API (PixelArtRenderer class, 16×16 matrix at PS=3). Zero external image files.
+   - `node -c game.js` must pass with zero errors.
+   - Farmer 12-frame walk cycle preserved.
+   - Root `game.js` and `assets/game.js` must be synchronized.
 
-## Steps
-1. **Phase 1: Exploration**
-   - Dispatch 3 Explorers (`teamwork_preview_explorer`) to investigate:
-     - Explorer 1: Detailed HTML layout of `#hud`, `#event-banner`, `#progress-bar-wrap`, and all 15+ items in `index.html`.
-     - Explorer 2: JS bindings, DOM selections, dynamic updates, and button event listeners in `game.js`.
-     - Explorer 3: Responsive CSS styles, glassmorphism rules, break points (1024px, 768px), and layout proposals.
-   - Aggregate Explorer findings.
+## Milestone Plan
 
-2. **Phase 2: Implementation & Sync**
-   - Dispatch Worker (`teamwork_preview_worker`) to:
-     - Redesign `#hud`, `#event-banner`, and `#progress-bar-wrap` CSS and HTML structure.
-     - Group buttons into clear logical sections: Status, Currency, Main Actions (≤8 visible), plus a dropdown/overflow menu for remaining actions.
-     - Ensure retro glassmorphism visual design (neon borders, backdrop blur, Press Start 2P font) is preserved.
-     - Maintain all element IDs and `onclick` attributes intact.
-     - Sync changes from `index.html` to `assets/index.html`.
-     - Run `node -c game.js` syntax check.
+### Milestone 1: Exploration & Architecture Analysis
+- **Goal**: Thoroughly analyze `game.js` sprite rendering pipeline, matrix structure, palette colors, Phaser animation definitions, cat NPC hardcoded references, and FarmScene trigger points.
+- **Dispatch**:
+  - `explorer_m1_1`: Analyze Farmer character matrix format, palette keys, existing 12 walk frames, and how action frames should be structured and animated.
+  - `explorer_m1_2`: Analyze Cat NPC "Muop" references, current 2 idle frames, and how to structure 4+ animation states (idle-blink, walk, sit, sleep) with striped tabby design.
+  - `explorer_m1_3`: Analyze FarmScene interaction logic for watering (Phase 2 success), harvesting (Phase 3 success), and apple picking, and exact line locations for animation triggers.
+- **Output**: Consolidated exploration findings report in `.agents/explorer_m1_1/analysis.md`.
 
-3. **Phase 3: Review, Challenge & Audit**
-   - Dispatch 2 Reviewers (`teamwork_preview_reviewer`) to independently review HTML/CSS layout, button count (≤8 top-level), element ID preservation, and sync between `index.html` and `assets/index.html`.
-   - Dispatch 2 Challengers (`teamwork_preview_challenger`) to run headless tests / viewport tests checking for pixel overlaps at 1024px+ and 768px, verifying click handlers work for all 12 buttons.
-   - Dispatch Forensic Auditor (`teamwork_preview_auditor`) to verify zero cheating, fake implementations, or missing files.
+### Milestone 2: Implementation & Synchronization
+- **Goal**: Implement all character matrices, textures, Phaser animation registrations, renaming, contextual cat behaviors, and gameplay trigger hooks. Synchronize root `game.js` and `assets/game.js`.
+- **Dispatch**: Worker subagent (`worker_m2`).
+- **Output**: Updated `game.js` and `assets/game.js` with passing `node -c game.js`.
 
-4. **Phase 4: Synthesis & Reporting**
-   - Synthesize results, update scope & progress metadata, report completion.
+### Milestone 3: Verification, Challenge & Forensic Audit
+- **Goal**: Independently review code quality, verify animation frame counts, challenge trigger hooks and naming parity, and perform forensic integrity audit.
+- **Dispatch**:
+  - `reviewer_m3_1` & `reviewer_m3_2`: Verify code structure, animation parameters, frame counts, naming parity, sync between `game.js` and `assets/game.js`.
+  - `challenger_m3_1` & `challenger_m3_2`: Verify syntax, test animation triggers, verify zero remaining "Muop" instances.
+  - `auditor_m3`: Forensic integrity audit for cheating/fake code detection.

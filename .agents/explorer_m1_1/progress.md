@@ -1,11 +1,15 @@
 # Progress Report
 
-Last visited: 2026-07-22T10:42:08Z
-Status: Completed investigation for Milestone R1 Procedural 48x48 Pixel Art Sprite Renderer & Character System.
+Last visited: 2026-07-23T09:05:06Z
+Status: Completed - Farmer Action Animations & Tool Sprites Specification complete.
 
 ## Completed Steps
-- Examined `game.js` for player sprite (`farmer0..3`), emoji text sprites (`🗡️`, `🎣`, `🛸`), and NPC rendering (`cat_npc`, `wizard_npc`).
-- Designed procedural 48x48 pixel art grid system for 16 textures (`player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`, `cat_idle_0..1`, `wizard_idle_0..1`).
-- Documented `PixelArtRenderer` module structure for Phaser texture baking and animation registration.
-- Saved detailed analysis report to `C:/VibeCode/Hangeul Valley/.agents/explorer_m1_1/analysis.md`.
-- Saved 5-component handoff report to `C:/VibeCode/Hangeul Valley/.agents/explorer_m1_1/handoff.md`.
+1. Examined `PixelArtRenderer` in `game.js` (PS=3, STARDEW_PALETTE, matrix format, generateTexture calls).
+2. Examined current Farmer walk cycle textures (`player_walk_down_0/1/2`, etc.) and animation registrations (`player-walk-down`, etc.).
+3. Designed 3+ frame procedural pixel art matrix specifications (16×16 character grid strings using `STARDEW_PALETTE`) for:
+   - Watering action (`player_water_down_0..2`)
+   - Harvesting action (`player_harvest_down_0..2`)
+   - Fruit Picking action (`player_pick_down_0..2`)
+4. Designed separate 16×16 procedural tool sprites (`tool_watering_can`, `tool_basket`, `tool_sickle`).
+5. Verified all 12 matrices with `test_matrices.py` (100% 16x16 dimension and palette compliance).
+6. Documented complete ASCII diagrams, symbol legend, texture key names, Phaser `anims.create` parameters, and copy-paste JS code in `analysis.md` and `handoff.md`.

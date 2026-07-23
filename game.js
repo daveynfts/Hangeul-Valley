@@ -804,14 +804,19 @@ class PixelArtRenderer {
     }
   }
 
-  // 1. Player Farmer 4-Direction Walk Cycle (12 frames)
+  // 1. Player Farmer 4-Direction Walk Cycle & Action Animations
   static _genPlayerTextures(scene) {
     const P = {
       '.': null,
       'X': 0xF9D09B, 'x': 0xD8A070, 'I': 0xFFB3B3, 'N': 0x2A1A0A,
       'T': STARDEW_PALETTE.strawHat, 't': 0xE8C988, 'V': STARDEW_PALETTE.woodHighlight, 'R': STARDEW_PALETTE.hatRibbon,
       'Z': STARDEW_PALETTE.overallsBase, 'z': STARDEW_PALETTE.overallsDark, 'Q': 0x1E2A4A, 'q': 0x161F38,
-      'S': STARDEW_PALETTE.boots, 's': 0x382210, 'B': STARDEW_PALETTE.strawHat, 'W': 0xFFFFFF
+      'S': STARDEW_PALETTE.boots, 's': 0x382210, 'B': STARDEW_PALETTE.strawHat, 'W': 0xFFFFFF,
+      'm': 0x7A8B99, 'M': 0xA0B2C6, 'k': 0x4A5568, 'w': STARDEW_PALETTE.oceanShimmer, 'U': STARDEW_PALETTE.oceanFoam,
+      'Y': STARDEW_PALETTE.woodBase, 'y': STARDEW_PALETTE.woodHighlight, 'j': STARDEW_PALETTE.woodShadow,
+      'c': 0xC0C0C0, 'C': 0xE0E0E0, 'e': STARDEW_PALETTE.boots, 'E': STARDEW_PALETTE.woodBase,
+      'A': STARDEW_PALETTE.flowerRed, 'a': 0xFF6B6B, 'G': STARDEW_PALETTE.grassBase, 'g': STARDEW_PALETTE.grassHighlight,
+      'd': STARDEW_PALETTE.dirtDry, 'D': STARDEW_PALETTE.dirtWet, 'L': STARDEW_PALETTE.flowerYellow
     };
 
 
@@ -1035,6 +1040,228 @@ class PixelArtRenderer {
       '..ssss..ssss....'
     ];
 
+    // Farmer Action Frames
+    const water_down_0 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXXXXX......',
+      '..ZZZZZZZZ......',
+      '..ZZZZZZZZXXM...',
+      '..ZZZZZZZZmMk...',
+      '..QQQQQQQQ.kk...',
+      '..QQQQ..QQQQ....',
+      '..QQQQ..QQQQ....',
+      '..SSSS..SSSS....',
+      '..ssss..ssss....'
+    ];
+    const water_down_1 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXXXXX......',
+      '..ZZZZZZZZ......',
+      '..ZZZZZZZZXX....',
+      '..ZZZZZZZZ.MMk..',
+      '..QQQQQQQQ..mww.',
+      '..QQQQ..QQQQ.UU.',
+      '..QQQQ..QQQQ.WW.',
+      '..SSSS..SSSS.wW.',
+      '..ssss..ssss....'
+    ];
+    const water_down_2 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXXXXX......',
+      '..ZZZZZZZZ......',
+      '..ZZZZZZZZXX....',
+      '..ZZZZZZZZ.MMk..',
+      '..QQQQQQQQ..mUw.',
+      '..QQQQ..QQQQ.wUW',
+      '..QQQQ..QQQQ.WwU',
+      '..SSSS..SSSSUWWw',
+      '..ssss..ssss.wW.'
+    ];
+
+    const harvest_down_0 = [
+      '................',
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '.ZZZZZZZZZZZZ...',
+      '.QQQQQQQQQQQQ...',
+      '.QQQQ.XX..QQQ...',
+      '.SSSS.XX..SSS...',
+      '.SSSS.....SSS...',
+      '.ssss.....sss...'
+    ];
+    const harvest_down_1 = [
+      '................',
+      '................',
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '..ZZZZZZZZZZ....',
+      '.ZZZZZZZZZZZZ...',
+      '.QQQQ.gGg.QQQ...',
+      '.QQQQXAdAXQQQ...',
+      '.SSSS.dDd.SSS...',
+      '.SSSS.....SSS...',
+      '.ssss.....sss...'
+    ];
+    const harvest_down_2 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXgGgXX.....',
+      '..ZZZXAdAXZZ....',
+      '..ZZZZdDdzZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '..QQQQ..QQQQ....',
+      '..QQQQ..QQQQ....',
+      '..SSSS..SSSS....',
+      '..ssss..ssss....'
+    ];
+
+    const pick_down_0 = [
+      '....TTTTTTTT....',
+      '..XXTTTTTTTTXX..',
+      '..XXTTTTTTTTXX..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXXXXX......',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '..QQQQ..QQQQ....',
+      '..QQQQ..QQQQ....',
+      '..SSSS..SSSS....',
+      '..ssss..ssss....'
+    ];
+    const pick_down_1 = [
+      '......gAaG......',
+      '..XXXXAdAX..XX..',
+      '..XXTTTTTTTTXX..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXXXXX......',
+      '..ZZZZZZZZZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '..QQQQ..QQQQ....',
+      '..QQQQ..QQQQ....',
+      '..SSSS..SSSS....',
+      '..ssss..ssss....'
+    ];
+    const pick_down_2 = [
+      '....TTTTTTTT....',
+      '..TTTTTTTTTTTT..',
+      '..VVVVVVVVVVVV..',
+      '....RRRRRRRR....',
+      '....XXXXXX......',
+      '....XNXNXX......',
+      '....XIXXIX......',
+      '....XXgGgXX.....',
+      '..ZZZXaAaXZZ....',
+      '..ZZZZdDdzZZ....',
+      '..ZZZZZZZZZZ....',
+      '..QQQQQQQQQQ....',
+      '..QQQQ..QQQQ....',
+      '..QQQQ..QQQQ....',
+      '..SSSS..SSSS....',
+      '..ssss..ssss....'
+    ];
+
+    // Tool Sprites
+    const tool_watering_can = [
+      '................',
+      '......kkkk......',
+      '.....kMMMMk.....',
+      '.....k....k.....',
+      '.....kMMMMk.....',
+      '....kMMMMMMk....',
+      '...kMMMMMMMMk...',
+      '...kmmmmmmmmk...',
+      '...kmmmmmmmmk...',
+      '...kmmmmmmmmkmk.',
+      '...kmmmmmmmm.mMk',
+      '...kmmmmmmmm.mww',
+      '....kkkkkkkk..wW',
+      '................',
+      '................',
+      '................'
+    ];
+    const tool_basket = [
+      '................',
+      '......jjjj......',
+      '.....jYYYYj.....',
+      '.....j....j.....',
+      '.....j....j.....',
+      '...gGg.aAa.gG...',
+      '..gAaAgAaAgLg...',
+      '.jYyYyYyYyYyYj..',
+      '.jYyYyYyYyYyYj..',
+      '.jyYyYyYyYyYyj..',
+      '.jYyYyYyYyYyYj..',
+      '.jyYyYyYyYyYyj..',
+      '..jjjjjjjjjjjj..',
+      '................',
+      '................',
+      '................'
+    ];
+    const tool_sickle = [
+      '................',
+      '.......kkkk.....',
+      '.....kkCCCCk....',
+      '....kCCCCCCk....',
+      '...kCCCCck......',
+      '..kCCCCc........',
+      '..kCCCk.........',
+      '.kCCCCk.........',
+      '.kCCCk..........',
+      '..kCcEk.........',
+      '...kEEek........',
+      '....kEEek.......',
+      '.....kEEek......',
+      '......kjjk......',
+      '................',
+      '................'
+    ];
+
     this.createTexture(scene, 'player_walk_down_0', down_0, P);
     this.createTexture(scene, 'player_walk_down_1', down_1, P);
     this.createTexture(scene, 'player_walk_down_2', down_2, P);
@@ -1047,6 +1274,20 @@ class PixelArtRenderer {
     this.createTexture(scene, 'player_walk_right_0', right_0, P);
     this.createTexture(scene, 'player_walk_right_1', right_1, P);
     this.createTexture(scene, 'player_walk_right_2', right_2, P);
+
+    this.createTexture(scene, 'player_water_down_0', water_down_0, P);
+    this.createTexture(scene, 'player_water_down_1', water_down_1, P);
+    this.createTexture(scene, 'player_water_down_2', water_down_2, P);
+    this.createTexture(scene, 'player_harvest_down_0', harvest_down_0, P);
+    this.createTexture(scene, 'player_harvest_down_1', harvest_down_1, P);
+    this.createTexture(scene, 'player_harvest_down_2', harvest_down_2, P);
+    this.createTexture(scene, 'player_pick_down_0', pick_down_0, P);
+    this.createTexture(scene, 'player_pick_down_1', pick_down_1, P);
+    this.createTexture(scene, 'player_pick_down_2', pick_down_2, P);
+
+    this.createTexture(scene, 'tool_watering_can', tool_watering_can, P);
+    this.createTexture(scene, 'tool_basket', tool_basket, P);
+    this.createTexture(scene, 'tool_sickle', tool_sickle, P);
 
     // Legacy farmer0..3 aliases
     this.createTexture(scene, 'farmer0', down_0, P);
@@ -1066,54 +1307,200 @@ class PixelArtRenderer {
       reg('player-walk-up', ['player_walk_up_0', 'player_walk_up_1', 'player_walk_up_0', 'player_walk_up_2']);
       reg('player-walk-left', ['player_walk_left_0', 'player_walk_left_1', 'player_walk_left_0', 'player_walk_left_2']);
       reg('player-walk-right', ['player_walk_right_0', 'player_walk_right_1', 'player_walk_right_0', 'player_walk_right_2']);
+
+      const regOnce = (key, frames, fps = 6) => {
+        if (!anims.exists(key)) {
+          anims.create({ key, frames: frames.map(f => ({ key: f })), frameRate: fps, repeat: 0 });
+        }
+      };
+      regOnce('player-water', ['player_water_down_0', 'player_water_down_1', 'player_water_down_2', 'player_water_down_1']);
+      regOnce('player-harvest', ['player_harvest_down_0', 'player_harvest_down_1', 'player_harvest_down_2']);
+      regOnce('player-pick', ['player_pick_down_0', 'player_pick_down_1', 'player_pick_down_2']);
     }
   }
 
-  // 2. NPCs (Cat & Wizard)
+  // 2. NPCs (Ginger Cat & Wizard)
   static _genNpcTextures(scene) {
     const C = {
       '.': null,
-      'O': 0xF5813F, 'o': 0xB84E10, 'l': 0xFFBB66, 'w': 0xFFFFFF, 'e': 0xFFCC44, 'p': 0xFFAA99, 'u': 0x1A0800
+      'O': 0xF5813F, 'o': 0xB84E10, 'l': 0xFFC078, 'w': 0xFFFFFF, 'e': 0xFFCC44, 'p': 0xFFAA99, 'u': 0x1A0800, 's': 0xD97706
     };
-    const cat_0 = [
-      '..O........O....',
-      '..Oo......oO....',
-      '.OOOOOOOOOOOO...',
-      '.OOOOOOOOOOOO...',
-      '.OOeOOeOOeOOe...',
-      '.OOuOOuOOuOOu...',
-      '.OOOOOppOOOO....',
-      '..OOOOOOOOOO....',
-      '..OOOOOOOOOO.O..',
-      '..OwwwwwwwOO.O..',
-      '..OwwwwwwwOOO...',
-      '..OwwwwwwwOOO...',
-      '..OOOOOOOOOO....',
-      '..OOOOOOOOOO....',
-      '..pp......pp....',
+    const cat_idle_0 = [
+      '..p..........p..',
+      '.OpO........OpO.',
+      '.OOoOOOOOOOOoOO.',
+      '.OoOooOOOOooOoO.',
+      '.OeeuOOOOOOOueO.',
+      'u.OwwwwwwwwwwO.u',
+      '..OwwwppwwwwO...',
+      '..OOOOOOOOOOOO..',
+      '..OoOwwwwwwOoO..',
+      '..OoOwwwwwwOoOO.',
+      '..OoOwwwwwwOo.O.',
+      '..OOOOOOOOOOO.lO',
+      '..OOOOOOOOOOOOOO',
+      '..wwww....wwww..',
+      '..pppp....pppp..',
       '................'
     ];
-    const cat_1 = [
-      '..O........O....',
-      '..Oo......oO....',
-      '.OOOOOOOOOOOO...',
-      '.OOOOOOOOOOOO...',
-      '.OOuOOuOOuOOu...',
-      '.OOuOOuOOuOOu...',
-      '.OOOOOppOOOO....',
-      '..OOOOOOOOOO....',
-      '..OOOOOOOOOO..O.',
-      '..OwwwwwwwOO..O.',
-      '..OwwwwwwwOOO...',
-      '..OwwwwwwwOOO...',
-      '..OOOOOOOOOO....',
-      '..OOOOOOOOOO....',
-      '..pp......pp....',
+    const cat_idle_1 = [
+      '..p..........p..',
+      '.OpO........OpO.',
+      '.OOoOOOOOOOOoOO.',
+      '.OoOooOOOOooOoO.',
+      '.OuuuuOOOOOOuuO.',
+      'u.OwwwwwwwwwwO.u',
+      '..OwwwppwwwwO...',
+      '..OOOOOOOOOOOO..',
+      '..OoOwwwwwwOoO.O',
+      '..OoOwwwwwwOo.lO',
+      '..OoOwwwwwwOo.OO',
+      '..OOOOOOOOOOOOO.',
+      '..OOOOOOOOOOOO..',
+      '..wwww....wwww..',
+      '..pppp....pppp..',
       '................'
     ];
-    this.createTexture(scene, 'cat_idle_0', cat_0, C);
-    this.createTexture(scene, 'cat_idle_1', cat_1, C);
-    this.createTexture(scene, 'cat_npc', cat_0, C);
+
+    const cat_walk_0 = [
+      '..p..........p..',
+      '.OpO........OpO.',
+      '.OOoOOOOOOOOoOO.',
+      '.OoOooOOOOooOoO.',
+      '.OeeuOOOOOOOueO.',
+      'u.OwwwwwwwwwwO.u',
+      '..OwwwppwwwwO...',
+      '..OOOOOOOOOOOO..',
+      '..OoOwwwwwwOoO.O',
+      '..OoOwwwwwwOo.lO',
+      '.wOoOwwwwwwOo.OO',
+      'p.OOOOOOOOOOOO..',
+      '..wwww......wwww',
+      '..pppp......pppp',
+      '................',
+      '................'
+    ];
+    const cat_walk_1 = [
+      '.p..........p...',
+      'OpO........OpO..',
+      'OOoOOOOOOOOoOO..',
+      'OoOooOOOOooOoO..',
+      'OeeuOOOOOOOueO..',
+      'OwwwwwwwwwwO..u.',
+      'OwwwppwwwwO...OO',
+      'OOOOOOOOOOOO..lO',
+      'OoOwwwwwwOoO..OO',
+      'OoOwwwwwwOoO....',
+      'OOOOOOOOOOOO....',
+      '.wwww..wwww.....',
+      '.pppp..pppp.....',
+      '................',
+      '................',
+      '................'
+    ];
+    const cat_walk_2 = [
+      '..p..........p..',
+      '.OpO........OpO.',
+      '.OOoOOOOOOOOoOO.',
+      '.OoOooOOOOooOoO.',
+      '.OeeuOOOOOOOueO.',
+      'u.OwwwwwwwwwwO.u',
+      '..OwwwppwwwwO...',
+      '..OOOOOOOOOOOO..',
+      'O.OoOwwwwwwOoO..',
+      'lO.OoOwwwwwwOo..',
+      'OO.OoOwwwwwwOo.w',
+      '..OOOOOOOOOOOO.p',
+      'wwww......wwww..',
+      'pppp......pppp..',
+      '................',
+      '................'
+    ];
+
+    const cat_sit_0 = [
+      '....p......p....',
+      '...OpO....OpO...',
+      '...OOoOOOOoOO...',
+      '...OoOooOOoOo...',
+      '...OeeuOOueO....',
+      'u..OwwwppwwO..u.',
+      '...OOOOOOOOO....',
+      '...OoOwwwwOo....',
+      '...OoOwwwwOo....',
+      '..OOOOOOOOOOOO..',
+      '.OOOOOOOOOOOOOO.',
+      '.OOwwwwwwwwwwOO.',
+      '.OOppppppppppOO.',
+      '..OOOOOOOOOOOO.l',
+      '...oOOOOOOOOOOoO',
+      '................'
+    ];
+    const cat_sit_1 = [
+      '....p......p....',
+      '...OpO....OpO...',
+      '...OOoOOOOoOO...',
+      '...OoOooOOoOo...',
+      '...OuuuuuueO....',
+      'u..OwwwppwwO..u.',
+      '...OOOwwOOOO....',
+      '...OoOpwppOo....',
+      '...OoOwwwwOo....',
+      '..OOOOOOOOOOOO..',
+      '.OOOOOOOOOOOOOO.',
+      '.OOwwwwwwwwwwOO.',
+      '.OOppppppppppOO.',
+      '..OOOOOOOOOOOO.l',
+      '...oOOOOOOOOOOoO',
+      '................'
+    ];
+
+    const cat_sleep_0 = [
+      '................',
+      '................',
+      '................',
+      '.....w..........',
+      '....w...........',
+      '...p......p.....',
+      '..OpO....OpO....',
+      '.OOOOOOOOOOOO...',
+      '.OoOuuuuuuOoO...',
+      '.OwwwppppppwO...',
+      'oOOOOOOOOOOOOOo.',
+      'oOwwwwwwwwwwOoO.',
+      'oOppppppppppOoOl',
+      '.oOOOOOOOOOOOOo.',
+      '................',
+      '................'
+    ];
+    const cat_sleep_1 = [
+      '....w...........',
+      '...w............',
+      '................',
+      '................',
+      '...p......p.....',
+      '..OpO....OpO....',
+      '.OOOOOOOOOOOO...',
+      '.OoOuuuuuuOoO...',
+      '.OwwwppppppwO...',
+      'oOOOOOOOOOOOOOo.',
+      'oOwwwwwwwwwwOoO.',
+      'oOwwwwwwwwwwOoO.',
+      'oOppppppppppOoOl',
+      '.oOOOOOOOOOOOOo.',
+      '................',
+      '................'
+    ];
+
+    this.createTexture(scene, 'cat_idle_0', cat_idle_0, C);
+    this.createTexture(scene, 'cat_idle_1', cat_idle_1, C);
+    this.createTexture(scene, 'cat_walk_0', cat_walk_0, C);
+    this.createTexture(scene, 'cat_walk_1', cat_walk_1, C);
+    this.createTexture(scene, 'cat_walk_2', cat_walk_2, C);
+    this.createTexture(scene, 'cat_sit_0', cat_sit_0, C);
+    this.createTexture(scene, 'cat_sit_1', cat_sit_1, C);
+    this.createTexture(scene, 'cat_sleep_0', cat_sleep_0, C);
+    this.createTexture(scene, 'cat_sleep_1', cat_sleep_1, C);
+    this.createTexture(scene, 'cat_npc', cat_idle_0, C);
 
     const W = {
       '.': null,
@@ -1162,9 +1549,16 @@ class PixelArtRenderer {
 
     const anims = scene.anims;
     if (anims) {
-      if (!anims.exists('cat-idle')) {
-        anims.create({ key: 'cat-idle', frames: [{ key: 'cat_idle_0' }, { key: 'cat_idle_1' }], frameRate: 3, repeat: -1 });
-      }
+      const regCatAnim = (key, frames, frameRate, repeat = -1) => {
+        if (!anims.exists(key)) {
+          anims.create({ key, frames: frames.map(f => ({ key: f })), frameRate: frameRate, repeat: repeat });
+        }
+      };
+      regCatAnim('cat-idle', ['cat_idle_0', 'cat_idle_1'], 3, -1);
+      regCatAnim('cat-walk', ['cat_walk_0', 'cat_walk_1', 'cat_walk_2', 'cat_walk_1'], 6, -1);
+      regCatAnim('cat-sit', ['cat_sit_0', 'cat_sit_1'], 3, -1);
+      regCatAnim('cat-sleep', ['cat_sleep_0', 'cat_sleep_1'], 2, -1);
+
       if (!anims.exists('wizard-idle')) {
         anims.create({ key: 'wizard-idle', frames: [{ key: 'wizard_idle_0' }, { key: 'wizard_idle_1' }], frameRate: 3, repeat: -1 });
       }
@@ -3534,7 +3928,7 @@ const VOCAB_FACTS = {
                ko:'🧠 2 syllables: meo · ri. "Meo" sounds exactly like a cat meowing — then "ri"! A cat nodding its head: MEO-ri!'},
   'heart':    {vi:'💖 Koreans developed "nunchi" (눈치) — the art of sensing others emotions without being told. Being heart-aware is a core social skill!',
                ko:'🧠 2 syllables: ma · eum. "Ma!" = surprised call for your mum. "Eum" = sound/tone. Heart = the sound of calling for love.'},
-  'cat':      {vi:'🐱 Korean cats say "야옹!" (yaong) — longer and moodier than meow! Cat cafes in Seoul have waitlists on weekends. Muop says hi! 🐾',
+  'cat':      {vi:'🐱 Korean cats say "야옹!" (yaong) — longer and moodier than meow! Cat cafes in Seoul have waitlists on weekends. Ginger Cat says hi! 🐾',
                ko:'🧠 3 syllables: go · yang · i. "Go" = go! "Yang" = sheep baa! "I" = subject marker. The cat who goes and baa-s — GO-YANG-I!'},
   'dog':      {vi:'🐶 Korean dogs say "멍멍!" (meong-meong). The Jindo dog famously walked 300km home after being sold — a national loyalty legend!',
                ko:'🧠 1 syllable: gae. Sharp as a bark — GAE! One bark, one syllable. Done.'},
@@ -4540,7 +4934,7 @@ class FarmScene extends Phaser.Scene {
       color:'#FFCC44', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(cy+1).setAlpha(0);
     this.tweens.add({ targets:this.catHint, y:this.catHint.y-3, duration:700, yoyo:true, repeat:-1 });
-    this.add.text(cx, cy+6, 'Muop', {
+    this.add.text(cx, cy+6, 'Ginger Cat', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
       color:'#FFD700', stroke:'#000', strokeThickness:2
     }).setOrigin(0.5,0).setDepth(cy+1);
@@ -4719,27 +5113,123 @@ class FarmScene extends Phaser.Scene {
   }
 
   onAppleHarvested(){
-    playChiptuneSFX('harvest');
-    // Reward: big gold bonus
-    const bonus = 15 + Math.floor(Math.random() * 6); // 15-20 gold
-    addGold(bonus);
-    this._flyCoins(this.appleX, this.appleY - 30, Math.min(bonus, 8));
-    this._label(this.appleX, this.appleY - 30, `+${bonus} 🍎 BONUS!`);
+    this.playPlayerAction('pick', this.appleX, this.appleY, () => {
+      playChiptuneSFX('harvest');
+      // Reward: big gold bonus
+      const bonus = 15 + Math.floor(Math.random() * 6); // 15-20 gold
+      addGold(bonus);
+      this._flyCoins(this.appleX, this.appleY - 30, Math.min(bonus, 8));
+      this._label(this.appleX, this.appleY - 30, `+${bonus} 🍎 BONUS!`);
 
-    let yieldCount = 1;
-    if (typeof isPetActive === 'function' && isPetActive('hamster') && Math.random() < 0.30 * getPetPassiveMultiplier('hamster')) {
-      yieldCount = 2;
-      showToast(`🐹 Hamster Pouch Duplicator! Double harvest (+2 사과)!`);
+      let yieldCount = 1;
+      if (typeof isPetActive === 'function' && isPetActive('hamster') && Math.random() < 0.30 * getPetPassiveMultiplier('hamster')) {
+        yieldCount = 2;
+        showToast(`🐹 Hamster Pouch Duplicator! Double harvest (+2 사과)!`);
+      }
+      if (typeof addIngredient === 'function') addIngredient('사과', yieldCount);
+      if (typeof addPetXP === 'function') addPetXP(10);
+
+      // Start regrowth timer
+      this.appleRipe    = false;
+      this.appleRipeAt  = Date.now() + FarmScene.APPLE_RIPEN_MS;
+      _saveAppleTree(this);
+      this._updateAppleTree();
+      showToast(`🍎 Harvested! +${bonus} gold! Tree will regrow in 2 min.`, 4000);
+    });
+  }
+
+  // ── PLAYER ACTION HELPER ───────────────────────────────────────────────────
+  playPlayerAction(actionType, targetX, targetY, callback) {
+    if (!this.player) { if (callback) callback(); return; }
+
+    this.isPerformingAction = true;
+    playerLocked = true;
+    this.player.setVelocity(0, 0);
+
+    if (typeof targetX === 'number' && typeof targetY === 'number') {
+      const dx = targetX - this.player.x;
+      const dy = targetY - this.player.y;
+      if (Math.abs(dx) >= Math.abs(dy)) {
+        this.player.setFlipX(dx < 0);
+      } else {
+        this.player.setFlipX(false);
+      }
     }
-    if (typeof addIngredient === 'function') addIngredient('사과', yieldCount);
-    if (typeof addPetXP === 'function') addPetXP(10);
 
-    // Start regrowth timer
-    this.appleRipe    = false;
-    this.appleRipeAt  = Date.now() + FarmScene.APPLE_RIPEN_MS;
-    _saveAppleTree(this);
-    this._updateAppleTree();
-    showToast(`🍎 Harvested! +${bonus} gold! Tree will regrow in 2 min.`, 4000);
+    const animKey = `player-${actionType}`;
+    const toolKey = actionType === 'water' ? 'tool_watering_can' :
+                    actionType === 'harvest' ? 'tool_sickle' :
+                    actionType === 'pick' ? 'tool_basket' : null;
+
+    let toolSprite = null;
+    if (toolKey && this.textures && this.textures.exists(toolKey)) {
+      const offsetX = this.player.flipX ? -12 : 12;
+      toolSprite = this.add.image(this.player.x + offsetX, this.player.y - 6, toolKey)
+        .setDepth(this.player.depth + 1);
+    }
+
+    let cleanedUp = false;
+    const restoreState = () => {
+      if (cleanedUp) return;
+      cleanedUp = true;
+      if (toolSprite) { toolSprite.destroy(); toolSprite = null; }
+      this.isPerformingAction = false;
+      playerLocked = false;
+      if (this.player && this.player.active) {
+        this.player.anims.stop();
+        this.player.setTexture('player_walk_down_0');
+      }
+      if (typeof callback === 'function') callback();
+    };
+
+    const duration = 650;
+    if (this.anims && this.anims.exists(animKey)) {
+      this.player.anims.play(animKey, true);
+      this.player.once(`animationcomplete-${animKey}`, restoreState);
+      this.time.delayedCall(duration + 100, restoreState);
+    } else {
+      this.tweens.add({
+        targets: this.player,
+        scaleY: 0.8, scaleX: 1.2,
+        duration: 150, yoyo: true, repeat: 1,
+        onComplete: restoreState
+      });
+    }
+  }
+
+  // ── GINGER CAT BEHAVIOR STATE MACHINE ───────────────────────────────────────
+  _updateCatNPC(dt) {
+    if (!this.catSprite || !this.player) return;
+
+    const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.catX, this.catY);
+    let targetAnim = 'cat-idle';
+    const isCatTalking = typeof catDialogOpen !== 'undefined' && catDialogOpen;
+
+    if (this.catIsMoving) {
+      targetAnim = 'cat-walk';
+    } else if (isCatTalking || dist < 80) {
+      targetAnim = 'cat-sit';
+      this.catSprite.setFlipX(this.player.x < this.catX);
+      this.catIdleTimer = 0;
+    } else if (dist > 250) {
+      this.catIdleTimer = (this.catIdleTimer || 0) + (dt || 16);
+      if (this.catIdleTimer > 5000) {
+        targetAnim = 'cat-sleep';
+      } else {
+        targetAnim = 'cat-idle';
+      }
+    } else {
+      this.catIdleTimer = 0;
+      this.catSprite.setFlipX(this.player.x < this.catX);
+      targetAnim = 'cat-idle';
+    }
+
+    if (this.catCurrentAnim !== targetAnim) {
+      this.catCurrentAnim = targetAnim;
+      if (this.anims && this.anims.exists(targetAnim)) {
+        this.catSprite.play(targetAnim, true);
+      }
+    }
   }
 
   // ── PLOTS ──────────────────────────────────────────────────────────────────
@@ -4842,7 +5332,7 @@ class FarmScene extends Phaser.Scene {
     }
 
 
-    if(!playerLocked){
+    if(!playerLocked && !this.isPerformingAction){
       const vx=(this.keys.A.isDown || this.keys.LEFT.isDown?-1:0)+(this.keys.D.isDown || this.keys.RIGHT.isDown?1:0);
       const vy=(this.keys.W.isDown || this.keys.UP.isDown?-1:0)+(this.keys.S.isDown || this.keys.DOWN.isDown?1:0);
       const len=Math.sqrt(vx*vx+vy*vy)||1;
@@ -4880,8 +5370,10 @@ class FarmScene extends Phaser.Scene {
       }
     } else {
       this.player.setVelocity(0,0);
-      this.player.anims.stop();
-      this.player.setTexture('player_walk_down_0');
+      if (!this.isPerformingAction) {
+        this.player.anims.stop();
+        this.player.setTexture('player_walk_down_0');
+      }
     }
 
     // Show shop hint label when nearby
@@ -4889,12 +5381,12 @@ class FarmScene extends Phaser.Scene {
       const nearShop = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY) < 90;
       this.shopHint.setAlpha(nearShop ? 1 : 0);
     }
-    // Show cat hint label when nearby
+    // Show cat hint label when nearby & update Cat NPC state machine
     if(this.catHint){
       const nearCat = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY) < 80;
       this.catHint.setAlpha(nearCat ? 1 : 0);
-      if(this.catSprite) this.catSprite.setFlipX(this.player.x < this.catX ? true : false);
     }
+    this._updateCatNPC(dt);
 
     // Show board hint label when nearby
     if(this.boardHint){
@@ -4922,7 +5414,7 @@ class FarmScene extends Phaser.Scene {
       this.fishHint.setAlpha(nearFish ? 1 : 0);
     }
 
-    if(Phaser.Input.Keyboard.JustDown(this.spaceKey)&&!playerLocked&&!quizOpen&&!shopOpen&&!memoryOpen&&!trophyOpen&&!duelOpen) this._interact();
+    if(Phaser.Input.Keyboard.JustDown(this.spaceKey)&&!playerLocked&&!this.isPerformingAction&&!quizOpen&&!shopOpen&&!memoryOpen&&!trophyOpen&&!duelOpen) this._interact();
     // SRS timer: check every 8s if any plant needs state advance
     this._timerAcc=(this._timerAcc||0)+(dt||16);
     if(this._timerAcc>8000){this._timerAcc=0;this._checkSRS();}
@@ -4930,7 +5422,7 @@ class FarmScene extends Phaser.Scene {
     this._appleAcc=(this._appleAcc||0)+(dt||16);
     if(this._appleAcc>1000){this._appleAcc=0;this._tickAppleTree();}
     // SPACE target indicator (shows which object will be targeted)
-    if(!playerLocked&&!quizOpen&&!shopOpen&&!catDialogOpen) this._updateTargetHighlight();
+    if(!playerLocked&&!this.isPerformingAction&&!quizOpen&&!shopOpen&&!catDialogOpen) this._updateTargetHighlight();
     else if(this._tHL){ this._tHL.clear(); if(this._tLbl) this._tLbl.setAlpha(0); }
   }
 
@@ -4962,7 +5454,7 @@ class FarmScene extends Phaser.Scene {
       if(p.sState==='2'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Water';col=0x55CCFF;break;}
     }
     if(hx===null&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<82){
-      hx=this.catX;hy=this.catY-20;lbl='[SPACE] Talk to Muop';col=0xFF88CC;hw=44;hh=44;
+      hx=this.catX;hy=this.catY-20;lbl='[SPACE] Talk to Ginger Cat';col=0xFF88CC;hw=44;hh=44;
     }
     if(hx===null&&this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
       hx=this.wizardX;hy=this.wizardY-25;lbl='[SPACE] Spell Duel';col=0xA855F7;hw=44;hh=50;
@@ -5106,61 +5598,67 @@ class FarmScene extends Phaser.Scene {
       this._sparkle(plot.x,plot.y); this._label(plot.x,plot.y,'Planted!');
       this._setState(plot,'1',ko);
     } else if(phase===2){
-      // P2 correct: grow to sprout, set P3 timer
-      const srs=getSrs(ko); setSrs(ko,{p3At:now+SR2});
-      if(plot.plant) plot.plant.setTexture(`cr_${t}_2`).clearTint();
-      this.tweens.add({targets:plot.plant,scale:{from:0.7,to:1.1},duration:320,ease:'Back.Out(2)',
-        onComplete:()=>this.tweens.add({targets:plot.plant,scale:1,duration:150})});
-      if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
-      if(plot.glow){plot.glow.destroy();plot.glow=null;}
-      this._leaves(plot.x,plot.y-8); this._label(plot.x,plot.y,'Watered!');
-      this._setState(plot,'3',ko);
-    } else {
-      // P3 correct: HARVEST! Coins, Gems, Honor!
-      playChiptuneSFX('harvest');
-      const prev=harvestCounts.get(ko)||0;
-      const newHarvests = prev + 1;
-      harvestCounts.set(ko, newHarvests);
-
-      // Anti-farm diminishing returns formula:
-      // Decays smoothly down to 1 coin if harvested >= 15 times
-      const reward = Math.max(1, Math.floor(10 * Math.pow(0.85, prev)));
-      setSrs(ko,{p2At:null,p3At:null,harvests:(getSrs(ko).harvests||0)+1});
-      plantedWords.delete(ko);
-      this._sparkle(plot.x,plot.y);
-      this._label(plot.x,plot.y,prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`);
-
-      // Legendary tier mastery check (>= 10 harvests) -> +10 Honor
-      if (newHarvests === 10) {
-        addHonor(10);
-        showToast(`👑 Word "${ko}" reached Legendary Tier! +10 Honor!`, 4500);
-      }
-
-      // Quiz streak tracking: +3 Gems every 10 consecutive correct answers
-      quizStreak++;
-      if (quizStreak % 10 === 0) {
-        addGems(3);
-        showToast(`🔥 10-Quiz Perfect Streak! +3 Gems!`, 4000);
-      }
-
-      this.time.delayedCall(350,()=>{
-        addCoins(reward);
-        updateVocabBook();
-        checkQuestProgress('harvest', { count: 1 });
-        checkQuestProgress('quiz');
-
-        const cropIngredients = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근'];
-        const ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
-
-        let yieldCount = 1;
-        if (typeof isPetActive === 'function' && isPetActive('hamster') && Math.random() < 0.30 * getPetPassiveMultiplier('hamster')) {
-          yieldCount = 2;
-          showToast(`🐹 Hamster Pouch Duplicator! Double harvest (+2 ${ingName})!`);
-        }
-        if (typeof addIngredient === 'function') addIngredient(ingName, yieldCount);
-        if (typeof addPetXP === 'function') addPetXP(10);
+      // P2 correct: grow to sprout, set P3 timer, play watering animation
+      this.playPlayerAction('water', plot.x, plot.y, () => {
+        const srs=getSrs(ko); setSrs(ko,{p3At:now+SR2});
+        if(plot.plant) plot.plant.setTexture(`cr_${t}_2`).clearTint();
+        this.tweens.add({targets:plot.plant,scale:{from:0.7,to:1.1},duration:320,ease:'Back.Out(2)',
+          onComplete:()=>this.tweens.add({targets:plot.plant,scale:1,duration:150})});
+        if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
+        if(plot.glow){plot.glow.destroy();plot.glow=null;}
+        this._leaves(plot.x,plot.y-8); this._label(plot.x,plot.y,'Watered!');
+        this._setState(plot,'3',ko);
+        savePlotsFn();
       });
-      this._clearPlot(plot);
+    } else {
+      // P3 correct: HARVEST! Coins, Gems, Honor! Play harvesting animation
+      this.playPlayerAction('harvest', plot.x, plot.y, () => {
+        playChiptuneSFX('harvest');
+        const prev=harvestCounts.get(ko)||0;
+        const newHarvests = prev + 1;
+        harvestCounts.set(ko, newHarvests);
+
+        // Anti-farm diminishing returns formula:
+        // Decays smoothly down to 1 coin if harvested >= 15 times
+        const reward = Math.max(1, Math.floor(10 * Math.pow(0.85, prev)));
+        setSrs(ko,{p2At:null,p3At:null,harvests:(getSrs(ko).harvests||0)+1});
+        plantedWords.delete(ko);
+        this._sparkle(plot.x,plot.y);
+        this._label(plot.x,plot.y,prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`);
+
+        // Legendary tier mastery check (>= 10 harvests) -> +10 Honor
+        if (newHarvests === 10) {
+          addHonor(10);
+          showToast(`👑 Word "${ko}" reached Legendary Tier! +10 Honor!`, 4500);
+        }
+
+        // Quiz streak tracking: +3 Gems every 10 consecutive correct answers
+        quizStreak++;
+        if (quizStreak % 10 === 0) {
+          addGems(3);
+          showToast(`🔥 10-Quiz Perfect Streak! +3 Gems!`, 4000);
+        }
+
+        this.time.delayedCall(350,()=>{
+          addCoins(reward);
+          updateVocabBook();
+          checkQuestProgress('harvest', { count: 1 });
+          checkQuestProgress('quiz');
+
+          const cropIngredients = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근'];
+          const ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
+
+          let yieldCount = 1;
+          if (typeof isPetActive === 'function' && isPetActive('hamster') && Math.random() < 0.30 * getPetPassiveMultiplier('hamster')) {
+            yieldCount = 2;
+            showToast(`🐹 Hamster Pouch Duplicator! Double harvest (+2 ${ingName})!`);
+          }
+          if (typeof addIngredient === 'function') addIngredient(ingName, yieldCount);
+          if (typeof addPetXP === 'function') addPetXP(10);
+        });
+        this._clearPlot(plot);
+        savePlotsFn();
+      });
     }
     savePlotsFn();
   }

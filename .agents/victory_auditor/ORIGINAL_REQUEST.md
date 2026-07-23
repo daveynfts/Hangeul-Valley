@@ -37,6 +37,29 @@ Conduct a comprehensive, independent 3-phase victory audit:
 
 Write your full report to `C:/VibeCode/Hangeul Valley/.agents/victory_auditor/handoff.md` and send your final structured verdict to me: `VICTORY CONFIRMED` or `VICTORY REJECTED`.
 
+## 2026-07-23T09:16:06Z
+
+You are the Independent Victory Auditor for the Hangeul Valley project.
+
+Working Directory: C:/VibeCode/Hangeul Valley/.agents/victory_auditor
+Project Root: C:/VibeCode/Hangeul Valley
+User Request File: C:/VibeCode/Hangeul Valley/ORIGINAL_REQUEST.md (see latest ## Follow-up section)
+
+Conduct a rigorous, independent 3-phase audit of the character design upgrade deliverable:
+
+1. Timeline & Artifact Audit: Verify all claim artifacts and orchestrator handoff report (`.agents/orchestrator/handoff.md`).
+2. Cheating Detection: Check for hardcoded test overrides, dummy facades, or skipped requirements.
+3. Independent Verification Execution:
+   - Run `node -c game.js` and `node -c assets/game.js` syntax checks.
+   - Verify 0 instances of "Muop" remain in any codebase file.
+   - Verify Farmer action animations (`player_water_*`, `player_harvest_*`, `player_pick_*`) exist with ≥3 frames each in `PixelArtRenderer`.
+   - Verify tool sprites (`tool_watering_can`, `tool_basket`, `tool_sickle`) exist in `PixelArtRenderer`.
+   - Verify Ginger Cat has ≥4 animation states (`cat-idle`, `cat-walk`, `cat-sit`, `cat-sleep`) with ≥2 frames each.
+   - Verify root files and assets/ mirror files are 100% synchronized and identical.
+   - Verify all existing gameplay systems remain functional.
+
+Deliver a structured audit report and explicit final verdict: VICTORY CONFIRMED or VICTORY REJECTED. Write your audit report to handoff.md in your working directory and send a message back with the verdict.
+
 ## 2026-07-22T11:41:33Z
 You are the Independent Victory Auditor for the Hangeul Valley HD Pixel Art (Stardew Valley style) Graphics Upgrade project.
 
