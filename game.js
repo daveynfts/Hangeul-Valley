@@ -1299,24 +1299,24 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-    const tool_sickle = [
-      '................',
-      '.......kkkk.....',
-      '.....kkCCCCk....',
-      '....kCCCCCCk....',
-      '...kCCCCck......',
-      '..kCCCCc........',
-      '..kCCCk.........',
-      '.kCCCCk.........',
-      '.kCCCk..........',
-      '..kCcEk.........',
-      '...kEEek........',
-      '....kEEek.......',
-      '.....kEEek......',
-      '......kjjk......',
-      '................',
-      '................'
-    ];
+    const tool_sickle=[
+  '................',
+  '.......KKKK.....',
+  '.....KKKCCKK....',
+  '....KKCCCKKK....',
+  '...KKCCCKK......',
+  '..KKCCKKK.......',
+  '..KCCCK.........',
+  '.KKCCKK.........',
+  '.KKCCK..........',
+  '..KKcKK.........',
+  '...KKEKK........',
+  '....KKEKK.......',
+  '.....KKEKK......',
+  '......KKKK......',
+  '.......KK.......',
+  '................'
+];
 
     this.createTexture(scene, 'player_walk_down_0', down_0, P);
     this.createTexture(scene, 'player_walk_down_1', down_1, P);
@@ -1634,6 +1634,7 @@ class PixelArtRenderer {
   static _genCropAndTreeTextures(scene) {
     const P = {
       '.': null,
+      'K': 0x121016, 'B': 0x451A03,
       'S': 0x5C3A21, 's': 0x8B5A2B, 'd': 0xA67C52,
       'L': 0x86EFAC, 'l': 0x4ADE80, 'G': 0x22C55E, 'g': 0x15803D,
       'H': 0xFDBA74, 'O': 0xF97316, 'o': 0xEA580C, 'D': 0x9A3412,
@@ -1642,7 +1643,7 @@ class PixelArtRenderer {
       'Y': 0xFCA5A5, 'R': 0xEF4444, 'r': 0xB91C1C, 'U': 0x7F1D1D,
       'A': 0xFEF08A, 'a': 0xEAB308, 'b': 0xCA8A04, 'J': 0x854D0E,
       '*': 0xFFFFFF, '+': 0xFEF08A,
-      'K': 0x451A03, 'E': 0xEC4899, 'e': 0xBE185D, 'k': 0x78350F
+      'E': 0xEC4899, 'e': 0xBE185D, 'k': 0x78350F
     };
 
     // Soils
@@ -1666,19 +1667,19 @@ class PixelArtRenderer {
     ];
     const soil_watered = [
       'ssssssssssssssss',
-      'sKKKKKKKKKKKKKKs',
+      'sBBBBBBBBBBBBBBs',
       'ssssssssssssssss',
-      'sKKKKKKKKKKKKKKs',
+      'sBBBBBBBBBBBBBBs',
       'ssssssssssssssss',
-      'sKKKKKKKKKKKKKKs',
+      'sBBBBBBBBBBBBBBs',
       'ssssssssssssssss',
-      'sKKKKKKKKKKKKKKs',
+      'sBBBBBBBBBBBBBBs',
       'ssssssssssssssss',
-      'sKKKKKKKKKKKKKKs',
+      'sBBBBBBBBBBBBBBs',
       'ssssssssssssssss',
-      'sKKKKKKKKKKKKKKs',
+      'sBBBBBBBBBBBBBBs',
       'ssssssssssssssss',
-      'sKKKKKKKKKKKKKKs',
+      'sBBBBBBBBBBBBBBs',
       'ssssssssssssssss',
       'ssssssssssssssss'
     ];
@@ -1708,374 +1709,374 @@ class PixelArtRenderer {
     this.createTexture(scene, 'drt_wet', soil_watered, P);
 
     // Crop 1: Carrot (cr_0)
-    const carrot_0 = [
-      '................',
-      '................',
-      '................',
-      '......L.L.......',
-      '.....LGLG.......',
-      '......GG........',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const carrot_1 = [
-      '......L.........',
-      '.....LGL........',
-      '....LGLGL.......',
-      '.....GGG........',
-      '......GG........',
-      '......gG........',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const carrot_2 = [
-      '....LL...LL.....',
-      '...LGLG.LGLG....',
-      '..LGLGLGLGLGL...',
-      '...gGGGGGGGG....',
-      '....gGGGGGG.....',
-      '.....gGGGG......',
-      '......gOOg......',
-      '.....SSOoSSS....',
-      '...SSSSOoSSSSS..',
-      '..SSSSdOoSSSSSS.',
-      '.SSSSSSsOoSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const carrot_3 = [
-      '...*LL...LL*....',
-      '..+LGLG.LGLG+...',
-      '..LGLGLGLGLGL...',
-      '...gGGGGGGGG....',
-      '....gGGGGGG.....',
-      '......HOH.......',
-      '.....HOOOH......',
-      '.....OOOOO......',
-      '....OOOOOOO.....',
-      '....oOOOOOo.....',
-      '.....oOOOo......',
-      '......oOo.......',
-      '.......D........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSSSSSSSSSS.'
-    ];
+    const carrot_0=[
+  '................',
+  '................',
+  '.....K...K......',
+  '....KKKKKK......',
+  '...KKGLGLK......',
+  '....KGGGGK......',
+  '....KgGGgK......',
+  '....KSSSSKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const carrot_1=[
+  '......K.........',
+  '.....KKK........',
+  '....KKGKK.......',
+  '...KKGLGKK......',
+  '....KKGGK.......',
+  '.....KGGK.......',
+  '.....KgGK.......',
+  '....KKSSKKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const carrot_2=[
+  '...KKKK.KKKK....',
+  '..KKGLKKKLGKKK..',
+  '.KKGLGLGLGLGKK..',
+  '..KKGGGGGGGKK...',
+  '...KKGGGGGKK....',
+  '....KKGGGGK.....',
+  '.....KgOOgK.....',
+  '....KKSOoSKKK...',
+  '..KKKSSOoSSSKKK.',
+  '.KKSSSdOoSSSSSKK',
+  'KKSSSSSsOoSSSSSK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const carrot_3=[
+  '..KKKKK.KKKKK...',
+  '.KKLGLKKKLGLKKK.',
+  '.KKGLGLGLGLGKK..',
+  '..KKGGGGGGGKK...',
+  '...KKKGGGKKK....',
+  '.....KHOHK......',
+  '....KKOOOKK.....',
+  '....KOOOOOK.....',
+  '...KKOOOOOKK....',
+  '...KKOOOOOKK....',
+  '....KKOOOKK.....',
+  '.....KKOKK......',
+  '......KDK.......',
+  '....KKKSKKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKKKKKKKKKKKKKK'
+];
 
     // Crop 2: Radish (cr_1)
-    const radish_0 = [
-      '................',
-      '................',
-      '......L.L.......',
-      '.....LGLG.......',
-      '......GG........',
-      '......gG........',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const radish_1 = [
-      '.....L...L......',
-      '....LGL.LGL.....',
-      '....gGG.GGg.....',
-      '.....gGGGG......',
-      '......GGG.......',
-      '......gG........',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const radish_2 = [
-      '...LL.....LL....',
-      '..LGLG...LGLG...',
-      '..gGGGG.GGGGg...',
-      '...gGGGGGGGG....',
-      '....gGGGGGG.....',
-      '......pPp.......',
-      '.....pPWPp......',
-      '.....SSWSSS.....',
-      '...SSSSWSSSSS...',
-      '..SSSSdWSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const radish_3 = [
-      '..*LL.....LL*...',
-      '..LGLG...LGLG...',
-      '..gGGGG.GGGGg...',
-      '...gGGGGGGGG....',
-      '....gGGGGGG.....',
-      '......pPp.......',
-      '.....pPWPp......',
-      '....pWWWWWp.....',
-      '...pWWWWWWWp....',
-      '...wWWWWWWSw....',
-      '....wWWWWSw.....',
-      '.....wWWWw......',
-      '......wSw.......',
-      '.......w........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..'
-    ];
+    const radish_0=[
+  '................',
+  '................',
+  '.....K...K......',
+  '....KKKKKK......',
+  '...KKGLGLK......',
+  '....KGGGGK......',
+  '....KgGGgK......',
+  '....KSSSSKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const radish_1=[
+  '....KKK.KKK.....',
+  '...KKGKKKGKK....',
+  '...KKGGKGGKK....',
+  '....KKGGGKK.....',
+  '.....KGGKK......',
+  '.....KgGK.......',
+  '.....KgGK.......',
+  '....KKSSKKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const radish_2=[
+  '..KKKK...KKKK...',
+  '.KKGLKK.KKGLKK..',
+  '.KKGGGKKKGGGKK..',
+  '..KKGGGGGGGKK...',
+  '...KKKGGGKKK....',
+  '.....KpPpK......',
+  '....KKPWPKK.....',
+  '....KSSWSSKK....',
+  '..KKKSSWSSSKKK..',
+  '.KKSSSdWSSSSSKKK',
+  'KKSSSSSsSSSSSSSK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const radish_3=[
+  '.KKKKK...KKKKK..',
+  '.KLGLKK.KKGLGK..',
+  '.KKGGGKKKGGGKK..',
+  '..KKGGGGGGGKK...',
+  '...KKKGGGKKK....',
+  '.....KpPpK......',
+  '....KKPWPKK.....',
+  '...KKWWWWWKK....',
+  '..KKWWWWWWWKK...',
+  '..KKWWWWWWSKK...',
+  '...KKWWWWSKK....',
+  '....KKWWWKK.....',
+  '.....KKSKK......',
+  '......KwK.......',
+  '....KKKSKKK.....',
+  '..KKKKKKKKKKKKK.'
+];
 
     // Crop 3: Cabbage (cr_2)
-    const cabbage_0 = [
-      '................',
-      '................',
-      '.....LL..LL.....',
-      '....LGL..LGL....',
-      '.....GG..GG.....',
-      '......g..g......',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const cabbage_1 = [
-      '................',
-      '....LL....LL....',
-      '...LGLG..LGLG...',
-      '....gGGGGGGg....',
-      '.....gGGGGg.....',
-      '......gGG.......',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const cabbage_2 = [
-      '.....CCCCCC.....',
-      '...cCgGGGGgCc...',
-      '..cCGGGGGGGGCc..',
-      '.cCGGGGGGGGGGCc.',
-      '.CGGGGGGGGGGGGC.',
-      '.CGGGGGGGGGGGGC.',
-      '..cCGGGGGGGGCc..',
-      '...cCgGGGGgCc...',
-      '......gGG.......',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.'
-    ];
-    const cabbage_3 = [
-      '.....*++*.......',
-      '....cCXXXXCc....',
-      '..cCXCXXXXCXCc..',
-      '.cCXCCCCCCCCCXCc',
-      '.CXCCCCcCCCCCCCX',
-      'CXCCCCcCcCCCCCCC',
-      'CXCCCCcCcCCCCCCC',
-      '.CXCCCCcCCCCCCCX',
-      '.cCXCCCCCCCCCXCc',
-      '..cCXCXXXXCXCc..',
-      '....cCXXXXCc....',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS'
-    ];
+    const cabbage_0=[
+  '................',
+  '....K..K.K..K...',
+  '...KKKKKKKKK....',
+  '..KKKLKKKLGKK...',
+  '....KKGKKGKK....',
+  '.....KgKKKK.....',
+  '.....KgGK.......',
+  '....KKSSKKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const cabbage_1=[
+  '...KKKK...KKKK..',
+  '...KLLK...KLLK..',
+  '..KKGLKKKKKLKK..',
+  '...KKGGGGGGKK...',
+  '....KKGGGKKK....',
+  '.....KgGKK......',
+  '.....KgGK.......',
+  '....KKSSKKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const cabbage_2=[
+  '....KKKKKKKK....',
+  '..KKKgGGGGgKKK..',
+  '.KKCGGGGGGGGCKK.',
+  'KKCGGGGGGGGGGCKK',
+  'KCGGGGGGGGGGGGCK',
+  'KKGGGGGGGGGGGGKK',
+  '.KKCGGGGGGGGCKK.',
+  '..KKKKGGGKKKKK..',
+  '.....KgGKK......',
+  '.....KgGK.......',
+  '....KKSSKKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKKKKKKKKKKKKK.'
+];
+    const cabbage_3=[
+  '....KKKKKK......',
+  '...KKCXXXKKKK...',
+  '.KKKXCXXXXCXKKK.',
+  'KKCXCCCCCCCCCXKK',
+  'KCXCCCCcCCCCCCCK',
+  'KCXCCCCcCcCCCCCK',
+  'KCXCCCCcCcCCCCCK',
+  'KCXCCCCcCCCCCCCK',
+  'KKCXCCCCCCCCCXKK',
+  '.KKKXCXXXXCXKKK.',
+  '...KKCXXXXKKK...',
+  '....KSSSSSK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKKKKKKKKKKKKKKK'
+];
 
     // Crop 4: Pepper (cr_3)
-    const pepper_0 = [
-      '................',
-      '................',
-      '......L.L.......',
-      '.....LGLG.......',
-      '......GG........',
-      '......gG........',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const pepper_1 = [
-      '......L.........',
-      '.....LGL........',
-      '....LGLGL.......',
-      '.....GGG........',
-      '......GG........',
-      '......gG........',
-      '......gG........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const pepper_2 = [
-      '....LL...LL.....',
-      '...LGLG.LGLG....',
-      '..LGLGLGLGLGL...',
-      '...gGGGGGGGG....',
-      '....gGG+gGG.....',
-      '.....gGGGG......',
-      '......gGg.......',
-      '.....SSgSSS.....',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const pepper_3 = [
-      '...*LL...LL*....',
-      '..+LGLG.LGLG+...',
-      '..LGLGLGLGLGL...',
-      '...gGGGGGGGG....',
-      '....gGGgGGg.....',
-      '....gGg.gGg.....',
-      '...YgG...gGY....',
-      '..YRY.....YRY...',
-      '..RrR.....RrR...',
-      '..RrR..Y..RrR...',
-      '..UrU.YRY.UrU...',
-      '...U..RrR..U....',
-      '......UrU.......',
-      '.......U........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..'
-    ];
+    const pepper_0=[
+  '................',
+  '................',
+  '.....K...K......',
+  '....KKKKKK......',
+  '...KKGLGLK......',
+  '....KGGGGK......',
+  '....KgGGgK......',
+  '....KSSSSKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const pepper_1=[
+  '......K.........',
+  '.....KKK........',
+  '....KKGKK.......',
+  '...KKGLGKK......',
+  '....KKGGK.......',
+  '.....KGGK.......',
+  '.....KgGK.......',
+  '....KKSSKKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const pepper_2=[
+  '...KKKK.KKKK....',
+  '..KKGLKKKLGKKK..',
+  '.KKGLGLGLGLGKK..',
+  '..KKGGGGGGGKK...',
+  '...KKGG+gGKK....',
+  '....KKGGGKK.....',
+  '.....KgGgK......',
+  '....KKSgSKKK....',
+  '..KKKSSSSSSKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const pepper_3=[
+  '..KKKKK.KKKKK...',
+  '.KKLGLKKKLGLKKK.',
+  '.KKGLGLGLGLGKK..',
+  '..KKGGGGGGGKK...',
+  '...KgGGKKKgK....',
+  '...KgGKK.KKKKK..',
+  '..KKgKK...KKGKK.',
+  '.KKRYK.....KYRKK',
+  '.KRrRK.....KRrKK',
+  '.KRrRK.KK.KKrRK.',
+  '.KKrKKKKKKKKKrKK',
+  '..KKK.KRrKK.KKK.',
+  '.....KKrKK......',
+  '......KUK.......',
+  '....KKKSKKK.....',
+  '..KKKKKKKKKKKKK.'
+];
 
     // Crop 5: Rice (cr_4)
-    const rice_0 = [
-      '................',
-      '................',
-      '.......L........',
-      '......Ll........',
-      '......LL........',
-      '......Ll........',
-      '......lL........',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const rice_1 = [
-      '......L.L.......',
-      '.....LlLl.......',
-      '....LLLLLL......',
-      '.....LlLlL......',
-      '......LLLL......',
-      '......lLlL......',
-      '......gLlL......',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const rice_2 = [
-      '....LL.LL.LL....',
-      '...LlLlLlLlLl...',
-      '..LLLLLLLLLLLL..',
-      '...LlLlLlLlLl...',
-      '....GGGGGGGG....',
-      '.....gGGGGg.....',
-      '......gGGg......',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..',
-      '.....SSSSSSS....',
-      '................'
-    ];
-    const rice_3 = [
-      '...*..+A+..*....',
-      '..+AA.AaA.AA+...',
-      '..AAAAaAaAAAA...',
-      '...aAbAbAbAa....',
-      '....aAbAbAa.....',
-      '.....aAbAa......',
-      '......JJJ.......',
-      '......JJJ.......',
-      '......gJg.......',
-      '.....SSSSS......',
-      '...SSSSSSSSSSS..',
-      '..SSSSdSSSSSSSS.',
-      '.SSSSSSsSSSSSSSS',
-      '.SSSSSSSSSSSSSSS',
-      '..SSSSSSSSSSSSS.',
-      '...SSSSSSSSSSS..'
-    ];
+    const rice_0=[
+  '......K.........',
+  '......KKK.......',
+  '.....KKlK.......',
+  '.....KLLK.......',
+  '.....KLlK.......',
+  '.....KlLK.......',
+  '.....KgLK.......',
+  '....KKSSKKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const rice_1=[
+  '.....KKKKK......',
+  '....KKlLlK......',
+  '...KKLLLLKK.....',
+  '....KKlLlLK.....',
+  '.....KLLLLK.....',
+  '.....KlLlLK.....',
+  '.....KgLlLK.....',
+  '....KKSSSSK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const rice_2=[
+  '...KKKKKKKKKK...',
+  '..KKlLlLlLlLKK..',
+  '.KKLLLLLLLLLLKK.',
+  '..KKlLlLlLlLKK..',
+  '...KKGGGGGGKK...',
+  '....KKGGGGKK....',
+  '.....KgGGgK.....',
+  '....KKSSSSK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSKK.',
+  '..KKKSSSSSSSKK..',
+  '....KKSSSSSKK...',
+  '.....KKKKKKK....'
+];
+    const rice_3=[
+  '..KKKKKKKKKKK...',
+  '.KKAAKAaAKAAKK..',
+  '.KKAAAaAaAAAKK..',
+  '..KKAbAbAbAKK...',
+  '...KKAbAbAKK....',
+  '....KKAbAKK.....',
+  '.....KJJJK......',
+  '.....KJJJK......',
+  '.....KgJgK......',
+  '....KKSSSKK.....',
+  '..KKKSSSSSKKKKK.',
+  '.KKSSSdSSSSSSSK.',
+  'KKSSSSSsSSSSSSKK',
+  'KKSSSSSSSSSSSSKK',
+  '.KKSSSSSSSSSSSK.',
+  '..KKKKKKKKKKKKK.'
+];
 
     const cropList = [
       { name: 'carrot', cr: 'cr_0', s0: carrot_0, s1: carrot_1, s2: carrot_2, s3: carrot_3 },
@@ -2113,42 +2114,42 @@ class PixelArtRenderer {
     this.createTexture(scene, 'crop_sunflower_3', radish_3, P);
 
     // Apple trees
-    const tree_summer = [
-      '....gGGGGGGg....',
-      '..gGGGGGGGGGGg..',
-      '.gGGGRGGGGGRGGg.',
-      '.GGGRRRGGGGGRRR.',
-      '.GGGGGGGGGGGGGG.',
-      '.GGGRRRGGGGGRRR.',
-      '.gGGGRGGGGGRGGg.',
-      '..gGGGGGGGGGGg..',
-      '....gGGGGGGg....',
-      '.......KK.......',
-      '.......KK.......',
-      '.......KK.......',
-      '.......KK.......',
-      '.......KK.......',
-      '......kKKk......',
-      '.....kKKKKk.....'
-    ];
-    const tree_bare = [
-      '.......KK.......',
-      '.....KKKKKK.....',
-      '....KK....KK....',
-      '....KK....KK....',
-      '......KKKK......',
-      '......KKKK......',
-      '.......KK.......',
-      '.......KK.......',
-      '.......KK.......',
-      '.......KK.......',
-      '.......KK.......',
-      '.......KK.......',
-      '.......KK.......',
-      '.......KK.......',
-      '......kKKk......',
-      '.....kKKKKk.....'
-    ];
+    const tree_summer=[
+  '...KKKKKKKKKK...',
+  '.KKKGGGGGGGGKKK.',
+  'KKGGGRGGGGGRGGKK',
+  'KGGGRRRGGGGGRRRK',
+  'KGGGGGGGGGGGGGGK',
+  'KGGGRRRGGGGGRRRK',
+  'KKGGGRGGGGGRGGKK',
+  '.KKKGGGGGGGGKKK.',
+  '...KKKKGGKKKK...',
+  '......KBBK......',
+  '......KBBK......',
+  '......KBBK......',
+  '......KBBK......',
+  '......KBBK......',
+  '.....KKBBKK.....',
+  '....KKKKKKKK....'
+];
+    const tree_bare=[
+  '......KKKK......',
+  '....KKKKKKKK....',
+  '...KKBK..KBKK...',
+  '...KKKK..KKKK...',
+  '.....KKKKKK.....',
+  '.....KKBBKK.....',
+  '......KBBK......',
+  '......KBBK......',
+  '......KBBK......',
+  '......KBBK......',
+  '......KBBK......',
+  '......KBBK......',
+  '......KBBK......',
+  '......KBBK......',
+  '.....KKBBKK.....',
+  '....KKKKKKKK....'
+];
 
     this.createTexture(scene, 'tree_apple_summer', tree_summer, P);
     this.createTexture(scene, 'tree_apple_bare', tree_bare, P);
@@ -2162,6 +2163,7 @@ class PixelArtRenderer {
       '.': null,       // Transparent
       'K': 0x0F172A,   // 1px Dark Slate Outline
       'k': 0x1E293B,   // Secondary Outline / Fin Shadow
+      'R': 0xEF4444,   // Bobber Red Cap
       'W': 0xFFFFFF,   // Specular White Eye/Scale Highlight
       'w': 0xF1F5F9,   // Belly White/Cream
 
@@ -2186,7 +2188,7 @@ class PixelArtRenderer {
       // Catfish (Mud Olive Grey & Barbels)
       'A': 0x4B5563, 'a': 0x1F2937,
       // Mackerel / Accents
-      '+': 0xFDE047, 'Wood': 0x78350F, 'Metal': 0x475569
+      '+': 0xFDE047, 'd': 0x78350F, 'N': 0x475569
     };
 
     const carp = [
@@ -2387,24 +2389,24 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-    const legendary = [
-      '....cCCCCCCc....',
-      '...cZZZZZZZZc...',
-      '..cZZZZKZZZZZZc.',
-      '.cZZZZZWZZZZZZZZc',
-      'cZZZZZZZWWWWWWWWZ',
-      'CzzzzzzzWWWWWWWWz',
-      'CzzzzzzzzzzzzzzzC',
-      '.CzzzzzzzzzzzzC.',
-      '..CzzzzzzzzzzC..',
-      '....CzzzzzzC....',
-      '.....cCCCCc.....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
+    const legendary=[
+  '.....KKKKKK.....',
+  '...KKKZZZZKKK...',
+  '..KKZZZKZZZZKKK.',
+  '.KKZZZZWZZZZZZKK',
+  'KKZZZZZZWWWWWWWK',
+  'KzzzzzzzWWWWWWWK',
+  'KKzzzzzzzzzzzzKK',
+  '.KKzzzzzzzzzzKK.',
+  '..KKKzzzzzzKKK..',
+  '....KKzzzzKK....',
+  '.....KKKKKK.....',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................'
+];
     const clam = [
       '.....BKKKBB.....',
       '...BKKKKKKKBB...',
@@ -2454,59 +2456,59 @@ class PixelArtRenderer {
 
     // Dock tiles & bobber & rod
     const dock_plank = [
-      'WoodWoodWoodWoodWoodWoodWoodWood',
-      'WoodWoodWoodWoodWoodWoodWoodWood',
-      'Metal............Metal..........',
-      'Metal............Metal..........',
-      'WoodWoodWoodWoodWoodWoodWoodWood',
-      'WoodWoodWoodWoodWoodWoodWoodWood',
-      '................................',
-      'WoodWoodWoodWoodWoodWoodWoodWood',
-      'WoodWoodWoodWoodWoodWoodWoodWood',
-      'Metal............Metal..........',
-      'Metal............Metal..........',
-      'WoodWoodWoodWoodWoodWoodWoodWood',
-      'WoodWoodWoodWoodWoodWoodWoodWood',
-      '................................',
-      'WoodWoodWoodWoodWoodWoodWoodWood',
-      'WoodWoodWoodWoodWoodWoodWoodWood'
+      'dddddddddddddddd',
+      'dddddddddddddddd',
+      'N......N........',
+      'N......N........',
+      'dddddddddddddddd',
+      'dddddddddddddddd',
+      '................',
+      'dddddddddddddddd',
+      'dddddddddddddddd',
+      'N......N........',
+      'N......N........',
+      'dddddddddddddddd',
+      'dddddddddddddddd',
+      '................',
+      'dddddddddddddddd',
+      'dddddddddddddddd'
     ];
     const dock_post = [
-      '....WoodWood....',
-      '....WoodWood....',
-      '....MetalMetal..',
-      '....WoodWood....',
-      '....WoodWood....',
-      '....WoodWood....',
-      '....WoodWood....',
-      '....WoodWood....',
-      '....WoodWood....',
-      '....WoodWood....',
-      '....MetalMetal..',
-      '....WoodWood....',
-      '....WoodWood....',
-      '....WoodWood....',
-      '....WoodWood....',
-      '....WoodWood....'
+      '......dd........',
+      '......dd........',
+      '......NN........',
+      '......dd........',
+      '......dd........',
+      '......dd........',
+      '......dd........',
+      '......dd........',
+      '......dd........',
+      '......dd........',
+      '......NN........',
+      '......dd........',
+      '......dd........',
+      '......dd........',
+      '......dd........',
+      '......dd........'
     ];
-    const bobber = [
-      '......RRRR......',
-      '....RRRRRRRR....',
-      '...RRRRRRRRRR...',
-      '..RRRRRRRRRRRR..',
-      '..WWWWWWWWWWWW..',
-      '...WWWWWWWWWW...',
-      '....WWWWWWWW....',
-      '......WWWW......',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
+    const bobber=[
+  '.....KKKKKK.....',
+  '....KKRRRRKK....',
+  '...KKRRRRRRKK...',
+  '..KKRRRRRRRRKK..',
+  '..KKWWWWWWWWKK..',
+  '...KKWWWWWWKK...',
+  '....KKWWWWKK....',
+  '.....KKWWKK.....',
+  '......KKKK......',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................',
+  '................'
+];
     const rod = [
       '...............C',
       '..............C.',
@@ -3051,16 +3053,42 @@ const GRASS=[
   'GGGGGGGGGGGGGGGG','GgGGGGGGGGGGGGGG','GGGGGGGGGGGpdGGG','GGGGGGGGGGGpGGGG',
   'GGGGGGGGGGgGGGGG','GGGGGGGGGGGGGGGG','gggggggggggggggg','gggggggggggggggg'],
 ];
-const DIRT_DRY=['BAAAaAaAAAaAAaAAaB','BAaAAAAAAAAAAAaAB','BAAAAaAAAAAAAAaAB',
- 'BaaaaaaaaaaaaaAAB','BAAAAAAAAAAAAaAaB','BaAAAaAAAAAAAAAaB',
- 'BAAAAAAAAAAAAAAAB','BAAAAAaAAAAAaAAAAB','BaAAAAAAAAAAAAAaB',
- 'BAAAAAAaAAAAAAAAB','BAaAAAAAAAAAAAAAaB','BaaaaaaaaaaaaaAAB',
- 'BAAAAaAAAAAAAAaAAB','BAaAAAAAaAAAAAaAB','BAAAAAAAAAAAAAAAB','bBBBBBBBBBBBBBBBb',];
-const DIRT_WET=['WWwWWWWWWWWWWWwwW','WwWWWWJWWWWWWwWwW','WWWWWWWWWWWWWwWWW',
- 'WwWWWWWWWWWWWWwWW','wwwwwwwwwwwwwwwww','WWWWWwwWWWWWWWWWW',
- 'WWWwWWWWWwWWWWWWW','WwWWWWWWWWWWWWwWW','WWWWWWwWWWWWWWWWW',
- 'WwWWWWWWWWJWWWwWW','WWWWWWWWWWwWWWWWW','WWwWWWWwWWWWWWWWW',
- 'WwWWWWWWWWWWWWwWW','WWWWWWWWWWWWWwWWW','wwwwwwwwwwwwwwwww','wwwwwwwwwwwwwwwww',];
+const DIRT_DRY=[
+  'BAAAaAaAAAaAAaAA',
+  'BAaAAAAAAAAAAAaA',
+  'BAAAAaAAAAAAAAaA',
+  'BaaaaaaaaaaaaaAA',
+  'BAAAAAAAAAAAAaAa',
+  'BaAAAaAAAAAAAAAa',
+  'BAAAAAAAAAAAAAAA',
+  'BAAAAAaAAAAAaAAA',
+  'BaAAAAAAAAAAAAAa',
+  'BAAAAAAaAAAAAAAA',
+  'BAaAAAAAAAAAAAAA',
+  'BaaaaaaaaaaaaaAA',
+  'BAAAAaAAAAAAAAaA',
+  'BAaAAAAAaAAAAAaA',
+  'BAAAAAAAAAAAAAAA',
+  'bBBBBBBBBBBBBBBB'
+];
+const DIRT_WET=[
+  'WWwWWWWWWWWWWWww',
+  'WwWWWWJWWWWWWwWw',
+  'WWWWWWWWWWWWWwWW',
+  'WwWWWWWWWWWWWWwW',
+  'wwwwwwwwwwwwwwww',
+  'WWWWWwwWWWWWWWWW',
+  'WWWwWWWWWwWWWWWW',
+  'WwWWWWWWWWWWWWwW',
+  'WWWWWWwWWWWWWWWW',
+  'WwWWWWWWWWJWWWwW',
+  'WWWWWWWWWWwWWWWW',
+  'WWwWWWWwWWWWWWWW',
+  'WwWWWWWWWWWWWWwW',
+  'WWWWWWWWWWWWWwWW',
+  'wwwwwwwwwwwwwwww',
+  'wwwwwwwwwwwwwwww'
+];
 
 // ═══════════════ GAME CONSTANTS ═══════════════════════════════════════════════
 const TILE=48, PLAYER_SPD=210, PLOT_SIZE=48, PLOT_COLS=3, PLOT_GAP=18;
@@ -4825,12 +4853,24 @@ class FarmScene extends Phaser.Scene {
     const mk = () => this.make.graphics({add:false});
     // Apple Tree texture (18×30 pixels) — ginger-red apples peeking through crown
     const gat=mk();
-    const crown2=['......lLLLl.......','....lLLLLLLl......','...LLLLLLLLLLL....',
-     '..LLLLLLLLlLLLL...','..lLLLRALLllLLLl..','.LLLLLRALLllLLLLL.',
-     'lLLRRALllMlLLLLLL','lLLRRALlMMLllLLLL','lLLLLllMMMlllLLLL',
-     'lLLRRAllllllLLLLL','mLlRRAMMMlllllLLL','mRRAMMMMMllllllLL',
-     'mMMMMMMMMMllllllL','.MMMMMMMMmmllllL.','.mMMMMMMmmmlll..','.mmmmmmmmmmll...',
-     '...mmmmmmmmm.....','....kKKKk........'];
+    const crown2=[
+  '.....lLLLl......',
+  '...lLLLLLLl.....',
+  '..LLLLLLLLLLL...',
+  '.LLLLLLLLlLLLL..',
+  '.lLLLRALLllLLLl.',
+  'LLLLLRALLllLLLLL',
+  'lLLRRALllMlLLLLL',
+  'lLLRRALlMMLllLLL',
+  'lLLLLllMMMlllLLL',
+  'lLLRRAllllllLLLL',
+  'mLlRRAMMMlllllLL',
+  'mRRAMMMMMllllllL',
+  'mMMMMMMMMMllllll',
+  'MMMMMMMMmmllllL.',
+  '.mMMMMMMmmmlll..',
+  '.mmmmmmmmmmll...'
+];
     // Override some cells with red apple color
     const R=0xEE2222, RA=0xFF5555;
     drawS(gat,crown2); // draw base crown
@@ -4907,12 +4947,24 @@ class FarmScene extends Phaser.Scene {
 
     // Tree
     const gt=mk();
-    const crown=['......lLLLl.......','....lLLLLLLl......','...LLLLLLLLLLL....',
-     '..LLLLLLLLlLLLL...','.lLLLLLLLllLLLLl.','.LLLLLLLLllLLLLLL',
-     'lLLLLLLLllMlLLLLL','lLLLLLLlMMLllLLLL','lLLLLllMMMlllLLLL',
-     'lLLLlMMMMllllLLLL','mLlMMMMMMlllllLLL','mMMMMMMMMllllllLL',
-     'mMMMMMMMMMllllllL','.MMMMMMMMmmllllL.','.mMMMMMMmmmlll..','.mmmmmmmmmmll...',
-     '...mmmmmmmmm.....','....kKKKk........'];
+    const crown=[
+  '.....lLLLl......',
+  '...lLLLLLLl.....',
+  '..LLLLLLLLLLL...',
+  '.LLLLLLLLlLLLL..',
+  'lLLLLLLLllLLLLl.',
+  'LLLLLLLLllLLLLLL',
+  'lLLLLLLLllMlLLLL',
+  'lLLLLLLlMMLllLLL',
+  'lLLLLllMMMlllLLL',
+  'lLLLlMMMMllllLLL',
+  'mLlMMMMMMlllllLL',
+  'mMMMMMMMMllllllL',
+  'mMMMMMMMMMllllll',
+  'MMMMMMMMmmllllL.',
+  '.mMMMMMMmmmlll..',
+  '.mmmmmmmmmmll...'
+];
     drawS(gt,crown); pR(gt,7,17,4,11,K.K); pR(gt,7,17,1,11,K.k); pR(gt,10,17,1,11,K.s);
     gt.generateTexture('tree',18*PS,28*PS); gt.destroy();
 
