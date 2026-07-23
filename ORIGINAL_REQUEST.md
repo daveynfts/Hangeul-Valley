@@ -456,4 +456,63 @@ Integrity mode: development
 - [ ] Tất cả texture keys của Ginger Cat đều được tạo thành công và giữ đúng tham chiếu.
 - [ ] Sync hoàn toàn `game.js` ↔ `assets/game.js`.
 
+## Follow-up — 2026-07-23T07:27:57Z
+
+Nâng cấp toàn bộ chất lượng đồ họa pixel art trong game **Hangeul Valley** — bao gồm tất cả sprites, tilemap textures, và decorations trên mọi scene (Farm, Fishing, Arcade, Dungeon) — lên chuẩn thẩm mỹ **Stardew Valley / Celeste / Eastward**: sắc nét, multi-tone shading, 1px dark contour outlines, và phong cách đồng nhất xuyên suốt.
+
+Working directory: C:/VibeCode/Hangeul Valley
+Integrity mode: development
+
+## Current Context
+
+### Architecture
+- Mọi sprites đều được vẽ bằng code (procedural pixel art) thông qua `PixelArtRenderer.drawMatrix(g, matrix, palette)` sử dụng 16×16 character grid matrices.
+- `drawMatrix()` parser chỉ xử lý single-character tokens. **KHÔNG được dùng multi-character tokens** (ví dụ: `'Wood'`, `'Metal'` sẽ gây lỗi parser).
+- Tất cả thay đổi phải được thực hiện trong `game.js` và đồng bộ sang `assets/game.js`.
+
+### Already Upgraded (DO NOT MODIFY)
+- **Player Farmer**: 12 walk frames (4-direction) + 9 action frames (water, harvest, pick) + 3 tool sprites — already multi-tone with outlines.
+- **Ginger Cat NPC**: 10 frames (idle×2, walk×3, sit×2, sleep×2, npc) — already redesigned with warm ginger palette & crisp outlines.
+- **Wizard Merlin NPC**: 2 idle frames — already has purple robe shading & crystal staff.
+- **DynamicShadowSystem**: Dual-layer AO + penumbra, solar cycle — fully implemented.
+
+### Needs Upgrade
+All other sprites, tilemap textures, and decorations across the 4 game scenes.
+
+## Requirements
+
+### R1. Farm Scene Tilemap & Decoration Upgrade
+Nâng cấp tất cả tilemap textures trong `generateTilemapTextures()` (grass tiles, path tiles, fence tiles, house tiles, shore tiles) và farm scene decorations (trees, flowers, stone well, barrels, crates, signpost, notice board, shop sign, arcade machine, dungeon portal, fishing dock) lên chất lượng Stardew Valley: multi-tone earthy colors, warm palette, subtle dithering/texture variation, và viền sắc nét. Phải sử dụng bảng màu `STARDEW_PALETTE` đã có sẵn.
+
+### R2. Fishing Scene Sprites Upgrade
+Nâng cấp toàn bộ 13 loài cá (carp, salmon, tuna, squid, eel, goldfish, seabass, shrimp, octopus, catfish, mackerel, legendary, clam) cùng fishing accessories (bobber, rod, dock_plank, dock_post) trong `_genFishingTextures()`. Mỗi loài cá cần: silhouette rõ ràng, multi-tone shading (highlight/base/shadow tối thiểu 3 tone), 1px dark outline `K`, và đặc điểm nhận dạng riêng biệt (vây, đuôi, mắt, hoa văn).
+
+### R3. Arcade Scene Sprites Upgrade
+Nâng cấp toàn bộ sprites Arcade trong `_genArcadeTextures()`: player ship, 4 loại alien (scout, shooter, elite, boss/dreadnought), laser, và 3 powerups (weapon, shield, nuke). Mỗi sprite cần: sci-fi neon glow aesthetic, crisp outlines, multi-tone metallic/energy shading, và silhouette tách biệt rõ ràng trên nền tối space.
+
+### R4. Dungeon Scene Sprites Upgrade
+Nâng cấp toàn bộ sprites Dungeon trong `_genDungeonTextures()`: 4 enemies (green slime, skeleton archer, goblin warrior, demon lord boss) và 5 loot items (coin, gem, potion, chest, scroll). Mỗi enemy cần: intimidating silhouette, multi-tone shading, glowing eyes/accents, dark fantasy palette. Loot items cần: sparkling highlights, rich metallic/jewel tones.
+
+### R5. Maintain All Existing Functionality & Texture Key Parity
+- Tất cả texture keys hiện tại phải được giữ nguyên 100% — không thêm, không bớt, không đổi tên.
+- Tất cả animation keys Phaser phải hoạt động bình thường.
+- `node -c game.js` phải chạy qua với 0 lỗi syntax.
+- Đồng bộ hoàn toàn `game.js` ↔ `assets/game.js`.
+- **KHÔNG ĐƯỢC chỉnh sửa** các sprite đã upgrade: Player Farmer, Ginger Cat, Wizard Merlin, DynamicShadowSystem.
+
+## Acceptance Criteria
+
+### Visual Quality
+- [ ] Mọi sprite đều có viền 1px dark outline sắc nét (`K` = `0x0F172A` hoặc tương đương tối).
+- [ ] Mọi sprite đều sử dụng tối thiểu 3 tông màu (highlight/base/shadow) thay vì flat color.
+- [ ] Không có sprite nào sử dụng multi-character tokens trong matrix (mỗi ô chỉ 1 character).
+- [ ] Mọi matrix row đều có đúng 16 characters (hoặc kích thước mong muốn, đồng nhất trong sprite).
+
+### Technical Integrity
+- [ ] `node -c game.js` đạt 0 lỗi syntax.
+- [ ] Tất cả texture keys hiện có đều tồn tại và tham chiếu đúng.
+- [ ] `game.js` và `assets/game.js` đồng bộ hoàn toàn (byte-identical).
+- [ ] Player Farmer, Ginger Cat, Wizard Merlin sprites KHÔNG bị thay đổi so với bản hiện tại.
+
+
 

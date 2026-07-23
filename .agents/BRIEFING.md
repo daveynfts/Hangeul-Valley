@@ -1,22 +1,27 @@
-# BRIEFING — 2026-07-23T08:43:54Z
+# BRIEFING — 2026-07-23T14:28:30Z
 
 ## Mission
-Manage Project Orchestrator for Hangeul Valley HUD Overlap Fix & UX Redesign.
+Upgrade all pixel art graphics quality across Hangeul Valley (sprites, tilemap textures, decorations for Farm, Fishing, Arcade, Dungeon scenes) to Stardew Valley / Celeste / Eastward standard.
 
 ## 🔒 My Identity
 - Archetype: sentinel
 - Working directory: C:\VibeCode\Hangeul Valley\.agents
-- Orchestrator: 8ef8b7f4-ce9c-4e52-ad89-50ad5b5c7e13
-- Victory Auditor: 6d7d3b23-e574-4d0e-ad22-bb97153ce52d
+- Orchestrator: f82e6501-37a6-4d67-b1ab-db89920a095d
+- Victory Auditor: f4b1ac3d-c142-46c9-bd99-ff3b1b3a8c23
 
 ## 🔒 Key Constraints
 - No technical decisions — relay only
 - Victory Audit is MANDATORY before reporting completion
+- Single-character tokens only in matrix grids
+- DO NOT MODIFY Player Farmer, Ginger Cat, Wizard Merlin, or DynamicShadowSystem
+- Preserve 100% texture key and Phaser animation key compatibility
+- Syntax check `node -c game.js` must pass with 0 errors
+- Synchronize root `game.js` ↔ `assets/game.js`
 
 ## User Context
-- **Last user request**: Fix HUD top-area overlap (#hud, #event-banner, #progress-bar-wrap) and reorganize 15+ items into clear, scannable groups (≤8 top-level items, responsive at 1024px and 768px, zero functionality loss, preserve glassmorphism style and JS onclick compatibility).
+- **Last user request**: Upgrade tilemaps, decorations, fishing sprites, arcade sprites, dungeon sprites to Stardew Valley/Celeste aesthetic with multi-tone shading and 1px dark contour outlines.
 - **Pending clarifications**: none
-- **Delivered results**: HUD redesign complete and certified VICTORY CONFIRMED by Independent Victory Auditor!
+- **Delivered results**: Graphics upgrade completed and certified VICTORY CONFIRMED by Independent Victory Auditor!
 
 ## Project Status
 - **Phase**: complete
@@ -30,4 +35,6 @@ Manage Project Orchestrator for Hangeul Valley HUD Overlap Fix & UX Redesign.
 - ORIGINAL_REQUEST.md — Verbatim record of user request
 - BRIEFING.md — Sentinel state and briefing
 - handoff.md — Sentinel handoff report
+
+
 

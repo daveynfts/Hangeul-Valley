@@ -73,3 +73,27 @@ Ensure overall visual quality matches the Stardew Valley aesthetic standard:
 - [ ] Root files (`index.html`, `game.js`) and `assets/` copies remain synchronized.
 - [ ] Game loads and runs without errors in a modern browser — no external image files are required.
 - [ ] Existing Glassmorphism UI overlays continue to display correctly on top of the new pixel art scenes.
+
+## Follow-up — 2026-07-23T07:27:57Z
+
+### CORE REQUIREMENTS SUMMARY:
+1. R1. Farm Scene Tilemap & Decoration Upgrade:
+   - Tilemaps in `generateTilemapTextures()` (grass, path, fence, house, shore tiles) and farm scene decorations (trees, flowers, stone well, barrels, crates, signpost, notice board, shop sign, arcade machine, dungeon portal, fishing dock).
+   - Stardew Valley aesthetic: multi-tone earthy colors, warm palette, subtle dithering/texture variation, 1px dark outline. Use `STARDEW_PALETTE`.
+2. R2. Fishing Scene Sprites Upgrade:
+   - All 13 fish species (carp, salmon, tuna, squid, eel, goldfish, seabass, shrimp, octopus, catfish, mackerel, legendary, clam) and fishing accessories (bobber, rod, dock_plank, dock_post) in `_genFishingTextures()`.
+   - Distinct silhouette, multi-tone shading (at least 3 tones), 1px dark outline `K` = `0x0F172A`.
+3. R3. Arcade Scene Sprites Upgrade:
+   - All arcade sprites in `_genArcadeTextures()`: player ship, 4 aliens (scout, shooter, elite, boss/dreadnought), laser, 3 powerups (weapon, shield, nuke).
+   - Sci-fi neon glow aesthetic, crisp outlines, multi-tone metallic/energy shading.
+4. R4. Dungeon Scene Sprites Upgrade:
+   - All dungeon sprites in `_genDungeonTextures()`: 4 enemies (green slime, skeleton archer, goblin warrior, demon lord boss) and 5 loot items (coin, gem, potion, chest, scroll).
+   - Intimidating silhouettes, glowing eyes/accents, dark fantasy palette, sparkling highlights on loot.
+5. R5. Maintenance & Compatibility Constraints (STRICT):
+   - **DO NOT MODIFY**: Player Farmer (walk/action/tool sprites), Ginger Cat NPC (10 frames), Wizard Merlin NPC (2 frames), DynamicShadowSystem.
+   - **Single-character tokens ONLY**: `drawMatrix()` parser ONLY supports single-character tokens (e.g. `'K'`, `'g'`, `'G'`). NEVER use multi-character tokens like `'Wood'` or `'Metal'`.
+   - **Matrix Row Width**: Every row string in matrix array MUST have exact character length matching grid size (typically 16 chars).
+   - **100% Texture Key Parity**: Keep all texture keys intact and unchanged.
+   - **Syntax Validation**: `node -c game.js` MUST pass with 0 syntax errors.
+   - **File Sync**: Sync `game.js` ↔ `assets/game.js` completely.
+

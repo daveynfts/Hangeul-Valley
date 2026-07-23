@@ -285,290 +285,721 @@ class PixelArtRenderer {
       return key;
     };
 
+    const TILEMAP_PALETTE = {
+      '.': null,
+      'K': 0x0F172A, // Dark slate outline / border
+      'k': 0x1E293B, // Dark slate accent
+      'H': 0x8FD19E, // Grass highlight green
+      'G': 0x4A7C59, // Grass base green
+      'g': 0x2D4E35, // Grass shade green
+      'M': 0x1A3622, // Grass deep shadow green
+      'B': 0xC4986C, // Path highlight tan
+      'b': 0xA6754B, // Path base dirt
+      'A': 0x7E5436, // Path rich earth brown
+      'a': 0x573A23, // Path dark loam shadow
+      'O': 0xD99B66, // Wood sunlit highlight
+      'o': 0xB3713D, // Wood oak highlight
+      'W': 0x8F5428, // Wood cedar base
+      'w': 0x573012, // Wood deep shadow
+      't': 0xC7C1BD, // Stone highlight
+      'T': 0x9E9793, // Stone base
+      'S': 0x7D7571, // Slate base
+      's': 0x4A4440, // Mortar shadow
+      'E': 0xE0F2FE, // Water foam white
+      'c': 0x6BB1D6, // Water bright cyan
+      'C': 0x3D7898, // Water medium blue
+      'Z': 0x1E506B, // Water deep ocean teal
+      'z': 0x153A4F, // Water abyss dark teal
+      'Y': 0xFDE047, // Gold yellow
+      'y': 0xD97706, // Amber orange
+      'R': 0xEF4444, // Red highlight
+      'r': 0x991B1B, // Red shadow
+      'P': 0xA855F7, // Purple magic
+      'p': 0x6D28D9, // Dark purple magic
+      'F': 0xF472B6, // Pink flower
+      'f': 0xDB2777, // Pink flower shadow
+      'N': 0x475569, // Metal slate
+      'n': 0x334155, // Metal dark slate
+      'V': 0x38BDF8, // Cyan accent
+      'v': 0x0284C7  // Deep cyan accent
+    };
+
+    const drawTileMatrix = (g, matrix) => {
+      PixelArtRenderer.drawMatrix(g, matrix, TILEMAP_PALETTE, 0, 0, 3);
+    };
+
     // ── FARM SCENE TILEMAP TEXTURES ──────────────────────────────────────────
     makeTile('tile_grass_base', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x15803D, 1);
-      g.fillRect(6, 6, 3, 6); g.fillRect(24, 12, 3, 6); g.fillRect(36, 27, 3, 6);
-      g.fillRect(12, 39, 3, 6); g.fillRect(42, 6, 3, 6); g.fillRect(18, 24, 3, 6);
-      g.fillStyle(0x4ADE80, 1);
-      g.fillRect(15, 3, 3, 3); g.fillRect(30, 18, 3, 3); g.fillRect(3, 24, 3, 3);
-      g.fillRect(33, 42, 3, 3); g.fillRect(21, 33, 3, 3); g.fillRect(39, 15, 3, 3);
+      drawTileMatrix(g, [
+        'GGGGGHGGGGGGGHGG',
+        'GGGGGGGGGGGGGGGG',
+        'GGgGGGGGGgGGGGGG',
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGHGGGGGGGGGG',
+        'GgGGGGGGGGGGGGgG',
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGGGGgGGGGgGG',
+        'GGGGGGGGGGGGGGGG',
+        'GgGGGGGGGGGGGGGG',
+        'GGGGGgGGGGGGGGGG',
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGGGGGGgGGGGG',
+        'GGGGGGGGGGGGGGGG',
+        'gggggggggggggggg',
+        'MMMMMMMMMMMMMMMM'
+      ]);
     });
 
     makeTile('tile_grass_flowers', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x15803D, 1); g.fillRect(6, 6, 3, 6); g.fillRect(24, 12, 3, 6); g.fillRect(36, 27, 3, 6);
-      g.fillStyle(0x4ADE80, 1); g.fillRect(15, 3, 3, 3); g.fillRect(30, 18, 3, 3);
-      g.fillStyle(0xEF4444, 1); g.fillRect(9, 12, 9, 9);
-      g.fillStyle(0xFDE047, 1); g.fillRect(12, 15, 3, 3);
-      g.fillStyle(0xFDE047, 1); g.fillRect(30, 24, 9, 9);
-      g.fillStyle(0xF97316, 1); g.fillRect(33, 27, 3, 3);
-      g.fillStyle(0xFFFFFF, 1); g.fillRect(18, 33, 9, 9);
-      g.fillStyle(0xFDE047, 1); g.fillRect(21, 36, 3, 3);
+      drawTileMatrix(g, [
+        'GGGGGHGGGGGGGHGG',
+        'GG.FRF.GGGG.Yy.G',
+        'GGFfRfFGGGGYyYyG',
+        'GG.FRF.GGgG.Yy.G',
+        'GGGGGHGGGGGGGGGG',
+        'GgGGGGGGGGGGGGgG',
+        'GGGG.Ff.GGGGGGGG',
+        'GGGFfFfFGGgGGgGG',
+        'GGGG.Ff.GGGGGGGG',
+        'GgGGGGGGGGGGGGGG',
+        'GGGGGgGGGG.VRV.G',
+        'GGGGGGGGGGVRVRVG',
+        'GGGGGGGGGG.VRV.G',
+        'GGGGGGGGGGGGGGGG',
+        'gggggggggggggggg',
+        'MMMMMMMMMMMMMMMM'
+      ]);
     });
 
     makeTile('tile_grass_clover', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x15803D, 1); g.fillRect(6, 6, 3, 6); g.fillRect(36, 27, 3, 6);
-      g.fillStyle(0x4ADE80, 1); g.fillRect(15, 3, 3, 3); g.fillRect(33, 42, 3, 3);
-      g.fillStyle(0x166534, 1);
-      g.fillRect(9, 12, 6, 6); g.fillRect(18, 12, 6, 6); g.fillRect(13, 6, 6, 6);
-      g.fillStyle(0x86EFAC, 1); g.fillRect(15, 18, 3, 6);
-      g.fillStyle(0x166534, 1);
-      g.fillRect(27, 30, 6, 6); g.fillRect(36, 30, 6, 6); g.fillRect(31, 24, 6, 6);
-      g.fillStyle(0x86EFAC, 1); g.fillRect(33, 36, 3, 6);
+      drawTileMatrix(g, [
+        'GGGGGHGGGGGGGHGG',
+        'G.HH.GGGGGG.HH.G',
+        'GHHHHGGGGGGHHHHG',
+        'G.HH.GGgGGG.HH.G',
+        'GGGGGHGGGGGGGGGG',
+        'GgGGGGGGGGGGGGgG',
+        'GGGGGGGGGGGGGGGG',
+        'GGGG.HH.GGgGGgGG',
+        'GGGGHHHHGGGGGGGG',
+        'GgGG.HH.GGGGGGGG',
+        'GGGGGgGGGGGGGGGG',
+        'GGGGGGGGGG.HH.GG',
+        'GGGGGGGGGGHHHHGG',
+        'GGGGGGGGGG.HH.GG',
+        'gggggggggggggggg',
+        'MMMMMMMMMMMMMMMM'
+      ]);
     });
 
     makeTile('tile_path_straight', (g) => {
-      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x451A03, 1); g.fillRect(0, 0, 48, 3); g.fillRect(0, 45, 48, 3);
-      g.fillStyle(0x92400E, 1);
-      g.fillRect(6, 9, 9, 9); g.fillRect(21, 24, 12, 9); g.fillRect(33, 6, 9, 12);
-      g.fillRect(9, 30, 9, 12); g.fillRect(30, 33, 12, 9);
-      g.fillStyle(0xB45309, 1); g.fillRect(9, 12, 3, 3); g.fillRect(24, 27, 3, 3); g.fillRect(36, 9, 3, 3);
+      drawTileMatrix(g, [
+        'aaaaaAaAaAaaaaaa',
+        'ABBBBBBBBBBBBBBA',
+        'AbbbbbbbbbbbbbbA',
+        'AbbbbbbbbbbbbbbA',
+        'AAAAAAAAAAAAAAAA',
+        'ABBBBBBBBBBBBBBA',
+        'AbbbbbbbbbbbbbbA',
+        'AbbbbbbbbbbbbbbA',
+        'AAAAAAAAAAAAAAAA',
+        'ABBBBBBBBBBBBBBA',
+        'AbbbbbbbbbbbbbbA',
+        'AbbbbbbbbbbbbbbA',
+        'AAAAAAAAAAAAAAAA',
+        'ABBBBBBBBBBBBBBA',
+        'AbbbbbbbbbbbbbbA',
+        'aaaaaAaAaAaaaaaa'
+      ]);
     });
 
     makeTile('tile_path_corner', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x78350F, 1);
-      g.fillRect(0, 0, 48, 24); g.fillRect(24, 0, 24, 48);
-      g.fillStyle(0x451A03, 1); g.fillRect(0, 24, 24, 3); g.fillRect(24, 24, 3, 24);
-      g.fillStyle(0x92400E, 1); g.fillRect(6, 6, 12, 12); g.fillRect(30, 30, 12, 12);
+      drawTileMatrix(g, [
+        'aaaaaAaAaAaaaaaa',
+        'ABBBBBBBBBBBBBBA',
+        'AbbbbbbbbbbbbbbA',
+        'AbbbbbbbbbbbbbbA',
+        'AAAAAAAAAAAAAAAa',
+        'ABBBBBBBBBBBBBAA',
+        'AbbbbbbbbbbbbbAA',
+        'AbbbbbbbbbbbbAAA',
+        'AAAAAAAAAAAAAaAA',
+        'ABBBBBBBBBAAaAAA',
+        'AbbbbbbbbAAaAAAA',
+        'AbbbbbbbAAaAAAAA',
+        'AAAAAAAaAaAAAAAA',
+        'AAAAAAaAaAAAAAAA',
+        'aaaaaaAaAAAAAAAA',
+        'aaaaaaaaaaaaaaaa'
+      ]);
     });
 
     makeTile('tile_path_cross', (g) => {
-      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x92400E, 1);
-      g.fillRect(15, 6, 18, 36); g.fillRect(6, 15, 36, 18);
-      g.fillStyle(0x451A03, 1); g.fillRect(18, 18, 12, 12);
-      g.fillStyle(0xB45309, 1); g.fillRect(21, 21, 6, 6);
+      drawTileMatrix(g, [
+        'aAaABBBBBBBAaAaA',
+        'AaAbbbbbbbbbaAaA',
+        'aAaAbbbbbbbbaAaA',
+        'AaAbbbbbbbbbaAaA',
+        'ABBBBBBBBBBBBBBA',
+        'AbbbbbbbbbbbbbbA',
+        'AbbbbbbbbbbbbbbA',
+        'AbbbbbbbbbbbbbbA',
+        'ABBBBBBBBBBBBBBA',
+        'AaAbbbbbbbbbaAaA',
+        'aAaAbbbbbbbbaAaA',
+        'AaAbbbbbbbbbaAaA',
+        'aAaABBBBBBBAaAaA',
+        'AaAbbbbbbbbbaAaA',
+        'aAaAbbbbbbbbaAaA',
+        'aaaaaaaaaaaaaaaa'
+      ]);
     });
 
     makeTile('tile_path_single', (g) => {
-      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x9A6538, 1); g.fillRect(6, 6, 15, 15); g.fillRect(27, 6, 15, 15);
-      g.fillRect(6, 27, 15, 15); g.fillRect(27, 27, 15, 15);
-      g.fillStyle(0x7A480A, 1); g.fillRect(3, 3, 42, 3); g.fillRect(3, 42, 42, 3);
+      drawTileMatrix(g, [
+        'gggggggggggggggg',
+        'g.KKKKKKKKKKKK.g',
+        'gKBBBBBBBBBBBBKg',
+        'gKBbbbbbbbbbbBKg',
+        'gKBbbAAAAAAbbBKg',
+        'gKBbbAaaaaAbbBKg',
+        'gKBbbAaaaaAbbBKg',
+        'gKBbbAAAAAAbbBKg',
+        'gKBbbAAAAAAbbBKg',
+        'gKBbbAaaaaAbbBKg',
+        'gKBbbAaaaaAbbBKg',
+        'gKBbbAAAAAAbbBKg',
+        'gKBbbbbbbbbbbBKg',
+        'gKBBBBBBBBBBBBKg',
+        'g.KKKKKKKKKKKK.g',
+        'MMMMMMMMMMMMMMMM'
+      ]);
     });
 
     makeTile('tile_path_stone', (g) => {
-      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x9A6538, 1);
-      g.fillRect(6, 6, 12, 12); g.fillRect(24, 9, 15, 12);
-      g.fillRect(9, 24, 15, 15); g.fillRect(27, 27, 15, 12);
-      g.fillStyle(0xC48E58, 1); g.fillRect(9, 9, 6, 6); g.fillRect(27, 12, 6, 6);
-      g.fillStyle(0x451A03, 1); g.fillRect(0, 0, 48, 3); g.fillRect(0, 45, 48, 3);
+      drawTileMatrix(g, [
+        'aAaABBBBBBBAaAaA',
+        'AaAKttTTTTsKaAaA',
+        'aAaKtTTTTTSsAaAa',
+        'AaAKtTTTTTSsAaAa',
+        'aAaKSSSSSSSSAaAa',
+        'AaAKKKKKKKKKaAaA',
+        'aAaABBBBBBBAaAaA',
+        'AaAKttTTTTsKaAaA',
+        'aAaKtTTTTTSsAaAa',
+        'AaAKtTTTTTSsAaAa',
+        'aAaKSSSSSSSSAaAa',
+        'AaAKKKKKKKKKaAaA',
+        'aAaABBBBBBBAaAaA',
+        'AaAbbbbbbbbbaAaA',
+        'aAaAbbbbbbbbaAaA',
+        'aaaaaaaaaaaaaaaa'
+      ]);
     });
 
     makeTile('tile_fence_h', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x8B4513, 1); g.fillRect(0, 12, 48, 9); g.fillRect(0, 30, 48, 9);
-      g.fillStyle(0xD2691E, 1); g.fillRect(0, 12, 48, 3); g.fillRect(0, 30, 48, 3);
-      g.fillStyle(0x451A03, 1); g.fillRect(0, 18, 48, 3); g.fillRect(0, 36, 48, 3);
-      g.fillStyle(0x8B4513, 1); g.fillRect(3, 6, 9, 36); g.fillRect(36, 6, 9, 36);
-      g.fillStyle(0xD2691E, 1); g.fillRect(3, 6, 9, 3); g.fillRect(36, 6, 9, 3);
+      drawTileMatrix(g, [
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGGGGGGGGGGGG',
+        'KKKKKKKKKKKKKKKK',
+        'KOOOOOOOOOOOOOOK',
+        'KOOWWWWWWWWWWOOK',
+        'KKwWWWWWWWWWWwKK',
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGGGGGGGGGGGG',
+        'KKKKKKKKKKKKKKKK',
+        'KOOOOOOOOOOOOOOK',
+        'KOOWWWWWWWWWWOOK',
+        'KKwWWWWWWWWWWwKK',
+        'GGGGGGGGGGGGGGGG',
+        'gggggggggggggggg',
+        'MMMMMMMMMMMMMMMM'
+      ]);
     });
 
     makeTile('tile_fence_v', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x8B4513, 1); g.fillRect(12, 0, 9, 48); g.fillRect(30, 0, 9, 48);
-      g.fillStyle(0xD2691E, 1); g.fillRect(12, 0, 3, 48); g.fillRect(30, 0, 3, 48);
-      g.fillStyle(0x451A03, 1); g.fillRect(18, 0, 3, 48); g.fillRect(36, 0, 3, 48);
-      g.fillStyle(0x8B4513, 1); g.fillRect(6, 3, 36, 9); g.fillRect(6, 36, 36, 9);
-      g.fillStyle(0xD2691E, 1); g.fillRect(6, 3, 3, 9); g.fillRect(6, 36, 3, 9);
+      drawTileMatrix(g, [
+        'GGKKOKGKKOKGGGGG',
+        'GGKKOKGKKOKGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKOWGKKOWGGGGG',
+        'GGKKwWGKKwWGGGGG',
+        'ggKKwWGKKwWGgggg',
+        'MMKKKKGKKKKGMMMM'
+      ]);
     });
 
     makeTile('tile_fence_post', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x8B4513, 1); g.fillRect(18, 6, 12, 36);
-      g.fillStyle(0xD2691E, 1); g.fillRect(18, 6, 12, 6); g.fillRect(18, 6, 3, 36);
-      g.fillStyle(0x451A03, 1); g.fillRect(27, 6, 3, 36);
-      g.fillStyle(0x15803D, 1); g.fillRect(15, 39, 18, 6);
+      drawTileMatrix(g, [
+        '.....KKKKKK.....',
+        '....KOOOOoOK....',
+        '....KOOOOoOK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KggggggK....',
+        '....KMMMMMMK....'
+      ]);
     });
 
     makeTile('tile_fence_corner', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x8B4513, 1);
-      g.fillRect(18, 18, 30, 9); g.fillRect(18, 18, 9, 30);
-      g.fillRect(15, 12, 15, 24);
-      g.fillStyle(0xD2691E, 1); g.fillRect(15, 12, 15, 3); g.fillRect(18, 18, 30, 3);
-      g.fillStyle(0x451A03, 1); g.fillRect(18, 24, 30, 3); g.fillRect(24, 18, 3, 30);
+      drawTileMatrix(g, [
+        '.....KKKKKK.....',
+        '....KOOOOoOK....',
+        '....KOOOOoOK....',
+        '....KOOWWwwKKKKK',
+        '....KOOWWwwOOOOK',
+        '....KOOWWWWWWWwK',
+        '....KOOWWwwKKKKK',
+        '....KOOWWwwK....',
+        '....KOOWWwwK....',
+        '....KOOWWwwKKKKK',
+        '....KOOWWwwOOOOK',
+        '....KOOWWWWWWWwK',
+        '....KOOWWwwKKKKK',
+        '....KOOWWwwK....',
+        '....KggggggK....',
+        '....KMMMMMMK....'
+      ]);
     });
 
     makeTile('tile_house_roof', (g) => {
-      g.fillStyle(0x991B1B, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0xB91C1C, 1);
-      for (let y = 0; y < 48; y += 12) {
-        g.fillRect(0, y, 48, 6);
-      }
-      g.fillStyle(0xEF4444, 1);
-      for (let y = 0; y < 48; y += 12) {
-        for (let x = (y % 24 === 0 ? 0 : 12); x < 48; x += 24) {
-          g.fillRect(x, y, 12, 3);
-        }
-      }
-      g.fillStyle(0x7F1D1D, 1); g.fillRect(0, 45, 48, 3);
+      drawTileMatrix(g, [
+        'KKKKKKKKKKKKKKKK',
+        'KRRRRRRRRRRRRRRK',
+        'KRRRRRRRRRRRRRRK',
+        'KrrrrrrrrrrrrrrK',
+        'KKKKKKKKKKKKKKKK',
+        'KRKKKKRRKKKKRRKK',
+        'KRRRRRRRRRRRRRRK',
+        'KrrrrrrrrrrrrrrK',
+        'KKKKKKKKKKKKKKKK',
+        'KKKKRRKKKKRRKKKK',
+        'KRRRRRRRRRRRRRRK',
+        'KrrrrrrrrrrrrrrK',
+        'KKKKKKKKKKKKKKKK',
+        'KRKKKKRRKKKKRRKK',
+        'KrrrrrrrrrrrrrrK',
+        'KKKKKKKKKKKKKKKK'
+      ]);
     });
 
     makeTile('tile_house_wall', (g) => {
-      g.fillStyle(0xDC2626, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x7F1D1D, 1);
-      for (let x = 0; x < 48; x += 12) {
-        g.fillRect(x, 0, 2, 48);
-      }
-      g.fillStyle(0xF87171, 1);
-      for (let x = 2; x < 48; x += 12) {
-        g.fillRect(x, 0, 2, 48);
-      }
+      drawTileMatrix(g, [
+        'KKKKKKKKKKKKKKKK',
+        'KRRRRKRRRRKRRRRK',
+        'KRRRRKRRRRKRRRRK',
+        'KrrrrKrrrrKrrrrK',
+        'KKKKKKKKKKKKKKKK',
+        'KRRRRKRRRRKRRRRK',
+        'KRRRRKRRRRKRRRRK',
+        'KrrrrKrrrrKrrrrK',
+        'KKKKKKKKKKKKKKKK',
+        'KRRRRKRRRRKRRRRK',
+        'KRRRRKRRRRKRRRRK',
+        'KrrrrKrrrrKrrrrK',
+        'KKKKKKKKKKKKKKKK',
+        'KRRRRKRRRRKRRRRK',
+        'KrrrrKrrrrKrrrrK',
+        'KKKKKKKKKKKKKKKK'
+      ]);
     });
 
     makeTile('tile_house_door', (g) => {
-      g.fillStyle(0xDC2626, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x451A03, 1); g.fillRect(9, 6, 30, 42);
-      g.fillStyle(0x78350F, 1); g.fillRect(12, 9, 24, 39);
-      g.fillStyle(0x94A3B8, 1); g.fillRect(12, 18, 24, 3); g.fillRect(12, 33, 24, 3);
-      g.fillStyle(0xFDE047, 1); g.fillRect(30, 27, 4, 6);
+      drawTileMatrix(g, [
+        'KKKKKKKKKKKKKKKK',
+        'KRRKKKKKKKKRRRRK',
+        'KRRKOOOOOOKRRRRK',
+        'KrrKOWWWWwKrrrrK',
+        'KKKKOWWWWwKKKKKK',
+        'KRRKOWWWWwKRRRRK',
+        'KRRKOWWWWwKRRRRK',
+        'KrrKOWWYYwKrrrrK',
+        'KKKKOWWYYwKKKKKK',
+        'KRRKOWWWWwKRRRRK',
+        'KRRKOWWWWwKRRRRK',
+        'KrrKOWWWWwKrrrrK',
+        'KKKKOWWWWwKKKKKK',
+        'KRRKOWWWWwKRRRRK',
+        'KrrKowwwwwKrrrrK',
+        'KKKKKKKKKKKKKKKK'
+      ]);
     });
 
     makeTile('tile_house_window', (g) => {
-      g.fillStyle(0xDC2626, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x451A03, 1); g.fillRect(9, 9, 30, 30);
-      g.fillStyle(0xFDE047, 1); g.fillRect(12, 12, 24, 24);
-      g.fillStyle(0xFEF08A, 1); g.fillRect(15, 15, 9, 9);
-      g.fillStyle(0x451A03, 1); g.fillRect(22, 12, 3, 24); g.fillRect(12, 22, 24, 3);
+      drawTileMatrix(g, [
+        'KKKKKKKKKKKKKKKK',
+        'KRRKKKKKKKKRRRRK',
+        'KRRKYYYYYYKRRRRK',
+        'KrrKYYYYYYKrrrrK',
+        'KKKKYYKKYYKKKKKK',
+        'KRRKYYKKYYKRRRRK',
+        'KRRKYYYYYYKRRRRK',
+        'KrrKYYYYYYKrrrrK',
+        'KKKKKKKKKKKKKKKK',
+        'KRRRRRRRRRRRRRRK',
+        'KRRRRRRRRRRRRRRK',
+        'KrrrrrrrrrrrrrrK',
+        'KKKKKKKKKKKKKKKK',
+        'KRRRRRRRRRRRRRRK',
+        'KrrrrrrrrrrrrrrK',
+        'KKKKKKKKKKKKKKKK'
+      ]);
     });
 
     makeTile('tile_shore_top', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 24);
-      g.fillStyle(0x67E8F9, 1); g.fillRect(0, 24, 48, 6);
-      g.fillStyle(0xFFFFFF, 1); g.fillRect(0, 24, 48, 3);
-      g.fillStyle(0x0284C7, 1); g.fillRect(0, 30, 48, 18);
+      drawTileMatrix(g, [
+        'GGGGGHGGGGGGGHGG',
+        'GGGGGGGGGGGGGGGG',
+        'GGgGGGGGGgGGGGGG',
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGHGGGGGGGGGG',
+        'GgGGGGGGGGGGGGgG',
+        'gggggggggggggggg',
+        'MMMMMMMMMMMMMMMM',
+        'EEEEEEEEEEEEEEEE',
+        'cccccccccccccccc',
+        'CCCCCCCCCCCCCCCC',
+        'CCCCCCCCCCCCCCCC',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'zzzzzzzzzzzzzzzz',
+        'zzzzzzzzzzzzzzzz'
+      ]);
     });
 
     makeTile('tile_shore_bottom', (g) => {
-      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 18);
-      g.fillStyle(0x67E8F9, 1); g.fillRect(0, 18, 48, 6);
-      g.fillStyle(0xFFFFFF, 1); g.fillRect(0, 21, 48, 3);
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 24, 48, 24);
+      drawTileMatrix(g, [
+        'zzzzzzzzzzzzzzzz',
+        'zzzzzzzzzzzzzzzz',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'CCCCCCCCCCCCCCCC',
+        'CCCCCCCCCCCCCCCC',
+        'cccccccccccccccc',
+        'EEEEEEEEEEEEEEEE',
+        'MMMMMMMMMMMMMMMM',
+        'gggggggggggggggg',
+        'GgGGGGGGGGGGGGgG',
+        'GGGGGHGGGGGGGGGG',
+        'GGgGGGGGGgGGGGGG',
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGHGGGGGGGHGG',
+        'GGGGGGGGGGGGGGGG'
+      ]);
     });
 
     makeTile('tile_shore_left', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 24, 48);
-      g.fillStyle(0x67E8F9, 1); g.fillRect(24, 0, 6, 48);
-      g.fillStyle(0xFFFFFF, 1); g.fillRect(24, 0, 3, 48);
-      g.fillStyle(0x0284C7, 1); g.fillRect(30, 0, 18, 48);
+      drawTileMatrix(g, [
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGGgMECZZzzzz'
+      ]);
     });
 
     makeTile('tile_shore_right', (g) => {
-      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 18, 48);
-      g.fillStyle(0x67E8F9, 1); g.fillRect(18, 0, 6, 48);
-      g.fillStyle(0xFFFFFF, 1); g.fillRect(21, 0, 3, 48);
-      g.fillStyle(0x22C55E, 1); g.fillRect(24, 0, 24, 48);
+      drawTileMatrix(g, [
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG',
+        'zzzzZZCEMgGGGGGG'
+      ]);
     });
 
     makeTile('tile_shore_corner', (g) => {
-      g.fillStyle(0x22C55E, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x0284C7, 1); g.fillRect(24, 24, 24, 24);
-      g.fillStyle(0x67E8F9, 1); g.fillRect(18, 24, 6, 24); g.fillRect(24, 18, 24, 6);
-      g.fillStyle(0xFFFFFF, 1); g.fillRect(21, 24, 3, 24); g.fillRect(24, 21, 24, 3);
+      drawTileMatrix(g, [
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGGGGGGGGGGGG',
+        'GGGGGGGGGGGGGGgM',
+        'GGGGGGGGGGGGgMEC',
+        'GGGGGGGGGGgMECZZ',
+        'GGGGGGGGgMECZZzz',
+        'GGGGGGgMECZZzzzz',
+        'GGGGGgMECZZzzzzz',
+        'GGGGgMECZZzzzzzz',
+        'GGGgMECZZzzzzzzz',
+        'GGgMECZZzzzzzzzz',
+        'GgMECZZzzzzzzzzz',
+        'gMECZZzzzzzzzzzz',
+        'MECZZzzzzzzzzzzz',
+        'ECZZzzzzzzzzzzzz',
+        'CZZzzzzzzzzzzzzz'
+      ]);
     });
 
     // ── FISHING SCENE TILEMAP TEXTURES ───────────────────────────────────────
     makeTile('tile_sand', (g) => {
-      g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0xF59E0B, 1);
-      g.fillRect(6, 9, 3, 3); g.fillRect(24, 18, 3, 3); g.fillRect(39, 6, 3, 3);
-      g.fillRect(15, 33, 3, 3); g.fillRect(33, 39, 3, 3);
-      g.fillStyle(0xFEF08A, 1);
-      g.fillRect(18, 6, 3, 3); g.fillRect(36, 21, 3, 3); g.fillRect(9, 27, 3, 3);
+      drawTileMatrix(g, [
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYyYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYyYYYYYYYYYYyYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYyYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYyYYYYYYYYYYyYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYyYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYyYYYYYYYYYYyYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY'
+      ]);
     });
 
     makeTile('tile_sand_wet', (g) => {
-      g.fillStyle(0xD97706, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0xB45309, 1);
-      g.fillRect(9, 6, 3, 3); g.fillRect(27, 15, 3, 3); g.fillRect(18, 36, 3, 3);
-      g.fillStyle(0x38BDF8, 1);
-      g.fillRect(15, 12, 6, 3); g.fillRect(33, 30, 6, 3); g.fillRect(6, 42, 6, 3);
+      drawTileMatrix(g, [
+        'yAyAyAyAyAyAyAyA',
+        'AyAyAyAyAyAyAyAy',
+        'yAyAyAyAyAyAyAyA',
+        'AyAyAVVVVAyAyAyA',
+        'yAyAyAyAyAyAyAyA',
+        'AyAyAyAyAyAyAyAy',
+        'yAyAyAyAyAyAyAyA',
+        'AyAyAyAyAVVVVAyA',
+        'yAyAyAyAyAyAyAyA',
+        'AyAyAyAyAyAyAyAy',
+        'yAyAyAyAyAyAyAyA',
+        'AyAVVVVAyAyAyAyA',
+        'yAyAyAyAyAyAyAyA',
+        'AyAyAyAyAyAyAyAy',
+        'yAyAyAyAyAyAyAyA',
+        'AyAyAyAyAyAyAyAy'
+      ]);
     });
 
     makeTile('tile_rock_shore', (g) => {
-      g.fillStyle(0xD97706, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x475569, 1); g.fillRect(6, 6, 36, 36);
-      g.fillStyle(0x64748B, 1); g.fillRect(9, 9, 24, 24);
-      g.fillStyle(0x94A3B8, 1); g.fillRect(12, 12, 12, 12);
-      g.fillStyle(0x334155, 1); g.fillRect(6, 36, 36, 6); g.fillRect(36, 6, 6, 36);
-      g.fillStyle(0x67E8F9, 1); g.fillRect(0, 0, 6, 48); g.fillRect(0, 0, 48, 6);
+      drawTileMatrix(g, [
+        'yAyAyAyAyAyAyAyA',
+        'AyAKKKKKKKKKKAAy',
+        'yAKtTTTTTTTTsKAy',
+        'AyKtTTTTTTTTsKAA',
+        'yAKtTTTTTTTTsKAy',
+        'AyKtTTTTTTTTsKAA',
+        'yAKtTTTTTTTTsKAy',
+        'AyKtTTTTTTTTsKAA',
+        'yAKtTTTTTTTTsKAy',
+        'AyKtTTTTTTTTsKAA',
+        'yAKSSSSSSSSSSKAy',
+        'AyKKKKKKKKKKKKAA',
+        'yAyAyAyAyAyAyAyA',
+        'AyAyAyAyAyAyAyAy',
+        'yAyAyAyAyAyAyAyA',
+        'AyAyAyAyAyAyAyAy'
+      ]);
     });
 
     makeTile('tile_pier_plank', (g) => {
-      g.fillStyle(0x78350F, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x92400E, 1);
-      g.fillRect(0, 0, 48, 9); g.fillRect(0, 12, 48, 9);
-      g.fillRect(0, 24, 48, 9); g.fillRect(0, 36, 48, 9);
-      g.fillStyle(0x451A03, 1);
-      g.fillRect(0, 9, 48, 3); g.fillRect(0, 21, 48, 3);
-      g.fillRect(0, 33, 48, 3); g.fillRect(0, 45, 48, 3);
-      g.fillStyle(0x334155, 1);
-      g.fillRect(6, 3, 3, 3); g.fillRect(39, 3, 3, 3);
-      g.fillRect(6, 15, 3, 3); g.fillRect(39, 15, 3, 3);
-      g.fillRect(6, 27, 3, 3); g.fillRect(39, 27, 3, 3);
-      g.fillRect(6, 39, 3, 3); g.fillRect(39, 39, 3, 3);
+      drawTileMatrix(g, [
+        'KKKKKKKKKKKKKKKK',
+        'KOOOOOOOOOOOOOOK',
+        'KOOWWWWWWWWWWOOK',
+        'KKwWWWWWWWWWWwKK',
+        'KKKKKKKKKKKKKKKK',
+        'KN..N......N..NK',
+        'KN..N......N..NK',
+        'KKKKKKKKKKKKKKKK',
+        'KOOOOOOOOOOOOOOK',
+        'KOOWWWWWWWWWWOOK',
+        'KKwWWWWWWWWWWwKK',
+        'KKKKKKKKKKKKKKKK',
+        'KN..N......N..NK',
+        'KN..N......N..NK',
+        'KKKKKKKKKKKKKKKK',
+        'KKKKKKKKKKKKKKKK'
+      ]);
     });
 
     makeTile('tile_pier_post', (g) => {
-      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x78350F, 1); g.fillRect(12, 0, 24, 48);
-      g.fillStyle(0x92400E, 1); g.fillRect(12, 0, 6, 48);
-      g.fillStyle(0x451A03, 1); g.fillRect(30, 0, 6, 48);
-      g.fillStyle(0xD97706, 1); g.fillRect(12, 18, 24, 9);
-      g.fillStyle(0xB45309, 1); g.fillRect(12, 21, 24, 3);
+      drawTileMatrix(g, [
+        'ZZZZKKKKKKKKZZZZ',
+        'ZZZZKOOOOoOKZZZZ',
+        'ZZZZKOOOOoOKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'zzzzKzzzzzzKzzzz',
+        'zzzzKzzzzzzKzzzz'
+      ]);
     });
 
     makeTile('tile_pier_lantern', (g) => {
-      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x475569, 1); g.fillRect(18, 24, 12, 24); g.fillRect(12, 18, 24, 6);
-      g.fillStyle(0xFDE047, 0.3); g.fillRect(3, 3, 42, 42);
-      g.fillStyle(0xF59E0B, 1); g.fillRect(15, 6, 18, 18);
-      g.fillStyle(0xFEF08A, 1); g.fillRect(18, 9, 12, 12);
+      drawTileMatrix(g, [
+        'ZZZZZZKKKKZZZZZZ',
+        'ZZZZZKYYYYKZZZZZ',
+        'ZZZZKYYYYYYKZZZZ',
+        'ZZZZKYYYYYYKZZZZ',
+        'ZZZZZKYYYYKZZZZZ',
+        'ZZZZZZKKKKZZZZZZ',
+        'ZZZZKKKKKKKKZZZZ',
+        'ZZZZKOOOOoOKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'ZZZZKOOWWwwKZZZZ',
+        'zzzzKzzzzzzKzzzz',
+        'zzzzKzzzzzzKzzzz'
+      ]);
     });
 
     makeTile('tile_seashell', (g) => {
-      g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0xF472B6, 1); g.fillRect(18, 18, 15, 15);
-      g.fillStyle(0xFFFFFF, 1); g.fillRect(21, 21, 9, 9);
-      g.fillStyle(0xDB2777, 1); g.fillRect(18, 24, 15, 3); g.fillRect(24, 18, 3, 15);
+      drawTileMatrix(g, [
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYKKKKKKYYYYY',
+        'YYYYKFFFFFFKYYYY',
+        'YYYKFFFFFFffKYYY',
+        'YYYKFFFffFFFfKYY',
+        'YYYKFFFffFFFfKYY',
+        'YYYKFFFffFFFfKYY',
+        'YYYKFFFffFFFfKYY',
+        'YYYKFFFFffFFfKYY',
+        'YYYYKFFFFFFfKYYY',
+        'YYYYYKKKKKKYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY'
+      ]);
     });
 
     makeTile('tile_starfish', (g) => {
-      g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0xF97316, 1);
-      g.fillRect(21, 12, 6, 24); g.fillRect(12, 21, 24, 6);
-      g.fillRect(15, 15, 18, 18);
-      g.fillStyle(0xFFFFFF, 1);
-      g.fillRect(21, 21, 3, 3); g.fillRect(21, 15, 3, 3); g.fillRect(21, 27, 3, 3);
+      drawTileMatrix(g, [
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYKKYYYYYYY',
+        'YYYYYYKyYKYYYYYY',
+        'YYYYYYKyYKYYYYYY',
+        'YYYYYKKyyKKYYYYY',
+        'YKKSKyYYYYyKSKKY',
+        'YKyKyYYYYYYyKyKY',
+        'YYKKYYYYYYYYKKYY',
+        'YYYYKyyyyyyKYYYY',
+        'YYYKKSKyKySKKYYY',
+        'YYYKyyKYYKyyKYYY',
+        'YYYKyKYYYYKyKYYY',
+        'YYYKKYYYYYYKKYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY'
+      ]);
     });
 
     makeTile('tile_driftwood', (g) => {
-      g.fillStyle(0xFDE047, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x78350F, 1); g.fillRect(6, 18, 36, 12);
-      g.fillStyle(0x64748B, 1); g.fillRect(9, 18, 12, 12); g.fillRect(27, 15, 6, 6);
-      g.fillStyle(0x451A03, 1); g.fillRect(6, 27, 36, 3);
+      drawTileMatrix(g, [
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YKKKKKKKKKKKKKYY',
+        'KOOOOOOOOOOOOoKY',
+        'KOWWWWWWWWWWWwKY',
+        'KOWWWWWWWWWWWwKY',
+        'KKwWWWWWWWWWWwKK',
+        'YKKKKKKKKKKKKKYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY',
+        'YYYYYYYYYYYYYYYY'
+      ]);
     });
 
     makeTile('tile_ocean_deep', (g) => {
-      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x0369A1, 1); g.fillRect(0, 24, 48, 24);
-      g.fillStyle(0x38BDF8, 1);
-      g.fillRect(6, 12, 12, 3); g.fillRect(27, 33, 15, 3); g.fillRect(18, 21, 9, 3);
+      drawTileMatrix(g, [
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZzZZZZZZZZZZ',
+        'ZZZZZzZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZzZZZZZZ',
+        'ZZZZZZZZZzZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZzZZZZZZZZZZZZZ',
+        'ZZzZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZzZZZZ',
+        'ZZZZZZZZZZZzZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'zzzzzzzzzzzzzzzz',
+        'zzzzzzzzzzzzzzzz'
+      ]);
     });
 
     makeTile('tile_water_foam_border', (g) => {
-      g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x67E8F9, 1); g.fillRect(0, 0, 48, 12); g.fillRect(0, 24, 48, 6);
-      g.fillStyle(0xE0F2FE, 1); g.fillRect(0, 0, 48, 6);
-      g.fillStyle(0xFFFFFF, 1);
-      g.fillRect(6, 6, 6, 3); g.fillRect(24, 6, 9, 3); g.fillRect(39, 6, 6, 3);
+      drawTileMatrix(g, [
+        'EEEEEEEEEEEEEEEE',
+        'EEEEEEEEEEEEEEEE',
+        'cccccccccccccccc',
+        'cccccccccccccccc',
+        'CCCCCCCCCCCCCCCC',
+        'CCCCCCCCCCCCCCCC',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'ZZZZZZZZZZZZZZZZ',
+        'zzzzzzzzzzzzzzzz',
+        'zzzzzzzzzzzzzzzz'
+      ]);
     });
 
     // ── ARCADE SCENE TILEMAP TEXTURES ────────────────────────────────────────
@@ -872,7 +1303,7 @@ class PixelArtRenderer {
       'z': 0x5B6E9E, 'Z': 0x3B4D7A, 'q': 0x263354, 'Q': 0x161F38, 'b': 0xE8C840,
       'L': 0x7E4F2B, 'S': 0x59381E, 's': 0x382210,
       'N': 0x121016, 'W': 0xFFFFFF,
-      'n': 0x78350F, 'M': 0x64748B, 'd': 0x475569, 'U': 0x38BDF8, 'm': 0x94A3B8,
+      'n': 0x78350F, 'M': 0x64748B, 'd': 0x475569, 'U': 0x38BDF8, 'u': 0x6BB1D6, 'm': 0x94A3B8,
       'G': 0x22C55E, 'A': 0xEF4444, 'a': 0xFCA5A5, 'D': 0x7F1D1D, 'j': 0x78350F, 'Y': 0xFDE047, 'y': 0xEAB308, 'c': 0x94A3B8, 'C': 0xE2E8F0, 'e': 0x59381E, 'E': 0x78350F
     };
 
@@ -2166,32 +2597,52 @@ class PixelArtRenderer {
       '.': null,       // Transparent
       'K': 0x0F172A,   // 1px Dark Slate Outline
       'k': 0x1E293B,   // Secondary Outline / Fin Shadow
-      'R': 0xEF4444,   // Bobber Red Cap
+      'R': 0xEF4444,   // Bobber Red Cap / Red accent
+      'r': 0x991B1B,   // Deep Red Shadow
       'W': 0xFFFFFF,   // Specular White Eye/Scale Highlight
       'w': 0xF1F5F9,   // Belly White/Cream
-
-      // Carp (Bronze & Gold)
-      'Z': 0xF59E0B, 'z': 0xD97706, 'Y': 0xFDE047, 'y': 0xB45309,
-      // Salmon (Pink-Orange & Coral)
-      'S': 0xFB923C, 's': 0xEA580C, 'H': 0xFFEDD5, 'h': 0xC2410C,
-      // Tuna (Royal Blue & Navy)
-      'U': 0x2563EB, 'u': 0x1D4ED8, 'B': 0x60A5FA, 'V': 0x1E3A8A,
-      // Squid (Translucent Pink & Iridescent Purple)
-      'Q': 0xF472B6, 'q': 0xDB2777, 'E': 0xFBCFE8, 'I': 0xC084FC,
-      // Eel (Metallic Slate Blue-Grey)
-      'N': 0x475569, 'n': 0x334155, 'm': 0x94A3B8,
-      // Goldfish (Flame Orange)
-      'F': 0xFF6B00, 'f': 0xD94600, 'G': 0xFFBE98, 'g': 0xFFD000,
-      // Seabass (Silver-Grey & Shimmer)
-      'M': 0x64748B, 'T': 0x94A3B8, 't': 0x0EA5E9,
-      // Shrimp (Coral Red & Translucent Pink)
-      'P': 0xF87171, 'p': 0xDC2626, 'X': 0xFECACA,
-      // Octopus (Crimson & Cream Suction Cups)
-      'O': 0xE11D48, 'o': 0x9F1239, 'C': 0xFFE4E6, 'c': 0xFB7185,
-      // Catfish (Mud Olive Grey & Barbels)
-      'A': 0x4B5563, 'a': 0x1F2937,
-      // Mackerel / Accents
-      '+': 0xFDE047, 'd': 0x78350F, 'N': 0x475569
+      'Y': 0xFDE047,   // Bright Gold / Yellow
+      'y': 0xD97706,   // Gold Shadow / Amber
+      'Z': 0xF59E0B,   // Carp Bronze / Orange Base
+      'z': 0xB45309,   // Deep Bronze Shadow
+      'S': 0xFB923C,   // Salmon Coral / Pink-Orange
+      's': 0xEA580C,   // Salmon Mid Shadow
+      'H': 0xFFEDD5,   // Salmon Belly Light
+      'h': 0xC2410C,   // Salmon Deep Shadow
+      'U': 0x2563EB,   // Tuna Royal Blue
+      'u': 0x1D4ED8,   // Tuna Dark Blue
+      'B': 0x60A5FA,   // Tuna Light Blue Highlight
+      'V': 0x1E3A8A,   // Tuna Navy Shadow
+      'Q': 0xF472B6,   // Squid Pink
+      'q': 0xDB2777,   // Squid Deep Pink
+      'E': 0xFBCFE8,   // Squid Light Highlight
+      'I': 0xC084FC,   // Squid Purple Iridescence
+      'N': 0x475569,   // Eel Slate Grey / Wood Iron
+      'n': 0x334155,   // Eel Dark Slate
+      'm': 0x94A3B8,   // Eel Light Slate
+      'F': 0xFF6B00,   // Goldfish Flame Orange
+      'f': 0xD94600,   // Goldfish Deep Orange
+      'G': 0xFFBE98,   // Goldfish Tail Fin Light
+      'g': 0xFFD000,   // Goldfish Gold Accent
+      'M': 0x64748B,   // Seabass Grey Base
+      'T': 0x94A3B8,   // Seabass Light Grey
+      't': 0x0EA5E9,   // Seabass Blue Shimmer
+      'P': 0xF87171,   // Shrimp Coral Pink
+      'p': 0xDC2626,   // Shrimp Red Base
+      'X': 0xFECACA,   // Shrimp Light Pink Shell
+      'O': 0xE11D48,   // Octopus Crimson Base
+      'o': 0x9F1239,   // Octopus Dark Crimson Shadow
+      'C': 0xFFE4E6,   // Octopus Suction Cup Cream / Rod Ring
+      'c': 0xFB7185,   // Octopus Pink Accent
+      'A': 0x4B5563,   // Catfish Mud Olive Base
+      'a': 0x1F2937,   // Catfish Dark Shadow
+      'e': 0x6B7280,   // Catfish Mid Grey
+      'L': 0x9333EA,   // Legendary Purple
+      'l': 0x6D28D9,   // Legendary Dark Purple
+      'j': 0xEAB308,   // Legendary Gold Shimmer
+      'D': 0x8F5428,   // Wood Base
+      'd': 0x573012,   // Wood Shadow
+      'x': 0xD99B66    // Wood Highlight
     };
 
     const carp = [
@@ -2235,7 +2686,7 @@ class PixelArtRenderer {
       '.....KKKK.......',
       '...KKUUUBKK.....',
       '..KKUUUKUUUUKK..',
-      '.KKUUUWUUUUUUUV+',
+      '.KKUUUWUUUUUUUVY',
       'KUuuuuuWWWWWWWWu',
       'KUuuuuuuuuuuuuuu',
       '.KUuuuuuuuuuuuu.',
@@ -2362,7 +2813,7 @@ class PixelArtRenderer {
       '..KKAAAKAAAAKK..',
       'WKKAAAAEAAAAAAKA',
       'WKAaaaaWWWWWWWWa',
-      ' KAaaaaaaaaaaaaa',
+      '.KAaaaaaaaaaaaaa',
       '.KAaaaaaaaaaaaa.',
       '..KAaaaaaaaaaa..',
       '....KAaaaaaa....',
@@ -2392,33 +2843,33 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-    const legendary=[
-  '.....KKKKKK.....',
-  '...KKKZZZZKKK...',
-  '..KKZZZKZZZZKKK.',
-  '.KKZZZZWZZZZZZKK',
-  'KKZZZZZZWWWWWWWK',
-  'KzzzzzzzWWWWWWWK',
-  'KKzzzzzzzzzzzzKK',
-  '.KKzzzzzzzzzzKK.',
-  '..KKKzzzzzzKKK..',
-  '....KKzzzzKK....',
-  '.....KKKKKK.....',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................'
-];
+    const legendary = [
+      '.....KKKKKK.....',
+      '...KKKLLLLKKK...',
+      '..KKLLLKLLLLKKK.',
+      '.KKLLLLWLLLLLLKK',
+      'KKLLLLLLWWWWWWWK',
+      'KlllllllWWWWWWWK',
+      'KKlllllljjjjjjKK',
+      '.KKlllljjjjjjKK.',
+      '..KKKlllljjKKK..',
+      '....KKllllKK....',
+      '.....KKKKKK.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
     const clam = [
-      '.....BKKKBB.....',
-      '...BKKKKKKKBB...',
-      '..BKKKKKKKKKKB..',
-      '.BKKKKKQKWWKKKB.',
-      '.BKKKKQQQWWKKKB.',
-      '..BKKKKKKKKKKB..',
-      '...bbbbbbbbbb...',
-      '.....bbbbbb.....',
+      '.....KKKKKK.....',
+      '...KKEEQQQQKK...',
+      '..KKWWEEQQqqKK..',
+      '.KKWWEEQKWWqqKK.',
+      '.KKWWEEQQWWqqKK.',
+      '..KKEEQQqqqqKK..',
+      '...KKqqqqqqKK...',
+      '.....KKKKKK.....',
       '................',
       '................',
       '................',
@@ -2459,76 +2910,76 @@ class PixelArtRenderer {
 
     // Dock tiles & bobber & rod
     const dock_plank = [
-      'dddddddddddddddd',
-      'dddddddddddddddd',
-      'N......N........',
-      'N......N........',
-      'dddddddddddddddd',
-      'dddddddddddddddd',
-      '................',
-      'dddddddddddddddd',
-      'dddddddddddddddd',
-      'N......N........',
-      'N......N........',
-      'dddddddddddddddd',
-      'dddddddddddddddd',
-      '................',
-      'dddddddddddddddd',
-      'dddddddddddddddd'
+      'KKKKKKKKKKKKKKKK',
+      'KOOOOOOOOOOOOOOK',
+      'KOOWWWWWWWWWWOOK',
+      'KKwWWWWWWWWWWwKK',
+      'KKKKKKKKKKKKKKKK',
+      'KN..N......N..NK',
+      'KN..N......N..NK',
+      'KKKKKKKKKKKKKKKK',
+      'KOOOOOOOOOOOOOOK',
+      'KOOWWWWWWWWWWOOK',
+      'KKwWWWWWWWWWWwKK',
+      'KKKKKKKKKKKKKKKK',
+      'KN..N......N..NK',
+      'KN..N......N..NK',
+      'KKKKKKKKKKKKKKKK',
+      'KKKKKKKKKKKKKKKK'
     ];
     const dock_post = [
-      '......dd........',
-      '......dd........',
-      '......NN........',
-      '......dd........',
-      '......dd........',
-      '......dd........',
-      '......dd........',
-      '......dd........',
-      '......dd........',
-      '......dd........',
-      '......NN........',
-      '......dd........',
-      '......dd........',
-      '......dd........',
-      '......dd........',
-      '......dd........'
+      '.....KKKK.......',
+      '.....KxDdK......',
+      '.....KxNdK......',
+      '.....KxDdK......',
+      '.....KxDdK......',
+      '.....KxDdK......',
+      '.....KxDdK......',
+      '.....KxDdK......',
+      '.....KxDdK......',
+      '.....KxDdK......',
+      '.....KxNdK......',
+      '.....KxDdK......',
+      '.....KxDdK......',
+      '.....KxDdK......',
+      '.....KxDdK......',
+      '.....KKKK.......'
     ];
-    const bobber=[
-  '.....KKKKKK.....',
-  '....KKRRRRKK....',
-  '...KKRRRRRRKK...',
-  '..KKRRRRRRRRKK..',
-  '..KKWWWWWWWWKK..',
-  '...KKWWWWWWKK...',
-  '....KKWWWWKK....',
-  '.....KKWWKK.....',
-  '......KKKK......',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................',
-  '................'
-];
+    const bobber = [
+      '.....KKKKKK.....',
+      '....KKRRRRKK....',
+      '...KKRRRRrrKK...',
+      '..KKRRRRrrrrKK..',
+      '..KKWWWWWWWWKK..',
+      '...KKWWWWwwKK...',
+      '....KKWWwwKK....',
+      '.....KKwwKK.....',
+      '......KKKK......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ];
     const rod = [
-      '...............C',
-      '..............C.',
-      '.............C..',
-      '............C...',
-      '...........C....',
-      '..........C.....',
-      '.........C......',
-      '........C.......',
-      '.......C........',
-      '......Wood......',
-      '.....Wood.......',
-      '....Wood........',
-      '...Wood.........',
-      '..Wood..........',
-      '.Wood...........',
-      'Wood............'
+      '.............KCK',
+      '............KEK.',
+      '...........KCK..',
+      '..........KCK...',
+      '.........KBK....',
+      '........KCK.....',
+      '.......KCK......',
+      '......KCK.......',
+      '.....KxK........',
+      '....KDK.........',
+      '...KdK..........',
+      '..KDK...........',
+      '.KdK............',
+      'KDK.............',
+      'KdK.............',
+      'KK..............'
     ];
 
     this.createTexture(scene, 'dock_plank', dock_plank, P);
@@ -2543,49 +2994,51 @@ class PixelArtRenderer {
     // 10. Player Ship Palette & Matrix
     const P_SHIP = {
       '.': null,
-      'k': 0x0F172A, 'q': 0x1E293B, 'S': 0x0284C7, 'C': 0x38BDF8,
-      'W': 0xE0F2FE, 'R': 0xEF4444, 'O': 0xF97316, 'E': 0xFDE047
+      'K': 0x0F172A, 'd': 0x0369A1, 'D': 0x0369A1, 'S': 0x0284C7, 'L': 0x38BDF8,
+      'C': 0x06B6D4, 'A': 0x67E8F9, 'W': 0xE0F2FE, 'R': 0xEF4444,
+      'O': 0xF97316, 'Y': 0xFDE047
     };
     const ship = [
-      '.......kk.......',
-      '......kWWk......',
-      '......kCCk......',
-      '.....kCCCCk.....',
-      '.....kSSSSk.....',
-      '....kSqSSqSk....',
-      '...kSSqSSqSSk...',
-      '..kSSSSSSSSSSk..',
-      '.kSSSSCSCSCSSSk.',
-      'kRSSSSkCCkSSSSRk',
-      'kRkSSk.kk.kSSkRk',
-      'kkkSSk....kSSkkk',
-      '..kOEk....kOEk..',
-      '..kOOk....kOOk..',
-      '...kk......kk...',
+      '.......KK.......',
+      '......KWWK......',
+      '......KAAK......',
+      '.....KCAACK.....',
+      '.....KLLLSK.....',
+      '....KLLSSSDK....',
+      '...KSLSSSSSDK...',
+      '..KSLLSSSSSSDK..',
+      '.KSSLLCCCCCCSSK.',
+      'KRSSSK.WW.KSSSRK',
+      'KRRSSK.KK.KSSRRK',
+      'KKKSSK....KSSKKK',
+      '..KOYK....KOYK..',
+      '..KOOK....KOOK..',
+      '...KK......KK...',
       '................'
     ];
 
     // 11. Alien Scout
     const P_SCOUT = {
       '.': null,
-      'k': 0x052E16, 'g': 0x14532D, 'G': 0x16A34A, 'A': 0x4ADE80,
-      'Y': 0xFDE047, 'R': 0xEF4444, 'C': 0x06B6D4
+      'K': 0x0F172A, 'd': 0x052E16, 'g': 0x16A34A, 'G': 0x4ADE80,
+      'H': 0x86EFAC, 'C': 0x06B6D4, 'R': 0xEF4444, 'Y': 0xFDE047,
+      'W': 0xFFFFFF
     };
     const scout = [
-      '......kkkk......',
-      '....kkGGGGkk....',
-      '...kGGAAGGAAGk..',
-      '..kGkYRRkYRRkGk.',
-      '.kGGkYRRkYRRkGGk',
-      '.kGGGGGGGGGGGGk.',
-      '.kGGgGGGGGGgGGk.',
-      '..kGGGGGGGGGGk..',
-      '...kGGgGGgGGk...',
-      '....kGk..kGk....',
-      '....kCk..kCk....',
-      '....kk....kk....',
-      '................',
-      '................',
+      '..CK........KC..',
+      '.CKK..KKKK..KKC.',
+      '..KKdKGGGGKdKK..',
+      '..KGGGHHHHGGGK..',
+      '.KGGgGGGGGGgGGK.',
+      'KGgKKYYYYYYKKgGK',
+      'KGgKYYRWWRYYKgGK',
+      'KGgKYYRRRRYYKgGK',
+      '.KGGKYYYYYYKGGK.',
+      '..KGGgGGGGgGGK..',
+      '...KGGGGGGGGK...',
+      '....KGgddgGK....',
+      '....KCK..KCK....',
+      '.....KK..KK.....',
       '................',
       '................'
     ];
@@ -2593,22 +3046,23 @@ class PixelArtRenderer {
     // 12. Alien Shooter
     const P_SHOOTER = {
       '.': null,
-      'k': 0x3B0764, 'p': 0x581C87, 'P': 0x7E22CE, 'H': 0xC084FC,
-      'B': 0xEC4899, 'W': 0xFFFFFF, 'E': 0xFDE047
+      'K': 0x0F172A, 'd': 0x3B0764, 'p': 0x6B21A8, 'P': 0x9333EA,
+      'H': 0xC084FC, 'M': 0xEC4899, 'B': 0xF472B6, 'E': 0xFDE047,
+      'W': 0xFFFFFF
     };
     const shooter = [
-      '......kkkk......',
-      '....kkPPPPkk....',
-      '..kkPPHHHHPPkk..',
-      '.kBkPPkEEkPPkBk.',
-      '.kBWBPPkkPPBWBk.',
-      'kBWBkPPPPPPkBWBk',
-      '.kBkPPpHHpPPkBk.',
-      '..kkPPPPPPPPkk..',
-      '...kPPpPPpPPk...',
-      '....kPkkkkPk....',
-      '....kk....kk....',
-      '................',
+      '......KKKK......',
+      '....KKHHHHKK....',
+      '..KKPPHHHHPPKK..',
+      '.KMKPPHPPPHPPKMK',
+      '.KMBKPPEEEPPBKMK',
+      '.KMBKPWWEWWPKMB.',
+      '.KMPKPEEEEEPKPM.',
+      '.KMPPKPPPPPKPPMK',
+      '..KKPppPPPppKK..',
+      '...KKpPPPPpKK...',
+      '....KKppddppKK..',
+      '.....KKKKKK.....',
       '................',
       '................',
       '................',
@@ -2618,24 +3072,25 @@ class PixelArtRenderer {
     // 13. Alien Elite
     const P_ELITE = {
       '.': null,
-      'k': 0x431407, 'o': 0x9A3412, 'O': 0xEA580C, 'Y': 0xFB923C,
-      'C': 0x06B6D4, 'F': 0xFDE047, 'R': 0xEF4444
+      'K': 0x0F172A, 'd': 0x431407, 'o': 0x9A3412, 'O': 0xEA580C,
+      'Y': 0xFB923C, 'F': 0xFDE047, 'C': 0x06B6D4, 'A': 0x67E8F9,
+      'W': 0xFFFFFF
     };
     const elite = [
-      'kFk..........kFk',
-      'kYFk........kFYk',
-      '.kYOk......kOYk.',
-      '..kYOk....kOYk..',
-      '..kOOOOOOOOOOk..',
-      '.kOOOkCCCCkOOOk.',
-      '.kOOOkCCCCkOOOk.',
-      'kOOOOOOOOOOOOOOk',
-      'kOoOOOOOOOOOOoOk',
-      '.kOoOOOOOOOOoOk.',
-      '..kOoOOOOOOoOk..',
-      '...kOkkkkkkOk...',
-      '....kRk..kRk....',
-      '....kk....kk....',
+      'KFK..........KFK',
+      'KAFK........KFAK',
+      '.KCYK......KYCK.',
+      '..KYYK....KYYK..',
+      '..KYYYYYYYYYYK..',
+      '.KYYYOOOOOOYYYK.',
+      '.KYYKCAAAACKYYK.',
+      '.KYYKCAWWACKYYK.',
+      '.KYYKCAAAACKYYK.',
+      '.KYYOOOOOOOOYYK.',
+      '..KdOOOOOOOOdK..',
+      '...KdOOOOOOdK...',
+      '....KFFKKFFK....',
+      '....KK....KK....',
       '................',
       '................'
     ];
@@ -2643,70 +3098,72 @@ class PixelArtRenderer {
     // 14. Alien Boss (Dreadnought)
     const P_BOSS = {
       '.': null,
-      'k': 0x500724, 'b': 0x881337, 'm': 0xBE123C, 'B': 0xE11D48,
-      'H': 0xFB7185, 'G': 0x22C55E, 'P': 0xA855F7, 'Y': 0xFDE047
+      'K': 0x0F172A, 'd': 0x500724, 'b': 0x881337, 'r': 0xBE123C,
+      'R': 0xE11D48, 'H': 0xFB7185, 'G': 0x22C55E, 'P': 0xA855F7,
+      'Y': 0xFDE047, 'W': 0xFFFFFF
     };
     const boss = [
-      '..kkkkkkkkkkkk..',
-      '.kBHHHHHHHHHHBk.',
-      'kBBBBBBBBBBBBBBk',
-      'kBBBkGkBBkGkBBBk',
-      'kBBBkGkBBkGkBBBk',
-      'kBBBkkkkkkkkBBBk',
-      '.kBBBBkPPkBBBBk.',
-      '.kBBBBkPPkBBBBk.',
-      '..kBBBkPPkBBBk..',
-      '..kBBBBBBBBBBk..',
-      '.kbBbBBBBBBbBbk.',
-      'kbmbkYYkYYkbmbk.',
-      'kbmbkYYkYYkbmbk.',
-      '.kkbkkkkkkkkbkk.',
-      '...kk......kk...',
+      '..KKKKKKKKKKKK..',
+      '.KRRHHHHHHHHRRK.',
+      'KRRRRRRRRRRRRRRK',
+      'KRRRKGKRRRKGKRRK',
+      'KRRRKGKRRRKGKRRK',
+      'KRRRKKKKKKKKRRRK',
+      '.KRRRRKPPKRRRRK.',
+      '.KRRRKPWWPKRRRK.',
+      '..KRRRKPPKRRRK..',
+      '..KRRRRRRRRRRK..',
+      '.KbRbRRRRRRbRbK.',
+      'KbRbKYYKYYKbRbK.',
+      'KbRbKYYKYYKbRbK.',
+      '.KKbKKKKKKKKbKK.',
+      '...KK......KK...',
       '................'
     ];
 
     // 15. Laser Player
     const P_LASER = {
       '.': null,
-      'k': 0x083344, 's': 0x0891B2, 'C': 0x06B6D4, 'A': 0x67E8F9, 'W': 0xFFFFFF
+      'K': 0x0F172A, 'd': 0x083344, 'C': 0x06B6D4, 'A': 0x38BDF8,
+      'B': 0x67E8F9, 'W': 0xFFFFFF
     };
     const laser = [
-      '.....kk....kk...',
-      '....kAWk..kAWk..',
-      '....kCWk..kCWk..',
-      '....kCWk..kCWk..',
-      '....kCWk..kCWk..',
-      '....kCWk..kCWk..',
-      '....kCWk..kCWk..',
-      '....kCWk..kCWk..',
-      '....kCWk..kCWk..',
-      '....kCWk..kCWk..',
-      '....kCWk..kCWk..',
-      '....kCWk..kCWk..',
-      '....ksWk..ksWk..',
-      '....ksWk..ksWk..',
-      '.....kk....kk...',
+      '.....KK....KK...',
+      '....KABK..KABK..',
+      '....KAWK..KAWK..',
+      '....KCWK..KCWK..',
+      '....KCWK..KCWK..',
+      '....KCWK..KCWK..',
+      '....KCWK..KCWK..',
+      '....KCWK..KCWK..',
+      '....KCWK..KCWK..',
+      '....KCWK..KCWK..',
+      '....KCWK..KCWK..',
+      '....KCWK..KCWK..',
+      '....KAWK..KAWK..',
+      '....KABK..KABK..',
+      '.....KK....KK...',
       '................'
     ];
 
     // 16. Powerup Weapon
     const P_PW_WEAPON = {
       '.': null,
-      'k': 0x451A03, 'y': 0xCA8A04, 'Y': 0xEAB308, 'E': 0xFDE047,
-      'r': 0xB91C1C, 'R': 0xEF4444, 'W': 0xFFFFFF
+      'K': 0x0F172A, 'd': 0x451A03, 'y': 0xCA8A04, 'Y': 0xEAB308,
+      'E': 0xFDE047, 'R': 0xEF4444, 'r': 0x991B1B, 'W': 0xFFFFFF
     };
     const pw_weapon = [
-      '......kkkk......',
-      '....kkEEEEkk....',
-      '...kEEWWEEEEk...',
-      '..kEEkRRkkEEEk..',
-      '.kEEkRRRRkkEEEk.',
-      '.kEEkRRRRkkEEEk.',
-      '.kEEykkRRkkEyEk.',
-      '..kEEykkkkyEEk..',
-      '...kEEyyyyEEk...',
-      '....kkEEEEkk....',
-      '......kkkk......',
+      '......KKKK......',
+      '....KKEEEEKK....',
+      '...KEEWWEEEEK...',
+      '..KEEEKRRKEEEYK.',
+      '.KEEEErRRrEEEEYK',
+      '.KEEEErRRrEEEEYK',
+      '.KEEEErRRrEEEEYK',
+      '..KEEEKRRKEEEYK.',
+      '...KYYEEEEYYYK..',
+      '....KKYYYYKK....',
+      '......KKKK......',
       '................',
       '................',
       '................',
@@ -2717,21 +3174,21 @@ class PixelArtRenderer {
     // 17. Powerup Shield
     const P_PW_SHIELD = {
       '.': null,
-      'k': 0x0C4A6E, 's': 0x0284C7, 'S': 0x38BDF8, 'C': 0xBAE6FD,
-      'w': 0xE0F2FE, 'W': 0xFFFFFF
+      'K': 0x0F172A, 'd': 0x0C4A6E, 's': 0x0284C7, 'S': 0x38BDF8,
+      'C': 0xBAE6FD, 'w': 0xE0F2FE, 'W': 0xFFFFFF
     };
     const pw_shield = [
-      '......kkkk......',
-      '....kkCCCCkk....',
-      '...kCCWWCCCCk...',
-      '..kCCWWWWWWCCk..',
-      '.kCCSWWWWWWSCCk.',
-      '.kCCSWWWWWWSCCk.',
-      '.kCCSsWWWwSsCCk.',
-      '..kCCSsWWsSSCCk.',
-      '...kCCSssSSCCk..',
-      '....kkSSSSkk....',
-      '......kkkk......',
+      '......KKKK......',
+      '....KKCCCCKK....',
+      '...KCCWWCCCCK...',
+      '..KCCSSWWSSCCCK.',
+      '.KCCSSSSWWSSCSCK',
+      '.KCSSSSSSSSSSSCK',
+      '.KCSSSSSSSSSSSCK',
+      '..KCSSSSssssSCK.',
+      '...KSSSSssssSK..',
+      '....KKssssKK....',
+      '......KKKK......',
       '................',
       '................',
       '................',
@@ -2742,21 +3199,21 @@ class PixelArtRenderer {
     // 18. Powerup Nuke
     const P_PW_NUKE = {
       '.': null,
-      'k': 0x450A0A, 'r': 0x991B1B, 'R': 0xDC2626, 'a': 0xF87171,
-      'N': 0x0F172A, 'Y': 0xFDE047, 'W': 0xFFFFFF
+      'K': 0x0F172A, 'd': 0x450A0A, 'r': 0x991B1B, 'R': 0xDC2626,
+      'a': 0xF87171, 'Y': 0xFDE047, 'W': 0xFFFFFF
     };
     const pw_nuke = [
-      '......kkkk......',
-      '....kkaaaakk....',
-      '...kaaWWaaaak...',
-      '..kaaYYNNYYaak..',
-      '.kaaYYYYYYYYaak.',
-      '.kaaYYNNNNYYaak.',
-      '.kaarNNYYNNraak.',
-      '..kaarrNNrraak..',
-      '...kaarrrraak...',
-      '....kkRRRRkk....',
-      '......kkkk......',
+      '......KKKK......',
+      '....KKaaaaKK....',
+      '...KaaWWaaaaK...',
+      '..KaaYYKKYYaaK..',
+      '.KaaYYYYYYYYaaK.',
+      '.KaaYYKKKKYYaaK.',
+      '.KaaRKKYYKKRaaK.',
+      '..KaaRRKKRRaaK..',
+      '...KaaRRRRaaK...',
+      '....KKRRRRKK....',
+      '......KKKK......',
       '................',
       '................',
       '................',
@@ -2779,123 +3236,123 @@ class PixelArtRenderer {
   static _genDungeonTextures(scene) {
     // 1. Slime
     const P_SLIME = {
-      '.': null, 'k': 0x064E3B, 's': 0x047857, 'G': 0x10B981,
-      'g': 0x34D399, 'H': 0xA7F3D0, 'W': 0xFFFFFF, 'E': 0x0F172A,
-      'c': 0x6EE7B7, 'd': 0x059669
+      '.': null, 'K': 0x0F172A, 'd': 0x064E3B, 's': 0x059669,
+      'G': 0x10B981, 'g': 0x34D399, 'H': 0xA7F3D0, 'Y': 0xFDE047,
+      'W': 0xFFFFFF, 'D': 0x0F172A
     };
     const slime = [
-      '.....kkkkkk.....',
-      '...kkGGGGGGkk...',
-      '..kGGgHHHHgGGk..',
-      '.kGGgHWWgHWWgGk.',
-      '.kGsgHEEgHEEsgGk',
-      '.kGssgHHgHHgssGk',
-      '.kGGsscGGcssGGk.',
-      '.kGGGGsGGsGGGGk.',
-      '..kGGGssssGGGk..',
-      '...kkGGGGGGkk...',
-      '....kGsddsGk....',
-      '.....kdsddk.....',
-      '......kddk......',
-      '.......kk.......',
+      '.....KKKKKK.....',
+      '...KKGGGGGGKK...',
+      '..KGGgHHHHgGGK..',
+      '.KGGgHYWYHYWgGK.',
+      '.KGsHYDYHYDYsGK.',
+      '.KGssgHHgHHgssGK',
+      '.KGGssgGGgssGGK.',
+      '.KGGGGsGGsGGGGK.',
+      '..KGGGssssGGGK..',
+      '...KKGGGGGGKK...',
+      '....KGsddsGK....',
+      '.....KdsddK.....',
+      '......KdK.......',
+      '................',
       '................',
       '................'
     ];
 
     // 2. Skeleton Archer
     const P_SKELETON = {
-      '.': null, 'k': 0x1C1917, 'b': 0x78716C, 'B': 0xD6D3D1,
-      'W': 0xF5F5F4, 'R': 0xEF4444, 'S': 0x78350F, 'y': 0xD97706,
-      'M': 0x94A3B8, 'm': 0x64748B
+      '.': null, 'K': 0x0F172A, 'd': 0x1C1917, 'b': 0x78716C,
+      'B': 0xD6D3D1, 'W': 0xF5F5F4, 'R': 0xEF4444, 'S': 0x78350F,
+      'y': 0xD97706, 'M': 0x94A3B8, 'm': 0x64748B
     };
     const skeleton = [
-      '.....kkkkkk.....',
-      '...kkWWWWWWkk...',
-      '..kWWbWWbWWWWk..',
-      '.kWWkRkWkRkWWWk.',
-      '.kWWkkkkkkkWWWk.',
-      '..kWbWbWbWbWWk..',
-      '...kkWWWWWWkk...',
-      '....kSBBBBBSk.M.',
-      '...kSBBWWWBBSkM.',
-      '..kSBBWkkkWBSmS.',
-      '.kSBBWk...kWBmS.',
-      'kSyBBk....kWBmS.',
-      'kSyBk......kBmS.',
-      '.kSk.......kk.S.',
+      '.....KKKKKK.....',
+      '...KKWWWWWWKK...',
+      '..KWWbWWbWWWWK..',
+      '.KWWKRKWKRKWWWK.',
+      '.KWWKKKKKKKWWWK.',
+      '..KWbWbWbWbWWK..',
+      '...KKWWWWWWKK...',
+      '....KSBBBBBSK.M.',
+      '...KSBBWWWBBSSM.',
+      '..KSBBWKKKWBSmS.',
+      '.KSBBWK...KWBSmS',
+      'KSyBBK....KWBSmS',
+      'KSyBK......KBSmS',
+      '.KSK.......KK.S.',
       '................',
       '................'
     ];
 
     // 3. Goblin Warrior
     const P_GOBLIN = {
-      '.': null, 'k': 0x052E16, 'e': 0x14532D, 'E': 0x16A34A,
-      'H': 0x4ADE80, 'm': 0x334155, 'M': 0x64748B, 'w': 0xCBD5E1,
-      'R': 0xDC2626, 'W': 0xFFFFFF
+      '.': null, 'K': 0x0F172A, 'd': 0x052E16, 'e': 0x14532D,
+      'E': 0x16A34A, 'H': 0x4ADE80, 'm': 0x334155, 'M': 0x64748B,
+      'w': 0xCBD5E1, 'R': 0xDC2626, 'W': 0xFFFFFF
     };
     const goblin = [
-      '....kkk..kkk....',
-      '...kEEEkkEEEk...',
-      '..kEEHkEEkHEEk..',
-      '.kEEERREEERRkEEk',
-      '.kEEEEkEEkEEEEk.',
-      "..kEEEWWWWEEEk..",
-      '...kEEEEEEEEk...',
-      '..kkMMMMMMMMkk..',
-      '.kMMMmwMMwmMMMk.',
-      '.kMmmmwMMwmMMMk.',
-      '.kEEmMMMMMMmEEk.',
-      '..kEkMMMMMMkEk..',
-      '...kkEkkkkEk....',
-      '....kEk..kEk....',
-      '....kk....kk....',
+      '....KKK..KKK....',
+      '...KEEEKKEEEK...',
+      '..KEEHKEEKHEEK..',
+      '.KEEERREEEERRKEK',
+      '.KEEEEKKEEKKEEEK',
+      '..KEEEWWWWEEEK..',
+      '...KEEEEEEEEK...',
+      '..KKMMMMMMMMKK..',
+      '.KMMMmwMMwmMMMK.',
+      '.KMmmmwMMwmMMMK.',
+      '.KEEmMMMMMMmEEK.',
+      '..KEKMMMMMMKEK..',
+      '...KKEKKKKEK....',
+      '....KEK..KEK....',
+      '....KK....KK....',
       '................'
     ];
 
     // 4. Demon Lord Boss
     const P_DUNGEON_BOSS = {
-      '.': null, 'k': 0x450A0A, 'b': 0x18181B, 'm': 0x52525B,
-      'd': 0x991B1B, 'D': 0xDC2626, 'F': 0xF97316, 'Y': 0xFDE047,
-      'E': 0xFEF08A, 'W': 0xFFFFFF
+      '.': null, 'K': 0x0F172A, 'd': 0x450A0A, 'b': 0x18181B, 'B': 0x18181B,
+      'm': 0x52525B, 'M': 0x52525B, 'R': 0x991B1B, 'D': 0xDC2626, 'F': 0xF97316,
+      'Y': 0xFDE047, 'E': 0xFEF08A, 'W': 0xFFFFFF
     };
     const boss = [
-      'kbk..........kbk',
-      'kmbk........kmbk',
-      '.kmbkkkkkkkkmbk.',
-      '..kmbDDDDDDmbk..',
-      '..kDDDFFFDDDDk..',
-      '.kDDDkEkDDkEkDk.',
-      '.kDDDkkkkkkkkDk.',
-      '.kDDFDDWWDDFFDk.',
-      '..kDDDFYYFDDDk..',
-      '...kDDDDDDDDk...',
-      '..kkbbDDDDbbkk..',
-      '.kbmbkYYYYkbmbk.',
-      '.kbmbkYFFYkbmbk.',
-      '..kmbkkkkkkmbk..',
-      '...kk......kk...',
+      'KBK..........KBK',
+      'KMBK........KMBK',
+      '.KMBKKKKKKKKMBK.',
+      '..KMBBDDDDDDBMK.',
+      '..KDDDFFFDDDDK..',
+      '.KDDDKEKDDKEKDK.',
+      '.KDDDKKKKKKKKDK.',
+      '.KDDFDDWWDDFFDK.',
+      '..KDDFYYFDDDK...',
+      '...KDDDDDDDDK...',
+      '..KKbBDDDDDbBKK.',
+      '.KbMbKYYYYKbMbK.',
+      '.KbMbKYFFYKbMbK.',
+      '..KMbKKKKKKMbK..',
+      '...KK......KK...',
       '................'
     ];
 
     // 5. Loot Chest
     const P_CHEST = {
-      '.': null, 'k': 0x291E0B, 's': 0x451A03, 'S': 0x78350F,
-      'y': 0xB45309, 'f': 0xB8860B, 'F': 0xEAB308, 'Y': 0xFEF08A,
-      'N': 0x0F172A
+      '.': null, 'K': 0x0F172A, 'd': 0x291E0B, 's': 0x451A03,
+      'S': 0x78350F, 'y': 0xB45309, 'f': 0xB8860B, 'F': 0xEAB308,
+      'Y': 0xFEF08A, 'N': 0x0F172A
     };
     const chest = [
-      '....kkkkkkkk....',
-      '..kkFYYYYYYFkk..',
-      '.kFFsSSSSSSsFFk.',
-      '.kFFsSSSSSSsFFk.',
-      '.kFFFffffffFFFk.',
-      '.kFFsSSNNSSsFFk.',
-      '.kFFsSSNNSSsFFk.',
-      '.kFFFffffffFFFk.',
-      '.kFFsSSSSSSsFFk.',
-      '.kFFsSSSSSSsFFk.',
-      '..kkFYYYYYYFkk..',
-      '....kkkkkkkk....',
+      '....KKKKKKKK....',
+      '..KKFYYYYYYFKK..',
+      '.KFFsSSSSSSsFFK.',
+      '.KFFsSSSSSSsFFK.',
+      '.KFFFffffffFFFK.',
+      '.KFFsSSNNSSsFFK.',
+      '.KFFsSSNNSSsFFK.',
+      '.KFFFffffffFFFK.',
+      '.KFFsSSSSSSsFFK.',
+      '.KFFsSSSSSSsFFK.',
+      '..KKFYYYYYYFKK..',
+      '....KKKKKKKK....',
       '................',
       '................',
       '................',
@@ -2904,20 +3361,20 @@ class PixelArtRenderer {
 
     // 6. Loot Coin
     const P_COIN = {
-      '.': null, 'k': 0x78350F, 'f': 0xCA8A04, 'F': 0xEAB308,
-      'Y': 0xFDE047, 'W': 0xFFFFFF
+      '.': null, 'K': 0x0F172A, 'd': 0x78350F, 'f': 0xCA8A04,
+      'F': 0xEAB308, 'Y': 0xFDE047, 'E': 0xFEF08A, 'W': 0xFFFFFF
     };
     const coin = [
-      '......kkkk......',
-      '....kkYYYYkk....',
-      '...kYYWWYYYYk...',
-      '..kYYFFfFFYYYk..',
-      '.kYYFFFfFFFYYYk.',
-      '.kYYFFFfFFFYYYk.',
-      '..kYYFFfFFYYYk..',
-      '...kYYffffffk...',
-      '....kkffffkk....',
-      '......kkkk......',
+      '......KKKK......',
+      '....KKYYYYKK....',
+      '...KEEWWYYYYK...',
+      '..KYYFFfFFYYYK..',
+      '.KYYFFFfFFFYYYK.',
+      '.KYYFFFfFFFYYYK.',
+      '..KYYFFfFFYYYK..',
+      '...KYYffffffK...',
+      '....KKffffKK....',
+      '......KKKK......',
       '................',
       '................',
       '................',
@@ -2928,20 +3385,20 @@ class PixelArtRenderer {
 
     // 7. Loot Gem
     const P_GEM = {
-      '.': null, 'k': 0x083344, 'c': 0x0E7490, 'C': 0x06B6D4,
-      'A': 0x38BDF8, 'W': 0xE0F2FE, 'S': 0xFFFFFF
+      '.': null, 'K': 0x0F172A, 'd': 0x083344, 'c': 0x0E7490,
+      'C': 0x06B6D4, 'A': 0x38BDF8, 'W': 0xE0F2FE, 'S': 0xFFFFFF
     };
     const gem = [
-      '......kkkk......',
-      '....kkWWAAkk....',
-      '...kWWAAAAAAk...',
-      '..kWWCCCCcCCAk..',
-      '.kWWCCCCCCccCAk.',
-      '.kWWCCCCCCccCAk.',
-      '..kWWCCCCcCCAk..',
-      '...kWWccccAAk...',
-      '....kkcccckk....',
-      '......kkkk......',
+      '......KKKK......',
+      '....KKWWAAKK....',
+      '...KSSAAAAAAK...',
+      '..KWWCCCCcCCAK..',
+      '.KWWCCCCCCccCAK.',
+      '.KWWCCCCCCccCAK.',
+      '..KWWCCCCcCCAK..',
+      '...KWWccccAAK...',
+      '....KKccccKK....',
+      '......KKKK......',
       '................',
       '................',
       '................',
@@ -2952,20 +3409,21 @@ class PixelArtRenderer {
 
     // 8. Loot Potion
     const P_POTION = {
-      '.': null, 'k': 0x450A0A, 'p': 0x78350F, 'r': 0x991B1B,
-      'P': 0xEF4444, 'a': 0xF87171, 'Y': 0xFEF08A, 'W': 0xFFFFFF
+      '.': null, 'K': 0x0F172A, 'd': 0x450A0A, 'p': 0x78350F,
+      'y': 0xD97706, 'r': 0x991B1B, 'P': 0xEF4444, 'a': 0xF87171,
+      'A': 0xFCA5A5, 'Y': 0xFEF08A, 'W': 0xFFFFFF
     };
     const potion = [
-      '......kkkk......',
-      '......kppk......',
-      '.....kkkkkk.....',
-      '....kkaaaakk....',
-      '...kaaWWaPaaak..',
-      '..kaaWPPYPPPaak.',
-      '..kaaWPPPPPaak..',
-      '...kaaPrrPaak...',
-      '....kkrrrrkk....',
-      '......kkkk......',
+      '......KKKK......',
+      '......KppK......',
+      '.....KKyyKK.....',
+      '....KKaaWaaKK...',
+      '...KaaWWaPaaAK..',
+      '..KaaWPPYPPPAAK.',
+      '..KaaWPPPPPAAK..',
+      '...KaaPrrPAAK...',
+      '....KKrrrrKK....',
+      '......KKKK......',
       '................',
       '................',
       '................',
@@ -2976,20 +3434,21 @@ class PixelArtRenderer {
 
     // 9. Loot Scroll
     const P_SCROLL = {
-      '.': null, 'k': 0x451A03, 's': 0xD97706, 'Y': 0xFDE047,
-      'W': 0xFFFEF0, 'r': 0x991B1B, 'R': 0xEF4444, 'F': 0xF59E0B
+      '.': null, 'K': 0x0F172A, 'd': 0x451A03, 's': 0xD97706,
+      'Y': 0xFDE047, 'W': 0xFFFEF0, 'w': 0xFEF08A, 'r': 0x991B1B,
+      'R': 0xEF4444, 'F': 0xF59E0B
     };
     const scroll = [
-      '......kkkk......',
-      '....kkWWYYkk....',
-      '...kWWWWYYYYk...',
-      "..kWWWWRRYYYYk..",
-      '.kWWWWWRRYYYYYk.',
-      '.kWWWWFRRRYYYYk.',
-      '..kWWWWRRYYYYk..',
-      '...kWWWWYYYYk...',
-      '....kksssskk....',
-      '......kkkk......',
+      '......KKKK......',
+      '....KKWWYYKK....',
+      '...KWWWWYYYYK...',
+      '..KWWWWRRYYYYK..',
+      '.KWWWWWRRYYYYYK.',
+      '.KWWWWFRRRYYYYK.',
+      '..KWWWWRRYYYYK..',
+      '...KWWWWYYYYK...',
+      '....KKssssKK....',
+      '......KKKK......',
       '................',
       '................',
       '................',
@@ -4956,151 +5415,366 @@ class FarmScene extends Phaser.Scene {
     const gflp = mk(); pR(gflp, 2, 2, 4, 4, STARDEW_PALETTE.flowerPurple); pR(gflp, 3, 3, 2, 2, STARDEW_PALETTE.flowerYellow); pR(gflp, 3, 6, 2, 2, STARDEW_PALETTE.grassShadow); gflp.generateTexture('flw_purple', 8*PS, 8*PS); gflp.destroy();
 
 
+    const DECOR_PALETTE = {
+      '.': null,
+      'K': 0x0F172A, // 1px Dark Slate Outline
+      'k': 0x1E293B, // Dark slate shadow
+      'H': 0x8FD19E, // Leaf highlight green
+      'G': 0x4A7C59, // Leaf base green
+      'g': 0x2D4E35, // Leaf shade green
+      'M': 0x1A3622, // Canopy shadow green
+      'O': 0xD99B66, // Sunlit wood highlight
+      'o': 0xB3713D, // Oak wood highlight
+      'W': 0x8F5428, // Cedar wood base
+      'w': 0x573012, // Deep timber shadow
+      't': 0xC7C1BD, // Stone highlight
+      'T': 0x9E9793, // Stone base
+      'S': 0x7D7571, // Dark slate base
+      's': 0x4A4440, // Deep mortar shadow
+      'E': 0xE0F2FE, // Water sparkle
+      'v': 0x38BDF8, // Bright cyan
+      'V': 0x0284C7, // Water blue
+      'C': 0x0369A1, // Deep water blue
+      'c': 0x6BB1D6, // Cyan water basin
+      'Y': 0xFDE047, // Bright gold
+      'y': 0xD97706, // Gold/amber shadow
+      'R': 0xEF4444, // Red accent
+      'r': 0x991B1B, // Dark red shadow
+      'P': 0xA855F7, // Purple portal glow
+      'p': 0x6D28D9, // Dark purple shadow
+      'b': 0xFFF3C7, // Notice paper parchment
+      'N': 0x475569, // Metal slate
+      'n': 0x334155  // Metal dark slate
+    };
+
     // Micro Butterfly Wing 0 (Open)
     const gbf0 = mk();
-    pR(gbf0, 0, 0, 2, 2, 0x38BDF8); pR(gbf0, 4, 0, 2, 2, 0x38BDF8);
-    pR(gbf0, 1, 2, 2, 2, 0x0284C7); pR(gbf0, 3, 2, 2, 2, 0x0284C7);
-    pR(gbf0, 2, 1, 2, 4, 0x0F172A);
+    PixelArtRenderer.drawMatrix(gbf0, [
+      'Kvv.vv',
+      'vvv.vv',
+      '.vvvv.',
+      '..KK..',
+      '.vvvv.',
+      'Kvv.vv'
+    ], DECOR_PALETTE, 0, 0, PS);
     gbf0.generateTexture('bf_open', 6*PS, 6*PS); gbf0.destroy();
 
     // Micro Butterfly Wing 1 (Flap/Up)
     const gbf1 = mk();
-    pR(gbf1, 1, 0, 2, 3, 0x38BDF8); pR(gbf1, 3, 0, 2, 3, 0x38BDF8);
-    pR(gbf1, 2, 1, 2, 4, 0x0F172A);
+    PixelArtRenderer.drawMatrix(gbf1, [
+      '.KvvK.',
+      '.vvvv.',
+      '..vv..',
+      '..KK..',
+      '..vv..',
+      '.KvvK.'
+    ], DECOR_PALETTE, 0, 0, PS);
     gbf1.generateTexture('bf_flap', 6*PS, 6*PS); gbf1.destroy();
 
     // Stone Well / Water Shrine (16x16)
     const gsw = mk();
-    pR(gsw, 2, 2, 12, 12, 0x57534E); pR(gsw, 3, 3, 10, 10, 0x78716C);
-    pR(gsw, 4, 4, 8, 8, 0x0284C7); pR(gsw, 5, 5, 6, 6, 0x0369A1);
-    pR(gsw, 5, 5, 2, 2, 0x38BDF8); pR(gsw, 6, 6, 1, 1, 0xFFFFFF); // water sparkle
-    pR(gsw, 1, 1, 3, 14, 0x78350F); pR(gsw, 12, 1, 3, 14, 0x78350F); // posts
-    pR(gsw, 1, 1, 14, 3, 0x92400E); // top winch bar
+    PixelArtRenderer.drawMatrix(gsw, [
+      '..KKKKKKKKKKKK..',
+      '.KOOOOOOOOOOOoK.',
+      '.KOWWWWWWWWWwwK.',
+      '.KOWKKKKKKKKwwK.',
+      '.KOWKTTTTTTKwwK.',
+      '.KOWKTSCCSTKwwK.',
+      '.KOWKSCcCcSKwwK.',
+      '.KOWKSCcCcSKwwK.',
+      '.KOWKTSCCSTKwwK.',
+      '.KOWKTTTTTTKwwK.',
+      '.KOWKKKKKKKKwwK.',
+      '.KOWWWWWWWWWwwK.',
+      '.KSSSSssssssssK.',
+      '.KSSSSssssssssK.',
+      '.KKKKKKKKKKKKKK.',
+      '................'
+    ], DECOR_PALETTE, 0, 0, PS);
     gsw.generateTexture('stone_well', 16*PS, 16*PS); gsw.destroy();
 
     // Pixel Barrel (10x12)
     const gbar = mk();
-    pR(gbar, 1, 0, 8, 12, 0x78350F); pR(gbar, 0, 1, 10, 10, 0x92400E);
-    pR(gbar, 0, 3, 10, 2, 0x475569); pR(gbar, 0, 8, 10, 2, 0x475569); // metal hoops
+    PixelArtRenderer.drawMatrix(gbar, [
+      '.KKKKKKKK.',
+      'KOOOOOOOoK',
+      'KOWWWWWWwK',
+      'KKKKKKKKKK',
+      'KtTTTTTTsK',
+      'KOWWWWWWwK',
+      'KOWWWWWWwK',
+      'KOWWWWWWwK',
+      'KtTTTTTTsK',
+      'KKKKKKKKKK',
+      'KOWWWWWWwK',
+      '.KKKKKKKK.'
+    ], DECOR_PALETTE, 0, 0, PS);
     gbar.generateTexture('pixel_barrel', 10*PS, 12*PS); gbar.destroy();
 
     // Pixel Crate (12x12)
     const gcrat = mk();
-    pR(gcrat, 0, 0, 12, 12, 0x92400E); pR(gcrat, 1, 1, 10, 10, 0xB45309);
-    pR(gcrat, 0, 0, 12, 1, 0x78350F); pR(gcrat, 0, 11, 12, 1, 0x78350F);
-    pR(gcrat, 0, 0, 1, 12, 0x78350F); pR(gcrat, 11, 0, 1, 12, 0x78350F);
-    pR(gcrat, 1, 1, 10, 10, 0x78350F); pR(gcrat, 2, 2, 8, 8, 0xB45309); // X-brace
+    PixelArtRenderer.drawMatrix(gcrat, [
+      'KKKKKKKKKKKK',
+      'KOOOOOOOOOoK',
+      'KOWKKKKKKWwK',
+      'KOWKOWWwKWwK',
+      'KOWKKOWwKWwK',
+      'KOWWKKWwKWwK',
+      'KOWWKWKKKWwK',
+      'KOWWKWwKKWwK',
+      'KOWWKWwKOWwK',
+      'KOWKKKKKKWwK',
+      'KOwwwwwwwwwK',
+      'KKKKKKKKKKKK'
+    ], DECOR_PALETTE, 0, 0, PS);
     gcrat.generateTexture('pixel_crate', 12*PS, 12*PS); gcrat.destroy();
 
     // Directional Signpost (12x14)
     const gsgn = mk();
-    pR(gsgn, 5, 4, 2, 10, 0x78350F); // post
-    pR(gsgn, 1, 1, 10, 4, 0x92400E); pR(gsgn, 1, 1, 1, 4, 0xB45309); // sign 1
-    pR(gsgn, 2, 7, 9, 4, 0x92400E); pR(gsgn, 10, 7, 1, 4, 0xB45309); // sign 2
+    PixelArtRenderer.drawMatrix(gsgn, [
+      '....KKKK....',
+      '.KKKOOOOKKK.',
+      '.KOWWWWWWWWK',
+      '.KOWWWWWWWWK',
+      '.KKKwwwwKKKK',
+      '....KWWK....',
+      '..KKKOOOOK..',
+      '..KOWWWWWWK.',
+      '..KOWWWWWWK.',
+      '..KKKwwwwwK.',
+      '....KWWK....',
+      '....KWWK....',
+      '....KWWK....',
+      '....KKKK....'
+    ], DECOR_PALETTE, 0, 0, PS);
     gsgn.generateTexture('signpost', 12*PS, 14*PS); gsgn.destroy();
 
     // Tree
-    const gt=mk();
-    const crown=[
-  '.....lLLLl......',
-  '...lLLLLLLl.....',
-  '..LLLLLLLLLLL...',
-  '.LLLLLLLLlLLLL..',
-  'lLLLLLLLllLLLLl.',
-  'LLLLLLLLllLLLLLL',
-  'lLLLLLLLllMlLLLL',
-  'lLLLLLLlMMLllLLL',
-  'lLLLLllMMMlllLLL',
-  'lLLLlMMMMllllLLL',
-  'mLlMMMMMMlllllLL',
-  'mMMMMMMMMllllllL',
-  'mMMMMMMMMMllllll',
-  'MMMMMMMMmmllllL.',
-  '.mMMMMMMmmmlll..',
-  '.mmmmmmmmmmll...'
-];
-    drawS(gt,crown); pR(gt,7,17,4,11,K.K); pR(gt,7,17,1,11,K.k); pR(gt,10,17,1,11,K.s);
-    gt.generateTexture('tree',18*PS,28*PS); gt.destroy();
+    const gt = mk();
+    PixelArtRenderer.drawMatrix(gt, [
+      '.....KKKKKK.......',
+      '...KKHHHHHHKK.....',
+      '..KHHHHHHHHHHK....',
+      '.KHHHHGGGGHHHHK...',
+      '.KHHHGGGGGGGGHK...',
+      'KHHHGGGGGGGGGGHK..',
+      'KHHGGGGggggGGGGHK.',
+      'KHHGGGggggggGGGHK.',
+      'KHHGGGggggggGGGHK.',
+      'KHHGGGggggggGGGHK.',
+      'KHHGGGggggggGGGHK.',
+      'KHHGGGggggggGGGHK.',
+      '.KHHGGGgggggGGHK..',
+      '.KHHHGGGGGGGGHK...',
+      '..KHHHGGGGGGHK....',
+      '...KKHHHHHHKK.....',
+      '.....KKKKKK.......',
+      '......KWWK........',
+      '......KWWK........',
+      '......KWWK........',
+      '......KWWK........',
+      '......KWWK........',
+      '......KWWK........',
+      '......KWWK........',
+      '......KWWK........',
+      '......KWWK........',
+      '......KWWK........',
+      '.....KKKKKK.......'
+    ], DECOR_PALETTE, 0, 0, PS);
+    gt.generateTexture('tree', 18*PS, 28*PS); gt.destroy();
 
     // Fence
-    const gfp=mk();
-    pR(gfp,0,0,4,12,K.O); pR(gfp,0,0,1,12,K.o); pR(gfp,3,0,1,12,K.U); pR(gfp,0,0,4,1,K.o);
-    [3,6,9].forEach(y=>pR(gfp,1,y,3,1,K.U));
-    gfp.generateTexture('fnc_post',4*PS,12*PS); gfp.destroy();
-    const gfr=mk();
-    pR(gfr,0,0,14,4,K.O); pR(gfr,0,0,14,1,K.o); pR(gfr,0,3,14,1,K.U);
-    [3,7,11].forEach(x=>pR(gfr,x,0,1,4,K.U));
-    gfr.generateTexture('fnc_rail',14*PS,4*PS); gfr.destroy();
+    const gfp = mk();
+    PixelArtRenderer.drawMatrix(gfp, [
+      'KKKK',
+      'KOoK',
+      'KOoK',
+      'KOWK',
+      'KOWK',
+      'KOWK',
+      'KOWK',
+      'KOWK',
+      'KOWK',
+      'KOWK',
+      'KowK',
+      'KKKK'
+    ], DECOR_PALETTE, 0, 0, PS);
+    gfp.generateTexture('fnc_post', 4*PS, 12*PS); gfp.destroy();
+
+    const gfr = mk();
+    PixelArtRenderer.drawMatrix(gfr, [
+      'KKKKKKKKKKKKKK',
+      'KOOOOOOOOOOOoK',
+      'KOWWWWWWWWWWwK',
+      'KKKKKKKKKKKKKK'
+    ], DECOR_PALETTE, 0, 0, PS);
+    gfr.generateTexture('fnc_rail', 14*PS, 4*PS); gfr.destroy();
 
     // Sparkle
-    const gsp=mk();
-    gsp.fillStyle(0xFFFFFF,1); gsp.fillRect(6,0,4,16); gsp.fillRect(0,6,16,4);
-    gsp.fillRect(3,3,2,2); gsp.fillRect(11,3,2,2); gsp.fillRect(3,11,2,2); gsp.fillRect(11,11,2,2);
-    gsp.generateTexture('sparkle',16,16); gsp.destroy();
+    const gsp = mk();
+    PixelArtRenderer.drawMatrix(gsp, [
+      '......KKKK......',
+      '......KWWK......',
+      '......KWWK......',
+      '......KWWK......',
+      '......KWWK......',
+      '......KWWK......',
+      'KKKKKKKWWKKKKKKK',
+      'KWWWWWWWWWWWWWWK',
+      'KWWWWWWWWWWWWWWK',
+      'KKKKKKKWWKKKKKKK',
+      '......KWWK......',
+      '......KWWK......',
+      '......KWWK......',
+      '......KWWK......',
+      '......KWWK......',
+      '......KKKK......'
+    ], DECOR_PALETTE, 0, 0, 1);
+    gsp.generateTexture('sparkle', 16, 16); gsp.destroy();
 
-    // Gold coin 8×8
-    const gc=mk();
-    pR(gc,1,0,6,1,0xFFDD00); pR(gc,0,1,8,6,0xFFDD00); pR(gc,1,7,6,1,0xFFDD00);
-    pR(gc,1,1,3,2,0xFFFF88); pR(gc,2,3,1,1,0xCC9900);
-    gc.generateTexture('coin',8*PS,8*PS); gc.destroy();
+    // Gold coin 8x8
+    const gc = mk();
+    PixelArtRenderer.drawMatrix(gc, [
+      '..KKKK..',
+      '.KYYYYK.',
+      'KYYYYYYK',
+      'KYYWWYYK',
+      'KYYWWYYK',
+      'KYYYYYYK',
+      '.KYYYYK.',
+      '..KKKK..'
+    ], DECOR_PALETTE, 0, 0, PS);
+    gc.generateTexture('coin', 8*PS, 8*PS); gc.destroy();
 
-    // Shop sign texture 14×18
-    const gs=mk();
-    pR(gs,0,0,14,2,K.O);  // roof
-    pR(gs,1,0,12,2,K.o);  // roof highlight
-    pR(gs,0,2,14,12,K.T); // board body
-    pR(gs,0,2,1,12,K.t);  // left highlight
-    pR(gs,13,2,1,12,K.V); // right shadow
-    pR(gs,1,3,12,1,K.t);  // stripe
-    // Coin icon on sign
-    pR(gs,4,5,6,6,0xFFDD00); pR(gs,5,4,4,1,0xFFDD00); pR(gs,5,11,4,1,0xFFDD00);
-    pR(gs,5,5,2,2,0xFFFF88);
-    pR(gs,0,14,14,4,K.K); // post
-    pR(gs,6,14,2,4,K.k);
-    gs.generateTexture('shop_sign',14*PS,18*PS); gs.destroy();
+    // Shop sign texture 14x18
+    const gs = mk();
+    PixelArtRenderer.drawMatrix(gs, [
+      '..KKKKKKKKKK..',
+      '..KOOOOOOOOK..',
+      '..KOOOOOOOOK..',
+      'KKKKKKKKKKKKKK',
+      'KOOOOOOOOOOOoK',
+      'KOWWKKYYKKWWwK',
+      'KOWKYYYYYYKWwK',
+      'KOWKYYYYYYKWwK',
+      'KOWKYYYYYYKWwK',
+      'KOWWKKYYKKWWwK',
+      'KOWWWWWWWWWWwK',
+      'KOWWWWWWWWWWwK',
+      'KOwwwwwwwwwwwK',
+      'KKKKKKKKKKKKKK',
+      '....KWWKWWK...',
+      '....KWWKWWK...',
+      '....KWWKWWK...',
+      '....KKKKKKK...'
+    ], DECOR_PALETTE, 0, 0, PS);
+    gs.generateTexture('shop_sign', 14*PS, 18*PS); gs.destroy();
 
-    // Notice Board texture 18x16 with micro corkboard grain & colored pushpins
+    // Notice Board texture 18x16
     const gb = mk();
-    pR(gb,0,0,18,12,K.O); pR(gb,1,1,16,10,0xD97706);
-    pR(gb,2,12,2,4,K.K); pR(gb,14,12,2,4,K.K);
-    // Papers with micro text lines
-    pR(gb,2,2,5,5,K.J); pR(gb,3,3,3,1,0x525252); pR(gb,3,5,3,1,0x525252);
-    pR(gb,10,3,6,6,0xFFF3C7); pR(gb,11,4,4,1,0x525252); pR(gb,11,6,4,1,0x525252);
-    pR(gb,4,8,8,3,0xDDFFDD); pR(gb,5,9,6,1,0x525252);
-    // Colored Pushpins
-    pR(gb,4,1,1,1,0xEF4444); pR(gb,12,2,1,1,0x06B6D4); pR(gb,7,7,1,1,0xEAB308);
-    gb.generateTexture('notice_board',18*PS,16*PS); gb.destroy();
+    PixelArtRenderer.drawMatrix(gb, [
+      'KKKKKKKKKKKKKKKKKK',
+      'KOOOOOOOOOOOOOOOoK',
+      'KOWKKKKKKKKKKKKWwK',
+      'KOWKb.K..K...bKWwK',
+      'KOWKb.K..K...bKWwK',
+      'KOWKb.KKKK...bKWwK',
+      'KOWKb........bKWwK',
+      'KOWKb.KK.KK..bKWwK',
+      'KOWKb.KK.KK..bKWwK',
+      'KOWKb........bKWwK',
+      'KOWKKKKKKKKKKKKWwK',
+      'KOwwwwwwwwwwwwwwwK',
+      'KKKKKKKKKKKKKKKKKK',
+      '..KWWK......KWWK..',
+      '..KWWK......KWWK..',
+      '..KKKK......KKKK..'
+    ], DECOR_PALETTE, 0, 0, PS);
+    gb.generateTexture('notice_board', 18*PS, 16*PS); gb.destroy();
 
     // Dungeon Portal texture 20x28
     const gport = mk();
-    pR(gport, 0, 4, 20, 24, 0x334155); pR(gport, 2, 6, 16, 22, 0x1E293B);
-    pR(gport, 0, 0, 20, 6, 0x475569); pR(gport, 2, 2, 16, 4, 0x334155);
-    pR(gport, 4, 8, 12, 20, 0xA855F7); pR(gport, 6, 10, 8, 16, 0x6D28D9);
-    pR(gport, 8, 12, 4, 12, 0x06B6D4); pR(gport, 9, 14, 2, 8, 0xFFFFFF);
+    PixelArtRenderer.drawMatrix(gport, [
+      '......KKKKKK......',
+      '....KKTTTTTTKK....',
+      '...KTTTTTTTTTTK...',
+      '..KTTTTTTTTTTTTK..',
+      '.KTTTTTTTTTTTTTTK.',
+      'KTTTTKKKKKKKKTTTTK',
+      'KTTTKPPPPPPPPKTTTK',
+      'KTTKPPPPPPPPPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPpPpPpPpPPKTTK',
+      'KTTKPPPPPPPPPPKTTK',
+      'KTTTKPPPPPPPPKTTTK',
+      'KTTTTKKKKKKKKTTTTK',
+      'KTTTTTTTTTTTTTTTTK',
+      'KKKKKKKKKKKKKKKKKK'
+    ], DECOR_PALETTE, 0, 0, PS);
     gport.generateTexture('dungeon_portal', 20*PS, 28*PS); gport.destroy();
 
     // Fishing Dock Pier texture 24x16
     const gdock = mk();
-    pR(gdock, 0, 0, 24, 16, 0x78350F); pR(gdock, 1, 1, 22, 14, 0x92400E);
-    pR(gdock, 0, 0, 24, 2, 0xB45309); pR(gdock, 0, 8, 24, 2, 0x78350F);
-    pR(gdock, 2, 2, 2, 12, 0x475569); pR(gdock, 20, 2, 2, 12, 0x475569); // bolts
+    PixelArtRenderer.drawMatrix(gdock, [
+      'KKKKKKKKKKKKKKKKKKKKKKKK',
+      'KOOOOOOOOOOOOOOOOOOOOOoK',
+      'KOWWWWWWWWWWWWWWWWWWWWwK',
+      'KKwWWWWWWWWWWWWWWWWWWwKK',
+      'KKKKKKKKKKKKKKKKKKKKKKKK',
+      'KN..N..............N..NK',
+      'KN..N..............N..NK',
+      'KKKKKKKKKKKKKKKKKKKKKKKK',
+      'KOOOOOOOOOOOOOOOOOOOOOoK',
+      'KOWWWWWWWWWWWWWWWWWWWWwK',
+      'KKwWWWWWWWWWWWWWWWWWWwKK',
+      'KKKKKKKKKKKKKKKKKKKKKKKK',
+      'KN..N..............N..NK',
+      'KN..N..............N..NK',
+      'KKKKKKKKKKKKKKKKKKKKKKKK',
+      'KKKKKKKKKKKKKKKKKKKKKKKK'
+    ], DECOR_PALETTE, 0, 0, PS);
     gdock.generateTexture('fishing_dock', 24*PS, 16*PS); gdock.destroy();
 
-    // Arcade Machine texture 16x22 with CRT scanline details
+    // Arcade Machine texture 16x22
     const ga = mk();
-    pR(ga,2,0,12,22,0x222222); pR(ga,3,1,10,20,0x444455);
-    // Screen glowing with scanlines
-    pR(ga,4,4,8,6,0x00FFFF); pR(ga,5,5,6,4,0xFFFFFF);
-    pR(ga,4,6,8,1,0x06B6D4); pR(ga,4,8,8,1,0x0891B2);
-    // Control panel (slanted)
-    pR(ga,3,10,10,4,0xFF00FF);
-    pR(ga,5,11,1,1,0xFF0000); pR(ga,5,10,1,1,0xFF8888); // joystick + knob
-    pR(ga,10,12,2,1,0xFFFF00); pR(ga,8,12,1,1,0x00FF00); // buttons
-    // Marquee with glowing text line
-    pR(ga,4,1,8,2,0xFF00FF); pR(ga,5,1,6,1,0xFFFFFF);
-    // Coin slot
-    pR(ga,5,16,2,3,0x777777); pR(ga,6,17,1,1,0x000000);
-    ga.generateTexture('arcade_machine',16*PS,22*PS); ga.destroy();
+    PixelArtRenderer.drawMatrix(ga, [
+      '....KKKKKKKK....',
+      '....KPPPPPPK....',
+      '....KPPPPPPK....',
+      '..KKKKKKKKKKKK..',
+      '..KSSSSSSSSSSK..',
+      '..KSKvvvvvvKSK..',
+      '..KSKvvvvvvKSK..',
+      '..KSKvvvvvvKSK..',
+      '..KSKvvvvvvKSK..',
+      '..KSKvvvvvvKSK..',
+      '..KSSSSSSSSSSK..',
+      '..KKKKKKKKKKKK..',
+      '..KRRRRRRRRRRK..',
+      '..KRRRRRRRRRRK..',
+      '..KKKKKKKKKKKK..',
+      '..KSSSSSSSSSSK..',
+      '..KSKYYKKYYKSK..',
+      '..KSKYYKKYYKSK..',
+      '..KSSSSSSSSSSK..',
+      '..KSSSSSSSSSSK..',
+      '..KSSSSSSSSSSK..',
+      '..KKKKKKKKKKKK..'
+    ], DECOR_PALETTE, 0, 0, PS);
+    ga.generateTexture('arcade_machine', 16*PS, 22*PS); ga.destroy();
 
     // Wizard NPC texture 16x22
     const gwiz = mk();
