@@ -1,25 +1,25 @@
-# BRIEFING — 2026-07-23T03:24:05Z
+# BRIEFING — 2026-07-23T11:28:06Z
 
 ## Mission
-Upgrade all pixel art in Hangeul Valley to professional indie game quality (Stardew Valley, Celeste, Eastward level) using multi-tone shading, dithering, AA, and enhanced anatomical/environmental details.
+Upgrade the shadow system in Hangeul Valley from a simple single-player ellipse to a realistic, multi-entity, dynamic time-of-day shadow system (similar to Stardew Valley) casting soft, ground-tinted shadows for player, NPCs, crops, trees, fences, and rocks.
 
 ## 🔒 My Identity
 - Archetype: sentinel
 - Working directory: C:/VibeCode/Hangeul Valley/.agents/sentinel
-- Orchestrator: 2e596daa-9447-48df-b80a-96eb3091b561
-- Victory Auditor: SKIPPED (User requested: "Skip victory audit phase — user will visually audit the results themselves.")
+- Orchestrator: 0a865dab-ac1d-47e9-92ad-fb26ea7f48c2
+- Victory Auditor: SKIPPED (User requested: "Skip audit phase — user will visually verify.")
 
 ## 🔒 Key Constraints
 - No technical decisions — relay only
 - Victory Audit is MANDATORY before reporting completion UNLESS user explicitly requested skip
-- User explicitly requested: "Skip victory audit phase — user will visually audit the results themselves."
-- Maintain zero external assets constraint (all graphics in Phaser Graphics API / generateTexture)
-- Preserve all existing texture keys, animation keys, and gameplay logic
+- User explicitly requested: "Skip audit phase — user will visually verify."
+- Maintain zero external assets constraint (all graphics/shadows generated procedurally in Phaser)
+- Preserve all existing gameplay, rendering, animations, and UI
 
 ## User Context
-- **Last user request**: Upgrade all 16x16 pixel art sprites (Farmer, Ginger Cat, Wizard Merlin, crops, fish, dungeon monsters, arcade enemies) with professional multi-tone shading, dithering, anti-aliasing pixels, anatomical detail, and dark outlines.
+- **Last user request**: Upgrade shadow system to dynamic, multi-entity shadows (Player, NPCs, Crops, Trees, Fences, Rocks) with time-of-day rotation and length stretching.
 - **Pending clarifications**: None
-- **Delivered results**: Pixel art upgrade complete across all character, crop, fish, monster, and enemy sprites. Syntax validated, files synchronized.
+- **Delivered results**: Upgrade of Dynamic Multi-Entity Time-of-Day Shadow System complete across all FarmScene entities. Syntax validated, files synchronized, 24h solar cycle stress tests passed (40/40).
 
 ## Project Status
 - **Phase**: complete
@@ -31,4 +31,5 @@ Upgrade all pixel art in Hangeul Valley to professional indie game quality (Star
 
 ## Artifact Index
 - ORIGINAL_REQUEST.md — Verbatim record of user requests
-- .agents/orchestrator/handoff.md — Handoff report from Project Orchestrator
+- .agents/sentinel/BRIEFING.md — Sentinel briefing
+

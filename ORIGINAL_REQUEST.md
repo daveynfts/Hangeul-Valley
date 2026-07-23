@@ -371,3 +371,48 @@ All existing texture keys, animation keys, gameplay triggers, and scene integrat
 
 ### Process
 - [ ] Skip victory audit phase — user will visually audit the results themselves.
+
+## Follow-up — 2026-07-23T11:28:06Z
+
+Nâng cấp hệ thống shadow trong game **Hangeul Valley** từ mức cơ bản (chỉ 1 ellipse đen dưới player) lên hệ thống shadow đẹp, chân thật, dynamic — tương tự chất lượng shadow trong Stardew Valley, nơi mọi object đều có bóng đổ thay đổi theo thời gian trong ngày.
+
+Working directory: C:/VibeCode/Hangeul Valley
+Integrity mode: development
+
+## Current Shadow System (Minimal)
+
+- **`DynamicShadowSystem`** class (line ~4643 in game.js): Creates simple black ellipses (`scene.add.ellipse(..., 0x000000, 0.3)`) 
+- **`updateShadow(sprite, sunAngle)`**: Moves shadow based on sun angle, scales X, adjusts alpha (0.12–0.45)
+- **`updatePointShadow(sprite, lightX, lightY)`**: Point-light shadow for dungeon
+- **Usage**: Only applied to **player sprite** in FarmScene (line 5792) and DungeonScene (line 6855)
+- **Missing**: No shadows on NPCs (Cat, Wizard), crops, trees, fences, rocks, buildings, or any other game entity
+
+## Requirements
+
+### R1. Shadows for All Game Entities
+Every visible game entity in FarmScene should cast a shadow: the player, NPCs (Ginger Cat, Wizard Merlin), all crop sprites, apple trees, fences, rocks, and any decorative elements. Shadows should be proportional to the object's visual size — a tree casts a much larger shadow than a small crop sprout.
+
+### R2. Dynamic Time-of-Day Shadow Behavior
+Shadows must respond convincingly to the existing day/night cycle and sun angle system. At dawn and dusk, shadows should be long and stretched. At noon, shadows should be short and compact directly beneath objects. At night, shadows should be very faint or invisible. The shadow direction must rotate smoothly as the sun moves across the sky throughout the day.
+
+### R3. Visual Quality & Realism Enhancement
+Upgrade shadow visual quality beyond simple flat ellipses. Shadows should feel soft and natural — consider graduated opacity (darker near the object, fading at the edges), slight color tinting that matches the ground surface, and ambient occlusion (subtle darkening where objects meet the ground). The overall effect should make the farm scene feel more grounded and three-dimensional.
+
+### R4. Maintain All Existing Functionality
+All existing gameplay, sprite rendering, animations, and UI must remain intact. The shadow system must not introduce noticeable frame rate drops. `node -c game.js` must pass.
+
+## Acceptance Criteria
+
+### Shadow Coverage
+- [ ] In FarmScene, the player, at least one NPC, and at least one crop/tree all have visible shadows simultaneously.
+- [ ] Shadow size is proportional to entity size: a tree's shadow is visibly larger than a crop's shadow.
+
+### Dynamic Behavior
+- [ ] Shadows change direction and length as the in-game sun angle changes (verified by checking `updateShadow` is called with the environment's `sunAngle` for multiple entities per frame).
+- [ ] Shadow alpha/opacity varies between day (more visible) and night (less visible or hidden).
+
+### Code Integrity
+- [ ] `node -c game.js` passes with zero syntax errors.
+- [ ] Root `game.js` and `assets/game.js` are synchronized.
+- [ ] Skip audit phase — user will visually verify.
+

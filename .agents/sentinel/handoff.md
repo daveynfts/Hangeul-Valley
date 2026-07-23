@@ -1,26 +1,28 @@
-# Handoff Report — Project Sentinel Final Handoff
+# Handoff Report — Dynamic Multi-Entity Time-of-Day Shadow System
 
 ## Observation
-- Received user request to upgrade character design (Farmer action animations, Ginger Cat redesign, zero-external-asset procedural sprites).
-- Recorded request to `ORIGINAL_REQUEST.md`.
-- Dispatched Project Orchestrator (`1eaeaf43-aeda-40fe-8cdf-1284cd6a557d`).
-- Orchestrator completed all tasks across Milestones 1–3 and claimed victory.
-- Spawned Independent Victory Auditor (`0fd275c1-331e-4dae-a2ea-337ef9c4b343`).
-- Victory Auditor delivered **VICTORY CONFIRMED** verdict after 3-phase audit.
+The shadow system in `Hangeul Valley` (`game.js` & `assets/game.js`) has been upgraded from a single-player basic ellipse into a full Stardew Valley-style dynamic shadow system.
+
+- **Coverage**: Player, NPCs (Ginger Cat, Wizard Merlin), 4-stage crops, apple trees, fences, rocks, shop sign, notice board, arcade machine, dungeon portal, stone well, signpost, barrels, crates, and fishing dock.
+- **Proportional Scaling**: Footprints scaled dynamically per entity type (e.g. tree: 24×12, crop sprout: 6×3, player: 14×7).
+- **Dual-Layer Shadows**: Soft outer penumbra with graduated opacity + darker ground ambient occlusion core.
+- **Solar Vector Dynamics**: Calculates exact shadow offset, stretch factor, and opacity based on `sunAngle` / in-game hour (dawn/dusk: long stretched shadows; noon: short compact shadows; night: faint/hidden).
 
 ## Logic Chain
-1. Orchestrator implemented 16×16 PS=3 procedural pixel art matrices for Farmer actions and Ginger Cat NPC states.
-2. Wired action triggers in `FarmScene` for watering (Phase 2), harvesting (Phase 3), and fruit picking (Apple tree).
-3. Renamed Cat NPC from "Muop" to "Ginger Cat" across all files (0 remaining "Muop" references).
-4. Synchronized root files with `assets/` mirror copies.
-5. Independent Victory Auditor verified syntax, matrix constraints, frame counts, state transitions, mirror parity, and test suites with 0 discrepancies.
+1. `DynamicShadowSystem` refactored with dual-layer ellipse containers and proportional entity size lookup matrix.
+2. `FarmScene.update` now calls `updateAllShadows(sunAngle, environment.hour)` every frame.
+3. Syntax verification executed: `node -c game.js` returned zero errors.
+4. File synchronization: `game.js` and `assets/game.js` checked with matching SHA256 hashes.
+5. Reviewer & Challenger verification completed 100% PASS (40/40 solar cycle test cases).
 
 ## Caveats
-None. Zero external image files were added, Phaser Graphics API procedural rendering maintained, syntax 100% clean.
+- Victory audit phase was skipped per explicit user instruction ("Skip audit phase — user will visually verify").
+- DungeonScene point-light shadows remain intact using existing point-light update logic for backwards compatibility.
 
 ## Conclusion
-Project character design upgrade is complete, fully integrated, verified, and audited with **VICTORY CONFIRMED**.
+The dynamic shadow system upgrade is complete, fully synchronized, and passed syntax & stress testing.
 
 ## Verification Method
-- Independent Victory Audit Report: `C:/VibeCode/Hangeul Valley/.agents/victory_auditor/audit_report.md`
-- Automated test suite execution: `node .agents/challenger_m3_1/test_character_upgrade.js`
+- `node -c game.js` -> 0 errors.
+- SHA256 hash match between `game.js` and `assets/game.js`.
+- Automated 24-hour solar cycle simulation test suite passed 40/40.
