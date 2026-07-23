@@ -1,98 +1,81 @@
-# Final Victory Handoff Report: Hangeul Valley Gameplay Mechanics & Economy Upgrade
+# Handoff Report — Project Orchestrator (Hangeul Valley Top HUD Redesign)
 
-**Project**: Hangeul Valley  
-**Orchestrator**: Project Orchestrator  
-**Parent ID**: `d5d77ce8-e222-48c8-b3d7-2539d16b2a13` (Sentinel)  
-**Status**: 100% Complete & Verified  
-**Audit Verdict**: **CLEAN** (Verified by Victory Forensic Auditor `d74c8c09-77c9-49c7-8b69-76457a006b64`)  
+**Working Directory**: `C:\VibeCode\Hangeul Valley\.agents\orchestrator`  
+**Target Files**: `index.html`, `assets/index.html`, `game.js`  
+**Status**: Hard Handoff (Task Complete)
 
 ---
 
-## 1. Observation & Scope Summary
+## 1. Observation
 
-All requirements R1 through R5, system integrity constraints, save compatibility, and asset mirror requirements have been fully implemented, integrated, and verified:
+1. **Problem Analysis**:
+   - Original `#hud`, `#event-banner`, and `#progress-bar-wrap` were positioned with uncoordinated fixed CSS offsets (`top: 10px..14px`), causing complete visual overlap and click-blocking collisions on desktop 1024px+ and tablet 768px viewports.
+   - `#hud` contained 20+ items in a single non-wrapping flex row (~1600px wide), creating visual overload and clutter.
 
-### R1. Triple Currency Economy (Coins, Gems, Honor) & Rebalanced Sinks
-- **Coins (동전 🪙)**: Primary earnable currency from all gameplay activities (farming harvests, fishing catches, arcade stages, dungeon loot drops, spell duel victories, memory match). Used for everyday purchases (seeds, hints, basic items).
-- **Gems (보석 💎)**: Premium rare currency earned ONLY from perfect quiz streaks (100% accuracy), legendary fish catches (`황금물고기`), zero-damage boss kills, and daily login streak milestones. Used for rare unlocks (pets, cosmetics, special recipes).
-- **Honor (명예 🏅)**: Reputation currency earned from completing quests, mastering vocabulary words to Legendary tier ($\ge 10$ harvests), crafting rare dishes, and seasonal event participation. Used for leaderboards and prestige.
-- **Save Schema Version 4 (`v: 4`)**: Implemented `migrateSaveData(data)` upgrading legacy `v2`/`v3` saves automatically on load. Legacy `gold` is preserved as a synchronized getter alias for `currencies.coins` to guarantee 100% backward compatibility.
-- **Rebalanced Sinks & Cooldowns**: Anti-farm diminishing returns applied to repetitive harvests.
+2. **Implemented 2-Tier Floating Dock Architecture**:
+   - **Tier 1 (`top: 10px`)**: `#hud` (top-left, `max-width: calc(100vw - 300px)`) and `#progress-bar-wrap` (top-right, `right: 14px`).
+   - **Tier 2 (`top: 66px` desktop / `top: 106px` tablet 768px / `top: 128px` mobile 480px)**: `#event-banner` centered horizontally below Tier 1.
+   - **HUD Structural Sub-Grouping**: Reorganized 20+ HUD items into 3 scannable logical groups: `#hud-status-group` (level, progress, active buffs), `#hud-currency-group` (coins, gems, honor), and `#hud-actions-group`.
+   - **Action Button Capping & Overflow Menu**: Top-level visible action buttons capped at exactly 8 (`#vocab-btn`, `#shop-btn`, `#quest-btn`, `#recipe-btn`, `#pet-btn`, `#save-btn`, `#hud-more-btn`, `#hud-menu-btn`). Remaining 5 feature buttons (`#seasonal-btn`, `#leaderboard-btn`, `#duel-btn`, `#fish-album-btn`, `#trophy-btn`) placed in `#hud-overflow-menu` dropdown container toggled via `➕ More`.
+   - **Retro Glassmorphism Preservation**: `glass-hud`, `neon-border-gold`, backdrop blur filters, and `Press Start 2P` font fully intact.
+   - **Script Handlers**: Added `toggleHudOverflow(evt)` function with click-outside auto-close listener.
 
-### R2. Korean-Gated Progression & Quest System
-- **Hard Lock Zone Unlocks**: Enforced 80% SRS Word Mastery ($\ge 3$ harvests) in preceding levels to unlock Arcade (requires L1 mastery), Fishing Dock (requires L2), Dungeon Portal (requires L3), and Spell Duel (requires L4). Displays 🔒 Hard Lock toast/modal when blocked.
-- **Shop Purchase Quiz Gates**: Intercepted `buyLevel(idx)` with a mandatory 3-question Korean translation quiz challenge (`#shop-quiz-overlay`). Requires 3/3 correct answers before deducting coins and unlocking level packs.
-- **Boss Entrance Gates**: Timed entrance quiz challenge (`#boss-gate-overlay`) before fighting Dungeon Boss ("King Sejong's Corrupted Sentinel") and Spell Duel Necromancer.
-- **Quest System & UI Overlay**: 6-Act Main Storyline Quest Chain (Food -> Animals -> Family -> Colors -> Numbers -> Advanced) + Daily (24h reset) & Weekly (7-day reset) side quests awarding Coins, Gems, and Honor. Integrated `#quest-overlay` styled in 64-Bit Retro Glassmorphism.
-
-### R3. Crafting/Cooking System with Korean Culture Integration
-- **Ingredient Acquisition**: Farm crops (`배추`, `무`, `파`, `고추`, `마늘`, `쌀`, `콩`, `당근`, `사과`) and caught fish (`연어`, `고등어`, `오징어`, `잉어`, `새우`, `문어`, `조개`, `황금물고기`) accumulate in player inventory with Korean names.
-- **9 Authentic Korean Recipes**: 김치 (Kimchi), 비빔밥 (Bibimbap), 불고기 (Bulgogi), 떡볶이 (Tteokbokki), 삼겹살 (Samgyeopsal), 해물파전 (Seafood Pajeon), 잡채 (Japchae), 삼계탕 (Samgyetang), 김밥 (Gimbap).
-- **Interactive Cooking Minigame**: Timed-input ingredient prep and heat adjustment slider in `#cooking-minigame-overlay`. Grade (S/A/B/F) determines buff duration and multiplier.
-- **Gameplay Buff System**: Temporary buffs (2x Coins, +50% Crop Speed, +25% Combat Damage, +50% Fishing Luck, Extra Quiz Hints) managed in `activeBuffs` with live HUD countdown indicators (`#active-buff-bar`).
-- **Cultural Fact Overlays**: Authentic culinary heritage notes displayed upon dish creation.
-
-### R4. Pet Companion System
-- **5 Collectible Pets (반려동물)**:
-  1. 🐶 **강아지 (Dog)** (10 Gems): Coin Magnet (+15% Coins) & Auto-Water Crops.
-  2. 🐱 **고양이 (Cat)** (15 Gems): Feline Nunchi (+25% Combat Damage).
-  3. 🐰 **토끼 (Rabbit)** (15 Gems): Rapid Hop (+50% Crop Growth Speed).
-  4. 🐹 **햄스터 (Hamster)** (20 Gems): Pouch Duplicator (+30% Double Harvest).
-  5. 🦜 **앵무새 (Parrot)** (25 Gems): Echo Scholar (+1 Quiz Hint & +20% Fishing Luck).
-- **Acquisition & Management**: Purchased with Gems 💎 and equipped in `#pet-overlay`.
-- **Pet Leveling & Vocab Quiz**: XP earned from activities; leveling up requires passing a "🎓 Level Up Quiz!".
-- **Happiness Decay & Feeding**: Happiness meter (0-100%) decays (-5%/5min); restored by feeding cooked Korean dishes or raw ingredients.
-
-### R5. Seasonal Events & Local Leaderboard UI Panel
-- **Seasonal Events Framework**: Configured event templates for 추석 (Chuseok), 설날 (Seollal), and 어린이날 (Children's Day) with themed vocabulary flashcards, festival quests, active festival perks (+50% Honor during Chuseok, +1 Gem during Seollal, 2x Coins during Children's Day), `#event-banner`, and `#seasonal-overlay`.
-- **Local Leaderboard UI Panel**: Offline tracking for 7 core metrics (Total Words Mastered, Total Honor, Highest Cooking Tier, Pet Collection %, Arcade Score, Dungeon Max Floor, Spell Duel Streak) alongside simulated local single-player rivals in `#leaderboard-overlay`.
-- **Complete Asset Mirror Synchronization**: Synchronized `index.html`, `game.js`, `levels.json`, and `save_data.json` byte-for-byte into `assets/`.
-
-### Validation & Verification
-- `node -c game.js` and `node -c assets/game.js`: **Passed with 0 syntax errors**.
-- Automated Unit Tests (`test_currency_save.js`, `test_gating_quests.js`, `test_r3_r4_systems.js`): **Passed 100%**.
-- File Mirror Parity: **100% byte-for-byte MD5 hash match**.
-- Forensic Integrity Audit: **CLEAN** (0 stubs, 0 cheating/facades, 100% genuine code).
+3. **File Mirroring & Code Syntax**:
+   - `index.html` and `assets/index.html` are 100% byte-for-byte identical (SHA256: `0461144FE32ADF10ED98FF0FA161FAAE6776EE3F07C56A07EFD6888673E65CB7`).
+   - `node -c game.js` passes cleanly with 0 syntax errors.
 
 ---
 
-## 2. Milestone State Summary
+## 2. Logic Chain
 
-| Milestone | Scope | Status | Audit Verdict |
-|---|---|:---:|:---:|
-| **M1** | Codebase Exploration | **DONE** | CLEAN |
-| **M2** | R1 Triple Economy & R2 Progression & Quests | **DONE** | CLEAN |
-| **M3** | R3 Crafting/Cooking & R4 Pet Companions | **DONE** | CLEAN |
-| **M4** | R5 Seasonal Events, Leaderboard & Asset Mirror Sync | **DONE** | CLEAN |
-| **M5** | Full Verification, Syntax Check & Victory Audit | **DONE** | **CLEAN** |
-
----
-
-## 3. Verification Method
-
-To re-verify all deliverables on any Windows system:
-
-```powershell
-# 1. Syntax Check
-node -c "C:\VibeCode\Hangeul Valley\game.js"
-node -c "C:\VibeCode\Hangeul Valley\assets\game.js"
-
-# 2. Automated Test Suites
-node "C:\VibeCode\Hangeul Valley\test_currency_save.js"
-node "C:\VibeCode\Hangeul Valley\test_gating_quests.js"
-node "C:\VibeCode\Hangeul Valley\test_r3_r4_systems.js"
-
-# 3. File Mirror Equality Check
-fc /b "C:\VibeCode\Hangeul Valley\index.html" "C:\VibeCode\Hangeul Valley\assets\index.html"
-fc /b "C:\VibeCode\Hangeul Valley\game.js" "C:\VibeCode\Hangeul Valley\assets\game.js"
-fc /b "C:\VibeCode\Hangeul Valley\levels.json" "C:\VibeCode\Hangeul Valley\assets\levels.json"
-fc /b "C:\VibeCode\Hangeul Valley\save_data.json" "C:\VibeCode\Hangeul Valley\assets\save_data.json"
-```
-
-*(Expected output: Exit code 0, 0 syntax errors, 100% test pass, exact binary file match)*
+1. *Observation*: Anchoring `#hud` at `top: 10px; max-width: calc(100vw - 300px)` limits its width to 724px on a 1024px desktop viewport, placing its right edge at `x = 738px`.
+2. *Observation*: Anchoring `#progress-bar-wrap` at `top: 10px; right: 14px` places its left edge at `x = 762px`.
+3. *Deduction*: A clear 24px horizontal clearance gap exists between `#hud` and `#progress-bar-wrap` on desktop 1024px+.
+4. *Observation*: Moving `#event-banner` to `top: 66px` places it below Tier 1, providing 11px vertical clearance.
+5. *Deduction*: On 768px tablet and 480px mobile viewports, `@media` queries stack Tier 1 and Tier 2 vertically with explicit clearance gaps (8px–10px vertical margins), eliminating 100% of pixel collisions across all viewports.
+6. *Observation*: Capping visible buttons to 8 and moving 5 secondary feature buttons into `#hud-overflow-menu` satisfies the ≤8 top-level button limit while preserving all 12 element IDs, `onclick` attributes, and `game.js` event listeners.
 
 ---
 
-## 4. Victory Declaration
+## 3. Caveats
 
-The gameplay mechanics and addicting Korean learning economy upgrade for **Hangeul Valley** is 100% complete, fully functional, and verified **CLEAN**.
+- None. All acceptance criteria have been verified through empirical test scripts (`layout_overlap_test.js`, `verify_buttons.js`), 2 independent reviewer audits, 2 challenger test suites, and 1 forensic integrity audit.
+
+---
+
+## 4. Conclusion
+
+The HUD top area layout and UI/UX redesign for Hangeul Valley is 100% complete, fully verified, and clean of integrity violations.
+
+- **Zero Overlap**: Verified across desktop (1024px+), tablet (768px), and mobile (480px) viewports.
+- **Scannable Grouping & Button Capping**: 3 logical groups, exactly 8 visible top-level action buttons + 5 in overflow menu, 100% feature access preserved.
+- **Code Integrity**: `node -c game.js` passes with zero errors; `index.html` and `assets/index.html` remain 100% synchronized.
+- **Verification Verdicts**: Reviewer 1 (PASS), Reviewer 2 (PASS), Challenger 1 (PASS), Challenger 2 (PASS), Forensic Auditor (CLEAN).
+
+---
+
+## 5. Verification Method
+
+1. **JS Syntax Verification**:
+   ```cmd
+   node -c game.js
+   ```
+   *Result*: Exit code 0 (0 errors).
+
+2. **Empirical Layout Overlap Test Harness**:
+   ```cmd
+   node .agents\teamwork_preview_challenger_m3_1\layout_overlap_test.js
+   ```
+   *Result*: `PASS ✅` across 1024px, 768px, and 480px viewports.
+
+3. **Button Interactivity Test Harness**:
+   ```cmd
+   node .agents\teamwork_preview_challenger_m3_2\verify_buttons.js
+   ```
+   *Result*: `29/29 assertions passed` (PASS ✅).
+
+4. **File Mirror Synchronization Check**:
+   ```cmd
+   node -e "const fs=require('fs'); console.log(fs.readFileSync('index.html').equals(fs.readFileSync('assets/index.html')));"
+   ```
+   *Result*: `true`.

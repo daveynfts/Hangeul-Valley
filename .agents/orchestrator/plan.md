@@ -1,46 +1,29 @@
-# Execution Plan: Hangeul Valley Gameplay Mechanics & Economy Upgrade
+# Execution Plan — Top HUD Redesign & Overlap Fix
 
 ## Objective
-Implement R1 through R5 gameplay mechanics, triple currency economy, Korean-gated progression & quest system, crafting/cooking system, pet companion system, seasonal events & leaderboard system, preserving system integrity and backward compatibility.
+Fix top area layout overlaps (#hud, #event-banner, #progress-bar-wrap) for 1024px+ and 768px viewports, reorganize 15+ HUD items into scannable logical groups with ≤8 visible top-level action buttons, preserve retro glassmorphism design system & functional JS parity, and keep `index.html` and `assets/index.html` 100% synchronized.
 
-## Execution Strategy
+## Steps
+1. **Phase 1: Exploration**
+   - Dispatch 3 Explorers (`teamwork_preview_explorer`) to investigate:
+     - Explorer 1: Detailed HTML layout of `#hud`, `#event-banner`, `#progress-bar-wrap`, and all 15+ items in `index.html`.
+     - Explorer 2: JS bindings, DOM selections, dynamic updates, and button event listeners in `game.js`.
+     - Explorer 3: Responsive CSS styles, glassmorphism rules, break points (1024px, 768px), and layout proposals.
+   - Aggregate Explorer findings.
 
-### Phase 1: Milestone 1 - Deep Codebase & Save Schema Exploration
-- Dispatch 3 Explorers:
-  - **Explorer 1**: Analyze `game.js` economy hooks, Gold spending/earning across scenes, shop system, diminishing return functions, and existing save/load logic in `save_data.json` & pywebview interface.
-  - **Explorer 2**: Analyze progression system (zones, level select, SRS vocabulary tracking), quiz modals, boss encounter triggers, and UI layout in `index.html` & `game.js`.
-  - **Explorer 3**: Analyze ingredient drop points (farming crops, fishing catches), item system, and existing modal styles to plan 64-Bit Retro Glassmorphism UI additions for Quest Log, Recipe Book, Cooking Minigame, Pet Panel, Leaderboard, Event Banner.
-- Synthesize findings into `context.md`.
+2. **Phase 2: Implementation & Sync**
+   - Dispatch Worker (`teamwork_preview_worker`) to:
+     - Redesign `#hud`, `#event-banner`, and `#progress-bar-wrap` CSS and HTML structure.
+     - Group buttons into clear logical sections: Status, Currency, Main Actions (≤8 visible), plus a dropdown/overflow menu for remaining actions.
+     - Ensure retro glassmorphism visual design (neon borders, backdrop blur, Press Start 2P font) is preserved.
+     - Maintain all element IDs and `onclick` attributes intact.
+     - Sync changes from `index.html` to `assets/index.html`.
+     - Run `node -c game.js` syntax check.
 
-### Phase 2: Milestone 2 - R1 Triple Economy & R2 Progression & Quests
-- Dispatch **Worker 1**:
-  - Refactor Gold system into Coins (동전), Gems (보석), Honor (명예).
-  - Add rebalanced sinks, diminishing returns, non-convertible currency loops.
-  - Implement Hard Lock progression: zone unlock quiz checks, shop item quiz checks, boss attempt quiz checks.
-  - Implement Quest System: Main storyline + Daily/Weekly side quests guiding through vocabulary themes.
-  - Implement Quest Log UI modal in 64-Bit Retro Glassmorphism.
-- Verification Gate:
-  - **Reviewer 1** & **Reviewer 2**: Verify code correctness, economy balance, SRS gating logic, UI aesthetics.
-  - **Challenger 1** & **Challenger 2**: Run syntax validation (`node -c game.js`), currency transactions, quiz gate flow.
-  - **Forensic Auditor**: Run integrity checks.
+3. **Phase 3: Review, Challenge & Audit**
+   - Dispatch 2 Reviewers (`teamwork_preview_reviewer`) to independently review HTML/CSS layout, button count (≤8 top-level), element ID preservation, and sync between `index.html` and `assets/index.html`.
+   - Dispatch 2 Challengers (`teamwork_preview_challenger`) to run headless tests / viewport tests checking for pixel overlaps at 1024px+ and 768px, verifying click handlers work for all 12 buttons.
+   - Dispatch Forensic Auditor (`teamwork_preview_auditor`) to verify zero cheating, fake implementations, or missing files.
 
-### Phase 3: Milestone 3 - R3 Crafting/Cooking & R4 Pet Companion System
-- Dispatch **Worker 2**:
-  - Implement Recipe Book (요리책) with 8+ Korean recipes (김치, 비빔밥, 불고기, 떡볶이, 삼겹살, etc.), Korean ingredient names.
-  - Implement Cooking Minigame (timed input selecting Korean ingredient names) + temporary gameplay buffs + cultural facts overlay.
-  - Implement 5+ Pets (Dog, Cat, Rabbit, Hamster, Parrot) with passive abilities, XP leveling via Korean quizzes, happiness meter & dish feeding.
-  - Implement Recipe Book, Cooking Minigame, and Pet Panel UI modals in 64-Bit Retro Glassmorphism.
-- Verification Gate:
-  - **Reviewers**, **Challengers**, **Forensic Auditor** verification.
-
-### Phase 4: Milestone 4 - R5 Seasonal Events, Leaderboard & Asset Mirror Sync
-- Dispatch **Worker 3**:
-  - Implement Seasonal Event framework (Chuseok, Seollal, Children's Day) with limited quests, exclusive recipes/pet skins, bonus Honor.
-  - Implement Local Leaderboard UI panel & persistence.
-  - Ensure save backward compatibility & upgrade logic for legacy saves.
-  - Synchronize `assets/` mirror copy (`assets/index.html`, `assets/game.js`, `assets/levels.json`, `assets/save_data.json`).
-- Verification Gate:
-  - **Reviewers**, **Challengers**, **Forensic Auditor** verification.
-
-### Phase 5: Milestone 5 - Final E2E Integration & Verification
-- Final full regression audit: `node -c game.js` 100% clean, complete test of save loading, mirror file sync check, and final victory report to Sentinel.
+4. **Phase 4: Synthesis & Reporting**
+   - Synthesize results, update scope & progress metadata, report completion.

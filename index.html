@@ -213,19 +213,62 @@
     .lc-tag.words { border-color: rgba(56, 189, 248, 0.4); color: var(--neon-cyan); }
     .lc-tag.target { border-color: rgba(245, 158, 11, 0.4); color: var(--neon-gold); }
 
-    /* ── MAIN HUD BAR ────────────────────────────────────────────────────── */
+    /* ── MAIN HUD BAR & GROUPS ───────────────────────────────────────────── */
     #hud {
-      position: fixed; top: 14px; left: 14px; z-index: 100;
-      background: rgba(15, 23, 42, 0.85) !important;
+      position: fixed; top: 10px; left: 14px;
+      max-width: calc(100vw - 300px);
+      z-index: 100;
+      background: rgba(15, 23, 42, 0.88) !important;
       backdrop-filter: var(--glass-blur) !important;
       -webkit-backdrop-filter: var(--glass-blur) !important;
       border: 2px solid var(--neon-gold) !important;
-      border-radius: 14px !important; padding: 8px 16px !important;
-      color: #e2e8f0; font-size: 15px; font-weight: 700;
+      border-radius: 14px !important; padding: 6px 14px !important;
+      color: #e2e8f0; font-size: 14px; font-weight: 700;
       box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 10px 30px rgba(0, 0, 0, 0.7) !important;
-      display: flex; align-items: center; gap: 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
       user-select: none;
     }
+
+    .hud-group {
+      display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+    }
+
+    #hud-status-group {
+      font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--neon-gold);
+    }
+
+    #hud-currency-group {
+      border-left: 1px solid rgba(255, 255, 255, 0.15);
+      border-right: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 0 10px;
+    }
+
+    #hud-actions-group {
+      position: relative;
+    }
+
+    /* ── HUD OVERFLOW DROPDOWN MENU ──────────────────────────────────────── */
+    #hud-overflow-menu {
+      position: absolute; top: calc(100% + 8px); right: 0;
+      z-index: 950; display: flex; flex-direction: column; gap: 6px;
+      padding: 10px; min-width: 170px;
+      background: rgba(15, 23, 42, 0.95) !important;
+      backdrop-filter: var(--glass-blur) !important;
+      -webkit-backdrop-filter: var(--glass-blur) !important;
+      border: 1.5px solid var(--neon-gold) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 14px 36px rgba(0, 0, 0, 0.8) !important;
+      animation: popIn .18s cubic-bezier(.4,0,.2,1);
+    }
+    #hud-overflow-menu.hidden { display: none !important; }
+
+    .hud-overflow-item {
+      width: 100%; text-align: left;
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 12px !important; font-size: 10px !important;
+      border-radius: 6px !important;
+    }
+
     #hud-level { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--neon-gold); letter-spacing: .5px; }
     #hud-sep { color: rgba(255, 255, 255, 0.25); }
     #hud-progress {
@@ -261,12 +304,12 @@
 
     /* ── PROGRESS BAR ────────────────────────────────────────────────────── */
     #progress-bar-wrap {
-      position: fixed; top: 14px; right: 14px; z-index: 100;
-      background: rgba(15, 23, 42, 0.85);
+      position: fixed; top: 10px; right: 14px; z-index: 100;
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
-      border: 1.5px solid var(--neon-green); border-radius: 10px;
-      padding: 7px 14px 7px 12px;
+      border: 1.5px solid var(--neon-green); border-radius: 12px;
+      padding: 6px 14px 6px 12px; height: 44px;
       color: var(--neon-green); font-family: 'VT323', monospace; font-size: 19px;
       display: flex; align-items: center; gap: 10px; pointer-events: none;
       box-shadow: 0 0 0 2px #0f172a, var(--glow-green);
@@ -921,17 +964,27 @@
     @media (max-width: 768px) {
       #hud {
         top: 8px !important; left: 8px !important; right: 8px !important;
-        max-width: calc(100vw - 16px); overflow-x: auto;
-        padding: 6px 10px !important; gap: 6px !important;
-        white-space: nowrap; border-radius: 10px !important;
+        max-width: calc(100vw - 16px) !important;
+        padding: 6px 10px !important; gap: 8px !important;
+        border-radius: 12px !important;
+        flex-wrap: wrap;
       }
+      .hud-group { gap: 6px; }
+      #hud-currency-group { border-left: none; border-right: none; padding: 0 2px; }
       #hud::-webkit-scrollbar { display: none; }
-      .hud-btn { padding: 4px 8px !important; font-size: 9px !important; }
+      .hud-btn { padding: 5px 8px !important; font-size: 9px !important; }
       #hud-level { font-size: 10px; }
       #hud-progress { font-size: 16px; padding: 2px 6px; }
 
-      #progress-bar-wrap { top: 54px; right: 8px; font-size: 14px; padding: 4px 8px; }
+      #progress-bar-wrap { top: 64px; right: 8px; font-size: 15px; padding: 4px 10px; height: 36px; }
       #progress-bar-bg { width: 80px; height: 10px; }
+
+      #event-banner {
+        top: 106px; left: 50%; transform: translateX(-50%);
+        padding: 5px 12px; gap: 8px; border-radius: 18px;
+      }
+      .eb-title { font-size: 9px; }
+      .eb-subtitle { display: none; }
 
       #controls-tip { bottom: 6px; font-size: 14px; padding: 4px 10px; max-width: 96vw; overflow-x: auto; }
 
@@ -966,6 +1019,10 @@
     }
 
     @media (max-width: 480px) {
+      #hud { padding: 6px 8px !important; gap: 6px !important; }
+      #hud-gold, #hud-gems, #hud-honor { padding: 2px 6px !important; font-size: 9px !important; }
+      #progress-bar-wrap { top: 86px; right: 8px; }
+      #event-banner { top: 128px; max-width: 96vw; }
       #quiz-ui, #vocab-panel, #shop-panel, #fish-album-panel,
       #trophy-panel, #duel-panel, #memory-panel, #vff-inner,
       #cat-dialog-inner, #levelup-card, #alldone-card {
@@ -1160,13 +1217,13 @@
 
     /* ── R5 SEASONAL EVENTS & LOCAL LEADERBOARD OVERLAYS ────────────────────── */
     #event-banner {
-      position: fixed; top: 10px; left: 50%; transform: translateX(-50%); z-index: 850;
+      position: fixed; top: 66px; left: 50%; transform: translateX(-50%); z-index: 850;
       display: flex; align-items: center; justify-content: space-between; gap: 14px;
-      width: max-content; max-width: 94vw; padding: 6px 16px;
+      width: max-content; max-width: 90vw; padding: 6px 16px;
       background: rgba(15, 23, 42, 0.9); backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       border: 1.5px solid var(--neon-gold); border-radius: 24px;
-      box-shadow: var(--glow-gold), 0 8px 24px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--glow-gold), 0 8px 24px rgba(0, 0, 0, 0.5);
       transition: all 0.3s ease;
     }
     #event-banner.hidden { display: none; }
@@ -1233,27 +1290,42 @@
 
   <!-- ══════════════ HUD ═══════════════════════════════════════════ -->
   <div id="hud" class="glass-hud" style="display:none">
-    <span style="font-size:20px">🌾</span>
-    <span id="hud-level">Level 1</span>
-    <span id="hud-sep">|</span>
-    <span id="hud-progress">🌱 0</span>
-    <span id="hud-gold" title="Coins">🪙 <span id="gold-val">0</span></span>
-    <span id="hud-gems" style="margin-left:6px;" title="Gems">💎 <span id="gems-val">0</span></span>
-    <span id="hud-honor" style="margin-left:6px;" title="Honor">🎖️ <span id="honor-val">0</span></span>
-    <div id="active-buff-bar" style="display:inline-flex; gap:6px; margin-left:8px; align-items:center;"></div>
-    <button class="hud-btn" id="recipe-btn" title="Recipe Book (요리책)" onclick="openRecipeBook()">🍳 Cook</button>
-    <button class="hud-btn" id="pet-btn" title="Pet Companions (반려동물)" onclick="openPetOverlay()">🐾 Pets</button>
-    <button class="hud-btn" id="seasonal-btn" title="Seasonal Events" onclick="openSeasonalOverlay()">🎉 Event</button>
-    <button class="hud-btn" id="leaderboard-btn" title="Local Leaderboard" onclick="openLeaderboard()">🏅 Ranks</button>
-    <button class="hud-btn" id="quest-btn" title="Quest Log" onclick="openQuestOverlay()">📜 Quests</button>
-    <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
-    <button class="hud-btn" id="duel-btn" title="Spell Duel" onclick="openSpellDuel()">⚡ Duel</button>
-    <button class="hud-btn" id="fish-album-btn" title="Fish Encyclopedia" onclick="openFishAlbum()">🐟 Fish</button>
-    <button class="hud-btn" id="trophy-btn" title="Trophies">🏆 Trophies</button>
-    <button class="hud-btn" id="shop-btn" title="Seed shop">🏪 Shop</button>
-    <button class="hud-btn" id="vocab-btn" title="Vocabulary Book">📖 Vocab</button>
-    <button class="hud-btn" id="hud-menu-btn" title="Level Menu">☰ Menu</button>
+    <!-- Group 1: Status -->
+    <div id="hud-status-group" class="hud-group">
+      <span style="font-size:20px">🌾</span>
+      <span id="hud-level">Level 1</span>
+      <span id="hud-sep">|</span>
+      <span id="hud-progress">🌱 0</span>
+      <div id="active-buff-bar" style="display:inline-flex; gap:6px; align-items:center;"></div>
+    </div>
 
+    <!-- Group 2: Currency -->
+    <div id="hud-currency-group" class="hud-group">
+      <span id="hud-gold" title="Coins">🪙 <span id="gold-val">0</span></span>
+      <span id="hud-gems" style="margin-left:4px;" title="Gems">💎 <span id="gems-val">0</span></span>
+      <span id="hud-honor" style="margin-left:4px;" title="Honor">🎖️ <span id="honor-val">0</span></span>
+    </div>
+
+    <!-- Group 3: Primary Action Buttons + Overflow Menu -->
+    <div id="hud-actions-group" class="hud-group">
+      <button class="hud-btn" id="vocab-btn" title="Vocabulary Book">📖 Vocab</button>
+      <button class="hud-btn" id="shop-btn" title="Seed shop">🏪 Shop</button>
+      <button class="hud-btn" id="quest-btn" title="Quest Log" onclick="openQuestOverlay()">📜 Quests</button>
+      <button class="hud-btn" id="recipe-btn" title="Recipe Book (요리책)" onclick="openRecipeBook()">🍳 Cook</button>
+      <button class="hud-btn" id="pet-btn" title="Pet Companions (반려동물)" onclick="openPetOverlay()">🐾 Pets</button>
+      <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
+      <button class="hud-btn" id="hud-more-btn" title="More Features" onclick="toggleHudOverflow(event)">➕ More</button>
+      <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level Menu">☰ Menu</button>
+
+      <!-- Overflow Dropdown Panel -->
+      <div id="hud-overflow-menu" class="glass-bg neon-border hidden">
+        <button class="hud-btn hud-overflow-item" id="seasonal-btn" title="Seasonal Events" onclick="openSeasonalOverlay(); toggleHudOverflow(false);">🎉 Event</button>
+        <button class="hud-btn hud-overflow-item" id="leaderboard-btn" title="Local Leaderboard" onclick="openLeaderboard(); toggleHudOverflow(false);">🏅 Ranks</button>
+        <button class="hud-btn hud-overflow-item" id="duel-btn" title="Spell Duel" onclick="openSpellDuel(); toggleHudOverflow(false);">⚡ Duel</button>
+        <button class="hud-btn hud-overflow-item" id="fish-album-btn" title="Fish Encyclopedia" onclick="openFishAlbum(); toggleHudOverflow(false);">🐟 Fish</button>
+        <button class="hud-btn hud-overflow-item" id="trophy-btn" title="Trophies" onclick="toggleHudOverflow(false);">🏆 Trophies</button>
+      </div>
+    </div>
   </div>
 
   <!-- Progress bar -->
@@ -1789,6 +1861,30 @@
       </div>
     </div>
   </div>
+
+  <script>
+    function toggleHudOverflow(evt) {
+      if (evt && evt.stopPropagation) evt.stopPropagation();
+      const menu = document.getElementById('hud-overflow-menu');
+      if (!menu) return;
+      if (typeof evt === 'boolean') {
+        menu.classList.toggle('hidden', !evt);
+      } else {
+        menu.classList.toggle('hidden');
+      }
+    }
+
+    // Auto-close overflow menu on click outside
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('hud-overflow-menu');
+      const moreBtn = document.getElementById('hud-more-btn');
+      if (menu && !menu.classList.contains('hidden')) {
+        if (!menu.contains(e.target) && (!moreBtn || !moreBtn.contains(e.target))) {
+          menu.classList.add('hidden');
+        }
+      }
+    });
+  </script>
 
   <!-- Phaser 3 CDN -->
   <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>

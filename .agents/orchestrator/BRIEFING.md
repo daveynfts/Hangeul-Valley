@@ -1,91 +1,76 @@
-# BRIEFING — 2026-07-22T17:18:15Z
+# BRIEFING — 2026-07-23T08:50:30Z
 
 ## Mission
-Lead the full upgrade of gameplay mechanics and build an addicting Korean learning economy for Hangeul Valley according to requirements R1 through R5:
-- R1: Triple Currency Economy (Coins, Gems, Honor) & Rebalanced Sinks
-- R2: Korean-Gated Progression (Hard lock zone unlocks, shop items, bosses) & Quest System (Main + Daily/Weekly)
-- R3: Crafting/Cooking System (8+ Korean recipes, ingredient names, cooking mini-game, temporary buffs, cultural facts)
-- R4: Pet Companion System (5+ pets with passive abilities, XP leveling via Korean quizzes, happiness meter & feeding)
-- R5: Seasonal Events (Chuseok, Seollal, etc. templates) & Local Leaderboard UI Panel
-- System Integrity: `node -c game.js` clean, save backward compatibility, 64-Bit Retro Glassmorphism UI, mirror sync `assets/`.
+Redesign top HUD layout and UI/UX for Hangeul Valley: fix top element overlaps (#hud, #event-banner, #progress-bar-wrap), reorganize 15+ HUD items into clean scannable logical groups with ≤8 top-level buttons while retaining 100% functional parity and retro glassmorphism style.
 
 ## 🔒 My Identity
 - Archetype: Project Orchestrator
 - Roles: orchestrator, user_liaison, human_reporter, successor
-- Working directory: C:\VibeCode\Hangeul Valley\.agents\orchestrator\
-- Original parent: parent
-- Original parent conversation ID: d5d77ce8-e222-48c8-b3d7-2539d16b2a13
+- Working directory: C:\VibeCode\Hangeul Valley\.agents\orchestrator
+- Original parent: top-level
+- Original parent conversation ID: 8ef8b7f4-ce9c-4e52-ad89-50ad5b5c7e13
 
 ## 🔒 My Workflow
-- **Pattern**: Project Orchestration Pattern
+- **Pattern**: Project Pattern (Orchestrator → Explorer → Worker → Reviewer → Challenger → Forensic Auditor)
 - **Scope document**: C:\VibeCode\Hangeul Valley\.agents\orchestrator\PROJECT.md
-1. **Decompose**: Decompose requirements R1 through R5 into 5 verifiable milestones.
-2. **Dispatch & Execute**:
-   - Explorer -> Worker -> Reviewer -> Challenger -> Auditor iteration loop per milestone.
-3. **On failure**: Retry -> Replace -> Skip -> Redistribute -> Redesign -> Escalate.
-4. **Succession**: Self-succeed at 16 spawns.
+1. **Decompose**: Split into milestone phases (Phase 1: Investigation & Layout Architecture, Phase 2: Implementation & Synchronization, Phase 3: Verification & Auditing)
+2. **Dispatch & Execute**: Direct (iteration loop: Explorer -> Worker -> Reviewer -> Challenger -> Auditor)
+3. **On failure**: Retry -> Replace -> Skip -> Redistribute -> Redesign
+4. **Succession**: Self-succeed at 16 spawns
 - **Work items**:
-  1. Milestone 1: Deep Codebase & Save Schema Exploration [done]
-  2. Milestone 2: R1 Triple Economy & R2 Progression & Quests [done]
-  3. Milestone 3: R3 Crafting/Cooking & R4 Pet Companion System [done]
-  4. Milestone 4: R5 Seasonal Events, Leaderboard & Asset Mirror Sync [done]
-  5. Milestone 5: Full Verification, Syntax Check & Forensic Audit [done]
-- **Current phase**: 5 (VICTORY)
-- **Current focus**: Project Complete & Verified CLEAN
+  1. Phase 1: Exploration of HTML/CSS/JS top layout & button structure [completed]
+  2. Phase 2: Reorganization & CSS layout fix implementation [completed]
+  3. Phase 3: Review, Challenge & Forensic Audit [completed]
+- **Current phase**: 4
+- **Current focus**: Victory reporting & project completion
 
 ## 🔒 Key Constraints
-- Never write or edit code directly; dispatch subagents for code changes and verification.
-- Never run build/test commands directly; rely on workers/reviewers/challengers/auditors.
-- Only write metadata (.md) files in .agents/ folder.
-- `node -c game.js` must pass with 100% success and 0 syntax errors.
-- Save data backward compatibility must be preserved.
-- UI panels styled in 64-Bit Retro Glassmorphism.
-- Sync `assets/` mirror copy with root files (`index.html`, `game.js`, `levels.json`, `save_data.json`).
-- Never reuse a subagent after handoff.
+- NEVER write or modify source code files directly as orchestrator
+- NEVER run build/test commands directly as orchestrator
+- All HTML/CSS changes in index.html MUST be mirrored to assets/index.html
+- All element IDs and onclick handlers must be preserved
+- Must pass `node -c game.js`
+- Must pass zero-overlap requirement at 1024px+ and 768px viewports
+- Must have ≤8 visible top-level action buttons
 
 ## Current Parent
-- Conversation ID: d5d77ce8-e222-48c8-b3d7-2539d16b2a13
-- Updated: not yet
+- Conversation ID: 8ef8b7f4-ce9c-4e52-ad89-50ad5b5c7e13
+- Updated: 2026-07-23T08:50:30Z
 
 ## Key Decisions Made
-- Completed all Milestones M1 through M5.
-- Forensic Auditor issued final CLEAN verdict.
-- Synchronized assets mirror 100%.
+- Dispatched 3 Explorer subagents in parallel for HTML, JS, and CSS architecture investigation.
+- Adopted Explorer 3's 2-Tier Responsive Floating Dock Architecture.
+- Worker M2 completed initial implementation and fix pass (`max-width: calc(100vw - 300px)`).
+- Reviewer 1 (PASS), Reviewer 2 (PASS), Challenger 1 (PASS), Challenger 2 (PASS), Auditor M3 (CLEAN).
 
 ## Team Roster
 | Agent | Type | Work Item | Status | Conv ID |
 |-------|------|-----------|--------|---------|
-| Explorer M1-1 | teamwork_preview_explorer | Economy Exploration | completed | 3db3ca43-3656-4bb7-aa7a-f22d63354016 |
-| Explorer M1-2 | teamwork_preview_explorer | Progression Exploration | completed | c38e37c8-6e6a-4d8c-9f4b-4ebbceb8a980 |
-| Explorer M1-3 | teamwork_preview_explorer | Crafting/UI Exploration | completed | 20f23fc8-2907-46c3-b830-7fa6e6ae9555 |
-| Worker M2 Impl | teamwork_preview_worker | R1 & R2 Implementation | completed | 806e9ad8-1027-4b02-b593-57271188e7e1 |
-| Reviewer M2-1 | teamwork_preview_reviewer | M2 Code Review | completed | ab6aff60-4fae-4895-99ed-37829b17931b |
-| Reviewer M2-2 | teamwork_preview_reviewer | M2 UI/UX & Save Review | completed | e9931a53-39ad-4048-9f5b-3812a204245b |
-| Challenger M2-1 | teamwork_preview_challenger | M2 Economy & Save Stress Test | completed | 89c8e6de-baaf-4c06-a915-39f70e70c4d7 |
-| Challenger M2-2 | teamwork_preview_challenger | M2 Gating & Quest Stress Test | completed | 4a4fdc86-0eb0-4df9-bd12-0509bcda40b4 |
-| Auditor M2 | teamwork_preview_auditor | M2 Forensic Integrity Audit | completed | 547fd0e2-4232-4925-b8c7-400c8d40be1d |
-| Worker M3 | teamwork_preview_worker | R3 Crafting & R4 Pets | completed | 4c3abc54-67fb-4885-988f-cc095b44c5d5 |
-| Worker M2 Fix | teamwork_preview_worker | M2 Remediation | completed | fa6698a5-33c8-479f-9c09-c62e4a6817e6 |
-| Worker M4 | teamwork_preview_worker | R5 Events, Leaderboard & Mirror Sync | completed | f037b8e9-ef8f-4b04-909c-aa217db3fe16 |
-| Reviewer M5 | teamwork_preview_reviewer | Final M5 Code Review | completed | 18dd4604-0ed2-4f7a-b6ad-b82ca00a6099 |
-| Challenger M5 | teamwork_preview_challenger | Final M5 E2E & Parity Test | completed | 9445a84f-9a2d-4aef-a38d-dfa13f422969 |
-| Victory Auditor | teamwork_preview_auditor | Final Victory Forensic Audit | completed | d74c8c09-77c9-49c7-8b69-76457a006b64 |
+| Explorer 1 | teamwork_preview_explorer | HTML Top Area Inspection | completed | 04bc177d-8f02-4e40-bed2-db8754fbace9 |
+| Explorer 2 | teamwork_preview_explorer | JS HUD Bindings Inspection | completed | 3540dfdf-0717-45c3-8968-6eb952f49991 |
+| Explorer 3 | teamwork_preview_explorer | CSS & UX Layout Architecture | completed | 155af5b7-49a9-4d1c-b7f6-5116c72e3519 |
+| Worker M2 | teamwork_preview_worker | HUD Layout Implementation & Fix | completed | b621f088-b6dc-4ce5-95eb-daf0c3ed4331 |
+| Reviewer 1 | teamwork_preview_reviewer | HTML/CSS & Sync Review | completed (PASS) | ec9df78a-f87c-4aa2-9d75-841ce679f809 |
+| Reviewer 2 | teamwork_preview_reviewer | UI/UX & Feature Parity Review | completed (PASS) | 64dfb043-57ad-4305-b215-41168052d0b1 |
+| Challenger 1 | teamwork_preview_challenger | Responsive Overlap Verification | completed (PASS) | a0931687-764e-45af-8dc7-876fe838d59a |
+| Challenger 2 | teamwork_preview_challenger | Button Interactivity & Parity | completed (PASS) | 86bc03e9-752c-4f3b-8699-92956bb5e65d |
+| Auditor M3 | teamwork_preview_auditor | Forensic Integrity Audit | completed (CLEAN) | f0d52377-d4c0-4167-8975-d25131f8e979 |
 
 ## Succession Status
-- Generation: gen1
-- Spawn count: 16 / 16
+- Succession required: no
+- Spawn count: 11 / 16
 - Pending subagents: none
 - Predecessor: none
-- Successor: not required (project 100% complete)
+- Successor: not yet spawned
 
 ## Active Timers
-- Heartbeat cron: task-31 (to be killed)
+- Heartbeat cron: 8ef8b7f4-ce9c-4e52-ad89-50ad5b5c7e13/task-23
 - Safety timer: none
 
 ## Artifact Index
 - C:\VibeCode\Hangeul Valley\.agents\orchestrator\ORIGINAL_REQUEST.md — Original User Request
-- C:\VibeCode\Hangeul Valley\.agents\orchestrator\PROJECT.md — Project Plan & Architecture
-- C:\VibeCode\Hangeul Valley\.agents\orchestrator\plan.md — Detailed Execution Plan
-- C:\VibeCode\Hangeul Valley\.agents\orchestrator\progress.md — Liveness & Milestone Progress
-- C:\VibeCode\Hangeul Valley\.agents\orchestrator\context.md — Project Context & State
-- C:\VibeCode\Hangeul Valley\.agents\orchestrator\handoff.md — Final Victory Report
+- C:\VibeCode\Hangeul Valley\.agents\orchestrator\BRIEFING.md — Briefing memory
+- C:\VibeCode\Hangeul Valley\.agents\orchestrator\plan.md — Work Plan
+- C:\VibeCode\Hangeul Valley\.agents\orchestrator\progress.md — Progress tracking & heartbeat
+- C:\VibeCode\Hangeul Valley\.agents\orchestrator\PROJECT.md — Project scope & layout spec
+- C:\VibeCode\Hangeul Valley\.agents\orchestrator\handoff.md — Final Handoff Report
