@@ -1,14 +1,19 @@
-## 2026-07-24T14:31:05Z
-You are Explorer 1 for Milestone 2 (Honey Inventory & Rewards Integration).
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1`.
-Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1\handoff.md`.
+## 2026-07-24T21:56:50Z
+You are teamwork_preview_explorer_m2_1.
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1`. Write your analysis to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1\analysis.md` and handoff to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1\handoff.md`.
 
-Read `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\game.js`.
+Target Scope: Milestone 2 - Cat NPC (Muop) Sprite Polish & Upgrade (R3).
+Read project specs: `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`.
 
-Investigate the following areas in `game.js`:
-1. How item types are registered in `ITEM_TYPES` (or equivalent inventory item dictionary). Verify if `'honey'` item definition exists or needs to be added (`id: 'honey'`, `nameKo: '꿀'`, `nameEn: 'Honey'`, `icon: '🍯'`, `type: 'ingredient'`).
-2. How `addItemToInventory(itemId, count)` is implemented and called throughout `game.js`.
-3. How `BeeScene` end-of-round summary awards Honey to `inventoryState` based on score and accuracy %, displaying a toast or reward notification.
-4. Syntax check command: `node -c game.js`.
-
-Synthesize your findings and provide a detailed implementation plan for Honey Inventory & Rewards Integration. Deliver your handoff report and send a message back to the Project Orchestrator when complete.
+Objectives:
+1. Locate all code in `game.js` responsible for baking, rendering, drawing, or animating the Cat NPC (Muop) world sprite (not the dialog portrait canvas).
+2. Count baseline color tokens currently used for Muop's world sprite.
+3. Detail upgrade strategy for Muop world sprite:
+   - Richer fur texture detail
+   - Visible tabby stripes / pattern
+   - Expressive eyes with catchlights
+   - Subtle tail-swish idle animation (frame-to-frame tail movement)
+   - Crisp 1px dark outlines (`K = 0x0F172A`) for visual consistency
+   - Increased unique color token count
+4. Verify positioning, origin, depth sorting, levitation/idle tween, collision, and Cat dialog interaction logic to ensure 0 regression.
+5. Provide exact line numbers, code structure, and upgrade recommendation.

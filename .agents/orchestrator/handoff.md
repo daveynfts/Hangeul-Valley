@@ -1,52 +1,52 @@
-# Handoff Report: Beehive Structure, Bee Shooting Minigame & Cooking Integration
+# Handoff Report: Project Orchestrator (Generation 1 -> Generation 2)
 
-**Project**: Hangeul Valley  
-**Orchestrator**: Project Orchestrator  
+**From**: Project Orchestrator (Generation 1)  
+**To**: Project Orchestrator Successor (Generation 2)  
 **Working Directory**: `d:\Hangeul Valley\.agents\orchestrator`  
-**Date**: 2026-07-24  
+**Parent Conversation ID**: `d6083e12-0fd2-4310-838f-2485ea038830`  
 
 ---
 
-## 1. Executive Summary
+## 1. Milestone State
 
-All requirements for the Beehive Structure on Farm Map, Bee Shooting Vocabulary Minigame Scene (`BeeScene`), Honey Rewards & Cooking Integration, Save/Load Persistence, and Dual-File Synchronization have been fully implemented, verified, and audited across 3 structured milestones.
-
-- **Milestone 1**: Beehive Farm NPC, BeeScene Minigame & Flying Bee Vocabulary Mechanics — **APPROVED & CLEAN**
-- **Milestone 2**: Honey Inventory Integration, Cooking Recipe & Save/Load Persistence — **APPROVED & CLEAN**
-- **Milestone 3**: Dual-File Synchronization & E2E Forensic Integrity Audit — **APPROVED & CLEAN**
-
----
-
-## 2. Requirements & Verification Matrix
-
-| Requirement | Implementation Summary | Verification Status | Forensic Audit Verdict |
-|-------------|------------------------|---------------------|-----------------------|
-| **R1. Beehive NPC on Farm Map** | Added `_genBeehiveTextures` (`beehive`, `p_tiny_bee`) in `PixelArtRenderer`. Positioned Beehive NPC near Apple Tree at `(farm.x - 65, farm.y - 70)` in `FarmScene` with an 85ms vibration tween, 4 orbiting tiny bee particles, `🐝 Beehive [SPACE]` hint label (<85px distance), and smooth camera fadeOut/launch transition to `BeeScene`. | 2 Reviewers PASS<br>2 Challengers PASS (79 assertions) | **CLEAN** |
-| **R2. Bee Shooting Minigame (`BeeScene`)** | Created `BeeScene extends Phaser.Scene` registered in Phaser game config. Procedural textures (`bee_fly_0`, `bee_fly_1`, `p_pollen`, `p_honey_drip`). Spawns flying bee containers carrying Korean words across 3 flight trajectories (Linear, Sine Wave, Zigzag). Glassmorphism top HUD target English word banner. Combo multiplier scoring (`100 + (combo - 1) * 20`), pollen particle explosions, chiptune sound effects, wrong hit feedback (red tint, camera shake, combo reset). 10-word round cap triggers retro glassmorphism summary modal. Return transition smoothly resumes `FarmScene`. | 2 Reviewers PASS<br>2 Challengers PASS | **CLEAN** |
-| **R3. Honey Rewards & Cooking Integration** | Registered Honey (`'꿀'`: `id: 'honey'`, `icon: '🍯'`) in `ITEM_DB`. `BeeScene.showResultsSummary()` grants honey rewards via `addItemToInventory('honey', totalHoney)` with toast notification. Added authentic Korean honey recipes **Honey Yakgwa (꿀약과)** (`honey_yakgwa`) and **Honey Tea (꿀차)** (`honey_tea`) to `COOKING_RECIPES` with ingredient checking, stock deduction, and UI rendering. | 2 Reviewers PASS<br>2 Challengers PASS (269 assertions) | **CLEAN** |
-| **R4. Save/Load & Scene Persistence** | `collectSave()` and `applySave()` serialize and deserialize `inventoryState.ingredients['꿀']` and `cookingState` (cooked recipe stats). Scene transitions preserve overworld player position, crop growth timers, and ground items across pause/resume cycles. | 2 Reviewers PASS<br>2 Challengers PASS | **CLEAN** |
-| **R5. Code Quality & Synchronization** | `node -c game.js` and `node -c assets/game.js` pass with 0 syntax errors. Exact 100% SHA256 byte synchronization verified between `game.js` ↔ `assets/game.js` and `index.html` ↔ `assets/index.html`. | M3 Sync Worker PASS<br>100% SHA256 Match | **CLEAN** |
+| # | Milestone Name | Status | Summary |
+|---|----------------|--------|---------|
+| 1 | M1: Shop & Wizard NPC Polish | **DONE** | Upgraded Shop NPC (18 color tokens, 18x22) and Wizard NPC (32 color tokens, 16x20) with 1px dark slate outlines, fabric folds, star/moon embroidery, gold coins, staff particles, levitation, and 0 syntax errors. Reviewers PASS, Challengers PASS (25/25 & 27/27 assertions), Forensic Auditor CLEAN. |
+| 2 | M2: Cat NPC, Board, Portal & Beehive Polish | **IN_PROGRESS (Impl Done)** | Worker M2 completed code implementation in `game.js`: R3 Cat NPC Muop (19 color tokens, tabby stripes, M-mark, catchlights, tail-swish), R4 Notice Board (18 color tokens, wood grain, notes, lantern glow), R4 Portal (17 color tokens, stone arch, runes, cosmic swirl), R5 Beehive (17 color tokens, honeycomb texture, skep shading, dripping honey). Passed `node -c` syntax check and 100% SHA256 sync (`46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`). **Needs M2 Gate Verification**! |
+| 3 | M3: Dual-File Sync & Final Forensic Integrity Audit | **PLANNED** | Final byte-level SHA256 sync verification (`game.js` <-> `assets/game.js`, `index.html` <-> `assets/index.html`), `node -c` syntax check, full project E2E Forensic Audit, and victory claim report to Sentinel/User. |
 
 ---
 
-## 3. SHA256 Synchronization Verification
-
-- **`game.js` ↔ `assets/game.js`**:
-  - Size: `1,509,284` bytes
-  - SHA256: `60DD3489A3F2D646B51D0B97A908AA93E580F292177B200F1C4DA3D92DA99C26`
-- **`index.html` ↔ `assets/index.html`**:
-  - Size: `113,353` bytes
-  - SHA256: `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA`
-- **Syntax Integrity**: `node -c game.js` and `node -c assets/game.js` both executed with **0 syntax errors**.
+## 2. Active Subagents
+- All 16 subagents spawned by Generation 1 have completed their tasks and delivered reports.
+- Current active subagent count: 0 pending.
 
 ---
 
-## 4. Key Verification Artifacts
+## 3. Pending Decisions & Immediate Next Steps for Successor
 
-- `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m1\audit_report.md`
-- `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m2\audit_report.md`
-- `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m3\audit_report.md`
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_1\test_m1_empirical.js`
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\test_m1_boundary.js`
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1\test_m2_empirical.js`
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_2\test_m2_boundary.js`
+1. **Milestone 2 Gate Verification**:
+   - Spawn 2 Reviewers (`teamwork_preview_reviewer`), 2 Challengers (`teamwork_preview_challenger`), and 1 Forensic Auditor (`teamwork_preview_auditor`) for Milestone 2.
+   - Instruct Reviewers to verify color token counts (Cat 19, Board 18, Portal 17, Beehive 17), 1px dark slate outlines, micro-animations, and non-regression of interaction triggers (`showCatDialog()`, `openMemoryGame()`, `DungeonScene`, `enterBeeScene()`).
+   - Instruct Challengers to write empirical test scripts for token counts, SHA256 match, and proximity/interaction thresholds.
+   - Instruct Forensic Auditor to audit M2 changes in `game.js` for genuine pixel art structures and issue CLEAN / INTEGRITY VIOLATION verdict.
+
+2. **Milestone 2 Sign-off**:
+   - If Forensic Auditor verdict is CLEAN and Reviewers/Challengers PASS: mark Milestone 2 as **DONE** in `PROJECT.md` and `progress.md`.
+
+3. **Milestone 3 Execution**:
+   - Ensure byte-for-byte SHA256 match between `game.js` ↔ `assets/game.js` and `index.html` ↔ `assets/index.html`.
+   - Run syntax checks (`node -c game.js` and `node -c assets/game.js`).
+   - Spawn Final Forensic Auditor for project-wide integrity verification across R1–R5 and acceptance criteria.
+   - Upon CLEAN verdict, send victory claim report to Sentinel / User (`d6083e12-0fd2-4310-838f-2485ea038830`).
+
+---
+
+## 4. Key Artifacts
+
+- `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md` — Original Requirements and Acceptance Criteria
+- `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` — Project Architecture and Milestone Plan
+- `d:\Hangeul Valley\.agents\orchestrator\plan.md` — Execution Plan
+- `d:\Hangeul Valley\.agents\orchestrator\progress.md` — Progress Tracker and Heartbeat
+- `d:\Hangeul Valley\.agents\orchestrator\context.md` — Context Summary
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md` — Worker M2 Implementation Handoff Report

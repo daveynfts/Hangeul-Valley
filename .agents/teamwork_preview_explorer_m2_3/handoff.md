@@ -1,85 +1,101 @@
-# Handoff Report: Milestone 2 Save/Load Persistence & Scene Transitions Investigation
-
-**Agent**: Explorer 3 (Milestone 2)  
-**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_3`  
-**Date**: 2026-07-24  
-
----
+# Handoff Report — Milestone 2: Beehive Polish & Upgrade (R5)
 
 ## 1. Observation
 
-1. **`collectSave()` & `applySave()` Implementation**:
-   - Location: `d:\Hangeul Valley\game.js` lines 4092–4126 (`collectSave`), lines 4129–4175 (`applySave`), lines 4033–4089 (`migrateSaveData`).
-   - `collectSave()` aggregates 19 distinct state properties into a JSON object with `v: 4`.
-   - `applySave(d)` executes `migrateSaveData(d)` to ensure backwards compatibility and schema completeness, restores global state variables (`playerCurrencies`, `harvestCounts`, `srsData`, `plotSave`, `appleTreeSave`, `fishAlbumSave`, `questState`, `inventoryState`, `recipeState`, `activeBuffs`, `seasonalState`, `leaderboardState`, `droppedItemsSave`, `cookingState`), and triggers HUD update side-effects.
+### Code Locations in `game.js`
+- **Bake Trigger**: `game.js:346`
+  `this._genBeehiveTextures(scene);` inside `PixelArtGenerator._bakeTextures(scene)`.
+- **Beehive Sprite Bake Function**: `game.js:1396–1437`
+  ```javascript
+  1396:   static _genBeehiveTextures(scene) {
+  1397:     if (!scene || !scene.textures || scene.textures.exists('beehive')) return;
+  1398: 
+  1399:     const BEEHIVE_PALETTE = {
+  1400:       '.': null,
+  1401:       'K': 0x0F172A,
+  1402:       'b': 0x543A24,
+  1403:       'B': 0x78350F,
+  1404:       'W': 0xA16207,
+  1405:       'w': 0xCA8A04,
+  1406:       'D': 0xB45309,
+  1407:       'A': 0xD97706,
+  1408:       'Y': 0xFACC15,
+  1409:       'y': 0xFDE047,
+  1410:       'H': 0xFEF08A
+  1411:     };
+  1412: 
+  1413:     this.createTexture(scene, 'beehive', [ ... ], BEEHIVE_PALETTE, 20, 22, 2);
+  ```
+- **Ambient Bee Texture Bake**: `game.js:1450–1455`
+  `makeTex('p_tiny_bee', 5, 5, (g) => { ... });`
+- **Farm Map Instantiation**: `game.js:7516` (call to `_createBeehiveNPC`) and `game.js:8653–8713` (`_createBeehiveNPC` definition):
+  - `bx = this.farm.x - 65; by = this.farm.y - 70;` (lines 8654–8655)
+  - `this.beehiveSprite = this.add.image(bx, by, 'beehive').setOrigin(0.5, 1).setScale(1.6).setDepth(by);` (lines 8659–8660)
+  - `if (this.shadows) this.shadows.createShadow(this.beehiveSprite, 38, 12, 2);` (line 8661)
+- **Depth Sorting & Proximity**: `game.js:9218–9223`
+  - `const nearBeehive = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY) < 85;` (line 9218)
+  - `if (this.beehiveSprite) this.beehiveSprite.setDepth(this.beehiveY || this.beehiveSprite.y);` (line 9221)
+- **HUD Prompt Overlay**: `game.js:9281–9282`
+  - `if(hx===null&&this.beehiveX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY)<85){ ... }`
+- **BeeScene Launch Trigger**: `game.js:9375–9383`
+  ```javascript
+  9375:     if(this.beehiveX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY)<85){
+  9376:       this.tweens.add({targets:this.beehiveSprite,scale:{from:1.6,to:1.85},duration:120,yoyo:true,ease:'Back.Out(2)'});
+  9377:       this.cameras.main.fadeOut(300, 0, 0, 0);
+  9378:       this.cameras.main.once('camerafadeoutcomplete', () => {
+  9379:         this.scene.pause();
+  9380:         this.scene.launch('BeeScene');
+  9381:       });
+  9382:       return;
+  9383:     }
+  ```
 
-2. **Inventory & Honey Item State**:
-   - `inventoryState` (lines 3932–3938) initializes with `{ maxSlots: 20, ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 }, seeds: {}, scrolls: 0, cookedDishes: {} }`.
-   - `ITEM_DB` (lines 3900–3921) defines 20 item keys. Honey (`'꿀'` / `'honey'`) is currently missing from `ITEM_DB`.
-   - `BeeScene.showResultsSummary()` (lines 11165–11215) calculates `const totalHoney = baseHoney + bonusHoney;` and renders `HONEY REWARD: +${totalHoney} 🍯`, but does not invoke `addItemToInventory('honey', totalHoney)`.
-
-3. **Scene Transitions & State Preservation**:
-   - `FarmScene` launches `BeeScene` at line 9336 via `this.scene.pause()` and `this.scene.launch('BeeScene')`.
-   - `BeeScene` exits back to `FarmScene` at line 11222 via `this.scene.stop()` and `this.scene.resume('FarmScene')`.
-   - `FarmScene` resumes cleanly via `'resume'` listener (line 7438: `this.cameras.main.fadeIn(300, 0, 0, 0)`).
-   - Overworld coordinates (`this.player.x`, `this.player.y`), crop timers (`p.plantedAt`), apple tree timer (`appleRipeAt`), and ground items remain stored on the paused `FarmScene` instance and global memory.
-
-4. **Syntax Verification**:
-   - Command: `node -c game.js`
-   - Output: Exit Code 0 (No syntax errors).
+### Baseline Color Token Count
+- `BEEHIVE_PALETTE` object keys: 10 non-null colors defined (`K`, `b`, `B`, `W`, `w`, `D`, `A`, `Y`, `y`, `H`).
+- Active rendered colors in baseline 20x22 grid string array: **8 unique color tokens** (`K`, `b`, `B`, `W`, `D`, `A`, `Y`, `y`).
+- Unused colors in baseline grid: `w` (`0xCA8A04`) and `H` (`0xFEF08A`).
 
 ---
 
 ## 2. Logic Chain
 
-1. **Save/Load Integrity (Observations 1 & 2)**:
-   - `collectSave()` serializes `inventoryState` directly.
-   - `applySave()` restores `inventoryState` directly.
-   - Therefore, any item added to `inventoryState.ingredients` via `addItemToInventory()` will be persisted automatically upon `persistSave()`.
-   - However, since `'꿀'` is not present in `ITEM_DB`, `addItemToInventory('honey')` will lack item metadata (icon, description, Korean name). Registering `'꿀'` in `ITEM_DB` will allow seamless item lookup and inventory UI rendering.
-
-2. **BeeScene Reward Integration (Observations 2 & 3)**:
-   - `BeeScene.showResultsSummary()` calculates `totalHoney` reward.
-   - Adding `addItemToInventory('honey', totalHoney)` inside `showResultsSummary()` will place honey directly into `inventoryState.ingredients['꿀']`, which then automatically triggers `persistSave()`.
-
-3. **Scene Transition Stability (Observation 3)**:
-   - `this.scene.pause()` keeps `FarmScene` in memory without resetting player position or timestamp comparisons for crop growth.
-   - `collectSave()` checks `sceneRef && Array.isArray(sceneRef.plots)` to harvest active plot states even while `FarmScene` is paused.
-   - Thus, saving during or after scene transitions preserves all overworld coordinates, timers, and inventory changes seamlessly.
+1. **Baking Architecture**: `PixelArtGenerator._bakeTextures(scene)` executes `_genBeehiveTextures(scene)` which creates the Phaser texture `'beehive'` with key-color mapping from `BEEHIVE_PALETTE`.
+2. **Color Token Baseline**: Examining the 22 strings of 20 characters in `_genBeehiveTextures` reveals that characters `w` and `H` are defined in `BEEHIVE_PALETTE` but omitted from the grid string array. Thus, only 8 active color tokens are rendered in the baseline sprite.
+3. **Upgrade Requirement Alignment**: To satisfy Acceptance Criterion 1 ("strictly MORE unique color tokens than baseline") and R5 requirements, the palette must be expanded to 17 active color tokens, adding multi-tone wood shading, honeycomb micro-structures, specular catchlights, and dripping honey droplets.
+4. **Outlines Consistency**: Acceptance Criterion 2 requires a 1px dark outline. Setting outer border pixels to `K = 0x0F172A` ensures complete visual consistency with the Robot character.
+5. **Zero Regression Mechanics**: Because `FarmScene` references texture key `'beehive'` with scale `1.6`, origin `(0.5, 1)`, depth `by`, shadow `(38, 12, 2)`, proximity radius `85`, and `BeeScene` launch trigger on SPACE, modifying ONLY the texture baking function in `_genBeehiveTextures` guarantees 0 regression in game logic, collision, or scene transitions.
 
 ---
 
 ## 3. Caveats
 
-- **Player Overworld Position Persistence across Save/Load**: `collectSave()` serializes plots, harvest counts, currencies, quests, items, and cooking data, but does NOT currently save `playerPos: { x, y }` in the save file schema. Upon full app reload, `FarmScene` spawns the player at default center coordinates (`W/2, H/2`). Scene pause/resume preserves exact player position during runtime, but a fresh file load resets position to default spawn.
-- **No other caveats**: Code logic and state flows are fully verified via source code analysis and syntax check.
+- **No Canvas Size Changes Required**: The baseline grid is 20x22 pixels at `pixelSize = 2` (40x44 canvas). The upgrade design fits within 20x22 (or 22x24), which preserves scale factor `1.6` without shifting spatial coordinates or shadow bounds.
+- **`BeeScene` Visual Dependencies**: `BeeScene` relies on `PixelArtRenderer.generateAllTextures(this)` in its `preload()` method. Updating `_genBeehiveTextures` automatically propagates the upgraded Beehive texture to `BeeScene` if referenced.
+- **Dual-File Sync Obligation**: Any changes to `game.js` must be byte-for-byte synced to `assets/game.js`.
 
 ---
 
 ## 4. Conclusion
 
-The Save/Load persistence system in `game.js` (`collectSave` / `applySave` / `migrateSaveData`) is architecturally sound and fully prepared for Milestone 2. 
-
-To complete Milestone 2 implementation:
-1. Add `'꿀': { id: 'honey', name: 'Honey', nameKo: '꿀', icon: '🍯', description: 'Sweet golden honey harvested from the beehive.' }` to `ITEM_DB`.
-2. Add `addItemToInventory('honey', totalHoney)` inside `BeeScene.showResultsSummary()`.
-3. Add Honey cooking recipes (e.g. `honey_tea`, `honey_yakgwa`) to `COOKING_RECIPES`.
+The Beehive sprite (`'beehive'`) in `game.js` is fully located and mapped. The baseline sprite uses 8 active color tokens (10 defined). Upgrading `_genBeehiveTextures` with a 17-color palette (honeycomb textures, layered straw skep, dripping honey droplets, 1px dark slate outlines) will achieve premium visual polish while maintaining 100% mechanical non-regression across map placement, depth sorting, drop shadows, and `BeeScene` launch triggers.
 
 ---
 
 ## 5. Verification Method
 
+### Automated Commands
 1. **Syntax Check**:
    ```bash
    node -c game.js
+   node -c assets/game.js
    ```
-   Must exit with code 0.
+2. **SHA256 Dual-File Sync Check**:
+   ```powershell
+   (Get-FileHash game.js).Hash -eq (Get-FileHash assets/game.js).Hash
+   ```
 
-2. **File Inspection**:
-   - Inspect `d:\Hangeul Valley\game.js` around lines 4000–4200 for `collectSave()` and `applySave()`.
-   - Inspect `d:\Hangeul Valley\game.js` around lines 10908–11225 for `BeeScene` and `exitMinigame()`.
-   - Inspect `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_3\analysis.md` for full breakdown.
-
-3. **Invalidation Conditions**:
-   - If `node -c game.js` fails with syntax errors.
-   - If `collectSave()` fails to include `inventoryState` or `cookingState`.
+### Manual Inspection & Code Audit
+1. Inspect `game.js` line 1396–1437 to verify `BEEHIVE_PALETTE` has > 10 unique non-null colors and all tokens are active in the grid.
+2. Confirm texture key is `'beehive'` and `makeTex('p_tiny_bee', ...)` remains intact.
+3. Confirm `FarmScene._createBeehiveNPC` at lines 8653–8713 retains origin `(0.5, 1)`, scale `1.6`, and shadow `(38, 12, 2)`.
+4. Confirm proximity distance check `85` at line 9375 and `this.scene.launch('BeeScene')` at line 9380 are unchanged.

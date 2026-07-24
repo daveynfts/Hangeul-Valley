@@ -1,186 +1,102 @@
-# Handoff Report — Milestone 2 Empirical Challenge
-
-**Agent**: Challenger 1 (`teamwork_preview_challenger_m2_1`)  
-**Target**: `game.js` (Milestone 2: Honey Rewards, Cooking Integration & Save/Load Persistence)  
-**Date**: 2026-07-24  
-**Verdict**: **PASS** (75 / 75 Assertions Passed, 0 Failures)
-
----
+# Handoff Report: Milestone 2 Gate Verification (Challenger 1)
 
 ## 1. Observation
 
-Direct empirical evidence obtained by running syntax check and Node.js verification test harness:
+Empirical verification was conducted on `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` by writing and running the Node.js test script `verify_m2.js` in `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1`.
 
-- **Syntax Verification**:
-  ```powershell
-  node -c game.js
-  # Output: The command completed successfully. Exit code: 0
-  ```
+### Exact Commands Executed and Results:
+```powershell
+node verify_m2.js
+```
+Output verbatim:
+```
+=== Milestone 2 Empirical Verification ===
+[PASS] Byte-level SHA256 Equality - game.js: 46466cd4188c... vs assets/game.js: 46466cd4188c...
+[PASS] Syntax check: game.js - node -c passed with 0 exit code
+[PASS] Syntax check: assets/game.js - node -c passed with 0 exit code
+[PASS] Palette C size >= 19 - Size: 20 (keys: .,K,k,H,G,g,D,d,W,C,c,w,P,p,E,I,e,L,Z,z)
+[PASS] Outline token K in C is 0x0F172A - Value: 0xF172A
+[PASS] C active tokens matrix usage - All 20 tokens used in cat matrices
+[PASS] Palette BEEHIVE_PALETTE size >= 17 - Size: 18 (keys: .,K,k,b,B,W,w,O,S,D,A,M,Y,y,H,C,G,g)
+[PASS] Outline token K in BEEHIVE_PALETTE is 0x0F172A - Value: 0xF172A
+[PASS] BEEHIVE_PALETTE active tokens matrix usage - All 18 tokens used in beehive matrix
+[PASS] Palette NOTICE_BOARD_PALETTE size >= 18 - Extension size: 18, Merged size: 34
+[PASS] Outline token K in NOTICE_BOARD_PALETTE is 0x0F172A - Value: 0xF172A
+[PASS] NOTICE_BOARD_PALETTE active tokens matrix usage - All 18 extension tokens used in notice board matrix
+[PASS] Palette PORTAL_PALETTE size >= 17 - Extension size: 17, Merged size: 35
+[PASS] Outline token K in PORTAL_PALETTE is 0x0F172A - Value: 0xF172A
+[PASS] PORTAL_PALETTE active tokens matrix usage - All 17 extension tokens used in portal matrix
 
-- **Empirical Harness Execution**:
-  ```powershell
-  node .agents/teamwork_preview_challenger_m2_1/test_m2_empirical.js
-  ```
-  Output excerpt:
-  ```text
-  Loading game.js from: D:\Hangeul Valley\game.js
-  Successfully loaded game.js into VM context.
+=== SUMMARY ===
+Total tests: 15
+Passed: 15
+Failed: 0
+VERDICT: PASS
+```
 
-  ==================================================
-  TEST SUITE 1: getItemInfo Bidirectional Resolution
-  ==================================================
-    ✓ PASS: getItemInfo('honey') returns valid object
-    ✓ PASS: getItemInfo('honey').key is '꿀' (Value: "꿀")
-    ✓ PASS: getItemInfo('honey').id is 'honey' (Value: "honey")
-    ✓ PASS: getItemInfo('honey').name is 'Honey' (Value: "Honey")
-    ✓ PASS: getItemInfo('honey').nameKo is '꿀' (Value: "꿀")
-    ✓ PASS: getItemInfo('honey').icon is '🍯' (Value: "🍯")
-    ✓ PASS: getItemInfo('honey').type is 'ingredient' (Value: "ingredient")
-    ✓ PASS: getItemInfo('꿀') returns valid object
-    ✓ PASS: getItemInfo('꿀').key is '꿀' (Value: "꿀")
-    ✓ PASS: getItemInfo('꿀').id is 'honey' (Value: "honey")
-    ✓ PASS: getItemInfo('꿀').name is 'Honey' (Value: "Honey")
-    ✓ PASS: getItemInfo('꿀').nameKo is '꿀' (Value: "꿀")
-    ✓ PASS: getItemInfo('꿀').icon is '🍯' (Value: "🍯")
-    ✓ PASS: getItemInfo('꿀').type is 'ingredient' (Value: "ingredient")
-    ✓ PASS: getItemInfo('honey') and getItemInfo('꿀') return identical objects
-
-  ==================================================
-  TEST SUITE 2: Inventory Addition & Stacking
-  ==================================================
-    ✓ PASS: addItemToInventory('honey', 0) returns false (Value: false)
-    ✓ PASS: Honey stock remains 0 after adding 0 (Value: 0)
-    ✓ PASS: addItemToInventory('honey', 1) returns true (Value: true)
-    ✓ PASS: Honey stock is 1 after adding 1 (Value: 1)
-    ✓ PASS: addItemToInventory('honey', 5) returns true (Value: true)
-    ✓ PASS: Honey stock is 6 after adding 5 (Value: 6)
-    ✓ PASS: addItemToInventory('honey', 100) returns true (Value: true)
-    ✓ PASS: Honey stock is 106 after adding 100 (Value: 106)
-    ✓ PASS: addItemToInventory('꿀', 4) returns true (Value: true)
-    ✓ PASS: Honey stock is 110 after adding 4 via '꿀' (Value: 110)
-
-  ==================================================
-  TEST SUITE 3: Capacity Limits Enforcement
-  ==================================================
-    ✓ PASS: Inventory used slots count is 5/5 (Value: 5)
-    ✓ PASS: addItemToInventory('honey', 1) returns false when inventory is at full capacity (5/5) (Value: false)
-    ✓ PASS: Honey is not added to inventory when capacity full (Value: "undefined")
-    ✓ PASS: addItemToInventory('배추', 10) returns true (stacking in existing slot when full) (Value: true)
-    ✓ PASS: Existing item ('배추') stock incremented to 11 (Value: 11)
-    ✓ PASS: addItemToInventory('honey', 5) returns true after capacity expansion to 6 slots (Value: true)
-    ✓ PASS: Honey stock is 5 after successful addition (Value: 5)
-
-  ==================================================
-  TEST SUITE 4: Cooking Integration (honey_yakgwa & honey_tea)
-  ==================================================
-    ✓ PASS: Recipe 'honey_yakgwa' exists in COOKING_RECIPES
-    ✓ PASS: Recipe 'honey_tea' exists in COOKING_RECIPES
-    ✓ PASS: cookRecipe('honey_yakgwa') rejected due to insufficient honey (Value: false)
-    ✓ PASS: Honey stock unchanged after failed cooking attempt (Value: 1)
-    ✓ PASS: Cabbage stock unchanged after failed cooking attempt (Value: 1)
-    ✓ PASS: totalDishesCooked is 0 after failed cooking (Value: 0)
-    ✓ PASS: cookRecipe('honey_yakgwa') succeeds with sufficient ingredients (Value: true)
-    ✓ PASS: Honey stock deducted by 2 (6 -> 4) (Value: 4)
-    ✓ PASS: Cabbage stock deducted by 1 (1 -> 0, key deleted) (Value: "undefined")
-    ✓ PASS: Gold reward +60 granted for honey_yakgwa (Value: 60)
-    ✓ PASS: XP/Honor reward +50 granted for honey_yakgwa (Value: 50)
-    ✓ PASS: cookingState.cookedRecipes includes 'honey_yakgwa'
-    ✓ PASS: cookingState.totalDishesCooked is 1 (Value: 1)
-    ✓ PASS: cookingState.recipeStats['honey_yakgwa'] is 1 (Value: 1)
-    ✓ PASS: inventoryState.cookedDishes['honey_yakgwa'] is 1 (Value: 1)
-    ✓ PASS: cookRecipe('honey_tea') succeeds with 4 honey in stock (Value: true)
-    ✓ PASS: Honey stock deducted by 2 (4 -> 2) (Value: 2)
-    ✓ PASS: Gold reward +45 granted for honey_tea (Value: 45)
-    ✓ PASS: XP/Honor reward +35 granted for honey_tea (Value: 35)
-    ✓ PASS: cookingState.cookedRecipes includes 'honey_tea'
-    ✓ PASS: cookingState.totalDishesCooked is 2 (Value: 2)
-    ✓ PASS: cookingState.recipeStats['honey_tea'] is 1 (Value: 1)
-    ✓ PASS: inventoryState.cookedDishes['honey_tea'] is 1 (Value: 1)
-
-  ==================================================
-  TEST SUITE 5: Save/Load Persistence (100 Cycles)
-  ==================================================
-  Starting state: Honey Stock=36, DishesCooked=3, Coins=250, Honor=120
-    ✓ PASS: All 100 save/load cycles completed successfully
-    ✓ PASS: Honey stock intact (36) after 100 save/load cycles (Value: 36)
-    ✓ PASS: inventoryState.cookedDishes intact after 100 save/load cycles
-    ✓ PASS: cookingState.cookedRecipes intact after 100 save/load cycles
-    ✓ PASS: cookingState.totalDishesCooked intact (3) after 100 save/load cycles (Value: 3)
-    ✓ PASS: cookingState.recipeStats intact after 100 save/load cycles
-    ✓ PASS: playerCurrencies.coins intact after 100 save/load cycles (Value: 250)
-    ✓ PASS: playerCurrencies.honor intact after 100 save/load cycles (Value: 120)
-
-  ==================================================
-  TEST SUITE 6: Legacy Save Migration & High-Throughput Cooking
-  ==================================================
-  [Save Migration] Upgrading schema from v3 -> v4
-    ✓ PASS: applySave returns true for legacy v3 save data (Value: true)
-    ✓ PASS: Migrated legacy totalDishesCooked is 8 (3 + 5) (Value: 8)
-    ✓ PASS: Migrated cookingState.cookedRecipes includes 'honey_yakgwa'
-    ✓ PASS: Migrated cookingState.cookedRecipes includes 'honey_tea'
-    ✓ PASS: Migrated recipeStats['honey_yakgwa'] is 3 (Value: 3)
-    ✓ PASS: Migrated recipeStats['honey_tea'] is 5 (Value: 5)
-    ✓ PASS: Honey stock is 50 after cooking 25 honey_yakgwa (Value: 50)
-    ✓ PASS: Cabbage stock is 25 after cooking 25 honey_yakgwa (Value: 25)
-    ✓ PASS: cookingState.recipeStats['honey_yakgwa'] is 25 (Value: 25)
-    ✓ PASS: Honey stock is completely depleted and key deleted after 25 honey_tea (Value: "undefined")
-    ✓ PASS: cookingState.recipeStats['honey_tea'] is 25 (Value: 25)
-    ✓ PASS: Total dishes cooked across rapid stress test is 50 (Value: 50)
-
-  ==================================================
-  SUMMARY OF RESULTS
-  ==================================================
-  Total Assertions: 75
-  Passed:           75
-  Failed:           0
-
-  VERDICT: PASS
-  ```
+### Table of Assertion Results:
+| # | Assertion Description | Target | Expected | Actual Result | Status |
+|---|----------------------|--------|----------|---------------|--------|
+| 1 | SHA256 Byte Equality | `game.js` vs `assets/game.js` | Identical hash | `46466cd4188c...` == `46466cd4188c...` | PASS |
+| 2 | Syntax check | `game.js` | Exit code 0 | `node -c` exited 0 | PASS |
+| 3 | Syntax check | `assets/game.js` | Exit code 0 | `node -c` exited 0 | PASS |
+| 4 | Palette `C` size | `game.js`:2115 | >= 19 | 20 keys | PASS |
+| 5 | Outline `K` color in `C` | `game.js`:2117 | `0x0F172A` | `0x0F172A` | PASS |
+| 6 | Active token usage in `C` | `game.js`:2124-2288 | 100% tokens used | 20/20 tokens present in matrices | PASS |
+| 7 | Palette `BEEHIVE_PALETTE` size | `game.js`:1399 | >= 17 | 18 keys | PASS |
+| 8 | Outline `K` color in `BEEHIVE_PALETTE` | `game.js`:1401 | `0x0F172A` | `0x0F172A` | PASS |
+| 9 | Active token usage in `BEEHIVE_PALETTE` | `game.js`:1420-1443 | 100% tokens used | 18/18 tokens present in matrix | PASS |
+| 10 | Palette `NOTICE_BOARD_PALETTE` size | `game.js`:7957 | >= 18 | Ext 18 keys (Merged 34) | PASS |
+| 11 | Outline `K` color in `NOTICE_BOARD_PALETTE` | `game.js`:7958 | `0x0F172A` | `0x0F172A` | PASS |
+| 12 | Active token usage in `NOTICE_BOARD_PALETTE` | `game.js`:7979-7996 | 100% tokens used | 18/18 tokens present in matrix | PASS |
+| 13 | Palette `PORTAL_PALETTE` size | `game.js`:8000 | >= 17 | Ext 17 keys (Merged 35) | PASS |
+| 14 | Outline `K` color in `PORTAL_PALETTE` | `game.js`:8001 | `0x0F172A` | `0x0F172A` | PASS |
+| 15 | Active token usage in `PORTAL_PALETTE` | `game.js`:8021-8050 | 100% tokens used | 17/17 tokens present in matrix | PASS |
 
 ---
 
 ## 2. Logic Chain
 
-1. **Syntax Integrity**: Executing `node -c game.js` returned code 0, confirming no syntax or parsing errors exist in `game.js`.
-2. **Bidirectional Key Resolution**: `getItemInfo` checks `ITEM_DB[keyOrId]` first, then searches values matching `val.id === keyOrId`. For both `'honey'` and `'꿀'`, the returned key is strictly `'꿀'`. This prevents inventory fragmentation across Korean and English item aliases.
-3. **Inventory Management & Capacity Enforcement**: `addItemToInventory('honey', count)` validates `qty > 0`. If `'꿀'` is already in `inventoryState.ingredients`, it stacks without adding a slot. If `'꿀'` is new, it verifies `getUsedInventorySlots() < inventoryState.maxSlots`. If capacity is exceeded, addition returns `false` and inventory remains uncorrupted.
-4. **Cooking System Integration**:
-   - `cookRecipe` validates all recipe ingredient counts in a pre-check loop before mutating state. Insufficient ingredient attempts return `false` without modifying inventory.
-   - For valid recipes (`honey_yakgwa` and `honey_tea`), ingredients are deducted via `removeItemFromInventory`, which deletes the key when count drops to zero.
-   - Rewards (+60 Gold / +50 Honor for `honey_yakgwa`, +45 Gold / +35 Honor for `honey_tea`) are awarded to `playerCurrencies`.
-   - `cookingState` and `inventoryState.cookedDishes` are updated synchronously.
-5. **Save/Load Persistence Stability**: `collectSave()` gathers state into schema v4 object; `applySave()` restores state after schema migration. 100 consecutive cycles demonstrated 0% data degradation or drift.
-6. **Legacy Migration**: Saves from schema v3 lacking explicit `cooking` state automatically reconstruct `cookingState` from `inventoryState.cookedDishes`.
+1. **SHA256 Hash Matching**: Evaluating the SHA256 hashes of `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` yielded identical 64-character hex strings (`46466cd4188c...`). This proves exact byte-level parity between root `game.js` and `assets/game.js`.
+2. **Syntax Validation**: Executing `node -c` against both files returned exit code 0 without any syntax errors, confirming valid ECMAScript syntax.
+3. **Palette Size Verification**:
+   - `C` palette defined at line 2115 contains 20 key-value pairs (threshold >= 19).
+   - `BEEHIVE_PALETTE` defined at line 1399 contains 18 key-value pairs (threshold >= 17).
+   - `NOTICE_BOARD_PALETTE` defined at line 7957 specifies 18 extension key-value pairs (merged size 34, threshold >= 18).
+   - `PORTAL_PALETTE` defined at line 8000 specifies 17 extension key-value pairs (merged size 35, threshold >= 17).
+4. **Outline Color Standardization**:
+   - Every target palette (`C`, `BEEHIVE_PALETTE`, `NOTICE_BOARD_PALETTE`, `PORTAL_PALETTE`) defines key `'K'` explicitly as `0x0F172A` (Dark Slate `#0F172A`).
+5. **Token Utilization**:
+   - Cross-referencing every character key in each palette against its target sprite matrix confirmed that 100% of defined tokens are actively rendered in the matrix strings. Zero dead/orphan tokens were detected.
 
 ---
 
 ## 3. Caveats
 
-- **No caveats**. All specified functionality was tested empirically with 100% assertion pass rate.
+- **WebGL/Phaser Runtime Rendering**: Verification was conducted empirically via Node.js AST/evaluation and hash inspection. Browser-level WebGL context initialization was not executed, but standard syntax and matrix structure validation confirm complete structural integrity.
 
 ---
 
 ## 4. Conclusion
 
-Milestone 2 implementation in `game.js` is fully verified, robust, and empirically sound.
-- **Verdict**: **PASS**
-- **Total Assertions**: 75
-- **Passed**: 75
-- **Failed**: 0
+All 15 empirical test assertions passed with 0 failures. `game.js` and `assets/game.js` satisfy all Milestone 2 NPC Sprite Polish & Upgrade requirements.
+
+**Final Verdict**: **PASS**
 
 ---
 
 ## 5. Verification Method
 
-To independently verify these results:
+To re-verify independently, execute the following commands in PowerShell from `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1`:
 
-1. Open PowerShell in `d:\Hangeul Valley`.
-2. Run syntax check:
-   ```powershell
-   node -c game.js
-   ```
-3. Run empirical test harness:
-   ```powershell
-   node .agents/teamwork_preview_challenger_m2_1/test_m2_empirical.js
-   ```
-4. Confirm output shows `VERDICT: PASS` with 75 passed assertions and 0 failures.
+```powershell
+node verify_m2.js
+node -c "d:\Hangeul Valley\game.js"
+node -c "d:\Hangeul Valley\assets\game.js"
+```
+
+Expected output:
+- `Total tests: 15`
+- `Passed: 15`
+- `Failed: 0`
+- `VERDICT: PASS`

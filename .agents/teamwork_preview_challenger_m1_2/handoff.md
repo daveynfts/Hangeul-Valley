@@ -1,113 +1,104 @@
-# Handoff Report — Milestone 1: Beehive Farm NPC & Bee Shooting Minigame Mechanics
+# Handoff Report: Milestone 1 Interaction & Non-Regression Empirical Challenger
 
-**Role**: Challenger 2 (Empirical Challenger)  
-**Target**: Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics)  
-**Status**: COMPLETE (PASS)  
+**Agent**: `teamwork_preview_challenger_m1_2`  
+**Role**: Empirical Challenger (critic / specialist)  
+**Task**: Milestone 1 Interaction & Non-Regression Empirical Challenge & Verification  
+**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2`  
 
 ---
 
 ## 1. Observation
 
-- **Command Execution & Syntax Validation**:
-  - Command: `node -c game.js`
-  - Output: Exited with code 0 (no syntax errors).
-  - Command: `node -c assets/game.js`
-  - Output: Exited with code 0 (no syntax errors).
-  - Command: `node "d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\test_m1_boundary.js"`
-  - Output:
-    ```
-    TOTAL ASSERTIONS: 49
-    PASSED ASSERTIONS: 49
-    FAILED ASSERTIONS: 0
-    VERDICT: PASS
-    ```
+Direct empirical observations obtained from static AST/code analysis and command execution:
 
-- **Code Structure Direct Inspection (`game.js`)**:
-  - `BeeScene` class definition: `class BeeScene extends Phaser.Scene` at line 10908.
-  - Phaser Scene configuration array: `scene:[FarmScene, ArcadeScene, DungeonScene, FishingScene, BeeScene]` at line 11266.
-  - Transition from `FarmScene` to `BeeScene`: Lines 9334–9338:
-    ```javascript
-    this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.pause();
-      this.scene.launch('BeeScene');
-    });
-    ```
-  - Transition from `BeeScene` to `FarmScene` (`exitMinigame`): Lines 11219–11224:
-    ```javascript
-    this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.stop();
-      this.scene.resume('FarmScene');
-    });
-    ```
-  - Accuracy Calculation Formula: Lines 11136 & 11170:
-    ```javascript
-    const accuracy = this.totalClicks > 0 ? Math.round((this.correctHits / this.totalClicks) * 100) : 100;
-    ```
-  - Pollen Particle Emitter creation: Lines 10931–10940:
-    ```javascript
-    if (this.textures.exists('p_pollen') && typeof this.add.particles === 'function') {
-      try {
-        this.pollenEmitter = this.add.particles(0, 0, 'p_pollen', { ... }).setDepth(50);
-      } catch (e) {}
-    }
-    ```
-  - Summary Modal Return Button: Lines 11204–11214:
-    ```javascript
-    const closeBtn = this.add.text(this.W / 2, this.H / 2 + 105, '[ RETURN TO FARM ]', { ... });
-    closeBtn.on('pointerdown', () => this.exitMinigame());
-    ```
+1. **Test Runner Execution**:
+   - Executed Node.js test script `test_m1_interactions.js` against `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js`.
+   - Total assertions: **27**. Passed: **27**. Failed: **0**. Overall status: **PASSED**.
+
+2. **Shop NPC (R1) Interaction & Placement**:
+   - Location: `game.js` line 9403 in `_interact()` and lines 8345–8360 in `_createShopNPC()`.
+   - Proximity Check: `Phaser.Math.Distance.Between(this.player.x, this.player.y, this.shopX, this.shopY) < 90`.
+   - Call Site: `openShop()` invoked directly inside the `< 90px` distance block.
+   - Origin: `setOrigin(0.5, 1)` confirmed.
+   - Scale: `setScale(1.3)` confirmed.
+   - Initial Depth: `setDepth(sy)` confirmed.
+   - Levitation Tween: `targets: this.shopNPC, y: sy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut'` confirmed.
+
+3. **Wizard NPC (R2) Interaction & Placement**:
+   - Location: `game.js` lines 9344–9349 in `_interact()` and lines 8392–8410 in `_createWizardNPC()`.
+   - Proximity Check: `Phaser.Math.Distance.Between(this.player.x, this.player.y, this.wizardX, this.wizardY) < 85`.
+   - Call Site: `openSpellDuel()` invoked inside the `< 85px` distance block (after zone unlock check).
+   - Origin: `setOrigin(0.5, 1)` confirmed.
+   - Scale: `setScale(1.8)` confirmed.
+   - Initial Depth: `setDepth(wy)` confirmed.
+   - Levitation Tween: `targets: this.wizardSprite, y: wy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut'` confirmed.
+
+4. **Depth Sorting**:
+   - Location: `game.js` lines 9112 & 9115 in `updateDepthSort()`.
+   - Shop NPC Depth Sort: `if (this.shopNPC) this.shopNPC.setDepth(this.shopY || this.shopNPC.y)` (uses static base ground Y anchor `this.shopY` to prevent levitation depth flicker).
+   - Wizard NPC Depth Sort: `if (this.wizardSprite) this.wizardSprite.setDepth(this.wizardY || this.wizardSprite.y)` (uses static base ground Y anchor `this.wizardY`).
+   - Player Depth Sort: `const playerBaseY = this.player.y + (this.player.displayHeight * (1 - this.player.originY)); this.player.setDepth(playerBaseY)`.
+
+5. **Syntax & Mirroring Audit**:
+   - `node -c game.js`: Code 0 (0 syntax errors).
+   - `node -c assets/game.js`: Code 0 (0 syntax errors).
+   - SHA256 Hash of `game.js`: `28626aa8aa82412b4c4415fd220327a16789cf92b40cfc690540dbfb6ed7fe18`.
+   - SHA256 Hash of `assets/game.js`: `28626aa8aa82412b4c4415fd220327a16789cf92b40cfc690540dbfb6ed7fe18` (100% byte match).
 
 ---
 
 ## 2. Logic Chain
 
-1. **Syntax Integrity**: `node -c game.js` completed with exit code 0, proving `game.js` is free of ECMAScript syntax errors.
-2. **Camera Event Binding Safety**: Observation of lines 9334–9338 and 11219–11224 shows both scene transitions bind to `'camerafadeoutcomplete'` using `.once()`. This guarantees event handlers fire exactly once upon completion of `fadeOut(300, 0, 0, 0)`, preventing double-triggering or memory leaks.
-3. **Scoring & Accuracy Mathematical Safety**:
-   - Initial state (`totalClicks === 0`) evaluates `totalClicks > 0 ? ... : 100`, producing `100` and avoiding `0 / 0` (`NaN`).
-   - 10 consecutive correct hits yields `score = 1900` (incorporating linear combo bonuses: 100, 120, 140, ..., 280), `accuracy = 100%`, `totalHoney = 7`.
-   - 5 misses followed by 5 correct hits yields `score = 700`, `accuracy = 50%`, `totalHoney = 2`.
-   - 10 consecutive misses yields `score = 0`, `accuracy = 0%`, `totalHoney = 1`.
-   - In all tested scenarios, `score >= 0` remains non-negative and `accuracy` remains a valid finite percentage in `[0, 100]`.
-4. **Particle Emitter Resilience**:
-   - Texture existence (`this.textures.exists('p_pollen')`) and API type check (`typeof this.add.particles === 'function'`) prevent crashes when particle assets or methods are missing.
-   - The `try { ... } catch (e) {}` block absorbs WebGL or initialization failures.
-   - Click-time emission is guarded by `if (this.pollenEmitter)`.
-5. **Summary Overlay Template & Return Action**:
-   - Summary template string generates formatted score, accuracy, max combo, and honey reward.
-   - `closeBtn.on('pointerdown', ...)` triggers `exitMinigame()`, initiating camera fade-out and returning control to `FarmScene`.
+1. **Observation 1 & 2**: The prompt instructed verification of `openShop()` call site and proximity check (`< 90px`) for Shop NPC.
+   - **Reasoning**: The automated test script scanned `_interact()` in `game.js` and confirmed that `openShop()` is called when `Distance.Between(player, shop) < 90`. This guarantees interaction mechanics remain intact.
+
+2. **Observation 1 & 3**: The prompt instructed verification of `openSpellDuel()` call site and proximity check (`< 85px`) for Wizard NPC.
+   - **Reasoning**: The test script confirmed `openSpellDuel()` is triggered inside `Distance.Between(player, wizard) < 85` after verifying zone unlock state.
+
+3. **Observation 2 & 3**: The prompt required origin `(0.5, 1)`, scale factors (`1.3` for Shop, `1.8` for Wizard), initial depths, and levitation tweens (`y: base - 4`, `duration: 900`, `yoyo: true`, `Sine.InOut`).
+   - **Reasoning**: The test script parsed `_createShopNPC()` and `_createWizardNPC()` and verified exact matches for origin, scale, initial depth, and tween parameters, confirming zero scene placement regressions.
+
+4. **Observation 4**: Depth sorting in `updateDepthSort()` relies on static base anchors `this.shopY` and `this.wizardY`.
+   - **Reasoning**: Using static ground Y anchors (`this.shopY` / `this.wizardY`) instead of animated sprite Y (`y - 4`) prevents flickering Y-sort ordering relative to the player during idle levitation animations.
+
+5. **Observation 5**: Non-regression requires clean syntax checks and 100% byte synchronization between `game.js` and `assets/game.js`.
+   - **Reasoning**: `node -c` succeeded on both files and SHA256 hashes matched identically (`28626aa8aa82412b4c4415fd220327a16789cf92b40cfc690540dbfb6ed7fe18`), ensuring no discrepancy exists between source files.
 
 ---
 
 ## 3. Caveats
 
-- **Phaser 3 Particle Manager Legacy Method**: On legacy Phaser 3 builds where `add.particles()` returns a `ParticleEmitterManager` without `emitParticleAt`, calling `this.pollenEmitter.emitParticleAt(...)` throws a `TypeError`. Standard modern Phaser 3.60+ builds are unaffected.
-- **Visual Presentation**: Tests were run empirically via Node.js headless AST/simulation harness (`test_m1_boundary.js`). WebGL rendering in live browser canvas was not visually benchmarked.
+- **No Caveats**: All 27 empirical test assertions across interaction triggers, proximity thresholds, origin/scale factors, levitation tweens, depth updates, node syntax, and SHA256 file mirroring passed cleanly without errors or warnings.
 
 ---
 
 ## 4. Conclusion
 
-- **Verdict**: **PASS**
-- The implementation of Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame) in `game.js` is empirically verified. All 49 test assertions in `test_m1_boundary.js` passed without error.
+Milestone 1 Interaction & Non-Regression Empirical Verification is **COMPLETE and APPROVED**.
+- All 27 assertions in `test_m1_interactions.js` passed.
+- `openShop()` `< 90px` and `openSpellDuel()` `< 85px` triggers are verified intact.
+- Origin settings `(0.5, 1)`, scale factors `1.3` / `1.8`, levitation tweens, and static-anchor depth sorting in `updateDepthSort()` are fully preserved.
+- Syntax validation passes with 0 errors and SHA256 mirroring between `game.js` and `assets/game.js` is 100% in sync.
 
 ---
 
 ## 5. Verification Method
 
-To independently verify these findings, run the following commands from `d:\Hangeul Valley`:
+To independently re-verify:
 
-```bash
-# 1. Verify JS syntax of game.js
-node -c game.js
+1. **Run Test Harness Script**:
+   ```powershell
+   node "d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\test_m1_interactions.js"
+   ```
+   Must output: `Total Assertions: 27`, `Passed Assertions: 27`, `Failed Assertions: 0`, `Verdict: SUCCESS (ALL PASSED)`.
 
-# 2. Run the empirical boundary and stress test harness (49 assertions)
-node "d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\test_m1_boundary.js"
-```
+2. **Run Syntax Check**:
+   ```powershell
+   node -c game.js
+   node -c assets/game.js
+   ```
 
-Files to inspect:
-- `d:\Hangeul Valley\game.js` (lines 10908–11225)
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\test_m1_boundary.js`
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\analysis.md`
+3. **Run SHA256 Sync Verification**:
+   ```powershell
+   node -e "const fs=require('fs'), c=require('crypto'); const h1=c.createHash('sha256').update(fs.readFileSync('game.js')).digest('hex'); const h2=c.createHash('sha256').update(fs.readFileSync('assets/game.js')).digest('hex'); console.log(h1 === h2 ? 'MATCH: ' + h1 : 'MISMATCH');"
+   ```

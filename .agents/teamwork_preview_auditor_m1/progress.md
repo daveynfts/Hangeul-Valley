@@ -1,12 +1,14 @@
-# Progress Log - Milestone 1 Forensic Audit
+# Audit Progress
 
-Last visited: 2026-07-24T14:30:45Z
+Last visited: 2026-07-24T14:54:25Z
 
-- [x] Workspace initialized (`ORIGINAL_REQUEST.md`, `BRIEFING.md`, `progress.md`)
-- [x] Phase 1: Source code analysis (`game.js`, `assets/game.js`)
-  - [x] Texture generation check (`_genBeehiveTextures`, `_genBeeTextures`)
-  - [x] Overworld Beehive NPC check (`_createBeehiveNPC`, buzzing, particles, interaction)
-  - [x] Minigame scene check (`BeeScene`, trajectory math, hit detection, scoring/accuracy, word selection)
-  - [x] Prohibited patterns & cheat check
-- [x] Phase 2: Syntax and behavior checks (`node -c game.js`, `node -c assets/game.js`, SHA256 hashes)
-- [x] Phase 3: Final verdict, `audit_report.md` & `handoff.md` generation, message to orchestrator
+- [x] Initialized audit environment & briefing
+- [x] Read specs & worker handoff report
+- [x] Run syntax validation (`node -c game.js` and `node -c assets/game.js`)
+- [x] Verify SHA256 synchronization between `game.js` and `assets/game.js`
+- [x] Inspect sprite matrix definitions and palette structures (`PixelArtRenderer.WIZ_0`, `PixelArtRenderer.WIZ_1`, `shop_sign`, `SHOP_PALETTE`, `W_PAL`)
+- [x] Static code analysis for hardcoded test returns, facade functions, or bypassed render calls
+- [x] Verify shop render logic and wizard idle animation timing
+- [x] Draft adversarial review challenges
+- [x] Write `audit.md` and `handoff.md`
+- [x] Send summary message to parent

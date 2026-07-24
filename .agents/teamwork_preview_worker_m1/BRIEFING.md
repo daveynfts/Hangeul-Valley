@@ -1,51 +1,54 @@
-# BRIEFING — 2026-07-24T21:27:21Z
+# BRIEFING — 2026-07-24T21:50:45+07:00
 
 ## Mission
-Implement Beehive Farm NPC and Bee Shooting Vocabulary Minigame Mechanics (Milestone 1).
+Upgrade Shop NPC (R1) and Wizard NPC (R2) sprite matrices and color palettes in game.js, validate syntax, mirror to assets/game.js, and document work. [COMPLETED]
 
 ## 🔒 My Identity
-- Archetype: implementer/qa/specialist
+- Archetype: implementer / qa / specialist
 - Roles: implementer, qa, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_worker_m1
-- Original parent: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
-- Milestone: Milestone 1 - Beehive Farm NPC & Bee Shooting Minigame Mechanics
+- Original parent: 91abe837-7e50-404d-9abd-f03869cb92e7
+- Milestone: Milestone 1
 
 ## 🔒 Key Constraints
-- CODE_ONLY network mode: No external network calls.
-- DO NOT CHEAT. Genuine implementation with real state and mechanics.
-- Follow minimal change principle and verify syntax with `node -c game.js`.
+- Minimal change principle.
+- Retain texture key names, origins, scale, tween, depth sorting, trigger logic intact.
+- Must pass `node -c game.js` and `node -c assets/game.js` with 0 errors.
+- SHA256 hashes of `game.js` and `assets/game.js` must match 100%.
+- Genuine implementations only, no hardcoded cheating.
 
 ## Current Parent
-- Conversation ID: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
-- Updated: 2026-07-24T21:27:21Z
+- Conversation ID: 91abe837-7e50-404d-9abd-f03869cb92e7
+- Updated: 2026-07-24T21:50:45+07:00
 
 ## Task Summary
-- **What to build**: Beehive NPC on Farm Map + Bee Shooting Vocabulary Minigame Scene (`BeeScene`).
-- **Success criteria**: Functional beehive NPC with buzzing animation & tiny bees, interaction prompt, fade transitions, `BeeScene` with top HUD, trajectory types (linear, sine wave, zigzag), target/distractor Korean words, hit handling, score/combo calculation, end-of-round retro glassmorphism overlay, return transition to `FarmScene`, syntax checks (`node -c game.js`) pass.
+- **What to build**: Shop NPC & Wizard NPC sprite upgrades in `game.js`.
+- **Success criteria**:
+  - Shop NPC `'shop_sign'`: expanded grid (18x22), Korean merchant character with hat, warm expression, multi-tone hanbok vest/apron, wooden counter, shiny gold coins (`Y`), 1px dark outlines (`K`), 18 unique color tokens (Pass).
+  - Wizard NPC `W_PAL` & matrices (`wiz_0`, `wiz_1`, `gwiz`): 32 color tokens, 16x20 matrices, fabric shading, gold embroidery, beard gradients, glowing cyan staff orb, magical aura sparkles, 1px dark outlines (`K`) (Pass).
+  - `node -c` clean pass on `game.js` and `assets/game.js` (Pass).
+  - Exact file sync (SHA256 match: `28626aa8aa82412b4c4415fd220327a16789cf92b40cfc690540dbfb6ed7fe18`) (Pass).
 - **Interface contracts**: `PROJECT.md`
-- **Code layout**: `game.js`
+- **Code layout**: `game.js` and `assets/game.js`
 
 ## Change Tracker
-- **Files modified**:
-  - `game.js`: Added `_genBeehiveTextures`, `_genBeeTextures`, `_createBeehiveNPC`, `getUnlockedWords()`, `BeeScene` class, and registered `BeeScene` in `config.scene`.
-  - `assets/game.js`: Synchronized with `game.js`.
-  - `assets/index.html`: Synchronized with `index.html`.
-- **Build status**: `node -c game.js` and `node -c assets/game.js` completed with 0 errors.
-- **Pending issues**: None. All tasks completed.
+- **Files modified**: `game.js`, `assets/game.js`
+- **Build status**: `node -c game.js` and `node -c assets/game.js` passed with 0 errors. SHA256 matched.
+- **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**:
-  - `test_m1_challenger_harness.js`: 49/49 PASSED.
-  - `verify_m1.js`: 21/21 PASSED.
-- **Lint/Syntax status**: Passed (0 syntax errors).
-- **Tests added/modified**: `verify_m1.js` empirical test script.
+- **Build/test result**: Pass (0 errors)
+- **Lint status**: Pass
+- **Tests added/modified**: Syntax & SHA256 validation tests executed.
 
 ## Loaded Skills
 - None
 
+## Key Decisions Made
+- Defined `PixelArtRenderer.W_PAL`, `PixelArtRenderer.WIZ_0`, `PixelArtRenderer.WIZ_1` as static class properties for clean shared access across `_genNpcTextures(scene)` and `_bakeTextures()`.
+- Created `SHOP_PALETTE` extending `DECOR_PALETTE` with 18 unique colors for Korean merchant Shop NPC.
+
 ## Artifact Index
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\ORIGINAL_REQUEST.md` — Original worker request
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\progress.md` — Progress log
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md` — Change report
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\ORIGINAL_REQUEST.md` — User request log
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md` — Implementation notes
 - `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\handoff.md` — Handoff report
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\verify_m1.js` — Empirical test verification script

@@ -1,33 +1,46 @@
-## 2026-07-24T14:32:03Z
-You are Worker for Milestone 2 (Honey Rewards, Cooking Integration & Save/Load Persistence).
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2`.
-Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your changes report to `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\changes.md` and `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md`.
+## 2026-07-24T14:58:01Z
+<USER_REQUEST>
+You are teamwork_preview_worker_m2.
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2`. Please write your implementation notes to `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\changes.md` and your handoff to `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md`.
 
-Read the handoff reports from the 3 M2 Explorers:
-- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1\handoff.md` and `analysis.md`
-- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\handoff.md` and `analysis.md`
-- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_3\handoff.md` and `analysis.md`
+Target Scope: Milestone 2 - Cat NPC (R3), Notice Board & Portal (R4), and Beehive (R5) Sprite Polish & Upgrade.
+
+Read Explorer handoff reports:
+- Cat NPC Explorer Handoff: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1\handoff.md`
+- Board & Portal Explorer Handoff: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\handoff.md`
+- Beehive Explorer Handoff: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_3\handoff.md`
+- Project Specs: `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`
 
 MANDATORY INTEGRITY WARNING:
 DO NOT CHEAT. All implementations must be genuine. DO NOT hardcode test results, create dummy/facade implementations, or circumvent the intended task. A Forensic Auditor will independently verify your work. Integrity violations WILL be detected and your work WILL be rejected.
 
-Your Tasks for Milestone 2:
-1. **R3. Honey Inventory Registration & Minigame Reward Granting**:
-   - Register Honey (`'꿀'`) in `ITEM_DB` in `game.js`:
-     `'꿀': { id: 'honey', name: 'Honey', nameKo: '꿀', icon: '🍯', type: 'ingredient', description: 'Sweet golden honey harvested from the beehive.' }`
-   - In `BeeScene.showResultsSummary()` (around lines ~11165-11215 in `game.js`), invoke `addItemToInventory('honey', totalHoney)` upon round completion so that earned Honey is added to player's inventory. Show toast notification `showToast('🍯 + ' + totalHoney + ' Honey added to inventory!')`.
+Implementation Tasks:
+1. **Cat NPC Muop (R3)**:
+   - In `game.js`, locate `PixelArtRenderer` static `CAT_PAL` / `C` dictionary and `cat_0` & `cat_1` matrices, plus `FarmScene._bakeTextures()` `gcat` bake.
+   - Upgrade palette to 19 color tokens (ginger fur, white chest fluff, eye green with catchlight `W`, slate 1px dark outlines `K = 0x0F172A`).
+   - Update `cat_0` and `cat_1` matrices to feature forehead M-mark, tabby flank stripes, expressive eyes with catchlights, and frame-to-frame tail-swish idle animation.
+   - Ensure all defined palette tokens are actively used in the matrices.
+   - Retain origin `(0.5, 1)`, scale `0.75`, depth sorting, shadow anchor, proximity check (65px), and `showCatDialog()` modal trigger.
 
-2. **R3. Cooking System Integration**:
-   - Add authentic Korean recipes requiring Honey to `COOKING_RECIPES` in `game.js` (around lines ~11752-11894):
-     - **Honey Yakgwa (꿀약과)**: `id: 'honey_yakgwa'`, `nameEn: 'Honey Yakgwa'`, `nameKo: '꿀약과'`, `icon: '🥮'`, `description: 'Traditional Korean honey pastry made with wheat, honey, and sesame oil.'`, `ingredients: [{ itemId: 'honey', count: 2 }, { itemId: 'cabbage', count: 1 }]` (or available crop ingredient), `xpReward: 50`, `goldReward: 60`.
-     - **Honey Tea (꿀차)**: `id: 'honey_tea'`, `nameEn: 'Honey Tea'`, `nameKo: '꿀차'`, `icon: '🍵'`, `description: 'Warm soothing tea sweetened with fresh natural honey.'`, `ingredients: [{ itemId: 'honey', count: 2 }]`, `xpReward: 35`, `goldReward: 45`.
+2. **Notice Board & Dungeon Portal (R4)**:
+   - In `game.js`, locate `_bakeTextures()` for `'notice_board'` and `'dungeon_portal'`.
+   - Upgrade `'notice_board'` matrix from 6 to 18 color tokens with 1px dark slate outlines, detailed wood grain texture, pinned paper notes with visible text marks, red pushpins, and warm hanging lantern glow.
+   - Upgrade `'dungeon_portal'` matrix from 4 to 17 color tokens with 1px dark slate outlines, multi-tone stone arch, glowing ancient runes (cyan, pink, amber gold), cosmic blue swirl core, white hot energy flash, and pulsing glow particles.
+   - Ensure all defined palette tokens are actively used in the matrices.
+   - Retain origin `(0.5, 1)`, scales, depth sorting, `openMemoryGame()` overlay trigger, and `DungeonScene` transition trigger.
 
-3. **R4. Save/Load Persistence & Scene State**:
-   - Verify `collectSave()` serializes `inventoryState` (including `inventoryState.ingredients['꿀']`) and `cookingState` (cooked recipes).
-   - Verify `applySave(saveData)` correctly restores inventory state and ingredients including `'꿀'`.
-   - Ensure scene transitions between `FarmScene` and `BeeScene` preserve player position, inventory state, and game clock.
+3. **Beehive (R5)**:
+   - In `game.js`, locate `_genBeehiveTextures` / `_bakeTextures()` for `'beehive'`.
+   - Upgrade `'beehive'` matrix from 8 to 17 color tokens with 1px dark slate outlines (`K = 0x0F172A`), visible honeycomb surface micro-texture, 6-tier straw skep shading, glossy dripping honey droplets with specular catchlights, and multi-tone wooden base.
+   - Ensure all defined palette tokens are actively used in the matrix.
+   - Retain placement `(bx, by)`, origin `(0.5, 1)`, scale `1.6`, drop shadow, proximity check (<85px), and `enterBeeScene()` trigger.
 
-4. **Syntax & Verification**:
-   - Run `node -c game.js` in terminal. Must complete with 0 errors.
+4. **Syntax Check & Sync**:
+   - Run `node -c game.js` via run_command. Must pass with 0 syntax errors.
+   - Copy `game.js` to `assets/game.js`.
+   - Run `node -c assets/game.js`.
+   - Verify SHA256 hashes match 100%.
 
-Report your exact code modifications, build/syntax results, and handoff report. Send a message back to Project Orchestrator when done.
+5. Document all changes and verification outputs in `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md`.
+
+</USER_REQUEST>

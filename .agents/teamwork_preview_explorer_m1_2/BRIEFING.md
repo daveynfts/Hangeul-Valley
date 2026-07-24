@@ -1,41 +1,35 @@
-# BRIEFING — 2026-07-24T14:25:00Z
+# BRIEFING — 2026-07-24T14:49:10Z
 
 ## Mission
-Investigate Phaser scene architecture in `game.js`, procedural pixel art texture generation for bees, flight trajectory algorithms, hit detection/visuals/audio/gameplay mechanics, and design the `BeeScene` implementation for Milestone 1.
+Analyze Wizard NPC Sprite Polish & Upgrade (R2) in `game.js` for Milestone 1.
 
 ## 🔒 My Identity
-- Archetype: Explorer
-- Roles: Read-only investigator & synthesizer
+- Archetype: explorer
+- Roles: Teamwork explorer
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2
-- Original parent: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
-- Milestone: Milestone 1 (BeeScene Minigame & Bee Flight Mechanics)
+- Original parent: 91abe837-7e50-404d-9abd-f03869cb92e7
+- Milestone: Milestone 1 - Wizard NPC Sprite Polish & Upgrade (R2)
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT modify game source code files
-- Create reports in working directory: `analysis.md` and `handoff.md`
-- Maintain heartbeat in `progress.md`
+- Read-only investigation — do NOT implement code in game.js
+- Deliver analysis.md and handoff.md in d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2
 
 ## Current Parent
-- Conversation ID: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
-- Updated: 2026-07-24T14:25:00Z
+- Conversation ID: 91abe837-7e50-404d-9abd-f03869cb92e7
+- Updated: 2026-07-24T14:49:10Z
 
 ## Investigation State
-- **Explored paths**: `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md`, `d:\Hangeul Valley\game.js`, `d:\Hangeul Valley\levels.json`
-- **Key findings**: 
-  1. Identified Phaser Scene construction in `game.js` (`FarmScene`, `ArcadeScene`, `DungeonScene`, `FishingScene`).
-  2. Defined registration in `config.scene` array.
-  3. Designed procedural texture matrices for bees (`bee_fly_0`, `bee_fly_1`, `p_pollen`, `p_honey_drip`) in `PixelArtRenderer`.
-  4. Formulated 3 flight trajectory algorithms (linear, sine wave, zigzag).
-  5. Designed container-based entity system, interactive pointer detection, Korean text labels, chiptune audio triggers (`quiz_correct`, `quiz_wrong`), visual feedback, and 10-word round flow.
-  6. Verified syntax with `node -c game.js` (0 errors).
+- **Explored paths**: `game.js`, `PROJECT.md`, `ORIGINAL_REQUEST.md`
+- **Key findings**: Baseline Wizard NPC uses 18 unique fill color tokens in `W_PAL` / `wiz_0` / `wiz_1` matrices and 13 colors in `gwiz`. Upgraded blueprint expands `W_PAL` to 32 color tokens, 16x20 matrix size, fabric fold shading, gold star / crescent moon embroidery, glowing cyan staff orb with floating particle highlights, 5-tone beard gradient, magical purple/cyan aura, and 1px dark outlines (`0x121016`). Zero regression verified for collision, depth sorting, levitation tween, and Spell Duel interaction (<85px distance).
 - **Unexplored areas**: None.
 
 ## Key Decisions Made
-- Delivered full architectural report in `analysis.md` and 5-component handoff report in `handoff.md`.
+- Completed read-only investigation for Milestone 1 - Wizard NPC Sprite Polish & Upgrade (R2).
+- Produced comprehensive `analysis.md` and 5-component `handoff.md`.
 
 ## Artifact Index
-- ORIGINAL_REQUEST.md — Original user request
-- BRIEFING.md — Context and working memory
-- progress.md — Heartbeat and step log
-- analysis.md — Detailed investigation report & implementation blueprint
-- handoff.md — 5-component handoff report
+- ORIGINAL_REQUEST.md — Original task prompt
+- BRIEFING.md — Persistent briefing memory
+- progress.md — Liveness heartbeat log
+- analysis.md — Detailed technical analysis and upgrade specifications
+- handoff.md — 5-Component handoff report for implementer

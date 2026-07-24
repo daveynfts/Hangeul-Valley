@@ -1,12 +1,15 @@
-## 2026-07-24T13:27:47Z
-You are Forensic Auditor for Milestone 1 Re-audit (Ground Drop Persistence Fix).
-Your working directory for metadata is `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m1_fix`.
-Project root is `d:\Hangeul Valley`.
+## 2026-07-24T14:55:54Z
+<USER_REQUEST>
+You are teamwork_preview_auditor_m1_fix.
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m1_fix`. Write your audit report to `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m1_fix\audit.md` and handoff to `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m1_fix\handoff.md`.
 
-Perform forensic audit on `game.js`, `index.html`, `assets/game.js`, and `assets/index.html`:
-1. Verify exact SHA256 byte-for-byte synchronization between `game.js` <-> `assets/game.js` and `index.html` <-> `assets/index.html`.
-2. Run `node -c game.js` and `node -c assets/game.js` to verify syntax (0 errors).
-3. Confirm authentic, non-cheating implementation of `droppedItemsSave` buffering and restoration.
+Target Scope: Milestone 1 Final Forensic Integrity Audit.
+Read Worker Fix handoff: `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1_fix\handoff.md`.
 
-Deliver verdict CLEAN or VIOLATION.
-Write audit report to `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m1_fix\audit.md` and send message to orchestrator.
+Tasks:
+1. Examine `game.js` and `assets/game.js` to ensure the fixes are authentic pixel art corrections with no stubs, hardcoded test logic, or facade patterns.
+2. Confirm `node -c game.js` and `node -c assets/game.js` pass with exit code 0.
+3. Confirm 100% SHA256 byte match between `game.js` and `assets/game.js`.
+4. Issue final verdict: CLEAN or INTEGRITY VIOLATION.
+
+</USER_REQUEST>

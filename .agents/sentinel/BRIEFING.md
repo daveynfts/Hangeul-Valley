@@ -1,24 +1,22 @@
-# BRIEFING — 2026-07-24T21:23:30Z
+# BRIEFING — 2026-07-24T15:04:00Z
 
 ## Mission
-Add Beehive structure on farm map, Bee Shooting Korean vocabulary minigame scene, Honey items/rewards, and Cooking recipe integration with persistence.
+Monitor project orchestrator progress, run cron status scans, and spawn Victory Auditor upon completion of NPC sprite polish.
 
 ## 🔒 My Identity
 - Archetype: sentinel
 - Working directory: d:\Hangeul Valley\.agents\sentinel
-- Orchestrator: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
-- Victory Auditor: 56d97759-5335-40e5-b825-25ff99bf26ba
+- Orchestrator: 271beac4-82f5-4128-b9b0-62d62497fc69
+- Victory Auditor: 9003078d-2aa2-4b7f-8459-cadb7f069d98
 
 ## 🔒 Key Constraints
 - No technical decisions — relay only
 - Victory Audit is MANDATORY before reporting completion
-- node -c game.js and node -c assets/game.js pass with 0 syntax errors
-- SHA256 byte synchronization verified between game.js & assets/game.js, and index.html & assets/index.html
 
 ## User Context
-- **Last user request**: Add Beehive NPC/structure on farm map with animated buzzing and SPACE interaction, create Phaser BeeScene for shooting bees carrying Korean vocab matching top English word, award Honey scaling with score/accuracy, register Honey as cooking ingredient with at least 1 new recipe requiring Honey, and persist Beehive/Honey data with proper scene transitions.
+- **Last user request**: Polish and upgrade all NPC sprites in Hangeul Valley (Shop NPC, Wizard NPC, Cat NPC, Notice Board & Portal, Beehive).
 - **Pending clarifications**: none
-- **Delivered results**: none for current request
+- **Delivered results**: All NPC sprites upgraded with rich pixel art detail, multi-tone shading, specular highlights, micro-animations, 1px dark outlines, color token count increases, zero syntax errors, and 100% SHA256 file synchronization. Verified clean by independent Victory Audit.
 
 ## Project Status
 - **Phase**: complete
@@ -29,6 +27,7 @@ Add Beehive structure on farm map, Bee Shooting Korean vocabulary minigame scene
 - **Retry count**: 0
 
 ## Artifact Index
-- ORIGINAL_REQUEST.md — Verbatim record of user requests
-- .agents/sentinel/BRIEFING.md — Sentinel briefing
-- .agents/sentinel/handoff.md — Sentinel handoff
+- d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md — Verbatim user request
+- d:\Hangeul Valley\.agents\sentinel\BRIEFING.md — Sentinel state briefing
+- d:\Hangeul Valley\.agents\sentinel\handoff.md — Sentinel final handoff report
+- d:\Hangeul Valley\.agents\auditor\handoff.md — Victory Auditor final audit report

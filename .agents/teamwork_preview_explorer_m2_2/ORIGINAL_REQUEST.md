@@ -1,15 +1,18 @@
-## 2026-07-24T21:31:05Z
-You are Explorer 2 for Milestone 2 (Cooking Recipe Integration).
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2`.
-Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\handoff.md`.
+## 2026-07-24T14:56:50Z
+<USER_REQUEST>
+You are teamwork_preview_explorer_m2_2.
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2`. Write your analysis to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\analysis.md` and handoff to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\handoff.md`.
 
-Read `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\game.js`.
+Target Scope: Milestone 2 - Notice Board & Portal NPC Polish & Upgrade (R4).
+Read project specs: `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`.
 
-Investigate the following areas in `game.js`:
-1. How `COOKING_RECIPES` array is defined in `game.js` (around lines ~4000-5000).
-2. How ingredients are specified in recipes (`ingredients: [{ itemId: 'honey', count: 2 }, ...]`), checked against inventory, and deducted when cooked.
-3. How cooking recipes are displayed in the Cooking Modal UI (`index.html` / `game.js`), including icon, Korean name, English name, required ingredients, and buff/XP/gold rewards.
-4. How to add at least 1 authentic Korean cooking recipe requiring Honey (e.g. Honey Yakgwa 🥮 / 꿀약과, Honey Tea 🍵 / 꿀차, or Honey Glazed Goods 🍯).
-5. Syntax check command: `node -c game.js`.
+Objectives:
+1. Locate all code in `game.js` responsible for baking/rendering the Notice Board sprite and Dungeon Portal NPC sprite.
+2. Count baseline color tokens for Notice Board and Portal sprites.
+3. Detail upgrade strategy:
+   - Notice Board: wood grain detail, pinned paper notes with visible text marks, warm lantern glow effect, 1px dark outlines, increased color tokens.
+   - Portal: richer magical rune detail, swirling energy core, pulsing glow particles, 1px dark outlines, increased color tokens.
+4. Verify board overlay trigger and portal transition mechanics to ensure 0 regression.
+5. Provide exact line numbers, code structure, and upgrade recommendation.
 
-Synthesize your findings and provide a detailed implementation plan for Cooking Recipe Integration. Deliver your handoff report and send a message back to the Project Orchestrator when complete.
+</USER_REQUEST>

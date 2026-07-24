@@ -1,51 +1,47 @@
-# BRIEFING — 2026-07-24T21:29:30+07:00
+# BRIEFING — 2026-07-24T21:51:40Z
 
 ## Mission
-Empirical verification and edge-case challenge testing for Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics).
+Empirically challenge and verify Milestone 1 interaction triggers, depth sorting, and scene placement in game.js by building and running an automated Node.js test harness.
 
 ## 🔒 My Identity
-- Archetype: EMPIRICAL CHALLENGER
+- Archetype: Empirical Challenger
 - Roles: critic, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2
-- Original parent: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
-- Milestone: Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics)
-- Instance: Challenger 2
+- Original parent: 91abe837-7e50-404d-9abd-f03869cb92e7
+- Milestone: Milestone 1
+- Instance: 1 of 1
 
 ## 🔒 Key Constraints
-- Review-only — do NOT modify implementation code
-- Empirically verify camera transition event bindings, 10-word round scoring / accuracy edge cases, particle emitter configuration safety, DOM summary overlay & return button binding
-- Execute `node -c game.js` and `test_m1_boundary.js`
-- Deliver empirical findings in `analysis.md` and `handoff.md`
+- Must run verification code directly (Node.js test harness script). Do NOT trust unverified claims.
+- Report results to results.md and handoff to handoff.md in d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2.
+- Report test outcome via send_message to parent.
 
 ## Current Parent
-- Conversation ID: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
-- Updated: 2026-07-24T21:29:30+07:00
-
-## Review Scope
-- **Files to review**: `game.js`
-- **Interface contracts**: Bee Shooting Minigame Scene / Camera transition events, Scoring & Accuracy formulas, Particle Emitter API compatibility, Summary Overlay & DOM binding
-- **Review criteria**: Empirical test verification, non-negative scores, NaN prevention, division by zero prevention, camera lifecycle, particle emitter robustness
+- Conversation ID: 91abe837-7e50-404d-9abd-f03869cb92e7
+- Updated: 2026-07-24T21:51:40Z
 
 ## Attack Surface
-- **Hypotheses tested**:
-  - Camera transition event bindings (`fadeOut`, `camerafadeoutcomplete`, `pause`, `resume`, `launch`, `stop`) -> Confirmed robust, uses `.once()` properly.
-  - 10-word round scoring & accuracy formula edge cases (0 clicks, 10 hits, 5 miss + 5 hit, 10 misses) -> Confirmed non-negative scores, no division by zero or NaN.
-  - Particle emitter configuration safety across Phaser variants -> Confirmed guarded with `add.particles` function check & `try-catch`. Identified minor legacy method check recommendation.
-  - DOM / overlay summary template & return button event binding -> Confirmed formatting and pointerdown binding.
-- **Vulnerabilities found**: None breaking. Minor recommendation: add optional chaining / method check for `this.pollenEmitter?.emitParticleAt?.(...)`.
-- **Untested angles**: None.
+- **Hypotheses tested**: Interaction triggers (openShop < 90px, openSpellDuel < 85px), origin (0.5, 1), scales (1.3, 1.8), levitation tweens (y: base-4, 900ms, Sine.InOut), depth sorting in updateDepthSort using static anchors, syntax checks, and SHA256 file mirror.
+- **Vulnerabilities found**: 0 (all 27 assertions passed).
+- **Untested angles**: None within M1 scope.
 
 ## Loaded Skills
-None loaded.
+- None.
+
+## Review Scope
+- **Files to review**: `game.js`, `assets/game.js`, `PROJECT.md`, `handoff.md` (worker)
+- **Interface contracts**: PROJECT.md specifications
+- **Review criteria**: Empirical Node.js static analysis and non-regression verification.
 
 ## Key Decisions Made
-- Executed node syntax check `node -c game.js` (exited 0).
-- Created and executed empirical test harness `test_m1_boundary.js` (49/49 assertions passed).
-- Written `analysis.md` and `handoff.md` in `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2`.
+- Executed `test_m1_interactions.js` test harness with 27 assertions covering all requirements.
+- Confirmed depth sorting in `updateDepthSort()` uses static ground Y anchors (`this.shopY`, `this.wizardY`) to prevent levitation flickering.
+- Verified SHA256 sync (`28626aa8aa82412b4c4415fd220327a16789cf92b40cfc690540dbfb6ed7fe18`).
 
 ## Artifact Index
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\ORIGINAL_REQUEST.md` — Task prompt
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\progress.md` — Heartbeat
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\test_m1_boundary.js` — Empirical test script (49 assertions)
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\analysis.md` — Empirical challenge report
-- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\handoff.md` — Handoff report
+- `ORIGINAL_REQUEST.md` — Original request details
+- `BRIEFING.md` — Working context briefing
+- `test_m1_interactions.js` — Automated Node.js test runner script
+- `test_output.json` — Structured JSON output of assertion results
+- `results.md` — Test harness results and assertion ledger
+- `handoff.md` — Final handoff report

@@ -1,20 +1,21 @@
-## 2026-07-24T14:38:14Z
+## 2026-07-24T15:00:08Z
+
 <USER_REQUEST>
-You are Worker for Milestone 3 (Dual-File Synchronization & Syntax Verification).
+You are Worker M3 for Milestone 3 of Hangeul Valley NPC Sprite Polish & Upgrade.
 Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_worker_m3`.
-Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your changes report to `d:\Hangeul Valley\.agents\teamwork_preview_worker_m3\changes.md` and `d:\Hangeul Valley\.agents\teamwork_preview_worker_m3\handoff.md`.
 
-MANDATORY INTEGRITY WARNING:
-DO NOT CHEAT. All implementations must be genuine. DO NOT hardcode test results, create dummy/facade implementations, or circumvent the intended task. A Forensic Auditor will independently verify your work. Integrity violations WILL be detected and your work WILL be rejected.
-
-Your Tasks for Milestone 3:
-1. Copy `d:\Hangeul Valley\game.js` to `d:\Hangeul Valley\assets\game.js` so that `game.js` and `assets/game.js` are 100% byte-identical.
-2. Copy `d:\Hangeul Valley\index.html` to `d:\Hangeul Valley\assets\index.html` so that `index.html` and `assets/index.html` are 100% byte-identical.
-3. Compute SHA256 hashes of `game.js`, `assets/game.js`, `index.html`, `assets/index.html` to verify exact matching.
-4. Run syntax checks on both JS files:
-   - `node -c game.js`
-   - `node -c assets/game.js`
-   Both must pass with exit code 0 and 0 syntax errors.
-
-Report SHA256 hashes, file sizes, syntax test outputs, and handoff report. Send a message back to Project Orchestrator when done.
+Your task:
+1. Create your working directory `d:\Hangeul Valley\.agents\teamwork_preview_worker_m3` and initialize state/progress files.
+2. Synchronize mirror files:
+   - Copy `d:\Hangeul Valley\game.js` to `d:\Hangeul Valley\assets\game.js`.
+   - Copy `d:\Hangeul Valley\index.html` to `d:\Hangeul Valley\assets\index.html` (if `index.html` exists).
+3. Run syntax validation:
+   - `node -c d:\Hangeul Valley\game.js`
+   - `node -c d:\Hangeul Valley\assets\game.js`
+4. Calculate and compare SHA256 hashes of:
+   - `game.js` vs `assets/game.js`
+   - `index.html` vs `assets/index.html`
+5. Verify 100% SHA256 hash match between root and asset mirror files.
+6. Write your handoff report to `d:\Hangeul Valley\.agents\teamwork_preview_worker_m3\handoff.md`.
+7. Send a message to orchestrator (`271beac4-82f5-4128-b9b0-62d62497fc69`) with the verification results, syntax check outputs, and SHA256 hashes.
 </USER_REQUEST>

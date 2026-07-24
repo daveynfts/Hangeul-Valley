@@ -212,6 +212,88 @@ const STARDEW_PALETTE = {
 // ═══════════════ PIXEL ART RENDERER & CHARACTER SYSTEM ═══════════════════════
 
 class PixelArtRenderer {
+  static W_PAL = {
+    '.': null,
+    'K': 0x0F172A, // 1px Dark Slate Outline
+    'k': 0x1E1B4B, // Deep shadow outline
+    'p': 0xC084FC, // Bright lavender highlight
+    'P': 0xA855F7, // Robe highlight purple
+    'h': 0x8B5CF6, // Robe base purple
+    'H': 0x7C3AED, // Robe mid purple
+    'v': 0x6D28D9, // Robe deep purple
+    'V': 0x4C1D95, // Robe shadow purple
+    'u': 0x3B0764, // Robe darkest fold shadow
+    'm': 0xFDE047, // Bright gold embroidery star/moon highlight
+    'M': 0xF59E0B, // Gold embroidery midtone
+    'y': 0xD97706, // Gold embroidery shadow
+    'Y': 0xB45309, // Gold embroidery deep shadow
+    'W': 0xFFFFFF, // Pure white beard highlight / aura glint
+    'w': 0xF8FAFC, // Soft white beard top
+    'd': 0xE2E8F0, // Light gray beard midtone
+    'D': 0xCBD5E1, // Silver gray beard body
+    'b': 0x94A3B8, // Blue-gray beard shadow
+    'B': 0x64748B, // Deep beard shadow
+    'S': 0x92400E, // Staff light wood
+    's': 0x78350F, // Staff base wood
+    'z': 0x451A03, // Staff dark wood shadow
+    'q': 0xE0F2FE, // Orb core brilliant white-cyan
+    'Q': 0xA5F3FC, // Orb inner glow cyan
+    'c': 0x38BDF8, // Orb bright cyan
+    'C': 0x0284C7, // Orb deep cyan
+    'e': 0x0369A1, // Orb shadow cyan
+    'a': 0xE9D5FF, // Mystical aura light purple sparkle
+    'A': 0x67E8F9, // Mystical aura cyan sparkle
+    'f': 0xFDE68A, // Star sparkle gold
+    'X': 0xFFDDAD, // Skin peach
+    'x': 0xC87858  // Skin shadow
+  };
+
+  static WIZ_0 = [
+    '.......KfmK.....',
+    '......KphhPK....',
+    '.....KphHHHhK...',
+    '....KphHHHHHhK.a',
+    '...KphHHHHHHHhK.',
+    '..KpvVVVVVVVVvpK',
+    '..KmMMMyyMMMMMmK',
+    '....KXxXKKXxXK.A',
+    '....KwwWWwwwwK.q',
+    '....KddDBBDddK.Q',
+    '...KphHHDDbHHhKc',
+    '..KphHHmMMmHHhKC',
+    '..KphHHvVVvHHhKs',
+    '..KphHHvVVvHHhKS',
+    '.KphHHHvVVvHHHhS',
+    '.KpvVVVuuuuVVvPS',
+    '.KmMMMYYMMMMMmKS',
+    '..KuuuuuuuuuuKs.',
+    '.......KsK...KzK',
+    '.......KzK......'
+  ];
+
+  static WIZ_1 = [
+    '.......KmfK.....',
+    '......KphhPK....',
+    '.....KphHHHhK.a.',
+    '....KphHHHHHhK..',
+    '...KphHHHHHHHhKA',
+    '..KpvVVVVVVVVvpK',
+    '..KmMMMMMMMMMMmK',
+    '....KXkXKKXkXK.a',
+    '....KwwwwwwwwK.Q',
+    '....KddDDDDddK.q',
+    '...KphHHDDbHHhKC',
+    '..KphHHmMMmHHhKe',
+    '..KphHHvVVvHHhKs',
+    '..KphHHvVVvHHhKS',
+    '.KphHHHvVVvHHHhS',
+    '.KpvVVVuuuuVVvPS',
+    '.KmMMMMMMMMMMmKS',
+    '..KuuuuuuuuuuKs.',
+    '.......KsK...KzK',
+    '.......KzK......'
+  ];
+
   static drawMatrix(g, matrix, palette, ox = 0, oy = 0, ps = 3) {
     matrix.forEach((row, ry) => {
       for (let rx = 0; rx < row.length; rx++) {
@@ -1317,40 +1399,47 @@ class PixelArtRenderer {
     const BEEHIVE_PALETTE = {
       '.': null,
       'K': 0x0F172A,
-      'b': 0x543A24,
+      'k': 0x1E293B,
+      'b': 0x451A03,
       'B': 0x78350F,
-      'W': 0xA16207,
-      'w': 0xCA8A04,
-      'D': 0xB45309,
-      'A': 0xD97706,
+      'W': 0x92400E,
+      'w': 0xB45309,
+      'O': 0xD97706,
+      'S': 0x642404,
+      'D': 0x853208,
+      'A': 0xA7490A,
+      'M': 0xC46808,
       'Y': 0xFACC15,
       'y': 0xFDE047,
-      'H': 0xFEF08A
+      'H': 0xFEF08A,
+      'C': 0xFFFBEB,
+      'G': 0xF59E0B,
+      'g': 0xE08208
     };
 
     this.createTexture(scene, 'beehive', [
-      ".......AAAAAA.......",
-      ".....AAyyyyyyyyAA...",
-      "....AyyyyyyyyyyyyA..",
-      "...AyyYKKKKKKYYyyyA.",
-      "..AyYYKKKKKKKKYYyyA.",
-      "..AyYYYYYYYYYYYYyyA.",
-      ".AyYYYYYYYYYYYYYYyyA",
-      ".AyYYDDAAAAAADDYYyyA",
-      "AyYYA..........AYyyA",
-      "AyYA..KKKKKKKK..AYyA",
-      "AyYA.KKKKKKKKKK.AYyA",
-      "AyYA.KKKKKKKKKK.AYyA",
-      "AyYYA.KKKKKKKK.AYyyA",
-      "AyYYA..........AYyyA",
-      ".AyYYDDAAAAAADDYYyyA",
-      ".AyYYYYYYYYYYYYYYyyA",
-      "..AyYYYYYYYYYYYYyyA.",
-      "...AyyyyyyyyyyyyyA..",
-      "..bbWWWWWWWWWWWWbb..",
-      ".bBBBBBBBBBBBBBBBBb.",
+      ".......KKKKKK.......",
+      ".....KKyHHHHyyKK....",
+      "....KyHHyYYYYyHHyK..",
+      "...KyHYDMDMDMDMYyYK.",
+      "..KyYYMDMDMDMDMDYYyK",
+      "..KSSSACAMMACASSSyK.",
+      ".KyHYDMDMKKKKMDMDMYK",
+      ".KyYMDMDkKKKKkMDMYyK",
+      "KyHYDMDkKKKKKKkMDMYK",
+      "KyYMDMDkKKKKKKkMDYyK",
+      "KyHYDMDkKKKKKKkMDMYK",
+      "KyYMDMDMkKKKKkMDMYyK",
+      ".KyHYDMDMAAAAMDMDMYK",
+      ".KyYSSSSSACASSSSSSyK",
+      "..KyYYYYYYYYYYYYYyK.",
+      "..KSSSGgCGgCGgGSSyK.",
+      "...KGgC..GgC..GgCK..",
+      "...Kgg...gG...ggKK..",
+      "..KbOOOOOOOOOOOOwKb.",
+      ".bBWWWWWWWWWWWWWWBBb",
       "bBBBBBBBBBBBBBBBBBBb",
-      "bBBBBBBBBBBBBBBBBBBb"
+      "bKKKKKKKKKKKKKKKKKKb"
     ], BEEHIVE_PALETTE, 20, 22, 2);
 
     const makeTex = (key, w, h, drawFn) => {
@@ -2025,22 +2114,21 @@ class PixelArtRenderer {
   static _genNpcTextures(scene) {
     const C = {
       '.': null,
-      'K': 0x2A1508, 'k': 0x121016,
-      'G': 0xE07A38, 'g': 0xC86228, 'D': 0x9E3B0E,
-      'C': 0xFFF3E0, 'c': 0xFDF6E2,
-      'E': 0x2D5A27, 'e': 0x1E3A1E, 'W': 0xFFFFFF,
-      'P': 0xFF9EAA, 'p': 0xE67E90,
-      'w': 0xE8D5C4,
+      'K': 0x0F172A, 'k': 0x121016,
+      'H': 0xFBAE68, 'G': 0xEE7B28, 'g': 0xC86228, 'D': 0x9E3B0E, 'd': 0x782D00,
+      'W': 0xFFFFFF, 'C': 0xFFF3E0, 'c': 0xF1F5F9, 'w': 0xCBD5E1,
+      'P': 0xFFB3C1, 'p': 0xE67E90,
+      'E': 0x55C655, 'I': 0x22C55E, 'e': 0x1E4A1E, 'L': 0xA3F0A3,
       'Z': 0x93C5FD, 'z': 0xBFDBFE
     };
     const cat_idle_0 = [
       '................',
       '...KPK.....KPK..',
-      '..KGpKK...KGpKK.',
-      '.KGDDGGGGGGGDDGK',
-      '.KGDGGGGGGGGGDGK',
-      '.KGWEeGGGGeEWGgK',
-      'wKGCCCPPCCCgGKw.',
+      '..KHpKK...KHpKK.',
+      '.KGddGGGGGGGddGK',
+      '.KGdGGGGGGGGGdGK',
+      '.KGWEILGGGEILWGK',
+      'wKGCCCpPCCCgGKw.',
       '.KGGCCCCCCCCGGGK',
       '..KGDDCCCCDDGGK.',
       '..KGGCCCCCCGGK.K',
@@ -2054,11 +2142,11 @@ class PixelArtRenderer {
     const cat_idle_1 = [
       '................',
       '...KPK.....KPK..',
-      '..KGpKK...KGpKK.',
-      '.KGDDGGGGGGGDDGK',
-      '.KGDGGGGGGGGGDGK',
+      '..KHpKK...KHpKK.',
+      '.KGddGGGGGGGddGK',
+      '.KGdGGGGGGGGGdGK',
       '.KGeKkGGGGeKkGgK',
-      'wKGCCCPPCCCgGKw.',
+      'wKGCCCpPCCCgGKw.',
       '.KGGCCCCCCCCGGGK',
       '..KGDDCCCCCCDDGK',
       '..KGGCCCCCCCgK.K',
@@ -2073,10 +2161,10 @@ class PixelArtRenderer {
     const cat_walk_0 = [
       '................',
       '..KPK.....KPK...',
-      '.KGpKK...KGpKK..',
-      'KGDDGGGGGGGDDGK.',
-      'KGDGGGGGGGGGDGK.',
-      'KGWEeGGGGeEWGgK.',
+      '.KHpKK...KHpKK..',
+      'KGddGGGGGGGddGK.',
+      'KGdGGGGGGGGGdGK.',
+      'KGWEILGGGEILWGgK',
       'wGCCCPPCCCgGKw..',
       'KGGCCCCCCCCGGGK.',
       '.KGDDCCCCDDGGK..',
@@ -2090,11 +2178,11 @@ class PixelArtRenderer {
     ];
     const cat_walk_1 = [
       '...KPK.....KPK..',
-      '..KGpKK...KGpKK.',
-      '.KGDDGGGGGGGDDGK',
-      '.KGDGGGGGGGGGDGK',
-      '.KGWEeGGGGeEWGgK',
-      'wKGCCCPPCCCgGKw.',
+      '..KHpKK...KHpKK.',
+      '.KGddGGGGGGGddGK',
+      '.KGdGGGGGGGGGdGK',
+      '.KGWEILGGGEILWGK',
+      'wKGCCCpPCCCgGKw.',
       '.KGGCCCCCCCCGGGK',
       '..KGDDCCCCDDGGK.',
       '..KGGCCCCCCGGGK.',
@@ -2109,10 +2197,10 @@ class PixelArtRenderer {
     const cat_walk_2 = [
       '................',
       '....KPK.....KPK.',
-      '...KGpKK...KGpKK',
-      '..KGDDGGGGGGGDDG',
-      '..KGDGGGGGGGGGDG',
-      '..KGWEeGGGGeEWGg',
+      '...KHpKK...KHpKK',
+      '..KGddGGGGGGGddG',
+      '..KGdGGGGGGGGGDG',
+      '..KGWEILGGGEILWG',
       '.wKGCCCPPCCCgGKw',
       '..KGGCCCCCCCCGGG',
       '...KGDDCCCCDDGGK',
@@ -2128,10 +2216,10 @@ class PixelArtRenderer {
     const cat_sit_0 = [
       '................',
       '....KPK...KPK...',
-      '...KGpKK.KGpKK..',
-      '..KGDDGGGGDDGK..',
-      '..KGDGGGGGGGDGK.',
-      '..KGWEeGGGeEWGgK',
+      '...KHpKK.KHpKK..',
+      '..KGddGGGGddGK..',
+      '..KGdGGGGGGGdGK.',
+      '..KGWEILGGGEILGK',
       '.wKGCCCPPCCCgGKw',
       '..KGGCCCCCCCCGK.',
       '..KGDDCCCCDDGGK.',
@@ -2146,9 +2234,9 @@ class PixelArtRenderer {
     const cat_sit_1 = [
       '................',
       '...KpKK...KPK...',
-      '..KGpKK..KGpKK..',
-      '..KGDDGGGGDDGK..',
-      '..KGDGGGGGGGDGK.',
+      '..KHpKK..KHpKK..',
+      '..KGddGGGGddGK..',
+      '..KGdGGGGGGGdGK.',
       '..KGeKkGGGeEWGgK',
       '.wKGCCCPPCCCgGKw',
       '..KGGCCCCCCCCGK.',
@@ -2168,8 +2256,8 @@ class PixelArtRenderer {
       '................',
       '................',
       '....KPK...KPK...',
-      '...KGpKK.KGpKK..',
-      '..KGDDGGGGDDGGK.',
+      '...KHpKK.KHpKK..',
+      '..KGddGGGGddGGK.',
       '.KGGeKkGGGeKkGGK',
       '.KGCCCCPCCCCGGGK',
       'KGGCCCCCCCCCCGGK',
@@ -2186,8 +2274,8 @@ class PixelArtRenderer {
       '.......z........',
       '................',
       '....KPK...KPK...',
-      '...KGpKK.KGpKK..',
-      '..KGDDGGGGDDGGK.',
+      '...KHpKK.KHpKK..',
+      '..KGddGGGGddGGK.',
       '.KGGeKkGGGeKkGGK',
       '.KGCCCCPCCCCGGGK',
       'KGGGCCCCCCCCCGGK',
@@ -2211,55 +2299,12 @@ class PixelArtRenderer {
     this.createTexture(scene, 'cat_sleep_1', cat_sleep_1, C);
     this.createTexture(scene, 'cat_npc', cat_npc, C);
 
-    const W_PAL = {
-      '.': null,
-      'K': 0x121016, 'k': 0x251C2B,
-      'h': 0xA78BFA, 'H': 0x8B5CF6, 'v': 0x6D28D9, 'V': 0x4C1D95,
-      'd': 0xFFFFFF, 'D': 0xE2E8F0, 'b': 0x94A3B8,
-      'y': 0xFBBF24, 'Y': 0xD97706,
-      'c': 0x7DD3FC, 'C': 0x38BDF8, 'e': 0x0284C7,
-      'S': 0x78350F, 's': 0x451A03,
-      'X': 0xEAA878, 'x': 0xC87858, 'N': 0x121016, 'n': 0x984838, 'W': 0xFFFFFF, 'w': 0xE0F2FE
-    };
-    const wiz_0 = [
-      '.......KyK......',
-      '......KhHK......',
-      '.....KhHHHK.....',
-      '....KhHHHHHK....',
-      '...KhHHHHHHHK...',
-      '..KhHHHHHHHHHK..',
-      '.KvVVVVVVVVVVvK.',
-      '....KXxNXnXK..cK',
-      '....KddddddK.cCK',
-      '....KdDDDDdK..eK',
-      '...KhHHHHHHhK.SK',
-      '...KhHHYYHHhK.SK',
-      '..KhHHHvVHHHhKSK',
-      '..KhHHHvVHHHhKSK',
-      '..KhHHHvVHHHhKSK',
-      '..KvVVVVVVVVvKsK'
-    ];
-    const wiz_1 = [
-      '.......KyK......',
-      '......KhHK......',
-      '.....KhHHHK.....',
-      '....KhHHHHHK....',
-      '...KhHHHHHHHK...',
-      '..KhHHHHHHHHHK..',
-      '.KvVVVVVVVVVVvK.',
-      '....KXxNXnXK.WcK',
-      '....KddddddKwcCK',
-      '....KdDDDDdK.WcK',
-      '...KhHHHHHHhK.SK',
-      '...KhHHYYHHhK.SK',
-      '..KhHHHvVHHHhKSK',
-      '..KhHHHvVHHHhKSK',
-      '..KhHHHvVHHHhKSK',
-      '..KvVVVVVVVVvKsK'
-    ];
-    this.createTexture(scene, 'wizard_idle_0', wiz_0, W_PAL);
-    this.createTexture(scene, 'wizard_idle_1', wiz_1, W_PAL);
-    this.createTexture(scene, 'wizard_npc', wiz_0, W_PAL);
+    const W_PAL = PixelArtRenderer.W_PAL;
+    const wiz_0 = PixelArtRenderer.WIZ_0;
+    const wiz_1 = PixelArtRenderer.WIZ_1;
+    this.createTexture(scene, 'wizard_idle_0', wiz_0, W_PAL, 16, 20);
+    this.createTexture(scene, 'wizard_idle_1', wiz_1, W_PAL, 16, 20);
+    this.createTexture(scene, 'wizard_npc', wiz_0, W_PAL, 16, 20);
 
     const anims = scene.anims;
     if (anims) {
@@ -7867,84 +7912,142 @@ class FarmScene extends Phaser.Scene {
     ], DECOR_PALETTE, 0, 0, PS);
     gc.generateTexture('coin', 8*PS, 8*PS); gc.destroy();
 
-    // Shop sign texture 14x18
+    // Shop sign texture 18x22 (Korean Merchant Character)
+    const SHOP_PALETTE = Object.assign({}, DECOR_PALETTE, {
+      'B': 0x1E293B, // Gat hat dark slate
+      'A': 0x38BDF8, // Hat ribbon cyan blue
+      'X': 0xFFDDAD, // Skin base warm peach
+      'x': 0xF4A261, // Skin shadow
+      'f': 0xFFF0D5, // Skin highlight
+      'Q': 0xE76F51, // Warm cheek blush
+      'U': 0xF8FAFC, // Hanbok white collar / apron highlight
+      'u': 0xCBD5E1, // Cream apron shadow
+      'J': 0x1E3A8A, // Navy hanbok vest
+      'j': 0x172554, // Deep navy vest shadow
+      'm': 0xF59E0B  // Gold embroidery on vest
+    });
     const gs = mk();
     PixelArtRenderer.drawMatrix(gs, [
-      '..KKKKKKKKKK..',
-      '..KOOOOOOOOK..',
-      '..KOOOOOOOOK..',
-      'KKKKKKKKKKKKKK',
-      'KOOOOOOOOOOOoK',
-      'KOWWKKYYKKWWwK',
-      'KOWKYYYYYYKWwK',
-      'KOWKYYYYYYKWwK',
-      'KOWKYYYYYYKWwK',
-      'KOWWKKYYKKWWwK',
-      'KOWWWWWWWWWWwK',
-      'KOWWWWWWWWWWwK',
-      'KOwwwwwwwwwwwK',
-      'KKKKKKKKKKKKKK',
-      '....KWWKWWK...',
-      '....KWWKWWK...',
-      '....KWWKWWK...',
-      '....KKKKKKK...'
-    ], DECOR_PALETTE, 0, 0, PS);
-    gs.generateTexture('shop_sign', 14*PS, 18*PS); gs.destroy();
-
-    // Notice Board texture 18x16
-    const gb = mk();
-    PixelArtRenderer.drawMatrix(gb, [
+      '.....KKKKKKKK.....',
+      '....KBBBBBBBBK....',
+      '....KBBBBBBBBK....',
+      '.KKKKKKKKKKKKKKKK.',
+      '.KBBBBBBBBBBBBBBK.',
+      '...KAAKXXXXKAAK...',
+      '...KXffffffffXK...',
+      '...KXKXXKKXXKXK...',
+      '...KXfQffffQfXK...',
+      '...KXxKKKKKKxXK...',
+      '..KKUJJJJJJJJUKK..',
+      '.KUuuJJmJJmJJuuUK.',
+      '.KuuJmJJJJJJmJuuK.',
+      '.KuuJjJjJjJjJjuuK.',
       'KKKKKKKKKKKKKKKKKK',
       'KOOOOOOOOOOOOOOOoK',
-      'KOWKKKKKKKKKKKKWwK',
-      'KOWKb.K..K...bKWwK',
-      'KOWKb.K..K...bKWwK',
-      'KOWKb.KKKK...bKWwK',
-      'KOWKb........bKWwK',
-      'KOWKb.KK.KK..bKWwK',
-      'KOWKb.KK.KK..bKWwK',
-      'KOWKb........bKWwK',
-      'KOWKKKKKKKKKKKKWwK',
+      'KOWWKYyKYyKYyKWwwK',
+      'KOWWYYYYYYYYYYWwwK',
+      'KOWWKYyYYYYyYKWwwK',
+      'KOWWWWWWWWWWwwwwwK',
       'KOwwwwwwwwwwwwwwwK',
-      'KKKKKKKKKKKKKKKKKK',
-      '..KWWK......KWWK..',
-      '..KWWK......KWWK..',
+      'KKKKKKKKKKKKKKKKKK'
+    ], SHOP_PALETTE, 0, 0, PS);
+    gs.generateTexture('shop_sign', 18*PS, 22*PS); gs.destroy();
+
+    // Notice Board texture 18x16
+    const NOTICE_BOARD_PALETTE = Object.assign({}, DECOR_PALETTE, {
+      'K': 0x0F172A,
+      'O': 0xE5A96E,
+      'o': 0xC8864B,
+      'W': 0x965A2C,
+      'w': 0x643714,
+      'd': 0x3E2009,
+      'b': 0xFFF3C7,
+      'B': 0xFFFAF0,
+      'u': 0xE2E8F0,
+      'N': 0x334155,
+      'n': 0x64748B,
+      'R': 0xEF4444,
+      'r': 0x991B1B,
+      'M': 0x475569,
+      'm': 0x1E293B,
+      'Y': 0xFEF08A,
+      'y': 0xF59E0B,
+      'g': 0xFB7185
+    });
+
+    const gb = mk();
+    PixelArtRenderer.drawMatrix(gb, [
+      '.....KKKKKKKK.....',
+      '....KKmMYYMYyKKK..',
+      '..KKKKKMYgMYgKKKKK',
+      '.KOOOOOOOOOOOOOOOo',
+      '.KOWKKKKKKKKKKKKWw',
+      '.KOWKRbBrKRbBrKKWw',
+      '.KOWKbNnbKbNNbKKWw',
+      '.KOWKbuubKbuubKKWw',
+      '.KOWKdWWdKRbBbKKWw',
+      '.KOWKbNNbKbNnbKKWw',
+      '.KOWKbuubKbuubKKWw',
+      '.KOWKKKKKKKKKKKKWw',
+      '.KOwwwwwwwwwwwwwww',
+      '.KKKKKKKKKKKKKKKKK',
+      '..KdWWK......KdWWK',
       '..KKKK......KKKK..'
-    ], DECOR_PALETTE, 0, 0, PS);
+    ], NOTICE_BOARD_PALETTE, 0, 0, PS);
     gb.generateTexture('notice_board', 18*PS, 16*PS); gb.destroy();
 
     // Dungeon Portal texture 20x28
+    const PORTAL_PALETTE = Object.assign({}, DECOR_PALETTE, {
+      'K': 0x0F172A,
+      't': 0xE2E8F0,
+      'T': 0x94A3B8,
+      'S': 0x475569,
+      's': 0x1E293B,
+      'C': 0x38BDF8,
+      'Q': 0xF43F5E,
+      'Y': 0xFACC15,
+      'P': 0xD8B4FE,
+      'p': 0x9333EA,
+      'm': 0x581C87,
+      'V': 0x2563EB,
+      'v': 0x0284C7,
+      'E': 0xA5F3FC,
+      'W': 0xFFFFFF,
+      'z': 0xF472B6,
+      'X': 0xE0E7FF
+    });
+
     const gport = mk();
     PixelArtRenderer.drawMatrix(gport, [
-      '......KKKKKK......',
-      '....KKTTTTTTKK....',
-      '...KTTTTTTTTTTK...',
-      '..KTTTTTTTTTTTTK..',
-      '.KTTTTTTTTTTTTTTK.',
-      'KTTTTKKKKKKKKTTTTK',
-      'KTTTKPPPPPPPPKTTTK',
-      'KTTKPPPPPPPPPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPpPpPpPpPPKTTK',
-      'KTTKPPPPPPPPPPKTTK',
-      'KTTTKPPPPPPPPKTTTK',
-      'KTTTTKKKKKKKKTTTTK',
-      'KTTTTTTTTTTTTTTTTK',
-      'KKKKKKKKKKKKKKKKKK'
-    ], DECOR_PALETTE, 0, 0, PS);
+      '.......KKKKKK.......',
+      '.....KKtTTTTtKK.....',
+      '....KtTTSCSSTtK....',
+      '...KtTTTTTTTTTTtK...',
+      '..KtTTSQSSTSQSStK..',
+      '.KtTTSKKKKKKKKSttSK.',
+      '.KtSKPPPPPPzPPPPKSK.',
+      'KTTKPPPPPzPPPPPPKTTK',
+      'KTTKPpPvvVVvvPPpPKTTK',
+      'KTTKPpvVEEWEVvpPPKTTK',
+      'KCTKPpvVWEWEVvppPKCK',
+      'KTTKPpvVEEWEVvpPPKTTK',
+      'KQTKPpPvvVVvvPPpPKQK',
+      'KTTKPmPvvVVvvPmPPKTTK',
+      'KTTKPpvVEEWEVvpPPKTTK',
+      'KYTKPpvVWEWEVvpPPKYK',
+      'KTTKPpvVEEWEVvpPPKTTK',
+      'KTTKPpPvvVVvvPPpPKTTK',
+      'KCTKPppppXppppppPKCK',
+      'KTTKPpppppppppppPKTTK',
+      'KQTKPPPPPPPPPPPPKQK',
+      'KTTKPPPPPzPPPPPPKTTK',
+      'KTTKPPPPPPPPPPPPKTTK',
+      '.KTTKPPPPPPPPPPKTTK.',
+      '.KTTTTKKKKKKKKTTTTK.',
+      'KTTTTTTSSSSSSSSTTTTK',
+      'KssssssssssssssssssK',
+      'KKKKKKKKKKKKKKKKKKKK'
+    ], PORTAL_PALETTE, 0, 0, PS);
     gport.generateTexture('dungeon_portal', 20*PS, 28*PS); gport.destroy();
 
     // Wooden Fishing Boat texture 26x20
@@ -8001,24 +8104,10 @@ class FarmScene extends Phaser.Scene {
     ], DECOR_PALETTE, 0, 0, PS);
     ga.generateTexture('arcade_machine', 16*PS, 22*PS); ga.destroy();
 
-    // Wizard NPC texture 16x22
+    // Wizard NPC texture 16x20
     const gwiz = mk();
-    // Robe / Body (Dark purple)
-    pR(gwiz, 4, 8, 8, 12, 0x5B21B6); pR(gwiz, 3, 10, 10, 10, 0x4C1D95);
-    pR(gwiz, 5, 9, 6, 11, 0x6D28D9);
-    // Face & Beard
-    pR(gwiz, 5, 5, 6, 4, 0xFFDDAD);
-    pR(gwiz, 6, 6, 1, 1, 0x1E1B4B); pR(gwiz, 9, 6, 1, 1, 0x1E1B4B);
-    pR(gwiz, 4, 8, 8, 6, 0xF3F4F6);
-    pR(gwiz, 5, 14, 6, 3, 0xE5E7EB);
-    // Pointy Wizard Hat
-    pR(gwiz, 1, 5, 14, 2, 0x7C3AED); pR(gwiz, 2, 5, 12, 1, 0x8B5CF6);
-    pR(gwiz, 4, 3, 8, 2, 0x7C3AED); pR(gwiz, 5, 1, 6, 2, 0x6D28D9); pR(gwiz, 6, 0, 4, 1, 0x8B5CF6);
-    pR(gwiz, 7, 2, 2, 2, 0xF59E0B);
-    // Staff & Glowing Orb
-    pR(gwiz, 13, 4, 2, 16, 0x78350F);
-    pR(gwiz, 12, 2, 4, 4, 0x06B6D4); pR(gwiz, 13, 3, 2, 2, 0x67E8F9);
-    gwiz.generateTexture('wizard_npc', 16*PS, 22*PS); gwiz.destroy();
+    PixelArtRenderer.drawMatrix(gwiz, PixelArtRenderer.WIZ_0, PixelArtRenderer.W_PAL, 0, 0, PS);
+    gwiz.generateTexture('wizard_npc', 16*PS, 20*PS); gwiz.destroy();
 
 
     // Crops (5 types × 3 stages) - Stardew Valley warm earthy tones
@@ -8054,9 +8143,9 @@ class FarmScene extends Phaser.Scene {
     // ── GINGER TABBY CAT NPC (12×16 pixels) ─────────────────────────────────
     const GC=()=>this.make.graphics({add:false});
     const gc2=GC();
-    const GO=0xF5813F, GD=0xB84E10, GL=0xFFBB66;
-    const WH2=0xFFFFFF, EY=0xFFCC44, PU=0x1A0800;
-    const PK2=0xFFAA99;
+    const GO=0xEE7B28, GD=0x9E3B0E, GL=0xFBAE68;
+    const WH2=0xFFFFFF, EY=0x55C655, PU=0x0F172A;
+    const PK2=0xFFB3C1;
     const pr2=(x,y,w,h,c)=>pR(gc2,x,y,w,h,c);
     // Ginger body
     pr2(1,8,10,8,GO);

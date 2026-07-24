@@ -1,14 +1,15 @@
-## 2026-07-24T14:33:33Z
-You are Forensic Auditor for Milestone 2 (Honey Rewards, Cooking Integration & Save/Load Persistence).
+## 2026-07-24T14:59:51Z
+You are Forensic Auditor for Milestone 2 Gate Verification of Hangeul Valley NPC Sprite Polish & Upgrade.
 Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m2`.
-Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m2\audit_report.md` and `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m2\handoff.md`.
 
-Perform a forensic integrity audit on the Milestone 2 code changes in `game.js`:
-1. Verify genuine implementation of `'꿀'` registration in `ITEM_DB` (authentic item metadata).
-2. Verify genuine implementation of Honey reward granting in `BeeScene.showResultsSummary()` calling `addItemToInventory('honey', totalHoney)` and toast notification.
-3. Verify genuine implementation of Honey cooking recipes (`honey_yakgwa` and `honey_tea`) in `COOKING_RECIPES` with authentic ingredient checking, deduction, and reward granting.
-4. Verify genuine save/load persistence in `collectSave()` and `applySave()`.
-5. Verify NO hardcoded test bypasses, NO dummy/facade implementations, NO fake persistence claims.
-6. Run syntax check: `node -c game.js`.
-
-Deliver your audit verdict (CLEAN / INTEGRITY_VIOLATION), evidence chain, and handoff report. Send a message back to the Project Orchestrator when complete.
+Your task:
+1. Create your working directory `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m2` and initialize state/progress files.
+2. Perform forensic integrity audit on `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` for Milestone 2 (R3 Cat NPC, R4 Notice Board & Dungeon Portal, R5 Beehive):
+   - Verify color palette expansions are genuine pixel art color gradations (no unused dummy colors added just to artificially pad counts).
+   - Verify matrix strings contain real pixel art details (M-mark, tabby stripes, catchlights, wood grain, runes, honeycomb texture, honey drops) matching requirements.
+   - Verify no cheating, hardcoded test skips, dummy overrides, or fake output functions.
+   - Verify 100% SHA256 byte-level synchronization between `game.js` and `assets/game.js`.
+   - Verify syntax via `node -c` on both files.
+3. Issue an explicit verdict: **CLEAN** or **INTEGRITY VIOLATION**.
+4. Write your full forensic audit report and evidence chain to `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m2\handoff.md`.
+5. Send a message to orchestrator (`271beac4-82f5-4128-b9b0-62d62497fc69`) with your audit findings and explicit verdict.

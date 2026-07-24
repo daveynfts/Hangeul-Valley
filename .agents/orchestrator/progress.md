@@ -1,25 +1,20 @@
-# Project Progress Log
+# Progress Log — Hangeul Valley NPC Sprite Polish & Upgrade
 
 ## Current Status
-Last visited: 2026-07-24T21:40:30+07:00
+Last visited: 2026-07-24T21:50:00Z
 
 ## Iteration Status
 Current iteration: 1 / 32
 
 ## Checklist
-- [x] M1: Beehive Farm NPC, BeeScene Minigame & Flying Bee Vocabulary Mechanics
-  - [x] Explorer phase (3 explorers: Explorer 1 [DONE], Explorer 2 [DONE], Explorer 3 [DONE])
-  - [x] Worker phase (M1 Worker implemented R1 & R2)
-  - [x] Reviewer & Challenger phase (Reviewer 1 [PASS], Reviewer 2 [PASS], Challenger 1 [PASS - 30 assertions], Challenger 2 [PASS - 49 assertions])
-  - [x] Forensic Auditor phase (Auditor [CLEAN])
-  - [x] Milestone Gate verification (APPROVED & CLEAN)
-- [x] M2: Honey Inventory Integration, Cooking Recipe & Save/Load Persistence
-  - [x] Explorer phase (3 explorers: Explorer 1 [DONE], Explorer 2 [DONE], Explorer 3 [DONE])
-  - [x] Worker phase (M2 Worker implemented R3 & R4)
-  - [x] Reviewer & Challenger phase (Reviewer 1 [PASS], Reviewer 2 [PASS], Challenger 1 [PASS - 75 assertions], Challenger 2 [PASS - 194 assertions])
-  - [x] Forensic Auditor phase (Auditor [CLEAN])
-  - [x] Milestone Gate verification (APPROVED & CLEAN)
-- [x] M3: Dual-File Synchronization (game.js <-> assets/game.js, index.html <-> assets/index.html) & E2E Integrity Audit
-  - [x] Sync check & copy verification (Worker M3 PASS, SHA256 match)
-  - [x] Final E2E Audit & Syntax check (Auditor M3 CLEAN, 0 syntax errors)
-  - [x] Gate verification & Final report (APPROVED & CLEAN)
+- [x] Initialized Project Orchestrator workspace and state files (`BRIEFING.md`, `ORIGINAL_REQUEST.md`, `PROJECT.md`, `plan.md`, `context.md`, `progress.md`)
+- [x] Milestone 1: Shop NPC (R1) & Wizard NPC (R2) Polish (PASSED & AUDITED CLEAN)
+- [x] Milestone 2: Cat NPC (R3), Notice Board & Portal NPC (R4), Beehive (R5) Polish (PASSED & AUDITED CLEAN)
+  - [x] M2 Phase 1: Exploration (3 Explorers completed)
+  - [x] M2 Phase 2: Implementation (Worker M2 completed code)
+  - [x] M2 Phase 3: Review & Challenge (2 Reviewers PASS, 2 Challengers PASS)
+  - [x] M2 Phase 4: Forensic Audit (Forensic Auditor CLEAN)
+- [x] Milestone 3: Dual-File Sync & Final E2E Forensic Integrity Audit (PASSED & AUDITED CLEAN)
+  - [x] M3 Phase 1: Dual-file SHA256 Sync & `node -c` Syntax Check (100% SHA256 Match & 0 Syntax Errors)
+  - [x] M3 Phase 2: Final E2E Forensic Integrity Audit (Auditor CLEAN)
+  - [x] M3 Phase 3: Victory Claim Presentation (Submitting to Parent)

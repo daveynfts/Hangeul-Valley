@@ -1,0 +1,172 @@
+{
+  "timestamp": "2026-07-24T14:51:32.116Z",
+  "totalAssertions": 27,
+  "passedAssertions": 27,
+  "failedAssertions": 0,
+  "verdict": "PASSED",
+  "sha256": "28626aa8aa82412b4c4415fd220327a16789cf92b40cfc690540dbfb6ed7fe18",
+  "results": [
+    {
+      "id": 1,
+      "status": "PASS",
+      "description": "_interact() method defined in game.js",
+      "details": "Method found"
+    },
+    {
+      "id": 2,
+      "status": "PASS",
+      "description": "Shop NPC proximity distance check (< 90px) inside _interact()",
+      "details": "Found `< 90` distance check"
+    },
+    {
+      "id": 3,
+      "status": "PASS",
+      "description": "openShop() call site inside < 90px proximity block",
+      "details": "openShop() triggered on proximity < 90px"
+    },
+    {
+      "id": 4,
+      "status": "PASS",
+      "description": "Wizard NPC proximity distance check (< 85px) inside _interact()",
+      "details": "Found `< 85` distance check"
+    },
+    {
+      "id": 5,
+      "status": "PASS",
+      "description": "openSpellDuel() call site inside < 85px proximity block",
+      "details": "openSpellDuel() triggered on proximity < 85px"
+    },
+    {
+      "id": 6,
+      "status": "PASS",
+      "description": "_createShopNPC method defined in game.js",
+      "details": "Method found"
+    },
+    {
+      "id": 7,
+      "status": "PASS",
+      "description": "Shop NPC X coordinate calculation (sx = farm.x + farm.w + 175)",
+      "details": "const sx = this.farm.x + this.farm.w + 175;\r\n    const sy = this.farm.y + this.farm.h / 2 + 25;\r\n    this.shopNPC = this"
+    },
+    {
+      "id": 8,
+      "status": "PASS",
+      "description": "Shop NPC Y coordinate calculation (sy = farm.y + farm.h / 2 + 25)",
+      "details": "const sx = this.farm.x + this.farm.w + 175;\r\n    const sy = this.farm.y + this.farm.h / 2 + 25;\r\n    this.shopNPC = this"
+    },
+    {
+      "id": 9,
+      "status": "PASS",
+      "description": "Shop NPC texture key is shop_sign",
+      "details": "const sx = this.farm.x + this.farm.w + 175;\r\n    const sy = this.farm.y + this.farm.h / 2 + 25;\r\n    this.shopNPC = this"
+    },
+    {
+      "id": 10,
+      "status": "PASS",
+      "description": "Shop NPC origin setting is (0.5, 1)",
+      "details": "const sx = this.farm.x + this.farm.w + 175;\r\n    const sy = this.farm.y + this.farm.h / 2 + 25;\r\n    this.shopNPC = this"
+    },
+    {
+      "id": 11,
+      "status": "PASS",
+      "description": "Shop NPC scale factor is 1.3",
+      "details": "const sx = this.farm.x + this.farm.w + 175;\r\n    const sy = this.farm.y + this.farm.h / 2 + 25;\r\n    this.shopNPC = this"
+    },
+    {
+      "id": 12,
+      "status": "PASS",
+      "description": "Shop NPC initial depth set to sy",
+      "details": "const sx = this.farm.x + this.farm.w + 175;\r\n    const sy = this.farm.y + this.farm.h / 2 + 25;\r\n    this.shopNPC = this"
+    },
+    {
+      "id": 13,
+      "status": "PASS",
+      "description": "Shop NPC levitation tween configuration (y: sy-4, duration: 900, yoyo: true, ease: Sine.InOut)",
+      "details": "const sx = this.farm.x + this.farm.w + 175;\r\n    const sy = this.farm.y + this.farm.h / 2 + 25;\r\n    this.shopNPC = this"
+    },
+    {
+      "id": 14,
+      "status": "PASS",
+      "description": "_createWizardNPC method defined in game.js",
+      "details": "Method found"
+    },
+    {
+      "id": 15,
+      "status": "PASS",
+      "description": "Wizard NPC X coordinate calculation (wx = farm.x + farm.w + 160)",
+      "details": "const wx = this.farm.x + this.farm.w + 160;\r\n    const wy = this.farm.y - 85;\r\n    this.wizardSprite = this.add.sprite(w"
+    },
+    {
+      "id": 16,
+      "status": "PASS",
+      "description": "Wizard NPC Y coordinate calculation (wy = farm.y - 85)",
+      "details": "const wx = this.farm.x + this.farm.w + 160;\r\n    const wy = this.farm.y - 85;\r\n    this.wizardSprite = this.add.sprite(w"
+    },
+    {
+      "id": 17,
+      "status": "PASS",
+      "description": "Wizard NPC texture key is wizard_idle_0",
+      "details": "const wx = this.farm.x + this.farm.w + 160;\r\n    const wy = this.farm.y - 85;\r\n    this.wizardSprite = this.add.sprite(w"
+    },
+    {
+      "id": 18,
+      "status": "PASS",
+      "description": "Wizard NPC origin setting is (0.5, 1)",
+      "details": "const wx = this.farm.x + this.farm.w + 160;\r\n    const wy = this.farm.y - 85;\r\n    this.wizardSprite = this.add.sprite(w"
+    },
+    {
+      "id": 19,
+      "status": "PASS",
+      "description": "Wizard NPC scale factor is 1.8",
+      "details": "const wx = this.farm.x + this.farm.w + 160;\r\n    const wy = this.farm.y - 85;\r\n    this.wizardSprite = this.add.sprite(w"
+    },
+    {
+      "id": 20,
+      "status": "PASS",
+      "description": "Wizard NPC initial depth set to wy",
+      "details": "const wx = this.farm.x + this.farm.w + 160;\r\n    const wy = this.farm.y - 85;\r\n    this.wizardSprite = this.add.sprite(w"
+    },
+    {
+      "id": 21,
+      "status": "PASS",
+      "description": "Wizard NPC levitation tween configuration (y: wy-4, duration: 900, yoyo: true, ease: Sine.InOut)",
+      "details": "const wx = this.farm.x + this.farm.w + 160;\r\n    const wy = this.farm.y - 85;\r\n    this.wizardSprite = this.add.sprite(w"
+    },
+    {
+      "id": 22,
+      "status": "PASS",
+      "description": "Shop NPC depth sort update in updateDepthSort() using static base Y",
+      "details": "Found shopNPC.setDepth update"
+    },
+    {
+      "id": 23,
+      "status": "PASS",
+      "description": "Wizard NPC depth sort update in updateDepthSort() using static base Y",
+      "details": "Found wizardSprite.setDepth update"
+    },
+    {
+      "id": 24,
+      "status": "PASS",
+      "description": "Player Y-sort depth calculation in updateDepthSort()",
+      "details": "Player Y-sort logic intact"
+    },
+    {
+      "id": 25,
+      "status": "PASS",
+      "description": "game.js node syntax check (node -c game.js)",
+      "details": "Syntax valid"
+    },
+    {
+      "id": 26,
+      "status": "PASS",
+      "description": "assets/game.js node syntax check (node -c assets/game.js)",
+      "details": "Syntax valid"
+    },
+    {
+      "id": 27,
+      "status": "PASS",
+      "description": "game.js <-> assets/game.js SHA256 byte synchronization",
+      "details": "game.js: 28626aa8aa82412b4c4415fd220327a16789cf92b40cfc690540dbfb6ed7fe18, assets/game.js: 28626aa8aa82412b4c4415fd22032"
+    }
+  ]
+}

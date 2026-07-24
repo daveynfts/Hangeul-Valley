@@ -1,243 +1,303 @@
-# Detailed Technical Analysis: Cooking Recipe Integration (Milestone 2)
+# Milestone 2: Notice Board & Dungeon Portal NPC Polish & Upgrade Analysis (R4)
+
+**Target Scope**: Milestone 2 - Notice Board & Dungeon Portal NPC Sprite Polish & Upgrade (R4)  
+**Target File**: `d:\Hangeul Valley\game.js` (and mirror copy `d:\Hangeul Valley\assets\game.js`)  
+**Investigator**: `teamwork_preview_explorer_m2_2`  
+**Date**: 2026-07-24  
+
+---
 
 ## 1. Executive Summary
-This report analyzes the Cooking Recipe system in `game.js` and `index.html` for Milestone 2 (Cooking Recipe Integration). It details how recipes are structured, how ingredient checking and deduction work via `ITEM_DB` and `inventoryState`, how the Cooking Modal UI renders recipes and rewards, and how to seamlessly integrate authentic Korean honey-based recipes (e.g. **Honey Yakgwa / 꿀약과**, **Honey Tea / 꿀차**, **Honey Rice Cake / 꿀떡**).
+
+This report presents a thorough read-only investigation and upgrade strategy for **Milestone 2 (R4)**: polishing the **Notice Board** and **Dungeon Portal NPC** procedural pixel art sprites in `game.js`.
+
+Both sprites are procedurally generated during scene initialization using `PixelArtRenderer.drawMatrix(...)` and converted to Phaser textures via `.generateTexture(...)`. Currently, both sprites use basic pixel art matrices with low color token counts (Notice Board: 6 tokens; Dungeon Portal: 4 tokens). 
+
+The proposed upgrade will enhance Notice Board to **18 unique color tokens** (+200% increase) and Dungeon Portal to **17 unique color tokens** (+325% increase), incorporating multi-tone shading, 1px dark slate outlines (`0x0F172A`), wood grain textures, pinned paper notices with visible text marks, warm lantern glow highlights, ancient magical runes, swirling cosmic energy cores, and pulsing glow particles.
 
 ---
 
-## 2. Array Definition of `COOKING_RECIPES`
-In `game.js` (lines 11752–11890), `COOKING_RECIPES` is defined as a global array of recipe objects and attached to `window.COOKING_RECIPES`.
+## 2. Baseline Sprite Code Audit
+
+### 2.1 Notice Board Baseline Code (`game.js` Lines 7950–7970)
 
 ```javascript
-// game.js: lines 11752-11766
-var COOKING_RECIPES = [
-  {
-    id: 'kimchi',
-    nameEn: 'Kimchi',
-    nameKo: '김치',
-    icon: '🥬',
-    description: 'Traditional spicy fermented Napa cabbage with chili and garlic.',
-    ingredients: [
-      { itemId: 'cabbage', count: 1 },
-      { itemId: 'chili', count: 1 },
-      { itemId: 'garlic', count: 1 }
-    ],
-    xpReward: 25,
-    goldReward: 30
-  },
-  ...
-];
+// Notice Board texture 18x16
+const gb = mk();
+PixelArtRenderer.drawMatrix(gb, [
+  'KKKKKKKKKKKKKKKKKK',
+  'KOOOOOOOOOOOOOOOoK',
+  'KOWKKKKKKKKKKKKWwK',
+  'KOWKb.K..K...bKWwK',
+  'KOWKb.K..K...bKWwK',
+  'KOWKb.KKKK...bKWwK',
+  'KOWKb........bKWwK',
+  'KOWKb.KK.KK..bKWwK',
+  'KOWKb.KK.KK..bKWwK',
+  'KOWKb........bKWwK',
+  'KOWKKKKKKKKKKKKWwK',
+  'KOwwwwwwwwwwwwwwwK',
+  'KKKKKKKKKKKKKKKKKK',
+  '..KWWK......KWWK..',
+  '..KWWK......KWWK..',
+  '..KKKK......KKKK..'
+], DECOR_PALETTE, 0, 0, PS);
+gb.generateTexture('notice_board', 18*PS, 16*PS); gb.destroy();
 ```
 
-### Data Schema of a Recipe Object
-| Property | Type | Description | Example |
-|---|---|---|---|
-| `id` | `String` | Unique recipe identifier | `'honey_yakgwa'` |
-| `nameEn` | `String` | English dish name | `'Honey Yakgwa'` |
-| `nameKo` | `String` | Korean dish name | `'꿀약과'` |
-| `icon` | `String` | Emoji icon representing the dish | `'🥮'` |
-| `description` | `String` | Description of the dish | `'Traditional deep-fried honey pastry...'` |
-| `ingredients` | `Array` | List of requirement objects `{ itemId, count }` | `[{ itemId: 'honey', count: 2 }, { itemId: 'rice', count: 1 }]` |
-| `xpReward` | `Number` | XP bonus granted on successful cooking | `50` |
-| `goldReward` | `Number` | Coins/gold granted on successful cooking | `65` |
+* **Texture Key**: `'notice_board'`
+* **Grid Dimensions**: 18 x 16 pixels (rendered at scale factor `PS=4`, resulting in 72x64 canvas).
+* **Palette Used**: `DECOR_PALETTE`
+
+### 2.2 Dungeon Portal Baseline Code (`game.js` Lines 7972–8004)
+
+```javascript
+// Dungeon Portal texture 20x28
+const gport = mk();
+PixelArtRenderer.drawMatrix(gport, [
+  '......KKKKKK......',
+  '....KKTTTTTTKK....',
+  '...KTTTTTTTTTTK...',
+  '..KTTTTTTTTTTTTK..',
+  '.KTTTTTTTTTTTTTTK.',
+  'KTTTTKKKKKKKKTTTTK',
+  'KTTTKPPPPPPPPKTTTK',
+  'KTTKPPPPPPPPPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPpPpPpPpPPKTTK',
+  'KTTKPPPPPPPPPPKTTK',
+  'KTTTKPPPPPPPPKTTTK',
+  'KTTTTKKKKKKKKTTTTK',
+  'KTTTTTTTTTTTTTTTTK',
+  'KKKKKKKKKKKKKKKKKK'
+], DECOR_PALETTE, 0, 0, PS);
+gport.generateTexture('dungeon_portal', 20*PS, 28*PS); gport.destroy();
+```
+
+* **Texture Key**: `'dungeon_portal'`
+* **Grid Dimensions**: 20 x 28 pixels (rendered at scale factor `PS=4`, resulting in 80x112 canvas).
+* **Palette Used**: `DECOR_PALETTE`
 
 ---
 
-## 3. Ingredient Specification, Inventory Checking, and Deduction Mechanics
+## 3. Baseline Color Token Inventory
 
-### 3.1 Item Metadata via `ITEM_DB` & `getItemInfo`
-Items are registered in `ITEM_DB` (lines 3900–3921 in `game.js`). The dictionary maps Korean item keys to item objects:
+### 3.1 Notice Board Baseline Tokens (Total: 6)
 
-```javascript
-// game.js: lines 3900-3902
-var ITEM_DB = {
-  '배추': { id: 'cabbage', name: 'Napa Cabbage', nameKo: '배추', icon: '🥬', description: 'Fresh Napa cabbage harvested from the plot.' },
-  '무': { id: 'radish', name: 'Korean Radish', nameKo: '무', icon: '🥔', description: 'Crunchy white Korean radish.' },
-  ...
-};
-```
+| Char | Hex Code | Description | Role in Baseline Sprite |
+| :---: | :---: | :--- | :--- |
+| `K` | `0x0F172A` | Dark Slate Outline | Exterior frame & leg outline |
+| `O` | `0xD99B66` | Sunlit Wood Highlight | Top edge frame highlight |
+| `W` | `0x8F5428` | Cedar Wood Base | Frame and post body color |
+| `w` | `0x573012` | Deep Timber Shadow | Frame shadow & lower rim |
+| `o` | `0xB3713D` | Oak Wood Highlight | Top right corner rim accent |
+| `b` | `0xFFF3C7` | Notice Paper Parchment | Pinned notice paper sheet |
 
-The function `getItemInfo(keyOrId)` (lines 3923–3930) bridges English `itemId` values (e.g. `'cabbage'`, `'honey'`) and Korean inventory keys (`'배추'`, `'꿀'`).
+### 3.2 Dungeon Portal Baseline Tokens (Total: 4)
 
-```javascript
-// game.js: lines 3923-3930
-function getItemInfo(keyOrId) {
-  if (!keyOrId) return { key: 'unknown', id: 'unknown', name: 'Item', nameKo: '아이템', icon: '📦', description: 'Unknown Item' };
-  if (ITEM_DB[keyOrId]) return { key: keyOrId, ...ITEM_DB[keyOrId] };
-  for (const [k, val] of Object.entries(ITEM_DB)) {
-    if (val.id === keyOrId) return { key: k, ...val };
-  }
-  return { key: keyOrId, id: keyOrId, name: keyOrId, nameKo: keyOrId, icon: '📦', description: keyOrId };
-}
-```
-
-### 3.2 Required `ITEM_DB` Entry for Honey
-To register `honey` in `ITEM_DB`, the following entry must be added:
-
-```javascript
-'꿀': { id: 'honey', name: 'Wild Honey', nameKo: '꿀', icon: '🍯', description: 'Sweet pure honey harvested from the farm beehive.' }
-```
-
-### 3.3 Stock Verification Logic
-In `renderCookingGrid()` (lines 11954–11960, 11995–12014) and `cookRecipe()` (lines 12073–12084):
-1. For each requirement in `recipe.ingredients`, `getItemInfo(req.itemId)` gets the resolved Korean key (`info.key`).
-2. Current stock `have` is checked against `inventoryState.ingredients[key]`.
-3. If `have < req.count`, `canCook` is set to `false`, the UI displays red warning badges (`✗`), and cooking is prevented.
-
-```javascript
-// game.js: lines 12073-12084
-const ingMap = (inventoryState && inventoryState.ingredients) ? inventoryState.ingredients : {};
-for (const req of reqs) {
-  const info = getItemInfo(req.itemId);
-  const key = info.key || req.itemId;
-  const have = ingMap[key] || 0;
-  if (have < req.count) {
-    if (typeof showToast === 'function') {
-      showToast(`⚠️ Missing ingredient for ${recipe.nameKo || recipe.nameEn}: Need ${req.count}x ${info.nameKo || key} (have ${have})`);
-    }
-    return false;
-  }
-}
-```
-
-### 3.4 Deduction Logic
-In `cookRecipe()` (lines 12086–12092):
-```javascript
-for (const req of reqs) {
-  const ok = removeItemFromInventory(req.itemId, req.count);
-  if (!ok) return false;
-}
-```
-
-`removeItemFromInventory(itemId, qty)` (lines 3985–4003) looks up `info.key`, subtracts `qty` from `inventoryState.ingredients[key]`, removes the key if zero, and triggers `persistSave()`.
+| Char | Hex Code | Description | Role in Baseline Sprite |
+| :---: | :---: | :--- | :--- |
+| `K` | `0x0F172A` | Dark Slate Outline | Stone arch outline & portal frame |
+| `T` | `0x9E9793` | Stone Base | Archway stone structure |
+| `P` | `0xA855F7` | Purple Portal Glow | Active portal interior energy |
+| `p` | `0x6D28D9` | Dark Purple Shadow | Portal interior shading stripes |
 
 ---
 
-## 4. Cooking UI Rendering & Reward Execution
+## 4. Upgrade Strategy & Custom Palette Design
 
-### 4.1 UI Layout in `index.html` (lines 1859–1902)
-- `#cooking-overlay`: Fullscreen glassmorphism overlay container.
-- `#cooking-progress-badge`: Displays cooked dishes ratio (`Cooked: X / Y`).
-- `#cooking-pantry-list`: Displays player's current ingredients in pantry.
-- `#cooking-recipe-list`: Left grid column listing all recipe cards.
-- `#cooking-detail-view`: Right pane presenting selected dish details, ingredient requirements (with green `✓` or red `✗` badges), rewards (Gold & XP), and the `🍳 Cook [Dish]` button.
+### 4.1 Notice Board Upgrade Specifications
+1. **Dedicated Palette (`NOTICE_BOARD_PALETTE`)**: Expand from 6 to 18 color tokens.
+2. **Wood Grain & Frame Detail**: Multi-tiered timber shading with sunlit highlights (`O`, `o`), medium cedar (`W`), deep timber shadow (`w`), and micro wood grain line accents (`d`).
+3. **Pinned Paper Notes & Visible Ink Marks**:
+   - Paper sheets with parchment highlights (`B`), warm base (`b`), and edge shadows (`u`).
+   - Red pushpins (`R`, `r`) holding individual notices.
+   - Visible dark and light ink marks (`N`, `n`) representing written quest notices on the board.
+4. **Warm Lantern Glow Effect**:
+   - Iron lantern housing (`M`, `m`) hanging from the top wooden frame.
+   - Warm glowing lamp bulb with bright yellow core (`Y`), amber glow (`y`), and soft ambient glow halo (`g`).
+5. **1px Dark Outlines**: Crisp 1px dark slate outline (`K`, `0x0F172A`).
 
-### 4.2 Rewards & Progression System
-When a recipe is cooked in `cookRecipe()`:
-1. **Gold Reward**: `addCoins(recipe.goldReward)`.
-2. **XP Reward**: `addHonor(recipe.xpReward)` (or `inventoryState.vocabXP += recipe.xpReward`).
-3. **Mastery Tracking**:
-   - `cookingState.cookedRecipes` records unique recipe IDs cooked.
-   - `cookingState.recipeStats[recipe.id]` tracks total times cooked.
-   - `inventoryState.cookedDishes[recipe.id]` updates cooked dish inventory.
-4. **Persistence & Feedback**:
-   - Calls `persistSave()` (serializing `inventoryState` & `cookingState`).
-   - Plays `'complete'` SFX and shows toast notification.
-   - Re-renders inventory grid, cooking UI grid, and currency HUD.
-   - Triggers `checkCookingAchievements()` to award the `'master_chef'` trophy when all dishes are cooked.
-
----
-
-## 5. Authentic Korean Honey Recipe Proposals
-
-To integrate honey into the cooking system, we propose adding 1 to 3 authentic Korean recipes to `COOKING_RECIPES`:
-
-### Recipe Option 1: Honey Yakgwa (꿀약과) - Recommended Primary Dish
+#### Proposed `NOTICE_BOARD_PALETTE` (18 Color Tokens)
 ```javascript
-{
-  id: 'honey_yakgwa',
-  nameEn: 'Honey Yakgwa',
-  nameKo: '꿀약과',
-  icon: '🥮',
-  description: 'Traditional Korean deep-fried honey pastry made with wild honey and grain.',
-  ingredients: [
-    { itemId: 'honey', count: 2 },
-    { itemId: 'rice', count: 1 }
-  ],
-  xpReward: 50,
-  goldReward: 60
-}
+const NOTICE_BOARD_PALETTE = Object.assign({}, DECOR_PALETTE, {
+  'K': 0x0F172A, // 1px Dark Slate Outline
+  'O': 0xE5A96E, // Sunlit Wood Grain Highlight
+  'o': 0xC8864B, // Light Oak Frame
+  'W': 0x965A2C, // Medium Cedar Wood Base
+  'w': 0x643714, // Dark Timber Shadow
+  'd': 0x3E2009, // Deep Wood Grain Line
+  'b': 0xFFF3C7, // Warm Parchment Paper Base
+  'B': 0xFFFAF0, // Parchment Paper Highlight
+  'u': 0xE2E8F0, // Parchment Shadow Edge
+  'N': 0x334155, // Dark Ink Note Mark
+  'n': 0x64748B, // Light Ink Note Mark
+  'R': 0xEF4444, // Red Pushpin Accent
+  'r': 0x991B1B, // Pushpin Shadow
+  'M': 0x475569, // Lantern Iron Housing
+  'm': 0x1E293B, // Lantern Iron Shadow
+  'Y': 0xFEF08A, // Lantern Bright Core
+  'y': 0xF59E0B, // Lantern Warm Amber Glow
+  'g': 0xFB7185  // Lantern Warm Ambient Glow
+});
 ```
 
-### Recipe Option 2: Honey Tea (꿀차)
+#### Proposed Upgraded Notice Board Pixel Matrix (18x16)
 ```javascript
-{
-  id: 'honey_tea',
-  nameEn: 'Honey Tea',
-  nameKo: '꿀차',
-  icon: '🍵',
-  description: 'Warm soothing Korean tea brewed with wild farm honey.',
-  ingredients: [
-    { itemId: 'honey', count: 2 }
-  ],
-  xpReward: 35,
-  goldReward: 45
-}
-```
-
-### Recipe Option 3: Honey Rice Cake (꿀떡)
-```javascript
-{
-  id: 'honey_tteok',
-  nameEn: 'Honey Rice Cake',
-  nameKo: '꿀떡',
-  icon: '🍡',
-  description: 'Sweet chewy Korean rice cake filled with melted golden honey.',
-  ingredients: [
-    { itemId: 'honey', count: 1 },
-    { itemId: 'rice', count: 2 }
-  ],
-  xpReward: 45,
-  goldReward: 50
-}
+PixelArtRenderer.drawMatrix(gb, [
+  '.....KKKKKKKK.....',
+  '....KKKMYYMYYKKK..',
+  '..KKKKKMYyMYyKKKKK',
+  '.KOOOOOOOOOOOOOOOo',
+  '.KOWKKKKKKKKKKKKWw',
+  '.KOWKRbBbKRbBbKKWw',
+  '.KOWKbNnbKbNNbKKWw',
+  '.KOWKbuubKbuubKKWw',
+  '.KOWKdWWdKRbBbKKWw',
+  '.KOWKbNNbKbNnbKKWw',
+  '.KOWKbuubKbuubKKWw',
+  '.KOWKKKKKKKKKKKKWw',
+  '.KOwwwwwwwwwwwwwww',
+  '.KKKKKKKKKKKKKKKKK',
+  '..KdWWK......KdWWK',
+  '..KKKK......KKKK..'
+], NOTICE_BOARD_PALETTE, 0, 0, PS);
 ```
 
 ---
 
-## 6. Detailed Implementation Plan for Implementer Agent
+### 4.2 Dungeon Portal NPC Upgrade Specifications
+1. **Dedicated Palette (`PORTAL_PALETTE`)**: Expand from 4 to 17 color tokens.
+2. **Richer Magical Rune Details**: Stone archway adorned with glowing runes in Cyan (`C`), Pink/Ruby (`Q`), and Amber Gold (`Y`).
+3. **Swirling Energy Core**:
+   - Multi-tone stone archway with highlights (`t`), slate base (`T`), dark slate (`S`), and shadow folds (`s`).
+   - Swirling vortex core with deep violet void (`m`), vivid purple layers (`p`), bright lavender outer aura (`P`), cosmic blue core (`V`), cyan vortex streaks (`v`), spark core (`E`), and white-hot energy center (`W`).
+4. **Pulsing Glow Particles**: Floating particle sparks (`z`, `X`) scattered across the portal energy threshold.
+5. **1px Dark Outlines**: Crisp 1px dark slate outline (`K`, `0x0F172A`).
 
-### Step 1: Register Honey in `ITEM_DB`
-In `game.js` around line 3920, insert:
+#### Proposed `PORTAL_PALETTE` (17 Color Tokens)
 ```javascript
-'꿀': { id: 'honey', name: 'Wild Honey', nameKo: '꿀', icon: '🍯', description: 'Sweet pure honey harvested from the farm beehive.' }
+const PORTAL_PALETTE = Object.assign({}, DECOR_PALETTE, {
+  'K': 0x0F172A, // 1px Dark Slate Outline
+  't': 0xE2E8F0, // Stone Arch Highlight
+  'T': 0x94A3B8, // Stone Base Slate
+  'S': 0x475569, // Dark Stone Slate
+  's': 0x1E293B, // Stone Shadow Folds
+  'C': 0x38BDF8, // Glowing Rune Cyan
+  'Q': 0xF43F5E, // Glowing Rune Pink/Ruby
+  'Y': 0xFACC15, // Glowing Rune Amber Gold
+  'P': 0xD8B4FE, // Portal Bright Lavender Outer
+  'p': 0x9333EA, // Portal Vivid Purple Layer
+  'm': 0x581C87, // Portal Deep Violet Void
+  'V': 0x2563EB, // Swirling Cosmic Blue Core
+  'v': 0x0284C7, // Cyan Core Vortex Streak
+  'E': 0xA5F3FC, // Plasma Energy Spark Core
+  'W': 0xFFFFFF, // White Hot Energy Flash
+  'z': 0xF472B6, // Pulsing Glow Particle
+  'X': 0xE0E7FF  // Floating Aura Spark
+});
 ```
 
-### Step 2: Add Honey Recipes to `COOKING_RECIPES`
-In `game.js` inside `var COOKING_RECIPES = [...]` (around line 11889), append:
+#### Proposed Upgraded Dungeon Portal Pixel Matrix (20x28)
 ```javascript
-  {
-    id: 'honey_yakgwa',
-    nameEn: 'Honey Yakgwa',
-    nameKo: '꿀약과',
-    icon: '🥮',
-    description: 'Traditional Korean deep-fried honey pastry made with wild honey and grain.',
-    ingredients: [
-      { itemId: 'honey', count: 2 },
-      { itemId: 'rice', count: 1 }
-    ],
-    xpReward: 50,
-    goldReward: 60
-  },
-  {
-    id: 'honey_tea',
-    nameEn: 'Honey Tea',
-    nameKo: '꿀차',
-    icon: '🍵',
-    description: 'Warm soothing Korean tea brewed with wild farm honey.',
-    ingredients: [
-      { itemId: 'honey', count: 2 }
-    ],
-    xpReward: 35,
-    goldReward: 45
-  }
+PixelArtRenderer.drawMatrix(gport, [
+  '.......KKKKKK.......',
+  '.....KKtTTTTtKK.....',
+  '....KtTTSCSSTtK....',
+  '...KtTTTTTTTTTTtK...',
+  '..KtTTSQSSTSQSStK..',
+  '.KtTTSKKKKKKKKSttSK.',
+  '.KtSKPPPPPPzPPPPKSK.',
+  'KTTKPPPPPzPPPPPPKTTK',
+  'KTTKPpPvvVVvvPPpPKTTK',
+  'KTTKPpvVEEWEVvpPPKTTK',
+  'KCTKPpvVWEWEVvppPKCK',
+  'KTTKPpvVEEWEVvpPPKTTK',
+  'KQTKPpPvvVVvvPPpPKQK',
+  'KTTKPmPvvVVvvPmPPKTTK',
+  'KTTKPpvVEEWEVvpPPKTTK',
+  'KYTKPpvVWEWEVvpPPKYK',
+  'KTTKPpvVEEWEVvpPPKTTK',
+  'KTTKPpPvvVVvvPPpPKTTK',
+  'KCTKPppppXppppppPKCK',
+  'KTTKPpppppppppppPKTTK',
+  'KQTKPPPPPPPPPPPPKQK',
+  'KTTKPPPPPzPPPPPPKTTK',
+  'KTTKPPPPPPPPPPPPKTTK',
+  '.KTTKPPPPPPPPPPKTTK.',
+  '.KTTTTKKKKKKKKTTTTK.',
+  'KTTTTTTSSSSSSSSTTTTK',
+  'KssssssssssssssssssK',
+  'KKKKKKKKKKKKKKKKKKKK'
+], PORTAL_PALETTE, 0, 0, PS);
 ```
 
-### Step 3: Verify Persistence & UI
-Ensure `collectSave()` and `applySave()` maintain `inventoryState.ingredients['꿀']` and `cookingState.cookedRecipes` without schema changes.
+---
 
-### Step 4: Run Syntax Check
-Execute:
-```powershell
-node -c game.js
-```
-Confirm exit code 0 and zero syntax errors.
+## 5. Color Token Comparison Table
+
+| Sprite Name | Baseline Tokens | Upgraded Tokens | Token Increase | Status |
+| :--- | :---: | :---: | :---: | :---: |
+| **Notice Board (`notice_board`)** | **6** | **18** | **+12 (+200%)** | Meets & exceeds acceptance criteria |
+| **Dungeon Portal (`dungeon_portal`)** | **4** | **17** | **+13 (+325%)** | Meets & exceeds acceptance criteria |
+
+---
+
+## 6. Interaction & Non-Regression Audit
+
+### 6.1 Notice Board Interaction Mechanics (`openMemoryGame`)
+* **Placement & Depth**: Instantiated in `_createBoardNPC(W,H)` at `(bx, by)` (`farm.x + farm.w/2`, `farm.y - 95`) with origin `(0.5, 1)`, scale `1.3`, and depth `by` (`game.js` line 8366). Depth dynamically updated in `update()` (`game.js` line 9113).
+* **Proximity Check**: Checked in `update()` (`game.js` line 9193) within distance `< 80` to show `this.boardHint`.
+* **Target Highlight**: Rendered in `_updateTargetHighlight()` (`game.js` line 9287) showing `[SPACE] Play Memory Match` in `#FF88FF`.
+* **Interaction Trigger**: Keydown `[SPACE]` triggers `_interact()` (`game.js` line 9398), animating `this.boardSprite` wobble tween (`angle: 5, duration: 100`) and calling `openMemoryGame()`.
+* **Non-Regression Verdict**: Upgrading the texture `'notice_board'` has **zero impact** on sprite position, scale, depth, shadow, or `openMemoryGame()` overlay trigger logic.
+
+### 6.2 Dungeon Portal Mechanics & Transition (`DungeonScene`)
+* **Placement & Depth**: Instantiated in `_createPortalNPC(W,H)` at `(px, py)` (`farm.x + farm.w + 140`, `farm.y + farm.h + 80`) with origin `(0.5, 1)`, scale `1.6`, and depth `py` (`game.js` line 8439). Idle breathing tween toggles scale between 1.60 and 1.65.
+* **Proximity Check**: Checked in `update()` (`game.js` line 9208) within distance `< 90` to show `this.portalHint`.
+* **Target Highlight**: Rendered in `_updateTargetHighlight()` (`game.js` line 9275) showing `[SPACE] Enter Dungeon` in `#EC4899`.
+* **Interaction & Scene Launch**: Keydown `[SPACE]` triggers `_interact()` (`game.js` line 9351), animating scale punch, checking `isZoneUnlocked('dungeon')`, fading out camera (300ms), pausing `MainScene`, and launching `DungeonScene`.
+* **DungeonScene Integration**: `DungeonScene` reuses texture key `'dungeon_portal'` in `spawnBossPortal()` (`game.js` line 10433) for the Boss Chamber Portal.
+* **Non-Regression Verdict**: Upgrading `'dungeon_portal'` preserves the texture key and dimensions, improving visual quality in both `MainScene` and `DungeonScene` with **zero regression risk**.
+
+---
+
+## 7. Exact Line Numbers Reference Table
+
+| Component / Function | File Path | Line Numbers | Description |
+| :--- | :--- | :---: | :--- |
+| `DECOR_PALETTE` | `game.js` | 7676–7708 | Base palette definition |
+| Notice Board Bake | `game.js` | 7950–7970 | `gb.generateTexture('notice_board', 18*PS, 16*PS)` |
+| Dungeon Portal Bake | `game.js` | 7972–8004 | `gport.generateTexture('dungeon_portal', 20*PS, 28*PS)` |
+| `_createBoardNPC` | `game.js` | 8363–8374 | Notice board sprite & shadow creation |
+| `_createPortalNPC` | `game.js` | 8436–8455 | Portal sprite, shadow & idle tween creation |
+| Depth Sorting | `game.js` | 9113, 9117 | Y-sorting depth updates for board & portal |
+| Proximity Hints | `game.js` | 9192, 9207 | Distance check (<80 / <90) for board & portal hints |
+| Target Highlight | `game.js` | 9275, 9287 | Target highlight labels & corner box rendering |
+| `_interact` Trigger | `game.js` | 9350, 9398 | Spacebar interaction handling & scene launch |
+| `openMemoryGame` | `game.js` | 11328–11350 | Notice board minigame overlay launcher |
+| `spawnBossPortal` | `game.js` | 10431–10442 | Boss chamber portal using `'dungeon_portal'` |
+
+---
+
+## 8. Implementation Recommendation for Implementer Agent
+
+1. Define `NOTICE_BOARD_PALETTE` right before notice board texture baking (`game.js` line 7950).
+2. Replace `notice_board` matrix draw call with the 18-token upgraded matrix.
+3. Define `PORTAL_PALETTE` right before portal texture baking (`game.js` line 7972).
+4. Replace `dungeon_portal` matrix draw call with the 17-token upgraded matrix.
+5. Verify node syntax using `node -c game.js`.
+6. Mirror all changes exactly to `assets/game.js` and verify SHA256 match.

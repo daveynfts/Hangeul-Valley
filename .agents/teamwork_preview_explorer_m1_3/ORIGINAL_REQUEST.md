@@ -1,15 +1,13 @@
-## 2026-07-24T21:23:56Z
-You are Explorer 3 for Milestone 1 (Vocabulary Integration & Minigame Scoring Flow).
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3`.
-Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\handoff.md`.
+## 2026-07-24T14:48:09Z
+You are teamwork_preview_explorer_m1_3.
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3`. Please write your analysis to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md` and your handoff to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\handoff.md`.
 
-Read `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md`, `d:\Hangeul Valley\game.js`, and `d:\Hangeul Valley\levels.json`.
+Target Scope: Milestone 1 - NPC Rendering Engine, Sprite Bake Infrastructure & Visual Consistency Audit.
+Read the project specifications in `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`.
 
-Investigate the following areas in `game.js` and `levels.json`:
-1. How vocabulary data is loaded from `levels.json` or stored in game memory (SRS system, unlocked level vocabulary, `LEVELS` object, `getUnlockedWords()`).
-2. How target English words are picked and matched with distractor Korean words for minigame rounds (e.g. 1 correct answer + 2-3 distractor bees carrying other unlocked Korean words).
-3. Round progression state in `BeeScene`: word counter (e.g., 1 to 10), score tracking, accuracy percentage, combo counter.
-4. Minigame end-of-round results summary overlay (styled in retro glassmorphism style, showing score, accuracy, honey reward preview, and a 'Return to Farm' button).
-5. Command to test syntax: `node -c game.js`.
-
-Synthesize your findings and provide a comprehensive design for R2 vocabulary integration & scoring flow. Deliver your handoff report and send a message back to the Project Orchestrator when complete.
+Your objective:
+1. Search `game.js` for the texture baking system, offscreen canvas generators, sprite atlas, palette system, or pixel art rendering helpers used across all NPCs (Shop, Wizard, Robot player, Apple tree, etc.).
+2. Analyze how 1px dark outlines are rendered on player/tree assets vs how Shop NPC and Wizard NPC are rendered.
+3. Analyze depth sorting (`depthSort`), NPC positioning, scale factors, collision boxes, and interaction distance checks for Shop NPC and Wizard NPC.
+4. Establish the exact color token counting methodology for acceptance testing (how distinct fill color tokens in texture bake routines are enumerated).
+5. Provide architectural guidelines for the worker to ensure Shop and Wizard NPC upgrades perfectly align with existing game loops, bake caches, and rendering pipelines without breaking SHA256 sync or syntax.

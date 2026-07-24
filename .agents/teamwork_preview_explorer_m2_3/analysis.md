@@ -1,263 +1,133 @@
-# Comprehensive Analysis: Save/Load Persistence & Scene Transitions (Milestone 2)
+# Milestone 2: Beehive Sprite Polish & Upgrade (R5) Analysis Report
 
-**Agent**: Explorer 3 (Milestone 2)  
-**Target File**: `d:\Hangeul Valley\game.js`  
-**Date**: 2026-07-24  
+## Summary & Core Findings
+This report details the architectural investigation, baseline analysis, upgrade strategy, and non-regression verification for the **Beehive Sprite (`'beehive'`)** in `game.js` under Milestone 2 (R5).
 
----
-
-## 1. Executive Summary
-
-This investigation analyzes the Save/Load persistence system and Scene Transition architecture in `game.js` to establish full technical readiness for **Milestone 2** (Honey Rewards, Cooking Integration & Save/Load Persistence).
-
-Key findings:
-- `collectSave()` and `applySave()` manage unified state serialization across schema version `v: 4`.
-- `inventoryState` and `cookingState` are fully serialized, but `'꿀'` (Honey) is not yet registered in `ITEM_DB`, and `BeeScene.showResultsSummary()` calculates `totalHoney` reward without calling `addItemToInventory('honey', totalHoney)`.
-- Scene transitions between `FarmScene` and `BeeScene` utilize Phaser's `this.scene.pause()` and `this.scene.launch('BeeScene')`, preserving overworld coordinates, active crop growth timers (`plantedAt`), apple tree ripening timers (`appleRipeAt`), and dropped ground items seamlessly in memory.
-- `node -c game.js` executes with **0 syntax errors**.
+1. **Texture Generation**: The Beehive texture is procedurally generated in `PixelArtGenerator._genBeehiveTextures(scene)` (lines 1396–1456), which is invoked during texture pre-baking by `PixelArtGenerator._bakeTextures(scene)` at line 346.
+2. **Baseline Palette & Token Count**: The baseline `BEEHIVE_PALETTE` defines 10 unique colors (11 keys including `'.'`). However, only **8 unique color tokens** (`K`, `b`, `B`, `W`, `D`, `A`, `Y`, `y`) are actively rendered in the 20x22 grid. Two palette entries (`w`, `H`) are unused in the original grid.
+3. **Upgrade Objectives**:
+   - Multi-tiered straw/skep coiled dome construction with defined ring highlights and overhang shadows.
+   - Visible honeycomb cell micro-patterns across the hive surface.
+   - Glossy dripping honey droplets hanging from the lower dome rim onto the wooden base.
+   - Crisp 1px dark slate outline (`K = 0x0F172A`) enclosing all hive elements.
+   - Expanded palette from 8 active color tokens to **16+ active color tokens**.
+4. **Non-Regression Verification**:
+   - Farm map positioning (`bx = farm.x - 65`, `by = farm.y - 70`), origin `(0.5, 1)`, scale `1.6`, drop shadow (`38x12, offsetY=2`), dynamic depth sorting (`setDepth(by)`), orbiting bee particles (`p_tiny_bee`), proximity threshold (`85px`), and `BeeScene` launch trigger remain 100% intact with 0 breaking changes.
 
 ---
 
-## 2. Deep Dive: Save/Load Architecture (`collectSave` & `applySave`)
+## 1. Exact Code Locations & Structural Breakdown (`game.js`)
 
-### 2.1 Serialization Flow (`collectSave`)
-Located at lines `4092–4126` in `game.js`.
+| Subsystem | File & Line Range | Function / Code Context | Description |
+|---|---|---|---|
+| **Bake Invocation** | `game.js`: 346 | `PixelArtGenerator._bakeTextures(scene)` | Calls `this._genBeehiveTextures(scene);` during pre-bake phase. |
+| **Beehive Texture Bake** | `game.js`: 1396–1437 | `PixelArtGenerator._genBeehiveTextures(scene)` | Defines `BEEHIVE_PALETTE` (lines 1399–1411) and bakes 20x22 grid texture `'beehive'` with pixelSize `2` (40x44 canvas). |
+| **Ambient Bee Texture** | `game.js`: 1450–1455 | `PixelArtGenerator._genBeehiveTextures(scene)` | Bakes `'p_tiny_bee'` 5x5 graphics texture for ambient orbiting bees. |
+| **World Instantiation** | `game.js`: 7516 | `FarmScene.create()` | Calls `this._createBeehiveNPC(W, H);` to place beehive on farm map. |
+| **NPC Setup & Shadow** | `game.js`: 8653–8713 | `FarmScene._createBeehiveNPC(W, H)` | Sets `bx = farm.x - 65`, `by = farm.y - 70`, instantiates `beehiveSprite` image at `(bx, by)` with origin `(0.5, 1)`, scale `1.6`, depth `by`, shadow `(38, 12, 2)`, idle wobble tween, orbiting bees (`beehiveBees`), floating prompt (`beehiveHint`), and ground text. |
+| **Proximity & Depth** | `game.js`: 9218–9223 | `FarmScene.update()` | Checks proximity (`Distance < 85`), updates `beehiveHint` visibility, dynamically updates `beehiveSprite.setDepth(this.beehiveY)`, and updates `beehiveBees` elliptical orbits. |
+| **HUD Overlay Hint** | `game.js`: 9281–9282 | `FarmScene.update()` | Displays HUD target prompt `[SPACE] Beehive Minigame` at `(hx, hy)` when player distance is `< 85`. |
+| **BeeScene Launch Trigger** | `game.js`: 9375–9383 | `FarmScene.update()` | Handles Space key press within 85px: plays scale pop tween (`1.6 -> 1.85`), fades camera out, pauses `FarmScene`, and launches `'BeeScene'`. |
+| **Target Scene Class** | `game.js`: 10951–11315 | `class BeeScene extends Phaser.Scene` | Minigame scene launched from the beehive interaction. |
 
-`collectSave()` constructs a unified JSON snapshot object:
+---
+
+## 2. Baseline Color Token Analysis
+
+### Baseline `BEEHIVE_PALETTE` Definition (lines 1399–1411):
 ```javascript
-function collectSave(){
-  const hcObj={}; harvestCounts.forEach((v,k)=>hcObj[k]=v);
-  const isFarm = sceneRef && Array.isArray(sceneRef.plots);
-  const plots = isFarm
-    ? sceneRef.plots.filter(p => p && p.ko).map(p => ({ i: p.index, ko: p.ko, sState: p.sState, plantedAt: p.plantedAt || 0 }))
-    : plotSave;
-  const apple = (sceneRef && typeof sceneRef.appleRipeAt !== 'undefined')
-    ? { ripeAt: sceneRef.appleRipeAt, ripe: sceneRef.appleRipe }
-    : appleTreeSave;
-  const drops = (sceneRef && Array.isArray(sceneRef.droppedItems))
-    ? sceneRef.droppedItems.map(item => ({ itemId: item.itemId, nameKo: item.nameKo, x: item.curX, y: item.curY }))
-    : droppedItemsSave;
-  droppedItemsSave = drops;
-  return {
-    v: 4,
-    currencies: playerCurrencies,
-    gold: playerCurrencies.coins,
-    unlockedLevels,
-    unlockedTrophies,
-    harvests: hcObj,
-    srs: srsData,
-    plots,
-    lastLevel: currentLevelIndex,
-    apple,
-    fishAlbum: fishAlbumSave,
-    quests: questState,
-    inventory: inventoryState,
-    recipes: recipeState,
-    activeBuffs: activeBuffs,
-    seasonal: seasonalState,
-    leaderboards: leaderboardState,
-    droppedItems: drops,
-    cooking: cookingState
-  };
-}
+const BEEHIVE_PALETTE = {
+  '.': null,
+  'K': 0x0F172A, // Dark slate outline / entrance aperture
+  'b': 0x543A24, // Dark wooden base border
+  'B': 0x78350F, // Wooden base fill
+  'W': 0xA16207, // Wooden base highlight
+  'w': 0xCA8A04, // (Unused in baseline grid) Bright wooden accent
+  'D': 0xB45309, // Dark amber hive shade
+  'A': 0xD97706, // Amber hive outer border / midtone
+  'Y': 0xFACC15, // Gold hive main fill
+  'y': 0xFDE047, // Light yellow highlight
+  'H': 0xFEF08A  // (Unused in baseline grid) Specular highlight
+};
 ```
 
-Key features:
-1. **Dynamic Fallbacks**: Checks `sceneRef` (the active `FarmScene` instance). If active, reads current plot growth states, apple tree ripening timestamp, and ground item drops directly from scene objects. If inactive/paused, falls back to global cached buffers (`plotSave`, `appleTreeSave`, `droppedItemsSave`).
-2. **Data Structure Normalization**: Converts Map objects (`harvestCounts`) to plain JavaScript objects (`hcObj`) for standard JSON serialization.
+### Grid Grid Analysis (20x22 pixels, lines 1414–1435):
+- Defined Palette Keys: **10 colors** (+ null background).
+- Active Rendered Palette Keys in Grid: **8 colors**:
+  1. `K` (`0x0F172A`) — Dark Slate
+  2. `b` (`0x543A24`) — Dark Wood Border
+  3. `B` (`0x78350F`) — Wood Base Shadow
+  4. `W` (`0xA16207`) — Wood Base Top Edge
+  5. `D` (`0xB45309`) — Dark Amber Shadow
+  6. `A` (`0xD97706`) — Hive Contour / Border
+  7. `Y` (`0xFACC15`) — Honey Gold Body
+  8. `y` (`0xFDE047`) — Light Yellow Highlight
+- **Unused Baseline Tokens**: `w` (`0xCA8A04`) and `H` (`0xFEF08A`) are present in the palette object but 0 pixels exist in the 20x22 grid string array.
 
 ---
 
-### 2.2 Deserialization Flow (`applySave` & `migrateSaveData`)
-Located at lines `4033–4089` (`migrateSaveData`) and lines `4129–4175` (`applySave`).
+## 3. Beehive Upgrade Strategy (R5 Specification)
 
-```javascript
-function applySave(d){
-  if(!d) return false;
-  const migrated = migrateSaveData(d);
-  if(!migrated) return false;
-  
-  playerCurrencies = migrated.currencies || { coins: migrated.gold || 0, gems: 0, honor: 0 };
-  syncGoldAlias();
-  
-  unlockedLevels = Array.isArray(migrated.unlockedLevels) ? migrated.unlockedLevels : [0];
-  unlockedTrophies = Array.isArray(migrated.unlockedTrophies) ? migrated.unlockedTrophies : [];
-  if(migrated.harvests) Object.entries(migrated.harvests).forEach(([k,v])=>harvestCounts.set(k,v));
-  if(migrated.srs) srsData = migrated.srs;
-  if(migrated.plots) plotSave = migrated.plots;
-  if(typeof migrated.lastLevel==='number') currentLevelIndex = migrated.lastLevel;
-  if(migrated.apple) appleTreeSave = migrated.apple;
-  if(migrated.fishAlbum) fishAlbumSave = migrated.fishAlbum;
-  if(migrated.quests) questState = migrated.quests;
-  if(migrated.inventory) {
-    inventoryState = migrated.inventory;
-    inventoryState.maxSlots = typeof inventoryState.maxSlots === 'number' ? inventoryState.maxSlots : 20;
-  }
-  if(migrated.recipes) recipeState = migrated.recipes;
-  if(migrated.activeBuffs) activeBuffs = migrated.activeBuffs;
-  if(migrated.seasonal) seasonalState = migrated.seasonal;
-  if(migrated.leaderboards) leaderboardState = migrated.leaderboards;
-  if(Array.isArray(migrated.droppedItems)) {
-    droppedItemsSave = migrated.droppedItems;
-    if(sceneRef) {
-      sceneRef.clearAllDroppedItems();
-      droppedItemsSave.forEach(drop => sceneRef.spawnDroppedItem(drop.itemId || drop.nameKo, drop.x, drop.y, false));
-    }
-  }
-  if(migrated.cooking) {
-    cookingState = {
-      cookedRecipes: Array.isArray(migrated.cooking.cookedRecipes) ? migrated.cooking.cookedRecipes : [],
-      totalDishesCooked: typeof migrated.cooking.totalDishesCooked === 'number' ? migrated.cooking.totalDishesCooked : 0,
-      recipeStats: (typeof migrated.cooking.recipeStats === 'object' && migrated.cooking.recipeStats !== null) ? migrated.cooking.recipeStats : {}
-    };
-  } else {
-    cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
-  }
+To meet the Milestone 2 acceptance criteria and align with the upgraded Robot player character and Apple Tree, the Beehive sprite will be enhanced across 5 core dimensions:
 
-  initQuestState();
-  updateCurrencyHUD();
-  if (typeof checkCookingAchievements === 'function') checkCookingAchievements();
-  return true;
-}
-```
+### 1. Honeycomb Surface Texture Detail
+- Integrate geometric honeycomb cell micro-patterns across the hive tiers.
+- Alternating offset cell highlight (`C`, `H`) and cell shadow (`D`, `d`) pixels to simulate 3D hexagonal indentations.
+- Concentric spherical shading curves that follow the dome contours.
 
-#### Migration Layer (`migrateSaveData`):
-- Handles schema upgrades (v1–v3 to v4).
-- Ensures missing root objects (`quests`, `inventory`, `recipes`, `activeBuffs`, `seasonal`, `leaderboards`, `droppedItems`, `cooking`) are assigned sensible default structures.
-- Migrates legacy `inventory.cookedDishes` into `cooking.cookedRecipes`, `cooking.recipeStats`, and `cooking.totalDishesCooked`.
+### 2. Multi-Layered Straw / Skep & Wood Construction
+- 6 distinct horizontal coiled straw tiers, each rendered with clear top highlight (`y`, `H`), warm honey body (`Y`), and lower overhang drop-shadow (`S`, `D`).
+- Base wooden stand upgraded from flat brown bars to 3D bevelled wooden plinth with dark mahogany shadow (`b`, `B`), rich teak midtone (`W`, `w`), and polished top bevel (`O`).
+
+### 3. Glossy Dripping Honey Accent Pixels
+- Teardrop honey drips extending downward from the bottom straw ring over the wooden plinth edge.
+- Translucent golden amber gradient (`G` = `0xF59E0B`, `g` = `0xD97706`, `y` = `0xFDE047`) with a 1px bright specular catchlight (`C` = `0xFFFBEB`) on each drop.
+
+### 4. Crisp 1px Dark Slate Outlines (`K = 0x0F172A`)
+- Enclose the entire outer silhouette (straw dome, hanging honey drips, and wooden base stand) in solid `K = 0x0F172A`.
+- Refine the central entrance aperture: deep slate core (`K`) surrounded by inner shadow (`k` = `0x1E293B`) and framed by a warm golden entrance arch (`A`, `M`).
+
+### 5. Expanded Color Token Palette (17 Active Color Tokens)
+
+| Token | Hex Value | Color Description | Usage / Role |
+|---|---|---|---|
+| `.` | `null` | Transparent | Background canvas |
+| `K` | `0x0F172A` | Dark Slate | Crisp 1px outer outline & entrance core |
+| `k` | `0x1E293B` | Dark Charcoal | Entrance aperture inner depth shadow |
+| `b` | `0x451A03` | Dark Walnut | Wooden base outer border & deep shadow |
+| `B` | `0x78350F` | Deep Mahogany | Wooden base body shadow |
+| `W` | `0x92400E` | Warm Teak | Wooden base body midtone |
+| `w` | `0xB45309` | Rich Amber Wood | Wooden base top edge transition |
+| `O` | `0xD97706` | Polished Wood Edge | Wooden base highlight bevel |
+| `S` | `0x78350F` | Layer Shadow | Coiled straw tier overhang shadow |
+| `D` | `0x92400E` | Honeycomb Shadow | Honeycomb cell shadow & tier shadow |
+| `A` | `0xB45309` | Dark Amber Contour | Hive body contour & entrance frame |
+| `M` | `0xD97706` | Golden Amber | Hive body shading transition |
+| `Y` | `0xFACC15` | Honey Gold | Primary hive body gold |
+| `y` | `0xFDE047` | Sunflower Yellow | Tier top highlight & honey drip body |
+| `H` | `0xFEF08A` | Light Cream | Specular highlight on straw tiers |
+| `C` | `0xFFFBEB` | Pure Specular Catchlight | Honey droplet & dome specular shine |
+| `G` | `0xF59E0B` | Glossy Honey Gold | Honey drip core |
+| `g` | `0xD97706` | Honey Drip Shadow | Honey drip edge shadow |
 
 ---
 
-## 3. Serialized Data Inventory (All 19 Fields)
+## 4. Non-Regression & Verification Checklist
 
-| Field Name | Type | Description / Content | Default / Restored Target |
-|------------|------|-----------------------|---------------------------|
-| `v` | Number | Save schema version (currently `4`) | `migrated.v` |
-| `currencies` | Object | `{ coins, gems, honor }` | `playerCurrencies` |
-| `gold` | Number | Legacy alias for `coins` | `gold` global (synced via `syncGoldAlias()`) |
-| `unlockedLevels` | Array | Array of unlocked level indices `[0, 1, ...]` | `unlockedLevels` |
-| `unlockedTrophies` | Array | Array of purchased trophy IDs | `unlockedTrophies` |
-| `harvests` | Object | Map entries `{ "배추": 5, ... }` | `harvestCounts` Map |
-| `srs` | Object | Word review spaced-repetition statistics | `srsData` |
-| `plots` | Array | Active farm plot states `[{ i, ko, sState, plantedAt }]` | `plotSave` |
-| `lastLevel` | Number | Index of last active vocabulary level | `currentLevelIndex` |
-| `apple` | Object | Apple tree state `{ ripeAt, ripe }` | `appleTreeSave` |
-| `fishAlbum` | Object | Caught fish counts `{ "연어": 3, ... }` | `fishAlbumSave` |
-| `quests` | Object | Quest progression & daily/weekly reset timestamps | `questState` |
-| `inventory` | Object | `{ maxSlots, ingredients, seeds, scrolls, cookedDishes }` | `inventoryState` |
-| `recipes` | Object | `{ unlockedRecipes: [...] }` | `recipeState` |
-| `activeBuffs` | Object | Active player stat boost buffs | `activeBuffs` |
-| `seasonal` | Object | Season ID, points, claimed rewards | `seasonalState` |
-| `leaderboards` | Object | Personal best scores across minigames | `leaderboardState` |
-| `droppedItems` | Array | Items on overworld ground `[{ itemId, nameKo, x, y }]` | `droppedItemsSave` + scene respawn |
-| `cooking` | Object | `{ cookedRecipes, totalDishesCooked, recipeStats }` | `cookingState` |
+1. **Grid Resolution**: Maintain 20x22 (or 22x24 at `pixelSize = 2`) so canvas size fits cleanly into existing scale factor (`1.6`).
+2. **Anchor & Origin**: Keep `.setOrigin(0.5, 1)` at line 8660 so the bottom center of the wooden base aligns with world coordinate `(bx, by)`.
+3. **Drop Shadow Alignment**: `shadows.createShadow(this.beehiveSprite, 38, 12, 2)` expects a ~38px bottom base width, matching the upgraded wooden stand width.
+4. **Depth Sorting**: Dynamic depth sorting `setDepth(this.beehiveY)` in `FarmScene.update()` (line 9221) is unchanged.
+5. **Orbiting Bees**: `'p_tiny_bee'` creation (line 1450) and orbit updates (lines 9222–9235) remain intact.
+6. **Interaction Radius & Minigame Trigger**: Proximity check `Distance < 85` (lines 9218, 9281, 9375) and `this.scene.launch('BeeScene')` (line 9380) remain 100% untouched.
 
 ---
 
-## 4. Inventory & Cooking Restoration Mechanism
+## 5. Implementation Recommendation
 
-### 4.1 Inventory System (`inventoryState`)
-- `inventoryState` stores items in dictionary maps under `inventoryState.ingredients`:
-  ```javascript
-  inventoryState = {
-    maxSlots: 20,
-    ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 },
-    seeds: {},
-    scrolls: 0,
-    cookedDishes: {}
-  };
-  ```
-- `addItemToInventory(itemId, qty)` uses `getItemInfo(itemId)` to look up item metadata in `ITEM_DB`.
-- `getItemInfo` checks `ITEM_DB[keyOrId]` or matches `val.id === keyOrId`.
-- **Honey Gap Identified**:
-  - Currently `ITEM_DB` (lines 3901–3920) contains 20 items (`배추`, `무`, `파`, `고추`, `마늘`, `쌀`, `콩`, `당근`, `감자`, `옥수수`, `딸기`, `사과`, `연어`, `고등어`, `오징어`, `잉어`, `새우`, `문어`, `조개`, `황금물고기`).
-  - `'꿀'` (Honey) is **missing from `ITEM_DB`**.
-  - Standard addition required in `ITEM_DB`:
-    ```javascript
-    '꿀': { id: 'honey', name: 'Honey', nameKo: '꿀', icon: '🍯', description: 'Sweet golden honey harvested from the beehive.' }
-    ```
-
-### 4.2 Cooking System (`cookingState` & `COOKING_RECIPES`)
-- `COOKING_RECIPES` (lines 11752–11890) currently defines 10 recipes (`kimchi`, `radish_rice`, `roasted_corn`, `strawberry_jam`, `gimbap`, `tteokbokki`, `gamjajeon`, `bibimbap`, `bulgogi`, `samgyetang`).
-- `cookingState` tracks:
-  - `cookedRecipes`: array of recipe IDs cooked at least once.
-  - `totalDishesCooked`: integer count of all dishes cooked.
-  - `recipeStats`: map of `{ recipeId: count }`.
-- In `applySave()`, if `migrated.cooking` exists, `cookingState` is directly restored. Legacy save files automatically migrate `inventory.cookedDishes` into `cookingState`.
-
----
-
-## 5. Scene Transition & Lifecycle Architecture (`BeeScene` ↔ `FarmScene`)
-
-### 5.1 Launch Phase (`FarmScene` → `BeeScene`)
-Lines 9331–9339 in `FarmScene.update()`:
-```javascript
-if(this.beehiveX && Phaser.Math.Distance.Between(this.player.x, this.player.y, this.beehiveX, this.beehiveY) < 85){
-  this.tweens.add({targets:this.beehiveSprite, scale:{from:1.6, to:1.85}, duration:120, yoyo:true, ease:'Back.Out(2)'});
-  this.cameras.main.fadeOut(300, 0, 0, 0);
-  this.cameras.main.once('camerafadeoutcomplete', () => {
-    this.scene.pause();
-    this.scene.launch('BeeScene');
-  });
-  return;
-}
-```
-1. **Camera Fade**: 300ms fade out to black.
-2. **Scene Pause**: `this.scene.pause()` halts `FarmScene` physics, animation, and updates without destroying the scene instance.
-3. **Overworld Position Preservation**: Player coordinates (`this.player.x`, `this.player.y`) remain intact on the paused `FarmScene` instance.
-4. **Timer Preservation**: Crop growth timers (`p.plantedAt`) rely on absolute timestamp comparisons `(Date.now() - p.plantedAt)` in `FarmScene.update()`. Pausing the scene does not alter timestamps, so elapsed time in `BeeScene` is accurately counted towards crop growth upon return.
-
-### 5.2 Return Phase (`BeeScene` → `FarmScene`)
-Lines 11217–11224 in `BeeScene`:
-```javascript
-exitMinigame() {
-  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  this.cameras.main.fadeOut(300, 0, 0, 0);
-  this.cameras.main.once('camerafadeoutcomplete', () => {
-    this.scene.stop();
-    this.scene.resume('FarmScene');
-  });
-}
-```
-1. `BeeScene` camera fades out (300ms).
-2. `this.scene.stop()` destroys the active `BeeScene` instance.
-3. `this.scene.resume('FarmScene')` resumes `FarmScene`.
-4. `FarmScene` listens for the `'resume'` event (`lines 7438–7440`) and executes `this.cameras.main.fadeIn(300, 0, 0, 0)`, restoring visual focus cleanly.
-
----
-
-## 6. Implementation Plan for Milestone 2
-
-To achieve complete Milestone 2 persistence and scene integration:
-
-1. **Register Honey Item in `ITEM_DB`**:
-   Add `'꿀'` key to `ITEM_DB` in `game.js`:
-   ```javascript
-   '꿀': { id: 'honey', name: 'Honey', nameKo: '꿀', icon: '🍯', description: 'Sweet golden honey harvested from the beehive.' }
-   ```
-
-2. **Grant Honey Reward on BeeScene Completion**:
-   In `BeeScene.showResultsSummary()`, add item award logic before exit:
-   ```javascript
-   addItemToInventory('honey', totalHoney);
-   if (typeof showToast === 'function') showToast(`🍯 Received +${totalHoney} Honey! Saved to inventory.`);
-   ```
-
-3. **Register Honey Cooking Recipes**:
-   Add new recipes to `COOKING_RECIPES`:
-   - `honey_tea` (Honey Tea / 꿀차) requiring 1x `honey`.
-   - `honey_yakgwa` (Honey Yakgwa / 약과) requiring 1x `honey` and 1x `rice`.
-   Add recipe IDs to default `unlockedRecipes` array in `recipeState` and `migrateSaveData`.
-
-4. **Beehive Minigame High Score / Stats Persistence (Optional Enhancement)**:
-   Extend `leaderboardState.personalBests` with `beehiveHighScore` and `beehiveTotalHoney` to serialize player performance in `collectSave()` and restore in `applySave()`.
-
----
-
-## 7. Forensic Verification & Syntax Check
-
-Executed command:
-```bash
-node -c game.js
-```
-Result: **Exit Code 0 — Syntax OK (No errors or warnings)**.
+When implementing the upgrade in `game.js` (and syncing to `assets/game.js`):
+1. Update `BEEHIVE_PALETTE` in `PixelArtGenerator._genBeehiveTextures(scene)` (line 1399) with the 17-token expanded color palette.
+2. Replace the 20x22 grid array in `this.createTexture(scene, 'beehive', [...])` (lines 1413–1436) with the upgraded pixel grid containing honeycomb details, layered straw tiers, 1px dark slate outlines (`K`), and dripping honey droplets (`G`, `g`, `C`).
+3. Retain `'p_tiny_bee'` baking (lines 1450–1455) without modification.
+4. Run `node -c game.js` and `node -c assets/game.js` to verify syntax.
+5. Verify SHA256 parity between `game.js` and `assets/game.js`.

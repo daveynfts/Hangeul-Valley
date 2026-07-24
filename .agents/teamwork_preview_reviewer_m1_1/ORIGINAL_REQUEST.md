@@ -1,11 +1,16 @@
-## 2026-07-24T14:27:31Z
-You are Reviewer 1 for Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics).
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_1`.
-Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_1\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_1\handoff.md`.
+## 2026-07-24T14:50:53Z
+<USER_REQUEST>
+You are teamwork_preview_reviewer_m1_1.
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_1`. Write your review report to `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_1\review.md` and handoff to `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_1\handoff.md`.
 
-Review the implementation in `game.js` and `assets/game.js` against requirements R1 and R2:
-1. R1: Beehive NPC on Farm Map: pixel-art Beehive sprite near apple tree (`_createBeehiveNPC`), animated buzzing effect (vibration tween + 4 orbiting tiny bee particles), label `🐝 Beehive [SPACE]`, proximity interaction (<85px), smooth camera fade scene transition to `BeeScene`.
-2. R2: Bee Shooting Minigame Scene (`BeeScene`): Phaser `BeeScene` class registered in `config.scene`, procedural bee textures (`bee_fly_0`, `bee_fly_1`, `p_pollen`, `p_honey_drip`), flying bee containers with varied flight trajectories (Linear Glide, Sine Wave, Zigzag), target English word HUD, vocabulary word extraction via `getUnlockedWords()`, click handlers with combo score multiplier, particle explosion & chiptune sound effects, camera shake feedback on miss, 10-word round limit, retro glassmorphism end-of-round summary overlay, return transition to `FarmScene`.
-3. Code quality: run `node -c game.js` and `node -c assets/game.js`.
+Target Scope: Milestone 1 Code Review — Shop NPC (R1) & Wizard NPC (R2) Polish.
+Read project specs: `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and Worker handoff: `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\handoff.md`.
 
-Verify code correctness, completeness, visual integration quality, and scene transition stability. Deliver your verdict (PASS/FAIL) and handoff report, then send a message back to the Project Orchestrator.
+Review Tasks:
+1. Examine `game.js` and `assets/game.js` for Shop NPC (R1) and Wizard NPC (R2) implementations.
+2. Run syntax checks via run_command (`node -c game.js` and `node -c assets/game.js`).
+3. Verify palette definitions, 1px dark outlines (`K = 0x0F172A` / `0x121016`), multi-tone shading, hat/apron/coins, robe fabric folds, star/moon embroidery, staff orb, and magical aura.
+4. Verify non-regression: origin `(0.5, 1)`, scales (`1.3` / `1.8`), depth-sorting, levitation tweens, shadow anchors, and interaction functions (`openShop()`, `openSpellDuel()`).
+5. Provide explicit PASS / VETO verdict with detailed rationale.
+
+</USER_REQUEST>

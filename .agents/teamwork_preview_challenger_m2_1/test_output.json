@@ -1,0 +1,83 @@
+{
+  "totalTests": 15,
+  "passedTests": 15,
+  "failedTests": 0,
+  "verdict": "PASS",
+  "results": [
+    {
+      "name": "Byte-level SHA256 Equality",
+      "status": "PASS",
+      "details": "game.js: 46466cd4188c... vs assets/game.js: 46466cd4188c..."
+    },
+    {
+      "name": "Syntax check: game.js",
+      "status": "PASS",
+      "details": "node -c passed with 0 exit code"
+    },
+    {
+      "name": "Syntax check: assets/game.js",
+      "status": "PASS",
+      "details": "node -c passed with 0 exit code"
+    },
+    {
+      "name": "Palette C size >= 19",
+      "status": "PASS",
+      "details": "Size: 20 (keys: .,K,k,H,G,g,D,d,W,C,c,w,P,p,E,I,e,L,Z,z)"
+    },
+    {
+      "name": "Outline token K in C is 0x0F172A",
+      "status": "PASS",
+      "details": "Value: 0xF172A"
+    },
+    {
+      "name": "C active tokens matrix usage",
+      "status": "PASS",
+      "details": "All 20 tokens used in cat matrices"
+    },
+    {
+      "name": "Palette BEEHIVE_PALETTE size >= 17",
+      "status": "PASS",
+      "details": "Size: 18 (keys: .,K,k,b,B,W,w,O,S,D,A,M,Y,y,H,C,G,g)"
+    },
+    {
+      "name": "Outline token K in BEEHIVE_PALETTE is 0x0F172A",
+      "status": "PASS",
+      "details": "Value: 0xF172A"
+    },
+    {
+      "name": "BEEHIVE_PALETTE active tokens matrix usage",
+      "status": "PASS",
+      "details": "All 18 tokens used in beehive matrix"
+    },
+    {
+      "name": "Palette NOTICE_BOARD_PALETTE size >= 18",
+      "status": "PASS",
+      "details": "Extension size: 18, Merged size: 34"
+    },
+    {
+      "name": "Outline token K in NOTICE_BOARD_PALETTE is 0x0F172A",
+      "status": "PASS",
+      "details": "Value: 0xF172A"
+    },
+    {
+      "name": "NOTICE_BOARD_PALETTE active tokens matrix usage",
+      "status": "PASS",
+      "details": "All 18 extension tokens used in notice board matrix"
+    },
+    {
+      "name": "Palette PORTAL_PALETTE size >= 17",
+      "status": "PASS",
+      "details": "Extension size: 17, Merged size: 35"
+    },
+    {
+      "name": "Outline token K in PORTAL_PALETTE is 0x0F172A",
+      "status": "PASS",
+      "details": "Value: 0xF172A"
+    },
+    {
+      "name": "PORTAL_PALETTE active tokens matrix usage",
+      "status": "PASS",
+      "details": "All 17 extension tokens used in portal matrix"
+    }
+  ]
+}

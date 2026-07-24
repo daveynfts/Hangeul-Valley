@@ -1,45 +1,92 @@
-# Handoff Report - Reviewer 2 (Milestone 1)
+# Handoff Report: Milestone 1 Code & Visual Quality Review — Shop NPC (R1) & Wizard NPC (R2)
+
+**Agent**: `teamwork_preview_reviewer_m1_2`  
+**Roles**: Reviewer, Adversarial Critic  
+**Target Scope**: Milestone 1 Code & Visual Quality Review  
+**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2`  
+
+---
 
 ## 1. Observation
-- **Syntax Check Commands**: Executed `node -c game.js` and `node -c assets/game.js`. Output was clean (exit code 0, 0 errors).
-- **File Parity Check Command**: Executed `powershell -Command "Get-FileHash game.js; Get-FileHash assets/game.js"`. Output:
-  - `game.js`: `5E33CC08BD18ABF3C75866868DFDE18EC5B900DE41A9C124220E866AC6B9A026`
-  - `assets/game.js`: `5E33CC08BD18ABF3C75866868DFDE18EC5B900DE41A9C124220E866AC6B9A026`
-- **Empirical Test Suite**: Executed `node test_m1_challenger_harness.js`. Output: `VERIFICATION COMPLETE: 49 PASSED, 0 FAILED`.
-- **Texture Baking Code**: In `game.js` lines 264–265:
-  ```js
-  this._genBeehiveTextures(scene);
-  this._genBeeTextures(scene);
-  ```
-  Lines 1314–1374 define `static _genBeehiveTextures(scene)`, creating textures `beehive` and `p_tiny_bee`.
-  Lines 1376–1449 define `static _genBeeTextures(scene)`, creating textures `bee_fly_0`, `bee_fly_1`, `p_pollen`, and `p_honey_drip`.
-- **Scene Lifecycle**: 
-  - `game.js` line 10908: `class BeeScene extends Phaser.Scene` with key `'BeeScene'`.
-  - `game.js` line 11266: `scene:[FarmScene, ArcadeScene, DungeonScene, FishingScene, BeeScene]`.
-  - `game.js` lines 9336–9337: `this.scene.pause(); this.scene.launch('BeeScene');` in `FarmScene`.
-  - `game.js` lines 11221–11222: `this.scene.stop(); this.scene.resume('FarmScene');` in `BeeScene`.
-- **Vocabulary & Distractor Logic**:
-  - `game.js` line 4215: `function getUnlockedWords()` flattens unlocked level words with array check and fallbacks.
-  - `game.js` line 11018: `const distractors = this.wordList.filter(w => w.ko !== currentTarget.ko);`
-  - `game.js` line 11019: `const shuffledDistractors = Phaser.Utils.Array.Shuffle([...distractors]).slice(0, 3);`
+
+Direct observations from source code inspection and CLI test execution:
+
+1. **Syntax Check & Dual-File Synchronization**:
+   - `node -c game.js` and `node -c assets/game.js` executed cleanly with exit code 0.
+   - SHA256 hashes for both files match 100%: `28626AA8AA82412B4C4415FD220327A16789CF92B40CFC690540DBFB6ED7FE18`.
+
+2. **Wizard NPC (R2) Matrix Bounds & Particle Animation**:
+   - Location: `PixelArtRenderer.WIZ_1` at lines 274–295 in `game.js`.
+   - Line 278 (`WIZ_1` row 4): `'...KphHHHHHHHhK.A'` contains **17 characters** (columns 0..16).
+   - In contrast, all rows of `WIZ_0` (lines 251–272) and all other rows of `WIZ_1` contain **16 characters** (columns 0..15).
+   - `this.createTexture(scene, 'wizard_idle_1', wiz_1, W_PAL, 16, 20)` bakes a texture with canvas width `16 * PS = 48px`.
+   - Drawing column 16 at `x = 16 * 3 = 48px` renders outside the canvas coordinate space [0..47px], causing pixel `'A'` to be clipped off/lost during canvas texture bake.
+
+3. **Wizard NPC (R2) Palette Audit (`W_PAL`)**:
+   - Location: `PixelArtRenderer.W_PAL` at lines 215–249 in `game.js`.
+   - `W_PAL` defines 32 unique hex color tokens (excluding transparent `.`).
+   - Character usage audit across `WIZ_0` and `WIZ_1` shows that only 26 color tokens (`A`, `C`, `D`, `H`, `K`, `M`, `P`, `Q`, `S`, `V`, `X`, `a`, `b`, `c`, `d`, `f`, `h`, `k`, `m`, `p`, `q`, `s`, `u`, `v`, `w`, `z`) are actually present in the matrices.
+   - 6 defined color tokens (`'y'`, `'Y'`, `'W'`, `'B'`, `'e'`, `'x'`) are **never used** in either `WIZ_0` or `WIZ_1`.
+
+4. **Shop NPC (R1) Palette & Matrix Audit (`SHOP_PALETTE`)**:
+   - Location: `SHOP_PALETTE` and `shop_sign` matrix at lines 7910–7948 in `game.js`.
+   - `shop_sign` matrix dimensions are 18×22 (all 22 rows are 18 characters long).
+   - 17 unique non-null color tokens (`A`, `B`, `J`, `K`, `O`, `Q`, `U`, `W`, `X`, `Y`, `f`, `j`, `m`, `o`, `u`, `w`, `y`) are actively rendered in the matrix, mapping to 17 unique fill hex values.
+   - Exceeds the threshold requirement of > 14 unique fill colors. Token `'x'` is declared in `SHOP_PALETTE` but omitted from the matrix.
+
+---
 
 ## 2. Logic Chain
-1. *From Syntax & Parity Observations*: Running `node -c` on both `game.js` and `assets/game.js` succeeds with zero errors, and SHA256 hashes match identically. Thus, dual-file synchronization and syntactic correctness are verified.
-2. *From Texture Baking Observations*: `PixelArtRenderer.generateAllTextures(scene)` calls `_genBeehiveTextures` and `_genBeeTextures`, which use `createTexture` and Canvas graphics to bake textures `beehive`, `p_tiny_bee`, `bee_fly_0`, `bee_fly_1`, `p_pollen`, and `p_honey_drip` with nearest-neighbor filtering. Requirement R1 is fully met.
-3. *From Scene Lifecycle Observations*: `BeeScene` extends `Phaser.Scene` and is registered in the Phaser game config array. `FarmScene` pauses itself before launching `BeeScene`, and `BeeScene` stops itself before resuming `FarmScene`. `FarmScene` listens to `resume` to fade back in without losing state. Requirement R2 is fully met.
-4. *From Vocabulary & Distractor Observations*: `getUnlockedWords()` handles unlocked levels and fallbacks. Distractors are constructed by filtering out `currentTarget.ko`, ensuring no duplicate target distractors, and handles small word pools (even single-word pools) safely without runtime errors. Requirement R3 is fully met.
-5. *From Adversarial & Integrity Analysis*: No dummy implementations, facade code, or hardcoded test bypasses were discovered. The minigame logic is completely functional and robust against edge cases.
+
+1. **Matrix Bounds Violation**:
+   - *Observation*: `WIZ_1` row 4 has 17 characters, but `wizard_idle_1` texture is created with width 16 (48px canvas).
+   - *Reasoning*: When `PixelArtRenderer.drawMatrix` iterates over row 4, `rx` reaches 16. `fillRect(16*3, 4*3, 3, 3)` attempts to draw at `x=48px`. A 48px wide HTML5 canvas has x-indices 0 to 47. Coordinates >= 48px are out-of-bounds and ignored by canvas clipping. Thus, particle highlight `'A'` is never visible in `wizard_idle_1`. Furthermore, string length asymmetry breaks matrix grid uniformity.
+
+2. **Facade Palette Bloating**:
+   - *Observation*: `W_PAL` contains 32 entries, but 6 entries (`y`, `Y`, `W`, `B`, `e`, `x`) do not appear in `WIZ_0` or `WIZ_1`.
+   - *Reasoning*: The task specification requires `W_PAL` to use 32 unique color tokens. While the JS dictionary has 32 keys, a pixel art renderer must actually render those color tokens in the baked sprite textures. 6 dead palette entries constitute facade implementation bloat.
+
+3. **Verdict Deduction**:
+   - *Conclusion*: A Critical defect (out-of-bounds matrix truncation) and a Major defect (6 unused facade palette entries) necessitate a **VETO** verdict for Milestone 1.
+
+---
 
 ## 3. Caveats
-- No caveats. All core requirements and edge cases were fully examined and empirically tested.
+
+- **No Caveats**: All code paths, static renderer matrices, palette structures, canvas generation methods, syntax checks, and SHA256 file hashes were fully inspected and audited.
+
+---
 
 ## 4. Conclusion
-Final Assessment: **PASS (APPROVE)**.
-Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics) in `game.js` and `assets/game.js` meets all requirements (R1, R2), exhibits high code quality, preserves dual-file parity, and passes adversarial stress-testing with zero integrity violations.
+
+**Verdict**: **VETO** (REQUEST_CHANGES)
+
+- Milestone 1 cannot be approved in its current state due to:
+  1. Critical bounds overflow in `WIZ_1` row 4 (`'...KphHHHHHHHhK.A'` is 17 chars long instead of 16), truncating particle sparkle `'A'`.
+  2. 6 unused facade color tokens in `W_PAL` (`y`, `Y`, `W`, `B`, `e`, `x`).
+- Detailed findings and suggested remediations are documented in `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2\review.md`.
+
+---
 
 ## 5. Verification Method
-To independently verify this report:
-1. `node -c game.js; node -c assets/game.js`
-2. `powershell -Command "Get-FileHash game.js; Get-FileHash assets/game.js"`
-3. `node test_m1_challenger_harness.js`
-Invalidation Condition: Any syntax error, SHA256 hash mismatch between `game.js` and `assets/game.js`, failure in test harness, or missing texture generation invocation.
+
+To independently verify these findings:
+
+1. **Matrix Row Length Audit**:
+   ```powershell
+   node -e "const fs = require('fs'); const code = fs.readFileSync('game.js', 'utf8'); eval(code.slice(0, code.indexOf('class FarmScene'))); console.log('WIZ_1 row 4 length:', PixelArtRenderer.WIZ_1[4].length, `'${PixelArtRenderer.WIZ_1[4]} '`);"
+   ```
+   *Expected Output*: Row 4 length is `17` (violates 16-column width constraint).
+
+2. **Palette Token Usage Audit**:
+   ```powershell
+   node -e "const fs = require('fs'); const code = fs.readFileSync('game.js', 'utf8'); eval(code.slice(0, code.indexOf('class FarmScene'))); const defined = Object.keys(PixelArtRenderer.W_PAL).filter(k => k !== '.'); const used = new Set([...PixelArtRenderer.WIZ_0.join(''), ...PixelArtRenderer.WIZ_1.join('')]); const unused = defined.filter(k => !used.has(k)); console.log('Unused W_PAL tokens:', unused);"
+   ```
+   *Expected Output*: `[ 'y', 'Y', 'W', 'B', 'e', 'x' ]`.
+
+3. **Syntax & Dual-File Hash Check**:
+   ```powershell
+   node -c game.js; node -c assets/game.js
+   Get-FileHash game.js, assets/game.js
+   ```
+   *Expected Output*: Both pass `node -c` cleanly, SHA256 hashes match `28626AA8AA82412B4C4415FD220327A16789CF92B40CFC690540DBFB6ED7FE18`.

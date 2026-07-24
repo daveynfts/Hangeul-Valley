@@ -1,38 +1,23 @@
-# Implementation Plan — Hangeul Valley Pixel Art Quality Upgrade
+# Execution Plan — Hangeul Valley NPC Sprite Polish & Upgrade
 
-## Objectives & Requirements
-1. **Character Sprite Redesign (R1)**:
-   - Farmer: 12 walk frames (4 directions × 3) + 9 action frames (watering, harvesting, fruit picking) with visible separate arms/hands, clothing folds, anatomical proportions, weight shift, multi-tone shading (≥3 tones per color area), 1px dark outline, anti-aliasing, and dithering.
-   - Ginger Cat: 8 frames (idle 0/1, walk 0/1, sit 0/1, sleep 0/1) with detailed tabby stripes, fur dithering, expressive tail/ears, 1px dark outline, multi-tone shading.
-   - Wizard Merlin: 2 frames (idle 0/1) with flowing robe, fabric fold shading, beard hair strands, inner glow staff crystal, 1px dark outline, multi-tone shading.
-2. **Environment & Entity Sprites Upgrade (R2)**:
-   - 5 Crop species × 4 growth stages (20 textures): detailed leaf shapes, stem structure, harvest-ready sparkle/richness, multi-tone shading.
-   - 11 Fish species: distinct scale patterns, fin details, species-specific coloring with iridescent highlights.
-   - Dungeon Monsters: menacing design, idle breathing/pulsing, detailed weapon/armor on skeleton/goblin, multi-tone shading.
-   - Arcade Enemies: sleek sci-fi design, engine glow, distinct silhouettes, multi-tone shading.
-3. **Zero External Assets (R3)**:
-   - All sprites generated programmatically via `PixelArtRenderer.drawMatrix(g, matrix, palette)` on 16×16 grids scaled at PS=3 (48×48 textures).
-4. **Integration & Integrity (R4)**:
-   - Retain 100% existing texture keys, animation keys, gameplay triggers, and scene integrations.
-   - Synchronize `game.js` and `assets/game.js`. Validate with `node -c game.js`.
-   - Skip victory audit phase per user instructions.
+## Overview
+Polish and upgrade all NPC sprites in Hangeul Valley (Shop NPC, Wizard NPC, Cat NPC Muop, Notice Board, Portal, and Beehive) with richer pixel art detail, multi-tone shading, specular highlights, crisp 1px dark outlines, micro-animations, and increased color token count.
 
-## Milestone Plan
+## Milestones & Phased Plan
 
-### Milestone 1: Exploration & Palette/Matrix Specification
-- **Goal**: Analyze `game.js` sprite renderer, existing palette, all texture key definitions, and design the multi-tone shading color palettes and 16×16 matrices for characters, crops, fish, monsters, and arcade enemies.
-- **Dispatch**:
-  - `explorer_m1_1`: Character Sprites (Farmer 21 frames, Ginger Cat 8 frames, Wizard 2 frames) - design multi-tone palettes (highlight, base, shadow, deep shadow), 1px outline rules, anatomical details, dithering, and matrices.
-  - `explorer_m1_2`: Environment & Entity Sprites (5 crops × 4 stages, 11 fish species) - design leaf/scale/highlight palettes and 16×16 matrices.
-  - `explorer_m1_3`: Monsters, Arcade Enemies & Texture Registry - design monster/enemy multi-tone matrices and inventory all texture keys in `game.js`.
+### Milestone 1: Shop NPC & Wizard NPC Polish (R1 & R2)
+- **Phase 1: Exploration**: Spawn 3 Explorers to locate exact sprite creation/bake/rendering functions for Shop NPC and Wizard NPC in `game.js`, count baseline color tokens, inspect current drawing routines, and formulate pixel art upgrade designs.
+- **Phase 2: Implementation**: Spawn Worker to implement Shop NPC & Wizard NPC upgrades in `game.js`. Worker runs syntax check (`node -c game.js`) and verifies rendering logic.
+- **Phase 3: Review & Challenge**: Spawn 2 Reviewers (code quality, outline compliance, non-regression) and 2 Challengers (empirical verification of color token count increase, 1px outlines, interaction stability).
+- **Phase 4: Audit**: Spawn 1 Forensic Auditor for M1 integrity check.
 
-### Milestone 2: Implementation & Code Synchronization
-- **Goal**: Replace all 16×16 matrix definitions in `game.js` with the upgraded professional pixel art matrices, extend `STARDEW_PALETTE` with multi-tone colors, ensure zero texture key drops, synchronize `game.js` with `assets/game.js`, and verify with `node -c game.js`.
-- **Dispatch**: `worker_m2`.
+### Milestone 2: Cat NPC, Notice Board, Portal & Beehive Polish (R3, R4, R5)
+- **Phase 1: Exploration**: Spawn 3 Explorers to analyze Cat NPC Muop (world sprite), Notice Board, Portal, and Beehive sprite drawing functions in `game.js`.
+- **Phase 2: Implementation**: Spawn Worker to implement R3, R4, R5 upgrades in `game.js`.
+- **Phase 3: Review & Challenge**: Spawn 2 Reviewers and 2 Challengers to verify pixel art improvements, color token increases, tail-swish animation, particle/glow effects, and non-regression.
+- **Phase 4: Audit**: Spawn 1 Forensic Auditor for M2 integrity check.
 
-### Milestone 3: Verification & Challenge (Skip Victory Audit)
-- **Goal**: Perform independent code review, texture key parity check, syntax validation, and challenge verification.
-- **Dispatch**:
-  - `reviewer_m3_1`: Code quality, key parity & sync verification.
-  - `reviewer_m3_2`: Requirement compliance & art quality verification.
-  - `challenger_m3_1`: Syntax check (`node -c game.js`) & key registry validation.
+### Milestone 3: Dual-File Sync & Final E2E Forensic Integrity Audit
+- **Phase 1: Sync & Verify**: Spawn Worker to synchronize `game.js` -> `assets/game.js` and `index.html` -> `assets/index.html`, verifying 100% SHA256 match and passing `node -c` syntax checks.
+- **Phase 2: E2E Forensic Audit**: Spawn Forensic Auditor for complete project verification across R1-R5 and acceptance criteria.
+- **Phase 3: Victory Report**: Report victory claim back to Sentinel/User.

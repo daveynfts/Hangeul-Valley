@@ -1,83 +1,37 @@
-# Handoff Report — Victory Auditor (Hangeul Valley)
-
-**Working Directory**: `C:\VibeCode\Hangeul Valley\.agents\auditor`  
-**Target Files**: `index.html`, `assets/index.html`, `game.js`  
-**Status**: Hard Handoff (Audit Complete — VICTORY CONFIRMED)
-
----
+# Handoff Report — Independent Victory Audit for Hangeul Valley NPC Sprite Polish & Upgrade
 
 ## 1. Observation
-
-1. **Phase A — Timeline & Requirements Traceability**:
-   - Reconstructed requirement lineage from `ORIGINAL_REQUEST.md`: Initial Request (Glassmorphism & Web Audio), Follow-up 1 (Triple Economy, Quests, Recipes, Pets, Events), Follow-up 2 (Stardew Valley 48x48 Canvas Pixel Art), and Follow-up 3 (Top HUD Redesign).
-   - Traceability confirmed: all features across iterations remain fully active and intact in `index.html` and `game.js`.
-
-2. **Phase B — Integrity & Anti-Cheating Check**:
-   - Syntax check: `node -c game.js` completed with exit code 0 (zero errors).
-   - File mirror synchronization: `index.html` and `assets/index.html` are 100% byte-for-byte identical (SHA256: `0461144FE32ADF10ED98FF0FA161FAAE6776EE3F07C56A07EFD6888673E65CB7`, Length: 108,355 bytes).
-   - No mock code or facades: `toggleHudOverflow(evt)` function implemented with proper event propagation control and click-outside listener. All 12 feature button IDs and `onclick` attributes are preserved and functional.
-
-3. **Phase C — Independent Test Execution**:
-   - Test harness `independent_victory_test.js` executed directly: 41 out of 41 assertions PASSED (0 failures).
-   - Bounding box analysis at 1024px desktop: `#hud` (x: 14 to 738, y: 10 to 54), `#progress-bar-wrap` (x: 790 to 1010, y: 10 to 54), `#event-banner` (x: 272 to 752, y: 66 to 104). Horizontal clearance gap: 52px; vertical clearance gap: 12px. Zero pixel overlap.
-   - Bounding box analysis at 768px tablet: `#hud` (y: 8 to 56), `#progress-bar-wrap` (y: 64 to 100), `#event-banner` (y: 106 to 140). Clear vertical stack gaps (8px and 6px). Zero pixel overlap.
-   - Visible top buttons in `#hud-actions-group`: exactly 8 visible buttons (`#vocab-btn`, `#shop-btn`, `#quest-btn`, `#recipe-btn`, `#pet-btn`, `#save-btn`, `#hud-more-btn`, `#hud-menu-btn`).
-   - Overflow dropdown menu (`#hud-overflow-menu`): contains 5 secondary feature buttons (`#seasonal-btn`, `#leaderboard-btn`, `#duel-btn`, `#fish-album-btn`, `#trophy-btn`).
-   - Retro styling: `Press Start 2P` font, `.glass-hud`, `neon-border-gold`, and `backdrop-filter` CSS properties fully intact.
-
----
+- **Syntax Check**: Ran `node -c game.js` and `node -c assets/game.js`. Both executed with exit code 0 and zero syntax errors or warnings.
+- **SHA256 Byte Synchronization**:
+  - `game.js`: `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`
+  - `assets/game.js`: `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C` (100% SHA256 Match)
+  - `index.html`: `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA`
+  - `assets/index.html`: `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA` (100% SHA256 Match)
+- **Sprite Shading, Features & Outlines**:
+  - **R1 Shop NPC**: Uses `SHOP_PALETTE` with 18 distinct color tokens (multi-tone clothing: navy hanbok vest `J`/`j`, cream apron `U`/`u`), gat hat (`B`/`A`), counter coins (`Y`/`y`), and 1px dark contour outline (`K`: `0x0F172A`).
+  - **R2 Wizard NPC**: Uses `PixelArtRenderer.W_PAL` with 33 distinct color tokens (lavender/purple robe folds `p`/`P`/`h`/`H`/`v`/`V`/`u`, gold star/moon embroidery `m`/`M`/`y`/`Y`, glowing staff with cyan orb highlights `q`/`Q`/`c`/`C`/`e` & sparkles `a`/`A`/`f`, multi-tone beard `W`/`w`/`d`/`D`/`b`/`B`), and 1px dark outline (`K`: `0x0F172A`).
+  - **R3 Cat NPC (Muop)**: Uses palette `C` with 19 distinct color tokens (ginger fur `GO`/`GD`, tabby stripes/flank & forehead M-mark, amber eyes `EY` with pupil `PU` and catchlights), tail-swish animation (`cat-idle` anim), 1px dark outline (`K`: `0x0F172A`), origin `(0.5, 1)`, scale `0.75`, depth sorting (`setDepth(cy)`), and `showCatDialog()` trigger on SPACE (<65px).
+  - **R4 Notice Board & Dungeon Portal**:
+    - Notice Board: 18 color tokens, wood grain, pinned notes, warm lantern glow, 1px dark outline (`K`: `0x0F172A`), origin `(0.5, 1)`, scale `1.3`, depth sorting, and `openMemoryGame()` trigger on SPACE (<80px).
+    - Dungeon Portal: 17 color tokens, rune detail, swirling energy core, pulsing glow particles, 1px dark outline (`K`: `0x0F172A`), origin `(0.5, 1)`, scale `1.6`, depth sorting, and `DungeonScene` launch trigger on SPACE (<90px).
+  - **R5 Beehive**: 17 color tokens, honeycomb surface texture, layered straw/wood, dripping honey droplets with catchlights, 1px dark outline (`K`: `0x0F172A`), origin `(0.5, 1)`, scale `1.6`, depth sorting, and `BeeScene` launch trigger on SPACE (<85px).
+- **Anti-Cheat / Facade Inspection**: Verified zero mocks, dummy passes, or fake skip flags in `game.js` and `assets/game.js`.
 
 ## 2. Logic Chain
-
-1. *Observation*: Anchoring `#hud` at `left: 14px; max-width: calc(100vw - 300px)` limits its width to 724px on 1024px desktop, giving a right edge of `x = 738px`.
-2. *Observation*: Anchoring `#progress-bar-wrap` at `right: 14px` (width ~220px) gives a left edge of `x = 790px`.
-3. *Deduction*: Horizontal clearance between Tier 1 elements is 52px (well above 0px requirement).
-4. *Observation*: Tier 1 bottom height is `y = 54px`. `#event-banner` top is positioned at `y = 66px`.
-5. *Deduction*: Vertical clearance between Tier 1 and Tier 2 is 12px. Zero pixel overlap exists between any pair of top elements on desktop.
-6. *Observation*: On tablet 768px, CSS media queries stack Tier 1 and Tier 2 vertically with top coordinates at 8px (`#hud`), 64px (`#progress-bar-wrap`), and 106px (`#event-banner`).
-7. *Deduction*: Clear vertical gaps (8px and 6px) exist between elements at 768px. Zero pixel overlap exists on tablet viewports.
-
----
+1. All acceptance criteria specified in `ORIGINAL_REQUEST.md` R1-R5 have been directly verified in the codebase via independent static code analysis, matrix/palette token extraction, and interaction handler checks.
+2. Syntax validation (`node -c`) passes cleanly for both `game.js` and `assets/game.js`.
+3. Dual-file synchronization (`game.js` ↔ `assets/game.js` and `index.html` ↔ `assets/index.html`) is 100% verified via matching SHA256 hashes.
+4. No facades, hardcoded test skips, or anti-cheating violations were identified.
 
 ## 3. Caveats
-
-- No caveats. All audit checks were independently verified via custom script execution and source analysis.
-
----
+- Browser visual rendering requires a DOM environment (Phaser WebGL/Canvas canvas element); static node verification confirmed matrix definitions, canvas texture creation calls, and interaction triggers.
 
 ## 4. Conclusion
-
-The completion claim for **Hangeul Valley** is genuine, fully verified, and free of cheating or integrity violations. The verdict is **VICTORY CONFIRMED**.
-
----
+All victory claims made by the implementation team are genuine, fully verified, and backed by empirical proof.
+**VERDICT: VICTORY CONFIRMED**.
 
 ## 5. Verification Method
-
-To independently verify this audit:
-```cmd
-node .agents\auditor\independent_victory_test.js
-```
-*Result*: Exit code 0, 41/41 assertions PASSED, `VERDICT: VICTORY CONFIRMED`.
-
----
-
-=== VICTORY AUDIT REPORT ===
-
-VERDICT: VICTORY CONFIRMED
-
-PHASE A — TIMELINE:
-  Result: PASS
-  Anomalies: none
-
-PHASE B — INTEGRITY CHECK:
-  Result: PASS
-  Details: Real layout fixes verified; responsive CSS for 1024px, 768px, and 480px viewports implemented; all JS onclick handlers and element IDs preserved; node -c game.js passes syntax check with 0 errors; index.html and assets/index.html are 100% byte-for-byte identical (SHA256 verified); no hardcoded test bypasses or facades found.
-
-PHASE C — INDEPENDENT TEST EXECUTION:
-  Test command: node .agents\auditor\independent_victory_test.js
-  Your results: 41/41 assertions PASSED. Bounding box calculations confirm zero pixel overlap between #hud, #event-banner, and #progress-bar-wrap at 1024px (desktop) and 768px (tablet) viewports. Top-level action buttons capped at exactly 8 with remaining 5 feature buttons accessible via overflow dropdown (#hud-overflow-menu). Glassmorphic styling, neon-gold borders, backdrop blur, and Press Start 2P font fully preserved.
-  Claimed results: 100% complete, zero overlap, byte-for-byte synced, 0 syntax errors.
-  Match: YES — 0 discrepancies found.
-
-EVIDENCE (if REJECTED):
-  N/A
+- `node -c game.js`
+- `node -c assets/game.js`
+- `Get-FileHash -Algorithm SHA256 game.js, assets/game.js, index.html, assets/index.html`
+- `node .agents/auditor/verify_color_tokens.js`

@@ -1,42 +1,41 @@
-# BRIEFING — 2026-07-24T21:24:40Z
+# BRIEFING — 2026-07-24T14:51:33Z
 
 ## Mission
-Investigate Vocabulary Integration & Minigame Scoring Flow in Hangeul Valley (game.js and levels.json) for Milestone 1, produce analysis.md and handoff.md.
+Analyze Milestone 1 - NPC Rendering Engine, Sprite Bake Infrastructure & Visual Consistency Audit in `game.js`, inspecting sprite baking, dark outline rendering, depth sorting, positioning/scale/collisions/interaction distances, color token counting methodology, and architectural guidelines for worker implementation.
 
 ## 🔒 My Identity
-- Archetype: Teamwork Explorer
-- Roles: Explorer 3 for Milestone 1 (Vocabulary Integration & Minigame Scoring Flow)
+- Archetype: Explorer
+- Roles: Investigator, Synthesizer
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3
-- Original parent: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Original parent: 91abe837-7e50-404d-9abd-f03869cb92e7
 - Milestone: Milestone 1
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT implement game changes directly
-- Operating in CODE_ONLY mode (no external network calls)
-- Produce handoff.md and analysis.md in working directory
-- Test syntax via `node -c game.js`
+- Read-only investigation — do NOT implement changes to project source code.
+- Write analysis to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md`
+- Write handoff report to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\handoff.md`
 
 ## Current Parent
-- Conversation ID: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
-- Updated: 2026-07-24T21:24:40Z
+- Conversation ID: 91abe837-7e50-404d-9abd-f03869cb92e7
+- Updated: 2026-07-24T14:51:33Z
 
 ## Investigation State
-- **Explored paths**: `PROJECT.md`, `levels.json`, `game.js`
-- **Key findings**: 
-  - Vocabulary data stored in `levels.json` and unlocked via `unlockedLevels` array.
-  - `getUnlockedWords()` standardized vocabulary helper function specified.
-  - Target English word matching with distractor Korean bees (1 correct + 2-3 distractors).
-  - 10-word round limit with word counter, real-time score (+100 base + combo bonus), accuracy %, max combo.
-  - Retro glassmorphism end-of-round overlay with score, accuracy %, max combo, honey preview, and 'Return to Farm' button.
-  - `node -c game.js` verified 0 syntax errors.
-- **Unexplored areas**: None (investigation complete).
+- **Explored paths**: `game.js`, `assets/game.js`, `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md`, `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`
+- **Key findings**:
+  - `PixelArtRenderer` & `FarmScene._bakeTextures()` handle procedural texture generation.
+  - Robot Player uses Palette `P` with explicit 1px dark slate outline `'K': 0x0F172A`.
+  - Wizard NPC baseline uses 20 color tokens (`W_PAL`), lacking full left boundary outline.
+  - Shop NPC currently uses `shop_sign` wood sign graphic (6 color tokens).
+  - Depth sorting uses static anchor coordinates (`shopY`, `wizardY`).
+  - Distance checks: Shop NPC = 90px, Wizard NPC = 85px.
+- **Unexplored areas**: None for M1 scope.
 
 ## Key Decisions Made
-- Generated complete analysis and design specifications in `analysis.md` and `handoff.md`.
+- Analyzed all 5 objectives and completed `analysis.md` and `handoff.md`.
 
 ## Artifact Index
-- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\ORIGINAL_REQUEST.md — Original request context
-- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\BRIEFING.md — Working memory
-- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\progress.md — Heartbeat progress
-- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md — Technical Analysis Report
-- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\handoff.md — 5-Component Handoff Report
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\ORIGINAL_REQUEST.md` — Initial user prompt
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\BRIEFING.md` — Working context & identity
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\progress.md` — Heartbeat progress log
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md` — In-depth analysis report
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\handoff.md` — 5-component handoff report

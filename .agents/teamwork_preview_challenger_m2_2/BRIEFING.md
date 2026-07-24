@@ -1,52 +1,48 @@
-# BRIEFING — 2026-07-24T14:33:37Z
+# BRIEFING — 2026-07-24T15:05:00Z
 
 ## Mission
-Empirically challenge and stress-test Milestone 2 (Honey Rewards, Cooking Integration & Save/Load Persistence) in `game.js`.
+Milestone 2 Gate Verification of Hangeul Valley NPC Sprite Polish & Upgrade (Empirical Challenger 2).
 
 ## 🔒 My Identity
-- Archetype: Empirical Challenger
+- Archetype: empirical_challenger
 - Roles: critic, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_2
-- Original parent: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Original parent: 271beac4-82f5-4128-b9b0-62d62497fc69
 - Milestone: Milestone 2
-- Instance: 1 of 1
+- Instance: 2 of 2
 
 ## 🔒 Key Constraints
-- Review & verification focused — run empirical tests on code
-- Do NOT fix code bugs yourself; report any failures as findings
-- Output report to `analysis.md` and `handoff.md` in working directory
-- Send message back to Project Orchestrator upon completion
+- Review/test-only — write test scripts in own directory, do NOT modify game source code files.
+- Run tests and empirically verify all criteria.
 
 ## Current Parent
-- Conversation ID: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
-- Updated: 2026-07-24T14:33:37Z
+- Conversation ID: 271beac4-82f5-4128-b9b0-62d62497fc69
+- Updated: 2026-07-24T15:05:00Z
 
 ## Review Scope
-- **Files to review**: `game.js`
-- **Verification points**:
-  1. `BeeScene.showResultsSummary()` honey reward calculation across 50 simulated outcomes (scores, 0-100% accuracy, non-negative totalHoney added to inventory).
-  2. Legacy save data hydration (`applySave` missing `cookingState` or missing `'꿀'`).
-  3. Recipe list rendering structure and pantry stock badge calculations.
-  4. Syntax check `node -c game.js`.
+- **Files to review**: game.js, assets/game.js
+- **Verification criteria**:
+  - Proximity/interaction radii preservation (<65px for Cat, <80px for Notice Board, <90px for Portal, <85px for Beehive) [PASSED]
+  - Event trigger preservation (`showCatDialog()`, `openMemoryGame()`, `DungeonScene`, `enterBeeScene()`) [PASSED]
+  - Sprite origin `(0.5, 1)` and scaling factors (0.75, 1.3, 1.6, 1.6) [PASSED]
+  - Syntax validation (`node -c game.js` and `node -c assets/game.js`) [PASSED]
+  - SHA256 hash sync between `game.js` and `assets/game.js` [PASSED]
 
 ## Attack Surface
-- **Hypotheses tested**:
-  - End-of-round honey rewards in `BeeScene.showResultsSummary()` across 50 round outcomes -> PASSED (totalHoney >= 1, added to inventory key '꿀').
-  - Legacy save data hydration (`applySave`) without `cookingState` or `'꿀'` key -> PASSED (safe defaults, no crashes, valid schema v4 migration).
-  - Cooking UI integration, recipe list rendering, and pantry stock badge calculations -> PASSED (12 recipes rendered, accurate badges, valid cookRecipe execution).
+- **Hypotheses tested**: Syntax, SHA256 hash equality, sprite origins, scale factors, proximity radii, event triggers. All passed.
 - **Vulnerabilities found**: None.
-- **Untested angles**: None within scope of Milestone 2.
+- **Untested angles**: None.
 
 ## Loaded Skills
-- None specified
+- None loaded.
 
 ## Key Decisions Made
-- Executed Node.js VM empirical test suite (`test_m2_boundary.js`) validating 194 assertions against `game.js`.
+- Executed empirical test script `verify_m2.js` and confirmed 100% pass rate.
+- Documented findings in `handoff.md`.
 
 ## Artifact Index
-- `ORIGINAL_REQUEST.md` — Original request log
-- `progress.md` — Liveness heartbeat & status log
-- `BRIEFING.md` — Persistent state index
-- `test_m2_boundary.js` — Empirical Node.js verification script (194 assertions)
-- `analysis.md` — Comprehensive empirical test analysis report
-- `handoff.md` — Handoff report for Project Orchestrator
+- ORIGINAL_REQUEST.md — Initial user request
+- BRIEFING.md — Working memory briefing
+- progress.md — Heartbeat progress log
+- verify_m2.js — Test suite script
+- handoff.md — Verification handoff report (PASS)

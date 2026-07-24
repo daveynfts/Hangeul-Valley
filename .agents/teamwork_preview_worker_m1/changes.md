@@ -1,73 +1,49 @@
-# Milestone 1 Code Modifications Summary
+# Implementation Notes: Milestone 1 (Shop & Wizard NPC Polish)
 
+**Agent**: `teamwork_preview_worker_m1`  
 **Date**: 2026-07-24  
-**Author**: Worker for Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics)  
-**Files Modified**: `game.js`, `assets/game.js`, `assets/index.html`
+**Target Files**: `game.js`, `assets/game.js`
 
 ---
 
-## 1. Pixel Art Texture Generation (`PixelArtRenderer`)
-- Added `_genBeehiveTextures(scene)` to `PixelArtRenderer`:
-  - `'beehive'`: 20x22 amber hive dome on wooden base with dark entrance hole, ribbed amber layers, and golden highlights.
-  - `'p_tiny_bee'`: 5x5 tiny bee particle texture with dark body contour, bright yellow stripes, and translucent wings.
-- Added `_genBeeTextures(scene)` to `PixelArtRenderer`:
-  - `'bee_fly_0'` & `'bee_fly_1'`: 16x16 pixel-art bee flying animation frames (wide wings & fluttering wings).
-  - `'p_pollen'`: 6x6 yellow pollen particle texture.
-  - `'p_honey_drip'`: 4x8 golden honey drip particle texture.
-- Updated `PixelArtRenderer.generateAllTextures(scene)` to invoke `_genBeehiveTextures` and `_genBeeTextures`.
+## Overview of Changes
 
-## 2. Beehive NPC Integration in `FarmScene`
-- Added `_createBeehiveNPC(W, H)` in `FarmScene`:
-  - Positioned Beehive sprite near the Apple Tree at `(this.farm.x - 65, this.farm.y - 70)`.
-  - Added subtle buzzing animation using a rapid horizontal vibration tween (`x: ±1.5px`, `duration: 85ms`, `repeat: -1`).
-  - Added 4 orbiting tiny bee particle sprites (`beehiveBees`) moving in continuous sinusoidal trajectories around the hive dome.
-  - Added floating interaction hint `🐝 Beehive\n[SPACE]` with bobbing tween.
-  - Added fixed gold name tag `🐝 Beehive` below hive.
-  - Added proximity check (`<85px`) in `FarmScene.update()`, `_updateTargetHighlight()`, and `_interact()`.
-  - Implemented transition to `BeeScene`:
-    ```javascript
-    this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.pause();
-      this.scene.launch('BeeScene');
-    });
-    ```
+### 1. Shop NPC (R1) Upgrade
+- **Location**: `_bakeTextures()` around line 7870 in `game.js`.
+- **Palette**: Created `SHOP_PALETTE` extending `DECOR_PALETTE` with 18 unique color tokens:
+  - Outline: `K` (`0x0F172A` 1px Dark Slate Outline)
+  - Gat Hat: `B` (`0x1E293B`), Ribbon `A` (`0x38BDF8`)
+  - Face: `X` (`0xFFDDAD`), `x` (`0xF4A261`), `f` (`0xFFF0D5`), Cheek blush `Q` (`0xE76F51`)
+  - Hanbok Vest & Apron: `J` (`0x1E3A8A`), `j` (`0x172554`), `U` (`0xF8FAFC`), `u` (`0xCBD5E1`), `m` (`0xF59E0B`)
+  - Wooden Counter: `O` (`0xD99B66`), `o` (`0xB3713D`), `W` (`0x8F5428`), `w` (`0x573012`)
+  - Gold Coins: `Y` (`0xFDE047`), `y` (`0xD97706`)
+- **Matrix**: Upgraded `shop_sign` matrix from 14×18 signpost to an expanded 18×22 grid depicting a warm Korean merchant character wearing a traditional hat (gat), navy hanbok vest with gold embroidery, white collar, cream apron, standing behind a wooden counter loaded with stacks of shiny gold coins.
+- **Contract Retention**: Texture key `'shop_sign'`, origin `(0.5, 1)`, scale `1.3`, depth sorting, and `openShop()` trigger logic remain 100% intact.
 
-## 3. Vocabulary Standardization Helper (`getUnlockedWords()`)
-- Added global `getUnlockedWords()` function:
-  - Retrieves active vocabulary words across all unlocked level packs in `unlockedLevels`.
-  - Safely falls back to `levelsData[0].words` if `unlockedLevels` or `levelsData` are empty.
+### 2. Wizard NPC (R2) Upgrade
+- **Location**: `PixelArtRenderer` static definition (line 214), `_genNpcTextures(scene)` (line 2210), and `_bakeTextures()` (line 8000) in `game.js`.
+- **Palette**: Upgraded `W_PAL` from 18 to 32 rich color tokens:
+  - 1px Dark Outlines: `K` (`0x0F172A`), `k` (`0x1E1B4B`)
+  - Robe Purple Shades: `p` (`0xC084FC`), `P` (`0xA855F7`), `h` (`0x8B5CF6`), `H` (`0x7C3AED`), `v` (`0x6D28D9`), `V` (`0x4C1D95`), `u` (`0x3B0764`)
+  - Star/Moon Embroidery: `m` (`0xFDE047`), `M` (`0xF59E0B`), `y` (`0xD97706`), `Y` (`0xB45309`)
+  - Flowing Beard Gradient: `W` (`0xFFFFFF`), `w` (`0xF8FAFC`), `d` (`0xE2E8F0`), `D` (`0xCBD5E1`), `b` (`0x94A3B8`), `B` (`0x64748B`)
+  - Staff Wood: `S` (`0x92400E`), `s` (`0x78350F`), `z` (`0x451A03`)
+  - Glowing Cyan Orb: `q` (`0xE0F2FE`), `Q` (`0xA5F3FC`), `c` (`0x38BDF8`), `C` (`0x0284C7`), `e` (`0x0369A1`)
+  - Mystical Aura Sparkles: `a` (`0xE9D5FF`), `A` (`0x67E8F9`), `f` (`0xFDE68A`)
+  - Face: `X` (`0xFFDDAD`), `x` (`0xC87858`)
+- **Matrices**: Upgraded `wiz_0` and `wiz_1` matrices to 16×20 resolution featuring fabric fold shading, gold embroidery trim, flowing beard gradients, staff with glowing crystal orb, and micro-animated particle sparkles shifting between frames at 3 fps.
+- **Texture Bake**: `gwiz` in `_bakeTextures()` now invokes `PixelArtRenderer.drawMatrix(gwiz, PixelArtRenderer.WIZ_0, PixelArtRenderer.W_PAL, 0, 0, PS)` to guarantee 100% visual consistency for `'wizard_npc'`.
+- **Contract Retention**: Texture keys `'wizard_idle_0'`, `'wizard_idle_1'`, `'wizard_npc'`, origin `(0.5, 1)`, scale `1.8`, levitation tween, depth sorting, and `openSpellDuel()` trigger logic remain 100% intact.
 
-## 4. Bee Shooting Vocabulary Minigame (`BeeScene`)
-- Defined `class BeeScene extends Phaser.Scene` with key `'BeeScene'`:
-  - **Top HUD Banner**: Prominent glassmorphic dark container displaying target English word (e.g. `TARGET: "MOTHER" 👩`).
-  - **Left HUD**: Displays current word step (`1/10`), score, accuracy %, and combo multiplier (`2x`).
-  - **Exit Button & [ESC] Key**: Allows graceful exit back to `FarmScene`.
-  - **Wave Spawning**: Spawns flying bee containers with 1 correct Korean word + 2-3 distractor Korean words.
-  - **Flight Trajectories**:
-    1. *Linear Glide*: Straight horizontal drift across screen.
-    2. *Sine Wave*: Sinusoidal vertical oscillation `y = baseY + Math.sin(t * freq + phase) * amp`.
-    3. *Zigzag Pattern*: Alternating vertical velocity direction steps between upper and lower bounds.
-  - **Interaction Logic**:
-    - *Correct Hit*: +100 base score + combo bonus (+20 per combo streak), particle explosion (`p_pollen`), chiptune audio `'quiz_correct'`, floating "+100 (2x Combo!)" text, advances to next word.
-    - *Wrong Hit*: Camera shake, chiptune audio `'quiz_wrong'`, red sprite tint flash, combo streak reset, updates accuracy metric.
-  - **Round Progression**: 10-word round limit.
-  - **Results Summary Modal**: Retro glassmorphism overlay showing Final Score, Accuracy %, Max Combo, Honey reward preview (`+3 Honey`), and `[ RETURN TO FARM ]` button.
-  - **Return Transition**:
-    ```javascript
-    this.cameras.main.fadeOut(300, 0, 0, 0);
-    this.cameras.main.once('camerafadeoutcomplete', () => {
-      this.scene.stop();
-      this.scene.resume('FarmScene');
-    });
-    ```
+### 3. Synchronization & Validation
+- Executed `node -c game.js` (0 syntax errors).
+- Mirrored `game.js` to `assets/game.js` via `fs.copyFileSync`.
+- Executed `node -c assets/game.js` (0 syntax errors).
+- Verified SHA256 byte-level hash match between `game.js` and `assets/game.js` (`28626aa8aa82412b4c4415fd220327a16789cf92b40cfc690540dbfb6ed7fe18`).
 
-## 5. Scene Registration & Dual-File Synchronization
-- Registered `BeeScene` in `Phaser.Game` configuration: `scene: [FarmScene, ArcadeScene, DungeonScene, FishingScene, BeeScene]`.
-- Synchronized all code updates to `assets/game.js` and `assets/index.html`.
+---
 
-## 6. Verification Results
-- `node -c game.js`: 0 errors.
-- `node -c assets/game.js`: 0 errors.
-- `node test_m1_challenger_harness.js`: 49 PASSED, 0 FAILED.
-- `node verify_m1.js`: 21 PASSED, 0 FAILED.
+## Verification Summary
+- `node -c game.js` -> Pass (0 errors)
+- `node -c assets/game.js` -> Pass (0 errors)
+- SHA256 Match -> `28626aa8aa82412b4c4415fd220327a16789cf92b40cfc690540dbfb6ed7fe18` (100% Identical)
