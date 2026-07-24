@@ -7797,29 +7797,31 @@ class FarmScene extends Phaser.Scene {
     ], DECOR_PALETTE, 0, 0, PS);
     gport.generateTexture('dungeon_portal', 20*PS, 28*PS); gport.destroy();
 
-    // Fishing Dock Pier texture 24x18
+    // Wooden Fishing Boat texture 26x20
     const gdock = mk();
     PixelArtRenderer.drawMatrix(gdock, [
-      '.KK..................KK.',
-      'KOOK................KOOK',
-      'KODKKKKKKKKKKKKKKKKKKDOK',
-      'KODKOOOOOOOOOOOOOOOoKDOK',
-      'KODKOWNWWWWWWWWWWNWwKDOK',
-      'KODKwWnWWWWWWWWWWnWwKDOK',
-      'KKKKKKKKKKKKKKKKKKKKKKKK',
-      'KODKOOOOOOOOOOOOOOOoKDOK',
-      'KODKOWNWWWWWWWWWWNWwKDOK',
-      'KODKwWnWWWWWWWWWWnWwKDOK',
-      'KKKKKKKKKKKKKKKKKKKKKKKK',
-      'KODKOOOOOOOOOOOOOOOoKDOK',
-      'KODKOWNWWWWWWWWWWNWwKDOK',
-      'KODKwWnWWWWWWWWWWnWwKDOK',
-      'KKKKKKKKKKKKKKKKKKKKKKKK',
-      '.KdDK..............KdDK.',
-      '.KdDK..............KdDK.',
-      '.KKKK..............KKKK.'
+      '..........K...............',  // row 0  — mast tip
+      '..........KK..............',  // row 1
+      '.........KbK..............',  // row 2  — sail top
+      '........KbbK..............',  // row 3
+      '.......KbbbK..............',  // row 4
+      '......KbbbbK..............',  // row 5
+      '.....KbbbbbK..............',  // row 6
+      '....KbbbbbbK..............',  // row 7  — sail bottom
+      '....KKKKKKKK..............',  // row 8  — boom
+      '..........K...............',  // row 9  — mast
+      '..........K...............',  // row 10
+      '.....KKKKKKKKKKKKKK.......',  // row 11 — gunwale top
+      '....KOOOOOOOOOOOOOoK......',  // row 12 — hull outer top
+      '...KOOWWWWWWWWWWWWWOK.....',  // row 13 — hull planking 1
+      '..KOWWwWWWWWWWWWwWWoK.....',  // row 14 — hull planking 2 (knots)
+      '..KWWwWWWWWWWWWWWwWWK.....',  // row 15 — hull mid
+      '...KWWWWwWWWWWwWWWWK......',  // row 16 — hull lower
+      '....KKWWWWWWWWWWKKk.......',  // row 17 — hull bottom curve
+      '.....vKKKKKKKKKKv.........',  // row 18 — waterline
+      '....vvEvvvvvvvvEvvv........', // row 19 — water ripple
     ], DECOR_PALETTE, 0, 0, PS);
-    gdock.generateTexture('fishing_dock', 24*PS, 18*PS); gdock.destroy();
+    gdock.generateTexture('fishing_dock', 26*PS, 20*PS); gdock.destroy();
 
     // Arcade Machine texture 16x22
     const ga = mk();
@@ -8273,10 +8275,13 @@ class FarmScene extends Phaser.Scene {
     this.add.image(fx - 60, fy + 15, 'tile_grass').setDisplaySize(20,20).setDepth(fy-4);
     this.add.image(fx + 70, fy + 25, 'tile_grass').setDisplaySize(18,18).setDepth(fy-4);
 
-    // Fishing Dock Pier
+    // Wooden Fishing Boat
     this.dockSprite = this.add.image(fx, fy, 'fishing_dock').setOrigin(0.5,1).setScale(1.6).setDepth(fy);
-    if (this.shadows) this.shadows.createShadow(this.dockSprite, 80, 22, 8);
-    this.tweens.add({ targets: this.dockSprite, y: fy - 2, duration: 1500, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    if (this.shadows) this.shadows.createShadow(this.dockSprite, 90, 24, 8);
+    // Gentle vertical bobbing (boat on water)
+    this.tweens.add({ targets: this.dockSprite, y: fy - 3, duration: 2000, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    // Subtle rocking rotation
+    this.tweens.add({ targets: this.dockSprite, angle: { from: -1.5, to: 1.5 }, duration: 2500, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
     this.fishHint = this.add.text(fx, fy-60, '🎣 CRYSTAL POND\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
@@ -8284,7 +8289,7 @@ class FarmScene extends Phaser.Scene {
     }).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
     this.tweens.add({ targets: this.fishHint, y: this.fishHint.y - 3, duration: 700, yoyo: true, repeat: -1 });
 
-    this.add.text(fx, fy+6, 'Fishing Dock', {
+    this.add.text(fx, fy+6, '⛵ Fishing Boat', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
       color:'#7DD3FC', stroke:'#000', strokeThickness:2
     }).setOrigin(0.5,0).setDepth(fy+1);
