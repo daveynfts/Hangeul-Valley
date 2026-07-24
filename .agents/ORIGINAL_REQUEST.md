@@ -540,3 +540,31 @@ Completely remove all pet companion functionality from the codebase. This includ
 - [ ] `node -c game.js` and `node -c assets/game.js` pass with 0 syntax errors.
 - [ ] The game loads and runs without any console errors related to missing pet functions or undefined pet variables.
 
+## Follow-up — 2026-07-24T12:43:46Z
+
+Completely replace the human main character in Hangeul Valley with a stylish Industrial Yellow Farmer Pixel Robot (Industrial Bot style, yellow/gray metallic casing, vibrant LED visor/screen, treaded/tread-style feet with smooth 4-directional movement bobbing).
+
+Working directory: d:\Hangeul Valley
+Integrity mode: development
+
+## Requirements
+
+### R1. Complete Main Character Replacement with Pixel Robot
+Wipe out the existing human player sprite rendering and replace it with a brand-new Industrial Yellow Farmer Pixel Robot character. The robot design should feature a vibrant yellow and metallic gray industrial casing, expressively lit LED screen/visor, mechanical antenna/gear details, crisp 1px dark outlines, and clean Chibi proportions.
+
+### R2. 4-Directional Robot Tread Walk Animations
+Implement complete 4-directional (Down, Up, Left, Right) walk cycle animations for the robot with tread/leg movement frame steps, mechanical bobbing, and responsive player movement controls.
+
+### R3. Environment & Scale Integration
+Ensure the robot player sprite maintains proper scale ratio (1.8x base scale), dynamic shadow rendering, depth sorting (`y-sort`), and aligned hitboxes with the farm environment (crops, trees, Muop the Cat, Shop, Fishing Dock).
+
+## Acceptance Criteria
+
+### Robot Character Verification
+- [ ] Human player sprite matrices and texture routines are completely replaced with the new Industrial Yellow Farmer Robot.
+- [ ] 4-directional walking animations (down, up, left, right) render cleanly with proper mechanical frame steps and sprite flipping.
+- [ ] `node -c game.js` and `node -c assets/game.js` pass with 0 syntax errors.
+- [ ] SHA256 byte synchronization is verified between `game.js` and `assets/game.js`.
+- [ ] The game builds and runs without any console errors or movement issues.
+
+

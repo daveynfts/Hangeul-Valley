@@ -1,109 +1,69 @@
-# Handoff Report: Environment Harmony, Synchronization & Verification Analysis
-
-**Agent**: Explorer 3  
-**Milestone**: Milestone 1 – Main Character Redesign  
-**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3`  
-**Date**: 2026-07-24  
-
----
+# Handoff Report — Explorer 3: Industrial Yellow Farmer Robot Action Frames & Rendering Mechanics
 
 ## 1. Observation
 
-Direct observations from source code files and environment inspection:
-
-1. **Asset Synchronization Mechanism**:
-   - `main.py` lines 95–103 contains an explicit copy block:
-     ```python
-     for fname in ('game.js', 'index.html', 'levels.json', 'save_data.json'):
-         src = os.path.join(BASE_DIR, fname)
-         dst = os.path.join(assets_dir, fname)
-         if os.path.exists(src):
-             shutil.copy2(src, dst)
-     ```
-   - SHA256 hashes of `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` are currently identical: `D0F92E4CAAC096DC1630035935823A1AAD1FF6E345282305C21D23BF46E606F8`.
-
-2. **Player Proportions & Mechanics (`game.js`)**:
-   - `_genPlayerTextures` (line 1314): player matrices are 16x16 characters.
-   - `createTexture` (line 229): default parameters `width = 16, height = 16, ps = 3` generate a `48px x 48px` texture.
-   - `_createPlayer` (line 8477–8480):
-     ```javascript
-     this.player = this.physics.add.sprite(W/2, H-80, 'player_walk_down_0').setScale(1.8);
-     this.player.body.setSize(24, 16).setOffset(12, 32);
-     ```
-   - Player display dimensions: `48 * 1.8 = 86.4px` wide x `86.4px` tall.
-   - Origin: `(0.5, 0.5)` (default sprite center).
-   - Y-sorting depth (lines 8501–8502): `playerBaseY = this.player.y + (this.player.displayHeight * (1 - this.player.originY))` (`y + 43.2`).
-
-3. **Surrounding Environment Entity Proportions (`game.js`)**:
-   - **Farm Plots** (line 3837, 8446): `PLOT_SIZE = 48px`, display size `48px x 48px`, trigger circle radius `19.2px`.
-   - **Apple Tree** (lines 8158–8165): `apple_tree` base `48x48px`, `.setScale(3.6)` -> **172.8px x 172.8px**, origin `(0.5, 1.0)`, trunk collider `100x48px`.
-   - **Muop the Cat NPC** (lines 7971–7974): `cat_npc` base `48x48px`, `.setScale(0.75)` -> **36px x 36px**, origin `(0.5, 1.0)`.
-   - **Wizard Merlin NPC** (lines 7948–7949): `wizard_npc` base `48x48px`, `.setScale(1.8)` -> **86.4px x 86.4px**, origin `(0.5, 1.0)`.
-   - **Shop Sign / NPC** (lines 7457, 7901–7902): `shop_sign` base `42x54px`, `.setScale(1.3)` -> **54.6px x 70.2px**, origin `(0.5, 1.0)`.
-   - **Fishing Dock** (lines 7537, 8024): `fishing_dock` base `72x54px`, `.setScale(1.6)` -> **115.2px x 86.4px**, origin `(0.5, 1.0)`.
-   - **Notice Board**: `70.2px x 62.4px`.
-   - **Arcade Machine**: `72.0px x 90.0px`.
-   - **Dungeon Portal**: `96.0px x 115.2px`.
-
-4. **Syntax & Harness Verification**:
-   - `node -c game.js` and `node -c assets/game.js` executed with exit code 0.
-   - `node test_m2_harness.js` passed all 16x16 matrix structure and palette token validation checks.
-
----
+- **`_genPlayerTextures(scene)` Location**: Defined in `d:\Hangeul Valley\game.js` at line 1313 (`static _genPlayerTextures(scene) {`) and mirrored in `d:\Hangeul Valley\assets\game.js`.
+- **Action Frame Matrices**: Lines 1615–1778 in `game.js`:
+  - `player_water_down_0..2` (lines 1615–1668): 3 action matrices ($16 \times 16$).
+  - `player_harvest_down_0..2` (lines 1670–1723): 3 action matrices ($16 \times 16$).
+  - `player_pick_down_0..2` (lines 1725–1778): 3 action matrices ($16 \times 16$).
+- **Tool Sprite Matrices**: Lines 1781–1834 in `game.js`:
+  - `tool_watering_can` (lines 1781–1798), `tool_basket` (lines 1799–1816), `tool_sickle` (lines 1817–1834).
+- **Legacy Aliases**: Lines 1864–1867 in `game.js`:
+  ```javascript
+  this.createTexture(scene, 'farmer0', down_0, P);
+  this.createTexture(scene, 'farmer1', down_1, P);
+  this.createTexture(scene, 'farmer2', down_0, P);
+  this.createTexture(scene, 'farmer3', down_2, P);
+  ```
+  And filter setting in `FarmScene` at lines 7570–7575:
+  ```javascript
+  for (let fr = 0; fr < 4; fr++) {
+    const t = this.textures.get('farmer' + fr);
+    if (t && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
+      t.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    }
+  }
+  ```
+- **Action Invocation Logic**: `FarmScene.playPlayerAction(actionType, targetX, targetY, callback)` at lines 8156–8212:
+  - Triggers `player-water`, `player-harvest`, or `player-pick` animations.
+  - Spawns tool sprite (`tool_watering_can`, `tool_sickle`, `tool_basket`) at `(this.player.x ± 12, this.player.y - 6)` with depth `player.depth + 1`.
+- **Scale & Physical Mechanics**:
+  - `FarmScene`: scale `1.8` (lines 8478, 8544), display size $86.4 \times 86.4\text{ px}$.
+  - Physics hitbox: `setSize(24, 16).setOffset(12, 32)` (line 8480).
+  - Dynamic shadow: `createShadow(this.player, 58, 18, 32)` (line 8482).
+  - Y-sort depth sorting: `playerBaseY = y + displayHeight * 0.5 = y + 43.2` (lines 8501–8502).
+- **File Sync Requirement**: Both `game.js` and `assets/game.js` must pass `node -c` and match SHA256 hashes.
 
 ## 2. Logic Chain
 
-1. **Asset Source & Sync Reasoning**:
-   - `main.py` explicitly overwrites `assets/game.js` with root `game.js` upon execution.
-   - Therefore, edits must ONLY occur on root `game.js`, and `assets/game.js` must be synchronized manually or via script before builds/deployments.
-
-2. **Scale Harmony Reasoning**:
-   - Current player height (`86.4px`) matches Wizard Merlin (`86.4px`) 1:1, is 2.4x Muop the Cat (`36px`), and 0.5x Apple Tree (`172.8px`).
-   - If player texture switches to a 16x32 grid @ `ps=3` (`48x96px` base) without altering scale, `1.8` scale will inflate the player to `172.8px` tall (the size of an Apple Tree!).
-   - Therefore, the scale factor for a 16x32 @ ps=3 matrix MUST be reduced to `0.9` to maintain the target `86.4px` display height.
-
-3. **Depth Sorting & Origin Reasoning**:
-   - All NPCs and environment structures use `originY = 1.0` and set depth to `this.y`.
-   - The current player uses `originY = 0.5` and depth `y + displayHeight * 0.5`.
-   - With a tall 1:2 Chibi sprite, center origin causes z-sorting visual artifacts (head popping through trees/fences). Standardizing player origin to `(0.5, 1.0)` and depth to `this.player.y` ensures pixel-perfect Y-sorting alignment.
-
-4. **Hitbox & Attachment Reasoning**:
-   - Physics body `offset Y = 32` was calculated for 48x48px texture. On a 48x96px texture, Y=32 places the hitbox at stomach level. Recalibrating to `offset Y = 80` (or proportional to new height) anchors collision to the feet.
-
----
+1. **Observation**: Action frames (`player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`) and tool sprites (`tool_watering_can`, `tool_basket`, `tool_sickle`) are generated inside `_genPlayerTextures(scene)` and referenced by `playPlayerAction` in `FarmScene`.
+2. **Inference**: To complete Milestone 1 without breaking action mechanics, all 9 action matrices and 3 tool sprite matrices must be redesigned to fit the Industrial Yellow Farmer Robot theme while preserving their texture keys and $16 \times 16$ dimensions.
+3. **Observation**: `farmer0..3` legacy aliases are explicitly registered in `_genPlayerTextures` and set to `NEAREST` filter in `FarmScene`.
+4. **Inference**: Preserving `farmer0..3` texture alias creation is strictly mandatory for backward compatibility with legacy texture lookups.
+5. **Observation**: `FarmScene` uses scale `1.8`, foot-anchored hitbox $(24, 16)$ offset $(12, 32)$, shadow size $(58, 18)$ offset $32$, and Y-sort depth baseline $Y+43.2$.
+6. **Inference**: The industrial robot sprite design (treads, yellow casing, glowing LED visor) naturally aligns with this physical rendering setup, allowing the head/visor area to overlap objects cleanly while tread contact determines collision and depth.
+7. **Observation**: `game.js` and `assets/game.js` must be synchronized.
+8. **Inference**: Any changes made by the implementer worker must be applied to both files synchronously and verified via syntax checking and SHA256 hash comparison.
 
 ## 3. Caveats
 
-1. **Read-Only Scope**: No source code modifications were made during this exploration phase.
-2. **Animation Frame Count Assumptions**: Analysis assumes standard 1:2 Chibi walk cycles (4 directions, 4 frames each). If extra frames or action poses are added, `createTexture` parameters and animation key registrations must be updated accordingly.
-
----
+- Investigation was strictly read-only; no code files in the main repository were modified.
+- Non-overworld scenes (`DungeonScene`, `FishingScene`) use scale 1.0; while out of scope for matrix replacement in `_genPlayerTextures`, implementers should keep in mind that the robot sprite will render at $48 \times 48\text{ px}$ unscaled in those scenes.
 
 ## 4. Conclusion
 
-1. Root `d:\Hangeul Valley\game.js` is the canonical file; synchronization to `assets/game.js` is required after every modification.
-2. Target player height must remain ~**86.4px** (`scale = 0.9` for a 16x32 @ ps=3 texture) to preserve scale harmony with Wizard Merlin (86.4px), Muop the Cat (36px), and Apple Tree (172.8px).
-3. Player origin should be updated to `setOrigin(0.5, 1.0)` and Arcade physics body offset updated to `setOffset(12, 80)` to prevent collision clipping and z-sorting distortion.
-4. All syntax checks (`node -c game.js`) and test harness runs (`node test_m2_harness.js`) currently pass cleanly.
-
----
+The specification for the **Industrial Yellow Farmer Pixel Robot** action frames, tool sprites, legacy aliases, physical rendering parameters, and file synchronization is complete and fully documented in `analysis.md`. Implementers can safely proceed with matrix replacement in `_genPlayerTextures(scene)` in both `game.js` and `assets/game.js`.
 
 ## 5. Verification Method
 
-To independently verify these findings:
-
-1. **Check JS Syntax**:
+To verify these findings and any future implementation:
+1. **Syntax Validation**:
    ```bash
-   node -c game.js
-   node -c assets/game.js
+   node -c "d:\Hangeul Valley\game.js"
+   node -c "d:\Hangeul Valley\assets\game.js"
    ```
-2. **Verify Asset File Hashes**:
-   ```bash
-   powershell -Command "Get-FileHash game.js, assets/game.js | Format-Table -AutoSize"
-   ```
-3. **Run Test Harness**:
-   ```bash
-   node test_m2_harness.js
-   ```
-4. **Inspect Analysis Report**:
-   View `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md`.
+2. **Key Inspection**:
+   Inspect `game.js` lines 1615–1891 to confirm presence of `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`, `tool_watering_can`, `tool_basket`, `tool_sickle`, `farmer0..3`, and `player-water`, `player-harvest`, `player-pick` animation registrations.
+3. **File Mirror Hash Invalidation**:
+   If SHA256 checksums of `game.js` and `assets/game.js` differ, synchronization has failed.

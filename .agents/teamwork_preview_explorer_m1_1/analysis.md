@@ -1,192 +1,620 @@
-# Technical Analysis: Main Character Sprite Generation & Texture Baking Architecture
+# Industrial Yellow Farmer Pixel Robot - Design Specification & Analysis
 
-## Summary of Core Findings
-1. **Primary Function Location**: `PixelArtRenderer._genPlayerTextures(scene)` is defined in `d:\Hangeul Valley\game.js` (and duplicated in `d:\Hangeul Valley\assets\game.js`) spanning **lines 1314 to 1828** (515 lines total). It is invoked during game boot at **line 252** inside `PixelArtRenderer.generateAllTextures(scene)`.
-2. **Palette Definition**: Palette `P` (lines 1315–1329) contains **48 token keys** (1 transparent `.` + 47 color hex entries), exceeding the minimum requirement of 30 tokens. Token `'K'` (`0x1A1A2E`) serves as the dark silhouette outline token. Multi-tone shading is implemented across skin (6 tokens), hair (3 tokens), clothing/overalls (7 tokens), straw hat (4 tokens), boots (3 tokens), and tools.
-3. **Matrices**: Contains **24 matrices** total (12 walk frames, 9 action frames, 3 standalone tool sprites), each strictly formatted as a $16 \times 16$ array of single-character token strings.
-4. **Legacy Aliases**: Lines 1801–1804 register legacy aliases `farmer0` (`down_0`), `farmer1` (`down_1`), `farmer2` (`down_0`), and `farmer3` (`down_2`) via `this.createTexture`.
-5. **Animation Registrations**: Lines 1806–1827 handle Phaser animation registrations (`player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`, `player-water`, `player-harvest`, `player-pick`).
+## Executive Summary
+This document provides a comprehensive technical analysis of the existing player texture generation system in `game.js` and delivers the full pixel matrix design specification and exact token dictionary for the **Industrial Yellow Farmer Pixel Robot Replacement** (Milestone 1).
 
----
-
-## 1. `_genPlayerTextures(scene)` Structure & Line Map
-
-| Component | Line Range | Description |
-|---|---|---|
-| Method Header | 1314 | `static _genPlayerTextures(scene) {` |
-| Palette Object `P` | 1315–1329 | Definition of 48 color mapping tokens |
-| Walk Down Matrices (`down_0..2`) | 1331–1384 | 3 matrices ($16 \times 16$) for downward movement |
-| Walk Up Matrices (`up_0..2`) | 1386–1439 | 3 matrices ($16 \times 16$) for upward movement |
-| Walk Left Matrices (`left_0..2`) | 1441–1494 | 3 matrices ($16 \times 16$) for leftward movement |
-| Walk Right Matrices (`right_0..2`) | 1496–1549 | 3 matrices ($16 \times 16$) for rightward movement |
-| Water Action Matrices (`water_down_0..2`) | 1552–1605 | 3 action matrices ($16 \times 16$) for watering can usage |
-| Harvest Action Matrices (`harvest_down_0..2`) | 1607–1660 | 3 action matrices ($16 \times 16$) for crop harvesting |
-| Pick Action Matrices (`pick_down_0..2`) | 1662–1715 | 3 action matrices ($16 \times 16$) for fruit picking |
-| Tool Sprite Matrices | 1718–1771 | `tool_watering_can`, `tool_basket`, `tool_sickle` ($16 \times 16$) |
-| Texture Baking Calls | 1773–1798 | 24 `this.createTexture(scene, key, matrix, P)` calls |
-| Legacy Aliases | 1800–1804 | `farmer0..3` texture alias registrations |
-| Animation Registrations | 1806–1827 | `scene.anims.create` calls for 7 player animations |
-| Method Closing | 1828 | `}` |
+The design replaces the human farmer sprites with a compact, high-precision chibi robot featuring:
+- **Yellow Metallic Armor Casing**: Vibrant industrial yellow with highlight, mid-shade, and shadow tones.
+- **Slate/Gray Metallic Body & Joints**: Industrial slate frame, mechanical shoulder joints, and tread housing.
+- **Glowing Cyan LED Visor**: Expressive digital screen with glowing cyan eyes/glare pixels.
+- **Top Antenna & Brass Gear Details**: Top warning beacon bulb and chest power core gear.
+- **Mechanical Caterpillar Tread Feet**: Twin tread pods supporting 4-directional walk animations with tread step dynamics.
+- **1px Dark Outline**: Slate 900 (`0x0F172A`) contouring for crisp pixel art visibility.
 
 ---
 
-## 2. Palette Object `P` Token Map
+## 1. Existing Player Texture System Analysis
 
-Palette `P` is defined at lines 1315–1329. The full breakdown of all 48 tokens:
-
-| Token | Hex Color | Color Description / Role | Category |
-|---|---|---|---|
-| `.` | `null` | Transparent background | Background |
-| `K` | `0x1A1A2E` | Dark silhouette boundary outline | Outer Boundary Outline |
-| `k` | `0x24243B` | Soft inner outline / shadow | Inner Outline |
-| `0` | `0x0B090C` | Deep black shoe base | Shoe Base |
-| `J` | `0x1D283B` | Dark shadow tone | Clothing Shadow |
-| `X` | `0xFFE0C2` | Light skin highlight | Skin (Tone 1) |
-| `x` | `0xF1B78B` | Mid skin base | Skin (Tone 2) |
-| `i` | `0xD38666` | Shadow skin tone | Skin (Tone 3) |
-| `I` | `0x9C533C` | Deep skin shadow | Skin (Tone 4) |
-| `O` | `0xFFE0C2` | Facial skin highlight | Skin (Tone 5) |
-| `o` | `0xB03A2E` | Blush / mouth red tone | Skin/Face Detail |
-| `f` | `0x8D5B3A` | Hair light highlight | Hair (Tone 1) |
-| `H` | `0x653E23` | Hair mid base | Hair (Tone 2) |
-| `h` | `0x3D2314` | Hair dark shadow | Hair (Tone 3) |
-| `t` | `0xF4D685` | Straw hat highlight | Straw Hat (Tone 1) |
-| `T` | `0xDC9F42` | Straw hat base | Straw Hat (Tone 2) |
-| `V` | `0xB37D2A` | Straw hat shadow | Straw Hat (Tone 3) |
-| `v` | `0x7A5016` | Straw hat dark brim edge | Straw Hat (Tone 4) |
-| `R` | `0xC23B22` | Red hat ribbon base | Red Ribbon (Tone 1) |
-| `r` | `0x731C13` | Red hat ribbon shadow | Red Ribbon (Tone 2) |
-| `p` | `0xD94738` | Red hat ribbon highlight | Red Ribbon (Tone 3) |
-| `w` | `0xF2ECE1` | White shirt highlight | Shirt Fabric |
-| `F` | `0xD5CFBF` | White shirt base | Shirt Fabric |
-| `g` | `0x999385` | White shirt shadow | Shirt Fabric |
-| `z` | `0x4B6B94` | Blue denim overalls highlight | Overalls (Tone 1) |
-| `Z` | `0x334B73` | Blue denim overalls base | Overalls (Tone 2) |
-| `q` | `0x213252` | Blue denim overalls shadow | Overalls (Tone 3) |
-| `Q` | `0x141E36` | Blue denim deep shadow | Overalls (Tone 4) |
-| `B` | `0x60A5FA` | Denim bright blue accent | Overalls (Tone 5) |
-| `2` | `0x1E3A8A` | Denim navy blue shadow | Overalls (Tone 6) |
-| `b` | `0xE6B830` | Brass button gold | Overalls Detail |
-| `L` | `0x854B27` | Leather boot highlight | Boots (Tone 1) |
-| `S` | `0x5E3218` | Leather boot base | Boots (Tone 2) |
-| `s` | `0x3B1F0E` | Leather boot shadow | Boots (Tone 3) |
-| `N` | `0x121016` | Eye pupil dark black | Eyes |
-| `W` | `0xFFFFFF` | Eye white sparkle / highlight | Eyes |
-| `n` | `0x78350F` | Watering can copper rim | Watering Can |
-| `M` | `0x64748B` | Watering can metal body | Watering Can |
-| `d` | `0x475569` | Watering can metal shadow | Watering Can |
-| `U` | `0x38BDF8` | Water droplet / splash blue | Water |
-| `u` | `0x6BB1D6` | Water spray mid blue | Water |
-| `m` | `0x94A3B8` | Water / metal shine gray | Water / Metal |
-| `G` | `0x22C55E` | Basket leaf green | Basket / Crops |
-| `A` | `0xEF4444` | Basket apple red base | Basket / Crops |
-| `a` | `0xFCA5A5` | Basket apple red highlight | Basket / Crops |
-| `D` | `0x7F1D1D` | Basket apple red shadow | Basket / Crops |
-| `j` | `0x78350F` | Basket wicker weave dark | Basket |
-| `Y` | `0xFDE047` | Basket wicker highlight | Basket |
-| `y` | `0xEAB308` | Basket wicker base | Basket |
-| `c` | `0x94A3B8` | Sickle metal shadow | Sickle |
-| `C` | `0xE2E8F0` | Sickle metal blade shine | Sickle |
-| `e` | `0x59381E` | Sickle wood handle base | Sickle |
-| `E` | `0x78350F` | Sickle wood handle shadow | Sickle |
+### 1.1 Architecture & Workflow
+Player textures are procedurally generated in `game.js` inside `PixelArtRenderer._genPlayerTextures(scene)` (lines ~1313–1890).
+The rendering pipeline operates as follows:
+1. **Palette Mapping (`P`)**: A dictionary mapping single-character ASCII tokens to 24-bit hex color values (e.g. `'K': 0x0F172A`).
+2. **16×16 Sprite Matrices**: Array of 16 strings, each 16 characters long representing a 2D pixel grid.
+3. **Texture Generation**: `PixelArtRenderer.createTexture(scene, key, matrix, palette, width=16, height=16, ps=3)` renders pixels onto a Phaser Graphics object with pixel size `ps = 3` (producing 48×48 pixel Phaser textures) and registers them with `NEAREST` filtering.
+4. **Animation Registration**: `scene.anims.create()` links texture frame sequences into walk (`player-walk-down`, etc.) and action (`player-water`, `player-harvest`, `player-pick`) animations.
+5. **Legacy Compatibility**: Aliases `farmer0`..`farmer3` map directly to `down_0`, `down_1`, `down_0`, `down_2`.
 
 ---
 
-## 3. Matrix Mapping
+## 2. Color Palette `P` Specification
 
-All 24 matrices are defined as arrays of 16 strings of 16 characters each.
+The palette `P` integrates all required industrial yellow, metallic slate, glowing LED cyan, antenna/gear amber, dark outline, and action/tool compatibility colors:
 
-### A. Walk Frame Matrices (12 total)
-- `player_walk_down_0` (lines 1331–1348): Down idle/rest position.
-- `player_walk_down_1` (lines 1349–1366): Down step left foot forward.
-- `player_walk_down_2` (lines 1367–1384): Down step right foot forward.
-- `player_walk_up_0` (lines 1386–1403): Up idle/rest position (back facing).
-- `player_walk_up_1` (lines 1404–1421): Up step left foot forward.
-- `player_walk_up_2` (lines 1422–1439): Up step right foot forward.
-- `player_walk_left_0` (lines 1441–1458): Left idle/rest position.
-- `player_walk_left_1` (lines 1459–1476): Left step frame.
-- `player_walk_left_2` (lines 1477–1494): Left stride frame.
-- `player_walk_right_0` (lines 1496–1513): Right idle/rest position.
-- `player_walk_right_1` (lines 1514–1531): Right step frame.
-- `player_walk_right_2` (lines 1532–1549): Right stride frame.
-
-### B. Action Frame Matrices (9 total)
-- `player_water_down_0` (lines 1552–1569): Hold watering can ready.
-- `player_water_down_1` (lines 1570–1587): Tilt watering can & stream water.
-- `player_water_down_2` (lines 1588–1605): Water splash on soil.
-- `player_harvest_down_0` (lines 1607–1624): Crouch to harvest crop.
-- `player_harvest_down_1` (lines 1625–1642): Gather crop into basket.
-- `player_harvest_down_2` (lines 1643–1660): Hold harvested crop overhead triumphantly.
-- `player_pick_down_0` (lines 1662–1679): Reach toward tree/bush.
-- `player_pick_down_1` (lines 1680–1697): Pluck fruit from branch.
-- `player_pick_down_2` (lines 1698–1715): Return to standing with picked fruit.
-
-### C. Tool Sprite Matrices (3 total)
-- `tool_watering_can` (lines 1718–1735): Standalone watering can graphic.
-- `tool_basket` (lines 1736–1753): Standalone harvest basket graphic filled with apples.
-- `tool_sickle` (lines 1754–1771): Standalone curved harvesting sickle.
-
----
-
-## 4. Legacy Aliases & Animation Registrations
-
-### Legacy Aliases (Lines 1800–1804)
 ```javascript
-this.createTexture(scene, 'farmer0', down_0, P);
-this.createTexture(scene, 'farmer1', down_1, P);
-this.createTexture(scene, 'farmer2', down_0, P);
-this.createTexture(scene, 'farmer3', down_2, P);
-```
+const P = {
+  '.': null,       // Transparent background
 
-### Animation Registrations (Lines 1806–1827)
-- `player-walk-down`: Frames `['player_walk_down_0', 'player_walk_down_1', 'player_walk_down_0', 'player_walk_down_2']`, `frameRate: 8`, `repeat: -1`.
-- `player-walk-up`: Frames `['player_walk_up_0', 'player_walk_up_1', 'player_walk_up_0', 'player_walk_up_2']`, `frameRate: 8`, `repeat: -1`.
-- `player-walk-left`: Frames `['player_walk_left_0', 'player_walk_left_1', 'player_walk_left_0', 'player_walk_left_2']`, `frameRate: 8`, `repeat: -1`.
-- `player-walk-right`: Frames `['player_walk_right_0', 'player_walk_right_1', 'player_walk_right_0', 'player_walk_right_2']`, `frameRate: 8`, `repeat: -1`.
-- `player-water`: Frames `['player_water_down_0', 'player_water_down_1', 'player_water_down_2', 'player_water_down_1']`, `frameRate: 6`, `repeat: 0`.
-- `player-harvest`: Frames `['player_harvest_down_0', 'player_harvest_down_1', 'player_harvest_down_2']`, `frameRate: 6`, `repeat: 0`.
-- `player-pick`: Frames `['player_pick_down_0', 'player_pick_down_1', 'player_pick_down_2']`, `frameRate: 6`, `repeat: 0`.
+  // 1px Dark Outline & Contours
+  'K': 0x0F172A,   // Dark slate outline (Slate 900)
+  'k': 0x1E293B,   // Dark inner contour / chassis shadow (Slate 800)
+
+  // Industrial Yellow Metallic Casing
+  'y': 0xFEF08A,   // Yellow casing metallic highlight (Yellow 200)
+  'Y': 0xFACC15,   // Yellow casing main base (Yellow 400)
+  'j': 0xEAB308,   // Yellow casing mid-shade (Yellow 500)
+  'J': 0xCA8A04,   // Yellow casing shadow (Yellow 600)
+
+  // Metallic Gray / Slate Body & Joints
+  'C': 0xE2E8F0,   // Bright metal reflection (Slate 200)
+  'c': 0xCBD5E1,   // Light joint cap / accent (Slate 300)
+  'm': 0x94A3B8,   // Light metal joint / manipulator (Slate 400)
+  'M': 0x64748B,   // Mid metal chassis frame (Slate 500)
+  'd': 0x475569,   // Dark metal frame / housing (Slate 600)
+  'D': 0x334155,   // Deep joint shadow / inner core (Slate 700)
+
+  // Glowing LED Visor & Screen Expressions
+  'W': 0xFFFFFF,   // Bright LED glare / eye white highlight
+  'V': 0x38BDF8,   // Glowing cyan eye / pixel display (Sky 400)
+  'v': 0x06B6D4,   // Visor base screen (Cyan 500)
+  'z': 0x0284C7,   // Deep visor screen shadow (Sky 600)
+  'Z': 0x0369A1,   // Visor frame border (Sky 700)
+
+  // Antenna Tip & Gear Accent Details
+  'o': 0xF97316,   // Warning beacon glow (Orange 500)
+  'A': 0xF59E0B,   // Antenna bulb / brass gear core (Amber 500)
+  'a': 0xD97706,   // Brass gear shadow (Amber 600)
+
+  // Action FX, Tool & Crop Palette Compatibility Tokens
+  'n': 0x78350F,   // Tool wood handle
+  'e': 0x59381E,   // Dark handle shadow
+  'G': 0x22C55E,   // Crop leaf green
+  'R': 0xEF4444,   // Crop berry red
+  'u': 0x38BDF8,   // Water droplet cyan
+  'U': 0x0284C7,   // Deep water splash blue
+  'w': 0xE0F2FE    // Water highlight white-blue
+};
+```
 
 ---
 
-## 5. Step-by-Step Replacement Strategy for Worker
+## 3. Complete 16×16 Matrix Design Specifications
 
-When replacing the existing character design with a high-quality Stardew Valley Chibi 1:2 pixel art character, the Worker MUST adhere to the following steps and validation criteria:
+### 3.1 Walk Down Cycles (Front Facing)
 
-### Step 1: Target Files
-- Both `d:\Hangeul Valley\game.js` AND `d:\Hangeul Valley\assets\game.js` MUST be updated synchronously.
-
-### Step 2: Palette `P` Compliance Rules
-1. Must contain **$\ge 30$ color tokens** (excluding transparent `.` key).
-2. Token `'K'` MUST be defined as `0x1A1A2E` (or equivalent dark outline hex).
-3. Multi-tone shading rules:
-   - Skin: $\ge 3$ tones (`X`, `x`, `i`, etc.)
-   - Hair: $\ge 3$ tones (`f`, `H`, `h`, etc.)
-   - Clothing: $\ge 3$ tones (`z`, `Z`, `q`, etc.)
-
-### Step 3: Matrix Grid & Proportion Rules
-1. **Dimensions**: All 24 matrices MUST be strictly $16 \times 16$ arrays of strings.
-2. **Tokens**: Every character in every row MUST be either `.` or a token present in `P`.
-3. **1px Outer Silhouette Outline (Token `K`)**:
-   - Every non-transparent token adjacent (up, down, left, right) to transparent `.` MUST be token `'K'`.
-4. **Chibi 1:2 Ratio (Head Height $\ge 35\%$)**:
-   - On walk down frames (`down_0`, `down_1`, `down_2`), the head area (hat + hair + facial area) MUST span at least $35\%$ of total non-transparent sprite height ($\ge 5.5$ rows out of 16, recommended 8 rows for true 1:1 head-to-body Chibi proportion).
-5. **Facial Features**:
-   - Visible face area must span $\ge 3$ rows high by $\ge 6$ columns wide.
-   - Must include 2 distinct eyes containing `'NW'` pupil-white pairs.
-6. **Bouncy Walk Frame Differences**:
-   - Character matrices for walking MUST have a pixel difference of $\ge 8$ characters between `_0` and `_1`, `_1` and `_2`, and `_0` and `_2` across all 4 directions.
-
-### Step 4: Method Code Structure Preservation
-- Keep method header `static _genPlayerTextures(scene) {` intact.
-- Keep `this.createTexture` calls for all 24 keys intact.
-- Keep legacy alias registrations `farmer0..3` intact.
-- Keep Phaser animation registrations `player-walk-*`, `player-water`, `player-harvest`, `player-pick` intact.
-
-### Step 5: Verification & Auditing Commands
-Run the following verification commands to ensure zero syntax errors and 100% audit pass:
-```bash
-node -c "d:\Hangeul Valley\game.js"
-node -c "d:\Hangeul Valley\assets\game.js"
-node "d:\Hangeul Valley\.agents\victory_auditor_player_sdv_v2\verify_all.js"
+#### `down_0` (Neutral Stance)
+```javascript
+const down_0 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMaAaMdymKK.',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  '..KKdMMMMMMdKK..',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
 ```
+
+#### `down_1` (Left Tread Forward / Step)
+```javascript
+const down_1 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  'KKmYYYYYYYYmKK..',
+  'KKmYdMaAaMdymKK.',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  '.KKdMMMMd.dMMdKK',
+  '.KKDDkDDKKDDkDDK',
+  '.KKKKKKK.KKKKKK.'
+];
+```
+
+#### `down_2` (Right Tread Forward / Step)
+```javascript
+const down_2 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '..KKmYYYYYYYYmKK',
+  '.KKmYdMaAaMdymKK',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  'KKdMMd.dMMMMdKK.',
+  'KDDkDDKKDDkDDKK.',
+  '.KKKKKK.KKKKKKK.'
+];
+```
+
+---
+
+### 3.2 Walk Up Cycles (Back Facing)
+
+#### `up_0` (Neutral Stance Back)
+```javascript
+const up_0 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYdMMddMMdYJK.',
+  '.KKYdDDddDDdYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMdAAdMdYmKK',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  '..KKdMMMMMMdKK..',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
+```
+
+#### `up_1` (Left Tread Step Back)
+```javascript
+const up_1 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYdMMddMMdYJK.',
+  '.KKYdDDddDDdYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  'KKmYYYYYYYYmKK..',
+  'KKmYdMdAAdMdYmKK',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  '.KKdMMMMd.dMMdKK',
+  '.KKDDkDDKKDDkDDK',
+  '.KKKKKKK.KKKKKK.'
+];
+```
+
+#### `up_2` (Right Tread Step Back)
+```javascript
+const up_2 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYdMMddMMdYJK.',
+  '.KKYdDDddDDdYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '..KKmYYYYYYYYmKK',
+  '.KKmYdMdAAdMdYmK',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  'KKdMMd.dMMMMdKK.',
+  'KDDkDDKKDDkDDKK.',
+  '.KKKKKK.KKKKKKK.'
+];
+```
+
+---
+
+### 3.3 Walk Left Cycles (Left Facing)
+
+#### `left_0` (Neutral Left Profile)
+```javascript
+const left_0 = [
+  '......KK........',
+  '.....KAoK.......',
+  '....KKcKK.......',
+  '..KKyyyyyKK.....',
+  '.KKYYYYYYYJK....',
+  '.KKvZvvVvvZYJK..',
+  '.KKvZvVWvVzYJK..',
+  '.KKYjjjjjjJJK...',
+  '..KKKKKKKKKK....',
+  '.KKmYYYYYYmKK...',
+  'KKmYdMaAaMdYmKK.',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDDKK.',
+  '..KKdMMMMMMMdKK.',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
+```
+
+#### `left_1` (Left Tread Step Forward)
+```javascript
+const left_1 = [
+  '......KK........',
+  '.....KAoK.......',
+  '....KKcKK.......',
+  '..KKyyyyyKK.....',
+  '.KKYYYYYYYJK....',
+  '.KKvZvvVvvZYJK..',
+  '.KKvZvVWvVzYJK..',
+  '.KKYjjjjjjJJK...',
+  '.KKKKKKKKKKK....',
+  'KKmYYYYYYmKK....',
+  'KKmYdMaAaMdYmKK.',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDDKK.',
+  '.KKdMMMMMMMdKK..',
+  'KKDDkDDkDDkDDKK.',
+  'KKKKKKKKKKKKKKK.'
+];
+```
+
+#### `left_2` (Left Tread Step Rear)
+```javascript
+const left_2 = [
+  '......KK........',
+  '.....KAoK.......',
+  '....KKcKK.......',
+  '..KKyyyyyKK.....',
+  '.KKYYYYYYYJK....',
+  '.KKvZvvVvvZYJK..',
+  '.KKvZvVWvVzYJK..',
+  '.KKYjjjjjjJJK...',
+  '...KKKKKKKKKK...',
+  '..KKmYYYYYYmKK..',
+  '..KKmYdMaAaMdYmK',
+  '..KKyJJJJJJJJJKK',
+  '..KKDDDDDDDDDKK.',
+  '..KKdMMMMMMMdKK.',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
+```
+
+---
+
+### 3.4 Walk Right Cycles (Right Facing)
+
+#### `right_0` (Neutral Right Profile)
+```javascript
+const right_0 = [
+  '........KK......',
+  '.......KAoK.....',
+  '.......KKcKK....',
+  '.....KKyyyyyKK..',
+  '....KJYYYYYYYK.',
+  '..KJYZvvVvvZvKK.',
+  '..KJYzVwWVvZvKK.',
+  '...KJJjjjjjjYKK.',
+  '....KKKKKKKKKK..',
+  '...KKmYYYYYYmKK.',
+  '.KKmYdMaAaMdYmKK',
+  '.KKJJJJJJJJJyKK.',
+  '.KKDDDDDDDDDKK..',
+  '.KKdMMMMMMMdKK..',
+  'KKDkDkDkDkDDKK..',
+  '.KKKKKKKKKKKKKK.'
+];
+```
+
+#### `right_1` (Right Tread Step Forward)
+```javascript
+const right_1 = [
+  '........KK......',
+  '.......KAoK.....',
+  '.......KKcKK....',
+  '.....KKyyyyyKK..',
+  '....KJYYYYYYYK.',
+  '..KJYZvvVvvZvKK.',
+  '..KJYzVwWVvZvKK.',
+  '...KJJjjjjjjYKK.',
+  '....KKKKKKKKKKK.',
+  '....KKmYYYYYYmKK',
+  '.KKmYdMaAaMdYmKK',
+  '.KKJJJJJJJJJyKK.',
+  '.KKDDDDDDDDDKK..',
+  '..KKdMMMMMMMdKK.',
+  '.KKDkDkDkDkDDKK.',
+  '.KKKKKKKKKKKKKKK'
+];
+```
+
+#### `right_2` (Right Tread Step Rear)
+```javascript
+const right_2 = [
+  '........KK......',
+  '.......KAoK.....',
+  '.......KKcKK....',
+  '.....KKyyyyyKK..',
+  '....KJYYYYYYYK.',
+  '..KJYZvvVvvZvKK.',
+  '..KJYzVwWVvZvKK.',
+  '...KJJjjjjjjYKK.',
+  '...KKKKKKKKKK...',
+  '..KKmYYYYYYmKK..',
+  'KmYdMaAaMdYmKK..',
+  'KKJJJJJJJJJyKK..',
+  '.KKDDDDDDDDDKK..',
+  '.KKdMMMMMMMdKK..',
+  'KKDkDkDkDkDDKK..',
+  '.KKKKKKKKKKKKKK.'
+];
+```
+
+---
+
+### 3.5 Action Animations (Water, Harvest, Pick)
+
+#### `water_down_0..2` (Watering Action)
+```javascript
+const water_down_0 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMaAaMdyKnKK',
+  '.KKyJJJJJJJJmMMK',
+  '..KKDDDDDDDKdMK.',
+  '..KKdMMMMMMKdMK.',
+  '.KKDDkDDkDDKdKKK',
+  '.KKKKKKKKKKKKKK.'
+];
+
+const water_down_1 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMaAaMdyFKKK',
+  '.KKyJJJJJJJBFKnK',
+  '..KKDDDDDDDZZKMm',
+  '..KKdMMMMMM2KdUK',
+  '.KKDDkDDkDD2KdWK',
+  '.KKKKKKKKKKKKKUK'
+];
+
+const water_down_2 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMaAaMdyFKKK',
+  '.KKyJJJJJJJBFKKK',
+  '..KKDDDDDDDZFKnK',
+  '..KKdMMMMMMZKMmK',
+  '.KKDDkDDkDD2KdUK',
+  '.KKKKKKKKKKKKdWK'
+];
+```
+
+#### `harvest_down_0..2` (Harvesting Action)
+```javascript
+const harvest_down_0 = [
+  '................',
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMaAaMdymKK.',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
+
+const harvest_down_1 = [
+  '................',
+  '................',
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYGAAgGYmKK..',
+  'KKmYZaAaAaXZqXKK',
+  '.KKyZsDDsZJJQK..',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
+
+const harvest_down_2 = [
+  '.......KK.......',
+  '......KAoK......',
+  '..KKgXaAaAXgKK..',
+  '..KKXsDDsXKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMaAaMdymKK.',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
+```
+
+#### `pick_down_0..2` (Picking Up Item)
+```javascript
+const pick_down_0 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMaAaMdymXKK',
+  '.KKyJJJJJJJJJKXK',
+  '..KKDDDDDDDDKKKK',
+  '..KKdMMMMMMdKK..',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
+
+const pick_down_1 = [
+  '.......KKKKKKKKK',
+  '......KAoKKXaK..',
+  '...KKKKcKKKaK...',
+  '..KKyyyyyyyyKDKK',
+  '.KKYYYYYYYYYKKKK',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMaAaMdymKK.',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  '..KKdMMMMMMdKK..',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
+
+const pick_down_2 = [
+  '.......KK.......',
+  '......KAoK......',
+  '...KKKKcKKKK....',
+  '..KKyyyyyyyyKK..',
+  '.KKYYYYYYYYYYJK.',
+  '.KKYZvvVVvvZYJK.',
+  '.KKYZvVWvWVzYJK.',
+  '.KKYjjjjjjjjJJK.',
+  '..KKKKKKKKKKKK..',
+  '.KKmYYYYYYYYmKK.',
+  'KKmYdMaAaMdymKK.',
+  '.KKyJJJJJJJJJKK.',
+  '..KKDDDDDDDDKK..',
+  '..KKdMMMMMMdKK..',
+  '.KKDDkDDkDDkDDKK',
+  '.KKKKKKKKKKKKKK.'
+];
+```
+
+---
+
+### 3.6 Standalone Industrial Tool Sprites
+
+#### `tool_watering_can` (Industrial Robot Water Tank)
+```javascript
+const tool_watering_can = [
+  '................',
+  '....KKKKKKKK....',
+  '....KKnKKKnKK...',
+  '....KKnCCCnKK...',
+  '....KKnMMMnKK...',
+  '...KKdYYYYYmKK..',
+  '..KKdYYYYYYYmKK.',
+  '..KKdYYAaYYYmKKK',
+  '..KKdYYYYYYYmKnK',
+  '..KKdYYYYYYYmKdK',
+  '..KKdddddddddKUK',
+  '...KKKKKKKKKKKWK',
+  '.............KKK',
+  '................',
+  '................',
+  '................'
+];
+```
+
+#### `tool_basket` (Industrial Cargo Crate)
+```javascript
+const tool_basket = [
+  '.....KKKKKK.....',
+  '.....KKmmKK.....',
+  '....KKmKKmKK....',
+  '....KKmKKmKKK...',
+  '...KKmGAAgGmKK..',
+  '..KKgXaAaAXgKKK.',
+  '.KKgAYsDDsYAaGKK',
+  'KKmYjYjYjYjYjYmK',
+  'KKmjYjYjYjYjYjmK',
+  'KKmYjYjYjYjYjYmK',
+  'KKmjYjYjYjYjYjmK',
+  '.KKmmmmmmmmmmKKK',
+  '.KKKKKKKKKKKKKKK',
+  '................',
+  '................',
+  '................'
+];
+```
+
+#### `tool_sickle` (Laser Harvester Sickle)
+```javascript
+const tool_sickle = [
+  '................',
+  '......KKKKKK....',
+  '....KKKKCCCKKK..',
+  '...KKKCcVVKKK...',
+  '..KKKCcVVdKK....',
+  '.KKKCcVVdKK.....',
+  '.KKCcVVdKK......',
+  'KKKCcVVdK.......',
+  'KKKCcVVdK.......',
+  '.KKKcVdKK.......',
+  '..KKKyyjK.......',
+  '...KKKyjKK......',
+  '....KKKjjKK.....',
+  '.....KKKJKK.....',
+  '......KKKK......',
+  '................'
+];
+```
+
+---
+
+## 4. Verification & Implementation Roadmap
+
+1. **Syntax Check**: Ensure matrix strings are valid 16-character array elements.
+2. **Key Preservation**: Verify that frame key names (`player_walk_down_0`, `farmer0`, etc.) match standard contract names.
+3. **Dual File Sync**: Apply edits to `game.js` and copy `game.js` to `assets/game.js` to guarantee byte-for-byte SHA256 equality.

@@ -1,29 +1,19 @@
-## 2026-07-24T11:29:34Z
-
-You are Reviewer 2 for Milestone 1: Player Sprite Redesign & 4-Directional Walk Animations.
+## 2026-07-24T12:48:54Z
+You are Reviewer 2 for Milestone 1: Industrial Yellow Farmer Pixel Robot Replacement & Integration.
 Your working directory is: d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2
-Project root is: d:\Hangeul Valley
+Project root: d:\Hangeul Valley
+Scope document: d:\Hangeul Valley\.agents\orchestrator\PROJECT.md
 
-Objectives:
-1. Examine `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js`.
-2. Inspect `PixelArtRenderer._genPlayerTextures(scene)` to verify aesthetic and proportion compliance:
-   - Outer boundary rule: every non-transparent pixel adjacent to transparent '.' is enclosed by 'K'.
-   - Head height ratio: ≥35% (≥5.5 rows) on walk down frames.
-   - Facial area: ≥3x6 with at least 2 distinct 'NW' eye pairs on walk down frames.
-   - Walk animation bouncy differences: ≥8px between all frame pairs per direction (0-1, 1-2, 0-2).
-   - Multi-tone shading: ≥3 tones for skin, hair, and clothing.
-3. Run victory auditor script:
-   `node "d:\Hangeul Valley\.agents\victory_auditor_player_sdv_v2\verify_all.js"`
-4. Document findings in `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2\review.md` and deliver `handoff.md` with your review verdict.
-
-## 2026-07-24T12:18:32Z
+Worker handoff: d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\handoff.md
+Worker changes: d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md
 
 Task:
-Review animation registrations, matrix dimensions, and texture key parity for the main character sprite in `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js`.
-
-Requirements:
-1. Verify all 24 matrices are exactly 16 lines by 16 characters.
-2. Verify all texture keys (`player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`, `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`, `tool_*`, `farmer0..3`) are correctly generated and registered.
-3. Verify `node -c "d:\Hangeul Valley\game.js"` and `node -c "d:\Hangeul Valley\assets\game.js"` pass with 0 syntax errors.
-4. Verify file identity between `game.js` and `assets/game.js`.
-5. Provide your review report and verdict (PASS/FAIL) in `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2\review.md` and `handoff.md`, and send a completion message back.
+1. Review `game.js` and `assets/game.js` for Phaser animation registration and physical rendering integration.
+2. Inspect:
+   - Phaser animation registrations (`player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`, `player-water`, `player-harvest`, `player-pick`).
+   - Overworld scale (1.8x), dynamic shadow rendering (`DynamicShadowSystem.createShadow`), y-sort depth sorting (`playerBaseY = y + 43.2`), and collision hitbox alignment.
+   - Nearest neighbor texture filtering (`NEAREST`).
+3. Run `node -c game.js` and `node -c assets/game.js` to verify 0 syntax errors.
+4. Verify SHA256 byte synchronization between `game.js` and `assets/game.js`.
+5. Write your detailed review in `review.md` and handoff report in `handoff.md` in your working directory.
+6. Send a message to orchestrator with your verdict (PASS or VETO with rationale).

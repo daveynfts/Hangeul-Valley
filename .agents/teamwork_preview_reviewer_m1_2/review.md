@@ -1,107 +1,85 @@
-# Milestone 1 Reviewer 2: Quality & Adversarial Review Report
+# Milestone 1 Code Review & Stress Test Report
 
-## Review Summary
-
-**Verdict**: **PASS**
-
-Independent review and verification of main character sprite animation registrations, matrix dimensions, texture key parity, syntax integrity, and file identity between `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` confirms full compliance with all 4 requirements. No syntax errors, dimension mismatches, or file identity drift were found.
+**Reviewer**: Reviewer 2 (reviewer_critic)
+**Target**: Milestone 1 — Industrial Yellow Farmer Pixel Robot Replacement & Integration (`game.js`, `assets/game.js`)
+**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2`
 
 ---
 
-## Requirements Verification & Findings
+## 1. Review Summary
 
-### Requirement 1: Matrix Dimensions
-- **Criteria**: All 24 matrices in `PixelArtRenderer._genPlayerTextures` must be exactly 16 lines by 16 characters.
-- **Verification Method**: Programmatic parsing and evaluation of all matrix array lengths and line string lengths across both `game.js` and `assets/game.js`.
-- **Matrices Evaluated**:
-  1. `down_0` (16x16)
-  2. `down_1` (16x16)
-  3. `down_2` (16x16)
-  4. `up_0` (16x16)
-  5. `up_1` (16x16)
-  6. `up_2` (16x16)
-  7. `left_0` (16x16)
-  8. `left_1` (16x16)
-  9. `left_2` (16x16)
-  10. `right_0` (16x16)
-  11. `right_1` (16x16)
-  12. `right_2` (16x16)
-  13. `water_down_0` (16x16)
-  14. `water_down_1` (16x16)
-  15. `water_down_2` (16x16)
-  16. `harvest_down_0` (16x16)
-  17. `harvest_down_1` (16x16)
-  18. `harvest_down_2` (16x16)
-  19. `pick_down_0` (16x16)
-  20. `pick_down_1` (16x16)
-  21. `pick_down_2` (16x16)
-  22. `tool_watering_can` (16x16)
-  23. `tool_basket` (16x16)
-  24. `tool_sickle` (16x16)
-- **Status**: **PASS** (24 / 24 matrices are strictly 16 lines by 16 characters).
+**Verdict**: **PASS** (APPROVE)
+
+All Phaser animation registrations, overworld scaling (1.8x), dynamic shadow rendering, y-sort depth sorting (`playerBaseY = y + 43.2`), collision hitbox alignment, nearest-neighbor texture filtering (`NEAREST`), syntax integrity, and byte-level file synchronization have been thoroughly reviewed, independently executed, and verified.
 
 ---
 
-### Requirement 2: Texture Keys & Animation Registrations
-- **Criteria**: Verify generation and registration of texture keys (`player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`, `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`, `tool_*`, `farmer0..3`) and animation registrations (`player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`, `player-water`, `player-harvest`, `player-pick`).
-- **Verification Method**: Mock Phaser Scene execution (`test_mock_phaser.js`) evaluating `PixelArtRenderer._genPlayerTextures(scene)`.
-- **Results**:
-  - **Textures Created (28 total)**:
-    - 12 Walk textures: `player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`
-    - 9 Action textures: `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`
-    - 3 Tool textures: `tool_watering_can`, `tool_basket`, `tool_sickle`
-    - 4 Legacy/Alias textures: `farmer0`, `farmer1`, `farmer2`, `farmer3`
-  - **Animations Created (7 total)**:
-    - `player-walk-down` (frames `player_walk_down_0`, `1`, `2`)
-    - `player-walk-up` (frames `player_walk_up_0`, `1`, `2`)
-    - `player-walk-left` (frames `player_walk_left_0`, `1`, `2`)
-    - `player-walk-right` (frames `player_walk_right_0`, `1`, `2`)
-    - `player-water` (frames `player_water_down_0`, `1`, `2`)
-    - `player-harvest` (frames `player_harvest_down_0`, `1`, `2`)
-    - `player-pick` (frames `player_pick_down_0`, `1`, `2`)
-- **Status**: **PASS** (All 28 textures and 7 animations register cleanly without errors).
+## 2. Findings & Inspection Results
+
+### 2.1 Phaser Animation Registrations
+- **Location**: `game.js` lines 1861–1882
+- **Verification**:
+  - `player-walk-down`: `['player_walk_down_0', 'player_walk_down_1', 'player_walk_down_0', 'player_walk_down_2']` (frameRate: 8, repeat: -1)
+  - `player-walk-up`: `['player_walk_up_0', 'player_walk_up_1', 'player_walk_up_0', 'player_walk_up_2']` (frameRate: 8, repeat: -1)
+  - `player-walk-left`: `['player_walk_left_0', 'player_walk_left_1', 'player_walk_left_0', 'player_walk_left_2']` (frameRate: 8, repeat: -1)
+  - `player-walk-right`: `['player_walk_right_0', 'player_walk_right_1', 'player_walk_right_0', 'player_walk_right_2']` (frameRate: 8, repeat: -1)
+  - `player-water`: `['player_water_down_0', 'player_water_down_1', 'player_water_down_2', 'player_water_down_1']` (frameRate: 6, repeat: 0)
+  - `player-harvest`: `['player_harvest_down_0', 'player_harvest_down_1', 'player_harvest_down_2']` (frameRate: 6, repeat: 0)
+  - `player-pick`: `['player_pick_down_0', 'player_pick_down_1', 'player_pick_down_2']` (frameRate: 6, repeat: 0)
+- **Assessment**: All 7 required animations are safely registered behind `if (!anims.exists(key))` idempotency guards.
+
+### 2.2 Physical Rendering Integration
+- **Overworld Scale**: `this.player.setScale(1.8)` in `_createPlayer` (line 8285).
+- **Dynamic Shadow**: `this.pShadow = this.shadows.createShadow(this.player, 58, 18, 32)` (line 8289). Updates dynamically with sun angle and time of day via `DynamicShadowSystem.updateAllShadows`.
+- **Y-Sort Depth Sorting**:
+  - Code: `const playerBaseY = this.player.y + (this.player.displayHeight * (1 - this.player.originY));`
+  - Math check: For 16×16 base rendered at `ps=3` (48×48 px) with `setScale(1.8)`: `displayHeight = 48 * 1.8 = 86.4 px`. With `originY = 0.5`, `displayHeight * (1 - originY) = 86.4 * 0.5 = 43.2`. Thus `playerBaseY = y + 43.2`.
+- **Collision Hitbox Alignment**: `this.player.body.setSize(24, 16).setOffset(12, 32)` (line 8287). Strictly aligns with the bottom mechanical tread area.
+- **Texture Filtering**: `NEAREST` filtering applied automatically via `PixelArtRenderer.createTexture` (lines 239–243) and reinforced in scene setup (line 7565).
+
+### 2.3 Syntax & File Synchronization
+- **Syntax Check (`node -c game.js`)**: 0 syntax errors (PASS)
+- **Syntax Check (`node -c assets/game.js`)**: 0 syntax errors (PASS)
+- **SHA256 Synchronization**:
+  - `game.js`: `27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`
+  - `assets/game.js`: `27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`
+  - Result: 100% byte-for-byte identical (MATCH: true).
 
 ---
 
-### Requirement 3: Node Syntax Verification
-- **Criteria**: `node -c "d:\Hangeul Valley\game.js"` and `node -c "d:\Hangeul Valley\assets\game.js"` pass with 0 syntax errors.
-- **Verification Method**: Executed Node CLI syntax compiler check (`node -c`) on both absolute paths.
-- **Results**:
-  - `game.js`: Exit Code 0 (0 errors).
-  - `assets/game.js`: Exit Code 0 (0 errors).
-- **Status**: **PASS**.
+## 3. Anti-Integrity Violation Verification
+
+| Violation Category | Checked? | Finding | Result |
+|--------------------|----------|---------|--------|
+| Hardcoded test results / expected outputs | Yes | None found | PASS |
+| Dummy or facade implementations | Yes | Full matrix drawing via `drawMatrix` | PASS |
+| Shortcuts bypassing procedural requirement | Yes | 100% procedural pixel matrices | PASS |
+| Fabricated outputs / self-certifying logs | Yes | Independent node execution verified | PASS |
 
 ---
 
-### Requirement 4: File Identity Verification
-- **Criteria**: Verify file identity between `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js`.
-- **Verification Method**: SHA-256 hash calculation and byte length comparison.
-- **Results**:
-  - `game.js` SHA-256: `92C1685DCA2B940E320849E7A59E3BABE68306219D825499046464F2C3EEE6A8` (1,182,270 bytes)
-  - `assets/game.js` SHA-256: `92C1685DCA2B940E320849E7A59E3BABE68306219D825499046464F2C3EEE6A8` (1,182,270 bytes)
-- **Status**: **PASS** (100% byte-for-byte identity match).
+## 4. Adversarial Stress-Test Challenges
+
+**Overall Risk Assessment**: **LOW**
+
+1. **Scene Re-entry & Animation Re-registration**:
+   - *Scenario*: Player switches scenes or restarts scene multiple times.
+   - *Risk*: `anims.create` called with existing key throws Phaser error.
+   - *Mitigation*: Guarded by `if (!anims.exists(key))` before creation. (PASS)
+
+2. **Headless Execution & Global Fallbacks**:
+   - *Scenario*: Script loaded in node test environment without Phaser window object.
+   - *Risk*: `Phaser.Textures.FilterMode` undefined throws ReferenceError.
+   - *Mitigation*: Ternary fallback `typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode ? ... : 1` handles missing globals gracefully. (PASS)
 
 ---
 
-## Adversarial Criticism & Integrity Assessment
+## 5. Verified Claims Table
 
-1. **Integrity Violations**:
-   - **Hardcoded test outputs**: None detected. All texture generation is programmatically driven by matrix maps.
-   - **Facade / Dummy implementations**: None. Mock Phaser execution proved `generateTexture` and `anims.create` are called for every key.
-   - **Bypasses**: None. Both files match 100% and exhibit zero syntax errors.
-
-2. **Minor Aesthetic Finding (Non-Blocking)**:
-   - **Outer Boundary K-Outline**: Boundary check script (`test_m1_review.js` / `verify_all.js`) flagged 27 instances on bottom shoe pixels (row 14) where non-transparent tokens (`S`, `L`, `0`, `3`, `a`) touch transparent `.` on outer edges without `K` outline wrapping.
-   - **Impact**: Low/aesthetic only. Does not break matrix dimensions (16x16), texture registration, or runtime execution.
-
----
-
-## Verdict Table
-
-| Scope Item | Requirement | Result | Status |
-|---|---|---|---|
-| Matrix Dimensions | 24 matrices, 16x16 | 24/24 matrices exactly 16x16 | **PASS** |
-| Texture Keys | 28 keys generated | 28/28 texture keys present and created | **PASS** |
-| Animations | 7 anims registered | 7/7 anims registered in Phaser | **PASS** |
-| Syntax Integrity | `node -c` | 0 syntax errors in both files | **PASS** |
-| File Identity | `game.js` == `assets/game.js` | 100% SHA256 match | **PASS** |
+- `node -c game.js` passes with 0 syntax errors → verified via `run_command` → PASS
+- `node -c assets/game.js` passes with 0 syntax errors → verified via `run_command` → PASS
+- `game.js` and `assets/game.js` SHA256 match → verified via `run_command` inline node script → PASS
+- All 7 Phaser animations registered → verified via `view_file` lines 1861-1882 → PASS
+- Scale set to 1.8x → verified via `view_file` line 8285 → PASS
+- `playerBaseY` y-sort offset (43.2 px equivalent) → verified via `view_file` line 8308 → PASS
+- Nearest-neighbor texture filtering set → verified via `view_file` line 242 → PASS

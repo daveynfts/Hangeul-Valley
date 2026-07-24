@@ -10,3 +10,19 @@ Read `.agents/ORIGINAL_REQUEST.md` for the latest user requirements:
 Your working directory for coordination is `.agents/orchestrator`.
 Create your `.agents/orchestrator/progress.md` and keep it updated regularly with milestones, tasks, and progress.
 When all work and verification are complete, send a victory claim message to parent Sentinel so that the independent Victory Auditor can verify your claims before reporting completion to the user.
+
+## Request — 2026-07-24T19:44:04Z
+
+Completely replace the human main character in Hangeul Valley with an Industrial Yellow Farmer Pixel Robot (yellow/gray metallic casing, vibrant LED visor/screen, treaded/tread-style feet with smooth 4-directional movement bobbing).
+
+Requirements:
+- R1: Complete Main Character Replacement with Pixel Robot (wipe out human player sprite rendering, replace with Industrial Yellow Farmer Pixel Robot, yellow/gray metallic casing, lit LED visor/screen, antenna/gear details, 1px dark outlines, chibi proportions).
+- R2: 4-Directional Robot Tread Walk Animations (Down, Up, Left, Right walk cycle animations with tread movement frame steps, mechanical bobbing, responsive movement controls).
+- R3: Environment & Scale Integration (1.8x base scale, dynamic shadow rendering, depth sorting y-sort, aligned hitboxes with crops, trees, Muop the Cat, Shop, Fishing Dock).
+
+Acceptance Criteria:
+- Human player sprite matrices & texture routines completely replaced with new robot.
+- 4-directional walking animations render cleanly with proper mechanical frame steps & sprite flipping.
+- `node -c game.js` and `node -c assets/game.js` pass with 0 syntax errors.
+- SHA256 byte synchronization verified between `game.js` and `assets/game.js`.
+- Game builds and runs without console errors or movement issues.

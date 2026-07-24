@@ -1,53 +1,58 @@
-# BRIEFING — 2026-07-24T12:18:18Z
+# BRIEFING — 2026-07-24T19:48:45+07:00
 
 ## Mission
-Implement enhanced main character sprite palette P and 24 micro-pixel matrix definitions in game.js and sync to assets/game.js.
+Replace player textures in `game.js` with Industrial Yellow Farmer Pixel Robot sprite matrices, update palette and tool matrices, verify syntax and synchronization with `assets/game.js`, and write handoff documentation.
 
 ## 🔒 My Identity
 - Archetype: implementer, qa, specialist
 - Roles: implementer, qa, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_worker_m1
-- Original parent: f6e78e1c-6bfe-4986-b2fe-f1bdd7278594
-- Milestone: M1 Character Sprite Enhancement
+- Original parent: 61273c20-169f-4f19-afce-70f9dfa80106
+- Milestone: Milestone 1: Industrial Yellow Farmer Pixel Robot Replacement & Integration
 
 ## 🔒 Key Constraints
-- Follow exact palette P and 24 matrix definitions in d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1\analysis.md.
-- Minimal, precise edits to _genPlayerTextures in d:\Hangeul Valley\game.js.
-- Synchronize d:\Hangeul Valley\game.js to d:\Hangeul Valley\assets\game.js (100% identical).
-- Verify node syntax for both files.
-- Document in changes.md and handoff.md.
+- Completely wipe existing human player sprite matrices in `_genPlayerTextures(scene)` and replace with Industrial Yellow Farmer Pixel Robot implementation.
+- Define palette P with tokens for yellow metallic casing (0xFACC15, 0xEAB308, 0xCA8A04), slate metallic chassis/treads (0x94A3B8, 0x64748B, 0x475569, 0x334155), glowing LED visor/screen (0x38BDF8, 0x06B6D4, 0x0284C7), antenna/beacon glow, 1px dark outline (0x0F172A), and tool/action FX tokens.
+- Update 12 walk matrices using Explorer 2's matrices with mechanical tread step differences (>= 8px changes in tread rows 11-15) and 1px mechanical bobbing.
+- Update 9 action matrices designed by Explorer 3.
+- Update 3 tool sprite matrices (tool_watering_can, tool_basket, tool_sickle).
+- Preserve legacy aliases (farmer0..3).
+- Synchronize game.js and assets/game.js, verify SHA256 checksums match, run `node -c`.
+- Genuine implementation required; no hardcoded test results or facade shortcuts.
 
 ## Current Parent
-- Conversation ID: f6e78e1c-6bfe-4986-b2fe-f1bdd7278594
-- Updated: 2026-07-24T12:18:18Z
+- Conversation ID: 61273c20-169f-4f19-afce-70f9dfa80106
+- Updated: 2026-07-24T19:48:45+07:00
 
 ## Task Summary
-- **What to build**: Expanded palette P and 24 micro-pixel sprite matrix definitions for player textures.
-- **Success criteria**: All 24 matrices correctly defined, syntax verified on game.js and assets/game.js, handoff report complete.
-- **Interface contracts**: analysis.md in teamwork_preview_explorer_m1
-- **Code layout**: d:\Hangeul Valley\game.js and d:\Hangeul Valley\assets\game.js
+- **What to build**: Replacement of `_genPlayerTextures(scene)` in `game.js` and `assets/game.js` with Industrial Yellow Farmer Pixel Robot textures.
+- **Success criteria**: All walk, action, tool, and legacy alias matrices updated properly; syntax checks pass; game.js and assets/game.js identical hash (`27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`).
+- **Interface contracts**: `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md`
 
 ## Key Decisions Made
-- All 24 matrices updated in `game.js`.
-- Synchronized `game.js` to `assets/game.js`.
-- Both files syntax-checked with `node -c` (0 errors).
-- Handoff report written to `handoff.md`.
+- Wiped human farmer textures and replaced `_genPlayerTextures(scene)` in `game.js` with the 24 Industrial Yellow Farmer Pixel Robot matrices and palette P.
+- Copied `game.js` to `assets/game.js` to maintain byte-for-byte SHA256 hash match (`27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`).
+- Preserved all legacy aliases (`farmer0..3`) and animation registrations (`player-walk-down/up/left/right`, `player-water`, `player-harvest`, `player-pick`).
 
 ## Artifact Index
-- d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\ORIGINAL_REQUEST.md — Original task prompt
-- d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\BRIEFING.md — Working briefing
-- d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md — Detailed changes log
-- d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\handoff.md — Handoff report
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\ORIGINAL_REQUEST.md` — Original request context
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\BRIEFING.md` — Current briefing
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\check_matrices.js` — Matrix and token validator
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\verify_m1.js` — Empirical Milestone 1 verification script
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md` — Record of code changes
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\handoff.md` — Handoff report
 
 ## Change Tracker
-- **Files modified**: `d:\Hangeul Valley\game.js`, `d:\Hangeul Valley\assets\game.js`
-- **Build status**: Pass (node -c verified)
+- **Files modified**:
+  - `game.js`: Replaced `_genPlayerTextures(scene)` with Industrial Yellow Farmer Pixel Robot sprite matrices, palette P, action frames, tool sprites, and aliases.
+  - `assets/game.js`: Synchronized with `game.js` (identical byte-for-byte SHA256).
+- **Build status**: Pass (`node -c` clean, SHA256 matched, `verify_m1.js` PASS)
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: Pass (0 syntax errors)
-- **Lint status**: Pass
-- **Tests added/modified**: `node -c` syntax check on both game.js and assets/game.js
+- **Build/test result**: PASS
+- **Lint status**: 0 errors
+- **Tests added/modified**: `verify_m1.js`, `check_matrices.js`
 
 ## Loaded Skills
 - None

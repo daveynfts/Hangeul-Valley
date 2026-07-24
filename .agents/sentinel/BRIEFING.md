@@ -1,26 +1,25 @@
-# BRIEFING — 2026-07-24T04:08:05Z
+# BRIEFING — 2026-07-24T12:51:39Z
 
 ## Mission
-Upgrade Fishing Dock graphics, move Fishing Dock + Crystal Pond to the left of the farm area, and add ambient jumping fish animation on Crystal Pond.
+Completely replace human player character in Hangeul Valley with a stylish Industrial Yellow Farmer Pixel Robot (yellow/gray metallic casing, LED visor, treaded feet, 4-directional walk animations).
 
 ## 🔒 My Identity
 - Archetype: sentinel
-- Working directory: C:/VibeCode/Hangeul Valley/.agents/sentinel
-- Orchestrator: 63593f9c-8629-4ad6-90ed-a2d1af53f943
-- Victory Auditor: 1f12933b-6411-4ca0-8b59-b13706685a0b
+- Working directory: d:\Hangeul Valley\.agents\sentinel
+- Orchestrator: 61273c20-169f-4f19-afce-70f9dfa80106
+- Victory Auditor: 077c3710-3705-4b07-8bab-250d9b5f6f92
 
 ## 🔒 Key Constraints
 - No technical decisions — relay only
 - Victory Audit is MANDATORY before reporting completion
-- Preserve 100% texture key ('fishing_dock') and interaction compatibility
-- Single-character tokens only in matrix grids
-- Node syntax check `node -c game.js` must pass with 0 errors
-- Synchronize root `game.js` ↔ `assets/game.js`
+- node -c game.js and node -c assets/game.js pass with 0 syntax errors
+- SHA256 byte synchronization verified between game.js and assets/game.js
+- 1.8x base scale, dynamic shadow rendering, depth sorting (y-sort), aligned hitboxes
 
 ## User Context
-- **Last user request**: Upgrade Fishing Dock graphics (multi-tone wood, 1px dark outline), move dock + Crystal Pond to left of farm (fx < farm.x), add ambient fish jumping effect on pond with splash.
+- **Last user request**: Completely replace the human main character with an Industrial Yellow Farmer Pixel Robot (yellow/gray metallic casing, vibrant LED visor/screen, treaded/tread-style feet with smooth 4-directional movement bobbing).
 - **Pending clarifications**: None
-- **Delivered results**: Fishing Dock Upgrade completed, verified by multi-agent team and certified VICTORY CONFIRMED by Independent Victory Auditor.
+- **Delivered results**: Industrial Yellow Farmer Pixel Robot implementation verified by team & certified VICTORY CONFIRMED by Independent Victory Auditor.
 
 ## Project Status
 - **Phase**: complete
@@ -34,4 +33,5 @@ Upgrade Fishing Dock graphics, move Fishing Dock + Crystal Pond to the left of t
 - ORIGINAL_REQUEST.md — Verbatim record of user requests
 - .agents/sentinel/BRIEFING.md — Sentinel briefing
 - .agents/sentinel/handoff.md — Sentinel final handoff
-- .agents/victory_auditor/handoff.md — Victory Auditor final report
+- .agents/victory_auditor/audit_report.md — Victory Auditor final report
+- .agents/victory_auditor/handoff.md — Victory Auditor final handoff

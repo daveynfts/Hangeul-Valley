@@ -1309,486 +1309,476 @@ class PixelArtRenderer {
     }
   }
 
-  // 1. Player Farmer 4-Direction Walk Cycle & Action Animations
+  // 1. Player Farmer 4-Direction Walk Cycle & Action Animations (Industrial Yellow Farmer Pixel Robot)
   static _genPlayerTextures(scene) {
     const P = {
       '.': null,
 
-      // --- Outlines & Contours ---
-      'K': 0x1A1A2E,
-      'k': 0x24243B,
+      // 1px Dark Outline & Contours
+      'K': 0x0F172A,   // Dark slate outline (Slate 900)
+      'k': 0x1E293B,   // Dark inner contour / chassis shadow (Slate 800)
 
-      // --- Skin & Face (5 Tones + Expression) ---
-      '1': 0xFFF3E8,
-      'X': 0xFFE0C2,
-      'O': 0xFFE0C2,
-      'x': 0xF1B78B,
-      'i': 0xD38666,
-      'I': 0x9C533C,
-      'o': 0xE07068,
-      'N': 0x121016,
-      'W': 0xFFFFFF,
+      // Industrial Yellow Metallic Casing
+      'Y': 0xFEF08A,   // Yellow casing metallic highlight (Yellow 200)
+      'y': 0xFACC15,   // Yellow casing main base (Yellow 400)
+      'J': 0xEAB308,   // Yellow casing mid-shade (Yellow 500)
+      'j': 0xCA8A04,   // Yellow casing shadow (Yellow 600)
 
-      // --- Hair (4 Tones) ---
-      '4': 0xB87C52,
-      'f': 0x8D5B3A,
-      'H': 0x653E23,
-      'h': 0x3D2314,
+      // Metallic Gray / Slate Body, Joints & Treads
+      'C': 0xE2E8F0,   // Bright metal reflection (Slate 200)
+      'c': 0xCBD5E1,   // Light joint cap / accent (Slate 300)
+      'm': 0x94A3B8,   // Slate gray light base (Slate 400)
+      'M': 0x64748B,   // Slate gray mid base (Slate 500)
+      'd': 0x475569,   // Dark metal frame / housing (Slate 600)
+      'D': 0x334155,   // Deep joint shadow / inner core (Slate 700)
+      'S': 0x64748B,   // Slate mid base
+      's': 0x475569,   // Dark slate shadow
 
-      // --- Straw Hat & Ribbon (6 Straw Tones + 3 Ribbon Tones) ---
-      '5': 0xFFF5B8,
-      't': 0xF4D685,
-      'T': 0xDC9F42,
-      'V': 0xB37D2A,
-      'v': 0x7A5016,
-      '6': 0x54360B,
-      'p': 0xEA5B4B,
-      'R': 0xC23B22,
-      'r': 0x731C13,
+      // Glowing LED Visor & Screen Expressions
+      'W': 0xFFFFFF,   // Bright LED glare / eye white highlight
+      'L': 0xE0F2FE,   // Visor glint highlight
+      'V': 0x38BDF8,   // Glowing cyan eye / pixel display (Sky 400)
+      'v': 0x06B6D4,   // Visor base screen (Cyan 500)
+      'z': 0x0284C7,   // Deep visor screen shadow (Sky 600)
+      'Z': 0x0369A1,   // Visor frame border (Sky 700)
+      'B': 0x0284C7,   // Visor cyan shadow edge
+      'b': 0x0369A1,   // Visor dark border
 
-      // --- T-Shirt (4 Tones) ---
-      '7': 0xFFFFFF,
-      'w': 0xF2ECE1,
-      'F': 0xD5CFBF,
-      'g': 0x999385,
+      // Antenna Tip & Gear Accent Details
+      'O': 0xFFEDD5,   // Antenna tip white glow
+      'o': 0xF97316,   // Warning beacon glow (Orange 500)
+      'R': 0xEF4444,   // Warning light red / Amber-orange
+      'r': 0xC2410C,   // Dark amber shadow
+      'A': 0xF59E0B,   // Antenna bulb / brass gear core (Amber 500)
+      'a': 0xD97706,   // Brass gear shadow (Amber 600)
 
-      // --- Dungarees / Overalls Denim (6 Denim Tones + Hardware) ---
-      '8': 0x7EA5D9,
-      'z': 0x4B6B94,
-      'Z': 0x334B73,
-      'q': 0x213252,
-      'Q': 0x141E36,
-      'J': 0x1D283B,
-      'b': 0xE6B830,
-      '9': 0xB3881B,
-      'B': 0x60A5FA,
-      '2': 0x1E3A8A,
-
-      // --- Leather Boots & Soles (5 Tones) ---
-      'L': 0x854B27,
-      'S': 0x5E3218,
-      's': 0x3B1F0E,
-      '0': 0x0B090C,
-      '3': 0xD49B5B,
-
-      // --- Tools, Water & Crop FX Tokens ---
-      'n': 0x78350F,
-      'e': 0x59381E,
-      'E': 0x78350F,
-      'M': 0x64748B,
-      'd': 0x475569,
-      'm': 0x94A3B8,
-      'c': 0x94A3B8,
-      'C': 0xE2E8F0,
-      'U': 0x38BDF8,
-      'u': 0x6BB1D6,
-      'G': 0x22C55E,
-      'A': 0xEF4444,
-      'a': 0xFCA5A5,
-      'D': 0x7F1D1D,
-      'j': 0x78350F,
-      'Y': 0xFDE047,
-      'y': 0xEAB308
+      // Status Indicator, Action FX, Tool & Crop Compatibility Tokens
+      'G': 0x22C55E,   // Status indicator green / Crop leaf green
+      'g': 0x15803D,   // Dark green indicator
+      'n': 0x78350F,   // Tool wood handle
+      'u': 0x38BDF8,   // Water droplet cyan
+      'U': 0x0284C7,   // Deep water splash blue
+      'w': 0xE0F2FE,   // Water highlight white-blue
+      'X': 0xFFE0C2,   // Action highlight / detail
+      'q': 0x213252,   // Chassis accent shadow
+      'Q': 0x141E36,   // Deep underchassis black/shadow
+      '2': 0x1E3A8A,   // Deep accent shadow
+      'F': 0xD5CFBF    // Tool/action metallic accent
     };
 
+    // 12 Walk Matrices (Designed by Explorer 2)
     const down_0 = [
-      '..KKKKKKKKKKKK..',
-      '..KKv5tTTt5vKK..',
-      '.KKvV5tTTt5VvKK.',
-      '..KKrRpRRpRrKK..',
-      '..KKf4fHHf4fKK..',
-      '...K1XNWXNWX1K..',
-      '...KXxXooXiXK...',
-      '...KKXiXXIXKKKK.',
-      '..KKgFz8b9bzFgKK',
-      '..KKgFBzZZzBFgKK',
-      '..KKqzZ2JJ2ZzqKK',
-      '..KKQzZ2222ZzQKK',
-      '..KQZZKKKKZZQKK.',
-      '..KQ22KKKK22QK..',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
-    ];
-    const down_1 = [
-      '..KKKKKKKKKKKK..',
-      '..KKv5tTTt5vKK..',
-      '.KKvV5tTTt5VvKK.',
-      '..KKrRpRRpRrKK..',
-      '..KKf4fHHf4fKK..',
-      '...K1XNWXNWX1K..',
-      '...KXxXooXiXK...',
-      '..KKKXiXXIXKKKK.',
-      '.KKgFz8b9bzFgXKK',
-      '.KKgFBzZZzBFgXKK',
-      '..KKqzZ2JJ2ZzqKK',
-      '.KKKQzZ2222ZzQKK',
-      '.KQZZKKKKKKZZQK.',
-      '.KQ22KKKKKKQ2QK.',
-      '.K0s3LSKKKK0s3LS',
+      '.......KK.......',
+      '......KORK......',
+      '.......KK.......',
+      '....KKKKKKKK....',
+      '...KYYYYYYYYK...',
+      '..KYyKbCCCCbYKK.',
+      '..KYyKCLWCLWbYK.',
+      '..KJJyKbbbbKYJK.',
+      '..KKmYYYYYYmKK..',
+      '..KSmYyGRyYmSK..',
+      '.KKSsDDDDDDsSKK.',
+      '.KKDDDKKKKDDDKK.',
+      '.KDmSDKKKKDmSDK.',
+      '.KDsDDKKKKDsDDK.',
+      '.KDmSDKKKKDmSDK.',
       '.KKKKKKKKKKKKKK.'
     ];
+
+    const down_1 = [
+      '......KKKK......',
+      '.......KK.......',
+      '....KKKKKKKK....',
+      '...KYYYYYYYYK...',
+      '..KYyKbCCCCbYKK.',
+      '..KYyKCLWCLWbYK.',
+      '..KJJyKbbbbKYJK.',
+      '..KKmYYYYYYmKK..',
+      '..KSmYyGRyYmSK..',
+      '.KKSsDDDDDDsSKK.',
+      '.KKSDDKKKKDDDKK.',
+      '.KDsDDKKKKDmSDK.',
+      '.KDmSDKKKKDsDDK.',
+      '.KDsDDKKKKDmSDK.',
+      '.KDmSDKKKKDmSDK.',
+      '.KKKKKKKKKKKKKK.'
+    ];
+
     const down_2 = [
-      '..KKKKKKKKKKKK..',
-      '..KKv5tTTt5vKK..',
-      '.KKvV5tTTt5VvKK.',
-      '..KKrRpRRpRrKK..',
-      '..KKf4fHHf4fKK..',
-      '...K1XNWXNWX1K..',
-      '...KXxXooXiXK...',
-      '.KKKKXiXXIXKKK..',
-      'KKXgFz8b9bzFgKK.',
-      'KKXgFzZZzBFgKKK.',
-      '.KKKqzZ2JJ2ZzqKK',
-      '.KKKQzZ2222ZzQKK',
-      '.KQZQKKKKKKZZQK.',
-      '.KQZQKKKKKK22QK.',
-      'K0s3LSKKKKK0s3LS',
+      '.......KK.......',
+      '......KORK......',
+      '.......KK.......',
+      '....KKKKKKKK....',
+      '...KYYYYYYYYK...',
+      '..KYyKbCCCCbYKK.',
+      '..KYyKCLWCLWbYK.',
+      '..KJJyKbbbbKYJK.',
+      '..KKmYYYYYYmKK..',
+      '..KSmYyGRyYmSK..',
+      '.KKSsDDDDDDsSKK.',
+      '.KKSDDKKKKDDSDK.',
+      '.KDmSDKKKKDsDDK.',
+      '.KDmSDKKKKDsDDK.',
+      '.KDsDDKKKKDsDDK.',
       '.KKKKKKKKKKKKKK.'
     ];
 
     const up_0 = [
-      '..KKKKKKKKKKKK..',
-      '..KKv5tTTt5vKK..',
-      '.KKvV5tTTt5VvKK.',
-      '..KKrRpRRpRrKK..',
-      '...KKh4HH4hKK...',
-      '...KhH4HHHH4hK..',
-      '...KhHHHHHHhK...',
-      '...KKhxiixhKKKK.',
-      '..KKgFz8888zFgKK',
-      '..KKgFBzZZzBFgKK',
-      '..KKqzZ2JJ2ZzqKK',
-      '..KKQzZ2222ZzQKK',
-      '..KQZZKKKKZZQKK.',
-      '..KQ22KKKK22QK..',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
-    ];
-    const up_1 = [
-      '..KKKKKKKKKKKK..',
-      '..KKv5tTTt5vKK..',
-      '.KKvV5tTTt5VvKK.',
-      '..KKrRpRRpRrKK..',
-      '...KKh4HH4hKK...',
-      '...KhH4HHHH4hK..',
-      '...KhHHHHHHhK...',
-      '..KKKhxiixhKKKK.',
-      '.KKgFz8888zFgXKK',
-      '.KKgFBzZZzBFgXKK',
-      '..KKqzZ2JJ2ZzqKK',
-      '.KKKQzZ2222ZzQKK',
-      '.KQZZKKKKKKZZQK.',
-      '.KQ22KKKKKKQ2QK.',
-      '.K0s3LSKKKK0s3LS',
+      '.......KK.......',
+      '......KORK......',
+      '.......KK.......',
+      '....KKKKKKKK....',
+      '...KYYYYYYYYK...',
+      '...KYyJkkJyYK...',
+      '...KYyJkkJyYK...',
+      '...KJJyyyyJJK...',
+      '..KKmYYYYYYmKK..',
+      '..KSmYyDDyYmSK..',
+      '.KKSsDDDDDDsSKK.',
+      '.KKDDDKKKKDDDKK.',
+      '.KDmSDKKKKDmSDK.',
+      '.KDsDDKKKKDsDDK.',
+      '.KDmSDKKKKDmSDK.',
       '.KKKKKKKKKKKKKK.'
     ];
+
+    const up_1 = [
+      '......KKKK......',
+      '.......KK.......',
+      '....KKKKKKKK....',
+      '...KYYYYYYYYK...',
+      '...KYyJkkJyYK...',
+      '...KYyJkkJyYK...',
+      '...KJJyyyyJJK...',
+      '..KKmYYYYYYmKK..',
+      '..KSmYyDDyYmSK..',
+      '.KKSsDDDDDDsSKK.',
+      '.KKSDDKKKKDDDKK.',
+      '.KDsDDKKKKDmSDK.',
+      '.KDmSDKKKKDsDDK.',
+      '.KDsDDKKKKDmSDK.',
+      '.KDmSDKKKKDmSDK.',
+      '.KKKKKKKKKKKKKK.'
+    ];
+
     const up_2 = [
-      '..KKKKKKKKKKKK..',
-      '..KKv5tTTt5vKK..',
-      '.KKvV5tTTt5VvKK.',
-      '..KKrRpRRpRrKK..',
-      '...KKh4HH4hKK...',
-      '...KhH4HHHH4hK..',
-      '...KhHHHHHHhK...',
-      '.KKKKhxiixhKKK..',
-      'KKXgFz8888zFgKK.',
-      'KKXgFzZZzBFgKKK.',
-      '.KKKqzZ2JJ2ZzqKK',
-      '.KKKQzZ2222ZzQKK',
-      '.KQZQKKKKKKZZQK.',
-      '.KQZQKKKKKK22QK.',
-      'K0s3LSKKKKK0s3LS',
+      '.......KK.......',
+      '......KORK......',
+      '.......KK.......',
+      '....KKKKKKKK....',
+      '...KYYYYYYYYK...',
+      '...KYyJkkJyYK...',
+      '...KYyJkkJyYK...',
+      '...KJJyyyyJJK...',
+      '..KKmYYYYYYmKK..',
+      '..KSmYyDDyYmSK..',
+      '.KKSsDDDDDDsSKK.',
+      '.KKSDDKKKKDDSDK.',
+      '.KDmSDKKKKDsDDK.',
+      '.KDmSDKKKKDsDDK.',
+      '.KDsDDKKKKDsDDK.',
       '.KKKKKKKKKKKKKK.'
     ];
 
     const left_0 = [
-      '....KKKKKKKK....',
-      '...KKv5tTt5vKK..',
-      '..KKvV5TtVvKK...',
-      '...KKrRpRrKK....',
-      '...KKKf4HhKK....',
-      '..KKO1NWf4HhKK..',
-      '..KKXOoXihhKK...',
-      '...KKXiIihKKK...',
-      '...KKgFz8bZqKK..',
-      '..KKXgFZZZqXKK..',
-      '...KKKqZZZZqKK..',
-      '....KKQZZZZQK...',
-      '....KKQZZZZQK...',
-      '....KKQZZZZQKK..',
-      '....KK0s3LS0s3LS',
-      '....KKKKKKKKKK..'
+      '.....KK.........',
+      '....KORK........',
+      '.....KK.........',
+      '...KKYYKKKK.....',
+      '..KYyyyyyyYK....',
+      '.KYyKbCCCbYYK...',
+      '.KYyKCLWbYYYK...',
+      '.KJJyKbbbYYJK...',
+      '..KKmYYYYYmKK...',
+      '..KSmYyGRySK....',
+      '.KKSsDDDDDsKK...',
+      '.KKDDDDDDDDDKK..',
+      '.KDmSmSmSmSmDK..',
+      '.KDsDsDsDsDsDK..',
+      '.KDmSmSmSmSmDK..',
+      '.KKKKKKKKKKKKK..'
     ];
+
     const left_1 = [
-      '....KKKKKKKK....',
-      '...KKv5tTt5vKK..',
-      '..KKvV5TtVvKK...',
-      '...KKrRpRrKK....',
-      '...KKKf4HhKK....',
-      '..KKO1NWf4HhKK..',
-      '..KKXOoXihhKK...',
-      '...KKXiIihKKK...',
-      '.KKKXgFz8bZqKK..',
-      'KKXgFzZZZqKKK...',
-      '.KKKKqZZZZqKKKK.',
-      '..KKKqZZZKKZZqK.',
-      '.KKQZZKKKKKZZQKK',
-      '.KQZZKKKKKKKZZQK',
-      '.K0s3LSKKKK0s3LS',
-      '.KKKKKKKKKKKKKKK'
+      '....KKKK........',
+      '.....KK.........',
+      '...KKYYKKKK.....',
+      '..KYyyyyyyYK....',
+      '.KYyKbCCCbYYK...',
+      '.KYyKCLWbYYYK...',
+      '.KJJyKbbbYYJK...',
+      '..KKmYYYYYmKK...',
+      '..KSmYyGRySK....',
+      '.KKSsDDDDDsKK...',
+      '.KDsDsDsDsDsDK..',
+      '.KDmSmSmSmSmDK..',
+      '.KDsDsDsDsDsDK..',
+      '.KDmSmSmSmSmDK..',
+      '.KDsDsDsDsDsDK..',
+      '.KKKKKKKKKKKKK..'
     ];
+
     const left_2 = [
-      '....KKKKKKKK....',
-      '...KKv5tTt5vKK..',
-      '..KKvV5TtVvKK...',
-      '...KKrRpRrKK....',
-      '...KKKf4HhKK....',
-      '..KKO1NWf4HhKK..',
-      '..KKXOoXihhKK...',
-      '...KKXiIihKKKKK.',
-      '....KKgFz8bZqXKK',
-      '....KKgFZZZqXKK.',
-      '.....KKqZZZZqKKK',
-      '...KKKqZZZKKZZqK',
-      '..KKQZZKKKKKZZQK',
-      '..KQZZKKKKKKKZZK',
-      '..K0s3LSKKKK0s3L',
-      '..KKKKKKKKKKKKKK'
+      '.....KK.........',
+      '....KORK........',
+      '.....KK.........',
+      '...KKYYKKKK.....',
+      '..KYyyyyyyYK....',
+      '.KYyKbCCCbYYK...',
+      '.KYyKCLWbYYYK...',
+      '.KJJyKbbbYYJK...',
+      '..KKmYYYYYmKK...',
+      '..KSmYyGRySK....',
+      '.KKSsDDDDDsKK...',
+      '.KKDDDDDDDDDKK..',
+      '.KDmDmDmDmDmDK..',
+      '.KDsDsDsDsDsDK..',
+      '.KDmDmDmDmDmDK..',
+      '.KKKKKKKKKKKKK..'
     ];
 
     const right_0 = [
-      '....KKKKKKKK....',
-      '...KKv5tTt5vKK..',
-      '..KKvV5TtVvKK...',
-      '...KKrRpRrKK....',
-      '...KKKh4fKKK....',
-      '..KKh4fWN1OKK...',
-      '...KKhhiXoOXKK..',
-      '...KKKhiIiXKK...',
-      '..KKqZb8zFgKK...',
-      '..KKXqZZZFgXKK..',
-      '..KKqZZZZqKKK...',
-      '...KQZZZZQK.....',
-      '...KQZZZZQK.....',
-      '...KQZZZZQK.....',
-      '..KK0s3LS0s3LSKK',
-      '..KKKKKKKKKK....'
-    ];
-    const right_1 = [
-      '....KKKKKKKK....',
-      '...KKv5tTt5vKK..',
-      '..KKvV5TtVvKK...',
-      '...KKrRpRrKK....',
-      '...KKKh4fKKK....',
-      '..KKh4fWN1OKK...',
-      '...KKhhiXoOXKK..',
-      '...KKKhiIiXKK...',
-      '..KKqZb8zFgXKK..',
-      '...KKqZZZzFgXKK.',
-      '.KKKKKqZZZZqKK..',
-      '.KqZZKKZZZqKKK..',
-      'KKQZZKKKKKZZQKK.',
-      'KQZZKKKKKKKZZQK.',
-      '0s3LSKKKKKK0s3LS',
-      'KKKKKKKKKKKKKKK.'
-    ];
-    const right_2 = [
-      '....KKKKKKKK....',
-      '...KKv5tTt5vKK..',
-      '..KKvV5TtVvKK...',
-      '...KKrRpRrKK....',
-      '...KKKh4fKKK....',
-      '..KKh4fWN1OKK...',
-      '...KKhhiXoOXKK..',
-      '...KKKhiIiXKK...',
-      '..KKXqZb8zFgKK..',
-      '...KKXqZZZFgKK..',
-      '...KKKqZZZZqKK..',
-      'KKKKqZZKKZZZqK..',
-      'KQZZKKKKKZZQKK..',
-      'KZZKKKKKKKZZQK..',
-      '0s3LSKKKKKK0s3LS',
-      'KKKKKKKKKKKKKK..'
+      '.........KK.....',
+      '........KORK....',
+      '.........KK.....',
+      '.....KKKKYYKK...',
+      '....KYyyyyyyYK..',
+      '...KYYbCCCbYyYK.',
+      '...KYYYbWLCbYyYK',
+      '...KJYYbbbKyJKK.',
+      '..KKmYYYYYmKK...',
+      '....KSyRGyYmSK..',
+      '....KKsDDDDDsKK.',
+      '...KKDDDDDDDDDKK',
+      '..KDmSmSmSmSmDK.',
+      '..KDsDsDsDsDsDK.',
+      '..KDmSmSmSmSmDK.',
+      '..KKKKKKKKKKKKK.'
     ];
 
-    // Farmer Action Frames (Milestone 3 Redesign)
+    const right_1 = [
+      '........KKKK....',
+      '.........KK.....',
+      '.....KKKKYYKK...',
+      '....KYyyyyyyYK..',
+      '...KYYbCCCbYyYK.',
+      '...KYYYbWLCbYyYK',
+      '...KJYYbbbKyJKK.',
+      '..KKmYYYYYmKK...',
+      '....KSyRGyYmSK..',
+      '....KKsDDDDDsKK.',
+      '..KKsDsDsDsDsDK.',
+      '..KDmSmSmSmSmDK.',
+      '..KDsDsDsDsDsDK.',
+      '..KDmSmSmSmSmDK.',
+      '..KDsDsDsDsDsDK.',
+      '..KKKKKKKKKKKKK.'
+    ];
+
+    const right_2 = [
+      '.........KK.....',
+      '........KORK....',
+      '.........KK.....',
+      '.....KKKKYYKK...',
+      '....KYyyyyyyYK..',
+      '...KYYbCCCbYyYK.',
+      '...KYYYbWLCbYyYK',
+      '...KJYYbbbKyJKK.',
+      '..KKmYYYYYmKK...',
+      '....KSyRGyYmSK..',
+      '....KKsDDDDDsKK.',
+      '...KKDDDDDDDDSDK',
+      '..KDmDmDmDmDmDK.',
+      '..KDsDsDsDsDsDK.',
+      '..KDmDmDmDmDmDK.',
+      '..KKKKKKKKKKKKK.'
+    ];
+
+    // 9 Action Matrices (Designed by Explorer 3)
     const water_down_0 = [
+      '.......KK.......',
+      '......KAoK......',
+      '...KKKKcKKKK....',
+      '..KKyyyyyyyyKK..',
+      '.KKYYYYYYYYYYJK.',
+      '.KKYZvvVVvvZYJK.',
+      '.KKYZvVWvWVzYJK.',
+      '.KKYjjjjjjjjJJK.',
       '..KKKKKKKKKKKK..',
-      '.KKKv5tTt5vKKK..',
-      'KKvV5TtT5VvKK...',
-      '.KKKrRpRRpRrKKK.',
-      '...KKf4fHHf4fKK.',
-      '...K1XNWXNWXK...',
-      '...KXxXooXiXK...',
-      '..KKKXiXXIXKKKKK',
-      '..KKgFz8b9bKnKK.',
-      '..KKgFBzZZzKMmK.',
-      '..KKqzZ2JJ2KdMK.',
-      '..KKQzZ2222KdMK.',
-      '..KQZZKKKKZZKdKK',
-      '..KQ22KKKK22QK..',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
+      '.KKmYYYYYYYYmKK.',
+      'KKmYdMaAaMdyKnKK',
+      '.KKyJJJJJJJJmMMK',
+      '..KKDDDDDDDKdMK.',
+      '..KKdMMMMMMKdMK.',
+      '.KKDDkDDkDDKdKKK',
+      '.KKKKKKKKKKKKKK.'
     ];
+
     const water_down_1 = [
+      '.......KK.......',
+      '......KAoK......',
+      '...KKKKcKKKK....',
+      '..KKyyyyyyyyKK..',
+      '.KKYYYYYYYYYYJK.',
+      '.KKYZvvVVvvZYJK.',
+      '.KKYZvVWvWVzYJK.',
+      '.KKYjjjjjjjjJJK.',
       '..KKKKKKKKKKKK..',
-      '.KKKv5tTt5vKKK..',
-      'KKvV5TtT5VvKK...',
-      '.KKKrRpRRpRrKKK.',
-      '...KKf4fHHf4fKK.',
-      '...K1XNWXNWXK...',
-      '...KXxXooXiXKK..',
-      '..KKKXiXXIXKKK..',
-      '..KKgFz8b9bFKKK.',
-      '..KKgFBzZZzBFKnK',
-      '..KKqzZ2JJ2ZKMmK',
-      '..KKQzZ2222KdUK.',
-      '..KQZZKKKKZZKdWK',
-      '..KQ22KKKK22QKUK',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
+      '.KKmYYYYYYYYmKK.',
+      'KKmYdMaAaMdyFKKK',
+      '.KKyJJJJJJJBFKnK',
+      '..KKDDDDDDDZZKMm',
+      '..KKdMMMMMM2KdUK',
+      '.KKDDkDDkDD2KdWK',
+      '.KKKKKKKKKKKKKUK'
     ];
+
     const water_down_2 = [
+      '.......KK.......',
+      '......KAoK......',
+      '...KKKKcKKKK....',
+      '..KKyyyyyyyyKK..',
+      '.KKYYYYYYYYYYJK.',
+      '.KKYZvvVVvvZYJK.',
+      '.KKYZvVWvWVzYJK.',
+      '.KKYjjjjjjjjJJK.',
       '..KKKKKKKKKKKK..',
-      '.KKKv5tTt5vKKK..',
-      'KKvV5TtT5VvKK...',
-      '.KKKrRpRRpRrKKK.',
-      '...KKf4fHHf4fKK.',
-      '...K1XNWXNWXK...',
-      '...KXxXooXiXKK..',
-      '..KKKXiXXIXKKK..',
-      '..KKgFz8b9bFKKK.',
-      '..KKgFBzZZzBFKKK',
-      '..KKqzZ2JJ2ZFKnK',
-      '..KKQzZ2222ZKMmK',
-      '..KQZZKKKKZZKdUK',
-      '..KQ22KKKKZZKdWK',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKKKK'
+      '.KKmYYYYYYYYmKK.',
+      'KKmYdMaAaMdyFKKK',
+      '.KKyJJJJJJJBFKKK',
+      '..KKDDDDDDDZFKnK',
+      '..KKdMMMMMMZKMmK',
+      '.KKDDkDDkDD2KdUK',
+      '.KKKKKKKKKKKKdWK'
     ];
 
     const harvest_down_0 = [
       '................',
+      '.......KK.......',
+      '......KAoK......',
+      '...KKKKcKKKK....',
+      '..KKyyyyyyyyKK..',
+      '.KKYYYYYYYYYYJK.',
+      '.KKYZvvVVvvZYJK.',
+      '.KKYZvVWvWVzYJK.',
+      '.KKYjjjjjjjjJJK.',
       '..KKKKKKKKKKKK..',
-      '.KKKv5tTt5vKKK..',
-      'KKvV5TtT5VvKK...',
-      '.KKKrRpRRpRrKKK.',
-      '...KKf4fHHf4fKK.',
-      '...K1XNWXNWXK...',
-      '...KXxXooXiXK...',
-      '..KKKXiXXIXKKKK.',
-      '..KKgFz8b9bFgKK.',
-      '.KKgFBzZZzBFgXKK',
-      '.KKXqzZ2JJ2ZqXKK',
-      '.KKXQzZ2222ZQKK.',
-      '..KQZZKKKKZZQK..',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
+      '.KKmYYYYYYYYmKK.',
+      'KKmYdMaAaMdymKK.',
+      '.KKyJJJJJJJJJKK.',
+      '..KKDDDDDDDDKK..',
+      '.KKDDkDDkDDkDDKK',
+      '.KKKKKKKKKKKKKK.'
     ];
+
     const harvest_down_1 = [
       '................',
       '................',
+      '.......KK.......',
+      '......KAoK......',
+      '...KKKKcKKKK....',
+      '..KKyyyyyyyyKK..',
+      '.KKYYYYYYYYYYJK.',
+      '.KKYZvvVVvvZYJK.',
+      '.KKYZvVWvWVzYJK.',
+      '.KKYjjjjjjjjJJK.',
       '..KKKKKKKKKKKK..',
-      '.KKKv5tTt5vKKK..',
-      'KKvV5TtT5VvKK...',
-      '.KKKrRpRRpRrKKK.',
-      '...KKf4fHHf4fKK.',
-      '...K1XNWXNWXK...',
-      '...KXxXooXiXK...',
-      '..KKKXiXXIXKKKK.',
-      '..KKgFz8b9bFgKK.',
-      '.KKgFBzGAAgZBFgK',
-      'KKXqZaAaAaXZqXKK',
-      'KKXQZZsDDsZZQXKK',
-      '.KK0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
+      '.KKmYGAAgGYmKK..',
+      'KKmYZaAaAaXZqXKK',
+      '.KKyZsDDsZJJQK..',
+      '.KKDDkDDkDDkDDKK',
+      '.KKKKKKKKKKKKKK.'
     ];
+
     const harvest_down_2 = [
-      '..KKKKKKKKKKKK..',
+      '.......KK.......',
+      '......KAoK......',
       '..KKgXaAaAXgKK..',
-      '...KKXsDDsXKK...',
-      '..KKKKtTTtKKKK..',
-      '.KKKv5tTt5vKKK..',
-      'KKvV5TtT5VvKK...',
-      '.KKKrRpRRpRrKKK.',
-      '...KKf4fHHf4fKK.',
-      '...K1XNWXNWXK...',
-      '...KXxXooXiXK...',
-      '..KKKXiXXIXKKKK.',
-      '..KKgFz8b9bFgKK.',
-      '..KKgFBzZZzBFgKK',
-      '..KKqzZ2JJ2ZzqKK',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
+      '..KKXsDDsXKK....',
+      '..KKyyyyyyyyKK..',
+      '.KKYYYYYYYYYYJK.',
+      '.KKYZvvVVvvZYJK.',
+      '.KKYZvVWvWVzYJK.',
+      '.KKYjjjjjjjjJJK.',
+      '..KKKKKKKKKKKK..',
+      '.KKmYYYYYYYYmKK.',
+      'KKmYdMaAaMdymKK.',
+      '.KKyJJJJJJJJJKK.',
+      '..KKDDDDDDDDKK..',
+      '.KKDDkDDkDDkDDKK',
+      '.KKKKKKKKKKKKKK.'
     ];
 
     const pick_down_0 = [
+      '.......KK.......',
+      '......KAoK......',
+      '...KKKKcKKKK....',
+      '..KKyyyyyyyyKK..',
+      '.KKYYYYYYYYYYJK.',
+      '.KKYZvvVVvvZYJK.',
+      '.KKYZvVWvWVzYJK.',
+      '.KKYjjjjjjjjJJK.',
       '..KKKKKKKKKKKK..',
-      '.KKKv5tTt5vKKK..',
-      'KKvV5TtT5VvKK...',
-      '.KKKrRpRRpRrKKK.',
-      '...KKf4fHHf4fKK.',
-      '...K1XNWXNWXK...',
-      '...KXxXooXiXKKK.',
-      '..KKKXiXXIXKKXKK',
-      '..KKgFz8b9bFgXK.',
-      '..KKgFBzZZzBFgKK',
-      '..KKqzZ2JJ2ZzqKK',
-      '..KKQzZ2222ZzQKK',
-      '..KQZZKKKKZZQKK.',
-      '..KQ22KKKK22QK..',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
-    ];
-    const pick_down_1 = [
-      '..KKKKKKKKKKKKKK',
-      '.KKKv5tTt5vKKXaK',
-      'KKvV5TtT5VvKaK..',
-      '.KKKrRpRRpRrKDKK',
-      '...KKf4fHHfKgK..',
-      '...K1XNWXNWXKKKK',
-      '...KXxXooXiXK...',
-      '..KKKXiXXIXKKKK.',
-      '..KKgFz8b9bFgKK.',
-      '..KKgFBzZZzBFgKK',
-      '..KKqzZ2JJ2ZzqKK',
-      '..KKQzZ2222ZzQKK',
-      '..KQZZKKKKZZQKK.',
-      '..KQ22KKKK22QK..',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
-    ];
-    const pick_down_2 = [
-      '..KKKKKKKKKKKK..',
-      '.KKKv5tTt5vKKK..',
-      'KKvV5TtT5VvKK...',
-      '.KKKrRpRRpRrKKK.',
-      '...KKf4fHHf4fKK.',
-      '...K1XNWXNWXK...',
-      '...KXxXooXiXK...',
-      '..KKKXiXXIXKKKK.',
-      '..KKgFz8b9bFgKK.',
-      '..KKgFBzZZzBFgKK',
-      '..KKqzZ2JJ2ZzqKK',
-      '..KKQzZ2222ZzQKK',
-      '..KQZZKKKKZZQKK.',
-      '..KQ22KKKK22QK..',
-      '..K0s3LSKK0s3LSK',
-      '..KKKKKKKKKKKK..'
+      '.KKmYYYYYYYYmKK.',
+      'KKmYdMaAaMdymXKK',
+      '.KKyJJJJJJJJJKXK',
+      '..KKDDDDDDDDKKKK',
+      '..KKdMMMMMMdKK..',
+      '.KKDDkDDkDDkDDKK',
+      '.KKKKKKKKKKKKKK.'
     ];
 
-    // Standalone Tool Sprites (Milestone 3 Redesign)
+    const pick_down_1 = [
+      '.......KKKKKKKKK',
+      '......KAoKKXaK..',
+      '...KKKKcKKKaK...',
+      '..KKyyyyyyyyKDKK',
+      '.KKYYYYYYYYYKKKK',
+      '.KKYZvvVVvvZYJK.',
+      '.KKYZvVWvWVzYJK.',
+      '.KKYjjjjjjjjJJK.',
+      '..KKKKKKKKKKKK..',
+      '.KKmYYYYYYYYmKK.',
+      'KKmYdMaAaMdymKK.',
+      '.KKyJJJJJJJJJKK.',
+      '..KKDDDDDDDDKK..',
+      '..KKdMMMMMMdKK..',
+      '.KKDDkDDkDDkDDKK',
+      '.KKKKKKKKKKKKKK.'
+    ];
+
+    const pick_down_2 = [
+      '.......KK.......',
+      '......KAoK......',
+      '...KKKKcKKKK....',
+      '..KKyyyyyyyyKK..',
+      '.KKYYYYYYYYYYJK.',
+      '.KKYZvvVVvvZYJK.',
+      '.KKYZvVWvWVzYJK.',
+      '.KKYjjjjjjjjJJK.',
+      '..KKKKKKKKKKKK..',
+      '.KKmYYYYYYYYmKK.',
+      'KKmYdMaAaMdymKK.',
+      '.KKyJJJJJJJJJKK.',
+      '..KKDDDDDDDDKK..',
+      '..KKdMMMMMMdKK..',
+      '.KKDDkDDkDDkDDKK',
+      '.KKKKKKKKKKKKKK.'
+    ];
+
+    // 3 Standalone Tool Sprites
     const tool_watering_can = [
       '................',
       '....KKKKKKKK....',
       '....KKnKKKnKK...',
       '....KKnCCCnKK...',
-      '....KKnmmmnKK...',
-      '...KKdMMMMMmKK..',
-      '..KKdCMMMMMMmKK.',
-      '..KKdMMMMMMMmKKK',
-      '..KKdMMMMMMMmKnK',
-      '..KKdMMMMMMMmKdK',
+      '....KKnMMMnKK...',
+      '...KKdYYYYYmKK..',
+      '..KKdYYYYYYYmKK.',
+      '..KKdYYAaYYYmKKK',
+      '..KKdYYYYYYYmKnK',
+      '..KKdYYYYYYYmKdK',
       '..KKdddddddddKUK',
       '...KKKKKKKKKKKWK',
       '.............KKK',
@@ -1796,39 +1786,41 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
+
     const tool_basket = [
       '.....KKKKKK.....',
-      '.....KKjjKK.....',
-      '....KKjKKjKK....',
-      '....KKjKKjKKK...',
-      '...KKjGAAgGjKK..',
+      '.....KKmmKK.....',
+      '....KKmKKmKK....',
+      '....KKmKKmKKK...',
+      '...KKmGAAgGmKK..',
       '..KKgXaAaAXgKKK.',
       '.KKgAYsDDsYAaGKK',
-      'KKjYyYyYyYyYyYjK',
-      'KKjyYyYyYyYyYyjK',
-      'KKjYyYyYyYyYyYjK',
-      'KKjyYyYyYyYyYyjK',
-      '.KKjjjjjjjjjjjKK',
+      'KKmYjYjYjYjYjYmK',
+      'KKmjYjYjYjYjYjmK',
+      'KKmYjYjYjYjYjYmK',
+      'KKmjYjYjYjYjYjmK',
+      '.KKmmmmmmmmmmKKK',
       '.KKKKKKKKKKKKKKK',
       '................',
       '................',
       '................'
     ];
+
     const tool_sickle = [
       '................',
       '......KKKKKK....',
       '....KKKKCCCKKK..',
-      '...KKKCcMMKKK...',
-      '..KKKCcMMdKK....',
-      '.KKKCcMMdKK.....',
-      '.KKCcMMdKK......',
-      'KKKCcMMdK.......',
-      'KKKCcMMdK.......',
-      '.KKKcMdKK.......',
-      '..KKKnnbK.......',
-      '...KKKneKK......',
-      '....KKKneKK.....',
-      '.....KKKEKK.....',
+      '...KKKCcVVKKK...',
+      '..KKKCcVVdKK....',
+      '.KKKCcVVdKK.....',
+      '.KKCcVVdKK......',
+      'KKKCcVVdK.......',
+      'KKKCcVVdK.......',
+      '.KKKcVdKK.......',
+      '..KKKyyjK.......',
+      '...KKKyjKK......',
+      '....KKKjjKK.....',
+      '.....KKKJKK.....',
       '......KKKK......',
       '................'
     ];

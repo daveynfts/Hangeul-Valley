@@ -1,35 +1,36 @@
-# Changes Summary — M1 Character Sprite Enhancement
+# Milestone 1 Code Modifications — `changes.md`
 
-## Overview
-Implemented the enhanced main character sprite palette `P` and 24 micro-pixel matrix definitions in `d:\Hangeul Valley\game.js` and synchronized the changes to `d:\Hangeul Valley\assets\game.js`.
+## Summary of Changes
 
-## Target Files Modified
-1. `d:\Hangeul Valley\game.js` (`PixelArtRenderer._genPlayerTextures` method)
-2. `d:\Hangeul Valley\assets\game.js` (Synchronized copy)
+### 1. `game.js` — `PixelArtRenderer._genPlayerTextures(scene)`
+- **Wiped Human Player Textures**: Removed all former human player sprite color tokens (skin, straw hat, dungarees, hair) and human 16x16 matrices.
+- **Defined Robot Palette `P`**: Implemented a 37-token dictionary matching the Industrial Yellow Farmer Pixel Robot color system:
+  - Dark Outline & Contours: `'K'` (`0x0F172A`), `'k'` (`0x1E293B`)
+  - Industrial Yellow Metallic Casing: `'Y'` (`0xFEF08A`), `'y'` (`0xFACC15`), `'J'` (`0xEAB308`), `'j'` (`0xCA8A04`)
+  - Metallic Slate Body & Treads: `'C'` (`0xE2E8F0`), `'c'` (`0xCBD5E1`), `'m'` (`0x94A3B8`), `'M'` (`0x64748B`), `'d'` (`0x475569`), `'D'` (`0x334155`), `'S'` (`0x64748B`), `'s'` (`0x475569`)
+  - Glowing LED Visor & Expressions: `'W'` (`0xFFFFFF`), `'L'` (`0xE0F2FE`), `'V'` (`0x38BDF8`), `'v'` (`0x06B6D4`), `'z'` (`0x0284C7`), `'Z'` (`0x0369A1`), `'B'` (`0x0284C7`), `'b'` (`0x0369A1`)
+  - Antenna Tip & Warning Lights: `'O'` (`0xFFEDD5`), `'o'` (`0xF97316`), `'R'` (`0xEF4444`), `'r'` (`0xC2410C`), `'A'` (`0xF59E0B`), `'a'` (`0xD97706`)
+  - Tool/Crop/FX Compatibility: `'G'` (`0x22C55E`), `'g'` (`0x15803D`), `'n'` (`0x78350F`), `'u'` (`0x38BDF8`), `'U'` (`0x0284C7`), `'w'` (`0xE0F2FE`), `'X'` (`0xFFE0C2`), `'q'` (`0x213252`), `'Q'` (`0x141E36`), `'2'` (`0x1E3A8A`), `'F'` (`0xD5CFBF`)
+- **Updated 12 Walk Matrices**:
+  - `player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`
+  - All matrices are strictly 16x16 grids with 1px outer 'K' outline enclosure, Chibi proportions, and mechanical tread step differences (>= 8px changes in tread rows 11-15) plus 1px vertical bobbing.
+- **Updated 9 Action Matrices**:
+  - `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`
+- **Updated 3 Tool Matrices**:
+  - `tool_watering_can`, `tool_basket`, `tool_sickle`
+- **Preserved Legacy Aliases & Animations**:
+  - Aliases `farmer0`..`farmer3` registered pointing to `down_0`, `down_1`, `down_0`, `down_2`.
+  - Animations `player-walk-down/up/left/right`, `player-water`, `player-harvest`, `player-pick` registered without breaking signatures.
 
-## Specific Changes Made
-1. **Palette `P` Expansion**:
-   - Outlines: `K` (0x1A1A2E), `k` (0x24243B)
-   - Skin & Face: `1` (Specular top-light 0xFFF3E8), `X` / `O` (Base 0xFFE0C2), `x` (Warm tan 0xF1B78B), `i` (Terracotta 0xD38666), `I` (Neck core shadow 0x9C533C), `o` (Soft rosy blush 0xE07068), `N` (Pupil 0x121016), `W` (Catchlight 0xFFFFFF)
-   - Hair: `4` (Specular strand 0xB87C52), `f` (Bangs 0x8D5B3A), `H` (Chestnut 0x653E23), `h` (Deep shadow 0x3D2314)
-   - Straw Hat & Ribbon: `5` (Specular 0xFFF5B8), `t` (Pale yellow 0xF4D685), `T` (Golden crown 0xDC9F42), `V` (Mid-shadow 0xB37D2A), `v` (Brim edge 0x7A5016), `6` (Weave 0x54360B), `p` (Ribbon highlight 0xEA5B4B), `R` (Crimson 0xC23B22), `r` (Burgundy 0x731C13)
-   - T-Shirt: `7` (Specular 0xFFFFFF), `w` (Ivory base 0xF2ECE1), `F` (Crease gray 0xD5CFBF), `g` (Armpit fold 0x999385)
-   - Denim Overalls: `8` (Top-stitch 0x7EA5D9), `z` (Strap highlight 0x4B6B94), `Z` (Main navy 0x334B73), `q` (Mid-shadow 0x213252), `Q` (Core shadow 0x141E36), `J` (Seam 0x1D283B), `b` (Brass buckle 0xE6B830), `9` (Brass rim 0xB3881B), `B` (Light blue 0x60A5FA), `2` (Crotch shadow 0x1E3A8A)
-   - Leather Boots: `L` (Leather highlight 0x854B27), `S` (Leather base 0x5E3218), `s` (Leather shadow 0x3B1F0E), `0` (Rubber sole 0x0B090C), `3` (Lacing accent 0xD49B5B)
-   - Tools & Items: `n`, `e`, `E`, `M`, `d`, `m`, `c`, `C`, `U`, `u`, `G`, `A`, `a`, `D`, `j`, `Y`, `y`
+### 2. `assets/game.js` — Synchronization
+- Executed file copy from `game.js` to `assets/game.js`.
+- Verified SHA256 checksum match: `27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`.
 
-2. **Player Matrices (All 24 Definitions)**:
-   - Walk Down: `down_0`, `down_1`, `down_2`
-   - Walk Up: `up_0`, `up_1`, `up_2`
-   - Walk Left: `left_0`, `left_1`, `left_2`
-   - Walk Right: `right_0`, `right_1`, `right_2`
-   - Action Frames: `water_down_0..2`, `harvest_down_0..2`, `pick_down_0..2`
-   - Tool Sprites: `tool_watering_can`, `tool_basket`, `tool_sickle`
-   - Aliases: `farmer0`, `farmer1`, `farmer2`, `farmer3`
+---
 
-3. **File Synchronization**:
-   - Copied `game.js` to `assets/game.js`. Verified 100% SHA-256 hash match (`1fc0365aefc7548b2133318313fc8e1139fd901582e14defc864766b1538da8e`).
+## Verification Commands & Results
 
-4. **Syntax Verification**:
-   - `node -c "d:\Hangeul Valley\game.js"`: Passed with 0 errors.
-   - `node -c "d:\Hangeul Valley\assets\game.js"`: Passed with 0 errors.
+1. **`node -c game.js`**: Passed (0 syntax errors).
+2. **`node -c assets/game.js`**: Passed (0 syntax errors).
+3. **SHA256 Match**: Passed (`27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`).
+4. **`node .agents/teamwork_preview_worker_m1/verify_m1.js`**: Passed (100% checks green).
