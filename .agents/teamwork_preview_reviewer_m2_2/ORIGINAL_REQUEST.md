@@ -1,14 +1,11 @@
-## 2026-07-24T14:59:51Z
-You are Reviewer 2 for Milestone 2 Gate Verification of Hangeul Valley NPC Sprite Polish & Upgrade.
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_2`.
+## 2026-07-24T15:30:06Z
+You are Reviewer 2 for Milestone 2 of Hangeul Valley Expandable Farm Plots.
+Working directory: d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_2
+Target codebase: d:\Hangeul Valley
 
-Your task:
-1. Create your working directory `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_2` and initialize state/progress files.
-2. Independently inspect `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` for Milestone 2 implementation:
-   - Verify active usage of all defined color tokens across Cat NPC (19 tokens), Notice Board (18 tokens), Dungeon Portal (17 tokens), and Beehive (17 tokens).
-   - Verify 1px dark slate outline (`0x0F172A`) consistency.
-   - Check non-regression of transform anchors, scale factors, drop shadows, collision/proximity radii, and dialog/scene triggers.
-3. Run `node -c game.js` and `node -c assets/game.js` for syntax validation.
-4. Calculate and compare SHA256 hashes of `game.js` and `assets/game.js`.
-5. Write your detailed review report to `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_2\handoff.md`.
-6. Send a message to orchestrator (`271beac4-82f5-4128-b9b0-62d62497fc69`) with your review findings and explicit PASS/FAIL verdict.
+Your task: Review Worker M2's implementation of R2 (Shop UI Plot Expansion Integration), Save/Load Persistence, and Code Quality Sync in `game.js`, `assets/game.js`, `index.html`, `assets/index.html`.
+1. Verify Shop UI displays "🌾 Farm Plot Expansions" with 6 plot expansion items, costs [100, 200, 350, 500, 750, 1000] Gold, locked vs "✅ Owned" status, gold deduction via `spendCoins()`, and real-time map unlock.
+2. Verify Save/Load persistence in `collectSave()`, `migrateSaveData()`, and `applySave()`.
+3. Check `node -c game.js` and `node -c assets/game.js` syntax check.
+4. Verify SHA256 byte sync between `game.js` ↔ `assets/game.js` and `index.html` ↔ `assets/index.html`.
+5. Write your review to `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_2\review.md` and write `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_2\handoff.md`. Send completion message back to parent orchestrator.

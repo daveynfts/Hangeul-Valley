@@ -1,165 +1,186 @@
-# Technical Analysis Report: Shop NPC Sprite Polish & Upgrade (Milestone 1 - R1)
+# Technical Analysis & Implementation Recommendations for Requirement R1: 6 Locked Farm Plots
 
-**Target Scope**: Milestone 1 — Shop NPC Sprite Polish & Upgrade (R1)  
-**Target File**: `game.js` (and dual-file sync to `assets/game.js`)  
-**Author**: `teamwork_preview_explorer_m1_1`  
-**Date**: 2026-07-24  
+## 1. Executive Summary & Problem Statement
+The objective of Milestone 1 / Requirement R1 is to transform the Hangeul Valley farm grid by supporting **6 expandable farm plots that start locked** and can be unlocked sequentially by the player using Gold (`100, 200, 350, 500, 750, 1000 Gold`).
 
----
-
-## 1. Codebase Architecture & Location Analysis
-
-All logic for texture baking, instantiation, depth-sorting, collision, proximity handling, and UI interactions for the Shop NPC resides inside `game.js`.
-
-### 1.1 Summary of Exact Line Locations in `game.js`
-
-| Module / System | Line Numbers in `game.js` | Responsibilities / Functionality |
-| :--- | :--- | :--- |
-| **Texture Bake Function** | **Lines 7870–7892** | `_bakeTextures()` creates `shop_sign` texture using `PixelArtRenderer.drawMatrix(gs, matrix, DECOR_PALETTE, 0, 0, PS)`. |
-| **Texture Filtering** | **Lines 8094–8101** | `_bakeTextures()` sets `setFilter(Phaser.Textures.FilterMode.NEAREST)` on `'shop_sign'` texture. |
-| **NPC Instantiation** | **Lines 8302–8318** | `_createShopNPC(W, H)` places `this.shopNPC` image at `(sx, sy)`, sets origin `(0.5, 1)`, scale `1.3`, depth `sy`, shadow, bounce tween, and hint text `this.shopHint`. |
-| **Dynamic Depth Sorting** | **Line 9070** | `update()` loop sets `this.shopNPC.setDepth(this.shopY || this.shopNPC.y)` dynamically every frame. |
-| **Proximity Hint Visibility** | **Lines 9137–9141** | `update()` checks distance between player and `(shopX, shopY) < 90px` to toggle `shopHint` alpha. |
-| **Target Highlight Indicator** | **Lines 9248–9250** | `_updateTargetHighlight()` checks `< 90px` distance and draws pulsing target box + `[SPACE] Open Shop` label. |
-| **Space Key Interaction** | **Line 9361** | `_interact()` checks `< 90px` distance to call `openShop()`. |
-| **Shop Modal UI & Quiz Gate** | **Lines 4356–4432 & 5367–5422** | Modal state management (`openShop()`, `closeShop()`), `shop-overlay` DOM controls, SRS quiz gate, and item purchases. |
+Currently, `game.js` creates 15 plots (`MAX = 15`), but plot activation is implicitly coupled to purchasing vocabulary level packs (`unlockedLevels.length`). Requirement R1 requires decoupling plot unlocking from level purchases, establishing dedicated state management for plot unlock progression, rendering locked plots with clear visual cues (dark soil, lock overlay, `'🔒'` indicator), adding interactive purchase prompts when approaching locked plots, and persisting unlock state across save/load sessions.
 
 ---
 
-## 2. Baseline Implementation & Color Token Inventory
+## 2. Current Codebase Architecture & Plot Grid Mechanics
 
-### 2.1 Baseline Matrix Analysis
-The baseline implementation bakes a 14×18 pixel matrix under the key `'shop_sign'` (lines 7872–7891):
+### 2.1 Grid Geometry and Positioning
+- **Constants** (`game.js:3921`):
+  `TILE = 48`, `PLOT_SIZE = 48`, `PLOT_COLS = 3`, `PLOT_GAP = 18`. Step = `48 + 18 = 66px`.
+- **Farm Boundary** (`game.js:8246-8247`):
+  `fW = PLOT_COLS * (PLOT_SIZE + PLOT_GAP) - PLOT_GAP = 3 * 66 - 18 = 180px`.
+  `fH = 3 * (PLOT_SIZE + PLOT_GAP) - PLOT_GAP = 180px`.
+  `this.farm = { x: W / 2 - fW / 2, y: H / 2 - fH / 2 - 30, w: fW, h: fH };`
+- **Plot Coordinates Indexing** (`game.js:9166-9172`):
+  `MAX = 15`, `ROWS = 5`.
+  For plot index `i` (`0 <= i < 15`):
+  - Column: `col = i % 3` (0, 1, 2)
+  - Row: `row = Math.floor(i / 3)` (0, 1, 2, 3, 4)
+  - Center X: `px = this.farm.x + col * 66 + 24`
+  - Center Y: `py = this.farm.y + row * 66 + 24`
 
+### 2.2 Memory Representation (`this.plots`)
+In `FarmScene._createPlots(W, H)` (`game.js:9164-9184`), each plot object in `this.plots[i]` has:
 ```javascript
-    // Shop sign texture 14x18
-    const gs = mk();
-    PixelArtRenderer.drawMatrix(gs, [
-      '..KKKKKKKKKK..',
-      '..KOOOOOOOOK..',
-      '..KOOOOOOOOK..',
-      'KKKKKKKKKKKKKK',
-      'KOOOOOOOOOOOoK',
-      'KOWWKKYYKKWWwK',
-      'KOWKYYYYYYKWwK',
-      'KOWKYYYYYYKWwK',
-      'KOWKYYYYYYKWwK',
-      'KOWWKKYYKKWWwK',
-      'KOWWWWWWWWWWwK',
-      'KOWWWWWWWWWWwK',
-      'KOwwwwwwwwwwwK',
-      'KKKKKKKKKKKKKK',
-      '....KWWKWWK...',
-      '....KWWKWWK...',
-      '....KWWKWWK...',
-      '....KKKKKKK...'
-    ], DECOR_PALETTE, 0, 0, PS);
-    gs.generateTexture('shop_sign', 14*PS, 18*PS); gs.destroy();
+{
+  index: i,             // Integer 0..14
+  x: px,                // World X coordinate
+  y: py,                // World Y coordinate
+  tile: PhaserImage,    // 'drt_dry' or 'drt_wet', display size 48x48, depth 2
+  shad: PhaserEllipse,  // Shadow sprite under soil tile, depth 1
+  body: StaticBody,     // Physics body (circle 48*0.4)
+  sState: '',           // Crop state: ''=empty, '1'=seedling, '2'=wilting, '3'=sprout, '4'=ripe
+  ko: null,             // Korean word key currently planted
+  word: null,           // Word object
+  plant: null,          // Crop image sprite (depth py + 5/10)
+  glow: null,           // Selection highlight graphics box
+  hintLabel: null,      // Hint text above crop
+  active: boolean,      // True if unlocked/usable, false if locked
+  plantedAt: 0          // Planting timestamp (ms)
+}
 ```
 
-### 2.2 Baseline Fill Color Tokens Count
-The baseline sprite matrix utilizes `DECOR_PALETTE` (lines 7637–7669) with the following character mapping:
-
-| Token Key | Hex Color | Description / Role |
-| :---: | :---: | :--- |
-| `.` | `null` | Transparent background |
-| `K` | `0x0F172A` | 1px Dark Slate Outline / Structural boundary |
-| `O` | `0xD99B66` | Sunlit wood highlight |
-| `o` | `0xB3713D` | Oak wood highlight |
-| `W` | `0x8F5428` | Cedar wood base |
-| `w` | `0x573012` | Deep timber shadow |
-| `Y` | `0xFDE047` | Bright gold (coin icon) |
-
-**Total Baseline Color Token Count**: **6 distinct non-null fill color tokens**.
-
----
-
-## 3. Recommended Upgrade Plan for Shop NPC Sprite (R1)
-
-Currently, `shop_sign` is a minimal wooden signpost. Requirement R1 specifies upgrading the Shop NPC sprite to depict a warm, inviting Korean merchant character standing behind a wooden shop counter with rich pixel art accessories.
-
-### 3.1 Proposed Visual Features
-1. **Korean Merchant Character**:
-   - **Headwear / Hat**: Traditional Korean merchant headwear/gat with multi-tone shading (`hatBase`, `hatShade`, `hatHighlight`).
-   - **Facial Expression**: Friendly, warm Korean merchant expression with smiling eyes (`eyeDark`, `eyeSparkle`), rosy cheeks (`cheekPink`), and natural skin shading (`skinBase`, `skinShade`, `skinHighlight`).
-   - **Clothing & Apron**: Korean merchant hanbok vest/robe and work apron with multi-tone cloth folds (`clothBase`, `clothShade`, `clothHighlight`, `apronBase`, `apronShade`).
-2. **Shop Counter & Accessories**:
-   - **Wood Counter**: Detailed wooden shop counter in front of the merchant with sunlit top edge and deep shadow underside (`counterTop`, `counterFront`, `counterShadow`).
-   - **Coins on Counter**: Shiny gold coins stacked on the counter top (`coinBase`, `coinShade`, `coinHighlight`).
-   - **Sign Banner Accent**: Hanging shop sign accent with warm gold coin motif.
-3. **Outlines**:
-   - Every outer edge and internal structural division must be bounded by a crisp 1px dark outline (`K = 0x0F172A` or `0x121016`) for visual consistency with the upgraded Robot character.
-
-### 3.2 Expanded Color Token Palette Specification (14–16 Tokens)
-To fulfill the acceptance criteria (must strictly increase unique fill color count from baseline 6), the upgraded Shop NPC palette should introduce:
-
+### 2.3 Legacy Unlocking Mechanism (To Be Replaced)
+Currently at `game.js:9167` & `9189`:
 ```javascript
-const SHOP_NPC_PALETTE = {
-  '.': null,
-  'K': 0x0F172A, // 1px Dark Slate Outline
-  'k': 0x1E293B, // Dark slate inner shadow
-  // Skin & Face (Warm Korean Merchant)
-  'X': 0xFFDDAD, // Skin base tone
-  'x': 0xEAA878, // Skin shadow tone
-  'H': 0xFFEECA, // Skin highlight
-  'P': 0xF87171, // Warm cheek blush
-  'E': 0x1E1B4B, // Dark eye pupil / expression line
-  // Merchant Headwear & Hair
-  'J': 0x334155, // Merchant hat base
-  'j': 0x1E293B, // Merchant hat shadow
-  'L': 0x64748B, // Merchant hat highlight
-  // Merchant Clothing & Hanbok Vest
-  'R': 0xB91C1C, // Crimson vest base
-  'r': 0x7F1D1D, // Crimson vest shadow
-  'm': 0xEF4444, // Crimson vest highlight
-  // Apron
-  'A': 0xFEF08A, // Cream/yellow apron base
-  'a': 0xCA8A04, // Apron shadow
-  // Counter & Wood Structure
-  'O': 0xD99B66, // Sunlit wood highlight
-  'o': 0xB3713D, // Oak wood midtone
-  'W': 0x8F5428, // Cedar wood base
-  'w': 0x573012, // Deep timber shadow
-  // Coins on Counter
-  'Y': 0xFDE047, // Gold coin base
-  'y': 0xD97706, // Gold coin shadow
-  'U': 0xFFFFFF  // Gold coin specular highlight
-};
+const activeCnt = Math.min(MAX, 9 + (unlockedLevels.length - 1) * 3);
 ```
-**Upgraded Token Count**: **16+ distinct color tokens** (vs 6 baseline).
-
-### 3.3 Matrix Layout Structure Recommendation (e.g. 18×22 grid)
-```
-Row 0-4:   Merchant Hat & Headband
-Row 5-8:   Face, Smiling Eyes, Rosy Cheeks, Beard/Smile Accent
-Row 9-13:  Hanbok Vest, Shoulders, Apron Ties
-Row 14-18: Shop Counter Top, Coins Stack, Counter Planks
-Row 19-21: Counter Support Base & Ground Outline
-```
+- Plots `0` through `8` (9 plots) start active for Level 1.
+- Plots `9` through `14` (6 plots) start inactive (`active = false`).
+- Locked plots currently set `tile.setAlpha(0.25)`, `shad.setAlpha(0.1)`, and display a `pixel_crate` image (`24x24`, alpha `0.6`).
+- No interactive purchase prompt exists when approaching `active === false` plots.
 
 ---
 
-## 4. Verification & Non-Regression Analysis
+## 3. Technical Requirements & Recommendations for Requirement R1
 
-### 4.1 Collision, Position & Depth-Sorting Checks
-- **Position Anchors**: `sx = farm.x + farm.w + 175`, `sy = farm.y + farm.h / 2 + 25`.
-- **Origin**: Kept at `setOrigin(0.5, 1)`. Ground contact remains aligned with `(sx, sy)`.
-- **Scale**: Scaled at `1.3` (or adjusted proportionally to maintain player-to-NPC ratio).
-- **Depth Sorting**: Dynamic Y-depth `setDepth(this.shopY || this.shopNPC.y)` works automatically because depth matches ground contact Y (`sy`). When `player.y < shopY`, player renders behind NPC; when `player.y > shopY`, player renders in front of NPC.
-- **Shadow**: `this.shadows.createShadow(this.shopNPC, 48, 15, 4)` projects clean elliptical shadow at feet/counter base.
+### 3.1 State Management & Decoupling
+1. **Global Unlocked Plot Data**:
+   Introduce explicit state variables for plot unlocking:
+   ```javascript
+   var unlockedPlotCount = 9; // Default 9 unlocked plots (indices 0..8)
+   ```
+   Or an array of unlocked indices:
+   ```javascript
+   var unlockedPlots = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+   ```
+2. **Gold Cost Table**:
+   Define the cost progression array for unlocking the 6 locked plots (indices 9 to 14):
+   ```javascript
+   const FARM_PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000];
+   ```
+   For a locked plot at index `i` (`9 <= i <= 14`), the cost index is `lockedIdx = i - 9`, giving:
+   - Plot index 9  (1st locked): **100 Gold**
+   - Plot index 10 (2nd locked): **200 Gold**
+   - Plot index 11 (3rd locked): **350 Gold**
+   - Plot index 12 (4th locked): **500 Gold**
+   - Plot index 13 (5th locked): **750 Gold**
+   - Plot index 14 (6th locked): **1000 Gold**
 
-### 4.2 Interaction & Shop Overlay Functional Checks
-- Distance check `< 90px` in `_updateTargetHighlight()` and `_interact()` triggers `openShop()`.
-- `openShop()` triggers `setModalState('shop-overlay', true)` and `buildShopGrid()`.
-- Purchases gate through `startShopQuizGate(idx)` and unlock SRS vocabulary levels.
-- All functional and UI pathways remain 100% error-free.
+### 3.2 Visual Rendering of Locked Plots
+In `FarmScene._createPlots()` and `refreshPlotAccess()`:
+- **Active Plot** (`p.active === true`):
+  - Soil tile: `p.tile.setAlpha(1).clearTint()`
+  - Shadow: `p.shad.setAlpha(0.3)`
+  - Remove lock indicators and crates.
+- **Locked Plot** (`p.active === false`):
+  - Soil tile: Darkened soil effect using `p.tile.setAlpha(0.35).setTint(0x666666)` (or dark earth tint `0x444444`).
+  - Shadow: `p.shad.setAlpha(0.1)`
+  - Overlay & Indicator: Centered text object displaying `'🔒'` icon (`fontSize: '20px'`, origin `(0.5, 0.5)`, depth `4`).
+  - Store handle on plot object: `p.lockIcon = lockTextObj;` for easy removal upon unlock.
+
+### 3.3 Interactive Unlock Flow & Proximity Prompt
+1. **Proximity Action Hint (`_updateHighlights` - `game.js:9383-9441`)**:
+   Add a check for locked plots:
+   ```javascript
+   if (hx === null) {
+     for (const p of this.plots) {
+       if (!p.active && near(p)) {
+         const lockedIdx = p.index - 9;
+         const cost = FARM_PLOT_UNLOCK_COSTS[lockedIdx] || 100;
+         hx = p.x; hy = p.y;
+         lbl = `[SPACE] Unlock Plot #${p.index + 1} (${cost} Gold) 🔒`;
+         col = 0xFFD700; // Gold highlight box
+         break;
+       }
+     }
+   }
+   ```
+2. **Interaction Dispatch (`_interact` - `game.js:9455-9540`)**:
+   Add an interaction check when player presses `[SPACE]` near a locked plot:
+   ```javascript
+   for (const p of this.plots) {
+     if (!p.active && near(p)) {
+       this.promptUnlockPlot(p);
+       return;
+     }
+   }
+   ```
+3. **Purchase Confirmation & Processing (`promptUnlockPlot(plot)`)**:
+   - Calculate cost: `const cost = FARM_PLOT_UNLOCK_COSTS[plot.index - 9];`
+   - Check player currency (`playerCurrencies.coins` / `gold`).
+   - If player has enough Gold:
+     - Deduct currency via `spendCoins(cost)`.
+     - Update plot state: `plot.active = true; unlockedPlotCount = Math.max(unlockedPlotCount, plot.index + 1);` (or `unlockedPlots.push(plot.index)`).
+     - Visual transition:
+       - Restore soil tile: `plot.tile.setAlpha(1).clearTint(); plot.shad.setAlpha(0.3);`
+       - Destroy lock indicator: `if (plot.lockIcon) { plot.lockIcon.destroy(); plot.lockIcon = null; }`
+       - Play feedback: `playChiptuneSFX('harvest')`, burst particles `this._sparkle(plot.x, plot.y)`.
+       - Float label: `this._label(plot.x, plot.y, 'Plot Unlocked! 🔓');`
+       - Show toast: `showToast(`🔓 Farm Plot #${plot.index + 1} Unlocked for ${cost} Gold!`);`
+     - Save game: Call `persistSave()`.
+   - If player lacks Gold:
+     - Play error SFX: `playChiptuneSFX('quiz_wrong')`.
+     - Show toast: `showToast(`Need ${cost} Gold 🪙 to unlock Farm Plot #${plot.index + 1}!`);`
+
+### 3.4 Save/Load Persistence Architecture
+1. **Schema Serialization (`collectSave` - `game.js:4138-4172`)**:
+   Include plot unlock state in the saved JSON payload:
+   ```javascript
+   return {
+     v: 4,
+     currencies: playerCurrencies,
+     gold: playerCurrencies.coins,
+     unlockedLevels,
+     unlockedPlotCount, // Serializes plot unlock level (default 9, max 15)
+     unlockedPlots,     // Alternative: array of unlocked plot indices [0..8]
+     ...
+   };
+   ```
+2. **Schema Migration (`migrateSaveData` - `game.js:4079-4135`)**:
+   Handle backwards compatibility for existing saves:
+   ```javascript
+   if (typeof data.unlockedPlotCount !== 'number') {
+     data.unlockedPlotCount = 9; // Fallback for legacy save files
+   }
+   if (!Array.isArray(data.unlockedPlots)) {
+     data.unlockedPlots = Array.from({ length: data.unlockedPlotCount }, (_, i) => i);
+   }
+   ```
+3. **State Restoration (`applySave` - `game.js:4175-4221`)**:
+   Restore global plot state and notify active scene:
+   ```javascript
+   if (typeof migrated.unlockedPlotCount === 'number') {
+     unlockedPlotCount = migrated.unlockedPlotCount;
+   }
+   if (sceneRef && typeof sceneRef.refreshPlotAccess === 'function') {
+     sceneRef.refreshPlotAccess();
+   }
+   ```
+4. **Dual Storage Persistence (`persistSave` & `loadSave` - `game.js:4223-4245`)**:
+   - `persistSave()` serializes state to `localStorage.setItem('hv_save_v2', ...)` and `window.pywebview.api.save(data)`.
+   - `loadSave()` loads snapshot from `pywebview.api.load()` or `localStorage` and executes `applySave()`.
 
 ---
 
-## 5. Precise Directives for Implementation Worker
-
-1. Edit `_bakeTextures()` in `game.js` (lines 7870–7892) to replace the basic sign matrix with the upgraded Shop NPC merchant & counter matrix.
-2. Verify that `shop_sign` texture registration and `NEAREST` filter mode remain active (lines 8094–8101).
-3. Ensure no modifications to `_createShopNPC()` positional anchors, origin `(0.5, 1)`, depth sorting, or interaction triggers.
-4. Run `node -c game.js` and `node -c assets/game.js` to ensure syntax validity.
-5. Synchronize byte-for-byte from `game.js` to `assets/game.js`.
+## 4. Mirror Sync & Verification Strategy
+- **File Sync Requirement**:
+  Per `PROJECT.md`, `assets/game.js` must be kept 100% byte-identical to `game.js`.
+- **Automated Verification**:
+  - Run syntax check: `node -c game.js` and `node -c assets/game.js`.
+  - Run Milestone 1 harness: `node test_m1_challenger_harness.js`.

@@ -1,97 +1,44 @@
-# FORENSIC AUDIT REPORT — MILESTONE 2 GATE VERIFICATION
-
-**Work Product**: `d:\Hangeul Valley\game.js` & `d:\Hangeul Valley\assets\game.js`  
-**Profile**: General Project / Forensic Integrity Audit  
-**Verdict**: **CLEAN**
-
----
+# Handoff Report — Milestone 2 Forensic Audit
 
 ## 1. Observation
 
-### SHA256 Hash Verification & Synchronization
-Executed SHA256 checksum calculation on both target files:
-- `game.js`: `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`
-- `assets/game.js`: `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`
-- **Result**: Exact byte-for-byte match (100% synchronization).
-
-### JavaScript Syntax Check
-Ran Node.js syntax compiler `node -c`:
-- `node -c "d:\Hangeul Valley\game.js"`: Exit code 0 (Pass).
-- `node -c "d:\Hangeul Valley\assets\game.js"`: Exit code 0 (Pass).
-
-### Color Palette Expansion & Token Utilization Audit
-Empirically checked all defined color palette keys against matrix string token usages:
-1. **R3 Cat NPC (`C` palette - 18 color keys)**:
-   - Palette Tokens: `K`, `k`, `H`, `G`, `g`, `D`, `d`, `W`, `C`, `c`, `w`, `P`, `p`, `E`, `I`, `e`, `L`, `Z`, `z`
-   - Token Usage: All 18 defined tokens are actively used across animation frames (`cat_idle_0`, `cat_idle_1`, `cat_walk_0..2`, `cat_sit_0..1`, `cat_sleep_0..1`). No unused dummy tokens.
-2. **R4 Notice Board (`NOTICE_BOARD_PALETTE` - 18 color keys)**:
-   - Palette Tokens: `K`, `O`, `o`, `W`, `w`, `d`, `b`, `B`, `u`, `N`, `n`, `R`, `r`, `M`, `m`, `Y`, `y`, `g`
-   - Token Usage: All 18 defined tokens are actively used in `notice_board` matrix (18×16). No unused dummy tokens.
-3. **R4 Dungeon Portal (`PORTAL_PALETTE` - 17 color keys)**:
-   - Palette Tokens: `K`, `t`, `T`, `S`, `s`, `C`, `Q`, `Y`, `P`, `p`, `m`, `V`, `v`, `E`, `W`, `z`, `X`
-   - Token Usage: All 17 defined tokens are actively used in `dungeon_portal` matrix (20×28). No unused dummy tokens.
-4. **R5 Beehive (`BEEHIVE_PALETTE` - 17 color keys & `BEE_PALETTE` - 7 color keys)**:
-   - Palette Tokens: `K`, `k`, `b`, `B`, `W`, `w`, `O`, `S`, `D`, `A`, `M`, `Y`, `y`, `H`, `C`, `G`, `g`
-   - Token Usage: All 17 defined tokens are actively used in `beehive` matrix (20×22). All 7 bee palette tokens are used in `bee_fly_0/1` and particle textures (`p_tiny_bee`, `p_pollen`, `p_honey_drip`).
-
-### Pixel Art Detail & Feature Verification
-- **Cat NPC (R3)**: Verified M-mark forehead stripes (`d` dark ginger tokens on forehead), tabby flank/body stripes (`d`/`D`), green eye pupil with bright green catchlight (`L`), white whiskers (`w`), airplane ears (`KPK`/`KHpKK`), and sleeping Zzz animation (`Z`/`z`).
-- **Notice Board (R4)**: Verified wood grain (`O`/`o`/`W`/`w`/`d`), roof tile slates and floral accents (`M`/`m`/`Y`/`y`/`g`), parchment notices with paper folds (`u`), ink text lines (`N`/`n`), and red pushpins (`R`/`r`).
-- **Dungeon Portal (R4)**: Verified stone archway with carved runic symbols (`C` cyan, `Q` crimson, `Y` gold), multi-layered swirling portal energy (`P`/`p`/`m`/`V`/`v`/`E`), white core singularity (`W`), pink energy spark (`z`), and node (`X`).
-- **Beehive (R5)**: Verified woven skep hive structure with multi-shade amber shading (`S`/`D`/`A`/`M`/`Y`/`y`/`H`), hexagonal honeycomb pattern (`DMDMDMDM`), hollow entrance hole (`KKKKKK`/`k`), dripping golden honey drops (`GgC`/`gG`), and wooden mounting stand (`b`/`B`/`W`/`w`/`O`).
-
-### Code Integrity & Anti-Cheating Scan
-- Searched codebase for hardcoded test skips (`it.skip`, `describe.skip`, `xit`), dummy overrides, facade implementations, or pre-calculated test result strings. None found.
-- All textures are built dynamically from pixel matrices via standard drawing logic.
-
----
+- **SHA256 File Hashes**:
+  - `game.js`: `74F3FC61296474A0CFFDDE17EE1FACAA5EBBD3B4805EF19EB0EDFEBA635AF1AC`
+  - `assets/game.js`: `74F3FC61296474A0CFFDDE17EE1FACAA5EBBD3B4805EF19EB0EDFEBA635AF1AC`
+  - `index.html`: `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA`
+  - `assets/index.html`: `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA`
+- **Code Inspection (`game.js`)**:
+  - Line 3936: `var PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000];`
+  - Line 3937-3944: `var unlockedPlots = [0, 1, 2, 3, 4, 5, 6, 7, 8]; function isPlotUnlocked(i) ...`
+  - Line 4348-4357: `function spendCoins(amount) { if (playerCurrencies.coins >= amount) { playerCurrencies.coins -= amount; syncGoldAlias(); persistSave(); updateCurrencyHUD(); return true; } return false; }`
+  - Line 5477-5510: `function buyPlotExpansion(idx) { ... if (playerCurrencies.coins < cost) return; spendCoins(cost); unlockedPlots.push(plotIndex); ... persistSave(); ... }`
+  - Lines 8424-8452: Perimeter fence loop creating fence posts, placing pixel-art flowers (`flw_red`, `flw_yellow`, `flw_purple`), applying color tinting (`0xEF4444`, `0xFBBF24`, `0xA855F7`, `0xEC4899`), and registering Phaser sway tweens (`angle: { from: -6, to: 6 }`, `duration: 1400 + (postIdx * 170) % 800`, `ease: 'Sine.InOut'`, `repeat: -1`).
+  - Lines 4160-4256: `collectSave()` and `applySave()` handling `unlockedPlots` & `unlockedPlotCount` schema v4 serialization and restoration.
+- **Empirical Test Results**:
+  - `node test_m2_harness.js`: Passed with 0 errors.
+  - `node .agents/teamwork_preview_auditor_m2/test_m2_audit_empirics.js`: 31 / 31 tests passed cleanly.
 
 ## 2. Logic Chain
 
-1. **Premise 1**: A work product is authentic if its assets build cleanly without syntax errors, maintain byte-level sync between primary and asset copies, implement required visual features genuinely without dummy padding, and contain no integrity violations.
-2. **Observation Step 1**: `node -c` executed cleanly with exit code 0 on both `game.js` and `assets/game.js`. SHA256 hashes match identically (`46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`).
-3. **Observation Step 2**: Parsing palette dictionaries and matrix arrays for R3 (Cat NPC), R4 (Notice Board & Dungeon Portal), and R5 (Beehive) confirmed that 100% of defined color tokens are actively mapped into matrix pixel locations, demonstrating genuine pixel art color gradations rather than artificial count padding.
-4. **Observation Step 3**: Visual matrix inspection confirmed exact compliance with specified pixel art details: M-mark and tabby stripes on Cat NPC, wood grain and pinned notices on Notice Board, carved runes and swirling vortex on Dungeon Portal, and honeycomb texture with dripping honey on Beehive.
-5. **Observation Step 4**: Grep and AST inspection revealed zero fake output functions, hardcoded test skips, or dummy overrides.
-6. **Inference**: All Milestone 2 requirements (R3, R4, R5) have been implemented with genuine, high-quality pixel art and complete structural integrity.
-
----
+1. **Byte-Level Synchronization**: Direct SHA256 evaluation of `game.js` vs `assets/game.js` and `index.html` vs `assets/index.html` confirmed identical hex hashes (`74F3FC61...` and `42E64739...`). Thus, runtime deployment assets are 100% synchronized with primary working files.
+2. **Absence of Facades / Hardcoding**: Static search across the entire codebase revealed no dummy return values, hardcoded test assertions, or mock functions.
+3. **Authentic Plot Expansion & Gold Economy**: Code inspection of `buyPlotExpansion(idx)` and `spendCoins(amount)` verified that plot unlocks enforce cost checks against `playerCurrencies.coins`, mutate state, update Phaser plot tiles, and persist save data. Empirical VM testing verified that purchasing expansions without gold is blocked, while purchasing with adequate gold deducts exact amounts (`[100, 200, 350, 500, 750, 1000]`).
+4. **Save Persistence Integrity**: `collectSave()` and `applySave()` correctly serialize and restore `unlockedPlots` and `unlockedPlotCount` without state corruption across save/reload cycles.
+5. **Fence Flower Animations**: `FarmScene` creates decorative flower sprites on perimeter fence posts and attaches infinite yoyo Sine easing sway tweens (`angle: { from: -6, to: 6 }`).
 
 ## 3. Caveats
 
-- Runtime web browser animation rendering was not executed directly in a headless browser, but all matrices were empirically inspected and static syntax/VM tests executed cleanly.
-- No other caveats.
-
----
+- No caveats. All core claims and implementation paths were directly inspected and empirically tested.
 
 ## 4. Conclusion
 
-**VERDICT: CLEAN**
-
-Milestone 2 (R3 Cat NPC, R4 Notice Board & Dungeon Portal, R5 Beehive) passes all forensic integrity checks. The work product in `game.js` and `assets/game.js` is fully synchronized, syntactically valid, free of cheating or facade code, and implements all requested pixel art details and color gradations authentically.
-
----
+The Milestone 2 implementation of Hangeul Valley (Expandable Locked Farm Plots & Decorative Fence Flowers) is genuine, fully functional, and completely free of integrity violations. Verdict is explicitly **CLEAN**.
 
 ## 5. Verification Method
 
-To independently verify this verdict:
-
-1. **SHA256 Synchronization Check**:
-   ```powershell
-   Get-FileHash "d:\Hangeul Valley\game.js" -Algorithm SHA256
-   Get-FileHash "d:\Hangeul Valley\assets\game.js" -Algorithm SHA256
-   ```
-   *Expected result*: Matching hash `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`.
-
-2. **JavaScript Syntax Verification**:
-   ```cmd
-   node -c "d:\Hangeul Valley\game.js"
-   node -c "d:\Hangeul Valley\assets\game.js"
-   ```
-   *Expected result*: Exit code 0 for both commands.
-
-3. **Matrix Harness Check**:
-   ```cmd
-   node "d:\Hangeul Valley\test_m2_harness.js"
-   ```
-   *Expected result*: `FINAL VERIFICATION RESULT: PASS`.
+To independently re-verify:
+1. Run SHA256 hash check:
+   `Get-FileHash -Algorithm SHA256 "d:\Hangeul Valley\game.js", "d:\Hangeul Valley\assets\game.js", "d:\Hangeul Valley\index.html", "d:\Hangeul Valley\assets\index.html"`
+2. Run empirical verification suite:
+   `node .agents/teamwork_preview_auditor_m2/test_m2_audit_empirics.js`
+3. Inspect `audit.md` report at `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m2\audit.md`.

@@ -1,19 +1,13 @@
-## 2026-07-24T14:48:09Z
-You are teamwork_preview_explorer_m1_1.
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1`. Please write your analysis to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\analysis.md` and your handoff to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\handoff.md`.
+## 2026-07-24T15:25:11Z
+You are Explorer 1 for Milestone 1 of Hangeul Valley Expandable Farm Plots.
+Working directory: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1
+Target codebase: d:\Hangeul Valley
+Project Scope: d:\Hangeul Valley\.agents\orchestrator\PROJECT.md
 
-Target Scope: Milestone 1 - Shop NPC Sprite Polish & Upgrade (R1).
-Read the project specifications in `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`.
-
-Your objective:
-1. Search `game.js` to locate all code responsible for baking, rendering, drawing, or instantiating the Shop NPC sprite and its shop counter / accessories.
-2. Analyze the current baseline implementation of the Shop NPC sprite. Count distinct fill color tokens currently used in its bake/draw function.
-3. Detail how to upgrade the Shop NPC sprite with:
-   - Richer pixel art detail
-   - Multi-tone clothing shading (base, shade, highlight)
-   - Facial expression refinement (eyes, Korean merchant warm expression)
-   - Accessory details (apron, hat, coins on counter)
-   - Crisp 1px dark outlines for visual consistency with Robot character
-   - Increased distinct color token count
-4. Verify all collision, depth-sorting, scale, positioning, and Shop interaction logic (`openShop()` / shop modal overlay) to guarantee NO visual or functional regression.
-5. Provide exact line numbers, code structure analysis, and precise recommendation for the implementation worker.
+Your task: Investigate game.js and assets/game.js focusing on Requirement R1 (6 Locked Farm Plots):
+1. How farm plots are currently defined, rendered, stored in memory, and indexed on the map grid.
+2. Where/how to add 6 additional farm plots that start locked.
+3. How locked plots should be visually rendered (e.g. darker soil, lock overlay, '🔒' indicator).
+4. How interaction with a locked plot works (prompt showing Gold cost: 100, 200, 350, 500, 750, 1000 Gold).
+5. How unlock state persists across save/load (localStorage / game save system).
+6. Write your comprehensive analysis and technical recommendations to d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\analysis.md and write a soft handoff to d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\handoff.md. Send a completion message back to parent orchestrator.

@@ -3933,6 +3933,15 @@ const SR2 = 90*1000;   // P2 sprout   → P3 ripe:  90 giây
 let srsData  = {}; // { ko: { p2At, p3At, harvests } }
 let plotSave = []; // [{ i, ko, sState, plantedAt }]
 let droppedItemsSave = []; // [{ itemId, nameKo, x, y }] persisted ground drops buffer
+var PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000];
+var unlockedPlots = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+var unlockedPlotCount = 9;
+function isPlotUnlocked(i) {
+  if (i < 9) return true;
+  if (Array.isArray(unlockedPlots) && unlockedPlots.includes(i)) return true;
+  if (typeof unlockedPlotCount === 'number' && i < unlockedPlotCount) return true;
+  return false;
+}
 
 // ── Unified File-Based Save (pywebview API → file, localStorage as backup) ─────
 let fishAlbumSave = {}; // { ko: count }
@@ -4112,6 +4121,19 @@ function migrateSaveData(d) {
     data.inventory.maxSlots = 20;
   }
 
+  if (Array.isArray(data.unlockedPlots)) {
+    data.unlockedPlots = Array.from(new Set(data.unlockedPlots));
+  } else if (typeof data.unlockedPlotCount === 'number') {
+    const arr = [];
+    for (let i = 0; i < Math.min(15, data.unlockedPlotCount); i++) arr.push(i);
+    data.unlockedPlots = arr;
+  } else {
+    data.unlockedPlots = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+  }
+  data.unlockedPlotCount = typeof data.unlockedPlotCount === 'number'
+    ? data.unlockedPlotCount
+    : data.unlockedPlots.length;
+
   // Ensure data.cooking object exists and populate from inventory.cookedDishes if legacy save
   data.cooking = data.cooking || { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
   data.cooking.cookedRecipes = Array.isArray(data.cooking.cookedRecipes) ? data.cooking.cookedRecipes : [];
@@ -4154,6 +4176,8 @@ function collectSave(){
     gold: playerCurrencies.coins,
     unlockedLevels,
     unlockedTrophies,
+    unlockedPlots,
+    unlockedPlotCount,
     harvests: hcObj,
     srs: srsData,
     plots,
@@ -4182,6 +4206,16 @@ function applySave(d){
   
   unlockedLevels = Array.isArray(migrated.unlockedLevels) ? migrated.unlockedLevels : [0];
   unlockedTrophies = Array.isArray(migrated.unlockedTrophies) ? migrated.unlockedTrophies : [];
+  if (Array.isArray(migrated.unlockedPlots)) {
+    unlockedPlots = migrated.unlockedPlots;
+    unlockedPlotCount = typeof migrated.unlockedPlotCount === 'number' ? migrated.unlockedPlotCount : unlockedPlots.length;
+  } else if (typeof migrated.unlockedPlotCount === 'number') {
+    unlockedPlotCount = migrated.unlockedPlotCount;
+    unlockedPlots = Array.from({length: unlockedPlotCount}, (_, i) => i);
+  } else {
+    unlockedPlots = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    unlockedPlotCount = 9;
+  }
   if(migrated.harvests) Object.entries(migrated.harvests).forEach(([k,v])=>harvestCounts.set(k,v));
   if(migrated.srs) srsData = migrated.srs;
   if(migrated.plots) plotSave = migrated.plots;
@@ -4216,6 +4250,7 @@ function applySave(d){
 
   initQuestState();
   updateCurrencyHUD();
+  if (sceneRef && typeof sceneRef.refreshPlotAccess === 'function') sceneRef.refreshPlotAccess();
   if (typeof checkCookingAchievements === 'function') checkCookingAchievements();
   return true;
 }
@@ -5439,8 +5474,81 @@ function buyLevel(idx) {
   if (playerCurrencies.coins < cost) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return; }
   startShopQuizGate(idx);
 }
+function buyPlotExpansion(idx) {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  const plotIndex = 9 + idx;
+  const cost = PLOT_UNLOCK_COSTS[idx] || 1000;
+
+  if (isPlotUnlocked(plotIndex)) {
+    showToast('You already unlocked this farm plot!');
+    return;
+  }
+
+  if (playerCurrencies.coins < cost) {
+    if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
+    showToast(`Need ${cost} Gold 🪙 to unlock Farm Plot #${plotIndex + 1}!`);
+    return;
+  }
+
+  spendCoins(cost);
+  if (!unlockedPlots.includes(plotIndex)) unlockedPlots.push(plotIndex);
+  unlockedPlotCount = Math.max(unlockedPlotCount, unlockedPlots.length);
+
+  if (sceneRef) {
+    const p = sceneRef.plots ? sceneRef.plots[plotIndex] : null;
+    if (p && typeof sceneRef.unlockPlot === 'function') {
+      sceneRef.unlockPlot(p);
+    } else if (typeof sceneRef.refreshPlotAccess === 'function') {
+      sceneRef.refreshPlotAccess();
+    }
+  }
+
+  persistSave();
+  showToast(`🎉 Unlocked Farm Plot #${plotIndex + 1}!`);
+  buildShopGrid();
+  updateGoldHUD();
+}
+
 function buildShopGrid() {
-  const grid = $('shop-level-grid'); grid.innerHTML = '';
+  const grid = $('shop-level-grid'); if(!grid) return; grid.innerHTML = '';
+
+  // Section 1: Farm Plot Expansions
+  const plotHeader = document.createElement('div');
+  plotHeader.className = 'shop-section-header';
+  plotHeader.style.cssText = 'grid-column: 1 / -1; font-family: "Press Start 2P", monospace; font-size: 13px; color: var(--neon-gold, #FBBF24); margin: 10px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(251, 191, 36, 0.3); display: flex; align-items: center; gap: 8px;';
+  plotHeader.innerHTML = `🌾 Farm Plot Expansions (${unlockedPlots.length}/15 Unlocked)`;
+  grid.appendChild(plotHeader);
+
+  PLOT_UNLOCK_COSTS.forEach((cost, idx) => {
+    const plotIndex = 9 + idx;
+    const isOwned = isPlotUnlocked(plotIndex);
+    const canAfford = playerCurrencies.coins >= cost;
+
+    const card = document.createElement('div');
+    card.className = 'shop-card' + (isOwned ? ' owned' : (!canAfford ? ' too-expensive' : ''));
+    card.innerHTML = `
+      <div class="shop-card-icon">🌾</div>
+      <div class="shop-card-name">Plot #${idx + 1} Expansion</div>
+      <div class="shop-card-desc">Unlock Farm Plot #${plotIndex + 1} for ${cost} Gold</div>
+      <div class="shop-card-price">
+        ${isOwned
+          ? `<span class="shop-owned-badge">✅ Owned</span>
+             <button class="shop-buy-btn" disabled>Unlocked</button>`
+          : `<span class="shop-card-cost">💰 ${cost} gold</span>
+             <button class="shop-buy-btn" ${canAfford ? '' : 'disabled'} onclick="buyPlotExpansion(${idx})">
+               ${canAfford ? '🛒 Buy Now' : `Need ${cost - playerCurrencies.coins} gold`}
+             </button>`}
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  // Section 2: Vocabulary Level Packs
+  const lvlHeader = document.createElement('div');
+  lvlHeader.className = 'shop-section-header';
+  lvlHeader.style.cssText = 'grid-column: 1 / -1; font-family: "Press Start 2P", monospace; font-size: 13px; color: var(--neon-cyan, #38BDF8); margin: 20px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); display: flex; align-items: center; gap: 8px;';
+  lvlHeader.innerHTML = `📚 Vocabulary Level Packs`;
+  grid.appendChild(lvlHeader);
+
   levelsData.forEach((lvl, idx) => {
     const owned     = unlockedLevels.includes(idx);
     const cost      = LEVEL_COST(idx);
@@ -8243,7 +8351,7 @@ class FarmScene extends Phaser.Scene {
       this.add.image(cc*TILE+TILE/2, r*TILE+TILE/2, 'grs'+rng.between(0,3))
         .setDisplaySize(TILE,TILE).setDepth(0);
     }
-    const fW=PLOT_COLS*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP, fH=3*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP;
+    const fW=PLOT_COLS*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP, fH=5*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP;
     this.farm = {x:W/2-fW/2, y:H/2-fH/2-30, w:fW, h:fH};
 
     // Cobblestone connecting paths (Widened & Spaced)
@@ -8313,12 +8421,73 @@ class FarmScene extends Phaser.Scene {
     const signpostSprite = this.add.image(spX, spY, 'signpost').setOrigin(0.5, 1).setScale(1.1).setDepth(spY);
     if (this.shadows) this.shadows.createShadow(signpostSprite, 18, 6, 0);
 
-    // Perimeter Fences
+    // R3: Perimeter Fences & Decorative Animated Fence Flowers
     const fenceY = this.farm.y - 12;
+    const fenceFlowerColors = [0xEF4444, 0xFBBF24, 0xA855F7, 0xEC4899];
+    const fenceFlowerTexs = ['flw_red', 'flw_yellow', 'flw_purple'];
+    let postIdx = 0;
     for (let fx = this.farm.x; fx <= this.farm.x + this.farm.w; fx += 28) {
       this.add.image(fx + 14, fenceY - 4, 'fnc_rail').setDisplaySize(28, 8).setDepth(fenceY - 1);
       const post = this.add.image(fx, fenceY, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fenceY);
       if (this.shadows) this.shadows.createShadow(post, 14, 5, 0);
+
+      // Decorative pixel-art flower on fence post
+      const color = fenceFlowerColors[postIdx % fenceFlowerColors.length];
+      const tex = fenceFlowerTexs[postIdx % fenceFlowerTexs.length];
+      const flower = this.add.image(fx + (postIdx % 2 === 0 ? -2 : 2), fenceY - 14, tex)
+        .setScale(0.9)
+        .setTint(color)
+        .setDepth(fenceY + 2);
+
+      // Subtle idle sway animation loop
+      this.tweens.add({
+        targets: flower,
+        angle: { from: -6, to: 6 },
+        duration: 1400 + (postIdx * 170) % 800,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.InOut'
+      });
+      postIdx++;
+    }
+
+    // Side perimeter fence posts with decorative animated flowers
+    for (let fy = fenceY + 28; fy <= this.farm.y + this.farm.h + 10; fy += 28) {
+      const postL = this.add.image(this.farm.x, fy, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fy);
+      if (this.shadows) this.shadows.createShadow(postL, 14, 5, 0);
+      const colorL = fenceFlowerColors[postIdx % fenceFlowerColors.length];
+      const texL = fenceFlowerTexs[postIdx % fenceFlowerTexs.length];
+      const flowerL = this.add.image(this.farm.x - 2, fy - 14, texL)
+        .setScale(0.9)
+        .setTint(colorL)
+        .setDepth(fy + 2);
+      this.tweens.add({
+        targets: flowerL,
+        angle: { from: -6, to: 6 },
+        duration: 1400 + (postIdx * 170) % 800,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.InOut'
+      });
+      postIdx++;
+
+      const postR = this.add.image(this.farm.x + this.farm.w, fy, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fy);
+      if (this.shadows) this.shadows.createShadow(postR, 14, 5, 0);
+      const colorR = fenceFlowerColors[postIdx % fenceFlowerColors.length];
+      const texR = fenceFlowerTexs[postIdx % fenceFlowerTexs.length];
+      const flowerR = this.add.image(this.farm.x + this.farm.w + 2, fy - 14, texR)
+        .setScale(0.9)
+        .setTint(colorR)
+        .setDepth(fy + 2);
+      this.tweens.add({
+        targets: flowerR,
+        angle: { from: -6, to: 6 },
+        duration: 1400 + (postIdx * 170) % 800,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.InOut'
+      });
+      postIdx++;
     }
 
     // Micro Animated Fauna: Fluttering Butterflies
@@ -9162,41 +9331,64 @@ class FarmScene extends Phaser.Scene {
 
   // ── PLOTS ──────────────────────────────────────────────────────────────────
   _createPlots(W, H){
-    // 15 slots (3x5) – open-world ready: first 9 active, more unlock with levels
     const MAX=15, ROWS=5;
-    const activeCnt = Math.min(MAX, 9 + (unlockedLevels.length-1)*3);
     for(let i=0;i<MAX;i++){
       const col=i%PLOT_COLS, row=Math.floor(i/PLOT_COLS);
       const px=this.farm.x+col*(PLOT_SIZE+PLOT_GAP)+PLOT_SIZE/2;
       const py=this.farm.y+row*(PLOT_SIZE+PLOT_GAP)+PLOT_SIZE/2;
-      const active=i<activeCnt;
-      const shad=this.add.ellipse(px,py+PLOT_SIZE/2-2,PLOT_SIZE*0.85,10,0,active?0.3:0.1).setDepth(1);
-      const tile=this.add.image(px,py,'drt_dry').setDisplaySize(PLOT_SIZE,PLOT_SIZE)
-        .setAlpha(active?1:0.25).setDepth(2);
-      if(!active) this.add.image(px,py,'pixel_crate').setDisplaySize(24,24).setAlpha(0.6).setDepth(3);
-      const body=this.physics.add.staticImage(px,py).setVisible(false);
+      const active = isPlotUnlocked(i);
+      const shad = this.add.ellipse(px, py+PLOT_SIZE/2-2, PLOT_SIZE*0.85, 10, 0, active ? 0.3 : 0.1).setDepth(1);
+      const tile = this.add.image(px, py, 'drt_dry').setDisplaySize(PLOT_SIZE, PLOT_SIZE).setDepth(2);
+
+      let lockIcon = null;
+      let lockText = null;
+      if(!active){
+        tile.setAlpha(0.35).setTint(0x666666);
+        lockIcon = this.add.image(px, py - 4, 'pixel_crate').setDisplaySize(24, 24).setAlpha(0.7).setDepth(3);
+        lockText = this.add.text(px, py, '🔒', { fontSize: '18px' }).setOrigin(0.5).setDepth(4);
+      } else {
+        tile.setAlpha(1.0).clearTint();
+      }
+
+      const body = this.physics.add.staticImage(px, py).setVisible(false);
       body.setCircle(PLOT_SIZE*0.4).refreshBody();
-      // sState: ''=empty '1'=seedling '2'=wilting(P2 ready) '3'=sprout '4'=ripe
-      this.plots.push({tile,shad,body,x:px,y:py,sState:'',ko:null,word:null,
-        index:i,plant:null,glow:null,hintLabel:null,active,plantedAt:0});
+
+      this.plots.push({
+        tile, shad, body, x: px, y: py, sState: '', ko: null, word: null,
+        index: i, plant: null, glow: null, hintLabel: null, active, plantedAt: 0,
+        lockIcon, lockText
+      });
     }
     this._restorePlots();
   }
 
-  // Dynamically unlock plots when buying new levels (no reload needed)
+  unlockPlot(p){
+    if(!p || p.active) return;
+    p.active = true;
+    if(!unlockedPlots.includes(p.index)) unlockedPlots.push(p.index);
+    unlockedPlotCount = Math.max(unlockedPlotCount, unlockedPlots.length);
+
+    p.tile.clearTint().setAlpha(1.0);
+    p.shad.setAlpha(0.3);
+    if(p.lockIcon){ p.lockIcon.destroy(); p.lockIcon = null; }
+    if(p.lockText){ p.lockText.destroy(); p.lockText = null; }
+    this.children.list
+      .filter(c => c.type === 'Text' && c.text === '🔒' &&
+              Math.abs(c.x - p.x) < 5 && Math.abs(c.y - p.y) < 5)
+      .forEach(c => c.destroy());
+
+    if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_correct');
+    this._sparkle(p.x, p.y);
+    this._label(p.x, p.y, 'Plot Unlocked! 🔓');
+    persistSave();
+    if(typeof buildShopGrid === 'function' && shopOpen) buildShopGrid();
+  }
+
   refreshPlotAccess(){
-    const MAX=15;
-    const activeCnt = Math.min(MAX, 9 + (unlockedLevels.length-1)*3);
-    this.plots.forEach((p,i) => {
-      if(i < activeCnt && !p.active){
-        p.active = true;
-        p.tile.setAlpha(1);
-        p.shad.setAlpha(0.3);
-        // Remove lock emoji overlay
-        this.children.list
-          .filter(c => c.type === 'Text' && c.text === '🔒' &&
-                  Math.abs(c.x - p.x) < 5 && Math.abs(c.y - p.y) < 5)
-          .forEach(c => c.destroy());
+    if(!this.plots) return;
+    this.plots.forEach((p, i) => {
+      if(isPlotUnlocked(i) && !p.active){
+        this.unlockPlot(p);
       }
     });
   }
@@ -9422,6 +9614,15 @@ class FarmScene extends Phaser.Scene {
     if(hx===null) for(const p of this.plots){
       if(p.sState===''&&p.active&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Plant new';col=0x44FF88;break;}
     }
+    if(hx===null) for(const p of this.plots){
+      if(!p.active&&near(p)){
+        const cost = PLOT_UNLOCK_COSTS[p.index - 9] || 1000;
+        hx=p.x; hy=p.y;
+        lbl=`[SPACE] Unlock Plot #${p.index + 1} (${cost} Gold) 🔒`;
+        col=0xFFD700;
+        break;
+      }
+    }
 
     if(hx!==null){
       // Subtle Corner brackets
@@ -9535,6 +9736,20 @@ class FarmScene extends Phaser.Scene {
       if(p.sState===''&&p.active&&near(p)){
         this.tweens.add({targets:p.tile,scaleX:0.85,scaleY:0.85,duration:90,yoyo:true});
         openQuiz(this._pickWord(),p,1); return;
+      }
+    }
+    // P4: locked plots (unlock interaction flow)
+    for(const p of this.plots){
+      if(!p.active&&near(p)){
+        const cost = PLOT_UNLOCK_COSTS[p.index - 9] || 1000;
+        if(gold >= cost){
+          spendCoins(cost);
+          this.unlockPlot(p);
+        } else {
+          if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
+          showToast(`Need ${cost} Gold 🪙 to unlock Farm Plot #${p.index + 1}!`);
+        }
+        return;
       }
     }
   }

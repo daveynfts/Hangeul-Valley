@@ -1,14 +1,10 @@
-## 2026-07-24T14:59:51Z
-You are Challenger 1 for Milestone 2 Gate Verification of Hangeul Valley NPC Sprite Polish & Upgrade.
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1`.
+## 2026-07-24T15:30:00Z
+You are Challenger 1 for Milestone 2 of Hangeul Valley Expandable Farm Plots.
+Working directory: d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1
+Target codebase: d:\Hangeul Valley
 
-Your task:
-1. Create your working directory `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1` and initialize state/progress files.
-2. Write and run empirical Node.js test script(s) in your workspace to test `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` against Milestone 2 requirements:
-   - Test palette sizes: `C` >= 19, `NOTICE_BOARD_PALETTE` >= 18, `PORTAL_PALETTE` >= 17, `BEEHIVE_PALETTE` >= 17.
-   - Test matrix active token usage: ensure every token in each palette appears in the corresponding sprite matrix.
-   - Test outline color: token `K` equals `0x0F172A` (or `#0F172A`).
-   - Test syntax via `node -c`.
-   - Test exact byte-level SHA256 equality between `game.js` and `assets/game.js`.
-3. Record all test assertion results in `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1\handoff.md`.
-4. Send a message to orchestrator (`271beac4-82f5-4128-b9b0-62d62497fc69`) with total tests run, tests passed/failed, and your PASS/FAIL verdict.
+Your task: Perform adversarial empirical testing of R1 (6 Locked Farm Plots) and Save/Load Persistence.
+1. Write and run a Node.js VM test script to load `game.js` and test plot state initialization (9 unlocked, 6 locked).
+2. Test locked plot interaction flow: attempting to purchase with insufficient Gold fails, purchasing with sufficient Gold succeeds and deducts exact Gold.
+3. Test save serialization (`collectSave()`), migration (`migrateSaveData()`), and restoration (`applySave()`).
+4. Write your test findings to `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1\report.md` and write `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1\handoff.md`. Send completion message back to parent orchestrator.

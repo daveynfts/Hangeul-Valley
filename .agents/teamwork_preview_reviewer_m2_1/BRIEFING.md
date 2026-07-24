@@ -1,51 +1,49 @@
-# BRIEFING — 2026-07-24T22:00:33Z
+# BRIEFING — 2026-07-24T15:30:52Z
 
 ## Mission
-Milestone 2 Gate Verification of Hangeul Valley NPC Sprite Polish & Upgrade (Cat NPC Muop, Notice Board & Dungeon Portal, Beehive).
+Review Worker M2's implementation of R1 (6 Locked Expandable Farm Plots) and R3 (Decorative Animated Fence Flowers) in game.js.
 
 ## 🔒 My Identity
-- Archetype: reviewer
+- Archetype: reviewer_critic
 - Roles: reviewer, critic
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1
-- Original parent: 271beac4-82f5-4128-b9b0-62d62497fc69
-- Milestone: M2 Gate Verification
-- Instance: 1 of 2
+- Original parent: 895d2d2b-864c-4647-819e-39b9baeaadbd
+- Milestone: Milestone 2 (R1 & R3)
+- Instance: 1 of 1
 
 ## 🔒 Key Constraints
 - Review-only — do NOT modify implementation code
-- Check for integrity violations, dummy implementations, hardcoded shortcuts, self-certification
-- Execute node syntax checks and SHA256 hash match verification between game.js and assets/game.js
+- Code-only network access (no external web requests)
+- Must check for integrity violations (facades, hardcoded outputs, fake verification)
+- Must write review to review.md and handoff to handoff.md
 
 ## Current Parent
-- Conversation ID: 271beac4-82f5-4128-b9b0-62d62497fc69
-- Updated: 2026-07-24T22:00:33Z
+- Conversation ID: 895d2d2b-864c-4647-819e-39b9baeaadbd
+- Updated: 2026-07-24T15:30:52Z
 
 ## Review Scope
-- **Files to review**: `d:\Hangeul Valley\game.js`, `d:\Hangeul Valley\assets\game.js`
-- **Requirements**:
-  - R3 Cat NPC (Muop): palette token count (19 tokens vs >=19 req), 1px dark slate outline (0x0F172A / token K), M-mark, tabby flank stripes, expressive eyes with catchlights, tail-swish idle animation.
-  - R4 Notice Board & Dungeon Portal: Notice Board (18 tokens vs >=18 req, 1px dark outline, wood grain, pinned notes with ink marks, lantern glow) & Dungeon Portal (17 tokens vs >=17 req, 1px dark outline, stone arch, glowing runes, cosmic swirl, sparks, floating particles).
-  - R5 Beehive: (17 tokens vs >=17 req, 1px dark outline, honeycomb surface micro-texture, straw skep shading, dripping honey droplets with catchlights, wooden base).
-  - Non-regression: origins (0.5, 1), scale values, depth sorting, interaction mechanics & event handlers (showCatDialog, openMemoryGame, DungeonScene, BeeScene).
-  - Syntax check: `node -c game.js` and `node -c assets/game.js` (0 errors).
-  - File sync: SHA256 hash match between `game.js` and `assets/game.js` (Match: 46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C).
+- **Files to review**: game.js, assets/game.js
+- **Interface contracts**: Milestone 2 Requirements R1 & R3
+- **Review criteria**: correctness, completeness, quality, adversarial robustness, integrity
 
 ## Review Checklist
-- **Items reviewed**: R3 Cat NPC (Muop), R4 Notice Board & Dungeon Portal, R5 Beehive, interaction non-regression, file hash synchronization, syntax checks.
-- **Verdict**: APPROVE (PASS)
+- **Items reviewed**: R1 Plot Slots & Initial State, R1 Visual Rendering, R1 Interaction & Unlock Behavior, R3 Fence Flowers & Sway Animation, File Synchronization
+- **Verdict**: APPROVE
+- **Unverified claims**: None
 
 ## Attack Surface
-- **Hypotheses tested**: Hardcoded bypasses, token count shortfall, origin/scale regressions, syntax errors, file divergence.
-- **Vulnerabilities found**: None. All criteria fully satisfied and verified.
+- **Hypotheses tested**: 41 automated unit & feature assertions in test_r1_r3.js
+- **Vulnerabilities found**: None
+- **Untested angles**: None
 
 ## Key Decisions Made
-- Confirmed zero syntax errors across `game.js` and `assets/game.js`.
-- Verified identical SHA256 file hashes.
-- Audited pixel art matrices, palette maps, animation registers, origins, depth sorting, and event handlers.
-- Confirmed absolute compliance with M2 criteria.
+- Confirmed full compliance with all R1 and R3 requirements.
+- Confirmed 100% byte-for-byte synchronization between game.js and assets/game.js.
+- Issued APPROVE verdict.
 
 ## Artifact Index
-- `ORIGINAL_REQUEST.md` — Initial prompt instructions
-- `BRIEFING.md` — Persistent briefing state
-- `progress.md` — Liveness heartbeat and progress log
-- `handoff.md` — Final review report
+- d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1\ORIGINAL_REQUEST.md — Original request log
+- d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1\BRIEFING.md — Working state briefing
+- d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1\test_r1_r3.js — Test harness script
+- d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1\review.md — Code review report
+- d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1\handoff.md — 5-component handoff report

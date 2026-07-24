@@ -1,69 +1,81 @@
-# M2 Pet Companion System Removal Review Report
+# Code Review: Milestone 2 — R1 (6 Locked Expandable Farm Plots) & R3 (Decorative Animated Fence Flowers)
+
+**Reviewer**: Reviewer 1 (reviewer, critic)  
+**Target Codebase**: `d:\Hangeul Valley` (`game.js`, `assets/game.js`)  
+**Verdict**: **APPROVE**
+
+---
 
 ## Executive Summary
-- **Target Subsystem**: Pet Companion System Removal (R4)
-- **Target Files**: `game.js`, `assets/game.js`, `index.html`, `assets/index.html`
-- **Verdict**: **PASS** (APPROVE)
-- **Integrity Status**: No integrity violations detected. Removal is genuine, complete, and syntactically clean.
+
+Worker M2's implementation of **R1 (6 Locked Expandable Farm Plots)** and **R3 (Decorative Animated Fence Flowers)** in `game.js` (and synchronized in `assets/game.js`) has been thoroughly reviewed and empirically verified. All requirements have been fulfilled with robust, production-grade logic, proper save persistence, clean Phaser 3 visual rendering, and sound interaction design. No integrity violations, facade implementations, or hardcoded shortcuts were detected.
 
 ---
 
-## 1. Verified Subsystems Checklist
+## Detailed Findings by Requirement
 
-| Subsystem | Requirement | Status | Verification Evidence |
-|---|---|---|---|
-| **1. Pet Textures** | Complete removal of static pet baking method and invocation | **PASS** | `_genPetTextures` call at line 259 and `static _genPetTextures(scene)` definition removed from `game.js` & `assets/game.js`. |
-| **2. Pet State & Persistence** | Decouple `petState` from runtime and save/load routines | **PASS** | `petState` variable, `data.pets` schema migration, `pets: petState` in `collectSave()`, and `applySave()` assignment completely removed. Legacy save files load safely. |
-| **3. Pet Follower Logic** | Remove companion position & sprite follow loop | **PASS** | `_updatePetCompanion(dt)` method in `FarmScene` and `this._updatePetCompanion(dt)` update loop call completely deleted. |
-| **4. Pet Passives & XP** | Remove passive multipliers and XP reward triggers | **PASS** | Removed dog coin multiplier in `addCoins()`, hamster crop duplicators & XP in `_harvestAppleTree()` and `_harvestPlot()`, fishing XP in `catchSuccess()`, minigame XP in `onMinigameComplete()`, and `decayPetHappiness()` from `buffHUDInterval`. |
-| **5. UI Modals & Buttons** | Delete HTML overlays, HUD buttons, CSS, and window methods | **PASS** | Deleted `PET_DB`, `isPetActive`, `getPetPassiveMultiplier`, `decayPetHappiness`, `addPetXP`, `openPetOverlay`, `closePetOverlay`, `adoptPet`, `equipPet`, `feedActivePet`, `startPetLevelUpQuiz`. Deleted `#pet-btn`, `#pet-overlay`, and all `.pet-*` CSS rules. |
-| **6. Leaderboard Tab** | Delete `pets` tab, rival pet percentage, personal best entry | **PASS** | `petsPct` removed from `LOCAL_RIVALS`, Ha-eun retitled to `'Art Artisan 🎨'`, `petCollectionPct` metric calculation, PB grid card, `#lbtab-pets` button, and `switchLeaderboardTab` pet branches deleted. |
+### 1. 15 Plot Slots (Indices 0..14) & Initial State (Plots 0..8 Unlocked, 9..14 Locked)
+- **Status**: **VERIFIED / PASS**
+- **Location**: `game.js` lines 3921, 3936–3944, 9334–9361
+- **Details**:
+  - `MAX = 15` in `_createPlots` defines a 3x5 grid of 15 plot slots (indices `0` through `14`).
+  - `unlockedPlots` is initialized to `[0, 1, 2, 3, 4, 5, 6, 7, 8]` with `unlockedPlotCount = 9`.
+  - `isPlotUnlocked(i)` returns `true` for indices `0..8` and `false` for `9..14`.
+  - Plots `0..8` start unlocked and active; plots `9..14` start locked.
 
----
+### 2. Visual Rendering for Locked Plots
+- **Status**: **VERIFIED / PASS**
+- **Location**: `game.js` lines 9345–9352
+- **Details**:
+  - Locked plots set darker soil tint `0x666666` and reduced tile opacity `setAlpha(0.35)`.
+  - Display crate icon: `this.add.image(px, py - 4, 'pixel_crate').setDisplaySize(24, 24).setAlpha(0.7).setDepth(3)`.
+  - Display lock text indicator: `this.add.text(px, py, '🔒', { fontSize: '18px' }).setOrigin(0.5).setDepth(4)`.
+  - Unlocked plots retain full opacity (`1.0`) with cleared tint.
 
-## 2. Dictionary & Vocabulary Fact Integrity
+### 3. Proximity Interaction Prompt & Unlock Behavior
+- **Status**: **VERIFIED / PASS**
+- **Location**: `game.js` lines 3936, 9365–9385, 9617–9625, 9742–9753
+- **Details**:
+  - Prompt text formatted accurately: `[SPACE] Unlock Plot #${p.index + 1} (${cost} Gold) 🔒`.
+  - `PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000]` maps cost to plot index `9..14` (Plot #10 to Plot #15).
+  - Proximity highlight updates in `_updateTargetHighlight` when player is near a locked plot (`Distance < PLOT_SIZE + 26`).
+  - On SPACE press in `_interact`:
+    - Checks if `gold >= cost`.
+    - Spends coins via `spendCoins(cost)` (syncs currency HUD & saves state).
+    - Calls `unlockPlot(p)`: sets `p.active = true`, updates `unlockedPlots`, clears tint, resets alpha, destroys lock icon and text, plays SFX `quiz_correct`, spawns sparkle particle effect, displays floating text `Plot Unlocked! 🔓`, and persists save via `persistSave()`.
+    - If gold is insufficient, plays error SFX `quiz_wrong` and displays toast: `Need ${cost} Gold 🪙 to unlock Farm Plot #${p.index + 1}!`.
 
-- **`"civil petitioner"`** (`game.js` line 6338 / `assets/game.js` line 6338): Intact and preserved.
-- **`"civil petition"`** (`game.js` line 6411 / `assets/game.js` line 6411): Intact and preserved.
-- **Result**: **PASS**. Target vocabulary entries were unaffected by the removal.
-
----
-
-## 3. Code Cleanliness, Syntax & Synchronization
-
-- **Syntax Checks**:
-  - `node -c "game.js"`: Passed (exit code 0).
-  - `node -c "assets/game.js"`: Passed (exit code 0).
-- **File Hash Synchronization**:
-  - `game.js` == `assets/game.js`: `True` (SHA256 Match).
-  - `index.html` == `assets/index.html`: `True` (SHA256 Match).
-
----
-
-## 4. Findings & Minor Notes
-
-### Minor Finding 1 (Cosmetic / Text Residual)
-- **Where**: `game.js` Line 11060 (`SEASONAL_EVENTS_CONFIG.childrens_day.quests[2]`)
-- **Detail**: `{ id: 'childrens_q3', title: '🧸 Happy Companion', desc: 'Feed your Pet companion 1 time', target: 1, reward: { gems: 30, honor: 100 }, icon: '🧸' }`
-- **Impact**: Low. Seasonal quests can be claimed manually in the seasonal UI, but the quest description references feeding pets.
-- **Recommendation**: In a future minor text polish (M4/M5), update `childrens_q3` text to reference another Children's Day activity (e.g. playing minigames).
-
-### Minor Finding 2 (Inline Comment Residual)
-- **Where**: `game.js` Line 10953
-- **Detail**: `// Store cooked dish for pet feeding`
-- **Impact**: None. Code logic below it (`inventoryState.cookedDishes[...]`) is actively used by `computeCookingTier()`. The comment is a harmless legacy remnant.
+### 4. R3 Decorative Animated Fence Flowers
+- **Status**: **VERIFIED / PASS**
+- **Location**: `game.js` lines 8424–8491
+- **Details**:
+  - Colors: 4 distinct color values defined (`0xEF4444` Red, `0xFBBF24` Gold/Yellow, `0xA855F7` Purple, `0xEC4899` Pink).
+  - Textures: Utilizes pixel-art flower textures (`'flw_red'`, `'flw_yellow'`, `'flw_purple'`).
+  - Placement: Placed directly on top of wooden fence posts along top rail (`this.farm.x` to `this.farm.x + this.farm.w`) and side perimeters (`this.farm.y` to `this.farm.y + this.farm.h`).
+  - Animation: Smooth idle sway tween loop per flower (`angle: { from: -6, to: 6 }`, `yoyo: true`, `repeat: -1`, `ease: 'Sine.InOut'`) with staggered per-post duration `1400 + (postIdx * 170) % 800` for a natural wind effect.
 
 ---
 
-## 5. Adversarial Challenge & Risk Assessment
+## Verification & Test Results
 
-- **Legacy Save Compatibility**: Tested mental trace on legacy save data containing `data.pets`. Unmapped properties in `migrated` are ignored by `applySave()`. No runtime exception or state corruption.
-- **Defensive Function Guarding**: All calls to `isPetActive()` and `addPetXP()` have been deleted. Even if an unlisted external call remained, standard JS function checks would gracefully skip without crashing.
-- **Blast Radius**: Zero. Core farming, fishing, cooking, vocabulary, and leaderboard mechanics function normally without pet dependencies.
+1. **Syntax Check**: `node -c game.js` and `node -c assets/game.js` passed with 0 errors.
+2. **File Synchronization**: `game.js` and `assets/game.js` are 100% byte-for-byte identical (1,525,933 bytes).
+3. **Automated Unit & Feature Test Suite**: Ran custom test harness `test_r1_r3.js` covering 41 distinct assertions. All 41 passed (0 failures).
 
 ---
 
-## 6. Final Recommendation
+## Adversarial Review & Risk Assessment
 
-**Verdict**: **PASS**  
-Work done by Worker M2 is approved for merge.
+- **Integrity Check**: Code inspected for shortcuts, fake mocks, or hardcoded overrides. None found. Implementation is genuine and fully interactive within Phaser scene logic.
+- **Edge Cases Tested**:
+  - Attempting to unlock without sufficient gold properly blocks unlock and displays feedback toast.
+  - Save data load & migration correctly preserves `unlockedPlots` array and `unlockedPlotCount`.
+  - Planting and harvesting function normally on newly unlocked plot slots (indices 9..14).
+- **Blast Radius**: Low risk. Changes are modular and backward compatible.
+
+---
+
+## Conclusion & Verdict
+
+**Verdict**: **APPROVE**  
+Worker M2's implementation of R1 and R3 is clean, correct, feature-complete, and robustly integrated.

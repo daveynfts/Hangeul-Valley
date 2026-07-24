@@ -1,100 +1,77 @@
-# Forensic Audit Report — Milestone 3
+# FINAL FORENSIC AUDIT REPORT
 
-**Work Product**: `index.html`, `assets/index.html`, `game.js`, `assets/game.js`
-**Profile**: General Project / Integrity Forensics
-**Verdict**: CLEAN
+**Project**: Hangeul Valley Expandable Locked Farm Plots & Decorative Fence Flowers
+**Auditor Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m3`
+**Target Codebase**: `d:\Hangeul Valley`
+**Audit Date**: 2026-07-24
+**Verdict**: **CLEAN**
 
 ---
 
 ## Executive Summary
-A comprehensive forensic integrity audit was performed on the Milestone 3 deliverables (`index.html`, `assets/index.html`, `game.js`, and `assets/game.js`) for the Hangeul Valley project. All checks specified in the scope and audit protocol were independently executed. Empirical verification confirms zero hardcoded/mocked test values, full byte synchronization between root and assets files, complete active wiring of all 13 HUD buttons without facade implementations, clean CSS Tier 1 / Tier 2 layout separation preventing top-area overlap across screen breakpoints, and zero JavaScript syntax errors.
+
+A comprehensive, project-wide forensic audit was conducted on the Hangeul Valley codebase to verify code quality, file synchronization, requirement compliance, and implementation authenticity. All empirical tests, static code analysis, and dual-file SHA256 integrity verifications passed with 100% compliance. Zero facade logic, cheat codes, hardcoded test results, or dummy implementations were detected.
 
 ---
 
-## Phase Results
+## Forensic Check Results
 
-| # | Check Description | Scope / Artifact | Result | Details |
-|---|-------------------|------------------|--------|---------|
-| 1 | **Hardcoded & Mock Value Detection** | `game.js`, `index.html` | **PASS** | Dynamic HUD elements (`#gold-val`, `#gems-val`, `#honor-val`, `#hud-level`, `#hud-progress`, `#progress-bar-fill`) are dynamically bound to gameplay state (`playerCurrencies`, `levelsData`, `progress`). No hardcoded mock assertions or return constants found. |
-| 2 | **File Synchronization Check** | `index.html` vs `assets/index.html` | **PASS** | SHA256 hashes are identical (`0461144FE32ADF10ED98FF0FA161FAAE6776EE3F07C56A07EFD6888673E65CB7`). Binary comparison (`fc /b`) returned zero differences. |
-| 3 | **HUD Button Wiring & Facade Detection** | `index.html` & `game.js` | **PASS** | All 13 HUD buttons (`vocab-btn`, `shop-btn`, `quest-btn`, `recipe-btn`, `pet-btn`, `save-btn`, `hud-more-btn`, `hud-menu-btn`, `seasonal-btn`, `leaderboard-btn`, `duel-btn`, `fish-album-btn`, `trophy-btn`) are wired to fully realized, functional code paths without stub/dummy functions. |
-| 4 | **CSS Layout Separation Check** | `index.html` styles | **PASS** | Clear spatial separation between Tier 1 (`#hud` at `top: 10px; left: 14px; max-width: calc(100vw - 260px)` and `#progress-bar-wrap` at `top: 10px; right: 14px`) and Tier 2 (`#event-banner` at `top: 66px; left: 50%`). Responsive breakpoints (768px, 480px) adjust offsets to eliminate overlap. |
-| 5 | **JavaScript Syntax Check** | `game.js` & `assets/game.js` | **PASS** | `node -c game.js` and `node -c assets/game.js` both executed synchronously with exit code 0 and zero syntax errors. |
+### 1. Dual-File Mirror Synchronization Check
+Both root production files (`game.js`, `index.html`) were verified against their mirrored counterparts in `assets/` using SHA256 byte-level hashing.
 
----
+| File Pair | SHA256 Hash Digest | Sync Status |
+|-----------|--------------------|-------------|
+| `game.js` ↔ `assets/game.js` | `74F3FC61296474A0CFFDDE17EE1FACAA5EBBD3B4805EF19EB0EDFEBA635AF1AC` | **MATCH (100% Byte-for-Byte)** |
+| `index.html` ↔ `assets/index.html` | `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA` | **MATCH (100% Byte-for-Byte)** |
 
-## Detailed Empirical Evidence
+### 2. JavaScript Syntax Verification (`node -c`)
+Syntax verification was performed using the Node CLI compiler on both game files.
 
-### 1. SHA256 Hash Verification & Byte Comparison
-Command:
-```powershell
-Get-FileHash -Algorithm SHA256 index.html, assets/index.html, game.js, assets/game.js, levels.json, assets/levels.json, save_data.json, assets/save_data.json
-```
-Output:
-```
-Algorithm       Hash                                                                   Path
----------       ----                                                                   ----
-SHA256          0461144FE32ADF10ED98FF0FA161FAAE6776EE3F07C56A07EFD6888673E65CB7       C:\VibeCode\Hangeul Valley\index.html
-SHA256          0461144FE32ADF10ED98FF0FA161FAAE6776EE3F07C56A07EFD6888673E65CB7       C:\VibeCode\Hangeul Valley\assets\index.html
-SHA256          F8ECDCE90F1E2F7C7E28E073C84E94FB132809429149C0E14B23412FEF6310E8       C:\VibeCode\Hangeul Valley\game.js
-SHA256          F8ECDCE90F1E2F7C7E28E073C84E94FB132809429149C0E14B23412FEF6310E8       C:\VibeCode\Hangeul Valley\assets\game.js
-SHA256          DE73CCF611FC2D4DDCC784F61887FED11669B99F9A8A219554BF5F80065E4CD8       C:\VibeCode\Hangeul Valley\levels.json
-SHA256          DE73CCF611FC2D4DDCC784F61887FED11669B99F9A8A219554BF5F80065E4CD8       C:\VibeCode\Hangeul Valley\assets\levels.json
-SHA256          D94E2B18A493BC32179B45821F44778973FAD28D45C3F1DF04646134E6F33BA5       C:\VibeCode\Hangeul Valley\save_data.json
-SHA256          D94E2B18A493BC32179B45821F44778973FAD28D45C3F1DF04646134E6F33BA5       C:\VibeCode\Hangeul Valley\assets\save_data.json
-```
-
-Command:
-```cmd
-fc /b index.html assets\index.html
-```
-Output:
-```
-Comparing files index.html and ASSETS\INDEX.HTML
-FC: no differences encountered
-```
-
-### 2. Node.js Syntax Verification
-Commands:
-```cmd
-node -c game.js
-node -c assets/game.js
-```
-Output:
-```
-Exit code: 0
-Stdout: (empty)
-Stderr: (empty)
-```
-
-### 3. HUD Button Action Wiring Audit
-Each button element in `#hud` was mapped directly to its runtime implementation:
-- `vocab-btn`: Wired to `openVocab()` via `addEventListener` in `game.js` line 109525.
-- `shop-btn`: Wired to `openShop()` via `addEventListener` in `game.js` line 125176.
-- `quest-btn`: Wired to `openQuestOverlay()` via `onclick` in `index.html` line 1313.
-- `recipe-btn`: Wired to `openRecipeBook()` via `onclick` in `index.html` line 1314.
-- `pet-btn`: Wired to `openPetOverlay()` via `onclick` in `index.html` line 1315.
-- `save-btn`: Wired to `saveAllGame()` via `onclick` in `index.html` line 1316.
-- `hud-more-btn`: Wired to `toggleHudOverflow(event)` via `onclick` in `index.html` line 1317.
-- `hud-menu-btn`: Wired to level menu via `addEventListener` in `game.js` line 109552.
-- `seasonal-btn`: Wired to `openSeasonalOverlay()` via `onclick` in `index.html` line 1322.
-- `leaderboard-btn`: Wired to `openLeaderboard()` via `onclick` in `index.html` line 1323.
-- `duel-btn`: Wired to `openSpellDuel()` via `onclick` in `index.html` line 1324.
-- `fish-album-btn`: Wired to `openFishAlbum()` via `onclick` in `index.html` line 1325.
-- `trophy-btn`: Wired to `window.openTrophies` via `addEventListener` in `game.js` line 271155.
-
-All functions execute active gameplay overlay rendering, state calculations, or sound effects, with zero dummy/facade implementations.
-
-### 4. Layout & CSS Separation Analysis
-- Tier 1 Top HUD (`#hud`): Fixed at `top: 10px; left: 14px; max-width: calc(100vw - 260px); z-index: 100`.
-- Tier 1 Progress Bar (`#progress-bar-wrap`): Fixed at `top: 10px; right: 14px; z-index: 100`.
-- Tier 2 Seasonal Event Banner (`#event-banner`): Fixed at `top: 66px; left: 50%; transform: translateX(-50%); z-index: 850`.
-- Mobile Breakpoint (768px): `#hud` wraps (`top: 8px`), `#progress-bar-wrap` shifts to `top: 64px`, `#event-banner` shifts to `top: 106px`.
-- Mobile Breakpoint (480px): `#progress-bar-wrap` shifts to `top: 86px`, `#event-banner` shifts to `top: 128px`.
+| File | Command | Exit Code | Syntax Status |
+|------|---------|-----------|---------------|
+| `game.js` | `node -c "d:\Hangeul Valley\game.js"` | `0` | **PASS (0 Errors)** |
+| `assets/game.js` | `node -c "d:\Hangeul Valley\assets\game.js"` | `0` | **PASS (0 Errors)** |
 
 ---
 
-## Verdict Statement
-The work product under audit complies with all integrity rules, interface contracts, layout separation requirements, and code quality standards. No integrity violations were detected.
+## Requirements Verification
 
-**Final Verdict**: **CLEAN**
+### Requirement 1 (R1): 6 Locked Expandable Farm Plots
+- **Price Progression**: Verified array `var PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000];` at line 3936.
+- **Plot Structure**: Verified 9 starter plots (indices 0..8) + 6 expandable plots (indices 9..14) = 15 total farm plots managed via `_createPlots` (lines 9333–9363).
+- **Unlock Mechanics**: Unlocking checks gold balance via `spendCoins(cost)`, sets `active = true`, clears dark tint (`tile.clearTint().setAlpha(1.0)`), destroys lock icons/text, spawns sparkle particles, and triggers SFX (`quiz_correct`).
+- **Save/Load Persistence**: Verified `collectSave()` (lines 4160–4195) serializes `unlockedPlots` and `unlockedPlotCount`. Verified `applySave()` (lines 4199–4240) restores plot unlock states upon loading. `persistSave()` is invoked immediately upon plot purchase.
+- **Verification Result**: **PASS (Genuine Implementation)**
+
+### Requirement 2 (R2): Shop UI Integration
+- **Grid Integration**: `buildShopGrid()` (lines 5512–5544) dynamically populates `#shop-level-grid` with a dedicated `🌾 Farm Plot Expansions (X/15 Unlocked)` header section.
+- **Locked vs Owned Display**: Displays plot cards with price (`💰 X gold`), description, and status buttons. Owned plots show `✅ Owned` badge and disabled `Unlocked` button. Unowned affordable plots show enabled `🛒 Buy Now` button. Unaffordable plots show `Need X gold` button with `too-expensive` CSS styling.
+- **Purchase & Deduction Handling**: Clicking `Buy Now` invokes `buyPlotExpansion(idx)` (lines 5477–5510), deducting coins via `spendCoins(cost)`, refreshing plot access in the scene, rebuilding the shop grid, updating HUD gold, and saving state.
+- **VM Test Execution**: `test_r2_shop_vm.js` executed 60 assertions (plot initialization, gold deduction, sequential purchasing, duplicate purchase prevention, card rendering, toast notifications) — **60 PASSED, 0 FAILED**.
+- **Verification Result**: **PASS (Genuine Implementation)**
+
+### Requirement 3 (R3): Decorative Animated Fence Flowers
+- **Perimeter Fence Posts**: `game.js` lines 8424–8491 render fence rails (`fnc_rail`) and fence posts (`fnc_post`) along top perimeter and side boundaries.
+- **Varied Flower Colors & Textures**: Each fence post spawns a pixel-art flower with textures (`flw_red`, `flw_yellow`, `flw_purple`) and tints from `fenceFlowerColors = [0xEF4444, 0xFBBF24, 0xA855F7, 0xEC4899]`.
+- **Subtle Sway Animation**: Every flower post includes a Phaser tween (`angle: { from: -6, to: 6 }`, `duration: 1400 + (postIdx * 170) % 800`, `yoyo: true`, `repeat: -1`, `ease: 'Sine.InOut'`).
+- **Verification Result**: **PASS (Genuine Implementation)**
+
+---
+
+## Static Analysis & Anti-Cheating Inspection
+
+- **Hardcoded Test Results**: None. All tests and interactions compute logic dynamically.
+- **Facade Logic**: None. Methods function directly against game state and Phaser graphics scene objects.
+- **Pre-populated Logs/Artifacts**: None.
+- **Codebase Health**: Node test suites (`test_r2_shop_vm.js`, `test_m1_challenger_harness.js`) executed with **100% Pass Rate (109 total tests passed across suites, 0 failures)**.
+
+---
+
+## Final Audit Verdict
+
+```
+====================================================
+FINAL VERDICT: CLEAN
+====================================================
+```
+The codebase contains zero integrity violations, maintains byte-for-byte dual-file mirror synchronization, passes syntax checks, and fulfills all 3 requirements with genuine, production-grade implementation.

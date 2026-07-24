@@ -1,102 +1,70 @@
-# Handoff Report: Milestone 2 Gate Verification (Challenger 1)
+# Handoff Report — Challenger 1 (Milestone 2 Expandable Farm Plots)
+
+**Agent**: Challenger 1 (`teamwork_preview_challenger_m2_1`)  
+**Target Codebase**: `d:\Hangeul Valley`  
+**Milestone**: Milestone 2 — Expandable Farm Plots & Save/Load Persistence  
+**Date**: 2026-07-24  
+**Verdict**: **PASS (52 / 52 Assertions Passed)**
+
+---
 
 ## 1. Observation
 
-Empirical verification was conducted on `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` by writing and running the Node.js test script `verify_m2.js` in `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1`.
+Direct empirical observations from executing Node.js syntax checks and test suite `test_m2_plots_saveload.js` in Node.js v25.8.0 VM sandbox:
 
-### Exact Commands Executed and Results:
-```powershell
-node verify_m2.js
-```
-Output verbatim:
-```
-=== Milestone 2 Empirical Verification ===
-[PASS] Byte-level SHA256 Equality - game.js: 46466cd4188c... vs assets/game.js: 46466cd4188c...
-[PASS] Syntax check: game.js - node -c passed with 0 exit code
-[PASS] Syntax check: assets/game.js - node -c passed with 0 exit code
-[PASS] Palette C size >= 19 - Size: 20 (keys: .,K,k,H,G,g,D,d,W,C,c,w,P,p,E,I,e,L,Z,z)
-[PASS] Outline token K in C is 0x0F172A - Value: 0xF172A
-[PASS] C active tokens matrix usage - All 20 tokens used in cat matrices
-[PASS] Palette BEEHIVE_PALETTE size >= 17 - Size: 18 (keys: .,K,k,b,B,W,w,O,S,D,A,M,Y,y,H,C,G,g)
-[PASS] Outline token K in BEEHIVE_PALETTE is 0x0F172A - Value: 0xF172A
-[PASS] BEEHIVE_PALETTE active tokens matrix usage - All 18 tokens used in beehive matrix
-[PASS] Palette NOTICE_BOARD_PALETTE size >= 18 - Extension size: 18, Merged size: 34
-[PASS] Outline token K in NOTICE_BOARD_PALETTE is 0x0F172A - Value: 0xF172A
-[PASS] NOTICE_BOARD_PALETTE active tokens matrix usage - All 18 extension tokens used in notice board matrix
-[PASS] Palette PORTAL_PALETTE size >= 17 - Extension size: 17, Merged size: 35
-[PASS] Outline token K in PORTAL_PALETTE is 0x0F172A - Value: 0xF172A
-[PASS] PORTAL_PALETTE active tokens matrix usage - All 17 extension tokens used in portal matrix
-
-=== SUMMARY ===
-Total tests: 15
-Passed: 15
-Failed: 0
-VERDICT: PASS
-```
-
-### Table of Assertion Results:
-| # | Assertion Description | Target | Expected | Actual Result | Status |
-|---|----------------------|--------|----------|---------------|--------|
-| 1 | SHA256 Byte Equality | `game.js` vs `assets/game.js` | Identical hash | `46466cd4188c...` == `46466cd4188c...` | PASS |
-| 2 | Syntax check | `game.js` | Exit code 0 | `node -c` exited 0 | PASS |
-| 3 | Syntax check | `assets/game.js` | Exit code 0 | `node -c` exited 0 | PASS |
-| 4 | Palette `C` size | `game.js`:2115 | >= 19 | 20 keys | PASS |
-| 5 | Outline `K` color in `C` | `game.js`:2117 | `0x0F172A` | `0x0F172A` | PASS |
-| 6 | Active token usage in `C` | `game.js`:2124-2288 | 100% tokens used | 20/20 tokens present in matrices | PASS |
-| 7 | Palette `BEEHIVE_PALETTE` size | `game.js`:1399 | >= 17 | 18 keys | PASS |
-| 8 | Outline `K` color in `BEEHIVE_PALETTE` | `game.js`:1401 | `0x0F172A` | `0x0F172A` | PASS |
-| 9 | Active token usage in `BEEHIVE_PALETTE` | `game.js`:1420-1443 | 100% tokens used | 18/18 tokens present in matrix | PASS |
-| 10 | Palette `NOTICE_BOARD_PALETTE` size | `game.js`:7957 | >= 18 | Ext 18 keys (Merged 34) | PASS |
-| 11 | Outline `K` color in `NOTICE_BOARD_PALETTE` | `game.js`:7958 | `0x0F172A` | `0x0F172A` | PASS |
-| 12 | Active token usage in `NOTICE_BOARD_PALETTE` | `game.js`:7979-7996 | 100% tokens used | 18/18 tokens present in matrix | PASS |
-| 13 | Palette `PORTAL_PALETTE` size | `game.js`:8000 | >= 17 | Ext 17 keys (Merged 35) | PASS |
-| 14 | Outline `K` color in `PORTAL_PALETTE` | `game.js`:8001 | `0x0F172A` | `0x0F172A` | PASS |
-| 15 | Active token usage in `PORTAL_PALETTE` | `game.js`:8021-8050 | 100% tokens used | 17/17 tokens present in matrix | PASS |
+1. **Syntax Verification**:
+   - Command `node -c "game.js"` completed with exit code 0 and zero error messages.
+2. **Plot State Initialization**:
+   - `game.js:3936-3938`: `PLOT_UNLOCK_COSTS` is defined as `[100, 200, 350, 500, 750, 1000]`. `unlockedPlots` is initialized to `[0, 1, 2, 3, 4, 5, 6, 7, 8]`. `unlockedPlotCount` is initialized to `9`.
+   - `game.js:3939-3944`: `isPlotUnlocked(i)` returns `true` for indices 0 to 8, and `false` for indices 9 to 14 by default.
+3. **Locked Plot Interaction & Purchase Flow**:
+   - `game.js:5477-5510`: `buyPlotExpansion(idx)` checks `isPlotUnlocked(plotIndex)` and `playerCurrencies.coins < cost`. If coins are insufficient (e.g. 50 Gold for 100 Gold plot), it shows toast, plays wrong SFX, and returns early without deducting Gold or modifying `unlockedPlots`.
+   - When sufficient coins are available (e.g. 500 Gold), `spendCoins(cost)` deducts exact cost (100 Gold), `unlockedPlots.push(plotIndex)` adds plot 9, `unlockedPlotCount` increments to 10, and `persistSave()` is invoked.
+   - `game.js:9742-9754`: Direct scene interaction `_interact()` checks `gold >= cost`. If gold is insufficient, plot remains locked (`active = false`). If gold is sufficient, exact cost is spent and `mockScene.unlockPlot(p)` sets `p.active = true` and updates unlocked plot state.
+4. **Save Serialization, Migration, and Restoration**:
+   - `game.js:4160-4196`: `collectSave()` serializes schema version `v: 4`, `currencies`, `gold`, `unlockedPlots`, `unlockedPlotCount`, `plots`, `srs`, `inventory`, `quests`, `cooking`, etc.
+   - `game.js:4088-4157`: `migrateSaveData(d)` upgrades legacy schemas (< v4) to v4. Converts legacy `data.gold` to `currencies.coins`, defaults missing `unlockedPlots` to `[0..8]`, expands `unlockedPlotCount` into full index array if needed, and deduplicates `unlockedPlots` with `Set`.
+   - `game.js:4199-4256`: `applySave(d)` migrates data, restores `playerCurrencies` and `gold` alias, restores `unlockedPlots` array and `unlockedPlotCount`, and restores saved crop plot states (`plotSave`).
 
 ---
 
 ## 2. Logic Chain
 
-1. **SHA256 Hash Matching**: Evaluating the SHA256 hashes of `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` yielded identical 64-character hex strings (`46466cd4188c...`). This proves exact byte-level parity between root `game.js` and `assets/game.js`.
-2. **Syntax Validation**: Executing `node -c` against both files returned exit code 0 without any syntax errors, confirming valid ECMAScript syntax.
-3. **Palette Size Verification**:
-   - `C` palette defined at line 2115 contains 20 key-value pairs (threshold >= 19).
-   - `BEEHIVE_PALETTE` defined at line 1399 contains 18 key-value pairs (threshold >= 17).
-   - `NOTICE_BOARD_PALETTE` defined at line 7957 specifies 18 extension key-value pairs (merged size 34, threshold >= 18).
-   - `PORTAL_PALETTE` defined at line 8000 specifies 17 extension key-value pairs (merged size 35, threshold >= 17).
-4. **Outline Color Standardization**:
-   - Every target palette (`C`, `BEEHIVE_PALETTE`, `NOTICE_BOARD_PALETTE`, `PORTAL_PALETTE`) defines key `'K'` explicitly as `0x0F172A` (Dark Slate `#0F172A`).
-5. **Token Utilization**:
-   - Cross-referencing every character key in each palette against its target sprite matrix confirmed that 100% of defined tokens are actively rendered in the matrix strings. Zero dead/orphan tokens were detected.
+1. **Premise 1 (Initialization Specification)**: Milestone 2 R1 requires 15 total farm plots, starting with 9 unlocked (indices 0..8) and 6 locked (indices 9..14) with progressive unlock costs `[100, 200, 350, 500, 750, 1000]`.
+   - *Evidence*: `unlockedPlots` defaults to `[0,1,2,3,4,5,6,7,8]`, `unlockedPlotCount` defaults to `9`, and `isPlotUnlocked(i)` returns `true` for 0..8 and `false` for 9..14 in initial game state.
+2. **Premise 2 (Purchase Safeguard & Deduction)**: Attempting to purchase a locked plot with insufficient Gold must fail without deducting Gold. Purchasing with sufficient Gold must succeed and deduct the exact cost.
+   - *Evidence*: `buyPlotExpansion(0)` with 50 Gold leaves `isPlotUnlocked(9)` as `false` and leaves Gold balance at 50. With 500 Gold, plot 9 unlocks and Gold balance drops to exactly 400. In-scene `_interact()` near locked plot 10 (cost 200 Gold) with 50 Gold fails to unlock plot 10; with 300 Gold, plot 10 unlocks (`active = true`) and Gold balance drops to exactly 100.
+3. **Premise 3 (Persistence & Migration)**: Save serialization must capture full plot state, migration must handle legacy save structures seamlessly, and restoration must recover exact plot states and currency balances.
+   - *Evidence*: `collectSave()` generates valid `v: 4` object. `migrateSaveData()` upgrades legacy v1 schema (setting default 9 plots) and count-only v2 schema (expanding count 12 to indices 0..11). `applySave()` restores `unlockedPlots`, `unlockedPlotCount`, and crop states. Round-trip export/import preserves plot 11 unlocked status and 900 Gold coin balance.
+4. **Conclusion**: R1 (6 Locked Farm Plots) and Save/Load Persistence in `game.js` are fully compliant with specification, robust against corner cases, and pass all empirical assertions.
 
 ---
 
 ## 3. Caveats
 
-- **WebGL/Phaser Runtime Rendering**: Verification was conducted empirically via Node.js AST/evaluation and hash inspection. Browser-level WebGL context initialization was not executed, but standard syntax and matrix structure validation confirm complete structural integrity.
+- **WebGL Rendering Context**: The VM test suite executes in Node.js with mock DOM/Phaser objects. Visual sprite rendering (Phaser textures/animations) was not verified in a live WebGL browser environment, though all data state and interaction logic were empirically verified.
 
 ---
 
 ## 4. Conclusion
 
-All 15 empirical test assertions passed with 0 failures. `game.js` and `assets/game.js` satisfy all Milestone 2 NPC Sprite Polish & Upgrade requirements.
-
-**Final Verdict**: **PASS**
+**PASS**: Milestone 2 Requirements for R1 (6 Locked Farm Plots) and Save/Load Persistence are fully satisfied and verified via 52 empirical test assertions with zero failures.
 
 ---
 
 ## 5. Verification Method
 
-To re-verify independently, execute the following commands in PowerShell from `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1`:
+To independently verify these findings:
 
-```powershell
-node verify_m2.js
-node -c "d:\Hangeul Valley\game.js"
-node -c "d:\Hangeul Valley\assets\game.js"
-```
-
-Expected output:
-- `Total tests: 15`
-- `Passed: 15`
-- `Failed: 0`
-- `VERDICT: PASS`
+1. **Run Syntax Check**:
+   ```powershell
+   node -c "d:\Hangeul Valley\game.js"
+   ```
+2. **Run Empirical VM Test Suite**:
+   ```powershell
+   cd "d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1"
+   node test_m2_plots_saveload.js
+   ```
+3. **Inspect Results**:
+   - Verify all 52 assertions report `[PASS]`.
+   - Check `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1\test_output.json` for structured test results (`failed: 0`).

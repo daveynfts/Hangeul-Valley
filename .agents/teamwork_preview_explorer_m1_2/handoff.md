@@ -1,59 +1,86 @@
-# Handoff Report: Wizard NPC Sprite Polish & Upgrade (Milestone 1 - R2)
+# Handoff Report: Milestone 1 - Shop Integration for Plot Purchases (Requirement R2) Analysis
+
+**Agent**: `teamwork_preview_explorer_m1_2`  
+**Role**: Read-only Explorer  
+**Task**: Milestone 1 - Requirement R2 (Shop Integration for Plot Purchases) Investigation & Strategy  
+**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2`  
+
+---
 
 ## 1. Observation
 
-Direct observations from examining `game.js` and project specifications:
-- **Project Specifications**: `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` line 17 specifies Requirement R2: "Wizard NPC: Detailed robes (fabric folds, star/moon embroidery details), glowing staff with particle-like highlights, mystical beard detail, magical aura effect."
-- **Baseline Palette & Matrix Location**: In `game.js` lines 2214–2262, `PixelArtRenderer._genNpcTextures(scene)` defines `W_PAL` (18 color tokens mapped to `wiz_0` and `wiz_1` matrices, 16x16 size).
-- **Procedural Canvas Bake Location**: In `game.js` lines 8004–8021, `FarmScene._bakeTextures()` generates canvas texture `'wizard_npc'` (16x22 scale grid using `gwiz`).
-- **Instantiation & Origin**: In `game.js` lines 8349–8370, `_createWizardNPC(W, H)` instantiates `wizardSprite = this.add.sprite(wx, wy, 'wizard_idle_0')`, sets origin `(0.5, 1)`, scale `1.8`, depth `wy`, shadow, levitation tween (`wy - 4`), text label `wizardHint`, and name label `'Merlin'`.
-- **Depth-Sorting**: `game.js` line 9073 (`updateDepthSort()`) updates depth dynamically using `wizardSprite.setDepth(this.wizardY || this.wizardSprite.y)`.
-- **Proximity & Interaction**: `game.js` lines 9161, 9230, and 9302 all use `Phaser.Math.Distance.Between(this.player.x, this.player.y, this.wizardX, this.wizardY) < 85` for hint visibility, HUD interaction prompt, and SPACE key trigger to open `openSpellDuel()`.
-- **Baseline Color Count**: 18 unique hex color tokens in `W_PAL` / `wiz_0` / `wiz_1`, and 13 unique hex color tokens in `gwiz`.
+Direct observations from code inspection of `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\index.html`:
+
+1. **Shop UI Markup & Modal Overlay (`index.html:1475–1489`)**:
+   `#shop-overlay` contains `#shop-panel`, `#shop-header`, `#shop-title` ("🏪 Seed Shop"), `#shop-gold-badge` (`💰 <span id="shop-gold-val">0</span>`), `#shop-close-btn`, and `#shop-level-grid`.
+
+2. **Shop UI Styling & Card Classes (`index.html:595–646`)**:
+   - `#shop-overlay`: `position: fixed`, `inset: 0`, `z-index: 480`, `display: none`, `backdrop-filter: var(--glass-blur)`. Class `.visible` toggles `display: flex`.
+   - `#shop-panel`: `background: rgba(15, 23, 42, 0.92)`, `border: 2px solid var(--neon-cyan)`, `border-radius: 18px`, `max-width: 720px`, `max-height: 88vh`, `overflow-y: auto`.
+   - `#shop-level-grid`: `display: grid`, `grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))`, `gap: 16px`.
+   - `.shop-card`: `.shop-card.owned` (`border-color: var(--neon-green)`, `background: rgba(15, 35, 20, 0.7)`), `.shop-card.too-expensive` (`opacity: .45`).
+
+3. **Shop Open/Close Flow (`game.js:5413–5424`)**:
+   - `openShop()`: Sets `shopOpen = true`, updates currency HUD (`updateGoldHUD()`), calls `buildShopGrid()`, and executes `setModalState('shop-overlay', true)`.
+   - `closeShop()`: Sets `shopOpen = false` and executes `setModalState('shop-overlay', false)`.
+   - Trigger points: `#shop-btn` click listener (`game.js:5468`) and proximity check in `FarmScene.update` (`game.js:9532`): `Phaser.Math.Distance.Between(player.x, player.y, shopX, shopY) < 90`.
+
+4. **Currency Management & Gold Deduction (`game.js:3941–3942`, `4075–4077`, `4313–4322`)**:
+   - Currency state: `playerCurrencies = { coins: 85, gems: 10, honor: 0 }`.
+   - Alias: `gold = playerCurrencies.coins` synced via `syncGoldAlias()`.
+   - Deduction helper: `spendCoins(cost)` deducts `playerCurrencies.coins`, calls `syncGoldAlias()`, `persistSave()`, and `updateCurrencyHUD()`.
+
+5. **Farm Plot Capacity & Scene Mechanics (`game.js:9164–9202`)**:
+   - `_createPlots(W, H)` initializes 15 plot objects (indices 0..14).
+   - Currently, active plots count is calculated as `Math.min(15, 9 + (unlockedLevels.length - 1) * 3)`.
+   - `refreshPlotAccess()` loops over `this.plots`, setting `p.active = true`, `p.tile.setAlpha(1)`, `p.shad.setAlpha(0.3)`, and destroying lock graphics.
 
 ---
 
 ## 2. Logic Chain
 
-1. **Baseline Deficiencies**: The baseline Wizard sprite uses 18 colors without fabric fold depth, star/moon embroidery, magical aura particles, detailed beard shading gradients, or 1px dark outlines on upper features (hat peak, orb, staff).
-2. **Palette Expansion**: By creating a 32-color palette `W_PAL` with 6 robe purple shades, 4 embroidery gold/moon shades, 5 beard gradient shades, 3 wood grain shades, 5 crystal orb cyan/white shades, 4 magical aura/sparkle shades, and 2 1px dark outline shades, the token count increases from 18 to 32 (+77.7%).
-3. **Resolution & Alignment**: Expanding matrix height from 16 to 20 (`16x20`) allows overhead hat/star peaks and floating particle aura space without altering feet position. Because `setOrigin(0.5, 1)` anchors the bottom center at `(wx, wy)`, expanding matrix height extends the sprite upwards, preserving collision, shadow, and depth sorting (`wy`).
-4. **Animation Synchronization**: Animating particle sparkle shifts (`p`, `P`, `a`) between `wiz_0` and `wiz_1` at 3 fps provides a lively micro-animation of magical energy radiating from the wizard's staff and hat.
-5. **Dual Generator Consistency**: Updating both `PixelArtRenderer._genNpcTextures()` (`wiz_0`, `wiz_1`, `W_PAL`) and `FarmScene._bakeTextures()` (`gwiz`) guarantees visual consistency regardless of whether Phaser references `'wizard_idle_0'`, `'wizard_idle_1'`, or `'wizard_npc'`.
-6. **Dual-File Sync**: Synchronizing `game.js` to `assets/game.js` and running `node -c` ensures 100% SHA256 match and 0 syntax errors.
+1. **Observation 1 & 2** establish that the Shop UI is already equipped with modal container `#shop-panel`, gold badge `#shop-gold-val`, responsive grid layout `#shop-level-grid`, and CSS classes for card states (`.owned`, `.too-expensive`, `.shop-buy-btn`, `.shop-owned-badge`).
+   **Inference**: Plot expansion cards can be seamlessly rendered inside `#shop-level-grid` (or under a designated Plot Expansion section / tab) using the existing CSS class system without creating new top-level HTML overlays.
+
+2. **Observation 3 & 4** show that shop modal management (`openShop`/`closeShop`) and economy deduction (`spendCoins(cost)`) are fully established and central to `game.js`.
+   **Inference**: Purchasing a farm plot can invoke `spendCoins(cost)`, deduct Gold, and persist save data using existing engine pathways.
+
+3. **Observation 5** shows that farm plot rendering and activation in `FarmScene` relies on `p.active` flag and `refreshPlotAccess()` / tile transparency updates.
+   **Inference**: Introducing an `unlockedPlots` state array (defaulting to `[0,1,2,3,4,5,6,7,8]` for 9 base plots) and calling `sceneRef.unlockPlot(plotIdx)` will immediately unlock the corresponding plot on the farm in real time, removing lock overlays and emitting particle sparkles.
 
 ---
 
 ## 3. Caveats
 
-- **No Caveats**: All code paths, matrices, palette tokens, instantiation methods, levitation tweens, depth-sorting, proximity thresholds, HUD indicators, and dialog/duel triggers were completely analyzed.
+- **Backwards Compatibility**: Existing save files (schema `v: 4`) do not contain explicit `unlockedPlots` arrays. The save migration function (`migrateSaveData`) must populate `data.unlockedPlots = Array.isArray(data.unlockedPlots) ? data.unlockedPlots : [0,1,2,3,4,5,6,7,8]` to prevent crashes or plot state loss on existing save files.
+- **Dual-File Mirroring**: Every modification to `game.js` and `index.html` during implementation in Milestone 2 must be duplicated to `assets/game.js` and `assets/index.html` to pass SHA256 sync verification.
 
 ---
 
 ## 4. Conclusion
 
-The Wizard NPC (Merlin) sprite upgrade for Milestone 1 (R2) is fully specified and safe for implementation. Implementing the 32-color palette, 16x20 matrices, 1px dark outlines, fabric fold shading, star/moon embroidery, glowing staff with animated particles, flowing beard gradient, and magical aura effect will achieve full visual quality standards without any functional or visual regressions.
+The investigation of `game.js` and `index.html` for Requirement R2 is complete. The existing Shop UI modal, card styling, currency deduction engine (`spendCoins`), and plot grid infrastructure (`this.plots`) provide a straightforward path to implement the 6 plot expansions (Plots #10 through #15 priced at 100, 200, 350, 500, 750, 1000 Gold). Plot purchases will immediately deduct Gold, persist save data, update UI badges, and unlock farm plots in real time on the farm scene.
 
 ---
 
 ## 5. Verification Method
 
-To verify the implementation once applied:
+To verify implementation readiness and codebase consistency:
 
-1. **Syntax Check**:
-   ```bash
-   node -c game.js
-   node -c assets/game.js
+1. **Syntax Audit**:
+   ```cmd
+   node -c "d:\Hangeul Valley\game.js"
+   node -c "d:\Hangeul Valley\assets\game.js"
    ```
-   Both commands must return exit code 0 with 0 errors.
+   *Expectation*: 0 syntax errors.
 
-2. **SHA256 Synchronization Check**:
-   Confirm `game.js` and `assets/game.js` have identical SHA256 hashes.
+2. **Dual-File SHA256 Hash Verification**:
+   ```powershell
+   Get-FileHash "d:\Hangeul Valley\game.js", "d:\Hangeul Valley\assets\game.js" -Algorithm SHA256
+   Get-FileHash "d:\Hangeul Valley\index.html", "d:\Hangeul Valley\assets\index.html" -Algorithm SHA256
+   ```
+   *Expectation*: Identical hash values for both pairs.
 
-3. **Color Token Count Measurement**:
-   Inspect `W_PAL` in `game.js`. Verify distinct color count = 32 (greater than baseline of 18).
-
-4. **Visual & Interaction Verification**:
-   - Verify Wizard NPC renders with 1px dark outlines, detailed purple robes with gold embroidery, glowing cyan staff orb with particles, mystical beard gradient, and purple/cyan aura.
-   - Verify floating levitation tween continues to bob vertically without jitter.
-   - Verify approach within 85px displays `[SPACE] Spell Duel` prompt and pressing SPACE triggers scale bounce and opens Spell Duel.
+3. **Shop UI & Plot Unlock Verification Plan**:
+   - Open Shop UI in-game and verify 6 plot expansion items appear with prices 100, 200, 350, 500, 750, 1000 Gold.
+   - Click "Unlock Plot" on Plot #10 with >= 100 Gold -> verify Gold decreases by 100, card badge updates to "✅ Unlocked", and Plot #10 on the farm immediately becomes active brown soil with lock icon removed.

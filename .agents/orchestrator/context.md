@@ -1,16 +1,14 @@
-# Context Summary — Hangeul Valley NPC Sprite Polish & Upgrade
+# Context — Expandable Farm Plots & Decorative Fence Flowers
 
-## Overview
-This project upgrades NPC graphics across Hangeul Valley to match the high visual quality of the upgraded Robot player character and Apple tree.
+## Project Context
+Hangeul Valley is a web-based farming game (`game.js`, `index.html`).
+This project adds:
+1. 6 locked expandable farm plots (buyable in Shop with prices 100, 200, 350, 500, 750, 1000 Gold, persistent unlock state via save/load).
+2. Shop UI integration showing locked vs owned plots and handling purchase/gold deduction.
+3. Decorative animated flowers growing on/along perimeter fence posts (varied colors red/yellow/purple/pink, subtle sway animation).
+4. Dual-file SHA256 synchronization (`game.js` <-> `assets/game.js` and `index.html` <-> `assets/index.html`) and zero syntax errors (`node -c`).
 
-## Scope & Target Sprites
-1. Shop NPC: multi-tone clothing shading, facial expressions, apron, hat, counter coins, 1px outlines.
-2. Wizard NPC: detailed robes, star/moon embroidery, glowing staff with particle highlights, mystical beard, magical aura.
-3. Cat NPC (Muop): world sprite fur texture, tabby stripes, eye catchlights, tail-swish idle animation.
-4. Notice Board & Portal NPC: Notice board wood grain, pinned paper notes with text marks, lantern glow. Portal magical runes, swirling energy core, pulsing glow particles.
-5. Beehive: honeycomb surface texture, layered straw/wood, dripping honey accent pixels.
-
-## Key Rules
-- DISPATCH-ONLY: Do not edit source code directly. Always spawn worker subagents.
-- Non-regression: Do not break depth-sorting, collision, scale, positioning, or interaction callbacks.
-- Audit gating: Forensic Auditor verdict must be CLEAN.
+## Active Orchestrator
+- Role: Project Orchestrator
+- Working directory: `d:\Hangeul Valley\.agents\orchestrator`
+- Parent conversation ID: `3ef02c1a-4366-4e14-9d1d-e2961eccd869`

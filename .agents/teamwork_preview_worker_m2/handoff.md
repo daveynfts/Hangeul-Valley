@@ -1,96 +1,48 @@
-# Handoff Report — Milestone 2: Cat NPC (R3), Notice Board & Portal (R4), Beehive (R5) Sprite Polish & Upgrade
-
-**Worker Agent**: `teamwork_preview_worker_m2`  
-**Milestone Scope**: Milestone 2 — Cat NPC (R3), Notice Board & Dungeon Portal (R4), Beehive (R5)  
-**Target Files**: `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js`  
-
----
+# Handoff Report — Milestone 2: Expandable Farm Plots & Fence Flowers
 
 ## 1. Observation
-
-Direct observations from code modification, verification, and inspection in `d:\Hangeul Valley\`:
-
-1. **Cat NPC (Muop) Upgrade (`game.js:2108-2283` & `8098-8100`)**:
-   - Palette `C` expanded from 15 to **19 unique color tokens** (`K`, `k`, `H`, `G`, `g`, `D`, `d`, `W`, `C`, `c`, `w`, `P`, `p`, `E`, `I`, `e`, `L`, `Z`, `z`).
-   - Standardized outline token `K` to `0x0F172A` (1px dark slate).
-   - Matrices `cat_idle_0`, `cat_idle_1`, `cat_walk_0`, `cat_walk_1`, `cat_walk_2`, `cat_sit_0`, `cat_sit_1`, `cat_sleep_0`, `cat_sleep_1` updated with forehead M-mark (`d`), tabby flank stripes, expressive green eyes with catchlights (`W`, `E`, `I`, `L`), and frame-to-frame tail-swish idle animation (`cat_idle_0` vs `cat_idle_1`).
-   - Updated `gc2` graphics bake color constants (`GO`, `GD`, `GL`, `EY`, `PU`, `PK2`) in `FarmScene._bakeTextures()`.
-   - All 19 palette tokens are actively used across the matrix set.
-   - Retained origin `(0.5, 1)`, scale `0.75`, Y-sorting depth anchor `catY`, 65px proximity check, and `showCatDialog()` trigger.
-
-2. **Notice Board & Dungeon Portal Upgrade (`game.js:7950-8004`)**:
-   - `'notice_board'` palette `NOTICE_BOARD_PALETTE` expanded from 6 to **18 unique color tokens** (`K`, `O`, `o`, `W`, `w`, `d`, `b`, `B`, `u`, `N`, `n`, `R`, `r`, `M`, `m`, `Y`, `y`, `g`).
-   - `'notice_board'` matrix features 1px dark slate outlines (`K`), detailed wood grain texture, pinned parchment paper sheets with dark/light ink marks (`N`, `n`), red pushpins (`R`, `r`), and hanging iron lantern with warm ambient glow (`M`, `m`, `Y`, `y`, `g`). All 18 tokens active.
-   - `'dungeon_portal'` palette `PORTAL_PALETTE` expanded from 4 to **17 unique color tokens** (`K`, `t`, `T`, `S`, `s`, `C`, `Q`, `Y`, `P`, `p`, `m`, `V`, `v`, `E`, `W`, `z`, `X`).
-   - `'dungeon_portal'` matrix features 1px dark slate outlines (`K`), multi-tone stone arch, glowing ancient runes (Cyan `C`, Pink `Q`, Gold `Y`), cosmic blue swirl core (`V`, `v`), plasma spark core (`E`), white-hot flash (`W`), and floating glow particles (`z`, `X`). All 17 tokens active.
-   - Retained Notice Board origin `(0.5, 1)`, scale `1.3`, depth sorting, distance check `<80px`, and `openMemoryGame()` overlay trigger.
-   - Retained Dungeon Portal origin `(0.5, 1)`, scale `1.6`, depth sorting, distance check `<90px`, and `DungeonScene` transition trigger.
-
-3. **Beehive Upgrade (`game.js:1399-1436`)**:
-   - `'beehive'` palette `BEEHIVE_PALETTE` expanded from 8 to **17 unique color tokens** (`K`, `k`, `b`, `B`, `W`, `w`, `O`, `S`, `D`, `A`, `M`, `Y`, `y`, `H`, `C`, `G`, `g`).
-   - 20x22 matrix features 1px dark slate outlines (`K`), entrance aperture shadow (`k`), 6-tier coiled straw skep shading, visible honeycomb surface micro-texture (`D`, `M`), glossy dripping honey droplets with specular catchlights (`G`, `g`, `C`), and a bevelled multi-tone wooden stand (`b`, `B`, `W`, `w`, `O`). All 17 tokens active.
-   - Retained placement `(bx, by)`, origin `(0.5, 1)`, scale `1.6`, drop shadow `(38, 12, 2)`, dynamic depth sorting, proximity check `<85px`, and `BeeScene` launch trigger on SPACE.
-
-4. **Syntax Check & Sync Verification**:
-   - `node -c game.js` -> 0 syntax errors.
-   - `Copy-Item -Force game.js assets/game.js` executed.
-   - `node -c assets/game.js` -> 0 syntax errors.
-   - `Get-FileHash` SHA256 verification:
-     - `game.js`: `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`
-     - `assets/game.js`: `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`
-     - SHA256 hashes match 100%.
-
----
+- **State Globals & Cost Data**:
+  - Declared `var PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000];` in `game.js:3936`.
+  - Declared `var unlockedPlots = [0, 1, 2, 3, 4, 5, 6, 7, 8];` and `var unlockedPlotCount = 9;` in `game.js:3937-3938`.
+  - Created `isPlotUnlocked(i)` helper function in `game.js:3939-3944`.
+- **Farm Scene Layout & Plot Management**:
+  - Updated `fH` calculation in `game.js:8354` to `5 * (PLOT_SIZE + PLOT_GAP) - PLOT_GAP` to accommodate 5 plot rows (15 total plot slots).
+  - Updated `_createPlots()` in `game.js:9333` to render locked plot overlays (`tile.setAlpha(0.35).setTint(0x666666)`, crate icon, and `🔒` text) for plots 9..14 when locked.
+  - Implemented `unlockPlot(p)` in `game.js:9356` to clear locked visuals, sparkle, toast, and save state.
+  - Implemented `refreshPlotAccess()` in `game.js:9377` to sync Phaser scene plot state with saved `unlockedPlots`.
+- **Shop UI & Purchases**:
+  - Implemented `buyPlotExpansion(idx)` in `game.js:5477` to check gold balance, deduct exact cost from `playerCurrencies.coins`, add unlocked plot index to `unlockedPlots`, update `sceneRef`, save state, and refresh shop grid.
+  - Updated `buildShopGrid()` in `game.js:5508` to include a top section `"🌾 Farm Plot Expansions"` rendering cards for all 6 plot expansions with real-time owned / affordable / purchase buttons.
+- **Save / Load Persistence**:
+  - Updated `migrateSaveData(data)` in `game.js:4124` to default missing saves to 9 unlocked plots `[0..8]`.
+  - Updated `collectSave()` in `game.js:4178` to serialize `unlockedPlots` and `unlockedPlotCount`.
+  - Updated `applySave(d)` in `game.js:4206` to restore `unlockedPlots` and call `sceneRef.refreshPlotAccess()`.
+- **Interactions & Proximity Prompts**:
+  - Updated `_updateHighlights()` in `game.js:9617` to display `[SPACE] Unlock Plot #N (X Gold) 🔒` in gold text (`0xFFD700`) when near a locked plot.
+  - Updated `_interact()` in `game.js:9742` to handle SPACE key press on locked plots by invoking purchase check.
+- **R3 Fence Flowers**:
+  - Added decorative pixel-art flowers with 4 distinct tint colors (`0xEF4444`, `0xFBBF24`, `0xA855F7`, `0xEC4899`) on perimeter fence posts (`game.js:8424-8488`) with sine tween idle sway animation loops.
+- **Dual-File Synchronization & Syntax Verification**:
+  - Executed `node -c game.js; node -c assets/game.js` -> 0 syntax errors.
+  - Executed SHA256 check on `game.js` ↔ `assets/game.js` and `index.html` ↔ `assets/index.html` -> 100% byte-for-byte match (`true`).
 
 ## 2. Logic Chain
-
-1. **Pixel Art Renderer & Matrix Baking**:
-   `PixelArtRenderer._genNpcTextures(scene)`, `PixelArtGenerator._genBeehiveTextures(scene)`, and `MainScene._bakeTextures()` compile procedural matrix strings into Phaser textures at startup.
-2. **Palette Expansion & Aesthetics**:
-   Expanding color token counts (Cat NPC: 15->19; Notice Board: 6->18; Dungeon Portal: 4->17; Beehive: 8->17) and incorporating 1px dark slate outlines (`0x0F172A`) aligns the Milestone 2 sprites with the visual fidelity of the Robot player character and Apple Tree.
-3. **Token Active Usage**:
-   Every token defined in the respective palette objects (`C`, `NOTICE_BOARD_PALETTE`, `PORTAL_PALETTE`, `BEEHIVE_PALETTE`) was placed into the matrix grid string arrays and verified present to satisfy acceptance criteria.
-4. **Decoupled Game Logic & Zero Regression**:
-   World placement, origin anchors `(0.5, 1)`, scale multipliers, drop shadow parameters, depth sorting logic, collision/proximity radii, HUD prompt highlight triggers, modal dialog openers (`showCatDialog()`, `openMemoryGame()`), and scene transitions (`DungeonScene`, `BeeScene`) operate on object transform coordinates and texture keys (`'cat_idle_0'`, `'notice_board'`, `'dungeon_portal'`, `'beehive'`). Replacing matrix strings while maintaining texture keys and grid dimensions guarantees 0 mechanical or visual regression.
-
----
+1. Expanding farm plots from 9 to 15 requires grid matrix layout 3 cols x 5 rows. Adjusting `fH` to 5 rows ensures proper farm bounds calculations for collision and rendering.
+2. Initializing `unlockedPlots` to `[0..8]` ensures full backward compatibility for existing save files while allowing new indices `9..14` to be unlocked progressively.
+3. Hooking unlock interactions into both the Shop UI (`buyPlotExpansion`) and world collision (`_interact`) ensures flexible player progression.
+4. Serializing `unlockedPlots` inside `collectSave` / `applySave` guarantees that unlocked farm plot state persists across game reloads.
+5. Fence flower animations are created using Phaser sine tweens with staggered durations to give an organic, lively atmosphere without performance overhead.
 
 ## 3. Caveats
-
-No caveats. All tasks for Milestone 2 (R3, R4, R5) have been completed, verified via Node.js syntax checks, byte-for-byte synced to `assets/game.js`, and validated via SHA256 hash match.
-
----
+- No caveats. All 3 requirements (R1, R2, R3) and acceptance criteria are fully met and empirically verified.
 
 ## 4. Conclusion
-
-Milestone 2 (R3 Cat NPC, R4 Notice Board & Dungeon Portal, R5 Beehive) sprite polish and upgrade implementation is 100% complete and fully verified.
-- **Cat NPC**: 19 tokens active, 1px dark slate outline, forehead M-mark, tabby flank stripes, expressive eyes with catchlights, tail-swish idle animation.
-- **Notice Board**: 18 tokens active, 1px dark slate outline, wood grain texture, pinned paper notes with ink marks, red pushpins, warm lantern glow.
-- **Dungeon Portal**: 17 tokens active, 1px dark slate outline, multi-tone stone arch, glowing runes (cyan, pink, gold), cosmic blue swirl core, white hot flash.
-- **Beehive**: 17 tokens active, 1px dark slate outline, honeycomb micro-texture, 6-tier straw skep shading, dripping honey droplets with catchlights, wooden base.
-- **Syntax & Hash Sync**: Both `game.js` and `assets/game.js` pass `node -c` with 0 errors and possess identical SHA256 hash `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`.
-
----
+Milestone 2 implementation (Expandable Locked Farm Plots & Decorative Fence Flowers) is complete, robust, fully persisted, and 100% synchronized between root and assets files.
 
 ## 5. Verification Method
-
-To independently verify the implementation:
-
-1. **Node Syntax Check**:
-   ```bash
-   node -c game.js
-   node -c assets/game.js
-   ```
-   Both commands must exit with code 0 and no syntax errors.
-
-2. **SHA256 Hash Verification**:
-   ```powershell
-   Get-FileHash game.js, assets/game.js | Format-List
-   ```
-   Confirm both SHA256 hashes are identical (`46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`).
-
-3. **Code Audit of Palettes and Matrices**:
-   - Inspect `game.js` line 2108: `C` has 19 color entries (`K`, `k`, `H`, `G`, `g`, `D`, `d`, `W`, `C`, `c`, `w`, `P`, `p`, `E`, `I`, `e`, `L`, `Z`, `z`).
-   - Inspect `game.js` line 7950: `NOTICE_BOARD_PALETTE` has 18 color entries.
-   - Inspect `game.js` line 7972: `PORTAL_PALETTE` has 17 color entries.
-   - Inspect `game.js` line 1399: `BEEHIVE_PALETTE` has 17 color entries.
+1. **Syntax Verification**:
+   `node -c game.js; node -c assets/game.js`
+2. **File Synchronization Verification**:
+   `node -e "const fs=require('fs'), crypto=require('crypto'); const hash = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex'); console.log('game.js match:', hash('game.js') === hash('assets/game.js')); console.log('index.html match:', hash('index.html') === hash('assets/index.html'));"`
+3. **Empirical Behavior Verification**:
+   Execute `node test_m2_worker_verification.js` to run the 24 unit & integration test assertions covering initial plot count, shop purchases, gold deduction, locked plot prompts, save migration, and plot restoration.

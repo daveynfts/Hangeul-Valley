@@ -1,112 +1,44 @@
-# Handoff & Review Report: Milestone 2 Gate Verification
-
-**Reviewer**: Reviewer 1 (teamwork_preview_reviewer_m2_1)  
-**Date**: 2026-07-24  
-**Verdict**: **APPROVE (PASS)**
-
----
+# Handoff Report — Reviewer M2 (R1 & R3)
 
 ## 1. Observation
-
-Direct evidence collected from `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js`:
-
-### Node Syntax & SHA256 Verification
-Command executed: `node -c game.js; node -c assets/game.js; Get-FileHash -Algorithm SHA256 game.js, assets/game.js`
-- `node -c game.js`: Exited with code 0 (0 syntax errors).
-- `node -c assets/game.js`: Exited with code 0 (0 syntax errors).
-- SHA256 Output:
-  - `game.js`: `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`
-  - `assets/game.js`: `46466CD4188CE2FB112D564928685BBB77F8B0036523919E6C72B8B68A56E43C`
-  - Result: Files are 100% byte-for-byte identical.
-
-### R3: Cat NPC (Muop) Inspection
-File: `d:\Hangeul Valley\game.js`, lines 2114-2325 & 8462-8480
-- **Palette Token Count**: 19 tokens defined in palette `C` (`K, k, H, G, g, D, d, W, C, c, w, P, p, E, I, e, L, Z, z`). Requirement: `>= 19 tokens vs original 15` -> **PASS (19 tokens)**.
-- **1px Dark Slate Outline**: Token `'K': 0x0F172A` frames all boundary pixels of cat animation frames (`cat_idle_0`, `cat_idle_1`, `cat_walk_0..2`, `cat_sit_0..1`, `cat_sleep_0..1`). -> **PASS**.
-- **Forehead M-Mark**: Lines 2128-2129 (`.KGddGGGGGGGddGK`) use dark shadow token `'d': 0x782D00` to draw the tabby forehead M-mark. -> **PASS**.
-- **Tabby Flank Stripes**: Body rows use `'D': 0x9E3B0E` and `'d': 0x782D00` for side stripe pattern (`KGDDCCCCDDGGK`). -> **PASS**.
-- **Expressive Eyes with Catchlights**: Line 2130 (`.KGWEILGGGEILWGK`) uses `'E': 0x55C655`, `'I': 0x22C55E`, `'e': 0x1E4A1E`, `'L': 0xA3F0A3`, and `'W': 0xFFFFFF` for green iris, pupil depth, and white catchlights. -> **PASS**.
-- **Tail-Swish Idle Animation**: `cat_idle_0` vs `cat_idle_1` right-flank pixels shift tail tip position (`..KGGCCCCCCGGK.K` vs `..KGGCCCCCCCgK.K`), registered in animation `'cat-idle'` at 3 fps. -> **PASS**.
-- **Origin, Scale, Depth**: `this.catSprite = this.add.sprite(cx, cy, 'cat_idle_0').setOrigin(0.5,1).setScale(0.75).setDepth(cy)` (Lines 8465-8467). -> **PASS**.
-- **Interaction Handler**: Line 9388 calls `showCatDialog()` (defined line 4887), opening dialogue overlay and picking random vocab card with tips. -> **PASS**.
-
-### R4: Notice Board & Dungeon Portal Inspection
-File: `d:\Hangeul Valley\game.js`, lines 7957-8051 & 8413, 8486
-- **Notice Board Palette Token Count**: 18 tokens in `NOTICE_BOARD_PALETTE` (`K, O, o, W, w, d, b, B, u, N, n, R, r, M, m, Y, y, g`). Requirement: `>= 18 tokens vs original 6` -> **PASS (18 tokens)**.
-- **Notice Board Features**:
-  - `1px Dark Slate Outline`: Token `'K': 0x0F172A` frames the board border.
-  - `Wood Grain`: Planks and posts textured with `'W': 0x965A2C`, `'w': 0x643714`, `'d': 0x3E2009`.
-  - `Pinned Notes with Ink Marks`: Paper sheets (`b`, `B`, `u`), ink marks (`N`, `n`), pushpins (`R`, `r`).
-  - `Lantern Glow`: Iron lantern (`M`, `m`) with yellow/orange/pink glow (`Y`, `y`, `g`).
-- **Dungeon Portal Palette Token Count**: 17 tokens in `PORTAL_PALETTE` (`K, t, T, S, s, C, Q, Y, P, p, m, V, v, E, W, z, X`). Requirement: `>= 17 tokens vs original 4` -> **PASS (17 tokens)**.
-- **Dungeon Portal Features**:
-  - `1px Dark Slate Outline`: Token `'K': 0x0F172A` frames portal perimeter.
-  - `Stone Arch`: Cut stone texture with `'t', 'T', 'S', 's'`.
-  - `Glowing Runes`: Embedded runes in cyan (`C`), rose/red (`Q`), gold (`Y`).
-  - `Cosmic Swirl`: Multi-tone concentric vortex using `'P', 'p', 'm'` (violet/purple) and `'V', 'v', 'E'` (blue/cyan core).
-  - `Sparks & Floating Particles`: Bright spark core (`W`), pink sparks (`z`), pale violet particles (`X`).
-- **Origin, Scale, Depth**:
-  - `boardSprite`: `setOrigin(0.5, 1).setScale(1.3).setDepth(by)` (Line 8413). -> **PASS**.
-  - `portalSprite`: `setOrigin(0.5, 1).setScale(1.6).setDepth(py)` (Line 8486). -> **PASS**.
-- **Interaction Handlers**:
-  - Notice Board: Line 9447 calls `openMemoryGame()` (Line 11375). -> **PASS**.
-  - Dungeon Portal: Line 9405 launches `DungeonScene` (Line 10156). `dungeon_portal` texture is also rendered inside `DungeonScene` for the boss chamber portal (Line 10480). -> **PASS**.
-
-### R5: Beehive Inspection
-File: `d:\Hangeul Valley\game.js`, lines 1396-1443 & 8700-8760
-- **Beehive Palette Token Count**: 17 tokens in `BEEHIVE_PALETTE` (`K, k, b, B, W, w, O, S, D, A, M, Y, y, H, C, G, g`). Requirement: `>= 17 tokens vs original 8` -> **PASS (17 tokens)**.
-- **Beehive Features**:
-  - `1px Dark Slate Outline`: Token `'K': 0x0F172A` frames skep perimeter.
-  - `Honeycomb Surface Micro-texture`: Matrix pattern using `'D'` (cell shadow), `'M'` (midtone), `'A'` (weave) across rows.
-  - `Straw Skep Shading`: Tiered straw bands shaded with `'S', 'A', 'Y', 'y', 'H'`.
-  - `Dripping Honey Droplets`: Hanging amber drops (`G`, `g`) with bright white catchlights (`C`).
-  - `Wooden Base`: Multi-tone timber pedestal (`O, W, w, B, b`).
-- **Origin, Scale, Depth**:
-  - `beehiveSprite`: `setOrigin(0.5, 1).setScale(1.6).setDepth(by)` (Line 8707). -> **PASS**.
-- **Interaction Handler**:
-  - `_createBeehiveNPC()` instantiates beehive, ambient bee particles, and floating hint text (Line 8700). Interacting with SPACE fades camera and launches `BeeScene` (Line 9427). -> **PASS**.
-
----
+- **Codebase inspected**: `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js`.
+- **File synchronization command**: `node -e "const fs = require('fs'); const g1 = fs.readFileSync('game.js'); const g2 = fs.readFileSync('assets/game.js'); console.log(g1.equals(g2));"` returned `true` (size: 1,525,933 bytes).
+- **R1 Implementation in `game.js`**:
+  - `const TILE=48, PLAYER_SPD=210, PLOT_SIZE=48, PLOT_COLS=3, PLOT_GAP=18;` (line 3921).
+  - `var PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000];` (line 3936).
+  - `var unlockedPlots = [0, 1, 2, 3, 4, 5, 6, 7, 8];` (line 3937).
+  - `var unlockedPlotCount = 9;` (line 3938).
+  - `function isPlotUnlocked(i)` (lines 3939–3944): returns `true` for `0..8`, `false` for `9..14`.
+  - `_createPlots(W, H)` (lines 9333–9361): `const MAX=15, ROWS=5;`. Loops `i` from `0` to `14`. For `!active` plots: `tile.setAlpha(0.35).setTint(0x666666)`, adds `pixel_crate` image (`setAlpha(0.7)`, depth 3), and adds `'🔒'` text (`fontSize: '18px'`, depth 4).
+  - `unlockPlot(p)` (lines 9365–9385): sets `p.active = true`, updates `unlockedPlots` array, resets tile tint & alpha, destroys lock icon and lock text, plays SFX `quiz_correct`, triggers sparkle VFX, floating text `'Plot Unlocked! 🔓'`, and calls `persistSave()`.
+  - `_updateTargetHighlight()` (lines 9617–9625): shows label ``lbl=`[SPACE] Unlock Plot #${p.index + 1} (${cost} Gold) 🔒`;``.
+  - `_interact()` (lines 9742–9753): checks `gold >= cost`, calls `spendCoins(cost)` and `this.unlockPlot(p)`, or shows error toast if insufficient gold.
+- **R3 Implementation in `game.js`**:
+  - Lines 8424–8491: Defines `fenceFlowerColors = [0xEF4444, 0xFBBF24, 0xA855F7, 0xEC4899];` (4 distinct colors) and `fenceFlowerTexs = ['flw_red', 'flw_yellow', 'flw_purple'];`.
+  - Places flowers on perimeter fence posts along top rail and side rails.
+  - Adds sway tween loop: `targets: flower`, `angle: { from: -6, to: 6 }`, `duration: 1400 + (postIdx * 170) % 800`, `yoyo: true`, `repeat: -1`, `ease: 'Sine.InOut'`.
+- **Automated test run**: Ran `.agents/teamwork_preview_reviewer_m2_1/test_r1_r3.js`, output: `TEST SUMMARY: 41 PASSED, 0 FAILED`.
 
 ## 2. Logic Chain
-
-1. **Syntax & Synchronization**: `node -c` confirmed valid JavaScript syntax in both files. SHA256 calculation confirmed `game.js` and `assets/game.js` are identical down to every single byte, ensuring zero drift between asset root and src root.
-2. **Palette Token Auditing**: Counting non-null tokens in palette definitions confirmed all token thresholds are exceeded or exactly met:
-   - Cat NPC: 19 tokens (Requirement: >=19)
-   - Notice Board: 18 tokens (Requirement: >=18)
-   - Dungeon Portal: 17 tokens (Requirement: >=17)
-   - Beehive: 17 tokens (Requirement: >=17)
-3. **Feature Verifications**: Direct code matrix inspection verified the presence of 1px dark slate outline (`0x0F172A` / `'K'`), M-mark, tabby stripes, eye catchlights, tail-swish animation, wood grain, pinned notes, lantern glow, stone arch, glowing runes, cosmic vortex, sparks, honeycomb texture, straw skep shading, honey drips, and wooden base.
-4. **Non-Regression**: Origins `(0.5, 1)`, scale values (0.75, 1.3, 1.6, 1.6), and depth sorting (`setDepth(y)`) are preserved across all four upgraded sprites. Interaction handlers (`showCatDialog()`, `openMemoryGame()`, `DungeonScene`, `BeeScene`) remain connected and operational.
-5. **Adversarial Criticism**: Checked for dummy/facade implementations, hardcoded shortcut returns, or unexecuted sprite generation. Confirmed that actual graphics matrix rendering (`PixelArtRenderer.drawMatrix` and `createTexture`) is active and authentic.
-
----
+1. *Observation*: `_createPlots` sets `MAX=15`, creating plot slots 0..14. `isPlotUnlocked(i)` checks `unlockedPlots`, which defaults to `[0..8]`.
+   *Inference*: Plots 0..8 start unlocked and plots 9..14 start locked. Requirement 1 is fully satisfied.
+2. *Observation*: In `_createPlots`, plots with `!active` receive `setAlpha(0.35)`, `setTint(0x666666)`, `'pixel_crate'` image, and `'🔒'` text.
+   *Inference*: Visual rendering for locked plots satisfies Requirement 2.
+3. *Observation*: Highlight target loop builds prompt string `[SPACE] Unlock Plot #${p.index + 1} (${cost} Gold) 🔒`, and `_interact` verifies gold before invoking `spendCoins` and `unlockPlot`.
+   *Inference*: Proximity interaction prompt and unlock state transition satisfy Requirement 3.
+4. *Observation*: Perimeter fence loop creates flowers on top and side fence posts with 4 distinct colors (`0xEF4444`, `0xFBBF24`, `0xA855F7`, `0xEC4899`) and Sine.InOut angle yoyo tweens (`repeat: -1`).
+   *Inference*: Decorative animated fence flowers satisfy Requirement 4.
+5. *Observation*: Inspection of logic shows full integration into Phaser physics, save persistence (`persistSave`), and currency system without dummy facades or shortcuts.
+   *Inference*: No integrity violations exist.
 
 ## 3. Caveats
-
-No caveats. All verification targets were directly inspected, verified via node CLI execution, SHA256 hashing, and static analysis of full source files.
-
----
+No caveats. Analysis and empirical test coverage are complete.
 
 ## 4. Conclusion
-
-Milestone 2 implementation in `game.js` and `assets/game.js` satisfies all requirements (R3 Cat NPC, R4 Notice Board & Portal, R5 Beehive, non-regression, syntax validity, file synchronization).
-Verdict: **APPROVE (PASS)**.
-
----
+Worker M2's implementation of Milestone 2 R1 and R3 is approved without requested changes. The verdict is **APPROVE**.
 
 ## 5. Verification Method
-
-To re-verify independently:
-1. Run syntax & hash verification in PowerShell / Node:
-   ```powershell
-   node -c game.js
-   node -c assets/game.js
-   Get-FileHash -Algorithm SHA256 game.js, assets/game.js
-   ```
-2. Inspect `game.js`:
-   - Line 2115: `C` palette (19 tokens)
-   - Line 7957: `NOTICE_BOARD_PALETTE` (18 tokens)
-   - Line 8000: `PORTAL_PALETTE` (17 tokens)
-   - Line 1399: `BEEHIVE_PALETTE` (17 tokens)
-   - Lines 8413, 8467, 8486, 8707: `setOrigin(0.5, 1)` and scales `0.75, 1.3, 1.6, 1.6`.
+To independently re-verify:
+1. Run syntax check: `node -c game.js` and `node -c assets/game.js`.
+2. Run automated verification test: `node .agents/teamwork_preview_reviewer_m2_1/test_r1_r3.js`.
+3. Inspect `game.js` lines 3936-3944, 8424-8491, 9333-9385, 9617-9625, and 9742-9753.

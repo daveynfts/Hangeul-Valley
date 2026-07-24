@@ -1,56 +1,85 @@
-# M2 Pet Removal Review Report — Reviewer 2
+# Quality & Adversarial Review Report — Milestone 2 (Reviewer 2)
 
-**Verdict**: PASS
-
-## Executive Summary
-All requirements for Milestone 2 (M2) Pet Removal review have been strictly evaluated and verified:
-1. Syntax integrity: `node -c "game.js"` and `node -c "assets/game.js"` executed with 0 syntax errors.
-2. File synchronization: `game.js` vs `assets/game.js` and `index.html` vs `assets/index.html` were confirmed to have 100% byte-level identity using SHA256 hashes and binary diff (`fc.exe /b`).
-3. DOM & CSS parity: `index.html` tag balance parser verified 0 unclosed/mismatched HTML tags. Search for `#pet-overlay`, `#pet-btn`, or pet CSS styles in `index.html` and `assets/index.html` yielded 0 findings.
-4. Integrity check: No hardcoded test stubs, facade implementations, or broken runtime code were detected.
+**Target Codebase**: `d:\Hangeul Valley`
+**Files Reviewed**: `game.js`, `assets/game.js`, `index.html`, `assets/index.html`
+**Reviewer**: Reviewer 2 (reviewer_critic)
+**Verdict**: **APPROVE**
 
 ---
 
-## Detailed Audit Results
-
-### 1. Syntax Check (`node -c`)
-- `node -c "d:\Hangeul Valley\game.js"`: PASS (Exit Code 0, 0 syntax errors)
-- `node -c "d:\Hangeul Valley\assets\game.js"`: PASS (Exit Code 0, 0 syntax errors)
-
-### 2. Byte-Level Identity Verification
-- **`game.js` vs `assets/game.js`**:
-  - `game.js` SHA256: `92C1685DCA2B940E320849E7A59E3BABE68306219D825499046464F2C3EEE6A8`
-  - `assets/game.js` SHA256: `92C1685DCA2B940E320849E7A59E3BABE68306219D825499046464F2C3EEE6A8`
-  - Binary diff (`fc /b`): `FC: no differences encountered`
-- **`index.html` vs `assets/index.html`**:
-  - `index.html` SHA256: `FDE5AEEEFB610054920E08B6314140ECA363E3724124095E3EBBB05B9B53B183`
-  - `assets/index.html` SHA256: `FDE5AEEEFB610054920E08B6314140ECA363E3724124095E3EBBB05B9B53B183`
-  - Binary diff (`fc /b`): `FC: no differences encountered`
-
-### 3. HTML Tag Balance & Orphaned Pet UI Elements
-- Stack-based parser verification: **PASS** (0 unclosed tags, 0 mismatched tags, 0 orphaned closing tags).
-- Element / CSS search (`#pet-overlay`, `#pet-btn`, `.pet-`):
-  - `index.html`: 0 matches found.
-  - `assets/index.html`: 0 matches found.
-
-### 4. JavaScript Pet Code Cleanup Verification
-- Grep search in `game.js` for key pet symbols (`petState`, `petSprite`, `petShadow`, `_updatePetCompanion`, `_genPetTextures`, `isPetActive`, `getPetPassiveMultiplier`, `addPetXP`, `openPetOverlay`, `closePetOverlay`, `PET_DB`, `feedActivePet`, `startPetLevelUpQuiz`, `activePet`): **0 matches found**.
+## 1. Executive Summary
+Worker M2's implementation of Requirement R2 (Shop UI Plot Expansion Integration, Save/Load Persistence, and Code Quality Sync) has been comprehensively reviewed and empirically tested. All functional, persistence, syntax, and synchronization requirements have been met with zero defects or integrity violations.
 
 ---
 
-## Adversarial Criticism & Findings
+## 2. Findings & Claim Verification
 
-### Findings Summary
-- **Critical Findings**: 0
-- **Major Findings**: 0
-- **Minor / Informational Findings**: 1 (Informational)
-  - *Location*: `game.js` lines 10953 and 11060
-  - *Detail*: Line 10953 contains a leftover comment (`// Store cooked dish for pet feeding`) and line 11060 contains seasonal quest text (`desc: 'Feed your Pet companion 1 time'`).
-  - *Impact*: Zero operational or runtime impact. Neither comment nor static string interacts with any DOM node or missing JavaScript function.
+| Claim / Requirement | Status | Verification Method & Results |
+| ------------------- | ------ | ----------------------------- |
+| **Shop UI Section Header** | ✅ PASS | Verified `buildShopGrid()` in `game.js:5515-5520` renders top section `🌾 Farm Plot Expansions (${unlockedPlots.length}/15 Unlocked)`. |
+| **6 Plot Expansion Items & Costs** | ✅ PASS | Verified `PLOT_UNLOCK_COSTS` `[100, 200, 350, 500, 750, 1000]` mapped to Plots #10 to #15 (`game.js:5522-5543`). |
+| **Locked vs "✅ Owned" Status** | ✅ PASS | Verified status toggle: owned plots render `✅ Owned` badge and disabled `Unlocked` button; affordable plots render `🛒 Buy Now` button; unaffordable plots render disabled `Need X gold` button (`game.js:5534-5541`). |
+| **Gold Deduction via `spendCoins()`** | ✅ PASS | Verified `buyPlotExpansion(idx)` invokes `spendCoins(cost)` (`game.js:5493`), deducting gold from `playerCurrencies.coins`, updating HUD, and persisting save state. |
+| **Real-time Map Unlock** | ✅ PASS | Verified `buyPlotExpansion(idx)` invokes `sceneRef.unlockPlot(p)` (`game.js:5497-5504`), removing crate/lock overlays, playing sparkle animation/SFX, and clearing tile tinting immediately. |
+| **Save/Load Persistence** | ✅ PASS | Verified `collectSave()` serializes `unlockedPlots` & `unlockedPlotCount` (`game.js:4179-4180`); `migrateSaveData()` handles legacy saves (`game.js:4124-4135`); `applySave()` restores plot arrays and refreshes scene access (`game.js:4209-4218, 4253`). |
+| **Syntax Checks (`node -c`)** | ✅ PASS | Executed `node -c game.js; node -c assets/game.js` → 0 syntax errors. |
+| **SHA256 Byte Sync** | ✅ PASS | Executed SHA256 check: `game.js` ↔ `assets/game.js` (`74F3FC...`) and `index.html` ↔ `assets/index.html` (`42E647...`) match 100% byte-for-byte. |
 
 ---
 
-## Conclusion
-The M2 Pet System Removal has been implemented cleanly, completely, and synchronously across both root and `assets/` directories with 0 syntax errors and perfect HTML DOM tag integrity.
+## 3. Adversarial Stress Testing & Integrity Audit
 
-**Final Reviewer Verdict**: PASS
+### Integrity Violation Audit
+- **Hardcoded Test Outputs / Dummy Logic**: None found. All shop UI rendering, cost checks, balance deductions, plot unlocking, and save/load migrations use dynamic live data structures.
+- **Bypass / Facade Implementations**: None found. `buyPlotExpansion(idx)` performs real coin deductions via `spendCoins()`, mutates `unlockedPlots`, triggers live scene updates via `sceneRef.unlockPlot(p)`, and writes state to disk via `persistSave()`.
+
+### Boundary & Stress Scenarios Tested
+
+1. **Insufficient Gold Guard**:
+   - *Scenario*: Player attempts to buy Plot Expansion #1 (100 Gold) with 50 Gold balance.
+   - *Result*: `buyPlotExpansion()` displays error toast, `spendCoins()` returns false, balance remains 50 Gold, and plot remains locked.
+
+2. **Re-purchasing Unlocked Plot**:
+   - *Scenario*: Invoking `buyPlotExpansion()` on an already owned plot index.
+   - *Result*: `isPlotUnlocked(plotIndex)` guard triggers toast `You already unlocked this farm plot!` and aborts immediately without gold deduction.
+
+3. **Legacy Save Data Migration**:
+   - *Scenario 1*: Loading a legacy save file (v3) with only `unlockedPlotCount: 12`.
+   - *Result*: `migrateSaveData()` populates `unlockedPlots: [0, 1, 2, ..., 11]` and upgrades schema version to v4.
+   - *Scenario 2*: Loading a legacy save with missing plot fields.
+   - *Result*: `migrateSaveData()` defaults `unlockedPlots` to `[0, 1, 2, 3, 4, 5, 6, 7, 8]` and `unlockedPlotCount` to 9.
+
+4. **Duplicate Unlocked Plot Indices**:
+   - *Scenario*: Save data contains duplicate entries in `unlockedPlots`.
+   - *Result*: `migrateSaveData()` applies `Array.from(new Set(data.unlockedPlots))`, cleanly deduplicating array elements.
+
+---
+
+## 4. Empirical Test Suite Summary
+An independent verification test runner (`verify_m2_plots.js`) executing 33 unit and integration assertions in Node VM context returned **33/33 PASS, 0 FAIL**.
+
+```
+===========================================================
+REVIEWER 2 - MILESTONE 2 FARM PLOTS EMPIRICAL VERIFICATION
+===========================================================
+[PASS] game.js syntax check (node -c)
+[PASS] assets/game.js syntax check (node -c)
+[PASS] SHA256 game.js <-> assets/game.js
+[PASS] SHA256 index.html <-> assets/index.html
+[PASS] VM load of game.js succeeded
+[PASS] PLOT_UNLOCK_COSTS is [100, 200, 350, 500, 750, 1000]
+[PASS] Initial plot unlock states (Plots 0-8 unlocked, Plots 9-14 locked)
+[PASS] Shop grid rendering ("🌾 Farm Plot Expansions", 6 expansion cards)
+[PASS] Insufficient gold balance handling
+[PASS] Sufficient gold balance deduction (-100 Gold) & plot state mutation
+[PASS] collectSave(), applySave(), migrateSaveData() persistence lifecycle
+===========================================================
+SUITE COMPLETE: Pass = 33 | Fail = 0
+VERDICT: ALL PASSED
+```
+
+---
+
+## 5. Review Verdict & Recommendation
+**Verdict**: **APPROVE**
+The implementation of Milestone 2 (R2 Shop UI Plot Expansion Integration, Save/Load Persistence, Code Quality Sync) is clean, fully verified, and ready for production merging.

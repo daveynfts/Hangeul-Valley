@@ -1,46 +1,39 @@
-## 2026-07-24T14:58:01Z
+## 2026-07-24T15:26:28Z
 <USER_REQUEST>
-You are teamwork_preview_worker_m2.
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2`. Please write your implementation notes to `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\changes.md` and your handoff to `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md`.
-
-Target Scope: Milestone 2 - Cat NPC (R3), Notice Board & Portal (R4), and Beehive (R5) Sprite Polish & Upgrade.
-
-Read Explorer handoff reports:
-- Cat NPC Explorer Handoff: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1\handoff.md`
-- Board & Portal Explorer Handoff: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\handoff.md`
-- Beehive Explorer Handoff: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_3\handoff.md`
-- Project Specs: `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`
+You are Worker M2 for Hangeul Valley Expandable Locked Farm Plots & Decorative Fence Flowers.
+Working directory: d:\Hangeul Valley\.agents\teamwork_preview_worker_m2
+Target codebase: d:\Hangeul Valley
 
 MANDATORY INTEGRITY WARNING:
 DO NOT CHEAT. All implementations must be genuine. DO NOT hardcode test results, create dummy/facade implementations, or circumvent the intended task. A Forensic Auditor will independently verify your work. Integrity violations WILL be detected and your work WILL be rejected.
 
-Implementation Tasks:
-1. **Cat NPC Muop (R3)**:
-   - In `game.js`, locate `PixelArtRenderer` static `CAT_PAL` / `C` dictionary and `cat_0` & `cat_1` matrices, plus `FarmScene._bakeTextures()` `gcat` bake.
-   - Upgrade palette to 19 color tokens (ginger fur, white chest fluff, eye green with catchlight `W`, slate 1px dark outlines `K = 0x0F172A`).
-   - Update `cat_0` and `cat_1` matrices to feature forehead M-mark, tabby flank stripes, expressive eyes with catchlights, and frame-to-frame tail-swish idle animation.
-   - Ensure all defined palette tokens are actively used in the matrices.
-   - Retain origin `(0.5, 1)`, scale `0.75`, depth sorting, shadow anchor, proximity check (65px), and `showCatDialog()` modal trigger.
+Your instructions:
+Implement all requirements R1, R2, and R3 in d:\Hangeul Valley\game.js (and index.html if UI requires HTML edits), then copy modifications to assets/game.js (and assets/index.html) so SHA256 hashes are identical.
 
-2. **Notice Board & Dungeon Portal (R4)**:
-   - In `game.js`, locate `_bakeTextures()` for `'notice_board'` and `'dungeon_portal'`.
-   - Upgrade `'notice_board'` matrix from 6 to 18 color tokens with 1px dark slate outlines, detailed wood grain texture, pinned paper notes with visible text marks, red pushpins, and warm hanging lantern glow.
-   - Upgrade `'dungeon_portal'` matrix from 4 to 17 color tokens with 1px dark slate outlines, multi-tone stone arch, glowing ancient runes (cyan, pink, amber gold), cosmic blue swirl core, white hot energy flash, and pulsing glow particles.
-   - Ensure all defined palette tokens are actively used in the matrices.
-   - Retain origin `(0.5, 1)`, scales, depth sorting, `openMemoryGame()` overlay trigger, and `DungeonScene` transition trigger.
+Detailed Requirements:
 
-3. **Beehive (R5)**:
-   - In `game.js`, locate `_genBeehiveTextures` / `_bakeTextures()` for `'beehive'`.
-   - Upgrade `'beehive'` matrix from 8 to 17 color tokens with 1px dark slate outlines (`K = 0x0F172A`), visible honeycomb surface micro-texture, 6-tier straw skep shading, glossy dripping honey droplets with specular catchlights, and multi-tone wooden base.
-   - Ensure all defined palette tokens are actively used in the matrix.
-   - Retain placement `(bx, by)`, origin `(0.5, 1)`, scale `1.6`, drop shadow, proximity check (<85px), and `enterBeeScene()` trigger.
+1. R1: 6 Locked Expandable Farm Plots
+   - In game.js, extend plot definition so 6 additional farm plots exist (total 15 plots, indices 0..14). Plots 0..8 start unlocked. Plots 9..14 start locked.
+   - Cost progression array for locked plots (indices 9..14): [100, 200, 350, 500, 750, 1000] Gold.
+   - Visually render locked plots distinctly: darker soil tint (0x666666 or 0x444444), reduced alpha (0.35), lock overlay graphic/icon, and '🔒' text indicator.
+   - Proximity interaction: Approaching a locked plot shows a prompt e.g. [SPACE] Unlock Plot #${p.index + 1} (${cost} Gold) 🔒.
+   - Interaction flow: Pressing [SPACE] near a locked plot checks player Gold. If Gold >= cost, deduct Gold, unlock plot (plot.active = true), update visual rendering (clear tint, alpha 1.0, destroy lock icon, play chiptune SFX and particle sparkle + float label Plot Unlocked! 🔓), and save game state. If Gold < cost, play error SFX and display toast message e.g. Need ${cost} Gold 🪙 to unlock Farm Plot #${plot.index + 1}!.
+   - Save/Load persistence: Save unlocked plot state (unlockedPlotCount or unlockedPlots array) in collectSave(), migrate legacy saves in migrateSaveData(), restore state in applySave(), so unlocked plots persist across save/load.
 
-4. **Syntax Check & Sync**:
-   - Run `node -c game.js` via run_command. Must pass with 0 syntax errors.
-   - Copy `game.js` to `assets/game.js`.
-   - Run `node -c assets/game.js`.
-   - Verify SHA256 hashes match 100%.
+2. R2: Shop UI Integration for Plot Purchases
+   - Add the 6 locked plot expansion items to the Shop UI modal/tab in game.js (or index.html).
+   - Prices: Plot #1: 100g, Plot #2: 200g, Plot #3: 350g, Plot #4: 500g, Plot #5: 750g, Plot #6: 1000g.
+   - Shop UI must clearly display locked/available plot expansions vs. owned/unlocked plots (showing "Owned" or disabled state for already-unlocked plots).
+   - Purchasing a plot expansion from the Shop UI deducts Gold, unlocks the corresponding plot immediately on the farm grid, updates visuals, and saves state.
 
-5. Document all changes and verification outputs in `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md`.
+3. R3: Decorative Animated Flowers on Farm Fences
+   - Add pixel-art flower decorations growing on/along perimeter fence posts surrounding the farming area.
+   - Use at least 3 distinct flower colors (e.g., red 0xEF4444, yellow 0xFBBF24, purple 0xA855F7, pink 0xEC4899).
+   - Implement a subtle idle sway animation loop for the fence flowers.
 
+4. Code Quality & Dual-File Synchronization
+   - Execute node -c game.js and node -c assets/game.js to ensure 0 syntax errors.
+   - Copy game.js to assets/game.js and index.html to assets/index.html (if index.html modified) to ensure exact SHA256 byte sync.
+   - Write implementation report to d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\changes.md and soft handoff to d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md.
+   - Send completion message to parent orchestrator.
 </USER_REQUEST>

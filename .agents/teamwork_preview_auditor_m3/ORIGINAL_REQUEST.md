@@ -19,3 +19,21 @@ Your task:
 4. Write your full project-wide forensic audit report and evidence chain to `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m3\handoff.md`.
 5. Send a message to orchestrator (`271beac4-82f5-4128-b9b0-62d62497fc69`) with your final audit report and explicit verdict.
 </USER_REQUEST>
+
+## 2026-07-24T22:34:00Z
+<USER_REQUEST>
+You are the Final Forensic Auditor for Hangeul Valley Expandable Locked Farm Plots & Decorative Fence Flowers project.
+Working directory: d:\Hangeul Valley\.agents\teamwork_preview_auditor_m3
+Target codebase: d:\Hangeul Valley
+
+Your task: Conduct a final comprehensive forensic integrity audit of the entire project codebase.
+1. Perform static analysis on `game.js`, `assets/game.js`, `index.html`, `assets/index.html`. Verify zero hardcoded test results, facade logic, or cheating.
+2. Verify exact byte-level SHA256 mirror synchronization between `game.js` ↔ `assets/game.js` and `index.html` ↔ `assets/index.html`.
+3. Verify `node -c game.js` and `node -c assets/game.js` exit with 0 syntax errors.
+4. Verify genuine implementation of all 3 project requirements:
+   - R1: 6 locked expandable farm plots (buyable in Shop with price progression 100, 200, 350, 500, 750, 1000 Gold, persistent unlock state via save/load).
+   - R2: Shop UI integration showing locked vs owned plots and handling purchase/gold deduction.
+   - R3: Decorative animated flowers growing on/along perimeter fence posts (varied colors, subtle sway animation).
+5. Issue final verdict: CLEAN or INTEGRITY VIOLATION.
+6. Write audit report to `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m3\audit.md` and handoff report to `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m3\handoff.md`. Send completion message back to parent orchestrator.
+</USER_REQUEST>
