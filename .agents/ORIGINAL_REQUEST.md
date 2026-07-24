@@ -239,4 +239,80 @@ All existing HUD functionality must remain accessible. No features should be rem
 - [ ] The root `index.html` and `assets/index.html` are synchronized.
 - [ ] The glassmorphism visual style (glass-bg, neon-gold borders, backdrop-filter blur) is preserved.
 
+## Follow-up — 2026-07-24T01:50:44Z
+
+Revamp hệ thống VOCAB_FACTS trong game **Hangeul Valley**: thay thế phần "Korean Culture" (fun facts) bằng **giải thích chi tiết về từ vựng** (nguồn gốc, cấu trúc, ngữ cảnh) và xây lại phần "Recall Hint" với **phân tích âm tiết + hình ảnh liên tưởng + câu ví dụ**. Tạo data cho **toàn bộ ~1,500 từ** trong `levels.json`.
+
+Working directory: C:/VibeCode/Hangeul Valley
+Integrity mode: development
+
+## Context
+
+### Current System
+- File `game.js` chứa object `VOCAB_FACTS` (line ~4822) với ~35 entries hardcoded dạng:
+```js
+const VOCAB_FACTS = {
+  'water': {
+    vi: '💧 Koreans almost never drink cold water...', // "Korean Culture" fun fact
+    ko: '🧠 1 syllable, sounds like "mull"...'         // "Recall Hint" mnemonic
+  },
+  ...
+};
+```
+- Hàm `getFunFact(word)` (line ~4904) lookup theo `word.en.toLowerCase()` → nếu không có trong VOCAB_FACTS thì dùng fallback generic dựa trên syllable count và category.
+- Hiện tại chỉ 35/1500 từ có data riêng (2.3%). 97.7% từ dùng fallback chung chung.
+- Data hiển thị ở: Cat NPC dialog, Phase 3 quiz hints, Vocab card modal, Quiz hint reveal.
+
+### Data Source
+- `levels.json` chứa 25 levels × 60 words = 1,500 từ. Mỗi từ có: `{ ko, en, hint, category }`.
+- VOCAB_FACTS key = `word.en.toLowerCase()`.
+
+### Problem
+1. **"Korean Culture" (trường `vi`)**: Hiện tại là fun facts hời hợt, không giúp người học hiểu sâu về từ vựng. User muốn thay bằng **giải thích chi tiết về từ vựng**.
+2. **"Recall Hint" (trường `ko`)**: Hiện tại quá chung chung ("1 syllable — say it once!"), không tạo ấn tượng ghi nhớ. User muốn xây lại hoàn toàn.
+
+## Requirements
+
+### R1. Thay thế "Korean Culture" bằng giải thích từ vựng chi tiết (trường `vi`)
+Cho **mỗi từ trong 1,500 từ** của `levels.json`, tạo nội dung giải thích từ vựng chi tiết bằng tiếng Anh cho trường `vi`, bao gồm:
+- **Nguồn gốc từ**: Phân loại rõ (từ Hán-Hàn 한자어, từ thuần Hàn 고유어, từ ngoại lai 외래어) và giải thích gốc Hán tự nếu có (ví dụ: 학교 = 學校 = learn + school)
+- **Cách dùng trong câu**: Ít nhất 1 câu ví dụ tiếng Hàn ngắn + dịch tiếng Anh
+- **Ngữ cảnh thường gặp**: Từ này hay gặp ở đâu (K-drama, TOPIK, daily life, formal/informal)
+
+### R2. Xây lại hoàn toàn "Recall Hint" (trường `ko`)
+Cho **mỗi từ trong 1,500 từ**, tạo nội dung recall hint mới bằng tiếng Anh cho trường `ko`, kết hợp:
+- **Phân tích âm tiết**: Tách từ thành từng âm tiết Hangul và romanize rõ ràng
+- **Hình ảnh liên tưởng**: Tạo mnemonic device sáng tạo gắn âm Hàn với hình ảnh/cảm xúc dễ nhớ
+- **Câu ví dụ ngắn**: 1 câu Hàn siêu ngắn (3-5 từ) minh họa cách dùng + romanization
+
+### R3. Giữ nguyên cấu trúc code và tương thích 100%
+- VOCAB_FACTS phải giữ nguyên format: object keyed by `word.en.toLowerCase()`, value = `{ vi: string, ko: string }`.
+- `getFunFact(word)` phải vẫn hoạt động đúng logic lookup.
+- `node -c game.js` phải pass syntax check.
+- File `game.js` và `assets/game.js` phải đồng bộ hoàn toàn.
+- **KHÔNG ĐƯỢC** chỉnh sửa bất kỳ code nào khác ngoài object `VOCAB_FACTS` và hàm `getFunFact` fallback.
+
+### R4. Nâng cấp fallback trong getFunFact
+Cải thiện fallback trong `getFunFact()` cho trường hợp từ không có trong VOCAB_FACTS (nếu có). Fallback nên thông minh hơn: ít nhất phải romanize `word.ko` và phân tích số âm tiết Hangul chính xác (không đếm ký tự raw).
+
+## Acceptance Criteria
+
+### Coverage
+- [ ] VOCAB_FACTS có entries cho **≥ 1,400 từ** (≥93% coverage của 1,500 từ trong levels.json)
+- [ ] Mỗi entry có cả 2 trường `vi` (giải thích từ vựng) và `ko` (recall hint), không rỗng
+- [ ] Trường `vi` chứa ít nhất 1 câu ví dụ tiếng Hàn cho mỗi từ
+- [ ] Trường `ko` chứa romanization cho mỗi từ
+
+### Content Quality
+- [ ] Trường `vi` có phân loại nguồn gốc từ (한자어/고유어/외래어) cho ≥80% entries
+- [ ] Trường `ko` có mnemonic device (không chỉ là "say it X times" generic)
+- [ ] Không có entry nào copy nguyên văn từ bộ 35 entries cũ mà không cải thiện
+
+### Technical Integrity
+- [ ] `node -c game.js` pass (0 lỗi syntax)
+- [ ] Tất cả keys trong VOCAB_FACTS match với `word.en.toLowerCase()` từ levels.json
+- [ ] `game.js` và `assets/game.js` đồng bộ hoàn toàn
+- [ ] getFunFact(word) trả về object có cả `vi` và `ko` cho mọi input
+
+
 

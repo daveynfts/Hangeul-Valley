@@ -1,0 +1,114 @@
+{
+  "verdict": "VICTORY REJECTED",
+  "results": {
+    "phaseA": {
+      "status": "PASS",
+      "anomalies": []
+    },
+    "phaseB": {
+      "status": "FAIL",
+      "checks": [
+        {
+          "name": "File Sync (game.js vs assets/game.js)",
+          "pass": true
+        },
+        {
+          "name": "Syntax Check (node -c)",
+          "pass": true
+        },
+        {
+          "name": "Strict Constraint Check",
+          "pass": false,
+          "detail": "spawnSync C:\\WINDOWS\\system32\\cmd.exe ENOBUFS"
+        }
+      ]
+    },
+    "phaseC": {
+      "status": "PENDING",
+      "r1": {
+        "pass": false,
+        "totalChecked": 1494,
+        "missingOrigin": 88,
+        "missingSentence": 0,
+        "missingContext": 0,
+        "sampleFailures": [
+          {
+            "word": "older brother (for male)",
+            "vi": "한자어 (兄 형 형). 예문: 형이 반갑게 인사하며 다가옵니다. (Older brother (for male) comes over with a warm greeting.) Văn cảnh: Từ vựng \"형\" (older brother (for male)) thuộc chủ đề 가족과 사람. Xuất hiện phổ biến trong giao tiếp hàng ngày, phim ảnh và đời sống tại Hàn Quốc.",
+            "hasOrigin": false,
+            "hasHangul": true,
+            "hasEnglishTranslation": true,
+            "lengthOk": true
+          },
+          {
+            "word": "uncle",
+            "vi": "한자어 (三寸 = 三 석 삼 + 寸 마디 촌). 예문: 삼촌이 반갑게 인사하며 다가옵니다. (Uncle comes over with a warm greeting.) Văn cảnh: Từ vựng \"삼촌\" (uncle) thuộc chủ đề 가족과 사람. Xuất hiện phổ biến trong giao tiếp hàng ngày, phim ảnh và đời sống tại Hàn Quốc.",
+            "hasOrigin": false,
+            "hasHangul": true,
+            "hasEnglishTranslation": true,
+            "lengthOk": true
+          },
+          {
+            "word": "maternal aunt",
+            "vi": "한자어 (姨母 = 姨 이모 이 + 母 어미 모). 예문: 이모가 반갑게 인사하며 다가옵니다. (Maternal aunt comes over with a warm greeting.) Văn cảnh: Từ vựng \"이모\" (maternal aunt) thuộc chủ đề 가족과 사람. Xuất hiện phổ biến trong giao tiếp hàng ngày, phim ảnh và đời sống tại Hàn Quốc.",
+            "hasOrigin": false,
+            "hasHangul": true,
+            "hasEnglishTranslation": true,
+            "lengthOk": true
+          },
+          {
+            "word": "paternal aunt",
+            "vi": "한자어 (姑母 = 姑 시어미 고 + 母 어미 모). 예문: 고모가 반갑게 인사하며 다가옵니다. (Paternal aunt comes over with a warm greeting.) Văn cảnh: Từ vựng \"고모\" (paternal aunt) thuộc chủ đề 가족과 사람. Xuất hiện phổ biến trong giao tiếp hàng ngày, phim ảnh và đời sống tại Hàn Quốc.",
+            "hasOrigin": false,
+            "hasHangul": true,
+            "hasEnglishTranslation": true,
+            "lengthOk": true
+          },
+          {
+            "word": "grandson",
+            "vi": "한자어 (孫子 = 孫 손자 손 + 子 아들 자). 예문: 손자가 반갑게 인사하며 다가옵니다. (Grandson comes over with a warm greeting.) Văn cảnh: Từ vựng \"손자\" (grandson) thuộc chủ đề 가족과 사람. Xuất hiện phổ biến trong giao tiếp hàng ngày, phim ảnh và đời sống tại Hàn Quốc.",
+            "hasOrigin": false,
+            "hasHangul": true,
+            "hasEnglishTranslation": true,
+            "lengthOk": true
+          }
+        ]
+      },
+      "r2": {
+        "pass": false,
+        "totalChecked": 1494,
+        "missingSyllable": 2,
+        "missingMnemonic": 0,
+        "missingSentence": 0,
+        "sampleR2Failures": [
+          {
+            "word": "social network service",
+            "ko": "[SNS]. 🧠 Hãy hình dung hình ảnh sinh động đại diện cho \"social network service\" và phát âm nhịp nhàng [] () để ghi nhớ sâu vào trí nhớ! SNS를 항상 사용합니다 [SNSreul hangsang sayonghamnida]",
+            "hasSyllable": false,
+            "hasMnemonic": true,
+            "hasSentenceAndRom": true
+          },
+          {
+            "word": "producer",
+            "ko": "[PD]. 🧠 Hãy hình dung hình ảnh sinh động đại diện cho \"producer\" và phát âm nhịp nhàng [] () để ghi nhớ sâu vào trí nhớ! PD를 항상 사용합니다 [PDreul hangsang sayonghamnida]",
+            "hasSyllable": false,
+            "hasMnemonic": true,
+            "hasSentenceAndRom": true
+          }
+        ]
+      },
+      "r3": {
+        "pass": true,
+        "matchedCount": 1494,
+        "totalWords": 1494,
+        "coveragePct": 100,
+        "vocabTotal": 1494,
+        "invalidFormatCount": 0
+      },
+      "r4": {
+        "pass": false,
+        "detail": "getFunFact is not defined or not a function"
+      }
+    }
+  }
+}

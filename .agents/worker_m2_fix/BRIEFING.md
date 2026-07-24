@@ -1,50 +1,57 @@
-# BRIEFING — 2026-07-23T09:13:20+07:00
+# BRIEFING — 2026-07-24T09:02:10Z
 
 ## Mission
-Fix 17-row height anomaly in `player_pick_down_2` in `game.js` to make it strictly 16x16, synchronize `game.js` to `assets/game.js`, verify syntax and test compliance.
+Remediate 3 audit findings in `game.js` and `assets/game.js` for Milestone 2 Iteration 2:
+1. Move global helper constants/functions inside `getFunFact` function body.
+2. Fix `vi` field Sino-Korean origin tags (`한자어` -> `Gốc từ Hán-Hàn (한자어)` / `Hán-Hàn`).
+3. Fix empty template placeholders `[] ()` in `ko` field entries ('social network service', 'producer', etc.).
 
 ## 🔒 My Identity
-- Archetype: worker_m2_fix
+- Archetype: implementer / qa / specialist
 - Roles: implementer, qa, specialist
 - Working directory: C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix
-- Original parent: 1eaeaf43-aeda-40fe-8cdf-1284cd6a557d
-- Milestone: M2 Fix / Character Design Upgrade
+- Original parent: 8c7ac785-6cfc-4fb2-b6ae-0f3781741efe
+- Milestone: Milestone 2 Iteration 2 Remediation
 
 ## 🔒 Key Constraints
-- DO NOT CHEAT. All implementations must be genuine.
-- Fix 17-row height anomaly in `player_pick_down_2` matrix in `game.js` so it is strictly 16 rows (16x16).
-- Synchronize `game.js` -> `assets/game.js`.
-- Run syntax checks and test suite to confirm 100% matrix grid compliance.
-- Write report to `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/handoff.md` and send message to parent.
+- Move helper constants/functions INSIDE `getFunFact(word)`.
+- ZERO modifications outside `VOCAB_FACTS` and `getFunFact`.
+- All Sino-Korean entries must explicitly use `từ Hán-Hàn (한자어)` or `Hán-Hàn`. 0 entries with raw `한자어` without `Hán-Hàn`.
+- 0 entries with empty `[]` or `()` in `ko` fields.
+- `game.js` and `assets/game.js` must be 100% byte-for-byte identical.
+- `node -c game.js` and `node -c assets/game.js` must succeed.
 
 ## Current Parent
-- Conversation ID: 1eaeaf43-aeda-40fe-8cdf-1284cd6a557d
-- Updated: 2026-07-23T09:13:20+07:00
+- Conversation ID: 8c7ac785-6cfc-4fb2-b6ae-0f3781741efe
+- Updated: 2026-07-24T09:02:10Z
 
 ## Task Summary
-- **What to build**: Fix `player_pick_down_2` row count anomaly in `game.js`, sync to `assets/game.js`.
-- **Success criteria**: All matrices 16x16, node syntax check passes, test scripts pass 100%.
-
-## Key Decisions Made
-- Removed extra `'..VVVVVVVVVVVV..'` row from `player_pick_down_2` array in `game.js`.
-- Synchronized `game.js` to `assets/game.js` via byte copy.
-- Confirmed syntax with `node -c` and full pass with `test_character_upgrade.js` (44/44 passed) and `test_matrices.py`.
+- **What to build**: Fixed helper scope, `vi` field Hán-Hàn tags, and `ko` field placeholders in `game.js` & `assets/game.js`.
+- **Success criteria**: All audit checks pass, `game.js` and `assets/game.js` synchronized, syntax check clean.
 
 ## Change Tracker
-- **Files modified**: `game.js`, `assets/game.js`
-- **Build status**: PASS (node -c clean)
-- **Pending issues**: none
+- **Files modified**:
+  - `scripts/build_vocab_facts.js`: Updated generator with helper functions inside `getFunFact`, Hán-Hàn origin tags for all Sino-Korean words, non-empty mnemonic generation for Latin/abbreviation words, and build-time audit assertions.
+  - `game.js`: Regenerated with remediated `VOCAB_FACTS` and scope-scoped `getFunFact`.
+  - `assets/game.js`: Regenerated and 100% byte-for-byte synchronized with `game.js`.
+- **Build status**: PASS (`node -c game.js`, `node -c assets/game.js`, `node scripts/verify_m2_m3.js`, `node test_m2_harness.js`).
+- **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: PASS (44/44 tests passed in `test_character_upgrade.js`, `test_matrices.py` SUCCESS)
-- **Lint status**: clean
-- **Tests added/modified**: none (used existing challenger and explorer test scripts)
+- **Build/test result**: All 5 test suites PASSED. 0 errors, 0 raw `한자어` violations, 0 empty placeholder violations.
+- **Lint status**: Clean (Syntax check exit code 0).
+- **Tests added/modified**: Embedded audit assertions in `build_vocab_facts.js`.
 
 ## Loaded Skills
-- None required.
+- None
+
+## Key Decisions Made
+- `RR_CHOSEONG`, `RR_JUNGSEONG`, `RR_JONGSEONG`, `decomposeHangulWord`, and `getHangulRomanization` placed strictly inside `getFunFact(word)` body.
+- `HANJA_MAP` and `getWordOrigin` updated to prepend `Gốc từ Hán-Hàn (한자어)` / `Hán-Hàn` to all Sino-Korean entries.
+- `generateMnemonic` updated to fallback to `[${koWord}]` when `syllables.length === 0` (e.g. for SNS, PD), eliminating all empty `[] ()` placeholders.
 
 ## Artifact Index
-- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/ORIGINAL_REQUEST.md`
-- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/BRIEFING.md`
-- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/progress.md`
-- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/handoff.md`
+- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/ORIGINAL_REQUEST.md` — Original request
+- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/BRIEFING.md` — Briefing document
+- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/progress.md` — Progress log
+- `C:/VibeCode/Hangeul Valley/.agents/worker_m2_fix/handoff.md` — Final Handoff report

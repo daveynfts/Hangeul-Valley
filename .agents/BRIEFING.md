@@ -1,13 +1,13 @@
-# BRIEFING — 2026-07-23T14:28:30Z
+# BRIEFING — 2026-07-24T02:05:45Z
 
 ## Mission
-Upgrade all pixel art graphics quality across Hangeul Valley (sprites, tilemap textures, decorations for Farm, Fishing, Arcade, Dungeon scenes) to Stardew Valley / Celeste / Eastward standard.
+Revamp VOCAB_FACTS in Hangeul Valley for all ~1,500 words in `levels.json`: Replace 'Korean Culture' with detailed vocabulary explanations (origin, structure, context) and rebuild 'Recall Hints' (syllable analysis, mnemonics, example sentences).
 
 ## 🔒 My Identity
 - Archetype: sentinel
 - Working directory: C:\VibeCode\Hangeul Valley\.agents
-- Orchestrator: f82e6501-37a6-4d67-b1ab-db89920a095d
-- Victory Auditor: f4b1ac3d-c142-46c9-bd99-ff3b1b3a8c23
+- Orchestrator: 8c7ac785-6cfc-4fb2-b6ae-0f3781741efe
+- Victory Auditor: 2779107f-eb42-4886-8bcc-7df4fd50ee56
 
 ## 🔒 Key Constraints
 - No technical decisions — relay only
@@ -17,11 +17,13 @@ Upgrade all pixel art graphics quality across Hangeul Valley (sprites, tilemap t
 - Preserve 100% texture key and Phaser animation key compatibility
 - Syntax check `node -c game.js` must pass with 0 errors
 - Synchronize root `game.js` ↔ `assets/game.js`
+- DO NOT modify any code in `game.js` outside of `VOCAB_FACTS` object and `getFunFact` fallback function.
+- `VOCAB_FACTS` coverage must be ≥ 1,400 words (≥93%).
 
 ## User Context
-- **Last user request**: Upgrade tilemaps, decorations, fishing sprites, arcade sprites, dungeon sprites to Stardew Valley/Celeste aesthetic with multi-tone shading and 1px dark contour outlines.
+- **Last user request**: Revamp VOCAB_FACTS system for ~1,500 words in `levels.json` with detailed vocab explanations and recall hints.
 - **Pending clarifications**: none
-- **Delivered results**: Graphics upgrade completed and certified VICTORY CONFIRMED by Independent Victory Auditor!
+- **Delivered results**: Project completed successfully. Certified VICTORY CONFIRMED by Independent Victory Auditor.
 
 ## Project Status
 - **Phase**: complete
@@ -29,12 +31,9 @@ Upgrade all pixel art graphics quality across Hangeul Valley (sprites, tilemap t
 ## Victory Audit Status
 - **Triggered**: yes
 - **Verdict**: VICTORY CONFIRMED
-- **Retry count**: 0
+- **Retry count**: 1
 
 ## Artifact Index
 - ORIGINAL_REQUEST.md — Verbatim record of user request
 - BRIEFING.md — Sentinel state and briefing
 - handoff.md — Sentinel handoff report
-
-
-
