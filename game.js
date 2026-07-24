@@ -7032,6 +7032,17 @@ class FarmScene extends Phaser.Scene {
 
     buildLevelSelectScreen(); playerLocked = true;
     updateGoldHUD();
+
+    // ── RESIZE HANDLER ─ update camera & world bounds on window resize ──
+    this.scale.on('resize', (gameSize) => {
+      const nw = gameSize.width, nh = gameSize.height;
+      this.cameras.main.setBounds(0, 0, Math.max(nw, W), Math.max(nh, H));
+      // Update weather/lighting overlays to cover new size
+      if (this.lighting) {
+        this.lighting.width = nw;
+        this.lighting.height = nh;
+      }
+    });
   }
 
   // ── BAKE TEXTURES ──────────────────────────────────────────────────────────
@@ -9049,6 +9060,11 @@ class ArcadeScene extends Phaser.Scene {
 
     // Enable overlap between Lasers and Boss
     this.physics.add.overlap(this.lasers, this.bossContainer, this.hitBoss, null, this);
+
+    // ── RESIZE HANDLER ──
+    this.scale.on('resize', (gameSize) => {
+      this.cameras.main.setBounds(0, 0, Math.max(gameSize.width, this.W), Math.max(gameSize.height, this.H));
+    });
   }
 
   update(t, dt){
@@ -9475,6 +9491,11 @@ class DungeonScene extends Phaser.Scene {
 
     // Click to Slash
     this.input.on('pointerdown', () => this.playerSlash());
+
+    // ── RESIZE HANDLER ──
+    this.scale.on('resize', (gameSize) => {
+      this.cameras.main.setBounds(0, 0, Math.max(gameSize.width, this.W), Math.max(gameSize.height, this.H));
+    });
   }
 
   update(t, dt){
@@ -9955,6 +9976,11 @@ class FishingScene extends Phaser.Scene {
     this.holdTip = this.add.text(this.barX - 110, this.barY, 'HOLD SPACE\nTO REEL!', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'10px', color:'#4ADE80', align:'center', stroke:'#000', strokeThickness:3
     }).setOrigin(0.5).setVisible(false);
+
+    // ── RESIZE HANDLER ──
+    this.scale.on('resize', (gameSize) => {
+      this.cameras.main.setBounds(0, 0, Math.max(gameSize.width, this.W), Math.max(gameSize.height, this.H));
+    });
   }
 
   handleAction(){

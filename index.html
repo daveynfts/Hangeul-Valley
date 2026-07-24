@@ -61,6 +61,7 @@
       image-rendering: crisp-edges;
       image-rendering: pixelated;
       -ms-interpolation-mode: nearest-neighbor;
+      transition: width 0.1s ease, height 0.1s ease;
     }
 
     /* Korean & Vietnamese Typography Rules */
@@ -215,8 +216,8 @@
 
     /* ── MAIN HUD BAR & GROUPS ───────────────────────────────────────────── */
     #hud {
-      position: fixed; top: 10px; left: 14px;
-      max-width: calc(100vw - 300px);
+      position: fixed; top: 10px; left: 14px; right: 14px;
+      max-width: calc(100vw - 28px);
       z-index: 100;
       background: rgba(15, 23, 42, 0.88) !important;
       backdrop-filter: var(--glass-blur) !important;
@@ -226,7 +227,9 @@
       color: #e2e8f0; font-size: 14px; font-weight: 700;
       box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 10px 30px rgba(0, 0, 0, 0.7) !important;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      flex-wrap: wrap;
       user-select: none;
+      transition: max-width 0.15s ease, padding 0.15s ease;
     }
 
     .hud-group {
@@ -313,6 +316,7 @@
       color: var(--neon-green); font-family: 'VT323', monospace; font-size: 19px;
       display: flex; align-items: center; gap: 10px; pointer-events: none;
       box-shadow: 0 0 0 2px #0f172a, var(--glow-green);
+      transition: top 0.15s ease, right 0.15s ease;
     }
     #progress-bar-bg {
       width: 130px; height: 12px;
