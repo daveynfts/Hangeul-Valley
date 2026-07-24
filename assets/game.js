@@ -255,6 +255,8 @@ class PixelArtRenderer {
     this._genFishingTextures(scene);
     this._genArcadeTextures(scene);
     this._genDungeonTextures(scene);
+    this._genBossTextures(scene);
+    this._genPetTextures(scene);
     this.generateTilemapTextures(scene);
     this._genParticleTextures(scene);
     this._genLightingTextures(scene);
@@ -1060,6 +1062,24 @@ class PixelArtRenderer {
       g.fillStyle(0x06B6D4, 1); g.fillRect(21, 21, 6, 6);
     });
 
+    makeTile('tile_starfield', (g) => {
+      g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0xFFFFFF, 0.9); g.fillRect(6, 12, 3, 3); g.fillRect(36, 9, 3, 3); g.fillRect(21, 33, 3, 3);
+      g.fillStyle(0x38BDF8, 0.8); g.fillRect(12, 39, 2, 2); g.fillRect(42, 27, 2, 2);
+      g.fillStyle(0xFDE047, 0.8); g.fillRect(27, 15, 2, 2); g.fillRect(9, 24, 2, 2);
+      g.fillStyle(0xA855F7, 0.7); g.fillRect(30, 42, 2, 2); g.fillRect(18, 6, 2, 2);
+    });
+
+    makeTile('tile_cosmic_bridge', (g) => {
+      g.fillStyle(0x0F172A, 1); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x4338CA, 0.6); g.fillRect(0, 0, 48, 48);
+      g.fillStyle(0x6366F1, 0.8); g.fillRect(3, 3, 42, 42);
+      g.fillStyle(0x818CF8, 1);
+      g.fillRect(0, 0, 48, 3); g.fillRect(0, 45, 48, 3);
+      g.fillRect(0, 0, 3, 48); g.fillRect(45, 0, 3, 48);
+      g.fillStyle(0xC084FC, 0.9); g.fillRect(21, 21, 6, 6);
+    });
+
     // ── DUNGEON SCENE TILEMAP TEXTURES ───────────────────────────────────────
     makeTile('tile_dungeon_floor', (g) => {
       g.fillStyle(0x1E293B, 1); g.fillRect(0, 0, 48, 48);
@@ -1294,14 +1314,14 @@ class PixelArtRenderer {
   static _genPlayerTextures(scene) {
     const P = {
       '.': null,
-      'K': 0x121016, 'k': 0x251C2B,
-      'X': 0xFAD8B0, 'x': 0xEAA878, 'i': 0xC87858, 'I': 0x984838,
-      'f': 0x925A32, 'H': 0x6A3E1E, 'h': 0x42240E,
-      't': 0xF8D88E, 'T': 0xE4B663, 'V': 0xB88A3D, 'v': 0x805A20,
-      'R': 0xC0382B, 'r': 0x781D14, 'p': 0xE74C3C,
-      'w': 0xF0EAE1, 'F': 0xD0D5DD, 'g': 0x98A2B3,
-      'z': 0x5B6E9E, 'Z': 0x3B4D7A, 'q': 0x263354, 'Q': 0x161F38, 'b': 0xE8C840,
-      'L': 0x7E4F2B, 'S': 0x59381E, 's': 0x382210,
+      'K': 0x1A1A2E, 'k': 0x24243B,
+      'X': 0xFFE0C2, 'x': 0xF1B78B, 'i': 0xD38666, 'I': 0x9C533C,
+      'f': 0x8D5B3A, 'H': 0x653E23, 'h': 0x3D2314,
+      't': 0xF4D685, 'T': 0xDC9F42, 'V': 0xB37D2A, 'v': 0x7A5016,
+      'R': 0xC23B22, 'r': 0x731C13, 'p': 0xD94738,
+      'w': 0xF2ECE1, 'F': 0xD5CFBF, 'g': 0x999385,
+      'z': 0x4B6B94, 'Z': 0x334B73, 'q': 0x213252, 'Q': 0x141E36, 'b': 0xE6B830,
+      'L': 0x854B27, 'S': 0x5E3218, 's': 0x3B1F0E,
       'N': 0x121016, 'W': 0xFFFFFF,
       'n': 0x78350F, 'M': 0x64748B, 'd': 0x475569, 'U': 0x38BDF8, 'u': 0x6BB1D6, 'm': 0x94A3B8,
       'G': 0x22C55E, 'A': 0xEF4444, 'a': 0xFCA5A5, 'D': 0x7F1D1D, 'j': 0x78350F, 'Y': 0xFDE047, 'y': 0xEAB308, 'c': 0x94A3B8, 'C': 0xE2E8F0, 'e': 0x59381E, 'E': 0x78350F,
@@ -1309,444 +1329,444 @@ class PixelArtRenderer {
     };
 
     const down_0 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
+      '..KKKKKKKKKKKK..',
+      '..KKvTTTTTTvKK..',
+      '.KKvVVTTTTVVvKK.',
+      '..KKrRRRRRRrKK..',
+      '...KKfHHHHfKK...',
       '...KOXNWXNWXK...',
       '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KgFzBbZbzFgK..',
-      '..KgFBzZZzBFgK..',
-      '..KqzZ2JJ2ZzqK..',
-      '..KQzZ2222ZzQK..',
-      '..KQZZK..KZZQK..',
-      '..KQ22K..K22QK..',
-      '..KLSsK..KLSsK..',
-      '..K0sKK..K0sKK..'
+      '...KKXiXXIXKKKK.',
+      '..KKgFzBbZbzFgKK',
+      '..KKgFBzZZzBFgKK',
+      '..KKqzZ2JJ2ZzqKK',
+      '..KKQzZ2222ZzQKK',
+      '..KQZZKKKKZZQKK.',
+      '..KQ22KKKK22QK..',
+      '..K0sSKKKK0sSK..',
+      '..KKKKKKKKKKKK..'
     ];
     const down_1 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
+      '..KKKKKKKKKKKK..',
+      '..KKvTTTTTTvKK..',
+      '.KKvVVTTTTVVvKK.',
+      '..KKrRRRRRRrKK..',
+      '...KKfHHHHfKK...',
       '...KOXNWXNWXK...',
       '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '.KgFzBbZbzFgXK..',
-      '.KgFBzZZzBFgXK..',
-      '..KqzZ2JJ2ZzqK..',
-      '..KQzZ2222ZzQK..',
-      '.KQZZK...KZZQK..',
-      '.KQ22K...KQ2QK..',
-      '.KLSsK....KLSsK.',
-      '.K0sKK....K0sKK.'
+      '..KKKXiXXIXKKKK.',
+      '.KKgFzBbZbzFgXKK',
+      '.KKgFBzZZzBFgXKK',
+      '..KKqzZ2JJ2ZzqKK',
+      '.KKKQzZ2222ZzQKK',
+      '.KQZZKKKKKKZZQK.',
+      '.KQ22KKKKKKQ2QK.',
+      '.K0sSKKKKKK0sSK.',
+      '.KKKKKKKKKKKKKK.'
     ];
     const down_2 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
+      '..KKKKKKKKKKKK..',
+      '..KKvTTTTTTvKK..',
+      '.KKvVVTTTTVVvKK.',
+      '..KKrRRRRRRrKK..',
+      '...KKfHHHHfKK...',
       '...KOXNWXNWXK...',
       '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KXgFzBbZbzFgK.',
-      '..KXgFzZZzBFgK..',
-      '..KqzZ2JJ2ZzqK..',
-      '..KQzZ2222ZzQK..',
-      '..KQZQK...KZZQK.',
-      '..KQZQK...K22QK.',
-      '.KLSsK....KLSsK.',
-      '.K0sKK....K0sKK.'
+      '.KKKKXiXXIXKKK..',
+      'KKXgFzBbZbzFgKK.',
+      'KKXgFzZZzBFgKKK.',
+      '.KKKqzZ2JJ2ZzqKK',
+      '.KKKQzZ2222ZzQKK',
+      '.KQZQKKKKKKZZQK.',
+      '.KQZQKKKKKK22QK.',
+      '.K0sSKKKKKK0sSK.',
+      '.KKKKKKKKKKKKKK.'
     ];
 
     const up_0 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
+      '..KKKKKKKKKKKK..',
+      '..KKvTTTTTTvKK..',
+      '.KKvVVTTTTVVvKK.',
+      '..KKrRRRRRRrKK..',
+      '...KKhHHHHhKK...',
       '...KhHHHHHHhK...',
       '...KhHHHHHHhK...',
-      '...KhHHHHHHhK...',
-      '....KhxiixhK....',
-      '..KgFzBbZbzFgK..',
-      '..KgFBzZZzBFgK..',
-      '..KqzZ2JJ2ZzqK..',
-      '..KQzZ2222ZzQK..',
-      '..KQZZK..KZZQK..',
-      '..KQ22K..K22QK..',
-      '..KLSsK..KLSsK..',
-      '..K0sKK..K0sKK..'
+      '...KKhxiixhKKKK.',
+      '..KKgFzBbZbzFgKK',
+      '..KKgFBzZZzBFgKK',
+      '..KKqzZ2JJ2ZzqKK',
+      '..KKQzZ2222ZzQKK',
+      '..KQZZKKKKZZQKK.',
+      '..KQ22KKKK22QK..',
+      '..K0sSKKKK0sSK..',
+      '..KKKKKKKKKKKK..'
     ];
     const up_1 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
+      '..KKKKKKKKKKKK..',
+      '..KKvTTTTTTvKK..',
+      '.KKvVVTTTTVVvKK.',
+      '..KKrRRRRRRrKK..',
+      '...KKhHHHHhKK...',
       '...KhHHHHHHhK...',
       '...KhHHHHHHhK...',
-      '...KhHHHHHHhK...',
-      '....KhxiixhK....',
-      '.KgFzBbZbzFgXK..',
-      '.KgFBzZZzBFgXK..',
-      '..KqzZ2JJ2ZzqK..',
-      '..KQzZ2222ZzQK..',
-      '.KQZZK...KZZQK..',
-      '.KQ22K...KQ2QK..',
-      '.KLSsK....KLSsK.',
-      '.K0sKK....K0sKK.'
+      '..KKKhxiixhKKKK.',
+      '.KKgFzBbZbzFgXKK',
+      '.KKgFBzZZzBFgXKK',
+      '..KKqzZ2JJ2ZzqKK',
+      '.KKKQzZ2222ZzQKK',
+      '.KQZZKKKKKKZZQK.',
+      '.KQ22KKKKKKQ2QK.',
+      '.K0sSKKKKKK0sSK.',
+      '.KKKKKKKKKKKKKK.'
     ];
     const up_2 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
+      '..KKKKKKKKKKKK..',
+      '..KKvTTTTTTvKK..',
+      '.KKvVVTTTTVVvKK.',
+      '..KKrRRRRRRrKK..',
+      '...KKhHHHHhKK...',
       '...KhHHHHHHhK...',
       '...KhHHHHHHhK...',
-      '...KhHHHHHHhK...',
-      '....KhxiixhK....',
-      '..KXgFzBbZbzFgK.',
-      '..KXgFzZZzBFgK..',
-      '..KqzZ2JJ2ZzqK..',
-      '..KQzZ2222ZzQK..',
-      '..KQZQK...KZZQK.',
-      '..KQZQK...K22QK.',
-      '.KLSsK....KLSsK.',
-      '.K0sKK....K0sKK.'
+      '.KKKKhxiixhKKK..',
+      'KKXgFzBbZbzFgKK.',
+      'KKXgFzZZzBFgKKK.',
+      '.KKKqzZ2JJ2ZzqKK',
+      '.KKKQzZ2222ZzQKK',
+      '.KQZQKKKKKKZZQK.',
+      '.KQZQKKKKKK22QK.',
+      '.K0sSKKKKKK0sSK.',
+      '.KKKKKKKKKKKKKK.'
     ];
 
     const left_0 = [
-      '.....KtTTtK.....',
-      '...KvTTTTTTvK...',
-      '..KvVVTTTTTVvK..',
-      '...KrRRRRRRrK...',
-      '....KfHHHHhK....',
-      '...KOXNWfHHhK...',
-      '...KXOoXihhK....',
-      '....KXiIihK.....',
-      '...KgFzBbZqK....',
-      '...KXgFZZZqXK...',
-      '....KqZZZZqK....',
-      '....KQZZZZQK....',
-      '....KQZZZZQK....',
-      '....KQZZZZQK....',
-      '....KLSsLSsK....',
-      '....K0sKK0sK....'
+      '....KKKKKKKK....',
+      '...KKvTTTTvKK...',
+      '..KKvVVTTTVvKK..',
+      '...KKrRRRRrKK...',
+      '...KKKfHHHhKK...',
+      '..KKOXNWfHHhKK..',
+      '..KKXOoXihhKK...',
+      '...KKXiIihKKK...',
+      '...KKgFzBbZqKK..',
+      '..KKXgFZZZqXKK..',
+      '...KKKqZZZZqKK..',
+      '....KKQZZZZQK...',
+      '....KKQZZZZQK...',
+      '....KKQZZZZQKK..',
+      '....KK0sSK0sSK..',
+      '....KKKKKKKKKK..'
     ];
     const left_1 = [
-      '.....KtTTtK.....',
-      '...KvTTTTTTvK...',
-      '..KvVVTTTTTVvK..',
-      '...KrRRRRRRrK...',
-      '....KfHHHHhK....',
-      '...KOXNWfHHhK...',
-      '...KXOoXihhK....',
-      '....KXiIihK.....',
-      '..KXgFzBbZqK....',
-      '.KXgFzZZZqK.....',
-      '...KqZZZZqK.....',
-      '...KqZZZ.ZZqK...',
-      '..KQZZK...KZZQK.',
-      '.KQZZK.....KZZQK',
-      '.KLSsK.....KLSsK',
-      '.K0sKK.....K0sKK'
+      '....KKKKKKKK....',
+      '...KKvTTTTvKK...',
+      '..KKvVVTTTVvKK..',
+      '...KKrRRRRrKK...',
+      '...KKKfHHHhKK...',
+      '..KKOXNWfHHhKK..',
+      '..KKXOoXihhKK...',
+      '...KKXiIihKKK...',
+      '.KKKXgFzBbZqKK..',
+      'KKXgFzZZZqKKK...',
+      '.KKKKqZZZZqKKKK.',
+      '..KKKqZZZKKZZqK.',
+      '.KKQZZKKKKKZZQKK',
+      '.KQZZKKKKKKKZZQK',
+      '.K0sSKKKKKKK0sSK',
+      '.KKKKKKKKKKKKKKK'
     ];
     const left_2 = [
-      '.....KtTTtK.....',
-      '...KvTTTTTTvK...',
-      '..KvVVTTTTTVvK..',
-      '...KrRRRRRRrK...',
-      '....KfHHHHhK....',
-      '...KOXNWfHHhK...',
-      '...KXOoXihhK....',
-      '....KXiIihK.....',
-      '....KgFzBbZqXK..',
-      '....KgFZZZqXK...',
-      '.....KqZZZZqK...',
-      '....KqZZZ.ZZqK..',
-      '...KQZZK...KZZQK',
-      '..KQZZK.....KZZK',
-      '..KLSsK.....KLSK',
-      '..K0sKK.....K0sK'
+      '....KKKKKKKK....',
+      '...KKvTTTTvKK...',
+      '..KKvVVTTTVvKK..',
+      '...KKrRRRRrKK...',
+      '...KKKfHHHhKK...',
+      '..KKOXNWfHHhKK..',
+      '..KKXOoXihhKK...',
+      '...KKXiIihKKKKK.',
+      '....KKgFzBbZqXKK',
+      '....KKgFZZZqXKK.',
+      '.....KKqZZZZqKKK',
+      '...KKKqZZZKKZZqK',
+      '..KKQZZKKKKKZZQK',
+      '..KQZZKKKKKKKZZK',
+      '..K0sSKKKKKKK0sK',
+      '..KKKKKKKKKKKKKK'
     ];
 
     const right_0 = [
-      '.....KtTTtK.....',
-      '...KvTTTTTTvK...',
-      '..KvVTTTTTVVvK..',
-      '...KrRRRRRRrK...',
-      '....KhHHHHfK....',
-      '...KhHHfWNXOK...',
-      '....KhhiXoOXK...',
-      '.....KhiIiXK....',
-      '....KqZbBzFgK...',
-      '...KXqZZZFgXK...',
-      '....KqZZZZqK....',
-      '....KQZZZZQK....',
-      '....KQZZZZQK....',
-      '....KQZZZZQK....',
-      '....KsSLsSLK....',
-      '....Ks0KKs0K....'
+      '....KKKKKKKK....',
+      '...KKvTTTTvKK...',
+      '..KKvVTTTVVvKK..',
+      '...KKrRRRRrKK...',
+      '...KKKhHHHfKK...',
+      '..KKhHHfWNXOKK..',
+      '...KKhhiXoOXKK..',
+      '...KKKhiIiXKK...',
+      '..KKqZbBzFgKK...',
+      '..KKXqZZZFgXKK..',
+      '..KKqZZZZqKKK...',
+      '...KQZZZZQK.....',
+      '...KQZZZZQK.....',
+      '...KQZZZZQK.....',
+      '..KKsSLsSLKK....',
+      '..KKKKKKKKKK....'
     ];
     const right_1 = [
-      '.....KtTTtK.....',
-      '...KvTTTTTTvK...',
-      '..KvVTTTTTVVvK..',
-      '...KrRRRRRRrK...',
-      '....KhHHHHfK....',
-      '...KhHHfWNXOK...',
-      '....KhhiXoOXK...',
-      '.....KhiIiXK....',
-      '....KqZbBzFgXK..',
-      '.....KqZZZzFgXK.',
-      '.....KqZZZZqK...',
-      '...KqZZ.ZZZqK...',
-      '.KQZZK...KZZQK..',
-      'KQZZK.....KZZQK.',
-      'KsSLK.....KsSLK.',
-      'KKs0K.....KKs0K.'
+      '....KKKKKKKK....',
+      '...KKvTTTTvKK...',
+      '..KKvVTTTVVvKK..',
+      '...KKrRRRRrKK...',
+      '...KKKhHHHfKK...',
+      '..KKhHHfWNXOKK..',
+      '...KKhhiXoOXKK..',
+      '...KKKhiIiXKK...',
+      '..KKqZbBzFgXKK..',
+      '...KKqZZZzFgXKK.',
+      '.KKKKKqZZZZqKK..',
+      '.KqZZKKZZZqKKK..',
+      'KKQZZKKKKKZZQKK.',
+      'KQZZKKKKKKKZZQK.',
+      'KsSLKKKKKKKsSLK.',
+      'KKKKKKKKKKKKKKK.'
     ];
     const right_2 = [
-      '.....KtTTtK.....',
-      '...KvTTTTTTvK...',
-      '..KvVTTTTTVVvK..',
-      '...KrRRRRRRrK...',
-      '....KhHHHHfK....',
-      '...KhHHfWNXOK...',
-      '....KhhiXoOXK...',
-      '.....KhiIiXK....',
-      '..KXqZbBzFgK....',
-      '...KXqZZZFgK....',
-      '...KqZZZZqK.....',
-      '..KqZZ.ZZZqK....',
-      'KQZZK...KZZQK...',
-      'KZZK.....KZZQK..',
-      'KSLK.....KsSLK..',
-      'Ks0K.....KKs0K..'
+      '....KKKKKKKK....',
+      '...KKvTTTTvKK...',
+      '..KKvVTTTVVvKK..',
+      '...KKrRRRRrKK...',
+      '...KKKhHHHfKK...',
+      '..KKhHHfWNXOKK..',
+      '...KKhhiXoOXKK..',
+      '...KKKhiIiXKK...',
+      '..KKXqZbBzFgKK..',
+      '...KKXqZZZFgKK..',
+      '...KKKqZZZZqKK..',
+      'KKKKqZZKKZZZqK..',
+      'KQZZKKKKKZZQKK..',
+      'KZZKKKKKKKZZQK..',
+      'KSLKKKKKKKsSLK..',
+      'KKKKKKKKKKKKKK..'
     ];
 
     // Farmer Action Frames (Milestone 3 Redesign)
     const water_down_0 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
-      '...KOXNWXNWXK...',
+      '..KKKKKKKKKKKK..',
+      '.KKKvTTTTTTvKKK.',
+      'KKvVVTTTTTTVVvKK',
+      '.KKKrRRRRRRrKKK.',
+      '...KKfHhHHhHfKK.',
+      '...KOXNWXNWXKK..',
       '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KgFzBbZbzFKnK.',
-      '..KgFBzZZzBFKMmK',
-      '..KqzZ2JJ2ZKdMK.',
-      '..KQzZ2222ZKdMK.',
-      '..KQZZK..KZZKdK.',
-      '..KQ22K..K22QK..',
-      '..KLSsK..KLSsK..',
-      '..K0sKK..K0sKK..'
+      '..KKKXiXXIXKKKKK',
+      '..KKgFzBbZbzFKnK',
+      '..KKgFBzZZzBFKMK',
+      '..KKqzZ2JJ2ZKdMK',
+      '..KKQzZ2222ZKdMK',
+      '..KQZZKKKKZZKdKK',
+      '..KQ22KKKK22QKK.',
+      '..KLSsKKKKLSsK..',
+      '..KKKKKKKKKKKK..'
     ];
     const water_down_1 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
-      '...KOXNWXNWXK...',
-      '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KgFzBbZbzFK...',
-      '..KgFBzZZzBFKnK.',
-      '..KqzZ2JJ2ZKMmK.',
-      '..KQzZ2222ZKdMU.',
-      '..KQZZK..KZZKdW.',
-      '..KQ22K..K22QK.U',
-      '..KLSsK..KLSsK..',
-      '..K0sKK..K0sKK..'
+      '..KKKKKKKKKKKK..',
+      '.KKKvTTTTTTvKKK.',
+      'KKvVVTTTTTTVVvKK',
+      '.KKKrRRRRRRrKKK.',
+      '...KKfHhHHhHfKK.',
+      '...KOXNWXNWXKK..',
+      '...KXxXooXiXKK..',
+      '..KKKXiXXIXKKK..',
+      '..KKgFzBbZbzFKKK',
+      '..KKgFBzZZzBFKnK',
+      '..KKqzZ2JJ2ZKMmK',
+      '..KKQzZ2222ZKdUK',
+      '..KQZZKKKKZZKdWK',
+      '..KQ22KKKK22QKUK',
+      '..KLSsKKKKLSsKKK',
+      '..KKKKKKKKKKKK..'
     ];
     const water_down_2 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
-      '...KOXNWXNWXK...',
-      '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KgFzBbZbzFK...',
-      '..KgFBzZZzBFK...',
-      '..KqzZ2JJ2ZFKnK.',
-      '..KQzZ2222ZKMmK.',
-      '..KQZZK..KZZKdUU',
-      '..KQ22K..KZZKdWW',
-      '..KLSsK..KLSsKdU',
-      '..K0sKK..K0sKKuW'
+      '..KKKKKKKKKKKK..',
+      '.KKKvTTTTTTvKKK.',
+      'KKvVVTTTTTTVVvKK',
+      '.KKKrRRRRRRrKKK.',
+      '...KKfHhHHhHfKK.',
+      '...KOXNWXNWXKK..',
+      '...KXxXooXiXKK..',
+      '..KKKXiXXIXKKK..',
+      '..KKgFzBbZbzFKKK',
+      '..KKgFBzZZzBFKKK',
+      '..KKqzZ2JJ2ZFKnK',
+      '..KKQzZ2222ZKMmK',
+      '..KQZZKKKKZZKdUK',
+      '..KQ22KKKKZZKdWK',
+      '..KLSsKKKKLSsKdK',
+      '..KKKKKKKKKKKKKK'
     ];
 
     const harvest_down_0 = [
       '................',
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
-      '...KOXNWXNWXK...',
+      '..KKKKKKKKKKKK..',
+      '.KKKvTTTTTTvKKK.',
+      'KKvVVTTTTTTVVvKK',
+      '.KKKrRRRRRRrKKK.',
+      '...KKfHhHHhHfKK.',
+      '...KOXNWXNWXKK..',
       '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KgFzBbZbzFgK..',
-      '.KgFBzZZzBFgXK..',
-      '.KXqzZ2JJ2ZqXK..',
-      '.KXQzZ2222ZQK...',
-      '..KQZZK..KZZQK..',
-      '..KLSsK..KLSsK..',
-      '..K0sKK..K0sKK..'
+      '..KKKXiXXIXKKKK.',
+      '..KKgFzBbZbzFgKK',
+      '.KKgFBzZZzBFgXKK',
+      '.KKXqzZ2JJ2ZqXKK',
+      '.KKXQzZ2222ZQKK.',
+      '..KQZZKKKKZZQK..',
+      '..KLSsKKKKLSsK..',
+      '..KKKKKKKKKKKK..'
     ];
     const harvest_down_1 = [
       '................',
       '................',
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
-      '...KOXNWXNWXK...',
+      '..KKKKKKKKKKKK..',
+      '.KKKvTTTTTTvKKK.',
+      'KKvVVTTTTTTVVvKK',
+      '.KKKrRRRRRRrKKK.',
+      '...KKfHhHHhHfKK.',
+      '...KOXNWXNWXKK..',
       '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KgFzBbZbzFgK..',
-      '.KgFBzGAAgZBFgK.',
-      '.KXqZaAaAaXZqXK.',
-      '.KXQzZ2JJ2ZzqXK.',
-      '..KLSsKKKKLSsK..',
-      '..K0sKK..K0sKK..'
+      '..KKKXiXXIXKKKK.',
+      '..KKgFzBbZbzFgKK',
+      '.KKgFBzGAAgZBFgK',
+      'KKXqZaAaAaXZqXKK',
+      'KKXQZZsDDsZZQXKK',
+      '.KKLSsKKKKLSsKK.',
+      '..KKKKKKKKKKKK..'
     ];
     const harvest_down_2 = [
-      '....KgGAAgGk....',
-      '...KgXaAaAXgK...',
-      '....KXsDDsXK....',
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
-      '...KOXNWXNWXK...',
+      '..KKKKKKKKKKKK..',
+      '..KKgXaAaAXgKK..',
+      '...KKXsDDsXKK...',
+      '..KKKKtTTtKKKK..',
+      '.KKKvTTTTTTvKKK.',
+      'KKvVVTTTTTTVVvKK',
+      '.KKKrRRRRRRrKKK.',
+      '...KKfHhHHhHfKK.',
+      '...KOXNWXNWXKK..',
       '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KgFzBbZbzFgK..',
-      '..KgFBzZZzBFgK..',
-      '..KqzZ2JJ2ZzqK..',
-      '..KLSsK..KLSsK..',
-      '..K0sKK..K0sKK..'
+      '..KKKXiXXIXKKKK.',
+      '..KKgFzBbZbzFgKK',
+      '..KKgFBzZZzBFgKK',
+      '..KKqzZ2JJ2ZzqKK',
+      '..KLSsKKKKLSsKK.',
+      '..KKKKKKKKKKKK..'
     ];
 
     const pick_down_0 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
-      '...KOXNWXNWXK...',
-      '...KXxXooXiXK...',
-      '....KXiXXIXK.XK.',
-      '..KgFzBbZbzFgXK.',
-      '..KgFBzZZzBFgK..',
-      '..KqzZ2JJ2ZzqK..',
-      '..KQzZ2222ZzQK..',
-      '..KQZZK..KZZQK..',
-      '..KQ22K..K22QK..',
-      '..KLSsK..KLSsK..',
-      '..K0sKK..K0sKK..'
+      '..KKKKKKKKKKKK..',
+      '.KKKvTTTTTTvKKK.',
+      'KKvVVTTTTTTVVvKK',
+      '.KKKrRRRRRRrKKK.',
+      '...KKfHhHHhHfKK.',
+      '...KOXNWXNWXKK..',
+      '...KXxXooXiXKKK.',
+      '..KKKXiXXIXKKXKK',
+      '..KKgFzBbZbzFgXK',
+      '..KKgFBzZZzBFgKK',
+      '..KKqzZ2JJ2ZzqKK',
+      '..KKQzZ2222ZzQKK',
+      '..KQZZKKKKZZQKK.',
+      '..KQ22KKKK22QK..',
+      '..KLSsKKKKLSsK..',
+      '..KKKKKKKKKKKK..'
     ];
     const pick_down_1 = [
-      '.....KtTTtK..Gk.',
-      '..KvTTTTTTTTKXaK',
-      '.KvVVTTTTTTVVKaK',
-      '..KrRRRRRRRRKDK.',
-      '...KfHHHHHHfKgK.',
-      '...KOXNWXNWXK...',
+      '..KKKKKKKKKKKKKK',
+      '.KKKvTTTTTTTKXaK',
+      'KKvVVTTTTTTVVKaK',
+      '.KKKrRRRRRRRKDKK',
+      '...KKfHhHHhHfKgK',
+      '...KOXNWXNWXKKKK',
       '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KgFzBbZbzFgK..',
-      '..KgFBzZZzBFgK..',
-      '..KqzZ2JJ2ZzqK..',
-      '..KQzZ2222ZzQK..',
-      '..KQZZK..KZZQK..',
-      '..KQ22K..K22QK..',
-      '..KLSsK..KLSsK..',
-      '..K0sKK..K0sKK..'
+      '..KKKXiXXIXKKKK.',
+      '..KKgFzBbZbzFgKK',
+      '..KKgFBzZZzBFgKK',
+      '..KKqzZ2JJ2ZzqKK',
+      '..KKQzZ2222ZzQKK',
+      '..KQZZKKKKZZQKK.',
+      '..KQ22KKKK22QK..',
+      '..KLSsKKKKLSsK..',
+      '..KKKKKKKKKKKK..'
     ];
     const pick_down_2 = [
-      '.....KtTTtK.....',
-      '..KvTTTTTTTTvK..',
-      '.KvVVTTTTTTVVvK.',
-      '..KrRRRRRRRRrK..',
-      '...KfHHHHHHfK...',
-      '...KOXNWXNWXK...',
+      '..KKKKKKKKKKKK..',
+      '.KKKvTTTTTTvKKK.',
+      'KKvVVTTTTTTVVvKK',
+      '.KKKrRRRRRRrKKK.',
+      '...KKfHhHHhHfKK.',
+      '...KOXNWXNWXKK..',
       '...KXxXooXiXK...',
-      '....KXiXXIXK....',
-      '..KgFzBbZbzFgK..',
-      '..KgFBzZZzBFgKGk',
-      '..KqzZ2JJ2ZzqKKa',
-      '..KQzZ2222ZzQKDk',
-      '..KQZZK..KZZQK.K',
-      '..KQ22K..K22QK..',
-      '..KLSsK..KLSsK..',
-      '..K0sKK..K0sKK..'
+      '..KKKXiXXIXKKKK.',
+      '..KKgFzBbZbzFgKK',
+      '..KKgFBzZZzBFgKK',
+      '..KKqzZ2JJ2ZzqKK',
+      '..KKQzZ2222ZzQKK',
+      '..KQZZKKKKZZQKK.',
+      '..KQ22KKKK22QK..',
+      '..KLSsKKKKLSsK..',
+      '..KKKKKKKKKKKK..'
     ];
 
     // Standalone Tool Sprites (Milestone 3 Redesign)
     const tool_watering_can = [
       '................',
-      '......KKKK......',
-      '.....Kn...nK....',
-      '.....KnCCCnK....',
-      '.....KnmmmnK....',
-      '....KdMMMMMmK...',
-      '...KdCMMMMMMmK..',
-      '...KdMMMMMMMmK..',
-      '...KdMMMMMMMmKnK',
-      '...KdMMMMMMMmKdK',
-      '...KdddddddddK.U',
-      '....KKKKKKKKK.uW',
-      '................',
+      '....KKKKKKKK....',
+      '....KKnKKKnKK...',
+      '....KKnCCCnKK...',
+      '....KKnmmmnKK...',
+      '...KKdMMMMMmKK..',
+      '..KKdCMMMMMMmKK.',
+      '..KKdMMMMMMMmKKK',
+      '..KKdMMMMMMMmKnK',
+      '..KKdMMMMMMMmKdK',
+      '..KKdddddddddKUK',
+      '...KKKKKKKKKKKWK',
+      '.............KKK',
       '................',
       '................',
       '................'
     ];
     const tool_basket = [
-      '................',
-      '......KjjK......',
-      '.....Kj..jK.....',
-      '.....Kj..jK.....',
-      '....KjGAAgGjK...',
-      '...KgXaAaAXgK...',
-      '..KgAYsDDsYAaGK.',
-      '.KjYyYyYyYyYyYjK',
-      '.KjyYyYyYyYyYyjK',
-      '.KjYyYyYyYyYyYjK',
-      '.KjyYyYyYyYyYyjK',
-      '..KjjjjjjjjjjjK.',
-      '................',
+      '.....KKKKKK.....',
+      '.....KKjjKK.....',
+      '....KKjKKjKK....',
+      '....KKjKKjKKK...',
+      '...KKjGAAgGjKK..',
+      '..KKgXaAaAXgKKK.',
+      '.KKgAYsDDsYAaGKK',
+      'KKjYyYyYyYyYyYjK',
+      'KKjyYyYyYyYyYyjK',
+      'KKjYyYyYyYyYyYjK',
+      'KKjyYyYyYyYyYyjK',
+      '.KKjjjjjjjjjjjKK',
+      '.KKKKKKKKKKKKKKK',
       '................',
       '................',
       '................'
     ];
     const tool_sickle = [
       '................',
-      '.......KKKK.....',
-      '.....KKKCCCKK...',
-      '....KKCCcMMKK...',
-      '...KKCcMMdKK....',
-      '..KKCcMMdKK.....',
-      '..KCcMMdKK......',
-      '.KKCcMMdK.......',
-      '.KKCcMMdK.......',
-      '..KKcMdKK.......',
-      '...KKnnbK.......',
-      '....KKneK.......',
-      '.....KKneK......',
-      '......KKEKK.....',
-      '.......KK.......',
+      '......KKKKKK....',
+      '....KKKKCCCKKK..',
+      '...KKKCcMMKKK...',
+      '..KKKCcMMdKK....',
+      '.KKKCcMMdKK.....',
+      '.KKCcMMdKK......',
+      'KKKCcMMdK.......',
+      'KKKCcMMdK.......',
+      '.KKKcMdKK.......',
+      '..KKKnnbK.......',
+      '...KKKneKK......',
+      '....KKKneKK.....',
+      '.....KKKEKK.....',
+      '......KKKK......',
       '................'
     ];
 
@@ -3468,6 +3488,266 @@ class PixelArtRenderer {
     this.createTexture(scene, 'loot_potion', potion, P_POTION);
     this.createTexture(scene, 'loot_chest', chest, P_CHEST);
     this.createTexture(scene, 'loot_scroll', scroll, P_SCROLL);
+  }
+
+  static _genBossTextures(scene) {
+    if (!scene || !scene.textures || scene.textures.exists('boss_fire_golem')) return;
+
+    // 1. Fire Golem Boss
+    const P_FIRE_GOLEM = {
+      '.': null, 'K': 0x0F172A, 'r': 0x450A0A, 'R': 0x78350F,
+      'f': 0xB91C1C, 'F': 0xEF4444, 'o': 0xF97316, 'Y': 0xFDE047, 'W': 0xFFFFFF
+    };
+    const fire_golem = [
+      '.....KooooK.....',
+      '....KoffffoK....',
+      '..KKrrrrrrrrKK..',
+      '.KrrRFFFFFFRrrK.',
+      '.KrRFWYYYYWFREK.',
+      '.KrRFYWWWWYFRrK.',
+      '.KrrRFFFFFFRrEK.',
+      '..KKrrrrrrrrKK..',
+      '.KffRooooooooRffK',
+      'KffRYYYYYYYYYRffK',
+      'KffRYWYYYYWWYRFfK',
+      '.KffRooooooooRffK',
+      '..KKrrrrrrrrKK..',
+      '..KrRrK..KrRrK..',
+      '..KrRrK..KrRrK..',
+      '..KKKKK..KKKKK..'
+    ];
+
+    // 2. Shadow Dragon Boss
+    const P_SHADOW_DRAGON = {
+      '.': null, 'K': 0x0F172A, 'd': 0x1E1B4B, 'v': 0x312E81,
+      'p': 0x5B21B6, 'V': 0x7C3AED, 'E': 0xC084FC, 'W': 0xFFFFFF, 'w': 0x4C1D95
+    };
+    const shadow_dragon = [
+      'K...KK....KK...K',
+      'KwKKvdKKKKdvKKwK',
+      'KwwwvdvvvvdvwwwK',
+      '.KwwwvPPPPvwwwK.',
+      '..KwKPPEEPPKwK..',
+      '..KwPEWWWWEPwK..',
+      '..KwPEWWWWEPwK..',
+      '..KwKPPEEPPKwK..',
+      '...KvvVVVVvvK...',
+      '..KvvVVVVVVvvK..',
+      '.KvvVVpVVpVVvvK.',
+      '.KvvVVVVVVVVvvK.',
+      '..KvvVVVVVVvvK..',
+      '..KddK....KddK..',
+      '..KddK....KddK..',
+      '..KKKK....KKKK..'
+    ];
+
+    // 3. Ice Lich Boss
+    const P_ICE_LICH = {
+      '.': null, 'K': 0x0F172A, 'i': 0x0284C7, 'I': 0x0369A1,
+      'c': 0x38BDF8, 'C': 0x7DD3FC, 'W': 0xE0F2FE, 'S': 0xFFFFFF, 'm': 0x1E293B
+    };
+    const ice_lich = [
+      '.....KCSSCK.....',
+      '....KCCCCCCK....',
+      '...KcCCCCCCcK...',
+      '..KicKWWWWKciK..',
+      '..KiKWSWWSWKCiK.',
+      '..KiKWSWWSWKCiK.',
+      '..KicKWWWWKciK..',
+      '...KcCCCCCCcK...',
+      '..KmmCCCCCCmmK..',
+      '.KmmmCWWWW CmmmK',
+      '.KmmmCWSWSCmmmK.',
+      '.KmmmCWWWW CmmmK',
+      '..KmmCCCCCCmmK..',
+      '...KmmmmmmmmK...',
+      '....KmmmmmmK....',
+      '.....KKKKKK.....'
+    ];
+
+    // 4. Cyber Kraken Boss
+    const P_CYBER_KRAKEN = {
+      '.': null, 'K': 0x0F172A, 'k': 0x111827, 'd': 0x1F2937,
+      'n': 0x06B6D4, 'N': 0x22D3EE, 'p': 0xD946EF, 'P': 0xF0ABFC, 'W': 0xFFFFFF
+    };
+    const cyber_kraken = [
+      '....KKNNNNKK....',
+      '..KKNNWWWWNNKK..',
+      '.KNNddNNNNddNNK.',
+      'KNNdNNWWWWNNdNNK',
+      'KNNdNPWWWWPNdNNK',
+      'KNNdNPWWWWPNdNNK',
+      'KNNdNNWWWWNNdNNK',
+      '.KNNddNNNNddNNK.',
+      '..KKNNPPPPNNKK..',
+      '.KpPKNNNNNNKpPK.',
+      'KpP...KNNK...PpK',
+      'KpP...KNNK...PpK',
+      'KpP...KNNK...PpK',
+      '.KpPK.KNNK.KPpK.',
+      '..KKK.KKKK.KKK..',
+      '................'
+    ];
+
+    this.createTexture(scene, 'boss_fire_golem', fire_golem, P_FIRE_GOLEM);
+    this.createTexture(scene, 'boss_shadow_dragon', shadow_dragon, P_SHADOW_DRAGON);
+    this.createTexture(scene, 'boss_ice_lich', ice_lich, P_ICE_LICH);
+    this.createTexture(scene, 'boss_cyber_kraken', cyber_kraken, P_CYBER_KRAKEN);
+  }
+
+  static _genPetTextures(scene) {
+    if (!scene || !scene.textures || scene.textures.exists('pet_shiba')) return;
+
+    // 1. Pet Shiba
+    const P_PET_SHIBA = {
+      '.': null, 'K': 0x1A1A2E, 'y': 0xD97706, 'Y': 0xF59E0B,
+      'w': 0xFFFBEB, 'W': 0xFFFFFF, 'N': 0x1A1A2E, 'r': 0xF87171
+    };
+    const pet_shiba = [
+      '....KK.....KK...',
+      '...KyYK...KyYK..',
+      '..KYYYYKKKYYYYK.',
+      '..KYYWWYYYWWYYK.',
+      '..KYWNKWWWNKYK..',
+      '..KYYWWNNWWYYK..',
+      '...KYYYYrYYYYK..',
+      '....KKWWWWKK....',
+      '....KYYYYYYK.KK.',
+      '...KYYYYYYYYKYK.',
+      '...KYYWWWWYYKYK.',
+      '...KYYWWWWYYKK..',
+      '...KYYYYYYYYK...',
+      '....KYYK..KYYK..',
+      '....KYYK..KYYK..',
+      '....KKKK..KKKK..'
+    ];
+
+    // 2. Pet Cat
+    const P_PET_CAT = {
+      '.': null, 'K': 0x1A1A2E, 'o': 0xEA580C, 'O': 0xF97316,
+      'b': 0x334155, 'w': 0xFFFBEB, 'W': 0xFFFFFF, 'g': 0x22C55E, 'p': 0xF472B6
+    };
+    const pet_cat = [
+      '....KK.....KK...',
+      '...KoOK...KbBK..',
+      '..KoOOOKKKbBBK..',
+      '..KoOWWKKKWWbK..',
+      '..KoWgKWKWgObK..',
+      '..KoOWWpWWObK...',
+      '...KOOOOOOObK...',
+      '....KKWWWWKK....',
+      '....KoObbWWK..K.',
+      '...KoOObbWWK.KoK',
+      '...KoOObbWWKKoK.',
+      '...KoOObbWWKoK..',
+      '...KoOObbWWKK...',
+      '....KWWK..KWWK..',
+      '....KWWK..KWWK..',
+      '....KKKK..KKKK..'
+    ];
+
+    // 3. Pet Dragon
+    const P_PET_DRAGON = {
+      '.': null, 'K': 0x0F172A, 'g': 0x15803D, 'G': 0x22C55E,
+      'y': 0xFACC15, 'W': 0xFFFFFF, 'r': 0xEF4444, 'w': 0x166534
+    };
+    const pet_dragon = [
+      '.....KK...KK....',
+      '....KgGK.KgGK...',
+      '..KKGGGGKKGGGGK.',
+      '.KwKGGWWGGWWGGK.',
+      '.KwKGGWKWGWKGGK.',
+      '..KKGGGGGGGGGGK.',
+      '....KKGGyGGKK...',
+      '....KwKyyyKwK...',
+      '...KwKGGyyGGKwK.',
+      '..KKwKGGyyGGKwKK',
+      '.KwK.KGGyyGGK.Kw',
+      '.KwK.KGGGGGGK.Kw',
+      '..KK.KGGGGGGK..K',
+      '.....KgGK..KgGK.',
+      '.....KgGK..KgGK.',
+      '.....KKKK..KKKK.'
+    ];
+
+    // 4. Pet Slime
+    const P_PET_SLIME = {
+      '.': null, 'K': 0x0F172A, 'c': 0x06B6D4, 'C': 0x38BDF8,
+      'W': 0xFFFFFF, 'Y': 0xFDE047, 'p': 0xF472B6
+    };
+    const pet_slime = [
+      '................',
+      '......KKKK......',
+      '....KKCCCCKK....',
+      '...KCCCCCCCCK...',
+      '..KCCCWCCCCWCK..',
+      '..KCCCWCCCCWCK..',
+      '.KCCCCWCCCCWCCK.',
+      '.KCCpCCCCCCCCpCK',
+      '.KCCCCCCCYCCCCCK',
+      '.KCCCCCCCCCCCCCK',
+      '..KCCCCCCCCCCCK.',
+      '...KCCCCCCCCCK..',
+      '....KKCCCCCKK...',
+      '......KKKKK.....',
+      '................',
+      '................'
+    ];
+
+    // 5. Pet Fox
+    const P_PET_FOX = {
+      '.': null, 'K': 0x1A1A2E, 'o': 0xC2410C, 'O': 0xEA580C,
+      'w': 0xFFFBEB, 'W': 0xFFFFFF, 'N': 0x1A1A2E
+    };
+    const pet_fox = [
+      '..KK.......KK...',
+      '.KoOK.....KoOK..',
+      'KKooOKKKKKooOKK.',
+      'KoooOWWKKKWWooOK',
+      'KoooOWKOWKOWooOK',
+      '.KoooWWNWWoooOK.',
+      '..KoooooooooOK..',
+      '...KKWWWWWWWKK..',
+      '....KOOOOOOOK.KK',
+      '...KOOOOOOOOOKWo',
+      '...KOOOOWWWOOKWo',
+      '...KOOOOOOOOOKK.',
+      '...KOOOOOOOOOK..',
+      '....KooK..KooK..',
+      '....KooK..KooK..',
+      '....KKKK..KKKK..'
+    ];
+
+    // 6. Pet Penguin
+    const P_PET_PENGUIN = {
+      '.': null, 'K': 0x0F172A, 'b': 0x1E293B, 'B': 0x334155,
+      'w': 0xFFFBEB, 'W': 0xFFFFFF, 'y': 0xF59E0B, 'o': 0xF97316
+    };
+    const pet_penguin = [
+      '.....KKKKKK.....',
+      '...KKBBBBBBKK...',
+      '..KBBBWWWWBBBK..',
+      '.KBBBWBKWKBWBBK.',
+      '.KBBBWBKWKBWBBK.',
+      '.KBBBWWoKoWBBBK.',
+      '..KBBBWOOOOBBK..',
+      '..KBBKWWWWKBBK..',
+      '.KbBKWWWWWWKbBK.',
+      '.KbBKWWWWWWKbBK.',
+      '.KbBKWWWWWWKbBK.',
+      '.KbBKWWWWWWKbBK.',
+      '..KBBWWWWWWBBK..',
+      '...KKBBBBBBKK...',
+      '....KoOK..KoOK..',
+      '....KKKK..KKKK..'
+    ];
+
+    this.createTexture(scene, 'pet_shiba', pet_shiba, P_PET_SHIBA);
+    this.createTexture(scene, 'pet_cat', pet_cat, P_PET_CAT);
+    this.createTexture(scene, 'pet_dragon', pet_dragon, P_PET_DRAGON);
+    this.createTexture(scene, 'pet_slime', pet_slime, P_PET_SLIME);
+    this.createTexture(scene, 'pet_fox', pet_fox, P_PET_FOX);
+    this.createTexture(scene, 'pet_penguin', pet_penguin, P_PET_PENGUIN);
   }
 }
 
@@ -8072,6 +8352,52 @@ class FarmScene extends Phaser.Scene {
   }
 
   // ── GINGER CAT BEHAVIOR STATE MACHINE ───────────────────────────────────────
+  _updatePetCompanion(dt) {
+    if (!this.player || typeof petState === 'undefined' || !petState || !petState.activePet) {
+      if (this.petSprite) { this.petSprite.destroy(); this.petSprite = null; }
+      if (this.petShadow) { this.petShadow.destroy(); this.petShadow = null; }
+      return;
+    }
+    const petId = petState.activePet;
+    const petTexMap = {
+      dog: 'pet_shiba',
+      shiba: 'pet_shiba',
+      cat: 'pet_cat',
+      dragon: 'pet_dragon',
+      slime: 'pet_slime',
+      fox: 'pet_fox',
+      penguin: 'pet_penguin',
+      rabbit: 'pet_fox',
+      hamster: 'pet_shiba',
+      parrot: 'pet_dragon'
+    };
+    const texKey = petTexMap[petId] || 'pet_shiba';
+
+    if (!this.petSprite || this.petSprite.texture.key !== texKey) {
+      if (this.petSprite) this.petSprite.destroy();
+      this.petSprite = this.add.sprite(this.player.x - 24, this.player.y + 8, texKey)
+        .setScale(1.3).setDepth(this.player.depth - 1);
+      if (this.shadows) this.petShadow = this.shadows.createShadow(this.petSprite, 22, 8, 8);
+    }
+
+    // Smooth pet companion movement following player
+    const targetX = this.player.x + (this.player.flipX ? 28 : -28);
+    const targetY = this.player.y + 10;
+    const dist = Phaser.Math.Distance.Between(this.petSprite.x, this.petSprite.y, targetX, targetY);
+
+    if (dist > 16) {
+      const angle = Phaser.Math.Angle.Between(this.petSprite.x, this.petSprite.y, targetX, targetY);
+      const speed = Math.min(260, dist * 6);
+      this.petSprite.x += Math.cos(angle) * speed * (dt / 1000);
+      this.petSprite.y += Math.sin(angle) * speed * (dt / 1000);
+      this.petSprite.setFlipX(this.player.x < this.petSprite.x);
+    }
+
+    const petBaseY = this.petSprite.y + (this.petSprite.displayHeight * 0.5);
+    this.petSprite.setDepth(petBaseY);
+    if (this.petShadow) this.petShadow.setDepth(petBaseY - 1);
+  }
+
   _updateCatNPC(dt) {
     if (!this.catSprite || !this.player) return;
 
@@ -8182,6 +8508,7 @@ class FarmScene extends Phaser.Scene {
       }
     }
     if (this.lighting) this.lighting.update();
+    this._updatePetCompanion(dt);
 
     // Dynamic Y-sort depth sorting for NPCs (using static base Y anchors)
     if (this.shopNPC) this.shopNPC.setDepth(this.shopY || this.shopNPC.y);
@@ -9499,11 +9826,20 @@ class DungeonScene extends Phaser.Scene {
 
   spawnDungeonBoss(){
     if(this.bossPortal) this.bossPortal.destroy();
-    showToast('👹 KING SEJONG\'S CORRUPTED SENTINEL SPAWNED!', 4000);
-    const boss = this.add.sprite(this.W/2, 120, 'dungeon_boss').setOrigin(0.5).setDepth(30);
+    const bossList = [
+      { key: 'boss_fire_golem', name: '🔥 MOLTEN FIRE GOLEM' },
+      { key: 'boss_shadow_dragon', name: '🐉 VOID SHADOW DRAGON' },
+      { key: 'boss_ice_lich', name: '❄️ FROZEN ICE LICH' },
+      { key: 'boss_cyber_kraken', name: '🐙 CYBER KRAKEN' },
+      { key: 'dungeon_boss', name: '👹 KING SEJONG\'S CORRUPTED SENTINEL' }
+    ];
+    const chosen = Phaser.Utils.Array.GetRandom(bossList);
+    showToast(`👹 ${chosen.name} SPAWNED!`, 4000);
+    const boss = this.add.sprite(this.W/2, 120, chosen.key).setOrigin(0.5).setDepth(30);
     this.physics.add.existing(boss);
+    boss.setDisplaySize(64, 64);
     boss.body.setSize(60, 60);
-    boss.hp = 300;
+    boss.hp = 350;
     boss.moveSpeed = 85;
     boss.isBoss = true;
     boss.word = { ko: '왕', en: 'King' };

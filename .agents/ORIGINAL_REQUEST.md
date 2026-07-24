@@ -387,3 +387,102 @@ Tạo hiệu ứng cá nhảy lên khỏi mặt nước trên Crystal Pond ở F
 - [ ] Cá nhảy ambient xảy ra tự động mỗi vài giây (không cần player input)
 - [ ] `node -c game.js` pass (0 lỗi syntax)
 - [ ] `game.js` và `assets/game.js` đồng bộ hoàn toàn
+
+## Follow-up — 2026-07-24T07:59:14Z
+
+**Xóa bỏ hoàn toàn** sprite nhân vật chính hiện tại và **vẽ lại từ đầu** theo phong cách **Stardew Valley**. Nhân vật hiện tại vẫn xấu sau lần redesign trước — lần này phải đạt chất lượng ngang tầm Stardew Valley: chibi proportions rõ ràng, warm earthy palette, rich shading, 1px dark outlines, clothing layers detail, và facial expressions nhìn được dù ở pixel size nhỏ.
+
+Working directory: C:/VibeCode/Hangeul Valley
+Integrity mode: development
+
+## Stardew Valley Art Style Reference
+
+Phân tích kỹ từ game Stardew Valley — các đặc điểm PHẢI bắt chước:
+
+### Body Proportions (Chibi Style)
+- **Head chiếm ~40% chiều cao** nhân vật (row 1-6 trên 16 rows) — đầu tròn, rộng
+- **Body compact** (row 7-11) — thân ngắn, vai rộng, tay ngắn cute
+- **Legs ngắn** (row 12-16) — chân ngắn mập, boots rõ ràng
+- **Tổng thể**: nhân vật trông "mũm mĩm" dễ thương, KHÔNG gầy hay dài
+
+### Color & Shading (Warm Earthy Tones)
+- **Palette ấm áp**: tông nâu, cam, vàng, xanh denim — KHÔNG lạnh hay xám
+- **Mỗi vùng có 3-4 tones**: base + highlight (sáng hơn) + shadow (tối hơn) + deep shadow
+- **Skin**: peach/tan base + bright highlight ở trán/má + warm shadow ở cằm/cổ
+- **Hair**: 3 tones brown rõ ràng + bright highlight strand
+- **Clothing**: denim overalls với highlight ở vai + shadow ở nếp gấp
+- **1px dark outline** (`0x1A1A2E` hoặc tối tương tự) BAO QUANH toàn bộ silhouette
+
+### Facial Features (CRITICAL — điểm yếu lần trước)
+- **2 mắt rõ ràng**: mỗi mắt = 1px pupil (dark) + 1px white/highlight, đặt cách nhau ~4px
+- **Tóc mái che 1 phần trán** nhưng KHÔNG che mắt
+- **Skin tone khuôn mặt** phải fill đủ diện tích (~3 rows × 6-8 cols) để nhìn thấy biểu cảm
+- Front view: 2 mắt + miệng/blush optional
+- Side view: 1 mắt visible + profile mũi 1px nhô ra
+
+### Walk Animation (Smooth & Bouncy)
+- **Frame 0** (idle): đứng thẳng, 2 chân cạnh nhau
+- **Frame 1** (left step): chân trái bước ra trước, tay phải swing tới, body hơi nghiêng
+- **Frame 2** (right step): chân phải bước ra trước, tay trái swing tới, body hơi nghiêng ngược
+- SDV đặc trưng: nhân vật **bounce nhẹ** (body shift lên 1px ở mid-stride)
+- Sự khác biệt giữa 3 frames phải **RẤT RÕ** ở chân + tay, không chỉ khác 1-2 pixel
+
+## Context
+
+### Current System (KHÔNG thay đổi)
+- Method: `_genPlayerTextures(scene)` — line ~1294 trong `game.js`
+- Mỗi frame = ma trận 16×16 characters  
+- Palette object `P` (có thể THAY THẾ HOÀN TOÀN — user nói xóa bỏ phiên bản hiện tại)
+- Texture keys: `player_walk_down_0..2`, `player_walk_up_0..2`, etc.
+- Animations: `player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`
+- Action frames: `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`
+- Tool sprites: `tool_watering_can`, `tool_basket`, `tool_sickle`
+- Legacy aliases: `farmer0..3`
+- Player scale = 1.8x
+
+### Architecture Constraints
+- Ma trận PHẢI 16×16 characters
+- Single-character tokens, `.` = transparent
+- `PixelArtRenderer.drawMatrix()` renders sprites
+- Texture keys PHẢI giữ nguyên tên
+- Animation registration PHẢI giữ nguyên
+
+## Requirements
+
+### R1. Xóa bỏ hoàn toàn palette và sprites hiện tại, vẽ lại từ đầu theo phong cách Stardew Valley
+Thiết kế lại palette `P` hoàn toàn mới phù hợp phong cách Stardew Valley (warm earthy tones), và vẽ lại tất cả 12 walk cycle frames (4 hướng × 3 poses) từ đầu. Character design: farmer nam trẻ với mũ rơm, áo overalls xanh denim, boots nâu — theo đúng chibi proportions của Stardew Valley.
+
+### R2. Vẽ lại 9 action frames + 3 tool sprites theo style mới
+Tương tự R1, vẽ lại toàn bộ 9 action frames (watering/harvest/pick) và 3 tool sprites cho consistent với style SDV mới.
+
+### R3. Giữ nguyên tương thích hệ thống
+- Tất cả ma trận đúng 16×16
+- Tất cả texture keys giữ nguyên tên
+- Legacy farmer0..3 aliases vẫn hoạt động
+- Animation registration không thay đổi
+- `node -c game.js` pass
+- `game.js` và `assets/game.js` đồng bộ hoàn toàn
+
+## Acceptance Criteria
+
+### Stardew Valley Art Quality
+- [ ] Palette `P` hoàn toàn mới (≥30 tokens) với warm earthy tones — KHÔNG còn token palette cũ nếu không cần
+- [ ] Mỗi walk down frame: khuôn mặt chiếm ≥ 3 rows cao × 6 columns rộng (visible facial area)
+- [ ] Mỗi walk down frame: 2 mắt riêng biệt visible (mỗi mắt ≥ 1px pupil + 1px white)
+- [ ] Head chiếm ≥ 35% tổng chiều cao sprite (≥ 5.5 rows trên 16)
+- [ ] Mỗi hướng walk: 3 frames khác biệt ≥ 8 pixels ở phần chân + tay (không gần giống nhau)
+- [ ] 1px dark outline token bao quanh silhouette nhân vật (viền ngoài cùng)
+- [ ] Skin area có ≥ 3 distinct tones (base + highlight + shadow)
+- [ ] Clothing area có ≥ 3 distinct tones (base + highlight + shadow)
+
+### Consistency
+- [ ] Character design nhất quán qua tất cả 24 frames
+- [ ] Action frames cùng style với walk frames
+- [ ] Tool sprites detail tương đương
+
+### Technical Integrity
+- [ ] Tất cả 24 ma trận đều đúng 16×16 characters (mỗi row đúng 16 chars)
+- [ ] `node -c game.js` pass (0 lỗi syntax)
+- [ ] `game.js` và `assets/game.js` đồng bộ hoàn toàn
+- [ ] Legacy farmer0..3 textures vẫn được tạo đúng
+
