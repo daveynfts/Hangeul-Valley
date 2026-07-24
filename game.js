@@ -7583,38 +7583,6 @@ class FarmScene extends Phaser.Scene {
     pR(gwiz, 12, 2, 4, 4, 0x06B6D4); pR(gwiz, 13, 3, 2, 2, 0x67E8F9);
     gwiz.generateTexture('wizard_npc', 16*PS, 22*PS); gwiz.destroy();
 
-    // Player (4 walk frames)
-    for(let fr=0; fr<4; fr++){
-      const gp=mk();
-      const by = (fr===1 || fr===3) ? 1 : 0; // Body down 1px when stepping
-      
-      pR(gp,3,0+by,8,1,K.T); pR(gp,2,1+by,10,3,K.T); pR(gp,2,1+by,1,3,K.t); pR(gp,11,1+by,1,3,K.V);
-      pR(gp,2,1+by,10,1,K.t); pR(gp,2,3+by,10,1,K.V);
-      pR(gp,1,4+by,12,2,K.T); pR(gp,1,4+by,12,1,K.t); pR(gp,1,5+by,12,1,K.V);
-      pR(gp,2,4+by,10,1,0xEF4444); // Straw hat red ribbon
-      pR(gp,3,6+by,8,5,K.X); pR(gp,3,6+by,1,5,K.x); pR(gp,10,6+by,1,5,K.x);
-      pR(gp,4,8+by,1,1,K.J); pR(gp,5,8+by,1,1,K.N); pR(gp,8,8+by,1,1,K.J); pR(gp,9,8+by,1,1,K.N);
-      pR(gp,3,9+by,1,1,0xF472B6); pR(gp,10,9+by,1,1,0xF472B6); // Rosy cheeks
-      pR(gp,4,9+by,1,1,K.I); pR(gp,9,9+by,1,1,K.I); pR(gp,6,10+by,2,1,K.x);
-      pR(gp,2,11+by,10,4,K.Z); pR(gp,2,11+by,1,4,K.z); pR(gp,11,11+by,1,4,K.z);
-      pR(gp,0,11+by,3,4,K.Z); pR(gp,11,11+by,3,4,K.Z);
-      pR(gp,0,14+by,3,1,K.X); pR(gp,11,14+by,3,1,K.X);
-      pR(gp,4,12+by,6,2,K.q);
-      pR(gp,6,15+by,2,1,0xF59E0B); // Overalls bronze belt buckle
-      pR(gp,2,15+by,10,4,K.Q); pR(gp,2,15+by,1,4,K.q); pR(gp,11,15+by,1,4,K.q);
-      
-      let ly=0, ry=0;
-      let lL=K.Q, rL=K.q, lB=K.R, rB=K.r; // Stand / idle shading
-      if(fr===1) { ly=-2; lL=K.q; rL=K.Q; lB=K.r; rB=K.R; } // Left foot step
-      else if(fr===3) { ry=-2; lL=K.Q; rL=K.q; lB=K.R; rB=K.r; } // Right foot step
-      else if(fr===2) { lL=K.q; rL=K.Q; lB=K.r; rB=K.R; } // Opposite stand phase
-      
-      pR(gp,2,19+by+ly,4,3,lL); pR(gp,8,19+by+ry,4,3,rL);
-      pR(gp,2,22+by+ly,5,2,lB); pR(gp,8,22+by+ry,5,2,rB);
-      pR(gp,2,23+by+ly,5,1,K.r); pR(gp,8,23+by+ry,5,1,K.r);
-      
-      gp.generateTexture('farmer'+fr,14*PS,25*PS); gp.destroy();
-    }
 
     // Crops (5 types × 3 stages) - Stardew Valley warm earthy tones
     const CC=[

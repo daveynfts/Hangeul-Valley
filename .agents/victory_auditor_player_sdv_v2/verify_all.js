@@ -3,7 +3,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { execSync } = require('child_process');
 
-const rootDir = 'C:/VibeCode/Hangeul Valley';
+const rootDir = fs.existsSync('C:/VibeCode/Hangeul Valley/game.js') ? 'C:/VibeCode/Hangeul Valley' : path.resolve(__dirname, '../..');
 const gameJsPath = path.join(rootDir, 'game.js');
 const assetsGameJsPath = path.join(rootDir, 'assets/game.js');
 

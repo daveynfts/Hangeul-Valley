@@ -1,41 +1,19 @@
-## 2026-07-23T01:44:40Z
-<USER_REQUEST>
-You are Explorer 1 (HTML Top Area Inspector).
-Your working directory is: `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1`
-Project root: `C:\VibeCode\Hangeul Valley`
-Scope document: `C:\VibeCode\Hangeul Valley\.agents\orchestrator\PROJECT.md`
+## 2026-07-24T11:27:45Z
+You are Explorer 1 for Milestone 1 of Hangeul Valley Main Character Redesign.
+Your working directory is: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1
+Project root is: d:\Hangeul Valley
 
-Objective:
-1. Create your working directory `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1` if needed and write `progress.md` with liveness timestamp.
-2. Inspect `C:\VibeCode\Hangeul Valley\index.html` (and check `assets/index.html`).
-3. Examine `#hud`, `#event-banner`, `#progress-bar-wrap`, and all top-level HUD elements.
-4. List all 15+ items inside or near the HUD, including their element IDs, HTML classes, icons, titles, current inline styles or CSS rules, and `onclick` handlers.
-5. Check how `#event-banner` and `#progress-bar-wrap` are positioned relative to `#hud`.
-6. Write a comprehensive analysis to `analysis.md` and a summary `handoff.md` in your working directory. Send a message to the parent (orchestrator) with the handoff summary and path. Do NOT modify source code files.
-
-## 2026-07-23T03:13:51Z
-<USER_REQUEST>
-You are Explorer 1 (Character Sprites Specialist) for the Hangeul Valley Pixel Art Quality Upgrade project.
-Your working directory is: C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_1/
-Please create your working directory if it does not exist, and initialize your BRIEFING.md and progress.md there.
-
-Your mission is to inspect C:/VibeCode/Hangeul Valley/game.js and design professional-grade, multi-tone 16x16 pixel art matrices for ALL character sprites:
-1. Farmer character:
-   - 12 Walk cycle frames: player_walk_down_0/1/2, player_walk_up_0/1/2, player_walk_left_0/1/2, player_walk_right_0/1/2
-   - 9 Action frames: player_water_down_0/1/2, player_harvest_down_0/1/2, player_pick_down_0/1/2
-   - Tools: tool_watering_can, tool_basket
-2. Ginger Cat NPC:
-   - 8 Animation frames: cat_idle_0/1, cat_walk_0/1, cat_sit_0/1, cat_sleep_0/1, plus cat_npc legacy texture key
-3. Wizard Merlin NPC:
-   - 2 Idle frames: wizard_idle_0/1
-
-Requirements for your design specs:
-- Multi-tone shading: Each major color area MUST use at least 3 distinct tones (e.g. highlight, base, shadow, deep shadow). Define exact hex color codes for STARDEW_PALETTE additions.
-- Anatomical detail: Visible arms/hands separate from body, proper head-to-body proportions, clothing folds.
-- Pixel polish: Consistent 1px dark outline (e.g. symbol 'K' = 0x121016), anti-aliasing pixels at curved edges, dithering textures on hat/overalls/fur.
-- Frame fluidity: Weight shifts, arm swings, clear action poses.
-- 100% key parity: Ensure all existing texture keys remain unchanged.
-
-Write your full analysis and matrix design specifications to C:/VibeCode/Hangeul Valley/.agents/teamwork_preview_explorer_m1_1/analysis.md and send a handoff message with your findings.
-</USER_REQUEST>
-
+Objectives:
+1. Create your working directory if needed, and write your BRIEFING.md and initial progress.md.
+2. Investigate `d:\Hangeul Valley\game.js` to map ALL code related to main character sprite generation, texture baking, palette definition, animation keys, and tool sprites.
+3. Specifically identify:
+   - Function `_genPlayerTextures(scene)` and its exact line numbers/structure.
+   - Palette object `P` (all token characters, color hexes, and usage).
+   - All 12 walk frame matrices (`player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`).
+   - Action frame matrices (`player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`).
+   - Tool sprite matrices (`tool_watering_can`, `tool_basket`, `tool_sickle`).
+   - Legacy aliases (`farmer0..3`).
+   - Animation registration calls (`anims.create` for `player-walk-down`, `player-walk-up`, etc.).
+4. Formulate a clear, step-by-step strategy for how a Worker can completely wipe and replace the existing palette and matrix definitions with a high-quality Stardew Valley Chibi 1:2 pixel art character.
+5. Document all your evidence and findings in `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\analysis.md`.
+6. Write a complete handoff report in `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\handoff.md` and notify parent when done.

@@ -1,36 +1,36 @@
-# BRIEFING — 2026-07-23T10:15:00+07:00
+# BRIEFING — 2026-07-24T18:28:28+07:00
 
 ## Mission
-Inspect `C:/VibeCode/Hangeul Valley/game.js` and design professional-grade, multi-tone 16x16 pixel art matrices for ALL character sprites (Farmer walk cycle, action frames, tools, Ginger Cat NPC, and Wizard Merlin NPC).
+Investigate game.js for main character sprite generation, texture baking, palettes, animation keys, tool sprites, and formulate replacement strategy.
 
 ## 🔒 My Identity
-- Archetype: Explorer 1 (Character Sprites Specialist)
-- Roles: Read-only character sprite designer & analyst
-- Working directory: C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1
-- Original parent: 2e596daa-9447-48df-b80a-96eb3091b561
-- Milestone: Hangeul Valley Pixel Art Quality Upgrade - Milestone 1 (Character Sprites)
+- Archetype: Explorer
+- Roles: Explorer 1
+- Working directory: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1
+- Original parent: e0ee9bc0-52f9-4591-ab9f-3be595ee9892
+- Milestone: Milestone 1 - Main Character Redesign
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT modify source code files.
-- Deliver analysis and full matrix design specifications in `analysis.md` and handoff report in `handoff.md`.
-- Multi-tone shading: Each major color area MUST use at least 3 distinct tones.
-- 100% key parity: Ensure all existing texture keys remain unchanged.
+- Read-only investigation — do NOT implement code changes to game.js
+- Document all evidence and findings in analysis.md and handoff.md
 
 ## Current Parent
-- Conversation ID: 2e596daa-9447-48df-b80a-96eb3091b561
-- Updated: 2026-07-23T10:15:00+07:00
+- Conversation ID: e0ee9bc0-52f9-4591-ab9f-3be595ee9892
+- Updated: 2026-07-24T18:28:28+07:00
 
 ## Investigation State
-- **Explored paths**: `C:/VibeCode/Hangeul Valley/game.js`
-- **Key findings**: [TBD - Investigating character texture generation in game.js]
-- **Unexplored areas**: Existing texture keys, palette definitions, matrix representations in game.js
+- **Explored paths**: `d:\Hangeul Valley\game.js`, `d:\Hangeul Valley\assets\game.js`, `.agents\victory_auditor_player_sdv_v2\verify_all.js`
+- **Key findings**: `_genPlayerTextures` mapped (lines 1314–1828), Palette P mapped (48 tokens), 24 matrices mapped (12 walk, 9 action, 3 tools), legacy aliases `farmer0..3` mapped, 7 animation registrations mapped, auditor criteria integrated into replacement strategy.
+- **Unexplored areas**: None for Milestone 1 Explorer 1.
 
 ## Key Decisions Made
-- Commenced character sprite pixel matrix design process for all required character frames.
+- Completed full read-only codebase mapping of `_genPlayerTextures`.
+- Formulated step-by-step strategy for Worker agent replacement.
+- Written comprehensive `analysis.md` and `handoff.md`.
 
 ## Artifact Index
-- `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\ORIGINAL_REQUEST.md` — Original request log
-- `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\progress.md` — Heartbeat and task progress
-- `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\BRIEFING.md` — Briefing document
-- `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\analysis.md` — Full analysis and pixel art matrix design specs
-- `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\handoff.md` — Summary handoff report
+- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\ORIGINAL_REQUEST.md — Original user request log
+- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\BRIEFING.md — Working memory index
+- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\progress.md — Progress log
+- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\analysis.md — Complete technical analysis report
+- d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\handoff.md — 5-component handoff report
