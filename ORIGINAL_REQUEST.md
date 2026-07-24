@@ -514,5 +514,34 @@ Nâng cấp toàn bộ sprites Dungeon trong `_genDungeonTextures()`: 4 enemies 
 - [ ] `game.js` và `assets/game.js` đồng bộ hoàn toàn (byte-identical).
 - [ ] Player Farmer, Ginger Cat, Wizard Merlin sprites KHÔNG bị thay đổi so với bản hiện tại.
 
+## Follow-up — 2026-07-24T12:15:09Z
+
+Enhance the main character sprite in Hangeul Valley with richer micro pixel details (sub-pixel shading, accessory highlights, outfit texture details, hair strands, expression nuances) for a more polished and premium pixel art look. Additionally, completely remove the entire pet companion system (pet textures, pet state, pet overlay UI, pet following logic, pet passive bonuses, pet save/load data) from the codebase.
+
+Working directory: d:\Hangeul Valley
+Integrity mode: development
+
+## Requirements
+
+### R1. Main Character Micro Pixel Enhancement
+Upgrade the existing main character sprite with richer micro pixel details: more nuanced sub-pixel shading, visible clothing texture (stitching on overalls, shirt creases), hair strand highlights, accessory polish (straw hat brim detail, shoe lacing), and subtle facial expression refinements. The character should look noticeably more detailed and premium while maintaining the existing Stardew Valley Chibi 1:2 art style and color palette.
+
+### R2. Complete Pet System Removal
+Completely remove all pet companion functionality from the codebase. This includes: pet texture generation (`_genPetTextures`, all `pet_shiba/cat/dragon/slime/fox/penguin` textures), pet state management (`petState`, `activePet`), pet following/movement logic (`_updatePetCompanion`, `petSprite`, `petShadow`), pet UI overlay (`pet-overlay`), pet passive bonuses (`isPetActive`, `getPetPassiveMultiplier`, `addPetXP`), and pet data in save/load functions (`collectSave`, `applySave`). The game must run cleanly with zero errors after removal.
+
+## Acceptance Criteria
+
+### Character Enhancement Verification
+- [ ] Main character sprite textures contain more color tokens/shading detail than the current version (measurable by counting unique fill colors in the bake routine).
+- [ ] All 4-directional walk animation frames are preserved and functional after enhancement.
+- [ ] No visual regression — character scale, shadow, depth-sort, and collision remain correct.
+
+### Pet System Removal Verification
+- [ ] Zero references to `petState`, `petSprite`, `petShadow`, `_updatePetCompanion`, `_genPetTextures`, `isPetActive`, `getPetPassiveMultiplier`, `addPetXP` remain in game.js or assets/game.js.
+- [ ] Zero references to `pet-overlay` remain in index.html or assets/index.html.
+- [ ] `node -c game.js` and `node -c assets/game.js` pass with 0 syntax errors.
+- [ ] The game loads and runs without any console errors related to missing pet functions or undefined pet variables.
+
+
 
 

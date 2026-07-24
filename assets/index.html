@@ -1161,14 +1161,14 @@
       max-width: 560px; width: 92%; box-shadow: 0 0 0 2px #0f172a, var(--glow-pink), 0 20px 60px rgba(0,0,0,.95);
       text-align: center; position: relative;
     }
-    /* ── R3 CRAFTING/COOKING & R4 PET OVERLAYS ──────────────────────────────── */
-    #recipe-overlay, #cooking-minigame-overlay, #cultural-fact-overlay, #pet-overlay {
+    /* ── R3 CRAFTING/COOKING OVERLAYS ──────────────────────────────── */
+    #recipe-overlay, #cooking-minigame-overlay, #cultural-fact-overlay {
       position: fixed; inset: 0; z-index: 890; display: none;
       background: rgba(10, 15, 30, 0.88); backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       align-items: center; justify-content: center; animation: fadeIn .2s;
     }
-    #recipe-overlay.visible, #cooking-minigame-overlay.visible, #cultural-fact-overlay.visible, #pet-overlay.visible {
+    #recipe-overlay.visible, #cooking-minigame-overlay.visible, #cultural-fact-overlay.visible {
       display: flex;
     }
     .recipe-grid {
@@ -1193,22 +1193,7 @@
     .cook-btn:hover { opacity: 0.9; transform: scale(1.02); }
     .cook-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
-    .pet-roster-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-top: 14px;
-    }
-    .pet-card {
-      background: rgba(30, 41, 59, 0.7); border: 1.5px solid rgba(168, 85, 247, 0.4);
-      border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px;
-      align-items: center; box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: all 0.15s;
-    }
-    .pet-card.active { border-color: var(--neon-gold); box-shadow: 0 0 16px rgba(245, 158, 11, 0.5); }
-    .pet-card-avatar { font-size: 40px; }
-    .pet-card-name { font-family: 'Press Start 2P', monospace; font-size: 11px; color: #fff; }
-    .pet-card-level { font-size: 10px; color: var(--neon-pink); font-weight: bold; }
-    .pet-card-passive { font-size: 10px; color: #94a3b8; text-align: center; background: rgba(15,23,42,0.6); padding: 6px; border-radius: 6px; width: 100%; }
-    .pet-bar-bg { width: 100%; height: 10px; background: rgba(15,23,42,0.8); border-radius: 5px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-    .pet-bar-fill-xp { height: 100%; background: linear-gradient(90deg, #a855f7, #ec4899); transition: width 0.3s; }
-    .pet-bar-fill-happy { height: 100%; background: linear-gradient(90deg, #22c55e, #10b981); transition: width 0.3s; }
+
 
     .buff-badge {
       background: rgba(15, 23, 42, 0.9); border: 1px solid var(--neon-cyan); color: var(--neon-cyan);
@@ -1312,7 +1297,6 @@
       <button class="hud-btn" id="shop-btn" title="Seed shop">🏪 Shop</button>
       <button class="hud-btn" id="quest-btn" title="Quest Log" onclick="openQuestOverlay()">📜 Quests</button>
       <button class="hud-btn" id="recipe-btn" title="Recipe Book (요리책)" onclick="openRecipeBook()">🍳 Cook</button>
-      <button class="hud-btn" id="pet-btn" title="Pet Companions (반려동물)" onclick="openPetOverlay()">🐾 Pets</button>
       <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
       <button class="hud-btn" id="hud-more-btn" title="More Features" onclick="toggleHudOverflow(event)">➕ More</button>
       <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level Menu">☰ Menu</button>
@@ -1757,30 +1741,6 @@
     </div>
   </div>
 
-  <!-- ══════════════ PET COMPANION (반려동물) OVERLAY ══════════════ -->
-  <div id="pet-overlay">
-    <div id="pet-panel" class="glass-modal" style="max-width:760px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(168,85,247,0.4); padding-bottom:14px; margin-bottom:16px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <span style="font-size:32px">🐾</span>
-          <div>
-            <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:#c084fc">PET COMPANIONS (반려동물)</div>
-            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Collect cute companions, level up with Korean quizzes & earn passive bonuses!</div>
-          </div>
-        </div>
-        <button onclick="closePetOverlay()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
-      </div>
-
-      <!-- Active Pet Overview Card -->
-      <div id="pet-active-card" style="background:rgba(30,41,59,0.8); border:2px solid var(--neon-purple); border-radius:16px; padding:18px; margin-bottom:18px; display:flex; gap:16px; align-items:center;">
-        <!-- Rendered by JS -->
-      </div>
-
-      <!-- Pet Roster -->
-      <div style="font-family:'Press Start 2P',monospace; font-size:11px; color:#c084fc; margin-bottom:8px">🐾 Pet Roster & Adoption:</div>
-      <div id="pet-roster-container" class="pet-roster-grid"></div>
-    </div>
-  </div>
 
   <!-- ══════════════ SEASONAL EVENT MODAL ══════════════ -->
   <div id="seasonal-overlay">
@@ -1849,7 +1809,6 @@
         <button class="lb-tab-btn active" id="lbtab-vocab" onclick="switchLeaderboardTab('vocab')">📖 Vocab Master</button>
         <button class="lb-tab-btn" id="lbtab-honor" onclick="switchLeaderboardTab('honor')">🎖️ Total Honor</button>
         <button class="lb-tab-btn" id="lbtab-cooking" onclick="switchLeaderboardTab('cooking')">🍳 Cooking Tier</button>
-        <button class="lb-tab-btn" id="lbtab-pets" onclick="switchLeaderboardTab('pets')">🐾 Pet Collection</button>
         <button class="lb-tab-btn" id="lbtab-arcade" onclick="switchLeaderboardTab('arcade')">👾 Arcade Score</button>
         <button class="lb-tab-btn" id="lbtab-dungeon" onclick="switchLeaderboardTab('dungeon')">🗡️ Dungeon Floor</button>
         <button class="lb-tab-btn" id="lbtab-duel" onclick="switchLeaderboardTab('duel')">⚡ Duel Streak</button>

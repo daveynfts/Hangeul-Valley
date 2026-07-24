@@ -1,76 +1,66 @@
-# Summary of Changes - Worker M2 (HUD Layout & UI/UX Implementer - Fix Pass)
+# M2 Pet Companion System Removal — Changes Documentation
 
-## Overview
-Implemented the 2-Tier Responsive Floating Dock Architecture and HUD Sub-Grouping in `index.html`, fixed the 1024px desktop viewport horizontal overlap issue by updating `#hud` `max-width` from `calc(100vw - 260px)` to `calc(100vw - 300px)`, and synchronized all changes identically to `assets/index.html`.
+## Executive Summary
+All elements of the Pet Companion System (반려동물) have been completely removed from `game.js`, `assets/game.js`, `index.html`, and `assets/index.html` in accordance with the blueprint mapped in `analysis.md`. All dictionary entries in `VOCAB_FACTS` (such as "civil petitioner" and "civil petition") were strictly preserved.
+
+---
 
 ## Files Modified
-- `index.html`: Main game interface file updated with redesigned top HUD CSS, sub-grouped markup, 2-tier banner/progress layout, overflow dropdown menu, responsive media queries, JS overflow toggle controller, and updated desktop `#hud` `max-width: calc(100vw - 300px)`.
-- `assets/index.html`: Identically synchronized mirror file (verified byte-for-byte matching).
-- `.agents\teamwork_preview_challenger_m3_1\layout_overlap_test.js`: Updated to dynamically parse `#hud` `max-width` `calc(100vw - Npx)` from `index.html`.
+1. `game.js`
+2. `assets/game.js` (Synchronized 1:1 copy of `game.js`)
+3. `index.html`
+4. `assets/index.html` (Synchronized 1:1 copy of `index.html`)
 
-## Detailed Modifications
+---
 
-### 1. 1024px Viewport Overlap Fix (Fix Pass)
-- **CSS `max-width` Adjustment**: Updated `#hud` rule in `index.html` (and mirrored `assets/index.html`) from `max-width: calc(100vw - 260px);` to `max-width: calc(100vw - 300px);`.
-- **Layout Math at 1024px Viewport**:
-  - `#hud` `max-width` = `1024 - 300 = 724px`.
-  - `#hud` right edge = `left (14px) + width (724px) = 738px`.
-  - `#progress-bar-wrap` left edge = `1010px - 253px = 757px`.
-  - Clean horizontal clearance = `757px - 738px = 19px` (>19px clean clearance, zero pixel collision).
+## Detailed Breakdown of Removals by Subsystem
 
-### 2. CSS Redesign (`index.html` style block)
-- **`#hud`**: Set `top: 10px; left: 14px; max-width: calc(100vw - 300px); z-index: 100; display: flex; justify-content: space-between; gap: 12px; border-radius: 14px; padding: 6px 14px`.
-- **HUD Sub-Groups**:
-  - `.hud-group`: `display: flex; align-items: center; gap: 8px; flex-shrink: 0;`
-  - `#hud-status-group`: Status indicators (`Press Start 2P`, 11px, `--neon-gold`).
-  - `#hud-currency-group`: Coins, gems, honor badges with subtle white borders (`padding: 0 10px; border-left/right: 1px solid rgba(255,255,255,0.15)`).
-  - `#hud-actions-group`: Button container with `position: relative` for overflow dropdown anchoring.
-- **`#hud-overflow-menu` & `.hud-overflow-item`**:
-  - `#hud-overflow-menu`: Dropdown anchored to bottom-right of action group (`position: absolute; top: calc(100% + 8px); right: 0; z-index: 950`), styled with glassmorphism backdrop, `--neon-gold` border, popIn animation.
-  - `.hud-overflow-item`: Full-width left-aligned buttons (`width: 100%; text-align: left; font-size: 10px; padding: 8px 12px`).
-- **`#event-banner` (Tier 2 Sub-Banner)**: Set `top: 66px; left: 50%; transform: translateX(-50%); z-index: 850; max-width: 90vw`. Shifted down to Tier 2 so it floats centered below top docking bar without overlap.
-- **`#progress-bar-wrap`**: Set `top: 10px; right: 14px; z-index: 100; height: 44px; padding: 6px 14px 6px 12px`.
-- **Responsive Media Queries**:
-  - `@media (max-width: 768px)`: Re-anchors `#hud` (`top: 8px; left: 8px; right: 8px`), adjusts `#progress-bar-wrap` (`top: 64px`), and shifts `#event-banner` to Tier 2 mobile height (`top: 106px`).
-  - `@media (max-width: 480px)`: Adjusts padding and shifts `#progress-bar-wrap` (`top: 86px`) and `#event-banner` (`top: 128px; max-width: 96vw`).
+### Subsystem 1: Pet Textures
+- Removed call `this._genPetTextures(scene);` from `TextureGenerator.generateAll()`.
+- Removed entire static method `static _genPetTextures(scene) { ... }` which generated pixel matrices and textures for `pet_shiba`, `pet_cat`, `pet_dragon`, `pet_slime`, `pet_fox`, and `pet_penguin`.
 
-### 3. HTML Markup Restructuring (`index.html`)
-Restructured `#hud` into 3 distinct sub-groups:
-- **Status Group (`#hud-status-group`)**: Level icon `🌾`, `#hud-level`, `#hud-sep`, `#hud-progress`, `#active-buff-bar`.
-- **Currency Group (`#hud-currency-group`)**: `#hud-gold` (🪙), `#hud-gems` (💎), `#hud-honor` (🎖️).
-- **Action Buttons Group (`#hud-actions-group`)**:
-  - **Visible Top-Level Action Buttons (8 items)**: `#vocab-btn`, `#shop-btn`, `#quest-btn`, `#recipe-btn`, `#pet-btn`, `#save-btn`, `#hud-more-btn`, `#hud-menu-btn`.
-  - **Overflow Dropdown Menu (`#hud-overflow-menu`, 5 items)**: `#seasonal-btn`, `#leaderboard-btn`, `#duel-btn`, `#fish-album-btn`, `#trophy-btn`.
+### Subsystem 2: Pet State & Persistence
+- Removed `var petState` state variable definition.
+- Removed `data.pets` initialization from `migrateSaveData()`.
+- Removed `pets: petState` property from `collectSave()`.
+- Removed `if(migrated.pets) petState = migrated.pets;` assignment from `applySave()`.
 
-### 4. JavaScript Controller (`index.html`)
-Added `<script>` block before `</body>`:
-- `toggleHudOverflow(evt)`: Toggles `.hidden` class on `#hud-overflow-menu`.
-- Click-outside listener: Auto-closes `#hud-overflow-menu` when clicking outside.
+### Subsystem 3: Pet Movement & Companion Loop
+- Removed `_updatePetCompanion(dt)` method from `FarmScene`.
+- Removed `this._updatePetCompanion(dt);` tick call from `FarmScene.update()`.
 
-### 5. Mirror Synchronization
-Copied `index.html` to `assets/index.html` and verified byte-for-byte identity via SHA256 file hash comparison.
+### Subsystem 4: Pet Passives & XP Hooks
+- Removed dog coin multiplier hook from `addCoins()`.
+- Removed hamster yield duplication and pet XP calls from `_harvestAppleTree()` and `_harvestPlot()`.
+- Removed pet XP addition call from `catchSuccess()`.
+- Removed pet XP addition call from `onMinigameComplete()`.
+- Removed `decayPetHappiness()` tick call from `buffHUDInterval`.
+- Removed `overlayId === 'pet-overlay'` check from `closeModalById()`.
 
-## Verification Command Outputs
+### Subsystem 5: Pet Functions & UI Modals
+- Removed `PET_DB` array definition.
+- Removed pet utility functions: `isPetActive()`, `getPetPassiveMultiplier()`, `decayPetHappiness()`, and `addPetXP()`.
+- Removed pet window and interaction handlers: `openPetOverlay()`, `closePetOverlay()`, `adoptPet()`, `equipPet()`, `feedActivePet()`, and `startPetLevelUpQuiz()`.
+- Removed `#pet-overlay` HTML container, active card element, and roster container from `index.html`.
+- Removed `#pet-btn` HUD button from `index.html`.
+- Removed CSS styling rules for `.pet-roster-grid`, `.pet-card`, `.pet-card-avatar`, `.pet-card-name`, `.pet-card-level`, `.pet-card-passive`, `.pet-bar-bg`, `.pet-bar-fill-xp`, and `.pet-bar-fill-happy` from `index.html`.
 
-1. **JS Syntax Verification**:
-   ```cmd
-   node -c game.js
-   ```
-   *Output*: Exit Code 0 (0 syntax errors).
+### Subsystem 6: Pet Leaderboard Tab
+- Removed `petsPct` property from all `LOCAL_RIVALS` entries and updated Ha-eun's title to `'Art Artisan 🎨'`.
+- Removed pet metrics computation (`petCollectionPct`) from `updateLeaderboardMetrics()`.
+- Removed `Pets Collected` line item from `openLeaderboard()` personal best grid.
+- Removed `petsPct` field from player entry in `switchLeaderboardTab()`.
+- Removed `pets` tab sorting branch (`tabId === 'pets'`), column header branch (`valColHeader = 'Pet Collection %'`), and row display branch from `switchLeaderboardTab()`.
+- Removed `#lbtab-pets` tab button from `index.html`.
 
-2. **Challenger 1 Layout Overlap Test Script**:
-   ```cmd
-   node .agents\teamwork_preview_challenger_m3_1\layout_overlap_test.js
-   ```
-   *Output*:
-   - HTML Synchronization Check: SYNCHRONIZED ✅
-   - Viewport 1024px: PASS ✅ (`#hud` right=738px, `#progress-bar-wrap` left=762px [range 757-766px], 19px horizontal clearance)
-   - Viewport 768px: PASS ✅
-   - Viewport 480px: PASS ✅
-   - OVERLAP VERDICT FOR 1024px & 768px: PASS ✅
+---
 
-3. **Byte-for-Byte HTML Mirror Verification**:
-   ```cmd
-   node -e "const fs=require('fs'); console.log(fs.readFileSync('index.html').equals(fs.readFileSync('assets/index.html')));"
-   ```
-   *Output*: `true` (Size: 108355 bytes each).
+## Synchronization & Verification Results
+1. **Syntax Verification**:
+   - `node -c "d:\Hangeul Valley\game.js"`: PASSED (0 errors)
+   - `node -c "d:\Hangeul Valley\assets\game.js"`: PASSED (0 errors)
+2. **File Synchronization**:
+   - `game.js` <-> `assets/game.js`: 100% byte-for-byte identical (1,448,057 bytes).
+   - `index.html` <-> `assets/index.html`: 100% byte-for-byte identical (106,664 bytes).
+3. **Keyword Verification**:
+   - `petState`, `petSprite`, `petShadow`, `_updatePetCompanion`, `_genPetTextures`, `isPetActive`, `getPetPassiveMultiplier`, `addPetXP`, `decayPetHappiness`, `openPetOverlay`, `closePetOverlay`, `adoptPet`, `equipPet`, `feedActivePet`, `startPetLevelUpQuiz`, `PET_DB`, `petsPct`, `petCollectionPct`, `#pet-overlay`, `#pet-btn`, `#lbtab-pets`: 0 occurrences.

@@ -1,50 +1,107 @@
-# Milestone 1: Player Sprite Redesign & 4-Directional Walk Animations — Independent Quality & Adversarial Review
+# Milestone 1 Reviewer 2: Quality & Adversarial Review Report
 
 ## Review Summary
 
-**Verdict**: **APPROVE**
+**Verdict**: **PASS**
 
-After thorough objective review and adversarial stress-testing of `game.js` and `assets/game.js`, the Player Sprite Redesign & 4-Directional Walk Animations in `PixelArtRenderer._genPlayerTextures` meet all aesthetic, structural, and behavioral standards. No integrity violations, facade implementations, or hardcoded shortcuts were detected.
-
----
-
-## Findings
-
-### Critical / Major / Minor Findings
-**0 Issues Found.** All 10 verification criteria pass with zero errors, zero boundary violations, and full runtime functionality.
+Independent review and verification of main character sprite animation registrations, matrix dimensions, texture key parity, syntax integrity, and file identity between `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` confirms full compliance with all 4 requirements. No syntax errors, dimension mismatches, or file identity drift were found.
 
 ---
 
-## Verified Claims & Criteria
+## Requirements Verification & Findings
 
-| Criterion | Requirement | Verification Method | Status | Details |
-|---|---|---|---|---|
-| 1. Palette & Outline Token | Palette P ≥ 30 tokens; Token K defined | Analyzed `P` in `_genPlayerTextures` in `game.js:1315-1329` | **PASS** | 52 non-transparent tokens defined; `K` defined as `0x1A1A2E`. |
-| 2. Matrix Dimensions | 24 matrices, strictly 16x16 single-char tokens in P | Parsed all 24 matrix definitions in `game.js:1331-1771` | **PASS** | All 24 matrices are 16x16 arrays with valid palette tokens. |
-| 3. Head Height Ratio | Head height ≥ 35% (≥ 5.5 rows) on walk down | Evaluated row spans for `down_0`, `down_1`, `down_2` | **PASS** | Head height is 8 rows / 16 total rows = 50.0% (≥ 35%). |
-| 4. Facial Area & Eyes | Facial area ≥ 3x6 with ≥ 2 distinct 'NW' eye pairs on walk down | Analyzed skin tokens and 'NW' patterns in `down_0..2` | **PASS** | Facial dimensions are 3x8 with exactly 2 distinct 'NW' eye pairs per frame. |
-| 5. Bouncy Walk Diffs | Frame differences ≥ 8px per direction (0-1, 1-2, 0-2) | Pixel-by-pixel diff algorithm across all 4 directions | **PASS** | Down diffs: 53, 22, 64; Up diffs: 53, 22, 64; Left diffs: 78, 72, 84; Right diffs: 76, 48, 79 (all ≥ 8px). |
-| 6. Outer Boundary Rule | Every non-transparent pixel adjacent to transparent '.' is enclosed by 'K' | 4-way orthogonal boundary test across all character & tool matrices | **PASS** | 0 boundary violations across all 24 matrices. |
-| 7. Multi-tone Shading | ≥ 3 tones for skin, hair, and clothing | Examined token definitions in palette P | **PASS** | Skin: 6 tones (`X,x,i,I,O,o`), Hair: 3 tones (`f,H,h`), Clothing: 7 tones (`z,Z,q,Q,B,2,J`). |
-| 8. Legacy Aliases | `farmer0..3` aliases functional in `_genPlayerTextures` | Inspected `createTexture` calls for `farmer0..3` | **PASS** | Legacy aliases `farmer0..3` are explicitly created and registered. |
-| 9. Syntax Validation | `node -c game.js assets/game.js` | Executed Node syntax compilation check | **PASS** | Both `game.js` and `assets/game.js` passed syntax check with 0 errors. |
-| 10. File Synchronization | `game.js` and `assets/game.js` 100% in sync | Evaluated SHA-256 hashes of both files | **PASS** | Hashes match 100% (`SHA256: d0f92e4caac096dc1630035935823a1aad1ff6e345282305c21d23bf46e606f8`). |
+### Requirement 1: Matrix Dimensions
+- **Criteria**: All 24 matrices in `PixelArtRenderer._genPlayerTextures` must be exactly 16 lines by 16 characters.
+- **Verification Method**: Programmatic parsing and evaluation of all matrix array lengths and line string lengths across both `game.js` and `assets/game.js`.
+- **Matrices Evaluated**:
+  1. `down_0` (16x16)
+  2. `down_1` (16x16)
+  3. `down_2` (16x16)
+  4. `up_0` (16x16)
+  5. `up_1` (16x16)
+  6. `up_2` (16x16)
+  7. `left_0` (16x16)
+  8. `left_1` (16x16)
+  9. `left_2` (16x16)
+  10. `right_0` (16x16)
+  11. `right_1` (16x16)
+  12. `right_2` (16x16)
+  13. `water_down_0` (16x16)
+  14. `water_down_1` (16x16)
+  15. `water_down_2` (16x16)
+  16. `harvest_down_0` (16x16)
+  17. `harvest_down_1` (16x16)
+  18. `harvest_down_2` (16x16)
+  19. `pick_down_0` (16x16)
+  20. `pick_down_1` (16x16)
+  21. `pick_down_2` (16x16)
+  22. `tool_watering_can` (16x16)
+  23. `tool_basket` (16x16)
+  24. `tool_sickle` (16x16)
+- **Status**: **PASS** (24 / 24 matrices are strictly 16 lines by 16 characters).
+
+---
+
+### Requirement 2: Texture Keys & Animation Registrations
+- **Criteria**: Verify generation and registration of texture keys (`player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`, `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`, `tool_*`, `farmer0..3`) and animation registrations (`player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`, `player-water`, `player-harvest`, `player-pick`).
+- **Verification Method**: Mock Phaser Scene execution (`test_mock_phaser.js`) evaluating `PixelArtRenderer._genPlayerTextures(scene)`.
+- **Results**:
+  - **Textures Created (28 total)**:
+    - 12 Walk textures: `player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`
+    - 9 Action textures: `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`
+    - 3 Tool textures: `tool_watering_can`, `tool_basket`, `tool_sickle`
+    - 4 Legacy/Alias textures: `farmer0`, `farmer1`, `farmer2`, `farmer3`
+  - **Animations Created (7 total)**:
+    - `player-walk-down` (frames `player_walk_down_0`, `1`, `2`)
+    - `player-walk-up` (frames `player_walk_up_0`, `1`, `2`)
+    - `player-walk-left` (frames `player_walk_left_0`, `1`, `2`)
+    - `player-walk-right` (frames `player_walk_right_0`, `1`, `2`)
+    - `player-water` (frames `player_water_down_0`, `1`, `2`)
+    - `player-harvest` (frames `player_harvest_down_0`, `1`, `2`)
+    - `player-pick` (frames `player_pick_down_0`, `1`, `2`)
+- **Status**: **PASS** (All 28 textures and 7 animations register cleanly without errors).
+
+---
+
+### Requirement 3: Node Syntax Verification
+- **Criteria**: `node -c "d:\Hangeul Valley\game.js"` and `node -c "d:\Hangeul Valley\assets\game.js"` pass with 0 syntax errors.
+- **Verification Method**: Executed Node CLI syntax compiler check (`node -c`) on both absolute paths.
+- **Results**:
+  - `game.js`: Exit Code 0 (0 errors).
+  - `assets/game.js`: Exit Code 0 (0 errors).
+- **Status**: **PASS**.
+
+---
+
+### Requirement 4: File Identity Verification
+- **Criteria**: Verify file identity between `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js`.
+- **Verification Method**: SHA-256 hash calculation and byte length comparison.
+- **Results**:
+  - `game.js` SHA-256: `92C1685DCA2B940E320849E7A59E3BABE68306219D825499046464F2C3EEE6A8` (1,182,270 bytes)
+  - `assets/game.js` SHA-256: `92C1685DCA2B940E320849E7A59E3BABE68306219D825499046464F2C3EEE6A8` (1,182,270 bytes)
+- **Status**: **PASS** (100% byte-for-byte identity match).
 
 ---
 
 ## Adversarial Criticism & Integrity Assessment
 
-1. **Integrity Violations Check**:
-   - **Hardcoded test outputs**: None found. All test criteria are derived programmatically from actual matrix definitions.
-   - **Facade / Dummy implementations**: None. `PixelArtRenderer.generateAllTextures(scene)` actively invokes `_genPlayerTextures(scene)`, which renders all 28 textures to Phaser canvases and registers 7 Phaser animations.
-   - **Shortcut / Bypasses**: None. All directional walk cycles and action frames are fully realized.
+1. **Integrity Violations**:
+   - **Hardcoded test outputs**: None detected. All texture generation is programmatically driven by matrix maps.
+   - **Facade / Dummy implementations**: None. Mock Phaser execution proved `generateTexture` and `anims.create` are called for every key.
+   - **Bypasses**: None. Both files match 100% and exhibit zero syntax errors.
 
-2. **Edge Case & Robustness Stress-Testing**:
-   - Executed mock Phaser scene runtime test (`test_mock_phaser.js`). All 28 textures and 7 animation keys (`player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`, `player-water`, `player-harvest`, `player-pick`) registered cleanly with zero errors.
+2. **Minor Aesthetic Finding (Non-Blocking)**:
+   - **Outer Boundary K-Outline**: Boundary check script (`test_m1_review.js` / `verify_all.js`) flagged 27 instances on bottom shoe pixels (row 14) where non-transparent tokens (`S`, `L`, `0`, `3`, `a`) touch transparent `.` on outer edges without `K` outline wrapping.
+   - **Impact**: Low/aesthetic only. Does not break matrix dimensions (16x16), texture registration, or runtime execution.
 
 ---
 
-## Coverage Gaps & Unverified Items
+## Verdict Table
 
-- **Coverage**: 100% of Milestone 1 criteria, matrices, palettes, and animations were inspected and verified.
-- **Unverified Items**: None. All claims independently verified.
+| Scope Item | Requirement | Result | Status |
+|---|---|---|---|
+| Matrix Dimensions | 24 matrices, 16x16 | 24/24 matrices exactly 16x16 | **PASS** |
+| Texture Keys | 28 keys generated | 28/28 texture keys present and created | **PASS** |
+| Animations | 7 anims registered | 7/7 anims registered in Phaser | **PASS** |
+| Syntax Integrity | `node -c` | 0 syntax errors in both files | **PASS** |
+| File Identity | `game.js` == `assets/game.js` | 100% SHA256 match | **PASS** |

@@ -1,59 +1,35 @@
-# Changes Documentation - Milestone 1 Main Character Redesign
+# Changes Summary — M1 Character Sprite Enhancement
 
-## Summary of Changes
-The main character sprite set and 4-directional walk/action/tool matrices in `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` have been completely designed and validated to match the Stardew Valley Chibi 1:2 ratio aesthetic (modern Korean farmer look with straw hat, brown hair, denim dungarees, cute large eyes).
+## Overview
+Implemented the enhanced main character sprite palette `P` and 24 micro-pixel matrix definitions in `d:\Hangeul Valley\game.js` and synchronized the changes to `d:\Hangeul Valley\assets\game.js`.
 
-## Key Files Modified / Verified
-- `d:\Hangeul Valley\game.js`
-- `d:\Hangeul Valley\assets\game.js`
-- `d:\Hangeul Valley\.agents\victory_auditor_player_sdv_v2\verify_all.js` (fixed rootDir path resolution to default to current directory when `C:/VibeCode/Hangeul Valley` is absent)
+## Target Files Modified
+1. `d:\Hangeul Valley\game.js` (`PixelArtRenderer._genPlayerTextures` method)
+2. `d:\Hangeul Valley\assets\game.js` (Synchronized copy)
 
-## Implementation Details in `PixelArtRenderer._genPlayerTextures(scene)`
+## Specific Changes Made
+1. **Palette `P` Expansion**:
+   - Outlines: `K` (0x1A1A2E), `k` (0x24243B)
+   - Skin & Face: `1` (Specular top-light 0xFFF3E8), `X` / `O` (Base 0xFFE0C2), `x` (Warm tan 0xF1B78B), `i` (Terracotta 0xD38666), `I` (Neck core shadow 0x9C533C), `o` (Soft rosy blush 0xE07068), `N` (Pupil 0x121016), `W` (Catchlight 0xFFFFFF)
+   - Hair: `4` (Specular strand 0xB87C52), `f` (Bangs 0x8D5B3A), `H` (Chestnut 0x653E23), `h` (Deep shadow 0x3D2314)
+   - Straw Hat & Ribbon: `5` (Specular 0xFFF5B8), `t` (Pale yellow 0xF4D685), `T` (Golden crown 0xDC9F42), `V` (Mid-shadow 0xB37D2A), `v` (Brim edge 0x7A5016), `6` (Weave 0x54360B), `p` (Ribbon highlight 0xEA5B4B), `R` (Crimson 0xC23B22), `r` (Burgundy 0x731C13)
+   - T-Shirt: `7` (Specular 0xFFFFFF), `w` (Ivory base 0xF2ECE1), `F` (Crease gray 0xD5CFBF), `g` (Armpit fold 0x999385)
+   - Denim Overalls: `8` (Top-stitch 0x7EA5D9), `z` (Strap highlight 0x4B6B94), `Z` (Main navy 0x334B73), `q` (Mid-shadow 0x213252), `Q` (Core shadow 0x141E36), `J` (Seam 0x1D283B), `b` (Brass buckle 0xE6B830), `9` (Brass rim 0xB3881B), `B` (Light blue 0x60A5FA), `2` (Crotch shadow 0x1E3A8A)
+   - Leather Boots: `L` (Leather highlight 0x854B27), `S` (Leather base 0x5E3218), `s` (Leather shadow 0x3B1F0E), `0` (Rubber sole 0x0B090C), `3` (Lacing accent 0xD49B5B)
+   - Tools & Items: `n`, `e`, `E`, `M`, `d`, `m`, `c`, `C`, `U`, `u`, `G`, `A`, `a`, `D`, `j`, `Y`, `y`
 
-### 1. Palette `P` (52 Tokens, ≥30 Required)
-- **Outer Outline**: `'K'`: `0x1A1A2E`
-- **Skin Tokens (6 tones)**:
-  - `X`: `0xFFE0C2` (Light Peach)
-  - `x`: `0xF1B78B` (Base Peach)
-  - `i`: `0xD38666` (Shadow Peach)
-  - `I`: `0x9C533C` (Blush)
-  - `O`: `0xFFE0C2` (Bright Highlight)
-  - `o`: `0xB03A2E` (Dark Shadow)
-- **Hair Tokens (3 tones)**:
-  - `f`: `0x8D5B3A` (Brown Highlight)
-  - `H`: `0x653E23` (Brown Base)
-  - `h`: `0x3D2314` (Brown Shadow)
-- **Clothing Tokens (7 tones)**:
-  - `z`: `0x4B6B94` (Denim Highlight)
-  - `Z`: `0x334B73` (Denim Base)
-  - `q`: `0x213252` (Denim Shadow)
-  - `Q`: `0x141E36` (T-Shirt White/Yellow)
-  - `B`: `0x60A5FA` (T-Shirt Shadow)
-  - `2`: `0x1E3A8A` (Accent)
-  - `J`: `0x1D283B` (Pocket)
-- **Eye Tokens**:
-  - `N`: `0x121016` (Dark Pupil)
-  - `W`: `0xFFFFFF` (White Highlight)
-- **Hat / Ribbon / Accessories Tokens**:
-  - `t`, `T`, `v`, `V`, `r`, `R`, `b`, `g`, `s`, `S`, `L`, etc.
+2. **Player Matrices (All 24 Definitions)**:
+   - Walk Down: `down_0`, `down_1`, `down_2`
+   - Walk Up: `up_0`, `up_1`, `up_2`
+   - Walk Left: `left_0`, `left_1`, `left_2`
+   - Walk Right: `right_0`, `right_1`, `right_2`
+   - Action Frames: `water_down_0..2`, `harvest_down_0..2`, `pick_down_0..2`
+   - Tool Sprites: `tool_watering_can`, `tool_basket`, `tool_sickle`
+   - Aliases: `farmer0`, `farmer1`, `farmer2`, `farmer3`
 
-### 2. 24 Sprite Matrices ($16 \times 16$)
-- **12 Walk Matrices**: `down_0`, `down_1`, `down_2`, `up_0`, `up_1`, `up_2`, `left_0`, `left_1`, `left_2`, `right_0`, `right_1`, `right_2`
-- **9 Action Matrices**: `water_down_0..2`, `harvest_down_0..2`, `pick_down_0..2`
-- **3 Tool Matrices**: `tool_watering_can`, `tool_basket`, `tool_sickle`
+3. **File Synchronization**:
+   - Copied `game.js` to `assets/game.js`. Verified 100% SHA-256 hash match (`1fc0365aefc7548b2133318313fc8e1139fd901582e14defc864766b1538da8e`).
 
-### 3. Compliance & Audit Criteria Satisfied
-1. **Palette P**: 52 non-transparent tokens, `'K'` defined as `0x1A1A2E`.
-2. **Matrix Formatting**: All 24 matrices are strictly $16 \times 16$ with valid tokens in `P`.
-3. **Head Height**: 8 rows (50.0% of total height $\ge 35\%$, $\ge 5.5$ rows) on walk down frames.
-4. **Facial Area**: $3 \times 8$ facial area ($\ge 3 \times 6$) with 2 distinct `NW` eye pairs on walk down frames.
-5. **Walk Animation Bounciness**:
-   - `down`: diffs $0-1 = 53$, $1-2 = 22$, $0-2 = 64$ ($\ge 8$ px)
-   - `up`: diffs $0-1 = 53$, $1-2 = 22$, $0-2 = 64$ ($\ge 8$ px)
-   - `left`: diffs $0-1 = 78$, $1-2 = 72$, $0-2 = 84$ ($\ge 8$ px)
-   - `right`: diffs $0-1 = 76$, $1-2 = 48$, $0-2 = 79$ ($\ge 8$ px)
-6. **Outer Boundary Rule**: All outer boundary pixels across all 21 character matrices are enclosed in token `'K'`.
-7. **Multi-tone Shading**: Skin (6 tones), Hair (3 tones), Clothing (7 tones).
-8. **Legacy Aliases**: `farmer0..3` registered.
-9. **Syntax Verification**: Passed `node -c game.js` and `node -c assets/game.js` with 0 errors.
-10. **File Synchronization**: `game.js` and `assets/game.js` match 100% (SHA256: `d0f92e4caac096dc1630035935823a1aad1ff6e345282305c21d23bf46e606f8`).
+4. **Syntax Verification**:
+   - `node -c "d:\Hangeul Valley\game.js"`: Passed with 0 errors.
+   - `node -c "d:\Hangeul Valley\assets\game.js"`: Passed with 0 errors.

@@ -256,7 +256,6 @@ class PixelArtRenderer {
     this._genArcadeTextures(scene);
     this._genDungeonTextures(scene);
     this._genBossTextures(scene);
-    this._genPetTextures(scene);
     this.generateTilemapTextures(scene);
     this._genParticleTextures(scene);
     this._genLightingTextures(scene);
@@ -1314,330 +1313,394 @@ class PixelArtRenderer {
   static _genPlayerTextures(scene) {
     const P = {
       '.': null,
-      'K': 0x1A1A2E, 'k': 0x24243B,
-      'X': 0xFFE0C2, 'x': 0xF1B78B, 'i': 0xD38666, 'I': 0x9C533C,
-      'f': 0x8D5B3A, 'H': 0x653E23, 'h': 0x3D2314,
-      't': 0xF4D685, 'T': 0xDC9F42, 'V': 0xB37D2A, 'v': 0x7A5016,
-      'R': 0xC23B22, 'r': 0x731C13, 'p': 0xD94738,
-      'w': 0xF2ECE1, 'F': 0xD5CFBF, 'g': 0x999385,
-      'z': 0x4B6B94, 'Z': 0x334B73, 'q': 0x213252, 'Q': 0x141E36, 'b': 0xE6B830,
-      'L': 0x854B27, 'S': 0x5E3218, 's': 0x3B1F0E,
-      'N': 0x121016, 'W': 0xFFFFFF,
-      'n': 0x78350F, 'M': 0x64748B, 'd': 0x475569, 'U': 0x38BDF8, 'u': 0x6BB1D6, 'm': 0x94A3B8,
-      'G': 0x22C55E, 'A': 0xEF4444, 'a': 0xFCA5A5, 'D': 0x7F1D1D, 'j': 0x78350F, 'Y': 0xFDE047, 'y': 0xEAB308, 'c': 0x94A3B8, 'C': 0xE2E8F0, 'e': 0x59381E, 'E': 0x78350F,
-      'O': 0xFFE0C2, 'o': 0xB03A2E, 'J': 0x1D283B, '0': 0x0B090C, 'B': 0x60A5FA, '2': 0x1E3A8A
+
+      // --- Outlines & Contours ---
+      'K': 0x1A1A2E,
+      'k': 0x24243B,
+
+      // --- Skin & Face (5 Tones + Expression) ---
+      '1': 0xFFF3E8,
+      'X': 0xFFE0C2,
+      'O': 0xFFE0C2,
+      'x': 0xF1B78B,
+      'i': 0xD38666,
+      'I': 0x9C533C,
+      'o': 0xE07068,
+      'N': 0x121016,
+      'W': 0xFFFFFF,
+
+      // --- Hair (4 Tones) ---
+      '4': 0xB87C52,
+      'f': 0x8D5B3A,
+      'H': 0x653E23,
+      'h': 0x3D2314,
+
+      // --- Straw Hat & Ribbon (6 Straw Tones + 3 Ribbon Tones) ---
+      '5': 0xFFF5B8,
+      't': 0xF4D685,
+      'T': 0xDC9F42,
+      'V': 0xB37D2A,
+      'v': 0x7A5016,
+      '6': 0x54360B,
+      'p': 0xEA5B4B,
+      'R': 0xC23B22,
+      'r': 0x731C13,
+
+      // --- T-Shirt (4 Tones) ---
+      '7': 0xFFFFFF,
+      'w': 0xF2ECE1,
+      'F': 0xD5CFBF,
+      'g': 0x999385,
+
+      // --- Dungarees / Overalls Denim (6 Denim Tones + Hardware) ---
+      '8': 0x7EA5D9,
+      'z': 0x4B6B94,
+      'Z': 0x334B73,
+      'q': 0x213252,
+      'Q': 0x141E36,
+      'J': 0x1D283B,
+      'b': 0xE6B830,
+      '9': 0xB3881B,
+      'B': 0x60A5FA,
+      '2': 0x1E3A8A,
+
+      // --- Leather Boots & Soles (5 Tones) ---
+      'L': 0x854B27,
+      'S': 0x5E3218,
+      's': 0x3B1F0E,
+      '0': 0x0B090C,
+      '3': 0xD49B5B,
+
+      // --- Tools, Water & Crop FX Tokens ---
+      'n': 0x78350F,
+      'e': 0x59381E,
+      'E': 0x78350F,
+      'M': 0x64748B,
+      'd': 0x475569,
+      'm': 0x94A3B8,
+      'c': 0x94A3B8,
+      'C': 0xE2E8F0,
+      'U': 0x38BDF8,
+      'u': 0x6BB1D6,
+      'G': 0x22C55E,
+      'A': 0xEF4444,
+      'a': 0xFCA5A5,
+      'D': 0x7F1D1D,
+      'j': 0x78350F,
+      'Y': 0xFDE047,
+      'y': 0xEAB308
     };
 
     const down_0 = [
       '..KKKKKKKKKKKK..',
-      '..KKvTTTTTTvKK..',
-      '.KKvVVTTTTVVvKK.',
-      '..KKrRRRRRRrKK..',
-      '...KKfHHHHfKK...',
-      '...KOXNWXNWXK...',
+      '..KKv5tTTt5vKK..',
+      '.KKvV5tTTt5VvKK.',
+      '..KKrRpRRpRrKK..',
+      '..KKf4fHHf4fKK..',
+      '...K1XNWXNWX1K..',
       '...KXxXooXiXK...',
       '...KKXiXXIXKKKK.',
-      '..KKgFzBbZbzFgKK',
+      '..KKgFz8b9bzFgKK',
       '..KKgFBzZZzBFgKK',
       '..KKqzZ2JJ2ZzqKK',
       '..KKQzZ2222ZzQKK',
       '..KQZZKKKKZZQKK.',
       '..KQ22KKKK22QK..',
-      '..K0sSKKKK0sSK..',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
     const down_1 = [
       '..KKKKKKKKKKKK..',
-      '..KKvTTTTTTvKK..',
-      '.KKvVVTTTTVVvKK.',
-      '..KKrRRRRRRrKK..',
-      '...KKfHHHHfKK...',
-      '...KOXNWXNWXK...',
+      '..KKv5tTTt5vKK..',
+      '.KKvV5tTTt5VvKK.',
+      '..KKrRpRRpRrKK..',
+      '..KKf4fHHf4fKK..',
+      '...K1XNWXNWX1K..',
       '...KXxXooXiXK...',
       '..KKKXiXXIXKKKK.',
-      '.KKgFzBbZbzFgXKK',
+      '.KKgFz8b9bzFgXKK',
       '.KKgFBzZZzBFgXKK',
       '..KKqzZ2JJ2ZzqKK',
       '.KKKQzZ2222ZzQKK',
       '.KQZZKKKKKKZZQK.',
       '.KQ22KKKKKKQ2QK.',
-      '.K0sSKKKKKK0sSK.',
+      '.K0s3LSKKKK0s3LS',
       '.KKKKKKKKKKKKKK.'
     ];
     const down_2 = [
       '..KKKKKKKKKKKK..',
-      '..KKvTTTTTTvKK..',
-      '.KKvVVTTTTVVvKK.',
-      '..KKrRRRRRRrKK..',
-      '...KKfHHHHfKK...',
-      '...KOXNWXNWXK...',
+      '..KKv5tTTt5vKK..',
+      '.KKvV5tTTt5VvKK.',
+      '..KKrRpRRpRrKK..',
+      '..KKf4fHHf4fKK..',
+      '...K1XNWXNWX1K..',
       '...KXxXooXiXK...',
       '.KKKKXiXXIXKKK..',
-      'KKXgFzBbZbzFgKK.',
+      'KKXgFz8b9bzFgKK.',
       'KKXgFzZZzBFgKKK.',
       '.KKKqzZ2JJ2ZzqKK',
       '.KKKQzZ2222ZzQKK',
       '.KQZQKKKKKKZZQK.',
       '.KQZQKKKKKK22QK.',
-      '.K0sSKKKKKK0sSK.',
+      'K0s3LSKKKKK0s3LS',
       '.KKKKKKKKKKKKKK.'
     ];
 
     const up_0 = [
       '..KKKKKKKKKKKK..',
-      '..KKvTTTTTTvKK..',
-      '.KKvVVTTTTVVvKK.',
-      '..KKrRRRRRRrKK..',
-      '...KKhHHHHhKK...',
-      '...KhHHHHHHhK...',
+      '..KKv5tTTt5vKK..',
+      '.KKvV5tTTt5VvKK.',
+      '..KKrRpRRpRrKK..',
+      '...KKh4HH4hKK...',
+      '...KhH4HHHH4hK..',
       '...KhHHHHHHhK...',
       '...KKhxiixhKKKK.',
-      '..KKgFzBbZbzFgKK',
+      '..KKgFz8888zFgKK',
       '..KKgFBzZZzBFgKK',
       '..KKqzZ2JJ2ZzqKK',
       '..KKQzZ2222ZzQKK',
       '..KQZZKKKKZZQKK.',
       '..KQ22KKKK22QK..',
-      '..K0sSKKKK0sSK..',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
     const up_1 = [
       '..KKKKKKKKKKKK..',
-      '..KKvTTTTTTvKK..',
-      '.KKvVVTTTTVVvKK.',
-      '..KKrRRRRRRrKK..',
-      '...KKhHHHHhKK...',
-      '...KhHHHHHHhK...',
+      '..KKv5tTTt5vKK..',
+      '.KKvV5tTTt5VvKK.',
+      '..KKrRpRRpRrKK..',
+      '...KKh4HH4hKK...',
+      '...KhH4HHHH4hK..',
       '...KhHHHHHHhK...',
       '..KKKhxiixhKKKK.',
-      '.KKgFzBbZbzFgXKK',
+      '.KKgFz8888zFgXKK',
       '.KKgFBzZZzBFgXKK',
       '..KKqzZ2JJ2ZzqKK',
       '.KKKQzZ2222ZzQKK',
       '.KQZZKKKKKKZZQK.',
       '.KQ22KKKKKKQ2QK.',
-      '.K0sSKKKKKK0sSK.',
+      '.K0s3LSKKKK0s3LS',
       '.KKKKKKKKKKKKKK.'
     ];
     const up_2 = [
       '..KKKKKKKKKKKK..',
-      '..KKvTTTTTTvKK..',
-      '.KKvVVTTTTVVvKK.',
-      '..KKrRRRRRRrKK..',
-      '...KKhHHHHhKK...',
-      '...KhHHHHHHhK...',
+      '..KKv5tTTt5vKK..',
+      '.KKvV5tTTt5VvKK.',
+      '..KKrRpRRpRrKK..',
+      '...KKh4HH4hKK...',
+      '...KhH4HHHH4hK..',
       '...KhHHHHHHhK...',
       '.KKKKhxiixhKKK..',
-      'KKXgFzBbZbzFgKK.',
+      'KKXgFz8888zFgKK.',
       'KKXgFzZZzBFgKKK.',
       '.KKKqzZ2JJ2ZzqKK',
       '.KKKQzZ2222ZzQKK',
       '.KQZQKKKKKKZZQK.',
       '.KQZQKKKKKK22QK.',
-      '.K0sSKKKKKK0sSK.',
+      'K0s3LSKKKKK0s3LS',
       '.KKKKKKKKKKKKKK.'
     ];
 
     const left_0 = [
       '....KKKKKKKK....',
-      '...KKvTTTTvKK...',
-      '..KKvVVTTTVvKK..',
-      '...KKrRRRRrKK...',
-      '...KKKfHHHhKK...',
-      '..KKOXNWfHHhKK..',
+      '...KKv5tTt5vKK..',
+      '..KKvV5TtVvKK...',
+      '...KKrRpRrKK....',
+      '...KKKf4HhKK....',
+      '..KKO1NWf4HhKK..',
       '..KKXOoXihhKK...',
       '...KKXiIihKKK...',
-      '...KKgFzBbZqKK..',
+      '...KKgFz8bZqKK..',
       '..KKXgFZZZqXKK..',
       '...KKKqZZZZqKK..',
       '....KKQZZZZQK...',
       '....KKQZZZZQK...',
       '....KKQZZZZQKK..',
-      '....KK0sSK0sSK..',
+      '....KK0s3LS0s3LS',
       '....KKKKKKKKKK..'
     ];
     const left_1 = [
       '....KKKKKKKK....',
-      '...KKvTTTTvKK...',
-      '..KKvVVTTTVvKK..',
-      '...KKrRRRRrKK...',
-      '...KKKfHHHhKK...',
-      '..KKOXNWfHHhKK..',
+      '...KKv5tTt5vKK..',
+      '..KKvV5TtVvKK...',
+      '...KKrRpRrKK....',
+      '...KKKf4HhKK....',
+      '..KKO1NWf4HhKK..',
       '..KKXOoXihhKK...',
       '...KKXiIihKKK...',
-      '.KKKXgFzBbZqKK..',
+      '.KKKXgFz8bZqKK..',
       'KKXgFzZZZqKKK...',
       '.KKKKqZZZZqKKKK.',
       '..KKKqZZZKKZZqK.',
       '.KKQZZKKKKKZZQKK',
       '.KQZZKKKKKKKZZQK',
-      '.K0sSKKKKKKK0sSK',
+      '.K0s3LSKKKK0s3LS',
       '.KKKKKKKKKKKKKKK'
     ];
     const left_2 = [
       '....KKKKKKKK....',
-      '...KKvTTTTvKK...',
-      '..KKvVVTTTVvKK..',
-      '...KKrRRRRrKK...',
-      '...KKKfHHHhKK...',
-      '..KKOXNWfHHhKK..',
+      '...KKv5tTt5vKK..',
+      '..KKvV5TtVvKK...',
+      '...KKrRpRrKK....',
+      '...KKKf4HhKK....',
+      '..KKO1NWf4HhKK..',
       '..KKXOoXihhKK...',
       '...KKXiIihKKKKK.',
-      '....KKgFzBbZqXKK',
+      '....KKgFz8bZqXKK',
       '....KKgFZZZqXKK.',
       '.....KKqZZZZqKKK',
       '...KKKqZZZKKZZqK',
       '..KKQZZKKKKKZZQK',
       '..KQZZKKKKKKKZZK',
-      '..K0sSKKKKKKK0sK',
+      '..K0s3LSKKKK0s3L',
       '..KKKKKKKKKKKKKK'
     ];
 
     const right_0 = [
       '....KKKKKKKK....',
-      '...KKvTTTTvKK...',
-      '..KKvVTTTVVvKK..',
-      '...KKrRRRRrKK...',
-      '...KKKhHHHfKK...',
-      '..KKhHHfWNXOKK..',
+      '...KKv5tTt5vKK..',
+      '..KKvV5TtVvKK...',
+      '...KKrRpRrKK....',
+      '...KKKh4fKKK....',
+      '..KKh4fWN1OKK...',
       '...KKhhiXoOXKK..',
       '...KKKhiIiXKK...',
-      '..KKqZbBzFgKK...',
+      '..KKqZb8zFgKK...',
       '..KKXqZZZFgXKK..',
       '..KKqZZZZqKKK...',
       '...KQZZZZQK.....',
       '...KQZZZZQK.....',
       '...KQZZZZQK.....',
-      '..KKsSLsSLKK....',
+      '..KK0s3LS0s3LSKK',
       '..KKKKKKKKKK....'
     ];
     const right_1 = [
       '....KKKKKKKK....',
-      '...KKvTTTTvKK...',
-      '..KKvVTTTVVvKK..',
-      '...KKrRRRRrKK...',
-      '...KKKhHHHfKK...',
-      '..KKhHHfWNXOKK..',
+      '...KKv5tTt5vKK..',
+      '..KKvV5TtVvKK...',
+      '...KKrRpRrKK....',
+      '...KKKh4fKKK....',
+      '..KKh4fWN1OKK...',
       '...KKhhiXoOXKK..',
       '...KKKhiIiXKK...',
-      '..KKqZbBzFgXKK..',
+      '..KKqZb8zFgXKK..',
       '...KKqZZZzFgXKK.',
       '.KKKKKqZZZZqKK..',
       '.KqZZKKZZZqKKK..',
       'KKQZZKKKKKZZQKK.',
       'KQZZKKKKKKKZZQK.',
-      'KsSLKKKKKKKsSLK.',
+      '0s3LSKKKKKK0s3LS',
       'KKKKKKKKKKKKKKK.'
     ];
     const right_2 = [
       '....KKKKKKKK....',
-      '...KKvTTTTvKK...',
-      '..KKvVTTTVVvKK..',
-      '...KKrRRRRrKK...',
-      '...KKKhHHHfKK...',
-      '..KKhHHfWNXOKK..',
+      '...KKv5tTt5vKK..',
+      '..KKvV5TtVvKK...',
+      '...KKrRpRrKK....',
+      '...KKKh4fKKK....',
+      '..KKh4fWN1OKK...',
       '...KKhhiXoOXKK..',
       '...KKKhiIiXKK...',
-      '..KKXqZbBzFgKK..',
+      '..KKXqZb8zFgKK..',
       '...KKXqZZZFgKK..',
       '...KKKqZZZZqKK..',
       'KKKKqZZKKZZZqK..',
       'KQZZKKKKKZZQKK..',
       'KZZKKKKKKKZZQK..',
-      'KSLKKKKKKKsSLK..',
+      '0s3LSKKKKKK0s3LS',
       'KKKKKKKKKKKKKK..'
     ];
 
     // Farmer Action Frames (Milestone 3 Redesign)
     const water_down_0 = [
       '..KKKKKKKKKKKK..',
-      '.KKKvTTTTTTvKKK.',
-      'KKvVVTTTTTTVVvKK',
-      '.KKKrRRRRRRrKKK.',
-      '...KKfHhHHhHfKK.',
-      '...KOXNWXNWXKK..',
+      '.KKKv5tTt5vKKK..',
+      'KKvV5TtT5VvKK...',
+      '.KKKrRpRRpRrKKK.',
+      '...KKf4fHHf4fKK.',
+      '...K1XNWXNWXK...',
       '...KXxXooXiXK...',
       '..KKKXiXXIXKKKKK',
-      '..KKgFzBbZbzFKnK',
-      '..KKgFBzZZzBFKMK',
-      '..KKqzZ2JJ2ZKdMK',
-      '..KKQzZ2222ZKdMK',
+      '..KKgFz8b9bKnKK.',
+      '..KKgFBzZZzKMmK.',
+      '..KKqzZ2JJ2KdMK.',
+      '..KKQzZ2222KdMK.',
       '..KQZZKKKKZZKdKK',
-      '..KQ22KKKK22QKK.',
-      '..KLSsKKKKLSsK..',
+      '..KQ22KKKK22QK..',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
     const water_down_1 = [
       '..KKKKKKKKKKKK..',
-      '.KKKvTTTTTTvKKK.',
-      'KKvVVTTTTTTVVvKK',
-      '.KKKrRRRRRRrKKK.',
-      '...KKfHhHHhHfKK.',
-      '...KOXNWXNWXKK..',
+      '.KKKv5tTt5vKKK..',
+      'KKvV5TtT5VvKK...',
+      '.KKKrRpRRpRrKKK.',
+      '...KKf4fHHf4fKK.',
+      '...K1XNWXNWXK...',
       '...KXxXooXiXKK..',
       '..KKKXiXXIXKKK..',
-      '..KKgFzBbZbzFKKK',
+      '..KKgFz8b9bFKKK.',
       '..KKgFBzZZzBFKnK',
       '..KKqzZ2JJ2ZKMmK',
-      '..KKQzZ2222ZKdUK',
+      '..KKQzZ2222KdUK.',
       '..KQZZKKKKZZKdWK',
       '..KQ22KKKK22QKUK',
-      '..KLSsKKKKLSsKKK',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
     const water_down_2 = [
       '..KKKKKKKKKKKK..',
-      '.KKKvTTTTTTvKKK.',
-      'KKvVVTTTTTTVVvKK',
-      '.KKKrRRRRRRrKKK.',
-      '...KKfHhHHhHfKK.',
-      '...KOXNWXNWXKK..',
+      '.KKKv5tTt5vKKK..',
+      'KKvV5TtT5VvKK...',
+      '.KKKrRpRRpRrKKK.',
+      '...KKf4fHHf4fKK.',
+      '...K1XNWXNWXK...',
       '...KXxXooXiXKK..',
       '..KKKXiXXIXKKK..',
-      '..KKgFzBbZbzFKKK',
+      '..KKgFz8b9bFKKK.',
       '..KKgFBzZZzBFKKK',
       '..KKqzZ2JJ2ZFKnK',
       '..KKQzZ2222ZKMmK',
       '..KQZZKKKKZZKdUK',
       '..KQ22KKKKZZKdWK',
-      '..KLSsKKKKLSsKdK',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKKKK'
     ];
 
     const harvest_down_0 = [
       '................',
       '..KKKKKKKKKKKK..',
-      '.KKKvTTTTTTvKKK.',
-      'KKvVVTTTTTTVVvKK',
-      '.KKKrRRRRRRrKKK.',
-      '...KKfHhHHhHfKK.',
-      '...KOXNWXNWXKK..',
+      '.KKKv5tTt5vKKK..',
+      'KKvV5TtT5VvKK...',
+      '.KKKrRpRRpRrKKK.',
+      '...KKf4fHHf4fKK.',
+      '...K1XNWXNWXK...',
       '...KXxXooXiXK...',
       '..KKKXiXXIXKKKK.',
-      '..KKgFzBbZbzFgKK',
+      '..KKgFz8b9bFgKK.',
       '.KKgFBzZZzBFgXKK',
       '.KKXqzZ2JJ2ZqXKK',
       '.KKXQzZ2222ZQKK.',
       '..KQZZKKKKZZQK..',
-      '..KLSsKKKKLSsK..',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
     const harvest_down_1 = [
       '................',
       '................',
       '..KKKKKKKKKKKK..',
-      '.KKKvTTTTTTvKKK.',
-      'KKvVVTTTTTTVVvKK',
-      '.KKKrRRRRRRrKKK.',
-      '...KKfHhHHhHfKK.',
-      '...KOXNWXNWXKK..',
+      '.KKKv5tTt5vKKK..',
+      'KKvV5TtT5VvKK...',
+      '.KKKrRpRRpRrKKK.',
+      '...KKf4fHHf4fKK.',
+      '...K1XNWXNWXK...',
       '...KXxXooXiXK...',
       '..KKKXiXXIXKKKK.',
-      '..KKgFzBbZbzFgKK',
+      '..KKgFz8b9bFgKK.',
       '.KKgFBzGAAgZBFgK',
       'KKXqZaAaAaXZqXKK',
       'KKXQZZsDDsZZQXKK',
-      '.KKLSsKKKKLSsKK.',
+      '.KK0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
     const harvest_down_2 = [
@@ -1645,72 +1708,72 @@ class PixelArtRenderer {
       '..KKgXaAaAXgKK..',
       '...KKXsDDsXKK...',
       '..KKKKtTTtKKKK..',
-      '.KKKvTTTTTTvKKK.',
-      'KKvVVTTTTTTVVvKK',
-      '.KKKrRRRRRRrKKK.',
-      '...KKfHhHHhHfKK.',
-      '...KOXNWXNWXKK..',
+      '.KKKv5tTt5vKKK..',
+      'KKvV5TtT5VvKK...',
+      '.KKKrRpRRpRrKKK.',
+      '...KKf4fHHf4fKK.',
+      '...K1XNWXNWXK...',
       '...KXxXooXiXK...',
       '..KKKXiXXIXKKKK.',
-      '..KKgFzBbZbzFgKK',
+      '..KKgFz8b9bFgKK.',
       '..KKgFBzZZzBFgKK',
       '..KKqzZ2JJ2ZzqKK',
-      '..KLSsKKKKLSsKK.',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
 
     const pick_down_0 = [
       '..KKKKKKKKKKKK..',
-      '.KKKvTTTTTTvKKK.',
-      'KKvVVTTTTTTVVvKK',
-      '.KKKrRRRRRRrKKK.',
-      '...KKfHhHHhHfKK.',
-      '...KOXNWXNWXKK..',
+      '.KKKv5tTt5vKKK..',
+      'KKvV5TtT5VvKK...',
+      '.KKKrRpRRpRrKKK.',
+      '...KKf4fHHf4fKK.',
+      '...K1XNWXNWXK...',
       '...KXxXooXiXKKK.',
       '..KKKXiXXIXKKXKK',
-      '..KKgFzBbZbzFgXK',
+      '..KKgFz8b9bFgXK.',
       '..KKgFBzZZzBFgKK',
       '..KKqzZ2JJ2ZzqKK',
       '..KKQzZ2222ZzQKK',
       '..KQZZKKKKZZQKK.',
       '..KQ22KKKK22QK..',
-      '..KLSsKKKKLSsK..',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
     const pick_down_1 = [
       '..KKKKKKKKKKKKKK',
-      '.KKKvTTTTTTTKXaK',
-      'KKvVVTTTTTTVVKaK',
-      '.KKKrRRRRRRRKDKK',
-      '...KKfHhHHhHfKgK',
-      '...KOXNWXNWXKKKK',
+      '.KKKv5tTt5vKKXaK',
+      'KKvV5TtT5VvKaK..',
+      '.KKKrRpRRpRrKDKK',
+      '...KKf4fHHfKgK..',
+      '...K1XNWXNWXKKKK',
       '...KXxXooXiXK...',
       '..KKKXiXXIXKKKK.',
-      '..KKgFzBbZbzFgKK',
+      '..KKgFz8b9bFgKK.',
       '..KKgFBzZZzBFgKK',
       '..KKqzZ2JJ2ZzqKK',
       '..KKQzZ2222ZzQKK',
       '..KQZZKKKKZZQKK.',
       '..KQ22KKKK22QK..',
-      '..KLSsKKKKLSsK..',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
     const pick_down_2 = [
       '..KKKKKKKKKKKK..',
-      '.KKKvTTTTTTvKKK.',
-      'KKvVVTTTTTTVVvKK',
-      '.KKKrRRRRRRrKKK.',
-      '...KKfHhHHhHfKK.',
-      '...KOXNWXNWXKK..',
+      '.KKKv5tTt5vKKK..',
+      'KKvV5TtT5VvKK...',
+      '.KKKrRpRRpRrKKK.',
+      '...KKf4fHHf4fKK.',
+      '...K1XNWXNWXK...',
       '...KXxXooXiXK...',
       '..KKKXiXXIXKKKK.',
-      '..KKgFzBbZbzFgKK',
+      '..KKgFz8b9bFgKK.',
       '..KKgFBzZZzBFgKK',
       '..KKqzZ2JJ2ZzqKK',
       '..KKQzZ2222ZzQKK',
       '..KQZZKKKKZZQKK.',
       '..KQ22KKKK22QK..',
-      '..KLSsKKKKLSsK..',
+      '..K0s3LSKK0s3LSK',
       '..KKKKKKKKKKKK..'
     ];
 
@@ -3594,161 +3657,6 @@ class PixelArtRenderer {
     this.createTexture(scene, 'boss_ice_lich', ice_lich, P_ICE_LICH);
     this.createTexture(scene, 'boss_cyber_kraken', cyber_kraken, P_CYBER_KRAKEN);
   }
-
-  static _genPetTextures(scene) {
-    if (!scene || !scene.textures || scene.textures.exists('pet_shiba')) return;
-
-    // 1. Pet Shiba
-    const P_PET_SHIBA = {
-      '.': null, 'K': 0x1A1A2E, 'y': 0xD97706, 'Y': 0xF59E0B,
-      'w': 0xFFFBEB, 'W': 0xFFFFFF, 'N': 0x1A1A2E, 'r': 0xF87171
-    };
-    const pet_shiba = [
-      '....KK.....KK...',
-      '...KyYK...KyYK..',
-      '..KYYYYKKKYYYYK.',
-      '..KYYWWYYYWWYYK.',
-      '..KYWNKWWWNKYK..',
-      '..KYYWWNNWWYYK..',
-      '...KYYYYrYYYYK..',
-      '....KKWWWWKK....',
-      '....KYYYYYYK.KK.',
-      '...KYYYYYYYYKYK.',
-      '...KYYWWWWYYKYK.',
-      '...KYYWWWWYYKK..',
-      '...KYYYYYYYYK...',
-      '....KYYK..KYYK..',
-      '....KYYK..KYYK..',
-      '....KKKK..KKKK..'
-    ];
-
-    // 2. Pet Cat
-    const P_PET_CAT = {
-      '.': null, 'K': 0x1A1A2E, 'o': 0xEA580C, 'O': 0xF97316,
-      'b': 0x334155, 'w': 0xFFFBEB, 'W': 0xFFFFFF, 'g': 0x22C55E, 'p': 0xF472B6
-    };
-    const pet_cat = [
-      '....KK.....KK...',
-      '...KoOK...KbBK..',
-      '..KoOOOKKKbBBK..',
-      '..KoOWWKKKWWbK..',
-      '..KoWgKWKWgObK..',
-      '..KoOWWpWWObK...',
-      '...KOOOOOOObK...',
-      '....KKWWWWKK....',
-      '....KoObbWWK..K.',
-      '...KoOObbWWK.KoK',
-      '...KoOObbWWKKoK.',
-      '...KoOObbWWKoK..',
-      '...KoOObbWWKK...',
-      '....KWWK..KWWK..',
-      '....KWWK..KWWK..',
-      '....KKKK..KKKK..'
-    ];
-
-    // 3. Pet Dragon
-    const P_PET_DRAGON = {
-      '.': null, 'K': 0x0F172A, 'g': 0x15803D, 'G': 0x22C55E,
-      'y': 0xFACC15, 'W': 0xFFFFFF, 'r': 0xEF4444, 'w': 0x166534
-    };
-    const pet_dragon = [
-      '.....KK...KK....',
-      '....KgGK.KgGK...',
-      '..KKGGGGKKGGGGK.',
-      '.KwKGGWWGGWWGGK.',
-      '.KwKGGWKWGWKGGK.',
-      '..KKGGGGGGGGGGK.',
-      '....KKGGyGGKK...',
-      '....KwKyyyKwK...',
-      '...KwKGGyyGGKwK.',
-      '..KKwKGGyyGGKwKK',
-      '.KwK.KGGyyGGK.Kw',
-      '.KwK.KGGGGGGK.Kw',
-      '..KK.KGGGGGGK..K',
-      '.....KgGK..KgGK.',
-      '.....KgGK..KgGK.',
-      '.....KKKK..KKKK.'
-    ];
-
-    // 4. Pet Slime
-    const P_PET_SLIME = {
-      '.': null, 'K': 0x0F172A, 'c': 0x06B6D4, 'C': 0x38BDF8,
-      'W': 0xFFFFFF, 'Y': 0xFDE047, 'p': 0xF472B6
-    };
-    const pet_slime = [
-      '................',
-      '......KKKK......',
-      '....KKCCCCKK....',
-      '...KCCCCCCCCK...',
-      '..KCCCWCCCCWCK..',
-      '..KCCCWCCCCWCK..',
-      '.KCCCCWCCCCWCCK.',
-      '.KCCpCCCCCCCCpCK',
-      '.KCCCCCCCYCCCCCK',
-      '.KCCCCCCCCCCCCCK',
-      '..KCCCCCCCCCCCK.',
-      '...KCCCCCCCCCK..',
-      '....KKCCCCCKK...',
-      '......KKKKK.....',
-      '................',
-      '................'
-    ];
-
-    // 5. Pet Fox
-    const P_PET_FOX = {
-      '.': null, 'K': 0x1A1A2E, 'o': 0xC2410C, 'O': 0xEA580C,
-      'w': 0xFFFBEB, 'W': 0xFFFFFF, 'N': 0x1A1A2E
-    };
-    const pet_fox = [
-      '..KK.......KK...',
-      '.KoOK.....KoOK..',
-      'KKooOKKKKKooOKK.',
-      'KoooOWWKKKWWooOK',
-      'KoooOWKOWKOWooOK',
-      '.KoooWWNWWoooOK.',
-      '..KoooooooooOK..',
-      '...KKWWWWWWWKK..',
-      '....KOOOOOOOK.KK',
-      '...KOOOOOOOOOKWo',
-      '...KOOOOWWWOOKWo',
-      '...KOOOOOOOOOKK.',
-      '...KOOOOOOOOOK..',
-      '....KooK..KooK..',
-      '....KooK..KooK..',
-      '....KKKK..KKKK..'
-    ];
-
-    // 6. Pet Penguin
-    const P_PET_PENGUIN = {
-      '.': null, 'K': 0x0F172A, 'b': 0x1E293B, 'B': 0x334155,
-      'w': 0xFFFBEB, 'W': 0xFFFFFF, 'y': 0xF59E0B, 'o': 0xF97316
-    };
-    const pet_penguin = [
-      '.....KKKKKK.....',
-      '...KKBBBBBBKK...',
-      '..KBBBWWWWBBBK..',
-      '.KBBBWBKWKBWBBK.',
-      '.KBBBWBKWKBWBBK.',
-      '.KBBBWWoKoWBBBK.',
-      '..KBBBWOOOOBBK..',
-      '..KBBKWWWWKBBK..',
-      '.KbBKWWWWWWKbBK.',
-      '.KbBKWWWWWWKbBK.',
-      '.KbBKWWWWWWKbBK.',
-      '.KbBKWWWWWWKbBK.',
-      '..KBBWWWWWWBBK..',
-      '...KKBBBBBBKK...',
-      '....KoOK..KoOK..',
-      '....KKKK..KKKK..'
-    ];
-
-    this.createTexture(scene, 'pet_shiba', pet_shiba, P_PET_SHIBA);
-    this.createTexture(scene, 'pet_cat', pet_cat, P_PET_CAT);
-    this.createTexture(scene, 'pet_dragon', pet_dragon, P_PET_DRAGON);
-    this.createTexture(scene, 'pet_slime', pet_slime, P_PET_SLIME);
-    this.createTexture(scene, 'pet_fox', pet_fox, P_PET_FOX);
-    this.createTexture(scene, 'pet_penguin', pet_penguin, P_PET_PENGUIN);
-  }
 }
 
 const K = {
@@ -3866,10 +3774,6 @@ var inventoryState = {
 var recipeState = {
   unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap']
 };
-var petState = {
-  collection: [{ id: 'dog', name: '강아지', enName: 'Puppy', level: 1, xp: 0, happiness: 100, lastDecayTime: Date.now() }],
-  activePet: 'dog'
-};
 var activeBuffs = {};
 let seasonalState = { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, claimedRewards: [] };
 let leaderboardState = { personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 } };
@@ -3901,7 +3805,6 @@ function migrateSaveData(d) {
     };
     data.inventory = data.inventory || { ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 }, seeds: {}, scrolls: 0, cookedDishes: {} };
     data.recipes = data.recipes || { unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap'] };
-    data.pets = data.pets || { collection: [{ id: 'dog', name: '강아지', enName: 'Puppy', level: 1, xp: 0, happiness: 100, lastDecayTime: Date.now() }], activePet: 'dog' };
     data.activeBuffs = data.activeBuffs || {};
     data.seasonal = data.seasonal || { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, claimedRewards: [] };
     data.leaderboards = data.leaderboards || {
@@ -3937,7 +3840,6 @@ function collectSave(){
     quests: questState,
     inventory: inventoryState,
     recipes: recipeState,
-    pets: petState,
     activeBuffs: activeBuffs,
     seasonal: seasonalState,
     leaderboards: leaderboardState
@@ -3964,7 +3866,6 @@ function applySave(d){
   if(migrated.quests) questState = migrated.quests;
   if(migrated.inventory) inventoryState = migrated.inventory;
   if(migrated.recipes) recipeState = migrated.recipes;
-  if(migrated.pets) petState = migrated.pets;
   if(migrated.activeBuffs) activeBuffs = migrated.activeBuffs;
   if(migrated.seasonal) seasonalState = migrated.seasonal;
   if(migrated.leaderboards) leaderboardState = migrated.leaderboards;
@@ -4020,9 +3921,6 @@ function addCoins(amount) {
     }
     if (typeof seasonalState !== 'undefined' && seasonalState?.activeSeasonId === 'childrens_day') {
       finalAmt = Math.round(finalAmt * 2.0);
-    }
-    if (typeof isPetActive === 'function' && isPetActive('dog')) {
-      finalAmt = Math.round(finalAmt * (1.0 + 0.15 * getPetPassiveMultiplier('dog')));
     }
   }
   playerCurrencies.coins = Math.max(0, playerCurrencies.coins + finalAmt);
@@ -4817,7 +4715,6 @@ function closeTopModal() {
 function closeModalById(overlayId) {
   if (overlayId === 'fish-album-overlay') window.closeFishAlbum();
   else if (overlayId === 'recipe-overlay') window.closeRecipeBook();
-  else if (overlayId === 'pet-overlay') window.closePetOverlay();
   else if (overlayId === 'seasonal-overlay') window.closeSeasonalOverlay();
   else if (overlayId === 'leaderboard-overlay') window.closeLeaderboard();
   else if (overlayId === 'shop-overlay') window.closeShop();
@@ -8244,12 +8141,7 @@ class FarmScene extends Phaser.Scene {
       this._label(this.appleX, this.appleY - 30, `+${bonus} 🍎 BONUS!`);
 
       let yieldCount = 1;
-      if (typeof isPetActive === 'function' && isPetActive('hamster') && Math.random() < 0.30 * getPetPassiveMultiplier('hamster')) {
-        yieldCount = 2;
-        showToast(`🐹 Hamster Pouch Duplicator! Double harvest (+2 사과)!`);
-      }
       if (typeof addIngredient === 'function') addIngredient('사과', yieldCount);
-      if (typeof addPetXP === 'function') addPetXP(10);
 
       // Start regrowth timer
       this.appleRipe    = false;
@@ -8320,51 +8212,6 @@ class FarmScene extends Phaser.Scene {
   }
 
   // ── GINGER CAT BEHAVIOR STATE MACHINE ───────────────────────────────────────
-  _updatePetCompanion(dt) {
-    if (!this.player || typeof petState === 'undefined' || !petState || !petState.activePet) {
-      if (this.petSprite) { this.petSprite.destroy(); this.petSprite = null; }
-      if (this.petShadow) { this.petShadow.destroy(); this.petShadow = null; }
-      return;
-    }
-    const petId = petState.activePet;
-    const petTexMap = {
-      dog: 'pet_shiba',
-      shiba: 'pet_shiba',
-      cat: 'pet_cat',
-      dragon: 'pet_dragon',
-      slime: 'pet_slime',
-      fox: 'pet_fox',
-      penguin: 'pet_penguin',
-      rabbit: 'pet_fox',
-      hamster: 'pet_shiba',
-      parrot: 'pet_dragon'
-    };
-    const texKey = petTexMap[petId] || 'pet_shiba';
-
-    if (!this.petSprite || this.petSprite.texture.key !== texKey) {
-      if (this.petSprite) this.petSprite.destroy();
-      this.petSprite = this.add.sprite(this.player.x - 24, this.player.y + 8, texKey)
-        .setScale(1.3).setDepth(this.player.depth - 1);
-      if (this.shadows) this.petShadow = this.shadows.createShadow(this.petSprite, 22, 8, 8);
-    }
-
-    // Smooth pet companion movement following player
-    const targetX = this.player.x + (this.player.flipX ? 28 : -28);
-    const targetY = this.player.y + 10;
-    const dist = Phaser.Math.Distance.Between(this.petSprite.x, this.petSprite.y, targetX, targetY);
-
-    if (dist > 16) {
-      const angle = Phaser.Math.Angle.Between(this.petSprite.x, this.petSprite.y, targetX, targetY);
-      const speed = Math.min(260, dist * 6);
-      this.petSprite.x += Math.cos(angle) * speed * (dt / 1000);
-      this.petSprite.y += Math.sin(angle) * speed * (dt / 1000);
-      this.petSprite.setFlipX(this.player.x < this.petSprite.x);
-    }
-
-    const petBaseY = this.petSprite.y + (this.petSprite.displayHeight * 0.5);
-    this.petSprite.setDepth(petBaseY);
-    if (this.petShadow) this.petShadow.setDepth(petBaseY - 1);
-  }
 
   _updateCatNPC(dt) {
     if (!this.catSprite || !this.player) return;
@@ -8476,7 +8323,6 @@ class FarmScene extends Phaser.Scene {
       }
     }
     if (this.lighting) this.lighting.update();
-    this._updatePetCompanion(dt);
 
     // Dynamic Y-sort depth sorting for NPCs (using static base Y anchors)
     if (this.shopNPC) this.shopNPC.setDepth(this.shopY || this.shopNPC.y);
@@ -8817,12 +8663,7 @@ class FarmScene extends Phaser.Scene {
           const ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
 
           let yieldCount = 1;
-          if (typeof isPetActive === 'function' && isPetActive('hamster') && Math.random() < 0.30 * getPetPassiveMultiplier('hamster')) {
-            yieldCount = 2;
-            showToast(`🐹 Hamster Pouch Duplicator! Double harvest (+2 ${ingName})!`);
-          }
           if (typeof addIngredient === 'function') addIngredient(ingName, yieldCount);
-          if (typeof addPetXP === 'function') addPetXP(10);
         });
         this._clearPlot(plot);
         savePlotsFn();
@@ -10230,7 +10071,6 @@ class FishingScene extends Phaser.Scene {
     addCoins(35);
 
     if (typeof addIngredient === 'function') addIngredient(fish.ko, 1);
-    if (typeof addPetXP === 'function') addPetXP(15);
 
     if (fish.rarity === 'Legendary' || fish.ko === '황금물고기') {
       addGems(5);
@@ -10914,7 +10754,6 @@ if (typeof window !== 'undefined') {
     if (typeof activeBuffs !== 'undefined' && Object.keys(activeBuffs).length > 0) {
       updateBuffHUD();
     }
-    decayPetHappiness();
   }, 1000);
 }
 
@@ -11116,8 +10955,6 @@ function finishCookingMinigame() {
   inventoryState.cookedDishes[currentCookingRecipe.id] = (inventoryState.cookedDishes[currentCookingRecipe.id] || 0) + 1;
   persistSave();
 
-  // Add pet XP if active pet exists
-  addPetXP(20);
 
   // Show cultural fact modal!
   showCulturalFact(currentCookingRecipe.id, grade);
@@ -11153,227 +10990,6 @@ window.closeCulturalFact = function() {
   if (overlay) overlay.classList.remove('visible');
 };
 
-// ═══════════════ R4: PET COMPANION SYSTEM ═════════════════════════════════════
-var PET_DB = [
-  {
-    id: 'dog', name: '강아지', enName: 'Puppy / Dog', icon: '🐶', costGems: 10,
-    desc: 'Coin Magnet (+15% Coins) & 15% Auto-Water Crops when wilting.'
-  },
-  {
-    id: 'cat', name: '고양이', enName: 'Cat', icon: '🐱', costGems: 15,
-    desc: 'Feline Nunchi (+25% Combat Damage in Dungeon & Spell Duel).'
-  },
-  {
-    id: 'rabbit', name: '토끼', enName: 'Rabbit', icon: '🐰', costGems: 15,
-    desc: 'Rapid Hop (+50% Crop Growth Speed).'
-  },
-  {
-    id: 'hamster', name: '햄스터', enName: 'Hamster', icon: '🐹', costGems: 20,
-    desc: 'Pouch Duplicator (+30% Double Harvest on all crops & apples).'
-  },
-  {
-    id: 'parrot', name: '앵무새', enName: 'Parrot', icon: '🦜', costGems: 25,
-    desc: 'Echo Scholar (+1 Extra Free Quiz Hint & +20% Fishing Luck).'
-  }
-];
-
-function isPetActive(petId) {
-  if (!petState || petState.activePet !== petId) return false;
-  const pet = petState.collection.find(p => p.id === petId);
-  if (!pet) return false;
-  return pet.happiness > 0; // pet gives passive if happiness > 0
-}
-
-function getPetPassiveMultiplier(petId) {
-  if (!isPetActive(petId)) return 0;
-  const pet = petState.collection.find(p => p.id === petId);
-  if (!pet) return 0;
-  const happinessRatio = pet.happiness >= 50 ? 1.0 : 0.5; // reduced passive if unhappy < 50%
-  const levelBonus = 1.0 + (pet.level - 1) * 0.2; // +20% power per level
-  return happinessRatio * levelBonus;
-}
-
-function decayPetHappiness() {
-  if (!petState || !petState.collection || petState.collection.length === 0) return;
-  const now = Date.now();
-  petState.collection.forEach(pet => {
-    pet.lastDecayTime = pet.lastDecayTime || now;
-    // Decays 5% every 5 minutes (300,000 ms)
-    if (now - pet.lastDecayTime >= 300000) {
-      pet.happiness = Math.max(0, pet.happiness - 5);
-      pet.lastDecayTime = now;
-      persistSave();
-    }
-  });
-}
-
-function addPetXP(amount) {
-  if (!petState || !petState.activePet) return;
-  const pet = petState.collection.find(p => p.id === petState.activePet);
-  if (!pet) return;
-  pet.xp = (pet.xp || 0) + amount;
-  persistSave();
-}
-
-window.openPetOverlay = function() {
-  playChiptuneSFX('click');
-  const overlay = document.getElementById('pet-overlay');
-  const activeCard = document.getElementById('pet-active-card');
-  const rosterContainer = document.getElementById('pet-roster-container');
-
-  if (!overlay || !activeCard || !rosterContainer) return;
-
-  // Render Active Pet Card
-  const activePetObj = petState.collection.find(p => p.id === petState.activePet);
-  const activePetDef = activePetObj ? PET_DB.find(p => p.id === activePetObj.id) : null;
-
-  if (activePetObj && activePetDef) {
-    const maxXp = activePetObj.level * 50;
-    const xpPct = Math.min(100, Math.round((activePetObj.xp / maxXp) * 100));
-    const happyPct = activePetObj.happiness;
-
-    activeCard.innerHTML = `
-      <div style="font-size:48px;">${activePetDef.icon}</div>
-      <div style="flex:1;">
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span style="font-family:'Press Start 2P',monospace; font-size:14px; color:#fff;">${activePetObj.name}</span>
-          <span class="pet-card-level">Lv.${activePetObj.level}</span>
-          <span style="font-size:16px;">${happyPct >= 70 ? '😊' : happyPct >= 30 ? '😐' : '😿'}</span>
-        </div>
-        <div style="font-size:11px; color:#94a3b8; margin:4px 0;">${activePetDef.desc}</div>
-        
-        <div style="margin-top:6px;">
-          <div style="font-size:9px; color:#c084fc; margin-bottom:2px;">XP: ${activePetObj.xp} / ${maxXp}</div>
-          <div class="pet-bar-bg"><div class="pet-bar-fill-xp" style="width:${xpPct}%;"></div></div>
-        </div>
-
-        <div style="margin-top:6px;">
-          <div style="font-size:9px; color:#4ade80; margin-bottom:2px;">Happiness: ${happyPct}% ${happyPct < 50 ? '(Reduced Bonus!)' : ''}</div>
-          <div class="pet-bar-bg"><div class="pet-bar-fill-happy" style="width:${happyPct}%;"></div></div>
-        </div>
-      </div>
-
-      <div style="display:flex; flex-direction:column; gap:6px;">
-        <button class="cook-btn" onclick="feedActivePet()">🍎 Feed Dish</button>
-        ${activePetObj.xp >= maxXp ? `<button class="cook-btn" style="background:linear-gradient(135deg,#ec4899,#a855f7);" onclick="startPetLevelUpQuiz('${activePetObj.id}')">🎓 Level Up Quiz!</button>` : ''}
-      </div>
-    `;
-  } else {
-    activeCard.innerHTML = '<div style="color:#94a3b8;">No active companion equipped. Select one from the roster below!</div>';
-  }
-
-  // Render Roster Grid
-  rosterContainer.innerHTML = '';
-  PET_DB.forEach(def => {
-    const owned = petState.collection.find(p => p.id === def.id);
-    const isActive = petState.activePet === def.id;
-
-    const card = document.createElement('div');
-    card.className = `pet-card ${isActive ? 'active' : ''}`;
-    card.innerHTML = `
-      <div class="pet-card-avatar">${def.icon}</div>
-      <div class="pet-card-name">${def.name}</div>
-      <div style="font-size:11px; color:#cbd5e1;">${def.enName}</div>
-      <div class="pet-card-passive">${def.desc}</div>
-      ${owned ? `
-        <div style="font-size:10px; color:var(--neon-pink); font-weight:bold;">Lv.${owned.level} | ${owned.happiness}% 😊</div>
-        <button class="cook-btn" style="width:100%; margin-top:4px;" ${isActive ? 'disabled' : ''} onclick="equipPet('${def.id}')">${isActive ? 'Equipped' : 'Equip'}</button>
-      ` : `
-        <button class="cook-btn" style="width:100%; margin-top:4px; background:linear-gradient(135deg,#06b6d4,#0284c7);" onclick="adoptPet('${def.id}')">💎 Adopt (${def.costGems} Gems)</button>
-      `}
-    `;
-    rosterContainer.appendChild(card);
-  });
-
-  setModalState('pet-overlay', true);
-};
-
-window.closePetOverlay = function() {
-  playChiptuneSFX('click');
-  setModalState('pet-overlay', false);
-};
-
-
-window.adoptPet = function(petId) {
-  const def = PET_DB.find(p => p.id === petId);
-  if (!def) return;
-  if (!spendGems(def.costGems)) {
-    showToast(`⚠️ Need ${def.costGems} Gems to adopt ${def.name}!`);
-    return;
-  }
-
-  petState.collection.push({
-    id: def.id,
-    name: def.name,
-    enName: def.enName,
-    level: 1,
-    xp: 0,
-    happiness: 100,
-    lastDecayTime: Date.now()
-  });
-  petState.activePet = def.id;
-
-  showToast(`🎉 Adopted ${def.icon} ${def.name}! Set as active companion!`);
-  openPetOverlay();
-};
-
-window.equipPet = function(petId) {
-  petState.activePet = petId;
-  persistSave();
-  showToast(`🐾 Equipped ${petId} as active companion!`);
-  openPetOverlay();
-};
-
-window.feedActivePet = function() {
-  if (!petState || !petState.activePet) return;
-  const pet = petState.collection.find(p => p.id === petState.activePet);
-  if (!pet) return;
-
-  const dishes = inventoryState.cookedDishes || {};
-  const availableDishes = Object.entries(dishes).filter(([_, count]) => count > 0);
-
-  if (availableDishes.length === 0) {
-    // Fallback: check raw ingredients
-    const ings = inventoryState.ingredients || {};
-    const availIngs = Object.entries(ings).filter(([_, count]) => count > 0);
-
-    if (availIngs.length === 0) {
-      showToast('⚠️ No cooked dishes or ingredients to feed your pet! Cook a dish first.');
-      return;
-    }
-
-    const [ingName, cnt] = availIngs[0];
-    ings[ingName]--;
-    pet.happiness = Math.min(100, pet.happiness + 30);
-    pet.xp += 10;
-    persistSave();
-    showToast(`😋 Fed ${ingName} to ${pet.name}! (+30% Happiness, +10 XP)`);
-    openPetOverlay();
-    return;
-  }
-
-  const [dishId, cnt] = availableDishes[0];
-  const recipe = RECIPE_DB.find(r => r.id === dishId);
-  dishes[dishId]--;
-  pet.happiness = Math.min(100, pet.happiness + 50);
-  pet.xp += 25;
-  persistSave();
-
-  showToast(`😋 Fed delicious ${recipe ? recipe.name : dishId} to ${pet.name}! (+50% Happiness, +25 XP)`);
-  openPetOverlay();
-};
-
-window.startPetLevelUpQuiz = function(petId) {
-  const pet = petState.collection.find(p => p.id === petId);
-  const def = PET_DB.find(p => p.id === petId);
-  if (!pet || !def) return;
-
-  closePetOverlay();
-
-  // Create pet vocab question
-  const targetWord = { ko: def.name, en: def.enName.split('/')[0].trim() };
-  openQuiz(targetWord, null, 3);
-};
 
 // ═══════════════ R5 SEASONAL EVENTS & LOCAL LEADERBOARD SYSTEM ═════════════════
 
@@ -11598,10 +11214,10 @@ function claimSeasonalQuest(questId) {
 // ══════════════ LOCAL LEADERBOARD SYSTEM ═════════════════════════════════════
 
 const LOCAL_RIVALS = [
-  { name: 'Min-jun (민준)', title: 'Valley Veteran 🌾', words: 24, honor: 850, cookingTier: 'Sous Chef 🍲', petsPct: 80, arcade: 1450, dungeon: 8, duelStreak: 7 },
-  { name: 'Seo-yeon (서연)', title: 'Hansik Scholar 👑', words: 18, honor: 620, cookingTier: 'Apprentice Chef 👨‍🍳', petsPct: 60, arcade: 1100, dungeon: 6, duelStreak: 5 },
-  { name: 'Ji-hoon (지훈)', title: 'Spell Duelist ⚡', words: 12, honor: 450, cookingTier: 'Novice Cook 🍳', petsPct: 40, arcade: 850, dungeon: 4, duelStreak: 4 },
-  { name: 'Ha-eun (하은)', title: 'Pet Companion 🎨', words: 8, honor: 280, cookingTier: 'Novice Cook 🍳', petsPct: 40, arcade: 520, dungeon: 2, duelStreak: 2 }
+  { name: 'Min-jun (민준)', title: 'Valley Veteran 🌾', words: 24, honor: 850, cookingTier: 'Sous Chef 🍲', arcade: 1450, dungeon: 8, duelStreak: 7 },
+  { name: 'Seo-yeon (서연)', title: 'Hansik Scholar 👑', words: 18, honor: 620, cookingTier: 'Apprentice Chef 👨‍🍳', arcade: 1100, dungeon: 6, duelStreak: 5 },
+  { name: 'Ji-hoon (지훈)', title: 'Spell Duelist ⚡', words: 12, honor: 450, cookingTier: 'Novice Cook 🍳', arcade: 850, dungeon: 4, duelStreak: 4 },
+  { name: 'Ha-eun (하은)', title: 'Art Artisan 🎨', words: 8, honor: 280, cookingTier: 'Novice Cook 🍳', arcade: 520, dungeon: 2, duelStreak: 2 }
 ];
 
 function computeCookingTier() {
@@ -11639,8 +11255,6 @@ function updateLeaderboardMetrics() {
   leaderboardState.personalBests.totalHonor = playerCurrencies?.honor || 0;
   leaderboardState.personalBests.highestCookingTier = computeCookingTier();
   
-  const petCount = (petState?.collection || []).length;
-  leaderboardState.personalBests.petCollectionPct = Math.round((petCount / 5) * 100);
 
   if (typeof leaderboardState.personalBests.arcadeHighScore !== 'number') {
     leaderboardState.personalBests.arcadeHighScore = 0;
@@ -11666,7 +11280,6 @@ function openLeaderboard(tab = 'vocab') {
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">📖 Words Mastered: <b style="color:var(--neon-gold)">${pb.totalWordsMastered}</b></div>
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🎖️ Total Honor: <b style="color:var(--neon-gold)">${pb.totalHonor}</b></div>
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🍳 Cooking Tier: <b style="color:var(--neon-gold)">${pb.highestCookingTier}</b></div>
-      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🐾 Pets Collected: <b style="color:var(--neon-gold)">${pb.petCollectionPct}%</b></div>
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">👾 Arcade Score: <b style="color:var(--neon-gold)">${pb.arcadeHighScore}</b></div>
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🗡️ Dungeon Floor: <b style="color:var(--neon-gold)">Floor ${pb.dungeonMaxFloor}</b></div>
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">⚡ Duel Streak: <b style="color:var(--neon-gold)">${pb.duelMaxWinStreak} Wins</b></div>
@@ -11704,7 +11317,6 @@ function switchLeaderboardTab(tabId) {
     words: pb.totalWordsMastered || 0,
     honor: pb.totalHonor || 0,
     cookingTier: pb.highestCookingTier || 'Novice Cook 🍳',
-    petsPct: pb.petCollectionPct || 20,
     arcade: pb.arcadeHighScore || 0,
     dungeon: pb.dungeonMaxFloor || 0,
     duelStreak: pb.duelMaxWinStreak || 0,
@@ -11718,7 +11330,6 @@ function switchLeaderboardTab(tabId) {
     if (tabId === 'vocab') return b.words - a.words;
     if (tabId === 'honor') return b.honor - a.honor;
     if (tabId === 'cooking') return computeCookingTierScore(b.cookingTier) - computeCookingTierScore(a.cookingTier);
-    if (tabId === 'pets') return b.petsPct - a.petsPct;
     if (tabId === 'arcade') return b.arcade - a.arcade;
     if (tabId === 'dungeon') return b.dungeon - a.dungeon;
     if (tabId === 'duel') return b.duelStreak - a.duelStreak;
@@ -11729,7 +11340,6 @@ function switchLeaderboardTab(tabId) {
   if (tabId === 'vocab') valColHeader = 'Words Mastered (>=5 Harvests)';
   if (tabId === 'honor') valColHeader = 'Total Honor 🏅';
   if (tabId === 'cooking') valColHeader = 'Cooking Rank';
-  if (tabId === 'pets') valColHeader = 'Pet Collection %';
   if (tabId === 'arcade') valColHeader = 'Arcade High Score';
   if (tabId === 'dungeon') valColHeader = 'Dungeon Max Floor';
   if (tabId === 'duel') valColHeader = 'Spell Duel Win Streak';
@@ -11757,7 +11367,6 @@ function switchLeaderboardTab(tabId) {
     if (tabId === 'vocab') displayVal = `${entry.words} words`;
     if (tabId === 'honor') displayVal = `${entry.honor} Honor 🏅`;
     if (tabId === 'cooking') displayVal = entry.cookingTier;
-    if (tabId === 'pets') displayVal = `${entry.petsPct}%`;
     if (tabId === 'arcade') displayVal = `${entry.arcade} pts`;
     if (tabId === 'dungeon') displayVal = `Floor ${entry.dungeon}`;
     if (tabId === 'duel') displayVal = `${entry.duelStreak} Win Streak`;
