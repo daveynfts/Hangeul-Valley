@@ -1,16 +1,15 @@
-## 2026-07-24T20:17:30Z
-You are Explorer 1 for Milestone 1 (Inventory Storage System & Ground Drop Pipeline).
-Your working directory for metadata is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1`.
-Project root is `d:\Hangeul Valley`.
+## 2026-07-24T14:23:56Z
+You are Explorer 1 for Milestone 1 (Beehive Farm NPC & Scene Setup).
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1`.
+Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\handoff.md`.
 
-Read `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`.
-Examine `game.js`, `index.html`, `assets/game.js`, and `assets/index.html`.
+Read `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\game.js`.
 
-Focus area: Codebase state investigation & overall Storage/Inventory architecture:
-1. Locate where crop data, harvest logic, player inventory/state, and save/load functions (`collectSave`, `applySave`) are defined in `game.js`.
-2. Analyze how inventory state should be structured (slots array vs map, item types, stacking up to slot capacity starting at 20, expanding via gold).
-3. Identify existing HUD buttons and modal structures in `index.html` and `game.js`.
-4. Formulate concrete implementation strategy for R1 (Inventory Storage System) and how it interfaces with R2 (Ground Drop) and save/load.
+Investigate the following areas in `game.js`:
+1. How `FarmScene` renders objects, NPCs, tree entities (specifically apple tree near line ~3500-6000), labels, and interaction hints (`[SPACE]`).
+2. Where and how to add the pixel-art Beehive sprite near the apple tree in `FarmScene`, including procedural texture generation in `PixelArtRenderer` (`_genBeehiveTextures` or similar) and buzzing particle effect / vibration animation.
+3. How Phaser Scene management and scene transitions work in `game.js` (e.g. `this.scene.start('BeeScene')` or `this.scene.launch` / camera fade out/in `cameras.main.fade`).
+4. How FarmScene saves player position or pauses/resumes state when transitioning to another scene and returning.
+5. Command to test syntax: `node -c game.js`.
 
-Write your findings to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1\analysis.md` and update `progress.md`.
-Send a message back to the orchestrator with your detailed report when complete.
+Synthesize your findings and provide a step-by-step implementation plan for R1 (Beehive NPC on Farm Map & Scene Transition). Deliver your handoff report and send a message back to the Project Orchestrator when complete.

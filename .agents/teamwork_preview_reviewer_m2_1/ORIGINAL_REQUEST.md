@@ -1,16 +1,12 @@
-## 2026-07-24T13:34:36Z
-You are Reviewer 1 for Milestone 2 (Cooking System with Recipes, UI & Achievements) in Hangeul Valley.
-Working directory: d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1.
-Read PROJECT.md at d:\Hangeul Valley\.agents\orchestrator\PROJECT.md and Worker 3 handoff at d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md.
+## 2026-07-24T14:33:33Z
+You are Reviewer 1 for Milestone 2 (Honey Rewards, Cooking Integration & Save/Load Persistence).
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1`.
+Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1\handoff.md`.
 
-Your tasks:
-1. Examine code in game.js, assets/game.js, index.html, and assets/index.html for Milestone 2:
-   - 10 recipes in COOKING_RECIPES
-   - cookRecipe(recipeId) execution engine, checking ingredients, deducting items, awarding XP & Gold, tracking cookingState.
-   - Cooking UI modal #cooking-overlay, HUD button #cooking-btn, keyboard shortcut 'C'/'c' with text focus guards.
-   - Master Chef achievement (master_chef) when 10 recipes cooked.
-   - Persistence in collectSave(), applySave(), and migrateSaveData().
-2. Check code quality, robustness, edge cases (e.g. cooking with partial ingredients, rapid double-click, full inventory, non-existent recipe ID).
-3. Test syntax using run_command: node -c "d:\Hangeul Valley\game.js" and node -c "d:\Hangeul Valley\assets\game.js".
-4. Provide a structured Reviewer report with explicit PASS/FAIL verdict, findings, and verification details in d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m2_1\handoff.md.
-Send message back to parent when done.
+Review the implementation in `game.js` against requirements R3 and R4:
+1. R3 (Honey Registration & Rewards): `'꿀'` item registered in `ITEM_DB` (`id: 'honey'`, `name: 'Honey'`, `nameKo: '꿀'`, `icon: '🍯'`, `type: 'ingredient'`). `BeeScene.showResultsSummary()` grants honey rewards via `addItemToInventory('honey', totalHoney)` and displays toast notification.
+2. R3 (Cooking System Integration): Authentic Korean honey recipes added to `COOKING_RECIPES` (`Honey Yakgwa 꿀약과` and `Honey Tea 꿀차`). Stock check, ingredient deduction (`removeItemFromInventory`), and UI rendering verified.
+3. R4 (Save/Load & Scene Persistence): `collectSave()` and `applySave()` serialize and restore `inventoryState.ingredients['꿀']` and `cookingState`. Scene transition pause/resume preserves overworld state.
+4. Code quality: run `node -c game.js`.
+
+Verify code correctness, completeness, and functional integrity. Deliver your verdict (PASS/FAIL) and handoff report, then send a message back to the Project Orchestrator.

@@ -1,329 +1,243 @@
-# Technical Analysis & Architectural Specification: Cooking UI Modal & HUD Integration (Milestone 2)
-
-**Explorer 2 Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2`  
-**Target Files**: `index.html`, `game.js`, `assets/index.html`, `assets/game.js`  
-**Date**: 2026-07-24  
-
----
+# Detailed Technical Analysis: Cooking Recipe Integration (Milestone 2)
 
 ## 1. Executive Summary
-
-This report establishes the complete structural, visual, and behavioral specification for the **Cooking UI Modal & HUD Integration** in **Hangeul Valley** (Milestone 2).
-
-### Key Architectural Deliverables
-1. **Modal Convention Audit**: Analysis of existing glassmorphism modals (`.glass-modal`, `#inventory-overlay`, `#quest-overlay`) to ensure 100% design system alignment.
-2. **`#cooking-overlay` & `#cooking-panel` Design**: Glassmorphic modal overlay containing recipe selection grid, ingredient cards with dynamic `owned / needed` color-coded status badges, cook action buttons with input validation state, reward badges for XP, Gold & Buffs, and recipe completion tracking.
-3. **HUD Action Button Integration**: Primary action button (`🍳 Cooking` / `요리`) placed seamlessly inside `#hud-actions-group`.
-4. **Hotkey System ('C' / 'c') & Input Focus Guard**: Dedicated keyboard shortcut to toggle cooking UI, guarded by DOM input focus detection to prevent accidental triggers while typing in text fields.
-5. **Dual-File Synchronization Specification**: Explicit blueprints for mirroring changes between `index.html` <-> `assets/index.html` and `game.js` <-> `assets/game.js`.
+This report analyzes the Cooking Recipe system in `game.js` and `index.html` for Milestone 2 (Cooking Recipe Integration). It details how recipes are structured, how ingredient checking and deduction work via `ITEM_DB` and `inventoryState`, how the Cooking Modal UI renders recipes and rewards, and how to seamlessly integrate authentic Korean honey-based recipes (e.g. **Honey Yakgwa / 꿀약과**, **Honey Tea / 꿀차**, **Honey Rice Cake / 꿀떡**).
 
 ---
 
-## 2. Examination of `index.html` Modal Conventions
-
-### 2.1 CSS Design System Parameters
-All overlay modals in Hangeul Valley follow a strict 64-bit glassmorphic theme defined in `index.html`:
-
-| CSS Property | Modal Overlay standard | Glass Panel (`.glass-modal`) standard |
-|---|---|---|
-| **Positioning** | `fixed; inset: 0; align-items: center; justify-content: center;` | `position: relative; max-height: 88vh; overflow-y: auto;` |
-| **Z-Index** | `870` (Inventory) / `880` (Quest) / `890` (Recipe/Cooking) | Inherits overlay stack level above Phaser canvas (`z-index: 1`) |
-| **Backdrop Blur** | `backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);` | `background: rgba(15, 23, 42, 0.94);` |
-| **Borders** | Overlay: borderless dimming layer (`background: rgba(10, 15, 30, 0.88)`) | `border: 2px solid var(--neon-gold); border-radius: 18px;` |
-| **Box Shadow** | N/A | `box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 20px 60px rgba(0,0,0,.9);` |
-| **Animation** | `animation: fadeIn .2s;` | Smooth scale/slide transition |
-
-### 2.2 Header Layout Convention
-Standard modal headers (e.g. `#inventory-panel`, `#quest-panel`, `#recipe-panel`) follow a consistent flexbox contract:
-- **Left**: Icon (font-size 26px–32px) + Vertical stack of retro Title (`font-family: 'Press Start 2P', monospace; font-size: 16px; color: var(--neon-gold);`) and munted Subtitle (`font-size: 11px; color: rgba(255,255,255,0.6)`).
-- **Right**: Badge indicators (e.g., `#inv-capacity-badge` or `#cooking-progress-badge`) + Close Button `✕` (`background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; padding: 4px 12px; font-size: 16px; cursor: pointer;`).
-- **Divider**: `border-bottom: 1.5px solid rgba(245, 158, 11, 0.3); padding-bottom: 14px; margin-bottom: 16px;`.
-
----
-
-## 3. Cooking UI Modal Design (`#cooking-overlay` & `#cooking-panel`)
-
-### 3.1 HTML DOM Structure
-
-```html
-<!-- ══════════════ COOKING KITCHEN (요리) OVERLAY ══════════════ -->
-<div id="cooking-overlay">
-  <div id="cooking-panel" class="glass-modal" style="max-width:800px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
-    
-    <!-- Modal Header -->
-    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(245,158,11,0.3); padding-bottom:14px; margin-bottom:16px;">
-      <div style="display:flex; align-items:center; gap:10px;">
-        <span style="font-size:32px">🍳</span>
-        <div>
-          <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:var(--neon-gold)">KOREAN COOKING KITCHEN (요리)</div>
-          <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Craft Hansik dishes, gain Vocab XP, Gold & powerful buffs!</div>
-        </div>
-      </div>
-      <div style="display:flex; gap:12px; align-items:center;">
-        <span id="cooking-progress-badge" style="font-family:'Press Start 2P',monospace; font-size:11px; background:rgba(245,158,11,0.15); border:1px solid var(--neon-gold); color:var(--neon-gold); padding:4px 10px; border-radius:8px;">Cooked: 0 / 9</span>
-        <button onclick="closeCookingUI()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
-      </div>
-    </div>
-
-    <!-- Pantry Stock Summary Bar -->
-    <div id="cooking-pantry-bar" style="background:rgba(30,41,59,0.7); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-      <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold)">🧺 My Ingredients Stock (재료):</div>
-      <div id="cooking-pantry-list" style="display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:#cbd5e1;">
-        <!-- Rendered by JS -->
-      </div>
-    </div>
-
-    <!-- Recipe Selection Cards Grid -->
-    <div id="cooking-recipe-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(230px, 1fr)); gap:14px;">
-      <!-- Dynamic recipe cards rendered by JS -->
-    </div>
-
-  </div>
-</div>
-```
-
-### 3.2 Recipe Card Layout & Badge Specifications
-
-Each card in `#cooking-recipe-grid` contains 5 key sections:
-
-```
-┌─────────────────────────────────────────────────────────┐
-│ [Icon: 🥬]      김치 (Kimchi)             [Status Badge] │
-├─────────────────────────────────────────────────────────┤
-│ Required Ingredients:                                   │
-│  • 배추 1/1 ✓ [GREEN]    • 고추 0/1 ✗ [RED]             │
-├─────────────────────────────────────────────────────────┤
-│ Rewards & Buffs:                                        │
-│  [⭐ +50 XP]  [🪙 +30 Gold]  [⚡ 2x Coin Rate (5m)]      │
-├─────────────────────────────────────────────────────────┤
-│ [ 🍳 Cook Recipe ]    [ 🏺 Culture Info ]              │
-└─────────────────────────────────────────────────────────┘
-```
-
-#### Ingredient Requirement Cards (`owned / needed` Badges)
-For each ingredient requirement entry in `recipe.req`:
-- `owned = inventoryState.ingredients[ingName] || 0`
-- `needed = reqCount`
-- **Sufficient Badge** (`owned >= needed`):
-  - CSS: `background: rgba(34, 197, 94, 0.15); border: 1px solid #22c55e; color: #4ade80;`
-  - HTML text: `<span>${ingIcon} ${ingName} ${owned}/${needed} ✓</span>`
-- **Missing Badge** (`owned < needed`):
-  - CSS: `background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #f87171;`
-  - HTML text: `<span>${ingIcon} ${ingName} ${owned}/${needed} ✗</span>`
-
-#### Reward Badges
-- **XP Reward Badge**: `background: rgba(168, 85, 247, 0.18); border: 1px solid #a855f7; color: #c084fc; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-family: 'Press Start 2P', monospace;`
-- **Gold Reward Badge**: `background: rgba(245, 158, 11, 0.18); border: 1px solid #f59e0b; color: #fbbf24; padding: 3px 8px; border-radius: 6px; font-size: 10px; font-family: 'Press Start 2P', monospace;`
-- **Gameplay Buff Badge**: `background: rgba(6, 182, 212, 0.15); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); padding: 4px; border-radius: 6px; font-size: 10px; text-align: center; font-weight: bold;`
-
-#### Cook Button State (`.cook-btn`)
-- **Enabled State** (`allIngredientsMet === true`):
-  - CSS: `background: linear-gradient(135deg, #f59e0b, #d97706); border: none; border-radius: 8px; color: #fff; font-family: 'Press Start 2P', monospace; font-size: 10px; padding: 8px; cursor: pointer;`
-  - Hover: `opacity: 0.95; transform: scale(1.02); box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);`
-- **Disabled State** (`allIngredientsMet === false`):
-  - Attributes: `disabled`
-  - CSS: `opacity: 0.45; cursor: not-allowed; transform: none; filter: grayscale(0.5);`
-
----
-
-## 4. HUD Action Button & Hotkey Toggle ('C' / 'c')
-
-### 4.1 HUD Action Button Integration
-The Cooking HUD button must be placed in `#hud-actions-group` in `index.html` alongside `Vocab`, `Shop`, `Quests`, and `Bag`:
-
-```html
-<!-- In index.html line ~1333 -->
-<div id="hud-actions-group" class="hud-group">
-  <button class="hud-btn" id="vocab-btn" title="Vocabulary Book">📖 Vocab</button>
-  <button class="hud-btn" id="shop-btn" title="Seed shop">🏪 Shop</button>
-  <button class="hud-btn" id="quest-btn" title="Quest Log" onclick="openQuestOverlay()">📜 Quests</button>
-  <button class="hud-btn" id="cooking-btn" title="Cooking Kitchen (요리) [Key: C]" onclick="openCookingUI()">🍳 Cooking</button>
-  <button class="hud-btn" id="inventory-btn" title="Inventory Storage (🎒) [Key: I/E]" onclick="openInventoryUI()">🎒 Bag</button>
-  <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
-  <button class="hud-btn" id="hud-more-btn" title="More Features" onclick="toggleHudOverflow(event)">➕ More</button>
-  <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level Menu">☰ Menu</button>
-</div>
-```
-
-### 4.2 Hotkey Toggle ('C' / 'c') with Input Guard Logic
-
-In `game.js` (and `assets/game.js`), the keyboard listener handles hotkey toggling with active input element protection:
+## 2. Array Definition of `COOKING_RECIPES`
+In `game.js` (lines 11752–11890), `COOKING_RECIPES` is defined as a global array of recipe objects and attached to `window.COOKING_RECIPES`.
 
 ```javascript
-// Global keydown handler for UI hotkeys
-if (typeof window !== 'undefined' && window.addEventListener) {
-  window.addEventListener('keydown', (e) => {
-    // 1. Text Input Guard Check
-    const activeEl = document.activeElement;
-    const isInputFocused = activeEl && (
-      activeEl.tagName === 'INPUT' ||
-      activeEl.tagName === 'TEXTAREA' ||
-      activeEl.isContentEditable
-    );
-    if (isInputFocused) return; // Do not intercept keypresses when user is typing
+// game.js: lines 11752-11766
+var COOKING_RECIPES = [
+  {
+    id: 'kimchi',
+    nameEn: 'Kimchi',
+    nameKo: '김치',
+    icon: '🥬',
+    description: 'Traditional spicy fermented Napa cabbage with chili and garlic.',
+    ingredients: [
+      { itemId: 'cabbage', count: 1 },
+      { itemId: 'chili', count: 1 },
+      { itemId: 'garlic', count: 1 }
+    ],
+    xpReward: 25,
+    goldReward: 30
+  },
+  ...
+];
+```
 
-    // 2. Escape Key (Close Top Modal)
-    if (e.key === 'Escape' && activeModalStack.length > 0) {
-      closeTopModal();
-      return;
-    }
+### Data Schema of a Recipe Object
+| Property | Type | Description | Example |
+|---|---|---|---|
+| `id` | `String` | Unique recipe identifier | `'honey_yakgwa'` |
+| `nameEn` | `String` | English dish name | `'Honey Yakgwa'` |
+| `nameKo` | `String` | Korean dish name | `'꿀약과'` |
+| `icon` | `String` | Emoji icon representing the dish | `'🥮'` |
+| `description` | `String` | Description of the dish | `'Traditional deep-fried honey pastry...'` |
+| `ingredients` | `Array` | List of requirement objects `{ itemId, count }` | `[{ itemId: 'honey', count: 2 }, { itemId: 'rice', count: 1 }]` |
+| `xpReward` | `Number` | XP bonus granted on successful cooking | `50` |
+| `goldReward` | `Number` | Coins/gold granted on successful cooking | `65` |
 
-    // 3. Hotkey 'I' / 'E' -> Inventory Storage
-    if (!isInputFocused && (e.key === 'i' || e.key === 'I' || e.key === 'e' || e.key === 'E')) {
-      if (activeModalStack.length > 0 && activeModalStack[activeModalStack.length - 1] === 'inventory-overlay') {
-        window.closeInventoryUI();
-      } else if (activeModalStack.length === 0) {
-        window.openInventoryUI();
-      }
-    }
+---
 
-    // 4. Hotkey 'C' / 'c' -> Cooking Kitchen UI
-    if (!isInputFocused && (e.key === 'c' || e.key === 'C')) {
-      if (activeModalStack.length > 0 && activeModalStack[activeModalStack.length - 1] === 'cooking-overlay') {
-        window.closeCookingUI();
-      } else if (activeModalStack.length === 0) {
-        window.openCookingUI();
-      }
+## 3. Ingredient Specification, Inventory Checking, and Deduction Mechanics
+
+### 3.1 Item Metadata via `ITEM_DB` & `getItemInfo`
+Items are registered in `ITEM_DB` (lines 3900–3921 in `game.js`). The dictionary maps Korean item keys to item objects:
+
+```javascript
+// game.js: lines 3900-3902
+var ITEM_DB = {
+  '배추': { id: 'cabbage', name: 'Napa Cabbage', nameKo: '배추', icon: '🥬', description: 'Fresh Napa cabbage harvested from the plot.' },
+  '무': { id: 'radish', name: 'Korean Radish', nameKo: '무', icon: '🥔', description: 'Crunchy white Korean radish.' },
+  ...
+};
+```
+
+The function `getItemInfo(keyOrId)` (lines 3923–3930) bridges English `itemId` values (e.g. `'cabbage'`, `'honey'`) and Korean inventory keys (`'배추'`, `'꿀'`).
+
+```javascript
+// game.js: lines 3923-3930
+function getItemInfo(keyOrId) {
+  if (!keyOrId) return { key: 'unknown', id: 'unknown', name: 'Item', nameKo: '아이템', icon: '📦', description: 'Unknown Item' };
+  if (ITEM_DB[keyOrId]) return { key: keyOrId, ...ITEM_DB[keyOrId] };
+  for (const [k, val] of Object.entries(ITEM_DB)) {
+    if (val.id === keyOrId) return { key: k, ...val };
+  }
+  return { key: keyOrId, id: keyOrId, name: keyOrId, nameKo: keyOrId, icon: '📦', description: keyOrId };
+}
+```
+
+### 3.2 Required `ITEM_DB` Entry for Honey
+To register `honey` in `ITEM_DB`, the following entry must be added:
+
+```javascript
+'꿀': { id: 'honey', name: 'Wild Honey', nameKo: '꿀', icon: '🍯', description: 'Sweet pure honey harvested from the farm beehive.' }
+```
+
+### 3.3 Stock Verification Logic
+In `renderCookingGrid()` (lines 11954–11960, 11995–12014) and `cookRecipe()` (lines 12073–12084):
+1. For each requirement in `recipe.ingredients`, `getItemInfo(req.itemId)` gets the resolved Korean key (`info.key`).
+2. Current stock `have` is checked against `inventoryState.ingredients[key]`.
+3. If `have < req.count`, `canCook` is set to `false`, the UI displays red warning badges (`✗`), and cooking is prevented.
+
+```javascript
+// game.js: lines 12073-12084
+const ingMap = (inventoryState && inventoryState.ingredients) ? inventoryState.ingredients : {};
+for (const req of reqs) {
+  const info = getItemInfo(req.itemId);
+  const key = info.key || req.itemId;
+  const have = ingMap[key] || 0;
+  if (have < req.count) {
+    if (typeof showToast === 'function') {
+      showToast(`⚠️ Missing ingredient for ${recipe.nameKo || recipe.nameEn}: Need ${req.count}x ${info.nameKo || key} (have ${have})`);
     }
-  });
+    return false;
+  }
+}
+```
+
+### 3.4 Deduction Logic
+In `cookRecipe()` (lines 12086–12092):
+```javascript
+for (const req of reqs) {
+  const ok = removeItemFromInventory(req.itemId, req.count);
+  if (!ok) return false;
+}
+```
+
+`removeItemFromInventory(itemId, qty)` (lines 3985–4003) looks up `info.key`, subtracts `qty` from `inventoryState.ingredients[key]`, removes the key if zero, and triggers `persistSave()`.
+
+---
+
+## 4. Cooking UI Rendering & Reward Execution
+
+### 4.1 UI Layout in `index.html` (lines 1859–1902)
+- `#cooking-overlay`: Fullscreen glassmorphism overlay container.
+- `#cooking-progress-badge`: Displays cooked dishes ratio (`Cooked: X / Y`).
+- `#cooking-pantry-list`: Displays player's current ingredients in pantry.
+- `#cooking-recipe-list`: Left grid column listing all recipe cards.
+- `#cooking-detail-view`: Right pane presenting selected dish details, ingredient requirements (with green `✓` or red `✗` badges), rewards (Gold & XP), and the `🍳 Cook [Dish]` button.
+
+### 4.2 Rewards & Progression System
+When a recipe is cooked in `cookRecipe()`:
+1. **Gold Reward**: `addCoins(recipe.goldReward)`.
+2. **XP Reward**: `addHonor(recipe.xpReward)` (or `inventoryState.vocabXP += recipe.xpReward`).
+3. **Mastery Tracking**:
+   - `cookingState.cookedRecipes` records unique recipe IDs cooked.
+   - `cookingState.recipeStats[recipe.id]` tracks total times cooked.
+   - `inventoryState.cookedDishes[recipe.id]` updates cooked dish inventory.
+4. **Persistence & Feedback**:
+   - Calls `persistSave()` (serializing `inventoryState` & `cookingState`).
+   - Plays `'complete'` SFX and shows toast notification.
+   - Re-renders inventory grid, cooking UI grid, and currency HUD.
+   - Triggers `checkCookingAchievements()` to award the `'master_chef'` trophy when all dishes are cooked.
+
+---
+
+## 5. Authentic Korean Honey Recipe Proposals
+
+To integrate honey into the cooking system, we propose adding 1 to 3 authentic Korean recipes to `COOKING_RECIPES`:
+
+### Recipe Option 1: Honey Yakgwa (꿀약과) - Recommended Primary Dish
+```javascript
+{
+  id: 'honey_yakgwa',
+  nameEn: 'Honey Yakgwa',
+  nameKo: '꿀약과',
+  icon: '🥮',
+  description: 'Traditional Korean deep-fried honey pastry made with wild honey and grain.',
+  ingredients: [
+    { itemId: 'honey', count: 2 },
+    { itemId: 'rice', count: 1 }
+  ],
+  xpReward: 50,
+  goldReward: 60
+}
+```
+
+### Recipe Option 2: Honey Tea (꿀차)
+```javascript
+{
+  id: 'honey_tea',
+  nameEn: 'Honey Tea',
+  nameKo: '꿀차',
+  icon: '🍵',
+  description: 'Warm soothing Korean tea brewed with wild farm honey.',
+  ingredients: [
+    { itemId: 'honey', count: 2 }
+  ],
+  xpReward: 35,
+  goldReward: 45
+}
+```
+
+### Recipe Option 3: Honey Rice Cake (꿀떡)
+```javascript
+{
+  id: 'honey_tteok',
+  nameEn: 'Honey Rice Cake',
+  nameKo: '꿀떡',
+  icon: '🍡',
+  description: 'Sweet chewy Korean rice cake filled with melted golden honey.',
+  ingredients: [
+    { itemId: 'honey', count: 1 },
+    { itemId: 'rice', count: 2 }
+  ],
+  xpReward: 45,
+  goldReward: 50
 }
 ```
 
 ---
 
-## 5. JavaScript Implementation Blueprint for `game.js`
+## 6. Detailed Implementation Plan for Implementer Agent
 
-### 5.1 Modal State & Rendering Functions
-
+### Step 1: Register Honey in `ITEM_DB`
+In `game.js` around line 3920, insert:
 ```javascript
-// Open Cooking UI Modal
-window.openCookingUI = function() {
-  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  renderCookingGrid();
-  setModalState('cooking-overlay', true);
-};
-
-// Close Cooking UI Modal
-window.closeCookingUI = function() {
-  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  setModalState('cooking-overlay', false);
-};
-
-// Render Cooking Grid & Ingredients
-function renderCookingGrid() {
-  const pantryList = document.getElementById('cooking-pantry-list');
-  const grid = document.getElementById('cooking-recipe-grid');
-  const progressBadge = document.getElementById('cooking-progress-badge');
-  if (!grid) return;
-
-  const ingMap = inventoryState.ingredients || {};
-  const cookedMap = cookingState.cookedRecipes || {};
-
-  // 1. Update Pantry Ingredients Summary
-  if (pantryList) {
-    pantryList.innerHTML = '';
-    const entries = Object.entries(ingMap).filter(([_, count]) => count > 0);
-    if (entries.length === 0) {
-      pantryList.innerHTML = '<span style="color:#94a3b8; font-size:11px;">No ingredients in pantry. Harvest crops to get cooking ingredients!</span>';
-    } else {
-      entries.forEach(([ing, cnt]) => {
-        const tag = document.createElement('span');
-        tag.style.cssText = 'background:rgba(15,23,42,0.8); border:1px solid rgba(245,158,11,0.3); border-radius:6px; padding:3px 8px; font-size:11px; font-family:"Noto Sans KR",sans-serif;';
-        tag.textContent = `${ing}: ×${cnt}`;
-        pantryList.appendChild(tag);
-      });
-    }
-  }
-
-  // 2. Update Progress Badge
-  const cookedCount = Object.keys(cookedMap).length;
-  const totalRecipes = RECIPE_DB.length;
-  if (progressBadge) {
-    progressBadge.textContent = `Cooked: ${cookedCount} / ${totalRecipes}`;
-  }
-
-  // 3. Render Recipe Cards
-  grid.innerHTML = '';
-  RECIPE_DB.forEach(r => {
-    const card = document.createElement('div');
-    card.className = 'recipe-card';
-    if (cookedMap[r.id]) {
-      card.style.borderColor = 'var(--neon-green)';
-    }
-
-    let canCook = true;
-    let reqBadgesHtml = [];
-
-    Object.entries(r.req).forEach(([ing, needed]) => {
-      const have = ingMap[ing] || 0;
-      if (have < needed) canCook = false;
-
-      if (have >= needed) {
-        reqBadgesHtml.push(`
-          <span style="background:rgba(34,197,94,0.15); border:1px solid #22c55e; color:#4ade80; padding:2px 6px; border-radius:6px; font-size:10px; font-weight:bold;">
-            ${ing} ${have}/${needed} ✓
-          </span>
-        `);
-      } else {
-        reqBadgesHtml.push(`
-          <span style="background:rgba(239,68,68,0.15); border:1px solid #ef4444; color:#f87171; padding:2px 6px; border-radius:6px; font-size:10px; font-weight:bold;">
-            ${ing} ${have}/${needed} ✗
-          </span>
-        `);
-      }
-    });
-
-    const isCooked = !!cookedMap[r.id];
-    const xp = r.xpReward || 50;
-    const gold = r.goldReward || 30;
-
-    card.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <div style="font-size:32px;">${r.icon}</div>
-        ${isCooked ? '<span style="font-family:\'Press Start 2P\',monospace; font-size:9px; background:rgba(34,197,94,0.2); border:1px solid #22c55e; color:#4ade80; padding:3px 6px; border-radius:6px;">✓ Cooked</span>' : ''}
-      </div>
-      <div class="recipe-card-title">${r.name}</div>
-      <div class="recipe-card-sub">${r.enName}</div>
-      
-      <div style="font-size:10px; color:#cbd5e1; margin-top:2px;"><b>Required:</b></div>
-      <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:4px;">
-        ${reqBadgesHtml.join('')}
-      </div>
-
-      <div style="display:flex; gap:6px; margin-bottom:4px;">
-        <span style="background:rgba(168,85,247,0.18); border:1px solid #a855f7; color:#c084fc; padding:2px 6px; border-radius:6px; font-size:9px; font-family:'Press Start 2P',monospace;">⭐ +${xp} XP</span>
-        <span style="background:rgba(245,158,11,0.18); border:1px solid #f59e0b; color:#fbbf24; padding:2px 6px; border-radius:6px; font-size:9px; font-family:'Press Start 2P',monospace;">🪙 +${gold}</span>
-      </div>
-
-      <div class="recipe-buff-badge">⚡ ${r.buff.name}</div>
-
-      <div style="display:flex; gap:6px; margin-top:6px;">
-        <button class="cook-btn" style="flex:1;" ${canCook ? '' : 'disabled'} onclick="cookRecipe('${r.id}')">🍳 Cook Dish</button>
-        <button class="hud-btn" style="padding:4px 8px; font-size:10px;" onclick="showCulturalFact('${r.id}')">🏺 Info</button>
-      </div>
-    `;
-    grid.appendChild(card);
-  });
-}
+'꿀': { id: 'honey', name: 'Wild Honey', nameKo: '꿀', icon: '🍯', description: 'Sweet pure honey harvested from the farm beehive.' }
 ```
 
----
+### Step 2: Add Honey Recipes to `COOKING_RECIPES`
+In `game.js` inside `var COOKING_RECIPES = [...]` (around line 11889), append:
+```javascript
+  {
+    id: 'honey_yakgwa',
+    nameEn: 'Honey Yakgwa',
+    nameKo: '꿀약과',
+    icon: '🥮',
+    description: 'Traditional Korean deep-fried honey pastry made with wild honey and grain.',
+    ingredients: [
+      { itemId: 'honey', count: 2 },
+      { itemId: 'rice', count: 1 }
+    ],
+    xpReward: 50,
+    goldReward: 60
+  },
+  {
+    id: 'honey_tea',
+    nameEn: 'Honey Tea',
+    nameKo: '꿀차',
+    icon: '🍵',
+    description: 'Warm soothing Korean tea brewed with wild farm honey.',
+    ingredients: [
+      { itemId: 'honey', count: 2 }
+    ],
+    xpReward: 35,
+    goldReward: 45
+  }
+```
 
-## 6. Verification Method & Checklists
+### Step 3: Verify Persistence & UI
+Ensure `collectSave()` and `applySave()` maintain `inventoryState.ingredients['꿀']` and `cookingState.cookedRecipes` without schema changes.
 
-### 6.1 Interactive UI Verification
-1. Click `🍳 Cooking` HUD Button or press `'C'` / `'c'` key on keyboard -> Modal `#cooking-overlay` appears cleanly centered.
-2. Type into an input field (e.g. search bar or cat dialog) and press `'c'` / `'C'` -> Hotkey is ignored and character `c`/`C` is typed normally.
-3. Check ingredient cards:
-   - When player has 0/1 Cabbage -> Badge is RED (`#f87171`), Cook Button disabled.
-   - When player has 1/1 Cabbage -> Badge is GREEN (`#4ade80`), Cook Button enabled.
-4. Click disabled Cook button -> No action.
-5. Click enabled Cook button -> Ingredients deducted, XP & Gold added, completion tracked, toast displayed.
-6. Press `Escape` -> Cooking UI modal closes immediately.
-
-### 6.2 Code & File Integrity Check
-1. Run `node -c game.js` and `node -c assets/game.js` -> 0 syntax errors.
-2. Dual-file SHA256 sync check: `game.js` <-> `assets/game.js` and `index.html` <-> `assets/index.html`.
-
----
-*End of Analysis Report.*
+### Step 4: Run Syntax Check
+Execute:
+```powershell
+node -c game.js
+```
+Confirm exit code 0 and zero syntax errors.

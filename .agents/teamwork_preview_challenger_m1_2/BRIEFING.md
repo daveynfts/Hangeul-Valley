@@ -1,50 +1,51 @@
-# BRIEFING — 2026-07-24T20:25:15+07:00
+# BRIEFING — 2026-07-24T21:29:30+07:00
 
 ## Mission
-Empirical verification and edge-case challenge testing for Milestone 1 (Storage / Inventory System & Harvest-to-Ground Drop Pipeline).
+Empirical verification and edge-case challenge testing for Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics).
 
 ## 🔒 My Identity
 - Archetype: EMPIRICAL CHALLENGER
 - Roles: critic, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2
-- Original parent: b547cc1b-ac55-4776-ac07-72a671ad73d8
-- Milestone: Milestone 1 (Storage / Inventory System & Harvest-to-Ground Drop Pipeline)
+- Original parent: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Milestone: Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics)
 - Instance: Challenger 2
 
 ## 🔒 Key Constraints
-- Empirically verify all claims using code execution or node checks
-- Run SHA256 sync verification between root and assets copies
-- Stress test UI hotkeys, focus guards, modal stack behavior, harvest-to-ground drop pipeline, inventory sync
 - Review-only — do NOT modify implementation code
+- Empirically verify camera transition event bindings, 10-word round scoring / accuracy edge cases, particle emitter configuration safety, DOM summary overlay & return button binding
+- Execute `node -c game.js` and `test_m1_boundary.js`
+- Deliver empirical findings in `analysis.md` and `handoff.md`
 
 ## Current Parent
-- Conversation ID: b547cc1b-ac55-4776-ac07-72a671ad73d8
-- Updated: 2026-07-24T20:25:15+07:00
+- Conversation ID: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Updated: 2026-07-24T21:29:30+07:00
 
 ## Review Scope
-- **Files to review**: game.js, assets/game.js, index.html, assets/index.html, test scripts/suite
-- **Interface contracts**: Storage, Inventory, Hotkey, Focus Guards, Drop Pipeline
-- **Review criteria**: Correctness, SHA256 sync, hotkey handling, focus guards, modal stack, edge cases
+- **Files to review**: `game.js`
+- **Interface contracts**: Bee Shooting Minigame Scene / Camera transition events, Scoring & Accuracy formulas, Particle Emitter API compatibility, Summary Overlay & DOM binding
+- **Review criteria**: Empirical test verification, non-negative scores, NaN prevention, division by zero prevention, camera lifecycle, particle emitter robustness
 
 ## Attack Surface
-- **Hypotheses tested**: 
-  - Hotkey toggle ('I'/'E') & input focus guard protection -> Confirmed robust
-  - Modal open/close stack behavior & Escape key pop -> Confirmed robust
-  - Inventory capacity checks, item stacking vs new slot -> Confirmed robust
-  - Harvest-to-ground drop magnet, pickup, full inventory cooldown -> Confirmed robust
-  - File SHA256 sync game.js <-> assets/game.js and index.html <-> assets/index.html -> Byte-for-byte identical
-- **Vulnerabilities found**: None breaking. Minor recommendation: add explicit `window.closeShop = closeShop;` assignment.
+- **Hypotheses tested**:
+  - Camera transition event bindings (`fadeOut`, `camerafadeoutcomplete`, `pause`, `resume`, `launch`, `stop`) -> Confirmed robust, uses `.once()` properly.
+  - 10-word round scoring & accuracy formula edge cases (0 clicks, 10 hits, 5 miss + 5 hit, 10 misses) -> Confirmed non-negative scores, no division by zero or NaN.
+  - Particle emitter configuration safety across Phaser variants -> Confirmed guarded with `add.particles` function check & `try-catch`. Identified minor legacy method check recommendation.
+  - DOM / overlay summary template & return button event binding -> Confirmed formatting and pointerdown binding.
+- **Vulnerabilities found**: None breaking. Minor recommendation: add optional chaining / method check for `this.pollenEmitter?.emitParticleAt?.(...)`.
 - **Untested angles**: None.
 
 ## Loaded Skills
 None loaded.
 
 ## Key Decisions Made
-- Executed automated empirical test suite `test_m1_challenger_harness.js` (49/49 passed).
-- Written `challenge.md` and `handoff.md` in `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2`.
+- Executed node syntax check `node -c game.js` (exited 0).
+- Created and executed empirical test harness `test_m1_boundary.js` (49/49 assertions passed).
+- Written `analysis.md` and `handoff.md` in `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2`.
 
 ## Artifact Index
-- d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\ORIGINAL_REQUEST.md — Original task prompt
-- d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\challenge.md — Challenge report
-- d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\handoff.md — Handoff report
-- d:\Hangeul Valley\test_m1_challenger_harness.js — Automated test harness script
+- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\ORIGINAL_REQUEST.md` — Task prompt
+- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\progress.md` — Heartbeat
+- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\test_m1_boundary.js` — Empirical test script (49 assertions)
+- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\analysis.md` — Empirical challenge report
+- `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\handoff.md` — Handoff report

@@ -1,14 +1,16 @@
-## 2026-07-24T13:34:36Z
-You are Challenger 1 for Milestone 2 (Cooking System with Recipes, UI & Achievements) in Hangeul Valley.
-Working directory: d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1.
-Read PROJECT.md at d:\Hangeul Valley\.agents\orchestrator\PROJECT.md and Worker 3 handoff at d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md.
+## 2026-07-24T21:33:33Z
+<USER_REQUEST>
+You are Challenger 1 for Milestone 2 (Honey Rewards, Cooking Integration & Save/Load Persistence).
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1`.
+Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1\handoff.md`.
 
-Your tasks:
-1. Write a Node.js verification test script (using node vm/eval or importing game state structures) to empirically test:
-   - COOKING_RECIPES structure and validity.
-   - cookRecipe(recipeId) logic: ingredient deduction, XP/Gold reward addition, cookingState updates.
-   - checkCookingAchievements(): unlocking master_chef trophy upon cooking all 10 recipes.
-   - collectSave() & applySave() roundtrip persistence for cooking state.
-2. Run your test script using run_command. Include assertions count and pass/fail stats in your report.
-3. Provide a structured Challenger report with empirical test results and explicit PASS/FAIL verdict in d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1\handoff.md.
-Send message back to parent when done.
+Empirically challenge and stress-test the Milestone 2 implementation in `game.js`:
+1. Write a Node.js verification script (e.g. `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_1\test_m2_empirical.js`) to parse and simulate `game.js` structures:
+   - Test `getItemInfo('honey')` and `getItemInfo('꿀')` bidirectional resolution.
+   - Simulate adding 0, 1, 5, 100 honey items to `inventoryState` via `addItemToInventory('honey', count)`. Verify stock increments and capacity limits are enforced.
+   - Simulate cooking `honey_yakgwa` and `honey_tea`: verify stock deduction (`removeItemFromInventory`), insufficient ingredient rejection, XP/Gold reward granting, and `cookingState` updates.
+   - Test serialization (`collectSave()`) and deserialization (`applySave()`) of honey inventory and cooking state under 100 simulated save/load cycles.
+2. Run `node -c game.js` and your test script.
+
+Deliver your empirical test results, assertion counts, verdict (PASS/FAIL), and handoff report, then send a message back to the Project Orchestrator.
+</USER_REQUEST>

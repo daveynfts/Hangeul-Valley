@@ -1,92 +1,104 @@
-# Handoff Report: Cooking UI Modal & HUD Integration (Milestone 2)
-
-**Agent Role**: Explorer 2 (Cooking UI & HUD Integration)  
-**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2`  
-**Target Files**: `index.html`, `game.js`, `assets/index.html`, `assets/game.js`  
-**Date**: 2026-07-24  
-
----
+# Handoff Report: Milestone 2 Cooking Recipe Integration Investigation
 
 ## 1. Observation
 
-1. **Existing Glass Modal Conventions in `index.html`**:
-   - Lines 1071–1080 define `.glass-modal` styling: `background: rgba(15, 23, 42, 0.92) !important; backdrop-filter: var(--glass-blur); border: 2px solid var(--neon-gold); border-radius: 18px; box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 20px 60px rgba(0,0,0,.9);`.
-   - Lines 122–128 (`#inventory-overlay`) & lines 1098–1104 (`#quest-overlay`) define backdrop overlays: `position: fixed; inset: 0; z-index: 870; display: none; background: rgba(10, 15, 30, 0.88); backdrop-filter: var(--glass-blur); animation: fadeIn .2s;`. `.visible` class toggles `display: flex;`.
-   - Header standards: flex layout with retro `'Press Start 2P', monospace` title (`color: var(--neon-gold)`), subtitle in muted white, close button `✕` (`background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 8px; padding: 4px 12px; font-size: 16px; cursor: pointer;`).
+### Observation 1.1: `COOKING_RECIPES` Location & Data Schema
+- **File**: `d:\Hangeul Valley\game.js` (lines 11752–11894)
+- `COOKING_RECIPES` is defined as a global array containing 10 default Korean dish objects (`kimchi`, `radish_rice`, `roasted_corn`, `strawberry_jam`, `gimbap`, `tteokbokki`, `gamjajeon`, `bibimbap`, `bulgogi`, `samgyetang`).
+- **Verbatim Code Snippet**:
+```javascript
+// game.js: lines 11752-11766
+var COOKING_RECIPES = [
+  {
+    id: 'kimchi',
+    nameEn: 'Kimchi',
+    nameKo: '김치',
+    icon: '🥬',
+    description: 'Traditional spicy fermented Napa cabbage with chili and garlic.',
+    ingredients: [
+      { itemId: 'cabbage', count: 1 },
+      { itemId: 'chili', count: 1 },
+      { itemId: 'garlic', count: 1 }
+    ],
+    xpReward: 25,
+    goldReward: 30
+  },
+```
 
-2. **Existing HUD Action Group in `index.html`**:
-   - Lines 1329–1337 define `#hud-actions-group`:
-     ```html
-     <button class="hud-btn" id="vocab-btn" title="Vocabulary Book">📖 Vocab</button>
-     <button class="hud-btn" id="shop-btn" title="Seed shop">🏪 Shop</button>
-     <button class="hud-btn" id="quest-btn" title="Quest Log" onclick="openQuestOverlay()">📜 Quests</button>
-     <button class="hud-btn" id="recipe-btn" title="Recipe Book (요리책)" onclick="openRecipeBook()">🍳 Cook</button>
-     <button class="hud-btn" id="inventory-btn" title="Inventory Storage (🎒) [Key: I/E]" onclick="openInventoryUI()">🎒 Bag</button>
-     <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
-     ```
+### Observation 1.2: Item Resolution & Inventory Ingredient Stock Checking
+- **File**: `d:\Hangeul Valley\game.js` (lines 3900–3930, 3985–4003, 11954–11960, 12073–12092)
+- `ITEM_DB` maps Korean item keys to metadata (`id`, `name`, `nameKo`, `icon`, `description`).
+- `getItemInfo(keyOrId)` resolves English `itemId` string (e.g. `'honey'`) to item metadata including Korean key `info.key` (e.g. `'꿀'`).
+- `inventoryState.ingredients` stores ingredient counts indexed by `info.key` (e.g. `inventoryState.ingredients['꿀'] = 3`).
+- **Ingredient Stock Check Snippet**:
+```javascript
+// game.js: lines 12073-12084
+const ingMap = (inventoryState && inventoryState.ingredients) ? inventoryState.ingredients : {};
+for (const req of reqs) {
+  const info = getItemInfo(req.itemId);
+  const key = info.key || req.itemId;
+  const have = ingMap[key] || 0;
+  if (have < req.count) { ... return false; }
+}
+```
+- **Deduction Snippet**:
+```javascript
+// game.js: lines 12086-12092
+for (const req of reqs) {
+  const ok = removeItemFromInventory(req.itemId, req.count);
+  if (!ok) return false;
+}
+```
 
-3. **Hotkey Listener Guard Convention in `game.js`**:
-   - Lines 4855–4877 in `game.js` define hotkey listener for Inventory (`I` / `E`):
-     ```javascript
-     window.addEventListener('keydown', (e) => {
-       const activeEl = document.activeElement;
-       const isInputFocused = activeEl && (
-         activeEl.tagName === 'INPUT' ||
-         activeEl.tagName === 'TEXTAREA' ||
-         activeEl.isContentEditable
-       );
-       if (e.key === 'Escape' && activeModalStack.length > 0) {
-         closeTopModal();
-         return;
-       }
-       if (!isInputFocused) {
-         if (e.key === 'i' || e.key === 'I' || e.key === 'e' || e.key === 'E') { ... }
-       }
-     });
-     ```
+### Observation 1.3: Cooking UI Overlay & Reward Execution
+- **File**: `d:\Hangeul Valley\index.html` (lines 1859–1902) & `d:\Hangeul Valley\game.js` (lines 11898–12134)
+- UI DOM container `#cooking-overlay` includes `#cooking-progress-badge`, `#cooking-pantry-list`, `#cooking-recipe-list`, and `#cooking-detail-view`.
+- `renderCookingGrid(selectId)` updates pantry stock tags, progress count (`Cooked: X / Y`), left recipe grid, and right detail view.
+- `cookRecipe(recipeId)` awards `recipe.goldReward` (`addCoins`), `recipe.xpReward` (`addHonor` / `vocabXP`), updates `cookingState.cookedRecipes` array, `cookingState.recipeStats`, saves state via `persistSave()`, plays audio SFX, shows toast notification, and triggers `checkCookingAchievements()`.
 
-4. **Recipe Database Structure in `game.js`**:
-   - Lines 11131–11186 define `RECIPE_DB` array containing 9 recipes (`kimchi`, `bibimbap`, `bulgogi`, `tteokbokki`, `samgyeopsal`, `haemul_pajeon`, `japchae`, `samgyetang`, `gimbap`), each with `id`, `name`, `enName`, `icon`, `req`, `buff`, `culturalFact`.
+### Observation 1.4: Save & Load Persistence
+- **File**: `d:\Hangeul Valley\game.js` (lines 4092–4170)
+- `collectSave()` serializes `inventory` (`inventoryState`) and `cooking` (`cookingState`).
+- `applySave(d)` restores `inventoryState` and `cookingState` from save snapshots.
+
+### Observation 1.5: Syntax Verification Command
+- **Command**: `node -c game.js` executed in `d:\Hangeul Valley`
+- **Result**: Command completed with 0 errors (exit code 0, empty stdout/stderr).
 
 ---
 
 ## 2. Logic Chain
 
-1. **Observation 1** establishes the design parameters for `.glass-modal`, `#inventory-overlay`, and header components. Implementing `#cooking-overlay` and `#cooking-panel` with matching CSS classes, backdrop blurs, neon borders, and flex headers guarantees 100% UI consistency.
-2. **Observation 2** shows where primary HUD buttons live in `#hud-actions-group`. Placing `<button class="hud-btn" id="cooking-btn" title="Cooking Kitchen (요리) [Key: C]" onclick="openCookingUI()">🍳 Cooking</button>` ensures the Cooking button has identical button dimensions, font, hover highlights, and placement as the Bag/Inventory button.
-3. **Observation 3** provides the exact pattern for hotkey event handling and text input guards. Extending the `keydown` listener to listen for `e.key === 'c' || e.key === 'C'` while checking `!isInputFocused` guarantees hotkey responsiveness without interfering with user text typing.
-4. **Observation 4** defines the data schema of `RECIPE_DB`. Combining this schema with `inventoryState.ingredients` allows dynamic rendering of `owned / needed` ingredient cards, green (`#4ade80`) vs red (`#f87171`) status badges, disabled vs enabled Cook button states, and XP/Gold reward badges.
+1. **Item Identity & Resolution**: `getItemInfo('honey')` converts item ID `'honey'` to Korean key `'꿀'`. If `'꿀'` is added to `ITEM_DB`, all inventory functions (`addItemToInventory`, `removeItemFromInventory`, `getUsedInventorySlots`) and cooking UI functions (`renderCookingGrid`, `cookRecipe`) automatically operate seamlessly without requiring custom inventory hacks.
+2. **Recipe Requirements**: Defining recipes in `COOKING_RECIPES` with `ingredients: [{ itemId: 'honey', count: N }, ...]` leverages existing verification (`ingMap[key] >= req.count`) and deduction (`removeItemFromInventory(req.itemId, count)`).
+3. **Reward Pipeline**: Executing `cookRecipe()` awards Gold (`addCoins`), XP (`addHonor`), updates mastery state (`cookingState.cookedRecipes`), and persists via `persistSave()`.
+4. **UI Integration**: Adding honey recipes automatically expands the recipe list cards, pantry stock badges, detail view requirements badges, and total recipe progress counter (`Cooked: X / N`).
 
 ---
 
 ## 3. Caveats
 
-- **Dual-File Synchronization**: Project files exist in both project root (`index.html`, `game.js`) and `assets/` directory (`assets/index.html`, `assets/game.js`). Any modifications made by the implementer must be applied to both files identically.
-- **Backend Cooking Execution**: Explorer 2 focused on the UI Modal & HUD integration specification. Backend execution details (XP award calculations, trophy unlock logic, save persistence) are detailed in Explorer 1 & 3 reports.
+1. **ITEM_DB Registration Prerequisite**: Honey (`'꿀'`) must be added to `ITEM_DB` in `game.js` (around line 3920) before or alongside adding Honey recipes to `COOKING_RECIPES`, so `getItemInfo('honey')` returns `{ key: '꿀', id: 'honey', nameKo: '꿀', icon: '🍯' }`.
+2. **Dual-File Sync**: Note that Milestone 3 requires byte-for-byte synchronization between `game.js` and `assets/game.js`. Code changes should be performed synchronously across both files during implementation.
 
 ---
 
 ## 4. Conclusion
 
-The specification for **Cooking UI Modal & HUD Integration** is complete and fully documented in `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\analysis.md`. The design provides:
-1. Modal overlay `#cooking-overlay` and panel `#cooking-panel` with glassmorphic styling, pantry stock summary, and recipe card grid.
-2. Requirement cards with green `owned / needed` badges (`owned >= needed`) and red badges (`owned < needed`).
-3. Cook Action Button disabled when ingredients are missing, enabled with golden gradient hover when complete.
-4. XP & Gold reward badges (`⭐ +50 XP`, `🪙 +30 Gold`) on every recipe card.
-5. Primary HUD action button (`🍳 Cooking` / `요리`) in `#hud-actions-group` and hotkey toggle (`'C'` / `'c'`) with DOM input focus guard.
+The Cooking Recipe system in `game.js` is fully functional, highly modular, and ready for honey recipe integration. Adding Honey (`'꿀'`) to `ITEM_DB` and registering authentic Korean recipes such as **Honey Yakgwa (꿀약과)** and **Honey Tea (꿀차)** into `COOKING_RECIPES` will complete Milestone 2 cooking requirements without breaking existing inventory or UI state.
 
 ---
 
 ## 5. Verification Method
 
-1. **File Inspection**:
-   - Inspect `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\analysis.md` for complete code blueprints and CSS specifications.
-2. **Syntax Verification**:
-   - Execute `node -c game.js` and `node -c assets/game.js` to ensure 0 syntax errors.
-3. **Interactive Verification**:
-   - Open `index.html` in a web browser.
-   - Click `🍳 Cooking` HUD button or press key `'C'` -> `#cooking-overlay` opens.
-   - Test ingredient badge colors: Green when sufficient ingredients, Red when missing.
-   - Verify Cook button disabled state when ingredients missing.
-   - Focus text input field and press `'C'` -> verify keypress is not intercepted.
-   - Press `Escape` -> verify `#cooking-overlay` closes.
+To independently verify the investigation findings and implementation readiness:
+
+1. **Syntax Integrity Check**:
+   ```powershell
+   node -c game.js
+   ```
+   Must output no errors and exit with code 0.
+
+2. **Code Structure Verification**:
+   - Inspect `game.js` at line 3900 (`ITEM_DB`), line 3923 (`getItemInfo`), line 11752 (`COOKING_RECIPES`), and line 12053 (`cookRecipe`).
+   - Inspect `index.html` at line 1859 (`#cooking-overlay`).

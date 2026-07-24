@@ -1,99 +1,42 @@
-# Forensic Audit Report — Milestone 3
-
-**Work Product**: Hangeul Valley — Storage (Inventory) & Cooking System Dual-File Synchronization & Syntax Check
-**Profile**: General Project
-**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_auditor_m3`
-**Verdict**: **CLEAN**
-
----
+# Handoff Report — Milestone 3 Final E2E Audit
 
 ## 1. Observation
-
-### A. Dual-File Synchronization & SHA256 Hashes
-Direct empirical computation of SHA256 hashes via PowerShell `Get-FileHash`:
-
-- `game.js`: `7A1098E4EF7A568788ACA9DFA25D738E4FCAC9447101095CD3A9DE849A50CFF9`
-- `assets/game.js`: `7A1098E4EF7A568788ACA9DFA25D738E4FCAC9447101095CD3A9DE849A50CFF9`
-  - **Result**: 100% Byte-for-Byte Match (1,488,421 bytes).
-
-- `index.html`: `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA`
-- `assets/index.html`: `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA`
-  - **Result**: 100% Byte-for-Byte Match (113,353 bytes).
-
-### B. Node Syntax Verification (`node -c`)
-- `node -c "d:\Hangeul Valley\game.js"` -> Exit Code 0 (0 syntax errors).
-- `node -c "d:\Hangeul Valley\assets\game.js"` -> Exit Code 0 (0 syntax errors).
-
-### C. Feature & Implementation Analysis
-
-1. **Storage (Inventory) System**:
-   - `inventoryState` in `game.js` manages capacity (`maxSlots: 20` default, expandable by +5 for 50 coins via `expandInventoryCapacity()`), ingredient quantities (`ingredients`), seeds (`seeds`), and cooked dishes (`cookedDishes`).
-   - `addItemToInventory(itemId, qty)` stacks existing items within available slots or allocates new slots up to `maxSlots`.
-   - `spawnDroppedItem` & `updateDroppedItems` implement animated Phaser containers with ground shadow, glowing aura, continuous sine-wave bobbing, magnet pull (~65px radius), and proximity pickup (~32px radius) with sparkle effects, floated label texts, and full-inventory cooldowns.
-   - HUD button `#inventory-btn` with `onclick="openInventoryUI()"` is bound in `index.html`.
-   - Keyboard listener handles `KeyI` ('i'/'I') and `KeyE` ('e'/'E') to open/close inventory modal when not focused on `<input>`, `<textarea>`, or `contentEditable`.
-
-2. **Cooking Kitchen System**:
-   - `COOKING_RECIPES` defines 10 authentic Korean dishes (`kimchi`, `radish_rice`, `roasted_corn`, `strawberry_jam`, `gimbap`, `tteokbokki`, `gamjajeon`, `bibimbap`, `bulgogi`, `samgyetang`) with ingredient requirements, XP rewards, and Gold rewards.
-   - `cookRecipe(recipeId)` checks required ingredient stock, deducts consumed ingredients from `inventoryState.ingredients`, awards Gold and Vocab XP, records statistics in `cookingState`, syncs `inventoryState.cookedDishes`, triggers sound effects (`playChiptuneSFX`), persists state via `persistSave()`, updates UI, and evaluates achievement unlocks.
-   - Overlay modal `#cooking-overlay` in `index.html` features pantry inventory bar, scrollable recipe cards, detail view with ingredient status badges, and progress badge (`Cooked: X / 10`).
-   - HUD button `#cooking-btn` with `onclick="openCookingUI()"` is bound in `index.html`.
-   - Keyboard listener handles `KeyC` ('c'/'C') to toggle cooking modal, and `Escape` to close top modal.
-
-3. **Master Chef Trophy Unlock & Save Persistence**:
-   - `TROPHIES_DB` registers `{ id: 'master_chef', name: 'Master Chef (요리 왕)', icon: '👨‍🍳', type: 'cooking', reqRecipes: 10 }`.
-   - `checkCookingAchievements()` verifies when `totalCookedTypes >= recipes.length` (all 10 recipes cooked at least once) and pushes `'master_chef'` to `unlockedTrophies`, triggering fanfare SFX and achievement notification.
-   - `collectSave()`, `applySave()`, and `migrateSaveData(d)` serialize and restore `inventoryState`, `cookingState`, `droppedItems`, `unlockedTrophies`, and schema v4 migrations across local storage and pywebview file persistence.
-
-4. **Cheating & Facade Scan**:
-   - Codebase search for `mock`, `dummy`, `cheat`, `fake`, and hardcoded result stubs returned 0 findings.
-   - Automated boundary & stress harnesses (`test_m2_challenger_cooking.js` and `test_m1_challenger_harness.js`) executed with 59/59 PASS and 49/49 PASS respectively.
-
----
+- SHA256 hashes generated for all core files:
+  - `game.js`: `60DD3489A3F2D646B51D0B97A908AA93E580F292177B200F1C4DA3D92DA99C26`
+  - `assets/game.js`: `60DD3489A3F2D646B51D0B97A908AA93E580F292177B200F1C4DA3D92DA99C26`
+  - `index.html`: `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA`
+  - `assets/index.html`: `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA`
+- Dual-file pairs show 100% exact byte synchronization.
+- Node syntax checks executed via `run_command`:
+  - `node -c game.js` -> Exit code 0, 0 errors.
+  - `node -c assets/game.js` -> Exit code 0, 0 errors.
+- R1 logic verified in `FarmScene` (lines 8611–8670, 9174–9185, 9332–9341): Beehive NPC near apple tree with animated buzzing, 4 orbiting bees, `🐝 Beehive [SPACE]` hint label (<85px distance), camera fade out and launch transition.
+- R2 logic verified in `BeeScene` (lines 10909–11233): registered in `config.scene`, procedural textures (`bee_fly_0`, `bee_fly_1`, `p_pollen`), 3 flight trajectories (`linear`, `sine`, `zigzag`), target HUD banner, `getUnlockedWords()`, combo score multiplier, pollen particle explosion, chiptune SFX, camera shake on error, 10-word round cap, retro glassmorphism summary modal overlay, return transition to `FarmScene`.
+- R3 logic verified (lines 3921, 11899–11922, 12100–12125): Honey item (`'꿀'`, `id: 'honey'`) in `ITEM_DB`, reward granting (`addItemToInventory('honey', totalHoney)`), toast notification, authentic Korean honey recipes (`honey_yakgwa` & `honey_tea`), ingredient validation and stock deduction via `removeItemFromInventory()`.
+- R4 logic verified (lines 4093–4170): `collectSave()` and `applySave()` serialize and restore honey inventory stock and cooking records. Overworld state preserved via scene pause/resume.
+- Zero hardcoded test results, facade implementations, or fake persistence detected.
 
 ## 2. Logic Chain
-
-1. **Observation**: SHA256 hashes calculated independently match 100% across root and assets files.
-   **Inference**: Dual-file synchronization requirement is satisfied without drift.
-
-2. **Observation**: `node -c` runs on `game.js` and `assets/game.js` with zero syntax errors.
-   **Inference**: Both JS files are syntactically valid under Node.js parser rules.
-
-3. **Observation**: Core functions (`addItemToInventory`, `removeItemFromInventory`, `spawnDroppedItem`, `updateDroppedItems`, `cookRecipe`, `checkCookingAchievements`, `collectSave`, `applySave`) implement full state transition pipelines and UI DOM updates without stubs or shortcuts.
-   **Inference**: Storage/Inventory and Cooking systems are fully functional, interactive, and persistent across sessions.
-
-4. **Observation**: Automated test harnesses test invalid recipes, ingredient exhaustion, item stacking, magnet pickup, modal stacking, keyboard guards, and trophy triggers with 108 total passing test assertions and zero failures.
-   **Inference**: Codebase demonstrates robust integrity and full coverage under empirical boundary testing.
-
----
+1. Step 1: Compute SHA256 hashes of root and `assets/` copies of `game.js` and `index.html`. Outcome: Hashes are identical, confirming 100% byte synchronization across dual-file locations.
+2. Step 2: Run syntax checking tools `node -c game.js` and `node -c assets/game.js`. Outcome: Exit code 0 with zero errors, confirming syntax validity.
+3. Step 3: Inspect source implementation in `game.js` for R1 through R4. Outcome: All 4 requirements are implemented with full functional depth.
+4. Step 4: Perform forensic scan for prohibited patterns (hardcoded strings, facade methods, pre-populated logs, fake state). Outcome: Zero integrity violations found.
+5. Step 5: Conclude verdict as **CLEAN**.
 
 ## 3. Caveats
-
-- Pywebview file persistence depends on standard desktop environment bindings (`window.pywebview.api.save`), with graceful fallback to standard `localStorage` when executed outside pywebview context.
-
----
+- No automated browser E2E test framework (e.g. Playwright / Selenium) was executed in this environment; empirical verification was conducted via SHA256 hashing, static code auditing, AST syntax checks, and path tracing.
 
 ## 4. Conclusion
-
-**Verdict**: **CLEAN**
-
-Milestone 3 dual-file synchronization is verified 100% byte-identical. Node syntax verification passes with 0 errors. All Storage (Inventory) and Cooking features (10 recipes, execution engine, UI modal, HUD buttons, keyboard shortcuts, Master Chef trophy unlock, save/load persistence) operate with authentic logic and zero cheating stubs.
-
----
+The codebase is **CLEAN** and completely satisfies all Milestone 3 requirements and forensic integrity criteria.
 
 ## 5. Verification Method
-
-To independently verify this audit:
-
+Run the following PowerShell commands to independently verify:
 ```powershell
-# 1. SHA256 Hash Verification
-Get-FileHash -Algorithm SHA256 'd:\Hangeul Valley\game.js', 'd:\Hangeul Valley\assets\game.js', 'd:\Hangeul Valley\index.html', 'd:\Hangeul Valley\assets\index.html' | Format-List
-
-# 2. Syntax Check
-node -c 'd:\Hangeul Valley\game.js'
-node -c 'd:\Hangeul Valley\assets\game.js'
-
-# 3. Execution of Empirical Test Suites
-node test_m2_challenger_cooking.js
-node test_m1_challenger_harness.js
+Get-FileHash -Algorithm SHA256 game.js, assets/game.js, index.html, assets/index.html | Format-List
+node -c game.js
+node -c assets/game.js
 ```
+Expected output:
+- `game.js` and `assets/game.js` share SHA256 hash `60DD3489A3F2D646B51D0B97A908AA93E580F292177B200F1C4DA3D92DA99C26`.
+- `index.html` and `assets/index.html` share SHA256 hash `42E6473937F1950FFF14DC71074B3E01E848A927C328B35E96B3B13DB334FAAA`.
+- `node -c` exits with code 0 and zero error messages.

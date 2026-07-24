@@ -1,38 +1,38 @@
-# BRIEFING — 2026-07-24T13:30:37Z
+# BRIEFING — 2026-07-24T21:32:20+07:00
 
 ## Mission
-Analyze cooking achievement ("Master Chef" / 요리 왕) and save/load persistence integration (`cookingState`, `collectSave`, `applySave`, legacy migration) for Hangeul Valley.
+Investigate Save/Load Persistence & Scene Transitions in `game.js` for Milestone 2.
 
 ## 🔒 My Identity
-- Archetype: Teamwork explorer
-- Roles: Explorer 3 for Milestone 2 (Cooking Achievements & Persistence)
-- Working directory: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_3
-- Original parent: b547cc1b-ac55-4776-ac07-72a671ad73d8
-- Milestone: Milestone 2 (Cooking Achievements & Persistence)
+- Archetype: Teamwork Explorer
+- Roles: Explorer 3 (Milestone 2 - Save/Load Persistence & Scene Transitions)
+- Working directory: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_3`
+- Original parent: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Milestone: Milestone 2
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT implement project code changes
-- Write metadata/reports only to d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_3
+- Read-only investigation — do NOT implement code changes in `game.js`
+- Focus on save/load serialization/deserialization, scene transitions (BeeScene <-> FarmScene), overworld coordinates, timers, inventory state.
 
 ## Current Parent
-- Conversation ID: b547cc1b-ac55-4776-ac07-72a671ad73d8
-- Updated: 2026-07-24T13:30:37Z
+- Conversation ID: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Updated: 2026-07-24T21:32:20+07:00
 
 ## Investigation State
-- **Explored paths**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`, `.agents/orchestrator/PROJECT.md`
-- **Key findings**:
-  - Existing trophy system defined in `TROPHIES_DB` & `unlockedTrophies` array (`game.js` line 4038 & 10763).
-  - Designed "Master Chef" (요리 왕) trophy with `id: 'master_chef'`, `type: 'cooking'`, `cost: 0`, auto-unlocking when all 9 recipes cooked.
-  - Designed `cookingState` runtime schema `{ cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} }`.
-  - Integrated `cookingState` inside `collectSave()`, `applySave()`, and `migrateSaveData()` with full legacy save migration.
-- **Unexplored areas**: None (investigation complete).
+- **Explored paths**: `game.js` lines 3900-4200 (`collectSave`, `applySave`, `inventoryState`, `migrateSaveData`), lines 7417-7460 (`FarmScene`), lines 9330-9340 (`BeeScene` launch), lines 10908-11225 (`BeeScene` class & `exitMinigame`), lines 11752-11890 (`COOKING_RECIPES`).
+- **Key findings**: 
+  - Save/Load serialization schema v4 handles 19 fields.
+  - Scene transitions use `this.scene.pause()` / `this.scene.launch('BeeScene')` and `this.scene.stop()` / `this.scene.resume('FarmScene')`, keeping overworld player coordinates, crop growth timers (`plantedAt`), and dropped items intact.
+  - Honey (`'꿀'`) needs registration in `ITEM_DB` and granting in `BeeScene.showResultsSummary()`.
+- **Unexplored areas**: None (all 5 investigation prompt items covered).
 
 ## Key Decisions Made
-- Defined complete data contract and trigger design in `analysis.md` and `handoff.md`.
+- Completed full analysis report (`analysis.md`) and handoff report (`handoff.md`).
+- Executed `node -c game.js` (0 syntax errors).
 
 ## Artifact Index
-- ORIGINAL_REQUEST.md — Original task prompt
-- BRIEFING.md — Persistent memory state
-- progress.md — Step execution log
-- analysis.md — Focus Area Analysis Report
-- handoff.md — 5-Component Handoff Report
+- `ORIGINAL_REQUEST.md` — Original request
+- `progress.md` — Heartbeat and status
+- `BRIEFING.md` — Working context
+- `analysis.md` — Comprehensive technical investigation report
+- `handoff.md` — 5-component handoff report

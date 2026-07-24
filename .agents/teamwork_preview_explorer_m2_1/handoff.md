@@ -1,57 +1,63 @@
-# Handoff Report — Explorer 1 (Milestone 2: Recipe Data & Cooking Execution Engine)
+# Handoff Report — Honey Inventory & Rewards Integration
 
 ## 1. Observation
+- **`ITEM_DB` location**: `d:\Hangeul Valley\game.js:3900-3921`
+  - Defines items such as `'배추'`, `'무'`, `'사과'`, etc.
+  - Verbatim excerpt:
+    ```javascript
+    var ITEM_DB = {
+      '배추': { id: 'cabbage', name: 'Napa Cabbage', nameKo: '배추', icon: '🥬', description: 'Fresh Napa cabbage harvested from the plot.' },
+      ...
+      '황금물고기': { id: 'golden_fish', name: 'Golden Fish', nameKo: '황금물고기', icon: '🐠', description: 'Rare golden fish.' }
+    };
+    ```
+  - `'꿀'` / `'honey'` item is currently missing from `ITEM_DB`.
+- **`addItemToInventory` location**: `d:\Hangeul Valley\game.js:3959-3983`
+  - Verbatim excerpt:
+    ```javascript
+    function addItemToInventory(itemId, qty = 1) {
+      if (!itemId || qty <= 0) return false;
+      inventoryState = inventoryState || {};
+      inventoryState.ingredients = inventoryState.ingredients || {};
+      inventoryState.maxSlots = typeof inventoryState.maxSlots === 'number' ? inventoryState.maxSlots : 20;
 
-- **Project Root**: `d:\Hangeul Valley`
-- **Working Metadata Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1`
-- **File Inspection**:
-  - `game.js` (lines 3761-3779): `ITEM_DB` defines crops/items with `id`, `name`, `nameKo`, `icon`, `description`. `getItemInfo(keyOrId)` (lines 3781-3788) resolves dual-directional queries (Korean key `'배추'` vs English ID `'cabbage'`).
-  - `game.js` (lines 3790-3796): `inventoryState` structure contains `{ maxSlots, ingredients: {}, seeds: {}, scrolls, cookedDishes: {} }`.
-  - `game.js` (lines 3817-3861): `addItemToInventory()` and `removeItemFromInventory()` manage item stacking and slot deletion.
-  - `game.js` (lines 3928-4001): `collectSave()` and `applySave()` serialize `inventory: inventoryState`, `recipes: recipeState`, and `unlockedTrophies`.
-  - `game.js` (lines 4041-4093): `addCoins(amount)` handles currency granting, HUD sync, and save persistence. `addHonor(amount)` handles language progress XP.
-  - `game.js` (lines 11131-11186): `RECIPE_DB` has 9 prototype recipes with `req` objects and `buff` effects.
-  - `game.js` (lines 11253-11304): `openRecipeBook()` renders ingredient stock and recipe cards.
+      const info = getItemInfo(itemId);
+      const key = info.key;
+      ...
+    ```
+- **`BeeScene.showResultsSummary()` location**: `d:\Hangeul Valley\game.js:11165-11215`
+  - Verbatim excerpt:
+    ```javascript
+    const baseHoney = Math.max(1, Math.floor(this.score / 300));
+    const bonusHoney = accuracy >= 90 ? 1 : 0;
+    const totalHoney = baseHoney + bonusHoney;
+    ...
+    const summaryText = 
+      `SCORE: ${this.score}\n\n` +
+      `ACCURACY: ${accuracy}%\n\n` +
+      `MAX COMBO: ${this.maxCombo}x\n\n` +
+      `HONEY REWARD: +${totalHoney} 🍯`;
+    ```
+  - Displays reward on text UI but does not invoke `addItemToInventory('honey', totalHoney)` or call `showToast`.
+- **Syntax Check Command**: `node -c game.js` executed in `d:\Hangeul Valley` returned exit code 0 (clean execution).
 
 ## 2. Logic Chain
-
-1. **Crop Data & Recipe Alignment**:
-   - `ITEM_DB` already supports crops like `cabbage`, `radish`, `green_onion`, `chili`, `garlic`, `rice`, `soybean`, `carrot`, `apple`.
-   - Adding missing crops (`potato`, `tomato`, `corn`, `strawberry`) into `ITEM_DB` completes the ingredient pool.
-2. **Recipe Data Schema Design**:
-   - 10 recipes of tiered difficulty (`kimchi`, `radish_rice`, `roasted_corn`, `strawberry_jam`, `gimbap`, `tteokbokki`, `gamjajeon`, `bibimbap`, `bulgogi`, `samgyetang`) are designed with `id`, `nameEn`, `nameKo`, `icon`, `description`, `ingredients: [{itemId, count}]`, `xpReward`, `goldReward`.
-3. **Execution Engine (`cookRecipe`)**:
-   - `cookRecipe(recipeId)` checks availability of each ingredient using `getItemInfo(itemId).key` against `inventoryState.ingredients`.
-   - On success, `removeItemFromInventory()` deducts each required count.
-   - Rewards are granted using existing state functions `addCoins(gold)` and `addHonor(xp)`.
-   - Cooked dish count is incremented in `inventoryState.cookedDishes[recipe.id]`.
-   - UI refreshes (`renderInventoryGrid()`, `openRecipeBook()`, `updateCurrencyHUD()`) are triggered.
-   - Achievement check (`checkCookingAchievements()`) verifies if all 10 unique recipes are cooked, awarding `'trophy_master_chef'` into `unlockedTrophies`.
+1. **Observation**: `ITEM_DB` maps items using Korean keys like `'배추'` with `id: 'cabbage'`. `getItemInfo(keyOrId)` resolves either key or `id` to the item info object.
+2. **Observation**: `addItemToInventory(itemId, qty)` calls `getItemInfo(itemId)`, gets `key` (`'꿀'`), checks capacity or existing stack, increments `inventoryState.ingredients[key]`, and calls `persistSave()`.
+3. **Logic Step**: Since `'꿀'` is not registered in `ITEM_DB`, `getItemInfo('honey')` defaults to fallback object `{ key: 'honey', id: 'honey', ... }`. Registering `'꿀'` with `id: 'honey'` ensures proper Korean display name `'꿀'`, English name `'Honey'`, icon `'🍯'`, and type `'ingredient'`.
+4. **Observation**: In `BeeScene.showResultsSummary()`, `totalHoney` is calculated using score and accuracy percentage.
+5. **Logic Step**: To award Honey to inventory and inform player, calling `addItemToInventory('honey', totalHoney)` inside `showResultsSummary()` and triggering `showToast(...)` will complete the rewards integration seamlessly.
 
 ## 3. Caveats
-
-- **Dual-File Synchronization**: `assets/game.js` must be updated synchronously with `game.js` during implementation to ensure byte-for-byte identity.
-- **Recipe UI Event Handlers**: `cookRecipe(recipeId)` should be connected to the UI cook buttons in `openRecipeBook()` or `startCookingMinigame()`.
+- Cooking recipes using Honey (`COOKING_RECIPES`) are part of downstream tasks in Milestone 2.
+- Dual-file synchronization (`game.js` -> `assets/game.js`) will be handled in Milestone 3 or sync tasks.
 
 ## 4. Conclusion
-
-The recipe data architecture and `cookRecipe(recipeId)` algorithm are fully formulated and ready for implementation. The design leverages existing game functions (`removeItemFromInventory`, `addCoins`, `addHonor`, `persistSave`, `unlockedTrophies`) with zero architectural friction.
-
-The complete specs, data schemas, and code implementations are documented in:
-- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1\analysis.md`
+The Honey Inventory & Rewards Integration requires two discrete code edits in `game.js`:
+1. Register `'꿀'` item in `ITEM_DB` (lines 3900-3921).
+2. Invoke `addItemToInventory('honey', totalHoney)` and `showToast(...)` in `BeeScene.showResultsSummary()` (lines 11172-11175).
 
 ## 5. Verification Method
-
-1. **Syntax Check**:
-   Run node syntax validation on `game.js`:
-   `node -c game.js`
-2. **Algorithm Execution Verification**:
-   - Call `addItemToInventory('cabbage', 2); addItemToInventory('chili', 2); addItemToInventory('garlic', 2);`
-   - Call `cookRecipe('kimchi')` in JS console.
-   - Check that 1 of each ingredient is deducted from `inventoryState.ingredients`.
-   - Check `inventoryState.cookedDishes['kimchi'] === 1`.
-   - Check player gold increases by 30.
-3. **Achievement Completion Test**:
-   - Set all 10 recipe keys in `inventoryState.cookedDishes` to `1`.
-   - Execute `checkCookingAchievements()`.
-   - Verify `unlockedTrophies` includes `'trophy_master_chef'`.
+- Execute `node -c game.js` to confirm syntax validity.
+- Inspect `ITEM_DB` in `game.js` to verify `'꿀'` entry exists with properties (`id: 'honey'`, `nameKo: '꿀'`, `nameEn: 'Honey'`, `icon: '🍯'`, `type: 'ingredient'`).
+- Inspect `showResultsSummary()` in `game.js` to confirm `addItemToInventory('honey', totalHoney)` is called upon round completion.

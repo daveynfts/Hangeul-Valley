@@ -1,15 +1,13 @@
-## 2026-07-24T20:34:36+07:00
-You are Challenger 2 for Milestone 2 (Cooking System with Recipes, UI & Achievements) in Hangeul Valley.
-Working directory: d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_2.
-Read PROJECT.md at d:\Hangeul Valley\.agents\orchestrator\PROJECT.md and Worker 3 handoff at d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md.
+## 2026-07-24T14:33:33Z
+You are Challenger 2 for Milestone 2 (Honey Rewards, Cooking Integration & Save/Load Persistence).
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_2`.
+Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_2\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_2\handoff.md`.
 
-Your tasks:
-1. Write an empirical stress/boundary test script in Node.js to stress test:
-   - Edge cases: cooking without required ingredients (should fail/return false), cooking with exact ingredients, cooking with excess ingredients.
-   - Invalid or unknown recipe ID passed to cookRecipe.
-   - Repeated cooking until ingredients run out.
-   - Keyboard listener behavior and modal toggle open/close logic.
-   - Byte-for-byte SHA256 comparison between game.js <-> assets/game.js and index.html <-> assets/index.html.
-2. Execute test script using run_command.
-3. Write structured Challenger report with assertion breakdown and explicit PASS/FAIL verdict in d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_2\handoff.md.
-Send message back to parent when done.
+Empirically challenge and stress-test the Milestone 2 implementation in `game.js`:
+1. Write a Node.js verification script (e.g. `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m2_2\test_m2_boundary.js`) to parse and simulate `game.js` structures:
+   - Simulate `BeeScene.showResultsSummary()` end-of-round honey reward granting across 50 simulated round outcomes (various scores, 0%-100% accuracy). Verify `totalHoney` is correctly added to inventory and non-negative.
+   - Test legacy save data hydration (`applySave` with save data missing `cookingState` or missing `'꿀'` key). Verify safe defaults without runtime crashes.
+   - Test recipe list rendering structure and pantry stock badge calculations.
+2. Run `node -c game.js` and your test script.
+
+Deliver your empirical test results, assertion counts, verdict (PASS/FAIL), and handoff report, then send a message back to the Project Orchestrator.

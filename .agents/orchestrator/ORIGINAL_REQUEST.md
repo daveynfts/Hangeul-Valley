@@ -38,5 +38,14 @@ Next Actions:
 2. Dispatch Milestone 2 review & verification panel: 2 Reviewers, 2 Challengers, 1 Forensic Auditor.
 3. Evaluate M2 Gate results (ALL pass, Forensic Auditor CLEAN verdict required).
 4. Perform Milestone 3 (Final Dual-File Synchronization & Syntax Check verification).
-5. Report completion to user / parent.
 
+## Request — 2026-07-24T14:23:28Z
+
+Task: Implement Beehive Structure on Farm Map, Bee Shooting Vocabulary Minigame Scene, Honey Rewards & Cooking Integration, and Save/Load Persistence & Scene Transitions.
+
+Requirements Summary:
+1. R1. Beehive NPC on Farm Map: Add pixel-art Beehive sprite near apple tree with animated buzzing effect, label '🐝 Beehive', interaction hint '[SPACE]', and transition to BeeScene on SPACE interaction.
+2. R2. Bee Shooting Vocabulary Minigame Scene: Create Phaser BeeScene with pixel-art bees flying in varied patterns (zigzag, sine wave, straight) carrying Korean words. Prominently display target English word at top. Clicking correct bee scores points, plays satisfying hit effect, advances to next word. Wrong hits show brief feedback. Runs for round limit (e.g., 10 words) at learnable pace using unlocked level vocabulary, then shows results summary.
+3. R3. Honey Rewards & Cooking Integration: Completing rounds awards Honey to inventory, scaling with score/accuracy. Honey registered as cooking ingredient. Include at least 1 cooking recipe requiring Honey (e.g., Honey Glazed Goods / Honey Tea / Honey Yakgwa).
+4. R4. Save/Load & Scene Transitions: Beehive state and honey-related data integrate with save/load system (`collectSave`/`applySave`). Smooth camera fade transitions between FarmScene and BeeScene, returning cleanly to farm.
+5. Code Quality & Sync: `node -c game.js` and `node -c assets/game.js` pass with 0 syntax errors. Synchronize `game.js` <-> `assets/game.js` and `index.html` <-> `assets/index.html`.

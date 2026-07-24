@@ -1,55 +1,60 @@
-# BRIEFING — 2026-07-24T20:34:00Z
+# BRIEFING — 2026-07-24T14:33:00Z
 
 ## Mission
-Implement Cooking System with 10 Recipes, Execution Engine (`cookRecipe`), Cooking UI Modal & HUD Integration, Master Chef Trophy, and Save Persistence for Hangeul Valley (Milestone 2).
+Implement Milestone 2: Honey Inventory Registration, Bee minigame reward granting, Cooking System Integration with Honey recipes, Save/Load Persistence verification, and Scene State preservation.
 
 ## 🔒 My Identity
-- Archetype: worker
+- Archetype: implementer/qa/specialist
 - Roles: implementer, qa, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_worker_m2
-- Original parent: b547cc1b-ac55-4776-ac07-72a671ad73d8
-- Milestone: Milestone 2 (Cooking System)
+- Original parent: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Milestone: M2 Honey Rewards, Cooking Integration & Save/Load Persistence
 
 ## 🔒 Key Constraints
-- CODE_ONLY network mode: no external HTTP requests.
-- No cheating or hardcoded test facades. Real logic and state.
-- Dual-file synchronization: mirror changes between `game.js` <-> `assets/game.js` and `index.html` <-> `assets/index.html`.
-- Verification with `node -c game.js` and `node -c assets/game.js`.
+- CODE_ONLY mode (no external network).
+- Follow minimal change principle.
+- No hardcoded test results or fake implementations.
+- Verify node -c game.js syntax.
 
 ## Current Parent
-- Conversation ID: b547cc1b-ac55-4776-ac07-72a671ad73d8
-- Updated: 2026-07-24T20:34:00Z
+- Conversation ID: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Updated: 2026-07-24T14:33:00Z
 
 ## Task Summary
 - **What to build**: 
-  1. `COOKING_RECIPES` array of 10 authentic Korean dishes (Novice to Master) in `game.js`. `cookRecipe(recipeId)` engine handling ingredient checks, deduction via `removeItemFromInventory()`, XP & Gold awards, cooked dish tracking, UI refresh, and achievement checks.
-  2. `#cooking-overlay` glass modal and `#cooking-btn` in `index.html`. `openCookingUI()`, `closeCookingUI()`, `renderCookingGrid()`, and `'C'` / `'c'` hotkey with text input focus guard in `game.js`.
-  3. Master Chef trophy (`master_chef`) added to `TROPHIES_DB`. `checkCookingAchievements()` to grant trophy when 100% of recipes are cooked. Persist `cookingState` in `collectSave()`, `applySave()`, and `migrateSaveData()`.
-  4. Synchronize `game.js` -> `assets/game.js` and `index.html` -> `assets/index.html`.
-- **Success criteria**: 0 syntax errors on `node -c`, all 10 recipes working, UI rendering, trophy unlocked on 100% completion, save state persisting.
-- **Interface contracts**: `PROJECT.md` & Explorer Analysis Reports (m2_1, m2_2, m2_3).
-- **Code layout**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`.
-
-## Key Decisions Made
-- Used exact recipe specifications from Explorer 1 (10 recipes with crop ingredients).
-- Implemented `cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} }` and integrated with `inventoryState.cookedDishes` for backward compatibility.
-- Modal structure following existing `.glass-modal` conventions with recipe cards `#cooking-recipe-list`, pantry bar, ingredient badges (green/red), and Cook buttons inside `#cooking-detail-view`.
-- Full keyboard hotkey handling ('C'/'c') with input focus protection (`INPUT`, `TEXTAREA`, `isContentEditable`).
-
-## Artifact Index
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\ORIGINAL_REQUEST.md` — Original request
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\changes.md` — List of code changes
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md` — Handoff report
+  1. Registered '꿀' (Honey) in ITEM_DB in game.js.
+  2. Granted Honey reward in BeeScene.showResultsSummary() using addItemToInventory('honey', totalHoney) and showToast notification.
+  3. Added Honey Yakgwa (꿀약과) and Honey Tea (꿀차) to COOKING_RECIPES.
+  4. Verified Save/Load persistence for inventory/ingredients/cookingState and scene transitions.
+  5. Validated with `node -c game.js` and automated unit test `test_m2.js`.
+- **Success criteria**: All items/recipes registered properly, inventory updated on minigame reward, save/load persists Honey & recipes, syntax check passes. (COMPLETED)
 
 ## Change Tracker
-- **Files modified**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`
-- **Build status**: PASS (0 syntax errors, 100% test pass)
+- **Files modified**: `game.js`
+  - `ITEM_DB`: Registered '꿀' (Honey) metadata.
+  - `BeeScene.showResultsSummary()`: Added `addItemToInventory('honey', totalHoney)` & `showToast`.
+  - `COOKING_RECIPES`: Added `honey_yakgwa` and `honey_tea`.
+  - `recipeState.unlockedRecipes`: Added new recipes to default unlocked list.
+- **Build status**: PASS (node -c game.js completed with 0 errors)
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: PASS
-- **Lint status**: 0 errors
-- **Tests added/modified**: Node syntax & unit verification test suite passed
+- **Build/test result**: PASS (node -c game.js & node test_m2.js 100% pass)
+- **Lint status**: Clean
+- **Tests added/modified**: `test_m2.js` (automated test suite)
 
 ## Loaded Skills
 - None
+
+## Key Decisions Made
+- Registered '꿀' in ITEM_DB with item ID 'honey'.
+- Added authentic Korean recipes Honey Yakgwa (꿀약과) and Honey Tea (꿀차) to COOKING_RECIPES.
+- Executed unit verification via automated script `test_m2.js`.
+
+## Artifact Index
+- d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\ORIGINAL_REQUEST.md
+- d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\BRIEFING.md
+- d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\progress.md
+- d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\changes.md
+- d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md
+- d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\test_m2.js

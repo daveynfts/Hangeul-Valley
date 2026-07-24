@@ -1,38 +1,73 @@
-# Changes Log — Milestone 1 (Storage & Ground Drop Pipeline)
+# Milestone 1 Code Modifications Summary
 
-## 1. Inventory Storage System (R1)
-- **`game.js`**:
-  - Defined `ITEM_DB` registry mapping Korean item keys (`'배추'`, `'무'`, `'사과'`, etc.) to item metadata (ID, English name, Korean name, icon, description).
-  - Added helper `getItemInfo(keyOrId)` for bidirectional ID <-> key resolution.
-  - Updated `inventoryState` to include `maxSlots: 20`.
-  - Implemented `getUsedInventorySlots()`: counts distinct occupied slots across `ingredients`, `cookedDishes`, and `seeds`.
-  - Implemented `addItemToInventory(itemId, qty)`: checks existing item stack first; if new item slot required, enforces `maxSlots` limit and returns `false` if full, otherwise adds item and returns `true`.
-  - Implemented `removeItemFromInventory(itemId, qty)`: validates sufficient count, deducts quantity, cleans up empty key, and returns boolean result.
-  - Implemented `expandInventoryCapacity()`: deducts 50 coins via `spendCoins(50)`, increases `maxSlots` by +5, updates save state, and re-renders inventory grid.
-  - Updated `migrateSaveData(d)`, `collectSave()`, and `applySave(d)`: serialized `maxSlots` and active dropped ground items, handled legacy saves (`maxSlots = saveData.maxSlots || 20`).
+**Date**: 2026-07-24  
+**Author**: Worker for Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics)  
+**Files Modified**: `game.js`, `assets/game.js`, `assets/index.html`
 
-## 2. Inventory UI & Keybindings (R1)
-- **`index.html`**:
-  - Added CSS styles for `#inventory-overlay`, `.inv-slot`, `.inv-slot:hover`, `.inv-slot.empty`, `.inv-slot-icon`, `.inv-slot-ko`, `.inv-slot-en`, `.inv-qty-badge`.
-  - Included `#inventory-panel` in the 64-Bit CRT Scanlines texture overlay selector list.
-  - Added `#inventory-btn` (`🎒 Bag`) button to `#hud-actions-group`.
-  - Added `#inventory-overlay` modal HTML structure with capacity badge (`#inv-capacity-badge`), capacity info + expansion button (`#inv-expand-btn`), and grid container (`#inventory-grid`).
-- **`game.js`**:
-  - Implemented `openInventoryUI()`, `closeInventoryUI()`, and `renderInventoryGrid()`.
-  - Integrated `inventory-overlay` with centralized modal manager (`setModalState`, `closeModalById`).
-  - Added keydown listener for `'I'` / `'i'` and `'E'` / `'e'` with text input focus guard (`document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA' || document.activeElement.isContentEditable`).
+---
 
-## 3. Harvest-to-Ground Drop Pipeline (R2)
-- **`game.js`**:
-  - Initialized `this.droppedItems = []` in `FarmScene.create()`.
-  - Implemented `spawnDroppedItem(itemId, x, y, playPopAnim)`: creates Phaser container with ground shadow ellipse, glowing aura, emoji icon, Korean text label, initial pop-up bounce animation (`Bounce.Out`), and random sine-wave bobbing phase angle.
-  - Implemented `updateDroppedItems(dt)` in `FarmScene.update(_t, dt)`:
-    - Continuous sine-wave bobbing & aura pulse.
-    - Magnet Zone (~60px): smooth glide towards player if inventory is not restricted by full-inventory cooldown.
-    - Pickup Zone (~30px): attempts `addItemToInventory(itemId, 1)`. On success, plays pickup SFX, sparkle particles, floating text label (`+1 [Item]!`), and destroys entity container. On failure (full inventory), triggers `showToast("🎒 Inventory Full! Cannot pick up " + nameKo, 2500)` and applies a 3-second pickup cooldown debounce (`pickupCooldown = Date.now() + 3000`).
-  - Modified crop harvest in `advancePlot()` and Apple harvest in `onAppleHarvested()` to call `this.spawnDroppedItem(...)` instead of direct inventory credit.
-  - Added ground item serialization to `collectSave()` and re-spawning logic to `applySave()`.
+## 1. Pixel Art Texture Generation (`PixelArtRenderer`)
+- Added `_genBeehiveTextures(scene)` to `PixelArtRenderer`:
+  - `'beehive'`: 20x22 amber hive dome on wooden base with dark entrance hole, ribbed amber layers, and golden highlights.
+  - `'p_tiny_bee'`: 5x5 tiny bee particle texture with dark body contour, bright yellow stripes, and translucent wings.
+- Added `_genBeeTextures(scene)` to `PixelArtRenderer`:
+  - `'bee_fly_0'` & `'bee_fly_1'`: 16x16 pixel-art bee flying animation frames (wide wings & fluttering wings).
+  - `'p_pollen'`: 6x6 yellow pollen particle texture.
+  - `'p_honey_drip'`: 4x8 golden honey drip particle texture.
+- Updated `PixelArtRenderer.generateAllTextures(scene)` to invoke `_genBeehiveTextures` and `_genBeeTextures`.
 
-## 4. File Mirroring & Verification
-- Synchronized `game.js` -> `assets/game.js` and `index.html` -> `assets/index.html`.
-- Executed `node -c game.js` and `node -c assets/game.js` — **0 syntax errors**.
+## 2. Beehive NPC Integration in `FarmScene`
+- Added `_createBeehiveNPC(W, H)` in `FarmScene`:
+  - Positioned Beehive sprite near the Apple Tree at `(this.farm.x - 65, this.farm.y - 70)`.
+  - Added subtle buzzing animation using a rapid horizontal vibration tween (`x: ±1.5px`, `duration: 85ms`, `repeat: -1`).
+  - Added 4 orbiting tiny bee particle sprites (`beehiveBees`) moving in continuous sinusoidal trajectories around the hive dome.
+  - Added floating interaction hint `🐝 Beehive\n[SPACE]` with bobbing tween.
+  - Added fixed gold name tag `🐝 Beehive` below hive.
+  - Added proximity check (`<85px`) in `FarmScene.update()`, `_updateTargetHighlight()`, and `_interact()`.
+  - Implemented transition to `BeeScene`:
+    ```javascript
+    this.cameras.main.fadeOut(300, 0, 0, 0);
+    this.cameras.main.once('camerafadeoutcomplete', () => {
+      this.scene.pause();
+      this.scene.launch('BeeScene');
+    });
+    ```
+
+## 3. Vocabulary Standardization Helper (`getUnlockedWords()`)
+- Added global `getUnlockedWords()` function:
+  - Retrieves active vocabulary words across all unlocked level packs in `unlockedLevels`.
+  - Safely falls back to `levelsData[0].words` if `unlockedLevels` or `levelsData` are empty.
+
+## 4. Bee Shooting Vocabulary Minigame (`BeeScene`)
+- Defined `class BeeScene extends Phaser.Scene` with key `'BeeScene'`:
+  - **Top HUD Banner**: Prominent glassmorphic dark container displaying target English word (e.g. `TARGET: "MOTHER" 👩`).
+  - **Left HUD**: Displays current word step (`1/10`), score, accuracy %, and combo multiplier (`2x`).
+  - **Exit Button & [ESC] Key**: Allows graceful exit back to `FarmScene`.
+  - **Wave Spawning**: Spawns flying bee containers with 1 correct Korean word + 2-3 distractor Korean words.
+  - **Flight Trajectories**:
+    1. *Linear Glide*: Straight horizontal drift across screen.
+    2. *Sine Wave*: Sinusoidal vertical oscillation `y = baseY + Math.sin(t * freq + phase) * amp`.
+    3. *Zigzag Pattern*: Alternating vertical velocity direction steps between upper and lower bounds.
+  - **Interaction Logic**:
+    - *Correct Hit*: +100 base score + combo bonus (+20 per combo streak), particle explosion (`p_pollen`), chiptune audio `'quiz_correct'`, floating "+100 (2x Combo!)" text, advances to next word.
+    - *Wrong Hit*: Camera shake, chiptune audio `'quiz_wrong'`, red sprite tint flash, combo streak reset, updates accuracy metric.
+  - **Round Progression**: 10-word round limit.
+  - **Results Summary Modal**: Retro glassmorphism overlay showing Final Score, Accuracy %, Max Combo, Honey reward preview (`+3 Honey`), and `[ RETURN TO FARM ]` button.
+  - **Return Transition**:
+    ```javascript
+    this.cameras.main.fadeOut(300, 0, 0, 0);
+    this.cameras.main.once('camerafadeoutcomplete', () => {
+      this.scene.stop();
+      this.scene.resume('FarmScene');
+    });
+    ```
+
+## 5. Scene Registration & Dual-File Synchronization
+- Registered `BeeScene` in `Phaser.Game` configuration: `scene: [FarmScene, ArcadeScene, DungeonScene, FishingScene, BeeScene]`.
+- Synchronized all code updates to `assets/game.js` and `assets/index.html`.
+
+## 6. Verification Results
+- `node -c game.js`: 0 errors.
+- `node -c assets/game.js`: 0 errors.
+- `node test_m1_challenger_harness.js`: 49 PASSED, 0 FAILED.
+- `node verify_m1.js`: 21 PASSED, 0 FAILED.

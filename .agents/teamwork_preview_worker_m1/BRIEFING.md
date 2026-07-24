@@ -1,53 +1,51 @@
-# BRIEFING — 2026-07-24T20:22:30Z
+# BRIEFING — 2026-07-24T21:27:21Z
 
 ## Mission
-Implement Milestone 1 Inventory Storage System, Inventory UI & Keybindings, and Harvest-to-Ground Drop Pipeline for Hangeul Valley.
+Implement Beehive Farm NPC and Bee Shooting Vocabulary Minigame Mechanics (Milestone 1).
 
 ## 🔒 My Identity
-- Archetype: implementer
+- Archetype: implementer/qa/specialist
 - Roles: implementer, qa, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_worker_m1
-- Original parent: b547cc1b-ac55-4776-ac07-72a671ad73d8
-- Milestone: M1 Storage / Inventory System & Harvest-to-Ground Drop Pipeline
+- Original parent: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Milestone: Milestone 1 - Beehive Farm NPC & Bee Shooting Minigame Mechanics
 
 ## 🔒 Key Constraints
-- Code modification minimal change principle.
-- Synchronization between root files and assets/ copies (`game.js` -> `assets/game.js`, `index.html` -> `assets/index.html`).
-- Zero syntax errors verified via `node -c`.
-- Text input focus guard for hotkeys 'I'/'i' and 'E'/'e'.
-- 3-second pickup cooldown debounce when inventory is full on dropped item pickup attempt.
+- CODE_ONLY network mode: No external network calls.
+- DO NOT CHEAT. Genuine implementation with real state and mechanics.
+- Follow minimal change principle and verify syntax with `node -c game.js`.
 
 ## Current Parent
-- Conversation ID: b547cc1b-ac55-4776-ac07-72a671ad73d8
-- Updated: 2026-07-24T20:22:30Z
+- Conversation ID: 74ebbed7-7c1b-4da3-b8af-458dfafa078b
+- Updated: 2026-07-24T21:27:21Z
 
 ## Task Summary
-- **What to build**: Inventory storage state & helper functions, save serialization/deserialization, UI modal & button, hotkeys ('I'/'E'), ground drop physics & collection system for crops and apples.
-- **Success criteria**: Functional inventory with capacity, persistent save, modal UI grid with expand button, dropped item arc bounce + glide magnet + pickup / full inventory toast debounce, syntax validated.
-- **Interface contracts**: `.agents/orchestrator/PROJECT.md`, `.agents/teamwork_preview_explorer_m1_2/analysis.md`, `.agents/teamwork_preview_explorer_m1_3/analysis.md`.
-- **Code layout**: Root `game.js`, `index.html`, mirrored in `assets/`.
-
-## Key Decisions Made
-- Implemented `ITEM_DB` registry and `getItemInfo(keyOrId)` for bidirectional ID and Korean key resolution.
-- Updated `addItemToInventory` to handle stacking in existing occupied slots without incrementing total slot count.
-- Integrated dropped item entities into `collectSave()` and `applySave()` for full persistence across scene reloads.
-- Guarded hotkeys 'I'/'i' and 'E'/'e' against active input focus (`INPUT`, `TEXTAREA`, `isContentEditable`).
+- **What to build**: Beehive NPC on Farm Map + Bee Shooting Vocabulary Minigame Scene (`BeeScene`).
+- **Success criteria**: Functional beehive NPC with buzzing animation & tiny bees, interaction prompt, fade transitions, `BeeScene` with top HUD, trajectory types (linear, sine wave, zigzag), target/distractor Korean words, hit handling, score/combo calculation, end-of-round retro glassmorphism overlay, return transition to `FarmScene`, syntax checks (`node -c game.js`) pass.
+- **Interface contracts**: `PROJECT.md`
+- **Code layout**: `game.js`
 
 ## Change Tracker
-- **Files modified**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`
-- **Build status**: Passed (`node -c` exit code 0)
-- **Pending issues**: None
+- **Files modified**:
+  - `game.js`: Added `_genBeehiveTextures`, `_genBeeTextures`, `_createBeehiveNPC`, `getUnlockedWords()`, `BeeScene` class, and registered `BeeScene` in `config.scene`.
+  - `assets/game.js`: Synchronized with `game.js`.
+  - `assets/index.html`: Synchronized with `index.html`.
+- **Build status**: `node -c game.js` and `node -c assets/game.js` completed with 0 errors.
+- **Pending issues**: None. All tasks completed.
 
 ## Quality Status
-- **Build/test result**: Passed Node syntax checks
-- **Lint status**: 0 syntax errors
-- **Tests added/modified**: Node syntax check executed
+- **Build/test result**:
+  - `test_m1_challenger_harness.js`: 49/49 PASSED.
+  - `verify_m1.js`: 21/21 PASSED.
+- **Lint/Syntax status**: Passed (0 syntax errors).
+- **Tests added/modified**: `verify_m1.js` empirical test script.
 
 ## Loaded Skills
 - None
 
 ## Artifact Index
-- `.agents/teamwork_preview_worker_m1/ORIGINAL_REQUEST.md` — Original request
-- `.agents/teamwork_preview_worker_m1/progress.md` — Progress tracker
-- `.agents/teamwork_preview_worker_m1/changes.md` — Detailed changes log
-- `.agents/teamwork_preview_worker_m1/handoff.md` — Final handoff report
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\ORIGINAL_REQUEST.md` — Original worker request
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\progress.md` — Progress log
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md` — Change report
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\handoff.md` — Handoff report
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\verify_m1.js` — Empirical test verification script

@@ -1,16 +1,14 @@
-## 2026-07-24T20:22:48Z
-You are Reviewer 2 for Milestone 1 (Storage / Inventory System & Harvest-to-Ground Drop Pipeline).
-Your working directory for metadata is `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2`.
-Project root is `d:\Hangeul Valley`.
+## 2026-07-24T14:27:31Z
+<USER_REQUEST>
+You are Reviewer 2 for Milestone 1 (Beehive Farm NPC & Bee Shooting Minigame Mechanics).
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2`.
+Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2\handoff.md`.
 
-Read:
-- Worker 1 changes: `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md`
-- Code files: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`
+Review the implementation in `game.js` and `assets/game.js` against requirements R1 and R2:
+1. Architecture & Texture Baking: `PixelArtRenderer._genBeehiveTextures` and `_genBeeTextures` correctly invoked during texture generation.
+2. Scene Lifecycle: `BeeScene` inheriting from `Phaser.Scene`, registered in `new Phaser.Game({ ..., scene: [FarmScene, ArcadeScene, DungeonScene, FishingScene, BeeScene] })`. Safe `this.scene.pause()` / `this.scene.launch('BeeScene')` and `this.scene.stop()` / `this.scene.resume('FarmScene')` transitions preserving overworld state.
+3. Vocabulary & Distractor Logic: `getUnlockedWords()` correctly handles level unlocking and fallbacks. Distractors selected cleanly without duplicates or crashing when pool size is small.
+4. Code quality: run `node -c game.js` and `node -c assets/game.js`.
 
-Review:
-1. Harvest-to-Ground Drop Pipeline (`spawnDroppedItem`, `updateDroppedItems`, crop harvest hooks in `advancePlot` and `onAppleHarvested`).
-2. Visual rendering, bounce animation, glowing aura, magnet attraction, pickup detection, and full-inventory toast notification debounce.
-3. Persistence of dropped items on map across save/load roundtrips.
-4. Run `node -c game.js` and `node -c assets/game.js` to verify syntax.
-
-Write your review verdict and findings to `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2\review.md` and send a message back to the orchestrator.
+Verify architecture integrity, scene lifecycle, distractor selection safety, and dual-file consistency. Deliver your verdict (PASS/FAIL) and handoff report, then send a message back to the Project Orchestrator.
+</USER_REQUEST>

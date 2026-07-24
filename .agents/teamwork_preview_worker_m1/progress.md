@@ -1,15 +1,17 @@
-# Progress Tracker — M1 Implementation Worker
+# Progress Log - Milestone 1 Worker
 
-Last visited: 2026-07-24T20:22:32Z
+Last visited: 2026-07-24T21:27:12Z
 
-## Status Overview
-- [x] Step 1: Initialize workspace metadata (ORIGINAL_REQUEST.md, BRIEFING.md, progress.md)
-- [x] Step 2: Read specifications & analysis reports
-- [x] Step 3: Inspect existing `game.js` and `index.html`
-- [x] Step 4: Implement Inventory Storage System (State, helper functions, save persistence) in `game.js`
-- [x] Step 5: Implement Inventory UI & Keybindings in `index.html` and `game.js`
-- [x] Step 6: Implement Harvest-to-Ground Drop Pipeline (entities, bounce, magnet, pickup, full toast debounce) in `game.js`
-- [x] Step 7: Sync files to `assets/`
-- [x] Step 8: Verify syntax (`node -c game.js` and `node -c assets/game.js`)
-- [x] Step 9: Write `changes.md` and `handoff.md`
-- [x] Step 10: Send completion message to orchestrator
+- [x] Initialized workspace and briefing
+- [x] Read Explorer handoff & analysis reports
+- [x] Inspect existing `game.js` structure
+- [x] Implement `PixelArtRenderer` additions (`_genBeehiveTextures`, `_genBeeTextures`)
+- [x] Implement `FarmScene` Beehive NPC integration (`_createBeehiveNPC`, buzzing animation, orbiting tiny bees, proximity hint `<85px`, fade transition)
+- [x] Implement `BeeScene` class & register in Phaser game configuration (`scene: [FarmScene, ArcadeScene, DungeonScene, FishingScene, BeeScene]`)
+- [x] Implement `getUnlockedWords()` vocabulary getter and 10-word round logic
+- [x] Implement varied trajectories (`linear`, `sine`, `zigzag`), hit/miss interactions, combo multiplier, particle/audio effects, and retro glassmorphism end-of-round modal summary
+- [x] Synchronize changes to `assets/game.js` and `assets/index.html`
+- [x] Verify syntax (`node -c game.js` and `node -c assets/game.js`) - Passed 0 errors
+- [x] Run empirical verification test harnesses - Passed 21/21 assertions
+- [ ] Write `changes.md` and `handoff.md`
+- [ ] Send message to orchestrator

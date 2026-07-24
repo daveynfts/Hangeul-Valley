@@ -1,16 +1,15 @@
-## 2026-07-24T13:17:30Z
-You are Explorer 3 for Milestone 1 (Inventory Storage System & Ground Drop Pipeline).
-Your working directory for metadata is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3`.
-Project root is `d:\Hangeul Valley`.
+## 2026-07-24T21:23:56Z
+You are Explorer 3 for Milestone 1 (Vocabulary Integration & Minigame Scoring Flow).
+Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3`.
+Please create your working directory if it does not exist, write progress.md to keep your heartbeat alive, and write your report to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md` and `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\handoff.md`.
 
-Read `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`.
-Examine `game.js`, `index.html`, `assets/game.js`, and `assets/index.html`.
+Read `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md`, `d:\Hangeul Valley\game.js`, and `d:\Hangeul Valley\levels.json`.
 
-Focus area: UI/UX, Keybindings, HUD & Save System (R1):
-1. Examine `index.html` for existing HUD layout, modal templates, CSS styles, and toast notifications.
-2. Design Inventory UI Modal layout: slot grid, item icons, Korean/English names, quantity badges, capacity indicator (e.g. "20 / 20 slots"), and "Expand Capacity (+5 slots for X gold)" button.
-3. Design HUD inventory button and keyboard shortcut handling ('I' or 'E' key toggles inventory UI; ensure no conflict with existing keys or text inputs).
-4. Verify persistence requirements: exact payload in `collectSave()` and restore logic in `applySave()`.
+Investigate the following areas in `game.js` and `levels.json`:
+1. How vocabulary data is loaded from `levels.json` or stored in game memory (SRS system, unlocked level vocabulary, `LEVELS` object, `getUnlockedWords()`).
+2. How target English words are picked and matched with distractor Korean words for minigame rounds (e.g. 1 correct answer + 2-3 distractor bees carrying other unlocked Korean words).
+3. Round progression state in `BeeScene`: word counter (e.g., 1 to 10), score tracking, accuracy percentage, combo counter.
+4. Minigame end-of-round results summary overlay (styled in retro glassmorphism style, showing score, accuracy, honey reward preview, and a 'Return to Farm' button).
+5. Command to test syntax: `node -c game.js`.
 
-Write your findings to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md` and update `progress.md`.
-Send a message back to the orchestrator with your detailed report when complete.
+Synthesize your findings and provide a comprehensive design for R2 vocabulary integration & scoring flow. Deliver your handoff report and send a message back to the Project Orchestrator when complete.

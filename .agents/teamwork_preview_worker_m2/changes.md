@@ -1,63 +1,87 @@
-# Code Changes Report - Milestone 2 (Cooking System)
+# Changes Report — Milestone 2 (Honey Rewards, Cooking Integration & Save/Load Persistence)
 
-## 1. Files Modified
-- `game.js`
-- `index.html`
-- `assets/game.js` (Synchronized copy of `game.js`)
-- `assets/index.html` (Synchronized copy of `index.html`)
+**Worker ID**: `teamwork_preview_worker_m2`  
+**Date**: 2026-07-24  
+**Target File**: `d:\Hangeul Valley\game.js`  
 
-## 2. Detailed Summary of Changes
+---
 
-### `game.js` & `assets/game.js`
-1. **Added Crops to `ITEM_DB`**:
-   - Added `'감자'` (`potato`), `'옥수수'` (`corn`), and `'딸기'` (`strawberry`) to `ITEM_DB` for crop ingredient mapping.
+## 1. Summary of Modifications
 
-2. **Defined `COOKING_RECIPES` (10 Authentic Korean Dishes)**:
-   - Defined `COOKING_RECIPES` array with 10 tiered recipes:
-     - `kimchi` (Novice): Napa Cabbage 1, Chili 1, Garlic 1 | XP: 25, Gold: 30
-     - `radish_rice` (Novice): Rice 1, Radish 1 | XP: 20, Gold: 25
-     - `roasted_corn` (Novice): Corn 2 | XP: 20, Gold: 20
-     - `strawberry_jam` (Novice): Strawberry 2 | XP: 22, Gold: 25
-     - `gimbap` (Intermediate): Rice 1, Carrot 1, Radish 1 | XP: 40, Gold: 50
-     - `tteokbokki` (Intermediate): Rice 2, Chili 1, Green Onion 1 | XP: 45, Gold: 55
-     - `gamjajeon` (Advanced): Potato 2, Green Onion 1, Garlic 1 | XP: 65, Gold: 75
-     - `bibimbap` (Advanced): Rice 1, Cabbage 1, Carrot 1, Soybean 1 | XP: 75, Gold: 90
-     - `bulgogi` (Master): Green Onion 2, Garlic 2, Soybean 1 | XP: 95, Gold: 115
-     - `samgyetang` (Master): Rice 2, Garlic 2, Radish 1, Green Onion 1 | XP: 130, Gold: 160
+### Task 1: Honey Inventory Registration & Bee Minigame Reward Granting
+- **Registered `'꿀'` (Honey) in `ITEM_DB`**:
+  - File: `game.js`, lines 3920–3922
+  - Entry:
+    ```javascript
+    '꿀': { id: 'honey', name: 'Honey', nameKo: '꿀', icon: '🍯', type: 'ingredient', description: 'Sweet golden honey harvested from the beehive.' }
+    ```
+- **Integrated Honey Reward Granting & Notification in `BeeScene.showResultsSummary()`**:
+  - File: `game.js`, lines 11170–11178
+  - Logic added:
+    ```javascript
+    if (typeof addItemToInventory === 'function') {
+      addItemToInventory('honey', totalHoney);
+    }
+    if (typeof showToast === 'function') {
+      showToast('🍯 + ' + totalHoney + ' Honey added to inventory!');
+    }
+    ```
 
-3. **Cooking Execution Engine (`cookRecipe`)**:
-   - `cookRecipe(recipeId)`: Validates input, resolves ingredient keys using `getItemInfo()`, checks owned ingredient amounts in `inventoryState.ingredients`, deducts ingredients using `removeItemFromInventory()`, awards Gold (`addCoins`) & Vocab XP (`addHonor`), updates dish counts in `cookingState` and `inventoryState.cookedDishes`, triggers audio feedback and UI refresh, and executes `checkCookingAchievements()`.
+### Task 2: Cooking System Integration (Honey Recipes)
+- **Added authentic Korean Honey-based recipes to `COOKING_RECIPES`**:
+  - File: `game.js`, lines 11885–11910
+  - Recipes:
+    - **Honey Yakgwa (꿀약과)**:
+      ```javascript
+      {
+        id: 'honey_yakgwa',
+        nameEn: 'Honey Yakgwa',
+        nameKo: '꿀약과',
+        icon: '🥮',
+        description: 'Traditional Korean honey pastry made with wheat, honey, and sesame oil.',
+        ingredients: [
+          { itemId: 'honey', count: 2 },
+          { itemId: 'cabbage', count: 1 }
+        ],
+        xpReward: 50,
+        goldReward: 60
+      }
+      ```
+    - **Honey Tea (꿀차)**:
+      ```javascript
+      {
+        id: 'honey_tea',
+        nameEn: 'Honey Tea',
+        nameKo: '꿀차',
+        icon: '🍵',
+        description: 'Warm soothing tea sweetened with fresh natural honey.',
+        ingredients: [
+          { itemId: 'honey', count: 2 }
+        ],
+        xpReward: 35,
+        goldReward: 45
+      }
+      ```
+- **Updated `recipeState.unlockedRecipes` default list**:
+  - File: `game.js`, lines 4022 and 4056
+  - Added `'honey_yakgwa'` and `'honey_tea'` to unlocked recipes arrays.
 
-4. **Cooking UI Modal Functions & Keyboard Shortcut ('C'/'c')**:
-   - Added `openCookingUI()`, `closeCookingUI()`, and `renderCookingGrid(selectId)`.
-   - Updated global keydown handler to support `'c'` / `'C'` hotkey with text focus guard checking `activeElement` (`INPUT`, `TEXTAREA`, `isContentEditable`).
-   - Added `overlayId === 'cooking-overlay'` to `closeModalById()` for Escape key handling.
-   - Bound cooking methods to `window`.
+### Task 3: Save/Load Persistence & Scene State Verification
+- **Save/Load Persistence**: Verified `collectSave()` serializes `inventoryState` (including `inventoryState.ingredients['꿀']`) and `cookingState` (cooked recipes, recipe stats). `applySave()` deserializes and restores `inventoryState` and `cookingState` accurately.
+- **Scene State & Clock**: Scene transitions between `FarmScene` and `BeeScene` utilize `this.scene.pause()` / `this.scene.launch('BeeScene')` and `this.scene.resume('FarmScene')`, preserving overworld coordinates, crop growth timers (`plantedAt`), apple tree timers (`appleRipeAt`), and dropped ground items seamlessly.
 
-5. **Trophy & Achievement Integration**:
-   - Added Master Chef trophy (`id: 'master_chef'`, `name: 'Master Chef (요리 왕)'`, `icon: '👨‍🍳'`, `desc: 'Cook all 10 recipes at least once'`, `type: 'cooking'`, `reqRecipes: 10`, `cost: 0`) to `TROPHIES_DB`.
-   - Implemented `checkCookingAchievements()` to grant trophy when 100% (10/10) of recipes have been cooked.
-   - Updated `renderTrophies()` to properly render cooking progress badges and claim buttons.
+---
 
-6. **Save State & Legacy Migration**:
-   - Declared top-level `var cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} }`.
-   - Updated `collectSave()` to persist `cooking: cookingState`.
-   - Updated `applySave()` to restore `cookingState` and run `checkCookingAchievements()`.
-   - Updated `migrateSaveData()` to populate `cookingState` from legacy `inventoryState.cookedDishes` if present.
+## 2. Verification Results
 
-### `index.html` & `assets/index.html`
-1. **Added `#cooking-overlay` Glass Modal**:
-   - Includes glass header with title "KOREAN COOKING KITCHEN (요리)", `#cooking-progress-badge`, and close button.
-   - Pantry bar `#cooking-pantry-bar` displaying active crop ingredient stock summary.
-   - Grid layout containing `#cooking-recipe-list` (recipe cards) and `#cooking-detail-view` (selected recipe details: dish icon, nameKo/nameEn, description, green/red owned/needed ingredient badges, Cook action button, reward badges).
+1. **Syntax Check**:
+   - Executed `node -c game.js`.
+   - Result: 0 errors, exit code 0.
 
-2. **Added HUD Action Button `#cooking-btn`**:
-   - Added `#cooking-btn` (`🍳 Cooking`) in `#hud-actions-group`.
-
-3. **Updated CSS Selectors**:
-   - Updated `#recipe-overlay, #cooking-overlay, #cooking-minigame-overlay, #cultural-fact-overlay` for modal display and transition.
-
-## 3. Verification Logs
-- `node -c game.js`: Passed (0 errors)
-- `node -c assets/game.js`: Passed (0 errors)
-- Unit execution test in Node environment: All 4 verification stages passed successfully.
+2. **Automated Unit Test Execution**:
+   - Executed `node .agents/teamwork_preview_worker_m2/test_m2.js`.
+   - Result:
+     - `ITEM_DB` lookup by key `'꿀'` and id `'honey'` PASSED.
+     - `addItemToInventory('honey', 5)` updated `inventoryState.ingredients['꿀']` from 0 to 5 PASSED.
+     - `COOKING_RECIPES` registration for `honey_yakgwa` and `honey_tea` PASSED.
+     - `collectSave()` & `applySave()` restoration of `'꿀'` count PASSED.
