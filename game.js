@@ -8519,11 +8519,24 @@ class FarmScene extends Phaser.Scene {
   _createFishingSpot(W, H){
     const fx = this.farm.x - 190;
     const fy = this.farm.y + this.farm.h / 2 + 20;
+    this.dockSprite = null; // No boat — pure pond
 
-    // ── Pebble / Cobblestone border ring ──────────────────────────────────
-    const pebbleColors = [0x9E9793, 0x7D7571, 0xC7C1BD, 0x4A4440, 0xB0A8A3];
+    // ── Large stones (outer ring) ─────────────────────────────────────────
+    const stoneColors = [0x7D7571, 0x6B6360, 0x8A8480, 0x5C5652];
     const pondRadiusX = 140, pondRadiusY = 50;
-    for (let angle = 0; angle < Math.PI * 2; angle += 0.18) {
+    for (let angle = 0; angle < Math.PI * 2; angle += 0.22) {
+      const jitter = 0.88 + Math.random() * 0.24;
+      const px = fx + Math.cos(angle) * (pondRadiusX + 14) * jitter;
+      const py = fy + 20 + Math.sin(angle) * (pondRadiusY + 14) * jitter;
+      const size = 5 + Math.random() * 5;
+      const col = stoneColors[Math.floor(Math.random() * stoneColors.length)];
+      const stone = this.add.ellipse(px, py, size * 1.4, size, col, 0.95).setDepth(fy - 8);
+      stone.setAngle(Math.random() * 360);
+    }
+
+    // ── Mid cobblestone ring ──────────────────────────────────────────────
+    const pebbleColors = [0x9E9793, 0xC7C1BD, 0xB0A8A3, 0x8A827E];
+    for (let angle = 0; angle < Math.PI * 2; angle += 0.16) {
       const jitter = 0.85 + Math.random() * 0.3;
       const px = fx + Math.cos(angle) * (pondRadiusX + 6) * jitter;
       const py = fy + 20 + Math.sin(angle) * (pondRadiusY + 6) * jitter;
@@ -8531,66 +8544,73 @@ class FarmScene extends Phaser.Scene {
       const col = pebbleColors[Math.floor(Math.random() * pebbleColors.length)];
       this.add.circle(px, py, size, col, 0.9).setDepth(fy - 7);
     }
-    // Inner ring (smaller pebbles)
-    for (let angle = 0; angle < Math.PI * 2; angle += 0.25) {
+
+    // ── Inner small pebbles ───────────────────────────────────────────────
+    const smallColors = [0xC7C1BD, 0xB0A8A3, 0xD5CFCB, 0x9E9793];
+    for (let angle = 0; angle < Math.PI * 2; angle += 0.2) {
       const jitter = 0.9 + Math.random() * 0.2;
-      const px = fx + Math.cos(angle) * (pondRadiusX - 2) * jitter;
-      const py = fy + 20 + Math.sin(angle) * (pondRadiusY - 2) * jitter;
-      const size = 2 + Math.random() * 2.5;
-      const col = pebbleColors[Math.floor(Math.random() * pebbleColors.length)];
-      this.add.circle(px, py, size, col, 0.7).setDepth(fy - 6);
+      const px = fx + Math.cos(angle) * (pondRadiusX - 4) * jitter;
+      const py = fy + 20 + Math.sin(angle) * (pondRadiusY - 4) * jitter;
+      const size = 1.5 + Math.random() * 2.5;
+      const col = smallColors[Math.floor(Math.random() * smallColors.length)];
+      this.add.circle(px, py, size, col, 0.75).setDepth(fy - 6);
     }
 
-    // ── Crystal Pond (larger, deeper) ─────────────────────────────────────
-    // Dark bottom layer
+    // ── Scattered accent rocks (random clusters) ──────────────────────────
+    for (let i = 0; i < 14; i++) {
+      const rAngle = Math.random() * Math.PI * 2;
+      const rDist = 0.95 + Math.random() * 0.35;
+      const rx = fx + Math.cos(rAngle) * (pondRadiusX + 22) * rDist;
+      const ry = fy + 20 + Math.sin(rAngle) * (pondRadiusY + 22) * rDist;
+      const rSize = 3 + Math.random() * 6;
+      const rCol = stoneColors[Math.floor(Math.random() * stoneColors.length)];
+      const rock = this.add.ellipse(rx, ry, rSize * 1.6, rSize, rCol, 0.85).setDepth(fy - 8);
+      rock.setAngle(Math.random() * 360);
+    }
+
+    // ── Crystal Pond (multi-layer water) ──────────────────────────────────
     this.add.ellipse(fx, fy + 22, 260, 84, 0x0369A1, 0.95).setDepth(fy - 5);
-    // Main water surface
     const pond = this.add.ellipse(fx, fy + 20, 250, 76, 0x0284C7, 0.88).setDepth(fy - 4);
     this.tweens.add({ targets: pond, scaleX: 1.03, scaleY: 0.97, duration: 2200, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-    // Bright water highlight
     this.add.ellipse(fx - 30, fy + 12, 80, 28, 0x38BDF8, 0.3).setDepth(fy - 3);
+    this.add.ellipse(fx + 40, fy + 24, 50, 18, 0x38BDF8, 0.2).setDepth(fy - 3);
 
     // ── Water sparkle particles ───────────────────────────────────────────
-    for (let i = 0; i < 6; i++) {
-      const sx = fx + (Math.random() - 0.5) * 180;
-      const sy = fy + 10 + (Math.random() - 0.5) * 40;
+    for (let i = 0; i < 8; i++) {
+      const sx = fx + (Math.random() - 0.5) * 200;
+      const sy = fy + 10 + (Math.random() - 0.5) * 50;
       const sparkle = this.add.circle(sx, sy, 1.5, 0xE0F2FE, 0.8).setDepth(fy - 2);
       this.tweens.add({
         targets: sparkle, alpha: { from: 0.2, to: 0.9 }, scale: { from: 0.8, to: 1.6 },
-        duration: 1000 + i * 400, yoyo: true, repeat: -1, ease: 'Sine.InOut'
+        duration: 1000 + i * 350, yoyo: true, repeat: -1, ease: 'Sine.InOut'
       });
     }
 
     // ── Floating Lily Pads ────────────────────────────────────────────────
-    const lily1 = this.add.ellipse(fx - 65, fy + 22, 16, 10, 0x4A7C59, 0.7).setDepth(fy - 1);
-    const lily2 = this.add.ellipse(fx + 75, fy + 28, 14, 9, 0x4A7C59, 0.6).setDepth(fy - 1);
-    this.tweens.add({ targets: [lily1, lily2], y: '+=2', duration: 2000, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    const lilyPositions = [[-65, 22], [75, 28], [-20, 30], [40, 15], [-85, 10]];
+    lilyPositions.forEach(([lx, ly], i) => {
+      const lSize = 12 + Math.random() * 8;
+      const lily = this.add.ellipse(fx + lx, fy + ly, lSize, lSize * 0.6, 0x4A7C59, 0.55 + Math.random() * 0.2).setDepth(fy - 1);
+      this.tweens.add({ targets: lily, y: `+=${1 + Math.random()}`, duration: 1800 + i * 300, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    });
 
-    // ── Fishing Boat (centered on pond, no background) ────────────────────
-    this.dockSprite = this.add.image(fx, fy + 8, 'fishing_dock').setOrigin(0.5, 0.5).setScale(2.2).setDepth(fy);
-    if (this.shadows) this.shadows.createShadow(this.dockSprite, 70, 18, 4);
-    // Gentle vertical bobbing (boat on water)
-    this.tweens.add({ targets: this.dockSprite, y: fy + 5, duration: 2200, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-    // Subtle rocking rotation
-    this.tweens.add({ targets: this.dockSprite, angle: { from: -1.8, to: 1.8 }, duration: 2800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-
-    // ── Water ripples around the boat ─────────────────────────────────────
-    for (let i = 0; i < 3; i++) {
-      const ripple = this.add.ellipse(fx + (i - 1) * 30, fy + 30, 20, 6, 0x38BDF8, 0.35).setDepth(fy - 1);
+    // ── Water ripple waves ────────────────────────────────────────────────
+    for (let i = 0; i < 4; i++) {
+      const ripple = this.add.ellipse(fx + (i - 1.5) * 40, fy + 20, 24, 7, 0x38BDF8, 0.3).setDepth(fy - 1);
       this.tweens.add({
-        targets: ripple, scaleX: { from: 1, to: 2.5 }, scaleY: { from: 1, to: 1.5 }, alpha: { from: 0.35, to: 0 },
-        duration: 2500, delay: i * 800, repeat: -1, ease: 'Quad.Out'
+        targets: ripple, scaleX: { from: 1, to: 2.8 }, scaleY: { from: 1, to: 1.4 }, alpha: { from: 0.3, to: 0 },
+        duration: 3000, delay: i * 700, repeat: -1, ease: 'Quad.Out'
       });
     }
 
     // ── Hint & Label ──────────────────────────────────────────────────────
-    this.fishHint = this.add.text(fx, fy - 60, '🎣 CRYSTAL POND\n[SPACE]', {
+    this.fishHint = this.add.text(fx, fy - 40, '🎣 FISHING POND\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#38BDF8', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
     this.tweens.add({ targets: this.fishHint, y: this.fishHint.y - 3, duration: 700, yoyo: true, repeat: -1 });
 
-    this.add.text(fx, fy + 52, '⛵ Fishing Boat', {
+    this.add.text(fx, fy + 52, '🎣 Fishing Pond', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
       color:'#7DD3FC', stroke:'#000', strokeThickness:2
     }).setOrigin(0.5,0).setDepth(fy+1);
