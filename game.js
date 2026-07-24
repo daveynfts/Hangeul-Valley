@@ -8050,27 +8050,45 @@ class FarmScene extends Phaser.Scene {
     ], PORTAL_PALETTE, 0, 0, PS);
     gport.generateTexture('dungeon_portal', 20*PS, 28*PS); gport.destroy();
 
-    // Wooden Fishing Boat texture 22x16 (no background — pure boat)
+    // Wooden Fishing Rowboat texture 28x18 (top-down, detailed)
+    const BOAT_PALETTE = {
+      '.': null,
+      'K': 0x0F172A, // Dark outline
+      'H': 0xE8C992, // Hull highlight (sunlit plank)
+      'h': 0xD99B66, // Hull warm mid
+      'W': 0xB3713D, // Hull base wood
+      'w': 0x8F5428, // Hull dark grain
+      'D': 0x573012, // Deep shadow / keel
+      'R': 0xC7C1BD, // Rope / oarlock metal light
+      'r': 0x9E9793, // Rope shadow / metal dark
+      'B': 0x7D7571, // Bucket body
+      'b': 0x4A4440, // Bucket shadow
+      'S': 0xFDE047, // Seat cushion highlight
+      's': 0xD97706, // Seat cushion shade
+      'N': 0x475569, // Oarlock / nail metal
+    };
     const gdock = mk();
     PixelArtRenderer.drawMatrix(gdock, [
-      '..........K...........',  // row 0  — mast tip
-      '..........KK..........',  // row 1
-      '.........KbK..........',  // row 2  — sail top
-      '........KbbK..........',  // row 3
-      '.......KbbbK..........',  // row 4
-      '......KbbbbK..........',  // row 5
-      '.....KbbbbbK..........',  // row 6  — sail bottom
-      '.....KKKKKKKK.........',  // row 7  — boom
-      '..........K...........',  // row 8  — mast
-      '....KKKKKKKKKKKKKK....',  // row 9  — gunwale (rim)
-      '...KOOOOOOOOOOOOOoK...',  // row 10 — hull outer top
-      '..KOOWWWWWWWWWWWWWOK..',  // row 11 — hull planking 1
-      '..KOWWwWWWWWWWWWwWWoK.',  // row 12 — hull planking 2 (knots)
-      '..KWWwWWWWWWWWWWWwWWK.',  // row 13 — hull mid
-      '...KWWWWwWWWWWwWWWWK..',  // row 14 — hull lower curve
-      '....KKKKKKKKKKKKKKK...',  // row 15 — keel
-    ], DECOR_PALETTE, 0, 0, PS);
-    gdock.generateTexture('fishing_dock', 22*PS, 16*PS); gdock.destroy();
+      '............KKKK............',  // row 0  — bow tip
+      '..........KKhhhWKK..........',  // row 1  — bow curve
+      '.........KHhRRhWwK..........',  // row 2  — bow + rope coil
+      'K.......KHhhRRhhWwK.........',  // row 3  — bow interior + rope
+      'KNK....KHhhhhhhhWwwK......K.',  // row 4  — left oar + hull
+      'KHHK..KHhhhhhhhhhWwwK..KHHK.',  // row 5  — oar blade L + hull expand + oar blade R
+      '.KK..KHhhwhhhhhhwhhWwK..KK..',  // row 6  — oar shafts + hull with grain
+      '.....KHhhwhSSSShwhhWwK.....',  // row 7  — hull + front bench seat
+      '....KHhhhwsSSSSswhhWwK.....',  // row 8  — hull + seat shadow
+      '....KHhhhhhhhhhhhhhWwK.....',  // row 9  — hull mid open
+      '....KHhhwhhhhhhhwhhWwK.....',  // row 10 — hull with grain
+      '.....KHhhwSSSShwhhWwK......',  // row 11 — hull + rear bench seat
+      '.....KHhhwsSSsswhhWwK......',  // row 12 — hull + seat shadow
+      '......KHhhhBbhhhhWwK.......',  // row 13 — stern + bait bucket
+      '.......KHhBKKbhhWwK........',  // row 14 — bucket detail
+      '........KWhhhhWwK..........',  // row 15 — stern narrowing
+      '.........KKWwWKK...........',  // row 16 — stern curve
+      '..........KKKK..............',  // row 17 — stern tip
+    ], BOAT_PALETTE, 0, 0, PS);
+    gdock.generateTexture('fishing_dock', 28*PS, 18*PS); gdock.destroy();
 
     // Arcade Machine texture 16x22
     const ga = mk();
