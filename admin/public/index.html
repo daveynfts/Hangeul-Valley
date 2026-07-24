@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hangeul Valley - Admin Panel</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Sticky Navigation Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <span class="brand-logo">🌾</span>
+        <div class="brand-text">
+          <h1 class="brand-title">Hangeul Valley</h1>
+          <span class="brand-subtitle">Admin Control Center</span>
+        </div>
+      </div>
+      
+      <nav class="nav-tabs">
+        <button class="nav-btn active" data-tab="dashboard" id="tab-btn-dashboard">
+          <span class="nav-icon">📊</span> Dashboard
+        </button>
+        <button class="nav-btn" data-tab="levels" id="tab-btn-levels">
+          <span class="nav-icon">📚</span> Levels & Words
+        </button>
+        <button class="nav-btn" data-tab="vocab" id="tab-btn-vocab">
+          <span class="nav-icon">📖</span> VOCAB_FACTS Editor
+        </button>
+      </nav>
+
+      <div class="header-actions">
+        <div class="sync-status" id="sync-indicator" title="Data Synchronization Status">
+          <span class="status-dot green" id="sync-dot"></span>
+          <span class="status-text" id="sync-text">In Sync</span>
+        </div>
+        <button class="btn btn-secondary btn-sm" id="btn-sync-now">
+          <span class="btn-icon">🔄</span> Sync Files
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main class="app-main">
+    <!-- ========================================== -->
+    <!-- TAB 1: DASHBOARD VIEW                      -->
+    <!-- ========================================== -->
+    <section id="tab-dashboard" class="tab-content active">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="section-title">System Overview</h2>
+          <p class="section-desc">Real-time statistics for dataset coverage, levels, and vocabulary facts.</p>
+        </div>
+        <div class="dash-quick-actions">
+          <button class="btn btn-primary" id="btn-refresh-stats">
+            <span>🔄</span> Refresh Stats
+          </button>
+        </div>
+      </div>
+
+      <!-- Top Stats Summary Grid (6 Cards) -->
+      <div class="stats-grid">
+        <div class="stat-card border-indigo">
+          <div class="stat-header">
+            <span class="stat-label">Total Levels</span>
+            <span class="stat-icon">📚</span>
+          </div>
+          <div class="stat-value" id="stat-total-levels">--</div>
+          <div class="stat-subtext">Configured game levels</div>
+        </div>
+
+        <div class="stat-card border-blue">
+          <div class="stat-header">
+            <span class="stat-label">Total Words</span>
+            <span class="stat-icon">🔤</span>
+          </div>
+          <div class="stat-value" id="stat-total-words">--</div>
+          <div class="stat-subtext">Active vocabulary entries</div>
+        </div>
+
+        <div class="stat-card border-violet">
+          <div class="stat-header">
+            <span class="stat-label">Avg Words / Level</span>
+            <span class="stat-icon">📈</span>
+          </div>
+          <div class="stat-value" id="stat-avg-words">--</div>
+          <div class="stat-subtext">Mean word density</div>
+        </div>
+
+        <div class="stat-card border-emerald" id="card-coverage">
+          <div class="stat-header">
+            <span class="stat-label">VOCAB_FACTS Coverage</span>
+            <span class="stat-icon">🎯</span>
+          </div>
+          <div class="stat-value text-emerald" id="stat-coverage">--%</div>
+          <div class="stat-subtext" id="stat-coverage-sub">Matching game.js facts</div>
+        </div>
+
+        <div class="stat-card border-amber" id="card-duplicates">
+          <div class="stat-header">
+            <span class="stat-label">Duplicate Words</span>
+            <span class="stat-icon">⚠️</span>
+          </div>
+          <div class="stat-value text-amber" id="stat-duplicates">--</div>
+          <div class="stat-subtext">Repeated Korean words</div>
+        </div>
+
+        <div class="stat-card border-rose" id="card-missing">
+          <div class="stat-header">
+            <span class="stat-label">Missing Facts</span>
+            <span class="stat-icon">❌</span>
+          </div>
+          <div class="stat-value text-rose" id="stat-missing">--</div>
+          <div class="stat-subtext">Words lacking VOCAB_FACTS</div>
+        </div>
+      </div>
+
+      <!-- Coverage Breakdown Progress Widget -->
+      <div class="card widget-card">
+        <div class="widget-header">
+          <div>
+            <h3 class="widget-title">VOCAB_FACTS Coverage Breakdown</h3>
+            <p class="widget-subtitle">Visual representation of word mapping between levels.json and game.js</p>
+          </div>
+          <div class="coverage-badges">
+            <span class="badge badge-emerald" id="badge-exact-count">Exact: --</span>
+            <span class="badge badge-amber" id="badge-casing-count">Casing Mismatch: --</span>
+            <span class="badge badge-rose" id="badge-missing-count">Missing: --</span>
+          </div>
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-bar-stacked" id="coverage-progress-bar">
+            <div class="bar-segment bar-emerald" style="width: 0%" id="bar-exact" title="Exact Match"></div>
+            <div class="bar-segment bar-amber" style="width: 0%" id="bar-casing" title="Casing Mismatch"></div>
+            <div class="bar-segment bar-rose" style="width: 0%" id="bar-missing" title="Missing Facts"></div>
+          </div>
+        </div>
+
+        <div class="progress-legend">
+          <div class="legend-item"><span class="dot emerald"></span> Exact Matches</div>
+          <div class="legend-item"><span class="dot amber"></span> Casing Discrepancies (Case Mismatch)</div>
+          <div class="legend-item"><span class="dot rose"></span> Missing VOCAB_FACTS</div>
+        </div>
+      </div>
+
+      <!-- Two-Column Widget Section: Missing Facts & Duplicates -->
+      <div class="dash-columns">
+        <!-- Missing Facts List Widget -->
+        <div class="card widget-card col-span-2">
+          <div class="widget-header">
+            <div>
+              <h3 class="widget-title">Missing Vocabulary Facts</h3>
+              <p class="widget-subtitle">Words in levels.json missing entries in VOCAB_FACTS</p>
+            </div>
+            <span class="badge badge-rose" id="missing-count-badge">0 Missing</span>
+          </div>
+
+          <div class="table-container max-h-350">
+            <table class="data-table" id="missing-facts-table">
+              <thead>
+                <tr>
+                  <th>Level</th>
+                  <th>Korean (ko)</th>
+                  <th>English Key (en)</th>
+                  <th>Hint</th>
+                  <th>Category</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="missing-facts-tbody">
+                <tr><td colspan="6" class="text-center text-muted">Loading stats...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Duplicate Words Warning Widget -->
+        <div class="card widget-card col-span-1">
+          <div class="widget-header">
+            <div>
+              <h3 class="widget-title">Duplicate Korean Words</h3>
+              <p class="widget-subtitle">Words appearing multiple times across levels</p>
+            </div>
+            <span class="badge badge-amber" id="duplicates-count-badge">0 Duplicates</span>
+          </div>
+
+          <div class="table-container max-h-350">
+            <table class="data-table" id="duplicates-table">
+              <thead>
+                <tr>
+                  <th>Korean (ko)</th>
+                  <th class="text-right">Count</th>
+                </tr>
+              </thead>
+              <tbody id="duplicates-tbody">
+                <tr><td colspan="2" class="text-center text-muted">No duplicates detected.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: LEVELS & WORDS EDITOR VIEW          -->
+    <!-- ========================================== -->
+    <section id="tab-levels" class="tab-content">
+      <div class="levels-container">
+        <!-- Sidebar: Level Selector -->
+        <aside class="levels-sidebar">
+          <div class="sidebar-header">
+            <h3 class="sidebar-title">Game Levels</h3>
+            <span class="badge badge-indigo" id="levels-count-badge">25 Levels</span>
+          </div>
+          <div class="level-selector-grid" id="level-selector-list">
+            <!-- Dynamically populated level buttons -->
+          </div>
+        </aside>
+
+        <!-- Main Workspace: Level Metadata & Word Datatable -->
+        <div class="levels-main">
+          <!-- Level Metadata Header Card -->
+          <div class="card level-meta-card">
+            <div class="level-meta-left">
+              <div class="level-icon-wrapper" id="level-icon">🏠</div>
+              <div>
+                <div class="level-title-row">
+                  <h2 class="level-meta-title" id="level-title">Level 1</h2>
+                  <span class="badge badge-emerald" id="level-words-badge">60 Words</span>
+                </div>
+                <p class="level-meta-desc" id="level-desc">Level description loading...</p>
+                <div class="level-target-info" id="level-target">Target Score: 60</div>
+              </div>
+            </div>
+            <div class="level-meta-actions">
+              <button class="btn btn-secondary btn-sm" id="btn-edit-level-meta">
+                <span>✏️</span> Edit Level Metadata
+              </button>
+            </div>
+          </div>
+
+          <!-- Global Search & Filter Bar -->
+          <div class="card filter-bar-card">
+            <div class="filter-controls">
+              <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="input-search-words" class="form-input search-input" placeholder="Search across words (Korean, English, Category)...">
+                <button class="btn-clear hidden" id="btn-clear-search-words" title="Clear search">✕</button>
+              </div>
+
+              <div class="category-filter-wrapper">
+                <label for="select-filter-category" class="filter-label">Category:</label>
+                <select id="select-filter-category" class="form-select">
+                  <option value="ALL">All Categories</option>
+                </select>
+              </div>
+
+              <div class="filter-actions">
+                <span class="search-results-info" id="search-results-info"></span>
+                <button class="btn btn-emerald" id="btn-add-word">
+                  <span>➕</span> Add Word
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Words Datatable -->
+          <div class="card widget-card">
+            <div class="table-container">
+              <table class="data-table" id="words-table">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;">#</th>
+                    <th>Korean (ko)</th>
+                    <th>English Key (en)</th>
+                    <th>Category</th>
+                    <th style="width: 70px;" class="text-center">Hint</th>
+                    <th style="width: 140px;" class="text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="words-tbody">
+                  <tr><td colspan="6" class="text-center text-muted">Loading words dataset...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: VOCAB_FACTS EDITOR VIEW             -->
+    <!-- ========================================== -->
+    <section id="tab-vocab" class="tab-content">
+      <div class="vocab-header-card card">
+        <div class="vocab-header-left">
+          <div>
+            <h2 class="section-title">VOCAB_FACTS Dictionary</h2>
+            <p class="section-desc">Manage game vocabulary dictionary definitions in <code>game.js</code> with real-time file synchronization.</p>
+          </div>
+        </div>
+        <div class="vocab-header-actions">
+          <button class="btn btn-emerald" id="btn-add-vocab">
+            <span>➕</span> Add VOCAB_FACT
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Controls & Search -->
+      <div class="card filter-bar-card">
+        <div class="vocab-toolbar">
+          <div class="filter-mode-tabs" id="vocab-filter-tabs">
+            <button class="mode-tab active" data-mode="all">All Entries (<span id="count-mode-all">0</span>)</button>
+            <button class="mode-tab" data-mode="missing">Missing Coverage (<span id="count-mode-missing">0</span>)</button>
+            <button class="mode-tab" data-mode="discrepancy">Casing Mismatches (<span id="count-mode-discrepancy">0</span>)</button>
+          </div>
+
+          <div class="search-input-wrapper flex-1">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="input-search-vocab" class="form-input search-input" placeholder="Search by English Key, Vietnamese, or Korean...">
+            <button class="btn-clear hidden" id="btn-clear-search-vocab" title="Clear search">✕</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table & Pagination Container -->
+      <div class="card widget-card">
+        <div class="vocab-pagination-bar" id="vocab-pagination-top">
+          <div class="pagination-info" id="vocab-items-info">Showing 0 of 0 entries</div>
+          <div class="pagination-controls" id="vocab-pagination-controls">
+            <!-- Dynamic pagination buttons -->
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table" id="vocab-table">
+            <thead>
+              <tr>
+                <th style="width: 180px;">English Key (en)</th>
+                <th>Vietnamese (vi)</th>
+                <th>Korean (ko)</th>
+                <th style="width: 130px;">Status</th>
+                <th style="width: 140px;" class="text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="vocab-tbody">
+              <tr><td colspan="5" class="text-center text-muted">Loading dictionary facts...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="vocab-pagination-bar border-top" id="vocab-pagination-bottom">
+          <div class="pagination-info" id="vocab-items-info-bottom">Showing 0 of 0 entries</div>
+          <div class="pagination-controls" id="vocab-pagination-controls-bottom">
+            <!-- Dynamic pagination buttons -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Global Modal Container -->
+  <div id="modal-backdrop" class="modal-backdrop hidden">
+    <div id="modal-box" class="modal-box">
+      <!-- Dynamic Modal Content Injection -->
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/vocab.js"></script>
+</body>
+</html>

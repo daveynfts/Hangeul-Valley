@@ -1,0 +1,14 @@
+{
+  "name": "hangeul-valley-admin",
+  "version": "1.0.0",
+  "description": "Hangeul Valley Admin Panel Data & Parser Safety API Engine",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/run_all_tests.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  }
+}
