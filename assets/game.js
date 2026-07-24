@@ -7037,41 +7037,115 @@ class FarmScene extends Phaser.Scene {
   // ── BAKE TEXTURES ──────────────────────────────────────────────────────────
   _bakeTextures(){
     const mk = () => this.make.graphics({add:false});
-    // Apple Tree texture (18×30 pixels) — ginger-red apples peeking through crown
+    // Apple Tree texture (22×32 pixels) — lush detailed canopy with individual apples
     const gat=mk();
-    const crown2=[
-  '.....lLLLl......',
-  '...lLLLLLLl.....',
-  '..LLLLLLLLLLL...',
-  '.LLLLLLLLlLLLL..',
-  '.lLLLRALLllLLLl.',
-  'LLLLLRALLllLLLLL',
-  'lLLRRALllMlLLLLL',
-  'lLLRRALlMMLllLLL',
-  'lLLLLllMMMlllLLL',
-  'lLLRRAllllllLLLL',
-  'mLlRRAMMMlllllLL',
-  'mRRAMMMMMllllllL',
-  'mMMMMMMMMMllllll',
-  'MMMMMMMMmmllllL.',
-  '.mMMMMMMmmmlll..',
-  '.mmmmmmmmmmll...'
-];
-    // Override some cells with red apple color
-    const R=0xEE2222, RA=0xFF5555;
-    drawS(gat,crown2); // draw base crown
-    // Paint apple spots red on top of crown
-    [[3,5,3,2,R],[2,9,3,2,R],[8,10,3,2,R]].forEach(([x,y,w,h,c])=>pR(gat,x,y,w,h,c));
-    [[3,5,1,1,RA],[2,9,1,1,RA],[8,10,1,1,RA]].forEach(([x,y,w,h,c])=>pR(gat,x,y,w,h,c));
-    pR(gat,7,17,4,11,K.K); pR(gat,7,17,1,11,K.k); pR(gat,10,17,1,11,K.s);
-    gat.generateTexture('apple_tree',18*PS,30*PS); gat.destroy();
-    // Ripe apple tree variant — brighter more saturated apples
+    // Rich multi-tone crown with leaf detail, apples, and textured bark
+    const appleTree_unripe=[
+      '......vLLLLv.........',  // row 0  — crown tip
+      '....vLLLLLLLv........',  // row 1
+      '...LLLLLLLLLLL.......',  // row 2
+      '..LLlLLLLLlLLLL......',  // row 3  — leaf variation
+      '.LLLLLLLLLLLLLLLl....',  // row 4
+      '.lLLLLLLLlLLLLLLLl...',  // row 5
+      'LLLLLlLLLLLlLLLLLLL..',  // row 6
+      'LLlLLLLLLLLLLLlLLLLL.',  // row 7
+      'LLLLLLlLLLLLLLLLLLLLL',  // row 8  — widest
+      'lLLLLLLLLlLLLLLLLLLLl',  // row 9
+      'LLLLLlLLLLLlLLLLLLLLL',  // row 10
+      'lLLLLLLLLLLLLLlLLLLLl',  // row 11
+      '.LLLlLLLLLLLLLLLLLLL.',  // row 12
+      '.lLLLLLlLLLLlLLLLLLl.',  // row 13
+      '..LLLLLLLLLLLLLLLLl..',  // row 14
+      '..lLLLLlLLLLlLLLLl...',  // row 15
+      '...lLLLLLLLLLLLl.....',  // row 16
+      '....llLLLLLLll.......',  // row 17  — crown bottom
+      '.........KKK.........',  // row 18  — trunk top
+      '........kKKKs........',  // row 19
+      '........kKKKs........',  // row 20
+      '........kKKKs........',  // row 21
+      '........kKKKs........',  // row 22
+      '........kKKKs........',  // row 23
+      '........kKKKs........',  // row 24
+      '.......kkKKKss.......',  // row 25  — trunk base wider
+      '.......kKKKKKs.......',  // row 26
+      '......kkKKKKKss......',  // row 27
+      '.....mkkKKKKKssm.....',  // row 28  — roots
+      '....mmm.KKK.mmm......',  // row 29
+      '...mm.........mm.....',  // row 30
+      '......................', // row 31
+    ];
+    drawS(gat, appleTree_unripe);
+    // Paint small green unripe apples (subtle bumps in crown)
+    const uG=0x66AA22, uGh=0x88CC44;
+    [[4,5,uG],[5,5,uGh],[13,7,uG],[14,7,uGh],[3,10,uG],[4,10,uGh],
+     [16,10,uG],[17,10,uGh],[8,13,uG],[9,13,uGh],[14,5,uG],[15,5,uGh]].forEach(([x,y,c])=>pR(gat,x,y,1,1,c));
+    // Trunk bark knot details
+    pR(gat,9,21,1,1,0x503018); pR(gat,10,24,1,1,0x503018);
+    gat.generateTexture('apple_tree',22*PS,32*PS); gat.destroy();
+
+    // Ripe apple tree — bright red apples with white highlight, golden leaf shimmer
     const gatr=mk();
-    drawS(gatr,crown2);
-    [[3,5,3,2,0xFF0000],[2,9,3,2,0xFF0000],[8,10,3,2,0xFF0000]].forEach(([x,y,w,h,c])=>pR(gatr,x,y,w,h,c));
-    [[3,5,1,1,0xFF6666],[2,9,1,1,0xFF6666],[8,10,1,1,0xFF6666]].forEach(([x,y,w,h,c])=>pR(gatr,x,y,w,h,c));
-    pR(gatr,7,17,4,11,K.K); pR(gatr,7,17,1,11,K.k); pR(gatr,10,17,1,11,K.s);
-    gatr.generateTexture('apple_tree_ripe',18*PS,30*PS); gatr.destroy();
+    const appleTree_ripe=[
+      '......vLLLLv.........',
+      '....vLLLLLLLv........',
+      '...LLLLLLLLLLL.......',
+      '..LLlLLLLLlLLLL......',
+      '.LLLLLLLLLLLLLLLl....',
+      '.lLLLLLLLlLLLLLLLl...',
+      'LLLLLlLLLLLlLLLLLLL..',
+      'LLlLLLLLLLLLLLlLLLLL.',
+      'LLLLLLlLLLLLLLLLLLLLL',
+      'lLLLLLLLLlLLLLLLLLLLl',
+      'LLLLLlLLLLLlLLLLLLLLL',
+      'lLLLLLLLLLLLLLlLLLLLl',
+      '.LLLlLLLLLLLLLLLLLLL.',
+      '.lLLLLLlLLLLlLLLLLLl.',
+      '..LLLLLLLLLLLLLLLLl..',
+      '..lLLLLlLLLLlLLLLl...',
+      '...lLLLLLLLLLLLl.....',
+      '....llLLLLLLll.......',
+      '.........KKK.........',
+      '........kKKKs........',
+      '........kKKKs........',
+      '........kKKKs........',
+      '........kKKKs........',
+      '........kKKKs........',
+      '........kKKKs........',
+      '.......kkKKKss.......',
+      '.......kKKKKKs.......',
+      '......kkKKKKKss......',
+      '.....mkkKKKKKssm.....',
+      '....mmm.KKK.mmm......',
+      '...mm.........mm.....',
+      '......................',
+    ];
+    drawS(gatr, appleTree_ripe);
+    // Paint juicy red apples with white specular highlights
+    const aR=0xEE1111, aRd=0xAA0808, aRh=0xFF6666, aW=0xFFFFFF;
+    // Apple 1 (upper-left)
+    [[4,4,aRd],[5,4,aR],[4,5,aR],[5,5,aR],[5,4,aRh]].forEach(([x,y,c])=>pR(gatr,x,y,1,1,c));
+    pR(gatr,4,4,1,1,aW); // highlight
+    // Apple 2 (upper-right)
+    [[14,5,aRd],[15,5,aR],[14,6,aR],[15,6,aR]].forEach(([x,y,c])=>pR(gatr,x,y,1,1,c));
+    pR(gatr,14,5,1,1,aW);
+    // Apple 3 (mid-left)
+    [[2,9,aRd],[3,9,aR],[2,10,aR],[3,10,aR]].forEach(([x,y,c])=>pR(gatr,x,y,1,1,c));
+    pR(gatr,2,9,1,1,aW);
+    // Apple 4 (mid-right)
+    [[16,9,aRd],[17,9,aR],[16,10,aR],[17,10,aR]].forEach(([x,y,c])=>pR(gatr,x,y,1,1,c));
+    pR(gatr,16,9,1,1,aW);
+    // Apple 5 (center)
+    [[9,11,aRd],[10,11,aR],[9,12,aR],[10,12,aR]].forEach(([x,y,c])=>pR(gatr,x,y,1,1,c));
+    pR(gatr,9,11,1,1,aW);
+    // Apple 6 (lower-left)
+    [[5,13,aRd],[6,13,aR],[5,14,aR],[6,14,aR]].forEach(([x,y,c])=>pR(gatr,x,y,1,1,c));
+    pR(gatr,5,13,1,1,aW);
+    // Apple 7 (lower-right)
+    [[14,13,aRd],[15,13,aR],[14,14,aR],[15,14,aR]].forEach(([x,y,c])=>pR(gatr,x,y,1,1,c));
+    pR(gatr,14,13,1,1,aW);
+    // Trunk bark knot details
+    pR(gatr,9,21,1,1,0x503018); pR(gatr,10,24,1,1,0x503018);
+    gatr.generateTexture('apple_tree_ripe',22*PS,32*PS); gatr.destroy();
 
     GRASS.forEach((rows,i)=>{ const g=mk(); drawS(g,rows); g.generateTexture('grs'+i,16*PS,16*PS); g.destroy(); });
     const gd=mk(); drawS(gd,DIRT_DRY); gd.generateTexture('drt_dry',16*PS,16*PS); gd.destroy();
@@ -8011,24 +8085,25 @@ class FarmScene extends Phaser.Scene {
   _createAppleTree(W, H){
     const ax = this.farm.x - 130;
     const ay = this.farm.y - 85;
-    // Tree sprite (starts with unripe texture)
+    // Tree sprite (starts with unripe texture — now 22×32 grid)
     this.appleTreeSprite = this.add.image(ax, ay, 'apple_tree')
       .setOrigin(0.5, 1).setScale(3.6).setDepth(ay+1);
-    if (this.shadows) this.shadows.createShadow(this.appleTreeSprite, 150, 38, 0);
-    
+    if (this.shadows) this.shadows.createShadow(this.appleTreeSprite, 170, 44, 0);
+
     this._createFallingLeaves(ax, ay);
-      
-    // Trunk collision zone
-    const trunkZone = this.add.zone(ax, ay - 10, 100, 48);
+
+    // Trunk collision zone (slightly wider for new tree)
+    const trunkZone = this.add.zone(ax, ay - 10, 110, 52);
     this.physics.add.existing(trunkZone, true);
     this.physics.add.collider(this.player, trunkZone);
     // Gentle sway
     this.tweens.add({
       targets: this.appleTreeSprite,
-      angle: { from: -1.5, to: 1.5 },
-      duration: 2800, yoyo: true, repeat: -1, ease: 'Sine.InOut'
+      angle: { from: -1.2, to: 1.2 },
+      duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.InOut'
     });
-    this.appleTreeLabel = this.add.text(ax, ay - 240, '🍎 HARVEST!\n[SPACE]', {
+    // Floating harvest label (hidden until ripe)
+    this.appleTreeLabel = this.add.text(ax, ay - 260, '🍎 HARVEST!\n[SPACE]', {
       fontFamily: '"Press Start 2P",monospace', fontSize: '14px',
       color: '#FFFFFF', stroke: '#000', strokeThickness: 4, align: 'center'
     }).setOrigin(0.5, 1).setDepth(ay + 100).setAlpha(0);
@@ -8044,7 +8119,7 @@ class FarmScene extends Phaser.Scene {
       color: '#AAFFAA', stroke: '#000', strokeThickness: 2, align: 'center'
     }).setOrigin(0.5, 0).setDepth(ay + 10);
     // Name tag
-    this.add.text(ax, ay + 34, '🍎 Apple Tree', {
+    this.add.text(ax, ay + 38, '🍎 Apple Tree', {
       fontFamily: '"Press Start 2P",monospace', fontSize: '10px',
       color: '#FFD700', stroke: '#000', strokeThickness: 2, align: 'center'
     }).setOrigin(0.5, 0).setDepth(ay + 10);
