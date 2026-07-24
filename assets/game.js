@@ -7499,8 +7499,8 @@ class FarmScene extends Phaser.Scene {
     // Micro World Details: Stone Well & Water Sparkles (Widened Placement)
     const wellX = this.farm.x - 190;
     const wellY = this.farm.y + this.farm.h + 85;
-    const wellSprite = this.add.image(wellX, wellY, 'stone_well').setOrigin(0.5, 1).setScale(1.5).setDepth(wellY);
-    if (this.shadows) this.shadows.createShadow(wellSprite, 54, 16, 8);
+    const wellSprite = this.add.image(wellX, wellY, 'stone_well').setOrigin(0.5, 1).setScale(1.1).setDepth(wellY);
+    if (this.shadows) this.shadows.createShadow(wellSprite, 44, 14, 6);
     // Water sparkles inside well
     for(let i=0; i<4; i++){
       const sp = this.add.circle(wellX + (Math.random()-0.5)*18, wellY - 12 + (Math.random()-0.5)*12, 1.5, 0x67E8F9, 0.9).setDepth(wellY+1);
@@ -7509,24 +7509,24 @@ class FarmScene extends Phaser.Scene {
 
     // Micro World Details: Barrels & Crates next to Shop
     const bxl = sx + 28, byl = sy - 10;
-    const barrelSprite = this.add.image(bxl, byl, 'pixel_barrel').setOrigin(0.5, 1).setScale(1.4).setDepth(byl);
-    const crateSprite = this.add.image(bxl + 18, byl + 6, 'pixel_crate').setOrigin(0.5, 1).setScale(1.3).setDepth(byl+6);
+    const barrelSprite = this.add.image(bxl, byl, 'pixel_barrel').setOrigin(0.5, 1).setScale(0.9).setDepth(byl);
+    const crateSprite = this.add.image(bxl + 18, byl + 6, 'pixel_crate').setOrigin(0.5, 1).setScale(0.9).setDepth(byl+6);
     if (this.shadows) {
-      this.shadows.createShadow(barrelSprite, 20, 7, 0);
-      this.shadows.createShadow(crateSprite, 22, 7, 0);
+      this.shadows.createShadow(barrelSprite, 18, 6, 0);
+      this.shadows.createShadow(crateSprite, 20, 6, 0);
     }
 
     // Micro World Details: Directional Signpost
     const spX = bx - 60, spY = by + 20;
-    const signpostSprite = this.add.image(spX, spY, 'signpost').setOrigin(0.5, 1).setScale(1.4).setDepth(spY);
-    if (this.shadows) this.shadows.createShadow(signpostSprite, 22, 7, 0);
+    const signpostSprite = this.add.image(spX, spY, 'signpost').setOrigin(0.5, 1).setScale(1.1).setDepth(spY);
+    if (this.shadows) this.shadows.createShadow(signpostSprite, 18, 6, 0);
 
     // Perimeter Fences
     const fenceY = this.farm.y - 12;
     for (let fx = this.farm.x; fx <= this.farm.x + this.farm.w; fx += 28) {
       this.add.image(fx + 14, fenceY - 4, 'fnc_rail').setDisplaySize(28, 8).setDepth(fenceY - 1);
-      const post = this.add.image(fx, fenceY, 'fnc_post').setOrigin(0.5, 1).setScale(1.4).setDepth(fenceY);
-      if (this.shadows) this.shadows.createShadow(post, 16, 6, 0);
+      const post = this.add.image(fx, fenceY, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fenceY);
+      if (this.shadows) this.shadows.createShadow(post, 14, 5, 0);
     }
 
     // Micro Animated Fauna: Fluttering Butterflies
@@ -7615,8 +7615,8 @@ class FarmScene extends Phaser.Scene {
     const sx = this.farm.x + this.farm.w + 175;
     const sy = this.farm.y + this.farm.h / 2 + 25;
     this.shopNPC = this.add.image(sx, sy, 'shop_sign')
-      .setOrigin(0.5, 1).setScale(1.2).setDepth(sy);
-    if (this.shadows) this.shadows.createShadow(this.shopNPC, 45, 14, 4);
+      .setOrigin(0.5, 1).setScale(1.3).setDepth(sy);
+    if (this.shadows) this.shadows.createShadow(this.shopNPC, 48, 15, 4);
 
     this.tweens.add({ targets: this.shopNPC, y: sy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
 
@@ -7632,8 +7632,8 @@ class FarmScene extends Phaser.Scene {
   _createBoardNPC(W, H){
     const bx = this.farm.x + this.farm.w / 2;
     const by = this.farm.y - 95;
-    this.boardSprite = this.add.image(bx, by, 'notice_board').setOrigin(0.5,1).setScale(1.5).setDepth(by);
-    if (this.shadows) this.shadows.createShadow(this.boardSprite, 50, 14, 6);
+    this.boardSprite = this.add.image(bx, by, 'notice_board').setOrigin(0.5,1).setScale(1.3).setDepth(by);
+    if (this.shadows) this.shadows.createShadow(this.boardSprite, 46, 13, 5);
     this.boardHint = this.add.text(bx, by-40, '📋 Minigame\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#FF88FF', stroke:'#000', strokeThickness:3, align:'center'
@@ -7662,11 +7662,11 @@ class FarmScene extends Phaser.Scene {
     const wx = this.farm.x + this.farm.w + 160;
     const wy = this.farm.y - 85;
     this.wizardSprite = this.add.sprite(wx, wy, 'wizard_idle_0');
-    if (this.wizardSprite.play) this.wizardSprite.play('wizard-idle').setOrigin(0.5,1).setScale(1.6).setDepth(wy);
-    if (this.shadows) this.shadows.createShadow(this.wizardSprite, 34, 11, 6);
+    if (this.wizardSprite.play) this.wizardSprite.play('wizard-idle').setOrigin(0.5,1).setScale(1.8).setDepth(wy);
+    if (this.shadows) this.shadows.createShadow(this.wizardSprite, 38, 12, 6);
     this.tweens.add({ targets: this.wizardSprite, y: wy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
-    this.wizardHint = this.add.text(wx, wy-62, '⚡ SPELL DUEL\n[SPACE]', {
+    this.wizardHint = this.add.text(wx, wy-68, '⚡ SPELL DUEL\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#A855F7', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(wy+1).setAlpha(0);
@@ -7686,10 +7686,10 @@ class FarmScene extends Phaser.Scene {
     const cy = this.farm.y + this.farm.h + 75;
     this.catSprite = this.add.sprite(cx, cy, 'cat_idle_0');
     if (this.catSprite.play) this.catSprite.play('cat-idle')
-      .setOrigin(0.5,1).setScale(1.8).setDepth(cy);
-    if (this.shadows) this.shadows.createShadow(this.catSprite, 26, 8, 2);
+      .setOrigin(0.5,1).setScale(0.75).setDepth(cy);
+    if (this.shadows) this.shadows.createShadow(this.catSprite, 20, 6, 2);
     this.tweens.add({ targets:this.catSprite, y:cy-3, duration:1200, yoyo:true, repeat:-1, ease:'Sine.InOut' });
-    this.catHint = this.add.text(cx, cy-52, '🐱 야옹\n[SPACE]', {
+    this.catHint = this.add.text(cx, cy-38, '🐱 야옹\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#FFCC44', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(cy+1).setAlpha(0);
@@ -7705,9 +7705,9 @@ class FarmScene extends Phaser.Scene {
   _createPortalNPC(W, H){
     const px = this.farm.x + this.farm.w + 140;
     const py = this.farm.y + this.farm.h + 80;
-    this.portalSprite = this.add.image(px, py, 'dungeon_portal').setOrigin(0.5,1).setScale(1.5).setDepth(py);
-    if (this.shadows) this.shadows.createShadow(this.portalSprite, 65, 18, 6);
-    this.tweens.add({ targets: this.portalSprite, scaleX: 1.55, scaleY: 1.45, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    this.portalSprite = this.add.image(px, py, 'dungeon_portal').setOrigin(0.5,1).setScale(1.6).setDepth(py);
+    if (this.shadows) this.shadows.createShadow(this.portalSprite, 72, 20, 6);
+    this.tweens.add({ targets: this.portalSprite, scaleX: 1.65, scaleY: 1.55, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
     this.portalHint = this.add.text(px, py-75, '🌀 DUNGEON\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
@@ -7737,8 +7737,8 @@ class FarmScene extends Phaser.Scene {
     this.add.image(fx + 70, fy + 25, 'tile_grass').setDisplaySize(18,18).setDepth(fy-4);
 
     // Fishing Dock Pier
-    this.dockSprite = this.add.image(fx, fy, 'fishing_dock').setOrigin(0.5,1).setScale(1.5).setDepth(fy);
-    if (this.shadows) this.shadows.createShadow(this.dockSprite, 75, 20, 8);
+    this.dockSprite = this.add.image(fx, fy, 'fishing_dock').setOrigin(0.5,1).setScale(1.6).setDepth(fy);
+    if (this.shadows) this.shadows.createShadow(this.dockSprite, 80, 22, 8);
     this.tweens.add({ targets: this.dockSprite, y: fy - 2, duration: 1500, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
     this.fishHint = this.add.text(fx, fy-60, '🎣 CRYSTAL POND\n[SPACE]', {
@@ -7754,23 +7754,8 @@ class FarmScene extends Phaser.Scene {
 
     this.fishX = fx; this.fishY = fy;
 
-    // Pond collision zone — prevent player from walking through water
-    // Left half of pond
-    const pondBlockL = this.add.zone(fx - 60, fy + 20, 100, 55);
-    this.physics.add.existing(pondBlockL, true);
-    this.physics.add.collider(this.player, pondBlockL);
-    // Right half of pond
-    const pondBlockR = this.add.zone(fx + 60, fy + 20, 100, 55);
-    this.physics.add.existing(pondBlockR, true);
-    this.physics.add.collider(this.player, pondBlockR);
-    // Back of pond (behind dock)
-    const pondBlockBack = this.add.zone(fx, fy + 45, 200, 30);
-    this.physics.add.existing(pondBlockBack, true);
-    this.physics.add.collider(this.player, pondBlockBack);
-
     // Ambient Fish Jumping Effect
     this.time.addEvent({ delay: 4000, loop: true, callback: () => this._triggerFishJump(fx, fy) });
-
   }
 
   _triggerFishJump(fx, fy) {
@@ -7787,7 +7772,7 @@ class FarmScene extends Phaser.Scene {
     this._createSplashRipples(startX, startY);
     this._createSplashDroplets(startX, startY);
 
-    const fish = this.add.image(startX, startY, 'fish_carp').setScale(1.2).setDepth(fy + 5);
+    const fish = this.add.image(startX, startY, 'fish_carp').setScale(1.0).setDepth(fy + 5);
     if (isLeft) fish.setFlipX(true);
 
     const startAngle = isLeft ? 40 : -40;
@@ -7887,13 +7872,13 @@ class FarmScene extends Phaser.Scene {
     const ay = this.farm.y - 85;
     // Tree sprite (starts with unripe texture)
     this.appleTreeSprite = this.add.image(ax, ay, 'apple_tree')
-      .setOrigin(0.5, 1).setScale(2.5).setDepth(ay+1);
-    if (this.shadows) this.shadows.createShadow(this.appleTreeSprite, 110, 28, 0);
+      .setOrigin(0.5, 1).setScale(3.6).setDepth(ay+1);
+    if (this.shadows) this.shadows.createShadow(this.appleTreeSprite, 150, 38, 0);
     
     this._createFallingLeaves(ax, ay);
       
     // Trunk collision zone
-    const trunkZone = this.add.zone(ax, ay - 10, 80, 40);
+    const trunkZone = this.add.zone(ax, ay - 10, 100, 48);
     this.physics.add.existing(trunkZone, true);
     this.physics.add.collider(this.player, trunkZone);
     // Gentle sway
@@ -8092,7 +8077,7 @@ class FarmScene extends Phaser.Scene {
 
     if (this.catIsMoving) {
       targetAnim = 'cat-walk';
-    } else if (isCatTalking || dist < 80) {
+    } else if (isCatTalking || dist < 65) {
       targetAnim = 'cat-sit';
       this.catSprite.setFlipX(this.player.x < this.catX);
       this.catIdleTimer = 0;
@@ -8160,11 +8145,13 @@ class FarmScene extends Phaser.Scene {
 
   _createPlayer(W, H){
     this.player=this.physics.add.sprite(W/2, H-80,'player_walk_down_0')
+      .setScale(1.8)
       .setCollideWorldBounds(true).setDrag(900,900).setDepth(500);
+    this.player.body.setSize(24, 16).setOffset(12, 32);
     if (this.shadows) {
-      this.pShadow = this.shadows.createShadow(this.player, 32, 10, 18);
+      this.pShadow = this.shadows.createShadow(this.player, 58, 18, 32);
     } else {
-      this.pShadow = this.add.ellipse(0,0,32,10,0,0.3).setDepth(499);
+      this.pShadow = this.add.ellipse(0,0,58,18,0,0.3).setDepth(499);
     }
     if (this.lighting) {
       this.playerLantern = this.lighting.attachTo(this.player, 'light_glow_lantern', 0.8, 0.4);
@@ -8221,8 +8208,10 @@ class FarmScene extends Phaser.Scene {
         let animKey = 'player-walk-down';
         if (Math.abs(vx) >= Math.abs(vy)) {
           animKey = vx < 0 ? 'player-walk-left' : 'player-walk-right';
+          this.player.setScale(vx < 0 ? -1.8 : 1.8, 1.8);
         } else {
           animKey = vy < 0 ? 'player-walk-up' : 'player-walk-down';
+          this.player.setScale(1.8, 1.8);
         }
         this.player.setFlipX(false);
         this.player.anims.play(animKey, true);
@@ -8263,7 +8252,7 @@ class FarmScene extends Phaser.Scene {
     }
     // Show cat hint label when nearby & update Cat NPC state machine
     if(this.catHint){
-      const nearCat = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY) < 80;
+      const nearCat = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY) < 65;
       this.catHint.setAlpha(nearCat ? 1 : 0);
     }
     this._updateCatNPC(dt);
@@ -8285,7 +8274,7 @@ class FarmScene extends Phaser.Scene {
     }
     // Show dungeon portal hint label when nearby
     if(this.portalHint){
-      const nearPortal = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY) < 85;
+      const nearPortal = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY) < 90;
       this.portalHint.setAlpha(nearPortal ? 1 : 0);
     }
     // Show fishing hint label when nearby
@@ -8324,7 +8313,7 @@ class FarmScene extends Phaser.Scene {
     let hx=null,hy=null,lbl='',col=0xFFD700,hw=PLOT_SIZE,hh=PLOT_SIZE;
 
     // Priority mirrors _interact(): apple > ripe > wilt > cat > shop > empty
-    if(this.appleRipe&&this.appleX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<90){
+    if(this.appleRipe&&this.appleX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<95){
       hx=this.appleX;hy=this.appleY-50;lbl='[SPACE] Harvest 🍎 Bonus!';col=0xFF3333;hw=60;hh=70;
     }
     if(hx===null) for(const p of this.plots){
@@ -8333,13 +8322,13 @@ class FarmScene extends Phaser.Scene {
     if(hx===null) for(const p of this.plots){
       if(p.sState==='2'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Water';col=0x55CCFF;break;}
     }
-    if(hx===null&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<82){
+    if(hx===null&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
       hx=this.catX;hy=this.catY-20;lbl='[SPACE] Talk to Ginger Cat';col=0xFF88CC;hw=44;hh=44;
     }
     if(hx===null&&this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
       hx=this.wizardX;hy=this.wizardY-25;lbl='[SPACE] Spell Duel';col=0xA855F7;hw=44;hh=50;
     }
-    if(hx===null&&this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<85){
+    if(hx===null&&this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<90){
       hx=this.portalX;hy=this.portalY-30;lbl='[SPACE] Enter Dungeon';col=0xEC4899;hw=50;hh=60;
     }
     if(hx===null&&this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
@@ -8348,10 +8337,10 @@ class FarmScene extends Phaser.Scene {
     if(hx===null&&this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
       hx=this.arcadeX;hy=this.arcadeY-30;lbl='[SPACE] Play Retro Shooter';col=0x00FFFF;hw=44;hh=50;
     }
-    if(hx===null&&this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<82){
+    if(hx===null&&this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<80){
       hx=this.boardX;hy=this.boardY-20;lbl='[SPACE] Play Memory Match';col=0xFF88FF;hw=44;hh=44;
     }
-    if(hx===null&&this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<92){
+    if(hx===null&&this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<90){
       hx=this.shopX;hy=this.shopY-20;lbl='[SPACE] Open Shop';col=0xFFAA44;hw=50;hh=60;
     }
     if(hx===null) for(const p of this.plots){
@@ -8391,7 +8380,7 @@ class FarmScene extends Phaser.Scene {
     const near=p=>Phaser.Math.Distance.Between(this.player.x,this.player.y,p.x,p.y)<PLOT_SIZE+24;
     // Apple Tree harvest (highest priority when ripe)
     if(this.appleRipe&&this.appleX&&
-       Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<90){
+       Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<95){
       this.tweens.add({targets:this.appleTreeSprite,angle:12,duration:80,yoyo:true,repeat:2});
       this.harvestAppleTree(); return;
     }
@@ -8400,20 +8389,20 @@ class FarmScene extends Phaser.Scene {
     // P2: wilting plants (Phase 2 review)
     for(const p of this.plots){ if(p.sState==='2'&&near(p)){openQuiz(p.word,p,2);return;} }
     // Cat NPC
-    if(this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<80){
-      this.tweens.add({targets:this.catSprite,scale:{from:1.8,to:2.2},duration:100,yoyo:true,ease:'Back.Out(2)'});
+    if(this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
+      this.tweens.add({targets:this.catSprite,scale:{from:0.75,to:0.95},duration:100,yoyo:true,ease:'Back.Out(2)'});
       showCatDialog(); return;
     }
     // Wizard NPC
     if(this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
-      this.tweens.add({targets:this.wizardSprite,scale:{from:1.6,to:1.9},duration:120,yoyo:true,ease:'Back.Out(2)'});
+      this.tweens.add({targets:this.wizardSprite,scale:{from:1.8,to:2.1},duration:120,yoyo:true,ease:'Back.Out(2)'});
       const chk = isZoneUnlocked('duel');
       if(!chk.unlocked){ showHardLockToast('duel'); return; }
       openSpellDuel(); return;
     }
     // Dungeon Portal
-    if(this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<85){
-      this.tweens.add({targets:this.portalSprite,scale:{from:1.5,to:1.8},duration:120,yoyo:true,ease:'Back.Out(2)'});
+    if(this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<90){
+      this.tweens.add({targets:this.portalSprite,scale:{from:1.6,to:1.9},duration:120,yoyo:true,ease:'Back.Out(2)'});
       const chk = isZoneUnlocked('dungeon');
       if(!chk.unlocked){ showHardLockToast('dungeon'); return; }
       this.cameras.main.fadeOut(300, 0, 0, 0);
@@ -8425,7 +8414,7 @@ class FarmScene extends Phaser.Scene {
     }
     // Fishing Dock
     if(this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
-      this.tweens.add({targets:this.dockSprite,scale:{from:1.5,to:1.7},duration:120,yoyo:true,ease:'Back.Out(2)'});
+      this.tweens.add({targets:this.dockSprite,scale:{from:1.6,to:1.8},duration:120,yoyo:true,ease:'Back.Out(2)'});
       const chk = isZoneUnlocked('fishing');
       if(!chk.unlocked){ showHardLockToast('fishing'); return; }
       this.cameras.main.fadeOut(300, 0, 0, 0);
