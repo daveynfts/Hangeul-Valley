@@ -314,5 +314,76 @@ Cải thiện fallback trong `getFunFact()` cho trường hợp từ không có 
 - [ ] `game.js` và `assets/game.js` đồng bộ hoàn toàn
 - [ ] getFunFact(word) trả về object có cả `vi` và `ko` cho mọi input
 
+## Follow-up — 2026-07-24T03:56:23Z
 
+Nâng cấp khu vực **Fishing Dock** trong game **Hangeul Valley**: cải thiện đồ họa pixel art cho dock sprite, di chuyển vị trí dock + Crystal Pond sang **bên trái bản đồ** (hiện tại đang ở phía dưới farm), và thêm hiệu ứng **cá nhảy trên hồ** (ambient fish jumping animation).
 
+Working directory: C:/VibeCode/Hangeul Valley
+Integrity mode: development
+
+## Context
+
+### Current Fishing Dock System
+- **Vị trí hiện tại**: Dock nằm ở **phía dưới farm** (center-bottom). Code tính position:
+  ```js
+  // _createFishingSpot() — line ~7722
+  const fx = this.farm.x + this.farm.w / 2;     // center horizontally
+  const fy = this.farm.y + this.farm.h + 165;    // below farm
+  ```
+- **Crystal Pond**: Ellipse (240×70px) màu xanh nước `0x0284C7`, có tween breathing.
+- **Dock Sprite**: Texture `'fishing_dock'` — ma trận 24×16 characters, DECOR_PALETTE, scale 1.5, tween bobbing nhẹ.
+- **Interaction**: Nhấn SPACE khi gần dock → mở Fishing Scene. Collision check dựa trên `this.fishX`, `this.fishY`.
+- **Splash Effect**: Đã có particle `'p_splash'` dùng cho fishing minigame, nhưng **CHƯA có hiệu ứng cá nhảy ambient** trên pond ở Farm scene.
+
+### Key Files
+- `game.js` (line ~7229-7249): Dock texture generation
+- `game.js` (line ~7720-7750): `_createFishingSpot()` — placement & pond rendering
+- `game.js` (line ~8290-8300): Dock interaction proximity check
+- `game.js` + `assets/game.js` phải sync
+
+### Architecture Constraints
+- Mọi sprites dùng `PixelArtRenderer.drawMatrix()` với single-character tokens
+- `DECOR_PALETTE` chứa các màu dùng cho decorations
+- `DynamicShadowSystem` cần `createShadow()` cho mọi entity mới
+- Texture key `'fishing_dock'` phải giữ nguyên tên
+
+## Requirements
+
+### R1. Nâng cấp đồ họa Fishing Dock
+Redesign sprite `'fishing_dock'` pixel art matrix với chất lượng cao hơn: cấu trúc cầu tàu gỗ rõ ràng hơn (ván gỗ ngang, cọc chống, lan can, đèn lồng hoặc dây thừng), multi-tone shading cho gỗ, và 1px dark outline. Kích thước có thể tăng hợp lý nếu cần nhưng phải giữ texture key `'fishing_dock'`.
+
+### R2. Di chuyển Fishing Dock + Crystal Pond sang bên trái bản đồ
+Thay đổi vị trí Fishing Dock và Crystal Pond trong `_createFishingSpot()` từ phía dưới farm sang **bên trái farm**. Cần đảm bảo:
+- Không che khuất các decoration/NPC khác (apple tree, shop, etc.)
+- Interaction proximity check vẫn hoạt động đúng
+- Player có thể di chuyển đến vị trí mới mà không bị stuck
+- Shadow system vẫn render đúng cho dock ở vị trí mới
+
+### R3. Thêm hiệu ứng cá nhảy ambient trên Crystal Pond
+Tạo hiệu ứng cá nhảy lên khỏi mặt nước trên Crystal Pond ở Farm scene — hiệu ứng ambient xảy ra ngẫu nhiên (không cần người chơi tương tác). Cá nhảy lên rồi rơi xuống tạo splash nhỏ, xuất hiện random vị trí trên pond với khoảng cách thời gian ngẫu nhiên.
+
+### R4. Giữ nguyên tất cả chức năng hiện có
+- Fishing interaction (SPACE to enter Fishing Scene) vẫn hoạt động
+- Tất cả texture keys giữ nguyên
+- `node -c game.js` pass syntax
+- `game.js` và `assets/game.js` đồng bộ hoàn toàn
+- KHÔNG chỉnh sửa code ngoài phạm vi fishing dock / pond
+
+## Acceptance Criteria
+
+### Visual
+- [ ] Dock sprite mới có ≥ 3 tone màu gỗ (không flat color)
+- [ ] Dock sprite mới có 1px dark outline
+- [ ] Crystal Pond có hiệu ứng cá nhảy visible (animation arc lên-xuống)
+- [ ] Cá nhảy có splash effect khi rơi xuống nước
+
+### Position
+- [ ] Fishing Dock + Pond nằm ở **bên trái** farm (fx < farm.x)
+- [ ] Dock không overlap với apple tree, shop sign, hoặc các decoration khác
+- [ ] Player có thể walk đến dock từ farm area
+
+### Functionality
+- [ ] Nhấn SPACE gần dock vẫn mở Fishing Scene đúng
+- [ ] Cá nhảy ambient xảy ra tự động mỗi vài giây (không cần player input)
+- [ ] `node -c game.js` pass (0 lỗi syntax)
+- [ ] `game.js` và `assets/game.js` đồng bộ hoàn toàn
