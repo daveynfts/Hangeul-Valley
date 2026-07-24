@@ -1,26 +1,35 @@
-## 2026-07-24T12:17:26Z
-You are the M2 Pet System Removal Worker for Hangeul Valley.
-Your working directory is `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2`.
+## 2026-07-24T13:30:56Z
+You are Worker 3 for Milestone 2 (Cooking System with Recipes, UI & Achievements).
+Your working directory for metadata is `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2`.
+Project root is `d:\Hangeul Valley`.
 
-MANDATORY INTEGRITY WARNING:
-DO NOT CHEAT. All implementations must be genuine. DO NOT hardcode test results, create dummy/facade implementations, or circumvent the intended task. A Forensic Auditor will independently verify your work. Integrity violations WILL be detected and your work WILL be rejected.
+Read the specifications and designs in:
+- `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md`
+- `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_1\analysis.md` (Recipes & Cooking Engine)
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_2\analysis.md` (Cooking UI & HUD Integration)
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2_3\analysis.md` (Achievements & Persistence Integration)
 
-Task:
-Completely remove all pet companion system elements from `game.js`, `assets/game.js`, `index.html`, and `assets/index.html` as mapped in `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2\analysis.md`.
+### Your Tasks:
+1. **Cooking Recipes & Execution Engine (R3)**:
+   - In `game.js`: Define `COOKING_RECIPES` array of 10 authentic Korean dishes (Novice to Master tier) requiring harvested crop ingredients (`cabbage`, `radish`, `green_onion`, `chili`, `garlic`, `rice`, `soybean`, `carrot`, `potato`, `corn`, `strawberry`).
+   - Implement `cookRecipe(recipeId)`: checks owned vs needed ingredients in `inventoryState`, deducts ingredients using `removeItemFromInventory()`, awards vocab XP (`addHonor`) and Gold (`addCoins`), updates cooked recipes tracking in `cookingState`, refreshes UI grids, and triggers achievement checks.
 
-Steps:
-1. Read `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2\analysis.md` for exact line numbers and deletion/refactoring blueprints across all 6 pet subsystems:
-   - Pet textures (`_genPetTextures` call & definition)
-   - Pet state & persistence (`petState`, `collectSave`, `applySave`, schema defaults)
-   - Pet movement & companion loop (`_updatePetCompanion` call & definition)
-   - Pet passives & XP hooks (`isPetActive`, `getPetPassiveMultiplier`, `addPetXP`, `decayPetHappiness`)
-   - Pet functions & UI modals (`PET_DB`, `openPetOverlay`, `closePetOverlay`, `adoptPet`, `equipPet`, `feedActivePet`, `startPetLevelUpQuiz`, `#pet-overlay` HTML/CSS, `#pet-btn` HUD button)
-   - Pet leaderboard tab (`#lbtab-pets`, `LOCAL_RIVALS` pet metrics, `pets` tab sorting/rendering)
-2. Perform clean removals on `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\index.html`.
-   (Note: Do NOT delete VOCAB_FACTS dictionary entries like "civil petitioner").
-3. Synchronize `game.js` to `assets/game.js` and `index.html` to `assets/index.html`.
-4. Run syntax verification via run_command:
-   - `node -c "d:\Hangeul Valley\game.js"`
-   - `node -c "d:\Hangeul Valley\assets\game.js"`
-5. Document all changes in `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\changes.md`.
-6. Write your handoff report to `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md` and send a completion message to the parent orchestrator.
+2. **Cooking UI Modal & HUD Integration (R3)**:
+   - In `index.html`: Add `#cooking-overlay` glass modal with header, recipe cards container `#cooking-recipe-list`, selected recipe detail container `#cooking-detail-view` (showing dish icon, Korean/English names, description, `owned / needed` ingredient badges in green/red, Cook action button, reward badges). Add `#cooking-btn` (`🍳 Cooking`) into HUD actions group.
+   - In `game.js`: Add `openCookingUI()`, `closeCookingUI()`, `renderCookingGrid()`, and register keydown listener for `'C'` / `'c'` with text input focus guard (`INPUT`, `TEXTAREA`, `isContentEditable`).
+
+3. **Master Chef Trophy & Save Persistence (R3)**:
+   - In `game.js`: Add Master Chef trophy (`id: 'master_chef'`, `name: 'Master Chef (요리 왕)'`, `icon: '👨🍳'`, `desc: 'Cook all 10 recipes at least once'`) to `TROPHIES_DB`.
+   - Implement `checkCookingAchievements()` to grant trophy when 100% of recipes have been cooked.
+   - Update `collectSave()`, `applySave()`, and `migrateSaveData()` to persist `cookingState` (cooked recipe IDs, dish counts).
+
+4. **Synchronization & Verification**:
+   - Copy `game.js` to `assets/game.js` and `index.html` to `assets/index.html`.
+   - Run `node -c game.js` and `node -c assets/game.js` to verify syntax (0 errors).
+   - Document changes in `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\changes.md` and `handoff.md`.
+
+> MANDATORY INTEGRITY WARNING:
+> DO NOT CHEAT. All implementations must be genuine. DO NOT hardcode test results, create dummy/facade implementations, or circumvent the intended task. A Forensic Auditor will independently verify your work. Integrity violations WILL be detected and your work WILL be rejected.
+
+Send a message to the orchestrator when completed with a summary of changes and syntax verification logs.

@@ -1,25 +1,24 @@
-# BRIEFING — 2026-07-24T12:51:39Z
+# BRIEFING — 2026-07-24T20:57:00Z
 
 ## Mission
-Completely replace human player character in Hangeul Valley with a stylish Industrial Yellow Farmer Pixel Robot (yellow/gray metallic casing, LED visor, treaded feet, 4-directional walk animations).
+Build a complete Storage (Inventory) + Cooking system for Hangeul Valley (harvest ground drops, inventory slots/stacking/capacity, 8+ cooking recipes, UI, save/load, rewards).
 
 ## 🔒 My Identity
 - Archetype: sentinel
 - Working directory: d:\Hangeul Valley\.agents\sentinel
-- Orchestrator: 61273c20-169f-4f19-afce-70f9dfa80106
-- Victory Auditor: 077c3710-3705-4b07-8bab-250d9b5f6f92
+- Orchestrator: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Victory Auditor: 3d00d321-17a3-409a-bf93-3b573aa17734
 
 ## 🔒 Key Constraints
 - No technical decisions — relay only
 - Victory Audit is MANDATORY before reporting completion
 - node -c game.js and node -c assets/game.js pass with 0 syntax errors
-- SHA256 byte synchronization verified between game.js and assets/game.js
-- 1.8x base scale, dynamic shadow rendering, depth sorting (y-sort), aligned hitboxes
+- SHA256 byte synchronization verified between game.js & assets/game.js, and index.html & assets/index.html
 
 ## User Context
-- **Last user request**: Completely replace the human main character with an Industrial Yellow Farmer Pixel Robot (yellow/gray metallic casing, vibrant LED visor/screen, treaded/tread-style feet with smooth 4-directional movement bobbing).
-- **Pending clarifications**: None
-- **Delivered results**: Industrial Yellow Farmer Pixel Robot implementation verified by team & certified VICTORY CONFIRMED by Independent Victory Auditor.
+- **Last user request**: Build Storage (Inventory) + Harvest Drop + Cooking system with recipes, Gold/XP rewards, and full persistence.
+- **Pending clarifications**: none
+- **Delivered results**: Storage + Cooking system implementation complete and certified VICTORY CONFIRMED by Independent Victory Auditor.
 
 ## Project Status
 - **Phase**: complete
@@ -32,6 +31,7 @@ Completely replace human player character in Hangeul Valley with a stylish Indus
 ## Artifact Index
 - ORIGINAL_REQUEST.md — Verbatim record of user requests
 - .agents/sentinel/BRIEFING.md — Sentinel briefing
-- .agents/sentinel/handoff.md — Sentinel final handoff
-- .agents/victory_auditor/audit_report.md — Victory Auditor final report
-- .agents/victory_auditor/handoff.md — Victory Auditor final handoff
+- .agents/sentinel/handoff.md — Sentinel handoff
+- .agents/orchestrator/handoff.md — Orchestrator handoff
+- .agents/victory_auditor/audit_report.md — Victory Auditor report
+- .agents/victory_auditor/handoff.md — Victory Auditor handoff

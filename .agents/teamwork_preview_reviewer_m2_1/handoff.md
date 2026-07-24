@@ -1,44 +1,66 @@
-# Handoff Report — M2 Pet Companion System Removal Review
+# Reviewer Handoff Report — Milestone 2 (Cooking System with Recipes, UI & Achievements)
 
 ## 1. Observation
-- Target Files Inspected: `game.js`, `assets/game.js`, `index.html`, `assets/index.html`.
-- Verification Commands Executed:
-  - `node -c "d:\Hangeul Valley\game.js"; node -c "d:\Hangeul Valley\assets\game.js"` -> Output: Completed successfully (exit code 0).
-  - PowerShell SHA256 Hash Sync Test: `(Get-FileHash 'game.js').Hash -eq (Get-FileHash 'assets/game.js').Hash` -> Output: `True`.
-  - PowerShell SHA256 Hash Sync Test: `(Get-FileHash 'index.html').Hash -eq (Get-FileHash 'assets/index.html').Hash` -> Output: `True`.
-- Pet Subsystem Inspections:
-  1. Textures: `_genPetTextures` call at line 259 and static generator method removed.
-  2. State/Persistence: `petState` declaration, `data.pets` migration, `collectSave()`, and `applySave()` references removed.
-  3. Companion Follower: `_updatePetCompanion(dt)` method and call in `FarmScene.update()` removed.
-  4. Passives & XP Hooks: All passive checks in `addCoins()`, `_harvestAppleTree()`, `_harvestPlot()`, `catchSuccess()`, `onMinigameComplete()`, and `buffHUDInterval` removed.
-  5. UI Overlays/Modals: `#pet-overlay`, `#pet-btn`, `PET_DB`, window functions (`openPetOverlay`, `adoptPet`, etc.), and pet CSS rules removed. `index.html` has 0 occurrences of `pet`.
-  6. Leaderboard Tab: `petsPct` in `LOCAL_RIVALS`, `#lbtab-pets`, and pet sorting/display branches in `switchLeaderboardTab()` removed.
-- Preserved Dictionary Terms Verification:
-  - `"civil petitioner"` at `game.js` line 6338: Present.
-  - `"civil petition"` at `game.js` line 6411: Present.
-- Minor Discoveries:
-  - `game.js` line 11060: `childrens_q3` desc mentions `'Feed your Pet companion 1 time'`.
-  - `game.js` line 10953: Inline comment `// Store cooked dish for pet feeding` (underlying code retained for `computeCookingTier()`).
+
+- **Files Inspected**:
+  - `game.js` (lines 11188–11595, 3888–4036, 4875–4920, 10817–10860)
+  - `assets/game.js`
+  - `index.html` (lines 1199, 1333, 1859–1902)
+  - `assets/index.html`
+- **Syntax Check Commands & Outputs**:
+  - `node -c "d:\Hangeul Valley\game.js"` → Returned exit code 0 (No syntax errors).
+  - `node -c "d:\Hangeul Valley\assets\game.js"` → Returned exit code 0 (No syntax errors).
+- **Binary Difference Check (File Sync)**:
+  - `FC.exe /B "d:\Hangeul Valley\game.js" "d:\Hangeul Valley\assets\game.js"` → Output: `FC: no differences encountered`.
+  - `FC.exe /B "d:\Hangeul Valley\index.html" "d:\Hangeul Valley\assets\index.html"` → Output: `FC: no differences encountered`.
+- **Code Audit Observations**:
+  - `COOKING_RECIPES` array in `game.js:11188-11326` contains exactly 10 recipes (`kimchi`, `radish_rice`, `roasted_corn`, `strawberry_jam`, `gimbap`, `tteokbokki`, `gamjajeon`, `bibimbap`, `bulgogi`, `samgyetang`), each with complete metadata (id, nameEn, nameKo, icon, description, ingredients, xpReward, goldReward).
+  - `cookRecipe(recipeId)` in `game.js:11489-11570`:
+    - Checks required ingredients against `inventoryState.ingredients`. If missing any ingredient, displays toast warning and returns `false` without removing any items.
+    - Deducts ingredients via `removeItemFromInventory()`.
+    - Awards Gold via `addCoins()` and XP via `addHonor()`.
+    - Updates `cookingState` (`cookedRecipes`, `totalDishesCooked`, `recipeStats`) and `inventoryState.cookedDishes`.
+    - Triggers `checkCookingAchievements()`.
+  - `checkCookingAchievements()` in `game.js:11572-11595` unlocks `'master_chef'` trophy when 10 recipes are cooked.
+  - UI Overlay `#cooking-overlay` in `index.html:1859` and HUD button `#cooking-btn` in `index.html:1333` exist. Keydown listener in `game.js:4891-4921` listens for `'C'`/`'c'` with text focus guards (`INPUT`, `TEXTAREA`, `isContentEditable`).
+  - Save/Load Persistence: `collectSave()` serializes `cooking: cookingState`, `applySave()` restores `cookingState`, and `migrateSaveData()` populates missing `cookingState` or migrates from `inventory.cookedDishes`.
 
 ## 2. Logic Chain
-1. Node syntax checks (`node -c`) on `game.js` and `assets/game.js` confirm valid JavaScript parsing without syntax errors.
-2. File hash checks confirm 100% byte synchronization between `game.js` / `assets/game.js` and `index.html` / `assets/index.html`.
-3. Inspection of the 6 pet companion subsystems shows complete code removal without stubbing or facade bypasses.
-4. Retention of `VOCAB_FACTS` dictionary terms ("civil petitioner", "civil petition") confirms vocabulary content integrity was preserved.
-5. Absence of integrity violations (fake outputs, hardcoded test results, facade classes) validates genuine implementation quality.
-6. Conclusion follows directly: The removal of the Pet Companion System is verified and approved (PASS).
+
+1. **Syntax & Synchronization Verification**:
+   - `node -c` confirmed valid JavaScript syntax in both `game.js` and `assets/game.js`.
+   - `FC.exe /B` proved 100% byte-for-byte identity between `game.js` <-> `assets/game.js` and `index.html` <-> `assets/index.html`.
+2. **Recipe & Execution Engine Verification**:
+   - All 10 recipes are properly configured with valid ingredient item IDs (`cabbage`, `radish`, `green_onion`, `chili`, `garlic`, `rice`, `soybean`, `carrot`, `potato`, `corn`, `strawberry`) which resolve in `getItemInfo()`.
+   - Stress test with partial ingredients (`kimchi` with only cabbage) correctly returned `false` and deducted 0 items.
+   - Stress test with invalid recipe ID (`non_existent`) correctly returned `false`.
+   - Stress test with complete ingredients for all 10 recipes successfully cooked each dish, deducted ingredients, awarded coins/XP, updated `cookingState`, and unlocked `'master_chef'`.
+3. **Save/Load Roundtrip**:
+   - `collectSave()` creates `{ cooking: { cookedRecipes: [...], totalDishesCooked: 10, recipeStats: {...} } }`.
+   - `applySave()` restores `cookingState` and auto-evaluates `checkCookingAchievements()`.
+4. **Code Integrity Audit**:
+   - No hardcoded test results, mock functions, or dummy shortcuts found. Implementation is genuine and production-ready.
 
 ## 3. Caveats
-- `childrens_q3` in `SEASONAL_EVENTS_CONFIG` contains legacy pet feeding text; while reward claiming works manually, updating the text to match pet-free gameplay can be done in future minor polish tasks.
+
+- No caveats. All core requirements, edge cases, UI elements, persistence mechanisms, and file sync contracts for Milestone 2 are fully satisfied.
 
 ## 4. Conclusion
-Final Verdict: **PASS** (APPROVE).
-The pet companion system removal is complete, clean, syntactically valid, and properly synchronized.
+
+- **VERDICT**: **PASS** (APPROVE)
+- Milestone 2 (Cooking System with Recipes, UI & Achievements) implementation is robust, complete, fully synchronized, and verified.
 
 ## 5. Verification Method
-- Execute syntax check:
-  - `node -c "d:\Hangeul Valley\game.js"; node -c "d:\Hangeul Valley\assets\game.js"`
-- Execute file synchronization check:
-  - `powershell -Command "(Get-FileHash 'game.js').Hash -eq (Get-FileHash 'assets/game.js').Hash; (Get-FileHash 'index.html').Hash -eq (Get-FileHash 'assets/index.html').Hash"`
-- Inspect dictionary terms:
-  - Grep for `civil petitioner` and `civil petition` in `game.js`.
+
+- **Syntax Verification**:
+  ```powershell
+  node -c "d:\Hangeul Valley\game.js"
+  node -c "d:\Hangeul Valley\assets\game.js"
+  ```
+- **File Sync Verification**:
+  ```powershell
+  FC.exe /B "d:\Hangeul Valley\game.js" "d:\Hangeul Valley\assets\game.js"
+  FC.exe /B "d:\Hangeul Valley\index.html" "d:\Hangeul Valley\assets\index.html"
+  ```
+- **Headless Execution & Save Persistence Test**:
+  Run node script initializing mock Phaser environment, calling `cookRecipe` for all 10 recipes, verifying trophy unlock, and executing `collectSave()` / `applySave()` roundtrip.

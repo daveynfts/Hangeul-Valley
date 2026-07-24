@@ -1,48 +1,55 @@
-# BRIEFING — 2026-07-24T19:17:26+07:00
+# BRIEFING — 2026-07-24T20:34:00Z
 
 ## Mission
-Completely remove all pet companion system elements from `game.js`, `assets/game.js`, `index.html`, and `assets/index.html` based on analysis blueprint.
+Implement Cooking System with 10 Recipes, Execution Engine (`cookRecipe`), Cooking UI Modal & HUD Integration, Master Chef Trophy, and Save Persistence for Hangeul Valley (Milestone 2).
 
 ## 🔒 My Identity
-- Archetype: implementer / qa / specialist
+- Archetype: worker
 - Roles: implementer, qa, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_worker_m2
-- Original parent: f6e78e1c-6bfe-4986-b2fe-f1bdd7278594
-- Milestone: M2 Pet System Removal
+- Original parent: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Milestone: Milestone 2 (Cooking System)
 
 ## 🔒 Key Constraints
-- DO NOT CHEAT or hardcode values.
-- Do NOT delete VOCAB_FACTS dictionary entries like "civil petitioner".
-- Perform clean removals on game.js and index.html.
-- Synchronize game.js -> assets/game.js and index.html -> assets/index.html.
-- Verify syntax using `node -c`.
-- Document changes in changes.md and create handoff.md.
+- CODE_ONLY network mode: no external HTTP requests.
+- No cheating or hardcoded test facades. Real logic and state.
+- Dual-file synchronization: mirror changes between `game.js` <-> `assets/game.js` and `index.html` <-> `assets/index.html`.
+- Verification with `node -c game.js` and `node -c assets/game.js`.
 
 ## Current Parent
-- Conversation ID: f6e78e1c-6bfe-4986-b2fe-f1bdd7278594
-- Updated: 2026-07-24T19:17:26+07:00
+- Conversation ID: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Updated: 2026-07-24T20:34:00Z
 
 ## Task Summary
-- **What to build**: Complete removal of pet companion system from Hangeul Valley project files.
-- **Success criteria**: All 6 pet subsystems cleanly removed, no syntax errors, valid game logic, synchronized files.
-- **Interface contracts**: PROJECT.md / analysis.md
-- **Code layout**: root and assets/
+- **What to build**: 
+  1. `COOKING_RECIPES` array of 10 authentic Korean dishes (Novice to Master) in `game.js`. `cookRecipe(recipeId)` engine handling ingredient checks, deduction via `removeItemFromInventory()`, XP & Gold awards, cooked dish tracking, UI refresh, and achievement checks.
+  2. `#cooking-overlay` glass modal and `#cooking-btn` in `index.html`. `openCookingUI()`, `closeCookingUI()`, `renderCookingGrid()`, and `'C'` / `'c'` hotkey with text input focus guard in `game.js`.
+  3. Master Chef trophy (`master_chef`) added to `TROPHIES_DB`. `checkCookingAchievements()` to grant trophy when 100% of recipes are cooked. Persist `cookingState` in `collectSave()`, `applySave()`, and `migrateSaveData()`.
+  4. Synchronize `game.js` -> `assets/game.js` and `index.html` -> `assets/index.html`.
+- **Success criteria**: 0 syntax errors on `node -c`, all 10 recipes working, UI rendering, trophy unlocked on 100% completion, save state persisting.
+- **Interface contracts**: `PROJECT.md` & Explorer Analysis Reports (m2_1, m2_2, m2_3).
+- **Code layout**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`.
 
 ## Key Decisions Made
-- Will follow analysis blueprint in `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m2\analysis.md`.
+- Used exact recipe specifications from Explorer 1 (10 recipes with crop ingredients).
+- Implemented `cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} }` and integrated with `inventoryState.cookedDishes` for backward compatibility.
+- Modal structure following existing `.glass-modal` conventions with recipe cards `#cooking-recipe-list`, pantry bar, ingredient badges (green/red), and Cook buttons inside `#cooking-detail-view`.
+- Full keyboard hotkey handling ('C'/'c') with input focus protection (`INPUT`, `TEXTAREA`, `isContentEditable`).
 
 ## Artifact Index
-- ORIGINAL_REQUEST.md — Original user prompt instructions
-- BRIEFING.md — Working briefing index
-- changes.md — Change documentation
-- handoff.md — Final handoff report
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\ORIGINAL_REQUEST.md` — Original request
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\changes.md` — List of code changes
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m2\handoff.md` — Handoff report
 
 ## Change Tracker
-- **Files modified**: None yet
-- **Build status**: Pending
+- **Files modified**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`
+- **Build status**: PASS (0 syntax errors, 100% test pass)
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: Pending
-- **Lint status**: N/A
-- **Tests added/modified**: Syntax check pending
+- **Build/test result**: PASS
+- **Lint status**: 0 errors
+- **Tests added/modified**: Node syntax & unit verification test suite passed
+
+## Loaded Skills
+- None

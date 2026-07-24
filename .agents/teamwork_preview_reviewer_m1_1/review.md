@@ -1,88 +1,110 @@
-# Detailed Review & Adversarial Critic Report — Milestone 1
+# Code Review Report — Milestone 1: Storage / Inventory System & Harvest-to-Ground Drop Pipeline
 
-**Milestone**: Milestone 1 — Industrial Yellow Farmer Pixel Robot Replacement & Integration  
-**Reviewer**: Reviewer 1 (Roles: reviewer, critic)  
-**Target Files**: `game.js`, `assets/game.js`  
-**Verdict**: **PASS / APPROVE**  
-
----
-
-## 1. Review Summary
-
-The implementation of Milestone 1 in `game.js` and `assets/game.js` (~lines 1313–1891) has been thoroughly inspected, evaluated, and verified. 
-- All human player character pixel art matrices have been removed and replaced with 16×16 matrices representing the Industrial Yellow Farmer Pixel Robot.
-- The 37-token palette `P` is completely populated with yellow casing, metallic slate chassis, glowing cyan visor, warning lights/antenna glow, and 1px dark slate outline tokens.
-- All 12 walk matrices (`player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`) correctly feature mechanical tread step differences (>= 8px changes in tread rows 11–15) and 1px vertical mechanical bobbing.
-- All 9 action matrices (`player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`) and 3 standalone tools (`tool_watering_can`, `tool_basket`, `tool_sickle`) are correctly defined.
-- Legacy aliases (`farmer0`..`farmer3`) point to `down_0`, `down_1`, `down_0`, `down_2`, maintaining full backward compatibility.
-- Syntax verification (`node -c`) passed with 0 errors for both files.
-- SHA256 hashes for `game.js` and `assets/game.js` match 100% byte-for-byte (`27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`).
-- Code integrity checks confirmed no dummy facades, hardcoded test overrides, or self-certifying shortcuts.
+**Reviewer**: Reviewer 1 (Teamwork Reviewer & Critic)  
+**Date**: 2026-07-24  
+**Target Files**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`  
+**Verdict**: **APPROVE**
 
 ---
 
-## 2. Findings
+## Executive Summary
 
-### Findings Summary
-- **Critical**: 0
-- **Major**: 0
-- **Minor**: 0
-
-*No defects or integrity violations detected.*
+Worker 1 has delivered a robust, complete implementation of Milestone 1 (Storage / Inventory System & Harvest-to-Ground Drop Pipeline). All core functions, persistence mechanisms, UI components, keybindings, input guards, and ground drop physics perform as specified without regressions or integrity violations. Code syntax and file synchronization between root and `assets/` mirrors are 100% verified.
 
 ---
 
-## 3. Verified Claims
+## 1. Storage API Evaluation
 
-| Claim | Verification Method | Result | Notes |
-|---|---|---|---|
-| `node -c game.js` & `assets/game.js` pass | Executed `node -c` on both files | **PASS** | 0 syntax errors |
-| SHA256 byte synchronization | Executed crypto hash comparison on raw file buffers | **PASS** | Hashes match (`27fce2...`) |
-| Palette token completeness | Programmatically executed `_genPlayerTextures` in mock scene and validated character map | **PASS** | All 37 tokens in `P` resolved with 0 missing key errors |
-| 12 Walk matrices 16×16 | Validated height (16 rows) and width (16 cols) for all 12 matrices | **PASS** | Strict 16×16 grid compliance |
-| Mechanical tread movement & bobbing | Inspected rows 11–15 and row 0 across rest (`_0`) vs step (`_1`, `_2`) frames | **PASS** | Tread pattern shifts and antenna/head bobbing verified |
-| 9 Action matrices & 3 Standalone tools | Inspected matrix definitions and texture registrations | **PASS** | Registered in Phaser anims and texture manager |
-| Legacy alias compatibility | Verified `farmer0..3` mapping to `down_0`, `down_1`, `down_0`, `down_2` | **PASS** | Direct backward compatibility maintained |
-| Chibi Proportions & 1.8x Scale | Inspected `_createPlayer` in `game.js` line 8285 | **PASS** | `.setScale(1.8)` set on sprite with dynamic shadow |
+### 1.1 `addItemToInventory(itemId, qty = 1)`
+- **Correctness**: Maps `itemId` (English ID or Korean Key) to canonical key using `getItemInfo(itemId).key`.
+- **Item Stacking Logic**: If the item already exists in `inventoryState.ingredients` with `qty > 0`, it stacks into the existing slot regardless of capacity limits.
+- **Capacity Enforcement**: For new items, verifies `getUsedInventorySlots() < inventoryState.maxSlots`. If capacity is exceeded, returns `false` to block pickup/addition.
+- **Boundary Checks**: Returns `false` for invalid `itemId` or `qty <= 0`.
+- **Persistence**: Triggers `persistSave()` on successful addition.
 
----
+### 1.2 `removeItemFromInventory(itemId, qty = 1)`
+- **Correctness**: Resolves item key via `getItemInfo(itemId).key` and verifies `inventoryState.ingredients[key] >= qty`.
+- **Key Cleanup**: Subtracts `qty` and executes `delete inventoryState.ingredients[key]` if count drops to `<= 0`, freeing the inventory slot.
+- **Boundary Checks**: Returns `false` if item doesn't exist or remaining quantity is insufficient.
 
-## 4. Coverage Gaps
+### 1.3 `getUsedInventorySlots()`
+- **Slot Counting**: Counts distinct occupied keys (`qty > 0`) across `ingredients`, `cookedDishes`, and `seeds`.
+- **Safety**: Safe against uninitialized state (`inventoryState.ingredients = inventoryState.ingredients || {}`).
 
-- None. All 28 texture keys, 7 animation sequences, 37 palette tokens, and 2 code files were explicitly examined and verified.
-
----
-
-## 5. Unverified Items
-
-- None.
+### 1.4 `expandInventoryCapacity()`
+- **Economy Integration**: Invokes `spendCoins(50)` to deduct 50 coins. Returns `false` and alerts the user if coins are insufficient.
+- **Capacity Update**: Increments `inventoryState.maxSlots` by +5, updates save state via `persistSave()`, re-renders grid (`renderInventoryGrid()`), and displays a toast notification.
 
 ---
 
-## 6. Adversarial Stress-Test & Challenge Report
+## 2. Save/Load Persistence (`collectSave`, `applySave`, `migrateSaveData`)
 
-### Challenge 1: Matrix Character Mapping Incompleteness
-- **Hypothesis**: A matrix might contain an unmapped token character leading to `undefined` pixel values during rendering.
-- **Test**: Executed JavaScript parser over `_genPlayerTextures` iterating through all 28 matrices, checking every single character against palette `P`.
-- **Result**: 0 unmapped characters found out of 7,168 total matrix cell entries.
-
-### Challenge 2: Animation Frame Rate & Key Mismatch
-- **Hypothesis**: Registered animation keys might reference non-existent texture names or mismatched frame counts.
-- **Test**: Intercepted Phaser `scene.anims.create` calls and verified every frame key against the created textures map.
-- **Result**: All 7 animations (`player-walk-down/up/left/right`, `player-water`, `player-harvest`, `player-pick`) reference valid textures.
-
-### Challenge 3: File Sync Desynchronization Risk
-- **Hypothesis**: `assets/game.js` could drift from `game.js` if comments or byte order differ.
-- **Test**: Performed SHA256 and byte-level buffer equality check.
-- **Result**: Exactly identical (1,448,966 bytes, SHA256 `27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`).
-
-### Challenge 4: Integrity Violation & Facade Check
-- **Hypothesis**: The worker might have left legacy human matrices or introduced dummy facades.
-- **Test**: Searched for human farmer color hex codes (`0xFFE0C2` as skin main, etc.) and inspected matrices.
-- **Result**: Human character matrices fully removed; player model is strictly the Industrial Yellow Farmer Pixel Robot.
+- **Schema Migration (`migrateSaveData`)**: Upgrades save data to `v: 4`. Ensures `data.inventory.maxSlots` defaults to 20 if missing or invalid, and initializes `droppedItems` array.
+- **Save Collection (`collectSave`)**: Serializes `v: 4`, `playerCurrencies`, `inventoryState` (including `maxSlots`), and active ground `droppedItems` (`itemId`, `nameKo`, `x`, `y`).
+- **Save Restoration (`applySave`)**: Migrates data, restores `inventoryState`, and re-spawns active ground items on `FarmScene` via `sceneRef.spawnDroppedItem()`.
 
 ---
 
-## 7. Conclusion
+## 3. Inventory UI, CSS, HUD & Hotkeys
 
-Milestone 1 satisfies all functional, architectural, syntax, and sync requirements. Final Verdict: **PASS**.
+- **HTML Modal Structure**: `#inventory-overlay` contains `#inventory-panel` glass container, `#inv-capacity-badge` (`X / Y slots`), `#inv-expand-btn`, and `#inventory-grid`.
+- **CSS & CRT Overlay**: Integrated `.inv-slot`, `.inv-slot:hover`, `.inv-slot.empty`, `.inv-qty-badge`, `.inv-slot-icon`, `.inv-slot-ko`, `.inv-slot-en`. Added `#inventory-panel` to 64-Bit CRT Scanlines overlay selector lists (`#inventory-panel::before`).
+- **HUD Button**: Added `#inventory-btn` (`🎒 Bag`) to `#hud-actions-group` in `index.html`.
+- **Hotkeys & Input Guard**: 'I' / 'i' and 'E' / 'e' toggle the inventory modal. Guarded by:
+  ```js
+  const activeEl = document.activeElement;
+  const isInputFocused = activeEl && (
+    activeEl.tagName === 'INPUT' ||
+    activeEl.tagName === 'TEXTAREA' ||
+    activeEl.isContentEditable
+  );
+  ```
+  This prevents modal toggling while typing in text inputs or textareas.
+
+---
+
+## 4. Harvest-to-Ground Drop Pipeline
+
+- **Spawning**: Harvest actions (`advancePlot` crop harvest and `onAppleHarvested`) trigger `spawnDroppedItem(itemId, x, y)`.
+- **Physics & Visuals**: Entity container features ground shadow, glowing cyan aura, item emoji icon, Korean text label, pop-up bounce animation (`Bounce.Out`), and continuous sine-wave floating.
+- **Magnet & Pickup Zones**:
+  - Magnet Zone (~65px): Pulls item towards player if inventory is not full or item is already owned.
+  - Pickup Zone (~32px): Attempts `addItemToInventory(itemId, 1)`. Plays pickup SFX, sparkle particles, floating `+1 [Item]!` text, and destroys drop container.
+  - Full Inventory Handling: Shows toast (`🎒 Inventory Full! Cannot pick up [Item]`) and applies a 3-second pickup cooldown debounce to avoid toast spam.
+
+---
+
+## 5. Verification & Integrity Attestation
+
+- **Syntax Check (`node -c`)**:
+  - `node -c game.js`: **PASS** (0 errors)
+  - `node -c assets/game.js`: **PASS** (0 errors)
+- **File Synchronization (SHA256 Hashes)**:
+  - `game.js` SHA256: `612717BEAC3E2AA7821B3BB1656201E53729B15DD0701C83481F526FE3459C0E`
+  - `assets/game.js` SHA256: `612717BEAC3E2AA7821B3BB1656201E53729B15DD0701C83481F526FE3459C0E` (MATCH)
+  - `index.html` SHA256: `72C0731982A8AE6D913B6C6FEA6E1AB632AD3905F1B8165CC8C96B70EB828138`
+  - `assets/index.html` SHA256: `72C0731982A8AE6D913B6C6FEA6E1AB632AD3905F1B8165CC8C96B70EB828138` (MATCH)
+- **Integrity Violation Assessment**:
+  - Hardcoded test results / facade implementations: **NONE**
+  - Task shortcuts: **NONE**
+  - Self-certifying without verification: **NONE** (All claims verified by direct inspection and CLI commands).
+
+---
+
+## Findings & Advisory Recommendations
+
+### Verified Claims
+- `addItemToInventory` & `removeItemFromInventory` canonicalize item keys and enforce capacity: **VERIFIED (PASS)**
+- Stacking existing items when inventory is full: **VERIFIED (PASS)**
+- Coins deduction on expansion: **VERIFIED (PASS)**
+- Schema migration v4 & save persistence: **VERIFIED (PASS)**
+- CRT scanlines styling on `#inventory-panel`: **VERIFIED (PASS)**
+- Input focus guards on hotkeys 'I' / 'E': **VERIFIED (PASS)**
+
+### Advisory Recommendations (Non-blocking / Minor)
+1. **`removeItemFromInventory` Scope**: Currently targets `inventoryState.ingredients`. If cooked dishes or seeds are removed via this generic helper in future milestones, consider extending `removeItemFromInventory` to search `cookedDishes` and `seeds` dictionaries.
+
+---
+
+## Final Verdict
+**APPROVE** — Milestone 1 implementation is complete, correct, and ready for integration.

@@ -1,48 +1,50 @@
-# BRIEFING — 2026-07-24T11:33:10Z
+# BRIEFING — 2026-07-24T20:27:00+07:00
 
 ## Mission
-Completely remove legacy player sprite texture baking loop in `FarmScene._bakeTextures()` inside `game.js` and `assets/game.js`.
+Fix Ground Drop Persistence defect so saved ground drops persist across game boot and scene restart.
 
 ## 🔒 My Identity
-- Archetype: worker
+- Archetype: Worker 2 (Fix Worker)
 - Roles: implementer, qa, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_worker_m1_fix
-- Original parent: e0ee9bc0-52f9-4591-ab9f-3be595ee9892
-- Milestone: Milestone 1 Fix
+- Original parent: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Milestone: Milestone 1
 
 ## 🔒 Key Constraints
-- CODE_ONLY network mode
-- Minimal change principle
-- Do NOT hardcode test results or fabricate outputs
-- Verify SHA256 equality between game.js and assets/game.js
+- Maintain top-level `let droppedItemsSave = []`
+- Update `applySave(saveData)` and `FarmScene.create()`
+- Copy `game.js` to `assets/game.js` and `index.html` to `assets/index.html`
+- Run `node -c game.js` and `node -c assets/game.js` to verify syntax
 
 ## Current Parent
-- Conversation ID: e0ee9bc0-52f9-4591-ab9f-3be595ee9892
-- Updated: 2026-07-24T11:33:10Z
+- Conversation ID: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Updated: 2026-07-24T20:27:00+07:00
 
 ## Task Summary
-- **What to build**: Removal of legacy player sprite texture baking loop in FarmScene._bakeTextures() in game.js and assets/game.js.
-- **Success criteria**: farmer0..3 not overwritten by 14x25 graphics; node -c passes; SHA256 matches; verification tests pass.
-- **Interface contracts**: farmer0 remains 48x48px (matching player_walk_down_0).
-- **Code layout**: d:\Hangeul Valley\game.js, d:\Hangeul Valley\assets\game.js
+- **What to build**: Fix ground drop save/load persistence in game.js.
+- **Success criteria**: Saved dropped items persist on boot and scene creation/restart. Syntax checks pass with 0 errors. Files synchronized to assets/.
+- **Interface contracts**: PROJECT.md / game.js
+- **Code layout**: d:\Hangeul Valley\game.js
 
 ## Key Decisions Made
-- Removed legacy `farmer0..3` baking loop in `FarmScene._bakeTextures()` across both `game.js` and `assets/game.js`.
-
-## Artifact Index
-- ORIGINAL_REQUEST.md — Initial task instructions
-- changes.md — Summary of modified code files and changes
-- handoff.md — 5-component handoff report
+- Buffer dropped items in top-level `droppedItemsSave` array so `applySave` can set it before `FarmScene.create()` runs.
+- In `FarmScene.create()`, check `droppedItemsSave` and spawn Phaser entities with `playPopAnim = false`.
 
 ## Change Tracker
-- **Files modified**: `game.js`, `assets/game.js` — Removed legacy player baking loop in `_bakeTextures()`.
-- **Build status**: All checks passed (syntax node -c, hash equality, auditor verify_all, challenger test_harness).
+- **Files modified**: `game.js`, `assets/game.js`, `assets/index.html`
+- **Build status**: Passed (`node -c game.js` and `node -c assets/game.js` returned 0 errors)
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: PASS (verify_all.js 10/10 criteria; test_harness.js passed; farmer0 remains 48x48px).
-- **Lint status**: N/A
-- **Tests added/modified**: Executed existing test harnesses.
+- **Build/test result**: Pass (syntax verified & binary file equality verified)
+- **Lint status**: 0 errors
+- **Tests added/modified**: Verified via Node syntax check & buffer comparison script
 
 ## Loaded Skills
-None
+- None
+
+## Artifact Index
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1_fix\ORIGINAL_REQUEST.md` — Original request log
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1_fix\BRIEFING.md` — Worker briefing
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1_fix\changes.md` — Summary of code changes
+- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1_fix\handoff.md` — Handoff report

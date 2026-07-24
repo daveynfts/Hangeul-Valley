@@ -1,34 +1,36 @@
-# BRIEFING — 2026-07-24T12:45:00Z
+# BRIEFING — 2026-07-24T13:18:40Z
 
 ## Mission
-Investigate action frames, tool sprites, legacy aliases, player scale, shadow rendering, depth sorting, collision hitboxes, and file sync requirements for Industrial Yellow Farmer Pixel Robot Replacement (Milestone 1).
+Investigate UI/UX, Keybindings, HUD & Save System (R1) for Milestone 1 (Inventory Storage System & Ground Drop Pipeline).
 
 ## 🔒 My Identity
-- Archetype: Explorer
-- Roles: Explorer 3
+- Archetype: Teamwork Explorer
+- Roles: Explorer 3 (UI/UX, Keybindings, HUD & Save System)
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3
-- Original parent: 61273c20-169f-4f19-afce-70f9dfa80106
-- Milestone: Milestone 1: Industrial Yellow Farmer Pixel Robot Replacement
+- Original parent: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Milestone: Milestone 1
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT implement code changes in project source files directly.
-- CODE_ONLY network mode.
+- Read-only investigation — do NOT implement code in game source files
+- Write output to analysis.md, progress.md, handoff.md in working directory
+- Send detailed report message back to orchestrator
 
 ## Current Parent
-- Conversation ID: 61273c20-169f-4f19-afce-70f9dfa80106
-- Updated: 2026-07-24T12:45:00Z
+- Conversation ID: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Updated: 2026-07-24T13:18:40Z
 
 ## Investigation State
-- **Explored paths**: `game.js`, `assets/game.js`, `PROJECT.md`, `teamwork_preview_explorer_m1_1/analysis.md`, `teamwork_preview_explorer_m1_2/analysis.md`
-- **Key findings**: Complete line-by-line mapping of action frames (1615–1778), tool sprites (1781–1834), legacy aliases `farmer0..3` (1864–1867), tool action logic in `FarmScene` (8156–8212), player scale 1.8x, shadow rendering (DynamicShadowSystem 58x18, offset 32), y-sort baseline (y + 43.2), hitbox (24x16, offset 12, 32), and byte sync requirements between `game.js` and `assets/game.js`.
-- **Unexplored areas**: None.
+- **Explored paths**: `index.html`, `assets/index.html`, `game.js`, `assets/game.js`, `.agents/orchestrator/PROJECT.md`, `.agents/ORIGINAL_REQUEST.md`
+- **Key findings**: Designed complete HTML/CSS modal layout for Inventory UI (`#inventory-overlay`), slot grid, capacity counter, gold capacity expansion (`+5 slots for 50 gold`), HUD Bag button integration in `#hud-actions-group`, keyboard shortcut handling ('I'/'E' toggle with input focus guards), and persistence payload in `collectSave()` / `applySave()`.
+- **Unexplored areas**: None for R1 focus scope.
 
 ## Key Decisions Made
-- Prepared action frame specification, tool sprite redesign, legacy alias mapping, physical rendering mechanics report (`analysis.md`), and handoff document (`handoff.md`).
+- Selected modal overlay architecture conforming to existing `.glass-modal` & `setModalState()` patterns.
+- Binds both 'I' and 'E' key shortcuts with active input focus guards (`INPUT`, `TEXTAREA`).
+- Designed backwards-compatible `inventoryState` schema adding `maxSlots: 20`.
 
 ## Artifact Index
-- ORIGINAL_REQUEST.md — Original request instructions
-- BRIEFING.md — Working state briefing
-- progress.md — Heartbeat progress
-- analysis.md — Technical analysis report
-- handoff.md — Handoff report
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\ORIGINAL_REQUEST.md` — Initial request
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md` — Technical analysis & design
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\handoff.md` — Handoff report
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\progress.md` — Progress tracker

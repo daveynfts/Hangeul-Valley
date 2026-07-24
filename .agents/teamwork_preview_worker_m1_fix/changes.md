@@ -1,23 +1,27 @@
-# Summary of Changes
+# Changes Summary — Milestone 1 Fix (Ground Drop Persistence)
 
-## Target Files
-- `d:\Hangeul Valley\game.js`
-- `d:\Hangeul Valley\assets\game.js`
+## Summary of Fixes
+Fixed defect where ground dropped items saved in `collectSave()` were lost on initial game boot or scene restart.
 
-## Modifications
-1. Removed obsolete procedural player texture baking loop in `FarmScene._bakeTextures()` (formerly lines 7586-7617):
-```javascript
-    // Player (4 walk frames)
-    for(let fr=0; fr<4; fr++){
-      const gp=mk();
-      ...
-      gp.generateTexture('farmer'+fr,14*PS,25*PS); gp.destroy();
-    }
-```
-2. By removing this block, the legacy texture aliases `farmer0`, `farmer1`, `farmer2`, and `farmer3` created during `PixelArtRenderer._genPlayerTextures` are no longer overwritten by 14x25 procedural graphics at runtime, maintaining their 48x48px Stardew Valley-inspired player textures (matching `player_walk_down_0`, `player_walk_down_1`, `player_walk_down_2`).
+## Modified Files
+- `game.js`
+- `assets/game.js` (mirrored copy)
+- `assets/index.html` (mirrored copy)
+
+## Detailed Changes in `game.js`
+1. **Declared Global Save Buffer**: Added top-level `let droppedItemsSave = [];` near `plotSave` (line 3750) to buffer saved ground dropped items.
+2. **Updated `collectSave()`**: Synced `droppedItemsSave = drops` when `collectSave()` executes so the buffer always retains the latest state.
+3. **Updated `applySave(d)`**:
+   - Stores `migrated.droppedItems` into `droppedItemsSave`.
+   - If `sceneRef` is active, calls `sceneRef.clearAllDroppedItems()` and recreates items immediately.
+   - If `sceneRef` is null (e.g. during cold boot load), keeps `droppedItemsSave` buffered for scene creation.
+4. **Updated `FarmScene.create()`**:
+   - When scene is created, checks `if (droppedItemsSave && droppedItemsSave.length > 0)` and restores each saved item via `this.spawnDroppedItem(drop.itemId || drop.nameKo, drop.x, drop.y, false)`.
+5. **Asset Synchronization**:
+   - Copied `game.js` to `assets/game.js`.
+   - Copied `index.html` to `assets/index.html`.
 
 ## Verification Results
-- **Syntax Check**: `node -c game.js` and `node -c assets/game.js` both passed with 0 errors.
-- **File Synchronization**: `game.js` and `assets/game.js` SHA256 hashes match identically (`7B1AFC34D059F2E8DB6D554B949809F6C2EEF016819a3d34b7716e5c2fa68CEF`).
-- **Auditor Test Harness**: `verify_all.js` passed all 10 criteria.
-- **Challenger Test Harness**: `test_harness.js` confirmed no `farmer` texture overwrites occur in `_bakeTextures()`. `farmer0` remains 48x48px.
+- `node -c game.js`: Passed (0 errors).
+- `node -c assets/game.js`: Passed (0 errors).
+- File match test (`Buffer.equals`): `game.js` <-> `assets/game.js` (true), `index.html` <-> `assets/index.html` (true).

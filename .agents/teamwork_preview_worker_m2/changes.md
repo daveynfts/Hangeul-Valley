@@ -1,66 +1,63 @@
-# M2 Pet Companion System Removal — Changes Documentation
+# Code Changes Report - Milestone 2 (Cooking System)
 
-## Executive Summary
-All elements of the Pet Companion System (반려동물) have been completely removed from `game.js`, `assets/game.js`, `index.html`, and `assets/index.html` in accordance with the blueprint mapped in `analysis.md`. All dictionary entries in `VOCAB_FACTS` (such as "civil petitioner" and "civil petition") were strictly preserved.
+## 1. Files Modified
+- `game.js`
+- `index.html`
+- `assets/game.js` (Synchronized copy of `game.js`)
+- `assets/index.html` (Synchronized copy of `index.html`)
 
----
+## 2. Detailed Summary of Changes
 
-## Files Modified
-1. `game.js`
-2. `assets/game.js` (Synchronized 1:1 copy of `game.js`)
-3. `index.html`
-4. `assets/index.html` (Synchronized 1:1 copy of `index.html`)
+### `game.js` & `assets/game.js`
+1. **Added Crops to `ITEM_DB`**:
+   - Added `'감자'` (`potato`), `'옥수수'` (`corn`), and `'딸기'` (`strawberry`) to `ITEM_DB` for crop ingredient mapping.
 
----
+2. **Defined `COOKING_RECIPES` (10 Authentic Korean Dishes)**:
+   - Defined `COOKING_RECIPES` array with 10 tiered recipes:
+     - `kimchi` (Novice): Napa Cabbage 1, Chili 1, Garlic 1 | XP: 25, Gold: 30
+     - `radish_rice` (Novice): Rice 1, Radish 1 | XP: 20, Gold: 25
+     - `roasted_corn` (Novice): Corn 2 | XP: 20, Gold: 20
+     - `strawberry_jam` (Novice): Strawberry 2 | XP: 22, Gold: 25
+     - `gimbap` (Intermediate): Rice 1, Carrot 1, Radish 1 | XP: 40, Gold: 50
+     - `tteokbokki` (Intermediate): Rice 2, Chili 1, Green Onion 1 | XP: 45, Gold: 55
+     - `gamjajeon` (Advanced): Potato 2, Green Onion 1, Garlic 1 | XP: 65, Gold: 75
+     - `bibimbap` (Advanced): Rice 1, Cabbage 1, Carrot 1, Soybean 1 | XP: 75, Gold: 90
+     - `bulgogi` (Master): Green Onion 2, Garlic 2, Soybean 1 | XP: 95, Gold: 115
+     - `samgyetang` (Master): Rice 2, Garlic 2, Radish 1, Green Onion 1 | XP: 130, Gold: 160
 
-## Detailed Breakdown of Removals by Subsystem
+3. **Cooking Execution Engine (`cookRecipe`)**:
+   - `cookRecipe(recipeId)`: Validates input, resolves ingredient keys using `getItemInfo()`, checks owned ingredient amounts in `inventoryState.ingredients`, deducts ingredients using `removeItemFromInventory()`, awards Gold (`addCoins`) & Vocab XP (`addHonor`), updates dish counts in `cookingState` and `inventoryState.cookedDishes`, triggers audio feedback and UI refresh, and executes `checkCookingAchievements()`.
 
-### Subsystem 1: Pet Textures
-- Removed call `this._genPetTextures(scene);` from `TextureGenerator.generateAll()`.
-- Removed entire static method `static _genPetTextures(scene) { ... }` which generated pixel matrices and textures for `pet_shiba`, `pet_cat`, `pet_dragon`, `pet_slime`, `pet_fox`, and `pet_penguin`.
+4. **Cooking UI Modal Functions & Keyboard Shortcut ('C'/'c')**:
+   - Added `openCookingUI()`, `closeCookingUI()`, and `renderCookingGrid(selectId)`.
+   - Updated global keydown handler to support `'c'` / `'C'` hotkey with text focus guard checking `activeElement` (`INPUT`, `TEXTAREA`, `isContentEditable`).
+   - Added `overlayId === 'cooking-overlay'` to `closeModalById()` for Escape key handling.
+   - Bound cooking methods to `window`.
 
-### Subsystem 2: Pet State & Persistence
-- Removed `var petState` state variable definition.
-- Removed `data.pets` initialization from `migrateSaveData()`.
-- Removed `pets: petState` property from `collectSave()`.
-- Removed `if(migrated.pets) petState = migrated.pets;` assignment from `applySave()`.
+5. **Trophy & Achievement Integration**:
+   - Added Master Chef trophy (`id: 'master_chef'`, `name: 'Master Chef (요리 왕)'`, `icon: '👨‍🍳'`, `desc: 'Cook all 10 recipes at least once'`, `type: 'cooking'`, `reqRecipes: 10`, `cost: 0`) to `TROPHIES_DB`.
+   - Implemented `checkCookingAchievements()` to grant trophy when 100% (10/10) of recipes have been cooked.
+   - Updated `renderTrophies()` to properly render cooking progress badges and claim buttons.
 
-### Subsystem 3: Pet Movement & Companion Loop
-- Removed `_updatePetCompanion(dt)` method from `FarmScene`.
-- Removed `this._updatePetCompanion(dt);` tick call from `FarmScene.update()`.
+6. **Save State & Legacy Migration**:
+   - Declared top-level `var cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} }`.
+   - Updated `collectSave()` to persist `cooking: cookingState`.
+   - Updated `applySave()` to restore `cookingState` and run `checkCookingAchievements()`.
+   - Updated `migrateSaveData()` to populate `cookingState` from legacy `inventoryState.cookedDishes` if present.
 
-### Subsystem 4: Pet Passives & XP Hooks
-- Removed dog coin multiplier hook from `addCoins()`.
-- Removed hamster yield duplication and pet XP calls from `_harvestAppleTree()` and `_harvestPlot()`.
-- Removed pet XP addition call from `catchSuccess()`.
-- Removed pet XP addition call from `onMinigameComplete()`.
-- Removed `decayPetHappiness()` tick call from `buffHUDInterval`.
-- Removed `overlayId === 'pet-overlay'` check from `closeModalById()`.
+### `index.html` & `assets/index.html`
+1. **Added `#cooking-overlay` Glass Modal**:
+   - Includes glass header with title "KOREAN COOKING KITCHEN (요리)", `#cooking-progress-badge`, and close button.
+   - Pantry bar `#cooking-pantry-bar` displaying active crop ingredient stock summary.
+   - Grid layout containing `#cooking-recipe-list` (recipe cards) and `#cooking-detail-view` (selected recipe details: dish icon, nameKo/nameEn, description, green/red owned/needed ingredient badges, Cook action button, reward badges).
 
-### Subsystem 5: Pet Functions & UI Modals
-- Removed `PET_DB` array definition.
-- Removed pet utility functions: `isPetActive()`, `getPetPassiveMultiplier()`, `decayPetHappiness()`, and `addPetXP()`.
-- Removed pet window and interaction handlers: `openPetOverlay()`, `closePetOverlay()`, `adoptPet()`, `equipPet()`, `feedActivePet()`, and `startPetLevelUpQuiz()`.
-- Removed `#pet-overlay` HTML container, active card element, and roster container from `index.html`.
-- Removed `#pet-btn` HUD button from `index.html`.
-- Removed CSS styling rules for `.pet-roster-grid`, `.pet-card`, `.pet-card-avatar`, `.pet-card-name`, `.pet-card-level`, `.pet-card-passive`, `.pet-bar-bg`, `.pet-bar-fill-xp`, and `.pet-bar-fill-happy` from `index.html`.
+2. **Added HUD Action Button `#cooking-btn`**:
+   - Added `#cooking-btn` (`🍳 Cooking`) in `#hud-actions-group`.
 
-### Subsystem 6: Pet Leaderboard Tab
-- Removed `petsPct` property from all `LOCAL_RIVALS` entries and updated Ha-eun's title to `'Art Artisan 🎨'`.
-- Removed pet metrics computation (`petCollectionPct`) from `updateLeaderboardMetrics()`.
-- Removed `Pets Collected` line item from `openLeaderboard()` personal best grid.
-- Removed `petsPct` field from player entry in `switchLeaderboardTab()`.
-- Removed `pets` tab sorting branch (`tabId === 'pets'`), column header branch (`valColHeader = 'Pet Collection %'`), and row display branch from `switchLeaderboardTab()`.
-- Removed `#lbtab-pets` tab button from `index.html`.
+3. **Updated CSS Selectors**:
+   - Updated `#recipe-overlay, #cooking-overlay, #cooking-minigame-overlay, #cultural-fact-overlay` for modal display and transition.
 
----
-
-## Synchronization & Verification Results
-1. **Syntax Verification**:
-   - `node -c "d:\Hangeul Valley\game.js"`: PASSED (0 errors)
-   - `node -c "d:\Hangeul Valley\assets\game.js"`: PASSED (0 errors)
-2. **File Synchronization**:
-   - `game.js` <-> `assets/game.js`: 100% byte-for-byte identical (1,448,057 bytes).
-   - `index.html` <-> `assets/index.html`: 100% byte-for-byte identical (106,664 bytes).
-3. **Keyword Verification**:
-   - `petState`, `petSprite`, `petShadow`, `_updatePetCompanion`, `_genPetTextures`, `isPetActive`, `getPetPassiveMultiplier`, `addPetXP`, `decayPetHappiness`, `openPetOverlay`, `closePetOverlay`, `adoptPet`, `equipPet`, `feedActivePet`, `startPetLevelUpQuiz`, `PET_DB`, `petsPct`, `petCollectionPct`, `#pet-overlay`, `#pet-btn`, `#lbtab-pets`: 0 occurrences.
+## 3. Verification Logs
+- `node -c game.js`: Passed (0 errors)
+- `node -c assets/game.js`: Passed (0 errors)
+- Unit execution test in Node environment: All 4 verification stages passed successfully.

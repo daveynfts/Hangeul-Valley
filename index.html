@@ -84,6 +84,7 @@
     #memory-panel::before,
     #vff-inner::before,
     #cat-dialog-inner::before,
+    #inventory-panel::before,
     #levelup-card::before,
     #alldone-card::before {
       content: '';
@@ -104,7 +105,7 @@
     /* Content child elevated above scanlines */
     #quiz-ui > *, #vocab-panel > *, #shop-panel > *, #fish-album-panel > *,
     #trophy-panel > *, #duel-panel > *, #memory-panel > *, #vff-inner > *,
-    #cat-dialog-inner > *, #levelup-card > *, #alldone-card > * {
+    #cat-dialog-inner > *, #inventory-panel > *, #levelup-card > *, #alldone-card > * {
       position: relative;
       z-index: 2;
     }
@@ -116,6 +117,35 @@
     @keyframes pulseGold { 0%, 100% { box-shadow: 0 0 16px rgba(245,158,11,0.3); } 50% { box-shadow: 0 0 32px rgba(245,158,11,0.6); } }
     @keyframes pulseGreen { 0%, 100% { box-shadow: 0 0 16px rgba(74,222,128,0.3); } 50% { box-shadow: 0 0 32px rgba(74,222,128,0.6); } }
     @keyframes catBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+    /* ── INVENTORY STORAGE OVERLAY & SLOTS ───────────────────────────────── */
+    #inventory-overlay {
+      position: fixed; inset: 0; z-index: 870; display: none;
+      background: rgba(10, 15, 30, 0.88); backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      align-items: center; justify-content: center; animation: fadeIn .2s;
+    }
+    #inventory-overlay.visible { display: flex; }
+
+    .inv-slot {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1.5px solid rgba(56, 189, 248, 0.3);
+      border-radius: 12px; padding: 10px; text-align: center;
+      position: relative; transition: transform .15s, border-color .15s, box-shadow .15s;
+      cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100px;
+    }
+    .inv-slot:hover { transform: translateY(-2px); border-color: var(--neon-cyan); box-shadow: 0 0 14px rgba(56, 189, 248, 0.35); }
+    .inv-slot.empty { opacity: 0.4; border-style: dashed; border-color: rgba(255,255,255,0.15); cursor: default; }
+    .inv-slot.empty:hover { transform: none; box-shadow: none; }
+    .inv-slot-icon { font-size: 32px; line-height: 1; margin-bottom: 4px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
+    .inv-slot-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: bold; color: #fff; line-height: 1.2; }
+    .inv-slot-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; color: var(--neon-cyan); margin-top: 2px; }
+    .inv-qty-badge {
+      position: absolute; top: 6px; right: 6px;
+      background: rgba(245, 158, 11, 0.95); color: #0f172a;
+      font-family: 'Press Start 2P', monospace; font-size: 9px; font-weight: bold;
+      padding: 2px 6px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    }
 
     /* ── LEVEL SELECT OVERLAY ────────────────────────────────────────────── */
     #level-select-overlay {
@@ -1166,13 +1196,13 @@
       text-align: center; position: relative;
     }
     /* ── R3 CRAFTING/COOKING OVERLAYS ──────────────────────────────── */
-    #recipe-overlay, #cooking-minigame-overlay, #cultural-fact-overlay {
+    #recipe-overlay, #cooking-overlay, #cooking-minigame-overlay, #cultural-fact-overlay {
       position: fixed; inset: 0; z-index: 890; display: none;
       background: rgba(10, 15, 30, 0.88); backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       align-items: center; justify-content: center; animation: fadeIn .2s;
     }
-    #recipe-overlay.visible, #cooking-minigame-overlay.visible, #cultural-fact-overlay.visible {
+    #recipe-overlay.visible, #cooking-overlay.visible, #cooking-minigame-overlay.visible, #cultural-fact-overlay.visible {
       display: flex;
     }
     .recipe-grid {
@@ -1300,7 +1330,9 @@
       <button class="hud-btn" id="vocab-btn" title="Vocabulary Book">📖 Vocab</button>
       <button class="hud-btn" id="shop-btn" title="Seed shop">🏪 Shop</button>
       <button class="hud-btn" id="quest-btn" title="Quest Log" onclick="openQuestOverlay()">📜 Quests</button>
-      <button class="hud-btn" id="recipe-btn" title="Recipe Book (요리책)" onclick="openRecipeBook()">🍳 Cook</button>
+      <button class="hud-btn" id="cooking-btn" title="Cooking Kitchen (요리) [Key: C]" onclick="openCookingUI()">🍳 Cooking</button>
+      <button class="hud-btn" id="recipe-btn" title="Recipe Book (요리책)" onclick="openRecipeBook()">📖 Recipes</button>
+      <button class="hud-btn" id="inventory-btn" title="Inventory Storage (🎒) [Key: I/E]" onclick="openInventoryUI()">🎒 Bag</button>
       <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
       <button class="hud-btn" id="hud-more-btn" title="More Features" onclick="toggleHudOverflow(event)">➕ More</button>
       <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level Menu">☰ Menu</button>
@@ -1821,6 +1853,85 @@
       <!-- Leaderboard Table -->
       <div id="lb-table-container">
         <!-- Rendered by JS -->
+      </div>
+    </div>
+  <!-- ══════════════ COOKING KITCHEN (요리) OVERLAY ══════════════ -->
+  <div id="cooking-overlay">
+    <div id="cooking-panel" class="glass-modal" style="max-width:840px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
+      <!-- Modal Header -->
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(245,158,11,0.3); padding-bottom:14px; margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:32px">🍳</span>
+          <div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:var(--neon-gold)">KOREAN COOKING KITCHEN (요리)</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Cook authentic Korean dishes, earn Gold & Vocab XP!</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <span id="cooking-progress-badge" style="font-family:'Press Start 2P',monospace; font-size:11px; background:rgba(245,158,11,0.15); border:1px solid var(--neon-gold); color:var(--neon-gold); padding:4px 10px; border-radius:8px;">Cooked: 0 / 10</span>
+          <button onclick="closeCookingUI()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+        </div>
+      </div>
+
+      <!-- Pantry Stock Summary Bar -->
+      <div id="cooking-pantry-bar" style="background:rgba(30,41,59,0.7); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold)">🧺 My Pantry Stock (재료):</div>
+        <div id="cooking-pantry-list" style="display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:#cbd5e1;"></div>
+      </div>
+
+      <!-- Recipe List + Detail View Layout -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;" id="cooking-main-layout">
+        <!-- Recipe Cards List -->
+        <div>
+          <div style="font-family:'Press Start 2P',monospace; font-size:11px; color:var(--neon-gold); margin-bottom:8px">📜 Select Recipe:</div>
+          <div id="cooking-recipe-list" class="recipe-grid" style="display:grid; grid-template-columns:1fr; gap:10px; max-height:480px; overflow-y:auto; padding-right:4px;">
+            <!-- Dynamic Recipe Cards rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Selected Recipe Detail View -->
+        <div>
+          <div style="font-family:'Press Start 2P',monospace; font-size:11px; color:var(--neon-gold); margin-bottom:8px">🍳 Recipe Details:</div>
+          <div id="cooking-detail-view" style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-gold); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:12px; min-height:300px;">
+            <!-- Selected dish details rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════ INVENTORY STORAGE OVERLAY ══════════════ -->
+  <div id="inventory-overlay">
+    <div id="inventory-panel" class="glass-modal" style="max-width:760px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
+      <!-- Header -->
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(56,189,248,0.4); padding-bottom:14px; margin-bottom:16px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:32px">🎒</span>
+          <div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:var(--neon-cyan)">INVENTORY STORAGE (가방)</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Manage harvested crops & cooked dishes</div>
+          </div>
+        </div>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <span id="inv-capacity-badge" style="font-family:'Press Start 2P',monospace; font-size:11px; background:rgba(56,189,248,0.15); border:1px solid var(--neon-cyan); color:var(--neon-cyan); padding:4px 10px; border-radius:8px;">0 / 20 slots</span>
+          <button onclick="closeInventoryUI()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+        </div>
+      </div>
+
+      <!-- Capacity Info & Expansion Control -->
+      <div style="background:rgba(30,41,59,0.7); border:1px solid rgba(56,189,248,0.3); border-radius:12px; padding:12px 16px; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+        <div style="font-size:13px; color:#cbd5e1; font-family:'Be Vietnam Pro',sans-serif;">
+          Storage Limit: <strong id="inv-capacity-text" style="color:var(--neon-gold);">20 slots</strong> (Items stack automatically)
+        </div>
+        <button class="hud-btn" id="inv-expand-btn" onclick="expandInventoryCapacity()" style="padding:6px 14px; font-size:10px;">
+          ➕ Expand (+5 slots for 50 🪙)
+        </button>
+      </div>
+
+      <!-- Slot Grid Container -->
+      <div id="inventory-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:12px;">
+        <!-- Rendered dynamically by renderInventoryGrid() -->
       </div>
     </div>
   </div>

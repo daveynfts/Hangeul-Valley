@@ -20,4 +20,21 @@ Key Requirements & Acceptance Criteria to Audit:
    - `node -c game.js` and `node -c assets/game.js` pass with 0 syntax errors.
    - SHA256 byte synchronization verified between `game.js` and `assets/game.js`.
 
-Please conduct your independent audit, run all tests independently, create `audit_report.md` and `handoff.md` in `d:\Hangeul Valley\.agents\victory_auditor`, and report back with your final verdict (`VICTORY CONFIRMED` or `VICTORY REJECTED`).
+## 2026-07-24T13:48:08Z
+You are the Victory Auditor for Hangeul Valley.
+Your working directory for metadata is `d:\Hangeul Valley\.agents\victory_auditor`.
+The project root directory is `d:\Hangeul Valley`.
+
+Read `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md` for the verbatim requirements and acceptance criteria.
+
+Perform a rigorous 3-phase victory audit:
+Phase 1: Timeline & File Modification Audit.
+Phase 2: Cheating & Stub Detection Audit (verify no mock/fake/hardcoded stubs or disabled logic).
+Phase 3: Independent Test & Integrity Execution Audit.
+- Test `node -c game.js` and `node -c assets/game.js` (must pass 0 errors).
+- Verify SHA256 byte synchronization between `game.js` <-> `assets/game.js` and `index.html` <-> `assets/index.html`.
+- Independently verify R1 Storage/Inventory system (slots capacity, gold expansion, stacking, HUD button, 'I'/'E' hotkeys, save/load persistence).
+- Independently verify R2 Harvest Ground Drop Pipeline (crop harvest spawns dropped item sprite with bounce/glow animation, magnetic pickup, full-inventory notification, item stays on ground if full).
+- Independently verify R3 Cooking System with Recipes (10 recipes of increasing difficulty, Cooking UI, owned vs needed counts, ingredient deduction, XP & Gold rewards, Master Chef trophy unlock, save/load persistence).
+
+Write your structured audit report to `d:\Hangeul Valley\.agents\victory_auditor\audit_report.md` and deliver your final verdict: `VICTORY CONFIRMED` or `VICTORY REJECTED`.

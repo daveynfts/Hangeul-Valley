@@ -3748,6 +3748,7 @@ const SR2 = 90*1000;   // P2 sprout   → P3 ripe:  90 giây
 // Plot sState codes: ''=empty '1'=seedling '2'=wilting '3'=sprout '4'=ripe
 let srsData  = {}; // { ko: { p2At, p3At, harvests } }
 let plotSave = []; // [{ i, ko, sState, plantedAt }]
+let droppedItemsSave = []; // [{ itemId, nameKo, x, y }] persisted ground drops buffer
 
 // ── Unified File-Based Save (pywebview API → file, localStorage as backup) ─────
 let fishAlbumSave = {}; // { ko: count }
@@ -3757,18 +3758,134 @@ var playerCurrencies = { coins: 85, gems: 10, honor: 0 };
 var gold = 85; // kept in sync for 100% backward compatibility
 var quizStreak = 0; // consecutive correct quiz streak
 
+var ITEM_DB = {
+  '배추': { id: 'cabbage', name: 'Napa Cabbage', nameKo: '배추', icon: '🥬', description: 'Fresh Napa cabbage harvested from the plot.' },
+  '무': { id: 'radish', name: 'Korean Radish', nameKo: '무', icon: '🥔', description: 'Crunchy white Korean radish.' },
+  '파': { id: 'green_onion', name: 'Green Onion', nameKo: '파', icon: '🌱', description: 'Fragrant green onions.' },
+  '고추': { id: 'chili', name: 'Chili Pepper', nameKo: '고추', icon: '🌶️', description: 'Spicy red chili pepper.' },
+  '마늘': { id: 'garlic', name: 'Garlic', nameKo: '마늘', icon: '🧄', description: 'Pungent garlic cloves.' },
+  '쌀': { id: 'rice', name: 'Rice', nameKo: '쌀', icon: '🌾', description: 'Staple Korean white rice.' },
+  '콩': { id: 'soybean', name: 'Soybean', nameKo: '콩', icon: '🫘', description: 'Nutritious yellow soybeans.' },
+  '당근': { id: 'carrot', name: 'Carrot', nameKo: '당근', icon: '🥕', description: 'Sweet orange carrot.' },
+  '감자': { id: 'potato', name: 'Potato', nameKo: '감자', icon: '🥔', description: 'Fresh farm potato.' },
+  '옥수수': { id: 'corn', name: 'Corn', nameKo: '옥수수', icon: '🌽', description: 'Sweet farm corn on the cob.' },
+  '딸기': { id: 'strawberry', name: 'Strawberry', nameKo: '딸기', icon: '🍓', description: 'Sweet garden strawberry.' },
+  '사과': { id: 'apple', name: 'Apple', nameKo: '사과', icon: '🍎', description: 'Crisp Orchard Apple.' },
+  '연어': { id: 'salmon', name: 'Salmon', nameKo: '연어', icon: '🐟', description: 'Fresh river salmon.' },
+  '고등어': { id: 'mackerel', name: 'Mackerel', nameKo: '고등어', icon: '🐟', description: 'Flavorful ocean mackerel.' },
+  '오징어': { id: 'squid', name: 'Squid', nameKo: '오징어', icon: '🦑', description: 'Tender ocean squid.' },
+  '잉어': { id: 'carp', name: 'Carp', nameKo: '잉어', icon: '🐟', description: 'Crystal pond carp.' },
+  '새우': { id: 'shrimp', name: 'Shrimp', nameKo: '새우', icon: '🦐', description: 'Fresh sea shrimp.' },
+  '문어': { id: 'octopus', name: 'Octopus', nameKo: '문어', icon: '🐙', description: 'Giant sea octopus.' },
+  '조개': { id: 'clam', name: 'Clam', nameKo: '조개', icon: '🦪', description: 'Fresh shore clam.' },
+  '황금물고기': { id: 'golden_fish', name: 'Golden Fish', nameKo: '황금물고기', icon: '🐠', description: 'Rare golden fish.' }
+};
+
+function getItemInfo(keyOrId) {
+  if (!keyOrId) return { key: 'unknown', id: 'unknown', name: 'Item', nameKo: '아이템', icon: '📦', description: 'Unknown Item' };
+  if (ITEM_DB[keyOrId]) return { key: keyOrId, ...ITEM_DB[keyOrId] };
+  for (const [k, val] of Object.entries(ITEM_DB)) {
+    if (val.id === keyOrId) return { key: k, ...val };
+  }
+  return { key: keyOrId, id: keyOrId, name: keyOrId, nameKo: keyOrId, icon: '📦', description: keyOrId };
+}
+
 var inventoryState = {
+  maxSlots: 20,
   ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 },
   seeds: {},
   scrolls: 0,
   cookedDishes: {}
 };
+
+function getUsedInventorySlots() {
+  if (!inventoryState) return 0;
+  inventoryState.ingredients = inventoryState.ingredients || {};
+  inventoryState.cookedDishes = inventoryState.cookedDishes || {};
+  inventoryState.seeds = inventoryState.seeds || {};
+
+  let count = 0;
+  for (const k in inventoryState.ingredients) {
+    if (inventoryState.ingredients[k] > 0) count++;
+  }
+  for (const k in inventoryState.cookedDishes) {
+    if (inventoryState.cookedDishes[k] > 0) count++;
+  }
+  for (const k in inventoryState.seeds) {
+    if (inventoryState.seeds[k] > 0) count++;
+  }
+  return count;
+}
+
+function addItemToInventory(itemId, qty = 1) {
+  if (!itemId || qty <= 0) return false;
+  inventoryState = inventoryState || {};
+  inventoryState.ingredients = inventoryState.ingredients || {};
+  inventoryState.maxSlots = typeof inventoryState.maxSlots === 'number' ? inventoryState.maxSlots : 20;
+
+  const info = getItemInfo(itemId);
+  const key = info.key;
+
+  // Stacking within existing slot
+  if (typeof inventoryState.ingredients[key] !== 'undefined' && inventoryState.ingredients[key] > 0) {
+    inventoryState.ingredients[key] += qty;
+    if (typeof persistSave === 'function') persistSave();
+    return true;
+  }
+
+  // Capacity check for new slot
+  if (getUsedInventorySlots() >= inventoryState.maxSlots) {
+    return false;
+  }
+
+  inventoryState.ingredients[key] = (inventoryState.ingredients[key] || 0) + qty;
+  if (typeof persistSave === 'function') persistSave();
+  return true;
+}
+
+function removeItemFromInventory(itemId, qty = 1) {
+  if (!itemId || qty <= 0) return false;
+  inventoryState = inventoryState || {};
+  inventoryState.ingredients = inventoryState.ingredients || {};
+
+  const info = getItemInfo(itemId);
+  const key = info.key;
+
+  if (!inventoryState.ingredients[key] || inventoryState.ingredients[key] < qty) {
+    return false;
+  }
+
+  inventoryState.ingredients[key] -= qty;
+  if (inventoryState.ingredients[key] <= 0) {
+    delete inventoryState.ingredients[key];
+  }
+  if (typeof persistSave === 'function') persistSave();
+  return true;
+}
+
+function expandInventoryCapacity() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  const cost = 50;
+  inventoryState = inventoryState || {};
+  inventoryState.maxSlots = typeof inventoryState.maxSlots === 'number' ? inventoryState.maxSlots : 20;
+  if (!spendCoins(cost)) {
+    if (typeof showToast === 'function') showToast(`Need ${cost} Coins 🪙 to expand inventory capacity!`);
+    return false;
+  }
+  inventoryState.maxSlots += 5;
+  if (typeof persistSave === 'function') persistSave();
+  if (typeof renderInventoryGrid === 'function') renderInventoryGrid();
+  if (typeof showToast === 'function') showToast(`🎒 Capacity expanded +5 slots! Total: ${inventoryState.maxSlots} slots.`);
+  return true;
+}
+
 var recipeState = {
   unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap']
 };
 var activeBuffs = {};
 let seasonalState = { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, claimedRewards: [] };
 let leaderboardState = { personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 } };
+var cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
 
 function syncGoldAlias() {
   gold = playerCurrencies.coins;
@@ -3795,15 +3912,40 @@ function migrateSaveData(d) {
       lastDailyReset: 0,
       lastWeeklyReset: 0
     };
-    data.inventory = data.inventory || { ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 }, seeds: {}, scrolls: 0, cookedDishes: {} };
+    data.inventory = data.inventory || { maxSlots: 20, ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 }, seeds: {}, scrolls: 0, cookedDishes: {} };
+    data.inventory.maxSlots = typeof data.inventory.maxSlots === 'number' ? data.inventory.maxSlots : 20;
     data.recipes = data.recipes || { unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap'] };
     data.activeBuffs = data.activeBuffs || {};
     data.seasonal = data.seasonal || { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, claimedRewards: [] };
     data.leaderboards = data.leaderboards || {
       personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 }
     };
+    data.droppedItems = Array.isArray(data.droppedItems) ? data.droppedItems : [];
     data.v = 4;
   }
+  if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
+    data.inventory.maxSlots = 20;
+  }
+
+  // Ensure data.cooking object exists and populate from inventory.cookedDishes if legacy save
+  data.cooking = data.cooking || { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
+  data.cooking.cookedRecipes = Array.isArray(data.cooking.cookedRecipes) ? data.cooking.cookedRecipes : [];
+  data.cooking.recipeStats = (typeof data.cooking.recipeStats === 'object' && data.cooking.recipeStats !== null) ? data.cooking.recipeStats : {};
+  data.cooking.totalDishesCooked = typeof data.cooking.totalDishesCooked === 'number' ? data.cooking.totalDishesCooked : 0;
+
+  if (data.inventory && data.inventory.cookedDishes && data.cooking.cookedRecipes.length === 0) {
+    const cookedKeys = Object.keys(data.inventory.cookedDishes).filter(k => data.inventory.cookedDishes[k] > 0);
+    if (cookedKeys.length > 0) {
+      data.cooking.cookedRecipes = cookedKeys;
+      data.cooking.recipeStats = { ...data.inventory.cookedDishes };
+      let sum = 0;
+      for (const val of Object.values(data.inventory.cookedDishes)) {
+        sum += (typeof val === 'number' ? val : 0);
+      }
+      data.cooking.totalDishesCooked = sum;
+    }
+  }
+
   return data;
 }
 
@@ -3817,6 +3959,10 @@ function collectSave(){
   const apple = (sceneRef && typeof sceneRef.appleRipeAt !== 'undefined')
     ? { ripeAt: sceneRef.appleRipeAt, ripe: sceneRef.appleRipe }
     : appleTreeSave;
+  const drops = (sceneRef && Array.isArray(sceneRef.droppedItems))
+    ? sceneRef.droppedItems.map(item => ({ itemId: item.itemId, nameKo: item.nameKo, x: item.curX, y: item.curY }))
+    : droppedItemsSave;
+  droppedItemsSave = drops;
   return {
     v: 4,
     currencies: playerCurrencies,
@@ -3834,7 +3980,9 @@ function collectSave(){
     recipes: recipeState,
     activeBuffs: activeBuffs,
     seasonal: seasonalState,
-    leaderboards: leaderboardState
+    leaderboards: leaderboardState,
+    droppedItems: drops,
+    cooking: cookingState
   };
 }
 
@@ -3856,14 +4004,34 @@ function applySave(d){
   if(migrated.apple) appleTreeSave = migrated.apple;
   if(migrated.fishAlbum) fishAlbumSave = migrated.fishAlbum;
   if(migrated.quests) questState = migrated.quests;
-  if(migrated.inventory) inventoryState = migrated.inventory;
+  if(migrated.inventory) {
+    inventoryState = migrated.inventory;
+    inventoryState.maxSlots = typeof inventoryState.maxSlots === 'number' ? inventoryState.maxSlots : 20;
+  }
   if(migrated.recipes) recipeState = migrated.recipes;
   if(migrated.activeBuffs) activeBuffs = migrated.activeBuffs;
   if(migrated.seasonal) seasonalState = migrated.seasonal;
   if(migrated.leaderboards) leaderboardState = migrated.leaderboards;
+  if(Array.isArray(migrated.droppedItems)) {
+    droppedItemsSave = migrated.droppedItems;
+    if(sceneRef) {
+      sceneRef.clearAllDroppedItems();
+      droppedItemsSave.forEach(drop => sceneRef.spawnDroppedItem(drop.itemId || drop.nameKo, drop.x, drop.y, false));
+    }
+  }
+  if(migrated.cooking) {
+    cookingState = {
+      cookedRecipes: Array.isArray(migrated.cooking.cookedRecipes) ? migrated.cooking.cookedRecipes : [],
+      totalDishesCooked: typeof migrated.cooking.totalDishesCooked === 'number' ? migrated.cooking.totalDishesCooked : 0,
+      recipeStats: (typeof migrated.cooking.recipeStats === 'object' && migrated.cooking.recipeStats !== null) ? migrated.cooking.recipeStats : {}
+    };
+  } else {
+    cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
+  }
 
   initQuestState();
   updateCurrencyHUD();
+  if (typeof checkCookingAchievements === 'function') checkCookingAchievements();
   return true;
 }
 
@@ -3901,8 +4069,8 @@ function getSrs(ko){ return srsData[ko]||{}; }
 function setSrs(ko,u){ srsData[ko]={...getSrs(ko),...u}; saveSRS(); }
 
 // ═══════════════ ECONOMY STATE & CURRENCY HELPERS ════════════════════════════
-let unlockedLevels = [0];  // Level indices the player has bought
-let unlockedTrophies = []; // IDs of the trophies the player has bought
+var unlockedLevels = [0];  // Level indices the player has bought
+var unlockedTrophies = []; // IDs of the trophies the player has bought
 const harvestCounts = new Map(); // word.ko → how many times harvested
 
 function addCoins(amount) {
@@ -4705,7 +4873,9 @@ function closeTopModal() {
 }
 
 function closeModalById(overlayId) {
-  if (overlayId === 'fish-album-overlay') window.closeFishAlbum();
+  if (overlayId === 'inventory-overlay') window.closeInventoryUI();
+  else if (overlayId === 'cooking-overlay') window.closeCookingUI();
+  else if (overlayId === 'fish-album-overlay') window.closeFishAlbum();
   else if (overlayId === 'recipe-overlay') window.closeRecipeBook();
   else if (overlayId === 'seasonal-overlay') window.closeSeasonalOverlay();
   else if (overlayId === 'leaderboard-overlay') window.closeLeaderboard();
@@ -4719,10 +4889,147 @@ function closeModalById(overlayId) {
 
 if (typeof window !== 'undefined' && window.addEventListener) {
   window.addEventListener('keydown', (e) => {
+    const activeEl = document.activeElement;
+    const isInputFocused = activeEl && (
+      activeEl.tagName === 'INPUT' ||
+      activeEl.tagName === 'TEXTAREA' ||
+      activeEl.isContentEditable
+    );
+
     if (e.key === 'Escape' && activeModalStack.length > 0) {
       closeTopModal();
+      return;
+    }
+
+    if (!isInputFocused) {
+      if (e.key === 'i' || e.key === 'I' || e.key === 'e' || e.key === 'E') {
+        if (activeModalStack.length > 0 && activeModalStack[activeModalStack.length - 1] === 'inventory-overlay') {
+          window.closeInventoryUI();
+        } else if (activeModalStack.length === 0) {
+          window.openInventoryUI();
+        }
+      }
+      if (e.key === 'c' || e.key === 'C') {
+        if (activeModalStack.length > 0 && activeModalStack[activeModalStack.length - 1] === 'cooking-overlay') {
+          window.closeCookingUI();
+        } else if (activeModalStack.length === 0) {
+          window.openCookingUI();
+        }
+      }
     }
   });
+}
+
+function openInventoryUI() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderInventoryGrid();
+  setModalState('inventory-overlay', true);
+}
+
+function closeInventoryUI() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  setModalState('inventory-overlay', false);
+}
+
+function renderInventoryGrid() {
+  const grid = document.getElementById('inventory-grid');
+  const badge = document.getElementById('inv-capacity-badge');
+  const capText = document.getElementById('inv-capacity-text');
+
+  inventoryState = inventoryState || {};
+  const maxSlots = typeof inventoryState.maxSlots === 'number' ? inventoryState.maxSlots : 20;
+  inventoryState.maxSlots = maxSlots;
+  const usedSlots = getUsedInventorySlots();
+
+  if (badge) badge.textContent = `${usedSlots} / ${maxSlots} slots`;
+  if (capText) capText.textContent = `${maxSlots} slots`;
+
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const items = [];
+
+  // 1. Ingredients
+  if (inventoryState.ingredients) {
+    for (const [nameKo, qty] of Object.entries(inventoryState.ingredients)) {
+      if (qty > 0) {
+        const info = getItemInfo(nameKo);
+        items.push({
+          itemId: info.id || nameKo,
+          name: info.name || nameKo,
+          nameKo: info.nameKo || nameKo,
+          qty: qty,
+          icon: info.icon || '🥬',
+          description: info.description || 'Harvested crop / ingredient'
+        });
+      }
+    }
+  }
+
+  // 2. Cooked Dishes
+  if (inventoryState.cookedDishes) {
+    for (const [recipeId, qty] of Object.entries(inventoryState.cookedDishes)) {
+      if (qty > 0) {
+        let nameKo = recipeId;
+        let nameEn = recipeId;
+        let icon = '🍱';
+        if (typeof COOKING_RECIPES !== 'undefined' && Array.isArray(COOKING_RECIPES)) {
+          const rec = COOKING_RECIPES.find(r => r.id === recipeId);
+          if (rec) {
+            nameKo = rec.name;
+            nameEn = rec.enName || rec.name;
+            icon = rec.icon || '🍱';
+          }
+        }
+        items.push({
+          itemId: recipeId,
+          name: nameEn,
+          nameKo: nameKo,
+          qty: qty,
+          icon: icon,
+          description: 'Delicious cooked dish'
+        });
+      }
+    }
+  }
+
+  // Render slots up to maxSlots
+  for (let i = 0; i < maxSlots; i++) {
+    const slotEl = document.createElement('div');
+    if (i < items.length) {
+      const item = items[i];
+      slotEl.className = 'inv-slot';
+      slotEl.title = `${item.nameKo} (${item.name}): ${item.description}`;
+      slotEl.innerHTML = `
+        <div class="inv-qty-badge">x${item.qty}</div>
+        <div class="inv-slot-icon">${item.icon}</div>
+        <div class="inv-slot-ko">${item.nameKo}</div>
+        <div class="inv-slot-en">${item.name}</div>
+      `;
+    } else {
+      slotEl.className = 'inv-slot empty';
+      slotEl.innerHTML = `
+        <div style="font-size:22px; opacity:0.3; margin-bottom:4px;">📦</div>
+        <div style="font-size:11px; color:rgba(255,255,255,0.3); font-family:'Press Start 2P',monospace;">Empty</div>
+      `;
+    }
+    grid.appendChild(slotEl);
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.openInventoryUI = openInventoryUI;
+  window.closeInventoryUI = closeInventoryUI;
+  window.renderInventoryGrid = renderInventoryGrid;
+  window.expandInventoryCapacity = expandInventoryCapacity;
+  window.addItemToInventory = addItemToInventory;
+  window.removeItemFromInventory = removeItemFromInventory;
+  window.getUsedInventorySlots = getUsedInventorySlots;
+  window.openCookingUI = openCookingUI;
+  window.closeCookingUI = closeCookingUI;
+  window.renderCookingGrid = renderCookingGrid;
+  window.cookRecipe = cookRecipe;
+  window.checkCookingAchievements = checkCookingAchievements;
 }
 
 function showLevelSelect() {
@@ -6973,6 +7280,10 @@ class FarmScene extends Phaser.Scene {
 
   create(){
     sceneRef = this;
+    this.droppedItems = [];
+    if (droppedItemsSave && droppedItemsSave.length > 0) {
+      droppedItemsSave.forEach(drop => this.spawnDroppedItem(drop.itemId || drop.nameKo, drop.x, drop.y, false));
+    }
     this.cameras.main.fadeIn(300, 0, 0, 0);
     this.cameras.main.setRoundPixels(true);
     this.events.off('resume');
@@ -8218,8 +8529,7 @@ class FarmScene extends Phaser.Scene {
       this._flyCoins(this.appleX, this.appleY - 30, Math.min(bonus, 8));
       this._label(this.appleX, this.appleY - 30, `+${bonus} 🍎 BONUS!`);
 
-      let yieldCount = 1;
-      if (typeof addIngredient === 'function') addIngredient('사과', yieldCount);
+      this.spawnDroppedItem('사과', this.appleX, this.appleY);
 
       // Start regrowth timer
       this.appleRipe    = false;
@@ -8228,6 +8538,142 @@ class FarmScene extends Phaser.Scene {
       this._updateAppleTree();
       showToast(`🍎 Harvested! +${bonus} gold! Tree will regrow in 2 min.`, 4000);
     });
+  }
+
+  // ── GROUND DROPPED ITEM PIPELINE ─────────────────────────────────────────
+  spawnDroppedItem(itemId, x, y, playPopAnim = true) {
+    if (!this.droppedItems) this.droppedItems = [];
+    const info = getItemInfo(itemId);
+    const nameKo = info.nameKo || itemId;
+
+    const container = this.add.container(x, y - 10).setDepth(y + 5);
+
+    // Ground Shadow
+    const shadow = this.add.ellipse(0, 14, 22, 8, 0x000000, 0.4);
+    
+    // Glowing Aura
+    const glow = this.add.graphics();
+    glow.fillStyle(0x38bdf8, 0.25);
+    glow.fillCircle(0, 0, 16);
+
+    // Icon / Emoji
+    const iconText = this.add.text(0, -4, info.icon || '🥬', { fontSize: '24px' }).setOrigin(0.5, 0.5);
+
+    // Korean Label
+    const labelText = this.add.text(0, 16, nameKo, {
+      fontFamily: '"Press Start 2P", "Noto Sans KR", monospace',
+      fontSize: '9px',
+      color: '#FFFFFF',
+      stroke: '#000000',
+      strokeThickness: 2
+    }).setOrigin(0.5, 0.5);
+
+    container.add([shadow, glow, iconText, labelText]);
+
+    if (playPopAnim) {
+      container.setScale(0.2);
+      container.y = y - 30;
+      this.tweens.add({
+        targets: container,
+        y: y - 10,
+        scale: 1,
+        duration: 400,
+        ease: 'Bounce.Out'
+      });
+    }
+
+    const dropEntity = {
+      id: 'drop_' + Date.now() + '_' + Math.floor(Math.random() * 10000),
+      itemId: itemId,
+      nameKo: nameKo,
+      curX: x,
+      curY: y,
+      bobOffset: Math.random() * Math.PI * 2,
+      pickupCooldown: 0,
+      container: container,
+      glowGraphics: glow,
+      shadowSprite: shadow
+    };
+
+    this.droppedItems.push(dropEntity);
+    return dropEntity;
+  }
+
+  clearAllDroppedItems() {
+    if (this.droppedItems && Array.isArray(this.droppedItems)) {
+      this.droppedItems.forEach(item => {
+        if (item.container && item.container.destroy) {
+          item.container.destroy();
+        }
+      });
+    }
+    this.droppedItems = [];
+  }
+
+  updateDroppedItems(dt) {
+    if (!this.droppedItems || this.droppedItems.length === 0) return;
+    const gameTime = this.time ? this.time.now : Date.now();
+    const now = Date.now();
+
+    const isPlayerValid = !!this.player;
+    const playerX = isPlayerValid ? this.player.x : 0;
+    const playerBaseY = isPlayerValid ? (this.player.y + (this.player.displayHeight * (1 - this.player.originY))) : 0;
+
+    const MAGNET_DIST = 65;
+    const PICKUP_DIST = 32;
+
+    for (let i = this.droppedItems.length - 1; i >= 0; i--) {
+      const item = this.droppedItems[i];
+      if (!item.container || !item.container.active) {
+        this.droppedItems.splice(i, 1);
+        continue;
+      }
+
+      // Continuous sine-wave bobbing
+      const bob = Math.sin(gameTime * 0.005 + item.bobOffset) * 4;
+      item.container.y = item.curY - 10 + bob;
+      item.container.x = item.curX;
+      item.container.setDepth(item.curY + 5);
+
+      if (item.glowGraphics) {
+        item.glowGraphics.setAlpha(0.25 + 0.15 * Math.sin(gameTime * 0.004 + item.bobOffset));
+      }
+
+      if (!isPlayerValid) continue;
+
+      const dist = Phaser.Math.Distance.Between(playerX, playerBaseY, item.curX, item.curY);
+
+      const isCooldownActive = now <= item.pickupCooldown;
+      const isInvFull = getUsedInventorySlots() >= (inventoryState.maxSlots || 20);
+      const isAlreadyOwned = inventoryState.ingredients && inventoryState.ingredients[getItemInfo(item.itemId).key] > 0;
+
+      // Magnet zone (~60px)
+      if (dist <= MAGNET_DIST && dist > PICKUP_DIST) {
+        if (!isInvFull || isAlreadyOwned || !isCooldownActive) {
+          item.curX += (playerX - item.curX) * 0.10;
+          item.curY += (playerBaseY - item.curY) * 0.10;
+        }
+      }
+
+      // Pickup zone (~30px)
+      if (dist <= PICKUP_DIST) {
+        if (now > item.pickupCooldown) {
+          const added = addItemToInventory(item.itemId, 1);
+          if (added) {
+            if (typeof playChiptuneSFX === 'function') playChiptuneSFX('pickup');
+            if (typeof this._sparkle === 'function') this._sparkle(item.curX, item.curY);
+            if (typeof this._label === 'function') this._label(item.curX, item.curY - 15, `+1 ${item.nameKo}!`, '#4ade80');
+            item.container.destroy();
+            this.droppedItems.splice(i, 1);
+          } else {
+            if (typeof showToast === 'function') {
+              showToast("🎒 Inventory Full! Cannot pick up " + item.nameKo, 2500);
+            }
+            item.pickupCooldown = now + 3000;
+          }
+        }
+      }
+    }
   }
 
   // ── PLAYER ACTION HELPER ───────────────────────────────────────────────────
@@ -8420,6 +8866,8 @@ class FarmScene extends Phaser.Scene {
         }
       });
     }
+
+    this.updateDroppedItems(dt);
 
 
     if(!playerLocked && !this.isPerformingAction){
@@ -8740,8 +9188,7 @@ class FarmScene extends Phaser.Scene {
           const cropIngredients = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근'];
           const ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
 
-          let yieldCount = 1;
-          if (typeof addIngredient === 'function') addIngredient(ingName, yieldCount);
+          this.spawnDroppedItem(ingName, plot.x, plot.y);
         });
         this._clearPlot(plot);
         savePlotsFn();
@@ -10366,7 +10813,8 @@ const TROPHIES_DB = [
   { id: 'silver_spade', name: 'Nông Dân', icon: '🥈', reqHarvests: 50, cost: 300 },
   { id: 'gold_tractor', name: 'Chuyên Gia', icon: '🥇', reqHarvests: 150, cost: 1000 },
   { id: 'diamond_crown', name: 'Bậc Thầy', icon: '💎', reqHarvests: 500, cost: 5000 },
-  { id: 'master_scholar', name: 'Huyền Thoại', icon: '👑', reqHarvests: 1000, cost: 20000 }
+  { id: 'master_scholar', name: 'Huyền Thoại', icon: '👑', reqHarvests: 1000, cost: 20000 },
+  { id: 'master_chef', name: 'Master Chef (요리 왕)', icon: '👨‍🍳', desc: 'Cook all 10 recipes at least once', type: 'cooking', reqRecipes: 10, cost: 0 }
 ];
 
 window.getTotalHarvests = function() {
@@ -10392,12 +10840,25 @@ window.closeTrophies = function() {
 
 window.renderTrophies = function() {
   const grid = document.getElementById('trophy-grid');
+  if (!grid) return;
   grid.innerHTML = '';
   const totalHarvests = window.getTotalHarvests();
+  const totalCooked = cookingState && Array.isArray(cookingState.cookedRecipes) ? cookingState.cookedRecipes.length : 0;
   
   TROPHIES_DB.forEach(t => {
     const isBought = unlockedTrophies.includes(t.id);
-    const reqMet = totalHarvests >= t.reqHarvests;
+    let reqMet = false;
+    let reqText = '';
+
+    if (t.type === 'cooking') {
+      const targetCount = t.reqRecipes || (typeof COOKING_RECIPES !== 'undefined' ? COOKING_RECIPES.length : 10);
+      reqMet = totalCooked >= targetCount;
+      reqText = `<span style="font-size:12px;color:#888;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Cooking</span><br/>${totalCooked}/${targetCount}`;
+    } else {
+      reqMet = totalHarvests >= t.reqHarvests;
+      reqText = `<span style="font-size:12px;color:#888;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Thu hoạch</span><br/>${totalHarvests}/${t.reqHarvests}`;
+    }
+
     const canAfford = gold >= t.cost;
     
     const div = document.createElement('div');
@@ -10407,19 +10868,19 @@ window.renderTrophies = function() {
       <div>
         <div class="trophy-icon">${t.icon}</div>
         <div class="trophy-name">${t.name}</div>
-        <div class="trophy-req"><span style="font-size:12px;color:#888;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Thu hoạch</span><br/>${totalHarvests}/${t.reqHarvests}</div>
+        <div class="trophy-req">${reqText}</div>
       </div>
       ${isBought ? 
         '<div class="trophy-unlocked-badge">Đã Mở! 🏆</div>' : 
-        '<button class="trophy-buy-btn" ' + ((!reqMet || !canAfford) ? 'disabled' : '') + '>' +
-           (!reqMet ? '⚠️ CHƯA ĐỦ' : 'MUA 💰' + t.cost) +
+        '<button class="trophy-buy-btn" ' + ((!reqMet || (!canAfford && t.cost > 0)) ? 'disabled' : '') + '>' +
+           (!reqMet ? '⚠️ CHƯA ĐỦ' : (t.cost > 0 ? ('MUA 💰' + t.cost) : 'NHẬN 🏆')) +
          '</button>'
       }
     `;
     
-    if(!isBought && reqMet && canAfford) {
+    if(!isBought && reqMet && (canAfford || t.cost === 0)) {
       div.querySelector('.trophy-buy-btn').addEventListener('click', () => {
-         if (!spendCoins(t.cost)) return;
+         if (t.cost > 0 && !spendCoins(t.cost)) return;
          unlockedTrophies.push(t.id);
          window.renderTrophies();
          showToast('🏆 Chúc mừng! Bạn đã nhận cúp ' + t.name + '!');
@@ -10724,6 +11185,415 @@ if(window.addEventListener){
 }
 
 // ═══════════════ R3: CRAFTING / COOKING SYSTEM & BUFFS ════════════════════════
+var COOKING_RECIPES = [
+  {
+    id: 'kimchi',
+    nameEn: 'Kimchi',
+    nameKo: '김치',
+    icon: '🥬',
+    description: 'Traditional spicy fermented Napa cabbage with chili and garlic.',
+    ingredients: [
+      { itemId: 'cabbage', count: 1 },
+      { itemId: 'chili', count: 1 },
+      { itemId: 'garlic', count: 1 }
+    ],
+    xpReward: 25,
+    goldReward: 30
+  },
+  {
+    id: 'radish_rice',
+    nameEn: 'Radish Rice',
+    nameKo: '무밥',
+    icon: '🍚',
+    description: 'Comforting Korean steamed rice infused with sweet sliced radish.',
+    ingredients: [
+      { itemId: 'rice', count: 1 },
+      { itemId: 'radish', count: 1 }
+    ],
+    xpReward: 20,
+    goldReward: 25
+  },
+  {
+    id: 'roasted_corn',
+    nameEn: 'Roasted Corn',
+    nameKo: '옥수수구이',
+    icon: '🌽',
+    description: 'Sweet juicy corn on the cob roasted over open farm embers.',
+    ingredients: [
+      { itemId: 'corn', count: 2 }
+    ],
+    xpReward: 20,
+    goldReward: 20
+  },
+  {
+    id: 'strawberry_jam',
+    nameEn: 'Strawberry Jam',
+    nameKo: '딸기잼',
+    icon: '🍓',
+    description: 'Sweet homemade jam boiled down from fresh garden strawberries.',
+    ingredients: [
+      { itemId: 'strawberry', count: 2 }
+    ],
+    xpReward: 22,
+    goldReward: 25
+  },
+  {
+    id: 'gimbap',
+    nameEn: 'Gimbap',
+    nameKo: '김밥',
+    icon: '🍱',
+    description: 'Savory seaweed rice roll filled with carrots and pickled radish.',
+    ingredients: [
+      { itemId: 'rice', count: 1 },
+      { itemId: 'carrot', count: 1 },
+      { itemId: 'radish', count: 1 }
+    ],
+    xpReward: 40,
+    goldReward: 50
+  },
+  {
+    id: 'tteokbokki',
+    nameEn: 'Tteokbokki',
+    nameKo: '떡볶이',
+    icon: '🍢',
+    description: 'Chewy rice cakes simmered in spicy gochujang and green onion.',
+    ingredients: [
+      { itemId: 'rice', count: 2 },
+      { itemId: 'chili', count: 1 },
+      { itemId: 'green_onion', count: 1 }
+    ],
+    xpReward: 45,
+    goldReward: 55
+  },
+  {
+    id: 'gamjajeon',
+    nameEn: 'Potato Pancake',
+    nameKo: '감자전',
+    icon: '🥔',
+    description: 'Crispy pan-fried potato pancake seasoned with green onions and garlic.',
+    ingredients: [
+      { itemId: 'potato', count: 2 },
+      { itemId: 'green_onion', count: 1 },
+      { itemId: 'garlic', count: 1 }
+    ],
+    xpReward: 65,
+    goldReward: 75
+  },
+  {
+    id: 'bibimbap',
+    nameEn: 'Bibimbap',
+    nameKo: '비빔밥',
+    icon: '🥗',
+    description: 'Nourishing bowl of rice topped with cabbage, carrot, soybean, and chili.',
+    ingredients: [
+      { itemId: 'rice', count: 1 },
+      { itemId: 'cabbage', count: 1 },
+      { itemId: 'carrot', count: 1 },
+      { itemId: 'soybean', count: 1 }
+    ],
+    xpReward: 75,
+    goldReward: 90
+  },
+  {
+    id: 'bulgogi',
+    nameEn: 'Bulgogi',
+    nameKo: '불고기',
+    icon: '🍖',
+    description: 'Flavorful marinated dish with garlic, green onions, and soybeans.',
+    ingredients: [
+      { itemId: 'green_onion', count: 2 },
+      { itemId: 'garlic', count: 2 },
+      { itemId: 'soybean', count: 1 }
+    ],
+    xpReward: 95,
+    goldReward: 115
+  },
+  {
+    id: 'samgyetang',
+    nameEn: 'Samgyetang',
+    nameKo: '궁중 삼계탕',
+    icon: '🍲',
+    description: 'Royal ginseng chicken soup cooked with rice, garlic, radish, and green onions.',
+    ingredients: [
+      { itemId: 'rice', count: 2 },
+      { itemId: 'garlic', count: 2 },
+      { itemId: 'radish', count: 1 },
+      { itemId: 'green_onion', count: 1 }
+    ],
+    xpReward: 130,
+    goldReward: 160
+  }
+];
+
+if (typeof window !== 'undefined') {
+  window.COOKING_RECIPES = COOKING_RECIPES;
+}
+
+let selectedRecipeId = 'kimchi';
+
+function openCookingUI() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderCookingGrid(selectedRecipeId);
+  setModalState('cooking-overlay', true);
+}
+
+function closeCookingUI() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  setModalState('cooking-overlay', false);
+}
+
+function renderCookingGrid(selectId) {
+  const pantryList = document.getElementById('cooking-pantry-list');
+  const recipeListEl = document.getElementById('cooking-recipe-list');
+  const detailViewEl = document.getElementById('cooking-detail-view');
+  const progressBadge = document.getElementById('cooking-progress-badge');
+
+  if (!recipeListEl) return;
+
+  if (selectId && COOKING_RECIPES.some(r => r.id === selectId)) {
+    selectedRecipeId = selectId;
+  } else if (!COOKING_RECIPES.some(r => r.id === selectedRecipeId)) {
+    selectedRecipeId = COOKING_RECIPES[0]?.id || 'kimchi';
+  }
+
+  const ingMap = (inventoryState && inventoryState.ingredients) ? inventoryState.ingredients : {};
+  const cookedRecipes = (cookingState && Array.isArray(cookingState.cookedRecipes)) ? cookingState.cookedRecipes : [];
+
+  // 1. Pantry Stock Summary
+  if (pantryList) {
+    pantryList.innerHTML = '';
+    const entries = Object.entries(ingMap).filter(([_, count]) => count > 0);
+    if (entries.length === 0) {
+      pantryList.innerHTML = '<span style="color:#94a3b8; font-size:11px;">No crop ingredients in pantry. Harvest crops to start cooking!</span>';
+    } else {
+      entries.forEach(([ingKey, cnt]) => {
+        const info = getItemInfo(ingKey);
+        const tag = document.createElement('span');
+        tag.style.cssText = 'background:rgba(15,23,42,0.8); border:1px solid rgba(245,158,11,0.3); border-radius:6px; padding:3px 8px; font-size:11px; font-family:"Noto Sans KR",sans-serif; color:#e2e8f0;';
+        tag.textContent = `${info.icon || '📦'} ${info.nameKo || ingKey}: ×${cnt}`;
+        pantryList.appendChild(tag);
+      });
+    }
+  }
+
+  // 2. Progress Badge
+  if (progressBadge) {
+    progressBadge.textContent = `Cooked: ${cookedRecipes.length} / ${COOKING_RECIPES.length}`;
+  }
+
+  // 3. Render Recipe List Cards
+  recipeListEl.innerHTML = '';
+  COOKING_RECIPES.forEach(r => {
+    const isSelected = r.id === selectedRecipeId;
+    const isCooked = cookedRecipes.includes(r.id);
+
+    let canCook = true;
+    r.ingredients.forEach(req => {
+      const info = getItemInfo(req.itemId);
+      const key = info.key || req.itemId;
+      const have = ingMap[key] || 0;
+      if (have < req.count) canCook = false;
+    });
+
+    const card = document.createElement('div');
+    card.className = 'recipe-card';
+    card.style.cursor = 'pointer';
+    card.style.border = isSelected ? '2px solid var(--neon-gold)' : (isCooked ? '1.5px solid #22c55e' : '1.5px solid rgba(245, 158, 11, 0.3)');
+    card.style.background = isSelected ? 'rgba(245, 158, 11, 0.15)' : 'rgba(30, 41, 59, 0.7)';
+
+    card.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:24px;">${r.icon}</span>
+          <div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold);">${r.nameKo}</div>
+            <div style="font-size:10px; color:#cbd5e1;">${r.nameEn}</div>
+          </div>
+        </div>
+        ${isCooked ? '<span style="font-family:\'Press Start 2P\',monospace; font-size:8px; background:rgba(34,197,94,0.2); border:1px solid #22c55e; color:#4ade80; padding:2px 5px; border-radius:4px;">✓ Cooked</span>' : ''}
+      </div>
+    `;
+    card.onclick = () => {
+      if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+      selectedRecipeId = r.id;
+      renderCookingGrid(r.id);
+    };
+    recipeListEl.appendChild(card);
+  });
+
+  // 4. Render Selected Recipe Detail View
+  if (detailViewEl) {
+    const recipe = COOKING_RECIPES.find(r => r.id === selectedRecipeId) || COOKING_RECIPES[0];
+    if (recipe) {
+      let canCook = true;
+      let ingBadgesHtml = [];
+
+      recipe.ingredients.forEach(req => {
+        const info = getItemInfo(req.itemId);
+        const key = info.key || req.itemId;
+        const have = ingMap[key] || 0;
+        if (have < req.count) canCook = false;
+
+        if (have >= req.count) {
+          ingBadgesHtml.push(`
+            <span style="background:rgba(34,197,94,0.15); border:1px solid #22c55e; color:#4ade80; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:bold; display:inline-flex; align-items:center; gap:4px;">
+              ${info.icon || '📦'} ${info.nameKo || req.itemId} ${have}/${req.count} ✓
+            </span>
+          `);
+        } else {
+          ingBadgesHtml.push(`
+            <span style="background:rgba(239,68,68,0.15); border:1px solid #ef4444; color:#f87171; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:bold; display:inline-flex; align-items:center; gap:4px;">
+              ${info.icon || '📦'} ${info.nameKo || req.itemId} ${have}/${req.count} ✗
+            </span>
+          `);
+        }
+      });
+
+      const isCooked = cookedRecipes.includes(recipe.id);
+
+      detailViewEl.innerHTML = `
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:40px;">${recipe.icon}</span>
+          <div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:14px; color:var(--neon-gold);">${recipe.nameKo} (${recipe.nameEn})</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.7); margin-top:4px;">${recipe.description || ''}</div>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
+          <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:6px;">Required Ingredients (재료):</div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            ${ingBadgesHtml.join('')}
+          </div>
+        </div>
+
+        <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
+          <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:6px;">Rewards:</div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <span style="background:rgba(168,85,247,0.18); border:1px solid #a855f7; color:#c084fc; padding:4px 10px; border-radius:6px; font-size:10px; font-family:'Press Start 2P',monospace;">⭐ +${recipe.xpReward} XP</span>
+            <span style="background:rgba(245,158,11,0.18); border:1px solid #f59e0b; color:#fbbf24; padding:4px 10px; border-radius:6px; font-size:10px; font-family:'Press Start 2P',monospace;">🪙 +${recipe.goldReward} Gold</span>
+            ${isCooked ? '<span style="background:rgba(34,197,94,0.18); border:1px solid #22c55e; color:#4ade80; padding:4px 10px; border-radius:6px; font-size:10px; font-family:\'Press Start 2P\',monospace;">✓ Dish Mastered</span>' : ''}
+          </div>
+        </div>
+
+        <div style="margin-top:auto; padding-top:10px;">
+          <button class="cook-btn" style="width:100%; padding:12px; font-family:'Press Start 2P',monospace; font-size:11px; ${canCook ? 'background:linear-gradient(135deg, #f59e0b, #d97706); cursor:pointer;' : 'opacity:0.45; cursor:not-allowed; filter:grayscale(0.5);'}" ${canCook ? '' : 'disabled'} onclick="cookRecipe('${recipe.id}')">
+            🍳 Cook ${recipe.nameKo}
+          </button>
+        </div>
+      `;
+    }
+  }
+}
+
+function cookRecipe(recipeId) {
+  if (!recipeId) return false;
+
+  const recipes = (typeof COOKING_RECIPES !== 'undefined' && Array.isArray(COOKING_RECIPES))
+    ? COOKING_RECIPES
+    : ((typeof RECIPE_DB !== 'undefined') ? RECIPE_DB : []);
+
+  const recipe = recipes.find(r => r.id === recipeId);
+  if (!recipe) {
+    if (typeof showToast === 'function') showToast(`⚠️ Recipe '${recipeId}' not found!`);
+    return false;
+  }
+
+  let reqs = [];
+  if (Array.isArray(recipe.ingredients)) {
+    reqs = recipe.ingredients;
+  } else if (recipe.req && typeof recipe.req === 'object') {
+    reqs = Object.entries(recipe.req).map(([k, cnt]) => ({ itemId: k, count: cnt }));
+  }
+
+  const ingMap = (inventoryState && inventoryState.ingredients) ? inventoryState.ingredients : {};
+  for (const req of reqs) {
+    const info = getItemInfo(req.itemId);
+    const key = info.key || req.itemId;
+    const have = ingMap[key] || 0;
+    if (have < req.count) {
+      if (typeof showToast === 'function') {
+        showToast(`⚠️ Missing ingredient for ${recipe.nameKo || recipe.nameEn}: Need ${req.count}x ${info.nameKo || key} (have ${have})`);
+      }
+      return false;
+    }
+  }
+
+  for (const req of reqs) {
+    const ok = removeItemFromInventory(req.itemId, req.count);
+    if (!ok) {
+      if (typeof showToast === 'function') showToast(`⚠️ Failed to remove ingredient ${req.itemId}`);
+      return false;
+    }
+  }
+
+  const goldReward = recipe.goldReward || 0;
+  const xpReward = recipe.xpReward || 0;
+
+  if (goldReward > 0 && typeof addCoins === 'function') {
+    addCoins(goldReward);
+  }
+
+  if (xpReward > 0) {
+    if (typeof addHonor === 'function') {
+      addHonor(xpReward);
+    } else {
+      inventoryState.vocabXP = (inventoryState.vocabXP || 0) + xpReward;
+    }
+  }
+
+  cookingState = cookingState || { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
+  cookingState.cookedRecipes = Array.isArray(cookingState.cookedRecipes) ? cookingState.cookedRecipes : [];
+  if (!cookingState.cookedRecipes.includes(recipe.id)) {
+    cookingState.cookedRecipes.push(recipe.id);
+  }
+  cookingState.totalDishesCooked = (cookingState.totalDishesCooked || 0) + 1;
+  cookingState.recipeStats = cookingState.recipeStats || {};
+  cookingState.recipeStats[recipe.id] = (cookingState.recipeStats[recipe.id] || 0) + 1;
+
+  inventoryState.cookedDishes = inventoryState.cookedDishes || {};
+  inventoryState.cookedDishes[recipe.id] = cookingState.recipeStats[recipe.id];
+
+  if (typeof persistSave === 'function') persistSave();
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('complete');
+
+  if (typeof showToast === 'function') {
+    showToast(`🍳 Cooked ${recipe.nameKo || recipe.nameEn}! +${goldReward} Gold 🪙, +${xpReward} XP ⭐`);
+  }
+
+  if (typeof renderInventoryGrid === 'function') renderInventoryGrid();
+  renderCookingGrid(recipe.id);
+  if (typeof updateCurrencyHUD === 'function') updateCurrencyHUD();
+
+  checkCookingAchievements();
+  return true;
+}
+
+function checkCookingAchievements() {
+  const recipes = (typeof COOKING_RECIPES !== 'undefined' && Array.isArray(COOKING_RECIPES))
+    ? COOKING_RECIPES
+    : ((typeof RECIPE_DB !== 'undefined') ? RECIPE_DB : []);
+  if (recipes.length === 0) return;
+
+  cookingState = cookingState || { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
+  cookingState.cookedRecipes = Array.isArray(cookingState.cookedRecipes) ? cookingState.cookedRecipes : [];
+  const totalCookedTypes = cookingState.cookedRecipes.length;
+
+  unlockedTrophies = Array.isArray(unlockedTrophies) ? unlockedTrophies : [];
+
+  if (totalCookedTypes >= recipes.length && !unlockedTrophies.includes('master_chef')) {
+    unlockedTrophies.push('master_chef');
+    if (typeof showToast === 'function') {
+      showToast('🏆 ACHIEVEMENT UNLOCKED: Master Chef (요리 왕)! (100% Recipes Cooked! 🍳⭐)');
+    }
+    if (typeof playChiptuneSFX === 'function') {
+      playChiptuneSFX('fanfare');
+    }
+    if (typeof persistSave === 'function') persistSave();
+    if (typeof window.renderTrophies === 'function') window.renderTrophies();
+  }
+}
+
 var KOREAN_INGREDIENTS = [
   '배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근', '사과',
   '연어', '고등어', '오징어', '잉어', '새우', '문어', '조개', '황금물고기'

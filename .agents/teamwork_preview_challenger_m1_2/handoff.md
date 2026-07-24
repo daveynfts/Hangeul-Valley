@@ -1,95 +1,34 @@
-# Challenger 2 Handoff Report — Milestone 1 Verification
+# Handoff Report — Challenger 2 (Milestone 1 Verification)
 
 ## 1. Observation
-- **Node.js Verification Script**: Executed `node "d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\verify_m1_challenger.js"`. Output:
-  ```
-  ===========================================================
-  CHALLENGER 2 VERIFICATION HARNESS - MILESTONE 1
-  ===========================================================
-
-  --- 1. File Synchronization & Syntax Check ---
-  game.js SHA256:        27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2
-  assets/game.js SHA256: 27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2
-  [PASS] game.js and assets/game.js are 100% SHA256 hash identical.
-
-  --- 2. Extracting Player Matrices & Palette ---
-  [PASS] Dynamically executed _genPlayerTextures. Intercepted 28 textures.
-
-  --- 3. Palette Token Coverage Check ---
-  Extracted Palette tokens count: 40
-    [PASS] Palette contains Yellow Casing Main (Yellow 400): 0xFACC15
-    [PASS] Palette contains Yellow Casing Mid (Yellow 500): 0xEAB308
-    [PASS] Palette contains Yellow Casing Shadow (Yellow 600): 0xCA8A04
-    [PASS] Palette contains Slate Body Light Base (Slate 400): 0x94A3B8
-    [PASS] Palette contains Slate Body Mid Base (Slate 500): 0x64748B
-    [PASS] Palette contains Slate Body Frame (Slate 600): 0x475569
-    [PASS] Palette contains Slate Body Core (Slate 700): 0x334155
-    [PASS] Palette contains Cyan LED Visor Display (Sky 400): 0x38BDF8
-    [PASS] Palette contains Cyan LED Visor Screen (Cyan 500): 0x06B6D4
-    [PASS] Palette contains Cyan LED Visor Shadow (Sky 600): 0x0284C7
-    [PASS] Palette contains Antenna Glow (Orange 500): 0xF97316
-    [PASS] Palette contains Antenna Glow Tip: 0xFFEDD5
-    [PASS] Palette contains 1px Dark Slate Outline (Slate 900): 0x0F172A
-  [PASS] All character tokens used in all matrices map to valid entries in palette P.
-
-  --- 4. Mechanical Tread Step Differences Verification (Rows 11-15) ---
-  Direction: DOWN: frame_0 vs frame_1: 9 diffs, frame_0 vs frame_2: 11 diffs
-  Direction: UP:   frame_0 vs frame_1: 9 diffs, frame_0 vs frame_2: 11 diffs
-  Direction: LEFT: frame_0 vs frame_1: 38 diffs, frame_0 vs frame_2: 8 diffs
-  Direction: RIGHT: frame_0 vs frame_1: 39 diffs, frame_0 vs frame_2: 10 diffs
-  [PASS] All walk cycle frame pairs meet or exceed the >= 8 pixel tread diff requirement.
-
-  --- 5. Mechanical Head / Torso Bobbing Dynamics Verification ---
-  Direction DOWN: 88 upper body diffs frame_0 vs frame_1
-  Direction UP: 67 upper body diffs frame_0 vs frame_1
-  Direction LEFT: 83 upper body diffs frame_0 vs frame_1
-  Direction RIGHT: 92 upper body diffs frame_0 vs frame_1
-  [PASS] Mechanical head/torso bobbing dynamics verified for all 4 walk cycles.
-
-  --- 6. Action Frames, Tools & Legacy Aliases Check ---
-  [PASS] Action frames, tools (tool_watering_can, tool_basket, tool_sickle), and legacy aliases (farmer0..3) registered.
-
-  --- 7. Matrix Dimension Compliance & Animation Registrations ---
-  [PASS] All 28 texture matrices are strictly 16x16 pixel grids.
-  [PASS] All 7 animation keys registered matching specification.
-
-  ===========================================================
-  FINAL VERDICT: PASS
-  ===========================================================
-  ```
-
-- **File Locations**:
-  - Main code: `d:\Hangeul Valley\game.js` (lines 1313–1891)
-  - Asset copy: `d:\Hangeul Valley\assets\game.js`
-  - Challenger test script: `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\verify_m1_challenger.js`
-  - Challenge report: `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\challenge_report.md`
+- Ran node syntax checks: `node -c game.js` and `node -c assets/game.js` completed with exit code 0.
+- Executed SHA256 byte-for-byte hash check on `game.js` vs `assets/game.js` and `index.html` vs `assets/index.html`:
+  - `game.js` / `assets/game.js` SHA256: `612717BEAC3E2AA7821B3BB1656201E53729B15DD0701C83481F526FE3459C0E` (MATCH)
+  - `index.html` / `assets/index.html` SHA256: `72C0731982A8AE6D913B6C6FEA6E1AB632AD3905F1B8165CC8C96B70EB828138` (MATCH)
+- Executed automated empirical test suite `d:\Hangeul Valley\test_m1_challenger_harness.js`: 49 tests executed, 49 PASSED, 0 FAILED.
+- Documented findings in `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\challenge.md`.
 
 ## 2. Logic Chain
-1. **Observation**: Executing `verify_m1_challenger.js` parses and evaluates `PixelArtRenderer._genPlayerTextures` directly from `game.js`.
-2. **Deduction**: Inspecting the extracted matrices empirically measures character pixel differences without relying on manual visual checks or worker claims.
-3. **Observation**: Tread/foot rows 11-15 for all 4 directions exhibit 8 to 39 character differences between `frame_0` and `frame_1`/`frame_2`.
-4. **Deduction**: This confirms mechanical tread step animation requirement (>= 8 pixel diffs) is fully satisfied across all 8 walk cycle frame pairs.
-5. **Observation**: Rows 0-10 exhibit 67 to 92 pixel differences between `frame_0` and `frame_1` with vertical shifts in head/antenna/visor contours.
-6. **Deduction**: This confirms mechanical head/torso bobbing dynamics are present across all 4 walk cycles.
-7. **Observation**: Palette `P` includes all 13 required hex tokens (`0xFACC15`, `0x94A3B8`, `0x38BDF8`, `0xF97316`, `0x0F172A`, etc.) and all matrix tokens map to valid palette entries.
-8. **Deduction**: Palette token coverage is complete with zero unmapped pixels.
-9. **Observation**: `game.js` and `assets/game.js` share the exact SHA256 hash `27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`.
-10. **Deduction**: Main code and asset mirrors are 100% byte-synchronized.
+- Node syntax checks verify that JavaScript syntax is valid across both source files.
+- SHA256 byte-for-byte comparison proves that root files (`game.js`, `index.html`) and asset files (`assets/game.js`, `assets/index.html`) are 100% in sync.
+- Empirical DOM & Phaser mock execution confirmed:
+  1. Hotkey listeners ('i', 'I', 'e', 'E') correctly toggle inventory overlay when inputs are not focused, and ignore keypresses when inputs, textareas, or contenteditable elements are focused.
+  2. Centralized glassmorphism modal manager (`activeModalStack`, `setModalState`, `closeTopModal`, `closeModalById`) correctly manages overlay stacks, prevents duplicate pushes, preserves lower modals when top modal is popped with Escape key, and sets `playerLocked` to false only when stack is empty.
+  3. Inventory capacity & stacking logic (`addItemToInventory`, `removeItemFromInventory`, `getUsedInventorySlots`, `expandInventoryCapacity`) accurately tracks slots and allows stacking existing items into full inventory while rejecting new items.
+  4. Ground drop pipeline (`spawnDroppedItem`, `updateDroppedItems`) correctly applies magnet pull (32px–65px), pickup zone mechanics (<=32px), and full-inventory 3s toast cooldown.
 
 ## 3. Caveats
-No caveats. Empirical verification was conducted using dynamic JavaScript runtime inspection in Node.js VM sandbox.
+- `window.closeShop` is called inside `closeModalById`, but relies on browser top-level function declaration global attachment. While standard in browser environments, explicit assignment (`window.closeShop = closeShop`) is recommended for strict module safety.
 
 ## 4. Conclusion
-Final Verdict: **PASS**.
-The Industrial Yellow Farmer Pixel Robot implementation in `game.js` and `assets/game.js` fully satisfies all technical requirements for Milestone 1.
+Milestone 1 (Storage / Inventory System & Harvest-to-Ground Drop Pipeline) passes all empirical verification and edge-case challenge criteria.
 
 ## 5. Verification Method
-To independently re-verify this report:
-1. Run Challenger verification harness:
-   ```bash
-   node "d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\verify_m1_challenger.js"
-   ```
-2. Verify SHA256 equality:
-   ```bash
-   node -e "const fs = require('fs'), crypto = require('crypto'); console.log(crypto.createHash('sha256').update(fs.readFileSync('d:/Hangeul Valley/game.js')).digest('hex') === crypto.createHash('sha256').update(fs.readFileSync('d:/Hangeul Valley/assets/game.js')).digest('hex'));"
-   ```
+To independently verify:
+```powershell
+node -c game.js
+node -c assets/game.js
+Get-FileHash game.js, assets/game.js, index.html, assets/index.html -Algorithm SHA256
+node test_m1_challenger_harness.js
+```
+Inspect findings at `d:\Hangeul Valley\.agents\teamwork_preview_challenger_m1_2\challenge.md`.

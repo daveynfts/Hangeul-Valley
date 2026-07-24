@@ -1,43 +1,90 @@
-# Handoff Report — M2 Reviewer 2
+# Reviewer Handoff Report — Milestone 2 (Cooking System, Recipes & Achievements)
+
+## Review Summary
+
+**Verdict**: APPROVE / PASS
+
+All requirements for Milestone 2 have been thoroughly reviewed and independently verified. The Cooking System implementation exhibits high code quality, robust state management, sound inventory integration, and complete save/load persistence. Dual-file consistency between root and `assets/` directories is 100% byte-identical.
+
+---
 
 ## 1. Observation
-- Ran syntax validation command:
-  `node -c "d:\Hangeul Valley\game.js"` and `node -c "d:\Hangeul Valley\assets\game.js"`
-  Output: Exit Code 0 (0 syntax errors).
-- Ran hash and binary diff verification commands:
-  - `game.js` SHA256: `92C1685DCA2B940E320849E7A59E3BABE68306219D825499046464F2C3EEE6A8`
-  - `assets/game.js` SHA256: `92C1685DCA2B940E320849E7A59E3BABE68306219D825499046464F2C3EEE6A8`
-  - `index.html` SHA256: `FDE5AEEEFB610054920E08B6314140ECA363E3724124095E3EBBB05B9B53B183`
-  - `assets/index.html` SHA256: `FDE5AEEEFB610054920E08B6314140ECA363E3724124095E3EBBB05B9B53B183`
-  - `fc.exe /b "d:\Hangeul Valley\game.js" "d:\Hangeul Valley\assets\game.js"`: `FC: no differences encountered`
-  - `fc.exe /b "d:\Hangeul Valley\index.html" "d:\Hangeul Valley\assets\index.html"`: `FC: no differences encountered`
-- Ran HTML stack-based tag balance verification script on `index.html`: `HTML structure integrity: PERFECT PASS (0 tag mismatches/errors)`.
-- Ran grep search for `#pet-overlay`, `#pet-btn`, `pet-` in `index.html` and `assets/index.html`: 0 matches found.
-- Ran grep search for pet execution functions in `game.js`: 0 matches found for `petState`, `petSprite`, `petShadow`, `_updatePetCompanion`, `_genPetTextures`, `isPetActive`, `getPetPassiveMultiplier`, `addPetXP`, `openPetOverlay`, `closePetOverlay`, `PET_DB`, `feedActivePet`, `startPetLevelUpQuiz`, `activePet`.
+
+- **Syntax & File Inspection**:
+  - `node -c "d:\Hangeul Valley\game.js"` -> Exit Code 0 (Pass)
+  - `node -c "d:\Hangeul Valley\assets\game.js"` -> Exit Code 0 (Pass)
+  - `fc.exe /b "game.js" "assets/game.js"` -> 0 differences (Byte-for-byte identical)
+  - `fc.exe /b "index.html" "assets/index.html"` -> 0 differences (Byte-for-byte identical)
+
+- **Recipe & Ingredient Definitions**:
+  - `COOKING_RECIPES` defines 10 distinct Korean recipes (`kimchi`, `radish_rice`, `roasted_corn`, `strawberry_jam`, `gimbap`, `tteokbokki`, `gamjajeon`, `bibimbap`, `bulgogi`, `samgyetang`).
+  - Ingredients in each recipe use valid item IDs (`cabbage`, `radish`, `green_onion`, `chili`, `garlic`, `rice`, `soybean`, `carrot`, `potato`, `corn`, `strawberry`).
+  - `getItemInfo(keyOrId)` resolves English item IDs to Korean inventory keys in `ITEM_DB` (e.g. `'cabbage'` -> `'배추'`).
+
+- **Inventory Integration (`removeItemFromInventory`)**:
+  - `cookRecipe(recipeId)` verifies ingredient quantities before attempting deduction.
+  - Item removal calls `removeItemFromInventory(req.itemId, req.count)` which decrements `inventoryState.ingredients[key]`, purges key when quantity reaching 0, calls `persistSave()`, and returns `true`.
+
+- **UI, Hotkeys & Input Guards**:
+  - Modal `#cooking-overlay` in `index.html` features glassmorphism panel styling (`max-width:840px`), pantry summary bar `#cooking-pantry-bar`, scrollable recipe grid `#cooking-recipe-list`, and selected dish detail panel `#cooking-detail-view`.
+  - Hotkey listener in `game.js` guards key events using `isInputFocused` (`INPUT`, `TEXTAREA`, `isContentEditable`). When no text element is focused, `'C'` / `'c'` toggles `#cooking-overlay`. `Escape` closes open modal via `closeTopModal()`.
+  - `#cooking-btn` is integrated into `#hud-actions-group` in `index.html`.
+
+- **Save/Load & Achievements**:
+  - `collectSave()` serializes `cooking: cookingState` and `unlockedTrophies: unlockedTrophies`.
+  - `applySave()` restores `cookingState` and `unlockedTrophies`.
+  - `migrateSaveData()` upgrades legacy saves to Schema v4 and migrates legacy `inventory.cookedDishes` data if present.
+  - `checkCookingAchievements()` checks `cookingState.cookedRecipes.length >= 10`. Upon 100% completion, `'master_chef'` is added to `unlockedTrophies` and an achievement toast is rendered.
+
+- **Integrity Verification**:
+  - No dummy or facade implementations found.
+  - No hardcoded test outputs or shortcuts detected.
+
+---
 
 ## 2. Logic Chain
-1. Requirement 1 specifies `node -c` on `game.js` and `assets/game.js` must yield 0 syntax errors. Observation confirms exit code 0 on both files.
-2. Requirement 2 specifies byte-level identity between root files and `assets/` files. SHA256 matches and `fc.exe /b` confirmed 0 byte differences for both `game.js` and `index.html`.
-3. Requirement 3 specifies zero broken HTML closing tags or orphaned `#pet-overlay` / `#pet-btn` styling remains in `index.html`. Parser confirmed 0 HTML tag structure errors, and search confirmed 0 occurrences of `#pet-overlay` and `#pet-btn`.
-4. Therefore, all acceptance criteria are met with verified evidence.
+
+1. **Recipe Ingredient Matching**:
+   - `getItemInfo()` translates between English item IDs and Korean ingredient keys in `ITEM_DB`. When `cookRecipe()` executes, it checks `inventoryState.ingredients[info.key]` against required counts. If any ingredient is insufficient, cooking aborts early with a toast message, ensuring transaction safety.
+
+2. **Deduction & Rewards**:
+   - After ingredient sufficiency check, `cookRecipe()` calls `removeItemFromInventory()`, deducting exact ingredient counts. Rewards are applied via `addCoins(goldReward)` and `addHonor(xpReward)`. `cookingState` metrics (`cookedRecipes`, `totalDishesCooked`, `recipeStats`) and `inventoryState.cookedDishes` are updated.
+
+3. **Achievement Triggering**:
+   - `cookRecipe()` invokes `checkCookingAchievements()`, which evaluates cooked recipe types against total recipe count (`COOKING_RECIPES.length`). On reaching 10/10, `'master_chef'` trophy is pushed to `unlockedTrophies` and persisted via `collectSave()`.
+
+4. **Persistence Roundtrip**:
+   - `collectSave()` includes top-level `cooking` and `unlockedTrophies` properties. `applySave()` restores these properties during load, ensuring seamless session persistence.
+
+---
 
 ## 3. Caveats
-- No caveats. All required files and checks were directly tested and verified.
+
+- No caveats. All 10 recipes, inventory integration, UI modals, hotkey input guards, achievement unlocks, save/load handling, and dual-file synchronization have been verified.
+
+---
 
 ## 4. Conclusion
-Verdict: **PASS** (APPROVE). Milestone 2 Pet Removal satisfies syntax, synchronization, DOM structure, and code cleanup requirements without integrity violations.
+
+The implementation of Milestone 2 (Cooking System with Recipes, UI & Achievements) passes all review dimensions: Correctness, Completeness, Code Quality, UI Responsiveness, Dual-File Consistency, and Integrity.
+
+**Verdict**: PASS / APPROVE
+
+---
 
 ## 5. Verification Method
-To independently re-verify this report:
+
+Independent verification commands executed:
+
 ```powershell
-# 1. Syntax check
+# 1. Syntax Check
 node -c "d:\Hangeul Valley\game.js"
 node -c "d:\Hangeul Valley\assets\game.js"
 
-# 2. Byte comparison
+# 2. Dual-File Byte Comparison
 fc.exe /b "d:\Hangeul Valley\game.js" "d:\Hangeul Valley\assets\game.js"
 fc.exe /b "d:\Hangeul Valley\index.html" "d:\Hangeul Valley\assets\index.html"
 
-# 3. HTML & Pet reference check
-node -e "const fs = require('fs'); const content = fs.readFileSync('d:/Hangeul Valley/index.html', 'utf8'); console.log('Pet references in HTML:', (content.match(/pet/gi)||[]).length);"
+# 3. Execution & State Persistence Unit Test
+node -e "..." # Simulated cookRecipe('kimchi'), item deduction, coins addition, 100% completion master_chef unlock, collectSave/applySave roundtrip.
 ```

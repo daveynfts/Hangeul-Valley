@@ -1,17 +1,15 @@
-## 2026-07-23T01:47:36Z
-<USER_REQUEST>
-You are Forensic Auditor (Integrity Auditor).
-Your working directory is: `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_auditor_m3`
-Project root: `C:\VibeCode\Hangeul Valley`
-Scope document: `C:\VibeCode\Hangeul Valley\.agents\orchestrator\PROJECT.md`
+## 2026-07-24T13:39:01Z
+You are the Forensic Auditor for Milestone 3 (Final Dual-File Synchronization & Syntax Check) for Hangeul Valley.
+Working directory: d:\Hangeul Valley\.agents\teamwork_preview_auditor_m3.
 
-Objective:
-1. Create your working directory `C:\VibeCode\Hangeul Valley\.agents\teamwork_preview_auditor_m3` if needed and write `progress.md` with liveness timestamp.
-2. Perform systematic forensic integrity checks on `index.html`, `assets/index.html`, and `game.js`:
-   - Check if any test results, element states, or dynamic values were hardcoded or mocked.
-   - Check if `index.html` and `assets/index.html` are genuinely synchronized (byte-for-byte identical).
-   - Check if all 12 HUD button element IDs and handlers are genuinely wired to active code without dummy/facade implementations.
-   - Check if CSS rules actually implement layout separation (Tier 1 vs Tier 2) rather than fake display rules.
-   - Run `node -c game.js` and verify zero errors.
-3. Document audit findings, evidence, and verdict (CLEAN / INTEGRITY VIOLATION) in `audit.md` and `handoff.md` in your working directory. Send a message to the parent (orchestrator) with your verdict. Do NOT modify source code files outside your working directory.
-</USER_REQUEST>
+Your tasks:
+1. Independently compute and compare SHA256 hashes of:
+   - d:\Hangeul Valley\game.js vs d:\Hangeul Valley\assets\game.js
+   - d:\Hangeul Valley\index.html vs d:\Hangeul Valley\assets\index.html
+2. Run syntax verification with node -c "d:\Hangeul Valley\game.js" and node -c "d:\Hangeul Valley\assets\game.js".
+3. Verify overall codebase integrity for the entire Storage (Inventory) + Cooking System features across M1, M2, and M3:
+   - Confirm persistent inventory storage slots, item stacking, ground drops, proximity pickup, HUD button, keyboard shortcuts.
+   - Confirm 10 cooking recipes, cooking execution engine, cooking overlay UI modal, HUD button, keyboard shortcuts, master chef trophy unlock, and save/load persistence.
+   - Confirm zero mock/dummy/hardcoded cheating stubs.
+4. Output a formal Forensic Integrity Report with explicit verdict (CLEAN or INTEGRITY VIOLATION) in d:\Hangeul Valley\.agents\teamwork_preview_auditor_m3\handoff.md.
+Send message back to parent when done.

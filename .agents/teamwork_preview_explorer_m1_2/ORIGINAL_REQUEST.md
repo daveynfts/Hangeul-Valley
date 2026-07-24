@@ -1,18 +1,16 @@
-## 2026-07-24T12:45:00Z
-<USER_REQUEST>
-You are Explorer 2 for Milestone 1: Industrial Yellow Farmer Pixel Robot Replacement.
-Your working directory is: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2
-Project root: d:\Hangeul Valley
-Scope document: d:\Hangeul Valley\.agents\orchestrator\PROJECT.md
+## 2026-07-24T13:17:30Z
+You are Explorer 2 for Milestone 1 (Inventory Storage System & Ground Drop Pipeline).
+Your working directory for metadata is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2`.
+Project root is `d:\Hangeul Valley`.
 
-Task:
-1. Inspect `_genPlayerTextures(scene)` and animation registration in `game.js` for player walk cycles (`player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`).
-2. Analyze how 4-directional walking animations are constructed and registered with Phaser (`player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`).
-3. Design the 4-directional robot tread walk cycle animation specification:
-   - Down walk (idle frame 0, left tread shift/bob frame 1, right tread shift/bob frame 2).
-   - Up walk (back casing, antenna, tread steps).
-   - Left walk & Right walk (side profile robot with tread motion & LED visor side view).
-   - Clear mechanical tread step differences (≥ 8 pixels changed in lower tread/foot rows between frames) and vertical bobbing (1px shift in head/torso).
-4. Document the walk cycle matrices and animation steps in `analysis.md` and write `handoff.md` in your working directory.
-5. Send a message to orchestrator with your findings when complete.
-</USER_REQUEST>
+Read `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`.
+Examine `game.js`, `index.html`, `assets/game.js`, and `assets/index.html`.
+
+Focus area: Ground Drop Pipeline & Entity Mechanics (R2):
+1. Locate harvest code in `game.js`. How are mature crops harvested currently?
+2. Design dropped item entity structure: world coordinates, item type, sprite rendering (pixel-art icons), subtle bouncing/glow animation (bobbing offset using sin wave / game time).
+3. Analyze proximity/collision detection between player character and dropped items for automatic or key interaction pickup.
+4. Design full-inventory behavior: trigger toast notification, keep item entity on ground.
+
+Write your findings to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2\analysis.md` and update `progress.md`.
+Send a message back to the orchestrator with your detailed report when complete.

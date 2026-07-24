@@ -1,69 +1,122 @@
-# Handoff Report — Explorer 3: Industrial Yellow Farmer Robot Action Frames & Rendering Mechanics
+# Handoff Report: UI/UX, Keybindings, HUD & Save System (R1)
+**Agent**: Explorer 3 (UI/UX, Keybindings, HUD & Save System)
+**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3`
+**Date**: 2026-07-24
+
+---
 
 ## 1. Observation
 
-- **`_genPlayerTextures(scene)` Location**: Defined in `d:\Hangeul Valley\game.js` at line 1313 (`static _genPlayerTextures(scene) {`) and mirrored in `d:\Hangeul Valley\assets\game.js`.
-- **Action Frame Matrices**: Lines 1615–1778 in `game.js`:
-  - `player_water_down_0..2` (lines 1615–1668): 3 action matrices ($16 \times 16$).
-  - `player_harvest_down_0..2` (lines 1670–1723): 3 action matrices ($16 \times 16$).
-  - `player_pick_down_0..2` (lines 1725–1778): 3 action matrices ($16 \times 16$).
-- **Tool Sprite Matrices**: Lines 1781–1834 in `game.js`:
-  - `tool_watering_can` (lines 1781–1798), `tool_basket` (lines 1799–1816), `tool_sickle` (lines 1817–1834).
-- **Legacy Aliases**: Lines 1864–1867 in `game.js`:
-  ```javascript
-  this.createTexture(scene, 'farmer0', down_0, P);
-  this.createTexture(scene, 'farmer1', down_1, P);
-  this.createTexture(scene, 'farmer2', down_0, P);
-  this.createTexture(scene, 'farmer3', down_2, P);
-  ```
-  And filter setting in `FarmScene` at lines 7570–7575:
-  ```javascript
-  for (let fr = 0; fr < 4; fr++) {
-    const t = this.textures.get('farmer' + fr);
-    if (t && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
-      t.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    }
-  }
-  ```
-- **Action Invocation Logic**: `FarmScene.playPlayerAction(actionType, targetX, targetY, callback)` at lines 8156–8212:
-  - Triggers `player-water`, `player-harvest`, or `player-pick` animations.
-  - Spawns tool sprite (`tool_watering_can`, `tool_sickle`, `tool_basket`) at `(this.player.x ± 12, this.player.y - 6)` with depth `player.depth + 1`.
-- **Scale & Physical Mechanics**:
-  - `FarmScene`: scale `1.8` (lines 8478, 8544), display size $86.4 \times 86.4\text{ px}$.
-  - Physics hitbox: `setSize(24, 16).setOffset(12, 32)` (line 8480).
-  - Dynamic shadow: `createShadow(this.player, 58, 18, 32)` (line 8482).
-  - Y-sort depth sorting: `playerBaseY = y + displayHeight * 0.5 = y + 43.2` (lines 8501–8502).
-- **File Sync Requirement**: Both `game.js` and `assets/game.js` must pass `node -c` and match SHA256 hashes.
+1. **Modal Management Architecture**:
+   - `game.js:4676`: `let activeModalStack = [];`
+   - `game.js:4678`:
+     ```javascript
+     function setModalState(overlayId, isOpen) {
+       const overlay = document.getElementById(overlayId);
+       if (!overlay) return;
+       if (isOpen) {
+         overlay.classList.add('visible');
+         overlay.classList.remove('hidden');
+         playerLocked = true;
+         if (!activeModalStack.includes(overlayId)) {
+           activeModalStack.push(overlayId);
+         }
+       } else {
+         overlay.classList.remove('visible');
+         activeModalStack = activeModalStack.filter(id => id !== overlayId);
+         if (activeModalStack.length === 0) {
+           playerLocked = false;
+         }
+       }
+     }
+     ```
+   - `game.js:4707`: `closeModalById(overlayId)` handles teardown for all modals.
+   - `game.js:4721-4726`:
+     ```javascript
+     window.addEventListener('keydown', (e) => {
+       if (e.key === 'Escape' && activeModalStack.length > 0) {
+         closeTopModal();
+       }
+     });
+     ```
+
+2. **Toast System**:
+   - `index.html:1459`: `<div id="toast"></div>`
+   - `game.js:4585`:
+     ```javascript
+     function showToast(msg, dur=3500) {
+       const t = $('toast'); if(!t) return;
+       t.textContent = msg; t.classList.add('show');
+       clearTimeout(toastTimer);
+       toastTimer = setTimeout(() => t.classList.remove('show'), dur);
+     }
+     ```
+
+3. **HUD Layout**:
+   - `index.html:1281-1317`: `#hud` container with `#hud-actions-group` holding buttons: `📖 Vocab`, `🏪 Shop`, `📜 Quests`, `🍳 Cook`, `💾 Save`, `➕ More`, `☰ Menu`.
+
+4. **Persistence & Save System**:
+   - `game.js:3760`: `var inventoryState = { ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 }, seeds: {}, scrolls: 0, cookedDishes: {} };`
+   - `game.js:3811`: `collectSave()` collects `inventory: inventoryState`.
+   - `game.js:3842`: `applySave(d)` executes `migrateSaveData(d)` and assigns `inventoryState = migrated.inventory`.
+
+5. **Existing Key Inputs**:
+   - `game.js:7020-7030`: Phaser `WASD`, Arrow keys, and `SPACE` configured for movement and interaction. No bindings for `'I'` or `'E'`.
+
+---
 
 ## 2. Logic Chain
 
-1. **Observation**: Action frames (`player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`) and tool sprites (`tool_watering_can`, `tool_basket`, `tool_sickle`) are generated inside `_genPlayerTextures(scene)` and referenced by `playPlayerAction` in `FarmScene`.
-2. **Inference**: To complete Milestone 1 without breaking action mechanics, all 9 action matrices and 3 tool sprite matrices must be redesigned to fit the Industrial Yellow Farmer Robot theme while preserving their texture keys and $16 \times 16$ dimensions.
-3. **Observation**: `farmer0..3` legacy aliases are explicitly registered in `_genPlayerTextures` and set to `NEAREST` filter in `FarmScene`.
-4. **Inference**: Preserving `farmer0..3` texture alias creation is strictly mandatory for backward compatibility with legacy texture lookups.
-5. **Observation**: `FarmScene` uses scale `1.8`, foot-anchored hitbox $(24, 16)$ offset $(12, 32)$, shadow size $(58, 18)$ offset $32$, and Y-sort depth baseline $Y+43.2$.
-6. **Inference**: The industrial robot sprite design (treads, yellow casing, glowing LED visor) naturally aligns with this physical rendering setup, allowing the head/visor area to overlap objects cleanly while tread contact determines collision and depth.
-7. **Observation**: `game.js` and `assets/game.js` must be synchronized.
-8. **Inference**: Any changes made by the implementer worker must be applied to both files synchronously and verified via syntax checking and SHA256 hash comparison.
+1. **Observation 1 & 3 → Glassmorphism Modal Integration**:
+   - All game modals share `.glass-modal` styling and registered integration with `setModalState`.
+   - Creating `#inventory-overlay` and `#inventory-panel` using standard modal classes (`.glass-modal`, `#inventory-overlay.visible`) allows standard LIFO stacking, backdrop blurring, CRT scanline overlay, and automatic `playerLocked` control when opened or closed.
+
+2. **Observation 2 → Notification UX**:
+   - Full inventory warnings during crop harvest or ground item pickup can directly invoke `showToast('⚠️ Inventory full! (20/20 slots)')` without requiring new UI components.
+
+3. **Observation 4 → Backward Compatibility in Save Data**:
+   - Existing `inventoryState` uses `{ ingredients: {...}, seeds: {}, cookedDishes: {} }`.
+   - Extending `inventoryState` with `maxSlots: 20` preserves all existing ingredient entries while adding total capacity limits.
+   - `collectSave()` and `applySave()` already handle `inventoryState` reference, ensuring zero breaking changes to saving/loading mechanics.
+
+4. **Observation 5 → Shortcut Collision Prevention**:
+   - Binds `'I'` / `'i'` and `'E'` / `'e'` to `toggleInventoryUI()`.
+   - Guarding key listener with `document.activeElement.tagName === 'INPUT' || 'TEXTAREA'` ensures users typing Korean answers in the Quiz or searching words in the Vocab book will not trigger the inventory modal.
+
+---
 
 ## 3. Caveats
 
-- Investigation was strictly read-only; no code files in the main repository were modified.
-- Non-overworld scenes (`DungeonScene`, `FishingScene`) use scale 1.0; while out of scope for matrix replacement in `_genPlayerTextures`, implementers should keep in mind that the robot sprite will render at $48 \times 48\text{ px}$ unscaled in those scenes.
+- **No Caveats**: The codebase and dependencies for HUD, Keybindings, Modal Management, and Save Persistence were fully inspected and documented.
+
+---
 
 ## 4. Conclusion
 
-The specification for the **Industrial Yellow Farmer Pixel Robot** action frames, tool sprites, legacy aliases, physical rendering parameters, and file synchronization is complete and fully documented in `analysis.md`. Implementers can safely proceed with matrix replacement in `_genPlayerTextures(scene)` in both `game.js` and `assets/game.js`.
+The UI/UX, Keybindings, HUD & Save System design for Milestone 1 (R1) is fully complete, self-contained, and ready for implementer execution.
+
+- **HTML/CSS Design**: Modal layout `#inventory-overlay` with responsive slot grid, item icons, Korean/English labels, quantity badges, capacity counter, and gold expansion button.
+- **HUD Integration**: Added `🎒 Bag` button to `#hud-actions-group` and controls tip display.
+- **Keybindings**: Binds `'I'` and `'E'` keys with active text input guards.
+- **Persistence**: Exact payload integration in `collectSave()` and restoration in `applySave()`.
+
+---
 
 ## 5. Verification Method
 
-To verify these findings and any future implementation:
-1. **Syntax Validation**:
-   ```bash
-   node -c "d:\Hangeul Valley\game.js"
-   node -c "d:\Hangeul Valley\assets\game.js"
+1. **Syntax Verification**:
+   Run syntax checks on both primary JS files:
+   ```powershell
+   node -c game.js
+   node -c assets/game.js
    ```
-2. **Key Inspection**:
-   Inspect `game.js` lines 1615–1891 to confirm presence of `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`, `tool_watering_can`, `tool_basket`, `tool_sickle`, `farmer0..3`, and `player-water`, `player-harvest`, `player-pick` animation registrations.
-3. **File Mirror Hash Invalidation**:
-   If SHA256 checksums of `game.js` and `assets/game.js` differ, synchronization has failed.
+   *Expected Result*: 0 errors.
+
+2. **File Inspection**:
+   - Inspect `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md` for complete DOM/CSS code specifications.
+   - Inspect `index.html` and `game.js` for matching modal IDs (`#inventory-overlay`) and state definitions (`inventoryState.maxSlots`).
+
+3. **Invalidation Conditions**:
+   - If modal fails to open on pressing 'I' or 'E' while player is moving in farm scene.
+   - If pressing 'I' or 'E' while typing inside `#answer-input` toggles the inventory modal (indicates missing input focus guard).
+   - If expanding capacity with gold does not persist across `collectSave()` and `loadSave()`.

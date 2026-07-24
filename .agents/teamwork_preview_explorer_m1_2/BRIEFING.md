@@ -1,43 +1,39 @@
-# BRIEFING — 2026-07-24T12:45:00Z
+# BRIEFING — 2026-07-24T13:18:30Z
 
 ## Mission
-Analyze Phaser 4-directional player walk cycles in `game.js` and design the 4-directional industrial yellow farmer pixel robot tread walk cycle matrices and animation specs.
+Investigate Ground Drop Pipeline & Entity Mechanics (R2) for Milestone 1, including harvest code location, dropped item entity structure, proximity/collision detection, and full-inventory behavior.
 
 ## 🔒 My Identity
-- Archetype: Explorer 2
-- Roles: Read-only investigation, pixel art matrix design, animation analysis
-- Working directory: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2
-- Original parent: 61273c20-169f-4f19-afce-70f9dfa80106
-- Milestone: Milestone 1 - Industrial Yellow Farmer Pixel Robot Replacement
+- Archetype: Explorer
+- Roles: Read-only investigator / analyzer for Ground Drop Pipeline & Entity Mechanics (R2)
+- Working directory: `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2`
+- Original parent: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Milestone: Milestone 1 (Inventory Storage System & Ground Drop Pipeline)
 
 ## 🔒 Key Constraints
-- Read-only investigation — do NOT modify game source code files directly
-- Write all artifacts (`BRIEFING.md`, `progress.md`, `analysis.md`, `handoff.md`) into working directory `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2`
-- Industrial Yellow Farmer theme matching Explorer 1's palette and design specifications
-- Clear tread step differences (≥ 8 pixels changed in lower tread/foot rows between frames) and 1px vertical bobbing in head/torso
+- Read-only investigation — do NOT modify project source code directly
+- Perform evidence-based analysis with exact file paths and line numbers
+- Output analysis to `analysis.md` and `handoff.md`, update `progress.md`
 
 ## Current Parent
-- Conversation ID: 61273c20-169f-4f19-afce-70f9dfa80106
-- Updated: 2026-07-24T12:45:00Z
+- Conversation ID: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Updated: 2026-07-24T13:18:30Z
 
 ## Investigation State
-- **Explored paths**: `game.js` (lines 1314–1890), `_genPlayerTextures(scene)`, `scene.anims.create` registrations, Explorer 1's `analysis.md` and `handoff.md`.
+- **Explored paths**: `game.js`, `assets/game.js`, `index.html`, `assets/index.html`, `PROJECT.md`, `ORIGINAL_REQUEST.md`
 - **Key findings**:
-  - Phaser walk animations (`player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`) use 4-frame loops (`[0, 1, 0, 2]`) at 8 FPS.
-  - Complete Palette `P` (44 tokens) and 12 robot walk matrices designed and verified.
-  - All frame pairs in all 4 directions exhibit tread pixel differences between 8 px and 39 px (satisfying $\ge 8$ px requirement) and 100% 1px boundary 'K' enclosure.
-- **Unexplored areas**: None for this subtask scope.
+  - Located mature crop harvest in `advancePlot()` (lines 8680-8751) and apple tree harvest in `onAppleHarvested()` (lines 8212-8231).
+  - Current harvest code directly adds ingredients to state without spawning dropped entities on map.
+  - Designed `DroppedItem` entity structure with unsynchronized sine-wave bobbing, shadow scaling, and glow aura.
+  - Designed two-tier proximity detection: magnet pull zone (65px) and collision pickup zone (30px / key interaction).
+  - Designed full-inventory handling with item retention, toast notification, and 3-second debounce cooldown.
+- **Unexplored areas**: None (R2 investigation fully complete)
 
 ## Key Decisions Made
-- Validated all 12 matrices with programmatic validator `generate_clean_matrices.js`.
-- Exported matrix definitions to `clean_walk_matrices.json`, `analysis.md`, and `handoff.md`.
+- Completed detailed architectural analysis report in `analysis.md`.
+- Completed 5-component handoff report in `handoff.md`.
 
 ## Artifact Index
-- `ORIGINAL_REQUEST.md` — User task copy
-- `BRIEFING.md` — Persistent briefing
-- `progress.md` — Liveness log
-- `validate_robot_walk.js` — Programmatic matrix & boundary validator
-- `generate_clean_matrices.js` — Clean matrix generator & tread diff verifier
-- `clean_walk_matrices.json` — Verified matrix exports in JSON format
-- `analysis.md` — Technical analysis report and matrix specification
-- `handoff.md` — 5-component handoff report
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2\analysis.md` — Detailed analysis for R2 Ground Drop Pipeline & Entity Mechanics.
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2\handoff.md` — Self-contained 5-component handoff report.
+- `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2\progress.md` — Log of completed investigation tasks.

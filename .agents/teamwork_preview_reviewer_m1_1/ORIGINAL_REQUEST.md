@@ -1,21 +1,16 @@
-## 2026-07-24T12:48:54Z
-You are Reviewer 1 for Milestone 1: Industrial Yellow Farmer Pixel Robot Replacement & Integration.
-Your working directory is: d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_1
-Project root: d:\Hangeul Valley
-Scope document: d:\Hangeul Valley\.agents\orchestrator\PROJECT.md
+## 2026-07-24T13:22:48Z
+You are Reviewer 1 for Milestone 1 (Storage / Inventory System & Harvest-to-Ground Drop Pipeline).
+Your working directory for metadata is `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_1`.
+Project root is `d:\Hangeul Valley`.
 
-Worker handoff: d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\handoff.md
-Worker changes: d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md
+Read:
+- Worker 1 changes: `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md`
+- Code files: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`
 
-Task:
-1. Review `game.js` and `assets/game.js` (~lines 1313–1891) for `_genPlayerTextures(scene)`.
-2. Inspect:
-   - Palette `P` token definitions (yellow casing, slate chassis, cyan LED visor, antenna glow, 1px dark outline).
-   - All 12 walk cycle matrices (`player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`).
-   - All 9 action matrices (`player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`).
-   - Standalone tools (`tool_watering_can`, `tool_basket`, `tool_sickle`).
-   - Legacy aliases (`farmer0..3`).
-3. Run `node -c game.js` and `node -c assets/game.js` to verify 0 syntax errors.
-4. Verify SHA256 byte synchronization between `game.js` and `assets/game.js`.
-5. Write your detailed review in `review.md` and handoff report in `handoff.md` in your working directory.
-6. Send a message to orchestrator with your verdict (PASS or VETO with rationale).
+Review:
+1. Storage API (`addItemToInventory`, `removeItemFromInventory`, `getUsedInventorySlots`, `expandInventoryCapacity`) for correctness, boundary conditions, and item stacking logic.
+2. Save/Load persistence in `collectSave()`, `applySave()`, and `migrateSaveData()`.
+3. Inventory UI Modal HTML structure, CSS, HUD button (`#inventory-btn`), and hotkeys ('I' / 'E') with input guards.
+4. Run `node -c game.js` and `node -c assets/game.js` to verify syntax.
+
+Write your review verdict and findings to `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_1\review.md` and send a message back to the orchestrator.

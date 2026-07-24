@@ -1,11 +1,10 @@
-# Progress Log
-
-Last visited: 2026-07-24T11:33:10Z
-
-- [x] Initialized workspace and briefing.
-- [x] Inspect `FarmScene._bakeTextures()` in `game.js` and `assets/game.js`.
-- [x] Remove legacy player sprite texture baking loop.
-- [x] Verify node syntax check on both files.
-- [x] Verify SHA256 equality of `game.js` and `assets/game.js`.
-- [x] Run test scripts (`verify_all.js` and `test_harness.js`).
-- [x] Produce `changes.md` and `handoff.md`.
+# Progress Log - Worker 2 (Milestone 1 Ground Drop Persistence Fix)
+Last visited: 2026-07-24T20:25:35+07:00
+- [ ] Read Reviewer 2 defect report in `.agents/teamwork_preview_reviewer_m1_2/review.md`.
+- [ ] Fix ground drop persistence across scene boot in `game.js`:
+  - Define a global `droppedItemsSave` array buffer.
+  - In `applySave(d)`, store saved dropped items into `droppedItemsSave` regardless of whether `sceneRef` is active yet.
+  - In `FarmScene.create()`, initialize `this.droppedItems` and call `this._restoreDroppedItems(droppedItemsSave)` if `droppedItemsSave` contains saved items.
+- [ ] Synchronize `game.js` -> `assets/game.js` and `index.html` -> `assets/index.html`.
+- [ ] Verify syntax with `node -c game.js` and `node -c assets/game.js`.
+- [ ] Report completion to Orchestrator.

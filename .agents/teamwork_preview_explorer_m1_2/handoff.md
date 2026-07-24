@@ -1,47 +1,77 @@
-# Handoff Report: Industrial Yellow Farmer Robot 4-Directional Tread Walk Cycle Specifications (Milestone 1)
+# Handoff Report: Ground Drop Pipeline & Entity Mechanics (R2)
+
+**Agent**: Explorer 2 (`teamwork_preview_explorer_m1_2`)  
+**Milestone**: Milestone 1 (Inventory Storage System & Ground Drop Pipeline)  
+**Date**: 2026-07-24  
+
+---
 
 ## 1. Observation
-- **Source Code Locations**:
-  - `d:\Hangeul Valley\game.js` (and twin copy `d:\Hangeul Valley\assets\game.js`) lines 1314–1890.
-  - Player walk matrices: `player_walk_down_0..2` (lines 1331–1384), `player_walk_up_0..2` (lines 1386–1439), `player_walk_left_0..2` (lines 1441–1494), `player_walk_right_0..2` (lines 1496–1549).
-  - Phaser animation registration: `scene.anims.create` for `player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right` (lines 1871–1880).
-- **Phaser Walk Animation Loop**:
-  - Each 4-directional walk key plays sequence `[frame_0, frame_1, frame_0, frame_2]` (Rest $\rightarrow$ Left Tread Step $\rightarrow$ Rest $\rightarrow$ Right Tread Step) at 8 FPS with infinite loop (`repeat: -1`).
-- **Robot Walk Specs & Matrix Validation**:
-  - Palette `P` defined with 44 tokens (including yellow casing `Y`/`y`/`J`, slate metallic chassis/treads `M`/`m`/`S`/`s`/`D`/`d`, glowing cyan visor screen `L`/`C`/`c`/`B`/`b`, antenna beacon `O`/`o`/`R`, and eye sparkles `W`).
-  - All 12 matrices are $16 \times 16$ grids enclosed in a 1px dark outer boundary token `'K'` (`0x0F172A`).
-  - Mechanical tread step differences: lower tread rows (rows 11–15) exhibit **$\ge 8$ pixel changes** across all frame pairs (`_0` vs `_1`, `_1` vs `_2`, `_0` vs `_2`) in all 4 directions (Down, Up, Left, Right).
-  - 1px vertical head/torso bobbing implemented between rest frame 0 and step frames 1 & 2.
+
+- **Project Location**: Root `d:\Hangeul Valley`, target files `game.js`, `index.html`, `assets/game.js`, and `assets/index.html`.
+- **Harvest Logic Location**:
+  - `game.js` line 8601–8677: `FarmScene._interact()` handles player interaction with plots (`sState === '4'`) by calling `openQuiz(p.word, p, 3)`.
+  - `game.js` line 8680–8751: `FarmScene.advancePlot(plot, word, phase)` processes Phase 3 mature crop harvesting.
+  - `game.js` line 8740–8745: Direct ingredient addition code:
+    ```javascript
+    const cropIngredients = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근'];
+    const ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
+    let yieldCount = 1;
+    if (typeof addIngredient === 'function') addIngredient(ingName, yieldCount);
+    ```
+  - `game.js` line 8212–8231: `FarmScene.onAppleHarvested()` handles Apple Tree harvesting and directly adds apples:
+    ```javascript
+    if (typeof addIngredient === 'function') addIngredient('사과', yieldCount);
+    ```
+- **Dropped Items Absence**: Searching `game.js` for `dropped` returned 0 matches; ground drop entities are currently not implemented.
+- **Toast UI Component**:
+  - `index.html` line 1460 contains `<div id="toast"></div>`.
+  - `game.js` contains global helper `showToast(msg, duration)`.
+- **Scene Update Loop**:
+  - `game.js` line 8392: `FarmScene.update(_t, dt)` runs frame-by-frame updates for player movement, environment, Y-sorting, and interaction highlights.
 
 ---
 
 ## 2. Logic Chain
-1. **Problem**: Replace human character walk textures with an Industrial Yellow Farmer Pixel Robot while ensuring smooth 4-directional tread walk animations and full compatibility with existing Phaser animation callers.
-2. **Analysis of Existing System**: `PixelArtRenderer._genPlayerTextures(scene)` bakes $16 \times 16$ pixel matrices into Phaser textures and registers 4-frame animation loops (`player-walk-*`).
-3. **Design Strategy**:
-   - Palette `P` incorporates vibrant yellow (`0xFACC15`, `0xFEF08A`, `0xEAB308`), slate gray/dark metallic (`0x94A3B8`, `0x64748B`, `0x475569`, `0x334155`), glowing LED visor screen (`0x38BDF8`, `0x06B6D4`, `0x0284C7`), and antenna beacon (`0xFFEDD5`, `0xF97316`).
-   - 12 Walk matrices constructed with 1px outer boundary `'K'`, Chibi 1:2 head-to-body height ratio ($\ge 50\%$), and distinct facial visor screens with eye sparkles.
-   - Mechanical tread animation engineered with shifting rubber tread belt link patterns (`m`, `s`, `D`), bogie wheel movements, and 1px vertical body bobbing.
-4. **Validation**: Automated validator `generate_clean_matrices.js` verified that all 12 matrices pass 100% boundary enclosure, matrix grid constraints, and exhibit tread pixel differences between 8 px and 39 px across all frame pairs in all 4 directions.
+
+1. **Observation 1 (Harvest Code Direct Addition)**: Lines 8740–8745 in `advancePlot()` and lines 8221–8222 in `onAppleHarvested()` directly call `addIngredient(ingName, yieldCount)`, bypassing world entity instantiation.
+   - **Reasoning**: To transition to R2, this direct-grant call should be replaced or wrapped by a call to `this.spawnDroppedItem(itemId, x, y)`.
+
+2. **Observation 2 (Dropped Item Entity Structure & Visual Design)**:
+   - **Reasoning**: Dropped items need persistent world position `(x, y)`, random phase offset `bobOffset`, timestamp `spawnTime`, and Phaser visual components (`container`, `itemSprite`, `shadowSprite`, `glowRing`).
+   - Trigonometric function $y_{\text{render}} = y_{\text{base}} - 8 + \sin(t \times 0.005 + \text{bobOffset}) \times 5$ provides unsynchronized bobbing. Shadow scaling $scale = 1.0 - 0.2 \times \sin(\dots)$ provides realistic depth perception.
+
+3. **Observation 3 (Proximity & Collision Mechanics)**:
+   - **Reasoning**: Checking distance inside `FarmScene.update(_t, dt)` via `Phaser.Math.Distance.Between` allows two zones:
+     - Magnet zone ($30\text{px} < \text{dist} \le 65\text{px}$): Item glides towards player.
+     - Pickup zone ($\text{dist} \le 30\text{px}$ or interaction key): Invokes `addItemToInventory(item.itemId, 1)`.
+
+4. **Observation 4 (Full Inventory Behavior & Debounce)**:
+   - **Reasoning**: When `addItemToInventory()` returns `false`, leaving the item on ground without a cooldown would trigger `showToast()` 60 times per second while standing over the item. Adding `item.pickupCooldown = Date.now() + 3000` debounces the notification to once every 3 seconds per item.
 
 ---
 
 ## 3. Caveats
-- `assets/game.js` must be updated synchronously alongside `game.js` to ensure twin-file SHA256 integrity.
-- Player character physics body size is `24 x 16` with offset `(12, 32)` rendered at `1.8x` scale. $16 \times 16$ matrices rendered with `PS = 3` generate $48 \times 48$ pixel textures.
-- Action frames (`water_down_0..2`, `harvest_down_0..2`, `pick_down_0..2`) and standalone tool sprites are covered by sibling task specs; existing walk keys `player_walk_*` and legacy aliases `farmer0..3` MUST be preserved.
+
+- **Dual-File Sync**: Any implementation of ground drop entities in `game.js` MUST be duplicated identically in `assets/game.js` to pass Milestone 3 SHA256 sync checks.
+- **Inventory Integration**: Ground drop pickup depends on R1's `addItemToInventory(itemId, qty)` returning a boolean (`true` if added, `false` if inventory is full).
+- **Save State Scope**: Ground items can be saved via `collectSave()` / `applySave()` so dropped items remain on ground across page reloads.
 
 ---
 
 ## 4. Conclusion
-The 4-directional industrial yellow farmer pixel robot tread walk cycle matrices (`down_0..2`, `up_0..2`, `left_0..2`, `right_0..2`) have been fully designed, verified, and documented in `analysis.md` and `clean_walk_matrices.json`. All 12 matrices are 100% ready for immediate integration by the implementer agent.
+
+The Ground Drop Pipeline (R2) design is complete and fully scoped:
+1. **Harvest Integration**: Modify `advancePlot()` and `onAppleHarvested()` to call `spawnDroppedItem(itemId, x, y)`.
+2. **Entity Rendering & Animation**: Render pixel-art item sprites with shadow, glow aura, initial pop tween, and continuous sine-wave bobbing offset.
+3. **Proximity & Collision**: Magnet attraction within 65px, pickup collision within 30px invoking `addItemToInventory()`.
+4. **Full Inventory Handling**: Leave entity on ground, invoke `showToast("🎒 Inventory Full! Cannot pick up " + nameKo, 2500)`, and enforce a 3-second debounce cooldown.
 
 ---
 
 ## 5. Verification Method
-1. Inspect `analysis.md` and `clean_walk_matrices.json` in `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2`.
-2. Run matrix validator script:
-   ```bash
-   node "d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_2\generate_clean_matrices.js"
-   ```
-3. Confirm output displays `SUCCESS! ALL 4 DIRECTIONS HAVE TREAD DIFFS >= 8 PIXELS BETWEEN ALL FRAME PAIRS!`.
+
+To independently verify these findings and design:
+1. **Inspect harvest lines**: Read `game.js` lines 8680–8751 and 8212–8231 to verify harvest callbacks.
+2. **Check toast container**: Read `index.html` line 1460 to verify `<div id="toast"></div>` presence.
+3. **Check syntax validation**: Run `node -c game.js` and `node -c assets/game.js` after implementation to verify syntax.

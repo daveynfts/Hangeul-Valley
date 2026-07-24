@@ -1,53 +1,38 @@
-# Milestone 1 Handoff Report — Forensic Audit
+# Handoff Report — Milestone 1 Audit
 
 ## 1. Observation
-- **Source Inspection**: Examined `PixelArtRenderer._genPlayerTextures(scene)` in `d:\Hangeul Valley\game.js` (lines 1313–1883) and `d:\Hangeul Valley\assets\game.js`.
-- **Palette Verification**: Verified 40-token palette `P` containing yellow casing (`Y`, `y`, `J`, `j`), dark slate contours (`K`, `k`), metallic slate body/treads (`C`, `c`, `m`, `M`, `d`, `D`, `S`, `s`), glowing cyan LED visor screen (`W`, `L`, `V`, `v`, `z`, `Z`, `B`, `b`), antenna tip/beacon (`O`, `o`, `R`, `r`, `A`, `a`), and action/crop/tool tokens (`G`, `g`, `n`, `u`, `U`, `w`, `X`, `q`, `Q`, `2`, `F`).
-- **Matrix Inspection**: Verified 24 matrices (12 walk: `down_0..2`, `up_0..2`, `left_0..2`, `right_0..2`; 9 action: `water_down_0..2`, `harvest_down_0..2`, `pick_down_0..2`; 3 tools: `tool_watering_can`, `tool_basket`, `tool_sickle`). All matrices are strictly 16x16 pixel arrays using valid palette tokens.
-- **Tread & Animation Dynamics**: Rest vs step frames exhibit 16px (`down_0` vs `down_1`) and 11px (`down_0` vs `down_2`) tread pixel changes in rows 10-15 with 1px mechanical bobbing.
-- **Legacy Aliases & Filtering**: `farmer0..3` aliases point to `down_0`, `down_1`, `down_0`, `down_2` and are filtered to `FilterMode.NEAREST` in `FarmScene`.
-- **Syntax Check Results**:
-  ```
-  node -c "d:\Hangeul Valley\game.js" -> Exit code 0
-  node -c "d:\Hangeul Valley\assets\game.js" -> Exit code 0
-  ```
-- **Byte Synchronization Results**:
-  ```
-  game.js SHA256:        27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2
-  assets/game.js SHA256: 27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2
-  Equal: true (1,183,179 bytes)
-  ```
-- **Independent Forensic Audit Script**: Executed `deep_audit.js`. Output: `FINAL VERDICT: CLEAN`.
+- Ran syntax verification commands on project root files:
+  - `node -c game.js` returned status code 0 without stderr output.
+  - `node -c assets/game.js` returned status code 0 without stderr output.
+- Calculated SHA256 checksums:
+  - `game.js`: `612717BEAC3E2AA7821B3BB1656201E53729B15DD0701C83481F526FE3459C0E`
+  - `assets/game.js`: `612717BEAC3E2AA7821B3BB1656201E53729B15DD0701C83481F526FE3459C0E`
+  - `index.html`: `72C0731982A8AE6D913B6C6FEA6E1AB632AD3905F1B8165CC8C96B70EB828138`
+  - `assets/index.html`: `72C0731982A8AE6D913B6C6FEA6E1AB632AD3905F1B8165CC8C96B70EB828138`
+- Source code analysis of `game.js` and `index.html`:
+  - `inventoryState` (line 3789) maintains `maxSlots`, `ingredients`, `seeds`, `scrolls`, `cookedDishes`.
+  - `addItemToInventory` (line 3816) implements slot check, item stacking, and save triggering.
+  - `spawnDroppedItem` (line 8488) creates Phaser containers with graphics, label, shadow, and pop animation.
+  - `updateDroppedItems` (line 8557) handles sine bobbing, distance magnet physics, item pickup, and inventory overflow toasts.
+  - `collectSave` (line 3928) serializes full inventory and ground dropped items.
+  - `applySave` (line 3963) deserializes schema v4, restores inventory state and dropped item entities.
+  - UI Grid (`game.js:4886`, `index.html:1858`) dynamically updates slot count and badges.
+  - `expandInventoryCapacity` (line 3862) charges 50 coins and expands max slots by 5.
 
 ## 2. Logic Chain
-1. **Observation**: `_genPlayerTextures(scene)` previously contained human farmer color tokens and sprite matrices.
-2. **Deduction**: Completely wiping human sprite definitions and substituting the 40-token Industrial Yellow Farmer Pixel Robot palette `P` along with the 24 16x16 robot matrices transforms the main character while fully honoring Phaser texture generation APIs.
-3. **Observation**: Walk matrices feature 1px dark slate outline enclosure ('K'), glowing cyan LED visor screen, top antenna LED, and >= 8px tread frame changes.
-4. **Deduction**: The robot character model satisfies all visual and mechanical requirements specified in `PROJECT.md`.
-5. **Observation**: Legacy aliases (`farmer0..3`) are registered in `_genPlayerTextures` and set to `FilterMode.NEAREST` in `FarmScene`.
-6. **Deduction**: Preserving legacy aliases guarantees zero disruption to legacy texture lookups.
-7. **Observation**: `game.js` and `assets/game.js` must be synchronized across the project.
-8. **Deduction**: Copying `game.js` to `assets/game.js` guarantees SHA256 equality (`27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`) and identical behavior.
+1. Syntax validation proved no syntax errors exist in `game.js` or `assets/game.js`.
+2. SHA256 checksum comparison proved 100% byte-for-byte synchronization between primary and asset copies (`game.js` <-> `assets/game.js` and `index.html` <-> `assets/index.html`).
+3. Source inspection confirmed authentic, interactive implementations without mock return values, hardcoded test passes, or dummy wrappers.
+4. No pre-populated result artifacts exist in the root repository.
 
 ## 3. Caveats
-No caveats. All forensic checks, syntax checks, hashing checks, visual specs, and matrix dimensions were empirically verified.
+- No caveats. All 3 required verification dimensions passed completely.
 
 ## 4. Conclusion
-Final Forensic Verdict: **CLEAN**
-Milestone 1 implementation is authentic, complete, fully verified, and free of any integrity violations or syntax errors.
+- Verdict: **CLEAN**
+- The Milestone 1 Storage / Inventory System & Harvest-to-Ground Drop Pipeline meets all forensic integrity, file synchronization, and syntax standard requirements.
 
 ## 5. Verification Method
-To independently verify this forensic audit:
-1. Run syntax verification:
-   ```bash
-   node -c "d:\Hangeul Valley\game.js"
-   node -c "d:\Hangeul Valley\assets\game.js"
-   ```
-2. Check SHA256 byte synchronization:
-   ```bash
-   node -e "const fs = require('fs'), crypto = require('crypto'); console.log(crypto.createHash('sha256').update(fs.readFileSync('game.js')).digest('hex') === crypto.createHash('sha256').update(fs.readFileSync('assets/game.js')).digest('hex'));"
-   ```
-3. Run forensic deep audit script:
-   ```bash
-   node "d:\Hangeul Valley\.agents\teamwork_preview_auditor_m1\deep_audit.js"
-   ```
+1. Syntax test: `node -c game.js; node -c assets/game.js`
+2. Hash comparison: `Get-FileHash -Algorithm SHA256 game.js, assets/game.js, index.html, assets/index.html`
+3. Inspection: View `game.js` lines 3789-3990, 4886-4975, 8488-8622.

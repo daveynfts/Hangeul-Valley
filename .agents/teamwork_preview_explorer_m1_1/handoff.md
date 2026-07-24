@@ -1,70 +1,81 @@
-# Handoff Report - Milestone 1: Industrial Yellow Farmer Pixel Robot Replacement
+# Handoff Report — Explorer 1 (Milestone 1)
+
+**Working Directory:** `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_1`  
+**Date:** 2026-07-24  
+
+---
 
 ## 1. Observation
 
-- **File Path**: `d:\Hangeul Valley\game.js` (and mirrored target `d:\Hangeul Valley\assets\game.js`).
-- **Function Location**: `PixelArtRenderer._genPlayerTextures(scene)` at lines 1313–1890.
-- **Rendering Mechanism**:
-  `PixelArtRenderer.createTexture(scene, key, matrix, palette, width = 16, height = 16, ps = 3)` calls `PixelArtRenderer.drawMatrix(g, matrix, palette, ox, oy, ps)` where `ps = 3`.
-  ```javascript
-  static drawMatrix(g, matrix, palette, ox = 0, oy = 0, ps = 3) {
-    matrix.forEach((row, ry) => {
-      for (let rx = 0; rx < row.length; rx++) {
-        const char = row[rx];
-        if (char === '.' || char === ' ') continue;
-        const col = palette[char];
-        if (col !== undefined && col !== null) {
-          g.fillStyle(col, 1);
-          g.fillRect((ox + rx) * ps, (oy + ry) * ps, ps, ps);
-        }
-      }
-    });
-  }
-  ```
-- **Registered Keys & Aliases**:
-  - Walk frames (12 keys): `player_walk_down_0..2`, `player_walk_up_0..2`, `player_walk_left_0..2`, `player_walk_right_0..2`.
-  - Action frames (9 keys): `player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`.
-  - Tool standalone textures (3 keys): `tool_watering_can`, `tool_basket`, `tool_sickle`.
-  - Legacy aliases (4 keys): `farmer0`, `farmer1`, `farmer2`, `farmer3`.
-  - Phaser Animations: `player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`, `player-water`, `player-harvest`, `player-pick`.
+### 1.1 Save/Load System in `game.js`
+* `game.js:3811`: `collectSave()` collects game state snapshot including `inventory: inventoryState`, `v: 4`, `currencies: playerCurrencies`, `gold: playerCurrencies.coins`, `recipes: recipeState`, `plots`, `srsData`, etc.
+* `game.js:3842`: `applySave(d)` executes `migrateSaveData(d)` and restores `inventoryState`, `recipeState`, `playerCurrencies`.
+* `game.js:3760`: `var inventoryState = { ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 }, seeds: {}, scrolls: 0, cookedDishes: {} };`
+* `game.js:3777`: `migrateSaveData(d)` sets schema version to `v4` and populates default `data.inventory` if missing.
+* `game.js:3871`: `persistSave()` writes to `localStorage` key `'hv_save_v2'` and calls `window.pywebview.api.save(data)`.
+
+### 1.2 Harvest Logic in `game.js`
+* `game.js:8706`: `advancePlot(plot, word, phase)` handles Phase 3 (ripe) harvest:
+  - `game.js:8740`:
+    ```javascript
+    const cropIngredients = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근'];
+    const ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
+    let yieldCount = 1;
+    if (typeof addIngredient === 'function') addIngredient(ingName, yieldCount);
+    ```
+* `game.js:10789`: `addIngredient(name, count)` directly increments `inventoryState.ingredients[name]` without checking capacity or spawning an on-ground entity.
+
+### 1.3 Crop Data & Recipe Definitions
+* `game.js:10727`: `var KOREAN_INGREDIENTS = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근', '사과', '연어', '고등어', '오징어', '잉어', '새우', '문어', '조개', '황금물고기'];`
+* `game.js:10732`: `RECIPE_DB` contains 8 cooking recipes (`kimchi`, `bibimbap`, `bulgogi`, `tteokbokki`, `samgyeopsal`, `haemul_pajeon`, `japchae`, `samgyetang`, `gimbap`).
+
+### 1.4 HUD & Modal Infrastructure
+* `index.html:1299`: `<div id="hud-actions-group" class="hud-group">` contains HUD buttons (`vocab-btn`, `shop-btn`, `quest-btn`, `recipe-btn`, `save-btn`, `hud-more-btn`, `hud-menu-btn`).
+* `game.js:4678`: `setModalState(overlayId, isOpen)` manages modal visibility class `.visible`, `activeModalStack`, and toggles `playerLocked`.
+* `game.js:4721`: Global `window.addEventListener('keydown')` checks for `'Escape'` key to call `closeTopModal()`.
 
 ---
 
 ## 2. Logic Chain
 
-1. **Observation 1**: `PixelArtRenderer.createTexture` maps each character token in a 16×16 matrix string to a hex color defined in palette object `P`.
-2. **Observation 2**: All player textures rely on exact matrix keys and legacy aliases (`farmer0`..`farmer3`) so that game state and rendering logic expect existing texture keys.
-3. **Logic Step 1**: To replace the human farmer with the Industrial Yellow Farmer Pixel Robot without breaking Phaser animations or game state, the new palette `P` must define the requested robot color tokens:
-   - Yellow metallic casing (`0xFACC15`, `0xEAB308`, `0xCA8A04`, highlight `0xFEF08A`).
-   - Gray/slate metallic joints & body (`0x94A3B8`, `0x64748B`, `0x475569`, `0x334155`, `0xCBD5E1`, `0xE2E8F0`).
-   - Glowing LED visor (`0x38BDF8`, `0x06B6D4`, `0x0284C7`, glare `0xFFFFFF`).
-   - Antenna & gear details (`0xF59E0B`, `0xD97706`, beacon `0xF97316`).
-   - 1px dark outline (`0x0F172A`).
-4. **Logic Step 2**: All 24 matrices (12 walk, 9 action, 3 tools) have been redesigned into 16×16 ASCII character arrays featuring a chibi robot silhouette, top antenna, cyan visor screen, brass gear core, and mechanical tread movement steps.
-5. **Logic Step 3**: The implementer agent can directly copy the palette `P` and matrix variables documented in `analysis.md` into `_genPlayerTextures(scene)` in `game.js`, and sync to `assets/game.js`.
+1. **Observation:** `inventoryState` currently stores ingredients as an unconstrained object dictionary (`{ "배추": 3, ... }`) without slot capacity control (`maxSlots`), slot indexing, or item stacking limits.
+   **Reasoning:** To meet Requirement 1 (R1 - Inventory Storage System), `inventoryState` must be restructured into a slot array with `maxSlots` (starting at 20, expandable via gold), item stacking limits (e.g. max 99), and item metadata defined in `ITEM_DB`.
+
+2. **Observation:** In `advancePlot()` (`game.js:8740`), mature crops directly invoke `addIngredient(ingName, yieldCount)`, which immediately adds ingredients to `inventoryState.ingredients`.
+   **Reasoning:** To implement Requirement 2 (R2 - Harvest-to-Ground Drop Pipeline), `advancePlot()` must instead call `spawnDroppedItem(itemId, plot.x, plot.y)`. The dropped item entity will animate on ground with subtle bounce, and proximity detection in Phaser scene `updateDroppedItems()` will attempt `addItemToInventory(itemId, qty)`. If full, it leaves the item on ground and displays a warning toast.
+
+3. **Observation:** `setModalState(overlayId, isOpen)` handles glassmorphic modal overlays, stack management, `playerLocked` toggling, and Escape key listeners cleanly.
+   **Reasoning:** An `#inventory-overlay` modal can be added to `index.html` following the exact `.glass-modal` structure of `#recipe-overlay`, and integrated into `setModalState` and `closeModalById` in `game.js`. Adding an Inventory button to `#hud-actions-group` and keydown listeners for `'I'` and `'E'` keys complete the R1 UI requirement.
+
+4. **Observation:** `collectSave()`, `applySave(d)`, and `migrateSaveData(d)` handle V4 state persistence and migration.
+   **Reasoning:** Schema migration in `migrateSaveData(d)` will automatically convert any legacy `inventoryState.ingredients` objects into slot array elements upon loading, guaranteeing 100% backward save compatibility.
 
 ---
 
 ## 3. Caveats
 
-- **Scope Boundary**: This report defines matrix structures and token dictionaries. Implementation changes in `game.js` and `assets/game.js` must be performed by the Implementer agent.
-- **Assumptions**: Existing `ps = 3` and 1.8x character scaling in Phaser scene remain unchanged, preserving character dimensions in Hangeul Valley world.
+* **Dual File Sync:** Changes to `game.js` and `index.html` must be replicated in `assets/game.js` and `assets/index.html` for Milestone 3 synchronization.
+* **Ground Drop Texture Baking:** Spawning dropped items requires using mature crop textures (`cr_0_3` .. `cr_4_3`) or rendering item icons cleanly in Phaser graphics/sprites.
+* **Focus Check for Keyboard Shortcuts:** The `'I'` and `'E'` key listeners must check `document.activeElement` so keypresses while typing in quiz inputs or chat inputs do not trigger the inventory modal.
 
 ---
 
 ## 4. Conclusion
 
-The Industrial Yellow Farmer Pixel Robot matrix design specification and color token dictionary are complete and fully documented in `analysis.md`. The design fulfills all requirements of Milestone 1:
-- Chibi robot proportions with yellow armor casing, slate joints/chassis, glowing cyan LED screen visor, top antenna beacon, and twin caterpillar treads.
-- Retains all 12 walk frames, 9 action frames, 3 tool standalone sprites, 4 legacy aliases, and 7 Phaser animation registrations.
+The codebase is fully investigated and ready for Milestone 1 implementation. The proposed R1 & R2 architecture cleanly integrates into existing systems:
+1. `inventoryState` with `maxSlots` (starting at 20, expandable via Gold) and slot array.
+2. `ITEM_DB` dictionary mapping item types (`cabbage`, `radish`, etc.) to names, icons, categories, and max stack sizes.
+3. Spawning on-ground drop entities on crop harvest (`spawnDroppedItem`) with bounce animation and proximity auto-pickup (`addItemToInventory`).
+4. HUD Inventory button in `#hud-actions-group`, keyboard shortcuts ('I'/'E'), and `#inventory-overlay` modal in `index.html`.
+5. Seamless V4 save/load migration in `collectSave()`, `applySave()`, and `migrateSaveData()`.
 
 ---
 
 ## 5. Verification Method
 
-1. **Matrix Structural Audit**:
-   Verify that all matrices in `analysis.md` consist of exactly 16 rows of 16 characters each.
-2. **Palette Token Verification**:
-   Inspect `P` dictionary in `analysis.md` to ensure all character tokens used in matrices exist in `P` and correspond to specified hex values.
-3. **Syntax Verification**:
-   After implementation, run `node -c game.js` and `node -c assets/game.js`. Both must report zero syntax errors.
+1. **Syntax Validation:**
+   Run `node -c game.js` and `node -c assets/game.js` to ensure zero syntax errors.
+2. **Save Migration Verification:**
+   Inspect `collectSave()` and `applySave()` outputs in browser console / test scripts to verify `inventoryState` structure, `maxSlots`, and legacy save compatibility.
+3. **Ground Drop & Pickup Verification:**
+   Plant and harvest a crop in-game, confirm pixel drop entity spawns with bounce animation, walk over entity to verify pickup when inventory has space, and verify toast warning when inventory is full.

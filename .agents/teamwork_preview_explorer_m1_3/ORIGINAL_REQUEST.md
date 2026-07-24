@@ -1,13 +1,16 @@
-## 2026-07-24T12:45:00Z
-You are Explorer 3 for Milestone 1: Industrial Yellow Farmer Pixel Robot Replacement.
-Your working directory is: d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3
-Project root: d:\Hangeul Valley
-Scope document: d:\Hangeul Valley\.agents\orchestrator\PROJECT.md
+## 2026-07-24T13:17:30Z
+You are Explorer 3 for Milestone 1 (Inventory Storage System & Ground Drop Pipeline).
+Your working directory for metadata is `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3`.
+Project root is `d:\Hangeul Valley`.
 
-Task:
-1. Inspect `_genPlayerTextures(scene)` in `game.js` for action frames (`player_water_down_0..2`, `player_harvest_down_0..2`, `player_pick_down_0..2`), tool sprites (`tool_watering_can`, `tool_basket`, `tool_sickle`), and legacy aliases (`farmer0..3`).
-2. Inspect player scale (1.8x base scale), shadow rendering (`DynamicShadowSystem`), depth sorting (`y-sort`), and collision hitboxes in `game.js`.
-3. Verify file synchronization requirements between `game.js` and `assets/game.js`.
-4. Design the action frames specification (robot wielding tools / harvesting / watering) and verify that tool sprites and legacy aliases match the new industrial robot theme.
-5. Document your findings in `analysis.md` and write `handoff.md` in your working directory.
-6. Send a message to orchestrator with your findings when complete.
+Read `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md` and `d:\Hangeul Valley\.agents\ORIGINAL_REQUEST.md`.
+Examine `game.js`, `index.html`, `assets/game.js`, and `assets/index.html`.
+
+Focus area: UI/UX, Keybindings, HUD & Save System (R1):
+1. Examine `index.html` for existing HUD layout, modal templates, CSS styles, and toast notifications.
+2. Design Inventory UI Modal layout: slot grid, item icons, Korean/English names, quantity badges, capacity indicator (e.g. "20 / 20 slots"), and "Expand Capacity (+5 slots for X gold)" button.
+3. Design HUD inventory button and keyboard shortcut handling ('I' or 'E' key toggles inventory UI; ensure no conflict with existing keys or text inputs).
+4. Verify persistence requirements: exact payload in `collectSave()` and restore logic in `applySave()`.
+
+Write your findings to `d:\Hangeul Valley\.agents\teamwork_preview_explorer_m1_3\analysis.md` and update `progress.md`.
+Send a message back to the orchestrator with your detailed report when complete.

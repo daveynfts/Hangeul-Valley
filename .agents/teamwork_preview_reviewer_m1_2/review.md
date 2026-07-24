@@ -1,85 +1,83 @@
-# Milestone 1 Code Review & Stress Test Report
+# Review Report — Milestone 1 (Storage & Ground Drop Pipeline)
 
-**Reviewer**: Reviewer 2 (reviewer_critic)
-**Target**: Milestone 1 — Industrial Yellow Farmer Pixel Robot Replacement & Integration (`game.js`, `assets/game.js`)
-**Working Directory**: `d:\Hangeul Valley\.agents\teamwork_preview_reviewer_m1_2`
-
----
-
-## 1. Review Summary
-
-**Verdict**: **PASS** (APPROVE)
-
-All Phaser animation registrations, overworld scaling (1.8x), dynamic shadow rendering, y-sort depth sorting (`playerBaseY = y + 43.2`), collision hitbox alignment, nearest-neighbor texture filtering (`NEAREST`), syntax integrity, and byte-level file synchronization have been thoroughly reviewed, independently executed, and verified.
+**Reviewer**: Reviewer 2 (reviewer, critic)  
+**Date**: 2026-07-24  
+**Target Files**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`, `.agents/teamwork_preview_worker_m1/changes.md`  
 
 ---
 
-## 2. Findings & Inspection Results
+## Review Summary
 
-### 2.1 Phaser Animation Registrations
-- **Location**: `game.js` lines 1861–1882
-- **Verification**:
-  - `player-walk-down`: `['player_walk_down_0', 'player_walk_down_1', 'player_walk_down_0', 'player_walk_down_2']` (frameRate: 8, repeat: -1)
-  - `player-walk-up`: `['player_walk_up_0', 'player_walk_up_1', 'player_walk_up_0', 'player_walk_up_2']` (frameRate: 8, repeat: -1)
-  - `player-walk-left`: `['player_walk_left_0', 'player_walk_left_1', 'player_walk_left_0', 'player_walk_left_2']` (frameRate: 8, repeat: -1)
-  - `player-walk-right`: `['player_walk_right_0', 'player_walk_right_1', 'player_walk_right_0', 'player_walk_right_2']` (frameRate: 8, repeat: -1)
-  - `player-water`: `['player_water_down_0', 'player_water_down_1', 'player_water_down_2', 'player_water_down_1']` (frameRate: 6, repeat: 0)
-  - `player-harvest`: `['player_harvest_down_0', 'player_harvest_down_1', 'player_harvest_down_2']` (frameRate: 6, repeat: 0)
-  - `player-pick`: `['player_pick_down_0', 'player_pick_down_1', 'player_pick_down_2']` (frameRate: 6, repeat: 0)
-- **Assessment**: All 7 required animations are safely registered behind `if (!anims.exists(key))` idempotency guards.
+**Verdict**: **REQUEST_CHANGES**
 
-### 2.2 Physical Rendering Integration
-- **Overworld Scale**: `this.player.setScale(1.8)` in `_createPlayer` (line 8285).
-- **Dynamic Shadow**: `this.pShadow = this.shadows.createShadow(this.player, 58, 18, 32)` (line 8289). Updates dynamically with sun angle and time of day via `DynamicShadowSystem.updateAllShadows`.
-- **Y-Sort Depth Sorting**:
-  - Code: `const playerBaseY = this.player.y + (this.player.displayHeight * (1 - this.player.originY));`
-  - Math check: For 16×16 base rendered at `ps=3` (48×48 px) with `setScale(1.8)`: `displayHeight = 48 * 1.8 = 86.4 px`. With `originY = 0.5`, `displayHeight * (1 - originY) = 86.4 * 0.5 = 43.2`. Thus `playerBaseY = y + 43.2`.
-- **Collision Hitbox Alignment**: `this.player.body.setSize(24, 16).setOffset(12, 32)` (line 8287). Strictly aligns with the bottom mechanical tread area.
-- **Texture Filtering**: `NEAREST` filtering applied automatically via `PixelArtRenderer.createTexture` (lines 239–243) and reinforced in scene setup (line 7565).
+### Summary Rationale
+The Harvest-to-Ground Drop Pipeline is remarkably well implemented in terms of visual rendering, bounce animations, glowing aura FX, sine-wave bobbing, magnet attraction, pickup detection, and full-inventory toast notification debouncing. Syntax checks pass with 0 errors, and root/assets file mirrors are 100% synchronized.
 
-### 2.3 Syntax & File Synchronization
-- **Syntax Check (`node -c game.js`)**: 0 syntax errors (PASS)
-- **Syntax Check (`node -c assets/game.js`)**: 0 syntax errors (PASS)
-- **SHA256 Synchronization**:
-  - `game.js`: `27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`
-  - `assets/game.js`: `27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`
-  - Result: 100% byte-for-byte identical (MATCH: true).
+However, a **Major Finding** was identified in Requirement 3 (**Persistence of dropped items on map across save/load roundtrips**): ground dropped items are lost on game startup because `applySave()` only spawns dropped items if `sceneRef` is active at the instant `applySave()` is invoked, and `FarmScene.create()` resets `this.droppedItems = []` without restoring saved drops from a persistent global buffer (unlike `plotSave` or `appleTreeSave`).
 
 ---
 
-## 3. Anti-Integrity Violation Verification
+## Findings
 
-| Violation Category | Checked? | Finding | Result |
-|--------------------|----------|---------|--------|
-| Hardcoded test results / expected outputs | Yes | None found | PASS |
-| Dummy or facade implementations | Yes | Full matrix drawing via `drawMatrix` | PASS |
-| Shortcuts bypassing procedural requirement | Yes | 100% procedural pixel matrices | PASS |
-| Fabricated outputs / self-certifying logs | Yes | Independent node execution verified | PASS |
+### [Major] Finding 1: Ground Dropped Item State Lost on Game Startup & Scene Re-initialization
+- **What**: Dropped items saved in save data are not restored when launching the game or initializing `FarmScene`.
+- **Where**: `game.js` (lines 3988–3991 and line 7230) & `assets/game.js`.
+- **Why**:
+  1. `collectSave()` correctly serializes ground items into `data.droppedItems`.
+  2. In `applySave(d)` (lines 3988–3991), the restoration logic is:
+     ```javascript
+     if(sceneRef && Array.isArray(migrated.droppedItems)) {
+       sceneRef.clearAllDroppedItems();
+       migrated.droppedItems.forEach(drop => sceneRef.spawnDroppedItem(drop.itemId || drop.nameKo, drop.x, drop.y, false));
+     }
+     ```
+  3. When `initSave()` runs on page boot, `applySave(d)` executes before `FarmScene.create()` sets `sceneRef`. Because `sceneRef` is `null` at that moment, `migrated.droppedItems` is skipped and NOT stored in any persistent global variable.
+  4. When `FarmScene.create()` executes, line 7230 runs `this.droppedItems = [];` without restoring saved items from disk/localStorage.
+- **Suggestion**:
+  1. Declare a top-level persistent variable `let droppedItemsSave = [];` near `plotSave`.
+  2. In `applySave(d)`:
+     ```javascript
+     if (Array.isArray(migrated.droppedItems)) {
+       droppedItemsSave = migrated.droppedItems;
+       if (sceneRef) {
+         sceneRef.clearAllDroppedItems();
+         migrated.droppedItems.forEach(drop => sceneRef.spawnDroppedItem(drop.itemId || drop.nameKo, drop.x, drop.y, false));
+       }
+     }
+     ```
+  3. In `FarmScene.create()`, call a new method `_restoreDroppedItems()`:
+     ```javascript
+     _restoreDroppedItems() {
+       if (!droppedItemsSave || !droppedItemsSave.length) return;
+       droppedItemsSave.forEach(drop => this.spawnDroppedItem(drop.itemId || drop.nameKo, drop.x, drop.y, false));
+     }
+     ```
 
 ---
 
-## 4. Adversarial Stress-Test Challenges
+## Verified Claims
 
-**Overall Risk Assessment**: **LOW**
-
-1. **Scene Re-entry & Animation Re-registration**:
-   - *Scenario*: Player switches scenes or restarts scene multiple times.
-   - *Risk*: `anims.create` called with existing key throws Phaser error.
-   - *Mitigation*: Guarded by `if (!anims.exists(key))` before creation. (PASS)
-
-2. **Headless Execution & Global Fallbacks**:
-   - *Scenario*: Script loaded in node test environment without Phaser window object.
-   - *Risk*: `Phaser.Textures.FilterMode` undefined throws ReferenceError.
-   - *Mitigation*: Ternary fallback `typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode ? ... : 1` handles missing globals gracefully. (PASS)
+| Feature / Claim | Verification Method | Status | Notes |
+| :--- | :--- | :--- | :--- |
+| **Syntax Checks** | `node -c game.js`, `node -c assets/game.js` | **PASS** | 0 syntax errors. |
+| **File Mirroring** | Node buffer comparison (`readFileSync`) | **PASS** | `game.js` <-> `assets/game.js` & `index.html` <-> `assets/index.html` 100% match. |
+| **Harvest Hooks** | `advancePlot()` & `onAppleHarvested()` code review | **PASS** | Spawns dropped items at crop/apple plot coordinates; handles Korean ingredients fallback. |
+| **Visual Rendering & FX** | Code trace in `spawnDroppedItem` & `updateDroppedItems` | **PASS** | Container includes ground shadow ellipse, cyan aura, item emoji, Korean text stroke, bounce pop tween (`Bounce.Out`), continuous sine bobbing & pulsing aura. |
+| **Magnet Attraction & Pickup** | Code trace in `updateDroppedItems` | **PASS** | Magnet zone at 65px radius; pickup zone at 32px radius; proper stacking check via `addItemToInventory`. |
+| **Full Inventory Debounce** | Code trace in `updateDroppedItems` | **PASS** | 3-second `pickupCooldown` debounce prevents toast spam and repels magnet pull while full. |
+| **Save/Load Persistence** | Execution flow analysis of `initSave`, `applySave`, `FarmScene.create` | **FAIL (REQUEST_CHANGES)** | See Finding 1 above. |
 
 ---
 
-## 5. Verified Claims Table
+## Coverage Gaps & Stress Test Analysis
 
-- `node -c game.js` passes with 0 syntax errors → verified via `run_command` → PASS
-- `node -c assets/game.js` passes with 0 syntax errors → verified via `run_command` → PASS
-- `game.js` and `assets/game.js` SHA256 match → verified via `run_command` inline node script → PASS
-- All 7 Phaser animations registered → verified via `view_file` lines 1861-1882 → PASS
-- Scale set to 1.8x → verified via `view_file` line 8285 → PASS
-- `playerBaseY` y-sort offset (43.2 px equivalent) → verified via `view_file` line 8308 → PASS
-- Nearest-neighbor texture filtering set → verified via `view_file` line 242 → PASS
+1. **Magnet attraction vs Stackable item**: Tested scenario where inventory is full but item is already owned (e.g. Napa Cabbage). `updateDroppedItems` correctly evaluates `isAlreadyOwned = true`, allowing magnet pull and successful stacking in existing slot.
+2. **Reverse Loop Array Removal**: `updateDroppedItems` iterates backwards (`for (let i = this.droppedItems.length - 1; i >= 0; i--)`), preventing index skipping when items are picked up and spliced out.
+3. **Boot-time Save Hydration Race Condition**: Uncovered that `sceneRef` is null when `applySave` runs on initial load, causing dropped items to be omitted during scene initialization.
+
+---
+
+## Recommendations for Worker 1
+
+1. Implement `droppedItemsSave` global storage and `_restoreDroppedItems()` in `FarmScene` to complete Requirement 3 persistence across cold game reloads.
+2. Maintain synchronized state between root files (`game.js`, `index.html`) and mirrored asset copies (`assets/game.js`, `assets/index.html`).

@@ -1,82 +1,67 @@
-# Forensic Audit Report — Milestone 1 Main Character Sprite Implementation
+## Forensic Audit Report
 
-**Work Product**: `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js`
-**Profile**: General Project / M1 Main Character Sprite Implementation
-**Verdict**: **CLEAN**
-
----
-
-### Executive Summary
-
-A forensic integrity audit was conducted on the Milestone 1 main character sprite implementation within `d:\Hangeul Valley\game.js` and its duplicate `d:\Hangeul Valley\assets\game.js`.
-
-The audit evaluated static code structure, matrix completeness, palette token validity, sub-pixel shading precision, file synchronization, syntax validity, and anti-cheat compliance.
-
-**Key Findings:**
-1. **File Synchronization & Syntax**: `d:\Hangeul Valley\game.js` and `d:\Hangeul Valley\assets\game.js` are 100% byte-for-byte identical (SHA256: `92c1685dca2b940e320849e7a59e3babe68306219d825499046464f2c3eee6a8`). Both pass Node.js syntax checks (`node --check`) with zero syntax errors.
-2. **Palette Token Authenticity**: The sub-pixel palette dictionary `P` defines 61 distinct tokens, covering straw hat gradations, ribbon accents, 5 skin tones, 4 hair tones, white shirt, denim overalls with brass hardware, leather boots, tool handles, water sprays, crop particles, and contour outlines.
-3. **Pixel Matrix Completeness**: All 24 player/tool matrices (`down_0..2`, `up_0..2`, `left_0..2`, `right_0..2`, `water_down_0..2`, `harvest_down_0..2`, `pick_down_0..2`, `tool_watering_can`, `tool_basket`, `tool_sickle`) are strictly 16x16 arrays of 16-character strings. Every character token is mapped in palette `P`. Zero unmapped tokens or invalid dimensions exist.
-4. **No Dummy Placeholders or Cheating**: No hardcoded strings, dummy placeholders (`PLACEHOLDER`, `DUMMY`, `TODO`), repetitive line mocks, or bypass flags exist. Matrix data represents authentic pixel art detailing farmer eyes, blush, overalls, boots, and tools.
-5. **Animation & Texture Binding**: All 28 texture generation calls and 7 animation keys (`player-walk-down`, `player-walk-up`, `player-walk-left`, `player-walk-right`, `player-water`, `player-harvest`, `player-pick`) are correctly wired into Phaser 3 scene texture manager and animation registry.
+**Work Product**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`
+**Profile**: General Project (Forensic Audit)
+**Verdict**: CLEAN
 
 ---
 
-### Forensic Phase Results
-
-| Check # | Phase | Check Description | Status | Details |
-|---|---|---|---|---|
-| 1 | Phase 1 | File Synchronization | **PASS** | SHA256 hashes match identically across `game.js` and `assets/game.js`. |
-| 2 | Phase 1 | JS Syntax Verification | **PASS** | Both files pass `node --check` with 0 syntax errors. |
-| 3 | Phase 1 | Sub-pixel Palette Token Audit | **PASS** | Palette `P` defines 61 valid color tokens (0xHEX) + null transparent token. |
-| 4 | Phase 1 | Matrix Dimension Integrity | **PASS** | All 24 matrices strictly measure 16x16. |
-| 5 | Phase 1 | Palette Mapping Audit | **PASS** | 0 unmapped character tokens found across all 24 matrices. |
-| 6 | Phase 1 | Facade & Placeholder Detection | **PASS** | 0 dummy/placeholder strings found. Pixel count & token count demonstrate detailed pixel art. |
-| 7 | Phase 2 | Runtime Texture Baking Logic | **PASS** | `PixelArtRenderer.createTexture` dynamically renders canvas graphics via `g.fillRect` per matrix cell. |
-| 8 | Phase 2 | Animation Registration | **PASS** | All 4 walk direction cycles & 3 action animation keys registered properly. |
-| 9 | Phase 2 | Anti-Cheating & Bypass Audit | **PASS** | No stubbed returns, mock textures, or illegal fallbacks. |
+### Audit Summary
+An exhaustive forensic integrity audit was conducted for Milestone 1 (Storage / Inventory System & Harvest-to-Ground Drop Pipeline) across all target files: `game.js`, `index.html`, `assets/game.js`, and `assets/index.html`.
 
 ---
 
-### Forensic Evidence
+### Check Results
 
-#### 1. File Identity Verification
-```powershell
-Algorithm: SHA256
-Hash: 92c1685dca2b940e320849e7a59e3babe68306219d825499046464f2c3eee6a8  D:\Hangeul Valley\game.js
-Hash: 92c1685dca2b940e320849e7a59e3babe68306219d825499046464f2c3eee6a8  D:\Hangeul Valley\assets\game.js
-```
+#### 1. Syntax Verification Check: PASS
+- **Command**: `node -c game.js`
+  - **Output**: Exit code 0 (No syntax errors)
+- **Command**: `node -c assets/game.js`
+  - **Output**: Exit code 0 (No syntax errors)
 
-#### 2. Matrix Audit Output (Raw Automated Verification Harness Output)
-```
-=== M1 FORENSIC INTEGRITY AUDIT HARNESS ===
-game.js SHA256:        92c1685dca2b940e320849e7a59e3babe68306219d825499046464f2c3eee6a8
-assets/game.js SHA256: 92c1685dca2b940e320849e7a59e3babe68306219d825499046464f2c3eee6a8
-Sync Status:           PASS (100% Identical)
-Palette P parsed successfully. Token count: 61
-Extracted 24 matrix definitions: down_0, down_1, down_2, up_0, up_1, up_2, left_0, left_1, left_2, right_0, right_1, right_2, water_down_0, water_down_1, water_down_2, harvest_down_0, harvest_down_1, harvest_down_2, pick_down_0, pick_down_1, pick_down_2, tool_watering_can, tool_basket, tool_sickle
+#### 2. Byte-for-Byte SHA256 Synchronization Check: PASS
+- **`game.js` <-> `assets/game.js`**:
+  - `game.js` SHA256: `612717BEAC3E2AA7821B3BB1656201E53729B15DD0701C83481F526FE3459C0E`
+  - `assets/game.js` SHA256: `612717BEAC3E2AA7821B3BB1656201E53729B15DD0701C83481F526FE3459C0E`
+  - Status: **IDENTICAL (100% SHA256 Match)**
+- **`index.html` <-> `assets/index.html`**:
+  - `index.html` SHA256: `72C0731982A8AE6D913B6C6FEA6E1AB632AD3905F1B8165CC8C96B70EB828138`
+  - `assets/index.html` SHA256: `72C0731982A8AE6D913B6C6FEA6E1AB632AD3905F1B8165CC8C96B70EB828138`
+  - Status: **IDENTICAL (100% SHA256 Match)**
 
-Invalid Dimensions:   0
-Invalid Tokens:       0
-Placeholders Detected: 0
-Texture Creation Calls Count: 28
-Animation Registrations Check: PASS
-
-=== FINAL VERDICT: CLEAN ===
-```
-
-#### 3. Sample Code Inspection (`game.js:1313-1342`)
-```javascript
-  static _genPlayerTextures(scene) {
-    const P = {
-      '.': null,
-      'K': 0x1A1A2E, 'k': 0x24243B,
-      '1': 0xFFF3E8, 'X': 0xFFE0C2, 'O': 0xFFE0C2, 'x': 0xF1B78B, 'i': 0xD38666, 'I': 0x9C533C, 'o': 0xE07068, 'N': 0x121016, 'W': 0xFFFFFF,
-      '4': 0xB87C52, 'f': 0x8D5B3A, 'H': 0x653E23, 'h': 0x3D2314,
-      ...
-```
+#### 3. Genuine Implementation Verification: PASS
+Each specified core component was inspected for genuine functional logic, absence of facades, hardcoded test passes, or dummy functions:
+- `inventoryState` (`game.js:3789`): Real in-memory state object managing `maxSlots`, `ingredients`, `seeds`, `scrolls`, and `cookedDishes`.
+- `addItemToInventory` (`game.js:3816`): Genuine item-addition logic with item stacking, capacity limits check via `getUsedInventorySlots()`, and save persistence.
+- `spawnDroppedItem` (`game.js:8488`): Complete Phaser rendering container creation (shadow, aura glow, emoji icon, Korean label, and bounce tween animation).
+- `updateDroppedItems` (`game.js:8557`): Full game loop tick logic including continuous sine-wave floating animation, magnet attraction physics towards player position, distance pickup detection, sound/visual FX triggering, and inventory space checks.
+- `collectSave` (`game.js:3928`): Genuine state serialization function gathering `inventoryState`, `droppedItems`, and player state into schema v4.
+- `applySave` (`game.js:3963`): Complete deserialization function migrating and restoring `inventoryState` and recreating dropped items in the active Phaser scene.
+- UI Grid Rendering (`game.js:4886` & `index.html:1858`): `renderInventoryGrid()` dynamically constructs grid DOM elements for ingredients and cooked dishes up to `maxSlots` with badges, icons, and titles.
+- Capacity Expansion (`game.js:3862` & `index.html:1880`): `expandInventoryCapacity()` deducts 50 coins via `spendCoins(50)`, expands `maxSlots` by +5, persists state, and re-renders UI grid.
 
 ---
 
-### Conclusion
+### Evidence Details
 
-The Milestone 1 main character sprite implementation in `game.js` and `assets/game.js` is fully authentic, syntactically correct, synchronized, and free of cheat shortcuts or integrity violations. The verdict is **CLEAN**.
+```
+Algorithm : SHA256
+Hash      : 612717BEAC3E2AA7821B3BB1656201E53729B15DD0701C83481F526FE3459C0E
+Path      : D:\Hangeul Valley\game.js
+
+Algorithm : SHA256
+Hash      : 612717BEAC3E2AA7821B3BB1656201E53729B15DD0701C83481F526FE3459C0E
+Path      : D:\Hangeul Valley\assets\game.js
+
+Algorithm : SHA256
+Hash      : 72C0731982A8AE6D913B6C6FEA6E1AB632AD3905F1B8165CC8C96B70EB828138
+Path      : D:\Hangeul Valley\index.html
+
+Algorithm : SHA256
+Hash      : 72C0731982A8AE6D913B6C6FEA6E1AB632AD3905F1B8165CC8C96B70EB828138
+Path      : D:\Hangeul Valley\assets\index.html
+```
+
+Syntax Check Commands:
+- `node -c game.js` -> 0 errors.
+- `node -c assets/game.js` -> 0 errors.

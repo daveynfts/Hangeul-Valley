@@ -1,58 +1,53 @@
-# BRIEFING — 2026-07-24T19:48:45+07:00
+# BRIEFING — 2026-07-24T20:22:30Z
 
 ## Mission
-Replace player textures in `game.js` with Industrial Yellow Farmer Pixel Robot sprite matrices, update palette and tool matrices, verify syntax and synchronization with `assets/game.js`, and write handoff documentation.
+Implement Milestone 1 Inventory Storage System, Inventory UI & Keybindings, and Harvest-to-Ground Drop Pipeline for Hangeul Valley.
 
 ## 🔒 My Identity
-- Archetype: implementer, qa, specialist
+- Archetype: implementer
 - Roles: implementer, qa, specialist
 - Working directory: d:\Hangeul Valley\.agents\teamwork_preview_worker_m1
-- Original parent: 61273c20-169f-4f19-afce-70f9dfa80106
-- Milestone: Milestone 1: Industrial Yellow Farmer Pixel Robot Replacement & Integration
+- Original parent: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Milestone: M1 Storage / Inventory System & Harvest-to-Ground Drop Pipeline
 
 ## 🔒 Key Constraints
-- Completely wipe existing human player sprite matrices in `_genPlayerTextures(scene)` and replace with Industrial Yellow Farmer Pixel Robot implementation.
-- Define palette P with tokens for yellow metallic casing (0xFACC15, 0xEAB308, 0xCA8A04), slate metallic chassis/treads (0x94A3B8, 0x64748B, 0x475569, 0x334155), glowing LED visor/screen (0x38BDF8, 0x06B6D4, 0x0284C7), antenna/beacon glow, 1px dark outline (0x0F172A), and tool/action FX tokens.
-- Update 12 walk matrices using Explorer 2's matrices with mechanical tread step differences (>= 8px changes in tread rows 11-15) and 1px mechanical bobbing.
-- Update 9 action matrices designed by Explorer 3.
-- Update 3 tool sprite matrices (tool_watering_can, tool_basket, tool_sickle).
-- Preserve legacy aliases (farmer0..3).
-- Synchronize game.js and assets/game.js, verify SHA256 checksums match, run `node -c`.
-- Genuine implementation required; no hardcoded test results or facade shortcuts.
+- Code modification minimal change principle.
+- Synchronization between root files and assets/ copies (`game.js` -> `assets/game.js`, `index.html` -> `assets/index.html`).
+- Zero syntax errors verified via `node -c`.
+- Text input focus guard for hotkeys 'I'/'i' and 'E'/'e'.
+- 3-second pickup cooldown debounce when inventory is full on dropped item pickup attempt.
 
 ## Current Parent
-- Conversation ID: 61273c20-169f-4f19-afce-70f9dfa80106
-- Updated: 2026-07-24T19:48:45+07:00
+- Conversation ID: b547cc1b-ac55-4776-ac07-72a671ad73d8
+- Updated: 2026-07-24T20:22:30Z
 
 ## Task Summary
-- **What to build**: Replacement of `_genPlayerTextures(scene)` in `game.js` and `assets/game.js` with Industrial Yellow Farmer Pixel Robot textures.
-- **Success criteria**: All walk, action, tool, and legacy alias matrices updated properly; syntax checks pass; game.js and assets/game.js identical hash (`27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`).
-- **Interface contracts**: `d:\Hangeul Valley\.agents\orchestrator\PROJECT.md`
+- **What to build**: Inventory storage state & helper functions, save serialization/deserialization, UI modal & button, hotkeys ('I'/'E'), ground drop physics & collection system for crops and apples.
+- **Success criteria**: Functional inventory with capacity, persistent save, modal UI grid with expand button, dropped item arc bounce + glide magnet + pickup / full inventory toast debounce, syntax validated.
+- **Interface contracts**: `.agents/orchestrator/PROJECT.md`, `.agents/teamwork_preview_explorer_m1_2/analysis.md`, `.agents/teamwork_preview_explorer_m1_3/analysis.md`.
+- **Code layout**: Root `game.js`, `index.html`, mirrored in `assets/`.
 
 ## Key Decisions Made
-- Wiped human farmer textures and replaced `_genPlayerTextures(scene)` in `game.js` with the 24 Industrial Yellow Farmer Pixel Robot matrices and palette P.
-- Copied `game.js` to `assets/game.js` to maintain byte-for-byte SHA256 hash match (`27fce209444d80fdbc8b1e3fc0dbac928ffdb2c3367636d16b8b93b7e8dddfa2`).
-- Preserved all legacy aliases (`farmer0..3`) and animation registrations (`player-walk-down/up/left/right`, `player-water`, `player-harvest`, `player-pick`).
-
-## Artifact Index
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\ORIGINAL_REQUEST.md` — Original request context
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\BRIEFING.md` — Current briefing
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\check_matrices.js` — Matrix and token validator
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\verify_m1.js` — Empirical Milestone 1 verification script
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\changes.md` — Record of code changes
-- `d:\Hangeul Valley\.agents\teamwork_preview_worker_m1\handoff.md` — Handoff report
+- Implemented `ITEM_DB` registry and `getItemInfo(keyOrId)` for bidirectional ID and Korean key resolution.
+- Updated `addItemToInventory` to handle stacking in existing occupied slots without incrementing total slot count.
+- Integrated dropped item entities into `collectSave()` and `applySave()` for full persistence across scene reloads.
+- Guarded hotkeys 'I'/'i' and 'E'/'e' against active input focus (`INPUT`, `TEXTAREA`, `isContentEditable`).
 
 ## Change Tracker
-- **Files modified**:
-  - `game.js`: Replaced `_genPlayerTextures(scene)` with Industrial Yellow Farmer Pixel Robot sprite matrices, palette P, action frames, tool sprites, and aliases.
-  - `assets/game.js`: Synchronized with `game.js` (identical byte-for-byte SHA256).
-- **Build status**: Pass (`node -c` clean, SHA256 matched, `verify_m1.js` PASS)
+- **Files modified**: `game.js`, `index.html`, `assets/game.js`, `assets/index.html`
+- **Build status**: Passed (`node -c` exit code 0)
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: PASS
-- **Lint status**: 0 errors
-- **Tests added/modified**: `verify_m1.js`, `check_matrices.js`
+- **Build/test result**: Passed Node syntax checks
+- **Lint status**: 0 syntax errors
+- **Tests added/modified**: Node syntax check executed
 
 ## Loaded Skills
 - None
+
+## Artifact Index
+- `.agents/teamwork_preview_worker_m1/ORIGINAL_REQUEST.md` — Original request
+- `.agents/teamwork_preview_worker_m1/progress.md` — Progress tracker
+- `.agents/teamwork_preview_worker_m1/changes.md` — Detailed changes log
+- `.agents/teamwork_preview_worker_m1/handoff.md` — Final handoff report
