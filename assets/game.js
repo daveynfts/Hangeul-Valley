@@ -1251,6 +1251,12 @@ class PixelArtRenderer {
       g.fillStyle(0x9A3412, 1); g.fillRect(2, 2, 2, 2);
     });
 
+    makeTex('p_firefly', 7, 7, (g) => {
+      g.fillStyle(0xFDE68A, 0.18); g.fillCircle(3.5, 3.5, 3.5);
+      g.fillStyle(0xFEF08A, 0.55); g.fillCircle(3.5, 3.5, 2);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(3, 3, 1, 1);
+    });
+
     makeTex('p_dust', 4, 4, (g) => {
       g.fillStyle(0xD97706, 0.8); g.fillRect(0, 0, 4, 4);
       g.fillStyle(0xFDE047, 0.6); g.fillRect(1, 1, 2, 2);
@@ -4083,6 +4089,12 @@ let seasonalState = { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, cl
 let leaderboardState = { personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 } };
 var cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
 var curriculumState = { completedChapters: [], chapterAttempts: {}, activeChapterId: null };
+var visualState = {
+  worldTimeMs: 6 * 3600 * 1000,
+  quality: 'high',
+  weather: 'clear',
+  weatherSeasonId: null
+};
 
 function syncGoldAlias() {
   gold = playerCurrencies.coins;
@@ -4131,6 +4143,16 @@ function migrateSaveData(d) {
     console.log(`[Save Migration] Upgrading schema from v${data.v || 5} -> v6`);
     data.curriculum = data.curriculum || { completedChapters: [], chapterAttempts: {}, activeChapterId: null };
     data.v = 6;
+  }
+  if (!data.v || data.v < 7) {
+    console.log(`[Save Migration] Upgrading schema from v${data.v || 6} -> v7`);
+    data.visual = data.visual || {
+      worldTimeMs: 6 * 3600 * 1000,
+      quality: 'high',
+      weather: 'clear',
+      weatherSeasonId: null
+    };
+    data.v = 7;
   }
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
     data.inventory.maxSlots = 20;
@@ -4190,7 +4212,7 @@ function collectSave(){
     : droppedItemsSave;
   droppedItemsSave = drops;
   return {
-    v: 6,
+    v: 7,
     currencies: playerCurrencies,
     gold: playerCurrencies.coins,
     unlockedLevels,
@@ -4213,6 +4235,7 @@ function collectSave(){
     droppedItems: drops,
     cooking: cookingState,
     curriculum: curriculumState,
+    visual: visualState,
     learning: window.HVLearning ? window.HVLearning.exportState() : null
   };
 }
@@ -4285,6 +4308,31 @@ function applySave(d){
   } else {
     curriculumState = { completedChapters: [], chapterAttempts: {}, activeChapterId: null };
   }
+  if (migrated.visual) {
+    const validQuality = ['high', 'low', 'off'].includes(migrated.visual.quality)
+      ? migrated.visual.quality
+      : 'high';
+    visualState = {
+      worldTimeMs: Number.isFinite(migrated.visual.worldTimeMs)
+        ? Math.max(0, migrated.visual.worldTimeMs) % (24 * 3600 * 1000)
+        : 6 * 3600 * 1000,
+      quality: validQuality,
+      weather: typeof migrated.visual.weather === 'string' ? migrated.visual.weather : 'clear',
+      weatherSeasonId: typeof migrated.visual.weatherSeasonId === 'string'
+        ? migrated.visual.weatherSeasonId
+        : null
+    };
+  } else {
+    visualState = {
+      worldTimeMs: 6 * 3600 * 1000,
+      quality: 'high',
+      weather: 'clear',
+      weatherSeasonId: null
+    };
+  }
+  if (sceneRef?.dayNight) sceneRef.dayNight.setTimeMs(visualState.worldTimeMs);
+  if (sceneRef?.weather) sceneRef.weather.syncSeason(seasonalState?.activeSeasonId, false);
+  updateVisualQualityControls();
   if (window.HVLearning) {
     window.HVLearning.importState(migrated.learning);
     hydrateLearningFromLegacy(migrated.harvests || {});
@@ -5610,6 +5658,9 @@ function submitAnswer(){
   });
   if(isCorrect){
     playChiptuneSFX('quiz_correct');
+    const quizPanel = $('quiz-ui');
+    if (quizPanel) quizPanel.classList.add('celebrate');
+    if (sceneRef?.feedback) sceneRef.feedback.correctAtPlayer();
     // ── Apple Tree harvest (special Phase 3 quiz) ─────────────────────────
     if(appleTreeQuizPending){
       feedbackText.textContent='🍎 Harvested! Excellent Korean!'; feedbackText.className='correct';
@@ -5778,6 +5829,8 @@ function answerHangulQuiz(isCorrect, button) {
     setTimeout(startHangulQuiz, 500);
   } else {
     playChiptuneSFX('quiz_wrong');
+    const quizPanel = $('quiz-ui');
+    if (quizPanel) quizPanel.classList.remove('celebrate');
     button.style.borderColor = '#ef4444';
     showToast(`❌ Hãy nghe và thử lại [${target.en}].`, 1800);
   }
@@ -7947,14 +8000,26 @@ menuBtn   && menuBtn.addEventListener('click', ()   => { alldoneOverlay.classLis
 
 // ═══════════════ GRAPHICS & ATMOSPHERE SYSTEM CLASSES ═════════════════════════
 class DayNightSystem {
-  constructor(scene, cycleDurationSec = 240) {
+  constructor(scene, cycleDurationSec = 480) {
     this.scene = scene;
     this.cycleDuration = cycleDurationSec * 1000;
-    this.timeMs = 6 * 3600 * 1000; // Start at 06:00 AM (Dawn)
+    this.dayDurationMs = 24 * 3600 * 1000;
+    this.timeMs = Number.isFinite(visualState?.worldTimeMs)
+      ? visualState.worldTimeMs
+      : 6 * 3600 * 1000;
 
     this.ambientOverlay = scene.add.graphics()
       .setDepth(9990)
       .setScrollFactor(0);
+
+    this.vignette = null;
+    try {
+      if (scene.cameras?.main?.postFX?.addVignette) {
+        this.vignette = scene.cameras.main.postFX.addVignette(0.5, 0.5, 0.92, 0);
+      }
+    } catch (e) {
+      this.vignette = null;
+    }
 
     this.keyframes = [
       { hour: 0,  color: { r: 15, g: 23, b: 42 },   alpha: 0.65 }, // Night
@@ -7978,22 +8043,66 @@ class DayNightSystem {
   }
 
   update(dt = 16) {
-    this.timeMs = (this.timeMs + dt) % (24 * 3600 * 1000);
+    const safeDelta = Math.min(100, Math.max(0, Number(dt) || 16));
+    const gameTimeDelta = safeDelta * (this.dayDurationMs / this.cycleDuration);
+    this.timeMs = (this.timeMs + gameTimeDelta) % this.dayDurationMs;
+    visualState.worldTimeMs = this.timeMs;
     const hour = (this.timeMs / (3600 * 1000)) % 24;
     const sunAngle = ((hour - 6) / 24) * Math.PI * 2;
 
     const state = this._interpolateLighting(hour);
+    const phase = this.getPhase(hour);
+    const nightStrength = this.getNightStrength(hour);
+    const qualityMultiplier = visualState.quality === 'off' ? 0.2 : 1;
 
     this.ambientOverlay.clear();
-    if (state.alpha > 0.005) {
+    if (state.alpha > 0.005 && qualityMultiplier > 0) {
       const hexColor = (state.color.r << 16) | (state.color.g << 8) | state.color.b;
       const w = this.width || (this.scene.scale ? this.scene.scale.width : 1024);
       const h = this.height || (this.scene.scale ? this.scene.scale.height : 768);
-      this.ambientOverlay.fillStyle(hexColor, state.alpha);
+      this.ambientOverlay.fillStyle(hexColor, state.alpha * qualityMultiplier);
       this.ambientOverlay.fillRect(0, 0, w, h);
     }
+    if (this.vignette) {
+      this.vignette.strength = visualState.quality === 'off'
+        ? 0
+        : 0.08 + nightStrength * 0.32;
+    }
 
-    return { hour, sunAngle, state };
+    return {
+      hour,
+      sunAngle,
+      state,
+      phase,
+      nightStrength,
+      formattedTime: this.formatTime(hour)
+    };
+  }
+
+  setTimeMs(value) {
+    if (!Number.isFinite(value)) return;
+    this.timeMs = Math.max(0, value) % this.dayDurationMs;
+  }
+
+  getNightStrength(hour) {
+    if (hour >= 21 || hour < 4) return 1;
+    if (hour >= 19) return (hour - 19) / 2;
+    if (hour < 6) return (6 - hour) / 2;
+    return 0;
+  }
+
+  getPhase(hour) {
+    if (hour >= 5 && hour < 8) return { id:'dawn', icon:'🌅', ko:'새벽', vi:'Bình minh', accent:'#e9a23b' };
+    if (hour >= 8 && hour < 17) return { id:'day', icon:'☀️', ko:'낮', vi:'Ban ngày', accent:'#d6a43b' };
+    if (hour >= 17 && hour < 20) return { id:'dusk', icon:'🌇', ko:'저녁', vi:'Hoàng hôn', accent:'#c85b3c' };
+    return { id:'night', icon:'🌙', ko:'밤', vi:'Ban đêm', accent:'#5c74a8' };
+  }
+
+  formatTime(hour) {
+    const totalMinutes = Math.floor(hour * 60) % (24 * 60);
+    const hours = String(Math.floor(totalMinutes / 60)).padStart(2, '0');
+    const minutes = String(totalMinutes % 60).padStart(2, '0');
+    return `${hours}:${minutes}`;
   }
 
   _interpolateLighting(hour) {
@@ -8028,9 +8137,11 @@ class AmbientLightingSystem {
     const blendMode = (typeof Phaser !== 'undefined' && Phaser.BlendModes) ? Phaser.BlendModes.ADD : 'ADD';
     const light = this.scene.add.image(x, y, textureKey)
       .setScale(scale)
-      .setAlpha(alpha)
+      .setAlpha(alpha * 0.15)
       .setBlendMode(blendMode)
       .setDepth(9985);
+    light._baseAlpha = alpha;
+    light._pulseOffset = Math.random() * Math.PI * 2;
     this.lights.push(light);
     return light;
   }
@@ -8041,10 +8152,17 @@ class AmbientLightingSystem {
     return light;
   }
 
-  update() {
+  update(environment) {
+    const nightStrength = environment?.nightStrength || 0;
+    const now = (this.scene.time?.now || 0) / 1000;
     this.lights.forEach(l => {
       if (l && l._followTarget && l._followTarget.active) {
         l.setPosition(l._followTarget.x, l._followTarget.y);
+      }
+      if (l?.active) {
+        const pulse = 0.94 + Math.sin(now * 2.4 + (l._pulseOffset || 0)) * 0.06;
+        const visibility = 0.12 + nightStrength * 0.88;
+        l.setAlpha((l._baseAlpha || 0.5) * visibility * pulse);
       }
     });
   }
@@ -8101,15 +8219,18 @@ class DynamicShadowSystem {
 
     const isDay = hour >= 5.5 && hour <= 18.5;
     const sunAlt = Math.max(0, sunSin);
-    const stretch = Math.max(0.35, Math.abs(sunCos) * 1.85 + (1 - sunAlt) * 0.65);
+    const effectsOff = visualState.quality === 'off';
+    const stretch = effectsOff
+      ? 0.55
+      : Math.max(0.35, Math.abs(sunCos) * 1.85 + (1 - sunAlt) * 0.65);
 
-    const dx = -sunCos * (shadowSprite._baseW * 0.75) * stretch;
+    const dx = effectsOff ? 0 : -sunCos * (shadowSprite._baseW * 0.75) * stretch;
     const dy = shadowSprite._offsetY + sunSin * 3.5;
 
     const scaleX = 1 + Math.abs(dx) / (shadowSprite._baseW * 0.55);
     const scaleY = Math.max(0.4, 1 - Math.abs(sunCos) * 0.35);
 
-    const alpha = isDay ? (0.22 + sunAlt * 0.26) : 0.12;
+    const alpha = effectsOff ? 0.16 : (isDay ? (0.22 + sunAlt * 0.26) : 0.12);
 
     const targetY = typeof target.y === 'number' ? target.y : 0;
     const groundDepth = Math.max(0, targetY - 1);
@@ -8121,7 +8242,12 @@ class DynamicShadowSystem {
       shadowSprite._penumbra.setPosition(dx, dy);
       shadowSprite._penumbra.setScale(scaleX, scaleY);
       shadowSprite._penumbra.setAlpha(alpha);
-    } else {
+      shadowSprite._penumbra.setRotation(effectsOff ? 0 : Math.atan2(dy, dx || 0.001) * 0.08);
+    }
+    if (shadowSprite._aoCore) {
+      shadowSprite._aoCore.setAlpha(isDay ? 0.22 : 0.15);
+    }
+    if (!shadowSprite._penumbra) {
       shadowSprite.setPosition(target.x + dx, target.y + dy);
       shadowSprite.setScale(scaleX, scaleY);
       shadowSprite.setAlpha(alpha);
@@ -8159,6 +8285,10 @@ class WeatherEngine {
     this.scene = scene;
     this.currentWeather = 'clear';
     this.emitters = {};
+    this.seasonId = null;
+    this.weatherTimer = 0;
+    this.weatherInterval = 85 * 1000;
+    this.nightParticlesActive = false;
 
     this.initEmitters();
   }
@@ -8215,14 +8345,51 @@ class WeatherEngine {
         }).setScrollFactor(0).setDepth(9940);
       } catch (e) {}
     }
+
+    if (this.scene.textures && this.scene.textures.exists('p_leaf_orange')) {
+      try {
+        this.emitters.leaves = this.scene.add.particles(W / 2, -12, 'p_leaf_orange', {
+          x: { min: -W / 2, max: W / 2 },
+          speedY: { min: 28, max: 72 },
+          speedX: { min: -45, max: 30 },
+          rotate: { min: -160, max: 160 },
+          lifespan: 7000,
+          quantity: 1,
+          frequency: 260,
+          scale: { start: 0.7, end: 1.05 },
+          alpha: { start: 0.9, end: 0.15 },
+          emitting: false
+        }).setScrollFactor(0).setDepth(9950);
+      } catch (e) {}
+    }
+
+    if (this.scene.textures && this.scene.textures.exists('p_firefly')) {
+      try {
+        this.emitters.fireflies = this.scene.add.particles(0, H * 0.62, 'p_firefly', {
+          x: { min: 0, max: W },
+          y: { min: -H * 0.38, max: H * 0.32 },
+          speedX: { min: -12, max: 12 },
+          speedY: { min: -18, max: 8 },
+          lifespan: 4200,
+          quantity: 1,
+          frequency: 320,
+          scale: { start: 0.55, end: 1.25 },
+          alpha: { start: 0, ease: 'Sine.easeInOut', to: 1, yoyo: true },
+          emitting: false
+        }).setScrollFactor(0).setDepth(9960);
+      } catch (e) {}
+    }
   }
 
   setWeather(type) {
-    this.currentWeather = type;
-    Object.keys(this.emitters).forEach(key => {
+    const supported = ['clear', 'rain', 'snow', 'fog', 'leaves'];
+    const nextType = supported.includes(type) ? type : 'clear';
+    this.currentWeather = nextType;
+    visualState.weather = nextType;
+    ['rain', 'snow', 'fog', 'leaves'].forEach(key => {
       if (this.emitters[key]) {
         try {
-          if (key === type) {
+          if (key === nextType && visualState.quality !== 'off') {
             this.emitters[key].start();
           } else {
             this.emitters[key].stop();
@@ -8231,7 +8398,180 @@ class WeatherEngine {
       }
     });
   }
+
+  getSeasonWeatherOptions(seasonId) {
+    if (seasonId === 'seollal') return ['snow', 'clear', 'fog', 'snow'];
+    if (seasonId === 'childrens_day') return ['clear', 'leaves', 'rain', 'clear'];
+    return ['leaves', 'clear', 'fog', 'leaves'];
+  }
+
+  syncSeason(seasonId, force = false) {
+    const supportedSeasons = ['chuseok', 'seollal', 'childrens_day'];
+    const nextSeason = supportedSeasons.includes(seasonId) ? seasonId : 'chuseok';
+    const seasonChanged = visualState.weatherSeasonId !== nextSeason;
+    this.seasonId = nextSeason;
+    visualState.weatherSeasonId = nextSeason;
+    const options = this.getSeasonWeatherOptions(nextSeason);
+    const savedWeatherIsValid = options.includes(visualState.weather);
+    if (force || seasonChanged || !savedWeatherIsValid) {
+      this.setWeather(options[0]);
+    } else {
+      this.setWeather(visualState.weather);
+    }
+    this.weatherTimer = 0;
+  }
+
+  update(environment, dt = 16) {
+    const safeDelta = Math.min(100, Math.max(0, Number(dt) || 16));
+    if (visualState.quality === 'off') {
+      Object.values(this.emitters).forEach(emitter => {
+        try { emitter?.stop(); } catch (e) {}
+      });
+      this.nightParticlesActive = false;
+      return;
+    }
+
+    this.weatherTimer += safeDelta;
+    if (this.weatherTimer >= this.weatherInterval) {
+      this.weatherTimer = 0;
+      const options = this.getSeasonWeatherOptions(this.seasonId);
+      const currentIndex = Math.max(0, options.indexOf(this.currentWeather));
+      const offset = 1 + Math.floor(Math.random() * Math.max(1, options.length - 1));
+      this.setWeather(options[(currentIndex + offset) % options.length]);
+    }
+
+    const allowFireflies = visualState.quality === 'high'
+      && (this.currentWeather === 'clear' || this.currentWeather === 'leaves')
+      && (environment?.nightStrength || 0) >= 0.45;
+    if (allowFireflies !== this.nightParticlesActive && this.emitters.fireflies) {
+      this.nightParticlesActive = allowFireflies;
+      try {
+        if (allowFireflies) this.emitters.fireflies.start();
+        else this.emitters.fireflies.stop();
+      } catch (e) {}
+    }
+  }
+
+  applyQuality() {
+    this.setWeather(this.currentWeather);
+    if (visualState.quality !== 'high' && this.emitters.fireflies) {
+      try { this.emitters.fireflies.stop(); } catch (e) {}
+      this.nightParticlesActive = false;
+    }
+  }
+
+  resize(width, height) {
+    ['rain', 'snow', 'leaves'].forEach(key => {
+      if (this.emitters[key]) this.emitters[key].setPosition(width / 2, -20);
+    });
+    if (this.emitters.fireflies) this.emitters.fireflies.setPosition(0, height * 0.62);
+  }
+
+  getDisplayState() {
+    const labels = {
+      clear: { icon:'☀️', ko:'맑음', vi:'Quang đãng' },
+      rain: { icon:'🌧️', ko:'비', vi:'Mưa' },
+      snow: { icon:'❄️', ko:'눈', vi:'Tuyết' },
+      fog: { icon:'🌫️', ko:'안개', vi:'Sương' },
+      leaves: { icon:'🍂', ko:'바람', vi:'Gió mùa' }
+    };
+    return labels[this.currentWeather] || labels.clear;
+  }
 }
+
+class WorldFeedbackSystem {
+  constructor(scene) {
+    this.scene = scene;
+  }
+
+  ring(x, y, color = 0xF4C95D, strength = 1) {
+    if (visualState.quality === 'off') return;
+    const ring = this.scene.add.ellipse(x, y, 18, 8, 0x000000, 0)
+      .setStrokeStyle(Math.max(1, Math.round(2 * strength)), color, 0.95)
+      .setDepth(y + 45);
+    this.scene.tweens.add({
+      targets:ring,
+      scaleX:2.6 + strength * 0.45,
+      scaleY:2.3 + strength * 0.35,
+      alpha:0,
+      duration:420 + strength * 100,
+      ease:'Cubic.Out',
+      onComplete:()=>ring.destroy()
+    });
+  }
+
+  action(type, x, y) {
+    const palette = {
+      plant: { color:0x4ADE80, strength:0.7 },
+      water: { color:0x38BDF8, strength:0.85 },
+      harvest: { color:0xFACC15, strength:1.35 },
+      correct: { color:0xC084FC, strength:0.8 }
+    };
+    const config = palette[type] || palette.correct;
+    this.ring(x, y, config.color, config.strength);
+    if (visualState.quality !== 'high') return;
+    if (type === 'harvest') {
+      try {
+        this.scene.cameras.main.shake(90, 0.0018);
+        this.scene.cameras.main.flash(70, 255, 236, 160, false);
+      } catch (e) {}
+    }
+  }
+
+  correctAtPlayer() {
+    const target = this.scene.player;
+    if (!target) return;
+    this.action('correct', target.x, target.y + 10);
+  }
+}
+
+function updateWorldVisualHUD(environment, weatherState) {
+  if (!environment) return;
+  const stateEl = document.getElementById('hud-world-state');
+  const timeEl = document.getElementById('hud-world-time');
+  const phaseEl = document.getElementById('hud-world-phase');
+  const weatherEl = document.getElementById('hud-world-weather');
+  if (timeEl) timeEl.textContent = environment.formattedTime;
+  if (phaseEl) {
+    phaseEl.textContent = `${environment.phase.icon} ${environment.phase.ko}`;
+    phaseEl.title = `${environment.phase.vi} · ${environment.formattedTime}`;
+  }
+  if (weatherEl && weatherState) {
+    weatherEl.textContent = `${weatherState.icon} ${weatherState.ko}`;
+    weatherEl.title = weatherState.vi;
+  }
+  if (stateEl) stateEl.style.setProperty('--world-accent', environment.phase.accent);
+  if (document.body) {
+    document.body.dataset.dayPhase = environment.phase.id;
+    document.body.dataset.visualQuality = visualState.quality;
+  }
+}
+
+function updateVisualQualityControls() {
+  const button = document.getElementById('visual-quality-btn');
+  const label = {
+    high:'✨ FX High',
+    low:'✨ FX Low',
+    off:'✨ FX Off'
+  }[visualState.quality] || '✨ FX High';
+  if (button) button.textContent = label;
+  if (document.body) document.body.dataset.visualQuality = visualState.quality;
+  if (sceneRef?.weather) sceneRef.weather.applyQuality();
+}
+
+window.cycleVisualQuality = function() {
+  const order = ['high', 'low', 'off'];
+  const currentIndex = order.indexOf(visualState.quality);
+  visualState.quality = order[(currentIndex + 1) % order.length];
+  updateVisualQualityControls();
+  persistSave();
+  const descriptions = {
+    high:'Hiệu ứng đầy đủ',
+    low:'Giảm particle để tăng hiệu năng',
+    off:'Chỉ giữ ánh sáng cơ bản'
+  };
+  showToast(`🎨 ${descriptions[visualState.quality]}`, 2200);
+};
 
 // ═══════════════ PHASER SCENE ════════════════════════════════════════════════
 class FarmScene extends Phaser.Scene {
@@ -8273,6 +8613,10 @@ class FarmScene extends Phaser.Scene {
     this.lighting = new AmbientLightingSystem(this);
     this.shadows = new DynamicShadowSystem(this);
     this.weather = new WeatherEngine(this);
+    this.feedback = new WorldFeedbackSystem(this);
+    this.weather.syncSeason(seasonalState?.activeSeasonId, false);
+    this._worldHudElapsed = 0;
+    updateVisualQualityControls();
 
     if (this.textures && this.textures.exists('p_sparkle') && typeof this.add.particles === 'function') {
       try {
@@ -8319,10 +8663,11 @@ class FarmScene extends Phaser.Scene {
       const nw = gameSize.width, nh = gameSize.height;
       this.cameras.main.setBounds(0, 0, Math.max(nw, W), Math.max(nh, H));
       // Update weather/lighting overlays to cover new size
-      if (this.lighting) {
-        this.lighting.width = nw;
-        this.lighting.height = nh;
+      if (this.dayNight) {
+        this.dayNight.width = nw;
+        this.dayNight.height = nh;
       }
+      if (this.weather) this.weather.resize(nw, nh);
     });
   }
 
@@ -9753,6 +10098,7 @@ class FarmScene extends Phaser.Scene {
       addGold(bonus);
       this._flyCoins(this.appleX, this.appleY - 30, Math.min(bonus, 8));
       this._label(this.appleX, this.appleY - 30, `+${bonus} 🍎 BONUS!`);
+      if (this.feedback) this.feedback.action('harvest', this.appleX, this.appleY);
 
       this.spawnDroppedItem('사과', this.appleX, this.appleY);
 
@@ -10088,13 +10434,20 @@ class FarmScene extends Phaser.Scene {
     const playerBaseY = this.player.y + (this.player.displayHeight * (1 - this.player.originY));
     this.player.setDepth(playerBaseY);
 
+    let environment = null;
     if (this.dayNight) {
-      const env = this.dayNight.update(dt || 16);
+      environment = this.dayNight.update(dt || 16);
       if (this.shadows) {
-        this.shadows.updateAllShadows(env.sunAngle, env.hour);
+        this.shadows.updateAllShadows(environment.sunAngle, environment.hour);
       }
     }
-    if (this.lighting) this.lighting.update();
+    if (this.lighting) this.lighting.update(environment);
+    if (this.weather) this.weather.update(environment, dt || 16);
+    this._worldHudElapsed = (this._worldHudElapsed || 0) + (dt || 16);
+    if (this._worldHudElapsed >= 400) {
+      this._worldHudElapsed = 0;
+      updateWorldVisualHUD(environment, this.weather?.getDisplayState());
+    }
 
     // Dynamic Y-sort depth sorting for NPCs (using static base Y anchors)
     if (this.shopNPC) this.shopNPC.setDepth(this.shopY || this.shopNPC.y);
@@ -10435,6 +10788,7 @@ class FarmScene extends Phaser.Scene {
       plot.plant=crop;
       this.tweens.add({targets:crop,scale:1,duration:300,ease:'Back.Out(3)'});
       this._sparkle(plot.x,plot.y); this._label(plot.x,plot.y,'Planted!');
+      if (this.feedback) this.feedback.action('plant', plot.x, plot.y);
       this._setState(plot,'1',ko);
     } else if(phase===2){
       // P2 correct: grow to sprout, set P3 timer, play watering animation
@@ -10446,6 +10800,7 @@ class FarmScene extends Phaser.Scene {
         if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
         if(plot.glow){plot.glow.destroy();plot.glow=null;}
         this._leaves(plot.x,plot.y-8); this._label(plot.x,plot.y,'Watered!');
+        if (this.feedback) this.feedback.action('water', plot.x, plot.y);
         this._setState(plot,'3',ko);
         savePlotsFn();
       });
@@ -10464,6 +10819,7 @@ class FarmScene extends Phaser.Scene {
         plantedWords.delete(ko);
         this._sparkle(plot.x,plot.y);
         this._label(plot.x,plot.y,prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`);
+        if (this.feedback) this.feedback.action('harvest', plot.x, plot.y);
 
         // Legendary tier mastery check (>= 10 harvests) -> +10 Honor
         if (newHarvests === 10) {
@@ -13768,6 +14124,7 @@ function initSeasonalEvents() {
   if (!seasonalState.activeSeasonId || !SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId]) {
     seasonalState.activeSeasonId = 'chuseok';
   }
+  if (sceneRef?.weather) sceneRef.weather.syncSeason(seasonalState.activeSeasonId, false);
   updateSeasonalBanner();
 }
 
@@ -13814,6 +14171,7 @@ function cycleSeasonalEvent() {
   seasonalState.activeSeasonId = seasons[nextIdx];
   seasonalState.seasonPoints = 0;
   seasonalState.progress = {};
+  if (sceneRef?.weather) sceneRef.weather.syncSeason(seasonalState.activeSeasonId, true);
 
   const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId];
   showToast(`🎉 Festival Changed to ${cfg.name}!`, 3500);

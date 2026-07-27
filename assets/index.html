@@ -48,6 +48,19 @@
       --gold:     #f59e0b;
       --green-l:  #4ade80;
       --green-d:  #16a34a;
+
+      /* Korean Neo-Folk — softened 오방색 (Obangsaek) */
+      --folk-ink: #17232b;
+      --folk-ink-deep: #0d171d;
+      --folk-paper: #efe2c6;
+      --folk-paper-muted: #cbbd9f;
+      --folk-red: #b94b3d;
+      --folk-blue: #3f7186;
+      --folk-yellow: #d3a640;
+      --folk-green: #567a54;
+      --folk-violet: #75648f;
+      --folk-line: rgba(239, 226, 198, 0.22);
+      --world-accent: var(--folk-yellow);
     }
 
     body {
@@ -1352,6 +1365,117 @@
       #learning-chapter-detail { max-height:52vh; }
       #context-mission-options { grid-template-columns:1fr; }
     }
+
+    /* ══════════════ KOREAN NEO-FOLK VISUAL POLISH ══════════════ */
+    @keyframes folkSuccess {
+      0% { opacity:0; transform:translate(-50%,-35%) scale(.65) rotate(-4deg); }
+      35% { opacity:1; transform:translate(-50%,-55%) scale(1.04) rotate(2deg); }
+      100% { opacity:0; transform:translate(-50%,-85%) scale(1.18) rotate(0); }
+    }
+    @keyframes folkPanelIn {
+      from { opacity:0; transform:translateY(12px) scale(.985); }
+      to { opacity:1; transform:translateY(0) scale(1); }
+    }
+    @keyframes folkSkyPulse {
+      0%,100% { filter:saturate(.96) brightness(.98); }
+      50% { filter:saturate(1.04) brightness(1.03); }
+    }
+
+    #level-select-overlay {
+      background:
+        radial-gradient(circle at 82% 13%, rgba(211,166,64,.72) 0 42px, rgba(211,166,64,.2) 43px 82px, transparent 84px),
+        linear-gradient(145deg, transparent 0 55%, rgba(63,113,134,.16) 55.2% 66%, transparent 66.2%),
+        linear-gradient(215deg, transparent 0 58%, rgba(86,122,84,.14) 58.2% 70%, transparent 70.2%),
+        radial-gradient(ellipse at 30% 10%, rgba(185,75,61,.12) 0%, transparent 48%),
+        linear-gradient(160deg, #17232b 0%, #0d171d 100%) !important;
+      animation:fadeIn .35s ease, folkSkyPulse 8s ease-in-out infinite;
+    }
+    .ls-title {
+      background:linear-gradient(135deg,var(--folk-yellow) 16%,var(--folk-paper) 52%,#7fb0b8 86%);
+      background-clip:text; -webkit-background-clip:text;
+      filter:drop-shadow(0 3px 0 rgba(13,23,29,.8));
+    }
+    .level-card, .ls-resume-card {
+      background-color:rgba(23,35,43,.9) !important;
+      background-image:
+        radial-gradient(circle at 12% 16%, rgba(239,226,198,.055) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 78% 62%, rgba(239,226,198,.04) 0 1px, transparent 1.5px) !important;
+      background-size:19px 17px,23px 21px !important;
+      border-color:rgba(211,166,64,.72) !important;
+      box-shadow:0 0 0 2px var(--folk-ink-deep),0 12px 30px rgba(0,0,0,.42),inset 0 1px rgba(239,226,198,.15) !important;
+    }
+
+    #hud {
+      background-color:rgba(23,35,43,.92) !important;
+      background-image:
+        linear-gradient(90deg,rgba(185,75,61,.1),transparent 18%,transparent 82%,rgba(63,113,134,.1)),
+        radial-gradient(circle at 20% 30%,rgba(239,226,198,.055) 0 1px,transparent 1.5px) !important;
+      background-size:auto,18px 18px !important;
+      border-color:var(--world-accent) !important;
+      box-shadow:0 0 0 2px var(--folk-ink-deep),0 9px 24px rgba(0,0,0,.48),inset 0 1px rgba(239,226,198,.16) !important;
+    }
+    body[data-day-phase="dawn"] #hud { --world-accent:#e9a23b; }
+    body[data-day-phase="day"] #hud { --world-accent:#d3a640; }
+    body[data-day-phase="dusk"] #hud { --world-accent:#b94b3d; }
+    body[data-day-phase="night"] #hud { --world-accent:#657ba6; }
+    #hud-world-state {
+      --world-accent:var(--folk-yellow);
+      display:inline-flex;align-items:center;gap:5px;padding:4px 9px;
+      color:var(--folk-paper);font-family:'Noto Sans KR','VT323',sans-serif;font-size:12px;
+      background:linear-gradient(180deg,rgba(239,226,198,.1),rgba(13,23,29,.2));
+      border:1px solid color-mix(in srgb,var(--world-accent) 62%,transparent);
+      border-radius:999px;box-shadow:inset 0 1px rgba(255,255,255,.08);
+      white-space:nowrap;
+    }
+    #hud-world-time { color:#fff;font-family:'VT323',monospace;font-size:17px;letter-spacing:.5px; }
+    #hud-world-phase,#hud-world-weather { color:var(--folk-paper); }
+    .hud-world-divider { opacity:.38; }
+
+    #hud-overflow-menu,
+    #quiz-ui, #vocab-panel, #shop-panel, #fish-album-panel,
+    #trophy-panel, #duel-panel, #memory-panel, #vff-inner,
+    #cat-dialog-inner, #inventory-panel, #learning-path-panel, #hangul-panel {
+      background-color:rgba(23,35,43,.965) !important;
+      background-image:
+        radial-gradient(circle at 18% 22%,rgba(239,226,198,.05) 0 1px,transparent 1.4px),
+        radial-gradient(circle at 72% 68%,rgba(239,226,198,.035) 0 1px,transparent 1.4px),
+        linear-gradient(135deg,rgba(185,75,61,.045),transparent 36%,rgba(63,113,134,.055)) !important;
+      background-size:17px 19px,23px 21px,auto !important;
+      border-color:rgba(211,166,64,.7) !important;
+      box-shadow:0 0 0 2px var(--folk-ink-deep),0 20px 54px rgba(0,0,0,.62),inset 0 1px rgba(239,226,198,.14) !important;
+      animation:folkPanelIn .22s cubic-bezier(.2,.8,.2,1);
+    }
+    .hud-btn {
+      background:linear-gradient(180deg,rgba(211,166,64,.24),rgba(86,54,29,.22)) !important;
+      border-color:rgba(211,166,64,.72) !important;
+      box-shadow:0 4px 9px rgba(0,0,0,.32),inset 0 1px rgba(239,226,198,.12) !important;
+    }
+    .hud-btn:hover {
+      background:linear-gradient(180deg,rgba(211,166,64,.38),rgba(185,75,61,.2)) !important;
+      box-shadow:0 0 0 1px rgba(239,226,198,.16),0 7px 15px rgba(0,0,0,.38) !important;
+    }
+    #quiz-ui.celebrate::after {
+      content:'✦  ㄱ  ㅏ  한  ✦';
+      position:absolute;left:50%;top:46%;z-index:7;pointer-events:none;
+      color:#f8dc83;font-family:'Noto Sans KR','Press Start 2P',sans-serif;font-size:26px;
+      white-space:nowrap;text-shadow:0 2px #5a361d,0 0 16px rgba(250,204,21,.7);
+      animation:folkSuccess .72s ease-out forwards;
+    }
+    #feedback-text.correct { color:#a7d49b;text-shadow:0 2px #18331c,0 0 9px rgba(74,222,128,.32); }
+    body[data-visual-quality="off"] #hud-world-state { opacity:.72;filter:saturate(.65); }
+
+    @media (max-width:980px) {
+      #hud-world-state { order:5; }
+      #hud-world-phase { display:none; }
+    }
+    @media (max-width:620px) {
+      #hud-world-weather,.hud-world-divider { display:none; }
+      #hud-world-state { padding:3px 7px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation-duration:.01ms !important;animation-iteration-count:1 !important;scroll-behavior:auto !important; }
+      .hud-btn,.level-card,.learning-chapter-card { transition:none !important; }
+    }
     .seasonal-vocab-card { background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 10px; padding: 10px; text-align: center; }
   </style>
 </head>
@@ -1393,6 +1517,12 @@
       <span id="hud-level">Level 1</span>
       <span id="hud-sep">|</span>
       <span id="hud-progress">🌱 0</span>
+      <span id="hud-world-state" title="World time and weather">
+        <span id="hud-world-phase">🌅 새벽</span>
+        <span id="hud-world-time">06:00</span>
+        <span class="hud-world-divider">·</span>
+        <span id="hud-world-weather">🍂 바람</span>
+      </span>
       <div id="active-buff-bar" style="display:inline-flex; gap:6px; align-items:center;"></div>
     </div>
 
@@ -1423,6 +1553,7 @@
         <button class="hud-btn hud-overflow-item" id="fish-album-btn" title="Fish Encyclopedia" onclick="openFishAlbum(); toggleHudOverflow(false);">🐟 Fish</button>
         <button class="hud-btn hud-overflow-item" id="hangul-btn" title="Hangul Foundations" onclick="openHangulLab(); toggleHudOverflow(false);">🔤 Hangul</button>
         <button class="hud-btn hud-overflow-item" id="learning-path-btn" title="Korean Learning Path" onclick="openLearningPath(); toggleHudOverflow(false);">🗺️ Learn</button>
+        <button class="hud-btn hud-overflow-item" id="visual-quality-btn" title="Cycle visual effect quality" onclick="cycleVisualQuality()">✨ FX High</button>
         <button class="hud-btn hud-overflow-item" id="trophy-btn" title="Trophies" onclick="toggleHudOverflow(false);">🏆 Trophies</button>
       </div>
     </div>

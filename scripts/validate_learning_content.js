@@ -116,7 +116,8 @@ assert(html.includes('onclick="openGingerLearningPath()"'), 'Ginger must link to
 const game = read('game.js');
 assert(game.includes('activity:\'npc_ginger_context\''), 'Context missions must feed the learning engine');
 assert(game.includes('curriculum: curriculumState'), 'Curriculum progress must be persisted');
-assert(game.includes('v: 6'), 'Save schema v6 is required for curriculum progress');
+assert(game.includes('v: 7'), 'Save schema v7 is required for curriculum and visual progress');
+assert(game.includes('visual: visualState'), 'Visual world state must be persisted with the save');
 assert(game.includes('let saveInitStarted = false'), 'Save initialization must be guarded independently of player currency');
 assert(!game.includes('if(gold===0 && harvestCounts.size===0) initSave()'), 'Browser save loading must not depend on the starting coin balance');
 assert(!game.includes('__M2_TEST__') && !game.includes('__M3_TEST__'), 'Test-only globals must not ship in runtime code');
