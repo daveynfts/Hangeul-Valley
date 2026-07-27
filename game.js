@@ -3923,7 +3923,9 @@ const CROP_ICONS=['🌸','🥬','🍓','🌽','🌻'];
 
 // Gold reward: smooth diminishing returns (see advancePlot harvest logic)
 // Curve: 10 → 8 → 7 → 6 → 5 → 4 → 4 → 3 → 3 → 3... (min 3)
-const LEVEL_COST = (idx) => idx === 0 ? 0 : Math.floor(50 * Math.pow(1.8, idx - 1));
+// Learning packs follow a gentle quadratic curve. Coins remain meaningful for
+// world expansion without turning later lessons into an impossible grind.
+const LEVEL_COST = (idx) => idx === 0 ? 0 : Math.floor(80 + (30 * idx) + (10 * idx * idx));
 // Level 2: 50, Level 3: 90, Level 4: 162, Level 5: 292, Level 6: 525
 
 // SRS Intervals (change to 86400000/259200000 for real-day SRS)
@@ -4080,6 +4082,7 @@ var activeBuffs = {};
 let seasonalState = { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, claimedRewards: [] };
 let leaderboardState = { personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 } };
 var cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
+var curriculumState = { completedChapters: [], chapterAttempts: {}, activeChapterId: null };
 
 function syncGoldAlias() {
   gold = playerCurrencies.coins;
@@ -4117,8 +4120,24 @@ function migrateSaveData(d) {
     data.droppedItems = Array.isArray(data.droppedItems) ? data.droppedItems : [];
     data.v = 4;
   }
+  if (!data.v || data.v < 5) {
+    console.log(`[Save Migration] Upgrading schema from v${data.v || 4} -> v5`);
+    data.learning = data.learning || null;
+    data.seasonal = data.seasonal || { activeSeasonId: 'chuseok', seasonPoints: 0, claimedRewards: [] };
+    data.seasonal.progress = data.seasonal.progress || {};
+    data.v = 5;
+  }
+  if (!data.v || data.v < 6) {
+    console.log(`[Save Migration] Upgrading schema from v${data.v || 5} -> v6`);
+    data.curriculum = data.curriculum || { completedChapters: [], chapterAttempts: {}, activeChapterId: null };
+    data.v = 6;
+  }
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
     data.inventory.maxSlots = 20;
+  }
+  if (data.quests) {
+    data.quests.mainProgress = data.quests.mainProgress || {};
+    if (typeof data.quests.mainProgress.grandBosses !== 'number') data.quests.mainProgress.grandBosses = 0;
   }
 
   if (Array.isArray(data.unlockedPlots)) {
@@ -4171,7 +4190,7 @@ function collectSave(){
     : droppedItemsSave;
   droppedItemsSave = drops;
   return {
-    v: 4,
+    v: 6,
     currencies: playerCurrencies,
     gold: playerCurrencies.coins,
     unlockedLevels,
@@ -4180,6 +4199,7 @@ function collectSave(){
     unlockedPlotCount,
     harvests: hcObj,
     srs: srsData,
+    quizStreak,
     plots,
     lastLevel: currentLevelIndex,
     apple,
@@ -4191,7 +4211,9 @@ function collectSave(){
     seasonal: seasonalState,
     leaderboards: leaderboardState,
     droppedItems: drops,
-    cooking: cookingState
+    cooking: cookingState,
+    curriculum: curriculumState,
+    learning: window.HVLearning ? window.HVLearning.exportState() : null
   };
 }
 
@@ -4218,6 +4240,7 @@ function applySave(d){
   }
   if(migrated.harvests) Object.entries(migrated.harvests).forEach(([k,v])=>harvestCounts.set(k,v));
   if(migrated.srs) srsData = migrated.srs;
+  quizStreak = typeof migrated.quizStreak === 'number' ? migrated.quizStreak : 0;
   if(migrated.plots) plotSave = migrated.plots;
   if(typeof migrated.lastLevel==='number') currentLevelIndex = migrated.lastLevel;
   if(migrated.apple) appleTreeSave = migrated.apple;
@@ -4246,6 +4269,25 @@ function applySave(d){
     };
   } else {
     cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
+  }
+  if (migrated.curriculum) {
+    curriculumState = {
+      completedChapters: Array.isArray(migrated.curriculum.completedChapters)
+        ? Array.from(new Set(migrated.curriculum.completedChapters))
+        : [],
+      chapterAttempts: migrated.curriculum.chapterAttempts && typeof migrated.curriculum.chapterAttempts === 'object'
+        ? migrated.curriculum.chapterAttempts
+        : {},
+      activeChapterId: typeof migrated.curriculum.activeChapterId === 'string'
+        ? migrated.curriculum.activeChapterId
+        : null
+    };
+  } else {
+    curriculumState = { completedChapters: [], chapterAttempts: {}, activeChapterId: null };
+  }
+  if (window.HVLearning) {
+    window.HVLearning.importState(migrated.learning);
+    hydrateLearningFromLegacy(migrated.harvests || {});
   }
 
   initQuestState();
@@ -4287,6 +4329,45 @@ function loadSRS()   {}
 function loadEconomy() {}
 function getSrs(ko){ return srsData[ko]||{}; }
 function setSrs(ko,u){ srsData[ko]={...getSrs(ko),...u}; saveSRS(); }
+
+function getAllLearningWords() {
+  return Array.isArray(levelsData)
+    ? levelsData.flatMap(level => Array.isArray(level?.words) ? level.words : [])
+    : [];
+}
+
+function hydrateLearningFromLegacy(harvests) {
+  if (!window.HVLearning) return;
+  const legacy = harvests || Object.fromEntries(harvestCounts.entries());
+  window.HVLearning.bootstrapFromHarvestCounts(legacy, getAllLearningWords());
+}
+
+function recordLearningAttempt(word, details = {}) {
+  if (!window.HVLearning || !word) return null;
+  const attempt = window.HVLearning.recordAttempt({
+    word,
+    activity: details.activity || 'unknown',
+    modality: details.modality || 'recognition',
+    correct: Boolean(details.correct),
+    responseMs: details.responseMs || 0,
+    hints: details.hints || 0
+  });
+  if (!attempt) return null;
+  if (attempt.correct) {
+    checkQuestProgress('quiz');
+    if (!attempt.hints) updateSeasonalProgress('quizNoHint', 1);
+  }
+  persistSave();
+  if (typeof updateVocabBook === 'function') updateVocabBook();
+  return attempt;
+}
+
+function recordLearningExposure(word, activity = 'world') {
+  if (!window.HVLearning || !word) return null;
+  const result = window.HVLearning.recordExposure(word, activity);
+  persistSave();
+  return result;
+}
 
 // ═══════════════ ECONOMY STATE & CURRENCY HELPERS ════════════════════════════
 var unlockedLevels = [0];  // Level indices the player has bought
@@ -4407,6 +4488,7 @@ function calcLevelMastery(levelIdx) {
   if (!levelsData || !levelsData[levelIdx] || !levelsData[levelIdx].words) return 0;
   const words = levelsData[levelIdx].words;
   if (words.length === 0) return 100;
+  if (window.HVLearning) return window.HVLearning.calcLevelMastery(words);
   let mastered = 0;
   words.forEach(w => {
     if ((harvestCounts.get(w.ko) || 0) >= 3) mastered++;
@@ -4416,10 +4498,10 @@ function calcLevelMastery(levelIdx) {
 
 function isZoneUnlocked(zoneKey) {
   const reqs = {
-    arcade:  { reqLevel: 0, minPct: 80, name: levelsData[0]?.name || 'Level 1: Basic Nouns' },
-    fishing: { reqLevel: 1, minPct: 80, name: levelsData[1]?.name || 'Level 2: Animals' },
-    dungeon: { reqLevel: 2, minPct: 80, name: levelsData[2]?.name || 'Level 3: Colors' },
-    duel:    { reqLevel: 3, minPct: 80, name: levelsData[3]?.name || 'Level 4: Family' }
+    arcade:  { reqLevel: 0, minPct: 8,  name: levelsData[0]?.name || 'Level 1' },
+    fishing: { reqLevel: 0, minPct: 15, name: levelsData[0]?.name || 'Level 1' },
+    dungeon: { reqLevel: 1, minPct: 15, name: levelsData[1]?.name || 'Level 2' },
+    duel:    { reqLevel: 1, minPct: 25, name: levelsData[1]?.name || 'Level 2' }
   };
   const req = reqs[zoneKey];
   if (!req) return { unlocked: true };
@@ -4430,11 +4512,11 @@ function isZoneUnlocked(zoneKey) {
 function showHardLockToast(zoneKey) {
   const check = isZoneUnlocked(zoneKey);
   playChiptuneSFX('quiz_wrong');
-  showToast(`🔒 HARD LOCK: Reach ${check.targetPct}% SRS Mastery in ${check.reqName}! (Current: ${check.pct}%)`, 4000);
+  showToast(`🌱 Keep learning: reach ${check.targetPct}% mastery in ${check.reqName}. Current: ${check.pct}%`, 4000);
 }
 
 // ═══════════════ R2: SHOP PURCHASE QUIZ GATE ══════════════════════════════════
-let shopQuizState = { targetIdx: null, questions: [], currentQ: 0, correctCount: 0 };
+let shopQuizState = { targetIdx: null, questions: [], currentQ: 0, correctCount: 0, startedAt: 0 };
 
 function startShopQuizGate(idx) {
   const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
@@ -4458,6 +4540,7 @@ function startShopQuizGate(idx) {
 function renderShopQuizQuestion() {
   const q = shopQuizState.questions[shopQuizState.currentQ];
   if (!q) return;
+  shopQuizState.startedAt = Date.now();
 
   const ind = document.getElementById('sq-step-indicator');
   if (ind) ind.textContent = `Question ${shopQuizState.currentQ + 1} of 3`;
@@ -4477,6 +4560,15 @@ function renderShopQuizQuestion() {
 }
 
 function answerShopQuiz(isCorrect) {
+  const activeQuestion = shopQuizState.questions[shopQuizState.currentQ];
+  if (activeQuestion) {
+    recordLearningAttempt(activeQuestion.target, {
+      activity: 'shop_gate',
+      modality: 'recognition',
+      correct: isCorrect,
+      responseMs: Date.now() - (shopQuizState.startedAt || Date.now())
+    });
+  }
   if (isCorrect) {
     playChiptuneSFX('quiz_correct');
     shopQuizState.correctCount++;
@@ -4515,7 +4607,7 @@ function cancelShopQuizGate() {
 }
 
 // ═══════════════ R2: BOSS ENTRANCE GATE CHALLENGE ═════════════════════════════
-let bossGateState = { type: null, questions: [], currentQ: 0, callback: null };
+let bossGateState = { type: null, questions: [], currentQ: 0, callback: null, startedAt: 0 };
 
 function startBossGateChallenge(type, questionsCount, onCompleteCallback) {
   const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
@@ -4541,6 +4633,7 @@ function startBossGateChallenge(type, questionsCount, onCompleteCallback) {
 function renderBossGateQuestion() {
   const q = bossGateState.questions[bossGateState.currentQ];
   if (!q) return;
+  bossGateState.startedAt = Date.now();
 
   const ind = document.getElementById('bg-step-indicator');
   if (ind) ind.textContent = `Gate Challenge ${bossGateState.currentQ + 1} of ${bossGateState.questions.length}`;
@@ -4560,6 +4653,15 @@ function renderBossGateQuestion() {
 }
 
 function answerBossGate(isCorrect) {
+  const activeQuestion = bossGateState.questions[bossGateState.currentQ];
+  if (activeQuestion) {
+    recordLearningAttempt(activeQuestion.target, {
+      activity: `boss_gate_${bossGateState.type || 'unknown'}`,
+      modality: 'recognition',
+      correct: isCorrect,
+      responseMs: Date.now() - (bossGateState.startedAt || Date.now())
+    });
+  }
   if (isCorrect) {
     playChiptuneSFX('quiz_correct');
     bossGateState.currentQ++;
@@ -4591,7 +4693,7 @@ let activeQuestTab = 'main';
 
 let questState = {
   mainStep: 1,
-  mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0, duels: 0 },
+  mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0, duels: 0, grandBosses: 0 },
   mainCompleted: [],
   daily: [],
   weekly: [],
@@ -4600,20 +4702,32 @@ let questState = {
 };
 
 const MAIN_STORYLINE = [
-  { act: 1, id: 'act_1', title: 'Act I: Harvest of Hangeul', desc: 'Harvest 3 ripe words in farm. Reach 80% SRS Mastery in Level 1 (Basic Nouns).', target: 3, reqLevel: 0, minPct: 80, rCoins: 100, rGems: 10, rHonor: 50 },
-  { act: 2, id: 'act_2', title: 'Act II: Beast Master', desc: 'Defeat 5 Dungeon beasts. Reach 80% SRS Mastery in Level 2 (Animals).', target: 5, reqLevel: 1, minPct: 80, rCoins: 150, rGems: 15, rHonor: 75 },
-  { act: 3, id: 'act_3', title: 'Act III: Bonds of Hangeul', desc: 'Win 3 Spell Duels. Reach 80% SRS Mastery in Level 4 (Family).', target: 3, reqLevel: 3, minPct: 80, rCoins: 200, rGems: 20, rHonor: 100 },
-  { act: 4, id: 'act_4', title: 'Act IV: Chromatic Angler', desc: 'Catch 5 fish in Crystal Pond. Reach 80% SRS Mastery in Level 3 (Colors).', target: 5, reqLevel: 2, minPct: 80, rCoins: 250, rGems: 25, rHonor: 125 },
-  { act: 5, id: 'act_5', title: 'Act V: Numeric Dominion', desc: 'Score 500+ in Arcade Machine. Reach 80% SRS Mastery in Level 6 (Numbers).', target: 500, reqLevel: 5, minPct: 80, rCoins: 300, rGems: 30, rHonor: 150 },
-  { act: 6, id: 'act_6', title: 'Act VI: Grand Sovereign', desc: 'Defeat Grand Necromancer Boss with 100% SRS Mastery across all levels.', target: 1, reqLevel: 0, minPct: 100, rCoins: 500, rGems: 50, rHonor: 300 }
+  { act: 1, id: 'act_1', title: 'Act I: Harvest of Hangeul', desc: 'Harvest 3 Korean words and build 8% learning mastery in Level 1.', target: 3, reqLevel: 0, minPct: 8, rCoins: 100, rGems: 10, rHonor: 50 },
+  { act: 2, id: 'act_2', title: 'Act II: Kitchen & Creatures', desc: 'Defeat 5 Dungeon creatures and build 15% mastery in Level 2.', target: 5, reqLevel: 1, minPct: 15, rCoins: 150, rGems: 15, rHonor: 75 },
+  { act: 3, id: 'act_3', title: 'Act III: Bonds of Hangeul', desc: 'Win 3 Spell Duels and build 25% mastery in Level 2.', target: 3, reqLevel: 1, minPct: 25, rCoins: 200, rGems: 20, rHonor: 100 },
+  { act: 4, id: 'act_4', title: 'Act IV: Language Angler', desc: 'Catch 5 fish and build 25% mastery in Level 3.', target: 5, reqLevel: 2, minPct: 25, rCoins: 250, rGems: 25, rHonor: 125 },
+  { act: 5, id: 'act_5', title: 'Act V: Arcade Scholar', desc: 'Score 500+ in Arcade and build 30% mastery in Level 4.', target: 500, reqLevel: 3, minPct: 30, rCoins: 300, rGems: 30, rHonor: 150 },
+  { act: 6, id: 'act_6', title: 'Act VI: Grand Sovereign', desc: 'Defeat the Grand Necromancer with 35% average mastery across unlocked levels.', target: 1, reqLevel: -1, minPct: 35, rCoins: 500, rGems: 50, rHonor: 300 }
 ];
+
+function getActMastery(act) {
+  if (act.reqLevel >= 0) return calcLevelMastery(act.reqLevel);
+  const owned = unlockedLevels.filter(idx => levelsData[idx]?.words?.length);
+  if (!owned.length) return 0;
+  return Math.floor(owned.reduce((sum, idx) => sum + calcLevelMastery(idx), 0) / owned.length);
+}
 
 function initQuestState() {
   const now = Date.now();
-  const DAY_MS = 24 * 3600 * 1000;
-  const WEEK_MS = 7 * DAY_MS;
+  const today = new Date(now);
+  const dailyKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  const monday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  const day = monday.getDay() || 7;
+  monday.setDate(monday.getDate() - day + 1);
+  const weeklyKey = `${monday.getFullYear()}-${String(monday.getMonth() + 1).padStart(2, '0')}-${String(monday.getDate()).padStart(2, '0')}`;
 
-  if (!questState.lastDailyReset || now - questState.lastDailyReset > DAY_MS) {
+  if (questState.lastDailyKey !== dailyKey) {
+    questState.lastDailyKey = dailyKey;
     questState.lastDailyReset = now;
     questState.daily = [
       { id: 'dq_1', title: '🌾 Daily Harvest', desc: 'Harvest 3 ripe crops in your farm.', current: 0, target: 3, rCoins: 30, rGems: 2, rHonor: 10, claimed: false },
@@ -4622,10 +4736,11 @@ function initQuestState() {
     ];
   }
 
-  if (!questState.lastWeeklyReset || now - questState.lastWeeklyReset > WEEK_MS) {
+  if (questState.lastWeeklyKey !== weeklyKey) {
+    questState.lastWeeklyKey = weeklyKey;
     questState.lastWeeklyReset = now;
     questState.weekly = [
-      { id: 'wq_1', title: '🟣 Master Scholar', desc: 'Master 5 Korean words (harvest count >= 5).', current: 0, target: 5, rCoins: 150, rGems: 15, rHonor: 50, claimed: false },
+      { id: 'wq_1', title: '🟣 Master Scholar', desc: 'Reach 70% learning mastery on 5 Korean words.', current: 0, target: 5, rCoins: 150, rGems: 15, rHonor: 50, claimed: false },
       { id: 'wq_2', title: '⚡ Arena Champion', desc: 'Win 3 Spell Duels.', current: 0, target: 3, rCoins: 200, rGems: 20, rHonor: 60, claimed: false },
       { id: 'wq_3', title: '🎣 Master Angler', desc: 'Catch 10 fish in Crystal Pond.', current: 0, target: 10, rCoins: 180, rGems: 18, rHonor: 55, claimed: false }
     ];
@@ -4637,8 +4752,10 @@ function checkQuestProgress(type, data = {}) {
   if (type === 'harvest') {
     questState.mainProgress.harvests += (data.count || 1);
     questState.daily.forEach(q => { if (q.id === 'dq_1') q.current = Math.min(q.target, q.current + (data.count || 1)); });
+    updateSeasonalProgress('harvest', data.count || 1);
   } else if (type === 'quiz') {
     questState.daily.forEach(q => { if (q.id === 'dq_2') q.current = Math.min(q.target, q.current + 1); });
+    updateSeasonalProgress('quizCorrect', 1);
   } else if (type === 'kill') {
     questState.mainProgress.kills += (data.count || 1);
     questState.daily.forEach(q => { if (q.id === 'dq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
@@ -4646,15 +4763,23 @@ function checkQuestProgress(type, data = {}) {
     questState.mainProgress.fish += (data.count || 1);
     questState.daily.forEach(q => { if (q.id === 'dq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
     questState.weekly.forEach(q => { if (q.id === 'wq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
+    updateSeasonalProgress('fish', data.count || 1);
   } else if (type === 'duel') {
     questState.mainProgress.duels += (data.count || 1);
     questState.weekly.forEach(q => { if (q.id === 'wq_2') q.current = Math.min(q.target, q.current + (data.count || 1)); });
   } else if (type === 'score') {
     if (data.score > questState.mainProgress.score) questState.mainProgress.score = data.score;
+    updateSeasonalProgress('arcadeScore', data.score || 0, 'max');
+  } else if (type === 'grandBoss') {
+    questState.mainProgress.grandBosses = (questState.mainProgress.grandBosses || 0) + (data.count || 1);
   }
 
   let totalMastered = 0;
-  harvestCounts.forEach((count) => { if (count >= 5) totalMastered++; });
+  if (window.HVLearning) {
+    totalMastered = getAllLearningWords().filter(word => window.HVLearning.getMastery(word) >= 70).length;
+  } else {
+    harvestCounts.forEach((count) => { if (count >= 5) totalMastered++; });
+  }
   questState.weekly.forEach(q => { if (q.id === 'wq_1') q.current = Math.min(q.target, totalMastered); });
 
   persistSave();
@@ -4700,9 +4825,9 @@ function renderQuestList() {
     else if (act.act === 3) curr = questState.mainProgress.duels;
     else if (act.act === 4) curr = questState.mainProgress.fish;
     else if (act.act === 5) curr = questState.mainProgress.score;
-    else if (act.act === 6) curr = questState.mainProgress.duels >= 1 ? 1 : 0;
+    else if (act.act === 6) curr = questState.mainProgress.grandBosses || 0;
 
-    const srsPct = calcLevelMastery(act.reqLevel);
+    const srsPct = getActMastery(act);
     const reqMet = curr >= act.target && srsPct >= act.minPct;
 
     const card = document.createElement('div');
@@ -4769,9 +4894,9 @@ function claimMainQuest(actNum) {
   else if (act.act === 3) curr = questState.mainProgress.duels;
   else if (act.act === 4) curr = questState.mainProgress.fish;
   else if (act.act === 5) curr = questState.mainProgress.score;
-  else if (act.act === 6) curr = questState.mainProgress.duels >= 1 ? 1 : 0;
+  else if (act.act === 6) curr = questState.mainProgress.grandBosses || 0;
 
-  const srsPct = calcLevelMastery(act.reqLevel);
+  const srsPct = getActMastery(act);
   if (curr < act.target || srsPct < act.minPct) {
     showToast('⚠️ Quest requirements not met!');
     return;
@@ -4822,9 +4947,12 @@ function saveAllGame(){
   showToast('💾 Game saved successfully!', 2200);
 }
 
-// Run save load once pywebview is ready (or immediately if in browser)
+// Run save load once pywebview is ready (or after a short browser fallback).
+let saveInitStarted = false;
 
 function initSave(){
+  if (saveInitStarted) return;
+  saveInitStarted = true;
   // Always try file-based load first, localStorage as fallback
   if(window.pywebview?.api){
     loadSave().then(()=>{ _afterLoad(); });
@@ -4844,7 +4972,7 @@ function _afterLoad(){
 if(window.addEventListener){
   window.addEventListener('pywebviewready', ()=>{ console.log('[pywebview] API ready'); initSave(); }, {once:true});
   // Fallback: if pywebview doesn't fire in 400ms (browser mode), init anyway
-  setTimeout(()=>{ if(gold===0 && harvestCounts.size===0) initSave(); }, 400);
+  setTimeout(()=>{ initSave(); }, 400);
 }
 let quizOpen=false, currentWord=null, currentPlot=null;
 let playerLocked=false, plantedWords=new Set(); // words currently ON a plot
@@ -4919,6 +5047,8 @@ function drawCatPortrait(){
   for(let i=3;i<9;i++) p(i,8,WH);
 }
 
+let catCurrentWord = null;
+
 function showCatDialog(){
   if(catDialogOpen) return;
   playChiptuneSFX('click');
@@ -4936,7 +5066,10 @@ function closeCatDialog(){
 function catSetWord(){
   const allWords=unlockedLevels.flatMap(idx=>levelsData[idx]?.words||[]);
   if(!allWords.length) return;
-  const w=allWords[Math.floor(Math.random()*allWords.length)];
+  const w=window.HVLearning
+    ? window.HVLearning.selectNextWord(allWords)
+    : allWords[Math.floor(Math.random()*allWords.length)];
+  catCurrentWord = w;
   document.getElementById('cat-emoji').textContent = w.hint||'📝';
   document.getElementById('cat-ko').textContent    = w.ko;
   document.getElementById('cat-en').textContent    = w.en;
@@ -4946,12 +5079,22 @@ function catSetWord(){
   const useKo = Math.random() < 0.5;
   const tipText = (useKo ? fact.ko : fact.vi) || fact.vi || fact.ko || '야옹~ Memorize this word!';
   document.getElementById('cat-dialog-tip').textContent = tipText;
+  recordLearningExposure(w, 'ginger_dialog');
 }
 function catAnotherWord(){
   const ko=document.getElementById('cat-ko');
   ko.animate([{opacity:0,transform:'scale(.5)'},{opacity:1,transform:'scale(1)'}],{duration:250,easing:'ease-out'});
   catSetWord();
 }
+window.speakCatWord = function(){
+  if (catCurrentWord && speakKorean(catCurrentWord.ko)) {
+    recordLearningExposure(catCurrentWord, 'ginger_dialog_audio');
+  }
+};
+window.openGingerLearningPath = function(){
+  closeCatDialog();
+  openLearningPath(curriculumState.activeChapterId || null);
+};
 document.getElementById('cat-dialog').addEventListener('keydown',e=>e.stopPropagation());
 
 
@@ -5111,6 +5254,8 @@ function closeModalById(overlayId) {
   else if (overlayId === 'shop-overlay') window.closeShop();
   else if (overlayId === 'memory-overlay') window.closeMemoryGame();
   else if (overlayId === 'duel-overlay') window.closeSpellDuel();
+  else if (overlayId === 'hangul-overlay') window.closeHangulLab();
+  else if (overlayId === 'learning-path-overlay') window.closeLearningPath();
   else if (overlayId === 'trophy-overlay') window.closeTrophies();
   else if (overlayId === 'level-select-overlay') hideLevelSelect();
   else setModalState(overlayId, false);
@@ -5275,13 +5420,31 @@ function buyLevelFromSelect(idx) {
   playChiptuneSFX('click');
   const cost = LEVEL_COST(idx);
   if (unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return; }
+  const gate = getPackLearningGate(idx);
+  if (!gate.allowed) { showToast(gate.message, 4000); return; }
   if (playerCurrencies.coins < cost) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return; }
   startShopQuizGate(idx);
+}
+
+function getPackLearningGate(idx) {
+  if (idx <= 0) return { allowed: true };
+  if (!unlockedLevels.includes(idx - 1)) {
+    return { allowed: false, message: `📚 Complete the story in Level ${idx} before opening this pack.` };
+  }
+  const target = Math.min(35, 8 + Math.floor((idx - 1) / 3) * 3);
+  const mastery = calcLevelMastery(idx - 1);
+  return {
+    allowed: mastery >= target,
+    mastery,
+    target,
+    message: `🧠 Reach ${target}% learning mastery in ${levelsData[idx - 1]?.name || `Level ${idx}`} first. Current: ${mastery}%`
+  };
 }
 
 // ═══════════════ START LEVEL / RESUME ═════════════════════════════════════════
 function startLevel(idx, resetCrops=true) {
   currentLevelIndex = idx;
+  try { localStorage.setItem('hv_lastLevel', String(idx)); } catch {}
   if(resetCrops){
     // Full fresh start: wipe everything
     progress = 0; plantedWords.clear();
@@ -5327,7 +5490,23 @@ const ROMAN_MAP = {
   '물':'mul'
 };
 function getRoman(ko){
-  return ROMAN_MAP[ko] || ko;
+  return ROMAN_MAP[ko] || (window.HVLearning ? window.HVLearning.romanizeHangul(ko) : ko);
+}
+
+function speakKorean(text) {
+  if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
+    showToast('🔇 Korean speech is not available in this browser.', 2500);
+    return false;
+  }
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'ko-KR';
+  utterance.rate = 0.82;
+  const voices = window.speechSynthesis.getVoices();
+  const koreanVoice = voices.find(voice => String(voice.lang).toLowerCase().startsWith('ko'));
+  if (koreanVoice) utterance.voice = koreanVoice;
+  window.speechSynthesis.speak(utterance);
+  return true;
 }
 
 function revealQuizHint(tier){
@@ -5335,27 +5514,44 @@ function revealQuizHint(tier){
   playChiptuneSFX('click');
   const box = $('quiz-hint-reveal-card');
   if(!box) return;
+  let revealed = false;
   
-  if(tier === 'roman'){
+  if(tier === 'audio'){
+    if (!speakKorean(currentWord.ko)) return;
+    recordLearningExposure(currentWord, 'audio_hint');
+    box.innerHTML = `🔊 <b>Nghe & nhắc lại:</b> <span lang="ko" style="color:#67e8f9;font-weight:bold">${currentWord.ko}</span>`;
+    revealed = true;
+  } else if(tier === 'roman'){
     const rom = getRoman(currentWord.ko);
     box.innerHTML = `🔤 <b>Phiên Âm:</b> <span style="color:#67e8f9; font-weight:bold">[${rom}]</span>`;
+    revealed = true;
   } else if(tier === 'chosung'){
-    if(!spendCoins(5)){ showToast('Need 5 Coins 🪙 for Chosung hint!'); return; }
+    if (quizFreeHintsRemaining > 0) quizFreeHintsRemaining--;
+    else if(!spendCoins(5)){ showToast('Need 5 Coins 🪙 for Chosung hint!'); return; }
     const ch = getChosung(currentWord.ko);
     box.innerHTML = `🔠 <b>Phụ Âm Đầu (초성):</b> <span style="color:#fde047; font-size:18px; font-weight:bold; letter-spacing:3px">${ch}</span>`;
+    revealed = true;
   } else if(tier === 'fact'){
-    if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 for Han-Viet hint!'); return; }
+    if (quizFreeHintsRemaining > 0) quizFreeHintsRemaining--;
+    else if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 for Han-Viet hint!'); return; }
     const fact = getFunFact(currentWord);
     box.innerHTML = `💡 <b>Mẹo Nhớ:</b> ${fact.vi || fact.ko || 'Từ vựng Tiếng Hàn thông dụng!'}`;
+    revealed = true;
   }
+  if (revealed) quizHintsUsed++;
   box.classList.remove('hidden');
 }
 
 // ====== QUIZ (SRS Phase-Aware) ================================================
 let currentPhase = 1;
+let quizStartedAt = 0;
+let quizHintsUsed = 0;
+let quizFreeHintsRemaining = 0;
 function openQuiz(word, plot, phase=1){
   if(quizOpen) return;
   currentWord=word; currentPlot=plot; currentPhase=phase;
+  quizStartedAt=Date.now(); quizHintsUsed=0;
+  quizFreeHintsRemaining = Math.max(0, Math.floor(getBuff('quiz_hints')?.value || 0));
   quizOpen=playerLocked=true;
   
   // Reset tier hint reveal card
@@ -5401,8 +5597,18 @@ function closeQuiz(){
 }
 function submitAnswer(){
   if(!currentWord) return;
-  const typed=answerInput.value.trim();
-  if(typed===currentWord.ko){
+  const typed=answerInput.value;
+  const isCorrect = window.HVLearning
+    ? window.HVLearning.isAnswerCorrect(typed, currentWord)
+    : typed.trim()===currentWord.ko;
+  recordLearningAttempt(currentWord, {
+    activity: appleTreeQuizPending ? 'apple_tree' : `farm_phase_${currentPhase}`,
+    modality: 'production',
+    correct: isCorrect,
+    responseMs: Date.now() - quizStartedAt,
+    hints: quizHintsUsed
+  });
+  if(isCorrect){
     playChiptuneSFX('quiz_correct');
     // ── Apple Tree harvest (special Phase 3 quiz) ─────────────────────────
     if(appleTreeQuizPending){
@@ -5437,12 +5643,447 @@ function submitAnswer(){
 submitBtn.addEventListener('click', submitAnswer);
 cancelBtn.addEventListener('click', closeQuiz);
 answerInput.addEventListener('keydown', e => {
+  if((e.isComposing || e.keyCode === 229)) { e.stopPropagation(); return; }
   if(e.key==='Enter'){e.preventDefault();submitAnswer();}
   if(e.key==='Escape') closeQuiz();
   e.stopPropagation();
 });
 quizBackdrop.addEventListener('keydown', e => e.stopPropagation());
 quizBackdrop.addEventListener('keyup',   e => e.stopPropagation());
+
+// ═══════════════ HANGUL FOUNDATIONS LAB ══════════════════════════════════════
+const HANGUL_LAB_INITIALS = [
+  { jamo:'ㄱ', index:0, roman:'g/k' }, { jamo:'ㄴ', index:2, roman:'n' },
+  { jamo:'ㄷ', index:3, roman:'d/t' }, { jamo:'ㄹ', index:5, roman:'r/l' },
+  { jamo:'ㅁ', index:6, roman:'m' }, { jamo:'ㅂ', index:7, roman:'b/p' },
+  { jamo:'ㅅ', index:9, roman:'s' }, { jamo:'ㅇ', index:11, roman:'-/ng' },
+  { jamo:'ㅈ', index:12, roman:'j' }, { jamo:'ㅊ', index:14, roman:'ch' },
+  { jamo:'ㅋ', index:15, roman:'k' }, { jamo:'ㅌ', index:16, roman:'t' },
+  { jamo:'ㅍ', index:17, roman:'p' }, { jamo:'ㅎ', index:18, roman:'h' }
+];
+const HANGUL_LAB_VOWELS = [
+  { jamo:'ㅏ', index:0, roman:'a' }, { jamo:'ㅑ', index:2, roman:'ya' },
+  { jamo:'ㅓ', index:4, roman:'eo' }, { jamo:'ㅕ', index:6, roman:'yeo' },
+  { jamo:'ㅗ', index:8, roman:'o' }, { jamo:'ㅛ', index:12, roman:'yo' },
+  { jamo:'ㅜ', index:13, roman:'u' }, { jamo:'ㅠ', index:17, roman:'yu' },
+  { jamo:'ㅡ', index:18, roman:'eu' }, { jamo:'ㅣ', index:20, roman:'i' }
+];
+let hangulLabState = { initial:0, vowel:0, quiz:null, startedAt:0 };
+
+function composeHangulSyllable(initialIndex, vowelIndex, finalIndex = 0) {
+  return String.fromCharCode(0xAC00 + ((initialIndex * 21 + vowelIndex) * 28) + finalIndex);
+}
+
+function currentHangulLabWord() {
+  const initial = HANGUL_LAB_INITIALS[hangulLabState.initial];
+  const vowel = HANGUL_LAB_VOWELS[hangulLabState.vowel];
+  const ko = composeHangulSyllable(initial.index, vowel.index);
+  return { id:`hangul_${ko}`, ko, en:window.HVLearning ? window.HVLearning.romanizeHangul(ko) : `${initial.roman}${vowel.roman}`, category:'한글 기초' };
+}
+
+function renderHangulLab() {
+  const initialGrid = document.getElementById('hangul-initial-grid');
+  const vowelGrid = document.getElementById('hangul-vowel-grid');
+  if (!initialGrid || !vowelGrid) return;
+  initialGrid.innerHTML = '';
+  vowelGrid.innerHTML = '';
+
+  HANGUL_LAB_INITIALS.forEach((item, index) => {
+    const button = document.createElement('button');
+    button.className = `hangul-choice${index === hangulLabState.initial ? ' selected' : ''}`;
+    button.innerHTML = `${item.jamo}<small>${item.roman}</small>`;
+    button.onclick = () => { hangulLabState.initial = index; renderHangulLab(); };
+    initialGrid.appendChild(button);
+  });
+  HANGUL_LAB_VOWELS.forEach((item, index) => {
+    const button = document.createElement('button');
+    button.className = `hangul-choice${index === hangulLabState.vowel ? ' selected' : ''}`;
+    button.innerHTML = `${item.jamo}<small>${item.roman}</small>`;
+    button.onclick = () => { hangulLabState.vowel = index; renderHangulLab(); };
+    vowelGrid.appendChild(button);
+  });
+
+  const word = currentHangulLabWord();
+  const result = document.getElementById('hangul-builder-result');
+  const roman = document.getElementById('hangul-builder-roman');
+  if (result) result.textContent = word.ko;
+  if (roman) roman.textContent = `[${word.en}]`;
+}
+
+window.openHangulLab = function() {
+  playChiptuneSFX('click');
+  renderHangulLab();
+  startHangulQuiz();
+  setModalState('hangul-overlay', true);
+};
+
+window.closeHangulLab = function() {
+  playChiptuneSFX('click');
+  setModalState('hangul-overlay', false);
+};
+
+window.speakHangulBuilder = function() {
+  const word = currentHangulLabWord();
+  if (speakKorean(word.ko)) recordLearningExposure(word, 'hangul_builder_audio');
+};
+
+window.startHangulQuiz = function() {
+  const initial = Phaser.Utils.Array.GetRandom(HANGUL_LAB_INITIALS);
+  const vowel = Phaser.Utils.Array.GetRandom(HANGUL_LAB_VOWELS);
+  const target = {
+    id:`hangul_${composeHangulSyllable(initial.index, vowel.index)}`,
+    ko:composeHangulSyllable(initial.index, vowel.index),
+    en:window.HVLearning ? window.HVLearning.romanizeHangul(composeHangulSyllable(initial.index, vowel.index)) : `${initial.roman}${vowel.roman}`,
+    category:'한글 기초'
+  };
+  const options = [target];
+  while (options.length < 4) {
+    const randomInitial = Phaser.Utils.Array.GetRandom(HANGUL_LAB_INITIALS);
+    const randomVowel = Phaser.Utils.Array.GetRandom(HANGUL_LAB_VOWELS);
+    const ko = composeHangulSyllable(randomInitial.index, randomVowel.index);
+    if (!options.some(option => option.ko === ko)) {
+      options.push({ id:`hangul_${ko}`, ko, en:window.HVLearning ? window.HVLearning.romanizeHangul(ko) : '', category:'한글 기초' });
+    }
+  }
+  Phaser.Utils.Array.Shuffle(options);
+  hangulLabState.quiz = target;
+  hangulLabState.startedAt = Date.now();
+  const prompt = document.getElementById('hangul-quiz-prompt');
+  if (prompt) prompt.textContent = `Khối âm tiết nào được đọc là [${target.en}]?`;
+  const container = document.getElementById('hangul-quiz-options');
+  if (!container) return;
+  container.innerHTML = '';
+  options.forEach(option => {
+    const button = document.createElement('button');
+    button.className = 'hangul-choice';
+    button.textContent = option.ko;
+    button.onclick = () => answerHangulQuiz(option.ko === target.ko, button);
+    container.appendChild(button);
+  });
+};
+
+function answerHangulQuiz(isCorrect, button) {
+  const target = hangulLabState.quiz;
+  if (!target) return;
+  recordLearningAttempt(target, {
+    activity:'hangul_lab',
+    modality:'recognition',
+    correct:isCorrect,
+    responseMs:Date.now() - hangulLabState.startedAt
+  });
+  if (isCorrect) {
+    playChiptuneSFX('quiz_correct');
+    button.classList.add('selected');
+    showToast(`✅ ${target.ko} = [${target.en}]`, 1800);
+    setTimeout(startHangulQuiz, 500);
+  } else {
+    playChiptuneSFX('quiz_wrong');
+    button.style.borderColor = '#ef4444';
+    showToast(`❌ Hãy nghe và thử lại [${target.en}].`, 1800);
+  }
+}
+
+// ═══════════════ GINGER'S KOREAN LEARNING PATH ═══════════════════════════════
+let learningPathUiState = { chapterId:null, missionIndex:0, missionStartedAt:0, running:false, locked:false };
+
+function escapeLearningHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function getCurriculumChapters() {
+  return Array.isArray(window.HVCurriculum?.chapters) ? window.HVCurriculum.chapters : [];
+}
+
+function resolveCurriculumWord(ko) {
+  const existing = getAllLearningWords().find(word => word.ko === ko);
+  if (existing) return existing;
+  return {
+    id:`curriculum_${ko}`,
+    ko,
+    en:window.HVLearning ? window.HVLearning.romanizeHangul(ko) : ko,
+    category:'문맥 학습'
+  };
+}
+
+function getChapterLearningMastery(chapter) {
+  if (!window.HVLearning || !chapter?.wordRefs?.length) return 0;
+  const total = chapter.wordRefs.reduce((sum, ko) => sum + window.HVLearning.getMastery(resolveCurriculumWord(ko)), 0);
+  return Math.round(total / chapter.wordRefs.length);
+}
+
+function getRecommendedChapterId() {
+  const chapters = getCurriculumChapters();
+  const unfinished = chapters.find(chapter => !curriculumState.completedChapters.includes(chapter.id));
+  return unfinished?.id || chapters[chapters.length - 1]?.id || null;
+}
+
+function getChapterAttemptStats(chapterId) {
+  const current = curriculumState.chapterAttempts[chapterId];
+  if (current && typeof current === 'object') return current;
+  const created = { runs:0, correct:0, incorrect:0, lastPlayedAt:0 };
+  curriculumState.chapterAttempts[chapterId] = created;
+  return created;
+}
+
+function renderLearningPath() {
+  const chapters = getCurriculumChapters();
+  const list = document.getElementById('learning-chapter-list');
+  const detail = document.getElementById('learning-chapter-detail');
+  const summary = document.getElementById('learning-path-summary');
+  const qaNote = document.getElementById('learning-qa-note');
+  if (!list || !detail) return;
+  if (!chapters.length) {
+    detail.innerHTML = '<div class="learning-card">Curriculum data is unavailable.</div>';
+    return;
+  }
+
+  const selectedId = learningPathUiState.chapterId || curriculumState.activeChapterId || getRecommendedChapterId();
+  const selected = chapters.find(chapter => chapter.id === selectedId) || chapters[0];
+  learningPathUiState.chapterId = selected.id;
+  curriculumState.activeChapterId = selected.id;
+
+  const completedCount = curriculumState.completedChapters.length;
+  if (summary) {
+    summary.textContent = `${completedCount}/${chapters.length} chương hoàn thành · học từ trong câu · luyện theo ngữ cảnh`;
+  }
+  if (qaNote) {
+    qaNote.textContent = `🧪 QA: ${window.HVCurriculum?.qa?.noteVi || 'Nội dung đang chờ biên tập ngôn ngữ.'}`;
+  }
+
+  list.innerHTML = '';
+  chapters.forEach(chapter => {
+    const completed = curriculumState.completedChapters.includes(chapter.id);
+    const button = document.createElement('button');
+    button.className = `learning-chapter-card${chapter.id === selected.id ? ' active' : ''}${completed ? ' completed' : ''}`;
+    button.innerHTML = `
+      <div class="learning-chapter-title">${chapter.icon} ${chapter.order}. ${escapeLearningHtml(chapter.titleVi)} ${completed ? '✅' : ''}</div>
+      <div class="learning-chapter-meta">${chapter.band} · ${escapeLearningHtml(chapter.titleKo)} · mastery ${getChapterLearningMastery(chapter)}%</div>
+    `;
+    button.onclick = () => selectLearningChapter(chapter.id);
+    list.appendChild(button);
+  });
+
+  renderLearningChapterDetail(selected);
+}
+
+function renderLearningChapterDetail(chapter) {
+  const detail = document.getElementById('learning-chapter-detail');
+  if (!detail || !chapter) return;
+  const stats = getChapterAttemptStats(chapter.id);
+  const grammarHtml = chapter.grammar.map(point => `
+    <div class="learning-card">
+      <div style="color:#fde047;font-weight:900;font-family:'Noto Sans KR',sans-serif;">${escapeLearningHtml(point.form)}</div>
+      <div style="color:#cbd5e1;margin-top:5px;">${escapeLearningHtml(point.meaningVi)}</div>
+      ${point.examples.map(example => `
+        <div style="margin-top:9px;padding:9px;border-left:3px solid #a78bfa;background:rgba(124,58,237,.1);">
+          <div lang="ko" style="font-family:'Noto Sans KR',sans-serif;font-size:19px;">${escapeLearningHtml(example.ko)}
+            <button class="hud-btn learning-audio-btn" data-ko="${escapeLearningHtml(example.ko)}" style="padding:3px 7px;margin-left:5px;">🔊</button>
+          </div>
+          <div style="color:#94a3b8;font-size:12px;margin-top:3px;">${escapeLearningHtml(example.vi)}</div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+  const dialogueHtml = chapter.dialogue.map(line => `
+    <div class="learning-dialogue-line">
+      <div class="learning-speaker">${escapeLearningHtml(line.speaker)}</div>
+      <div>
+        <div lang="ko" style="font-family:'Noto Sans KR',sans-serif;font-size:18px;">${escapeLearningHtml(line.ko)}</div>
+        <div style="color:#94a3b8;font-size:12px;">${escapeLearningHtml(line.vi)}</div>
+      </div>
+    </div>
+  `).join('');
+  const completed = curriculumState.completedChapters.includes(chapter.id);
+
+  detail.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+      <div>
+        <div style="color:#c4b5fd;font-family:'Press Start 2P',monospace;font-size:12px;">${chapter.icon} CHAPTER ${chapter.order} · ${chapter.band}</div>
+        <h2 style="margin:9px 0 2px;color:#fff;">${escapeLearningHtml(chapter.titleVi)}</h2>
+        <div lang="ko" style="color:#67e8f9;font-family:'Noto Sans KR',sans-serif;font-size:20px;">${escapeLearningHtml(chapter.titleKo)}</div>
+      </div>
+      <div style="text-align:right;color:${completed ? '#4ade80' : '#94a3b8'};font-weight:900;">${completed ? '✅ COMPLETE' : `${getChapterLearningMastery(chapter)}% MASTERY`}</div>
+    </div>
+    <div class="learning-card"><strong style="color:#f9a8d4;">🎯 Can-do:</strong> ${escapeLearningHtml(chapter.canDoVi)}</div>
+    ${grammarHtml}
+    <div class="learning-card">
+      <div style="color:#f9a8d4;font-weight:900;margin-bottom:6px;">🐱 HỘI THOẠI VỚI GINGER</div>
+      ${dialogueHtml}
+      <button class="hud-btn learning-dialogue-audio" style="margin-top:7px;">🔊 Nghe hội thoại</button>
+    </div>
+    <div id="context-mission-box" class="learning-card">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
+        <div>
+          <strong style="color:#67e8f9;">🎓 Context Mission</strong>
+          <div style="color:#94a3b8;font-size:12px;margin-top:3px;">${stats.runs} lượt · ${stats.correct} đúng · ${stats.incorrect} cần ôn</div>
+        </div>
+        <button class="hud-btn" id="start-context-mission-btn">${completed ? '🔁 Luyện lại' : '▶ Bắt đầu'}</button>
+      </div>
+      <div id="context-mission-content" style="margin-top:10px;color:#cbd5e1;">Hoàn thành ${chapter.missions.length} tình huống để mở dấu hoàn thành chương.</div>
+    </div>
+  `;
+
+  detail.querySelectorAll('.learning-audio-btn').forEach(button => {
+    button.onclick = () => speakCurriculumText(button.dataset.ko);
+  });
+  const dialogueAudio = detail.querySelector('.learning-dialogue-audio');
+  if (dialogueAudio) dialogueAudio.onclick = () => speakCurriculumDialogue(chapter.id);
+  const startButton = document.getElementById('start-context-mission-btn');
+  if (startButton) startButton.onclick = () => startContextMission(chapter.id);
+  if (learningPathUiState.running && learningPathUiState.chapterId === chapter.id) {
+    renderContextMissionQuestion();
+  }
+}
+
+window.selectLearningChapter = function(chapterId) {
+  learningPathUiState = { chapterId, missionIndex:0, missionStartedAt:0, running:false, locked:false };
+  curriculumState.activeChapterId = chapterId;
+  persistSave();
+  renderLearningPath();
+};
+
+window.openLearningPath = function(chapterId) {
+  playChiptuneSFX('click');
+  const desiredId = chapterId || curriculumState.activeChapterId || getRecommendedChapterId();
+  learningPathUiState = { chapterId:desiredId, missionIndex:0, missionStartedAt:0, running:false, locked:false };
+  setModalState('learning-path-overlay', true);
+  renderLearningPath();
+};
+
+window.closeLearningPath = function() {
+  playChiptuneSFX('click');
+  learningPathUiState.running = false;
+  setModalState('learning-path-overlay', false);
+};
+
+window.speakCurriculumText = function(text) {
+  if (text && speakKorean(text)) {
+    recordLearningExposure(resolveCurriculumWord(text), 'curriculum_audio');
+  }
+};
+
+window.speakCurriculumDialogue = function(chapterId) {
+  const chapter = window.HVCurriculum?.getChapter(chapterId);
+  if (!chapter) return;
+  const korean = chapter.dialogue.map(line => line.ko).join(' ');
+  if (speakKorean(korean)) {
+    chapter.wordRefs.forEach(ko => recordLearningExposure(resolveCurriculumWord(ko), 'curriculum_dialogue_audio'));
+  }
+};
+
+window.startContextMission = function(chapterId) {
+  const chapter = window.HVCurriculum?.getChapter(chapterId);
+  if (!chapter?.missions?.length) return;
+  learningPathUiState = {
+    chapterId,
+    missionIndex:0,
+    missionStartedAt:Date.now(),
+    running:true,
+    locked:false
+  };
+  curriculumState.activeChapterId = chapterId;
+  const stats = getChapterAttemptStats(chapterId);
+  stats.runs++;
+  stats.lastPlayedAt = Date.now();
+  persistSave();
+  renderLearningPath();
+};
+
+function renderContextMissionQuestion() {
+  const chapter = window.HVCurriculum?.getChapter(learningPathUiState.chapterId);
+  const content = document.getElementById('context-mission-content');
+  if (!chapter || !content || !learningPathUiState.running) return;
+  if (learningPathUiState.missionIndex >= chapter.missions.length) {
+    finishContextMission(chapter);
+    return;
+  }
+  const mission = chapter.missions[learningPathUiState.missionIndex];
+  learningPathUiState.missionStartedAt = Date.now();
+  learningPathUiState.locked = false;
+  const options = [...mission.choicesKo].sort(() => Math.random() - 0.5);
+  content.innerHTML = `
+    <div style="color:#94a3b8;font-size:12px;">Tình huống ${learningPathUiState.missionIndex + 1}/${chapter.missions.length}</div>
+    <div style="font-weight:800;margin-top:7px;">${escapeLearningHtml(mission.promptVi)}</div>
+    <div lang="ko" style="font-family:'Noto Sans KR',sans-serif;font-size:25px;color:#fff;margin-top:9px;">${escapeLearningHtml(mission.contextKo)}
+      <button class="hud-btn" id="context-audio-btn" style="padding:3px 7px;">🔊</button>
+    </div>
+    <div id="context-mission-options">
+      ${options.map(option => `<button class="context-choice" data-answer="${escapeLearningHtml(option)}">${escapeLearningHtml(option)}</button>`).join('')}
+    </div>
+    <div id="context-feedback" style="min-height:24px;margin-top:10px;"></div>
+  `;
+  const audioButton = document.getElementById('context-audio-btn');
+  if (audioButton) audioButton.onclick = () => speakCurriculumText(mission.contextKo.replace('___', mission.correctKo));
+  content.querySelectorAll('.context-choice').forEach(button => {
+    button.onclick = () => answerContextMission(button.dataset.answer, button);
+  });
+}
+
+function answerContextMission(answer, button) {
+  if (learningPathUiState.locked) return;
+  const chapter = window.HVCurriculum?.getChapter(learningPathUiState.chapterId);
+  const mission = chapter?.missions?.[learningPathUiState.missionIndex];
+  if (!mission) return;
+  const isCorrect = answer === mission.correctKo;
+  const stats = getChapterAttemptStats(chapter.id);
+  recordLearningAttempt(resolveCurriculumWord(mission.correctKo), {
+    activity:'npc_ginger_context',
+    modality:'context',
+    correct:isCorrect,
+    responseMs:Date.now() - learningPathUiState.missionStartedAt
+  });
+  const feedback = document.getElementById('context-feedback');
+  if (!isCorrect) {
+    stats.incorrect++;
+    button.classList.add('wrong');
+    playChiptuneSFX('quiz_wrong');
+    if (feedback) feedback.innerHTML = `<span style="color:#fca5a5;">❌ Chưa đúng. ${escapeLearningHtml(mission.explanationVi)}</span>`;
+    persistSave();
+    return;
+  }
+
+  learningPathUiState.locked = true;
+  stats.correct++;
+  button.classList.add('correct');
+  document.querySelectorAll('#context-mission-options .context-choice').forEach(choice => { choice.disabled = true; });
+  playChiptuneSFX('quiz_correct');
+  if (feedback) feedback.innerHTML = `<span style="color:#86efac;">✅ ${escapeLearningHtml(mission.explanationVi)}</span>`;
+  persistSave();
+  setTimeout(() => {
+    learningPathUiState.missionIndex++;
+    renderContextMissionQuestion();
+  }, 650);
+}
+
+function finishContextMission(chapter) {
+  const content = document.getElementById('context-mission-content');
+  if (!content) return;
+  const firstCompletion = !curriculumState.completedChapters.includes(chapter.id);
+  if (firstCompletion) {
+    curriculumState.completedChapters.push(chapter.id);
+    addCoins(30);
+  }
+  learningPathUiState.running = false;
+  persistSave();
+  content.innerHTML = `
+    <div style="text-align:center;padding:15px;">
+      <div style="font-size:38px;">${firstCompletion ? '🌟' : '✅'}</div>
+      <div style="color:#86efac;font-weight:900;margin-top:6px;">Hoàn thành ${escapeLearningHtml(chapter.titleVi)}!</div>
+      <div style="color:#94a3b8;margin-top:5px;">${firstCompletion ? 'Thưởng lần đầu: 30 🪙' : 'Tiến độ ôn tập đã được ghi nhận.'}</div>
+      <button class="hud-btn" style="margin-top:12px;" onclick="renderLearningPath()">Tiếp tục lộ trình</button>
+    </div>
+  `;
+  const summary = document.getElementById('learning-path-summary');
+  if (summary) {
+    summary.textContent = `${curriculumState.completedChapters.length}/${getCurriculumChapters().length} chương hoàn thành · học từ trong câu · luyện theo ngữ cảnh`;
+  }
+  showToast(`🎓 Ginger Mission complete${firstCompletion ? ' · +30 🪙' : ''}!`, 2400);
+}
 
 // ═══════════════ SHOP ════════════════════════════════════════════════════════
 function openShop() {
@@ -5461,6 +6102,8 @@ function closeShop() {
 function _doLevelPurchase(idx) {
   const cost = LEVEL_COST(idx);
   if(unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return false; }
+  const gate = getPackLearningGate(idx);
+  if (!gate.allowed) { showToast(gate.message, 4000); return false; }
   if(!spendCoins(cost)) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return false; }
   unlockedLevels.push(idx);
   if(sceneRef) sceneRef.refreshPlotAccess();
@@ -5471,6 +6114,8 @@ function buyLevel(idx) {
   playChiptuneSFX('click');
   const cost = LEVEL_COST(idx);
   if (unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return; }
+  const gate = getPackLearningGate(idx);
+  if (!gate.allowed) { showToast(gate.message, 4000); return; }
   if (playerCurrencies.coins < cost) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return; }
   startShopQuizGate(idx);
 }
@@ -7092,11 +7737,13 @@ const VOCAB_FACTS = {
   "additionally": {vi:"고유어 (Native Korean word). 예문: 일상 생활에서 덧붙여는 아주 자주 쓰이는 표현입니다. (Additionally is a very frequently used expression in daily life.) Văn cảnh: Từ vựng \"덧붙여\" (additionally) thuộc chủ đề 전환 및 첨가 부사. Xuất hiện phổ biến trong giao tiếp hàng ngày, phim ảnh và đời sống tại Hàn Quốc.", ko:"3 syllables: deot-but-yeo [deot · but · yeo]. 🧠 Hãy hình dung hình ảnh sinh động đại diện cho \"additionally\" và phát âm nhịp nhàng [deot-but-yeo] (덧 · 붙 · 여) để ghi nhớ sâu vào trí nhớ! 덧붙여를 항상 사용합니다 [deot-but-yeo hangsang sayonghamnida]"},
   "to wrap up / put in order": {vi:"고유어 (Native Korean word). 예문: 일상 생활에서 정리하자면은 아주 자주 쓰이는 표현입니다. (Wrap up / put in order is a very frequently used expression in daily life.) Văn cảnh: Từ vựng \"정리하자면\" (to wrap up / put in order) thuộc chủ đề 담화 연결 표지. Xuất hiện phổ biến trong giao tiếp hàng ngày, phim ảnh và đời sống tại Hàn Quốc.", ko:"5 syllables: jeong-ri-ha-ja-myeon [jeong · ri · ha · ja · myeon]. 🧠 Hãy hình dung hình ảnh sinh động đại diện cho \"wrap up / put in order\" và phát âm nhịp nhàng [jeong-ri-ha-ja-myeon] (정 · 리 · 하 · 자 · 면) để ghi nhớ sâu vào trí nhớ! 정리하자면을 항상 사용합니다 [jeong-ri-ha-ja-myeon hangsang sayonghamnida]"},
   "in brief / recap": {vi:"고유어 (Native Korean word). 예문: 일상 생활에서 요약하건대는 아주 자주 쓰이는 표현입니다. (In brief / recap is a very frequently used expression in daily life.) Văn cảnh: Từ vựng \"요약하건대\" (in brief / recap) thuộc chủ đề 담화 연결 표지. Xuất hiện phổ biến trong giao tiếp hàng ngày, phim ảnh và đời sống tại Hàn Quốc.", ko:"5 syllables: yo-yak-ha-geon-dae [yo · yak · ha · geon · dae]. 🧠 Hãy hình dung hình ảnh sinh động đại diện cho \"in brief / recap\" và phát âm nhịp nhàng [yo-yak-ha-geon-dae] (요 · 약 · 하 · 건 · 대) để ghi nhớ sâu vào trí nhớ! 요약하건대를 항상 사용합니다 [yo-yak-ha-geon-dae hangsang sayonghamnida]"},
-  "father": {vi:"Bố, cha", ko:"아버지"},
-  "sync_test_vocab_key": {vi:"Thử nghiệm đồng bộ", ko:"동보 테스트"},
-  "complex_hangul_vocab_key": {vi:"Nghĩa tiếng Việt có dấu: ế, ồ, ẵ, ự, 🏃‍♂️", ko:"앉다 (밠/뷁/쀍) 설명"},
-  "quote_test_key": {vi:"Quote test: \"Double\", 'Single', `Backtick`, \\Backslash\\, <script>alert('XSS')</script>", ko:"줄바꿈\n테스트 및 \"큰따옴표\", '작은따옴표'"}
+  "father": {vi:"아버지 là cách gọi “bố/cha” lịch sự và phổ biến. 예문: 아버지가 집에 계세요. (Bố đang ở nhà.) Khi nói thân mật trong gia đình, trẻ em cũng thường dùng 아빠.", ko:"4 âm tiết: a-beo-ji [아 · 버 · 지]. Âm tiết cuối 지 không có 받침. Hãy nhớ cặp xưng hô gia đình: 어머니 (mẹ) ↔ 아버지 (bố)."}
 };
+
+const COLLIDING_FACT_KEYS = new Set([
+  'to be cold', 'to be rewarding', 'art', 'historic site',
+  'public policy', 'on the other hand'
+]);
 
 // Generate a fun fact for any word (smart fallback if not in database)
 function getFunFact(word) {
@@ -7153,7 +7800,7 @@ function getFunFact(word) {
 
   if (!word) word = {};
   const key = (word.en || '').toLowerCase();
-  if (VOCAB_FACTS[key]) return VOCAB_FACTS[key];
+  if (VOCAB_FACTS[key] && !COLLIDING_FACT_KEYS.has(key)) return VOCAB_FACTS[key];
 
   const ko = word.ko || '';
   const en = word.en || '';
@@ -7215,7 +7862,10 @@ function showVocabFunFact(word) {
   $('vff-en').textContent       = word.en;
   $('vff-cat').textContent      = word.category || '';
   $('vff-phase').textContent    = phaseLabel;
-  $('vff-harvests').textContent = harvests > 0 ? `✅ Harvested ×${harvests}` : '🌱 Not harvested';
+  const mastery = window.HVLearning ? window.HVLearning.getMastery(word) : 0;
+  const dueAt = window.HVLearning ? window.HVLearning.dueAtForWord(word) : 0;
+  const dueLabel = dueAt && dueAt <= Date.now() ? ' · 🔁 Review due' : '';
+  $('vff-harvests').textContent = `🧠 Mastery ${mastery}% · Harvested ×${harvests}${dueLabel}`;
   $('vff-fact-vi').textContent  = fact.vi;
   $('vff-fact-ko').textContent  = fact.ko;
   modal.classList.add('visible');
@@ -7229,29 +7879,45 @@ function renderVocabCards() {
 
   // Filter by category / mastery filter
   if(activeCat !== 'all'){
-    if(activeCat.includes('Novice')) words = words.filter(w => (harvestCounts.get(w.ko)||0) <= 1);
-    else if(activeCat.includes('Practicing')) words = words.filter(w => { const h=harvestCounts.get(w.ko)||0; return h>=2 && h<=4; });
-    else if(activeCat.includes('Mastered')) words = words.filter(w => { const h=harvestCounts.get(w.ko)||0; return h>=5 && h<=9; });
-    else if(activeCat.includes('Legendary')) words = words.filter(w => (harvestCounts.get(w.ko)||0) >= 10);
+    if(activeCat.includes('Novice')) words = words.filter(w => !window.HVLearning || window.HVLearning.getMastery(w) < 20);
+    else if(activeCat.includes('Practicing')) words = words.filter(w => window.HVLearning && window.HVLearning.getMastery(w) >= 20 && window.HVLearning.getMastery(w) < 70);
+    else if(activeCat.includes('Mastered')) words = words.filter(w => window.HVLearning && window.HVLearning.getMastery(w) >= 70 && window.HVLearning.getMastery(w) < 90);
+    else if(activeCat.includes('Legendary')) words = words.filter(w => window.HVLearning && window.HVLearning.getMastery(w) >= 90);
     else words = words.filter(w => w.category === activeCat);
   }
   
   if(q) words = words.filter(w => w.ko.toLowerCase().includes(q) || w.en.toLowerCase().includes(q) || getRoman(w.ko).includes(q));
   
-  vocabCountEl.textContent = `${words.length} words`; vocabGrid.innerHTML = '';
+  const summary = window.HVLearning ? window.HVLearning.getSummary(lvl.words) : { due:0, learned:0, mastered:0, accuracy:0, attempts:0 };
+  const summaryBindings = {
+    'learning-due': summary.due,
+    'learning-learned': summary.learned,
+    'learning-mastered': summary.mastered,
+    'learning-accuracy': `${summary.accuracy}%`,
+    'learning-attempts': summary.attempts
+  };
+  Object.entries(summaryBindings).forEach(([id, value]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  });
+  vocabCountEl.textContent = `${words.length} words · Level mastery ${calcLevelMastery(currentLevelIndex)}%`; vocabGrid.innerHTML = '';
   words.forEach(w => {
     const times   = harvestCounts.get(w.ko) || 0;
     const planted = plantedWords.has(w.ko);
     const chosung = getChosung(w.ko);
     const roman   = getRoman(w.ko);
+    const mastery = window.HVLearning ? window.HVLearning.getMastery(w) : Math.min(100, times * 20);
+    const dueAt = window.HVLearning ? window.HVLearning.dueAtForWord(w) : 0;
+    const due = dueAt && dueAt <= Date.now();
 
     let mBadgeClass = 'novice', mBadgeLabel = '⚪ Tân thủ';
-    if(times >= 10) { mBadgeClass = 'legendary'; mBadgeLabel = '🟡 Huyền thoại ⭐'; }
-    else if(times >= 5) { mBadgeClass = 'mastered'; mBadgeLabel = '🟣 Thành thạo'; }
-    else if(times >= 2) { mBadgeClass = 'practicing'; mBadgeLabel = '🔵 Đang nhớ'; }
+    if(mastery >= 90) { mBadgeClass = 'legendary'; mBadgeLabel = '🟡 Huyền thoại ⭐'; }
+    else if(mastery >= 70) { mBadgeClass = 'mastered'; mBadgeLabel = '🟣 Thành thạo'; }
+    else if(mastery >= 20) { mBadgeClass = 'practicing'; mBadgeLabel = '🔵 Đang nhớ'; }
+    if (due) mBadgeLabel = `🔁 Đến hạn ôn`;
 
     const div = document.createElement('div');
-    div.className = `vocab-card ${mBadgeClass}` + (times > 0 ? ' planted' : '') + (planted ? ' growing' : '');
+    div.className = `vocab-card ${mBadgeClass}` + (mastery > 0 ? ' planted' : '') + (planted ? ' growing' : '');
     div.title = 'Click for Fun Facts & Hints!';
     div.style.cursor = 'pointer';
     div.innerHTML = `
@@ -7260,7 +7926,7 @@ function renderVocabCards() {
       <span style="font-size:12px; color:#67e8f9; font-weight:bold; font-family:monospace">[${roman}]</span>
       <span class="vc-en">${w.en}</span>
       <span style="font-size:11px; color:#fde047; font-family:monospace">초성: ${chosung}</span>
-      <span class="mastery-badge ${mBadgeClass}">${mBadgeLabel} (×${times})</span>`;
+      <span class="mastery-badge ${mBadgeClass}">${mBadgeLabel} · ${mastery}%</span>`;
     div.addEventListener('click', () => showVocabFunFact(w));
     vocabGrid.appendChild(div);
   });
@@ -7594,6 +8260,7 @@ class FarmScene extends Phaser.Scene {
     });
     levelsData = this.cache.json.get('levels') || [];
     if(!levelsData.length){ console.error('levels.json missing'); return; }
+    hydrateLearningFromLegacy();
 
     this._bakeTextures();
     const W = this.scale.width, H = this.scale.height;
@@ -9757,10 +10424,12 @@ class FarmScene extends Phaser.Scene {
   // ── SRS ADVANCE PLOT (called after correct quiz answer) ─────────────────────
   advancePlot(plot, word, phase){
     const ko=word.ko, now=Date.now(), t=plot.index%5;
+    const cropBuff = getBuff('crop_speed');
+    const cropTimeScale = cropBuff ? 1 / (1 + Math.max(0, cropBuff.value || 0)) : 1;
     if(phase===1){
       // P1 correct: plant seedling, set P2 timer
       plot.word=word; plot.ko=ko; plot.plantedAt=now;
-      setSrs(ko,{p2At:now+SR1,p3At:null});
+      setSrs(ko,{p2At:now+Math.round(SR1*cropTimeScale),p3At:null});
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
       const crop=this.add.image(plot.x,plot.y-4,`cr_${t}_1`).setOrigin(0.5,0.85).setScale(0).setDepth(plot.y+5);
       plot.plant=crop;
@@ -9770,7 +10439,7 @@ class FarmScene extends Phaser.Scene {
     } else if(phase===2){
       // P2 correct: grow to sprout, set P3 timer, play watering animation
       this.playPlayerAction('water', plot.x, plot.y, () => {
-        const srs=getSrs(ko); setSrs(ko,{p3At:now+SR2});
+        const srs=getSrs(ko); setSrs(ko,{p3At:now+Math.round(SR2*cropTimeScale)});
         if(plot.plant) plot.plant.setTexture(`cr_${t}_2`).clearTint();
         this.tweens.add({targets:plot.plant,scale:{from:0.7,to:1.1},duration:320,ease:'Back.Out(2)',
           onComplete:()=>this.tweens.add({targets:plot.plant,scale:1,duration:150})});
@@ -9813,7 +10482,6 @@ class FarmScene extends Phaser.Scene {
           addCoins(reward);
           updateVocabBook();
           checkQuestProgress('harvest', { count: 1 });
-          checkQuestProgress('quiz');
 
           const cropIngredients = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근'];
           const ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
@@ -9961,6 +10629,9 @@ class FarmScene extends Phaser.Scene {
     const all=unlockedLevels.flatMap(idx=>levelsData[idx]?.words||[]);
     const pool=all.filter(w=>!plantedWords.has(w.ko));
     const arr=pool.length?pool:all;
+    if (window.HVLearning) {
+      return window.HVLearning.selectNextWord(arr, { exclude: Array.from(plantedWords) });
+    }
     // Weighted random: new words ×5, <3 harvests ×3, rest ×1
     const weighted=arr.map(w=>{
       const h=harvestCounts.get(w.ko)||0;
@@ -10296,6 +10967,8 @@ class ArcadeScene extends Phaser.Scene {
     this.bossBarrier.setVisible(true);
 
     const targetWord = Phaser.Utils.Array.GetRandom(this.wordPool);
+    this.spellTargetWord = targetWord;
+    this.spellStartedAt = Date.now();
     const wrongs = this.wordPool.filter(w => w.ko !== targetWord.ko);
     Phaser.Utils.Array.Shuffle(wrongs);
     const options = Phaser.Utils.Array.Shuffle([targetWord, wrongs[0]||{ko:'우유'}, wrongs[1]||{ko:'빵'}, wrongs[2]||{ko:'밥'}]);
@@ -10341,6 +11014,15 @@ class ArcadeScene extends Phaser.Scene {
     laser.destroy();
     const isCorrect = orb.isCorrect;
     const w = orb.word;
+    if (this.spellTargetWord) {
+      recordLearningAttempt(this.spellTargetWord, {
+        activity: 'arcade_spell',
+        modality: 'recognition',
+        correct: isCorrect,
+        responseMs: Date.now() - (this.spellStartedAt || Date.now())
+      });
+    }
+    this.spellTargetWord = null;
 
     this.wordOrbs.clear(true, true);
     if(this.spellBanner) this.spellBanner.destroy();
@@ -10350,10 +11032,12 @@ class ArcadeScene extends Phaser.Scene {
       // Shield Shatter & Boss Stun!
       this.bossShielded = false;
       this.bossBarrier.setVisible(false);
-      this.bossHP = Math.max(0, this.bossHP - 120);
+      const combatBuff = getBuff('combat_damage');
+      const spellDamage = Math.round(120 * (1 + (combatBuff?.value || 0)));
+      this.bossHP = Math.max(0, this.bossHP - spellDamage);
       this.updateBossHPBar();
 
-      showToast(`🎯 CRITICAL HIT! "${w.ko}" (${w.en}) SHATTERED SHIELD! +120 DMG!`, 3500);
+      showToast(`🎯 CRITICAL HIT! "${w.ko}" (${w.en}) SHATTERED SHIELD! +${spellDamage} DMG!`, 3500);
       this.cameras.main.flash(200, 56, 189, 248);
     } else {
       playChiptuneSFX('quiz_wrong');
@@ -10370,7 +11054,9 @@ class ArcadeScene extends Phaser.Scene {
       return;
     }
 
-    this.bossHP = Math.max(0, this.bossHP - 15);
+    const combatBuff = getBuff('combat_damage');
+    const laserDamage = Math.round(15 * (1 + (combatBuff?.value || 0)));
+    this.bossHP = Math.max(0, this.bossHP - laserDamage);
     this.score += 10;
     this.scoreText.setText('SCORE: ' + this.score);
     this.updateBossHPBar();
@@ -10432,6 +11118,7 @@ class ArcadeScene extends Phaser.Scene {
       }
     }
     const earned = Math.floor(this.score / 15);
+    checkQuestProgress('score', { score: this.score });
     if(earned > 0){
       addGold(earned);
       showToast(`🕹️ Arcade Cleared: +${earned} Gold!`);
@@ -10670,16 +11357,18 @@ class DungeonScene extends Phaser.Scene {
 
     // Check hit monsters in range (90px)
     const deadMonsters = [];
+    const combatBuff = getBuff('combat_damage');
+    const attackDamage = Math.round(35 * (1 + (combatBuff?.value || 0)));
     this.monsters.children.entries.forEach(m => {
       if(m && m.active){
         const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, m.x, m.y);
         if(dist < 95){
-          m.hp -= 35;
+          m.hp -= attackDamage;
           m.setTint(0xFF0000);
           this.time.delayedCall(120, () => { if(m.active) m.clearTint(); });
           
           // Floating damage text
-          const dmg = this.add.text(m.x, m.y - 20, '-35', {
+          const dmg = this.add.text(m.x, m.y - 20, `-${attackDamage}`, {
             fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#22C55E', stroke:'#000', strokeThickness:3
           }).setOrigin(0.5).setDepth(60);
           this.tweens.add({ targets:dmg, y:m.y-50, alpha:0, duration:600, onComplete:()=>dmg.destroy() });
@@ -10827,11 +11516,14 @@ class DungeonScene extends Phaser.Scene {
 
     this.lootedScrolls++;
     this.lootedGold += 25;
+    inventoryState.scrolls = (inventoryState.scrolls || 0) + 1;
 
     this.goldText.setText(`💰 COINS: ${this.lootedGold}`);
     this.scrollText.setText(`📜 SCROLLS: ${this.lootedScrolls}`);
 
     this.showLootFlashcard(word);
+    recordLearningExposure(word, 'dungeon_scroll');
+    persistSave();
   }
 
   showLootFlashcard(w){
@@ -11079,7 +11771,9 @@ class FishingScene extends Phaser.Scene {
       try { this.splashEmitter.explode(8, this.bobber.x, this.bobber.y); } catch(e) {}
     }
 
-    const waitTime = Phaser.Math.Between(1500, 3000);
+    const fishingBuff = getBuff('fishing_luck');
+    const waitScale = fishingBuff ? 1 / (1 + Math.max(0, fishingBuff.value || 0)) : 1;
+    const waitTime = Math.round(Phaser.Math.Between(1500, 3000) * waitScale);
     this.time.delayedCall(waitTime, () => {
       if(this.state !== 'WAITING') return;
       this.triggerBite();
@@ -11108,7 +11802,8 @@ class FishingScene extends Phaser.Scene {
     this.pbFill.setVisible(true);
     this.holdTip.setVisible(true);
 
-    this.catchProgress = 0.45; // Start 45% full
+    const fishingBuff = getBuff('fishing_luck');
+    this.catchProgress = fishingBuff ? 0.60 : 0.45;
     this.targetFish = Phaser.Utils.Array.GetRandom(FISH_DB);
     const fishTexMap = {
       '연어': 'fishing_salmon',
@@ -11193,6 +11888,7 @@ class FishingScene extends Phaser.Scene {
     this.hideTensionBar();
 
     const fish = this.targetFish;
+    this.fishQuizStartedAt = Date.now();
     this.infoTxt.setText(`🐟 Reeled in ${fish.hint} ${fish.ko} [${fish.rom}]! Answer to Catch!`);
 
     // Pick 3 random wrong fish choices
@@ -11216,7 +11912,14 @@ class FishingScene extends Phaser.Scene {
       const txt = this.add.text(cx, cy, c.en, {fontFamily:'"Be Vietnam Pro",sans-serif', fontSize:'15px', color:'#FFFFFF', fontWeight:'bold'}).setOrigin(0.5);
       
       btnBg.on('pointerdown', () => {
-        if(c.ko === fish.ko){
+        const isCorrect = c.ko === fish.ko;
+        recordLearningAttempt(fish, {
+          activity: 'fishing',
+          modality: 'recognition',
+          correct: isCorrect,
+          responseMs: Date.now() - (this.fishQuizStartedAt || Date.now())
+        });
+        if(isCorrect){
           playChiptuneSFX('quiz_correct');
           btnBg.setFillStyle(0x15803D);
           this.time.delayedCall(400, () => {
@@ -11398,6 +12101,8 @@ class BeeScene extends Phaser.Scene {
     }
 
     const currentTarget = this.roundWords[this.currentWordIndex];
+    this.currentTarget = currentTarget;
+    this.wordStartedAt = Date.now();
     const hintEmoji = currentTarget.hint ? ` ${currentTarget.hint}` : '';
     this.targetText.setText(`TARGET: "${currentTarget.en.toUpperCase()}"${hintEmoji}`);
     this.updateHUD();
@@ -11460,6 +12165,14 @@ class BeeScene extends Phaser.Scene {
   onBeeClicked(bee) {
     if (this.isRoundOver) return;
     this.totalClicks++;
+    if (this.currentTarget) {
+      recordLearningAttempt(this.currentTarget, {
+        activity: 'beehive',
+        modality: 'recognition',
+        correct: bee.isCorrect,
+        responseMs: Date.now() - (this.wordStartedAt || Date.now())
+      });
+    }
 
     if (bee.isCorrect) {
       this.correctHits++;
@@ -11692,8 +12405,8 @@ window.openMemoryGame = function(){
   // Create 16 cards (8 Ko, 8 En)
   memoryCards = [];
   selected.forEach((w, id) => {
-     memoryCards.push({ text: w.ko, type: 'ko', id });
-     memoryCards.push({ text: w.en, type: 'en', id });
+     memoryCards.push({ text: w.ko, type: 'ko', id, word: w });
+     memoryCards.push({ text: w.en, type: 'en', id, word: w });
   });
   memoryCards.sort(()=>Math.random()-0.5);
   
@@ -11729,6 +12442,11 @@ window.onMemoryCardClick = function(idx, cardEl){
     if(c1.id === c2.id && c1.type !== c2.type){
       // Match!
       playChiptuneSFX('quiz_correct');
+      recordLearningAttempt(c1.word, {
+        activity: 'memory_match',
+        modality: 'recognition',
+        correct: true
+      });
       setTimeout(()=>{
         document.getElementById('memory-grid').children[i1].classList.add('matched');
         document.getElementById('memory-grid').children[i2].classList.add('matched');
@@ -11748,6 +12466,10 @@ window.onMemoryCardClick = function(idx, cardEl){
     } else {
       // No match
       playChiptuneSFX('quiz_wrong');
+      if (c1.word) recordLearningAttempt(c1.word, { activity: 'memory_match', modality: 'recognition', correct: false });
+      if (c2.word && c2.word.ko !== c1.word?.ko) {
+        recordLearningAttempt(c2.word, { activity: 'memory_match', modality: 'recognition', correct: false });
+      }
       setTimeout(()=>{
         const grid = document.getElementById('memory-grid');
         grid.children[i1].classList.remove('flipped');
@@ -11964,6 +12686,7 @@ function nextDuelTurn(){
   Phaser.Utils.Array.Shuffle(options);
 
   duelState.currentQuestion = { target, options };
+  duelState.questionStartedAt = Date.now();
 
   document.getElementById('duel-target-word').textContent = target.ko;
 
@@ -12007,6 +12730,12 @@ window.selectDuelOption = function(idx){
   const buttons = grid.querySelectorAll('.duel-option-btn');
   const target = duelState.currentQuestion.target;
   const isCorrect = idx >= 0 && duelState.currentQuestion.options[idx]?.ko === target.ko;
+  recordLearningAttempt(target, {
+    activity: 'spell_duel',
+    modality: 'recognition',
+    correct: isCorrect,
+    responseMs: Date.now() - (duelState.questionStartedAt || Date.now())
+  });
 
   buttons.forEach((btn, i) => {
     btn.disabled = true;
@@ -12020,7 +12749,8 @@ window.selectDuelOption = function(idx){
   if(isCorrect){
     playChiptuneSFX('quiz_correct');
     duelState.combo++;
-    const dmg = 25 + duelState.combo * 5;
+    const combatBuff = getBuff('combat_damage');
+    const dmg = Math.round((25 + duelState.combo * 5) * (1 + (combatBuff?.value || 0)));
     duelState.enemyHP = Math.max(0, duelState.enemyHP - dmg);
     document.getElementById('duel-combo-badge').textContent = `🔥 Combo x${duelState.combo}`;
     
@@ -12099,6 +12829,7 @@ function endDuel(victory){
     if (duelState.enemyIndex === 3) {
       addGems(50);
       addHonor(100);
+      checkQuestProgress('grandBoss', { count: 1 });
       if (duelState.playerHP >= 100) {
         addGems(15);
         showToast('🛡️ ZERO-DAMAGE BOSS KILL! +15 Bonus Gems!', 4500);
@@ -12581,6 +13312,12 @@ var KOREAN_INGREDIENTS = [
   '배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근', '사과',
   '연어', '고등어', '오징어', '잉어', '새우', '문어', '조개', '황금물고기'
 ];
+var INGREDIENT_EN = {
+  '배추':'napa cabbage', '무':'radish', '파':'green onion', '고추':'chili pepper',
+  '마늘':'garlic', '쌀':'rice', '콩':'bean', '당근':'carrot', '사과':'apple',
+  '연어':'salmon', '고등어':'mackerel', '오징어':'squid', '잉어':'carp',
+  '새우':'shrimp', '문어':'octopus', '조개':'clam', '황금물고기':'golden fish'
+};
 
 var RECIPE_DB = [
   {
@@ -12768,6 +13505,7 @@ let currentCookingRecipe = null;
 let cookingStage = 0;
 let cookingScore = 0;
 let activeHeatInterval = null;
+let cookingQuestionStartedAt = 0;
 
 window.startCookingMinigame = function(recipeId) {
   const recipe = RECIPE_DB.find(r => r.id === recipeId);
@@ -12813,6 +13551,8 @@ function renderCookingStage() {
   if (cookingStage === 1) {
     stepDesc.textContent = 'Stage 1/2: Prep Ingredients - Select the correct Korean name!';
     const correctTarget = Object.keys(currentCookingRecipe.req)[0];
+    const targetEnglish = INGREDIENT_EN[correctTarget] || 'the highlighted ingredient';
+    cookingQuestionStartedAt = Date.now();
     const choices = [correctTarget];
     KOREAN_INGREDIENTS.forEach(ing => {
       if (ing !== correctTarget && choices.length < 4) choices.push(ing);
@@ -12820,7 +13560,10 @@ function renderCookingStage() {
     Phaser.Utils.Array.Shuffle(choices);
 
     container.innerHTML = `
-      <div style="font-size:16px; color:#fff; margin-bottom:12px;">Which ingredient is needed first?</div>
+      <div style="font-size:16px; color:#fff; margin-bottom:12px;">
+        “${targetEnglish}”에 해당하는 한국어 재료를 고르세요.<br>
+        <span style="font-size:12px;color:#94a3b8;">Choose the Korean ingredient for “${targetEnglish}”.</span>
+      </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; width:100%;">
         ${choices.map(choice => `
           <button class="cook-btn" style="padding:12px; font-size:14px;" onclick="handleCookingStage1('${choice}', '${correctTarget}')">${choice}</button>
@@ -12872,15 +13615,22 @@ function renderCookingStage() {
 }
 
 window.handleCookingStage1 = function(selected, target) {
-  if (selected === target) {
+  const isCorrect = selected === target;
+  recordLearningAttempt({ ko: target, en: INGREDIENT_EN[target] || 'ingredient', category: '요리 재료' }, {
+    activity: 'cooking',
+    modality: 'recognition',
+    correct: isCorrect,
+    responseMs: Date.now() - (cookingQuestionStartedAt || Date.now())
+  });
+  if (isCorrect) {
     cookingScore += 50;
     playChiptuneSFX('quiz_correct');
+    cookingStage = 2;
+    renderCookingStage();
   } else {
-    cookingScore += 10;
     playChiptuneSFX('quiz_wrong');
+    showToast(`❌ ${INGREDIENT_EN[target] || 'Ingredient'} = ${target}. Try once more!`, 2500);
   }
-  cookingStage = 2;
-  renderCookingStage();
 };
 
 function finishCookingMinigame() {
@@ -12899,6 +13649,7 @@ function finishCookingMinigame() {
   // Store cooked dish for pet feeding
   inventoryState.cookedDishes = inventoryState.cookedDishes || {};
   inventoryState.cookedDishes[currentCookingRecipe.id] = (inventoryState.cookedDishes[currentCookingRecipe.id] || 0) + 1;
+  updateSeasonalProgress('cook', 1);
   persistSave();
 
 
@@ -12957,9 +13708,9 @@ const SEASONAL_EVENTS_CONFIG = {
       { ko: '결실', en: 'Harvest Yield' }
     ],
     quests: [
-      { id: 'chuseok_q1', title: '🌾 Harvest Festival Prep', desc: 'Harvest 5 crops during Chuseok', target: 5, reward: { honor: 50, coins: 100 }, icon: '🌾' },
-      { id: 'chuseok_q2', title: '🍡 Bake Songpyeon', desc: 'Cook any dish in Recipe Book', target: 1, reward: { honor: 100, gems: 10 }, icon: '🍡' },
-      { id: 'chuseok_q3', title: '🌕 Full Moon Wishes', desc: 'Earn 100 Season Points', target: 100, reward: { honor: 150, gems: 25 }, icon: '🌕' }
+      { id: 'chuseok_q1', metric: 'harvest', title: '🌾 Harvest Festival Prep', desc: 'Harvest 5 crops during Chuseok', target: 5, reward: { honor: 50, coins: 100 }, icon: '🌾' },
+      { id: 'chuseok_q2', metric: 'cook', title: '🍡 Festival Kitchen', desc: 'Cook any dish in Recipe Book', target: 1, reward: { honor: 100, gems: 10 }, icon: '🍡' },
+      { id: 'chuseok_q3', metric: 'seasonPoints', title: '🌕 Full Moon Wishes', desc: 'Earn 100 Season Points', target: 100, reward: { honor: 150, gems: 25 }, icon: '🌕' }
     ]
   },
   seollal: {
@@ -12979,9 +13730,9 @@ const SEASONAL_EVENTS_CONFIG = {
       { ko: '연날리기', en: 'Kite Flying' }
     ],
     quests: [
-      { id: 'seollal_q1', title: '🥣 New Year Tteokguk', desc: 'Cook 1 dish in Recipe Book', target: 1, reward: { gems: 15, coins: 150 }, icon: '🥣' },
-      { id: 'seollal_q2', title: '🙇‍♂️ Sebae Bowing', desc: 'Complete 3 Korean Quizzes correctly', target: 3, reward: { gems: 25, honor: 50 }, icon: '🙇‍♂️' },
-      { id: 'seollal_q3', title: '🧧 Lucky Pouch Collector', desc: 'Earn 100 Season Points', target: 100, reward: { gems: 50, honor: 200 }, icon: '🧧' }
+      { id: 'seollal_q1', metric: 'cook', title: '🥣 New Year Kitchen', desc: 'Cook 1 dish in Recipe Book', target: 1, reward: { gems: 15, coins: 150 }, icon: '🥣' },
+      { id: 'seollal_q2', metric: 'quizCorrect', title: '🙇‍♂️ Sebae Scholar', desc: 'Complete 3 Korean quizzes correctly', target: 3, reward: { gems: 25, honor: 50 }, icon: '🙇‍♂️' },
+      { id: 'seollal_q3', metric: 'seasonPoints', title: '🧧 Lucky Pouch Collector', desc: 'Earn 100 Season Points', target: 100, reward: { gems: 50, honor: 200 }, icon: '🧧' }
     ]
   },
   childrens_day: {
@@ -13001,9 +13752,9 @@ const SEASONAL_EVENTS_CONFIG = {
       { ko: '동심', en: 'Childlike Innocence' }
     ],
     quests: [
-      { id: 'childrens_q1', title: '🍭 Dalgona Challenge', desc: 'Complete 3 Quizzes without hints', target: 3, reward: { coins: 300, honor: 30 }, icon: '🍭' },
-      { id: 'childrens_q2', title: '🎈 Balloon Party', desc: 'Earn 200 Coins from activities', target: 200, reward: { coins: 500, gems: 15 }, icon: '🎈' },
-      { id: 'childrens_q3', title: '🧸 Happy Companion', desc: 'Feed your Pet companion 1 time', target: 1, reward: { gems: 30, honor: 100 }, icon: '🧸' }
+      { id: 'childrens_q1', metric: 'quizNoHint', title: '🍭 Dalgona Challenge', desc: 'Complete 3 quizzes without hints', target: 3, reward: { coins: 300, honor: 30 }, icon: '🍭' },
+      { id: 'childrens_q2', metric: 'arcadeScore', title: '🎈 Balloon Arcade', desc: 'Score 200 points in one Arcade run', target: 200, reward: { coins: 500, gems: 15 }, icon: '🎈' },
+      { id: 'childrens_q3', metric: 'fish', title: '🐟 Pond Adventure', desc: 'Catch 1 fish and learn its Korean name', target: 1, reward: { gems: 30, honor: 100 }, icon: '🐟' }
     ]
   }
 };
@@ -13018,6 +13769,21 @@ function initSeasonalEvents() {
     seasonalState.activeSeasonId = 'chuseok';
   }
   updateSeasonalBanner();
+}
+
+function updateSeasonalProgress(metric, value = 1, mode = 'add') {
+  if (!seasonalState) return;
+  seasonalState.progress = seasonalState.progress || {};
+  const current = Number(seasonalState.progress[metric]) || 0;
+  seasonalState.progress[metric] = mode === 'max'
+    ? Math.max(current, Number(value) || 0)
+    : current + (Number(value) || 0);
+}
+
+function getSeasonalQuestProgress(quest) {
+  if (!quest) return 0;
+  if (quest.metric === 'seasonPoints') return seasonalState.seasonPoints || 0;
+  return Number(seasonalState.progress?.[quest.metric]) || 0;
 }
 
 function updateSeasonalBanner() {
@@ -13046,6 +13812,8 @@ function cycleSeasonalEvent() {
   const curIdx = seasons.indexOf(seasonalState.activeSeasonId);
   const nextIdx = (curIdx + 1) % seasons.length;
   seasonalState.activeSeasonId = seasons[nextIdx];
+  seasonalState.seasonPoints = 0;
+  seasonalState.progress = {};
 
   const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId];
   showToast(`🎉 Festival Changed to ${cfg.name}!`, 3500);
@@ -13084,6 +13852,8 @@ function openSeasonalOverlay() {
     qListContainer.innerHTML = '';
     cfg.quests.forEach(q => {
       const isClaimed = (seasonalState.claimedRewards || []).includes(q.id);
+      const current = getSeasonalQuestProgress(q);
+      const isComplete = current >= q.target;
       const qCard = document.createElement('div');
       qCard.style.cssText = 'background:rgba(30,41,59,0.7); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center;';
       
@@ -13098,11 +13868,12 @@ function openSeasonalOverlay() {
           <div>
             <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:#fff">${q.title}</div>
             <div style="font-size:11px; color:#cbd5e1; margin-top:2px">${q.desc}</div>
+            <div style="font-size:10px; color:#67e8f9; margin-top:4px">Progress: ${Math.min(current, q.target)} / ${q.target}</div>
             <div style="font-size:10px; color:var(--neon-gold); margin-top:4px">Reward: ${rewardStr} +50 Pts ⭐</div>
           </div>
         </div>
-        <button class="eb-btn" ${isClaimed ? 'disabled style="opacity:0.5;cursor:default;"' : `onclick="claimSeasonalQuest('${q.id}')"`}>
-          ${isClaimed ? 'Claimed ✓' : 'Claim Reward'}
+        <button class="eb-btn" ${isClaimed || !isComplete ? 'disabled style="opacity:0.5;cursor:default;"' : `onclick="claimSeasonalQuest('${q.id}')"`}>
+          ${isClaimed ? 'Claimed ✓' : isComplete ? 'Claim Reward' : 'In Progress'}
         </button>
       `;
       qListContainer.appendChild(qCard);
@@ -13142,6 +13913,11 @@ function claimSeasonalQuest(questId) {
 
   if (!seasonalState.claimedRewards) seasonalState.claimedRewards = [];
   if (seasonalState.claimedRewards.includes(questId)) return;
+  const current = getSeasonalQuestProgress(quest);
+  if (current < quest.target) {
+    showToast(`⏳ Quest not complete: ${Math.min(current, quest.target)} / ${quest.target}`, 3000);
+    return;
+  }
 
   seasonalState.claimedRewards.push(questId);
   seasonalState.seasonPoints = (seasonalState.seasonPoints || 0) + 50;
@@ -13189,9 +13965,11 @@ function updateLeaderboardMetrics() {
   if (typeof leaderboardState === 'undefined' || !leaderboardState) leaderboardState = { personalBests: {} };
   if (!leaderboardState.personalBests) leaderboardState.personalBests = {};
 
-  // Total Words Mastered (words with >= 5 harvests)
+  // Total words with evidence-backed learning mastery.
   let masteredCount = 0;
-  if (typeof harvestCounts !== 'undefined' && harvestCounts) {
+  if (window.HVLearning) {
+    masteredCount = getAllLearningWords().filter(word => window.HVLearning.getMastery(word) >= 70).length;
+  } else if (typeof harvestCounts !== 'undefined' && harvestCounts) {
     harvestCounts.forEach((count) => {
       if (count >= 5) masteredCount++;
     });
