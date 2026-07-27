@@ -95,7 +95,16 @@ def main():
     import shutil
     assets_dir = os.path.join(BASE_DIR, 'assets')
     os.makedirs(assets_dir, exist_ok=True)
-    for fname in ('game.js', 'curriculum.js', 'learning-core.js', 'index.html', 'levels.json', 'save_data.json'):
+    for fname in (
+        'game.js',
+        'curriculum.js',
+        'learning-core.js',
+        'world-learning.js',
+        'world-learning-ui.js',
+        'index.html',
+        'levels.json',
+        'save_data.json',
+    ):
         src = os.path.join(BASE_DIR, fname)
         dst = os.path.join(assets_dir, fname)
         if os.path.exists(src):

@@ -32,7 +32,7 @@ assert(game.includes('syncSeason(seasonId'), 'Weather must synchronize with the 
 assert(game.includes("'p_firefly'"), 'Night firefly particles are missing');
 assert(game.includes('class WorldFeedbackSystem'), 'Farm action feedback system is missing');
 assert(game.includes('visual: visualState'), 'Visual state must be included in game saves');
-assert(game.includes('v: 7'), 'Visual save schema must be version 7');
+assert(game.includes('v: 8'), 'Visual save schema must be included in version 8');
 
 assert(html.includes('id="hud-world-state"'), 'World time/weather HUD is missing');
 assert(html.includes('id="visual-quality-btn"'), 'Visual quality control is missing');
