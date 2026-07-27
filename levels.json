@@ -7387,31 +7387,46 @@
     "target": 9,
     "words": [
       {
-        "ko": "발이넓다",
+        "ko": "발이 넓다",
+        "acceptedAnswers": [
+          "발이넓다"
+        ],
         "en": "to have a wide circle of contacts",
         "hint": "👣",
         "category": "신체 관용구"
       },
       {
-        "ko": "귀가얇다",
+        "ko": "귀가 얇다",
+        "acceptedAnswers": [
+          "귀가얇다"
+        ],
         "en": "to be easily influenced",
         "hint": "👂",
         "category": "신체 관용구"
       },
       {
-        "ko": "눈이높다",
+        "ko": "눈이 높다",
+        "acceptedAnswers": [
+          "눈이높다"
+        ],
         "en": "to have high standards",
         "hint": "👀",
         "category": "신체 관용구"
       },
       {
-        "ko": "손이크다",
+        "ko": "손이 크다",
+        "acceptedAnswers": [
+          "손이크다"
+        ],
         "en": "to be generous / big-handed",
         "hint": "✋",
         "category": "신체 관용구"
       },
       {
-        "ko": "입이가볍다",
+        "ko": "입이 가볍다",
+        "acceptedAnswers": [
+          "입이가볍다"
+        ],
         "en": "to be unable to keep secrets",
         "hint": "👄",
         "category": "신체 관용구"

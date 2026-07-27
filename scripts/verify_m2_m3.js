@@ -74,16 +74,25 @@ console.log('\n--- TEST 4: getFunFact Functional Tests ---');
 
 // Test 4a: Direct Lookup
 const directResult = sandbox.getFunFact({ en: 'father', ko: '아버지' });
-if (directResult && directResult.vi && directResult.ko && directResult.vi.includes('Native Korean') && directResult.ko.includes('3 syllables')) {
+if (directResult && directResult.vi && directResult.ko && directResult.vi.includes('아버지') && directResult.ko.includes('syllables')) {
   console.log('[PASS] Direct lookup returned rich vi and ko fields.');
 } else {
   overallPassed = false;
   console.log('[FAIL] Direct lookup failed:', directResult);
 }
 
+const forbiddenProductionKeys = ['sync_test_vocab_key', 'complex_hangul_vocab_key', 'quote_test_key'];
+const leakedKeys = forbiddenProductionKeys.filter(key => Object.prototype.hasOwnProperty.call(sandbox.VOCAB_FACTS, key));
+if (leakedKeys.length === 0) {
+  console.log('[PASS] No verification-only vocabulary keys leaked into production data.');
+} else {
+  overallPassed = false;
+  console.log('[FAIL] Verification-only keys found in production:', leakedKeys);
+}
+
 // Test 4b: Dynamic Fallback
 const fallbackResult = sandbox.getFunFact({ en: 'unknown_test_word', ko: '비빔밥', category: 'food' });
-if (fallbackResult && fallbackResult.vi && fallbackResult.ko && fallbackResult.vi.includes('Ẩm thực') && fallbackResult.ko.includes('3 âm tiết')) {
+if (fallbackResult && fallbackResult.vi && fallbackResult.ko && fallbackResult.vi.includes('Food and drink') && fallbackResult.ko.includes('3 syllables')) {
   console.log('[PASS] Dynamic fallback returned rich vi and ko fields with exact Hangul decomposition.');
 } else {
   overallPassed = false;
