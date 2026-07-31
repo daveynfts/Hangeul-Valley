@@ -230,6 +230,31 @@
       font-family: 'Press Start 2P', monospace; font-size: 13px; color: #fff;
       line-height: 1.5; margin-top: 2px;
     }
+    .lc-name-ko {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 12px; font-weight: 700;
+      color: rgba(226, 232, 240, 0.55); line-height: 1.4; margin-top: 3px;
+    }
+    .lc-name-ko:empty { display: none; }
+
+    /* ── Korean pronunciation (TTS) ──────────────────────────────────────────
+       Every speak control carries .tts-only, so a browser with no Korean voice
+       hides the whole feature instead of offering buttons that do nothing. */
+    .tts-unavailable .tts-only { display: none !important; }
+    .hud-btn-off { opacity: .55; filter: saturate(.4); }
+    .speak-btn {
+      background: rgba(103, 232, 249, .12);
+      border: 1px solid rgba(103, 232, 249, .45);
+      color: #67e8f9; border-radius: 8px; cursor: pointer;
+      padding: 2px 8px; font-size: 14px; line-height: 1.4;
+      transition: background .15s, transform .1s;
+    }
+    .speak-btn:hover { background: rgba(103, 232, 249, .26); }
+    .speak-btn:active { transform: scale(.92); }
+    .vc-speak {
+      position: absolute; top: 6px; right: 6px;
+      padding: 1px 6px; font-size: 13px;
+    }
+    .vocab-card { position: relative; }
     .lc-badge { font-size: 20px; position: absolute; top: 12px; right: 14px; }
     .lc-desc {
       font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
@@ -865,6 +890,8 @@
     #vff-emoji { font-size: 42px; flex-shrink: 0; }
     #vff-en { font-size: 24px; font-weight: 800; color: #fff; font-family: 'Be Vietnam Pro', sans-serif; }
     #vff-cat { font-size: 14px; color: var(--neon-green); margin-top: 2px; font-family: 'Be Vietnam Pro', sans-serif; }
+    #vff-ko-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+    #vff-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: 700; color: #fde047; }
     #vff-status { margin-left: auto; text-align: right; }
     #vff-phase { font-size: 14px; color: var(--neon-gold); font-weight: 700; font-family: 'Be Vietnam Pro', sans-serif; }
     #vff-harvests { font-size: 13px; color: rgba(226, 232, 240, 0.5); margin-top: 3px; font-family: 'Be Vietnam Pro', sans-serif; }
@@ -1333,6 +1360,7 @@
       <button class="hud-btn" id="cooking-btn" title="Cooking Kitchen (요리) [Key: C]" onclick="openCookingUI()">🍳 Cooking</button>
       <button class="hud-btn" id="recipe-btn" title="Recipe Book (요리책)" onclick="openRecipeBook()">📖 Recipes</button>
       <button class="hud-btn" id="inventory-btn" title="Inventory Storage (🎒) [Key: I/E]" onclick="openInventoryUI()">🎒 Bag</button>
+      <button class="hud-btn tts-only" id="tts-toggle-btn" title="Toggle Korean pronunciation" onclick="toggleTTS()">🔊 Audio</button>
       <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
       <button class="hud-btn" id="hud-more-btn" title="More Features" onclick="toggleHudOverflow(event)">➕ More</button>
       <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level Menu">☰ Menu</button>
@@ -1399,9 +1427,10 @@
 
       <!-- ── 4-Tier Progressive Hint Buttons ── -->
       <div id="quiz-tier-hints">
-        <button type="button" class="quiz-tier-btn" onclick="revealQuizHint('roman')">🔤 Phiên Âm</button>
-        <button type="button" class="quiz-tier-btn" onclick="revealQuizHint('chosung')">🔠 Phụ Âm Đầu 초성 (5💰)</button>
-        <button type="button" class="quiz-tier-btn" onclick="revealQuizHint('fact')">💡 Gốc Hán & Mẹo (10💰)</button>
+        <button type="button" class="quiz-tier-btn" onclick="revealQuizHint('roman')">🔤 Romanization</button>
+        <button type="button" class="quiz-tier-btn" onclick="revealQuizHint('chosung')">🔠 Initials 초성 (5💰)</button>
+        <button type="button" class="quiz-tier-btn tts-only" onclick="revealQuizHint('audio')">🔊 Hear It (10💰)</button>
+        <button type="button" class="quiz-tier-btn" onclick="revealQuizHint('fact')">💡 Word Origin (10💰)</button>
       </div>
       <div id="quiz-hint-reveal-card" class="hidden"></div>
 
@@ -1502,6 +1531,11 @@
         <span id="vff-emoji">📝</span>
         <div>
           <div id="vff-en"></div>
+          <div id="vff-ko-row" class="tts-only">
+            <span id="vff-ko"></span>
+            <button type="button" class="speak-btn" title="Hear this word" onclick="speakKorean(document.getElementById('vff-ko').textContent)">🔊</button>
+            <button type="button" class="speak-btn" title="Syllable by syllable" onclick="spellKorean(document.getElementById('vff-ko').textContent)">🐢</button>
+          </div>
           <div id="vff-cat"></div>
         </div>
         <div id="vff-status">
@@ -1510,12 +1544,12 @@
         </div>
       </div>
       <div class="vff-section">
-        <div class="vff-section-title">🇰🇷 Korean Culture</div>
-        <div id="vff-fact-vi" class="vff-fact-text"></div>
+        <div class="vff-section-title">📜 Word Origin</div>
+        <div id="vff-fact-origin" class="vff-fact-text"></div>
       </div>
       <div class="vff-section">
-        <div class="vff-section-title">🔤 Recall Hints (Phase 3)</div>
-        <div id="vff-fact-ko" class="vff-fact-text vff-hint-box"></div>
+        <div class="vff-section-title">🔤 Pronunciation &amp; Syllables</div>
+        <div id="vff-fact-structure" class="vff-fact-text vff-hint-box"></div>
       </div>
       <button id="vff-close-btn" onclick="closeVocabFunFact()">👍 Got it, close!</button>
     </div>
@@ -1542,6 +1576,8 @@
               <div id="cat-ko">사과</div>
               <div id="cat-en">Apple</div>
             </div>
+            <button type="button" class="speak-btn tts-only" title="Hear this word"
+                    onclick="speakKorean(document.getElementById('cat-ko').textContent)">🔊</button>
           </div>
           <div id="cat-dialog-tip">야옹~ Remember this one! Nyaa~</div>
         </div>

@@ -183,6 +183,10 @@ window.AppController = {
 
       if (vocabRes.success) {
         window.AppState.vocabFacts = vocabRes.data || {};
+        // Pre-rendered English origin strings, so the view need not know the schema.
+        window.AppState.vocabDescriptions = vocabRes.descriptions || {};
+        window.AppState.vocabReadOnly = vocabRes.readOnly === true;
+        window.AppState.vocabGeneratorHint = vocabRes.generatorHint || '';
         window.AppState.casingDiscrepancies = vocabRes.casingDiscrepancies || [];
         if (!window.AppState.missingFacts.length) {
           window.AppState.missingFacts = vocabRes.missingFacts || [];

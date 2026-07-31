@@ -230,16 +230,29 @@ assert(!card1.className.includes('owned') && !card1.className.includes('too-expe
 assert(card1.innerHTML.includes('💰 200 gold'), 'Affordable card displays cost "💰 200 gold"');
 assert(card1.innerHTML.includes('🛒 Buy Now') && !card1.innerHTML.includes('disabled'), 'Affordable card displays enabled "🛒 Buy Now" button');
 
-// Card 2 (Plot #3 expansion, plotIndex 11, cost 350): UNOWNED & TOO EXPENSIVE (coins = 250)
+// Card 2 (Plot #3 expansion, plotIndex 11, cost 350): NOT YET AVAILABLE — plot 10 unowned.
+// Expansions sell in order now, so the card reports the sequential lock rather than a gold
+// shortfall; quoting a price for something you cannot buy yet would be misleading.
 const card2 = plotCards[2];
-assert(card2.className.includes('too-expensive'), 'Unaffordable card has "too-expensive" class');
-assert(card2.innerHTML.includes('Need 100 gold'), 'Unaffordable card displays "Need 100 gold"');
-assert(card2.innerHTML.includes('disabled'), 'Unaffordable card button has "disabled" attribute');
+assert(card2.className.includes('too-expensive'), 'Not-yet-available card has "too-expensive" class');
+assert(card2.innerHTML.includes('Unlock Plot #11 first'), 'Not-yet-available card tells you which plot to buy first');
+assert(!card2.innerHTML.includes('Need 100 gold'), 'Not-yet-available card does not quote a gold shortfall');
+assert(card2.innerHTML.includes('disabled'), 'Not-yet-available card button has "disabled" attribute');
+assert(card2.innerHTML.includes('🔒'), 'Not-yet-available card shows the lock icon');
 
-// Card 5 (Plot #6 expansion, plotIndex 14, cost 1000): UNOWNED & TOO EXPENSIVE (coins = 250)
+// Card 5 (Plot #6 expansion, plotIndex 14, cost 1000): NOT YET AVAILABLE — plot 13 unowned
 const card5 = plotCards[5];
 assert(card5.className.includes('too-expensive'), 'Plot #6 card has "too-expensive" class');
-assert(card5.innerHTML.includes('Need 750 gold'), 'Plot #6 card displays "Need 750 gold"');
+assert(card5.innerHTML.includes('Unlock Plot #14 first'), 'Plot #6 card reports the sequential lock');
+
+// Available but unaffordable: card 1 (plotIndex 10, cost 200) is next in line, so dropping
+// coins below its price must surface the gold shortfall instead of a lock message.
+execVM('playerCurrencies.coins = 50; syncGoldAlias(); buildShopGrid();');
+const poorCard1 = mockDocument.getElementById('shop-level-grid').children.slice(1, 7)[1];
+assert(poorCard1.className.includes('too-expensive'), 'Available-but-unaffordable card has "too-expensive" class');
+assert(poorCard1.innerHTML.includes('Need 150 gold'), 'Available-but-unaffordable card displays "Need 150 gold"');
+assert(!poorCard1.innerHTML.includes('Unlock Plot'), 'Available card does not show a sequential lock message');
+execVM('playerCurrencies.coins = 250; syncGoldAlias(); buildShopGrid();');
 
 // ----------------------------------------------------
 // SUMMARY

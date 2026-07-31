@@ -29,7 +29,7 @@
           <span class="nav-icon">📚</span> Levels & Words
         </button>
         <button class="nav-btn" data-tab="vocab" id="tab-btn-vocab">
-          <span class="nav-icon">📖</span> VOCAB_FACTS Editor
+          <span class="nav-icon">📖</span> Word Origins
         </button>
       </nav>
 
@@ -94,11 +94,11 @@
 
         <div class="stat-card border-emerald" id="card-coverage">
           <div class="stat-header">
-            <span class="stat-label">VOCAB_FACTS Coverage</span>
+            <span class="stat-label">Origin Coverage</span>
             <span class="stat-icon">🎯</span>
           </div>
           <div class="stat-value text-emerald" id="stat-coverage">--%</div>
-          <div class="stat-subtext" id="stat-coverage-sub">Matching game.js facts</div>
+          <div class="stat-subtext" id="stat-coverage-sub">Words with a curated origin</div>
         </div>
 
         <div class="stat-card border-amber" id="card-duplicates">
@@ -112,11 +112,11 @@
 
         <div class="stat-card border-rose" id="card-missing">
           <div class="stat-header">
-            <span class="stat-label">Missing Facts</span>
+            <span class="stat-label">Not Curated</span>
             <span class="stat-icon">❌</span>
           </div>
           <div class="stat-value text-rose" id="stat-missing">--</div>
-          <div class="stat-subtext">Words lacking VOCAB_FACTS</div>
+          <div class="stat-subtext">Words lacking a curated origin</div>
         </div>
       </div>
 
@@ -124,28 +124,25 @@
       <div class="card widget-card">
         <div class="widget-header">
           <div>
-            <h3 class="widget-title">VOCAB_FACTS Coverage Breakdown</h3>
-            <p class="widget-subtitle">Visual representation of word mapping between levels.json and game.js</p>
+            <h3 class="widget-title">Origin Coverage Breakdown</h3>
+            <p class="widget-subtitle">How many levels.json words have a curated origin in facts.json</p>
           </div>
           <div class="coverage-badges">
-            <span class="badge badge-emerald" id="badge-exact-count">Exact: --</span>
-            <span class="badge badge-amber" id="badge-casing-count">Casing Mismatch: --</span>
-            <span class="badge badge-rose" id="badge-missing-count">Missing: --</span>
+            <span class="badge badge-emerald" id="badge-exact-count">Curated: --</span>
+            <span class="badge badge-rose" id="badge-missing-count">Not curated: --</span>
           </div>
         </div>
 
         <div class="progress-container">
           <div class="progress-bar-stacked" id="coverage-progress-bar">
-            <div class="bar-segment bar-emerald" style="width: 0%" id="bar-exact" title="Exact Match"></div>
-            <div class="bar-segment bar-amber" style="width: 0%" id="bar-casing" title="Casing Mismatch"></div>
-            <div class="bar-segment bar-rose" style="width: 0%" id="bar-missing" title="Missing Facts"></div>
+            <div class="bar-segment bar-emerald" style="width: 0%" id="bar-exact" title="Curated origin"></div>
+            <div class="bar-segment bar-rose" style="width: 0%" id="bar-missing" title="Not curated"></div>
           </div>
         </div>
 
         <div class="progress-legend">
-          <div class="legend-item"><span class="dot emerald"></span> Exact Matches</div>
-          <div class="legend-item"><span class="dot amber"></span> Casing Discrepancies (Case Mismatch)</div>
-          <div class="legend-item"><span class="dot rose"></span> Missing VOCAB_FACTS</div>
+          <div class="legend-item"><span class="dot emerald"></span> Curated origin</div>
+          <div class="legend-item"><span class="dot rose"></span> Not curated</div>
         </div>
       </div>
 
@@ -155,10 +152,10 @@
         <div class="card widget-card col-span-2">
           <div class="widget-header">
             <div>
-              <h3 class="widget-title">Missing Vocabulary Facts</h3>
-              <p class="widget-subtitle">Words in levels.json missing entries in VOCAB_FACTS</p>
+              <h3 class="widget-title">Words Needing Origin Curation</h3>
+              <p class="widget-subtitle">Add these to the curated maps in scripts/build_facts_json.js</p>
             </div>
-            <span class="badge badge-rose" id="missing-count-badge">0 Missing</span>
+            <span class="badge badge-rose" id="missing-count-badge">0 Not curated</span>
           </div>
 
           <div class="table-container max-h-350">
@@ -295,20 +292,15 @@
     </section>
 
     <!-- ========================================== -->
-    <!-- TAB 3: VOCAB_FACTS EDITOR VIEW             -->
+    <!-- TAB 3: WORD ORIGINS VIEW (read-only)      -->
     <!-- ========================================== -->
     <section id="tab-vocab" class="tab-content">
       <div class="vocab-header-card card">
         <div class="vocab-header-left">
           <div>
-            <h2 class="section-title">VOCAB_FACTS Dictionary</h2>
-            <p class="section-desc">Manage game vocabulary dictionary definitions in <code>game.js</code> with real-time file synchronization.</p>
+            <h2 class="section-title">Word Origins</h2>
+            <p class="section-desc">Read-only view of <code>facts.json</code>. Origins are curated in <code>scripts/build_facts_json.js</code> — edit the maps there and re-run <code>node scripts/build_facts_json.js</code>.</p>
           </div>
-        </div>
-        <div class="vocab-header-actions">
-          <button class="btn btn-emerald" id="btn-add-vocab">
-            <span>➕</span> Add VOCAB_FACT
-          </button>
         </div>
       </div>
 
@@ -317,13 +309,12 @@
         <div class="vocab-toolbar">
           <div class="filter-mode-tabs" id="vocab-filter-tabs">
             <button class="mode-tab active" data-mode="all">All Entries (<span id="count-mode-all">0</span>)</button>
-            <button class="mode-tab" data-mode="missing">Missing Coverage (<span id="count-mode-missing">0</span>)</button>
-            <button class="mode-tab" data-mode="discrepancy">Casing Mismatches (<span id="count-mode-discrepancy">0</span>)</button>
+            <button class="mode-tab" data-mode="missing">Not Curated (<span id="count-mode-missing">0</span>)</button>
           </div>
 
           <div class="search-input-wrapper flex-1">
             <span class="search-icon">🔍</span>
-            <input type="text" id="input-search-vocab" class="form-input search-input" placeholder="Search by English Key, Vietnamese, or Korean...">
+            <input type="text" id="input-search-vocab" class="form-input search-input" placeholder="Search by Korean word, hanja, or English gloss...">
             <button class="btn-clear hidden" id="btn-clear-search-vocab" title="Clear search">✕</button>
           </div>
         </div>
@@ -342,15 +333,14 @@
           <table class="data-table" id="vocab-table">
             <thead>
               <tr>
-                <th style="width: 180px;">English Key (en)</th>
-                <th>Vietnamese (vi)</th>
-                <th>Korean (ko)</th>
+                <th style="width: 180px;">Korean Word (ko)</th>
+                <th>Origin</th>
                 <th style="width: 130px;">Status</th>
-                <th style="width: 140px;" class="text-right">Actions</th>
+                <th style="width: 110px;" class="text-right">Source</th>
               </tr>
             </thead>
             <tbody id="vocab-tbody">
-              <tr><td colspan="5" class="text-center text-muted">Loading dictionary facts...</td></tr>
+              <tr><td colspan="4" class="text-center text-muted">Loading word origins...</td></tr>
             </tbody>
           </table>
         </div>
