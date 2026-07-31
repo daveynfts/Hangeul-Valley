@@ -11,7 +11,7 @@ Testing File: game.js
 Method: _genArcadeTextures
 Found 1 occurrence(s) of _genArcadeTextures
 
---- Inspecting occurrence 1 (Line 3253) ---
+--- Inspecting occurrence 1 (Line 3401) ---
    [VM Execution Error]: ship is not defined
 Extracted 0 createTexture calls, 18 captured variable definitions.
 
@@ -72,7 +72,7 @@ Extracted 0 createTexture calls, 18 captured variable definitions.
 Method: _genDungeonTextures
 Found 1 occurrence(s) of _genDungeonTextures
 
---- Inspecting occurrence 1 (Line 3496) ---
+--- Inspecting occurrence 1 (Line 3644) ---
    [VM Execution Error]: slime is not defined
 Extracted 0 createTexture calls, 18 captured variable definitions.
 
@@ -137,7 +137,7 @@ Testing File: assets/game.js
 Method: _genArcadeTextures
 Found 1 occurrence(s) of _genArcadeTextures
 
---- Inspecting occurrence 1 (Line 3253) ---
+--- Inspecting occurrence 1 (Line 3401) ---
    [VM Execution Error]: ship is not defined
 Extracted 0 createTexture calls, 18 captured variable definitions.
 
@@ -198,7 +198,7 @@ Extracted 0 createTexture calls, 18 captured variable definitions.
 Method: _genDungeonTextures
 Found 1 occurrence(s) of _genDungeonTextures
 
---- Inspecting occurrence 1 (Line 3496) ---
+--- Inspecting occurrence 1 (Line 3644) ---
    [VM Execution Error]: slime is not defined
 Extracted 0 createTexture calls, 18 captured variable definitions.
 

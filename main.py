@@ -95,7 +95,7 @@ def main():
     import shutil
     assets_dir = os.path.join(BASE_DIR, 'assets')
     os.makedirs(assets_dir, exist_ok=True)
-    for fname in ('game.js', 'index.html', 'levels.json', 'save_data.json'):
+    for fname in ('game.js', 'index.html', 'levels.json', 'facts.json', 'save_data.json'):
         src = os.path.join(BASE_DIR, fname)
         dst = os.path.join(assets_dir, fname)
         if os.path.exists(src):
@@ -103,7 +103,7 @@ def main():
     print("[Sync] Root asset files successfully synchronized to assets/ directory.")
 
     # Validate asset files
-    for fname in ('index.html', 'levels.json'):
+    for fname in ('index.html', 'levels.json', 'facts.json'):
         path = os.path.join(ASSETS, fname)
         if not os.path.exists(path):
             print(f"[ERROR] Missing file: {path}")

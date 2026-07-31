@@ -10,7 +10,9 @@ function getPaths(rootDir) {
     gameJsPath: path.join(root, 'game.js'),
     assetsDir: path.join(root, 'assets'),
     assetsLevelsPath: path.join(root, 'assets', 'levels.json'),
-    assetsGameJsPath: path.join(root, 'assets', 'game.js')
+    assetsGameJsPath: path.join(root, 'assets', 'game.js'),
+    factsPath: path.join(root, 'facts.json'),
+    assetsFactsPath: path.join(root, 'assets', 'facts.json')
   };
 }
 

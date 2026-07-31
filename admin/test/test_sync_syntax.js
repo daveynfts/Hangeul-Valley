@@ -97,21 +97,30 @@ async function runTests() {
       assert(assetParsed[0].name === 'Level Sync Verification Test', 'Parsed asset level 1 name updated');
     });
 
-    // 4. Auto-sync test for vocab facts: add vocab fact via lib, verify game.js and assets/game.js update synchronously
-    await test('Auto-sync vocab facts: adding entry updates game.js and assets/game.js synchronously with valid syntax', () => {
-      const testKey = 'sync_test_vocab_key';
-      const testFact = { vi: 'Thử nghiệm đồng bộ', ko: '동보 테스트' };
+    // 4. Word origins are read-only and no longer live in game.js: they were moved to
+    // the generated facts.json, so a write must be refused rather than rewriting game.js.
+    await test('Word origins are read-only: writes are refused and game.js is left untouched', () => {
+      const rootBefore = fs.readFileSync(path.join(rootDir, 'game.js'), 'utf8');
+      const assetBefore = fs.readFileSync(path.join(rootDir, 'assets/game.js'), 'utf8');
 
-      vocabFactsLib.addVocabFact(testKey, testFact, rootDir);
+      let caught = false;
+      try {
+        vocabFactsLib.addVocabFact('sync_test_vocab_key', {}, rootDir);
+      } catch (err) {
+        caught = true;
+        assert(err.statusCode === 409, `expected statusCode 409, got ${err.statusCode}`);
+        assert(/build_facts_json\.js/.test(err.message), 'error points at the generator');
+      }
+      assert(caught === true, 'addVocabFact threw instead of writing');
 
-      const rootGameJs = fs.readFileSync(path.join(rootDir, 'game.js'), 'utf8');
-      const assetGameJs = fs.readFileSync(path.join(rootDir, 'assets/game.js'), 'utf8');
+      assert(fs.readFileSync(path.join(rootDir, 'game.js'), 'utf8') === rootBefore, 'game.js unchanged');
+      assert(fs.readFileSync(path.join(rootDir, 'assets/game.js'), 'utf8') === assetBefore, 'assets/game.js unchanged');
+      assert(rootBefore === assetBefore, 'game.js and assets/game.js remain identical');
 
-      assert(rootGameJs === assetGameJs, 'game.js and assets/game.js are identical after update');
-      assert(rootGameJs.includes(testKey), 'game.js contains newly added vocab key');
-      assert(assetGameJs.includes(testKey), 'assets/game.js contains newly added vocab key');
+      // facts.json itself must be valid JSON and mirrored into assets/
+      const facts = JSON.parse(fs.readFileSync(path.join(rootDir, 'facts.json'), 'utf8'));
+      assert(Object.keys(facts).length > 0, 'facts.json parses and is non-empty');
 
-      // Verify node -c syntax on both files
       execSync(`node -c "${path.join(rootDir, 'game.js')}"`, { stdio: 'pipe' });
       execSync(`node -c "${path.join(rootDir, 'assets/game.js')}"`, { stdio: 'pipe' });
     });

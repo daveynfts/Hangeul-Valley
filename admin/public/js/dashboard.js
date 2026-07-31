@@ -78,7 +78,7 @@ window.DashboardView = {
     const missingTbody = document.getElementById('missing-facts-tbody');
     if (missingTbody) {
       if (missingList.length === 0) {
-        missingTbody.innerHTML = `<tr><td colspan="6" class="text-center text-emerald">🎉 100% VOCAB_FACTS Coverage! No missing facts detected.</td></tr>`;
+        missingTbody.innerHTML = `<tr><td colspan="6" class="text-center text-emerald">🎉 Every word has a curated origin.</td></tr>`;
       } else {
         missingTbody.innerHTML = missingList.map(item => {
           const levelNum = item.level || '--';
@@ -94,23 +94,10 @@ window.DashboardView = {
               <td><code class="key-badge">${this.escapeHtml(en)}</code></td>
               <td class="text-center">${this.escapeHtml(hint)}</td>
               <td><span class="badge badge-slate">${this.escapeHtml(category)}</span></td>
-              <td class="text-right">
-                <button class="btn btn-emerald btn-sm btn-quick-add-fact" data-key="${this.escapeHtml(en)}" data-ko="${this.escapeHtml(ko)}">
-                  <span>➕</span> Add Fact
-                </button>
-              </td>
+              <td class="text-right"><span class="text-muted" title="Curate this word in scripts/build_facts_json.js, then re-run the generator">curate in generator</span></td>
             </tr>
           `;
         }).join('');
-
-        // Bind quick add fact buttons
-        missingTbody.querySelectorAll('.btn-quick-add-fact').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const key = btn.getAttribute('data-key');
-            const ko = btn.getAttribute('data-ko');
-            this.openQuickAddFactModal(key, ko);
-          });
-        });
       }
     }
 
@@ -130,59 +117,6 @@ window.DashboardView = {
           </tr>
         `).join('');
       }
-    }
-  },
-
-  openQuickAddFactModal(key = '', ko = '') {
-    const bodyHtml = `
-      <div class="form-group">
-        <label class="form-label">English Dictionary Key (en)</label>
-        <input type="text" id="modal-fact-key" class="form-input" value="${this.escapeHtml(key)}" placeholder="e.g. father">
-        <span class="form-hint">Must match English translation key in levels.json</span>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Korean Word (ko)</label>
-        <input type="text" id="modal-fact-ko" class="form-input" value="${this.escapeHtml(ko)}" placeholder="e.g. 아버지">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">Vietnamese Explanation (vi)</label>
-        <input type="text" id="modal-fact-vi" class="form-input" placeholder="e.g. Bố, cha">
-        <span class="form-hint">Vietnamese vocabulary explanation for players</span>
-      </div>
-    `;
-
-    const footerHtml = `
-      <button class="btn btn-secondary" onclick="window.Modal.close()">Cancel</button>
-      <button class="btn btn-emerald" id="modal-btn-save-fact"><span>💾</span> Save Fact Entry</button>
-    `;
-
-    window.Modal.open('Quick Add VOCAB_FACT Entry', bodyHtml, footerHtml);
-
-    const btnSave = document.getElementById('modal-btn-save-fact');
-    if (btnSave) {
-      btnSave.addEventListener('click', async () => {
-        const keyVal = document.getElementById('modal-fact-key').value.trim();
-        const koVal = document.getElementById('modal-fact-ko').value.trim();
-        const viVal = document.getElementById('modal-fact-vi').value.trim();
-
-        if (!keyVal) {
-          window.Toast.warning('English key is required.', 'Validation');
-          return;
-        }
-
-        try {
-          const res = await window.apiFetch.addVocabFact({ key: keyVal, ko: koVal, vi: viVal });
-          if (res.success) {
-            window.Toast.success(`VOCAB_FACT '${keyVal}' added & synced to game.js!`, 'Success');
-            window.Modal.close();
-            await window.AppController.fetchAllData();
-          }
-        } catch (err) {
-          // Toast handles errors
-        }
-      });
     }
   },
 

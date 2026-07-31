@@ -222,7 +222,7 @@ app.delete('/api/levels/:levelNum/words/:wordIndex', (req, res, next) => {
   }
 });
 
-// 8. GET /api/vocab-facts
+// 8. GET /api/vocab-facts  (word origins, read-only — see admin/lib/vocabFacts.js)
 app.get('/api/vocab-facts', (req, res, next) => {
   try {
     const data = vocabFactsLib.getVocabFactsData(getRootDir());
@@ -230,102 +230,35 @@ app.get('/api/vocab-facts', (req, res, next) => {
       success: true,
       totalFacts: data.totalFacts,
       data: data.facts,
+      descriptions: data.descriptions,
+      byOrigin: data.byOrigin,
+      coveragePercentage: data.coveragePercentage,
+      exactMatchCount: data.exactMatchCount,
+      casingMismatchCount: data.casingMismatchCount,
       casingDiscrepancies: data.casingDiscrepancies,
-      missingFacts: data.missingFacts
+      missingFacts: data.missingFacts,
+      readOnly: true,
+      generatorHint: data.generatorHint
     });
   } catch (err) {
     next(err);
   }
 });
 
-// 9. POST /api/vocab-facts
-app.post('/api/vocab-facts', (req, res, next) => {
-  try {
-    const { key, vi, ko } = req.body || {};
-    if (!key || typeof key !== 'string' || !key.trim()) {
-      return res.status(400).json({
-        success: false,
-        error: 'Bad Request',
-        details: 'Field "key" is required and must be a non-empty string.'
-      });
-    }
-    const result = vocabFactsLib.addVocabFact(key, { vi, ko }, getRootDir());
-    res.status(201).json({
-      success: true,
-      message: `VOCAB_FACTS entry '${result.key}' added and synced to game.js.`,
-      key: result.key,
-      data: result.fact
-    });
-  } catch (err) {
-    if (err.message.includes('syntax error')) {
-      return res.status(422).json({
-        success: false,
-        error: 'Unprocessable Entity',
-        details: err.message
-      });
-    }
-    next(err);
-  }
-});
-
-// 10. PUT /api/vocab-facts/:key
-app.put('/api/vocab-facts/:key', (req, res, next) => {
-  try {
-    const key = req.params.key;
-    if (!key) {
-      return res.status(400).json({
-        success: false,
-        error: 'Bad Request',
-        details: 'Key parameter is required.'
-      });
-    }
-    const result = vocabFactsLib.updateVocabFact(key, req.body, getRootDir());
-    res.json({
-      success: true,
-      message: `VOCAB_FACTS entry '${result.key}' updated and synced.`,
-      key: result.key,
-      data: result.fact
-    });
-  } catch (err) {
-    if (err.message.includes('syntax error')) {
-      return res.status(422).json({
-        success: false,
-        error: 'Unprocessable Entity',
-        details: err.message
-      });
-    }
-    next(err);
-  }
-});
-
-// 11. DELETE /api/vocab-facts/:key
-app.delete('/api/vocab-facts/:key', (req, res, next) => {
-  try {
-    const key = req.params.key;
-    if (!key) {
-      return res.status(400).json({
-        success: false,
-        error: 'Bad Request',
-        details: 'Key parameter is required.'
-      });
-    }
-    const result = vocabFactsLib.deleteVocabFact(key, getRootDir());
-    res.json({
-      success: true,
-      message: `VOCAB_FACTS entry '${result.key}' deleted.`,
-      key: result.key
-    });
-  } catch (err) {
-    if (err.message.includes('not found')) {
-      return res.status(404).json({
-        success: false,
-        error: 'Not Found',
-        details: err.message
-      });
-    }
-    next(err);
-  }
-});
+// 9-11. Writes to word origins are refused: facts.json is a generated artifact, so
+// anything saved here would be discarded by the next `node scripts/build_facts_json.js`.
+// Curate the SINO / MIXED / LOANWORDS / NATIVE_NOTE maps in that script instead.
+const refuseOriginWrite = (verb) => (req, res) => {
+  res.status(409).json({
+    success: false,
+    error: 'Conflict',
+    details: `Cannot ${verb} word origins from the admin panel. ${vocabFactsLib.GENERATOR_HINT}`,
+    generatorHint: vocabFactsLib.GENERATOR_HINT
+  });
+};
+app.post('/api/vocab-facts', refuseOriginWrite('add'));
+app.put('/api/vocab-facts/:key', refuseOriginWrite('update'));
+app.delete('/api/vocab-facts/:key', refuseOriginWrite('delete'));
 
 // 12. POST /api/sync (Manual Trigger Resync)
 app.post('/api/sync', (req, res, next) => {
