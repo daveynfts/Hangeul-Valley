@@ -4,3 +4,13 @@ save_data.json
 webview_data/
 node_modules/
 .DS_Store
+
+# Agent scratch logs — 1102 files / 6.7 MB of orchestration transcripts.
+# Kept on disk, out of the repo.
+.agents/
+
+# Editor / tooling
+.claude/
+_game_temp.js
+_game_bak.js
+levels.json.tmp
