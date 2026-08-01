@@ -319,6 +319,14 @@
     .prog-level-learned { position: absolute; inset: 0 auto 0 0; background: rgba(103,232,249,.5); }
     .prog-level-mature  { position: absolute; inset: 0 auto 0 0; background: var(--neon-gold); }
     .prog-level-pct { flex: 0 0 92px; text-align: right; font-family: monospace; font-size: 11px; color: rgba(226,232,240,.65); }
+    #prog-activity { display: flex; gap: 4px; }
+    .prog-day {
+      flex: 1; height: 26px; border-radius: 4px;
+      background: rgba(30, 41, 59, .9); border: 1px solid rgba(148,163,184,.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: rgba(15,23,42,.9);
+    }
+    .prog-day.has { background: var(--neon-green); border-color: transparent; }
     #prog-footnote { font-size: 11px; color: rgba(226,232,240,.45); line-height: 1.6; margin: 0; }
 
     /* ── Korean pronunciation (TTS) ──────────────────────────────────────────
@@ -1474,6 +1482,10 @@
         <div class="prog-section">
           <div class="prog-section-title">📅 Next 7 days</div>
           <div id="prog-forecast"></div>
+        </div>
+        <div class="prog-section">
+          <div class="prog-section-title">🔥 Last 14 days</div>
+          <div id="prog-activity"></div>
         </div>
         <div class="prog-section">
           <div class="prog-section-title">📚 Per level</div>
