@@ -4074,11 +4074,166 @@ const CROP_ICONS=['🌸','🥬','🍓','🌽','🌻'];
 const LEVEL_COST = (idx) => idx === 0 ? 0 : Math.floor(50 * Math.pow(1.8, idx - 1));
 // Level 2: 50, Level 3: 90, Level 4: 162, Level 5: 292, Level 6: 525
 
-// SRS Intervals (change to 86400000/259200000 for real-day SRS)
-const SR1 = 30*1000;   // P1 seedling → P2 wilt:  30 seconds
-const SR2 = 90*1000;   // P2 sprout   → P3 ripe:  90 seconds
+// ═══════════════ SPACED REPETITION SCHEDULER (SM-2) ═════════════════════════
+//
+// Previously `SR1`/`SR2` were the whole of "SRS": two fixed timers, 30 and 90 seconds,
+// with no interval, ease factor or due date stored anywhere. That is crop-growth
+// pacing, not spaced repetition — a player could reach "100% mastery" on 1500 words in
+// one sitting and remember none of it the next day.
+//
+// The fix keeps the game feel intact by recognising that the existing three-touch loop
+// (plant → 30s → water → 90s → harvest) is exactly Anki's *learning steps*. So those
+// timers stay, and a day-scale review layer sits on top:
+//
+//   new ──plant──> learn ──steps──> review ──due in N days──> review ...
+//                    ↑                  │
+//                    └──── relearn <────┘  (failed a mature word)
+//
+// A word graduates when it is harvested, entering review with a 1-day interval. From
+// then on it resurfaces when due, as a single recall rather than the full three-touch
+// cycle. Scheduling is deliberately un-fuzzed so behaviour is reproducible and testable.
+const SRS_CFG = {
+  LEARN_STEPS:   [30 * 1000, 90 * 1000],  // matches the seedling → wilt → ripe pacing
+  RELEARN_STEPS: [60 * 1000],
+  GRADUATE_IVL: 1,     // days — every word enters review here, no shortcuts
+  MATURE_IVL:   21,    // days — Anki's mature-card threshold, used for the Mastery stat
+  START_EASE:   2.5,
+  MIN_EASE:     1.3,
+  MAX_EASE:     3.0,
+  MAX_IVL:      730,   // 2 years
+  LAPSE_IVL_MULT: 0.5, // a lapsed word keeps half its interval when it returns
+  // Fraction of the scheduled interval that must actually elapse before a correct answer
+  // is allowed to grow it. Reviewing early is not punished, it just earns nothing.
+  EARLY_REVIEW_RATIO: 0.8,
+};
+
+const GRADE = { AGAIN: 0, HARD: 1, GOOD: 2, EASY: 3 };
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+const _clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+function srsNewEntry() {
+  return { st: 'new', step: 0, ivl: 0, ease: SRS_CFG.START_EASE, reps: 0, lapses: 0, due: 0, last: 0 };
+}
+
+// Pure: returns a fresh entry, never mutates its argument. `now` is injected so the
+// scheduler can be tested across simulated days.
+function srsSchedule(entry, grade, now) {
+  const e = { ...srsNewEntry(), ...(entry || {}) };
+  const g = _clamp(grade | 0, 0, 3);
+  // Captured before e.last is overwritten — the review branch needs to know how long the
+  // player actually waited, and reading e.last after the assignment always yields zero.
+  const prevLast = e.last;
+  e.last = now;
+
+  const enterLearning = (steps, stateName) => {
+    e.st = stateName;
+    e.step = 0;
+    e.due = now + steps[0];
+  };
+
+  const graduate = (ivlDays) => {
+    e.st = 'review';
+    e.step = 0;
+    e.ivl = _clamp(Math.round(ivlDays), 1, SRS_CFG.MAX_IVL);
+    e.due = now + e.ivl * DAY_MS;
+    e.reps++;
+  };
+
+  if (e.st === 'new') {
+    // First exposure always enters the learning steps, whatever the grade. Anki lets Easy
+    // graduate a card immediately, but there Easy is a deliberate "I already knew this"
+    // self-report; here the grade is inferred from answer speed, and a fast click on a
+    // four-option question is not evidence of knowing anything.
+    enterLearning(SRS_CFG.LEARN_STEPS, 'learn');
+    return e;
+  }
+
+  if (e.st === 'learn' || e.st === 'relearn') {
+    const steps = e.st === 'learn' ? SRS_CFG.LEARN_STEPS : SRS_CFG.RELEARN_STEPS;
+    if (g === GRADE.AGAIN) {
+      e.step = 0;
+      e.due = now + steps[0];
+      return e;
+    }
+    if (g === GRADE.HARD) {
+      // Repeat the current step rather than advancing.
+      e.due = now + steps[Math.min(e.step, steps.length - 1)];
+      return e;
+    }
+    // GOOD and EASY both advance exactly one step, graduating off the end.
+    //
+    // Anki lets Easy skip the rest of the learning steps, but its Easy is the player saying
+    // "I already knew this". Here it is inferred from answering inside six seconds, which a
+    // learner shown the word thirty seconds ago will manage from short-term memory — that is
+    // not evidence the word will survive a week. Requiring every step also keeps the
+    // scheduler in step with the crop visuals: seedling, sprout, ripe, harvested.
+    e.step++;
+    if (e.step >= steps.length) {
+      // A relearning word returns on the interval it kept when it lapsed.
+      graduate(e.st === 'relearn' ? Math.max(SRS_CFG.GRADUATE_IVL, e.ivl) : SRS_CFG.GRADUATE_IVL);
+    } else {
+      e.due = now + steps[e.step];
+    }
+    return e;
+  }
+
+  // st === 'review'
+  // Failing is always a lapse, whether or not the review was due.
+  if (g === GRADE.AGAIN) {
+    e.lapses++;
+    e.ease = _clamp(e.ease - 0.20, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+    e.ivl = _clamp(Math.round(e.ivl * SRS_CFG.LAPSE_IVL_MULT), 1, SRS_CFG.MAX_IVL);
+    enterLearning(SRS_CFG.RELEARN_STEPS, 'relearn');
+    return e;
+  }
+
+  // An interval is a claim about how long the word survives in memory, so it can only be
+  // earned by actually waiting. Reviewing ahead of schedule proves nothing new: the answer
+  // still counts as a rep and the card is rescheduled, but the interval does not grow.
+  //
+  // Without this a player could answer the same word three times in one minute and compound
+  // 1d → 4d → 10d → 25d straight past the 21-day maturity line, which is precisely the
+  // "100% mastery in one sitting" problem this scheduler exists to fix.
+  const waitedMs = prevLast ? (now - prevLast) : e.ivl * DAY_MS;
+  const onSchedule = waitedMs >= e.ivl * DAY_MS * SRS_CFG.EARLY_REVIEW_RATIO;
+  if (!onSchedule) {
+    graduate(e.ivl);   // same interval, new due date, rep still credited
+    return e;
+  }
+
+  // Each branch advances by at least a day so an interval can never stall.
+  if (g === GRADE.HARD) {
+    e.ease = _clamp(e.ease - 0.15, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+    graduate(Math.max(e.ivl + 1, e.ivl * 1.2));
+  } else if (g === GRADE.GOOD) {
+    graduate(Math.max(e.ivl + 1, e.ivl * e.ease));
+  } else {
+    e.ease = _clamp(e.ease + 0.15, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+    graduate(Math.max(e.ivl + 1, e.ivl * e.ease * 1.3));
+  }
+  return e;
+}
+
+// ── Predicates ───────────────────────────────────────────────────────────────
+// "graduated" gates content: reachable inside one session, so the minigames and quests
+// do not sit locked for weeks. "mature" is the long-haul Mastery stat.
+function srsIsGraduated(e) { return !!e && (e.st === 'review' || e.st === 'relearn'); }
+function srsIsMature(e)    { return !!e && e.st === 'review' && e.ivl >= SRS_CFG.MATURE_IVL; }
+function srsIsDue(e, now)  { return !!e && e.st !== 'new' && e.due > 0 && now >= e.due; }
+function srsIsLearning(e)  { return !!e && (e.st === 'learn' || e.st === 'relearn'); }
+
+// Human-readable interval, for the vocab book and dashboard.
+function srsIntervalLabel(e) {
+  if (!e || e.st === 'new') return 'new';
+  if (srsIsLearning(e)) return 'learning';
+  if (e.ivl >= 365) return (e.ivl / 365).toFixed(1) + 'y';
+  if (e.ivl >= 30) return Math.round(e.ivl / 30) + 'mo';
+  return e.ivl + 'd';
+}
+
 // Plot sState codes: ''=empty '1'=seedling '2'=wilting '3'=sprout '4'=ripe
-let srsData  = {}; // { ko: { p2At, p3At, harvests } }
+let srsData  = {}; // { ko: srsNewEntry() }
 let plotSave = []; // [{ i, ko, sState, plantedAt }]
 let droppedItemsSave = []; // [{ itemId, nameKo, x, y }] persisted ground drops buffer
 var PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000];
@@ -4274,6 +4429,57 @@ function migrateSaveData(d) {
     data.droppedItems = Array.isArray(data.droppedItems) ? data.droppedItems : [];
     data.v = 4;
   }
+
+  // v4 -> v5: the SRS schema changed from {p2At, p3At, harvests} to a real SM-2 entry.
+  //
+  // Existing players must not be reset to zero. The old data has no interval or ease, but
+  // harvest count is a usable proxy for how well a word was known: each harvest was a
+  // successful three-touch recall. Seeding intervals from it means a veteran save keeps
+  // its progress and simply starts getting sensible review dates from now on.
+  //
+  // Intervals are staggered by harvest count so a save with hundreds of learned words does
+  // not dump all of them into a single day's review queue.
+  if (!data.v || data.v < 5) {
+    console.log(`[Save Migration] Upgrading SRS schema v${data.v || 4} -> v5 (SM-2)`);
+    const now = Date.now();
+    const oldSrs = (data.srs && typeof data.srs === 'object') ? data.srs : {};
+    const harvests = (data.harvests && typeof data.harvests === 'object') ? data.harvests : {};
+    const migrated = {};
+
+    // Every word the old save knew about, from either source.
+    const kos = new Set([...Object.keys(oldSrs), ...Object.keys(harvests)]);
+    kos.forEach(ko => {
+      const prev = oldSrs[ko] || {};
+      // Already migrated (or written by a newer build) — leave it alone.
+      if (prev.st) { migrated[ko] = prev; return; }
+
+      const h = Math.max(0, (typeof harvests[ko] === 'number' ? harvests[ko] : 0) | 0,
+                            (typeof prev.harvests === 'number' ? prev.harvests : 0) | 0);
+
+      if (h <= 0) {
+        // Seen but never completed a cycle. If it was mid-learning, keep it in learning.
+        const e = srsNewEntry();
+        if (prev.p2At || prev.p3At) { e.st = 'learn'; e.step = prev.p3At ? 1 : 0; e.due = now; }
+        migrated[ko] = e;
+        return;
+      }
+
+      // Graduated. Interval grows with harvest count but is capped below maturity, so
+      // "mature" still has to be earned under the real scheduler rather than granted.
+      const e = srsNewEntry();
+      e.st = 'review';
+      e.reps = h;
+      e.ivl = Math.min(SRS_CFG.MATURE_IVL - 1, Math.max(1, Math.round(Math.pow(h, 1.4))));
+      e.ease = _clamp(SRS_CFG.START_EASE + (h >= 5 ? 0.1 : 0), SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+      e.last = now;
+      // Spread the queue: 1 day apart per harvest tier, so they do not all land at once.
+      e.due = now + Math.min(e.ivl, 1 + (h % 7)) * DAY_MS;
+      migrated[ko] = e;
+    });
+
+    data.srs = migrated;
+    data.v = 5;
+  }
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
     data.inventory.maxSlots = 20;
   }
@@ -4328,7 +4534,7 @@ function collectSave(){
     : droppedItemsSave;
   droppedItemsSave = drops;
   return {
-    v: 4,
+    v: 5,
     currencies: playerCurrencies,
     gold: playerCurrencies.coins,
     unlockedLevels,
@@ -4483,8 +4689,61 @@ function savePlotsFn() { persistSave(); }
 function saveEconomy() { persistSave(); }
 function loadSRS()   {}
 function loadEconomy() {}
-function getSrs(ko){ return srsData[ko]||{}; }
+function getSrs(ko){ return srsData[ko] || srsNewEntry(); }
 function setSrs(ko,u){ srsData[ko]={...getSrs(ko),...u}; saveSRS(); }
+
+// Record a review outcome. This is the only place the scheduler is advanced.
+function gradeWord(ko, grade, now = Date.now()){
+  const next = srsSchedule(getSrs(ko), grade, now);
+  srsData[ko] = next;
+  saveSRS();
+  return next;
+}
+
+// Words the player owns that are due for review right now, soonest first.
+function srsDueWords(now = Date.now()){
+  const seen = new Set();
+  const out = [];
+  unlockedLevels.forEach(idx => (levelsData[idx]?.words || []).forEach(w => {
+    if (seen.has(w.ko)) return;
+    seen.add(w.ko);
+    const e = srsData[w.ko];
+    if (srsIsDue(e, now)) out.push({ word: w, entry: e });
+  }));
+  out.sort((a, b) => a.entry.due - b.entry.due);
+  return out;
+}
+
+// Review forecast for the next `days` days, for the progress dashboard.
+function srsForecast(days = 7, now = Date.now()){
+  const buckets = new Array(days).fill(0);
+  Object.values(srsData).forEach(e => {
+    if (!srsIsGraduated(e) || !e.due) return;
+    const d = Math.floor((e.due - now) / DAY_MS);
+    if (d >= 0 && d < days) buckets[d]++;
+  });
+  return buckets;
+}
+
+function srsStats(){
+  const all = Object.values(srsData);
+  const graduated = all.filter(srsIsGraduated);
+  const reps = graduated.reduce((s, e) => s + (e.reps || 0), 0);
+  const lapses = graduated.reduce((s, e) => s + (e.lapses || 0), 0);
+  return {
+    seen: all.length,
+    learning: all.filter(srsIsLearning).length,
+    graduated: graduated.length,
+    mature: all.filter(srsIsMature).length,
+    dueNow: srsDueWords().length,
+    // Share of reviews answered without a lapse — the closest thing to a retention rate
+    // the game can measure without logging every single answer.
+    retention: reps + lapses > 0 ? Math.round((reps / (reps + lapses)) * 100) : null,
+    avgEase: graduated.length
+      ? +(graduated.reduce((s, e) => s + e.ease, 0) / graduated.length).toFixed(2)
+      : null
+  };
+}
 
 // ═══════════════ ECONOMY STATE & CURRENCY HELPERS ════════════════════════════
 var unlockedLevels = [0];  // Level indices the player has bought
@@ -4608,16 +4867,27 @@ function checkAffordablePacks() {
 }
 
 // ═══════════════ R2: KOREAN-GATED PROGRESSION & HARD LOCKS ════════════════════
-function calcLevelMastery(levelIdx) {
+// Two separate metrics, deliberately.
+//
+// Under the real scheduler, "mastered" means an interval of 21+ days, which takes weeks of
+// honest reviews to reach. Gating the minigames and quests on that would leave a new player
+// staring at locked content for a month — so content gates use `calcLevelProgress`
+// (graduated: learned through its steps at least once, reachable in a single session) while
+// `calcLevelMastery` reports genuine maturity for the Mastery stat, trophies and dashboard.
+function _levelPct(levelIdx, predicate) {
   if (!levelsData || !levelsData[levelIdx] || !levelsData[levelIdx].words) return 0;
   const words = levelsData[levelIdx].words;
   if (words.length === 0) return 100;
-  let mastered = 0;
-  words.forEach(w => {
-    if ((harvestCounts.get(w.ko) || 0) >= 3) mastered++;
-  });
-  return Math.floor((mastered / words.length) * 100);
+  let n = 0;
+  words.forEach(w => { if (predicate(srsData[w.ko])) n++; });
+  return Math.floor((n / words.length) * 100);
 }
+
+// % of the level graduated — drives content unlocks.
+function calcLevelProgress(levelIdx) { return _levelPct(levelIdx, srsIsGraduated); }
+
+// % of the level mature (interval >= 21 days) — the long-haul Mastery stat.
+function calcLevelMastery(levelIdx) { return _levelPct(levelIdx, srsIsMature); }
 
 function isZoneUnlocked(zoneKey) {
   const reqs = {
@@ -4628,14 +4898,16 @@ function isZoneUnlocked(zoneKey) {
   };
   const req = reqs[zoneKey];
   if (!req) return { unlocked: true };
-  const pct = calcLevelMastery(req.reqLevel);
+  // Graduated, not mature — see calcLevelProgress. Mature gating would lock every zone
+  // for weeks on a fresh save.
+  const pct = calcLevelProgress(req.reqLevel);
   return { unlocked: pct >= req.minPct, pct, targetPct: req.minPct, reqName: req.name };
 }
 
 function showHardLockToast(zoneKey) {
   const check = isZoneUnlocked(zoneKey);
   playChiptuneSFX('quiz_wrong');
-  showToast(`🔒 HARD LOCK: Reach ${check.targetPct}% SRS Mastery in ${check.reqName}! (Current: ${check.pct}%)`, 4000);
+  showToast(`🔒 LOCKED: Learn ${check.targetPct}% of ${check.reqName} first! (Current: ${check.pct}%)`, 4000);
 }
 
 // ═══════════════ R2: SHOP PURCHASE QUIZ GATE ══════════════════════════════════
@@ -4805,12 +5077,12 @@ let questState = {
 };
 
 const MAIN_STORYLINE = [
-  { act: 1, id: 'act_1', title: 'Act I: Harvest of Hangeul', desc: 'Harvest 3 ripe words in farm. Reach 80% SRS Mastery in Level 1 (Daily Life & People).', target: 3, reqLevel: 0, minPct: 80, rCoins: 100, rGems: 10, rHonor: 50 },
-  { act: 2, id: 'act_2', title: 'Act II: Beast Master', desc: 'Defeat 5 Dungeon beasts. Reach 80% SRS Mastery in Level 2 (Food & Dining).', target: 5, reqLevel: 1, minPct: 80, rCoins: 150, rGems: 15, rHonor: 75 },
-  { act: 3, id: 'act_3', title: 'Act III: Bonds of Hangeul', desc: 'Win 3 Spell Duels. Reach 80% SRS Mastery in Level 4 (Places & Directions).', target: 3, reqLevel: 3, minPct: 80, rCoins: 200, rGems: 20, rHonor: 100 },
-  { act: 4, id: 'act_4', title: 'Act IV: Chromatic Angler', desc: 'Catch 5 fish in Crystal Pond. Reach 80% SRS Mastery in Level 3 (Time & Weather).', target: 5, reqLevel: 2, minPct: 80, rCoins: 250, rGems: 25, rHonor: 125 },
-  { act: 5, id: 'act_5', title: 'Act V: Numeric Dominion', desc: 'Score 500+ in Arcade Machine. Reach 80% SRS Mastery in Level 6 (Hobbies & Leisure).', target: 500, reqLevel: 5, minPct: 80, rCoins: 300, rGems: 30, rHonor: 150 },
-  { act: 6, id: 'act_6', title: 'Act VI: Grand Sovereign', desc: 'Defeat Grand Necromancer Boss with 100% SRS Mastery across all levels.', target: 1, reqLevel: 0, minPct: 100, rCoins: 500, rGems: 50, rHonor: 300 }
+  { act: 1, id: 'act_1', title: 'Act I: Harvest of Hangeul', desc: 'Harvest 3 ripe words in farm. Learn 80% of Level 1 (Daily Life & People).', target: 3, reqLevel: 0, minPct: 80, rCoins: 100, rGems: 10, rHonor: 50 },
+  { act: 2, id: 'act_2', title: 'Act II: Beast Master', desc: 'Defeat 5 Dungeon beasts. Learn 80% of Level 2 (Food & Dining).', target: 5, reqLevel: 1, minPct: 80, rCoins: 150, rGems: 15, rHonor: 75 },
+  { act: 3, id: 'act_3', title: 'Act III: Bonds of Hangeul', desc: 'Win 3 Spell Duels. Learn 80% of Level 4 (Places & Directions).', target: 3, reqLevel: 3, minPct: 80, rCoins: 200, rGems: 20, rHonor: 100 },
+  { act: 4, id: 'act_4', title: 'Act IV: Chromatic Angler', desc: 'Catch 5 fish in Crystal Pond. Learn 80% of Level 3 (Time & Weather).', target: 5, reqLevel: 2, minPct: 80, rCoins: 250, rGems: 25, rHonor: 125 },
+  { act: 5, id: 'act_5', title: 'Act V: Numeric Dominion', desc: 'Score 500+ in Arcade Machine. Learn 80% of Level 6 (Hobbies & Leisure).', target: 500, reqLevel: 5, minPct: 80, rCoins: 300, rGems: 30, rHonor: 150 },
+  { act: 6, id: 'act_6', title: 'Act VI: Grand Sovereign', desc: 'Defeat Grand Necromancer Boss after learning every word in all levels.', target: 1, reqLevel: 0, minPct: 100, rCoins: 500, rGems: 50, rHonor: 300 }
 ];
 
 function initQuestState() {
@@ -4858,8 +5130,8 @@ function checkQuestProgress(type, data = {}) {
     if (data.score > questState.mainProgress.score) questState.mainProgress.score = data.score;
   }
 
-  let totalMastered = 0;
-  harvestCounts.forEach((count) => { if (count >= 5) totalMastered++; });
+  // Mature under the scheduler, not "harvested five times".
+  const totalMastered = Object.values(srsData).filter(srsIsMature).length;
   questState.weekly.forEach(q => { if (q.id === 'wq_1') q.current = Math.min(q.target, totalMastered); });
 
   persistSave();
@@ -4907,7 +5179,7 @@ function renderQuestList() {
     else if (act.act === 5) curr = questState.mainProgress.score;
     else if (act.act === 6) curr = questState.mainProgress.duels >= 1 ? 1 : 0;
 
-    const srsPct = calcLevelMastery(act.reqLevel);
+    const srsPct = calcLevelProgress(act.reqLevel);
     const reqMet = curr >= act.target && srsPct >= act.minPct;
 
     const card = document.createElement('div');
@@ -4915,7 +5187,7 @@ function renderQuestList() {
     card.innerHTML = `
       <div class="quest-card-header">
         <span class="quest-card-title">${act.title}</span>
-        <span class="quest-card-badge">${isCompleted ? 'COMPLETED' : `SRS Mastery ${srsPct}% / ${act.minPct}%`}</span>
+        <span class="quest-card-badge">${isCompleted ? 'COMPLETED' : `Learned ${srsPct}% / ${act.minPct}%`}</span>
       </div>
       <div class="quest-card-desc">${act.desc}</div>
       <div class="quest-progress-bg">
@@ -4976,7 +5248,7 @@ function claimMainQuest(actNum) {
   else if (act.act === 5) curr = questState.mainProgress.score;
   else if (act.act === 6) curr = questState.mainProgress.duels >= 1 ? 1 : 0;
 
-  const srsPct = calcLevelMastery(act.reqLevel);
+  const srsPct = calcLevelProgress(act.reqLevel);
   if (curr < act.target || srsPct < act.minPct) {
     showToast('⚠️ Quest requirements not met!');
     return;
@@ -5197,10 +5469,16 @@ function updateHUD() {
   if(!levelsData.length) return;
   const lvl = levelsData[currentLevelIndex];
   hudLevelEl.textContent = `${lvl.icon||'🌾'} ${levelName(lvl)}`;
-  // progress = total unique words planted this session
-  const pct = lvl.words.length > 0 ? Math.min(100, Math.round((progress / lvl.words.length) * 100)) : 0;
-  hudProgressEl.textContent = `🌱 ${progress} words`;
-  if(pbFill) pbFill.style.width = pct + '%';
+  // The bar now tracks how much of the level has been learned, which persists across
+  // sessions, rather than a session-local plant counter that reset every reload.
+  const learnedPct = calcLevelProgress(currentLevelIndex);
+  const due = srsDueWords().length;
+  const maturePct = calcLevelMastery(currentLevelIndex);
+  hudProgressEl.textContent = due > 0
+    ? `⏰ ${due} due · 📗 ${learnedPct}%`
+    : `📗 ${learnedPct}% learned${maturePct ? ` · 🌟 ${maturePct}%` : ''}`;
+  hudProgressEl.title = `${learnedPct}% of this level learned, ${maturePct}% mature (21+ day interval)`;
+  if(pbFill) pbFill.style.width = learnedPct + '%';
   updateGoldHUD();
 }
 
@@ -5320,6 +5598,9 @@ function closeModalById(overlayId) {
   else if (overlayId === 'duel-overlay') window.closeSpellDuel();
   else if (overlayId === 'trophy-overlay') window.closeTrophies();
   else if (overlayId === 'level-select-overlay') hideLevelSelect();
+  // Needs its own branch: this overlay is hidden by the .hidden class, and the generic
+  // fallback below only clears .visible, which would leave it on screen after Escape.
+  else if (overlayId === 'progress-overlay') window.closeProgressOverlay();
   else setModalState(overlayId, false);
 }
 
@@ -5548,6 +5829,7 @@ function revealQuizHint(tier){
     box.innerHTML = `🔤 <b>Romanization:</b> <span style="color:#67e8f9; font-weight:bold">[${rom}]</span>`;
   } else if(tier === 'chosung'){
     if(!spendCoins(5)){ showToast('Need 5 Coins 🪙 for Chosung hint!'); return; }
+    currentQuizMeta.paidHints++;
     const ch = getChosung(currentWord.ko);
     box.innerHTML = `🔠 <b>Initial consonants (초성):</b> <span style="color:#fde047; font-size:18px; font-weight:bold; letter-spacing:3px">${ch}</span>`;
   } else if(tier === 'audio'){
@@ -5555,6 +5837,7 @@ function revealQuizHint(tier){
     // origin hint rather than given away free as romanization is.
     if(!KoreanTTS.isAvailable()){ showToast('🔇 No Korean voice available on this device.'); return; }
     if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 to hear the word!'); return; }
+    currentQuizMeta.paidHints++;
     const ko = currentWord.ko;
     speakKorean(ko);
     // The word is embedded rather than read from `currentWord` at click time: the quiz
@@ -5566,6 +5849,7 @@ function revealQuizHint(tier){
       b.dataset.spell ? spellKorean(b.dataset.ko) : speakKorean(b.dataset.ko)));
   } else if(tier === 'fact'){
     if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 for the origin hint!'); return; }
+    currentQuizMeta.paidHints++;
     const fact = getFunFact(currentWord);
     box.innerHTML = `💡 <b>Word origin:</b> ${fact.origin || fact.hint}`;
   }
@@ -5574,10 +5858,94 @@ function revealQuizHint(tier){
 
 // ====== QUIZ (SRS Phase-Aware) ================================================
 let currentPhase = 1;
+
+// SM-2 wants Again/Hard/Good/Easy, but the quiz only knows right or wrong. These three
+// signals stand in for self-assessed difficulty, and unlike a self-report they cannot be
+// gamed: a player who needed a paid hint or several tries genuinely found the word hard.
+let currentQuizMeta = { openedAt: 0, attempts: 0, paidHints: 0 };
+const EASY_ANSWER_MS = 6000;
+// Declared here rather than beside applyQuizMode below because deriveGrade reads it, and a
+// `let` further down the file would still be in its temporal dead zone at that point.
+let currentQuizMode = 'type';   // 'type' | 'recognise' | 'listen'
+let currentChoices = [];
+
+function resetQuizMeta(){ currentQuizMeta = { openedAt: Date.now(), attempts: 0, paidHints: 0 }; }
+
+// ── Answer matching ──────────────────────────────────────────────────────────
+// Comparison happens on decomposed jamo, not syllable blocks. 갑 vs 강 differs by a single
+// jamo but is a whole different character, so a syllable-level edit distance would call
+// them two edits apart while jamo-level correctly calls it one. Composed-form comparison
+// would also treat a wrong vowel as a completely different symbol.
+const _JAMO_L = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const _JAMO_V = ['ㅏ','ㅐ','ㅑ','ㅒ','ㅓ','ㅔ','ㅕ','ㅖ','ㅗ','ㅘ','ㅙ','ㅚ','ㅛ','ㅜ','ㅝ','ㅞ','ㅟ','ㅠ','ㅡ','ㅢ','ㅣ'];
+const _JAMO_T = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+
+function toJamo(str){
+  const out = [];
+  for (const ch of String(str).normalize('NFC')) {
+    const c = ch.charCodeAt(0);
+    if (c >= 0xac00 && c <= 0xd7a3) {
+      const s = c - 0xac00;
+      out.push(_JAMO_L[Math.floor(s / 588)], _JAMO_V[Math.floor((s % 588) / 28)]);
+      const t = _JAMO_T[s % 28];
+      if (t) out.push(t);
+    } else if (ch !== ' ') {
+      out.push(ch);
+    }
+  }
+  return out;
+}
+
+function levenshtein(a, b){
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    prev = cur;
+  }
+  return prev[b.length];
+}
+
+// A word may list alternates as "가다 / 걷다" or comma-separated; any of them is correct.
+function acceptableAnswers(word){
+  return String(word.ko || '').split(/[\/,]/).map(s => s.trim().normalize('NFC')).filter(Boolean);
+}
+
+// Returns 'exact' | 'close' | 'wrong'. 'close' is a one-jamo slip: the learner clearly
+// knew the word, so it is accepted but graded Hard rather than thrown away.
+function checkAnswer(typed, word){
+  const t = String(typed).trim().normalize('NFC');
+  if (!t) return 'wrong';
+  const options = acceptableAnswers(word);
+  if (options.includes(t)) return 'exact';
+  const tj = toJamo(t);
+  // Only forgive a slip on words long enough that one jamo cannot flip the meaning outright.
+  for (const opt of options) {
+    const oj = toJamo(opt);
+    if (oj.length >= 4 && levenshtein(tj, oj) <= 1) return 'close';
+  }
+  return 'wrong';
+}
+
+function deriveGrade(wasClose = false){
+  const m = currentQuizMeta;
+  if (wasClose || m.attempts > 0 || m.paidHints > 0) return GRADE.HARD;
+  // Easy is only inferable from a fast *typed* answer. On multiple choice a quick click is
+  // one-in-four guessing, not fluency, so recognition and listening cap out at Good.
+  if (currentQuizMode !== 'type') return GRADE.GOOD;
+  const elapsed = Date.now() - (m.openedAt || Date.now());
+  return elapsed <= EASY_ANSWER_MS ? GRADE.EASY : GRADE.GOOD;
+}
+
 function openQuiz(word, plot, phase=1){
   if(quizOpen) return;
   currentWord=word; currentPlot=plot; currentPhase=phase;
   quizOpen=playerLocked=true;
+  resetQuizMeta();
   
   // Reset tier hint reveal card
   const hc = $('quiz-hint-reveal-card'); if(hc) { hc.innerHTML = ''; hc.classList.add('hidden'); }
@@ -5608,8 +5976,132 @@ function openQuiz(word, plot, phase=1){
     }
   }
   answerInput.value=''; feedbackText.textContent=''; feedbackText.className='';
+  applyQuizMode(word, phase);
   quizBackdrop.classList.add('visible');
-  setTimeout(()=>answerInput.focus(),80);
+  if(currentQuizMode === 'type') setTimeout(()=>answerInput.focus(),80);
+}
+
+// ── Question modes ───────────────────────────────────────────────────────────
+// Every phase used to be "type the Korean for this English word", which is production
+// recall — the hardest form. For a word the player has never seen that is not a test at
+// all: the Korean is nowhere on screen, so the only way through is to buy a hint. (The
+// code claimed "CSS controls visibility per phase", but no phase-1/2/3 rules ever existed,
+// so all three phases rendered identically.)
+//
+// First contact is now recognition: the Korean is shown as the prompt and the player picks
+// its meaning, which teaches the pairing. Production typing is kept for the graded recall
+// at phase 3, where it belongs. (currentQuizMode / currentChoices are declared up beside
+// currentQuizMeta so deriveGrade can read the mode.)
+
+function pickQuizMode(word, phase){
+  if (phase === 3) return 'type';                       // graded recall stays production
+  const e = srsData[word.ko];
+  const firstContact = !e || e.st === 'new';
+  if (phase === 1 && firstContact) return 'recognise';
+  // Second touch: listening where a Korean voice exists, otherwise typing.
+  if (phase === 2 && KoreanTTS.isAvailable() && !firstContact) return 'listen';
+  return 'type';
+}
+
+// Distractors are drawn from the same category where possible, so a choice cannot be made
+// by elimination on topic alone.
+function buildChoices(word, count = 4){
+  const pool = unlockedLevels.flatMap(i => levelsData[i]?.words || []).filter(w => w.ko !== word.ko);
+  const sameCat = pool.filter(w => wordCategory(w) === wordCategory(word));
+  const from = sameCat.length >= count - 1 ? sameCat : pool;
+  const picked = [];
+  const used = new Set();
+  while (picked.length < count - 1 && used.size < from.length) {
+    const i = Math.floor(Math.random() * from.length);
+    if (used.has(i)) continue;
+    used.add(i);
+    picked.push(from[i]);
+  }
+  const options = [...picked, word];
+  for (let i = options.length - 1; i > 0; i--) {   // Fisher-Yates
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  return options;
+}
+
+function applyQuizMode(word, phase){
+  currentQuizMode = pickQuizMode(word, phase);
+  const koPrompt = $('quiz-ko-prompt'), choices = $('quiz-choices'), qText = $('question-text');
+  const hints = $('quiz-tier-hints');
+
+  const showTyping = currentQuizMode === 'type';
+  answerInput.classList.toggle('hidden', !showTyping);
+  answerInput.style.display = showTyping ? '' : 'none';
+  if ($('submit-btn')) $('submit-btn').style.display = showTyping ? '' : 'none';
+  // Hints reveal the spelling, which is the answer in typing mode but pointless in the
+  // others — the Korean is already on screen, or the question is about the meaning.
+  if (hints) hints.style.display = showTyping ? '' : 'none';
+  choices.classList.toggle('hidden', showTyping);
+  koPrompt.classList.toggle('hidden', currentQuizMode !== 'recognise');
+  enWordDisplay.style.display = showTyping ? '' : 'none';
+
+  if (showTyping) { qText.textContent = 'Type in Korean for:'; currentChoices = []; return; }
+
+  if (currentQuizMode === 'recognise') {
+    qText.textContent = 'What does this word mean?';
+    $('quiz-ko-word').textContent = word.ko;
+    const speak = $('quiz-ko-speak');
+    if (speak) speak.onclick = () => speakKorean(word.ko);
+    speakKorean(word.ko);          // free here: the spelling is already visible
+  } else {
+    qText.textContent = '🔊 Listen — which word was that?';
+    speakKorean(word.ko);
+  }
+
+  currentChoices = buildChoices(word);
+  choices.innerHTML = '';
+  currentChoices.forEach(opt => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'quiz-choice-btn';
+    // Recognition shows the Korean, so options are meanings. Listening hides it, so
+    // options are Korean spellings — the learner maps sound to spelling.
+    b.textContent = currentQuizMode === 'recognise' ? opt.en : opt.ko;
+    b.onclick = () => answerChoice(opt, b);
+    choices.appendChild(b);
+  });
+}
+
+function answerChoice(opt, btn){
+  if(!currentWord || !quizOpen) return;
+  const correct = opt.ko === currentWord.ko;
+  const all = [...$('quiz-choices').querySelectorAll('.quiz-choice-btn')];
+  all.forEach(b => { b.disabled = true; });
+  btn.classList.add(correct ? 'correct' : 'wrong');
+  if(!correct){
+    // Always reveal the right answer — a wrong guess is the moment the word is learned.
+    const idx = currentChoices.findIndex(o => o.ko === currentWord.ko);
+    if(all[idx]) all[idx].classList.add('correct');
+  }
+
+  if(correct){
+    playChiptuneSFX('quiz_correct');
+    speakKorean(currentWord.ko);
+    feedbackText.textContent = `✅ ${currentWord.ko} — ${currentWord.en}`;
+    feedbackText.className = 'correct';
+    const cp=currentPlot, cw=currentWord, ph=currentPhase;
+    const grade = deriveGrade();
+    gradeWord(cw.ko, grade);
+    if(ph===1){ plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook(); }
+    setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph,grade); }, 950);
+  } else {
+    playChiptuneSFX('quiz_wrong');
+    currentQuizMeta.attempts++;
+    feedbackText.textContent = `❌ It's ${currentWord.ko} — ${currentWord.en}`;
+    feedbackText.className = '';
+    // Re-ask rather than punishing: this is a teaching step, not the graded recall.
+    setTimeout(()=>{
+      if(!quizOpen || !currentWord) return;
+      applyQuizMode(currentWord, currentPhase);
+      feedbackText.textContent = 'Try again — which one is it?';
+    }, 1500);
+  }
 }
 function closeQuiz(){
   playChiptuneSFX('click');
@@ -5618,6 +6110,15 @@ function closeQuiz(){
   const hc = $('quiz-hint-reveal-card'); if(hc) { hc.innerHTML = ''; hc.classList.add('hidden'); }
   quizBackdrop.classList.remove('visible');
   const qui=$('quiz-ui'); if(qui) qui.className='';
+  // Restore the typing layout so the next quiz opens in a known state.
+  const ch=$('quiz-choices'); if(ch){ ch.classList.add('hidden'); ch.innerHTML=''; }
+  const kp=$('quiz-ko-prompt'); if(kp) kp.classList.add('hidden');
+  const kw=$('quiz-ko-word'); if(kw) kw.textContent='';   // don't leave the answer staged
+  answerInput.style.display=''; answerInput.classList.remove('hidden');
+  if($('submit-btn')) $('submit-btn').style.display='';
+  if($('quiz-tier-hints')) $('quiz-tier-hints').style.display='';
+  enWordDisplay.style.display='';
+  currentQuizMode='type'; currentChoices=[];
   currentWord=currentPlot=null;
 }
 function submitAnswer(){
@@ -5626,7 +6127,8 @@ function submitAnswer(){
   // (NFD) while levels.json stores composed syllables, so 어머니 typed on a Mac
   // would never match 어머니 on disk despite looking identical.
   const typed=answerInput.value.trim().normalize('NFC');
-  if(typed===currentWord.ko.normalize('NFC')){
+  const verdict=checkAnswer(typed, currentWord);
+  if(verdict!=='wrong'){
     playChiptuneSFX('quiz_correct');
     // Say the word back on a correct answer. Free, and only after the learner has
     // already produced it — so it reinforces the spelling→sound link without ever
@@ -5642,12 +6144,25 @@ function submitAnswer(){
     }
     // ── Normal crop quiz ──────────────────────────────────────────────────
     const msgs=['🌱 Planted! Remember to water!','💧 Watered! Almost ripe!','🍎 Excellent! +Gold earned!'];
-    feedbackText.textContent=msgs[currentPhase-1]; feedbackText.className='correct';
+    feedbackText.textContent = verdict==='close'
+      ? `✅ Close enough — it's ${currentWord.ko}`
+      : msgs[currentPhase-1];
+    feedbackText.className='correct';
     const cp=currentPlot, cw=currentWord, ph=currentPhase;
+    // Grade before the state changes, while the attempt/hint counters still describe
+    // this answer. gradeWord is the single entry point into the scheduler.
+    const grade = deriveGrade(verdict==='close');
+    const srsAfter = gradeWord(cw.ko, grade);
+    if(ph===3 && srsAfter.st==='review'){
+      feedbackText.textContent = `🍎 ${srsAfter.reps===1 ? 'Learned' : 'Reviewed'}! Next review in ${srsIntervalLabel(srsAfter)}`;
+    }
     if(ph===1){plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();}
-    setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph); },650);
+    setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph,grade); },650);
   } else {
     playChiptuneSFX('quiz_wrong');
+    // Counts toward the grade even if the next attempt succeeds — needing a retry is
+    // exactly the signal SM-2's "Hard" is meant to capture.
+    currentQuizMeta.attempts++;
     const isApple = appleTreeQuizPending;
     const wrong = isApple ? '❌ Wrong! Try again to harvest!' : (currentPhase===3?'❌ Wrong! Plant regressed to Phase 2!':'❌ Wrong! Try again.');
     feedbackText.textContent=wrong; feedbackText.className='';
@@ -5659,6 +6174,12 @@ function submitAnswer(){
     if(!isApple && currentPhase===3){
       const cp=currentPlot, cw=currentWord;
       appleTreeQuizPending=false;
+      // Failing at phase 3 is a lapse: a mature word drops to relearning and loses half
+      // its interval, a learning word restarts its steps.
+      const after = gradeWord(cw.ko, GRADE.AGAIN);
+      if(after.lapses > 0){
+        feedbackText.textContent = `❌ Lapsed — interval reset to ${srsIntervalLabel(after)} after relearning.`;
+      }
       setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.regressionPlot(cp,cw); },1400);
     }
   }
@@ -5831,7 +6352,7 @@ function buildVocabBook() {
   const lvl = levelsData[currentLevelIndex];
   const ko = levelNameKo(lvl);
   vocabSubtitle.textContent = `Level ${lvl.level} – ${levelName(lvl)}${ko ? ` (${ko})` : ''}`;
-  const cats = ['all', '⚪ Novice', '🔵 Practicing', '🟣 Mastered', '🟡 Legendary', ...new Set(lvl.words.map(wordCategory).filter(Boolean))];
+  const cats = ['all', '⏰ Due', '⚪ New', '🌱 Learning', '🍎 Review', '🌟 Mature', ...new Set(lvl.words.map(wordCategory).filter(Boolean))];
   catFiltersEl.innerHTML = '';
   cats.forEach(cc => {
     const b = document.createElement('button');
@@ -6015,15 +6536,21 @@ function showVocabFunFact(word) {
   const fact = getFunFact(word);
   const srs  = getSrs(word.ko);
   const harvests = harvestCounts.get(word.ko) || 0;
-  const phase = srs.p3ReadyAt ? 3 : srs.p2At ? 2 : plantedWords.has(word.ko) ? 1 : 0;
-  const phaseLabel = ['Not planted','🌱 Phase 1','💧 Phase 2','🍎 Ready to harvest'][phase];
+  // Report the scheduler's own view of the word instead of guessing a phase from timers.
+  let stageLabel = 'Not started';
+  if (srsIsMature(srs))          stageLabel = '🌟 Mature';
+  else if (srs.st === 'review')  stageLabel = '🍎 In review';
+  else if (srs.st === 'relearn') stageLabel = '🔁 Relearning';
+  else if (srs.st === 'learn')   stageLabel = '🌱 Learning';
   const modal = $('vocab-ff-modal');
   $('vff-emoji').textContent    = word.hint || '📝';
   $('vff-en').textContent       = word.en;
   $('vff-ko').textContent       = word.ko;
   $('vff-cat').textContent      = wordCategory(word) + (word.categoryEn && word.category ? ` · ${word.category}` : '');
-  $('vff-phase').textContent    = phaseLabel;
-  $('vff-harvests').textContent = harvests > 0 ? `✅ Harvested ×${harvests}` : '🌱 Not harvested';
+  $('vff-phase').textContent    = stageLabel;
+  $('vff-harvests').textContent = srsIsGraduated(srs)
+    ? `⏱ Interval ${srsIntervalLabel(srs)} · ${srs.reps} review${srs.reps===1?'':'s'}${srs.lapses?` · ${srs.lapses} lapse${srs.lapses===1?'':'s'}`:''}`
+    : (harvests > 0 ? `✅ Harvested ×${harvests}` : '🌱 Not harvested');
   $('vff-fact-origin').textContent    = fact.origin || fact.hint;
   $('vff-fact-structure').textContent = fact.structure;
   modal.classList.add('visible');
@@ -6035,31 +6562,39 @@ function renderVocabCards() {
   const q = vocabSearch.value.trim().toLowerCase();
   let words = lvl.words;
 
-  // Filter by category / mastery filter
+  // Filter by learning stage / category. Stages come from the scheduler now, so they mean
+  // something about retention rather than counting how often a plot was farmed.
   if(activeCat !== 'all'){
-    if(activeCat.includes('Novice')) words = words.filter(w => (harvestCounts.get(w.ko)||0) <= 1);
-    else if(activeCat.includes('Practicing')) words = words.filter(w => { const h=harvestCounts.get(w.ko)||0; return h>=2 && h<=4; });
-    else if(activeCat.includes('Mastered')) words = words.filter(w => { const h=harvestCounts.get(w.ko)||0; return h>=5 && h<=9; });
-    else if(activeCat.includes('Legendary')) words = words.filter(w => (harvestCounts.get(w.ko)||0) >= 10);
+    if(activeCat.includes('New')) words = words.filter(w => !srsData[w.ko] || srsData[w.ko].st === 'new');
+    else if(activeCat.includes('Learning')) words = words.filter(w => srsIsLearning(srsData[w.ko]));
+    else if(activeCat.includes('Review')) words = words.filter(w => { const e=srsData[w.ko]; return e && e.st==='review' && !srsIsMature(e); });
+    else if(activeCat.includes('Mature')) words = words.filter(w => srsIsMature(srsData[w.ko]));
+    else if(activeCat.includes('Due')) words = words.filter(w => srsIsDue(srsData[w.ko], Date.now()));
     else words = words.filter(w => wordCategory(w) === activeCat);
   }
   
   if(q) words = words.filter(w => w.ko.toLowerCase().includes(q) || w.en.toLowerCase().includes(q) || getRoman(w.ko).includes(q));
   
   vocabCountEl.textContent = `${words.length} words`; vocabGrid.innerHTML = '';
+  const now = Date.now();
   words.forEach(w => {
     const times   = harvestCounts.get(w.ko) || 0;
     const planted = plantedWords.has(w.ko);
     const chosung = getChosung(w.ko);
     const roman   = getRoman(w.ko);
+    const e       = srsData[w.ko];
 
-    let mBadgeClass = 'novice', mBadgeLabel = '⚪ Novice';
-    if(times >= 10) { mBadgeClass = 'legendary'; mBadgeLabel = '🟡 Legendary ⭐'; }
-    else if(times >= 5) { mBadgeClass = 'mastered'; mBadgeLabel = '🟣 Mastered'; }
-    else if(times >= 2) { mBadgeClass = 'practicing'; mBadgeLabel = '🔵 Practicing'; }
+    // Badge reflects scheduler state; the suffix shows the current interval, which is the
+    // number that actually tells a learner how well they know the word.
+    let mBadgeClass = 'novice', mBadgeLabel = '⚪ New', mBadgeSuffix = '';
+    if(srsIsMature(e))        { mBadgeClass='legendary'; mBadgeLabel='🌟 Mature'; }
+    else if(e && e.st==='review'){ mBadgeClass='mastered';  mBadgeLabel='🍎 Review'; }
+    else if(srsIsLearning(e)) { mBadgeClass='practicing'; mBadgeLabel = e.st==='relearn' ? '🔁 Relearning' : '🌱 Learning'; }
+    if(srsIsGraduated(e)) mBadgeSuffix = ` (${srsIntervalLabel(e)})`;
+    if(srsIsDue(e, now))  mBadgeSuffix += ' ⏰';
 
     const div = document.createElement('div');
-    div.className = `vocab-card ${mBadgeClass}` + (times > 0 ? ' planted' : '') + (planted ? ' growing' : '');
+    div.className = `vocab-card ${mBadgeClass}` + (times > 0 || srsIsGraduated(e) ? ' planted' : '') + (planted ? ' growing' : '');
     div.title = 'Click for Fun Facts & Hints!';
     div.style.cursor = 'pointer';
     div.innerHTML = `
@@ -6069,7 +6604,7 @@ function renderVocabCards() {
       <span style="font-size:12px; color:#67e8f9; font-weight:bold; font-family:monospace">[${roman}]</span>
       <span class="vc-en">${w.en}</span>
       <span style="font-size:11px; color:#fde047; font-family:monospace">초성: ${chosung}</span>
-      <span class="mastery-badge ${mBadgeClass}">${mBadgeLabel} (×${times})</span>`;
+      <span class="mastery-badge ${mBadgeClass}">${mBadgeLabel}${mBadgeSuffix}</span>`;
     // Free here: the vocab book already shows the answer, so audio adds nothing to give away.
     div.querySelector('.vc-speak').addEventListener('click', (e) => {
       e.stopPropagation();          // don't also open the fun-fact modal
@@ -6405,6 +6940,8 @@ class FarmScene extends Phaser.Scene {
     this.events.off('resume');
     this.events.on('resume', () => {
       this.cameras.main.fadeIn(300, 0, 0, 0);
+      // Reviews can fall due while the player is off in a minigame.
+      this._refreshDueReviews();
     });
     levelsData = this.cache.json.get('levels') || [];
     if(!levelsData.length){ console.error('levels.json missing'); return; }
@@ -6434,6 +6971,8 @@ class FarmScene extends Phaser.Scene {
     }
 
     this.plots = []; this._createPlots(W, H);
+    // After restoring saved plots, fill the free ones with whatever is due today.
+    this._refreshDueReviews();
     this._createPlayer(W, H); this._addPlotLabels();
     this._createShopNPC(W, H);
     this._createBoardNPC(W, H);
@@ -8460,8 +8999,10 @@ class FarmScene extends Phaser.Scene {
     this.plots.forEach(p=>{
       if(!p.ko) return;
       const s=getSrs(p.ko);
-      if(p.sState==='1' && s.p2At && now>=s.p2At){ this._setState(p,'2',p.ko); changed=true; }
-      if(p.sState==='3' && s.p3At && now>=s.p3At){ this._setState(p,'4',p.ko); changed=true; }
+      // A learning-step timer elapsing is what makes a crop need attention. Both
+      // transitions read the same `due` field now; the plot state says which step we are on.
+      if(p.sState==='1' && srsIsDue(s, now)){ this._setState(p,'2',p.ko); changed=true; }
+      if(p.sState==='3' && srsIsDue(s, now)){ this._setState(p,'4',p.ko); changed=true; }
     });
     if(changed) savePlotsFn();
   }
@@ -8569,12 +9110,13 @@ class FarmScene extends Phaser.Scene {
   }
 
   // ── SRS ADVANCE PLOT (called after correct quiz answer) ─────────────────────
-  advancePlot(plot, word, phase){
+  // `grade` is the SM-2 grade already applied by submitAnswer; the scheduler owns all
+  // timing now, so this method only drives visuals and rewards.
+  advancePlot(plot, word, phase, grade = GRADE.GOOD){
     const ko=word.ko, now=Date.now(), t=plot.index%5;
     if(phase===1){
-      // P1 correct: plant seedling, set P2 timer
+      // P1 correct: plant seedling. The next-step timer already lives in srsData.due.
       plot.word=word; plot.ko=ko; plot.plantedAt=now;
-      setSrs(ko,{p2At:now+SR1,p3At:null});
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
       const crop=this.add.image(plot.x,plot.y-4,`cr_${t}_1`).setOrigin(0.5,0.85).setScale(0).setDepth(plot.y+5);
       plot.plant=crop;
@@ -8584,7 +9126,6 @@ class FarmScene extends Phaser.Scene {
     } else if(phase===2){
       // P2 correct: grow to sprout, set P3 timer, play watering animation
       this.playPlayerAction('water', plot.x, plot.y, () => {
-        const srs=getSrs(ko); setSrs(ko,{p3At:now+SR2});
         if(plot.plant) plot.plant.setTexture(`cr_${t}_2`).clearTint();
         this.tweens.add({targets:plot.plant,scale:{from:0.7,to:1.1},duration:320,ease:'Back.Out(2)',
           onComplete:()=>this.tweens.add({targets:plot.plant,scale:1,duration:150})});
@@ -8605,7 +9146,6 @@ class FarmScene extends Phaser.Scene {
         // Anti-farm diminishing returns formula:
         // Decays smoothly down to 1 coin if harvested >= 15 times
         const reward = Math.max(1, Math.floor(10 * Math.pow(0.85, prev)));
-        setSrs(ko,{p2At:null,p3At:null,harvests:(getSrs(ko).harvests||0)+1});
         plantedWords.delete(ko);
         this._sparkle(plot.x,plot.y);
         this._label(plot.x,plot.y,prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`);
@@ -8646,7 +9186,8 @@ class FarmScene extends Phaser.Scene {
     quizStreak = 0;
     const ko=word.ko, t=plot.index%5;
 
-    setSrs(ko,{p3At:null,p2At:null}); // state '2' is enough, p2At meaningless here
+    // Scheduling was already applied by submitAnswer's AGAIN grade; this only regresses
+    // the plot visuals back to "needs watering".
     if(plot.glow){plot.glow.destroy();plot.glow=null;}
     if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
     if(plot.plant) plot.plant.setTexture(`cr_${t}_1`);
@@ -8733,8 +9274,8 @@ class FarmScene extends Phaser.Scene {
       const srs=getSrs(pd.ko);
       // Advance state if timers expired while offline
       let st=pd.sState||pd.state||'1';
-      if(st==='1'&&srs.p2At&&now>=srs.p2At) st='2';
-      if(st==='3'&&srs.p3At&&now>=srs.p3At) st='4';
+      if(st==='1'&&srsIsDue(srs,now)) st='2';
+      if(st==='3'&&srsIsDue(srs,now)) st='4';
       const t=plot.index%5;
       const tex={1:`cr_${t}_1`,2:`cr_${t}_1`,3:`cr_${t}_2`,4:`cr_${t}_3`}[st]||`cr_${t}_1`;
       plot.plant=this.add.image(plot.x,plot.y-4,tex).setOrigin(0.5,0.85).setDepth(plot.y+5);
@@ -8743,6 +9284,55 @@ class FarmScene extends Phaser.Scene {
       plantedWords.add(pd.ko);
     });
   }
+
+  // ── DAILY REVIEW LOOP ──────────────────────────────────────────────────────
+  // Words whose review date has passed appear as already-ripe crops on free plots, so
+  // opening the farm answers "what do I owe today?" the way Stardew answers it: you walk
+  // in and see what needs harvesting. Reviews are a single recall — the three-touch
+  // plant/water/harvest cycle is for learning a word the first time, and repeating it for
+  // a word you already know would be busywork.
+  //
+  // Some plots are always left free, otherwise a large review backlog would lock the
+  // player out of learning anything new.
+  _plantDueReviews(){
+    if(!this.plots) return 0;
+    const now = Date.now();
+    const due = srsDueWords(now).filter(d => d.entry.st === 'review' && !plantedWords.has(d.word.ko));
+    if(!due.length) return 0;
+
+    const freePlots = this.plots.filter(p => p.active && !p.ko);
+    const RESERVED_FOR_NEW = 2;
+    const capacity = Math.max(0, freePlots.length - RESERVED_FOR_NEW);
+    const planting = due.slice(0, capacity);
+
+    planting.forEach((d, i) => {
+      const plot = freePlots[i];
+      const t = plot.index % 5;
+      plot.word = d.word; plot.ko = d.word.ko; plot.plantedAt = now;
+      plot.plant = this.add.image(plot.x, plot.y-4, `cr_${t}_3`)
+        .setOrigin(0.5,0.85).setDepth(plot.y+5).setScale(0);
+      plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
+      this.tweens.add({ targets: plot.plant, scale: 1, duration: 260, delay: i*70, ease:'Back.Out(2)' });
+      this._setState(plot, '4', d.word.ko);   // ripe: next interact opens the recall quiz
+      plantedWords.add(d.word.ko);
+    });
+
+    if(planting.length) savePlotsFn();
+    return { planted: planting.length, remaining: due.length - planting.length };
+  }
+
+  // Called on farm entry and again when the player returns from a minigame, since reviews
+  // can come due while they are away.
+  _refreshDueReviews(announce = true){
+    const res = this._plantDueReviews();
+    if(!res || !res.planted) return;
+    const msg = res.remaining > 0
+      ? `⏰ ${res.planted} word${res.planted===1?'':'s'} due for review — ${res.remaining} more waiting for free plots`
+      : `⏰ ${res.planted} word${res.planted===1?'':'s'} due for review!`;
+    if(announce) showToast(msg, 4200);
+    updateHUD();
+  }
+
   _findWord(ko){
     for(const lvl of levelsData){ const w=lvl.words.find(w=>w.ko===ko); if(w) return w; }
     return null;
@@ -8773,12 +9363,17 @@ class FarmScene extends Phaser.Scene {
   }
   _pickWord(){
     const all=unlockedLevels.flatMap(idx=>levelsData[idx]?.words||[]);
-    const pool=all.filter(w=>!plantedWords.has(w.ko));
+    let pool=all.filter(w=>!plantedWords.has(w.ko));
+    // Manual planting is for learning new material; anything already in the review queue
+    // resurfaces on its own schedule via _plantDueReviews, so it is excluded here rather
+    // than letting the player grind a known word ahead of its due date.
+    const unlearned=pool.filter(w=>!srsIsGraduated(srsData[w.ko]));
+    if(unlearned.length) pool=unlearned;
     const arr=pool.length?pool:all;
-    // Weighted random: new words ×5, <3 harvests ×3, rest ×1
+    // Weighted random: untouched ×5, mid-learning ×3, everything else ×1
     const weighted=arr.map(w=>{
-      const h=harvestCounts.get(w.ko)||0;
-      return {word:w, weight: h===0?5 : h<3?3 : 1};
+      const e=srsData[w.ko];
+      return {word:w, weight: !e||e.st==='new' ? 5 : srsIsLearning(e) ? 3 : 1};
     });
     const total=weighted.reduce((s,w)=>s+w.weight,0);
     let r=Math.random()*total;
@@ -12006,13 +12601,11 @@ function updateLeaderboardMetrics() {
   if (typeof leaderboardState === 'undefined' || !leaderboardState) leaderboardState = { personalBests: {} };
   if (!leaderboardState.personalBests) leaderboardState.personalBests = {};
 
-  // Total Words Mastered (words with >= 5 harvests)
-  let masteredCount = 0;
-  if (typeof harvestCounts !== 'undefined' && harvestCounts) {
-    harvestCounts.forEach((count) => {
-      if (count >= 5) masteredCount++;
-    });
-  }
+  // Total Words Mastered — mature under the scheduler (interval >= 21 days), not a
+  // harvest tally, which a player could run up in a single session.
+  const masteredCount = (typeof srsData !== 'undefined' && srsData)
+    ? Object.values(srsData).filter(srsIsMature).length
+    : 0;
 
   leaderboardState.personalBests.totalWordsMastered = masteredCount;
   leaderboardState.personalBests.totalHonor = playerCurrencies?.honor || 0;
@@ -12155,7 +12748,83 @@ function switchLeaderboardTab(tabId) {
   if (container) container.innerHTML = html;
 }
 
+// ═══════════════ PROGRESS DASHBOARD ══════════════════════════════════════════
+// A real scheduler is invisible without a readout: intervals live in a save file and the
+// player has no way to tell whether they are actually retaining anything. This surfaces
+// the four numbers that matter — what is due, what is mature, what is coming, and how
+// often reviews are being failed.
+function renderProgressOverlay() {
+  const s = srsStats();
+  const grid = $('prog-stat-grid');
+  if (!grid) return;
+
+  const totalWords = unlockedLevels.reduce((a, i) => a + (levelsData[i]?.words?.length || 0), 0);
+  const cards = [
+    { cls: 'gold',  val: s.dueNow,                       lbl: 'Due now' },
+    { cls: 'green', val: s.mature,                       lbl: `Mature (${SRS_CFG.MATURE_IVL}d+)` },
+    { cls: '',      val: s.graduated,                    lbl: 'Learned' },
+    { cls: '',      val: s.learning,                     lbl: 'In learning' },
+    { cls: '',      val: Math.max(0, totalWords - s.seen), lbl: 'Untouched' },
+    { cls: s.retention !== null && s.retention < 80 ? 'rose' : 'green',
+      val: s.retention === null ? '—' : s.retention + '%', lbl: 'Retention' },
+  ];
+  grid.innerHTML = cards.map(c =>
+    `<div class="prog-stat ${c.cls}"><div class="prog-stat-val">${c.val}</div><div class="prog-stat-lbl">${c.lbl}</div></div>`
+  ).join('');
+
+  // 7-day forecast. Bars are scaled to the busiest day so a light week still reads clearly.
+  const fc = srsForecast(7);
+  const peak = Math.max(1, ...fc);
+  const now = new Date();
+  const labels = fc.map((_, i) => i === 0
+    ? 'Today'
+    : new Date(now.getTime() + i * DAY_MS).toLocaleDateString(undefined, { weekday: 'short' }));
+  $('prog-forecast').innerHTML = fc.map((n, i) =>
+    `<div class="prog-bar-col">
+       <span class="prog-bar-n">${n || ''}</span>
+       <div class="prog-bar ${i === 0 ? 'today' : ''}" style="height:${Math.round((n / peak) * 70)}%"></div>
+       <span class="prog-bar-d">${labels[i]}</span>
+     </div>`
+  ).join('');
+
+  // Per level: learned as the wide bar, mature overlaid, so the gap between "seen it" and
+  // "actually retained it" is visible at a glance.
+  $('prog-levels').innerHTML = unlockedLevels.slice().sort((a, b) => a - b).map(i => {
+    const lvl = levelsData[i]; if (!lvl) return '';
+    const learned = calcLevelProgress(i), mature = calcLevelMastery(i);
+    return `<div class="prog-level-row">
+      <span class="prog-level-name" title="${levelName(lvl)}">${lvl.icon || '📘'} ${levelName(lvl)}</span>
+      <span class="prog-level-track">
+        <span class="prog-level-learned" style="width:${learned}%"></span>
+        <span class="prog-level-mature" style="width:${mature}%"></span>
+      </span>
+      <span class="prog-level-pct">${learned}% / ${mature}%</span>
+    </div>`;
+  }).join('');
+
+  $('prog-footnote').innerHTML =
+    `Cyan = learned, gold = mature. A word becomes <b>mature</b> once its review interval reaches
+     ${SRS_CFG.MATURE_IVL} days, which takes several correctly spaced reviews — it cannot be rushed in
+     one session. <b>Retention</b> is the share of reviews passed without a lapse.
+     ${s.avgEase !== null ? `Average ease ${s.avgEase}.` : ''}`;
+}
+
+function openProgressOverlay() {
+  playChiptuneSFX('click');
+  renderProgressOverlay();
+  setModalState('progress-overlay', true);
+  $('progress-overlay').classList.remove('hidden');
+}
+
+function closeProgressOverlay() {
+  playChiptuneSFX('click');
+  $('progress-overlay').classList.add('hidden');
+  setModalState('progress-overlay', false);
+}
+
 // Global window exports for HTML event bindings
+window.openProgressOverlay = openProgressOverlay;
+window.closeProgressOverlay = closeProgressOverlay;
 window.openSeasonalOverlay = openSeasonalOverlay;
 window.closeSeasonalOverlay = closeSeasonalOverlay;
 window.cycleSeasonalEvent = cycleSeasonalEvent;
