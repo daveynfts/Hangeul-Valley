@@ -64,31 +64,65 @@ a phone.
 
 ## How the learning loop works
 
-Each word moves through three phases on its plot. Every phase is a quiz you must pass
-in Korean:
+Scheduling is real SM-2 spaced repetition. The farming loop maps onto it directly:
+the three-touch plant → water → harvest cycle *is* the set of learning steps, and
+harvesting a word graduates it into day-scale review.
 
-| Phase | Prompt | Reward |
+```
+new ──plant──> learning ──30s──> ──90s──> review ──1d──> ──3d──> ──8d──> ──20d──> mature
+                  ↑                          │
+                  └──────── relearning <─────┘   (failed a review)
+```
+
+### Learning a new word — three touches
+
+| Phase | Question | What it is |
 |---|---|---|
-| 🌱 1 — Plant | Type the Korean for an English word | Seed goes in |
-| 💧 2 — Water | Type it again after the seedling sprouts | Crop ripens |
-| 🍎 3 — Harvest | Type it once more, with origin + pronunciation hints shown | Gold, XP, a droppable item |
+| 🌱 1 — Plant | **Korean shown**, pick its meaning from four options | Recognition. Teaches the pairing; you cannot be asked to produce a word you have never seen. |
+| 💧 2 — Water | Type the Korean (or pick it by ear, if a Korean voice is installed) | Recall with support |
+| 🍎 3 — Harvest | Type the Korean, with origin and pronunciation shown | Production recall → graduates the word |
 
-Getting phase 3 wrong sends the crop back to phase 2. Answers are graded on exact
-Hangul match after NFC normalization, so a Mac or iOS Korean IME (which emits
-decomposed jamo) grades the same as a Windows one.
+### Reviewing — one touch, on schedule
 
-Progressive hints are available during a quiz, priced to keep them a real decision:
-romanization is free, initial consonants (초성) cost 5 coins, hearing the word costs
-10, and the word's origin costs 10.
+Once graduated, a word resurfaces on its own schedule. Open the farm and words that
+have come due are already standing there as ripe crops: harvesting one is its review.
+Two plots are always kept free so a review backlog never blocks learning something new.
 
-Zones (Arcade, Fishing, Dungeon, Duel) are gated behind mastery of specific levels.
+Answers are graded Again / Hard / Good / Easy, inferred from signals that cannot be
+gamed — a wrong attempt, a paid hint or a near-miss all mean Hard; a clean fast typed
+answer means Easy. Failing a review is a lapse: the word loses half its interval, its
+ease drops, and it goes back through relearning.
 
-> **Heads up on "SRS".** The code calls the phase timers SRS, but `SR1`/`SR2` are 30
-> and 90 *seconds* — crop growth pacing, not spaced repetition. `srsData` stores no
-> interval, ease factor or due date, and "mastered" means harvested ≥3 times, which
-> can all happen inside one session. Treat the current build as a vocabulary game
-> with a farming loop, not a retention tool. Turning this into real day-scale
-> scheduling is the single biggest open item.
+Two properties worth knowing:
+
+- **An interval can only be earned by waiting.** Answering a word ahead of its due
+  date counts as a rep and reschedules it, but does not grow the interval — you cannot
+  reach "mature" by drilling one word twenty times in a sitting. Reaching 21 days takes
+  roughly four correctly spaced reviews over about 80 real days.
+- **Easy never skips a learning step.** In Anki, Easy is a deliberate "I already knew
+  this"; here it is inferred from answering quickly, which a learner shown the word
+  thirty seconds ago manages from short-term memory. So every word goes through all
+  three touches.
+
+Grading normalizes to NFC, so a Mac or iOS Korean IME (which emits decomposed jamo)
+grades the same as a Windows one, and a one-jamo slip is accepted as "close enough"
+with a Hard grade rather than thrown away.
+
+Progressive hints are priced to keep them a real decision: romanization is free,
+initial consonants (초성) cost 5 coins, hearing the word costs 10, and the word's
+origin costs 10. Using any of them caps the grade at Hard.
+
+### Two progress metrics, deliberately
+
+| Metric | Means | Used for |
+|---|---|---|
+| **Learned** | graduated — through its learning steps at least once | Unlocking zones (Arcade, Fishing, Dungeon, Duel) and quest requirements |
+| **Mature** | review interval ≥ 21 days | The Mastery stat, trophies, the dashboard |
+
+Gating content on maturity would leave a new player staring at locked minigames for a
+month, so unlocks track *learned* while *mature* is the long-haul goal. **📊 Progress**
+in the HUD overflow menu shows what is due, the 7-day review forecast, retention rate
+and per-level learned-vs-mature bars.
 
 ---
 
@@ -199,8 +233,15 @@ weather systems, and the economy, quest, inventory and cooking systems.
 ## Saves
 
 State is written to `localStorage` under `hv_save_v2`, and additionally to
-`save_data.json` via the PyWebView bridge on desktop. Save format is v4 with a
-migration path in `migrateSaveData()`.
+`save_data.json` via the PyWebView bridge on desktop. Save format is **v5**, with the
+migration chain in `migrateSaveData()`.
+
+The v4 → v5 step converts the old `{p2At, p3At, harvests}` SRS records into SM-2
+entries. Nobody is reset: harvest count is a usable proxy for how well a word was
+known, so it seeds `reps` and an interval, staggered across days so a veteran save does
+not dump hundreds of reviews into one afternoon. Intervals are capped just below the
+maturity threshold — maturity has to be earned under the real scheduler rather than
+granted retroactively. The migration is idempotent.
 
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
 (currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs, seasonal,
@@ -213,10 +254,15 @@ shutdown, page hide and the explicit 💾 Save button.
 ## Tests
 
 ```bash
-node test_m2_harness.js               # sprite matrix / palette integrity — passes
-node test_r2_shop_vm.js               # shop + plot expansion, 60 assertions — passes
-cd admin && npm test                  # admin API, sync, frontend, edge cases — 44 passes
+node test_srs_engine.js               # SM-2 scheduler + save migration, 93 assertions
+node test_r2_shop_vm.js               # shop + plot expansion, 65 assertions
+node test_m2_harness.js               # sprite matrix / palette integrity
+cd admin && npm test                  # admin API, sync, frontend, edge cases — 44 assertions
 ```
+
+`test_srs_engine.js` runs the scheduler extracted from `game.js` in a bare vm and
+injects `now` into every call, which is why `srsSchedule` takes it as a parameter — it
+lets months of review history be simulated without touching the clock.
 
 Two known failures, both predating the current work:
 
@@ -237,21 +283,22 @@ repo root, which is what Vercel serves.
 
 ## Roadmap
 
-Highest-value first, on the view that the game systems are far ahead of the learning
-systems:
-
-1. **Real spaced repetition.** Replace the 30/90-second timers with SM-2 or FSRS on a
-   day scale — `interval`, `ease`, `dueAt`, `lapses`. Keep the crop animation timers
-   for game feel but drive ripeness off review due dates, so logging in each day
-   surfaces the words actually due. Redefine mastery as `interval >= 21 days` instead
-   of three harvests.
-2. **More question types.** Everything is currently EN→KO production typing, the
-   hardest form. Add KO→EN multiple choice for recognition and listening questions now
-   that audio exists, and accept near-misses (Levenshtein ≤ 1) rather than a flat ❌.
-3. **Curate the remaining 1,049 origins**, ideally 300 TOPIK-1 words first.
-4. **Mobile.** Virtual joystick and tap-to-interact for `FarmScene`, then PWA install.
-5. **Cloud save** — losing SRS progress when changing machines is a dealbreaker for a
-   study tool.
-6. **Split `game.js` into modules** behind Vite. `FarmScene` alone is ~2.4k lines, and
+1. **Curate the remaining 1,049 word origins**, ideally the 300 TOPIK-1 words first.
+   The admin dashboard's **Not Curated** list is the working queue.
+2. **Mobile.** Virtual joystick and tap-to-interact for `FarmScene`, then PWA install.
+   The review loop suits phones better than desktop — vocabulary study is what people do
+   on a bus.
+3. **Cloud save.** Losing SRS history when changing machines is a dealbreaker now that
+   the history is the product.
+4. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the
+   exact timestamp they were scheduled; a real study tool batches by day boundary and
+   caps how many land at once so a backlog cannot become unmanageable.
+5. **Split `game.js` into modules** behind Vite. `FarmScene` alone is ~2.4k lines, and
    ~1.7k lines of cooking/seasonal/leaderboard code sit at top level after `BeeScene`.
-7. **CI** — `node -c`, the passing harnesses, and a `levels.json` schema check.
+6. **CI** — `node -c`, the passing harnesses, and a `levels.json` schema check.
+7. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's
+   own review log and would use the lapse and ease history already being recorded.
+
+Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
+SM-2 scheduler with its learning-step reconciliation, recognition and listening question
+modes, fuzzy answer matching, and the progress dashboard.

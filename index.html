@@ -236,6 +236,91 @@
     }
     .lc-name-ko:empty { display: none; }
 
+    /* ── Quiz: recognition / listening modes ─────────────────────────────── */
+    #quiz-ko-prompt { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 8px; }
+    #quiz-ko-prompt.hidden { display: none !important; }
+    #quiz-ko-word {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 40px; font-weight: 900;
+      color: var(--neon-gold); text-shadow: 0 2px 0 #000, 0 0 18px rgba(251,191,36,.5);
+      letter-spacing: 1px;
+    }
+    #quiz-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 14px 0 4px; }
+    #quiz-choices.hidden { display: none !important; }
+    .quiz-choice-btn {
+      padding: 13px 12px; border-radius: 12px; cursor: pointer;
+      background: rgba(30, 41, 59, 0.85); border: 2px solid rgba(148, 163, 184, 0.35);
+      color: #e2e8f0; font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 15px; font-weight: 700; line-height: 1.35;
+      transition: transform .1s, border-color .15s, background .15s;
+    }
+    .quiz-choice-btn:hover:not(:disabled) { border-color: var(--neon-cyan); background: rgba(103,232,249,.14); }
+    .quiz-choice-btn:active:not(:disabled) { transform: scale(.97); }
+    .quiz-choice-btn:disabled { cursor: default; opacity: .75; }
+    .quiz-choice-btn.correct { border-color: var(--neon-green); background: rgba(74,222,128,.22); color: #fff; }
+    .quiz-choice-btn.wrong   { border-color: #fb7185; background: rgba(251,113,133,.2); }
+    @media (max-width: 520px) { #quiz-choices { grid-template-columns: 1fr; } }
+
+    /* ── Progress / SRS dashboard ────────────────────────────────────────── */
+    #progress-overlay {
+      position: fixed; inset: 0; z-index: 640; display: flex;
+      align-items: center; justify-content: center;
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+      animation: fadeIn .2s;
+    }
+    #progress-overlay.hidden { display: none !important; }
+    #progress-panel {
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid var(--neon-cyan); border-radius: 20px;
+      max-width: 620px; width: 94%; max-height: 88vh; overflow-y: auto;
+      box-shadow: 0 0 0 2px #0f172a, 0 0 24px rgba(103,232,249,.35), 0 20px 60px rgba(0,0,0,.9);
+    }
+    #progress-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; background: rgba(103, 232, 249, 0.12);
+      border-bottom: 1px solid rgba(103, 232, 249, 0.25);
+    }
+    #progress-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--neon-cyan); }
+    #progress-header button {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2);
+      color: #fff; border-radius: 8px; padding: 4px 10px; font-size: 14px; cursor: pointer;
+    }
+    #progress-body { padding: 18px 20px 22px; }
+    #prog-stat-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px; margin-bottom: 20px;
+    }
+    .prog-stat {
+      background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(148,163,184,.2);
+      border-radius: 10px; padding: 10px 12px;
+    }
+    .prog-stat-val { font-family: 'VT323', monospace; font-size: 30px; line-height: 1; color: var(--neon-cyan); }
+    .prog-stat-lbl { font-size: 11px; color: rgba(226,232,240,.6); margin-top: 4px; letter-spacing: .3px; }
+    .prog-stat.gold  .prog-stat-val { color: var(--neon-gold); }
+    .prog-stat.green .prog-stat-val { color: var(--neon-green); }
+    .prog-stat.rose  .prog-stat-val { color: #fb7185; }
+    .prog-section { margin-bottom: 18px; }
+    .prog-section-title {
+      font-family: 'Press Start 2P', monospace; font-size: 10px;
+      color: var(--neon-gold); margin-bottom: 10px;
+    }
+    #prog-forecast { display: flex; align-items: flex-end; gap: 6px; height: 96px; }
+    .prog-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+    .prog-bar {
+      width: 100%; min-height: 3px; border-radius: 4px 4px 0 0;
+      background: linear-gradient(180deg, var(--neon-cyan), rgba(103,232,249,.25));
+    }
+    .prog-bar.today { background: linear-gradient(180deg, var(--neon-gold), rgba(251,191,36,.25)); }
+    .prog-bar-n { font-family: monospace; font-size: 11px; color: rgba(226,232,240,.75); }
+    .prog-bar-d { font-size: 10px; color: rgba(226,232,240,.45); }
+    .prog-level-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; font-size: 12px; }
+    .prog-level-name { flex: 0 0 150px; color: rgba(226,232,240,.8); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .prog-level-track { flex: 1; height: 12px; background: rgba(30,41,59,.9); border-radius: 6px; overflow: hidden; position: relative; }
+    .prog-level-learned { position: absolute; inset: 0 auto 0 0; background: rgba(103,232,249,.5); }
+    .prog-level-mature  { position: absolute; inset: 0 auto 0 0; background: var(--neon-gold); }
+    .prog-level-pct { flex: 0 0 92px; text-align: right; font-family: monospace; font-size: 11px; color: rgba(226,232,240,.65); }
+    #prog-footnote { font-size: 11px; color: rgba(226,232,240,.45); line-height: 1.6; margin: 0; }
+
     /* ── Korean pronunciation (TTS) ──────────────────────────────────────────
        Every speak control carries .tts-only, so a browser with no Korean voice
        hides the whole feature instead of offering buttons that do nothing. */
@@ -1367,11 +1452,34 @@
 
       <!-- Overflow Dropdown Panel -->
       <div id="hud-overflow-menu" class="glass-bg neon-border hidden">
+        <button class="hud-btn hud-overflow-item" id="progress-btn" title="Review schedule &amp; retention" onclick="openProgressOverlay(); toggleHudOverflow(false);">📊 Progress</button>
         <button class="hud-btn hud-overflow-item" id="seasonal-btn" title="Seasonal Events" onclick="openSeasonalOverlay(); toggleHudOverflow(false);">🎉 Event</button>
         <button class="hud-btn hud-overflow-item" id="leaderboard-btn" title="Local Leaderboard" onclick="openLeaderboard(); toggleHudOverflow(false);">🏅 Ranks</button>
         <button class="hud-btn hud-overflow-item" id="duel-btn" title="Spell Duel" onclick="openSpellDuel(); toggleHudOverflow(false);">⚡ Duel</button>
         <button class="hud-btn hud-overflow-item" id="fish-album-btn" title="Fish Encyclopedia" onclick="openFishAlbum(); toggleHudOverflow(false);">🐟 Fish</button>
         <button class="hud-btn hud-overflow-item" id="trophy-btn" title="Trophies" onclick="toggleHudOverflow(false);">🏆 Trophies</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PROGRESS / SRS DASHBOARD ══════════ -->
+  <div id="progress-overlay" class="hidden">
+    <div id="progress-panel">
+      <div id="progress-header">
+        <span id="progress-title">📊 Review Progress</span>
+        <button onclick="closeProgressOverlay()">✕</button>
+      </div>
+      <div id="progress-body">
+        <div id="prog-stat-grid"></div>
+        <div class="prog-section">
+          <div class="prog-section-title">📅 Next 7 days</div>
+          <div id="prog-forecast"></div>
+        </div>
+        <div class="prog-section">
+          <div class="prog-section-title">📚 Per level</div>
+          <div id="prog-levels"></div>
+        </div>
+        <p id="prog-footnote"></p>
       </div>
     </div>
   </div>
@@ -1416,7 +1524,15 @@
       <div style="text-align:center">
         <div id="question-text">Type in Korean for:</div>
         <span id="en-word-display"></span>
+        <!-- Shown in recognition mode: the Korean is the prompt, not the answer -->
+        <div id="quiz-ko-prompt" class="hidden">
+          <span id="quiz-ko-word"></span>
+          <button type="button" class="speak-btn tts-only" id="quiz-ko-speak" title="Hear this word">🔊</button>
+        </div>
       </div>
+
+      <!-- Multiple-choice options (recognition / listening modes) -->
+      <div id="quiz-choices" class="hidden"></div>
 
       <!-- Fun Fact hint (Phase 3 only, populated by JS) -->
       <div id="quiz-funfact-box">
