@@ -123,6 +123,25 @@ Progressive hints are priced to keep them a real decision: romanization is free,
 initial consonants (초성) cost 5 coins, hearing the word costs 10, and the word's
 origin costs 10. Using any of them caps the grade at Hard.
 
+### Each skill schedules separately
+
+Knowing 아버지 on sight is not the same skill as typing it from memory, so every word carries
+an independent interval, ease and due date **per modality**:
+
+| Modality | Question | Role |
+|---|---|---|
+| `type` | Type the Korean for an English word | **Primary.** Production is the hardest skill, it is what the learning cycle ends on, and it is what `graduated` and `mature` measure. |
+| `recognise` | Korean shown, pick the meaning | Teaches first contact; schedules on its own |
+| `listen` | Hear the word, pick the spelling | Only where a Korean voice exists, else falls back to typing |
+
+Answering a four-option recognition question therefore cannot advance the production
+schedule. Phase 1 seeds both tracks — recognition because that is what was tested, production
+because the crop timer and phases 2–3 run on it — but only the modality actually answered has
+its interval moved.
+
+When a word comes due, the review tests **whichever modality expired**, not always typing.
+Ties go to production.
+
 ### Two progress metrics, deliberately
 
 | Metric | Means | Used for |
@@ -275,7 +294,7 @@ weather systems, and the economy, quest, inventory and cooking systems.
 ## Saves
 
 State is written to `localStorage` under `hv_save_v2`, and additionally to
-`save_data.json` via the PyWebView bridge on desktop. Save format is **v5**, with the
+`save_data.json` via the PyWebView bridge on desktop. Save format is **v6**, with the
 migration chain in `migrateSaveData()`.
 
 The v4 → v5 step converts the old `{p2At, p3At, harvests}` SRS records into SM-2
@@ -284,6 +303,11 @@ known, so it seeds `reps` and an interval, staggered across days so a veteran sa
 not dump hundreds of reviews into one afternoon. Intervals are capped just below the
 maturity threshold — maturity has to be earned under the real scheduler rather than
 granted retroactively. The migration is idempotent.
+
+The v5 → v6 step nests each schedule under its modality. An old single-track entry lands
+on the production track, because the three-touch cycle it was earned through ends on
+typing. Recognition and listening start unseeded rather than inheriting an interval
+nobody demonstrated — inheriting would claim a skill that was never tested.
 
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
 (currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs, seasonal,
@@ -354,12 +378,7 @@ repo root, which is what Vercel serves.
    all pass and exit non-zero on failure, so this is now just a workflow file.
 7. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
    review log — and the log it needs is now being recorded (see below), so the input is there.
-8. **Per-modality scheduling.** Recognition, listening and production currently share one
-   interval, so passing a four-option question advances the same schedule as typing the word
-   from memory. Tracking them separately is the largest remaining correctness gap in the
-   scheduler; the idea comes from the parallel `codex/korean-learning-upgrade` branch, which
-   got this right. It needs a save migration, so it is its own piece of work.
-9. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
+8. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
    a spelling would collide. All 1,500 headwords are currently unique, making this latent
    rather than live — a hash of `ko` + part of speech fixes it.
 
@@ -374,5 +393,5 @@ accuracy and 14-day activity strip.
 
 Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question
-modes, fuzzy answer matching, the progress dashboard, and the second origin-curation pass
-that took coverage from 30% to 42%.
+modes, per-modality scheduling, fuzzy answer matching, the progress dashboard, and the
+second origin-curation pass that took coverage from 30% to 42%.

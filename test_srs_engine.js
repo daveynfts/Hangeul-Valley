@@ -1,5 +1,6 @@
 /**
- * test_srs_engine.js — exercises the SM-2 scheduler and the v4→v5 save migration.
+ * test_srs_engine.js — exercises the SM-2 scheduler, per-modality records, and the
+ * v4 → v5 → v6 save migration chain.
  *
  * The scheduler is extracted from game.js and run in a bare vm context, so this tests the
  * shipped source rather than a copy. `now` is injected into every call, which is why the
@@ -257,37 +258,74 @@ const legacy = {
   srs: { '아버지': { p2At: null, p3At: null, harvests: 7 }, '바다': { p2At: T0, p3At: null } }
 };
 const out = migrate(legacy);
-eq(out.v, 5, 'save is bumped to v5');
+eq(out.v, 6, 'save is bumped to v6');
 
-const father = out.srs['아버지'];
-eq(father.st, 'review', '7 harvests migrates to a graduated review card');
+// v6 nests each schedule under its modality. The production track is where a v4/v5 entry
+// lands, since the three-touch cycle it was earned through ends on typing.
+const PRIMARY = R('PRIMARY_MODALITY');
+const mod = (ko, m = PRIMARY) => (out.srs[ko] && out.srs[ko].m) ? out.srs[ko].m[m] : undefined;
+
+const father = mod('아버지');
+assert(!!father, '7 harvests produces a production record');
+eq(father.st, 'review', 'and it is graduated');
 eq(father.reps, 7, 'harvest count carries over as reps');
 assert(father.ivl >= 1, `receives a real interval (${father.ivl}d)`);
 assert(father.ivl < CFG.MATURE_IVL, `but stays below maturity (${father.ivl}d < ${CFG.MATURE_IVL}d) — maturity must be earned`);
 assert(!isMature(father), 'so it is not silently granted mature status');
 
-const mother = out.srs['어머니'];
+eq(mod('아버지', 'recognise'), undefined, 'recognition is NOT seeded — that skill was never tested');
+eq(mod('아버지', 'listen'), undefined, 'nor is listening');
+
+const mother = mod('어머니');
 eq(mother.st, 'review', '3 harvests also graduates');
 assert(mother.ivl <= father.ivl, `fewer harvests means a shorter interval (${mother.ivl}d <= ${father.ivl}d)`);
 
-const school = out.srs['학교'];
-eq(school.st, 'review', '1 harvest still counts as learned');
+eq(mod('학교').st, 'review', '1 harvest still counts as learned');
+eq(mod('사과').st, 'new', '0 harvests stays new');
+eq(mod('바다').st, 'learn', 'a word caught mid-learning stays in learning');
 
-const apple = out.srs['사과'];
-eq(apple.st, 'new', '0 harvests stays new');
-
-const sea = out.srs['바다'];
-eq(sea.st, 'learn', 'a word caught mid-learning stays in learning');
-
-const dues = Object.values(out.srs).filter(x => x.st === 'review').map(x => x.due);
+const dues = Object.keys(out.srs).map(k => mod(k)).filter(e => e && e.st === 'review').map(e => e.due);
 assert(new Set(dues).size > 1, 'migrated reviews are staggered, not all dumped on the same day');
 
 console.log('\n--- 12b. Migration is idempotent ---');
 const twice = migrate(out);
-eq(JSON.stringify(twice.srs), JSON.stringify(out.srs), 'migrating an already-v5 save changes nothing');
+eq(JSON.stringify(twice.srs), JSON.stringify(out.srs), 'migrating an already-v6 save changes nothing');
 
-const alreadyNew = migrate({ v: 5, srs: { '테스트': { st: 'review', ivl: 99, ease: 2.5, reps: 4, lapses: 0, due: T0, last: T0, step: 0 } } });
-eq(alreadyNew.srs['테스트'].ivl, 99, 'existing v5 entries are left untouched');
+const alreadyV6 = migrate({
+  v: 6,
+  srs: { '테스트': { m: { type: { st: 'review', ivl: 99, ease: 2.5, reps: 4, lapses: 0, due: T0, last: T0, step: 0 } } } }
+});
+eq(alreadyV6.srs['테스트'].m.type.ivl, 99, 'existing v6 entries are left untouched');
+
+// A v5 save skipping straight past v5 into v6 must still land on the production track.
+const fromV5 = migrate({ v: 5, srs: { '바나나': { st: 'review', ivl: 12, ease: 2.4, reps: 3, lapses: 1, due: T0, last: T0, step: 0 } } });
+eq(fromV5.v, 6, 'a v5 save migrates to v6');
+eq(fromV5.srs['바나나'].m.type.ivl, 12, 'and its schedule moves under the production modality intact');
+eq(fromV5.srs['바나나'].m.type.lapses, 1, 'keeping its lapse count');
+
+// ── 13. Modalities schedule independently ───────────────────────────────────
+console.log('\n--- 13. Per-modality independence ---');
+const MODS = R('MODALITIES');
+eq(MODS.length, 3, 'three modalities are tracked');
+assert(MODS.includes('type') && MODS.includes('recognise') && MODS.includes('listen'),
+  'production, recognition and listening');
+eq(PRIMARY, 'type', 'production is primary — the hardest skill sets the bar');
+
+// The point of the change: answering recognition must not move production.
+let rec = sched(newEntry(), G.GOOD, T0);
+rec = sched(rec, G.GOOD, T0 + 31_000);
+rec = sched(rec, G.GOOD, T0 + 125_000);   // recognition graduated
+const prod = newEntry();                   // production untouched
+eq(rec.st, 'review', 'recognition can graduate on its own');
+eq(prod.st, 'new', 'while production stays new');
+assert(!isMature(prod), 'so the word is not counted mature off the back of recognition alone');
+
+// And the two can sit at very different intervals without interfering.
+let a = { ...newEntry(), st: 'review', ivl: 30, ease: 2.5, reps: 6, last: T0, due: T0 + 30 * DAY };
+let b = { ...newEntry(), st: 'review', ivl: 2, ease: 2.0, reps: 2, last: T0, due: T0 + 2 * DAY };
+const aAfter = sched(a, G.GOOD, T0 + 30 * DAY);
+eq(b.ivl, 2, 'scheduling one modality leaves the other untouched');
+assert(aAfter.ivl > 30, `and the one answered grows normally (${aAfter.ivl}d)`);
 
 // ── Summary ─────────────────────────────────────────────────────────────────
 console.log('\n====================================================');
