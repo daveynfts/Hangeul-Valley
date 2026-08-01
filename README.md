@@ -104,9 +104,20 @@ Two properties worth knowing:
   thirty seconds ago manages from short-term memory. So every word goes through all
   three touches.
 
-Grading normalizes to NFC, so a Mac or iOS Korean IME (which emits decomposed jamo)
-grades the same as a Windows one, and a one-jamo slip is accepted as "close enough"
-with a Hard grade rather than thrown away.
+Answers are normalized before comparison — NFC (so a Mac or iOS Korean IME emitting
+decomposed jamo grades the same as a Windows one), zero-width characters stripped,
+inner whitespace collapsed, trailing punctuation removed. A one-jamo slip is accepted as
+"close enough" with a Hard grade rather than thrown away.
+
+A word can declare alternates explicitly:
+
+```json
+{ "ko": "아버지", "en": "father", "acceptedAnswers": ["아버님"] }
+```
+
+`acceptedAnswers` (or `answersKo` / `variantsKo`) is preferred over inlining alternates as
+`"가다 / 걷다"` in `ko` — a list states intent, splitting a text field guesses at it. The
+delimiter split still works for existing entries.
 
 Progressive hints are priced to keep them a real decision: romanization is free,
 initial consonants (초성) cost 5 coins, hearing the word costs 10, and the word's
@@ -285,11 +296,22 @@ shutdown, page hide and the explicit 💾 Save button.
 ## Tests
 
 ```bash
+node scripts/validate_content.js      # data invariants — the CI gate, 19 checks
 node test_srs_engine.js               # SM-2 scheduler + save migration, 93 assertions
 node test_r2_shop_vm.js               # shop + plot expansion, 65 assertions
 node test_m2_harness.js               # sprite matrix / palette integrity
 cd admin && npm test                  # admin API, sync, frontend, edge cases — 44 assertions
 ```
+
+`validate_content.js` is the one to run before committing data changes. It asserts the
+shape of `levels.json` and `facts.json` (25 levels, 1500 words, no duplicate Korean
+headwords, every word carrying `categoryEn`, every `facts.json` entry matching a real
+word), that no origin class can render blank, that `assets/` has not drifted from the root
+copies, and that **no Vietnamese has crept back into the shipped source** — an invariant
+that was established by hand and previously unguarded.
+
+Its three excluded characters are deliberate and documented in the script: `ã`/`õ` for the
+Portuguese loanword etymologies (pão, sabão) and `é` for "pet cafés".
 
 `test_srs_engine.js` runs the scheduler extracted from `game.js` in a bare vm and
 injects `now` into every call, which is why `srsSchedule` takes it as a parameter — it
@@ -328,9 +350,27 @@ repo root, which is what Vercel serves.
    caps how many land at once so a backlog cannot become unmanageable.
 5. **Split `game.js` into modules** behind Vite. `FarmScene` alone is ~2.4k lines, and
    ~1.7k lines of cooking/seasonal/leaderboard code sit at top level after `BeeScene`.
-6. **CI** — `node -c`, the passing harnesses, and a `levels.json` schema check.
-7. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's
-   own review log and would use the lapse and ease history already being recorded.
+6. **Wire the checks into GitHub Actions.** `scripts/validate_content.js` and the harnesses
+   all pass and exit non-zero on failure, so this is now just a workflow file.
+7. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
+   review log — and the log it needs is now being recorded (see below), so the input is there.
+8. **Per-modality scheduling.** Recognition, listening and production currently share one
+   interval, so passing a four-option question advances the same schedule as typing the word
+   from memory. Tracking them separately is the largest remaining correctness gap in the
+   scheduler; the idea comes from the parallel `codex/korean-learning-upgrade` branch, which
+   got this right. It needs a save migration, so it is its own piece of work.
+9. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
+   a spelling would collide. All 1,500 headwords are currently unique, making this latent
+   rather than live — a hash of `ko` + part of speech fixes it.
+
+### Review history
+
+Every graded answer is appended to a bounded log (`attemptLog`, 500 entries, saved with the
+rest of the state): the word, the grade, which question mode produced it, the timestamp, and
+the resulting interval and state. SM-2 keeps only the current interval and ease and throws
+the history away, but retention analysis and FSRS both need it, and it cannot be
+reconstructed after the fact. Nothing depends on it yet beyond the dashboard's rolling
+accuracy and 14-day activity strip.
 
 Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question

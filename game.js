@@ -4543,6 +4543,7 @@ function collectSave(){
     unlockedPlotCount,
     harvests: hcObj,
     srs: srsData,
+    attempts: attemptLog,
     plots,
     lastLevel: currentLevelIndex,
     apple,
@@ -4590,6 +4591,9 @@ function applySave(d){
   unlockedPlotCount = unlockedPlots.length;
   if(migrated.harvests) Object.entries(migrated.harvests).forEach(([k,v])=>harvestCounts.set(k,v));
   if(migrated.srs) srsData = migrated.srs;
+  // Absent in saves written before the log existed; an empty history is correct there
+  // rather than something to reconstruct.
+  attemptLog = Array.isArray(migrated.attempts) ? migrated.attempts.slice(-ATTEMPT_LOG_MAX) : [];
   if(migrated.plots) plotSave = migrated.plots;
   if(typeof migrated.lastLevel==='number') currentLevelIndex = migrated.lastLevel;
   if(migrated.apple) appleTreeSave = migrated.apple;
@@ -4693,9 +4697,48 @@ function getSrs(ko){ return srsData[ko] || srsNewEntry(); }
 function setSrs(ko,u){ srsData[ko]={...getSrs(ko),...u}; saveSRS(); }
 
 // Record a review outcome. This is the only place the scheduler is advanced.
+// ── Attempt log ──────────────────────────────────────────────────────────────
+// SM-2 keeps only the current interval and ease; it throws the review history away. FSRS
+// and any retention analysis need that history, and it cannot be reconstructed after the
+// fact — so every graded answer is appended here even though nothing consumes it yet.
+//
+// Bounded ring buffer: this rides along in every save, and collectSave() already serializes
+// the whole state, so it must not grow without limit.
+const ATTEMPT_LOG_MAX = 500;
+let attemptLog = [];   // [{ ko, g, m, at, ivl, st }]
+
+// Rolling correct-rate over the most recent answers, used by the dashboard. Distinct from
+// srsStats().retention, which is lifetime reps-vs-lapses.
+function recentAccuracy(n = 50){
+  const slice = attemptLog.slice(-n);
+  if (!slice.length) return null;
+  const ok = slice.filter(a => a.g > GRADE.AGAIN).length;
+  return Math.round((ok / slice.length) * 100);
+}
+
+// Per-day answer counts for the last `days` days, for a streak/heatmap readout.
+function dailyActivity(days = 14, now = Date.now()){
+  const out = new Array(days).fill(0);
+  const startOfToday = new Date(now); startOfToday.setHours(0, 0, 0, 0);
+  attemptLog.forEach(a => {
+    const d = Math.floor((startOfToday.getTime() - new Date(a.at).setHours(0, 0, 0, 0)) / DAY_MS);
+    if (d >= 0 && d < days) out[days - 1 - d]++;
+  });
+  return out;
+}
+
 function gradeWord(ko, grade, now = Date.now()){
   const next = srsSchedule(getSrs(ko), grade, now);
   srsData[ko] = next;
+  attemptLog.push({
+    ko,
+    g: grade,                     // 0 Again … 3 Easy
+    m: currentQuizMode,           // which modality produced the answer
+    at: now,
+    ivl: next.ivl,                // interval the answer resulted in
+    st: next.st
+  });
+  if (attemptLog.length > ATTEMPT_LOG_MAX) attemptLog.splice(0, attemptLog.length - ATTEMPT_LOG_MAX);
   saveSRS();
   return next;
 }
@@ -5910,15 +5953,40 @@ function levenshtein(a, b){
   return prev[b.length];
 }
 
-// A word may list alternates as "가다 / 걷다" or comma-separated; any of them is correct.
+// Normalizing an answer is more than NFC. Korean IMEs and copy-paste routinely introduce
+// zero-width joiners, and learners add trailing punctuation or stray inner spaces — none of
+// which should be the difference between right and wrong.
+//
+// Adapted from the learning-core module on the parallel codex/korean-learning-upgrade
+// branch, whose normalizer was strictly more thorough than the plain trim+NFC this had.
+function normalizeKorean(value){
+  return String(value == null ? '' : value)
+    .normalize('NFC')
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')     // zero-width space / joiners / BOM
+    .trim()
+    .replace(/\s+/g, ' ')                     // collapse runs of inner whitespace
+    .replace(/[.!?,;:。！？、]+$/g, '')        // trailing punctuation, Latin and CJK
+    .trim();
+}
+
+// Acceptable answers come from explicit data first: a word may declare alternates as
+// `acceptedAnswers: ['아버님']`, which is unambiguous. The delimiter split on `ko` stays as a
+// fallback for entries that inline alternates as "가다 / 걷다", but new data should use the
+// field — splitting a text field guesses at intent, a list states it.
 function acceptableAnswers(word){
-  return String(word.ko || '').split(/[\/,]/).map(s => s.trim().normalize('NFC')).filter(Boolean);
+  if (!word) return [];
+  const out = [String(word.ko || '')];
+  ['acceptedAnswers', 'answersKo', 'variantsKo'].forEach(key => {
+    if (Array.isArray(word[key])) out.push(...word[key]);
+  });
+  const expanded = out.flatMap(s => String(s).split(/[\/,]/));
+  return [...new Set(expanded.map(normalizeKorean).filter(Boolean))];
 }
 
 // Returns 'exact' | 'close' | 'wrong'. 'close' is a one-jamo slip: the learner clearly
 // knew the word, so it is accepted but graded Hard rather than thrown away.
 function checkAnswer(typed, word){
-  const t = String(typed).trim().normalize('NFC');
+  const t = normalizeKorean(typed);
   if (!t) return 'wrong';
   const options = acceptableAnswers(word);
   if (options.includes(t)) return 'exact';
@@ -6123,11 +6191,10 @@ function closeQuiz(){
 }
 function submitAnswer(){
   if(!currentWord) return;
-  // Normalize to NFC before comparing: macOS/iOS Korean IMEs emit decomposed jamo
-  // (NFD) while levels.json stores composed syllables, so 어머니 typed on a Mac
-  // would never match 어머니 on disk despite looking identical.
-  const typed=answerInput.value.trim().normalize('NFC');
-  const verdict=checkAnswer(typed, currentWord);
+  // checkAnswer normalizes both sides through normalizeKorean, which handles the macOS/iOS
+  // IME emitting decomposed jamo (NFD) against the composed syllables in levels.json, plus
+  // zero-width characters and trailing punctuation.
+  const verdict=checkAnswer(answerInput.value, currentWord);
   if(verdict!=='wrong'){
     playChiptuneSFX('quiz_correct');
     // Say the word back on a correct answer. Free, and only after the learner has
@@ -12774,6 +12841,12 @@ function renderProgressOverlay() {
     { cls: s.retention !== null && s.retention < 80 ? 'rose' : 'green',
       val: s.retention === null ? '—' : s.retention + '%', lbl: 'Retention' },
   ];
+  // Lifetime retention moves slowly once there is history behind it, so a rolling figure
+  // over the last 50 answers is what actually reflects how the current session is going.
+  const recent = recentAccuracy(50);
+  if (recent !== null) {
+    cards.push({ cls: recent < 70 ? 'rose' : '', val: recent + '%', lbl: 'Last 50 answers' });
+  }
   grid.innerHTML = cards.map(c =>
     `<div class="prog-stat ${c.cls}"><div class="prog-stat-val">${c.val}</div><div class="prog-stat-lbl">${c.lbl}</div></div>`
   ).join('');
@@ -12807,6 +12880,23 @@ function renderProgressOverlay() {
       <span class="prog-level-pct">${learned}% / ${mature}%</span>
     </div>`;
   }).join('');
+
+  // Answers per day over the last fortnight — the streak view. Only rendered once there is
+  // history, so a fresh save does not show fourteen empty columns.
+  const act = dailyActivity(14);
+  const actWrap = $('prog-activity');
+  if (actWrap) {
+    const total = act.reduce((a, b) => a + b, 0);
+    actWrap.parentElement.style.display = total ? '' : 'none';
+    if (total) {
+      const peakA = Math.max(1, ...act);
+      actWrap.innerHTML = act.map((n, i) =>
+        `<span class="prog-day ${n ? 'has' : ''}" title="${n} answer${n === 1 ? '' : 's'}"
+               style="opacity:${n ? (0.35 + 0.65 * (n / peakA)).toFixed(2) : 1}">${
+          i === act.length - 1 ? '<b>·</b>' : ''}</span>`
+      ).join('');
+    }
+  }
 
   $('prog-footnote').innerHTML =
     `Cyan = learned, gold = mature. A word becomes <b>mature</b> once its review interval reaches
