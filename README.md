@@ -194,16 +194,47 @@ To add or correct an origin, edit the curated `SINO` / `MIXED` / `LOANWORDS` /
 `NATIVE_NOTE` maps in `scripts/build_facts_json.js` and re-run it. The admin panel
 shows origins read-only and its write endpoints return `409` for this reason.
 
-**Coverage is 451 / 1500 (30%), with real hanja for 192 words.** The remaining 1,049
-are classified `unknown`, and the UI simply shows pronunciation for them. That gap is
-deliberate: the previous data asserted "Native Korean (고유어)" for ~1,090 words with
-no evidence, mislabelling plenty of Sino-Korean vocabulary (건강검진, 환경오염,
-기술혁신). Unknown now stays unknown. The admin dashboard's **Not Curated** list is the
-backlog.
+**Coverage is 636 / 1500 (42%), with real hanja for 279 words.** The remaining 864 are
+classified `unknown`, and the UI shows pronunciation for them rather than inventing an
+origin. That gap is deliberate: the original data asserted "Native Korean (고유어)" for
+~1,090 words with no evidence, mislabelling plenty of Sino-Korean vocabulary (건강검진,
+환경오염, 기술혁신). Unknown stays unknown. The admin dashboard's **Not Curated** list is
+the backlog.
 
 Origin classes: `native`, `sino`, `sino-partial` (compound built on a known root),
 `sino-verb`, `sino-passive`, `sino-adj`, `sino-noun`, `mixed`, `mixed-loan`, `loan`,
-`unknown`.
+`loan-partial`, `idiom`, `discourse`, `unknown`.
+
+### How curation is targeted
+
+Roots are chosen by cascade potential rather than alphabetically. Because
+`sino-partial` and `loan-partial` match curated multi-syllable roots inside compounds,
+curating 실업 (失業) also resolves 실업률, 청년실업 and 실업수당. Measuring which roots
+appear inside the most still-uncurated words is what moved coverage from 30% to 42% for
+about 35 new root entries.
+
+Single-syllable hanja is never inferred: one Hangul reading maps to many characters
+(차 = 茶 / 車 / 差 / 次), so a word whose parts cannot be vouched for stays `unknown`.
+
+Readings are shown with the **initial-sound rule** (두음법칙) made explicit — 여행 renders
+as `旅 (려 → 여) + 行 (행)`, because printing only the dictionary reading looks like a typo
+next to the word on screen, and printing only the surface form hides a rule learners need.
+
+The generator refuses to emit an origin class that `renderOrigin()` in `game.js` has no
+case for. That switch ends in `default: return ''`, so without the check a new class would
+produce entries that are curated but silently display nothing.
+
+### Corrections to the original data
+
+Five entries asserted hanja that contradicted their own reading or breakdown:
+
+| Word | Was | Now |
+|---|---|---|
+| 무료 | 免費, decomposed as 無 + 料 | 無料 |
+| 환불 | parts listed in reverse | 還拂 |
+| 계좌이체 | 口座 (reads 구좌, the obsolete term) | 計座移替 |
+| 병원 | 醫院 (reads 의원 — a clinic, or an assembly member) | 病院 |
+| 과일 | 果實 (reads 과실) | native, naturalised — noted as related to 果實 |
 
 ---
 
@@ -283,8 +314,10 @@ repo root, which is what Vercel serves.
 
 ## Roadmap
 
-1. **Curate the remaining 1,049 word origins**, ideally the 300 TOPIK-1 words first.
-   The admin dashboard's **Not Curated** list is the working queue.
+1. **Curate the remaining 864 word origins.** Coverage is 42%; the next lift comes from
+   the same cascade method — measure which roots appear inside the most uncurated
+   compounds and curate those, rather than working through the list in order. The admin
+   dashboard's **Not Curated** list is the working queue.
 2. **Mobile.** Virtual joystick and tap-to-interact for `FarmScene`, then PWA install.
    The review loop suits phones better than desktop — vocabulary study is what people do
    on a bus.
@@ -301,4 +334,5 @@ repo root, which is what Vercel serves.
 
 Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question
-modes, fuzzy answer matching, and the progress dashboard.
+modes, fuzzy answer matching, the progress dashboard, and the second origin-curation pass
+that took coverage from 30% to 42%.
