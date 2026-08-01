@@ -6476,8 +6476,14 @@ function renderOrigin(f) {
       return `${SINO} + loanword — ${f.h}${parts ? ' = ' + parts : ''}, plus English “${f.l}”`;
     case 'loan':
       return `Loanword (외래어) — from ${f.l.includes('(') ? f.l : `English “${f.l}”`}`;
+    case 'loan-partial':
+      return `Loanword (외래어) — built on ${f.l}`;
     case 'native':
       return `Native Korean (고유어)${f.note ? ' — ' + f.note : ''}`;
+    case 'idiom':
+      return `Idiom (관용구) — ${f.note}`;
+    case 'discourse':
+      return `Discourse marker (담화 표지) — ${f.note}`;
     default:
       return '';
   }

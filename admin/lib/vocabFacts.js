@@ -37,6 +37,9 @@ const ORIGIN_LABELS = {
   'mixed': 'Sino-Korean + native Korean',
   'mixed-loan': 'Sino-Korean + loanword',
   'loan': 'Loanword (외래어)',
+  'loan-partial': 'Loanword (외래어, partial)',
+  'idiom': 'Idiom (관용구)',
+  'discourse': 'Discourse marker (담화 표지)',
   'unknown': 'Not yet curated'
 };
 

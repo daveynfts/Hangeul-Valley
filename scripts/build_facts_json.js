@@ -139,6 +139,44 @@ const EUMHUN_EN = {
   '還 돌아올 환': 'to return',        '拂 떨칠 불': 'to pay out',
   // Used only by 신용카드.
   '用 쓸 용': 'to use',
+
+  // ── Second curation pass ────────────────────────────────────────────────────
+  // Roots chosen by cascade potential: each one below appears inside several compounds
+  // in levels.json, so curating it lifts every compound containing it via sino-partial.
+  '旅 나그네 려': 'traveller',        '自 스스로 자': 'self',
+  '然 그럴 연': 'so, thus',           '由 말미암을 유': 'to arise from',
+  '關 관계할 관': 'to connect',       '係 맬 계': 'to tie',
+  '共 함께 공': 'together',           '鑑 거울 감': 'to examine',
+  '賞 상줄 상': 'to appreciate',      '議 의논할 의': 'to deliberate',
+  '儀 거동 의': 'rite, decorum',      '排 물리칠 배': 'to expel',
+  '電 번개 전': 'electricity',        '話 말씀 화': 'speech',
+  '失 잃을 실': 'to lose',            '策 꾀 책': 'scheme, policy',
+  '景 볕 경': 'scene, prospect',      '態 모습 태': 'condition',
+  '汚 더러울 오': 'to soil',          '染 물들일 염': 'to stain',
+  '保 지킬 보': 'to preserve',        '護 도울 호': 'to guard',
+  '候 기후 후': 'season, climate',
+  '要 요긴할 요': 'essential',        '選 가릴 선': 'to select',
+  '擧 들 거': 'to raise up',          '授 줄 수': 'to impart',
+  '卒 마칠 졸': 'to finish',          '企 꾀할 기': 'to plan',
+  '創 비롯할 창': 'to originate',     '成 이룰 성': 'to form',
+  '語 말씀 어': 'word, speech',       '感 느낄 감': 'to feel',
+  '滿 찰 만': 'full',                 '足 발 족': 'sufficient',
+  '疏 소통할 소': 'distant, sparse',  '遠 멀 원': 'far',
+  '興 일 흥': 'to arise, interest',   '味 맛 미': 'taste',
+  '和 화할 화': 'harmony',            '製 지을 제': 'to manufacture',
+  '造 지을 조': 'to build',           '析 쪼갤 석': 'to analyse',
+  '變 변할 변': 'to change',          '危 위태할 위': 'danger',
+  '機 틀 기': 'mechanism, juncture',  '代 대신할 대': 'generation, era',
+  '結 맺을 결': 'to bind, conclude',  '論 논할 론': 'to argue',
+  '體 몸 체': 'body, form',
+  '連 이을 련': 'to link',            '續 이을 속': 'to continue',
+  '對 대할 대': 'to face, oppose',    '照 비칠 조': 'to shine on, compare',
+  '人 사람 인': 'person',             '分 나눌 분': 'to divide',
+  // Used by the corrected 병원 entry.
+  '病 병 병': 'illness',
+  // 茶 carries two established Korean readings, 다 and 차. Both are listed so 차 is not
+  // rendered as a 두음법칙 shift, which it is not.
+  '茶 차 차': 'tea',
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -164,7 +202,9 @@ const SINO = {
   '학교': ['學校', ['學 배울 학', '校 학교 교']],
   '학생': ['學生', ['學 배울 학', '生 날 생']],
   '선생님': ['先生', ['先 먼저 선', '生 날 생']],
-  '병원': ['醫院', ['醫 의원 의', '院 집 원']],
+  // Corrected: the original map had 醫院, which reads 의원 (a clinic, or an assembly member).
+  // 병원 is 病院.
+  '병원': ['病院', ['病 병 병', '院 집 원']],
   '의사': ['醫師', ['醫 의원 의', '師 스승 사']],
   '약국': ['藥局', ['藥 약 약', '局 판 국']],
   '은행': ['銀行', ['銀 은 은', '行 다닐 행']],
@@ -186,9 +226,10 @@ const SINO = {
   '식당': ['食堂', ['食 먹을 식', '堂 집 당']],
   '음료수': ['飲料水', ['飲 마실 음', '料 헤아릴 료', '水 물 수']],
   '음식': ['飲食', ['飲 마실 음', '食 먹을 식']],
-  '차': ['茶', ['茶 차 다']],
+  '차': ['茶', ['茶 차 차']],   // dual reading 다/차; here it is 차
   '만두': ['饅頭', ['饅 만두 만', '頭 머리 두']],
-  '과일': ['果實', ['果 열매 과', '實 열매 실']],
+  // 과일 is deliberately absent: the original map claimed 果實, which reads 과실, not 과일.
+  // It is handled as a naturalised native form in NATIVE_NOTE instead.
   '시간': ['時間', ['時 때 시', '間 사이 간']],
   '일자': ['日字', ['日 날 일', '字 글자 자']],
   '주말': ['週末', ['週 돌 주', '末 끝 말']],
@@ -269,6 +310,50 @@ const SINO = {
   '승차': ['乘車', ['乘 탈 승', '車 수레 차']],
   '경유': ['經由', ['經 지날 경', '由 까닭 유']],
   '출구': ['出口', ['出 날 출', '口 입 구']],
+
+  // ── Second curation pass ────────────────────────────────────────────────────
+  // Selected by measuring which roots occur inside the most still-uncurated compounds
+  // (see the cascade analysis in the commit message), not by working alphabetically.
+  '여행': ['旅行', ['旅 나그네 려', '行 다닐 행']],
+  '자연': ['自然', ['自 스스로 자', '然 그럴 연']],
+  '자유': ['自由', ['自 스스로 자', '由 까닭 유']],
+  '관계': ['關係', ['關 관계할 관', '係 맬 계']],
+  '공공': ['公共', ['公 공평할 공', '共 함께 공']],
+  '감상': ['鑑賞', ['鑑 거울 감', '賞 상줄 상']],
+  '회의': ['會議', ['會 모일 회', '議 의논할 의']],
+  '예의': ['禮儀', ['禮 예도 예', '儀 거동 의']],
+  '배출': ['排出', ['排 물리칠 배', '出 날 출']],
+  '전화': ['電話', ['電 번개 전', '話 말씀 화']],
+  '실업': ['失業', ['失 잃을 실', '業 업 업']],
+  '정책': ['政策', ['政 정사 정', '策 꾀 책']],
+  '경기': ['景氣', ['景 볕 경', '氣 기운 기']],
+  '생태': ['生態', ['生 날 생', '態 모습 태']],
+  '오염': ['汚染', ['汚 더러울 오', '染 물들일 염']],
+  '보호': ['保護', ['保 지킬 보', '護 도울 호']],
+  '기후': ['氣候', ['氣 기운 기', '候 기후 후']],
+  '현대': ['現代', ['現 나타날 현', '代 대신할 대']],
+  '요약': ['要約', ['要 요긴할 요', '約 약속 약']],
+  '선거': ['選擧', ['選 가릴 선', '擧 들 거']],
+  '수업': ['授業', ['授 줄 수', '業 업 업']],
+  '졸업': ['卒業', ['卒 마칠 졸', '業 업 업']],
+  '기업': ['企業', ['企 꾀할 기', '業 업 업']],
+  '창업': ['創業', ['創 비롯할 창', '業 업 업']],
+  '성어': ['成語', ['成 이룰 성', '語 말씀 어']],
+  '감동': ['感動', ['感 느낄 감', '動 움직일 동']],
+  '만족': ['滿足', ['滿 찰 만', '足 발 족']],
+  '인기': ['人氣', ['人 사람 인', '氣 기운 기']],
+  '소원': ['疏遠', ['疏 소통할 소', '遠 멀 원']],
+  '흥미': ['興味', ['興 일 흥', '味 맛 미']],
+  '평화': ['平和', ['平 평평할 평', '和 화할 화']],
+  '주민': ['住民', ['住 살 주', '民 백성 민']],
+  '제조': ['製造', ['製 지을 제', '造 지을 조']],
+  '분석': ['分析', ['分 나눌 분', '析 쪼갤 석']],
+  '변화': ['變化', ['變 변할 변', '化 될 화']],
+  '위기': ['危機', ['危 위태할 위', '機 틀 기']],
+  '결론': ['結論', ['結 맺을 결', '論 논할 론']],
+  '구체': ['具體', ['具 갖출 구', '體 몸 체']],
+  '연속': ['連續', ['連 이을 련', '續 이을 속']],
+  '대조': ['對照', ['對 대할 대', '照 비칠 조']],
 };
 
 // Sino-Korean root + native Korean suffix.
@@ -288,6 +373,7 @@ const MIXED_LOAN = {
 
 // Native Korean words with a note worth keeping (the rest just get o:'native').
 const NATIVE_NOTE = {
+  '과일': 'naturalised in Korean; related to the Sino-Korean 果實 (과실), but no longer read that way',
   '아버지': 'respectful term for one\'s father',
   '어머니': 'respectful term for one\'s mother',
   '할아버지': 'grandfather; also used for any elderly man',
@@ -324,9 +410,115 @@ const LOANWORDS = {
   '콘서트': 'concert', '밴드': 'band', '아티스트': 'artist',
 };
 
+// Second curation pass. Words verified against levels.json rather than recalled: an
+// earlier heuristic sweep flagged 수업 / 졸업 / 기업 / 실업 / 제조업 as loanwords purely
+// because they end in 업, when all of them are Sino-Korean (授業, 卒業, 企業, 失業, 製造業).
+Object.assign(LOANWORDS, {
+  '오토바이': 'auto-bicycle (motorcycle)', '힐링': 'healing',
+  '캐리어': 'carrier (suitcase)',          '게스트하우스': 'guest house',
+  '앱': 'app',                             '어플리케이션': 'application',
+  '웹사이트': 'website',                    '업로드': 'upload',
+  '스트리밍': 'streaming',                  '데이터베이스': 'database',
+  '바이러스': 'virus',                      '콘텐츠': 'contents',
+  '미디어': 'media',                        '팟캐스트': 'podcast',
+  '인플레이션': 'inflation',                '빅데이터': 'big data',
+  '시뮬레이션': 'simulation',               '리모델링': 'remodeling',
+  '인테리어': 'interior',                   '데이터': 'data',
+  '센터': 'center',                         '프로그램': 'program',
+  '프린팅': 'printing',                     '업사이클링': 'upcycling',
+  '소셜미디어': 'social media',             '스마트시티': 'smart city',
+});
+
 // 맥주 and 택배 are Sino-Korean, not loanwords — the old list mis-tagged them.
 delete LOANWORDS['맥주'];
 delete LOANWORDS['택배'];
+
+// Native Korean predicates. Listed explicitly rather than inferred from the ending, because
+// several endings attach happily to Sino roots — 만족스럽다 is 滿足 + 스럽다 and 예의바르다
+// is 禮儀 + 바르다, so a blanket "-스럽다 means native" rule would mislabel them. The `note`
+// records which native ending is doing the work.
+const NATIVE_PREDICATES = {
+  '일어나다': 'native verb stem in -나다 (to arise)',
+  '만나다': 'native verb stem in -나다',
+  '신나다': 'native verb stem in -나다 (spirit rising)',
+  '화나다': '화 (anger) + native -나다',
+  '짜증나다': '짜증 (irritation) + native -나다',
+  '네모나다': '네모 (four corners) + native -나다',
+  '세모나다': '세모 (three corners) + native -나다',
+  '헤어지다': 'native verb stem in -지다',
+  '기름지다': '기름 (oil) + native -지다',
+  '건방지다': 'native adjective in -지다',
+  '바쁘다': 'native adjective stem in -쁘다',
+  '기쁘다': 'native adjective stem in -쁘다',
+  '나쁘다': 'native adjective stem in -쁘다',
+  '예쁘다': 'native adjective stem in -쁘다',
+  '슬프다': 'native adjective stem in -프다',
+  '배고프다': '배 (belly) + native -고프다',
+  '더럽다': 'native adjective stem in -럽다',
+  '부끄럽다': 'native adjective stem in -럽다',
+  '부럽다': 'native adjective stem in -럽다',
+  '싱겁다': 'native adjective stem in -겁다',
+  '뜨겁다': 'native adjective stem in -겁다',
+  '무겁다': 'native adjective stem in -겁다',
+  '즐겁다': 'native adjective stem in -겁다',
+  '배부르다': '배 (belly) + native 부르다 (to be full)',
+  '목마르다': '목 (throat) + native 마르다 (to dry)',
+  '마르다': 'native verb 마르다 (to dry, to thin)',
+  '머무르다': 'native verb stem in -르다',
+  '맛있다': '맛 (taste) + 있다 (to exist)',
+  '맛없다': '맛 (taste) + 없다 (to not exist)',
+  '재미있다': '재미 (fun) + 있다 (to exist)',
+  '뉘우치다': 'native verb 뉘우치다',
+  '챙기다': 'native verb 챙기다',
+};
+
+// Idioms. Native by construction, and worth a gloss because the literal reading is the point.
+const IDIOMS = {
+  '배가아프다': 'literally "the belly hurts" — to be envious of someone else\'s good fortune',
+  '어깨가무겁다': 'literally "the shoulders are heavy" — to carry a weighty responsibility',
+  '눈코뜰새없이바쁘다': 'literally "no time to open eyes or nose" — frantically busy',
+  '귀를기울이다': 'literally "to tilt the ear" — to listen closely',
+  '뼈가있다': 'literally "there is a bone in it" — a remark with a hidden barb',
+  '가슴을치다': 'literally "to strike the chest" — to beat one\'s breast in grief',
+  '눈이높다': 'literally "the eyes are high" — to have exacting standards',
+  '콧대가높다': 'literally "the bridge of the nose is high" — haughty',
+  '가슴이치밀다': 'literally "the chest surges" — emotion welling up',
+  '길을찾다': 'literally "to look for the road" — to find one\'s way',
+  '길을잃다': 'literally "to lose the road" — to get lost',
+  '눈길을끌다': 'literally "to pull the gaze" — to catch the eye',
+};
+
+// Discourse connectives, all native Korean constructions.
+const DISCOURSE = {
+  '그러므로': 'native connective — 그러하다 + -므로 (because it is so)',
+  '따라서': 'native connective — 따르다 (to follow) + -아서',
+  '이에따라': 'native connective — 이에 (to this) + 따라 (following)',
+  '잇따라': 'native connective — 잇다 (to join) + 따라',
+  '왜냐하면': 'native connective — 왜 (why) + -냐 하면 (if one asks)',
+  '그럼에도불구하고': 'native + Sino — 그럼에도 (even so) + 不拘하고 (without regard)',
+  '한편': 'native/Sino — 한 (one) + 便 (side)',
+  '한편으로는': '한편 (one side) + -으로는 (as for)',
+  '다른한편으로는': '다른 (other) + 한편 + -으로는',
+  '바꾸어말하면': 'native — 바꾸다 (to change) + 말하다 (to say) + -면',
+  '말하자면': 'native — 말하다 + -자면 (if one is to say)',
+  '들자면': 'native — 들다 (to raise, cite) + -자면',
+  '비유하자면': '比喩 (analogy) + 하자면',
+  '정리하자면': '整理 (to order) + 하자면',
+  '요약하자면': '要約 (to summarise) + 하자면',
+  '요약하건대': '要約 + -하건대 (in so summarising)',
+  '다음으로': 'native — 다음 (next) + -으로',
+  '끝으로': 'native — 끝 (end) + -으로',
+  '다음주': 'native 다음 (next) + 週 (week)',
+  '다음달': 'native 다음 (next) + 달 (month)',
+  '드디어': 'native adverb 드디어 (at last)',
+  '도리어': 'native adverb 도리어 (on the contrary)',
+};
+
+// Multi-syllable loanwords that appear inside compounds, longest first, so a compound such
+// as 데이터센터 can be recognised from its parts the way sino-partial handles hanja roots.
+const LOAN_ROOTS_BY_LEN = Object.keys(LOANWORDS)
+  .filter(k => k.length >= 2)
+  .sort((a, b) => b.length - a.length);
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -337,6 +529,18 @@ function eumhun(tokens) {
     const [char, , reading] = t.split(' ');
     return [char, reading, en];
   });
+}
+
+// 두음법칙 — the initial-sound rule. Word-initial ㄹ and ㄴ shift in Sino-Korean, so 旅 (려)
+// surfaces as 여 in 여행 and 路 (로) as 노 in 노선. Showing only the dictionary reading looks
+// like a typo next to the word on screen; showing only the surface form hides the rule. So
+// where they differ the reading becomes "려 → 여", which teaches it.
+//
+// Applied by position, and only for a word whose syllable count matches its hanja count —
+// otherwise there is no reliable syllable-to-character alignment to compare against.
+function markInitialSoundRule(ko, parts) {
+  if (!parts || parts.length !== ko.length) return parts;
+  return parts.map((p, i) => (p[1] === ko[i] ? p : [p[0], `${p[1]} → ${ko[i]}`, p[2]]));
 }
 
 // Derivational suffixes that attach to a Sino-Korean root without changing it.
@@ -354,11 +558,14 @@ const SINO_ROOTS_BY_LEN = Object.keys(SINO)
   .sort((a, b) => b.length - a.length);
 
 function classify(ko) {
-  if (SINO[ko])        { const [h, t] = SINO[ko];              return { o: 'sino', h, p: eumhun(t) }; }
+  if (SINO[ko])        { const [h, t] = SINO[ko];              return { o: 'sino', h, p: markInitialSoundRule(ko, eumhun(t)) }; }
   if (MIXED[ko])       { const [h, t, n] = MIXED[ko];          return { o: 'mixed', h, p: eumhun(t), n }; }
   if (MIXED_LOAN[ko])  { const [h, t, l] = MIXED_LOAN[ko];     return { o: 'mixed-loan', h, p: eumhun(t), l }; }
   if (LOANWORDS[ko])   { return { o: 'loan', l: LOANWORDS[ko] }; }
   if (NATIVE_NOTE[ko]) { return { o: 'native', note: NATIVE_NOTE[ko] }; }
+  if (IDIOMS[ko])      { return { o: 'idiom', note: IDIOMS[ko] }; }
+  if (DISCOURSE[ko])   { return { o: 'discourse', note: DISCOURSE[ko] }; }
+  if (NATIVE_PREDICATES[ko]) { return { o: 'native', note: NATIVE_PREDICATES[ko] }; }
 
   // A curated Sino root carrying a derivational suffix keeps its hanja.
   for (const [suf, kind] of DERIV_SUFFIXES) {
@@ -393,6 +600,17 @@ function classify(ko) {
     };
   }
 
+  // Same idea for loanwords: 데이터센터 is 데이터 + 센터, 백신프로그램 is a Sino root we do
+  // not have plus 프로그램. Multi-syllable only, for the same ambiguity reason.
+  const loanParts = [];
+  for (let i = 0; i < ko.length; ) {
+    const r = LOAN_ROOTS_BY_LEN.find(x => ko.startsWith(x, i));
+    if (r) { loanParts.push(r); i += r.length; } else { i++; }
+  }
+  if (loanParts.length) {
+    return { o: 'loan-partial', l: loanParts.map(r => LOANWORDS[r]).join(' + '), k: loanParts };
+  }
+
   // Suffix heuristics for Sino-Korean words we have no curated hanja for.
   if (ko.endsWith('하다') && ko.length >= 4)            return { o: 'sino-verb' };
   if (ko.endsWith('되다') || ko.endsWith('시키다'))      return { o: 'sino-passive' };
@@ -423,11 +641,40 @@ for (const level of levelsData) {
   }
 }
 
+// ── Guard: every emitted origin class must be renderable by the game ─────────
+//
+// renderOrigin() in game.js is a switch with a `default: return ''`, so introducing a new
+// origin class here and forgetting to add a case there silently produces entries that are
+// curated but display nothing. That happened once already with idiom / discourse /
+// loan-partial, so the generator now refuses to emit a class game.js cannot render.
+const gameJs = fs.readFileSync(path.join(ROOT, 'game.js'), 'utf8');
+const renderOriginBody = gameJs.slice(
+  gameJs.indexOf('function renderOrigin('),
+  gameJs.indexOf('function renderStructure(')
+);
+const renderable = new Set(
+  [...renderOriginBody.matchAll(/case '([a-z-]+)':/g)].map(m => m[1]).concat('unknown')
+);
+const unrenderable = Object.keys(stats).filter(o => !renderable.has(o));
+if (unrenderable.length) {
+  console.error('\nERROR: these origin classes have no case in game.js renderOrigin():');
+  unrenderable.forEach(o => console.error(`  ${o} (${stats[o]} words would show no origin)`));
+  console.error('Add a case for each in renderOrigin(), then re-run.');
+  process.exit(1);
+}
+
 const out = path.join(ROOT, 'facts.json');
 fs.writeFileSync(out, JSON.stringify(facts), 'utf8');
+// Mirror into assets/, which main.py serves from and admin/lib/sync.js keeps in step.
+const assetsFacts = path.join(ROOT, 'assets', 'facts.json');
+if (fs.existsSync(path.dirname(assetsFacts))) fs.copyFileSync(out, assetsFacts);
 
 const kb = (fs.statSync(out).size / 1024).toFixed(1);
 console.log(`facts.json written: ${Object.keys(facts).length} entries from ${total} words, ${kb} KB`);
 console.log('Origin breakdown:');
+const curated = total - (stats.unknown || 0);
 Object.entries(stats).sort((a, b) => b[1] - a[1])
-  .forEach(([k, v]) => console.log(`  ${k.padEnd(12)} ${String(v).padStart(5)}`));
+  .forEach(([k, v]) => console.log(`  ${k.padEnd(13)} ${String(v).padStart(5)}`));
+console.log(`\nCoverage: ${curated}/${total} curated (${(curated / total * 100).toFixed(1)}%), ` +
+            `${Object.values(facts).filter(f => f.h).length} with hanja`);
+console.log(`All ${Object.keys(stats).length} origin classes are renderable by game.js ✓`);
