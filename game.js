@@ -4232,8 +4232,25 @@ function srsIntervalLabel(e) {
   return e.ivl + 'd';
 }
 
+// ── Per-modality records ─────────────────────────────────────────────────────
+// Knowing 아버지 on sight is not the same skill as typing it from memory, so each modality
+// carries its own interval, ease and due date. A single shared schedule meant answering a
+// four-option recognition question advanced the same interval as producing the word cold —
+// which overstates what the learner can actually do.
+//
+// The idea is from the parallel codex/korean-learning-upgrade branch, which modelled this
+// correctly while this tree had one track per word.
+//
+//   srsData[ko] = { m: { type: entry, recognise: entry, listen: entry } }
+//
+// Production ('type') is the primary modality: it is the hardest, it is what the three-touch
+// learning cycle ends on, and it is therefore what "graduated" and "mature" are measured
+// against. Recognition and listening schedule independently alongside it.
+const MODALITIES = ['type', 'recognise', 'listen'];
+const PRIMARY_MODALITY = 'type';
+
 // Plot sState codes: ''=empty '1'=seedling '2'=wilting '3'=sprout '4'=ripe
-let srsData  = {}; // { ko: srsNewEntry() }
+let srsData  = {}; // { ko: { m: { <modality>: srsNewEntry() } } }
 let plotSave = []; // [{ i, ko, sState, plantedAt }]
 let droppedItemsSave = []; // [{ itemId, nameKo, x, y }] persisted ground drops buffer
 var PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000];
@@ -4480,6 +4497,25 @@ function migrateSaveData(d) {
     data.srs = migrated;
     data.v = 5;
   }
+
+  // v5 -> v6: SRS records became per-modality. A v5 entry was one schedule per word, and the
+  // three-touch learning cycle it was earned through ends on typing, so it maps to the
+  // production track. Recognition and listening start unseeded rather than inheriting an
+  // interval nobody demonstrated — inheriting would claim a skill that was never tested.
+  if (!data.v || data.v < 6) {
+    console.log(`[Save Migration] Upgrading SRS to per-modality records v${data.v || 5} -> v6`);
+    const flat = (data.srs && typeof data.srs === 'object') ? data.srs : {};
+    const perModality = {};
+    Object.entries(flat).forEach(([ko, entry]) => {
+      if (!entry || typeof entry !== 'object') return;
+      // Already migrated (or written by a newer build).
+      if (entry.m && typeof entry.m === 'object') { perModality[ko] = entry; return; }
+      perModality[ko] = { m: { [PRIMARY_MODALITY]: entry } };
+    });
+    data.srs = perModality;
+    data.v = 6;
+  }
+
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
     data.inventory.maxSlots = 20;
   }
@@ -4534,7 +4570,7 @@ function collectSave(){
     : droppedItemsSave;
   droppedItemsSave = drops;
   return {
-    v: 5,
+    v: 6,
     currencies: playerCurrencies,
     gold: playerCurrencies.coins,
     unlockedLevels,
@@ -4693,8 +4729,57 @@ function savePlotsFn() { persistSave(); }
 function saveEconomy() { persistSave(); }
 function loadSRS()   {}
 function loadEconomy() {}
-function getSrs(ko){ return srsData[ko] || srsNewEntry(); }
-function setSrs(ko,u){ srsData[ko]={...getSrs(ko),...u}; saveSRS(); }
+// ── Record access ────────────────────────────────────────────────────────────
+// Reads never create. srsData is serialized into every save, so touching a word to check a
+// badge must not add 1500 empty records to it.
+function peekSrs(ko, mod = PRIMARY_MODALITY){
+  const rec = srsData[ko];
+  return rec && rec.m ? rec.m[mod] : undefined;
+}
+
+// The word's headline state. Defaults to production because that is what every existing
+// caller — gates, mastery, badges, the plot cycle — already meant by "this word's progress".
+function getSrs(ko){ return peekSrs(ko) || srsNewEntry(); }
+
+// Creates on demand. Only for the write path.
+function getSrsMod(ko, mod = PRIMARY_MODALITY){
+  let rec = srsData[ko];
+  if (!rec || !rec.m) { rec = { m: {} }; srsData[ko] = rec; }
+  if (!rec.m[mod]) rec.m[mod] = srsNewEntry();
+  return rec.m[mod];
+}
+
+function setSrs(ko, u, mod = PRIMARY_MODALITY){
+  srsData[ko].m[mod] = { ...getSrsMod(ko, mod), ...u };
+  saveSRS();
+}
+
+// ── Word-level aggregation across modalities ─────────────────────────────────
+// A word is due when its *soonest* started modality is due, and that modality is the one the
+// review should test — there is no point re-testing recognition when production is what has
+// gone stale.
+function startedModalities(ko){
+  const rec = srsData[ko];
+  if (!rec || !rec.m) return [];
+  return MODALITIES.filter(m => rec.m[m] && rec.m[m].st !== 'new');
+}
+
+function dueModality(ko, now = Date.now()){
+  const started = startedModalities(ko).filter(m => srsIsDue(srsData[ko].m[m], now));
+  if (!started.length) return null;
+  // Soonest due first; production wins a tie because it is the skill that matters most.
+  started.sort((a, b) => (srsData[ko].m[a].due - srsData[ko].m[b].due)
+    || (a === PRIMARY_MODALITY ? -1 : b === PRIMARY_MODALITY ? 1 : 0));
+  return started[0];
+}
+
+function wordIsDue(ko, now = Date.now()){ return dueModality(ko, now) !== null; }
+
+function wordNextDueAt(ko){
+  const started = startedModalities(ko);
+  if (!started.length) return 0;
+  return Math.min(...started.map(m => srsData[ko].m[m].due || Infinity));
+}
 
 // Record a review outcome. This is the only place the scheduler is advanced.
 // ── Attempt log ──────────────────────────────────────────────────────────────
@@ -4727,13 +4812,16 @@ function dailyActivity(days = 14, now = Date.now()){
   return out;
 }
 
-function gradeWord(ko, grade, now = Date.now()){
-  const next = srsSchedule(getSrs(ko), grade, now);
-  srsData[ko] = next;
+// Advances one modality's schedule. `mod` defaults to whichever question mode is on screen,
+// so a recognition answer can never move the production interval.
+function gradeWord(ko, grade, mod = currentQuizMode, now = Date.now()){
+  const modality = MODALITIES.includes(mod) ? mod : PRIMARY_MODALITY;
+  const next = srsSchedule(getSrsMod(ko, modality), grade, now);
+  srsData[ko].m[modality] = next;
   attemptLog.push({
     ko,
     g: grade,                     // 0 Again … 3 Easy
-    m: currentQuizMode,           // which modality produced the answer
+    m: modality,                  // which modality this answer scheduled
     at: now,
     ivl: next.ivl,                // interval the answer resulted in
     st: next.st
@@ -4743,48 +4831,69 @@ function gradeWord(ko, grade, now = Date.now()){
   return next;
 }
 
-// Words the player owns that are due for review right now, soonest first.
+// Words the player owns that are due right now, soonest first, each tagged with the modality
+// that fell due so the review can test the right skill.
 function srsDueWords(now = Date.now()){
   const seen = new Set();
   const out = [];
   unlockedLevels.forEach(idx => (levelsData[idx]?.words || []).forEach(w => {
     if (seen.has(w.ko)) return;
     seen.add(w.ko);
-    const e = srsData[w.ko];
-    if (srsIsDue(e, now)) out.push({ word: w, entry: e });
+    const mod = dueModality(w.ko, now);
+    if (mod) out.push({ word: w, modality: mod, entry: srsData[w.ko].m[mod] });
   }));
   out.sort((a, b) => a.entry.due - b.entry.due);
   return out;
 }
 
-// Review forecast for the next `days` days, for the progress dashboard.
+// Review forecast for the next `days` days. Counts every scheduled modality, since each one
+// is a separate thing the player will be asked to do.
 function srsForecast(days = 7, now = Date.now()){
   const buckets = new Array(days).fill(0);
-  Object.values(srsData).forEach(e => {
-    if (!srsIsGraduated(e) || !e.due) return;
-    const d = Math.floor((e.due - now) / DAY_MS);
-    if (d >= 0 && d < days) buckets[d]++;
+  Object.values(srsData).forEach(rec => {
+    if (!rec || !rec.m) return;
+    Object.values(rec.m).forEach(e => {
+      if (!srsIsGraduated(e) || !e.due) return;
+      const d = Math.floor((e.due - now) / DAY_MS);
+      if (d >= 0 && d < days) buckets[d]++;
+    });
   });
   return buckets;
 }
 
+// Word counts report the production track, so "learned" and "mature" mean the same thing they
+// did before per-modality records existed. Retention and ease average over every modality,
+// because a lapse in recognition is still a lapse.
 function srsStats(){
-  const all = Object.values(srsData);
-  const graduated = all.filter(srsIsGraduated);
-  const reps = graduated.reduce((s, e) => s + (e.reps || 0), 0);
-  const lapses = graduated.reduce((s, e) => s + (e.lapses || 0), 0);
+  const kos = Object.keys(srsData);
+  const primary = kos.map(k => peekSrs(k)).filter(Boolean);
+  const everyEntry = kos.flatMap(k => Object.values(srsData[k].m || {}));
+  const gradAll = everyEntry.filter(srsIsGraduated);
+  const reps = gradAll.reduce((s, e) => s + (e.reps || 0), 0);
+  const lapses = gradAll.reduce((s, e) => s + (e.lapses || 0), 0);
   return {
-    seen: all.length,
-    learning: all.filter(srsIsLearning).length,
-    graduated: graduated.length,
-    mature: all.filter(srsIsMature).length,
+    seen: kos.length,
+    learning: primary.filter(srsIsLearning).length,
+    graduated: primary.filter(srsIsGraduated).length,
+    mature: primary.filter(srsIsMature).length,
     dueNow: srsDueWords().length,
     // Share of reviews answered without a lapse — the closest thing to a retention rate
-    // the game can measure without logging every single answer.
+    // the game can measure without replaying the whole attempt log.
     retention: reps + lapses > 0 ? Math.round((reps / (reps + lapses)) * 100) : null,
-    avgEase: graduated.length
-      ? +(graduated.reduce((s, e) => s + e.ease, 0) / graduated.length).toFixed(2)
-      : null
+    avgEase: gradAll.length
+      ? +(gradAll.reduce((s, e) => s + e.ease, 0) / gradAll.length).toFixed(2)
+      : null,
+    // Per-modality breakdown, so the dashboard can show that recognition is ahead of
+    // production rather than hiding the gap behind one number.
+    byModality: MODALITIES.reduce((acc, m) => {
+      const es = kos.map(k => peekSrs(k, m)).filter(Boolean);
+      acc[m] = {
+        started: es.length,
+        graduated: es.filter(srsIsGraduated).length,
+        mature: es.filter(srsIsMature).length
+      };
+      return acc;
+    }, {})
   };
 }
 
@@ -4922,7 +5031,7 @@ function _levelPct(levelIdx, predicate) {
   const words = levelsData[levelIdx].words;
   if (words.length === 0) return 100;
   let n = 0;
-  words.forEach(w => { if (predicate(srsData[w.ko])) n++; });
+  words.forEach(w => { if (predicate(peekSrs(w.ko))) n++; });
   return Math.floor((n / words.length) * 100);
 }
 
@@ -6044,7 +6153,7 @@ function openQuiz(word, plot, phase=1){
     }
   }
   answerInput.value=''; feedbackText.textContent=''; feedbackText.className='';
-  applyQuizMode(word, phase);
+  applyQuizMode(word, phase, plot);
   quizBackdrop.classList.add('visible');
   if(currentQuizMode === 'type') setTimeout(()=>answerInput.focus(),80);
 }
@@ -6061,9 +6170,15 @@ function openQuiz(word, plot, phase=1){
 // at phase 3, where it belongs. (currentQuizMode / currentChoices are declared up beside
 // currentQuizMeta so deriveGrade can read the mode.)
 
-function pickQuizMode(word, phase){
+function pickQuizMode(word, phase, plot){
+  // A due review tests the modality that actually expired. Listening needs a Korean voice, so
+  // it falls back to typing where none is installed rather than playing silence.
+  if (plot && plot.reviewModality) {
+    const m = plot.reviewModality;
+    return (m === 'listen' && !KoreanTTS.isAvailable()) ? 'type' : m;
+  }
   if (phase === 3) return 'type';                       // graded recall stays production
-  const e = srsData[word.ko];
+  const e = peekSrs(word.ko);
   const firstContact = !e || e.st === 'new';
   if (phase === 1 && firstContact) return 'recognise';
   // Second touch: listening where a Korean voice exists, otherwise typing.
@@ -6093,8 +6208,8 @@ function buildChoices(word, count = 4){
   return options;
 }
 
-function applyQuizMode(word, phase){
-  currentQuizMode = pickQuizMode(word, phase);
+function applyQuizMode(word, phase, plot){
+  currentQuizMode = pickQuizMode(word, phase, plot);
   const koPrompt = $('quiz-ko-prompt'), choices = $('quiz-choices'), qText = $('question-text');
   const hints = $('quiz-tier-hints');
 
@@ -6155,8 +6270,14 @@ function answerChoice(opt, btn){
     feedbackText.className = 'correct';
     const cp=currentPlot, cw=currentWord, ph=currentPhase;
     const grade = deriveGrade();
-    gradeWord(cw.ko, grade);
-    if(ph===1){ plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook(); }
+    gradeWord(cw.ko, grade);            // schedules whichever modality is on screen
+    if(ph===1){
+      // Phase 1 teaches by recognition, but the crop timer and the rest of the cycle are
+      // production. Start the production track here too so phases 2 and 3 have a schedule to
+      // advance and the 30s/90s pacing is unchanged — recognition keeps its own record.
+      if(currentQuizMode !== PRIMARY_MODALITY) gradeWord(cw.ko, grade, PRIMARY_MODALITY);
+      plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();
+    }
     setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph,grade); }, 950);
   } else {
     playChiptuneSFX('quiz_wrong');
@@ -6166,7 +6287,7 @@ function answerChoice(opt, btn){
     // Re-ask rather than punishing: this is a teaching step, not the graded recall.
     setTimeout(()=>{
       if(!quizOpen || !currentWord) return;
-      applyQuizMode(currentWord, currentPhase);
+      applyQuizMode(currentWord, currentPhase, currentPlot);
       feedbackText.textContent = 'Try again — which one is it?';
     }, 1500);
   }
@@ -6621,9 +6742,16 @@ function showVocabFunFact(word) {
   $('vff-ko').textContent       = word.ko;
   $('vff-cat').textContent      = wordCategory(word) + (word.categoryEn && word.category ? ` · ${word.category}` : '');
   $('vff-phase').textContent    = stageLabel;
-  $('vff-harvests').textContent = srsIsGraduated(srs)
-    ? `⏱ Interval ${srsIntervalLabel(srs)} · ${srs.reps} review${srs.reps===1?'':'s'}${srs.lapses?` · ${srs.lapses} lapse${srs.lapses===1?'':'s'}`:''}`
-    : (harvests > 0 ? `✅ Harvested ×${harvests}` : '🌱 Not harvested');
+  // Each skill has its own schedule, so show them separately — an average would hide the
+  // usual case, which is recognition running well ahead of production.
+  const MOD_LABEL = { type: '⌨️ Type', recognise: '👁 Recognise', listen: '👂 Listen' };
+  const perMod = MODALITIES
+    .map(m => ({ m, e: peekSrs(word.ko, m) }))
+    .filter(x => x.e && x.e.st !== 'new')
+    .map(({ m, e }) => `${MOD_LABEL[m]} ${srsIntervalLabel(e)}${e.lapses ? ` (${e.lapses}✗)` : ''}`);
+  $('vff-harvests').textContent = perMod.length
+    ? perMod.join('  ·  ')
+    : (harvests > 0 ? `✅ Harvested ×${harvests}` : '🌱 Not started');
   $('vff-fact-origin').textContent    = fact.origin || fact.hint;
   $('vff-fact-structure').textContent = fact.structure;
   modal.classList.add('visible');
@@ -6638,11 +6766,11 @@ function renderVocabCards() {
   // Filter by learning stage / category. Stages come from the scheduler now, so they mean
   // something about retention rather than counting how often a plot was farmed.
   if(activeCat !== 'all'){
-    if(activeCat.includes('New')) words = words.filter(w => !srsData[w.ko] || srsData[w.ko].st === 'new');
-    else if(activeCat.includes('Learning')) words = words.filter(w => srsIsLearning(srsData[w.ko]));
-    else if(activeCat.includes('Review')) words = words.filter(w => { const e=srsData[w.ko]; return e && e.st==='review' && !srsIsMature(e); });
-    else if(activeCat.includes('Mature')) words = words.filter(w => srsIsMature(srsData[w.ko]));
-    else if(activeCat.includes('Due')) words = words.filter(w => srsIsDue(srsData[w.ko], Date.now()));
+    if(activeCat.includes('New')) words = words.filter(w => { const e=peekSrs(w.ko); return !e || e.st === 'new'; });
+    else if(activeCat.includes('Learning')) words = words.filter(w => srsIsLearning(peekSrs(w.ko)));
+    else if(activeCat.includes('Review')) words = words.filter(w => { const e=peekSrs(w.ko); return e && e.st==='review' && !srsIsMature(e); });
+    else if(activeCat.includes('Mature')) words = words.filter(w => srsIsMature(peekSrs(w.ko)));
+    else if(activeCat.includes('Due')) words = words.filter(w => wordIsDue(w.ko));
     else words = words.filter(w => wordCategory(w) === activeCat);
   }
   
@@ -6655,7 +6783,7 @@ function renderVocabCards() {
     const planted = plantedWords.has(w.ko);
     const chosung = getChosung(w.ko);
     const roman   = getRoman(w.ko);
-    const e       = srsData[w.ko];
+    const e       = peekSrs(w.ko);
 
     // Badge reflects scheduler state; the suffix shows the current interval, which is the
     // number that actually tells a learner how well they know the word.
@@ -9071,9 +9199,10 @@ class FarmScene extends Phaser.Scene {
     const now=Date.now(); let changed=false;
     this.plots.forEach(p=>{
       if(!p.ko) return;
+      // getSrs resolves to the production track, which is the one the learning cycle
+      // advances — phase 1 seeds it even when the question shown was recognition. So the crop
+      // timer follows production regardless of which modality each phase tests.
       const s=getSrs(p.ko);
-      // A learning-step timer elapsing is what makes a crop need attention. Both
-      // transitions read the same `due` field now; the plot state says which step we are on.
       if(p.sState==='1' && srsIsDue(s, now)){ this._setState(p,'2',p.ko); changed=true; }
       if(p.sState==='3' && srsIsDue(s, now)){ this._setState(p,'4',p.ko); changed=true; }
     });
@@ -9331,7 +9460,7 @@ class FarmScene extends Phaser.Scene {
     if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
     if(plot.cropShadow){if(plot.cropShadow.destroy) plot.cropShadow.destroy(); plot.cropShadow=null;}
     if(plot.plant){plot.plant.destroy();plot.plant=null;}
-    plot.sState=''; plot.ko=null; plot.word=null;
+    plot.sState=''; plot.ko=null; plot.word=null; plot.reviewModality=null;
     plot.tile.setTexture('drt_dry').setAlpha(1).setDisplaySize(PLOT_SIZE,PLOT_SIZE).clearTint();
     plot.shad.setAlpha(0.3);
   }
@@ -9387,6 +9516,9 @@ class FarmScene extends Phaser.Scene {
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
       this.tweens.add({ targets: plot.plant, scale: 1, duration: 260, delay: i*70, ease:'Back.Out(2)' });
       this._setState(plot, '4', d.word.ko);   // ripe: next interact opens the recall quiz
+      // Remember which skill fell due, so the review tests that one rather than defaulting to
+      // typing when it was recognition or listening that went stale.
+      plot.reviewModality = d.modality;
       plantedWords.add(d.word.ko);
     });
 
@@ -9440,12 +9572,12 @@ class FarmScene extends Phaser.Scene {
     // Manual planting is for learning new material; anything already in the review queue
     // resurfaces on its own schedule via _plantDueReviews, so it is excluded here rather
     // than letting the player grind a known word ahead of its due date.
-    const unlearned=pool.filter(w=>!srsIsGraduated(srsData[w.ko]));
+    const unlearned=pool.filter(w=>!srsIsGraduated(peekSrs(w.ko)));
     if(unlearned.length) pool=unlearned;
     const arr=pool.length?pool:all;
     // Weighted random: untouched ×5, mid-learning ×3, everything else ×1
     const weighted=arr.map(w=>{
-      const e=srsData[w.ko];
+      const e=peekSrs(w.ko);
       return {word:w, weight: !e||e.st==='new' ? 5 : srsIsLearning(e) ? 3 : 1};
     });
     const total=weighted.reduce((s,w)=>s+w.weight,0);
@@ -12880,6 +13012,30 @@ function renderProgressOverlay() {
       <span class="prog-level-pct">${learned}% / ${mature}%</span>
     </div>`;
   }).join('');
+
+  // Per-skill breakdown. Each modality schedules independently, so this is where the gap
+  // between "I recognise it" and "I can produce it" becomes visible.
+  const modWrap = $('prog-modalities');
+  if (modWrap) {
+    const LBL = { type: '⌨️ Type (production)', recognise: '👁 Recognise', listen: '👂 Listen' };
+    const any = MODALITIES.some(m => s.byModality[m].started > 0);
+    modWrap.parentElement.style.display = any ? '' : 'none';
+    if (any) {
+      modWrap.innerHTML = MODALITIES.map(m => {
+        const b = s.byModality[m];
+        const gradPct = b.started ? Math.round((b.graduated / b.started) * 100) : 0;
+        const matPct  = b.started ? Math.round((b.mature / b.started) * 100) : 0;
+        return `<div class="prog-level-row">
+          <span class="prog-level-name">${LBL[m]}</span>
+          <span class="prog-level-track">
+            <span class="prog-level-learned" style="width:${gradPct}%"></span>
+            <span class="prog-level-mature" style="width:${matPct}%"></span>
+          </span>
+          <span class="prog-level-pct">${b.graduated}/${b.started}${b.mature ? ` · ${b.mature}🌟` : ''}</span>
+        </div>`;
+      }).join('');
+    }
+  }
 
   // Answers per day over the last fortnight — the streak view. Only rendered once there is
   // history, so a fresh save does not show fourteen empty columns.
