@@ -4454,6 +4454,55 @@ const KO_V7_RENAMES = KO_V7_RESPELLINGS.reduce((m, spaced) => {
   return m;
 }, {});
 
+// Three headwords were the wrong *word*, not merely the wrong spacing. Unlike the v7 table
+// these cannot be derived: a correction that changes characters leaves no rule for recovering
+// the old key from the new one, which is exactly why it is a separate step.
+//
+// Keys are the **post-v7** spellings. That is safe because the v7 step always runs first, so a
+// v6 save has already reached 발을 벗고 나서다 by the time this table is consulted — and folding
+// the two together would not work, since stripping spaces from 발 벗고 나서다 yields 발벗고나서다
+// and would never match the 발을벗고나서다 a pre-v7 save actually holds.
+const KO_V8_RENAMES = {
+  '허리띠를 둘러매다': '허리띠를 졸라매다',  // 둘러매다 is to sling over a shoulder, not to tighten
+  '발을 벗고 나서다':  '발 벗고 나서다',     // the idiom takes no 을
+  '어플리케이션':      '애플리케이션',        // 외래어 표기법 — v7 did not touch this one
+};
+
+// Renaming a headword means moving it everywhere it serves as an identity: srsData and
+// harvestCounts key on it, plots and attemptLog carry it as a field. Shared by the v7 and v8
+// steps, which differ only in their table.
+//
+// Idempotent: a key moves only when the destination is free, so re-running finds nothing to do.
+// Where both spellings somehow exist the new one wins as the later write — except harvest
+// counts, which take the larger of the two rather than discarding a tally.
+function applyKoRenames(data, renames) {
+  let moved = 0;
+
+  const rekey = (obj, merge) => {
+    if (!obj || typeof obj !== 'object') return;
+    for (const [oldKo, newKo] of Object.entries(renames)) {
+      if (!(oldKo in obj)) continue;
+      if (newKo in obj) obj[newKo] = merge ? merge(obj[newKo], obj[oldKo]) : obj[newKo];
+      else { obj[newKo] = obj[oldKo]; moved++; }
+      delete obj[oldKo];
+    }
+  };
+
+  rekey(data.srs);
+  rekey(data.harvests, (a, b) => Math.max(a | 0, b | 0));
+
+  // Arrays carry `ko` as a field rather than a key. fishAlbum keys on FISH_DB names, which
+  // neither pass touched.
+  [data.plots, data.attempts].forEach(list => {
+    if (!Array.isArray(list)) return;
+    list.forEach(row => {
+      if (row && renames[row.ko]) { row.ko = renames[row.ko]; moved++; }
+    });
+  });
+
+  return moved;
+}
+
 function migrateSaveData(d) {
   if (!d) return null;
   const data = JSON.parse(JSON.stringify(d));
@@ -4560,38 +4609,21 @@ function migrateSaveData(d) {
   // (어깨가무겁다 -> 어깨가 무겁다). srsData, harvestCounts, plots and attemptLog are all keyed
   // on `ko`, so without this step every one of those words would read as brand new and its
   // review history would be stranded under a spelling nothing looks up any more.
-  //
-  // Idempotent: a key is only moved when the destination is free, so re-running finds
-  // nothing to do. Where both spellings somehow exist, the new one wins as the later write —
-  // except harvest counts, which take the larger of the two rather than discarding a tally.
   if (!data.v || data.v < 7) {
     console.log(`[Save Migration] Respelling ${Object.keys(KO_V7_RENAMES).length} headwords with word-spaces v${data.v || 6} -> v7`);
-    let moved = 0;
-
-    const rekey = (obj, merge) => {
-      if (!obj || typeof obj !== 'object') return;
-      for (const [oldKo, newKo] of Object.entries(KO_V7_RENAMES)) {
-        if (!(oldKo in obj)) continue;
-        if (newKo in obj) obj[newKo] = merge ? merge(obj[newKo], obj[oldKo]) : obj[newKo];
-        else { obj[newKo] = obj[oldKo]; moved++; }
-        delete obj[oldKo];
-      }
-    };
-
-    rekey(data.srs);
-    rekey(data.harvests, (a, b) => Math.max(a | 0, b | 0));
-
-    // Arrays carry `ko` as a field rather than a key.
-    [data.plots, data.attempts].forEach(list => {
-      if (!Array.isArray(list)) return;
-      list.forEach(row => {
-        if (row && KO_V7_RENAMES[row.ko]) { row.ko = KO_V7_RENAMES[row.ko]; moved++; }
-      });
-    });
-
-    // fishAlbum keys on FISH_DB names, which this pass did not touch.
+    const moved = applyKoRenames(data, KO_V7_RENAMES);
     if (moved) console.log(`[Save Migration] Carried ${moved} records onto their new spelling`);
     data.v = 7;
+  }
+
+  // v7 -> v8: three headwords were corrected to the right word — 허리띠를 둘러매다 slings a belt
+  // over one shoulder rather than tightening it, the idiom is 발 벗고 나서다 without the 을, and
+  // 외래어 표기법 spells application 애플리케이션. Same identity problem as v7, so the same move.
+  if (!data.v || data.v < 8) {
+    console.log(`[Save Migration] Correcting ${Object.keys(KO_V8_RENAMES).length} mis-spelled headwords v${data.v || 7} -> v8`);
+    const moved = applyKoRenames(data, KO_V8_RENAMES);
+    if (moved) console.log(`[Save Migration] Carried ${moved} records onto their corrected spelling`);
+    data.v = 8;
   }
 
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
@@ -4648,7 +4680,7 @@ function collectSave(){
     : droppedItemsSave;
   droppedItemsSave = drops;
   return {
-    v: 7,
+    v: 8,
     currencies: playerCurrencies,
     gold: playerCurrencies.coins,
     unlockedLevels,
@@ -12546,11 +12578,12 @@ function renderCookingStage() {
   if (cookingStage === 1) {
     stepDesc.textContent = 'Stage 1/2: Prep Ingredients - Select the correct Korean name!';
     const correctTarget = Object.keys(currentCookingRecipe.req)[0];
-    const choices = [correctTarget];
-    KOREAN_INGREDIENTS.forEach(ing => {
-      if (ing !== correctTarget && choices.length < 4) choices.push(ing);
-    });
-    Phaser.Utils.Array.Shuffle(choices);
+    // Shuffle the pool *before* taking three, not the result after. The old loop walked
+    // KOREAN_INGREDIENTS in declaration order and stopped once it had four, so every prep
+    // question in the game offered the same three decoys — 배추 / 무 / 파 — and the answer
+    // became the odd one out rather than something you had to read the Korean to find.
+    const decoys = shuffleInPlace(KOREAN_INGREDIENTS.filter(ing => ing !== correctTarget)).slice(0, 3);
+    const choices = shuffleInPlace([correctTarget, ...decoys]);
 
     container.innerHTML = `
       <div style="font-size:16px; color:#fff; margin-bottom:12px;">Which ingredient is needed first?</div>

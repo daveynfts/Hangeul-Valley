@@ -1,6 +1,6 @@
 /**
  * test_srs_engine.js — exercises the SM-2 scheduler, per-modality records, and the
- * v4 → v5 → v6 → v7 save migration chain.
+ * v4 → v5 → v6 → v7 → v8 save migration chain.
  *
  * The scheduler is extracted from game.js and run in a bare vm context, so this tests the
  * shipped source rather than a copy. `now` is injected into every call, which is why the
@@ -260,7 +260,7 @@ const legacy = {
   srs: { '아버지': { p2At: null, p3At: null, harvests: 7 }, '바다': { p2At: T0, p3At: null } }
 };
 const out = migrate(legacy);
-eq(out.v, 7, 'save is bumped to v7');
+eq(out.v, 8, 'save is bumped to v8');
 
 // v6 nests each schedule under its modality. The production track is where a v4/v5 entry
 // lands, since the three-touch cycle it was earned through ends on typing.
@@ -291,7 +291,7 @@ assert(new Set(dues).size > 1, 'migrated reviews are staggered, not all dumped o
 
 console.log('\n--- 12b. Migration is idempotent ---');
 const twice = migrate(out);
-eq(JSON.stringify(twice.srs), JSON.stringify(out.srs), 'migrating an already-v7 save changes nothing');
+eq(JSON.stringify(twice.srs), JSON.stringify(out.srs), 'migrating an already-v8 save changes nothing');
 
 const alreadyV6 = migrate({
   v: 6,
@@ -301,7 +301,7 @@ eq(alreadyV6.srs['테스트'].m.type.ivl, 99, 'existing v6 entries are left unto
 
 // A v5 save skipping straight past v5 into v6 must still land on the production track.
 const fromV5 = migrate({ v: 5, srs: { '바나나': { st: 'review', ivl: 12, ease: 2.4, reps: 3, lapses: 1, due: T0, last: T0, step: 0 } } });
-eq(fromV5.v, 7, 'a v5 save migrates all the way to v7');
+eq(fromV5.v, 8, 'a v5 save migrates all the way to v8');
 eq(fromV5.srs['바나나'].m.type.ivl, 12, 'and its schedule moves under the production modality intact');
 eq(fromV5.srs['바나나'].m.type.lapses, 1, 'keeping its lapse count');
 
@@ -332,7 +332,7 @@ const preRespell = {
   attempts: [{ ko: '어깨가무겁다', g: 2, m: 'type', at: T0, ivl: 34, st: 'review' }]
 };
 const resp = migrate(preRespell);
-eq(resp.v, 7, 'save is bumped to v7');
+eq(resp.v, 8, 'save is bumped to v8');
 eq(resp.srs['어깨가무겁다'], undefined, 'the unspaced key is gone');
 assert(!!resp.srs['어깨가 무겁다'], 'and the record now lives under the spaced spelling');
 eq(resp.srs['어깨가 무겁다'].m.type.ivl, 34, 'carrying its interval — 8 reps of history are not thrown away');
@@ -359,6 +359,59 @@ const collide = migrate({
 eq(collide.srs['어깨가 무겁다'].m.type.ivl, 40, 'where both spellings exist the new one is kept');
 eq(collide.srs['어깨가무겁다'], undefined, 'and the old one is dropped');
 eq(collide.harvests['어깨가 무겁다'], 8, 'harvest counts take the larger of the two');
+
+// ── 12d. Migration v7 → v8: headwords corrected to the right word ───────────
+//
+// Three entries were the wrong word rather than the wrong spacing, so unlike v7 these cannot
+// be derived by stripping spaces — which is the whole reason they are a separate step. The
+// case that proves it: a pre-v7 save holds 발을벗고나서다, and stripping the spaces from the
+// final 발 벗고 나서다 gives 발벗고나서다, which would never have matched.
+console.log('\n--- 12d. Save migration (headword corrections) ---');
+const V8 = vm.runInContext('KO_V8_RENAMES', migCtx);
+const V7 = vm.runInContext('KO_V7_RENAMES', migCtx);
+
+eq(Object.keys(V8).length, 3, 'three corrections');
+eq(V8['허리띠를 둘러매다'], '허리띠를 졸라매다', '둘러매다 (to sling over a shoulder) becomes 졸라매다');
+eq(V8['발을 벗고 나서다'], '발 벗고 나서다', 'the idiom loses the 을 it never took');
+eq(V8['어플리케이션'], '애플리케이션', 'application follows 외래어 표기법');
+
+// The v8 keys are post-v7 spellings, which only works because v7 runs first.
+Object.keys(V8).forEach((k) => {
+  const reachable = !k.includes(' ') || Object.values(V7).includes(k);
+  assert(reachable, `v8 key ${k} is reachable — either untouched by v7 or produced by it`);
+});
+// applyKoRenames walks Object.entries, so a table where one entry's target is another's key
+// would rename twice in one pass and the result would depend on declaration order.
+assert(!Object.values(V8).some((target) => target in V8),
+  'no v8 target is also a v8 key, so a single pass cannot chain renames');
+assert(!Object.values(V8).some((target) => Object.values(V7).includes(target)),
+  'no v8 target collides with a v7 target, so the two passes cannot merge unrelated words');
+
+// Full chain from a pre-v7 save: the spacing step and the correction step must compose.
+const chain = migrate({
+  v: 6,
+  srs: {
+    '발을벗고나서다': { m: { type: { st: 'review', ivl: 19, ease: 2.5, reps: 6, lapses: 0, due: T0, last: T0, step: 0 } } },
+    '어플리케이션':   { m: { type: { st: 'review', ivl: 7,  ease: 2.4, reps: 3, lapses: 1, due: T0, last: T0, step: 0 } } }
+  },
+  harvests: { '발을벗고나서다': 6 },
+  plots:    [{ i: 1, ko: '발을벗고나서다', sState: 1, plantedAt: T0 }],
+  attempts: [{ ko: '어플리케이션', g: 1, m: 'type', at: T0, ivl: 7, st: 'review' }]
+});
+eq(chain.v, 8, 'a v6 save lands on v8');
+eq(chain.srs['발을벗고나서다'], undefined, 'the pre-v7 spelling is gone');
+eq(chain.srs['발을 벗고 나서다'], undefined, 'and so is the v7 intermediate');
+assert(!!chain.srs['발 벗고 나서다'], 'the record ends up under the corrected idiom');
+eq(chain.srs['발 벗고 나서다'].m.type.ivl, 19, 'across two renames in one run, with its interval intact');
+eq(chain.srs['발 벗고 나서다'].m.type.reps, 6, 'and its rep count');
+eq(chain.harvests['발 벗고 나서다'], 6, 'harvests follow the whole chain');
+eq(chain.plots[0].ko, '발 벗고 나서다', 'so does a crop growing mid-cycle');
+assert(!!chain.srs['애플리케이션'], 'a word v7 did not touch is still corrected by v8');
+eq(chain.srs['애플리케이션'].m.type.lapses, 1, 'keeping its lapse count');
+eq(chain.attempts[0].ko, '애플리케이션', 'and the review log follows it');
+
+const chainTwice = migrate(chain);
+eq(JSON.stringify(chainTwice.srs), JSON.stringify(chain.srs), 'the whole chain is idempotent');
 
 // ── 13. Modalities schedule independently ───────────────────────────────────
 console.log('\n--- 13. Per-modality independence ---');

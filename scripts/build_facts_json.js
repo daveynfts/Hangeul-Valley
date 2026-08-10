@@ -416,7 +416,7 @@ const LOANWORDS = {
 Object.assign(LOANWORDS, {
   '오토바이': 'auto-bicycle (motorcycle)', '힐링': 'healing',
   '캐리어': 'carrier (suitcase)',          '게스트하우스': 'guest house',
-  '앱': 'app',                             '어플리케이션': 'application',
+  '앱': 'app',                             '애플리케이션': 'application',
   '웹사이트': 'website',                    '업로드': 'upload',
   '스트리밍': 'streaming',                  '데이터베이스': 'database',
   '바이러스': 'virus',                      '콘텐츠': 'contents',

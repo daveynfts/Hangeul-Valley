@@ -294,6 +294,19 @@ Five entries asserted hanja that contradicted their own reading or breakdown:
 | 병원 | 醫院 (reads 의원 — a clinic, or an assembly member) | 病院 |
 | 과일 | 果實 (reads 과실) | native, naturalised — noted as related to 果實 |
 
+Three headwords were the wrong word outright, which no amount of respacing fixes:
+
+| Word | Was | Now | Why |
+|---|---|---|---|
+| tighten one's belt | 허리띠를둘러매다 | 허리띠를 졸라매다 | 둘러매다 is to sling something over a shoulder |
+| step forward eagerly | 발을벗고나서다 | 발 벗고 나서다 | the idiom takes no 을 |
+| application | 어플리케이션 | 애플리케이션 | 외래어 표기법 |
+
+`애플리케이션` also had to be renamed in the generator's `LOANWORDS` map; without that it would
+have fallen out of the `loan` class and coverage would have dropped by one with nothing saying
+so. The two idioms are still classified `unknown` — correcting a headword is not the same as
+curating its origin, and the `IDIOMS` map is the place for that.
+
 Separately, 64 headwords were respelled with the word-spaces Korean orthography requires —
 see the `levels.json` section above. The curated `IDIOMS` and `DISCOURSE` maps key on whole
 headwords, so they moved with them. To stop that pairing drifting again, the generator now
@@ -338,7 +351,7 @@ weather systems, and the economy, quest, inventory and cooking systems.
 ## Saves
 
 State is written to `localStorage` under `hv_save_v2`, and additionally to
-`save_data.json` via the PyWebView bridge on desktop. Save format is **v7**, with the
+`save_data.json` via the PyWebView bridge on desktop. Save format is **v8**, with the
 migration chain in `migrateSaveData()`.
 
 The v4 → v5 step converts the old `{p2At, p3At, harvests}` SRS records into SM-2
@@ -365,6 +378,15 @@ Deriving the pairing from `levelsData` would be self-maintaining but wrong: `ini
 on `DOMContentLoaded` and `levelsData` is not populated until `FarmScene` preloads
 `levels.json`, so the migration would silently find nothing to move.
 
+The v7 → v8 step does the same move for three headwords that were the wrong *word* rather than
+the wrong spacing, and it is a separate step precisely because those cannot be derived. The
+case that settles it: a pre-v7 save holds `발을벗고나서다`, and stripping the spaces from the
+corrected `발 벗고 나서다` gives `발벗고나서다` — which would never have matched. So `KO_V8_RENAMES`
+is an explicit table, keyed on the *post-v7* spellings, which is safe because v7 always runs
+first. Both steps share `applyKoRenames()`; the tests assert that no v8 target is also a v8 key
+(a single pass would otherwise chain renames in declaration order) and that no v8 target
+collides with a v7 one.
+
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
 (currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs, seasonal,
 leaderboards, ground drops) and `persistSave()` is called from ~35 places including
@@ -377,7 +399,7 @@ shutdown, page hide and the explicit 💾 Save button.
 
 ```bash
 node scripts/validate_content.js      # data invariants — the CI gate, 21 checks
-node test_srs_engine.js               # SM-2 scheduler + save migration, 126 assertions
+node test_srs_engine.js               # SM-2 scheduler + save migration, 147 assertions
 node test_r2_shop_vm.js               # shop + plot expansion, 65 assertions
 node test_m2_harness.js               # sprite matrix / palette integrity
 cd admin && npm test                  # admin API, sync, frontend, edge cases — 44 assertions
@@ -455,5 +477,5 @@ Done in earlier passes: English unification, generated `facts.json`, Korean TTS,
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question
 modes, per-modality scheduling, fuzzy answer matching, the progress dashboard, the
 second origin-curation pass that took coverage from 30% to 42%, and the 띄어쓰기 pass —
-space-insensitive grading, 64 headwords respelled, six shared glosses split apart, and two
-new content invariants guarding both.
+space-insensitive grading, 64 headwords respelled, three corrected outright, six shared glosses
+split apart, and two new content invariants guarding all of it.
