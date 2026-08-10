@@ -109,6 +109,14 @@ decomposed jamo grades the same as a Windows one), zero-width characters strippe
 inner whitespace collapsed, trailing punctuation removed. A one-jamo slip is accepted as
 "close enough" with a Hard grade rather than thrown away.
 
+**Word spacing never affects the grade.** 띄어쓰기 is an orthographic convention, not part of
+the word, so `어깨가 무겁다` and `어깨가무겁다` are compared space-stripped and both score exact.
+This was a real defect rather than a nicety: the answer key had every phrase written solid,
+and the jamo tier read a single missing space as a one-edit slip — so a learner who typed the
+idiom the way the dictionary writes it was capped at Hard on every repetition, permanently
+depressing that word's interval. Phrases needing more than one space (`눈코 뜰 새 없이 바쁘다`)
+fell past the one-edit threshold and graded wrong outright.
+
 A word can declare alternates explicitly:
 
 ```json
@@ -204,6 +212,26 @@ is itself material worth reading.
 }
 ```
 
+Two invariants on this file are worth knowing, both enforced by `validate_content.js`:
+
+**Headwords carry the word-spaces standard Korean requires.** A particle attaches to the noun
+before it, but the predicate that follows is a separate word — `어깨가 무겁다`, not `어깨가무겁다`.
+The original data had all 1,500 written solid; 64 have been respelled, and the validator now
+rejects any headword that runs an object particle 을/를 or a subject particle 이/가 into a
+following predicate. Endings that legitimately fuse to a Sino root are excluded, since
+감동적이다 is 感動的 + 이다 and 만족스럽다 is 滿足 + 스럽다 — one word each.
+
+Compound nouns are deliberately left alone. 한글 맞춤법 제49항 permits 전문 용어 to be written
+solid, so 중앙도서관 and 지구온난화 are defensible either way and a rule there would be taste
+rather than correctness. Loanword compounds (`데이터 센터`, `스마트 시티`) are spaced, because
+standard orthography does not write those solid.
+
+**No two headwords share an English gloss.** 미술 and 예술 both read "art", so a four-option
+recognition question could render two identical buttons and score one of them wrong. Six such
+pairs existed; each now has a distinguishing gloss. `buildOptionSet` in `game.js` also dedupes
+on the rendered label, so a future collision cannot reach the screen — but the data invariant
+is what the learner actually needs.
+
 ### `facts.json` — word origins
 
 **Generated. Do not hand-edit.** Keyed by the Korean headword (all 1,500 are unique,
@@ -266,6 +294,22 @@ Five entries asserted hanja that contradicted their own reading or breakdown:
 | 병원 | 醫院 (reads 의원 — a clinic, or an assembly member) | 病院 |
 | 과일 | 果實 (reads 과실) | native, naturalised — noted as related to 果實 |
 
+Separately, 64 headwords were respelled with the word-spaces Korean orthography requires —
+see the `levels.json` section above. The curated `IDIOMS` and `DISCOURSE` maps key on whole
+headwords, so they moved with them. To stop that pairing drifting again, the generator now
+refuses to run when a whole-word map holds a key matching nothing in `levels.json`:
+
+```
+ERROR: curated entries that match no word in levels.json:
+  IDIOMS['어깨가무겁다']
+```
+
+The check covers `MIXED`, `MIXED_LOAN`, `NATIVE_NOTE`, `IDIOMS`, `DISCOURSE` and
+`NATIVE_PREDICATES` only. `SINO` and `LOANWORDS` also hold bare roots for compound matching
+(`데이터`, `센터`), so 53 and 68 of their keys respectively are not standalone words by design.
+Without the check a respelled headword silently falls back to `unknown` and coverage drops
+with nothing to point at.
+
 ---
 
 ## Project layout
@@ -294,7 +338,7 @@ weather systems, and the economy, quest, inventory and cooking systems.
 ## Saves
 
 State is written to `localStorage` under `hv_save_v2`, and additionally to
-`save_data.json` via the PyWebView bridge on desktop. Save format is **v6**, with the
+`save_data.json` via the PyWebView bridge on desktop. Save format is **v7**, with the
 migration chain in `migrateSaveData()`.
 
 The v4 → v5 step converts the old `{p2At, p3At, harvests}` SRS records into SM-2
@@ -309,6 +353,18 @@ on the production track, because the three-touch cycle it was earned through end
 typing. Recognition and listening start unseeded rather than inheriting an interval
 nobody demonstrated — inheriting would claim a skill that was never tested.
 
+The v6 → v7 step carries records onto the 64 respelled headwords. `srsData`, `harvestCounts`,
+`plots` and `attemptLog` all key on `ko`, so without it every respelled word would read as
+brand new and years of review history would sit stranded under a spelling nothing looks up
+any more. Every respelling only *inserts* spaces, so `KO_V7_RESPELLINGS` lists just the new
+forms and the old key is recovered by removing them — there is no old→new table that can fall
+out of sync with itself. Where both spellings somehow exist the new one wins as the later
+write, except harvest counts, which take the larger rather than discarding a tally.
+
+Deriving the pairing from `levelsData` would be self-maintaining but wrong: `initSave()` runs
+on `DOMContentLoaded` and `levelsData` is not populated until `FarmScene` preloads
+`levels.json`, so the migration would silently find nothing to move.
+
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
 (currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs, seasonal,
 leaderboards, ground drops) and `persistSave()` is called from ~35 places including
@@ -320,8 +376,8 @@ shutdown, page hide and the explicit 💾 Save button.
 ## Tests
 
 ```bash
-node scripts/validate_content.js      # data invariants — the CI gate, 19 checks
-node test_srs_engine.js               # SM-2 scheduler + save migration, 93 assertions
+node scripts/validate_content.js      # data invariants — the CI gate, 21 checks
+node test_srs_engine.js               # SM-2 scheduler + save migration, 126 assertions
 node test_r2_shop_vm.js               # shop + plot expansion, 65 assertions
 node test_m2_harness.js               # sprite matrix / palette integrity
 cd admin && npm test                  # admin API, sync, frontend, edge cases — 44 assertions
@@ -330,7 +386,8 @@ cd admin && npm test                  # admin API, sync, frontend, edge cases �
 `validate_content.js` is the one to run before committing data changes. It asserts the
 shape of `levels.json` and `facts.json` (25 levels, 1500 words, no duplicate Korean
 headwords, every word carrying `categoryEn`, every `facts.json` entry matching a real
-word), that no origin class can render blank, that `assets/` has not drifted from the root
+word), that Korean headwords carry their required word-spaces and no two share an English
+gloss, that no origin class can render blank, that `assets/` has not drifted from the root
 copies, and that **no Vietnamese has crept back into the shipped source** — an invariant
 that was established by hand and previously unguarded.
 
@@ -380,7 +437,10 @@ repo root, which is what Vercel serves.
    review log — and the log it needs is now being recorded (see below), so the input is there.
 8. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
    a spelling would collide. All 1,500 headwords are currently unique, making this latent
-   rather than live — a hash of `ko` + part of speech fixes it.
+   rather than live — a hash of `ko` + part of speech fixes it. The v6 → v7 respelling made
+   the cost of the current scheme concrete: correcting a headword's spelling means a save
+   migration, a facts regeneration and a curated-map update, all because the spelling *is*
+   the identity. A stable ID would have made it a one-line data edit.
 
 ### Review history
 
@@ -393,5 +453,7 @@ accuracy and 14-day activity strip.
 
 Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question
-modes, per-modality scheduling, fuzzy answer matching, the progress dashboard, and the
-second origin-curation pass that took coverage from 30% to 42%.
+modes, per-modality scheduling, fuzzy answer matching, the progress dashboard, the
+second origin-curation pass that took coverage from 30% to 42%, and the 띄어쓰기 pass —
+space-insensitive grading, 64 headwords respelled, six shared glosses split apart, and two
+new content invariants guarding both.

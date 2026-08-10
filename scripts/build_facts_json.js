@@ -426,7 +426,7 @@ Object.assign(LOANWORDS, {
   '인테리어': 'interior',                   '데이터': 'data',
   '센터': 'center',                         '프로그램': 'program',
   '프린팅': 'printing',                     '업사이클링': 'upcycling',
-  '소셜미디어': 'social media',             '스마트시티': 'smart city',
+  '소셜 미디어': 'social media',            '스마트 시티': 'smart city',
 });
 
 // 맥주 and 택배 are Sino-Korean, not loanwords — the old list mis-tagged them.
@@ -434,7 +434,7 @@ delete LOANWORDS['맥주'];
 delete LOANWORDS['택배'];
 
 // Native Korean predicates. Listed explicitly rather than inferred from the ending, because
-// several endings attach happily to Sino roots — 만족스럽다 is 滿足 + 스럽다 and 예의바르다
+// several endings attach happily to Sino roots — 만족스럽다 is 滿足 + 스럽다 and 예의 바르다
 // is 禮儀 + 바르다, so a blanket "-스럽다 means native" rule would mislabel them. The `note`
 // records which native ending is doing the work.
 const NATIVE_PREDICATES = {
@@ -474,18 +474,18 @@ const NATIVE_PREDICATES = {
 
 // Idioms. Native by construction, and worth a gloss because the literal reading is the point.
 const IDIOMS = {
-  '배가아프다': 'literally "the belly hurts" — to be envious of someone else\'s good fortune',
-  '어깨가무겁다': 'literally "the shoulders are heavy" — to carry a weighty responsibility',
-  '눈코뜰새없이바쁘다': 'literally "no time to open eyes or nose" — frantically busy',
-  '귀를기울이다': 'literally "to tilt the ear" — to listen closely',
-  '뼈가있다': 'literally "there is a bone in it" — a remark with a hidden barb',
-  '가슴을치다': 'literally "to strike the chest" — to beat one\'s breast in grief',
-  '눈이높다': 'literally "the eyes are high" — to have exacting standards',
-  '콧대가높다': 'literally "the bridge of the nose is high" — haughty',
-  '가슴이치밀다': 'literally "the chest surges" — emotion welling up',
-  '길을찾다': 'literally "to look for the road" — to find one\'s way',
-  '길을잃다': 'literally "to lose the road" — to get lost',
-  '눈길을끌다': 'literally "to pull the gaze" — to catch the eye',
+  '배가 아프다': 'literally "the belly hurts" — to be envious of someone else\'s good fortune',
+  '어깨가 무겁다': 'literally "the shoulders are heavy" — to carry a weighty responsibility',
+  '눈코 뜰 새 없이 바쁘다': 'literally "no time to open eyes or nose" — frantically busy',
+  '귀를 기울이다': 'literally "to tilt the ear" — to listen closely',
+  '뼈가 있다': 'literally "there is a bone in it" — a remark with a hidden barb',
+  '가슴을 치다': 'literally "to strike the chest" — to beat one\'s breast in grief',
+  '눈이 높다': 'literally "the eyes are high" — to have exacting standards',
+  '콧대가 높다': 'literally "the bridge of the nose is high" — haughty',
+  '가슴이 치밀다': 'literally "the chest surges" — emotion welling up',
+  '길을 찾다': 'literally "to look for the road" — to find one\'s way',
+  '길을 잃다': 'literally "to lose the road" — to get lost',
+  '눈길을 끌다': 'literally "to pull the gaze" — to catch the eye',
 };
 
 // Discourse connectives, all native Korean constructions.
@@ -495,11 +495,11 @@ const DISCOURSE = {
   '이에따라': 'native connective — 이에 (to this) + 따라 (following)',
   '잇따라': 'native connective — 잇다 (to join) + 따라',
   '왜냐하면': 'native connective — 왜 (why) + -냐 하면 (if one asks)',
-  '그럼에도불구하고': 'native + Sino — 그럼에도 (even so) + 不拘하고 (without regard)',
+  '그럼에도 불구하고': 'native + Sino — 그럼에도 (even so) + 不拘하고 (without regard)',
   '한편': 'native/Sino — 한 (one) + 便 (side)',
   '한편으로는': '한편 (one side) + -으로는 (as for)',
-  '다른한편으로는': '다른 (other) + 한편 + -으로는',
-  '바꾸어말하면': 'native — 바꾸다 (to change) + 말하다 (to say) + -면',
+  '다른 한편으로는': '다른 (other) + 한편 + -으로는',
+  '바꾸어 말하면': 'native — 바꾸다 (to change) + 말하다 (to say) + -면',
   '말하자면': 'native — 말하다 + -자면 (if one is to say)',
   '들자면': 'native — 들다 (to raise, cite) + -자면',
   '비유하자면': '比喩 (analogy) + 하자면',
@@ -515,7 +515,7 @@ const DISCOURSE = {
 };
 
 // Multi-syllable loanwords that appear inside compounds, longest first, so a compound such
-// as 데이터센터 can be recognised from its parts the way sino-partial handles hanja roots.
+// as 데이터 센터 can be recognised from its parts the way sino-partial handles hanja roots.
 const LOAN_ROOTS_BY_LEN = Object.keys(LOANWORDS)
   .filter(k => k.length >= 2)
   .sort((a, b) => b.length - a.length);
@@ -600,8 +600,9 @@ function classify(ko) {
     };
   }
 
-  // Same idea for loanwords: 데이터센터 is 데이터 + 센터, 백신프로그램 is a Sino root we do
-  // not have plus 프로그램. Multi-syllable only, for the same ambiguity reason.
+  // Same idea for loanwords: 데이터 센터 is 데이터 + 센터, 백신 프로그램 is a Sino root we do
+  // not have plus 프로그램. Multi-syllable only, for the same ambiguity reason. The scan
+  // skips any position that matches nothing, so a word-space between parts costs nothing.
   const loanParts = [];
   for (let i = 0; i < ko.length; ) {
     const r = LOAN_ROOTS_BY_LEN.find(x => ko.startsWith(x, i));
@@ -639,6 +640,29 @@ for (const level of levelsData) {
     facts[ko] = f;
     stats[f.o] = (stats[f.o] || 0) + 1;
   }
+}
+
+// ── Guard: whole-word curation must still match a real headword ──────────────
+//
+// These six maps are keyed on complete words, unlike SINO and LOANWORDS which also hold
+// bare roots for compound matching. So a key here that matches nothing in levels.json is
+// dead curation — the usual cause is a headword being respelled (the 띄어쓰기 pass moved
+// 어깨가무겁다 to 어깨가 무겁다) and the map not being updated with it. The word silently
+// falls back to `unknown` and coverage drops with nothing to point at.
+const WHOLE_WORD_MAPS = {
+  MIXED, MIXED_LOAN, NATIVE_NOTE, IDIOMS, DISCOURSE, NATIVE_PREDICATES,
+};
+const headwords = new Set(
+  levelsData.flatMap(l => (l.words || []).map(w => (w.ko || '').normalize('NFC')))
+);
+const orphaned = Object.entries(WHOLE_WORD_MAPS).flatMap(([name, map]) =>
+  Object.keys(map).filter(k => !headwords.has(k.normalize('NFC'))).map(k => `${name}['${k}']`)
+);
+if (orphaned.length) {
+  console.error('\nERROR: curated entries that match no word in levels.json:');
+  orphaned.forEach(o => console.error(`  ${o}`));
+  console.error('Either the headword was respelled, or the entry is stale. Fix, then re-run.');
+  process.exit(1);
 }
 
 // ── Guard: every emitted origin class must be renderable by the game ─────────

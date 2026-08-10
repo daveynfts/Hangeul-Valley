@@ -4414,6 +4414,46 @@ function syncGoldAlias() {
   gold = playerCurrencies.coins;
 }
 
+// Headwords respelled by the 띄어쓰기 pass. Every one only *inserts* word-spaces, so the
+// pre-v7 key is the same string with them removed — which is why this is a list of the new
+// spellings and not an old -> new table. There is nothing to keep in sync and no way for the
+// two halves to disagree.
+//
+// Deriving the pairing from levelsData instead would be self-maintaining but wrong here:
+// initSave() runs on DOMContentLoaded and levelsData is not populated until FarmScene
+// preloads levels.json, so the migration would silently find nothing to move.
+const KO_V7_RESPELLINGS = [
+  '피로를 풀다', '주사를 맞다', '사진을 찍다',
+  '길을 찾다', '길을 잃다', '먼지를 털다',
+  '오해를 풀다', '귀를 기울이다', '입을 모으다',
+  '손을 씻다', '발을 끊다', '눈길을 끌다',
+  '가슴을 치다', '손을 잡다', '뜸을 들이다',
+  '허리띠를 둘러매다', '발을 벗고 나서다', '인기가 있다',
+  '고집이 세다', '발이 넓다', '귀가 얇다',
+  '눈이 높다', '손이 크다', '입이 가볍다',
+  '콧대가 높다', '배가 아프다', '어깨가 무겁다',
+  '낯이 익다', '낯이 설다', '가슴이 치밀다',
+  '뼈가 있다', '눈코 뜰 새 없이 바쁘다', '식은 죽 먹기',
+  '누워서 떡 먹기', '우물 안 개구리', '티끌 모아 태산',
+  '그림의 떡', '집회의 자유', '언론의 자유',
+  '공공의 안녕', '자전거 타기', '그림 그리기',
+  '숲 가꾸기', '예의 바르다', '그럼에도 불구하고',
+  '바꾸어 말하면', '종합해 보면', '다른 한편으로는',
+  '스트레스 해소', '백신 프로그램', '소셜 미디어',
+  '문자 메시지', '데이터 분석', '데이터 센터',
+  '스마트 시티', '글로벌 시장', '바이오 기술',
+  '3D 프린팅', '친환경 에너지', '그린 에너지',
+  '양자 컴퓨팅', '알고리즘 수식', '패키지 여행',
+  '사물 인터넷',
+];
+
+// { '어깨가무겁다': '어깨가 무겁다', … } — built once, from the list above.
+const KO_V7_RENAMES = KO_V7_RESPELLINGS.reduce((m, spaced) => {
+  const packed = spaced.replace(/\s+/g, '');
+  if (packed !== spaced) m[packed] = spaced;
+  return m;
+}, {});
+
 function migrateSaveData(d) {
   if (!d) return null;
   const data = JSON.parse(JSON.stringify(d));
@@ -4516,6 +4556,44 @@ function migrateSaveData(d) {
     data.v = 6;
   }
 
+  // v6 -> v7: 64 headwords were respelled with the word-spaces standard Korean requires
+  // (어깨가무겁다 -> 어깨가 무겁다). srsData, harvestCounts, plots and attemptLog are all keyed
+  // on `ko`, so without this step every one of those words would read as brand new and its
+  // review history would be stranded under a spelling nothing looks up any more.
+  //
+  // Idempotent: a key is only moved when the destination is free, so re-running finds
+  // nothing to do. Where both spellings somehow exist, the new one wins as the later write —
+  // except harvest counts, which take the larger of the two rather than discarding a tally.
+  if (!data.v || data.v < 7) {
+    console.log(`[Save Migration] Respelling ${Object.keys(KO_V7_RENAMES).length} headwords with word-spaces v${data.v || 6} -> v7`);
+    let moved = 0;
+
+    const rekey = (obj, merge) => {
+      if (!obj || typeof obj !== 'object') return;
+      for (const [oldKo, newKo] of Object.entries(KO_V7_RENAMES)) {
+        if (!(oldKo in obj)) continue;
+        if (newKo in obj) obj[newKo] = merge ? merge(obj[newKo], obj[oldKo]) : obj[newKo];
+        else { obj[newKo] = obj[oldKo]; moved++; }
+        delete obj[oldKo];
+      }
+    };
+
+    rekey(data.srs);
+    rekey(data.harvests, (a, b) => Math.max(a | 0, b | 0));
+
+    // Arrays carry `ko` as a field rather than a key.
+    [data.plots, data.attempts].forEach(list => {
+      if (!Array.isArray(list)) return;
+      list.forEach(row => {
+        if (row && KO_V7_RENAMES[row.ko]) { row.ko = KO_V7_RENAMES[row.ko]; moved++; }
+      });
+    });
+
+    // fishAlbum keys on FISH_DB names, which this pass did not touch.
+    if (moved) console.log(`[Save Migration] Carried ${moved} records onto their new spelling`);
+    data.v = 7;
+  }
+
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
     data.inventory.maxSlots = 20;
   }
@@ -4570,7 +4648,7 @@ function collectSave(){
     : droppedItemsSave;
   droppedItemsSave = drops;
   return {
-    v: 6,
+    v: 7,
     currencies: playerCurrencies,
     gold: playerCurrencies.coins,
     unlockedLevels,
@@ -5062,6 +5140,45 @@ function showHardLockToast(zoneKey) {
   showToast(`🔒 LOCKED: Learn ${check.targetPct}% of ${check.reqName} first! (Current: ${check.pct}%)`, 4000);
 }
 
+// ═══════════════ MULTIPLE-CHOICE OPTION BUILDING ═════════════════════════════
+//
+// A distractor has to differ from the answer in the text the button actually shows, not
+// just in `ko`. Filtering on `ko` alone let two headwords sharing an English gloss land in
+// the same question — 미술 and 예술 both read "art" — so the learner saw two identical
+// buttons and one of them scored wrong. Six such pairs existed in levels.json; they have
+// since been given distinct glosses, but the guard belongs here rather than resting on the
+// data staying clean, and it holds for Korean-labelled options too.
+//
+// Plain Fisher-Yates rather than Phaser.Utils.Array.Shuffle: this runs in the Node test
+// harnesses, which evaluate game.js in a bare vm with no Phaser.
+function shuffleInPlace(arr){
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// Returns the target plus up to `count - 1` distractors, shuffled, no two sharing a label.
+// `pool` may contain the target; it is filtered out. Falls short of `count` only when the
+// pool genuinely has too few distinct labels, which beats padding with a duplicate.
+function buildOptionSet(target, pool, count, labelOf){
+  const seen = new Set([labelOf(target)]);
+  const picked = [];
+  for (const w of shuffleInPlace([...pool])) {
+    if (picked.length >= count - 1) break;
+    if (w.ko === target.ko) continue;
+    const label = labelOf(w);
+    if (seen.has(label)) continue;
+    seen.add(label);
+    picked.push(w);
+  }
+  return shuffleInPlace([target, ...picked]);
+}
+
+const labelEn = w => String(w && w.en || '');
+const labelKo = w => String(w && w.ko || '');
+
 // ═══════════════ R2: SHOP PURCHASE QUIZ GATE ══════════════════════════════════
 let shopQuizState = { targetIdx: null, questions: [], currentQ: 0, correctCount: 0 };
 
@@ -5069,14 +5186,11 @@ function startShopQuizGate(idx) {
   const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
   const pool = allWords.length >= 4 ? allWords : (levelsData[0]?.words || []);
 
-  const shuffled = Phaser.Utils.Array.Shuffle([...pool]);
-  const questions = shuffled.slice(0, 3).map(target => {
-    const distractors = pool.filter(w => w.ko !== target.ko);
-    Phaser.Utils.Array.Shuffle(distractors);
-    const options = [target, ...distractors.slice(0, 3)];
-    Phaser.Utils.Array.Shuffle(options);
-    return { target, options };
-  });
+  // Korean is shown and the buttons carry meanings, so options are deduped on `en`.
+  const questions = shuffleInPlace([...pool]).slice(0, 3).map(target => ({
+    target,
+    options: buildOptionSet(target, pool, 4, labelEn),
+  }));
 
   shopQuizState = { targetIdx: idx, questions, currentQ: 0, correctCount: 0 };
   playerLocked = true;
@@ -5150,14 +5264,10 @@ function startBossGateChallenge(type, questionsCount, onCompleteCallback) {
   const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
   const pool = allWords.length >= 4 ? allWords : (levelsData[0]?.words || []);
 
-  const shuffled = Phaser.Utils.Array.Shuffle([...pool]);
-  const questions = shuffled.slice(0, questionsCount).map(target => {
-    const distractors = pool.filter(w => w.ko !== target.ko);
-    Phaser.Utils.Array.Shuffle(distractors);
-    const options = [target, ...distractors.slice(0, 3)];
-    Phaser.Utils.Array.Shuffle(options);
-    return { target, options };
-  });
+  const questions = shuffleInPlace([...pool]).slice(0, questionsCount).map(target => ({
+    target,
+    options: buildOptionSet(target, pool, 4, labelEn),
+  }));
 
   bossGateState = { type, questions, currentQ: 0, callback: onCompleteCallback };
   playerLocked = true;
@@ -6092,6 +6202,12 @@ function acceptableAnswers(word){
   return [...new Set(expanded.map(normalizeKorean).filter(Boolean))];
 }
 
+// Word spacing (띄어쓰기) is an orthographic convention, not part of the word. Standard
+// Korean writes 어깨가 무겁다 with a space and 눈코 뜰 새 없이 바쁘다 with four; a learner who
+// types either of those correctly must not be scored below one who runs them together.
+// Comparing space-stripped makes the two indistinguishable in both directions.
+const stripSpaces = s => String(s).replace(/\s+/g, '');
+
 // Returns 'exact' | 'close' | 'wrong'. 'close' is a one-jamo slip: the learner clearly
 // knew the word, so it is accepted but graded Hard rather than thrown away.
 function checkAnswer(typed, word){
@@ -6099,6 +6215,12 @@ function checkAnswer(typed, word){
   if (!t) return 'wrong';
   const options = acceptableAnswers(word);
   if (options.includes(t)) return 'exact';
+  // Spacing alone is never a mistake. Without this tier the jamo pass below catches a
+  // single-space difference as a one-edit "slip" and caps the grade at Hard, so writing
+  // an idiom the way the dictionary writes it would permanently depress its interval —
+  // and multi-space phrases fell past the <=1 threshold and graded wrong outright.
+  const ts = stripSpaces(t);
+  if (options.some(opt => stripSpaces(opt) === ts)) return 'exact';
   const tj = toJamo(t);
   // Only forgive a slip on words long enough that one jamo cannot flip the meaning outright.
   for (const opt of options) {
@@ -6187,25 +6309,16 @@ function pickQuizMode(word, phase, plot){
 }
 
 // Distractors are drawn from the same category where possible, so a choice cannot be made
-// by elimination on topic alone.
-function buildChoices(word, count = 4){
+// by elimination on topic alone. `labelOf` is the text the buttons will carry, and it is
+// what options are deduped on — see buildOptionSet.
+function buildChoices(word, count = 4, labelOf = labelEn){
   const pool = unlockedLevels.flatMap(i => levelsData[i]?.words || []).filter(w => w.ko !== word.ko);
   const sameCat = pool.filter(w => wordCategory(w) === wordCategory(word));
-  const from = sameCat.length >= count - 1 ? sameCat : pool;
-  const picked = [];
-  const used = new Set();
-  while (picked.length < count - 1 && used.size < from.length) {
-    const i = Math.floor(Math.random() * from.length);
-    if (used.has(i)) continue;
-    used.add(i);
-    picked.push(from[i]);
-  }
-  const options = [...picked, word];
-  for (let i = options.length - 1; i > 0; i--) {   // Fisher-Yates
-    const j = Math.floor(Math.random() * (i + 1));
-    [options[i], options[j]] = [options[j], options[i]];
-  }
-  return options;
+  // Same category first, but only if it can fill the question with distinct labels. The old
+  // check was `sameCat.length >= count - 1`, which counts entries: a category holding two
+  // words that render the same text would over-promise and leave the question a choice short.
+  const preferred = buildOptionSet(word, sameCat, count, labelOf);
+  return preferred.length === count ? preferred : buildOptionSet(word, pool, count, labelOf);
 }
 
 function applyQuizMode(word, phase, plot){
@@ -6237,15 +6350,17 @@ function applyQuizMode(word, phase, plot){
     speakKorean(word.ko);
   }
 
-  currentChoices = buildChoices(word);
+  // Recognition shows the Korean, so options are meanings. Listening hides it, so options
+  // are Korean spellings — the learner maps sound to spelling. One `labelOf` drives both
+  // the dedupe and the button text, so the two cannot drift apart.
+  const labelOf = currentQuizMode === 'recognise' ? labelEn : labelKo;
+  currentChoices = buildChoices(word, 4, labelOf);
   choices.innerHTML = '';
   currentChoices.forEach(opt => {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'quiz-choice-btn';
-    // Recognition shows the Korean, so options are meanings. Listening hides it, so
-    // options are Korean spellings — the learner maps sound to spelling.
-    b.textContent = currentQuizMode === 'recognise' ? opt.en : opt.ko;
+    b.textContent = labelOf(opt);
     b.onclick = () => answerChoice(opt, b);
     choices.appendChild(b);
   });
@@ -9913,9 +10028,13 @@ class ArcadeScene extends Phaser.Scene {
     this.bossBarrier.setVisible(true);
 
     const targetWord = Phaser.Utils.Array.GetRandom(this.wordPool);
-    const wrongs = this.wordPool.filter(w => w.ko !== targetWord.ko);
-    Phaser.Utils.Array.Shuffle(wrongs);
-    const options = Phaser.Utils.Array.Shuffle([targetWord, wrongs[0]||{ko:'우유'}, wrongs[1]||{ko:'빵'}, wrongs[2]||{ko:'밥'}]);
+    // The banner names the target in English and the orbs carry Korean, so two words sharing
+    // a gloss would put two correct answers on the field. Deduping on `en` prevents it.
+    //
+    // This replaces a `wrongs[0]||{ko:'우유'}` padding chain that guaranteed four orbs: the
+    // pool is a whole unlocked level, never fewer than four words, so the padding only ever
+    // stood to put a word that is not in the pool on screen.
+    const options = buildOptionSet(targetWord, this.wordPool, 4, labelEn);
 
     // Show Spell Prompt Banner
     this.spellBanner = this.add.container(this.W/2, 170).setDepth(40);
@@ -11019,9 +11138,10 @@ class BeeScene extends Phaser.Scene {
     this.targetText.setText(`TARGET: "${currentTarget.en.toUpperCase()}"${hintEmoji}`);
     this.updateHUD();
 
-    const distractors = this.wordList.filter(w => w.ko !== currentTarget.ko);
-    const shuffledDistractors = Phaser.Utils.Array.Shuffle([...distractors]).slice(0, 3);
-    const waveWords = Phaser.Utils.Array.Shuffle([currentTarget, ...shuffledDistractors]);
+    // The target is announced in English and the bees carry Korean, so a decoy sharing the
+    // target's gloss would be an equally correct answer that scores as a miss. Deduping on
+    // `en` keeps every wrong bee genuinely wrong.
+    const waveWords = buildOptionSet(currentTarget, this.wordList, 4, labelEn);
 
     const trajectories = ['linear', 'sine', 'zigzag'];
     const numBees = waveWords.length;
@@ -11572,13 +11692,9 @@ function nextDuelTurn(){
 
   const allWords = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
   const target = Phaser.Utils.Array.GetRandom(allWords);
-  
-  const distractors = allWords.filter(w => w.ko !== target.ko);
-  Phaser.Utils.Array.Shuffle(distractors);
-  const selectedDistractors = distractors.slice(0, 3);
 
-  const options = [target, ...selectedDistractors];
-  Phaser.Utils.Array.Shuffle(options);
+  // The prompt is the Korean and the buttons carry meanings, so dedupe on `en`.
+  const options = buildOptionSet(target, allWords, 4, labelEn);
 
   duelState.currentQuestion = { target, options };
 

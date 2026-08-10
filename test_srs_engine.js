@@ -1,6 +1,6 @@
 /**
  * test_srs_engine.js — exercises the SM-2 scheduler, per-modality records, and the
- * v4 → v5 → v6 save migration chain.
+ * v4 → v5 → v6 → v7 save migration chain.
  *
  * The scheduler is extracted from game.js and run in a bare vm context, so this tests the
  * shipped source rather than a copy. `now` is injected into every call, which is why the
@@ -241,7 +241,9 @@ eq(clampHigh.st, 'review', 'an oversized grade clamps to Easy and stays in revie
 
 // ── 12. Migration v4 → v5 ───────────────────────────────────────────────────
 console.log('\n--- 12. Save migration (v4 harvest counts → SM-2 entries) ---');
-const migSrc = extract('function migrateSaveData(d) {', '\nfunction collectSave', 'migrateSaveData');
+// Starts at the respelling table rather than at the function: the v6 -> v7 step reads
+// KO_V7_RENAMES, which is built at module level just above migrateSaveData.
+const migSrc = extract('const KO_V7_RESPELLINGS = [', '\nfunction collectSave', 'migrateSaveData');
 const migCtx = {
   console,
   srsNewEntry: R('srsNewEntry'), SRS_CFG: CFG, DAY_MS: DAY, _clamp: R('_clamp'),
@@ -258,7 +260,7 @@ const legacy = {
   srs: { '아버지': { p2At: null, p3At: null, harvests: 7 }, '바다': { p2At: T0, p3At: null } }
 };
 const out = migrate(legacy);
-eq(out.v, 6, 'save is bumped to v6');
+eq(out.v, 7, 'save is bumped to v7');
 
 // v6 nests each schedule under its modality. The production track is where a v4/v5 entry
 // lands, since the three-touch cycle it was earned through ends on typing.
@@ -289,7 +291,7 @@ assert(new Set(dues).size > 1, 'migrated reviews are staggered, not all dumped o
 
 console.log('\n--- 12b. Migration is idempotent ---');
 const twice = migrate(out);
-eq(JSON.stringify(twice.srs), JSON.stringify(out.srs), 'migrating an already-v6 save changes nothing');
+eq(JSON.stringify(twice.srs), JSON.stringify(out.srs), 'migrating an already-v7 save changes nothing');
 
 const alreadyV6 = migrate({
   v: 6,
@@ -299,9 +301,64 @@ eq(alreadyV6.srs['테스트'].m.type.ivl, 99, 'existing v6 entries are left unto
 
 // A v5 save skipping straight past v5 into v6 must still land on the production track.
 const fromV5 = migrate({ v: 5, srs: { '바나나': { st: 'review', ivl: 12, ease: 2.4, reps: 3, lapses: 1, due: T0, last: T0, step: 0 } } });
-eq(fromV5.v, 6, 'a v5 save migrates to v6');
+eq(fromV5.v, 7, 'a v5 save migrates all the way to v7');
 eq(fromV5.srs['바나나'].m.type.ivl, 12, 'and its schedule moves under the production modality intact');
 eq(fromV5.srs['바나나'].m.type.lapses, 1, 'keeping its lapse count');
+
+// ── 12c. Migration v6 → v7: headwords respelled with word-spaces ────────────
+//
+// 64 headwords gained the spaces standard Korean requires (어깨가무겁다 -> 어깨가 무겁다).
+// srsData, harvests, plots and attemptLog all key on `ko`, so a save written before the
+// respelling must be carried across or every one of those words reads as brand new.
+console.log('\n--- 12c. Save migration (headword respelling) ---');
+const RENAMES = vm.runInContext('KO_V7_RENAMES', migCtx);
+const RESPELLINGS = vm.runInContext('KO_V7_RESPELLINGS', migCtx);
+
+eq(Object.keys(RENAMES).length, RESPELLINGS.length, 'every respelling yields a rename pair');
+assert(RESPELLINGS.every(s => s.includes(' ')), 'every respelling actually contains a space');
+assert(Object.entries(RENAMES).every(([packed, spaced]) => spaced.replace(/\s+/g, '') === packed),
+  'each old key is exactly its new spelling with the spaces removed');
+assert(!!RENAMES['어깨가무겁다'], 'the idiom that motivated the pass is in the table');
+eq(RENAMES['어깨가무겁다'], '어깨가 무겁다', 'and maps to the spaced form');
+
+const preRespell = {
+  v: 6,
+  srs: {
+    '어깨가무겁다': { m: { type: { st: 'review', ivl: 34, ease: 2.6, reps: 8, lapses: 1, due: T0, last: T0, step: 0 } } },
+    '아버지':       { m: { type: { st: 'review', ivl: 5,  ease: 2.5, reps: 2, lapses: 0, due: T0, last: T0, step: 0 } } }
+  },
+  harvests: { '어깨가무겁다': 8, '아버지': 2 },
+  plots:    [{ i: 0, ko: '어깨가무겁다', sState: 2, plantedAt: T0 }],
+  attempts: [{ ko: '어깨가무겁다', g: 2, m: 'type', at: T0, ivl: 34, st: 'review' }]
+};
+const resp = migrate(preRespell);
+eq(resp.v, 7, 'save is bumped to v7');
+eq(resp.srs['어깨가무겁다'], undefined, 'the unspaced key is gone');
+assert(!!resp.srs['어깨가 무겁다'], 'and the record now lives under the spaced spelling');
+eq(resp.srs['어깨가 무겁다'].m.type.ivl, 34, 'carrying its interval — 8 reps of history are not thrown away');
+eq(resp.srs['어깨가 무겁다'].m.type.reps, 8, 'and its rep count');
+eq(resp.srs['아버지'].m.type.ivl, 5, 'words that were not respelled are untouched');
+eq(resp.harvests['어깨가 무겁다'], 8, 'harvest counts move too');
+eq(resp.harvests['어깨가무겁다'], undefined, 'leaving nothing behind');
+eq(resp.plots[0].ko, '어깨가 무겁다', 'a crop growing mid-cycle is renamed in place, not orphaned');
+eq(resp.attempts[0].ko, '어깨가 무겁다', 'and the review log keeps pointing at the same word');
+
+const respTwice = migrate(resp);
+eq(JSON.stringify(respTwice.srs), JSON.stringify(resp.srs), 'running the respelling again is a no-op');
+
+// Both spellings present at once: the new one is the later write and wins, but a harvest
+// tally is a count and takes the larger rather than discarding one side.
+const collide = migrate({
+  v: 6,
+  srs: {
+    '어깨가무겁다':  { m: { type: { st: 'review', ivl: 3,  ease: 2.5, reps: 1, lapses: 0, due: T0, last: T0, step: 0 } } },
+    '어깨가 무겁다': { m: { type: { st: 'review', ivl: 40, ease: 2.5, reps: 9, lapses: 0, due: T0, last: T0, step: 0 } } }
+  },
+  harvests: { '어깨가무겁다': 8, '어깨가 무겁다': 2 }
+});
+eq(collide.srs['어깨가 무겁다'].m.type.ivl, 40, 'where both spellings exist the new one is kept');
+eq(collide.srs['어깨가무겁다'], undefined, 'and the old one is dropped');
+eq(collide.harvests['어깨가 무겁다'], 8, 'harvest counts take the larger of the two');
 
 // ── 13. Modalities schedule independently ───────────────────────────────────
 console.log('\n--- 13. Per-modality independence ---');

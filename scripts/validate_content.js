@@ -89,6 +89,45 @@ const notKorean = words
   .map((w) => w.ko);
 check('every ko is Hangul or a Latin initialism', notKorean.length === 0, notKorean.slice(0, 5).join(', '));
 
+// Korean word spacing (띄어쓰기). A particle attaches to the noun before it, but the verb or
+// adjective that follows is a separate word — 어깨가 무겁다, not 어깨가무겁다. The original data
+// had all 1500 headwords written solid, so learners typing the dictionary spelling were
+// graded down, and the answer shown back to them taught the wrong orthography.
+//
+// This catches the mechanically detectable class: an object particle 을/를 sitting inside the
+// word, or a subject particle 이/가 inside a word that ends in the predicate 다. Verb and
+// adjective endings that legitimately fuse to a Sino root are excluded — 감동적이다 is 感動的 +
+// 이다 and 만족스럽다 is 滿足 + 스럽다, one word each.
+//
+// Compound nouns are deliberately not checked. 한글 맞춤법 제49항 permits 전문 용어 to be written
+// solid, so 중앙도서관 and 지구온난화 are defensible either way and a rule here would be taste.
+const FUSED_PREDICATE_ENDING = /(적이다|스럽다|롭다|하다|되다|시키다)$/;
+const unspacedPhrases = words
+  .map((w) => String(w.ko || '').normalize('NFC'))
+  .filter((ko) => {
+    if (ko.length < 4 || /\s/.test(ko)) return false;
+    if (/[을를]/.test(ko.slice(1, -1))) return true;
+    return /[이가]/.test(ko.slice(1, -2)) && ko.endsWith('다') && !FUSED_PREDICATE_ENDING.test(ko);
+  });
+check('no headword runs a particle into the following predicate', unspacedPhrases.length === 0,
+  `${unspacedPhrases.length} need a space, e.g. ${unspacedPhrases.slice(0, 5).join(', ')}`);
+
+// Two headwords sharing an English gloss make a four-option recognition question
+// unanswerable: 미술 and 예술 both read "art", so the learner sees two identical buttons and
+// one of them scores wrong. buildOptionSet in game.js now dedupes on the rendered label so a
+// collision cannot reach the screen, but distinct glosses are what the learner actually needs.
+const byGloss = new Map();
+words.forEach((w) => {
+  const g = String(w.en || '').trim().toLowerCase();
+  if (!g) return;
+  byGloss.set(g, [...(byGloss.get(g) || []), w.ko]);
+});
+const sharedGlosses = [...byGloss.entries()]
+  .filter(([, kos]) => kos.length > 1)
+  .map(([g, kos]) => `"${g}" = ${kos.join(' / ')}`);
+check('no two headwords share an English gloss', sharedGlosses.length === 0,
+  sharedGlosses.slice(0, 5).join('\n      '));
+
 const viInData = [];
 words.forEach((w) => {
   ['en', 'categoryEn'].forEach((f) => {
