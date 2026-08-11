@@ -301,7 +301,7 @@ To add or correct an origin, edit the curated `SINO` / `MIXED` / `LOANWORDS` /
 `NATIVE_SET` / `NATIVE_NOTE` maps in `scripts/build_facts_json.js` and re-run it. The admin
 panel shows origins read-only and its write endpoints return `409` for this reason.
 
-**Coverage is 914 / 1500 (61%), with real hanja for 420 words.** The remaining 586 are
+**Coverage is 1,167 / 1500 (78%), with real hanja for 606 words.** The remaining 333 are
 classified `unknown`, and the UI shows pronunciation for them rather than inventing an
 origin. That gap is deliberate: the original data asserted "Native Korean (고유어)" for
 ~1,090 words with no evidence, mislabelling plenty of Sino-Korean vocabulary (건강검진,
@@ -314,6 +314,15 @@ there is no hanja to look for. It is a checked list and not a default, which is 
 difference from the inherited data. The trap is the everyday word that *looks* native and is
 not: 내일 (來日), 점심 (點心), 양말 (洋襪), 지갑 (紙匣), 시계 (時計), 안경 (眼鏡), 감기 (感氣),
 항상 (恒常), 냉면 (冷麵), 반찬 (飯饌) all live in `SINO`.
+
+That trap is not hypothetical. 침대 (寢臺), 책상 (冊床), 식탁 (食卓), 전세 (傳貰), 월세 (月貰)
+and 지인 (知人) were all drafted into `NATIVE_SET` during the fourth pass and pulled back out on
+review. A word being everyday furniture vocabulary says nothing about whether it has hanja.
+
+**Where a word is genuinely contested it stays `unknown`.** 구두 most likely reached Korean
+through Japanese くつ, and "probably a loanword" is not a thing to put on a flashcard. Native +
+Sino compounds like 옷장, 게시글, 민속놀이 and 댓글 are left alone for the same reason: they fit
+neither bucket cleanly, and forcing them would teach something false.
 
 Origin classes: `native`, `sino`, `sino-partial` (compound built on a known root),
 `sino-verb`, `sino-passive`, `sino-adj`, `sino-noun`, `mixed`, `mixed-loan`, `loan`,
@@ -545,7 +554,7 @@ repo root, which is what Vercel serves.
 
 ## Roadmap
 
-1. **Curate the remaining 586 word origins.** Coverage is 61%. The cascade method is spent —
+1. **Curate the remaining 333 word origins.** Coverage is 78%. The cascade method is spent —
    see "How curation is targeted" — so this is per-word work now, best done a semantic
    category at a time so each word's English gloss is available as evidence. The admin
    dashboard's **Not Curated** list is the working queue.
@@ -581,7 +590,7 @@ accuracy and 14-day activity strip.
 Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question
 modes, per-modality scheduling, fuzzy answer matching, the progress dashboard, the
-origin-curation passes that took coverage from 30% to 61%, the 띄어쓰기 pass —
+origin-curation passes that took coverage from 30% to 78%, the 띄어쓰기 pass —
 space-insensitive grading, 64 headwords respelled, three corrected outright, six shared glosses
 split apart — closing the three paths that printed the answer during graded recall, and CI,
 which meant first making the two unrunnable suites runnable.
