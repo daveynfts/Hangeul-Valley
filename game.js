@@ -5750,6 +5750,21 @@ const markCompleted = i=>{ const c=getCompleted(); if(!c.includes(i)){c.push(i);
 const $=id=>document.getElementById(id);
 const lsOverlay=$('level-select-overlay'), lsGrid=$('ls-grid');
 const hud=$('hud'), pbWrap=$('progress-bar-wrap'), tipEl=$('controls-tip');
+
+// Publish the HUD's measured bottom edge so anything anchored under it can follow. The HUD is
+// `flex-wrap: wrap` and its contents change as buttons unlock and pixel fonts finish loading,
+// so its height is not a constant — and the seasonal banner used to assume it was, sitting at
+// a hardcoded 66px that landed on the button row whenever the bar wrapped to two lines.
+// ResizeObserver catches all three causes; a plain resize listener would miss the other two.
+if (typeof ResizeObserver === 'function' && hud) {
+  const publishHudBottom = () => {
+    const r = hud.getBoundingClientRect();
+    // Zero while the HUD is display:none, in which case leave the last good value alone.
+    if (r.height > 0) document.documentElement.style.setProperty('--hud-bottom', `${Math.round(r.bottom)}px`);
+  };
+  new ResizeObserver(publishHudBottom).observe(hud);
+  publishHudBottom();
+}
 const hudLevelEl=$('hud-level'), hudProgressEl=$('hud-progress'), pbFill=$('progress-bar-fill');
 const quizBackdrop=$('quiz-backdrop'), answerInput=$('answer-input');
 const feedbackText=$('feedback-text'), submitBtn=$('submit-btn'), cancelBtn=$('cancel-btn');
@@ -7398,7 +7413,17 @@ class FarmScene extends Phaser.Scene {
     // ── RESIZE HANDLER ─ update camera & world bounds on window resize ──
     this.scale.on('resize', (gameSize) => {
       const nw = gameSize.width, nh = gameSize.height;
-      this.cameras.main.setBounds(0, 0, Math.max(nw, W), Math.max(nh, H));
+      const bw = Math.max(nw, W), bh = Math.max(nh, H);
+      this.cameras.main.setBounds(0, 0, bw, bh);
+
+      // Grow the ground to match. Without this the camera bounds widened over bare canvas —
+      // the resize handler moved the walls but never laid any floor.
+      this._tileGround(bw, bh);
+
+      // The parallax strips are sized from the creation width, so they stop short too.
+      if (this.bgMountains) { this.bgMountains.setSize(bw * 2, 128); this.bgMountains.x = bw / 2; }
+      if (this.bgHills)     { this.bgHills.setSize(bw * 2, 128);     this.bgHills.x = bw / 2; }
+
       // Update weather/lighting overlays to cover new size
       if (this.lighting) {
         this.lighting.width = nw;
@@ -8083,6 +8108,39 @@ class FarmScene extends Phaser.Scene {
   }
 
 
+  // Lay grass out to cover W x H, adding only the tiles that are not there yet.
+  //
+  // This used to be an inline double loop in _drawWorld, run once with the window size at
+  // scene creation. Phaser is in RESIZE mode so the canvas grows with the window, but the
+  // ground did not: enlarging the window — or simply having the scene start before the window
+  // settled — left bare background beyond the original extent. At 1915x907 with a world tiled
+  // for 576x768 that was 1339px of empty canvas down the right-hand side.
+  //
+  // The variant is picked from the tile's own coordinates rather than a running RNG, so a
+  // tile always looks the same however many passes it took to get there. A sequential
+  // generator would have made the pattern depend on resize history.
+  _tileGround(W, H){
+    const cols = Math.ceil((W + TILE) / TILE);
+    const rows = Math.ceil((H + TILE) / TILE);
+    if (cols <= this._groundCols && rows <= this._groundRows) return 0;
+
+    let added = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (r < this._groundRows && c < this._groundCols) continue;   // already laid
+        // Cheap positional hash: deterministic per tile, and mixed enough that the four
+        // variants do not fall into visible diagonal stripes.
+        const v = ((c * 73856093) ^ (r * 19349663)) >>> 0;
+        this.add.image(c * TILE + TILE / 2, r * TILE + TILE / 2, 'grs' + (v % 4))
+          .setDisplaySize(TILE, TILE).setDepth(0);
+        added++;
+      }
+    }
+    this._groundCols = Math.max(this._groundCols, cols);
+    this._groundRows = Math.max(this._groundRows, rows);
+    return added;
+  }
+
   // ── WORLD ──────────────────────────────────────────────────────────────────
   _drawWorld(W, H){
     if (this.textures && this.textures.exists('bg_distant_mountains')) {
@@ -8094,11 +8152,10 @@ class FarmScene extends Phaser.Scene {
         .setDepth(-9).setScrollFactor(0.3, 0.15);
     }
 
-    const rng = new Phaser.Math.RandomDataGenerator(['sv16']);
-    for(let r=0; r*TILE<=H+TILE; r++) for(let cc=0; cc*TILE<=W+TILE; cc++){
-      this.add.image(cc*TILE+TILE/2, r*TILE+TILE/2, 'grs'+rng.between(0,3))
-        .setDisplaySize(TILE,TILE).setDepth(0);
-    }
+    this._groundCols = 0;
+    this._groundRows = 0;
+    this._tileGround(W, H);
+
     const fW=PLOT_COLS*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP, fH=5*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP;
     this.farm = {x:W/2-fW/2, y:H/2-fH/2-30, w:fW, h:fH};
 

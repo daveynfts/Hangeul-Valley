@@ -60,6 +60,22 @@ cd admin && npm install && npm start
 Keyboard only — there are no touch controls yet, so the farm scene is not playable on
 a phone.
 
+### On-screen furniture
+
+`#hud` is `flex-wrap: wrap`, so its height changes with the window, with which buttons have
+unlocked, and with whether the pixel fonts have finished loading. Anything anchored beneath it
+therefore cannot use a fixed offset: a ResizeObserver in `game.js` publishes the bar's measured
+bottom edge as `--hud-bottom`, and `#event-banner` positions itself with
+`top: calc(var(--hud-bottom) + 8px)`. That is a contract across the two files — moving the
+observer without updating the CSS fallback puts the banner back on top of the buttons.
+
+The level progress bar is a child of `#hud` rather than a floating element. It was
+`position: fixed; top: 10px; right: 14px`, which is exactly where the HUD sits and at the same
+z-index, so it covered the right-hand end of the bar — 249×44px of the button row at 1915 wide.
+
+Layer order, lowest first: game canvas → HUD (100) → seasonal banner (150) → modals (200+).
+Every modal covers the viewport, so anything below 200 is hidden while one is open.
+
 ---
 
 ## How the learning loop works
