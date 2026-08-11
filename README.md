@@ -298,15 +298,22 @@ Romanization, syllable count and 받침 are derived from the Hangul at render ti
 they are deliberately not stored.
 
 To add or correct an origin, edit the curated `SINO` / `MIXED` / `LOANWORDS` /
-`NATIVE_NOTE` maps in `scripts/build_facts_json.js` and re-run it. The admin panel
-shows origins read-only and its write endpoints return `409` for this reason.
+`NATIVE_SET` / `NATIVE_NOTE` maps in `scripts/build_facts_json.js` and re-run it. The admin
+panel shows origins read-only and its write endpoints return `409` for this reason.
 
-**Coverage is 636 / 1500 (42%), with real hanja for 279 words.** The remaining 864 are
+**Coverage is 914 / 1500 (61%), with real hanja for 420 words.** The remaining 586 are
 classified `unknown`, and the UI shows pronunciation for them rather than inventing an
 origin. That gap is deliberate: the original data asserted "Native Korean (고유어)" for
 ~1,090 words with no evidence, mislabelling plenty of Sino-Korean vocabulary (건강검진,
 환경오염, 기술혁신). Unknown stays unknown. The admin dashboard's **Not Curated** list is
 the backlog.
+
+`NATIVE_SET` is a plain list of headwords that are native with nothing more to say — the
+panel renders "Native Korean (고유어)", which is the useful fact, because it tells the learner
+there is no hanja to look for. It is a checked list and not a default, which is the whole
+difference from the inherited data. The trap is the everyday word that *looks* native and is
+not: 내일 (來日), 점심 (點心), 양말 (洋襪), 지갑 (紙匣), 시계 (時計), 안경 (眼鏡), 감기 (感氣),
+항상 (恒常), 냉면 (冷麵), 반찬 (飯饌) all live in `SINO`.
 
 Origin classes: `native`, `sino`, `sino-partial` (compound built on a known root),
 `sino-verb`, `sino-passive`, `sino-adj`, `sino-noun`, `mixed`, `mixed-loan`, `loan`,
@@ -319,6 +326,14 @@ Roots are chosen by cascade potential rather than alphabetically. Because
 curating 실업 (失業) also resolves 실업률, 청년실업 and 실업수당. Measuring which roots
 appear inside the most still-uncurated words is what moved coverage from 30% to 42% for
 about 35 new root entries.
+
+**That well is now dry.** Measuring again before the third pass found only four multi-syllable
+roots left inside three or more uncurated words, and they were native (가락, 놀이) or a verb
+ending (하다). The 586 that remain are mostly standalone two-syllable words — 465 of the 864 at
+the start of that pass — so there is no leverage left to find and curation is now one word at a
+time. The third pass therefore worked by semantic category instead, which is what makes the
+glosses usable as evidence: 눈 is native as "eye", 열 is 熱 as "fever" and not the native "ten",
+시 is 詩 as "poem" and not 時 or 市. Without reading the gloss those are coin flips.
 
 Single-syllable hanja is never inferred: one Hangul reading maps to many characters
 (차 = 茶 / 車 / 差 / 次), so a word whose parts cannot be vouched for stays `unknown`.
@@ -530,9 +545,9 @@ repo root, which is what Vercel serves.
 
 ## Roadmap
 
-1. **Curate the remaining 864 word origins.** Coverage is 42%; the next lift comes from
-   the same cascade method — measure which roots appear inside the most uncurated
-   compounds and curate those, rather than working through the list in order. The admin
+1. **Curate the remaining 586 word origins.** Coverage is 61%. The cascade method is spent —
+   see "How curation is targeted" — so this is per-word work now, best done a semantic
+   category at a time so each word's English gloss is available as evidence. The admin
    dashboard's **Not Curated** list is the working queue.
 2. **PWA install and offline.** The touch controls have landed, so the farm is playable on a
    phone; installability is what is left. It needs Phaser vendored into the repo first — the
@@ -566,7 +581,7 @@ accuracy and 14-day activity strip.
 Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question
 modes, per-modality scheduling, fuzzy answer matching, the progress dashboard, the
-second origin-curation pass that took coverage from 30% to 42%, the 띄어쓰기 pass —
+origin-curation passes that took coverage from 30% to 61%, the 띄어쓰기 pass —
 space-insensitive grading, 64 headwords respelled, three corrected outright, six shared glosses
 split apart — closing the three paths that printed the answer during graded recall, and CI,
 which meant first making the two unrunnable suites runnable.
