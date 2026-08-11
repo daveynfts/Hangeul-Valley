@@ -80,7 +80,7 @@ new ──plant──> learning ──30s──> ──90s──> review ──1
 |---|---|---|
 | 🌱 1 — Plant | **Korean shown**, pick its meaning from four options | Recognition. Teaches the pairing; you cannot be asked to produce a word you have never seen. |
 | 💧 2 — Water | Type the Korean (or pick it by ear, if a Korean voice is installed) | Recall with support |
-| 🍎 3 — Harvest | Type the Korean, with origin and pronunciation shown | Production recall → graduates the word |
+| 🍎 3 — Harvest | Type the Korean, with a recall scaffold shown | Production recall → graduates the word |
 
 ### Reviewing — one touch, on schedule
 
@@ -130,6 +130,25 @@ delimiter split still works for existing entries.
 Progressive hints are priced to keep them a real decision: romanization is free,
 initial consonants (초성) cost 5 coins, hearing the word costs 10, and the word's
 origin costs 10. Using any of them caps the grade at Hard.
+
+**The scaffold above the input must not contain the answer.** Phase 3 is what sets the word's
+interval, so `renderRecallScaffold()` reports only how many syllables the word has and whether
+it ends on a 받침 — never the syllables themselves, and never which 받침. Everything that spells
+the word out stays behind the buttons above, which are priced and which cap the grade.
+
+Three separate paths were handing the answer over for free, none of them setting `paidHints`,
+so a word could be typed straight off the screen and still graded Easy:
+
+| Path | Showed | Now |
+|---|---|---|
+| `renderStructure()` in the phase-3 panel | `[o-ppa] · 2 syllables (오 · 빠) · final syllable 빠 …` | syllable count and 받침 presence only |
+| `fact.origin` in the phase-3 panel | `父 (부) “father” + 母 (모) “mother”` — the reading of 부모, and the same string the 10-coin button sells | topical note only |
+| `getRoman()` behind the free 🔤 button | a 36-word table falling back to `\|\| ko`, so 1,485 of 1,500 words printed the Korean itself | Revised Romanization derived from the Hangul |
+
+Retiring that table surfaced a fourth bug: its one entry that disagreed with the derived form,
+병원 → `byeong-won`, was the correct one. `RR_JUNGSEONG` romanized ㅝ as `weo`; Revised
+Romanization spells it `wo`. It was the only one of the 21 vowels that did not match the
+standard, and it reached 47 words.
 
 ### Each skill schedules separately
 

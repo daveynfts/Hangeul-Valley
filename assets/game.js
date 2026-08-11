@@ -6098,18 +6098,16 @@ function getChosung(str){
   return res;
 }
 
-const ROMAN_MAP = {
-  '사과':'sa-gwa', '우유':'u-yu', '빵':'ppang', '밥':'bap', '생선':'saeng-seon',
-  '고기':'go-gi', '계란':'gye-ran', '채소':'chae-so', '과일':'gwa-il', '커피':'keo-pi',
-  '차':'cha', '주스':'ju-seu', '태양':'tae-yang', '달':'dal', '별':'byeol',
-  '하늘':'ha-neul', '산':'san', '바다':'ba-da', '강':'gang', '나무':'na-mu',
-  '꽃':'kkot', '눈':'nun', '코':'ko', '입':'ip', '손':'son',
-  '발':'bal', '머리':'meo-ri', '마음':'ma-eum', '고양이':'go-yang-i', '개':'gae',
-  '새':'sae', '학교':'hak-gyo', '병원':'byeong-won', '시장':'si-jang', '전화':'jeon-hwa',
-  '물':'mul'
-};
+// Was a hardcoded 36-word ROMAN_MAP falling back to `|| ko` — so for the other 1,485 words the
+// free 🔤 Romanization hint printed the Korean itself. In phase 3 that is the answer, handed
+// over for nothing, on the question whose result sets the word's interval.
+//
+// getHangulRomanization derives Revised Romanization from the Hangul for any word, so the
+// table was redundant as well as harmful: 35 of its 36 entries matched it exactly, and the
+// one that did not (병원) was right about ㅝ, which is what turned up the RR_JUNGSEONG error
+// fixed above. With that corrected the map has nothing left to say.
 function getRoman(ko){
-  return ROMAN_MAP[ko] || ko;
+  return getHangulRomanization(ko);
 }
 
 function revealQuizHint(tier){
@@ -6120,7 +6118,11 @@ function revealQuizHint(tier){
   
   if(tier === 'roman'){
     const rom = getRoman(currentWord.ko);
-    box.innerHTML = `🔤 <b>Romanization:</b> <span style="color:#67e8f9; font-weight:bold">[${rom}]</span>`;
+    // SNS and PD are Latin initialisms borrowed whole, so they romanize to themselves and
+    // "romanization" would just be the answer. Say so rather than print it.
+    box.innerHTML = rom === currentWord.ko
+      ? `🔤 <b>Romanization:</b> <span style="color:#94a3b8">this word is already written in Latin letters — nothing to transliterate.</span>`
+      : `🔤 <b>Romanization:</b> <span style="color:#67e8f9; font-weight:bold">[${rom}]</span>`;
   } else if(tier === 'chosung'){
     if(!spendCoins(5)){ showToast('Need 5 Coins 🪙 for Chosung hint!'); return; }
     currentQuizMeta.paidHints++;
@@ -6295,13 +6297,14 @@ function openQuiz(word, plot, phase=1){
   hintCategory.textContent  = wordCategory(word);
   enWordDisplay.textContent = word.en;
   quizLevelTag.textContent  = 'P'+phase+'/3';
-  // Phase 3: populate fun-fact recall hints
+  // Phase 3: a recall scaffold, not the answer. `structure` and `origin` both spell the word
+  // out — see renderRecallScaffold — so the panel carries the redacted shape and the topical
+  // note, and the two revealing fields stay behind their own hint buttons.
   const ffText=$('quiz-funfact-text'), ffCulture=$('quiz-funfact-culture');
   if(ffText && ffCulture){
     if(phase===3){
-      const fact = getFunFact(word);
-      ffText.textContent    = fact.structure || '';
-      ffCulture.textContent = fact.origin || fact.hint || '';
+      ffText.textContent    = renderRecallScaffold(word.ko || '');
+      ffCulture.textContent = getFunFact(word).hint || '';
     } else {
       ffText.textContent = ''; ffCulture.textContent = '';
     }
@@ -6727,7 +6730,9 @@ loadFacts();
 
 // ── Hangul decomposition (Revised Romanization) ──────────────────────────────
 const RR_CHOSEONG  = ['g','kk','n','d','tt','r','m','b','pp','s','ss','','j','jj','ch','k','t','p','h'];
-const RR_JUNGSEONG = ['a','ae','ya','yae','eo','e','yeo','ye','o','wa','wae','oe','yo','u','weo','we','wi','yu','eu','ui','i'];
+// ㅝ is `wo` in Revised Romanization, not `weo` — it was the one vowel of the 21 that did not
+// match the standard, and it reached 47 words (병원 romanized as byeong-weon).
+const RR_JUNGSEONG = ['a','ae','ya','yae','eo','e','yeo','ye','o','wa','wae','oe','yo','u','wo','we','wi','yu','eu','ui','i'];
 const RR_JONGSEONG = ['','k','k','ks','n','nj','nh','t','l','lg','lm','lb','ls','lt','lp','lh','m','p','bs','t','t','ng','t','t','k','t','p','t'];
 
 function decomposeHangulWord(str) {
@@ -6836,6 +6841,32 @@ function renderStructure(ko) {
     ? `final syllable ${last.char} closes on a 받침 (-${last.final})`
     : `final syllable ${last.char} is open, no 받침`);
   return bits.join(' · ');
+}
+
+// The same shape as renderStructure, minus anything that spells the word out. Phase 3 is
+// graded production recall — what the player types sets the word's interval — so the panel
+// above the input box must not contain the answer.
+//
+// renderStructure prints the syllables as Hangul (오 · 빠) and leads with the romanization,
+// and the phase-3 panel was additionally printing the curated origin, which for a Sino word
+// gives the reading character by character (父 (부) “father” + 母 (모) “mother” — that is 부모).
+// All three were free, and none of them set `paidHints`, so the answer stood above the input
+// and the attempt could still be graded Easy. That does not just make the question trivial:
+// it feeds the scheduler a confident recall that never happened, and the word gets a long
+// interval on the strength of it.
+//
+// Romanization and origin are not withheld, they are behind the buttons that already exist
+// and are already priced — free and 10 coins respectively. This keeps only what neither sells:
+// how long the word is, and whether it ends closed. The batchim is reported as present or
+// absent without naming the consonant, which is what the 5-coin 초성 hint is for.
+function renderRecallScaffold(ko) {
+  const syl = decomposeHangulWord(ko);
+  const n = syl.length;
+  if (!n) return '';
+  return [
+    `${n} syllable${n === 1 ? '' : 's'}`,
+    syl[n - 1].hasBatchim ? 'ends on a 받침' : 'ends open, no 받침',
+  ].join(' · ');
 }
 
 // English topical note, used when a word has no curated origin.

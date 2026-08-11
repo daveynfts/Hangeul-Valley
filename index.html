@@ -1355,8 +1355,13 @@
     }
 
     /* ── R5 SEASONAL EVENTS & LOCAL LEADERBOARD OVERLAYS ────────────────────── */
+    /* z-index 150 puts the banner above the HUD (100) and below every modal — the lowest
+       overlay backdrop is #quiz-backdrop at 200. It used to sit at 850, which is modal tier:
+       the banner is fixed-position HUD furniture, so at that level it floated over the quiz
+       panel and clipped the phase header behind it. Nothing else needs to change, because
+       every overlay covers the viewport, so a banner below 200 is hidden while one is open. */
     #event-banner {
-      position: fixed; top: 66px; left: 50%; transform: translateX(-50%); z-index: 850;
+      position: fixed; top: 66px; left: 50%; transform: translateX(-50%); z-index: 150;
       display: flex; align-items: center; justify-content: space-between; gap: 14px;
       width: max-content; max-width: 90vw; padding: 6px 16px;
       background: rgba(15, 23, 42, 0.9); backdrop-filter: var(--glass-blur);
