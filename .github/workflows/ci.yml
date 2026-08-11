@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    # The suites take seconds. A generous cap that still stops a future hang from burning
+    # an hour — test_m1_challenger_harness.js used to never exit at all.
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Cheapest possible failure first: a parse error makes every suite below meaningless.
+      - name: Syntax check
+        run: |
+          node --check game.js
+          node --check assets/game.js
+
+      # The content gate. Asserts the shape of levels.json and facts.json, that Korean
+      # headwords carry their required word-spaces, that no two share an English gloss, that
+      # no origin class can render blank, that assets/ has not drifted, and that no Vietnamese
+      # has crept back into the shipped source.
+      - name: Content invariants
+        run: node scripts/validate_content.js
+
+      # facts.json is generated and must not be hand-edited. Regenerating it has to be a
+      # no-op; if this produces a diff, either someone edited the artifact directly or the
+      # generator and the committed output have drifted apart.
+      - name: facts.json is reproducible from its generator
+        run: |
+          node scripts/build_facts_json.js
+          git diff --exit-code -- facts.json assets/facts.json
+
+      - name: SM-2 scheduler and save migrations
+        run: node test_srs_engine.js
+
+      - name: Shop and plot expansion
+        run: node test_r2_shop_vm.js
+
+      - name: Sprite matrix and palette integrity
+        run: node test_m2_harness.js
+
+      - name: Inventory, modals and ground drops
+        run: node test_m1_challenger_harness.js
+
+      - name: Cooking engine and recipes
+        run: node test_m2_challenger_cooking.js
+
+  admin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: admin/package-lock.json
+
+      - name: Install
+        run: npm ci
+        working-directory: admin
+
+      - name: Admin API, sync, frontend and edge cases
+        run: npm test
+        working-directory: admin

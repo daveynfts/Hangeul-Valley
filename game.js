@@ -7,6 +7,18 @@
  */
 
 // ═══════════════ GLOBAL STATE ════════════════════════════════════════════════
+//
+// The test harnesses evaluate this file in Node with hand-written `window` and `document`
+// mocks, so `typeof window !== 'undefined'` does not mean "in a browser" — it means "someone
+// defined window". Two module-scope side effects relied on that and fired under Node:
+// the buff-HUD ticker (a 1s repeating interval, never cleared, which kept the process alive
+// so test_m1_challenger_harness.js had to be killed by hand and could not go into CI) and
+// loadFacts()'s fetch of a relative URL, which threw ERR_INVALID_URL into every run's output.
+//
+// `process.versions.node` is the check a DOM mock cannot fake. There is no bundler here, so
+// nothing shims `process` in the browser build.
+const IS_NODE = typeof process !== 'undefined' && !!(process.versions && process.versions.node);
+
 let levelsData = [];
 let sceneRef = null;
 let currentLevelIndex = 0;
@@ -4414,6 +4426,95 @@ function syncGoldAlias() {
   gold = playerCurrencies.coins;
 }
 
+// Headwords respelled by the 띄어쓰기 pass. Every one only *inserts* word-spaces, so the
+// pre-v7 key is the same string with them removed — which is why this is a list of the new
+// spellings and not an old -> new table. There is nothing to keep in sync and no way for the
+// two halves to disagree.
+//
+// Deriving the pairing from levelsData instead would be self-maintaining but wrong here:
+// initSave() runs on DOMContentLoaded and levelsData is not populated until FarmScene
+// preloads levels.json, so the migration would silently find nothing to move.
+const KO_V7_RESPELLINGS = [
+  '피로를 풀다', '주사를 맞다', '사진을 찍다',
+  '길을 찾다', '길을 잃다', '먼지를 털다',
+  '오해를 풀다', '귀를 기울이다', '입을 모으다',
+  '손을 씻다', '발을 끊다', '눈길을 끌다',
+  '가슴을 치다', '손을 잡다', '뜸을 들이다',
+  '허리띠를 둘러매다', '발을 벗고 나서다', '인기가 있다',
+  '고집이 세다', '발이 넓다', '귀가 얇다',
+  '눈이 높다', '손이 크다', '입이 가볍다',
+  '콧대가 높다', '배가 아프다', '어깨가 무겁다',
+  '낯이 익다', '낯이 설다', '가슴이 치밀다',
+  '뼈가 있다', '눈코 뜰 새 없이 바쁘다', '식은 죽 먹기',
+  '누워서 떡 먹기', '우물 안 개구리', '티끌 모아 태산',
+  '그림의 떡', '집회의 자유', '언론의 자유',
+  '공공의 안녕', '자전거 타기', '그림 그리기',
+  '숲 가꾸기', '예의 바르다', '그럼에도 불구하고',
+  '바꾸어 말하면', '종합해 보면', '다른 한편으로는',
+  '스트레스 해소', '백신 프로그램', '소셜 미디어',
+  '문자 메시지', '데이터 분석', '데이터 센터',
+  '스마트 시티', '글로벌 시장', '바이오 기술',
+  '3D 프린팅', '친환경 에너지', '그린 에너지',
+  '양자 컴퓨팅', '알고리즘 수식', '패키지 여행',
+  '사물 인터넷',
+];
+
+// { '어깨가무겁다': '어깨가 무겁다', … } — built once, from the list above.
+const KO_V7_RENAMES = KO_V7_RESPELLINGS.reduce((m, spaced) => {
+  const packed = spaced.replace(/\s+/g, '');
+  if (packed !== spaced) m[packed] = spaced;
+  return m;
+}, {});
+
+// Three headwords were the wrong *word*, not merely the wrong spacing. Unlike the v7 table
+// these cannot be derived: a correction that changes characters leaves no rule for recovering
+// the old key from the new one, which is exactly why it is a separate step.
+//
+// Keys are the **post-v7** spellings. That is safe because the v7 step always runs first, so a
+// v6 save has already reached 발을 벗고 나서다 by the time this table is consulted — and folding
+// the two together would not work, since stripping spaces from 발 벗고 나서다 yields 발벗고나서다
+// and would never match the 발을벗고나서다 a pre-v7 save actually holds.
+const KO_V8_RENAMES = {
+  '허리띠를 둘러매다': '허리띠를 졸라매다',  // 둘러매다 is to sling over a shoulder, not to tighten
+  '발을 벗고 나서다':  '발 벗고 나서다',     // the idiom takes no 을
+  '어플리케이션':      '애플리케이션',        // 외래어 표기법 — v7 did not touch this one
+};
+
+// Renaming a headword means moving it everywhere it serves as an identity: srsData and
+// harvestCounts key on it, plots and attemptLog carry it as a field. Shared by the v7 and v8
+// steps, which differ only in their table.
+//
+// Idempotent: a key moves only when the destination is free, so re-running finds nothing to do.
+// Where both spellings somehow exist the new one wins as the later write — except harvest
+// counts, which take the larger of the two rather than discarding a tally.
+function applyKoRenames(data, renames) {
+  let moved = 0;
+
+  const rekey = (obj, merge) => {
+    if (!obj || typeof obj !== 'object') return;
+    for (const [oldKo, newKo] of Object.entries(renames)) {
+      if (!(oldKo in obj)) continue;
+      if (newKo in obj) obj[newKo] = merge ? merge(obj[newKo], obj[oldKo]) : obj[newKo];
+      else { obj[newKo] = obj[oldKo]; moved++; }
+      delete obj[oldKo];
+    }
+  };
+
+  rekey(data.srs);
+  rekey(data.harvests, (a, b) => Math.max(a | 0, b | 0));
+
+  // Arrays carry `ko` as a field rather than a key. fishAlbum keys on FISH_DB names, which
+  // neither pass touched.
+  [data.plots, data.attempts].forEach(list => {
+    if (!Array.isArray(list)) return;
+    list.forEach(row => {
+      if (row && renames[row.ko]) { row.ko = renames[row.ko]; moved++; }
+    });
+  });
+
+  return moved;
+}
+
 function migrateSaveData(d) {
   if (!d) return null;
   const data = JSON.parse(JSON.stringify(d));
@@ -4516,6 +4617,27 @@ function migrateSaveData(d) {
     data.v = 6;
   }
 
+  // v6 -> v7: 64 headwords were respelled with the word-spaces standard Korean requires
+  // (어깨가무겁다 -> 어깨가 무겁다). srsData, harvestCounts, plots and attemptLog are all keyed
+  // on `ko`, so without this step every one of those words would read as brand new and its
+  // review history would be stranded under a spelling nothing looks up any more.
+  if (!data.v || data.v < 7) {
+    console.log(`[Save Migration] Respelling ${Object.keys(KO_V7_RENAMES).length} headwords with word-spaces v${data.v || 6} -> v7`);
+    const moved = applyKoRenames(data, KO_V7_RENAMES);
+    if (moved) console.log(`[Save Migration] Carried ${moved} records onto their new spelling`);
+    data.v = 7;
+  }
+
+  // v7 -> v8: three headwords were corrected to the right word — 허리띠를 둘러매다 slings a belt
+  // over one shoulder rather than tightening it, the idiom is 발 벗고 나서다 without the 을, and
+  // 외래어 표기법 spells application 애플리케이션. Same identity problem as v7, so the same move.
+  if (!data.v || data.v < 8) {
+    console.log(`[Save Migration] Correcting ${Object.keys(KO_V8_RENAMES).length} mis-spelled headwords v${data.v || 7} -> v8`);
+    const moved = applyKoRenames(data, KO_V8_RENAMES);
+    if (moved) console.log(`[Save Migration] Carried ${moved} records onto their corrected spelling`);
+    data.v = 8;
+  }
+
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
     data.inventory.maxSlots = 20;
   }
@@ -4570,7 +4692,7 @@ function collectSave(){
     : droppedItemsSave;
   droppedItemsSave = drops;
   return {
-    v: 6,
+    v: 8,
     currencies: playerCurrencies,
     gold: playerCurrencies.coins,
     unlockedLevels,
@@ -5062,6 +5184,45 @@ function showHardLockToast(zoneKey) {
   showToast(`🔒 LOCKED: Learn ${check.targetPct}% of ${check.reqName} first! (Current: ${check.pct}%)`, 4000);
 }
 
+// ═══════════════ MULTIPLE-CHOICE OPTION BUILDING ═════════════════════════════
+//
+// A distractor has to differ from the answer in the text the button actually shows, not
+// just in `ko`. Filtering on `ko` alone let two headwords sharing an English gloss land in
+// the same question — 미술 and 예술 both read "art" — so the learner saw two identical
+// buttons and one of them scored wrong. Six such pairs existed in levels.json; they have
+// since been given distinct glosses, but the guard belongs here rather than resting on the
+// data staying clean, and it holds for Korean-labelled options too.
+//
+// Plain Fisher-Yates rather than Phaser.Utils.Array.Shuffle: this runs in the Node test
+// harnesses, which evaluate game.js in a bare vm with no Phaser.
+function shuffleInPlace(arr){
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// Returns the target plus up to `count - 1` distractors, shuffled, no two sharing a label.
+// `pool` may contain the target; it is filtered out. Falls short of `count` only when the
+// pool genuinely has too few distinct labels, which beats padding with a duplicate.
+function buildOptionSet(target, pool, count, labelOf){
+  const seen = new Set([labelOf(target)]);
+  const picked = [];
+  for (const w of shuffleInPlace([...pool])) {
+    if (picked.length >= count - 1) break;
+    if (w.ko === target.ko) continue;
+    const label = labelOf(w);
+    if (seen.has(label)) continue;
+    seen.add(label);
+    picked.push(w);
+  }
+  return shuffleInPlace([target, ...picked]);
+}
+
+const labelEn = w => String(w && w.en || '');
+const labelKo = w => String(w && w.ko || '');
+
 // ═══════════════ R2: SHOP PURCHASE QUIZ GATE ══════════════════════════════════
 let shopQuizState = { targetIdx: null, questions: [], currentQ: 0, correctCount: 0 };
 
@@ -5069,14 +5230,11 @@ function startShopQuizGate(idx) {
   const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
   const pool = allWords.length >= 4 ? allWords : (levelsData[0]?.words || []);
 
-  const shuffled = Phaser.Utils.Array.Shuffle([...pool]);
-  const questions = shuffled.slice(0, 3).map(target => {
-    const distractors = pool.filter(w => w.ko !== target.ko);
-    Phaser.Utils.Array.Shuffle(distractors);
-    const options = [target, ...distractors.slice(0, 3)];
-    Phaser.Utils.Array.Shuffle(options);
-    return { target, options };
-  });
+  // Korean is shown and the buttons carry meanings, so options are deduped on `en`.
+  const questions = shuffleInPlace([...pool]).slice(0, 3).map(target => ({
+    target,
+    options: buildOptionSet(target, pool, 4, labelEn),
+  }));
 
   shopQuizState = { targetIdx: idx, questions, currentQ: 0, correctCount: 0 };
   playerLocked = true;
@@ -5150,14 +5308,10 @@ function startBossGateChallenge(type, questionsCount, onCompleteCallback) {
   const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
   const pool = allWords.length >= 4 ? allWords : (levelsData[0]?.words || []);
 
-  const shuffled = Phaser.Utils.Array.Shuffle([...pool]);
-  const questions = shuffled.slice(0, questionsCount).map(target => {
-    const distractors = pool.filter(w => w.ko !== target.ko);
-    Phaser.Utils.Array.Shuffle(distractors);
-    const options = [target, ...distractors.slice(0, 3)];
-    Phaser.Utils.Array.Shuffle(options);
-    return { target, options };
-  });
+  const questions = shuffleInPlace([...pool]).slice(0, questionsCount).map(target => ({
+    target,
+    options: buildOptionSet(target, pool, 4, labelEn),
+  }));
 
   bossGateState = { type, questions, currentQ: 0, callback: onCompleteCallback };
   playerLocked = true;
@@ -5469,8 +5623,11 @@ function _afterLoad(){
   if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
   console.log('[Save] gold='+gold+', levels='+JSON.stringify(unlockedLevels)+', plots='+plotSave.length);
 }
-// pywebview fires this event when API is ready; otherwise we init on DOMLoaded
-if(window.addEventListener){
+// pywebview fires this event when API is ready; otherwise we init on DOMLoaded.
+// `typeof` first, like the flushSave block above: a bare `window.x` on an undeclared
+// identifier is a ReferenceError, not undefined, so evaluating game.js in a vm without a
+// window mock died right here — which is what has been breaking scripts/verify_m2_m3.js.
+if(typeof window !== 'undefined' && window.addEventListener){
   window.addEventListener('pywebviewready', ()=>{ console.log('[pywebview] API ready'); initSave(); }, {once:true});
   // Fallback: if pywebview doesn't fire in 400ms (browser mode), init anyway
   setTimeout(()=>{ if(gold===0 && harvestCounts.size===0) initSave(); }, 400);
@@ -5593,6 +5750,21 @@ const markCompleted = i=>{ const c=getCompleted(); if(!c.includes(i)){c.push(i);
 const $=id=>document.getElementById(id);
 const lsOverlay=$('level-select-overlay'), lsGrid=$('ls-grid');
 const hud=$('hud'), pbWrap=$('progress-bar-wrap'), tipEl=$('controls-tip');
+
+// Publish the HUD's measured bottom edge so anything anchored under it can follow. The HUD is
+// `flex-wrap: wrap` and its contents change as buttons unlock and pixel fonts finish loading,
+// so its height is not a constant — and the seasonal banner used to assume it was, sitting at
+// a hardcoded 66px that landed on the button row whenever the bar wrapped to two lines.
+// ResizeObserver catches all three causes; a plain resize listener would miss the other two.
+if (typeof ResizeObserver === 'function' && hud) {
+  const publishHudBottom = () => {
+    const r = hud.getBoundingClientRect();
+    // Zero while the HUD is display:none, in which case leave the last good value alone.
+    if (r.height > 0) document.documentElement.style.setProperty('--hud-bottom', `${Math.round(r.bottom)}px`);
+  };
+  new ResizeObserver(publishHudBottom).observe(hud);
+  publishHudBottom();
+}
 const hudLevelEl=$('hud-level'), hudProgressEl=$('hud-progress'), pbFill=$('progress-bar-fill');
 const quizBackdrop=$('quiz-backdrop'), answerInput=$('answer-input');
 const feedbackText=$('feedback-text'), submitBtn=$('submit-btn'), cancelBtn=$('cancel-btn');
@@ -5956,18 +6128,16 @@ function getChosung(str){
   return res;
 }
 
-const ROMAN_MAP = {
-  '사과':'sa-gwa', '우유':'u-yu', '빵':'ppang', '밥':'bap', '생선':'saeng-seon',
-  '고기':'go-gi', '계란':'gye-ran', '채소':'chae-so', '과일':'gwa-il', '커피':'keo-pi',
-  '차':'cha', '주스':'ju-seu', '태양':'tae-yang', '달':'dal', '별':'byeol',
-  '하늘':'ha-neul', '산':'san', '바다':'ba-da', '강':'gang', '나무':'na-mu',
-  '꽃':'kkot', '눈':'nun', '코':'ko', '입':'ip', '손':'son',
-  '발':'bal', '머리':'meo-ri', '마음':'ma-eum', '고양이':'go-yang-i', '개':'gae',
-  '새':'sae', '학교':'hak-gyo', '병원':'byeong-won', '시장':'si-jang', '전화':'jeon-hwa',
-  '물':'mul'
-};
+// Was a hardcoded 36-word ROMAN_MAP falling back to `|| ko` — so for the other 1,485 words the
+// free 🔤 Romanization hint printed the Korean itself. In phase 3 that is the answer, handed
+// over for nothing, on the question whose result sets the word's interval.
+//
+// getHangulRomanization derives Revised Romanization from the Hangul for any word, so the
+// table was redundant as well as harmful: 35 of its 36 entries matched it exactly, and the
+// one that did not (병원) was right about ㅝ, which is what turned up the RR_JUNGSEONG error
+// fixed above. With that corrected the map has nothing left to say.
 function getRoman(ko){
-  return ROMAN_MAP[ko] || ko;
+  return getHangulRomanization(ko);
 }
 
 function revealQuizHint(tier){
@@ -5978,7 +6148,11 @@ function revealQuizHint(tier){
   
   if(tier === 'roman'){
     const rom = getRoman(currentWord.ko);
-    box.innerHTML = `🔤 <b>Romanization:</b> <span style="color:#67e8f9; font-weight:bold">[${rom}]</span>`;
+    // SNS and PD are Latin initialisms borrowed whole, so they romanize to themselves and
+    // "romanization" would just be the answer. Say so rather than print it.
+    box.innerHTML = rom === currentWord.ko
+      ? `🔤 <b>Romanization:</b> <span style="color:#94a3b8">this word is already written in Latin letters — nothing to transliterate.</span>`
+      : `🔤 <b>Romanization:</b> <span style="color:#67e8f9; font-weight:bold">[${rom}]</span>`;
   } else if(tier === 'chosung'){
     if(!spendCoins(5)){ showToast('Need 5 Coins 🪙 for Chosung hint!'); return; }
     currentQuizMeta.paidHints++;
@@ -6092,6 +6266,12 @@ function acceptableAnswers(word){
   return [...new Set(expanded.map(normalizeKorean).filter(Boolean))];
 }
 
+// Word spacing (띄어쓰기) is an orthographic convention, not part of the word. Standard
+// Korean writes 어깨가 무겁다 with a space and 눈코 뜰 새 없이 바쁘다 with four; a learner who
+// types either of those correctly must not be scored below one who runs them together.
+// Comparing space-stripped makes the two indistinguishable in both directions.
+const stripSpaces = s => String(s).replace(/\s+/g, '');
+
 // Returns 'exact' | 'close' | 'wrong'. 'close' is a one-jamo slip: the learner clearly
 // knew the word, so it is accepted but graded Hard rather than thrown away.
 function checkAnswer(typed, word){
@@ -6099,6 +6279,12 @@ function checkAnswer(typed, word){
   if (!t) return 'wrong';
   const options = acceptableAnswers(word);
   if (options.includes(t)) return 'exact';
+  // Spacing alone is never a mistake. Without this tier the jamo pass below catches a
+  // single-space difference as a one-edit "slip" and caps the grade at Hard, so writing
+  // an idiom the way the dictionary writes it would permanently depress its interval —
+  // and multi-space phrases fell past the <=1 threshold and graded wrong outright.
+  const ts = stripSpaces(t);
+  if (options.some(opt => stripSpaces(opt) === ts)) return 'exact';
   const tj = toJamo(t);
   // Only forgive a slip on words long enough that one jamo cannot flip the meaning outright.
   for (const opt of options) {
@@ -6141,13 +6327,14 @@ function openQuiz(word, plot, phase=1){
   hintCategory.textContent  = wordCategory(word);
   enWordDisplay.textContent = word.en;
   quizLevelTag.textContent  = 'P'+phase+'/3';
-  // Phase 3: populate fun-fact recall hints
+  // Phase 3: a recall scaffold, not the answer. `structure` and `origin` both spell the word
+  // out — see renderRecallScaffold — so the panel carries the redacted shape and the topical
+  // note, and the two revealing fields stay behind their own hint buttons.
   const ffText=$('quiz-funfact-text'), ffCulture=$('quiz-funfact-culture');
   if(ffText && ffCulture){
     if(phase===3){
-      const fact = getFunFact(word);
-      ffText.textContent    = fact.structure || '';
-      ffCulture.textContent = fact.origin || fact.hint || '';
+      ffText.textContent    = renderRecallScaffold(word.ko || '');
+      ffCulture.textContent = getFunFact(word).hint || '';
     } else {
       ffText.textContent = ''; ffCulture.textContent = '';
     }
@@ -6187,25 +6374,16 @@ function pickQuizMode(word, phase, plot){
 }
 
 // Distractors are drawn from the same category where possible, so a choice cannot be made
-// by elimination on topic alone.
-function buildChoices(word, count = 4){
+// by elimination on topic alone. `labelOf` is the text the buttons will carry, and it is
+// what options are deduped on — see buildOptionSet.
+function buildChoices(word, count = 4, labelOf = labelEn){
   const pool = unlockedLevels.flatMap(i => levelsData[i]?.words || []).filter(w => w.ko !== word.ko);
   const sameCat = pool.filter(w => wordCategory(w) === wordCategory(word));
-  const from = sameCat.length >= count - 1 ? sameCat : pool;
-  const picked = [];
-  const used = new Set();
-  while (picked.length < count - 1 && used.size < from.length) {
-    const i = Math.floor(Math.random() * from.length);
-    if (used.has(i)) continue;
-    used.add(i);
-    picked.push(from[i]);
-  }
-  const options = [...picked, word];
-  for (let i = options.length - 1; i > 0; i--) {   // Fisher-Yates
-    const j = Math.floor(Math.random() * (i + 1));
-    [options[i], options[j]] = [options[j], options[i]];
-  }
-  return options;
+  // Same category first, but only if it can fill the question with distinct labels. The old
+  // check was `sameCat.length >= count - 1`, which counts entries: a category holding two
+  // words that render the same text would over-promise and leave the question a choice short.
+  const preferred = buildOptionSet(word, sameCat, count, labelOf);
+  return preferred.length === count ? preferred : buildOptionSet(word, pool, count, labelOf);
 }
 
 function applyQuizMode(word, phase, plot){
@@ -6237,15 +6415,17 @@ function applyQuizMode(word, phase, plot){
     speakKorean(word.ko);
   }
 
-  currentChoices = buildChoices(word);
+  // Recognition shows the Korean, so options are meanings. Listening hides it, so options
+  // are Korean spellings — the learner maps sound to spelling. One `labelOf` drives both
+  // the dedupe and the button text, so the two cannot drift apart.
+  const labelOf = currentQuizMode === 'recognise' ? labelEn : labelKo;
+  currentChoices = buildChoices(word, 4, labelOf);
   choices.innerHTML = '';
   currentChoices.forEach(opt => {
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'quiz-choice-btn';
-    // Recognition shows the Korean, so options are meanings. Listening hides it, so
-    // options are Korean spellings — the learner maps sound to spelling.
-    b.textContent = currentQuizMode === 'recognise' ? opt.en : opt.ko;
+    b.textContent = labelOf(opt);
     b.onclick = () => answerChoice(opt, b);
     choices.appendChild(b);
   });
@@ -6568,9 +6748,10 @@ let factsLoaded = false;
 // script still evaluates where fetch is absent (Node test harnesses run game.js in
 // a bare vm context).
 function loadFacts(){
-  // Browser-only: Node has a global fetch but no document, and a relative URL there
-  // throws ERR_INVALID_URL. Checking for document keeps the test harnesses quiet.
-  if (typeof fetch !== 'function' || typeof document === 'undefined') return Promise.resolve();
+  // Browser-only: Node has a global fetch but no base URL, so a relative one throws
+  // ERR_INVALID_URL. This checked `typeof document` and one harness mocks document, so the
+  // guard passed and every run of it dumped that error. IS_NODE is the check that holds.
+  if (IS_NODE || typeof fetch !== 'function') return Promise.resolve();
   return fetch('facts.json')
     .then(r => r.json())
     .then(d => { factsData = d || {}; factsLoaded = true; })
@@ -6580,7 +6761,9 @@ loadFacts();
 
 // ── Hangul decomposition (Revised Romanization) ──────────────────────────────
 const RR_CHOSEONG  = ['g','kk','n','d','tt','r','m','b','pp','s','ss','','j','jj','ch','k','t','p','h'];
-const RR_JUNGSEONG = ['a','ae','ya','yae','eo','e','yeo','ye','o','wa','wae','oe','yo','u','weo','we','wi','yu','eu','ui','i'];
+// ㅝ is `wo` in Revised Romanization, not `weo` — it was the one vowel of the 21 that did not
+// match the standard, and it reached 47 words (병원 romanized as byeong-weon).
+const RR_JUNGSEONG = ['a','ae','ya','yae','eo','e','yeo','ye','o','wa','wae','oe','yo','u','wo','we','wi','yu','eu','ui','i'];
 const RR_JONGSEONG = ['','k','k','ks','n','nj','nh','t','l','lg','lm','lb','ls','lt','lp','lh','m','p','bs','t','t','ng','t','t','k','t','p','t'];
 
 function decomposeHangulWord(str) {
@@ -6689,6 +6872,32 @@ function renderStructure(ko) {
     ? `final syllable ${last.char} closes on a 받침 (-${last.final})`
     : `final syllable ${last.char} is open, no 받침`);
   return bits.join(' · ');
+}
+
+// The same shape as renderStructure, minus anything that spells the word out. Phase 3 is
+// graded production recall — what the player types sets the word's interval — so the panel
+// above the input box must not contain the answer.
+//
+// renderStructure prints the syllables as Hangul (오 · 빠) and leads with the romanization,
+// and the phase-3 panel was additionally printing the curated origin, which for a Sino word
+// gives the reading character by character (父 (부) “father” + 母 (모) “mother” — that is 부모).
+// All three were free, and none of them set `paidHints`, so the answer stood above the input
+// and the attempt could still be graded Easy. That does not just make the question trivial:
+// it feeds the scheduler a confident recall that never happened, and the word gets a long
+// interval on the strength of it.
+//
+// Romanization and origin are not withheld, they are behind the buttons that already exist
+// and are already priced — free and 10 coins respectively. This keeps only what neither sells:
+// how long the word is, and whether it ends closed. The batchim is reported as present or
+// absent without naming the consonant, which is what the 5-coin 초성 hint is for.
+function renderRecallScaffold(ko) {
+  const syl = decomposeHangulWord(ko);
+  const n = syl.length;
+  if (!n) return '';
+  return [
+    `${n} syllable${n === 1 ? '' : 's'}`,
+    syl[n - 1].hasBatchim ? 'ends on a 받침' : 'ends open, no 받침',
+  ].join(' · ');
 }
 
 // English topical note, used when a word has no curated origin.
@@ -7204,7 +7413,17 @@ class FarmScene extends Phaser.Scene {
     // ── RESIZE HANDLER ─ update camera & world bounds on window resize ──
     this.scale.on('resize', (gameSize) => {
       const nw = gameSize.width, nh = gameSize.height;
-      this.cameras.main.setBounds(0, 0, Math.max(nw, W), Math.max(nh, H));
+      const bw = Math.max(nw, W), bh = Math.max(nh, H);
+      this.cameras.main.setBounds(0, 0, bw, bh);
+
+      // Grow the ground to match. Without this the camera bounds widened over bare canvas —
+      // the resize handler moved the walls but never laid any floor.
+      this._tileGround(bw, bh);
+
+      // The parallax strips are sized from the creation width, so they stop short too.
+      if (this.bgMountains) { this.bgMountains.setSize(bw * 2, 128); this.bgMountains.x = bw / 2; }
+      if (this.bgHills)     { this.bgHills.setSize(bw * 2, 128);     this.bgHills.x = bw / 2; }
+
       // Update weather/lighting overlays to cover new size
       if (this.lighting) {
         this.lighting.width = nw;
@@ -7889,6 +8108,39 @@ class FarmScene extends Phaser.Scene {
   }
 
 
+  // Lay grass out to cover W x H, adding only the tiles that are not there yet.
+  //
+  // This used to be an inline double loop in _drawWorld, run once with the window size at
+  // scene creation. Phaser is in RESIZE mode so the canvas grows with the window, but the
+  // ground did not: enlarging the window — or simply having the scene start before the window
+  // settled — left bare background beyond the original extent. At 1915x907 with a world tiled
+  // for 576x768 that was 1339px of empty canvas down the right-hand side.
+  //
+  // The variant is picked from the tile's own coordinates rather than a running RNG, so a
+  // tile always looks the same however many passes it took to get there. A sequential
+  // generator would have made the pattern depend on resize history.
+  _tileGround(W, H){
+    const cols = Math.ceil((W + TILE) / TILE);
+    const rows = Math.ceil((H + TILE) / TILE);
+    if (cols <= this._groundCols && rows <= this._groundRows) return 0;
+
+    let added = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (r < this._groundRows && c < this._groundCols) continue;   // already laid
+        // Cheap positional hash: deterministic per tile, and mixed enough that the four
+        // variants do not fall into visible diagonal stripes.
+        const v = ((c * 73856093) ^ (r * 19349663)) >>> 0;
+        this.add.image(c * TILE + TILE / 2, r * TILE + TILE / 2, 'grs' + (v % 4))
+          .setDisplaySize(TILE, TILE).setDepth(0);
+        added++;
+      }
+    }
+    this._groundCols = Math.max(this._groundCols, cols);
+    this._groundRows = Math.max(this._groundRows, rows);
+    return added;
+  }
+
   // ── WORLD ──────────────────────────────────────────────────────────────────
   _drawWorld(W, H){
     if (this.textures && this.textures.exists('bg_distant_mountains')) {
@@ -7900,11 +8152,10 @@ class FarmScene extends Phaser.Scene {
         .setDepth(-9).setScrollFactor(0.3, 0.15);
     }
 
-    const rng = new Phaser.Math.RandomDataGenerator(['sv16']);
-    for(let r=0; r*TILE<=H+TILE; r++) for(let cc=0; cc*TILE<=W+TILE; cc++){
-      this.add.image(cc*TILE+TILE/2, r*TILE+TILE/2, 'grs'+rng.between(0,3))
-        .setDisplaySize(TILE,TILE).setDepth(0);
-    }
+    this._groundCols = 0;
+    this._groundRows = 0;
+    this._tileGround(W, H);
+
     const fW=PLOT_COLS*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP, fH=5*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP;
     this.farm = {x:W/2-fW/2, y:H/2-fH/2-30, w:fW, h:fH};
 
@@ -9913,9 +10164,13 @@ class ArcadeScene extends Phaser.Scene {
     this.bossBarrier.setVisible(true);
 
     const targetWord = Phaser.Utils.Array.GetRandom(this.wordPool);
-    const wrongs = this.wordPool.filter(w => w.ko !== targetWord.ko);
-    Phaser.Utils.Array.Shuffle(wrongs);
-    const options = Phaser.Utils.Array.Shuffle([targetWord, wrongs[0]||{ko:'우유'}, wrongs[1]||{ko:'빵'}, wrongs[2]||{ko:'밥'}]);
+    // The banner names the target in English and the orbs carry Korean, so two words sharing
+    // a gloss would put two correct answers on the field. Deduping on `en` prevents it.
+    //
+    // This replaces a `wrongs[0]||{ko:'우유'}` padding chain that guaranteed four orbs: the
+    // pool is a whole unlocked level, never fewer than four words, so the padding only ever
+    // stood to put a word that is not in the pool on screen.
+    const options = buildOptionSet(targetWord, this.wordPool, 4, labelEn);
 
     // Show Spell Prompt Banner
     this.spellBanner = this.add.container(this.W/2, 170).setDepth(40);
@@ -11019,9 +11274,10 @@ class BeeScene extends Phaser.Scene {
     this.targetText.setText(`TARGET: "${currentTarget.en.toUpperCase()}"${hintEmoji}`);
     this.updateHUD();
 
-    const distractors = this.wordList.filter(w => w.ko !== currentTarget.ko);
-    const shuffledDistractors = Phaser.Utils.Array.Shuffle([...distractors]).slice(0, 3);
-    const waveWords = Phaser.Utils.Array.Shuffle([currentTarget, ...shuffledDistractors]);
+    // The target is announced in English and the bees carry Korean, so a decoy sharing the
+    // target's gloss would be an equally correct answer that scores as a miss. Deduping on
+    // `en` keeps every wrong bee genuinely wrong.
+    const waveWords = buildOptionSet(currentTarget, this.wordList, 4, labelEn);
 
     const trajectories = ['linear', 'sine', 'zigzag'];
     const numBees = waveWords.length;
@@ -11389,7 +11645,11 @@ const TROPHIES_DB = [
   { id: 'gold_tractor', name: 'Expert (전문가)', icon: '🥇', reqHarvests: 150, cost: 1000 },
   { id: 'diamond_crown', name: 'Master (달인)', icon: '💎', reqHarvests: 500, cost: 5000 },
   { id: 'master_scholar', name: 'Legend (전설)', icon: '👑', reqHarvests: 1000, cost: 20000 },
-  { id: 'master_chef', name: 'Master Chef (요리 왕)', icon: '👨‍🍳', desc: 'Cook all 10 recipes at least once', type: 'cooking', reqRecipes: 10, cost: 0 }
+  // No hardcoded recipe count. It used to carry `reqRecipes: 10`, which the trophy card
+  // preferred over COOKING_RECIPES.length while the actual unlock below compared against the
+  // real length — so once the two honey recipes brought the total to 12, the card read 10/10
+  // and showed the requirement as met on a trophy that would never unlock.
+  { id: 'master_chef', name: 'Master Chef (요리 왕)', icon: '👨‍🍳', desc: 'Cook every recipe at least once', type: 'cooking', cost: 0 }
 ];
 
 window.getTotalHarvests = function() {
@@ -11426,7 +11686,9 @@ window.renderTrophies = function() {
     let reqText = '';
 
     if (t.type === 'cooking') {
-      const targetCount = t.reqRecipes || (typeof COOKING_RECIPES !== 'undefined' ? COOKING_RECIPES.length : 10);
+      // COOKING_RECIPES.length is the only source for this, so the card and the unlock check
+      // in checkMasterChefTrophy cannot disagree the way they did.
+      const targetCount = (typeof COOKING_RECIPES !== 'undefined' ? COOKING_RECIPES.length : 0);
       reqMet = totalCooked >= targetCount;
       reqText = `<span style="font-size:12px;color:#888;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Cooking</span><br/>${totalCooked}/${targetCount}`;
     } else {
@@ -11572,13 +11834,9 @@ function nextDuelTurn(){
 
   const allWords = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
   const target = Phaser.Utils.Array.GetRandom(allWords);
-  
-  const distractors = allWords.filter(w => w.ko !== target.ko);
-  Phaser.Utils.Array.Shuffle(distractors);
-  const selectedDistractors = distractors.slice(0, 3);
 
-  const options = [target, ...selectedDistractors];
-  Phaser.Utils.Array.Shuffle(options);
+  // The prompt is the Korean and the buttons carry meanings, so dedupe on `en`.
+  const options = buildOptionSet(target, allWords, 4, labelEn);
 
   duelState.currentQuestion = { target, options };
 
@@ -12310,8 +12568,9 @@ function updateBuffHUD() {
   });
 }
 
-// Tick active buffs every second
-if (typeof window !== 'undefined') {
+// Tick active buffs every second. Never under Node: nothing clears this interval, so in a
+// harness it is an immortal handle that stops the process exiting — see IS_NODE at the top.
+if (typeof window !== 'undefined' && !IS_NODE) {
   if (window.buffHUDInterval) clearInterval(window.buffHUDInterval);
   window.buffHUDInterval = setInterval(() => {
     if (typeof activeBuffs !== 'undefined' && Object.keys(activeBuffs).length > 0) {
@@ -12430,11 +12689,12 @@ function renderCookingStage() {
   if (cookingStage === 1) {
     stepDesc.textContent = 'Stage 1/2: Prep Ingredients - Select the correct Korean name!';
     const correctTarget = Object.keys(currentCookingRecipe.req)[0];
-    const choices = [correctTarget];
-    KOREAN_INGREDIENTS.forEach(ing => {
-      if (ing !== correctTarget && choices.length < 4) choices.push(ing);
-    });
-    Phaser.Utils.Array.Shuffle(choices);
+    // Shuffle the pool *before* taking three, not the result after. The old loop walked
+    // KOREAN_INGREDIENTS in declaration order and stopped once it had four, so every prep
+    // question in the game offered the same three decoys — 배추 / 무 / 파 — and the answer
+    // became the odd one out rather than something you had to read the Korean to find.
+    const decoys = shuffleInPlace(KOREAN_INGREDIENTS.filter(ing => ing !== correctTarget)).slice(0, 3);
+    const choices = shuffleInPlace([correctTarget, ...decoys]);
 
     container.innerHTML = `
       <div style="font-size:16px; color:#fff; margin-bottom:12px;">Which ingredient is needed first?</div>

@@ -201,3 +201,7 @@ print(`FINAL VERIFICATION RESULT: ${overallPassed ? 'PASS' : 'FAIL'}`);
 print(`==================================================`);
 
 fs.writeFileSync('m2_verification_log.txt', logs.join('\n'));
+
+// This printed FAIL and then exited 0, so as a CI gate it was decoration: a broken sprite
+// matrix would have shown red in the log and passed the job anyway.
+process.exit(overallPassed ? 0 : 1);

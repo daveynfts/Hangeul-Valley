@@ -768,7 +768,7 @@
       },
       {
         "ko": "차갑다",
-        "en": "to be cold",
+        "en": "to be cold (to the touch)",
         "hint": "🧊",
         "category": "맛과 상태",
         "categoryEn": "Taste & Texture"
@@ -1185,7 +1185,7 @@
       },
       {
         "ko": "춥다",
-        "en": "to be cold",
+        "en": "to be cold (weather)",
         "hint": "🥶",
         "category": "날씨와 계절",
         "categoryEn": "Weather & Seasons"
@@ -2253,7 +2253,7 @@
         "categoryEn": "Exercise & Sports"
       },
       {
-        "ko": "자전거타기",
+        "ko": "자전거 타기",
         "en": "cycling",
         "hint": "🚴",
         "category": "운동과 스포츠",
@@ -2302,7 +2302,7 @@
         "categoryEn": "Culture & Leisure"
       },
       {
-        "ko": "그림그리기",
+        "ko": "그림 그리기",
         "en": "drawing / painting",
         "hint": "🎨",
         "category": "문화와 여가",
@@ -2477,7 +2477,7 @@
         "categoryEn": "Appreciation & Evaluation"
       },
       {
-        "ko": "인기가있다",
+        "ko": "인기가 있다",
         "en": "to be popular",
         "hint": "⭐",
         "category": "감상과 평가",
@@ -2492,20 +2492,20 @@
       },
       {
         "ko": "보람차다",
-        "en": "to be rewarding",
+        "en": "to be fulfilling",
         "hint": "🌟",
         "category": "감상과 평가",
         "categoryEn": "Appreciation & Evaluation"
       },
       {
-        "ko": "피로를풀다",
+        "ko": "피로를 풀다",
         "en": "to relieve fatigue",
         "hint": "🛀",
         "category": "문화와 여가",
         "categoryEn": "Culture & Leisure"
       },
       {
-        "ko": "스트레스해소",
+        "ko": "스트레스 해소",
         "en": "stress relief",
         "hint": "🧘",
         "category": "문화와 여가",
@@ -2992,7 +2992,7 @@
         "categoryEn": "Health Care"
       },
       {
-        "ko": "주사를맞다",
+        "ko": "주사를 맞다",
         "en": "to get an injection",
         "hint": "💉",
         "category": "건강 관리",
@@ -3151,7 +3151,7 @@
       },
       {
         "ko": "미술",
-        "en": "art",
+        "en": "fine art",
         "hint": "🎨",
         "category": "학교 시설과 과목",
         "categoryEn": "School Facilities & Subjects"
@@ -4138,7 +4138,7 @@
         "categoryEn": "Sightseeing & Experiences"
       },
       {
-        "ko": "패키지여행",
+        "ko": "패키지 여행",
         "en": "package tour",
         "hint": "🚌",
         "category": "관광과 경험",
@@ -4166,7 +4166,7 @@
         "categoryEn": "Sightseeing & Experiences"
       },
       {
-        "ko": "사진을찍다",
+        "ko": "사진을 찍다",
         "en": "to take photos",
         "hint": "📸",
         "category": "관광과 경험",
@@ -4187,14 +4187,14 @@
         "categoryEn": "Transport & Accommodation"
       },
       {
-        "ko": "길을찾다",
+        "ko": "길을 찾다",
         "en": "to find a way",
         "hint": "🗺️",
         "category": "관광과 경험",
         "categoryEn": "Sightseeing & Experiences"
       },
       {
-        "ko": "길을잃다",
+        "ko": "길을 잃다",
         "en": "to get lost",
         "hint": "❓",
         "category": "관광과 경험",
@@ -4332,7 +4332,7 @@
       },
       {
         "ko": "보람되다",
-        "en": "to be rewarding",
+        "en": "to be worthwhile",
         "hint": "🌟",
         "category": "긍정 감정",
         "categoryEn": "Positive Emotions"
@@ -4832,7 +4832,7 @@
         "categoryEn": "Personality Traits"
       },
       {
-        "ko": "예의바르다",
+        "ko": "예의 바르다",
         "en": "to be polite",
         "hint": "🙇",
         "category": "성격 특징",
@@ -4846,7 +4846,7 @@
         "categoryEn": "Personality Traits"
       },
       {
-        "ko": "고집이세다",
+        "ko": "고집이 세다",
         "en": "to be stubborn",
         "hint": "🐂",
         "category": "성격 특징",
@@ -5340,7 +5340,7 @@
         "categoryEn": "Housework & Upkeep"
       },
       {
-        "ko": "먼지를털다",
+        "ko": "먼지를 털다",
         "en": "to dust off",
         "hint": "🪶",
         "category": "집안일과 관리",
@@ -5645,7 +5645,7 @@
         "categoryEn": "Phones & Telecoms"
       },
       {
-        "ko": "문자메시지",
+        "ko": "문자 메시지",
         "en": "text message",
         "hint": "💬",
         "category": "전화와 정보통신",
@@ -5687,7 +5687,7 @@
         "categoryEn": "Phones & Telecoms"
       },
       {
-        "ko": "어플리케이션",
+        "ko": "애플리케이션",
         "en": "application",
         "hint": "💻",
         "category": "전화와 정보통신",
@@ -5729,7 +5729,7 @@
         "categoryEn": "Internet & Social Media"
       },
       {
-        "ko": "소셜미디어",
+        "ko": "소셜 미디어",
         "en": "social media",
         "hint": "💬",
         "category": "인터넷과 SNS",
@@ -5967,7 +5967,7 @@
         "categoryEn": "Internet & Social Media"
       },
       {
-        "ko": "백신프로그램",
+        "ko": "백신 프로그램",
         "en": "antivirus software",
         "hint": "🛡️",
         "category": "인터넷과 SNS",
@@ -6398,7 +6398,7 @@
         "categoryEn": "Relationships & Social Contact"
       },
       {
-        "ko": "오해를풀다",
+        "ko": "오해를 풀다",
         "en": "to resolve misunderstanding",
         "hint": "💡",
         "category": "갈등과 화해",
@@ -6830,7 +6830,7 @@
       },
       {
         "ko": "정책",
-        "en": "public policy",
+        "en": "policy",
         "hint": "📜",
         "category": "복지와 제도",
         "categoryEn": "Welfare & Institutions"
@@ -7232,7 +7232,7 @@
         "categoryEn": "Trade & Industry"
       },
       {
-        "ko": "글로벌시장",
+        "ko": "글로벌 시장",
         "en": "global market",
         "hint": "🌍",
         "category": "무역과 산업",
@@ -7411,7 +7411,7 @@
         "categoryEn": "Science & Research"
       },
       {
-        "ko": "데이터분석",
+        "ko": "데이터 분석",
         "en": "data analysis",
         "hint": "📊",
         "category": "과학과 연구",
@@ -7432,7 +7432,7 @@
         "categoryEn": "Advanced Technology"
       },
       {
-        "ko": "사물인터넷",
+        "ko": "사물 인터넷",
         "en": "Internet of Things (IoT)",
         "hint": "🌐",
         "category": "첨단 기술",
@@ -7453,7 +7453,7 @@
         "categoryEn": "Advanced Technology"
       },
       {
-        "ko": "바이오기술",
+        "ko": "바이오 기술",
         "en": "biotechnology",
         "hint": "🧬",
         "category": "첨단 기술",
@@ -7467,7 +7467,7 @@
         "categoryEn": "Advanced Technology"
       },
       {
-        "ko": "3D프린팅",
+        "ko": "3D 프린팅",
         "en": "3D printing",
         "hint": "🖨️",
         "category": "첨단 기술",
@@ -7565,7 +7565,7 @@
         "categoryEn": "Energy & Information"
       },
       {
-        "ko": "친환경에너지",
+        "ko": "친환경 에너지",
         "en": "eco-friendly energy",
         "hint": "🌱",
         "category": "에너지와 정보",
@@ -7628,7 +7628,7 @@
         "categoryEn": "Advanced Technology"
       },
       {
-        "ko": "스마트시티",
+        "ko": "스마트 시티",
         "en": "smart city",
         "hint": "🏙️",
         "category": "첨단 기술",
@@ -7726,21 +7726,21 @@
         "categoryEn": "Energy & Information"
       },
       {
-        "ko": "양자컴퓨팅",
+        "ko": "양자 컴퓨팅",
         "en": "quantum computing",
         "hint": "⚛️",
         "category": "첨단 기술",
         "categoryEn": "Advanced Technology"
       },
       {
-        "ko": "알고리즘수식",
+        "ko": "알고리즘 수식",
         "en": "algorithm formula",
         "hint": "📐",
         "category": "첨단 기술",
         "categoryEn": "Advanced Technology"
       },
       {
-        "ko": "데이터센터",
+        "ko": "데이터 센터",
         "en": "data center",
         "hint": "🏢",
         "category": "에너지와 정보",
@@ -7968,7 +7968,7 @@
         "categoryEn": "Conservation & Climate"
       },
       {
-        "ko": "숲가꾸기",
+        "ko": "숲 가꾸기",
         "en": "forest tending",
         "hint": "🌳",
         "category": "보전과 기후",
@@ -8122,7 +8122,7 @@
         "categoryEn": "Conservation & Climate"
       },
       {
-        "ko": "그린에너지",
+        "ko": "그린 에너지",
         "en": "green energy",
         "hint": "🔋",
         "category": "보전과 기후",
@@ -8232,7 +8232,7 @@
       },
       {
         "ko": "사적",
-        "en": "historic site",
+        "en": "historic landmark",
         "hint": "🏛️",
         "category": "전통과 유산",
         "categoryEn": "Tradition & Heritage"
@@ -8627,161 +8627,161 @@
     "target": 9,
     "words": [
       {
-        "ko": "발이넓다",
+        "ko": "발이 넓다",
         "en": "to have a wide circle of contacts",
         "hint": "👣",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "귀가얇다",
+        "ko": "귀가 얇다",
         "en": "to be easily influenced",
         "hint": "👂",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "눈이높다",
+        "ko": "눈이 높다",
         "en": "to have high standards",
         "hint": "👀",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "손이크다",
+        "ko": "손이 크다",
         "en": "to be generous / big-handed",
         "hint": "✋",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "입이가볍다",
+        "ko": "입이 가볍다",
         "en": "to be unable to keep secrets",
         "hint": "👄",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "콧대가높다",
+        "ko": "콧대가 높다",
         "en": "to be haughty / proud",
         "hint": "👃",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "배가아프다",
+        "ko": "배가 아프다",
         "en": "to be envious of others",
         "hint": "🤢",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "발을벗고나서다",
+        "ko": "발 벗고 나서다",
         "en": "to eagerly step forward",
         "hint": "👟",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "어깨가무겁다",
+        "ko": "어깨가 무겁다",
         "en": "to feel heavy responsibility",
         "hint": "🏋️",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "낯이익다",
+        "ko": "낯이 익다",
         "en": "to look familiar",
         "hint": "😀",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "낯이설다",
+        "ko": "낯이 설다",
         "en": "to look unfamiliar",
         "hint": "❓",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "눈코뜰새없이바쁘다",
+        "ko": "눈코 뜰 새 없이 바쁘다",
         "en": "to be extremely busy",
         "hint": "🏃",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "귀를기울이다",
+        "ko": "귀를 기울이다",
         "en": "to listen attentively",
         "hint": "🎧",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "입을모으다",
+        "ko": "입을 모으다",
         "en": "to speak with one voice",
         "hint": "🗣️",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "손을씻다",
+        "ko": "손을 씻다",
         "en": "to cut ties with bad deed",
         "hint": "🧼",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "발을끊다",
+        "ko": "발을 끊다",
         "en": "to stop visiting a place",
         "hint": "🛑",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "가슴이치밀다",
+        "ko": "가슴이 치밀다",
         "en": "to feel emotion surging",
         "hint": "💔",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "눈길을끌다",
+        "ko": "눈길을 끌다",
         "en": "to attract attention",
         "hint": "✨",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "식은죽먹기",
+        "ko": "식은 죽 먹기",
         "en": "piece of cake / very easy",
         "hint": "🥣",
         "category": "상황 관용구",
         "categoryEn": "Situational Idioms"
       },
       {
-        "ko": "그림의떡",
+        "ko": "그림의 떡",
         "en": "pie in the sky / unobtainable",
         "hint": "🖼️",
         "category": "상황 관용구",
         "categoryEn": "Situational Idioms"
       },
       {
-        "ko": "누워서떡먹기",
+        "ko": "누워서 떡 먹기",
         "en": "extremely easy task",
         "hint": "🛌",
         "category": "상황 관용구",
         "categoryEn": "Situational Idioms"
       },
       {
-        "ko": "우물안개구리",
+        "ko": "우물 안 개구리",
         "en": "a frog in a well / narrow-minded",
         "hint": "🐸",
         "category": "상황 관용구",
         "categoryEn": "Situational Idioms"
       },
       {
-        "ko": "티끌모아태산",
+        "ko": "티끌 모아 태산",
         "en": "many a mickle makes a muckle",
         "hint": "🏔️",
         "category": "사자성어와 속담",
@@ -8949,21 +8949,21 @@
         "categoryEn": "Four-Character Idioms & Proverbs"
       },
       {
-        "ko": "뼈가있다",
+        "ko": "뼈가 있다",
         "en": "to have a hidden sting in words",
         "hint": "🦴",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "가슴을치다",
+        "ko": "가슴을 치다",
         "en": "to beat one's chest in grief",
         "hint": "💔",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "손을잡다",
+        "ko": "손을 잡다",
         "en": "to join hands in cooperation",
         "hint": "🤝",
         "category": "신체 관용구",
@@ -8977,14 +8977,14 @@
         "categoryEn": "Situational Idioms"
       },
       {
-        "ko": "뜸을들이다",
+        "ko": "뜸을 들이다",
         "en": "to beat around the bush / hesitate",
         "hint": "⏳",
         "category": "상황 관용구",
         "categoryEn": "Situational Idioms"
       },
       {
-        "ko": "허리띠를둘러매다",
+        "ko": "허리띠를 졸라매다",
         "en": "to tighten one's belt",
         "hint": "👔",
         "category": "신체 관용구",
@@ -10256,14 +10256,14 @@
         "categoryEn": "Administration & Citizens"
       },
       {
-        "ko": "집회의자유",
+        "ko": "집회의 자유",
         "en": "freedom of assembly",
         "hint": "📢",
         "category": "행정과 시민",
         "categoryEn": "Administration & Citizens"
       },
       {
-        "ko": "언론의자유",
+        "ko": "언론의 자유",
         "en": "freedom of press",
         "hint": "🎙️",
         "category": "행정과 시민",
@@ -10291,7 +10291,7 @@
         "categoryEn": "Law & Order"
       },
       {
-        "ko": "공공의안녕",
+        "ko": "공공의 안녕",
         "en": "public peace",
         "hint": "🕊️",
         "category": "행정과 시민",
@@ -10407,7 +10407,7 @@
         "categoryEn": "Transition & Addition Adverbs"
       },
       {
-        "ko": "그럼에도불구하고",
+        "ko": "그럼에도 불구하고",
         "en": "nevertheless / despite that",
         "hint": "⛰️",
         "category": "전환 및 첨가 부사",
@@ -10464,7 +10464,7 @@
       },
       {
         "ko": "반면에",
-        "en": "on the other hand",
+        "en": "whereas",
         "hint": "⚖️",
         "category": "전환 및 첨가 부사",
         "categoryEn": "Transition & Addition Adverbs"
@@ -10505,7 +10505,7 @@
         "categoryEn": "Transition & Addition Adverbs"
       },
       {
-        "ko": "바꾸어말하면",
+        "ko": "바꾸어 말하면",
         "en": "put differently",
         "hint": "💬",
         "category": "담화 연결 표지",
@@ -10575,7 +10575,7 @@
         "categoryEn": "Discourse Markers"
       },
       {
-        "ko": "종합해보면",
+        "ko": "종합해 보면",
         "en": "taking all into account / in summary",
         "hint": "📋",
         "category": "담화 연결 표지",
@@ -10659,7 +10659,7 @@
         "categoryEn": "Discourse Markers"
       },
       {
-        "ko": "다른한편으로는",
+        "ko": "다른 한편으로는",
         "en": "on the other hand",
         "hint": "👉",
         "category": "담화 연결 표지",
