@@ -301,12 +301,16 @@ To add or correct an origin, edit the curated `SINO` / `MIXED` / `LOANWORDS` /
 `NATIVE_SET` / `NATIVE_NOTE` maps in `scripts/build_facts_json.js` and re-run it. The admin
 panel shows origins read-only and its write endpoints return `409` for this reason.
 
-**Coverage is 1,167 / 1500 (78%), with real hanja for 606 words.** The remaining 333 are
-classified `unknown`, and the UI shows pronunciation for them rather than inventing an
-origin. That gap is deliberate: the original data asserted "Native Korean (고유어)" for
-~1,090 words with no evidence, mislabelling plenty of Sino-Korean vocabulary (건강검진,
-환경오염, 기술혁신). Unknown stays unknown. The admin dashboard's **Not Curated** list is
-the backlog.
+**Coverage is 1500 / 1500 (100%), with real hanja for 869 words.** Nothing is left `unknown`
+and no entry renders a blank origin.
+
+Reaching 100% did not mean relaxing the standard the file was rebuilt on. The inherited data
+asserted "Native Korean (고유어)" for ~1,090 words with no evidence and mislabelled a great deal
+of Sino-Korean along the way (건강검진, 환경오염, 기술혁신). Every entry here was read against its
+English gloss. Where a word resisted a clean answer it got an honest one rather than a
+convenient one: 구두 is filed as a loanword from Japanese くつ *with the uncertainty stated in
+the gloss*, because "usually attributed, not settled" is more use to a learner than either a
+confident lie or a blank.
 
 `NATIVE_SET` is a plain list of headwords that are native with nothing more to say — the
 panel renders "Native Korean (고유어)", which is the useful fact, because it tells the learner
@@ -325,8 +329,15 @@ Sino compounds like 옷장, 게시글, 민속놀이 and 댓글 are left alone fo
 neither bucket cleanly, and forcing them would teach something false.
 
 Origin classes: `native`, `sino`, `sino-partial` (compound built on a known root),
-`sino-verb`, `sino-passive`, `sino-adj`, `sino-noun`, `mixed`, `mixed-loan`, `loan`,
-`loan-partial`, `idiom`, `discourse`, `unknown`.
+`sino-verb`, `sino-passive`, `sino-adj`, `sino-noun`, `mixed`, `mixed-native`, `mixed-loan`,
+`loan-mixed`, `loan`, `loan-partial`, `idiom`, `discourse`, `unknown`.
+
+`mixed-native` and `loan-mixed` exist because the panel prints a compound's halves in the order
+the word has them. `mixed` puts the hanja first, which is right for 남동생 (男 + 동생) and wrong
+for 옷장 (옷 + 欌); `mixed-loan` puts the hanja first, which is right for 온실가스 (溫室 + gas) and
+wrong for 가스비. A breakdown in the wrong order is worse than no breakdown, because the learner
+reads it as the word's actual shape. `unknown` is still a valid class and still renders
+pronunciation only — nothing currently uses it.
 
 ### How curation is targeted
 
@@ -554,24 +565,20 @@ repo root, which is what Vercel serves.
 
 ## Roadmap
 
-1. **Curate the remaining 333 word origins.** Coverage is 78%. The cascade method is spent —
-   see "How curation is targeted" — so this is per-word work now, best done a semantic
-   category at a time so each word's English gloss is available as evidence. The admin
-   dashboard's **Not Curated** list is the working queue.
-2. **PWA install and offline.** The touch controls have landed, so the farm is playable on a
+1. **PWA install and offline.** The touch controls have landed, so the farm is playable on a
    phone; installability is what is left. It needs Phaser vendored into the repo first — the
    game loads it from a CDN, so a service worker cannot make the app work offline while its
    engine still comes over the wire.
-3. **Cloud save.** Losing SRS history when changing machines is a dealbreaker now that
+2. **Cloud save.** Losing SRS history when changing machines is a dealbreaker now that
    the history is the product.
-4. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the
+3. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the
    exact timestamp they were scheduled; a real study tool batches by day boundary and
    caps how many land at once so a backlog cannot become unmanageable.
-5. **Split `game.js` into modules** behind Vite. `FarmScene` alone is ~2.4k lines, and
+4. **Split `game.js` into modules** behind Vite. `FarmScene` alone is ~2.4k lines, and
    ~1.5k lines of cooking/leaderboard code sit at top level after `BeeScene`.
-6. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
+5. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
    review log — and the log it needs is now being recorded (see below), so the input is there.
-7. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
+6. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
    a spelling would collide. All 1,500 headwords are currently unique, making this latent
    rather than live — a hash of `ko` + part of speech fixes it. The v6 → v7 respelling made
    the cost of the current scheme concrete: correcting a headword's spelling means a save
@@ -590,7 +597,7 @@ accuracy and 14-day activity strip.
 Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question
 modes, per-modality scheduling, fuzzy answer matching, the progress dashboard, the
-origin-curation passes that took coverage from 30% to 78%, the 띄어쓰기 pass —
+origin-curation passes that took coverage from 30% to 100%, the 띄어쓰기 pass —
 space-insensitive grading, 64 headwords respelled, three corrected outright, six shared glosses
 split apart — closing the three paths that printed the answer during graded recall, and CI,
 which meant first making the two unrunnable suites runnable.

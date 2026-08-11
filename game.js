@@ -6923,8 +6923,17 @@ function renderOrigin(f) {
       return `${SINO} noun — formed with the suffix -성 / -력 / -감`;
     case 'mixed':
       return `${SINO} + native Korean — ${parts} + ${f.n} (native Korean)`;
+    // Same thing with the halves the other way round. `mixed` prints the hanja first, which is
+    // right for 남동생 (男 + 동생) and wrong for 옷장 (옷 + 欌) — and a breakdown in the wrong
+    // order is worse than none, because the learner reads it as the word's actual shape.
+    case 'mixed-native':
+      return `native Korean + ${SINO} — ${f.n} (native Korean) + ${parts}`;
     case 'mixed-loan':
       return `${SINO} + loanword — ${f.h}${parts ? ' = ' + parts : ''}, plus English “${f.l}”`;
+    // 가스비 and 마케팅부 put the borrowed half first, and the same reasoning as mixed-native
+    // applies: printing the halves in the wrong order misreads the word's shape.
+    case 'loan-mixed':
+      return `loanword + ${SINO} — English “${f.l}”, plus ${f.h}${parts ? ' = ' + parts : ''}`;
     case 'loan':
       return `Loanword (외래어) — from ${f.l.includes('(') ? f.l : `English “${f.l}”`}`;
     case 'loan-partial':
