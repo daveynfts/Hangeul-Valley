@@ -140,6 +140,98 @@ const EUMHUN_EN = {
   // Used only by 신용카드.
   '用 쓸 용': 'to use',
 
+  // ── Added by the third curation pass ──────────────────────────────────────
+  // Body, illness and symptoms.
+  '內 안 내': 'inside',               '臟 오장 장': 'internal organ',
+  '心 마음 심': 'heart, mind',        '肺 허파 폐': 'lung',
+  '痛 아플 통': 'to ache',            '齒 이 치': 'tooth',
+  '腹 배 복': 'belly',                '熱 더울 열': 'hot, fever',
+  '泄 샐 설': 'to leak',              '瀉 쏟을 사': 'to pour out',
+  '便 똥오줌 변': 'bodily waste',      '祕 숨길 비': 'to conceal, to block',
+  '傷 다칠 상': 'to be hurt',         '處 곳 처': 'place',
+  '骨 뼈 골': 'bone',                 '折 꺾을 절': 'to break, to snap',
+  '炎 불꽃 염': 'flame, inflammation', '皮 가죽 피': 'skin, hide',
+  '膚 살갗 부': 'skin surface',
+  '不 아닐 불': 'not',                '良 좋을 량': 'good',
+  // Weather.
+  '颱 태풍 태': 'typhoon',            '風 바람 풍': 'wind',
+  '暴 사나울 폭': 'violent, sudden',   '雪 눈 설': 'snow',
+  '寒 찰 한': 'cold',                 '波 물결 파': 'wave',
+  '較 견줄 교': 'to compare',         '差 다를 차': 'difference',
+  '冷 찰 랭': 'cold',
+  // Time.
+  '來 올 래': 'to come',              '年 해 년': 'year',
+  '昨 어제 작': 'yesterday',          '點 점 점': 'point, dot',
+  // Food and objects.
+  '飯 밥 반': 'cooked rice',          '饌 반찬 찬': 'side dish',
+  '麵 국수 면': 'noodles',            '粥 죽 죽': 'porridge',
+  '洋 큰바다 양': 'ocean, Western',    '襪 버선 말': 'sock',
+  '帽 모자 모': 'hat',                '掌 손바닥 장': 'palm of the hand',
+  '匣 갑 갑': 'case, box',            '紙 종이 지': 'paper',
+  '眼 눈 안': 'eye',                  '鏡 거울 경': 'mirror, lens',
+  '粧 단장할 장': 'to adorn',          '品 물건 품': 'article, goods',
+  // Appearance and manner.
+  '童 아이 동': 'child',              '顔 얼굴 안': 'face',
+  '老 늙을 로': 'old',                '軀 몸 구': 'body, frame',
+  '型 모형 형': 'form, type',         '耳 귀 이': 'ear',
+  '鼻 코 비': 'nose',                 '印 도장 인': 'seal, imprint',
+  '象 코끼리 상': 'elephant, image',
+  '恒 항상 항': 'constant',           '常 떳떳할 상': 'ordinary, always',
+  // Direction.
+  '直 곧을 직': 'straight',           '進 나아갈 진': 'to advance',
+
+  // Law and order.
+  '憲 법 헌': 'constitution',         '裁 마를 재': 'to judge, to cut',
+  '事 일 사': 'affair, matter',       '檢 검사할 검': 'to examine',
+  '辯 말잘할 변': 'to argue, to plead', '士 선비 사': 'scholar, professional',
+  '被 입을 피': 'to receive, passive',  '告 알릴 고': 'to tell, to accuse',
+  '訴 호소할 소': 'to appeal',         '訟 송사할 송': 'to litigate',
+  '合 합할 합': 'to join, lawful',     '刑 형벌 형': 'punishment',
+  '嫌 싫어할 혐': 'to dislike, suspicion', '疑 의심할 의': 'to doubt',
+  '據 근거 거': 'grounds, basis',      '懲 징계할 징': 'to discipline',
+  '役 부릴 역': 'labour, service',     '罰 벌할 벌': 'to punish',
+  '司 맡을 사': 'to take charge',      '安 편안 안': 'peace, safety',
+  // Finance.
+  '券 문서 권': 'certificate',         '株 그루 주': 'stock, share',
+  '式 법 식': 'form, formula',         '投 던질 투': 'to throw, to invest',
+  '資 재물 자': 'resources, capital',   '貯 쌓을 저': 'to store up',
+  '蓄 모을 축': 'to accumulate',       '預 맡길 예': 'to entrust, to deposit',
+  '積 쌓을 적': 'to pile up',          '貸 빌릴 대': 'to lend',
+  '利 이로울 리': 'benefit, interest',  '率 비율 률': 'rate, ratio',
+  '潤 불을 윤': 'to enrich, profit',    '損 덜 손': 'to lose, to damage',
+  '赤 붉을 적': 'red',                 '黑 검을 흑': 'black',
+  '本 근본 본': 'root, principal',
+  // School.
+  '敎 가르칠 교': 'to teach',          '講 익힐 강': 'to lecture',
+  '義 옳을 의': 'righteous, meaning',   '育 기를 육': 'to raise, to educate',
+  '寄 부칠 기': 'to lodge, to send',    '宿 잘 숙': 'to lodge overnight',
+  '舍 집 사': 'quarters, building',     '國 나라 국': 'country',
+  '英 꽃부리 영': 'flower, England',    '數 셈 수': 'number',
+  '韓 한국 한': 'Korea',               '史 사기 사': 'history',
+  '音 소리 음': 'sound',               '樂 노래 악': 'music',
+  '助 도울 조': 'to assist',
+  // Classes and exams.
+  '席 자리 석': 'seat',                '缺 이지러질 결': 'to lack, to be absent',
+  '遲 늦을 지': 'late',                '刻 새길 각': 'to carve, moment',
+  '考 상고할 고': 'to examine, to test', '査 조사할 사': 'to investigate',
+  '期 기약할 기': 'period, term',       '奬 장려할 장': 'to encourage, to award',
+  '入 들 입': 'to enter',              '績 길쌈할 적': 'achievement, record',
+  '表 겉 표': 'surface, table',         '位 자리 위': 'position, rank',
+  // Jobs and departments.
+  '長 긴 장': 'long, chief',           '部 떼 부': 'division, department',
+  '次 버금 차': 'next, second',        '組 짤 조': 'to organize, group',
+  '織 짤 직': 'to weave',              '劃 그을 획': 'to draw, to plan',
+  '營 경영할 영': 'to manage',          '總 다 총': 'all, general',
+  '財 재물 재': 'wealth',              '開 열 개': 'to open',
+  '發 필 발': 'to issue, to develop',
+  // Hospital and pharmacy.
+  '看 볼 간': 'to watch over',         '患 근심 환': 'to suffer, illness',
+  '者 놈 자': 'person',                '外 바깥 외': 'outside',
+  '應 응할 응': 'to respond',          '急 급할 급': 'urgent',
+  '方 모 방': 'direction, method',      '箋 기록할 전': 'slip of paper',
+  '軟 연할 연': 'soft',                '膏 기름 고': 'ointment, fat',
+  '咽 목구멍 인': 'throat',            '喉 목구멍 후': 'larynx',
+
   // ── Second curation pass ────────────────────────────────────────────────────
   // Roots chosen by cascade potential: each one below appears inside several compounds
   // in levels.json, so curating it lifts every compound containing it via sino-partial.
@@ -354,6 +446,160 @@ const SINO = {
   '구체': ['具體', ['具 갖출 구', '體 몸 체']],
   '연속': ['連續', ['連 이을 련', '續 이을 속']],
   '대조': ['對照', ['對 대할 대', '照 비칠 조']],
+
+  // ── Third curation pass ───────────────────────────────────────────────────
+  // Chosen because they read as native to a learner and are not. Getting these wrong in the
+  // other direction — filing them under 고유어 because they are everyday words — is exactly
+  // the mistake the inherited data made.
+  '내장': ['內臟', ['內 안 내', '臟 오장 장']],
+  '심장': ['心臟', ['心 마음 심', '臟 오장 장']],
+  '폐': ['肺', ['肺 허파 폐']],
+  '감기': ['感氣', ['感 느낄 감', '氣 기운 기']],
+  '두통': ['頭痛', ['頭 머리 두', '痛 아플 통']],
+  '치통': ['齒痛', ['齒 이 치', '痛 아플 통']],
+  '복통': ['腹痛', ['腹 배 복', '痛 아플 통']],
+  '소화불량': ['消化不良', ['消 사라질 소', '化 될 화', '不 아닐 불', '良 좋을 량']],
+  '열': ['熱', ['熱 더울 열']],
+  '설사': ['泄瀉', ['泄 샐 설', '瀉 쏟을 사']],
+  '변비': ['便祕', ['便 똥오줌 변', '祕 숨길 비']],
+  '상처': ['傷處', ['傷 다칠 상', '處 곳 처']],
+  '골절': ['骨折', ['骨 뼈 골', '折 꺾을 절']],
+  '염증': ['炎症', ['炎 불꽃 염', '症 증세 증']],
+  '피부': ['皮膚', ['皮 가죽 피', '膚 살갗 부']],
+  // Weather.
+  '태풍': ['颱風', ['颱 태풍 태', '風 바람 풍']],
+  '폭설': ['暴雪', ['暴 사나울 폭', '雪 눈 설']],
+  '폭염': ['暴炎', ['暴 사나울 폭', '炎 불꽃 염']],
+  '한파': ['寒波', ['寒 찰 한', '波 물결 파']],
+  '일교차': ['日較差', ['日 날 일', '較 견줄 교', '差 다를 차']],
+  // Time. 내일 and 점심 are the two that most often get filed as native.
+  '내일': ['來日', ['來 올 래', '日 날 일']],
+  '점심': ['點心', ['點 점 점', '心 마음 심']],
+  '작년': ['昨年', ['昨 어제 작', '年 해 년']],
+  '내년': ['來年', ['來 올 래', '年 해 년']],
+  // Food.
+  '반찬': ['飯饌', ['飯 밥 반', '饌 반찬 찬']],
+  '냉면': ['冷麵', ['冷 찰 랭', '麵 국수 면']],
+  '죽': ['粥', ['粥 죽 죽']],
+  // Clothing and objects.
+  '양말': ['洋襪', ['洋 큰바다 양', '襪 버선 말']],
+  '모자': ['帽子', ['帽 모자 모', '子 아들 자']],
+  '장갑': ['掌匣', ['掌 손바닥 장', '匣 갑 갑']],
+  '지갑': ['紙匣', ['紙 종이 지', '匣 갑 갑']],
+  '시계': ['時計', ['時 때 시', '計 셈할 계']],
+  '안경': ['眼鏡', ['眼 눈 안', '鏡 거울 경']],
+  '화장품': ['化粧品', ['化 될 화', '粧 단장할 장', '品 물건 품']],
+  '치약': ['齒藥', ['齒 이 치', '藥 약 약']],
+  // Appearance.
+  '체구': ['體軀', ['體 몸 체', '軀 몸 구']],
+  '체형': ['體型', ['體 몸 체', '型 모형 형']],
+  '이목구비': ['耳目口鼻', ['耳 귀 이', '目 눈 목', '口 입 구', '鼻 코 비']],
+  '인상': ['印象', ['印 도장 인', '象 코끼리 상']],
+  '미인': ['美人', ['美 아름다울 미', '人 사람 인']],
+  '동안': ['童顔', ['童 아이 동', '顔 얼굴 안']],
+  '노안': ['老顔', ['老 늙을 로', '顔 얼굴 안']],
+  // Adverb and direction.
+  '항상': ['恒常', ['恒 항상 항', '常 떳떳할 상']],
+  '직진': ['直進', ['直 곧을 직', '進 나아갈 진']],
+
+  // ── Law and order ─────────────────────────────────────────────────────────
+  '헌법': ['憲法', ['憲 법 헌', '法 법 법']],
+  '법원': ['法院', ['法 법 법', '院 집 원']],
+  '재판': ['裁判', ['裁 마를 재', '判 판단할 판']],
+  '판사': ['判事', ['判 판단할 판', '事 일 사']],
+  '검사': ['檢事', ['檢 검사할 검', '事 일 사']],
+  '변호사': ['辯護士', ['辯 말잘할 변', '護 도울 호', '士 선비 사']],
+  '피고': ['被告', ['被 입을 피', '告 알릴 고']],
+  '원고': ['原告', ['原 근본 원', '告 알릴 고']],
+  '소송': ['訴訟', ['訴 호소할 소', '訟 송사할 송']],
+  '판결': ['判決', ['判 판단할 판', '決 결단할 결']],
+  '불법': ['不法', ['不 아닐 불', '法 법 법']],
+  '합법': ['合法', ['合 합할 합', '法 법 법']],
+  '형사': ['刑事', ['刑 형벌 형', '事 일 사']],
+  '민사': ['民事', ['民 백성 민', '事 일 사']],
+  '혐의': ['嫌疑', ['嫌 싫어할 혐', '疑 의심할 의']],
+  '증거': ['證據', ['證 증거 증', '據 근거 거']],
+  '징역': ['懲役', ['懲 징계할 징', '役 부릴 역']],
+  '벌금': ['罰金', ['罰 벌할 벌', '金 돈 금']],
+  '사법': ['司法', ['司 맡을 사', '法 법 법']],
+  '치안': ['治安', ['治 다스릴 치', '安 편안 안']],
+  // ── Finance and economy ───────────────────────────────────────────────────
+  '증권': ['證券', ['證 증거 증', '券 문서 권']],
+  '주식': ['株式', ['株 그루 주', '式 법 식']],
+  '투자': ['投資', ['投 던질 투', '資 재물 자']],
+  '저축': ['貯蓄', ['貯 쌓을 저', '蓄 모을 축']],
+  '예금': ['預金', ['預 맡길 예', '金 돈 금']],
+  '적금': ['積金', ['積 쌓을 적', '金 돈 금']],
+  '대출': ['貸出', ['貸 빌릴 대', '出 날 출']],
+  '금리': ['金利', ['金 돈 금', '利 이로울 리']],
+  '이자': ['利子', ['利 이로울 리', '子 아들 자']],
+  '물가': ['物價', ['物 물건 물', '價 값 가']],
+  '환율': ['換率', ['換 바꿀 환', '率 비율 률']],
+  '자산': ['資產', ['資 재물 자', '產 재산 산']],
+  '원가': ['原價', ['原 근본 원', '價 값 가']],
+  '이윤': ['利潤', ['利 이로울 리', '潤 불을 윤']],
+  '손실': ['損失', ['損 덜 손', '失 잃을 실']],
+  '적자': ['赤字', ['赤 붉을 적', '字 글자 자']],
+  '흑자': ['黑字', ['黑 검을 흑', '字 글자 자']],
+  '자본': ['資本', ['資 재물 자', '本 근본 본']],
+  // ── School ────────────────────────────────────────────────────────────────
+  '교실': ['敎室', ['敎 가르칠 교', '室 집 실']],
+  '강의실': ['講義室', ['講 익힐 강', '義 옳을 의', '室 집 실']],
+  '강당': ['講堂', ['講 익힐 강', '堂 집 당']],
+  '체육관': ['體育館', ['體 몸 체', '育 기를 육', '館 집 관']],
+  '기숙사': ['寄宿舍', ['寄 부칠 기', '宿 잘 숙', '舍 집 사']],
+  '국어': ['國語', ['國 나라 국', '語 말씀 어']],
+  '영어': ['英語', ['英 꽃부리 영', '語 말씀 어']],
+  '수학': ['數學', ['數 셈 수', '學 배울 학']],
+  '한국사': ['韓國史', ['韓 한국 한', '國 나라 국', '史 사기 사']],
+  '지리': ['地理', ['地 땅 지', '理 이치 리']],
+  '음악': ['音樂', ['音 소리 음', '樂 노래 악']],
+  '체육': ['體育', ['體 몸 체', '育 기를 육']],
+  '조교': ['助敎', ['助 도울 조', '敎 가르칠 교']],
+  // ── Classes and exams ─────────────────────────────────────────────────────
+  '강의': ['講義', ['講 익힐 강', '義 옳을 의']],
+  '출석': ['出席', ['出 날 출', '席 자리 석']],
+  '결석': ['缺席', ['缺 이지러질 결', '席 자리 석']],
+  '지각': ['遲刻', ['遲 늦을 지', '刻 새길 각']],
+  '학점': ['學點', ['學 배울 학', '點 점 점']],
+  '중간고사': ['中間考査', ['中 가운데 중', '間 사이 간', '考 상고할 고', '査 조사할 사']],
+  '기말고사': ['期末考査', ['期 기약할 기', '末 끝 말', '考 상고할 고', '査 조사할 사']],
+  '보고서': ['報告書', ['報 알릴 보', '告 알릴 고', '書 글 서']],
+  '논문': ['論文', ['論 논할 론', '文 글 문']],
+  '장학금': ['奬學金', ['奬 장려할 장', '學 배울 학', '金 돈 금']],
+  '입학': ['入學', ['入 들 입', '學 배울 학']],
+  '학기': ['學期', ['學 배울 학', '期 기약할 기']],
+  '방학': ['放學', ['放 놓을 방', '學 배울 학']],
+  '성적표': ['成績表', ['成 이룰 성', '績 길쌈할 적', '表 겉 표']],
+  '학위': ['學位', ['學 배울 학', '位 자리 위']],
+  // ── Jobs and departments ──────────────────────────────────────────────────
+  '사장': ['社長', ['社 모임 사', '長 긴 장']],
+  '이사': ['理事', ['理 이치 리', '事 일 사']],
+  '부장': ['部長', ['部 떼 부', '長 긴 장']],
+  '차장': ['次長', ['次 버금 차', '長 긴 장']],
+  '과장': ['課長', ['課 매길 과', '長 긴 장']],
+  '대리': ['代理', ['代 대신할 대', '理 이치 리']],
+  '사원': ['社員', ['社 모임 사', '員 인원 원']],
+  '직원': ['職員', ['職 직분 직', '員 인원 원']],
+  '직무': ['職務', ['職 직분 직', '務 힘쓸 무']],
+  '조직': ['組織', ['組 짤 조', '織 짤 직']],
+  '기획부': ['企劃部', ['企 꾀할 기', '劃 그을 획', '部 떼 부']],
+  '영업부': ['營業部', ['營 경영할 영', '業 업 업', '部 떼 부']],
+  '인사부': ['人事部', ['人 사람 인', '事 일 사', '部 떼 부']],
+  '총무부': ['總務部', ['總 다 총', '務 힘쓸 무', '部 떼 부']],
+  '재무부': ['財務部', ['財 재물 재', '務 힘쓸 무', '部 떼 부']],
+  '개발부': ['開發部', ['開 열 개', '發 필 발', '部 떼 부']],
+  // ── Hospital and pharmacy ─────────────────────────────────────────────────
+  '간호사': ['看護士', ['看 볼 간', '護 도울 호', '士 선비 사']],
+  '환자': ['患者', ['患 근심 환', '者 놈 자']],
+  '내과': ['內科', ['內 안 내', '科 과목 과']],
+  '외과': ['外科', ['外 바깥 외', '科 과목 과']],
+  '안과': ['眼科', ['眼 눈 안', '科 과목 과']],
+  '치과': ['齒科', ['齒 이 치', '科 과목 과']],
+  '이비인후과': ['耳鼻咽喉科', ['耳 귀 이', '鼻 코 비', '咽 목구멍 인', '喉 목구멍 후', '科 과목 과']],
+  '응급실': ['應急室', ['應 응할 응', '急 급할 급', '室 집 실']],
+  '처방전': ['處方箋', ['處 곳 처', '方 모 방', '箋 기록할 전']],
+  '연고': ['軟膏', ['軟 연할 연', '膏 기름 고']],
 };
 
 // Sino-Korean root + native Korean suffix.
@@ -380,7 +626,55 @@ const NATIVE_NOTE = {
   '할머니': 'grandmother; also used for any elderly woman',
 };
 
+// Native Korean words that need no further comment. "Native Korean (고유어)" on its own is
+// the useful fact — it tells the learner there is no hanja to look for, which is most of what
+// the origin panel is for.
+//
+// This is a checked list, not a default. The data this project inherited asserted 고유어 for
+// ~1,090 words with no evidence and mislabelled a great deal of Sino-Korean along the way, so
+// every entry here was read against its English gloss first. The words that trip people up are
+// the ones that *look* native and are not — 내일 (來日), 점심 (點心), 양말 (洋襪), 지갑 (紙匣),
+// 시계 (時計), 안경 (眼鏡), 감기 (感氣), 항상 (恒常), 냉면 (冷麵), 반찬 (飯饌) — and those are
+// curated in SINO below rather than swept in here.
+const NATIVE_SET = [
+  // Body
+  '머리', '눈', '코', '입', '귀', '얼굴', '목', '어깨', '팔', '손', '손가락', '가슴', '배',
+  '허리', '다리', '발', '발가락', '콧물', '붓기', '기침', '흉터',
+  // Position and direction
+  '앞', '뒤', '위', '아래', '옆', '사이', '안', '밖', '오른쪽', '왼쪽', '구석', '모퉁이',
+  // Weather and seasons
+  '봄', '여름', '가을', '겨울', '날씨', '맑음', '흐림', '비', '함박눈', '바람', '장마',
+  '맑다', '흐리다', '춥다', '덥다',
+  // Time
+  '오늘', '어제', '모레', '글피', '아침', '저녁', '밤', '새벽', '올해',
+  // Food
+  '밥', '국', '찌개', '김치', '불고기', '비빔밥', '떡볶이', '삼겹살', '갈비', '튀김',
+  // Objects and clothing
+  '옷', '바지', '치마', '신발', '구두', '목도리', '가방',
+  // Colour and shape
+  '빨간색', '파란색', '노란색', '초록색', '하얀색', '검은색', '동그랗다', '넓다', '좁다',
+  '두껍다', '얇다', '가볍다',
+  // Everyday actions
+  '자다', '먹다', '마시다', '보다', '듣다', '읽다', '쓰다', '말하다', '걷다', '달리다',
+  '쉬다', '씻다', '입다', '벗다', '웃다', '울다', '살다',
+  // Appearance
+  '키', '머릿결', '쌍꺼풀', '차림새', '겉모습', '옷차림',
+  // Time adverbs
+  '일찍', '늦게', '벌써', '아직', '자주', '가끔', '늘', '갑자기', '이미',
+  // Misc native nouns confirmed against their glosses
+  '동아리', '스승', '색깔',
+];
+const NATIVE_LOOKUP = new Set(NATIVE_SET);
+
 const LOANWORDS = {
+  '컵': 'cup',
+  // Third curation pass. 파스 arrived through Japanese パス rather than straight from English,
+  // which is why its English gloss ("pain relief patch") looks nothing like the Korean.
+  '인턴': 'intern',           '커리큘럼': 'curriculum',   '파스': 'pas (adhesive pain patch, via Japanese)',
+  '헬스': 'health (gym)',      '스키': 'ski',             '캠핑': 'camping',
+  '보너스': 'bonus',          '펜션': 'pension (holiday cottage)', '프론트': 'front (reception desk)',
+  '렌터카': 'rent-a-car',      '빌라': 'villa',           '원룸': 'one-room (studio flat)',
+  '에어컨': 'air conditioner', '이슈': 'issue',           '마케팅': 'marketing',
   '커피': 'coffee', '빵': 'pão (Portuguese, via Japanese)', '마트': 'mart',
   '버스': 'bus', '택시': 'taxi', '셔츠': 'shirt', '코트': 'coat',
   '점퍼': 'jumper', '스마트폰': 'smartphone', '인터넷': 'internet',
@@ -563,6 +857,7 @@ function classify(ko) {
   if (MIXED_LOAN[ko])  { const [h, t, l] = MIXED_LOAN[ko];     return { o: 'mixed-loan', h, p: eumhun(t), l }; }
   if (LOANWORDS[ko])   { return { o: 'loan', l: LOANWORDS[ko] }; }
   if (NATIVE_NOTE[ko]) { return { o: 'native', note: NATIVE_NOTE[ko] }; }
+  if (NATIVE_LOOKUP.has(ko)) { return { o: 'native' }; }
   if (IDIOMS[ko])      { return { o: 'idiom', note: IDIOMS[ko] }; }
   if (DISCOURSE[ko])   { return { o: 'discourse', note: DISCOURSE[ko] }; }
   if (NATIVE_PREDICATES[ko]) { return { o: 'native', note: NATIVE_PREDICATES[ko] }; }
@@ -651,6 +946,9 @@ for (const level of levelsData) {
 // falls back to `unknown` and coverage drops with nothing to point at.
 const WHOLE_WORD_MAPS = {
   MIXED, MIXED_LOAN, NATIVE_NOTE, IDIOMS, DISCOURSE, NATIVE_PREDICATES,
+  // NATIVE_SET is a list, not a map, but the same rule applies: a headword that is not there
+  // any more, or that an earlier branch of classify() now claims, is dead curation.
+  NATIVE_SET: Object.fromEntries(NATIVE_SET.map(k => [k, true])),
 };
 const headwords = new Set(
   levelsData.flatMap(l => (l.words || []).map(w => (w.ko || '').normalize('NFC')))
