@@ -5736,6 +5736,114 @@ const markCompleted = i=>{ const c=getCompleted(); if(!c.includes(i)){c.push(i);
 const $=id=>document.getElementById(id);
 const lsOverlay=$('level-select-overlay'), lsGrid=$('ls-grid');
 const hud=$('hud'), pbWrap=$('progress-bar-wrap'), tipEl=$('controls-tip');
+
+// ── Touch controls ───────────────────────────────────────────────────────────
+//
+// The farm scene read movement straight off eight keyboard booleans, so on a phone it was
+// simply unplayable — which is a strange gap for a vocabulary trainer, since reviewing is
+// exactly the thing people do standing up.
+//
+// touchAxis is an analog vector the scene's update() adds to the keyboard vector. Keeping it
+// as shared state rather than wiring the DOM into the scene means the scene needs no knowledge
+// of where input came from, and the keyboard path is untouched.
+const touchAxis = { x: 0, y: 0 };
+
+// `pointer: coarse` asks whether the *primary* pointer is imprecise, which is the question
+// worth asking. maxTouchPoints alone would light these up on a touchscreen laptop being
+// driven with its trackpad, and a width breakpoint would light them up on a narrow desktop
+// window. Re-evaluated on change so plugging in a mouse, or a tablet switching modes, is
+// handled without a reload.
+const coarsePointer = (typeof window !== 'undefined' && window.matchMedia)
+  ? window.matchMedia('(pointer: coarse)')
+  : null;
+function isTouchDevice(){ return !!(coarsePointer && coarsePointer.matches); }
+
+function setTouchControlsVisible(show){
+  const el = $('touch-controls');
+  if (!el) return;
+  const on = show && isTouchDevice();
+  el.classList.toggle('hidden', !on);
+  if (!on) { touchAxis.x = 0; touchAxis.y = 0; resetTouchKnob(); }
+}
+
+function resetTouchKnob(){
+  const knob = $('tc-knob'), stick = $('tc-stick');
+  if (knob) knob.style.transform = 'translate(0px, 0px)';
+  if (stick) stick.classList.remove('dragging');
+}
+
+function initTouchControls(){
+  const stick = $('tc-stick'), knob = $('tc-knob'), action = $('tc-action');
+  if (!stick || !knob || !action) return;
+
+  const RADIUS = 46;          // how far the knob travels, in px
+  const DEAD_ZONE = 0.18;     // below this the stick reads as centred
+  let activeId = null;
+
+  const applyFromPoint = (clientX, clientY) => {
+    const r = stick.getBoundingClientRect();
+    let dx = clientX - (r.left + r.width / 2);
+    let dy = clientY - (r.top + r.height / 2);
+    const dist = Math.hypot(dx, dy);
+    // Clamp the knob to the ring, but keep the axis analog inside it so a small lean is a
+    // slow walk rather than a full sprint.
+    const clamped = Math.min(dist, RADIUS);
+    const ux = dist ? dx / dist : 0, uy = dist ? dy / dist : 0;
+    knob.style.transform = `translate(${ux * clamped}px, ${uy * clamped}px)`;
+    const mag = clamped / RADIUS;
+    if (mag < DEAD_ZONE) { touchAxis.x = 0; touchAxis.y = 0; }
+    else { touchAxis.x = ux * mag; touchAxis.y = uy * mag; }
+  };
+
+  stick.addEventListener('pointerdown', (e) => {
+    activeId = e.pointerId;
+    stick.setPointerCapture(e.pointerId);
+    stick.classList.add('dragging');
+    applyFromPoint(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  stick.addEventListener('pointermove', (e) => {
+    if (e.pointerId !== activeId) return;
+    applyFromPoint(e.clientX, e.clientY);
+    e.preventDefault();
+  });
+  const release = (e) => {
+    if (activeId !== null && e.pointerId !== activeId) return;
+    activeId = null;
+    touchAxis.x = 0; touchAxis.y = 0;
+    resetTouchKnob();
+  };
+  stick.addEventListener('pointerup', release);
+  stick.addEventListener('pointercancel', release);
+  // A pointer that leaves the element without capture releasing still has to stop the player,
+  // otherwise a thumb sliding off the pad walks them into a fence forever.
+  stick.addEventListener('lostpointercapture', release);
+
+  action.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    triggerInteract();
+  });
+
+  if (coarsePointer && coarsePointer.addEventListener) {
+    coarsePointer.addEventListener('change', () => {
+      setTouchControlsVisible(hud && hud.style.display !== 'none');
+    });
+  }
+}
+
+// The same guards the SPACE handler in FarmScene.update() applies, in one place so the two
+// input routes cannot drift apart.
+function triggerInteract(){
+  const sc = sceneRef;
+  if (!sc || typeof sc._interact !== 'function') return;
+  if (playerLocked || sc.isPerformingAction) return;
+  if (quizOpen || shopOpen || memoryOpen || trophyOpen || duelOpen || catDialogOpen) return;
+  sc._interact();
+}
+
+// game.js is loaded at the end of <body>, so the controls are already in the document.
+// Guarded for the Node harnesses, which evaluate this file with a mock document.
+if (!IS_NODE && typeof document !== 'undefined') initTouchControls();
 const hudLevelEl=$('hud-level'), hudProgressEl=$('hud-progress'), pbFill=$('progress-bar-fill');
 const quizBackdrop=$('quiz-backdrop'), answerInput=$('answer-input');
 const feedbackText=$('feedback-text'), submitBtn=$('submit-btn'), cancelBtn=$('cancel-btn');
@@ -6046,11 +6154,13 @@ if (typeof window !== 'undefined') {
 function showLevelSelect() {
   setModalState('level-select-overlay', true);
   hud.style.display = pbWrap.style.display = tipEl.style.display = 'none';
+  setTouchControlsVisible(false);
   buildLevelSelectScreen();
 }
 function hideLevelSelect() {
   setModalState('level-select-overlay', false);
   hud.style.display = pbWrap.style.display = tipEl.style.display = '';
+  setTouchControlsVisible(true);
 }
 
 function buyLevelFromSelect(idx) {
@@ -9227,10 +9337,17 @@ class FarmScene extends Phaser.Scene {
 
 
     if(!playerLocked && !this.isPerformingAction){
-      const vx=(this.keys.A.isDown || this.keys.LEFT.isDown?-1:0)+(this.keys.D.isDown || this.keys.RIGHT.isDown?1:0);
-      const vy=(this.keys.W.isDown || this.keys.UP.isDown?-1:0)+(this.keys.S.isDown || this.keys.DOWN.isDown?1:0);
-      const len=Math.sqrt(vx*vx+vy*vy)||1;
-      this.player.setVelocity((vx/len)*PLAYER_SPD,(vy/len)*PLAYER_SPD);
+      let vx=(this.keys.A.isDown || this.keys.LEFT.isDown?-1:0)+(this.keys.D.isDown || this.keys.RIGHT.isDown?1:0);
+      let vy=(this.keys.W.isDown || this.keys.UP.isDown?-1:0)+(this.keys.S.isDown || this.keys.DOWN.isDown?1:0);
+      // The virtual thumbstick adds to the same vector, so nothing downstream — animation,
+      // facing, dust puffs — needs to know which device the player used.
+      if(typeof touchAxis !== 'undefined'){ vx += touchAxis.x; vy += touchAxis.y; }
+      // Normalize only past unit length. Keyboard diagonals are √2 and still get scaled back
+      // exactly as before; a half-pushed stick keeps its magnitude and walks at half speed,
+      // which dividing by `len` unconditionally would have thrown away.
+      const len=Math.hypot(vx,vy);
+      if(len>1){ vx/=len; vy/=len; }
+      this.player.setVelocity(vx*PLAYER_SPD,vy*PLAYER_SPD);
       if(vx!==0||vy!==0){
         let animKey = 'player-walk-down';
         if (Math.abs(vx) >= Math.abs(vy)) {
