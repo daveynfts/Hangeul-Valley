@@ -57,8 +57,19 @@ cd admin && npm install && npm start
 | `C` | Cooking |
 | `Esc` | Close the top modal |
 
-Keyboard only — there are no touch controls yet, so the farm scene is not playable on
-a phone.
+On a touchscreen the farm scene shows a virtual thumbstick and an interact button instead.
+They appear only where `(pointer: coarse)` matches — the question is whether the *primary*
+pointer is imprecise, which `navigator.maxTouchPoints` does not answer (it lights up on a
+touchscreen laptop being driven by its trackpad) and a width breakpoint does not answer either
+(it lights up on a narrow desktop window). The media query is watched for changes, so plugging
+in a mouse takes effect without a reload.
+
+The stick is analog: a half push walks at half speed. It feeds `touchAxis`, which
+`FarmScene.update()` adds to the keyboard vector, so animation, facing and dust puffs need no
+knowledge of which device the player used. Normalization happens only past unit length —
+keyboard diagonals are √2 and still get scaled back exactly as before, while a partly pushed
+stick keeps its magnitude. The interact button routes through `triggerInteract()`, which
+applies the same guards as the SPACE handler from one place so the two cannot drift apart.
 
 ### On-screen furniture
 
@@ -523,9 +534,10 @@ repo root, which is what Vercel serves.
    the same cascade method — measure which roots appear inside the most uncurated
    compounds and curate those, rather than working through the list in order. The admin
    dashboard's **Not Curated** list is the working queue.
-2. **Mobile.** Virtual joystick and tap-to-interact for `FarmScene`, then PWA install.
-   The review loop suits phones better than desktop — vocabulary study is what people do
-   on a bus.
+2. **PWA install and offline.** The touch controls have landed, so the farm is playable on a
+   phone; installability is what is left. It needs Phaser vendored into the repo first — the
+   game loads it from a CDN, so a service worker cannot make the app work offline while its
+   engine still comes over the wire.
 3. **Cloud save.** Losing SRS history when changing machines is a dealbreaker now that
    the history is the product.
 4. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the

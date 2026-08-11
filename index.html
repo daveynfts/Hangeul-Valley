@@ -497,6 +497,70 @@
       width: max-content; max-width: calc(100vw - 28px);
       text-align: center; line-height: 1.5;
     }
+
+    /* ── TOUCH CONTROLS ─────────────────────────────────────────────────────
+       The container is pointer-events: none so it never steals taps from the game
+       underneath; only the stick and the button opt back in. Sitting at z-index 150 puts
+       them above the HUD (100) and below every modal backdrop (200+), so opening a quiz
+       covers them rather than leaving a thumbstick floating over the answer field. */
+    #touch-controls {
+      position: fixed; inset: auto 0 0 0; z-index: 150;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      padding: 0 18px 18px; pointer-events: none;
+      /* Keep clear of the iOS home indicator and any notch-side inset. */
+      padding-bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    }
+    #touch-controls.hidden { display: none; }
+
+    #tc-stick {
+      pointer-events: auto; touch-action: none;
+      width: 132px; height: 132px; border-radius: 50%;
+      background: rgba(15, 23, 42, 0.55);
+      border: 2px solid rgba(56, 189, 248, 0.45);
+      box-shadow: 0 0 0 2px #0f172a, 0 0 18px rgba(56, 189, 248, 0.2);
+      position: relative; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    #tc-knob {
+      position: absolute; left: 50%; top: 50%; width: 56px; height: 56px;
+      margin: -28px 0 0 -28px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #7dd3fc, #0284c7);
+      border: 2px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: transform .08s ease-out;
+    }
+    #tc-stick.dragging #tc-knob { transition: none; }
+
+    #tc-action {
+      pointer-events: auto; touch-action: none;
+      width: 108px; height: 108px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #86efac, #16a34a);
+      border: 3px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 0 0 2px #0f172a, 0 6px 18px rgba(0, 0, 0, 0.55);
+      color: #06280f; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      font-family: 'Press Start 2P', monospace; font-size: 11px;
+      user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+    }
+    #tc-action:active { transform: scale(0.94); filter: brightness(1.1); }
+    #tc-action-icon { font-size: 26px; line-height: 1; }
+
+    /* The keyboard hint is noise where there is no keyboard, and it would sit under the
+       thumbstick anyway. Done in CSS rather than JS because showLevelSelect/hideLevelSelect
+       already drive `#controls-tip`'s inline display, and two owners of one property is how
+       flicker starts. */
+    @media (pointer: coarse) {
+      #controls-tip { display: none !important; }
+    }
+
+    /* Short landscape phones: shrink so the controls do not eat the play area. */
+    @media (max-height: 460px) {
+      #touch-controls { padding: 0 12px 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)); }
+      #tc-stick { width: 104px; height: 104px; }
+      #tc-knob { width: 44px; height: 44px; margin: -22px 0 0 -22px; }
+      #tc-action { width: 84px; height: 84px; font-size: 9px; }
+      #tc-action-icon { font-size: 20px; }
+    }
+
     .key-badge {
       display: inline-block;
       background: rgba(30, 41, 59, 0.9);
@@ -1468,6 +1532,20 @@
     Move: <span class="key-badge">W</span><span class="key-badge">A</span><span class="key-badge">S</span><span class="key-badge">D</span>
     or <span class="key-badge">↑</span><span class="key-badge">↓</span><span class="key-badge">←</span><span class="key-badge">→</span>
     &nbsp;|&nbsp; Near plot 🟤 → <span class="key-badge">SPACE</span> plant &nbsp;|&nbsp; Near crop ✨ → <span class="key-badge">SPACE</span> harvest
+  </div>
+
+  <!-- ══════════════ TOUCH CONTROLS (phones / tablets) ══════════════
+       Shown only where the primary pointer is coarse, and hidden while the game is not in
+       play. z-index 150 keeps them above the HUD and below every modal, so a modal's own
+       buttons are never competing with a thumbstick underneath. -->
+  <div id="touch-controls" class="hidden">
+    <div id="tc-stick" aria-label="Move">
+      <div id="tc-knob"></div>
+    </div>
+    <button type="button" id="tc-action" aria-label="Interact">
+      <span id="tc-action-icon">✋</span>
+      <span id="tc-action-label">ACT</span>
+    </button>
   </div>
 
   <!-- ══════════════ QUIZ MODAL ════════════════════════════════════ -->
