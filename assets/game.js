@@ -4418,7 +4418,6 @@ var recipeState = {
   unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap', 'honey_yakgwa', 'honey_tea']
 };
 var activeBuffs = {};
-let seasonalState = { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, claimedRewards: [] };
 let leaderboardState = { personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 } };
 var cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
 
@@ -4540,7 +4539,6 @@ function migrateSaveData(d) {
     data.inventory.maxSlots = typeof data.inventory.maxSlots === 'number' ? data.inventory.maxSlots : 20;
     data.recipes = data.recipes || { unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap', 'honey_yakgwa', 'honey_tea'] };
     data.activeBuffs = data.activeBuffs || {};
-    data.seasonal = data.seasonal || { activeSeasonId: 'autumn_harvest_2026', seasonPoints: 0, claimedRewards: [] };
     data.leaderboards = data.leaderboards || {
       personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 }
     };
@@ -4710,7 +4708,6 @@ function collectSave(){
     inventory: inventoryState,
     recipes: recipeState,
     activeBuffs: activeBuffs,
-    seasonal: seasonalState,
     leaderboards: leaderboardState,
     droppedItems: drops,
     cooking: cookingState
@@ -4763,7 +4760,6 @@ function applySave(d){
   }
   if(migrated.recipes) recipeState = migrated.recipes;
   if(migrated.activeBuffs) activeBuffs = migrated.activeBuffs;
-  if(migrated.seasonal) seasonalState = migrated.seasonal;
   if(migrated.leaderboards) leaderboardState = migrated.leaderboards;
   if(Array.isArray(migrated.droppedItems)) {
     droppedItemsSave = migrated.droppedItems;
@@ -4792,7 +4788,7 @@ function applySave(d){
 // Write to file (pywebview) AND localStorage backup.
 //
 // collectSave() serializes the entire game state — currencies, SRS for 1500 words,
-// plots, inventory, quests, recipes, buffs, seasonal, leaderboards, ground drops.
+// plots, inventory, quests, recipes, buffs, leaderboards, ground drops.
 // persistSave() is called from ~35 places, including on every quiz answer, so writes
 // are coalesced behind a trailing debounce. Use flushSave() when the state must reach
 // disk immediately (scene shutdown, page unload, explicit Save button).
@@ -5046,9 +5042,6 @@ function addCoins(amount) {
     if (typeof isBuffActive === 'function' && isBuffActive('coin_boost')) {
       finalAmt = Math.round(finalAmt * 2.0);
     }
-    if (typeof seasonalState !== 'undefined' && seasonalState?.activeSeasonId === 'childrens_day') {
-      finalAmt = Math.round(finalAmt * 2.0);
-    }
   }
   playerCurrencies.coins = Math.max(0, playerCurrencies.coins + finalAmt);
   syncGoldAlias();
@@ -5058,10 +5051,7 @@ function addCoins(amount) {
 }
 
 function addGems(amount) {
-  let finalGems = amount;
-  if (amount > 0 && typeof seasonalState !== 'undefined' && seasonalState?.activeSeasonId === 'seollal') {
-    finalGems += 1;
-  }
+  const finalGems = amount;
   playerCurrencies.gems = Math.max(0, playerCurrencies.gems + finalGems);
   syncGoldAlias();
   persistSave();
@@ -5070,10 +5060,7 @@ function addGems(amount) {
 }
 
 function addHonor(amount) {
-  let finalHonor = amount;
-  if (amount > 0 && typeof seasonalState !== 'undefined' && seasonalState?.activeSeasonId === 'chuseok') {
-    finalHonor = Math.round(finalHonor * 1.5);
-  }
+  const finalHonor = amount;
   playerCurrencies.honor = Math.max(0, playerCurrencies.honor + finalHonor);
   syncGoldAlias();
   persistSave();
@@ -5619,7 +5606,6 @@ function initSave(){
 function _afterLoad(){
   updateGoldHUD();
   buildLevelSelectScreen();
-  if (typeof initSeasonalEvents === 'function') initSeasonalEvents();
   if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
   console.log('[Save] gold='+gold+', levels='+JSON.stringify(unlockedLevels)+', plots='+plotSave.length);
 }
@@ -5750,21 +5736,6 @@ const markCompleted = i=>{ const c=getCompleted(); if(!c.includes(i)){c.push(i);
 const $=id=>document.getElementById(id);
 const lsOverlay=$('level-select-overlay'), lsGrid=$('ls-grid');
 const hud=$('hud'), pbWrap=$('progress-bar-wrap'), tipEl=$('controls-tip');
-
-// Publish the HUD's measured bottom edge so anything anchored under it can follow. The HUD is
-// `flex-wrap: wrap` and its contents change as buttons unlock and pixel fonts finish loading,
-// so its height is not a constant — and the seasonal banner used to assume it was, sitting at
-// a hardcoded 66px that landed on the button row whenever the bar wrapped to two lines.
-// ResizeObserver catches all three causes; a plain resize listener would miss the other two.
-if (typeof ResizeObserver === 'function' && hud) {
-  const publishHudBottom = () => {
-    const r = hud.getBoundingClientRect();
-    // Zero while the HUD is display:none, in which case leave the last good value alone.
-    if (r.height > 0) document.documentElement.style.setProperty('--hud-bottom', `${Math.round(r.bottom)}px`);
-  };
-  new ResizeObserver(publishHudBottom).observe(hud);
-  publishHudBottom();
-}
 const hudLevelEl=$('hud-level'), hudProgressEl=$('hud-progress'), pbFill=$('progress-bar-fill');
 const quizBackdrop=$('quiz-backdrop'), answerInput=$('answer-input');
 const feedbackText=$('feedback-text'), submitBtn=$('submit-btn'), cancelBtn=$('cancel-btn');
@@ -5915,7 +5886,6 @@ function closeModalById(overlayId) {
   else if (overlayId === 'cooking-overlay') window.closeCookingUI();
   else if (overlayId === 'fish-album-overlay') window.closeFishAlbum();
   else if (overlayId === 'recipe-overlay') window.closeRecipeBook();
-  else if (overlayId === 'seasonal-overlay') window.closeSeasonalOverlay();
   else if (overlayId === 'leaderboard-overlay') window.closeLeaderboard();
   else if (overlayId === 'shop-overlay') window.closeShop();
   else if (overlayId === 'memory-overlay') window.closeMemoryGame();
@@ -12814,226 +12784,6 @@ window.closeCulturalFact = function() {
 };
 
 
-// ═══════════════ R5 SEASONAL EVENTS & LOCAL LEADERBOARD SYSTEM ═════════════════
-
-const SEASONAL_EVENTS_CONFIG = {
-  chuseok: {
-    id: 'chuseok',
-    name: '추석 (Chuseok - Harvest Festival)',
-    icon: '🌾',
-    themeColor: '#f59e0b',
-    borderClass: 'neon-border-gold',
-    desc: 'Harvest Festival: Bake Songpyeon 🍡, light Lunar Lanterns 🏮, and earn +50% Bonus Honor 🏅 on Quests!',
-    buffText: '+50% Honor Rewards 🏅 on Quests & Harvests',
-    themedVocab: [
-      { ko: '추석', en: 'Chuseok (Harvest Festival)' },
-      { ko: '송편', en: 'Songpyeon (Rice Cake)' },
-      { ko: '달', en: 'Moon' },
-      { ko: '한가위', en: 'Midautumn Festival' },
-      { ko: '보름달', en: 'Full Moon' },
-      { ko: '결실', en: 'Harvest Yield' }
-    ],
-    quests: [
-      { id: 'chuseok_q1', title: '🌾 Harvest Festival Prep', desc: 'Harvest 5 crops during Chuseok', target: 5, reward: { honor: 50, coins: 100 }, icon: '🌾' },
-      { id: 'chuseok_q2', title: '🍡 Bake Songpyeon', desc: 'Cook any dish in Recipe Book', target: 1, reward: { honor: 100, gems: 10 }, icon: '🍡' },
-      { id: 'chuseok_q3', title: '🌕 Full Moon Wishes', desc: 'Earn 100 Season Points', target: 100, reward: { honor: 150, gems: 25 }, icon: '🌕' }
-    ]
-  },
-  seollal: {
-    id: 'seollal',
-    name: '설날 (Seollal - Lunar New Year)',
-    icon: '🧧',
-    themeColor: '#38bdf8',
-    borderClass: 'neon-border-cyan',
-    desc: 'Lunar New Year: Cook Tteokguk 🥣, perform Sebae 🙇‍♂️ bowing, and earn Bonus Gems 💎!',
-    buffText: '+1 Bonus Gem 💎 on Quests & Minigames',
-    themedVocab: [
-      { ko: '설날', en: 'Seollal (Lunar New Year)' },
-      { ko: '떡국', en: 'Tteokguk (Rice Cake Soup)' },
-      { ko: '세배', en: 'Sebae (New Year Bow)' },
-      { ko: '복주머니', en: 'Lucky Pouch' },
-      { ko: '덕담', en: 'New Year Blessing' },
-      { ko: '연날리기', en: 'Kite Flying' }
-    ],
-    quests: [
-      { id: 'seollal_q1', title: '🥣 New Year Tteokguk', desc: 'Cook 1 dish in Recipe Book', target: 1, reward: { gems: 15, coins: 150 }, icon: '🥣' },
-      { id: 'seollal_q2', title: '🙇‍♂️ Sebae Bowing', desc: 'Complete 3 Korean Quizzes correctly', target: 3, reward: { gems: 25, honor: 50 }, icon: '🙇‍♂️' },
-      { id: 'seollal_q3', title: '🧧 Lucky Pouch Collector', desc: 'Earn 100 Season Points', target: 100, reward: { gems: 50, honor: 200 }, icon: '🧧' }
-    ]
-  },
-  childrens_day: {
-    id: 'childrens_day',
-    name: '어린이날 (Children\'s Day - May 5th)',
-    icon: '🎈',
-    themeColor: '#f43f5e',
-    borderClass: 'neon-border-pink',
-    desc: 'Children\'s Day: Play Dalgona minigame 🍭, unlock Balloon Auras 🎈 & enjoy 2x Coins 🪙 rate!',
-    buffText: '2x Coins 🪙 Rate from all activities',
-    themedVocab: [
-      { ko: '어린이', en: 'Child / Children' },
-      { ko: '달고나', en: 'Dalgona Candy' },
-      { ko: '풍선', en: 'Balloon' },
-      { ko: '장난감', en: 'Toy' },
-      { ko: '선물', en: 'Gift / Present' },
-      { ko: '동심', en: 'Childlike Innocence' }
-    ],
-    quests: [
-      { id: 'childrens_q1', title: '🍭 Dalgona Challenge', desc: 'Complete 3 Quizzes without hints', target: 3, reward: { coins: 300, honor: 30 }, icon: '🍭' },
-      { id: 'childrens_q2', title: '🎈 Balloon Party', desc: 'Earn 200 Coins from activities', target: 200, reward: { coins: 500, gems: 15 }, icon: '🎈' },
-      { id: 'childrens_q3', title: '🧸 Happy Companion', desc: 'Feed your Pet companion 1 time', target: 1, reward: { gems: 30, honor: 100 }, icon: '🧸' }
-    ]
-  }
-};
-
-let currentLeaderboardTab = 'vocab';
-
-function initSeasonalEvents() {
-  if (typeof seasonalState === 'undefined' || !seasonalState) {
-    seasonalState = { activeSeasonId: 'chuseok', seasonPoints: 0, claimedRewards: [] };
-  }
-  if (!seasonalState.activeSeasonId || !SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId]) {
-    seasonalState.activeSeasonId = 'chuseok';
-  }
-  updateSeasonalBanner();
-}
-
-function updateSeasonalBanner() {
-  const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId] || SEASONAL_EVENTS_CONFIG.chuseok;
-  const bannerEl = document.getElementById('event-banner');
-  if (!bannerEl) return;
-
-  bannerEl.style.borderColor = cfg.themeColor;
-  const iconEl = document.getElementById('eb-icon');
-  if (iconEl) iconEl.textContent = cfg.icon;
-  const titleEl = document.getElementById('eb-title');
-  if (titleEl) {
-    titleEl.textContent = cfg.name;
-    titleEl.style.color = cfg.themeColor;
-  }
-  const descEl = document.getElementById('eb-desc');
-  if (descEl) descEl.textContent = cfg.buffText;
-  const ptsEl = document.getElementById('eb-pts-val');
-  if (ptsEl) ptsEl.textContent = seasonalState.seasonPoints || 0;
-
-  bannerEl.style.display = 'flex';
-}
-
-function cycleSeasonalEvent() {
-  const seasons = ['chuseok', 'seollal', 'childrens_day'];
-  const curIdx = seasons.indexOf(seasonalState.activeSeasonId);
-  const nextIdx = (curIdx + 1) % seasons.length;
-  seasonalState.activeSeasonId = seasons[nextIdx];
-
-  const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId];
-  showToast(`🎉 Festival Changed to ${cfg.name}!`, 3500);
-  persistSave();
-  updateSeasonalBanner();
-  const modal = document.getElementById('seasonal-overlay');
-  if (modal && modal.classList.contains('visible')) {
-    openSeasonalOverlay();
-  }
-}
-
-function openSeasonalOverlay() {
-  initSeasonalEvents();
-  const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId];
-  if (!cfg) return;
-
-  const iconEl = document.getElementById('so-icon');
-  if (iconEl) iconEl.textContent = cfg.icon;
-  const titleEl = document.getElementById('so-title');
-  if (titleEl) {
-    titleEl.textContent = cfg.name;
-    titleEl.style.color = cfg.themeColor;
-  }
-  const subEl = document.getElementById('so-subtitle');
-  if (subEl) subEl.textContent = cfg.desc;
-
-  const buffTextEl = document.getElementById('so-buff-text');
-  if (buffTextEl) buffTextEl.textContent = cfg.buffText;
-
-  const ptsEl = document.getElementById('so-pts-display');
-  if (ptsEl) ptsEl.textContent = `${seasonalState.seasonPoints || 0} ⭐`;
-
-  // Render Quests
-  const qListContainer = document.getElementById('so-quests-list');
-  if (qListContainer) {
-    qListContainer.innerHTML = '';
-    cfg.quests.forEach(q => {
-      const isClaimed = (seasonalState.claimedRewards || []).includes(q.id);
-      const qCard = document.createElement('div');
-      qCard.style.cssText = 'background:rgba(30,41,59,0.7); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center;';
-      
-      let rewardStr = '';
-      if (q.reward.coins) rewardStr += `🪙+${q.reward.coins} `;
-      if (q.reward.gems) rewardStr += `💎+${q.reward.gems} `;
-      if (q.reward.honor) rewardStr += `🎖️+${q.reward.honor} `;
-
-      qCard.innerHTML = `
-        <div style="display:flex; align-items:center; gap:10px;">
-          <span style="font-size:24px">${q.icon}</span>
-          <div>
-            <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:#fff">${q.title}</div>
-            <div style="font-size:11px; color:#cbd5e1; margin-top:2px">${q.desc}</div>
-            <div style="font-size:10px; color:var(--neon-gold); margin-top:4px">Reward: ${rewardStr} +50 Pts ⭐</div>
-          </div>
-        </div>
-        <button class="eb-btn" ${isClaimed ? 'disabled style="opacity:0.5;cursor:default;"' : `onclick="claimSeasonalQuest('${q.id}')"`}>
-          ${isClaimed ? 'Claimed ✓' : 'Claim Reward'}
-        </button>
-      `;
-      qListContainer.appendChild(qCard);
-    });
-  }
-
-  // Render Themed Vocabulary Flashcards
-  const vGridContainer = document.getElementById('so-vocab-grid');
-  if (vGridContainer) {
-    vGridContainer.innerHTML = '';
-    cfg.themedVocab.forEach(v => {
-      const vCard = document.createElement('div');
-      vCard.className = 'seasonal-vocab-card';
-      vCard.innerHTML = `
-        <div style="font-family:'Noto Sans KR',sans-serif; font-size:18px; font-weight:bold; color:var(--neon-gold);">${v.ko}</div>
-        <div style="font-size:11px; color:#e2e8f0; margin-top:4px;">${v.en}</div>
-      `;
-      vGridContainer.appendChild(vCard);
-    });
-  }
-
-  setModalState('seasonal-overlay', true);
-}
-
-function closeSeasonalOverlay() {
-  playChiptuneSFX('click');
-  setModalState('seasonal-overlay', false);
-}
-
-
-function claimSeasonalQuest(questId) {
-  const cfg = SEASONAL_EVENTS_CONFIG[seasonalState.activeSeasonId];
-  if (!cfg) return;
-
-  const quest = cfg.quests.find(q => q.id === questId);
-  if (!quest) return;
-
-  if (!seasonalState.claimedRewards) seasonalState.claimedRewards = [];
-  if (seasonalState.claimedRewards.includes(questId)) return;
-
-  seasonalState.claimedRewards.push(questId);
-  seasonalState.seasonPoints = (seasonalState.seasonPoints || 0) + 50;
-
-  if (quest.reward.coins) addCoins(quest.reward.coins);
-  if (quest.reward.gems) addGems(quest.reward.gems);
-  if (quest.reward.honor) addHonor(quest.reward.honor);
-
-  persistSave();
-  showToast(`🎉 Claimed Quest Reward: ${quest.title}! (+50 Event Pts ⭐)`);
-  updateSeasonalBanner();
-  openSeasonalOverlay();
-  updateLeaderboardMetrics();
-}
-
 // ══════════════ LOCAL LEADERBOARD SYSTEM ═════════════════════════════════════
 
 const LOCAL_RIVALS = [
@@ -13337,10 +13087,6 @@ function closeProgressOverlay() {
 // Global window exports for HTML event bindings
 window.openProgressOverlay = openProgressOverlay;
 window.closeProgressOverlay = closeProgressOverlay;
-window.openSeasonalOverlay = openSeasonalOverlay;
-window.closeSeasonalOverlay = closeSeasonalOverlay;
-window.cycleSeasonalEvent = cycleSeasonalEvent;
-window.claimSeasonalQuest = claimSeasonalQuest;
 window.openLeaderboard = openLeaderboard;
 window.closeLeaderboard = closeLeaderboard;
 window.switchLeaderboardTab = switchLeaderboardTab;
