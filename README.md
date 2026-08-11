@@ -416,13 +416,28 @@ shutdown, page hide and the explicit 💾 Save button.
 
 ## Tests
 
+Everything below runs on push and on PRs to `main` via `.github/workflows/ci.yml`. All of it
+also runs locally with no setup beyond `npm ci` in `admin/`.
+
 ```bash
-node scripts/validate_content.js      # data invariants — the CI gate, 21 checks
+node scripts/validate_content.js      # data invariants — the content gate, 21 checks
 node test_srs_engine.js               # SM-2 scheduler + save migration, 147 assertions
 node test_r2_shop_vm.js               # shop + plot expansion, 65 assertions
 node test_m2_harness.js               # sprite matrix / palette integrity
+node test_m1_challenger_harness.js    # inventory, modals, ground drops — 49 assertions
+node test_m2_challenger_cooking.js    # cooking engine + recipes — 62 assertions
 cd admin && npm test                  # admin API, sync, frontend, edge cases — 44 assertions
 ```
+
+CI also re-runs `scripts/build_facts_json.js` and fails if that produces a diff. `facts.json`
+is a generated artifact, and the only way to notice someone hand-editing it — which the file's
+own header forbids — is to check that the generator still reproduces it exactly.
+
+Every suite exits non-zero on failure, which is what makes any of this a gate rather than
+decoration. That was not free: `test_m2_harness.js` printed `FINAL VERIFICATION RESULT: FAIL`
+and then exited 0, so a broken sprite matrix would have gone green. Both it and
+`validate_content.js` were checked by deliberately breaking the thing they guard and
+confirming a non-zero exit.
 
 `validate_content.js` is the one to run before committing data changes. It asserts the
 shape of `levels.json` and `facts.json` (25 levels, 1500 words, no duplicate Korean
@@ -439,13 +454,40 @@ Portuguese loanword etymologies (pão, sabão) and `é` for "pet cafés".
 injects `now` into every call, which is why `srsSchedule` takes it as a parameter — it
 lets months of review history be simulated without touching the clock.
 
-Two known failures, both predating the current work:
+### Two suites that used to be unrunnable
 
-- `test_m2_challenger_cooking.js` — 57/61. Asserts exactly 10 cooking recipes; two
-  honey recipes were added later, so the count check and the Master Chef trophy
-  assertions fail.
-- `test_m1_challenger_harness.js` — 49/49 assertions pass but the process never exits,
-  so it has to be killed. Something in `game.js` keeps the Node event loop alive.
+Both are green now, and both were blocking CI rather than merely being untidy.
+
+`test_m1_challenger_harness.js` passed 49/49 and then never exited, so it had to be killed by
+hand. The cause was a module-scope side effect in `game.js`: the buff-HUD ticker is a 1-second
+`setInterval` that nothing ever clears, guarded only by `typeof window !== 'undefined'`. This
+harness mocks `window`, so the guard passed and the timer kept the Node process alive forever.
+The same mock — of `document` this time — also defeated `loadFacts()`'s browser check, so every
+run fetched a relative URL and dumped an `ERR_INVALID_URL` trace into its own output.
+
+Both now test `IS_NODE` (`process.versions.node`), which a DOM mock cannot fake. That is the
+general lesson: in this codebase `typeof window !== 'undefined'` does not mean "in a browser",
+it means "someone defined window".
+
+`test_m2_challenger_cooking.js` failed 4 of 61 because it asserted **exactly 10** recipes and
+stocked a hand-written ingredient list that predated the honey recipes, so honey was missing
+and those two could not be cooked. It now reads both the recipe count and the shopping list off
+`COOKING_RECIPES`, stocking the *sum* of each ingredient's demand rather than the largest
+single requirement — the recipes are cooked back to back, so a shared ingredient runs out
+partway through.
+
+That last failure was hiding a real bug rather than being purely a test problem. The
+`master_chef` trophy carried `reqRecipes: 10`, and the trophy card preferred it over
+`COOKING_RECIPES.length` while the actual unlock compared against the real length. Once the
+honey recipes brought the total to 12, the card read `10/10` and showed the requirement as met
+on a trophy that could never unlock. The hardcoded count is gone; both paths read one source.
+
+Left out of CI: `scripts/verify_m2_m3.js`. It is undocumented, already failed on `main` before
+this work, and everything it checks — syntax, `assets/` parity, `levels.json` coverage — is
+covered by the suites above. It dies evaluating `game.js` in a bare vm on unguarded browser
+globals; one of those (`window.addEventListener` at what is now the `pywebviewready` block) is
+fixed here because it was inconsistent with the `typeof`-guarded block directly above it, but
+the rest of that chain was not worth chasing to revive a redundant script.
 
 ---
 
@@ -472,11 +514,9 @@ repo root, which is what Vercel serves.
    caps how many land at once so a backlog cannot become unmanageable.
 5. **Split `game.js` into modules** behind Vite. `FarmScene` alone is ~2.4k lines, and
    ~1.7k lines of cooking/seasonal/leaderboard code sit at top level after `BeeScene`.
-6. **Wire the checks into GitHub Actions.** `scripts/validate_content.js` and the harnesses
-   all pass and exit non-zero on failure, so this is now just a workflow file.
-7. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
+6. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
    review log — and the log it needs is now being recorded (see below), so the input is there.
-8. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
+7. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
    a spelling would collide. All 1,500 headwords are currently unique, making this latent
    rather than live — a hash of `ko` + part of speech fixes it. The v6 → v7 respelling made
    the cost of the current scheme concrete: correcting a headword's spelling means a save
@@ -495,6 +535,7 @@ accuracy and 14-day activity strip.
 Done in earlier passes: English unification, generated `facts.json`, Korean TTS, the
 SM-2 scheduler with its learning-step reconciliation, recognition and listening question
 modes, per-modality scheduling, fuzzy answer matching, the progress dashboard, the
-second origin-curation pass that took coverage from 30% to 42%, and the 띄어쓰기 pass —
+second origin-curation pass that took coverage from 30% to 42%, the 띄어쓰기 pass —
 space-insensitive grading, 64 headwords respelled, three corrected outright, six shared glosses
-split apart, and two new content invariants guarding all of it.
+split apart — closing the three paths that printed the answer during graded recall, and CI,
+which meant first making the two unrunnable suites runnable.

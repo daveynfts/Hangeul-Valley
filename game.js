@@ -7,6 +7,18 @@
  */
 
 // ═══════════════ GLOBAL STATE ════════════════════════════════════════════════
+//
+// The test harnesses evaluate this file in Node with hand-written `window` and `document`
+// mocks, so `typeof window !== 'undefined'` does not mean "in a browser" — it means "someone
+// defined window". Two module-scope side effects relied on that and fired under Node:
+// the buff-HUD ticker (a 1s repeating interval, never cleared, which kept the process alive
+// so test_m1_challenger_harness.js had to be killed by hand and could not go into CI) and
+// loadFacts()'s fetch of a relative URL, which threw ERR_INVALID_URL into every run's output.
+//
+// `process.versions.node` is the check a DOM mock cannot fake. There is no bundler here, so
+// nothing shims `process` in the browser build.
+const IS_NODE = typeof process !== 'undefined' && !!(process.versions && process.versions.node);
+
 let levelsData = [];
 let sceneRef = null;
 let currentLevelIndex = 0;
@@ -5611,8 +5623,11 @@ function _afterLoad(){
   if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
   console.log('[Save] gold='+gold+', levels='+JSON.stringify(unlockedLevels)+', plots='+plotSave.length);
 }
-// pywebview fires this event when API is ready; otherwise we init on DOMLoaded
-if(window.addEventListener){
+// pywebview fires this event when API is ready; otherwise we init on DOMLoaded.
+// `typeof` first, like the flushSave block above: a bare `window.x` on an undeclared
+// identifier is a ReferenceError, not undefined, so evaluating game.js in a vm without a
+// window mock died right here — which is what has been breaking scripts/verify_m2_m3.js.
+if(typeof window !== 'undefined' && window.addEventListener){
   window.addEventListener('pywebviewready', ()=>{ console.log('[pywebview] API ready'); initSave(); }, {once:true});
   // Fallback: if pywebview doesn't fire in 400ms (browser mode), init anyway
   setTimeout(()=>{ if(gold===0 && harvestCounts.size===0) initSave(); }, 400);
@@ -6718,9 +6733,10 @@ let factsLoaded = false;
 // script still evaluates where fetch is absent (Node test harnesses run game.js in
 // a bare vm context).
 function loadFacts(){
-  // Browser-only: Node has a global fetch but no document, and a relative URL there
-  // throws ERR_INVALID_URL. Checking for document keeps the test harnesses quiet.
-  if (typeof fetch !== 'function' || typeof document === 'undefined') return Promise.resolve();
+  // Browser-only: Node has a global fetch but no base URL, so a relative one throws
+  // ERR_INVALID_URL. This checked `typeof document` and one harness mocks document, so the
+  // guard passed and every run of it dumped that error. IS_NODE is the check that holds.
+  if (IS_NODE || typeof fetch !== 'function') return Promise.resolve();
   return fetch('facts.json')
     .then(r => r.json())
     .then(d => { factsData = d || {}; factsLoaded = true; })
@@ -11572,7 +11588,11 @@ const TROPHIES_DB = [
   { id: 'gold_tractor', name: 'Expert (전문가)', icon: '🥇', reqHarvests: 150, cost: 1000 },
   { id: 'diamond_crown', name: 'Master (달인)', icon: '💎', reqHarvests: 500, cost: 5000 },
   { id: 'master_scholar', name: 'Legend (전설)', icon: '👑', reqHarvests: 1000, cost: 20000 },
-  { id: 'master_chef', name: 'Master Chef (요리 왕)', icon: '👨‍🍳', desc: 'Cook all 10 recipes at least once', type: 'cooking', reqRecipes: 10, cost: 0 }
+  // No hardcoded recipe count. It used to carry `reqRecipes: 10`, which the trophy card
+  // preferred over COOKING_RECIPES.length while the actual unlock below compared against the
+  // real length — so once the two honey recipes brought the total to 12, the card read 10/10
+  // and showed the requirement as met on a trophy that would never unlock.
+  { id: 'master_chef', name: 'Master Chef (요리 왕)', icon: '👨‍🍳', desc: 'Cook every recipe at least once', type: 'cooking', cost: 0 }
 ];
 
 window.getTotalHarvests = function() {
@@ -11609,7 +11629,9 @@ window.renderTrophies = function() {
     let reqText = '';
 
     if (t.type === 'cooking') {
-      const targetCount = t.reqRecipes || (typeof COOKING_RECIPES !== 'undefined' ? COOKING_RECIPES.length : 10);
+      // COOKING_RECIPES.length is the only source for this, so the card and the unlock check
+      // in checkMasterChefTrophy cannot disagree the way they did.
+      const targetCount = (typeof COOKING_RECIPES !== 'undefined' ? COOKING_RECIPES.length : 0);
       reqMet = totalCooked >= targetCount;
       reqText = `<span style="font-size:12px;color:#888;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Cooking</span><br/>${totalCooked}/${targetCount}`;
     } else {
@@ -12489,8 +12511,9 @@ function updateBuffHUD() {
   });
 }
 
-// Tick active buffs every second
-if (typeof window !== 'undefined') {
+// Tick active buffs every second. Never under Node: nothing clears this interval, so in a
+// harness it is an immortal handle that stops the process exiting — see IS_NODE at the top.
+if (typeof window !== 'undefined' && !IS_NODE) {
   if (window.buffHUDInterval) clearInterval(window.buffHUDInterval);
   window.buffHUDInterval = setInterval(() => {
     if (typeof activeBuffs !== 'undefined' && Object.keys(activeBuffs).length > 0) {
