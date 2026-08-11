@@ -63,18 +63,21 @@ a phone.
 ### On-screen furniture
 
 `#hud` is `flex-wrap: wrap`, so its height changes with the window, with which buttons have
-unlocked, and with whether the pixel fonts have finished loading. Anything anchored beneath it
-therefore cannot use a fixed offset: a ResizeObserver in `game.js` publishes the bar's measured
-bottom edge as `--hud-bottom`, and `#event-banner` positions itself with
-`top: calc(var(--hud-bottom) + 8px)`. That is a contract across the two files — moving the
-observer without updating the CSS fallback puts the banner back on top of the buttons.
+unlocked, and with whether the pixel fonts have finished loading. Nothing may anchor itself
+beneath it with a fixed offset — that is what the seasonal banner did, at a hardcoded 66px
+that landed on the button row whenever the bar wrapped to two lines. The banner is gone now,
+but the constraint outlives it: measure the bar, do not assume its height.
 
 The level progress bar is a child of `#hud` rather than a floating element. It was
 `position: fixed; top: 10px; right: 14px`, which is exactly where the HUD sits and at the same
 z-index, so it covered the right-hand end of the bar — 249×44px of the button row at 1915 wide.
 
-Layer order, lowest first: game canvas → HUD (100) → seasonal banner (150) → modals (200+).
-Every modal covers the viewport, so anything below 200 is hidden while one is open.
+`#controls-tip` is centred with `translateX(-50%)` and so needs both `width: max-content` and
+`max-width: calc(100vw - 28px)`. Without the clamp it hangs off both edges below ~980px;
+without `max-content` it collapses toward its longest word and goes five lines tall on a phone.
+
+Layer order, lowest first: game canvas → HUD (100) → modals (200+). Every modal covers the
+viewport, so anything below 200 is hidden while one is open.
 
 ---
 
@@ -423,7 +426,7 @@ first. Both steps share `applyKoRenames()`; the tests assert that no v8 target i
 collides with a v7 one.
 
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
-(currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs, seasonal,
+(currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs,
 leaderboards, ground drops) and `persistSave()` is called from ~35 places including
 every quiz answer. `flushSave()` writes through immediately and runs on scene
 shutdown, page hide and the explicit 💾 Save button.
@@ -529,7 +532,7 @@ repo root, which is what Vercel serves.
    exact timestamp they were scheduled; a real study tool batches by day boundary and
    caps how many land at once so a backlog cannot become unmanageable.
 5. **Split `game.js` into modules** behind Vite. `FarmScene` alone is ~2.4k lines, and
-   ~1.7k lines of cooking/seasonal/leaderboard code sit at top level after `BeeScene`.
+   ~1.5k lines of cooking/leaderboard code sit at top level after `BeeScene`.
 6. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
    review log — and the log it needs is now being recorded (see below), so the input is there.
 7. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing

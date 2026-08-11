@@ -77,7 +77,7 @@ function createMockElement(id, tagName = 'DIV') {
 // Pre-create required elements
 ['inventory-overlay', 'inventory-grid', 'inv-capacity-badge', 'inv-capacity-text',
  'shop-overlay', 'cat-dialog', 'quizBackdrop', 'answerInput', 'fish-album-overlay',
- 'recipe-overlay', 'seasonal-overlay', 'leaderboard-overlay', 'memory-overlay',
+ 'recipe-overlay', 'leaderboard-overlay', 'memory-overlay',
  'duel-overlay', 'trophy-overlay', 'level-select-overlay'].forEach(id => createMockElement(id));
 
 const mockActiveElement = {
