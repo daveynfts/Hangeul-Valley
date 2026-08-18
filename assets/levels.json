@@ -78,7 +78,7 @@
       },
       {
         "ko": "삼촌",
-        "en": "uncle",
+        "en": "uncle (paternal)",
         "hint": "👨‍🦰",
         "category": "가족과 사람",
         "categoryEn": "Family & People"
@@ -1767,7 +1767,7 @@
       },
       {
         "ko": "점퍼",
-        "en": "jumper / jacket",
+        "en": "jacket / windbreaker",
         "hint": "🧥",
         "category": "물건과 의류",
         "categoryEn": "Objects & Clothing"
@@ -7734,7 +7734,7 @@
       },
       {
         "ko": "알고리즘 수식",
-        "en": "algorithm formula",
+        "en": "algorithmic expression",
         "hint": "📐",
         "category": "첨단 기술",
         "categoryEn": "Advanced Technology"
@@ -7885,7 +7885,7 @@
       },
       {
         "ko": "플라스틱",
-        "en": "plastic waste",
+        "en": "plastic",
         "hint": "🥤",
         "category": "환경 오염",
         "categoryEn": "Pollution"
@@ -8726,7 +8726,7 @@
       },
       {
         "ko": "손을 씻다",
-        "en": "to cut ties with bad deed",
+        "en": "to wash one's hands of something",
         "hint": "🧼",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
@@ -8782,7 +8782,7 @@
       },
       {
         "ko": "티끌 모아 태산",
-        "en": "many a mickle makes a muckle",
+        "en": "little by little, a mountain",
         "hint": "🏔️",
         "category": "사자성어와 속담",
         "categoryEn": "Four-Character Idioms & Proverbs"
