@@ -74,6 +74,13 @@ const EUMHUN_EN = {
   '日 날 일': 'day, sun',             '字 글자 자': 'character',
   '週 돌 주': 'week, cycle',          '末 끝 말': 'end',
   '平 평평할 평': 'level, ordinary',  '正 바를 정': 'upright, exact',
+  '義 뜻 의': 'meaning',
+  '徙 옮길 사': 'to migrate, to move house',
+  '閑 한가할 한': 'idle, at leisure',
+  '困 곤할 곤': 'to be distressed, weary',
+  '解 풀 해': 'to untie, to understand',
+  '推 밀 추': 'to push, to infer',
+  '薦 천거할 천': 'to recommend',
   '午 낮 오': 'noon',                 '子 첫째지 자': 'first zodiac branch (midnight)',
   '季 계절 계': 'season',             '節 마디 절': 'node, section',
   '氣 기운 기': 'air, energy',        '溫 따뜻할 온': 'warm',
@@ -325,6 +332,44 @@ const EUMHUN_EN = {
   '讀 읽을 독': 'to read',             '像 모양 상': 'image',
   '索 찾을 색': 'to search',           '窓 창 창': 'window',
   '定 정할 정': 'to fix, to settle',
+  '包 쌀 포': 'to wrap',               '裝 꾸밀 장': 'to dress, to pack',
+  '達 통달할 달': 'to reach, to attain', '淡 맑을 담': 'mild, pale',
+  '白 흰 백': 'white',                 '鮮 고울 선': 'fresh, vivid',
+  '調 고를 조': 'to tune, to arrange',  '停 머무를 정': 'to stop',
+  '交 사귈 교': 'to associate, to exchange', '廉 청렴할 렴': 'cheap, honest',
+  '覽 볼 람': 'to view',               '參 참여할 참': 'to take part',
+  '毒 독 독': 'poison',                '復 회복할 복': 'to recover, again',
+  '暗 어두울 암': 'dark',               '評 평할 평': 'to comment, to rate',
+  '集 모을 집': 'to gather',            '落 떨어질 낙': 'to fall',
+  '第 차례 제': 'order, rank',          '討 칠 토': 'to attack, to discuss',
+  '修 닦을 수': 'to cultivate, to repair', '協 화할 협': 'to cooperate',
+  '力 힘 력': 'strength',              '探 찾을 탐': 'to probe, to seek',
+  '訪 찾을 방': 'to visit',             '幸 다행 행': 'good fortune',
+  '爽 시원할 상': 'bracing, clear',     '快 쾌할 쾌': 'pleasant, fast',
+  '堵 담 도': 'wall, to feel secure',   '絶 끊을 절': 'to cut off, absolute',
+  '憤 분할 분': 'indignation',          '怒 성낼 노': 'anger',
+  '悔 뉘우칠 회': 'to repent',          '嫉 미워할 질': 'to envy',
+  '妬 투기할 투': 'jealousy',           '鎭 진압할 진': 'to suppress, to calm',
+  '慰 위로할 위': 'to console',         '虛 빌 허': 'empty',
+  '脫 벗을 탈': 'to take off, to escape', '誠 정성 성': 'sincerity',
+  '切 끊을 절': 'to cut, earnest',      '順 순할 순': 'obedient, mild',
+  '潑 뿌릴 발': 'to splash, lively',    '率 거느릴 솔': 'to lead, frank',
+  '慎 삼갈 신': 'prudent',             '重 무거울 중': 'heavy, important',
+  '肯 즐길 긍': 'to assent',            '否 아닐 부': 'to deny',
+  '謙 겸손할 겸': 'humble',             '遜 겸손할 손': 'modest',
+  '倨 거만할 거': 'haughty',            '慢 거만할 만': 'arrogant',
+  '取 취할 취': 'to take',              '材 재목 재': 'material, timber',
+  '編 엮을 편': 'to compile',           '輯 모을 집': 'to collect',
+  '讓 사양할 양': 'to yield',           '步 걸음 보': 'step',
+  '妥 온당할 타': 'appropriate, to settle', '尊 높을 존': 'to honour',
+  '團 둥글 단': 'group, round',         '依 의지할 의': 'to rely',
+  '支 지탱할 지': 'to support',         '賴 의뢰할 뢰': 'to depend',
+  '繼 이을 계': 'to continue',          '存 있을 존': 'to exist',
+  '享 누릴 향': 'to enjoy',             '抽 뽑을 추': 'to extract',
+  '普 넓을 보': 'widespread',           '遍 두루 편': 'everywhere',
+  '殊 다를 수': 'different, special',   '批 비평할 비': 'to criticise',
+  '糾 얽힐 규': 'to investigate, to entwine', '的 과녁 적': 'target, -al',
+  '性 성품 성': 'nature, sex',
   // Technology.
   '能 능할 능': 'ability',             '知 알 지': 'to know',
   '商 장사 상': 'commerce',
@@ -817,6 +862,15 @@ const SINO = {
   // ── Jobs and departments ──────────────────────────────────────────────────
   '사장': ['社長', ['社 모임 사', '長 긴 장']],
   '이사': ['理事', ['理 이치 리', '事 일 사']],
+  // 이사하다 "to move house" is 移徙, not 理事. The suffix strip would otherwise
+  // inherit the director sense. Same trap as 정의하다 below.
+  '한가': ['閑暇', ['閑 한가할 한', '暇 겨레 가']],
+  '피곤': ['疲困', ['疲 피곤할 피', '困 곤할 곤']],
+  '이해': ['理解', ['理 이치 리', '解 풀 해']],
+  '추천': ['推薦', ['推 밀 추', '薦 천거할 천']],
+  '부족': ['不足', ['不 아닐 불', '足 발 족']],
+  '입원': ['入院', ['入 들 입', '院 집 원']],
+  '예방': ['豫防', ['豫 먼저 예', '防 막을 방']],
   '부장': ['部長', ['部 떼 부', '長 긴 장']],
   '차장': ['次長', ['次 버금 차', '長 긴 장']],
   '과장': ['課長', ['課 매길 과', '長 긴 장']],
@@ -1291,6 +1345,133 @@ const SINO = {
   // compounds — SINO_ROOTS_BY_LEN filters to two syllables and up — so this cannot mislabel
   // anything else that happens to contain 상.
   '상': ['傷', ['傷 다칠 상']],
+  // Sixth pass — remaining 하다 / 적 headwords. Nouns that themselves end in 적
+  // (성적, 실적, 사적) are listed in full so the -적 suffix rule cannot strip them
+  // to a one-syllable root.
+  '포장': ['包裝', ['包 쌀 포', '裝 꾸밀 장']],
+  '배달': ['配達', ['配 나눌 배', '達 통달할 달']],
+  '담백': ['淡白', ['淡 맑을 담', '白 흰 백']],
+  '신선': ['新鮮', ['新 새 신', '鮮 고울 선']],
+  '폭식': ['暴食', ['暴 사나울 폭', '食 먹을 식']],
+  '소식': ['小食', ['小 작을 소', '食 먹을 식']],
+  '조리': ['調理', ['調 고를 조', '理 이치 리']],
+  '정차': ['停車', ['停 머무를 정', '車 수레 차']],
+  '교환': ['交換', ['交 사귈 교', '換 바꿀 환']],
+  '저렴': ['低廉', ['低 낮을 저', '廉 청렴할 렴']],
+  '관람': ['觀覽', ['觀 볼 관', '覽 볼 람']],
+  '유익': ['有益', ['有 있을 유', '益 더할 익']],
+  '참여': ['參與', ['參 참여할 참', '與 더불 여']],
+  '수술': ['手術', ['手 손 수', '術 재주 술']],
+  '퇴원': ['退院', ['退 물러날 퇴', '院 집 원']],
+  '치료': ['治療', ['治 다스릴 치', '療 병고칠 료']],
+  '소독': ['消毒', ['消 사라질 소', '毒 독 독']],
+  '성적': ['成績', ['成 이룰 성', '績 길쌈할 적']],
+  '복습': ['復習', ['復 회복할 복', '習 익힐 습']],
+  '예습': ['豫習', ['豫 먼저 예', '習 익힐 습']],
+  '암기': ['暗記', ['暗 어두울 암', '記 기록할 기']],
+  '질문': ['質問', ['質 바탕 질', '問 물을 문']],
+  '제출': ['提出', ['提 끌 제', '出 날 출']],
+  '평가': ['評價', ['評 평할 평', '價 값 가']],
+  '집중': ['集中', ['集 모을 집', '中 가운데 중']],
+  '통과': ['通過', ['通 통할 통', '過 지날 과']],
+  '낙제': ['落第', ['落 떨어질 낙', '第 차례 제']],
+  '작성': ['作成', ['作 지을 작', '成 이룰 성']],
+  '검토': ['檢討', ['檢 검사할 검', '討 칠 토']],
+  '수정': ['修正', ['修 닦을 수', '正 바를 정']],
+  '협력': ['協力', ['協 화할 협', '力 힘 력']],
+  '추진': ['推進', ['推 밀 추', '進 나아갈 진']],
+  '달성': ['達成', ['達 통달할 달', '成 이룰 성']],
+  '실적': ['實績', ['實 열매 실', '績 길쌈할 적']],
+  '협상': ['協商', ['協 화할 협', '商 장사 상']],
+  '계약': ['契約', ['契 맺을 계', '約 약속 약']],
+  '조율': ['調律', ['調 고를 조', '律 법칙 률']],
+  '탐방': ['探訪', ['探 찾을 탐', '訪 찾을 방']],
+  '체험': ['體驗', ['體 몸 체', '驗 시험 험']],
+  '숙박': ['宿泊', ['宿 잘 숙', '泊 머무를 박']],
+  '행복': ['幸福', ['幸 다행 행', '福 복 복']],
+  '상쾌': ['爽快', ['爽 시원할 상', '快 쾌할 쾌']],
+  '안도': ['安堵', ['安 편안 안', '堵 담 도']],
+  '감사': ['感謝', ['感 느낄 감', '謝 사례할 사']],
+  '우울': ['憂鬱', ['憂 근심 우', '鬱 답답할 울']],
+  '불안': ['不安', ['不 아닐 불', '安 편안 안']],
+  '절망': ['絶望', ['絶 끊을 절', '望 바랄 망']],
+  '분노': ['憤怒', ['憤 분할 분', '怒 성낼 노']],
+  '후회': ['後悔', ['後 뒤 후', '悔 뉘우칠 회']],
+  '질투': ['嫉妬', ['嫉 미워할 질', '妬 투기할 투']],
+  '진정': ['鎭靜', ['鎭 진압할 진', '靜 고요할 정']],
+  '위로': ['慰勞', ['慰 위로할 위', '勞 일할 로']],
+  '공감': ['共感', ['共 한가지 공', '感 느낄 감']],
+  '동정': ['同情', ['同 한가지 동', '情 뜻 정']],
+  '불쾌': ['不快', ['不 아닐 불', '快 쾌할 쾌']],
+  '허탈': ['虛脫', ['虛 빌 허', '脫 벗을 탈']],
+  '성실': ['誠實', ['誠 정성 성', '實 열매 실']],
+  '친절': ['親切', ['親 친할 친', '切 끊을 절']],
+  '온순': ['溫順', ['溫 따뜻할 온', '順 순할 순']],
+  '활발': ['活潑', ['活 살 활', '潑 뿌릴 발']],
+  '외향': ['外向', ['外 바깥 외', '向 향할 향']],
+  '내향': ['內向', ['內 안 내', '向 향할 향']],
+  '솔직': ['率直', ['率 거느릴 솔', '直 곧을 직']],
+  '정직': ['正直', ['正 바를 정', '直 곧을 직']],
+  '성급': ['性急', ['性 성품 성', '急 급할 급']],
+  '신중': ['慎重', ['慎 삼갈 신', '重 무거울 중']],
+  '소극': ['消極', ['消 사라질 소', '極 극진할 극']],
+  '적극': ['積極', ['積 쌓을 적', '極 극진할 극']],
+  '긍정': ['肯定', ['肯 즐길 긍', '定 정할 정']],
+  '부정': ['否定', ['否 아닐 부', '定 정할 정']],
+  '단정': ['端正', ['端 끝 단', '正 바를 정']],
+  '겸손': ['謙遜', ['謙 겸손할 겸', '遜 겸손할 손']],
+  '거만': ['倨慢', ['倨 거만할 거', '慢 거만할 만']],
+  '냉정': ['冷靜', ['冷 찰 랭', '靜 고요할 정']],
+  '다정': ['多情', ['多 많을 다', '情 뜻 정']],
+  '청소': ['淸掃', ['淸 맑을 청', '掃 쓸 소']],
+  '수리': ['修理', ['修 닦을 수', '理 이치 리']],
+  '입주': ['入住', ['入 들 입', '住 살 주']],
+  '퇴거': ['退去', ['退 물러날 퇴', '去 갈 거']],
+  '공유': ['共有', ['共 한가지 공', '有 있을 유']],
+  '보도': ['報道', ['報 알릴 보', '道 길 도']],
+  '취재': ['取材', ['取 취할 취', '材 재목 재']],
+  '편집': ['編輯', ['編 엮을 편', '輯 모을 집']],
+  '송출': ['送出', ['送 보낼 송', '出 날 출']],
+  '화해': ['和解', ['和 화할 화', '解 풀 해']],
+  '중재': ['仲裁', ['仲 버금 중', '裁 마를 재']],
+  '양보': ['讓步', ['讓 사양할 양', '步 걸음 보']],
+  '타협': ['妥協', ['妥 온당할 타', '協 화할 협']],
+  '존중': ['尊重', ['尊 높을 존', '重 무거울 중']],
+  '배려': ['配慮', ['配 나눌 배', '慮 생각할 려']],
+  '소통': ['疏通', ['疏 소통할 소', '通 통할 통']],
+  '교류': ['交流', ['交 사귈 교', '流 흐를 류']],
+  '단합': ['團合', ['團 둥글 단', '合 합할 합']],
+  '친밀': ['親密', ['親 친할 친', '密 빽빽할 밀']],
+  '의지': ['依支', ['依 의지할 의', '支 지탱할 지']],
+  '신뢰': ['信賴', ['信 믿을 신', '賴 의뢰할 뢰']],
+  '배신': ['背信', ['背 등 배', '信 믿을 신']],
+  '대화': ['對話', ['對 대할 대', '話 말씀 화']],
+  '합리': ['合理', ['合 합할 합', '理 이치 리']],
+  '사적': ['史蹟', ['史 사기 사', '蹟 자취 적']],
+  '계승': ['繼承', ['繼 이을 계', '承 이을 승']],
+  '보존': ['保存', ['保 지킬 보', '存 있을 존']],
+  '창작': ['創作', ['創 비롯할 창', '作 지을 작']],
+  '향유': ['享有', ['享 누릴 향', '有 있을 유']],
+  '추상': ['抽象', ['抽 뽑을 추', '象 코끼리 상']],
+  '보편': ['普遍', ['普 넓을 보', '遍 두루 편']],
+  '특수': ['特殊', ['特 특별할 특', '殊 다를 수']],
+  '상대': ['相對', ['相 서로 상', '對 대할 대']],
+  '절대': ['絕對', ['絶 끊을 절', '對 대할 대']],
+  '수용': ['受容', ['受 받을 수', '容 얼굴 용']],
+  '비판': ['批判', ['批 비평할 비', '判 판단할 판']],
+  '종합': ['綜合', ['綜 모을 종', '合 합할 합']],
+  '추론': ['推論', ['推 밀 추', '論 논할 론']],
+  '도출': ['導出', ['導 인도할 도', '出 날 출']],
+  '정립': ['定立', ['定 정할 정', '立 설 립']],
+  '유기': ['有機', ['有 있을 유', '機 틀 기']],
+  '다목적': ['多目的', ['多 많을 다', '目 눈 목', '的 과녁 적']],
+  '논구': ['論究', ['論 논할 론', '究 구할 구']],
+  '탐구': ['探究', ['探 찾을 탐', '究 구할 구']],
+  '고찰': ['考察', ['考 상고할 고', '察 살필 찰']],
+  '규명': ['糾明', ['糾 얽힐 규', '明 밝을 명']],
+  '제시': ['提示', ['提 끌 제', '示 보일 시']],
+  '입증': ['立證', ['立 설 립', '證 증거 증']],
+  '비생산': ['非生產', ['非 아닐 비', '生 날 생', '產 낳을 산']],
 };
 
 // Sino-Korean root + native Korean suffix.
@@ -1416,6 +1597,16 @@ const NATIVE_SET = [
   '손님', '젓가락', '숟가락', '접시', '쓴맛', '버릇', '집안일', '동네', '놀이터',
   '햇빛', '알림', '나눔', '존댓말', '반말', '절', '지난달', '이번달',
   '그림 그리기', '숲 가꾸기', '산불', '설날',
+  // Native 하다 adjectives — the old suffix heuristic labelled every X하다 a Sino-Korean
+  // verb, so 시원하다 / 달콤하다 / 꼼꼼하다 told the learner "하다 attaches to a Sino root"
+  // with no hanja attached. They are 고유어.
+  '시원하다', '깨끗하다', '매콤하다', '달콤하다', '새콤하다', '고소하다', '짭짤하다',
+  '푸짐하다', '쌀쌀하다', '따뜻하다', '뾰족하다', '지루하다', '따분하다',
+  '뿌듯하다', '서운하다', '섭섭하다', '억울하다', '답답하다',
+  '꼼꼼하다', '느긋하다', '털털하다', '날씬하다', '뚱뚱하다', '통통하다',
+  '싹싹하다', '얌전하다', '뻔뻔하다', '서먹하다', '어색하다', '발뺌하다',
+  '훌륭하다',
+  '구경하다', '홀가분하다', '부지런하다', '빨래하다', '설거지하다', '다림질하다',
 ];
 const NATIVE_LOOKUP = new Set(NATIVE_SET);
 
@@ -1449,7 +1640,9 @@ const LOANWORDS = {
   '메커니즘': 'mechanism',     '패러다임': 'paradigm',     '딜레마': 'dilemma',
   '커피': 'coffee', '빵': 'pão (Portuguese, via Japanese)', '마트': 'mart',
   '버스': 'bus', '택시': 'taxi', '셔츠': 'shirt', '코트': 'coat',
-  '점퍼': 'jumper', '스마트폰': 'smartphone', '인터넷': 'internet',
+  '점퍼': 'jacket (Korean 점퍼, not a British jumper)',
+  '프로젝트': 'project',
+  '스마트폰': 'smartphone', '인터넷': 'internet',
   'SNS': 'SNS (social networking service)', 'PD': 'PD (producer/director)',
   '뉴스': 'news', '드라마': 'drama', '라디오': 'radio', '텔레비전': 'television',
   '컴퓨터': 'computer', '이메일': 'e-mail', '블로그': 'blog', '스포츠': 'sports',
@@ -1663,6 +1856,14 @@ function markInitialSoundRule(ko, parts) {
 // Derivational suffixes that attach to a Sino-Korean root without changing it.
 // 건강하다 -> 건강 (健康) + 하다, so the curated hanja for the root still applies.
 // Ordered longest-first so 시키다 wins over 다.
+// Homophonous Sino roots that must NOT be inherited by a derived headword.
+// 이사 (理事, "director") vs 이사하다 (移徙, "to move house");
+// 정의 (正義, "justice") vs 정의하다 (定義, "to define").
+const SINO_DERIV = {
+  '이사하다': ['移徙', ['移 옮길 이', '徙 옮길 사'], '하다'],
+  '정의하다': ['定義', ['定 정할 정', '義 뜻 의'], '하다'],
+};
+
 const DERIV_SUFFIXES = [
   ['시키다', 'sino-passive'], ['스럽다', 'sino-adj'], ['롭다', 'sino-adj'],
   ['하다', 'sino-verb'],      ['되다', 'sino-passive'],
@@ -1686,6 +1887,10 @@ function classify(ko) {
   if (IDIOMS[ko])      { return { o: 'idiom', note: IDIOMS[ko] }; }
   if (DISCOURSE[ko])   { return { o: 'discourse', note: DISCOURSE[ko] }; }
   if (NATIVE_PREDICATES[ko]) { return { o: 'native', note: NATIVE_PREDICATES[ko] }; }
+  if (SINO_DERIV[ko]) {
+    const [h, t, s] = SINO_DERIV[ko];
+    return { o: 'sino-verb', h, p: eumhun(t), s };
+  }
 
   // A curated Sino root carrying a derivational suffix keeps its hanja.
   for (const [suf, kind] of DERIV_SUFFIXES) {
@@ -1732,11 +1937,12 @@ function classify(ko) {
     return { o: 'loan-partial', l: loanParts.map(r => LOANWORDS[r]).join(' + '), k: loanParts };
   }
 
-  // Suffix heuristics for Sino-Korean words we have no curated hanja for.
-  if (ko.endsWith('하다') && ko.length >= 4)            return { o: 'sino-verb' };
+  // Suffix heuristics. A bare `하다` no longer implies Sino-Korean — that was how
+  // 시원하다 and 달콤하다 were labelled "하다 attaches to a Sino-Korean root" with
+  // no character to show. Only emit sino-verb / sino-passive when a curated root
+  // matched above. `적` still leans Sino (감동적) but stays unknown without a root.
   if (ko.endsWith('되다') || ko.endsWith('시키다'))      return { o: 'sino-passive' };
-  if (ko.endsWith('적'))                                 return { o: 'sino-adj' };
-  if (/[성력감]$/.test(ko))                              return { o: 'sino-noun' };
+  if (/[성력감]$/.test(ko) && ko.length >= 2)           return { o: 'sino-noun' };
 
   // Honest default. The old VOCAB_FACTS claimed "고유어 (Native Korean word)" for
   // 1090 words with no evidence, which mislabels plenty of Sino-Korean vocabulary
@@ -1770,7 +1976,7 @@ for (const level of levelsData) {
 // 어깨가무겁다 to 어깨가 무겁다) and the map not being updated with it. The word silently
 // falls back to `unknown` and coverage drops with nothing to point at.
 const WHOLE_WORD_MAPS = {
-  MIXED, MIXED_LOAN, NATIVE_NOTE, IDIOMS, DISCOURSE, NATIVE_PREDICATES,
+  MIXED, MIXED_LOAN, NATIVE_NOTE, IDIOMS, DISCOURSE, NATIVE_PREDICATES, SINO_DERIV,
   // NATIVE_SET is a list, not a map, but the same rule applies: a headword that is not there
   // any more, or that an earlier branch of classify() now claims, is dead curation.
   NATIVE_SET: Object.fromEntries(NATIVE_SET.map(k => [k, true])),

@@ -242,7 +242,10 @@ function syncTTSButton() {
     if (typeof document === 'undefined' || !document.getElementById) return;
     const btn = document.getElementById('tts-toggle-btn');
     if (!btn) return;
-    btn.textContent = KoreanTTS.enabled ? '🔊 Audio' : '🔇 Audio';
+    const inMenu = btn.classList && btn.classList.contains('hud-overflow-item');
+    btn.textContent = KoreanTTS.enabled
+      ? (inMenu ? '🔊 Audio' : '🔊')
+      : (inMenu ? '🔇 Muted' : '🔇');
     if (btn.classList && btn.classList.toggle) btn.classList.toggle('hud-btn-off', !KoreanTTS.enabled);
   } catch {}
 }
@@ -576,64 +579,64 @@ class PixelArtRenderer {
     // ── FARM SCENE TILEMAP TEXTURES ──────────────────────────────────────────
     makeTile('tile_grass_base', (g) => {
       drawTileMatrix(g, [
-        'GGGGGHGGGGGGGHGG',
-        'GGGGGGGGGGGGGGGG',
-        'GGgGGGGGGgGGGGGG',
-        'GGGGGGGGGGGGGGGG',
+        'GGGGHGGGGGGGHGGG',
+        'GGGHGGGGHGGGGGGG',
+        'GGGGGGGGGGGHGGGG',
+        'HGGGGGGGGGGGGGHG',
         'GGGGGHGGGGGGGGGG',
-        'GgGGGGGGGGGGGGgG',
-        'GGGGGGGGGGGGGGGG',
-        'GGGGGGGGgGGGGgGG',
-        'GGGGGGGGGGGGGGGG',
-        'GgGGGGGGGGGGGGGG',
-        'GGGGGgGGGGGGGGGG',
-        'GGGGGGGGGGGGGGGG',
-        'GGGGGGGGGGgGGGGG',
-        'GGGGGGGGGGGGGGGG',
-        'gggggggggggggggg',
-        'MMMMMMMMMMMMMMMM'
+        'GGHGGGGGGGHGGGGG',
+        'GGGGGGGHGGGGGGGG',
+        'GGGGGGGGGGGGHGGG',
+        'GHGGGGGGGGGGGGGG',
+        'GGGGGGHGGGGGGGGG',
+        'GGGHGGGGGGGGHGGG',
+        'GGGGGGGGGHGGGGGG',
+        'GGGGHGGGGGGGGGGG',
+        'HGGGGGGGGGGGHGGG',
+        'GGGGGGGHGGGGGGGG',
+        'GGHGGGGGGGGGGGHG'
       ]);
     });
 
     makeTile('tile_grass_flowers', (g) => {
       drawTileMatrix(g, [
-        'GGGGGHGGGGGGGHGG',
-        'GG.FRF.GGGG.Yy.G',
-        'GGFfRfFGGGGYyYyG',
-        'GG.FRF.GGgG.Yy.G',
-        'GGGGGHGGGGGGGGGG',
-        'GgGGGGGGGGGGGGgG',
-        'GGGG.Ff.GGGGGGGG',
-        'GGGFfFfFGGgGGgGG',
-        'GGGG.Ff.GGGGGGGG',
-        'GgGGGGGGGGGGGGGG',
-        'GGGGGgGGGG.VRV.G',
-        'GGGGGGGGGGVRVRVG',
-        'GGGGGGGGGG.VRV.G',
-        'GGGGGGGGGGGGGGGG',
-        'gggggggggggggggg',
-        'MMMMMMMMMMMMMMMM'
+        'GHGGGHGGGHGGGHGG',
+        'GGH.FRF.HGg.Yy.G',
+        'GGgFfRfFGgYyYyHG',
+        'GGG.FRF.GGH.Yy.G',
+        'GHGGGHGGGHGGGHGG',
+        'GgGGHGgGGHGgGGHG',
+        'GGH.Ff.GHGgGGGHG',
+        'GGgFfFfFGgGHGGGg',
+        'GGG.Ff.GGGHGGgGG',
+        'GHGGGHGGGHGGGHGG',
+        'GgGGHGgGG.VRV.HG',
+        'GGHGgGGGVRVRVGHG',
+        'GGgGHGGG.VRV.GgG',
+        'GGGHGGgGGGHGGgGG',
+        'GHGGGHGGGHGGGHGG',
+        'GgGGHGgGGHGgGGHG'
       ]);
     });
 
     makeTile('tile_grass_clover', (g) => {
       drawTileMatrix(g, [
-        'GGGGGHGGGGGGGHGG',
-        'G.HH.GGGGGG.HH.G',
-        'GHHHHGGGGGGHHHHG',
-        'G.HH.GGgGGG.HH.G',
-        'GGGGGHGGGGGGGGGG',
-        'GgGGGGGGGGGGGGgG',
-        'GGGGGGGGGGGGGGGG',
-        'GGGG.HH.GGgGGgGG',
-        'GGGGHHHHGGGGGGGG',
-        'GgGG.HH.GGGGGGGG',
-        'GGGGGgGGGGGGGGGG',
-        'GGGGGGGGGG.HH.GG',
-        'GGGGGGGGGGHHHHGG',
-        'GGGGGGGGGG.HH.GG',
-        'gggggggggggggggg',
-        'MMMMMMMMMMMMMMMM'
+        'GHGGGHGGGHGGGHGG',
+        'G.HH.GgGGH.HH.HG',
+        'GHHHHGGGHGHHHHGG',
+        'G.HH.GgGGH.HH.GG',
+        'GHGGGHGGGHGGGHGG',
+        'GgGGHGgGGHGgGGHG',
+        'GGHGgGGGHGgGGGHG',
+        'GGgG.HH.GgGHGGGg',
+        'GGGHHHHGGGHGGgGG',
+        'GHG.HH.GGHGGGHGG',
+        'GgGGHGgGGHGgGGHG',
+        'GGHGgGGGHG.HH.HG',
+        'GGgGHGGGGHHHHGgG',
+        'GGGHGGgGG.HH.GGG',
+        'GHGGGHGGGHGGGHGG',
+        'GgGGHGgGGHGgGGHG'
       ]);
     });
 
@@ -1430,6 +1433,12 @@ class PixelArtRenderer {
       g.fillStyle(0xFACC15, 1); g.fillRect(3, 0, 2, 8); g.fillRect(0, 3, 8, 2);
       g.fillStyle(0xFFFFFF, 1); g.fillRect(3, 3, 2, 2);
     });
+
+    makeTex('p_firefly', 5, 5, (g) => {
+      g.fillStyle(0xFDE047, 0.35); g.fillRect(0, 1, 5, 3); g.fillRect(1, 0, 3, 5);
+      g.fillStyle(0xFEF08A, 0.9); g.fillRect(1, 1, 3, 3);
+      g.fillStyle(0xFFFFFF, 1); g.fillRect(2, 2, 1, 1);
+    });
   }
 
   static _genLightingTextures(scene) {
@@ -1495,19 +1504,27 @@ class PixelArtRenderer {
     };
 
     makeTex('bg_distant_mountains', 256, 128, (g) => {
-      g.fillStyle(0x1E1B4B, 0.85);
+      g.fillStyle(0x1E1B4B, 0.95);
       g.beginPath();
-      g.moveTo(0, 128); g.lineTo(0, 70); g.lineTo(40, 30); g.lineTo(90, 80);
-      g.lineTo(140, 20); g.lineTo(190, 75); g.lineTo(230, 40); g.lineTo(256, 85);
+      g.moveTo(0, 128); g.lineTo(0, 78); g.lineTo(36, 28); g.lineTo(58, 48);
+      g.lineTo(88, 18); g.lineTo(118, 62); g.lineTo(156, 14); g.lineTo(190, 58);
+      g.lineTo(222, 32); g.lineTo(256, 72); g.lineTo(256, 128);
+      g.closePath(); g.fillPath();
+      g.fillStyle(0x312E81, 0.75);
+      g.beginPath();
+      g.moveTo(0, 128); g.lineTo(0, 96); g.lineTo(48, 70); g.lineTo(92, 92);
+      g.lineTo(140, 64); g.lineTo(188, 88); g.lineTo(230, 68); g.lineTo(256, 90);
       g.lineTo(256, 128);
       g.closePath(); g.fillPath();
-      g.fillStyle(0x312E81, 0.6); g.fillRect(0, 100, 256, 28);
+      g.fillStyle(0xE2E8F0, 0.55); g.fillRect(82, 18, 10, 6); g.fillRect(150, 14, 12, 6);
+      g.fillStyle(0x4338CA, 0.45); g.fillRect(0, 108, 256, 20);
     });
 
     makeTex('bg_rolling_hills', 256, 128, (g) => {
-      g.fillStyle(0x14532D, 0.9);
-      g.fillCircle(64, 128, 80); g.fillCircle(192, 128, 90);
-      g.fillStyle(0x166534, 0.8); g.fillCircle(128, 128, 70);
+      g.fillStyle(0x14532D, 0.95);
+      g.fillCircle(48, 132, 86); g.fillCircle(200, 136, 96);
+      g.fillStyle(0x166534, 0.92); g.fillCircle(128, 128, 78);
+      g.fillStyle(0x4ADE80, 0.18); g.fillCircle(118, 110, 22); g.fillCircle(70, 118, 14);
     });
   }
 
@@ -1528,29 +1545,95 @@ class PixelArtRenderer {
 
     for (let f = 0; f < 4; f++) {
       makeTex(`tile_ocean_deep_${f}`, 48, 48, (g) => {
-        g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
-        g.fillStyle(0x0369A1, 1); g.fillRect(0, 24, 48, 24);
-        g.fillStyle(0x38BDF8, 1);
-        const offset = f * 12;
-        g.fillRect((6 + offset) % 48, 12, 12, 3);
-        g.fillRect((27 + offset) % 48, 33, 15, 3);
-        g.fillRect((18 + offset) % 48, 21, 9, 3);
-        g.fillStyle(0xE0F2FE, 0.8);
-        g.fillRect((12 + offset) % 48, 14, 6, 2);
+        g.fillStyle(0x0E7490, 1); g.fillRect(0, 0, 48, 48);
+        g.fillStyle(0x155E75, 1); g.fillRect(0, 22, 48, 26);
+        g.fillStyle(0x164E63, 1); g.fillRect(0, 34, 48, 14);
+        const offset = f * 10;
+        g.fillStyle(0x22D3EE, 0.55);
+        g.fillRect((4 + offset) % 48, 10, 14, 2);
+        g.fillRect((22 + offset) % 48, 20, 16, 2);
+        g.fillRect((10 + offset) % 48, 30, 12, 2);
+        g.fillStyle(0x67E8F9, 0.7);
+        g.fillRect((8 + offset) % 48, 11, 6, 1);
+        g.fillRect((28 + offset) % 48, 21, 7, 1);
+        g.fillStyle(0x14532D, 0.25);
+        g.fillRect((16 + (f % 2) * 8) % 48, 36, 10, 3);
       });
     }
 
     for (let f = 0; f < 4; f++) {
       makeTex(`tile_water_foam_${f}`, 48, 48, (g) => {
-        g.fillStyle(0x0284C7, 1); g.fillRect(0, 0, 48, 48);
-        const foamH = Math.round(6 + Math.sin(f * Math.PI / 2) * 4);
-        g.fillStyle(0x67E8F9, 1); g.fillRect(0, 0, 48, foamH + 6);
-        g.fillStyle(0xFFFFFF, 1); g.fillRect(0, 0, 48, foamH);
-        g.fillStyle(0xE0F2FE, 1);
-        g.fillRect((f * 12) % 48, foamH, 12, 3);
-        g.fillRect((f * 12 + 24) % 48, foamH + 2, 8, 3);
+        g.fillStyle(0x0E7490, 1); g.fillRect(0, 0, 48, 48);
+        const foamH = Math.round(5 + Math.sin(f * Math.PI / 2) * 3);
+        g.fillStyle(0x5EEAD4, 0.85); g.fillRect(0, 0, 48, foamH + 5);
+        g.fillStyle(0xECFEFF, 0.95); g.fillRect(0, 0, 48, foamH);
+        g.fillStyle(0xA5F3FC, 0.9);
+        g.fillRect((f * 12) % 48, foamH, 10, 2);
+        g.fillRect((f * 12 + 22) % 48, foamH + 2, 8, 2);
       });
     }
+
+    const LILY_PAL = {
+      '.': null, 'K': 0x14532D, 'H': 0x86EFAC, 'G': 0x4ADE80, 'g': 0x166534,
+      'P': 0xF472B6, 'p': 0xDB2777, 'Y': 0xFDE047
+    };
+    this.createTexture(scene, 'lily_pad', [
+      '....KKKKKK......',
+      '..KKHGGGGHKK....',
+      '.KHGGGGGGGGHK...',
+      'KHGGHGGGHGGGHK..',
+      'KGGGGGGGGGGGgK..',
+      'KHGGGGYGGGGGHK..',
+      'KGGGGGGGGGGGgK..',
+      'KHGGHGGGHGGGHK..',
+      '.KHGGGGGGGGHK...',
+      '..KKHGGGGHKK....',
+      '....KKKKKK......',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ], LILY_PAL, 16, 16, 2);
+
+    this.createTexture(scene, 'lily_bloom', [
+      '......K.......',
+      '.....KPK......',
+      '....KPYpK.....',
+      '...KPpYpPK....',
+      '....KPYpK.....',
+      '.....KPK......',
+      '......K.......',
+      '......g.......',
+      '.....GgG......',
+      '....GGGGG.....',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................',
+      '................'
+    ], LILY_PAL, 16, 16, 2);
+
+    const REED_PAL = { '.': null, 'K': 0x365314, 'G': 0x4D7C0F, 'g': 0x3F6212, 'B': 0x854D0E, 'b': 0xA16207, 'Y': 0xCA8A04 };
+    this.createTexture(scene, 'pond_reed', [
+      '......YK........',
+      '.....YbK........',
+      '......BK........',
+      '......gK........',
+      '.....GgK........',
+      '......GK...YK...',
+      '......gK..YbK...',
+      '.....GgK...BK...',
+      '......GK...gK...',
+      '......gK..GgK...',
+      '.....GgK...GK...',
+      '......GKg.gK....',
+      '......gKGGK.....',
+      '.....KgKK.......',
+      '....KK..........',
+      '................'
+    ], REED_PAL);
   }
 
   static _genBeehiveTextures(scene) {
@@ -1740,6 +1823,12 @@ class PixelArtRenderer {
       'A': 0xF59E0B,   // Antenna bulb / brass gear core (Amber 500)
       'a': 0xD97706,   // Brass gear shadow (Amber 600)
 
+      // Straw hat (farm silhouette on the robot)
+      'h': 0xF8D88E,
+      't': 0xE4B663,
+      'T': 0xB88A3D,
+      'i': 0xC0382B,
+
       // Status Indicator, Action FX, Tool & Crop Compatibility Tokens
       'G': 0x22C55E,   // Status indicator green / Crop leaf green
       'g': 0x15803D,   // Dark green indicator
@@ -1756,9 +1845,9 @@ class PixelArtRenderer {
 
     // 12 Walk Matrices (Designed by Explorer 2)
     const down_0 = [
-      '.......KK.......',
-      '......KORK......',
-      '.......KK.......',
+      '....KhhhhhhK....',
+      '...KhthitihthK..',
+      '....KTttttTTK...',
       '....KKKKKKKK....',
       '...KYYYYYYYYK...',
       '..KYyKbCCCCbYKK.',
@@ -1775,9 +1864,9 @@ class PixelArtRenderer {
     ];
 
     const down_1 = [
-      '......KKKK......',
-      '.......KK.......',
-      '....KKKKKKKK....',
+      '....KhhhhhhK....',
+      '...KhthitihthK..',
+      '....KTttttTTK...',
       '...KYYYYYYYYK...',
       '..KYyKbCCCCbYKK.',
       '..KYyKCLWCLWbYK.',
@@ -1794,9 +1883,9 @@ class PixelArtRenderer {
     ];
 
     const down_2 = [
-      '.......KK.......',
-      '......KORK......',
-      '.......KK.......',
+      '....KhhhhhhK....',
+      '...KhthitihthK..',
+      '....KTttttTTK...',
       '....KKKKKKKK....',
       '...KYYYYYYYYK...',
       '..KYyKbCCCCbYKK.',
@@ -1813,9 +1902,9 @@ class PixelArtRenderer {
     ];
 
     const up_0 = [
-      '.......KK.......',
-      '......KORK......',
-      '.......KK.......',
+      '....KhhhhhhK....',
+      '...KhtthhtthK...',
+      '....KTTTTTTK....',
       '....KKKKKKKK....',
       '...KYYYYYYYYK...',
       '...KYyJkkJyYK...',
@@ -1832,9 +1921,9 @@ class PixelArtRenderer {
     ];
 
     const up_1 = [
-      '......KKKK......',
-      '.......KK.......',
-      '....KKKKKKKK....',
+      '....KhhhhhhK....',
+      '...KhtthhtthK...',
+      '....KTTTTTTK....',
       '...KYYYYYYYYK...',
       '...KYyJkkJyYK...',
       '...KYyJkkJyYK...',
@@ -1851,9 +1940,9 @@ class PixelArtRenderer {
     ];
 
     const up_2 = [
-      '.......KK.......',
-      '......KORK......',
-      '.......KK.......',
+      '....KhhhhhhK....',
+      '...KhtthhtthK...',
+      '....KTTTTTTK....',
       '....KKKKKKKK....',
       '...KYYYYYYYYK...',
       '...KYyJkkJyYK...',
@@ -1870,9 +1959,9 @@ class PixelArtRenderer {
     ];
 
     const left_0 = [
-      '.....KK.........',
-      '....KORK........',
-      '.....KK.........',
+      '...KhhhhK.......',
+      '..KhthitK.......',
+      '...KTtttK.......',
       '...KKYYKKKK.....',
       '..KYyyyyyyYK....',
       '.KYyKbCCCbYYK...',
@@ -1889,8 +1978,8 @@ class PixelArtRenderer {
     ];
 
     const left_1 = [
-      '....KKKK........',
-      '.....KK.........',
+      '...KhhhhK.......',
+      '..KhthitK.......',
       '...KKYYKKKK.....',
       '..KYyyyyyyYK....',
       '.KYyKbCCCbYYK...',
@@ -1908,9 +1997,9 @@ class PixelArtRenderer {
     ];
 
     const left_2 = [
-      '.....KK.........',
-      '....KORK........',
-      '.....KK.........',
+      '...KhhhhK.......',
+      '..KhthitK.......',
+      '...KTtttK.......',
       '...KKYYKKKK.....',
       '..KYyyyyyyYK....',
       '.KYyKbCCCbYYK...',
@@ -1927,9 +2016,9 @@ class PixelArtRenderer {
     ];
 
     const right_0 = [
-      '.........KK.....',
-      '........KORK....',
-      '.........KK.....',
+      '.......KhhhhK...',
+      '.......KtihthK..',
+      '.......KtttTK...',
       '.....KKKKYYKK...',
       '....KYyyyyyyYK..',
       '...KYYbCCCbYyYK.',
@@ -1946,8 +2035,8 @@ class PixelArtRenderer {
     ];
 
     const right_1 = [
-      '........KKKK....',
-      '.........KK.....',
+      '.......KhhhhK...',
+      '.......KtihthK..',
       '.....KKKKYYKK...',
       '....KYyyyyyyYK..',
       '...KYYbCCCbYyYK.',
@@ -1965,9 +2054,9 @@ class PixelArtRenderer {
     ];
 
     const right_2 = [
-      '.........KK.....',
-      '........KORK....',
-      '.........KK.....',
+      '.......KhhhhK...',
+      '.......KtihthK..',
+      '.......KtttTK...',
       '.....KKKKYYKK...',
       '....KYyyyyyyYK..',
       '...KYYbCCCbYyYK.',
@@ -1985,8 +2074,8 @@ class PixelArtRenderer {
 
     // 9 Action Matrices (Designed by Explorer 3)
     const water_down_0 = [
-      '.......KK.......',
-      '......KAoK......',
+      '....KhhhhhhK....',
+      '...KhthitihthK..',
       '...KKKKcKKKK....',
       '..KKyyyyyyyyKK..',
       '.KKYYYYYYYYYYJK.',
@@ -2004,8 +2093,8 @@ class PixelArtRenderer {
     ];
 
     const water_down_1 = [
-      '.......KK.......',
-      '......KAoK......',
+      '....KhhhhhhK....',
+      '...KhthitihthK..',
       '...KKKKcKKKK....',
       '..KKyyyyyyyyKK..',
       '.KKYYYYYYYYYYJK.',
@@ -2023,8 +2112,8 @@ class PixelArtRenderer {
     ];
 
     const water_down_2 = [
-      '.......KK.......',
-      '......KAoK......',
+      '....KhhhhhhK....',
+      '...KhthitihthK..',
       '...KKKKcKKKK....',
       '..KKyyyyyyyyKK..',
       '.KKYYYYYYYYYYJK.',
@@ -2953,19 +3042,91 @@ class PixelArtRenderer {
       this.createTexture(scene, c.cr + '_3', c.s3, P);
     });
 
-    // Also maintain strawberry, corn, sunflower keys for 100% key parity
-    this.createTexture(scene, 'crop_strawberry_0', carrot_0, P);
-    this.createTexture(scene, 'crop_strawberry_1', carrot_1, P);
-    this.createTexture(scene, 'crop_strawberry_2', carrot_2, P);
-    this.createTexture(scene, 'crop_strawberry_3', pepper_3, P);
-    this.createTexture(scene, 'crop_corn_0', carrot_0, P);
-    this.createTexture(scene, 'crop_corn_1', carrot_1, P);
-    this.createTexture(scene, 'crop_corn_2', carrot_2, P);
-    this.createTexture(scene, 'crop_corn_3', rice_3, P);
-    this.createTexture(scene, 'crop_sunflower_0', carrot_0, P);
-    this.createTexture(scene, 'crop_sunflower_1', carrot_1, P);
-    this.createTexture(scene, 'crop_sunflower_2', carrot_2, P);
-    this.createTexture(scene, 'crop_sunflower_3', radish_3, P);
+    const straw_0=[
+      '................','................','................','......KK.......',
+      '.....KGLK.......','......KgK.......','......KSK.......','.....KSSS......',
+      '....KSSSSK......','...KKSSSSKK.....','...KSSSdSSK.....','....KKSSSK......',
+      '.....KKKKK......','................','................','................'
+    ];
+    const straw_1=[
+      '................','......K.K.......','.....KLGLK......','.....KGGGK......',
+      '......KgK.......','.....KSSSK......','....KSSSSSK.....','...KKSYYSSKK....',
+      '..KKSSYRYSSKK...','..KSSSYYYSSSK...','...KKSSSSSKK....','....KKSSSKK.....',
+      '.....KKKKK......','................','................','................'
+    ];
+    const straw_2=[
+      '......K.K.......','.....KLGLK......','....KKGGGKK.....','.....KgGGgK.....',
+      '......KgK.......','.....KSSSK......','...KKSYRYSKK....','..KKSYRRRYSKK...',
+      '.KKSSYRRRYSSKK..','.KSSSYR*RYSSSK..','..KKSSYRYSSKK...','...KKSSSSSKK....',
+      '....KKSSSKK.....','.....KKKKK......','................','................'
+    ];
+    const straw_3=[
+      '.....KLKLK......','....KKGLGKK.....','...KKGGGGGKK....','....KgGGGgK.....',
+      '.....KgGgK......','....KKSSSKK.....','...KSYRRYSK.....','..KKYRRRRYKK....',
+      '.KKSYR*RRYSKK...','.KSSYR*RRYSSK...','..KKYRRRRYKK....','...KSYRRYSK.....',
+      '....KKSSSKK.....','.....KKKKK......','................','................'
+    ];
+    const corn_0=[
+      '................','................','......KK.......','.....KGLK.......',
+      '.....KGGLK......','......KgK.......','......KSK.......','.....KSSSK......',
+      '....KSSSSK......','...KKSSSSKK.....','...KSSSdSSK.....','....KKSSSK......',
+      '.....KKKKK......','................','................','................'
+    ];
+    const corn_1=[
+      '......KK........','.....KLGK.......','....KKGLKK......','....KGGGGK......',
+      '.....KgGgK......','......KgK.......','.....KSSSK......','....KSSSSSK.....',
+      '...KKSSSSSKK....','..KKSSSdSSSKK...','..KSSSSSSSSSK...','...KKSSSSSKK....',
+      '....KKSSSKK.....','.....KKKKK......','................','................'
+    ];
+    const corn_2=[
+      '.....KLKLK......','....KKGLGKK.....','...KKGGGGGKK....','....KgGGGgK.....',
+      '.....KGGGK......','......KgK.......','.....KgAgK......','....KKAaAKK.....',
+      '...KKSAAaSSKK...','..KKSSAaASSKK...','..KSSSSSSSSSK...','...KKSSSSSKK....',
+      '....KKSSSKK.....','.....KKKKK......','................','................'
+    ];
+    const corn_3=[
+      '....KLKLKLK.....','...KKGLGLGKK....','..KKGGGGGGGKK...','...KgGGGGGgK....',
+      '....KGGGGGK.....','.....KgGgK......','.....KAAaK......','....KKAaAKK.....',
+      '...KKSA*ASSKK...','..KKSSAAaSSKK...','..KSSSAAaSSSK...','...KKSSSSSKK....',
+      '....KKSSSKK.....','.....KKKKK......','................','................'
+    ];
+    const sun_0=[
+      '................','................','................','......KK.......',
+      '.....KGLK.......','......KgK.......','......KgK.......','......KSK.......',
+      '.....KSSSK......','....KSSSSSK.....','...KKSSSSSKK....','....KKSSSKK.....',
+      '.....KKKKK......','................','................','................'
+    ];
+    const sun_1=[
+      '................','......KK........','.....KGLK.......','.....KGGLK......',
+      '......KgK.......','......KgK.......','......KgK.......','......KSK.......',
+      '.....KSSSK......','....KSSSSSK.....','...KKSSSSSKK....','....KKSSSKK.....',
+      '.....KKKKK......','................','................','................'
+    ];
+    const sun_2=[
+      '.....KAAAK......','....KAaAaAK.....','.....KAJAK......','......KgK.......',
+      '......KgK.......','......KgK.......','......KgK.......','......KSK.......',
+      '.....KSSSK......','....KSSSSSK.....','...KKSSSSSKK....','....KKSSSKK.....',
+      '.....KKKKK......','................','................','................'
+    ];
+    const sun_3=[
+      '...KAAAKAAAK....','..KAAaAaAaAaAK..','.KAaAAAAAAAAaAK.','..KAAAAJAAAAK...',
+      '...KAAJAJAAK....','....KKKgKKK.....','......KgK.......','......KgK.......',
+      '......KgK.......','.....KSSSK......','....KSSSSSK.....','...KKSSSSSKK....',
+      '....KKSSSKK.....','.....KKKKK......','................','................'
+    ];
+    const pad16 = (rows) => rows.map((r) => (r + '................').slice(0, 16));
+    this.createTexture(scene, 'crop_strawberry_0', pad16(straw_0), P);
+    this.createTexture(scene, 'crop_strawberry_1', pad16(straw_1), P);
+    this.createTexture(scene, 'crop_strawberry_2', pad16(straw_2), P);
+    this.createTexture(scene, 'crop_strawberry_3', pad16(straw_3), P);
+    this.createTexture(scene, 'crop_corn_0', pad16(corn_0), P);
+    this.createTexture(scene, 'crop_corn_1', pad16(corn_1), P);
+    this.createTexture(scene, 'crop_corn_2', pad16(corn_2), P);
+    this.createTexture(scene, 'crop_corn_3', pad16(corn_3), P);
+    this.createTexture(scene, 'crop_sunflower_0', pad16(sun_0), P);
+    this.createTexture(scene, 'crop_sunflower_1', pad16(sun_1), P);
+    this.createTexture(scene, 'crop_sunflower_2', pad16(sun_2), P);
+    this.createTexture(scene, 'crop_sunflower_3', pad16(sun_3), P);
 
     // Apple trees
     const tree_summer=[
@@ -4023,58 +4184,59 @@ function pR(g,x,y,w,h,col,a=1){g.fillStyle(col,a);g.fillRect(x*PS,y*PS,w*PS,h*PS
 
 // ═══════════════ SPRITE DATA ══════════════════════════════════════════════════
 const GRASS=[
- ['HGGHGGHHGGHGHHHG','GGGGGGGGGGGGGGGG','GGgGGGGGGGgGGGGG','GGGGGGGGGGGGGGGG',
-  'GGGGGHGGGGGGGGGG','GgGGGGGGGGGGGGGg','GGGGGGGGGGGGGGGG','GGGGGGGGgGGGGGgG',
-  'GGGGGGGGGGGGGGGG','GgGGGGGGGGGGGGGG','GGGGGgGGGGGGGGGG','GGGGGGGGGGGGGGGG',
-  'GGGGGGGGGGgGGGGG','GGGGGGGGGGGGGGGG','gggggggggggggggg','gggggggggggggggg'],
- ['HGGHGGHHGGHGHHHG','GGGGGGGGGGGGGGGG','GGgGGGGGGGgGGGGG','GGGGGGJJJGGGGGGG',
-  'GGGGGJdAJGGGGGGG','GgGGGGJJJGGGGGGg','GGGGGGGpGGGGGGGG','GGGGGGGpGGGGgGGG',
-  'GGGGGGGGGGGGGGGG','GgGGGGGGGGGGGGGG','GGGGGgGGGGGGGGGG','GGGGGGGGGGGGGGGG',
-  'GGGGGGGGGGgGGGGG','GGGGGGGGGGGGGGGG','gggggggggggggggg','gggggggggggggggg'],
- ['HGGHGGHHGGHGHHHG','GGGGGGGGGGGGGGGG','GGgGGGGGGGgGGGGG','GGGGGGGGGGGGGGGG',
-  'GGGGGHGGGGGGGGGG','GgGGGGGGGGGGGGGg','GGGGGGGGGGGbbbGG','GGGGGGGGGGGCCCGG',
-  'GGGGGGGGGGGcccGG','GgGGGGGGGGGGGGGG','GGGGGgGGGGGGGGGG','GGGGGGGGGGGGGGGG',
-  'GGGGGGGGGGgGGGGG','GGGGGGGGGGGGGGGG','gggggggggggggggg','gggggggggggggggg'],
- ['HGGHGGHHGGHGHHHG','GGGGGGGGGGGGGGGG','GGgGGGGGGGgGGGGG','GGGGGGpdGGGGGGGG',
-  'GGGGGGpGGGGGGGGG','GgGGGpdpGGGGGGGg','GGGGGGpGpGGGGGGG','GGGGGdGGGGGGgGGG',
-  'GGGGGGGGGGGGGGGG','GgGGGGGGGGGGGGGG','GGGGGGGGGGGpdGGG','GGGGGGGGGGGpGGGG',
-  'GGGGGGGGGGgGGGGG','GGGGGGGGGGGGGGGG','gggggggggggggggg','gggggggggggggggg'],
+ // Patchy meadow. Large same-color clumps so the tile does not read as a checkerboard.
+ ['GGGGHGGGGGGGHGGG','GGGHGGGGHGGGGGGG','GGGGGGGGGGGHGGGG','HGGGGGGGGGGGGGHG',
+  'GGGGGHGGGGGGGGGG','GGHGGGGGGGHGGGGG','GGGGGGGHGGGGGGGG','GGGGGGGGGGGGHGGG',
+  'GHGGGGGGGGGGGGGG','GGGGGGHGGGGGGGGG','GGGHGGGGGGGGHGGG','GGGGGGGGGHGGGGGG',
+  'GGGGHGGGGGGGGGGG','HGGGGGGGGGGGHGGG','GGGGGGGHGGGGGGGG','GGHGGGGGGGGGGGHG'],
+ ['GGGGHGGGGGGGHGGG','GGGHGGJOGGGGGGGG','GGGGGGJOJGGGHGGG','HGGGGGpGGGGGGGHG',
+  'GGGGGHGGGGGGGGGG','GGHGGGGGGGHGGGGG','GGGGGGGHGGGGGGGG','GGGGGGGGGGGGHGGG',
+  'GHGGGGGGGGGGGGGG','GGGGGGHGGIGGGGGG','GGGHGGGGGIOIHGGG','GGGGGGGGGpGGGGGG',
+  'GGGGHGGGGGGGGGGG','HGGGGGGGGGGGHGGG','GGGGGGGHGGGGGGGG','GGHGGGGGGGGGGGHG'],
+ ['GGGGHGGGGGGGHGGG','GGGHGGGGHGGGGGGG','GGGGGGGGGGGHGGGG','HGGGGGGGGGGGGGHG',
+  'GGGGGHGGGGGGGGGG','GGHGGGGGGGHGGGGG','GGGGGGGHGGbbGGGG','GGGGGGGGGCbCGHGG',
+  'GHGGGGGGGcCcGGGG','GGGGGGHGGGbbGGGG','GGGHGGGGGGGGHGGG','GGGGGGGGGHGGGGGG',
+  'GGGGHGGGGGGGGGGG','HGGGGGGGGGGGHGGG','GGGGGGGHGGGGGGGG','GGHGGGGGGGGGGGHG'],
+ ['GGGGHGGPvpGGHGGG','GGGHGGpvpGGGGGGG','GGGGGGpGGGGGHGGG','HGGGGGGGGGGGGGHG',
+  'GGGGGHGGGGGGGGGG','GGHGGGGGGGHGGGGG','GGGGGGGHGGGGGGGG','GGGGGGGGGGGGHGGG',
+  'GHGGGGPdGGGGGGGG','GGGGGGpGpGGGGGGG','GGGHGGpGpGGGHGGG','GGGGGGGpdGGGGGGG',
+  'GGGGHGGGGGGGGGGG','HGGGGGGGGGGGHGGG','GGGGGGGHGGGGGGGG','GGHGGGGGGGGGGGHG'],
 ];
 const DIRT_DRY=[
-  'BAAAaAaAAAaAAaAA',
-  'BAaAAAAAAAAAAAaA',
-  'BAAAAaAAAAAAAAaA',
-  'BaaaaaaaaaaaaaAA',
-  'BAAAAAAAAAAAAaAa',
-  'BaAAAaAAAAAAAAAa',
-  'BAAAAAAAAAAAAAAA',
-  'BAAAAAaAAAAAaAAA',
-  'BaAAAAAAAAAAAAAa',
-  'BAAAAAAaAAAAAAAA',
-  'BAaAAAAAAAAAAAAA',
-  'BaaaaaaaaaaaaaAA',
-  'BAAAAaAAAAAAAAaA',
-  'BAaAAAAAaAAAAAaA',
-  'BAAAAAAAAAAAAAAA',
-  'bBBBBBBBBBBBBBBB'
+  'AAAAaAAAAAaAAAAA',
+  'AAaAAAAAAaAAAAAA',
+  'aaaaaaaaaaaaaaaa',
+  'AAAAaAAAAAaAAAAA',
+  'AAaBAAAAAaAAAAAA',
+  'aaaaaaaaaaaaaaaa',
+  'AAAAaAAAAAaAAAAA',
+  'AAAAAAaAAAAAaAAA',
+  'aaaaaaaaaaaaaaaa',
+  'AAAAaAAAAAaAAAAA',
+  'AAaAAAAAAaBAAAAA',
+  'aaaaaaaaaaaaaaaa',
+  'AAAAaAAAAAaAAAAA',
+  'AAAAAAaAAAAAaAAA',
+  'aaaaaaaaaaaaaaaa',
+  'aAAaAAaAAaAAaAAa'
 ];
 const DIRT_WET=[
-  'WWwWWWWWWWWWWWww',
-  'WwWWWWJWWWWWWwWw',
-  'WWWWWWWWWWWWWwWW',
-  'WwWWWWWWWWWWWWwW',
+  'WWWWwWWWWWwWWWWW',
+  'WWwWWWWJWwWWWWWW',
   'wwwwwwwwwwwwwwww',
-  'WWWWWwwWWWWWWWWW',
-  'WWWwWWWWWwWWWWWW',
-  'WwWWWWWWWWWWWWwW',
-  'WWWWWWwWWWWWWWWW',
-  'WwWWWWWWWWJWWWwW',
-  'WWWWWWWWWWwWWWWW',
-  'WWwWWWWwWWWWWWWW',
-  'WwWWWWWWWWWWWWwW',
-  'WWWWWWWWWWWWWwWW',
+  'WWWWwWWWWWwWWWWW',
+  'WWwWWWWWWwWWWWWW',
   'wwwwwwwwwwwwwwww',
-  'wwwwwwwwwwwwwwww'
+  'WWWWwWWWWWwWWWWW',
+  'WWWWWWwJWWWWwWWW',
+  'wwwwwwwwwwwwwwww',
+  'WWWWwWWWWWwWWWWW',
+  'WWwWWWWWWwWWWWWW',
+  'wwwwwwwwwwwwwwww',
+  'WWWWwWWWWWwWWWWW',
+  'WWWWWWwWWWWWwWWW',
+  'wwwwwwwwwwwwwwww',
+  'wWWwWWwWWwWWwWWw'
 ];
 
 // ═══════════════ GAME CONSTANTS ═══════════════════════════════════════════════
@@ -5585,9 +5747,8 @@ function saveAllGame(){
   const btn=$('save-btn');
   if(btn){
     const prev=btn.textContent;
-    btn.textContent='✅ Saved!';
-    btn.style.background='linear-gradient(180deg,#22c55e,#16a34a)';
-    setTimeout(()=>{ btn.textContent=prev; btn.style.background=''; }, 1800);
+    btn.textContent = btn.classList.contains('hud-overflow-item') ? '✅ Saved' : '✅';
+    setTimeout(()=>{ btn.textContent=prev; }, 1800);
   }
   showToast('💾 Game saved successfully!', 2200);
 }
@@ -5877,10 +6038,14 @@ function updateHUD() {
   const learnedPct = calcLevelProgress(currentLevelIndex);
   const due = srsDueWords().length;
   const maturePct = calcLevelMastery(currentLevelIndex);
-  hudProgressEl.textContent = due > 0
-    ? `⏰ ${due} due · 📗 ${learnedPct}%`
-    : `📗 ${learnedPct}% learned${maturePct ? ` · 🌟 ${maturePct}%` : ''}`;
-  hudProgressEl.title = `${learnedPct}% of this level learned, ${maturePct}% mature (21+ day interval)`;
+  hudProgressEl.textContent = `${learnedPct}%`;
+  hudProgressEl.title = `${learnedPct}% learned, ${maturePct}% mature` + (due ? `, ${due} due` : '');
+  const dueEl = $('hud-due');
+  if (dueEl) {
+    dueEl.textContent = due > 0 ? String(due) : '';
+    dueEl.classList.toggle('has-due', due > 0);
+    dueEl.title = due > 0 ? `${due} review${due === 1 ? '' : 's'} due` : '';
+  }
   if(pbFill) pbFill.style.width = learnedPct + '%';
   updateGoldHUD();
 }
@@ -7456,6 +7621,8 @@ class FarmScene extends Phaser.Scene {
     this.lighting = new AmbientLightingSystem(this);
     this.shadows = new DynamicShadowSystem(this);
     this.weather = new WeatherEngine(this);
+    if (this._wellLightPos) this.lighting.addLight(this._wellLightPos.x, this._wellLightPos.y, 'light_glow_soft', 0.7, 0.35);
+    if (this._shopLightPos) this.lighting.addLight(this._shopLightPos.x, this._shopLightPos.y, 'light_glow_lantern', 0.55, 0.4);
 
     if (this.textures && this.textures.exists('p_sparkle') && typeof this.add.particles === 'function') {
       try {
@@ -7638,15 +7805,77 @@ class FarmScene extends Phaser.Scene {
     const gd=mk(); drawS(gd,DIRT_DRY); gd.generateTexture('drt_dry',16*PS,16*PS); gd.destroy();
     const gw=mk(); drawS(gw,DIRT_WET); gw.generateTexture('drt_wet',16*PS,16*PS); gw.destroy();
 
-    // Cobblestone Path texture (16x16)
+    const PATH_PAL = {
+      '.': null,
+      'K': 0x3F3A36, 't': 0xC7C1BD, 'T': 0x9E9793, 'S': 0x7D7571,
+      's': 0x4A4440, 'A': 0x7E5436, 'a': 0x573A23, 'B': 0xA6754B
+    };
     const gcs = mk();
-    pR(gcs, 10, 10, 4, 4, 0x57534E);
+    PixelArtRenderer.drawMatrix(gcs, [
+      'aAaABBBBBBBAaAaA',
+      'AaAKttTTTTsKaAaA',
+      'aAaKtTTTTTSsAaAa',
+      'AaAKtTSSTTSsAaAa',
+      'aAaKSSSSSSSSAaAa',
+      'AaAKKKKKKKKKaAaA',
+      'aAaABBBBBBBAaAaA',
+      'AaAKttTTTTsKaAaA',
+      'aAaKtTTTTTSsAaAa',
+      'AaAKtTSSTTSsAaAa',
+      'aAaKSSSSSSSSAaAa',
+      'AaAKKKKKKKKKaAaA',
+      'aAaABBBBBBBAaAaA',
+      'AaABBBBBBBBBAaAa',
+      'aAaABBBBBBBAaAaA',
+      'aaaaaaaaaaaaaaaa'
+    ], PATH_PAL, 0, 0, PS);
     gcs.generateTexture('path_stone', 16*PS, 16*PS); gcs.destroy();
 
-    // Wildflowers (8x8)
-    const gflr = mk(); pR(gflr, 2, 2, 4, 4, STARDEW_PALETTE.flowerRed); pR(gflr, 3, 3, 2, 2, STARDEW_PALETTE.flowerYellow); pR(gflr, 3, 6, 2, 2, STARDEW_PALETTE.grassShadow); gflr.generateTexture('flw_red', 8*PS, 8*PS); gflr.destroy();
-    const gfly = mk(); pR(gfly, 2, 2, 4, 4, STARDEW_PALETTE.flowerYellow); pR(gfly, 3, 3, 2, 2, 0xFFFFFF); pR(gfly, 3, 6, 2, 2, STARDEW_PALETTE.grassShadow); gfly.generateTexture('flw_yellow', 8*PS, 8*PS); gfly.destroy();
-    const gflp = mk(); pR(gflp, 2, 2, 4, 4, STARDEW_PALETTE.flowerPurple); pR(gflp, 3, 3, 2, 2, STARDEW_PALETTE.flowerYellow); pR(gflp, 3, 6, 2, 2, STARDEW_PALETTE.grassShadow); gflp.generateTexture('flw_purple', 8*PS, 8*PS); gflp.destroy();
+    const FLW_PAL = {
+      '.': null,
+      'K': 0x121016,
+      'R': STARDEW_PALETTE.flowerRed, 'r': 0x8A1836,
+      'Y': STARDEW_PALETTE.flowerYellow, 'y': 0xB88A3D,
+      'P': STARDEW_PALETTE.flowerPurple, 'p': 0x6D28D9,
+      'W': 0xFFFFFF, 'G': STARDEW_PALETTE.grassBase, 'g': STARDEW_PALETTE.grassShadow,
+      'L': STARDEW_PALETTE.grassHighlight
+    };
+    const gflr = mk();
+    PixelArtRenderer.drawMatrix(gflr, [
+      '..RWRR..',
+      '.RrYRRr.',
+      'RRYWYRRr',
+      '.RrYRRr.',
+      '..RWRR..',
+      '...gG...',
+      '...Gg...',
+      '..gGLg..'
+    ], FLW_PAL, 0, 0, PS);
+    gflr.generateTexture('flw_red', 8*PS, 8*PS); gflr.destroy();
+    const gfly = mk();
+    PixelArtRenderer.drawMatrix(gfly, [
+      '..YWYY..',
+      '.YyWYYy.',
+      'YYWYWYYy',
+      '.YyWYYy.',
+      '..YWYY..',
+      '...gG...',
+      '...Gg...',
+      '..gGLg..'
+    ], FLW_PAL, 0, 0, PS);
+    gfly.generateTexture('flw_yellow', 8*PS, 8*PS); gfly.destroy();
+    const gflp = mk();
+    PixelArtRenderer.drawMatrix(gflp, [
+      '..PWPP..',
+      '.PpYPPp.',
+      'PPYWYPPp',
+      '.PpYPPp.',
+      '..PWPP..',
+      '...gG...',
+      '...Gg...',
+      '..gGLg..'
+    ], FLW_PAL, 0, 0, PS);
+    gflp.generateTexture('flw_purple', 8*PS, 8*PS); gflp.destroy();
 
 
     const DECOR_PALETTE = {
@@ -7769,17 +7998,17 @@ class FarmScene extends Phaser.Scene {
     const gsgn = mk();
     PixelArtRenderer.drawMatrix(gsgn, [
       '....KKKK....',
-      '.KKKOOOOKKK.',
-      '.KOWWWWWWWWK',
-      '.KOWWWWWWWWK',
+      '.KKKObbbKKK.',
+      '.KOWYYbYYWWK',
+      '.KOWbbbbbbWK',
       '.KKKwwwwKKKK',
       '....KWWK....',
-      '..KKKOOOOK..',
-      '..KOWWWWWWK.',
-      '..KOWWWWWWK.',
+      '..KKKOyyyK..',
+      '..KOWbbbbWK.',
+      '..KOWYYbYWK.',
       '..KKKwwwwwK.',
       '....KWWK....',
-      '....KWWK....',
+      '....KOWk....',
       '....KWWK....',
       '....KKKK....'
     ], DECOR_PALETTE, 0, 0, PS);
@@ -7789,32 +8018,32 @@ class FarmScene extends Phaser.Scene {
     const gt = mk();
     PixelArtRenderer.drawMatrix(gt, [
       '.....KKKKKK.......',
-      '...KKHHHHHHKK.....',
-      '..KHHHHHHHHHHK....',
-      '.KHHHHGGGGHHHHK...',
+      '...KKHHRHHHKK.....',
+      '..KHHHGHHHGHHK....',
+      '.KHHHHGGGGHRHHK...',
       '.KHHHGGGGGGGGHK...',
-      'KHHHGGGGGGGGGGHK..',
-      'KHHGGGGggggGGGGHK.',
+      'KHHHRGGGGGHGGGHK..',
+      'KHHGGGGggggGGGRHK.',
+      'KHHGGGggRgggGGGHK.',
+      'KHRGGGggggggGGGHK.',
+      'KHHGGGggHgggGGRHK.',
+      'KHHGGGRgggggGGGHK.',
       'KHHGGGggggggGGGHK.',
-      'KHHGGGggggggGGGHK.',
-      'KHHGGGggggggGGGHK.',
-      'KHHGGGggggggGGGHK.',
-      'KHHGGGggggggGGGHK.',
-      '.KHHGGGgggggGGHK..',
+      '.KHHGGGggRggGGHK..',
       '.KHHHGGGGGGGGHK...',
-      '..KHHHGGGGGGHK....',
+      '..KHHHGGRGGGHK....',
       '...KKHHHHHHKK.....',
-      '.....KKKKKK.......',
+      '.....KKWWKK.......',
+      '......KOWk........',
       '......KWWK........',
+      '......KwWK........',
       '......KWWK........',
+      '......KOWk........',
       '......KWWK........',
+      '......KwWK........',
       '......KWWK........',
-      '......KWWK........',
-      '......KWWK........',
-      '......KWWK........',
-      '......KWWK........',
-      '......KWWK........',
-      '......KWWK........',
+      '.....KKOOWKK......',
+      '....ddKWWKdd......',
       '.....KKKKKK.......'
     ], DECOR_PALETTE, 0, 0, PS);
     gt.generateTexture('tree', 18*PS, 28*PS); gt.destroy();
@@ -7900,27 +8129,27 @@ class FarmScene extends Phaser.Scene {
     PixelArtRenderer.drawMatrix(gs, [
       '.....KKKKKKKK.....',
       '....KBBBBBBBBK....',
-      '....KBBBBBBBBK....',
-      '.KKKKKKKKKKKKKKKK.',
+      '....KBBttttBBK....',
+      '.KKKKKBBBBBBKKKKK.',
       '.KBBBBBBBBBBBBBBK.',
-      '...KAAKXXXXKAAK...',
+      '...KAAfXXXXXfAAK..',
       '...KXffffffffXK...',
-      '...KXKXXKKXXKXK...',
+      '...KXKNXKKXNKXK...',
       '...KXfQffffQfXK...',
-      '...KXxKKKKKKxXK...',
-      '..KKUJJJJJJJJUKK..',
-      '.KUuuJJmJJmJJuuUK.',
+      '...KXxKKmmKKxXK...',
+      '..KKUJJJmJmJJUKK..',
+      '.KUuuJJmYYYmJJuuK.',
       '.KuuJmJJJJJJmJuuK.',
       '.KuuJjJjJjJjJjuuK.',
       'KKKKKKKKKKKKKKKKKK',
       'KOOOOOOOOOOOOOOOoK',
       'KOWWKYyKYyKYyKWwwK',
       'KOWWYYYYYYYYYYWwwK',
-      'KOWWKYyYYYYyYKWwwK',
+      'KOWWKYyYmmYyYKWwwK',
       'KOWWWWWWWWWWwwwwwK',
       'KOwwwwwwwwwwwwwwwK',
       'KKKKKKKKKKKKKKKKKK'
-    ], SHOP_PALETTE, 0, 0, PS);
+    ], Object.assign({}, SHOP_PALETTE, { t: 0xF8D88E }), 0, 0, PS);
     gs.generateTexture('shop_sign', 18*PS, 22*PS); gs.destroy();
 
     // Notice Board texture 18x16
@@ -8064,28 +8293,28 @@ class FarmScene extends Phaser.Scene {
     const ga = mk();
     PixelArtRenderer.drawMatrix(ga, [
       '....KKKKKKKK....',
-      '....KPPPPPPK....',
-      '....KPPPPPPK....',
+      '....KPppppPK....',
+      '....KpYYYYpK....',
       '..KKKKKKKKKKKK..',
-      '..KSSSSSSSSSSK..',
-      '..KSKvvvvvvKSK..',
-      '..KSKvvvvvvKSK..',
-      '..KSKvvvvvvKSK..',
-      '..KSKvvvvvvKSK..',
-      '..KSKvvvvvvKSK..',
-      '..KSSSSSSSSSSK..',
+      '..KOWWWWWWWWoK..',
+      '..KOWKEEEEEKWK..',
+      '..KOWKvCvCvKWK..',
+      '..KOWKCvCvCKWK..',
+      '..KOWKvCvCvKWK..',
+      '..KOWKvvvvvKWK..',
+      '..KOWWWWWWWWoK..',
       '..KKKKKKKKKKKK..',
-      '..KRRRRRRRRRRK..',
-      '..KRRRRRRRRRRK..',
+      '..KRYrrrrrrYRK..',
+      '..KRrrYYYYrrRK..',
       '..KKKKKKKKKKKK..',
-      '..KSSSSSSSSSSK..',
-      '..KSKYYKKYYKSK..',
-      '..KSKYYKKYYKSK..',
-      '..KSSSSSSSSSSK..',
-      '..KSSSSSSSSSSK..',
-      '..KSSSSSSSSSSK..',
+      '..KOWWWWWWWWoK..',
+      '..KOWKYYKKYWK..',
+      '..KOWKYYKKYWK..',
+      '..KOWWWWWWWWoK..',
+      '..KOwwwwwwwwwK..',
+      '..KOWWWWWWWWoK..',
       '..KKKKKKKKKKKK..'
-    ], DECOR_PALETTE, 0, 0, PS);
+    ], Object.assign({}, DECOR_PALETTE, { E: 0xA5F3FC, Y: 0xFDE047 }), 0, 0, PS);
     ga.generateTexture('arcade_machine', 16*PS, 22*PS); ga.destroy();
 
     // Wizard NPC texture 16x20
@@ -8094,34 +8323,55 @@ class FarmScene extends Phaser.Scene {
     gwiz.generateTexture('wizard_npc', 16*PS, 20*PS); gwiz.destroy();
 
 
-    // Crops (5 types × 3 stages) - Stardew Valley warm earthy tones
-    const CC=[
-      [0xD8587E, 0x8A1836, 0xE8A0B8], // Strawberry
-      [0x6BB832, 0x3B6818, 0x98E060], // Cabbage
-      [0xD83838, 0x8A1010, 0xE87070], // Tomato
-      [0xE8A820, 0x9A6800, 0xF4CF60], // Corn
-      [0xE0B830, 0x9A7800, 0xF0D470], // Wheat
+    // Crops (5 types × 3 stages) — unique silhouettes, 12×20, match CROP_ICONS.
+    const CROP_FARM_PAL = {
+      '.': null,
+      'K': 0x121016,
+      'P': K.P, 'p': K.p, 'v': K.v, 'L': K.L, 'l': K.l, 'M': K.M,
+      's': K.s, 'k': K.k,
+      'R': 0xD8587E, 'r': 0x8A1836, 'I': 0xE8A0B8,
+      'C': 0x6BB832, 'c': 0x3B6818, 'H': 0x98E060,
+      'T': 0xD83838, 't': 0x8A1010, 'o': 0xE87070,
+      'Y': 0xE8A820, 'y': 0x9A6800, 'A': 0xF4CF60,
+      'W': 0xE0B830, 'w': 0x9A7800, 'F': 0xF0D470,
+      'J': 0xFFFFFF, 'B': 0x6A3E1E, 'b': 0x42240E
+    };
+    const pad12 = (rows) => rows.map((r) => (r + '............').slice(0, 12));
+    const FARM_CROPS = [
+      { // 🌸 blossom
+        1: ['............','............','............','............','............','............','............','.....PP.....','....PvP.....','.....vP.....','.....ss.....','....skss....','....ssss....','.....ss.....','............','............','............','............','............','............'],
+        2: ['............','............','............','............','.....PLP....','....PvLv....','.....PvP....','.....ss.....','....PssP....','...PvssvP...','....PssP....','.....ss.....','....skss....','....ssss....','.....ss.....','............','............','............','............','............'],
+        3: ['............','....IFIFI...','...FIRIRIF..','....IRJRI...','...FIRIRIF..','....IFIFI...','.....LvL....','.....PPP....','....PvsvP...','...PPvssvPP.','....PsssP...','.....sss....','....skkss...','....sssss...','.....sss....','............','............','............','............','............']
+      },
+      { // 🥬 cabbage
+        1: ['............','............','............','............','............','............','............','............','.....HH.....','....HcCH....','.....cc.....','.....ss.....','....skss....','....ssss....','............','............','............','............','............','............'],
+        2: ['............','............','............','............','............','....HHHH....','...HCccCH...','...HcCCcH...','....HccH....','.....ss.....','....CssC....','...HCsscH...','....ssss....','....skss....','............','............','............','............','............','............'],
+        3: ['............','............','...HHHHHH...','..HHCccCHH..','.HCccccccCH.','HCcHHHHHHcCH','HcCHHJJHHcCH','HCcHHHHHHcCH','.HCccccccCH.','..HHCccCHH..','...HCssCH...','....CssC....','....ssss....','....skss....','............','............','............','............','............','............']
+      },
+      { // 🍓 strawberry
+        1: ['............','............','............','............','............','............','.....LL.....','....LvL.....','.....vL.....','.....ss.....','....skss....','....RssR....','.....ss.....','............','............','............','............','............','............','............'],
+        2: ['............','............','............','............','.....LLL....','....LvLv....','.....LL.....','.....ss.....','....RssR....','...RrIIrR...','....RrrR....','.....ss.....','....skss....','....ssss....','............','............','............','............','............','............'],
+        3: ['............','............','.....LvL....','....LLLLL...','...LLvLvLL..','....LrLrL...','...RrIrIrR..','..RrIrJrIrR.','..RrrIIrrR..','...RrrrrR...','....RrrrR...','.....RrR....','.....sss....','....skss....','....ssss....','............','............','............','............','............']
+      },
+      { // 🌽 corn
+        1: ['............','............','............','............','............','.....LL.....','....LvL.....','.....LL.....','.....ss.....','.....ss.....','....skss....','....ssss....','.....ss.....','............','............','............','............','............','............','............'],
+        2: ['............','............','............','.....LLL....','....LvLvL...','.....LLL....','.....ss.....','....LYYL....','....YAyA....','....YAYA....','.....ss.....','....skss....','....LssL....','.....ss.....','............','............','............','............','............','............'],
+        3: ['............','....LLLLLL..','...LvLLLLL..','....LLLLL...','.....YAY....','....YAJAY...','....YAAAY...','....YAJAY...','....YAAAY...','....YAyAY...','.....yyy....','.....ss.....','....LssL....','...LvssvL...','....ssss....','....skss....','............','............','............','............']
+      },
+      { // 🌻 sunflower
+        1: ['............','............','............','............','............','............','.....LL.....','.....vL.....','.....ss.....','.....ss.....','.....ss.....','....skss....','....ssss....','............','............','............','............','............','............','............'],
+        2: ['............','............','............','....FWFWF...','.....WJW....','....FWFWF...','.....ss.....','.....ss.....','.....ss.....','.....ss.....','.....ss.....','....skss....','....LssL....','............','............','............','............','............','............','............'],
+        3: ['............','...FWFWFWF..','..FWWWAWWWF.','.FWWABbAWWF.','..FWBbJbBWF.','.FWWABbAWWF.','..FWWWAWWWF.','...FWFWFWF..','.....ss.....','.....ss.....','.....Lss....','.....ssL....','....Lsss....','....skssL...','....ssss....','............','............','............','............','............']
+      }
     ];
-    CC.forEach(([M,D,Li],t)=>{
-      const g1=mk();
-      pR(g1,5,14,2,6,K.P); pR(g1,5,14,1,6,K.v);
-      pR(g1,3,12,4,3,K.P); pR(g1,6,12,3,3,K.p); pR(g1,5,11,2,2,K.v);
-      g1.generateTexture(`cr_${t}_1`,12*PS,20*PS); g1.destroy();
-
-      const g2=mk();
-      pR(g2,5,8,2,12,K.P); pR(g2,5,8,1,12,K.v);
-      pR(g2,1,8,5,5,K.p); pR(g2,1,8,1,1,K.P); pR(g2,6,8,5,5,K.P); pR(g2,10,8,1,1,K.p);
-      pR(g2,2,12,4,3,K.p); pR(g2,6,12,4,3,K.P);
-      g2.generateTexture(`cr_${t}_2`,12*PS,20*PS); g2.destroy();
-
-      const g3=mk();
-      pR(g3,5,6,2,14,K.P); pR(g3,5,6,1,14,K.v);
-      pR(g3,1,9,5,6,K.p); pR(g3,6,9,5,6,K.P);
-      pR(g3,2,14,4,4,K.p); pR(g3,6,14,4,4,K.P);
-      g3.fillStyle(D,1); g3.fillRect(3*PS,0,6*PS,6*PS);
-      g3.fillStyle(M,1); g3.fillRect(4*PS,0,4*PS,5*PS); g3.fillRect(3*PS,1*PS,6*PS,3*PS);
-      g3.fillStyle(Li,0.8); g3.fillRect(4*PS,0,2*PS,2*PS);
-      g3.generateTexture(`cr_${t}_3`,12*PS,20*PS); g3.destroy();
+    const CC = FARM_CROPS;
+    FARM_CROPS.forEach((stages, t) => {
+      [1, 2, 3].forEach((s) => {
+        const g = mk();
+        PixelArtRenderer.drawMatrix(g, pad12(stages[s]), CROP_FARM_PAL, 0, 0, PS);
+        g.generateTexture(`cr_${t}_${s}`, 12 * PS, 20 * PS);
+        g.destroy();
+      });
     });
 
     // ── GINGER TABBY CAT NPC (12×16 pixels) ─────────────────────────────────
@@ -8394,6 +8644,66 @@ class FarmScene extends Phaser.Scene {
 
     // Micro Ambient Particle: Falling Leaves from Apple Tree
     this._createFallingLeaves(apx, apy);
+
+    this._createPollenDrift(W, H);
+    this._createFireflies(W, H);
+    this._wellLightPos = { x: wellX, y: wellY - 18 };
+    this._shopLightPos = { x: sx, y: sy - 20 };
+  }
+
+  _createPollenDrift(W, H) {
+    if (!this.textures.exists('p_pollen') && !this.textures.exists('p_leaf_green')) return;
+    if (typeof this.add.particles !== 'function') return;
+    const key = this.textures.exists('p_pollen') ? 'p_pollen' : 'p_leaf_green';
+    try {
+      this.pollenDrift = this.add.particles(W / 2, H / 2, key, {
+        x: { min: -W / 2, max: W / 2 },
+        y: { min: -H / 2, max: H / 2 },
+        speedX: { min: 6, max: 18 },
+        speedY: { min: -10, max: 6 },
+        lifespan: 7000,
+        quantity: 1,
+        frequency: 420,
+        scale: { start: 0.7, end: 0.2 },
+        alpha: { start: 0.55, end: 0 },
+        rotate: { min: 0, max: 180 }
+      }).setDepth(8);
+    } catch (e) {}
+  }
+
+  _createFireflies(W, H) {
+    this.fireflies = [];
+    const key = this.textures.exists('p_firefly') ? 'p_firefly' : null;
+    for (let i = 0; i < 14; i++) {
+      const fx = Phaser.Math.Between(30, Math.max(60, W - 30));
+      const fy = Phaser.Math.Between(60, Math.max(90, H - 40));
+      const fl = key
+        ? this.add.image(fx, fy, key).setDepth(9986)
+        : this.add.circle(fx, fy, 2, 0xFDE047, 0.8).setDepth(9986);
+      if (key && typeof Phaser !== 'undefined' && Phaser.BlendModes) {
+        fl.setBlendMode(Phaser.BlendModes.ADD);
+      }
+      fl.setAlpha(0);
+      this.tweens.add({
+        targets: fl,
+        x: fx + Phaser.Math.Between(-40, 40),
+        y: fy + Phaser.Math.Between(-30, 30),
+        duration: 2800 + Math.random() * 2200,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.InOut'
+      });
+      this.tweens.add({
+        targets: fl,
+        alpha: { from: 0.15, to: 0.95 },
+        duration: 700 + Math.random() * 900,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.InOut',
+        delay: Math.random() * 800
+      });
+      this.fireflies.push(fl);
+    }
   }
 
   _createFallingLeaves(ax, ay){
@@ -8631,31 +8941,64 @@ class FarmScene extends Phaser.Scene {
       rock.setAngle(Math.random() * 360);
     }
 
-    // ── Crystal Pond (multi-layer water) ──────────────────────────────────
-    this.add.ellipse(fx, fy + 22, 260, 84, 0x0369A1, 0.95).setDepth(fy - 5);
-    const pond = this.add.ellipse(fx, fy + 20, 250, 76, 0x0284C7, 0.88).setDepth(fy - 4);
-    this.tweens.add({ targets: pond, scaleX: 1.03, scaleY: 0.97, duration: 2200, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-    this.add.ellipse(fx - 30, fy + 12, 80, 28, 0x38BDF8, 0.3).setDepth(fy - 3);
-    this.add.ellipse(fx + 40, fy + 24, 50, 18, 0x38BDF8, 0.2).setDepth(fy - 3);
+    // ── Crystal Pond (tiled water + depth rings) ──────────────────────────
+    this.add.ellipse(fx, fy + 24, 268, 90, 0x134E4A, 0.95).setDepth(fy - 6);
+    if (this.textures.exists('tile_ocean_deep_0')) {
+      const maskG = this.make.graphics({ add: false });
+      maskG.fillStyle(0xffffff, 1);
+      maskG.fillEllipse(fx, fy + 20, 250, 76);
+      const pondMask = maskG.createGeometryMask();
+      this.pondWater = this.add.tileSprite(fx, fy + 20, 260, 86, 'tile_ocean_deep_0')
+        .setDepth(fy - 4).setMask(pondMask);
+      this.pondWaterFrame = 0;
+      this.time.addEvent({
+        delay: 280,
+        loop: true,
+        callback: () => {
+          if (!this.pondWater || !this.sys || !this.sys.isActive()) return;
+          this.pondWaterFrame = (this.pondWaterFrame + 1) % 4;
+          const key = `tile_ocean_deep_${this.pondWaterFrame}`;
+          if (this.textures.exists(key)) this.pondWater.setTexture(key);
+        }
+      });
+    } else {
+      const pond = this.add.ellipse(fx, fy + 20, 250, 76, 0x0E7490, 0.9).setDepth(fy - 4);
+      this.tweens.add({ targets: pond, scaleX: 1.03, scaleY: 0.97, duration: 2200, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    }
+    this.add.ellipse(fx - 36, fy + 10, 90, 30, 0x5EEAD4, 0.18).setDepth(fy - 3);
+    this.add.ellipse(fx + 48, fy + 26, 56, 18, 0x67E8F9, 0.14).setDepth(fy - 3);
 
     // ── Water sparkle particles ───────────────────────────────────────────
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 10; i++) {
       const sx = fx + (Math.random() - 0.5) * 200;
       const sy = fy + 10 + (Math.random() - 0.5) * 50;
-      const sparkle = this.add.circle(sx, sy, 1.5, 0xE0F2FE, 0.8).setDepth(fy - 2);
+      const sparkle = this.add.circle(sx, sy, 1.5, 0xECFEFF, 0.85).setDepth(fy - 2);
       this.tweens.add({
-        targets: sparkle, alpha: { from: 0.2, to: 0.9 }, scale: { from: 0.8, to: 1.6 },
-        duration: 1000 + i * 350, yoyo: true, repeat: -1, ease: 'Sine.InOut'
+        targets: sparkle, alpha: { from: 0.15, to: 0.95 }, scale: { from: 0.7, to: 1.7 },
+        duration: 900 + i * 280, yoyo: true, repeat: -1, ease: 'Sine.InOut'
       });
     }
 
     // ── Floating Lily Pads ────────────────────────────────────────────────
-    const lilyPositions = [[-65, 22], [75, 28], [-20, 30], [40, 15], [-85, 10]];
+    const lilyPositions = [[-70, 18], [78, 26], [-18, 30], [42, 12], [-92, 8]];
     lilyPositions.forEach(([lx, ly], i) => {
-      const lSize = 12 + Math.random() * 8;
-      const lily = this.add.ellipse(fx + lx, fy + ly, lSize, lSize * 0.6, 0x4A7C59, 0.55 + Math.random() * 0.2).setDepth(fy - 1);
-      this.tweens.add({ targets: lily, y: `+=${1 + Math.random()}`, duration: 1800 + i * 300, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+      const key = this.textures.exists('lily_pad') ? 'lily_pad' : null;
+      const lily = key
+        ? this.add.image(fx + lx, fy + ly, key).setScale(0.9 + Math.random() * 0.25).setDepth(fy - 1)
+        : this.add.ellipse(fx + lx, fy + ly, 16, 10, 0x4ADE80, 0.7).setDepth(fy - 1);
+      this.tweens.add({ targets: lily, y: `+=${1.5 + Math.random()}`, duration: 1800 + i * 280, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+      if (i % 2 === 0 && this.textures.exists('lily_bloom')) {
+        const bloom = this.add.image(fx + lx, fy + ly - 6, 'lily_bloom').setScale(0.7).setDepth(fy);
+        this.tweens.add({ targets: bloom, y: `+=${1.5 + Math.random()}`, duration: 1800 + i * 280, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+      }
     });
+
+    if (this.textures.exists('pond_reed')) {
+      [[-132, 8], [-118, 28], [124, 6], [136, 24], [-108, -8]].forEach(([rx, ry], i) => {
+        const reed = this.add.image(fx + rx, fy + ry, 'pond_reed').setOrigin(0.5, 1).setScale(1.1).setDepth(fy + 2);
+        this.tweens.add({ targets: reed, angle: { from: -4, to: 5 }, duration: 1600 + i * 220, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+      });
+    }
 
     // ── Water ripple waves ────────────────────────────────────────────────
     for (let i = 0; i < 4; i++) {
@@ -9319,6 +9662,14 @@ class FarmScene extends Phaser.Scene {
       const env = this.dayNight.update(dt || 16);
       if (this.shadows) {
         this.shadows.updateAllShadows(env.sunAngle, env.hour);
+      }
+      const night = env.hour < 5.8 || env.hour > 19.2;
+      if (this.fireflies) {
+        this.fireflies.forEach((f) => { if (f && f.setVisible) f.setVisible(night); });
+      }
+      if (this.playerLantern) {
+        this.playerLantern.setVisible(night);
+        this.playerLantern.setAlpha(night ? 0.55 : 0);
       }
     }
     if (this.lighting) this.lighting.update();
@@ -11277,9 +11628,13 @@ class BeeScene extends Phaser.Scene {
     this.H = this.scale.height;
     this.cameras.main.setBounds(0, 0, this.W, this.H);
 
+    const grassKeys = ['tile_grass_base', 'tile_grass_flowers', 'tile_grass_clover'];
     for (let x = 0; x < this.W + 48; x += 48) {
       for (let y = 0; y < this.H + 48; y += 48) {
-        this.add.image(x + 24, y + 24, 'tile_grass_base').setDisplaySize(48, 48).setDepth(0);
+        const c = Math.floor(x / 48), r = Math.floor(y / 48);
+        const v = ((c * 73856093) ^ (r * 19349663)) >>> 0;
+        const key = grassKeys[v % 5 === 0 ? 1 : (v % 7 === 0 ? 2 : 0)];
+        this.add.image(x + 24, y + 24, key).setDisplaySize(48, 48).setDepth(0);
       }
     }
 

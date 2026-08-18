@@ -44,10 +44,13 @@
       --wood-d:   #4a2a0d;
       --parch:    #f4d6a0;
       --parch-d:  #e8c07a;
+      --parch-l:  #fff8e8;
+      --ink:      #2a1a0a;
       --grass:    #3d7a1a;
       --gold:     #f59e0b;
       --green-l:  #4ade80;
       --green-d:  #16a34a;
+      --farm-veil: rgba(42, 26, 10, 0.58);
     }
 
     body {
@@ -92,10 +95,10 @@
       inset: 0;
       background: repeating-linear-gradient(
         0deg,
-        rgba(0, 0, 0, 0.15) 0px,
-        rgba(0, 0, 0, 0.15) 1px,
+        rgba(74, 42, 13, 0.05) 0px,
+        rgba(74, 42, 13, 0.05) 1px,
         transparent 1px,
-        transparent 2px
+        transparent 3px
       );
       pointer-events: none;
       z-index: 1;
@@ -121,25 +124,26 @@
     /* ── INVENTORY STORAGE OVERLAY & SLOTS ───────────────────────────────── */
     #inventory-overlay {
       position: fixed; inset: 0; z-index: 870; display: none;
-      background: rgba(10, 15, 30, 0.88); backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--farm-veil); backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       align-items: center; justify-content: center; animation: fadeIn .2s;
     }
     #inventory-overlay.visible { display: flex; }
 
     .inv-slot {
-      background: rgba(30, 41, 59, 0.7);
-      border: 1.5px solid rgba(56, 189, 248, 0.3);
-      border-radius: 12px; padding: 10px; text-align: center;
+      background: var(--parch-l);
+      border: 1.5px solid #c4893a;
+      border-radius: 10px; padding: 6px 4px; text-align: center;
       position: relative; transition: transform .15s, border-color .15s, box-shadow .15s;
-      cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100px;
+      cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 72px;
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 #8b5a2b;
     }
-    .inv-slot:hover { transform: translateY(-2px); border-color: var(--neon-cyan); box-shadow: 0 0 14px rgba(56, 189, 248, 0.35); }
-    .inv-slot.empty { opacity: 0.4; border-style: dashed; border-color: rgba(255,255,255,0.15); cursor: default; }
+    .inv-slot:hover { transform: translateY(-2px); border-color: #166534; }
+    .inv-slot.empty { opacity: 0.45; border-style: dashed; border-color: #c4893a; cursor: default; box-shadow: none; }
     .inv-slot.empty:hover { transform: none; box-shadow: none; }
-    .inv-slot-icon { font-size: 32px; line-height: 1; margin-bottom: 4px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
-    .inv-slot-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: bold; color: #fff; line-height: 1.2; }
-    .inv-slot-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; color: var(--neon-cyan); margin-top: 2px; }
+    .inv-slot-icon { font-size: 24px; line-height: 1; margin-bottom: 2px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.25)); }
+    .inv-slot-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 13px; font-weight: bold; color: var(--ink); line-height: 1.2; }
+    .inv-slot-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 10px; color: #7a3e12; margin-top: 1px; }
     .inv-qty-badge {
       position: absolute; top: 6px; right: 6px;
       background: rgba(245, 158, 11, 0.95); color: #0f172a;
@@ -151,36 +155,32 @@
     #level-select-overlay {
       position: fixed; inset: 0; z-index: 500;
       background:
-        radial-gradient(ellipse at 20% 10%, rgba(56, 189, 248, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 90%, rgba(192, 132, 252, 0.15) 0%, transparent 50%),
-        linear-gradient(160deg, #0f172a 0%, #090d16 100%);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+        radial-gradient(ellipse at 20% 8%, rgba(245, 158, 11, 0.18) 0%, transparent 46%),
+        radial-gradient(ellipse at 80% 92%, rgba(74, 124, 89, 0.22) 0%, transparent 50%),
+        linear-gradient(160deg, #3d2914 0%, #1a1008 100%);
       display: flex; flex-direction: column; align-items: center;
-      overflow-y: auto; padding: clamp(20px, 4vw, 40px) 20px 60px;
+      overflow-y: auto; padding: clamp(16px, 3vw, 28px) 16px 40px;
       animation: fadeIn .35s ease;
     }
     #level-select-overlay.hidden { display: none; }
 
-    .ls-title-wrap { text-align: center; margin-bottom: 28px; }
-    .ls-logo { font-size: clamp(48px, 6vw, 64px); margin-bottom: 10px; filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.6)); }
+    .ls-title-wrap { text-align: center; margin-bottom: 16px; }
+    .ls-logo { font-size: clamp(36px, 5vw, 48px); margin-bottom: 6px; filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.45)); }
     .ls-title {
       font-family: 'Press Start 2P', monospace;
-      font-size: clamp(22px, 3.5vw, 32px); letter-spacing: 2px;
-      background: linear-gradient(135deg, #f59e0b 20%, #38bdf8 80%);
-      background-clip: text;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 2px 10px rgba(245, 158, 11, 0.4));
+      font-size: clamp(18px, 3vw, 26px); letter-spacing: 2px;
+      color: #f4d6a0;
+      text-shadow: 0 2px 0 #4a2a0d;
     }
     .ls-subtitle {
       font-family: 'VT323', monospace;
-      font-size: clamp(18px, 2.5vw, 22px); color: rgba(226, 232, 240, 0.6); margin-top: 8px; letter-spacing: 2px;
+      font-size: clamp(16px, 2.2vw, 20px); color: #e8c07a; margin-top: 6px; letter-spacing: 2px;
     }
 
     .ls-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 18px; width: 100%; max-width: 980px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px; width: 100%; max-width: 980px;
     }
 
     .ls-resume-card {
@@ -203,36 +203,36 @@
     }
 
     .level-card {
-      background: rgba(15, 23, 42, 0.85);
-      border: 2px solid var(--neon-gold);
-      border-radius: 14px; padding: 20px 18px;
+      background: linear-gradient(180deg, #f6deaa, #e8c07a);
+      border: 3px solid #8b5a2b;
+      border-radius: 12px; padding: 12px 12px 10px;
       cursor: pointer; position: relative; overflow: hidden;
       transition: transform .18s, box-shadow .18s, border-color .18s;
       user-select: none;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 2px #4a2a0d, inset 0 1px 0 #fff3d6;
     }
     .level-card:hover:not(.locked) {
-      transform: translateY(-4px);
-      box-shadow: 0 0 0 2px #0f172a, 0 0 24px var(--neon-gold), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 0 0 2px #4a2a0d, 0 8px 18px rgba(0,0,0,.35);
     }
-    .level-card.locked { opacity: .45; cursor: not-allowed; filter: grayscale(.8); border-color: #475569; box-shadow: none; }
-    .level-card.completed { border-color: var(--neon-green); box-shadow: 0 0 0 2px #0f172a, var(--glow-green); }
-    .level-card.completed:hover { box-shadow: 0 0 0 2px #0f172a, 0 0 24px var(--neon-green); }
+    .level-card.locked { opacity: .5; cursor: not-allowed; filter: grayscale(.55); border-color: #6b5340; box-shadow: none; }
+    .level-card.completed { border-color: #166534; }
+    .level-card.completed:hover { box-shadow: 0 0 0 2px #14532d, 0 8px 18px rgba(0,0,0,.35); }
 
-    .lc-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .lc-icon { font-size: 32px; line-height: 1; filter: drop-shadow(0 2px 6px rgba(0,0,0,.6)); }
+    .lc-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .lc-icon { font-size: 26px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,.3)); }
     .lc-meta { flex: 1; }
     .lc-num {
       font-family: 'VT323', monospace; font-size: 16px; letter-spacing: 2px;
       color: var(--neon-cyan); text-transform: uppercase;
     }
     .lc-name {
-      font-family: 'Press Start 2P', monospace; font-size: 13px; color: #fff;
-      line-height: 1.5; margin-top: 2px;
+      font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--ink);
+      line-height: 1.45; margin-top: 2px;
     }
     .lc-name-ko {
       font-family: 'Noto Sans KR', sans-serif; font-size: 12px; font-weight: 700;
-      color: rgba(226, 232, 240, 0.55); line-height: 1.4; margin-top: 3px;
+      color: #7a3e12; line-height: 1.3; margin-top: 2px;
     }
     .lc-name-ko:empty { display: none; }
 
@@ -241,46 +241,48 @@
     #quiz-ko-prompt.hidden { display: none !important; }
     #quiz-ko-word {
       font-family: 'Noto Sans KR', sans-serif; font-size: 40px; font-weight: 900;
-      color: var(--neon-gold); text-shadow: 0 2px 0 #000, 0 0 18px rgba(251,191,36,.5);
+      color: #7a3e12; text-shadow: 0 1px 0 #fff3d6;
       letter-spacing: 1px;
     }
     #quiz-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 14px 0 4px; }
     #quiz-choices.hidden { display: none !important; }
     .quiz-choice-btn {
-      padding: 13px 12px; border-radius: 12px; cursor: pointer;
-      background: rgba(30, 41, 59, 0.85); border: 2px solid rgba(148, 163, 184, 0.35);
-      color: #e2e8f0; font-family: 'Be Vietnam Pro', sans-serif;
+      padding: 13px 12px; border-radius: 10px; cursor: pointer;
+      background: #fff8e8; border: 2px solid #b8894a;
+      color: #2a1a0a; font-family: 'Be Vietnam Pro', sans-serif;
       font-size: 15px; font-weight: 700; line-height: 1.35;
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 #8b5a2b;
       transition: transform .1s, border-color .15s, background .15s;
     }
-    .quiz-choice-btn:hover:not(:disabled) { border-color: var(--neon-cyan); background: rgba(103,232,249,.14); }
+    .quiz-choice-btn:hover:not(:disabled) { border-color: #16a34a; background: #f3fce8; }
     .quiz-choice-btn:active:not(:disabled) { transform: scale(.97); }
     .quiz-choice-btn:disabled { cursor: default; opacity: .75; }
-    .quiz-choice-btn.correct { border-color: var(--neon-green); background: rgba(74,222,128,.22); color: #fff; }
-    .quiz-choice-btn.wrong   { border-color: #fb7185; background: rgba(251,113,133,.2); }
+    .quiz-choice-btn.correct { border-color: #16a34a; background: #dcfce7; color: #14532d; }
+    .quiz-choice-btn.wrong   { border-color: #b91c1c; background: #fee2e2; color: #7f1d1d; }
     @media (max-width: 520px) { #quiz-choices { grid-template-columns: 1fr; } }
 
     /* ── Progress / SRS dashboard ────────────────────────────────────────── */
     #progress-overlay {
       position: fixed; inset: 0; z-index: 640; display: flex;
       align-items: center; justify-content: center;
-      background: rgba(10, 15, 30, 0.85);
-      backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--farm-veil);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
       animation: fadeIn .2s;
     }
     #progress-overlay.hidden { display: none !important; }
     #progress-panel {
-      background: rgba(15, 23, 42, 0.95);
-      border: 2px solid var(--neon-cyan); border-radius: 20px;
-      max-width: 620px; width: 94%; max-height: 88vh; overflow-y: auto;
-      box-shadow: 0 0 0 2px #0f172a, 0 0 24px rgba(103,232,249,.35), 0 20px 60px rgba(0,0,0,.9);
+      background: linear-gradient(180deg, #f6deaa, #e8c07a);
+      border: 4px solid #8b5a2b; border-radius: 14px;
+      max-width: 620px; width: 94%; max-height: 86vh; overflow-y: auto;
+      box-shadow: 0 0 0 3px #4a2a0d, inset 0 0 0 2px #c4893a, 0 18px 40px rgba(0,0,0,.45);
+      color: var(--ink);
     }
     #progress-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px; background: rgba(103, 232, 249, 0.12);
-      border-bottom: 1px solid rgba(103, 232, 249, 0.25);
+      padding: 10px 14px; background: #fff3d6;
+      border-bottom: 2px dashed #c4893a;
     }
-    #progress-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--neon-cyan); }
+    #progress-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: #7a3e12; }
     #progress-header button {
       background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2);
       color: #fff; border-radius: 8px; padding: 4px 10px; font-size: 14px; cursor: pointer;
@@ -291,11 +293,11 @@
       gap: 10px; margin-bottom: 20px;
     }
     .prog-stat {
-      background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(148,163,184,.2);
-      border-radius: 10px; padding: 10px 12px;
+      background: #fff8e8; border: 1px solid #c4893a;
+      border-radius: 10px; padding: 8px 10px;
     }
-    .prog-stat-val { font-family: 'VT323', monospace; font-size: 30px; line-height: 1; color: var(--neon-cyan); }
-    .prog-stat-lbl { font-size: 11px; color: rgba(226,232,240,.6); margin-top: 4px; letter-spacing: .3px; }
+    .prog-stat-val { font-family: 'VT323', monospace; font-size: 26px; line-height: 1; color: #7a3e12; }
+    .prog-stat-lbl { font-size: 11px; color: #5b3412; margin-top: 4px; letter-spacing: .3px; }
     .prog-stat.gold  .prog-stat-val { color: var(--neon-gold); }
     .prog-stat.green .prog-stat-val { color: var(--neon-green); }
     .prog-stat.rose  .prog-stat-val { color: #fb7185; }
@@ -350,8 +352,8 @@
     .vocab-card { position: relative; }
     .lc-badge { font-size: 20px; position: absolute; top: 12px; right: 14px; }
     .lc-desc {
-      font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-      color: rgba(226, 232, 240, 0.65); margin-bottom: 14px; line-height: 1.5;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px;
+      color: #5b3412; margin-bottom: 8px; line-height: 1.4;
     }
     .lc-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .lc-tag {
@@ -362,129 +364,152 @@
     .lc-tag.words { border-color: rgba(56, 189, 248, 0.4); color: var(--neon-cyan); }
     .lc-tag.target { border-color: rgba(245, 158, 11, 0.4); color: var(--neon-gold); }
 
-    /* ── MAIN HUD BAR & GROUPS ───────────────────────────────────────────── */
+    /* ── MAIN HUD BAR ─────────────────────────────────────────────────────── */
     #hud {
-      position: fixed; top: 10px; left: 14px; right: 14px;
-      max-width: calc(100vw - 28px);
+      position: fixed; top: 10px; left: 50%; transform: translateX(-50%);
+      width: min(920px, calc(100vw - 20px));
       z-index: 100;
-      background: rgba(15, 23, 42, 0.88) !important;
-      backdrop-filter: var(--glass-blur) !important;
-      -webkit-backdrop-filter: var(--glass-blur) !important;
-      border: 2px solid var(--neon-gold) !important;
-      border-radius: 14px !important; padding: 6px 14px !important;
-      color: #e2e8f0; font-size: 14px; font-weight: 700;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 10px 30px rgba(0, 0, 0, 0.7) !important;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      flex-wrap: wrap;
+      background: rgba(28, 18, 10, 0.82) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(232, 192, 122, 0.45) !important;
+      border-radius: 18px !important;
+      padding: 5px 8px 5px 12px !important;
+      color: #f6deaa;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35) !important;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      flex-wrap: nowrap;
       user-select: none;
-      transition: max-width 0.15s ease, padding 0.15s ease;
     }
 
     .hud-group {
-      display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+      display: flex; align-items: center; gap: 6px; flex-shrink: 0;
     }
 
     #hud-status-group {
-      font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--neon-gold);
+      min-width: 0; flex: 1 1 auto;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #f6deaa;
     }
 
     #hud-currency-group {
-      border-left: 1px solid rgba(255, 255, 255, 0.15);
-      border-right: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 0 10px;
+      padding: 0 4px;
     }
 
     #hud-actions-group {
       position: relative;
+      margin-left: auto;
     }
 
-    /* ── HUD OVERFLOW DROPDOWN MENU ──────────────────────────────────────── */
     #hud-overflow-menu {
       position: absolute; top: calc(100% + 8px); right: 0;
-      z-index: 950; display: flex; flex-direction: column; gap: 6px;
-      padding: 10px; min-width: 170px;
-      background: rgba(15, 23, 42, 0.95) !important;
-      backdrop-filter: var(--glass-blur) !important;
-      -webkit-backdrop-filter: var(--glass-blur) !important;
-      border: 1.5px solid var(--neon-gold) !important;
+      z-index: 950; display: flex; flex-direction: column; gap: 3px;
+      padding: 6px; min-width: 168px;
+      background: #f6deaa !important;
+      border: 1px solid #8b5a2b !important;
       border-radius: 12px !important;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 14px 36px rgba(0, 0, 0, 0.8) !important;
-      animation: popIn .18s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35) !important;
+      animation: popIn .16s cubic-bezier(.4,0,.2,1);
     }
     #hud-overflow-menu.hidden { display: none !important; }
 
     .hud-overflow-item {
-      width: 100%; text-align: left;
-      display: flex; align-items: center; gap: 8px;
-      padding: 8px 12px !important; font-size: 10px !important;
-      border-radius: 6px !important;
+      width: 100% !important; height: auto !important; min-width: 0 !important;
+      border-radius: 8px !important; justify-content: flex-start !important;
+      padding: 7px 10px !important; font-size: 12px !important;
+      font-family: 'Be Vietnam Pro', sans-serif !important;
+      background: transparent !important;
+      border: 0 !important;
+      color: #2a1a0a !important;
+      box-shadow: none !important;
+    }
+    .hud-overflow-item:hover {
+      background: #fff3d6 !important;
+      transform: none !important;
     }
 
-    #hud-level { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--neon-gold); letter-spacing: .5px; }
-    #hud-sep { color: rgba(255, 255, 255, 0.25); }
+    #hud-level {
+      font-family: 'Be Vietnam Pro', sans-serif; font-weight: 800;
+      font-size: 13px; color: #f6deaa; letter-spacing: 0;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 180px;
+    }
+    #hud-sep { display: none; }
     #hud-progress {
-      font-family: 'VT323', monospace; font-size: 20px; color: var(--neon-green);
-      background: rgba(74, 222, 128, 0.12); border: 1px solid rgba(74, 222, 128, 0.4);
-      border-radius: 8px; padding: 2px 10px;
+      font-family: 'VT323', monospace; font-size: 16px; color: #e8c07a;
+      background: none; border: 0; padding: 0; min-width: 28px;
     }
-    #hud-gold {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: rgba(245, 158, 11, 0.12); border: 1.5px solid var(--neon-gold);
-      border-radius: 18px; padding: 3px 12px;
-      font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--neon-gold);
-      transition: transform .25s;
+    #hud-due {
+      display: none; align-items: center; justify-content: center;
+      min-width: 22px; height: 18px; padding: 0 6px;
+      background: #b45309; color: #fff8e8;
+      border-radius: 999px; font-family: 'VT323', monospace; font-size: 14px;
     }
-    #hud-gold.pop { transform: scale(1.25); }
+    #hud-due.has-due { display: inline-flex; }
+
+    .hud-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 2px 2px 0;
+      font-family: 'VT323', monospace; font-size: 18px; color: #f6deaa;
+      line-height: 1;
+    }
+    #hud-gold, #hud-gems, #hud-honor { background: none; border: 0; border-radius: 0; }
+    #hud-gold.pop { transform: scale(1.12); }
 
     .hud-btn {
-      background: linear-gradient(180deg, rgba(245, 158, 11, 0.25), rgba(180, 110, 5, 0.15)) !important;
-      border: 1.5px solid var(--neon-gold) !important;
-      border-radius: 8px !important; color: #fff !important;
-      font-family: 'Press Start 2P', monospace !important; font-size: 10px !important;
-      cursor: pointer; padding: 7px 12px !important; letter-spacing: .5px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
-      transition: all 0.18s ease !important;
+      width: 32px; height: 32px; min-width: 32px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(246, 222, 170, 0.08) !important;
+      border: 1px solid rgba(232, 192, 122, 0.28) !important;
+      border-radius: 50% !important; color: #f6deaa !important;
+      font-family: inherit !important; font-size: 15px !important;
+      cursor: pointer; padding: 0 !important; letter-spacing: 0;
+      box-shadow: none !important;
+      transition: background .15s, border-color .15s !important;
       pointer-events: all;
     }
     .hud-btn:hover {
-      transform: translateY(-2px) scale(1.04) !important;
-      background: linear-gradient(180deg, rgba(245, 158, 11, 0.45), rgba(180, 110, 5, 0.3)) !important;
-      box-shadow: 0 0 14px var(--neon-gold) !important;
+      background: rgba(246, 222, 170, 0.22) !important;
+      border-color: rgba(246, 222, 170, 0.55) !important;
+      transform: none !important;
+      filter: none !important;
     }
-    .hud-btn:active { transform: translateY(0) scale(1) !important; }
+    .hud-btn:active { transform: scale(.96) !important; }
+    .hud-btn.hud-btn-menu {
+      background: #c4893a !important;
+      border-color: #e8c07a !important;
+      color: #2a1a0a !important;
+    }
 
     /* ── PROGRESS BAR ────────────────────────────────────────────────────── */
     /* Part of the status group, not a floating overlay. It was `position: fixed; top: 10px;
        right: 14px` — exactly where #hud sits, at the same z-index — so it covered the right
        end of the bar. In the flow it can never occlude anything. */
     #progress-bar-wrap {
-      display: flex; align-items: center; pointer-events: none;
+      display: flex; align-items: center; gap: 6px; pointer-events: none;
     }
     #progress-bar-bg {
-      width: 130px; height: 12px;
-      background: rgba(0, 0, 0, 0.5); border-radius: 8px; overflow: hidden;
-      border: 1px solid rgba(74, 222, 128, 0.3);
+      width: 72px; height: 6px;
+      background: rgba(0, 0, 0, 0.45); border-radius: 999px; overflow: hidden;
+      border: 0;
     }
     #progress-bar-fill {
       height: 100%; width: 0%;
-      background: linear-gradient(90deg, var(--neon-green), var(--neon-gold));
-      border-radius: 8px;
+      background: linear-gradient(90deg, #86efac, #e8c07a);
+      border-radius: 999px;
       transition: width .45s cubic-bezier(.4,0,.2,1);
-      box-shadow: 0 0 10px rgba(74, 222, 128, 0.7);
+      box-shadow: none;
     }
 
     /* ── CONTROLS TIP ────────────────────────────────────────────────────── */
     #controls-tip {
-      position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 100;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border: 1.5px solid rgba(56, 189, 248, 0.4);
-      border-radius: 8px; padding: 6px 16px;
-      font-family: 'VT323', monospace; font-size: 19px;
-      color: rgba(226, 232, 240, 0.8); letter-spacing: .5px;
+      position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 100;
+      background: rgba(42, 26, 10, 0.82);
+      border: 1.5px solid #c4893a;
+      border-radius: 8px; padding: 5px 12px;
+      font-family: 'VT323', monospace; font-size: 17px;
+      color: #f4d6a0; letter-spacing: .4px;
       pointer-events: none; user-select: none;
-      box-shadow: 0 0 0 2px #0f172a, 0 0 12px rgba(56, 189, 248, 0.25);
+      box-shadow: 0 0 0 2px #4a2a0d;
       /* The hint line is ~980px of `white-space: nowrap` text centred with translateX(-50%),
          so on anything narrower it hung off both edges — 15px each side at 950px, 40px at
          900px. A max-width clamp was only ever applied under a 768px media query, leaving the
@@ -572,75 +597,79 @@
     /* ── QUIZ MODAL ──────────────────────────────────────────────────────── */
     #quiz-backdrop {
       display: none; position: fixed; inset: 0; z-index: 200;
-      background: rgba(10, 15, 30, 0.85);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+      background: rgba(42, 26, 10, 0.62);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
     #quiz-backdrop.visible { display: flex; align-items: center; justify-content: center; animation: fadeIn .2s ease; }
 
     #quiz-ui {
-      background: rgba(15, 23, 42, 0.92);
-      border: 2px solid var(--neon-gold);
-      border-radius: 18px; padding: 24px 30px;
+      background:
+        linear-gradient(180deg, rgba(255,248,232,0.18), transparent 28%),
+        linear-gradient(180deg, #f6deaa 0%, #e8c07a 100%);
+      border: 5px solid #8b5a2b;
+      border-radius: 14px; padding: 22px 26px;
       width: min(480px, 94vw); max-height: 90vh; overflow-y: auto;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 20px 60px rgba(0,0,0,.85);
+      box-shadow: 0 0 0 3px #4a2a0d, inset 0 0 0 2px #c4893a, 0 22px 50px rgba(0,0,0,.55);
       display: flex; flex-direction: column; gap: 14px;
       animation: slideUp .25s cubic-bezier(.4,0,.2,1);
       position: relative;
+      color: #2a1a0a;
     }
 
     .quiz-header {
       display: flex; align-items: center; gap: 12px; padding-bottom: 10px;
-      border-bottom: 1px solid rgba(245, 158, 11, 0.25);
+      border-bottom: 2px dashed #b8894a;
     }
     .quiz-crop-icon { font-size: 24px; }
     .quiz-title {
       font-family: 'VT323', monospace; font-size: 22px;
-      color: var(--neon-gold); letter-spacing: 2px; text-transform: uppercase;
+      color: #7a3e12; letter-spacing: 2px; text-transform: uppercase;
     }
     #question-text {
       font-family: 'VT323', monospace; font-size: 26px;
-      color: rgba(226, 232, 240, 0.8); text-align: center; letter-spacing: 1px;
+      color: #4a2a0d; text-align: center; letter-spacing: 1px;
     }
     #en-word-display {
-      font-family: 'Press Start 2P', monospace; font-size: 24px;
-      color: #fff; display: block; margin-top: 6px;
-      text-shadow: 0 0 12px rgba(245, 158, 11, 0.5);
+      font-family: 'Press Start 2P', monospace; font-size: 22px;
+      color: #7a3e12; display: block; margin-top: 6px;
+      text-shadow: 0 1px 0 #fff3d6;
     }
 
     #quiz-hint-box {
-      background: rgba(30, 41, 59, 0.7);
-      border: 1.5px solid rgba(245, 158, 11, 0.3);
+      background: #fff6de;
+      border: 2px solid #c4893a;
       border-radius: 12px; padding: 14px; text-align: center;
       position: relative;
+      box-shadow: inset 0 1px 0 #fff;
     }
-    #hint-emoji { font-size: 68px; line-height: 1; display: block; margin-bottom: 4px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.5)); }
+    #hint-emoji { font-size: 68px; line-height: 1; display: block; margin-bottom: 4px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.25)); }
     #hint-category {
       font-family: 'VT323', monospace; font-size: 18px; letter-spacing: 2px;
-      color: var(--neon-gold); text-transform: uppercase;
+      color: #9a6800; text-transform: uppercase;
     }
 
     #answer-input {
       width: 100%;
-      background: rgba(30, 41, 59, 0.9);
-      border: 2px solid var(--neon-gold);
+      background: #fffaf0;
+      border: 2px solid #8b5a2b;
       border-radius: 10px; padding: 12px 18px;
       font-size: 32px; font-family: 'Noto Sans KR', 'Be Vietnam Pro', sans-serif; font-weight: 700;
-      color: #fff; outline: none; text-align: center; ime-mode: active;
+      color: #1a1208; outline: none; text-align: center; ime-mode: active;
       transition: border-color .2s, box-shadow .2s;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,.4);
+      box-shadow: inset 0 2px 6px rgba(74, 42, 13, .12);
     }
     #answer-input:focus {
-      border-color: var(--neon-green);
-      box-shadow: inset 0 2px 6px rgba(0,0,0,.4), 0 0 16px rgba(74, 222, 128, 0.6);
+      border-color: #16a34a;
+      box-shadow: inset 0 2px 6px rgba(74, 42, 13, .12), 0 0 0 3px rgba(74, 222, 128, 0.35);
     }
-    #answer-input::placeholder { color: rgba(226, 232, 240, 0.35); font-size: 18px; font-family: 'Be Vietnam Pro', sans-serif; }
+    #answer-input::placeholder { color: #b8894a; font-size: 18px; font-family: 'Be Vietnam Pro', sans-serif; }
 
     #feedback-text {
       font-family: 'VT323', monospace; font-size: 22px;
-      color: #f87171; text-align: center; min-height: 22px; letter-spacing: .5px;
+      color: #b91c1c; text-align: center; min-height: 22px; letter-spacing: .5px;
     }
-    #feedback-text.correct { color: var(--neon-green); text-shadow: 0 0 10px rgba(74, 222, 128, 0.5); }
+    #feedback-text.correct { color: #15803d; text-shadow: none; }
 
     .quiz-buttons { display: flex; gap: 10px; }
     #submit-btn, #cancel-btn {
@@ -649,71 +678,73 @@
       cursor: pointer; letter-spacing: 1px; transition: all .15s; border: 2px solid;
     }
     #submit-btn {
-      background: linear-gradient(180deg, rgba(74, 222, 128, 0.3), rgba(22, 163, 74, 0.2));
-      border-color: var(--neon-green); color: #fff;
-      box-shadow: 0 0 12px rgba(74, 222, 128, 0.3);
+      background: linear-gradient(180deg, #86efac, #4ade80);
+      border-color: #166534; color: #14532d;
+      box-shadow: 0 3px 0 #166534;
     }
-    #submit-btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(74, 222, 128, 0.6); filter: brightness(1.15); }
+    #submit-btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
     #cancel-btn {
-      background: rgba(30, 41, 59, 0.8);
-      border-color: rgba(226, 232, 240, 0.3); color: rgba(226, 232, 240, 0.7);
+      background: #f3e2b8;
+      border-color: #8b5a2b; color: #5b3412;
     }
-    #cancel-btn:hover { border-color: rgba(226, 232, 240, 0.6); color: #fff; }
+    #cancel-btn:hover { background: #efe0b0; color: #2a1a0a; }
 
     #quiz-tier-hints { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
     .quiz-tier-btn {
-      background: rgba(245, 158, 11, 0.12); border: 1.5px solid rgba(245, 158, 11, 0.4);
-      border-radius: 8px; color: #fde047; font-family: 'Press Start 2P', monospace;
+      background: #fff3c7; border: 1.5px solid #b8894a;
+      border-radius: 8px; color: #7a3e12; font-family: 'Press Start 2P', monospace;
       font-size: 9px; padding: 6px 10px; cursor: pointer; transition: all 0.15s;
     }
-    .quiz-tier-btn:hover { background: rgba(245, 158, 11, 0.25); border-color: var(--neon-gold); transform: translateY(-1px); }
+    .quiz-tier-btn:hover { background: #fde68a; border-color: #92400e; transform: translateY(-1px); }
     #quiz-hint-reveal-card {
-      background: rgba(30, 41, 59, 0.9); border: 1.5px solid var(--neon-purple);
+      background: #fffaf0; border: 1.5px solid #a855f7;
       border-radius: 10px; padding: 10px 14px; margin-top: 6px;
-      font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #e2e8f0;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #3b0764;
       line-height: 1.5; text-align: center;
     }
     #quiz-hint-reveal-card.hidden { display: none; }
 
     #quiz-phase-bar {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 6px 12px; background: rgba(0, 0, 0, 0.4); border-radius: 8px;
+      padding: 6px 12px; background: #ead198; border-radius: 8px;
+      border: 1px solid #c4893a;
       font-family: 'Press Start 2P', monospace; font-size: 10px;
     }
-    #quiz-phase-name { color: var(--neon-green); }
-    #quiz-phase-dots { color: var(--neon-gold); letter-spacing: 4px; font-size: 12px; }
-    #quiz-gold-reward { color: var(--neon-gold); }
+    #quiz-phase-name { color: #166534; }
+    #quiz-phase-dots { color: #b45309; letter-spacing: 4px; font-size: 12px; }
+    #quiz-gold-reward { color: #b45309; }
 
     /* ── VOCABULARY BOOK ─────────────────────────────────────────────────── */
     #vocab-overlay {
       display: none; position: fixed; inset: 0; z-index: 400;
-      background: rgba(10, 15, 30, 0.85);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--farm-veil);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       flex-direction: column;
     }
     #vocab-overlay.visible { display: flex; animation: fadeIn .25s ease; }
 
     #vocab-panel {
       display: flex; flex-direction: column;
-      width: min(920px, 94vw); margin: auto;
-      height: 90vh; max-height: 820px;
-      background: rgba(15, 23, 42, 0.92);
-      border: 2px solid var(--neon-cyan);
-      border-radius: 18px; overflow: hidden;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-cyan), 0 24px 60px rgba(0,0,0,.85);
+      width: min(860px, 94vw); margin: auto;
+      height: 86vh; max-height: 760px;
+      background: linear-gradient(180deg, #f6deaa, #e8c07a);
+      border: 4px solid #8b5a2b;
+      border-radius: 14px; overflow: hidden;
+      box-shadow: 0 0 0 3px #4a2a0d, inset 0 0 0 2px #c4893a, 0 18px 40px rgba(0,0,0,.45);
       animation: slideUp .28s cubic-bezier(.4,0,.2,1);
+      color: var(--ink);
     }
 
     #vocab-header {
-      padding: 18px 22px;
-      background: linear-gradient(180deg, rgba(56, 189, 248, 0.1) 0%, transparent);
-      border-bottom: 1px solid rgba(56, 189, 248, 0.25);
-      display: flex; align-items: center; gap: 14px; flex-shrink: 0;
+      padding: 12px 16px;
+      background: linear-gradient(180deg, #fff3d6 0%, transparent);
+      border-bottom: 2px dashed #c4893a;
+      display: flex; align-items: center; gap: 12px; flex-shrink: 0;
     }
     #vocab-title-wrap { flex: 1; }
-    #vocab-title { font-family: 'Press Start 2P', monospace; font-size: 16px; color: var(--neon-cyan); }
-    #vocab-subtitle { font-family: 'VT323', monospace; font-size: 18px; color: rgba(226, 232, 240, 0.6); margin-top: 4px; letter-spacing: 1px; }
+    #vocab-title { font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12; }
+    #vocab-subtitle { font-family: 'VT323', monospace; font-size: 16px; color: #8b5a2b; margin-top: 2px; letter-spacing: 1px; }
     #vocab-close-btn {
       background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 8px; color: #fff; font-size: 18px; width: 36px; height: 36px;
@@ -728,19 +759,19 @@
     }
     #vocab-search {
       flex: 1; min-width: 180px;
-      background: rgba(30, 41, 59, 0.9);
-      border: 1.5px solid var(--neon-cyan); border-radius: 8px; padding: 8px 13px;
-      font-family: 'VT323', monospace; font-size: 20px; color: #fff; outline: none;
+      background: #fffaf0;
+      border: 1.5px solid #8b5a2b; border-radius: 8px; padding: 6px 10px;
+      font-family: 'VT323', monospace; font-size: 18px; color: var(--ink); outline: none;
     }
-    #vocab-search:focus { box-shadow: 0 0 12px rgba(56, 189, 248, 0.5); }
-    #vocab-search::placeholder { color: rgba(226, 232, 240, 0.4); }
+    #vocab-search:focus { box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.35); }
+    #vocab-search::placeholder { color: #b8894a; }
     .cat-filter-btn {
-      border: 1.5px solid rgba(56, 189, 248, 0.3); border-radius: 7px;
-      background: rgba(30, 41, 59, 0.6); color: rgba(226, 232, 240, 0.8);
-      padding: 6px 12px; font-family: 'VT323', monospace; font-size: 18px;
+      border: 1.5px solid #c4893a; border-radius: 7px;
+      background: #fff8e8; color: #5b3412;
+      padding: 4px 10px; font-family: 'VT323', monospace; font-size: 16px;
       cursor: pointer; letter-spacing: .5px; white-space: nowrap; transition: all .15s;
     }
-    .cat-filter-btn.active { background: rgba(56, 189, 248, 0.2); border-color: var(--neon-cyan); color: var(--neon-cyan); box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
+    .cat-filter-btn.active { background: #dcfce7; border-color: #166534; color: #14532d; }
     .cat-filter-btn:hover:not(.active) { background: rgba(255,255,255,.1); color: #fff; }
 
     #vocab-grid-wrap { flex: 1; overflow-y: auto; padding: 16px 20px; }
@@ -750,22 +781,22 @@
 
     #vocab-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+      gap: 8px;
     }
     .vocab-card {
-      background: rgba(30, 41, 59, 0.7);
-      border: 1.5px solid rgba(56, 189, 248, 0.3);
-      border-radius: 12px; padding: 14px 10px; text-align: center;
+      background: #fff8e8;
+      border: 1.5px solid #c4893a;
+      border-radius: 10px; padding: 10px 8px; text-align: center;
       transition: transform .15s, border-color .15s, box-shadow .15s;
       cursor: pointer; position: relative;
     }
-    .vocab-card:hover { transform: translateY(-3px) scale(1.02); border-color: var(--neon-cyan); box-shadow: 0 0 16px rgba(56, 189, 248, 0.35); }
-    .vocab-card.planted { border-color: var(--neon-green); background: rgba(15, 35, 20, 0.8); }
+    .vocab-card:hover { transform: translateY(-2px); border-color: #166534; }
+    .vocab-card.planted { border-color: #166534; background: #e8f8dc; }
 
-    .vc-emoji { font-size: 40px; display: block; line-height: 1; margin-bottom: 8px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.5)); }
-    .vc-ko { font-size: 20px; font-weight: 900; color: #fff; font-family: 'Noto Sans KR', sans-serif; display: block; margin-bottom: 3px; }
-    .vc-en { font-family: 'VT323', monospace; font-size: 17px; color: var(--neon-cyan); display: block; letter-spacing: .3px; }
+    .vc-emoji { font-size: 28px; display: block; line-height: 1; margin-bottom: 4px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.25)); }
+    .vc-ko { font-size: 18px; font-weight: 900; color: var(--ink); font-family: 'Noto Sans KR', sans-serif; display: block; margin-bottom: 2px; }
+    .vc-en { font-family: 'VT323', monospace; font-size: 15px; color: #7a3e12; display: block; letter-spacing: .3px; }
 
     .mastery-badge {
       display: inline-block; padding: 3px 8px; border-radius: 12px;
@@ -782,21 +813,21 @@
     /* ── SEED SHOP OVERLAY ──────────────────────────────────────────────── */
     #shop-overlay {
       position: fixed; inset: 0; z-index: 480; display: none;
-      background: rgba(10, 15, 30, 0.85); backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--farm-veil); backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       align-items: center; justify-content: center; animation: fadeIn .2s;
     }
     #shop-overlay.visible { display: flex; }
 
     #shop-panel {
-      background: rgba(15, 23, 42, 0.92);
-      border: 2px solid var(--neon-cyan); border-radius: 18px; padding: 28px;
-      max-width: 720px; width: 94%; max-height: 88vh; overflow-y: auto;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-cyan), 0 20px 60px rgba(0,0,0,.85);
-      position: relative;
+      background: linear-gradient(180deg, #f6deaa, #e8c07a);
+      border: 4px solid #8b5a2b; border-radius: 14px; padding: 16px 18px;
+      max-width: 680px; width: 94%; max-height: 86vh; overflow-y: auto;
+      box-shadow: 0 0 0 3px #4a2a0d, inset 0 0 0 2px #c4893a, 0 18px 40px rgba(0,0,0,.45);
+      position: relative; color: var(--ink);
     }
-    #shop-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-    #shop-title { font-family: 'Press Start 2P', monospace; font-size: 16px; color: var(--neon-cyan); }
+    #shop-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    #shop-title { font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12; }
     #shop-gold-badge {
       display: flex; align-items: center; gap: 7px; background: rgba(245, 158, 11, 0.15);
       border: 1.5px solid var(--neon-gold); border-radius: 20px; padding: 4px 16px;
@@ -807,18 +838,19 @@
       color: #fff; border-radius: 8px; padding: 6px 12px; font-size: 16px; cursor: pointer; transition: all .15s;
     }
     #shop-close-btn:hover { background: rgba(244, 63, 94, 0.3); border-color: var(--neon-pink); }
-    #shop-level-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    #shop-level-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
     .shop-card {
-      background: rgba(30, 41, 59, 0.7);
-      border: 1.5px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 18px;
-      transition: transform .15s, border-color .15s, box-shadow .15s;
+      background: var(--parch-l);
+      border: 1.5px solid #c4893a; border-radius: 10px; padding: 10px;
+      transition: transform .15s, border-color .15s;
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 #8b5a2b;
     }
-    .shop-card:not(.owned):not(.too-expensive):hover { transform: translateY(-3px); border-color: var(--neon-cyan); box-shadow: 0 0 16px rgba(56, 189, 248, 0.35); cursor: pointer; }
-    .shop-card.owned { border-color: var(--neon-green); background: rgba(15, 35, 20, 0.7); }
-    .shop-card.too-expensive { opacity: .45; }
-    .shop-card-icon { font-size: 36px; text-align: center; margin-bottom: 8px; filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); }
-    .shop-card-name { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #fff; margin-bottom: 6px; }
-    .shop-card-desc { font-size: 14px; color: rgba(226, 232, 240, 0.65); margin-bottom: 12px; }
+    .shop-card:not(.owned):not(.too-expensive):hover { transform: translateY(-2px); border-color: #166534; cursor: pointer; }
+    .shop-card.owned { border-color: #166534; background: #e8f8dc; }
+    .shop-card.too-expensive { opacity: .5; }
+    .shop-card-icon { font-size: 26px; text-align: center; margin-bottom: 4px; }
+    .shop-card-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--ink); margin-bottom: 4px; }
+    .shop-card-desc { font-size: 12px; color: #5b3412; margin-bottom: 8px; }
     .shop-card-price { display: flex; align-items: center; justify-content: space-between; }
     .shop-card-cost { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--neon-gold); }
     .shop-buy-btn {
@@ -834,24 +866,24 @@
     /* ── FISH ALBUM OVERLAY ──────────────────────────────────────────────── */
     #fish-album-overlay {
       position: fixed; inset: 0; z-index: 520; display: none;
-      background: rgba(10, 15, 30, 0.85); backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--farm-veil); backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       align-items: center; justify-content: center; animation: fadeIn .2s;
     }
     #fish-album-overlay.visible { display: flex; }
     #fish-album-panel {
-      background: rgba(12, 30, 55, 0.92);
-      border: 2px solid var(--neon-cyan); border-radius: 20px; padding: 24px;
-      max-width: 720px; width: 94%; max-height: 86vh; overflow-y: auto;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-cyan), 0 20px 60px rgba(0,0,0,.85);
-      position: relative;
+      background: linear-gradient(180deg, #f6deaa, #e8c07a);
+      border: 4px solid #8b5a2b; border-radius: 14px; padding: 16px;
+      max-width: 680px; width: 94%; max-height: 86vh; overflow-y: auto;
+      box-shadow: 0 0 0 3px #4a2a0d, inset 0 0 0 2px #c4893a, 0 18px 40px rgba(0,0,0,.45);
+      position: relative; color: var(--ink);
     }
     #fish-album-header {
       display: flex; align-items: center; gap: 12px; margin-bottom: 18px; padding-bottom: 12px;
       border-bottom: 1px solid rgba(56, 189, 248, 0.3);
     }
-    #fish-album-title { font-family: 'Press Start 2P', monospace; font-size: 16px; color: var(--neon-cyan); }
-    #fish-album-sub { font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; color: rgba(226, 232, 240, 0.7); margin-top: 4px; }
+    #fish-album-title { font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12; }
+    #fish-album-sub { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 4px; }
     #fish-album-close-btn {
       margin-left: auto; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff; border-radius: 8px; padding: 4px 10px; font-size: 16px; cursor: pointer; transition: all .15s;
@@ -859,16 +891,16 @@
     #fish-album-close-btn:hover { background: rgba(244, 63, 94, 0.3); border-color: var(--neon-pink); }
     #fish-album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; }
     .fish-card {
-      background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(56, 189, 248, 0.3);
-      border-radius: 14px; padding: 14px; text-align: center; transition: transform .15s, box-shadow .15s;
+      background: #fff8e8; border: 1.5px solid #c4893a;
+      border-radius: 10px; padding: 10px; text-align: center; transition: transform .15s;
     }
-    .fish-card.unlocked { border-color: var(--neon-cyan); box-shadow: 0 0 14px rgba(56, 189, 248, 0.3); }
+    .fish-card.unlocked { border-color: #0e7490; }
     .fish-card.locked { opacity: .5; filter: grayscale(1); }
-    .fish-card:hover { transform: translateY(-3px); }
-    .fish-card-icon { font-size: 38px; margin-bottom: 6px; }
-    .fish-card-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 22px; font-weight: bold; color: #fff; }
-    .fish-card-rom { font-family: monospace; font-size: 12px; color: var(--neon-cyan); margin-top: 2px; }
-    .fish-card-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: rgba(226, 232, 240, 0.8); margin-top: 2px; }
+    .fish-card:hover { transform: translateY(-2px); }
+    .fish-card-icon { font-size: 28px; margin-bottom: 4px; }
+    .fish-card-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: bold; color: var(--ink); }
+    .fish-card-rom { font-family: monospace; font-size: 11px; color: #0e7490; margin-top: 2px; }
+    .fish-card-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 2px; }
     .fish-card-catches { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--neon-gold); margin-top: 8px; }
 
     /* ── TROPHIES ────────────────────────────────────────────────────────── */
@@ -1186,18 +1218,17 @@
     /* ── RESPONSIVE MEDIA QUERIES (MAX-WIDTH: 768px & 480px) ──────────────── */
     @media (max-width: 768px) {
       #hud {
-        top: 8px !important; left: 8px !important; right: 8px !important;
-        max-width: calc(100vw - 16px) !important;
-        padding: 6px 10px !important; gap: 8px !important;
-        border-radius: 12px !important;
+        top: 8px !important; left: 50% !important; right: auto !important;
+        width: calc(100vw - 16px) !important;
+        padding: 5px 6px !important; gap: 6px !important;
+        border-radius: 14px !important;
         flex-wrap: wrap;
       }
-      .hud-group { gap: 6px; }
-      #hud-currency-group { border-left: none; border-right: none; padding: 0 2px; }
-      #hud::-webkit-scrollbar { display: none; }
-      .hud-btn { padding: 5px 8px !important; font-size: 9px !important; }
-      #hud-level { font-size: 10px; }
-      #hud-progress { font-size: 16px; padding: 2px 6px; }
+      .hud-group { gap: 5px; }
+      #hud-currency-group { padding: 0; }
+      #hud-level { max-width: 120px; font-size: 12px; }
+      #hud-progress { font-size: 14px; }
+      .hud-btn { width: 30px !important; height: 30px !important; min-width: 30px !important; font-size: 14px !important; }
 
       /* No top/right here any more — it is a HUD group, so it moves with the bar. */
       #progress-bar-bg { width: 80px; height: 10px; }
@@ -1235,8 +1266,8 @@
     }
 
     @media (max-width: 480px) {
-      #hud { padding: 6px 8px !important; gap: 6px !important; }
-      #hud-gold, #hud-gems, #hud-honor { padding: 2px 6px !important; font-size: 9px !important; }
+      #hud { padding: 5px 6px !important; gap: 4px !important; }
+      .hud-chip { font-size: 16px; }
       #quiz-ui, #vocab-panel, #shop-panel, #fish-album-panel,
       #trophy-panel, #duel-panel, #memory-panel, #vff-inner,
       #cat-dialog-inner, #levelup-card, #alldone-card {
@@ -1249,14 +1280,13 @@
 
     /* ── 64-BIT RETRO GLASSMORPHISM UTILITIES & QUEST / QUIZ / BOSS MODALS ── */
     .glass-modal {
-      background: rgba(15, 23, 42, 0.92) !important;
-      backdrop-filter: var(--glass-blur) !important;
-      -webkit-backdrop-filter: var(--glass-blur) !important;
-      border: 2px solid var(--neon-gold);
-      border-radius: 18px;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 20px 60px rgba(0,0,0,.9);
+      background: linear-gradient(180deg, #f6deaa 0%, #e8c07a 100%) !important;
+      border: 4px solid #8b5a2b;
+      border-radius: 14px;
+      box-shadow: 0 0 0 3px #4a2a0d, inset 0 0 0 2px #c4893a, 0 18px 40px rgba(0,0,0,.45);
       position: relative;
       overflow: hidden;
+      color: #2a1a0a;
     }
     .glass-hud {
       background: rgba(15, 23, 42, 0.85) !important;
@@ -1389,15 +1419,15 @@
       display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px; margin-top: 14px;
     }
     .recipe-card {
-      background: rgba(30, 41, 59, 0.7); border: 1.5px solid rgba(245, 158, 11, 0.4);
-      border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3); transition: transform 0.15s, border-color 0.15s;
+      background: #fff8e8; border: 1.5px solid #c4893a;
+      border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 6px;
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 #8b5a2b; transition: transform 0.15s, border-color 0.15s;
     }
-    .recipe-card:hover { transform: translateY(-2px); border-color: var(--neon-gold); }
-    .recipe-card-icon { font-size: 32px; text-align: center; }
-    .recipe-card-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--neon-gold); text-align: center; }
-    .recipe-card-sub { font-size: 11px; color: #cbd5e1; text-align: center; }
-    .recipe-req-list { font-size: 10px; color: #94a3b8; background: rgba(15,23,42,0.6); padding: 8px; border-radius: 8px; }
+    .recipe-card:hover { transform: translateY(-2px); border-color: #166534; }
+    .recipe-card-icon { font-size: 26px; text-align: center; }
+    .recipe-card-title { font-family: 'Press Start 2P', monospace; font-size: 10px; color: #7a3e12; text-align: center; }
+    .recipe-card-sub { font-size: 11px; color: #5b3412; text-align: center; }
+    .recipe-req-list { font-size: 10px; color: #5b3412; background: #fff3d6; padding: 6px; border-radius: 8px; }
     .recipe-buff-badge { font-size: 10px; color: var(--neon-cyan); background: rgba(6,182,212,0.15); border: 1px solid var(--neon-cyan); border-radius: 6px; padding: 4px; text-align: center; font-weight: bold; }
     .cook-btn {
       background: linear-gradient(135deg, #f59e0b, #d97706); border: none; border-radius: 8px;
@@ -1410,8 +1440,8 @@
 
 
     .buff-badge {
-      background: rgba(15, 23, 42, 0.9); border: 1px solid var(--neon-cyan); color: var(--neon-cyan);
-      border-radius: 6px; padding: 2px 6px; font-size: 10px; font-weight: bold; display: flex; align-items: center; gap: 4px;
+      background: rgba(246, 222, 170, 0.14); border: 1px solid rgba(232, 192, 122, 0.4); color: #f6deaa;
+      border-radius: 999px; padding: 1px 6px; font-size: 10px; font-weight: 700; display: flex; align-items: center; gap: 3px;
     }
 
     /* ── LOCAL LEADERBOARD OVERLAY ──────────────────────────────────────────── */
@@ -1449,52 +1479,43 @@
   </div>
 
   <!-- ══════════════ HUD ═══════════════════════════════════════════ -->
-  <div id="hud" class="glass-hud" style="display:none">
-    <!-- Group 1: Status -->
+  <div id="hud" style="display:none">
     <div id="hud-status-group" class="hud-group">
-      <span style="font-size:20px">🌾</span>
       <span id="hud-level">Level 1</span>
-      <span id="hud-sep">|</span>
-      <span id="hud-progress">🌱 0</span>
-      <!-- The bar sits next to the percentage it draws. It carried a "Progress" label as
-           well, which said nothing #hud-progress does not already say and cost enough width
-           to push the whole group onto a second row. -->
-      <div id="progress-bar-wrap" style="display:none">
+      <div id="progress-bar-wrap">
         <div id="progress-bar-bg"><div id="progress-bar-fill"></div></div>
+        <span id="hud-progress">0%</span>
       </div>
-      <div id="active-buff-bar" style="display:inline-flex; gap:6px; align-items:center;"></div>
+      <span id="hud-due" title="Reviews due"></span>
+      <div id="active-buff-bar" style="display:inline-flex; gap:4px; align-items:center;"></div>
     </div>
 
-    <!-- Group 2: Currency -->
     <div id="hud-currency-group" class="hud-group">
-      <span id="hud-gold" title="Coins">🪙 <span id="gold-val">0</span></span>
-      <span id="hud-gems" style="margin-left:4px;" title="Gems">💎 <span id="gems-val">0</span></span>
-      <span id="hud-honor" style="margin-left:4px;" title="Honor">🎖️ <span id="honor-val">0</span></span>
+      <span class="hud-chip" id="hud-gold" title="Coins">🪙 <span id="gold-val">0</span></span>
+      <span class="hud-chip" id="hud-gems" title="Gems">💎 <span id="gems-val">0</span></span>
+      <span class="hud-chip" id="hud-honor" title="Honor">🎖️ <span id="honor-val">0</span></span>
     </div>
 
-    <!-- Group 3: Primary Action Buttons + Overflow Menu -->
     <div id="hud-actions-group" class="hud-group">
-      <button class="hud-btn" id="vocab-btn" title="Vocabulary Book">📖 Vocab</button>
-      <button class="hud-btn" id="shop-btn" title="Seed shop">🏪 Shop</button>
-      <button class="hud-btn" id="quest-btn" title="Quest Log" onclick="openQuestOverlay()">📜 Quests</button>
-      <button class="hud-btn" id="cooking-btn" title="Cooking Kitchen (요리) [Key: C]" onclick="openCookingUI()">🍳 Cooking</button>
-      <button class="hud-btn" id="recipe-btn" title="Recipe Book (요리책)" onclick="openRecipeBook()">📖 Recipes</button>
-      <button class="hud-btn" id="inventory-btn" title="Inventory Storage (🎒) [Key: I/E]" onclick="openInventoryUI()">🎒 Bag</button>
-      <button class="hud-btn tts-only" id="tts-toggle-btn" title="Toggle Korean pronunciation" onclick="toggleTTS()">🔊 Audio</button>
-      <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
-      <button class="hud-btn" id="hud-more-btn" title="More Features" onclick="toggleHudOverflow(event)">➕ More</button>
-      <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level Menu">☰ Menu</button>
+      <button class="hud-btn" id="vocab-btn" title="Vocabulary book">📖</button>
+      <button class="hud-btn" id="shop-btn" title="Shop">🏪</button>
+      <button class="hud-btn" id="inventory-btn" title="Inventory (I / E)" onclick="openInventoryUI()">🎒</button>
+      <button class="hud-btn" id="hud-more-btn" title="More" onclick="toggleHudOverflow(event)">⋯</button>
+      <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level menu">☰</button>
 
-      <!-- Overflow Dropdown Panel -->
-      <div id="hud-overflow-menu" class="glass-bg neon-border hidden">
-        <button class="hud-btn hud-overflow-item" id="progress-btn" title="Review schedule &amp; retention" onclick="openProgressOverlay(); toggleHudOverflow(false);">📊 Progress</button>
-        <button class="hud-btn hud-overflow-item" id="leaderboard-btn" title="Local Leaderboard" onclick="openLeaderboard(); toggleHudOverflow(false);">🏅 Ranks</button>
+      <div id="hud-overflow-menu" class="hidden">
+        <button class="hud-btn hud-overflow-item" id="quest-btn" title="Quest Log" onclick="openQuestOverlay(); toggleHudOverflow(false);">📜 Quests</button>
+        <button class="hud-btn hud-overflow-item" id="cooking-btn" title="Cooking (C)" onclick="openCookingUI(); toggleHudOverflow(false);">🍳 Cooking</button>
+        <button class="hud-btn hud-overflow-item" id="recipe-btn" title="Recipe Book" onclick="openRecipeBook(); toggleHudOverflow(false);">🍱 Recipes</button>
+        <button class="hud-btn hud-overflow-item tts-only" id="tts-toggle-btn" title="Korean pronunciation" onclick="toggleTTS()">🔊 Audio</button>
+        <button class="hud-btn hud-overflow-item" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
+        <button class="hud-btn hud-overflow-item" id="progress-btn" title="Review schedule" onclick="openProgressOverlay(); toggleHudOverflow(false);">📊 Progress</button>
+        <button class="hud-btn hud-overflow-item" id="leaderboard-btn" title="Leaderboard" onclick="openLeaderboard(); toggleHudOverflow(false);">🏅 Ranks</button>
         <button class="hud-btn hud-overflow-item" id="duel-btn" title="Spell Duel" onclick="openSpellDuel(); toggleHudOverflow(false);">⚡ Duel</button>
-        <button class="hud-btn hud-overflow-item" id="fish-album-btn" title="Fish Encyclopedia" onclick="openFishAlbum(); toggleHudOverflow(false);">🐟 Fish</button>
+        <button class="hud-btn hud-overflow-item" id="fish-album-btn" title="Fish album" onclick="openFishAlbum(); toggleHudOverflow(false);">🐟 Fish</button>
         <button class="hud-btn hud-overflow-item" id="trophy-btn" title="Trophies" onclick="toggleHudOverflow(false);">🏆 Trophies</button>
       </div>
     </div>
-
   </div>
 
   <!-- ══════════ PROGRESS / SRS DASHBOARD ══════════ -->

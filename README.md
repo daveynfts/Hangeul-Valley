@@ -301,8 +301,12 @@ To add or correct an origin, edit the curated `SINO` / `MIXED` / `LOANWORDS` /
 `NATIVE_SET` / `NATIVE_NOTE` maps in `scripts/build_facts_json.js` and re-run it. The admin
 panel shows origins read-only and its write endpoints return `409` for this reason.
 
-**Coverage is 1500 / 1500 (100%), with real hanja for 869 words.** Nothing is left `unknown`
-and no entry renders a blank origin.
+**Coverage is 1500 / 1500 (100%), with real hanja for 1004 words.** A bare `-하다` no longer
+implies Sino-Korean: that heuristic labelled 시원하다 and 달콤하다 as "하다 attaches to a
+Sino-Korean root" with no character to show. Those 고유어 are in `NATIVE_SET`; a derived
+form that would inherit the *wrong* homophone (이사하다 ≠ 理事, 정의하다 ≠ 正義) has its
+own hanja. Remaining `-하다` / `-적` words were curated root-by-root so every Sino label
+carries a character. No entry renders a blank.
 
 Reaching 100% did not mean relaxing the standard the file was rebuilt on. The inherited data
 asserted "Native Korean (고유어)" for ~1,090 words with no evidence and mislabelled a great deal
