@@ -178,6 +178,36 @@ check('no curated entry has an empty note', emptyNote.length === 0, emptyNote.sl
   check(`no Vietnamese in ${f}`, hits.length === 0, hits.slice(0, 5).join('\n      '));
 });
 
+// Modal overlays are `position:fixed` siblings of <body>. If one is nested inside
+// another that starts as `display:none` (this happened to inventory inside
+// leaderboard), adding `.visible` on the child cannot show it.
+const overlayIds = [
+  'inventory-overlay', 'cooking-overlay', 'leaderboard-overlay',
+  'recipe-overlay', 'quest-overlay', 'shop-overlay', 'vocab-overlay'
+];
+(function checkOverlayNesting() {
+  const html = read('index.html');
+  const stack = [];
+  const re = /<\/?div\b([^>]*)>/gi;
+  let m;
+  const nested = [];
+  while ((m = re.exec(html))) {
+    const attrs = m[1] || '';
+    const idMatch = attrs.match(/id=["']([^"']+)/);
+    const id = idMatch ? idMatch[1] : '';
+    if (m[0].startsWith('</')) {
+      stack.pop();
+      continue;
+    }
+    stack.push(id || '(anon)');
+    if (overlayIds.includes(id)) {
+      const parentOverlay = stack.slice(0, -1).find((x) => overlayIds.includes(x));
+      if (parentOverlay) nested.push(`${id} inside ${parentOverlay}`);
+    }
+  }
+  check('modal overlays are not nested in each other', nested.length === 0, nested.join(', '));
+}());
+
 // ── assets/ mirror ───────────────────────────────────────────────────────────
 // main.py serves from assets/ and admin/lib/sync.js writes both copies, so a drift here
 // means the desktop build and the browser build disagree.
