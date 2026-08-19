@@ -31,10 +31,10 @@ function env(k) {
   return String(process.env[k] || '').trim().replace(/^["']|["']$/g, '');
 }
 
-const envPath = process.argv.includes('--env')
+const envArg = process.argv.includes('--env')
   ? process.argv[process.argv.indexOf('--env') + 1]
-  : path.join(process.env.TEMP || '/tmp', 'hangeul-r2.env');
-loadEnvFile(envPath);
+  : '';
+if (envArg) loadEnvFile(envArg);
 loadEnvFile(path.join(ROOT, '.env.local'));
 
 const accountId = env('R2_ACCOUNT_ID');
