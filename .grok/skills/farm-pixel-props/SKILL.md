@@ -1,19 +1,20 @@
 ---
 name: farm-pixel-props
 description: >
-  Make Hangeul Valley farm props as front-facing 2D pixel-art PNGs (Imagine +
-  magenta key + Phaser load), not 20x20 letter matrices. Use when adding or
-  upgrading furniture, stalls, kitchens, desks, or other map props; when the
-  user says "sprite đẹp", "farm prop", "bàn học", "bếp", or runs /farm-pixel-props.
+  Make Hangeul Valley farm art as front-facing 2D pixel-art PNGs (Imagine +
+  magenta key + Phaser load), not letter matrices. Use when adding or upgrading
+  furniture, stalls, kitchens, desks, crops, fence blooms, trees, or other map
+  props; when the user says "sprite đẹp", "farm prop", "bàn học", "bếp",
+  "cây trồng", "hoa hàng rào", "apple tree", or runs /farm-pixel-props.
 ---
 
 # Farm pixel props
 
-Do not draw new furniture with `PixelArtRenderer` letter matrices. That reads as a brown box at game scale. Use this pipeline.
+Do not draw new farm props or plants with `PixelArtRenderer` letter matrices. That reads as a brown box at game scale. Use this pipeline.
 
 ## 1. Generate
 
-`image_gen`, aspect `1:1`. One prop per image.
+`image_gen`, aspect `1:1`. One subject per image.
 
 Prompt shape (2–5 sentences):
 
@@ -27,48 +28,52 @@ Keep later variants on `image_edit` from the first accepted PNG so the set match
 
 ## 1b. Set contract
 
-A set shares one parent PNG. Later pieces are `image_edit` from that parent, never three sibling `image_gen`s.
+A family shares one parent PNG. Later pieces are `image_edit` from that parent, never a pile of sibling `image_gen`s. Furniture parent is the accepted `study_desk.png`. Crop growth stages edit from that crop's ripe PNG. Ripe/unripe landmarks edit from the same tree.
 
-Height classes: `station` = script default 156; `accent` = `process_prop.py --height 64`. Crop, key, origin, and depth stay in §§2–3.
+Height classes — pass `--height` to `process_prop.py` (default 156). Do not fake height with Phaser `scale: 2.4`.
 
-Naming: new world-pack props `unit10_<role>.png`. Do not rename shipped `study_desk.png` / `unit10_kitchen.png`.
+| Class | `--height` | Use |
+|---|---|---|
+| `station` | 156 | desk, kitchen, stall |
+| `accent` | 64 | stool, crate |
+| `crop-sprout` | 32 | plot stage 1 |
+| `crop-mid` | 44 | plot stage 2 |
+| `crop-ripe` | 56 | plot stage 3 |
+| `fence-bloom` | 28 | post flowers (no grass pad, no tint) |
+| `landmark` | 180 | apple tree and similar |
 
-Palette: match `STARDEW_PALETTE` wood/outline in `game.js`. Do not paint grass or ground.
+Naming: do not rename shipped files. New world-pack furniture `unit10_<role>.png`. Plot plants `crop_<type>_<1|2|3>.png`. Post flowers `fence_flower_<color>.png`. Landmarks `apple_tree.png` / `apple_tree_ripe.png`.
 
-One Phaser spawn path per set: HD key, matrix fallback, scale 1 on HD, no y-bob.
+Palette: match `STARDEW_PALETTE` wood/outline in `game.js`. Do not paint grass or ground. Phaser `createShadow` is the contact darkening.
+
+One Phaser spawn path per family: `*_hd` key, matrix fallback, scale 1 on HD, no y-bob on planted sprites. Prefer `textures.exists(hd)`.
 
 ## 2. Key, crop, size
 
-Run `scripts/process_prop.py` (Pillow). It:
+Run `scripts/process_prop.py` (Pillow) with the class `--height`. It keys magenta / rose, crops 2px pad (feet stay the last opaque row), resizes, keys again, writes `sprites/<name>.png` and `assets/sprites/<name>.png`.
 
-- keys magenta / hot-pink to alpha
-- crops to the silhouette with 2px pad (feet stay the bottom pixels)
-- resizes height to 156px (LANCZOS), keys again
-- writes `sprites/<name>.png` and `assets/sprites/<name>.png`
-
-Feet of the furniture must be the last opaque row. Extra bottom pad makes the prop float.
+Extra bottom pad makes the prop float.
 
 ## 3. Load in Phaser
-
-In `FarmScene.preload`:
 
 ```js
 this.load.image('prop_hd', 'sprites/prop.png');
 ```
 
-Place with origin `(0.5, 1)` so the contact point is the bottom-center of the PNG. Scale `1.0` for the 156px-tall set. Do not bob planted props (`tweens` on `y` looks like they hover).
+Place with origin `(0.5, 1)`. Scale `1.0` after `process_prop.py`. Do not bob planted props (`tweens` on `y` looks like they hover). Tree angle-sway is allowed.
 
-Shadow under the feet (`createShadow`, small offset). Depth `y + 6`. Label below at `y + 8`.
+Shadow under the feet (`createShadow`, small offset). Depth `y + 6`. Nearby `[SPACE]` only — no always-on name tags under props.
 
 ## 4. Sit on the grass
 
-The tabletop / hood occupies the upper ~70% of the bitmap. If `y` is only ~90px south of the farm, the sprite covers plots.
+The tabletop / hood / canopy occupies the upper ~70% of the bitmap. If `y` is only ~90px south of the farm, the sprite covers plots.
 
 Clear the farm tile rect:
 
 - south props: station-class south row is `farm.h + 168` (shared `oy` for siblings). `y >= farm.y + farm.h + spriteDisplayHeight` is the minimum clear, not the placed value
 - east props: `x` far enough that the left edge is past `farm.x + farm.w`, and `y` low enough the cabinet base sits on grass (`farm.h/2 + 96`)
 - pond ellipse is a keep-out even when `_setPondVisible(false)`
+- plot plants stay inside the 48px dirt tile; crop-ripe width must leave a gap to the neighbor plot
 
 Interact radius follows the on-screen footprint (~80), not the old 48px matrix box.
 
