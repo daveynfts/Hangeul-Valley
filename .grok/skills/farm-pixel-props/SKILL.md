@@ -1,10 +1,10 @@
 ---
 name: farm-pixel-props
 description: >
-  Make Hangeul Valley farm props as isometric pixel-art PNGs (Imagine + magenta
-  key + Phaser load), not 20x20 letter matrices. Use when adding or upgrading
-  furniture, stalls, kitchens, desks, or other map props; when the user says
-  "sprite đẹp", "isometric", "farm prop", "bàn học", "bếp", or runs /farm-pixel-props.
+  Make Hangeul Valley farm props as front-facing 2D pixel-art PNGs (Imagine +
+  magenta key + Phaser load), not 20x20 letter matrices. Use when adding or
+  upgrading furniture, stalls, kitchens, desks, or other map props; when the
+  user says "sprite đẹp", "farm prop", "bàn học", "bếp", or runs /farm-pixel-props.
 ---
 
 # Farm pixel props
@@ -24,6 +24,18 @@ Prompt shape (2–5 sentences):
 - no text, no grass, no floor, no drop shadow, no scene
 
 Keep later variants on `image_edit` from the first accepted PNG so the set matches.
+
+## 1b. Set contract
+
+A set shares one parent PNG. Later pieces are `image_edit` from that parent, never three sibling `image_gen`s.
+
+Height classes: `station` = script default 156; `accent` = `process_prop.py --height 64`. Crop, key, origin, and depth stay in §§2–3.
+
+Naming: new world-pack props `unit10_<role>.png`. Do not rename shipped `study_desk.png` / `unit10_kitchen.png`.
+
+Palette: match `STARDEW_PALETTE` wood/outline in `game.js`. Do not paint grass or ground.
+
+One Phaser spawn path per set: HD key, matrix fallback, scale 1 on HD, no y-bob.
 
 ## 2. Key, crop, size
 
@@ -50,12 +62,13 @@ Shadow under the feet (`createShadow`, small offset). Depth `y + 6`. Label below
 
 ## 4. Sit on the grass
 
-Isometric art is tall. The tabletop / hood occupies the upper ~70% of the bitmap. If `y` is only ~90px south of the farm, the sprite covers plots.
+The tabletop / hood occupies the upper ~70% of the bitmap. If `y` is only ~90px south of the farm, the sprite covers plots.
 
 Clear the farm tile rect:
 
-- south props: `y >= farm.y + farm.h + spriteDisplayHeight` (desk uses `farm.h + 168`)
+- south props: station-class south row is `farm.h + 168` (shared `oy` for siblings). `y >= farm.y + farm.h + spriteDisplayHeight` is the minimum clear, not the placed value
 - east props: `x` far enough that the left edge is past `farm.x + farm.w`, and `y` low enough the cabinet base sits on grass (`farm.h/2 + 96`)
+- pond ellipse is a keep-out even when `_setPondVisible(false)`
 
 Interact radius follows the on-screen footprint (~80), not the old 48px matrix box.
 

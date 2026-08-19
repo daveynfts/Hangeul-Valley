@@ -7,7 +7,7 @@
   const DEFAULTS = {
     desk: { ox: -28, oy: 480, scale: 1, originX: 0.52, interact: 80, nameKo: '학습 책상', nameEn: 'Study desk' },
     kitchen: { ox: 328, oy: 252, scale: 1, originX: 0.48, interact: 82, nameKo: '요리 주방', nameEn: 'Kitchen' },
-    taste: { ox: 144, oy: 394, scale: 2.4, originX: 0.5, interact: 64, nameKo: '한 입 포장마차', nameEn: 'Taste stall' }
+    taste: { ox: 144, oy: 480, scale: 1, originX: 0.5, interact: 80, nameKo: '한 입 포장마차', nameEn: 'Taste stall' }
   };
 
   const state = {

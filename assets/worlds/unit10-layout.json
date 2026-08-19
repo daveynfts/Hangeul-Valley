@@ -27,10 +27,10 @@
       "nameKo": "한 입 포장마차",
       "nameEn": "Taste stall",
       "ox": 144,
-      "oy": 394,
-      "scale": 2.4,
+      "oy": 480,
+      "scale": 1,
       "originX": 0.5,
-      "interact": 64
+      "interact": 80
     }
   ]
 }

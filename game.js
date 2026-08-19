@@ -5558,7 +5558,7 @@ const UNIT10_LAYOUT_DEFAULT = {
   stations: [
     { id: 'desk', nameKo: '학습 책상', ox: -28, oy: 480, scale: 1, originX: 0.52, interact: 80 },
     { id: 'kitchen', nameKo: '요리 주방', ox: 328, oy: 252, scale: 1, originX: 0.48, interact: 82 },
-    { id: 'taste', nameKo: '한 입 포장마차', ox: 144, oy: 394, scale: 2.4, originX: 0.5, interact: 64 }
+    { id: 'taste', nameKo: '한 입 포장마차', ox: 144, oy: 480, scale: 1, originX: 0.5, interact: 80 }
   ]
 };
 function getUnit10Layout() {
@@ -5578,6 +5578,10 @@ function unit10StationXY(farm, spec) {
   const f = farm || { x: 300, y: 220, w: 180, h: 312 };
   const s = spec || {};
   return { x: f.x + (s.ox || 0), y: f.y + (s.oy || 0) };
+}
+function hdStationScale(spec) {
+  const s = spec && spec.scale;
+  return (typeof s === 'number' && s > 0 && s <= 1.2) ? s : 1;
 }
 function currentLesson() {
   return (typeof levelsData !== 'undefined' && levelsData[currentLevelIndex]) || null;
@@ -8522,9 +8526,10 @@ class FarmScene extends Phaser.Scene {
     PixelArtRenderer.generateTilemapTextures(this);
     this.load.json('levels','levels.json');
     this.load.json('world-2b-10','worlds/2b-unit-10.json');
-    this.load.json('unit10-layout','worlds/unit10-layout.json');
+    this.load.json('unit10-layout','worlds/unit10-layout.json?v=southband');
     this.load.image('study_desk_hd', 'sprites/study_desk.png');
     this.load.image('unit10_kitchen_hd', 'sprites/unit10_kitchen.png');
+    this.load.image('unit10_taste_stall_hd', 'sprites/unit10_taste_stall.png');
   }
 
   // ── APPLE TREE constants ──────────────────────────────────────────────────
@@ -10841,7 +10846,7 @@ class FarmScene extends Phaser.Scene {
       this.kitchenStation.label.setAlpha(near ? 1 : 0);
     }
     if (this.tasteStation && this.tasteStation.label) {
-      const near = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 64);
+      const near = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 80);
       this.tasteStation.label.setAlpha(near ? 1 : 0);
     }
     if (this.beehiveSprite) this.beehiveSprite.setDepth(this.beehiveY || this.beehiveSprite.y);
@@ -10890,8 +10895,8 @@ class FarmScene extends Phaser.Scene {
       hx = this.studyDesk.x; hy = this.studyDesk.y - 20; lbl = '[SPACE] 학습 책상'; col = 0x60A5FA; hw = 70; hh = 70;
     }
     if (hx === null && this._isUnit10() && this.tasteStation &&
-        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 64)) {
-      hx = this.tasteStation.x; hy = this.tasteStation.y - 18; lbl = '[SPACE] 한 입'; col = 0xF59E0B; hw = 48; hh = 48;
+        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 80)) {
+      hx = this.tasteStation.x; hy = this.tasteStation.y - 18; lbl = '[SPACE] 한 입'; col = 0xF59E0B; hw = 70; hh = 72;
     }
     if (hx === null) {
     // Priority mirrors _interact(): apple > ripe > wilt > cat > shop > empty
@@ -10899,11 +10904,9 @@ class FarmScene extends Phaser.Scene {
       hx=this.appleX;hy=this.appleY-50;lbl='[SPACE] Harvest 🍎 Bonus!';col=0xFF3333;hw=60;hh=70;
     }
     if(hx===null) for(const p of this.plots){
-      if(this.tasteStation&&p.index===this.tasteStation.plotIndex) continue;
       if(p.sState==='4'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Harvest +Gold';col=0xFFD700;break;}
     }
     if(hx===null) for(const p of this.plots){
-      if(this.tasteStation&&p.index===this.tasteStation.plotIndex) continue;
       if(p.sState==='2'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Water';col=0x55CCFF;break;}
     }
     if(hx===null&&this.catSprite&&this.catSprite.visible&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
@@ -10931,11 +10934,9 @@ class FarmScene extends Phaser.Scene {
       hx=this.shopX;hy=this.shopY-20;lbl='[SPACE] Open Shop';col=0xFFAA44;hw=50;hh=60;
     }
     if(hx===null) for(const p of this.plots){
-      if(this.tasteStation&&p.index===this.tasteStation.plotIndex) continue;
       if(p.sState===''&&p.active&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Plant new';col=0x44FF88;break;}
     }
     if(hx===null) for(const p of this.plots){
-      if(this.tasteStation&&p.index===this.tasteStation.plotIndex) continue;
       if(!p.active&&near(p)){
         const cost = PLOT_UNLOCK_COSTS[p.index - 9] || 1000;
         hx=p.x; hy=p.y;
@@ -10984,7 +10985,7 @@ class FarmScene extends Phaser.Scene {
     return this._isUnit10() ? 'chef' : 'player';
   }
 
-  // ── UNIT 10: farm plots stay; taste table sits on plot 0; no portal ──────
+  // ── UNIT 10: stations sit on grass south/east of the farm rect; pond hidden; portal hidden ──
   syncUnit10World(){
     const on = this._isUnit10();
     this._setMinigameSpritesVisible(!on);
@@ -11057,71 +11058,83 @@ class FarmScene extends Phaser.Scene {
     });
   }
 
+  _spawnUnit10Station(id, { hdKey, matrixKey, lastKey, shadowW, matrixScale }) {
+    if (!this.farm) return null;
+    const spec = getUnit10Station(id);
+    const pos = unit10StationXY(this.farm, spec);
+    const hd = this.textures.exists(hdKey);
+    const tex = hd ? hdKey
+      : (this.textures.exists(matrixKey) ? matrixKey : lastKey);
+    const spr = this.add.image(pos.x, pos.y, tex)
+      .setOrigin(spec.originX || 0.5, 1)
+      .setScale(hd ? hdStationScale(spec) : matrixScale)
+      .setDepth(pos.y + 6);
+    if (hd && spr.texture) spr.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    const hdShadowW = typeof shadowW === 'function' ? shadowW(spr) : shadowW;
+    if (this.shadows) this.shadows.createShadow(spr, hd ? hdShadowW : 52, 16, 2);
+    const label = this.add.text(pos.x, pos.y + 8, (spec.nameKo || id) + '\n[SPACE]', {
+      fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
+      color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
+    }).setOrigin(0.5, 0).setDepth(pos.y + 10).setAlpha(0);
+    return { x: pos.x, y: pos.y, spr, label, interact: spec.interact || 80 };
+  }
+
   _ensureTasteStation(){
     this._teardownTasteStation();
-    const farm = this.farm || { x: 300, y: 220, w: 400, h: 280 };
-    const spec = getUnit10Station('taste');
-    const pos = unit10StationXY(farm, spec);
-    const x = pos.x, y = pos.y;
-    const tex = this.textures.exists('taste_stall') ? 'taste_stall' : 'shop_sign';
-    const spr = this.add.image(x, y, tex).setOrigin(spec.originX || 0.5, 1).setScale(spec.scale || 2.4).setDepth(y + 6);
-    this.tweens.add({ targets: spr, y: y - 3, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    const base = this._spawnUnit10Station('taste', {
+      hdKey: 'unit10_taste_stall_hd',
+      matrixKey: 'taste_stall',
+      lastKey: 'shop_sign',
+      shadowW: (spr) => Math.min(90, Math.round(spr.displayWidth * 0.55)),
+      matrixScale: 2.4
+    });
+    if (!base) return;
     const steam = [];
+    const y0 = base.y - base.spr.displayHeight * 0.82;
     for (let i = 0; i < 3; i++) {
-      const puf = this.add.circle(x - 10 + i * 10, y - 52, 3 + i, 0xFFF8E8, 0.55).setDepth(y + 9);
+      const puf = this.add.circle(base.x - 10 + i * 10, y0, 3 + i, 0xFFF8E8, 0.55).setDepth(base.y + 9);
       this.tweens.add({
-        targets: puf, y: y - 72 - i * 6, alpha: 0, scale: 2.2,
+        targets: puf, y: y0 - 20 - i * 6, alpha: 0, scale: 2.2,
         duration: 900 + i * 180, repeat: -1, delay: i * 200, ease: 'Sine.Out'
       });
       steam.push(puf);
     }
-    const label = this.add.text(x, y + 8, (spec.nameKo || '한 입 포장마차') + '\n[SPACE]', {
-      fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
-      color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
-    }).setOrigin(0.5, 0).setDepth(y + 10).setAlpha(0);
-    this.tasteStation = { x, y, spr, label, steam, interact: spec.interact || 64 };
+    this.tasteStation = Object.assign(base, { steam });
   }
 
   _ensureStudyDesk(){
     this._teardownStudyDesk();
-    const farm = this.farm || { x: 300, y: 220, w: 400, h: 280 };
-    const spec = getUnit10Station('desk');
-    const pos = unit10StationXY(farm, spec);
-    const x = pos.x, y = pos.y;
-    const hd = this.textures.exists('study_desk_hd');
-    const tex = hd ? 'study_desk_hd' : (this.textures.exists('study_desk') ? 'study_desk' : 'pixel_crate');
-    const spr = this.add.image(x, y, tex).setOrigin(spec.originX || 0.52, 1).setScale(hd ? (spec.scale || 1) : 2.3).setDepth(y + 6);
-    if (this.shadows) this.shadows.createShadow(spr, hd ? 78 : 52, 16, 2);
-    const glow = this.add.circle(x - 26, y - 98, 8, 0xFDE047, 0.22).setDepth(y + 8);
+    const base = this._spawnUnit10Station('desk', {
+      hdKey: 'study_desk_hd',
+      matrixKey: 'study_desk',
+      lastKey: 'pixel_crate',
+      shadowW: 78,
+      matrixScale: 2.3
+    });
+    if (!base) return;
+    const glow = this.add.circle(base.x - 26, base.y - base.spr.displayHeight * 0.63, 8, 0xFDE047, 0.22).setDepth(base.y + 8);
     this.tweens.add({ targets: glow, alpha: { from: 0.22, to: 0.75 }, scale: { from: 0.8, to: 1.4 }, duration: 700, yoyo: true, repeat: -1 });
-    const label = this.add.text(x, y + 8, (spec.nameKo || '학습 책상') + '\n[SPACE]', {
-      fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
-      color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
-    }).setOrigin(0.5, 0).setDepth(y + 10).setAlpha(0);
-    this.studyDesk = { x, y, spr, glow, label, interact: spec.interact || 80 };
+    this.studyDesk = Object.assign(base, { glow });
   }
 
   _ensureKitchen(){
     this._teardownKitchen();
-    const farm = this.farm || { x: 300, y: 220, w: 400, h: 280 };
-    const spec = getUnit10Station('kitchen');
-    const pos = unit10StationXY(farm, spec);
-    const x = pos.x, y = pos.y;
-    const hd = this.textures.exists('unit10_kitchen_hd');
-    const tex = hd ? 'unit10_kitchen_hd' : (this.textures.exists('unit10_kitchen') ? 'unit10_kitchen' : 'shop_sign');
-    const spr = this.add.image(x, y, tex).setOrigin(spec.originX || 0.48, 1).setScale(hd ? (spec.scale || 1) : 2.35).setDepth(y + 6);
-    if (this.shadows) this.shadows.createShadow(spr, hd ? 58 : 56, 16, 2);
+    const base = this._spawnUnit10Station('kitchen', {
+      hdKey: 'unit10_kitchen_hd',
+      matrixKey: 'unit10_kitchen',
+      lastKey: 'shop_sign',
+      shadowW: 58,
+      matrixScale: 2.35
+    });
+    if (!base) return;
     const flame = [];
+    const y0 = base.y - base.spr.displayHeight * 0.76;
     for (let i = 0; i < 3; i++) {
-      const puf = this.add.circle(x - 4 + i * 7, y - 118, 2.5, 0xFFF7ED, 0.4).setDepth(y + 10);
-      this.tweens.add({ targets: puf, y: y - 138 - i * 6, alpha: 0, scale: 2.0, duration: 900 + i * 160, repeat: -1, delay: i * 180, ease: 'Sine.Out' });
+      const puf = this.add.circle(base.x - 4 + i * 7, y0, 2.5, 0xFFF7ED, 0.4).setDepth(base.y + 10);
+      this.tweens.add({ targets: puf, y: y0 - 20 - i * 6, alpha: 0, scale: 2.0, duration: 900 + i * 160, repeat: -1, delay: i * 180, ease: 'Sine.Out' });
       flame.push(puf);
     }
-    const label = this.add.text(x, y + 8, (spec.nameKo || '요리 주방') + '\n[SPACE]', {
-      fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
-      color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
-    }).setOrigin(0.5, 0).setDepth(y + 10).setAlpha(0);
-    this.kitchenStation = { x, y, spr, label, flame, interact: spec.interact || 82 };
+    this.kitchenStation = Object.assign(base, { flame });
   }
 
   _teardownKitchen(){
@@ -11166,12 +11179,12 @@ class FarmScene extends Phaser.Scene {
       return;
     }
     if (this._isUnit10() && this.tasteStation &&
-        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 64)) {
+        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 80)) {
       if (typeof openTasteGame === 'function') openTasteGame();
       return;
     }
     const near=p=>Phaser.Math.Distance.Between(this.player.x,this.player.y,p.x,p.y)<PLOT_SIZE+24;
-    const skipStation = (p) => this._isUnit10() && this.tasteStation && p && p.index === this.tasteStation.plotIndex;
+    const skipStation = () => false;
     // Apple Tree harvest (highest priority when ripe)
     if(this.appleRipe&&this.appleX&&
        Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<95){
@@ -11470,7 +11483,7 @@ class FarmScene extends Phaser.Scene {
     const due = srsDueWords(now).filter(d => d.entry.st === 'review' && !plantedWords.has(d.word.ko));
     if(!due.length) return 0;
 
-    const freePlots = this.plots.filter(p => p.active && !p.ko && !(this.tasteStation && p.index === this.tasteStation.plotIndex));
+    const freePlots = this.plots.filter(p => p.active && !p.ko);
     const RESERVED_FOR_NEW = 2;
     const capacity = Math.max(0, freePlots.length - RESERVED_FOR_NEW);
     const planting = due.slice(0, capacity);
