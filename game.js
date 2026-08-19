@@ -5583,6 +5583,13 @@ function hdStationScale(spec) {
   const s = spec && spec.scale;
   return (typeof s === 'number' && s > 0 && s <= 1.2) ? s : 1;
 }
+const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
+function cropTex(scene, type, stage) {
+  const n = CROP_HD_NAMES[type] || CROP_HD_NAMES[0];
+  const hd = 'crop_' + n + '_' + stage + '_hd';
+  if (scene && scene.textures && scene.textures.exists(hd)) return hd;
+  return 'cr_' + type + '_' + stage;
+}
 function currentLesson() {
   return (typeof levelsData !== 'undefined' && levelsData[currentLevelIndex]) || null;
 }
@@ -8530,6 +8537,14 @@ class FarmScene extends Phaser.Scene {
     this.load.image('study_desk_hd', 'sprites/study_desk.png');
     this.load.image('unit10_kitchen_hd', 'sprites/unit10_kitchen.png');
     this.load.image('unit10_taste_stall_hd', 'sprites/unit10_taste_stall.png');
+    CROP_HD_NAMES.forEach((n) => {
+      [1, 2, 3].forEach((s) => {
+        this.load.image('crop_' + n + '_' + s + '_hd', 'sprites/crop_' + n + '_' + s + '.png');
+      });
+    });
+    this.load.image('flw_red_hd', 'sprites/fence_flower_red.png');
+    this.load.image('flw_yellow_hd', 'sprites/fence_flower_yellow.png');
+    this.load.image('flw_purple_hd', 'sprites/fence_flower_purple.png');
   }
 
   // ── APPLE TREE constants ──────────────────────────────────────────────────
@@ -9614,68 +9629,41 @@ class FarmScene extends Phaser.Scene {
     const fenceFlowerColors = [0xEF4444, 0xFBBF24, 0xA855F7, 0xEC4899];
     const fenceFlowerTexs = ['flw_red', 'flw_yellow', 'flw_purple'];
     let postIdx = 0;
-    for (let fx = this.farm.x; fx <= this.farm.x + this.farm.w; fx += 28) {
-      this.add.image(fx + 14, fenceY - 4, 'fnc_rail').setDisplaySize(28, 8).setDepth(fenceY - 1);
-      const post = this.add.image(fx, fenceY, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fenceY);
-      if (this.shadows) this.shadows.createShadow(post, 14, 5, 0);
-
-      // Decorative pixel-art flower on fence post
-      const color = fenceFlowerColors[postIdx % fenceFlowerColors.length];
-      const tex = fenceFlowerTexs[postIdx % fenceFlowerTexs.length];
-      const flower = this.add.image(fx + (postIdx % 2 === 0 ? -2 : 2), fenceY - 14, tex)
-        .setScale(0.9)
-        .setTint(color)
-        .setDepth(fenceY + 2);
-
-      // Subtle idle sway animation loop
+    const placeFenceBloom = (x, y, depth) => {
+      const base = fenceFlowerTexs[postIdx % fenceFlowerTexs.length];
+      const hd = this.textures.exists(base + '_hd');
+      const flower = this.add.image(x, y, hd ? base + '_hd' : base)
+        .setOrigin(0.5, 1)
+        .setScale(hd ? 1 : 0.9)
+        .setDepth(depth);
+      if (!hd) flower.setTint(fenceFlowerColors[postIdx % fenceFlowerColors.length]);
       this.tweens.add({
         targets: flower,
-        angle: { from: -6, to: 6 },
+        angle: { from: -8, to: 8 },
         duration: 1400 + (postIdx * 170) % 800,
         yoyo: true,
         repeat: -1,
         ease: 'Sine.InOut'
       });
       postIdx++;
+      return flower;
+    };
+    for (let fx = this.farm.x; fx <= this.farm.x + this.farm.w; fx += 28) {
+      this.add.image(fx + 14, fenceY - 4, 'fnc_rail').setDisplaySize(28, 8).setDepth(fenceY - 1);
+      const post = this.add.image(fx, fenceY, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fenceY);
+      if (this.shadows) this.shadows.createShadow(post, 14, 5, 0);
+      placeFenceBloom(fx + (postIdx % 2 === 0 ? -2 : 2), fenceY - 10, fenceY + 2);
     }
 
     // Side perimeter fence posts with decorative animated flowers
     for (let fy = fenceY + 28; fy <= this.farm.y + this.farm.h + 10; fy += 28) {
       const postL = this.add.image(this.farm.x, fy, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fy);
       if (this.shadows) this.shadows.createShadow(postL, 14, 5, 0);
-      const colorL = fenceFlowerColors[postIdx % fenceFlowerColors.length];
-      const texL = fenceFlowerTexs[postIdx % fenceFlowerTexs.length];
-      const flowerL = this.add.image(this.farm.x - 2, fy - 14, texL)
-        .setScale(0.9)
-        .setTint(colorL)
-        .setDepth(fy + 2);
-      this.tweens.add({
-        targets: flowerL,
-        angle: { from: -6, to: 6 },
-        duration: 1400 + (postIdx * 170) % 800,
-        yoyo: true,
-        repeat: -1,
-        ease: 'Sine.InOut'
-      });
-      postIdx++;
+      placeFenceBloom(this.farm.x - 2, fy - 10, fy + 2);
 
       const postR = this.add.image(this.farm.x + this.farm.w, fy, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fy);
       if (this.shadows) this.shadows.createShadow(postR, 14, 5, 0);
-      const colorR = fenceFlowerColors[postIdx % fenceFlowerColors.length];
-      const texR = fenceFlowerTexs[postIdx % fenceFlowerTexs.length];
-      const flowerR = this.add.image(this.farm.x + this.farm.w + 2, fy - 14, texR)
-        .setScale(0.9)
-        .setTint(colorR)
-        .setDepth(fy + 2);
-      this.tweens.add({
-        targets: flowerR,
-        angle: { from: -6, to: 6 },
-        duration: 1400 + (postIdx * 170) % 800,
-        yoyo: true,
-        repeat: -1,
-        ease: 'Sine.InOut'
-      });
-      postIdx++;
+      placeFenceBloom(this.farm.x + this.farm.w + 2, fy - 10, fy + 2);
     }
 
     // Micro Animated Fauna: Fluttering Butterflies
@@ -11294,7 +11282,7 @@ class FarmScene extends Phaser.Scene {
       // P1 correct: plant seedling. The next-step timer already lives in srsData.due.
       plot.word=word; plot.ko=ko; plot.plantedAt=now;
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
-      const crop=this.add.image(plot.x,plot.y-4,`cr_${t}_1`).setOrigin(0.5,0.85).setScale(0).setDepth(plot.y+5);
+      const crop=this.add.image(plot.x,plot.y-4,cropTex(this,t,1)).setOrigin(0.5,0.85).setScale(0).setDepth(plot.y+5);
       plot.plant=crop;
       this.tweens.add({targets:crop,scale:1,duration:300,ease:'Back.Out(3)'});
       this._sparkle(plot.x,plot.y); this._label(plot.x,plot.y,'Planted!');
@@ -11302,7 +11290,7 @@ class FarmScene extends Phaser.Scene {
     } else if(phase===2){
       // P2 correct: grow to sprout, set P3 timer, play watering animation
       this.playPlayerAction('water', plot.x, plot.y, () => {
-        if(plot.plant) plot.plant.setTexture(`cr_${t}_2`).clearTint();
+        if(plot.plant) plot.plant.setTexture(cropTex(this,t,2)).clearTint();
         this.tweens.add({targets:plot.plant,scale:{from:0.7,to:1.1},duration:320,ease:'Back.Out(2)',
           onComplete:()=>this.tweens.add({targets:plot.plant,scale:1,duration:150})});
         if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
@@ -11373,7 +11361,7 @@ class FarmScene extends Phaser.Scene {
     // the plot visuals back to "needs watering".
     if(plot.glow){plot.glow.destroy();plot.glow=null;}
     if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
-    if(plot.plant) plot.plant.setTexture(`cr_${t}_1`);
+    if(plot.plant) plot.plant.setTexture(cropTex(this,t,1));
     this.tweens.add({targets:plot.plant,scale:0.5,duration:200,ease:'Power2.In',
       onComplete:()=>{
         if(plot.plant) plot.plant.setTint(0xFFCC44);
@@ -11402,7 +11390,7 @@ class FarmScene extends Phaser.Scene {
         plot.cropShadow = this.shadows.createShadow(plot.plant, 14, 5, 12);
       }
     } else if(s==='2'){  // wilting - P2 review needed
-      if(plot.plant) plot.plant.setTexture(`cr_${t}_1`).setTint(0xFFCC44);
+      if(plot.plant) plot.plant.setTexture(cropTex(this,t,1)).setTint(0xFFCC44);
       this._addLabel(plot,'💧','#FFD700');
       if (plot.plant && this.shadows) {
         plot.cropShadow = this.shadows.createShadow(plot.plant, 20, 7, 10);
@@ -11413,7 +11401,7 @@ class FarmScene extends Phaser.Scene {
         plot.cropShadow = this.shadows.createShadow(plot.plant, 24, 8, 8);
       }
     } else if(s==='4'){  // ripe - harvest!
-      if(plot.plant) plot.plant.setTexture(`cr_${t}_3`).clearTint();
+      if(plot.plant) plot.plant.setTexture(cropTex(this,t,3)).clearTint();
       this._addGlow(plot,0xFFD700);
       this._addLabel(plot,'SPACE','#FFD700');
       if (plot.plant && this.shadows) {
@@ -11460,7 +11448,7 @@ class FarmScene extends Phaser.Scene {
       if(st==='1'&&srsIsDue(srs,now)) st='2';
       if(st==='3'&&srsIsDue(srs,now)) st='4';
       const t=plot.index%5;
-      const tex={1:`cr_${t}_1`,2:`cr_${t}_1`,3:`cr_${t}_2`,4:`cr_${t}_3`}[st]||`cr_${t}_1`;
+      const tex={1:cropTex(this,t,1),2:cropTex(this,t,1),3:cropTex(this,t,2),4:cropTex(this,t,3)}[st]||cropTex(this,t,1);
       plot.plant=this.add.image(plot.x,plot.y-4,tex).setOrigin(0.5,0.85).setDepth(plot.y+5);
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
       this._setState(plot,st,pd.ko);
@@ -11492,7 +11480,7 @@ class FarmScene extends Phaser.Scene {
       const plot = freePlots[i];
       const t = plot.index % 5;
       plot.word = d.word; plot.ko = d.word.ko; plot.plantedAt = now;
-      plot.plant = this.add.image(plot.x, plot.y-4, `cr_${t}_3`)
+      plot.plant = this.add.image(plot.x, plot.y-4, cropTex(this, t, 3))
         .setOrigin(0.5,0.85).setDepth(plot.y+5).setScale(0);
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
       this.tweens.add({ targets: plot.plant, scale: 1, duration: 260, delay: i*70, ease:'Back.Out(2)' });
