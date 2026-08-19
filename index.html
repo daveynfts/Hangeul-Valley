@@ -243,7 +243,9 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
       gap: 12px; width: 100%; max-width: 980px;
+      position: relative; z-index: 2;
     }
+    #credential_picker_container { z-index: 40 !important; }
 
     .ls-resume-card {
       grid-column: 1 / -1;

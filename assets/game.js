@@ -5216,7 +5216,6 @@ function pushCloudSave(data) {
   cloudSaveRequest('PUT', data).then(({ status }) => {
     if (status === 401) {
       setGoogleSession('', null);
-      try { if (window.google && google.accounts && google.accounts.id) google.accounts.id.prompt(); } catch {}
       if (typeof showToast === 'function') showToast('Sign in again to keep cloud save.');
     }
   }).catch(() => {});
@@ -5332,24 +5331,30 @@ async function initGoogleAuth() {
   } catch {}
   const boot = () => {
     if (!window.google || !google.accounts || !google.accounts.id) return false;
-    google.accounts.id.initialize({
-      client_id: googleAuth.clientId,
-      callback: onGoogleCredential,
-      auto_select: true,
-      ux_mode: 'popup'
-    });
-    document.querySelectorAll('.google-signin-slot').forEach(el => {
-      el.innerHTML = '';
-      google.accounts.id.renderButton(el, {
-        theme: 'filled_black',
-        size: 'medium',
-        type: 'standard',
-        shape: 'pill',
-        text: 'signin_with'
+    try {
+      google.accounts.id.initialize({
+        client_id: googleAuth.clientId,
+        callback: onGoogleCredential,
+        auto_select: false,
+        cancel_on_tap_outside: true,
+        ux_mode: 'popup'
       });
-    });
-    renderAuthUI();
-    if (getGoogleToken()) syncCloudSave();
+      document.querySelectorAll('.google-signin-slot').forEach(el => {
+        el.innerHTML = '';
+        google.accounts.id.renderButton(el, {
+          theme: 'filled_black',
+          size: 'medium',
+          type: 'standard',
+          shape: 'pill',
+          text: 'signin_with'
+        });
+      });
+      renderAuthUI();
+      if (getGoogleToken()) syncCloudSave();
+    } catch (e) {
+      console.warn('Google Sign-In init failed', e);
+      renderAuthUI();
+    }
     return true;
   };
   if (boot()) return;
@@ -6517,10 +6522,15 @@ function buildLevelSelectScreen() {
       levelsData = sceneRef.cache.json.get('levels') || [];
     }
     if(!levelsData || !levelsData.length){
-      fetch('levels.json').then(r => r.json()).then(d => {
-        levelsData = d;
+      lsGrid.innerHTML = '<div class="ls-sep">Loading levels…</div>';
+      fetch('levels.json').then(r => r.ok ? r.json() : Promise.reject(new Error('levels '+r.status))).then(d => {
+        levelsData = Array.isArray(d) ? d : [];
         loadTextbookWorlds(() => buildLevelSelectScreen());
-      }).catch(err => console.error('Failed to load levels.json:', err));
+      }).catch(err => {
+        console.error('Failed to load levels.json:', err);
+        lsGrid.innerHTML = '<div class="ls-sep">Could not load levels. Click to retry.</div>';
+        lsGrid.onclick = () => { lsGrid.onclick = null; buildLevelSelectScreen(); };
+      });
       return;
     }
     if (!textbookWorldsTried && !levelsData.some(l => isWorldLevel(l))) {
@@ -6548,9 +6558,10 @@ function buildLevelSelectScreen() {
   }
   const paintCard = (lvl, idx) => {
     const world = isWorldLevel(lvl);
-    const owned = world || unlockedLevels.includes(idx);
+    const owned = world || (Array.isArray(unlockedLevels) && unlockedLevels.includes(idx));
     const cost  = LEVEL_COST(idx);
     const canAfford = gold >= cost;
+    const wordCount = (lvl && Array.isArray(lvl.words)) ? lvl.words.length : 0;
     const c = document.createElement('div');
     c.className = 'level-card' + (world ? ' world-card' : '') + (!owned ? ' locked' : '');
     c.innerHTML = `<div class="lc-badge">${world ? '📘' : (owned ? '✅' : (canAfford ? '💰' : '🔒'))}</div>
@@ -6560,7 +6571,7 @@ function buildLevelSelectScreen() {
       <div class="lc-name-ko">${levelNameKo(lvl)}</div></div></div>
       <div class="lc-desc">${lvl.descriptionEn || lvl.description || ''}</div>
       <div class="lc-footer">
-        <span class="lc-tag words">📝 ${lvl.words.length} words</span>
+        <span class="lc-tag words">📝 ${wordCount} words</span>
         ${world ? `<span class="lc-tag" style="color:#4ade80">📘 SNU 2B</span>`
                 : owned ? `<span class="lc-tag" style="color:#4ade80">✅ Owned</span>`
                 : `<span class="lc-tag target" style="color:${canAfford?'#f9c74f':'#aaa'}">💰 ${cost} gold</span>`}
@@ -6822,17 +6833,20 @@ function buyLevelFromSelect(idx) {
 function startLevel(idx, resetCrops=true) {
   currentLevelIndex = idx;
   const lvl = levelsData[idx];
-  if (isWorldLevel(lvl) && !unlockedLevels.includes(idx)) unlockedLevels.push(idx);
+  hideLevelSelect();
+  if (isWorldLevel(lvl) && Array.isArray(unlockedLevels) && !unlockedLevels.includes(idx)) unlockedLevels.push(idx);
   if(resetCrops){
-    // Full fresh start: wipe everything
     progress = 0; plantedWords.clear();
-    if(sceneRef) sceneRef.resetPlots(); // also removes hv_plots from localStorage
+    if(sceneRef && typeof sceneRef.resetPlots === 'function') {
+      try { sceneRef.resetPlots(); } catch (e) { console.warn('resetPlots', e); }
+    }
     plotSave = [];
   }
-  hideLevelSelect();
-  updateHUD(); updateVocabBook();
-  persistSave(); // save the chosen level
-  if (sceneRef && typeof sceneRef.syncUnit10World === 'function') sceneRef.syncUnit10World();
+  try { updateHUD(); updateVocabBook(); } catch (e) { console.warn('startLevel hud', e); }
+  persistSave();
+  if (sceneRef && typeof sceneRef.syncUnit10World === 'function') {
+    try { sceneRef.syncUnit10World(); } catch (e) { console.warn('syncUnit10World', e); }
+  }
 }
 // Resume last session WITHOUT resetting crops
 function resumeGame(){
@@ -8574,7 +8588,11 @@ class FarmScene extends Phaser.Scene {
     });
     levelsData = this.cache.json.get('levels') || [];
     if (this.cache.json.exists('world-2b-10')) attachTextbookWorld(this.cache.json.get('world-2b-10'));
-    if(!levelsData.length){ console.error('levels.json missing'); return; }
+    if(!levelsData.length){
+      console.error('levels.json missing');
+      if (typeof buildLevelSelectScreen === 'function') buildLevelSelectScreen();
+      return;
+    }
 
     this._bakeTextures();
     const W = this.scale.width, H = this.scale.height;
@@ -11518,6 +11536,7 @@ class FarmScene extends Phaser.Scene {
     this.tweens.add({targets:txt,y:y-65,alpha:0,scale:1.4,duration:1100,ease:'Power2.Out',onComplete:()=>txt.destroy()});
   }
   resetPlots(){
+    if (!this.plots) return;
     this.plots.forEach(p=>{
       if(p.glow){p.glow.destroy();p.glow=null;}
       if(p.hintLabel){p.hintLabel.destroy();p.hintLabel=null;}
@@ -13204,7 +13223,13 @@ const config={
   parent:document.body,
   scale:{mode:Phaser.Scale.RESIZE, autoCenter:Phaser.Scale.CENTER_BOTH},
 };
-const game=new Phaser.Game(config);
+let game = null;
+try {
+  if (!IS_NODE) game = new Phaser.Game(config);
+} catch (e) {
+  console.error('Phaser failed to start', e);
+  if (typeof buildLevelSelectScreen === 'function') buildLevelSelectScreen();
+}
 
 // ══════════════ MEMORY MINIGAME ══════════════════════════════════════════════
 let memoryCards = [];
