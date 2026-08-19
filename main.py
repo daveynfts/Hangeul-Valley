@@ -100,6 +100,21 @@ def main():
         dst = os.path.join(assets_dir, fname)
         if os.path.exists(src):
             shutil.copy2(src, dst)
+    worlds_src = os.path.join(BASE_DIR, 'worlds')
+    worlds_dst = os.path.join(assets_dir, 'worlds')
+    if os.path.isdir(worlds_src):
+        os.makedirs(worlds_dst, exist_ok=True)
+        for name in os.listdir(worlds_src):
+            if name.endswith('.json'):
+                shutil.copy2(os.path.join(worlds_src, name), os.path.join(worlds_dst, name))
+    diner_src = os.path.join(BASE_DIR, 'diner')
+    diner_dst = os.path.join(assets_dir, 'diner')
+    if os.path.isdir(diner_src):
+        os.makedirs(diner_dst, exist_ok=True)
+        for name in os.listdir(diner_src):
+            src_f = os.path.join(diner_src, name)
+            if os.path.isfile(src_f):
+                shutil.copy2(src_f, os.path.join(diner_dst, name))
     print("[Sync] Root asset files successfully synchronized to assets/ directory.")
 
     # Validate asset files

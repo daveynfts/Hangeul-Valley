@@ -156,6 +156,12 @@ window.apiFetch.addWord = (num, wordData) => window.apiFetch(`/api/levels/${num}
 window.apiFetch.updateWord = (num, wordIdx, wordData) => window.apiFetch(`/api/levels/${num}/words/${wordIdx}`, { method: 'PUT', body: wordData });
 window.apiFetch.deleteWord = (num, wordIdx) => window.apiFetch(`/api/levels/${num}/words/${wordIdx}`, { method: 'DELETE' });
 window.apiFetch.getVocabFacts = () => window.apiFetch('/api/vocab-facts');
+window.apiFetch.getUnit10Layout = () => window.apiFetch('/api/unit10/layout');
+window.apiFetch.saveUnit10Layout = (body) => window.apiFetch('/api/unit10/layout', { method: 'PUT', body });
+window.apiFetch.getUnit10Quiz = () => window.apiFetch('/api/unit10/quiz');
+window.apiFetch.saveUnit10Quiz = (body) => window.apiFetch('/api/unit10/quiz', { method: 'PUT', body });
+window.apiFetch.getUnit10World = () => window.apiFetch('/api/unit10/world');
+window.apiFetch.saveUnit10World = (body) => window.apiFetch('/api/unit10/world', { method: 'PUT', body });
 window.apiFetch.addVocabFact = (factData) => window.apiFetch('/api/vocab-facts', { method: 'POST', body: factData });
 window.apiFetch.updateVocabFact = (key, factData) => window.apiFetch(`/api/vocab-facts/${encodeURIComponent(key)}`, { method: 'PUT', body: factData });
 window.apiFetch.deleteVocabFact = (key) => window.apiFetch(`/api/vocab-facts/${encodeURIComponent(key)}`, { method: 'DELETE' });
@@ -233,7 +239,8 @@ window.AppRouter = {
   routes: {
     'dashboard': () => window.DashboardView && window.DashboardView.render(),
     'levels': () => window.LevelsView && window.LevelsView.render(),
-    'vocab': () => window.VocabView && window.VocabView.render()
+    'vocab': () => window.VocabView && window.VocabView.render(),
+    'unit10': () => window.Unit10View && window.Unit10View.render()
   },
 
   init() {

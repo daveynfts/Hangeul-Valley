@@ -183,7 +183,9 @@ check('no curated entry has an empty note', emptyNote.length === 0, emptyNote.sl
 // leaderboard), adding `.visible` on the child cannot show it.
 const overlayIds = [
   'inventory-overlay', 'cooking-overlay', 'leaderboard-overlay',
-  'recipe-overlay', 'quest-overlay', 'shop-overlay', 'vocab-overlay'
+  'recipe-overlay', 'quest-overlay', 'shop-overlay', 'vocab-overlay',
+  'unit-notebook-overlay', 'taste-overlay', 'desk-quiz-overlay',
+  'rank-card-overlay', 'rankup-overlay'
 ];
 (function checkOverlayNesting() {
   const html = read('index.html');
@@ -208,10 +210,53 @@ const overlayIds = [
   check('modal overlays are not nested in each other', nested.length === 0, nested.join(', '));
 }());
 
+// ── Textbook worlds (SNU 2B …) — separate from the 25 × 60 Valley packs ──────
+(function checkTextbookWorlds() {
+  const rel = path.join('worlds', '2b-unit-10.json');
+  const full = path.join(ROOT, rel);
+  if (!fs.existsSync(full)) { check(`${rel} exists`, false); return; }
+  let world;
+  try { world = JSON.parse(fs.readFileSync(full, 'utf8')); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('2B Unit 10 has an id and a level', !!(world.id === '2b-unit-10' && world.level && Array.isArray(world.level.words)));
+  const ww = (world.level && world.level.words) || [];
+  const missing = ww.filter((w) => !w.ko || !w.en || !w.category || !w.categoryEn).map((w) => w.ko || '?');
+  check('2B Unit 10 words have ko / en / category / categoryEn', missing.length === 0, missing.slice(0, 5).join(', '));
+  check('2B Unit 10 has the full textbook word list', ww.length === 80, `found ${ww.length}`);
+  const cats = new Set(ww.map((w) => w.category));
+  check('2B Unit 10 has six vocab groups', ['음식', '맛', '식당 평가', '읽기', '주문', '회화'].every((c) => cats.has(c)),
+    [...cats].join(', '));
+}());
+
 // ── assets/ mirror ───────────────────────────────────────────────────────────
 // main.py serves from assets/ and admin/lib/sync.js writes both copies, so a drift here
 // means the desktop build and the browser build disagree.
-['game.js', 'index.html', 'levels.json', 'facts.json'].forEach((f) => {
+(function checkDeskQuizBank() {
+  const rel = path.join('worlds', 'unit10-desk-quiz.json');
+  const full = path.join(ROOT, rel);
+  if (!fs.existsSync(full)) { check(`${rel} exists`, false); return; }
+  let bank;
+  try { bank = JSON.parse(fs.readFileSync(full, 'utf8')); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  const qs = (bank && bank.questions) || [];
+  check('desk quiz has 20 questions', qs.length === 20, `found ${qs.length}`);
+  check('desk quiz session is 5 questions', bank.sessionSize === 5, String(bank.sessionSize));
+  const ids = new Set();
+  const bad = [];
+  qs.forEach((q, i) => {
+    if (!q || typeof q.id !== 'number') bad.push(`q${i} missing id`);
+    else if (ids.has(q.id)) bad.push(`duplicate id ${q.id}`);
+    else ids.add(q.id);
+    if (!q.q || !q.a || !q.choices) bad.push(`q${i} incomplete`);
+    else if (!['A', 'B', 'C', 'D'].includes(q.a)) bad.push(`q${q.id} bad key ${q.a}`);
+    else if (!q.choices[q.a]) bad.push(`q${q.id} answer not in choices`);
+    ['A', 'B', 'C', 'D'].forEach((k) => { if (!q.choices[k]) bad.push(`q${q.id} missing ${k}`); });
+    if (VIETNAMESE.test(JSON.stringify(q))) bad.push(`q${q.id} has Vietnamese`);
+  });
+  check('desk quiz items are well-formed English MCQs', bad.length === 0, bad.slice(0, 6).join(', '));
+}());
+
+['game.js', 'index.html', 'levels.json', 'facts.json', path.join('worlds', '2b-unit-10.json'), path.join('worlds', 'unit10-desk-quiz.json'), path.join('worlds', 'unit10-layout.json')].forEach((f) => {
   const a = path.join(ROOT, f);
   const b = path.join(ROOT, 'assets', f);
   if (!fs.existsSync(b)) { check(`assets/${f} exists`, false); return; }

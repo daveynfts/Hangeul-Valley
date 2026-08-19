@@ -130,6 +130,68 @@
     }
     #inventory-overlay.visible { display: flex; }
 
+    #unit-notebook-overlay {
+      position: fixed; inset: 0; z-index: 880; display: none;
+      background: var(--farm-veil); backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; animation: fadeIn .2s;
+    }
+    #unit-notebook-overlay.visible { display: flex; }
+    #unit-notebook-panel {
+      max-width: 720px; width: 94%; max-height: 88vh; overflow-y: auto; padding: 22px 22px 18px;
+      color: #2a1a0a;
+    }
+    #unb-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+    #unb-kicker { font-family: 'VT323', monospace; font-size: 16px; color: #7a3e12; }
+    #unb-title { font-family: 'Noto Sans KR', sans-serif; font-size: 22px; font-weight: 900; color: #2a1a0a; }
+    #unb-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .unb-tab {
+      background: #fff8e8; border: 1.5px solid #c4893a; color: #5b3412;
+      border-radius: 999px; padding: 6px 12px; font-size: 12px; cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .unb-tab.active { background: #166534; border-color: #14532d; color: #fff8e8; }
+    .unb-h { font-family: 'Press Start 2P', monospace; font-size: 10px; color: #7a3e12; margin: 12px 0 8px; }
+    .unb-h span { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-left: 6px; }
+    .unb-lead { font-size: 14px; color: #5b3412; line-height: 1.5; margin-bottom: 10px; }
+    .unb-q, .unb-goal, .unb-line { background: #fff8e8; border: 1px solid #c4893a; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+    .unb-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 700; color: #2a1a0a; }
+    .unb-en { font-size: 13px; color: #7a3e12; margin-top: 2px; }
+    .unb-goal.soon { opacity: .55; }
+    .unb-goal em { font-style: normal; font-size: 11px; color: #9a3412; }
+    .unb-line { display: flex; gap: 10px; align-items: flex-start; }
+    .unb-who { font-family: 'Press Start 2P', monospace; font-size: 10px; color: #166534; min-width: 24px; padding-top: 4px; }
+    .unb-note { font-size: 12px; color: #7a3e12; margin: 10px 0; }
+    .unb-cta {
+      display: block; width: 100%; margin-top: 12px; padding: 10px;
+      background: #c4893a; border: 2px solid #8b5a2b; color: #fff8e8;
+      border-radius: 10px; font-weight: 800; cursor: pointer;
+    }
+    .unb-label { display: block; font-size: 13px; color: #5b3412; margin-bottom: 8px; }
+    .unb-label input {
+      display: block; width: 100%; margin-top: 4px; padding: 8px 10px;
+      border: 1.5px solid #c4893a; border-radius: 8px; background: #fff8e8; font-size: 16px;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .unb-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
+    .unb-chip, .unb-opt {
+      background: #fff8e8; border: 1.5px solid #c4893a; color: #2a1a0a;
+      border-radius: 999px; padding: 6px 10px; font-size: 12px; cursor: pointer;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .unb-chip.dim { opacity: .75; }
+    .unb-chip.picked, .unb-opt:focus { background: #166534; border-color: #14532d; color: #fff8e8; }
+    .unb-built {
+      background: #fff3d6; border: 1.5px dashed #8b5a2b; border-radius: 10px;
+      padding: 12px; font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 700;
+    }
+    .unb-blank { letter-spacing: 2px; color: #9a3412; }
+    .unb-map { display: grid; gap: 10px; }
+    .unb-cluster {
+      background: #fff8e8; border: 1.5px solid #c4893a; border-radius: 12px; padding: 10px;
+    }
+    .unb-cluster .unb-chip { display: inline-block; margin: 3px 2px; }
+
     .inv-slot {
       background: var(--parch-l);
       border: 1.5px solid #c4893a;
@@ -218,6 +280,149 @@
     .level-card.locked { opacity: .5; cursor: not-allowed; filter: grayscale(.55); border-color: #6b5340; box-shadow: none; }
     .level-card.completed { border-color: #166534; }
     .level-card.completed:hover { box-shadow: 0 0 0 2px #14532d, 0 8px 18px rgba(0,0,0,.35); }
+    .level-card.world-card {
+      border-color: #166534;
+      background: linear-gradient(180deg, #fff3d6, #e8c07a);
+    }
+    #taste-overlay {
+      position: fixed; inset: 0; z-index: 875; display: none;
+      background: rgba(42, 26, 10, 0.62); align-items: center; justify-content: center;
+    }
+    #taste-overlay.visible { display: flex; }
+    #taste-panel {
+      max-width: 580px; width: 94%; padding: 18px 18px 16px; color: #2a1a0a;
+      background: linear-gradient(180deg, #fff3d6 0%, #e8c07a 100%) !important;
+    }
+    #taste-bar {
+      display: flex; justify-content: space-between; align-items: center; gap: 8px;
+      font-family: 'VT323', monospace; font-size: 20px; margin-bottom: 8px;
+    }
+    #taste-awning {
+      height: 18px; border-radius: 10px 10px 0 0; margin: -18px -18px 12px;
+      background: repeating-linear-gradient(90deg, #dc2626 0 22px, #fff8e8 22px 44px);
+      box-shadow: inset 0 -3px 0 #7f1d1d;
+    }
+    #taste-dish {
+      text-align: center; background:
+        radial-gradient(ellipse at 50% 70%, #fff8e8 40%, #f4d6a0 100%);
+      border: 3px solid #8b5a2b; border-radius: 50%;
+      width: 168px; height: 168px; margin: 8px auto 16px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: inset 0 0 0 6px #c4893a, 0 8px 0 #4a2a0d;
+    }
+    #taste-icon { font-size: 52px; line-height: 1; filter: drop-shadow(0 3px 0 rgba(0,0,0,.15)); }
+    #taste-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 22px; font-weight: 900; }
+    #taste-prompt { text-align: center; font-size: 14px; color: #7a3e12; margin: -6px 0 12px; }
+    #taste-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .taste-btn {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 20px; font-weight: 800;
+      padding: 12px 8px; border: 3px solid #8b5a2b; border-radius: 12px;
+      background: #fff8e8; color: #2a1a0a; cursor: pointer;
+      box-shadow: 0 3px 0 #4a2a0d;
+    }
+    .taste-btn[data-t="달다"] { border-color: #f59e0b; }
+    .taste-btn[data-t="짜다"] { border-color: #64748b; }
+    .taste-btn[data-t="쓰다"] { border-color: #166534; }
+    .taste-btn[data-t="시다"] { border-color: #eab308; }
+    .taste-btn[data-t="맵다"] { border-color: #dc2626; }
+    .taste-btn:hover { transform: translateY(-2px); }
+    .taste-btn.ok { background: #dcfce7; border-color: #166534; }
+    .taste-btn.bad { background: #fee2e2; border-color: #9f1239; }
+
+    #desk-quiz-overlay {
+      position: fixed; inset: 0; z-index: 876; display: none;
+      background: rgba(42, 26, 10, 0.62); align-items: center; justify-content: center;
+    }
+    #desk-quiz-overlay.visible { display: flex; }
+    #desk-quiz-panel { max-width: 640px; width: 94%; padding: 20px; color: #2a1a0a; }
+    #desk-lamp {
+      height: 10px; margin: -20px -20px 12px; border-radius: 10px 10px 0 0;
+      background: linear-gradient(90deg, #1e3a8a, #fde047 45%, #1e3a8a);
+    }
+    #desk-q {
+      font-family: 'Be Vietnam Pro', 'Noto Sans KR', sans-serif;
+      font-size: 17px; font-weight: 800; line-height: 1.45; margin: 8px 0 12px;
+    }
+    #desk-choices { display: flex; flex-direction: column; gap: 8px; }
+    .desk-opt {
+      text-align: left; font-family: 'Be Vietnam Pro', 'Noto Sans KR', sans-serif;
+      font-size: 15px; font-weight: 700; padding: 10px 12px;
+      background: #fff8e8; border: 2px solid #8b5a2b; border-radius: 10px;
+      color: #2a1a0a; cursor: pointer; box-shadow: 0 3px 0 #4a2a0d;
+    }
+    .desk-opt:hover { transform: translateY(-1px); border-color: #1e3a8a; }
+    .desk-opt.ok { background: #dcfce7; border-color: #166534; }
+    .desk-opt.bad { background: #fee2e2; border-color: #9f1239; }
+    #desk-head { display: flex; justify-content: space-between; align-items: center;
+      font-family: 'VT323', monospace; font-size: 20px; }
+    .desk-xp {
+      margin-top: 8px; font-size: 15px; font-weight: 800; color: #b45309;
+    }
+
+    #hud-rank {
+      cursor: pointer; gap: 6px; padding: 2px 8px 2px 4px !important;
+      border: 1px solid rgba(232, 192, 122, 0.35) !important; border-radius: 999px !important;
+      background: transparent; color: #f6deaa;
+    }
+    #hud-rank.pop { transform: scale(1.1); }
+    #hud-rank-icon { font-size: 14px; line-height: 1; }
+    #hud-rank-lv { font-family: 'Press Start 2P', monospace; font-size: 9px; color: #fde68a; }
+    #hud-rank-bar {
+      width: 42px; height: 6px; background: rgba(42,26,10,.55); border-radius: 99px; overflow: hidden;
+      border: 1px solid rgba(232, 192, 122, 0.35);
+    }
+    #hud-rank-fill { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #f59e0b, #fde68a); }
+
+    #rank-card-overlay, #rankup-overlay {
+      position: fixed; inset: 0; z-index: 890; display: none;
+      background: rgba(10, 15, 30, 0.72); align-items: center; justify-content: center;
+    }
+    #rank-card-overlay.visible, #rankup-overlay.visible { display: flex; }
+    #rank-card {
+      width: min(420px, 92vw); padding: 28px 24px 22px; text-align: center; color: #fff8e8;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(253,224,71,.22), transparent 55%),
+        linear-gradient(180deg, #2a1a0a 0%, #1a1008 100%);
+      border: 3px solid #f59e0b; border-radius: 22px;
+      box-shadow: 0 0 0 2px #0f172a, 0 20px 50px rgba(0,0,0,.55), 0 0 28px rgba(245,158,11,.35);
+    }
+    #rank-seal { font-size: 56px; filter: drop-shadow(0 6px 12px rgba(0,0,0,.45)); }
+    #rank-lv {
+      font-family: 'Press Start 2P', monospace; font-size: 13px; color: #fde68a;
+      letter-spacing: 2px; margin: 8px 0 6px;
+    }
+    #rank-title-ko {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 34px; font-weight: 900; line-height: 1.2;
+    }
+    #rank-title-en {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 700; color: #fbbf24; margin-bottom: 14px;
+    }
+    #rank-xp-wrap { margin: 8px 0 14px; }
+    #rank-xp-bar {
+      height: 10px; background: rgba(255,248,232,.12); border-radius: 99px; overflow: hidden;
+      border: 1px solid rgba(253,230,138,.4);
+    }
+    #rank-xp-fill { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #f59e0b, #fde68a); }
+    #rank-xp-num { font-family: 'VT323', monospace; font-size: 18px; color: #fde68a; margin-top: 4px; }
+    #rank-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin: 12px 0; }
+    .rank-stat {
+      background: rgba(255,248,232,.08); border: 1px solid rgba(253,230,138,.25); border-radius: 10px; padding: 8px 4px;
+    }
+    .rank-stat b { display: block; font-family: 'Press Start 2P', monospace; font-size: 11px; color: #fde68a; margin-bottom: 4px; }
+    .rank-stat span { font-size: 11px; color: rgba(255,248,232,.75); }
+    #rank-next { font-size: 12px; color: rgba(255,248,232,.8); margin: 6px 0 14px; }
+    #rankup-card {
+      width: min(400px, 92vw); padding: 32px 24px 24px; text-align: center; color: #fff8e8;
+      background: linear-gradient(180deg, #1e3a8a 0%, #1a1008 70%);
+      border: 3px solid #fde047; border-radius: 22px;
+      box-shadow: 0 0 0 2px #0f172a, 0 0 40px rgba(253,224,71,.45);
+      animation: popIn .35s cubic-bezier(.4,0,.2,1);
+    }
+    #rankup-kicker { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #fde047; letter-spacing: 2px; }
+    #rankup-icon { font-size: 64px; margin: 10px 0; }
+    #rankup-lv { font-family: 'Press Start 2P', monospace; font-size: 16px; color: #fde68a; }
+    #rankup-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 36px; font-weight: 900; }
+    #rankup-en { font-size: 16px; color: #fbbf24; margin-bottom: 18px; }
 
     .lc-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
     .lc-icon { font-size: 26px; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,.3)); }
@@ -1491,6 +1696,11 @@
     </div>
 
     <div id="hud-currency-group" class="hud-group">
+      <button type="button" class="hud-chip" id="hud-rank" title="Valley rank" onclick="openRankCard()">
+        <span id="hud-rank-icon">🌱</span>
+        <span id="hud-rank-lv">Lv.1</span>
+        <span id="hud-rank-bar"><span id="hud-rank-fill"></span></span>
+      </button>
       <span class="hud-chip" id="hud-gold" title="Coins">🪙 <span id="gold-val">0</span></span>
       <span class="hud-chip" id="hud-gems" title="Gems">💎 <span id="gems-val">0</span></span>
       <span class="hud-chip" id="hud-honor" title="Honor">🎖️ <span id="honor-val">0</span></span>
@@ -1499,6 +1709,7 @@
     <div id="hud-actions-group" class="hud-group">
       <button class="hud-btn" id="vocab-btn" title="Vocabulary book">📖</button>
       <button class="hud-btn" id="shop-btn" title="Shop">🏪</button>
+      <button class="hud-btn" id="unit-notebook-btn" title="Unit 10 notebook" onclick="openUnitNotebook()" style="display:none">📘</button>
       <button class="hud-btn" id="inventory-btn" title="Inventory (I / E)" onclick="openInventoryUI()">🎒</button>
       <button class="hud-btn" id="hud-more-btn" title="More" onclick="toggleHudOverflow(event)">⋯</button>
       <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level menu">☰</button>
@@ -1546,13 +1757,6 @@
         <p id="prog-footnote"></p>
       </div>
     </div>
-  </div>
-
-  <!-- Controls tip -->
-  <div id="controls-tip" style="display:none">
-    Move: <span class="key-badge">W</span><span class="key-badge">A</span><span class="key-badge">S</span><span class="key-badge">D</span>
-    or <span class="key-badge">↑</span><span class="key-badge">↓</span><span class="key-badge">←</span><span class="key-badge">→</span>
-    &nbsp;|&nbsp; Near plot 🟤 → <span class="key-badge">SPACE</span> plant &nbsp;|&nbsp; Near crop ✨ → <span class="key-badge">SPACE</span> harvest
   </div>
 
   <!-- ══════════════ TOUCH CONTROLS (phones / tablets) ══════════════
@@ -1734,6 +1938,10 @@
       <div class="vff-section">
         <div class="vff-section-title">📜 Word Origin</div>
         <div id="vff-fact-origin" class="vff-fact-text"></div>
+      </div>
+      <div class="vff-section" id="vff-example-section" style="display:none">
+        <div class="vff-section-title">💬 Textbook example</div>
+        <div id="vff-fact-example" class="vff-fact-text vff-hint-box"></div>
       </div>
       <div class="vff-section">
         <div class="vff-section-title">🔤 Pronunciation &amp; Syllables</div>
@@ -2027,6 +2235,7 @@
       <!-- Leaderboard Tabs -->
       <div class="lb-tabs" id="lb-tabs-container">
         <button class="lb-tab-btn active" id="lbtab-vocab" onclick="switchLeaderboardTab('vocab')">📖 Vocab Master</button>
+        <button class="lb-tab-btn" id="lbtab-rank" onclick="switchLeaderboardTab('rank')">⭐ Valley Rank</button>
         <button class="lb-tab-btn" id="lbtab-honor" onclick="switchLeaderboardTab('honor')">🎖️ Total Honor</button>
         <button class="lb-tab-btn" id="lbtab-cooking" onclick="switchLeaderboardTab('cooking')">🍳 Cooking Tier</button>
         <button class="lb-tab-btn" id="lbtab-arcade" onclick="switchLeaderboardTab('arcade')">👾 Arcade Score</button>
@@ -2119,6 +2328,83 @@
       <div id="inventory-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:12px;">
         <!-- Rendered dynamically by renderInventoryGrid() -->
       </div>
+    </div>
+  </div>
+
+  <div id="desk-quiz-overlay">
+    <div id="desk-quiz-panel" class="glass-modal">
+      <div id="desk-lamp"></div>
+      <div id="desk-head">
+        <span>학습 책상 · Food quiz</span>
+        <span id="desk-progress">1 / 5</span>
+        <button type="button" onclick="closeDeskQuiz()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:8px;padding:2px 10px;cursor:pointer">✕</button>
+      </div>
+      <div id="desk-q"></div>
+      <div id="desk-choices"></div>
+      <div id="desk-fb" class="fb"></div>
+    </div>
+  </div>
+
+  <div id="rank-card-overlay">
+    <div id="rank-card">
+      <div id="rank-seal">🌱</div>
+      <div id="rank-lv">LV. 1</div>
+      <div id="rank-title-ko">입문자</div>
+      <div id="rank-title-en">Newcomer</div>
+      <div id="rank-xp-wrap">
+        <div id="rank-xp-bar"><span id="rank-xp-fill"></span></div>
+        <div id="rank-xp-num">0 / 53 EXP</div>
+      </div>
+      <div id="rank-stats">
+        <div class="rank-stat"><b id="rank-stat-sessions">0</b><span>sessions</span></div>
+        <div class="rank-stat"><b id="rank-stat-perfects">0</b><span>perfect</span></div>
+        <div class="rank-stat"><b id="rank-stat-acc">0%</b><span>accuracy</span></div>
+      </div>
+      <div id="rank-next">Next title: ✏️ 견습생 · Apprentice at Lv.3</div>
+      <button type="button" class="desk-opt" onclick="closeRankCard()">Close card</button>
+    </div>
+  </div>
+
+  <div id="rankup-overlay">
+    <div id="rankup-card">
+      <div id="rankup-kicker">LEVEL UP</div>
+      <div id="rankup-icon">🌱</div>
+      <div id="rankup-lv">LV. 1</div>
+      <div id="rankup-ko">입문자</div>
+      <div id="rankup-en">Newcomer</div>
+      <button type="button" class="desk-opt" onclick="closeRankUp()">Show it off</button>
+    </div>
+  </div>
+
+  <div id="taste-overlay">
+    <div id="taste-panel" class="glass-modal">
+      <div id="taste-awning"></div>
+      <div id="taste-bar">
+        <span>한 입 포장마차</span>
+        <span id="taste-progress">1 / 10</span>
+        <button type="button" onclick="closeTasteGame()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:8px;padding:2px 10px;cursor:pointer">✕</button>
+      </div>
+      <div id="taste-dish">
+        <div id="taste-icon">🍲</div>
+        <div id="taste-ko">김치찌개</div>
+      </div>
+      <div id="taste-prompt">무슨 맛이에요?</div>
+      <div id="taste-choices"></div>
+      <div id="taste-fb" class="fb"></div>
+    </div>
+  </div>
+
+  <div id="unit-notebook-overlay">
+    <div id="unit-notebook-panel" class="glass-modal">
+      <div id="unb-head">
+        <div>
+          <div id="unb-kicker">2B Unit 10</div>
+          <div id="unb-title">10과 뭐 먹을래요?</div>
+        </div>
+        <button onclick="closeUnitNotebook()" style="background:rgba(42,26,10,0.08); border:1px solid #c4893a; color:#2a1a0a; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+      </div>
+      <div id="unb-tabs"></div>
+      <div id="unb-body"></div>
     </div>
   </div>
 

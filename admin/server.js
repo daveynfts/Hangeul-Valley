@@ -6,6 +6,7 @@ const fs = require('fs');
 const levelsLib = require('./lib/levels');
 const vocabFactsLib = require('./lib/vocabFacts');
 const syncLib = require('./lib/sync');
+const worldLib = require('./lib/world');
 
 const app = express();
 
@@ -259,6 +260,31 @@ const refuseOriginWrite = (verb) => (req, res) => {
 app.post('/api/vocab-facts', refuseOriginWrite('add'));
 app.put('/api/vocab-facts/:key', refuseOriginWrite('update'));
 app.delete('/api/vocab-facts/:key', refuseOriginWrite('delete'));
+
+app.get('/api/unit10/layout', (req, res, next) => {
+  try { res.json({ success: true, data: worldLib.getLayout(getRootDir()) }); }
+  catch (err) { next(err); }
+});
+app.put('/api/unit10/layout', (req, res, next) => {
+  try { res.json({ success: true, data: worldLib.saveLayout(req.body, getRootDir()) }); }
+  catch (err) { err.status = 400; next(err); }
+});
+app.get('/api/unit10/quiz', (req, res, next) => {
+  try { res.json({ success: true, data: worldLib.getQuiz(getRootDir()) }); }
+  catch (err) { next(err); }
+});
+app.put('/api/unit10/quiz', (req, res, next) => {
+  try { res.json({ success: true, data: worldLib.saveQuiz(req.body, getRootDir()) }); }
+  catch (err) { err.status = 400; next(err); }
+});
+app.get('/api/unit10/world', (req, res, next) => {
+  try { res.json({ success: true, data: worldLib.getWorld(getRootDir()) }); }
+  catch (err) { next(err); }
+});
+app.put('/api/unit10/world', (req, res, next) => {
+  try { res.json({ success: true, data: worldLib.saveWorld(req.body, getRootDir()) }); }
+  catch (err) { err.status = 400; next(err); }
+});
 
 // 12. POST /api/sync (Manual Trigger Resync)
 app.post('/api/sync', (req, res, next) => {
