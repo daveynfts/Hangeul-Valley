@@ -64,6 +64,7 @@ const FILES = [
   ['worlds/unit10-mindmap.jpg', 'image/jpeg'],
   ['sprites/study_desk.png', 'image/png'],
   ['sprites/unit10_kitchen.png', 'image/png'],
+  ['sprites/unit10_taste_stall.png', 'image/png'],
   ['diner/content.json', 'application/json']
 ];
 

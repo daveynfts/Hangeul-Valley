@@ -264,6 +264,75 @@ const overlayIds = [
   check(`assets/${f} matches the root copy`, norm(a) === norm(b));
 });
 
+function pngSize(rel) {
+  const buf = fs.readFileSync(path.join(ROOT, rel));
+  if (buf.length < 24 || buf.toString('ascii', 1, 4) !== 'PNG') {
+    throw new Error(rel + ' is not a PNG');
+  }
+  return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
+}
+
+(function checkSpriteLockstep() {
+  const listPng = (dir) => {
+    if (!fs.existsSync(dir)) return [];
+    return fs.readdirSync(dir).filter((n) => n.toLowerCase().endsWith('.png')).sort();
+  };
+  const rootNames = listPng(path.join(ROOT, 'sprites'));
+  const assetNames = listPng(path.join(ROOT, 'assets', 'sprites'));
+  const missingInAssets = rootNames.filter((n) => !assetNames.includes(n));
+  const orphanInAssets = assetNames.filter((n) => !rootNames.includes(n));
+  check('assets/sprites has every sprites/*.png', missingInAssets.length === 0, missingInAssets.join(', '));
+  check('sprites/ has every assets/sprites/*.png', orphanInAssets.length === 0, orphanInAssets.join(', '));
+  rootNames.filter((n) => assetNames.includes(n)).forEach((n) => {
+    const a = fs.readFileSync(path.join(ROOT, 'sprites', n));
+    const b = fs.readFileSync(path.join(ROOT, 'assets', 'sprites', n));
+    check(`sprites/${n} matches assets/sprites/${n}`, Buffer.compare(a, b) === 0);
+  });
+}());
+
+(function checkUnit10StationAabb() {
+  const rel = path.join('worlds', 'unit10-layout.json');
+  let pack;
+  try { pack = JSON.parse(read(rel)); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  const farm = pack.farm || { w: 180, h: 312 };
+  const pngFor = {
+    desk: path.join('sprites', 'study_desk.png'),
+    kitchen: path.join('sprites', 'unit10_kitchen.png'),
+    taste: path.join('sprites', 'unit10_taste_stall.png')
+  };
+  const boxes = [];
+  (pack.stations || []).forEach((st) => {
+    const relPng = pngFor[st.id];
+    if (!relPng || !fs.existsSync(path.join(ROOT, relPng))) return;
+    let size;
+    try { size = pngSize(relPng); }
+    catch (e) { check(`${relPng} IHDR`, false, e.message); return; }
+    check(`${st.id} station height is 156`, size.h === 156, `${relPng} is ${size.w}x${size.h}`);
+    const ox = st.ox, oy = st.oy, originX = typeof st.originX === 'number' ? st.originX : 0.5;
+    const left = ox - originX * size.w;
+    const right = ox + (1 - originX) * size.w;
+    const top = oy - size.h;
+    const bottom = oy;
+    if (st.id === 'desk' || st.id === 'taste') {
+      check(`${st.id} south of farm`, oy - size.h >= farm.h, `oy ${oy} h ${size.h} farm.h ${farm.h}`);
+    }
+    if (st.id === 'kitchen') {
+      check(`${st.id} east of farm`, ox - originX * size.w >= farm.w, `left ${left} farm.w ${farm.w}`);
+    }
+    boxes.push({ id: st.id, left, right, top, bottom });
+  });
+  check('taste stall PNG is in the layout set', boxes.some((b) => b.id === 'taste'));
+  for (let i = 0; i < boxes.length; i++) {
+    for (let j = i + 1; j < boxes.length; j++) {
+      const a = boxes[i], b = boxes[j];
+      const hit = a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+      check(`${a.id} AABB does not overlap ${b.id}`, !hit,
+        `[${a.left.toFixed(1)},${a.right.toFixed(1)}]x[${a.top},${a.bottom}] vs [${b.left.toFixed(1)},${b.right.toFixed(1)}]x[${b.top},${b.bottom}]`);
+    }
+  }
+}());
+
 // ── Report ───────────────────────────────────────────────────────────────────
 console.log(`\nvalidate_content: ${checks - failures.length}/${checks} invariants hold`);
 if (failures.length) {
