@@ -111,6 +111,17 @@ class ChiptuneSynthEngine {
         osc.connect(gain); gain.connect(this.ctx.destination);
         osc.start(now + i * 0.1); osc.stop(now + i * 0.1 + 0.15);
       });
+    } else if (type === 'levelup') {
+      [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, i) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + i * 0.08);
+        gain.gain.setValueAtTime(0.2, now + i * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.08 + 0.28);
+        osc.connect(gain); gain.connect(this.ctx.destination);
+        osc.start(now + i * 0.08); osc.stop(now + i * 0.08 + 0.28);
+      });
     }
   }
 }
@@ -2335,6 +2346,23 @@ class PixelArtRenderer {
     this.createTexture(scene, 'farmer2', down_0, P);
     this.createTexture(scene, 'farmer3', down_2, P);
 
+    const CHEF = Object.assign({}, P, {
+      h: 0xFFFFFF, t: 0xF8FAFC, T: 0xE2E8F0, i: 0xDC2626,
+      D: 0xF8FAFC, d: 0xE2E8F0, S: 0xFFFFFF, s: 0xCBD5E1
+    });
+    this.createTexture(scene, 'chef_walk_down_0', down_0, CHEF);
+    this.createTexture(scene, 'chef_walk_down_1', down_1, CHEF);
+    this.createTexture(scene, 'chef_walk_down_2', down_2, CHEF);
+    this.createTexture(scene, 'chef_walk_up_0', up_0, CHEF);
+    this.createTexture(scene, 'chef_walk_up_1', up_1, CHEF);
+    this.createTexture(scene, 'chef_walk_up_2', up_2, CHEF);
+    this.createTexture(scene, 'chef_walk_left_0', left_0, CHEF);
+    this.createTexture(scene, 'chef_walk_left_1', left_1, CHEF);
+    this.createTexture(scene, 'chef_walk_left_2', left_2, CHEF);
+    this.createTexture(scene, 'chef_walk_right_0', right_0, CHEF);
+    this.createTexture(scene, 'chef_walk_right_1', right_1, CHEF);
+    this.createTexture(scene, 'chef_walk_right_2', right_2, CHEF);
+
     // Register animations
     const anims = scene.anims;
     if (anims) {
@@ -2347,6 +2375,10 @@ class PixelArtRenderer {
       reg('player-walk-up', ['player_walk_up_0', 'player_walk_up_1', 'player_walk_up_0', 'player_walk_up_2']);
       reg('player-walk-left', ['player_walk_left_0', 'player_walk_left_1', 'player_walk_left_0', 'player_walk_left_2']);
       reg('player-walk-right', ['player_walk_right_0', 'player_walk_right_1', 'player_walk_right_0', 'player_walk_right_2']);
+      reg('chef-walk-down', ['chef_walk_down_0', 'chef_walk_down_1', 'chef_walk_down_0', 'chef_walk_down_2']);
+      reg('chef-walk-up', ['chef_walk_up_0', 'chef_walk_up_1', 'chef_walk_up_0', 'chef_walk_up_2']);
+      reg('chef-walk-left', ['chef_walk_left_0', 'chef_walk_left_1', 'chef_walk_left_0', 'chef_walk_left_2']);
+      reg('chef-walk-right', ['chef_walk_right_0', 'chef_walk_right_1', 'chef_walk_right_0', 'chef_walk_right_2']);
 
       const regOnce = (key, frames, fps = 6) => {
         if (!anims.exists(key)) {
@@ -4451,6 +4483,130 @@ let fishAlbumSave = {}; // { ko: count }
 
 // ═══════════════ R1: TRIPLE CURRENCY ECONOMY & SAVE V4 ═══════════════════════
 var playerCurrencies = { coins: 85, gems: 10, honor: 0 };
+var playerRank = { xp: 0, level: 1, sessions: 0, correct: 0, asked: 0, perfects: 0, recentIds: [] };
+
+const RANK_MAX = 60;
+const VALLEY_RANKS = [
+  { min: 1,  ko: '입문자',      en: 'Newcomer',           icon: '🌱' },
+  { min: 2,  ko: '견습생',      en: 'Apprentice',         icon: '✏️' },
+  { min: 4,  ko: '맛초보',      en: 'Taste Rookie',       icon: '🥄' },
+  { min: 7,  ko: '밭지기',      en: 'Plot Keeper',        icon: '🌾' },
+  { min: 10, ko: '주방보조',    en: 'Kitchen Hand',       icon: '🥢' },
+  { min: 14, ko: '맛감정사',    en: 'Palate Scout',       icon: '🧂' },
+  { min: 18, ko: '수습요리사',  en: 'Line Cook',          icon: '🍳' },
+  { min: 23, ko: '한식학도',    en: 'Hansik Scholar',     icon: '📘' },
+  { min: 28, ko: '수셰프',      en: 'Sous Chef',          icon: '🍲' },
+  { min: 34, ko: '한식당장',    en: 'Dining Master',      icon: '🏅' },
+  { min: 40, ko: '미식가',      en: 'Gourmet',            icon: '👑' },
+  { min: 47, ko: '전설의 셰프', en: 'Legend Chef',        icon: '🔥' },
+  { min: 55, ko: '한식의 달인', en: 'Hansik Grandmaster', icon: '💎' }
+];
+
+function defaultPlayerRank() {
+  return { xp: 0, level: 1, sessions: 0, correct: 0, asked: 0, perfects: 0, recentIds: [] };
+}
+function ensurePlayerRank() {
+  if (!playerRank || typeof playerRank !== 'object') playerRank = defaultPlayerRank();
+  if (typeof playerRank.xp !== 'number') playerRank.xp = 0;
+  if (typeof playerRank.level !== 'number' || playerRank.level < 1) playerRank.level = 1;
+  if (playerRank.level > RANK_MAX) playerRank.level = RANK_MAX;
+  if (!Array.isArray(playerRank.recentIds)) playerRank.recentIds = [];
+  ['sessions', 'correct', 'asked', 'perfects'].forEach(k => {
+    if (typeof playerRank[k] !== 'number') playerRank[k] = 0;
+  });
+  return playerRank;
+}
+function xpToNextLevel(lv) {
+  const n = Math.max(1, lv | 0);
+  return Math.round(36 + n * 14 + Math.pow(n, 1.42) * 3.2);
+}
+function rankTitleFor(lv) {
+  let found = VALLEY_RANKS[0];
+  VALLEY_RANKS.forEach(r => { if (lv >= r.min) found = r; });
+  return found;
+}
+function nextRankTitle(lv) {
+  return VALLEY_RANKS.find(r => r.min > lv) || null;
+}
+function addPlayerXp(amount) {
+  ensurePlayerRank();
+  const gain = Math.max(0, amount | 0);
+  if (!gain) return { leveled: [], level: playerRank.level, xp: playerRank.xp, need: xpToNextLevel(playerRank.level) };
+  playerRank.xp += gain;
+  const leveled = [];
+  while (playerRank.level < RANK_MAX && playerRank.xp >= xpToNextLevel(playerRank.level)) {
+    playerRank.xp -= xpToNextLevel(playerRank.level);
+    playerRank.level += 1;
+    leveled.push(rankTitleFor(playerRank.level));
+  }
+  if (playerRank.level >= RANK_MAX) playerRank.xp = 0;
+  persistSave();
+  updateRankHUD();
+  return { leveled, level: playerRank.level, xp: playerRank.xp, need: xpToNextLevel(playerRank.level) };
+}
+function studySessionXp(score, total) {
+  let xp = score * 14 + 10;
+  if (score === total) xp += 20;
+  else if (score === total - 1) xp += 8;
+  return xp;
+}
+function updateRankHUD() {
+  ensurePlayerRank();
+  const t = rankTitleFor(playerRank.level);
+  const need = xpToNextLevel(playerRank.level);
+  const pct = playerRank.level >= RANK_MAX ? 100 : Math.min(100, Math.floor((playerRank.xp / need) * 100));
+  const icon = document.getElementById('hud-rank-icon');
+  const lv = document.getElementById('hud-rank-lv');
+  const fill = document.getElementById('hud-rank-fill');
+  const chip = document.getElementById('hud-rank');
+  if (icon) icon.textContent = t.icon;
+  if (lv) lv.textContent = 'Lv.' + playerRank.level;
+  if (fill) fill.style.width = pct + '%';
+  if (chip) chip.title = t.ko + ' · ' + t.en + ' · ' + playerRank.xp + '/' + need + ' EXP';
+}
+function renderRankCard() {
+  ensurePlayerRank();
+  const t = rankTitleFor(playerRank.level);
+  const nxt = nextRankTitle(playerRank.level);
+  const need = xpToNextLevel(playerRank.level);
+  const pct = playerRank.level >= RANK_MAX ? 100 : Math.min(100, Math.floor((playerRank.xp / need) * 100));
+  const acc = playerRank.asked ? Math.round((playerRank.correct / playerRank.asked) * 100) : 0;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('rank-seal', t.icon);
+  set('rank-lv', 'LV. ' + playerRank.level);
+  set('rank-title-ko', t.ko);
+  set('rank-title-en', t.en);
+  set('rank-xp-num', playerRank.level >= RANK_MAX ? 'MAX' : (playerRank.xp + ' / ' + need + ' EXP'));
+  const fill = document.getElementById('rank-xp-fill');
+  if (fill) fill.style.width = pct + '%';
+  set('rank-stat-sessions', String(playerRank.sessions));
+  set('rank-stat-perfects', String(playerRank.perfects));
+  set('rank-stat-acc', acc + '%');
+  set('rank-next', nxt ? ('Next title: ' + nxt.icon + ' ' + nxt.ko + ' · ' + nxt.en + ' at Lv.' + nxt.min) : 'Hansik Grandmaster — peak of the valley.');
+}
+function openRankCard() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderRankCard();
+  setModalState('rank-card-overlay', true);
+}
+function closeRankCard() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  setModalState('rank-card-overlay', false);
+}
+function showRankUp(title, hops) {
+  const t = title || rankTitleFor(playerRank.level);
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('rankup-icon', t.icon);
+  set('rankup-lv', 'LV. ' + playerRank.level);
+  set('rankup-ko', t.ko);
+  set('rankup-en', t.en + (hops > 1 ? '  (+' + hops + ')' : ''));
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('levelup');
+  setModalState('rankup-overlay', true);
+}
+function closeRankUp() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  setModalState('rankup-overlay', false);
+}
 var gold = 85; // kept in sync for 100% backward compatibility
 var quizStreak = 0; // consecutive correct quiz streak
 
@@ -4475,7 +4631,12 @@ var ITEM_DB = {
   '문어': { id: 'octopus', name: 'Octopus', nameKo: '문어', icon: '🐙', description: 'Giant sea octopus.' },
   '조개': { id: 'clam', name: 'Clam', nameKo: '조개', icon: '🦪', description: 'Fresh shore clam.' },
   '황금물고기': { id: 'golden_fish', name: 'Golden Fish', nameKo: '황금물고기', icon: '🐠', description: 'Rare golden fish.' },
-  '꿀': { id: 'honey', name: 'Honey', nameKo: '꿀', icon: '🍯', type: 'ingredient', description: 'Sweet golden honey harvested from the beehive.' }
+  '꿀': { id: 'honey', name: 'Honey', nameKo: '꿀', icon: '🍯', type: 'ingredient', description: 'Sweet golden honey harvested from the beehive.' },
+  '오이': { id: 'cucumber', name: 'Cucumber', nameKo: '오이', icon: '🥒', description: 'Crisp cucumber for 냉면 and 비빔국수.' },
+  '양파': { id: 'onion', name: 'Onion', nameKo: '양파', icon: '🧅', description: 'Onion for Korean stews.' },
+  '콩나물': { id: 'bean_sprout', name: 'Bean sprouts', nameKo: '콩나물', icon: '🌱', description: 'Soybean sprouts for 된장찌개 and 비빔밥.' },
+  '상추': { id: 'lettuce', name: 'Lettuce', nameKo: '상추', icon: '🥬', description: 'Lettuce wraps for 삼겹살.' },
+  '생강': { id: 'ginger', name: 'Ginger', nameKo: '생강', icon: '🫚', description: 'Ginger for 감자탕 and 삼계탕 broth.' }
 };
 
 function getItemInfo(keyOrId) {
@@ -4864,6 +5025,7 @@ function collectSave(){
     attempts: attemptLog,
     plots,
     lastLevel: currentLevelIndex,
+    playerRank: ensurePlayerRank(),
     apple,
     fishAlbum: fishAlbumSave,
     quests: questState,
@@ -4913,6 +5075,12 @@ function applySave(d){
   attemptLog = Array.isArray(migrated.attempts) ? migrated.attempts.slice(-ATTEMPT_LOG_MAX) : [];
   if(migrated.plots) plotSave = migrated.plots;
   if(typeof migrated.lastLevel==='number') currentLevelIndex = migrated.lastLevel;
+  if (migrated.playerRank && typeof migrated.playerRank === 'object') {
+    playerRank = Object.assign(defaultPlayerRank(), migrated.playerRank);
+    ensurePlayerRank();
+  } else {
+    playerRank = defaultPlayerRank();
+  }
   if(migrated.apple) appleTreeSave = migrated.apple;
   if(migrated.fishAlbum) fishAlbumSave = migrated.fishAlbum;
   if(migrated.quests) questState = migrated.quests;
@@ -4942,6 +5110,7 @@ function applySave(d){
 
   initQuestState();
   updateCurrencyHUD();
+  updateRankHUD();
   if (sceneRef && typeof sceneRef.refreshPlotAccess === 'function') sceneRef.refreshPlotAccess();
   if (typeof checkCookingAchievements === 'function') checkCookingAchievements();
   return true;
@@ -5189,11 +5358,88 @@ function levelName(lvl)   { return (lvl && (lvl.nameEn || lvl.name)) || ''; }
 function levelNameKo(lvl) { return (lvl && lvl.nameEn && lvl.name) ? lvl.name : ''; }
 function wordCategory(w)  { return (w && (w.categoryEn || w.category)) || ''; }
 
+function isWorldLevel(lvl) {
+  return !!(lvl && (lvl.world || lvl.worldId || lvl.pack === 'snu-2b'));
+}
+function isUnit10World() {
+  return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10';
+}
+const UNIT10_LAYOUT_DEFAULT = {
+  stations: [
+    { id: 'desk', nameKo: '학습 책상', ox: -28, oy: 480, scale: 1, originX: 0.52, interact: 80 },
+    { id: 'kitchen', nameKo: '요리 주방', ox: 328, oy: 252, scale: 1, originX: 0.48, interact: 82 },
+    { id: 'taste', nameKo: '한 입 포장마차', ox: 144, oy: 394, scale: 2.4, originX: 0.5, interact: 64 }
+  ]
+};
+function getUnit10Layout() {
+  try {
+    if (typeof sceneRef !== 'undefined' && sceneRef && sceneRef.cache && sceneRef.cache.json && sceneRef.cache.json.exists('unit10-layout')) {
+      return sceneRef.cache.json.get('unit10-layout') || UNIT10_LAYOUT_DEFAULT;
+    }
+  } catch (e) {}
+  return UNIT10_LAYOUT_DEFAULT;
+}
+function getUnit10Station(id) {
+  const pack = getUnit10Layout();
+  const found = ((pack && pack.stations) || []).find(s => s && s.id === id);
+  return found || UNIT10_LAYOUT_DEFAULT.stations.find(s => s.id === id);
+}
+function unit10StationXY(farm, spec) {
+  const f = farm || { x: 300, y: 220, w: 180, h: 312 };
+  const s = spec || {};
+  return { x: f.x + (s.ox || 0), y: f.y + (s.oy || 0) };
+}
+function currentLesson() {
+  return (typeof levelsData !== 'undefined' && levelsData[currentLevelIndex]) || null;
+}
+function attachTextbookWorld(world) {
+  if (!world || !world.level || !Array.isArray(levelsData)) return -1;
+  const lvl = Object.assign({}, world.level, {
+    world: true,
+    pack: world.pack || 'snu-2b',
+    worldId: world.id,
+    notebook: world.notebook || null,
+    upcoming: world.upcoming || [],
+    source: world.source || '',
+    pages: world.pages || '',
+    title: world.title || world.level.nameEn,
+    titleKo: world.titleKo || world.level.name
+  });
+  const existing = levelsData.findIndex(l => l && l.worldId === world.id);
+  if (existing >= 0) { levelsData[existing] = lvl; return existing; }
+  levelsData.push(lvl);
+  return levelsData.length - 1;
+}
+let textbookWorldsTried = false;
+function loadTextbookWorlds(done) {
+  const finish = (data) => {
+    textbookWorldsTried = true;
+    if (data) attachTextbookWorld(data);
+    if (typeof done === 'function') done();
+  };
+  if (typeof sceneRef !== 'undefined' && sceneRef?.cache?.json?.exists?.('world-2b-10')) {
+    finish(sceneRef.cache.json.get('world-2b-10'));
+    return;
+  }
+  if ((typeof IS_NODE !== 'undefined' && IS_NODE) || typeof fetch !== 'function') {
+    finish(null);
+    return;
+  }
+  fetch('worlds/2b-unit-10.json')
+    .then(r => r && r.ok ? r.json() : null)
+    .then(finish)
+    .catch(() => finish(null));
+}
+
 function getUnlockedWords() {
+  const lesson = currentLesson();
+  if (isWorldLevel(lesson)) return (lesson.words || []).slice();
   if (typeof unlockedLevels === 'undefined' || !Array.isArray(unlockedLevels)) {
     return (typeof levelsData !== 'undefined' && levelsData[0]?.words) ? levelsData[0].words : [];
   }
-  const words = unlockedLevels.flatMap(idx => (typeof levelsData !== 'undefined' && levelsData[idx]?.words) ? levelsData[idx].words : []);
+  const words = unlockedLevels
+    .filter(idx => !isWorldLevel(typeof levelsData !== 'undefined' ? levelsData[idx] : null))
+    .flatMap(idx => (typeof levelsData !== 'undefined' && levelsData[idx]?.words) ? levelsData[idx].words : []);
   if (words.length > 0) return words;
   return (typeof levelsData !== 'undefined' && levelsData[0]?.words) ? levelsData[0].words : [];
 }
@@ -5274,7 +5520,10 @@ function updateCurrencyHUD(pop = false) {
   if (pop) {
     const hg = document.getElementById('hud-gold');
     if (hg) { hg.classList.add('pop'); setTimeout(() => hg.classList.remove('pop'), 300); }
+    const hr = document.getElementById('hud-rank');
+    if (hr) { hr.classList.add('pop'); setTimeout(() => hr.classList.remove('pop'), 300); }
   }
+  if (typeof updateRankHUD === 'function') updateRankHUD();
 }
 
 function updateGoldHUD(pop = false) {
@@ -5376,7 +5625,7 @@ const labelKo = w => String(w && w.ko || '');
 let shopQuizState = { targetIdx: null, questions: [], currentQ: 0, correctCount: 0 };
 
 function startShopQuizGate(idx) {
-  const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
+  const allWords = getUnlockedWords();
   const pool = allWords.length >= 4 ? allWords : (levelsData[0]?.words || []);
 
   // Korean is shown and the buttons carry meanings, so options are deduped on `en`.
@@ -5454,7 +5703,7 @@ function cancelShopQuizGate() {
 let bossGateState = { type: null, questions: [], currentQ: 0, callback: null };
 
 function startBossGateChallenge(type, questionsCount, onCompleteCallback) {
-  const allWords = unlockedLevels.flatMap(i => levelsData[i]?.words || []);
+  const allWords = getUnlockedWords();
   const pool = allWords.length >= 4 ? allWords : (levelsData[0]?.words || []);
 
   const questions = shuffleInPlace([...pool]).slice(0, questionsCount).map(target => ({
@@ -5867,7 +6116,7 @@ function closeCatDialog(){
   document.getElementById('cat-dialog').classList.remove('visible');
 }
 function catSetWord(){
-  const allWords=unlockedLevels.flatMap(idx=>levelsData[idx]?.words||[]);
+  const allWords=getUnlockedWords();
   if(!allWords.length) return;
   const w=allWords[Math.floor(Math.random()*allWords.length)];
   document.getElementById('cat-emoji').textContent = w.hint||'📝';
@@ -6032,7 +6281,10 @@ function showToast(msg, dur=3500) {
 function updateHUD() {
   if(!levelsData.length) return;
   const lvl = levelsData[currentLevelIndex];
-  hudLevelEl.textContent = `${lvl.icon||'🌾'} ${levelName(lvl)}`;
+  hudLevelEl.textContent = `${lvl.icon||'🌾'} ${isWorldLevel(lvl) ? (lvl.title || levelName(lvl)) : levelName(lvl)}`;
+  if (typeof updateRankHUD === 'function') updateRankHUD();
+  const nbBtn = $('unit-notebook-btn');
+  if (nbBtn) nbBtn.style.display = isWorldLevel(lvl) ? '' : 'none';
   // The bar now tracks how much of the level has been learned, which persists across
   // sessions, rather than a session-local plant counter that reset every reload.
   const learnedPct = calcLevelProgress(currentLevelIndex);
@@ -6060,8 +6312,12 @@ function buildLevelSelectScreen() {
     if(!levelsData || !levelsData.length){
       fetch('levels.json').then(r => r.json()).then(d => {
         levelsData = d;
-        buildLevelSelectScreen();
+        loadTextbookWorlds(() => buildLevelSelectScreen());
       }).catch(err => console.error('Failed to load levels.json:', err));
+      return;
+    }
+    if (!textbookWorldsTried && !levelsData.some(l => isWorldLevel(l))) {
+      loadTextbookWorlds(() => buildLevelSelectScreen());
       return;
     }
   }
@@ -6072,47 +6328,42 @@ function buildLevelSelectScreen() {
     const r = document.createElement('div');
     r.className = 'ls-resume-card';
     const planted = plotSave.length;
+    const cur = levelsData[currentLevelIndex];
+    const resumeLabel = isWorldLevel(cur) ? (cur.title || levelName(cur)) : `Level ${currentLevelIndex+1}`;
     r.innerHTML = `
       <div class="lsr-icon">▶</div>
       <div class="lsr-text">
         <div class="lsr-title">Continue Previous Session</div>
-        <div class="lsr-sub">💰 ${gold} gold &nbsp;|&nbsp; 🌱 ${planted} crops growing &nbsp;|&nbsp; Level ${currentLevelIndex+1}</div>
+        <div class="lsr-sub">💰 ${gold} gold &nbsp;|&nbsp; 🌱 ${planted} crops growing &nbsp;|&nbsp; ${resumeLabel}</div>
       </div>`;
     r.addEventListener('click', resumeGame);
     lsGrid.appendChild(r);
   }
-  // Separator if resume exists
-  if(hasSave){
-    const sep=document.createElement('div');
-    sep.className='ls-sep';
-    sep.textContent='── or select a level ──';
-    lsGrid.appendChild(sep);
-  }
-  levelsData.forEach((lvl, idx) => {
-    const owned = unlockedLevels.includes(idx);
+  const paintCard = (lvl, idx) => {
+    const world = isWorldLevel(lvl);
+    const owned = world || unlockedLevels.includes(idx);
     const cost  = LEVEL_COST(idx);
     const canAfford = gold >= cost;
-
     const c = document.createElement('div');
-    c.className = 'level-card' + (!owned ? ' locked' : '');
-    c.innerHTML = `<div class="lc-badge">${owned ? '✅' : (canAfford ? '💰' : '🔒')}</div>
+    c.className = 'level-card' + (world ? ' world-card' : '') + (!owned ? ' locked' : '');
+    c.innerHTML = `<div class="lc-badge">${world ? '📘' : (owned ? '✅' : (canAfford ? '💰' : '🔒'))}</div>
       <div class="lc-top"><span class="lc-icon">${lvl.icon||'📚'}</span>
-      <div class="lc-meta"><div class="lc-num">Level ${lvl.level}</div>
+      <div class="lc-meta"><div class="lc-num">${world ? (lvl.title || 'Textbook world') : `Level ${lvl.level}`}</div>
       <div class="lc-name">${levelName(lvl)}</div>
       <div class="lc-name-ko">${levelNameKo(lvl)}</div></div></div>
-      <div class="lc-desc">${lvl.description||''}</div>
+      <div class="lc-desc">${lvl.descriptionEn || lvl.description || ''}</div>
       <div class="lc-footer">
         <span class="lc-tag words">📝 ${lvl.words.length} words</span>
-        ${owned ? `<span class="lc-tag" style="color:#4ade80">✅ Owned</span>`
+        ${world ? `<span class="lc-tag" style="color:#4ade80">📘 SNU 2B</span>`
+                : owned ? `<span class="lc-tag" style="color:#4ade80">✅ Owned</span>`
                 : `<span class="lc-tag target" style="color:${canAfford?'#f9c74f':'#aaa'}">💰 ${cost} gold</span>`}
       </div>`;
     if(owned) {
-      // If clicking the CURRENT level → resume; if switching → confirm reset
       c.addEventListener('click', () => {
         if(idx === currentLevelIndex && hasSave){
-          resumeGame(); // same level: just resume
+          resumeGame();
         } else {
-          startLevel(idx, true); // different level or no save: fresh start
+          startLevel(idx, true);
         }
       });
     } else if(canAfford) {
@@ -6120,7 +6371,24 @@ function buildLevelSelectScreen() {
       c.title='Click to buy!';
     }
     lsGrid.appendChild(c);
-  });
+  };
+  const worlds = [];
+  const valley = [];
+  levelsData.forEach((lvl, idx) => (isWorldLevel(lvl) ? worlds : valley).push({lvl, idx}));
+  if (worlds.length) {
+    const sep = document.createElement('div');
+    sep.className = 'ls-sep';
+    sep.textContent = '── SNU Korean 2B ──';
+    lsGrid.appendChild(sep);
+    worlds.forEach(({lvl, idx}) => paintCard(lvl, idx));
+  }
+  if (valley.length) {
+    const sep = document.createElement('div');
+    sep.className = 'ls-sep';
+    sep.textContent = hasSave || worlds.length ? '── or a Valley pack ──' : '── select a level ──';
+    lsGrid.appendChild(sep);
+    valley.forEach(({lvl, idx}) => paintCard(lvl, idx));
+  }
 }
 // ═══════════════ CENTRALIZED UI GLASSMORPHISM MODAL MANAGER ═══════════════════
 let activeModalStack = [];
@@ -6168,6 +6436,11 @@ function closeModalById(overlayId) {
   // Needs its own branch: this overlay is hidden by the .hidden class, and the generic
   // fallback below only clears .visible, which would leave it on screen after Escape.
   else if (overlayId === 'progress-overlay') window.closeProgressOverlay();
+  else if (overlayId === 'unit-notebook-overlay') window.closeUnitNotebook();
+  else if (overlayId === 'taste-overlay') window.closeTasteGame();
+  else if (overlayId === 'desk-quiz-overlay') window.closeDeskQuiz();
+  else if (overlayId === 'rank-card-overlay') window.closeRankCard();
+  else if (overlayId === 'rankup-overlay') window.closeRankUp();
   else setModalState(overlayId, false);
 }
 
@@ -6318,13 +6591,15 @@ if (typeof window !== 'undefined') {
 
 function showLevelSelect() {
   setModalState('level-select-overlay', true);
-  hud.style.display = pbWrap.style.display = tipEl.style.display = 'none';
+  hud.style.display = pbWrap.style.display = 'none';
+  if (tipEl) tipEl.style.display = 'none';
   setTouchControlsVisible(false);
   buildLevelSelectScreen();
 }
 function hideLevelSelect() {
   setModalState('level-select-overlay', false);
-  hud.style.display = pbWrap.style.display = tipEl.style.display = '';
+  hud.style.display = pbWrap.style.display = '';
+  if (tipEl) tipEl.style.display = 'none';
   setTouchControlsVisible(true);
 }
 
@@ -6339,6 +6614,8 @@ function buyLevelFromSelect(idx) {
 // ═══════════════ START LEVEL / RESUME ═════════════════════════════════════════
 function startLevel(idx, resetCrops=true) {
   currentLevelIndex = idx;
+  const lvl = levelsData[idx];
+  if (isWorldLevel(lvl) && !unlockedLevels.includes(idx)) unlockedLevels.push(idx);
   if(resetCrops){
     // Full fresh start: wipe everything
     progress = 0; plantedWords.clear();
@@ -6348,12 +6625,14 @@ function startLevel(idx, resetCrops=true) {
   hideLevelSelect();
   updateHUD(); updateVocabBook();
   persistSave(); // save the chosen level
+  if (sceneRef && typeof sceneRef.syncUnit10World === 'function') sceneRef.syncUnit10World();
 }
 // Resume last session WITHOUT resetting crops
 function resumeGame(){
   currentLevelIndex = parseInt(localStorage.getItem('hv_lastLevel')||'0') || currentLevelIndex;
   hideLevelSelect();
   updateHUD(); updateVocabBook();
+  if (sceneRef && typeof sceneRef.syncUnit10World === 'function') sceneRef.syncUnit10World();
   showToast('▶ Resumed previous session!');
 }
 
@@ -6622,7 +6901,7 @@ function pickQuizMode(word, phase, plot){
 // by elimination on topic alone. `labelOf` is the text the buttons will carry, and it is
 // what options are deduped on — see buildOptionSet.
 function buildChoices(word, count = 4, labelOf = labelEn){
-  const pool = unlockedLevels.flatMap(i => levelsData[i]?.words || []).filter(w => w.ko !== word.ko);
+  const pool = getUnlockedWords().filter(w => w.ko !== word.ko);
   const sameCat = pool.filter(w => wordCategory(w) === wordCategory(word));
   // Same category first, but only if it can fill the question with distinct labels. The old
   // check was `sameCat.length >= count - 1`, which counts entries: a category holding two
@@ -7217,9 +7496,473 @@ function showVocabFunFact(word) {
     : (harvests > 0 ? `✅ Harvested ×${harvests}` : '🌱 Not started');
   $('vff-fact-origin').textContent    = fact.origin || fact.hint;
   $('vff-fact-structure').textContent = fact.structure;
+  const exBox = $('vff-fact-example');
+  const exSec = $('vff-example-section');
+  if (exBox) {
+    const line = word.example ? (word.exampleEn ? `${word.example} — ${word.exampleEn}` : word.example) : '';
+    exBox.textContent = line;
+    if (exSec) exSec.style.display = line ? '' : 'none';
+  }
   modal.classList.add('visible');
 }
 function closeVocabFunFact() { $('vocab-ff-modal').classList.remove('visible'); }
+
+function getUnitNotebook() {
+  const lvl = currentLesson();
+  return (lvl && lvl.notebook) || null;
+}
+
+function openUnitNotebook(tab) {
+  const nb = getUnitNotebook();
+  const overlay = $('unit-notebook-overlay');
+  if (!nb || !overlay) {
+    showToast('This pack has no unit notebook yet.');
+    return;
+  }
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderUnitNotebook(tab || 'map');
+  setModalState('unit-notebook-overlay', true);
+}
+function closeUnitNotebook() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  setModalState('unit-notebook-overlay', false);
+}
+
+const TASTE_LABELS = [
+  { ko: '달다', en: 'sweet' },
+  { ko: '짜다', en: 'salty' },
+  { ko: '쓰다', en: 'bitter' },
+  { ko: '시다', en: 'sour' },
+  { ko: '맵다', en: 'spicy' }
+];
+const TASTE_DISHES = [
+  { ko: '김치찌개', icon: '🍲', answer: '맵다' },
+  { ko: '된장찌개', icon: '🥘', answer: '짜다' },
+  { ko: '순두부찌개', icon: '🥣', answer: '맵다' },
+  { ko: '감자탕', icon: '🍖', answer: '맵다' },
+  { ko: '매운탕', icon: '🐟', answer: '맵다' },
+  { ko: '설렁탕', icon: '🥛', answer: '짜다' },
+  { ko: '냉면', icon: '🍜', answer: '시다' },
+  { ko: '칼국수', icon: '🍝', answer: '짜다' },
+  { ko: '비빔국수', icon: '🥗', answer: '맵다' },
+  { ko: '삼겹살', icon: '🥓', answer: '짜다' },
+  { ko: '떡갈비', icon: '🥩', answer: '달다' },
+  { ko: '갈비찜', icon: '🍖', answer: '달다' },
+  { ko: '갈비', icon: '🦴', answer: '달다' },
+  { ko: '삼계탕', icon: '🐔', answer: '짜다' },
+  { ko: '약', icon: '💊', answer: '쓰다', prompt: '약이 써요. 무슨 맛?' }
+];
+let tasteState = null;
+
+function openTasteGame() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  const pool = TASTE_DISHES.slice();
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = pool[i]; pool[i] = pool[j]; pool[j] = t;
+  }
+  const hotter = [
+    { a: TASTE_DISHES.find(d => d.ko === '매운탕'), b: TASTE_DISHES.find(d => d.ko === '설렁탕'), pick: '매운탕' },
+    { a: TASTE_DISHES.find(d => d.ko === '김치찌개'), b: TASTE_DISHES.find(d => d.ko === '된장찌개'), pick: '김치찌개' }
+  ];
+  tasteState = { queue: pool.slice(0, 8), hotter, hi: 0, i: 0, score: 0, mode: 'dish', locked: false };
+  setModalState('taste-overlay', true);
+  renderTasteRound();
+}
+function closeTasteGame() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  tasteState = null;
+  setModalState('taste-overlay', false);
+}
+function renderTasteRound() {
+  if (!tasteState) return;
+  const prog = $('taste-progress');
+  const icon = $('taste-icon');
+  const ko = $('taste-ko');
+  const prompt = $('taste-prompt');
+  const box = $('taste-choices');
+  const fb = $('taste-fb');
+  if (fb) { fb.textContent = ''; fb.className = 'fb'; }
+  const total = 10;
+  if (tasteState.mode === 'done') {
+    if (prog) prog.textContent = tasteState.score + ' / ' + total;
+    if (icon) icon.textContent = '😋';
+    if (ko) ko.textContent = '잘 먹었습니다';
+    if (prompt) prompt.textContent = tasteState.score + ' of ' + total + ' tastes right';
+    if (box) box.innerHTML = '<button class="taste-btn" onclick="closeTasteGame()">닫기</button>';
+    return;
+  }
+  if (tasteState.mode === 'hotter') {
+    const h = tasteState.hotter[tasteState.hi];
+    if (prog) prog.textContent = (9 + tasteState.hi) + ' / ' + total;
+    if (icon) icon.textContent = h.a.icon + ' ' + h.b.icon;
+    if (ko) ko.textContent = h.a.ko + '  /  ' + h.b.ko;
+    if (prompt) prompt.textContent = '더 매운 거 뭐예요?';
+    if (box) {
+      box.innerHTML = '';
+      [h.a, h.b].forEach(d => {
+        const b = document.createElement('button');
+        b.className = 'taste-btn';
+        b.textContent = d.icon + ' ' + d.ko;
+        b.onclick = () => answerTaste(d.ko === h.pick, b);
+        box.appendChild(b);
+      });
+    }
+    return;
+  }
+  const d = tasteState.queue[tasteState.i];
+  if (prog) prog.textContent = (tasteState.i + 1) + ' / ' + total;
+  if (icon) icon.textContent = d.icon;
+  if (ko) ko.textContent = d.ko;
+  if (prompt) prompt.textContent = d.prompt || '무슨 맛이에요?';
+  if (box) {
+    box.innerHTML = '';
+    TASTE_LABELS.forEach(t => {
+      const b = document.createElement('button');
+      b.className = 'taste-btn';
+      b.textContent = t.ko;
+      b.setAttribute('data-t', t.ko);
+      b.title = t.en;
+      b.onclick = () => answerTaste(t.ko === d.answer, b);
+      box.appendChild(b);
+    });
+  }
+}
+function answerTaste(ok, btn) {
+  if (!tasteState || tasteState.locked) return;
+  tasteState.locked = true;
+  if (btn) btn.classList.add(ok ? 'ok' : 'bad');
+  const fb = $('taste-fb');
+  if (ok) {
+    tasteState.score += 1;
+    if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_correct');
+    if (fb) { fb.className = 'fb good'; fb.textContent = '맞아요!'; }
+  } else {
+    if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
+    if (fb) { fb.className = 'fb bad'; fb.textContent = '다시 생각해 봐.'; }
+  }
+  setTimeout(() => {
+    if (!tasteState) return;
+    tasteState.locked = false;
+    if (tasteState.mode === 'dish') {
+      tasteState.i += 1;
+      if (tasteState.i >= tasteState.queue.length) tasteState.mode = 'hotter';
+    } else if (tasteState.mode === 'hotter') {
+      tasteState.hi += 1;
+      if (tasteState.hi >= tasteState.hotter.length) tasteState.mode = 'done';
+    }
+    renderTasteRound();
+  }, 650);
+}
+
+if (typeof window !== 'undefined') {
+  window.openTasteGame = openTasteGame;
+  window.closeTasteGame = closeTasteGame;
+}
+
+let deskQuizBank = null;
+let deskQuizState = null;
+
+function loadDeskQuiz() {
+  if (deskQuizBank) return Promise.resolve(deskQuizBank);
+  if (typeof fetch !== 'function') return Promise.resolve(null);
+  return fetch('/worlds/unit10-desk-quiz.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(d => { deskQuizBank = d; return d; })
+    .catch(() => null);
+}
+
+function shuffleDeskItems(list) {
+  const arr = list.slice();
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
+function pickDeskSession(bank) {
+  const all = ((bank && bank.questions) || []).slice();
+  const size = Math.min((bank && bank.sessionSize) || 5, all.length);
+  ensurePlayerRank();
+  const recent = playerRank.recentIds || [];
+  const fresh = all.filter(q => recent.indexOf(q.id) < 0);
+  const pool = shuffleDeskItems(fresh.length >= size ? fresh : all);
+  return pool.slice(0, size);
+}
+
+function openDeskQuiz() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  loadDeskQuiz().then(bank => {
+    const qs = pickDeskSession(bank);
+    deskQuizState = { i: 0, score: 0, locked: false, settled: false, qs, bank, gain: null };
+    setModalState('desk-quiz-overlay', true);
+    renderDeskQuiz();
+  });
+}
+function closeDeskQuiz() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  deskQuizState = null;
+  setModalState('desk-quiz-overlay', false);
+}
+function settleDeskSession() {
+  const st = deskQuizState;
+  if (!st || st.settled) return;
+  st.settled = true;
+  ensurePlayerRank();
+  const total = (st.qs || []).length;
+  playerRank.sessions += 1;
+  playerRank.asked += total;
+  playerRank.correct += st.score;
+  if (total && st.score === total) playerRank.perfects += 1;
+  playerRank.recentIds = (st.qs || []).map(q => q.id);
+  const xp = studySessionXp(st.score, total);
+  const after = addPlayerXp(xp);
+  st.gain = { xp: xp, leveled: after.leveled, level: after.level, remain: after.xp, need: after.need };
+  if (st.score === total && total) addHonor(2);
+  persistSave();
+  updateRankHUD();
+}
+function renderDeskResults() {
+  const st = deskQuizState;
+  if (!st) return;
+  const qEl = $('desk-q');
+  const nEl = $('desk-progress');
+  const box = $('desk-choices');
+  const fb = $('desk-fb');
+  const total = (st.qs || []).length;
+  const t = rankTitleFor(playerRank.level);
+  const xp = (st.gain && st.gain.xp) || 0;
+  const hops = (st.gain && st.gain.leveled && st.gain.leveled.length) || 0;
+  if (nEl) nEl.textContent = st.score + ' / ' + total;
+  if (qEl) {
+    qEl.innerHTML = ((st.bank && st.bank.doneKo) || 'Done.') +
+      '<div class="desk-xp">+' + xp + ' EXP · ' + t.icon + ' Lv.' + playerRank.level + ' ' + t.ko +
+      (hops ? '  ▲' : '') + '</div>';
+  }
+  if (fb) {
+    fb.className = 'fb good';
+    fb.textContent = st.score === total ? 'Perfect set!' : (st.score + ' correct');
+  }
+  if (box) {
+    const again = (st.bank && st.bank.againKo) || 'Again';
+    const close = (st.bank && st.bank.closeKo) || 'Close';
+    box.innerHTML =
+      '<button class="desk-opt" onclick="openRankCard()">Valley rank card</button>' +
+      '<button class="desk-opt" onclick="openDeskQuiz()">' + again + '</button>' +
+      '<button class="desk-opt" onclick="closeDeskQuiz()">' + close + '</button>';
+  }
+  if (hops) setTimeout(() => { if (deskQuizState) showRankUp(st.gain.leveled[st.gain.leveled.length - 1], hops); }, 380);
+}
+function renderDeskQuiz() {
+  const st = deskQuizState;
+  if (!st) return;
+  const qEl = $('desk-q');
+  const nEl = $('desk-progress');
+  const box = $('desk-choices');
+  const fb = $('desk-fb');
+  if (fb) { fb.textContent = ''; fb.className = 'fb'; }
+  const qs = st.qs || [];
+  if (st.i >= qs.length) {
+    settleDeskSession();
+    renderDeskResults();
+    return;
+  }
+  const item = qs[st.i];
+  if (nEl) nEl.textContent = (st.i + 1) + ' / ' + qs.length;
+  if (qEl) qEl.textContent = (st.i + 1) + '. ' + item.q;
+  if (box) {
+    box.innerHTML = '';
+    ['A', 'B', 'C', 'D'].forEach(key => {
+      const b = document.createElement('button');
+      b.className = 'desk-opt';
+      b.textContent = key + '. ' + item.choices[key];
+      b.onclick = () => answerDeskQuiz(key, b);
+      box.appendChild(b);
+    });
+  }
+}
+function answerDeskQuiz(key, btn) {
+  const st = deskQuizState;
+  const qs = st.qs || [];
+  if (!st || st.locked || st.i >= qs.length) return;
+  st.locked = true;
+  const item = qs[st.i];
+  const ok = key === item.a;
+  if (btn) btn.classList.add(ok ? 'ok' : 'bad');
+  const fb = $('desk-fb');
+  if (ok) {
+    st.score += 1;
+    if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_correct');
+    if (fb) { fb.className = 'fb good'; fb.textContent = (st.bank && st.bank.correctKo) || 'O'; }
+  } else {
+    if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
+    if (fb) { fb.className = 'fb bad'; fb.textContent = ((st.bank && st.bank.wrongKo) || '') + ' ' + item.a + '. ' + item.choices[item.a]; }
+  }
+  setTimeout(() => {
+    if (!deskQuizState) return;
+    deskQuizState.locked = false;
+    deskQuizState.i += 1;
+    renderDeskQuiz();
+  }, 900);
+}
+
+if (typeof window !== 'undefined') {
+  window.openDeskQuiz = openDeskQuiz;
+  window.closeDeskQuiz = closeDeskQuiz;
+  window.openRankCard = openRankCard;
+  window.closeRankCard = closeRankCard;
+  window.closeRankUp = closeRankUp;
+}
+
+function renderUnitNotebook(tab) {
+  const nb = getUnitNotebook();
+  const lvl = currentLesson();
+  if (!nb) return;
+  const titleEl = $('unb-title');
+  const kickerEl = $('unb-kicker');
+  if (kickerEl) kickerEl.textContent = (lvl && (lvl.title || '2B Unit 10')) + (lvl && lvl.source ? ` · ${lvl.pages || 'pp. 24–27'}` : '');
+  if (titleEl) titleEl.textContent = (lvl && (lvl.titleKo || levelNameKo(lvl))) || '뭐 먹을래요?';
+  const tabs = [
+    { id: 'map', label: '지도 Mind map' },
+    { id: 'words', label: '단어 Words' }
+  ];
+  const tabBar = $('unb-tabs');
+  if (tabBar) {
+    tabBar.innerHTML = '';
+    tabs.forEach(t => {
+      const b = document.createElement('button');
+      b.className = 'unb-tab' + (t.id === tab ? ' active' : '');
+      b.textContent = t.label;
+      b.onclick = () => renderUnitNotebook(t.id);
+      tabBar.appendChild(b);
+    });
+  }
+  const body = $('unb-body');
+  if (!body) return;
+  if (tab === 'map' || tab === 'warmup' || tab === 'goals') {
+    const groups = {};
+    (lvl.words || []).forEach(w => {
+      const key = w.categoryEn || w.category || 'Other';
+      if (!groups[key]) groups[key] = { ko: w.category || key, en: w.categoryEn || key, words: [] };
+      groups[key].words.push(w);
+    });
+    const cards = Object.values(groups).map(g =>
+      `<div class="unb-cluster"><div class="unb-h">${g.ko} <span>${g.en} · ${g.words.length}</span></div>` +
+      g.words.map(w => `<span class="unb-chip">${w.hint || ''} ${w.ko}</span>`).join(' ') +
+      `</div>`
+    ).join('');
+    body.innerHTML = `<div class="unb-lead">10과 뭐 먹을래? — ${ (lvl.words||[]).length } words in six groups. Plant them on the farm.</div>
+      <img src="/worlds/unit10-mindmap.jpg" alt="Unit 10 mind map" style="width:100%;border-radius:12px;border:2px solid #8b5a2b;margin:8px 0 12px">
+      <div class="unb-map">${cards}</div>
+      <button class="unb-cta" onclick="closeUnitNotebook()">Go plant →</button>`;
+  } else if (tab === 'words') {
+    const rows = (lvl.words || []).map(w =>
+      `<div class="unb-q"><div class="unb-ko">${w.hint || ''} ${w.ko}</div><div class="unb-en">${w.en} · ${w.categoryEn || w.category}</div></div>`
+    ).join('');
+    body.innerHTML = rows;
+  } else if (false && tab === 'warmup') {
+    const qs = (nb.warmup && nb.warmup.questions) || [];
+    body.innerHTML = `<div class="unb-lead">Look at the unit picture, then answer in Korean if you can.</div>` +
+      qs.map(q => `<div class="unb-q"><div class="unb-ko">${q.ko}</div><div class="unb-en">${q.en}</div></div>`).join('') +
+      `<button class="unb-cta" onclick="renderUnitNotebook('goals')">Next: learning goals →</button>`;
+  } else if (tab === 'goals') {
+    const g = nb.goals || {};
+    const row = (items, heading) => `<div class="unb-h">${heading}</div>` + (items || []).map(it =>
+      `<div class="unb-goal ${it.ready === false ? 'soon' : ''}"><b>${it.ko}</b> <span>${it.en}</span>${it.ready === false ? ' <em>later pages</em>' : ''}</div>`
+    ).join('');
+    body.innerHTML = row(g.vocab, '어휘 Vocabulary') + row(g.grammar, '문법 Grammar') + row(g.tasks, '과제 Tasks') +
+      `<div class="unb-note">This world only uses pp. 24–27. Later pages will add 아/어 보다, -잖아요, and ordering food.</div>
+       <button class="unb-cta" onclick="closeUnitNotebook()">Plant these words on the farm →</button>`;
+  } else if (tab === 'speak') {
+    const s = nb.speaking || {};
+    const model = (s.model || []).map(m =>
+      `<div class="unb-line"><span class="unb-who">${m.who}</span><div><div class="unb-ko">${m.ko}</div><div class="unb-en">${m.en}</div></div></div>`
+    ).join('');
+    const crit = (s.criteria || []).map((c, i) =>
+      `<button type="button" class="unb-chip" data-i="${i}" data-side="pos">${c.ko}: ${c.pos}</button>` +
+      `<button type="button" class="unb-chip dim" data-i="${i}" data-side="neg">${c.ko}: ${c.neg}</button>`
+    ).join('');
+    body.innerHTML = `<div class="unb-h">${s.title || '말하기'} <span>${s.titleEn || ''}</span></div>
+      <div class="unb-dialog">${model}</div>
+      <div class="unb-h">Make a sentence</div>
+      <label class="unb-label">Restaurant name
+        <input id="unb-rest-name" value="서울식당" maxlength="20">
+      </label>
+      <div class="unb-lead">Tap two points (one “but” contrast, like the model: expensive <i>but</i> nice atmosphere).</div>
+      <div id="unb-chips" class="unb-chips">${crit}</div>
+      <div id="unb-built" class="unb-built">제가 자주 가는 식당은 서울식당인데 …</div>
+      <button class="unb-cta tts-only" id="unb-speak-line">🔊 Hear my sentence</button>`;
+    const chosen = [];
+    const chips = body.querySelector('#unb-chips');
+    const built = body.querySelector('#unb-built');
+    const nameIn = body.querySelector('#unb-rest-name');
+    const rebuild = () => {
+      const name = (nameIn && nameIn.value.trim()) || '서울식당';
+      if (chosen.length < 2) {
+        built.textContent = `제가 자주 가는 식당은 ${name}인데 …`;
+        return;
+      }
+      const a = s.criteria[chosen[0].i][chosen[0].side];
+      const b = s.criteria[chosen[1].i][chosen[1].side];
+      built.textContent = `제가 자주 가는 식당은 ${name}인데 ${a}지만 ${b}.`;
+    };
+    if (chips) chips.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('.unb-chip');
+      if (!btn) return;
+      const i = Number(btn.getAttribute('data-i'));
+      const side = btn.getAttribute('data-side');
+      const same = chosen.findIndex(c => c.i === i);
+      if (same >= 0) chosen.splice(same, 1);
+      chosen.push({ i, side });
+      if (chosen.length > 2) chosen.shift();
+      chips.querySelectorAll('.unb-chip').forEach(el => el.classList.remove('picked'));
+      chosen.forEach(c => {
+        const el = chips.querySelector(`.unb-chip[data-i="${c.i}"][data-side="${c.side}"]`);
+        if (el) el.classList.add('picked');
+      });
+      rebuild();
+    });
+    if (nameIn) nameIn.addEventListener('input', rebuild);
+    const hear = body.querySelector('#unb-speak-line');
+    if (hear) hear.onclick = () => { if (typeof speakKorean === 'function') speakKorean(built.textContent); };
+  } else if (tab === 'grammar') {
+    const g = nb.grammar || {};
+    const dlg = (g.dialogue || []).map(m =>
+      `<div class="unb-line"><span class="unb-who">${m.who}</span><div><div class="unb-ko">${m.ko}</div><div class="unb-en">${m.en}</div></div></div>`
+    ).join('');
+    const prac = (g.practice || []).map(p =>
+      `<div class="unb-q"><div class="unb-ko">${p.ko}</div><div class="unb-en">${p.en}</div></div>`
+    ).join('');
+    const drill = g.drill || {};
+    const opts = (drill.options || []).map(o => `<button type="button" class="unb-opt" data-v="${o}">${o}</button>`).join('');
+    body.innerHTML = `<div class="unb-h">${g.form || 'N 중에(서)'}</div>
+      <p class="unb-lead">${g.meaningKo || ''} ${g.meaning || ''}</p>
+      <div class="unb-dialog">${dlg}</div>
+      <div class="unb-h">연습</div>${prac}
+      <div class="unb-h">Fill in</div>
+      <div class="unb-ko">${(drill.prompt || '').replace('_____', '<span class="unb-blank">____</span>')}</div>
+      <div id="unb-opts" class="unb-chips">${opts}</div>
+      <div id="unb-drill-fb" class="unb-lead"></div>`;
+    const box = body.querySelector('#unb-opts');
+    const fb = body.querySelector('#unb-drill-fb');
+    if (box) box.addEventListener('click', (ev) => {
+      const btn = ev.target.closest('.unb-opt');
+      if (!btn) return;
+      const ok = btn.getAttribute('data-v') === drill.answer;
+      fb.textContent = ok ? '맞아요! 중에서 marks the set you choose from.' : 'Again — we need the particle that means “among”.'
+      fb.style.color = ok ? '#166534' : '#9f1239';
+      if (ok && typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_correct');
+      else if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
+    });
+  }
+}
+
+if (typeof window !== 'undefined') {
+  window.openUnitNotebook = openUnitNotebook;
+  window.closeUnitNotebook = closeUnitNotebook;
+  window.renderUnitNotebook = renderUnitNotebook;
+}
 
 function renderVocabCards() {
   const lvl = levelsData[currentLevelIndex];
@@ -7587,6 +8330,10 @@ class FarmScene extends Phaser.Scene {
     PixelArtRenderer.generateAllTextures(this);
     PixelArtRenderer.generateTilemapTextures(this);
     this.load.json('levels','levels.json');
+    this.load.json('world-2b-10','worlds/2b-unit-10.json');
+    this.load.json('unit10-layout','worlds/unit10-layout.json');
+    this.load.image('study_desk_hd', 'sprites/study_desk.png');
+    this.load.image('unit10_kitchen_hd', 'sprites/unit10_kitchen.png');
   }
 
   // ── APPLE TREE constants ──────────────────────────────────────────────────
@@ -7608,6 +8355,7 @@ class FarmScene extends Phaser.Scene {
       this._refreshDueReviews();
     });
     levelsData = this.cache.json.get('levels') || [];
+    if (this.cache.json.exists('world-2b-10')) attachTextbookWorld(this.cache.json.get('world-2b-10'));
     if(!levelsData.length){ console.error('levels.json missing'); return; }
 
     this._bakeTextures();
@@ -7649,6 +8397,7 @@ class FarmScene extends Phaser.Scene {
     this._createBeehiveNPC(W, H);
     this._createPortalNPC(W, H);
     this._createFishingSpot(W, H);
+    this.syncUnit10World();
 
     this.keys = {
       W:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
@@ -7993,6 +8742,105 @@ class FarmScene extends Phaser.Scene {
       'KKKKKKKKKKKK'
     ], DECOR_PALETTE, 0, 0, PS);
     gcrat.generateTexture('pixel_crate', 12*PS, 12*PS); gcrat.destroy();
+
+    const TASTE_STALL_PAL = {
+      '.': null,
+      'K': 0x2A1A0A, 'k': 0x4A2A0D,
+      'R': 0xDC2626, 'r': 0x9F1239, 'P': 0xF87171,
+      'W': 0xFFF8E8, 'w': 0xF4D6A0, 'Y': 0xE8C07A,
+      'O': 0xC4893A, 'o': 0x8B5A2B,
+      'B': 0x78350F, 'b': 0xB45309,
+      'N': 0x166534, 'n': 0x86EFAC,
+      'C': 0xFDE047, 'S': 0xE2E8F0
+    };
+    PixelArtRenderer.createTexture(this, 'taste_stall', [
+      '......SS.SS.......',
+      '.....S..S..S......',
+      '..KKKKKKKKKKKKKK..',
+      '.KRrRrRrRrRrRrRrK.',
+      '.KPRPRPRPRPRPRPRK.',
+      '.KRrRrRrRrRrRrRrK.',
+      '.KKKKKKKKKKKKKKKK.',
+      '.KoYYYYYYYYYYYYOk.',
+      '.KoW..........WOk.',
+      '.KoW.bB.CC.nN.WOk.',
+      '.KoW.BB.CC.NN.WOk.',
+      '.KoWWWWWWWWWWWWOk.',
+      '.KOOOOOOOOOOOOOOK.',
+      '.KoOoOoOoOoOoOoOk.',
+      '.KKKKKKKKKKKKKKKK.',
+      '..................'
+    ], TASTE_STALL_PAL, 18, 16);
+
+    const DESK_PAL = {
+      '.': null,
+      'K': 0x1A0E06, 'k': 0x3D2314,
+      'O': 0xC4893A, 'o': 0x8B5A2B, 'Y': 0xE8C07A,
+      'W': 0xFFF8E8, 'w': 0xF4D6A0,
+      'B': 0x1E3A8A, 'b': 0x93C5FD,
+      'P': 0x9F1239, 'p': 0xFECACA,
+      'G': 0x166534, 'g': 0x86EFAC,
+      'L': 0xFDE047, 'l': 0xF59E0B, 'A': 0xFEF3C7,
+      'N': 0x1C1917
+    };
+    PixelArtRenderer.createTexture(this, 'study_desk', [
+      '........KKKK........',
+      '.......KlAAlK.......',
+      '......KlAAAAlK......',
+      '......KlALLAlK......',
+      '.......KllllK.......',
+      '........KkKk........',
+      '..KKKKKKKKKKKKKKKK..',
+      '.KoBBYYYYYYYYYYGGoK.',
+      '.KoBbYYYYYYYYYYGgoK.',
+      '.KKKKKKKKKKKKKKKKKK.',
+      '.KoYYYYYYYYYYYYYYoK.',
+      '.KoWbbWWWWWPPwwwwOk.',
+      '.KoWbBWWWWWpRwwwWOk.',
+      '.KoWWWWWWNNWWWWWWoK.',
+      '.KoWWWWWWWWWWWWWWoK.',
+      '.KOOOOOOOOOOOOOOOOK.',
+      '.KoOoYoOoYoOoYoOoOk.',
+      '.KK..KKKKKKKKKK..KK.',
+      '.KO..KooooooooK..OK.',
+      '.KO..KoWWWWWWoK..OK.',
+      '.KO..KoWbbbbWoK..OK.',
+      '.KK..KKKKKKKKKK..KK.'
+    ], DESK_PAL, 20, 22);
+
+    const KITCHEN_PAL = {
+      '.': null,
+      'K': 0x1C1917, 'k': 0x44403C,
+      'I': 0xA8A29E, 'i': 0x78716C, 'S': 0xE7E5E4,
+      'R': 0xDC2626, 'r': 0x9F1239, 'F': 0xF97316, 'Y': 0xFDE047,
+      'O': 0xC4893A, 'o': 0x8B5A2B, 'W': 0xFFF8E8,
+      'B': 0x292524, 'G': 0x16A34A, 'N': 0x166534,
+      'M': 0x7F1D1D, 'm': 0xFECACA
+    };
+    PixelArtRenderer.createTexture(this, 'unit10_kitchen', [
+      '....KKKKKKKKKKKK....',
+      '...KiiiiiiiiiiiiK...',
+      '...KiSSSSSSSSSSSiK..',
+      '....KKKKKKKKKKKK....',
+      '......YFFYYFFR......',
+      '..KKKKKKKKKKKKKKKK..',
+      '.KIIIIIIIIIIIIIIIIK.',
+      '.KIWWWWWWWWWWWWWWIK.',
+      '.KIW.MM.YYYY.GG.NWIK',
+      '.KIW.Mm.YYYY.Gg.NWIK',
+      '.KIW.KK.KKKK.KK.KWIK',
+      '.KIIIIIIIIIIIIIIIIK.',
+      '.KOOOOOOOOOOOOOOOOK.',
+      '.KoOoYoOoYoOoYoOoOoK',
+      '.KKBBBBBBBBBBBBBBKK.',
+      '.KB..............BK.',
+      '.KB.KKK......KKK.BK.',
+      '.KB.KkK......kKk.BK.',
+      '.KB.KKK......KKK.BK.',
+      '.KBBBBBBBBBBBBBBBBK.',
+      '.KKKKKKKKKKKKKKKKKK.',
+      '....................'
+    ], KITCHEN_PAL, 20, 22);
 
     // Directional Signpost (12x14)
     const gsgn = mk();
@@ -9029,6 +9877,7 @@ class FarmScene extends Phaser.Scene {
 
   _triggerFishJump(fx, fy) {
     if (!this.sys || !this.sys.isActive()) return;
+    if (this._pondVisible === false) return;
     const isLeft = Math.random() < 0.5;
     const jumpDist = Phaser.Math.Between(40, 70) * (isLeft ? -1 : 1);
     const startX = fx + Phaser.Math.Between(-40, 40);
@@ -9510,7 +10359,7 @@ class FarmScene extends Phaser.Scene {
       playerLocked = false;
       if (this.player && this.player.active) {
         this.player.anims.stop();
-        this.player.setTexture('player_walk_down_0');
+        this.player.setTexture((this._unit10Skin ? this._unit10Skin() : 'player') + '_walk_down_0');
       }
       if (typeof callback === 'function') callback();
     };
@@ -9709,12 +10558,13 @@ class FarmScene extends Phaser.Scene {
       if(len>1){ vx/=len; vy/=len; }
       this.player.setVelocity(vx*PLAYER_SPD,vy*PLAYER_SPD);
       if(vx!==0||vy!==0){
-        let animKey = 'player-walk-down';
+        const skin = this._unit10Skin();
+        let animKey = skin + '-walk-down';
         if (Math.abs(vx) >= Math.abs(vy)) {
-          animKey = vx < 0 ? 'player-walk-left' : 'player-walk-right';
+          animKey = vx < 0 ? skin + '-walk-left' : skin + '-walk-right';
           this.player.setScale(vx < 0 ? -1.8 : 1.8, 1.8);
         } else {
-          animKey = vy < 0 ? 'player-walk-up' : 'player-walk-down';
+          animKey = vy < 0 ? skin + '-walk-up' : skin + '-walk-down';
           this.player.setScale(1.8, 1.8);
         }
         this.player.setFlipX(false);
@@ -9739,13 +10589,13 @@ class FarmScene extends Phaser.Scene {
           }
         }
       } else {
-        this.player.anims.stop(); this.player.setTexture('player_walk_down_0'); this.walkTimer=0;
+        this.player.anims.stop(); this.player.setTexture(this._unit10Skin() + '_walk_down_0'); this.walkTimer=0;
       }
     } else {
       this.player.setVelocity(0,0);
       if (!this.isPerformingAction) {
         this.player.anims.stop();
-        this.player.setTexture('player_walk_down_0');
+        this.player.setTexture(this._unit10Skin() + '_walk_down_0');
       }
     }
 
@@ -9791,6 +10641,18 @@ class FarmScene extends Phaser.Scene {
       const nearBeehive = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY) < 85;
       this.beehiveHint.setAlpha(nearBeehive ? 1 : 0);
     }
+    if (this.studyDesk && this.studyDesk.label) {
+      const near = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.studyDesk.x, this.studyDesk.y) < (this.studyDesk.interact || 80);
+      this.studyDesk.label.setAlpha(near ? 1 : 0);
+    }
+    if (this.kitchenStation && this.kitchenStation.label) {
+      const near = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.kitchenStation.x, this.kitchenStation.y) < (this.kitchenStation.interact || 82);
+      this.kitchenStation.label.setAlpha(near ? 1 : 0);
+    }
+    if (this.tasteStation && this.tasteStation.label) {
+      const near = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 64);
+      this.tasteStation.label.setAlpha(near ? 1 : 0);
+    }
     if (this.beehiveSprite) this.beehiveSprite.setDepth(this.beehiveY || this.beehiveSprite.y);
     if (this.beehiveBees && this.beehiveBees.length) {
       this.beehiveBees.forEach((bee) => {
@@ -9828,45 +10690,61 @@ class FarmScene extends Phaser.Scene {
     const pulse=0.6+0.4*Math.sin(Date.now()/220);
     this._tHL.clear();
     let hx=null,hy=null,lbl='',col=0xFFD700,hw=PLOT_SIZE,hh=PLOT_SIZE;
-
+    if (this._isUnit10() && this.kitchenStation &&
+        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.kitchenStation.x, this.kitchenStation.y) < (this.kitchenStation.interact || 82)) {
+      hx = this.kitchenStation.x; hy = this.kitchenStation.y - 22; lbl = '[SPACE] 요리 주방'; col = 0xF97316; hw = 64; hh = 72;
+    }
+    if (hx === null && this._isUnit10() && this.studyDesk &&
+        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.studyDesk.x, this.studyDesk.y) < (this.studyDesk.interact || 80)) {
+      hx = this.studyDesk.x; hy = this.studyDesk.y - 20; lbl = '[SPACE] 학습 책상'; col = 0x60A5FA; hw = 70; hh = 70;
+    }
+    if (hx === null && this._isUnit10() && this.tasteStation &&
+        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 64)) {
+      hx = this.tasteStation.x; hy = this.tasteStation.y - 18; lbl = '[SPACE] 한 입'; col = 0xF59E0B; hw = 48; hh = 48;
+    }
+    if (hx === null) {
     // Priority mirrors _interact(): apple > ripe > wilt > cat > shop > empty
     if(this.appleRipe&&this.appleX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<95){
       hx=this.appleX;hy=this.appleY-50;lbl='[SPACE] Harvest 🍎 Bonus!';col=0xFF3333;hw=60;hh=70;
     }
     if(hx===null) for(const p of this.plots){
+      if(this.tasteStation&&p.index===this.tasteStation.plotIndex) continue;
       if(p.sState==='4'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Harvest +Gold';col=0xFFD700;break;}
     }
     if(hx===null) for(const p of this.plots){
+      if(this.tasteStation&&p.index===this.tasteStation.plotIndex) continue;
       if(p.sState==='2'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Water';col=0x55CCFF;break;}
     }
-    if(hx===null&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
+    if(hx===null&&this.catSprite&&this.catSprite.visible&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
       hx=this.catX;hy=this.catY-20;lbl='[SPACE] Talk to Ginger Cat';col=0xFF88CC;hw=44;hh=44;
     }
-    if(hx===null&&this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
+    if(hx===null&&this.wizardSprite&&this.wizardSprite.visible&&this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
       hx=this.wizardX;hy=this.wizardY-25;lbl='[SPACE] Spell Duel';col=0xA855F7;hw=44;hh=50;
     }
-    if(hx===null&&this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<90){
+    if(hx===null&&this.portalSprite&&this.portalSprite.visible&&this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<90){
       hx=this.portalX;hy=this.portalY-30;lbl='[SPACE] Enter Dungeon';col=0xEC4899;hw=50;hh=60;
     }
-    if(hx===null&&this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
+    if(hx===null&&this.dockSprite&&this.dockSprite.visible&&this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
       hx=this.fishX;hy=this.fishY-25;lbl='[SPACE] Start Fishing';col=0x38BDF8;hw=50;hh=50;
     }
-    if(hx===null&&this.beehiveX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY)<85){
+    if(hx===null&&this.beehiveSprite&&this.beehiveSprite.visible&&this.beehiveX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY)<85){
       hx=this.beehiveX;hy=this.beehiveY-25;lbl='[SPACE] Beehive Minigame';col=0xFACC15;hw=44;hh=50;
     }
-    if(hx===null&&this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
+    if(hx===null&&this.arcadeSprite&&this.arcadeSprite.visible&&this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
       hx=this.arcadeX;hy=this.arcadeY-30;lbl='[SPACE] Play Retro Shooter';col=0x00FFFF;hw=44;hh=50;
     }
-    if(hx===null&&this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<80){
+    if(hx===null&&this.boardSprite&&this.boardSprite.visible&&this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<80){
       hx=this.boardX;hy=this.boardY-20;lbl='[SPACE] Play Memory Match';col=0xFF88FF;hw=44;hh=44;
     }
-    if(hx===null&&this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<90){
+    if(hx===null&&this.shopNPC&&this.shopNPC.visible&&this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<90){
       hx=this.shopX;hy=this.shopY-20;lbl='[SPACE] Open Shop';col=0xFFAA44;hw=50;hh=60;
     }
     if(hx===null) for(const p of this.plots){
+      if(this.tasteStation&&p.index===this.tasteStation.plotIndex) continue;
       if(p.sState===''&&p.active&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Plant new';col=0x44FF88;break;}
     }
     if(hx===null) for(const p of this.plots){
+      if(this.tasteStation&&p.index===this.tasteStation.plotIndex) continue;
       if(!p.active&&near(p)){
         const cost = PLOT_UNLOCK_COSTS[p.index - 9] || 1000;
         hx=p.x; hy=p.y;
@@ -9875,6 +10753,7 @@ class FarmScene extends Phaser.Scene {
         break;
       }
     }
+    } // end non-Unit-10 highlight
 
     if(hx!==null){
       // Subtle Corner brackets
@@ -9907,9 +10786,201 @@ class FarmScene extends Phaser.Scene {
     if(changed) savePlotsFn();
   }
 
+  _isUnit10(){
+    return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10';
+  }
+  _unit10Skin(){
+    return this._isUnit10() ? 'chef' : 'player';
+  }
+
+  // ── UNIT 10: farm plots stay; taste table sits on plot 0; no portal ──────
+  syncUnit10World(){
+    const on = this._isUnit10();
+    this._setMinigameSpritesVisible(!on);
+    this._setPlotsVisible(true);
+    this._setPondVisible(!on);
+    if (this.portalSprite && this.portalSprite.setVisible) this.portalSprite.setVisible(!on);
+    if (this.portalHint && this.portalHint.setVisible) this.portalHint.setVisible(!on);
+    if (this.player && this.player.active) {
+      this.player.setTexture(this._unit10Skin() + '_walk_down_0');
+    }
+    if (on) {
+      this._ensureTasteStation();
+      this._ensureStudyDesk();
+      this._ensureKitchen();
+    } else {
+      this._teardownTasteStation();
+      this._teardownStudyDesk();
+      this._teardownKitchen();
+    }
+  }
+
+  _setPlotsVisible(show){
+    if (!this.plots) return;
+    this.plots.forEach(p => {
+      [p.tile, p.shad, p.plant, p.glow, p.hintLabel, p.lockIcon, p.lockText].forEach(s => {
+        if (s && s.setVisible) s.setVisible(show);
+      });
+    });
+    if (this.children && this.children.list && typeof CROP_ICONS !== 'undefined') {
+      this.children.list.forEach(ch => {
+        if (ch && ch.text && CROP_ICONS.indexOf(ch.text) >= 0) ch.setVisible(show);
+      });
+    }
+  }
+
+  _setMinigameSpritesVisible(show){
+    const list = [
+      this.shopNPC, this.shopHint, this.boardSprite, this.boardHint,
+      this.arcadeSprite, this.arcadeHint, this.wizardSprite, this.wizardHint,
+      this.portalSprite, this.portalHint, this.dockSprite, this.fishHint,
+      this.beehiveSprite, this.beehiveHint, this.catSprite, this.catHint
+    ];
+    list.forEach(spr => { if (spr && spr.setVisible) spr.setVisible(show); });
+    if (this.children && this.children.list) {
+      this.children.list.forEach(ch => {
+        const t = ch && ch.text;
+        if (typeof t === 'string' && /Merlin|Ginger Cat|Fishing Pond|Minigame|ARCADE|SPELL DUEL|Enter Dungeon|Dungeon Portal|Beehive|SHOP/i.test(t)) {
+          ch.setVisible(show);
+        }
+      });
+    }
+  }
+
+  _setPondVisible(show){
+    this._pondVisible = !!show;
+    if (this.pondWater && this.pondWater.setVisible) this.pondWater.setVisible(show);
+    if (this.fishHint && this.fishHint.setVisible) this.fishHint.setVisible(show);
+    if (this.dockSprite && this.dockSprite.setVisible) this.dockSprite.setVisible(show);
+    if (!this.farm || !this.children || !this.children.list) return;
+    const ox = this.farm.x - 190;
+    const oy = this.farm.y + this.farm.h / 2 + 40;
+    this.children.list.forEach(ch => {
+      if (!ch || !ch.setVisible) return;
+      if (Math.abs((ch.x || 0) - ox) > 175 || Math.abs((ch.y || 0) - oy) > 90) return;
+      const key = ch.texture && ch.texture.key;
+      const isWaterArt = typeof key === 'string' && /lily|reed|ocean|pond|fish/i.test(key);
+      const isShape = ch.type === 'Ellipse' || ch.type === 'Arc' || ch.type === 'Circle';
+      const isPondLabel = typeof ch.text === 'string' && /Fishing Pond|FISHING/i.test(ch.text);
+      if (isWaterArt || isShape || isPondLabel) ch.setVisible(show);
+    });
+  }
+
+  _ensureTasteStation(){
+    this._teardownTasteStation();
+    const farm = this.farm || { x: 300, y: 220, w: 400, h: 280 };
+    const spec = getUnit10Station('taste');
+    const pos = unit10StationXY(farm, spec);
+    const x = pos.x, y = pos.y;
+    const tex = this.textures.exists('taste_stall') ? 'taste_stall' : 'shop_sign';
+    const spr = this.add.image(x, y, tex).setOrigin(spec.originX || 0.5, 1).setScale(spec.scale || 2.4).setDepth(y + 6);
+    this.tweens.add({ targets: spr, y: y - 3, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    const steam = [];
+    for (let i = 0; i < 3; i++) {
+      const puf = this.add.circle(x - 10 + i * 10, y - 52, 3 + i, 0xFFF8E8, 0.55).setDepth(y + 9);
+      this.tweens.add({
+        targets: puf, y: y - 72 - i * 6, alpha: 0, scale: 2.2,
+        duration: 900 + i * 180, repeat: -1, delay: i * 200, ease: 'Sine.Out'
+      });
+      steam.push(puf);
+    }
+    const label = this.add.text(x, y + 8, (spec.nameKo || '한 입 포장마차') + '\n[SPACE]', {
+      fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
+      color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
+    }).setOrigin(0.5, 0).setDepth(y + 10).setAlpha(0);
+    this.tasteStation = { x, y, spr, label, steam, interact: spec.interact || 64 };
+  }
+
+  _ensureStudyDesk(){
+    this._teardownStudyDesk();
+    const farm = this.farm || { x: 300, y: 220, w: 400, h: 280 };
+    const spec = getUnit10Station('desk');
+    const pos = unit10StationXY(farm, spec);
+    const x = pos.x, y = pos.y;
+    const hd = this.textures.exists('study_desk_hd');
+    const tex = hd ? 'study_desk_hd' : (this.textures.exists('study_desk') ? 'study_desk' : 'pixel_crate');
+    const spr = this.add.image(x, y, tex).setOrigin(spec.originX || 0.52, 1).setScale(hd ? (spec.scale || 1) : 2.3).setDepth(y + 6);
+    if (this.shadows) this.shadows.createShadow(spr, hd ? 78 : 52, 16, 2);
+    const glow = this.add.circle(x - 26, y - 98, 8, 0xFDE047, 0.22).setDepth(y + 8);
+    this.tweens.add({ targets: glow, alpha: { from: 0.22, to: 0.75 }, scale: { from: 0.8, to: 1.4 }, duration: 700, yoyo: true, repeat: -1 });
+    const label = this.add.text(x, y + 8, (spec.nameKo || '학습 책상') + '\n[SPACE]', {
+      fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
+      color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
+    }).setOrigin(0.5, 0).setDepth(y + 10).setAlpha(0);
+    this.studyDesk = { x, y, spr, glow, label, interact: spec.interact || 80 };
+  }
+
+  _ensureKitchen(){
+    this._teardownKitchen();
+    const farm = this.farm || { x: 300, y: 220, w: 400, h: 280 };
+    const spec = getUnit10Station('kitchen');
+    const pos = unit10StationXY(farm, spec);
+    const x = pos.x, y = pos.y;
+    const hd = this.textures.exists('unit10_kitchen_hd');
+    const tex = hd ? 'unit10_kitchen_hd' : (this.textures.exists('unit10_kitchen') ? 'unit10_kitchen' : 'shop_sign');
+    const spr = this.add.image(x, y, tex).setOrigin(spec.originX || 0.48, 1).setScale(hd ? (spec.scale || 1) : 2.35).setDepth(y + 6);
+    if (this.shadows) this.shadows.createShadow(spr, hd ? 58 : 56, 16, 2);
+    const flame = [];
+    for (let i = 0; i < 3; i++) {
+      const puf = this.add.circle(x - 4 + i * 7, y - 118, 2.5, 0xFFF7ED, 0.4).setDepth(y + 10);
+      this.tweens.add({ targets: puf, y: y - 138 - i * 6, alpha: 0, scale: 2.0, duration: 900 + i * 160, repeat: -1, delay: i * 180, ease: 'Sine.Out' });
+      flame.push(puf);
+    }
+    const label = this.add.text(x, y + 8, (spec.nameKo || '요리 주방') + '\n[SPACE]', {
+      fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
+      color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
+    }).setOrigin(0.5, 0).setDepth(y + 10).setAlpha(0);
+    this.kitchenStation = { x, y, spr, label, flame, interact: spec.interact || 82 };
+  }
+
+  _teardownKitchen(){
+    if (!this.kitchenStation) return;
+    ['spr', 'label'].forEach(k => {
+      const s = this.kitchenStation[k];
+      if (s && s.destroy) s.destroy();
+    });
+    (this.kitchenStation.flame || []).forEach(s => { if (s && s.destroy) s.destroy(); });
+    this.kitchenStation = null;
+  }
+
+  _teardownStudyDesk(){
+    if (!this.studyDesk) return;
+    ['spr', 'glow', 'label'].forEach(k => {
+      const s = this.studyDesk[k];
+      if (s && s.destroy) s.destroy();
+    });
+    this.studyDesk = null;
+  }
+
+  _teardownTasteStation(){
+    if (!this.tasteStation) return;
+    ['spr', 'label'].forEach(k => {
+      const s = this.tasteStation[k];
+      if (s && s.destroy) s.destroy();
+    });
+    (this.tasteStation.steam || []).forEach(s => { if (s && s.destroy) s.destroy(); });
+    this.tasteStation = null;
+  }
+
   // ── INTERACT (SRS-aware priority) ─────────────────────────────────────────
   _interact(){
+    if (this._isUnit10() && this.kitchenStation &&
+        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.kitchenStation.x, this.kitchenStation.y) < (this.kitchenStation.interact || 82)) {
+      if (typeof openCookingUI === 'function') openCookingUI();
+      return;
+    }
+    if (this._isUnit10() && this.studyDesk &&
+        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.studyDesk.x, this.studyDesk.y) < (this.studyDesk.interact || 80)) {
+      if (typeof openDeskQuiz === 'function') openDeskQuiz();
+      return;
+    }
+    if (this._isUnit10() && this.tasteStation &&
+        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 64)) {
+      if (typeof openTasteGame === 'function') openTasteGame();
+      return;
+    }
     const near=p=>Phaser.Math.Distance.Between(this.player.x,this.player.y,p.x,p.y)<PLOT_SIZE+24;
+    const skipStation = (p) => this._isUnit10() && this.tasteStation && p && p.index === this.tasteStation.plotIndex;
     // Apple Tree harvest (highest priority when ripe)
     if(this.appleRipe&&this.appleX&&
        Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<95){
@@ -9917,23 +10988,24 @@ class FarmScene extends Phaser.Scene {
       this.harvestAppleTree(); return;
     }
     // P1: ripe crop plots (Phase 3 harvest)
-    for(const p of this.plots){ if(p.sState==='4'&&near(p)){openQuiz(p.word,p,3);return;} }
+    for(const p of this.plots){ if(!skipStation(p)&&p.sState==='4'&&near(p)){openQuiz(p.word,p,3);return;} }
     // P2: wilting plants (Phase 2 review)
-    for(const p of this.plots){ if(p.sState==='2'&&near(p)){openQuiz(p.word,p,2);return;} }
+    for(const p of this.plots){ if(!skipStation(p)&&p.sState==='2'&&near(p)){openQuiz(p.word,p,2);return;} }
+    const extrasOn = !(isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10');
     // Cat NPC
-    if(this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
+    if(extrasOn&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
       this.tweens.add({targets:this.catSprite,scale:{from:0.75,to:0.95},duration:100,yoyo:true,ease:'Back.Out(2)'});
       showCatDialog(); return;
     }
     // Wizard NPC
-    if(this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
+    if(extrasOn&&this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
       this.tweens.add({targets:this.wizardSprite,scale:{from:1.8,to:2.1},duration:120,yoyo:true,ease:'Back.Out(2)'});
       const chk = isZoneUnlocked('duel');
       if(!chk.unlocked){ showHardLockToast('duel'); return; }
       openSpellDuel(); return;
     }
     // Dungeon Portal
-    if(this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<90){
+    if(extrasOn&&this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<90){
       this.tweens.add({targets:this.portalSprite,scale:{from:1.6,to:1.9},duration:120,yoyo:true,ease:'Back.Out(2)'});
       const chk = isZoneUnlocked('dungeon');
       if(!chk.unlocked){ showHardLockToast('dungeon'); return; }
@@ -9945,7 +11017,7 @@ class FarmScene extends Phaser.Scene {
       return;
     }
     // Fishing Dock
-    if(this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
+    if(extrasOn&&this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
       this.tweens.add({targets:this.dockSprite,scale:{from:1.6,to:1.8},duration:120,yoyo:true,ease:'Back.Out(2)'});
       const chk = isZoneUnlocked('fishing');
       if(!chk.unlocked){ showHardLockToast('fishing'); return; }
@@ -9957,7 +11029,7 @@ class FarmScene extends Phaser.Scene {
       return;
     }
     // Beehive NPC
-    if(this.beehiveX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY)<85){
+    if(extrasOn&&this.beehiveX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY)<85){
       this.tweens.add({targets:this.beehiveSprite,scale:{from:1.6,to:1.85},duration:120,yoyo:true,ease:'Back.Out(2)'});
       this.cameras.main.fadeOut(300, 0, 0, 0);
       this.cameras.main.once('camerafadeoutcomplete', () => {
@@ -9967,7 +11039,7 @@ class FarmScene extends Phaser.Scene {
       return;
     }
     // Arcade
-    if(this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
+    if(extrasOn&&this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
       this.tweens.add({targets:this.arcadeSprite,scale:{from:1.5,to:1.6},duration:100,yoyo:true});
       const chk = isZoneUnlocked('arcade');
       if(!chk.unlocked){ showHardLockToast('arcade'); return; }
@@ -9980,22 +11052,22 @@ class FarmScene extends Phaser.Scene {
     }
 
     // Board
-    if(this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<80){
+    if(extrasOn&&this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<80){
       this.tweens.add({targets:this.boardSprite,angle:5,duration:100,yoyo:true,repeat:1});
       openMemoryGame(); return;
     }
     // Shop
-    if(this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<90){openShop();return;}
+    if(extrasOn&&this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<90){openShop();return;}
     // P3: empty plots (Phase 1 plant, full hints)
     for(const p of this.plots){
-      if(p.sState===''&&p.active&&near(p)){
+      if(!skipStation(p)&&p.sState===''&&p.active&&near(p)){
         this.tweens.add({targets:p.tile,scaleX:0.85,scaleY:0.85,duration:90,yoyo:true});
         openQuiz(this._pickWord(),p,1); return;
       }
     }
     // P4: locked plots (unlock interaction flow)
     for(const p of this.plots){
-      if(!p.active&&near(p)){
+      if(!skipStation(p)&&!p.active&&near(p)){
         const cost = PLOT_UNLOCK_COSTS[p.index - 9] || 1000;
         if(gold >= cost){
           spendCoins(cost);
@@ -10070,7 +11142,14 @@ class FarmScene extends Phaser.Scene {
           checkQuestProgress('quiz');
 
           const cropIngredients = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근'];
-          const ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
+          let ingName;
+          if (typeof isUnit10World === 'function' && isUnit10World() && typeof UNIT10_INGREDIENTS !== 'undefined') {
+            if (UNIT10_INGREDIENTS.indexOf(ko) >= 0) ingName = ko;
+            else if (UNIT10_WORD_DROP && UNIT10_WORD_DROP[ko]) ingName = UNIT10_WORD_DROP[ko];
+            else ingName = UNIT10_INGREDIENTS[plot.index % UNIT10_INGREDIENTS.length];
+          } else {
+            ingName = (ko && typeof KOREAN_INGREDIENTS !== 'undefined' && KOREAN_INGREDIENTS.includes(ko)) ? ko : cropIngredients[plot.index % cropIngredients.length];
+          }
 
           this.spawnDroppedItem(ingName, plot.x, plot.y);
         });
@@ -10200,7 +11279,7 @@ class FarmScene extends Phaser.Scene {
     const due = srsDueWords(now).filter(d => d.entry.st === 'review' && !plantedWords.has(d.word.ko));
     if(!due.length) return 0;
 
-    const freePlots = this.plots.filter(p => p.active && !p.ko);
+    const freePlots = this.plots.filter(p => p.active && !p.ko && !(this.tasteStation && p.index === this.tasteStation.plotIndex));
     const RESERVED_FOR_NEW = 2;
     const capacity = Math.max(0, freePlots.length - RESERVED_FOR_NEW);
     const planting = due.slice(0, capacity);
@@ -10265,7 +11344,7 @@ class FarmScene extends Phaser.Scene {
     }
   }
   _pickWord(){
-    const all=unlockedLevels.flatMap(idx=>levelsData[idx]?.words||[]);
+    const all=getUnlockedWords();
     let pool=all.filter(w=>!plantedWords.has(w.ko));
     // Manual planting is for learning new material; anything already in the review queue
     // resurfaces on its own schedule via _plantDueReviews, so it is excluded here rather
@@ -10419,7 +11498,7 @@ class ArcadeScene extends Phaser.Scene {
     this.lastMinionSpawn = 0;
     this.lastBossBullet = 0;
 
-    const all = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
+    const all = getUnlockedWords();
     this.wordPool = all.length > 0 ? all : [{ko:'사과', en:'Apple'}, {ko:'우유', en:'Milk'}, {ko:'빵', en:'Bread'}];
 
     // Spawn BOSS
@@ -10866,7 +11945,7 @@ class DungeonScene extends Phaser.Scene {
     this.invulnerableTime = 0;
 
     // Vocab pool
-    const all = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
+    const all = getUnlockedWords();
     this.wordPool = all.length > 0 ? all : [{ko:'한글', en:'Hangeul', hint:'📝'}];
 
     // HUD Header
@@ -12005,7 +13084,7 @@ window.openMemoryGame = function(){
   flippedIndices = []; matchedPairs = 0; memoryFlips = 0;
   
   // Pick 8 random words
-  const all = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
+  const all = getUnlockedWords();
   if(all.length < 8) {
      showToast('Not enough words unlocked! Buy more levels first.', 3000);
      memoryOpen = false; return;
@@ -12205,7 +13284,7 @@ window.openSpellDuel = function(){
   if(duelOpen) return;
   playChiptuneSFX('click');
   
-  const all = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
+  const all = getUnlockedWords();
   if(all.length < 4){
     showToast('⚠️ Need at least 4 unlocked words to duel! Unlock more in Shop.', 3000);
     return;
@@ -12283,7 +13362,7 @@ function nextDuelTurn(){
   const grid = document.getElementById('duel-options-grid');
   grid.innerHTML = '';
 
-  const allWords = unlockedLevels.flatMap(idx => levelsData[idx]?.words || []);
+  const allWords = getUnlockedWords();
   const target = Phaser.Utils.Array.GetRandom(allWords);
 
   // The prompt is the Korean and the buttons carry meanings, so dedupe on `en`.
@@ -12638,6 +13717,74 @@ if (typeof window !== 'undefined') {
   window.COOKING_RECIPES = COOKING_RECIPES;
 }
 
+var UNIT10_INGREDIENTS = ['배추', '무', '파', '고추', '마늘', '감자', '콩', '쌀', '당근', '오이', '양파', '콩나물', '상추', '생강'];
+var UNIT10_WORD_DROP = {
+  '김치찌개': '배추', '된장찌개': '콩', '순두부찌개': '콩',
+  '감자탕': '감자', '매운탕': '고추', '설렁탕': '무',
+  '냉면': '오이', '칼국수': '쌀', '비빔국수': '오이',
+  '삼겹살': '상추', '떡갈비': '파', '갈비찜': '당근',
+  '삼계탕': '쌀', '닭고기': '마늘', '갈비': '파',
+  '맵다': '고추', '시다': '오이', '달다': '쌀', '짜다': '파', '쓰다': '생강',
+  '야채': '배추', '고기': '파', '생선': '무'
+};
+var UNIT10_COOKING_RECIPES = [
+  { id: 'u10-kimchi-jjigae', nameEn: 'Kimchi stew', nameKo: '김치찌개', icon: '🍲',
+    description: 'Spicy stew. Grow 배추, 고추, 마늘, 파.',
+    ingredients: [{ itemId: '배추', count: 1 }, { itemId: '고추', count: 1 }, { itemId: '마늘', count: 1 }, { itemId: '파', count: 1 }],
+    xpReward: 30, goldReward: 35 },
+  { id: 'u10-doenjang-jjigae', nameEn: 'Soybean-paste stew', nameKo: '된장찌개', icon: '🥘',
+    description: 'Earthy stew. Grow 콩, 감자, 파, 마늘.',
+    ingredients: [{ itemId: '콩', count: 1 }, { itemId: '감자', count: 1 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
+    xpReward: 30, goldReward: 35 },
+  { id: 'u10-sundubu', nameEn: 'Soft-tofu stew', nameKo: '순두부찌개', icon: '🥣',
+    description: 'Soft tofu stew. Grow 콩, 고추, 파, 마늘.',
+    ingredients: [{ itemId: '콩', count: 1 }, { itemId: '고추', count: 1 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
+    xpReward: 32, goldReward: 38 },
+  { id: 'u10-gamjatang', nameEn: 'Pork-bone potato stew', nameKo: '감자탕', icon: '🍖',
+    description: 'Potato stew. Grow 감자, 파, 고추, 마늘.',
+    ingredients: [{ itemId: '감자', count: 2 }, { itemId: '파', count: 1 }, { itemId: '고추', count: 1 }, { itemId: '마늘', count: 1 }],
+    xpReward: 36, goldReward: 42 },
+  { id: 'u10-maeuntang', nameEn: 'Spicy fish stew', nameKo: '매운탕', icon: '🐟',
+    description: 'Spicy broth veg. Grow 고추, 무, 파, 마늘.',
+    ingredients: [{ itemId: '고추', count: 2 }, { itemId: '무', count: 1 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
+    xpReward: 34, goldReward: 40 },
+  { id: 'u10-naengmyeon', nameEn: 'Cold noodles', nameKo: '냉면', icon: '🍜',
+    description: 'Summer cold noodles. Grow 오이, 무, 파.',
+    ingredients: [{ itemId: '오이', count: 1 }, { itemId: '무', count: 1 }, { itemId: '파', count: 1 }],
+    xpReward: 28, goldReward: 32 },
+  { id: 'u10-kalguksu', nameEn: 'Knife-cut noodles', nameKo: '칼국수', icon: '🍝',
+    description: 'Hand-cut noodle soup. Grow 쌀, 파, 마늘.',
+    ingredients: [{ itemId: '쌀', count: 2 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
+    xpReward: 30, goldReward: 34 },
+  { id: 'u10-bibim-guksu', nameEn: 'Spicy mixed noodles', nameKo: '비빔국수', icon: '🥗',
+    description: 'Spicy mixed noodles. Grow 오이, 고추, 파.',
+    ingredients: [{ itemId: '오이', count: 1 }, { itemId: '고추', count: 1 }, { itemId: '파', count: 1 }],
+    xpReward: 28, goldReward: 32 },
+  { id: 'u10-bibimbap', nameEn: 'Bibimbap', nameKo: '비빔밥', icon: '🍚',
+    description: 'Mixed rice. Grow 쌀, 당근, 콩나물, 고추.',
+    ingredients: [{ itemId: '쌀', count: 1 }, { itemId: '당근', count: 1 }, { itemId: '콩나물', count: 1 }, { itemId: '고추', count: 1 }],
+    xpReward: 40, goldReward: 48 },
+  { id: 'u10-samgyeopsal', nameEn: 'Grilled pork belly', nameKo: '삼겹살', icon: '🥓',
+    description: 'Ssam wrap sides. Grow 상추, 마늘, 고추.',
+    ingredients: [{ itemId: '상추', count: 2 }, { itemId: '마늘', count: 1 }, { itemId: '고추', count: 1 }],
+    xpReward: 34, goldReward: 40 },
+  { id: 'u10-galbijjim', nameEn: 'Braised short ribs', nameKo: '갈비찜', icon: '🍖',
+    description: 'Braised-rib veg. Grow 당근, 감자, 파, 마늘.',
+    ingredients: [{ itemId: '당근', count: 1 }, { itemId: '감자', count: 1 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
+    xpReward: 38, goldReward: 46 },
+  { id: 'u10-samgyetang', nameEn: 'Ginseng chicken soup', nameKo: '삼계탕', icon: '🐔',
+    description: 'Chicken soup aromatics. Grow 쌀, 마늘, 파, 생강.',
+    ingredients: [{ itemId: '쌀', count: 2 }, { itemId: '마늘', count: 1 }, { itemId: '파', count: 1 }, { itemId: '생강', count: 1 }],
+    xpReward: 42, goldReward: 50 }
+];
+
+function getActiveCookingRecipes() {
+  if (typeof isUnit10World === 'function' && isUnit10World() && Array.isArray(UNIT10_COOKING_RECIPES)) {
+    return UNIT10_COOKING_RECIPES;
+  }
+  return COOKING_RECIPES;
+}
+
 let selectedRecipeId = 'kimchi';
 
 function openCookingUI() {
@@ -12659,10 +13806,11 @@ function renderCookingGrid(selectId) {
 
   if (!recipeListEl) return;
 
-  if (selectId && COOKING_RECIPES.some(r => r.id === selectId)) {
+  const recipes = (typeof getActiveCookingRecipes === 'function') ? getActiveCookingRecipes() : COOKING_RECIPES;
+  if (selectId && recipes.some(r => r.id === selectId)) {
     selectedRecipeId = selectId;
-  } else if (!COOKING_RECIPES.some(r => r.id === selectedRecipeId)) {
-    selectedRecipeId = COOKING_RECIPES[0]?.id || 'kimchi';
+  } else if (!recipes.some(r => r.id === selectedRecipeId)) {
+    selectedRecipeId = recipes[0]?.id || 'kimchi';
   }
 
   const ingMap = (inventoryState && inventoryState.ingredients) ? inventoryState.ingredients : {};
@@ -12687,12 +13835,12 @@ function renderCookingGrid(selectId) {
 
   // 2. Progress Badge
   if (progressBadge) {
-    progressBadge.textContent = `Cooked: ${cookedRecipes.length} / ${COOKING_RECIPES.length}`;
+    progressBadge.textContent = `Cooked: ${cookedRecipes.filter(id => recipes.some(r => r.id === id)).length} / ${recipes.length}`;
   }
 
   // 3. Render Recipe List Cards
   recipeListEl.innerHTML = '';
-  COOKING_RECIPES.forEach(r => {
+  recipes.forEach(r => {
     const isSelected = r.id === selectedRecipeId;
     const isCooked = cookedRecipes.includes(r.id);
 
@@ -12732,7 +13880,7 @@ function renderCookingGrid(selectId) {
 
   // 4. Render Selected Recipe Detail View
   if (detailViewEl) {
-    const recipe = COOKING_RECIPES.find(r => r.id === selectedRecipeId) || COOKING_RECIPES[0];
+    const recipe = recipes.find(r => r.id === selectedRecipeId) || recipes[0];
     if (recipe) {
       let canCook = true;
       let ingBadgesHtml = [];
@@ -12798,9 +13946,11 @@ function renderCookingGrid(selectId) {
 function cookRecipe(recipeId) {
   if (!recipeId) return false;
 
-  const recipes = (typeof COOKING_RECIPES !== 'undefined' && Array.isArray(COOKING_RECIPES))
-    ? COOKING_RECIPES
-    : ((typeof RECIPE_DB !== 'undefined') ? RECIPE_DB : []);
+  const recipes = (typeof getActiveCookingRecipes === 'function')
+    ? getActiveCookingRecipes()
+    : ((typeof COOKING_RECIPES !== 'undefined' && Array.isArray(COOKING_RECIPES))
+      ? COOKING_RECIPES
+      : ((typeof RECIPE_DB !== 'undefined') ? RECIPE_DB : []));
 
   const recipe = recipes.find(r => r.id === recipeId);
   if (!recipe) {
@@ -13268,10 +14418,10 @@ window.closeCulturalFact = function() {
 // ══════════════ LOCAL LEADERBOARD SYSTEM ═════════════════════════════════════
 
 const LOCAL_RIVALS = [
-  { name: 'Min-jun (민준)', title: 'Valley Veteran 🌾', words: 24, honor: 850, cookingTier: 'Sous Chef 🍲', arcade: 1450, dungeon: 8, duelStreak: 7 },
-  { name: 'Seo-yeon (서연)', title: 'Hansik Scholar 👑', words: 18, honor: 620, cookingTier: 'Apprentice Chef 👨‍🍳', arcade: 1100, dungeon: 6, duelStreak: 5 },
-  { name: 'Ji-hoon (지훈)', title: 'Spell Duelist ⚡', words: 12, honor: 450, cookingTier: 'Novice Cook 🍳', arcade: 850, dungeon: 4, duelStreak: 4 },
-  { name: 'Ha-eun (하은)', title: 'Art Artisan 🎨', words: 8, honor: 280, cookingTier: 'Novice Cook 🍳', arcade: 520, dungeon: 2, duelStreak: 2 }
+  { name: 'Min-jun (민준)', title: 'Valley Veteran 🌾', words: 24, honor: 850, cookingTier: 'Sous Chef 🍲', arcade: 1450, dungeon: 8, duelStreak: 7, rankLv: 31 },
+  { name: 'Seo-yeon (서연)', title: 'Hansik Scholar 👑', words: 18, honor: 620, cookingTier: 'Apprentice Chef 👨‍🍳', arcade: 1100, dungeon: 6, duelStreak: 5, rankLv: 26 },
+  { name: 'Ji-hoon (지훈)', title: 'Spell Duelist ⚡', words: 12, honor: 450, cookingTier: 'Novice Cook 🍳', arcade: 850, dungeon: 4, duelStreak: 4, rankLv: 18 },
+  { name: 'Ha-eun (하은)', title: 'Art Artisan 🎨', words: 8, honor: 280, cookingTier: 'Novice Cook 🍳', arcade: 520, dungeon: 2, duelStreak: 2, rankLv: 9 }
 ];
 
 function computeCookingTier() {
@@ -13306,6 +14456,9 @@ function updateLeaderboardMetrics() {
   leaderboardState.personalBests.totalWordsMastered = masteredCount;
   leaderboardState.personalBests.totalHonor = playerCurrencies?.honor || 0;
   leaderboardState.personalBests.highestCookingTier = computeCookingTier();
+  ensurePlayerRank();
+  leaderboardState.personalBests.valleyLevel = playerRank.level;
+  leaderboardState.personalBests.valleyTitle = rankTitleFor(playerRank.level).en;
   
 
   if (typeof leaderboardState.personalBests.arcadeHighScore !== 'number') {
@@ -13330,6 +14483,7 @@ function openLeaderboard(tab = 'vocab') {
     const pb = leaderboardState.personalBests;
     pbGrid.innerHTML = `
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">📖 Words Mastered: <b style="color:var(--neon-gold)">${pb.totalWordsMastered}</b></div>
+      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">⭐ Valley Rank: <b style="color:var(--neon-gold)">Lv.${pb.valleyLevel || 1} ${pb.valleyTitle || ''}</b></div>
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🎖️ Total Honor: <b style="color:var(--neon-gold)">${pb.totalHonor}</b></div>
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🍳 Cooking Tier: <b style="color:var(--neon-gold)">${pb.highestCookingTier}</b></div>
       <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">👾 Arcade Score: <b style="color:var(--neon-gold)">${pb.arcadeHighScore}</b></div>
@@ -13363,15 +14517,17 @@ function switchLeaderboardTab(tabId) {
   });
 
   const pb = leaderboardState.personalBests;
+  const meTitle = rankTitleFor((typeof playerRank !== 'undefined' && playerRank.level) || 1);
   const playerEntry = {
     name: 'Player (Hero Player) 🌟',
-    title: 'Hangeul Learner',
+    title: meTitle.icon + ' ' + meTitle.en,
     words: pb.totalWordsMastered || 0,
     honor: pb.totalHonor || 0,
     cookingTier: pb.highestCookingTier || 'Novice Cook 🍳',
     arcade: pb.arcadeHighScore || 0,
     dungeon: pb.dungeonMaxFloor || 0,
     duelStreak: pb.duelMaxWinStreak || 0,
+    rankLv: (typeof playerRank !== 'undefined' && playerRank.level) || 1,
     isPlayer: true
   };
 
@@ -13385,6 +14541,7 @@ function switchLeaderboardTab(tabId) {
     if (tabId === 'arcade') return b.arcade - a.arcade;
     if (tabId === 'dungeon') return b.dungeon - a.dungeon;
     if (tabId === 'duel') return b.duelStreak - a.duelStreak;
+    if (tabId === 'rank') return (b.rankLv || 0) - (a.rankLv || 0);
     return 0;
   });
 
@@ -13395,6 +14552,7 @@ function switchLeaderboardTab(tabId) {
   if (tabId === 'arcade') valColHeader = 'Arcade High Score';
   if (tabId === 'dungeon') valColHeader = 'Dungeon Max Floor';
   if (tabId === 'duel') valColHeader = 'Spell Duel Win Streak';
+  if (tabId === 'rank') valColHeader = 'Valley Rank';
 
   let html = `
     <table class="lb-table">
@@ -13422,6 +14580,7 @@ function switchLeaderboardTab(tabId) {
     if (tabId === 'arcade') displayVal = `${entry.arcade} pts`;
     if (tabId === 'dungeon') displayVal = `Floor ${entry.dungeon}`;
     if (tabId === 'duel') displayVal = `${entry.duelStreak} Win Streak`;
+    if (tabId === 'rank') displayVal = `Lv.${entry.rankLv || 1}`;
 
     const rowClass = entry.isPlayer ? 'class="lb-row-player"' : '';
 
@@ -13571,3 +14730,6 @@ window.closeProgressOverlay = closeProgressOverlay;
 window.openLeaderboard = openLeaderboard;
 window.closeLeaderboard = closeLeaderboard;
 window.switchLeaderboardTab = switchLeaderboardTab;
+window.openRankCard = openRankCard;
+window.closeRankCard = closeRankCard;
+window.closeRankUp = closeRankUp;

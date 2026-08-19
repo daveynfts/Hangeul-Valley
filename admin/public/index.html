@@ -31,6 +31,9 @@
         <button class="nav-btn" data-tab="vocab" id="tab-btn-vocab">
           <span class="nav-icon">📖</span> Word Origins
         </button>
+        <button class="nav-btn" data-tab="unit10" id="tab-btn-unit10">
+          <span class="nav-icon">🍜</span> Unit 10
+        </button>
       </nav>
 
       <div class="header-actions">
@@ -353,6 +356,151 @@
         </div>
       </div>
     </section>
+
+    <section id="tab-unit10" class="tab-content">
+      <div class="u10-header">
+        <div>
+          <h2 class="section-title">2B Unit 10 workspace</h2>
+          <p class="section-desc">Move farm props, edit the study-desk quiz, and curate the textbook word list. Saves write to <code>worlds/</code> and <code>assets/worlds/</code>. Refresh the game tab to see layout changes.</p>
+        </div>
+        <a class="btn btn-secondary btn-sm" href="http://localhost:8742/" target="_blank" rel="noopener">Open game ↗</a>
+      </div>
+
+      <div class="u10-subnav" id="u10-subnav">
+        <button class="u10-subbtn active" data-panel="layout">1. Map layout</button>
+        <button class="u10-subbtn" data-panel="quiz">2. Desk quiz</button>
+        <button class="u10-subbtn" data-panel="words">3. Textbook words</button>
+      </div>
+
+      <div id="u10-panel-layout" class="u10-panel">
+        <div class="u10-layout-grid">
+          <div class="card widget-card">
+            <div class="card-header-row">
+              <h3 class="widget-title">Farm schematic</h3>
+              <span class="text-muted">Drag a pin. Coordinates are offsets from the farm’s top-left (ox, oy).</span>
+            </div>
+            <div id="u10-map" class="u10-map" aria-label="Unit 10 layout map">
+              <div class="u10-farm" id="u10-farm-rect">밭</div>
+              <div class="u10-pin" data-id="desk" id="pin-desk" title="Study desk">📘</div>
+              <div class="u10-pin" data-id="kitchen" id="pin-kitchen" title="Kitchen">🍳</div>
+              <div class="u10-pin" data-id="taste" id="pin-taste" title="Taste stall">🍜</div>
+            </div>
+          </div>
+          <div class="card widget-card">
+            <h3 class="widget-title">Selected station</h3>
+            <div class="form-stack" id="u10-station-form">
+              <label>Station
+                <select id="u10-station-id" class="form-select">
+                  <option value="desk">📘 Study desk (학습 책상)</option>
+                  <option value="kitchen">🍳 Kitchen (요리 주방)</option>
+                  <option value="taste">🍜 Taste stall (한 입)</option>
+                </select>
+              </label>
+              <label>Korean label <input id="u10-name-ko" class="form-input" type="text"></label>
+              <label>English label <input id="u10-name-en" class="form-input" type="text"></label>
+              <div class="form-row-2">
+                <label>ox (from farm left) <input id="u10-ox" class="form-input" type="number" step="1"></label>
+                <label>oy (from farm top) <input id="u10-oy" class="form-input" type="number" step="1"></label>
+              </div>
+              <div class="form-row-2">
+                <label>Scale <input id="u10-scale" class="form-input" type="number" step="0.05" min="0.2"></label>
+                <label>Interact radius <input id="u10-interact" class="form-input" type="number" step="1" min="24"></label>
+              </div>
+              <p class="text-muted" id="u10-coord-hint"></p>
+              <div class="filter-actions">
+                <button class="btn btn-secondary" type="button" id="u10-reset-station">Reset this pin</button>
+                <button class="btn btn-primary" type="button" id="u10-save-layout">Save layout</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="u10-panel-quiz" class="u10-panel hidden">
+        <div class="card filter-bar-card">
+          <div class="filter-controls">
+            <label>Questions per session
+              <input id="u10-session-size" class="form-input" type="number" min="1" max="20" style="width:72px">
+            </label>
+            <span class="search-results-info" id="u10-quiz-count"></span>
+            <div class="filter-actions">
+              <button class="btn btn-emerald" type="button" id="u10-add-q">➕ Add question</button>
+              <button class="btn btn-primary" type="button" id="u10-save-quiz">Save quiz</button>
+            </div>
+          </div>
+        </div>
+        <div class="u10-quiz-workspace">
+          <div class="card widget-card">
+            <div class="table-container">
+              <table class="data-table" id="u10-quiz-table">
+                <thead>
+                  <tr>
+                    <th style="width:44px">#</th>
+                    <th>Prompt</th>
+                    <th style="width:52px">Key</th>
+                    <th style="width:70px"></th>
+                  </tr>
+                </thead>
+                <tbody id="u10-quiz-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card widget-card" id="u10-quiz-editor">
+            <h3 class="widget-title">Question editor</h3>
+            <p class="text-muted" id="u10-quiz-empty">Select a row to edit.</p>
+            <div id="u10-quiz-fields" class="form-stack hidden">
+              <label>Prompt <textarea id="u10-q-text" class="form-input" rows="3"></textarea></label>
+              <label>Correct key
+                <select id="u10-q-key" class="form-select">
+                  <option>A</option><option>B</option><option>C</option><option>D</option>
+                </select>
+              </label>
+              <label>A <input id="u10-q-A" class="form-input" type="text"></label>
+              <label>B <input id="u10-q-B" class="form-input" type="text"></label>
+              <label>C <input id="u10-q-C" class="form-input" type="text"></label>
+              <label>D <input id="u10-q-D" class="form-input" type="text"></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="u10-panel-words" class="u10-panel hidden">
+        <div class="card filter-bar-card">
+          <div class="filter-controls">
+            <div class="search-input-wrapper">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="u10-word-search" class="form-input search-input" placeholder="Filter Korean or English…">
+            </div>
+            <select id="u10-word-cat" class="form-select">
+              <option value="">All groups</option>
+            </select>
+            <span class="search-results-info" id="u10-word-count"></span>
+            <div class="filter-actions">
+              <button class="btn btn-emerald" type="button" id="u10-add-word">➕ Add word</button>
+              <button class="btn btn-primary" type="button" id="u10-save-world">Save word list</button>
+            </div>
+          </div>
+        </div>
+        <div class="card widget-card">
+          <div class="table-container">
+            <table class="data-table" id="u10-words-table">
+              <thead>
+                <tr>
+                  <th style="width:44px">#</th>
+                  <th>Korean</th>
+                  <th>English</th>
+                  <th style="width:88px">Hint</th>
+                  <th>Group (KO)</th>
+                  <th>Group (EN)</th>
+                  <th style="width:56px"></th>
+                </tr>
+              </thead>
+              <tbody id="u10-words-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Global Toast Notification Container -->
@@ -370,5 +518,6 @@
   <script src="js/dashboard.js"></script>
   <script src="js/levels.js"></script>
   <script src="js/vocab.js"></script>
+  <script src="js/world.js"></script>
 </body>
 </html>

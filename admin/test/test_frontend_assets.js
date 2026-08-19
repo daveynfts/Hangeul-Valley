@@ -69,7 +69,8 @@ async function runTests() {
         path.join(publicDir, 'js/app.js'),
         path.join(publicDir, 'js/dashboard.js'),
         path.join(publicDir, 'js/levels.js'),
-        path.join(publicDir, 'js/vocab.js')
+        path.join(publicDir, 'js/vocab.js'),
+        path.join(publicDir, 'js/world.js')
       ];
 
       files.forEach(f => {
@@ -80,12 +81,13 @@ async function runTests() {
     });
 
     // 2. JS Syntax Check via node -c
-    await test('Frontend JS files (app.js, dashboard.js, levels.js, vocab.js) pass node -c syntax check', () => {
+    await test('Frontend JS files (app.js, dashboard.js, levels.js, vocab.js, world.js) pass node -c syntax check', () => {
       const jsFiles = [
         path.join(publicDir, 'js/app.js'),
         path.join(publicDir, 'js/dashboard.js'),
         path.join(publicDir, 'js/levels.js'),
-        path.join(publicDir, 'js/vocab.js')
+        path.join(publicDir, 'js/vocab.js'),
+        path.join(publicDir, 'js/world.js')
       ];
 
       jsFiles.forEach(f => {
@@ -117,7 +119,9 @@ async function runTests() {
         'src="js/app.js"',
         'src="js/dashboard.js"',
         'src="js/levels.js"',
-        'src="js/vocab.js"'
+        'src="js/vocab.js"',
+        'src="js/world.js"',
+        'data-tab="unit10"'
       ];
 
       requiredElements.forEach(item => {
