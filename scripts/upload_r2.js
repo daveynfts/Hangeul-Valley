@@ -83,6 +83,8 @@ const FILES = [
   ['sprites/fence_flower_red.png', 'image/png'],
   ['sprites/fence_flower_yellow.png', 'image/png'],
   ['sprites/fence_flower_purple.png', 'image/png'],
+  ['sprites/apple_tree.png', 'image/png'],
+  ['sprites/apple_tree_ripe.png', 'image/png'],
   ['diner/content.json', 'application/json']
 ];
 
