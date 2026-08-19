@@ -1,3 +1,46 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/levels.json",
+      "destination": "https://cdn.daveynfts.com/hangeul-valley/levels.json"
+    },
+    {
+      "source": "/facts.json",
+      "destination": "https://cdn.daveynfts.com/hangeul-valley/facts.json"
+    },
+    {
+      "source": "/worlds/:path*",
+      "destination": "https://cdn.daveynfts.com/hangeul-valley/worlds/:path*"
+    },
+    {
+      "source": "/sprites/:path*",
+      "destination": "https://cdn.daveynfts.com/hangeul-valley/sprites/:path*"
+    },
+    {
+      "source": "/diner/content.json",
+      "destination": "https://cdn.daveynfts.com/hangeul-valley/diner/content.json"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/sprites/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    },
+    {
+      "source": "/(levels|facts).json",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
+      ]
+    },
+    {
+      "source": "/worlds/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
+      ]
+    }
+  ]
 }
+
