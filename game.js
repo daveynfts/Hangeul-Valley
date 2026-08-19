@@ -9677,7 +9677,7 @@ class FarmScene extends Phaser.Scene {
     vignette.fillRect(0, 0, W, H);
 
     // Micro Ambient Particle: Falling Leaves from Apple Tree
-    this._createFallingLeaves(apx, apy);
+    this._createFallingLeaves(this.farm.x - 130, this.farm.y - 85);
 
     this._createPollenDrift(W, H);
     this._createFireflies(W, H);
