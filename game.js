@@ -9564,33 +9564,10 @@ class FarmScene extends Phaser.Scene {
     const fW=PLOT_COLS*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP, fH=5*(PLOT_SIZE+PLOT_GAP)-PLOT_GAP;
     this.farm = {x:W/2-fW/2, y:H/2-fH/2-30, w:fW, h:fH};
 
-    // Cobblestone connecting paths (Widened & Spaced)
     const bx = this.farm.x + this.farm.w / 2;
     const by = this.farm.y - 95;
     const sx = this.farm.x + this.farm.w + 175;
     const sy = this.farm.y + this.farm.h / 2 + 25;
-    const ax = this.farm.x - 200;
-    const ay = this.farm.y + 20;
-    const wx = this.farm.x + this.farm.w + 160;
-    const wy = this.farm.y - 85;
-    const apx = this.farm.x - 130;
-    const apy = this.farm.y - 85;
-    const fx = this.farm.x - 190;
-    const fy = this.farm.y + this.farm.h / 2 + 20;
-
-    const pathPoints = [
-      {x: bx, y: by+25}, {x: sx, y: sy}, {x: ax, y: ay}, {x: wx, y: wy}, {x: apx, y: apy+25}, {x: fx + 60, y: fy}
-    ];
-    pathPoints.forEach(pt => {
-      for(let dx = -20; dx <= 20; dx += 20){
-        for(let dy = -20; dy <= 20; dy += 20){
-          if(Math.random() < 0.65){
-            this.add.image(pt.x + dx, pt.y + dy, 'path_stone')
-              .setDisplaySize(TILE, TILE).setDepth(1).setAlpha(0.85);
-          }
-        }
-      }
-    });
 
     // Scatter wildflowers naturally
     const flowers = ['flw_red', 'flw_yellow', 'flw_purple'];
