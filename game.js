@@ -5590,6 +5590,11 @@ function cropTex(scene, type, stage) {
   if (scene && scene.textures && scene.textures.exists(hd)) return hd;
   return 'cr_' + type + '_' + stage;
 }
+function appleTreeTex(scene, ripe) {
+  const hd = ripe ? 'apple_tree_ripe_hd' : 'apple_tree_hd';
+  if (scene && scene.textures && scene.textures.exists(hd)) return hd;
+  return ripe ? 'apple_tree_ripe' : 'apple_tree';
+}
 function currentLesson() {
   return (typeof levelsData !== 'undefined' && levelsData[currentLevelIndex]) || null;
 }
@@ -8545,6 +8550,8 @@ class FarmScene extends Phaser.Scene {
     this.load.image('flw_red_hd', 'sprites/fence_flower_red.png');
     this.load.image('flw_yellow_hd', 'sprites/fence_flower_yellow.png');
     this.load.image('flw_purple_hd', 'sprites/fence_flower_purple.png');
+    this.load.image('apple_tree_hd', 'sprites/apple_tree.png');
+    this.load.image('apple_tree_ripe_hd', 'sprites/apple_tree_ripe.png');
   }
 
   // ── APPLE TREE constants ──────────────────────────────────────────────────
@@ -9869,11 +9876,6 @@ class FarmScene extends Phaser.Scene {
     }).setOrigin(0.5,1).setDepth(wy+1).setAlpha(0);
     this.tweens.add({ targets: this.wizardHint, y: this.wizardHint.y - 3, duration: 600, yoyo: true, repeat: -1 });
     
-    this.add.text(wx, wy+6, 'Merlin', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
-      color:'#C084FC', stroke:'#000', strokeThickness:2
-    }).setOrigin(0.5,0).setDepth(wy+1);
-
     this.wizardX = wx; this.wizardY = wy;
   }
 
@@ -9891,10 +9893,6 @@ class FarmScene extends Phaser.Scene {
       color:'#FFCC44', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(cy+1).setAlpha(0);
     this.tweens.add({ targets:this.catHint, y:this.catHint.y-3, duration:700, yoyo:true, repeat:-1 });
-    this.add.text(cx, cy+6, 'Ginger Cat', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
-      color:'#FFD700', stroke:'#000', strokeThickness:2
-    }).setOrigin(0.5,0).setDepth(cy+1);
     this.catX=cx; this.catY=cy;
   }
 
@@ -9912,11 +9910,6 @@ class FarmScene extends Phaser.Scene {
     }).setOrigin(0.5,1).setDepth(py+1).setAlpha(0);
     this.tweens.add({ targets: this.portalHint, y: this.portalHint.y - 3, duration: 600, yoyo: true, repeat: -1 });
     
-    this.add.text(px, py+6, 'Dungeon Portal', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
-      color:'#F472B6', stroke:'#000', strokeThickness:2
-    }).setOrigin(0.5,0).setDepth(py+1);
-
     this.portalX = px; this.portalY = py;
   }
 
@@ -10048,11 +10041,6 @@ class FarmScene extends Phaser.Scene {
     }).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
     this.tweens.add({ targets: this.fishHint, y: this.fishHint.y - 3, duration: 700, yoyo: true, repeat: -1 });
 
-    this.add.text(fx, fy + 52, '🎣 Fishing Pond', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'10px',
-      color:'#7DD3FC', stroke:'#000', strokeThickness:2
-    }).setOrigin(0.5,0).setDepth(fy+1);
-
     this.fishX = fx; this.fishY = fy;
 
     // Ambient Fish Jumping Effect
@@ -10172,44 +10160,39 @@ class FarmScene extends Phaser.Scene {
   _createAppleTree(W, H){
     const ax = this.farm.x - 130;
     const ay = this.farm.y - 85;
-    // Tree sprite (starts with unripe texture — now 22×32 grid)
-    this.appleTreeSprite = this.add.image(ax, ay, 'apple_tree')
-      .setOrigin(0.5, 1).setScale(3.6).setDepth(ay+1);
-    if (this.shadows) this.shadows.createShadow(this.appleTreeSprite, 170, 44, 0);
+    const hd = this.textures.exists('apple_tree_hd');
+    this.appleTreeSprite = this.add.image(ax, ay, appleTreeTex(this, false))
+      .setOrigin(0.5, 1).setScale(hd ? 1 : 3.6).setDepth(ay+1);
+    if (hd && this.appleTreeSprite.texture) {
+      this.appleTreeSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    }
+    if (this.shadows) this.shadows.createShadow(this.appleTreeSprite, hd ? 88 : 170, hd ? 24 : 44, 0);
 
     this._createFallingLeaves(ax, ay);
 
-    // Trunk collision zone (slightly wider for new tree)
-    const trunkZone = this.add.zone(ax, ay - 10, 110, 52);
+    const trunkZone = this.add.zone(ax, ay - 8, hd ? 56 : 110, hd ? 36 : 52);
     this.physics.add.existing(trunkZone, true);
     this.physics.add.collider(this.player, trunkZone);
-    // Gentle sway
     this.tweens.add({
       targets: this.appleTreeSprite,
       angle: { from: -1.2, to: 1.2 },
       duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.InOut'
     });
-    // Floating harvest label (hidden until ripe)
-    this.appleTreeLabel = this.add.text(ax, ay - 260, '🍎 HARVEST!\n[SPACE]', {
+    const labelY = ay - (hd ? 188 : 260);
+    this.appleTreeLabel = this.add.text(ax, labelY, '🍎 HARVEST!\n[SPACE]', {
       fontFamily: '"Press Start 2P",monospace', fontSize: '14px',
       color: '#FFFFFF', stroke: '#000', strokeThickness: 4, align: 'center'
     }).setOrigin(0.5, 1).setDepth(ay + 100).setAlpha(0);
     this.tweens.add({ targets: this.appleTreeLabel, y: this.appleTreeLabel.y - 8,
       duration: 600, yoyo: true, repeat: -1 });
-    // Glow ring (hidden until ripe)
     this.appleTreeGlow = this.add.graphics().setDepth(ay - 1);
     this.tweens.add({ targets: this.appleTreeGlow, alpha: { from: 1, to: 0.1 },
       duration: 750, yoyo: true, repeat: -1 });
-    // Timer countdown label
-    this.appleTreeTimer = this.add.text(ax, ay + 22, '', {
+    this.appleTreeTimer = this.add.text(ax, ay + 8, '', {
       fontFamily: '"Press Start 2P",monospace', fontSize: '10px',
       color: '#AAFFAA', stroke: '#000', strokeThickness: 2, align: 'center'
     }).setOrigin(0.5, 0).setDepth(ay + 10);
     // Name tag
-    this.add.text(ax, ay + 38, '🍎 Apple Tree', {
-      fontFamily: '"Press Start 2P",monospace', fontSize: '10px',
-      color: '#FFD700', stroke: '#000', strokeThickness: 2, align: 'center'
-    }).setOrigin(0.5, 0).setDepth(ay + 10);
     // State
     this.appleX = ax; this.appleY = ay;
     this.appleRipeAt  = appleTreeSave.ripeAt  || (Date.now() + FarmScene.APPLE_RIPEN_MS);
@@ -10270,14 +10253,6 @@ class FarmScene extends Phaser.Scene {
       repeat: -1
     });
 
-    this.add.text(bx, by + 6, '🐝 Beehive', {
-      fontFamily: '"Press Start 2P",monospace',
-      fontSize: '10px',
-      color: '#FDE047',
-      stroke: '#000',
-      strokeThickness: 2,
-      align: 'center'
-    }).setOrigin(0.5, 0).setDepth(by + 10);
   }
 
   _createFallingLeaves(ax, ay){
@@ -10290,9 +10265,9 @@ class FarmScene extends Phaser.Scene {
           : null;
         let lf;
         if (leafKey) {
-          lf = this.add.image(ax + Phaser.Math.Between(-20, 20), ay - 35, leafKey).setDepth(ay + 10);
+          lf = this.add.image(ax + Phaser.Math.Between(-20, 20), ay - 110, leafKey).setDepth(ay + 10);
         } else {
-          lf = this.add.rectangle(ax + Phaser.Math.Between(-20, 20), ay - 35, 4, 3, 0x86EFAC).setDepth(ay + 10);
+          lf = this.add.rectangle(ax + Phaser.Math.Between(-20, 20), ay - 110, 4, 3, 0x86EFAC).setDepth(ay + 10);
         }
         this.tweens.add({
           targets: lf,
@@ -10311,14 +10286,15 @@ class FarmScene extends Phaser.Scene {
   _updateAppleTree(){
     if(!this.appleTreeSprite) return;
     if(this.appleRipe){
-      this.appleTreeSprite.setTexture('apple_tree_ripe');
+      this.appleTreeSprite.setTexture(appleTreeTex(this, true));
       this.appleTreeLabel.setAlpha(1);
       this.appleTreeGlow.clear();
+      const hd = this.textures.exists('apple_tree_ripe_hd');
       this.appleTreeGlow.fillStyle(0xFFDD44, 0.25);
-      this.appleTreeGlow.fillEllipse(this.appleX, this.appleY + 4, 150, 40);
+      this.appleTreeGlow.fillEllipse(this.appleX, this.appleY + 4, hd ? 96 : 150, hd ? 28 : 40);
       this.appleTreeTimer.setText('');
     } else {
-      this.appleTreeSprite.setTexture('apple_tree');
+      this.appleTreeSprite.setTexture(appleTreeTex(this, false));
       this.appleTreeLabel.setAlpha(0);
       this.appleTreeGlow.clear();
     }
@@ -10678,12 +10654,7 @@ class FarmScene extends Phaser.Scene {
     }
   }
 
-  _addPlotLabels(){
-    this.plots.forEach((p,i)=>{
-      this.add.text(p.x,p.y+PLOT_SIZE/2+3,CROP_ICONS[i%5],{fontSize:'18px'})
-        .setOrigin(0.5,0).setAlpha(0.4).setDepth(3);
-    });
-  }
+  _addPlotLabels(){}
 
   // ── UPDATE ─────────────────────────────────────────────────────────────────
   update(_t, dt){
