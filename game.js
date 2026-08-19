@@ -5034,7 +5034,8 @@ function collectSave(){
     activeBuffs: activeBuffs,
     leaderboards: leaderboardState,
     droppedItems: drops,
-    cooking: cookingState
+    cooking: cookingState,
+    updatedAt: Date.now()
   };
 }
 
@@ -5135,6 +5136,7 @@ async function flushSave(){
   if(window.pywebview?.api){
     try{ await window.pywebview.api.save(data); }catch(e){ console.warn('File save failed:',e); }
   }
+  if (typeof pushCloudSave === 'function') pushCloudSave(data);
 }
 
 function persistSave(){
@@ -5170,6 +5172,194 @@ async function loadSave(){
     if(s && applySave(JSON.parse(s))){ console.log('[Save] Loaded from localStorage ✓'); return; }
   }catch{}
   console.log('[Save] No save found – fresh start.');
+}
+
+let googleAuth = { clientId: '', token: '', user: null, ready: false };
+
+function peekLocalSave() {
+  try { return JSON.parse(localStorage.getItem('hv_save_v2') || 'null'); } catch { return null; }
+}
+
+function getGoogleToken() {
+  if (googleAuth.token) return googleAuth.token;
+  try { return sessionStorage.getItem('hv_google_token') || ''; } catch { return ''; }
+}
+
+function setGoogleSession(token, user) {
+  googleAuth.token = token || '';
+  googleAuth.user = user || null;
+  try {
+    if (token) sessionStorage.setItem('hv_google_token', token);
+    else sessionStorage.removeItem('hv_google_token');
+    if (user) localStorage.setItem('hv_google_user', JSON.stringify(user));
+    else localStorage.removeItem('hv_google_user');
+  } catch {}
+  renderAuthUI();
+}
+
+async function cloudSaveRequest(method, body) {
+  const token = getGoogleToken();
+  if (!token) return { status: 401, json: null };
+  const opts = {
+    method,
+    headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch('/api/save', opts);
+  let json = null;
+  try { json = await r.json(); } catch {}
+  return { status: r.status, json };
+}
+
+function pushCloudSave(data) {
+  if (!getGoogleToken()) return;
+  cloudSaveRequest('PUT', data).then(({ status }) => {
+    if (status === 401) {
+      setGoogleSession('', null);
+      try { if (window.google && google.accounts && google.accounts.id) google.accounts.id.prompt(); } catch {}
+      if (typeof showToast === 'function') showToast('Sign in again to keep cloud save.');
+    }
+  }).catch(() => {});
+}
+
+async function syncCloudSave() {
+  if (!getGoogleToken()) return;
+  let remote;
+  try {
+    const { status, json } = await cloudSaveRequest('GET');
+    if (status === 401) { setGoogleSession('', null); return; }
+    if (status !== 200) return;
+    remote = json && json.data;
+    if (json && json.user) googleAuth.user = json.user;
+  } catch { return; }
+  const local = peekLocalSave();
+  const remoteAt = (remote && remote.updatedAt) || 0;
+  const localAt = (local && local.updatedAt) || 0;
+  if (remote && remoteAt >= localAt) {
+    if (applySave(remote)) {
+      try { localStorage.setItem('hv_save_v2', JSON.stringify(remote)); } catch {}
+      if (typeof showToast === 'function') showToast('☁ Cloud save loaded');
+      if (typeof updateGoldHUD === 'function') updateGoldHUD();
+      if (typeof updateRankHUD === 'function') updateRankHUD();
+      if (typeof buildLevelSelectScreen === 'function') buildLevelSelectScreen();
+    }
+    return;
+  }
+  if (local) await cloudSaveRequest('PUT', local);
+  else if (!remote) {
+    const fresh = collectSave();
+    await cloudSaveRequest('PUT', fresh);
+  }
+}
+
+function escapeAuthText(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
+
+function safeGooglePhoto(url) {
+  const u = String(url || '');
+  return /^https:\/\/[\w.-]+\.googleusercontent\.com\//.test(u) ? u : '';
+}
+
+function decodeJwtPayload(token) {
+  const part = String(token || '').split('.')[1] || '';
+  const b64 = part.replace(/-/g, '+').replace(/_/g, '/');
+  const pad = b64 + '='.repeat((4 - (b64.length % 4)) % 4);
+  return JSON.parse(atob(pad));
+}
+
+function renderAuthUI() {
+  const user = googleAuth.user;
+  const signed = !!(user && getGoogleToken());
+  const slots = ['ls-auth-status', 'hud-auth-status'];
+  slots.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (signed) {
+      const src = safeGooglePhoto(user.picture);
+      const photo = src ? '<img class="auth-photo" alt="" src="' + src + '">' : '';
+      const label = escapeAuthText(user.email || user.name || 'Signed in');
+      el.innerHTML = photo + '<span class="auth-name">' + label + '</span>' +
+        '<button type="button" class="auth-out" onclick="signOutGoogle()">Sign out</button>';
+    } else {
+      el.innerHTML = '';
+    }
+  });
+  document.querySelectorAll('.google-signin-slot').forEach(el => {
+    el.classList.toggle('hidden', signed || !googleAuth.clientId);
+  });
+  const wrap = document.getElementById('ls-auth');
+  if (wrap) wrap.classList.toggle('hidden', !googleAuth.clientId && !signed);
+}
+
+function onGoogleCredential(resp) {
+  const token = resp && resp.credential;
+  if (!token) return;
+  let user = { email: '', name: '', picture: '' };
+  try {
+    const payload = decodeJwtPayload(token);
+    user = { email: payload.email || '', name: payload.name || '', picture: payload.picture || '', sub: payload.sub };
+  } catch {}
+  setGoogleSession(token, user);
+  if (typeof showToast === 'function') showToast('Signed in — syncing save…');
+  syncCloudSave();
+}
+
+function signOutGoogle() {
+  setGoogleSession('', null);
+  try {
+    if (window.google && google.accounts && google.accounts.id) google.accounts.id.disableAutoSelect();
+  } catch {}
+  if (typeof showToast === 'function') showToast('Signed out. Progress stays on this device.');
+}
+
+async function initGoogleAuth() {
+  if (typeof IS_NODE !== 'undefined' && IS_NODE) return;
+  try {
+    const cfg = await fetch('/api/config').then(r => r.ok ? r.json() : null);
+    googleAuth.clientId = (cfg && cfg.googleClientId) || '';
+  } catch {
+    googleAuth.clientId = '';
+  }
+  googleAuth.ready = true;
+  if (!googleAuth.clientId) { renderAuthUI(); return; }
+  try {
+    const raw = localStorage.getItem('hv_google_user');
+    if (raw) googleAuth.user = JSON.parse(raw);
+    googleAuth.token = sessionStorage.getItem('hv_google_token') || '';
+  } catch {}
+  const boot = () => {
+    if (!window.google || !google.accounts || !google.accounts.id) return false;
+    google.accounts.id.initialize({
+      client_id: googleAuth.clientId,
+      callback: onGoogleCredential,
+      auto_select: true,
+      ux_mode: 'popup'
+    });
+    document.querySelectorAll('.google-signin-slot').forEach(el => {
+      el.innerHTML = '';
+      google.accounts.id.renderButton(el, {
+        theme: 'filled_black',
+        size: 'medium',
+        type: 'standard',
+        shape: 'pill',
+        text: 'signin_with'
+      });
+    });
+    renderAuthUI();
+    if (getGoogleToken()) syncCloudSave();
+    return true;
+  };
+  if (boot()) return;
+  let n = 0;
+  const t = setInterval(() => { if (boot() || ++n > 40) clearInterval(t); }, 250);
+}
+
+if (typeof window !== 'undefined') {
+  window.signOutGoogle = signOutGoogle;
+  window.onGoogleCredential = onGoogleCredential;
 }
 
 // Legacy aliases
@@ -6018,6 +6208,7 @@ function _afterLoad(){
   buildLevelSelectScreen();
   if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
   console.log('[Save] gold='+gold+', levels='+JSON.stringify(unlockedLevels)+', plots='+plotSave.length);
+  initGoogleAuth();
 }
 // pywebview fires this event when API is ready; otherwise we init on DOMLoaded.
 // `typeof` first, like the flushSave block above: a bare `window.x` on an undeclared
