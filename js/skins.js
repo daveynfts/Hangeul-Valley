@@ -274,13 +274,13 @@ function applySkinToSprite(scene, sprite, opts) {
     const bodyW = Math.min(24, w), bodyH = 12;
     if (sprite.body) sprite.body.setSize(bodyW, bodyH).setOffset((w - bodyW) / 2, h - bodyH);
     if (preserveFeet && feetY != null) sprite.y = feetY;
-    replacePlayerShadow(scene, sprite, Math.round(w * 0.45), 12, 4);
+    replacePlayerShadow(scene, sprite, Math.round(w * 0.5), 10, 1);
   } else if (fit === 'farm') {
     sprite.setOrigin(0.5, 0.5);
     sprite.setScale(MATRIX_FARM_SCALE, MATRIX_FARM_SCALE);
     if (sprite.body) sprite.body.setSize(24, 16).setOffset(12, 32);
     if (preserveFeet && feetY != null) sprite.y = feetY - sprite.displayHeight * 0.5;
-    replacePlayerShadow(scene, sprite, 58, 18, 32);
+    replacePlayerShadow(scene, sprite, 36, 10, 1);
   } else {
     sprite.setOrigin(0.5, 0.5);
     sprite.setScale(1, 1);

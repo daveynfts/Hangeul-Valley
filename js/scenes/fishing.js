@@ -84,6 +84,8 @@ class FishingScene extends Phaser.Scene {
 
     this.player = this.add.sprite(this.W/2, this.H - 110, minigamePlayerTextureKey('down', 0)).setOrigin(0.5).setDepth(10);
     applySkinToSprite(this, this.player, { sceneFit: 'minigame' });
+    this.shadows = new DynamicShadowSystem(this);
+    this.shadows.createShadow(this.player, 30, 10, 1);
 
     // State: 'CASTING', 'WAITING', 'REELING', 'CATCH_QUIZ'
     this.state = 'CASTING';
@@ -213,6 +215,7 @@ class FishingScene extends Phaser.Scene {
   }
 
   update(t, dt){
+    if (this.shadows) this.shadows.updateAllShadows();
     this.waterTimer = (this.waterTimer || 0) + (dt || 16);
     if (this.waterTimer > 180) {
       this.waterTimer = 0;
@@ -279,7 +282,7 @@ class FishingScene extends Phaser.Scene {
     this.hideTensionBar();
 
     const fish = this.targetFish;
-    this.infoTxt.setText(`🐟 Reeled in ${fish.hint} ${fish.ko} [${fish.rom}]! Answer to Catch!`);
+    this.infoTxt.setText(`🐟 Reeled in ${fish.hint} ${fish.ko}! Answer to Catch!`);
 
     // Pick 3 random wrong fish choices
     const wrongs = FISH_DB.filter(f => f.ko !== fish.ko);

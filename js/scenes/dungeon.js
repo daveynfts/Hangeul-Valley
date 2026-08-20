@@ -77,7 +77,7 @@ class DungeonScene extends Phaser.Scene {
     this.playerFacing = 'down';
     this.player = this.add.sprite(this.W/2, this.H/2, minigamePlayerTextureKey('down', 0)).setOrigin(0.5);
     applySkinToSprite(this, this.player, { sceneFit: 'minigame' });
-    this.pShadow = this.shadows.createShadow(this.player, 30, 10, 15);
+    this.pShadow = this.shadows.createShadow(this.player, 30, 10, 1);
     this.physics.add.existing(this.player);
     this.player.body.setCollideWorldBounds(true);
     this.player.body.setSize(30, 30);
@@ -132,19 +132,7 @@ class DungeonScene extends Phaser.Scene {
     // Dynamic Y-sort for player and shadow
     const playerBaseY = this.player.y + (this.player.displayHeight * (1 - this.player.originY));
     this.player.setDepth(playerBaseY);
-    if (this.pShadow) this.pShadow.setDepth(playerBaseY - 1);
-
-    if (this.torchLights && this.pShadow && this.shadows) {
-      let closestTorch = this.torchLights[0];
-      let minDist = 99999;
-      this.torchLights.forEach(torch => {
-        const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, torch.x, torch.y);
-        if (d < minDist) { minDist = d; closestTorch = torch; }
-      });
-      if (closestTorch) {
-        this.shadows.updatePointShadow(this.pShadow, closestTorch.x, closestTorch.y);
-      }
-    }
+    if (this.shadows) this.shadows.updateAllShadows();
 
     // Movement
     let vx = 0, vy = 0;
