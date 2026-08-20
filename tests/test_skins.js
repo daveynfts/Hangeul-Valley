@@ -141,7 +141,9 @@ console.log('\n--- 1. Catalog helpers ---');
   assert(R(ctx, 'getSkinDef("farmer")').id === 'farmer', 'getSkinDef finds farmer on DEFAULT');
   assert(R(ctx, 'getSkinDef("hanbok")') === undefined, 'getSkinDef is strict for unknown ids');
   assert(R(ctx, 'getSkinDefOrDefault("hanbok")').id === 'farmer', 'getSkinDefOrDefault falls back to farmer');
-  assert(R(ctx, 'getSkinDef("farmer")').art === 'matrix', 'DEFAULT farmer stays matrix');
+  assert(R(ctx, 'getSkinDef("farmer")').art === 'hd', 'DEFAULT farmer is the HD valley farmer');
+  assert((R(ctx, 'getSkinDef("farmer")').files || []).indexOf('walk_down_0.png') >= 0,
+    'DEFAULT farmer lists HD walk files');
   assert(R(ctx, 'getSkinDef("chef")').matrixPrefix === 'chef', 'DEFAULT chef matrixPrefix is chef');
 }
 
@@ -184,10 +186,30 @@ console.log('\n--- 3. Farm costume is calling-scene only ---');
   ctx.sceneRef = farm;
   ctx._farm = farm;
   ctx._dungeon = dungeon;
-  assert(R(ctx, 'farmCostumeSkinId(_farm)') === 'chef', 'FarmScene reads costumeSkinId chef');
-  assert(R(ctx, 'activeSkinId(_farm)') === 'chef', 'Unit 10 farm uses chef overlay');
+  assert(R(ctx, 'farmCostumeSkinId(_farm)') === null, 'matrix chef is not a farm costume');
+  assert(R(ctx, 'activeSkinId(_farm)') === 'farmer', 'Unit 10 farm keeps the HD farmer');
   assert(R(ctx, 'farmCostumeSkinId(_dungeon)') === null, 'DungeonScene does not read farm costume');
   assert(R(ctx, 'activeSkinId(_dungeon)') === 'farmer', 'dungeon stays on equipped farmer');
+}
+
+console.log('\n--- 3b. HD costume may overlay; matrix never does ---');
+{
+  const ctx = makeCtx();
+  const pack = JSON.parse(JSON.stringify(liveCatalog));
+  const chef = pack.skins.find((s) => s.id === 'chef');
+  chef.art = 'hd';
+  chef.folder = 'characters/valley-chef';
+  chef.files = ['walk_down_0.png'];
+  ctx._lesson = { worldId: '2b-unit-10', costumeSkinId: 'chef' };
+  const farm = mockScene({
+    key: 'FarmScene',
+    catalog: pack,
+    textures: { farmer_walk_down_0: true, chef_walk_down_0: true, player_walk_down_0: true }
+  });
+  ctx.sceneRef = farm;
+  ctx._farm = farm;
+  assert(R(ctx, 'farmCostumeSkinId(_farm)') === 'chef', 'HD chef costume is allowed on FarmScene');
+  assert(R(ctx, 'activeSkinId(_farm)') === 'chef', 'Unit 10 farm uses HD chef when those textures exist');
 }
 
 console.log('\n--- 4. Minigame prefers matrixPrefix even when HD is cached ---');
@@ -293,8 +315,10 @@ console.log('\n--- 9. One shadow on farm apply ---');
 console.log('\n--- 10. attachTextbookWorld copies costumeSkinId ---');
 assert(src.indexOf('costumeSkinId: world.costumeSkinId') >= 0,
   'attachTextbookWorld copies world.costumeSkinId onto the injected level');
-assert(liveCatalog.skins.some((s) => s.id === 'chef' && (s.worldCostumeOf || []).indexOf('2b-unit-10') >= 0),
-  'chef worldCostumeOf lists 2b-unit-10');
+assert(liveCatalog.skins.some((s) => s.id === 'chef' && s.art === 'matrix'),
+  'chef remains matrix until an HD set exists');
+assert(src.indexOf('if (!skinUsesHd(scene, def, \'farm\')) return null;') >= 0,
+  'farm costume overlay refuses matrix skins');
 
 console.log(`\n====================================================`);
 console.log(`RESULT: ${passed} passed, ${failed} failed`);

@@ -47,7 +47,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-20260820a';
+const ART_CACHE_KEY = 'art-20260820c';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }
@@ -55,9 +55,14 @@ const ART_LOAD = [
   { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' },
   { key: 'unit10_kitchen_hd', file: 'furniture/farmhouse_kitchen.png' },
   { key: 'unit10_taste_stall_hd', file: 'stalls/korean_street_food_stall.png' },
-  { key: 'flw_red_hd', file: 'decorations/fence_rose_red.png' },
-  { key: 'flw_yellow_hd', file: 'decorations/fence_buttercup_yellow.png' },
-  { key: 'flw_purple_hd', file: 'decorations/fence_lavender_purple.png' },
+  { key: 'fence_rose_red_hd', file: 'decorations/fence_rose_red.png' },
+  { key: 'fence_buttercup_yellow_hd', file: 'decorations/fence_buttercup_yellow.png' },
+  { key: 'fence_lavender_purple_hd', file: 'decorations/fence_lavender_purple.png' },
+  { key: 'wildflower_rose_red_hd', file: 'decorations/wildflower_rose_red.png' },
+  { key: 'wildflower_buttercup_yellow_hd', file: 'decorations/wildflower_buttercup_yellow.png' },
+  { key: 'wildflower_lavender_purple_hd', file: 'decorations/wildflower_lavender_purple.png' },
+  { key: 'cabbage_white_butterfly_open_hd', file: 'decorations/cabbage_white_butterfly_open.png' },
+  { key: 'cabbage_white_butterfly_flap_hd', file: 'decorations/cabbage_white_butterfly_flap.png' },
   { key: 'apple_tree_hd', file: 'plants/apple_tree/summer.png' },
   { key: 'apple_tree_ripe_hd', file: 'plants/apple_tree/ripe.png' }
 ];
@@ -80,6 +85,31 @@ function appleTreeTex(scene, ripe) {
   const hd = ripe ? 'apple_tree_ripe_hd' : 'apple_tree_hd';
   if (scene && scene.textures && scene.textures.exists(hd)) return hd;
   return ripe ? 'apple_tree_ripe' : 'apple_tree';
+}
+const FENCE_BLOOM_HD = {
+  red: 'fence_rose_red_hd',
+  yellow: 'fence_buttercup_yellow_hd',
+  purple: 'fence_lavender_purple_hd'
+};
+const GROUND_WILDFLOWER_HD = {
+  red: 'wildflower_rose_red_hd',
+  yellow: 'wildflower_buttercup_yellow_hd',
+  purple: 'wildflower_lavender_purple_hd'
+};
+function fenceBloomTex(scene, color) {
+  const hd = FENCE_BLOOM_HD[color];
+  if (hd && scene && scene.textures && scene.textures.exists(hd)) return hd;
+  return 'flw_' + color;
+}
+function wildflowerTex(scene, color) {
+  const hd = GROUND_WILDFLOWER_HD[color];
+  if (hd && scene && scene.textures && scene.textures.exists(hd)) return hd;
+  return 'flw_' + color;
+}
+function butterflyTex(scene, pose) {
+  const hd = pose === 'flap' ? 'cabbage_white_butterfly_flap_hd' : 'cabbage_white_butterfly_open_hd';
+  if (scene && scene.textures && scene.textures.exists(hd)) return hd;
+  return pose === 'flap' ? 'bf_flap' : 'bf_open';
 }
 function currentLesson() {
   return (typeof levelsData !== 'undefined' && levelsData[currentLevelIndex]) || null;

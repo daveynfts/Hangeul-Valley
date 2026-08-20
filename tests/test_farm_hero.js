@@ -132,6 +132,10 @@ console.log('\n--- 2. playerFeetY / lanternChestOffset ---');
 
 console.log('\n--- 3. artUrl cache-bust ---');
 assert(R('ART_CACHE_KEY') === catalog.cacheKey, 'ART_CACHE_KEY matches sprites/catalog.json cacheKey');
+assert(src.indexOf("wildflower_rose_red_hd") >= 0, 'ART_LOAD includes ground wildflower HD');
+assert(src.indexOf("cabbage_white_butterfly_open_hd") >= 0, 'ART_LOAD includes butterfly HD');
+assert(src.indexOf('decorations/wildflower_rose_red.png') >= 0, 'wildflower PNG path is in the source');
+assert(src.indexOf('decorations/cabbage_white_butterfly_open.png') >= 0, 'butterfly PNG path is in the source');
 assert(R('artUrl("furniture/oak_study_desk.png")') === 'sprites/furniture/oak_study_desk.png?v=' + encodeURIComponent(catalog.cacheKey),
   'artUrl appends ?v=cacheKey');
 assert(src.indexOf('artUrl(a.file)') >= 0, 'FarmScene.preload loads ART_LOAD through artUrl');
@@ -211,6 +215,8 @@ console.log('\n--- 9. Chef is a catalog costume, not a farm if ---');
 assert(src.indexOf('chef_walk_down_0') >= 0, 'chef matrix textures still generated');
 assert(src.indexOf('_unit10Skin') < 0, '_unit10Skin is gone');
 assert(src.indexOf('farmCostumeSkinId') >= 0, 'farmCostumeSkinId is the Unit 10 overlay');
+assert(src.indexOf("if (!skinUsesHd(scene, def, 'farm')) return null;") >= 0,
+  'matrix chef does not overlay the HD farmer');
 
 console.log(`\n====================================================`);
 console.log(`RESULT: ${passed} passed, ${failed} failed`);

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260820a",
+  "cacheKey": "art-20260820c",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -483,40 +483,113 @@
       "id": "decoration.fence_rose_red",
       "nameEn": "Fence rose — red",
       "kind": "decoration",
-      "family": "fence-rose",
+      "family": "fence-bloom",
       "role": "bloom",
       "path": "decorations/fence_rose_red.png",
-      "phaserKey": "flw_red_hd",
+      "phaserKey": "fence_rose_red_hd",
       "status": "shipped",
       "heightClass": "fence-bloom",
       "parentId": "decoration.fence_rose_red",
-      "usedBy": ["FarmScene"]
+      "usedBy": ["FarmScene"],
+      "notes": "Parent of the fence-bloom set. Phaser key equals basename + _hd."
     },
     {
       "id": "decoration.fence_buttercup_yellow",
       "nameEn": "Fence buttercup — yellow",
       "kind": "decoration",
-      "family": "fence-buttercup",
+      "family": "fence-bloom",
       "role": "bloom",
       "path": "decorations/fence_buttercup_yellow.png",
-      "phaserKey": "flw_yellow_hd",
+      "phaserKey": "fence_buttercup_yellow_hd",
       "status": "shipped",
       "heightClass": "fence-bloom",
       "parentId": "decoration.fence_rose_red",
-      "usedBy": ["FarmScene"]
+      "usedBy": ["FarmScene"],
+      "notes": "Edit-chained from the fence rose. Phaser key equals basename + _hd."
     },
     {
       "id": "decoration.fence_lavender_purple",
       "nameEn": "Fence lavender — purple",
       "kind": "decoration",
-      "family": "fence-lavender",
+      "family": "fence-bloom",
       "role": "bloom",
       "path": "decorations/fence_lavender_purple.png",
-      "phaserKey": "flw_purple_hd",
+      "phaserKey": "fence_lavender_purple_hd",
       "status": "shipped",
       "heightClass": "fence-bloom",
       "parentId": "decoration.fence_rose_red",
-      "usedBy": ["FarmScene"]
+      "usedBy": ["FarmScene"],
+      "notes": "Edit-chained from the fence rose. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "decoration.wildflower_rose_red",
+      "nameEn": "Wildflower clump — red rose",
+      "kind": "decoration",
+      "family": "wildflower",
+      "role": "ground-bloom",
+      "path": "decorations/wildflower_rose_red.png",
+      "phaserKey": "wildflower_rose_red_hd",
+      "status": "shipped",
+      "heightClass": "ground-bloom",
+      "parentId": "decoration.wildflower_rose_red",
+      "usedBy": ["FarmScene", "2b-unit-10"],
+      "notes": "Parent of the ground-bloom set. Edit-chained from the fence rose. No grass pad. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "decoration.wildflower_buttercup_yellow",
+      "nameEn": "Wildflower clump — yellow buttercup",
+      "kind": "decoration",
+      "family": "wildflower",
+      "role": "ground-bloom",
+      "path": "decorations/wildflower_buttercup_yellow.png",
+      "phaserKey": "wildflower_buttercup_yellow_hd",
+      "status": "shipped",
+      "heightClass": "ground-bloom",
+      "parentId": "decoration.wildflower_rose_red",
+      "usedBy": ["FarmScene", "2b-unit-10"],
+      "notes": "Recolor of the red wildflower clump. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "decoration.wildflower_lavender_purple",
+      "nameEn": "Wildflower clump — purple lavender",
+      "kind": "decoration",
+      "family": "wildflower",
+      "role": "ground-bloom",
+      "path": "decorations/wildflower_lavender_purple.png",
+      "phaserKey": "wildflower_lavender_purple_hd",
+      "status": "shipped",
+      "heightClass": "ground-bloom",
+      "parentId": "decoration.wildflower_rose_red",
+      "usedBy": ["FarmScene", "2b-unit-10"],
+      "notes": "Recolor of the red wildflower clump. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "decoration.cabbage_white_butterfly.open",
+      "nameEn": "Cabbage white butterfly — wings open",
+      "kind": "decoration",
+      "family": "cabbage-white-butterfly",
+      "role": "open",
+      "path": "decorations/cabbage_white_butterfly_open.png",
+      "phaserKey": "cabbage_white_butterfly_open_hd",
+      "status": "shipped",
+      "heightClass": "fauna",
+      "parentId": "decoration.cabbage_white_butterfly.open",
+      "usedBy": ["FarmScene", "2b-unit-10"],
+      "notes": "Parent of the two-frame flap. Shared 35x24 canvas. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "decoration.cabbage_white_butterfly.flap",
+      "nameEn": "Cabbage white butterfly — wings up",
+      "kind": "decoration",
+      "family": "cabbage-white-butterfly",
+      "role": "flap",
+      "path": "decorations/cabbage_white_butterfly_flap.png",
+      "phaserKey": "cabbage_white_butterfly_flap_hd",
+      "status": "shipped",
+      "heightClass": "fauna",
+      "parentId": "decoration.cabbage_white_butterfly.open",
+      "usedBy": ["FarmScene", "2b-unit-10"],
+      "notes": "Flap frame, padded to the open-wing canvas. Phaser key equals basename + _hd."
     }
   ]
 }

@@ -13,11 +13,20 @@ const SKIN_CATALOG_DEFAULT = {
       price: 0,
       currency: 'coins',
       unlock: { type: 'default' },
-      art: 'matrix',
+      art: 'hd',
       matrixPrefix: 'player',
       folder: 'characters/valley-farmer',
-      files: [],
-      preview: null
+      files: [
+        'walk_down_0.png', 'walk_down_1.png', 'walk_down_2.png',
+        'walk_up_0.png', 'walk_up_1.png', 'walk_up_2.png',
+        'walk_left_0.png', 'walk_left_1.png', 'walk_left_2.png',
+        'walk_right_0.png', 'walk_right_1.png', 'walk_right_2.png'
+      ],
+      preview: 'walk_down_0.png',
+      states: {
+        walk: { dirs: ['down', 'up', 'left', 'right'], frames: 3 },
+        idle: { derived: 'walk/0' }
+      }
     },
     {
       id: 'chef',
@@ -30,8 +39,7 @@ const SKIN_CATALOG_DEFAULT = {
       matrixPrefix: 'chef',
       folder: '',
       files: [],
-      preview: null,
-      worldCostumeOf: ['2b-unit-10']
+      preview: null
     }
   ]
 };
@@ -130,7 +138,11 @@ function farmCostumeSkinId(scene) {
   if (sceneKeyOf(scene) !== 'FarmScene') return null;
   const lesson = (typeof currentLesson === 'function') ? currentLesson() : null;
   const costume = lesson && lesson.costumeSkinId;
-  return (costume && getSkinDef(costume)) ? costume : null;
+  const def = costume ? getSkinDef(costume) : null;
+  if (!def) return null;
+  // Matrix chef is the old yellow/white robot. Do not put it on the HD farm.
+  if (!skinUsesHd(scene, def, 'farm')) return null;
+  return costume;
 }
 function activeSkinId(scene) {
   if (debugSkinOverride && getSkinDef(debugSkinOverride)) return debugSkinOverride;

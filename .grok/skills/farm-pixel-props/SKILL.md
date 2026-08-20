@@ -40,6 +40,8 @@ Height classes — pass `--height` to `process_prop.py` (default 156). Do not fa
 | `crop-mid` | 44 | plot stage 2 |
 | `crop-ripe` | 56 | plot stage 3 |
 | `fence-bloom` | 28 | post flowers (no grass pad, no tint) |
+| `ground-bloom` | 36 | wildflower clumps on grass (no grass pad) |
+| `fauna` | 24 | butterflies (shared canvas per flap pair) |
 | `landmark` | 180 | apple tree and similar |
 | `character` | 80 | farm walk frames (`sprites/characters/<slug>/`) |
 
