@@ -1290,7 +1290,9 @@ function showVocabFunFact(word) {
   else if (srs.st === 'relearn') stageLabel = '🔁 Relearning';
   else if (srs.st === 'learn')   stageLabel = '🌱 Learning';
   const modal = $('vocab-ff-modal');
-  $('vff-emoji').textContent    = word.hint || '📝';
+  $('vff-emoji').innerHTML      = (typeof vocabIconHtml === 'function')
+    ? vocabIconHtml(word.ko, word.hint || '📝', 56)
+    : (word.hint || '📝');
   $('vff-en').textContent       = word.en;
   $('vff-ko').textContent       = word.ko;
   $('vff-cat').textContent      = wordCategory(word) + (word.categoryEn && word.category ? ` · ${word.category}` : '');
@@ -1816,7 +1818,7 @@ function renderVocabCards() {
     div.style.cursor = 'pointer';
     div.innerHTML = `
       <button type="button" class="speak-btn vc-speak tts-only" title="Hear this word">🔊</button>
-      <span class="vc-emoji">${w.hint||'📝'}</span>
+      <span class="vc-emoji">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(w.ko, w.hint || '📝', 40) : (w.hint || '📝')}</span>
       <span class="vc-ko">${w.ko}</span>
       <span class="vc-en">${w.en}</span>
       <span style="font-size:11px; color:#fde047; font-family:monospace">초성: ${chosung}</span>

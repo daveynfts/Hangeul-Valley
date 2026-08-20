@@ -177,6 +177,10 @@ check('js/manifest.json lists scripts', Array.isArray(GAME_SCRIPTS) && GAME_SCRI
 const html = read('index.html');
 check('index.html links css/game.css', html.indexOf('href="css/game.css"') >= 0);
 check('quiz has no romanization hint', html.indexOf("revealQuizHint('roman')") < 0);
+check('vocab book cards use vocabIconHtml',
+  /vc-emoji[\s\S]{0,120}vocabIconHtml|vocabIconHtml\([\s\S]{0,40}vc-emoji/.test(gameJs)
+  && gameJs.indexOf("vocabIconHtml(w.ko") >= 0);
+check('vocab fun-fact uses vocabIconHtml', gameJs.indexOf("vocabIconHtml(word.ko") >= 0);
 check('shipped source has no Hangul romanizer', gameJs.indexOf('getHangulRomanization') < 0 && gameJs.indexOf('function getRoman(') < 0);
 const scriptSrcs = [...html.matchAll(/<script\b[^>]*\bsrc="(js\/[^"]+)"[^>]*><\/script>/gi)].map((m) => m[1]);
 check('index.html script tags match js/manifest.json',
