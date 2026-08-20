@@ -87,6 +87,13 @@ async function runTests() {
       assert(typeof res.body.data.coveragePercentage === 'number', 'coveragePercentage is a number');
     });
 
+    await test('GET /api/admin-host reports a writable local server', async () => {
+      const res = await makeRequest(port, 'GET', '/api/admin-host');
+      assert(res.status === 200, `Expected 200, got ${res.status}`);
+      assert(res.body.success === true, 'Response success is true');
+      assert(res.body.data.writable === true, 'local admin is writable');
+    });
+
     await test('GET /api/art returns the sprite catalog report', async () => {
       const res = await makeRequest(port, 'GET', '/api/art');
       assert(res.status === 200, `Expected 200, got ${res.status}`);

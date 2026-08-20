@@ -38,12 +38,22 @@ Or double-click `run.bat`. Note `run.bat` hardcodes a Python path and falls back
 
 ### Admin panel
 
-An Express dashboard for editing the curriculum (`levels.json`) and reviewing word
-origins.
+The dashboard (levels, word origins, Unit 10, art library) is a local Express app
+because saves write into the git working copy.
 
 ```bash
 cd admin && npm install && npm start
 ```
+
+Then open <http://localhost:3000>.
+
+A **read-only** copy is also on the Vercel site, for viewing the art library and
+curriculum without running Node locally:
+
+<https://hangeul-valley.vercel.app/admin/>
+
+Edits (save layout, add words, Sync Files) stay on the local server. The Vercel
+copy shows a Read-only badge and hides those buttons.
 
 ---
 

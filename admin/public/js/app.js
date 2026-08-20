@@ -167,11 +167,36 @@ window.apiFetch.updateVocabFact = (key, factData) => window.apiFetch(`/api/vocab
 window.apiFetch.deleteVocabFact = (key) => window.apiFetch(`/api/vocab-facts/${encodeURIComponent(key)}`, { method: 'DELETE' });
 window.apiFetch.sync = () => window.apiFetch('/api/sync', { method: 'POST' });
 window.apiFetch.getArt = () => window.apiFetch('/api/art');
+window.apiFetch.getAdminHost = () => window.apiFetch('/api/admin-host');
 
 // 5. Data Refresh & Synchronization Manager
 window.AppController = {
+  applyHost(host) {
+    const data = host || { writable: true, gameUrl: 'http://localhost:8742/' };
+    window.AppState.adminWritable = data.writable !== false;
+    window.AppState.gameUrl = data.gameUrl || '/';
+    const pill = document.getElementById('admin-readonly-pill');
+    if (pill) {
+      if (window.AppState.adminWritable) pill.classList.add('hidden');
+      else {
+        pill.classList.remove('hidden');
+        pill.title = data.hint || 'Read-only on Vercel';
+      }
+    }
+    document.querySelectorAll('#btn-open-game').forEach((a) => {
+      a.setAttribute('href', window.AppState.gameUrl);
+    });
+    document.body.classList.toggle('admin-readonly', !window.AppState.adminWritable);
+  },
+
   async fetchAllData() {
     try {
+      try {
+        const hostRes = await window.apiFetch.getAdminHost();
+        if (hostRes && hostRes.success) this.applyHost(hostRes.data);
+      } catch (e) {
+        this.applyHost({ writable: true, gameUrl: 'http://localhost:8742/' });
+      }
       const [statsRes, levelsRes, vocabRes] = await Promise.all([
         window.apiFetch.getStats(),
         window.apiFetch.getLevels(),

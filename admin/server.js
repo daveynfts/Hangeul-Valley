@@ -292,6 +292,17 @@ app.get('/api/art', (req, res, next) => {
   catch (err) { next(err); }
 });
 
+app.get('/api/admin-host', (req, res) => {
+  res.json({
+    success: true,
+    data: {
+      writable: true,
+      gameUrl: 'http://localhost:8742/',
+      hint: ''
+    }
+  });
+});
+
 app.use('/sprite-preview', (req, res, next) => {
   express.static(path.join(getRootDir(), 'sprites'), { fallthrough: true })(req, res, next);
 });

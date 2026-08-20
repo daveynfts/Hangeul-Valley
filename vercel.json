@@ -1,6 +1,29 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/admin",
+      "destination": "/admin/",
+      "permanent": false
+    }
+  ],
   "rewrites": [
+    {
+      "source": "/admin/",
+      "destination": "/admin/public/index.html"
+    },
+    {
+      "source": "/admin/css/:path*",
+      "destination": "/admin/public/css/:path*"
+    },
+    {
+      "source": "/admin/js/:path*",
+      "destination": "/admin/public/js/:path*"
+    },
+    {
+      "source": "/sprite-preview/:path*",
+      "destination": "https://cdn.daveynfts.com/hangeul-valley/sprites/:path*"
+    },
     {
       "source": "/levels.json",
       "destination": "https://cdn.daveynfts.com/hangeul-valley/levels.json"
@@ -47,6 +70,32 @@
         { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/art.js": {
+      "includeFiles": "sprites/**"
+    },
+    "api/stats.js": {
+      "includeFiles": "{levels.json,facts.json}"
+    },
+    "api/levels.js": {
+      "includeFiles": "levels.json"
+    },
+    "api/levels/[num].js": {
+      "includeFiles": "levels.json"
+    },
+    "api/vocab-facts.js": {
+      "includeFiles": "{levels.json,facts.json}"
+    },
+    "api/unit10/layout.js": {
+      "includeFiles": "worlds/**"
+    },
+    "api/unit10/quiz.js": {
+      "includeFiles": "worlds/**"
+    },
+    "api/unit10/world.js": {
+      "includeFiles": "worlds/**"
+    }
+  }
 }
 
