@@ -43,35 +43,34 @@
 
     <div id="hud-currency-group" class="hud-group">
       <button type="button" class="hud-chip" id="hud-rank" title="Valley rank" onclick="openRankCard()">
-        <span id="hud-rank-icon">🌱</span>
+        <span id="hud-rank-icon" data-hud-icon="sprout" data-hud-size="18">🌱</span>
         <span id="hud-rank-lv">Lv.1</span>
         <span id="hud-rank-bar"><span id="hud-rank-fill"></span></span>
       </button>
-      <span class="hud-chip" id="hud-gold" title="Coins">🪙 <span id="gold-val">0</span></span>
-      <span class="hud-chip" id="hud-gems" title="Gems">💎 <span id="gems-val">0</span></span>
-      <span class="hud-chip" id="hud-honor" title="Honor">🎖️ <span id="honor-val">0</span></span>
+      <span class="hud-chip" id="hud-gold" title="Coins"><span data-hud-icon="coin" data-hud-size="18">🪙</span> <span id="gold-val">0</span></span>
+      <span class="hud-chip" id="hud-gems" title="Gems"><span data-hud-icon="gem" data-hud-size="18">💎</span> <span id="gems-val">0</span></span>
+      <span class="hud-chip" id="hud-honor" title="Honor"><span data-hud-icon="honor" data-hud-size="18">🎖️</span> <span id="honor-val">0</span></span>
       <span id="hud-auth-status" title="Cloud save"></span>
     </div>
 
     <div id="hud-actions-group" class="hud-group">
-      <button class="hud-btn" id="vocab-btn" title="Vocabulary book">📖</button>
-      <button class="hud-btn" id="shop-btn" title="Shop">🏪</button>
-      <button class="hud-btn" id="unit-notebook-btn" title="Unit 10 notebook" onclick="openUnitNotebook()" style="display:none">📘</button>
-      <button class="hud-btn" id="inventory-btn" title="Inventory (I / E)" onclick="openInventoryUI()">🎒</button>
-      <button class="hud-btn" id="hud-more-btn" title="More" onclick="toggleHudOverflow(event)">⋯</button>
-      <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level menu">☰</button>
+      <button class="hud-btn" id="vocab-btn" title="Vocabulary book" data-hud-icon="vocab" data-hud-size="22">📖</button>
+      <button class="hud-btn" id="shop-btn" title="Shop" data-hud-icon="shop" data-hud-size="22">🏪</button>
+      <button class="hud-btn" id="inventory-btn" title="Inventory (I / E)" onclick="openInventoryUI()" data-hud-icon="bag" data-hud-size="22">🎒</button>
+      <button class="hud-btn" id="hud-more-btn" title="More" onclick="toggleHudOverflow(event)" data-hud-icon="more" data-hud-size="22">⋯</button>
+      <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level menu" data-hud-icon="menu" data-hud-size="22">☰</button>
 
       <div id="hud-overflow-menu" class="hidden">
-        <button class="hud-btn hud-overflow-item" id="quest-btn" title="Quest Log" onclick="openQuestOverlay(); toggleHudOverflow(false);">📜 Quests</button>
-        <button class="hud-btn hud-overflow-item" id="cooking-btn" title="Cooking (C)" onclick="openCookingUI(); toggleHudOverflow(false);">🍳 Cooking</button>
-        <button class="hud-btn hud-overflow-item" id="recipe-btn" title="Recipe Book" onclick="openRecipeBook(); toggleHudOverflow(false);">🍱 Recipes</button>
-        <button class="hud-btn hud-overflow-item tts-only" id="tts-toggle-btn" title="Korean pronunciation" onclick="toggleTTS()">🔊 Audio</button>
-        <button class="hud-btn hud-overflow-item" id="save-btn" title="Save game" onclick="saveAllGame()">💾 Save</button>
-        <button class="hud-btn hud-overflow-item" id="progress-btn" title="Review schedule" onclick="openProgressOverlay(); toggleHudOverflow(false);">📊 Progress</button>
-        <button class="hud-btn hud-overflow-item" id="leaderboard-btn" title="Leaderboard" onclick="openLeaderboard(); toggleHudOverflow(false);">🏅 Ranks</button>
-        <button class="hud-btn hud-overflow-item" id="duel-btn" title="Spell Duel" onclick="openSpellDuel(); toggleHudOverflow(false);">⚡ Duel</button>
-        <button class="hud-btn hud-overflow-item" id="fish-album-btn" title="Fish album" onclick="openFishAlbum(); toggleHudOverflow(false);">🐟 Fish</button>
-        <button class="hud-btn hud-overflow-item" id="trophy-btn" title="Trophies" onclick="toggleHudOverflow(false);">🏆 Trophies</button>
+        <button class="hud-btn hud-overflow-item" id="quest-btn" title="Quest Log" onclick="openQuestOverlay(); toggleHudOverflow(false);" data-hud-icon="quest" data-hud-label="Quests" data-hud-size="18">📜 Quests</button>
+        <button class="hud-btn hud-overflow-item" id="cooking-btn" title="Cooking (C)" onclick="openCookingUI(); toggleHudOverflow(false);" data-hud-icon="cook" data-hud-label="Cooking" data-hud-size="18">🍳 Cooking</button>
+        <button class="hud-btn hud-overflow-item" id="recipe-btn" title="Recipe Book" onclick="openRecipeBook(); toggleHudOverflow(false);" data-hud-icon="recipe" data-hud-label="Recipes" data-hud-size="18">🍱 Recipes</button>
+        <button class="hud-btn hud-overflow-item tts-only" id="tts-toggle-btn" title="Korean pronunciation" onclick="toggleTTS()" data-hud-icon="audio" data-hud-label="Audio" data-hud-size="18">🔊 Audio</button>
+        <button class="hud-btn hud-overflow-item" id="save-btn" title="Save game" onclick="saveAllGame()" data-hud-icon="save" data-hud-label="Save" data-hud-size="18">💾 Save</button>
+        <button class="hud-btn hud-overflow-item" id="progress-btn" title="Review schedule" onclick="openProgressOverlay(); toggleHudOverflow(false);" data-hud-icon="progress" data-hud-label="Progress" data-hud-size="18">📊 Progress</button>
+        <button class="hud-btn hud-overflow-item" id="leaderboard-btn" title="Leaderboard" onclick="openLeaderboard(); toggleHudOverflow(false);" data-hud-icon="ranks" data-hud-label="Ranks" data-hud-size="18">🏅 Ranks</button>
+        <button class="hud-btn hud-overflow-item" id="duel-btn" title="Spell Duel" onclick="openSpellDuel(); toggleHudOverflow(false);" data-hud-icon="duel" data-hud-label="Duel" data-hud-size="18">⚡ Duel</button>
+        <button class="hud-btn hud-overflow-item" id="fish-album-btn" title="Fish album" onclick="openFishAlbum(); toggleHudOverflow(false);" data-hud-icon="fish" data-hud-label="Fish" data-hud-size="18">🐟 Fish</button>
+        <button class="hud-btn hud-overflow-item" id="trophy-btn" title="Trophies" onclick="toggleHudOverflow(false);" data-hud-icon="trophy" data-hud-label="Trophies" data-hud-size="18">🏆 Trophies</button>
       </div>
     </div>
   </div>
@@ -741,20 +740,6 @@
     </div>
   </div>
 
-  <div id="unit-notebook-overlay">
-    <div id="unit-notebook-panel" class="glass-modal">
-      <div id="unb-head">
-        <div>
-          <div id="unb-kicker">2B Unit 10</div>
-          <div id="unb-title">10과 뭐 먹을래요?</div>
-        </div>
-        <button onclick="closeUnitNotebook()" style="background:rgba(42,26,10,0.08); border:1px solid #c4893a; color:#2a1a0a; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
-      </div>
-      <div id="unb-tabs"></div>
-      <div id="unb-body"></div>
-    </div>
-  </div>
-
   <script>
     function toggleHudOverflow(evt) {
       if (evt && evt.stopPropagation) evt.stopPropagation();
@@ -790,6 +775,7 @@
   <script src="js/systems/economy.js"></script>
   <script src="js/vocabArt.js"></script>
   <script src="js/vocabArtUnit14.js"></script>
+  <script src="js/hudArt.js"></script>
   <script src="js/data.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/systems/atmosphere.js"></script>

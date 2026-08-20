@@ -30,7 +30,6 @@ const STATIC_FILES = [
   ['worlds/2b-unit-14.json', 'application/json'],
   ['worlds/unit10-desk-quiz.json', 'application/json'],
   ['worlds/unit10-layout.json', 'application/json'],
-  ['worlds/unit10-mindmap.jpg', 'image/jpeg'],
   ['sprites/catalog.json', 'application/json'],
   ['skins/catalog.json', 'application/json'],
   ['diner/content.json', 'application/json']

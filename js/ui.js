@@ -139,8 +139,6 @@ function updateHUD() {
   const lvl = levelsData[currentLevelIndex];
   hudLevelEl.textContent = `${lvl.icon||'🌾'} ${isWorldLevel(lvl) ? (lvl.title || levelName(lvl)) : levelName(lvl)}`;
   if (typeof updateRankHUD === 'function') updateRankHUD();
-  const nbBtn = $('unit-notebook-btn');
-  if (nbBtn) nbBtn.style.display = isWorldLevel(lvl) ? '' : 'none';
   // The bar now tracks how much of the level has been learned, which persists across
   // sessions, rather than a session-local plant counter that reset every reload.
   const learnedPct = calcLevelProgress(currentLevelIndex);
@@ -298,7 +296,6 @@ function closeModalById(overlayId) {
   // Needs its own branch: this overlay is hidden by the .hidden class, and the generic
   // fallback below only clears .visible, which would leave it on screen after Escape.
   else if (overlayId === 'progress-overlay') window.closeProgressOverlay();
-  else if (overlayId === 'unit-notebook-overlay') window.closeUnitNotebook();
   else if (overlayId === 'taste-overlay') window.closeTasteGame();
   else if (overlayId === 'desk-quiz-overlay') window.closeDeskQuiz();
   else if (overlayId === 'rank-card-overlay') window.closeRankCard();
@@ -1320,27 +1317,6 @@ function showVocabFunFact(word) {
 }
 function closeVocabFunFact() { $('vocab-ff-modal').classList.remove('visible'); }
 
-function getUnitNotebook() {
-  const lvl = currentLesson();
-  return (lvl && lvl.notebook) || null;
-}
-
-function openUnitNotebook(tab) {
-  const nb = getUnitNotebook();
-  const overlay = $('unit-notebook-overlay');
-  if (!nb || !overlay) {
-    showToast('This pack has no unit notebook yet.');
-    return;
-  }
-  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  renderUnitNotebook(tab || 'map');
-  setModalState('unit-notebook-overlay', true);
-}
-function closeUnitNotebook() {
-  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  setModalState('unit-notebook-overlay', false);
-}
-
 const TASTE_LABELS = [
   { ko: '달다', en: 'sweet' },
   { ko: '짜다', en: 'salty' },
@@ -1626,155 +1602,6 @@ if (typeof window !== 'undefined') {
   window.openRankCard = openRankCard;
   window.closeRankCard = closeRankCard;
   window.closeRankUp = closeRankUp;
-}
-
-function renderUnitNotebook(tab) {
-  const nb = getUnitNotebook();
-  const lvl = currentLesson();
-  if (!nb) return;
-  const titleEl = $('unb-title');
-  const kickerEl = $('unb-kicker');
-  if (kickerEl) kickerEl.textContent = (lvl && (lvl.title || '2B Unit 10')) + (lvl && lvl.source ? ` · ${lvl.pages || 'pp. 24–27'}` : '');
-  if (titleEl) titleEl.textContent = (lvl && (lvl.titleKo || levelNameKo(lvl))) || '뭐 먹을래요?';
-  const tabs = [
-    { id: 'map', label: '지도 Mind map' },
-    { id: 'words', label: '단어 Words' }
-  ];
-  const tabBar = $('unb-tabs');
-  if (tabBar) {
-    tabBar.innerHTML = '';
-    tabs.forEach(t => {
-      const b = document.createElement('button');
-      b.className = 'unb-tab' + (t.id === tab ? ' active' : '');
-      b.textContent = t.label;
-      b.onclick = () => renderUnitNotebook(t.id);
-      tabBar.appendChild(b);
-    });
-  }
-  const body = $('unb-body');
-  if (!body) return;
-  if (tab === 'map' || tab === 'warmup' || tab === 'goals') {
-    const groups = {};
-    (lvl.words || []).forEach(w => {
-      const key = w.categoryEn || w.category || 'Other';
-      if (!groups[key]) groups[key] = { ko: w.category || key, en: w.categoryEn || key, words: [] };
-      groups[key].words.push(w);
-    });
-    const cards = Object.values(groups).map(g =>
-      `<div class="unb-cluster"><div class="unb-h">${g.ko} <span>${g.en} · ${g.words.length}</span></div>` +
-      g.words.map(w => `<span class="unb-chip">${w.hint || ''} ${w.ko}</span>`).join(' ') +
-      `</div>`
-    ).join('');
-    body.innerHTML = `<div class="unb-lead">10과 뭐 먹을래? — ${ (lvl.words||[]).length } words in six groups. Plant them on the farm.</div>
-      <img src="/worlds/unit10-mindmap.jpg" alt="Unit 10 mind map" style="width:100%;border-radius:12px;border:2px solid #8b5a2b;margin:8px 0 12px">
-      <div class="unb-map">${cards}</div>
-      <button class="unb-cta" onclick="closeUnitNotebook()">Go plant →</button>`;
-  } else if (tab === 'words') {
-    const rows = (lvl.words || []).map(w =>
-      `<div class="unb-q"><div class="unb-ko">${w.hint || ''} ${w.ko}</div><div class="unb-en">${w.en} · ${w.categoryEn || w.category}</div></div>`
-    ).join('');
-    body.innerHTML = rows;
-  } else if (false && tab === 'warmup') {
-    const qs = (nb.warmup && nb.warmup.questions) || [];
-    body.innerHTML = `<div class="unb-lead">Look at the unit picture, then answer in Korean if you can.</div>` +
-      qs.map(q => `<div class="unb-q"><div class="unb-ko">${q.ko}</div><div class="unb-en">${q.en}</div></div>`).join('') +
-      `<button class="unb-cta" onclick="renderUnitNotebook('goals')">Next: learning goals →</button>`;
-  } else if (tab === 'goals') {
-    const g = nb.goals || {};
-    const row = (items, heading) => `<div class="unb-h">${heading}</div>` + (items || []).map(it =>
-      `<div class="unb-goal ${it.ready === false ? 'soon' : ''}"><b>${it.ko}</b> <span>${it.en}</span>${it.ready === false ? ' <em>later pages</em>' : ''}</div>`
-    ).join('');
-    body.innerHTML = row(g.vocab, '어휘 Vocabulary') + row(g.grammar, '문법 Grammar') + row(g.tasks, '과제 Tasks') +
-      `<div class="unb-note">This world only uses pp. 24–27. Later pages will add 아/어 보다, -잖아요, and ordering food.</div>
-       <button class="unb-cta" onclick="closeUnitNotebook()">Plant these words on the farm →</button>`;
-  } else if (tab === 'speak') {
-    const s = nb.speaking || {};
-    const model = (s.model || []).map(m =>
-      `<div class="unb-line"><span class="unb-who">${m.who}</span><div><div class="unb-ko">${m.ko}</div><div class="unb-en">${m.en}</div></div></div>`
-    ).join('');
-    const crit = (s.criteria || []).map((c, i) =>
-      `<button type="button" class="unb-chip" data-i="${i}" data-side="pos">${c.ko}: ${c.pos}</button>` +
-      `<button type="button" class="unb-chip dim" data-i="${i}" data-side="neg">${c.ko}: ${c.neg}</button>`
-    ).join('');
-    body.innerHTML = `<div class="unb-h">${s.title || '말하기'} <span>${s.titleEn || ''}</span></div>
-      <div class="unb-dialog">${model}</div>
-      <div class="unb-h">Make a sentence</div>
-      <label class="unb-label">Restaurant name
-        <input id="unb-rest-name" value="서울식당" maxlength="20">
-      </label>
-      <div class="unb-lead">Tap two points (one “but” contrast, like the model: expensive <i>but</i> nice atmosphere).</div>
-      <div id="unb-chips" class="unb-chips">${crit}</div>
-      <div id="unb-built" class="unb-built">제가 자주 가는 식당은 서울식당인데 …</div>
-      <button class="unb-cta tts-only" id="unb-speak-line">🔊 Hear my sentence</button>`;
-    const chosen = [];
-    const chips = body.querySelector('#unb-chips');
-    const built = body.querySelector('#unb-built');
-    const nameIn = body.querySelector('#unb-rest-name');
-    const rebuild = () => {
-      const name = (nameIn && nameIn.value.trim()) || '서울식당';
-      if (chosen.length < 2) {
-        built.textContent = `제가 자주 가는 식당은 ${name}인데 …`;
-        return;
-      }
-      const a = s.criteria[chosen[0].i][chosen[0].side];
-      const b = s.criteria[chosen[1].i][chosen[1].side];
-      built.textContent = `제가 자주 가는 식당은 ${name}인데 ${a}지만 ${b}.`;
-    };
-    if (chips) chips.addEventListener('click', (ev) => {
-      const btn = ev.target.closest('.unb-chip');
-      if (!btn) return;
-      const i = Number(btn.getAttribute('data-i'));
-      const side = btn.getAttribute('data-side');
-      const same = chosen.findIndex(c => c.i === i);
-      if (same >= 0) chosen.splice(same, 1);
-      chosen.push({ i, side });
-      if (chosen.length > 2) chosen.shift();
-      chips.querySelectorAll('.unb-chip').forEach(el => el.classList.remove('picked'));
-      chosen.forEach(c => {
-        const el = chips.querySelector(`.unb-chip[data-i="${c.i}"][data-side="${c.side}"]`);
-        if (el) el.classList.add('picked');
-      });
-      rebuild();
-    });
-    if (nameIn) nameIn.addEventListener('input', rebuild);
-    const hear = body.querySelector('#unb-speak-line');
-    if (hear) hear.onclick = () => { if (typeof speakKorean === 'function') speakKorean(built.textContent); };
-  } else if (tab === 'grammar') {
-    const g = nb.grammar || {};
-    const dlg = (g.dialogue || []).map(m =>
-      `<div class="unb-line"><span class="unb-who">${m.who}</span><div><div class="unb-ko">${m.ko}</div><div class="unb-en">${m.en}</div></div></div>`
-    ).join('');
-    const prac = (g.practice || []).map(p =>
-      `<div class="unb-q"><div class="unb-ko">${p.ko}</div><div class="unb-en">${p.en}</div></div>`
-    ).join('');
-    const drill = g.drill || {};
-    const opts = (drill.options || []).map(o => `<button type="button" class="unb-opt" data-v="${o}">${o}</button>`).join('');
-    body.innerHTML = `<div class="unb-h">${g.form || 'N 중에(서)'}</div>
-      <p class="unb-lead">${g.meaningKo || ''} ${g.meaning || ''}</p>
-      <div class="unb-dialog">${dlg}</div>
-      <div class="unb-h">연습</div>${prac}
-      <div class="unb-h">Fill in</div>
-      <div class="unb-ko">${(drill.prompt || '').replace('_____', '<span class="unb-blank">____</span>')}</div>
-      <div id="unb-opts" class="unb-chips">${opts}</div>
-      <div id="unb-drill-fb" class="unb-lead"></div>`;
-    const box = body.querySelector('#unb-opts');
-    const fb = body.querySelector('#unb-drill-fb');
-    if (box) box.addEventListener('click', (ev) => {
-      const btn = ev.target.closest('.unb-opt');
-      if (!btn) return;
-      const ok = btn.getAttribute('data-v') === drill.answer;
-      fb.textContent = ok ? '맞아요! 중에서 marks the set you choose from.' : 'Again — we need the particle that means “among”.'
-      fb.style.color = ok ? '#166534' : '#9f1239';
-      if (ok && typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_correct');
-      else if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
-    });
-  }
-}
-
-if (typeof window !== 'undefined') {
-  window.openUnitNotebook = openUnitNotebook;
-  window.closeUnitNotebook = closeUnitNotebook;
-  window.renderUnitNotebook = renderUnitNotebook;
 }
 
 function renderVocabCards() {

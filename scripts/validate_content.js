@@ -181,6 +181,13 @@ check('vocab book cards use vocabIconHtml',
   /vc-emoji[\s\S]{0,120}vocabIconHtml|vocabIconHtml\([\s\S]{0,40}vc-emoji/.test(gameJs)
   && gameJs.indexOf("vocabIconHtml(w.ko") >= 0);
 check('vocab fun-fact uses vocabIconHtml', gameJs.indexOf("vocabIconHtml(word.ko") >= 0);
+check('HUD paints catalogued farm icons', gameJs.indexOf('function hudIconHtml') >= 0 && gameJs.indexOf('function paintHudIcons') >= 0);
+check('HUD art folder is ui', gameJs.indexOf("HUD_ART_FOLDER = 'ui'") >= 0);
+check('Mindmap / Words notebook is gone',
+  gameJs.indexOf('function renderUnitNotebook') < 0
+  && gameJs.indexOf('openUnitNotebook') < 0
+  && html.indexOf('unit-notebook') < 0
+  && html.indexOf('unit10-mindmap') < 0);
 check('shipped source has no Hangul romanizer', gameJs.indexOf('getHangulRomanization') < 0 && gameJs.indexOf('function getRoman(') < 0);
 const scriptSrcs = [...html.matchAll(/<script\b[^>]*\bsrc="(js\/[^"]+)"[^>]*><\/script>/gi)].map((m) => m[1]);
 check('index.html script tags match js/manifest.json',
@@ -209,7 +216,7 @@ check('index.html script tags match js/manifest.json',
 const overlayIds = [
   'inventory-overlay', 'cooking-overlay', 'leaderboard-overlay',
   'recipe-overlay', 'quest-overlay', 'shop-overlay', 'vocab-overlay',
-  'unit-notebook-overlay', 'taste-overlay', 'desk-quiz-overlay',
+  'taste-overlay', 'desk-quiz-overlay',
   'rank-card-overlay', 'rankup-overlay'
 ];
 (function checkOverlayNesting() {
@@ -412,6 +419,10 @@ function pngSize(rel) {
   const orphans = onDisk.filter((p) => !catalogPaths.has(p));
   check('every PNG is in the art catalog', orphans.length === 0, orphans.slice(0, 8).join(', '));
   check('shipped source has the valley-farmer folder', gameJs.indexOf('characters/valley-farmer') >= 0);
+  const hud = (pack.assets || []).filter((a) => a && a.kind === 'ui' && a.family === 'hud-icons' && a.status === 'shipped');
+  check('HUD icon family has 19 shipped glyphs', hud.length === 19, String(hud.length));
+  check('index HUD uses data-hud-icon',
+    html.indexOf('data-hud-icon="vocab"') >= 0 && html.indexOf('data-hud-icon="coin"') >= 0);
 }());
 
 (function checkUnit10StationAabb() {

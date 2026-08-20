@@ -82,7 +82,9 @@ function updateRankHUD() {
   const lv = document.getElementById('hud-rank-lv');
   const fill = document.getElementById('hud-rank-fill');
   const chip = document.getElementById('hud-rank');
-  if (icon) icon.textContent = t.icon;
+  if (icon && !(typeof icon.getAttribute === 'function' && icon.getAttribute('data-hud-icon'))) {
+    icon.textContent = t.icon;
+  }
   if (lv) lv.textContent = 'Lv.' + playerRank.level;
   if (fill) fill.style.width = pct + '%';
   if (chip) chip.title = t.ko + ' · ' + t.en + ' · ' + playerRank.xp + '/' + need + ' EXP';
