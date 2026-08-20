@@ -1098,27 +1098,43 @@ class FarmScene extends Phaser.Scene {
     // Micro World Details: Stone Well & Water Sparkles (Widened Placement)
     const wellX = this.farm.x - 190;
     const wellY = this.farm.y + this.farm.h + 85;
-    const wellSprite = this.add.image(wellX, wellY, 'stone_well').setOrigin(0.5, 1).setScale(1.1).setDepth(wellY);
-    if (this.shadows) this.shadows.createShadow(wellSprite, 44, 14, 1);
-    // Water sparkles inside well
+    const wellTex = this._propTex('stone_well_hd', 'stone_well');
+    const wellHd = wellTex.indexOf('_hd') >= 0;
+    const wellSprite = this.add.image(wellX, wellY, wellTex)
+      .setOrigin(0.5, 1).setScale(wellHd ? 1 : 1.1).setDepth(wellY);
+    if (wellHd && wellSprite.texture) wellSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(wellSprite, wellHd ? 56 : 44, wellHd ? 16 : 14, 1);
+    const waterY = wellY - (wellHd ? Math.round((wellSprite.displayHeight || 80) * 0.38) : 12);
     for(let i=0; i<4; i++){
-      const sp = this.add.circle(wellX + (Math.random()-0.5)*18, wellY - 12 + (Math.random()-0.5)*12, 1.5, 0x67E8F9, 0.9).setDepth(wellY+1);
+      const sp = this.add.circle(wellX + (Math.random()-0.5)*18, waterY + (Math.random()-0.5)*12, 1.5, 0x67E8F9, 0.9).setDepth(wellY+1);
       this.tweens.add({ targets: sp, alpha: 0.2, scale: 1.8, duration: 800 + i*300, yoyo: true, repeat: -1 });
     }
 
-    // Micro World Details: Barrels & Crates next to Shop
+    // Micro World Details: Barrels & Crates next to Shop (kitchen yard on Unit 10)
     const bxl = sx + 28, byl = sy - 10;
-    const barrelSprite = this.add.image(bxl, byl, 'pixel_barrel').setOrigin(0.5, 1).setScale(0.9).setDepth(byl);
-    const crateSprite = this.add.image(bxl + 18, byl + 6, 'pixel_crate').setOrigin(0.5, 1).setScale(0.9).setDepth(byl+6);
+    const barrelTex = this._propTex('oak_barrel_hd', 'pixel_barrel');
+    const crateTex = this._propTex('wooden_crate_hd', 'pixel_crate');
+    const barrelHd = barrelTex.indexOf('_hd') >= 0;
+    const crateHd = crateTex.indexOf('_hd') >= 0;
+    const barrelSprite = this.add.image(bxl, byl, barrelTex)
+      .setOrigin(0.5, 1).setScale(barrelHd ? 1 : 0.9).setDepth(byl);
+    const crateSprite = this.add.image(bxl + (crateHd ? 44 : 18), byl + 6, crateTex)
+      .setOrigin(0.5, 1).setScale(crateHd ? 1 : 0.9).setDepth(byl+6);
+    if (barrelHd && barrelSprite.texture) barrelSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (crateHd && crateSprite.texture) crateSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (this.shadows) {
-      this.shadows.createShadow(barrelSprite, 18, 6, 0);
-      this.shadows.createShadow(crateSprite, 20, 6, 0);
+      this.shadows.createShadow(barrelSprite, barrelHd ? 36 : 18, barrelHd ? 12 : 6, 0);
+      this.shadows.createShadow(crateSprite, crateHd ? 40 : 20, crateHd ? 12 : 6, 0);
     }
 
     // Micro World Details: Directional Signpost
     const spX = bx - 60, spY = by + 20;
-    const signpostSprite = this.add.image(spX, spY, 'signpost').setOrigin(0.5, 1).setScale(1.1).setDepth(spY);
-    if (this.shadows) this.shadows.createShadow(signpostSprite, 18, 6, 0);
+    const signTex = this._propTex('wooden_signpost_hd', 'signpost');
+    const signHd = signTex.indexOf('_hd') >= 0;
+    const signpostSprite = this.add.image(spX, spY, signTex)
+      .setOrigin(0.5, 1).setScale(signHd ? 1 : 1.1).setDepth(spY);
+    if (signHd && signpostSprite.texture) signpostSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(signpostSprite, signHd ? 40 : 18, signHd ? 10 : 6, 0);
 
     // R3: Perimeter Fences & Decorative Animated Fence Flowers
     const fenceY = this.farm.y - 12;
@@ -1145,22 +1161,39 @@ class FarmScene extends Phaser.Scene {
       postIdx++;
       return flower;
     };
+    const postTex = this._propTex('oak_fence_post_hd', 'fnc_post');
+    const railTex = this._propTex('oak_fence_rail_hd', 'fnc_rail');
+    const hdPost = postTex.indexOf('_hd') >= 0;
+    const hdRail = railTex.indexOf('_hd') >= 0;
+    const bloomLift = hdPost ? 28 : 10;
+    const railLift = hdPost ? 18 : 4;
+    const placePost = (x, y) => {
+      const post = this.add.image(x, y, postTex)
+        .setOrigin(0.5, 1).setScale(hdPost ? 1 : 1.1).setDepth(y);
+      if (hdPost && post.texture) post.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      if (this.shadows) this.shadows.createShadow(post, hdPost ? 12 : 14, 5, 0);
+      return post;
+    };
+    const placeRail = (x, y, depth) => {
+      const rail = this.add.image(x, y, railTex).setOrigin(0.5, 0.5).setDepth(depth);
+      if (hdRail) rail.setDisplaySize(28, 10);
+      else rail.setDisplaySize(28, 8);
+      if (hdRail && rail.texture) rail.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      return rail;
+    };
     for (let fx = this.farm.x; fx <= this.farm.x + this.farm.w; fx += 28) {
-      this.add.image(fx + 14, fenceY - 4, 'fnc_rail').setDisplaySize(28, 8).setDepth(fenceY - 1);
-      const post = this.add.image(fx, fenceY, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fenceY);
-      if (this.shadows) this.shadows.createShadow(post, 14, 5, 0);
-      placeFenceBloom(fx + (postIdx % 2 === 0 ? -2 : 2), fenceY - 10, fenceY + 2);
+      placeRail(fx + 14, fenceY - railLift, fenceY - 1);
+      placePost(fx, fenceY);
+      placeFenceBloom(fx + (postIdx % 2 === 0 ? -2 : 2), fenceY - bloomLift, fenceY + 2);
     }
 
     // Side perimeter fence posts with decorative animated flowers
     for (let fy = fenceY + 28; fy <= this.farm.y + this.farm.h + 10; fy += 28) {
-      const postL = this.add.image(this.farm.x, fy, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fy);
-      if (this.shadows) this.shadows.createShadow(postL, 14, 5, 0);
-      placeFenceBloom(this.farm.x - 2, fy - 10, fy + 2);
+      placePost(this.farm.x, fy);
+      placeFenceBloom(this.farm.x - 2, fy - bloomLift, fy + 2);
 
-      const postR = this.add.image(this.farm.x + this.farm.w, fy, 'fnc_post').setOrigin(0.5, 1).setScale(1.1).setDepth(fy);
-      if (this.shadows) this.shadows.createShadow(postR, 14, 5, 0);
-      placeFenceBloom(this.farm.x + this.farm.w + 2, fy - 10, fy + 2);
+      placePost(this.farm.x + this.farm.w, fy);
+      placeFenceBloom(this.farm.x + this.farm.w + 2, fy - bloomLift, fy + 2);
     }
 
     // Micro Animated Fauna: Fluttering Butterflies
@@ -1176,7 +1209,7 @@ class FarmScene extends Phaser.Scene {
 
     this._createPollenDrift(W, H);
     this._createFireflies(W, H);
-    this._wellLightPos = { x: wellX, y: wellY - 18 };
+    this._wellLightPos = { x: wellX, y: wellY - (wellHd ? 40 : 18) };
     this._shopLightPos = { x: sx, y: sy - 20 };
   }
 
@@ -2085,7 +2118,7 @@ class FarmScene extends Phaser.Scene {
       let lockText = null;
       if(!active){
         tile.setAlpha(0.35).setTint(0x666666);
-        lockIcon = this.add.image(px, py - 4, 'pixel_crate').setDisplaySize(24, 24).setAlpha(0.7).setDepth(3);
+        lockIcon = this.add.image(px, py - 4, this._propTex('wooden_crate_hd', 'pixel_crate')).setDisplaySize(24, 24).setAlpha(0.7).setDepth(3);
         lockText = this.add.text(px, py, '🔒', { fontSize: '18px' }).setOrigin(0.5).setDepth(4);
       } else {
         tile.setAlpha(1.0).clearTint();
@@ -2434,6 +2467,10 @@ class FarmScene extends Phaser.Scene {
   _isUnit10(){
     return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10';
   }
+  _propTex(hdKey, fallback) {
+    if (hdKey && this.textures && this.textures.exists(hdKey)) return hdKey;
+    return fallback;
+  }
 
   // ── UNIT 10: stations sit on grass south/east of the farm rect; pond hidden; portal hidden ──
   syncUnit10World(){
@@ -2564,7 +2601,14 @@ class FarmScene extends Phaser.Scene {
     if (!base) return;
     const glow = this.add.circle(base.x - 26, base.y - base.spr.displayHeight * 0.63, 8, 0xFDE047, 0.22).setDepth(base.y + 8);
     this.tweens.add({ targets: glow, alpha: { from: 0.22, to: 0.75 }, scale: { from: 0.8, to: 1.4 }, duration: 700, yoyo: true, repeat: -1 });
-    this.studyDesk = Object.assign(base, { glow });
+    let stool = null;
+    if (this.textures.exists('wooden_stool_hd')) {
+      stool = this.add.image(base.x - 56, base.y, 'wooden_stool_hd')
+        .setOrigin(0.5, 1).setDepth(base.y + 5);
+      stool.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      if (this.shadows) this.shadows.createShadow(stool, 32, 10, 1);
+    }
+    this.studyDesk = Object.assign(base, { glow, stool });
   }
 
   _ensureKitchen(){
@@ -2599,7 +2643,7 @@ class FarmScene extends Phaser.Scene {
 
   _teardownStudyDesk(){
     if (!this.studyDesk) return;
-    ['spr', 'glow', 'label'].forEach(k => {
+    ['spr', 'glow', 'label', 'stool'].forEach(k => {
       const s = this.studyDesk[k];
       if (s && s.destroy) s.destroy();
     });

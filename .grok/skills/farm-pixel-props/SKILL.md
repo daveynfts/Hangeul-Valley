@@ -45,6 +45,9 @@ Height classes — pass `--height` to `process_prop.py` (default 156). Do not fa
 | `landmark` | 180 | apple tree and similar |
 | `character` | 80 | farm walk frames (`sprites/characters/<slug>/`) |
 | `item` | 48 | food / vocab still-icons (`sprites/foods/`, `sprites/items/`) |
+| `well` | 80 | stone well |
+| `fence-post` | 40 | perimeter posts under fence blooms |
+| `fence-rail` | 10 | horizontal rail between posts |
 
 Naming lives in `sprites/catalog.json` (id, real-world `nameEn`, `path`, Phaser key, status). Paths are taxonomy folders, not flat dumps:
 
