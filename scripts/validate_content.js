@@ -251,6 +251,58 @@ const overlayIds = [
     String(world.costumeSkinId));
 }());
 
+(function checkUnit14World() {
+  const rel = path.join('worlds', '2b-unit-14.json');
+  const full = path.join(ROOT, rel);
+  if (!check(`${rel} exists`, fs.existsSync(full))) return;
+  let world;
+  try { world = JSON.parse(fs.readFileSync(full, 'utf8')); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('2B Unit 14 has an id and a level', !!(world.id === '2b-unit-14' && world.level && Array.isArray(world.level.words)));
+  const ww = (world.level && world.level.words) || [];
+  const missing = ww.filter((w) => !w.ko || !w.en || !w.category || !w.categoryEn).map((w) => w.ko || '?');
+  check('2B Unit 14 words have ko / en / category / categoryEn', missing.length === 0, missing.slice(0, 5).join(', '));
+  check('2B Unit 14 has 54 textbook headwords', ww.length === 54, `found ${ww.length}`);
+  const cats = new Set(ww.map((w) => w.categoryEn));
+  const want = [
+    'Etiquette & respect for seniors',
+    'Public etiquette & prohibitions',
+    'Real-life dialogues',
+    'Listening & dormitory rules',
+    'Reading & culture'
+  ];
+  check('2B Unit 14 has five vocab groups', want.every((c) => cats.has(c)), [...cats].join(', '));
+  const keepKo = ww.some((w) => w.ko === '높임말[존댓말]을 하다') && ww.some((w) => w.ko === '야단(을) 맞다');
+  check('2B Unit 14 keeps OBJECTIVE Korean forms', keepKo);
+  const pack = JSON.parse(read(path.join('sprites', 'catalog.json')));
+  const byKo = {};
+  (pack.assets || []).forEach((a) => { if (a && a.wordKo) byKo[a.wordKo] = a; });
+  const artMiss = [];
+  ww.forEach((w) => {
+    const a = byKo[w.ko];
+    if (!a || !a.id || !a.nameEn || !a.path) { artMiss.push(w.ko); return; }
+    const pngRel = path.join('sprites', String(a.path).replace(/\\/g, '/'));
+    if (!fs.existsSync(path.join(ROOT, pngRel))) artMiss.push(w.ko + ' png');
+  });
+  check('every Unit 14 headword has catalogued PNG', artMiss.length === 0, artMiss.slice(0, 12).join(', '));
+}());
+
+(function checkUnit14FarmOnly() {
+  const gameJs = readGameSource();
+  check('textbook load path lists Unit 14 JSON', gameJs.indexOf('worlds/2b-unit-14.json') >= 0);
+  check('farm preload cache key world-2b-14', gameJs.indexOf("world-2b-14") >= 0);
+  check('isUnit10World stays Unit-10-only',
+    /function isUnit10World\(\)[\s\S]{0,180}worldId === '2b-unit-10'/.test(gameJs));
+  check('isUnit14World is declared', gameJs.indexOf('function isUnit14World') >= 0);
+  check('desk/kitchen/taste spawn only when _isUnit10',
+    /if \(unit10\) \{[\s\S]{0,160}_ensureTasteStation[\s\S]{0,80}_ensureStudyDesk[\s\S]{0,80}_ensureKitchen/.test(gameJs)
+    || /if \(this\._isUnit10\(\)\) \{[\s\S]{0,160}_ensureTasteStation/.test(gameJs));
+  const interact = gameJs.match(/_interact\(\)\{[\s\S]{0,900}openTasteGame/);
+  check('taste interact remains Unit-10-gated', !!(interact && interact[0].indexOf('_isUnit10()') >= 0));
+  check('cooking recipes still Unit-10-gated',
+    /isUnit10World\(\)[\s\S]{0,80}UNIT10_COOKING_RECIPES/.test(gameJs));
+}());
+
 // ── Unit 10 desk quiz ────────────────────────────────────────────────────────
 (function checkDeskQuizBank() {
   const rel = path.join('worlds', 'unit10-desk-quiz.json');

@@ -27,6 +27,7 @@ const STATIC_FILES = [
   ['levels.json', 'application/json'],
   ['facts.json', 'application/json'],
   ['worlds/2b-unit-10.json', 'application/json'],
+  ['worlds/2b-unit-14.json', 'application/json'],
   ['worlds/unit10-desk-quiz.json', 'application/json'],
   ['worlds/unit10-layout.json', 'application/json'],
   ['worlds/unit10-mindmap.jpg', 'image/jpeg'],

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260820e",
+  "cacheKey": "art-20260820f",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -2393,6 +2393,924 @@
       ],
       "wordKo": "생강",
       "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.speak_banmal",
+      "nameEn": "Speaking banmal",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/speak_banmal.png",
+      "phaserKey": "speak_banmal_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "반말을 하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.speak_honorific",
+      "nameEn": "Speaking honorifics",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/speak_honorific.png",
+      "phaserKey": "speak_honorific_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "높임말[존댓말]을 하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.call_by_name",
+      "nameEn": "Calling someone by name",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/call_by_name.png",
+      "phaserKey": "call_by_name_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "이름을 부르다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.receive_one_hand",
+      "nameEn": "Receiving with one hand",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/receive_one_hand.png",
+      "phaserKey": "receive_one_hand_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "한 손으로 받다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.give_two_hands",
+      "nameEn": "Giving with both hands",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/give_two_hands.png",
+      "phaserKey": "give_two_hands_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "두 손으로 드리다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.yield_seat",
+      "nameEn": "Yielding a seat",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/yield_seat.png",
+      "phaserKey": "yield_seat_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "자리를 양보하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.sit_cross_legged",
+      "nameEn": "Sitting with legs crossed",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/sit_cross_legged.png",
+      "phaserKey": "sit_cross_legged_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "다리를 꼬고 앉다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.turn_head_drink",
+      "nameEn": "Turning the head while drinking",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/turn_head_drink.png",
+      "phaserKey": "turn_head_drink_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "고개를 돌리고 마시다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.bow_greeting",
+      "nameEn": "Bowing in greeting",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/bow_greeting.png",
+      "phaserKey": "bow_greeting_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "고개를 숙여서 인사하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.get_scolded",
+      "nameEn": "Getting scolded",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/get_scolded.png",
+      "phaserKey": "get_scolded_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "야단(을) 맞다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.no_smoking",
+      "nameEn": "No smoking",
+      "kind": "item",
+      "family": "sign",
+      "role": "icon",
+      "path": "items/no_smoking.png",
+      "phaserKey": "no_smoking_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.no_smoking",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "금연",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.no_parking",
+      "nameEn": "No parking",
+      "kind": "item",
+      "family": "sign",
+      "role": "icon",
+      "path": "items/no_parking.png",
+      "phaserKey": "no_parking_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.no_smoking",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "주차 금지",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.no_photography",
+      "nameEn": "No photographs",
+      "kind": "item",
+      "family": "sign",
+      "role": "icon",
+      "path": "items/no_photography.png",
+      "phaserKey": "no_photography_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.no_smoking",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "사진 촬영 금지",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.no_food_or_drinks",
+      "nameEn": "No food or drinks",
+      "kind": "item",
+      "family": "sign",
+      "role": "icon",
+      "path": "items/no_food_or_drinks.png",
+      "phaserKey": "no_food_or_drinks_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.no_smoking",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "음식물 반입 금지",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.no_cell_phones",
+      "nameEn": "No cell phones",
+      "kind": "item",
+      "family": "sign",
+      "role": "icon",
+      "path": "items/no_cell_phones.png",
+      "phaserKey": "no_cell_phones_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.no_smoking",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "휴대 전화 사용 금지",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.eat_food",
+      "nameEn": "Eating food",
+      "kind": "item",
+      "family": "action",
+      "role": "icon",
+      "path": "items/eat_food.png",
+      "phaserKey": "eat_food_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.eat_food",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "음식물을 먹다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.make_phone_call",
+      "nameEn": "Making a phone call",
+      "kind": "item",
+      "family": "action",
+      "role": "icon",
+      "path": "items/make_phone_call.png",
+      "phaserKey": "make_phone_call_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.eat_food",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "전화를 하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.make_noise",
+      "nameEn": "Making noise",
+      "kind": "item",
+      "family": "action",
+      "role": "icon",
+      "path": "items/make_noise.png",
+      "phaserKey": "make_noise_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.eat_food",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "시끄럽게 하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.swap_seats",
+      "nameEn": "Swapping seats",
+      "kind": "item",
+      "family": "action",
+      "role": "icon",
+      "path": "items/swap_seats.png",
+      "phaserKey": "swap_seats_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.eat_food",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "자리를 바꾸다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.go_outside",
+      "nameEn": "Going outside",
+      "kind": "item",
+      "family": "action",
+      "role": "icon",
+      "path": "items/go_outside.png",
+      "phaserKey": "go_outside_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.eat_food",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "밖으로 나가다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.turn_off_phone",
+      "nameEn": "Turning off a cell phone",
+      "kind": "item",
+      "family": "action",
+      "role": "icon",
+      "path": "items/turn_off_phone.png",
+      "phaserKey": "turn_off_phone_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.eat_food",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "휴대전화를 끄다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.make_mistake",
+      "nameEn": "Making a mistake",
+      "kind": "item",
+      "family": "emotion",
+      "role": "icon",
+      "path": "items/make_mistake.png",
+      "phaserKey": "make_mistake_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.feel_embarrassed",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "실수하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.feel_embarrassed",
+      "nameEn": "Feeling embarrassed",
+      "kind": "item",
+      "family": "emotion",
+      "role": "icon",
+      "path": "items/feel_embarrassed.png",
+      "phaserKey": "feel_embarrassed_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.feel_embarrassed",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "창피하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.feel_awkward",
+      "nameEn": "Feeling awkward",
+      "kind": "item",
+      "family": "emotion",
+      "role": "icon",
+      "path": "items/feel_awkward.png",
+      "phaserKey": "feel_awkward_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.feel_embarrassed",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "어색하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.doctor",
+      "nameEn": "Doctor (honorific)",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/doctor.png",
+      "phaserKey": "doctor_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.elderly",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "의사 선생님",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.first_meeting",
+      "nameEn": "A person met for the first time",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/first_meeting.png",
+      "phaserKey": "first_meeting_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.elderly",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "처음 만난 사람",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.of_course",
+      "nameEn": "Of course",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/of_course.png",
+      "phaserKey": "of_course_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "물론이지",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.forget",
+      "nameEn": "Forgetting",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/forget.png",
+      "phaserKey": "forget_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "잊어버리다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.complicated",
+      "nameEn": "Being complicated",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/complicated.png",
+      "phaserKey": "complicated_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "복잡하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.our_country",
+      "nameEn": "Our country",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/our_country.png",
+      "phaserKey": "our_country_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.cafeteria",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "우리나라",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.similar",
+      "nameEn": "Being similar",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/similar.png",
+      "phaserKey": "similar_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "비슷하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.different",
+      "nameEn": "Being different",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/different.png",
+      "phaserKey": "different_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "다르다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.neighboring_country",
+      "nameEn": "A neighboring country",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/neighboring_country.png",
+      "phaserKey": "neighboring_country_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.cafeteria",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "가까운 나라",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.be_late",
+      "nameEn": "Arriving late",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/be_late.png",
+      "phaserKey": "be_late_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "지각하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.performance",
+      "nameEn": "Performance / concert",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/performance.png",
+      "phaserKey": "performance_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.cafeteria",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "공연",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.to_begin",
+      "nameEn": "To begin",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/to_begin.png",
+      "phaserKey": "to_begin_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "시작되다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.announcement",
+      "nameEn": "Announcement",
+      "kind": "item",
+      "family": "sign",
+      "role": "icon",
+      "path": "items/announcement.png",
+      "phaserKey": "announcement_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.no_smoking",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "안내 방송",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.keep_rules",
+      "nameEn": "Keeping the rules",
+      "kind": "item",
+      "family": "sign",
+      "role": "icon",
+      "path": "items/keep_rules.png",
+      "phaserKey": "keep_rules_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.no_smoking",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "지키다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.break_rules",
+      "nameEn": "Breaking the rules",
+      "kind": "item",
+      "family": "sign",
+      "role": "icon",
+      "path": "items/break_rules.png",
+      "phaserKey": "break_rules_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.no_smoking",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "어기다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.dorm_rules",
+      "nameEn": "Dormitory rules",
+      "kind": "item",
+      "family": "sign",
+      "role": "icon",
+      "path": "items/dorm_rules.png",
+      "phaserKey": "dorm_rules_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.no_smoking",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "기숙사 규칙",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.public_etiquette",
+      "nameEn": "Public etiquette",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/public_etiquette.png",
+      "phaserKey": "public_etiquette_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "공중도덕",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.cafeteria",
+      "nameEn": "Cafeteria",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/cafeteria.png",
+      "phaserKey": "cafeteria_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.cafeteria",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "식당",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.sports_facility",
+      "nameEn": "Sports facility",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/sports_facility.png",
+      "phaserKey": "sports_facility_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.cafeteria",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "운동 시설",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.use_for_free",
+      "nameEn": "Using for free",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/use_for_free.png",
+      "phaserKey": "use_for_free_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "무료로 이용하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.cultural_difference",
+      "nameEn": "Cultural differences",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/cultural_difference.png",
+      "phaserKey": "cultural_difference_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "문화 차이",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.feel_flustered",
+      "nameEn": "Feeling flustered",
+      "kind": "item",
+      "family": "emotion",
+      "role": "icon",
+      "path": "items/feel_flustered.png",
+      "phaserKey": "feel_flustered_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.feel_embarrassed",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "당황하다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.give_left_hand",
+      "nameEn": "Giving with the left hand",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/give_left_hand.png",
+      "phaserKey": "give_left_hand_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "왼손으로 물건을 주다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.touch_head",
+      "nameEn": "Touching someone's head",
+      "kind": "item",
+      "family": "etiquette",
+      "role": "icon",
+      "path": "items/touch_head.png",
+      "phaserKey": "touch_head_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.give_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "머리를 만지다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.senior_preference",
+      "nameEn": "Senior-citizen preference",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/senior_preference.png",
+      "phaserKey": "senior_preference_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.elderly",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "경로 우대",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.elderly",
+      "nameEn": "The elderly",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/elderly.png",
+      "phaserKey": "elderly_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.elderly",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "노인",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.disabled_person",
+      "nameEn": "A person with physical difficulties",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/disabled_person.png",
+      "phaserKey": "disabled_person_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.elderly",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "몸이 불편한 사람",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.be_empty",
+      "nameEn": "Being empty / unoccupied",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/be_empty.png",
+      "phaserKey": "be_empty_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.cafeteria",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "비어 있다",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.admission_discount",
+      "nameEn": "Admission-fee discount",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/admission_discount.png",
+      "phaserKey": "admission_discount_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "입장료 할인",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.system_policy",
+      "nameEn": "System / policy",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/system_policy.png",
+      "phaserKey": "system_policy_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.keep_rules",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "wordKo": "제도",
+      "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
     }
   ]
 }
