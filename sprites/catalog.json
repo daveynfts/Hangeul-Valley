@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260820d",
+  "cacheKey": "art-20260820e",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -224,12 +224,15 @@
       "family": "wooden-stool",
       "role": "prop",
       "path": "furniture/wooden_stool.png",
-      "phaserKey": null,
-      "status": "unused",
+      "phaserKey": "wooden_stool_hd",
+      "status": "shipped",
       "heightClass": "accent",
       "parentId": "furniture.oak_study_desk",
-      "usedBy": [],
-      "notes": "Kept in the library. Not loaded by the game."
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
+      "notes": "Desk-side stool. Phaser key equals basename + _hd."
     },
     {
       "id": "furniture.wooden_crate",
@@ -238,12 +241,100 @@
       "family": "wooden-crate",
       "role": "prop",
       "path": "furniture/wooden_crate.png",
-      "phaserKey": null,
-      "status": "unused",
+      "phaserKey": "wooden_crate_hd",
+      "status": "shipped",
       "heightClass": "accent",
       "parentId": "furniture.oak_study_desk",
-      "usedBy": [],
-      "notes": "Kept in the library. Not loaded by the game."
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
+      "notes": "Kitchen-yard crate. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "furniture.oak_barrel",
+      "nameEn": "Oak barrel",
+      "kind": "furniture",
+      "family": "oak-barrel",
+      "role": "prop",
+      "path": "furniture/oak_barrel.png",
+      "phaserKey": "oak_barrel_hd",
+      "status": "shipped",
+      "heightClass": "accent",
+      "parentId": "furniture.oak_study_desk",
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
+      "notes": "Edit-chained from the oak study desk. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "decoration.stone_well",
+      "nameEn": "Stone well",
+      "kind": "decoration",
+      "family": "stone-well",
+      "role": "prop",
+      "path": "decorations/stone_well.png",
+      "phaserKey": "stone_well_hd",
+      "status": "shipped",
+      "heightClass": "well",
+      "parentId": "furniture.oak_study_desk",
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
+      "notes": "Replaces the matrix stone_well on the SW grass."
+    },
+    {
+      "id": "decoration.wooden_signpost",
+      "nameEn": "Wooden signpost",
+      "kind": "decoration",
+      "family": "wooden-signpost",
+      "role": "prop",
+      "path": "decorations/wooden_signpost.png",
+      "phaserKey": "wooden_signpost_hd",
+      "status": "shipped",
+      "heightClass": "accent",
+      "parentId": "furniture.oak_study_desk",
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
+      "notes": "Blank boards, no painted letters."
+    },
+    {
+      "id": "decoration.oak_fence_post",
+      "nameEn": "Oak fence post",
+      "kind": "decoration",
+      "family": "oak-fence",
+      "role": "prop",
+      "path": "decorations/oak_fence_post.png",
+      "phaserKey": "oak_fence_post_hd",
+      "status": "shipped",
+      "heightClass": "fence-post",
+      "parentId": "furniture.oak_study_desk",
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
+      "notes": "Perimeter post under the HD fence blooms."
+    },
+    {
+      "id": "decoration.oak_fence_rail",
+      "nameEn": "Oak fence rail",
+      "kind": "decoration",
+      "family": "oak-fence",
+      "role": "prop",
+      "path": "decorations/oak_fence_rail.png",
+      "phaserKey": "oak_fence_rail_hd",
+      "status": "shipped",
+      "heightClass": "fence-rail",
+      "parentId": "decoration.oak_fence_post",
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
+      "notes": "Horizontal rail between posts. Edit-chained from the desk set."
     },
     {
       "id": "stall.korean_street_food",

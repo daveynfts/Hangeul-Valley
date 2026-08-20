@@ -47,7 +47,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-20260820d';
+const ART_CACHE_KEY = 'art-20260820e';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }
@@ -64,7 +64,14 @@ const ART_LOAD = [
   { key: 'cabbage_white_butterfly_open_hd', file: 'decorations/cabbage_white_butterfly_open.png' },
   { key: 'cabbage_white_butterfly_flap_hd', file: 'decorations/cabbage_white_butterfly_flap.png' },
   { key: 'apple_tree_hd', file: 'plants/apple_tree/summer.png' },
-  { key: 'apple_tree_ripe_hd', file: 'plants/apple_tree/ripe.png' }
+  { key: 'apple_tree_ripe_hd', file: 'plants/apple_tree/ripe.png' },
+  { key: 'wooden_stool_hd', file: 'furniture/wooden_stool.png' },
+  { key: 'wooden_crate_hd', file: 'furniture/wooden_crate.png' },
+  { key: 'oak_barrel_hd', file: 'furniture/oak_barrel.png' },
+  { key: 'stone_well_hd', file: 'decorations/stone_well.png' },
+  { key: 'wooden_signpost_hd', file: 'decorations/wooden_signpost.png' },
+  { key: 'oak_fence_post_hd', file: 'decorations/oak_fence_post.png' },
+  { key: 'oak_fence_rail_hd', file: 'decorations/oak_fence_rail.png' }
 ];
 const CROP_ART_FOLDER = {
   blossom: 'plants/cherry_blossom',
