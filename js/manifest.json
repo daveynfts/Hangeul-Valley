@@ -7,6 +7,7 @@
   "js/systems/economy.js",
   "js/vocabArt.js",
   "js/vocabArtUnit14.js",
+  "js/hudArt.js",
   "js/data.js",
   "js/ui.js",
   "js/systems/atmosphere.js",

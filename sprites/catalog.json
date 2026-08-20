@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260820f",
+  "cacheKey": "art-20260820g",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -3311,6 +3311,291 @@
       ],
       "wordKo": "제도",
       "notes": "Unit 14 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "ui.hud.vocab_book",
+      "nameEn": "Vocabulary book",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "vocab",
+      "path": "ui/vocab_book.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.shop_stall",
+      "nameEn": "Market stall",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "shop",
+      "path": "ui/shop_stall.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.harvest_basket",
+      "nameEn": "Harvest basket",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "bag",
+      "path": "ui/harvest_basket.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.more_acorns",
+      "nameEn": "More menu",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "more",
+      "path": "ui/more_acorns.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.menu_gate",
+      "nameEn": "Farm gate",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "menu",
+      "path": "ui/menu_gate.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.gold_coin",
+      "nameEn": "Gold coin",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "coin",
+      "path": "ui/gold_coin.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.jade_gem",
+      "nameEn": "Jade gem",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "gem",
+      "path": "ui/jade_gem.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.honor_medal",
+      "nameEn": "Honor medal",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "honor",
+      "path": "ui/honor_medal.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.rank_sprout",
+      "nameEn": "Rank sprout",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "sprout",
+      "path": "ui/rank_sprout.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.quest_scroll",
+      "nameEn": "Quest scroll",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "quest",
+      "path": "ui/quest_scroll.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.cooking_pot",
+      "nameEn": "Cooking pot",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "cook",
+      "path": "ui/cooking_pot.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.recipe_board",
+      "nameEn": "Recipe board",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "recipe",
+      "path": "ui/recipe_board.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.wooden_bell",
+      "nameEn": "Wooden bell",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "audio",
+      "path": "ui/wooden_bell.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.save_chest",
+      "nameEn": "Save chest",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "save",
+      "path": "ui/save_chest.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.progress_sunflower",
+      "nameEn": "Sunflower",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "progress",
+      "path": "ui/progress_sunflower.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.trophy_cup",
+      "nameEn": "Trophy cup",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "ranks",
+      "path": "ui/trophy_cup.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.lightning_bolt",
+      "nameEn": "Lightning bolt",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "duel",
+      "path": "ui/lightning_bolt.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.koi_fish",
+      "nameEn": "Koi fish",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "fish",
+      "path": "ui/koi_fish.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.hud.star_wreath",
+      "nameEn": "Star wreath",
+      "kind": "ui",
+      "family": "hud-icons",
+      "role": "trophy",
+      "path": "ui/star_wreath.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.hud.vocab_book",
+      "usedBy": [
+        "HUD"
+      ],
+      "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
     }
   ]
 }

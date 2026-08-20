@@ -120,68 +120,6 @@
     }
     #inventory-overlay.visible { display: flex; }
 
-    #unit-notebook-overlay {
-      position: fixed; inset: 0; z-index: 880; display: none;
-      background: var(--farm-veil); backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      align-items: center; justify-content: center; animation: fadeIn .2s;
-    }
-    #unit-notebook-overlay.visible { display: flex; }
-    #unit-notebook-panel {
-      max-width: 720px; width: 94%; max-height: 88vh; overflow-y: auto; padding: 22px 22px 18px;
-      color: #2a1a0a;
-    }
-    #unb-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
-    #unb-kicker { font-family: 'VT323', monospace; font-size: 16px; color: #7a3e12; }
-    #unb-title { font-family: 'Noto Sans KR', sans-serif; font-size: 22px; font-weight: 900; color: #2a1a0a; }
-    #unb-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-    .unb-tab {
-      background: #fff8e8; border: 1.5px solid #c4893a; color: #5b3412;
-      border-radius: 999px; padding: 6px 12px; font-size: 12px; cursor: pointer;
-      font-family: 'Be Vietnam Pro', sans-serif;
-    }
-    .unb-tab.active { background: #166534; border-color: #14532d; color: #fff8e8; }
-    .unb-h { font-family: 'Press Start 2P', monospace; font-size: 10px; color: #7a3e12; margin: 12px 0 8px; }
-    .unb-h span { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-left: 6px; }
-    .unb-lead { font-size: 14px; color: #5b3412; line-height: 1.5; margin-bottom: 10px; }
-    .unb-q, .unb-goal, .unb-line { background: #fff8e8; border: 1px solid #c4893a; border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
-    .unb-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 700; color: #2a1a0a; }
-    .unb-en { font-size: 13px; color: #7a3e12; margin-top: 2px; }
-    .unb-goal.soon { opacity: .55; }
-    .unb-goal em { font-style: normal; font-size: 11px; color: #9a3412; }
-    .unb-line { display: flex; gap: 10px; align-items: flex-start; }
-    .unb-who { font-family: 'Press Start 2P', monospace; font-size: 10px; color: #166534; min-width: 24px; padding-top: 4px; }
-    .unb-note { font-size: 12px; color: #7a3e12; margin: 10px 0; }
-    .unb-cta {
-      display: block; width: 100%; margin-top: 12px; padding: 10px;
-      background: #c4893a; border: 2px solid #8b5a2b; color: #fff8e8;
-      border-radius: 10px; font-weight: 800; cursor: pointer;
-    }
-    .unb-label { display: block; font-size: 13px; color: #5b3412; margin-bottom: 8px; }
-    .unb-label input {
-      display: block; width: 100%; margin-top: 4px; padding: 8px 10px;
-      border: 1.5px solid #c4893a; border-radius: 8px; background: #fff8e8; font-size: 16px;
-      font-family: 'Noto Sans KR', sans-serif;
-    }
-    .unb-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 12px; }
-    .unb-chip, .unb-opt {
-      background: #fff8e8; border: 1.5px solid #c4893a; color: #2a1a0a;
-      border-radius: 999px; padding: 6px 10px; font-size: 12px; cursor: pointer;
-      font-family: 'Noto Sans KR', sans-serif;
-    }
-    .unb-chip.dim { opacity: .75; }
-    .unb-chip.picked, .unb-opt:focus { background: #166534; border-color: #14532d; color: #fff8e8; }
-    .unb-built {
-      background: #fff3d6; border: 1.5px dashed #8b5a2b; border-radius: 10px;
-      padding: 12px; font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 700;
-    }
-    .unb-blank { letter-spacing: 2px; color: #9a3412; }
-    .unb-map { display: grid; gap: 10px; }
-    .unb-cluster {
-      background: #fff8e8; border: 1.5px solid #c4893a; border-radius: 12px; padding: 10px;
-    }
-    .unb-cluster .unb-chip { display: inline-block; margin: 3px 2px; }
-
     .inv-slot {
       background: var(--parch-l);
       border: 1.5px solid #c4893a;
@@ -363,7 +301,8 @@
       background: transparent; color: #f6deaa;
     }
     #hud-rank.pop { transform: scale(1.1); }
-    #hud-rank-icon { font-size: 14px; line-height: 1; }
+    #hud-rank-icon { font-size: 14px; line-height: 1; display: inline-flex; align-items: center; }
+    #hud-rank-icon .hud-art-icon { width: 18px; height: 18px; }
     #hud-rank-lv { font-family: 'Press Start 2P', monospace; font-size: 9px; color: #fde68a; }
     #hud-rank-bar {
       width: 42px; height: 6px; background: rgba(42,26,10,.55); border-radius: 99px; overflow: hidden;
@@ -658,6 +597,7 @@
     .hud-overflow-item {
       width: 100% !important; height: auto !important; min-width: 0 !important;
       border-radius: 8px !important; justify-content: flex-start !important;
+      gap: 8px !important;
       padding: 7px 10px !important; font-size: 12px !important;
       font-family: 'Be Vietnam Pro', sans-serif !important;
       background: transparent !important;
@@ -665,6 +605,11 @@
       color: #2a1a0a !important;
       box-shadow: none !important;
     }
+    .hud-overflow-item .hud-art-icon {
+      width: 18px; height: 18px; flex-shrink: 0;
+      filter: none;
+    }
+    .hud-overflow-label { line-height: 1.2; }
     .hud-overflow-item:hover {
       background: #fff3d6 !important;
       transform: none !important;
@@ -690,37 +635,43 @@
     #hud-due.has-due { display: inline-flex; }
 
     .hud-chip {
-      display: inline-flex; align-items: center; gap: 4px;
+      display: inline-flex; align-items: center; gap: 5px;
       padding: 2px 2px 2px 0;
       font-family: 'VT323', monospace; font-size: 18px; color: #f6deaa;
       line-height: 1;
     }
+    .hud-chip .hud-art-icon { width: 18px; height: 18px; flex-shrink: 0; }
     #hud-gold, #hud-gems, #hud-honor { background: none; border: 0; border-radius: 0; }
     #hud-gold.pop { transform: scale(1.12); }
 
     .hud-btn {
-      width: 32px; height: 32px; min-width: 32px;
+      width: 36px; height: 36px; min-width: 36px;
       display: inline-flex; align-items: center; justify-content: center;
-      background: rgba(246, 222, 170, 0.08) !important;
-      border: 1px solid rgba(232, 192, 122, 0.28) !important;
+      background: rgba(246, 222, 170, 0.10) !important;
+      border: 1px solid rgba(232, 192, 122, 0.32) !important;
       border-radius: 50% !important; color: #f6deaa !important;
       font-family: inherit !important; font-size: 15px !important;
       cursor: pointer; padding: 0 !important; letter-spacing: 0;
       box-shadow: none !important;
-      transition: background .15s, border-color .15s !important;
+      transition: background .15s, border-color .15s, box-shadow .15s !important;
       pointer-events: all;
     }
+    .hud-btn .hud-art-icon {
+      width: 22px; height: 22px; pointer-events: none;
+      filter: drop-shadow(0 1px 0 rgba(42, 26, 10, 0.35));
+    }
     .hud-btn:hover {
-      background: rgba(246, 222, 170, 0.22) !important;
-      border-color: rgba(246, 222, 170, 0.55) !important;
+      background: rgba(246, 222, 170, 0.24) !important;
+      border-color: rgba(246, 222, 170, 0.62) !important;
       transform: none !important;
       filter: none !important;
     }
     .hud-btn:active { transform: scale(.96) !important; }
     .hud-btn.hud-btn-menu {
-      background: #c4893a !important;
+      background: rgba(196, 137, 58, 0.92) !important;
       border-color: #e8c07a !important;
       color: #2a1a0a !important;
+      box-shadow: 0 0 0 1px rgba(42, 26, 10, 0.25) !important;
     }
 
     /* ── PROGRESS BAR ────────────────────────────────────────────────────── */
@@ -1501,7 +1452,8 @@
       #hud-currency-group { padding: 0; }
       #hud-level { max-width: 120px; font-size: 12px; }
       #hud-progress { font-size: 14px; }
-      .hud-btn { width: 30px !important; height: 30px !important; min-width: 30px !important; font-size: 14px !important; }
+      .hud-btn { width: 32px !important; height: 32px !important; min-width: 32px !important; font-size: 14px !important; }
+      .hud-btn .hud-art-icon { width: 20px; height: 20px; }
 
       /* No top/right here any more — it is a HUD group, so it moves with the bar. */
       #progress-bar-bg { width: 80px; height: 10px; }

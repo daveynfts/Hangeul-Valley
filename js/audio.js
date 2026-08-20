@@ -227,11 +227,19 @@ function syncTTSButton() {
     if (typeof document === 'undefined' || !document.getElementById) return;
     const btn = document.getElementById('tts-toggle-btn');
     if (!btn) return;
+    const on = !!KoreanTTS.enabled;
     const inMenu = btn.classList && btn.classList.contains('hud-overflow-item');
-    btn.textContent = KoreanTTS.enabled
-      ? (inMenu ? '🔊 Audio' : '🔊')
-      : (inMenu ? '🔇 Muted' : '🔇');
-    if (btn.classList && btn.classList.toggle) btn.classList.toggle('hud-btn-off', !KoreanTTS.enabled);
+    const label = on ? 'Audio' : 'Muted';
+    if (typeof hudIconHtml === 'function' && inMenu) {
+      btn.setAttribute('data-hud-label', label);
+      btn.innerHTML = hudIconHtml('audio', on ? '🔊' : '🔇', 18) +
+        '<span class="hud-overflow-label">' + label + '</span>';
+    } else {
+      btn.textContent = on
+        ? (inMenu ? '🔊 Audio' : '🔊')
+        : (inMenu ? '🔇 Muted' : '🔇');
+    }
+    if (btn.classList && btn.classList.toggle) btn.classList.toggle('hud-btn-off', !on);
   } catch {}
 }
 
