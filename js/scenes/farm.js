@@ -9,6 +9,9 @@ class FarmScene extends Phaser.Scene {
     this.load.json('unit10-layout','worlds/unit10-layout.json?v=southband');
     this.load.json('skin-catalog', 'skins/catalog.json?v=' + SKIN_CATALOG_BOOT_V);
     ART_LOAD.forEach((a) => { this.load.image(a.key, artUrl(a.file)); });
+    if (typeof vocabArtLoadEntries === 'function') {
+      vocabArtLoadEntries().forEach((a) => { this.load.image(a.key, artUrl(a.file)); });
+    }
     CROP_HD_NAMES.forEach((n) => {
       [1, 2, 3].forEach((s) => {
         this.load.image('crop_' + n + '_' + s + '_hd', artUrl(CROP_ART_FOLDER[n] + '/' + CROP_STAGE_FILE[s]));
@@ -1850,8 +1853,10 @@ class FarmScene extends Phaser.Scene {
     glow.fillStyle(0x38bdf8, 0.25);
     glow.fillCircle(0, 0, 16);
 
-    // Icon / Emoji
-    const iconText = this.add.text(0, -4, info.icon || '🥬', { fontSize: '24px' }).setOrigin(0.5, 0.5);
+    const hdKey = (typeof vocabArtKey === 'function') ? vocabArtKey(nameKo) : '';
+    const iconText = (hdKey && this.textures && this.textures.exists(hdKey))
+      ? this.add.image(0, -4, hdKey).setOrigin(0.5, 0.5)
+      : this.add.text(0, -4, info.icon || '🥬', { fontSize: '24px' }).setOrigin(0.5, 0.5);
 
     // Korean Label
     const labelText = this.add.text(0, 16, nameKo, {

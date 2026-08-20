@@ -5,6 +5,7 @@
   "js/systems/srs.js",
   "js/systems/save.js",
   "js/systems/economy.js",
+  "js/vocabArt.js",
   "js/data.js",
   "js/ui.js",
   "js/systems/atmosphere.js",

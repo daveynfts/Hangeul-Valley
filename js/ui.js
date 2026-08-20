@@ -378,7 +378,9 @@ function renderInventoryGrid() {
           name: info.name || nameKo,
           nameKo: info.nameKo || nameKo,
           qty: qty,
-          icon: info.icon || '🥬',
+          icon: (typeof vocabIconHtml === 'function')
+            ? vocabIconHtml(info.nameKo || nameKo, info.icon || '🥬', 28)
+            : (info.icon || '🥬'),
           description: info.description || 'Harvested crop / ingredient'
         });
       }
@@ -392,13 +394,22 @@ function renderInventoryGrid() {
         let nameKo = recipeId;
         let nameEn = recipeId;
         let icon = '🍱';
-        if (typeof COOKING_RECIPES !== 'undefined' && Array.isArray(COOKING_RECIPES)) {
-          const rec = COOKING_RECIPES.find(r => r.id === recipeId);
-          if (rec) {
-            nameKo = rec.name;
-            nameEn = rec.enName || rec.name;
-            icon = rec.icon || '🍱';
-          }
+        let rec = null;
+        if (typeof getActiveCookingRecipes === 'function') {
+          rec = getActiveCookingRecipes().find(r => r && r.id === recipeId) || null;
+        }
+        if (!rec && typeof UNIT10_COOKING_RECIPES !== 'undefined') {
+          rec = UNIT10_COOKING_RECIPES.find(r => r && r.id === recipeId) || null;
+        }
+        if (!rec && typeof COOKING_RECIPES !== 'undefined' && Array.isArray(COOKING_RECIPES)) {
+          rec = COOKING_RECIPES.find(r => r && r.id === recipeId) || null;
+        }
+        if (rec) {
+          nameKo = rec.nameKo || rec.name;
+          nameEn = rec.nameEn || rec.enName || rec.name;
+          icon = (typeof vocabIconHtml === 'function' && nameKo)
+            ? vocabIconHtml(nameKo, rec.icon || '🍱', 28)
+            : (rec.icon || '🍱');
         }
         items.push({
           itemId: recipeId,

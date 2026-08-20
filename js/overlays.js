@@ -790,7 +790,10 @@ function renderCookingGrid(selectId) {
         const info = getItemInfo(ingKey);
         const tag = document.createElement('span');
         tag.style.cssText = 'background:rgba(15,23,42,0.8); border:1px solid rgba(245,158,11,0.3); border-radius:6px; padding:3px 8px; font-size:11px; font-family:"Noto Sans KR",sans-serif; color:#e2e8f0;';
-        tag.textContent = `${info.icon || '📦'} ${info.nameKo || ingKey}: ×${cnt}`;
+        const icon = (typeof vocabIconHtml === 'function')
+          ? vocabIconHtml(info.nameKo || ingKey, info.icon || '📦', 20)
+          : (info.icon || '📦');
+        tag.innerHTML = `${icon} ${info.nameKo || ingKey}: ×${cnt}`;
         pantryList.appendChild(tag);
       });
     }
@@ -824,7 +827,7 @@ function renderCookingGrid(selectId) {
     card.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <div style="display:flex; align-items:center; gap:8px;">
-          <span style="font-size:24px;">${r.icon}</span>
+          <span style="font-size:24px;">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(r.nameKo, r.icon, 28) : r.icon}</span>
           <div>
             <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold);">${r.nameKo}</div>
             <div style="font-size:10px; color:#cbd5e1;">${r.nameEn}</div>
@@ -857,13 +860,13 @@ function renderCookingGrid(selectId) {
         if (have >= req.count) {
           ingBadgesHtml.push(`
             <span style="background:rgba(34,197,94,0.15); border:1px solid #22c55e; color:#4ade80; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:bold; display:inline-flex; align-items:center; gap:4px;">
-              ${info.icon || '📦'} ${info.nameKo || req.itemId} ${have}/${req.count} ✓
+              ${(typeof vocabIconHtml === 'function') ? vocabIconHtml(info.nameKo || req.itemId, info.icon || '📦', 18) : (info.icon || '📦')} ${info.nameKo || req.itemId} ${have}/${req.count} ✓
             </span>
           `);
         } else {
           ingBadgesHtml.push(`
             <span style="background:rgba(239,68,68,0.15); border:1px solid #ef4444; color:#f87171; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:bold; display:inline-flex; align-items:center; gap:4px;">
-              ${info.icon || '📦'} ${info.nameKo || req.itemId} ${have}/${req.count} ✗
+              ${(typeof vocabIconHtml === 'function') ? vocabIconHtml(info.nameKo || req.itemId, info.icon || '📦', 18) : (info.icon || '📦')} ${info.nameKo || req.itemId} ${have}/${req.count} ✗
             </span>
           `);
         }
@@ -873,7 +876,7 @@ function renderCookingGrid(selectId) {
 
       detailViewEl.innerHTML = `
         <div style="display:flex; align-items:center; gap:12px;">
-          <span style="font-size:40px;">${recipe.icon}</span>
+          <span style="font-size:40px;">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(recipe.nameKo, recipe.icon, 48) : recipe.icon}</span>
           <div>
             <div style="font-family:'Press Start 2P',monospace; font-size:14px; color:var(--neon-gold);">${recipe.nameKo} (${recipe.nameEn})</div>
             <div style="font-size:11px; color:rgba(255,255,255,0.7); margin-top:4px;">${recipe.description || ''}</div>
