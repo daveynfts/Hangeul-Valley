@@ -85,6 +85,18 @@ const FILES = [
   ['sprites/fence_flower_purple.png', 'image/png'],
   ['sprites/apple_tree.png', 'image/png'],
   ['sprites/apple_tree_ripe.png', 'image/png'],
+  ['sprites/skins/farmer/walk_down_0.png', 'image/png'],
+  ['sprites/skins/farmer/walk_down_1.png', 'image/png'],
+  ['sprites/skins/farmer/walk_down_2.png', 'image/png'],
+  ['sprites/skins/farmer/walk_up_0.png', 'image/png'],
+  ['sprites/skins/farmer/walk_up_1.png', 'image/png'],
+  ['sprites/skins/farmer/walk_up_2.png', 'image/png'],
+  ['sprites/skins/farmer/walk_left_0.png', 'image/png'],
+  ['sprites/skins/farmer/walk_left_1.png', 'image/png'],
+  ['sprites/skins/farmer/walk_left_2.png', 'image/png'],
+  ['sprites/skins/farmer/walk_right_0.png', 'image/png'],
+  ['sprites/skins/farmer/walk_right_1.png', 'image/png'],
+  ['sprites/skins/farmer/walk_right_2.png', 'image/png'],
   ['diner/content.json', 'application/json']
 ];
 

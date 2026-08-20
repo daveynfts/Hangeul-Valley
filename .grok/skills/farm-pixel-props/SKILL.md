@@ -41,8 +41,9 @@ Height classes — pass `--height` to `process_prop.py` (default 156). Do not fa
 | `crop-ripe` | 56 | plot stage 3 |
 | `fence-bloom` | 28 | post flowers (no grass pad, no tint) |
 | `landmark` | 180 | apple tree and similar |
+| `character` | 80 | farm walk frames (`sprites/skins/<id>/`) |
 
-Naming: do not rename shipped files. New world-pack furniture `unit10_<role>.png`. Plot plants `crop_<type>_<1|2|3>.png`. Post flowers `fence_flower_<color>.png`. Landmarks `apple_tree.png` / `apple_tree_ripe.png`.
+Naming: do not rename shipped files. New world-pack furniture `unit10_<role>.png`. Plot plants `crop_<type>_<1|2|3>.png`. Post flowers `fence_flower_<color>.png`. Landmarks `apple_tree.png` / `apple_tree_ripe.png`. Character walk frames `sprites/skins/<id>/walk_<dir>_<0|1|2>.png`.
 
 Palette: match `STARDEW_PALETTE` wood/outline in `game.js`. Do not paint grass or ground. Phaser `createShadow` is the contact darkening.
 
@@ -51,6 +52,8 @@ One Phaser spawn path per family: `*_hd` key, matrix fallback, scale 1 on HD, no
 ## 2. Key, crop, size
 
 Run `scripts/process_prop.py` (Pillow) with the class `--height`. It keys magenta / rose, crops 2px pad (feet stay the last opaque row), resizes, keys again, writes `sprites/<name>.png` and `assets/sprites/<name>.png`.
+
+Character sets: `--height 80 --subdir skins/<id>` per frame, then one `--pad-set skins/<id>` so every `walk_*.png` shares the same width (torso centered, extra rows above, feet last opaque row). Do not skip `--pad-set` — unequal widths sway the sprite.
 
 Extra bottom pad makes the prop float.
 
@@ -79,4 +82,8 @@ Interact radius follows the on-screen footprint (~80), not the old 48px matrix b
 
 ## 5. Fallback
 
-Keep the old matrix key only as a missing-file fallback. Prefer `*_hd` when `textures.exists`.
+Keep the old matrix key only as a missing-file fallback. Prefer `*_hd` when `textures.exists`. Farm HD characters use keys `farmer_walk_{dir}_{frame}`, origin `(0.5, 1)`, scale `+1` (never negative). Idle is walk frame 0 of last facing. Matrix `player_*` stays for dungeon/fishing and missing-file fallback.
+
+## 6. Character walk set
+
+One parent: front `walk_down_0` via `image_gen` (straw-hat farmer, `STARDEW_PALETTE` human block, same camera as the desk). Turnarounds (`up` / `left` / `right`) are `image_edit` from that parent — true profiles, not three slightly-turned fronts. Right may be a horizontal flip of left. Walk is 4-dir × 3 frames (`0` contact/idle, `1` and `2` opposite feet), cycle `0,1,0,2` at 8 fps. No dedicated idle files.

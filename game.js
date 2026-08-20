@@ -8355,7 +8355,9 @@ class AmbientLightingSystem {
   update() {
     this.lights.forEach(l => {
       if (l && l._followTarget && l._followTarget.active) {
-        l.setPosition(l._followTarget.x, l._followTarget.y);
+        const t = l._followTarget;
+        const y = l._followChest ? t.y + lanternChestOffset(t) : t.y;
+        l.setPosition(t.x, y);
       }
     });
   }
@@ -8544,6 +8546,74 @@ class WeatherEngine {
   }
 }
 
+// ═══════════════ FARM HD FARMER (matrix player_* is fallback only) ═══════════
+const FARMER_HD_DIRS = ['down', 'up', 'left', 'right'];
+const FARMER_HD_FRAMES = 3;
+const FARM_SPAWN_CENTER_Y_OFFSET = 80;
+const MATRIX_SRC = 48, MATRIX_FARM_SCALE = 1.8;
+
+function farmFeetYFromSpawn(H) {
+  return H - FARM_SPAWN_CENTER_Y_OFFSET + (MATRIX_SRC * MATRIX_FARM_SCALE) / 2;
+}
+function playerFeetY(sprite) {
+  return sprite.y + sprite.displayHeight * (1 - sprite.originY);
+}
+function farmHdReady(scene) {
+  return !!(scene && scene.textures && scene.textures.exists('farmer_walk_down_0'));
+}
+function farmerHdTextureKey(dir, frame) {
+  return 'farmer_walk_' + dir + '_' + frame;
+}
+function farmerHdAnimKey(dir) {
+  return 'farmer-hd-walk-' + dir;
+}
+function ensureFarmerHdAnims(scene) {
+  if (!farmHdReady(scene) || !scene.anims) return;
+  FARMER_HD_DIRS.forEach((dir) => {
+    const key = farmerHdAnimKey(dir);
+    if (scene.anims.exists(key)) return;
+    const frames = [0, 1, 0, 2].map((f) => ({ key: farmerHdTextureKey(dir, f) }));
+    scene.anims.create({ key, frames, frameRate: 8, repeat: -1 });
+  });
+  FARMER_HD_DIRS.forEach((dir) => {
+    for (let f = 0; f < FARMER_HD_FRAMES; f++) {
+      const tex = scene.textures.get(farmerHdTextureKey(dir, f));
+      if (tex && tex.setFilter && typeof Phaser !== 'undefined' && Phaser.Textures) {
+        tex.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      }
+    }
+  });
+}
+function lanternChestOffset(sprite) {
+  return sprite.displayHeight * (1 - sprite.originY - 0.45);
+}
+function applyFarmHeroContract(scene, sprite, opts) {
+  if (!sprite) return;
+  const facing = (scene.playerFacing || 'down');
+  const preserveFeet = opts && opts.preserveFeet;
+  const feetY = preserveFeet ? playerFeetY(sprite) : null;
+  const hd = farmHdReady(scene);
+  sprite.anims && sprite.anims.stop();
+  if (hd) {
+    ensureFarmerHdAnims(scene);
+    sprite.setTexture(farmerHdTextureKey(facing, 0));
+    sprite.setFlipX(false);
+    sprite.setOrigin(0.5, 1);
+    sprite.setScale(1, 1);
+    const w = sprite.frame.width, h = sprite.frame.height;
+    const bodyW = Math.min(24, w), bodyH = 12;
+    if (sprite.body) sprite.body.setSize(bodyW, bodyH).setOffset((w - bodyW) / 2, h - bodyH);
+    if (preserveFeet && feetY != null) sprite.y = feetY;
+  } else {
+    sprite.setTexture('player_walk_' + facing + '_0');
+    sprite.setFlipX(false);
+    sprite.setOrigin(0.5, 0.5);
+    sprite.setScale(MATRIX_FARM_SCALE, MATRIX_FARM_SCALE);
+    if (sprite.body) sprite.body.setSize(24, 16).setOffset(12, 32);
+    if (preserveFeet && feetY != null) sprite.y = feetY - sprite.displayHeight * 0.5;
+  }
+}
+
 // ═══════════════ PHASER SCENE ════════════════════════════════════════════════
 class FarmScene extends Phaser.Scene {
   constructor(){ super({key:'FarmScene'}); }
@@ -8566,6 +8636,14 @@ class FarmScene extends Phaser.Scene {
     this.load.image('flw_purple_hd', 'sprites/fence_flower_purple.png');
     this.load.image('apple_tree_hd', 'sprites/apple_tree.png');
     this.load.image('apple_tree_ripe_hd', 'sprites/apple_tree_ripe.png');
+    FARMER_HD_DIRS.forEach((dir) => {
+      for (let f = 0; f < FARMER_HD_FRAMES; f++) {
+        this.load.image(
+          farmerHdTextureKey(dir, f),
+          'sprites/skins/farmer/walk_' + dir + '_' + f + '.png'
+        );
+      }
+    });
   }
 
   // ── APPLE TREE constants ──────────────────────────────────────────────────
@@ -8574,6 +8652,7 @@ class FarmScene extends Phaser.Scene {
 
   create(){
     sceneRef = this;
+    ensureFarmerHdAnims(this);
     this.droppedItems = [];
     if (droppedItemsSave && droppedItemsSave.length > 0) {
       droppedItemsSave.forEach(drop => this.spawnDroppedItem(drop.itemId || drop.nameKo, drop.x, drop.y, false));
@@ -10501,7 +10580,8 @@ class FarmScene extends Phaser.Scene {
     let toolSprite = null;
     if (toolKey && this.textures && this.textures.exists(toolKey)) {
       const offsetX = this.player.flipX ? -12 : 12;
-      toolSprite = this.add.image(this.player.x + offsetX, this.player.y - 6, toolKey)
+      const toolY = playerFeetY(this.player) - (this.player.displayHeight * 0.55);
+      toolSprite = this.add.image(this.player.x + offsetX, toolY, toolKey)
         .setDepth(this.player.depth + 1);
     }
 
@@ -10513,8 +10593,7 @@ class FarmScene extends Phaser.Scene {
       this.isPerformingAction = false;
       playerLocked = false;
       if (this.player && this.player.active) {
-        this.player.anims.stop();
-        this.player.setTexture((this._unit10Skin ? this._unit10Skin() : 'player') + '_walk_down_0');
+        applyFarmHeroContract(this, this.player, { preserveFeet: true });
       }
       if (typeof callback === 'function') callback();
     };
@@ -10635,17 +10714,27 @@ class FarmScene extends Phaser.Scene {
   }
 
   _createPlayer(W, H){
-    this.player=this.physics.add.sprite(W/2, H-80,'player_walk_down_0')
-      .setScale(1.8)
-      .setCollideWorldBounds(true).setDrag(900,900).setDepth(500);
-    this.player.body.setSize(24, 16).setOffset(12, 32);
+    this.playerFacing = 'down';
+    this._farmFeetY = farmFeetYFromSpawn(H);
+    const hd = farmHdReady(this);
+    const key = hd ? farmerHdTextureKey('down', 0) : 'player_walk_down_0';
+    const spawnY = hd ? this._farmFeetY : (H - FARM_SPAWN_CENTER_Y_OFFSET);
+    this.player = this.physics.add.sprite(W / 2, spawnY, key)
+      .setCollideWorldBounds(true).setDrag(900, 900).setDepth(500);
+    applyFarmHeroContract(this, this.player, { preserveFeet: false });
+    if (hd) this.player.y = this._farmFeetY;
+    else this.player.setPosition(W / 2, H - FARM_SPAWN_CENTER_Y_OFFSET);
+    const sw = hd ? Math.round(this.player.frame.width * 0.45) : 58;
+    const sh = hd ? 12 : 18;
+    const soy = hd ? 4 : 32;
     if (this.shadows) {
-      this.pShadow = this.shadows.createShadow(this.player, 58, 18, 32);
+      this.pShadow = this.shadows.createShadow(this.player, sw, sh, soy);
     } else {
-      this.pShadow = this.add.ellipse(0,0,58,18,0,0.3).setDepth(499);
+      this.pShadow = this.add.ellipse(0, 0, sw, sh, 0, 0.3).setDepth(499);
     }
     if (this.lighting) {
       this.playerLantern = this.lighting.attachTo(this.player, 'light_glow_lantern', 0.8, 0.4);
+      if (this.playerLantern) this.playerLantern._followChest = true;
     }
   }
 
@@ -10708,17 +10797,17 @@ class FarmScene extends Phaser.Scene {
       if(len>1){ vx/=len; vy/=len; }
       this.player.setVelocity(vx*PLAYER_SPD,vy*PLAYER_SPD);
       if(vx!==0||vy!==0){
-        const skin = this._unit10Skin();
-        let animKey = skin + '-walk-down';
-        if (Math.abs(vx) >= Math.abs(vy)) {
-          animKey = vx < 0 ? skin + '-walk-left' : skin + '-walk-right';
-          this.player.setScale(vx < 0 ? -1.8 : 1.8, 1.8);
-        } else {
-          animKey = vy < 0 ? skin + '-walk-up' : skin + '-walk-down';
-          this.player.setScale(1.8, 1.8);
-        }
+        const hd = farmHdReady(this);
+        const facing = Math.abs(vx) >= Math.abs(vy) ? (vx < 0 ? 'left' : 'right') : (vy < 0 ? 'up' : 'down');
+        this.playerFacing = facing;
         this.player.setFlipX(false);
-        this.player.anims.play(animKey, true);
+        if (hd) {
+          this.player.setScale(1, 1);
+          this.player.anims.play(farmerHdAnimKey(facing), true);
+        } else {
+          this.player.setScale(MATRIX_FARM_SCALE, MATRIX_FARM_SCALE);
+          this.player.anims.play('player-walk-' + facing, true);
+        }
 
         this.walkTimer+=(dt||16);
         if(this.walkTimer>160){
@@ -10727,25 +10816,30 @@ class FarmScene extends Phaser.Scene {
           
           // Walking puff effect on stepping frames (1 and 3)
           if(this.walkFrame===1 || this.walkFrame===3){
-            const dx = animKey === 'player-walk-left' ? 7 : (animKey === 'player-walk-right' ? -7 : 0);
+            const dx = facing === 'left' ? 7 : (facing === 'right' ? -7 : 0);
+            const dustY = playerFeetY(this.player) - 4;
             if (this.textures && this.textures.exists('p_dust')) {
-              const dust = this.add.image(this.player.x + dx, this.player.y + 14, 'p_dust')
+              const dust = this.add.image(this.player.x + dx, dustY, 'p_dust')
                 .setScale(1).setAlpha(0.7).setDepth(this.player.y - 2);
               this.tweens.add({targets:dust, scale:2, y:dust.y-8, alpha:0, duration:400, ease:'Power1', onComplete:()=>dust.destroy()});
             } else {
-              const puff = this.add.ellipse(this.player.x + dx, this.player.y + 14, 6, 4, 0xDDCCAA, 0.6).setDepth(this.player.y - 2);
+              const puff = this.add.ellipse(this.player.x + dx, dustY, 6, 4, 0xDDCCAA, 0.6).setDepth(this.player.y - 2);
               this.tweens.add({targets:puff, scale:2, y:puff.y-8, alpha:0, duration:400, ease:'Power1', onComplete:()=>puff.destroy()});
             }
           }
         }
       } else {
-        this.player.anims.stop(); this.player.setTexture(this._unit10Skin() + '_walk_down_0'); this.walkTimer=0;
+        this.player.anims.stop();
+        const idleDir = this.playerFacing || 'down';
+        this.player.setTexture(farmHdReady(this) ? farmerHdTextureKey(idleDir, 0) : ('player_walk_' + idleDir + '_0'));
+        this.walkTimer=0;
       }
     } else {
       this.player.setVelocity(0,0);
       if (!this.isPerformingAction) {
         this.player.anims.stop();
-        this.player.setTexture(this._unit10Skin() + '_walk_down_0');
+        const idleDir = this.playerFacing || 'down';
+        this.player.setTexture(farmHdReady(this) ? farmerHdTextureKey(idleDir, 0) : ('player_walk_' + idleDir + '_0'));
       }
     }
 
@@ -10936,7 +11030,7 @@ class FarmScene extends Phaser.Scene {
     return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10';
   }
   _unit10Skin(){
-    return this._isUnit10() ? 'chef' : 'player';
+    return 'player';
   }
 
   // ── UNIT 10: stations sit on grass south/east of the farm rect; pond hidden; portal hidden ──
@@ -10948,7 +11042,7 @@ class FarmScene extends Phaser.Scene {
     if (this.portalSprite && this.portalSprite.setVisible) this.portalSprite.setVisible(!on);
     if (this.portalHint && this.portalHint.setVisible) this.portalHint.setVisible(!on);
     if (this.player && this.player.active) {
-      this.player.setTexture(this._unit10Skin() + '_walk_down_0');
+      applyFarmHeroContract(this, this.player, { preserveFeet: true });
     }
     if (on) {
       this._ensureTasteStation();
