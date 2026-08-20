@@ -273,9 +273,16 @@ function pngSize(rel) {
 }
 
 (function checkSpriteLockstep() {
-  const listPng = (dir) => {
+  const listPng = (dir, prefix) => {
     if (!fs.existsSync(dir)) return [];
-    return fs.readdirSync(dir).filter((n) => n.toLowerCase().endsWith('.png')).sort();
+    const out = [];
+    fs.readdirSync(dir).sort().forEach((n) => {
+      const full = path.join(dir, n);
+      const rel = prefix ? prefix + '/' + n : n;
+      if (fs.statSync(full).isDirectory()) listPng(full, rel).forEach((x) => out.push(x));
+      else if (n.toLowerCase().endsWith('.png')) out.push(rel);
+    });
+    return out;
   };
   const rootNames = listPng(path.join(ROOT, 'sprites'));
   const assetNames = listPng(path.join(ROOT, 'assets', 'sprites'));
@@ -287,6 +294,22 @@ function pngSize(rel) {
     const a = fs.readFileSync(path.join(ROOT, 'sprites', n));
     const b = fs.readFileSync(path.join(ROOT, 'assets', 'sprites', n));
     check(`sprites/${n} matches assets/sprites/${n}`, Buffer.compare(a, b) === 0);
+  });
+}());
+
+(function checkFarmerWalkSet() {
+  const dirs = ['down', 'up', 'left', 'right'];
+  let sharedW = null;
+  dirs.forEach((dir) => {
+    [0, 1, 2].forEach((frame) => {
+      const rel = path.join('sprites', 'skins', 'farmer', 'walk_' + dir + '_' + frame + '.png');
+      const full = path.join(ROOT, rel);
+      if (!check(rel + ' exists', fs.existsSync(full))) return;
+      const sz = pngSize(rel);
+      check(rel + ' height is 80', sz.h === 80, sz.w + 'x' + sz.h);
+      if (sharedW == null) sharedW = sz.w;
+      else check(rel + ' shares walk width ' + sharedW, sz.w === sharedW, sz.w + ' vs ' + sharedW);
+    });
   });
 }());
 
