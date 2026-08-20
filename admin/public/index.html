@@ -40,6 +40,7 @@
       </nav>
 
       <div class="header-actions">
+        <span class="readonly-pill hidden" id="admin-readonly-pill" title="This Vercel copy cannot write files">Read-only</span>
         <div class="sync-status" id="sync-indicator" title="Data Synchronization Status">
           <span class="status-dot green" id="sync-dot"></span>
           <span class="status-text" id="sync-text">In Sync</span>
@@ -366,7 +367,7 @@
           <h2 class="section-title">2B Unit 10 workspace</h2>
           <p class="section-desc">Move farm props, edit the study-desk quiz, and curate the textbook word list. Saves write to <code>worlds/</code> and <code>assets/worlds/</code>. Refresh the game tab to see layout changes.</p>
         </div>
-        <a class="btn btn-secondary btn-sm" href="http://localhost:8742/" target="_blank" rel="noopener">Open game ↗</a>
+        <a class="btn btn-secondary btn-sm" id="btn-open-game" href="/" target="_blank" rel="noopener">Open game ↗</a>
       </div>
 
       <div class="u10-subnav" id="u10-subnav">

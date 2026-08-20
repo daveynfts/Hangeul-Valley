@@ -1113,6 +1113,28 @@ code.key-badge {
 .u10-quiz-workspace .data-table tbody tr.selected { background: rgba(99,102,241,.18); }
 .u10-words-table input { width: 100%; }
 
+.readonly-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fde68a;
+  background: var(--accent-amber-bg);
+  border: 1px solid var(--accent-amber);
+  border-radius: var(--radius-pill);
+  padding: 0.25rem 0.65rem;
+}
+body.admin-readonly #btn-sync-now,
+body.admin-readonly #btn-add-word,
+body.admin-readonly #btn-edit-level-meta,
+body.admin-readonly #u10-save-layout,
+body.admin-readonly #u10-save-quiz,
+body.admin-readonly #u10-save-world,
+body.admin-readonly #u10-add-q,
+body.admin-readonly #u10-add-word {
+  display: none !important;
+}
+
 .art-stats-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .art-toolbar { width: 100%; }
 .art-family-grid { display: flex; flex-direction: column; gap: 16px; }

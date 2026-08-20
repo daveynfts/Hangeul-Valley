@@ -127,7 +127,8 @@ async function runTests() {
         'data-tab="unit10"',
         'data-tab="art"',
         'id="tab-art"',
-        'id="art-family-grid"'
+        'id="art-family-grid"',
+        'id="admin-readonly-pill"'
       ];
 
       requiredElements.forEach(item => {
