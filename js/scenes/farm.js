@@ -1048,18 +1048,45 @@ class FarmScene extends Phaser.Scene {
     const sx = this.farm.x + this.farm.w + 175;
     const sy = this.farm.y + this.farm.h / 2 + 25;
 
-    // Scatter wildflowers naturally
-    const flowers = ['flw_red', 'flw_yellow', 'flw_purple'];
+    // Scatter wildflower clumps on grass (HD when catalogued; matrix fallback).
+    const flowerColors = ['red', 'yellow', 'purple'];
     const flowerList = [];
-    for(let i=0; i<35; i++){
-      const fx = Phaser.Math.Between(40, W-40);
-      const fy = Phaser.Math.Between(40, H-40);
-      if(fx < this.farm.x - 20 || fx > this.farm.x + this.farm.w + 20 || fy < this.farm.y - 20 || fy > this.farm.y + this.farm.h + 20){
-        const fl = this.add.image(fx, fy, Phaser.Utils.Array.GetRandom(flowers))
-          .setScale(1.2).setDepth(fy);
-        flowerList.push(fl);
-        this.tweens.add({ targets: fl, angle: { from: -6, to: 6 }, duration: 1500 + Math.random()*1000, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-      }
+    const pondX = this.farm.x - 190;
+    const pondY = this.farm.y + this.farm.h / 2 + 40;
+    const inKeepout = (fx, fy) => {
+      if (fx > this.farm.x - 24 && fx < this.farm.x + this.farm.w + 24 &&
+          fy > this.farm.y - 24 && fy < this.farm.y + this.farm.h + 24) return true;
+      if (Math.abs(fx - pondX) < 175 && Math.abs(fy - pondY) < 90) return true;
+      // South band (desk + taste) and east kitchen — FarmScene.create draws flowers
+      // before the player picks Unit 10, so this keep-out is always on.
+      if (fy > this.farm.y + this.farm.h + 20 && fy < this.farm.y + this.farm.h + 190 &&
+          fx > this.farm.x - 90 && fx < this.farm.x + this.farm.w + 90) return true;
+      if (fx > this.farm.x + this.farm.w + 20 && fx < this.farm.x + this.farm.w + 260 &&
+          fy > this.farm.y + 60 && fy < this.farm.y + this.farm.h + 50) return true;
+      return false;
+    };
+    const want = 20;
+    let tries = 0;
+    while (flowerList.length < want && tries < 220) {
+      tries++;
+      const fx = Phaser.Math.Between(40, Math.max(80, W - 40));
+      const fy = Phaser.Math.Between(40, Math.max(80, H - 40));
+      if (inKeepout(fx, fy)) continue;
+      const tex = wildflowerTex(this, Phaser.Utils.Array.GetRandom(flowerColors));
+      const hd = tex.indexOf('_hd') >= 0;
+      const fl = this.add.image(fx, fy, tex)
+        .setOrigin(0.5, 1)
+        .setScale(hd ? 1 : 1.2)
+        .setDepth(fy);
+      flowerList.push(fl);
+      this.tweens.add({
+        targets: fl,
+        angle: { from: -6, to: 6 },
+        duration: 1500 + Math.random() * 1000,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.InOut'
+      });
     }
 
     // Micro World Details: Stone Well & Water Sparkles (Widened Placement)
@@ -1090,12 +1117,13 @@ class FarmScene extends Phaser.Scene {
     // R3: Perimeter Fences & Decorative Animated Fence Flowers
     const fenceY = this.farm.y - 12;
     const fenceFlowerColors = [0xEF4444, 0xFBBF24, 0xA855F7, 0xEC4899];
-    const fenceFlowerTexs = ['flw_red', 'flw_yellow', 'flw_purple'];
+    const fenceBloomColors = ['red', 'yellow', 'purple'];
     let postIdx = 0;
     const placeFenceBloom = (x, y, depth) => {
-      const base = fenceFlowerTexs[postIdx % fenceFlowerTexs.length];
-      const hd = this.textures.exists(base + '_hd');
-      const flower = this.add.image(x, y, hd ? base + '_hd' : base)
+      const color = fenceBloomColors[postIdx % fenceBloomColors.length];
+      const tex = fenceBloomTex(this, color);
+      const hd = tex.indexOf('_hd') >= 0;
+      const flower = this.add.image(x, y, tex)
         .setOrigin(0.5, 1)
         .setScale(hd ? 1 : 0.9)
         .setDepth(depth);
@@ -1223,22 +1251,25 @@ class FarmScene extends Phaser.Scene {
 
   _createButterflies(flowerList){
     if(!flowerList || !flowerList.length) return;
+    const openKey = butterflyTex(this, 'open');
+    const flapKey = butterflyTex(this, 'flap');
     for(let i=0; i<5; i++){
       const targetFlw = Phaser.Utils.Array.GetRandom(flowerList);
-      const bf = this.add.image(targetFlw.x, targetFlw.y - 12, 'bf_open').setDepth(targetFlw.y + 50);
-      
-      // Flapping wings animation using texture toggle
+      const bf = this.add.image(targetFlw.x, targetFlw.y - 18, openKey)
+        .setOrigin(0.5, 0.5)
+        .setScale(1)
+        .setDepth(targetFlw.y + 50);
+
       this.time.addEvent({
         delay: 180 + Math.random()*60,
         loop: true,
         callback: () => {
           if(bf && bf.active){
-            bf.setTexture(bf.texture.key === 'bf_open' ? 'bf_flap' : 'bf_open');
+            bf.setTexture(bf.texture.key === openKey ? flapKey : openKey);
           }
         }
       });
 
-      // Gentle fluttering path
       this.tweens.add({
         targets: bf,
         x: { value: `+=${Phaser.Math.Between(-60, 60)}`, ease: 'Sine.InOut' },

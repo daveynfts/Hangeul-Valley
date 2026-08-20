@@ -45,7 +45,6 @@
       "folder": "",
       "files": [],
       "preview": null,
-      "worldCostumeOf": ["2b-unit-10"],
       "states": {
         "walk": { "dirs": ["down", "up", "left", "right"], "frames": 3 },
         "idle": { "derived": "walk/0" }

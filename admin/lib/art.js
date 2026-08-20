@@ -104,7 +104,7 @@ function buildReport(rootDir) {
     if (a.status === 'shipped') fam.shipped++;
     if (a.status === 'unused') fam.unused++;
     if (a.status === 'missing') fam.missing++;
-    if (a.role === 'ripe' || a.role === 'prop' || a.role === 'walk_down_0' || a.role === 'summer' || a.role === 'bloom') {
+    if (a.role === 'ripe' || a.role === 'prop' || a.role === 'walk_down_0' || a.role === 'summer' || a.role === 'bloom' || a.role === 'ground-bloom' || a.role === 'open') {
       fam.preview = a.preview;
       fam.nameEn = a.nameEn.replace(/ — .*$/, '');
     }

@@ -245,7 +245,8 @@ const overlayIds = [
   const cats = new Set(ww.map((w) => w.category));
   check('2B Unit 10 has six vocab groups', ['음식', '맛', '식당 평가', '읽기', '주문', '회화'].every((c) => cats.has(c)),
     [...cats].join(', '));
-  check('2B Unit 10 has costumeSkinId chef', world.costumeSkinId === 'chef', String(world.costumeSkinId));
+  check('2B Unit 10 does not force matrix chef', !world.costumeSkinId,
+    String(world.costumeSkinId));
 }());
 
 // ── Unit 10 desk quiz ────────────────────────────────────────────────────────
@@ -325,6 +326,12 @@ function pngSize(rel) {
       const fam = a.family || 'character';
       if (!heightGroups[fam]) heightGroups[fam] = sz.w;
       else check(`${posix} shares ${fam} width ${heightGroups[fam]}`, sz.w === heightGroups[fam], `${sz.w} vs ${heightGroups[fam]}`);
+    }
+    if (a.status === 'shipped' && a.phaserKey &&
+        (a.heightClass === 'fence-bloom' || a.heightClass === 'ground-bloom' || a.heightClass === 'fauna')) {
+      const base = posix.split('/').pop().replace(/\.png$/i, '');
+      check(`${posix} phaserKey is basename_hd`, a.phaserKey === base + '_hd', a.phaserKey);
+      check(`ART_LOAD includes ${a.phaserKey}`, gameJs.indexOf("key: '" + a.phaserKey + "'") >= 0);
     }
   });
   const listPng = (dir, prefix) => {
@@ -464,8 +471,15 @@ function pngSize(rel) {
   (pack.skins || []).forEach((live) => {
     const d = (defPack.skins || []).find((s) => s.id === live.id);
     check(`DEFAULT ${live.id} matrixPrefix matches`, d && d.matrixPrefix === live.matrixPrefix);
-    check(`DEFAULT ${live.id} art is matrix`, d && d.art === 'matrix');
-    check(`DEFAULT ${live.id} files[] is empty`, d && Array.isArray(d.files) && d.files.length === 0);
+    if (live.id === pack.defaultSkinId) {
+      check(`DEFAULT ${live.id} art is hd`, d && d.art === 'hd');
+      check(`DEFAULT ${live.id} files[] match catalog`,
+        d && JSON.stringify(d.files || []) === JSON.stringify(live.files || []));
+      check(`DEFAULT ${live.id} folder matches catalog`, d && d.folder === live.folder);
+    } else {
+      check(`DEFAULT ${live.id} art is matrix`, d && d.art === 'matrix');
+      check(`DEFAULT ${live.id} files[] is empty`, d && Array.isArray(d.files) && d.files.length === 0);
+    }
   });
 }());
 
