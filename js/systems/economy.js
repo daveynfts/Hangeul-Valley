@@ -16,6 +16,16 @@ function isWorldLevel(lvl) {
 function isUnit10World() {
   return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10';
 }
+function isUnit14World() {
+  return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-14';
+}
+function isTextbookFarmWorld() {
+  return isUnit10World() || isUnit14World();
+}
+const TEXTBOOK_WORLD_FILES = [
+  { cache: 'world-2b-10', file: 'worlds/2b-unit-10.json' },
+  { cache: 'world-2b-14', file: 'worlds/2b-unit-14.json' }
+];
 const UNIT10_LAYOUT_DEFAULT = {
   stations: [
     { id: 'desk', nameKo: '학습 책상', ox: -28, oy: 480, scale: 1, originX: 0.52, interact: 80 },
@@ -47,7 +57,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-20260820e';
+const ART_CACHE_KEY = 'art-20260820f';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }
@@ -142,23 +152,30 @@ function attachTextbookWorld(world) {
 }
 let textbookWorldsTried = false;
 function loadTextbookWorlds(done) {
-  const finish = (data) => {
-    textbookWorldsTried = true;
+  const specs = TEXTBOOK_WORLD_FILES;
+  let remaining = specs.length;
+  const one = (data) => {
     if (data) attachTextbookWorld(data);
-    if (typeof done === 'function') done();
+    remaining--;
+    if (remaining <= 0) {
+      textbookWorldsTried = true;
+      if (typeof done === 'function') done();
+    }
   };
-  if (typeof sceneRef !== 'undefined' && sceneRef?.cache?.json?.exists?.('world-2b-10')) {
-    finish(sceneRef.cache.json.get('world-2b-10'));
-    return;
-  }
-  if ((typeof IS_NODE !== 'undefined' && IS_NODE) || typeof fetch !== 'function') {
-    finish(null);
-    return;
-  }
-  fetch('worlds/2b-unit-10.json')
-    .then(r => r && r.ok ? r.json() : null)
-    .then(finish)
-    .catch(() => finish(null));
+  specs.forEach((spec) => {
+    if (typeof sceneRef !== 'undefined' && sceneRef?.cache?.json?.exists?.(spec.cache)) {
+      one(sceneRef.cache.json.get(spec.cache));
+      return;
+    }
+    if ((typeof IS_NODE !== 'undefined' && IS_NODE) || typeof fetch !== 'function') {
+      one(null);
+      return;
+    }
+    fetch(spec.file)
+      .then(r => r && r.ok ? r.json() : null)
+      .then(one)
+      .catch(() => one(null));
+  });
 }
 
 function getUnlockedWords() {

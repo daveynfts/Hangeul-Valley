@@ -6,6 +6,7 @@ class FarmScene extends Phaser.Scene {
     PixelArtRenderer.generateTilemapTextures(this);
     this.load.json('levels','levels.json');
     this.load.json('world-2b-10','worlds/2b-unit-10.json');
+    this.load.json('world-2b-14','worlds/2b-unit-14.json');
     this.load.json('unit10-layout','worlds/unit10-layout.json?v=southband');
     this.load.json('skin-catalog', 'skins/catalog.json?v=' + SKIN_CATALOG_BOOT_V);
     ART_LOAD.forEach((a) => { this.load.image(a.key, artUrl(a.file)); });
@@ -48,6 +49,7 @@ class FarmScene extends Phaser.Scene {
     });
     levelsData = this.cache.json.get('levels') || [];
     if (this.cache.json.exists('world-2b-10')) attachTextbookWorld(this.cache.json.get('world-2b-10'));
+    if (this.cache.json.exists('world-2b-14')) attachTextbookWorld(this.cache.json.get('world-2b-14'));
     applyDebugSkinQuery();
     if(!levelsData.length){
       console.error('levels.json missing');
@@ -2467,23 +2469,29 @@ class FarmScene extends Phaser.Scene {
   _isUnit10(){
     return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10';
   }
+  _isTextbookFarm(){
+    if (typeof isTextbookFarmWorld === 'function') return isTextbookFarmWorld();
+    const id = currentLesson() && currentLesson().worldId;
+    return id === '2b-unit-10' || id === '2b-unit-14';
+  }
   _propTex(hdKey, fallback) {
     if (hdKey && this.textures && this.textures.exists(hdKey)) return hdKey;
     return fallback;
   }
 
-  // ── UNIT 10: stations sit on grass south/east of the farm rect; pond hidden; portal hidden ──
+  // ── Textbook farm: Unit 10/14 hide Valley minigames. Stations are Unit 10 only. ──
   syncUnit10World(){
-    const on = this._isUnit10();
-    this._setMinigameSpritesVisible(!on);
+    const farmOnly = this._isTextbookFarm();
+    const unit10 = this._isUnit10();
+    this._setMinigameSpritesVisible(!farmOnly);
     this._setPlotsVisible(true);
-    this._setPondVisible(!on);
-    if (this.portalSprite && this.portalSprite.setVisible) this.portalSprite.setVisible(!on);
-    if (this.portalHint && this.portalHint.setVisible) this.portalHint.setVisible(!on);
+    this._setPondVisible(!farmOnly);
+    if (this.portalSprite && this.portalSprite.setVisible) this.portalSprite.setVisible(!farmOnly);
+    if (this.portalHint && this.portalHint.setVisible) this.portalHint.setVisible(!farmOnly);
     if (this.player && this.player.active) {
       applySkinToSprite(this, this.player, FARM_SKIN_APPLY);
     }
-    if (on) {
+    if (unit10) {
       this._ensureTasteStation();
       this._ensureStudyDesk();
       this._ensureKitchen();
@@ -2689,7 +2697,7 @@ class FarmScene extends Phaser.Scene {
     for(const p of this.plots){ if(!skipStation(p)&&p.sState==='4'&&near(p)){openQuiz(p.word,p,3);return;} }
     // P2: wilting plants (Phase 2 review)
     for(const p of this.plots){ if(!skipStation(p)&&p.sState==='2'&&near(p)){openQuiz(p.word,p,2);return;} }
-    const extrasOn = !(isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10');
+    const extrasOn = !(typeof isTextbookFarmWorld === 'function' ? isTextbookFarmWorld() : this._isTextbookFarm());
     // Cat NPC
     if(extrasOn&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
       this.tweens.add({targets:this.catSprite,scale:{from:0.75,to:0.95},duration:100,yoyo:true,ease:'Back.Out(2)'});
