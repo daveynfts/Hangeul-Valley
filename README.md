@@ -4,9 +4,9 @@ A Stardew-Valley-flavoured Korean vocabulary game. You plant a Korean word, answ
 three-phase quiz as the crop grows, harvest it for Gold, and spend the Gold on new
 vocabulary packs, farm plots and cosmetics. 25 levels, 1,500 words, TOPIK 1–3 range.
 
-Built with Phaser 3 and vanilla JS — no build step, no framework, no bundler. All
-sprites are generated procedurally from character-matrix + palette definitions in
-`game.js`, so the whole game ships as four static files.
+Built with Phaser 3 and vanilla JS — no build step, no framework, no bundler.
+Farm props and the player walk cycle are HD PNGs in `sprites/` (catalogued in
+`sprites/catalog.json`); letter-matrix sprites in `js/renderer.js` remain as fallback.
 
 ---
 
@@ -287,7 +287,7 @@ standard orthography does not write those solid.
 
 **No two headwords share an English gloss.** 미술 and 예술 both read "art", so a four-option
 recognition question could render two identical buttons and score one of them wrong. Six such
-pairs existed; each now has a distinguishing gloss. `buildOptionSet` in `game.js` also dedupes
+pairs existed; each now has a distinguishing gloss. `buildOptionSet` in `js/ui.js` also dedupes
 on the rendered label, so a future collision cannot reach the screen — but the data invariant
 is what the learner actually needs.
 
@@ -376,7 +376,7 @@ Readings are shown with the **initial-sound rule** (두음법칙) made explicit 
 as `旅 (려 → 여) + 行 (행)`, because printing only the dictionary reading looks like a typo
 next to the word on screen, and printing only the surface form hides a rule learners need.
 
-The generator refuses to emit an origin class that `renderOrigin()` in `game.js` has no
+The generator refuses to emit an origin class that `renderOrigin()` in `js/ui.js` has no
 case for. That switch ends in `default: return ''`, so without the check a new class would
 produce entries that are curated but silently display nothing.
 
@@ -426,23 +426,27 @@ with nothing to point at.
 ## Project layout
 
 ```
-game.js          450 KB, ~12.1k lines — engine, 5 Phaser scenes, all game systems
-index.html       113 KB — DOM overlays and all CSS inline
-levels.json      280 KB — curriculum
-facts.json        58 KB — generated word origins, lazy-loaded
+js/              game scripts; js/manifest.json is the load order
+css/game.css     HUD and overlay styles
+index.html       DOM overlays + ordered <script> tags
+levels.json      curriculum (25 levels × 60 words)
+facts.json       generated word origins, lazy-loaded
+sprites/         HD PNG library + catalog.json
+worlds/          textbook worlds (Unit 10 layout, quiz, word list)
 main.py          PyWebView desktop wrapper + file-based save API
-assets/          mirror of the four shipped files (see caveat below)
-scripts/         data generators
-admin/           Express admin panel + its own test suite
+tests/           game suites (SRS, shop, sprites, inventory, cooking)
+scripts/         data generators, content validator, R2 upload
+admin/           Express admin panel (writable locally; read-only on Vercel)
+api/             Vercel serverless functions (save, admin GET, Unit 10)
 ```
 
-`game.js` holds five scenes — `FarmScene` (the hub), `ArcadeScene`, `DungeonScene`,
-`FishingScene`, `BeeScene` — plus the pixel renderer, chiptune synth, day/night and
-weather systems, and the economy, quest, inventory and cooking systems.
+`js/scenes/` holds five scenes — `FarmScene` (the hub), `ArcadeScene`, `DungeonScene`,
+`FishingScene`, `BeeScene` — with the pixel renderer, chiptune synth, day/night and
+weather systems, and the economy, quest, inventory and cooking systems in `js/systems/`
+and siblings. There is no bundler: `index.html` loads the files as classic script tags.
 
-> **`assets/` is a duplicate.** `main.py` serves from the repo root and copies the four
-> files into `assets/` on startup; `admin/lib/sync.js` writes both copies. Two sources
-> of truth for the same content — worth collapsing.
+Repo root is the only copy of the shipped game. Desktop (`main.py`) and Vercel both
+serve those files; there is no `assets/` mirror.
 
 ---
 
@@ -495,17 +499,14 @@ shutdown, page hide and the explicit 💾 Save button.
 
 ## Tests
 
-Everything below runs on push and on PRs to `main` via `.github/workflows/ci.yml`. All of it
-also runs locally with no setup beyond `npm ci` in `admin/`.
+Everything below runs on push and on PRs to `main` via `.github/workflows/ci.yml`. From the
+repo root, after `npm ci` in `admin/`:
 
 ```bash
-node scripts/validate_content.js      # data invariants — the content gate, 21 checks
-node test_srs_engine.js               # SM-2 scheduler + save migration, 147 assertions
-node test_r2_shop_vm.js               # shop + plot expansion, 65 assertions
-node test_m2_harness.js               # sprite matrix / palette integrity
-node test_m1_challenger_harness.js    # inventory, modals, ground drops — 49 assertions
-node test_m2_challenger_cooking.js    # cooking engine + recipes — 62 assertions
-cd admin && npm test                  # admin API, sync, frontend, edge cases — 44 assertions
+npm run validate     # data invariants — the content gate
+npm test             # SRS, shop, sprite matrices, inventory, cooking, farm hero
+npm run test:admin   # admin API, sync, frontend, edge cases
+# or: npm run test:all
 ```
 
 CI also re-runs `scripts/build_facts_json.js` and fails if that produces a diff. `facts.json`
@@ -522,14 +523,13 @@ confirming a non-zero exit.
 shape of `levels.json` and `facts.json` (25 levels, 1500 words, no duplicate Korean
 headwords, every word carrying `categoryEn`, every `facts.json` entry matching a real
 word), that Korean headwords carry their required word-spaces and no two share an English
-gloss, that no origin class can render blank, that `assets/` has not drifted from the root
-copies, and that **no Vietnamese has crept back into the shipped source** — an invariant
+gloss, that no origin class can render blank, and that **no Vietnamese has crept back into the shipped source** — an invariant
 that was established by hand and previously unguarded.
 
 Its three excluded characters are deliberate and documented in the script: `ã`/`õ` for the
 Portuguese loanword etymologies (pão, sabão) and `é` for "pet cafés".
 
-`test_srs_engine.js` runs the scheduler extracted from `game.js` in a bare vm and
+`test_srs_engine.js` runs the scheduler extracted from `js/systems/srs.js` in a bare vm and
 injects `now` into every call, which is why `srsSchedule` takes it as a parameter — it
 lets months of review history be simulated without touching the clock.
 
@@ -538,7 +538,7 @@ lets months of review history be simulated without touching the clock.
 Both are green now, and both were blocking CI rather than merely being untidy.
 
 `test_m1_challenger_harness.js` passed 49/49 and then never exited, so it had to be killed by
-hand. The cause was a module-scope side effect in `game.js`: the buff-HUD ticker is a 1-second
+hand. The cause was a module-scope side effect in `js/state.js`: the buff-HUD ticker is a 1-second
 `setInterval` that nothing ever clears, guarded only by `typeof window !== 'undefined'`. This
 harness mocks `window`, so the guard passed and the timer kept the Node process alive forever.
 The same mock — of `document` this time — also defeated `loadFacts()`'s browser check, so every
@@ -561,19 +561,41 @@ That last failure was hiding a real bug rather than being purely a test problem.
 honey recipes brought the total to 12, the card read `10/10` and showed the requirement as met
 on a trophy that could never unlock. The hardcoded count is gone; both paths read one source.
 
-Left out of CI: `scripts/verify_m2_m3.js`. It is undocumented, already failed on `main` before
-this work, and everything it checks — syntax, `assets/` parity, `levels.json` coverage — is
-covered by the suites above. It dies evaluating `game.js` in a bare vm on unguarded browser
-globals; one of those (`window.addEventListener` at what is now the `pywebviewready` block) is
-fixed here because it was inconsistent with the `typeof`-guarded block directly above it, but
-the rest of that chain was not worth chasing to revive a redundant script.
+Left out of CI historically: `scripts/verify_m2_m3.js`. It now runs standalone
+(`node scripts/verify_m2_m3.js`): syntax-check via `checkGameScripts()` plus
+`facts.json` / `levels.json` coverage keyed by Korean headword. The checks
+overlap the suites above, so it is still not a CI gate.
 
 ---
 
 ## Deployment
 
-Static hosting. `vercel.json` sets `cleanUrls`; the four shipped files live at the
-repo root, which is what Vercel serves.
+Static hosting on Vercel. `js/` and `index.html` are served from git. Curriculum JSON,
+worlds, sprites, and `skins/catalog.json` are rewritten in `vercel.json` to the public
+R2 CDN (`cdn.daveynfts.com/hangeul-valley/`). Player saves stay on **private** R2 via
+`/api/save`.
+
+That split is intentional (content can change without a git push), but the two channels
+must land in order: **R2 first, then Vercel**. A new `js/scenes/farm.js` that preloads a
+PNG which is not yet on the CDN 404s in prod.
+
+One command does the whole path:
+
+```bash
+npm run publish:prod
+```
+
+It runs `validate` → `PutObject` for every catalogued file → `HeadObject` + public GET of
+the four required JSON files → POST `VERCEL_DEPLOY_HOOK_URL`. Credentials live in
+`.env.local` (see `.env.example`). `--dry-run` prints the file list and does not touch
+the network. `--skip-deploy` is content-only.
+
+Create the hook in Vercel → Project → Settings → Git → Deploy Hooks. The same pipeline
+is a manual GitHub Action (Actions → Publish → Run workflow) once these repo secrets
+exist: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`,
+`R2_PUBLIC_BASE_URL`, `VERCEL_DEPLOY_HOOK_URL`.
+
+`npm run upload:r2` still uploads without deploying Vercel, if you only need the CDN.
 
 ---
 
@@ -588,8 +610,8 @@ repo root, which is what Vercel serves.
 3. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the
    exact timestamp they were scheduled; a real study tool batches by day boundary and
    caps how many land at once so a backlog cannot become unmanageable.
-4. **Split `game.js` into modules** behind Vite. `FarmScene` alone is ~2.4k lines, and
-   ~1.5k lines of cooking/leaderboard code sit at top level after `BeeScene`.
+4. **Vite / PWA modules.** Script-tag split of the engine is done (`js/*` + `js/manifest.json`).
+   Vite remains a later PR if we need minify, code-split, or a service worker.
 5. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
    review log — and the log it needs is now being recorded (see below), so the input is there.
 6. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing

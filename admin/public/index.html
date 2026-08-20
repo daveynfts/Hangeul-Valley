@@ -37,6 +37,9 @@
         <button class="nav-btn" data-tab="art" id="tab-btn-art">
           <span class="nav-icon">🎨</span> Art library
         </button>
+        <button class="nav-btn" data-tab="skins" id="tab-btn-skins">
+          <span class="nav-icon">🧑</span> Characters
+        </button>
       </nav>
 
       <div class="header-actions">
@@ -365,7 +368,7 @@
       <div class="u10-header">
         <div>
           <h2 class="section-title">2B Unit 10 workspace</h2>
-          <p class="section-desc">Move farm props, edit the study-desk quiz, and curate the textbook word list. Saves write to <code>worlds/</code> and <code>assets/worlds/</code>. Refresh the game tab to see layout changes.</p>
+          <p class="section-desc">Move farm props, edit the study-desk quiz, and curate the textbook word list. Saves write to <code>worlds/</code>. Refresh the game tab to see layout changes.</p>
         </div>
         <a class="btn btn-secondary btn-sm" id="btn-open-game" href="/" target="_blank" rel="noopener">Open game ↗</a>
       </div>
@@ -553,6 +556,36 @@
 
       <div id="art-family-grid" class="art-family-grid"></div>
     </section>
+    <section id="tab-skins" class="tab-content">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="section-title">Characters</h2>
+          <p class="section-desc">Preview walk cycles from <code>skins/catalog.json</code>. Switch opens the local farm with a session override — it never writes the player save.</p>
+        </div>
+        <div class="dash-quick-actions">
+          <button class="btn btn-secondary" id="btn-refresh-skins">🔄 Refresh</button>
+          <button class="btn btn-primary" id="btn-skin-switch">Open in farm</button>
+        </div>
+      </div>
+      <p class="section-desc" id="skins-switch-hint"></p>
+      <div class="skins-layout">
+        <div id="skins-list" class="skins-list"></div>
+        <div class="card widget-card skins-preview-card">
+          <div class="skins-preview-frame" id="skins-preview-frame">
+            <img id="skins-preview-img" class="art-preview-lg hidden" alt="Skin preview">
+            <p id="skins-preview-placeholder" class="text-muted">Select a skin.</p>
+          </div>
+          <p id="skins-preview-meta" class="text-muted"></p>
+          <div class="filter-mode-tabs" id="skins-dir-tabs">
+            <button class="mode-tab active" data-dir="down">Down</button>
+            <button class="mode-tab" data-dir="up">Up</button>
+            <button class="mode-tab" data-dir="left">Left</button>
+            <button class="mode-tab" data-dir="right">Right</button>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-skin-play">Play walk</button>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Global Toast Notification Container -->
@@ -572,5 +605,6 @@
   <script src="js/vocab.js"></script>
   <script src="js/world.js"></script>
   <script src="js/art.js"></script>
+  <script src="js/skins.js"></script>
 </body>
 </html>

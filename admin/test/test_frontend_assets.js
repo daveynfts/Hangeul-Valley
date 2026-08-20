@@ -71,7 +71,8 @@ async function runTests() {
         path.join(publicDir, 'js/levels.js'),
         path.join(publicDir, 'js/vocab.js'),
         path.join(publicDir, 'js/world.js'),
-        path.join(publicDir, 'js/art.js')
+        path.join(publicDir, 'js/art.js'),
+        path.join(publicDir, 'js/skins.js')
       ];
 
       files.forEach(f => {
@@ -89,7 +90,8 @@ async function runTests() {
         path.join(publicDir, 'js/levels.js'),
         path.join(publicDir, 'js/vocab.js'),
         path.join(publicDir, 'js/world.js'),
-        path.join(publicDir, 'js/art.js')
+        path.join(publicDir, 'js/art.js'),
+        path.join(publicDir, 'js/skins.js')
       ];
 
       jsFiles.forEach(f => {
@@ -124,10 +126,14 @@ async function runTests() {
         'src="js/vocab.js"',
         'src="js/world.js"',
         'src="js/art.js"',
+        'src="js/skins.js"',
         'data-tab="unit10"',
         'data-tab="art"',
+        'data-tab="skins"',
         'id="tab-art"',
+        'id="tab-skins"',
         'id="art-family-grid"',
+        'id="skins-list"',
         'id="admin-readonly-pill"'
       ];
 
@@ -186,7 +192,7 @@ async function runTests() {
     });
 
     await test('Express serves JS files at GET /js/*.js with 200 OK and javascript Content-Type', async () => {
-      const jsFiles = ['/js/app.js', '/js/dashboard.js', '/js/levels.js', '/js/vocab.js', '/js/art.js'];
+      const jsFiles = ['/js/app.js', '/js/dashboard.js', '/js/levels.js', '/js/vocab.js', '/js/art.js', '/js/skins.js'];
       for (const jsPath of jsFiles) {
         const res = await makeRequest(port, jsPath);
         assert(res.status === 200, `GET ${jsPath} status is 200, got ${res.status}`);

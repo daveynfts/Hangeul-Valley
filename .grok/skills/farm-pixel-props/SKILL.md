@@ -62,7 +62,7 @@ One Phaser spawn path per family: `*_hd` key, matrix fallback, scale 1 on HD, no
 
 ## 2. Key, crop, size
 
-Run `scripts/process_prop.py` (Pillow) with the class `--height`. It keys magenta / rose, crops 2px pad (feet stay the last opaque row), resizes, keys again, writes `sprites/<name>.png` and `assets/sprites/<name>.png`.
+Run `scripts/process_prop.py` (Pillow) with the class `--height`. It keys magenta / rose, crops 2px pad (feet stay the last opaque row), resizes, keys again, and writes `sprites/<name>.png` (repo root is the source of truth).
 
 Character sets: `--height 80 --subdir characters/<slug>` per frame, then one `--pad-set characters/<slug>` so every `walk_*.png` shares the same width (torso centered, extra rows above, feet last opaque row). Do not skip `--pad-set` — unequal widths sway the sprite. Register the frames in `sprites/catalog.json`.
 

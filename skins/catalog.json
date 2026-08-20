@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "cacheKey": "skins-20260820a",
+  "defaultSkinId": "farmer",
+  "skins": [
+    {
+      "id": "farmer",
+      "nameEn": "Valley Farmer",
+      "rarity": "common",
+      "price": 0,
+      "currency": "coins",
+      "unlock": { "type": "default" },
+      "art": "hd",
+      "matrixPrefix": "player",
+      "folder": "characters/valley-farmer",
+      "files": [
+        "walk_down_0.png",
+        "walk_down_1.png",
+        "walk_down_2.png",
+        "walk_up_0.png",
+        "walk_up_1.png",
+        "walk_up_2.png",
+        "walk_left_0.png",
+        "walk_left_1.png",
+        "walk_left_2.png",
+        "walk_right_0.png",
+        "walk_right_1.png",
+        "walk_right_2.png"
+      ],
+      "preview": "walk_down_0.png",
+      "states": {
+        "walk": { "dirs": ["down", "up", "left", "right"], "frames": 3 },
+        "idle": { "derived": "walk/0" }
+      }
+    },
+    {
+      "id": "chef",
+      "nameEn": "Kitchen Chef",
+      "rarity": "uncommon",
+      "price": 40,
+      "currency": "gems",
+      "unlock": { "type": "shop" },
+      "art": "matrix",
+      "matrixPrefix": "chef",
+      "folder": "",
+      "files": [],
+      "preview": null,
+      "worldCostumeOf": ["2b-unit-10"],
+      "states": {
+        "walk": { "dirs": ["down", "up", "left", "right"], "frames": 3 },
+        "idle": { "derived": "walk/0" }
+      }
+    }
+  ]
+}

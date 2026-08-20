@@ -163,10 +163,9 @@ window.apiFetch.saveUnit10Quiz = (body) => window.apiFetch('/api/unit10/quiz', {
 window.apiFetch.getUnit10World = () => window.apiFetch('/api/unit10/world');
 window.apiFetch.saveUnit10World = (body) => window.apiFetch('/api/unit10/world', { method: 'PUT', body });
 window.apiFetch.addVocabFact = (factData) => window.apiFetch('/api/vocab-facts', { method: 'POST', body: factData });
-window.apiFetch.updateVocabFact = (key, factData) => window.apiFetch(`/api/vocab-facts/${encodeURIComponent(key)}`, { method: 'PUT', body: factData });
-window.apiFetch.deleteVocabFact = (key) => window.apiFetch(`/api/vocab-facts/${encodeURIComponent(key)}`, { method: 'DELETE' });
 window.apiFetch.sync = () => window.apiFetch('/api/sync', { method: 'POST' });
 window.apiFetch.getArt = () => window.apiFetch('/api/art');
+window.apiFetch.getSkinCatalog = () => window.apiFetch('/api/skins/catalog');
 window.apiFetch.getAdminHost = () => window.apiFetch('/api/admin-host');
 
 // 5. Data Refresh & Synchronization Manager
@@ -195,7 +194,9 @@ window.AppController = {
         const hostRes = await window.apiFetch.getAdminHost();
         if (hostRes && hostRes.success) this.applyHost(hostRes.data);
       } catch (e) {
-        this.applyHost({ writable: true, gameUrl: 'http://localhost:8742/' });
+        const host = (typeof location !== 'undefined' && location.hostname) || '';
+        const local = host === 'localhost' || host === '127.0.0.1';
+        this.applyHost({ writable: local, gameUrl: local ? 'http://localhost:8742/' : '/' });
       }
       const [statsRes, levelsRes, vocabRes] = await Promise.all([
         window.apiFetch.getStats(),
@@ -251,7 +252,7 @@ window.AppController = {
     try {
       const res = await window.apiFetch.sync();
       if (res.success) {
-        window.Toast.success('Root and assets files successfully synchronized!', 'File Sync');
+        window.Toast.success('levels.json written; game scripts syntax-checked.', 'File Sync');
         await this.fetchAllData();
       }
     } catch (err) {
@@ -267,7 +268,8 @@ window.AppRouter = {
     'levels': () => window.LevelsView && window.LevelsView.render(),
     'vocab': () => window.VocabView && window.VocabView.render(),
     'unit10': () => window.Unit10View && window.Unit10View.render(),
-    'art': () => window.ArtView && window.ArtView.render()
+    'art': () => window.ArtView && window.ArtView.render(),
+    'skins': () => window.SkinsView && window.SkinsView.render()
   },
 
   init() {
@@ -335,6 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentTab === 'levels' && window.LevelsView) window.LevelsView.render();
     if (currentTab === 'vocab' && window.VocabView) window.VocabView.render();
     if (currentTab === 'art' && window.ArtView) window.ArtView.render();
+    if (currentTab === 'skins' && window.SkinsView) window.SkinsView.render();
   });
 
   // Initial Data Fetch & Router Activation

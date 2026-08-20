@@ -41,11 +41,17 @@ function setCors(req, res) {
 
 async function verifyGoogleIdToken(idToken) {
   if (!idToken) return null;
+  const aud = env('GOOGLE_CLIENT_ID');
+  if (!aud) {
+    const err = new Error('GOOGLE_CLIENT_ID is not configured');
+    err.status = 503;
+    err.code = 'AUTH_NOT_CONFIGURED';
+    throw err;
+  }
   const r = await fetch('https://oauth2.googleapis.com/tokeninfo?id_token=' + encodeURIComponent(idToken));
   if (!r.ok) return null;
   const p = await r.json();
-  const aud = env('GOOGLE_CLIENT_ID');
-  if (aud && p.aud !== aud) return null;
+  if (p.aud !== aud) return null;
   if (p.iss !== 'https://accounts.google.com' && p.iss !== 'accounts.google.com') return null;
   if (!p.sub) return null;
   return {

@@ -23,9 +23,6 @@ function getLevelByNum(levelNum, rootDir) {
 }
 
 function updateLevels(newLevels, rootDir) {
-  if (!Array.isArray(newLevels)) {
-    throw new Error('Levels payload must be an array.');
-  }
   return syncLevels(newLevels, rootDir);
 }
 
@@ -41,7 +38,15 @@ function updateLevelMetadata(levelNum, metadata, rootDir) {
   if (metadata.name !== undefined) targetLevel.name = String(metadata.name);
   if (metadata.icon !== undefined) targetLevel.icon = String(metadata.icon);
   if (metadata.description !== undefined) targetLevel.description = String(metadata.description);
-  if (metadata.target !== undefined) targetLevel.target = Number(metadata.target);
+  if (metadata.target !== undefined) {
+    const n = Number(metadata.target);
+    if (!Number.isFinite(n)) {
+      const err = new Error('Level target must be a number.');
+      err.status = 400;
+      throw err;
+    }
+    targetLevel.target = n;
+  }
 
   syncLevels(levels, rootDir);
   return targetLevel;
@@ -158,7 +163,7 @@ function getStats(rootDir) {
   try {
     vocabData = vocabFacts.getVocabFactsData(rootDir);
   } catch (err) {
-    // If game.js doesn't exist yet, handle gracefully
+    // If facts.json doesn't exist yet, handle gracefully
   }
 
   return {

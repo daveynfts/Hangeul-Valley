@@ -27,6 +27,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const { readGameSource } = require('./gameSource');
 const levelsData = JSON.parse(fs.readFileSync(path.join(ROOT, 'levels.json'), 'utf8'));
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -2000,7 +2001,7 @@ if (orphaned.length) {
 // origin class here and forgetting to add a case there silently produces entries that are
 // curated but display nothing. That happened once already with idiom / discourse /
 // loan-partial, so the generator now refuses to emit a class game.js cannot render.
-const gameJs = fs.readFileSync(path.join(ROOT, 'game.js'), 'utf8');
+const gameJs = readGameSource();
 const renderOriginBody = gameJs.slice(
   gameJs.indexOf('function renderOrigin('),
   gameJs.indexOf('function renderStructure(')
@@ -2018,9 +2019,6 @@ if (unrenderable.length) {
 
 const out = path.join(ROOT, 'facts.json');
 fs.writeFileSync(out, JSON.stringify(facts), 'utf8');
-// Mirror into assets/, which main.py serves from and admin/lib/sync.js keeps in step.
-const assetsFacts = path.join(ROOT, 'assets', 'facts.json');
-if (fs.existsSync(path.dirname(assetsFacts))) fs.copyFileSync(out, assetsFacts);
 
 const kb = (fs.statSync(out).size / 1024).toFixed(1);
 console.log(`facts.json written: ${Object.keys(facts).length} entries from ${total} words, ${kb} KB`);

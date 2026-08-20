@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const os = require('os');
 const syncLib = require('../lib/sync');
 const levelsLib = require('../lib/levels');
 const vocabFactsLib = require('../lib/vocabFacts');
+const { makeWriteSandbox, rmSandbox } = require('./sandbox');
 
-const rootDir = path.resolve(__dirname, '../../');
+const repoRoot = path.resolve(__dirname, '../../');
 
 function assert(condition, message) {
   if (!condition) {
@@ -19,8 +20,8 @@ async function runTests() {
   let failed = 0;
   const testDetails = [];
 
-  const originalLevels = fs.readFileSync(path.join(rootDir, 'levels.json'), 'utf8');
-  const originalGameJs = fs.readFileSync(path.join(rootDir, 'game.js'), 'utf8');
+  const sandbox = makeWriteSandbox(repoRoot);
+  const rootDir = sandbox;
 
   async function test(name, fn) {
     try {
@@ -35,73 +36,40 @@ async function runTests() {
   }
 
   try {
-    // 1. levels.json & assets/levels.json content equality check & JSON parsing
-    await test('levels.json & assets/levels.json exist, parse cleanly, and match equality', () => {
-      const rootLevelsPath = path.join(rootDir, 'levels.json');
-      const assetLevelsPath = path.join(rootDir, 'assets/levels.json');
-
-      assert(fs.existsSync(rootLevelsPath), 'levels.json exists');
-      assert(fs.existsSync(assetLevelsPath), 'assets/levels.json exists');
-
-      const rootContent = fs.readFileSync(rootLevelsPath, 'utf8');
-      const assetContent = fs.readFileSync(assetLevelsPath, 'utf8');
-
-      const rootParsed = JSON.parse(rootContent);
-      const assetParsed = JSON.parse(assetContent);
-
-      assert(Array.isArray(rootParsed), 'root levels.json is valid array');
-      assert(Array.isArray(assetParsed), 'assets levels.json is valid array');
-      assert(rootParsed.length === assetParsed.length, 'both levels files have same length');
-
-      // Compare JSON strings
-      assert(rootContent === assetContent, 'levels.json and assets/levels.json content strings match exactly');
+    await test('levels.json exists, parses as an array, and is the single source of truth', () => {
+      const levelsPath = path.join(repoRoot, 'levels.json');
+      assert(fs.existsSync(levelsPath), 'levels.json exists');
+      const content = fs.readFileSync(levelsPath, 'utf8');
+      const parsed = JSON.parse(content);
+      assert(Array.isArray(parsed), 'levels.json is a valid array');
+      assert(parsed.length > 0, 'levels.json is non-empty');
     });
 
-    // 2. node -c execution checks via execSync for game.js and assets/game.js
-    await test('node -c game.js & assets/game.js execution checks pass with 0 syntax errors', () => {
-      const rootGameJsPath = path.join(rootDir, 'game.js');
-      const assetGameJsPath = path.join(rootDir, 'assets/game.js');
-
-      assert(fs.existsSync(rootGameJsPath), 'game.js exists');
-      assert(fs.existsSync(assetGameJsPath), 'assets/game.js exists');
-
-      // Execute node -c directly via child_process.execSync
-      execSync(`node -c "${rootGameJsPath}"`, { stdio: 'pipe' });
-      execSync(`node -c "${assetGameJsPath}"`, { stdio: 'pipe' });
-
-      // Also verify via syncLib.validateJsSyntax
-      const rootCheck = syncLib.validateJsSyntax(rootGameJsPath);
-      const assetCheck = syncLib.validateJsSyntax(assetGameJsPath);
-
-      assert(rootCheck.valid === true, `root game.js valid syntax (${rootCheck.error || ''})`);
-      assert(assetCheck.valid === true, `assets/game.js valid syntax (${assetCheck.error || ''})`);
+    await test('every js/manifest.json file passes node -c', () => {
+      const checked = syncLib.validateGameScripts(repoRoot);
+      assert(checked.success === true, 'validateGameScripts succeeded');
+      assert(checked.files.length >= 17, `manifest lists split game scripts (got ${checked.files.length})`);
+      checked.files.forEach((rel) => {
+        const full = path.join(repoRoot, ...rel.split('/'));
+        assert(fs.existsSync(full), rel + ' exists');
+        const check = syncLib.validateJsSyntax(full);
+        assert(check.valid === true, `${rel} valid syntax (${check.error || ''})`);
+      });
     });
 
-    // 3. Auto-sync test for levels: mutate level via lib, verify both root and assets mirror files update synchronously
-    await test('Auto-sync levels: writing test level updates both root and assets mirror files synchronously', () => {
-      const testLevelNum = 1;
+    await test('Writing a test level updates the root levels.json', () => {
       const testMetadata = { name: 'Level Sync Verification Test' };
+      levelsLib.updateLevelMetadata(1, testMetadata, rootDir);
 
-      levelsLib.updateLevelMetadata(testLevelNum, testMetadata, rootDir);
-
-      const rootContent = fs.readFileSync(path.join(rootDir, 'levels.json'), 'utf8');
-      const assetContent = fs.readFileSync(path.join(rootDir, 'assets/levels.json'), 'utf8');
-
-      assert(rootContent === assetContent, 'Root and asset mirror level files are identical after edit');
-      assert(rootContent.includes('Level Sync Verification Test'), 'Root levels.json contains update');
-      assert(assetContent.includes('Level Sync Verification Test'), 'assets/levels.json contains update');
-
-      const rootParsed = JSON.parse(rootContent);
-      const assetParsed = JSON.parse(assetContent);
-      assert(rootParsed[0].name === 'Level Sync Verification Test', 'Parsed JSON level 1 name updated');
-      assert(assetParsed[0].name === 'Level Sync Verification Test', 'Parsed asset level 1 name updated');
+      const content = fs.readFileSync(path.join(rootDir, 'levels.json'), 'utf8');
+      assert(content.includes('Level Sync Verification Test'), 'levels.json contains update');
+      const parsed = JSON.parse(content);
+      assert(parsed[0].name === 'Level Sync Verification Test', 'Parsed JSON level 1 name updated');
     });
 
-    // 4. Word origins are read-only and no longer live in game.js: they were moved to
-    // the generated facts.json, so a write must be refused rather than rewriting game.js.
-    await test('Word origins are read-only: writes are refused and game.js is left untouched', () => {
-      const rootBefore = fs.readFileSync(path.join(rootDir, 'game.js'), 'utf8');
-      const assetBefore = fs.readFileSync(path.join(rootDir, 'assets/game.js'), 'utf8');
+    await test('Word origins are read-only: writes are refused and game scripts are left untouched', () => {
+      const sample = path.join(repoRoot, 'js', 'systems', 'save.js');
+      const before = fs.readFileSync(sample, 'utf8');
 
       let caught = false;
       try {
@@ -112,44 +80,29 @@ async function runTests() {
         assert(/build_facts_json\.js/.test(err.message), 'error points at the generator');
       }
       assert(caught === true, 'addVocabFact threw instead of writing');
+      assert(fs.readFileSync(sample, 'utf8') === before, 'save.js unchanged');
 
-      assert(fs.readFileSync(path.join(rootDir, 'game.js'), 'utf8') === rootBefore, 'game.js unchanged');
-      assert(fs.readFileSync(path.join(rootDir, 'assets/game.js'), 'utf8') === assetBefore, 'assets/game.js unchanged');
-      assert(rootBefore === assetBefore, 'game.js and assets/game.js remain identical');
-
-      // facts.json itself must be valid JSON and mirrored into assets/
-      const facts = JSON.parse(fs.readFileSync(path.join(rootDir, 'facts.json'), 'utf8'));
+      const facts = JSON.parse(fs.readFileSync(path.join(repoRoot, 'facts.json'), 'utf8'));
       assert(Object.keys(facts).length > 0, 'facts.json parses and is non-empty');
-
-      execSync(`node -c "${path.join(rootDir, 'game.js')}"`, { stdio: 'pipe' });
-      execSync(`node -c "${path.join(rootDir, 'assets/game.js')}"`, { stdio: 'pipe' });
+      const checked = syncLib.validateGameScripts(repoRoot);
+      assert(checked.success === true, 'game scripts still valid');
     });
 
-    // 5. Syntax Error Rejection & Rollback test
-    await test('Syntax Error Rejection & Rollback: invalid JS prevents sync and preserves intact original files', () => {
-      const invalidJsContent = 'const VOCAB_FACTS = { invalid js string syntax without closing brace...';
-
-      let caught = false;
+    await test('validateJsSyntax rejects invalid JavaScript', () => {
+      const tempPath = path.join(os.tmpdir(), '_sync_syntax_temp.js');
+      fs.writeFileSync(tempPath, 'const VOCAB_FACTS = { invalid js string syntax without closing brace...', 'utf8');
       try {
-        syncLib.syncGameJs(invalidJsContent, rootDir);
-      } catch (err) {
-        caught = true;
-        assert(err.message.includes('syntax error'), 'Error message mentions syntax error');
+        const check = syncLib.validateJsSyntax(tempPath);
+        assert(check.valid === false, 'invalid JS is rejected');
+      } finally {
+        if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
       }
-
-      assert(caught === true, 'syncGameJs threw error on invalid JS');
-
-      // Verify node -c on original files after failed sync attempt
-      const rootCheck = syncLib.validateJsSyntax(path.join(rootDir, 'game.js'));
-      const assetCheck = syncLib.validateJsSyntax(path.join(rootDir, 'assets/game.js'));
-      assert(rootCheck.valid === true, 'root game.js remains valid syntax after rollback');
-      assert(assetCheck.valid === true, 'assets/game.js remains valid syntax after rollback');
+      const checked = syncLib.validateGameScripts(repoRoot);
+      assert(checked.success === true, 'live game scripts remain valid');
     });
 
   } finally {
-    // Restore original files
-    syncLib.syncLevels(JSON.parse(originalLevels), rootDir);
-    syncLib.syncGameJs(originalGameJs, rootDir);
+    rmSandbox(sandbox);
   }
 
   const duration = Date.now() - startTime;

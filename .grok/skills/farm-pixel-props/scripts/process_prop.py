@@ -1,8 +1,7 @@
-"""Key magenta, crop to feet, resize, write sprites/ + assets/sprites/."""
+"""Key magenta, crop to feet, resize, write sprites/."""
 from __future__ import annotations
 
 import argparse
-import shutil
 from collections import deque
 from pathlib import Path
 
@@ -112,17 +111,6 @@ def process(src: Path, dest: Path, max_h: int = 156, pad: int = 2) -> None:
     im.save(dest, "PNG")
 
 
-def mirror_to_assets(root: Path, dest: Path) -> Path:
-    try:
-        rel = dest.relative_to(root / "sprites")
-    except ValueError:
-        raise SystemExit(f"dest not under sprites/: {dest}")
-    mirror = root / "assets" / "sprites" / rel
-    mirror.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(dest, mirror)
-    return mirror
-
-
 def pad_set(root: Path, subdir: str, height: int = 80) -> None:
     d = root / "sprites" / safe_subdir(subdir)
     files = sorted(d.glob("walk_*.png"))
@@ -145,7 +133,6 @@ def pad_set(root: Path, subdir: str, height: int = 80) -> None:
         y = height - src.height
         canvas.paste(src, (x, y), src)
         canvas.save(f, "PNG")
-        mirror_to_assets(root, f)
         print(f, canvas.size)
 
 
@@ -155,7 +142,7 @@ def main() -> None:
     p.add_argument("name", nargs="?", help="basename without extension, e.g. study_desk")
     p.add_argument("--root", default=".")
     p.add_argument("--height", type=int, default=156)
-    p.add_argument("--subdir", default="", help="under sprites/, e.g. skins/farmer")
+    p.add_argument("--subdir", default="", help="under sprites/, e.g. characters/valley-farmer")
     p.add_argument("--pad-set", default="", help="pad walk_*.png in this subdir to shared canvas")
     args = p.parse_args()
     root = Path(args.root)
@@ -170,7 +157,6 @@ def main() -> None:
     sub = safe_subdir(args.subdir) if args.subdir else Path()
     dest = root / "sprites" / sub / f"{args.name}.png"
     process(Path(args.src), dest, max_h=args.height)
-    mirror_to_assets(root, dest)
     print(dest, Image.open(dest).size)
 
 

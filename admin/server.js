@@ -8,6 +8,7 @@ const vocabFactsLib = require('./lib/vocabFacts');
 const syncLib = require('./lib/sync');
 const worldLib = require('./lib/world');
 const artLib = require('./lib/art');
+const skinsLib = require('./lib/skins');
 
 const app = express();
 
@@ -292,6 +293,15 @@ app.get('/api/art', (req, res, next) => {
   catch (err) { next(err); }
 });
 
+app.get('/api/skins/catalog', (req, res, next) => {
+  try { res.json({ success: true, data: skinsLib.getCatalog(getRootDir()) }); }
+  catch (err) { next(err); }
+});
+app.put('/api/skins/catalog', (req, res, next) => {
+  try { res.json({ success: true, data: skinsLib.saveCatalog(req.body, getRootDir()) }); }
+  catch (err) { err.status = 400; next(err); }
+});
+
 app.get('/api/admin-host', (req, res) => {
   res.json({
     success: true,
@@ -314,14 +324,12 @@ app.post('/api/sync', (req, res, next) => {
     const levels = levelsLib.getLevels(root);
     syncLib.syncLevels(levels, root);
 
-    const paths = syncLib.getPaths(root);
-    const gameJsContent = fs.readFileSync(paths.gameJsPath, 'utf8');
-    syncLib.syncGameJs(gameJsContent, root);
+    const scriptCheck = syncLib.validateGameScripts(root);
 
     res.json({
       success: true,
-      message: 'Root and assets files validated and synchronized.',
-      syncedFiles: ['levels.json -> assets/levels.json', 'game.js -> assets/game.js']
+      message: 'levels.json written; game scripts syntax-checked.',
+      syncedFiles: ['levels.json'].concat(scriptCheck.files)
     });
   } catch (err) {
     next(err);
@@ -331,7 +339,7 @@ app.post('/api/sync', (req, res, next) => {
 // Global Error Handler
 app.use((err, req, res, next) => {
   console.error('[Admin Server Error]', err);
-  const status = err.status || 500;
+  const status = err.status || err.statusCode || 500;
   res.status(status).json({
     success: false,
     error: err.name || 'Internal Server Error',

@@ -1,0 +1,19 @@
+[
+  "js/state.js",
+  "js/audio.js",
+  "js/renderer.js",
+  "js/systems/srs.js",
+  "js/systems/save.js",
+  "js/systems/economy.js",
+  "js/data.js",
+  "js/ui.js",
+  "js/systems/atmosphere.js",
+  "js/skins.js",
+  "js/scenes/farm.js",
+  "js/scenes/arcade.js",
+  "js/scenes/dungeon.js",
+  "js/scenes/fishing.js",
+  "js/scenes/bee.js",
+  "js/overlays.js",
+  "js/boot.js"
+]

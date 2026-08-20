@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 const syncLib = require('../lib/sync');
 const levelsLib = require('../lib/levels');
 const vocabFactsLib = require('../lib/vocabFacts');
+const { makeWriteSandbox, rmSandbox } = require('./sandbox');
 
-const rootDir = path.resolve(__dirname, '../../');
+const repoRoot = path.resolve(__dirname, '../../');
 
 function assert(condition, message) {
   if (!condition) {
@@ -19,8 +19,8 @@ async function runTests() {
   let failed = 0;
   const testDetails = [];
 
-  const originalLevels = fs.readFileSync(path.join(rootDir, 'levels.json'), 'utf8');
-  const originalGameJs = fs.readFileSync(path.join(rootDir, 'game.js'), 'utf8');
+  const sandbox = makeWriteSandbox(repoRoot);
+  const rootDir = sandbox;
 
   async function test(name, fn) {
     try {
@@ -61,8 +61,8 @@ async function runTests() {
       assert(Object.keys(factsData.facts).every(k => k === k.normalize('NFC')), 'All facts.json keys are NFC-normalized');
 
       // Validate syntax on disk
-      const syntaxCheck = syncLib.validateJsSyntax(path.join(rootDir, 'game.js'));
-      assert(syntaxCheck.valid === true, 'game.js remains valid JS syntax with multi-byte strings');
+      const syntaxCheck = syncLib.validateGameScripts(repoRoot);
+      assert(syntaxCheck.success === true, 'game scripts remain valid JS syntax with multi-byte strings');
     });
 
     // 2. Emojis and Unicode Symbols handling
@@ -105,8 +105,8 @@ async function runTests() {
       const raw = fs.readFileSync(path.join(rootDir, 'levels.json'), 'utf8');
       assert(JSON.parse(raw).length > 0, 'levels.json still parses after special characters');
 
-      const syntaxCheck = syncLib.validateJsSyntax(path.join(rootDir, 'game.js'));
-      assert(syntaxCheck.valid === true, 'game.js passes node -c');
+      const syntaxCheck = syncLib.validateGameScripts(repoRoot);
+      assert(syntaxCheck.success === true, 'game scripts pass node -c');
     });
 
     // 4. Boundary Values
@@ -203,9 +203,7 @@ async function runTests() {
     });
 
   } finally {
-    // Restore original files
-    syncLib.syncLevels(JSON.parse(originalLevels), rootDir);
-    syncLib.syncGameJs(originalGameJs, rootDir);
+    rmSandbox(sandbox);
   }
 
   const duration = Date.now() - startTime;
