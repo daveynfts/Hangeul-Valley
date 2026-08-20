@@ -169,7 +169,7 @@ const emptyNote = Object.entries(facts)
 check('no curated entry has an empty note', emptyNote.length === 0, emptyNote.slice(0, 5).join(', '));
 
 // ── Shipped source ───────────────────────────────────────────────────────────
-['game.js', 'index.html'].forEach((f) => {
+['game.js', 'index.html', path.join('sprites', 'catalog.json')].forEach((f) => {
   const src = read(f);
   const hits = src.split('\n')
     .map((line, i) => ({ line, n: i + 1 }))
@@ -256,7 +256,7 @@ const overlayIds = [
   check('desk quiz items are well-formed English MCQs', bad.length === 0, bad.slice(0, 6).join(', '));
 }());
 
-['game.js', 'index.html', 'levels.json', 'facts.json', path.join('worlds', '2b-unit-10.json'), path.join('worlds', 'unit10-desk-quiz.json'), path.join('worlds', 'unit10-layout.json')].forEach((f) => {
+['game.js', 'index.html', 'levels.json', 'facts.json', path.join('worlds', '2b-unit-10.json'), path.join('worlds', 'unit10-desk-quiz.json'), path.join('worlds', 'unit10-layout.json'), path.join('sprites', 'catalog.json')].forEach((f) => {
   const a = path.join(ROOT, f);
   const b = path.join(ROOT, 'assets', f);
   if (!fs.existsSync(b)) { check(`assets/${f} exists`, false); return; }
@@ -297,20 +297,62 @@ function pngSize(rel) {
   });
 }());
 
-(function checkFarmerWalkSet() {
-  const dirs = ['down', 'up', 'left', 'right'];
-  let sharedW = null;
-  dirs.forEach((dir) => {
-    [0, 1, 2].forEach((frame) => {
-      const rel = path.join('sprites', 'skins', 'farmer', 'walk_' + dir + '_' + frame + '.png');
-      const full = path.join(ROOT, rel);
-      if (!check(rel + ' exists', fs.existsSync(full))) return;
-      const sz = pngSize(rel);
-      check(rel + ' height is 80', sz.h === 80, sz.w + 'x' + sz.h);
-      if (sharedW == null) sharedW = sz.w;
-      else check(rel + ' shares walk width ' + sharedW, sz.w === sharedW, sz.w + ' vs ' + sharedW);
-    });
+(function checkArtCatalog() {
+  const rel = path.join('sprites', 'catalog.json');
+  let pack;
+  try { pack = JSON.parse(read(rel)); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('art catalog has assets[]', Array.isArray(pack.assets) && pack.assets.length > 0);
+  const ids = new Set();
+  const catalogPaths = new Set();
+  const gameJs = read('game.js');
+  check('game.js declares ART_LOAD', gameJs.indexOf('const ART_LOAD') >= 0);
+  check('game.js declares CROP_ART_FOLDER', gameJs.indexOf('const CROP_ART_FOLDER') >= 0);
+  check('game.js declares FARMER_ART_FOLDER', gameJs.indexOf('const FARMER_ART_FOLDER') >= 0);
+  const heightGroups = {};
+  const shippedPaths = new Set();
+  (pack.assets || []).forEach((a) => {
+    if (!a || !a.id || !a.path) {
+      check('catalog row has id+path', false, JSON.stringify(a));
+      return;
+    }
+    const posix = String(a.path).replace(/\\/g, '/');
+    check(`catalog id unique: ${a.id}`, !ids.has(a.id));
+    ids.add(a.id);
+    check(`catalog path unique: ${posix}`, !catalogPaths.has(posix), a.id);
+    catalogPaths.add(posix);
+    const pngRel = path.join('sprites', posix);
+    if (!check(`${pngRel} exists`, fs.existsSync(path.join(ROOT, pngRel)))) return;
+    if (a.status === 'shipped') {
+      shippedPaths.add(posix);
+      const folder = posix.includes('/') ? posix.slice(0, posix.lastIndexOf('/')) : '';
+      check(`game.js knows folder for ${posix}`, !folder || gameJs.indexOf(folder) >= 0);
+    } else {
+      check(`${a.id} unused has no phaserKey`, !a.phaserKey);
+    }
+    if (a.heightClass === 'character') {
+      const sz = pngSize(pngRel);
+      check(`${posix} character height 80`, sz.h === 80, sz.w + 'x' + sz.h);
+      const fam = a.family || 'character';
+      if (!heightGroups[fam]) heightGroups[fam] = sz.w;
+      else check(`${posix} shares ${fam} width ${heightGroups[fam]}`, sz.w === heightGroups[fam], `${sz.w} vs ${heightGroups[fam]}`);
+    }
   });
+  const listPng = (dir, prefix) => {
+    if (!fs.existsSync(dir)) return [];
+    const out = [];
+    fs.readdirSync(dir).sort().forEach((n) => {
+      const full = path.join(dir, n);
+      const relN = prefix ? prefix + '/' + n : n;
+      if (fs.statSync(full).isDirectory()) listPng(full, relN).forEach((x) => out.push(x));
+      else if (n.toLowerCase().endsWith('.png')) out.push(relN.replace(/\\/g, '/'));
+    });
+    return out;
+  };
+  const onDisk = listPng(path.join(ROOT, 'sprites'));
+  const orphans = onDisk.filter((p) => !catalogPaths.has(p));
+  check('every PNG is in the art catalog', orphans.length === 0, orphans.slice(0, 8).join(', '));
+  check('game.js ships the valley-farmer folder', gameJs.indexOf('characters/valley-farmer') >= 0);
 }());
 
 (function checkUnit10StationAabb() {
@@ -320,9 +362,9 @@ function pngSize(rel) {
   catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
   const farm = pack.farm || { w: 180, h: 312 };
   const pngFor = {
-    desk: path.join('sprites', 'study_desk.png'),
-    kitchen: path.join('sprites', 'unit10_kitchen.png'),
-    taste: path.join('sprites', 'unit10_taste_stall.png')
+    desk: path.join('sprites', 'furniture', 'oak_study_desk.png'),
+    kitchen: path.join('sprites', 'furniture', 'farmhouse_kitchen.png'),
+    taste: path.join('sprites', 'stalls', 'korean_street_food_stall.png')
   };
   const boxes = [];
   (pack.stations || []).forEach((st) => {

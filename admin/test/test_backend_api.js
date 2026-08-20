@@ -87,6 +87,23 @@ async function runTests() {
       assert(typeof res.body.data.coveragePercentage === 'number', 'coveragePercentage is a number');
     });
 
+    await test('GET /api/art returns the sprite catalog report', async () => {
+      const res = await makeRequest(port, 'GET', '/api/art');
+      assert(res.status === 200, `Expected 200, got ${res.status}`);
+      assert(res.body.success === true, 'Response success is true');
+      assert(Array.isArray(res.body.data.assets), 'assets is an array');
+      assert(res.body.data.totals.assets > 0, 'catalog has assets');
+      assert(res.body.data.assets.some((a) => a.id === 'character.valley_farmer.walk.down.0'), 'farmer parent is catalogued');
+      assert(res.body.data.orphans.length === 0, 'no uncatalogued PNGs');
+    });
+
+    await test('GET /sprite-preview serves a catalogued PNG', async () => {
+      const res = await makeRequest(port, 'GET', '/sprite-preview/furniture/oak_study_desk.png');
+      assert(res.status === 200, `Expected 200, got ${res.status}`);
+      const ctype = res.headers['content-type'] || '';
+      assert(ctype.indexOf('png') >= 0 || ctype.indexOf('octet-stream') >= 0, 'PNG content type, got ' + ctype);
+    });
+
     // 2. GET /api/levels
     await test('GET /api/levels returns list of all levels', async () => {
       const res = await makeRequest(port, 'GET', '/api/levels');

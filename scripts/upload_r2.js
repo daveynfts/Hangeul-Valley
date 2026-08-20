@@ -62,43 +62,19 @@ const FILES = [
   ['worlds/unit10-desk-quiz.json', 'application/json'],
   ['worlds/unit10-layout.json', 'application/json'],
   ['worlds/unit10-mindmap.jpg', 'image/jpeg'],
-  ['sprites/study_desk.png', 'image/png'],
-  ['sprites/unit10_kitchen.png', 'image/png'],
-  ['sprites/unit10_taste_stall.png', 'image/png'],
-  ['sprites/crop_blossom_1.png', 'image/png'],
-  ['sprites/crop_blossom_2.png', 'image/png'],
-  ['sprites/crop_blossom_3.png', 'image/png'],
-  ['sprites/crop_cabbage_1.png', 'image/png'],
-  ['sprites/crop_cabbage_2.png', 'image/png'],
-  ['sprites/crop_cabbage_3.png', 'image/png'],
-  ['sprites/crop_strawberry_1.png', 'image/png'],
-  ['sprites/crop_strawberry_2.png', 'image/png'],
-  ['sprites/crop_strawberry_3.png', 'image/png'],
-  ['sprites/crop_corn_1.png', 'image/png'],
-  ['sprites/crop_corn_2.png', 'image/png'],
-  ['sprites/crop_corn_3.png', 'image/png'],
-  ['sprites/crop_sunflower_1.png', 'image/png'],
-  ['sprites/crop_sunflower_2.png', 'image/png'],
-  ['sprites/crop_sunflower_3.png', 'image/png'],
-  ['sprites/fence_flower_red.png', 'image/png'],
-  ['sprites/fence_flower_yellow.png', 'image/png'],
-  ['sprites/fence_flower_purple.png', 'image/png'],
-  ['sprites/apple_tree.png', 'image/png'],
-  ['sprites/apple_tree_ripe.png', 'image/png'],
-  ['sprites/skins/farmer/walk_down_0.png', 'image/png'],
-  ['sprites/skins/farmer/walk_down_1.png', 'image/png'],
-  ['sprites/skins/farmer/walk_down_2.png', 'image/png'],
-  ['sprites/skins/farmer/walk_up_0.png', 'image/png'],
-  ['sprites/skins/farmer/walk_up_1.png', 'image/png'],
-  ['sprites/skins/farmer/walk_up_2.png', 'image/png'],
-  ['sprites/skins/farmer/walk_left_0.png', 'image/png'],
-  ['sprites/skins/farmer/walk_left_1.png', 'image/png'],
-  ['sprites/skins/farmer/walk_left_2.png', 'image/png'],
-  ['sprites/skins/farmer/walk_right_0.png', 'image/png'],
-  ['sprites/skins/farmer/walk_right_1.png', 'image/png'],
-  ['sprites/skins/farmer/walk_right_2.png', 'image/png'],
+  ['sprites/catalog.json', 'application/json'],
   ['diner/content.json', 'application/json']
 ];
+
+(function appendShippedArt() {
+  const catPath = path.join(ROOT, 'sprites', 'catalog.json');
+  if (!fs.existsSync(catPath)) return;
+  const pack = JSON.parse(fs.readFileSync(catPath, 'utf8'));
+  (pack.assets || []).forEach((a) => {
+    if (!a || !a.path || a.status !== 'shipped') return;
+    FILES.push(['sprites/' + String(a.path).replace(/\\/g, '/'), 'image/png']);
+  });
+}());
 
 function cacheControl(ctype) {
   if (ctype === 'application/json') return 'public, max-age=60';

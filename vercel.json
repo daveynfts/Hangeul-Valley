@@ -30,6 +30,12 @@
       ]
     },
     {
+      "source": "/sprites/catalog.json",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
+      ]
+    },
+    {
       "source": "/(levels|facts).json",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }

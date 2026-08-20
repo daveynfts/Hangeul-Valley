@@ -166,6 +166,7 @@ window.apiFetch.addVocabFact = (factData) => window.apiFetch('/api/vocab-facts',
 window.apiFetch.updateVocabFact = (key, factData) => window.apiFetch(`/api/vocab-facts/${encodeURIComponent(key)}`, { method: 'PUT', body: factData });
 window.apiFetch.deleteVocabFact = (key) => window.apiFetch(`/api/vocab-facts/${encodeURIComponent(key)}`, { method: 'DELETE' });
 window.apiFetch.sync = () => window.apiFetch('/api/sync', { method: 'POST' });
+window.apiFetch.getArt = () => window.apiFetch('/api/art');
 
 // 5. Data Refresh & Synchronization Manager
 window.AppController = {
@@ -240,7 +241,8 @@ window.AppRouter = {
     'dashboard': () => window.DashboardView && window.DashboardView.render(),
     'levels': () => window.LevelsView && window.LevelsView.render(),
     'vocab': () => window.VocabView && window.VocabView.render(),
-    'unit10': () => window.Unit10View && window.Unit10View.render()
+    'unit10': () => window.Unit10View && window.Unit10View.render(),
+    'art': () => window.ArtView && window.ArtView.render()
   },
 
   init() {
@@ -307,6 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentTab === 'dashboard' && window.DashboardView) window.DashboardView.render();
     if (currentTab === 'levels' && window.LevelsView) window.LevelsView.render();
     if (currentTab === 'vocab' && window.VocabView) window.VocabView.render();
+    if (currentTab === 'art' && window.ArtView) window.ArtView.render();
   });
 
   // Initial Data Fetch & Router Activation

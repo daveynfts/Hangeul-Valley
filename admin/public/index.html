@@ -34,6 +34,9 @@
         <button class="nav-btn" data-tab="unit10" id="tab-btn-unit10">
           <span class="nav-icon">🍜</span> Unit 10
         </button>
+        <button class="nav-btn" data-tab="art" id="tab-btn-art">
+          <span class="nav-icon">🎨</span> Art library
+        </button>
       </nav>
 
       <div class="header-actions">
@@ -501,6 +504,54 @@
         </div>
       </div>
     </section>
+    <section id="tab-art" class="tab-content">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="section-title">Art library</h2>
+          <p class="section-desc">Every farm PNG is a named asset in <code>sprites/catalog.json</code>. Status, family, and who uses it are tracked here so the set can grow without losing work.</p>
+        </div>
+        <div class="dash-quick-actions">
+          <button class="btn btn-primary" id="btn-refresh-art">🔄 Refresh</button>
+        </div>
+      </div>
+
+      <div class="stats-grid art-stats-grid">
+        <div class="stat-card border-indigo">
+          <div class="stat-header"><span class="stat-label">Assets</span><span class="stat-icon">🖼️</span></div>
+          <div class="stat-value" id="art-stat-assets">--</div>
+          <div class="stat-subtext">Rows in the catalog</div>
+        </div>
+        <div class="stat-card border-emerald">
+          <div class="stat-header"><span class="stat-label">Shipped</span><span class="stat-icon">✅</span></div>
+          <div class="stat-value text-emerald" id="art-stat-shipped">--</div>
+          <div class="stat-subtext">Loaded by the farm</div>
+        </div>
+        <div class="stat-card border-amber">
+          <div class="stat-header"><span class="stat-label">Library only</span><span class="stat-icon">📦</span></div>
+          <div class="stat-value text-amber" id="art-stat-unused">--</div>
+          <div class="stat-subtext">Kept, not in Phaser</div>
+        </div>
+        <div class="stat-card border-rose">
+          <div class="stat-header"><span class="stat-label">Health</span><span class="stat-icon">🩺</span></div>
+          <div class="stat-value text-rose" id="art-stat-health">--</div>
+          <div class="stat-subtext" id="art-stat-health-sub">Missing + orphans</div>
+        </div>
+      </div>
+
+      <div class="card filter-bar-card">
+        <div class="filter-controls art-toolbar">
+          <div class="filter-mode-tabs" id="art-kind-tabs"></div>
+          <div class="search-input-wrapper flex-1">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="input-search-art" class="form-input search-input" placeholder="Search name, family, path, or Phaser key…">
+          </div>
+        </div>
+      </div>
+
+      <div id="art-health-banner" class="card widget-card hidden"></div>
+
+      <div id="art-family-grid" class="art-family-grid"></div>
+    </section>
   </main>
 
   <!-- Global Toast Notification Container -->
@@ -519,5 +570,6 @@
   <script src="js/levels.js"></script>
   <script src="js/vocab.js"></script>
   <script src="js/world.js"></script>
+  <script src="js/art.js"></script>
 </body>
 </html>
