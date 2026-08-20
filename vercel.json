@@ -41,6 +41,10 @@
       "destination": "https://cdn.daveynfts.com/hangeul-valley/sprites/:path*"
     },
     {
+      "source": "/skins/:path*",
+      "destination": "https://cdn.daveynfts.com/hangeul-valley/skins/:path*"
+    },
+    {
       "source": "/diner/content.json",
       "destination": "https://cdn.daveynfts.com/hangeul-valley/diner/content.json"
     }
@@ -66,6 +70,12 @@
     },
     {
       "source": "/worlds/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
+      ]
+    },
+    {
+      "source": "/skins/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
       ]
@@ -95,6 +105,9 @@
     },
     "api/unit10/world.js": {
       "includeFiles": "worlds/**"
+    },
+    "api/skins/catalog.js": {
+      "includeFiles": "skins/catalog.json"
     }
   }
 }

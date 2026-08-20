@@ -2,6 +2,15 @@
   "name": "hangeul-valley",
   "private": true,
   "description": "Static Phaser game; Vercel functions handle Google cloud save.",
+  "scripts": {
+    "check": "node scripts/check_game_js.js",
+    "validate": "node scripts/validate_content.js",
+    "test": "node tests/test_srs_engine.js && node tests/test_r2_shop_vm.js && node tests/test_m2_harness.js && node tests/test_m1_challenger_harness.js && node tests/test_m2_challenger_cooking.js && node tests/test_farm_hero.js && node tests/test_skins.js && node tests/test_r2_content.js",
+    "test:admin": "npm --prefix admin test",
+    "test:all": "npm run check && npm run validate && npm test && npm run test:admin",
+    "upload:r2": "node scripts/upload_r2.js",
+    "publish:prod": "node scripts/publish.js"
+  },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.700.0"
   }

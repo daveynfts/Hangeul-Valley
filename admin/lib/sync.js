@@ -1,18 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { atomicWriteJson } = require('./atomicWrite');
 
 function getPaths(rootDir) {
   const root = rootDir ? path.resolve(rootDir) : path.resolve(__dirname, '../../');
   return {
     rootDir: root,
     levelsPath: path.join(root, 'levels.json'),
-    gameJsPath: path.join(root, 'game.js'),
-    assetsDir: path.join(root, 'assets'),
-    assetsLevelsPath: path.join(root, 'assets', 'levels.json'),
-    assetsGameJsPath: path.join(root, 'assets', 'game.js'),
-    factsPath: path.join(root, 'facts.json'),
-    assetsFactsPath: path.join(root, 'assets', 'facts.json')
+    manifestPath: path.join(root, 'js', 'manifest.json'),
+    factsPath: path.join(root, 'facts.json')
   };
 }
 
@@ -30,114 +27,99 @@ function validateJsSyntax(filePath) {
   }
 }
 
+function assertLevelsPayload(levelsData) {
+  if (!Array.isArray(levelsData)) {
+    const err = new Error('Invalid levels data: must be an array.');
+    err.status = 400;
+    throw err;
+  }
+  if (levelsData.length === 0) {
+    const err = new Error('Invalid levels data: array must not be empty.');
+    err.status = 400;
+    throw err;
+  }
+  levelsData.forEach((l, i) => {
+    if (!l || typeof l !== 'object' || Array.isArray(l)) {
+      const err = new Error('Invalid levels data: entry ' + i + ' must be an object.');
+      err.status = 400;
+      throw err;
+    }
+    if (!Number.isFinite(Number(l.level))) {
+      const err = new Error('Invalid levels data: entry ' + i + ' needs a numeric level.');
+      err.status = 400;
+      throw err;
+    }
+    if (!Array.isArray(l.words)) {
+      const err = new Error('Invalid levels data: entry ' + i + ' needs a words array.');
+      err.status = 400;
+      throw err;
+    }
+  });
+}
+
 /**
- * Saves and synchronizes `levels.json` to root and `assets/`.
+ * Saves `levels.json` at the repo root.
  * Uses atomic `.tmp` write and `JSON.parse` readback validation.
  */
 function syncLevels(levelsData, rootDir) {
-  if (!Array.isArray(levelsData)) {
-    throw new Error('Invalid levels data: must be an array.');
-  }
+  assertLevelsPayload(levelsData);
 
   const paths = getPaths(rootDir);
   const jsonStr = JSON.stringify(levelsData, null, 2);
 
-  // Validate in-memory JSON parseability
   try {
     JSON.parse(jsonStr);
   } catch (e) {
     throw new Error('Failed to serialize levels data to valid JSON: ' + e.message);
   }
 
-  const tempPath = path.join(paths.rootDir, 'levels.json.tmp');
-  
-  // Atomic write to temp file
-  fs.writeFileSync(tempPath, jsonStr, 'utf8');
-
-  // Readback parse validation
-  try {
-    const readback = fs.readFileSync(tempPath, 'utf8');
-    JSON.parse(readback);
-  } catch (e) {
-    if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
-    throw new Error('Atomic write validation failed for levels.json: ' + e.message);
-  }
-
-  // Ensure assets directory exists
-  if (!fs.existsSync(paths.assetsDir)) {
-    fs.mkdirSync(paths.assetsDir, { recursive: true });
-  }
-
-  // Commit to root and assets mirror
-  fs.copyFileSync(tempPath, paths.levelsPath);
-  fs.copyFileSync(tempPath, paths.assetsLevelsPath);
-  
-  // Cleanup temp file
-  if (fs.existsSync(tempPath)) {
-    fs.unlinkSync(tempPath);
-  }
+  atomicWriteJson(paths.levelsPath, jsonStr);
 
   return { success: true, totalLevels: levelsData.length };
 }
 
+function getGameScriptPaths(rootDir) {
+  const { rootDir: root, manifestPath } = getPaths(rootDir);
+  if (!fs.existsSync(manifestPath)) {
+    throw new Error('Missing js/manifest.json');
+  }
+  const list = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  if (!Array.isArray(list) || list.length === 0) {
+    throw new Error('js/manifest.json must be a non-empty array of script paths.');
+  }
+  return list.map((rel) => path.join(root, ...String(rel).split('/')));
+}
+
 /**
- * Saves and synchronizes `game.js` to root and `assets/`.
- * Uses `_game_temp.js` to run `node -c` syntax validation.
- * Rolls back on syntax error.
+ * Syntax-checks every file listed in js/manifest.json. Does not rewrite scripts.
  */
-function syncGameJs(gameJsContent, rootDir) {
-  if (typeof gameJsContent !== 'string' || gameJsContent.trim().length === 0) {
-    throw new Error('Invalid game.js content: must be a non-empty string.');
-  }
-
-  const paths = getPaths(rootDir);
-  const tempPath = path.join(paths.rootDir, '_game_temp.js');
-  const bakPath = path.join(paths.rootDir, '_game_bak.js');
-
-  // Step 1: Write to temporary .js file for node -c check
-  fs.writeFileSync(tempPath, gameJsContent, 'utf8');
-
-  // Step 2: Run syntax validation
-  const check = validateJsSyntax(tempPath);
-  if (!check.valid) {
-    if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
-    throw new Error(`JavaScript syntax error in game.js:\n${check.error}`);
-  }
-
-  // Step 3: Backup existing game.js if it exists
-  if (fs.existsSync(paths.gameJsPath)) {
-    fs.copyFileSync(paths.gameJsPath, bakPath);
-  }
-
-  try {
-    // Step 4: Ensure assets directory exists
-    if (!fs.existsSync(paths.assetsDir)) {
-      fs.mkdirSync(paths.assetsDir, { recursive: true });
+function validateGameScripts(rootDir) {
+  const { rootDir: root } = getPaths(rootDir);
+  const files = getGameScriptPaths(rootDir);
+  const rels = [];
+  files.forEach((f) => {
+    const rel = path.relative(root, f).replace(/\\/g, '/');
+    if (!fs.existsSync(f)) {
+      throw new Error('Missing game script: ' + rel);
     }
-
-    // Step 5: Write to root game.js and copy to assets/game.js
-    fs.writeFileSync(paths.gameJsPath, gameJsContent, 'utf8');
-    fs.writeFileSync(paths.assetsGameJsPath, gameJsContent, 'utf8');
-
-    // Step 6: Cleanup temp and backup files
-    if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
-    if (fs.existsSync(bakPath)) fs.unlinkSync(bakPath);
-
-    return { success: true, bytes: gameJsContent.length };
-  } catch (err) {
-    // Rollback on failure
-    if (fs.existsSync(bakPath)) {
-      fs.copyFileSync(bakPath, paths.gameJsPath);
-      fs.unlinkSync(bakPath);
+    const check = validateJsSyntax(f);
+    if (!check.valid) {
+      throw new Error('JavaScript syntax error in ' + rel + ':\n' + check.error);
     }
-    if (fs.existsSync(tempPath)) fs.unlinkSync(tempPath);
-    throw new Error(`Failed to sync game.js: ${err.message}`);
-  }
+    rels.push(rel);
+  });
+  return { success: true, files: rels };
+}
+
+function syncGameJs() {
+  throw new Error('game.js is split; Sync syntax-checks js/* via validateGameScripts() and does not rewrite scripts.');
 }
 
 module.exports = {
   getPaths,
   validateJsSyntax,
+  getGameScriptPaths,
+  validateGameScripts,
   syncLevels,
   syncGameJs,
   saveAndSyncLevels: syncLevels,

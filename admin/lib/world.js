@@ -1,23 +1,17 @@
 const fs = require('fs');
 const path = require('path');
+const { atomicWriteJson } = require('./atomicWrite');
 
 const LAYOUT_REL = path.join('worlds', 'unit10-layout.json');
 const QUIZ_REL = path.join('worlds', 'unit10-desk-quiz.json');
 const WORLD_REL = path.join('worlds', '2b-unit-10.json');
 const STATION_IDS = ['desk', 'kitchen', 'taste'];
 
-function writeBoth(rel, data, rootDir) {
+function writeJson(rel, data, rootDir) {
   const json = JSON.stringify(data, null, 2) + '\n';
   JSON.parse(json);
-  const dests = [path.join(rootDir, rel), path.join(rootDir, 'assets', rel)];
-  dests.forEach((dest) => {
-    fs.mkdirSync(path.dirname(dest), { recursive: true });
-    const tmp = dest + '.tmp';
-    fs.writeFileSync(tmp, json, 'utf8');
-    JSON.parse(fs.readFileSync(tmp, 'utf8'));
-    fs.copyFileSync(tmp, dest);
-    fs.unlinkSync(tmp);
-  });
+  const dest = path.join(rootDir, rel);
+  atomicWriteJson(dest, json);
 }
 
 function readJson(rel, rootDir) {
@@ -62,7 +56,7 @@ function saveLayout(body, rootDir) {
       interact: typeof s.interact === 'number' ? s.interact : 72
     }))
   };
-  writeBoth(LAYOUT_REL, next, rootDir);
+  writeJson(LAYOUT_REL, next, rootDir);
   return next;
 }
 
@@ -101,7 +95,7 @@ function saveQuiz(body, rootDir) {
       choices: { A: String(q.choices.A), B: String(q.choices.B), C: String(q.choices.C), D: String(q.choices.D) }
     }))
   };
-  writeBoth(QUIZ_REL, next, rootDir);
+  writeJson(QUIZ_REL, next, rootDir);
   return next;
 }
 
@@ -116,7 +110,7 @@ function saveWorld(body, rootDir) {
   const words = body.level.words;
   const missing = words.filter((w) => !w || !w.ko || !w.en || !w.category || !w.categoryEn);
   if (missing.length) throw new Error(`${missing.length} word(s) missing ko / en / category / categoryEn`);
-  writeBoth(WORLD_REL, body, rootDir);
+  writeJson(WORLD_REL, body, rootDir);
   return { wordCount: words.length, id: body.id };
 }
 

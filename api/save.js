@@ -1,13 +1,36 @@
 const { GetObjectCommand, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { r2Client, r2Bucket, saveKey, setCors, verifyGoogleIdToken, readBearer } = require('./_r2');
 
+const SAVE_BODY_MAX = 256 * 1024;
+
 async function readBody(req) {
-  if (req.body && typeof req.body === 'object') return req.body;
+  if (req.body && typeof req.body === 'object') {
+    if (Buffer.byteLength(JSON.stringify(req.body)) > SAVE_BODY_MAX) {
+      const err = new Error('save too large');
+      err.status = 413;
+      throw err;
+    }
+    return req.body;
+  }
   if (typeof req.body === 'string') {
+    if (Buffer.byteLength(req.body) > SAVE_BODY_MAX) {
+      const err = new Error('save too large');
+      err.status = 413;
+      throw err;
+    }
     try { return JSON.parse(req.body); } catch { return null; }
   }
   const chunks = [];
-  for await (const c of req) chunks.push(c);
+  let size = 0;
+  for await (const c of req) {
+    size += c.length;
+    if (size > SAVE_BODY_MAX) {
+      const err = new Error('save too large');
+      err.status = 413;
+      throw err;
+    }
+    chunks.push(c);
+  }
   if (!chunks.length) return null;
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { return null; }
 }
@@ -36,7 +59,16 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const user = await verifyGoogleIdToken(readBearer(req));
+  let user;
+  try {
+    user = await verifyGoogleIdToken(readBearer(req));
+  } catch (e) {
+    if (e && (e.code === 'AUTH_NOT_CONFIGURED' || e.status === 503)) {
+      res.status(503).json({ error: 'sign in not configured' });
+      return;
+    }
+    throw e;
+  }
   if (!user) {
     res.status(401).json({ error: 'sign in required' });
     return;
@@ -52,7 +84,16 @@ module.exports = async (req, res) => {
       return;
     }
     if (req.method === 'PUT') {
-      const body = await readBody(req);
+      let body;
+      try {
+        body = await readBody(req);
+      } catch (e) {
+        if (e && e.status === 413) {
+          res.status(413).json({ error: 'save too large' });
+          return;
+        }
+        throw e;
+      }
       if (!body || typeof body !== 'object') {
         res.status(400).json({ error: 'save body required' });
         return;

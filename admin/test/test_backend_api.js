@@ -2,11 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const app = require('../server');
-const syncLib = require('../lib/sync');
-const levelsLib = require('../lib/levels');
-const vocabFactsLib = require('../lib/vocabFacts');
+const { makeWriteSandbox, rmSandbox } = require('./sandbox');
 
-const rootDir = path.resolve(__dirname, '../../');
+const repoRoot = path.resolve(__dirname, '../../');
 
 function makeRequest(port, method, pathName, body = null) {
   return new Promise((resolve, reject) => {
@@ -51,8 +49,9 @@ async function runTests() {
   let failed = 0;
   const testDetails = [];
 
-  const originalLevels = fs.readFileSync(path.join(rootDir, 'levels.json'), 'utf8');
-  const originalGameJs = fs.readFileSync(path.join(rootDir, 'game.js'), 'utf8');
+  const originalLevels = fs.readFileSync(path.join(repoRoot, 'levels.json'), 'utf8');
+  const sandbox = makeWriteSandbox(repoRoot);
+  app.setRootDir(sandbox);
 
   let server = null;
   let port = 0;
@@ -109,6 +108,17 @@ async function runTests() {
       assert(res.status === 200, `Expected 200, got ${res.status}`);
       const ctype = res.headers['content-type'] || '';
       assert(ctype.indexOf('png') >= 0 || ctype.indexOf('octet-stream') >= 0, 'PNG content type, got ' + ctype);
+    });
+
+    await test('GET /api/skins/catalog returns farmer and chef', async () => {
+      const res = await makeRequest(port, 'GET', '/api/skins/catalog');
+      assert(res.status === 200, `Expected 200, got ${res.status}`);
+      assert(res.body.success === true, 'Response success is true');
+      assert(res.body.data.defaultSkinId === 'farmer', 'defaultSkinId is farmer');
+      const ids = (res.body.data.skins || []).map((s) => s.id);
+      assert(ids.indexOf('farmer') >= 0 && ids.indexOf('chef') >= 0, 'catalog lists farmer and chef');
+      const farmer = res.body.data.skins.find((s) => s.id === 'farmer');
+      assert(farmer && farmer.previewUrl && farmer.previewUrl.indexOf('/sprite-preview/') === 0, 'HD farmer has a preview URL');
     });
 
     // 2. GET /api/levels
@@ -289,9 +299,8 @@ async function runTests() {
     if (server) {
       server.close();
     }
-    // Restore original state of files to guarantee pristine codebase
-    syncLib.syncLevels(JSON.parse(originalLevels), rootDir);
-    syncLib.syncGameJs(originalGameJs, rootDir);
+    app.setRootDir(null);
+    rmSandbox(sandbox);
   }
 
   const duration = Date.now() - startTime;

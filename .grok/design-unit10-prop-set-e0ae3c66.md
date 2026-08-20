@@ -9,6 +9,8 @@
 | **Scope** | 2B Unit 10 textbook world (`worlds/2b-unit-10.json`), not Valley level 26 |
 | **Pipeline source of truth** | `farm-pixel-props` skill. Git home: `.grok/skills/farm-pixel-props/`. Runtime/generate home (Grok resolves first): `C:\Users\caokh\.grok\skills\farm-pixel-props\SKILL.md` — sync after the repo patch, before `image_edit`. |
 
+**Implementation status (2026-08-20).** Shipped: HD desk / kitchen / stall under `sprites/furniture/` and `sprites/stalls/`, catalogued in `sprites/catalog.json`. Farmer is an HD PNG, not a chef palette-swap. The `assets/` mirror is retired; `main.py` serves the repo root; `process_prop.py` writes `sprites/` only. Historical filenames in this snapshot (`study_desk.png`, `unit10_kitchen.png`, `unit10_taste_stall.png`) were renamed into the taxonomy folders. Dual-write / lockstep instructions below are historical — do not reintroduce `assets/`.
+
 **Numbers in this document are a design snapshot.** Runtime/pipeline constants (156 px height, 2 px pad, magenta key, origin `(0.5, 1)`, scale `1.0` for the station class, depth `y+6`, no y-bob) live in the skill. Farm grass/wood/dirt hex lives in `STARDEW_PALETTE` in `game.js`. Do not copy those values into `game.js` comments as a third source.
 
 ---

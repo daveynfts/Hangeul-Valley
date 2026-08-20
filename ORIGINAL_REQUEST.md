@@ -1,5 +1,7 @@
 # Original User Request
 
+> **Historical log.** This file records original agent briefs. The `assets/` mirror described throughout was retired on 2026-08-20; the shipped game is the files at repo root.
+
 ## Initial Request — 2026-07-22T08:41:03Z
 
 Nâng cấp toàn diện giao diện người dùng (UI), trải nghiệm điều khiển (UX), phong cách đồ họa 64-Bit Retro Glassmorphism, hiệu ứng âm thanh Synthesized Web Audio API, và hoạt họa chuyển cảnh mượt mà cho game Hangeul Valley.

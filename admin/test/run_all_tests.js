@@ -3,6 +3,7 @@ const testBackendApi = require('./test_backend_api');
 const testSyncSyntax = require('./test_sync_syntax');
 const testFrontendAssets = require('./test_frontend_assets');
 const testEdgeCases = require('./test_edge_cases');
+const testVercelContract = require('./test_vercel_contract');
 
 function padRight(str, len) {
   str = String(str);
@@ -31,7 +32,8 @@ async function runAllSuites() {
     { label: 'REST API Endpoints', module: testBackendApi },
     { label: 'Data Sync & Syntax Verification', module: testSyncSyntax },
     { label: 'Frontend Assets & UI Integrity', module: testFrontendAssets },
-    { label: 'Edge Cases & Data Integrity', module: testEdgeCases }
+    { label: 'Edge Cases & Data Integrity', module: testEdgeCases },
+    { label: 'Vercel vs Express GET contract', module: testVercelContract }
   ];
 
   const results = [];

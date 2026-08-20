@@ -183,6 +183,14 @@ window.LevelsView = {
 
     tbody.innerHTML = targetWords.map((item, displayIdx) => {
       const catBadgeClass = this.getCategoryBadgeClass(item.category);
+      const canWrite = window.AppState && window.AppState.adminWritable;
+      const actions = canWrite ? `
+            <button class="btn btn-secondary btn-sm btn-edit-word" data-level="${item.levelNum}" data-index="${item.wordIndex}">
+              ✏️
+            </button>
+            <button class="btn btn-danger btn-sm btn-delete-word" data-level="${item.levelNum}" data-index="${item.wordIndex}" data-ko="${this.escapeHtml(item.ko)}">
+              🗑️
+            </button>` : '';
       
       return `
         <tr>
@@ -193,14 +201,7 @@ window.LevelsView = {
           <td><code class="key-badge">${this.escapeHtml(item.en)}</code></td>
           <td><span class="badge ${catBadgeClass}">${this.escapeHtml(item.category || '기타')}</span></td>
           <td class="text-center" style="font-size: 1.1rem;">${this.escapeHtml(item.hint || '')}</td>
-          <td class="text-right">
-            <button class="btn btn-secondary btn-sm btn-edit-word" data-level="${item.levelNum}" data-index="${item.wordIndex}">
-              ✏️
-            </button>
-            <button class="btn btn-danger btn-sm btn-delete-word" data-level="${item.levelNum}" data-index="${item.wordIndex}" data-ko="${this.escapeHtml(item.ko)}">
-              🗑️
-            </button>
-          </td>
+          <td class="text-right">${actions}</td>
         </tr>
       `;
     }).join('');

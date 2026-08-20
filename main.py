@@ -28,7 +28,7 @@ except ImportError:
 # ─── Constants ─────────────────────────────────────────────────────────────────
 PORT      = 8742
 BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
-ASSETS    = BASE_DIR                                   # serve directly from root
+SERVE_DIR = BASE_DIR                                   # game files live at repo root
 SAVE_FILE = os.path.join(BASE_DIR, 'save_data.json')   # persistent save file
 DATA_DIR  = os.path.join(BASE_DIR, 'webview_data')     # WebView2 user profile
 
@@ -74,9 +74,9 @@ class GameSaveAPI:
 
 # ─── Minimal local HTTP server ──────────────────────────────────────────────────
 class _QuietHandler(http.server.SimpleHTTPRequestHandler):
-    """Serve files from the assets directory; suppress access logs."""
+    """Serve files from the repo root; suppress access logs."""
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, directory=ASSETS, **kwargs)
+        super().__init__(*args, directory=SERVE_DIR, **kwargs)
 
     def log_message(self, *_):
         pass
@@ -91,35 +91,16 @@ def _start_server():
 
 # ─── Entry point ───────────────────────────────────────────────────────────────
 def main():
-    # Synchronize root asset files to assets/ directory
-    import shutil
-    assets_dir = os.path.join(BASE_DIR, 'assets')
-    os.makedirs(assets_dir, exist_ok=True)
-    for fname in ('game.js', 'index.html', 'levels.json', 'facts.json', 'save_data.json'):
-        src = os.path.join(BASE_DIR, fname)
-        dst = os.path.join(assets_dir, fname)
-        if os.path.exists(src):
-            shutil.copy2(src, dst)
-    worlds_src = os.path.join(BASE_DIR, 'worlds')
-    worlds_dst = os.path.join(assets_dir, 'worlds')
-    if os.path.isdir(worlds_src):
-        os.makedirs(worlds_dst, exist_ok=True)
-        for name in os.listdir(worlds_src):
-            if name.endswith('.json'):
-                shutil.copy2(os.path.join(worlds_src, name), os.path.join(worlds_dst, name))
-    diner_src = os.path.join(BASE_DIR, 'diner')
-    diner_dst = os.path.join(assets_dir, 'diner')
-    if os.path.isdir(diner_src):
-        os.makedirs(diner_dst, exist_ok=True)
-        for name in os.listdir(diner_src):
-            src_f = os.path.join(diner_src, name)
-            if os.path.isfile(src_f):
-                shutil.copy2(src_f, os.path.join(diner_dst, name))
-    print("[Sync] Root asset files successfully synchronized to assets/ directory.")
-
-    # Validate asset files
-    for fname in ('index.html', 'levels.json', 'facts.json'):
-        path = os.path.join(ASSETS, fname)
+    required = (
+        'index.html',
+        os.path.join('css', 'game.css'),
+        os.path.join('js', 'manifest.json'),
+        os.path.join('js', 'state.js'),
+        'levels.json',
+        'facts.json',
+    )
+    for fname in required:
+        path = os.path.join(SERVE_DIR, fname)
         if not os.path.exists(path):
             print(f"[ERROR] Missing file: {path}")
             sys.exit(1)

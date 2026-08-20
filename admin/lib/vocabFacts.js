@@ -139,6 +139,7 @@ function getVocabFactsData(rootDir) {
 
 function refuseWrite(action) {
   const err = new Error(`Cannot ${action} word origins from the admin panel. ${GENERATOR_HINT}`);
+  err.status = 409;
   err.statusCode = 409;
   err.generatorHint = GENERATOR_HINT;
   throw err;

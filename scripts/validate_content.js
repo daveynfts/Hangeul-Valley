@@ -20,6 +20,8 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const { GAME_SCRIPTS, readGameSource } = require('./gameSource');
+const { STATIC_FILES } = require('./r2Content');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 
 let checks = 0;
@@ -36,7 +38,7 @@ function check(label, condition, detail) {
 // English-language content in this repo. Each exclusion is deliberate and auditable:
 //
 //   ã, õ  — Portuguese loanword etymologies in facts.json (pão for 빵, sabão for 비누)
-//   é     — "pet cafés" in the animal-category hint in game.js
+//   é     — "pet cafés" in the animal-category hint in js/data.js
 //
 // Everything else in the Vietnamese repertoire would be a regression, since the project is
 // English-only as of the language-unification pass.
@@ -155,12 +157,12 @@ check('every word has a facts.json entry', wordsWithoutFact.length === 0, wordsW
 
 // Every emitted origin class must have a case in renderOrigin, or it displays as blank.
 // The generator enforces this too; asserting it here means CI catches a hand-edit as well.
-const gameJs = read('game.js');
+const gameJs = readGameSource();
 const renderOrigin = gameJs.slice(gameJs.indexOf('function renderOrigin('), gameJs.indexOf('function renderStructure('));
 const renderable = new Set([...renderOrigin.matchAll(/case '([a-z-]+)':/g)].map((m) => m[1]).concat('unknown'));
 const emitted = [...new Set(Object.values(facts).map((f) => f.o))];
 const unrenderable = emitted.filter((o) => !renderable.has(o));
-check('every origin class in facts.json is renderable by game.js', unrenderable.length === 0, unrenderable.join(', '));
+check('every origin class in facts.json is renderable by renderOrigin()', unrenderable.length === 0, unrenderable.join(', '));
 
 // A curated entry that renders nothing is worse than an honest `unknown`.
 const emptyNote = Object.entries(facts)
@@ -169,14 +171,31 @@ const emptyNote = Object.entries(facts)
 check('no curated entry has an empty note', emptyNote.length === 0, emptyNote.slice(0, 5).join(', '));
 
 // ── Shipped source ───────────────────────────────────────────────────────────
-['game.js', 'index.html', path.join('sprites', 'catalog.json')].forEach((f) => {
-  const src = read(f);
-  const hits = src.split('\n')
-    .map((line, i) => ({ line, n: i + 1 }))
-    .filter(({ line }) => VIETNAMESE.test(line))
-    .map(({ line, n }) => `${f}:${n}: ${line.trim().slice(0, 70)}`);
-  check(`no Vietnamese in ${f}`, hits.length === 0, hits.slice(0, 5).join('\n      '));
-});
+check('game.js monolith is gone', !fs.existsSync(path.join(ROOT, 'game.js')));
+check('js/manifest.json lists scripts', Array.isArray(GAME_SCRIPTS) && GAME_SCRIPTS.length > 0);
+
+const html = read('index.html');
+check('index.html links css/game.css', html.indexOf('href="css/game.css"') >= 0);
+const scriptSrcs = [...html.matchAll(/<script\b[^>]*\bsrc="(js\/[^"]+)"[^>]*><\/script>/gi)].map((m) => m[1]);
+check('index.html script tags match js/manifest.json',
+  JSON.stringify(scriptSrcs) === JSON.stringify(GAME_SCRIPTS),
+  scriptSrcs.join(',') + ' vs ' + GAME_SCRIPTS.join(','));
+
+['index.html', path.join('css', 'game.css'), path.join('sprites', 'catalog.json'), path.join('skins', 'catalog.json')]
+  .concat(GAME_SCRIPTS)
+  .forEach((f) => {
+    let src;
+    try { src = read(f); }
+    catch (e) {
+      check(`readable ${f}`, false, e.message);
+      return;
+    }
+    const hits = src.split('\n')
+      .map((line, i) => ({ line, n: i + 1 }))
+      .filter(({ line }) => VIETNAMESE.test(line))
+      .map(({ line, n }) => `${f}:${n}: ${line.trim().slice(0, 70)}`);
+    check(`no Vietnamese in ${f}`, hits.length === 0, hits.slice(0, 5).join('\n      '));
+  });
 
 // Modal overlays are `position:fixed` siblings of <body>. If one is nested inside
 // another that starts as `display:none` (this happened to inventory inside
@@ -226,11 +245,10 @@ const overlayIds = [
   const cats = new Set(ww.map((w) => w.category));
   check('2B Unit 10 has six vocab groups', ['음식', '맛', '식당 평가', '읽기', '주문', '회화'].every((c) => cats.has(c)),
     [...cats].join(', '));
+  check('2B Unit 10 has costumeSkinId chef', world.costumeSkinId === 'chef', String(world.costumeSkinId));
 }());
 
-// ── assets/ mirror ───────────────────────────────────────────────────────────
-// main.py serves from assets/ and admin/lib/sync.js writes both copies, so a drift here
-// means the desktop build and the browser build disagree.
+// ── Unit 10 desk quiz ────────────────────────────────────────────────────────
 (function checkDeskQuizBank() {
   const rel = path.join('worlds', 'unit10-desk-quiz.json');
   const full = path.join(ROOT, rel);
@@ -256,14 +274,6 @@ const overlayIds = [
   check('desk quiz items are well-formed English MCQs', bad.length === 0, bad.slice(0, 6).join(', '));
 }());
 
-['game.js', 'index.html', 'levels.json', 'facts.json', path.join('worlds', '2b-unit-10.json'), path.join('worlds', 'unit10-desk-quiz.json'), path.join('worlds', 'unit10-layout.json'), path.join('sprites', 'catalog.json')].forEach((f) => {
-  const a = path.join(ROOT, f);
-  const b = path.join(ROOT, 'assets', f);
-  if (!fs.existsSync(b)) { check(`assets/${f} exists`, false); return; }
-  const norm = (p) => fs.readFileSync(p, 'utf8').replace(/\r\n/g, '\n');
-  check(`assets/${f} matches the root copy`, norm(a) === norm(b));
-});
-
 function pngSize(rel) {
   const buf = fs.readFileSync(path.join(ROOT, rel));
   if (buf.length < 24 || buf.toString('ascii', 1, 4) !== 'PNG') {
@@ -271,31 +281,6 @@ function pngSize(rel) {
   }
   return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
 }
-
-(function checkSpriteLockstep() {
-  const listPng = (dir, prefix) => {
-    if (!fs.existsSync(dir)) return [];
-    const out = [];
-    fs.readdirSync(dir).sort().forEach((n) => {
-      const full = path.join(dir, n);
-      const rel = prefix ? prefix + '/' + n : n;
-      if (fs.statSync(full).isDirectory()) listPng(full, rel).forEach((x) => out.push(x));
-      else if (n.toLowerCase().endsWith('.png')) out.push(rel);
-    });
-    return out;
-  };
-  const rootNames = listPng(path.join(ROOT, 'sprites'));
-  const assetNames = listPng(path.join(ROOT, 'assets', 'sprites'));
-  const missingInAssets = rootNames.filter((n) => !assetNames.includes(n));
-  const orphanInAssets = assetNames.filter((n) => !rootNames.includes(n));
-  check('assets/sprites has every sprites/*.png', missingInAssets.length === 0, missingInAssets.join(', '));
-  check('sprites/ has every assets/sprites/*.png', orphanInAssets.length === 0, orphanInAssets.join(', '));
-  rootNames.filter((n) => assetNames.includes(n)).forEach((n) => {
-    const a = fs.readFileSync(path.join(ROOT, 'sprites', n));
-    const b = fs.readFileSync(path.join(ROOT, 'assets', 'sprites', n));
-    check(`sprites/${n} matches assets/sprites/${n}`, Buffer.compare(a, b) === 0);
-  });
-}());
 
 (function checkArtCatalog() {
   const rel = path.join('sprites', 'catalog.json');
@@ -305,10 +290,14 @@ function pngSize(rel) {
   check('art catalog has assets[]', Array.isArray(pack.assets) && pack.assets.length > 0);
   const ids = new Set();
   const catalogPaths = new Set();
-  const gameJs = read('game.js');
-  check('game.js declares ART_LOAD', gameJs.indexOf('const ART_LOAD') >= 0);
-  check('game.js declares CROP_ART_FOLDER', gameJs.indexOf('const CROP_ART_FOLDER') >= 0);
-  check('game.js declares FARMER_ART_FOLDER', gameJs.indexOf('const FARMER_ART_FOLDER') >= 0);
+  const gameJs = readGameSource();
+  check('shipped source declares ART_LOAD', gameJs.indexOf('const ART_LOAD') >= 0);
+  check('shipped source declares CROP_ART_FOLDER', gameJs.indexOf('const CROP_ART_FOLDER') >= 0);
+  check('shipped source declares FARMER_ART_FOLDER', gameJs.indexOf('const FARMER_ART_FOLDER') >= 0);
+  check('ART_CACHE_KEY matches catalog cacheKey',
+    new RegExp('const ART_CACHE_KEY = [\'"]' + String(pack.cacheKey || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[\'"]').test(gameJs),
+    pack.cacheKey);
+  check('preload uses artUrl', gameJs.indexOf('artUrl(a.file)') >= 0);
   const heightGroups = {};
   const shippedPaths = new Set();
   (pack.assets || []).forEach((a) => {
@@ -326,7 +315,7 @@ function pngSize(rel) {
     if (a.status === 'shipped') {
       shippedPaths.add(posix);
       const folder = posix.includes('/') ? posix.slice(0, posix.lastIndexOf('/')) : '';
-      check(`game.js knows folder for ${posix}`, !folder || gameJs.indexOf(folder) >= 0);
+      check(`shipped source knows folder for ${posix}`, !folder || gameJs.indexOf(folder) >= 0);
     } else {
       check(`${a.id} unused has no phaserKey`, !a.phaserKey);
     }
@@ -352,7 +341,7 @@ function pngSize(rel) {
   const onDisk = listPng(path.join(ROOT, 'sprites'));
   const orphans = onDisk.filter((p) => !catalogPaths.has(p));
   check('every PNG is in the art catalog', orphans.length === 0, orphans.slice(0, 8).join(', '));
-  check('game.js ships the valley-farmer folder', gameJs.indexOf('characters/valley-farmer') >= 0);
+  check('shipped source has the valley-farmer folder', gameJs.indexOf('characters/valley-farmer') >= 0);
 }());
 
 (function checkUnit10StationAabb() {
@@ -397,6 +386,92 @@ function pngSize(rel) {
     }
   }
 }());
+
+(function checkSkinCatalog() {
+  const rel = path.join('skins', 'catalog.json');
+  let pack;
+  try { pack = JSON.parse(read(rel)); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('skin catalog has skins[]', Array.isArray(pack.skins) && pack.skins.length > 0);
+  check('skin catalog defaultSkinId is farmer', pack.defaultSkinId === 'farmer');
+  const ID_RE = /^[a-z][a-z0-9_]{1,31}$/;
+  const ids = new Set();
+  const gameJs = readGameSource();
+  const boot = gameJs.match(/const SKIN_CATALOG_BOOT_V = ['"]([^'"]+)['"]/);
+  check('SKIN_CATALOG_BOOT_V matches catalog cacheKey',
+    !!(boot && boot[1] === pack.cacheKey), pack.cacheKey);
+  (pack.skins || []).forEach((s) => {
+    if (!s || !s.id) { check('skin row has id', false); return; }
+    check(`skin id charset: ${s.id}`, ID_RE.test(s.id));
+    check(`skin id unique: ${s.id}`, !ids.has(s.id));
+    ids.add(s.id);
+    check(`${s.id} has English nameEn`, typeof s.nameEn === 'string' && s.nameEn.trim());
+    check(`${s.id} art is matrix or hd`, s.art === 'matrix' || s.art === 'hd');
+    check(`${s.id} has matrixPrefix`, typeof s.matrixPrefix === 'string' && s.matrixPrefix);
+    if (Array.isArray(s.worldCostumeOf)) {
+      s.worldCostumeOf.forEach((wid) => check(`${s.id} worldCostumeOf ${wid} is a string`, typeof wid === 'string' && wid));
+    }
+    if (s.art === 'hd') {
+      const folder = String(s.folder || ('skins/' + s.id)).replace(/\\/g, '/');
+      check(`${s.id} hd folder has no ..`, folder.indexOf('..') < 0);
+      const files = Array.isArray(s.files) ? s.files : [];
+      check(`${s.id} hd files[] is non-empty`, files.length > 0);
+      const walk = (s.states && s.states.walk) || { dirs: ['down', 'up', 'left', 'right'], frames: 3 };
+      const dirs = walk.dirs || ['down', 'up', 'left', 'right'];
+      const n = walk.frames || 3;
+      dirs.forEach((dir) => {
+        for (let f = 0; f < n; f++) {
+          const name = 'walk_' + dir + '_' + f + '.png';
+          check(`${s.id} lists ${name}`, files.indexOf(name) >= 0);
+          check(`sprites/${folder}/${name} exists`, fs.existsSync(path.join(ROOT, 'sprites', folder, name)));
+        }
+      });
+      if (s.states && s.states.idle && !s.states.idle.derived) {
+        check(`${s.id} idle is derived in v1`, false);
+      }
+    } else {
+      check(`${s.id} matrix has empty files[]`, !s.files || s.files.length === 0);
+    }
+  });
+  check('catalog contains farmer', ids.has('farmer'));
+  check('catalog contains chef', ids.has('chef'));
+
+  const start = gameJs.indexOf('const SKIN_CATALOG_DEFAULT =');
+  check('shipped source declares SKIN_CATALOG_DEFAULT', start >= 0);
+  if (start < 0) return;
+  const brace = gameJs.indexOf('{', start);
+  let depth = 0, end = -1;
+  for (let i = brace; i < gameJs.length; i++) {
+    if (gameJs[i] === '{') depth++;
+    else if (gameJs[i] === '}') {
+      depth--;
+      if (depth === 0) { end = i + 1; break; }
+    }
+  }
+  check('SKIN_CATALOG_DEFAULT object is closed', end > brace);
+  if (end <= brace) return;
+  let defPack;
+  try {
+    defPack = Function('"use strict"; return (' + gameJs.slice(brace, end) + ')')();
+  } catch (e) {
+    check('SKIN_CATALOG_DEFAULT parses', false, e.message);
+    return;
+  }
+  check('DEFAULT defaultSkinId matches catalog', defPack.defaultSkinId === pack.defaultSkinId);
+  const defIds = (defPack.skins || []).map((s) => s.id).sort().join(',');
+  const liveIds = (pack.skins || []).map((s) => s.id).sort().join(',');
+  check('DEFAULT skin ids match catalog', defIds === liveIds, defIds + ' vs ' + liveIds);
+  (pack.skins || []).forEach((live) => {
+    const d = (defPack.skins || []).find((s) => s.id === live.id);
+    check(`DEFAULT ${live.id} matrixPrefix matches`, d && d.matrixPrefix === live.matrixPrefix);
+    check(`DEFAULT ${live.id} art is matrix`, d && d.art === 'matrix');
+    check(`DEFAULT ${live.id} files[] is empty`, d && Array.isArray(d.files) && d.files.length === 0);
+  });
+}());
+
+STATIC_FILES.forEach(([rel]) => {
+  check(rel + ' exists for R2 upload', fs.existsSync(path.join(ROOT, rel)));
+});
 
 // ── Report ───────────────────────────────────────────────────────────────────
 console.log(`\nvalidate_content: ${checks - failures.length}/${checks} invariants hold`);
