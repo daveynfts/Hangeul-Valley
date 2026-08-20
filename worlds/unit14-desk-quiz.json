@@ -1,0 +1,132 @@
+{
+  "titleKo": "학습 책상",
+  "titleEn": "Etiquette quiz",
+  "sessionSize": 10,
+  "doneKo": "오늘 공부 끝!",
+  "againKo": "한 번 더",
+  "closeKo": "책상 닫기",
+  "correctKo": "맞아요!",
+  "wrongKo": "Answer:",
+  "questions": [
+    {
+      "id": 1,
+      "q": "Which of the following actions is considered polite when handing an object to an elderly person in Korea?",
+      "a": "C",
+      "choices": {
+        "A": "한 손으로 받다",
+        "B": "이름을 부르다",
+        "C": "두 손으로 드리다",
+        "D": "다리를 꼬고 앉다"
+      },
+      "art": "quiz/unit14_q01_two_hands.png"
+    },
+    {
+      "id": 2,
+      "q": "If you see a public sign that says \"금연\" at a bus station, what does it prohibit?",
+      "a": "B",
+      "choices": {
+        "A": "Parking",
+        "B": "Smoking",
+        "C": "Taking photos",
+        "D": "Using mobile phones"
+      },
+      "art": "quiz/unit14_q02_no_smoking.png"
+    },
+    {
+      "id": 3,
+      "q": "Choose the correct Korean translation for: \"May I take a picture here?\"",
+      "a": "B",
+      "choices": {
+        "A": "여기서 사진을 찍으면 안 돼요?",
+        "B": "여기서 사진을 찍어도 돼요?",
+        "C": "여기서 사진을 찍는 것 같아요.",
+        "D": "여기서 사진을 찍고 싶어요."
+      },
+      "art": "quiz/unit14_q03_may_i_photo.png"
+    },
+    {
+      "id": 4,
+      "q": "Complete the sentence to express prohibition: \"In the library, you must not make noise.\" 도서관에서 시끄럽게 ____________.",
+      "a": "B",
+      "choices": {
+        "A": "해도 돼요",
+        "B": "하면 안 돼요",
+        "C": "하는 것 같아요",
+        "D": "하고 싶어요"
+      },
+      "art": "quiz/unit14_q04_library_quiet.png"
+    },
+    {
+      "id": 5,
+      "q": "Minji accidentally handed a document to her boss with only one hand. She felt very embarrassed about her mistake. Which Korean word best describes her feeling?",
+      "a": "A",
+      "choices": {
+        "A": "창피하다",
+        "B": "비슷하다",
+        "C": "편리하다",
+        "D": "가깝다"
+      },
+      "art": "quiz/unit14_q05_embarrassed.png"
+    },
+    {
+      "id": 6,
+      "q": "What is the Korean term for \"respect or preferential treatment for senior citizens,\" such as reserving special seats for them on subways?",
+      "a": "C",
+      "choices": {
+        "A": "문화 차이",
+        "B": "기숙사 규칙",
+        "C": "경로 우대",
+        "D": "공중도덕"
+      },
+      "art": "quiz/unit14_q06_priority_seat.png"
+    },
+    {
+      "id": 7,
+      "q": "You are entering a concert hall and see a sign: \"음식물 반입 금지\". What does this mean?",
+      "a": "B",
+      "choices": {
+        "A": "You cannot take photos of the performers.",
+        "B": "You cannot bring food or drinks inside.",
+        "C": "You must turn off your mobile phone.",
+        "D": "You must not talk loudly."
+      },
+      "art": "quiz/unit14_q07_no_food.png"
+    },
+    {
+      "id": 8,
+      "q": "Conjugate the verb \"끄다\" (to turn off) correctly with the prohibition grammar \"-(으)면 안 되다\" (You must not turn off...).",
+      "a": "C",
+      "choices": {
+        "A": "꺼면 안 돼요",
+        "B": "끄으면 안 돼요",
+        "C": "끄면 안 돼요",
+        "D": "껐으면 안 돼요"
+      },
+      "art": "quiz/unit14_q08_turn_off.png"
+    },
+    {
+      "id": 9,
+      "q": "When drinking alcohol with seniors in Korea, what is the polite way to drink?",
+      "a": "B",
+      "choices": {
+        "A": "다리를 꼬고 앉아서 마시다",
+        "B": "고개를 돌리고 마시다",
+        "C": "한 손으로 마시다",
+        "D": "이름을 부르며 마시다"
+      },
+      "art": "quiz/unit14_q09_turn_head_drink.png"
+    },
+    {
+      "id": 10,
+      "q": "If someone asks you: \"여기 앉아도 돼요?\" (May I sit here?), and you want to politely say \"Yes, you may sit,\" how should you reply?",
+      "a": "B",
+      "choices": {
+        "A": "네, 앉으면 안 돼요.",
+        "B": "네, 앉아도 돼요.",
+        "C": "네, 앉는 것 같아요.",
+        "D": "네, 앉지 마세요."
+      },
+      "art": "quiz/unit14_q10_may_sit.png"
+    }
+  ]
+}

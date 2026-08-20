@@ -2378,7 +2378,7 @@ class FarmScene extends Phaser.Scene {
         Phaser.Math.Distance.Between(this.player.x, this.player.y, this.kitchenStation.x, this.kitchenStation.y) < (this.kitchenStation.interact || 82)) {
       hx = this.kitchenStation.x; hy = this.kitchenStation.y - 22; lbl = '[SPACE] 요리 주방'; col = 0xF97316; hw = 64; hh = 72;
     }
-    if (hx === null && this._isUnit10() && this.studyDesk &&
+    if (hx === null && this._hasStudyDesk() && this.studyDesk &&
         Phaser.Math.Distance.Between(this.player.x, this.player.y, this.studyDesk.x, this.studyDesk.y) < (this.studyDesk.interact || 80)) {
       hx = this.studyDesk.x; hy = this.studyDesk.y - 20; lbl = '[SPACE] 학습 책상'; col = 0x60A5FA; hw = 70; hh = 70;
     }
@@ -2469,6 +2469,12 @@ class FarmScene extends Phaser.Scene {
   _isUnit10(){
     return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10';
   }
+  _isUnit14(){
+    return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-14';
+  }
+  _hasStudyDesk(){
+    return this._isUnit10() || this._isUnit14();
+  }
   _isTextbookFarm(){
     if (typeof isTextbookFarmWorld === 'function') return isTextbookFarmWorld();
     const id = currentLesson() && currentLesson().worldId;
@@ -2479,7 +2485,7 @@ class FarmScene extends Phaser.Scene {
     return fallback;
   }
 
-  // ── Textbook farm: Unit 10/14 hide Valley minigames. Stations are Unit 10 only. ──
+  // ── Textbook farm: Unit 10/14 hide Valley minigames. Kitchen/taste stay Unit 10; desk is 10+14. ──
   syncUnit10World(){
     const farmOnly = this._isTextbookFarm();
     const unit10 = this._isUnit10();
@@ -2493,13 +2499,13 @@ class FarmScene extends Phaser.Scene {
     }
     if (unit10) {
       this._ensureTasteStation();
-      this._ensureStudyDesk();
       this._ensureKitchen();
     } else {
       this._teardownTasteStation();
-      this._teardownStudyDesk();
       this._teardownKitchen();
     }
+    if (this._hasStudyDesk()) this._ensureStudyDesk();
+    else this._teardownStudyDesk();
   }
 
   _setPlotsVisible(show){
@@ -2609,14 +2615,7 @@ class FarmScene extends Phaser.Scene {
     if (!base) return;
     const glow = this.add.circle(base.x - 26, base.y - base.spr.displayHeight * 0.63, 8, 0xFDE047, 0.22).setDepth(base.y + 8);
     this.tweens.add({ targets: glow, alpha: { from: 0.22, to: 0.75 }, scale: { from: 0.8, to: 1.4 }, duration: 700, yoyo: true, repeat: -1 });
-    let stool = null;
-    if (this.textures.exists('wooden_stool_hd')) {
-      stool = this.add.image(base.x - 56, base.y, 'wooden_stool_hd')
-        .setOrigin(0.5, 1).setDepth(base.y + 5);
-      stool.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-      if (this.shadows) this.shadows.createShadow(stool, 32, 10, 1);
-    }
-    this.studyDesk = Object.assign(base, { glow, stool });
+    this.studyDesk = Object.assign(base, { glow, stool: null });
   }
 
   _ensureKitchen(){
@@ -2675,7 +2674,7 @@ class FarmScene extends Phaser.Scene {
       if (typeof openCookingUI === 'function') openCookingUI();
       return;
     }
-    if (this._isUnit10() && this.studyDesk &&
+    if (this._hasStudyDesk() && this.studyDesk &&
         Phaser.Math.Distance.Between(this.player.x, this.player.y, this.studyDesk.x, this.studyDesk.y) < (this.studyDesk.interact || 80)) {
       if (typeof openDeskQuiz === 'function') openDeskQuiz();
       return;

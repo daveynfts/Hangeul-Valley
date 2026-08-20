@@ -47,8 +47,10 @@ function paintHudIcons() {
     els.forEach(function (el) {
       const px = Number(el.getAttribute('data-hud-size')) || (el.classList && el.classList.contains('hud-overflow-item') ? 18 : 20);
       const icon = hudIconHtml(row.id, row.fallback, px);
-      const label = el.getAttribute('data-hud-label');
-      if (label != null && label !== '') {
+      const isOverflow = el.classList && el.classList.contains('hud-overflow-item');
+      const label = el.getAttribute('data-hud-label') || (isOverflow ? row.label : '');
+      if (label) {
+        if (!el.getAttribute('data-hud-label')) el.setAttribute('data-hud-label', label);
         el.innerHTML = icon + '<span class="hud-overflow-label">' + label + '</span>';
       } else {
         el.innerHTML = icon;

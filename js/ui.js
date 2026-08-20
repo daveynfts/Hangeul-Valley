@@ -696,7 +696,13 @@ function openQuiz(word, plot, phase=1){
   const sb=$('submit-btn'); if(sb) sb.textContent=cfg.btn;
   const qui=$('quiz-ui'); if(qui) qui.className='phase-'+phase;
   // Fill data (CSS controls visibility per phase)
-  hintEmoji.textContent     = word.hint||'?';
+  if (hintEmoji) {
+    if (typeof vocabIconHtml === 'function') {
+      hintEmoji.innerHTML = vocabIconHtml(word.ko, word.hint || '?', 72);
+    } else {
+      hintEmoji.textContent = word.hint || '?';
+    }
+  }
   hintCategory.textContent  = wordCategory(word);
   enWordDisplay.textContent = word.en;
   quizLevelTag.textContent  = 'P'+phase+'/3';
@@ -1451,13 +1457,24 @@ if (typeof window !== 'undefined') {
 
 let deskQuizBank = null;
 let deskQuizState = null;
+const QUIZ_ART_FOLDER = 'quiz';
+
+function deskQuizUrl() {
+  if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-desk-quiz.json';
+  return '/worlds/unit10-desk-quiz.json';
+}
 
 function loadDeskQuiz() {
-  if (deskQuizBank) return Promise.resolve(deskQuizBank);
+  const url = deskQuizUrl();
+  if (deskQuizBank && deskQuizBank._url === url) return Promise.resolve(deskQuizBank);
   if (typeof fetch !== 'function') return Promise.resolve(null);
-  return fetch('/worlds/unit10-desk-quiz.json')
+  return fetch(url)
     .then(r => r.ok ? r.json() : null)
-    .then(d => { deskQuizBank = d; return d; })
+    .then(d => {
+      if (d) d._url = url;
+      deskQuizBank = d;
+      return d;
+    })
     .catch(() => null);
 }
 
@@ -1480,11 +1497,19 @@ function pickDeskSession(bank) {
   return pool.slice(0, size);
 }
 
+function deskQuizTitle(bank) {
+  const ko = (bank && bank.titleKo) || '학습 책상';
+  const en = (bank && bank.titleEn) || 'Quiz';
+  return ko + ' · ' + en;
+}
+
 function openDeskQuiz() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
   loadDeskQuiz().then(bank => {
     const qs = pickDeskSession(bank);
     deskQuizState = { i: 0, score: 0, locked: false, settled: false, qs, bank, gain: null };
+    const title = $('desk-title');
+    if (title) title.textContent = deskQuizTitle(bank);
     setModalState('desk-quiz-overlay', true);
     renderDeskQuiz();
   });
@@ -1523,6 +1548,8 @@ function renderDeskResults() {
   const t = rankTitleFor(playerRank.level);
   const xp = (st.gain && st.gain.xp) || 0;
   const hops = (st.gain && st.gain.leveled && st.gain.leveled.length) || 0;
+  const art = $('desk-art');
+  if (art) { art.removeAttribute('src'); art.hidden = true; }
   if (nEl) nEl.textContent = st.score + ' / ' + total;
   if (qEl) {
     qEl.innerHTML = ((st.bank && st.bank.doneKo) || 'Done.') +
@@ -1559,6 +1586,16 @@ function renderDeskQuiz() {
   }
   const item = qs[st.i];
   if (nEl) nEl.textContent = (st.i + 1) + ' / ' + qs.length;
+  const art = $('desk-art');
+  if (art) {
+    if (item.art && typeof artUrl === 'function') {
+      art.src = artUrl(item.art);
+      art.hidden = false;
+    } else {
+      art.removeAttribute('src');
+      art.hidden = true;
+    }
+  }
   if (qEl) qEl.textContent = (st.i + 1) + '. ' + item.q;
   if (box) {
     box.innerHTML = '';
