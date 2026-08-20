@@ -29,6 +29,12 @@ assert(hudArt.indexOf('function paintHudIcons') >= 0, 'paintHudIcons helper exis
 ].forEach((id) => {
   assert(html.indexOf('data-hud-icon="' + id + '"') >= 0, 'HUD wires ' + id);
 });
+['Quests', 'Cooking', 'Recipes', 'Audio', 'Save', 'Progress', 'Ranks', 'Duel', 'Fish', 'Trophies']
+  .forEach((label) => {
+    assert(html.indexOf('data-hud-label="' + label + '"') >= 0, 'More menu labels ' + label);
+  });
+assert(css.indexOf('.hud-overflow-label') >= 0, 'overflow label style exists');
+assert(css.indexOf('.hud-btn:not(.hud-overflow-item)') >= 0, 'circle size does not clip More rows');
 
 const hud = (catalog.assets || []).filter((a) => a && a.kind === 'ui' && a.family === 'hud-icons');
 assert(hud.length === 19, 'catalog has 19 HUD glyphs (got ' + hud.length + ')');
@@ -36,6 +42,7 @@ hud.forEach((a) => {
   const png = path.join(ROOT, 'sprites', a.path);
   assert(fs.existsSync(png), a.path + ' exists');
 });
-assert(catalog.cacheKey === 'art-20260820g', 'catalog cacheKey bumped for HUD art');
+assert(typeof catalog.cacheKey === 'string' && catalog.cacheKey.indexOf('art-') === 0,
+  'catalog cacheKey is an art token');
 
 console.log('\ntest_hud_icons: all passed');

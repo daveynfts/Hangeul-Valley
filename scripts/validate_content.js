@@ -181,6 +181,10 @@ check('vocab book cards use vocabIconHtml',
   /vc-emoji[\s\S]{0,120}vocabIconHtml|vocabIconHtml\([\s\S]{0,40}vc-emoji/.test(gameJs)
   && gameJs.indexOf("vocabIconHtml(w.ko") >= 0);
 check('vocab fun-fact uses vocabIconHtml', gameJs.indexOf("vocabIconHtml(word.ko") >= 0);
+check('plant quiz hint uses vocabIconHtml',
+  /hintEmoji[\s\S]{0,180}vocabIconHtml\(word\.ko/.test(gameJs));
+check('study desk does not spawn the stool',
+  !/_ensureStudyDesk\(\)\{[\s\S]{0,900}wooden_stool_hd/.test(gameJs));
 check('HUD paints catalogued farm icons', gameJs.indexOf('function hudIconHtml') >= 0 && gameJs.indexOf('function paintHudIcons') >= 0);
 check('HUD art folder is ui', gameJs.indexOf("HUD_ART_FOLDER = 'ui'") >= 0);
 check('Mindmap / Words notebook is gone',
@@ -305,11 +309,14 @@ const overlayIds = [
   check('isUnit10World stays Unit-10-only',
     /function isUnit10World\(\)[\s\S]{0,180}worldId === '2b-unit-10'/.test(gameJs));
   check('isUnit14World is declared', gameJs.indexOf('function isUnit14World') >= 0);
-  check('desk/kitchen/taste spawn only when _isUnit10',
-    /if \(unit10\) \{[\s\S]{0,160}_ensureTasteStation[\s\S]{0,80}_ensureStudyDesk[\s\S]{0,80}_ensureKitchen/.test(gameJs)
-    || /if \(this\._isUnit10\(\)\) \{[\s\S]{0,160}_ensureTasteStation/.test(gameJs));
-  const interact = gameJs.match(/_interact\(\)\{[\s\S]{0,900}openTasteGame/);
+  check('kitchen/taste spawn only when unit10',
+    /if \(unit10\) \{[\s\S]{0,220}_ensureTasteStation[\s\S]{0,80}_ensureKitchen/.test(gameJs));
+  check('study desk spawns on Unit 10 and Unit 14',
+    gameJs.indexOf('_hasStudyDesk') >= 0 && gameJs.indexOf('_ensureStudyDesk') >= 0);
+  const interact = gameJs.match(/_interact\(\)\{[\s\S]{0,1200}openTasteGame/);
   check('taste interact remains Unit-10-gated', !!(interact && interact[0].indexOf('_isUnit10()') >= 0));
+  check('desk interact uses _hasStudyDesk',
+    /_hasStudyDesk\(\)[\s\S]{0,280}openDeskQuiz/.test(gameJs));
   check('cooking recipes still Unit-10-gated',
     /isUnit10World\(\)[\s\S]{0,80}UNIT10_COOKING_RECIPES/.test(gameJs));
 }());
@@ -336,8 +343,45 @@ const overlayIds = [
     else if (!q.choices[q.a]) bad.push(`q${q.id} answer not in choices`);
     ['A', 'B', 'C', 'D'].forEach((k) => { if (!q.choices[k]) bad.push(`q${q.id} missing ${k}`); });
     if (VIETNAMESE.test(JSON.stringify(q))) bad.push(`q${q.id} has Vietnamese`);
+    if (!q.art || !String(q.art).startsWith('quiz/')) bad.push(`q${q.id} missing quiz art`);
+    else {
+      const pngRel = path.join('sprites', String(q.art).replace(/\\/g, '/'));
+      if (!fs.existsSync(path.join(ROOT, pngRel))) bad.push(`q${q.id} art missing`);
+    }
   });
-  check('desk quiz items are well-formed English MCQs', bad.length === 0, bad.slice(0, 6).join(', '));
+  check('desk quiz items are well-formed English MCQs with art', bad.length === 0, bad.slice(0, 6).join(', '));
+}());
+
+(function checkUnit14DeskQuiz() {
+  const rel = path.join('worlds', 'unit14-desk-quiz.json');
+  const full = path.join(ROOT, rel);
+  if (!check(`${rel} exists`, fs.existsSync(full))) return;
+  let bank;
+  try { bank = JSON.parse(fs.readFileSync(full, 'utf8')); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  const qs = (bank && bank.questions) || [];
+  check('Unit 14 desk quiz has 10 questions', qs.length === 10, `found ${qs.length}`);
+  check('Unit 14 desk quiz session is 10 questions', bank.sessionSize === 10, String(bank.sessionSize));
+  check('desk quiz loads Unit 14 JSON on that world',
+    gameJs.indexOf('unit14-desk-quiz.json') >= 0 && gameJs.indexOf('function deskQuizUrl') >= 0);
+  const ids = new Set();
+  const bad = [];
+  qs.forEach((q, i) => {
+    if (!q || typeof q.id !== 'number') bad.push(`q${i} missing id`);
+    else if (ids.has(q.id)) bad.push(`duplicate id ${q.id}`);
+    else ids.add(q.id);
+    if (!q.q || !q.a || !q.choices) bad.push(`q${i} incomplete`);
+    else if (!['A', 'B', 'C', 'D'].includes(q.a)) bad.push(`q${q.id} bad key ${q.a}`);
+    else if (!q.choices[q.a]) bad.push(`q${q.id} answer not in choices`);
+    ['A', 'B', 'C', 'D'].forEach((k) => { if (!q.choices[k]) bad.push(`q${q.id} missing ${k}`); });
+    if (VIETNAMESE.test(JSON.stringify(q))) bad.push(`q${q.id} has Vietnamese`);
+    if (!q.art || !String(q.art).startsWith('quiz/')) bad.push(`q${q.id} missing quiz art`);
+    else {
+      const pngRel = path.join('sprites', String(q.art).replace(/\\/g, '/'));
+      if (!fs.existsSync(path.join(ROOT, pngRel))) bad.push(`q${q.id} art missing`);
+    }
+  });
+  check('Unit 14 desk quiz items are well-formed with art', bad.length === 0, bad.slice(0, 8).join(', '));
 }());
 
 function pngSize(rel) {

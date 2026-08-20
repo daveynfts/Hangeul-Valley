@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260820g",
+  "cacheKey": "art-20260820i",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -3596,6 +3596,456 @@
         "HUD"
       ],
       "notes": "HUD glyph. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q01_two_hands",
+      "nameEn": "Unit 14 desk quiz illustration 1",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q1",
+      "path": "quiz/unit14_q01_two_hands.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q02_no_smoking",
+      "nameEn": "Unit 14 desk quiz illustration 2",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q2",
+      "path": "quiz/unit14_q02_no_smoking.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q03_may_i_photo",
+      "nameEn": "Unit 14 desk quiz illustration 3",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q3",
+      "path": "quiz/unit14_q03_may_i_photo.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q04_library_quiet",
+      "nameEn": "Unit 14 desk quiz illustration 4",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q4",
+      "path": "quiz/unit14_q04_library_quiet.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q05_embarrassed",
+      "nameEn": "Unit 14 desk quiz illustration 5",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q5",
+      "path": "quiz/unit14_q05_embarrassed.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q06_priority_seat",
+      "nameEn": "Unit 14 desk quiz illustration 6",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q6",
+      "path": "quiz/unit14_q06_priority_seat.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q07_no_food",
+      "nameEn": "Unit 14 desk quiz illustration 7",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q7",
+      "path": "quiz/unit14_q07_no_food.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q08_turn_off",
+      "nameEn": "Unit 14 desk quiz illustration 8",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q8",
+      "path": "quiz/unit14_q08_turn_off.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q09_turn_head_drink",
+      "nameEn": "Unit 14 desk quiz illustration 9",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q9",
+      "path": "quiz/unit14_q09_turn_head_drink.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit14.q10_may_sit",
+      "nameEn": "Unit 14 desk quiz illustration 10",
+      "kind": "quiz",
+      "family": "unit14-desk-quiz",
+      "role": "q10",
+      "path": "quiz/unit14_q10_may_sit.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-14"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q01_kimchi_stew",
+      "nameEn": "Unit 10 desk quiz illustration 1",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q1",
+      "path": "quiz/unit10_q01_kimchi_stew.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q02_soybean_paste_stew",
+      "nameEn": "Unit 10 desk quiz illustration 2",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q2",
+      "path": "quiz/unit10_q02_soybean_paste_stew.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q03_soft_tofu_stew",
+      "nameEn": "Unit 10 desk quiz illustration 3",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q3",
+      "path": "quiz/unit10_q03_soft_tofu_stew.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q04_pork_bone_potato_stew",
+      "nameEn": "Unit 10 desk quiz illustration 4",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q4",
+      "path": "quiz/unit10_q04_pork_bone_potato_stew.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q05_spicy_fish_stew",
+      "nameEn": "Unit 10 desk quiz illustration 5",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q5",
+      "path": "quiz/unit10_q05_spicy_fish_stew.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q06_ox_bone_soup",
+      "nameEn": "Unit 10 desk quiz illustration 6",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q6",
+      "path": "quiz/unit10_q06_ox_bone_soup.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q07_cold_noodles",
+      "nameEn": "Unit 10 desk quiz illustration 7",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q7",
+      "path": "quiz/unit10_q07_cold_noodles.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q08_knife_cut_noodles",
+      "nameEn": "Unit 10 desk quiz illustration 8",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q8",
+      "path": "quiz/unit10_q08_knife_cut_noodles.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q09_spicy_mixed_noodles",
+      "nameEn": "Unit 10 desk quiz illustration 9",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q9",
+      "path": "quiz/unit10_q09_spicy_mixed_noodles.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q10_grilled_pork_belly",
+      "nameEn": "Unit 10 desk quiz illustration 10",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q10",
+      "path": "quiz/unit10_q10_grilled_pork_belly.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q11_grilled_minced_ribs",
+      "nameEn": "Unit 10 desk quiz illustration 11",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q11",
+      "path": "quiz/unit10_q11_grilled_minced_ribs.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q12_braised_short_ribs",
+      "nameEn": "Unit 10 desk quiz illustration 12",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q12",
+      "path": "quiz/unit10_q12_braised_short_ribs.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q13_ginseng_chicken_soup",
+      "nameEn": "Unit 10 desk quiz illustration 13",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q13",
+      "path": "quiz/unit10_q13_ginseng_chicken_soup.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q14_chicken_meat",
+      "nameEn": "Unit 10 desk quiz illustration 14",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q14",
+      "path": "quiz/unit10_q14_chicken_meat.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q15_sweet",
+      "nameEn": "Unit 10 desk quiz illustration 15",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q15",
+      "path": "quiz/unit10_q15_sweet.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q16_salty",
+      "nameEn": "Unit 10 desk quiz illustration 16",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q16",
+      "path": "quiz/unit10_q16_salty.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q17_bitter",
+      "nameEn": "Unit 10 desk quiz illustration 17",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q17",
+      "path": "quiz/unit10_q17_bitter.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q18_sour",
+      "nameEn": "Unit 10 desk quiz illustration 18",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q18",
+      "path": "quiz/unit10_q18_sour.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q19_spicy",
+      "nameEn": "Unit 10 desk quiz illustration 19",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q19",
+      "path": "quiz/unit10_q19_spicy.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit10.q20_flavor",
+      "nameEn": "Unit 10 desk quiz illustration 20",
+      "kind": "quiz",
+      "family": "unit10-desk-quiz",
+      "role": "q20",
+      "path": "quiz/unit10_q20_flavor.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit10.q01_kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
     }
   ]
 }

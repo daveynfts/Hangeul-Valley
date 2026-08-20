@@ -136,7 +136,7 @@
         <span id="quiz-gold-reward"></span>
       </div>
 
-      <!-- Big emoji hint card -->
+      <!-- Vocab-art hint card (emoji only as missing-file fallback) -->
       <div id="quiz-hint-box">
         <span id="hint-emoji">❓</span>
         <span id="hint-category"></span>
@@ -681,10 +681,11 @@
     <div id="desk-quiz-panel" class="glass-modal">
       <div id="desk-lamp"></div>
       <div id="desk-head">
-        <span>학습 책상 · Food quiz</span>
+        <span id="desk-title">학습 책상 · Quiz</span>
         <span id="desk-progress">1 / 5</span>
         <button type="button" onclick="closeDeskQuiz()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:8px;padding:2px 10px;cursor:pointer">✕</button>
       </div>
+      <img id="desk-art" alt="" hidden>
       <div id="desk-q"></div>
       <div id="desk-choices"></div>
       <div id="desk-fb" class="fb"></div>

@@ -57,7 +57,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-20260820g';
+const ART_CACHE_KEY = 'art-20260820i';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }
@@ -742,9 +742,18 @@ function saveAllGame(){
   flushSave();   // explicit user action — write through, don't debounce
   const btn=$('save-btn');
   if(btn){
-    const prev=btn.textContent;
-    btn.textContent = btn.classList.contains('hud-overflow-item') ? '✅ Saved' : '✅';
-    setTimeout(()=>{ btn.textContent=prev; }, 1800);
+    const inMenu = btn.classList.contains('hud-overflow-item');
+    if (inMenu && typeof hudIconHtml === 'function') {
+      btn.innerHTML = hudIconHtml('save', '✅', 18) + '<span class="hud-overflow-label">Saved</span>';
+      setTimeout(() => {
+        if (typeof paintHudIcons === 'function') paintHudIcons();
+        else btn.innerHTML = hudIconHtml('save', '💾', 18) + '<span class="hud-overflow-label">Save</span>';
+      }, 1800);
+    } else {
+      const prev = btn.textContent;
+      btn.textContent = inMenu ? '✅ Saved' : '✅';
+      setTimeout(() => { btn.textContent = prev; }, 1800);
+    }
   }
   showToast('💾 Game saved successfully!', 2200);
 }
