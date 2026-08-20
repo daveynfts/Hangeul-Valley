@@ -41,9 +41,20 @@ Height classes — pass `--height` to `process_prop.py` (default 156). Do not fa
 | `crop-ripe` | 56 | plot stage 3 |
 | `fence-bloom` | 28 | post flowers (no grass pad, no tint) |
 | `landmark` | 180 | apple tree and similar |
-| `character` | 80 | farm walk frames (`sprites/skins/<id>/`) |
+| `character` | 80 | farm walk frames (`sprites/characters/<slug>/`) |
 
-Naming: do not rename shipped files. New world-pack furniture `unit10_<role>.png`. Plot plants `crop_<type>_<1|2|3>.png`. Post flowers `fence_flower_<color>.png`. Landmarks `apple_tree.png` / `apple_tree_ripe.png`. Character walk frames `sprites/skins/<id>/walk_<dir>_<0|1|2>.png`.
+Naming lives in `sprites/catalog.json` (id, real-world `nameEn`, `path`, Phaser key, status). Paths are taxonomy folders, not flat dumps:
+
+| Kind | Path |
+|---|---|
+| character | `characters/<slug>/walk_<dir>_<0\|1\|2>.png` |
+| furniture | `furniture/<descriptive>.png` |
+| stall | `stalls/<descriptive>.png` |
+| crop | `plants/<species>/{sprout,growing,ripe}.png` |
+| landmark | `plants/<species>/{summer,ripe}.png` |
+| decoration | `decorations/<descriptive>.png` |
+
+Add a catalog row **before** the PNG. `status: unused` keeps library art off the Phaser load list. Do not leave a PNG on disk that the catalog does not name.
 
 Palette: match `STARDEW_PALETTE` wood/outline in `game.js`. Do not paint grass or ground. Phaser `createShadow` is the contact darkening.
 
@@ -53,7 +64,7 @@ One Phaser spawn path per family: `*_hd` key, matrix fallback, scale 1 on HD, no
 
 Run `scripts/process_prop.py` (Pillow) with the class `--height`. It keys magenta / rose, crops 2px pad (feet stay the last opaque row), resizes, keys again, writes `sprites/<name>.png` and `assets/sprites/<name>.png`.
 
-Character sets: `--height 80 --subdir skins/<id>` per frame, then one `--pad-set skins/<id>` so every `walk_*.png` shares the same width (torso centered, extra rows above, feet last opaque row). Do not skip `--pad-set` — unequal widths sway the sprite.
+Character sets: `--height 80 --subdir characters/<slug>` per frame, then one `--pad-set characters/<slug>` so every `walk_*.png` shares the same width (torso centered, extra rows above, feet last opaque row). Do not skip `--pad-set` — unequal widths sway the sprite. Register the frames in `sprites/catalog.json`.
 
 Extra bottom pad makes the prop float.
 

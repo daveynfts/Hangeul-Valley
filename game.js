@@ -5589,6 +5589,26 @@ function hdStationScale(spec) {
   return (typeof s === 'number' && s > 0 && s <= 1.2) ? s : 1;
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
+const ART_DIR = 'sprites/';
+const ART_LOAD = [
+  { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' },
+  { key: 'unit10_kitchen_hd', file: 'furniture/farmhouse_kitchen.png' },
+  { key: 'unit10_taste_stall_hd', file: 'stalls/korean_street_food_stall.png' },
+  { key: 'flw_red_hd', file: 'decorations/fence_rose_red.png' },
+  { key: 'flw_yellow_hd', file: 'decorations/fence_buttercup_yellow.png' },
+  { key: 'flw_purple_hd', file: 'decorations/fence_lavender_purple.png' },
+  { key: 'apple_tree_hd', file: 'plants/apple_tree/summer.png' },
+  { key: 'apple_tree_ripe_hd', file: 'plants/apple_tree/ripe.png' }
+];
+const CROP_ART_FOLDER = {
+  blossom: 'plants/cherry_blossom',
+  cabbage: 'plants/napa_cabbage',
+  strawberry: 'plants/strawberry',
+  corn: 'plants/sweet_corn',
+  sunflower: 'plants/sunflower'
+};
+const CROP_STAGE_FILE = { 1: 'sprout.png', 2: 'growing.png', 3: 'ripe.png' };
+const FARMER_ART_FOLDER = 'characters/valley-farmer';
 function cropTex(scene, type, stage) {
   const n = CROP_HD_NAMES[type] || CROP_HD_NAMES[0];
   const hd = 'crop_' + n + '_' + stage + '_hd';
@@ -8623,24 +8643,17 @@ class FarmScene extends Phaser.Scene {
     this.load.json('levels','levels.json');
     this.load.json('world-2b-10','worlds/2b-unit-10.json');
     this.load.json('unit10-layout','worlds/unit10-layout.json?v=southband');
-    this.load.image('study_desk_hd', 'sprites/study_desk.png');
-    this.load.image('unit10_kitchen_hd', 'sprites/unit10_kitchen.png');
-    this.load.image('unit10_taste_stall_hd', 'sprites/unit10_taste_stall.png');
+    ART_LOAD.forEach((a) => { this.load.image(a.key, ART_DIR + a.file); });
     CROP_HD_NAMES.forEach((n) => {
       [1, 2, 3].forEach((s) => {
-        this.load.image('crop_' + n + '_' + s + '_hd', 'sprites/crop_' + n + '_' + s + '.png');
+        this.load.image('crop_' + n + '_' + s + '_hd', ART_DIR + CROP_ART_FOLDER[n] + '/' + CROP_STAGE_FILE[s]);
       });
     });
-    this.load.image('flw_red_hd', 'sprites/fence_flower_red.png');
-    this.load.image('flw_yellow_hd', 'sprites/fence_flower_yellow.png');
-    this.load.image('flw_purple_hd', 'sprites/fence_flower_purple.png');
-    this.load.image('apple_tree_hd', 'sprites/apple_tree.png');
-    this.load.image('apple_tree_ripe_hd', 'sprites/apple_tree_ripe.png');
     FARMER_HD_DIRS.forEach((dir) => {
       for (let f = 0; f < FARMER_HD_FRAMES; f++) {
         this.load.image(
           farmerHdTextureKey(dir, f),
-          'sprites/skins/farmer/walk_' + dir + '_' + f + '.png'
+          ART_DIR + FARMER_ART_FOLDER + '/walk_' + dir + '_' + f + '.png'
         );
       }
     });

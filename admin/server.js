@@ -7,6 +7,7 @@ const levelsLib = require('./lib/levels');
 const vocabFactsLib = require('./lib/vocabFacts');
 const syncLib = require('./lib/sync');
 const worldLib = require('./lib/world');
+const artLib = require('./lib/art');
 
 const app = express();
 
@@ -284,6 +285,15 @@ app.get('/api/unit10/world', (req, res, next) => {
 app.put('/api/unit10/world', (req, res, next) => {
   try { res.json({ success: true, data: worldLib.saveWorld(req.body, getRootDir()) }); }
   catch (err) { err.status = 400; next(err); }
+});
+
+app.get('/api/art', (req, res, next) => {
+  try { res.json({ success: true, data: artLib.buildReport(getRootDir()) }); }
+  catch (err) { next(err); }
+});
+
+app.use('/sprite-preview', (req, res, next) => {
+  express.static(path.join(getRootDir(), 'sprites'), { fallthrough: true })(req, res, next);
 });
 
 // 12. POST /api/sync (Manual Trigger Resync)
