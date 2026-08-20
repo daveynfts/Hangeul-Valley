@@ -44,6 +44,7 @@ Height classes — pass `--height` to `process_prop.py` (default 156). Do not fa
 | `fauna` | 24 | butterflies (shared canvas per flap pair) |
 | `landmark` | 180 | apple tree and similar |
 | `character` | 80 | farm walk frames (`sprites/characters/<slug>/`) |
+| `item` | 48 | food / vocab still-icons (`sprites/foods/`, `sprites/items/`) |
 
 Naming lives in `sprites/catalog.json` (id, real-world `nameEn`, `path`, Phaser key, status). Paths are taxonomy folders, not flat dumps:
 
@@ -55,6 +56,8 @@ Naming lives in `sprites/catalog.json` (id, real-world `nameEn`, `path`, Phaser 
 | crop | `plants/<species>/{sprout,growing,ripe}.png` |
 | landmark | `plants/<species>/{summer,ripe}.png` |
 | decoration | `decorations/<descriptive>.png` |
+| food | `foods/<descriptive>.png` |
+| item | `items/<descriptive>.png` |
 
 Add a catalog row **before** the PNG. `status: unused` keeps library art off the Phaser load list. Do not leave a PNG on disk that the catalog does not name.
 

@@ -335,6 +335,11 @@ function pngSize(rel) {
       check(`${posix} phaserKey is basename_hd`, a.phaserKey === base + '_hd', a.phaserKey);
       check(`ART_LOAD includes ${a.phaserKey}`, gameJs.indexOf("key: '" + a.phaserKey + "'") >= 0);
     }
+    if (a.status === 'shipped' && a.phaserKey &&
+        (a.heightClass === 'item' || a.kind === 'food' || a.kind === 'item')) {
+      const base = posix.split('/').pop().replace(/\.png$/i, '');
+      check(`${posix} phaserKey is basename_hd`, a.phaserKey === base + '_hd', a.phaserKey);
+    }
   });
   const listPng = (dir, prefix) => {
     if (!fs.existsSync(dir)) return [];
@@ -483,6 +488,51 @@ function pngSize(rel) {
       check(`DEFAULT ${live.id} files[] is empty`, d && Array.isArray(d.files) && d.files.length === 0);
     }
   });
+}());
+
+(function checkUnit10VocabArt() {
+  const world = JSON.parse(read(path.join('worlds', '2b-unit-10.json')));
+  const words = (((world || {}).level || {}).words) || [];
+  check('Unit 10 has 80 headwords', words.length === 80, String(words.length));
+  const pack = JSON.parse(read(path.join('sprites', 'catalog.json')));
+  const byKo = {};
+  (pack.assets || []).forEach((a) => { if (a && a.wordKo) byKo[a.wordKo] = a; });
+  const missing = [];
+  words.forEach((w) => {
+    const a = byKo[w.ko];
+    if (!a || !a.id || !a.nameEn || !a.path) { missing.push(w.ko); return; }
+    const pngRel = path.join('sprites', String(a.path).replace(/\\/g, '/'));
+    if (!fs.existsSync(path.join(ROOT, pngRel))) missing.push(w.ko + ' png');
+  });
+  check('every Unit 10 headword has catalogued PNG', missing.length === 0, missing.slice(0, 12).join(', '));
+
+  const overlays = read(path.join('js', 'overlays.js'));
+  const ui = read(path.join('js', 'ui.js'));
+  const farm = read(path.join('js', 'scenes', 'farm.js'));
+  check('cooking overlay prefers vocabIconHtml', overlays.indexOf('vocabIconHtml(r.nameKo') >= 0);
+  check('cooking detail prefers vocabIconHtml', overlays.indexOf('vocabIconHtml(recipe.nameKo') >= 0);
+  check('cooking pantry prefers vocabIconHtml', overlays.indexOf('vocabIconHtml(info.nameKo') >= 0);
+  check('inventory prefers vocabIconHtml', ui.indexOf('vocabIconHtml') >= 0);
+  check('farm loads cooking HD via vocabArtLoadEntries', farm.indexOf('vocabArtLoadEntries') >= 0);
+
+  const recStart = overlays.indexOf('var UNIT10_COOKING_RECIPES =');
+  const recEnd = overlays.indexOf('];', recStart);
+  const recBlock = recStart >= 0 ? overlays.slice(recStart, recEnd) : '';
+  const dishKos = [...recBlock.matchAll(/nameKo: '([^']+)'/g)].map((m) => m[1]);
+  const ingMatch = overlays.match(/var UNIT10_INGREDIENTS = \[([^\]]+)\]/);
+  const ings = ingMatch
+    ? [...ingMatch[1].matchAll(/'([^']+)'/g)].map((m) => m[1])
+    : [];
+  const unwired = [];
+  dishKos.concat(ings).forEach((ko) => {
+    const a = byKo[ko];
+    if (!a || !a.path) { unwired.push(ko); return; }
+    const pngRel = path.join('sprites', String(a.path).replace(/\\/g, '/'));
+    if (!fs.existsSync(path.join(ROOT, pngRel))) unwired.push(ko + ' png');
+  });
+  check('every Unit 10 cooking ingredient/dish has wired HD icon', unwired.length === 0, unwired.slice(0, 12).join(', '));
+  check('Unit 10 cooking has dishes and ingredients', dishKos.length >= 12 && ings.length >= 14,
+    `dishes ${dishKos.length} ings ${ings.length}`);
 }());
 
 STATIC_FILES.forEach(([rel]) => {

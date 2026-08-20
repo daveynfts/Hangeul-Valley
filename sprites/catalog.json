@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260820c",
+  "cacheKey": "art-20260820d",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -13,7 +13,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "notes": "Parent of the farmer set. Idle is this frame of last facing."
     },
     {
@@ -27,7 +29,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "character.valley_farmer.walk.down.2",
@@ -40,7 +44,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "character.valley_farmer.walk.up.0",
@@ -53,7 +59,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "character.valley_farmer.walk.up.1",
@@ -66,7 +74,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "character.valley_farmer.walk.up.2",
@@ -79,7 +89,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "character.valley_farmer.walk.left.0",
@@ -92,7 +104,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "character.valley_farmer.walk.left.1",
@@ -105,7 +119,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "character.valley_farmer.walk.left.2",
@@ -118,7 +134,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "character.valley_farmer.walk.right.0",
@@ -131,7 +149,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "notes": "Horizontal flip of the west contact frame."
     },
     {
@@ -145,7 +165,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "character.valley_farmer.walk.right.2",
@@ -158,7 +180,9 @@
       "status": "shipped",
       "heightClass": "character",
       "parentId": "character.valley_farmer.walk.down.0",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "furniture.oak_study_desk",
@@ -171,7 +195,10 @@
       "status": "shipped",
       "heightClass": "station",
       "parentId": "furniture.oak_study_desk",
-      "usedBy": ["FarmScene", "2b-unit-10"]
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ]
     },
     {
       "id": "furniture.farmhouse_kitchen",
@@ -184,7 +211,10 @@
       "status": "shipped",
       "heightClass": "station",
       "parentId": "furniture.oak_study_desk",
-      "usedBy": ["FarmScene", "2b-unit-10"],
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
       "notes": "Edit-chained from the oak study desk so wood matches."
     },
     {
@@ -226,7 +256,10 @@
       "status": "shipped",
       "heightClass": "station",
       "parentId": "furniture.oak_study_desk",
-      "usedBy": ["FarmScene", "2b-unit-10"]
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ]
     },
     {
       "id": "plant.cherry_blossom.sprout",
@@ -239,7 +272,9 @@
       "status": "shipped",
       "heightClass": "crop-sprout",
       "parentId": "plant.cherry_blossom.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "blossom",
       "stage": 1
     },
@@ -254,7 +289,9 @@
       "status": "shipped",
       "heightClass": "crop-mid",
       "parentId": "plant.cherry_blossom.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "blossom",
       "stage": 2
     },
@@ -269,7 +306,9 @@
       "status": "shipped",
       "heightClass": "crop-ripe",
       "parentId": "plant.cherry_blossom.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "blossom",
       "stage": 3
     },
@@ -284,7 +323,9 @@
       "status": "shipped",
       "heightClass": "crop-sprout",
       "parentId": "plant.napa_cabbage.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "cabbage",
       "stage": 1
     },
@@ -299,7 +340,9 @@
       "status": "shipped",
       "heightClass": "crop-mid",
       "parentId": "plant.napa_cabbage.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "cabbage",
       "stage": 2
     },
@@ -314,7 +357,9 @@
       "status": "shipped",
       "heightClass": "crop-ripe",
       "parentId": "plant.napa_cabbage.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "cabbage",
       "stage": 3
     },
@@ -329,7 +374,9 @@
       "status": "shipped",
       "heightClass": "crop-sprout",
       "parentId": "plant.strawberry.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "strawberry",
       "stage": 1
     },
@@ -344,7 +391,9 @@
       "status": "shipped",
       "heightClass": "crop-mid",
       "parentId": "plant.strawberry.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "strawberry",
       "stage": 2
     },
@@ -359,7 +408,9 @@
       "status": "shipped",
       "heightClass": "crop-ripe",
       "parentId": "plant.strawberry.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "strawberry",
       "stage": 3
     },
@@ -374,7 +425,9 @@
       "status": "shipped",
       "heightClass": "crop-sprout",
       "parentId": "plant.sweet_corn.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "corn",
       "stage": 1
     },
@@ -389,7 +442,9 @@
       "status": "shipped",
       "heightClass": "crop-mid",
       "parentId": "plant.sweet_corn.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "corn",
       "stage": 2
     },
@@ -404,7 +459,9 @@
       "status": "shipped",
       "heightClass": "crop-ripe",
       "parentId": "plant.sweet_corn.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "corn",
       "stage": 3
     },
@@ -419,7 +476,9 @@
       "status": "shipped",
       "heightClass": "crop-sprout",
       "parentId": "plant.sunflower.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "sunflower",
       "stage": 1
     },
@@ -434,7 +493,9 @@
       "status": "shipped",
       "heightClass": "crop-mid",
       "parentId": "plant.sunflower.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "sunflower",
       "stage": 2
     },
@@ -449,7 +510,9 @@
       "status": "shipped",
       "heightClass": "crop-ripe",
       "parentId": "plant.sunflower.ripe",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "cropType": "sunflower",
       "stage": 3
     },
@@ -464,7 +527,9 @@
       "status": "shipped",
       "heightClass": "landmark",
       "parentId": "landmark.apple_tree.summer",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "landmark.apple_tree.ripe",
@@ -477,7 +542,9 @@
       "status": "shipped",
       "heightClass": "landmark",
       "parentId": "landmark.apple_tree.summer",
-      "usedBy": ["FarmScene"]
+      "usedBy": [
+        "FarmScene"
+      ]
     },
     {
       "id": "decoration.fence_rose_red",
@@ -490,7 +557,9 @@
       "status": "shipped",
       "heightClass": "fence-bloom",
       "parentId": "decoration.fence_rose_red",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "notes": "Parent of the fence-bloom set. Phaser key equals basename + _hd."
     },
     {
@@ -504,7 +573,9 @@
       "status": "shipped",
       "heightClass": "fence-bloom",
       "parentId": "decoration.fence_rose_red",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "notes": "Edit-chained from the fence rose. Phaser key equals basename + _hd."
     },
     {
@@ -518,7 +589,9 @@
       "status": "shipped",
       "heightClass": "fence-bloom",
       "parentId": "decoration.fence_rose_red",
-      "usedBy": ["FarmScene"],
+      "usedBy": [
+        "FarmScene"
+      ],
       "notes": "Edit-chained from the fence rose. Phaser key equals basename + _hd."
     },
     {
@@ -532,7 +605,10 @@
       "status": "shipped",
       "heightClass": "ground-bloom",
       "parentId": "decoration.wildflower_rose_red",
-      "usedBy": ["FarmScene", "2b-unit-10"],
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
       "notes": "Parent of the ground-bloom set. Edit-chained from the fence rose. No grass pad. Phaser key equals basename + _hd."
     },
     {
@@ -546,7 +622,10 @@
       "status": "shipped",
       "heightClass": "ground-bloom",
       "parentId": "decoration.wildflower_rose_red",
-      "usedBy": ["FarmScene", "2b-unit-10"],
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
       "notes": "Recolor of the red wildflower clump. Phaser key equals basename + _hd."
     },
     {
@@ -560,7 +639,10 @@
       "status": "shipped",
       "heightClass": "ground-bloom",
       "parentId": "decoration.wildflower_rose_red",
-      "usedBy": ["FarmScene", "2b-unit-10"],
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
       "notes": "Recolor of the red wildflower clump. Phaser key equals basename + _hd."
     },
     {
@@ -574,7 +656,10 @@
       "status": "shipped",
       "heightClass": "fauna",
       "parentId": "decoration.cabbage_white_butterfly.open",
-      "usedBy": ["FarmScene", "2b-unit-10"],
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
       "notes": "Parent of the two-frame flap. Shared 35x24 canvas. Phaser key equals basename + _hd."
     },
     {
@@ -588,8 +673,1635 @@
       "status": "shipped",
       "heightClass": "fauna",
       "parentId": "decoration.cabbage_white_butterfly.open",
-      "usedBy": ["FarmScene", "2b-unit-10"],
+      "usedBy": [
+        "FarmScene",
+        "2b-unit-10"
+      ],
       "notes": "Flap frame, padded to the open-wing canvas. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.kimchi_stew",
+      "nameEn": "Kimchi stew",
+      "kind": "food",
+      "family": "stew",
+      "role": "icon",
+      "path": "foods/kimchi_stew.png",
+      "phaserKey": "kimchi_stew_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_stew",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "김치찌개",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.soybean_paste_stew",
+      "nameEn": "Soybean-paste stew",
+      "kind": "food",
+      "family": "stew",
+      "role": "icon",
+      "path": "foods/soybean_paste_stew.png",
+      "phaserKey": "soybean_paste_stew_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_stew",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "된장찌개",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.soft_tofu_stew",
+      "nameEn": "Soft-tofu stew",
+      "kind": "food",
+      "family": "stew",
+      "role": "icon",
+      "path": "foods/soft_tofu_stew.png",
+      "phaserKey": "soft_tofu_stew_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_stew",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "순두부찌개",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.pork_bone_potato_stew",
+      "nameEn": "Pork-bone potato stew",
+      "kind": "food",
+      "family": "stew",
+      "role": "icon",
+      "path": "foods/pork_bone_potato_stew.png",
+      "phaserKey": "pork_bone_potato_stew_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_stew",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "감자탕",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.spicy_fish_stew",
+      "nameEn": "Spicy fish stew",
+      "kind": "food",
+      "family": "stew",
+      "role": "icon",
+      "path": "foods/spicy_fish_stew.png",
+      "phaserKey": "spicy_fish_stew_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_stew",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "매운탕",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.ox_bone_soup",
+      "nameEn": "Ox-bone soup",
+      "kind": "food",
+      "family": "stew",
+      "role": "icon",
+      "path": "foods/ox_bone_soup.png",
+      "phaserKey": "ox_bone_soup_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_stew",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "설렁탕",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.cold_noodles",
+      "nameEn": "Cold noodles",
+      "kind": "food",
+      "family": "noodle",
+      "role": "icon",
+      "path": "foods/cold_noodles.png",
+      "phaserKey": "cold_noodles_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.cold_noodles",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "냉면",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.knife_cut_noodles",
+      "nameEn": "Knife-cut noodles",
+      "kind": "food",
+      "family": "noodle",
+      "role": "icon",
+      "path": "foods/knife_cut_noodles.png",
+      "phaserKey": "knife_cut_noodles_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.cold_noodles",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "칼국수",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.spicy_mixed_noodles",
+      "nameEn": "Spicy mixed noodles",
+      "kind": "food",
+      "family": "noodle",
+      "role": "icon",
+      "path": "foods/spicy_mixed_noodles.png",
+      "phaserKey": "spicy_mixed_noodles_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.cold_noodles",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "비빔국수",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.grilled_pork_belly",
+      "nameEn": "Grilled pork belly",
+      "kind": "food",
+      "family": "meat",
+      "role": "icon",
+      "path": "foods/grilled_pork_belly.png",
+      "phaserKey": "grilled_pork_belly_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.grilled_pork_belly",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "삼겹살",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.grilled_minced_ribs",
+      "nameEn": "Grilled minced ribs",
+      "kind": "food",
+      "family": "meat",
+      "role": "icon",
+      "path": "foods/grilled_minced_ribs.png",
+      "phaserKey": "grilled_minced_ribs_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.grilled_pork_belly",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "떡갈비",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.braised_short_ribs",
+      "nameEn": "Braised short ribs",
+      "kind": "food",
+      "family": "meat",
+      "role": "icon",
+      "path": "foods/braised_short_ribs.png",
+      "phaserKey": "braised_short_ribs_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.grilled_pork_belly",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "갈비찜",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.ginseng_chicken_soup",
+      "nameEn": "Ginseng chicken soup",
+      "kind": "food",
+      "family": "stew",
+      "role": "icon",
+      "path": "foods/ginseng_chicken_soup.png",
+      "phaserKey": "ginseng_chicken_soup_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_stew",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "삼계탕",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.chicken_meat",
+      "nameEn": "Chicken meat",
+      "kind": "food",
+      "family": "meat",
+      "role": "icon",
+      "path": "foods/chicken_meat.png",
+      "phaserKey": "chicken_meat_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.grilled_pork_belly",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "닭고기",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.ribs",
+      "nameEn": "Ribs",
+      "kind": "food",
+      "family": "meat",
+      "role": "icon",
+      "path": "foods/ribs.png",
+      "phaserKey": "ribs_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.grilled_pork_belly",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "갈비",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.sweet_taste",
+      "nameEn": "Sweetness",
+      "kind": "item",
+      "family": "taste",
+      "role": "icon",
+      "path": "items/sweet_taste.png",
+      "phaserKey": "sweet_taste_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.sweet_taste",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "달다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.salty_taste",
+      "nameEn": "Saltiness",
+      "kind": "item",
+      "family": "taste",
+      "role": "icon",
+      "path": "items/salty_taste.png",
+      "phaserKey": "salty_taste_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.sweet_taste",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "짜다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.bitter_taste",
+      "nameEn": "Bitterness",
+      "kind": "item",
+      "family": "taste",
+      "role": "icon",
+      "path": "items/bitter_taste.png",
+      "phaserKey": "bitter_taste_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.sweet_taste",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "쓰다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.sour_taste",
+      "nameEn": "Sourness",
+      "kind": "item",
+      "family": "taste",
+      "role": "icon",
+      "path": "items/sour_taste.png",
+      "phaserKey": "sour_taste_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.sweet_taste",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "시다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.spicy_taste",
+      "nameEn": "Spiciness",
+      "kind": "item",
+      "family": "taste",
+      "role": "icon",
+      "path": "items/spicy_taste.png",
+      "phaserKey": "spicy_taste_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.sweet_taste",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "맵다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.flavor",
+      "nameEn": "Taste / flavor",
+      "kind": "item",
+      "family": "taste",
+      "role": "icon",
+      "path": "items/flavor.png",
+      "phaserKey": "flavor_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.sweet_taste",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "맛",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.price_coins",
+      "nameEn": "Price",
+      "kind": "item",
+      "family": "review",
+      "role": "icon",
+      "path": "items/price_coins.png",
+      "phaserKey": "price_coins_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "값",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.subway_access",
+      "nameEn": "Transport / access",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/subway_access.png",
+      "phaserKey": "subway_access_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "교통",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.service_bell",
+      "nameEn": "Service",
+      "kind": "item",
+      "family": "review",
+      "role": "icon",
+      "path": "items/service_bell.png",
+      "phaserKey": "service_bell_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "서비스",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.candlelit_table",
+      "nameEn": "Atmosphere",
+      "kind": "item",
+      "family": "review",
+      "role": "icon",
+      "path": "items/candlelit_table.png",
+      "phaserKey": "candlelit_table_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "분위기",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.popular_restaurant",
+      "nameEn": "Popular restaurant",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/popular_restaurant.png",
+      "phaserKey": "popular_restaurant_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "맛집",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.korean_set_meal",
+      "nameEn": "Korean set meal",
+      "kind": "food",
+      "family": "rice",
+      "role": "icon",
+      "path": "foods/korean_set_meal.png",
+      "phaserKey": "korean_set_meal_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bibimbap",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "한정식",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.insadong_lantern",
+      "nameEn": "Insadong",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/insadong_lantern.png",
+      "phaserKey": "insadong_lantern_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "인사동",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.subway_station",
+      "nameEn": "Subway station",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/subway_station.png",
+      "phaserKey": "subway_station_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "지하철역",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.traditional_hanok",
+      "nameEn": "Traditional",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/traditional_hanok.png",
+      "phaserKey": "traditional_hanok_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "전통적인",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.restaurant_staff",
+      "nameEn": "Staff",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/restaurant_staff.png",
+      "phaserKey": "restaurant_staff_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.restaurant_staff",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "직원",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.dining_table",
+      "nameEn": "Dining table",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/dining_table.png",
+      "phaserKey": "dining_table_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "상",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.meat",
+      "nameEn": "Meat",
+      "kind": "food",
+      "family": "meat",
+      "role": "icon",
+      "path": "foods/meat.png",
+      "phaserKey": "meat_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.grilled_pork_belly",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "고기",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.whole_fish",
+      "nameEn": "Fish",
+      "kind": "food",
+      "family": "meat",
+      "role": "icon",
+      "path": "foods/whole_fish.png",
+      "phaserKey": "whole_fish_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.grilled_pork_belly",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "생선",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.vegetable_pile",
+      "nameEn": "Vegetables",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/vegetable_pile.png",
+      "phaserKey": "vegetable_pile_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "야채",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.kinds_types",
+      "nameEn": "Kind / type",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/kinds_types.png",
+      "phaserKey": "kinds_types_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "종류",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.diversity_spread",
+      "nameEn": "To be diverse",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/diversity_spread.png",
+      "phaserKey": "diversity_spread_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "다양하다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.first_time",
+      "nameEn": "The first time",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/first_time.png",
+      "phaserKey": "first_time_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "처음",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.surprise_burst",
+      "nameEn": "To be surprised",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/surprise_burst.png",
+      "phaserKey": "surprise_burst_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.restaurant_staff",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "놀라다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.kindness",
+      "nameEn": "To be kind",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/kindness.png",
+      "phaserKey": "kindness_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.restaurant_staff",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "친절하다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.recommend",
+      "nameEn": "To recommend",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/recommend.png",
+      "phaserKey": "recommend_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "추천하다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.pizza_nara_shop",
+      "nameEn": "Pizza Nara shop",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/pizza_nara_shop.png",
+      "phaserKey": "pizza_nara_shop_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "피자나라",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.bulgogi_pizza",
+      "nameEn": "Bulgogi pizza",
+      "kind": "food",
+      "family": "pizza",
+      "role": "icon",
+      "path": "foods/bulgogi_pizza.png",
+      "phaserKey": "bulgogi_pizza_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bulgogi_pizza",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "불고기피자",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.vegetable_pizza",
+      "nameEn": "Vegetable pizza",
+      "kind": "food",
+      "family": "pizza",
+      "role": "icon",
+      "path": "foods/vegetable_pizza.png",
+      "phaserKey": "vegetable_pizza_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bulgogi_pizza",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "야채피자",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.sweet_potato_pizza",
+      "nameEn": "Sweet-potato pizza",
+      "kind": "food",
+      "family": "pizza",
+      "role": "icon",
+      "path": "foods/sweet_potato_pizza.png",
+      "phaserKey": "sweet_potato_pizza_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bulgogi_pizza",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "고구마피자",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.cheese_pizza",
+      "nameEn": "Cheese pizza",
+      "kind": "food",
+      "family": "pizza",
+      "role": "icon",
+      "path": "foods/cheese_pizza.png",
+      "phaserKey": "cheese_pizza_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bulgogi_pizza",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "치즈피자",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.pepperoni_pizza",
+      "nameEn": "Pepperoni pizza",
+      "kind": "food",
+      "family": "pizza",
+      "role": "icon",
+      "path": "foods/pepperoni_pizza.png",
+      "phaserKey": "pepperoni_pizza_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bulgogi_pizza",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "페퍼로니피자",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.cola",
+      "nameEn": "Cola",
+      "kind": "food",
+      "family": "drink",
+      "role": "icon",
+      "path": "foods/cola.png",
+      "phaserKey": "cola_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.cola",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "콜라",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.lemon_lime_soda",
+      "nameEn": "Lemon-lime soda",
+      "kind": "food",
+      "family": "drink",
+      "role": "icon",
+      "path": "foods/lemon_lime_soda.png",
+      "phaserKey": "lemon_lime_soda_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.cola",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "사이다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.fried_chicken",
+      "nameEn": "Fried chicken",
+      "kind": "food",
+      "family": "chicken",
+      "role": "icon",
+      "path": "foods/fried_chicken.png",
+      "phaserKey": "fried_chicken_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.fried_chicken",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "프라이드치킨",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.seasoned_fried_chicken",
+      "nameEn": "Seasoned fried chicken",
+      "kind": "food",
+      "family": "chicken",
+      "role": "icon",
+      "path": "foods/seasoned_fried_chicken.png",
+      "phaserKey": "seasoned_fried_chicken_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.fried_chicken",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "양념치킨",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.bibimbap",
+      "nameEn": "Bibimbap",
+      "kind": "food",
+      "family": "rice",
+      "role": "icon",
+      "path": "foods/bibimbap.png",
+      "phaserKey": "bibimbap_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bibimbap",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "비빔밥",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.kimchi_fried_rice",
+      "nameEn": "Kimchi fried rice",
+      "kind": "food",
+      "family": "rice",
+      "role": "icon",
+      "path": "foods/kimchi_fried_rice.png",
+      "phaserKey": "kimchi_fried_rice_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bibimbap",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "김치볶음밥",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.cold_noodles_broth",
+      "nameEn": "Cold noodles in broth",
+      "kind": "food",
+      "family": "noodle",
+      "role": "icon",
+      "path": "foods/cold_noodles_broth.png",
+      "phaserKey": "cold_noodles_broth_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.cold_noodles",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "물냉면",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.seafood_fried_rice",
+      "nameEn": "Seafood fried rice",
+      "kind": "food",
+      "family": "rice",
+      "role": "icon",
+      "path": "foods/seafood_fried_rice.png",
+      "phaserKey": "seafood_fried_rice_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bibimbap",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "해물볶음밥",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "food.pizza_pan",
+      "nameEn": "Pizza pan (한 판)",
+      "kind": "food",
+      "family": "pizza",
+      "role": "icon",
+      "path": "foods/pizza_pan.png",
+      "phaserKey": "pizza_pan_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.bulgogi_pizza",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "판",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.servings",
+      "nameEn": "Servings",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/servings.png",
+      "phaserKey": "servings_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "인분",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.delivery_bag",
+      "nameEn": "To bring / deliver",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/delivery_bag.png",
+      "phaserKey": "delivery_bag_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "갖다 주다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.delivery_scooter",
+      "nameEn": "To be delivered",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/delivery_scooter.png",
+      "phaserKey": "delivery_scooter_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "배달되다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.same_age",
+      "nameEn": "Same age",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/same_age.png",
+      "phaserKey": "same_age_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.restaurant_staff",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "동갑",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.senior",
+      "nameEn": "Senior",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/senior.png",
+      "phaserKey": "senior_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.restaurant_staff",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "선배",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.junior",
+      "nameEn": "Junior",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/junior.png",
+      "phaserKey": "junior_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.restaurant_staff",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "후배",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.after_a_long_time",
+      "nameEn": "After a long time",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/after_a_long_time.png",
+      "phaserKey": "after_a_long_time_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "오랜만에",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.drop_honorifics",
+      "nameEn": "To drop honorifics",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/drop_honorifics.png",
+      "phaserKey": "drop_honorifics_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "말을 놓다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.casual_speech",
+      "nameEn": "Casual speech",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/casual_speech.png",
+      "phaserKey": "casual_speech_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "반말",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.suit_ones_taste",
+      "nameEn": "To suit one's taste",
+      "kind": "item",
+      "family": "taste",
+      "role": "icon",
+      "path": "items/suit_ones_taste.png",
+      "phaserKey": "suit_ones_taste_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.sweet_taste",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "입에 맞다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.wasted_money",
+      "nameEn": "To feel money was wasted",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/wasted_money.png",
+      "phaserKey": "wasted_money_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "돈이 아깝다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.order_food",
+      "nameEn": "To order food",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/order_food.png",
+      "phaserKey": "order_food_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "시키다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.place_order",
+      "nameEn": "To place an order",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/place_order.png",
+      "phaserKey": "place_order_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "주문하다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.reservation",
+      "nameEn": "To reserve",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/reservation.png",
+      "phaserKey": "reservation_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "예약하다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.in_advance",
+      "nameEn": "In advance",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/in_advance.png",
+      "phaserKey": "in_advance_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "미리",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.famous",
+      "nameEn": "To be famous",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/famous.png",
+      "phaserKey": "famous_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "유명하다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.always",
+      "nameEn": "Always",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/always.png",
+      "phaserKey": "always_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "항상",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.crossroads",
+      "nameEn": "Intersection",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/crossroads.png",
+      "phaserKey": "crossroads_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "사거리",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.around_here",
+      "nameEn": "Around here",
+      "kind": "item",
+      "family": "place",
+      "role": "icon",
+      "path": "items/around_here.png",
+      "phaserKey": "around_here_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.popular_restaurant",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "이 근처",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.birthday_cake",
+      "nameEn": "Birthday",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/birthday_cake.png",
+      "phaserKey": "birthday_cake_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.restaurant_staff",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "생일",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.weekend",
+      "nameEn": "Weekend",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/weekend.png",
+      "phaserKey": "weekend_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "주말",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.busy",
+      "nameEn": "To be busy",
+      "kind": "item",
+      "family": "people",
+      "role": "icon",
+      "path": "items/busy.png",
+      "phaserKey": "busy_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.restaurant_staff",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "바쁘다",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.already",
+      "nameEn": "Already",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/already.png",
+      "phaserKey": "already_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "벌써",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.let_me_see",
+      "nameEn": "Well / let me see",
+      "kind": "item",
+      "family": "abstract",
+      "role": "icon",
+      "path": "items/let_me_see.png",
+      "phaserKey": "let_me_see_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.place_order",
+      "usedBy": [
+        "2b-unit-10"
+      ],
+      "wordKo": "글쎄",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.napa_cabbage_head",
+      "nameEn": "Napa cabbage",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/napa_cabbage_head.png",
+      "phaserKey": "napa_cabbage_head_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "배추",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.korean_radish",
+      "nameEn": "Korean radish",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/korean_radish.png",
+      "phaserKey": "korean_radish_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "무",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.green_onion",
+      "nameEn": "Green onion",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/green_onion.png",
+      "phaserKey": "green_onion_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "파",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.chili_pepper",
+      "nameEn": "Chili pepper",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/chili_pepper.png",
+      "phaserKey": "chili_pepper_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "고추",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.garlic",
+      "nameEn": "Garlic",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/garlic.png",
+      "phaserKey": "garlic_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "마늘",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.potato",
+      "nameEn": "Potato",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/potato.png",
+      "phaserKey": "potato_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "감자",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.soybeans",
+      "nameEn": "Soybeans",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/soybeans.png",
+      "phaserKey": "soybeans_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "콩",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.rice_grain",
+      "nameEn": "Rice",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/rice_grain.png",
+      "phaserKey": "rice_grain_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "쌀",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.carrot",
+      "nameEn": "Carrot",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/carrot.png",
+      "phaserKey": "carrot_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "당근",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.cucumber",
+      "nameEn": "Cucumber",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/cucumber.png",
+      "phaserKey": "cucumber_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "오이",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.onion",
+      "nameEn": "Onion",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/onion.png",
+      "phaserKey": "onion_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "양파",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.bean_sprouts",
+      "nameEn": "Bean sprouts",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/bean_sprouts.png",
+      "phaserKey": "bean_sprouts_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "콩나물",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.lettuce",
+      "nameEn": "Lettuce",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/lettuce.png",
+      "phaserKey": "lettuce_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "상추",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
+    },
+    {
+      "id": "item.ginger",
+      "nameEn": "Ginger",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "icon",
+      "path": "items/ginger.png",
+      "phaserKey": "ginger_hd",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.napa_cabbage_head",
+      "usedBy": [
+        "2b-unit-10",
+        "cooking"
+      ],
+      "wordKo": "생강",
+      "notes": "Unit 10 still icon. Magenta-keyed 16-bit. Phaser key equals basename + _hd."
     }
   ]
 }
