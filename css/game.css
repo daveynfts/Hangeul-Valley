@@ -1155,7 +1155,7 @@
     .fish-card:hover { transform: translateY(-2px); }
     .fish-card-icon { font-size: 28px; margin-bottom: 4px; }
     .fish-card-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: bold; color: var(--ink); }
-    .fish-card-rom { font-family: monospace; font-size: 11px; color: #0e7490; margin-top: 2px; }
+
     .fish-card-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 2px; }
     .fish-card-catches { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--neon-gold); margin-top: 8px; }
 

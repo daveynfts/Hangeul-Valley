@@ -14,7 +14,6 @@ window.openFishAlbum = function(){
     card.innerHTML = `
       <div class="fish-card-icon">${f.hint}</div>
       <div class="fish-card-ko">${unlocked ? f.ko : '???'}</div>
-      <div class="fish-card-rom">[${f.rom}]</div>
       <div class="fish-card-en">${unlocked ? f.en : 'Locked'}</div>
       <div class="fish-card-catches">${unlocked ? `Caught ×${count}` : '🔒 Uncaught'}</div>`;
     grid.appendChild(card);

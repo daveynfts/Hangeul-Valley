@@ -1,13 +1,13 @@
 // ══════════════ FISH DATABASE ═════════════════════════════════════════════════
 const FISH_DB = [
-  { ko:'연어', en:'Salmon', hint:'🍣', rarity:'Common', weight:'2.4 kg', rom:'yeon-eo' },
-  { ko:'고등어', en:'Mackerel', hint:'🐟', rarity:'Common', weight:'1.1 kg', rom:'go-deung-eo' },
-  { ko:'오징어', en:'Squid', hint:'🦑', rarity:'Rare', weight:'0.8 kg', rom:'o-jing-eo' },
-  { ko:'잉어', en:'Carp', hint:'🎏', rarity:'Rare', weight:'3.2 kg', rom:'ing-eo' },
-  { ko:'새우', en:'Shrimp', hint:'🦐', rarity:'Common', weight:'0.1 kg', rom:'sae-u' },
-  { ko:'문어', en:'Octopus', hint:'🐙', rarity:'Epic', weight:'4.5 kg', rom:'mun-eo' },
-  { ko:'조개', en:'Clam', hint:'🐚', rarity:'Common', weight:'0.2 kg', rom:'jo-gae' },
-  { ko:'황금물고기', en:'Golden Fish', hint:'🌟', rarity:'Legendary', weight:'5.0 kg', rom:'hwang-geum-mul-go-gi' }
+  { ko:'연어', en:'Salmon', hint:'🍣', rarity:'Common', weight:'2.4 kg' },
+  { ko:'고등어', en:'Mackerel', hint:'🐟', rarity:'Common', weight:'1.1 kg' },
+  { ko:'오징어', en:'Squid', hint:'🦑', rarity:'Rare', weight:'0.8 kg' },
+  { ko:'잉어', en:'Carp', hint:'🎏', rarity:'Rare', weight:'3.2 kg' },
+  { ko:'새우', en:'Shrimp', hint:'🦐', rarity:'Common', weight:'0.1 kg' },
+  { ko:'문어', en:'Octopus', hint:'🐙', rarity:'Epic', weight:'4.5 kg' },
+  { ko:'조개', en:'Clam', hint:'🐚', rarity:'Common', weight:'0.2 kg' },
+  { ko:'황금물고기', en:'Golden Fish', hint:'🌟', rarity:'Legendary', weight:'5.0 kg' }
 ];
 let appleTreeQuizPending = false; // true when harvesting apple tree (not a crop plot)
 

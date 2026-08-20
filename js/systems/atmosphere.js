@@ -111,101 +111,71 @@ class DynamicShadowSystem {
     this.shadows = [];
   }
 
-  createShadow(target, baseW = 30, baseH = 10, offsetY = 18, options = {}) {
-    if (!target) return null;
-    const shadowContainer = this.scene.add.container(target.x, target.y);
-
-    // AO Core Layer (ground contact)
-    const aoCore = this.scene.add.ellipse(0, offsetY, baseW * 0.7, baseH * 0.7, 0x000000, 0.22);
-    // Dynamic Directional Penumbra Layer
-    const penumbra = this.scene.add.ellipse(0, offsetY, baseW, baseH, 0x000000, 0.35);
-
-    shadowContainer.add([aoCore, penumbra]);
-    shadowContainer._target = target;
-    shadowContainer._baseW = baseW;
-    shadowContainer._baseH = baseH;
-    shadowContainer._offsetY = offsetY;
-    shadowContainer._aoCore = aoCore;
-    shadowContainer._penumbra = penumbra;
-    shadowContainer._type = options.type || 'directional';
-
-    this.shadows.push(shadowContainer);
-    return shadowContainer;
+  static feetY(target) {
+    if (!target) return 0;
+    const h = typeof target.displayHeight === 'number' ? target.displayHeight : 0;
+    const oy = (target.originY != null) ? target.originY : 0.5;
+    return (typeof target.y === 'number' ? target.y : 0) + h * (1 - oy);
   }
 
-  updateAllShadows(sunAngle, hour) {
+  createShadow(target, baseW = 30, baseH = 10, offsetY = 0) {
+    if (!target || !this.scene || !this.scene.add) return null;
+    const w = Math.max(8, baseW);
+    const h = Math.max(4, baseH);
+    const extra = typeof offsetY === 'number' ? offsetY : 0;
+    const container = this.scene.add.container(target.x, target.y);
+    const blob = this.scene.add.ellipse(0, 0, w, h, 0x000000, 0.32);
+    container.add(blob);
+    container._target = target;
+    container._blob = blob;
+    container._baseW = w;
+    container._baseH = h;
+    container._offsetY = extra;
+    container._type = 'contact';
+    this._place(container);
+    this.shadows.push(container);
+    return container;
+  }
+
+  removeShadow(blob) {
+    const i = this.shadows.indexOf(blob);
+    if (i >= 0) this.shadows.splice(i, 1);
+    if (blob && blob.destroy) {
+      try { blob.destroy(); } catch (e) {}
+    }
+  }
+
+  _place(shadow) {
+    const target = shadow && shadow._target;
+    if (!shadow || !target) return;
+    const fy = DynamicShadowSystem.feetY(target);
+    shadow.setPosition(target.x, fy + (shadow._offsetY || 0));
+    shadow.setDepth(Math.max(0, fy - 2));
+    shadow.setAlpha(1);
+    shadow.setScale(1, 1);
+    if (shadow._blob && shadow._blob.setAlpha) shadow._blob.setAlpha(0.32);
+  }
+
+  updateAllShadows() {
     for (let i = this.shadows.length - 1; i >= 0; i--) {
       const s = this.shadows[i];
       if (!s || !s.active || !s._target || !s._target.active) {
-        if (s && s.destroy) s.destroy();
+        if (s && s.destroy) {
+          try { s.destroy(); } catch (e) {}
+        }
         this.shadows.splice(i, 1);
         continue;
       }
-      if (s._type === 'directional') {
-        this.updateShadow(s, sunAngle, hour);
-      }
+      this._place(s);
     }
   }
 
-  updateShadow(shadowSprite, sunAngle, hour = 12) {
-    if (!shadowSprite || !shadowSprite._target || !shadowSprite._target.active) return;
-    const target = shadowSprite._target;
-
-    const sunSin = Math.sin(sunAngle);
-    const sunCos = Math.cos(sunAngle);
-
-    const isDay = hour >= 5.5 && hour <= 18.5;
-    const sunAlt = Math.max(0, sunSin);
-    const stretch = Math.max(0.35, Math.abs(sunCos) * 1.85 + (1 - sunAlt) * 0.65);
-
-    const dx = -sunCos * (shadowSprite._baseW * 0.75) * stretch;
-    const dy = shadowSprite._offsetY + sunSin * 3.5;
-
-    const scaleX = 1 + Math.abs(dx) / (shadowSprite._baseW * 0.55);
-    const scaleY = Math.max(0.4, 1 - Math.abs(sunCos) * 0.35);
-
-    const alpha = isDay ? (0.22 + sunAlt * 0.26) : 0.12;
-
-    const targetY = typeof target.y === 'number' ? target.y : 0;
-    const groundDepth = Math.max(0, targetY - 1);
-
-    shadowSprite.setPosition(target.x, target.y);
-    shadowSprite.setDepth(groundDepth);
-
-    if (shadowSprite._penumbra) {
-      shadowSprite._penumbra.setPosition(dx, dy);
-      shadowSprite._penumbra.setScale(scaleX, scaleY);
-      shadowSprite._penumbra.setAlpha(alpha);
-    } else {
-      shadowSprite.setPosition(target.x + dx, target.y + dy);
-      shadowSprite.setScale(scaleX, scaleY);
-      shadowSprite.setAlpha(alpha);
-    }
+  updateShadow(shadowSprite) {
+    this._place(shadowSprite);
   }
 
-  updatePointShadow(shadowSprite, lightX, lightY) {
-    if (!shadowSprite || !shadowSprite._target || !shadowSprite._target.active) return;
-    const target = shadowSprite._target;
-    const dx = target.x - lightX;
-    const dy = target.y - lightY;
-    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-
-    const shadowLength = Math.min(28, dist * 0.15);
-    const offX = (dx / dist) * shadowLength;
-    const offY = (dy / dist) * shadowLength + shadowSprite._offsetY;
-
-    const targetY = typeof target.y === 'number' ? target.y : 0;
-    const groundDepth = Math.max(0, targetY - 1);
-
-    shadowSprite.setPosition(target.x, target.y);
-    shadowSprite.setDepth(groundDepth);
-
-    if (shadowSprite._penumbra) {
-      shadowSprite._penumbra.setPosition(offX, offY);
-      shadowSprite._penumbra.setAlpha(0.35);
-    } else {
-      shadowSprite.setPosition(target.x + offX, target.y + offY);
-    }
+  updatePointShadow(shadowSprite) {
+    this._place(shadowSprite);
   }
 }
 

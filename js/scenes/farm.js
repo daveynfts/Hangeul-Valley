@@ -56,13 +56,13 @@ class FarmScene extends Phaser.Scene {
     const W = this.scale.width, H = this.scale.height;
     this.cameras.main.setBounds(0, 0, W, H);
 
-    this._drawWorld(W, H);
-
-    // Atmosphere & World Systems (Day/Night, Ambient Lighting, Dynamic Shadows, Weather)
     this.dayNight = new DayNightSystem(this);
     this.lighting = new AmbientLightingSystem(this);
     this.shadows = new DynamicShadowSystem(this);
     this.weather = new WeatherEngine(this);
+
+    this._drawWorld(W, H);
+
     if (this._wellLightPos) this.lighting.addLight(this._wellLightPos.x, this._wellLightPos.y, 'light_glow_soft', 0.7, 0.35);
     if (this._shopLightPos) this.lighting.addLight(this._shopLightPos.x, this._shopLightPos.y, 'light_glow_lantern', 0.55, 0.4);
 
@@ -1078,6 +1078,9 @@ class FarmScene extends Phaser.Scene {
         .setOrigin(0.5, 1)
         .setScale(hd ? 1 : 1.2)
         .setDepth(fy);
+      if (this.shadows) {
+        this.shadows.createShadow(fl, Math.max(14, Math.round((fl.displayWidth || 20) * 0.7)), 6, 0);
+      }
       flowerList.push(fl);
       this.tweens.add({
         targets: fl,
@@ -1093,7 +1096,7 @@ class FarmScene extends Phaser.Scene {
     const wellX = this.farm.x - 190;
     const wellY = this.farm.y + this.farm.h + 85;
     const wellSprite = this.add.image(wellX, wellY, 'stone_well').setOrigin(0.5, 1).setScale(1.1).setDepth(wellY);
-    if (this.shadows) this.shadows.createShadow(wellSprite, 44, 14, 6);
+    if (this.shadows) this.shadows.createShadow(wellSprite, 44, 14, 1);
     // Water sparkles inside well
     for(let i=0; i<4; i++){
       const sp = this.add.circle(wellX + (Math.random()-0.5)*18, wellY - 12 + (Math.random()-0.5)*12, 1.5, 0x67E8F9, 0.9).setDepth(wellY+1);
@@ -1307,7 +1310,7 @@ class FarmScene extends Phaser.Scene {
     const sy = this.farm.y + this.farm.h / 2 + 25;
     this.shopNPC = this.add.image(sx, sy, 'shop_sign')
       .setOrigin(0.5, 1).setScale(1.3).setDepth(sy);
-    if (this.shadows) this.shadows.createShadow(this.shopNPC, 48, 15, 4);
+    if (this.shadows) this.shadows.createShadow(this.shopNPC, 48, 14, 1);
 
     this.tweens.add({ targets: this.shopNPC, y: sy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
 
@@ -1324,7 +1327,7 @@ class FarmScene extends Phaser.Scene {
     const bx = this.farm.x + this.farm.w / 2;
     const by = this.farm.y - 95;
     this.boardSprite = this.add.image(bx, by, 'notice_board').setOrigin(0.5,1).setScale(1.3).setDepth(by);
-    if (this.shadows) this.shadows.createShadow(this.boardSprite, 46, 13, 5);
+    if (this.shadows) this.shadows.createShadow(this.boardSprite, 46, 13, 1);
     this.boardHint = this.add.text(bx, by-40, '📋 Minigame\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#FF88FF', stroke:'#000', strokeThickness:3, align:'center'
@@ -1338,7 +1341,7 @@ class FarmScene extends Phaser.Scene {
     const ax = this.farm.x - 200;
     const ay = this.farm.y + 20;
     this.arcadeSprite = this.add.image(ax, ay, 'arcade_machine').setOrigin(0.5,1).setScale(1.5).setDepth(ay);
-    if (this.shadows) this.shadows.createShadow(this.arcadeSprite, 48, 14, 6);
+    if (this.shadows) this.shadows.createShadow(this.arcadeSprite, 48, 14, 1);
     this.tweens.add({ targets: this.arcadeSprite, scaleY: { from: 1.5, to: 1.54 }, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     this.arcadeHint = this.add.text(ax, ay-60, '👾 ARCADE\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
@@ -1354,7 +1357,7 @@ class FarmScene extends Phaser.Scene {
     const wy = this.farm.y - 85;
     this.wizardSprite = this.add.sprite(wx, wy, 'wizard_idle_0');
     if (this.wizardSprite.play) this.wizardSprite.play('wizard-idle').setOrigin(0.5,1).setScale(1.8).setDepth(wy);
-    if (this.shadows) this.shadows.createShadow(this.wizardSprite, 38, 12, 6);
+    if (this.shadows) this.shadows.createShadow(this.wizardSprite, 38, 12, 1);
     this.tweens.add({ targets: this.wizardSprite, y: wy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
     this.wizardHint = this.add.text(wx, wy-68, '⚡ SPELL DUEL\n[SPACE]', {
@@ -1373,7 +1376,7 @@ class FarmScene extends Phaser.Scene {
     this.catSprite = this.add.sprite(cx, cy, 'cat_idle_0');
     if (this.catSprite.play) this.catSprite.play('cat-idle')
       .setOrigin(0.5,1).setScale(0.75).setDepth(cy);
-    if (this.shadows) this.shadows.createShadow(this.catSprite, 20, 6, 2);
+    if (this.shadows) this.shadows.createShadow(this.catSprite, 20, 6, 1);
     this.tweens.add({ targets:this.catSprite, y:cy-3, duration:1200, yoyo:true, repeat:-1, ease:'Sine.InOut' });
     this.catHint = this.add.text(cx, cy-38, '🐱 야옹\n[SPACE]', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
@@ -1388,7 +1391,7 @@ class FarmScene extends Phaser.Scene {
     const px = this.farm.x + this.farm.w + 140;
     const py = this.farm.y + this.farm.h + 80;
     this.portalSprite = this.add.image(px, py, 'dungeon_portal').setOrigin(0.5,1).setScale(1.6).setDepth(py);
-    if (this.shadows) this.shadows.createShadow(this.portalSprite, 72, 20, 6);
+    if (this.shadows) this.shadows.createShadow(this.portalSprite, 72, 20, 1);
     this.tweens.add({ targets: this.portalSprite, scaleX: 1.65, scaleY: 1.55, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
     this.portalHint = this.add.text(px, py-75, '🌀 DUNGEON\n[SPACE]', {
@@ -1696,7 +1699,7 @@ class FarmScene extends Phaser.Scene {
 
     this.beehiveSprite = this.add.image(bx, by, 'beehive')
       .setOrigin(0.5, 1).setScale(1.6).setDepth(by);
-    if (this.shadows) this.shadows.createShadow(this.beehiveSprite, 38, 12, 2);
+    if (this.shadows) this.shadows.createShadow(this.beehiveSprite, 38, 12, 1);
 
     this.tweens.add({
       targets: this.beehiveSprite,
@@ -2513,7 +2516,7 @@ class FarmScene extends Phaser.Scene {
       .setDepth(pos.y + 6);
     if (hd && spr.texture) spr.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     const hdShadowW = typeof shadowW === 'function' ? shadowW(spr) : shadowW;
-    if (this.shadows) this.shadows.createShadow(spr, hd ? hdShadowW : 52, 16, 2);
+    if (this.shadows) this.shadows.createShadow(spr, hd ? hdShadowW : 52, 16, 1);
     const label = this.add.text(pos.x, pos.y + 8, (spec.nameKo || id) + '\n[SPACE]', {
       fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
       color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
@@ -2831,7 +2834,8 @@ class FarmScene extends Phaser.Scene {
     plot.sState=s;
     const t=plot.index%5;
     if (plot.cropShadow) {
-      if (plot.cropShadow.destroy) plot.cropShadow.destroy();
+      if (this.shadows && this.shadows.removeShadow) this.shadows.removeShadow(plot.cropShadow);
+      else if (plot.cropShadow.destroy) plot.cropShadow.destroy();
       plot.cropShadow = null;
     }
     if(s===''){  // empty
@@ -2841,25 +2845,25 @@ class FarmScene extends Phaser.Scene {
       plot.tile.setTexture('drt_wet').clearTint();
       if(plot.plant) plot.plant.clearTint();
       if (plot.plant && this.shadows) {
-        plot.cropShadow = this.shadows.createShadow(plot.plant, 14, 5, 12);
+        plot.cropShadow = this.shadows.createShadow(plot.plant, 16, 6, 0);
       }
     } else if(s==='2'){  // wilting - P2 review needed
       if(plot.plant) plot.plant.setTexture(cropTex(this,t,1)).setTint(0xFFCC44);
       this._addLabel(plot,'💧','#FFD700');
       if (plot.plant && this.shadows) {
-        plot.cropShadow = this.shadows.createShadow(plot.plant, 20, 7, 10);
+        plot.cropShadow = this.shadows.createShadow(plot.plant, 16, 6, 0);
       }
     } else if(s==='3'){  // sprout healthy
       if(plot.plant) plot.plant.clearTint();
       if (plot.plant && this.shadows) {
-        plot.cropShadow = this.shadows.createShadow(plot.plant, 24, 8, 8);
+        plot.cropShadow = this.shadows.createShadow(plot.plant, 20, 7, 0);
       }
     } else if(s==='4'){  // ripe - harvest!
       if(plot.plant) plot.plant.setTexture(cropTex(this,t,3)).clearTint();
       this._addGlow(plot,0xFFD700);
       this._addLabel(plot,'SPACE','#FFD700');
       if (plot.plant && this.shadows) {
-        plot.cropShadow = this.shadows.createShadow(plot.plant, 28, 9, 6);
+        plot.cropShadow = this.shadows.createShadow(plot.plant, 22, 7, 0);
       }
     }
   }

@@ -218,6 +218,14 @@ assert(src.indexOf('farmCostumeSkinId') >= 0, 'farmCostumeSkinId is the Unit 10 
 assert(src.indexOf("if (!skinUsesHd(scene, def, 'farm')) return null;") >= 0,
   'matrix chef does not overlay the HD farmer');
 
+console.log('\n--- 10. Stardew contact shadows ---');
+assert(src.indexOf('_penumbra') < 0, 'no sun-stretched penumbra layer');
+assert(src.indexOf("container._type = 'contact'") >= 0, 'shadows are a single contact blob');
+const drawAt = src.indexOf('this._drawWorld(W, H)');
+const shadowAt = src.indexOf('this.shadows = new DynamicShadowSystem(this)');
+assert(shadowAt > 0 && drawAt > 0 && shadowAt < drawAt, 'shadow system is created before _drawWorld');
+assert(src.indexOf('this.shadows.createShadow(fl,') >= 0, 'wildflowers get a contact shadow');
+
 console.log(`\n====================================================`);
 console.log(`RESULT: ${passed} passed, ${failed} failed`);
 console.log(`====================================================`);
