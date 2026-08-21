@@ -186,8 +186,11 @@ check('plant quiz hint uses vocabIconHtml',
 check('crop quiz has a success continue beat',
   html.indexOf('id="quiz-result"') >= 0
   && gameJs.indexOf('function showQuizSuccess') >= 0
-  && /delay: ph === 3 \? 4000/.test(gameJs)
+  && /delay: ph === 3 \? 0/.test(gameJs)
   && gameJs.indexOf("setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph,grade); },650)") < 0);
+check('phase 3 success waits for the player to dismiss',
+  /if \(delay === 0\)/.test(gameJs)
+  && gameJs.indexOf('delay: 0') >= 0);
 check('quiz steps mark Plant Water Harvest', html.indexOf('id="quiz-steps"') >= 0);
 check('phase 3 recall uses shape tiles, not category essays',
   gameJs.indexOf('function renderRecallScaffoldHtml') >= 0
@@ -196,6 +199,11 @@ check('phase 3 recall uses shape tiles, not category essays',
 check('recall scaffold never prints syllable characters',
   /function renderRecallScaffoldHtml[\s\S]{0,900}s\.hasBatchim/.test(gameJs)
   && !/function renderRecallScaffoldHtml[\s\S]{0,1200}s\.char/.test(gameJs));
+check('recall tiles group by vocab spacing, no open/closed caption',
+  gameJs.indexOf('function hangulSyllableGroups') >= 0
+  && gameJs.indexOf('recall-word') >= 0
+  && !/function renderRecallScaffoldHtml[\s\S]{0,800}closed/.test(gameJs)
+  && !/function renderRecallScaffoldHtml[\s\S]{0,800}recall-caption/.test(gameJs));
 check('study desk does not spawn the stool',
   !/_ensureStudyDesk\(\)\{[\s\S]{0,900}wooden_stool_hd/.test(gameJs));
 check('HUD paints catalogued farm icons', gameJs.indexOf('function hudIconHtml') >= 0 && gameJs.indexOf('function paintHudIcons') >= 0);
@@ -322,14 +330,29 @@ const overlayIds = [
   check('isUnit10World stays Unit-10-only',
     /function isUnit10World\(\)[\s\S]{0,180}worldId === '2b-unit-10'/.test(gameJs));
   check('isUnit14World is declared', gameJs.indexOf('function isUnit14World') >= 0);
-  check('kitchen/taste spawn only when unit10',
-    /if \(unit10\) \{[\s\S]{0,220}_ensureTasteStation[\s\S]{0,80}_ensureKitchen/.test(gameJs));
+  check('world packs are declared',
+    gameJs.indexOf('const WORLD_PACKS') >= 0 && gameJs.indexOf('function currentWorldPack') >= 0);
+  check('kitchen/taste belong to the Unit 10 pack only',
+    /'2b-unit-10': \{ extras: \[\], stations: \['desk', 'kitchen', 'taste'\] \}/.test(gameJs)
+    && /'2b-unit-14': \{ extras: \[\], stations: \['desk'\] \}/.test(gameJs));
+  check('farm applies world packs instead of hiding sprites',
+    gameJs.indexOf('applyWorld') >= 0
+    && gameJs.indexOf('_teardownExtra') >= 0
+    && !/syncUnit10World\(\)\{[\s\S]{0,400}_setMinigameSpritesVisible/.test(gameJs));
   check('study desk spawns on Unit 10 and Unit 14',
     gameJs.indexOf('_hasStudyDesk') >= 0 && gameJs.indexOf('_ensureStudyDesk') >= 0);
-  const interact = gameJs.match(/_interact\(\)\{[\s\S]{0,1200}openTasteGame/);
-  check('taste interact remains Unit-10-gated', !!(interact && interact[0].indexOf('_isUnit10()') >= 0));
+  const taste = gameJs.match(/case 'taste':[\s\S]{0,280}openTasteGame/);
+  check('taste interact remains Unit-10-gated', !!(taste && taste[0].indexOf('_isUnit10()') >= 0));
   check('desk interact uses _hasStudyDesk',
     /_hasStudyDesk\(\)[\s\S]{0,280}openDeskQuiz/.test(gameJs));
+  check('farm mouse pointer plan is shipped',
+    gameJs.indexOf('function pointerWorldPlan') >= 0
+    && gameJs.indexOf('_onWorldPointerDown') >= 0
+    && gameJs.indexOf('pointerWorldPlan(this.player') >= 0
+    && gameJs.indexOf('function nearestInRange') >= 0);
+  const farmJs = read(path.join('js', 'scenes', 'farm.js'));
+  check('farm world prompts are Click not SPACE',
+    farmJs.indexOf('[SPACE]') < 0 && farmJs.indexOf('WORLD_CLICK_HINT') >= 0);
   check('cooking recipes still Unit-10-gated',
     /isUnit10World\(\)[\s\S]{0,80}UNIT10_COOKING_RECIPES/.test(gameJs));
 }());

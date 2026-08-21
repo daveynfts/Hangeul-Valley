@@ -90,16 +90,9 @@ class FarmScene extends Phaser.Scene {
     ensureActiveSkinLoaded(this, () => {
       if (this.player && this.player.active) applySkinToSprite(this, this.player, FARM_SKIN_APPLY);
     });
-    this._createShopNPC(W, H);
-    this._createBoardNPC(W, H);
-    this._createArcadeNPC(W, H);
-    this._createWizardNPC(W, H);
-    this._createCatNPC(W, H);
     this._createAppleTree(W, H);
-    this._createBeehiveNPC(W, H);
-    this._createPortalNPC(W, H);
-    this._createFishingSpot(W, H);
-    this.syncUnit10World();
+    this._worldPackId = null;
+    this.applyWorld();
 
     this.keys = {
       W:this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W),
@@ -113,6 +106,8 @@ class FarmScene extends Phaser.Scene {
     };
     this.spaceKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     this.walkFrame = 0; this.walkTimer = 0;
+    this._hoverTarget = null;
+    this.input.on('pointerdown', (p) => this._onWorldPointerDown(p));
 
     buildLevelSelectScreen(); playerLocked = true;
     updateGoldHUD();
@@ -1344,6 +1339,7 @@ class FarmScene extends Phaser.Scene {
 
   // ── SHOP NPC ───────────────────────────────────────────────────────────────
   _createShopNPC(W, H){
+    if (this.shopNPC) return;
     const sx = this.farm.x + this.farm.w + 175;
     const sy = this.farm.y + this.farm.h / 2 + 25;
     this.shopNPC = this.add.image(sx, sy, 'shop_sign')
@@ -1352,7 +1348,7 @@ class FarmScene extends Phaser.Scene {
 
     this.tweens.add({ targets: this.shopNPC, y: sy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
 
-    this.shopHint = this.add.text(sx, sy + 10, '🏪 SHOP\n[SPACE]', {
+    this.shopHint = this.add.text(sx, sy + 10, '🏪 SHOP\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'14px',
       color:'#FFD700', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5, 0).setDepth(sy+1).setAlpha(0);
@@ -1362,11 +1358,12 @@ class FarmScene extends Phaser.Scene {
 
   // ── NOTICE BOARD ───────────────────────────────────────────────────────────
   _createBoardNPC(W, H){
+    if (this.boardSprite) return;
     const bx = this.farm.x + this.farm.w / 2;
     const by = this.farm.y - 95;
     this.boardSprite = this.add.image(bx, by, 'notice_board').setOrigin(0.5,1).setScale(1.3).setDepth(by);
     if (this.shadows) this.shadows.createShadow(this.boardSprite, 46, 13, 1);
-    this.boardHint = this.add.text(bx, by-40, '📋 Minigame\n[SPACE]', {
+    this.boardHint = this.add.text(bx, by-40, '📋 Minigame\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#FF88FF', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(by+1).setAlpha(0);
@@ -1376,12 +1373,13 @@ class FarmScene extends Phaser.Scene {
 
   // ── ARCADE MACHINE ─────────────────────────────────────────────────────────
   _createArcadeNPC(W, H){
+    if (this.arcadeSprite) return;
     const ax = this.farm.x - 200;
     const ay = this.farm.y + 20;
     this.arcadeSprite = this.add.image(ax, ay, 'arcade_machine').setOrigin(0.5,1).setScale(1.5).setDepth(ay);
     if (this.shadows) this.shadows.createShadow(this.arcadeSprite, 48, 14, 1);
     this.tweens.add({ targets: this.arcadeSprite, scaleY: { from: 1.5, to: 1.54 }, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-    this.arcadeHint = this.add.text(ax, ay-60, '👾 ARCADE\n[SPACE]', {
+    this.arcadeHint = this.add.text(ax, ay-60, '👾 ARCADE\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#00FFFF', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(ay+1).setAlpha(0);
@@ -1391,6 +1389,7 @@ class FarmScene extends Phaser.Scene {
 
   // ── WIZARD NPC ─────────────────────────────────────────────────────────────
   _createWizardNPC(W, H){
+    if (this.wizardSprite) return;
     const wx = this.farm.x + this.farm.w + 160;
     const wy = this.farm.y - 85;
     this.wizardSprite = this.add.sprite(wx, wy, 'wizard_idle_0');
@@ -1398,7 +1397,7 @@ class FarmScene extends Phaser.Scene {
     if (this.shadows) this.shadows.createShadow(this.wizardSprite, 38, 12, 1);
     this.tweens.add({ targets: this.wizardSprite, y: wy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
-    this.wizardHint = this.add.text(wx, wy-68, '⚡ SPELL DUEL\n[SPACE]', {
+    this.wizardHint = this.add.text(wx, wy-68, '⚡ SPELL DUEL\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#A855F7', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(wy+1).setAlpha(0);
@@ -1409,6 +1408,7 @@ class FarmScene extends Phaser.Scene {
 
   // ── CAT NPC ────────────────────────────────────────────────────────────────
   _createCatNPC(W, H){
+    if (this.catSprite) return;
     const cx = this.farm.x - 120;
     const cy = this.farm.y + this.farm.h + 75;
     this.catSprite = this.add.sprite(cx, cy, 'cat_idle_0');
@@ -1416,7 +1416,7 @@ class FarmScene extends Phaser.Scene {
       .setOrigin(0.5,1).setScale(0.75).setDepth(cy);
     if (this.shadows) this.shadows.createShadow(this.catSprite, 20, 6, 1);
     this.tweens.add({ targets:this.catSprite, y:cy-3, duration:1200, yoyo:true, repeat:-1, ease:'Sine.InOut' });
-    this.catHint = this.add.text(cx, cy-38, '🐱 야옹\n[SPACE]', {
+    this.catHint = this.add.text(cx, cy-38, '🐱 야옹\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#FFCC44', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(cy+1).setAlpha(0);
@@ -1426,13 +1426,14 @@ class FarmScene extends Phaser.Scene {
 
   // ── DUNGEON PORTAL NPC ─────────────────────────────────────────────────────
   _createPortalNPC(W, H){
+    if (this.portalSprite) return;
     const px = this.farm.x + this.farm.w + 140;
     const py = this.farm.y + this.farm.h + 80;
     this.portalSprite = this.add.image(px, py, 'dungeon_portal').setOrigin(0.5,1).setScale(1.6).setDepth(py);
     if (this.shadows) this.shadows.createShadow(this.portalSprite, 72, 20, 1);
     this.tweens.add({ targets: this.portalSprite, scaleX: 1.65, scaleY: 1.55, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
-    this.portalHint = this.add.text(px, py-75, '🌀 DUNGEON\n[SPACE]', {
+    this.portalHint = this.add.text(px, py-75, '🌀 DUNGEON\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#EC4899', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(py+1).setAlpha(0);
@@ -1443,9 +1444,12 @@ class FarmScene extends Phaser.Scene {
 
   // ── FISHING SPOT NPC / DOCK ────────────────────────────────────────────────
   _createFishingSpot(W, H){
+    if (this.fishX != null) return;
     const fx = this.farm.x - 190;
     const fy = this.farm.y + this.farm.h / 2 + 20;
     this.dockSprite = null; // No boat — pure pond
+    const layerStart = this.children.list.length;
+    this._fishingTimers = [];
 
     // ── Large stones (outer ring) ─────────────────────────────────────────
     const stoneColors = [0x7D7571, 0x6B6360, 0x8A8480, 0x5C5652];
@@ -1504,7 +1508,7 @@ class FarmScene extends Phaser.Scene {
       this.pondWater = this.add.tileSprite(fx, fy + 20, 260, 86, 'tile_ocean_deep_0')
         .setDepth(fy - 4).setMask(pondMask);
       this.pondWaterFrame = 0;
-      this.time.addEvent({
+      this._fishingTimers.push(this.time.addEvent({
         delay: 280,
         loop: true,
         callback: () => {
@@ -1513,7 +1517,7 @@ class FarmScene extends Phaser.Scene {
           const key = `tile_ocean_deep_${this.pondWaterFrame}`;
           if (this.textures.exists(key)) this.pondWater.setTexture(key);
         }
-      });
+      }));
     } else {
       const pond = this.add.ellipse(fx, fy + 20, 250, 76, 0x0E7490, 0.9).setDepth(fy - 4);
       this.tweens.add({ targets: pond, scaleX: 1.03, scaleY: 0.97, duration: 2200, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
@@ -1563,21 +1567,24 @@ class FarmScene extends Phaser.Scene {
     }
 
     // ── Hint & Label ──────────────────────────────────────────────────────
-    this.fishHint = this.add.text(fx, fy - 40, '🎣 FISHING POND\n[SPACE]', {
+    this.fishHint = this.add.text(fx, fy - 40, '🎣 FISHING POND\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#38BDF8', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
     this.tweens.add({ targets: this.fishHint, y: this.fishHint.y - 3, duration: 700, yoyo: true, repeat: -1 });
 
     this.fishX = fx; this.fishY = fy;
+    this._pondVisible = true;
+    this._worldLayers = this._worldLayers || {};
+    this._worldLayers.fishing = this.children.list.slice(layerStart);
 
     // Ambient Fish Jumping Effect
-    this.time.addEvent({ delay: 4000, loop: true, callback: () => this._triggerFishJump(fx, fy) });
+    this._fishingTimers.push(this.time.addEvent({ delay: 4000, loop: true, callback: () => this._triggerFishJump(fx, fy) }));
   }
 
   _triggerFishJump(fx, fy) {
     if (!this.sys || !this.sys.isActive()) return;
-    if (this._pondVisible === false) return;
+    if (this.fishX == null) return;
     const isLeft = Math.random() < 0.5;
     const jumpDist = Phaser.Math.Between(40, 70) * (isLeft ? -1 : 1);
     const startX = fx + Phaser.Math.Between(-40, 40);
@@ -1686,6 +1693,7 @@ class FarmScene extends Phaser.Scene {
 
   // ── APPLE TREE ─────────────────────────────────────────────────────────────
   _createAppleTree(W, H){
+    if (this.appleTreeSprite) return;
     const ax = this.farm.x - 130;
     const ay = this.farm.y - 85;
     const hd = this.textures.exists('apple_tree_hd');
@@ -1707,7 +1715,7 @@ class FarmScene extends Phaser.Scene {
       duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.InOut'
     });
     const labelY = ay - (hd ? 188 : 260);
-    this.appleTreeLabel = this.add.text(ax, labelY, '🍎 HARVEST!\n[SPACE]', {
+    this.appleTreeLabel = this.add.text(ax, labelY, '🍎 HARVEST!\n' + WORLD_CLICK_HINT, {
       fontFamily: '"Press Start 2P",monospace', fontSize: '14px',
       color: '#FFFFFF', stroke: '#000', strokeThickness: 4, align: 'center'
     }).setOrigin(0.5, 1).setDepth(ay + 100).setAlpha(0);
@@ -1730,6 +1738,7 @@ class FarmScene extends Phaser.Scene {
 
   // ── BEEHIVE NPC ────────────────────────────────────────────────────────────
   _createBeehiveNPC(W, H){
+    if (this.beehiveSprite) return;
     const bx = this.farm.x - 65;
     const by = this.farm.y - 70;
     this.beehiveX = bx;
@@ -1764,7 +1773,7 @@ class FarmScene extends Phaser.Scene {
       });
     }
 
-    this.beehiveHint = this.add.text(bx, by - 56, '🐝 Beehive\n[SPACE]', {
+    this.beehiveHint = this.add.text(bx, by - 56, '🐝 Beehive\n' + WORLD_CLICK_HINT, {
       fontFamily: '"Press Start 2P",monospace',
       fontSize: '12px',
       color: '#FFFFFF',
@@ -2283,59 +2292,56 @@ class FarmScene extends Phaser.Scene {
       }
     }
 
-    // Show shop hint label when nearby
-    if(this.shopNPC && this.shopHint){
-      const nearShop = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY) < 90;
-      this.shopHint.setAlpha(nearShop ? 1 : 0);
+    const pointerBusy = typeof worldPointerBlocked === 'function'
+      ? worldPointerBlocked({
+          playerLocked, isPerformingAction: this.isPerformingAction,
+          quizOpen, shopOpen, memoryOpen, trophyOpen, duelOpen, catDialogOpen
+        })
+      : (playerLocked || this.isPerformingAction || quizOpen || shopOpen);
+    if(!pointerBusy) this._syncPointerHover();
+    else {
+      this._hoverTarget = null;
+      if(this._tHL){ this._tHL.clear(); if(this._tLbl) this._tLbl.setAlpha(0); }
     }
-    // Show cat hint label when nearby & update Cat NPC state machine
+
+    const hover = this._hoverTarget;
+    const showHint = (id, x, y, r) =>
+      (typeof pointerOrNear === 'function') ? pointerOrNear(this.player, hover, id, x, y, r) : false;
+    // Hint labels: nearby OR hovered so mouse users see the prompt from afar.
+    if(this.shopNPC && this.shopHint){
+      this.shopHint.setAlpha(showHint('shop', this.shopX, this.shopY, 90) ? 1 : 0);
+    }
     if(this.catHint){
-      const nearCat = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY) < 65;
-      this.catHint.setAlpha(nearCat ? 1 : 0);
+      this.catHint.setAlpha(showHint('cat', this.catX, this.catY, 65) ? 1 : 0);
     }
     this._updateCatNPC(dt);
 
-    // Show board hint label when nearby
     if(this.boardHint){
-      const nearBoard = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY) < 80;
-      this.boardHint.setAlpha(nearBoard ? 1 : 0);
+      this.boardHint.setAlpha(showHint('board', this.boardX, this.boardY, 80) ? 1 : 0);
     }
-    // Show arcade hint label when nearby
     if(this.arcadeHint){
-      const nearArcade = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY) < 80;
-      this.arcadeHint.setAlpha(nearArcade ? 1 : 0);
+      this.arcadeHint.setAlpha(showHint('arcade', this.arcadeX, this.arcadeY, 80) ? 1 : 0);
     }
-    // Show wizard hint label when nearby
     if(this.wizardHint){
-      const nearWizard = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY) < 85;
-      this.wizardHint.setAlpha(nearWizard ? 1 : 0);
+      this.wizardHint.setAlpha(showHint('wizard', this.wizardX, this.wizardY, 85) ? 1 : 0);
     }
-    // Show dungeon portal hint label when nearby
     if(this.portalHint){
-      const nearPortal = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY) < 90;
-      this.portalHint.setAlpha(nearPortal ? 1 : 0);
+      this.portalHint.setAlpha(showHint('portal', this.portalX, this.portalY, 90) ? 1 : 0);
     }
-    // Show fishing hint label when nearby
     if(this.fishHint){
-      const nearFish = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY) < 85;
-      this.fishHint.setAlpha(nearFish ? 1 : 0);
+      this.fishHint.setAlpha(showHint('fish', this.fishX, this.fishY, 85) ? 1 : 0);
     }
-    // Show beehive hint label when nearby & update beehive bees
     if(this.beehiveHint){
-      const nearBeehive = Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY) < 85;
-      this.beehiveHint.setAlpha(nearBeehive ? 1 : 0);
+      this.beehiveHint.setAlpha(showHint('beehive', this.beehiveX, this.beehiveY, 85) ? 1 : 0);
     }
     if (this.studyDesk && this.studyDesk.label) {
-      const near = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.studyDesk.x, this.studyDesk.y) < (this.studyDesk.interact || 80);
-      this.studyDesk.label.setAlpha(near ? 1 : 0);
+      this.studyDesk.label.setAlpha(showHint('desk', this.studyDesk.x, this.studyDesk.y, this.studyDesk.interact || 80) ? 1 : 0);
     }
     if (this.kitchenStation && this.kitchenStation.label) {
-      const near = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.kitchenStation.x, this.kitchenStation.y) < (this.kitchenStation.interact || 82);
-      this.kitchenStation.label.setAlpha(near ? 1 : 0);
+      this.kitchenStation.label.setAlpha(showHint('kitchen', this.kitchenStation.x, this.kitchenStation.y, this.kitchenStation.interact || 82) ? 1 : 0);
     }
     if (this.tasteStation && this.tasteStation.label) {
-      const near = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 80);
-      this.tasteStation.label.setAlpha(near ? 1 : 0);
+      this.tasteStation.label.setAlpha(showHint('taste', this.tasteStation.x, this.tasteStation.y, this.tasteStation.interact || 80) ? 1 : 0);
     }
     if (this.beehiveSprite) this.beehiveSprite.setDepth(this.beehiveY || this.beehiveSprite.y);
     if (this.beehiveBees && this.beehiveBees.length) {
@@ -2346,22 +2352,182 @@ class FarmScene extends Phaser.Scene {
       });
     }
 
-    if(Phaser.Input.Keyboard.JustDown(this.spaceKey)&&!playerLocked&&!this.isPerformingAction&&!quizOpen&&!shopOpen&&!memoryOpen&&!trophyOpen&&!duelOpen) this._interact();
+    if(!pointerBusy && this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey)) this._interact();
     // SRS timer: check every 8s if any plant needs state advance
     this._timerAcc=(this._timerAcc||0)+(dt||16);
     if(this._timerAcc>8000){this._timerAcc=0;this._checkSRS();}
     // Apple tree timer: update every second
     this._appleAcc=(this._appleAcc||0)+(dt||16);
     if(this._appleAcc>1000){this._appleAcc=0;this._tickAppleTree();}
-    // SPACE target indicator (shows which object will be targeted)
-    if(!playerLocked&&!this.isPerformingAction&&!quizOpen&&!shopOpen&&!catDialogOpen) this._updateTargetHighlight();
-    else if(this._tHL){ this._tHL.clear(); if(this._tLbl) this._tLbl.setAlpha(0); }
   }
 
 
-  // ── SPACE TARGET HIGHLIGHT ─────────────────────────────────────────────────
-  _updateTargetHighlight(){
-    // Lazy-create graphics + label once
+
+  // ── POINTER: catalog, click-to-walk, click-to-interact ────────────────────
+  _pointerFlags(){
+    return {
+      playerLocked, isPerformingAction: this.isPerformingAction,
+      quizOpen, shopOpen, memoryOpen, trophyOpen, duelOpen, catDialogOpen
+    };
+  }
+
+  _onWorldPointerDown(pointer){
+    if (typeof worldPointerBlocked === 'function' && worldPointerBlocked(this._pointerFlags())) return;
+    if (!this.player || !pointer) return;
+    if (pointer.button != null && pointer.button !== 0) return;
+    if (typeof touchAxis !== 'undefined' && Math.hypot(touchAxis.x, touchAxis.y) > 0.18) return;
+    const plan = pointerWorldPlan(this.player, this._worldTargets(), pointer.worldX, pointer.worldY);
+    this._applyPointerPlan(plan);
+  }
+
+  _applyPointerPlan(plan){
+    if (!plan || plan.type === 'none') return;
+    if (plan.type === 'interact') {
+      this._runTarget(plan.target);
+      return;
+    }
+    if (plan.type === 'too-far') {
+      const now = Date.now();
+      if (!this._tooFarAt || now - this._tooFarAt > 1400) {
+        this._tooFarAt = now;
+        if (typeof showToast === 'function') showToast('Walk closer');
+      }
+    }
+  }
+
+  _syncPointerHover(){
+    const ptr = this.input && this.input.activePointer;
+    const targets = this._worldTargets();
+    if (ptr && typeof pickInteractableAt === 'function') {
+      this._hoverTarget = pickInteractableAt(targets, ptr.worldX, ptr.worldY);
+    } else {
+      this._hoverTarget = null;
+    }
+    if (this.input && this.input.setDefaultCursor) {
+      this.input.setDefaultCursor(this._hoverTarget ? 'pointer' : 'default');
+    }
+    this._updateTargetHighlight(this._hoverTarget);
+  }
+
+  _worldTargets(){
+    const list = [];
+    const pack = (typeof currentWorldPack === 'function') ? currentWorldPack() : null;
+    const extrasOn = !!(pack && pack.extras && pack.extras.length);
+    const plotHit = PLOT_SIZE / 2 + 10;
+    const plotUse = PLOT_SIZE + 24;
+    const plots = this.plots || [];
+    const labelOf = (typeof clickActionLabel === 'function') ? clickActionLabel : (v) => 'Click ' + v;
+    const mk = (o) => { list.push(o); };
+
+    if (this.kitchenStation) {
+      mk({
+        id: 'kitchen', kind: 'kitchen',
+        x: this.kitchenStation.x, y: this.kitchenStation.y,
+        hitR: this.kitchenStation.interact || 82,
+        useR: this.kitchenStation.interact || 82,
+        label: labelOf('요리 주방'), color: 0xF97316, hw: 64, hh: 72,
+        hy: this.kitchenStation.y - 22
+      });
+    }
+    if (this.studyDesk) {
+      mk({
+        id: 'desk', kind: 'desk',
+        x: this.studyDesk.x, y: this.studyDesk.y,
+        hitR: this.studyDesk.interact || 80,
+        useR: this.studyDesk.interact || 80,
+        label: labelOf('학습 책상'), color: 0x60A5FA, hw: 70, hh: 70,
+        hy: this.studyDesk.y - 20
+      });
+    }
+    if (this.tasteStation) {
+      mk({
+        id: 'taste', kind: 'taste',
+        x: this.tasteStation.x, y: this.tasteStation.y,
+        hitR: this.tasteStation.interact || 80,
+        useR: this.tasteStation.interact || 80,
+        label: labelOf('한 입'), color: 0xF59E0B, hw: 70, hh: 72,
+        hy: this.tasteStation.y - 18
+      });
+    }
+    if (this.appleRipe && this.appleX) {
+      mk({
+        id: 'apple', kind: 'apple',
+        x: this.appleX, y: this.appleY - 30,
+        hitR: 70, useR: 95,
+        label: labelOf('Harvest 🍎 Bonus!'), color: 0xFF3333, hw: 60, hh: 70,
+        hy: this.appleY - 50
+      });
+    }
+    plots.forEach((p) => {
+      if (p.sState === '4') mk({
+        id: 'plot:' + p.index, kind: 'plot-ripe', plot: p,
+        x: p.x, y: p.y, hitR: plotHit, useR: plotUse,
+        label: labelOf('Harvest +Gold'), color: 0xFFD700, hw: PLOT_SIZE, hh: PLOT_SIZE, hy: p.y
+      });
+    });
+    plots.forEach((p) => {
+      if (p.sState === '2') mk({
+        id: 'plot:' + p.index, kind: 'plot-water', plot: p,
+        x: p.x, y: p.y, hitR: plotHit, useR: plotUse,
+        label: labelOf('Water'), color: 0x55CCFF, hw: PLOT_SIZE, hh: PLOT_SIZE, hy: p.y
+      });
+    });
+    if (extrasOn) {
+      if (this.catSprite && this.catSprite.visible && this.catX) mk({
+        id: 'cat', kind: 'cat', x: this.catX, y: this.catY, hitR: 48, useR: 65,
+        label: labelOf('Talk to Ginger Cat'), color: 0xFF88CC, hw: 44, hh: 44, hy: this.catY - 20
+      });
+      if (this.wizardSprite && this.wizardSprite.visible && this.wizardX) mk({
+        id: 'wizard', kind: 'wizard', x: this.wizardX, y: this.wizardY, hitR: 56, useR: 85,
+        label: labelOf('Spell Duel'), color: 0xA855F7, hw: 44, hh: 50, hy: this.wizardY - 25
+      });
+      if (this.portalSprite && this.portalSprite.visible && this.portalX) mk({
+        id: 'portal', kind: 'portal', x: this.portalX, y: this.portalY, hitR: 56, useR: 90,
+        label: labelOf('Enter Dungeon'), color: 0xEC4899, hw: 50, hh: 60, hy: this.portalY - 30
+      });
+      if (this.dockSprite && this.dockSprite.visible && this.fishX) mk({
+        id: 'fish', kind: 'fish', x: this.fishX, y: this.fishY, hitR: 56, useR: 85,
+        label: labelOf('Start Fishing'), color: 0x38BDF8, hw: 50, hh: 50, hy: this.fishY - 25
+      });
+      if (this.beehiveSprite && this.beehiveSprite.visible && this.beehiveX) mk({
+        id: 'beehive', kind: 'beehive', x: this.beehiveX, y: this.beehiveY, hitR: 52, useR: 85,
+        label: labelOf('Beehive Minigame'), color: 0xFACC15, hw: 44, hh: 50, hy: this.beehiveY - 25
+      });
+      if (this.arcadeSprite && this.arcadeSprite.visible && this.arcadeX) mk({
+        id: 'arcade', kind: 'arcade', x: this.arcadeX, y: this.arcadeY, hitR: 52, useR: 80,
+        label: labelOf('Play Retro Shooter'), color: 0x00FFFF, hw: 44, hh: 50, hy: this.arcadeY - 30
+      });
+      if (this.boardSprite && this.boardSprite.visible && this.boardX) mk({
+        id: 'board', kind: 'board', x: this.boardX, y: this.boardY, hitR: 48, useR: 80,
+        label: labelOf('Play Memory Match'), color: 0xFF88FF, hw: 44, hh: 44, hy: this.boardY - 20
+      });
+      if (this.shopNPC && this.shopNPC.visible && this.shopX) mk({
+        id: 'shop', kind: 'shop', x: this.shopX, y: this.shopY, hitR: 56, useR: 90,
+        label: labelOf('Open Shop'), color: 0xFFAA44, hw: 50, hh: 60, hy: this.shopY - 20
+      });
+    }
+    plots.forEach((p) => {
+      if (p.sState === '' && p.active) mk({
+        id: 'plot:' + p.index, kind: 'plot-empty', plot: p,
+        x: p.x, y: p.y, hitR: plotHit, useR: plotUse,
+        label: labelOf('Plant new'), color: 0x44FF88, hw: PLOT_SIZE, hh: PLOT_SIZE, hy: p.y
+      });
+    });
+    plots.forEach((p) => {
+      if (!p.active) {
+        const cost = PLOT_UNLOCK_COSTS[p.index - 9] || 1000;
+        mk({
+          id: 'plot:' + p.index, kind: 'plot-locked', plot: p,
+          x: p.x, y: p.y, hitR: plotHit, useR: plotUse,
+          label: labelOf('Unlock Plot #' + (p.index + 1) + ' (' + cost + ' Gold) 🔒'),
+          color: 0xFFD700, hw: PLOT_SIZE, hh: PLOT_SIZE, hy: p.y
+        });
+      }
+    });
+    return list;
+  }
+
+  _updateTargetHighlight(target){
     if(!this._tHL){
       this._tHL  = this.add.graphics().setDepth(9997);
       this._tLbl = this.add.text(0,0,'',{
@@ -2370,86 +2536,29 @@ class FarmScene extends Phaser.Scene {
         backgroundColor:'rgba(0,0,0,0.55)', padding:{x:6,y:3}
       }).setOrigin(0.5,1).setDepth(9998);
     }
-    const near=p=>Phaser.Math.Distance.Between(this.player.x,this.player.y,p.x,p.y)<PLOT_SIZE+26;
     const pulse=0.6+0.4*Math.sin(Date.now()/220);
     this._tHL.clear();
-    let hx=null,hy=null,lbl='',col=0xFFD700,hw=PLOT_SIZE,hh=PLOT_SIZE;
-    if (this._isUnit10() && this.kitchenStation &&
-        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.kitchenStation.x, this.kitchenStation.y) < (this.kitchenStation.interact || 82)) {
-      hx = this.kitchenStation.x; hy = this.kitchenStation.y - 22; lbl = '[SPACE] 요리 주방'; col = 0xF97316; hw = 64; hh = 72;
+    if(!target){
+      if (this._tLbl) this._tLbl.setAlpha(0);
+      return;
     }
-    if (hx === null && this._hasStudyDesk() && this.studyDesk &&
-        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.studyDesk.x, this.studyDesk.y) < (this.studyDesk.interact || 80)) {
-      hx = this.studyDesk.x; hy = this.studyDesk.y - 20; lbl = '[SPACE] 학습 책상'; col = 0x60A5FA; hw = 70; hh = 70;
-    }
-    if (hx === null && this._isUnit10() && this.tasteStation &&
-        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 80)) {
-      hx = this.tasteStation.x; hy = this.tasteStation.y - 18; lbl = '[SPACE] 한 입'; col = 0xF59E0B; hw = 70; hh = 72;
-    }
-    if (hx === null) {
-    // Priority mirrors _interact(): apple > ripe > wilt > cat > shop > empty
-    if(this.appleRipe&&this.appleX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<95){
-      hx=this.appleX;hy=this.appleY-50;lbl='[SPACE] Harvest 🍎 Bonus!';col=0xFF3333;hw=60;hh=70;
-    }
-    if(hx===null) for(const p of this.plots){
-      if(p.sState==='4'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Harvest +Gold';col=0xFFD700;break;}
-    }
-    if(hx===null) for(const p of this.plots){
-      if(p.sState==='2'&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Water';col=0x55CCFF;break;}
-    }
-    if(hx===null&&this.catSprite&&this.catSprite.visible&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
-      hx=this.catX;hy=this.catY-20;lbl='[SPACE] Talk to Ginger Cat';col=0xFF88CC;hw=44;hh=44;
-    }
-    if(hx===null&&this.wizardSprite&&this.wizardSprite.visible&&this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
-      hx=this.wizardX;hy=this.wizardY-25;lbl='[SPACE] Spell Duel';col=0xA855F7;hw=44;hh=50;
-    }
-    if(hx===null&&this.portalSprite&&this.portalSprite.visible&&this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<90){
-      hx=this.portalX;hy=this.portalY-30;lbl='[SPACE] Enter Dungeon';col=0xEC4899;hw=50;hh=60;
-    }
-    if(hx===null&&this.dockSprite&&this.dockSprite.visible&&this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
-      hx=this.fishX;hy=this.fishY-25;lbl='[SPACE] Start Fishing';col=0x38BDF8;hw=50;hh=50;
-    }
-    if(hx===null&&this.beehiveSprite&&this.beehiveSprite.visible&&this.beehiveX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY)<85){
-      hx=this.beehiveX;hy=this.beehiveY-25;lbl='[SPACE] Beehive Minigame';col=0xFACC15;hw=44;hh=50;
-    }
-    if(hx===null&&this.arcadeSprite&&this.arcadeSprite.visible&&this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
-      hx=this.arcadeX;hy=this.arcadeY-30;lbl='[SPACE] Play Retro Shooter';col=0x00FFFF;hw=44;hh=50;
-    }
-    if(hx===null&&this.boardSprite&&this.boardSprite.visible&&this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<80){
-      hx=this.boardX;hy=this.boardY-20;lbl='[SPACE] Play Memory Match';col=0xFF88FF;hw=44;hh=44;
-    }
-    if(hx===null&&this.shopNPC&&this.shopNPC.visible&&this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<90){
-      hx=this.shopX;hy=this.shopY-20;lbl='[SPACE] Open Shop';col=0xFFAA44;hw=50;hh=60;
-    }
-    if(hx===null) for(const p of this.plots){
-      if(p.sState===''&&p.active&&near(p)){hx=p.x;hy=p.y;lbl='[SPACE] Plant new';col=0x44FF88;break;}
-    }
-    if(hx===null) for(const p of this.plots){
-      if(!p.active&&near(p)){
-        const cost = PLOT_UNLOCK_COSTS[p.index - 9] || 1000;
-        hx=p.x; hy=p.y;
-        lbl=`[SPACE] Unlock Plot #${p.index + 1} (${cost} Gold) 🔒`;
-        col=0xFFD700;
-        break;
-      }
-    }
-    } // end non-Unit-10 highlight
-
-    if(hx!==null){
-      // Subtle Corner brackets
-      const ca=12; const pad=8;
-      this._tHL.fillStyle(col, 0.8 + pulse*0.2);
-      [[hx-hw/2-pad,hy-hh/2-pad], [hx+hw/2+pad,hy-hh/2-pad], [hx-hw/2-pad,hy+hh/2+pad], [hx+hw/2+pad,hy+hh/2+pad]].forEach(([cx,cy], i)=>{
-        if(i===0) { this._tHL.fillRect(cx,cy-1,ca,3); this._tHL.fillRect(cx-1,cy,3,ca); } // Top-left
-        if(i===1) { this._tHL.fillRect(cx-ca,cy-1,ca,3); this._tHL.fillRect(cx-1,cy,3,ca); } // Top-right
-        if(i===2) { this._tHL.fillRect(cx,cy-1,ca,3); this._tHL.fillRect(cx-1,cy-ca,3,ca); } // Bottom-left
-        if(i===3) { this._tHL.fillRect(cx-ca,cy-1,ca,3); this._tHL.fillRect(cx-1,cy-ca,3,ca); } // Bottom-right
-      });
-      // Action label above object
-      this._tLbl.setPosition(hx, hy-hh/2-14).setText(lbl).setAlpha(0.9+pulse*0.1);
-    } else {
-      this._tLbl.setAlpha(0);
-    }
+    const hx = target.x;
+    const hy = target.hy != null ? target.hy : target.y;
+    const hw = target.hw != null ? target.hw : PLOT_SIZE;
+    const hh = target.hh != null ? target.hh : PLOT_SIZE;
+    const col = target.color != null ? target.color : 0xFFD700;
+    const ca=12; const pad=8;
+    this._tHL.fillStyle(col, 0.8 + pulse*0.2);
+    [[hx-hw/2-pad,hy-hh/2-pad], [hx+hw/2+pad,hy-hh/2-pad], [hx-hw/2-pad,hy+hh/2+pad], [hx+hw/2+pad,hy+hh/2+pad]].forEach(([cx,cy], i)=>{
+      if(i===0) { this._tHL.fillRect(cx,cy-1,ca,3); this._tHL.fillRect(cx-1,cy,3,ca); }
+      if(i===1) { this._tHL.fillRect(cx-ca,cy-1,ca,3); this._tHL.fillRect(cx-1,cy,3,ca); }
+      if(i===2) { this._tHL.fillRect(cx,cy-1,ca,3); this._tHL.fillRect(cx-1,cy-ca,3,ca); }
+      if(i===3) { this._tHL.fillRect(cx-ca,cy-1,ca,3); this._tHL.fillRect(cx-1,cy-ca,3,ca); }
+    });
+    const lbl = (typeof pointerHoverLabel === 'function')
+      ? pointerHoverLabel(this.player, target)
+      : (target.label || WORLD_CLICK_HINT);
+    this._tLbl.setPosition(hx, hy-hh/2-14).setText(lbl).setAlpha(0.9+pulse*0.1);
   }
 
   _checkSRS(){
@@ -2473,7 +2582,9 @@ class FarmScene extends Phaser.Scene {
     return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-14';
   }
   _hasStudyDesk(){
-    return this._isUnit10() || this._isUnit14();
+    return typeof worldPackHas === 'function'
+      ? worldPackHas(null, 'station', 'desk')
+      : (this._isUnit10() || this._isUnit14());
   }
   _isTextbookFarm(){
     if (typeof isTextbookFarmWorld === 'function') return isTextbookFarmWorld();
@@ -2485,78 +2596,107 @@ class FarmScene extends Phaser.Scene {
     return fallback;
   }
 
-  // ── Textbook farm: Unit 10/14 hide Valley minigames. Kitchen/taste stay Unit 10; desk is 10+14. ──
-  syncUnit10World(){
-    const farmOnly = this._isTextbookFarm();
-    const unit10 = this._isUnit10();
-    this._setMinigameSpritesVisible(!farmOnly);
-    this._setPlotsVisible(true);
-    this._setPondVisible(!farmOnly);
-    if (this.portalSprite && this.portalSprite.setVisible) this.portalSprite.setVisible(!farmOnly);
-    if (this.portalHint && this.portalHint.setVisible) this.portalHint.setVisible(!farmOnly);
+  // ── World packs: spawn/teardown extras+stations. Do not hide leftover sprites. ──
+  syncUnit10World(){ this.applyWorld(); }
+
+  applyWorld(){
+    const pack = (typeof currentWorldPack === 'function') ? currentWorldPack() : { id: 'valley', extras: VALLEY_EXTRA_IDS || [], stations: [] };
+    if (this._worldPackId === pack.id) return;
+    const want = pack.id;
+    this._worldApplyGen = (this._worldApplyGen || 0) + 1;
+    const gen = this._worldApplyGen;
+    const finish = () => {
+      if (this._worldApplyGen !== gen) return;
+      this._applyWorldPack(pack);
+    };
+    const files = (typeof artLoadForWorldPack === 'function') ? artLoadForWorldPack(pack.id) : [];
+    const missing = files.filter(a => a && !this.textures.exists(a.key));
+    if (!missing.length) { finish(); return; }
+    missing.forEach(a => this.load.image(a.key, artUrl(a.file)));
+    this.load.once('complete', finish);
+    this.load.start();
+  }
+
+  _applyWorldPack(pack){
+    const extras = pack.extras || [];
+    const stations = pack.stations || [];
+    const ids = (typeof VALLEY_EXTRA_IDS !== 'undefined') ? VALLEY_EXTRA_IDS : extras;
+    ids.forEach(id => {
+      if (extras.indexOf(id) >= 0) this._ensureExtra(id);
+      else this._teardownExtra(id);
+    });
+    ['kitchen', 'taste'].forEach(id => {
+      if (stations.indexOf(id) >= 0) {
+        if (id === 'kitchen') this._ensureKitchen();
+        else this._ensureTasteStation();
+      } else {
+        if (id === 'kitchen') this._teardownKitchen();
+        else this._teardownTasteStation();
+      }
+    });
+    if (this._hasStudyDesk()) this._ensureStudyDesk();
+    else this._teardownStudyDesk();
     if (this.player && this.player.active) {
       applySkinToSprite(this, this.player, FARM_SKIN_APPLY);
     }
-    if (unit10) {
-      this._ensureTasteStation();
-      this._ensureKitchen();
-    } else {
-      this._teardownTasteStation();
-      this._teardownKitchen();
-    }
-    if (this._hasStudyDesk()) this._ensureStudyDesk();
-    else this._teardownStudyDesk();
+    this._worldPackId = pack.id;
   }
 
-  _setPlotsVisible(show){
-    if (!this.plots) return;
-    this.plots.forEach(p => {
-      [p.tile, p.shad, p.plant, p.glow, p.hintLabel, p.lockIcon, p.lockText].forEach(s => {
-        if (s && s.setVisible) s.setVisible(show);
-      });
-    });
-    if (this.children && this.children.list && typeof CROP_ICONS !== 'undefined') {
-      this.children.list.forEach(ch => {
-        if (ch && ch.text && CROP_ICONS.indexOf(ch.text) >= 0) ch.setVisible(show);
-      });
-    }
+  _ensureExtra(id){
+    const W = this.scale.width, H = this.scale.height;
+    if (id === 'shop' && !this.shopNPC) this._createShopNPC(W, H);
+    else if (id === 'board' && !this.boardSprite) this._createBoardNPC(W, H);
+    else if (id === 'arcade' && !this.arcadeSprite) this._createArcadeNPC(W, H);
+    else if (id === 'wizard' && !this.wizardSprite) this._createWizardNPC(W, H);
+    else if (id === 'cat' && !this.catSprite) this._createCatNPC(W, H);
+    else if (id === 'beehive' && !this.beehiveSprite) this._createBeehiveNPC(W, H);
+    else if (id === 'portal' && !this.portalSprite) this._createPortalNPC(W, H);
+    else if (id === 'fishing' && this.fishX == null) this._createFishingSpot(W, H);
   }
 
-  _setMinigameSpritesVisible(show){
-    const list = [
-      this.shopNPC, this.shopHint, this.boardSprite, this.boardHint,
-      this.arcadeSprite, this.arcadeHint, this.wizardSprite, this.wizardHint,
-      this.portalSprite, this.portalHint, this.dockSprite, this.fishHint,
-      this.beehiveSprite, this.beehiveHint, this.catSprite, this.catHint
-    ];
-    list.forEach(spr => { if (spr && spr.setVisible) spr.setVisible(show); });
-    if (this.children && this.children.list) {
-      this.children.list.forEach(ch => {
-        const t = ch && ch.text;
-        if (typeof t === 'string' && /Merlin|Ginger Cat|Fishing Pond|Minigame|ARCADE|SPELL DUEL|Enter Dungeon|Dungeon Portal|Beehive|SHOP/i.test(t)) {
-          ch.setVisible(show);
-        }
-      });
+  _destroyWorldObj(obj){
+    if (!obj) return;
+    if (this.tweens) this.tweens.killTweensOf(obj);
+    if (this.shadows && this.shadows.shadows) {
+      this.shadows.shadows.filter(s => s && s._target === obj).forEach(s => this.shadows.removeShadow(s));
     }
+    if (obj.destroy) obj.destroy();
   }
 
-  _setPondVisible(show){
-    this._pondVisible = !!show;
-    if (this.pondWater && this.pondWater.setVisible) this.pondWater.setVisible(show);
-    if (this.fishHint && this.fishHint.setVisible) this.fishHint.setVisible(show);
-    if (this.dockSprite && this.dockSprite.setVisible) this.dockSprite.setVisible(show);
-    if (!this.farm || !this.children || !this.children.list) return;
-    const ox = this.farm.x - 190;
-    const oy = this.farm.y + this.farm.h / 2 + 40;
-    this.children.list.forEach(ch => {
-      if (!ch || !ch.setVisible) return;
-      if (Math.abs((ch.x || 0) - ox) > 175 || Math.abs((ch.y || 0) - oy) > 90) return;
-      const key = ch.texture && ch.texture.key;
-      const isWaterArt = typeof key === 'string' && /lily|reed|ocean|pond|fish/i.test(key);
-      const isShape = ch.type === 'Ellipse' || ch.type === 'Arc' || ch.type === 'Circle';
-      const isPondLabel = typeof ch.text === 'string' && /Fishing Pond|FISHING/i.test(ch.text);
-      if (isWaterArt || isShape || isPondLabel) ch.setVisible(show);
-    });
+  _teardownExtra(id){
+    if (id === 'shop') {
+      this._destroyWorldObj(this.shopNPC); this._destroyWorldObj(this.shopHint);
+      this.shopNPC = this.shopHint = null; this.shopX = this.shopY = null;
+    } else if (id === 'board') {
+      this._destroyWorldObj(this.boardSprite); this._destroyWorldObj(this.boardHint);
+      this.boardSprite = this.boardHint = null; this.boardX = this.boardY = null;
+    } else if (id === 'arcade') {
+      this._destroyWorldObj(this.arcadeSprite); this._destroyWorldObj(this.arcadeHint);
+      this.arcadeSprite = this.arcadeHint = null; this.arcadeX = this.arcadeY = null;
+    } else if (id === 'wizard') {
+      this._destroyWorldObj(this.wizardSprite); this._destroyWorldObj(this.wizardHint);
+      this.wizardSprite = this.wizardHint = null; this.wizardX = this.wizardY = null;
+    } else if (id === 'cat') {
+      this._destroyWorldObj(this.catSprite); this._destroyWorldObj(this.catHint);
+      this.catSprite = this.catHint = null; this.catX = this.catY = null;
+    } else if (id === 'portal') {
+      this._destroyWorldObj(this.portalSprite); this._destroyWorldObj(this.portalHint);
+      this.portalSprite = this.portalHint = null; this.portalX = this.portalY = null;
+    } else if (id === 'beehive') {
+      this._destroyWorldObj(this.beehiveSprite); this._destroyWorldObj(this.beehiveHint);
+      (this.beehiveBees || []).forEach(b => this._destroyWorldObj(b && b.sprite));
+      this.beehiveBees = [];
+      this.beehiveSprite = this.beehiveHint = null; this.beehiveX = this.beehiveY = null;
+    } else if (id === 'fishing') {
+      (this._fishingTimers || []).forEach(ev => { if (ev && ev.remove) ev.remove(false); });
+      this._fishingTimers = [];
+      (this._worldLayers && this._worldLayers.fishing || []).forEach(o => this._destroyWorldObj(o));
+      if (this._worldLayers) this._worldLayers.fishing = [];
+      this._destroyWorldObj(this.pondWater); this._destroyWorldObj(this.fishHint); this._destroyWorldObj(this.dockSprite);
+      this.pondWater = this.fishHint = this.dockSprite = null;
+      this.fishX = this.fishY = null;
+      this._pondVisible = false;
+    }
   }
 
   _spawnUnit10Station(id, { hdKey, matrixKey, lastKey, shadowW, matrixScale }) {
@@ -2573,7 +2713,7 @@ class FarmScene extends Phaser.Scene {
     if (hd && spr.texture) spr.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     const hdShadowW = typeof shadowW === 'function' ? shadowW(spr) : shadowW;
     if (this.shadows) this.shadows.createShadow(spr, hd ? hdShadowW : 52, 16, 1);
-    const label = this.add.text(pos.x, pos.y + 8, (spec.nameKo || id) + '\n[SPACE]', {
+    const label = this.add.text(pos.x, pos.y + 8, (spec.nameKo || id) + '\n' + WORLD_CLICK_HINT, {
       fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
       color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
     }).setOrigin(0.5, 0).setDepth(pos.y + 10).setAlpha(0);
@@ -2667,114 +2807,45 @@ class FarmScene extends Phaser.Scene {
     this.tasteStation = null;
   }
 
-  // ── INTERACT (SRS-aware priority) ─────────────────────────────────────────
+  // ── INTERACT (mouse catalog; keyboard uses nearest in-range) ────────────
   _interact(){
-    if (this._isUnit10() && this.kitchenStation &&
-        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.kitchenStation.x, this.kitchenStation.y) < (this.kitchenStation.interact || 82)) {
-      if (typeof openCookingUI === 'function') openCookingUI();
-      return;
-    }
-    if (this._hasStudyDesk() && this.studyDesk &&
-        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.studyDesk.x, this.studyDesk.y) < (this.studyDesk.interact || 80)) {
-      if (typeof openDeskQuiz === 'function') openDeskQuiz();
-      return;
-    }
-    if (this._isUnit10() && this.tasteStation &&
-        Phaser.Math.Distance.Between(this.player.x, this.player.y, this.tasteStation.x, this.tasteStation.y) < (this.tasteStation.interact || 80)) {
-      if (typeof openTasteGame === 'function') openTasteGame();
-      return;
-    }
-    const near=p=>Phaser.Math.Distance.Between(this.player.x,this.player.y,p.x,p.y)<PLOT_SIZE+24;
-    const skipStation = () => false;
-    // Apple Tree harvest (highest priority when ripe)
-    if(this.appleRipe&&this.appleX&&
-       Phaser.Math.Distance.Between(this.player.x,this.player.y,this.appleX,this.appleY-30)<95){
-      this.tweens.add({targets:this.appleTreeSprite,angle:12,duration:80,yoyo:true,repeat:2});
-      this.harvestAppleTree(); return;
-    }
-    // P1: ripe crop plots (Phase 3 harvest)
-    for(const p of this.plots){ if(!skipStation(p)&&p.sState==='4'&&near(p)){openQuiz(p.word,p,3);return;} }
-    // P2: wilting plants (Phase 2 review)
-    for(const p of this.plots){ if(!skipStation(p)&&p.sState==='2'&&near(p)){openQuiz(p.word,p,2);return;} }
-    const extrasOn = !(typeof isTextbookFarmWorld === 'function' ? isTextbookFarmWorld() : this._isTextbookFarm());
-    // Cat NPC
-    if(extrasOn&&this.catX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.catX,this.catY)<65){
-      this.tweens.add({targets:this.catSprite,scale:{from:0.75,to:0.95},duration:100,yoyo:true,ease:'Back.Out(2)'});
-      showCatDialog(); return;
-    }
-    // Wizard NPC
-    if(extrasOn&&this.wizardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.wizardX,this.wizardY)<85){
-      this.tweens.add({targets:this.wizardSprite,scale:{from:1.8,to:2.1},duration:120,yoyo:true,ease:'Back.Out(2)'});
-      const chk = isZoneUnlocked('duel');
-      if(!chk.unlocked){ showHardLockToast('duel'); return; }
-      openSpellDuel(); return;
-    }
-    // Dungeon Portal
-    if(extrasOn&&this.portalX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.portalX,this.portalY)<90){
-      this.tweens.add({targets:this.portalSprite,scale:{from:1.6,to:1.9},duration:120,yoyo:true,ease:'Back.Out(2)'});
-      const chk = isZoneUnlocked('dungeon');
-      if(!chk.unlocked){ showHardLockToast('dungeon'); return; }
-      this.cameras.main.fadeOut(300, 0, 0, 0);
-      this.cameras.main.once('camerafadeoutcomplete', () => {
-        this.scene.pause();
-        this.scene.launch('DungeonScene');
-      });
-      return;
-    }
-    // Fishing Dock
-    if(extrasOn&&this.fishX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.fishX,this.fishY)<85){
-      this.tweens.add({targets:this.dockSprite,scale:{from:1.6,to:1.8},duration:120,yoyo:true,ease:'Back.Out(2)'});
-      const chk = isZoneUnlocked('fishing');
-      if(!chk.unlocked){ showHardLockToast('fishing'); return; }
-      this.cameras.main.fadeOut(300, 0, 0, 0);
-      this.cameras.main.once('camerafadeoutcomplete', () => {
-        this.scene.pause();
-        this.scene.launch('FishingScene');
-      });
-      return;
-    }
-    // Beehive NPC
-    if(extrasOn&&this.beehiveX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.beehiveX,this.beehiveY)<85){
-      this.tweens.add({targets:this.beehiveSprite,scale:{from:1.6,to:1.85},duration:120,yoyo:true,ease:'Back.Out(2)'});
-      this.cameras.main.fadeOut(300, 0, 0, 0);
-      this.cameras.main.once('camerafadeoutcomplete', () => {
-        this.scene.pause();
-        this.scene.launch('BeeScene');
-      });
-      return;
-    }
-    // Arcade
-    if(extrasOn&&this.arcadeX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.arcadeX,this.arcadeY)<80){
-      this.tweens.add({targets:this.arcadeSprite,scale:{from:1.5,to:1.6},duration:100,yoyo:true});
-      const chk = isZoneUnlocked('arcade');
-      if(!chk.unlocked){ showHardLockToast('arcade'); return; }
-      this.cameras.main.fadeOut(300, 0, 0, 0);
-      this.cameras.main.once('camerafadeoutcomplete', () => {
-        this.scene.pause();
-        this.scene.launch('ArcadeScene');
-      });
-      return;
-    }
+    const t = nearestInRange(this.player, this._worldTargets());
+    if (t) this._runTarget(t);
+  }
 
-    // Board
-    if(extrasOn&&this.boardX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.boardX,this.boardY)<80){
-      this.tweens.add({targets:this.boardSprite,angle:5,duration:100,yoyo:true,repeat:1});
-      openMemoryGame(); return;
-    }
-    // Shop
-    if(extrasOn&&this.shopX&&Phaser.Math.Distance.Between(this.player.x,this.player.y,this.shopX,this.shopY)<90){openShop();return;}
-    // P3: empty plots (Phase 1 plant, full hints)
-    for(const p of this.plots){
-      if(!skipStation(p)&&p.sState===''&&p.active&&near(p)){
-        this.tweens.add({targets:p.tile,scaleX:0.85,scaleY:0.85,duration:90,yoyo:true});
-        openQuiz(this._pickWord(),p,1); return;
-      }
-    }
-    // P4: locked plots (unlock interaction flow)
-    for(const p of this.plots){
-      if(!skipStation(p)&&!p.active&&near(p)){
+  _runTarget(t){
+    if (!t) return;
+    switch (t.kind) {
+      case 'kitchen':
+        if (this._isUnit10() && typeof openCookingUI === 'function') openCookingUI();
+        return;
+      case 'desk':
+        if (this._hasStudyDesk() && typeof openDeskQuiz === 'function') openDeskQuiz();
+        return;
+      case 'taste':
+        if (this._isUnit10() && typeof openTasteGame === 'function') openTasteGame();
+        return;
+      case 'apple':
+        this.tweens.add({targets:this.appleTreeSprite,angle:12,duration:80,yoyo:true,repeat:2});
+        this.harvestAppleTree();
+        return;
+      case 'plot-ripe':
+        if (t.plot && t.plot.word) openQuiz(t.plot.word, t.plot, 3);
+        return;
+      case 'plot-water':
+        if (t.plot && t.plot.word) openQuiz(t.plot.word, t.plot, 2);
+        return;
+      case 'plot-empty':
+        if (t.plot && t.plot.active) {
+          this.tweens.add({targets:t.plot.tile,scaleX:0.85,scaleY:0.85,duration:90,yoyo:true});
+          openQuiz(this._pickWord(), t.plot, 1);
+        }
+        return;
+      case 'plot-locked': {
+        const p = t.plot;
+        if (!p || p.active) return;
         const cost = PLOT_UNLOCK_COSTS[p.index - 9] || 1000;
-        if(gold >= cost){
+        if (gold >= cost) {
           spendCoins(cost);
           this.unlockPlot(p);
         } else {
@@ -2783,6 +2854,65 @@ class FarmScene extends Phaser.Scene {
         }
         return;
       }
+      case 'cat':
+        this.tweens.add({targets:this.catSprite,scale:{from:0.75,to:0.95},duration:100,yoyo:true,ease:'Back.Out(2)'});
+        showCatDialog();
+        return;
+      case 'wizard': {
+        this.tweens.add({targets:this.wizardSprite,scale:{from:1.8,to:2.1},duration:120,yoyo:true,ease:'Back.Out(2)'});
+        const chk = isZoneUnlocked('duel');
+        if(!chk.unlocked){ showHardLockToast('duel'); return; }
+        openSpellDuel();
+        return;
+      }
+      case 'portal': {
+        this.tweens.add({targets:this.portalSprite,scale:{from:1.6,to:1.9},duration:120,yoyo:true,ease:'Back.Out(2)'});
+        const chk = isZoneUnlocked('dungeon');
+        if(!chk.unlocked){ showHardLockToast('dungeon'); return; }
+        this.cameras.main.fadeOut(300, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.pause();
+          this.scene.launch('DungeonScene');
+        });
+        return;
+      }
+      case 'fish': {
+        this.tweens.add({targets:this.dockSprite,scale:{from:1.6,to:1.8},duration:120,yoyo:true,ease:'Back.Out(2)'});
+        const chk = isZoneUnlocked('fishing');
+        if(!chk.unlocked){ showHardLockToast('fishing'); return; }
+        this.cameras.main.fadeOut(300, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.pause();
+          this.scene.launch('FishingScene');
+        });
+        return;
+      }
+      case 'beehive':
+        this.tweens.add({targets:this.beehiveSprite,scale:{from:1.6,to:1.85},duration:120,yoyo:true,ease:'Back.Out(2)'});
+        this.cameras.main.fadeOut(300, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.pause();
+          this.scene.launch('BeeScene');
+        });
+        return;
+      case 'arcade': {
+        this.tweens.add({targets:this.arcadeSprite,scale:{from:1.5,to:1.6},duration:100,yoyo:true});
+        const chk = isZoneUnlocked('arcade');
+        if(!chk.unlocked){ showHardLockToast('arcade'); return; }
+        this.cameras.main.fadeOut(300, 0, 0, 0);
+        this.cameras.main.once('camerafadeoutcomplete', () => {
+          this.scene.pause();
+          this.scene.launch('ArcadeScene');
+        });
+        return;
+      }
+      case 'board':
+        this.tweens.add({targets:this.boardSprite,angle:5,duration:100,yoyo:true,repeat:1});
+        openMemoryGame();
+        return;
+      case 'shop':
+        openShop();
+        return;
     }
   }
 
@@ -2917,7 +3047,7 @@ class FarmScene extends Phaser.Scene {
     } else if(s==='4'){  // ripe - harvest!
       if(plot.plant) plot.plant.setTexture(cropTex(this,t,3)).clearTint();
       this._addGlow(plot,0xFFD700);
-      this._addLabel(plot,'SPACE','#FFD700');
+      this._addLabel(plot, WORLD_CLICK_HINT, '#FFD700');
       if (plot.plant && this.shadows) {
         plot.cropShadow = this.shadows.createShadow(plot.plant, 22, 7, 0);
       }

@@ -28,17 +28,23 @@ vm.runInNewContext(
   '\nthis.kimchi = renderRecallScaffold("김치찌개");' +
   '\nthis.kimchiH = renderRecallScaffoldHtml("김치찌개");' +
   '\nthis.naeng = renderRecallScaffoldHtml("냉면");' +
-  '\nthis.dal = renderRecallScaffoldHtml("달다");',
+  '\nthis.dal = renderRecallScaffoldHtml("달다");' +
+  '\nthis.phrase = renderRecallScaffoldHtml("김치 찌개");',
   ctx
 );
 
 assert(ctx.kimchi.indexOf('김치찌개') < 0, 'text scaffold does not spell 김치찌개');
-assert(ctx.kimchi.indexOf('closed · open · open · open') >= 0, '김치찌개 shape is closed-open-open-open');
+assert(ctx.kimchi.indexOf('open') < 0 && ctx.kimchi.indexOf('closed') < 0, 'text scaffold has no open/closed caption');
 assert(ctx.kimchi.indexOf('Sino-Korean') >= 0, '김치찌개 class is Sino-Korean');
 assert((ctx.kimchiH.html.match(/class="recall-tile(?: batchim)?"/g) || []).length === 4, '김치찌개 has 4 tiles');
 assert((ctx.kimchiH.html.match(/class="recall-tile batchim"/g) || []).length === 1, '김치찌개 has one closed tile');
+assert((ctx.kimchiH.html.match(/class="recall-word"/g) || []).length === 1, '김치찌개 is one written word');
+assert(ctx.kimchiH.html.indexOf('open') < 0 && ctx.kimchiH.html.indexOf('closed') < 0, 'HTML has no open/closed caption');
+assert(ctx.kimchiH.html.indexOf('recall-caption') < 0, 'HTML has no caption line');
 assert(ctx.kimchiH.html.indexOf('김') < 0 && ctx.kimchiH.html.indexOf('찌개') < 0, 'HTML does not contain the Hangul');
 assert((ctx.naeng.html.match(/class="recall-tile batchim"/g) || []).length === 2, '냉면 both blocks closed');
 assert(ctx.dal.note === 'Native Korean', '달다 is native');
+assert((ctx.phrase.html.match(/class="recall-word"/g) || []).length === 2, 'spaced vocab splits into two tile groups');
+assert((ctx.phrase.html.match(/class="recall-tile(?: batchim)?"/g) || []).length === 4, '김치 찌개 still has 4 tiles');
 
 console.log('\ntest_phase3_recall: all passed');

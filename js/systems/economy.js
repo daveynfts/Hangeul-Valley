@@ -20,7 +20,49 @@ function isUnit14World() {
   return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-14';
 }
 function isTextbookFarmWorld() {
-  return isUnit10World() || isUnit14World();
+  const p = typeof currentWorldPack === 'function' ? currentWorldPack() : null;
+  return !!(p && p.id && p.id !== 'valley');
+}
+const VALLEY_EXTRA_IDS = ['shop', 'board', 'arcade', 'wizard', 'cat', 'beehive', 'portal', 'fishing'];
+const WORLD_PACKS = {
+  valley: { extras: VALLEY_EXTRA_IDS.slice(), stations: [] },
+  '2b-unit-10': { extras: [], stations: ['desk', 'kitchen', 'taste'] },
+  '2b-unit-14': { extras: [], stations: ['desk'] }
+};
+function worldPackIdForLesson(lvl) {
+  if (lvl && lvl.worldId && WORLD_PACKS[lvl.worldId]) return lvl.worldId;
+  return 'valley';
+}
+function currentWorldPack() {
+  const lvl = typeof currentLesson === 'function' ? currentLesson() : null;
+  const id = worldPackIdForLesson(lvl);
+  const base = WORLD_PACKS[id] || WORLD_PACKS.valley;
+  const map = lvl && lvl.map;
+  return {
+    id,
+    extras: (map && Array.isArray(map.extras)) ? map.extras.slice() : base.extras.slice(),
+    stations: (map && Array.isArray(map.stations)) ? map.stations.slice() : base.stations.slice()
+  };
+}
+function worldPackHas(pack, kind, id) {
+  const p = pack || currentWorldPack();
+  const list = kind === 'station' ? p.stations : p.extras;
+  return !!(list && list.indexOf(id) >= 0);
+}
+function artLoadForWorldPack(id) {
+  if (id === '2b-unit-10') {
+    return [
+      { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' },
+      { key: 'unit10_kitchen_hd', file: 'furniture/farmhouse_kitchen.png' },
+      { key: 'unit10_taste_stall_hd', file: 'stalls/korean_street_food_stall.png' }
+    ];
+  }
+  if (id === '2b-unit-14') {
+    return [
+      { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' }
+    ];
+  }
+  return [];
 }
 const TEXTBOOK_WORLD_FILES = [
   { cache: 'world-2b-10', file: 'worlds/2b-unit-10.json' },
@@ -62,9 +104,6 @@ function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }
 const ART_LOAD = [
-  { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' },
-  { key: 'unit10_kitchen_hd', file: 'furniture/farmhouse_kitchen.png' },
-  { key: 'unit10_taste_stall_hd', file: 'stalls/korean_street_food_stall.png' },
   { key: 'fence_rose_red_hd', file: 'decorations/fence_rose_red.png' },
   { key: 'fence_buttercup_yellow_hd', file: 'decorations/fence_buttercup_yellow.png' },
   { key: 'fence_lavender_purple_hd', file: 'decorations/fence_lavender_purple.png' },
@@ -137,6 +176,7 @@ function attachTextbookWorld(world) {
     world: true,
     pack: world.pack || 'snu-2b',
     worldId: world.id,
+    map: world.map || (world.level && world.level.map) || null,
     costumeSkinId: world.costumeSkinId || (world.level && world.level.costumeSkinId) || null,
     notebook: world.notebook || null,
     upcoming: world.upcoming || [],

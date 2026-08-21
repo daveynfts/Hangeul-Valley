@@ -16,6 +16,7 @@
     "world": true,
     "pack": "snu-2b",
     "worldId": "2b-unit-14",
+    "map": { "extras": [], "stations": ["desk"] },
     "target": 9,
     "words": [
       { "ko": "반말을 하다", "en": "to speak in informal/casual language (banmal)", "hint": "💬", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },

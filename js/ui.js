@@ -97,13 +97,20 @@ function initTouchControls(){
   }
 }
 
-// The same guards the SPACE handler in FarmScene.update() applies, in one place so the two
-// input routes cannot drift apart.
+// Same guards as FarmScene pointer/keyboard interact, in one place so the on-screen
+// touch button cannot drift from click-to-interact.
 function triggerInteract(){
   const sc = sceneRef;
   if (!sc || typeof sc._interact !== 'function') return;
-  if (playerLocked || sc.isPerformingAction) return;
-  if (quizOpen || shopOpen || memoryOpen || trophyOpen || duelOpen || catDialogOpen) return;
+  const flags = {
+    playerLocked,
+    isPerformingAction: sc.isPerformingAction,
+    quizOpen, shopOpen, memoryOpen, trophyOpen, duelOpen, catDialogOpen
+  };
+  if (typeof worldPointerBlocked === 'function' ? worldPointerBlocked(flags)
+      : (playerLocked || sc.isPerformingAction || quizOpen || shopOpen || memoryOpen || trophyOpen || duelOpen || catDialogOpen)) {
+    return;
+  }
   sc._interact();
 }
 
@@ -616,6 +623,11 @@ function showQuizSuccess({ message, ko, en, continueLabel, delay, onDone }){
   const qui = $('quiz-ui');
   if (qui) qui.classList.add('quiz-success');
   clearQuizFinishTimer();
+  // delay === 0: harvest stays open so the player can reread the word, then dismiss.
+  if (delay === 0) {
+    if (go) setTimeout(() => { try { go.focus(); } catch (e) {} }, 40);
+    return;
+  }
   const wait = typeof delay === 'number' ? delay : 2800;
   quizFinishTimer = setTimeout(settleQuizAdvance, wait);
 }
@@ -756,9 +768,8 @@ function openQuiz(word, plot, phase=1){
   hintCategory.textContent  = wordCategory(word);
   enWordDisplay.textContent = word.en;
   quizLevelTag.textContent  = 'P'+phase+'/3';
-  // Phase 3: shape only. The English gloss and picture already carry meaning; the old
-  // category paragraph did not help anyone type Hangul. Tiles show block count and
-  // which syllables are closed. Word-class (native / Sino / loan) never spells the word.
+  // Phase 3: shape tiles only — one square per syllable, grouped like the vocab is
+  // written. Word-class (native / Sino / loan) never spells the word.
   const ffText=$('quiz-funfact-text'), ffCulture=$('quiz-funfact-culture');
   const ffBox=$('quiz-funfact-box');
   if(ffText && ffCulture){
@@ -895,7 +906,7 @@ function answerChoice(opt, btn){
       message: ph === 1 ? 'Planted!' : (ph === 2 ? 'Watered!' : 'Harvested!'),
       ko: cw.ko, en: cw.en,
       continueLabel: ph === 3 ? 'Collect harvest' : (ph === 2 ? 'Keep growing' : 'Plant it'),
-      delay: ph === 3 ? 4000 : 1800,
+      delay: ph === 3 ? 0 : 1800,
       onDone: () => { if (sceneRef) sceneRef.advancePlot(cp, cw, ph, grade); }
     });
   } else {
@@ -956,7 +967,7 @@ function submitAnswer(){
         message: 'Harvested!',
         ko: harvested.ko, en: harvested.en,
         continueLabel: 'Collect apples',
-        delay: 3500,
+        delay: 0,
         onDone: () => { if (sceneRef) sceneRef.onAppleHarvested(); }
       });
       return;
@@ -981,7 +992,7 @@ function submitAnswer(){
       message,
       ko: cw.ko, en: cw.en,
       continueLabel: ph === 3 ? 'Collect harvest' : (ph === 2 ? 'Keep growing' : 'Plant it'),
-      delay: ph === 3 ? 4000 : 1800,
+      delay: ph === 3 ? 0 : 1800,
       onDone: () => { if (sceneRef) sceneRef.advancePlot(cp, cw, ph, grade); }
     });
   } else {
@@ -1233,6 +1244,24 @@ function decomposeHangulWord(str) {
   return syllables;
 }
 
+// Same walk, but split on whitespace so tile groups match how the vocab is written.
+function hangulSyllableGroups(str) {
+  const groups = [];
+  let current = [];
+  const raw = String(str || '').normalize('NFC');
+  for (let i = 0; i < raw.length; i++) {
+    const code = raw.charCodeAt(i);
+    if (code >= 0xac00 && code <= 0xd7a3) {
+      const s = code - 0xac00;
+      current.push({ hasBatchim: (s % 28) > 0 });
+    } else if (/\s/.test(raw[i])) {
+      if (current.length) { groups.push(current); current = []; }
+    }
+  }
+  if (current.length) groups.push(current);
+  return groups;
+}
+
 // ── Origin / structure renderers ─────────────────────────────────────────────
 const SINO = 'Sino-Korean (한자어)';
 
@@ -1343,28 +1372,23 @@ function recallOriginClass(ko) {
   }
 }
 function renderRecallScaffold(ko) {
-  const syl = decomposeHangulWord(ko);
-  const n = syl.length;
+  const groups = hangulSyllableGroups(ko);
+  const n = groups.reduce((acc, g) => acc + g.length, 0);
   if (!n) return '';
-  const shape = syl.map(s => s.hasBatchim ? 'closed' : 'open').join(' · ');
   const cls = recallOriginClass(ko);
-  return [n + (n === 1 ? ' block' : ' blocks'), shape, cls].filter(Boolean).join(' · ');
+  return [n + (n === 1 ? ' block' : ' blocks'), cls].filter(Boolean).join(' · ');
 }
 function renderRecallScaffoldHtml(ko) {
-  const syl = decomposeHangulWord(ko);
-  if (!syl.length) return { html: '', note: '' };
-  const tiles = syl.map(s =>
-    '<span class="recall-tile' + (s.hasBatchim ? ' batchim' : '') + '"></span>'
+  const groups = hangulSyllableGroups(ko);
+  if (!groups.length) return { html: '', note: '' };
+  const words = groups.map(g =>
+    '<span class="recall-word">' +
+    g.map(s => '<span class="recall-tile' + (s.hasBatchim ? ' batchim' : '') + '"></span>').join('') +
+    '</span>'
   ).join('');
-  const n = syl.length;
-  const caption = n + (n === 1 ? ' block' : ' blocks') +
-    ' · ' + syl.map(s => s.hasBatchim ? 'closed' : 'open').join(' · ');
-  const bits = [recallOriginClass(ko)];
-  if (/\s/.test(ko)) bits.push('written with a space');
   return {
-    html: '<div class="recall-tiles" aria-hidden="true">' + tiles + '</div>' +
-      '<div class="recall-caption">' + caption + '</div>',
-    note: bits.filter(Boolean).join(' · ')
+    html: '<div class="recall-tiles" aria-hidden="true">' + words + '</div>',
+    note: recallOriginClass(ko)
   };
 }
 
