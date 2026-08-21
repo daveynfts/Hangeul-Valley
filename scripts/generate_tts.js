@@ -12,7 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const {
   ROOT, TTS_VOICE, TTS_RATE, TTS_DIR_REL,
-  ttsClipPath, collectTtsPhrases
+  ttsClipRel, ttsClipPath, collectTtsPhrases
 } = require('./ttsClips');
 
 const MIN_BYTES = 400;
@@ -71,24 +71,39 @@ async function mapPool(items, width, worker) {
   await Promise.all(workers);
 }
 
-async function generateTtsClips(argv, root) {
+/**
+ * opts.have — a Set of clip paths (as returned by ttsClipRel) that are already published to
+ * the CDN. Clips are content-addressed on the hash of the Korean text, so an object that
+ * exists on R2 is definitively the clip for that phrase and never needs re-rendering.
+ *
+ * Without this, a checkout with no audio/ko/ — which is every CI run, since the clips are
+ * gitignored — decided it had to render all ~2200 of them. At four concurrent syntheses
+ * that overran the publish job's 40-minute cap, and because the job was killed the
+ * actions/cache post-step never saved what it had rendered, so the next run started from
+ * empty again. Auto-publish could not converge.
+ */
+async function generateTtsClips(argv, root, opts) {
   const flags = parseArgs(argv);
   const base = root || ROOT;
+  const have = (opts && opts.have) || null;
   const dir = path.join(base, TTS_DIR_REL);
   fs.mkdirSync(dir, { recursive: true });
 
   let phrases = collectTtsPhrases(base);
   if (flags.limit) phrases = phrases.slice(0, flags.limit);
 
+  let onCdn = 0;
   const needed = phrases.filter((text) => {
     if (flags.force) return true;
+    if (have && have.has(ttsClipRel(text))) { onCdn++; return false; }
     const full = ttsClipPath(text, base);
     if (!fs.existsSync(full)) return true;
     return fs.statSync(full).size < MIN_BYTES;
   });
 
-  console.log('TTS_PLAN', phrases.length, 'phrases,', needed.length, 'to render,', TTS_VOICE, TTS_RATE);
-  if (!needed.length) return { phrases: phrases.length, rendered: 0, skipped: phrases.length };
+  console.log('TTS_PLAN', phrases.length, 'phrases,', needed.length, 'to render,',
+    onCdn, 'already on the CDN,', TTS_VOICE, TTS_RATE);
+  if (!needed.length) return { phrases: phrases.length, rendered: 0, skipped: phrases.length, onCdn };
 
   const synthesize = loadSynthesize();
   let rendered = 0;
@@ -119,7 +134,7 @@ async function generateTtsClips(argv, root) {
   if (failures.length) {
     throw new Error('TTS render failed for ' + failures.length + ' phrase(s): ' + failures.slice(0, 5).join(' | '));
   }
-  return { phrases: phrases.length, rendered, skipped: phrases.length - rendered };
+  return { phrases: phrases.length, rendered, skipped: phrases.length - rendered, onCdn };
 }
 
 if (require.main === module) {
