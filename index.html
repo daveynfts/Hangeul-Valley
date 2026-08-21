@@ -381,11 +381,11 @@
     <div id="trophy-panel">
       <div id="trophy-header">
         <div>
-          <div id="trophy-title">🏆 Trophies</div>
+          <div id="trophy-title"><span data-hud-icon="trophy" data-hud-size="28">🏆</span> Trophies</div>
           <div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:6px;font-family:'Press Start 2P',monospace">Unlock with Gold</div>
         </div>
         <div style="display:flex; gap:12px; align-items:center;">
-           <div id="trophy-gold-badge">💰 <span id="trophy-gold-val">0</span></div>
+           <div id="trophy-gold-badge"><span data-hud-icon="coin" data-hud-size="18">🪙</span> <span id="trophy-gold-val">0</span></div>
            <button class="hud-btn" id="trophy-close-btn" style="padding:4px 10px">✕</button>
         </div>
       </div>
@@ -522,10 +522,10 @@
     <div id="recipe-panel" class="glass-modal" style="max-width:780px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
       <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(245,158,11,0.3); padding-bottom:14px; margin-bottom:16px;">
         <div style="display:flex; align-items:center; gap:10px;">
-          <span style="font-size:32px">🍳</span>
+          <span data-hud-icon="recipe" data-hud-size="36">🍳</span>
           <div>
-            <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:var(--neon-gold)">KOREAN RECIPE BOOK (요리책)</div>
-            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Craft authentic Hansik dishes & gain powerful gameplay buffs!</div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:var(--neon-gold)">Korean Recipe Book</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px;">Cook Hansik dishes and gain farm buffs</div>
           </div>
         </div>
         <button onclick="closeRecipeBook()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
@@ -533,7 +533,7 @@
 
       <!-- Ingredient Inventory Summary Bar -->
       <div id="recipe-pantry-bar" style="background:rgba(30,41,59,0.7); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px; margin-bottom:16px;">
-        <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:6px">🧺 My Ingredients Stock (재료):</div>
+        <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:6px">Pantry</div>
         <div id="recipe-pantry-list" style="display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:#cbd5e1;"></div>
       </div>
 
@@ -660,10 +660,10 @@
       <!-- Header -->
       <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(56,189,248,0.4); padding-bottom:14px; margin-bottom:16px;">
         <div style="display:flex; align-items:center; gap:10px;">
-          <span style="font-size:32px">🎒</span>
+          <span data-hud-icon="bag" data-hud-size="36">🎒</span>
           <div>
-            <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:var(--neon-cyan)">INVENTORY STORAGE (가방)</div>
-            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Manage harvested crops & cooked dishes</div>
+            <div style="font-family:'Press Start 2P',monospace; font-size:16px; color:var(--neon-cyan)">Inventory</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px;">Crops, fish, and cooked dishes</div>
           </div>
         </div>
         <div style="display:flex; gap:12px; align-items:center;">
@@ -678,14 +678,17 @@
           Storage Limit: <strong id="inv-capacity-text" style="color:var(--neon-gold);">20 slots</strong> (Items stack automatically)
         </div>
         <button class="hud-btn" id="inv-expand-btn" onclick="expandInventoryCapacity()" style="padding:6px 14px; font-size:10px;">
-          ➕ Expand (+5 slots for 50 🪙)
+          Expand +5 <span data-hud-icon="coin" data-hud-size="16">🪙</span> 50
         </button>
       </div>
 
-      <!-- Slot Grid Container -->
-      <div id="inventory-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:12px;">
-        <!-- Rendered dynamically by renderInventoryGrid() -->
+      <div id="inv-tabs" class="inv-tabs">
+        <button type="button" class="inv-tab active" data-inv-tab="all" onclick="setInventoryTab('all')">All</button>
+        <button type="button" class="inv-tab" data-inv-tab="ingredients" onclick="setInventoryTab('ingredients')">Crops</button>
+        <button type="button" class="inv-tab" data-inv-tab="dishes" onclick="setInventoryTab('dishes')">Dishes</button>
       </div>
+      <div id="inv-empty-msg" class="inv-empty-msg hidden">Harvest crops, catch fish, or cook a dish to fill the bag.</div>
+      <div id="inventory-grid"></div>
     </div>
   </div>
 
@@ -789,6 +792,7 @@
   <script src="js/vocabArt.js"></script>
   <script src="js/vocabArtUnit14.js"></script>
   <script src="js/hudArt.js"></script>
+  <script src="js/trophyArt.js"></script>
   <script src="js/data.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/systems/atmosphere.js"></script>

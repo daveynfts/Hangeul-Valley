@@ -354,10 +354,23 @@ function closeInventoryUI() {
   setModalState('inventory-overlay', false);
 }
 
+let inventoryTab = 'all';
+
+function setInventoryTab(tab) {
+  inventoryTab = tab === 'ingredients' || tab === 'dishes' ? tab : 'all';
+  if (typeof document !== 'undefined' && document.querySelectorAll) {
+    document.querySelectorAll('#inv-tabs .inv-tab').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-inv-tab') === inventoryTab);
+    });
+  }
+  renderInventoryGrid();
+}
+
 function renderInventoryGrid() {
   const grid = document.getElementById('inventory-grid');
   const badge = document.getElementById('inv-capacity-badge');
   const capText = document.getElementById('inv-capacity-text');
+  const emptyMsg = document.getElementById('inv-empty-msg');
 
   inventoryState = inventoryState || {};
   const maxSlots = typeof inventoryState.maxSlots === 'number' ? inventoryState.maxSlots : 20;
@@ -371,9 +384,11 @@ function renderInventoryGrid() {
   grid.innerHTML = '';
 
   const items = [];
+  const art = function (ko, fallback, px) {
+    return (typeof vocabIconHtml === 'function') ? vocabIconHtml(ko, fallback || '?', px || 40) : (fallback || '?');
+  };
 
-  // 1. Ingredients
-  if (inventoryState.ingredients) {
+  if (inventoryTab !== 'dishes' && inventoryState.ingredients) {
     for (const [nameKo, qty] of Object.entries(inventoryState.ingredients)) {
       if (qty > 0) {
         const info = getItemInfo(nameKo);
@@ -382,22 +397,19 @@ function renderInventoryGrid() {
           name: info.name || nameKo,
           nameKo: info.nameKo || nameKo,
           qty: qty,
-          icon: (typeof vocabIconHtml === 'function')
-            ? vocabIconHtml(info.nameKo || nameKo, info.icon || '🥬', 28)
-            : (info.icon || '🥬'),
-          description: info.description || 'Harvested crop / ingredient'
+          icon: art(info.nameKo || nameKo, info.icon, 40),
+          description: info.description || 'Harvested crop / ingredient',
+          kind: 'ingredient'
         });
       }
     }
   }
 
-  // 2. Cooked Dishes
-  if (inventoryState.cookedDishes) {
+  if (inventoryTab !== 'ingredients' && inventoryState.cookedDishes) {
     for (const [recipeId, qty] of Object.entries(inventoryState.cookedDishes)) {
       if (qty > 0) {
         let nameKo = recipeId;
         let nameEn = recipeId;
-        let icon = '🍱';
         let rec = null;
         if (typeof getActiveCookingRecipes === 'function') {
           rec = getActiveCookingRecipes().find(r => r && r.id === recipeId) || null;
@@ -411,24 +423,27 @@ function renderInventoryGrid() {
         if (rec) {
           nameKo = rec.nameKo || rec.name;
           nameEn = rec.nameEn || rec.enName || rec.name;
-          icon = (typeof vocabIconHtml === 'function' && nameKo)
-            ? vocabIconHtml(nameKo, rec.icon || '🍱', 28)
-            : (rec.icon || '🍱');
         }
         items.push({
           itemId: recipeId,
           name: nameEn,
           nameKo: nameKo,
           qty: qty,
-          icon: icon,
-          description: 'Delicious cooked dish'
+          icon: art(nameKo, rec && rec.icon, 40),
+          description: 'Cooked dish',
+          kind: 'dish'
         });
       }
     }
   }
 
-  // Render slots up to maxSlots
-  for (let i = 0; i < maxSlots; i++) {
+  if (emptyMsg && emptyMsg.classList && typeof emptyMsg.classList.toggle === 'function') {
+    emptyMsg.classList.toggle('hidden', items.length > 0);
+  }
+
+  const crate = (typeof crateIconHtml === 'function') ? crateIconHtml(28) : '';
+  const showSlots = inventoryTab === 'all' ? maxSlots : Math.max(items.length, 1);
+  for (let i = 0; i < showSlots; i++) {
     const slotEl = document.createElement('div');
     if (i < items.length) {
       const item = items[i];
@@ -443,8 +458,8 @@ function renderInventoryGrid() {
     } else {
       slotEl.className = 'inv-slot empty';
       slotEl.innerHTML = `
-        <div style="font-size:22px; opacity:0.3; margin-bottom:4px;">📦</div>
-        <div style="font-size:11px; color:rgba(255,255,255,0.3); font-family:'Press Start 2P',monospace;">Empty</div>
+        <div class="inv-slot-icon empty-crate">${crate}</div>
+        <div class="inv-slot-en">Empty</div>
       `;
     }
     grid.appendChild(slotEl);
@@ -455,6 +470,7 @@ if (typeof window !== 'undefined') {
   window.openInventoryUI = openInventoryUI;
   window.closeInventoryUI = closeInventoryUI;
   window.renderInventoryGrid = renderInventoryGrid;
+  window.setInventoryTab = setInventoryTab;
   window.expandInventoryCapacity = expandInventoryCapacity;
   window.addItemToInventory = addItemToInventory;
   window.removeItemFromInventory = removeItemFromInventory;

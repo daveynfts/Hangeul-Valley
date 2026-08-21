@@ -45,11 +45,12 @@ Height classes — pass `--height` to `process_prop.py` (default 156). Do not fa
 | `landmark` | 180 | apple tree and similar |
 | `character` | 80 | farm walk frames (`sprites/characters/<slug>/`) |
 | `item` | 48 | food / vocab still-icons (`sprites/foods/`, `sprites/items/`) |
+| `ui` | 48 | HUD glyphs and trophy plaques (`sprites/ui/`) |
 | `well` | 80 | stone well |
 | `fence-post` | 40 | perimeter posts under fence blooms |
 | `fence-rail` | 10 | horizontal rail between posts |
 
-Naming lives in `sprites/catalog.json` (id, real-world `nameEn`, `path`, Phaser key, status). Paths are taxonomy folders, not flat dumps:
+Naming lives in `sprites/catalog.json` (id, real-world `nameEn`, `path`, Phaser key, status). Paths are taxonomy folders, not flat dumps. The contract is `scripts/art_library.js`:
 
 | Kind | Path |
 |---|---|
@@ -61,8 +62,20 @@ Naming lives in `sprites/catalog.json` (id, real-world `nameEn`, `path`, Phaser 
 | decoration | `decorations/<descriptive>.png` |
 | food | `foods/<descriptive>.png` |
 | item | `items/<descriptive>.png` |
+| quiz | `quiz/<descriptive>.png` |
+| ui | `ui/<descriptive>.png` |
 
-Add a catalog row **before** the PNG. `status: unused` keeps library art off the Phaser load list. Do not leave a PNG on disk that the catalog does not name.
+**New image flow — do not skip a step:**
+
+1. Pick folder + snake_case slug. Register first so the file cannot land unnamed:
+   `npm run register:art -- --folder foods --slug kimchi_jar --name-en "Kimchi"`
+   (`registerArt()` writes `id`, `nameEn`, `path`, `kind`, `family`). Ids are `<kind>.<slug>` (`food.kimchi_jar`, `item.corn_cob`). Trophy plaques use `--family trophy-icons` so the id is `ui.trophy.<name>`.
+2. Imagine on magenta `#FF00FF`. Key/crop/resize with `process_prop.py --height <class> --subdir <folder> <src> <slug>`. Height and `--subdir` come from `processArgs()`.
+3. The PNG must land at `sprites/<folder>/<slug>.png` — the same path as the catalog row. Do not leave a generated file in `images/` or the session dump.
+4. Bump `sprites/catalog.json` `cacheKey` and `ART_CACHE_KEY` together.
+5. `npm run audit:art` (also gated by `validate_content`). Zero orphans, zero missing files, snake_case names, ids start with folder kind.
+
+`status: unused` keeps library art off the Phaser load list. Do not leave a PNG on disk that the catalog does not name. Overlay-only art (HUD, trophies, recipe/inventory stills) has no `phaserKey`.
 
 Palette: match `STARDEW_PALETTE` wood/outline in `game.js`. Do not paint grass or ground. Phaser `createShadow` is the contact darkening.
 
@@ -70,7 +83,7 @@ One Phaser spawn path per family: `*_hd` key, matrix fallback, scale 1 on HD, no
 
 ## 2. Key, crop, size
 
-Run `scripts/process_prop.py` (Pillow) with the class `--height`. It keys magenta / rose, crops 2px pad (feet stay the last opaque row), resizes, keys again, and writes `sprites/<name>.png` (repo root is the source of truth).
+Run `scripts/process_prop.py` (Pillow) with the class `--height`. It keys magenta / rose, crops 2px pad (feet stay the last opaque row), resizes, keys again, and writes `sprites/<subdir>/<slug>.png` (repo root is the source of truth). Height and `--subdir` come from `processArgs()` in `scripts/art_library.js`.
 
 Character sets: `--height 80 --subdir characters/<slug>` per frame, then one `--pad-set characters/<slug>` so every `walk_*.png` shares the same width (torso centered, extra rows above, feet last opaque row). Do not skip `--pad-set` — unequal widths sway the sprite. Register the frames in `sprites/catalog.json`.
 

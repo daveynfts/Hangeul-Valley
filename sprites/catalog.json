@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260820i",
+  "cacheKey": "art-20260821b",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -4046,6 +4046,522 @@
         "2b-unit-10"
       ],
       "notes": "Desk-quiz illustration. 16-bit framed still life. HTML overlay, not Phaser."
+    },
+    {
+      "id": "ui.trophy.bronze_apple",
+      "nameEn": "Bronze apple plaque",
+      "kind": "ui",
+      "family": "trophy-icons",
+      "role": "bronze_apple",
+      "path": "ui/trophy_bronze_apple.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.trophy.bronze_apple",
+      "usedBy": [
+        "Trophies"
+      ],
+      "notes": "16-bit oak plaque trophy. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "ui.trophy.silver_spade",
+      "nameEn": "Silver spade plaque",
+      "kind": "ui",
+      "family": "trophy-icons",
+      "role": "silver_spade",
+      "path": "ui/trophy_silver_spade.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.trophy.bronze_apple",
+      "usedBy": [
+        "Trophies"
+      ],
+      "notes": "16-bit oak plaque trophy. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "ui.trophy.gold_tractor",
+      "nameEn": "Gold tractor plaque",
+      "kind": "ui",
+      "family": "trophy-icons",
+      "role": "gold_tractor",
+      "path": "ui/trophy_gold_tractor.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.trophy.bronze_apple",
+      "usedBy": [
+        "Trophies"
+      ],
+      "notes": "16-bit oak plaque trophy. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "ui.trophy.diamond_crown",
+      "nameEn": "Jeweled crown plaque",
+      "kind": "ui",
+      "family": "trophy-icons",
+      "role": "diamond_crown",
+      "path": "ui/trophy_diamond_crown.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.trophy.bronze_apple",
+      "usedBy": [
+        "Trophies"
+      ],
+      "notes": "16-bit oak plaque trophy. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "ui.trophy.legend_crown",
+      "nameEn": "Legend crown plaque",
+      "kind": "ui",
+      "family": "trophy-icons",
+      "role": "master_scholar",
+      "path": "ui/trophy_legend_crown.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.trophy.bronze_apple",
+      "usedBy": [
+        "Trophies"
+      ],
+      "notes": "16-bit oak plaque trophy. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "ui.trophy.master_chef",
+      "nameEn": "Chef pot plaque",
+      "kind": "ui",
+      "family": "trophy-icons",
+      "role": "master_chef",
+      "path": "ui/trophy_master_chef.png",
+      "status": "shipped",
+      "heightClass": "ui",
+      "parentId": "ui.trophy.bronze_apple",
+      "usedBy": [
+        "Trophies"
+      ],
+      "notes": "16-bit oak plaque trophy. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "food.kimchi_jar",
+      "nameEn": "Kimchi",
+      "kind": "food",
+      "family": "stew",
+      "role": "kimchi_jar",
+      "path": "foods/kimchi_jar.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "food.bulgogi_plate",
+      "nameEn": "Bulgogi",
+      "kind": "food",
+      "family": "meat",
+      "role": "bulgogi_plate",
+      "path": "foods/bulgogi_plate.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "food.tteokbokki_bowl",
+      "nameEn": "Tteokbokki",
+      "kind": "food",
+      "family": "rice",
+      "role": "tteokbokki_bowl",
+      "path": "foods/tteokbokki_bowl.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "food.haemul_pajeon",
+      "nameEn": "Seafood pajeon",
+      "kind": "food",
+      "family": "meat",
+      "role": "haemul_pajeon",
+      "path": "foods/haemul_pajeon.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "food.japchae_bowl",
+      "nameEn": "Japchae",
+      "kind": "food",
+      "family": "noodle",
+      "role": "japchae_bowl",
+      "path": "foods/japchae_bowl.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "food.gimbap_roll",
+      "nameEn": "Gimbap",
+      "kind": "food",
+      "family": "rice",
+      "role": "gimbap_roll",
+      "path": "foods/gimbap_roll.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "item.corn_cob",
+      "nameEn": "Corn",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "corn_cob",
+      "path": "items/corn_cob.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.corn_cob",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "item.garden_strawberry",
+      "nameEn": "Strawberry",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "garden_strawberry",
+      "path": "items/garden_strawberry.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.corn_cob",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "item.farm_apple",
+      "nameEn": "Apple",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "farm_apple",
+      "path": "items/farm_apple.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.corn_cob",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "item.honey_jar",
+      "nameEn": "Honey",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "honey_jar",
+      "path": "items/honey_jar.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.corn_cob",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "food.river_salmon",
+      "nameEn": "Salmon",
+      "kind": "food",
+      "family": "meat",
+      "role": "river_salmon",
+      "path": "foods/river_salmon.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "food.cooked_shrimp",
+      "nameEn": "Shrimp",
+      "kind": "food",
+      "family": "meat",
+      "role": "cooked_shrimp",
+      "path": "foods/cooked_shrimp.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe book. Magenta-keyed. HTML overlay."
+    },
+    {
+      "id": "food.roasted_corn",
+      "nameEn": "Roasted corn",
+      "kind": "food",
+      "family": "rice",
+      "role": "roasted_corn",
+      "path": "foods/roasted_corn.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "옥수수구이"
+    },
+    {
+      "id": "food.radish_rice",
+      "nameEn": "Radish rice",
+      "kind": "food",
+      "family": "rice",
+      "role": "radish_rice",
+      "path": "foods/radish_rice.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "무밥"
+    },
+    {
+      "id": "food.strawberry_jam",
+      "nameEn": "Strawberry jam",
+      "kind": "food",
+      "family": "stew",
+      "role": "strawberry_jam",
+      "path": "foods/strawberry_jam.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "딸기잼"
+    },
+    {
+      "id": "food.potato_pancake",
+      "nameEn": "Potato pancake",
+      "kind": "food",
+      "family": "meat",
+      "role": "potato_pancake",
+      "path": "foods/potato_pancake.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "감자전"
+    },
+    {
+      "id": "food.royal_samgyetang",
+      "nameEn": "Royal ginseng chicken soup",
+      "kind": "food",
+      "family": "stew",
+      "role": "royal_samgyetang",
+      "path": "foods/royal_samgyetang.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "궁중 삼계탕"
+    },
+    {
+      "id": "food.honey_yakgwa",
+      "nameEn": "Honey yakgwa",
+      "kind": "food",
+      "family": "rice",
+      "role": "honey_yakgwa",
+      "path": "foods/honey_yakgwa.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "꿀약과"
+    },
+    {
+      "id": "food.honey_tea",
+      "nameEn": "Honey tea",
+      "kind": "food",
+      "family": "drink",
+      "role": "honey_tea",
+      "path": "foods/honey_tea.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "꿀차"
+    },
+    {
+      "id": "food.mackerel",
+      "nameEn": "Mackerel",
+      "kind": "food",
+      "family": "meat",
+      "role": "mackerel",
+      "path": "foods/mackerel.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "고등어"
+    },
+    {
+      "id": "food.pond_carp",
+      "nameEn": "Carp",
+      "kind": "food",
+      "family": "meat",
+      "role": "pond_carp",
+      "path": "foods/pond_carp.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "잉어"
+    },
+    {
+      "id": "food.golden_fish",
+      "nameEn": "Golden fish",
+      "kind": "food",
+      "family": "meat",
+      "role": "golden_fish",
+      "path": "foods/golden_fish.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "황금물고기"
+    },
+    {
+      "id": "food.squid",
+      "nameEn": "Squid",
+      "kind": "food",
+      "family": "meat",
+      "role": "squid",
+      "path": "foods/squid.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "오징어"
+    },
+    {
+      "id": "food.octopus",
+      "nameEn": "Octopus",
+      "kind": "food",
+      "family": "meat",
+      "role": "octopus",
+      "path": "foods/octopus.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "문어"
+    },
+    {
+      "id": "food.clam",
+      "nameEn": "Clam",
+      "kind": "food",
+      "family": "meat",
+      "role": "clam",
+      "path": "foods/clam.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kimchi_jar",
+      "usedBy": [
+        "Inventory",
+        "RecipeBook",
+        "Cooking"
+      ],
+      "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
+      "wordKo": "조개"
     }
   ]
 }

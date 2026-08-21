@@ -21,6 +21,7 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const { GAME_SCRIPTS, readGameSource } = require('./gameSource');
+const { auditArt } = require('./art_library');
 const { STATIC_FILES } = require('./r2Content');
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
 
@@ -498,6 +499,18 @@ function pngSize(rel) {
   const onDisk = listPng(path.join(ROOT, 'sprites'));
   const orphans = onDisk.filter((p) => !catalogPaths.has(p));
   check('every PNG is in the art catalog', orphans.length === 0, orphans.slice(0, 8).join(', '));
+  const artLib = auditArt(ROOT);
+  check('art library disk count equals catalog', artLib.disk === artLib.catalog,
+    artLib.disk + ' png vs ' + artLib.catalog + ' rows');
+  check('art library has no unnamed rows', artLib.unnamed.length === 0, artLib.unnamed.slice(0, 8).join(', '));
+  check('art library paths use taxonomy folders', artLib.badFolder.length === 0,
+    artLib.badFolder.slice(0, 8).join(', '));
+  check('art library filenames are snake_case', artLib.badSlug.length === 0,
+    artLib.badSlug.slice(0, 8).join(', '));
+  check('art library ids start with folder kind', artLib.badId.length === 0,
+    artLib.badId.slice(0, 8).join(', '));
+  check('art library has no duplicate ids', artLib.duplicateId.length === 0,
+    artLib.duplicateId.slice(0, 8).join(', '));
   check('shipped source has the valley-farmer folder', gameJs.indexOf('characters/valley-farmer') >= 0);
   const hud = (pack.assets || []).filter((a) => a && a.kind === 'ui' && a.family === 'hud-icons' && a.status === 'shipped');
   check('HUD icon family has 19 shipped glyphs', hud.length === 19, String(hud.length));
@@ -660,6 +673,9 @@ function pngSize(rel) {
   check('cooking detail prefers vocabIconHtml', overlays.indexOf('vocabIconHtml(recipe.nameKo') >= 0);
   check('cooking pantry prefers vocabIconHtml', overlays.indexOf('vocabIconHtml(info.nameKo') >= 0);
   check('inventory prefers vocabIconHtml', ui.indexOf('vocabIconHtml') >= 0);
+  check('inventory empty slots use crate art', ui.indexOf('crateIconHtml') >= 0);
+  check('trophy cards use trophyIconHtml', overlays.indexOf('trophyIconHtml(t.id') >= 0);
+  check('recipe book pantry uses vocab chips', overlays.indexOf('recipe-pantry-chip') >= 0);
   check('farm loads cooking HD via vocabArtLoadEntries', farm.indexOf('vocabArtLoadEntries') >= 0);
 
   const recStart = overlays.indexOf('var UNIT10_COOKING_RECIPES =');
@@ -680,6 +696,27 @@ function pngSize(rel) {
   check('every Unit 10 cooking ingredient/dish has wired HD icon', unwired.length === 0, unwired.slice(0, 12).join(', '));
   check('Unit 10 cooking has dishes and ingredients', dishKos.length >= 12 && ings.length >= 14,
     `dishes ${dishKos.length} ings ${ings.length}`);
+
+  const vocabArt = read(path.join('js', 'vocabArt.js'));
+  const farmStart = overlays.indexOf('var COOKING_RECIPES =');
+  const farmEnd = overlays.indexOf('];', farmStart);
+  const farmBlock = farmStart >= 0 ? overlays.slice(farmStart, farmEnd) : '';
+  const farmKos = [...farmBlock.matchAll(/nameKo: '([^']+)'/g)].map((m) => m[1]);
+  const farmMissing = farmKos.filter((ko) => {
+    const hit = vocabArt.indexOf("ko: '" + ko + "'") >= 0;
+    return !hit;
+  });
+  check('every farm cooking dish has a vocabArt row', farmMissing.length === 0, farmMissing.join(', '));
+
+  const fishSrc = read(path.join('js', 'data.js'));
+  const fishKos = [...fishSrc.matchAll(/ko:'([^']+)'/g)].map((m) => m[1]);
+  const slugOf = (ko) => {
+    const m = vocabArt.match(new RegExp("ko: '" + ko.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + "', slug: '([^']+)'"));
+    return m ? m[1] : '';
+  };
+  const fishSlugs = fishKos.map(slugOf);
+  check('every fish has a vocabArt slug', fishSlugs.every(Boolean), fishKos.filter((_, i) => !fishSlugs[i]).join(', '));
+  check('fish vocab slugs are unique', new Set(fishSlugs).size === fishSlugs.length, fishSlugs.join(', '));
 }());
 
 STATIC_FILES.forEach(([rel]) => {
