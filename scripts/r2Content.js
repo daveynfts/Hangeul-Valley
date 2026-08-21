@@ -271,8 +271,13 @@ async function triggerVercelDeploy(hookUrl) {
     }
     return { status: res.status, via: 'hook', body: text.slice(0, 240) };
   }
+  if (env('VERCEL_TOKEN')) {
+    console.log('No VERCEL_DEPLOY_HOOK_URL; deploying with Vercel CLI');
+    return triggerVercelCli();
+  }
   if (process.env.GITHUB_ACTIONS) {
-    throw new Error('VERCEL_DEPLOY_HOOK_URL is required in CI; the Vercel CLI fallback cannot authenticate.');
+    console.log('No Vercel hook or token; skipping deploy (Git still ships JS). R2 content is live.');
+    return { status: 0, via: 'skipped-ci' };
   }
   console.log('No VERCEL_DEPLOY_HOOK_URL; deploying with Vercel CLI');
   return triggerVercelCli();
