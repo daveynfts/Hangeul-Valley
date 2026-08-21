@@ -1,0 +1,93 @@
+'use strict';
+/**
+ * tests/test_world_packs.js — per-unit maps as world packs.
+ * Drives the shipped WORLD_PACKS / currentWorldPack / artLoadForWorldPack
+ * functions from js/systems/economy.js and checks FarmScene applyWorld wiring.
+ *
+ * Run: node tests/test_world_packs.js
+ */
+
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
+
+const ROOT = path.join(__dirname, '..');
+const econ = fs.readFileSync(path.join(ROOT, 'js', 'systems', 'economy.js'), 'utf8');
+const farm = fs.readFileSync(path.join(ROOT, 'js', 'scenes', 'farm.js'), 'utf8');
+const unit10 = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-10.json'), 'utf8'));
+const unit14 = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-14.json'), 'utf8'));
+
+let passed = 0;
+let failed = 0;
+function assert(cond, msg) {
+  if (cond) { console.log('  [PASS] ' + msg); passed++; }
+  else { console.error('  [FAIL] ' + msg); failed++; }
+}
+
+const start = econ.indexOf('const VALLEY_EXTRA_IDS');
+const end = econ.indexOf('const TEXTBOOK_WORLD_FILES');
+assert(start >= 0 && end > start, 'world pack helpers are in economy.js');
+
+const ctx = {
+  console,
+  levelsData: [
+    { nameEn: 'Daily Life' },
+    { worldId: '2b-unit-10', map: unit10.level.map },
+    { worldId: '2b-unit-14', map: unit14.level.map }
+  ],
+  currentLevelIndex: 0
+};
+ctx.currentLesson = function () { return ctx.levelsData[ctx.currentLevelIndex] || null; };
+vm.createContext(ctx);
+vm.runInContext(econ.slice(start, end), ctx);
+const R = (expr) => vm.runInContext(expr, ctx);
+
+assert(R('WORLD_PACKS.valley.extras').indexOf('shop') >= 0, 'valley pack includes shop');
+assert(R('WORLD_PACKS.valley.extras').indexOf('fishing') >= 0, 'valley pack includes fishing pond');
+assert(R('WORLD_PACKS.valley.stations').length === 0, 'valley pack has no textbook stations');
+assert(R("WORLD_PACKS['2b-unit-10'].stations").join(',') === 'desk,kitchen,taste',
+  'unit 10 pack is desk+kitchen+taste');
+assert(R("WORLD_PACKS['2b-unit-10'].extras").length === 0, 'unit 10 pack has no valley extras');
+assert(R("WORLD_PACKS['2b-unit-14'].stations").join(',') === 'desk',
+  'unit 14 pack is desk only');
+assert(R("WORLD_PACKS['2b-unit-14'].stations").indexOf('kitchen') < 0,
+  'unit 14 pack has no kitchen');
+
+ctx.currentLevelIndex = 0;
+assert(R('currentWorldPack().id') === 'valley', 'plain levels resolve to valley');
+ctx.currentLevelIndex = 1;
+assert(R('currentWorldPack().id') === '2b-unit-10', 'unit 10 lesson resolves to unit 10 pack');
+assert(R("worldPackHas(null, 'station', 'kitchen')") === true, 'unit 10 has kitchen');
+assert(R("worldPackHas(null, 'extra', 'shop')") === false, 'unit 10 has no shop extra');
+ctx.currentLevelIndex = 2;
+assert(R('currentWorldPack().id') === '2b-unit-14', 'unit 14 lesson resolves to unit 14 pack');
+assert(R("worldPackHas(null, 'station', 'desk')") === true, 'unit 14 has desk');
+assert(R("worldPackHas(null, 'station', 'taste')") === false, 'unit 14 has no taste stall');
+
+const u10art = R("artLoadForWorldPack('2b-unit-10')");
+assert(u10art.some(a => a.key === 'unit10_kitchen_hd'), 'unit 10 art loads kitchen');
+assert(u10art.some(a => a.key === 'study_desk_hd'), 'unit 10 art loads desk');
+const u14art = R("artLoadForWorldPack('2b-unit-14')");
+assert(u14art.some(a => a.key === 'study_desk_hd'), 'unit 14 art loads desk');
+assert(!u14art.some(a => a.key === 'unit10_kitchen_hd'), 'unit 14 does not load kitchen art');
+assert(R("artLoadForWorldPack('valley')").length === 0, 'valley boot does not pull unit station art');
+
+assert(JSON.stringify(unit10.level.map.stations) === JSON.stringify(['desk', 'kitchen', 'taste']),
+  'unit 10 JSON map matches the runtime pack');
+assert(JSON.stringify(unit14.level.map.stations) === JSON.stringify(['desk']),
+  'unit 14 JSON map matches the runtime pack');
+
+assert(farm.indexOf('applyWorld') >= 0, 'FarmScene has applyWorld');
+assert(farm.indexOf('_teardownExtra') >= 0, 'FarmScene tears extras down');
+assert(farm.indexOf('_ensureExtra') >= 0, 'FarmScene spawns extras from the pack');
+assert(/if \(this\._hasStudyDesk\(\)\) this\._ensureStudyDesk\(\)/.test(farm),
+  'desk still spawns through _hasStudyDesk');
+assert(!/this\._createShopNPC\(W, H\);\s*this\._createBoardNPC/.test(farm),
+  'create() no longer always spawns every valley extra');
+assert(!/syncUnit10World\(\)\{[\s\S]{0,500}_setMinigameSpritesVisible/.test(farm),
+  'switching units does not hide leftover sprites');
+assert(farm.indexOf('artLoadForWorldPack') >= 0, 'farm lazy-loads pack art');
+
+console.log('\n' + passed + ' passed, ' + failed + ' failed');
+if (failed) process.exit(1);
+console.log('\ntest_world_packs: all passed');

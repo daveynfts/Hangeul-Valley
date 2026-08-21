@@ -95,7 +95,7 @@ class FishingScene extends Phaser.Scene {
     // UI Header Frame
     const infoBg = this.add.rectangle(this.W/2, 60, 520, 50, 0x0F172A, 0.9)
       .setStrokeStyle(3, 0x38BDF8).setOrigin(0.5);
-    this.infoTxt = this.add.text(this.W/2, 60, '🎣 CLICK OR PRESS SPACE TO CAST LINE!', {
+    this.infoTxt = this.add.text(this.W/2, 60, '🎣 CLICK TO CAST LINE!', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'13px', color:'#FDE047', align:'center'
     }).setOrigin(0.5);
 
@@ -138,7 +138,7 @@ class FishingScene extends Phaser.Scene {
       .setOrigin(0.5, 1).setVisible(false);
 
     // Dynamic "HOLD SPACE" helper label next to tension bar
-    this.holdTip = this.add.text(this.barX - 110, this.barY, 'HOLD SPACE\nTO REEL!', {
+    this.holdTip = this.add.text(this.barX - 110, this.barY, 'HOLD CLICK\nTO REEL!', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'10px', color:'#4ADE80', align:'center', stroke:'#000', strokeThickness:3
     }).setOrigin(0.5).setVisible(false);
 
@@ -177,7 +177,7 @@ class FishingScene extends Phaser.Scene {
   triggerBite(){
     playChiptuneSFX('fishing_pull');
     this.state = 'REELING';
-    this.infoTxt.setText('❗ BITE! Hold SPACE to keep fish in Green Zone!');
+    this.infoTxt.setText('❗ BITE! Hold click to keep fish in Green Zone!');
 
     if (this.splashEmitter && this.bobber) {
       try { this.splashEmitter.explode(12, this.bobber.x, this.bobber.y); } catch(e) {}
@@ -263,7 +263,7 @@ class FishingScene extends Phaser.Scene {
     } else {
       this.catchProgress = Math.max(0.0, this.catchProgress - 0.0015); // Very forgiving penalty!
       this.catchZone.setFillStyle(0xEF4444, 0.85);
-      this.holdTip.setText('⚠️ HOLD SPACE!').setColor('#EF4444');
+      this.holdTip.setText('⚠️ HOLD CLICK!').setColor('#EF4444');
     }
 
     // Update Progress Bar
@@ -343,7 +343,7 @@ class FishingScene extends Phaser.Scene {
     if(this.bobber) this.bobber.destroy();
 
     this.state = 'CASTING';
-    this.infoTxt.setText('🎣 Caught! Press SPACE / Click to Cast Again!');
+    this.infoTxt.setText('🎣 Caught! Click to Cast Again!');
   }
 
 
@@ -352,7 +352,7 @@ class FishingScene extends Phaser.Scene {
     this.hideTensionBar();
     if(this.bobber) this.bobber.destroy();
     showToast('💨 The fish got away! Try again.');
-    this.infoTxt.setText('🎣 Click or Press SPACE to Cast Line Again!');
+    this.infoTxt.setText('🎣 Click to Cast Line Again!');
   }
 
   hideTensionBar(){

@@ -112,7 +112,7 @@ class DungeonScene extends Phaser.Scene {
     this.input.keyboard.on('keydown-ESC', () => this.exitDungeon());
 
     // Title Toast
-    const title = this.add.text(this.W/2, this.H/2 - 60, '⚔️ ANCIENT DUNGEON\nWASD to Move | SPACE / Click to Slash!', {
+    const title = this.add.text(this.W/2, this.H/2 - 60, '⚔️ ANCIENT DUNGEON\nWASD to Move | Click to Slash!', {
       fontFamily:'"Press Start 2P",monospace', fontSize:'18px', color:'#EC4899', align:'center', lineHeight:1.5, stroke:'#000', strokeThickness:4
     }).setOrigin(0.5).setDepth(100);
     this.tweens.add({ targets:title, alpha:0, delay:2500, duration:1000, onComplete:()=>title.destroy() });

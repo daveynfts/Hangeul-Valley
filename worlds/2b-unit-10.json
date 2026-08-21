@@ -16,6 +16,7 @@
     "world": true,
     "pack": "snu-2b",
     "worldId": "2b-unit-10",
+    "map": { "extras": [], "stations": ["desk", "kitchen", "taste"] },
     "target": 9,
     "words": [
       { "ko": "김치찌개", "en": "kimchi stew", "hint": "🍲", "category": "음식", "categoryEn": "Food" },

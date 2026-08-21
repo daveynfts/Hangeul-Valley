@@ -59,10 +59,10 @@ copy shows a Read-only badge and hides those buttons.
 
 ## Controls
 
-| Key | Action |
+| Control | Action |
 |---|---|
 | `WASD` / arrows | Move |
-| `Space` / `E` | Interact — plant, water, harvest, talk to an NPC |
+| Click a nearby object | Interact — plant, water, harvest, talk |
 | `I` / `E` | Inventory |
 | `C` | Cooking |
 | `Esc` | Close the top modal |
@@ -79,7 +79,14 @@ The stick is analog: a half push walks at half speed. It feeds `touchAxis`, whic
 knowledge of which device the player used. Normalization happens only past unit length —
 keyboard diagonals are √2 and still get scaled back exactly as before, while a partly pushed
 stick keeps its magnitude. The interact button routes through `triggerInteract()`, which
-applies the same guards as the SPACE handler from one place so the two cannot drift apart.
+uses the same nearest-in-range catalog as keyboard Space so the two cannot drift apart.
+Farm clicks go through `pointerWorldPlan()` in `js/systems/pointer.js`: hover highlight
+and click-to-interact (only when the farmer is in range). Movement stays on WASD / the
+stick — clicking empty ground does not walk.
+
+Each unit is a world pack (`WORLD_PACKS`): Valley spawns shop/minigames/pond; Unit 10
+spawns desk+kitchen+taste; Unit 14 spawns the desk. Switching units tears the previous
+pack down instead of hiding sprites.
 
 ### On-screen furniture
 

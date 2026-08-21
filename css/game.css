@@ -866,23 +866,31 @@
     #quiz-funfact-text { font-size: 15px; font-weight: 700; line-height: 1.4; }
     #quiz-funfact-culture { font-size: 13px; color: #7a3e12; margin-top: 4px; }
     .recall-tiles {
-      display: flex; justify-content: center; flex-wrap: wrap; gap: 6px;
-      margin: 2px 0 8px;
+      display: flex; justify-content: center; align-items: flex-end;
+      flex-wrap: wrap;
+      column-gap: 0.7em;
+      row-gap: 8px;
+      margin: 4px 0 2px;
+    }
+    .recall-word {
+      display: inline-flex;
+      gap: 3px;
+      flex-wrap: nowrap;
     }
     .recall-tile {
-      width: 26px; height: 30px;
+      width: 28px; height: 28px;
       background: #fffaf0;
       border: 2px solid #8b5a2b;
-      border-radius: 6px;
+      border-radius: 5px;
       box-shadow: inset 0 1px 0 #fff;
       position: relative;
+      flex-shrink: 0;
     }
     .recall-tile.batchim::after {
       content: '';
       position: absolute; left: 5px; right: 5px; bottom: 4px;
       height: 5px; background: #c4893a; border-radius: 1px;
     }
-    .recall-caption { font-size: 13px; font-weight: 700; color: #5b3412; }
     #hint-emoji { font-size: 68px; line-height: 1; display: block; margin-bottom: 4px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.25)); }
     #hint-emoji .vocab-art-icon, #hint-emoji img {
       width: 72px; height: 72px; object-fit: contain;

@@ -12,6 +12,7 @@
   "js/ui.js",
   "js/systems/atmosphere.js",
   "js/skins.js",
+  "js/systems/pointer.js",
   "js/scenes/farm.js",
   "js/scenes/arcade.js",
   "js/scenes/dungeon.js",
