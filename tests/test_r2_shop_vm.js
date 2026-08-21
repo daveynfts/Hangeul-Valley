@@ -41,6 +41,14 @@ class MockElement {
       add: (...cs) => cs.forEach(c => classes.add(c)),
       remove: (...cs) => cs.forEach(c => classes.delete(c)),
       contains: (c) => classes.has(c),
+      // Real DOM semantics: with `force` given this is a plain set/clear, and the
+      // return value is whether the class is present afterwards. The HUD badge code
+      // calls the two-argument form, which the mock previously did not implement.
+      toggle: (c, force) => {
+        const on = force === undefined ? !classes.has(c) : !!force;
+        if (on) classes.add(c); else classes.delete(c);
+        return on;
+      },
       toString: () => Array.from(classes).join(' ')
     };
   }
@@ -60,6 +68,12 @@ class MockElement {
   addEventListener() {}
   setAttribute(name, value) {
     this.attributes[name] = value;
+  }
+  getAttribute(name) {
+    return Object.prototype.hasOwnProperty.call(this.attributes, name) ? this.attributes[name] : null;
+  }
+  hasAttribute(name) {
+    return Object.prototype.hasOwnProperty.call(this.attributes, name);
   }
   removeAttribute(name) {
     delete this.attributes[name];

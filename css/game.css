@@ -1675,6 +1675,7 @@
     .quest-card-badge.claimed { background: #dcfce7; border-color: #166534; color: #14532d; }
     .quest-card-badge.locked { background: #e8c07a; border-color: #8b5a2b; color: #5b3412; }
     .quest-card-desc { font-size: 13px; color: #5b3412; font-weight: 600; line-height: 1.4; }
+    .quest-card-how { font-size: 12px; color: #7a4a18; font-weight: 600; line-height: 1.35; }
     .quest-progress-labels {
       display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: #5b3412;
     }

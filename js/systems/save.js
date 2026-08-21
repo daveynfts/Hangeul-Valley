@@ -681,15 +681,25 @@ const SAVE_DEBOUNCE_MS = 800;
 let _saveTimer = null;
 let _savePending = false;
 
+// Resolves to a per-destination report so a caller that cares — the Save button — can
+// tell the player the truth instead of a hardcoded tick. localStorage is written first and
+// synchronously, because it is the only leg that reliably lands during page teardown.
 async function flushSave(){
   if(_saveTimer){ clearTimeout(_saveTimer); _saveTimer = null; }
   _savePending = false;
   const data = collectSave();
-  try{ localStorage.setItem('hv_save_v2', JSON.stringify(data)); }catch{}
+  const result = { local: false, file: null, cloud: null };
+
+  try{ localStorage.setItem('hv_save_v2', JSON.stringify(data)); result.local = true; }
+  catch(e){ console.warn('localStorage save failed:', e); }
+
   if(window.pywebview?.api){
-    try{ await window.pywebview.api.save(data); }catch(e){ console.warn('File save failed:',e); }
+    try{ result.file = (await window.pywebview.api.save(data)) !== false; }
+    catch(e){ console.warn('File save failed:',e); result.file = false; }
   }
-  if (typeof pushCloudSave === 'function') pushCloudSave(data);
+
+  if (typeof pushCloudSave === 'function') result.cloud = await pushCloudSave(data);
+  return result;
 }
 
 function persistSave(){
@@ -712,18 +722,49 @@ if(typeof window !== 'undefined' && window.addEventListener){
   }
 }
 
-// Read from file first, then localStorage backup
+// ── Save precedence (pure) ───────────────────────────────────────────────────
+// Read BOTH copies and apply whichever is newer.
+//
+// Preferring the file unconditionally lost the last session's play. flushSave() writes
+// localStorage synchronously and then awaits the pywebview bridge, and pagehide cannot
+// await anything — so closing the window right after a save left localStorage current and
+// the file one write behind. The next launch then loaded the stale file and the newer
+// localStorage copy sat there unread.
+//
+// Comparing timestamps is safe here because both copies come from the same writer: the
+// desktop build runs on its own WebView2 profile (WEBVIEW2_USER_DATA_FOLDER, see main.py),
+// so nothing else can put a competing entry in this localStorage. A tie goes to the file,
+// which is the copy that survives a profile reset.
+function saveStamp(s){
+  return (s && typeof s.updatedAt === 'number') ? s.updatedAt : 0;
+}
+
+// Newest first, ties to the file. Returns [{ src, data }] with the absent copies dropped.
+function orderSaveCandidates(fileSave, localSave){
+  return [
+    { src: 'file', data: fileSave },
+    { src: 'localStorage', data: localSave }
+  ].filter(c => c.data && typeof c.data === 'object')
+   .sort((a, b) => (saveStamp(b.data) - saveStamp(a.data)) || (a.src === 'file' ? -1 : 1));
+}
+// ── Save precedence end ──────────────────────────────────────────────────────
+
 async function loadSave(){
+  let fileSave = null;
   if(window.pywebview?.api){
-    try{
-      const d = await window.pywebview.api.load();
-      if(d && applySave(d)){ console.log('[Save] Loaded from file ✓'); return; }
-    }catch(e){ console.warn('File load failed:',e); }
+    try{ fileSave = await window.pywebview.api.load(); }
+    catch(e){ console.warn('File load failed:',e); }
   }
-  try{
-    const s = localStorage.getItem('hv_save_v2');
-    if(s && applySave(JSON.parse(s))){ console.log('[Save] Loaded from localStorage ✓'); return; }
-  }catch{}
+  const candidates = orderSaveCandidates(fileSave, peekLocalSave());
+
+  for(const c of candidates){
+    if(applySave(c.data)){
+      const other = candidates.find(o => o !== c);
+      const behind = other ? ' (' + other.src + ' was ' + (saveStamp(c.data) - saveStamp(other.data)) + 'ms behind)' : '';
+      console.log('[Save] Loaded from ' + c.src + ' ✓' + behind);
+      return;
+    }
+  }
   console.log('[Save] No save found – fresh start.');
 }
 
@@ -750,6 +791,9 @@ function setGoogleSession(token, user) {
   renderAuthUI();
 }
 
+// A hung request must not wedge the Save button, which now awaits this.
+const CLOUD_TIMEOUT_MS = 15000;
+
 async function cloudSaveRequest(method, body) {
   const token = getGoogleToken();
   if (!token) return { status: 401, json: null };
@@ -758,21 +802,77 @@ async function cloudSaveRequest(method, body) {
     headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }
   };
   if (body) opts.body = JSON.stringify(body);
-  const r = await fetch('/api/save', opts);
-  let json = null;
-  try { json = await r.json(); } catch {}
-  return { status: r.status, json };
+  let timer = null;
+  if (typeof AbortController === 'function') {
+    const ac = new AbortController();
+    opts.signal = ac.signal;
+    timer = setTimeout(() => ac.abort(), CLOUD_TIMEOUT_MS);
+  }
+  try {
+    const r = await fetch('/api/save', opts);
+    let json = null;
+    try { json = await r.json(); } catch {}
+    return { status: r.status, json };
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
 }
 
+// ── Cloud writes, serialized ─────────────────────────────────────────────────
+// Every PUT carries the whole game state, so two of them in flight at once is a
+// last-writer-wins race decided by network jitter: the earlier request could land after
+// the later one and roll progress back. Requests now run one at a time on a chain, and
+// while one is in flight the queued payloads collapse to the newest — sending an
+// intermediate snapshot after a fresher one exists has no value.
+let _cloudChain = Promise.resolve({ ok: true, skipped: true });
+let _cloudPending = null;
+let _cloudLastError = '';
+
 function pushCloudSave(data) {
-  if (!getGoogleToken()) return;
-  cloudSaveRequest('PUT', data).then(({ status }) => {
-    if (status === 401) {
-      setGoogleSession('', null);
-      if (typeof showToast === 'function') showToast('Sign in again to keep cloud save.');
+  if (!getGoogleToken()) return { ok: true, skipped: true, reason: 'signed-out' };
+  _cloudPending = data;
+  _cloudChain = _cloudChain.then(async () => {
+    const payload = _cloudPending;
+    // A later push already superseded this slot, or the newest payload went out ahead
+    // of it. Either way there is nothing left to send.
+    if (!payload) return { ok: true, skipped: true, reason: 'superseded' };
+    _cloudPending = null;
+    try {
+      const { status } = await cloudSaveRequest('PUT', payload);
+      if (status === 401) {
+        setGoogleSession('', null);
+        if (typeof showToast === 'function') showToast('Sign in again to keep cloud save.');
+        return { ok: false, status, reason: 'signed-out' };
+      }
+      if (status === 409) {
+        // The server is holding a newer save than the one being pushed — another device
+        // got there first. Do not overwrite it, and do not yank the current session out
+        // from under the player either; syncCloudSave() reconciles on the next load.
+        _cloudLastError = 'cloud has newer progress';
+        if (typeof showToast === 'function') {
+          showToast('☁ Another device has newer progress — not overwriting it.', 4200);
+        }
+        return { ok: false, status, reason: _cloudLastError };
+      }
+      if (status !== 200) {
+        _cloudLastError = 'HTTP ' + status;
+        console.warn('Cloud save rejected:', status);
+        return { ok: false, status, reason: _cloudLastError };
+      }
+      _cloudLastError = '';
+      return { ok: true, status };
+    } catch (e) {
+      // Swallowing this was how a week of offline play could look like it was syncing.
+      _cloudLastError = (e && e.name === 'AbortError') ? 'timed out' : 'network error';
+      console.warn('Cloud save failed:', _cloudLastError, e);
+      return { ok: false, reason: _cloudLastError };
     }
-  }).catch(() => {});
+  });
+  return _cloudChain;
 }
+
+function cloudSaveLastError() { return _cloudLastError; }
+// ── Cloud writes end ─────────────────────────────────────────────────────────
 
 async function syncCloudSave() {
   if (!getGoogleToken()) return;
@@ -797,11 +897,10 @@ async function syncCloudSave() {
     }
     return;
   }
-  if (local) await cloudSaveRequest('PUT', local);
-  else if (!remote) {
-    const fresh = collectSave();
-    await cloudSaveRequest('PUT', fresh);
-  }
+  // Through pushCloudSave, not cloudSaveRequest directly, so this upload takes its turn
+  // on the same chain as gameplay saves instead of racing them.
+  if (local) await pushCloudSave(local);
+  else if (!remote) await pushCloudSave(collectSave());
 }
 
 function escapeAuthText(s) {
@@ -911,8 +1010,30 @@ async function initGoogleAuth() {
     return true;
   };
   if (boot()) return;
+  loadGoogleIdentityScript();
   let n = 0;
   const t = setInterval(() => { if (boot() || ++n > 40) clearInterval(t); }, 250);
+}
+
+// Google Identity Services, injected on demand rather than from a <script> tag in
+// index.html. A build with no client id configured — every desktop build, unless
+// GOOGLE_CLIENT_ID is set — then loads no third-party script at all, which is both one
+// less script running in the game's origin and one less thing to fail when offline.
+let _gisRequested = false;
+function loadGoogleIdentityScript() {
+  if (_gisRequested || typeof document === 'undefined') return;
+  _gisRequested = true;
+  const s = document.createElement('script');
+  s.src = 'https://accounts.google.com/gsi/client';
+  s.async = true;
+  s.defer = true;
+  s.onerror = () => {
+    // Offline, or the domain is blocked. Cloud save is simply unavailable; local play
+    // is unaffected, so say nothing louder than a warning.
+    console.warn('Google Sign-In unavailable — playing with local save only.');
+    renderAuthUI();
+  };
+  document.head.appendChild(s);
 }
 
 if (typeof window !== 'undefined') {
@@ -937,6 +1058,20 @@ function peekSrs(ko, mod = PRIMARY_MODALITY){
 // The word's headline state. Defaults to production because that is what every existing
 // caller — gates, mastery, badges, the plot cycle — already meant by "this word's progress".
 function getSrs(ko){ return peekSrs(ko) || srsNewEntry(); }
+
+// How many words are mature, for the quest board, Story Act 6 and the leaderboard.
+//
+// The obvious spelling — Object.values(srsData).filter(srsIsMature) — is wrong under the
+// per-modality schema: the values are `{ m: { type, recognise, listen } }` wrappers, which
+// carry no `st`/`ivl` of their own, so srsIsMature rejected every one and the count was
+// permanently zero. Maturity is a property of the primary modality, so go through peekSrs.
+function srsMatureWordCount(){
+  const all = (typeof srsData !== 'undefined' && srsData) ? srsData : {};
+  if (typeof srsIsMature !== 'function') return 0;
+  let n = 0;
+  Object.keys(all).forEach(ko => { if (srsIsMature(peekSrs(ko))) n++; });
+  return n;
+}
 
 // Creates on demand. Only for the write path.
 function getSrsMod(ko, mod = PRIMARY_MODALITY){

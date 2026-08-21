@@ -406,8 +406,8 @@
       </div>
       <div id="quest-body">
         <div class="quest-tabs" role="tablist">
-          <button type="button" class="quest-tab-btn active" id="qtab-main" role="tab" aria-selected="true" onclick="switchQuestTab('main')">Story <span class="quest-tab-count" id="qtab-main-n" hidden></span></button>
-          <button type="button" class="quest-tab-btn" id="qtab-daily" role="tab" aria-selected="false" onclick="switchQuestTab('daily')">Daily <span class="quest-tab-count" id="qtab-daily-n" hidden></span></button>
+          <button type="button" class="quest-tab-btn" id="qtab-main" role="tab" aria-selected="false" onclick="switchQuestTab('main')">Story <span class="quest-tab-count" id="qtab-main-n" hidden></span></button>
+          <button type="button" class="quest-tab-btn active" id="qtab-daily" role="tab" aria-selected="true" onclick="switchQuestTab('daily')">Daily <span class="quest-tab-count" id="qtab-daily-n" hidden></span></button>
           <button type="button" class="quest-tab-btn" id="qtab-weekly" role="tab" aria-selected="false" onclick="switchQuestTab('weekly')">Weekly <span class="quest-tab-count" id="qtab-weekly-n" hidden></span></button>
         </div>
         <div id="quest-meta"></div>
@@ -718,9 +718,16 @@
     });
   </script>
 
-  <!-- Phaser 3 CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <!--
+    Phaser 3, vendored. See vendor/README.md for provenance and the hashes.
+    Loading it from a CDN meant the desktop build was not offline (farm.js needs
+    Phaser.Scene at evaluation time) and put a third-party script in the game's origin.
+
+    Google Identity Services is deliberately NOT loaded here. initGoogleAuth() injects it
+    on demand, and only once /api/config hands back a client id — so a build without cloud
+    save configured pulls in no third-party script at all.
+  -->
+  <script src="vendor/phaser-3.70.0.min.js"></script>
   <script src="js/state.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/renderer.js"></script>

@@ -12,7 +12,20 @@ const skinsLib = require('./lib/skins');
 
 const app = express();
 
-app.use(cors());
+// This server has no auth and its PUT/POST/DELETE routes rewrite levels.json, the world
+// packs and the skins catalog. `cors()` with no options answered every preflight with
+// `Access-Control-Allow-Origin: *`, so any page the operator happened to have open could
+// drive those writes while the admin panel was running. Only the loopback origins the
+// panel and the game are actually served from are allowed; anything else gets no CORS
+// headers, which leaves the browser to block the response.
+const ALLOWED_ORIGIN = /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/;
+app.use(cors({
+  origin(origin, cb) {
+    // No Origin header at all: curl, same-origin navigations, the panel's own fetches.
+    if (!origin) return cb(null, true);
+    return cb(null, ALLOWED_ORIGIN.test(origin));
+  }
+}));
 app.use(express.json({ limit: '20mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -350,8 +363,13 @@ app.use((err, req, res, next) => {
 // Start Server if executed directly
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`[Hangeul Valley Admin Server] Listening on http://localhost:${PORT}`);
+  // Bind loopback explicitly. Without a host argument Node listens on :: — every
+  // interface — which put an unauthenticated curriculum editor on the local network
+  // for as long as the panel was open. HOST is there for the rare case of running the
+  // panel in a container, where the operator has to opt in deliberately.
+  const HOST = process.env.HOST || '127.0.0.1';
+  app.listen(PORT, HOST, () => {
+    console.log(`[Hangeul Valley Admin Server] Listening on http://${HOST}:${PORT}`);
   });
 }
 

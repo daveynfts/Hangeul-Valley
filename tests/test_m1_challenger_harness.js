@@ -48,10 +48,27 @@ function createMockElement(id, tagName = 'DIV') {
     tagName: tagName.toUpperCase(),
     classList: {
       classes: new Set(['hidden']),
-      add(cls) { this.classes.add(cls); },
-      remove(cls) { this.classes.delete(cls); },
-      contains(cls) { return this.classes.has(cls); }
+      add(...cls) { cls.forEach(c => this.classes.add(c)); },
+      remove(...cls) { cls.forEach(c => this.classes.delete(c)); },
+      contains(cls) { return this.classes.has(cls); },
+      // Real DOM semantics: with `force` given this is a plain set/clear, and the
+      // return value is whether the class is present afterwards. The HUD badge code
+      // calls the two-argument form, which the one-argument-only mock could not serve.
+      toggle(cls, force) {
+        const on = force === undefined ? !this.classes.has(cls) : !!force;
+        if (on) this.classes.add(cls); else this.classes.delete(cls);
+        return on;
+      }
     },
+    // Attribute API. `data-quest-ready` and friends are set and cleared through this,
+    // so a mock without it throws before any assertion gets to run.
+    attributes: {},
+    setAttribute(name, value) { this.attributes[name] = String(value); },
+    getAttribute(name) {
+      return Object.prototype.hasOwnProperty.call(this.attributes, name) ? this.attributes[name] : null;
+    },
+    removeAttribute(name) { delete this.attributes[name]; },
+    hasAttribute(name) { return Object.prototype.hasOwnProperty.call(this.attributes, name); },
     style: {},
     children: [],
     appendChild(child) { this.children.push(child); return child; },

@@ -4,6 +4,7 @@ const testSyncSyntax = require('./test_sync_syntax');
 const testFrontendAssets = require('./test_frontend_assets');
 const testEdgeCases = require('./test_edge_cases');
 const testVercelContract = require('./test_vercel_contract');
+const testCorsOrigin = require('./test_cors_origin');
 
 function padRight(str, len) {
   str = String(str);
@@ -33,7 +34,8 @@ async function runAllSuites() {
     { label: 'Data Sync & Syntax Verification', module: testSyncSyntax },
     { label: 'Frontend Assets & UI Integrity', module: testFrontendAssets },
     { label: 'Edge Cases & Data Integrity', module: testEdgeCases },
-    { label: 'Vercel vs Express GET contract', module: testVercelContract }
+    { label: 'Vercel vs Express GET contract', module: testVercelContract },
+    { label: 'CORS & bind hardening', module: testCorsOrigin }
   ];
 
   const results = [];

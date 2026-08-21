@@ -554,7 +554,7 @@ function cancelBossGate() {
 
 // ═══════════════ R2: QUEST SYSTEM ═════════════════════════════════════════════
 let questOverlayOpen = false;
-let activeQuestTab = 'main';
+let activeQuestTab = 'daily';
 let questMetaTimer = null;
 
 function cookedDishCount() {
@@ -590,32 +590,32 @@ const MAIN_STORYLINE = [
 const DAILY_QUEST_COUNT = 5;
 const WEEKLY_QUEST_COUNT = 3;
 const DAILY_QUEST_POOL = [
-  { id: 'd_harvest', kind: 'harvest', icon: '🌾', title: 'Morning Harvest', desc: 'Harvest 3 ripe crops on your farm.', tag: 'Farm', target: 3, rCoins: 30, rGems: 2, rHonor: 10 },
-  { id: 'd_basket', kind: 'harvest', icon: '🧺', title: 'Full Basket', desc: 'Harvest 6 ripe crops today.', tag: 'Farm', target: 6, rCoins: 55, rGems: 5, rHonor: 22 },
-  { id: 'd_plant', kind: 'plant', icon: '🌱', title: 'New Seeds', desc: 'Plant 2 new words on empty plots.', tag: 'Farm', target: 2, rCoins: 25, rGems: 2, rHonor: 8 },
-  { id: 'd_water', kind: 'water', icon: '💧', title: 'Listen & Water', desc: 'Water 3 growing crops (listening quiz).', tag: 'Farm', target: 3, rCoins: 35, rGems: 3, rHonor: 12 },
-  { id: 'd_quiz', kind: 'quiz', icon: '📖', title: 'Study Session', desc: 'Answer 8 farm quizzes correctly.', tag: 'Study', target: 8, rCoins: 40, rGems: 3, rHonor: 15 },
-  { id: 'd_listen', kind: 'listen', icon: '👂', title: 'Sharp Ears', desc: 'Complete 4 listening quizzes.', tag: 'Study', target: 4, rCoins: 40, rGems: 3, rHonor: 15 },
-  { id: 'd_streak', kind: 'streak', mode: 'max', icon: '🔥', title: 'On a Roll', desc: 'Get 5 correct answers in a row.', tag: 'Study', target: 5, rCoins: 45, rGems: 4, rHonor: 18 },
-  { id: 'd_new', kind: 'newHarvest', icon: '✨', title: 'Fresh Words', desc: 'Harvest 1 word you have never harvested before.', tag: 'Farm', target: 1, rCoins: 50, rGems: 5, rHonor: 20 },
-  { id: 'd_fish', kind: 'fish', icon: '🎣', title: 'Pond Visit', desc: 'Catch 2 fish at Crystal Pond.', tag: 'Valley', target: 2, rCoins: 40, rGems: 3, rHonor: 12 },
-  { id: 'd_kill', kind: 'kill', icon: '⚔️', title: 'Dungeon Patrol', desc: 'Defeat 3 review beasts in the dungeon.', tag: 'Valley', target: 3, rCoins: 45, rGems: 4, rHonor: 15 },
-  { id: 'd_cook', kind: 'cook', icon: '🍳', title: 'Home Cooking', desc: 'Cook 1 Korean dish.', tag: 'Kitchen', target: 1, rCoins: 40, rGems: 4, rHonor: 15 },
-  { id: 'd_memory', kind: 'memory', icon: '🃏', title: 'Match Maker', desc: 'Finish one memory-match game.', tag: 'Valley', target: 1, rCoins: 35, rGems: 3, rHonor: 12 },
-  { id: 'd_arcade', kind: 'arcade', mode: 'max', icon: '🕹️', title: 'Arcade Cadet', desc: 'Score 150 or more in the arcade.', tag: 'Valley', target: 150, rCoins: 50, rGems: 5, rHonor: 18 },
-  { id: 'd_bee', kind: 'bee', icon: '🐝', title: 'Busy Bee', desc: 'Finish one beehive listening round.', tag: 'Valley', target: 1, rCoins: 40, rGems: 3, rHonor: 14 },
-  { id: 'd_desk', kind: 'desk', icon: '📝', title: 'Study Desk', desc: 'Finish one textbook desk quiz.', tag: 'World', target: 1, rCoins: 45, rGems: 4, rHonor: 16 },
-  { id: 'd_taste', kind: 'taste', icon: '😋', title: 'Taste Test', desc: 'Finish the Unit 10 taste minigame.', tag: 'World', target: 1, rCoins: 40, rGems: 4, rHonor: 14 }
+  { id: 'd_harvest', kind: 'harvest', icon: '🌾', title: 'Morning Harvest', desc: 'Harvest 3 ripe crops on your farm.', how: 'Walk to a ripe plot and finish the harvest quiz.', tag: 'Farm', target: 3, rCoins: 30, rGems: 2, rHonor: 10 },
+  { id: 'd_basket', kind: 'harvest', icon: '🧺', title: 'Full Basket', desc: 'Harvest 6 ripe crops today.', how: 'Keep cycling plots — plant, water, then harvest.', tag: 'Farm', target: 6, rCoins: 55, rGems: 5, rHonor: 22 },
+  { id: 'd_plant', kind: 'plant', icon: '🌱', title: 'New Seeds', desc: 'Plant 2 new words on empty plots.', how: 'Use an empty dirt plot and pass the first quiz.', tag: 'Farm', target: 2, rCoins: 25, rGems: 2, rHonor: 8 },
+  { id: 'd_water', kind: 'water', icon: '💧', title: 'Listen & Water', desc: 'Water 3 growing crops (listening quiz).', how: 'Return to a sprout and pass the Water listening quiz.', tag: 'Farm', target: 3, rCoins: 35, rGems: 3, rHonor: 12 },
+  { id: 'd_quiz', kind: 'quiz', icon: '📖', title: 'Study Session', desc: 'Answer 8 farm quizzes correctly.', how: 'Any plant, water, or harvest quiz counts.', tag: 'Study', target: 8, rCoins: 40, rGems: 3, rHonor: 15 },
+  { id: 'd_listen', kind: 'listen', icon: '👂', title: 'Sharp Ears', desc: 'Complete 4 listening quizzes.', how: 'Watering a crop is always a listening quiz.', tag: 'Study', target: 4, rCoins: 40, rGems: 3, rHonor: 15 },
+  { id: 'd_streak', kind: 'streak', mode: 'max', icon: '🔥', title: 'On a Roll', desc: 'Get 5 correct answers in a row.', how: 'A wrong farm quiz resets the streak.', tag: 'Study', target: 5, rCoins: 45, rGems: 4, rHonor: 18 },
+  { id: 'd_new', kind: 'newHarvest', icon: '✨', title: 'Fresh Words', desc: 'Harvest 1 word you have never harvested before.', how: 'Plant a word that is still new in your book.', tag: 'Farm', target: 1, rCoins: 50, rGems: 5, rHonor: 20 },
+  { id: 'd_fish', kind: 'fish', need: 'fishing', icon: '🎣', title: 'Pond Visit', desc: 'Catch 2 fish at Crystal Pond.', how: 'Unlock the dock, then fish at Crystal Pond.', tag: 'Valley', target: 2, rCoins: 40, rGems: 3, rHonor: 12 },
+  { id: 'd_kill', kind: 'kill', need: 'dungeon', icon: '⚔️', title: 'Dungeon Patrol', desc: 'Defeat 3 review beasts in the dungeon.', how: 'Unlock the portal, then clear review minions.', tag: 'Valley', target: 3, rCoins: 45, rGems: 4, rHonor: 15 },
+  { id: 'd_cook', kind: 'cook', icon: '🍳', title: 'Home Cooking', desc: 'Cook 1 Korean dish.', how: 'Open Cooking from the More menu.', tag: 'Kitchen', target: 1, rCoins: 40, rGems: 4, rHonor: 15 },
+  { id: 'd_memory', kind: 'memory', icon: '🃏', title: 'Match Maker', desc: 'Finish one memory-match game.', how: 'Talk to the cat and match every pair.', tag: 'Valley', target: 1, rCoins: 35, rGems: 3, rHonor: 12 },
+  { id: 'd_arcade', kind: 'arcade', need: 'arcade', mode: 'max', icon: '🕹️', title: 'Arcade Cadet', desc: 'Score 150 or more in the arcade.', how: 'Unlock the arcade machine, then play a round.', tag: 'Valley', target: 150, rCoins: 50, rGems: 5, rHonor: 18 },
+  { id: 'd_bee', kind: 'bee', icon: '🐝', title: 'Busy Bee', desc: 'Finish one beehive listening round.', how: 'Tap the beehive on the Valley farm.', tag: 'Valley', target: 1, rCoins: 40, rGems: 3, rHonor: 14 },
+  { id: 'd_desk', kind: 'desk', need: 'desk', icon: '📝', title: 'Study Desk', desc: 'Finish one textbook desk quiz.', how: 'Enter Unit 10 or 14 and use the study desk.', tag: 'World', target: 1, rCoins: 45, rGems: 4, rHonor: 16 },
+  { id: 'd_taste', kind: 'taste', need: 'taste', icon: '😋', title: 'Taste Test', desc: 'Finish the Unit 10 taste minigame.', how: 'Enter Unit 10 and use the taste station.', tag: 'World', target: 1, rCoins: 40, rGems: 4, rHonor: 14 }
 ];
 const WEEKLY_QUEST_POOL = [
-  { id: 'w_mature', kind: 'mature', mode: 'max', icon: '🟣', title: 'Master Scholar', desc: 'Reach 5 mature words (21-day review interval).', tag: 'Study', target: 5, rCoins: 150, rGems: 15, rHonor: 50 },
-  { id: 'w_cook', kind: 'cook', icon: '🍳', title: 'Kitchen Champion', desc: 'Cook 5 Korean dishes this week.', tag: 'Kitchen', target: 5, rCoins: 200, rGems: 20, rHonor: 60 },
-  { id: 'w_fish', kind: 'fish', icon: '🎣', title: 'Master Angler', desc: 'Catch 10 fish in Crystal Pond.', tag: 'Valley', target: 10, rCoins: 180, rGems: 18, rHonor: 55 },
-  { id: 'w_harvest', kind: 'harvest', icon: '🌾', title: 'Week of Harvests', desc: 'Harvest 15 ripe crops this week.', tag: 'Farm', target: 15, rCoins: 160, rGems: 16, rHonor: 50 },
-  { id: 'w_quiz', kind: 'quiz', icon: '📖', title: 'Dedicated Student', desc: 'Answer 25 farm quizzes correctly.', tag: 'Study', target: 25, rCoins: 170, rGems: 16, rHonor: 55 },
-  { id: 'w_kill', kind: 'kill', icon: '⚔️', title: 'Dungeon Veteran', desc: 'Defeat 12 review beasts.', tag: 'Valley', target: 12, rCoins: 180, rGems: 18, rHonor: 55 },
-  { id: 'w_listen', kind: 'listen', icon: '👂', title: 'Ear for Korean', desc: 'Complete 12 listening quizzes.', tag: 'Study', target: 12, rCoins: 170, rGems: 16, rHonor: 52 },
-  { id: 'w_desk', kind: 'desk', icon: '📝', title: 'Textbook Week', desc: 'Finish 3 textbook desk quizzes.', tag: 'World', target: 3, rCoins: 190, rGems: 18, rHonor: 58 }
+  { id: 'w_mature', kind: 'mature', mode: 'max', icon: '🟣', title: 'Master Scholar', desc: 'Reach 5 mature words (21-day review interval).', how: 'Keep reviewing until a word’s interval hits 21 days.', tag: 'Study', target: 5, rCoins: 150, rGems: 15, rHonor: 50 },
+  { id: 'w_cook', kind: 'cook', icon: '🍳', title: 'Kitchen Champion', desc: 'Cook 5 Korean dishes this week.', how: 'Open Cooking from the More menu.', tag: 'Kitchen', target: 5, rCoins: 200, rGems: 20, rHonor: 60 },
+  { id: 'w_fish', kind: 'fish', need: 'fishing', icon: '🎣', title: 'Master Angler', desc: 'Catch 10 fish in Crystal Pond.', how: 'Unlock the dock, then fish at Crystal Pond.', tag: 'Valley', target: 10, rCoins: 180, rGems: 18, rHonor: 55 },
+  { id: 'w_harvest', kind: 'harvest', icon: '🌾', title: 'Week of Harvests', desc: 'Harvest 15 ripe crops this week.', how: 'Any farm harvest counts.', tag: 'Farm', target: 15, rCoins: 160, rGems: 16, rHonor: 50 },
+  { id: 'w_quiz', kind: 'quiz', icon: '📖', title: 'Dedicated Student', desc: 'Answer 25 farm quizzes correctly.', how: 'Plant, water, and harvest quizzes all count.', tag: 'Study', target: 25, rCoins: 170, rGems: 16, rHonor: 55 },
+  { id: 'w_kill', kind: 'kill', need: 'dungeon', icon: '⚔️', title: 'Dungeon Veteran', desc: 'Defeat 12 review beasts.', how: 'Unlock the portal, then clear review minions.', tag: 'Valley', target: 12, rCoins: 180, rGems: 18, rHonor: 55 },
+  { id: 'w_listen', kind: 'listen', icon: '👂', title: 'Ear for Korean', desc: 'Complete 12 listening quizzes.', how: 'Watering a crop is always a listening quiz.', tag: 'Study', target: 12, rCoins: 170, rGems: 16, rHonor: 52 },
+  { id: 'w_desk', kind: 'desk', need: 'desk', icon: '📝', title: 'Textbook Week', desc: 'Finish 3 textbook desk quizzes.', how: 'Enter Unit 10 or 14 and use the study desk.', tag: 'World', target: 3, rCoins: 190, rGems: 18, rHonor: 58 }
 ];
 
 function questLocalDayKey(ms) {
@@ -655,9 +655,11 @@ function instantiateQuest(def) {
     id: def.id,
     kind: def.kind,
     mode: def.mode || 'add',
+    need: def.need || '',
     icon: def.icon || '',
     title: def.title,
     desc: def.desc,
+    how: def.how || '',
     tag: def.tag || '',
     target: def.target,
     current: 0,
@@ -666,6 +668,10 @@ function instantiateQuest(def) {
     rHonor: def.rHonor,
     claimed: false
   };
+}
+function filterQuestPool(pool, flags) {
+  const open = flags || {};
+  return (pool || []).filter(q => !q.need || !!open[q.need]);
 }
 function pickQuestBoard(pool, seedKey, count) {
   const shuffled = questSeededShuffle(pool, seedKey);
@@ -746,23 +752,52 @@ function initQuestState() {
   const dayKey = questLocalDayKey(now);
   const weekKey = questLocalWeekKey(now);
 
-  if (questState.dailyKey !== dayKey || questBoardNeedsRoll(questState.daily, DAILY_QUEST_POOL)) {
+  const flags = currentQuestNeedFlags();
+  // One effective pool per board, used for *both* the validity check and the re-roll.
+  // Validating a saved board against the unfiltered pool was what let a Fishing or Dungeon
+  // quest that predated the zone gate survive: it was still a known id, so the board looked
+  // healthy and nothing re-rolled until the day or week key turned over.
+  const dailyPool = filterQuestPool(DAILY_QUEST_POOL, flags);
+  const weeklyPool = filterQuestPool(WEEKLY_QUEST_POOL, flags);
+  const dailyEffective = dailyPool.length ? dailyPool : DAILY_QUEST_POOL;
+  const weeklyEffective = weeklyPool.length ? weeklyPool : WEEKLY_QUEST_POOL;
+
+  if (questState.dailyKey !== dayKey || questBoardNeedsRoll(questState.daily, dailyEffective)) {
     questState.dailyKey = dayKey;
     questState.lastDailyReset = now;
     questState.quizStreakToday = 0;
-    questState.daily = pickQuestBoard(DAILY_QUEST_POOL, 'daily:' + dayKey, DAILY_QUEST_COUNT);
+    questState.daily = pickQuestBoard(dailyEffective, 'daily:' + dayKey, DAILY_QUEST_COUNT);
   }
 
-  if (questState.weeklyKey !== weekKey || questBoardNeedsRoll(questState.weekly, WEEKLY_QUEST_POOL)) {
+  if (questState.weeklyKey !== weekKey || questBoardNeedsRoll(questState.weekly, weeklyEffective)) {
     questState.weeklyKey = weekKey;
     questState.lastWeeklyReset = now;
-    questState.weekly = pickQuestBoard(WEEKLY_QUEST_POOL, 'weekly:' + weekKey, WEEKLY_QUEST_COUNT);
+    questState.weekly = pickQuestBoard(weeklyEffective, 'weekly:' + weekKey, WEEKLY_QUEST_COUNT);
   }
 
-  const srs = typeof srsData !== 'undefined' && srsData ? srsData : {};
-  const matureFn = typeof srsIsMature === 'function' ? srsIsMature : function () { return false; };
-  const totalMastered = Object.values(srs).filter(matureFn).length;
+  const totalMastered = typeof srsMatureWordCount === 'function' ? srsMatureWordCount() : 0;
   (questState.weekly || []).forEach(function (q) { applyQuestEventTo(q, 'mature', { total: totalMastered }); });
+}
+
+function currentQuestNeedFlags() {
+  const zoneOn = function (key) {
+    if (typeof isZoneUnlocked !== 'function') return false;
+    const chk = isZoneUnlocked(key);
+    return !!(chk && chk.unlocked);
+  };
+  const ownsWorld = function (worldId) {
+    if (!Array.isArray(unlockedLevels) || typeof levelsData === 'undefined' || !levelsData) return false;
+    return unlockedLevels.some(function (i) {
+      return levelsData[i] && levelsData[i].worldId === worldId;
+    });
+  };
+  return {
+    arcade: zoneOn('arcade'),
+    fishing: zoneOn('fishing'),
+    dungeon: zoneOn('dungeon'),
+    desk: ownsWorld('2b-unit-10') || ownsWorld('2b-unit-14'),
+    taste: ownsWorld('2b-unit-10')
+  };
 }
 
 function mainQuestProgress(act) {
@@ -772,10 +807,7 @@ function mainQuestProgress(act) {
   if (act.act === 3) return cookedDishCount();
   if (act.act === 4) return questState.mainProgress.fish || 0;
   if (act.act === 5) return questState.mainProgress.score || 0;
-  if (act.act === 6) {
-    const data = typeof srsData !== 'undefined' && srsData ? srsData : {};
-    return Object.values(data).filter(typeof srsIsMature === 'function' ? srsIsMature : () => false).length;
-  }
+  if (act.act === 6) return typeof srsMatureWordCount === 'function' ? srsMatureWordCount() : 0;
   return 0;
 }
 
@@ -815,8 +847,7 @@ function checkQuestProgress(type, data = {}) {
     readyTitles = readyTitles.concat(applyQuestEventToAll(eventType, data).titles);
   }
 
-  const srs = typeof srsData !== 'undefined' && srsData ? srsData : {};
-  const totalMastered = Object.values(srs).filter(typeof srsIsMature === 'function' ? srsIsMature : () => false).length;
+  const totalMastered = typeof srsMatureWordCount === 'function' ? srsMatureWordCount() : 0;
   applyQuestEventToAll('mature', { total: totalMastered });
 
   persistSave();
@@ -853,9 +884,19 @@ function updateQuestHudBadge() {
   if (more) more.classList.toggle('has-quest-ready', n > 0);
 }
 
+function bindQuestOverlayChrome() {
+  const overlay = document.getElementById('quest-overlay');
+  if (!overlay || overlay.getAttribute('data-quest-bound') === '1') return;
+  overlay.setAttribute('data-quest-bound', '1');
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeQuestOverlay();
+  });
+}
+
 function openQuestOverlay() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
   initQuestState();
+  bindQuestOverlayChrome();
   questOverlayOpen = true;
   if (typeof setModalState === 'function') setModalState('quest-overlay', true);
   else {
@@ -863,6 +904,7 @@ function openQuestOverlay() {
     const el = document.getElementById('quest-overlay');
     if (el) el.classList.add('visible');
   }
+  syncQuestTabButtons();
   renderQuestList();
   if (questMetaTimer) clearInterval(questMetaTimer);
   questMetaTimer = setInterval(() => { if (questOverlayOpen) renderQuestMeta(); }, 30000);
@@ -880,9 +922,7 @@ function closeQuestOverlay() {
   }
 }
 
-function switchQuestTab(tab) {
-  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  activeQuestTab = tab === 'daily' || tab === 'weekly' ? tab : 'main';
+function syncQuestTabButtons() {
   ['main', 'daily', 'weekly'].forEach(t => {
     const btn = document.getElementById('qtab-' + t);
     if (btn) {
@@ -890,6 +930,12 @@ function switchQuestTab(tab) {
       btn.setAttribute('aria-selected', t === activeQuestTab ? 'true' : 'false');
     }
   });
+}
+
+function switchQuestTab(tab) {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  activeQuestTab = tab === 'daily' || tab === 'weekly' ? tab : 'main';
+  syncQuestTabButtons();
   renderQuestList();
 }
 
@@ -1060,6 +1106,8 @@ function renderQuestList() {
     head.appendChild(badgeWrap);
     card.appendChild(head);
     card.appendChild(questEl('div', 'quest-card-desc', q.desc));
+    const how = q.how || ((DAILY_QUEST_POOL.concat(WEEKLY_QUEST_POOL).find(p => p.id === q.id) || {}).how) || '';
+    if (how && !q.claimed) card.appendChild(questEl('div', 'quest-card-how', how));
     const labels = questEl('div', 'quest-progress-labels');
     labels.appendChild(questEl('span', '', 'Progress'));
     labels.appendChild(questEl('span', '', (q.current || 0) + ' / ' + q.target));
@@ -1148,24 +1196,55 @@ const PHASE_CFG = [
   {icon:'🍎', title:'Harvest',    dots:'●●●', reward:'+🪙', btn:'🍎 Harvest'},
 ];
 
-function saveAllGame(){
-  flushSave();   // explicit user action — write through, don't debounce
-  const btn=$('save-btn');
-  if(btn){
-    const inMenu = btn.classList.contains('hud-overflow-item');
+// The button used to report success the instant it was pressed: flushSave() was called
+// without awaiting it, so "Game saved successfully!" appeared even when the file write or
+// the cloud upload went on to fail. It now waits for the real outcome and says which leg
+// failed, because "saved" is the one message a player has to be able to trust.
+async function saveAllGame(){
+  const btn = $('save-btn');
+  const inMenu = btn ? btn.classList.contains('hud-overflow-item') : false;
+  const paint = (icon, label) => {
+    if (!btn) return;
     if (inMenu && typeof hudIconHtml === 'function') {
-      btn.innerHTML = hudIconHtml('save', '✅', 18) + '<span class="hud-overflow-label">Saved</span>';
-      setTimeout(() => {
-        if (typeof paintHudIcons === 'function') paintHudIcons();
-        else btn.innerHTML = hudIconHtml('save', '💾', 18) + '<span class="hud-overflow-label">Save</span>';
-      }, 1800);
+      btn.innerHTML = hudIconHtml('save', icon, 18) + '<span class="hud-overflow-label">' + label + '</span>';
     } else {
-      const prev = btn.textContent;
-      btn.textContent = inMenu ? '✅ Saved' : '✅';
-      setTimeout(() => { btn.textContent = prev; }, 1800);
+      btn.textContent = inMenu ? icon + ' ' + label : icon;
     }
+  };
+  const restore = () => {
+    if (!btn) return;
+    if (inMenu && typeof hudIconHtml === 'function') {
+      if (typeof paintHudIcons === 'function') paintHudIcons();
+      else btn.innerHTML = hudIconHtml('save', '💾', 18) + '<span class="hud-overflow-label">Save</span>';
+    } else {
+      btn.textContent = inMenu ? '💾 Save' : '💾';
+    }
+  };
+
+  paint('⏳', 'Saving');
+  let res;
+  try {
+    res = await flushSave();   // explicit user action — write through, don't debounce
+  } catch (e) {
+    console.warn('Save failed:', e);
+    res = { local: false, file: false, cloud: { ok: false, reason: 'unexpected error' } };
   }
-  showToast('💾 Game saved successfully!', 2200);
+
+  const failed = [];
+  if (!res.local) failed.push('this device');
+  if (res.file === false) failed.push('the save file');
+  if (res.cloud && res.cloud.ok === false && res.cloud.reason !== 'signed-out') {
+    failed.push('the cloud (' + res.cloud.reason + ')');
+  }
+
+  if (failed.length) {
+    paint('⚠', 'Not saved');
+    showToast('⚠ Could not save to ' + failed.join(' or ') + '.', 4200);
+  } else {
+    paint('✅', 'Saved');
+    showToast('💾 Game saved successfully!', 2200);
+  }
+  setTimeout(restore, 1800);
 }
 
 // Run save load once pywebview is ready (or immediately if in browser)

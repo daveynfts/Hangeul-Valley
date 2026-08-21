@@ -460,8 +460,18 @@ serve those files; there is no `assets/` mirror.
 ## Saves
 
 State is written to `localStorage` under `hv_save_v2`, and additionally to
-`save_data.json` via the PyWebView bridge on desktop. Save format is **v8**, with the
+`save_data.json` via the PyWebView bridge on desktop. Save format is **v9**, with the
 migration chain in `migrateSaveData()`.
+
+Both copies are read on load and the newer `updatedAt` wins. Preferring the file
+unconditionally used to lose the last session: `flushSave()` writes `localStorage`
+synchronously and then awaits the PyWebView bridge, and `pagehide` cannot await anything,
+so closing the window right after a save left the file one write behind. The comparison is
+safe because both copies have a single writer — the desktop build runs on its own WebView2
+profile, so nothing else can put a competing entry in that `localStorage`. A tie goes to
+the file, which is the copy that survives a profile reset. On the Python side the file is
+written to a temp file and renamed into place, so an interrupted write cannot leave a
+truncated save behind.
 
 The v4 → v5 step converts the old `{p2At, p3At, harvests}` SRS records into SM-2
 entries. Nobody is reset: harvest count is a usable proxy for how well a word was
@@ -495,6 +505,11 @@ is an explicit table, keyed on the *post-v7* spellings, which is safe because v7
 first. Both steps share `applyKoRenames()`; the tests assert that no v8 target is also a v8 key
 (a single pass would otherwise chain renames in declaration order) and that no v8 target
 collides with a v7 one.
+
+The v8 → v9 step adds the character-skin fields, defaulting `equippedSkinId` to `farmer` and
+making sure `farmer` is in `ownedSkinIds`. It is field-fill only and deliberately does not
+read the live skins catalog, because `test_srs_engine.js` extracts `migrateSaveData()` into a
+VM that has only the rename tables.
 
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
 (currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs,

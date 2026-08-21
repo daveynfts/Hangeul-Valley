@@ -42,6 +42,18 @@ jobs:
       - name: Game suites (SRS, shop, sprites, inventory, cooking)
         run: npm test
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # The desktop wrapper's HTTP surface. main.py once served the whole repo root, which
+      # published .env.local, save_data.json, .git/ and the WebView2 profile on
+      # 127.0.0.1:8742. This suite asserts the allowlist that replaced it, so a future
+      # "just add the folder to SERVE_DIR" cannot quietly reopen it. pywebview is stubbed,
+      # so no GUI toolkit is needed.
+      - name: Desktop wrapper (web root allowlist, atomic save)
+        run: npm run test:desktop
+
   admin:
     runs-on: ubuntu-latest
     timeout-minutes: 10

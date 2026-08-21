@@ -121,6 +121,55 @@ const keepBoard = R(`(function () {
 })()`);
 assert(keepBoard, 'fresh boards are kept');
 
+const filtered = R(`(function () {
+  const open = filterQuestPool(DAILY_QUEST_POOL, { arcade: true, fishing: false, dungeon: false, desk: false, taste: false });
+  return open.every(q => q.need !== 'fishing' && q.need !== 'dungeon' && q.need !== 'desk' && q.need !== 'taste')
+    && open.some(q => q.id === 'd_arcade')
+    && open.some(q => !q.need);
+})()`);
+assert(filtered, 'locked zones are dropped from the daily pool');
+
+const boardFromFilter = R(`(function () {
+  const pool = filterQuestPool(DAILY_QUEST_POOL, {});
+  const board = pickQuestBoard(pool, "daily:fresh", DAILY_QUEST_COUNT);
+  return board.length === DAILY_QUEST_COUNT && board.every(q => !q.need);
+})()`);
+assert(boardFromFilter, 'a new player still gets 5 farm/study dailies');
+
+// Regression guard. initQuestState() validated a saved board against the *unfiltered*
+// pool, so a Fishing or Dungeon quest that predated the zone gate still looked like a
+// known id: the board passed as healthy and nothing re-rolled until the day key turned
+// over. Both the check and the re-roll now run against the same filtered pool.
+const staleLockedBoard = R(`(function () {
+  const flags = { arcade: false, fishing: false, dungeon: false, desk: false, taste: false };
+  const open = filterQuestPool(DAILY_QUEST_POOL, flags);
+  const lockedDef = DAILY_QUEST_POOL.find(q => q.need === 'fishing');
+  if (!lockedDef) return 'no fishing quest in the pool to test with';
+  // A board carried over from a save: four unlocked quests plus the stale locked one.
+  const saved = pickQuestBoard(open, "daily:old", DAILY_QUEST_COUNT - 1)
+    .concat([instantiateQuest(lockedDef)]);
+  return {
+    againstFiltered: questBoardNeedsRoll(saved, open),
+    againstFullPool: questBoardNeedsRoll(saved, DAILY_QUEST_POOL)
+  };
+})()`);
+assert(staleLockedBoard.againstFiltered === true,
+  'a saved board holding a locked-zone quest is re-rolled');
+assert(staleLockedBoard.againstFullPool === false,
+  'and validating against the full pool would have kept it — the bug this guards');
+
+const rerollConverges = R(`(function () {
+  const flags = { arcade: false, fishing: false, dungeon: false, desk: false, taste: false };
+  const open = filterQuestPool(DAILY_QUEST_POOL, flags);
+  const effective = open.length ? open : DAILY_QUEST_POOL;
+  const board = pickQuestBoard(effective, "daily:new", DAILY_QUEST_COUNT);
+  // The re-rolled board must itself be valid, or initQuestState would roll on every call
+  // and reset quizStreakToday with it.
+  return questBoardNeedsRoll(board, effective) === false
+    && board.every(q => !q.need || flags[q.need]);
+})()`);
+assert(rerollConverges, 'the re-rolled board is stable and free of locked quests');
+
 const englishOnly = R(`DAILY_QUEST_POOL.concat(WEEKLY_QUEST_POOL).every(q =>
   !/[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(q.title + q.desc)
 )`);

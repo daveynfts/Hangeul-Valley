@@ -451,6 +451,43 @@ const aAfter = sched(a, G.GOOD, T0 + 30 * DAY);
 eq(b.ivl, 2, 'scheduling one modality leaves the other untouched');
 assert(aAfter.ivl > 30, `and the one answered grows normally (${aAfter.ivl}d)`);
 
+console.log('\n--- 14. Mature word count reads the primary modality ---');
+// Regression guard. The quest board, Story Act 6 and the leaderboard all counted mature
+// words as Object.values(srsData).filter(srsIsMature). Under the per-modality schema those
+// values are `{ m: { … } }` wrappers with no st/ivl of their own, so the predicate rejected
+// every one and the count was permanently 0: the weekly mature quest never moved, Act 6 was
+// unfinishable and the leaderboard always read "0 words mastered". srsMatureWordCount() is
+// the shared accessor those call sites now use.
+const recordAccess = extract('// ── Record access ─', 'function setSrs(', 'record access');
+const cntCtx = { console };
+vm.createContext(cntCtx);
+vm.runInContext('var srsData = {};\n' + engine + '\n' + recordAccess, cntCtx);
+
+const seed = (ivl) => ({
+  m: {
+    type:      { st: 'review', ivl, ease: 2.5, reps: 6, lapses: 0, due: T0, last: T0, step: 0 },
+    recognise: { st: 'review', ivl: 400, ease: 2.5, reps: 9, lapses: 0, due: T0, last: T0, step: 0 },
+    listen:    { st: 'new',    ivl: 0, ease: 2.5, reps: 0, lapses: 0, due: 0, last: 0, step: 0 }
+  }
+});
+vm.runInContext(`srsData = {
+  ripe1: ${JSON.stringify(seed(120))},
+  ripe2: ${JSON.stringify(seed(CFG.MATURE_IVL))},
+  young: ${JSON.stringify(seed(CFG.MATURE_IVL - 1))},
+  fresh: { m: { type: srsNewEntry() } },
+  empty: { m: {} },
+  broken: {}
+}`, cntCtx);
+
+const matureCount = vm.runInContext('srsMatureWordCount()', cntCtx);
+eq(matureCount, 2, 'counts the words whose production track is mature');
+eq(vm.runInContext('Object.values(srsData).filter(srsIsMature).length', cntCtx), 0,
+  'and the old wrapper-filtering spelling really does return 0 — hence the guard');
+assert(vm.runInContext('srsMatureWordCount()', cntCtx) === 2,
+  'a word mature only in recognition is not counted');
+eq(vm.runInContext('(function(){ srsData = {}; return srsMatureWordCount(); })()', cntCtx), 0,
+  'an empty schedule counts 0 rather than throwing');
+
 // ── Summary ─────────────────────────────────────────────────────────────────
 console.log('\n====================================================');
 console.log(`TEST RESULTS: ${passed} PASSED, ${failed} FAILED`);

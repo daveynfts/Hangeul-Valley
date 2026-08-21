@@ -1149,9 +1149,7 @@ function updateLeaderboardMetrics() {
 
   // Total Words Mastered — mature under the scheduler (interval >= 21 days), not a
   // harvest tally, which a player could run up in a single session.
-  const masteredCount = (typeof srsData !== 'undefined' && srsData)
-    ? Object.values(srsData).filter(srsIsMature).length
-    : 0;
+  const masteredCount = typeof srsMatureWordCount === 'function' ? srsMatureWordCount() : 0;
 
   leaderboardState.personalBests.totalWordsMastered = masteredCount;
   leaderboardState.personalBests.totalHonor = playerCurrencies?.honor || 0;
