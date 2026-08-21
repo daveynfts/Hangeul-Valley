@@ -817,6 +817,13 @@ function openQuiz(word, plot, phase=1){
 // currentQuizMeta so deriveGrade can read the mode.)
 
 function pickQuizMode(word, phase, plot){
+  // Water is always listening. A due-review plot can still carry reviewModality='type'
+  // after a failed harvest, and a word whose production track is still 'new' used to
+  // skip this branch — both rendered the Water quiz as typing, which hid Hear again
+  // and left only the paid hint.
+  if (phase === 2) {
+    return (typeof KoreanTTS !== 'undefined' && KoreanTTS.supported()) ? 'listen' : 'type';
+  }
   // A due review tests the modality that actually expired. Listening needs a Korean voice, so
   // it falls back to typing where none is installed rather than playing silence.
   if (plot && plot.reviewModality) {
@@ -827,11 +834,6 @@ function pickQuizMode(word, phase, plot){
   const e = peekSrs(word.ko);
   const firstContact = !e || e.st === 'new';
   if (phase === 1 && firstContact) return 'recognise';
-  // Second touch is listening. Voice lists populate async in Chrome, so do not wait
-  // on isAvailable() — listen UI still opens and speak() retries when the voice lands.
-  if (phase === 2 && KoreanTTS.supported() && KoreanTTS.enabled !== false && !firstContact) {
-    return 'listen';
-  }
   return 'type';
 }
 
@@ -848,6 +850,29 @@ function buildChoices(word, count = 4, labelOf = labelEn){
   return preferred.length === count ? preferred : buildOptionSet(word, pool, count, labelOf);
 }
 
+function bindListenReplay(word, show){
+  let box = $('quiz-listen-controls');
+  if (!box && typeof document !== 'undefined' && document.createElement) {
+    box = document.createElement('div');
+    box.id = 'quiz-listen-controls';
+    const choices = $('quiz-choices');
+    if (choices && choices.parentNode) choices.parentNode.insertBefore(box, choices.nextSibling);
+  }
+  if (!box) return;
+  let replay = $('quiz-listen-replay');
+  if (!replay) {
+    replay = document.createElement('button');
+    replay.type = 'button';
+    replay.id = 'quiz-listen-replay';
+    replay.className = 'speak-btn';
+    replay.title = 'Play the word again';
+    replay.textContent = '▶ Hear again';
+    box.appendChild(replay);
+  }
+  replay.onclick = () => speakKorean(word.ko);
+  box.classList.toggle('hidden', !show);
+}
+
 function applyQuizMode(word, phase, plot){
   currentQuizMode = pickQuizMode(word, phase, plot);
   const koPrompt = $('quiz-ko-prompt'), choices = $('quiz-choices'), qText = $('question-text');
@@ -862,8 +887,7 @@ function applyQuizMode(word, phase, plot){
   if (hints) hints.style.display = showTyping ? '' : 'none';
   choices.classList.toggle('hidden', showTyping);
   koPrompt.classList.toggle('hidden', currentQuizMode !== 'recognise');
-  const listenBox = $('quiz-listen-controls');
-  if (listenBox) listenBox.classList.toggle('hidden', currentQuizMode !== 'listen');
+  bindListenReplay(word, currentQuizMode === 'listen');
   enWordDisplay.style.display = showTyping ? '' : 'none';
 
   if (showTyping) { qText.textContent = 'Type in Korean for:'; currentChoices = []; return; }
@@ -876,8 +900,6 @@ function applyQuizMode(word, phase, plot){
     speakKorean(word.ko);          // free here: the spelling is already visible
   } else {
     qText.textContent = 'Listen — which word was that?';
-    const replay = $('quiz-listen-replay');
-    if (replay) replay.onclick = () => speakKorean(word.ko);
     speakKorean(word.ko);
   }
 

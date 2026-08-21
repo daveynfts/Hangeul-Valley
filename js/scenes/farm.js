@@ -3006,6 +3006,7 @@ class FarmScene extends Phaser.Scene {
         this.tweens.add({targets:plot.plant,scale:1,duration:300,ease:'Back.Out(2)'});
       }});
     this._setState(plot,'2',ko);
+    plot.reviewModality = null;
     showToast('Plant regressed! Water it again.');
     savePlotsFn();
   }
