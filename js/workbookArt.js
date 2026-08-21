@@ -163,6 +163,324 @@ const WORKBOOK_ART = {
     '..KzK........KzK',
     '..KzKKKKKKKKKKzK',
     '...KzzzzzzzzzzK.'
+  ],
+
+  // ── A/V-았을/었을 때, 연습 1 ─────────────────────────────────────────────
+  // The moment the sentence is dated to. Each one draws the phrase printed under
+  // the picture rather than the scene around it, because the phrase is what the
+  // learner has to conjugate.
+
+  // 한국에 오다 — an airliner from above, red and blue tailplanes for the 태극.
+  come_to_korea: [
+    '.......KK.......',
+    '......KWdK......',
+    '......KWdK......',
+    '......KWdK......',
+    '.KKKKKKWdKKKKKK.',
+    'KWWWWWWWdddddddK',
+    '.KKKKKKWdKKKKKK.',
+    '......KWdK......',
+    '......KWdK......',
+    '......KWdK......',
+    '...KKKKWdKKKK...',
+    '...KrrrWdcccK...',
+    '...KKKKWdKKKK...',
+    '......KWdK......',
+    '......KKKK......',
+    '................'
+  ],
+
+  // 지하철이 떠나다 — a subway car pulling away, speed lines behind it.
+  train_leaves: [
+    '................',
+    '....KKKKKKKKKK..',
+    '...KWWWWWWWWWWK.',
+    '.b.KWccWWWWccWK.',
+    'b..KWcCcWWcCcWK.',
+    '.b.KWccWWWWccWK.',
+    '...KWWWWWWWWWWK.',
+    'b..KWWKWWWWKWWK.',
+    '.b.KWWKWWWWKWWK.',
+    '...KWWKWWWWKWWK.',
+    '...KbbbbbbbbbbK.',
+    '....KKKKKKKKKK..',
+    '.....KzK..KzK...',
+    '....KzzzKKzzzK..',
+    '.....KzK..KzK...',
+    '................'
+  ],
+
+  // 거짓말을 하다 — a speech bubble with the sentence crossed out. A face telling
+  // the lie needed an expression 16px cannot hold; what was said is the point.
+  tell_lie: [
+    '................',
+    '..KKKKKKKKKKKK..',
+    '.KWWWWWWWWWWWWK.',
+    '.KWRWWWWWWWWRWK.',
+    '.KWWRWWWWWWRWWK.',
+    '.KWWWRWWWWRWWWK.',
+    '.KWWWWRWWRWWWWK.',
+    '.KWWWWWRRWWWWWK.',
+    '.KWWWWRWWRWWWWK.',
+    '.KWWWRWWWWRWWWK.',
+    '.KWWRWWWWWWRWWK.',
+    '.KWRWWWWWWWWRWK.',
+    '.KWWWWWWWWWWWWK.',
+    '.KKKWWWKKKKKKKK.',
+    '...KWWWK........',
+    '....KWK.........'
+  ],
+
+  // 시험에서 떨어지다 — a result diving off the bottom of the sheet. 떨어지다 is
+  // literally "to fall", so the icon teaches the verb rather than just the mood.
+  fail_exam: [
+    '................',
+    '..KKKKKKKKKKKK..',
+    '.KWWWWWWWWWWWWK.',
+    '.KWRRWWWWWWWWWK.',
+    '.KWWRRWWWWWWWWK.',
+    '.KWWWRRWWWWWWWK.',
+    '.KWWWWRRWWWWWWK.',
+    '.KWWWWWRRWWWWWK.',
+    '.KWWWWWWRRWWWWK.',
+    '.KWWWWWWWRRWWWK.',
+    '.KWWWWWRRRRRWWK.',
+    '.KWWWWWWRRRRWWK.',
+    '.KWWWWWWWRRRWWK.',
+    '.KWWWWWWWWWWWWK.',
+    '.KbbbbbbbbbbbbK.',
+    '..KKKKKKKKKKKK..'
+  ],
+
+  // 처음 보다 — two faces meeting, with the heart the sentence ends in.
+  first_meet: [
+    '......KrKrK.....',
+    '.....KrRrRrK....',
+    '.....KrRRRrK....',
+    '......KrRrK.....',
+    '.......KrK......',
+    '................',
+    '..KKKK...KKKK...',
+    '.KXXXXK.KXXXXK..',
+    '.KXKXXK.KXXKXK..',
+    '.KXXXXK.KXXXXK..',
+    '..KxxK...KxxK...',
+    '.KWWWWK.KWWWWK..',
+    'KWWWWWWKKWWWWWWK',
+    'KWWWWWWKKWWWWWWK',
+    'KWWWWWWKKWWWWWWK',
+    '.KKKKKK..KKKKKK.'
+  ],
+
+  // ── A/V-았을/었을 때, 연습 2 ─────────────────────────────────────────────
+  // The book gives only a picture here, no phrase, so these icons carry more
+  // weight than the ones above.
+
+  // 아프다 — under the blanket with a compress on the forehead.
+  be_sick: [
+    '................',
+    '.....KKKKK......',
+    '....KXXXXXK.....',
+    '....KcccccK.....',
+    '....KXKXKXK.....',
+    '....KXXxXXK.....',
+    '.....KXXXK......',
+    '..KKKKKKKKKKKK..',
+    '.KWWWWWWWWWWWWK.',
+    '.KWrrrrrrrrrrWK.',
+    '.KWrWrWrWrWrWWK.',
+    '.KWrrrrrrrrrrWK.',
+    '.KWWWWWWWWWWWWK.',
+    '.KzzzzzzzzzzzzK.',
+    '..KzK......KzK..',
+    '................'
+  ],
+
+  // 상을 받다 — a 상장 with its gold band, and the medal that comes with it.
+  get_prize: [
+    '................',
+    '.KKKKKKKKKKKKK..',
+    '.KWWWWWWWWWWWK..',
+    '.KWmmmmmmmmmWK..',
+    '.KWWWWWWWWWWWK..',
+    '.KWbbbbbbbbWWK..',
+    '.KWWWWWWWWWWWK..',
+    '.KWbbbbbbWWWWK..',
+    '.KWWWWWWWWWWWK..',
+    '.KWbbbbbbbWWWK..',
+    '.KWWWWWWWWWWWK..',
+    '.KWWWWWWWWWWWK..',
+    '.KKKKKKKKKKKKK..',
+    '.........KmMmK..',
+    '.........KMmMK..',
+    '..........KyK...'
+  ],
+
+  // 할머니가 돌아가시다 — the framed portrait and the white chrysanthemum, which
+  // is how the book draws it and how a Korean 제사 actually looks.
+  memorial_photo: [
+    '................',
+    '.KKKKKKKKKKK....',
+    '.KsssssssssK....',
+    '.KsWWWWWWWsK....',
+    '.KsWdddddWsK....',
+    '.KsWdXXXdWsK....',
+    '.KsWXKXKXWsK....',
+    '.KsWXXXXXWsK....',
+    '.KsWWXxXWWsK....',
+    '.KsWWWWWWWsK....',
+    '.KsWWWWWWWsK.WK.',
+    '.KsssssssssKWmWK',
+    '.KKKKKKKKKKK.WK.',
+    '............KgK.',
+    '............KgK.',
+    '............KGK.'
+  ],
+
+  // 지갑을 잃어버리다 — the wallet, and the question of where it went.
+  lose_wallet: [
+    '.........KKKK...',
+    '........KK..KK..',
+    '............KK..',
+    '...........KK...',
+    '..........KK....',
+    '..........KK....',
+    '................',
+    '..........KK....',
+    '................',
+    'KKKKKKKKKKKK....',
+    'KzSSSSSSSSzK....',
+    'KzSSSSSSSSzK....',
+    'KzSSKKKKSSzK....',
+    'KzSSKmmKSSzK....',
+    'KzSSSSSSSSzK....',
+    'KKKKKKKKKKKK....'
+  ],
+
+  // 어리다 — a child, drawn with the head a child's proportions give it.
+  be_young: [
+    '................',
+    '.....KKKKK......',
+    '....KzzzzzK.....',
+    '...KzXXXXXzK....',
+    '...KzXKXKXzK....',
+    '...KXXXXXXXK....',
+    '....KXXxXXK.....',
+    '.....KKKKK......',
+    '...KgggggggK....',
+    '..KgKgggggKgK...',
+    '..KXKgggggKXK...',
+    '...KKKgggKKK....',
+    '.....KCCCK......',
+    '.....KCKCK......',
+    '....KXK.KXK.....',
+    '...KKKK.KKKK....'
+  ],
+
+  // ── V-(으)면 안 되다, 연습 1 ─────────────────────────────────────────────
+  // The book prints five 금지 signs. A 16px circle-and-slash turns whatever is
+  // inside it to mud — the slash lands straight across the thing you are meant
+  // to recognise — so the object is drawn clean and the 금지 mark sits beside it
+  // as a badge. Same mark on all five, so it reads as notation rather than art.
+
+  // 전화를 하다
+  no_phone: [
+    '................',
+    '..KKKKKKK.......',
+    '..KBBBBBK.......',
+    '..KBcccBK.......',
+    '..KBcccBK.......',
+    '..KBcccBK.......',
+    '..KBcccBK.......',
+    '..KBcccBK.......',
+    '..KBBBBBK.......',
+    '..KBWWWBK.......',
+    '..KBWWWBK..KKKK.',
+    '..KBWKWBK.KRRRRK',
+    '..KBWWWBK.KWWWWK',
+    '..KBBBBBK.KWWWWK',
+    '..KKKKKKK.KRRRRK',
+    '...........KKKK.'
+  ],
+
+  // 음식을 먹다
+  no_food: [
+    '................',
+    '................',
+    '..KKKKKKK.......',
+    '.KMMMMMMMK......',
+    '.KMWMMMWMK......',
+    '.KMMMMMMMK......',
+    'KGGGGGGGGGK.....',
+    'KzzzzzzzzzK.....',
+    'KzzzzzzzzzK.....',
+    'KmmmmmmmmmK.....',
+    '.KMMMMMMMK.KKKK.',
+    '.KMMMMMMMKKRRRRK',
+    '..KKKKKKK.KWWWWK',
+    '..........KWWWWK',
+    '..........KRRRRK',
+    '...........KKKK.'
+  ],
+
+  // 사진을 찍다
+  no_camera: [
+    '................',
+    '................',
+    '...KKKK.........',
+    'KKKKKKKKKK......',
+    'KddddddddK......',
+    'KdKKKKKKmK......',
+    'KdKBBBBKdK......',
+    'KdKBccBKdK......',
+    'KdKBccBKdK......',
+    'KdKBBBBKdK......',
+    'KdKKKKKKdK.KKKK.',
+    'KddddddddKKRRRRK',
+    'KKKKKKKKKKKWWWWK',
+    '..........KWWWWK',
+    '..........KRRRRK',
+    '...........KKKK.'
+  ],
+
+  // 담배를 피우다
+  no_smoking: [
+    '................',
+    '..KWK...........',
+    '.KWK............',
+    '..KWK...........',
+    '.KWK............',
+    '..KWK...........',
+    '................',
+    '................',
+    'KKKKKKKKKK......',
+    'KRMmWWWWWK......',
+    'KRMmWWWWWK.KKKK.',
+    'KKKKKKKKKKKRRRRK',
+    '..........KWWWWK',
+    '..........KWWWWK',
+    '..........KRRRRK',
+    '...........KKKK.'
+  ],
+
+  // 수영을 하다
+  no_swimming: [
+    '................',
+    '................',
+    '......KKK.......',
+    '.....KXXXK......',
+    '.....KXXXK......',
+    '..KK..KKK.......',
+    '.KXXKKKXXK......',
+    'KXXXXXXXXXK.....',
+    'KXXXXXXXXK......',
+    '.KKKKKKKK.......',
+    '...........KKKK.',
+    '.cc..cc..cKRRRRK',
+    'CCccCCccCCKWWWWK',
+    'CCCCCCCCCCKWWWWK',
+    '..........KRRRRK',
+    '...........KKKK.'
   ]
 };
 

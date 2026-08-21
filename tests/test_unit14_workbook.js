@@ -650,6 +650,302 @@ console.log('\n--- 12. Solo-playable ---');
   assert(html.indexOf('js/workbookArt.js') >= 0, 'and has a script tag');
 }
 
+// ── 13. 문법과 표현 2 — A/V-았을/었을 때 ──────────────────────────────────────
+console.log('\n--- 13. 문법과 표현, A/V-았을/었을 때 ---');
+const exW1 = wb.exercises.find(e => e.id === 'u14-grammar-2-1');
+const exW2 = wb.exercises.find(e => e.id === 'u14-grammar-2-2');
+{
+  [exW1, exW2].forEach((e) => {
+    assert(!!e && e.type === 'build', (e && e.no) + ' is a build exercise');
+    assert(e.pattern === 'A/V-았을/었을 때', 'and names the pattern it drills');
+    assert(!e.bank, 'with no shared box — the choice is the conjugation');
+    assert(e.items.length === 5, 'five pictures, five questions');
+    assert(e.items.every(i => (i.choices || []).length === 3), 'three forms per question');
+    assert(e.items.every(i => !i.choices2), 'one blank per row on these two pages');
+    assert(e.items.every(i => i.why && i.grammar && i.en), 'every answer is explained');
+  });
+
+  // 연습 1: the answer key from the back of the book, and the contraction each
+  // item was chosen to teach.
+  const KEY1 = [
+    [1, '왔을 때', '한국에 오다', 'come_to_korea'],
+    [2, '떠났을 때', '지하철이 떠나다', 'train_leaves'],
+    [3, '했을 때', '거짓말(을) 하다', 'tell_lie'],
+    [4, '떨어졌을 때', '시험에서 떨어지다', 'fail_exam'],
+    [5, '봤을 때부터', '처음 보다', 'first_meet']
+  ];
+  KEY1.forEach(([n, form, phrase, art]) => {
+    const item = exW1.items.find(i => i.n === n);
+    assert(!!item, '연습 1 question ' + n + ' exists');
+    const correct = item.choices.find(c => c.id === item.answer);
+    assert(correct && correct.ko === form, '연습 1 item ' + n + ' answers ' + form);
+    assert(item.phraseKo === phrase, 'and keeps the printed phrase ' + phrase);
+    assert(item.art === art, 'and uses the ' + art + ' picture');
+  });
+  // A asks the question and B answers it, so a row needs both speakers and the
+  // gap has to be on B's side.
+  assert(exW1.items.every(i => i.lines.length === 2), '연습 1 rows are two-line dialogues');
+  assert(exW1.items.every(i => i.lines[0].who === 'A' && i.lines[1].who === 'B'),
+    'A speaks first and B answers');
+  assert(exW1.items.every(i => i.lines[0].ko.indexOf('{}') < 0 && i.lines[1].ko.indexOf('{}') >= 0),
+    "the blank is in B's line — A's question is what dates it");
+  assert(exW1.items.find(i => i.n === 5).choices.some(c => c.ko === '봤을 때'),
+    'question 5 offers 봤을 때 without 부터 — A asked 언제부터, and that is the trap');
+  assert(exW1.items.find(i => i.n === 5).lines[0].ko.indexOf('언제부터') >= 0,
+    'and A’s line is where 부터 is announced');
+  assert(exW1.example.answerKo === '어렸을 때', 'the worked example reads 어렸을 때');
+
+  // 연습 2: a bare sentence, no speakers.
+  const KEY2 = [
+    [1, '아팠을 때', '아프다'],
+    [2, '받았을 때', '상을 받다'],
+    [3, '할머니가 돌아가셨을 때', '할머니가 돌아가시다'],
+    [4, '잃어버렸을 때', '지갑을 잃어버리다'],
+    [5, '어렸을 때', '어리다']
+  ];
+  KEY2.forEach(([n, form, phrase]) => {
+    const item = exW2.items.find(i => i.n === n);
+    assert(!!item, '연습 2 question ' + n + ' exists');
+    const correct = item.choices.find(c => c.id === item.answer);
+    assert(correct && correct.ko === form, '연습 2 item ' + n + ' answers ' + form);
+    assert(item.phraseKo === phrase, 'and keeps ' + phrase + ' as the phrase to conjugate');
+  });
+  assert(exW2.items.every(i => i.lines.length === 1 && !i.lines[0].who),
+    '연습 2 rows are one sentence with nobody speaking it');
+  assert(exW2.items.find(i => i.n === 1).grammar.indexOf('ㅡ') >= 0,
+    'item 1 names the ㅡ drop in 아프다');
+  assert(exW2.items.find(i => i.n === 2).grammar.indexOf('ㅗ') >= 0,
+    'item 2 names the vowel harmony that picks 았 over 었');
+  assert(exW2.items.find(i => i.n === 3).choices.some(c => c.ko === '할머니가 돌아갔을 때'),
+    'item 3 offers the form with the honorific 시 taken out');
+  assert(exW2.items.find(i => i.n === 5).choices.some(c => c.ko === '어려웠을 때'),
+    'item 5 offers 어려웠을 때 — 어리다 mistaken for 어렵다');
+  assert(/어릴 때/.test(exW2.items.find(i => i.n === 5).grammar),
+    'and says outright that 어릴 때 is good Korean too');
+
+  // The dialogue renders with both speakers, and the answer lands mid-sentence.
+  const ui = loadUi();
+  ui.setBank('u14-grammar-2-1');
+  assert(ui.els['wb-bank'].className === 'wb-hidden', 'no shared box is drawn for a build page');
+  assert(ui.els['wb-items'].className === 'wb-items-build', 'build rows use their own layout');
+  assert(ui.run('workbookState.fill2.length') === 5, 'a second blank is tracked per row');
+  ui.run("wbPickChoice(0, 'wasseul')");
+  const row1 = deepHtml(ui.els['wb-items'].children[0]);
+  assert((row1.match(/wb-spk/g) || []).length === 2, 'a row shows both speakers');
+  assert(row1.indexOf('언제 노래방에 가 봤어요?') >= 0, "A's question is printed in full");
+  assert(row1.indexOf('왔을 때') >= 0, 'and the chosen form lands in the blank');
+  // Measured inside B's line: A's question ends in 가 봤어요 too, so searching the
+  // whole row would find that one first and prove nothing.
+  const bLine = row1.slice(row1.indexOf('고향 친구가'));
+  assert(bLine.indexOf('왔을 때') > 0 && bLine.indexOf('왔을 때') < bLine.indexOf('가 봤어요'),
+    'the form sits mid-sentence in B’s line, not at the end of it');
+  assert(ui.els['wb-example'].innerHTML.indexOf('어렸을 때') >= 0,
+    'the worked example shows its answer filled in');
+  exW1.items.forEach((item, i) => ui.run('wbPickChoice(' + i + ", '" + item.answer + "')"));
+  assert(ui.run('wbComplete()') === true, 'no personal answer is needed on this page');
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.score') === 5, 'the textbook key scores 5 of 5');
+  assert(ui.els['wb-count'].textContent === '5 / 5', 'and the counter is out of five');
+  assert(ui.els['wb-explain'].innerHTML.indexOf('봤을 때부터') >= 0,
+    'the explanations name the right form');
+}
+
+// ── 14. 문법과 표현 4 — V-(으)면 안 되다 ─────────────────────────────────────
+console.log('\n--- 14. 문법과 표현, V-(으)면 안 되다 ---');
+const exP1 = wb.exercises.find(e => e.id === 'u14-grammar-4-1');
+const exP2 = wb.exercises.find(e => e.id === 'u14-grammar-4-2');
+const exP3 = wb.exercises.find(e => e.id === 'u14-grammar-4-3');
+{
+  [exP1, exP2, exP3].forEach((e) => {
+    assert(!!e && e.type === 'build', (e && e.no) + ' is a build exercise');
+    assert(e.pattern === 'V-(으)면 안 되다', 'and names the pattern it drills');
+    assert(e.items.every(i => i.why && i.grammar && i.en), 'every answer is explained');
+  });
+
+  // 연습 1 — the pair. Both halves are asked, so both are marked.
+  assert(exP1.items.length === 5 && exP1.items.every(i => i.choices2),
+    '연습 1 asks for both halves of all five signs');
+  const KEYP1 = [
+    [1, '해도 돼요', '하면 안 돼요', 'no_phone'],
+    [2, '먹어도 돼요', '먹으면 안 돼요', 'no_food'],
+    [3, '찍어도 돼요', '찍으면 안 돼요', 'no_camera'],
+    [4, '피워도 돼요', '피우면 안 돼요', 'no_smoking'],
+    [5, '해도 돼요', '하면 안 돼요', 'no_swimming']
+  ];
+  KEYP1.forEach(([n, ask, deny, art]) => {
+    const item = exP1.items.find(i => i.n === n);
+    assert(!!item, '연습 1 question ' + n + ' exists');
+    assert(item.choices.find(c => c.id === item.answer).ko === ask,
+      '연습 1 item ' + n + ' asks ' + ask);
+    assert(item.choices2.find(c => c.id === item.answer2).ko === deny,
+      'and refuses with ' + deny);
+    assert(item.art === art, 'and carries the ' + art + ' sign');
+    assert(item.lines[0].ko.indexOf('{}') >= 0 && item.lines[1].ko.indexOf('{}') >= 0,
+      'with a blank in each speaker’s line');
+  });
+  // The distractors are the two rules the pattern actually turns on.
+  assert(exP1.items.find(i => i.n === 2).choices2.some(c => c.ko === '먹면 안 돼요'),
+    'the consonant-stem row offers 먹면 — the missing 으');
+  assert(exP1.items.find(i => i.n === 4).choices2.some(c => c.ko === '피우으면 안 돼요'),
+    'and the vowel-stem row offers 피우으면 — the 으 that does not belong');
+  assert(exP1.items.find(i => i.n === 5).choices.some(c => c.ko === '해도 되요'),
+    'item 5 offers 되요 for 돼요');
+  assert(/돼/.test(exP1.items.find(i => i.n === 5).grammar), 'and the note explains the spelling');
+
+  // 연습 2 — B's reply is printed, and item 4 is the 반말 one.
+  assert(exP2.items.length === 4, '연습 2 has four dialogues');
+  assert(exP2.items.every(i => i.lines[1].ko.indexOf('{}') < 0),
+    "B's reply is given, not asked for");
+  assert(exP2.items.every(i => i.lines[0].ko.indexOf('{}') >= 0), 'the blank is in A’s question');
+  const banmal = exP2.items.find(i => i.n === 4);
+  assert(banmal.choices.find(c => c.id === banmal.answer).ko === '입으면 안 돼',
+    '연습 2 item 4 answers in 반말: 입으면 안 돼');
+  assert(banmal.choices.some(c => c.ko === '입으면 안 돼요'),
+    'and offers the 존댓말 form as the distractor');
+  assert(/언니|반말/.test(banmal.why), 'the note says what makes it 반말');
+  // The one place the book's own key and its picture disagree. Saying so beats
+  // quietly picking one.
+  const leftover = exP2.items.find(i => i.n === 3);
+  assert(leftover.phraseKo === '조금만 남기다', '연습 2 item 3 keeps the printed phrase');
+  assert(leftover.choices.find(c => c.id === leftover.answer).ko === '남기면 안 돼요',
+    'and is answered from that phrase');
+  assert(leftover.why.indexOf('안 먹으면 안 돼요') >= 0,
+    'while flagging that the book’s answer key prints a different sentence here');
+
+  // 연습 3 — the double negative, and the one item that needs 못.
+  assert(exP3.items.length === 4, '연습 3 has four rewrites');
+  assert(exP3.items.every(i => i.lines.length === 1 && !i.lines[0].who),
+    'a rewrite has nobody saying it');
+  assert(exP3.items.every(i => /꼭/.test(i.phraseKo)),
+    'each row prints the 꼭 …야 돼요 sentence it comes from');
+  const KEYP3 = [[1, '안 하면'], [2, '안 끊으면'], [3, '안 가면'], [4, '못 받으면']];
+  KEYP3.forEach(([n, form]) => {
+    const item = exP3.items.find(i => i.n === n);
+    assert(item && item.choices.find(c => c.id === item.answer).ko === form,
+      '연습 3 item ' + n + ' answers ' + form);
+  });
+  assert(exP3.items.find(i => i.n === 1).choices.some(c => c.ko === '하면'),
+    'item 1 offers the single negative — the form that means the opposite');
+  assert(/opposite/i.test(exP3.items.find(i => i.n === 1).why),
+    'and the note says so outright');
+  assert(exP3.items.find(i => i.n === 4).choices.some(c => c.ko === '안 받으면'),
+    'item 4 puts 안 against 못');
+  assert(/못/.test(exP3.items.find(i => i.n === 4).why), 'and explains why the parcel takes 못');
+
+  // Two blanks per row: both are needed, both are scored, and one right half
+  // does not mark the row right.
+  const ui = loadUi();
+  ui.setBank('u14-grammar-4-1');
+  assert(ui.els['wb-count'].textContent === '0 / 10', 'the counter counts blanks, not rows');
+  exP1.items.forEach((item, i) => ui.run('wbPickChoice(' + i + ", '" + item.answer + "')"));
+  assert(ui.run('wbComplete()') === false, 'a row is not finished with only its first blank');
+  assert(ui.els['wb-count'].textContent === '5 / 10', 'and the counter says so');
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.checked') === false, 'so the page cannot be checked yet');
+  exP1.items.forEach((item, i) => ui.run('wbPickChoice(' + i + ", '" + item.answer2 + "', 2)"));
+  assert(ui.run('wbComplete()') === true, 'both blanks filled finishes the row');
+  const rowP = deepHtml(ui.els['wb-items'].children[0]);
+  assert(rowP.indexOf('해도 돼요') >= 0 && rowP.indexOf('하면 안 돼요') >= 0,
+    'the row shows both halves of the exchange');
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.score') === 10, 'the textbook key scores 10 of 10');
+  assert(ui.els['wb-count'].textContent === '10 / 10' &&
+    ui.els['wb-count'].className === 'wb-count-all', 'and the page reads as complete');
+
+  const half = loadUi();
+  half.setBank('u14-grammar-4-1');
+  exP1.items.forEach((item, i) => {
+    half.run('wbPickChoice(' + i + ", '" + item.answer + "')");
+    const bad = item.choices2.find(c => c.id !== item.answer2);
+    half.run('wbPickChoice(' + i + ", '" + bad.id + "', 2)");
+  });
+  half.run('checkWorkbook()');
+  assert(half.run('workbookState.score') === 5, 'five right halves score 5 of 10');
+  assert(deepText(half.els['wb-items'].children[0]).indexOf('✕') >= 0
+    && half.els['wb-items'].children[0].className.indexOf('bad') > 0,
+    'and a row with one half wrong is marked wrong');
+  const yours = half.els['wb-explain'].innerHTML;
+  assert(yours.indexOf('wb-why-yours') >= 0 && yours.indexOf('해도 돼요 / ') >= 0,
+    'the explanation reports both halves, right one included');
+
+  // A choice from the wrong blank must not be accepted into it.
+  const cross = loadUi();
+  cross.setBank('u14-grammar-4-1');
+  cross.run("wbPickChoice(0, '" + exP1.items[0].answer2 + "', 1)");
+  assert(cross.run('workbookState.fill[0]') === null,
+    "the second blank's forms are refused by the first");
+  cross.run("wbPickChoice(0, '" + exP1.items[0].answer + "', 2)");
+  assert(cross.run('workbookState.fill2[0]') === null, 'and the other way round');
+
+  // Number keys run left to right across the whole row, so the second blank is
+  // reachable from the keyboard too.
+  const keys = loadUi();
+  keys.setBank('u14-grammar-4-1');
+  const n1 = exP1.items[0].choices.length;
+  keys.call('wbPickChoice', 0, exP1.items[0].choices2[0].id, 2);
+  assert(keys.run('workbookState.fill2[0]') === exP1.items[0].choices2[0].id,
+    'slot 2 takes its own choices');
+  assert(kb.indexOf('choices2') >= 0 && kb.indexOf('first.length + second.length') >= 0,
+    'and the key handler counts past the first blank to reach them');
+  assert(n1 === 3, 'each blank offers three forms, so 1-6 covers the row');
+}
+
+// ── 15. Telling three 연습 1s apart ─────────────────────────────────────────
+console.log('\n--- 15. The exercise list ---');
+{
+  // 문법과 표현 numbers per grammar point, so the list now holds three rows
+  // called 연습 1. Without the pattern printed they would read identically.
+  const ones = wb.exercises.filter(e => e.no === '연습 1');
+  assert(ones.length === 4, 'four exercises are called 연습 1');
+  assert(ones.filter(e => e.section === '문법과 표현').length === 3,
+    'three of them in the same section');
+  assert(new Set(ones.map(e => e.section + '|' + e.no)).size < ones.length,
+    'so section plus number does not tell them apart');
+  assert(new Set(wb.exercises.map(e => (e.pattern || '') + '|' + e.section + '|' + e.no)).size
+    === wb.exercises.length, 'adding the pattern makes every row unique');
+
+  const ui = loadUi();
+  ui.setBank(null);
+  const rows = ui.els['wb-items'].children;
+  assert(rows.length === 9, 'the list offers all nine exercises');
+  assert(wb.exercises.length <= 9,
+    'and every one is still reachable by number key — a tenth would need another way in');
+  const html9 = rows.map(r => r.innerHTML).join('');
+  assert(html9.indexOf('wb-pick-pat') >= 0, 'each grammar row prints its pattern');
+  assert(html9.indexOf('A/V-았을/었을 때') >= 0 && html9.indexOf('V-(으)면 안 되다') >= 0,
+    'and both new grammar points are named');
+  assert(css.indexOf('.wb-pick-pat') >= 0, 'the pattern label is styled');
+
+  ui.run("openWorkbookExercise('u14-grammar-4-3')");
+  assert(ui.els['wb-sub'].textContent.indexOf('V-(으)면 안 되다') >= 0,
+    'and the exercise header says which grammar point you are in');
+}
+
+// ── 16. Every picture the content names exists ──────────────────────────────
+console.log('\n--- 16. Art coverage ---');
+{
+  const base = loadUi();
+  const artKeys = base.run('workbookArtKeys()');
+  const named = [...new Set(wb.exercises.flatMap(e => (e.items || []).map(i => i.art))
+    .filter(Boolean))];
+  assert(named.length >= 21, 'the workbook names ' + named.length + ' pictures');
+  named.forEach((key) => {
+    assert(artKeys.includes(key), key + ' exists in the art table');
+    const size = base.run("workbookArtSize('" + key + "')");
+    assert(size.w === 16 && size.h === 16, key + ' is 16x16 (got ' + size.w + 'x' + size.h + ')');
+    assert(size.ragged === 0, key + ' has no ragged rows');
+    assert(base.run("workbookIconSvg('" + key + "', 4)").indexOf('<svg') === 0,
+      key + ' renders');
+  });
+  // The five 금지 signs share one badge, and it has to be the same pixels on all
+  // of them or it reads as decoration rather than notation.
+  const signs = ['no_phone', 'no_food', 'no_camera', 'no_smoking', 'no_swimming'];
+  const badges = signs.map((k) => base.run("WORKBOOK_ART['" + k + "']")
+    .slice(10).map(r => r.slice(10)).join('|'));
+  assert(new Set(badges).size === 1, 'all five signs carry the identical 금지 badge');
+  assert(badges[0].indexOf('R') >= 0, 'and it is drawn in red');
+}
+
 console.log('\n====================================================');
 console.log('RESULT: ' + passed + ' passed, ' + failed + ' failed');
 console.log('====================================================');

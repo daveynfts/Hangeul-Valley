@@ -2223,6 +2223,10 @@ function openWorkbookExercise(id) {
   st.ex = ex;
   st.chips = (ex.bank || []).filter(c => !c.usedByExample);
   st.fill = new Array((ex.items || []).length).fill(null);
+  // 'build' can put a second blank in the same script, because the book drills
+  // 해도 돼요? and -면 안 돼요 as one exchange and marking only half of it would
+  // be marking half the exercise.
+  st.fill2 = new Array((ex.items || []).length).fill(null);
   // 'experience' offers its choices per question rather than from one shared box,
   // because the point is whether you know 듣다 → 들은 rather than which of six
   // phrases is left over. `own` holds the 있어요/없어요 answer: it is the
@@ -2272,24 +2276,49 @@ function wbInExercise() {
   return !!(st && st.mode === 'exercise' && st.ex && st.fill);
 }
 
+// The two types whose choices hang off each question rather than one shared box.
+// They share a row shape — the picture, the dictionary phrase, the sentence being
+// built and the buttons that build it — and differ only in what the buttons are
+// for, so everything that draws or drives that shape asks this rather than
+// naming one type.
+function wbPerItem(ex) {
+  return !!ex && (ex.type === 'experience' || ex.type === 'build');
+}
+
+// How many blanks one question has. Nothing assumes one per row, because a
+// 'build' row can carry two and the score would be out of the wrong total.
+function wbSlots(item) {
+  return (item && item.choices2) ? 2 : 1;
+}
+function wbSlotTotal(ex) {
+  return (ex && ex.items || []).reduce((n, it) => n + wbSlots(it), 0);
+}
+
 function wbChip(id, item) {
   if (!wbInExercise()) return null;
   const st = workbookState;
-  if (st.ex.type === 'experience') {
-    if (item) return (item.choices || []).find(c => c.id === id) || null;
-    const all = (st.ex.items || []).flatMap(it => it.choices || []);
+  if (wbPerItem(st.ex)) {
+    if (item) {
+      return (item.choices || []).concat(item.choices2 || []).find(c => c.id === id) || null;
+    }
+    const all = (st.ex.items || []).flatMap(it => (it.choices || []).concat(it.choices2 || []));
     return all.find(c => c.id === id) || null;
   }
   return st.chips.find(c => c.id === id) || (st.ex.bank || []).find(c => c.id === id) || null;
 }
 
 // One question's choices are its own, so picking does not disturb any other row.
-function wbPickChoice(i, id) {
+// `slot` is 2 for the second blank on a row that has one; anything else is the
+// first, which is what every caller that predates two-blank rows passes.
+function wbPickChoice(i, id, slot) {
   const st = workbookState;
   if (!wbInExercise() || st.checked) return;
   const item = (st.ex.items || [])[i];
-  if (!item || !(item.choices || []).some(c => c.id === id)) return;
-  st.fill[i] = id;
+  if (!item) return;
+  const second = slot === 2;
+  const list = (second ? item.choices2 : item.choices) || [];
+  if (!list.some(c => c.id === id)) return;
+  if (second) st.fill2[i] = id; else st.fill[i] = id;
   st.focus = i;
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
   renderWorkbook();
@@ -2311,19 +2340,23 @@ function wbOwnLabel(ex, val) {
   return val === 'yes' ? labels.yes : (val === 'no' ? labels.no : '');
 }
 
-// A page is finished when every question has both a form and an answer. The
-// score counts only the form.
+// A page is finished when every blank on it has something in it. On the
+// 'experience' page that includes the 있어요/없어요 ending, which is required
+// even though the score never counts it.
 function wbComplete() {
   const st = workbookState;
   if (!wbInExercise()) return false;
   if (st.fill.some(v => !v)) return false;
+  if ((st.ex.items || []).some((it, i) => wbSlots(it) === 2 && !st.fill2[i])) return false;
   if (st.ex.type === 'experience' && st.own.some(v => !v)) return false;
   return true;
 }
 
 function wbFilledCount() {
   if (!wbInExercise()) return 0;
-  return workbookState.fill.filter(Boolean).length;
+  const st = workbookState;
+  return (st.ex.items || []).reduce((n, it, i) =>
+    n + (st.fill[i] ? 1 : 0) + (wbSlots(it) === 2 && st.fill2[i] ? 1 : 0), 0);
 }
 
 function wbFocusBlank(i) {
@@ -2374,18 +2407,23 @@ function checkWorkbook() {
   if (!wbComplete()) return;
   st.checked = true;
   const items = st.ex.items || [];
-  st.score = items.reduce((n, item, i) => n + (st.fill[i] === item.answer ? 1 : 0), 0);
+  const total = wbSlotTotal(st.ex);
+  st.score = items.reduce((n, item, i) => {
+    let got = st.fill[i] === item.answer ? 1 : 0;
+    if (wbSlots(item) === 2 && st.fill2[i] === item.answer2) got += 1;
+    return n + got;
+  }, 0);
   if (typeof playChiptuneSFX === 'function') {
-    playChiptuneSFX(st.score === items.length ? 'complete' : 'quiz_wrong');
+    playChiptuneSFX(st.score === total ? 'complete' : 'quiz_wrong');
   }
   // Scored the same way the desk quiz is, so one desk does not pay better than
   // the other for the same amount of work.
   if (typeof ensurePlayerRank === 'function') ensurePlayerRank();
   if (typeof studySessionXp === 'function' && typeof addPlayerXp === 'function') {
-    const xp = studySessionXp(st.score, items.length);
+    const xp = studySessionXp(st.score, total);
     const after = addPlayerXp(xp);
     st.gain = { xp: xp, leveled: after.leveled, level: after.level };
-    if (st.score === items.length && typeof addHonor === 'function') addHonor(2);
+    if (st.score === total && typeof addHonor === 'function') addHonor(2);
     if (typeof persistSave === 'function') persistSave();
     if (typeof updateRankHUD === 'function') updateRankHUD();
   }
@@ -2397,6 +2435,7 @@ function resetWorkbook() {
   const st = workbookState;
   if (!wbInExercise()) return;
   st.fill = new Array((st.ex.items || []).length).fill(null);
+  st.fill2 = new Array((st.ex.items || []).length).fill(null);
   st.own = new Array((st.ex.items || []).length).fill(null);
   st.focus = 0;
   st.checked = false;
@@ -2411,11 +2450,31 @@ function resetWorkbook() {
 // place rather than being spelled out twice per type.
 function wbLineHtml(ex, item, chipText, opts) {
   const o = opts || {};
-  const blank = o.plain
-    ? '<b>' + vbEsc(chipText) + '</b>'
-    : (chipText
-        ? '<b class="wb-blank filled">' + vbEsc(chipText) + '</b>'
-        : '<span class="wb-blank empty">&nbsp;</span>');
+  const mkBlank = (text) => (o.plain
+    ? '<b>' + vbEsc(text) + '</b>'
+    : (text
+        ? '<b class="wb-blank filled">' + vbEsc(text) + '</b>'
+        : '<span class="wb-blank empty">&nbsp;</span>'));
+  const blank = mkBlank(chipText);
+  if (ex.type === 'build') {
+    // The lines are a little script and the gaps are filled left to right across
+    // all of it, so a second blank in B's line is simply the next one along.
+    // Speaker chips are optional: 연습 3 rewrites a sentence and has nobody
+    // saying it.
+    const texts = [chipText || '', o.second || ''];
+    let slot = 0;
+    return (item.lines || []).map((line) => {
+      const parts = String(line.ko || '').split('{}');
+      let html = vbEsc(parts[0] || '');
+      for (let k = 1; k < parts.length; k++) {
+        html += mkBlank(texts[slot++]) + vbEsc(parts[k] || '');
+      }
+      return line.who
+        ? '<div class="wb-dlg"><span class="wb-spk">' + vbEsc(line.who) + '</span>' +
+            '<span class="wb-line">' + html + '</span></div>'
+        : '<div class="wb-line-solo">' + html + '</div>';
+    }).join('');
+  }
   if (ex.type === 'dialogue') {
     const parts = String(item.aKo || '').split('{}');
     const a = vbEsc(parts[0] || '') + blank + vbEsc(parts[1] || '');
@@ -2452,13 +2511,20 @@ function renderWorkbook() {
   const title = $('wb-title');
   if (title) title.textContent = (ex.section || '') + ' · ' + (ex.no || '');
   const sub = $('wb-sub');
-  if (sub) sub.textContent = (ex.sectionEn || '') + ' — ' + (st.bank.titleEn || 'Workbook');
+  // 문법과 표현 numbers its exercises per grammar point, so three of them are
+  // called 연습 1. The pattern is what actually tells them apart.
+  if (sub) {
+    sub.textContent = ex.pattern
+      ? ex.pattern + ' · ' + (ex.sectionEn || '')
+      : (ex.sectionEn || '') + ' — ' + (st.bank.titleEn || 'Workbook');
+  }
   const count = $('wb-count');
   if (count) {
+    const total = wbSlotTotal(ex);
     count.textContent = st.checked
-      ? (st.score + ' / ' + items.length)
-      : (wbFilledCount() + ' / ' + items.length);
-    count.className = st.checked ? (st.score === items.length ? 'wb-count-all' : 'wb-count-some') : '';
+      ? (st.score + ' / ' + total)
+      : (wbFilledCount() + ' / ' + total);
+    count.className = st.checked ? (st.score === total ? 'wb-count-all' : 'wb-count-some') : '';
   }
 
   const inst = $('wb-instruction');
@@ -2474,10 +2540,15 @@ function renderWorkbook() {
     if (!ex.example) { exBox.innerHTML = ''; exBox.className = 'wb-hidden'; }
     else {
       exBox.className = '';
-      const chip = wbChip(ex.example.answer);
+      // A 'build' example has no shared box to borrow from, so it carries the
+      // finished text itself.
+      const filled = ex.type === 'build'
+        ? (ex.example.answerKo || '')
+        : wbAnswerText(wbChip(ex.example.answer));
       exBox.innerHTML =
         '<span class="wb-example-tag">[보기]</span> ' +
-        wbLineHtml(ex, ex.example, wbAnswerText(chip), { plain: true }) +
+        wbLineHtml(ex, ex.example, filled,
+          { plain: true, second: ex.example.answer2Ko || '' }) +
         (ex.type === 'dialogue'
           ? '<div class="wb-dlg reply"><span class="wb-spk">B</span>' + vbEsc(ex.reply || '') + '</div>'
           : '') +
@@ -2486,7 +2557,7 @@ function renderWorkbook() {
   }
 
   const bank = $('wb-bank');
-  if (bank && ex.type === 'experience') {
+  if (bank && wbPerItem(ex)) {
     // Choices live on each row, so a shared box would just be an empty strip.
     bank.innerHTML = '';
     bank.className = 'wb-hidden';
@@ -2513,17 +2584,22 @@ function renderWorkbook() {
     items.forEach((item, i) => {
       const chosen = st.fill[i];
       const chip = chosen ? wbChip(chosen, item) : null;
-      const right = st.checked && chosen === item.answer;
-      const wrong = st.checked && chosen !== item.answer;
+      // A two-blank row is right only when both halves are: the book asks for the
+      // pair, and half a pair is not the answer to it.
+      const allRight = chosen === item.answer
+        && (wbSlots(item) < 2 || st.fill2[i] === item.answer2);
+      const right = st.checked && allRight;
+      const wrong = st.checked && !allRight;
       const row = document.createElement('div');
       row.className = 'wb-row'
         + (!st.checked && i === st.focus ? ' focus' : '')
         + (right ? ' ok' : '') + (wrong ? ' bad' : '');
 
-      if (ex.type === 'experience') {
+      if (wbPerItem(ex)) {
         // Its own row shape: the picture and the dictionary phrase name the task,
         // the sentence shows what has been built so far, and the buttons below
-        // are the two decisions — the graded form, then the ungraded truth.
+        // are the decisions that build it — left to right, in the order the
+        // blanks appear, with the ungraded 있어요/없어요 last where there is one.
         //
         // Built as elements rather than one innerHTML string and a querySelector
         // to fish the button container back out. The container is needed as an
@@ -2543,7 +2619,9 @@ function renderWorkbook() {
           '<span class="wb-exp-en">' + vbEsc(item.en || '') + '</span>';
         const line = document.createElement('div');
         line.className = 'wb-exp-line';
-        line.innerHTML = wbLineHtml(ex, item, chip ? wbAnswerText(chip) : '', { own: st.own[i] });
+        const chip2 = st.fill2[i] ? wbChip(st.fill2[i], item) : null;
+        line.innerHTML = wbLineHtml(ex, item, chip ? wbAnswerText(chip) : '',
+          { own: st.own[i], second: chip2 ? wbAnswerText(chip2) : '' });
         const picks = document.createElement('div');
         picks.className = 'wb-exp-picks';
         exp.appendChild(head);
@@ -2557,29 +2635,45 @@ function renderWorkbook() {
           mark.textContent = right ? '✓' : '✕';
           row.appendChild(mark);
         }
-        (item.choices || []).forEach((c, k) => {
-          const b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'wb-pick-form'
-            + (chosen === c.id ? ' on' : '')
-            + (st.checked && c.id === item.answer ? ' key' : '');
-          b.disabled = st.checked;
-          b.innerHTML = '<span class="wb-chip-key">' + (k + 1) + '</span>' + vbEsc(c.ko);
-          b.onclick = () => wbPickChoice(i, c.id);
-          picks.appendChild(b);
-        });
-        const sep = document.createElement('span');
-        sep.className = 'wb-exp-sep';
-        picks.appendChild(sep);
-        [['yes', 4], ['no', 5]].forEach(([val, key]) => {
-          const b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'wb-pick-own' + (st.own[i] === val ? ' on' : '');
-          b.disabled = st.checked;
-          b.innerHTML = '<span class="wb-chip-key">' + key + '</span>' + vbEsc(wbOwnLabel(ex, val));
-          b.onclick = () => wbSetOwn(i, val);
-          picks.appendChild(b);
-        });
+        // The number key on a button is its position in the whole row, so the
+        // keyboard and the mouse agree on what "3" means even when the row has
+        // two groups of buttons on it.
+        let key = 0;
+        const rule = () => {
+          const sep = document.createElement('span');
+          sep.className = 'wb-exp-sep';
+          picks.appendChild(sep);
+        };
+        const addForms = (list, slot) => {
+          const picked = slot === 2 ? st.fill2[i] : chosen;
+          const answer = slot === 2 ? item.answer2 : item.answer;
+          (list || []).forEach((c) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'wb-pick-form'
+              + (picked === c.id ? ' on' : '')
+              + (st.checked && c.id === answer ? ' key' : '');
+            b.disabled = st.checked;
+            b.innerHTML = '<span class="wb-chip-key">' + (++key) + '</span>' + vbEsc(c.ko);
+            b.onclick = () => wbPickChoice(i, c.id, slot);
+            picks.appendChild(b);
+          });
+        };
+        addForms(item.choices, 1);
+        if (wbSlots(item) === 2) { rule(); addForms(item.choices2, 2); }
+        if (ex.type === 'experience') {
+          rule();
+          ['yes', 'no'].forEach((val) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'wb-pick-own' + (st.own[i] === val ? ' on' : '');
+            b.disabled = st.checked;
+            b.innerHTML = '<span class="wb-chip-key">' + (++key) + '</span>'
+              + vbEsc(wbOwnLabel(ex, val));
+            b.onclick = () => wbSetOwn(i, val);
+            picks.appendChild(b);
+          });
+        }
         if (!st.checked) {
           row.onclick = (e) => { if (e.target === row) wbFocusBlank(i); };
         }
@@ -2609,15 +2703,22 @@ function renderWorkbook() {
     else {
       explain.className = 'shown';
       explain.innerHTML = items.map((item, i) => {
-        const correct = wbChip(item.answer);
-        const chosen = st.fill[i] ? wbChip(st.fill[i]) : null;
-        const ok = st.fill[i] === item.answer;
+        const two = wbSlots(item) === 2;
+        const correct = wbChip(item.answer, item);
+        const correct2 = two ? wbChip(item.answer2, item) : null;
+        const chosen = st.fill[i] ? wbChip(st.fill[i], item) : null;
+        const chosen2 = two && st.fill2[i] ? wbChip(st.fill2[i], item) : null;
+        const ok = st.fill[i] === item.answer && (!two || st.fill2[i] === item.answer2);
+        // Both halves of a two-blank row are reported, right one included, so the
+        // learner can see which half went wrong rather than just that one did.
+        const yours = (two ? [chosen, chosen2] : [chosen])
+          .map(c => (c ? wbAnswerText(c) : '—')).join(' / ');
         return '<div class="wb-why' + (ok ? ' ok' : ' bad') + '">' +
           '<div class="wb-why-head">' + item.n + ') ' + (ok ? '✓' : '✕') + ' ' +
             wbLineHtml(ex, item, wbAnswerText(correct),
-              { plain: true, own: st.own && st.own[i] }) + '</div>' +
-          (ok ? '' : '<div class="wb-why-yours">You put: ' +
-            vbEsc(chosen ? wbAnswerText(chosen) : '—') + '</div>') +
+              { plain: true, own: st.own && st.own[i],
+                second: correct2 ? wbAnswerText(correct2) : '' }) + '</div>' +
+          (ok ? '' : '<div class="wb-why-yours">You put: ' + vbEsc(yours) + '</div>') +
           '<div class="wb-why-en">' + vbEsc(item.en || '') + '</div>' +
           '<div class="wb-why-body">' + vbEsc(item.why || '') + '</div>' +
           '<div class="wb-why-gram">📐 ' + vbEsc(item.grammar || '') + '</div>' +
@@ -2689,11 +2790,15 @@ function renderWorkbookPicker() {
       b.type = 'button';
       b.className = 'wb-pick' + (i === st.pick ? ' focus' : '');
       b.setAttribute('data-exercise', ex.id);
+      // 문법과 표현 numbers its exercises inside each grammar point, so several
+      // rows here are called 연습 1. The pattern is printed because without it
+      // the list has rows that read identically.
       b.innerHTML =
         '<span class="wb-pick-key">' + (i + 1) + '</span>' +
         '<span class="wb-pick-icon">' + vbEsc(ex.icon || '📝') + '</span>' +
         '<span class="wb-pick-text">' +
-          '<span class="wb-pick-no">' + vbEsc((ex.section || '') + ' · ' + (ex.no || '')) + '</span>' +
+          '<span class="wb-pick-no">' + vbEsc((ex.section || '') + ' · ' + (ex.no || '')) +
+            (ex.pattern ? '<b class="wb-pick-pat">' + vbEsc(ex.pattern) + '</b>' : '') + '</span>' +
           '<span class="wb-pick-ko">' + vbEsc(ex.instructionKo || '') + '</span>' +
           '<span class="wb-pick-en">' + vbEsc(ex.blurbEn || ex.instructionEn || '') + '</span>' +
         '</span>' +
@@ -2769,16 +2874,27 @@ if (typeof window !== 'undefined' && window.addEventListener) {
       e.preventDefault(); wbClearBlank();
     } else if (/^[1-9]$/.test(e.key)) {
       const num = Number(e.key);
-      if (st.ex.type === 'experience') {
-        // Same idiom as everywhere else: numbers pick things in the focused row.
-        // 1-3 are the forms, then 있어요 and 없어요.
+      if (wbPerItem(st.ex)) {
+        // Same idiom as everywhere else: numbers pick things in the focused row,
+        // counting left to right across every button on it — the first blank's
+        // forms, then the second blank's, then 있어요 and 없어요.
         const item = (st.ex.items || [])[st.focus];
         if (!item) return;
-        const choice = (item.choices || [])[num - 1];
-        if (choice) { e.preventDefault(); wbPickChoice(st.focus, choice.id); return; }
-        const n = (item.choices || []).length;
-        if (num === n + 1) { e.preventDefault(); wbSetOwn(st.focus, 'yes'); }
-        else if (num === n + 2) { e.preventDefault(); wbSetOwn(st.focus, 'no'); }
+        const first = item.choices || [];
+        if (num <= first.length) {
+          e.preventDefault(); wbPickChoice(st.focus, first[num - 1].id, 1); return;
+        }
+        const second = item.choices2 || [];
+        if (num <= first.length + second.length) {
+          e.preventDefault();
+          wbPickChoice(st.focus, second[num - first.length - 1].id, 2);
+          return;
+        }
+        if (st.ex.type === 'experience') {
+          const base = first.length + second.length;
+          if (num === base + 1) { e.preventDefault(); wbSetOwn(st.focus, 'yes'); }
+          else if (num === base + 2) { e.preventDefault(); wbSetOwn(st.focus, 'no'); }
+        }
         return;
       }
       const chip = st.chips[num - 1];

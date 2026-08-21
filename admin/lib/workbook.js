@@ -13,11 +13,11 @@ const path = require('path');
 const { atomicWriteJson } = require('./atomicWrite');
 
 const WORKBOOK_REL = path.join('worlds', 'unit14-workbook.json');
-const TYPES = ['fill', 'match', 'dialogue', 'experience'];
-// 'experience' is the odd one out: its choices hang off each question rather
-// than a shared box, so it validates on a different axis. Everything else is
-// "assign one of N shared entries to each of M slots".
-const PER_ITEM_CHOICE_TYPES = ['experience'];
+const TYPES = ['fill', 'match', 'dialogue', 'experience', 'build'];
+// 'experience' and 'build' are the odd ones out: their choices hang off each
+// question rather than a shared box, so they validate on a different axis.
+// Everything else is "assign one of N shared entries to each of M slots".
+const PER_ITEM_CHOICE_TYPES = ['experience', 'build'];
 
 function readJson(rel, rootDir) {
   const full = path.join(rootDir, rel);
@@ -87,39 +87,94 @@ function cleanItem(item, i, where, type, chipIds) {
   return out;
 }
 
-// A question that carries its own choices. The graded answer must be one of
-// them, and there has to be something to get wrong — a single choice is not a
-// question. Distractors are the whole point here: the learner should be choosing
-// between 들은 and 듣은, not picking the only button on the row.
-function cleanChoiceItem(item, i, where) {
-  const at = `${where} item ${i + 1}`;
-  const raw = Array.isArray(item && item.choices) ? item.choices : [];
-  if (raw.length < 2) throw new Error(`${at}: needs at least two choices`);
-  const seen = new Set();
-  const choices = raw.map((c) => {
+// One set of buttons for one blank. There has to be something to get wrong — a
+// single choice is not a question. Distractors are the whole point here: the
+// learner should be choosing between 들은 and 듣은, not picking the only button
+// on the row.
+function cleanChoiceList(raw, at, what) {
+  const list = Array.isArray(raw) ? raw : [];
+  if (list.length < 2) throw new Error(`${at}: ${what}needs at least two choices`);
+  const ids = new Set();
+  const choices = list.map((c) => {
     const id = str(c && c.id);
     const ko = str(c && c.ko);
     if (!id) throw new Error(`${at}: every choice needs an id`);
     if (!ko) throw new Error(`${at}: choice "${id}" needs Korean text`);
-    if (seen.has(id)) throw new Error(`${at}: duplicate choice id "${id}"`);
-    seen.add(id);
+    if (ids.has(id)) throw new Error(`${at}: duplicate choice id "${id}"`);
+    ids.add(id);
     return { id, ko };
   });
-  const answer = str(item.answer);
+  return { choices, ids };
+}
+
+// A 'build' question is a short script: one or two speakers, and a gap in one of
+// the lines. The number of gaps has to match the number of choice sets, because
+// a line with nowhere to put the answer renders as already finished, and a spare
+// choice set renders buttons that change nothing on screen.
+function cleanLines(raw, at, gaps) {
+  const list = Array.isArray(raw) ? raw : [];
+  if (!list.length) throw new Error(`${at}: needs at least one line`);
+  let found = 0;
+  const lines = list.map((l) => {
+    const ko = str(l && l.ko);
+    if (!ko) throw new Error(`${at}: every line needs Korean text`);
+    found += ko.split('{}').length - 1;
+    const out = {};
+    const who = str(l && l.who);
+    if (who) out.who = who;
+    out.ko = ko;
+    return out;
+  });
+  if (found !== gaps) {
+    throw new Error(`${at}: ${gaps} blank(s) to fill, but the lines carry ${found} {}`);
+  }
+  return lines;
+}
+
+// A question that carries its own choices, for either of the two types that
+// work that way. 'experience' prints one prompt and one blank; 'build' prints a
+// script and can put a second blank in it — the 해도 돼요? / -면 안 돼요 pair the
+// book drills as one exchange.
+function cleanChoiceItem(item, i, where, type) {
+  const at = `${where} item ${i + 1}`;
+  const slot = cleanChoiceList(item && item.choices, at, '');
+  const answer = str(item && item.answer);
   if (!answer) throw new Error(`${at}: needs an answer`);
-  if (!seen.has(answer)) throw new Error(`${at}: answer "${answer}" is not one of its choices`);
+  if (!slot.ids.has(answer)) throw new Error(`${at}: answer "${answer}" is not one of its choices`);
+
   const out = {
     n: typeof item.n === 'number' && item.n > 0 ? item.n : i + 1,
     art: str(item.art),
-    phraseKo: str(item.phraseKo),
-    stemKo: str(item.stemKo),
-    answer,
-    choices,
-    en: str(item.en),
-    why: str(item.why),
-    grammar: str(item.grammar)
+    phraseKo: str(item.phraseKo)
   };
-  if (!out.stemKo) throw new Error(`${at}: needs the Korean prompt`);
+  if (type === 'build') {
+    const hasSecond = !!(item.choices2 || item.answer2);
+    out.lines = cleanLines(item.lines, at, hasSecond ? 2 : 1);
+    out.answer = answer;
+    out.choices = slot.choices;
+    if (hasSecond) {
+      const slot2 = cleanChoiceList(item.choices2, at, 'the second blank ');
+      // The renderer looks a placed choice up by id across the whole row, so an
+      // id shared by both blanks would put the first blank's text in the second.
+      const clash = slot2.choices.find((c) => slot.ids.has(c.id));
+      if (clash) throw new Error(`${at}: choice id "${clash.id}" is used by both blanks`);
+      const answer2 = str(item.answer2);
+      if (!answer2) throw new Error(`${at}: needs an answer for the second blank`);
+      if (!slot2.ids.has(answer2)) {
+        throw new Error(`${at}: answer "${answer2}" is not one of the second blank's choices`);
+      }
+      out.answer2 = answer2;
+      out.choices2 = slot2.choices;
+    }
+  } else {
+    out.stemKo = str(item.stemKo);
+    if (!out.stemKo) throw new Error(`${at}: needs the Korean prompt`);
+    out.answer = answer;
+    out.choices = slot.choices;
+  }
+  out.en = str(item.en);
+  out.why = str(item.why);
+  out.grammar = str(item.grammar);
   if (!out.why) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
   if (!out.grammar) throw new Error(`${at}: needs a grammar note`);
   return out;
@@ -155,7 +210,7 @@ function cleanExercise(ex, i, seenIds) {
   const items = Array.isArray(ex.items) ? ex.items : [];
   if (!items.length) throw new Error(`${where}: needs at least one question`);
   const cleaned = perItem
-    ? items.map((it, k) => cleanChoiceItem(it, k, where))
+    ? items.map((it, k) => cleanChoiceItem(it, k, where, type))
     : items.map((it, k) => cleanItem(it, k, where, type, chipIds));
 
   if (perItem) {
@@ -169,14 +224,32 @@ function cleanExercise(ex, i, seenIds) {
       instructionKo: str(ex.instructionKo),
       instructionEn: str(ex.instructionEn),
       noteEn: str(ex.noteEn),
-      pattern: str(ex.pattern),
-      ownLabels: {
+      pattern: str(ex.pattern)
+    };
+    if (type === 'experience') {
+      out.ownLabels = {
         yes: str(ex.ownLabels && ex.ownLabels.yes) || '있어요',
         no: str(ex.ownLabels && ex.ownLabels.no) || '없어요'
-      },
-      items: cleaned
-    };
-    if (ex.example) {
+      };
+    }
+    out.items = cleaned;
+    if (ex.example && type === 'build') {
+      // A 'build' example has no shared box to borrow its answer from, so the
+      // finished text is stored outright. An example with a gap left in it would
+      // be showing the learner the same puzzle instead of the answer to it.
+      const answerKo = str(ex.example.answerKo);
+      const answer2Ko = str(ex.example.answer2Ko);
+      if (!answerKo) throw new Error(`${where}: the worked example needs its answer written out`);
+      const eg = {
+        art: str(ex.example.art),
+        phraseKo: str(ex.example.phraseKo),
+        lines: cleanLines(ex.example.lines, `${where} example`, answer2Ko ? 2 : 1),
+        answerKo
+      };
+      if (answer2Ko) eg.answer2Ko = answer2Ko;
+      eg.en = str(ex.example.en);
+      out.example = eg;
+    } else if (ex.example) {
       const exAnswer = str(ex.example.answer);
       out.example = {
         art: str(ex.example.art),
