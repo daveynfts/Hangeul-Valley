@@ -586,7 +586,12 @@ That split is intentional (content can change without a git push), but the two c
 must land in order: **R2 first, then Vercel**. A new `js/scenes/farm.js` that preloads a
 PNG which is not yet on the CDN 404s in prod.
 
-One command does the whole path:
+Merging to `main` publishes automatically. `.github/workflows/publish.yml` waits for the
+**CI** workflow to succeed on a `push` to `main`, then runs `npm run publish:prod`
+(validate → R2 upload → CDN verify → Vercel Deploy Hook). Manual rerun is still
+Actions → Publish → Run workflow.
+
+Locally, the same command is:
 
 ```bash
 npm run publish:prod
@@ -597,9 +602,8 @@ the four required JSON files → POST `VERCEL_DEPLOY_HOOK_URL`. Credentials live
 `.env.local` (see `.env.example`). `--dry-run` prints the file list and does not touch
 the network. `--skip-deploy` is content-only.
 
-Create the hook in Vercel → Project → Settings → Git → Deploy Hooks. The same pipeline
-is a manual GitHub Action (Actions → Publish → Run workflow) once these repo secrets
-exist: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`,
+Create the hook in Vercel → Project → Settings → Git → Deploy Hooks. Repo secrets
+required: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`,
 `R2_PUBLIC_BASE_URL`, `VERCEL_DEPLOY_HOOK_URL`.
 
 `npm run upload:r2` still uploads without deploying Vercel, if you only need the CDN.
