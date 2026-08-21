@@ -20,8 +20,16 @@
   const TYPE_LABEL = {
     fill: 'Fill the sentence ending',
     match: 'Join two columns',
-    dialogue: 'Complete a dialogue'
+    dialogue: 'Complete a dialogue',
+    experience: 'Pick the form, then answer for yourself',
+    build: 'Build the line from its own choices'
   };
+
+  // These two carry their choices on each question rather than in one shared
+  // box, so the box-and-answer form below does not describe them. Rather than
+  // show a form whose fields mean nothing here — and which would be refused on
+  // save — the wording and the questions are shown read-only.
+  const PER_ITEM = ['experience', 'build'];
 
   function esc(s) {
     return String(s === null || s === undefined ? '' : s)
@@ -68,12 +76,76 @@
     });
   }
 
+  // ── An exercise whose choices live on each question ────────────────────────
+  // The wording is the part that is safe and useful to edit here: it is the same
+  // shape whatever the type. The questions carry per-row choices, art keys and
+  // {} placeholders that the server checks against each other, so they are
+  // listed rather than offered as inputs — an edit box that can only produce a
+  // refused save is worse than no edit box.
+  function renderPerItemForm(host, e) {
+    const two = (it) => !!it.choices2;
+    const line = (it) => (it.lines || []).map((l) =>
+      `<div class="u14-ro-line">${l.who ? `<b>${esc(l.who)}</b> ` : ''}${esc(l.ko)}</div>`).join('')
+      || `<div class="u14-ro-line">${esc(it.stemKo || '')}</div>`;
+    const forms = (list, answer) => (list || []).map((c) =>
+      `<span class="u14-ro-chip${c.id === answer ? ' key' : ''}">${esc(c.ko)}</span>`).join('');
+
+    host.innerHTML = `
+      <div class="card widget-card">
+        <div class="card-header-row">
+          <h3 class="widget-title">${esc(e.section || '')} · ${esc(e.no || '')}</h3>
+          <span class="u14-type-label">${esc(TYPE_LABEL[e.type] || e.type)}</span>
+        </div>
+        <div class="u14-grid2">
+          <label>Exercise id <input class="form-input" data-meta="id" value="${esc(e.id)}"></label>
+          <label>Grammar point <input class="form-input" data-meta="pattern" value="${esc(e.pattern)}"></label>
+          <label>Section (KO) <input class="form-input" data-meta="section" value="${esc(e.section)}"></label>
+          <label>Section (EN) <input class="form-input" data-meta="sectionEn" value="${esc(e.sectionEn)}"></label>
+          <label>연습 number <input class="form-input" data-meta="no" value="${esc(e.no)}"></label>
+          <label>Icon <input class="form-input" data-meta="icon" value="${esc(e.icon)}"></label>
+        </div>
+        <label>Instruction (KO) <input class="form-input" data-meta="instructionKo" value="${esc(e.instructionKo)}"></label>
+        <label>Instruction (EN) <input class="form-input" data-meta="instructionEn" value="${esc(e.instructionEn)}"></label>
+        <label>List blurb (EN) <input class="form-input" data-meta="blurbEn" value="${esc(e.blurbEn)}"></label>
+        <label>Note shown above the questions (EN)
+          <textarea class="form-input" rows="2" data-meta="noteEn">${esc(e.noteEn)}</textarea></label>
+      </div>
+
+      <div class="card widget-card">
+        <div class="card-header-row">
+          <h3 class="widget-title">Questions — ${(e.items || []).length}</h3>
+        </div>
+        <p class="section-desc">Each question here carries its own choices, its picture and the
+          <code>{}</code> that marks where the answer goes, and the server checks those against
+          each other on save. Edit the wording above; edit the questions in
+          <code>worlds/unit14-workbook.json</code>. The green choice is the answer.</p>
+        <div id="u14-items">
+          ${(e.items || []).map((it) => `
+          <div class="u14-item u14-readonly">
+            <div class="u14-item-head">
+              <span class="u14-item-n">${it.n})</span>
+              <span class="u14-ro-phrase">${esc(it.phraseKo || '')}</span>
+              ${it.art ? `<code class="u14-ro-art">${esc(it.art)}</code>` : ''}
+            </div>
+            ${line(it)}
+            <div class="u14-ro-forms">${forms(it.choices, it.answer)}</div>
+            ${two(it) ? `<div class="u14-ro-forms">${forms(it.choices2, it.answer2)}</div>` : ''}
+            <div class="u14-ro-en">${esc(it.en || '')}</div>
+          </div>`).join('')}
+        </div>
+      </div>`;
+
+    bindForm();
+  }
+
   // ── The selected exercise ──────────────────────────────────────────────────
   function renderForm() {
     const host = document.getElementById('u14-form');
     const e = ex();
     if (!host) return;
     if (!e) { host.innerHTML = '<p class="text-muted">No exercise selected.</p>'; return; }
+
+    if (PER_ITEM.includes(e.type)) { renderPerItemForm(host, e); return; }
 
     const isDlg = e.type === 'dialogue';
     const isFill = e.type === 'fill';

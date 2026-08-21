@@ -404,6 +404,944 @@
         "own": "no",
         "en": "I have never been to Russia."
       }
+    },
+    {
+      "id": "u14-grammar-2-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 1",
+      "icon": "⏳",
+      "blurbEn": "Say when it happened, and get the past-tense contraction right.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "The dictionary form is printed above each dialogue. Turn it into -았을/었을 때 — the same 았/었 as the plain past tense, contracting by the same rules.",
+      "pattern": "A/V-았을/었을 때",
+      "items": [
+        {
+          "n": 1,
+          "art": "come_to_korea",
+          "phraseKo": "한국에 오다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제 노래방에 가 봤어요?"
+            },
+            {
+              "who": "B",
+              "ko": "고향 친구가 한국에 {} 가 봤어요."
+            }
+          ],
+          "answer": "wasseul",
+          "choices": [
+            {
+              "id": "wasseul",
+              "ko": "왔을 때"
+            },
+            {
+              "id": "oasseul",
+              "ko": "오았을 때"
+            },
+            {
+              "id": "olttae",
+              "ko": "올 때"
+            }
+          ],
+          "en": "I went when a friend from my home town came to Korea.",
+          "why": "The question is about the 노래방, but the answer dates the visit by something else entirely — the friend arriving. That is what this clause is for: pinning one event to the moment another one happened.",
+          "grammar": "오다 → 왔을 때. ㅗ meeting 아 has nowhere to go but together: 오 + 았 = 왔. 올 때 is the same clause with no past marker at all, so it would mean whenever he comes rather than the once he did."
+        },
+        {
+          "n": 2,
+          "art": "train_leaves",
+          "phraseKo": "지하철이 떠나다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제 지갑 잃어버린 것을 알았어요?"
+            },
+            {
+              "who": "B",
+              "ko": "지하철이 {} 알았어요."
+            }
+          ],
+          "answer": "ddeonasseul",
+          "choices": [
+            {
+              "id": "ddeonasseul",
+              "ko": "떠났을 때"
+            },
+            {
+              "id": "ddeonaasseul",
+              "ko": "떠나았을 때"
+            },
+            {
+              "id": "ddeonalttae",
+              "ko": "떠날 때"
+            }
+          ],
+          "en": "I realised it when the train had already pulled out.",
+          "why": "The wallet was gone before this moment, but the knowing happened at it — and by then the train had left. -았을 때 is the tense for exactly that: the moment at which something had already finished.",
+          "grammar": "떠나다 → 떠났을 때. A stem ending in ㅏ absorbs the 았 rather than standing next to it: 떠나 + 았 = 떠났. 떠나았을 writes the same vowel twice."
+        },
+        {
+          "n": 3,
+          "art": "tell_lie",
+          "phraseKo": "거짓말(을) 하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제 친구에게 화가 났어요?"
+            },
+            {
+              "who": "B",
+              "ko": "친구가 거짓말을 {} 화가 났어요."
+            }
+          ],
+          "answer": "haesseul",
+          "choices": [
+            {
+              "id": "haesseul",
+              "ko": "했을 때"
+            },
+            {
+              "id": "haasseul",
+              "ko": "하았을 때"
+            },
+            {
+              "id": "halttae",
+              "ko": "할 때"
+            }
+          ],
+          "en": "I got angry when my friend lied to me.",
+          "why": "화가 나다 is something that happened to you at a particular moment, so the clause dating it has to be past as well. Note that Korean says the anger 났어요 — it arose — rather than that you were angry.",
+          "grammar": "하다 → 했을 때. 하 takes 여, not 았/었: 하 + 였 = 했, never 하았. It is the same 여 you already hear in 하다 → 해요."
+        },
+        {
+          "n": 4,
+          "art": "fail_exam",
+          "phraseKo": "시험에서 떨어지다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제 가장 힘들었어요?"
+            },
+            {
+              "who": "B",
+              "ko": "시험에서 {} 가장 힘들었어요."
+            }
+          ],
+          "answer": "ddeoreojyeosseul",
+          "choices": [
+            {
+              "id": "ddeoreojyeosseul",
+              "ko": "떨어졌을 때"
+            },
+            {
+              "id": "ddeoreojieosseul",
+              "ko": "떨어지었을 때"
+            },
+            {
+              "id": "ddeoreojilttae",
+              "ko": "떨어질 때"
+            }
+          ],
+          "en": "The hardest time was when I failed the exam.",
+          "why": "떨어지다 is to fall, and Korean uses the same verb for failing an exam — you fall out of it. Worth holding onto: 시험에 붙다 is the other side of it, to stick, to pass.",
+          "grammar": "떨어지다 → 떨어졌을 때. ㅣ meeting 었 gives ㅕㅆ: 떨어지 + 었 = 떨어졌. The same contraction as 마시다 → 마셨어요 from the 어휘 pages."
+        },
+        {
+          "n": 5,
+          "art": "first_meet",
+          "phraseKo": "처음 보다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제부터 그 사람을 좋아했어요?"
+            },
+            {
+              "who": "B",
+              "ko": "처음 {} 좋아했어요."
+            }
+          ],
+          "answer": "bwasseulttaebuteo",
+          "choices": [
+            {
+              "id": "bwasseulttaebuteo",
+              "ko": "봤을 때부터"
+            },
+            {
+              "id": "bwasseulttae",
+              "ko": "봤을 때"
+            },
+            {
+              "id": "bolttaebuteo",
+              "ko": "볼 때부터"
+            }
+          ],
+          "en": "I've liked them from the first time I saw them.",
+          "why": "A asked 언제부터, not 언제 — from when, not when. So the answer needs 부터 on it: the point is not that you liked them at that one moment, it is that you have liked them ever since. Reading which question was actually asked is half of this item.",
+          "grammar": "보다 → 봤을 때, then 부터: 봤을 때부터. 때 is an ordinary noun, so 부터 attaches to it exactly as it would to any other."
+        }
+      ],
+      "example": {
+        "art": "be_young",
+        "phraseKo": "어리다",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "언제 제주도에 가 봤어요?"
+          },
+          {
+            "who": "B",
+            "ko": "{} 가 봤어요."
+          }
+        ],
+        "answerKo": "어렸을 때",
+        "en": "A: When did you go to Jeju? — B: I went when I was little."
+      }
+    },
+    {
+      "id": "u14-grammar-2-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 2",
+      "icon": "🕰️",
+      "blurbEn": "Five memories, five verbs, and five different ways the past contracts.",
+      "instructionKo": "그림을 보고 [보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each sentence as shown in the example.",
+      "noteEn": "The book gives only a picture here and expects you to find the words yourself. The phrase is printed above each sentence so that the conjugation is what gets marked — that is the part with one right answer.",
+      "pattern": "A/V-았을/었을 때",
+      "items": [
+        {
+          "n": 1,
+          "art": "be_sick",
+          "phraseKo": "아프다",
+          "lines": [
+            {
+              "ko": "지난달에 {} 고향에 가고 싶었어요."
+            }
+          ],
+          "answer": "apasseul",
+          "choices": [
+            {
+              "id": "apasseul",
+              "ko": "아팠을 때"
+            },
+            {
+              "id": "apeueosseul",
+              "ko": "아프었을 때"
+            },
+            {
+              "id": "apeulttae",
+              "ko": "아플 때"
+            }
+          ],
+          "en": "Last month, when I was ill, I wanted to go home.",
+          "why": "Being ill is when homesickness lands hardest, and the sentence dates the wish to that. 아프다 is one of the ㅡ stems, which means the vowel it takes is decided by the syllable before the ㅡ rather than by the ㅡ itself.",
+          "grammar": "아프다 → 아팠을 때. The ㅡ drops before a vowel ending, and 아프 looks back at its ㅏ to pick 아: 아프 + 아 = 아파, then 았을 때. 아프었을 keeps the ㅡ and takes the wrong vowel on top of it."
+        },
+        {
+          "n": 2,
+          "art": "get_prize",
+          "phraseKo": "상을 받다",
+          "lines": [
+            {
+              "ko": "지난 수료식에서 상을 {} 정말 기뻤어요."
+            }
+          ],
+          "answer": "badasseul",
+          "choices": [
+            {
+              "id": "badasseul",
+              "ko": "받았을 때"
+            },
+            {
+              "id": "badeosseul",
+              "ko": "받었을 때"
+            },
+            {
+              "id": "badeulttae",
+              "ko": "받을 때"
+            }
+          ],
+          "en": "I was really happy when I got the prize at the last graduation ceremony.",
+          "why": "수료식 is the ceremony that closes a course, and the prize changes hands at one moment inside it. 받다 is a plain consonant stem, so nothing contracts here — the only decision is which vowel the ending takes.",
+          "grammar": "받다 → 받았을 때. Vowel harmony settles it: a stem whose vowel is ㅏ or ㅗ takes 았, everything else takes 었. 받 has ㅏ, so 받았을, not 받었을."
+        },
+        {
+          "n": 3,
+          "art": "memorial_photo",
+          "phraseKo": "할머니가 돌아가시다",
+          "lines": [
+            {
+              "ko": "{} 가장 슬펐어요."
+            }
+          ],
+          "answer": "dorakasyeosseul",
+          "choices": [
+            {
+              "id": "dorakasyeosseul",
+              "ko": "할머니가 돌아가셨을 때"
+            },
+            {
+              "id": "dorakasseul",
+              "ko": "할머니가 돌아갔을 때"
+            },
+            {
+              "id": "dorakasilttae",
+              "ko": "할머니가 돌아가실 때"
+            }
+          ],
+          "en": "The saddest time was when my grandmother passed away.",
+          "why": "돌아가시다 is how Korean says that someone has died, and the 시 inside it is not decoration — it is the honorific, and it is the entire reason the word is a respectful one. 돌아갔을 때 is the same verb with the 시 taken out, and means she went back somewhere.",
+          "grammar": "돌아가시다 → 돌아가셨을 때. 시 + 었 → 셨, the ordinary ㅣ contraction. 돌아가실 때 is future or general, which is not what a memory is."
+        },
+        {
+          "n": 4,
+          "art": "lose_wallet",
+          "phraseKo": "지갑을 잃어버리다",
+          "lines": [
+            {
+              "ko": "어제 지갑을 {} 친구가 같이 찾아 줬어요."
+            }
+          ],
+          "answer": "ireobeoryeosseul",
+          "choices": [
+            {
+              "id": "ireobeoryeosseul",
+              "ko": "잃어버렸을 때"
+            },
+            {
+              "id": "ireobeorieosseul",
+              "ko": "잃어버리었을 때"
+            },
+            {
+              "id": "ireobeorilttae",
+              "ko": "잃어버릴 때"
+            }
+          ],
+          "en": "When I lost my wallet yesterday, a friend helped me look for it.",
+          "why": "잃어버리다 is 잃다 with -어 버리다 stuck on, which adds the sense that the thing is gone and not coming back on its own. Only the last piece conjugates, so the verb behaves like any ㅣ stem.",
+          "grammar": "잃어버리다 → 잃어버렸을 때. 버리 + 었 = 버렸. Worth noticing 찾아 줬어요 as well: -아/어 주다 is doing something for someone, so the friend did the searching on your behalf."
+        },
+        {
+          "n": 5,
+          "art": "be_young",
+          "phraseKo": "어리다",
+          "lines": [
+            {
+              "ko": "저는 {} 친구들과 축구를 많이 했어요."
+            }
+          ],
+          "answer": "eoryeosseul",
+          "choices": [
+            {
+              "id": "eoryeosseul",
+              "ko": "어렸을 때"
+            },
+            {
+              "id": "eorieosseul",
+              "ko": "어리었을 때"
+            },
+            {
+              "id": "eoryeowosseul",
+              "ko": "어려웠을 때"
+            }
+          ],
+          "en": "When I was little I played a lot of football with my friends.",
+          "why": "어리다 is to be young and 어렵다 is to be difficult — two verbs that look like one until you conjugate them. 어려웠을 때 is the second one, and it turns this into playing football when life was hard.",
+          "grammar": "어리다 → 어렸을 때. 어리 + 었 = 어렸. 어릴 때 is idiomatic Korean for the same idea and you will hear it constantly, but this exercise is drilling -았을/었을 때 and the book’s key prints 어렸을 때."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "집에 도착하다",
+        "lines": [
+          {
+            "ko": "{} 전화가 왔어요."
+          }
+        ],
+        "answerKo": "집에 도착했을 때",
+        "en": "The phone rang when I got home."
+      }
+    },
+    {
+      "id": "u14-grammar-4-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 1",
+      "icon": "🚫",
+      "blurbEn": "Ask whether it is allowed, then answer that it is not — both halves.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "Two blanks per sign. A asks with -아/어도 돼요 — may I — and B refuses with -(으)면 안 돼요. One verb, two endings, and they attach by different rules: -아/어도 needs the 해요-form vowel, -(으)면 goes straight onto the plain stem.",
+      "pattern": "V-(으)면 안 되다",
+      "items": [
+        {
+          "n": 1,
+          "art": "no_phone",
+          "phraseKo": "전화를 하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기서 전화를 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 여기에서 전화를 {}."
+            }
+          ],
+          "answer": "haedo",
+          "choices": [
+            {
+              "id": "haedo",
+              "ko": "해도 돼요"
+            },
+            {
+              "id": "haado",
+              "ko": "하아도 돼요"
+            },
+            {
+              "id": "hamyeondo",
+              "ko": "하면 돼요"
+            }
+          ],
+          "answer2": "hamyeonan",
+          "choices2": [
+            {
+              "id": "hamyeonan",
+              "ko": "하면 안 돼요"
+            },
+            {
+              "id": "haemyeonan",
+              "ko": "해면 안 돼요"
+            },
+            {
+              "id": "hajian",
+              "ko": "하지 안 돼요"
+            }
+          ],
+          "en": "A: May I make a phone call here? — B: No, you may not make calls here.",
+          "why": "The trap on A’s side is 하면 돼요, which is a real pattern but a different one: -(으)면 되다 means it will do if you do, whereas -아/어도 되다 asks whether it is permitted. On B’s side, -(으)면 attaches to the plain stem 하, never to the 해요 form.",
+          "grammar": "하다 → 해도 돼요 / 하면 안 돼요. 하 + 여도 = 해도, and 하 + 면 = 하면. 하지 안 돼요 is 하지 마세요 and 안 되다 crossed with each other; -지 goes with 마세요 or 않다, not with 안 되다."
+        },
+        {
+          "n": 2,
+          "art": "no_food",
+          "phraseKo": "음식을 먹다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기서 음식을 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 여기에서 음식을 {}."
+            }
+          ],
+          "answer": "meogeodo",
+          "choices": [
+            {
+              "id": "meogeodo",
+              "ko": "먹어도 돼요"
+            },
+            {
+              "id": "meogado",
+              "ko": "먹아도 돼요"
+            },
+            {
+              "id": "meogeumyeondo",
+              "ko": "먹으면 돼요"
+            }
+          ],
+          "answer2": "meogeumyeonan",
+          "choices2": [
+            {
+              "id": "meogeumyeonan",
+              "ko": "먹으면 안 돼요"
+            },
+            {
+              "id": "meogmyeonan",
+              "ko": "먹면 안 돼요"
+            },
+            {
+              "id": "meogeomyeonan",
+              "ko": "먹어면 안 돼요"
+            }
+          ],
+          "en": "A: May I eat here? — B: No, you may not eat here.",
+          "why": "This is the 음식물 반입 금지 sign from 어휘 연습 3, seen from the other side: there the rule was a noun, here it is a verb aimed at you. 먹 ends in a consonant, which is what decides both endings.",
+          "grammar": "먹다 → 먹어도 돼요 / 먹으면 안 돼요. The stem vowel ㅓ takes 어, not 아. And a consonant-final stem needs the 으 in -으면 — 먹면 is what the rule exists to prevent."
+        },
+        {
+          "n": 3,
+          "art": "no_camera",
+          "phraseKo": "사진을 찍다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기서 사진을 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 여기에서 사진을 {}."
+            }
+          ],
+          "answer": "jjigeodo",
+          "choices": [
+            {
+              "id": "jjigeodo",
+              "ko": "찍어도 돼요"
+            },
+            {
+              "id": "jjigado",
+              "ko": "찍아도 돼요"
+            },
+            {
+              "id": "jjigeumyeondo",
+              "ko": "찍으면 돼요"
+            }
+          ],
+          "answer2": "jjigeumyeonan",
+          "choices2": [
+            {
+              "id": "jjigeumyeonan",
+              "ko": "찍으면 안 돼요"
+            },
+            {
+              "id": "jjigmyeonan",
+              "ko": "찍면 안 돼요"
+            },
+            {
+              "id": "jjigeodomyeonan",
+              "ko": "찍어면 안 돼요"
+            }
+          ],
+          "en": "A: May I take photographs here? — B: No, you may not take photographs here.",
+          "why": "찍다 has ㅣ in the stem, and ㅣ is not one of the two vowels that take 았/았 — so 어, the same as 먹다. Museums and 공연장 are where you will actually be asked this.",
+          "grammar": "찍다 → 찍어도 돼요 / 찍으면 안 돼요. Only ㅏ and ㅗ stems take 아; everything else, ㅣ included, takes 어. And 찍 ends in a consonant, so -으면 keeps its 으."
+        },
+        {
+          "n": 4,
+          "art": "no_smoking",
+          "phraseKo": "담배를 피우다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기서 담배를 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 여기에서 담배를 {}."
+            }
+          ],
+          "answer": "piwodo",
+          "choices": [
+            {
+              "id": "piwodo",
+              "ko": "피워도 돼요"
+            },
+            {
+              "id": "piueodo",
+              "ko": "피우어도 돼요"
+            },
+            {
+              "id": "piumyeondo",
+              "ko": "피우면 돼요"
+            }
+          ],
+          "answer2": "piumyeonan",
+          "choices2": [
+            {
+              "id": "piumyeonan",
+              "ko": "피우면 안 돼요"
+            },
+            {
+              "id": "piwomyeonan",
+              "ko": "피워면 안 돼요"
+            },
+            {
+              "id": "piueumyeonan",
+              "ko": "피우으면 안 돼요"
+            }
+          ],
+          "en": "A: May I smoke here? — B: No, you may not smoke here.",
+          "why": "This is 금연 from 어휘 연습 3 put into a verb. 피우다 pulls in two directions at once, which is what makes it the useful item here: the -아/어도 half contracts and the -(으)면 half does not.",
+          "grammar": "피우다 → 피워도 돼요 / 피우면 안 돼요. ㅜ + 어 → ㅝ, so 피우 + 어도 = 피워도. But 피우 ends in a vowel, so -면 goes on bare: 피우으면 is the 으 that only consonant stems need."
+        },
+        {
+          "n": 5,
+          "art": "no_swimming",
+          "phraseKo": "수영을 하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기서 수영을 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 여기에서 수영을 {}."
+            }
+          ],
+          "answer": "suyeonghaedo",
+          "choices": [
+            {
+              "id": "suyeonghaedo",
+              "ko": "해도 돼요"
+            },
+            {
+              "id": "suyeonghaedoeyo",
+              "ko": "해도 되요"
+            },
+            {
+              "id": "suyeonghamyeondo",
+              "ko": "하면 돼요"
+            }
+          ],
+          "answer2": "suyeonghamyeonan",
+          "choices2": [
+            {
+              "id": "suyeonghamyeonan",
+              "ko": "하면 안 돼요"
+            },
+            {
+              "id": "suyeonghamyeonandoe",
+              "ko": "하면 안 되요"
+            },
+            {
+              "id": "suyeonghaemyeonan",
+              "ko": "해면 안 돼요"
+            }
+          ],
+          "en": "A: May I swim here? — B: No, you may not swim here.",
+          "why": "Same verb as item 1, so the trap moved: it is now the spelling of 되다 itself. 되 + 어요 contracts to 돼요, and 되요 is the single most common misspelling in Korean — native writers get it wrong too.",
+          "grammar": "하다 → 해도 돼요 / 하면 안 돼요. 되다 conjugates like any other verb: 되 + 어요 = 돼요. The test is that 돼 can stand alone as a whole word and 되 cannot, so anything ending the sentence is 돼요."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "차를 세우다",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "여기에 {}?"
+          },
+          {
+            "who": "B",
+            "ko": "아니요, 여기에 {}."
+          }
+        ],
+        "answerKo": "차를 세워도 돼요",
+        "answer2Ko": "차를 세우면 안 돼요",
+        "en": "A: May I park a car here? — B: No, you may not park here."
+      }
+    },
+    {
+      "id": "u14-grammar-4-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 2",
+      "icon": "🙅",
+      "blurbEn": "Read the reply first, then ask the question it answers.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "Here the prohibition is the question: A asks -(으)면 안 돼요, meaning is it really not allowed. B’s answer is already printed, so read it first — it tells you which way the question has to point, and in item 4 it tells you how politely to ask.",
+      "pattern": "V-(으)면 안 되다",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "원고를 보면서 하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "발표할 때 원고를 보면서 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 다 외워서 해야 돼요."
+            }
+          ],
+          "answer": "hamyeonan",
+          "choices": [
+            {
+              "id": "hamyeonan",
+              "ko": "하면 안 돼요"
+            },
+            {
+              "id": "haemyeonan",
+              "ko": "해면 안 돼요"
+            },
+            {
+              "id": "hamyeondwae",
+              "ko": "하면 돼요"
+            }
+          ],
+          "en": "A: When I present, may I not read from my script? — B: Right, you have to memorise it all.",
+          "why": "B says you have to memorise it, so A must be asking whether the script is off limits — 하면 안 돼요, not 하면 돼요, which would be asking whether reading it is fine. -(으)면서 in the prompt is two things at once: looking at the script while presenting.",
+          "grammar": "하다 → 하면 안 돼요. -(으)면 attaches to the plain stem 하, so 해면 is the 해요 form leaking into a place that does not take it."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "나중에 하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금 하기 싫은데 나중에 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "안 돼. 지금 해."
+            }
+          ],
+          "answer": "hamyeonan2",
+          "choices": [
+            {
+              "id": "hamyeonan2",
+              "ko": "하면 안 돼요"
+            },
+            {
+              "id": "hamyeonandoeyo",
+              "ko": "하면 안 되요"
+            },
+            {
+              "id": "haesseumyeonan",
+              "ko": "했으면 안 돼요"
+            }
+          ],
+          "en": "A: I don't feel like doing it now — can't I do it later? — B: No. Do it now.",
+          "why": "-는데 is the little hinge A leans on: it lays out the situation and then asks for something because of it. B answers in 반말, so these two are close — but A is still asking upward, which is why the question keeps 요.",
+          "grammar": "하다 → 하면 안 돼요. Two traps: 되요 for 돼요, which is 되 + 어요 uncontracted and simply wrong; and 했으면, which puts the past tense where -(으)면 안 되다 takes a plain stem."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "조금만 남기다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "약이 너무 쓴데 조금만 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "안 돼. 다 먹어야 돼."
+            }
+          ],
+          "answer": "namgimyeonan",
+          "choices": [
+            {
+              "id": "namgimyeonan",
+              "ko": "남기면 안 돼요"
+            },
+            {
+              "id": "namgieumyeonan",
+              "ko": "남기으면 안 돼요"
+            },
+            {
+              "id": "namgimyeondwae",
+              "ko": "남기면 돼요"
+            }
+          ],
+          "en": "A: The medicine is so bitter — can't I leave just a little? — B: No. You have to take it all.",
+          "why": "남기다 is to leave something behind, so 조금만 남기다 is leaving a little in the cup. Medicine in Korean is 먹다, eaten rather than taken. One thing to know: the book’s answer key prints 안 먹으면 안 돼요 for this item, which is good Korean and fits B’s reply, but it is not built from 조금만 남기다 — the phrase printed under the picture. This page follows the picture.",
+          "grammar": "남기다 → 남기면 안 돼요. 남기 ends in a vowel, so -면 goes on bare; the 으 in 남기으면 is the one only consonant stems need. Compare 먹으면 in 연습 1, where the stem does end in a consonant."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "내일 입다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언니, 이 옷 내가 내일 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "입어도 돼."
+            }
+          ],
+          "answer": "ibeumyeonan",
+          "choices": [
+            {
+              "id": "ibeumyeonan",
+              "ko": "입으면 안 돼"
+            },
+            {
+              "id": "ibeumyeonanyo",
+              "ko": "입으면 안 돼요"
+            },
+            {
+              "id": "ibmyeonan",
+              "ko": "입면 안 돼"
+            }
+          ],
+          "en": "A: 언니, can I wear this tomorrow? — B: Sure, go ahead.",
+          "why": "This is the only 반말 exchange on the page, and the two words that give it away are 언니 and B’s 입어도 돼 with no 요 on it. Between sisters the 요 comes off, so 안 돼요 would be oddly formal here — right grammar, wrong distance.",
+          "grammar": "입다 → 입으면 안 돼. 입 ends in a consonant, so -으면 keeps its 으. Dropping the 요 from 안 돼요 is all 반말 takes here."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "밖에 나가다",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "지금 {}?"
+          },
+          {
+            "who": "B",
+            "ko": "안 돼요. 시험이 끝나면 나가세요."
+          }
+        ],
+        "answerKo": "밖에 나가면 안 돼요",
+        "en": "A: May I not go outside now? — B: No. Go out once the exam is over."
+      }
+    },
+    {
+      "id": "u14-grammar-4-3",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 3",
+      "icon": "🔁",
+      "blurbEn": "Turn \"you have to\" into \"not doing it will not do\" — twice negative, same meaning.",
+      "instructionKo": "[보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "Rewrite the sentences as shown in the example.",
+      "noteEn": "꼭 해야 돼요 and 안 하면 안 돼요 say the same thing from opposite ends: one says you must, the other says that not doing it will not do. Both negatives have to be there — drop either one and the sentence means the opposite.",
+      "pattern": "V-(으)면 안 되다",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "내일까지 숙제를 꼭 해야 돼요.",
+          "lines": [
+            {
+              "ko": "→ 내일까지 숙제를 {} 안 돼요."
+            }
+          ],
+          "answer": "anhamyeon",
+          "choices": [
+            {
+              "id": "anhamyeon",
+              "ko": "안 하면"
+            },
+            {
+              "id": "hamyeon",
+              "ko": "하면"
+            },
+            {
+              "id": "anhaesseumyeon",
+              "ko": "안 했으면"
+            }
+          ],
+          "en": "I have to get the homework done by tomorrow. → Not doing it by tomorrow will not do.",
+          "why": "This is the whole point of the exercise, and 하면 안 돼요 is the sentence that proves it: with only one negative it says you must not do the homework, which is the opposite of what was asked. The obligation lives in the pair of negatives, not in either one.",
+          "grammar": "해야 돼요 → 안 하면 안 돼요. 안 goes in front of the verb, and -(으)면 안 되다 goes on the plain stem, so the past tense in 안 했으면 has nowhere to attach."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "담배를 꼭 끊어야 돼요.",
+          "lines": [
+            {
+              "ko": "→ 담배를 {} 안 돼요."
+            }
+          ],
+          "answer": "ankkeuneumyeon",
+          "choices": [
+            {
+              "id": "ankkeuneumyeon",
+              "ko": "안 끊으면"
+            },
+            {
+              "id": "kkeuneumyeon",
+              "ko": "끊으면"
+            },
+            {
+              "id": "ankkeunmyeon",
+              "ko": "안 끊면"
+            }
+          ],
+          "en": "I have to give up smoking. → Not giving it up will not do.",
+          "why": "끊다 is to cut or sever, and Korean uses it for quitting a habit — you cut it off. It is the same verb you use for hanging up a phone call, 전화를 끊다.",
+          "grammar": "끊어야 돼요 → 안 끊으면 안 돼요. The stem 끊 ends in a consonant cluster, so -으면 keeps its 으 as it would after any consonant."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "아침 9시까지 학교에 꼭 가야 돼요.",
+          "lines": [
+            {
+              "ko": "→ 아침 9시까지 학교에 {} 안 돼요."
+            }
+          ],
+          "answer": "ankamyeon",
+          "choices": [
+            {
+              "id": "ankamyeon",
+              "ko": "안 가면"
+            },
+            {
+              "id": "kamyeon",
+              "ko": "가면"
+            },
+            {
+              "id": "ankaeumyeon",
+              "ko": "안 가으면"
+            }
+          ],
+          "en": "I have to be at school by nine in the morning. → Not being there by nine will not do.",
+          "why": "까지 is the deadline marker — up to and no later. Paired with 안 …면 안 돼요 it becomes the way Korean states a rule you cannot slip past.",
+          "grammar": "가야 돼요 → 안 가면 안 돼요. 가 ends in a vowel, so -면 goes on bare: 안 가으면 borrows the 으 that 끊으면 needs and 가면 does not."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "오늘 택배를 꼭 받아야 해요.",
+          "lines": [
+            {
+              "ko": "→ 오늘 택배를 {} 안 돼요."
+            }
+          ],
+          "answer": "motbadeumyeon",
+          "choices": [
+            {
+              "id": "motbadeumyeon",
+              "ko": "못 받으면"
+            },
+            {
+              "id": "anbadeumyeon",
+              "ko": "안 받으면"
+            },
+            {
+              "id": "badeumyeon",
+              "ko": "받으면"
+            }
+          ],
+          "en": "I have to take delivery of the parcel today. → Missing it today will not do.",
+          "why": "This is the one item in the set that takes 못 rather than 안, and the difference is choice. 안 받으면 is refusing the parcel; 못 받으면 is failing to be there for it, which is the thing that actually goes wrong. A parcel is not something you decline.",
+          "grammar": "받아야 해요 → 못 받으면 안 돼요. 안 is chosen not to, 못 is unable to, and both sit in front of the verb. Note the prompt ends 해야 해요 rather than 해야 돼요 — 되다 and 하다 are interchangeable in that pattern."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "운동을 꼭 해야 돼요.",
+        "lines": [
+          {
+            "ko": "운동을 꼭 해야 돼요."
+          },
+          {
+            "ko": "→ 운동을 {} 안 돼요."
+          }
+        ],
+        "answerKo": "안 하면",
+        "en": "I really have to exercise. → Not exercising will not do."
+      }
     }
   ]
 }

@@ -1260,6 +1260,23 @@ body.admin-readonly .btn-delete-word {
 .u14-answer { flex: 1 1 auto; margin-top: 0 !important; min-width: 0; }
 .u14-item-head .btn { flex: 0 0 auto; }
 
+/* A question whose choices live on the row itself. Listed rather than offered
+   as inputs, so it has to read as a display and not as a form gone flat. */
+.u14-item.u14-readonly { border-style: dashed; }
+.u14-readonly .u14-item-head { align-items: center; margin-bottom: 8px; }
+.u14-ro-phrase { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.u14-ro-art { font-size: 11px; color: var(--text-secondary); }
+.u14-ro-line { font-size: 14px; color: var(--text-primary); line-height: 1.8; }
+.u14-ro-forms { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.u14-ro-chip {
+  padding: 3px 9px; border-radius: var(--radius-btn); font-size: 13px;
+  background: var(--bg-card); border: 1px solid var(--border-card); color: var(--text-primary);
+}
+.u14-ro-chip.key {
+  background: rgba(34, 197, 94, .14); border-color: rgba(34, 197, 94, .55); font-weight: 700;
+}
+.u14-ro-en { margin-top: 8px; font-size: 12px; font-style: italic; color: var(--text-secondary); }
+
 @media (max-width: 1000px) {
   .u14-layout { grid-template-columns: 1fr; }
   .u14-side { position: static; }

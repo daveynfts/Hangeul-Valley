@@ -2643,6 +2643,15 @@
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
     .wb-pick-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; }
+    /* Which grammar point the 연습 belongs to. Several rows share a 연습 number,
+       so this is the line that tells them apart — it has to read as a label, not
+       as more of the heading. */
+    .wb-pick-pat {
+      display: inline-block; margin-left: 7px; padding: 1px 6px;
+      background: #fff3d6; border: 1.5px solid var(--wood-l); border-radius: 3px;
+      font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 700;
+      color: #7a3e12; letter-spacing: 0;
+    }
     .wb-pick-count {
       font-family: 'VT323', monospace; font-size: 17px; color: #7a3e12; white-space: nowrap;
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px; padding: 2px 8px;
@@ -2695,7 +2704,8 @@
        The form is graded; 있어요/없어요 is the learner's own life and is only
        recorded. They are drawn as separate groups, split by a rule, so the page
        never implies that one of the two answers on the right is wrong. */
-    .wb-items-experience .wb-row { align-items: flex-start; flex-direction: row; }
+    .wb-items-experience .wb-row,
+    .wb-items-build .wb-row { align-items: flex-start; flex-direction: row; }
     .wb-exp { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
     .wb-exp-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .wb-art { display: block; flex: 0 0 auto; image-rendering: pixelated; }
@@ -2742,12 +2752,23 @@
     .wb-row.bad .wb-pick-form.on:not(.key) { border-color: #b91c1c; background: #ffe9e9; }
     .wb-blank.own { min-width: 84px; }
 
+    /* ── Workbook · the sentence being built out of a short script ───────────
+       A 'build' row prints one or two spoken lines with the gap wherever the
+       book puts it. The speaker chip stays on its own baseline and the line
+       beside it takes the rest of the width, so a long B line wraps under
+       itself instead of pushing the chip off the row. */
+    .wb-dlg .wb-line { flex: 1 1 auto; min-width: 0; }
+    .wb-line-solo { line-height: 2; }
+    .wb-line-solo + .wb-line-solo { margin-top: 4px; }
+    .wb-items-build .wb-blank { min-width: 108px; }
+
     @media (max-width: 720px) {
       .wb-exp-line { font-size: 15px; line-height: 1.9; }
       .wb-exp-phrase { font-size: 15px; }
       .wb-exp-sep { display: none; }
       .wb-exp-picks { gap: 6px; }
       .wb-pick-form, .wb-pick-own { font-size: 14px; padding: 6px 9px; }
+      .wb-items-build .wb-blank { min-width: 88px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .wb-pick-form, .wb-pick-own { transition: none; }

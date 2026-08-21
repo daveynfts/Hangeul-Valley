@@ -72,8 +72,8 @@ async function runTests() {
       const book = workbookLib.getWorkbook(rootDir);
       assert(Array.isArray(book.exercises) && book.exercises.length >= 4, 'at least four exercises');
       const types = [...new Set(book.exercises.map((e) => e.type))].sort();
-      assert(types.join(',') === 'dialogue,experience,fill,match',
-        `all four types are present (got ${types})`);
+      assert(types.join(',') === 'build,dialogue,experience,fill,match',
+        `all five types are present (got ${types})`);
       types.forEach((t) => assert(workbookLib.TYPES.includes(t), `${t} is a supported type`));
       book.exercises.forEach((e) => {
         assert(e.items.length >= 4, `${e.no} has at least four questions`);
@@ -124,6 +124,62 @@ async function runTests() {
       const g2 = dup.exercises.find((e) => e.type === 'experience');
       g2.items[0].choices[1].id = g2.items[0].choices[0].id;
       refuses(dup, rootDir, 'duplicate choice id', 'two choices sharing an id');
+    });
+
+    // ── 'build': a script with the gap wherever the book puts it ─────────────
+    await test('The build type keeps its lines, its gaps and its second blank', () => {
+      const book = workbookLib.getWorkbook(rootDir);
+      const built = book.exercises.filter((e) => e.type === 'build');
+      assert(built.length >= 2, `the grammar pages are present (got ${built.length})`);
+      built.forEach((e) => {
+        assert(!e.bank, `${e.pattern} ${e.no} has no shared box`);
+        assert(!!e.pattern, `${e.no} names the grammar point it drills`);
+        e.items.forEach((i) => {
+          const gaps = i.lines.reduce((n, l) => n + l.ko.split('{}').length - 1, 0);
+          assert(gaps === (i.choices2 ? 2 : 1),
+            `${e.pattern} ${e.no} item ${i.n}: one {} per choice set`);
+          assert(i.choices.some((c) => c.id === i.answer), `item ${i.n} answers one of its choices`);
+          if (i.choices2) {
+            assert(i.choices2.some((c) => c.id === i.answer2),
+              `item ${i.n}: the second blank answers one of its own choices`);
+          }
+        });
+      });
+      // The pair exercise is the only one with two blanks, and it has to have
+      // them: marking half of 해도 돼요? / -면 안 돼요 is marking half the book.
+      const pair = book.exercises.find((e) => e.id === 'u14-grammar-4-1');
+      assert(!!pair && pair.items.every((i) => i.choices2), 'the 연습 1 pair page has two blanks per row');
+      assert(pair.example.answerKo && pair.example.answer2Ko,
+        'and its worked example writes out both halves');
+    });
+
+    await test('Refuses a build line with no gap, or more gaps than choice sets', () => {
+      const none = clone();
+      const b1 = none.exercises.find((e) => e.id === 'u14-grammar-2-2');
+      b1.items[0].lines[0].ko = b1.items[0].lines[0].ko.replace('{}', '아팠을 때');
+      refuses(none, rootDir, 'the lines carry 0', 'a sentence with nowhere to put the answer');
+      const extra = clone();
+      const b2 = extra.exercises.find((e) => e.id === 'u14-grammar-2-2');
+      b2.items[0].lines.push({ ko: '{} 또?' });
+      refuses(extra, rootDir, 'the lines carry 2', 'a second gap with no second choice set');
+    });
+
+    await test('Refuses a build second blank that is broken or borrowed', () => {
+      const wrong = clone();
+      const p1 = wrong.exercises.find((e) => e.id === 'u14-grammar-4-1');
+      p1.items[0].answer2 = p1.items[0].answer;
+      refuses(wrong, rootDir, "second blank's choices", 'the second answer taken from the first blank');
+      const shared = clone();
+      const p2 = shared.exercises.find((e) => e.id === 'u14-grammar-4-1');
+      p2.items[0].choices2[0].id = p2.items[0].choices[0].id;
+      refuses(shared, rootDir, 'used by both blanks', 'one id serving both blanks');
+    });
+
+    await test('Refuses a build example that does not show the answer', () => {
+      const bare = clone();
+      const b = bare.exercises.find((e) => e.id === 'u14-grammar-2-1');
+      b.example.answerKo = '';
+      refuses(bare, rootDir, 'written out', 'a worked example with the blank still blank');
     });
 
     await test('Refuses an experience example whose answer is not a real form', () => {
@@ -297,7 +353,7 @@ async function runTests() {
       assert(ui.indexOf("'/worlds/unit14-workbook.json'") >= 0, 'the game reads the same path');
       const server = fs.readFileSync(path.join(repoRoot, 'admin', 'server.js'), 'utf8');
       assert(server.indexOf("'/api/unit14/workbook'") >= 0, 'the API exposes it');
-      assert(workbookLib.TYPES.join(",") === "fill,match,dialogue,experience", 'the type list is the shared contract');
+      assert(workbookLib.TYPES.join(",") === "fill,match,dialogue,experience,build", 'the type list is the shared contract');
       // Every type the data uses must be a type the renderer knows.
       workbookLib.TYPES.forEach((t) => {
         assert(ui.indexOf("'" + t + "'") >= 0, `js/ui.js renders the ${t} type`);
