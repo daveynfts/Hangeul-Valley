@@ -9,6 +9,12 @@ class ArcadeScene extends Phaser.Scene {
   create(){
     this.cameras.main.fadeIn(300, 0, 0, 0);
     this.cameras.main.setRoundPixels(true);
+    if (typeof playSceneAudio === 'function') {
+      playSceneAudio('arcade');
+      // Launched over FarmScene rather than replacing it, so nothing else
+      // restores the farm's track when this one closes.
+      this.events.once('shutdown', () => playSceneAudio('farm'));
+    }
     this.W = this.scale.width;
 
     this.H = this.scale.height;

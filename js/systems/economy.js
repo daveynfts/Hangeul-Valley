@@ -239,6 +239,9 @@ function addCoins(amount) {
     }
   }
   playerCurrencies.coins = Math.max(0, playerCurrencies.coins + finalAmt);
+  // Spending is already announced by whatever the player clicked; earning had
+  // no sound at all. Rate limited in the mixer, so a payout loop cannot buzz.
+  if (finalAmt > 0 && typeof playChiptuneSFX === 'function') playChiptuneSFX('coin');
   syncGoldAlias();
   persistSave();
   updateCurrencyHUD(true);
@@ -364,7 +367,7 @@ function isZoneUnlocked(zoneKey) {
 
 function showHardLockToast(zoneKey) {
   const check = isZoneUnlocked(zoneKey);
-  playChiptuneSFX('quiz_wrong');
+  playChiptuneSFX('denied');
   showToast(`🔒 LOCKED: Learn ${check.targetPct}% of ${check.reqName} first! (Current: ${check.pct}%)`, 4000);
 }
 

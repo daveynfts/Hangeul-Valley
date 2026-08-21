@@ -34,6 +34,7 @@ class FarmScene extends Phaser.Scene {
 
   create(){
     sceneRef = this;
+    if (typeof playSceneAudio === 'function') playSceneAudio('farm');
     ensureFarmerHdAnims(this);
     this.droppedItems = [];
     if (droppedItemsSave && droppedItemsSave.length > 0) {
@@ -2204,6 +2205,9 @@ class FarmScene extends Phaser.Scene {
 
     if (this.dayNight) {
       const env = this.dayNight.update(dt || 16);
+      // The director only reacts when the day/night boundary is crossed, so
+      // calling it every frame costs a comparison.
+      if (typeof MusicDirector !== 'undefined') MusicDirector.setEnvironment(env);
       if (this.shadows) {
         this.shadows.updateAllShadows(env.sunAngle, env.hour);
       }
