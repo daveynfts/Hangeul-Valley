@@ -454,6 +454,16 @@
     }
     #quiz-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 14px 0 4px; }
     #quiz-choices.hidden { display: none !important; }
+    #quiz-listen-controls {
+      display: flex; justify-content: center; margin: 4px 0 8px;
+    }
+    #quiz-listen-controls.hidden { display: none !important; }
+    #quiz-listen-replay {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 15px; font-weight: 800;
+      padding: 8px 16px; color: #1d4ed8; background: #dbeafe;
+      border: 2px solid #1d4ed8; border-radius: 10px;
+    }
+    #quiz-listen-replay:hover { background: #bfdbfe; }
     .quiz-choice-btn {
       padding: 13px 12px; border-radius: 10px; cursor: pointer;
       background: #fff8e8; border: 2px solid #b8894a;
@@ -1037,6 +1047,7 @@
     #quiz-ui.quiz-success #en-word-display,
     #quiz-ui.quiz-success #quiz-ko-prompt,
     #quiz-ui.quiz-success #quiz-choices,
+    #quiz-ui.quiz-success #quiz-listen-controls,
     #quiz-ui.quiz-success #quiz-funfact-box,
     #quiz-ui.quiz-success #quiz-tier-hints,
     #quiz-ui.quiz-success #quiz-hint-reveal-card,

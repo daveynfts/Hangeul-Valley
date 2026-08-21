@@ -827,8 +827,11 @@ function pickQuizMode(word, phase, plot){
   const e = peekSrs(word.ko);
   const firstContact = !e || e.st === 'new';
   if (phase === 1 && firstContact) return 'recognise';
-  // Second touch: listening where a Korean voice exists, otherwise typing.
-  if (phase === 2 && KoreanTTS.isAvailable() && !firstContact) return 'listen';
+  // Second touch is listening. Voice lists populate async in Chrome, so do not wait
+  // on isAvailable() — listen UI still opens and speak() retries when the voice lands.
+  if (phase === 2 && KoreanTTS.supported() && KoreanTTS.enabled !== false && !firstContact) {
+    return 'listen';
+  }
   return 'type';
 }
 
@@ -859,6 +862,8 @@ function applyQuizMode(word, phase, plot){
   if (hints) hints.style.display = showTyping ? '' : 'none';
   choices.classList.toggle('hidden', showTyping);
   koPrompt.classList.toggle('hidden', currentQuizMode !== 'recognise');
+  const listenBox = $('quiz-listen-controls');
+  if (listenBox) listenBox.classList.toggle('hidden', currentQuizMode !== 'listen');
   enWordDisplay.style.display = showTyping ? '' : 'none';
 
   if (showTyping) { qText.textContent = 'Type in Korean for:'; currentChoices = []; return; }
@@ -870,7 +875,9 @@ function applyQuizMode(word, phase, plot){
     if (speak) speak.onclick = () => speakKorean(word.ko);
     speakKorean(word.ko);          // free here: the spelling is already visible
   } else {
-    qText.textContent = '🔊 Listen — which word was that?';
+    qText.textContent = 'Listen — which word was that?';
+    const replay = $('quiz-listen-replay');
+    if (replay) replay.onclick = () => speakKorean(word.ko);
     speakKorean(word.ko);
   }
 
@@ -951,6 +958,7 @@ function closeQuiz(){
   // Restore the typing layout so the next quiz opens in a known state.
   const ch=$('quiz-choices'); if(ch){ ch.classList.add('hidden'); ch.innerHTML=''; }
   const kp=$('quiz-ko-prompt'); if(kp) kp.classList.add('hidden');
+  const lc=$('quiz-listen-controls'); if(lc) lc.classList.add('hidden');
   const kw=$('quiz-ko-word'); if(kw) kw.textContent='';   // don't leave the answer staged
   answerInput.style.display=''; answerInput.classList.remove('hidden');
   if($('submit-btn')) $('submit-btn').style.display='';
