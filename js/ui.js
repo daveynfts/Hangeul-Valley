@@ -1427,7 +1427,7 @@ function buildShopGrid() {
   // Section 1: Farm Plot Expansions
   const plotHeader = document.createElement('div');
   plotHeader.className = 'shop-section-header';
-  plotHeader.style.cssText = 'grid-column: 1 / -1; font-family: "Press Start 2P", monospace; font-size: 13px; color: var(--neon-gold, #FBBF24); margin: 10px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(251, 191, 36, 0.3); display: flex; align-items: center; gap: 8px;';
+  plotHeader.style.cssText = 'grid-column: 1 / -1; font-family: "Press Start 2P", monospace; font-size: 13px; color: #78350f; margin: 10px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(139, 90, 43, 0.45); display: flex; align-items: center; gap: 8px;';
   plotHeader.innerHTML = `🌾 Farm Plot Expansions (${unlockedPlots.length}/15 Unlocked)`;
   grid.appendChild(plotHeader);
 
@@ -1461,7 +1461,7 @@ function buildShopGrid() {
   // Section 2: Vocabulary Level Packs
   const lvlHeader = document.createElement('div');
   lvlHeader.className = 'shop-section-header';
-  lvlHeader.style.cssText = 'grid-column: 1 / -1; font-family: "Press Start 2P", monospace; font-size: 13px; color: var(--neon-cyan, #38BDF8); margin: 20px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(56, 189, 248, 0.3); display: flex; align-items: center; gap: 8px;';
+  lvlHeader.style.cssText = 'grid-column: 1 / -1; font-family: "Press Start 2P", monospace; font-size: 13px; color: #1e3a8a; margin: 20px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(29, 78, 216, 0.35); display: flex; align-items: center; gap: 8px;';
   lvlHeader.innerHTML = `📚 Vocabulary Level Packs`;
   grid.appendChild(lvlHeader);
 
