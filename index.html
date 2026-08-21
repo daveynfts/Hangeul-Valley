@@ -258,7 +258,7 @@
       <div id="shop-header">
         <div>
           <div id="shop-title">🏪 Seed Shop</div>
-          <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:4px">Use gold to unlock new vocabulary packs</div>
+          <div style="font-size:11px;color:#5b3412;margin-top:4px">Use gold to unlock new vocabulary packs</div>
         </div>
         <div style="display:flex;align-items:center;gap:10px">
           <div id="shop-gold-badge">💰 <span id="shop-gold-val">0</span></div>
@@ -423,7 +423,7 @@
       <div style="font-family:'Press Start 2P',monospace; font-size:14px; color:var(--neon-cyan); margin-bottom:12px" id="sq-title">Unlock Pack Quiz Gate</div>
       <div style="font-size:14px; color:rgba(226,232,240,0.8); margin-bottom:16px" id="sq-subtitle">Answer 3 Korean translation questions to complete your purchase!</div>
       
-      <div style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-cyan); border-radius:14px; padding:18px; margin-bottom:16px" id="sq-qbox">
+      <div style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-cyan); border-radius:8px; padding:18px; margin-bottom:16px" id="sq-qbox">
         <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:8px" id="sq-step-indicator">Question 1 of 3</div>
         <div style="font-family:'Noto Sans KR',sans-serif; font-size:32px; font-weight:900; color:#fff; margin-bottom:6px" id="sq-word-ko">사과</div>
         <div style="font-size:14px; color:#cbd5e1" id="sq-prompt">Select the correct English translation:</div>
@@ -433,7 +433,7 @@
         <!-- JS generated 4 options -->
       </div>
 
-      <button style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:8px 16px; font-size:12px; cursor:pointer" onclick="cancelShopQuizGate()">Cancel Purchase</button>
+      <button style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:8px 16px; font-size:12px; cursor:pointer" onclick="cancelShopQuizGate()">Cancel Purchase</button>
     </div>
   </div>
 
@@ -444,7 +444,7 @@
       <div style="font-family:'Press Start 2P',monospace; font-size:15px; color:var(--neon-pink); margin-bottom:10px" id="bg-title">BOSS ENTRANCE GATE</div>
       <div style="font-size:14px; color:rgba(226,232,240,0.8); margin-bottom:16px" id="bg-subtitle">Prove your Korean mastery to enter the Boss Chamber!</div>
 
-      <div style="background:rgba(40,15,30,0.85); border:1.5px solid var(--neon-pink); border-radius:14px; padding:18px; margin-bottom:16px" id="bg-qbox">
+      <div style="background:rgba(40,15,30,0.85); border:1.5px solid var(--neon-pink); border-radius:8px; padding:18px; margin-bottom:16px" id="bg-qbox">
         <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:8px" id="bg-step-indicator">Gate Challenge 1 of 3</div>
         <div style="font-family:'Noto Sans KR',sans-serif; font-size:32px; font-weight:900; color:#fff; margin-bottom:6px" id="bg-word-ko">나무</div>
         <div style="font-size:14px; color:#cbd5e1" id="bg-prompt">Select the correct English translation:</div>
@@ -454,7 +454,7 @@
         <!-- JS generated options -->
       </div>
 
-      <button style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:8px 16px; font-size:12px; cursor:pointer" onclick="cancelBossGate()">Retreat</button>
+      <button style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:8px 16px; font-size:12px; cursor:pointer" onclick="cancelBossGate()">Retreat</button>
     </div>
   </div>
 
@@ -469,11 +469,11 @@
             <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px;">Cook Hansik dishes and gain farm buffs</div>
           </div>
         </div>
-        <button onclick="closeRecipeBook()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+        <button onclick="closeRecipeBook()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
       </div>
 
       <!-- Ingredient Inventory Summary Bar -->
-      <div id="recipe-pantry-bar" style="background:rgba(30,41,59,0.7); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px; margin-bottom:16px;">
+      <div id="recipe-pantry-bar" style="background:rgba(30,41,59,0.7); border:1px solid rgba(245,158,11,0.3); border-radius:8px; padding:12px; margin-bottom:16px;">
         <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:6px">Pantry</div>
         <div id="recipe-pantry-list" style="display:flex; flex-wrap:wrap; gap:8px; font-size:12px; color:#cbd5e1;"></div>
       </div>
@@ -490,11 +490,11 @@
       <div style="font-family:'Press Start 2P',monospace; font-size:15px; color:var(--neon-gold); margin-bottom:8px" id="cmg-dish-name">COOKING DISH</div>
       <div style="font-size:12px; color:rgba(226,232,240,0.8); margin-bottom:16px" id="cmg-step-desc">Step 1: Match Korean Ingredient</div>
 
-      <div id="cmg-stage-container" style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-gold); border-radius:14px; padding:18px; margin-bottom:16px; min-height:140px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+      <div id="cmg-stage-container" style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-gold); border-radius:8px; padding:18px; margin-bottom:16px; min-height:140px; display:flex; flex-direction:column; justify-content:center; align-items:center;">
         <!-- Interactive stage elements rendered by JS -->
       </div>
 
-      <button style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:8px 16px; font-size:12px; cursor:pointer" onclick="closeCookingMinigame()">Cancel Cooking</button>
+      <button style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:8px 16px; font-size:12px; cursor:pointer" onclick="closeCookingMinigame()">Cancel Cooking</button>
     </div>
   </div>
 
@@ -503,8 +503,8 @@
     <div class="glass-modal" style="max-width:560px; width:92%; padding:24px; text-align:center;">
       <div style="font-size:44px; margin-bottom:8px" id="cf-icon">🏺</div>
       <div style="font-family:'Press Start 2P',monospace; font-size:14px; color:var(--neon-gold); margin-bottom:10px" id="cf-title">Korean Culinary Culture</div>
-      <div style="font-size:14px; color:#e2e8f0; line-height:1.6; background:rgba(30,41,59,0.8); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:16px; margin-bottom:18px;" id="cf-text">Fact content</div>
-      <button style="background:linear-gradient(135deg, var(--neon-gold), #d97706); border:none; border-radius:8px; padding:10px 24px; font-family:'Press Start 2P',monospace; font-size:11px; color:#0f172a; cursor:pointer; font-weight:bold" onclick="closeCulturalFact()">Delicious! 😋</button>
+      <div style="font-size:14px; color:#e2e8f0; line-height:1.6; background:rgba(30,41,59,0.8); border:1px solid rgba(245,158,11,0.3); border-radius:8px; padding:16px; margin-bottom:18px;" id="cf-text">Fact content</div>
+      <button style="background:linear-gradient(135deg, var(--neon-gold), #d97706); border:none; border-radius:4px; padding:10px 24px; font-family:'Press Start 2P',monospace; font-size:11px; color:#0f172a; cursor:pointer; font-weight:bold" onclick="closeCulturalFact()">Delicious! 😋</button>
     </div>
   </div>
 
@@ -677,7 +677,7 @@
       <div id="desk-head">
         <span id="desk-title">학습 책상 · Quiz</span>
         <span id="desk-progress">1 / 5</span>
-        <button type="button" onclick="closeDeskQuiz()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:8px;padding:2px 10px;cursor:pointer">✕</button>
+        <button type="button" onclick="closeDeskQuiz()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:4px;padding:2px 10px;cursor:pointer">✕</button>
       </div>
       <img id="desk-art" alt="" hidden>
       <div id="desk-q"></div>
@@ -723,7 +723,7 @@
       <div id="taste-bar">
         <span>한 입 포장마차</span>
         <span id="taste-progress">1 / 10</span>
-        <button type="button" onclick="closeTasteGame()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:8px;padding:2px 10px;cursor:pointer">✕</button>
+        <button type="button" onclick="closeTasteGame()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:4px;padding:2px 10px;cursor:pointer">✕</button>
       </div>
       <div id="taste-dish">
         <div id="taste-icon">🍲</div>

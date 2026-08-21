@@ -184,10 +184,10 @@ window.renderTrophies = function() {
       // in checkMasterChefTrophy cannot disagree the way they did.
       const targetCount = (typeof COOKING_RECIPES !== 'undefined' ? COOKING_RECIPES.length : 0);
       reqMet = totalCooked >= targetCount;
-      reqText = `<span style="font-size:12px;color:#888;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Cooking</span><br/>${totalCooked}/${targetCount}`;
+      reqText = `<span style="font-size:12px;color:#5b3412;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Cooking</span><br/>${totalCooked}/${targetCount}`;
     } else {
       reqMet = totalHarvests >= t.reqHarvests;
-      reqText = `<span style="font-size:12px;color:#888;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Harvests</span><br/>${totalHarvests}/${t.reqHarvests}`;
+      reqText = `<span style="font-size:12px;color:#5b3412;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Harvests</span><br/>${totalHarvests}/${t.reqHarvests}`;
     }
 
     const canAfford = gold >= t.cost;
@@ -1153,7 +1153,7 @@ function renderCookingStage() {
     let direction = 1;
     container.innerHTML = `
       <div style="font-size:14px; color:#fff; margin-bottom:12px;">Adjust Cooking Temperature (불 조절):</div>
-      <div style="width:100%; height:24px; background:#1e293b; border-radius:12px; position:relative; overflow:hidden; border:1px solid var(--neon-gold); margin-bottom:16px;">
+      <div style="width:100%; height:24px; background:#1e293b; border-radius:8px; position:relative; overflow:hidden; border:1px solid var(--neon-gold); margin-bottom:16px;">
         <div style="position:absolute; left:40%; width:20%; height:100%; background:rgba(34,197,94,0.6);"></div>
         <div id="heat-indicator" style="position:absolute; left:0%; width:10px; height:100%; background:#ef4444;"></div>
       </div>
