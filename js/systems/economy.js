@@ -25,7 +25,7 @@ function isTextbookFarmWorld() {
 }
 const VALLEY_EXTRA_IDS = ['shop', 'board', 'arcade', 'wizard', 'cat', 'beehive', 'portal', 'fishing'];
 const WORLD_PACKS = {
-  valley: { extras: VALLEY_EXTRA_IDS.slice(), stations: [] },
+  valley: { extras: ['shop', 'board', 'arcade', 'cat', 'beehive', 'portal', 'fishing'], stations: [] },
   '2b-unit-10': { extras: [], stations: ['desk', 'kitchen', 'taste'] },
   '2b-unit-14': { extras: [], stations: ['desk'] }
 };
@@ -352,8 +352,7 @@ function isZoneUnlocked(zoneKey) {
   const reqs = {
     arcade:  { reqLevel: 0, minPct: 80, name: levelName(levelsData[0]) || 'Level 1: Daily Life & People' },
     fishing: { reqLevel: 1, minPct: 80, name: levelName(levelsData[1]) || 'Level 2: Food & Dining' },
-    dungeon: { reqLevel: 2, minPct: 80, name: levelName(levelsData[2]) || 'Level 3: Time & Weather' },
-    duel:    { reqLevel: 3, minPct: 80, name: levelName(levelsData[3]) || 'Level 4: Places & Directions' }
+    dungeon: { reqLevel: 2, minPct: 80, name: levelName(levelsData[2]) || 'Level 3: Time & Weather' }
   };
   const req = reqs[zoneKey];
   if (!req) return { unlocked: true };
@@ -557,6 +556,13 @@ function cancelBossGate() {
 let questOverlayOpen = false;
 let activeQuestTab = 'main';
 
+function cookedDishCount() {
+  const dishes = (typeof inventoryState !== 'undefined' && inventoryState && inventoryState.cookedDishes)
+    ? inventoryState.cookedDishes
+    : {};
+  return Object.values(dishes).reduce((n, v) => n + (Number(v) || 0), 0);
+}
+
 let questState = {
   mainStep: 1,
   mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0, duels: 0 },
@@ -570,10 +576,10 @@ let questState = {
 const MAIN_STORYLINE = [
   { act: 1, id: 'act_1', title: 'Act I: Harvest of Hangeul', desc: 'Harvest 3 ripe words in farm. Learn 80% of Level 1 (Daily Life & People).', target: 3, reqLevel: 0, minPct: 80, rCoins: 100, rGems: 10, rHonor: 50 },
   { act: 2, id: 'act_2', title: 'Act II: Beast Master', desc: 'Defeat 5 Dungeon beasts. Learn 80% of Level 2 (Food & Dining).', target: 5, reqLevel: 1, minPct: 80, rCoins: 150, rGems: 15, rHonor: 75 },
-  { act: 3, id: 'act_3', title: 'Act III: Bonds of Hangeul', desc: 'Win 3 Spell Duels. Learn 80% of Level 4 (Places & Directions).', target: 3, reqLevel: 3, minPct: 80, rCoins: 200, rGems: 20, rHonor: 100 },
+  { act: 3, id: 'act_3', title: 'Act III: Kitchen of Hangeul', desc: 'Cook 3 Korean dishes. Learn 80% of Level 4 (Places & Directions).', target: 3, reqLevel: 3, minPct: 80, rCoins: 200, rGems: 20, rHonor: 100 },
   { act: 4, id: 'act_4', title: 'Act IV: Chromatic Angler', desc: 'Catch 5 fish in Crystal Pond. Learn 80% of Level 3 (Time & Weather).', target: 5, reqLevel: 2, minPct: 80, rCoins: 250, rGems: 25, rHonor: 125 },
   { act: 5, id: 'act_5', title: 'Act V: Numeric Dominion', desc: 'Score 500+ in Arcade Machine. Learn 80% of Level 6 (Hobbies & Leisure).', target: 500, reqLevel: 5, minPct: 80, rCoins: 300, rGems: 30, rHonor: 150 },
-  { act: 6, id: 'act_6', title: 'Act VI: Grand Sovereign', desc: 'Defeat Grand Necromancer Boss after learning every word in all levels.', target: 1, reqLevel: 0, minPct: 100, rCoins: 500, rGems: 50, rHonor: 300 }
+  { act: 6, id: 'act_6', title: 'Act VI: Grand Sovereign', desc: 'Reach 10 mature words (21-day interval) after learning 80% of Level 1.', target: 10, reqLevel: 0, minPct: 80, rCoins: 500, rGems: 50, rHonor: 300 }
 ];
 
 function initQuestState() {
@@ -594,7 +600,7 @@ function initQuestState() {
     questState.lastWeeklyReset = now;
     questState.weekly = [
       { id: 'wq_1', title: '🟣 Master Scholar', desc: 'Master 5 Korean words (harvest count >= 5).', current: 0, target: 5, rCoins: 150, rGems: 15, rHonor: 50, claimed: false },
-      { id: 'wq_2', title: '⚡ Arena Champion', desc: 'Win 3 Spell Duels.', current: 0, target: 3, rCoins: 200, rGems: 20, rHonor: 60, claimed: false },
+      { id: 'wq_2', title: '🍳 Kitchen Champion', desc: 'Cook 5 Korean dishes.', current: 0, target: 5, rCoins: 200, rGems: 20, rHonor: 60, claimed: false },
       { id: 'wq_3', title: '🎣 Master Angler', desc: 'Catch 10 fish in Crystal Pond.', current: 0, target: 10, rCoins: 180, rGems: 18, rHonor: 55, claimed: false }
     ];
   }
@@ -614,8 +620,7 @@ function checkQuestProgress(type, data = {}) {
     questState.mainProgress.fish += (data.count || 1);
     questState.daily.forEach(q => { if (q.id === 'dq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
     questState.weekly.forEach(q => { if (q.id === 'wq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
-  } else if (type === 'duel') {
-    questState.mainProgress.duels += (data.count || 1);
+  } else if (type === 'cook') {
     questState.weekly.forEach(q => { if (q.id === 'wq_2') q.current = Math.min(q.target, q.current + (data.count || 1)); });
   } else if (type === 'score') {
     if (data.score > questState.mainProgress.score) questState.mainProgress.score = data.score;
@@ -665,10 +670,10 @@ function renderQuestList() {
     let curr = 0;
     if (act.act === 1) curr = questState.mainProgress.harvests;
     else if (act.act === 2) curr = questState.mainProgress.kills;
-    else if (act.act === 3) curr = questState.mainProgress.duels;
+    else if (act.act === 3) curr = cookedDishCount();
     else if (act.act === 4) curr = questState.mainProgress.fish;
     else if (act.act === 5) curr = questState.mainProgress.score;
-    else if (act.act === 6) curr = questState.mainProgress.duels >= 1 ? 1 : 0;
+    else if (act.act === 6) curr = Object.values(typeof srsData !== 'undefined' && srsData ? srsData : {}).filter(srsIsMature).length;
 
     const srsPct = calcLevelProgress(act.reqLevel);
     const reqMet = curr >= act.target && srsPct >= act.minPct;
@@ -734,10 +739,10 @@ function claimMainQuest(actNum) {
   let curr = 0;
   if (act.act === 1) curr = questState.mainProgress.harvests;
   else if (act.act === 2) curr = questState.mainProgress.kills;
-  else if (act.act === 3) curr = questState.mainProgress.duels;
+  else if (act.act === 3) curr = cookedDishCount();
   else if (act.act === 4) curr = questState.mainProgress.fish;
   else if (act.act === 5) curr = questState.mainProgress.score;
-  else if (act.act === 6) curr = questState.mainProgress.duels >= 1 ? 1 : 0;
+  else if (act.act === 6) curr = Object.values(typeof srsData !== 'undefined' && srsData ? srsData : {}).filter(srsIsMature).length;
 
   const srsPct = calcLevelProgress(act.reqLevel);
   if (curr < act.target || srsPct < act.minPct) {

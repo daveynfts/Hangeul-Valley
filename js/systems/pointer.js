@@ -16,7 +16,7 @@ function pointerDist(ax, ay, bx, by) {
 function worldPointerBlocked(flags) {
   const f = flags || {};
   return !!(f.playerLocked || f.isPerformingAction || f.quizOpen || f.shopOpen
-    || f.memoryOpen || f.trophyOpen || f.duelOpen || f.catDialogOpen);
+    || f.memoryOpen || f.trophyOpen || f.catDialogOpen);
 }
 
 function pickInteractableAt(targets, wx, wy) {

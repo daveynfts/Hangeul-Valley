@@ -44,6 +44,7 @@ const R = (expr) => vm.runInContext(expr, ctx);
 
 assert(R('WORLD_PACKS.valley.extras').indexOf('shop') >= 0, 'valley pack includes shop');
 assert(R('WORLD_PACKS.valley.extras').indexOf('fishing') >= 0, 'valley pack includes fishing pond');
+assert(R('WORLD_PACKS.valley.extras').indexOf('wizard') < 0, 'valley pack has no duel wizard');
 assert(R('WORLD_PACKS.valley.stations').length === 0, 'valley pack has no textbook stations');
 assert(R("WORLD_PACKS['2b-unit-10'].stations").join(',') === 'desk,kitchen,taste',
   'unit 10 pack is desk+kitchen+taste');

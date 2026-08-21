@@ -229,290 +229,7 @@ if(trophyBtn) trophyBtn.addEventListener('click', window.openTrophies);
 const trophyCloseBtn = document.getElementById('trophy-close-btn');
 if(trophyCloseBtn) trophyCloseBtn.addEventListener('click', window.closeTrophies);
 
-// ══════════════ SPELL QUIZ DUEL LOGIC ════════════════════════════════════════
-let duelState = {
-  playerHP: 100, maxPlayerHP: 100,
-  enemyHP: 100, maxEnemyHP: 100,
-  combo: 0,
-  timer: null,
-  currentQuestion: null,
-  answering: false,
-  enemyIndex: 0
-};
-
-const DUEL_ENEMIES = [
-  { name: 'Dark Sorcerer', avatar: '🧙‍♀️', hp: 100, goldBonus: 50 },
-  { name: 'Flame Archmage', avatar: '🔮', hp: 130, goldBonus: 80 },
-  { name: 'Shadow Dragon', avatar: '🐲', hp: 160, goldBonus: 120 },
-  { name: 'Grand Necromancer', avatar: '💀', hp: 200, goldBonus: 180 }
-];
-
-window.openSpellDuel = function(){
-  if(duelOpen) return;
-  playChiptuneSFX('click');
-  
-  const all = getUnlockedWords();
-  if(all.length < 4){
-    showToast('⚠️ Need at least 4 unlocked words to duel! Unlock more in Shop.', 3000);
-    return;
-  }
-
-  duelState.enemyIndex = Math.floor(Math.random() * DUEL_ENEMIES.length);
-
-  // If Grand Necromancer Boss (index 3), trigger 5-word Entrance Gate!
-  if (duelState.enemyIndex === 3) {
-    startBossGateChallenge('necromancer', 5, (passed) => {
-      if (passed) {
-        openSpellDuelDirect();
-      }
-    });
-    return;
-  }
-
-  openSpellDuelDirect();
-};
-
-function openSpellDuelDirect() {
-  if (duelState.timer) {
-    clearTimeout(duelState.timer);
-    duelState.timer = null;
-  }
-  const enemy = DUEL_ENEMIES[duelState.enemyIndex];
-  
-  duelState.playerHP = 100;
-  duelState.maxPlayerHP = 100;
-  duelState.enemyHP = enemy.hp;
-  duelState.maxEnemyHP = enemy.hp;
-  duelState.combo = 0;
-  duelState.answering = false;
-
-  document.getElementById('duel-enemy-name').textContent = enemy.name;
-  document.getElementById('duel-enemy-avatar').textContent = enemy.avatar;
-
-  updateDuelHP();
-  document.getElementById('duel-combo-badge').textContent = '🔥 Combo x0';
-
-  duelOpen = true;
-  setModalState('duel-overlay', true);
-
-  nextDuelTurn();
-}
-
-
-function updateDuelHP(){
-  const pFill = document.getElementById('duel-player-hp-fill');
-  const pText = document.getElementById('duel-player-hp-text');
-  const eFill = document.getElementById('duel-enemy-hp-fill');
-  const eText = document.getElementById('duel-enemy-hp-text');
-
-  const pPct = Math.max(0, Math.min(100, (duelState.playerHP / duelState.maxPlayerHP) * 100));
-  const ePct = Math.max(0, Math.min(100, (duelState.enemyHP / duelState.maxEnemyHP) * 100));
-
-  if(pFill){
-    pFill.style.width = pPct + '%';
-    pFill.style.background = pPct < 30 ? '#ef4444' : pPct < 60 ? '#f59e0b' : 'linear-gradient(90deg,#22c55e,#4ade80)';
-  }
-  if(pText) pText.textContent = `${Math.max(0, duelState.playerHP)} / ${duelState.maxPlayerHP} HP`;
-
-  if(eFill){
-    eFill.style.width = ePct + '%';
-    eFill.style.background = ePct < 30 ? '#ef4444' : ePct < 60 ? '#f59e0b' : 'linear-gradient(90deg,#a855f7,#ec4899)';
-  }
-  if(eText) eText.textContent = `${Math.max(0, duelState.enemyHP)} / ${duelState.maxEnemyHP} HP`;
-}
-
-function nextDuelTurn(){
-  if(!duelOpen) return;
-  if(duelState.playerHP <= 0 || duelState.enemyHP <= 0) return;
-
-  duelState.answering = false;
-  const grid = document.getElementById('duel-options-grid');
-  grid.innerHTML = '';
-
-  const allWords = getUnlockedWords();
-  const target = Phaser.Utils.Array.GetRandom(allWords);
-
-  // The prompt is the Korean and the buttons carry meanings, so dedupe on `en`.
-  const options = buildOptionSet(target, allWords, 4, labelEn);
-
-  duelState.currentQuestion = { target, options };
-
-  document.getElementById('duel-target-word').textContent = target.ko;
-
-  options.forEach((opt, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'duel-option-btn';
-    btn.innerHTML = `
-      <span>${opt.en}</span>
-      <span class="duel-option-badge">[${idx + 1}]</span>
-    `;
-    btn.onclick = () => window.selectDuelOption(idx);
-    grid.appendChild(btn);
-  });
-
-  const timerFill = document.getElementById('duel-timer-bar-fill');
-  if(timerFill){
-    timerFill.style.transition = 'none';
-    timerFill.style.width = '100%';
-    setTimeout(() => {
-      if(duelOpen && !duelState.answering){
-        timerFill.style.transition = 'width 5s linear';
-        timerFill.style.width = '0%';
-      }
-    }, 50);
-  }
-
-  if(duelState.timer) clearTimeout(duelState.timer);
-  duelState.timer = setTimeout(() => {
-    if(duelOpen && !duelState.answering){
-      window.selectDuelOption(-1);
-    }
-  }, 5050);
-}
-
-window.selectDuelOption = function(idx){
-  if(duelState.answering || !duelOpen) return;
-  duelState.answering = true;
-  if(duelState.timer) clearTimeout(duelState.timer);
-
-  const grid = document.getElementById('duel-options-grid');
-  const buttons = grid.querySelectorAll('.duel-option-btn');
-  const target = duelState.currentQuestion.target;
-  const isCorrect = idx >= 0 && duelState.currentQuestion.options[idx]?.ko === target.ko;
-
-  buttons.forEach((btn, i) => {
-    btn.disabled = true;
-    if(duelState.currentQuestion.options[i]?.ko === target.ko){
-      btn.classList.add('correct');
-    } else if(i === idx){
-      btn.classList.add('wrong');
-    }
-  });
-
-  if(isCorrect){
-    playChiptuneSFX('quiz_correct');
-    duelState.combo++;
-    const dmg = 25 + duelState.combo * 5;
-    duelState.enemyHP = Math.max(0, duelState.enemyHP - dmg);
-    document.getElementById('duel-combo-badge').textContent = `🔥 Combo x${duelState.combo}`;
-    
-    const playerBox = document.getElementById('duel-player-box');
-    const enemyBox = document.getElementById('duel-enemy-box');
-    if(playerBox) playerBox.classList.add('cast');
-    if(enemyBox) enemyBox.classList.add('hit');
-    showDmgPopup(enemyBox, `-${dmg} HP`, 'enemy-hit');
-
-    setTimeout(() => {
-      if(playerBox) playerBox.classList.remove('cast');
-      if(enemyBox) enemyBox.classList.remove('hit');
-    }, 400);
-
-    updateDuelHP();
-
-    if(duelState.enemyHP <= 0){
-      setTimeout(() => endDuel(true), 600);
-      return;
-    }
-  } else {
-    playChiptuneSFX('quiz_wrong');
-    duelState.combo = 0;
-    const dmg = 22;
-    duelState.playerHP = Math.max(0, duelState.playerHP - dmg);
-    document.getElementById('duel-combo-badge').textContent = `🔥 Combo x0`;
-
-    const playerBox = document.getElementById('duel-player-box');
-    const enemyBox = document.getElementById('duel-enemy-box');
-    if(enemyBox) enemyBox.classList.add('cast');
-    if(playerBox) playerBox.classList.add('hit');
-    showDmgPopup(playerBox, `-${dmg} HP`, 'player-hit');
-
-    setTimeout(() => {
-      if(enemyBox) enemyBox.classList.remove('cast');
-      if(playerBox) playerBox.classList.remove('hit');
-    }, 400);
-
-    updateDuelHP();
-
-    if(duelState.playerHP <= 0){
-      setTimeout(() => endDuel(false), 600);
-      return;
-    }
-  }
-
-  setTimeout(() => {
-    nextDuelTurn();
-  }, 900);
-};
-
-function showDmgPopup(parentEl, text, typeClass){
-  if(!parentEl) return;
-  const popup = document.createElement('div');
-  popup.className = `duel-dmg-popup ${typeClass}`;
-  popup.textContent = text;
-  popup.style.top = '10px';
-  parentEl.appendChild(popup);
-  setTimeout(() => popup.remove(), 1000);
-}
-
-function endDuel(victory){
-  if (typeof duelState.winStreak !== 'number') duelState.winStreak = 0;
-  if(victory){
-    duelState.winStreak++;
-    if (typeof leaderboardState !== 'undefined' && leaderboardState.personalBests) {
-      if (duelState.winStreak > (leaderboardState.personalBests.duelMaxWinStreak || 0)) {
-        leaderboardState.personalBests.duelMaxWinStreak = duelState.winStreak;
-        if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
-      }
-    }
-    const enemyInfo = DUEL_ENEMIES[duelState.enemyIndex];
-    const baseReward = enemyInfo.goldBonus + duelState.combo * 5 + Math.floor(duelState.playerHP / 2);
-    addCoins(baseReward);
-
-    if (duelState.enemyIndex === 3) {
-      addGems(50);
-      addHonor(100);
-      if (duelState.playerHP >= 100) {
-        addGems(15);
-        showToast('🛡️ ZERO-DAMAGE BOSS KILL! +15 Bonus Gems!', 4500);
-      }
-      showToast(`💀 GRAND NECROMANCER DEFEATED! +${baseReward} Coins, +50 Gems, +100 Honor!`, 5000);
-    } else {
-      showToast(`⚡ VICTORY! Defeated ${enemyInfo.name}! +${baseReward} Coins!`, 3500);
-    }
-    checkQuestProgress('duel', { count: 1 });
-  } else {
-    duelState.winStreak = 0;
-    showToast(`💀 DEFEAT! Practice more words and try again!`, 3500);
-  }
-  closeSpellDuel();
-}
-
-
-window.closeSpellDuel = function(){
-  if(duelState.timer) {
-    clearTimeout(duelState.timer);
-    duelState.timer = null;
-  }
-  duelState.answering = false;
-  playChiptuneSFX('click');
-  duelOpen = false;
-  setModalState('duel-overlay', false);
-};
-
-
-if(window.addEventListener){
-  window.addEventListener('keydown', (e) => {
-    if(duelOpen){
-      if(['1', '2', '3', '4'].includes(e.key)){
-        const idx = parseInt(e.key) - 1;
-        window.selectDuelOption(idx);
-      }
-      if(e.key === 'Escape'){
-        window.closeSpellDuel();
-      }
-    }
-  });
-}
+// Spell Quiz Duel was removed. Shop / boss-gate still uses .duel-option-btn.
 
 // ═══════════════ R3: CRAFTING / COOKING SYSTEM & BUFFS ════════════════════════
 var COOKING_RECIPES = [
@@ -984,6 +701,7 @@ function cookRecipe(recipeId) {
   inventoryState.cookedDishes[recipe.id] = cookingState.recipeStats[recipe.id];
 
   if (typeof persistSave === 'function') persistSave();
+  if (typeof checkQuestProgress === 'function') checkQuestProgress('cook', { count: 1 });
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('complete');
 
   if (typeof showToast === 'function') {
@@ -1399,10 +1117,10 @@ window.closeCulturalFact = function() {
 // ══════════════ LOCAL LEADERBOARD SYSTEM ═════════════════════════════════════
 
 const LOCAL_RIVALS = [
-  { name: 'Min-jun (민준)', title: 'Valley Veteran 🌾', words: 24, honor: 850, cookingTier: 'Sous Chef 🍲', arcade: 1450, dungeon: 8, duelStreak: 7, rankLv: 31 },
-  { name: 'Seo-yeon (서연)', title: 'Hansik Scholar 👑', words: 18, honor: 620, cookingTier: 'Apprentice Chef 👨‍🍳', arcade: 1100, dungeon: 6, duelStreak: 5, rankLv: 26 },
-  { name: 'Ji-hoon (지훈)', title: 'Spell Duelist ⚡', words: 12, honor: 450, cookingTier: 'Novice Cook 🍳', arcade: 850, dungeon: 4, duelStreak: 4, rankLv: 18 },
-  { name: 'Ha-eun (하은)', title: 'Art Artisan 🎨', words: 8, honor: 280, cookingTier: 'Novice Cook 🍳', arcade: 520, dungeon: 2, duelStreak: 2, rankLv: 9 }
+  { name: 'Min-jun (민준)', title: 'Valley Veteran 🌾', words: 24, honor: 850, cookingTier: 'Sous Chef 🍲', arcade: 1450, dungeon: 8, rankLv: 31 },
+  { name: 'Seo-yeon (서연)', title: 'Hansik Scholar 👑', words: 18, honor: 620, cookingTier: 'Apprentice Chef 👨‍🍳', arcade: 1100, dungeon: 6, rankLv: 26 },
+  { name: 'Ji-hoon (지훈)', title: 'Arcade Ace 👾', words: 12, honor: 450, cookingTier: 'Novice Cook 🍳', arcade: 850, dungeon: 4, rankLv: 18 },
+  { name: 'Ha-eun (하은)', title: 'Art Artisan 🎨', words: 8, honor: 280, cookingTier: 'Novice Cook 🍳', arcade: 520, dungeon: 2, rankLv: 9 }
 ];
 
 function computeCookingTier() {
@@ -1463,13 +1181,12 @@ function openLeaderboard(tab = 'vocab') {
   if (pbGrid) {
     const pb = leaderboardState.personalBests;
     pbGrid.innerHTML = `
-      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">📖 Words Mastered: <b style="color:var(--neon-gold)">${pb.totalWordsMastered}</b></div>
-      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">⭐ Valley Rank: <b style="color:var(--neon-gold)">Lv.${pb.valleyLevel || 1} ${pb.valleyTitle || ''}</b></div>
-      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🎖️ Total Honor: <b style="color:var(--neon-gold)">${pb.totalHonor}</b></div>
-      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🍳 Cooking Tier: <b style="color:var(--neon-gold)">${pb.highestCookingTier}</b></div>
-      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">👾 Arcade Score: <b style="color:var(--neon-gold)">${pb.arcadeHighScore}</b></div>
-      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">🗡️ Dungeon Floor: <b style="color:var(--neon-gold)">Floor ${pb.dungeonMaxFloor}</b></div>
-      <div style="background:rgba(15,23,42,0.6); padding:8px; border-radius:8px;">⚡ Duel Streak: <b style="color:var(--neon-gold)">${pb.duelMaxWinStreak} Wins</b></div>
+      <div class="lb-pb-chip">Words mastered: <b>${pb.totalWordsMastered}</b></div>
+      <div class="lb-pb-chip">Valley rank: <b>Lv.${pb.valleyLevel || 1} ${pb.valleyTitle || ''}</b></div>
+      <div class="lb-pb-chip">Honor: <b>${pb.totalHonor}</b></div>
+      <div class="lb-pb-chip">Cooking: <b>${pb.highestCookingTier}</b></div>
+      <div class="lb-pb-chip">Arcade: <b>${pb.arcadeHighScore}</b></div>
+      <div class="lb-pb-chip">Dungeon: <b>Floor ${pb.dungeonMaxFloor}</b></div>
     `;
   }
 
@@ -1507,7 +1224,6 @@ function switchLeaderboardTab(tabId) {
     cookingTier: pb.highestCookingTier || 'Novice Cook 🍳',
     arcade: pb.arcadeHighScore || 0,
     dungeon: pb.dungeonMaxFloor || 0,
-    duelStreak: pb.duelMaxWinStreak || 0,
     rankLv: (typeof playerRank !== 'undefined' && playerRank.level) || 1,
     isPlayer: true
   };
@@ -1521,7 +1237,6 @@ function switchLeaderboardTab(tabId) {
     if (tabId === 'cooking') return computeCookingTierScore(b.cookingTier) - computeCookingTierScore(a.cookingTier);
     if (tabId === 'arcade') return b.arcade - a.arcade;
     if (tabId === 'dungeon') return b.dungeon - a.dungeon;
-    if (tabId === 'duel') return b.duelStreak - a.duelStreak;
     if (tabId === 'rank') return (b.rankLv || 0) - (a.rankLv || 0);
     return 0;
   });
@@ -1532,7 +1247,6 @@ function switchLeaderboardTab(tabId) {
   if (tabId === 'cooking') valColHeader = 'Cooking Rank';
   if (tabId === 'arcade') valColHeader = 'Arcade High Score';
   if (tabId === 'dungeon') valColHeader = 'Dungeon Max Floor';
-  if (tabId === 'duel') valColHeader = 'Spell Duel Win Streak';
   if (tabId === 'rank') valColHeader = 'Valley Rank';
 
   let html = `
@@ -1560,7 +1274,6 @@ function switchLeaderboardTab(tabId) {
     if (tabId === 'cooking') displayVal = entry.cookingTier;
     if (tabId === 'arcade') displayVal = `${entry.arcade} pts`;
     if (tabId === 'dungeon') displayVal = `Floor ${entry.dungeon}`;
-    if (tabId === 'duel') displayVal = `${entry.duelStreak} Win Streak`;
     if (tabId === 'rank') displayVal = `Lv.${entry.rankLv || 1}`;
 
     const rowClass = entry.isPlayer ? 'class="lb-row-player"' : '';
@@ -1569,8 +1282,8 @@ function switchLeaderboardTab(tabId) {
       <tr ${rowClass}>
         <td style="font-family:'Press Start 2P',monospace; font-size:10px">${rankBadge}</td>
         <td>${entry.name}</td>
-        <td style="color:#94a3b8">${entry.title}</td>
-        <td style="font-weight:bold; color:var(--neon-gold)">${displayVal}</td>
+        <td class="lb-title-cell">${entry.title}</td>
+        <td class="lb-val">${displayVal}</td>
       </tr>
     `;
   });
@@ -1686,7 +1399,7 @@ function renderProgressOverlay() {
   }
 
   $('prog-footnote').innerHTML =
-    `Cyan = learned, gold = mature. A word becomes <b>mature</b> once its review interval reaches
+    `Blue = learned, brown = mature. A word becomes <b>mature</b> once its review interval reaches
      ${SRS_CFG.MATURE_IVL} days, which takes several correctly spaced reviews — it cannot be rushed in
      one session. <b>Retention</b> is the share of reviews passed without a lapse.
      ${s.avgEase !== null ? `Average ease ${s.avgEase}.` : ''}`;

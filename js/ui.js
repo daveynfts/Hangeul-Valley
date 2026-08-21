@@ -297,7 +297,6 @@ function closeModalById(overlayId) {
   else if (overlayId === 'leaderboard-overlay') window.closeLeaderboard();
   else if (overlayId === 'shop-overlay') window.closeShop();
   else if (overlayId === 'memory-overlay') window.closeMemoryGame();
-  else if (overlayId === 'duel-overlay') window.closeSpellDuel();
   else if (overlayId === 'trophy-overlay') window.closeTrophies();
   else if (overlayId === 'level-select-overlay') hideLevelSelect();
   // Needs its own branch: this overlay is hidden by the .hidden class, and the generic

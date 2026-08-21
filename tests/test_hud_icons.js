@@ -25,14 +25,19 @@ assert(hudArt.indexOf('function hudIconHtml') >= 0, 'hudIconHtml helper exists')
 assert(hudArt.indexOf('function paintHudIcons') >= 0, 'paintHudIcons helper exists');
 
 ['vocab', 'shop', 'bag', 'more', 'menu', 'coin', 'gem', 'honor', 'sprout',
-  'quest', 'cook', 'recipe', 'audio', 'save', 'progress', 'ranks', 'duel', 'fish', 'trophy'
+  'quest', 'cook', 'recipe', 'audio', 'save', 'progress', 'ranks', 'fish', 'trophy'
 ].forEach((id) => {
   assert(html.indexOf('data-hud-icon="' + id + '"') >= 0, 'HUD wires ' + id);
 });
-['Quests', 'Cooking', 'Recipes', 'Audio', 'Save', 'Progress', 'Ranks', 'Duel', 'Fish', 'Trophies']
+['Quests', 'Cooking', 'Recipes', 'Audio', 'Save', 'Progress', 'Ranks', 'Fish', 'Trophies']
   .forEach((label) => {
     assert(html.indexOf('data-hud-label="' + label + '"') >= 0, 'More menu labels ' + label);
   });
+assert(html.indexOf('data-hud-icon="duel"') < 0, 'Duel HUD button is gone');
+assert(html.indexOf('duel-overlay') < 0, 'Duel overlay is gone');
+assert(hudArt.indexOf("id: 'duel'") < 0, 'HUD art table has no duel row');
+assert(css.indexOf('#progress-title') >= 0 && css.indexOf('#4a2a0d') >= 0, 'progress title uses dark ink');
+assert(css.indexOf('.lb-title') >= 0 && css.indexOf('.lb-pb-chip') >= 0, 'ranks panel uses ink-on-parchment chips');
 assert(css.indexOf('.hud-overflow-label') >= 0, 'overflow label style exists');
 assert(css.indexOf('.hud-btn:not(.hud-overflow-item)') >= 0, 'circle size does not clip More rows');
 

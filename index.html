@@ -68,7 +68,6 @@
         <button class="hud-btn hud-overflow-item" id="save-btn" title="Save game" onclick="saveAllGame()" data-hud-icon="save" data-hud-label="Save" data-hud-size="18">💾 Save</button>
         <button class="hud-btn hud-overflow-item" id="progress-btn" title="Review schedule" onclick="openProgressOverlay(); toggleHudOverflow(false);" data-hud-icon="progress" data-hud-label="Progress" data-hud-size="18">📊 Progress</button>
         <button class="hud-btn hud-overflow-item" id="leaderboard-btn" title="Leaderboard" onclick="openLeaderboard(); toggleHudOverflow(false);" data-hud-icon="ranks" data-hud-label="Ranks" data-hud-size="18">🏅 Ranks</button>
-        <button class="hud-btn hud-overflow-item" id="duel-btn" title="Spell Duel" onclick="openSpellDuel(); toggleHudOverflow(false);" data-hud-icon="duel" data-hud-label="Duel" data-hud-size="18">⚡ Duel</button>
         <button class="hud-btn hud-overflow-item" id="fish-album-btn" title="Fish album" onclick="openFishAlbum(); toggleHudOverflow(false);" data-hud-icon="fish" data-hud-label="Fish" data-hud-size="18">🐟 Fish</button>
         <button class="hud-btn hud-overflow-item" id="trophy-btn" title="Trophies" onclick="toggleHudOverflow(false);" data-hud-icon="trophy" data-hud-label="Trophies" data-hud-size="18">🏆 Trophies</button>
       </div>
@@ -80,8 +79,8 @@
   <div id="progress-overlay" class="hidden">
     <div id="progress-panel">
       <div id="progress-header">
-        <span id="progress-title">📊 Review Progress</span>
-        <button onclick="closeProgressOverlay()">✕</button>
+        <span id="progress-title"><span data-hud-icon="progress" data-hud-size="18">📊</span> Review Progress</span>
+        <button type="button" class="prog-close" onclick="closeProgressOverlay()">✕</button>
       </div>
       <div id="progress-body">
         <div id="prog-stat-grid"></div>
@@ -395,60 +394,6 @@
     </div>
   </div>
 
-  <!-- ══════════ SPELL QUIZ DUEL ══════════ -->
-  <div id="duel-overlay">
-    <div id="duel-panel">
-      <div id="duel-header">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <span style="font-size:24px">⚡</span>
-          <div>
-            <div id="duel-title">SPELL QUIZ DUEL</div>
-            <div id="duel-subtitle">Cast magic by choosing the correct word!</div>
-          </div>
-        </div>
-        <button id="duel-close-btn" onclick="closeSpellDuel()">✕</button>
-      </div>
-
-      <div id="duel-stage">
-        <div class="duel-char-box" id="duel-player-box">
-          <div class="duel-avatar">🧙‍♂️</div>
-          <div class="duel-char-name">Hero Player</div>
-          <div class="duel-hp-bar-bg">
-            <div class="duel-hp-bar-fill" id="duel-player-hp-fill" style="width:100%"></div>
-          </div>
-          <div class="duel-hp-text" id="duel-player-hp-text">100 / 100 HP</div>
-        </div>
-
-        <div id="duel-vs-wrap">
-          <div id="duel-vs-badge">VS</div>
-          <div id="duel-combo-badge">🔥 Combo x0</div>
-        </div>
-
-        <div class="duel-char-box" id="duel-enemy-box">
-          <div class="duel-avatar" id="duel-enemy-avatar">🧙‍♀️</div>
-          <div class="duel-char-name" id="duel-enemy-name">Dark Wizard</div>
-          <div class="duel-hp-bar-bg">
-            <div class="duel-hp-bar-fill" id="duel-enemy-hp-fill" style="width:100%"></div>
-          </div>
-          <div class="duel-hp-text" id="duel-enemy-hp-text">100 / 100 HP</div>
-        </div>
-      </div>
-
-      <div id="duel-question-wrap">
-        <div id="duel-timer-bar-bg">
-          <div id="duel-timer-bar-fill"></div>
-        </div>
-        <div id="duel-spell-prompt">The enemy casts a spell with word:</div>
-        <div id="duel-target-word">사과</div>
-        <div id="duel-prompt-sub">Select the correct English translation!</div>
-      </div>
-
-      <div id="duel-options-grid">
-        <!-- JS generated 4 option buttons -->
-      </div>
-    </div>
-  </div>
-
   <!-- ══════════════ QUEST LOG OVERLAY ═════════════════════════════ -->
   <div id="quest-overlay">
     <div id="quest-panel" class="glass-modal">
@@ -571,34 +516,31 @@
   <!-- ══════════════ LOCAL LEADERBOARD MODAL ══════════════ -->
   <div id="leaderboard-overlay">
     <div id="leaderboard-panel" class="glass-modal" style="max-width:800px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(56,189,248,0.4); padding-bottom:14px; margin-bottom:16px;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <span style="font-size:32px">🏅</span>
+      <div class="lb-head">
+        <div class="lb-head-copy">
+          <span class="lb-seal" data-hud-icon="ranks" data-hud-size="28">🏅</span>
           <div>
-            <div style="font-family:'Press Start 2P',monospace; font-size:15px; color:var(--neon-cyan)">LOCAL LEADERBOARDS</div>
-            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Hangeul Valley Offline Local Rankings</div>
+            <div class="lb-title">Valley Rankings</div>
+            <div class="lb-sub">Local scores on this device</div>
           </div>
         </div>
-        <button onclick="closeLeaderboard()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:8px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+        <button type="button" class="lb-close" onclick="closeLeaderboard()">✕</button>
       </div>
 
-      <!-- Personal Best Stats Summary Bar -->
-      <div id="lb-pb-summary" style="background:rgba(30,41,59,0.8); border:1.5px solid var(--neon-cyan); border-radius:14px; padding:14px; margin-bottom:16px;">
-        <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-cyan); margin-bottom:8px">⭐ MY PERSONAL BEST RECORDS:</div>
-        <div id="lb-pb-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; font-size:11px;">
+      <div id="lb-pb-summary">
+        <div class="lb-pb-kicker">Your records</div>
+        <div id="lb-pb-grid">
           <!-- Rendered by JS -->
         </div>
       </div>
 
-      <!-- Leaderboard Tabs -->
       <div class="lb-tabs" id="lb-tabs-container">
-        <button class="lb-tab-btn active" id="lbtab-vocab" onclick="switchLeaderboardTab('vocab')">📖 Vocab Master</button>
-        <button class="lb-tab-btn" id="lbtab-rank" onclick="switchLeaderboardTab('rank')">⭐ Valley Rank</button>
-        <button class="lb-tab-btn" id="lbtab-honor" onclick="switchLeaderboardTab('honor')">🎖️ Total Honor</button>
-        <button class="lb-tab-btn" id="lbtab-cooking" onclick="switchLeaderboardTab('cooking')">🍳 Cooking Tier</button>
-        <button class="lb-tab-btn" id="lbtab-arcade" onclick="switchLeaderboardTab('arcade')">👾 Arcade Score</button>
-        <button class="lb-tab-btn" id="lbtab-dungeon" onclick="switchLeaderboardTab('dungeon')">🗡️ Dungeon Floor</button>
-        <button class="lb-tab-btn" id="lbtab-duel" onclick="switchLeaderboardTab('duel')">⚡ Duel Streak</button>
+        <button class="lb-tab-btn active" id="lbtab-vocab" onclick="switchLeaderboardTab('vocab')">Vocab</button>
+        <button class="lb-tab-btn" id="lbtab-rank" onclick="switchLeaderboardTab('rank')">Valley Rank</button>
+        <button class="lb-tab-btn" id="lbtab-honor" onclick="switchLeaderboardTab('honor')">Honor</button>
+        <button class="lb-tab-btn" id="lbtab-cooking" onclick="switchLeaderboardTab('cooking')">Cooking</button>
+        <button class="lb-tab-btn" id="lbtab-arcade" onclick="switchLeaderboardTab('arcade')">Arcade</button>
+        <button class="lb-tab-btn" id="lbtab-dungeon" onclick="switchLeaderboardTab('dungeon')">Dungeon</button>
       </div>
 
       <!-- Leaderboard Table -->

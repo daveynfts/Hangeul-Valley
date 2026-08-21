@@ -2479,7 +2479,7 @@ class FarmScene extends Phaser.Scene {
       });
       if (this.wizardSprite && this.wizardSprite.visible && this.wizardX) mk({
         id: 'wizard', kind: 'wizard', x: this.wizardX, y: this.wizardY, hitR: 56, useR: 85,
-        label: labelOf('Spell Duel'), color: 0xA855F7, hw: 44, hh: 50, hy: this.wizardY - 25
+        label: labelOf('Wizard'), color: 0xA855F7, hw: 44, hh: 50, hy: this.wizardY - 25
       });
       if (this.portalSprite && this.portalSprite.visible && this.portalX) mk({
         id: 'portal', kind: 'portal', x: this.portalX, y: this.portalY, hitR: 56, useR: 90,
@@ -2858,13 +2858,8 @@ class FarmScene extends Phaser.Scene {
         this.tweens.add({targets:this.catSprite,scale:{from:0.75,to:0.95},duration:100,yoyo:true,ease:'Back.Out(2)'});
         showCatDialog();
         return;
-      case 'wizard': {
-        this.tweens.add({targets:this.wizardSprite,scale:{from:1.8,to:2.1},duration:120,yoyo:true,ease:'Back.Out(2)'});
-        const chk = isZoneUnlocked('duel');
-        if(!chk.unlocked){ showHardLockToast('duel'); return; }
-        openSpellDuel();
+      case 'wizard':
         return;
-      }
       case 'portal': {
         this.tweens.add({targets:this.portalSprite,scale:{from:1.6,to:1.9},duration:120,yoyo:true,ease:'Back.Out(2)'});
         const chk = isZoneUnlocked('dungeon');

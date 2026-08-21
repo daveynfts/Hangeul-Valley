@@ -18,7 +18,6 @@ const HUD_ART_ROWS = [
   { id: 'save', slug: 'save_chest', nameEn: 'Save chest', fallback: '💾', label: 'Save' },
   { id: 'progress', slug: 'progress_sunflower', nameEn: 'Sunflower', fallback: '📊', label: 'Progress' },
   { id: 'ranks', slug: 'trophy_cup', nameEn: 'Trophy cup', fallback: '🏅', label: 'Ranks' },
-  { id: 'duel', slug: 'lightning_bolt', nameEn: 'Lightning bolt', fallback: '⚡', label: 'Duel' },
   { id: 'fish', slug: 'koi_fish', nameEn: 'Koi fish', fallback: '🐟', label: 'Fish' },
   { id: 'trophy', slug: 'star_wreath', nameEn: 'Star wreath', fallback: '🏆', label: 'Trophies' }
 ];
