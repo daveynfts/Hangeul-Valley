@@ -25,5 +25,8 @@ m2_verification_log.txt
 # Do not reintroduce a second tree.
 assets/
 
+# Generated Korean TTS clips (SunHi). Rebuilt by npm run tts:generate.
+audio/ko/*.mp3
+
 # Local Vercel CLI metadata — not a source of truth.
 .vercel/

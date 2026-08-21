@@ -47,6 +47,10 @@
     {
       "source": "/diner/content.json",
       "destination": "https://cdn.daveynfts.com/hangeul-valley/diner/content.json"
+    },
+    {
+      "source": "/audio/:path*",
+      "destination": "https://cdn.daveynfts.com/hangeul-valley/audio/:path*"
     }
   ],
   "headers": [
@@ -78,6 +82,12 @@
       "source": "/skins/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
+      ]
+    },
+    {
+      "source": "/audio/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
       ]
     }
   ],

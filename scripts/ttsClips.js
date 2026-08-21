@@ -1,0 +1,102 @@
+/**
+ * Shared Korean clip IDs for pre-rendered SunHi MP3s.
+ * The browser copy of the stem lives in js/audio.js — tests assert they match.
+ */
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.resolve(__dirname, '..');
+const TTS_VOICE = 'ko-KR-SunHiNeural';
+const TTS_RATE = '-12%';
+const TTS_CACHE_KEY = 'sunhi-1';
+const TTS_DIR_REL = 'audio/ko';
+const EXTRA_PHRASES = ['한국어'];
+
+function ttsClipStem(text) {
+  const nfc = String(text || '').normalize('NFC');
+  const bytes = Buffer.from(nfc, 'utf8');
+  let hex = '';
+  for (let i = 0; i < bytes.length; i++) hex += (bytes[i] + 256).toString(16).slice(1);
+  return hex;
+}
+
+function ttsClipRel(text) {
+  return TTS_DIR_REL + '/' + ttsClipStem(text) + '.mp3';
+}
+
+function ttsClipPath(text, root) {
+  return path.join(root || ROOT, ttsClipRel(text));
+}
+
+function addKo(out, seen, value) {
+  const nfc = String(value || '').normalize('NFC').trim();
+  if (!nfc || seen.has(nfc)) return;
+  seen.add(nfc);
+  out.push(nfc);
+}
+
+function walkKo(out, seen, node) {
+  if (!node) return;
+  if (Array.isArray(node)) {
+    node.forEach((item) => walkKo(out, seen, item));
+    return;
+  }
+  if (typeof node !== 'object') return;
+  if (typeof node.ko === 'string') addKo(out, seen, node.ko);
+  Object.keys(node).forEach((k) => {
+    if (k === 'ko') return;
+    walkKo(out, seen, node[k]);
+  });
+}
+
+function collectTtsPhrases(root) {
+  const base = root || ROOT;
+  const out = [];
+  const seen = new Set();
+  const levels = JSON.parse(fs.readFileSync(path.join(base, 'levels.json'), 'utf8'));
+  (Array.isArray(levels) ? levels : []).forEach((lvl) => {
+    (lvl.words || []).forEach((w) => addKo(out, seen, w && w.ko));
+  });
+  ['diner/content.json', 'worlds/2b-unit-10.json', 'worlds/2b-unit-14.json',
+    'worlds/unit10-desk-quiz.json', 'worlds/unit14-desk-quiz.json'].forEach((rel) => {
+    const full = path.join(base, rel);
+    if (!fs.existsSync(full)) return;
+    walkKo(out, seen, JSON.parse(fs.readFileSync(full, 'utf8')));
+  });
+  EXTRA_PHRASES.forEach((p) => addKo(out, seen, p));
+
+  const sylSeen = new Set();
+  out.slice().forEach((phrase) => {
+    String(phrase).normalize('NFC').split('').forEach((ch) => {
+      const n = ch.charCodeAt(0);
+      if (n < 0xac00 || n > 0xd7a3 || sylSeen.has(ch)) return;
+      sylSeen.add(ch);
+      addKo(out, seen, ch);
+    });
+  });
+  return out;
+}
+
+function listLocalTtsFiles(root) {
+  const dir = path.join(root || ROOT, TTS_DIR_REL);
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir)
+    .filter((name) => /^[0-9a-f]+\.mp3$/i.test(name))
+    .map((name) => TTS_DIR_REL + '/' + name);
+}
+
+module.exports = {
+  ROOT,
+  TTS_VOICE,
+  TTS_RATE,
+  TTS_CACHE_KEY,
+  TTS_DIR_REL,
+  EXTRA_PHRASES,
+  ttsClipStem,
+  ttsClipRel,
+  ttsClipPath,
+  collectTtsPhrases,
+  listLocalTtsFiles
+};

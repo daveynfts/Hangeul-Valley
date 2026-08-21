@@ -110,24 +110,41 @@ if (typeof window !== 'undefined') {
   window.addEventListener('click', unlockAudio, { capture: true });
 }
 
-// ═══════════════ KOREAN PRONUNCIATION (Web Speech API) ═══════════════════════
-// Reads Hangul aloud in ko-KR. Korean spelling does not map one-to-one onto sound —
-// 받침 assimilation, 연음 liaison and the tense consonants ㄲㄸㅃㅆㅉ all shift in
-// running speech — so a learner who only ever sees romanization learns it wrong.
-//
-// Everything here degrades silently: no speechSynthesis, no voices, or a system with
-// no Korean voice installed all end with isAvailable() false and the 🔊 controls hidden.
+// ═══════════════ KOREAN PRONUNCIATION ═══════════════════════════════════════
+// Primary: pre-rendered SunHi MP3s on the CDN (audio/ko/<utf8-hex>.mp3).
+// Fallback: Web Speech API ko-KR, for a missing clip or a device that cannot
+// play HTML audio. The stem helper must stay in lockstep with scripts/ttsClips.js.
+const TTS_CLIP_DIR = 'audio/ko/';
+const TTS_CACHE_KEY = 'sunhi-1';
+function ttsClipStem(text) {
+  const nfc = String(text || '').normalize('NFC');
+  const bytes = (typeof TextEncoder !== 'undefined')
+    ? new TextEncoder().encode(nfc)
+    : [];
+  let hex = '';
+  for (let i = 0; i < bytes.length; i++) hex += (bytes[i] + 256).toString(16).slice(1);
+  return hex;
+}
+function ttsClipUrl(text) {
+  return TTS_CLIP_DIR + ttsClipStem(text) + '.mp3?v=' + encodeURIComponent(TTS_CACHE_KEY);
+}
+
 const KoreanTTS = {
   _voice: null,
   _ready: false,
   _warned: false,
   _pendingSpeak: null,
   _speakTimer: null,
+  _clip: null,
   enabled: true,
 
   supported() {
     return typeof window !== 'undefined' && 'speechSynthesis' in window
       && typeof window.SpeechSynthesisUtterance === 'function';
+  },
+
+  clipsSupported() {
+    return typeof Audio !== 'undefined';
   },
 
   // Toggling the root class hides every .tts-only control at once. Written defensively
@@ -149,8 +166,6 @@ const KoreanTTS = {
       || null;
   },
 
-  // getVoices() is populated asynchronously and starts out empty in Chrome, so this
-  // runs on load and again on voiceschanged.
   refreshVoice() {
     if (!this.supported()) return;
     const voices = window.speechSynthesis.getVoices() || [];
@@ -159,7 +174,7 @@ const KoreanTTS = {
     this._ready = true;
     if (!this._voice && !this._warned) {
       this._warned = true;
-      console.info('[TTS] No Korean voice installed — speaking with lang=ko-KR anyway.');
+      console.info('[TTS] No Korean system voice — CDN clips still play.');
     }
     this._markAvailability();
     if (this._pendingSpeak) {
@@ -170,15 +185,15 @@ const KoreanTTS = {
   },
 
   isAvailable() {
-    return this.supported() && !!this._voice;
+    return this.clipsSupported() || (this.supported() && !!this._voice);
   },
 
   init() {
-    if (!this.supported()) { this._markAvailability(); return; }
     try { this.enabled = localStorage.getItem('hv_tts_enabled') !== '0'; } catch { this.enabled = true; }
+    this._markAvailability();
+    if (!this.supported()) return;
     this.refreshVoice();
     try { window.speechSynthesis.onvoiceschanged = () => this.refreshVoice(); } catch {}
-    // Chrome sometimes needs a beat before voices land even without the event.
     setTimeout(() => this.refreshVoice(), 400);
     setTimeout(() => this.refreshVoice(), 1500);
   },
@@ -190,13 +205,26 @@ const KoreanTTS = {
     }
   },
 
-  // First user tap wakes Chrome's voice list and unsticks a paused synth. Must stay
-  // inside the gesture — a delayed speak() is dropped as if it had no audio permission.
   unlock() {
-    if (!this.supported()) return;
-    try { window.speechSynthesis.getVoices(); } catch {}
-    this.refreshVoice();
-    try { if (window.speechSynthesis.paused) window.speechSynthesis.resume(); } catch {}
+    if (this.supported()) {
+      try { window.speechSynthesis.getVoices(); } catch {}
+      this.refreshVoice();
+      try { if (window.speechSynthesis.paused) window.speechSynthesis.resume(); } catch {}
+    }
+    if (this._clip && this._clip.paused) {
+      try { this._clip.play(); } catch {}
+    }
+  },
+
+  stop() {
+    if (this._clip) {
+      try { this._clip.onended = null; this._clip.onerror = null; this._clip.pause(); this._clip.removeAttribute('src'); } catch {}
+      this._clip = null;
+    }
+    this._clearSpeakTimer();
+    if (this.supported()) {
+      try { window.speechSynthesis.cancel(); } catch {}
+    }
   },
 
   _utterance(text, rate) {
@@ -210,16 +238,12 @@ const KoreanTTS = {
       const err = ev && ev.error;
       if (!err || err === 'interrupted' || err === 'canceled') return;
       console.warn('[TTS] utterance error:', err);
-      if (typeof showToast === 'function') {
-        showToast('🔇 Korean voice failed' + (err === 'not-allowed' ? ' — click Hear again' : ''), 2600);
-      }
     };
     return u;
   },
 
-  // Speak in the current turn. setTimeout after cancel() loses the click gesture in
-  // Chrome, which is why Hear again showed up but played silence.
   _speakNow(utterances) {
+    if (!this.supported()) return false;
     const synth = window.speechSynthesis;
     const list = Array.isArray(utterances) ? utterances : [utterances];
     try { if (synth.paused) synth.resume(); } catch {}
@@ -228,15 +252,11 @@ const KoreanTTS = {
     }
     list.forEach((u) => synth.speak(u));
     try { synth.resume(); } catch {}
+    return true;
   },
 
-  // rate defaults slow: learners need the syllable boundaries, not native tempo.
-  // `force` is for explicit buttons (Hear again): HUD mute only blocks auto-play.
-  speak(text, { rate = 0.85, force = false } = {}) {
+  _speakWeb(text, { rate = 0.85 } = {}) {
     if (!this.supported() || !text) return false;
-    if (!this.enabled && !force) return false;
-    this._pendingSpeak = null;
-    this._clearSpeakTimer();
     this.unlock();
     try {
       this._speakNow(this._utterance(text, rate));
@@ -247,18 +267,87 @@ const KoreanTTS = {
     }
   },
 
-  // Syllable-by-syllable, for when the learner wants the word broken apart.
-  spell(text, { force = false } = {}) {
-    if (!this.supported() || !text) return false;
+  _playClip(text, opts) {
+    if (!this.clipsSupported() || !text) return false;
+    const url = ttsClipUrl(text);
+    try {
+      const a = new Audio(url);
+      a.preload = 'auto';
+      this._clip = a;
+      a.onerror = () => {
+        if (this._clip !== a) return;
+        this._clip = null;
+        this._speakWeb(text, opts);
+      };
+      const play = a.play();
+      if (play && typeof play.catch === 'function') {
+        play.catch(() => {
+          if (this._clip !== a) return;
+          this._clip = null;
+          this._speakWeb(text, opts);
+        });
+      }
+      return true;
+    } catch {
+      return false;
+    }
+  },
+
+  _playClipQueue(parts, index, opts) {
+    if (!parts || index >= parts.length) return;
+    if (!this.clipsSupported()) {
+      this._speakNow(parts.map((s) => this._utterance(s, 0.7)));
+      return;
+    }
+    const text = parts[index];
+    const a = new Audio(ttsClipUrl(text));
+    a.preload = 'auto';
+    this._clip = a;
+    a.onended = () => {
+      if (this._clip !== a) return;
+      this._playClipQueue(parts, index + 1, opts);
+    };
+    a.onerror = () => {
+      if (this._clip !== a) return;
+      this._clip = null;
+      const rest = parts.slice(index);
+      if (this.supported()) this._speakNow(rest.map((s) => this._utterance(s, 0.7)));
+    };
+    const play = a.play();
+    if (play && typeof play.catch === 'function') {
+      play.catch(() => {
+        if (this._clip !== a) return;
+        this._clip = null;
+        if (this.supported()) this._speakNow(parts.slice(index).map((s) => this._utterance(s, 0.7)));
+      });
+    }
+  },
+
+  speak(text, { rate = 0.85, force = false } = {}) {
+    if (!text) return false;
     if (!this.enabled && !force) return false;
-    this.unlock();
+    this._pendingSpeak = null;
+    this.stop();
+    if (this._playClip(text, { rate, force })) return true;
+    return this._speakWeb(text, { rate, force });
+  },
+
+  spell(text, { force = false } = {}) {
+    if (!text) return false;
+    if (!this.enabled && !force) return false;
     const syls = String(text).normalize('NFC').split('').filter(c => {
       const n = c.charCodeAt(0);
       return n >= 0xac00 && n <= 0xd7a3;
     });
     if (!syls.length) return this.speak(text, { force });
     this._pendingSpeak = null;
-    this._clearSpeakTimer();
+    this.stop();
+    if (this.clipsSupported()) {
+      this._playClipQueue(syls, 0, { force });
+      return true;
+    }
+    if (!this.supported()) return false;
+    this.unlock();
     try {
       this._speakNow(syls.map((s) => this._utterance(s, 0.7)));
       return true;
@@ -271,7 +360,7 @@ const KoreanTTS = {
   setEnabled(on) {
     this.enabled = !!on;
     try { localStorage.setItem('hv_tts_enabled', this.enabled ? '1' : '0'); } catch {}
-    if (!this.enabled && this.supported()) window.speechSynthesis.cancel();
+    if (!this.enabled) this.stop();
     return this.enabled;
   }
 };
@@ -318,6 +407,8 @@ if (typeof window !== 'undefined') {
   window.spellKorean = spellKorean;
   window.toggleTTS = toggleTTS;
   window.syncTTSButton = syncTTSButton;
+  window.ttsClipStem = ttsClipStem;
+  window.ttsClipUrl = ttsClipUrl;
   // The HUD is built later in the file, so wait for the DOM before touching the button.
   if (typeof document !== 'undefined' && document.readyState === 'loading' && document.addEventListener) {
     document.addEventListener('DOMContentLoaded', syncTTSButton, { once: true });
