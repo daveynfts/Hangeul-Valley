@@ -189,6 +189,46 @@ function objectKey(rel) {
   return PREFIX + String(rel).replace(/\\/g, '/');
 }
 
+// Which Korean clips the CDN already holds: Map of repo-relative path
+// ('audio/ko/<hex>.mp3') to object size.
+//
+// The clip filename hashes the phrase, so an existing object is definitively the clip for
+// that text — which is what lets the render step skip it. The size is what distinguishes
+// "same clip, already published" from "same phrase, re-rendered differently" (a voice or
+// rate change keeps the filename but changes the bytes), so a forced re-render still
+// uploads instead of being silently filtered out.
+async function listRemoteTtsRels(client, bucket) {
+  const { ListObjectsV2Command } = sdk();
+  const { TTS_DIR_REL } = require('./ttsClips');
+  const prefix = PREFIX + TTS_DIR_REL + '/';
+  const rels = new Map();
+  let token;
+  do {
+    const out = await client.send(new ListObjectsV2Command({
+      Bucket: bucket,
+      Prefix: prefix,
+      ContinuationToken: token
+    }));
+    (out.Contents || []).forEach((o) => {
+      if (o && o.Key && o.Size > 0) rels.set(o.Key.slice(PREFIX.length), o.Size);
+    });
+    token = out.IsTruncated ? out.NextContinuationToken : undefined;
+  } while (token);
+  return rels;
+}
+
+// Drop the clips that are byte-for-byte already on the CDN. A clip missing locally is
+// nothing to upload; a clip whose local size differs was re-rendered and must go up.
+function dropPublishedClips(files, onCdn, base) {
+  return files.filter((f) => {
+    const remoteSize = onCdn.get(f.rel);
+    if (remoteSize === undefined) return true;
+    const full = path.join(base, f.rel);
+    if (!fs.existsSync(full)) return false;
+    return fs.statSync(full).size !== remoteSize;
+  });
+}
+
 async function uploadFiles(client, bucket, files, root) {
   const { PutObjectCommand } = sdk();
   const base = root || ROOT;
@@ -361,22 +401,47 @@ async function runPublish(argv, root) {
     });
   }
 
-  if (!flags.skipTts) {
-    const { generateTtsClips } = require('./generate_tts');
-    const tts = await generateTtsClips([], base);
-    console.log('TTS_CLIPS', tts.rendered, 'rendered,', tts.skipped, 'cached');
-  }
-
-  const files = collectUploadFiles(base);
-  console.log('UPLOAD_PLAN', files.length, 'files');
-
-  let uploaded = [];
   let client = null;
   let bucket = '';
-  if (!flags.skipUpload) {
+  const useR2 = !flags.skipUpload;
+  if (useR2) {
     const created = createR2Client();
     client = created.client;
     bucket = created.bucket;
+  }
+
+  // What the CDN already holds. Asked for once and reused by both the render step and the
+  // upload plan, because a clip already on R2 needs neither.
+  let onCdn = null;
+  if (useR2) {
+    try {
+      onCdn = await listRemoteTtsRels(client, bucket);
+      console.log('TTS_ON_CDN', onCdn.size, 'clips');
+    } catch (e) {
+      console.log('TTS_ON_CDN unavailable (' + (e && e.message) + ') — falling back to the local check');
+      onCdn = null;
+    }
+  }
+
+  if (!flags.skipTts) {
+    const { generateTtsClips } = require('./generate_tts');
+    const tts = await generateTtsClips([], base, { have: onCdn });
+    console.log('TTS_CLIPS', tts.rendered, 'rendered,', tts.skipped, 'cached');
+  }
+
+  let files = collectUploadFiles(base);
+  if (onCdn && onCdn.size) {
+    // Re-PUTting identical clip bytes on every publish is pure cost. Everything else —
+    // the JSON, the sprites — changes in place and always uploads.
+    const before = files.length;
+    files = dropPublishedClips(files, onCdn, base);
+    const skipped = before - files.length;
+    if (skipped) console.log('UPLOAD_SKIP', skipped, 'clips already on the CDN');
+  }
+  console.log('UPLOAD_PLAN', files.length, 'files');
+
+  let uploaded = [];
+  if (!flags.skipUpload) {
     uploaded = await uploadFiles(client, bucket, files, base);
     console.log('UPLOADED', uploaded.length);
   } else {
@@ -432,6 +497,8 @@ module.exports = {
   publicContentBase,
   objectKey,
   createR2Client,
+  listRemoteTtsRels,
+  dropPublishedClips,
   uploadFiles,
   verifyS3,
   verifyPublicJson,
