@@ -63,6 +63,16 @@ let threw = false;
 try { parsePublishArgs(['--nope']); } catch (e) { threw = /Unknown flag/.test(e.message); }
 assert(threw, 'unknown flag is rejected');
 
+const publishYml = fs.readFileSync(path.join(ROOT, '.github', 'workflows', 'publish.yml'), 'utf8');
+const ciYml = fs.readFileSync(path.join(ROOT, '.github', 'workflows', 'ci.yml'), 'utf8');
+assert(/^name: CI\s*$/m.test(ciYml), 'CI workflow is named CI (publish listens for that name)');
+assert(/workflow_run:/.test(publishYml), 'publish.yml auto-runs after CI');
+assert(/workflows:\s*\[CI\]/.test(publishYml), 'publish.yml listens for the CI workflow');
+assert(/workflow_dispatch:/.test(publishYml), 'publish.yml still allows a manual run');
+assert(/head_branch == 'main'/.test(publishYml), 'auto-publish is limited to main');
+assert(/npm run publish:prod/.test(publishYml), 'publish job runs publish:prod');
+assert(/github\.event\.workflow_run\.head_sha/.test(publishYml), 'auto-publish checks out the CI commit');
+
 console.log('\n====================================================');
 console.log('RESULT: ' + passed + ' passed, ' + failed + ' failed');
 console.log('====================================================');
