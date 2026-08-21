@@ -118,6 +118,8 @@ const KoreanTTS = {
   _voice: null,
   _ready: false,
   _warned: false,
+  _pendingSpeak: null,
+  _speakTimer: null,
   enabled: true,
 
   supported() {
@@ -150,6 +152,13 @@ const KoreanTTS = {
       console.info('[TTS] No Korean voice installed — pronunciation playback disabled.');
     }
     this._markAvailability();
+    if (this._voice && this._pendingSpeak) {
+      const queued = this._pendingSpeak;
+      this._pendingSpeak = null;
+      this.speak(queued);
+    } else if (voices.length && !this._voice) {
+      this._pendingSpeak = null;
+    }
   },
 
   isAvailable() {
@@ -166,17 +175,48 @@ const KoreanTTS = {
     setTimeout(() => this.refreshVoice(), 1500);
   },
 
+  _clearSpeakTimer() {
+    if (this._speakTimer) {
+      clearTimeout(this._speakTimer);
+      this._speakTimer = null;
+    }
+  },
+
+  _utterance(text, rate) {
+    const u = new SpeechSynthesisUtterance(String(text).normalize('NFC'));
+    if (this._voice) u.voice = this._voice;
+    u.lang = (this._voice && this._voice.lang) || 'ko-KR';
+    u.rate = rate;
+    u.pitch = 1;
+    return u;
+  },
+
+  // Chrome drops speak() when it runs in the same turn as cancel(), and a paused
+  // synth stays silent until resume(). Both show up as "phase 2 listening plays nothing".
+  _enqueue(utterances) {
+    const synth = window.speechSynthesis;
+    this._clearSpeakTimer();
+    try { if (synth.paused) synth.resume(); } catch {}
+    try { synth.cancel(); } catch {}
+    const list = Array.isArray(utterances) ? utterances : [utterances];
+    this._speakTimer = setTimeout(() => {
+      this._speakTimer = null;
+      try { if (synth.paused) synth.resume(); } catch {}
+      list.forEach((u) => synth.speak(u));
+    }, 60);
+  },
+
   // rate defaults slow: learners need the syllable boundaries, not native tempo.
   speak(text, { rate = 0.85 } = {}) {
-    if (!this.enabled || !this.isAvailable() || !text) return false;
+    if (!this.enabled || !this.supported() || !text) return false;
+    if (!this.isAvailable()) {
+      this.refreshVoice();
+      this._pendingSpeak = String(text);
+      return false;
+    }
+    this._pendingSpeak = null;
     try {
-      window.speechSynthesis.cancel();   // don't queue behind a previous word
-      const u = new SpeechSynthesisUtterance(String(text).normalize('NFC'));
-      u.voice = this._voice;
-      u.lang = this._voice.lang || 'ko-KR';
-      u.rate = rate;
-      u.pitch = 1;
-      window.speechSynthesis.speak(u);
+      this._enqueue(this._utterance(text, rate));
       return true;
     } catch (e) {
       console.warn('[TTS] speak failed:', e);
@@ -192,15 +232,9 @@ const KoreanTTS = {
       return n >= 0xac00 && n <= 0xd7a3;
     });
     if (!syls.length) return this.speak(text);
+    this._pendingSpeak = null;
     try {
-      window.speechSynthesis.cancel();
-      syls.forEach(s => {
-        const u = new SpeechSynthesisUtterance(s);
-        u.voice = this._voice;
-        u.lang = this._voice.lang || 'ko-KR';
-        u.rate = 0.7;
-        window.speechSynthesis.speak(u);
-      });
+      this._enqueue(syls.map((s) => this._utterance(s, 0.7)));
       return true;
     } catch (e) {
       console.warn('[TTS] spell failed:', e);
