@@ -1,6 +1,7 @@
 [
   "js/state.js",
   "js/audio.js",
+  "js/systems/music.js",
   "js/renderer.js",
   "js/systems/srs.js",
   "js/systems/save.js",

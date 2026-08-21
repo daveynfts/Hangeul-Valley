@@ -64,7 +64,7 @@
         <button class="hud-btn hud-overflow-item" id="quest-btn" title="Quest Log" onclick="openQuestOverlay(); toggleHudOverflow(false);" data-hud-icon="quest" data-hud-label="Quests" data-hud-size="18">📜 Quests</button>
         <button class="hud-btn hud-overflow-item" id="cooking-btn" title="Cooking (C)" onclick="openCookingUI(); toggleHudOverflow(false);" data-hud-icon="cook" data-hud-label="Cooking" data-hud-size="18">🍳 Cooking</button>
         <button class="hud-btn hud-overflow-item" id="recipe-btn" title="Recipe Book" onclick="openRecipeBook(); toggleHudOverflow(false);" data-hud-icon="recipe" data-hud-label="Recipes" data-hud-size="18">🍱 Recipes</button>
-        <button class="hud-btn hud-overflow-item tts-only" id="tts-toggle-btn" title="Korean pronunciation" onclick="toggleTTS()" data-hud-icon="audio" data-hud-label="Audio" data-hud-size="18">🔊 Audio</button>
+        <button class="hud-btn hud-overflow-item" id="tts-toggle-btn" title="Sound settings" onclick="openAudioSettings(); toggleHudOverflow(false);" data-hud-icon="audio" data-hud-label="Audio" data-hud-size="18">🔊 Audio</button>
         <button class="hud-btn hud-overflow-item" id="save-btn" title="Save game" onclick="saveAllGame()" data-hud-icon="save" data-hud-label="Save" data-hud-size="18">💾 Save</button>
         <button class="hud-btn hud-overflow-item" id="progress-btn" title="Review schedule" onclick="openProgressOverlay(); toggleHudOverflow(false);" data-hud-icon="progress" data-hud-label="Progress" data-hud-size="18">📊 Progress</button>
         <button class="hud-btn hud-overflow-item" id="leaderboard-btn" title="Leaderboard" onclick="openLeaderboard(); toggleHudOverflow(false);" data-hud-icon="ranks" data-hud-label="Ranks" data-hud-size="18">🏅 Ranks</button>
@@ -74,6 +74,56 @@
     </div>
   </div>
   <div id="controls-tip">WASD / arrows to move · click a nearby object to interact</div>
+
+  <!-- ══════════ AUDIO MIXER ══════════ -->
+  <div id="audio-overlay" role="dialog" aria-modal="true" aria-labelledby="audio-title">
+    <div id="audio-panel">
+      <div id="audio-header">
+        <div id="audio-title-wrap">
+          <div id="audio-title"><span data-hud-icon="audio" data-hud-size="18">🔊</span> Sound</div>
+          <div id="audio-sub">Music, ambience, effects and the Korean voice</div>
+        </div>
+        <button type="button" class="audio-close" onclick="closeAudioSettings()" aria-label="Close sound settings">✕</button>
+      </div>
+      <div id="audio-body">
+        <button type="button" id="audio-mute-btn" class="audio-switch" onclick="toggleAudioMute()" aria-pressed="false">🔊 Sound is on</button>
+
+        <label class="audio-row" for="audio-vol-master">
+          <span class="audio-row-name">🎚️ Master</span>
+          <input type="range" class="audio-slider" id="audio-vol-master" min="0" max="100" step="1" value="80"
+                 oninput="setAudioVolume('master', this.value)" aria-label="Master volume">
+          <span class="audio-row-val" id="audio-val-master">80%</span>
+        </label>
+        <label class="audio-row" for="audio-vol-music">
+          <span class="audio-row-name">🎵 Music</span>
+          <input type="range" class="audio-slider" id="audio-vol-music" min="0" max="100" step="1" value="40"
+                 oninput="setAudioVolume('music', this.value)" aria-label="Music volume">
+          <span class="audio-row-val" id="audio-val-music">40%</span>
+        </label>
+        <label class="audio-row" for="audio-vol-ambience">
+          <span class="audio-row-name">🌿 Ambience</span>
+          <input type="range" class="audio-slider" id="audio-vol-ambience" min="0" max="100" step="1" value="50"
+                 oninput="setAudioVolume('ambience', this.value)" aria-label="Ambience volume">
+          <span class="audio-row-val" id="audio-val-ambience">50%</span>
+        </label>
+        <label class="audio-row" for="audio-vol-sfx">
+          <span class="audio-row-name">🔔 Effects</span>
+          <input type="range" class="audio-slider" id="audio-vol-sfx" min="0" max="100" step="1" value="80"
+                 oninput="setAudioVolume('sfx', this.value)" aria-label="Effects volume">
+          <span class="audio-row-val" id="audio-val-sfx">80%</span>
+        </label>
+        <label class="audio-row" for="audio-vol-voice">
+          <span class="audio-row-name">🗣️ Korean voice</span>
+          <input type="range" class="audio-slider" id="audio-vol-voice" min="0" max="100" step="1" value="100"
+                 oninput="setAudioVolume('voice', this.value)" aria-label="Korean voice volume">
+          <span class="audio-row-val" id="audio-val-voice">100%</span>
+        </label>
+
+        <button type="button" id="audio-speech-btn" class="audio-switch tts-only" onclick="toggleTTS()" aria-pressed="true">🗣️ Pronunciation on</button>
+        <p class="audio-note">Music, ambience and effects duck automatically while a Korean word is spoken, so nothing is ever said over.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- ══════════ PROGRESS / SRS DASHBOARD ══════════ -->
   <div id="progress-overlay" class="hidden">
@@ -771,6 +821,7 @@
   <script src="vendor/phaser-3.70.0.min.js"></script>
   <script src="js/state.js"></script>
   <script src="js/audio.js"></script>
+  <script src="js/systems/music.js"></script>
   <script src="js/renderer.js"></script>
   <script src="js/systems/srs.js"></script>
   <script src="js/systems/save.js"></script>

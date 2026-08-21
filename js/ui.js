@@ -729,6 +729,7 @@ if (typeof window !== 'undefined') {
 
 function showLevelSelect() {
   setModalState('level-select-overlay', true);
+  if (typeof playSceneAudio === 'function') playSceneAudio('menu');
   hud.style.display = pbWrap.style.display = 'none';
   if (tipEl) tipEl.style.display = 'none';
   setTouchControlsVisible(false);
@@ -736,6 +737,7 @@ function showLevelSelect() {
 }
 function hideLevelSelect() {
   setModalState('level-select-overlay', false);
+  if (typeof playSceneAudio === 'function') playSceneAudio('farm');
   hud.style.display = pbWrap.style.display = '';
   if (tipEl) tipEl.style.display = 'none';
   setTouchControlsVisible(true);
