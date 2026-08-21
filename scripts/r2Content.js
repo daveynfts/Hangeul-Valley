@@ -70,6 +70,7 @@ function parsePublishArgs(argv) {
     skipUpload: false,
     skipVerify: false,
     skipDeploy: false,
+    skipTts: false,
     envFile: '',
     help: false
   };
@@ -81,6 +82,7 @@ function parsePublishArgs(argv) {
     else if (a === '--skip-upload') flags.skipUpload = true;
     else if (a === '--skip-verify') flags.skipVerify = true;
     else if (a === '--skip-deploy') flags.skipDeploy = true;
+    else if (a === '--skip-tts') flags.skipTts = true;
     else if (a === '--env') flags.envFile = list[++i] || '';
     else if (a === '--help' || a === '-h') flags.help = true;
     else throw new Error('Unknown flag: ' + a);
@@ -90,6 +92,7 @@ function parsePublishArgs(argv) {
 
 function cacheControl(ctype) {
   if (ctype === 'application/json') return 'public, max-age=60';
+  if (ctype === 'audio/mpeg') return 'public, max-age=86400';
   return 'public, max-age=86400';
 }
 
@@ -128,6 +131,9 @@ function collectUploadFiles(root) {
       });
     });
   }
+
+  const { listLocalTtsFiles } = require('./ttsClips');
+  listLocalTtsFiles(base).forEach((rel) => addFile(out, seen, rel, 'audio/mpeg'));
 
   return out;
 }
@@ -324,6 +330,7 @@ Flags:
   --skip-upload      do not PUT to R2
   --skip-verify      do not HeadObject / CDN GET
   --skip-deploy      do not POST VERCEL_DEPLOY_HOOK_URL
+  --skip-tts         do not render missing Korean MP3 clips
   --env <path>       extra env file (also reads .env.local)
 `;
 
@@ -335,15 +342,15 @@ async function runPublish(argv, root) {
   }
   loadPublishEnv(argv);
   const base = root || ROOT;
-  const files = collectUploadFiles(base);
+  const planned = collectUploadFiles(base);
   const missing = missingRequired(base);
   if (missing.length) throw new Error('Missing required content: ' + missing.join(', '));
 
-  console.log('PUBLISH_PLAN', files.length, 'files');
+  console.log('PUBLISH_PLAN', planned.length, 'files');
   if (flags.dryRun) {
-    files.forEach((f) => console.log(' ', f.rel, f.ctype));
+    planned.forEach((f) => console.log(' ', f.rel, f.ctype));
     console.log('dry-run: no upload, no deploy');
-    return { dryRun: true, files };
+    return { dryRun: true, files: planned };
   }
 
   if (!flags.skipValidate) {
@@ -353,6 +360,15 @@ async function runPublish(argv, root) {
       cwd: ROOT
     });
   }
+
+  if (!flags.skipTts) {
+    const { generateTtsClips } = require('./generate_tts');
+    const tts = await generateTtsClips([], base);
+    console.log('TTS_CLIPS', tts.rendered, 'rendered,', tts.skipped, 'cached');
+  }
+
+  const files = collectUploadFiles(base);
+  console.log('UPLOAD_PLAN', files.length, 'files');
 
   let uploaded = [];
   let client = null;

@@ -215,6 +215,11 @@ check('Mindmap / Words notebook is gone',
   && html.indexOf('unit-notebook') < 0
   && html.indexOf('unit10-mindmap') < 0);
 check('shipped source has no Hangul romanizer', gameJs.indexOf('getHangulRomanization') < 0 && gameJs.indexOf('function getRoman(') < 0);
+check('Korean audio plays CDN clips before Web Speech',
+  gameJs.indexOf("TTS_CLIP_DIR = 'audio/ko/'") >= 0
+  && gameJs.indexOf('function ttsClipStem') >= 0
+  && gameJs.indexOf('this._playClip') >= 0
+  && gameJs.indexOf("TTS_CACHE_KEY = 'sunhi-1'") >= 0);
 const scriptSrcs = [...html.matchAll(/<script\b[^>]*\bsrc="(js\/[^"]+)"[^>]*><\/script>/gi)].map((m) => m[1]);
 check('index.html script tags match js/manifest.json',
   JSON.stringify(scriptSrcs) === JSON.stringify(GAME_SCRIPTS),
