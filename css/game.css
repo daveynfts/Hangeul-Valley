@@ -865,6 +865,24 @@
     }
     #quiz-funfact-text { font-size: 15px; font-weight: 700; line-height: 1.4; }
     #quiz-funfact-culture { font-size: 13px; color: #7a3e12; margin-top: 4px; }
+    .recall-tiles {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 6px;
+      margin: 2px 0 8px;
+    }
+    .recall-tile {
+      width: 26px; height: 30px;
+      background: #fffaf0;
+      border: 2px solid #8b5a2b;
+      border-radius: 6px;
+      box-shadow: inset 0 1px 0 #fff;
+      position: relative;
+    }
+    .recall-tile.batchim::after {
+      content: '';
+      position: absolute; left: 5px; right: 5px; bottom: 4px;
+      height: 5px; background: #c4893a; border-radius: 1px;
+    }
+    .recall-caption { font-size: 13px; font-weight: 700; color: #5b3412; }
     #hint-emoji { font-size: 68px; line-height: 1; display: block; margin-bottom: 4px; filter: drop-shadow(0 4px 10px rgba(0,0,0,.25)); }
     #hint-emoji .vocab-art-icon, #hint-emoji img {
       width: 72px; height: 72px; object-fit: contain;
@@ -933,13 +951,68 @@
 
     #quiz-phase-bar {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 6px 12px; background: #ead198; border-radius: 8px;
+      gap: 10px; padding: 8px 10px; background: #ead198; border-radius: 8px;
       border: 1px solid #c4893a;
-      font-family: 'Press Start 2P', monospace; font-size: 10px;
     }
-    #quiz-phase-name { color: #166534; }
-    #quiz-phase-dots { color: #b45309; letter-spacing: 4px; font-size: 12px; }
-    #quiz-gold-reward { color: #b45309; }
+    #quiz-steps {
+      display: flex; align-items: center; gap: 6px; flex: 1;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; font-weight: 800;
+    }
+    .quiz-step {
+      padding: 4px 8px; border-radius: 999px;
+      background: #fff8e8; border: 1.5px solid #c4893a; color: #7a3e12;
+    }
+    .quiz-step.done { background: #dcfce7; border-color: #166534; color: #14532d; }
+    .quiz-step.active {
+      background: #166534; border-color: #14532d; color: #fff8e8;
+    }
+    #quiz-ui.phase-2 .quiz-step.active { background: #1d4ed8; border-color: #1e3a8a; }
+    #quiz-ui.phase-3 .quiz-step.active { background: #b45309; border-color: #92400e; }
+    .quiz-step-line { flex: 1; height: 2px; background: #c4893a; min-width: 8px; }
+    #quiz-gold-reward {
+      font-family: 'Press Start 2P', monospace; font-size: 9px; color: #b45309;
+    }
+    #quiz-ui.phase-1 { border-color: #166534; }
+    #quiz-ui.phase-2 { border-color: #1d4ed8; }
+    #quiz-ui.phase-3 { border-color: #b45309; }
+
+    #quiz-result {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      padding: 12px 8px 4px; text-align: center;
+    }
+    #quiz-result.hidden { display: none !important; }
+    #quiz-result-art .vocab-art-icon, #quiz-result-art img {
+      width: 72px; height: 72px; object-fit: contain;
+      image-rendering: pixelated; image-rendering: crisp-edges;
+    }
+    #quiz-result-msg {
+      font-family: 'VT323', monospace; font-size: 24px; color: #166534; font-weight: 700;
+    }
+    #quiz-result-ko {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 36px; font-weight: 900; color: #2a1a0a;
+    }
+    #quiz-result-en {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #7a3e12; font-weight: 700;
+    }
+    #quiz-result-continue {
+      margin-top: 8px; width: 100%; padding: 12px 0;
+      background: linear-gradient(180deg, #86efac, #4ade80);
+      border: 2px solid #166534; border-radius: 10px;
+      color: #14532d; font-family: 'VT323', monospace; font-size: 22px;
+      cursor: pointer; box-shadow: 0 3px 0 #166534;
+    }
+    #quiz-result-continue:hover { filter: brightness(1.05); }
+    #quiz-ui.quiz-success #quiz-hint-box,
+    #quiz-ui.quiz-success #question-text,
+    #quiz-ui.quiz-success #en-word-display,
+    #quiz-ui.quiz-success #quiz-ko-prompt,
+    #quiz-ui.quiz-success #quiz-choices,
+    #quiz-ui.quiz-success #quiz-funfact-box,
+    #quiz-ui.quiz-success #quiz-tier-hints,
+    #quiz-ui.quiz-success #quiz-hint-reveal-card,
+    #quiz-ui.quiz-success #answer-input,
+    #quiz-ui.quiz-success #feedback-text,
+    #quiz-ui.quiz-success .quiz-buttons { display: none !important; }
 
     /* ── VOCABULARY BOOK ─────────────────────────────────────────────────── */
     #vocab-overlay {

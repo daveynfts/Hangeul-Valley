@@ -183,6 +183,19 @@ check('vocab book cards use vocabIconHtml',
 check('vocab fun-fact uses vocabIconHtml', gameJs.indexOf("vocabIconHtml(word.ko") >= 0);
 check('plant quiz hint uses vocabIconHtml',
   /hintEmoji[\s\S]{0,180}vocabIconHtml\(word\.ko/.test(gameJs));
+check('crop quiz has a success continue beat',
+  html.indexOf('id="quiz-result"') >= 0
+  && gameJs.indexOf('function showQuizSuccess') >= 0
+  && /delay: ph === 3 \? 4000/.test(gameJs)
+  && gameJs.indexOf("setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph,grade); },650)") < 0);
+check('quiz steps mark Plant Water Harvest', html.indexOf('id="quiz-steps"') >= 0);
+check('phase 3 recall uses shape tiles, not category essays',
+  gameJs.indexOf('function renderRecallScaffoldHtml') >= 0
+  && gameJs.indexOf('recall-tile') >= 0
+  && !/ffCulture\.textContent = getFunFact\(word\)\.hint/.test(gameJs));
+check('recall scaffold never prints syllable characters',
+  /function renderRecallScaffoldHtml[\s\S]{0,900}s\.hasBatchim/.test(gameJs)
+  && !/function renderRecallScaffoldHtml[\s\S]{0,1200}s\.char/.test(gameJs));
 check('study desk does not spawn the stool',
   !/_ensureStudyDesk\(\)\{[\s\S]{0,900}wooden_stool_hd/.test(gameJs));
 check('HUD paints catalogued farm icons', gameJs.indexOf('function hudIconHtml') >= 0 && gameJs.indexOf('function paintHudIcons') >= 0);

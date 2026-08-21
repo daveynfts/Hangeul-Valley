@@ -129,10 +129,15 @@
         <span style="margin-left:auto; font-size:11px; color:rgba(255,255,255,.3); font-weight:700" id="quiz-level-tag"></span>
       </div>
 
-      <!-- SRS Phase indicator bar -->
+      <!-- SRS Phase indicator: Plant → Water → Harvest -->
       <div id="quiz-phase-bar">
-        <span id="quiz-phase-name">🌱 Plant Seed</span>
-        <span id="quiz-phase-dots">●○○</span>
+        <div id="quiz-steps" aria-label="Crop stage">
+          <span class="quiz-step" data-step="1">Plant</span>
+          <span class="quiz-step-line"></span>
+          <span class="quiz-step" data-step="2">Water</span>
+          <span class="quiz-step-line"></span>
+          <span class="quiz-step" data-step="3">Harvest</span>
+        </div>
         <span id="quiz-gold-reward"></span>
       </div>
 
@@ -157,9 +162,9 @@
       <!-- Multiple-choice options (recognition / listening modes) -->
       <div id="quiz-choices" class="hidden"></div>
 
-      <!-- Fun Fact hint (Phase 3 only, populated by JS) -->
+      <!-- Phase 3 shape card: block count + closed/open, never the Hangul itself -->
       <div id="quiz-funfact-box" class="hidden">
-        <div id="quiz-funfact-title">💡 Recall Hint</div>
+        <div id="quiz-funfact-title">Hangul shape</div>
         <div id="quiz-funfact-text"></div>
         <div id="quiz-funfact-culture"></div>
       </div>
@@ -179,6 +184,13 @@
         placeholder="한글로 입력하세요…" lang="ko"
       />
       <p id="feedback-text"></p>
+      <div id="quiz-result" class="hidden">
+        <div id="quiz-result-art"></div>
+        <div id="quiz-result-msg"></div>
+        <div id="quiz-result-ko"></div>
+        <div id="quiz-result-en"></div>
+        <button type="button" id="quiz-result-continue">Continue</button>
+      </div>
       <div class="quiz-buttons">
         <button id="submit-btn">🌱 Plant</button>
         <button id="cancel-btn">Skip</button>

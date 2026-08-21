@@ -570,6 +570,56 @@ let currentChoices = [];
 
 function resetQuizMeta(){ currentQuizMeta = { openedAt: Date.now(), attempts: 0, paidHints: 0 }; }
 
+function paintQuizSteps(phase){
+  if (typeof document === 'undefined' || !document.querySelectorAll) return;
+  const steps = document.querySelectorAll('#quiz-steps .quiz-step');
+  steps.forEach(el => {
+    const n = Number(el.getAttribute('data-step'));
+    el.classList.toggle('active', n === phase);
+    el.classList.toggle('done', n < phase);
+  });
+}
+
+let quizFinishTimer = null;
+let pendingQuizAdvance = null;
+function clearQuizFinishTimer(){
+  if (quizFinishTimer) { clearTimeout(quizFinishTimer); quizFinishTimer = null; }
+}
+function settleQuizAdvance(){
+  clearQuizFinishTimer();
+  const run = pendingQuizAdvance;
+  pendingQuizAdvance = null;
+  closeQuiz();
+  if (typeof run === 'function') run();
+}
+function showQuizSuccess({ message, ko, en, continueLabel, delay, onDone }){
+  pendingQuizAdvance = onDone;
+  const box = $('quiz-result');
+  const art = $('quiz-result-art');
+  const msg = $('quiz-result-msg');
+  const koEl = $('quiz-result-ko');
+  const enEl = $('quiz-result-en');
+  const go = $('quiz-result-continue');
+  if (msg) msg.textContent = message || '';
+  if (koEl) koEl.textContent = ko || '';
+  if (enEl) enEl.textContent = en || '';
+  if (art) {
+    art.innerHTML = (ko && typeof vocabIconHtml === 'function')
+      ? vocabIconHtml(ko, '', 64)
+      : '';
+  }
+  if (go) {
+    go.textContent = continueLabel || 'Continue';
+    go.onclick = closeQuiz;
+  }
+  if (box) box.classList.remove('hidden');
+  const qui = $('quiz-ui');
+  if (qui) qui.classList.add('quiz-success');
+  clearQuizFinishTimer();
+  const wait = typeof delay === 'number' ? delay : 2800;
+  quizFinishTimer = setTimeout(settleQuizAdvance, wait);
+}
+
 // ── Answer matching ──────────────────────────────────────────────────────────
 // Comparison happens on decomposed jamo, not syllable blocks. 갑 vs 강 differs by a single
 // jamo but is a whole different character, so a syllable-level edit distance would call
@@ -690,11 +740,11 @@ function openQuiz(word, plot, phase=1){
   // Phase bar UI
   const pi=$('quiz-phase-icon'); if(pi) pi.textContent=cfg.icon;
   const pt=$('quiz-phase-title'); if(pt) pt.textContent=cfg.title;
-  const pn=$('quiz-phase-name'); if(pn) pn.textContent=cfg.icon+' '+cfg.title;
-  const pd=$('quiz-phase-dots'); if(pd) pd.textContent=cfg.dots;
-  const gr=$('quiz-gold-reward'); if(gr) gr.textContent=cfg.reward;
+  const gr=$('quiz-gold-reward'); if(gr) gr.textContent=cfg.reward || '';
   const sb=$('submit-btn'); if(sb) sb.textContent=cfg.btn;
   const qui=$('quiz-ui'); if(qui) qui.className='phase-'+phase;
+  paintQuizSteps(phase);
+  const resultBox=$('quiz-result'); if(resultBox) resultBox.classList.add('hidden');
   // Fill data (CSS controls visibility per phase)
   if (hintEmoji) {
     if (typeof vocabIconHtml === 'function') {
@@ -706,15 +756,16 @@ function openQuiz(word, plot, phase=1){
   hintCategory.textContent  = wordCategory(word);
   enWordDisplay.textContent = word.en;
   quizLevelTag.textContent  = 'P'+phase+'/3';
-  // Phase 3: a recall scaffold, not the answer. `structure` and `origin` both spell the word
-  // out — see renderRecallScaffold — so the panel carries the redacted shape and the topical
-  // note, and the two revealing fields stay behind their own hint buttons.
+  // Phase 3: shape only. The English gloss and picture already carry meaning; the old
+  // category paragraph did not help anyone type Hangul. Tiles show block count and
+  // which syllables are closed. Word-class (native / Sino / loan) never spells the word.
   const ffText=$('quiz-funfact-text'), ffCulture=$('quiz-funfact-culture');
   const ffBox=$('quiz-funfact-box');
   if(ffText && ffCulture){
     if(phase===3){
-      ffText.textContent    = renderRecallScaffold(word.ko || '');
-      ffCulture.textContent = getFunFact(word).hint || '';
+      const sc = renderRecallScaffoldHtml(word.ko || '');
+      ffText.innerHTML = sc.html || '';
+      ffCulture.textContent = sc.note || '';
       if (ffBox) ffBox.classList.remove('hidden');
     } else {
       ffText.textContent = ''; ffCulture.textContent = '';
@@ -814,7 +865,7 @@ function applyQuizMode(word, phase, plot){
 }
 
 function answerChoice(opt, btn){
-  if(!currentWord || !quizOpen) return;
+  if(!currentWord || !quizOpen || pendingQuizAdvance) return;
   const correct = opt.ko === currentWord.ko;
   const all = [...$('quiz-choices').querySelectorAll('.quiz-choice-btn')];
   all.forEach(b => { b.disabled = true; });
@@ -840,7 +891,13 @@ function answerChoice(opt, btn){
       if(currentQuizMode !== PRIMARY_MODALITY) gradeWord(cw.ko, grade, PRIMARY_MODALITY);
       plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();
     }
-    setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph,grade); }, 950);
+    showQuizSuccess({
+      message: ph === 1 ? 'Planted!' : (ph === 2 ? 'Watered!' : 'Harvested!'),
+      ko: cw.ko, en: cw.en,
+      continueLabel: ph === 3 ? 'Collect harvest' : (ph === 2 ? 'Keep growing' : 'Plant it'),
+      delay: ph === 3 ? 4000 : 1800,
+      onDone: () => { if (sceneRef) sceneRef.advancePlot(cp, cw, ph, grade); }
+    });
   } else {
     playChiptuneSFX('quiz_wrong');
     currentQuizMeta.attempts++;
@@ -855,10 +912,14 @@ function answerChoice(opt, btn){
   }
 }
 function closeQuiz(){
-  playChiptuneSFX('click');
+  clearQuizFinishTimer();
+  const run = pendingQuizAdvance;
+  pendingQuizAdvance = null;
+  if (!run) playChiptuneSFX('click');
   quizOpen=playerLocked=false;
   appleTreeQuizPending=false; // always reset on close
   const hc = $('quiz-hint-reveal-card'); if(hc) { hc.innerHTML = ''; hc.classList.add('hidden'); }
+  const res = $('quiz-result'); if(res) res.classList.add('hidden');
   quizBackdrop.classList.remove('visible');
   const qui=$('quiz-ui'); if(qui) qui.className='';
   // Restore the typing layout so the next quiz opens in a known state.
@@ -871,9 +932,10 @@ function closeQuiz(){
   enWordDisplay.style.display='';
   currentQuizMode='type'; currentChoices=[];
   currentWord=currentPlot=null;
+  if (typeof run === 'function') run();
 }
 function submitAnswer(){
-  if(!currentWord) return;
+  if(!currentWord || pendingQuizAdvance) return;
   // checkAnswer normalizes both sides through normalizeKorean, which handles the macOS/iOS
   // IME emitting decomposed jamo (NFD) against the composed syllables in levels.json, plus
   // zero-width characters and trailing punctuation.
@@ -889,25 +951,39 @@ function submitAnswer(){
     if(appleTreeQuizPending){
       feedbackText.textContent='🍎 Harvested! Excellent Korean!'; feedbackText.className='correct';
       appleTreeQuizPending=false;
-      setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.onAppleHarvested(); },700);
+      const harvested = currentWord;
+      showQuizSuccess({
+        message: 'Harvested!',
+        ko: harvested.ko, en: harvested.en,
+        continueLabel: 'Collect apples',
+        delay: 3500,
+        onDone: () => { if (sceneRef) sceneRef.onAppleHarvested(); }
+      });
       return;
     }
     // ── Normal crop quiz ──────────────────────────────────────────────────
-    const msgs=['🌱 Planted! Remember to water!','💧 Watered! Almost ripe!','🍎 Excellent! +Gold earned!'];
-    feedbackText.textContent = verdict==='close'
-      ? `✅ Close enough — it's ${currentWord.ko}`
-      : msgs[currentPhase-1];
-    feedbackText.className='correct';
+    const msgs=['Planted! Remember to water.','Watered! Almost ripe.','Excellent! +Gold earned.'];
     const cp=currentPlot, cw=currentWord, ph=currentPhase;
     // Grade before the state changes, while the attempt/hint counters still describe
     // this answer. gradeWord is the single entry point into the scheduler.
     const grade = deriveGrade(verdict==='close');
     const srsAfter = gradeWord(cw.ko, grade);
+    let message = verdict==='close'
+      ? `Close enough — ${cw.ko}`
+      : msgs[ph-1];
     if(ph===3 && srsAfter.st==='review'){
-      feedbackText.textContent = `🍎 ${srsAfter.reps===1 ? 'Learned' : 'Reviewed'}! Next review in ${srsIntervalLabel(srsAfter)}`;
+      message = (srsAfter.reps===1 ? 'Learned!' : 'Reviewed!') + ' Next review in ' + srsIntervalLabel(srsAfter);
     }
+    feedbackText.textContent = message;
+    feedbackText.className='correct';
     if(ph===1){plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();}
-    setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.advancePlot(cp,cw,ph,grade); },650);
+    showQuizSuccess({
+      message,
+      ko: cw.ko, en: cw.en,
+      continueLabel: ph === 3 ? 'Collect harvest' : (ph === 2 ? 'Keep growing' : 'Plant it'),
+      delay: ph === 3 ? 4000 : 1800,
+      onDone: () => { if (sceneRef) sceneRef.advancePlot(cp, cw, ph, grade); }
+    });
   } else {
     playChiptuneSFX('quiz_wrong');
     // Counts toward the grade even if the next attempt succeeds — needing a retry is
@@ -930,7 +1006,7 @@ function submitAnswer(){
       if(after.lapses > 0){
         feedbackText.textContent = `❌ Lapsed — interval reset to ${srsIntervalLabel(after)} after relearning.`;
       }
-      setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.regressionPlot(cp,cw); },1400);
+      setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.regressionPlot(cp,cw); },1800);
     }
   }
 }
@@ -1234,17 +1310,62 @@ function renderStructure(ko) {
 // graded production recall — what the player types sets the word's interval — so the panel
 // above the input box must not contain the answer.
 //
-// This keeps only how long the word is, and whether it ends closed. The batchim is
-// reported as present or absent without naming the consonant, which is what the
-// 5-coin 초성 hint is for.
+// Tiles mark each syllable block. A bottom bar means that block is closed (has 받침)
+// without naming the consonant — that is what the 5-coin 초성 hint is for. Word-class
+// comes from facts.json's origin tag only (native / Sino / loan), never hanja readings.
+function recallOriginClass(ko) {
+  const f = (typeof factsData !== 'undefined' && factsData) ? factsData[(ko || '').normalize('NFC')] : null;
+  if (!f || !f.o) return '';
+  switch (f.o) {
+    case 'sino':
+    case 'sino-partial':
+    case 'sino-noun':
+    case 'sino-adj':
+    case 'sino-verb':
+    case 'sino-passive':
+      return 'Sino-Korean';
+    case 'native':
+      return 'Native Korean';
+    case 'loan':
+    case 'loan-partial':
+      return 'Loanword';
+    case 'mixed':
+    case 'mixed-native':
+    case 'mixed-loan':
+    case 'loan-mixed':
+      return 'Mixed origin';
+    case 'idiom':
+      return 'Idiom';
+    case 'discourse':
+      return 'Discourse marker';
+    default:
+      return '';
+  }
+}
 function renderRecallScaffold(ko) {
   const syl = decomposeHangulWord(ko);
   const n = syl.length;
   if (!n) return '';
-  return [
-    `${n} syllable${n === 1 ? '' : 's'}`,
-    syl[n - 1].hasBatchim ? 'ends on a 받침' : 'ends open, no 받침',
-  ].join(' · ');
+  const shape = syl.map(s => s.hasBatchim ? 'closed' : 'open').join(' · ');
+  const cls = recallOriginClass(ko);
+  return [n + (n === 1 ? ' block' : ' blocks'), shape, cls].filter(Boolean).join(' · ');
+}
+function renderRecallScaffoldHtml(ko) {
+  const syl = decomposeHangulWord(ko);
+  if (!syl.length) return { html: '', note: '' };
+  const tiles = syl.map(s =>
+    '<span class="recall-tile' + (s.hasBatchim ? ' batchim' : '') + '"></span>'
+  ).join('');
+  const n = syl.length;
+  const caption = n + (n === 1 ? ' block' : ' blocks') +
+    ' · ' + syl.map(s => s.hasBatchim ? 'closed' : 'open').join(' · ');
+  const bits = [recallOriginClass(ko)];
+  if (/\s/.test(ko)) bits.push('written with a space');
+  return {
+    html: '<div class="recall-tiles" aria-hidden="true">' + tiles + '</div>' +
+      '<div class="recall-caption">' + caption + '</div>',
+    note: bits.filter(Boolean).join(' · ')
+  };
 }
 
 // English topical note, used when a word has no curated origin.
