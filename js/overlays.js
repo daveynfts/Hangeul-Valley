@@ -194,16 +194,20 @@ window.renderTrophies = function() {
     const div = document.createElement('div');
     div.className = 'trophy-card ' + (isBought ? 'unlocked' : 'locked');
     
+    const art = (typeof trophyIconHtml === 'function')
+      ? trophyIconHtml(t.id, t.icon, 56)
+      : t.icon;
+    const coin = (typeof hudIconHtml === 'function') ? hudIconHtml('coin', '', 14) : '';
     div.innerHTML = `
       <div>
-        <div class="trophy-icon">${t.icon}</div>
+        <div class="trophy-icon">${art}</div>
         <div class="trophy-name">${t.name}</div>
         <div class="trophy-req">${reqText}</div>
       </div>
-      ${isBought ? 
-        '<div class="trophy-unlocked-badge">Unlocked! 🏆</div>' :
+      ${isBought ?
+        '<div class="trophy-unlocked-badge">Unlocked</div>' :
         '<button class="trophy-buy-btn" ' + ((!reqMet || (!canAfford && t.cost > 0)) ? 'disabled' : '') + '>' +
-           (!reqMet ? '⚠️ LOCKED' : (t.cost > 0 ? ('BUY 💰' + t.cost) : 'CLAIM 🏆')) +
+           (!reqMet ? 'Locked' : (t.cost > 0 ? ('Buy ' + coin + t.cost) : 'Claim')) +
          '</button>'
       }
     `;
@@ -1154,44 +1158,55 @@ window.openRecipeBook = function() {
   const grid = document.getElementById('recipe-grid-container');
   if (!overlay || !grid || !pantryList) return;
 
-  // Render pantry stock
   pantryList.innerHTML = '';
   const ingMap = inventoryState.ingredients || {};
   const entries = Object.entries(ingMap).filter(([_, count]) => count > 0);
+  const art = function (ko, fallback, px) {
+    return (typeof vocabIconHtml === 'function') ? vocabIconHtml(ko, fallback || '?', px || 20) : (fallback || '');
+  };
   if (entries.length === 0) {
-    pantryList.innerHTML = '<span style="color:#94a3b8;">No ingredients yet. Harvest crops or catch fish!</span>';
+    pantryList.innerHTML = '<span class="recipe-pantry-empty">Pantry is empty. Harvest a crop or catch a fish.</span>';
   } else {
     entries.forEach(([ing, cnt]) => {
+      const info = (typeof getItemInfo === 'function') ? getItemInfo(ing) : { nameKo: ing };
       const tag = document.createElement('span');
-      tag.style.cssText = 'background:rgba(15,23,42,0.8); border:1px solid rgba(255,255,255,0.15); border-radius:6px; padding:3px 8px;';
-      tag.textContent = `${ing}: ×${cnt}`;
+      tag.className = 'recipe-pantry-chip';
+      tag.innerHTML = art(info.nameKo || ing, info.icon, 20) +
+        '<span>' + (info.nameKo || ing) + '</span><strong>×' + cnt + '</strong>';
       pantryList.appendChild(tag);
     });
   }
 
-  // Render Recipe Cards
   grid.innerHTML = '';
   RECIPE_DB.forEach(r => {
     const card = document.createElement('div');
     card.className = 'recipe-card';
-    
+
     let canCook = true;
-    let reqText = [];
+    const reqBits = [];
     Object.entries(r.req).forEach(([ing, needed]) => {
       const have = (inventoryState.ingredients || {})[ing] || 0;
       if (have < needed) canCook = false;
-      reqText.push(`${ing} ${have}/${needed}`);
+      const info = (typeof getItemInfo === 'function') ? getItemInfo(ing) : { nameKo: ing };
+      const ok = have >= needed;
+      reqBits.push(
+        '<span class="recipe-req-chip' + (ok ? ' ok' : ' miss') + '">' +
+        art(info.nameKo || ing, info.icon, 16) +
+        (info.nameKo || ing) + ' ' + have + '/' + needed +
+        '</span>'
+      );
     });
+    if (canCook) card.classList.add('ready');
 
     card.innerHTML = `
-      <div class="recipe-card-icon">${r.icon}</div>
+      <div class="recipe-card-icon">${art(r.name, r.icon, 48)}</div>
       <div class="recipe-card-title">${r.name}</div>
       <div class="recipe-card-sub">${r.enName}</div>
-      <div class="recipe-req-list"><b>Req:</b> ${reqText.join(', ')}</div>
-      <div class="recipe-buff-badge">⚡ ${r.buff.name}</div>
-      <div style="display:flex; gap:6px; margin-top:4px;">
-        <button class="cook-btn" style="flex:1;" ${canCook ? '' : 'disabled'} onclick="startCookingMinigame('${r.id}')">🍳 Cook</button>
-        <button class="hud-btn" style="padding:4px 8px; font-size:10px;" onclick="showCulturalFact('${r.id}')">🏺 Info</button>
+      <div class="recipe-req-list">${reqBits.join('')}</div>
+      <div class="recipe-buff-badge">${r.buff.name}</div>
+      <div class="recipe-card-actions">
+        <button class="cook-btn" ${canCook ? '' : 'disabled'} onclick="startCookingMinigame('${r.id}')">Cook</button>
+        <button type="button" class="recipe-info-btn" onclick="showCulturalFact('${r.id}')">Info</button>
       </div>
     `;
     grid.appendChild(card);

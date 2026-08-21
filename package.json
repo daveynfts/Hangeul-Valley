@@ -5,7 +5,9 @@
   "scripts": {
     "check": "node scripts/check_game_js.js",
     "validate": "node scripts/validate_content.js",
-    "test": "node tests/test_srs_engine.js && node tests/test_r2_shop_vm.js && node tests/test_m2_harness.js && node tests/test_m1_challenger_harness.js && node tests/test_m2_challenger_cooking.js && node tests/test_farm_hero.js && node tests/test_skins.js && node tests/test_r2_content.js && node tests/test_hud_icons.js && node tests/test_unit14_desk_quiz.js && node tests/test_unit10_desk_quiz.js && node tests/test_phase3_recall.js && node tests/test_pointer.js && node tests/test_world_packs.js",
+    "audit:art": "node scripts/audit_art.js",
+    "register:art": "node scripts/register_art.js",
+    "test": "node tests/test_srs_engine.js && node tests/test_r2_shop_vm.js && node tests/test_m2_harness.js && node tests/test_m1_challenger_harness.js && node tests/test_m2_challenger_cooking.js && node tests/test_farm_hero.js && node tests/test_skins.js && node tests/test_r2_content.js && node tests/test_hud_icons.js && node tests/test_unit14_desk_quiz.js && node tests/test_unit10_desk_quiz.js && node tests/test_phase3_recall.js && node tests/test_pointer.js && node tests/test_world_packs.js && node tests/test_panel_art.js && node tests/test_art_library.js",
     "test:admin": "npm --prefix admin test",
     "test:all": "npm run check && npm run validate && npm test && npm run test:admin",
     "upload:r2": "node scripts/upload_r2.js",

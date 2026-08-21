@@ -95,7 +95,32 @@ const VOCAB_ART_ROWS = [
   { ko: '양파', slug: 'onion', folder: 'items', nameEn: 'Onion', family: 'ingredient', cooking: true },
   { ko: '콩나물', slug: 'bean_sprouts', folder: 'items', nameEn: 'Bean sprouts', family: 'ingredient', cooking: true },
   { ko: '상추', slug: 'lettuce', folder: 'items', nameEn: 'Lettuce', family: 'ingredient', cooking: true },
-  { ko: '생강', slug: 'ginger', folder: 'items', nameEn: 'Ginger', family: 'ingredient', cooking: true }
+  { ko: '생강', slug: 'ginger', folder: 'items', nameEn: 'Ginger', family: 'ingredient', cooking: true },
+  { ko: '김치', slug: 'kimchi_jar', folder: 'foods', nameEn: 'Kimchi', family: 'stew', cooking: false },
+  { ko: '불고기', slug: 'bulgogi_plate', folder: 'foods', nameEn: 'Bulgogi', family: 'meat', cooking: false },
+  { ko: '떡볶이', slug: 'tteokbokki_bowl', folder: 'foods', nameEn: 'Tteokbokki', family: 'rice', cooking: false },
+  { ko: '해물파전', slug: 'haemul_pajeon', folder: 'foods', nameEn: 'Seafood pajeon', family: 'meat', cooking: false },
+  { ko: '잡채', slug: 'japchae_bowl', folder: 'foods', nameEn: 'Japchae', family: 'noodle', cooking: false },
+  { ko: '김밥', slug: 'gimbap_roll', folder: 'foods', nameEn: 'Gimbap', family: 'rice', cooking: false },
+  { ko: '옥수수', slug: 'corn_cob', folder: 'items', nameEn: 'Corn', family: 'ingredient', cooking: true },
+  { ko: '옥수수구이', slug: 'roasted_corn', folder: 'foods', nameEn: 'Roasted corn', family: 'rice', cooking: false },
+  { ko: '딸기', slug: 'garden_strawberry', folder: 'items', nameEn: 'Strawberry', family: 'ingredient', cooking: false },
+  { ko: '사과', slug: 'farm_apple', folder: 'items', nameEn: 'Apple', family: 'ingredient', cooking: false },
+  { ko: '꿀', slug: 'honey_jar', folder: 'items', nameEn: 'Honey', family: 'ingredient', cooking: true },
+  { ko: '무밥', slug: 'radish_rice', folder: 'foods', nameEn: 'Radish rice', family: 'rice', cooking: false },
+  { ko: '딸기잼', slug: 'strawberry_jam', folder: 'foods', nameEn: 'Strawberry jam', family: 'stew', cooking: false },
+  { ko: '감자전', slug: 'potato_pancake', folder: 'foods', nameEn: 'Potato pancake', family: 'meat', cooking: false },
+  { ko: '궁중 삼계탕', slug: 'royal_samgyetang', folder: 'foods', nameEn: 'Royal ginseng chicken soup', family: 'stew', cooking: false },
+  { ko: '꿀약과', slug: 'honey_yakgwa', folder: 'foods', nameEn: 'Honey yakgwa', family: 'rice', cooking: false },
+  { ko: '꿀차', slug: 'honey_tea', folder: 'foods', nameEn: 'Honey tea', family: 'drink', cooking: false },
+  { ko: '연어', slug: 'river_salmon', folder: 'foods', nameEn: 'Salmon', family: 'meat', cooking: false },
+  { ko: '고등어', slug: 'mackerel', folder: 'foods', nameEn: 'Mackerel', family: 'meat', cooking: false },
+  { ko: '잉어', slug: 'pond_carp', folder: 'foods', nameEn: 'Carp', family: 'meat', cooking: false },
+  { ko: '황금물고기', slug: 'golden_fish', folder: 'foods', nameEn: 'Golden fish', family: 'meat', cooking: false },
+  { ko: '새우', slug: 'cooked_shrimp', folder: 'foods', nameEn: 'Shrimp', family: 'meat', cooking: false },
+  { ko: '오징어', slug: 'squid', folder: 'foods', nameEn: 'Squid', family: 'meat', cooking: false },
+  { ko: '문어', slug: 'octopus', folder: 'foods', nameEn: 'Octopus', family: 'meat', cooking: false },
+  { ko: '조개', slug: 'clam', folder: 'foods', nameEn: 'Clam', family: 'meat', cooking: false }
 ];
 
 function vocabArtRow(ko) {
