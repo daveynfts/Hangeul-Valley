@@ -28,7 +28,14 @@ assert(bank.questions[6].a === 'B' && bank.questions[7].a === 'C' && bank.questi
 assert(farm.indexOf('_hasStudyDesk') >= 0, 'farm has study-desk helper');
 assert(farm.indexOf('_isUnit14') >= 0, 'farm knows Unit 14');
 assert(/if \(this\._hasStudyDesk\(\)\) this\._ensureStudyDesk\(\)/.test(farm), 'Unit 14 spawns the desk');
-assert(/_hasStudyDesk\(\)[\s\S]{0,280}openDeskQuiz/.test(farm), 'desk interact opens the quiz');
+// The desk offers the quiz and the workbook page now, so the sprite opens the
+// chooser rather than the quiz directly. openStudyDesk falls back to the quiz on
+// a world that has no workbook, which is what keeps Unit 10 unchanged.
+assert(/_hasStudyDesk\(\)[\s\S]{0,280}openStudyDesk/.test(farm), 'desk interact opens the chooser');
+assert(/_hasStudyDesk\(\)[\s\S]{0,320}openDeskQuiz/.test(farm), 'and still falls back to the quiz');
+assert(ui.indexOf('function openStudyDesk') >= 0, 'ui ships the chooser');
+assert(/deskMenuOptions\.length === 1[\s\S]{0,80}run\(\)/.test(ui),
+  'a single-mode desk opens that mode instead of showing a one-row menu');
 assert(ui.indexOf('unit14-desk-quiz.json') >= 0, 'quiz loader knows Unit 14 bank');
 assert(html.indexOf('id="desk-art"') >= 0, 'quiz overlay has illustration slot');
 

@@ -2824,7 +2824,9 @@ class FarmScene extends Phaser.Scene {
         if (this._isUnit10() && typeof openCookingUI === 'function') openCookingUI();
         return;
       case 'desk':
-        if (this._hasStudyDesk() && typeof openDeskQuiz === 'function') openDeskQuiz();
+        if (!this._hasStudyDesk()) return;
+        if (typeof openStudyDesk === 'function') openStudyDesk();
+        else if (typeof openDeskQuiz === 'function') openDeskQuiz();
         return;
       case 'taste':
         if (this._isUnit10() && typeof openTasteGame === 'function') openTasteGame();

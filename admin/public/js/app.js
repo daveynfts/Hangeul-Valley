@@ -160,6 +160,8 @@ window.apiFetch.getUnit10Layout = () => window.apiFetch('/api/unit10/layout');
 window.apiFetch.saveUnit10Layout = (body) => window.apiFetch('/api/unit10/layout', { method: 'PUT', body });
 window.apiFetch.getUnit10Quiz = () => window.apiFetch('/api/unit10/quiz');
 window.apiFetch.saveUnit10Quiz = (body) => window.apiFetch('/api/unit10/quiz', { method: 'PUT', body });
+window.apiFetch.getUnit14Workbook = () => window.apiFetch('/api/unit14/workbook');
+window.apiFetch.saveUnit14Workbook = (body) => window.apiFetch('/api/unit14/workbook', { method: 'PUT', body });
 window.apiFetch.getUnit10World = () => window.apiFetch('/api/unit10/world');
 window.apiFetch.saveUnit10World = (body) => window.apiFetch('/api/unit10/world', { method: 'PUT', body });
 window.apiFetch.addVocabFact = (factData) => window.apiFetch('/api/vocab-facts', { method: 'POST', body: factData });
@@ -268,6 +270,7 @@ window.AppRouter = {
     'levels': () => window.LevelsView && window.LevelsView.render(),
     'vocab': () => window.VocabView && window.VocabView.render(),
     'unit10': () => window.Unit10View && window.Unit10View.render(),
+    'unit14': () => window.Unit14View && window.Unit14View.render(),
     'art': () => window.ArtView && window.ArtView.render(),
     'skins': () => window.SkinsView && window.SkinsView.render()
   },

@@ -1200,3 +1200,73 @@ body.admin-readonly .btn-delete-word {
 @media (max-width: 980px) {
   .art-stats-grid { grid-template-columns: 1fr 1fr; }
 }
+
+
+/* ── Unit 14 workbook editor ───────────────────────────────────────────────────
+   Uses the panel's own tokens — --bg-card / --bg-app / --border-card /
+   --text-primary. An earlier pass invented names like --bg-elevated, whose #fff
+   fallback put near-white text on a white ground at about 1.05:1. */
+.u14-actions { display: flex; align-items: center; gap: 10px; }
+.u14-dirty { font-size: 12px; font-weight: 700; color: var(--accent-amber); }
+
+.u14-layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 18px; align-items: start; }
+.u14-side { position: sticky; top: 18px; }
+.u14-main { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+
+.u14-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.u14-listbtn {
+  display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+  padding: 10px 12px; border-radius: var(--radius-btn); cursor: pointer;
+  background: var(--bg-app); border: 1px solid var(--border-card);
+  color: var(--text-primary); font: inherit;
+  transition: border-color .15s, background .15s;
+}
+.u14-listbtn:hover { background: var(--bg-card-hover); border-color: var(--border-input); }
+.u14-listbtn.active {
+  background: var(--bg-card-hover); border-color: var(--accent-indigo);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, .28);
+}
+.u14-listbtn:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--border-focus); }
+.u14-list-icon { font-size: 20px; line-height: 1; flex: 0 0 auto; }
+.u14-list-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.u14-list-no { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+.u14-list-type { font-size: 11px; color: var(--text-secondary); }
+
+.u14-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.u14-main label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-top: 12px; }
+.u14-main label .form-input,
+.u14-main label .form-select { margin-top: 4px; width: 100%; }
+.u14-main textarea.form-input { resize: vertical; line-height: 1.5; }
+.u14-center { text-align: center; }
+
+/* The box table holds Korean phrases, so the id column is the only narrow one. */
+.u14-main .data-table th:first-child, .u14-main .data-table td:first-child { width: 150px; }
+.u14-main .data-table td .form-input { width: 100%; min-width: 0; }
+.u14-main .data-table td:last-child { width: 48px; }
+.u14-narrow { max-width: 64px; text-align: center; }
+
+.u14-example {
+  margin-top: 16px; padding: 12px 14px; border-radius: var(--radius-btn);
+  background: rgba(99, 102, 241, .10); border: 1px solid rgba(99, 102, 241, .38);
+}
+.u14-example .widget-title { margin-bottom: 2px; }
+
+.u14-item {
+  padding: 12px 14px; border-radius: var(--radius-btn); margin-bottom: 12px;
+  background: var(--bg-app); border: 1px solid var(--border-card);
+}
+.u14-item-head { display: flex; align-items: flex-end; gap: 12px; }
+.u14-item-n { font-size: 16px; font-weight: 800; color: var(--text-primary); padding-bottom: 7px; }
+.u14-answer { flex: 1 1 auto; margin-top: 0 !important; min-width: 0; }
+.u14-item-head .btn { flex: 0 0 auto; }
+
+@media (max-width: 1000px) {
+  .u14-layout { grid-template-columns: 1fr; }
+  .u14-side { position: static; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .u14-listbtn { transition: none; }
+}
+
+/* .text-muted is 3.07:1 on a card here. This label needs the readable token. */
+.u14-type-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }

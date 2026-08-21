@@ -2380,6 +2380,380 @@
       border-radius: 3px; padding: 1px 6px; font-size: 10px; font-weight: 700; display: flex; align-items: center; gap: 3px;
     }
 
+    /* ── STUDY DESK · MODE CHOOSER ───────────────────────────────────────── */
+    /* 875 and 877 bracket the desk quiz at 876: the chooser sits just under the
+       screen it launches, and the workbook just over it, so neither can be
+       covered by the overlay it replaced. */
+    #desk-menu-overlay {
+      position: fixed; inset: 0; z-index: 875; display: none;
+      background: rgba(42, 26, 10, 0.62); align-items: center; justify-content: center;
+    }
+    #desk-menu-overlay.visible { display: flex; }
+    #desk-menu-panel { width: min(420px, 92vw); padding: 18px; color: var(--ink); }
+    #desk-menu-head {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px dashed #c4893a;
+    }
+    #desk-menu-title {
+      font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12; line-height: 1.4;
+    }
+    #desk-menu-sub {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 5px;
+    }
+    .desk-menu-close, .wb-close {
+      background: var(--parch-l); border: 1.5px solid var(--wood-m);
+      color: var(--wood-d); border-radius: 4px; padding: 4px 12px; font-size: 16px;
+      cursor: pointer; line-height: 1.4; flex: 0 0 auto; margin-left: auto;
+      transition: background .15s, border-color .15s, color .15s;
+    }
+    .desk-menu-close:hover, .wb-close:hover { background: #ffd9d9; border-color: #b91c1c; color: #b91c1c; }
+    .desk-menu-close:focus-visible, .wb-close:focus-visible {
+      outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.45);
+    }
+    #desk-menu-list { display: flex; flex-direction: column; gap: 9px; }
+    .desk-mode {
+      display: flex; align-items: center; gap: 11px; width: 100%; text-align: left;
+      background: #fff8e8; border: 2px solid var(--wood-m); border-radius: 6px;
+      padding: 11px 12px; cursor: pointer; color: var(--ink);
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 var(--wood-m);
+      transition: background .15s, border-color .15s, transform .12s;
+    }
+    .desk-mode:hover { background: #fff3d6; transform: translateY(-1px); }
+    /* The keyboard cursor has to be visible without a mouse ever moving, so the
+       focused row is drawn rather than left to :hover. */
+    .desk-mode.focus { border-color: #1e3a8a; background: #fff3d6; box-shadow: inset 0 1px 0 #fff, 0 2px 0 #1e3a8a; }
+    .desk-mode:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.42); }
+    .desk-mode-key {
+      flex: 0 0 auto; min-width: 20px; height: 20px; line-height: 18px; text-align: center;
+      background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
+      font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--wood-d);
+    }
+    .desk-mode-icon { flex: 0 0 auto; font-size: 22px; line-height: 1; }
+    .desk-mode-text { display: flex; flex-direction: column; min-width: 0; }
+    .desk-mode-ko {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 800; color: var(--ink);
+    }
+    .desk-mode-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 2px; }
+    #desk-menu-hint {
+      margin-top: 13px; font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 11px; color: #7a3e12; text-align: center;
+    }
+
+    /* ── STUDY DESK · WORKBOOK PAGE ──────────────────────────────────────── */
+    #workbook-overlay {
+      position: fixed; inset: 0; z-index: 877; display: none;
+      background: rgba(42, 26, 10, 0.68); align-items: center; justify-content: center;
+    }
+    #workbook-overlay.visible { display: flex; }
+    #workbook-panel {
+      width: min(660px, 95vw); max-height: 92vh; padding: 0; color: var(--ink);
+      display: flex; flex-direction: column;
+    }
+    #wb-head {
+      display: flex; align-items: flex-start; gap: 10px; flex-shrink: 0;
+      padding: 14px 16px; border-bottom: 2px dashed #c4893a;
+      background: linear-gradient(180deg, #fff3d6 0%, transparent);
+    }
+    #wb-title-wrap { flex: 1; min-width: 0; }
+    #wb-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #7a3e12; line-height: 1.4; }
+    #wb-sub { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 5px; }
+    #wb-count {
+      flex: 0 0 auto; font-family: 'VT323', monospace; font-size: 20px; color: #7a3e12;
+      background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 4px;
+      padding: 2px 9px; font-variant-numeric: tabular-nums;
+    }
+    #wb-count.wb-count-all { background: #dcfce7; border-color: #166534; color: #14532d; }
+    #wb-count.wb-count-some { background: #fef3c7; border-color: #b45309; color: #78350f; }
+
+    #wb-body { padding: 14px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+    .wb-inst-ko {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 700; color: var(--ink);
+    }
+    .wb-inst-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 3px; }
+    .wb-inst-note {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #7a3e12;
+      margin-top: 6px; padding: 7px 9px; border-radius: 4px;
+      background: #fff3d6; border: 1px solid var(--wood-l);
+    }
+    #wb-example {
+      background: #eef4ff; border: 1.5px solid #1e3a8a; border-radius: 4px;
+      padding: 10px 12px; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #1a1208;
+    }
+    .wb-example-tag {
+      font-family: 'Press Start 2P', monospace; font-size: 9px; color: #1e3a8a; margin-right: 4px;
+    }
+    .wb-example-en {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #3b4a6b; margin-top: 4px;
+    }
+
+    #wb-bank { display: flex; flex-wrap: wrap; gap: 7px; }
+    .wb-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #fff8e8; border: 2px solid var(--wood-m); border-radius: 4px;
+      padding: 8px 10px; cursor: pointer; color: var(--ink);
+      font-family: 'Noto Sans KR', sans-serif; font-size: 14px; font-weight: 700;
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 var(--wood-m);
+      transition: background .15s, border-color .15s, transform .12s, opacity .15s;
+    }
+    .wb-chip:hover:not(:disabled) { background: #fff3d6; transform: translateY(-1px); }
+    .wb-chip:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.42); }
+    /* Placed, not gone: the chip stays readable so the learner can still see the
+       expression they used, and clicking the blank is what returns it. */
+    .wb-chip.used { opacity: 0.4; border-style: dashed; box-shadow: none; }
+    .wb-chip:disabled { cursor: default; }
+    .wb-chip-key {
+      min-width: 18px; height: 18px; line-height: 16px; text-align: center;
+      background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
+      font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-d);
+    }
+
+    #wb-items { display: flex; flex-direction: column; gap: 8px; }
+    .wb-row {
+      display: flex; align-items: baseline; gap: 8px;
+      background: #fff8e8; border: 1.5px solid var(--wood-l); border-radius: 4px;
+      padding: 10px 11px; cursor: pointer;
+      font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: var(--ink);
+      transition: border-color .15s, background .15s;
+    }
+    .wb-row.focus { border-color: #1e3a8a; border-width: 2px; background: #fff3d6; }
+    .wb-row.ok { border-color: #166534; background: #f2fdf3; cursor: default; }
+    .wb-row.bad { border-color: #b91c1c; background: #fff4f4; cursor: default; }
+    .wb-row:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.42); }
+    .wb-n { flex: 0 0 auto; font-weight: 800; color: #7a3e12; }
+    .wb-sentence { flex: 1 1 auto; line-height: 1.7; }
+    .wb-blank {
+      display: inline-block; min-width: 128px; padding: 0 6px;
+      border-bottom: 2px solid var(--wood-m); text-align: center;
+    }
+    .wb-blank.filled { color: #14532d; border-bottom-color: #166534; font-weight: 800; }
+    .wb-blank.empty { border-bottom-style: dashed; }
+    .wb-mark { flex: 0 0 auto; font-size: 17px; font-weight: 800; }
+    .wb-row.ok .wb-mark { color: #166534; }
+    .wb-row.bad .wb-mark { color: #b91c1c; }
+
+    /* ── Why each answer is the answer ──────────────────────────────────────
+       The point of the exercise is not the tick. Each card names the etiquette
+       reason and the conjugation separately, because those are two different
+       mistakes a learner can make on the same blank. */
+    #wb-explain { display: none; }
+    #wb-explain.shown { display: flex; flex-direction: column; gap: 9px; }
+    .wb-why {
+      border-radius: 4px; padding: 11px 12px;
+      background: #fff3d6; border: 1.5px solid var(--wood-l);
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    .wb-why.ok { border-color: #166534; background: #f2fdf3; }
+    .wb-why.bad { border-color: #b45309; background: #fffaf0; }
+    .wb-why-head {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: var(--ink); line-height: 1.6;
+    }
+    .wb-why-yours {
+      font-size: 12px; font-weight: 700; color: #7f1d1d; margin-top: 4px;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+    .wb-why-en { font-size: 12px; color: #5b3412; margin-top: 5px; font-style: italic; }
+    .wb-why-body { font-size: 13px; color: #4a2a0d; margin-top: 6px; line-height: 1.6; }
+    .wb-why-gram {
+      font-size: 12px; color: #3b0764; margin-top: 7px; line-height: 1.6;
+      background: #f7f0ff; border: 1px solid #a855f7; border-radius: 3px; padding: 6px 8px;
+    }
+
+    #wb-foot {
+      display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+      padding: 12px 16px; border-top: 2px dashed #c4893a;
+    }
+    #wb-hint {
+      flex: 1 1 auto; font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412;
+    }
+    #wb-check {
+      flex: 0 0 auto; padding: 10px 18px; border-radius: 4px; cursor: pointer;
+      background: linear-gradient(180deg, #86efac, #4ade80);
+      border: 2px solid #166534; color: #14532d;
+      font-family: 'Press Start 2P', monospace; font-size: 10px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 3px 0 #166534;
+    }
+    #wb-check:hover:not(:disabled) { filter: brightness(1.05); }
+    #wb-check:disabled {
+      opacity: 0.5; cursor: not-allowed; filter: grayscale(0.5);
+      background: var(--parch-l); border-color: var(--wood-l); color: #7a3e12; box-shadow: none;
+    }
+    #wb-check:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.45); }
+
+    @media (max-width: 560px) {
+      #wb-title { font-size: 10px; }
+      #wb-body { padding: 12px; gap: 10px; }
+      .wb-row { font-size: 14px; padding: 9px; }
+      .wb-blank { min-width: 96px; }
+      .wb-chip { font-size: 13px; padding: 7px 9px; }
+      #desk-menu-title { font-size: 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .desk-mode, .wb-chip, .wb-row { transition: none; }
+      .desk-mode:hover, .wb-chip:hover:not(:disabled) { transform: none; }
+    }
+
+    /* ── Workbook · full screen ───────────────────────────────────────────────
+       A workbook page is a page. Boxed into a 660px modal, 연습 3 spent most of
+       its height scrolling two-line dialogues through a letterbox, so the panel
+       takes the whole viewport and lets the content breathe instead. */
+    #workbook-panel {
+      width: 100%; max-width: none; height: 100%; max-height: none;
+      border-radius: 0; border-left: 0; border-right: 0;
+      box-shadow: none;
+    }
+    #wb-body { max-width: 900px; width: 100%; margin: 0 auto; padding: 18px 20px 24px; }
+    #wb-head, #wb-foot { padding-left: max(20px, calc((100vw - 900px) / 2)); padding-right: max(20px, calc((100vw - 900px) / 2)); }
+    .wb-hidden { display: none !important; }
+
+    #wb-back {
+      flex: 0 0 auto; padding: 9px 14px; border-radius: 4px; cursor: pointer;
+      background: var(--parch-l); border: 2px solid var(--wood-m); color: var(--wood-d);
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 800;
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 var(--wood-m);
+      transition: background .15s, border-color .15s;
+    }
+    #wb-back:hover { background: #ffe9b8; border-color: var(--wood-d); }
+    #wb-back:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.45); }
+
+    /* ── Workbook · the exercise list ───────────────────────────────────────── */
+    .wb-items-pick { gap: 11px !important; }
+    .wb-pick {
+      display: grid; grid-template-columns: auto auto 1fr auto;
+      align-items: center; gap: 13px; width: 100%; text-align: left;
+      background: #fff8e8; border: 2px solid var(--wood-m); border-radius: 6px;
+      padding: 14px 16px; cursor: pointer; color: var(--ink);
+      box-shadow: inset 0 1px 0 #fff, 0 3px 0 var(--wood-m);
+      transition: background .15s, border-color .15s, transform .12s;
+    }
+    .wb-pick:hover { background: #fff3d6; transform: translateY(-1px); }
+    .wb-pick.focus { border-color: #1e3a8a; background: #fff3d6; box-shadow: inset 0 1px 0 #fff, 0 3px 0 #1e3a8a; }
+    .wb-pick:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.42); }
+    .wb-pick-key {
+      min-width: 22px; height: 22px; line-height: 20px; text-align: center;
+      background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
+      font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--wood-d);
+    }
+    .wb-pick-icon { font-size: 26px; line-height: 1; }
+    .wb-pick-text { display: flex; flex-direction: column; min-width: 0; gap: 3px; }
+    .wb-pick-no {
+      font-family: 'Press Start 2P', monospace; font-size: 10px; color: #7a3e12;
+    }
+    .wb-pick-ko {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 700; color: var(--ink);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .wb-pick-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; }
+    .wb-pick-count {
+      font-family: 'VT323', monospace; font-size: 17px; color: #7a3e12; white-space: nowrap;
+      background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px; padding: 2px 8px;
+    }
+
+    /* ── Workbook · 연습 2, joining two columns ──────────────────────────────
+       The book draws two columns and a pencil line between them. On a screen a
+       line the learner cannot see the end of is worse than a row that states the
+       join outright, so the pairing reads left → right on one line. */
+    .wb-items-match .wb-sentence {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1.2fr);
+      align-items: center; gap: 10px;
+    }
+    .wb-left { font-weight: 700; }
+    .wb-join { color: #7a3e12; font-weight: 800; }
+    .wb-items-match .wb-blank { min-width: 0; width: 100%; text-align: left; }
+    .wb-bank-match { flex-direction: column; align-items: stretch; }
+    .wb-bank-match .wb-chip { justify-content: flex-start; }
+
+    /* ── Workbook · 연습 3, two-line dialogue ───────────────────────────────── */
+    .wb-items-dialogue .wb-row { align-items: flex-start; }
+    .wb-dlg { display: flex; align-items: baseline; gap: 8px; line-height: 1.8; }
+    .wb-dlg + .wb-dlg { margin-top: 4px; }
+    .wb-dlg.reply { color: #5b3412; }
+    .wb-spk {
+      flex: 0 0 auto; min-width: 19px; height: 19px; line-height: 17px; text-align: center;
+      background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
+      font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-d);
+    }
+    .wb-dlg.reply .wb-spk { background: #e8dcc4; }
+    #wb-example .wb-dlg { line-height: 1.7; }
+    #wb-example .wb-spk { background: #dbe4fb; border-color: #1e3a8a; color: #1e3a8a; }
+
+    @media (max-width: 720px) {
+      #wb-head, #wb-foot { padding-left: 14px; padding-right: 14px; }
+      #wb-body { padding: 14px; }
+      .wb-pick { grid-template-columns: auto auto 1fr; padding: 12px; gap: 10px; }
+      .wb-pick-count { display: none; }
+      .wb-items-match .wb-sentence { grid-template-columns: 1fr; gap: 4px; }
+      .wb-join { display: none; }
+      .wb-items-match .wb-blank { border-bottom-width: 2px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wb-pick, #wb-back { transition: none; }
+      .wb-pick:hover { transform: none; }
+    }
+
+    /* ── Workbook · 문법과 표현, "have you ever…" ────────────────────────────
+       Two decisions per question, and they are not the same kind of decision.
+       The form is graded; 있어요/없어요 is the learner's own life and is only
+       recorded. They are drawn as separate groups, split by a rule, so the page
+       never implies that one of the two answers on the right is wrong. */
+    .wb-items-experience .wb-row { align-items: flex-start; flex-direction: row; }
+    .wb-exp { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+    .wb-exp-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .wb-art { display: block; flex: 0 0 auto; image-rendering: pixelated; }
+    .wb-exp-head .wb-art {
+      background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 4px; padding: 3px;
+    }
+    .wb-exp-phrase {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 800; color: var(--ink);
+    }
+    .wb-exp-en {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #7a3e12; font-style: italic;
+    }
+    .wb-exp-line {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 16px; line-height: 2; color: var(--ink);
+      padding: 6px 10px; border-radius: 4px;
+      background: #fff3d6; border: 1px solid var(--wood-l);
+    }
+    .wb-exp-picks { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+    .wb-exp-sep {
+      width: 1px; height: 26px; background: var(--wood-l); margin: 0 5px;
+    }
+    .wb-pick-form, .wb-pick-own {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #fff8e8; border: 2px solid var(--wood-m); border-radius: 4px;
+      padding: 7px 10px; cursor: pointer; color: var(--ink);
+      font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 700;
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 var(--wood-m);
+      transition: background .15s, border-color .15s, transform .12s;
+    }
+    .wb-pick-form:hover:not(:disabled), .wb-pick-own:hover:not(:disabled) {
+      background: #fff3d6; transform: translateY(-1px);
+    }
+    .wb-pick-form:focus-visible, .wb-pick-own:focus-visible {
+      outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.42);
+    }
+    .wb-pick-form.on { background: #dbe4fb; border-color: #1e3a8a; color: #1a1208; }
+    /* Deliberately a neutral choice, not a right one: the same blue as the form
+       picker would read as "correct", and this answer is never marked. */
+    .wb-pick-own.on { background: #e8dcc4; border-color: var(--wood-d); }
+    .wb-pick-form:disabled, .wb-pick-own:disabled { cursor: default; }
+    /* After marking, the correct form is outlined even if it was not chosen. */
+    .wb-pick-form.key { border-color: #166534; background: #eaffe9; }
+    .wb-pick-form.on.key { background: #dcfce7; }
+    .wb-row.bad .wb-pick-form.on:not(.key) { border-color: #b91c1c; background: #ffe9e9; }
+    .wb-blank.own { min-width: 84px; }
+
+    @media (max-width: 720px) {
+      .wb-exp-line { font-size: 15px; line-height: 1.9; }
+      .wb-exp-phrase { font-size: 15px; }
+      .wb-exp-sep { display: none; }
+      .wb-exp-picks { gap: 6px; }
+      .wb-pick-form, .wb-pick-own { font-size: 14px; padding: 6px 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wb-pick-form, .wb-pick-own { transition: none; }
+      .wb-pick-form:hover:not(:disabled), .wb-pick-own:hover:not(:disabled) { transform: none; }
+    }
+
     /* ── AUDIO MIXER OVERLAY ─────────────────────────────────────────────── */
     /* 645 sits just above the progress dashboard at 640 and below the inventory
        family at 870: sound is reachable from the More menu like they are, and

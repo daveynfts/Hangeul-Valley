@@ -2096,9 +2096,711 @@ function answerDeskQuiz(key, btn) {
   }, 900);
 }
 
+// ═══════════════ STUDY DESK · MODE CHOOSER ═══════════════════════════════════
+// The desk used to open the quiz and nothing else. The textbook ships both a
+// multiple-choice bank and written exercises, and they train different things —
+// recognising the right answer among four, versus choosing an expression and
+// putting it in the form the sentence needs. So the desk now asks which.
+//
+// Only Unit 14 has a workbook page so far. Rather than show a menu with one
+// live row and one dead one, a desk with a single mode opens it directly.
+
+let workbookBank = null;
+let workbookState = null;
+let deskMenuOptions = [];
+let deskMenuIndex = 0;
+
+function workbookUrl() {
+  if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-workbook.json';
+  return null;
+}
+
+function loadWorkbook() {
+  const url = workbookUrl();
+  if (!url) return Promise.resolve(null);
+  if (workbookBank && workbookBank._url === url) return Promise.resolve(workbookBank);
+  if (typeof fetch !== 'function') return Promise.resolve(null);
+  return fetch(url)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      if (d) d._url = url;
+      workbookBank = d;
+      return d;
+    })
+    .catch(() => null);
+}
+
+function openStudyDesk() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  loadWorkbook().then(wb => {
+    const exercises = (wb && wb.exercises) || [];
+    deskMenuOptions = [
+      { key: 'quiz', icon: '📝', ko: '퀴즈', en: 'Multiple choice', run: openDeskQuiz }
+    ];
+    if (exercises.length) {
+      deskMenuOptions.push({
+        key: 'workbook', icon: '✍️', ko: '연습 문제',
+        en: 'Workbook — build the sentences',
+        run: () => openWorkbook(wb)
+      });
+    }
+    if (deskMenuOptions.length === 1) { deskMenuOptions[0].run(); return; }
+    deskMenuIndex = 0;
+    renderDeskMenu();
+    setModalState('desk-menu-overlay', true);
+  });
+}
+
+function closeDeskMenu() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  setModalState('desk-menu-overlay', false);
+}
+
+function renderDeskMenu() {
+  const box = $('desk-menu-list');
+  if (!box) return;
+  box.innerHTML = '';
+  deskMenuOptions.forEach((opt, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'desk-mode' + (i === deskMenuIndex ? ' focus' : '');
+    b.setAttribute('data-mode', opt.key);
+    b.innerHTML =
+      '<span class="desk-mode-key">' + (i + 1) + '</span>' +
+      '<span class="desk-mode-icon">' + vbEsc(opt.icon) + '</span>' +
+      '<span class="desk-mode-text">' +
+        '<span class="desk-mode-ko">' + vbEsc(opt.ko) + '</span>' +
+        '<span class="desk-mode-en">' + vbEsc(opt.en) + '</span>' +
+      '</span>';
+    b.onclick = () => runDeskMode(i);
+    box.appendChild(b);
+  });
+}
+
+function runDeskMode(i) {
+  const opt = deskMenuOptions[i];
+  if (!opt) return;
+  setModalState('desk-menu-overlay', false);
+  opt.run();
+}
+
+// ═══════════════ STUDY DESK · WORKBOOK ═══════════════════════════════════════
+// 어휘 연습 1 from Unit 14: five expressions in a box, one spent on the worked
+// example, four sentences to complete. Each expression is used exactly once,
+// which is what the textbook's circled example establishes.
+//
+// The learner picks the dictionary form and the blank fills with the 해요 form,
+// because the exercise is really two skills at once — choosing the right piece
+// of etiquette, and conjugating it — and Korean conjugation here is irregular
+// (마시다 → 마셔요, 하다 → 해요). Deriving it would be guesswork, so both forms
+// are carried in the data and the conjugation is explained rather than hidden.
+
+// All three exercises reduce to the same act: assign one of N bank entries to
+// each of M slots. 연습 1 fills a sentence ending, 연습 3 fills a blank inside a
+// line of dialogue, and 연습 2 joins a left-hand phrase to a right-hand one —
+// which is the same thing with the bank drawn as a second column. So one state
+// shape and one set of controls serve all of them, and `type` only decides how a
+// row is drawn.
+//
+// The page opens on a list rather than on an exercise, because three exercises
+// stacked in one scroll is the wall of text this is meant to avoid. One 연습 per
+// sitting, and the list is where you come back to.
+function openWorkbook(bank) {
+  if (!bank || !(bank.exercises || []).length) return;
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  workbookState = { bank: bank, mode: 'pick', ex: null, pick: 0 };
+  renderWorkbook();
+  setModalState('workbook-overlay', true);
+}
+
+function openWorkbookExercise(id) {
+  const st = workbookState;
+  if (!st) return;
+  const ex = (st.bank.exercises || []).find(e => e.id === id);
+  if (!ex) return;
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  st.mode = 'exercise';
+  st.ex = ex;
+  st.chips = (ex.bank || []).filter(c => !c.usedByExample);
+  st.fill = new Array((ex.items || []).length).fill(null);
+  // 'experience' offers its choices per question rather than from one shared box,
+  // because the point is whether you know 듣다 → 들은 rather than which of six
+  // phrases is left over. `own` holds the 있어요/없어요 answer: it is the
+  // learner's own experience, so it is required but never marked wrong.
+  st.own = new Array((ex.items || []).length).fill(null);
+  st.focus = 0;
+  st.checked = false;
+  st.score = 0;
+  st.gain = null;
+  renderWorkbook();
+}
+
+function backToWorkbookList() {
+  const st = workbookState;
+  if (!st) return;
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  st.mode = 'pick';
+  st.ex = null;
+  st.checked = false;
+  renderWorkbook();
+}
+
+function closeWorkbook() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  workbookState = null;
+  setModalState('workbook-overlay', false);
+}
+
+// What a bank entry is called in the bank, and what it reads as once placed.
+// 연습 1 is the only one where those differ: you pick a dictionary form and the
+// sentence needs the 해요 form.
+function wbChipText(chip) {
+  if (!chip) return '';
+  if (chip.dict) return chip.dict;
+  return (chip.mark ? chip.mark + ' ' : '') + (chip.ko || '');
+}
+function wbAnswerText(chip) {
+  if (!chip) return '';
+  return chip.polite || chip.ko || '';
+}
+
+// The page has two screens now, and only one of them has slots and a bank.
+// Everything that touches them goes through this, so a stray key press on the
+// exercise list cannot reach into state that does not exist yet.
+function wbInExercise() {
+  const st = workbookState;
+  return !!(st && st.mode === 'exercise' && st.ex && st.fill);
+}
+
+function wbChip(id, item) {
+  if (!wbInExercise()) return null;
+  const st = workbookState;
+  if (st.ex.type === 'experience') {
+    if (item) return (item.choices || []).find(c => c.id === id) || null;
+    const all = (st.ex.items || []).flatMap(it => it.choices || []);
+    return all.find(c => c.id === id) || null;
+  }
+  return st.chips.find(c => c.id === id) || (st.ex.bank || []).find(c => c.id === id) || null;
+}
+
+// One question's choices are its own, so picking does not disturb any other row.
+function wbPickChoice(i, id) {
+  const st = workbookState;
+  if (!wbInExercise() || st.checked) return;
+  const item = (st.ex.items || [])[i];
+  if (!item || !(item.choices || []).some(c => c.id === id)) return;
+  st.fill[i] = id;
+  st.focus = i;
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderWorkbook();
+}
+
+// Never scored. A learner who has not been to Russia is not wrong.
+function wbSetOwn(i, val) {
+  const st = workbookState;
+  if (!wbInExercise() || st.checked) return;
+  if (val !== 'yes' && val !== 'no') return;
+  st.own[i] = val;
+  st.focus = i;
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderWorkbook();
+}
+
+function wbOwnLabel(ex, val) {
+  const labels = (ex && ex.ownLabels) || { yes: '있어요', no: '없어요' };
+  return val === 'yes' ? labels.yes : (val === 'no' ? labels.no : '');
+}
+
+// A page is finished when every question has both a form and an answer. The
+// score counts only the form.
+function wbComplete() {
+  const st = workbookState;
+  if (!wbInExercise()) return false;
+  if (st.fill.some(v => !v)) return false;
+  if (st.ex.type === 'experience' && st.own.some(v => !v)) return false;
+  return true;
+}
+
+function wbFilledCount() {
+  if (!wbInExercise()) return 0;
+  return workbookState.fill.filter(Boolean).length;
+}
+
+function wbFocusBlank(i) {
+  const st = workbookState;
+  if (!wbInExercise() || st.checked) return;
+  if (i < 0 || i >= st.fill.length) return;
+  st.focus = i;
+  renderWorkbook();
+}
+
+// One chip per blank. Picking a chip that is already placed moves it rather than
+// duplicating it, which is what makes the puzzle self-correcting instead of
+// letting the same expression answer two sentences.
+function wbPickChip(id) {
+  const st = workbookState;
+  if (!wbInExercise() || st.checked) return;
+  const at = st.fill.indexOf(id);
+  if (at >= 0) st.fill[at] = null;
+  st.fill[st.focus] = id;
+  const next = st.fill.findIndex(v => !v);
+  if (next >= 0) st.focus = next;
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderWorkbook();
+}
+
+function wbClearBlank(i) {
+  const st = workbookState;
+  if (!wbInExercise() || st.checked) return;
+  const at = (i === undefined) ? st.focus : i;
+  if (!st.fill[at]) return;
+  st.fill[at] = null;
+  st.focus = at;
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderWorkbook();
+}
+
+function wbMoveFocus(delta) {
+  const st = workbookState;
+  if (!wbInExercise() || st.checked) return;
+  const n = st.fill.length;
+  st.focus = ((st.focus + delta) % n + n) % n;
+  renderWorkbook();
+}
+
+function checkWorkbook() {
+  const st = workbookState;
+  if (!wbInExercise() || st.checked) return;
+  if (!wbComplete()) return;
+  st.checked = true;
+  const items = st.ex.items || [];
+  st.score = items.reduce((n, item, i) => n + (st.fill[i] === item.answer ? 1 : 0), 0);
+  if (typeof playChiptuneSFX === 'function') {
+    playChiptuneSFX(st.score === items.length ? 'complete' : 'quiz_wrong');
+  }
+  // Scored the same way the desk quiz is, so one desk does not pay better than
+  // the other for the same amount of work.
+  if (typeof ensurePlayerRank === 'function') ensurePlayerRank();
+  if (typeof studySessionXp === 'function' && typeof addPlayerXp === 'function') {
+    const xp = studySessionXp(st.score, items.length);
+    const after = addPlayerXp(xp);
+    st.gain = { xp: xp, leveled: after.leveled, level: after.level };
+    if (st.score === items.length && typeof addHonor === 'function') addHonor(2);
+    if (typeof persistSave === 'function') persistSave();
+    if (typeof updateRankHUD === 'function') updateRankHUD();
+  }
+  if (typeof checkQuestProgress === 'function') checkQuestProgress('desk', { count: 1 });
+  renderWorkbook();
+}
+
+function resetWorkbook() {
+  const st = workbookState;
+  if (!wbInExercise()) return;
+  st.fill = new Array((st.ex.items || []).length).fill(null);
+  st.own = new Array((st.ex.items || []).length).fill(null);
+  st.focus = 0;
+  st.checked = false;
+  st.score = 0;
+  st.gain = null;
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderWorkbook();
+}
+
+// The sentence a completed row reads as, which is also what the explanation
+// card has to print. Each type assembles it differently, so it lives in one
+// place rather than being spelled out twice per type.
+function wbLineHtml(ex, item, chipText, opts) {
+  const o = opts || {};
+  const blank = o.plain
+    ? '<b>' + vbEsc(chipText) + '</b>'
+    : (chipText
+        ? '<b class="wb-blank filled">' + vbEsc(chipText) + '</b>'
+        : '<span class="wb-blank empty">&nbsp;</span>');
+  if (ex.type === 'dialogue') {
+    const parts = String(item.aKo || '').split('{}');
+    const a = vbEsc(parts[0] || '') + blank + vbEsc(parts[1] || '');
+    return '<div class="wb-dlg"><span class="wb-spk">A</span>' + a + '</div>' +
+      (o.plain ? '' : '<div class="wb-dlg reply"><span class="wb-spk">B</span>' +
+        vbEsc(ex.reply || '') + '</div>');
+  }
+  if (ex.type === 'match') {
+    return '<span class="wb-left">' + vbEsc(item.stemKo) + '</span>' +
+      '<span class="wb-join">→</span>' + blank;
+  }
+  if (ex.type === 'experience') {
+    const own = o.own === undefined ? null : o.own;
+    const ownText = wbOwnLabel(ex, own);
+    const ownBlank = o.plain
+      ? '<b>' + vbEsc(ownText) + '</b>'
+      : (ownText
+          ? '<b class="wb-blank filled own">' + vbEsc(ownText) + '</b>'
+          : '<span class="wb-blank empty own">&nbsp;</span>');
+    return ('저는 ' + vbEsc(item.stemKo) + ' ' + blank
+      + ' 적이 ' + ownBlank + '.');
+  }
+  return vbEsc(item.stemKo) + ' ' + blank + '.';
+}
+
+function renderWorkbook() {
+  const st = workbookState;
+  if (!st) return;
+  if (st.mode === 'pick') { renderWorkbookPicker(); return; }
+
+  const ex = st.ex;
+  const items = ex.items || [];
+
+  const title = $('wb-title');
+  if (title) title.textContent = (ex.section || '') + ' · ' + (ex.no || '');
+  const sub = $('wb-sub');
+  if (sub) sub.textContent = (ex.sectionEn || '') + ' — ' + (st.bank.titleEn || 'Workbook');
+  const count = $('wb-count');
+  if (count) {
+    count.textContent = st.checked
+      ? (st.score + ' / ' + items.length)
+      : (wbFilledCount() + ' / ' + items.length);
+    count.className = st.checked ? (st.score === items.length ? 'wb-count-all' : 'wb-count-some') : '';
+  }
+
+  const inst = $('wb-instruction');
+  if (inst) {
+    inst.innerHTML =
+      '<div class="wb-inst-ko">' + vbEsc(ex.instructionKo || '') + '</div>' +
+      '<div class="wb-inst-en">' + vbEsc(ex.instructionEn || '') + '</div>' +
+      (ex.noteEn ? '<div class="wb-inst-note">' + vbEsc(ex.noteEn) + '</div>' : '');
+  }
+
+  const exBox = $('wb-example');
+  if (exBox) {
+    if (!ex.example) { exBox.innerHTML = ''; exBox.className = 'wb-hidden'; }
+    else {
+      exBox.className = '';
+      const chip = wbChip(ex.example.answer);
+      exBox.innerHTML =
+        '<span class="wb-example-tag">[보기]</span> ' +
+        wbLineHtml(ex, ex.example, wbAnswerText(chip), { plain: true }) +
+        (ex.type === 'dialogue'
+          ? '<div class="wb-dlg reply"><span class="wb-spk">B</span>' + vbEsc(ex.reply || '') + '</div>'
+          : '') +
+        '<div class="wb-example-en">' + vbEsc(ex.example.en || '') + '</div>';
+    }
+  }
+
+  const bank = $('wb-bank');
+  if (bank && ex.type === 'experience') {
+    // Choices live on each row, so a shared box would just be an empty strip.
+    bank.innerHTML = '';
+    bank.className = 'wb-hidden';
+  } else if (bank) {
+    bank.innerHTML = '';
+    bank.className = 'wb-bank-' + (ex.type || 'fill');
+    st.chips.forEach((c, i) => {
+      const used = st.fill.indexOf(c.id) >= 0;
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'wb-chip' + (used ? ' used' : '');
+      b.setAttribute('data-chip', c.id);
+      b.disabled = st.checked;
+      b.innerHTML = '<span class="wb-chip-key">' + (i + 1) + '</span>' + vbEsc(wbChipText(c));
+      b.onclick = () => wbPickChip(c.id);
+      bank.appendChild(b);
+    });
+  }
+
+  const list = $('wb-items');
+  if (list) {
+    list.innerHTML = '';
+    list.className = 'wb-items-' + (ex.type || 'fill');
+    items.forEach((item, i) => {
+      const chosen = st.fill[i];
+      const chip = chosen ? wbChip(chosen, item) : null;
+      const right = st.checked && chosen === item.answer;
+      const wrong = st.checked && chosen !== item.answer;
+      const row = document.createElement('div');
+      row.className = 'wb-row'
+        + (!st.checked && i === st.focus ? ' focus' : '')
+        + (right ? ' ok' : '') + (wrong ? ' bad' : '');
+
+      if (ex.type === 'experience') {
+        // Its own row shape: the picture and the dictionary phrase name the task,
+        // the sentence shows what has been built so far, and the buttons below
+        // are the two decisions — the graded form, then the ungraded truth.
+        //
+        // Built as elements rather than one innerHTML string and a querySelector
+        // to fish the button container back out. The container is needed as an
+        // object either way, so writing it as markup first only to look it up
+        // again is a round trip through the parser for nothing.
+        const art = (typeof workbookIconSvg === 'function' && item.art)
+          ? workbookIconSvg(item.art, 4) : '';
+        const num = document.createElement('span');
+        num.className = 'wb-n';
+        num.textContent = item.n + ')';
+        const exp = document.createElement('div');
+        exp.className = 'wb-exp';
+        const head = document.createElement('div');
+        head.className = 'wb-exp-head';
+        head.innerHTML = art +
+          '<span class="wb-exp-phrase">' + vbEsc(item.phraseKo || '') + '</span>' +
+          '<span class="wb-exp-en">' + vbEsc(item.en || '') + '</span>';
+        const line = document.createElement('div');
+        line.className = 'wb-exp-line';
+        line.innerHTML = wbLineHtml(ex, item, chip ? wbAnswerText(chip) : '', { own: st.own[i] });
+        const picks = document.createElement('div');
+        picks.className = 'wb-exp-picks';
+        exp.appendChild(head);
+        exp.appendChild(line);
+        exp.appendChild(picks);
+        row.appendChild(num);
+        row.appendChild(exp);
+        if (st.checked) {
+          const mark = document.createElement('span');
+          mark.className = 'wb-mark';
+          mark.textContent = right ? '✓' : '✕';
+          row.appendChild(mark);
+        }
+        (item.choices || []).forEach((c, k) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'wb-pick-form'
+            + (chosen === c.id ? ' on' : '')
+            + (st.checked && c.id === item.answer ? ' key' : '');
+          b.disabled = st.checked;
+          b.innerHTML = '<span class="wb-chip-key">' + (k + 1) + '</span>' + vbEsc(c.ko);
+          b.onclick = () => wbPickChoice(i, c.id);
+          picks.appendChild(b);
+        });
+        const sep = document.createElement('span');
+        sep.className = 'wb-exp-sep';
+        picks.appendChild(sep);
+        [['yes', 4], ['no', 5]].forEach(([val, key]) => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'wb-pick-own' + (st.own[i] === val ? ' on' : '');
+          b.disabled = st.checked;
+          b.innerHTML = '<span class="wb-chip-key">' + key + '</span>' + vbEsc(wbOwnLabel(ex, val));
+          b.onclick = () => wbSetOwn(i, val);
+          picks.appendChild(b);
+        });
+        if (!st.checked) {
+          row.onclick = (e) => { if (e.target === row) wbFocusBlank(i); };
+        }
+        list.appendChild(row);
+        return;
+      }
+
+      row.innerHTML =
+        '<span class="wb-n">' + item.n + ')</span>' +
+        '<span class="wb-sentence">' + wbLineHtml(ex, item, chip ? wbAnswerText(chip) : '') + '</span>' +
+        (st.checked ? '<span class="wb-mark">' + (right ? '✓' : '✕') + '</span>' : '');
+      if (!st.checked) {
+        row.tabIndex = 0;
+        row.setAttribute('role', 'button');
+        row.onclick = () => (chosen ? wbClearBlank(i) : wbFocusBlank(i));
+        row.onkeydown = (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); wbFocusBlank(i); }
+        };
+      }
+      list.appendChild(row);
+    });
+  }
+
+  const explain = $('wb-explain');
+  if (explain) {
+    if (!st.checked) { explain.innerHTML = ''; explain.className = ''; }
+    else {
+      explain.className = 'shown';
+      explain.innerHTML = items.map((item, i) => {
+        const correct = wbChip(item.answer);
+        const chosen = st.fill[i] ? wbChip(st.fill[i]) : null;
+        const ok = st.fill[i] === item.answer;
+        return '<div class="wb-why' + (ok ? ' ok' : ' bad') + '">' +
+          '<div class="wb-why-head">' + item.n + ') ' + (ok ? '✓' : '✕') + ' ' +
+            wbLineHtml(ex, item, wbAnswerText(correct),
+              { plain: true, own: st.own && st.own[i] }) + '</div>' +
+          (ok ? '' : '<div class="wb-why-yours">You put: ' +
+            vbEsc(chosen ? wbAnswerText(chosen) : '—') + '</div>') +
+          '<div class="wb-why-en">' + vbEsc(item.en || '') + '</div>' +
+          '<div class="wb-why-body">' + vbEsc(item.why || '') + '</div>' +
+          '<div class="wb-why-gram">📐 ' + vbEsc(item.grammar || '') + '</div>' +
+        '</div>';
+      }).join('');
+    }
+  }
+
+  const hint = $('wb-hint');
+  if (hint) {
+    hint.textContent = st.checked
+      ? (st.gain ? '+' + st.gain.xp + ' XP' : '')
+      : (st.bank.hintKo || '');
+  }
+  const back = $('wb-back');
+  if (back) {
+    back.textContent = '← ' + (st.bank.backKo || '연습 목록');
+    back.onclick = backToWorkbookList;
+    back.className = '';
+  }
+  const btn = $('wb-check');
+  if (btn) {
+    btn.className = '';
+    if (st.checked) {
+      btn.textContent = st.bank.againKo || '다시 풀기';
+      btn.onclick = resetWorkbook;
+      btn.disabled = false;
+    } else {
+      btn.textContent = (st.bank.checkKo || '확인') + ' ' + (st.bank.checkEn || 'Check');
+      btn.onclick = checkWorkbook;
+      btn.disabled = !wbComplete();
+    }
+  }
+}
+
+// One exercise per sitting. The list is the page you land on and the page you
+// return to, so nothing ever shows three exercises at once.
+function renderWorkbookPicker() {
+  const st = workbookState;
+  if (!st) return;
+  const exercises = st.bank.exercises || [];
+
+  const title = $('wb-title');
+  if (title) title.textContent = st.bank.titleKo || '연습 문제';
+  const sub = $('wb-sub');
+  if (sub) sub.textContent = st.bank.source || st.bank.titleEn || '';
+  const count = $('wb-count');
+  if (count) { count.textContent = exercises.length + ' 연습'; count.className = ''; }
+
+  const inst = $('wb-instruction');
+  if (inst) {
+    inst.innerHTML =
+      '<div class="wb-inst-ko">' + vbEsc(st.bank.pickKo || '어떤 연습을 할까요?') + '</div>' +
+      '<div class="wb-inst-en">' + vbEsc(st.bank.pickEn || '') + '</div>';
+  }
+  const exBox = $('wb-example');
+  if (exBox) { exBox.innerHTML = ''; exBox.className = 'wb-hidden'; }
+  const bank = $('wb-bank');
+  if (bank) { bank.innerHTML = ''; bank.className = 'wb-hidden'; }
+  const explain = $('wb-explain');
+  if (explain) { explain.innerHTML = ''; explain.className = ''; }
+
+  const list = $('wb-items');
+  if (list) {
+    list.innerHTML = '';
+    list.className = 'wb-items-pick';
+    exercises.forEach((ex, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'wb-pick' + (i === st.pick ? ' focus' : '');
+      b.setAttribute('data-exercise', ex.id);
+      b.innerHTML =
+        '<span class="wb-pick-key">' + (i + 1) + '</span>' +
+        '<span class="wb-pick-icon">' + vbEsc(ex.icon || '📝') + '</span>' +
+        '<span class="wb-pick-text">' +
+          '<span class="wb-pick-no">' + vbEsc((ex.section || '') + ' · ' + (ex.no || '')) + '</span>' +
+          '<span class="wb-pick-ko">' + vbEsc(ex.instructionKo || '') + '</span>' +
+          '<span class="wb-pick-en">' + vbEsc(ex.blurbEn || ex.instructionEn || '') + '</span>' +
+        '</span>' +
+        '<span class="wb-pick-count">' + ((ex.items || []).length) + '문항</span>';
+      b.onclick = () => openWorkbookExercise(ex.id);
+      list.appendChild(b);
+    });
+  }
+
+  const hint = $('wb-hint');
+  if (hint) hint.textContent = st.bank.hintKo || '';
+  const back = $('wb-back');
+  if (back) back.className = 'wb-hidden';
+  const btn = $('wb-check');
+  if (btn) { btn.className = 'wb-hidden'; btn.onclick = null; }
+}
+
+// Keyboard for both desk screens. Escape is deliberately left alone — the modal
+// stack handler in this file already owns it, and handling it twice would close
+// two overlays on one press.
+if (typeof window !== 'undefined' && window.addEventListener) {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') return;
+    const top = activeModalStack[activeModalStack.length - 1];
+
+    if (top === 'desk-menu-overlay') {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault(); deskMenuIndex = (deskMenuIndex + 1) % deskMenuOptions.length; renderDeskMenu();
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        deskMenuIndex = (deskMenuIndex - 1 + deskMenuOptions.length) % deskMenuOptions.length;
+        renderDeskMenu();
+      } else if (e.key === 'Enter') {
+        e.preventDefault(); runDeskMode(deskMenuIndex);
+      } else if (/^[1-9]$/.test(e.key)) {
+        e.preventDefault(); runDeskMode(Number(e.key) - 1);
+      }
+      return;
+    }
+
+    if (top !== 'workbook-overlay' || !workbookState) return;
+    const st = workbookState;
+
+    // The exercise list takes the same controls as the desk chooser, so the
+    // whole page is one keyboard idiom: numbers pick, arrows move, Enter opens.
+    if (st.mode === 'pick') {
+      const n = (st.bank.exercises || []).length;
+      if (!n) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault(); st.pick = (st.pick + 1) % n; renderWorkbook();
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault(); st.pick = (st.pick - 1 + n) % n; renderWorkbook();
+      } else if (e.key === 'Enter') {
+        e.preventDefault(); openWorkbookExercise(st.bank.exercises[st.pick].id);
+      } else if (/^[1-9]$/.test(e.key)) {
+        const ex = st.bank.exercises[Number(e.key) - 1];
+        if (ex) { e.preventDefault(); openWorkbookExercise(ex.id); }
+      }
+      return;
+    }
+
+    // Backspace on the first blank with nothing to clear is the natural
+    // "go back" gesture, but it would be a surprise mid-exercise, so the list
+    // is reached with the button or Esc-then-reopen instead.
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (st.checked) resetWorkbook(); else checkWorkbook();
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault(); wbMoveFocus(1);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault(); wbMoveFocus(-1);
+    } else if (e.key === 'Backspace' || e.key === 'Delete') {
+      e.preventDefault(); wbClearBlank();
+    } else if (/^[1-9]$/.test(e.key)) {
+      const num = Number(e.key);
+      if (st.ex.type === 'experience') {
+        // Same idiom as everywhere else: numbers pick things in the focused row.
+        // 1-3 are the forms, then 있어요 and 없어요.
+        const item = (st.ex.items || [])[st.focus];
+        if (!item) return;
+        const choice = (item.choices || [])[num - 1];
+        if (choice) { e.preventDefault(); wbPickChoice(st.focus, choice.id); return; }
+        const n = (item.choices || []).length;
+        if (num === n + 1) { e.preventDefault(); wbSetOwn(st.focus, 'yes'); }
+        else if (num === n + 2) { e.preventDefault(); wbSetOwn(st.focus, 'no'); }
+        return;
+      }
+      const chip = st.chips[num - 1];
+      if (chip) { e.preventDefault(); wbPickChip(chip.id); }
+    }
+  });
+}
+
 if (typeof window !== 'undefined') {
   window.openDeskQuiz = openDeskQuiz;
   window.closeDeskQuiz = closeDeskQuiz;
+  window.openStudyDesk = openStudyDesk;
+  window.closeDeskMenu = closeDeskMenu;
+  window.openWorkbook = openWorkbook;
+  window.openWorkbookExercise = openWorkbookExercise;
+  window.backToWorkbookList = backToWorkbookList;
+  window.closeWorkbook = closeWorkbook;
+  window.checkWorkbook = checkWorkbook;
+  window.wbPickChoice = wbPickChoice;
+  window.wbSetOwn = wbSetOwn;
+  window.wbComplete = wbComplete;
+  window.resetWorkbook = resetWorkbook;
   window.openRankCard = openRankCard;
   window.closeRankCard = closeRankCard;
   window.closeRankUp = closeRankUp;

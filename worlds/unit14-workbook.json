@@ -1,0 +1,409 @@
+{
+  "id": "unit14-workbook",
+  "source": "Seoul National University Korean 2B, Unit 14 · 예의를 지켜요",
+  "titleKo": "연습 문제",
+  "titleEn": "Workbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "One exercise at a time — pick where to start.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "exercises": [
+    {
+      "id": "u14-vocab-1",
+      "type": "fill",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 1",
+      "icon": "✍️",
+      "blurbEn": "Pick the etiquette that fits each moment, and see it conjugated.",
+      "instructionKo": "[보기]와 같이 알맞은 것을 골라 문장을 만들어 보세요.",
+      "instructionEn": "Complete each sentence using the appropriate expression from the box, as in the example.",
+      "noteEn": "Each expression is used exactly once. Pick the dictionary form — the blank fills with the 해요 form the sentence actually needs.",
+      "bank": [
+        {
+          "id": "two_hands",
+          "dict": "두 손으로 드리다",
+          "polite": "두 손으로 드려요",
+          "usedByExample": true
+        },
+        {
+          "id": "yield_seat",
+          "dict": "자리를 양보하다",
+          "polite": "자리를 양보해요"
+        },
+        {
+          "id": "honorific",
+          "dict": "높임말[존댓말]을 하다",
+          "polite": "높임말을 해요"
+        },
+        {
+          "id": "turn_head",
+          "dict": "고개를 돌리고 마시다",
+          "polite": "고개를 돌리고 마셔요"
+        },
+        {
+          "id": "bow",
+          "dict": "고개를 숙여서 인사하다",
+          "polite": "고개를 숙여서 인사해요"
+        }
+      ],
+      "items": [
+        {
+          "n": 1,
+          "answer": "turn_head",
+          "en": "When you drink with elders …",
+          "why": "Drinking while facing an elder head-on reads as placing yourself on their level. You turn your head aside so the act is not done straight at them — the same instinct behind receiving with both hands.",
+          "grammar": "마시다 → 마셔요. The stem 마시- ends in ㅣ, and ㅣ + 어요 contracts to 셔요.",
+          "stemKo": "어른들과 술을 마실 때"
+        },
+        {
+          "n": 2,
+          "answer": "bow",
+          "en": "When you greet elders …",
+          "why": "A greeting to an elder is carried by the bow, not by the words. 고개를 숙여서 is bowing the head, and -아/어서 links the two actions: you bow, and by bowing you greet.",
+          "grammar": "인사하다 → 인사해요. Every 하다 verb is irregular this way: 하 + 여요 → 해요. Note 께 in the prompt — it is the honorific of 에게/한테.",
+          "stemKo": "어른들께 인사할 때"
+        },
+        {
+          "n": 3,
+          "answer": "honorific",
+          "en": "When you talk with someone you have just met …",
+          "why": "With a person you have just met you do not yet know their age or standing, so 높임말 is the safe default. 반말 is for close friends or someone clearly younger — opening with it to a stranger is exactly the mistake this unit warns about.",
+          "grammar": "하다 → 해요. 높임말 and 존댓말 mean the same thing here; the textbook prints both, and the answer keeps just 높임말을 해요.",
+          "stemKo": "처음 만난 사람과 이야기할 때"
+        },
+        {
+          "n": 4,
+          "answer": "yield_seat",
+          "en": "If an older person is on the bus …",
+          "why": "Giving up your seat is the everyday form of 경로 우대, the senior-priority idea from this unit's culture section.",
+          "grammar": "양보하다 → 양보해요. The prompt is already honorific twice over: 분 is the polite counter for a person rather than 사람, and 계시다 is the honorific of 있다.",
+          "stemKo": "버스에 나이가 많은 분이 계시면"
+        }
+      ],
+      "example": {
+        "answer": "two_hands",
+        "en": "In Korea, when you hand something to an elder, you offer it with both hands.",
+        "stemKo": "한국에서는 어른께 물건을 드릴 때"
+      }
+    },
+    {
+      "id": "u14-vocab-2",
+      "type": "match",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 2",
+      "icon": "🔗",
+      "blurbEn": "Join each situation to the thing you should not do.",
+      "instructionKo": "알맞은 것끼리 연결하여 한 문장으로 만들어 보세요.",
+      "instructionEn": "Connect the phrases to make a sentence.",
+      "noteEn": "Every right-hand phrase is a -지 마세요 command: the polite way to tell someone not to do something. Each is used once.",
+      "bank": [
+        {
+          "id": "m_cross_legs",
+          "ko": "다리를 꼬고 앉지 마세요.",
+          "mark": "①"
+        },
+        {
+          "id": "m_call_name",
+          "ko": "이름을 부르지 마세요.",
+          "mark": "②"
+        },
+        {
+          "id": "m_one_hand",
+          "ko": "한 손으로 받지 마세요.",
+          "mark": "③"
+        },
+        {
+          "id": "m_banmal",
+          "ko": "반말을 하지 마세요.",
+          "mark": "④"
+        }
+      ],
+      "items": [
+        {
+          "n": 1,
+          "answer": "m_call_name",
+          "en": "When you address an elder …",
+          "why": "You do not call an elder by their given name. Korean reaches for a title or a kinship term instead — 선생님, 사장님, 아버님 — because a bare name puts the two of you on level terms.",
+          "grammar": "부르다 → 부르지 마세요. -지 마세요 attaches to the plain stem and is the polite way to tell someone not to do something.",
+          "stemKo": "어른을 부를 때"
+        },
+        {
+          "n": 2,
+          "answer": "m_one_hand",
+          "en": "When you receive something from a teacher …",
+          "why": "Taking something one-handed from someone senior is casual to the point of rude. Both hands — or the right hand with the left supporting the wrist — is the respectful form. This is 두 손으로 드리다 from 연습 1 seen from the receiving side.",
+          "grammar": "받다 → 받지 마세요. 께 in the prompt is the honorific of 에게/한테, so the sentence has already marked the teacher as senior.",
+          "stemKo": "선생님께 물건을 받을 때"
+        },
+        {
+          "n": 3,
+          "answer": "m_cross_legs",
+          "en": "When an elder is in front of you …",
+          "why": "Crossing your legs in front of an elder reads as relaxed and unbothered. The cue that the person present is senior is 계시다 — the honorific of 있다.",
+          "grammar": "앉다 → 앉지 마세요. -고 links the two actions: 다리를 꼬고 앉다 is to cross the legs and sit that way.",
+          "stemKo": "어른이 앞에 계실 때"
+        },
+        {
+          "n": 4,
+          "answer": "m_banmal",
+          "en": "When you talk with a teacher …",
+          "why": "반말 is for close friends and people clearly younger. A teacher gets 높임말 whatever their age — the same choice 연습 1 asked about with 처음 만난 사람.",
+          "grammar": "하다 → 하지 마세요. Worth noticing: 하다 is irregular for 해요, but perfectly regular here — the stem 하 is untouched.",
+          "stemKo": "선생님과 이야기할 때"
+        }
+      ]
+    },
+    {
+      "id": "u14-vocab-3",
+      "type": "dialogue",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 3",
+      "icon": "💬",
+      "blurbEn": "Name the sign that explains why B has to apologise.",
+      "instructionKo": "[보기]와 같이 빈칸에 알맞은 것을 골라 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue using the appropriate expression from the box, as in the example.",
+      "noteEn": "Read A's second sentence first: it says what cannot be done, and the sign is simply that rule as a noun.",
+      "bank": [
+        {
+          "id": "no_smoking",
+          "ko": "금연",
+          "usedByExample": true
+        },
+        {
+          "id": "no_parking",
+          "ko": "주차 금지"
+        },
+        {
+          "id": "no_photos",
+          "ko": "사진 촬영 금지"
+        },
+        {
+          "id": "no_phones",
+          "ko": "휴대 전화 사용 금지"
+        },
+        {
+          "id": "no_food",
+          "ko": "음식물 반입 금지"
+        }
+      ],
+      "items": [
+        {
+          "n": 1,
+          "answer": "no_food",
+          "en": "You cannot bring food in here.",
+          "why": "반입 is the act of bringing something in, so 음식물 반입 금지 forbids carrying food inside — which is word for word what A's second sentence says.",
+          "grammar": "-을/ㄹ 수 없습니다 is \"cannot\": 들어오다 → 들어올 수 없습니다. And 여기는 X입니다 names a place by the rule that governs it.",
+          "aKo": "여기는 {}입니다. 여기에 음식을 가지고 들어올 수 없습니다."
+        },
+        {
+          "n": 2,
+          "answer": "no_photos",
+          "en": "You cannot take photographs here.",
+          "why": "촬영 is photographing or filming. The sign turns the banned action into a noun phrase, and A's next sentence spells the same thing out as a verb.",
+          "grammar": "찍다 → 찍을 수 없습니다. Note 에서 rather than 에 — the action happens *at* the place, so 에서 marks it.",
+          "aKo": "여기는 {}입니다. 여기에서 사진을 찍을 수 없습니다."
+        },
+        {
+          "n": 3,
+          "answer": "no_phones",
+          "en": "You cannot make phone calls here.",
+          "why": "The banned thing is 사용 — use. The sign forbids using the phone, not carrying it, which is why A says 전화를 할 수 없습니다 rather than anything about bringing one in.",
+          "grammar": "하다 → 할 수 없습니다. The sign spaces 휴대 전화; running text usually writes 휴대전화 solid.",
+          "aKo": "여기는 {}입니다. 여기에서 전화를 할 수 없습니다."
+        },
+        {
+          "n": 4,
+          "answer": "no_parking",
+          "en": "You cannot park a car here.",
+          "why": "주차 is parking. 세우다 is to bring a vehicle to a stop and leave it, so 차를 세울 수 없습니다 is the everyday way of saying the same thing the sign says formally.",
+          "grammar": "세우다 → 세울 수 없습니다. Four of these five signs end in 금지; 금연 is the odd one out, built as 금 (prohibit) + 연 (smoke) instead.",
+          "aKo": "여기는 {}입니다. 여기에 차를 세울 수 없습니다."
+        }
+      ],
+      "reply": "아, 그래요? 죄송합니다.",
+      "example": {
+        "answer": "no_smoking",
+        "en": "A: This is a no-smoking area. You cannot smoke here. — B: Oh, really? I'm sorry.",
+        "aKo": "여기는 {}입니다. 여기에서 담배를 피울 수 없습니다."
+      }
+    },
+    {
+      "id": "u14-grammar-1",
+      "type": "experience",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 1",
+      "icon": "🧭",
+      "blurbEn": "Have you ever…? Build the V-(으)ㄴ form, then answer for yourself.",
+      "instructionKo": "[보기]와 같이 이야기하고 써 보세요.",
+      "instructionEn": "Say it and write it, as in the example.",
+      "noteEn": "The book asks you to interview a classmate. On your own, the part that can be marked is the grammar — pick the right V-(으)ㄴ form. Whether you answer 있어요 or 없어요 is your own experience, so it is kept but never marked wrong.",
+      "pattern": "V-(으)ㄴ 적(이) 있다[없다]",
+      "ownLabels": {
+        "yes": "있어요",
+        "no": "없어요"
+      },
+      "items": [
+        {
+          "n": 1,
+          "art": "go_russia",
+          "phraseKo": "러시아에 가다",
+          "stemKo": "러시아에",
+          "answer": "gan",
+          "choices": [
+            {
+              "id": "gan",
+              "ko": "간"
+            },
+            {
+              "id": "gaeun",
+              "ko": "가은"
+            },
+            {
+              "id": "gasseun",
+              "ko": "갔은"
+            }
+          ],
+          "en": "to go to Russia",
+          "why": "가- is a vowel stem, so the modifier is just ㄴ stuck onto it: 간. 가은 inserts the 으 that only consonant stems need, and 갔은 tries to stack the past-tense 았 under a form that already means past.",
+          "grammar": "V-(으)ㄴ 적(이) 있다/없다 — to have (never) done V. Vowel stem takes -ㄴ, consonant stem takes -은."
+        },
+        {
+          "n": 2,
+          "art": "meet_famous",
+          "phraseKo": "유명한 사람을 만나다",
+          "stemKo": "유명한 사람을",
+          "answer": "mannan",
+          "choices": [
+            {
+              "id": "mannan",
+              "ko": "만난"
+            },
+            {
+              "id": "mannaeun",
+              "ko": "만나은"
+            },
+            {
+              "id": "mannasseun",
+              "ko": "만났은"
+            }
+          ],
+          "en": "to meet a famous person",
+          "why": "만나- ends in the vowel ㅏ, so ㄴ attaches directly: 만난. The same rule as 가다, and the same two traps to avoid.",
+          "grammar": "만나다 → 만난. 았/었 has no place in this pattern; 적이 있다 already carries the past."
+        },
+        {
+          "n": 3,
+          "art": "write_letter",
+          "phraseKo": "연애편지를 쓰다",
+          "stemKo": "연애편지를",
+          "answer": "sseun",
+          "choices": [
+            {
+              "id": "sseun",
+              "ko": "쓴"
+            },
+            {
+              "id": "sseueun",
+              "ko": "쓰은"
+            },
+            {
+              "id": "ssyeosseun",
+              "ko": "썼은"
+            }
+          ],
+          "en": "to write a love letter",
+          "why": "쓰- is a vowel stem too, even though ㅡ looks bare: 쓴. 썼은 is the 었 past leaking in where it does not belong.",
+          "grammar": "쓰다 → 쓴. A ㅡ stem behaves like any other vowel stem for -(으)ㄴ."
+        },
+        {
+          "n": 4,
+          "art": "part_time_job",
+          "phraseKo": "아르바이트를 하다",
+          "stemKo": "아르바이트를",
+          "answer": "han",
+          "choices": [
+            {
+              "id": "han",
+              "ko": "한"
+            },
+            {
+              "id": "haeun",
+              "ko": "하은"
+            },
+            {
+              "id": "haesseun",
+              "ko": "했은"
+            }
+          ],
+          "en": "to work a part-time job",
+          "why": "하- is a vowel stem: 한. 하다 is the famous irregular for 해요, but -(으)ㄴ is perfectly regular — same verb, different ending, different behaviour.",
+          "grammar": "하다 → 한. Worth holding next to 하다 → 해요: irregularity belongs to an ending, not to a verb."
+        },
+        {
+          "n": 5,
+          "art": "traditional_music",
+          "phraseKo": "한국 전통 음악을 듣다",
+          "stemKo": "한국 전통 음악을",
+          "answer": "deureun",
+          "choices": [
+            {
+              "id": "deureun",
+              "ko": "들은"
+            },
+            {
+              "id": "deuteun",
+              "ko": "듣은"
+            },
+            {
+              "id": "deun",
+              "ko": "든"
+            }
+          ],
+          "en": "to listen to Korean traditional music",
+          "why": "This is the trap. 듣다 is ㄷ-irregular: before a vowel ending the ㄷ turns into ㄹ, so 듣 → 들, then -은. 듣은 keeps the ㄷ, and 든 drops the 으 that a consonant stem needs.",
+          "grammar": "듣다 → 들은. ㄷ-irregular: ㄷ → ㄹ before a vowel. Compare 듣고, where a consonant follows and nothing changes."
+        },
+        {
+          "n": 6,
+          "art": "make_bulgogi",
+          "phraseKo": "불고기를 만들다",
+          "stemKo": "불고기를",
+          "answer": "mandeun",
+          "choices": [
+            {
+              "id": "mandeun",
+              "ko": "만든"
+            },
+            {
+              "id": "mandeureun",
+              "ko": "만들은"
+            },
+            {
+              "id": "manteureun",
+              "ko": "만듣은"
+            }
+          ],
+          "en": "to make bulgogi",
+          "why": "The other trap, and it pulls the opposite way. A stem ending in ㄹ drops that ㄹ before ㄴ: 만들 → 만드 + ㄴ = 만든. 만들은 keeps the ㄹ and adds 으, which is what an ordinary consonant stem would do.",
+          "grammar": "만들다 → 만든. ㄹ stems drop ㄹ before ㄴ, ㅂ and ㅅ. Same shape as 살다 → 산 and 알다 → 안."
+        }
+      ],
+      "example": {
+        "art": "go_russia",
+        "phraseKo": "러시아에 가다",
+        "stemKo": "러시아에",
+        "answer": "gan",
+        "own": "no",
+        "en": "I have never been to Russia."
+      }
+    }
+  ]
+}

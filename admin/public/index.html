@@ -34,6 +34,9 @@
         <button class="nav-btn" data-tab="unit10" id="tab-btn-unit10">
           <span class="nav-icon">🍜</span> Unit 10
         </button>
+        <button class="nav-btn" data-tab="unit14" id="tab-btn-unit14">
+          <span class="nav-icon">🙇</span> Unit 14
+        </button>
         <button class="nav-btn" data-tab="art" id="tab-btn-art">
           <span class="nav-icon">🎨</span> Art library
         </button>
@@ -508,6 +511,29 @@
         </div>
       </div>
     </section>
+    <section id="tab-unit14" class="tab-content">
+      <div class="u10-header">
+        <div>
+          <h2 class="section-title">2B Unit 14 workbook</h2>
+          <p class="section-desc">The exercise pages behind the study desk. Saves write to <code>worlds/unit14-workbook.json</code>; the game reloads them on the next visit to the desk. Save refuses data the page could not render and tells you which field.</p>
+        </div>
+        <div class="u14-actions">
+          <span id="u14-dirty" class="u14-dirty"></span>
+          <button type="button" class="btn btn-secondary btn-sm" id="u14-add-exercise">+ Add exercise</button>
+          <button type="button" class="btn btn-primary btn-sm" id="u14-save">Save workbook</button>
+        </div>
+      </div>
+
+      <div class="u14-layout">
+        <div class="card widget-card u14-side">
+          <h3 class="widget-title">Exercises</h3>
+          <p class="section-desc">The learner picks one of these and does it on its own screen.</p>
+          <div id="u14-list" class="u14-list"></div>
+        </div>
+        <div id="u14-form" class="u14-main"></div>
+      </div>
+    </section>
+
     <section id="tab-art" class="tab-content">
       <div class="dashboard-header">
         <div>
@@ -604,6 +630,7 @@
   <script src="js/levels.js"></script>
   <script src="js/vocab.js"></script>
   <script src="js/world.js"></script>
+  <script src="js/workbook.js"></script>
   <script src="js/art.js"></script>
   <script src="js/skins.js"></script>
 </body>

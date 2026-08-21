@@ -1,0 +1,334 @@
+/**
+ * Unit 14 workbook API — read, write, and the refusals that matter.
+ *
+ * The game's renderer assumes things the JSON has to guarantee: answers point at
+ * real box entries, no entry answers two questions, a fill entry carries both
+ * its dictionary and 해요 forms, a dialogue line marks its blank with {}. This
+ * suite is the proof that saving cannot break any of them, because an editor
+ * that can write unrenderable data is worse than no editor.
+ */
+const fs = require('fs');
+const path = require('path');
+const workbookLib = require('../lib/workbook');
+const { makeWriteSandbox, rmSandbox } = require('./sandbox');
+
+const repoRoot = path.resolve(__dirname, '../../');
+
+function assert(condition, message) {
+  if (!condition) throw new Error(`Assertion failed: ${message}`);
+}
+
+// Deep-compare by value: recursively key-sorted JSON, so a difference in key
+// order cannot masquerade as a difference in content.
+function canonical(v) {
+  const walk = (x) => {
+    if (Array.isArray(x)) return x.map(walk);
+    if (x && typeof x === 'object') {
+      return Object.keys(x).sort().reduce((o, k) => { o[k] = walk(x[k]); return o; }, {});
+    }
+    return x;
+  };
+  return JSON.stringify(walk(v));
+}
+
+function refuses(body, rootDir, needle, label) {
+  let msg = null;
+  try {
+    workbookLib.saveWorkbook(body, rootDir);
+  } catch (err) {
+    msg = err.message;
+  }
+  assert(msg !== null, `${label}: should have been refused`);
+  assert(msg.toLowerCase().indexOf(needle.toLowerCase()) >= 0,
+    `${label}: message should mention "${needle}" (got "${msg}")`);
+}
+
+async function runTests() {
+  const startTime = Date.now();
+  let passed = 0;
+  let failed = 0;
+  const testDetails = [];
+
+  const rootDir = makeWriteSandbox(repoRoot);
+
+  async function test(name, fn) {
+    try {
+      await fn();
+      passed++;
+      testDetails.push({ name, passed: true });
+    } catch (err) {
+      failed++;
+      testDetails.push({ name, passed: false, error: err.message });
+      console.error(`  ❌ [FAIL] ${name}: ${err.message}`);
+    }
+  }
+
+  // A known-good book, deep-cloned per test so one mutation cannot leak.
+  const original = workbookLib.getWorkbook(rootDir);
+  const clone = () => JSON.parse(JSON.stringify(original));
+
+  try {
+    await test('Reads the shipped workbook and every type it uses is supported', () => {
+      const book = workbookLib.getWorkbook(rootDir);
+      assert(Array.isArray(book.exercises) && book.exercises.length >= 4, 'at least four exercises');
+      const types = [...new Set(book.exercises.map((e) => e.type))].sort();
+      assert(types.join(',') === 'dialogue,experience,fill,match',
+        `all four types are present (got ${types})`);
+      types.forEach((t) => assert(workbookLib.TYPES.includes(t), `${t} is a supported type`));
+      book.exercises.forEach((e) => {
+        assert(e.items.length >= 4, `${e.no} has at least four questions`);
+        assert(e.items.every((i) => i.why && i.grammar), `${e.section} ${e.no} explains every answer`);
+      });
+    });
+
+    await test('Round-trips unchanged: save then read gives the same exercises', () => {
+      const before = clone();
+      const expectedItems = original.exercises.reduce((n, e) => n + e.items.length, 0);
+      const res = workbookLib.saveWorkbook(before, rootDir);
+      assert(res.exerciseCount === original.exercises.length,
+        `reports ${original.exercises.length} exercises saved`);
+      assert(res.itemCount === expectedItems, `reports ${expectedItems} questions saved (got ${res.itemCount})`);
+      const after = workbookLib.getWorkbook(rootDir);
+      // Key order carries no meaning in JSON, so the comparison is on values.
+      assert(canonical(after.exercises) === canonical(original.exercises),
+        'every exercise survives a round trip unchanged');
+    });
+
+    // ── The per-question type validates on its own axis ──────────────────────
+    await test('The experience type keeps its per-question choices', () => {
+      const book = workbookLib.getWorkbook(rootDir);
+      const g = book.exercises.find((e) => e.type === 'experience');
+      assert(!!g, 'the grammar exercise is present');
+      assert(!g.bank, 'it has no shared box — choices belong to each question');
+      assert(g.items.every((i) => (i.choices || []).length >= 2), 'every question offers a real choice');
+      assert(g.items.every((i) => i.choices.some((c) => c.id === i.answer)),
+        'every answer is one of its own question’s choices');
+      assert(g.items.every((i) => i.art), 'every question names its picture');
+      assert(g.ownLabels && g.ownLabels.yes && g.ownLabels.no,
+        'the two personal answers are labelled');
+    });
+
+    await test('Refuses an experience answer that is not one of its own choices', () => {
+      const book = clone();
+      const g = book.exercises.find((e) => e.type === 'experience');
+      g.items[0].answer = g.items[1].answer;
+      refuses(book, rootDir, 'not one of its choices', 'answer borrowed from another question');
+    });
+
+    await test('Refuses an experience question with nothing to choose between', () => {
+      const one = clone();
+      const g1 = one.exercises.find((e) => e.type === 'experience');
+      g1.items[0].choices = [g1.items[0].choices[0]];
+      refuses(one, rootDir, 'at least two choices', 'a question with a single button');
+      const dup = clone();
+      const g2 = dup.exercises.find((e) => e.type === 'experience');
+      g2.items[0].choices[1].id = g2.items[0].choices[0].id;
+      refuses(dup, rootDir, 'duplicate choice id', 'two choices sharing an id');
+    });
+
+    await test('Refuses an experience example whose answer is not a real form', () => {
+      const book = clone();
+      const g = book.exercises.find((e) => e.type === 'experience');
+      g.example.answer = 'invented';
+      refuses(book, rootDir, "question 1's choices", 'example answer with no matching form');
+    });
+
+    await test('The shipped file is already in canonical form', () => {
+      // Worth asserting on its own: if it were not, the first save from the
+      // admin panel would produce a large reordering diff that hides the one
+      // field the editor actually changed.
+      const raw = fs.readFileSync(path.join(rootDir, workbookLib.WORKBOOK_REL), 'utf8');
+      workbookLib.saveWorkbook(workbookLib.getWorkbook(rootDir), rootDir);
+      const again = fs.readFileSync(path.join(rootDir, workbookLib.WORKBOOK_REL), 'utf8');
+      assert(raw === again, 'saving without editing anything rewrites the file byte for byte');
+    });
+
+    await test('Writes valid JSON with a trailing newline', () => {
+      workbookLib.saveWorkbook(clone(), rootDir);
+      const raw = fs.readFileSync(path.join(rootDir, workbookLib.WORKBOOK_REL), 'utf8');
+      assert(raw.endsWith('\n'), 'file ends with a newline');
+      JSON.parse(raw);
+    });
+
+    await test('Trims whitespace rather than storing it', () => {
+      const book = clone();
+      book.exercises[0].instructionKo = '  spaced out  ';
+      workbookLib.saveWorkbook(book, rootDir);
+      const after = workbookLib.getWorkbook(rootDir);
+      assert(after.exercises[0].instructionKo === 'spaced out', 'the stored value is trimmed');
+      workbookLib.saveWorkbook(clone(), rootDir);
+    });
+
+    // ── The refusals ─────────────────────────────────────────────────────────
+    await test('Refuses an answer that is not in the box', () => {
+      const book = clone();
+      book.exercises[0].items[0].answer = 'does_not_exist';
+      refuses(book, rootDir, 'not in the box', 'dangling answer');
+    });
+
+    await test('Refuses one entry answering two questions', () => {
+      const book = clone();
+      book.exercises[0].items[1].answer = book.exercises[0].items[0].answer;
+      refuses(book, rootDir, 'answers more than one question', 'duplicate answer');
+    });
+
+    await test('Refuses the worked example being offered as an answer too', () => {
+      const book = clone();
+      const spent = book.exercises[0].bank.find((c) => c.usedByExample);
+      book.exercises[0].items[0].answer = spent.id;
+      refuses(book, rootDir, 'worked example', 'example reused as an answer');
+    });
+
+    await test('Refuses more questions than pickable entries', () => {
+      const book = clone();
+      const ex = book.exercises[0];
+      ex.items.push({ n: 5, answer: ex.items[0].answer, stemKo: 'x', why: 'x', grammar: 'x' });
+      refuses(book, rootDir, 'answers more than one question', 'fifth question with no spare entry');
+      // And with a distinct-but-absent answer, the count check is what bites.
+      ex.items[4].answer = 'ghost';
+      refuses(book, rootDir, 'not in the box', 'fifth question pointing nowhere');
+    });
+
+    await test('Refuses a fill entry missing its 해요 form', () => {
+      const book = clone();
+      const ex = book.exercises.find((e) => e.type === 'fill');
+      delete ex.bank[1].polite;
+      refuses(book, rootDir, 'conjugated', 'fill entry with no polite form');
+    });
+
+    await test('Refuses a dialogue line with no {} placeholder', () => {
+      const book = clone();
+      const ex = book.exercises.find((e) => e.type === 'dialogue');
+      ex.items[0].aKo = '여기는 금연입니다.';
+      refuses(book, rootDir, '{}', 'dialogue line with nowhere to put the answer');
+    });
+
+    await test('Refuses a dialogue with no reply for B', () => {
+      const book = clone();
+      const ex = book.exercises.find((e) => e.type === 'dialogue');
+      ex.reply = '';
+      refuses(book, rootDir, "reply", 'dialogue missing B');
+    });
+
+    await test('Refuses an unknown exercise type', () => {
+      const book = clone();
+      book.exercises[0].type = 'crossword';
+      refuses(book, rootDir, 'type must be one of', 'unsupported type');
+    });
+
+    await test('Refuses duplicate exercise ids and duplicate box ids', () => {
+      const dupEx = clone();
+      dupEx.exercises[1].id = dupEx.exercises[0].id;
+      refuses(dupEx, rootDir, 'duplicate id', 'two exercises sharing an id');
+      const dupChip = clone();
+      dupChip.exercises[0].bank[1].id = dupChip.exercises[0].bank[0].id;
+      refuses(dupChip, rootDir, 'duplicate box id', 'two entries sharing an id');
+    });
+
+    await test('Refuses a question with no explanation', () => {
+      const noWhy = clone();
+      noWhy.exercises[0].items[0].why = '';
+      refuses(noWhy, rootDir, 'why', 'question with no reason given');
+      const noGram = clone();
+      noGram.exercises[0].items[2].grammar = '   ';
+      refuses(noGram, rootDir, 'grammar', 'question with no grammar note');
+    });
+
+    await test('Refuses two worked examples in one exercise', () => {
+      const book = clone();
+      book.exercises[0].bank[1].usedByExample = true;
+      refuses(book, rootDir, 'only one entry', 'two circled examples');
+    });
+
+    await test('Refuses an empty or absent exercises array', () => {
+      refuses({ exercises: [] }, rootDir, 'at least one exercise', 'empty book');
+      refuses({}, rootDir, 'exercises array', 'book with no exercises key');
+      refuses(null, rootDir, 'must be an object', 'null body');
+    });
+
+    await test('Refuses an exercise with no questions or a one-entry box', () => {
+      const noItems = clone();
+      noItems.exercises[0].items = [];
+      refuses(noItems, rootDir, 'at least one question', 'exercise with no questions');
+      const thinBank = clone();
+      thinBank.exercises[1].bank = [thinBank.exercises[1].bank[0]];
+      refuses(thinBank, rootDir, 'at least two entries', 'exercise with a one-entry box');
+    });
+
+    await test('A refused save leaves the file untouched', () => {
+      const good = workbookLib.getWorkbook(rootDir);
+      const bad = clone();
+      bad.exercises[0].items[0].answer = 'nope';
+      try { workbookLib.saveWorkbook(bad, rootDir); } catch (_) { /* expected */ }
+      const after = workbookLib.getWorkbook(rootDir);
+      assert(JSON.stringify(after) === JSON.stringify(good), 'the workbook on disk did not change');
+    });
+
+    await test('Accepts a genuinely new exercise', () => {
+      const book = clone();
+      book.exercises.push({
+        id: 'u14-vocab-4',
+        type: 'match',
+        section: '어휘',
+        no: '연습 4',
+        instructionKo: '알맞은 것끼리 연결해 보세요.',
+        bank: [
+          { id: 'x', ko: '가지 마세요.', mark: '①' },
+          { id: 'y', ko: '오지 마세요.', mark: '②' }
+        ],
+        items: [
+          { n: 1, stemKo: '위험할 때', answer: 'x', en: 'when it is dangerous', why: 'because it is dangerous', grammar: '가다 → 가지 마세요' },
+          { n: 2, stemKo: '바쁠 때', answer: 'y', en: 'when busy', why: 'because they are busy', grammar: '오다 → 오지 마세요' }
+        ]
+      });
+      const res = workbookLib.saveWorkbook(book, rootDir);
+      assert(res.exerciseCount === original.exercises.length + 1, "one more exercise is stored");
+      const after = workbookLib.getWorkbook(rootDir);
+      const added = after.exercises.find((e) => e.id === 'u14-vocab-4');
+      assert(!!added && added.items.length === 2, 'the new exercise round-trips');
+      assert(added.sectionEn === 'Vocabulary', 'omitted optional fields get sane defaults');
+      workbookLib.saveWorkbook(clone(), rootDir);
+    });
+
+    await test('The game and the editor agree on where the file lives', () => {
+      assert(workbookLib.WORKBOOK_REL.replace(/\\/g, '/') === 'worlds/unit14-workbook.json',
+        'lib writes worlds/unit14-workbook.json');
+      const ui = fs.readFileSync(path.join(repoRoot, 'js', 'ui.js'), 'utf8');
+      assert(ui.indexOf("'/worlds/unit14-workbook.json'") >= 0, 'the game reads the same path');
+      const server = fs.readFileSync(path.join(repoRoot, 'admin', 'server.js'), 'utf8');
+      assert(server.indexOf("'/api/unit14/workbook'") >= 0, 'the API exposes it');
+      assert(workbookLib.TYPES.join(",") === "fill,match,dialogue,experience", 'the type list is the shared contract');
+      // Every type the data uses must be a type the renderer knows.
+      workbookLib.TYPES.forEach((t) => {
+        assert(ui.indexOf("'" + t + "'") >= 0, `js/ui.js renders the ${t} type`);
+      });
+    });
+  } finally {
+    rmSandbox(rootDir);
+  }
+
+  const duration = Date.now() - startTime;
+  return {
+    suiteName: 'Unit 14 Workbook API (test_unit14_workbook.js)',
+    total: passed + failed,
+    passed,
+    failed,
+    duration,
+    testDetails
+  };
+}
+
+if (require.main === module) {
+  runTests().then((result) => {
+    console.log(`\n====================================================`);
+    console.log(`  ${result.suiteName}`);
+    console.log(`  Passed: ${result.passed}/${result.total} | Duration: ${result.duration}ms`);
+    console.log(`====================================================\n`);
+    process.exit(result.failed > 0 ? 1 : 0);
+  }).catch((err) => {
+    console.error('Fatal error running test_unit14_workbook:', err);
+    process.exit(1);
+  });
+}
+
+module.exports = { runTests };

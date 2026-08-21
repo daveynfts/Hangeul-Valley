@@ -5,6 +5,7 @@ const testFrontendAssets = require('./test_frontend_assets');
 const testEdgeCases = require('./test_edge_cases');
 const testVercelContract = require('./test_vercel_contract');
 const testCorsOrigin = require('./test_cors_origin');
+const testUnit14Workbook = require('./test_unit14_workbook');
 
 function padRight(str, len) {
   str = String(str);
@@ -35,7 +36,8 @@ async function runAllSuites() {
     { label: 'Frontend Assets & UI Integrity', module: testFrontendAssets },
     { label: 'Edge Cases & Data Integrity', module: testEdgeCases },
     { label: 'Vercel vs Express GET contract', module: testVercelContract },
-    { label: 'CORS & bind hardening', module: testCorsOrigin }
+    { label: 'CORS & bind hardening', module: testCorsOrigin },
+    { label: 'Unit 14 Workbook API', module: testUnit14Workbook }
   ];
 
   const results = [];
