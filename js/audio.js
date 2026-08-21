@@ -102,9 +102,12 @@ class ChiptuneSynthEngine {
 const ChiptuneSynth = new ChiptuneSynthEngine();
 function playChiptuneSFX(type) { ChiptuneSynth.play(type); }
 if (typeof window !== 'undefined') {
-  const unlockAudio = () => { ChiptuneSynth.init(); window.removeEventListener('pointerdown', unlockAudio); window.removeEventListener('click', unlockAudio); };
-  window.addEventListener('pointerdown', unlockAudio);
-  window.addEventListener('click', unlockAudio);
+  const unlockAudio = () => {
+    ChiptuneSynth.init();
+    if (typeof KoreanTTS !== 'undefined' && KoreanTTS.unlock) KoreanTTS.unlock();
+  };
+  window.addEventListener('pointerdown', unlockAudio, { capture: true });
+  window.addEventListener('click', unlockAudio, { capture: true });
 }
 
 // ═══════════════ KOREAN PRONUNCIATION (Web Speech API) ═══════════════════════
@@ -136,28 +139,33 @@ const KoreanTTS = {
     } catch {}
   },
 
+  _pickVoice(voices) {
+    const list = voices || [];
+    const lang = v => (v.lang || '').replace(/_/g, '-').toLowerCase();
+    const label = v => ((v.name || '') + ' ' + (v.lang || '')).toLowerCase();
+    return list.find(v => lang(v) === 'ko-kr')
+      || list.find(v => lang(v).startsWith('ko'))
+      || list.find(v => /korean|heami|google 한국|yuna|sora/.test(label(v)))
+      || null;
+  },
+
   // getVoices() is populated asynchronously and starts out empty in Chrome, so this
   // runs on load and again on voiceschanged.
   refreshVoice() {
     if (!this.supported()) return;
     const voices = window.speechSynthesis.getVoices() || [];
     if (!voices.length) return;
-    this._voice =
-      voices.find(v => v.lang === 'ko-KR') ||
-      voices.find(v => (v.lang || '').toLowerCase().startsWith('ko')) ||
-      null;
+    this._voice = this._pickVoice(voices);
     this._ready = true;
     if (!this._voice && !this._warned) {
       this._warned = true;
-      console.info('[TTS] No Korean voice installed — pronunciation playback disabled.');
+      console.info('[TTS] No Korean voice installed — speaking with lang=ko-KR anyway.');
     }
     this._markAvailability();
-    if (this._voice && this._pendingSpeak) {
+    if (this._pendingSpeak) {
       const queued = this._pendingSpeak;
       this._pendingSpeak = null;
       this.speak(queued);
-    } else if (voices.length && !this._voice) {
-      this._pendingSpeak = null;
     }
   },
 
@@ -182,41 +190,56 @@ const KoreanTTS = {
     }
   },
 
+  // First user tap wakes Chrome's voice list and unsticks a paused synth. Must stay
+  // inside the gesture — a delayed speak() is dropped as if it had no audio permission.
+  unlock() {
+    if (!this.supported()) return;
+    try { window.speechSynthesis.getVoices(); } catch {}
+    this.refreshVoice();
+    try { if (window.speechSynthesis.paused) window.speechSynthesis.resume(); } catch {}
+  },
+
   _utterance(text, rate) {
     const u = new SpeechSynthesisUtterance(String(text).normalize('NFC'));
-    if (this._voice) u.voice = this._voice;
     u.lang = (this._voice && this._voice.lang) || 'ko-KR';
+    if (this._voice) u.voice = this._voice;
     u.rate = rate;
     u.pitch = 1;
+    u.volume = 1;
+    u.onerror = (ev) => {
+      const err = ev && ev.error;
+      if (!err || err === 'interrupted' || err === 'canceled') return;
+      console.warn('[TTS] utterance error:', err);
+      if (typeof showToast === 'function') {
+        showToast('🔇 Korean voice failed' + (err === 'not-allowed' ? ' — click Hear again' : ''), 2600);
+      }
+    };
     return u;
   },
 
-  // Chrome drops speak() when it runs in the same turn as cancel(), and a paused
-  // synth stays silent until resume(). Both show up as "phase 2 listening plays nothing".
-  _enqueue(utterances) {
+  // Speak in the current turn. setTimeout after cancel() loses the click gesture in
+  // Chrome, which is why Hear again showed up but played silence.
+  _speakNow(utterances) {
     const synth = window.speechSynthesis;
-    this._clearSpeakTimer();
-    try { if (synth.paused) synth.resume(); } catch {}
-    try { synth.cancel(); } catch {}
     const list = Array.isArray(utterances) ? utterances : [utterances];
-    this._speakTimer = setTimeout(() => {
-      this._speakTimer = null;
-      try { if (synth.paused) synth.resume(); } catch {}
-      list.forEach((u) => synth.speak(u));
-    }, 60);
+    try { if (synth.paused) synth.resume(); } catch {}
+    if (synth.speaking || synth.pending) {
+      try { synth.cancel(); } catch {}
+    }
+    list.forEach((u) => synth.speak(u));
+    try { synth.resume(); } catch {}
   },
 
   // rate defaults slow: learners need the syllable boundaries, not native tempo.
-  speak(text, { rate = 0.85 } = {}) {
-    if (!this.enabled || !this.supported() || !text) return false;
-    if (!this.isAvailable()) {
-      this.refreshVoice();
-      this._pendingSpeak = String(text);
-      return false;
-    }
+  // `force` is for explicit buttons (Hear again): HUD mute only blocks auto-play.
+  speak(text, { rate = 0.85, force = false } = {}) {
+    if (!this.supported() || !text) return false;
+    if (!this.enabled && !force) return false;
     this._pendingSpeak = null;
+    this._clearSpeakTimer();
+    this.unlock();
     try {
-      this._enqueue(this._utterance(text, rate));
+      this._speakNow(this._utterance(text, rate));
       return true;
     } catch (e) {
       console.warn('[TTS] speak failed:', e);
@@ -225,16 +248,19 @@ const KoreanTTS = {
   },
 
   // Syllable-by-syllable, for when the learner wants the word broken apart.
-  spell(text) {
-    if (!this.enabled || !this.isAvailable() || !text) return false;
+  spell(text, { force = false } = {}) {
+    if (!this.supported() || !text) return false;
+    if (!this.enabled && !force) return false;
+    this.unlock();
     const syls = String(text).normalize('NFC').split('').filter(c => {
       const n = c.charCodeAt(0);
       return n >= 0xac00 && n <= 0xd7a3;
     });
-    if (!syls.length) return this.speak(text);
+    if (!syls.length) return this.speak(text, { force });
     this._pendingSpeak = null;
+    this._clearSpeakTimer();
     try {
-      this._enqueue(syls.map((s) => this._utterance(s, 0.7)));
+      this._speakNow(syls.map((s) => this._utterance(s, 0.7)));
       return true;
     } catch (e) {
       console.warn('[TTS] spell failed:', e);
@@ -252,7 +278,7 @@ const KoreanTTS = {
 
 // Convenience wrappers used by the UI.
 function speakKorean(text, opts) { return KoreanTTS.speak(text, opts); }
-function spellKorean(text) { return KoreanTTS.spell(text); }
+function spellKorean(text, opts) { return KoreanTTS.spell(text, opts); }
 
 // Reflect the persisted mute state on the HUD button. Purely cosmetic, and it runs at
 // load time, so a partial DOM (the Node test harnesses stub one) must never break boot.

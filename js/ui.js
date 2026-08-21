@@ -560,14 +560,14 @@ function revealQuizHint(tier){
     if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 to hear the word!'); return; }
     currentQuizMeta.paidHints++;
     const ko = currentWord.ko;
-    speakKorean(ko);
+    speakKorean(ko, { force: true });
     // The word is embedded rather than read from `currentWord` at click time: the quiz
     // may have moved on, and inline handlers should not depend on mutable globals.
     box.innerHTML = `🔊 <b>Listen:</b>
       <button type="button" class="speak-btn" data-ko="${ko}">▶ Again</button>
       <button type="button" class="speak-btn" data-ko="${ko}" data-spell="1">🐢 Syllable by syllable</button>`;
     box.querySelectorAll('.speak-btn').forEach(b => b.addEventListener('click', () =>
-      b.dataset.spell ? spellKorean(b.dataset.ko) : speakKorean(b.dataset.ko)));
+      b.dataset.spell ? spellKorean(b.dataset.ko, { force: true }) : speakKorean(b.dataset.ko, { force: true })));
   } else if(tier === 'fact'){
     if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 for the origin hint!'); return; }
     currentQuizMeta.paidHints++;
@@ -869,7 +869,13 @@ function bindListenReplay(word, show){
     replay.textContent = '▶ Hear again';
     box.appendChild(replay);
   }
-  replay.onclick = () => speakKorean(word.ko);
+  replay.onclick = (ev) => {
+    if (ev) ev.stopPropagation();
+    const ok = speakKorean(word.ko, { force: true });
+    if (!ok && typeof showToast === 'function') {
+      showToast('🔇 Could not play Korean audio on this device.', 2600);
+    }
+  };
   box.classList.toggle('hidden', !show);
 }
 
@@ -896,7 +902,7 @@ function applyQuizMode(word, phase, plot){
     qText.textContent = 'What does this word mean?';
     $('quiz-ko-word').textContent = word.ko;
     const speak = $('quiz-ko-speak');
-    if (speak) speak.onclick = () => speakKorean(word.ko);
+    if (speak) speak.onclick = () => speakKorean(word.ko, { force: true });
     speakKorean(word.ko);          // free here: the spelling is already visible
   } else {
     qText.textContent = 'Listen — which word was that?';
@@ -1880,7 +1886,7 @@ function renderVocabCards() {
     // Free here: the vocab book already shows the answer, so audio adds nothing to give away.
     div.querySelector('.vc-speak').addEventListener('click', (e) => {
       e.stopPropagation();          // don't also open the fun-fact modal
-      speakKorean(w.ko);
+      speakKorean(w.ko, { force: true });
     });
     div.addEventListener('click', () => showVocabFunFact(w));
     vocabGrid.appendChild(div);
