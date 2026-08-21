@@ -57,6 +57,7 @@ function paintHudIcons() {
     });
   });
   if (typeof syncTTSButton === 'function') syncTTSButton();
+  if (typeof updateQuestHudBadge === 'function') updateQuestHudBadge();
 }
 
 if (typeof document !== 'undefined') {

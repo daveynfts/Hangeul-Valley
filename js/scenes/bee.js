@@ -275,6 +275,7 @@ class BeeScene extends Phaser.Scene {
     if (typeof addItemToInventory === 'function') {
       addItemToInventory('honey', totalHoney);
     }
+    if (typeof checkQuestProgress === 'function') checkQuestProgress('bee', { count: 1 });
     if (typeof showToast === 'function') {
       showToast('🍯 + ' + totalHoney + ' Honey added to inventory!');
     }

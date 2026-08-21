@@ -104,6 +104,7 @@ window.onMemoryCardClick = function(idx, cardEl){
         
         if(matchedPairs === 8){
            const reward = Math.max(15, 60 - memoryFlips);
+           if (typeof checkQuestProgress === 'function') checkQuestProgress('memory', { count: 1 });
            setTimeout(()=>{
              addGold(reward);
              showToast(`🎉 You matched all cards! +${reward} Gold!`);

@@ -381,7 +381,10 @@ function migrateSaveData(d) {
       daily: [],
       weekly: [],
       lastDailyReset: 0,
-      lastWeeklyReset: 0
+      lastWeeklyReset: 0,
+      dailyKey: '',
+      weeklyKey: '',
+      quizStreakToday: 0
     };
     data.inventory = data.inventory || { maxSlots: 20, ingredients: { "배추": 3, "무": 2, "파": 2, "고추": 1, "마늘": 2, "쌀": 3, "콩": 1 }, seeds: {}, scrolls: 0, cookedDishes: {} };
     data.inventory.maxSlots = typeof data.inventory.maxSlots === 'number' ? data.inventory.maxSlots : 20;
@@ -659,6 +662,7 @@ function applySave(d){
   }
 
   initQuestState();
+  if (typeof updateQuestHudBadge === 'function') updateQuestHudBadge();
   updateCurrencyHUD();
   updateRankHUD();
   if (sceneRef && typeof sceneRef.refreshPlotAccess === 'function') sceneRef.refreshPlotAccess();

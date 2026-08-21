@@ -161,6 +161,7 @@ function updateHUD() {
   }
   if(pbFill) pbFill.style.width = learnedPct + '%';
   updateGoldHUD();
+  if (typeof updateQuestHudBadge === 'function') updateQuestHudBadge();
 }
 
 // ═══════════════ LEVEL SELECT ════════════════════════════════════════════════
@@ -301,6 +302,7 @@ function closeModalById(overlayId) {
   else if (overlayId === 'level-select-overlay') hideLevelSelect();
   // Needs its own branch: this overlay is hidden by the .hidden class, and the generic
   // fallback below only clears .visible, which would leave it on screen after Escape.
+  else if (overlayId === 'quest-overlay') window.closeQuestOverlay();
   else if (overlayId === 'progress-overlay') window.closeProgressOverlay();
   else if (overlayId === 'taste-overlay') window.closeTasteGame();
   else if (overlayId === 'desk-quiz-overlay') window.closeDeskQuiz();
@@ -615,6 +617,14 @@ function settleQuizAdvance(){
   if (typeof run === 'function') run();
 }
 function showQuizSuccess({ message, ko, en, continueLabel, delay, onDone }){
+  if (typeof checkQuestProgress === 'function') {
+    checkQuestProgress('quiz');
+    if (typeof currentQuizMode !== 'undefined' && currentQuizMode === 'listen') checkQuestProgress('listen');
+    if (typeof currentPhase === 'number') {
+      if (currentPhase === 1) checkQuestProgress('plant');
+      else if (currentPhase === 2) checkQuestProgress('water');
+    }
+  }
   pendingQuizAdvance = onDone;
   const box = $('quiz-result');
   const art = $('quiz-result-art');
@@ -961,6 +971,7 @@ function answerChoice(opt, btn){
     });
   } else {
     playChiptuneSFX('quiz_wrong');
+    if (typeof checkQuestProgress === 'function') checkQuestProgress('miss');
     currentQuizMeta.attempts++;
     feedbackText.textContent = `❌ It's ${currentWord.ko} — ${currentWord.en}`;
     feedbackText.className = '';
@@ -1048,6 +1059,7 @@ function submitAnswer(){
     });
   } else {
     playChiptuneSFX('quiz_wrong');
+    if (typeof checkQuestProgress === 'function') checkQuestProgress('miss');
     // Counts toward the grade even if the next attempt succeeds — needing a retry is
     // exactly the signal SM-2's "Hard" is meant to capture.
     currentQuizMeta.attempts++;
@@ -1640,7 +1652,10 @@ function answerTaste(ok, btn) {
       if (tasteState.i >= tasteState.queue.length) tasteState.mode = 'hotter';
     } else if (tasteState.mode === 'hotter') {
       tasteState.hi += 1;
-      if (tasteState.hi >= tasteState.hotter.length) tasteState.mode = 'done';
+      if (tasteState.hi >= tasteState.hotter.length) {
+        tasteState.mode = 'done';
+        if (typeof checkQuestProgress === 'function') checkQuestProgress('taste', { count: 1 });
+      }
     }
     renderTasteRound();
   }, 650);
@@ -1730,6 +1745,7 @@ function settleDeskSession() {
   const after = addPlayerXp(xp);
   st.gain = { xp: xp, leveled: after.leveled, level: after.level, remain: after.xp, need: after.need };
   if (st.score === total && total) addHonor(2);
+  if (typeof checkQuestProgress === 'function') checkQuestProgress('desk', { count: 1 });
   persistSave();
   updateRankHUD();
 }
