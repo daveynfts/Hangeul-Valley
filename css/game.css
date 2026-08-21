@@ -1598,74 +1598,121 @@
     /* ── QUEST LOG OVERLAY ────────────────────────────────────────────────── */
     #quest-overlay {
       position: fixed; inset: 0; z-index: 880; display: none;
-      background: rgba(10, 15, 30, 0.88); backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+      background: var(--farm-veil);
+      backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
       align-items: center; justify-content: center; animation: fadeIn .2s;
     }
     #quest-overlay.visible { display: flex; }
     #quest-panel {
-      background: rgba(15, 23, 42, 0.94);
-      border: 2px solid var(--neon-gold); border-radius: 20px; padding: 24px;
-      max-width: 760px; width: 94%; max-height: 88vh; overflow-y: auto;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-gold), 0 20px 60px rgba(0,0,0,.9);
-      position: relative;
+      background: linear-gradient(180deg, #f6deaa, #e8c07a);
+      border: 4px solid #8b5a2b; border-radius: 14px;
+      max-width: 640px; width: 94%; max-height: 88vh; overflow: hidden;
+      box-shadow: 0 0 0 3px #4a2a0d, inset 0 0 0 2px #c4893a, 0 18px 40px rgba(0,0,0,.45);
+      color: var(--ink); display: flex; flex-direction: column;
     }
     #quest-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding-bottom: 14px; border-bottom: 1.5px solid rgba(245, 158, 11, 0.3); margin-bottom: 16px;
+      padding: 10px 14px; background: #fff3d6;
+      border-bottom: 2px dashed #c4893a; flex-shrink: 0;
     }
-    #quest-title { font-family: 'Press Start 2P', monospace; font-size: 16px; color: var(--neon-gold); }
-    #quest-close-btn {
-      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff; border-radius: 8px; padding: 4px 12px; font-size: 16px; cursor: pointer; transition: all .15s;
+    #quest-title {
+      font-family: 'Press Start 2P', monospace; font-size: 11px; color: #4a2a0d;
+      display: inline-flex; align-items: center; gap: 8px;
     }
-    #quest-close-btn:hover { background: rgba(244, 63, 94, 0.3); border-color: var(--neon-pink); }
-    
-    .quest-tabs { display: flex; gap: 10px; margin-bottom: 18px; }
+    #quest-body { padding: 14px 16px 18px; overflow-y: auto; }
+    .quest-tabs { display: flex; gap: 8px; margin-bottom: 10px; }
     .quest-tab-btn {
-      flex: 1; padding: 10px 8px; background: rgba(30, 41, 59, 0.7);
-      border: 1.5px solid rgba(245, 158, 11, 0.3); border-radius: 10px;
-      color: #cbd5e1; font-family: 'Press Start 2P', monospace; font-size: 10px;
-      cursor: pointer; transition: all .15s; text-align: center;
+      flex: 1; padding: 8px 6px; background: #fff8e8;
+      border: 2px solid #8b5a2b; border-radius: 10px;
+      color: #5b3412; font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 800;
+      cursor: pointer; transition: background .15s, border-color .15s, color .15s;
+      text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     }
     .quest-tab-btn.active {
-      background: rgba(245, 158, 11, 0.2); border-color: var(--neon-gold); color: #fff;
-      box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+      background: #4a2a0d; border-color: #4a2a0d; color: #fff8e8;
     }
-    .quest-tab-btn:hover { border-color: var(--neon-gold); }
+    .quest-tab-btn:hover { border-color: #4a2a0d; }
+    .quest-tab-count {
+      min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px;
+      background: #dc2626; color: #fff; font-size: 11px; line-height: 18px; font-weight: 800;
+    }
+    .quest-tab-btn.active .quest-tab-count { background: #fbbf24; color: #4a2a0d; }
+    #quest-meta {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .quest-meta-line { font-size: 12px; font-weight: 700; color: #5b3412; }
+    .quest-claim-all {
+      background: #166534; border: 2px solid #14532d; color: #ecfdf5;
+      border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 800; cursor: pointer;
+    }
+    .quest-claim-all:hover { filter: brightness(1.08); }
 
-    .quest-list { display: flex; flex-direction: column; gap: 14px; }
+    .quest-list { display: flex; flex-direction: column; gap: 10px; }
+    .quest-empty { text-align: center; padding: 24px 8px; font-weight: 700; color: #5b3412; }
     .quest-card {
-      background: rgba(30, 41, 59, 0.6); border: 1.5px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px;
-      transition: transform .15s, border-color .15s;
+      background: #fff8e8; border: 2px solid #8b5a2b;
+      border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
     }
-    .quest-card.completed { border-color: var(--neon-green); background: rgba(15, 35, 20, 0.6); }
-    .quest-card-header { display: flex; justify-content: space-between; align-items: center; }
-    .quest-card-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: #fff; }
+    .quest-card.current { border-color: #b45309; box-shadow: inset 0 0 0 1px #fbbf24; }
+    .quest-card.ready { border-color: #16a34a; background: #f3fce8; }
+    .quest-card.completed { border-color: #166534; background: #ecfdf3; opacity: .92; }
+    .quest-card.locked { opacity: .55; }
+    .quest-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .quest-card-title-wrap { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .quest-card-icon { font-size: 20px; line-height: 1; flex-shrink: 0; }
+    .quest-card-title { font-size: 15px; font-weight: 800; color: #2a1a0a; line-height: 1.25; }
+    .quest-card-badges { display: flex; align-items: center; gap: 6px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+    .quest-card-tag {
+      font-size: 10px; font-weight: 800; letter-spacing: .4px; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 999px; background: #f6deaa; color: #5b3412; border: 1px solid #c4893a;
+    }
     .quest-card-badge {
-      font-family: 'Press Start 2P', monospace; font-size: 9px; padding: 3px 8px; border-radius: 6px;
-      background: rgba(245, 158, 11, 0.15); border: 1px solid var(--neon-gold); color: var(--neon-gold);
+      font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px;
+      background: #fff3d6; border: 1px solid #c4893a; color: #4a2a0d;
     }
-    .quest-card-desc { font-size: 13px; color: rgba(226, 232, 240, 0.8); font-family: 'Be Vietnam Pro', sans-serif; }
-    
+    .quest-card-badge.ready { background: #dcfce7; border-color: #16a34a; color: #14532d; }
+    .quest-card-badge.claimed { background: #dcfce7; border-color: #166534; color: #14532d; }
+    .quest-card-badge.locked { background: #e8c07a; border-color: #8b5a2b; color: #5b3412; }
+    .quest-card-desc { font-size: 13px; color: #5b3412; font-weight: 600; line-height: 1.4; }
+    .quest-card-how { font-size: 12px; color: #7a4a18; font-weight: 600; line-height: 1.35; }
+    .quest-progress-labels {
+      display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: #5b3412;
+    }
     .quest-progress-bg {
-      width: 100%; height: 12px; background: rgba(0, 0, 0, 0.5); border-radius: 6px; overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.15); position: relative;
+      width: 100%; height: 10px; background: #e8c07a; border-radius: 6px; overflow: hidden;
+      border: 1px solid #8b5a2b;
     }
-    .quest-progress-fill { height: 100%; background: linear-gradient(90deg, var(--neon-gold), #fde047); transition: width .3s ease; }
-    .quest-progress-text { font-family: 'VT323', monospace; font-size: 15px; color: #cbd5e1; text-align: right; }
+    .quest-progress-fill {
+      height: 100%; background: linear-gradient(90deg, #b45309, #fbbf24); transition: width .3s ease;
+    }
+    .quest-progress-fill.full { background: linear-gradient(90deg, #166534, #4ade80); }
 
-    .quest-rewards-row { display: flex; justify-content: space-between; align-items: center; margin-top: 4px; }
-    .quest-reward-tags { display: flex; gap: 10px; font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--neon-gold); }
+    .quest-rewards-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .quest-reward-tags { display: flex; gap: 8px; font-size: 12px; font-weight: 800; color: #4a2a0d; }
+    .quest-claimed-label { font-size: 12px; font-weight: 800; color: #166534; }
     .quest-claim-btn {
-      background: linear-gradient(180deg, var(--neon-green), #16a34a);
-      border: 1.5px solid #86efac; border-radius: 8px; padding: 6px 16px;
-      font-family: 'Press Start 2P', monospace; font-size: 10px; color: #0f172a;
-      cursor: pointer; transition: all .15s; font-weight: bold;
+      background: #166534; border: 2px solid #14532d; border-radius: 8px; padding: 6px 12px;
+      font-size: 12px; font-weight: 800; color: #ecfdf5; cursor: pointer;
     }
-    .quest-claim-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
-    .quest-claim-btn:disabled { opacity: 0.4; cursor: default; }
+    .quest-claim-btn:hover:not(:disabled) { filter: brightness(1.08); }
+    .quest-claim-btn:disabled { background: #c4893a; border-color: #8b5a2b; color: #fff8e8; opacity: .7; cursor: default; }
+
+    #quest-btn { position: relative; }
+    #quest-btn[data-quest-ready]::after {
+      content: attr(data-quest-ready);
+      position: absolute; top: 50%; right: 10px; transform: translateY(-50%);
+      min-width: 16px; height: 16px; padding: 0 4px; border-radius: 999px;
+      background: #dc2626; color: #fff; font-size: 10px; font-weight: 800; line-height: 16px;
+      text-align: center; pointer-events: none;
+    }
+    #hud-more-btn { position: relative; overflow: visible; }
+    #hud-more-btn.has-quest-ready::after {
+      content: '';
+      position: absolute; top: 3px; right: 3px;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #dc2626; border: 1.5px solid #fff8e8; pointer-events: none;
+    }
 
     /* ── SHOP QUIZ GATE OVERLAY ──────────────────────────────────────────── */
     #shop-quiz-overlay {

@@ -2969,7 +2969,7 @@ class FarmScene extends Phaser.Scene {
           addCoins(reward);
           updateVocabBook();
           checkQuestProgress('harvest', { count: 1 });
-          checkQuestProgress('quiz');
+          if (prev === 0) checkQuestProgress('newHarvest', { count: 1 });
 
           const cropIngredients = ['배추', '무', '파', '고추', '마늘', '쌀', '콩', '당근'];
           let ingName;

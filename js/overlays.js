@@ -104,6 +104,7 @@ window.onMemoryCardClick = function(idx, cardEl){
         
         if(matchedPairs === 8){
            const reward = Math.max(15, 60 - memoryFlips);
+           if (typeof checkQuestProgress === 'function') checkQuestProgress('memory', { count: 1 });
            setTimeout(()=>{
              addGold(reward);
              showToast(`🎉 You matched all cards! +${reward} Gold!`);
@@ -1148,9 +1149,7 @@ function updateLeaderboardMetrics() {
 
   // Total Words Mastered — mature under the scheduler (interval >= 21 days), not a
   // harvest tally, which a player could run up in a single session.
-  const masteredCount = (typeof srsData !== 'undefined' && srsData)
-    ? Object.values(srsData).filter(srsIsMature).length
-    : 0;
+  const masteredCount = typeof srsMatureWordCount === 'function' ? srsMatureWordCount() : 0;
 
   leaderboardState.personalBests.totalWordsMastered = masteredCount;
   leaderboardState.personalBests.totalHonor = playerCurrencies?.honor || 0;

@@ -554,7 +554,8 @@ function cancelBossGate() {
 
 // ═══════════════ R2: QUEST SYSTEM ═════════════════════════════════════════════
 let questOverlayOpen = false;
-let activeQuestTab = 'main';
+let activeQuestTab = 'daily';
+let questMetaTimer = null;
 
 function cookedDishCount() {
   const dishes = (typeof inventoryState !== 'undefined' && inventoryState && inventoryState.cookedDishes)
@@ -570,183 +571,574 @@ let questState = {
   daily: [],
   weekly: [],
   lastDailyReset: 0,
-  lastWeeklyReset: 0
+  lastWeeklyReset: 0,
+  dailyKey: '',
+  weeklyKey: '',
+  quizStreakToday: 0
 };
 
 const MAIN_STORYLINE = [
-  { act: 1, id: 'act_1', title: 'Act I: Harvest of Hangeul', desc: 'Harvest 3 ripe words in farm. Learn 80% of Level 1 (Daily Life & People).', target: 3, reqLevel: 0, minPct: 80, rCoins: 100, rGems: 10, rHonor: 50 },
-  { act: 2, id: 'act_2', title: 'Act II: Beast Master', desc: 'Defeat 5 Dungeon beasts. Learn 80% of Level 2 (Food & Dining).', target: 5, reqLevel: 1, minPct: 80, rCoins: 150, rGems: 15, rHonor: 75 },
-  { act: 3, id: 'act_3', title: 'Act III: Kitchen of Hangeul', desc: 'Cook 3 Korean dishes. Learn 80% of Level 4 (Places & Directions).', target: 3, reqLevel: 3, minPct: 80, rCoins: 200, rGems: 20, rHonor: 100 },
-  { act: 4, id: 'act_4', title: 'Act IV: Chromatic Angler', desc: 'Catch 5 fish in Crystal Pond. Learn 80% of Level 3 (Time & Weather).', target: 5, reqLevel: 2, minPct: 80, rCoins: 250, rGems: 25, rHonor: 125 },
-  { act: 5, id: 'act_5', title: 'Act V: Numeric Dominion', desc: 'Score 500+ in Arcade Machine. Learn 80% of Level 6 (Hobbies & Leisure).', target: 500, reqLevel: 5, minPct: 80, rCoins: 300, rGems: 30, rHonor: 150 },
-  { act: 6, id: 'act_6', title: 'Act VI: Grand Sovereign', desc: 'Reach 10 mature words (21-day interval) after learning 80% of Level 1.', target: 10, reqLevel: 0, minPct: 80, rCoins: 500, rGems: 50, rHonor: 300 }
+  { act: 1, id: 'act_1', title: 'Harvest of Hangeul', desc: 'Harvest 3 ripe words on the farm. Learn 80% of Level 1 (Daily Life & People).', target: 3, reqLevel: 0, minPct: 80, rCoins: 100, rGems: 10, rHonor: 50, icon: '🌾' },
+  { act: 2, id: 'act_2', title: 'Beast Master', desc: 'Defeat 5 dungeon beasts. Learn 80% of Level 2 (Food & Dining).', target: 5, reqLevel: 1, minPct: 80, rCoins: 150, rGems: 15, rHonor: 75, icon: '⚔️' },
+  { act: 3, id: 'act_3', title: 'Kitchen of Hangeul', desc: 'Cook 3 Korean dishes. Learn 80% of Level 4 (Places & Directions).', target: 3, reqLevel: 3, minPct: 80, rCoins: 200, rGems: 20, rHonor: 100, icon: '🍳' },
+  { act: 4, id: 'act_4', title: 'Chromatic Angler', desc: 'Catch 5 fish in Crystal Pond. Learn 80% of Level 3 (Time & Weather).', target: 5, reqLevel: 2, minPct: 80, rCoins: 250, rGems: 25, rHonor: 125, icon: '🎣' },
+  { act: 5, id: 'act_5', title: 'Numeric Dominion', desc: 'Score 500+ in the arcade. Learn 80% of Level 6 (Hobbies & Leisure).', target: 500, reqLevel: 5, minPct: 80, rCoins: 300, rGems: 30, rHonor: 150, icon: '🕹️' },
+  { act: 6, id: 'act_6', title: 'Grand Sovereign', desc: 'Reach 10 mature words (21-day interval) after learning 80% of Level 1.', target: 10, reqLevel: 0, minPct: 80, rCoins: 500, rGems: 50, rHonor: 300, icon: '👑' }
 ];
 
+// ── Quest board helpers (pure) ──
+const DAILY_QUEST_COUNT = 5;
+const WEEKLY_QUEST_COUNT = 3;
+const DAILY_QUEST_POOL = [
+  { id: 'd_harvest', kind: 'harvest', icon: '🌾', title: 'Morning Harvest', desc: 'Harvest 3 ripe crops on your farm.', how: 'Walk to a ripe plot and finish the harvest quiz.', tag: 'Farm', target: 3, rCoins: 30, rGems: 2, rHonor: 10 },
+  { id: 'd_basket', kind: 'harvest', icon: '🧺', title: 'Full Basket', desc: 'Harvest 6 ripe crops today.', how: 'Keep cycling plots — plant, water, then harvest.', tag: 'Farm', target: 6, rCoins: 55, rGems: 5, rHonor: 22 },
+  { id: 'd_plant', kind: 'plant', icon: '🌱', title: 'New Seeds', desc: 'Plant 2 new words on empty plots.', how: 'Use an empty dirt plot and pass the first quiz.', tag: 'Farm', target: 2, rCoins: 25, rGems: 2, rHonor: 8 },
+  { id: 'd_water', kind: 'water', icon: '💧', title: 'Listen & Water', desc: 'Water 3 growing crops (listening quiz).', how: 'Return to a sprout and pass the Water listening quiz.', tag: 'Farm', target: 3, rCoins: 35, rGems: 3, rHonor: 12 },
+  { id: 'd_quiz', kind: 'quiz', icon: '📖', title: 'Study Session', desc: 'Answer 8 farm quizzes correctly.', how: 'Any plant, water, or harvest quiz counts.', tag: 'Study', target: 8, rCoins: 40, rGems: 3, rHonor: 15 },
+  { id: 'd_listen', kind: 'listen', icon: '👂', title: 'Sharp Ears', desc: 'Complete 4 listening quizzes.', how: 'Watering a crop is always a listening quiz.', tag: 'Study', target: 4, rCoins: 40, rGems: 3, rHonor: 15 },
+  { id: 'd_streak', kind: 'streak', mode: 'max', icon: '🔥', title: 'On a Roll', desc: 'Get 5 correct answers in a row.', how: 'A wrong farm quiz resets the streak.', tag: 'Study', target: 5, rCoins: 45, rGems: 4, rHonor: 18 },
+  { id: 'd_new', kind: 'newHarvest', icon: '✨', title: 'Fresh Words', desc: 'Harvest 1 word you have never harvested before.', how: 'Plant a word that is still new in your book.', tag: 'Farm', target: 1, rCoins: 50, rGems: 5, rHonor: 20 },
+  { id: 'd_fish', kind: 'fish', need: 'fishing', icon: '🎣', title: 'Pond Visit', desc: 'Catch 2 fish at Crystal Pond.', how: 'Unlock the dock, then fish at Crystal Pond.', tag: 'Valley', target: 2, rCoins: 40, rGems: 3, rHonor: 12 },
+  { id: 'd_kill', kind: 'kill', need: 'dungeon', icon: '⚔️', title: 'Dungeon Patrol', desc: 'Defeat 3 review beasts in the dungeon.', how: 'Unlock the portal, then clear review minions.', tag: 'Valley', target: 3, rCoins: 45, rGems: 4, rHonor: 15 },
+  { id: 'd_cook', kind: 'cook', icon: '🍳', title: 'Home Cooking', desc: 'Cook 1 Korean dish.', how: 'Open Cooking from the More menu.', tag: 'Kitchen', target: 1, rCoins: 40, rGems: 4, rHonor: 15 },
+  { id: 'd_memory', kind: 'memory', icon: '🃏', title: 'Match Maker', desc: 'Finish one memory-match game.', how: 'Talk to the cat and match every pair.', tag: 'Valley', target: 1, rCoins: 35, rGems: 3, rHonor: 12 },
+  { id: 'd_arcade', kind: 'arcade', need: 'arcade', mode: 'max', icon: '🕹️', title: 'Arcade Cadet', desc: 'Score 150 or more in the arcade.', how: 'Unlock the arcade machine, then play a round.', tag: 'Valley', target: 150, rCoins: 50, rGems: 5, rHonor: 18 },
+  { id: 'd_bee', kind: 'bee', icon: '🐝', title: 'Busy Bee', desc: 'Finish one beehive listening round.', how: 'Tap the beehive on the Valley farm.', tag: 'Valley', target: 1, rCoins: 40, rGems: 3, rHonor: 14 },
+  { id: 'd_desk', kind: 'desk', need: 'desk', icon: '📝', title: 'Study Desk', desc: 'Finish one textbook desk quiz.', how: 'Enter Unit 10 or 14 and use the study desk.', tag: 'World', target: 1, rCoins: 45, rGems: 4, rHonor: 16 },
+  { id: 'd_taste', kind: 'taste', need: 'taste', icon: '😋', title: 'Taste Test', desc: 'Finish the Unit 10 taste minigame.', how: 'Enter Unit 10 and use the taste station.', tag: 'World', target: 1, rCoins: 40, rGems: 4, rHonor: 14 }
+];
+const WEEKLY_QUEST_POOL = [
+  { id: 'w_mature', kind: 'mature', mode: 'max', icon: '🟣', title: 'Master Scholar', desc: 'Reach 5 mature words (21-day review interval).', how: 'Keep reviewing until a word’s interval hits 21 days.', tag: 'Study', target: 5, rCoins: 150, rGems: 15, rHonor: 50 },
+  { id: 'w_cook', kind: 'cook', icon: '🍳', title: 'Kitchen Champion', desc: 'Cook 5 Korean dishes this week.', how: 'Open Cooking from the More menu.', tag: 'Kitchen', target: 5, rCoins: 200, rGems: 20, rHonor: 60 },
+  { id: 'w_fish', kind: 'fish', need: 'fishing', icon: '🎣', title: 'Master Angler', desc: 'Catch 10 fish in Crystal Pond.', how: 'Unlock the dock, then fish at Crystal Pond.', tag: 'Valley', target: 10, rCoins: 180, rGems: 18, rHonor: 55 },
+  { id: 'w_harvest', kind: 'harvest', icon: '🌾', title: 'Week of Harvests', desc: 'Harvest 15 ripe crops this week.', how: 'Any farm harvest counts.', tag: 'Farm', target: 15, rCoins: 160, rGems: 16, rHonor: 50 },
+  { id: 'w_quiz', kind: 'quiz', icon: '📖', title: 'Dedicated Student', desc: 'Answer 25 farm quizzes correctly.', how: 'Plant, water, and harvest quizzes all count.', tag: 'Study', target: 25, rCoins: 170, rGems: 16, rHonor: 55 },
+  { id: 'w_kill', kind: 'kill', need: 'dungeon', icon: '⚔️', title: 'Dungeon Veteran', desc: 'Defeat 12 review beasts.', how: 'Unlock the portal, then clear review minions.', tag: 'Valley', target: 12, rCoins: 180, rGems: 18, rHonor: 55 },
+  { id: 'w_listen', kind: 'listen', icon: '👂', title: 'Ear for Korean', desc: 'Complete 12 listening quizzes.', how: 'Watering a crop is always a listening quiz.', tag: 'Study', target: 12, rCoins: 170, rGems: 16, rHonor: 52 },
+  { id: 'w_desk', kind: 'desk', need: 'desk', icon: '📝', title: 'Textbook Week', desc: 'Finish 3 textbook desk quizzes.', how: 'Enter Unit 10 or 14 and use the study desk.', tag: 'World', target: 3, rCoins: 190, rGems: 18, rHonor: 58 }
+];
+
+function questLocalDayKey(ms) {
+  const d = new Date(ms);
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return d.getFullYear() + '-' + m + '-' + day;
+}
+function questLocalWeekKey(ms) {
+  const d = new Date(ms);
+  const diff = (d.getDay() + 6) % 7;
+  const mon = new Date(d.getFullYear(), d.getMonth(), d.getDate() - diff);
+  return questLocalDayKey(mon.getTime());
+}
+function questHash32(str) {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+function questSeededShuffle(list, seedStr) {
+  const out = list.slice();
+  let h = questHash32(String(seedStr || '0'));
+  for (let i = out.length - 1; i > 0; i--) {
+    h = (Math.imul(h, 1664525) + 1013904223) >>> 0;
+    const j = h % (i + 1);
+    const tmp = out[i];
+    out[i] = out[j];
+    out[j] = tmp;
+  }
+  return out;
+}
+function instantiateQuest(def) {
+  return {
+    id: def.id,
+    kind: def.kind,
+    mode: def.mode || 'add',
+    need: def.need || '',
+    icon: def.icon || '',
+    title: def.title,
+    desc: def.desc,
+    how: def.how || '',
+    tag: def.tag || '',
+    target: def.target,
+    current: 0,
+    rCoins: def.rCoins,
+    rGems: def.rGems,
+    rHonor: def.rHonor,
+    claimed: false
+  };
+}
+function filterQuestPool(pool, flags) {
+  const open = flags || {};
+  return (pool || []).filter(q => !q.need || !!open[q.need]);
+}
+function pickQuestBoard(pool, seedKey, count) {
+  const shuffled = questSeededShuffle(pool, seedKey);
+  const picked = [];
+  const usedKind = Object.create(null);
+  for (let i = 0; i < shuffled.length; i++) {
+    const def = shuffled[i];
+    if (usedKind[def.kind]) continue;
+    usedKind[def.kind] = true;
+    picked.push(instantiateQuest(def));
+    if (picked.length >= count) break;
+  }
+  for (let i = 0; i < shuffled.length && picked.length < count; i++) {
+    if (picked.some(q => q.id === shuffled[i].id)) continue;
+    picked.push(instantiateQuest(shuffled[i]));
+  }
+  return picked;
+}
+function applyQuestEventTo(q, type, data) {
+  if (!q || q.claimed || q.kind !== type) return false;
+  const before = q.current || 0;
+  const payload = data || {};
+  const n = payload.count || 1;
+  if (q.mode === 'max') {
+    const v = payload.total != null ? payload.total : (payload.score != null ? payload.score : 0);
+    q.current = Math.min(q.target, Math.max(before, v));
+  } else {
+    q.current = Math.min(q.target, before + n);
+  }
+  return before < q.target && q.current >= q.target;
+}
+function questIsReady(q) {
+  return !!(q && !q.claimed && (q.current || 0) >= (q.target || 1));
+}
+function questListReadyCount(list) {
+  return (list || []).filter(questIsReady).length;
+}
+function msUntilNextLocalDay(ms) {
+  const d = new Date(ms);
+  const next = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+  return Math.max(0, next.getTime() - ms);
+}
+function msUntilNextLocalWeek(ms) {
+  const d = new Date(ms);
+  const diff = (d.getDay() + 6) % 7;
+  const nextMon = new Date(d.getFullYear(), d.getMonth(), d.getDate() - diff + 7);
+  return Math.max(0, nextMon.getTime() - ms);
+}
+function formatQuestCountdown(ms) {
+  const s = Math.max(0, Math.floor(ms / 1000));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  if (h > 0) return h + 'h ' + m + 'm';
+  return m + 'm';
+}
+function questBoardNeedsRoll(list, pool) {
+  if (!Array.isArray(list) || !list.length) return true;
+  return list.some(q => !q || !q.kind || !pool.some(p => p.id === q.id));
+}
+// ── Quest board helpers end ──
+
 function initQuestState() {
+  if (!questState || typeof questState !== 'object') {
+    questState = {
+      mainStep: 1,
+      mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0, duels: 0 },
+      mainCompleted: [],
+      daily: [],
+      weekly: [],
+      lastDailyReset: 0,
+      lastWeeklyReset: 0,
+      dailyKey: '',
+      weeklyKey: '',
+      quizStreakToday: 0
+    };
+  }
   const now = Date.now();
-  const DAY_MS = 24 * 3600 * 1000;
-  const WEEK_MS = 7 * DAY_MS;
+  const dayKey = questLocalDayKey(now);
+  const weekKey = questLocalWeekKey(now);
 
-  if (!questState.lastDailyReset || now - questState.lastDailyReset > DAY_MS) {
+  const flags = currentQuestNeedFlags();
+  // One effective pool per board, used for *both* the validity check and the re-roll.
+  // Validating a saved board against the unfiltered pool was what let a Fishing or Dungeon
+  // quest that predated the zone gate survive: it was still a known id, so the board looked
+  // healthy and nothing re-rolled until the day or week key turned over.
+  const dailyPool = filterQuestPool(DAILY_QUEST_POOL, flags);
+  const weeklyPool = filterQuestPool(WEEKLY_QUEST_POOL, flags);
+  const dailyEffective = dailyPool.length ? dailyPool : DAILY_QUEST_POOL;
+  const weeklyEffective = weeklyPool.length ? weeklyPool : WEEKLY_QUEST_POOL;
+
+  if (questState.dailyKey !== dayKey || questBoardNeedsRoll(questState.daily, dailyEffective)) {
+    questState.dailyKey = dayKey;
     questState.lastDailyReset = now;
-    questState.daily = [
-      { id: 'dq_1', title: '🌾 Daily Harvest', desc: 'Harvest 3 ripe crops in your farm.', current: 0, target: 3, rCoins: 30, rGems: 2, rHonor: 10, claimed: false },
-      { id: 'dq_2', title: '📖 Daily Scholar', desc: 'Answer 5 SRS review quizzes correctly.', current: 0, target: 5, rCoins: 40, rGems: 3, rHonor: 15, claimed: false },
-      { id: 'dq_3', title: '⚔️ Daily Explorer', desc: 'Defeat 2 monsters or catch 2 fish.', current: 0, target: 2, rCoins: 50, rGems: 5, rHonor: 20, claimed: false }
-    ];
+    questState.quizStreakToday = 0;
+    questState.daily = pickQuestBoard(dailyEffective, 'daily:' + dayKey, DAILY_QUEST_COUNT);
   }
 
-  if (!questState.lastWeeklyReset || now - questState.lastWeeklyReset > WEEK_MS) {
+  if (questState.weeklyKey !== weekKey || questBoardNeedsRoll(questState.weekly, weeklyEffective)) {
+    questState.weeklyKey = weekKey;
     questState.lastWeeklyReset = now;
-    questState.weekly = [
-      { id: 'wq_1', title: '🟣 Master Scholar', desc: 'Master 5 Korean words (harvest count >= 5).', current: 0, target: 5, rCoins: 150, rGems: 15, rHonor: 50, claimed: false },
-      { id: 'wq_2', title: '🍳 Kitchen Champion', desc: 'Cook 5 Korean dishes.', current: 0, target: 5, rCoins: 200, rGems: 20, rHonor: 60, claimed: false },
-      { id: 'wq_3', title: '🎣 Master Angler', desc: 'Catch 10 fish in Crystal Pond.', current: 0, target: 10, rCoins: 180, rGems: 18, rHonor: 55, claimed: false }
-    ];
+    questState.weekly = pickQuestBoard(weeklyEffective, 'weekly:' + weekKey, WEEKLY_QUEST_COUNT);
   }
+
+  const totalMastered = typeof srsMatureWordCount === 'function' ? srsMatureWordCount() : 0;
+  (questState.weekly || []).forEach(function (q) { applyQuestEventTo(q, 'mature', { total: totalMastered }); });
+}
+
+function currentQuestNeedFlags() {
+  const zoneOn = function (key) {
+    if (typeof isZoneUnlocked !== 'function') return false;
+    const chk = isZoneUnlocked(key);
+    return !!(chk && chk.unlocked);
+  };
+  const ownsWorld = function (worldId) {
+    if (!Array.isArray(unlockedLevels) || typeof levelsData === 'undefined' || !levelsData) return false;
+    return unlockedLevels.some(function (i) {
+      return levelsData[i] && levelsData[i].worldId === worldId;
+    });
+  };
+  return {
+    arcade: zoneOn('arcade'),
+    fishing: zoneOn('fishing'),
+    dungeon: zoneOn('dungeon'),
+    desk: ownsWorld('2b-unit-10') || ownsWorld('2b-unit-14'),
+    taste: ownsWorld('2b-unit-10')
+  };
+}
+
+function mainQuestProgress(act) {
+  if (!act) return 0;
+  if (act.act === 1) return questState.mainProgress.harvests || 0;
+  if (act.act === 2) return questState.mainProgress.kills || 0;
+  if (act.act === 3) return cookedDishCount();
+  if (act.act === 4) return questState.mainProgress.fish || 0;
+  if (act.act === 5) return questState.mainProgress.score || 0;
+  if (act.act === 6) return typeof srsMatureWordCount === 'function' ? srsMatureWordCount() : 0;
+  return 0;
+}
+
+function applyQuestEventToAll(type, data) {
+  let becameReady = 0;
+  const titleOf = [];
+  const bump = (q) => {
+    if (applyQuestEventTo(q, type, data)) {
+      becameReady++;
+      titleOf.push(q.title);
+    }
+  };
+  (questState.daily || []).forEach(bump);
+  (questState.weekly || []).forEach(bump);
+  return { becameReady, titles: titleOf };
 }
 
 function checkQuestProgress(type, data = {}) {
   initQuestState();
-  if (type === 'harvest') {
-    questState.mainProgress.harvests += (data.count || 1);
-    questState.daily.forEach(q => { if (q.id === 'dq_1') q.current = Math.min(q.target, q.current + (data.count || 1)); });
-  } else if (type === 'quiz') {
-    questState.daily.forEach(q => { if (q.id === 'dq_2') q.current = Math.min(q.target, q.current + 1); });
-  } else if (type === 'kill') {
-    questState.mainProgress.kills += (data.count || 1);
-    questState.daily.forEach(q => { if (q.id === 'dq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
-  } else if (type === 'fish') {
-    questState.mainProgress.fish += (data.count || 1);
-    questState.daily.forEach(q => { if (q.id === 'dq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
-    questState.weekly.forEach(q => { if (q.id === 'wq_3') q.current = Math.min(q.target, q.current + (data.count || 1)); });
-  } else if (type === 'cook') {
-    questState.weekly.forEach(q => { if (q.id === 'wq_2') q.current = Math.min(q.target, q.current + (data.count || 1)); });
-  } else if (type === 'score') {
-    if (data.score > questState.mainProgress.score) questState.mainProgress.score = data.score;
+  if (type === 'harvest') questState.mainProgress.harvests += (data.count || 1);
+  else if (type === 'kill') questState.mainProgress.kills += (data.count || 1);
+  else if (type === 'fish') questState.mainProgress.fish += (data.count || 1);
+  else if (type === 'score' || type === 'arcade') {
+    const sc = data.score || 0;
+    if (sc > (questState.mainProgress.score || 0)) questState.mainProgress.score = sc;
   }
 
-  // Mature under the scheduler, not "harvested five times".
-  const totalMastered = Object.values(srsData).filter(srsIsMature).length;
-  questState.weekly.forEach(q => { if (q.id === 'wq_1') q.current = Math.min(q.target, totalMastered); });
+  let readyTitles = [];
+  if (type === 'quiz') {
+    readyTitles = readyTitles.concat(applyQuestEventToAll('quiz', data).titles);
+    questState.quizStreakToday = (questState.quizStreakToday || 0) + 1;
+    readyTitles = readyTitles.concat(applyQuestEventToAll('streak', { total: questState.quizStreakToday }).titles);
+  } else if (type === 'miss') {
+    questState.quizStreakToday = 0;
+  } else if (type !== 'honor') {
+    const eventType = type === 'score' ? 'arcade' : type;
+    readyTitles = readyTitles.concat(applyQuestEventToAll(eventType, data).titles);
+  }
+
+  const totalMastered = typeof srsMatureWordCount === 'function' ? srsMatureWordCount() : 0;
+  applyQuestEventToAll('mature', { total: totalMastered });
 
   persistSave();
+  updateQuestHudBadge();
   if (questOverlayOpen) renderQuestList();
+  if (!questOverlayOpen && readyTitles.length && typeof showToast === 'function') {
+    const first = readyTitles[0];
+    const extra = readyTitles.length > 1 ? ' (+' + (readyTitles.length - 1) + ' more)' : '';
+    showToast('📜 Ready to claim: ' + first + extra, 3200);
+  }
+}
+
+function countClaimableQuests() {
+  initQuestState();
+  let n = questListReadyCount(questState.daily) + questListReadyCount(questState.weekly);
+  const act = MAIN_STORYLINE.find(a => a.act === questState.mainStep);
+  if (act && !questState.mainCompleted.includes(act.id)) {
+    const srsPct = typeof calcLevelProgress === 'function' ? calcLevelProgress(act.reqLevel) : 0;
+    if (mainQuestProgress(act) >= act.target && srsPct >= act.minPct) n++;
+  }
+  return n;
+}
+
+function updateQuestHudBadge() {
+  if (typeof document === 'undefined') return;
+  const n = countClaimableQuests();
+  const btn = document.getElementById('quest-btn');
+  if (btn) {
+    if (n > 0) btn.setAttribute('data-quest-ready', String(n));
+    else btn.removeAttribute('data-quest-ready');
+    btn.title = n > 0 ? ('Quest Log — ' + n + ' ready to claim') : 'Quest Log';
+  }
+  const more = document.getElementById('hud-more-btn');
+  if (more) more.classList.toggle('has-quest-ready', n > 0);
+}
+
+function bindQuestOverlayChrome() {
+  const overlay = document.getElementById('quest-overlay');
+  if (!overlay || overlay.getAttribute('data-quest-bound') === '1') return;
+  overlay.setAttribute('data-quest-bound', '1');
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeQuestOverlay();
+  });
 }
 
 function openQuestOverlay() {
-  playChiptuneSFX('click');
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
   initQuestState();
-  questOverlayOpen = playerLocked = true;
-  document.getElementById('quest-overlay').classList.add('visible');
+  bindQuestOverlayChrome();
+  questOverlayOpen = true;
+  if (typeof setModalState === 'function') setModalState('quest-overlay', true);
+  else {
+    playerLocked = true;
+    const el = document.getElementById('quest-overlay');
+    if (el) el.classList.add('visible');
+  }
+  syncQuestTabButtons();
   renderQuestList();
+  if (questMetaTimer) clearInterval(questMetaTimer);
+  questMetaTimer = setInterval(() => { if (questOverlayOpen) renderQuestMeta(); }, 30000);
 }
 
 function closeQuestOverlay() {
-  playChiptuneSFX('click');
-  questOverlayOpen = playerLocked = false;
-  document.getElementById('quest-overlay').classList.remove('visible');
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  questOverlayOpen = false;
+  if (questMetaTimer) { clearInterval(questMetaTimer); questMetaTimer = null; }
+  if (typeof setModalState === 'function') setModalState('quest-overlay', false);
+  else {
+    playerLocked = false;
+    const el = document.getElementById('quest-overlay');
+    if (el) el.classList.remove('visible');
+  }
+}
+
+function syncQuestTabButtons() {
+  ['main', 'daily', 'weekly'].forEach(t => {
+    const btn = document.getElementById('qtab-' + t);
+    if (btn) {
+      btn.classList.toggle('active', t === activeQuestTab);
+      btn.setAttribute('aria-selected', t === activeQuestTab ? 'true' : 'false');
+    }
+  });
 }
 
 function switchQuestTab(tab) {
-  playChiptuneSFX('click');
-  activeQuestTab = tab;
-  ['main', 'daily', 'weekly'].forEach(t => {
-    const btn = document.getElementById(`qtab-${t}`);
-    if (btn) btn.classList.toggle('active', t === tab);
-  });
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  activeQuestTab = tab === 'daily' || tab === 'weekly' ? tab : 'main';
+  syncQuestTabButtons();
   renderQuestList();
+}
+
+function questEl(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text != null) node.textContent = text;
+  return node;
+}
+
+function renderQuestRewards(row, coins, gems, honor) {
+  const tags = questEl('div', 'quest-reward-tags');
+  tags.appendChild(questEl('span', 'quest-reward', '🪙 +' + coins));
+  tags.appendChild(questEl('span', 'quest-reward', '💎 +' + gems));
+  tags.appendChild(questEl('span', 'quest-reward', '🎖️ +' + honor));
+  row.appendChild(tags);
+}
+
+function renderQuestBar(parent, current, target) {
+  const pct = target > 0 ? Math.min(100, Math.floor((current / target) * 100)) : 0;
+  const bg = questEl('div', 'quest-progress-bg');
+  const fill = questEl('div', 'quest-progress-fill');
+  fill.style.width = pct + '%';
+  if (pct >= 100) fill.classList.add('full');
+  bg.appendChild(fill);
+  parent.appendChild(bg);
+  return pct;
+}
+
+function renderQuestMeta() {
+  const meta = document.getElementById('quest-meta');
+  if (!meta) return;
+  meta.innerHTML = '';
+  const now = Date.now();
+  const line = questEl('div', 'quest-meta-line');
+  if (activeQuestTab === 'main') {
+    const step = Math.min(MAIN_STORYLINE.length, questState.mainStep || 1);
+    const done = (questState.mainCompleted || []).length;
+    line.textContent = 'Story  ·  Act ' + step + ' of ' + MAIN_STORYLINE.length + '  ·  ' + done + ' claimed';
+  } else if (activeQuestTab === 'daily') {
+    const list = questState.daily || [];
+    const done = list.filter(q => q.claimed).length;
+    const ready = questListReadyCount(list);
+    line.textContent = done + ' / ' + list.length + ' claimed  ·  resets in ' + formatQuestCountdown(msUntilNextLocalDay(now));
+    if (ready) line.textContent += '  ·  ' + ready + ' ready';
+  } else {
+    const list = questState.weekly || [];
+    const done = list.filter(q => q.claimed).length;
+    const ready = questListReadyCount(list);
+    line.textContent = done + ' / ' + list.length + ' claimed  ·  week resets in ' + formatQuestCountdown(msUntilNextLocalWeek(now));
+    if (ready) line.textContent += '  ·  ' + ready + ' ready';
+  }
+  meta.appendChild(line);
+
+  const list = activeQuestTab === 'daily' ? questState.daily : (activeQuestTab === 'weekly' ? questState.weekly : null);
+  const ready = list ? questListReadyCount(list) : 0;
+  if (ready > 0) {
+    const btn = questEl('button', 'quest-claim-all');
+    btn.type = 'button';
+    btn.textContent = 'Claim all (' + ready + ')';
+    btn.onclick = () => claimReadySideQuests(activeQuestTab);
+    meta.appendChild(btn);
+  }
+
+  const dailyN = document.getElementById('qtab-daily-n');
+  const weeklyN = document.getElementById('qtab-weekly-n');
+  const mainN = document.getElementById('qtab-main-n');
+  const dReady = questListReadyCount(questState.daily);
+  const wReady = questListReadyCount(questState.weekly);
+  if (dailyN) {
+    dailyN.textContent = dReady ? String(dReady) : '';
+    dailyN.hidden = !dReady;
+  }
+  if (weeklyN) {
+    weeklyN.textContent = wReady ? String(wReady) : '';
+    weeklyN.hidden = !wReady;
+  }
+  if (mainN) {
+    const act = MAIN_STORYLINE.find(a => a.act === questState.mainStep);
+    const srsPct = act && typeof calcLevelProgress === 'function' ? calcLevelProgress(act.reqLevel) : 0;
+    const mainReady = !!(act && !questState.mainCompleted.includes(act.id) && mainQuestProgress(act) >= act.target && srsPct >= act.minPct);
+    mainN.textContent = mainReady ? '1' : '';
+    mainN.hidden = !mainReady;
+  }
 }
 
 function renderQuestList() {
   const container = document.getElementById('quest-list-container');
   if (!container) return;
   container.innerHTML = '';
+  initQuestState();
+  renderQuestMeta();
+  updateQuestHudBadge();
 
   if (activeQuestTab === 'main') {
-    const act = MAIN_STORYLINE.find(a => a.act === questState.mainStep) || MAIN_STORYLINE[MAIN_STORYLINE.length - 1];
-    const isCompleted = questState.mainCompleted.includes(act.id);
+    MAIN_STORYLINE.forEach(act => {
+      const isCompleted = questState.mainCompleted.includes(act.id);
+      const isCurrent = !isCompleted && act.act === questState.mainStep;
+      const isLocked = !isCompleted && act.act > questState.mainStep;
+      const curr = mainQuestProgress(act);
+      const srsPct = typeof calcLevelProgress === 'function' ? calcLevelProgress(act.reqLevel) : 0;
+      const reqMet = !isLocked && curr >= act.target && srsPct >= act.minPct;
 
-    let curr = 0;
-    if (act.act === 1) curr = questState.mainProgress.harvests;
-    else if (act.act === 2) curr = questState.mainProgress.kills;
-    else if (act.act === 3) curr = cookedDishCount();
-    else if (act.act === 4) curr = questState.mainProgress.fish;
-    else if (act.act === 5) curr = questState.mainProgress.score;
-    else if (act.act === 6) curr = Object.values(typeof srsData !== 'undefined' && srsData ? srsData : {}).filter(srsIsMature).length;
+      const card = questEl('div', 'quest-card' + (isCompleted ? ' completed' : '') + (reqMet && !isCompleted ? ' ready' : '') + (isLocked ? ' locked' : '') + (isCurrent ? ' current' : ''));
+      const head = questEl('div', 'quest-card-header');
+      const titleWrap = questEl('div', 'quest-card-title-wrap');
+      titleWrap.appendChild(questEl('span', 'quest-card-icon', act.icon || '📖'));
+      titleWrap.appendChild(questEl('span', 'quest-card-title', 'Act ' + act.act + ' · ' + act.title));
+      head.appendChild(titleWrap);
+      head.appendChild(questEl('span', 'quest-card-badge' + (isCompleted ? ' claimed' : (reqMet ? ' ready' : (isLocked ? ' locked' : ''))),
+        isCompleted ? 'Claimed' : (isLocked ? 'Locked' : (reqMet ? 'Ready' : 'Act ' + act.act))));
+      card.appendChild(head);
+      card.appendChild(questEl('div', 'quest-card-desc', isLocked ? 'Finish the previous act to unlock this chapter.' : act.desc));
 
-    const srsPct = calcLevelProgress(act.reqLevel);
-    const reqMet = curr >= act.target && srsPct >= act.minPct;
+      if (!isLocked) {
+        const labels = questEl('div', 'quest-progress-labels');
+        labels.appendChild(questEl('span', '', 'Goal'));
+        labels.appendChild(questEl('span', '', curr + ' / ' + act.target));
+        card.appendChild(labels);
+        renderQuestBar(card, curr, act.target);
+        const srsRow = questEl('div', 'quest-progress-labels');
+        srsRow.appendChild(questEl('span', '', 'Learned'));
+        srsRow.appendChild(questEl('span', '', srsPct + '% / ' + act.minPct + '%'));
+        card.appendChild(srsRow);
+        renderQuestBar(card, srsPct, act.minPct);
+      }
 
-    const card = document.createElement('div');
-    card.className = 'quest-card' + (isCompleted ? ' completed' : '');
-    card.innerHTML = `
-      <div class="quest-card-header">
-        <span class="quest-card-title">${act.title}</span>
-        <span class="quest-card-badge">${isCompleted ? 'COMPLETED' : `Learned ${srsPct}% / ${act.minPct}%`}</span>
-      </div>
-      <div class="quest-card-desc">${act.desc}</div>
-      <div class="quest-progress-bg">
-        <div class="quest-progress-fill" style="width:${Math.min(100, Math.floor((curr / act.target) * 100))}%"></div>
-      </div>
-      <div class="quest-progress-text">Progress: ${curr} / ${act.target}</div>
-      <div class="quest-rewards-row">
-        <div class="quest-reward-tags">
-          <span>🪙 +${act.rCoins}</span>
-          <span>💎 +${act.rGems}</span>
-          <span>🎖️ +${act.rHonor}</span>
-        </div>
-        ${isCompleted ? '<span style="color:var(--neon-green);font-weight:bold">✅ Claimed</span>' :
-          `<button class="quest-claim-btn" ${reqMet ? '' : 'disabled'} onclick="claimMainQuest(${act.act})">Claim Rewards</button>`}
-      </div>
-    `;
-    container.appendChild(card);
-  } else {
-    const list = activeQuestTab === 'daily' ? questState.daily : questState.weekly;
-    list.forEach(q => {
-      const card = document.createElement('div');
-      card.className = 'quest-card' + (q.claimed ? ' completed' : '');
-      const pct = Math.min(100, Math.floor((q.current / q.target) * 100));
-      card.innerHTML = `
-        <div class="quest-card-header">
-          <span class="quest-card-title">${q.title}</span>
-          <span class="quest-card-badge">${q.claimed ? 'CLAIMED' : `${pct}%`}</span>
-        </div>
-        <div class="quest-card-desc">${q.desc}</div>
-        <div class="quest-progress-bg">
-          <div class="quest-progress-fill" style="width:${pct}%"></div>
-        </div>
-        <div class="quest-progress-text">Progress: ${q.current} / ${q.target}</div>
-        <div class="quest-rewards-row">
-          <div class="quest-reward-tags">
-            <span>🪙 +${q.rCoins}</span>
-            <span>💎 +${q.rGems}</span>
-            <span>🎖️ +${q.rHonor}</span>
-          </div>
-          ${q.claimed ? '<span style="color:var(--neon-green);font-weight:bold">✅ Claimed</span>' :
-            `<button class="quest-claim-btn" ${q.current >= q.target ? '' : 'disabled'} onclick="claimSideQuest('${activeQuestTab}', '${q.id}')">Claim Rewards</button>`}
-        </div>
-      `;
+      const row = questEl('div', 'quest-rewards-row');
+      renderQuestRewards(row, act.rCoins, act.rGems, act.rHonor);
+      if (isCompleted) {
+        row.appendChild(questEl('span', 'quest-claimed-label', 'Claimed'));
+      } else if (!isLocked) {
+        const btn = questEl('button', 'quest-claim-btn');
+        btn.type = 'button';
+        btn.textContent = reqMet ? 'Claim rewards' : 'In progress';
+        btn.disabled = !reqMet;
+        btn.onclick = () => claimMainQuest(act.act);
+        row.appendChild(btn);
+      }
+      card.appendChild(row);
       container.appendChild(card);
     });
+    return;
   }
+
+  const list = (activeQuestTab === 'daily' ? questState.daily : questState.weekly).slice();
+  list.sort((a, b) => {
+    const ra = questIsReady(a) ? 0 : (a.claimed ? 2 : 1);
+    const rb = questIsReady(b) ? 0 : (b.claimed ? 2 : 1);
+    return ra - rb;
+  });
+  if (!list.length) {
+    container.appendChild(questEl('div', 'quest-empty', 'No quests on this board yet. Check back after a reset.'));
+    return;
+  }
+  list.forEach(q => {
+    const ready = questIsReady(q);
+    const card = questEl('div', 'quest-card' + (q.claimed ? ' completed' : '') + (ready ? ' ready' : ''));
+    const head = questEl('div', 'quest-card-header');
+    const titleWrap = questEl('div', 'quest-card-title-wrap');
+    titleWrap.appendChild(questEl('span', 'quest-card-icon', q.icon || '📜'));
+    titleWrap.appendChild(questEl('span', 'quest-card-title', q.title));
+    head.appendChild(titleWrap);
+    const badgeWrap = questEl('div', 'quest-card-badges');
+    if (q.tag) badgeWrap.appendChild(questEl('span', 'quest-card-tag', q.tag));
+    badgeWrap.appendChild(questEl('span', 'quest-card-badge' + (q.claimed ? ' claimed' : (ready ? ' ready' : '')),
+      q.claimed ? 'Claimed' : (ready ? 'Ready' : Math.min(100, Math.floor(((q.current || 0) / q.target) * 100)) + '%')));
+    head.appendChild(badgeWrap);
+    card.appendChild(head);
+    card.appendChild(questEl('div', 'quest-card-desc', q.desc));
+    const how = q.how || ((DAILY_QUEST_POOL.concat(WEEKLY_QUEST_POOL).find(p => p.id === q.id) || {}).how) || '';
+    if (how && !q.claimed) card.appendChild(questEl('div', 'quest-card-how', how));
+    const labels = questEl('div', 'quest-progress-labels');
+    labels.appendChild(questEl('span', '', 'Progress'));
+    labels.appendChild(questEl('span', '', (q.current || 0) + ' / ' + q.target));
+    card.appendChild(labels);
+    renderQuestBar(card, q.current || 0, q.target);
+    const row = questEl('div', 'quest-rewards-row');
+    renderQuestRewards(row, q.rCoins, q.rGems, q.rHonor);
+    if (q.claimed) {
+      row.appendChild(questEl('span', 'quest-claimed-label', 'Claimed'));
+    } else {
+      const btn = questEl('button', 'quest-claim-btn');
+      btn.type = 'button';
+      btn.textContent = ready ? 'Claim rewards' : 'In progress';
+      btn.disabled = !ready;
+      btn.onclick = () => claimSideQuest(activeQuestTab, q.id);
+      row.appendChild(btn);
+    }
+    card.appendChild(row);
+    container.appendChild(card);
+  });
 }
 
 function claimMainQuest(actNum) {
   const act = MAIN_STORYLINE.find(a => a.act === actNum);
   if (!act || questState.mainCompleted.includes(act.id)) return;
+  if (act.act > questState.mainStep) return;
 
-  let curr = 0;
-  if (act.act === 1) curr = questState.mainProgress.harvests;
-  else if (act.act === 2) curr = questState.mainProgress.kills;
-  else if (act.act === 3) curr = cookedDishCount();
-  else if (act.act === 4) curr = questState.mainProgress.fish;
-  else if (act.act === 5) curr = questState.mainProgress.score;
-  else if (act.act === 6) curr = Object.values(typeof srsData !== 'undefined' && srsData ? srsData : {}).filter(srsIsMature).length;
-
-  const srsPct = calcLevelProgress(act.reqLevel);
+  const curr = mainQuestProgress(act);
+  const srsPct = typeof calcLevelProgress === 'function' ? calcLevelProgress(act.reqLevel) : 0;
   if (curr < act.target || srsPct < act.minPct) {
-    showToast('⚠️ Quest requirements not met!');
+    showToast('Quest requirements not met yet.');
     return;
   }
 
@@ -759,7 +1151,8 @@ function claimMainQuest(actNum) {
   addGems(act.rGems);
   addHonor(act.rHonor);
 
-  showToast(`🎉 Main Story ${act.title} Complete! Earned rewards!`, 4000);
+  showToast('Story complete: ' + act.title + ' — rewards claimed!', 4000);
+  updateQuestHudBadge();
   renderQuestList();
 }
 
@@ -773,7 +1166,27 @@ function claimSideQuest(tab, qId) {
   addGems(q.rGems);
   addHonor(q.rHonor);
 
-  showToast(`🎉 Quest "${q.title}" Claimed! +${q.rCoins} Coins, +${q.rGems} Gems, +${q.rHonor} Honor!`, 4000);
+  showToast('Claimed "' + q.title + '"  ·  +' + q.rCoins + ' coins, +' + q.rGems + ' gems, +' + q.rHonor + ' honor', 4000);
+  updateQuestHudBadge();
+  renderQuestList();
+}
+
+function claimReadySideQuests(tab) {
+  const list = tab === 'daily' ? questState.daily : questState.weekly;
+  const ready = (list || []).filter(questIsReady);
+  if (!ready.length) return;
+  let coins = 0, gems = 0, honor = 0;
+  ready.forEach(q => {
+    q.claimed = true;
+    coins += q.rCoins;
+    gems += q.rGems;
+    honor += q.rHonor;
+  });
+  addCoins(coins);
+  addGems(gems);
+  addHonor(honor);
+  showToast('Claimed ' + ready.length + ' quest' + (ready.length === 1 ? '' : 's') + '  ·  +' + coins + ' coins', 4000);
+  updateQuestHudBadge();
   renderQuestList();
 }
 
@@ -783,24 +1196,55 @@ const PHASE_CFG = [
   {icon:'🍎', title:'Harvest',    dots:'●●●', reward:'+🪙', btn:'🍎 Harvest'},
 ];
 
-function saveAllGame(){
-  flushSave();   // explicit user action — write through, don't debounce
-  const btn=$('save-btn');
-  if(btn){
-    const inMenu = btn.classList.contains('hud-overflow-item');
+// The button used to report success the instant it was pressed: flushSave() was called
+// without awaiting it, so "Game saved successfully!" appeared even when the file write or
+// the cloud upload went on to fail. It now waits for the real outcome and says which leg
+// failed, because "saved" is the one message a player has to be able to trust.
+async function saveAllGame(){
+  const btn = $('save-btn');
+  const inMenu = btn ? btn.classList.contains('hud-overflow-item') : false;
+  const paint = (icon, label) => {
+    if (!btn) return;
     if (inMenu && typeof hudIconHtml === 'function') {
-      btn.innerHTML = hudIconHtml('save', '✅', 18) + '<span class="hud-overflow-label">Saved</span>';
-      setTimeout(() => {
-        if (typeof paintHudIcons === 'function') paintHudIcons();
-        else btn.innerHTML = hudIconHtml('save', '💾', 18) + '<span class="hud-overflow-label">Save</span>';
-      }, 1800);
+      btn.innerHTML = hudIconHtml('save', icon, 18) + '<span class="hud-overflow-label">' + label + '</span>';
     } else {
-      const prev = btn.textContent;
-      btn.textContent = inMenu ? '✅ Saved' : '✅';
-      setTimeout(() => { btn.textContent = prev; }, 1800);
+      btn.textContent = inMenu ? icon + ' ' + label : icon;
     }
+  };
+  const restore = () => {
+    if (!btn) return;
+    if (inMenu && typeof hudIconHtml === 'function') {
+      if (typeof paintHudIcons === 'function') paintHudIcons();
+      else btn.innerHTML = hudIconHtml('save', '💾', 18) + '<span class="hud-overflow-label">Save</span>';
+    } else {
+      btn.textContent = inMenu ? '💾 Save' : '💾';
+    }
+  };
+
+  paint('⏳', 'Saving');
+  let res;
+  try {
+    res = await flushSave();   // explicit user action — write through, don't debounce
+  } catch (e) {
+    console.warn('Save failed:', e);
+    res = { local: false, file: false, cloud: { ok: false, reason: 'unexpected error' } };
   }
-  showToast('💾 Game saved successfully!', 2200);
+
+  const failed = [];
+  if (!res.local) failed.push('this device');
+  if (res.file === false) failed.push('the save file');
+  if (res.cloud && res.cloud.ok === false && res.cloud.reason !== 'signed-out') {
+    failed.push('the cloud (' + res.cloud.reason + ')');
+  }
+
+  if (failed.length) {
+    paint('⚠', 'Not saved');
+    showToast('⚠ Could not save to ' + failed.join(' or ') + '.', 4200);
+  } else {
+    paint('✅', 'Saved');
+    showToast('💾 Game saved successfully!', 2200);
+  }
+  setTimeout(restore, 1800);
 }
 
 // Run save load once pywebview is ready (or immediately if in browser)

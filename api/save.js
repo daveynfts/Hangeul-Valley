@@ -102,6 +102,28 @@ module.exports = async (req, res) => {
         updatedAt: typeof body.updatedAt === 'number' ? body.updatedAt : Date.now(),
         cloudUser: user.sub
       });
+
+      // Refuse to move the save backwards. The write used to be unconditional, so a stale
+      // PUT — a request delayed in flight, or a second device that had been offline — would
+      // overwrite newer progress and there was nothing to detect it afterwards. The client
+      // serializes its own writes; this is the guard for everything it cannot see.
+      //
+      // A same-timestamp PUT is allowed through: it is the common "re-upload the copy I
+      // already have" case, and rejecting it would make a retry after a dropped response
+      // look like a conflict.
+      const current = await getObjectJson(client, Key);
+      const currentAt = current && typeof current.updatedAt === 'number' ? current.updatedAt : 0;
+      if (currentAt > payload.updatedAt) {
+        res.setHeader('Cache-Control', 'private, no-store');
+        res.status(409).json({
+          error: 'stale save',
+          updatedAt: currentAt,
+          sentAt: payload.updatedAt,
+          data: current
+        });
+        return;
+      }
+
       await client.send(new PutObjectCommand({
         Bucket: r2Bucket(),
         Key,

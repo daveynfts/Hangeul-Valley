@@ -419,6 +419,7 @@ class ArcadeScene extends Phaser.Scene {
   }
 
   exitGame(){
+    if (typeof checkQuestProgress === 'function') checkQuestProgress('arcade', { score: this.score });
     if (typeof leaderboardState !== 'undefined' && leaderboardState.personalBests) {
       if (this.score > (leaderboardState.personalBests.arcadeHighScore || 0)) {
         leaderboardState.personalBests.arcadeHighScore = this.score;

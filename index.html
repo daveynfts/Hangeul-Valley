@@ -399,26 +399,19 @@
 
   <!-- ══════════════ QUEST LOG OVERLAY ═════════════════════════════ -->
   <div id="quest-overlay">
-    <div id="quest-panel" class="glass-modal">
+    <div id="quest-panel">
       <div id="quest-header">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <span style="font-size:26px">📜</span>
-          <div>
-            <div id="quest-title">HANGEUL QUEST LOG</div>
-            <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px; font-family:'Press Start 2P',monospace">Earn Coins, Gems & Honor!</div>
-          </div>
+        <span id="quest-title"><span data-hud-icon="quest" data-hud-size="18">📜</span> Quest Log</span>
+        <button type="button" class="prog-close" onclick="closeQuestOverlay()">✕</button>
+      </div>
+      <div id="quest-body">
+        <div class="quest-tabs" role="tablist">
+          <button type="button" class="quest-tab-btn" id="qtab-main" role="tab" aria-selected="false" onclick="switchQuestTab('main')">Story <span class="quest-tab-count" id="qtab-main-n" hidden></span></button>
+          <button type="button" class="quest-tab-btn active" id="qtab-daily" role="tab" aria-selected="true" onclick="switchQuestTab('daily')">Daily <span class="quest-tab-count" id="qtab-daily-n" hidden></span></button>
+          <button type="button" class="quest-tab-btn" id="qtab-weekly" role="tab" aria-selected="false" onclick="switchQuestTab('weekly')">Weekly <span class="quest-tab-count" id="qtab-weekly-n" hidden></span></button>
         </div>
-        <button id="quest-close-btn" onclick="closeQuestOverlay()">✕</button>
-      </div>
-
-      <div class="quest-tabs">
-        <button class="quest-tab-btn active" id="qtab-main" onclick="switchQuestTab('main')">📖 Main Story</button>
-        <button class="quest-tab-btn" id="qtab-daily" onclick="switchQuestTab('daily')">⏰ Daily Quests</button>
-        <button class="quest-tab-btn" id="qtab-weekly" onclick="switchQuestTab('weekly')">📅 Weekly Quests</button>
-      </div>
-
-      <div class="quest-list" id="quest-list-container">
-        <!-- Rendered by JS -->
+        <div id="quest-meta"></div>
+        <div class="quest-list" id="quest-list-container"></div>
       </div>
     </div>
   </div>
@@ -725,9 +718,16 @@
     });
   </script>
 
-  <!-- Phaser 3 CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <!--
+    Phaser 3, vendored. See vendor/README.md for provenance and the hashes.
+    Loading it from a CDN meant the desktop build was not offline (farm.js needs
+    Phaser.Scene at evaluation time) and put a third-party script in the game's origin.
+
+    Google Identity Services is deliberately NOT loaded here. initGoogleAuth() injects it
+    on demand, and only once /api/config hands back a client id — so a build without cloud
+    save configured pulls in no third-party script at all.
+  -->
+  <script src="vendor/phaser-3.70.0.min.js"></script>
   <script src="js/state.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/renderer.js"></script>
