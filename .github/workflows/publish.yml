@@ -41,16 +41,7 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Require Vercel deploy hook
-        env:
-          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
-        run: |
-          if [ -z "$VERCEL_DEPLOY_HOOK_URL" ]; then
-            echo "Set repository secret VERCEL_DEPLOY_HOOK_URL (CLI fallback cannot authenticate on Actions)." >&2
-            exit 1
-          fi
-
-      - name: Publish (validate → R2 → CDN verify → Vercel hook)
+      - name: Publish (validate → R2 → CDN verify → Vercel)
         run: npm run publish:prod
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
@@ -59,3 +50,6 @@ jobs:
           R2_BUCKET_NAME: ${{ secrets.R2_BUCKET_NAME }}
           R2_PUBLIC_BASE_URL: ${{ secrets.R2_PUBLIC_BASE_URL }}
           VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}

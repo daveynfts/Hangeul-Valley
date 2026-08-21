@@ -602,9 +602,11 @@ the four required JSON files → POST `VERCEL_DEPLOY_HOOK_URL`. Credentials live
 `.env.local` (see `.env.example`). `--dry-run` prints the file list and does not touch
 the network. `--skip-deploy` is content-only.
 
-Create the hook in Vercel → Project → Settings → Git → Deploy Hooks. Repo secrets
-required: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`,
-`R2_PUBLIC_BASE_URL`, `VERCEL_DEPLOY_HOOK_URL`.
+Repo secrets required for R2: `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`,
+`R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`, `R2_PUBLIC_BASE_URL`. Optional Vercel
+secrets (used in this order): `VERCEL_DEPLOY_HOOK_URL`, or `VERCEL_TOKEN` +
+`VERCEL_ORG_ID` + `VERCEL_PROJECT_ID`. If neither Vercel secret is set, the job
+still uploads R2 and leaves the Git-connected Vercel deploy to ship JS.
 
 `npm run upload:r2` still uploads without deploying Vercel, if you only need the CDN.
 

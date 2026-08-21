@@ -72,6 +72,8 @@ assert(/workflow_dispatch:/.test(publishYml), 'publish.yml still allows a manual
 assert(/head_branch == 'main'/.test(publishYml), 'auto-publish is limited to main');
 assert(/npm run publish:prod/.test(publishYml), 'publish job runs publish:prod');
 assert(/github\.event\.workflow_run\.head_sha/.test(publishYml), 'auto-publish checks out the CI commit');
+assert(!/Require Vercel deploy hook/.test(publishYml), 'missing deploy hook does not fail the job');
+assert(/VERCEL_TOKEN/.test(publishYml), 'publish job can use Vercel CLI token');
 
 console.log('\n====================================================');
 console.log('RESULT: ' + passed + ' passed, ' + failed + ' failed');
