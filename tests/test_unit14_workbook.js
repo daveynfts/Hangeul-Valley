@@ -1,0 +1,656 @@
+/**
+ * tests/test_unit14_workbook.js — the Unit 14 workbook page on the study desk.
+ *
+ * Covers the textbook answer key for 어휘 연습 1, the one-chip-per-blank rule,
+ * the 해요 conjugation the blanks are filled with, scoring, and the explanation
+ * cards. The interaction logic runs for real: js/ui.js is loaded into a sandbox
+ * with a DOM stub, so the assertions read what the renderer actually wrote
+ * rather than trusting that it was called.
+ *
+ * Run: node tests/test_unit14_workbook.js
+ */
+'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
+
+const ROOT = path.join(__dirname, '..');
+const wb = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', 'unit14-workbook.json'), 'utf8'));
+const uiSrc = fs.readFileSync(path.join(ROOT, 'js', 'ui.js'), 'utf8');
+const artSrc = fs.readFileSync(path.join(ROOT, 'js', 'workbookArt.js'), 'utf8');
+const farm = fs.readFileSync(path.join(ROOT, 'js', 'scenes', 'farm.js'), 'utf8');
+const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+const css = fs.readFileSync(path.join(ROOT, 'css', 'game.css'), 'utf8');
+const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'js', 'manifest.json'), 'utf8'));
+
+let passed = 0, failed = 0;
+function assert(cond, msg) {
+  if (cond) { console.log('  [PASS] ' + msg); passed++; }
+  else { console.error('  [FAIL] ' + msg); failed++; }
+}
+
+// ── A DOM stub the renderer can actually write into ──────────────────────────
+// The experience row is built from child elements, so its own innerHTML is
+// empty. Assertions about what a row shows have to walk the subtree.
+function deepHtml(el) {
+  if (!el) return '';
+  return (el.innerHTML || '') + (el.children || []).map(deepHtml).join('');
+}
+function deepText(el) {
+  if (!el) return '';
+  return (el.textContent || '') + (el.children || []).map(deepText).join('');
+}
+
+function makeDom() {
+  const els = Object.create(null);
+  function mkEl(tag) {
+    const el = {
+      tagName: (tag || 'div').toUpperCase(),
+      textContent: '', className: '', type: '',
+      disabled: false, tabIndex: -1, children: [], attrs: Object.create(null),
+      onclick: null, onkeydown: null,
+      classList: {
+        _s: new Set(),
+        add(c) { this._s.add(c); }, remove(c) { this._s.delete(c); },
+        contains(c) { return this._s.has(c); },
+        toggle(c, on) { if (on === undefined) { this._s.has(c) ? this._s.delete(c) : this._s.add(c); } else if (on) this._s.add(c); else this._s.delete(c); }
+      },
+      style: {}, dataset: Object.create(null), value: '', hidden: false, parentElement: null,
+      setAttribute(k, v) { this.attrs[k] = v; },
+      getAttribute(k) { return this.attrs[k]; },
+      appendChild(c) { this.children.push(c); return c; },
+      insertBefore(c) { this.children.unshift(c); return c; },
+      removeAttribute(k) { delete this.attrs[k]; },
+      addEventListener() {}, removeEventListener() {},
+      querySelector: () => null, querySelectorAll: () => [],
+      remove() {}, focus() {}, blur() {}, click() {}
+    };
+    // innerHTML has to drop the children the way the real one does. Without
+    // this the renderer's `list.innerHTML = ''` leaves the previous pass in
+    // place, every re-render doubles the rows, and an assertion that counts
+    // them reads a number no browser would ever produce.
+    let markup = '';
+    Object.defineProperty(el, 'innerHTML', {
+      get() { return markup; },
+      set(v) { markup = String(v); el.children.length = 0; },
+      enumerable: true
+    });
+    return el;
+  }
+  const document = {
+    readyState: 'complete',
+    documentElement: mkEl('html'),
+    body: mkEl('body'),
+    // Lazily materialised, so the renderer finds every id the markup declares.
+    getElementById(id) {
+      if (!(id in els)) els[id] = mkEl('div');
+      return els[id];
+    },
+    createElement: mkEl,
+    querySelectorAll: () => [],
+    addEventListener() {}
+  };
+  return { document, els };
+}
+
+// Everything js/ui.js reaches for at load time that lives in another file
+// resolves to a harmless no-op through this proxy. The few globals whose return
+// value is actually used are stubbed for real below.
+function loadUi() {
+  const { document, els } = makeDom();
+  const real = Object.create(null);
+  const noop = function () { return undefined; };
+  const sandbox = new Proxy(real, {
+    has() { return true; },
+    get(t, k) {
+      if (k in t) return t[k];
+      if (typeof k === 'symbol') return undefined;
+      // Built-ins have to stay themselves: swallowing Promise or Math into the
+      // no-op would break the module rather than stub it.
+      if (k in globalThis) return globalThis[k];
+      return noop;
+    },
+    set(t, k, v) { t[k] = v; return true; },
+    defineProperty(t, k, d) { Object.defineProperty(t, k, d); return true; },
+    deleteProperty(t, k) { delete t[k]; return true; }
+  });
+  const sfx = [];
+  const quests = [];
+  Object.assign(real, {
+    console: { log() {}, info() {}, warn() {}, error() {} },
+    IS_NODE: true,
+    document: document,
+    window: { addEventListener() {} },
+    localStorage: { getItem: () => null, setItem() {}, removeItem() {} },
+    setTimeout: () => 0, clearTimeout() {}, setInterval: () => 0, clearInterval() {},
+    activeModalStack: [],
+    playerLocked: false,
+    playChiptuneSFX: (t) => { sfx.push(t); },
+    checkQuestProgress: (k, o) => { quests.push([k, o]); },
+    ensurePlayerRank: noop,
+    studySessionXp: (score, total) => score * 14 + 10 + (score === total ? 20 : 0),
+    addPlayerXp: (xp) => ({ leveled: false, level: 1, xp: xp, need: 100 }),
+    addHonor: noop,
+    persistSave: noop,
+    updateRankHUD: noop,
+    isUnit14World: () => true
+  });
+  vm.createContext(sandbox);
+  // The grammar exercise draws its own icons, so the art module has to be in the
+  // sandbox before ui.js renders a row that calls workbookIconSvg.
+  vm.runInContext(artSrc, sandbox);
+  vm.runInContext(uiSrc, sandbox);
+  return {
+    els, sfx, quests,
+    run: (expr) => vm.runInContext(expr, sandbox),
+    call: (fn, ...args) => {
+      real.__args = args;
+      return vm.runInContext(fn + '.apply(null, __args)', sandbox);
+    },
+    // openWorkbook lands on the exercise list now, so a test that wants to be
+    // inside an exercise has to say which. Passing null stays on the list.
+    setBank: (exId) => {
+      real.__wb = wb;
+      vm.runInContext('openWorkbook(__wb)', sandbox);
+      if (exId !== null) {
+        vm.runInContext("openWorkbookExercise('" + (exId || 'u14-vocab-1') + "')", sandbox);
+      }
+    }
+  };
+}
+
+console.log('====================================================');
+console.log('UNIT 14 WORKBOOK');
+console.log('====================================================\n');
+
+// ── 1. The exercise matches the textbook ─────────────────────────────────────
+console.log('--- 1. Textbook fidelity ---');
+const ex = wb.exercises[0];
+assert(wb.exercises.length >= 1, 'the workbook holds at least one exercise');
+assert(ex.section === '어휘' && ex.no === '연습 1', 'first exercise is 어휘 연습 1');
+assert(ex.instructionKo === '[보기]와 같이 알맞은 것을 골라 문장을 만들어 보세요.',
+  'the Korean instruction is the printed one');
+assert(ex.bank.length === 5, 'five expressions in the box');
+const example = ex.bank.filter(b => b.usedByExample);
+assert(example.length === 1 && example[0].id === 'two_hands',
+  'exactly one expression is spent on the worked example — 두 손으로 드리다');
+assert(ex.items.length === 4, 'four sentences to complete');
+
+// The answer key from the back of the book.
+const KEY = [
+  [1, 'turn_head', '고개를 돌리고 마셔요', '어른들과 술을 마실 때'],
+  [2, 'bow', '고개를 숙여서 인사해요', '어른들께 인사할 때'],
+  [3, 'honorific', '높임말을 해요', '처음 만난 사람과 이야기할 때'],
+  [4, 'yield_seat', '자리를 양보해요', '버스에 나이가 많은 분이 계시면']
+];
+KEY.forEach(([n, id, polite, stem]) => {
+  const item = ex.items.find(i => i.n === n);
+  assert(!!item, 'item ' + n + ' exists');
+  assert(item && item.answer === id, 'item ' + n + ' answers ' + id);
+  assert(item && item.stemKo === stem, 'item ' + n + ' prompt matches the book');
+  const chip = ex.bank.find(b => b.id === id);
+  assert(chip && chip.polite === polite, 'item ' + n + ' fills in ' + polite);
+});
+
+// One-to-one is the rule the circled example establishes.
+const answers = ex.items.map(i => i.answer);
+assert(new Set(answers).size === answers.length, 'no expression answers two sentences');
+assert(answers.every(a => ex.bank.some(b => b.id === a && !b.usedByExample)),
+  'every answer is a chip the learner can actually pick');
+const spare = ex.bank.filter(b => !b.usedByExample).length - ex.items.length;
+assert(spare === 0, 'the four remaining chips map onto the four blanks exactly');
+
+// The 해요 forms are irregular, which is why they are data and not derived.
+assert(ex.bank.every(b => b.dict && b.polite && b.dict !== b.polite),
+  'every chip carries both the dictionary form and the 해요 form');
+assert(ex.bank.find(b => b.id === 'turn_head').dict === '고개를 돌리고 마시다',
+  '마시다 is stored in its dictionary form');
+assert(ex.example.answer === 'two_hands' &&
+  ex.bank.find(b => b.id === 'two_hands').polite === '두 손으로 드려요',
+  'the worked example reads 두 손으로 드려요');
+
+console.log('\n--- 2. Every answer is explained ---');
+ex.items.forEach(item => {
+  assert(!!item.why && item.why.length > 40, 'item ' + item.n + ' explains why the etiquette applies');
+  assert(!!item.grammar, 'item ' + item.n + ' explains the conjugation');
+  assert(!!item.en, 'item ' + item.n + ' has an English gloss');
+});
+assert(ex.items.find(i => i.n === 1).grammar.indexOf('마셔요') >= 0, 'item 1 names the 마시다 → 마셔요 contraction');
+assert(ex.items.find(i => i.n === 2).grammar.indexOf('해요') >= 0, 'item 2 names the 하다 → 해요 irregular');
+assert(ex.items.find(i => i.n === 4).grammar.indexOf('계시다') >= 0, 'item 4 points out the honorific 계시다');
+
+// ── 3. The interaction runs ──────────────────────────────────────────────────
+console.log('\n--- 3. Interaction ---');
+{
+  const ui = loadUi();
+  ui.setBank();
+  assert(ui.run('!!workbookState'), 'opening the workbook builds state');
+  assert(ui.run('workbookState.chips.length') === 4, 'the example chip is not offered as a choice');
+  assert(ui.run('workbookState.fill.filter(Boolean).length') === 0, 'all four blanks start empty');
+  assert(ui.run('workbookState.focus') === 0, 'focus starts on the first blank');
+
+  // Mouse path: pick a chip for the focused blank.
+  ui.run("wbPickChip('bow')");
+  assert(ui.run('workbookState.fill[0]') === 'bow', 'picking a chip fills the focused blank');
+  assert(ui.run('workbookState.focus') === 1, 'focus advances to the next empty blank');
+
+  // The blank shows the conjugated form, not the dictionary form.
+  const rows = ui.els['wb-items'].children;
+  assert(rows.length === 4, 'four sentence rows are rendered');
+  assert(rows[0].innerHTML.indexOf('고개를 숙여서 인사해요') >= 0,
+    'the filled blank shows the 해요 form');
+  assert(rows[0].innerHTML.indexOf('고개를 숙여서 인사하다') < 0,
+    'and not the dictionary form');
+
+  // One chip per blank: re-picking a placed chip moves it instead of cloning it.
+  ui.run('workbookState.focus = 2');
+  ui.run("wbPickChip('bow')");
+  assert(ui.run('workbookState.fill[0]') === null, 'the chip leaves its old blank');
+  assert(ui.run('workbookState.fill[2]') === 'bow', 'and lands in the new one');
+  assert(ui.run('workbookState.fill.filter(v => v === "bow").length') === 1,
+    'the same expression can never answer two sentences');
+
+  // Keyboard path: focus movement wraps, and clearing empties the focused blank.
+  ui.run('workbookState.focus = 3; wbMoveFocus(1)');
+  assert(ui.run('workbookState.focus') === 0, 'focus wraps past the last blank');
+  ui.run('workbookState.focus = 0; wbMoveFocus(-1)');
+  assert(ui.run('workbookState.focus') === 3, 'and wraps backwards past the first');
+  ui.run('workbookState.focus = 2; wbClearBlank()');
+  assert(ui.run('workbookState.fill[2]') === null, 'clearing empties the focused blank');
+
+  // Check is refused until the page is complete.
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.checked') === false, 'an incomplete page cannot be checked');
+}
+
+// ── 4. Scoring and the explanations ──────────────────────────────────────────
+console.log('\n--- 4. Scoring and explanations ---');
+{
+  const ui = loadUi();
+  ui.setBank();
+  // Fill it exactly right.
+  KEY.forEach(([n, id]) => {
+    ui.run('workbookState.focus = ' + (n - 1));
+    ui.run("wbPickChip('" + id + "')");
+  });
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.checked') === true, 'a complete page can be checked');
+  assert(ui.run('workbookState.score') === 4, 'all four correct scores 4');
+  assert(ui.run('workbookState.gain && workbookState.gain.xp > 0'), 'a checked page awards XP');
+  assert(ui.quests.some(q => q[0] === 'desk'), 'the page counts toward the desk quest');
+  const explain = ui.els['wb-explain'];
+  assert(explain.className === 'shown', 'the explanation panel opens after checking');
+  assert(explain.innerHTML.indexOf('마셔요') >= 0, 'the explanations name the conjugated answer');
+  assert(explain.innerHTML.indexOf('계시다') >= 0, 'and carry the grammar note');
+  assert((explain.innerHTML.match(/wb-why/g) || []).length >= 4, 'one card per sentence');
+  assert(explain.innerHTML.indexOf('wb-why-yours') < 0,
+    'a perfect page does not print "you put" lines');
+
+  // Reset puts the page back without reloading it.
+  ui.run('resetWorkbook()');
+  assert(ui.run('workbookState.checked') === false && ui.run('workbookState.score') === 0,
+    'reset clears the marking');
+  assert(ui.run('workbookState.fill.filter(Boolean).length') === 0, 'and empties the blanks');
+}
+{
+  const ui = loadUi();
+  ui.setBank();
+  // Two swapped: the explanation has to show what was put as well as the answer.
+  const wrong = ['bow', 'turn_head', 'honorific', 'yield_seat'];
+  wrong.forEach((id, i) => {
+    ui.run('workbookState.focus = ' + i);
+    ui.run("wbPickChip('" + id + "')");
+  });
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.score') === 2, 'two swapped answers score 2 of 4');
+  const explain = ui.els['wb-explain'];
+  assert(explain.innerHTML.indexOf('wb-why-yours') >= 0,
+    'a wrong blank reports what the learner put');
+  assert(explain.innerHTML.indexOf('고개를 돌리고 마셔요') >= 0,
+    'and still shows the correct sentence');
+  const rows = ui.els['wb-items'].children;
+  assert(rows[0].innerHTML.indexOf('✕') >= 0 && rows[2].innerHTML.indexOf('✓') >= 0,
+    'each row is marked individually');
+}
+
+// ── 5. Wiring ────────────────────────────────────────────────────────────────
+console.log('\n--- 5. Wiring ---');
+assert(/case 'desk':[\s\S]{0,200}openStudyDesk/.test(farm), 'the desk sprite opens the chooser');
+assert(farm.indexOf('openDeskQuiz') >= 0, 'the quiz is still reachable as the fallback');
+assert(uiSrc.indexOf("'/worlds/unit14-workbook.json'") >= 0, 'the loader knows the Unit 14 page');
+assert(uiSrc.indexOf('deskMenuOptions.length === 1') >= 0,
+  'a world with no workbook skips the chooser instead of showing one live row');
+['desk-menu-overlay', 'desk-menu-list', 'workbook-overlay', 'wb-instruction', 'wb-example',
+  'wb-bank', 'wb-items', 'wb-explain', 'wb-check', 'wb-count', 'wb-hint'
+].forEach((id) => {
+  assert(html.indexOf('id="' + id + '"') >= 0, 'markup declares #' + id);
+});
+['openStudyDesk', 'closeDeskMenu', 'openWorkbook', 'closeWorkbook', 'checkWorkbook', 'resetWorkbook']
+  .forEach((fn) => {
+    assert(uiSrc.indexOf('window.' + fn + ' = ' + fn) >= 0, fn + ' is exported');
+  });
+assert(css.indexOf('#workbook-overlay') >= 0 && css.indexOf('.wb-chip') >= 0
+  && css.indexOf('.wb-why-gram') >= 0, 'the page is styled');
+// Escape belongs to the modal-stack handler; handling it twice closes two overlays.
+const kb = uiSrc.slice(uiSrc.indexOf("if (e.key === 'Escape') return;"));
+assert(uiSrc.indexOf("if (e.key === 'Escape') return;") >= 0,
+  'the workbook key handler leaves Escape to the modal stack');
+assert(kb.indexOf("top === 'desk-menu-overlay'") >= 0, 'the chooser takes number and arrow keys');
+assert(kb.indexOf('wbMoveFocus(1)') >= 0 && kb.indexOf('wbClearBlank()') >= 0,
+  'arrows move between blanks and Backspace clears one');
+assert(kb.indexOf('/^[1-9]$/') >= 0, 'number keys pick an expression');
+
+// ── 6. One exercise at a time ────────────────────────────────────────────────
+console.log('\n--- 6. Exercise list ---');
+{
+  const ui = loadUi();
+  ui.setBank(null);
+  assert(ui.run('workbookState.mode') === 'pick', 'the page opens on the list, not on an exercise');
+  assert(ui.run('workbookState.ex') === null, 'no exercise is loaded yet');
+  const rows = ui.els['wb-items'].children;
+  assert(rows.length === wb.exercises.length, 'one row per exercise (' + rows.length + ')');
+  assert(ui.els['wb-items'].className === 'wb-items-pick', 'the list uses its own layout');
+  // Nothing that belongs to an exercise may be on screen while the list is.
+  assert(ui.els['wb-bank'].className === 'wb-hidden', 'the bank is hidden on the list');
+  assert(ui.els['wb-example'].className === 'wb-hidden', 'the worked example is hidden on the list');
+  assert(ui.els['wb-check'].className === 'wb-hidden', 'the check button is hidden on the list');
+  assert(ui.els['wb-back'].className === 'wb-hidden', 'the back button is hidden on the list');
+  wb.exercises.forEach((ex) => {
+    assert(rows.some(r => r.attrs['data-exercise'] === ex.id), 'the list offers ' + ex.no);
+  });
+
+  // Keys that only make sense inside an exercise must be inert here.
+  ui.run("wbPickChip('no_food')");
+  assert(ui.run('workbookState.mode') === 'pick', 'picking a chip on the list does nothing');
+  ui.run('checkWorkbook(); resetWorkbook(); wbMoveFocus(1); wbClearBlank()');
+  assert(ui.run('workbookState.mode') === 'pick' && ui.run('!workbookState.fill'),
+    'no exercise-only call can reach into state that does not exist yet');
+
+  // Open one, then come back.
+  ui.run("openWorkbookExercise('u14-vocab-3')");
+  assert(ui.run('workbookState.mode') === 'exercise', 'choosing a row opens it');
+  assert(ui.run('workbookState.ex.id') === 'u14-vocab-3', 'and opens the row that was chosen');
+  assert(ui.els['wb-back'].className === '', 'the back button appears inside an exercise');
+  ui.run('backToWorkbookList()');
+  assert(ui.run('workbookState.mode') === 'pick' && ui.run('workbookState.ex') === null,
+    'back returns to the list');
+  ui.run("openWorkbookExercise('nope')");
+  assert(ui.run('workbookState.mode') === 'pick', 'an unknown exercise id is ignored');
+}
+
+// ── 7. 연습 2 — joining two columns ──────────────────────────────────────────
+console.log('\n--- 7. 연습 2 (match) ---');
+const ex2 = wb.exercises.find(e => e.id === 'u14-vocab-2');
+{
+  assert(!!ex2 && ex2.type === 'match', '연습 2 is a match exercise');
+  assert(ex2.instructionKo === '알맞은 것끼리 연결하여 한 문장으로 만들어 보세요.',
+    'the Korean instruction is the printed one');
+  assert(!ex2.example, 'the book prints no worked example for 연습 2');
+  assert(ex2.bank.length === 4 && ex2.items.length === 4, 'four phrases join four situations');
+  assert(ex2.bank.every(b => b.mark), 'each right-hand phrase keeps its printed ①②③④ mark');
+  // The answer key: 1)② 2)③ 3)① 4)④
+  const KEY2 = [[1, 'm_call_name', '②'], [2, 'm_one_hand', '③'], [3, 'm_cross_legs', '①'], [4, 'm_banmal', '④']];
+  KEY2.forEach(([n, id, mark]) => {
+    const item = ex2.items.find(i => i.n === n);
+    assert(item && item.answer === id, '연습 2 item ' + n + ' answers ' + mark);
+    const chip = ex2.bank.find(b => b.id === id);
+    assert(chip && chip.mark === mark, 'and ' + id + ' is the one printed as ' + mark);
+  });
+  const a2 = ex2.items.map(i => i.answer);
+  assert(new Set(a2).size === 4, 'no phrase is used twice');
+  assert(ex2.items.every(i => i.why && i.grammar), 'every join is explained');
+  assert(ex2.bank.every(b => /지 마세요\.$/.test(b.ko)), 'every phrase is a -지 마세요 command');
+  assert(ex2.items.find(i => i.n === 4).grammar.indexOf('하지 마세요') >= 0,
+    'item 4 contrasts the regular 하지 마세요 with the irregular 해요');
+
+  const ui = loadUi();
+  ui.setBank('u14-vocab-2');
+  assert(ui.run('workbookState.chips.length') === 4, 'all four phrases are offered');
+  ui.run("wbPickChip('m_call_name')");
+  const rows = ui.els['wb-items'].children;
+  assert(ui.els['wb-items'].className === 'wb-items-match', 'match rows use the two-column layout');
+  assert(rows[0].innerHTML.indexOf('wb-left') >= 0 && rows[0].innerHTML.indexOf('wb-join') >= 0,
+    'a match row draws the situation, the join and the phrase');
+  assert(rows[0].innerHTML.indexOf('이름을 부르지 마세요.') >= 0, 'the joined phrase is shown in full');
+  // Score it exactly right.
+  ['m_call_name', 'm_one_hand', 'm_cross_legs', 'm_banmal'].forEach((id, i) => {
+    ui.run('workbookState.focus = ' + i);
+    ui.run("wbPickChip('" + id + "')");
+  });
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.score') === 4, 'the textbook key scores 4 of 4');
+  assert(ui.els['wb-explain'].innerHTML.indexOf('-지 마세요') >= 0,
+    'the explanations cover the -지 마세요 form');
+}
+
+// ── 8. 연습 3 — completing a dialogue ────────────────────────────────────────
+console.log('\n--- 8. 연습 3 (dialogue) ---');
+const ex3 = wb.exercises.find(e => e.id === 'u14-vocab-3');
+{
+  assert(!!ex3 && ex3.type === 'dialogue', '연습 3 is a dialogue exercise');
+  assert(ex3.reply === '아, 그래요? 죄송합니다.', "B's line is the same apology throughout");
+  assert(ex3.bank.length === 5, 'five signs in the box');
+  assert(ex3.bank.filter(b => b.usedByExample).length === 1
+    && ex3.bank.find(b => b.usedByExample).id === 'no_smoking',
+    '금연 is the circled example');
+  // The blank sits mid-sentence, so every line needs a placeholder.
+  assert(ex3.example.aKo.indexOf('{}') >= 0, "the example's A line marks where the sign goes");
+  assert(ex3.items.every(i => i.aKo.indexOf('{}') >= 0), 'every A line marks where the sign goes');
+  const KEY3 = [[1, 'no_food', '음식물 반입 금지'], [2, 'no_photos', '사진 촬영 금지'],
+    [3, 'no_phones', '휴대 전화 사용 금지'], [4, 'no_parking', '주차 금지']];
+  KEY3.forEach(([n, id, ko]) => {
+    const item = ex3.items.find(i => i.n === n);
+    assert(item && item.answer === id, '연습 3 item ' + n + ' answers ' + ko);
+    assert(ex3.bank.find(b => b.id === id).ko === ko, 'and ' + id + ' reads ' + ko);
+  });
+  assert(new Set(ex3.items.map(i => i.answer)).size === 4, 'no sign is used twice');
+  assert(ex3.items.every(i => i.why && i.grammar), 'every sign is explained');
+  assert(ex3.bank.every(b => !b.polite), 'signs are nouns — there is nothing to conjugate');
+
+  const ui = loadUi();
+  ui.setBank('u14-vocab-3');
+  assert(ui.run('workbookState.chips.length') === 4, 'the example sign is not offered');
+  ui.run("wbPickChip('no_food')");
+  const rows = ui.els['wb-items'].children;
+  assert(ui.els['wb-items'].className === 'wb-items-dialogue', 'dialogue rows use their own layout');
+  assert((rows[0].innerHTML.match(/wb-spk/g) || []).length === 2, 'a row shows both speakers');
+  assert(rows[0].innerHTML.indexOf('음식물 반입 금지') >= 0, 'the sign lands inside A’s line');
+  assert(rows[0].innerHTML.indexOf('아, 그래요? 죄송합니다.') >= 0, "and B's reply is printed");
+  assert(rows[0].innerHTML.indexOf('여기는') < rows[0].innerHTML.indexOf('음식물 반입 금지')
+    && rows[0].innerHTML.indexOf('음식물 반입 금지') < rows[0].innerHTML.indexOf('입니다'),
+    'the sign sits between 여기는 and 입니다, not at the end of the line');
+  assert(ui.els['wb-example'].innerHTML.indexOf('금연') >= 0, 'the worked example shows 금연 filled in');
+  KEY3.forEach(([n, id]) => {
+    ui.run('workbookState.focus = ' + (n - 1));
+    ui.run("wbPickChip('" + id + "')");
+  });
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.score') === 4, 'the textbook key scores 4 of 4');
+}
+
+// ── 9. Full screen ──────────────────────────────────────────────────────────
+console.log('\n--- 9. Full screen ---');
+{
+  const panel = css.slice(css.indexOf('#workbook-panel {'));
+  assert(panel.indexOf('width: 100%') >= 0 && panel.indexOf('height: 100%') >= 0,
+    'the workbook panel fills the viewport');
+  assert(panel.indexOf('max-width: none') >= 0, 'and is not held to the modal width');
+  assert(css.indexOf('.wb-items-pick') >= 0 && css.indexOf('.wb-pick {') >= 0, 'the list is styled');
+  assert(css.indexOf('.wb-items-match') >= 0 && css.indexOf('.wb-join') >= 0, 'match rows are styled');
+  assert(css.indexOf('.wb-items-dialogue') >= 0 && css.indexOf('.wb-spk') >= 0, 'dialogue rows are styled');
+  assert(css.indexOf('.wb-hidden') >= 0, 'a hidden-state class exists for the shared slots');
+  assert(html.indexOf('id="wb-back"') >= 0, 'the markup carries the back button');
+  const kb2 = uiSrc.slice(uiSrc.indexOf("if (st.mode === 'pick')"));
+  assert(uiSrc.indexOf("if (st.mode === 'pick')") >= 0, 'the list has its own key handling');
+  assert(kb2.indexOf('openWorkbookExercise') >= 0, 'and number keys open an exercise');
+}
+
+// ── 10. 문법과 표현 연습 1 — V-(으)ㄴ 적(이) 있다[없다] ────────────────────────
+console.log('\n--- 10. 문법과 표현 연습 1 (experience) ---');
+const exG = wb.exercises.find(e => e.id === 'u14-grammar-1');
+{
+  // A sandbox just for reading the art table and its renderer.
+  const base = loadUi();
+  assert(!!exG && exG.type === 'experience', 'the grammar exercise is an experience exercise');
+  assert(exG.section === '문법과 표현' && exG.no === '연습 1', 'it is 문법과 표현 · 연습 1');
+  assert(exG.items.length === 6, 'six pictures, six questions');
+  assert(!exG.bank, 'no shared box — the whole point is the choice on each row');
+
+  // The answer key from the back of the book, and the three conjugation classes
+  // those six verbs were chosen to cover.
+  const KEYG = [
+    [1, '간', '러시아에', 'go_russia'],
+    [2, '만난', '유명한 사람을', 'meet_famous'],
+    [3, '쓴', '연애편지를', 'write_letter'],
+    [4, '한', '아르바이트를', 'part_time_job'],
+    [5, '들은', '한국 전통 음악을', 'traditional_music'],
+    [6, '만든', '불고기를', 'make_bulgogi']
+  ];
+  KEYG.forEach(([n, form, stem, art]) => {
+    const item = exG.items.find(i => i.n === n);
+    assert(!!item, 'question ' + n + ' exists');
+    const correct = item.choices.find(c => c.id === item.answer);
+    assert(correct && correct.ko === form, 'question ' + n + ' answers ' + form);
+    assert(item.stemKo === stem, 'question ' + n + ' keeps the printed prompt');
+    assert(item.art === art, 'question ' + n + ' uses the ' + art + ' picture');
+    assert(item.choices.length === 3, 'question ' + n + ' offers three forms');
+    assert(item.choices.some(c => c.id === item.answer), 'and the answer is one of them');
+  });
+  // Items 5 and 6 are the ones that make this exercise worth doing.
+  const five = exG.items.find(i => i.n === 5);
+  assert(five.choices.some(c => c.ko === '듣은'),
+    'question 5 offers 듣은 — the ㄷ-irregular trap has to be on the row to be a trap');
+  assert(five.grammar.indexOf('ㄷ') >= 0, 'and the note names the ㄷ-irregular');
+  const six = exG.items.find(i => i.n === 6);
+  assert(six.choices.some(c => c.ko === '만들은'), 'question 6 offers 만들은 — the ㄹ trap');
+  assert(six.grammar.indexOf('ㄹ') >= 0, 'and the note names the ㄹ drop');
+  assert(exG.items.every(i => i.why && i.grammar), 'every form is explained');
+  assert(exG.ownLabels.yes === '있어요' && exG.ownLabels.no === '없어요',
+    'the two personal answers are 있어요 and 없어요');
+  assert(exG.example && exG.example.own === 'no',
+    'the worked example is the 없어요 one the book prints');
+
+  // Art: every key the content names must exist, and be a clean 16x16.
+  const artKeys = base.run('workbookArtKeys()');
+  assert(artKeys.length >= 6, 'the art table holds at least six icons');
+  exG.items.forEach((item) => {
+    assert(artKeys.includes(item.art), item.art + ' exists in the art table');
+    const size = base.run("workbookArtSize('" + item.art + "')");
+    assert(size.w === 16 && size.h === 16, item.art + ' is 16x16 (got ' + size.w + 'x' + size.h + ')');
+    assert(size.ragged === 0, item.art + ' has no ragged rows');
+  });
+  const pal = base.run('WORKBOOK_ART_PALETTE');
+  artKeys.forEach((k) => {
+    const rows = base.run("WORKBOOK_ART['" + k + "']");
+    const unknown = [...new Set(rows.join('').split(''))].filter(c => !(c in pal));
+    assert(unknown.length === 0, k + ' uses only palette characters'
+      + (unknown.length ? ' — found ' + unknown.join('') : ''));
+  });
+  const svg = base.run("workbookIconSvg('go_russia', 4)");
+  assert(svg.indexOf('<svg') === 0 && svg.indexOf('crispEdges') > 0,
+    'icons render as crisp-edged SVG, not a blurred image');
+  assert(svg.indexOf('viewBox="0 0 16 16"') > 0, 'the viewBox matches the matrix');
+  assert(base.run("workbookIconSvg('no_such_icon', 4)") === '', 'an unknown key renders nothing');
+}
+
+// ── 11. Two decisions per row, only one of them graded ───────────────────────
+console.log('\n--- 11. Grading the form, not the life ---');
+{
+  const ui = loadUi();
+  ui.setBank('u14-grammar-1');
+  assert(ui.run('workbookState.own.length') === 6, 'a personal answer is tracked per question');
+  assert(ui.run('workbookState.own.every(v => v === null)'), 'and starts unset');
+  assert(ui.els['wb-bank'].className === 'wb-hidden', 'the shared box is hidden for this type');
+
+  // A form alone does not finish the page: the sentence needs its ending too.
+  exG.items.forEach((item, i) => ui.run("wbPickChoice(" + i + ", '" + item.answer + "')"));
+  assert(ui.run('workbookState.fill.every(Boolean)'), 'all six forms are chosen');
+  assert(ui.run('wbComplete()') === false, 'the page is not complete without the personal answers');
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.checked') === false, 'and cannot be checked');
+
+  // Answering 없어요 to everything is a valid life. It must score the same.
+  exG.items.forEach((_, i) => ui.run("wbSetOwn(" + i + ", 'no')"));
+  assert(ui.run('wbComplete()') === true, 'now the page is complete');
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.score') === 6, 'six correct forms score 6');
+
+  const flipped = loadUi();
+  flipped.setBank('u14-grammar-1');
+  exG.items.forEach((item, i) => {
+    flipped.run("wbPickChoice(" + i + ", '" + item.answer + "')");
+    flipped.run("wbSetOwn(" + i + ", 'yes')");
+  });
+  flipped.run('checkWorkbook()');
+  assert(flipped.run('workbookState.score') === 6,
+    'answering 있어요 to everything scores the same — the personal answer is never wrong');
+
+  // A wrong form is wrong, and the row says which one was right.
+  const wrong = loadUi();
+  wrong.setBank('u14-grammar-1');
+  exG.items.forEach((item, i) => {
+    const bad = item.choices.find(c => c.id !== item.answer);
+    wrong.run("wbPickChoice(" + i + ", '" + bad.id + "')");
+    wrong.run("wbSetOwn(" + i + ", 'no')");
+  });
+  wrong.run('checkWorkbook()');
+  assert(wrong.run('workbookState.score') === 0, 'six wrong forms score 0');
+  const rowsHtml = wrong.els['wb-items'].children.map(deepHtml).join('');
+  const rowClasses = wrong.els['wb-items'].children
+    .flatMap(r => (r.children || []).flatMap(c => (c.children || [])))
+    .flatMap(c => (c.children || []))
+    .map(b => b.className || '');
+  assert(rowsHtml.indexOf('wb-chip-key') >= 0, 'the choice buttons are rendered per row');
+  assert(rowClasses.filter(c => c.indexOf('wb-pick-form') === 0 && c.indexOf('key') > 0).length === 6,
+    'the correct form is marked on every row after checking');
+  assert(wrong.els['wb-explain'].innerHTML.indexOf('들은') >= 0,
+    'the explanations name the right form');
+
+  // Picking a form on one row must not disturb another.
+  const solo = loadUi();
+  solo.setBank('u14-grammar-1');
+  solo.run("wbPickChoice(0, '" + exG.items[0].answer + "')");
+  solo.run("wbPickChoice(1, '" + exG.items[1].answer + "')");
+  solo.run("wbPickChoice(0, '" + exG.items[0].choices[1].id + "')");
+  assert(solo.run('workbookState.fill[1]') === exG.items[1].answer,
+    'changing question 1 leaves question 2 alone');
+  solo.run("wbPickChoice(0, 'not_a_choice_here')");
+  assert(solo.run('workbookState.fill[0]') === exG.items[0].choices[1].id,
+    'a choice that does not belong to the row is refused');
+  solo.run("wbSetOwn(0, 'maybe')");
+  assert(solo.run('workbookState.own[0]') === null, 'only yes and no are accepted');
+
+  // The assembled sentence is what the book asks the learner to write.
+  const sent = loadUi();
+  sent.setBank('u14-grammar-1');
+  sent.run("wbPickChoice(4, '" + exG.items[4].answer + "')");
+  sent.run("wbSetOwn(4, 'no')");
+  const row5 = deepHtml(sent.els['wb-items'].children[4]);
+  ['저는', '한국 전통 음악을', '들은', '적이', '없어요'].forEach((part) => {
+    assert(row5.indexOf(part) >= 0, 'the built sentence contains ' + part);
+  });
+  assert(row5.indexOf('<svg') >= 0, 'and the row carries its picture');
+  assert(deepText(sent.els['wb-items'].children[4]).indexOf('5)') >= 0,
+    'and the row is numbered');
+}
+
+// ── 12. The interview format is gone ─────────────────────────────────────────
+console.log('\n--- 12. Solo-playable ---');
+{
+  assert(/interview/i.test(exG.noteEn), 'the page says outright that the book asks for an interview');
+  assert(/own experience|never marked/i.test(exG.noteEn),
+    'and that the personal half is not marked');
+  assert(css.indexOf('.wb-pick-own') >= 0 && css.indexOf('.wb-pick-form') >= 0,
+    'the two kinds of button are styled apart');
+  const ownStyle = css.slice(css.indexOf('.wb-pick-own.on'));
+  assert(ownStyle.indexOf('#1e3a8a') !== 0, 'the personal answer is not styled as a correct answer');
+  assert(uiSrc.indexOf('Never scored') >= 0, 'the code says why wbSetOwn is not graded');
+  assert(manifest.includes('js/workbookArt.js'), 'the art module is in the manifest');
+  assert(html.indexOf('js/workbookArt.js') >= 0, 'and has a script tag');
+}
+
+console.log('\n====================================================');
+console.log('RESULT: ' + passed + ' passed, ' + failed + ' failed');
+console.log('====================================================');
+process.exit(failed ? 1 : 0);

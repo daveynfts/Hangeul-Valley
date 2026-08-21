@@ -736,6 +736,47 @@
     </div>
   </div>
 
+  <!-- ══════════ STUDY DESK · MODE CHOOSER ══════════ -->
+  <div id="desk-menu-overlay" role="dialog" aria-modal="true" aria-labelledby="desk-menu-title">
+    <div id="desk-menu-panel" class="glass-modal">
+      <div id="desk-menu-head">
+        <div>
+          <div id="desk-menu-title">📖 학습 책상</div>
+          <div id="desk-menu-sub">Study desk · what would you like to do?</div>
+        </div>
+        <button type="button" class="desk-menu-close" onclick="closeDeskMenu()" aria-label="Close study desk">✕</button>
+      </div>
+      <div id="desk-menu-list"></div>
+      <div id="desk-menu-hint">1 · 2 to pick &nbsp;·&nbsp; ↑ ↓ then Enter &nbsp;·&nbsp; Esc to leave</div>
+    </div>
+  </div>
+
+  <!-- ══════════ STUDY DESK · WORKBOOK PAGE ══════════ -->
+  <div id="workbook-overlay" role="dialog" aria-modal="true" aria-labelledby="wb-title">
+    <div id="workbook-panel" class="glass-modal">
+      <div id="wb-head">
+        <div id="wb-title-wrap">
+          <div id="wb-title">어휘 · 연습 1</div>
+          <div id="wb-sub"></div>
+        </div>
+        <span id="wb-count">0 / 4</span>
+        <button type="button" class="wb-close" onclick="closeWorkbook()" aria-label="Close workbook">✕</button>
+      </div>
+      <div id="wb-body">
+        <div id="wb-instruction"></div>
+        <div id="wb-example"></div>
+        <div id="wb-bank" aria-label="Expression bank"></div>
+        <div id="wb-items"></div>
+        <div id="wb-explain"></div>
+      </div>
+      <div id="wb-foot">
+        <button type="button" id="wb-back" class="wb-hidden">← 연습 목록</button>
+        <span id="wb-hint"></span>
+        <button type="button" id="wb-check">확인 Check</button>
+      </div>
+    </div>
+  </div>
+
   <div id="rank-card-overlay">
     <div id="rank-card">
       <div id="rank-seal">🌱</div>
@@ -830,6 +871,7 @@
   <script src="js/vocabArtUnit14.js"></script>
   <script src="js/hudArt.js"></script>
   <script src="js/trophyArt.js"></script>
+  <script src="js/workbookArt.js"></script>
   <script src="js/data.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/systems/atmosphere.js"></script>

@@ -7,6 +7,7 @@ const levelsLib = require('./lib/levels');
 const vocabFactsLib = require('./lib/vocabFacts');
 const syncLib = require('./lib/sync');
 const worldLib = require('./lib/world');
+const workbookLib = require('./lib/workbook');
 const artLib = require('./lib/art');
 const skinsLib = require('./lib/skins');
 
@@ -298,6 +299,18 @@ app.get('/api/unit10/world', (req, res, next) => {
 });
 app.put('/api/unit10/world', (req, res, next) => {
   try { res.json({ success: true, data: worldLib.saveWorld(req.body, getRootDir()) }); }
+  catch (err) { err.status = 400; next(err); }
+});
+
+// Unit 14 workbook pages. saveWorkbook refuses anything the game could not
+// render, so a bad edit fails here with a reason rather than shipping a page
+// the learner cannot finish.
+app.get('/api/unit14/workbook', (req, res, next) => {
+  try { res.json({ success: true, data: workbookLib.getWorkbook(getRootDir()) }); }
+  catch (err) { next(err); }
+});
+app.put('/api/unit14/workbook', (req, res, next) => {
+  try { res.json({ success: true, data: workbookLib.saveWorkbook(req.body, getRootDir()) }); }
   catch (err) { err.status = 400; next(err); }
 });
 
