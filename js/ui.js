@@ -2102,6 +2102,28 @@ if (typeof window !== 'undefined') {
   window.closeRankUp = closeRankUp;
 }
 
+// Word text reaches innerHTML from levels.json. Escaping keeps a bad string a wrong
+// label rather than markup.
+function vbEsc(v) {
+  if (v === null || v === undefined) return '';
+  return String(v)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Headwords run from one syllable to a 13-character idiom, and a single font size cannot
+// serve both: sized for the idiom the common 3-syllable word is tiny, sized for the word
+// the idiom overflows. Three steps, picked off the headword's own length.
+function vbKoSizeClass(ko) {
+  const n = String(ko || '').replace(/\s+/g, '').length;
+  if (n >= 8) return ' vc-ko-xs';
+  if (n >= 6) return ' vc-ko-sm';
+  return '';
+}
+
 function renderVocabCards() {
   const lvl = levelsData[currentLevelIndex];
   const q = vocabSearch.value.trim().toLowerCase();
@@ -2117,10 +2139,24 @@ function renderVocabCards() {
     else if(activeCat.includes('Due')) words = words.filter(w => wordIsDue(w.ko));
     else words = words.filter(w => wordCategory(w) === activeCat);
   }
-  
+
   if(q) words = words.filter(w => w.ko.toLowerCase().includes(q) || w.en.toLowerCase().includes(q));
-  
-  vocabCountEl.textContent = `${words.length} words`; vocabGrid.innerHTML = '';
+
+  vocabCountEl.textContent = words.length === lvl.words.length
+    ? `${words.length} words`
+    : `${words.length} of ${lvl.words.length} words`;
+  vocabGrid.innerHTML = '';
+
+  if (!words.length) {
+    const empty = document.createElement('div');
+    empty.className = 'vocab-empty';
+    empty.textContent = q
+      ? `No word in this level matches “${q}”.`
+      : 'No word in this group yet.';
+    vocabGrid.appendChild(empty);
+    return;
+  }
+
   const now = Date.now();
   words.forEach(w => {
     const times   = harvestCounts.get(w.ko) || 0;
@@ -2139,21 +2175,37 @@ function renderVocabCards() {
 
     const div = document.createElement('div');
     div.className = `vocab-card ${mBadgeClass}` + (times > 0 || srsIsGraduated(e) ? ' planted' : '') + (planted ? ' growing' : '');
-    div.title = 'Click for Fun Facts & Hints!';
-    div.style.cursor = 'pointer';
+    // The gloss is clamped to two lines on the card, so the full text has to stay
+    // reachable somewhere — the tooltip carries it, and so does the fun-fact panel.
+    div.title = `${w.ko} — ${w.en}\nClick for word origin and hints`;
+    // A div rather than a button: the speak control is itself a button, and a button
+    // inside a button is invalid markup. role + tabindex + a key handler gets the same
+    // keyboard behaviour without nesting one inside the other.
+    div.setAttribute('role', 'button');
+    div.setAttribute('tabindex', '0');
+    div.setAttribute('aria-label', `${w.ko}, ${w.en}. ${mBadgeLabel}${mBadgeSuffix}. Open word details`);
     div.innerHTML = `
-      <button type="button" class="speak-btn vc-speak tts-only" title="Hear this word">🔊</button>
+      <button type="button" class="speak-btn vc-speak tts-only" title="Hear this word" aria-label="Hear ${vbEsc(w.ko)}">🔊</button>
       <span class="vc-emoji">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(w.ko, w.hint || '📝', 40) : (w.hint || '📝')}</span>
-      <span class="vc-ko">${w.ko}</span>
-      <span class="vc-en">${w.en}</span>
-      <span style="font-size:11px; color:#fde047; font-family:monospace">초성: ${chosung}</span>
-      <span class="mastery-badge ${mBadgeClass}">${mBadgeLabel}${mBadgeSuffix}</span>`;
+      <span class="vc-ko${vbKoSizeClass(w.ko)}" lang="ko">${vbEsc(w.ko)}</span>
+      <span class="vc-en">${vbEsc(w.en)}</span>
+      <span class="vc-meta">
+        <span class="vc-chosung" title="Initial consonants (초성)">${vbEsc(chosung)}</span>
+        <span class="mastery-badge ${mBadgeClass}">${mBadgeLabel}${mBadgeSuffix}</span>
+      </span>`;
     // Free here: the vocab book already shows the answer, so audio adds nothing to give away.
-    div.querySelector('.vc-speak').addEventListener('click', (e) => {
-      e.stopPropagation();          // don't also open the fun-fact modal
+    div.querySelector('.vc-speak').addEventListener('click', (ev) => {
+      ev.stopPropagation();          // don't also open the fun-fact modal
       speakKorean(w.ko, { force: true });
     });
     div.addEventListener('click', () => showVocabFunFact(w));
+    div.addEventListener('keydown', (ev) => {
+      if (!ev) return;
+      if (ev.key === 'Enter' || ev.key === ' ' || ev.key === 'Spacebar') {
+        if (typeof ev.preventDefault === 'function') ev.preventDefault();
+        showVocabFunFact(w);
+      }
+    });
     vocabGrid.appendChild(div);
   });
 }

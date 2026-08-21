@@ -1259,8 +1259,8 @@
 
     #vocab-panel {
       display: flex; flex-direction: column;
-      width: min(860px, 94vw); margin: auto;
-      height: 86vh; max-height: 760px;
+      width: min(1000px, 94vw); margin: auto;
+      height: 86vh; max-height: 800px;
       background: linear-gradient(180deg, #f6deaa, #e8c07a);
       border: 4px solid #8b5a2b;
       border-radius: 14px; overflow: hidden;
@@ -1275,20 +1275,22 @@
       border-bottom: 2px dashed #c4893a;
       display: flex; align-items: center; gap: 12px; flex-shrink: 0;
     }
-    #vocab-title-wrap { flex: 1; }
+    #vocab-title-wrap { flex: 1; min-width: 0; }
     #vocab-title { font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12; }
     #vocab-subtitle { font-family: 'VT323', monospace; font-size: 16px; color: #8b5a2b; margin-top: 2px; letter-spacing: 1px; }
+    /* Was #fff on a parchment header — a 1.32:1 ✕ that was effectively invisible. */
     #vocab-close-btn {
-      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px; color: #fff; font-size: 18px; width: 36px; height: 36px;
+      background: var(--parch-l); border: 1.5px solid var(--wood-m);
+      border-radius: 8px; color: var(--wood-d); font-size: 18px; width: 36px; height: 36px;
       cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all .15s;
+      flex-shrink: 0; transition: background .15s, border-color .15s, color .15s;
     }
-    #vocab-close-btn:hover { background: rgba(244, 63, 94, 0.3); border-color: var(--neon-pink); }
+    #vocab-close-btn:hover { background: #ffd9d9; border-color: #b91c1c; color: #b91c1c; }
+    #vocab-close-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.45); }
 
     #vocab-controls {
       padding: 12px 22px; display: flex; gap: 10px; flex-shrink: 0;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.15); flex-wrap: wrap;
+      border-bottom: 1px solid rgba(139, 90, 43, 0.25); flex-wrap: wrap;
     }
     #vocab-search {
       flex: 1; min-width: 180px;
@@ -1305,44 +1307,106 @@
       cursor: pointer; letter-spacing: .5px; white-space: nowrap; transition: all .15s;
     }
     .cat-filter-btn.active { background: #dcfce7; border-color: #166534; color: #14532d; }
-    .cat-filter-btn:hover:not(.active) { background: rgba(255,255,255,.1); color: #fff; }
+    /* Hover used to set color:#fff over a near-transparent white — the label vanished
+       against the parchment on the way to being clicked. */
+    .cat-filter-btn:hover:not(.active) { background: #ffe9b8; border-color: var(--wood-m); color: var(--wood-d); }
+    .cat-filter-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.4); }
 
     #vocab-grid-wrap { flex: 1; overflow-y: auto; padding: 16px 20px; }
-    #vocab-grid-wrap::-webkit-scrollbar { width: 6px; }
-    #vocab-grid-wrap::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 6px; }
-    #vocab-count { font-family: 'VT323', monospace; font-size: 18px; color: rgba(226, 232, 240, 0.5); margin-bottom: 12px; letter-spacing: 1px; }
+    #vocab-grid-wrap::-webkit-scrollbar { width: 8px; }
+    #vocab-grid-wrap::-webkit-scrollbar-track { background: rgba(139,90,43,0.15); border-radius: 8px; }
+    #vocab-grid-wrap::-webkit-scrollbar-thumb { background: var(--wood-m); border-radius: 8px; }
+    /* Was rgba(226,232,240,.5) — near-white at half opacity on parchment, 1.07:1. */
+    #vocab-count {
+      font-family: 'VT323', monospace; font-size: 19px; color: #7a3e12;
+      margin-bottom: 12px; letter-spacing: 1px;
+    }
 
+    /* Wider cells and a fixed row height. The Korean is the reason this screen exists, so
+       it gets the room; the old 118px cell forced a 3-syllable word onto two lines at
+       18px and let taller cards spill past their neighbours. */
     #vocab-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+      gap: 12px;
+      align-items: stretch;
     }
     .vocab-card {
       background: #fff8e8;
-      border: 1.5px solid #c4893a;
-      border-radius: 10px; padding: 10px 8px; text-align: center;
+      border: 2px solid #c4893a;
+      border-radius: 12px; padding: 14px 10px 10px; text-align: center;
       transition: transform .15s, border-color .15s, box-shadow .15s;
       cursor: pointer; position: relative;
+      display: flex; flex-direction: column; align-items: center;
+      min-height: 190px;
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 #8b5a2b;
     }
     .vocab-card:hover { transform: translateY(-2px); border-color: #166534; }
+    .vocab-card:focus-visible {
+      outline: none; border-color: #166534;
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 #8b5a2b, 0 0 0 3px rgba(22,101,52,.5);
+    }
     .vocab-card.planted { border-color: #166534; background: #e8f8dc; }
 
-    .vc-emoji { font-size: 28px; display: block; line-height: 1; margin-bottom: 4px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.25)); }
-    .vc-emoji img.vocab-art-icon { width: 40px; height: 40px; display: inline-block; filter: none; }
-    .vc-ko { font-size: 18px; font-weight: 900; color: var(--ink); font-family: 'Noto Sans KR', sans-serif; display: block; margin-bottom: 2px; }
-    .vc-en { font-family: 'VT323', monospace; font-size: 15px; color: #7a3e12; display: block; letter-spacing: .3px; }
-
-    .mastery-badge {
-      display: inline-block; padding: 3px 8px; border-radius: 12px;
-      font-family: 'Press Start 2P', monospace; font-size: 8px; font-weight: 700; margin-top: 6px;
+    .vc-emoji { font-size: 30px; display: block; line-height: 1; margin-bottom: 6px; filter: drop-shadow(0 2px 3px rgba(0,0,0,.25)); }
+    .vc-emoji img.vocab-art-icon { width: 44px; height: 44px; display: inline-block; filter: none; }
+    /* 18px -> 29px. Three steps down for the long headwords: most entries are three
+       syllables, but the idioms run to thirteen characters and would overflow. */
+    .vc-ko {
+      font-size: 29px; font-weight: 900; color: var(--ink);
+      font-family: 'Noto Sans KR', sans-serif; display: block;
+      line-height: 1.18; margin-bottom: 5px; word-break: keep-all;
     }
-    .mastery-badge.novice { background: rgba(148, 163, 184, 0.2); color: #94a3b8; border: 1px solid #64748b; }
-    .mastery-badge.practicing { background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid #3b82f6; }
-    .mastery-badge.mastered { background: rgba(192, 132, 252, 0.2); color: #c084fc; border: 1px solid #c084fc; box-shadow: 0 0 8px rgba(192, 132, 252, 0.4); }
-    .mastery-badge.legendary { background: rgba(245, 158, 11, 0.25); color: #fde047; border: 1.5px solid #f59e0b; box-shadow: 0 0 12px rgba(245, 158, 11, 0.6); }
+    .vc-ko.vc-ko-sm { font-size: 23px; }
+    .vc-ko.vc-ko-xs { font-size: 18px; }
+    /* Clamped to two lines so a 43-character gloss cannot set the height of every row.
+       The full text stays in the card's tooltip and in the fun-fact panel. */
+    .vc-en {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; color: #7a3e12;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+      overflow: hidden; line-height: 1.35; letter-spacing: .2px;
+    }
+    /* Pinned to the bottom so the badges line up across a row however tall the gloss is. */
+    .vc-meta {
+      margin-top: auto; padding-top: 8px; display: flex; flex-direction: column;
+      align-items: center; gap: 5px; width: 100%;
+    }
+    /* Was inline color:#fde047 — yellow on cream, 1.25:1, and unreadable. */
+    .vc-chosung {
+      font-family: 'Noto Sans KR', monospace; font-size: 12px; font-weight: 700;
+      color: #5b3412; background: #fff3d6; border: 1px solid #d9b072;
+      border-radius: 6px; padding: 2px 7px; letter-spacing: 2px;
+      max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
 
-    .vocab-card.mastered { border-color: #c084fc !important; box-shadow: 0 0 14px rgba(192, 132, 252, 0.35) !important; }
-    .vocab-card.legendary { border-color: #f59e0b !important; box-shadow: 0 0 18px rgba(245, 158, 11, 0.5) !important; }
+    /* All four badges were dark-theme fills — light text on translucent colour, landing
+       on a cream card. "New" measured 2.42:1. Same semantics, parchment palette. */
+    .mastery-badge {
+      display: inline-block; padding: 4px 8px; border-radius: 12px;
+      font-family: 'Press Start 2P', monospace; font-size: 8px; font-weight: 700;
+      line-height: 1.5; border: 1.5px solid; max-width: 100%;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .mastery-badge.novice     { background: #ece3d3; color: #463523; border-color: #a08a6f; }
+    .mastery-badge.practicing { background: #dbeafe; color: #1e3a8a; border-color: #2563eb; }
+    .mastery-badge.mastered   { background: #f3e8ff; color: #581c87; border-color: #7e22ce; }
+    .mastery-badge.legendary  { background: #fef3c7; color: #78350f; border-color: #b45309; }
+
+    .vocab-card.mastered  { border-color: #7e22ce; box-shadow: inset 0 1px 0 #fff, 0 2px 0 #6b21a8; }
+    .vocab-card.legendary { border-color: #b45309; box-shadow: inset 0 1px 0 #fff, 0 2px 0 #92400e; }
+
+    .vocab-empty {
+      grid-column: 1 / -1; text-align: center; padding: 32px 12px;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #7a3e12;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #vocab-overlay.visible { animation: none; }
+      #vocab-panel { animation: none; }
+      .vocab-card, .cat-filter-btn, #vocab-close-btn { transition: none; }
+      .vocab-card:hover { transform: none; }
+    }
+
 
     /* ── SEED SHOP OVERLAY ──────────────────────────────────────────────── */
     #shop-overlay {
@@ -1571,15 +1635,28 @@
     #vff-word-row { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-bottom: 1px solid rgba(74,222,128,.15); }
     #vff-emoji { font-size: 42px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; min-width: 56px; min-height: 56px; }
     #vff-emoji img.vocab-art-icon { width: 56px; height: 56px; }
-    #vff-en { font-size: 24px; font-weight: 800; color: #fff; font-family: 'Be Vietnam Pro', sans-serif; }
+    /* Demoted under the Korean. This is the word-detail view of a Hangul learning
+       game, and the gloss was set larger than the headword it explains. */
+    #vff-en { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.92); font-family: 'Be Vietnam Pro', sans-serif; }
     #vff-cat { font-size: 14px; color: var(--neon-green); margin-top: 2px; font-family: 'Be Vietnam Pro', sans-serif; }
     #vff-ko-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
-    #vff-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: 700; color: #fde047; }
-    #vff-status { margin-left: auto; text-align: right; }
+    /* 18px -> 34px: the headword now leads the panel, matching the card that opens it. */
+    #vff-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 34px; font-weight: 800; color: #fde047; line-height: 1.15; word-break: keep-all; }
+    /* The headword grew to 34px and squeezed this column until "Not started" broke
+       over two lines. The word block absorbs the slack; the status keeps its width. */
+    #vff-word-row > div:not(#vff-status) { flex: 1 1 auto; min-width: 0; }
+    /* nowrap only on the phase label — that is the short one that was breaking into
+       "Not / started". The modality line grows to three entries once a word is
+       studied in all three skills, and pinning that open overflowed the modal on a
+       phone, so it is allowed to wrap and to shrink. */
+    #vff-status { margin-left: auto; text-align: right; flex: 0 1 auto; min-width: 0; max-width: 46%; }
+    #vff-phase { white-space: nowrap; }
     #vff-phase { font-size: 14px; color: var(--neon-gold); font-weight: 700; font-family: 'Be Vietnam Pro', sans-serif; }
-    #vff-harvests { font-size: 13px; color: rgba(226, 232, 240, 0.5); margin-top: 3px; font-family: 'Be Vietnam Pro', sans-serif; }
+    /* Was 0.5 alpha, composited to 4.36:1 — under AA for 13px text. */
+    #vff-harvests { font-size: 13px; color: rgba(226, 232, 240, 0.78); margin-top: 3px; font-family: 'Be Vietnam Pro', sans-serif; }
     .vff-section { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.06); }
-    .vff-section-title { font-family: 'Press Start 2P', monospace; font-size: 10px; color: rgba(226, 232, 240, 0.4); margin-bottom: 8px; text-transform: uppercase; }
+    /* Was 0.4 alpha, composited to 3.28:1 — a 10px label that failed AA outright. */
+    .vff-section-title { font-family: 'Press Start 2P', monospace; font-size: 10px; color: rgba(226, 232, 240, 0.75); margin-bottom: 8px; text-transform: uppercase; }
     .vff-fact-text { font-size: 15px; line-height: 1.7; color: rgba(226, 232, 240, 0.9); font-family: 'Be Vietnam Pro', sans-serif; }
     .vff-hint-box { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 12px 14px; color: #fde047; font-weight: 600; }
     #vff-close-btn {
@@ -1733,7 +1810,15 @@
       }
 
       .ls-grid { grid-template-columns: 1fr; }
-      #vocab-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+      /* Two real columns rather than four cramped ones. minmax(110px) used to squeeze
+         four cards onto a phone and put every headword on two lines; 140px overshot the
+         other way and left one 288px column, which is a lot of scrolling for 60 words.
+         130 + 8 gap fits two in the 288px the grid actually gets at 375px wide. */
+      #vocab-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+      .vocab-card { min-height: 172px; padding: 12px 8px 8px; }
+      .vc-ko { font-size: 25px; }
+      .vc-ko.vc-ko-sm { font-size: 20px; }
+      .vc-ko.vc-ko-xs { font-size: 16px; }
       #shop-level-grid { grid-template-columns: 1fr; }
       #fish-album-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
       .trophy-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
@@ -1744,6 +1829,10 @@
       #cat-portrait-canvas { width: 90px; height: 135px; }
       #cat-word-wrap { padding: 12px; }
       #cat-ko { font-size: 32px; }
+      /* Headword, gloss and study status cannot share one row at this width. */
+      #vff-word-row { flex-wrap: wrap; }
+      #vff-status { margin-left: 0; text-align: left; max-width: 100%; flex: 1 1 100%; }
+      #vff-ko { font-size: 28px; }
       #cat-dialog-emoji-word { justify-content: center; }
 
     }
