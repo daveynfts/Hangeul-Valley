@@ -471,9 +471,42 @@ function getActiveCookingRecipes() {
 }
 
 let selectedRecipeId = 'kimchi';
+let cookingFilter = 'all';
+let cookingSearch = '';
+
+// Recipe names, descriptions and ingredient labels come from the recipe tables and
+// ITEM_DB and are written straight into innerHTML. Escaping keeps a bad string a wrong
+// label rather than markup.
+function ckEsc(v) {
+  if (v === null || v === undefined) return '';
+  return String(v)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function ckArt(ko, fallback, px) {
+  return (typeof vocabIconHtml === 'function')
+    ? vocabIconHtml(ko, fallback || '🍲', px || 30)
+    : (fallback || '🍲');
+}
 
 function openCookingUI() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  // A filter left over from a previous visit reads as "my recipes disappeared".
+  cookingFilter = 'all';
+  cookingSearch = '';
+  const search = document.getElementById('ck-search-input');
+  if (search) search.value = '';
+  if (typeof document !== 'undefined' && document.querySelectorAll) {
+    document.querySelectorAll('#ck-filters .ck-filter').forEach(function (btn) {
+      const on = btn.getAttribute('data-ck-filter') === 'all';
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
   renderCookingGrid(selectedRecipeId);
   setModalState('cooking-overlay', true);
 }
@@ -483,11 +516,52 @@ function closeCookingUI() {
   setModalState('cooking-overlay', false);
 }
 
+function setCookingFilter(filter) {
+  const valid = ['all', 'ready', 'missing', 'cooked'];
+  cookingFilter = valid.indexOf(filter) >= 0 ? filter : 'all';
+  if (typeof document !== 'undefined' && document.querySelectorAll) {
+    document.querySelectorAll('#ck-filters .ck-filter').forEach(function (btn) {
+      const on = btn.getAttribute('data-ck-filter') === cookingFilter;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderCookingGrid();
+}
+
+function setCookingSearch(q) {
+  cookingSearch = String(q === undefined || q === null ? '' : q).trim().toLowerCase();
+  renderCookingGrid();
+}
+
+// One place decides whether the pantry can support a recipe, so the list, the detail
+// panel and the Cook button can never disagree about it.
+function ckRecipeStatus(recipe, ingMap) {
+  const need = [];
+  (recipe.ingredients || []).forEach(function (req) {
+    const info = getItemInfo(req.itemId);
+    const key = info.key || req.itemId;
+    const have = ingMap[key] || 0;
+    need.push({
+      key: key,
+      nameKo: info.nameKo || req.itemId,
+      icon: info.icon || '📦',
+      have: have,
+      want: req.count,
+      ok: have >= req.count
+    });
+  });
+  const missing = need.filter(function (n) { return !n.ok; });
+  return { need: need, missing: missing, canCook: missing.length === 0 };
+}
+
 function renderCookingGrid(selectId) {
   const pantryList = document.getElementById('cooking-pantry-list');
   const recipeListEl = document.getElementById('cooking-recipe-list');
   const detailViewEl = document.getElementById('cooking-detail-view');
   const progressBadge = document.getElementById('cooking-progress-badge');
+  const emptyMsg = document.getElementById('ck-empty-msg');
 
   if (!recipeListEl) return;
 
@@ -501,64 +575,132 @@ function renderCookingGrid(selectId) {
   const ingMap = (inventoryState && inventoryState.ingredients) ? inventoryState.ingredients : {};
   const cookedRecipes = (cookingState && Array.isArray(cookingState.cookedRecipes)) ? cookingState.cookedRecipes : [];
 
-  // 1. Pantry Stock Summary
+  // Status is computed once per recipe and reused everywhere below.
+  const rows = recipes.map(function (r) {
+    const st = ckRecipeStatus(r, ingMap);
+    return { r: r, st: st, cooked: cookedRecipes.indexOf(r.id) >= 0 };
+  });
+  const selectedRow = rows.filter(function (x) { return x.r.id === selectedRecipeId; })[0] || rows[0];
+
+  // 1. Pantry Stock Summary — ingredients the selected dish calls for are marked, so the
+  //    bar answers "do I have what this needs" instead of just listing stock.
   if (pantryList) {
     pantryList.innerHTML = '';
     const entries = Object.entries(ingMap).filter(([_, count]) => count > 0);
     if (entries.length === 0) {
-      pantryList.innerHTML = '<span style="color:#94a3b8; font-size:11px;">No crop ingredients in pantry. Harvest crops to start cooking!</span>';
+      pantryList.innerHTML = '<span class="ck-pantry-empty">No crop ingredients in pantry. Harvest crops to start cooking!</span>';
     } else {
+      const needMap = {};
+      if (selectedRow) selectedRow.st.need.forEach(function (n) { needMap[n.key] = n; });
       entries.forEach(([ingKey, cnt]) => {
         const info = getItemInfo(ingKey);
+        const n = needMap[info.key || ingKey];
         const tag = document.createElement('span');
-        tag.style.cssText = 'background:rgba(15,23,42,0.8); border:1px solid rgba(245,158,11,0.3); border-radius:6px; padding:3px 8px; font-size:11px; font-family:"Noto Sans KR",sans-serif; color:#e2e8f0;';
-        const icon = (typeof vocabIconHtml === 'function')
-          ? vocabIconHtml(info.nameKo || ingKey, info.icon || '📦', 20)
-          : (info.icon || '📦');
-        tag.innerHTML = `${icon} ${info.nameKo || ingKey}: ×${cnt}`;
+        tag.className = 'ck-pantry-chip' + (n ? (n.ok ? ' needed' : ' short') : '');
+        if (n) tag.title = `${n.nameKo}: this dish needs ${n.want}, you have ${n.have}`;
+        tag.innerHTML = `${ckArt(info.nameKo || ingKey, info.icon, 20)} ${ckEsc(info.nameKo || ingKey)}: ×${cnt}`;
         pantryList.appendChild(tag);
       });
     }
   }
 
-  // 2. Progress Badge
-  if (progressBadge) {
-    progressBadge.textContent = `Cooked: ${cookedRecipes.filter(id => recipes.some(r => r.id === id)).length} / ${recipes.length}`;
+  // 2. Progress — count plus a bar.
+  const masteredCount = cookedRecipes.filter(id => recipes.some(r => r.id === id)).length;
+  if (progressBadge) progressBadge.textContent = `Cooked: ${masteredCount} / ${recipes.length}`;
+  const pFill = document.getElementById('ck-progress-fill');
+  const pTrack = document.getElementById('ck-progress-track');
+  if (pFill && pFill.style) {
+    pFill.style.width = (recipes.length ? Math.round(masteredCount / recipes.length * 100) : 0) + '%';
+  }
+  if (pTrack && pTrack.setAttribute) {
+    pTrack.setAttribute('aria-valuenow', String(masteredCount));
+    pTrack.setAttribute('aria-valuemax', String(recipes.length));
+    pTrack.setAttribute('aria-valuetext', `${masteredCount} of ${recipes.length} dishes mastered`);
   }
 
-  // 3. Render Recipe List Cards
-  recipeListEl.innerHTML = '';
-  recipes.forEach(r => {
-    const isSelected = r.id === selectedRecipeId;
-    const isCooked = cookedRecipes.includes(r.id);
-
-    let canCook = true;
-    r.ingredients.forEach(req => {
-      const info = getItemInfo(req.itemId);
-      const key = info.key || req.itemId;
-      const have = ingMap[key] || 0;
-      if (have < req.count) canCook = false;
+  // 3. Filter counts describe the whole cookbook, not the filtered view.
+  if (typeof document !== 'undefined' && document.querySelectorAll) {
+    const counts = {
+      all: rows.length,
+      ready: rows.filter(function (x) { return x.st.canCook; }).length,
+      missing: rows.filter(function (x) { return !x.st.canCook; }).length,
+      cooked: rows.filter(function (x) { return x.cooked; }).length
+    };
+    document.querySelectorAll('#ck-filters .ck-filter-count').forEach(function (el) {
+      const key = el.getAttribute('data-ck-count');
+      const n = counts[key] || 0;
+      el.textContent = String(n);
+      if (el.classList && typeof el.classList.toggle === 'function') el.classList.toggle('zero', n === 0);
     });
+  }
 
-    const card = document.createElement('div');
-    card.className = 'recipe-card';
-    card.style.cursor = 'pointer';
-    card.style.border = isSelected ? '2px solid var(--neon-gold)' : (isCooked ? '1.5px solid #22c55e' : '1.5px solid rgba(245, 158, 11, 0.3)');
-    card.style.background = isSelected ? 'rgba(245, 158, 11, 0.15)' : 'rgba(30, 41, 59, 0.7)';
+  // 4. Filter, search, then order: what the pantry can support first, then whatever is
+  //    closest to cookable. Insertion order gave no help at all.
+  let view = rows.filter(function (x) {
+    if (cookingFilter === 'ready') return x.st.canCook;
+    if (cookingFilter === 'missing') return !x.st.canCook;
+    if (cookingFilter === 'cooked') return x.cooked;
+    return true;
+  });
+  if (cookingSearch) {
+    view = view.filter(function (x) {
+      return String(x.r.nameKo).toLowerCase().indexOf(cookingSearch) >= 0
+        || String(x.r.nameEn).toLowerCase().indexOf(cookingSearch) >= 0;
+    });
+  }
+  view.sort(function (a, b) {
+    return (Number(b.st.canCook) - Number(a.st.canCook))
+      || (a.st.missing.length - b.st.missing.length)
+      || String(a.r.nameKo).localeCompare(String(b.r.nameKo), 'ko');
+  });
+
+  if (emptyMsg) {
+    let msg = '';
+    if (view.length === 0 && cookingSearch) msg = `No recipe matches “${cookingSearch}”.`;
+    else if (view.length === 0 && cookingFilter === 'ready') msg = 'Nothing is cookable yet — harvest the missing ingredients first.';
+    else if (view.length === 0 && cookingFilter === 'cooked') msg = 'No dish mastered yet. Cook one to fill the cookbook.';
+    else if (view.length === 0) msg = 'No recipe in this view.';
+    if (msg) emptyMsg.textContent = msg;
+    if (emptyMsg.classList && typeof emptyMsg.classList.toggle === 'function') {
+      emptyMsg.classList.toggle('hidden', msg === '');
+    }
+  }
+
+  // 5. Recipe list
+  recipeListEl.innerHTML = '';
+  view.forEach(function (row) {
+    const r = row.r;
+    const isSelected = r.id === selectedRecipeId;
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'ck-card'
+      + (isSelected ? ' selected' : '')
+      + (row.st.canCook ? ' ready' : ' short');
+    if (card.setAttribute) {
+      // A real <button> with aria-pressed, not role="option": a listbox promises
+      // arrow-key navigation this list does not implement, and buttons already give
+      // Tab plus Enter and Space for free.
+      card.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
+      card.setAttribute('aria-label',
+        `${r.nameKo}, ${r.nameEn}, ${row.st.canCook ? 'ready to cook' : row.st.missing.length + ' ingredients missing'}${row.cooked ? ', already mastered' : ''}`);
+    }
+
+    const tags = [];
+    if (row.cooked) tags.push('<span class="ck-tag cooked">✓ Cooked</span>');
+    tags.push(row.st.canCook
+      ? '<span class="ck-tag ready">Ready</span>'
+      : `<span class="ck-tag short">−${row.st.missing.length}</span>`);
 
     card.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center;">
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span style="font-size:24px;">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(r.nameKo, r.icon, 28) : r.icon}</span>
-          <div>
-            <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold);">${r.nameKo}</div>
-            <div style="font-size:10px; color:#cbd5e1;">${r.nameEn}</div>
-          </div>
-        </div>
-        ${isCooked ? '<span style="font-family:\'Press Start 2P\',monospace; font-size:8px; background:rgba(34,197,94,0.2); border:1px solid #22c55e; color:#4ade80; padding:2px 5px; border-radius:4px;">✓ Cooked</span>' : ''}
-      </div>
+      <span class="ck-card-icon">${ckArt(r.nameKo, r.icon, 30)}</span>
+      <span class="ck-card-body">
+        <span class="ck-card-ko">${ckEsc(r.nameKo)}</span>
+        <span class="ck-card-en">${ckEsc(r.nameEn)}</span>
+      </span>
+      <span class="ck-card-tags">${tags.join('')}</span>
     `;
-    card.onclick = () => {
+    // A <button> so Enter and Space work without a keydown handler of our own.
+    card.onclick = function () {
       if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
       selectedRecipeId = r.id;
       renderCookingGrid(r.id);
@@ -566,67 +708,66 @@ function renderCookingGrid(selectId) {
     recipeListEl.appendChild(card);
   });
 
-  // 4. Render Selected Recipe Detail View
+  // 6. Detail view
   if (detailViewEl) {
-    const recipe = recipes.find(r => r.id === selectedRecipeId) || recipes[0];
-    if (recipe) {
-      let canCook = true;
-      let ingBadgesHtml = [];
+    const row = selectedRow;
+    if (!row) {
+      detailViewEl.innerHTML = '';
+    } else {
+      const recipe = row.r;
+      const st = row.st;
 
-      recipe.ingredients.forEach(req => {
-        const info = getItemInfo(req.itemId);
-        const key = info.key || req.itemId;
-        const have = ingMap[key] || 0;
-        if (have < req.count) canCook = false;
+      const ingHtml = st.need.map(function (n) {
+        return `<span class="ck-ing ${n.ok ? 'ok' : 'miss'}">`
+          + `${ckArt(n.nameKo, n.icon, 18)} ${ckEsc(n.nameKo)} ${n.have}/${n.want} ${n.ok ? '✓' : '✗'}</span>`;
+      }).join('');
 
-        if (have >= req.count) {
-          ingBadgesHtml.push(`
-            <span style="background:rgba(34,197,94,0.15); border:1px solid #22c55e; color:#4ade80; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:bold; display:inline-flex; align-items:center; gap:4px;">
-              ${(typeof vocabIconHtml === 'function') ? vocabIconHtml(info.nameKo || req.itemId, info.icon || '📦', 18) : (info.icon || '📦')} ${info.nameKo || req.itemId} ${have}/${req.count} ✓
-            </span>
-          `);
-        } else {
-          ingBadgesHtml.push(`
-            <span style="background:rgba(239,68,68,0.15); border:1px solid #ef4444; color:#f87171; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:bold; display:inline-flex; align-items:center; gap:4px;">
-              ${(typeof vocabIconHtml === 'function') ? vocabIconHtml(info.nameKo || req.itemId, info.icon || '📦', 18) : (info.icon || '📦')} ${info.nameKo || req.itemId} ${have}/${req.count} ✗
-            </span>
-          `);
-        }
-      });
+      // Naming the shortfall beats a greyed-out button that never says why.
+      const hint = st.canCook ? '' :
+        `<div class="ck-cook-hint">Still need ${st.missing.map(function (n) {
+          return ckEsc(n.nameKo) + ' ×' + (n.want - n.have);
+        }).join(', ')}</div>`;
 
-      const isCooked = cookedRecipes.includes(recipe.id);
+      const cookLabel = st.canCook
+        ? `🍳 Cook ${ckEsc(recipe.nameKo)}`
+        : `🔒 Missing ${st.missing.length} ingredient${st.missing.length === 1 ? '' : 's'}`;
 
       detailViewEl.innerHTML = `
-        <div style="display:flex; align-items:center; gap:12px;">
-          <span style="font-size:40px;">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(recipe.nameKo, recipe.icon, 48) : recipe.icon}</span>
+        <div class="ck-detail-head">
+          <span class="ck-detail-icon">${ckArt(recipe.nameKo, recipe.icon, 48)}</span>
           <div>
-            <div style="font-family:'Press Start 2P',monospace; font-size:14px; color:var(--neon-gold);">${recipe.nameKo} (${recipe.nameEn})</div>
-            <div style="font-size:11px; color:rgba(255,255,255,0.7); margin-top:4px;">${recipe.description || ''}</div>
+            <div class="ck-detail-ko">${ckEsc(recipe.nameKo)}</div>
+            <div class="ck-detail-en">${ckEsc(recipe.nameEn)}</div>
+          </div>
+        </div>
+        ${recipe.description ? `<div class="ck-detail-desc">${ckEsc(recipe.description)}</div>` : ''}
+
+        <div class="ck-section">
+          <div class="ck-section-head">Required Ingredients (재료)</div>
+          <div class="ck-chips">${ingHtml}</div>
+        </div>
+
+        <div class="ck-section">
+          <div class="ck-section-head">Rewards</div>
+          <div class="ck-chips">
+            <span class="ck-reward xp">⭐ +${Number(recipe.xpReward) || 0} XP</span>
+            <span class="ck-reward gold">🪙 +${Number(recipe.goldReward) || 0} Gold</span>
+            ${row.cooked ? '<span class="ck-reward master">✓ Mastered</span>' : ''}
           </div>
         </div>
 
-        <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
-          <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:6px;">Required Ingredients (재료):</div>
-          <div style="display:flex; flex-wrap:wrap; gap:6px;">
-            ${ingBadgesHtml.join('')}
-          </div>
-        </div>
-
-        <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:10px;">
-          <div style="font-family:'Press Start 2P',monospace; font-size:10px; color:var(--neon-gold); margin-bottom:6px;">Rewards:</div>
-          <div style="display:flex; gap:8px; align-items:center;">
-            <span style="background:rgba(168,85,247,0.18); border:1px solid #a855f7; color:#c084fc; padding:4px 10px; border-radius:6px; font-size:10px; font-family:'Press Start 2P',monospace;">⭐ +${recipe.xpReward} XP</span>
-            <span style="background:rgba(245,158,11,0.18); border:1px solid #f59e0b; color:#fbbf24; padding:4px 10px; border-radius:6px; font-size:10px; font-family:'Press Start 2P',monospace;">🪙 +${recipe.goldReward} Gold</span>
-            ${isCooked ? '<span style="background:rgba(34,197,94,0.18); border:1px solid #22c55e; color:#4ade80; padding:4px 10px; border-radius:6px; font-size:10px; font-family:\'Press Start 2P\',monospace;">✓ Dish Mastered</span>' : ''}
-          </div>
-        </div>
-
-        <div style="margin-top:auto; padding-top:10px;">
-          <button class="cook-btn" style="width:100%; padding:12px; font-family:'Press Start 2P',monospace; font-size:11px; ${canCook ? 'background:linear-gradient(135deg, #f59e0b, #d97706); cursor:pointer;' : 'opacity:0.45; cursor:not-allowed; filter:grayscale(0.5);'}" ${canCook ? '' : 'disabled'} onclick="cookRecipe('${recipe.id}')">
-            🍳 Cook ${recipe.nameKo}
-          </button>
+        <div class="ck-cook-wrap">
+          <button type="button" class="ck-cook-btn cook-btn" id="ck-cook-btn" ${st.canCook ? '' : 'disabled'}>${cookLabel}</button>
+          ${hint}
         </div>
       `;
+      const cookBtn = document.getElementById('ck-cook-btn');
+      if (cookBtn && cookBtn.addEventListener) {
+        // Bound to the id captured here rather than interpolated into an onclick
+        // attribute, so a recipe id can never break out of the quoting.
+        const id = recipe.id;
+        cookBtn.addEventListener('click', function () { cookRecipe(id); });
+      }
     }
   }
 }
@@ -1432,6 +1573,9 @@ if (typeof window !== 'undefined') {
   window.openCookingUI = openCookingUI;
   window.closeCookingUI = closeCookingUI;
   window.renderCookingGrid = renderCookingGrid;
+  // Reached from the toolbar's inline handlers in index.html.
+  window.setCookingFilter = setCookingFilter;
+  window.setCookingSearch = setCookingSearch;
   window.cookRecipe = cookRecipe;
   window.checkCookingAchievements = checkCookingAchievements;
 }
