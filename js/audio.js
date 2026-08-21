@@ -102,12 +102,8 @@ class ChiptuneSynthEngine {
 const ChiptuneSynth = new ChiptuneSynthEngine();
 function playChiptuneSFX(type) { ChiptuneSynth.play(type); }
 if (typeof window !== 'undefined') {
-  const unlockAudio = () => {
-    ChiptuneSynth.init();
-    if (typeof KoreanTTS !== 'undefined' && KoreanTTS.unlock) KoreanTTS.unlock();
-  };
+  const unlockAudio = () => { ChiptuneSynth.init(); };
   window.addEventListener('pointerdown', unlockAudio, { capture: true });
-  window.addEventListener('click', unlockAudio, { capture: true });
 }
 
 // ═══════════════ KOREAN PRONUNCIATION ═══════════════════════════════════════
@@ -206,14 +202,9 @@ const KoreanTTS = {
   },
 
   unlock() {
-    if (this.supported()) {
-      try { window.speechSynthesis.getVoices(); } catch {}
-      this.refreshVoice();
-      try { if (window.speechSynthesis.paused) window.speechSynthesis.resume(); } catch {}
-    }
-    if (this._clip && this._clip.paused) {
-      try { this._clip.play(); } catch {}
-    }
+    if (!this.supported()) return;
+    try { window.speechSynthesis.getVoices(); } catch {}
+    this.refreshVoice();
   },
 
   stop() {
@@ -274,6 +265,9 @@ const KoreanTTS = {
       const a = new Audio(url);
       a.preload = 'auto';
       this._clip = a;
+      a.onended = () => {
+        if (this._clip === a) this._clip = null;
+      };
       a.onerror = () => {
         if (this._clip !== a) return;
         this._clip = null;
@@ -294,7 +288,10 @@ const KoreanTTS = {
   },
 
   _playClipQueue(parts, index, opts) {
-    if (!parts || index >= parts.length) return;
+    if (!parts || index >= parts.length) {
+      this._clip = null;
+      return;
+    }
     if (!this.clipsSupported()) {
       this._speakNow(parts.map((s) => this._utterance(s, 0.7)));
       return;
