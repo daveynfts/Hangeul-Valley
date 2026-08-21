@@ -674,9 +674,16 @@ function pngSize(rel) {
   const overlays = read(path.join('js', 'overlays.js'));
   const ui = read(path.join('js', 'ui.js'));
   const farm = read(path.join('js', 'scenes', 'farm.js'));
-  check('cooking overlay prefers vocabIconHtml', overlays.indexOf('vocabIconHtml(r.nameKo') >= 0);
-  check('cooking detail prefers vocabIconHtml', overlays.indexOf('vocabIconHtml(recipe.nameKo') >= 0);
-  check('cooking pantry prefers vocabIconHtml', overlays.indexOf('vocabIconHtml(info.nameKo') >= 0);
+  // The kitchen's three icon sites now route through one `ckArt` helper instead of
+  // repeating the vocabIconHtml call, so asserting the old literal call shape would fail
+  // on a refactor that kept the guarantee intact. What actually matters is unchanged:
+  // the helper resolves to vocabIconHtml, and all three sites go through the helper — so
+  // none of them can quietly fall back to a bare emoji.
+  const ckArtDef = /function ckArt\([\s\S]{0,400}?vocabIconHtml\(/.test(overlays);
+  check('cooking art helper resolves to vocabIconHtml', ckArtDef);
+  check('cooking overlay prefers vocabIconHtml', ckArtDef && overlays.indexOf('ckArt(r.nameKo') >= 0);
+  check('cooking detail prefers vocabIconHtml', ckArtDef && overlays.indexOf('ckArt(recipe.nameKo') >= 0);
+  check('cooking pantry prefers vocabIconHtml', ckArtDef && overlays.indexOf('ckArt(info.nameKo') >= 0);
   check('inventory prefers vocabIconHtml', ui.indexOf('vocabIconHtml') >= 0);
   check('inventory empty slots use crate art', ui.indexOf('crateIconHtml') >= 0);
   check('trophy cards use trophyIconHtml', overlays.indexOf('trophyIconHtml(t.id') >= 0);

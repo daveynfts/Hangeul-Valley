@@ -346,6 +346,12 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 
 function openInventoryUI() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  // A selection and a search term left over from last time read as "my items are gone",
+  // so the bag always opens showing everything.
+  inventorySelectedId = null;
+  inventorySearch = '';
+  const search = document.getElementById('inv-search-input');
+  if (search) search.value = '';
   renderInventoryGrid();
   setModalState('inventory-overlay', true);
 }
@@ -356,21 +362,259 @@ function closeInventoryUI() {
 }
 
 let inventoryTab = 'all';
+let inventorySearch = '';
+let inventorySelectedId = null;
+
+// Names and descriptions reach innerHTML from levels.json, facts.json and the recipe
+// tables — the one part of this markup the renderer does not author itself. Escaping is
+// what keeps a bad string a wrong label rather than executing script against the save.
+function invEscHtml(v) {
+  if (v === null || v === undefined) return '';
+  return String(v)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Crops before seeds before dishes, then the biggest stack, then Korean alphabetical.
+// Object key order used to decide this, so a stack changing size reshuffled the grid
+// under the player's cursor.
+const INV_KIND_ORDER = { ingredient: 0, seed: 1, dish: 2 };
+const INV_KIND_BADGE = { ingredient: '🌿', seed: '🌱', dish: '🍲' };
+const INV_KIND_LABEL = { ingredient: 'Crop / ingredient', seed: 'Seed', dish: 'Cooked dish' };
+
+// Read from the one place that charges it, so the label and the till cannot disagree.
+function invExpandCost() {
+  return (typeof INVENTORY_EXPAND_COST === 'number') ? INVENTORY_EXPAND_COST : 50;
+}
 
 function setInventoryTab(tab) {
   inventoryTab = tab === 'ingredients' || tab === 'dishes' ? tab : 'all';
   if (typeof document !== 'undefined' && document.querySelectorAll) {
     document.querySelectorAll('#inv-tabs .inv-tab').forEach(function (btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-inv-tab') === inventoryTab);
+      const on = btn.getAttribute('data-inv-tab') === inventoryTab;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
     });
   }
   renderInventoryGrid();
 }
 
-function renderInventoryGrid() {
-  const grid = document.getElementById('inventory-grid');
+function setInventorySearch(q) {
+  inventorySearch = String(q === undefined || q === null ? '' : q).trim().toLowerCase();
+  renderInventoryGrid();
+}
+
+function invResolveRecipe(recipeId) {
+  let rec = null;
+  if (typeof getActiveCookingRecipes === 'function') {
+    rec = getActiveCookingRecipes().find(r => r && r.id === recipeId) || null;
+  }
+  if (!rec && typeof UNIT10_COOKING_RECIPES !== 'undefined') {
+    rec = UNIT10_COOKING_RECIPES.find(r => r && r.id === recipeId) || null;
+  }
+  if (!rec && typeof COOKING_RECIPES !== 'undefined' && Array.isArray(COOKING_RECIPES)) {
+    rec = COOKING_RECIPES.find(r => r && r.id === recipeId) || null;
+  }
+  return rec;
+}
+
+// Every stack the bag holds, independent of the active tab or search, because the tab
+// counts and the capacity reading both have to describe the whole bag.
+//
+// Seeds are included: getUsedInventorySlots() has always counted them, so leaving them
+// out of the grid meant the badge could claim more slots used than the player could see.
+function collectInventoryItems() {
+  const items = [];
+  const art = function (ko, fallback, px) {
+    return (typeof vocabIconHtml === 'function') ? vocabIconHtml(ko, fallback || '?', px || 40) : (fallback || '?');
+  };
+
+  const simple = [
+    { map: inventoryState.ingredients, kind: 'ingredient', fallbackDesc: 'Harvested crop / ingredient' },
+    { map: inventoryState.seeds,       kind: 'seed',       fallbackDesc: 'Plantable seed' }
+  ];
+  simple.forEach(function (src) {
+    if (!src.map) return;
+    for (const [nameKo, qty] of Object.entries(src.map)) {
+      if (!(qty > 0)) continue;
+      const info = getItemInfo(nameKo);
+      items.push({
+        itemId: info.id || nameKo,
+        name: info.name || nameKo,
+        nameKo: info.nameKo || nameKo,
+        qty: qty,
+        icon: art(info.nameKo || nameKo, info.icon, 40),
+        iconLarge: art(info.nameKo || nameKo, info.icon, 56),
+        description: info.description || src.fallbackDesc,
+        kind: src.kind
+      });
+    }
+  });
+
+  if (inventoryState.cookedDishes) {
+    for (const [recipeId, qty] of Object.entries(inventoryState.cookedDishes)) {
+      if (!(qty > 0)) continue;
+      const rec = invResolveRecipe(recipeId);
+      const nameKo = rec ? (rec.nameKo || rec.name) : recipeId;
+      const nameEn = rec ? (rec.nameEn || rec.enName || rec.name) : recipeId;
+      items.push({
+        itemId: recipeId,
+        name: nameEn,
+        nameKo: nameKo,
+        qty: qty,
+        icon: art(nameKo, rec && rec.icon, 40),
+        iconLarge: art(nameKo, rec && rec.icon, 56),
+        description: (rec && rec.culturalFact) || 'Cooked dish',
+        kind: 'dish'
+      });
+    }
+  }
+
+  items.sort(function (a, b) {
+    return (INV_KIND_ORDER[a.kind] - INV_KIND_ORDER[b.kind])
+      || (b.qty - a.qty)
+      || String(a.nameKo).localeCompare(String(b.nameKo), 'ko');
+  });
+  return items;
+}
+
+function invMatchesTab(item) {
+  if (inventoryTab === 'all') return true;
+  if (inventoryTab === 'dishes') return item.kind === 'dish';
+  return item.kind === 'ingredient' || item.kind === 'seed';
+}
+
+function invMatchesSearch(item) {
+  if (!inventorySearch) return true;
+  return String(item.nameKo).toLowerCase().indexOf(inventorySearch) >= 0
+    || String(item.name).toLowerCase().indexOf(inventorySearch) >= 0;
+}
+
+function renderInventoryCapacity(usedSlots, maxSlots) {
+  const wrap = document.getElementById('inv-capacity');
   const badge = document.getElementById('inv-capacity-badge');
   const capText = document.getElementById('inv-capacity-text');
+  const fill = document.getElementById('inv-capacity-fill');
+  const track = document.getElementById('inv-capacity-track');
+  const expand = document.getElementById('inv-expand-btn');
+
+  if (badge) badge.textContent = `${usedSlots} / ${maxSlots} slots`;
+  if (capText) capText.textContent = `${maxSlots} slots`;
+
+  const ratio = maxSlots > 0 ? usedSlots / maxSlots : 0;
+  if (fill && fill.style) fill.style.width = Math.min(100, Math.round(ratio * 100)) + '%';
+  if (track && track.setAttribute) {
+    track.setAttribute('aria-valuenow', String(usedSlots));
+    track.setAttribute('aria-valuemax', String(maxSlots));
+    track.setAttribute('aria-valuetext', `${usedSlots} of ${maxSlots} slots used`);
+  }
+  if (wrap && wrap.classList && typeof wrap.classList.toggle === 'function') {
+    wrap.classList.toggle('full', usedSlots >= maxSlots);
+    wrap.classList.toggle('warn', usedSlots < maxSlots && ratio >= 0.8);
+  }
+
+  // The cost was only discoverable by clicking and being refused. Show affordability up
+  // front instead.
+  if (expand) {
+    const cost = invExpandCost();
+    const coins = (typeof playerCurrencies !== 'undefined' && playerCurrencies)
+      ? (playerCurrencies.coins || 0) : 0;
+    const affordable = coins >= cost;
+    expand.disabled = !affordable;
+    expand.title = affordable
+      ? `Add 5 slots for ${cost} Coins`
+      : `Needs ${cost} Coins — you have ${coins}`;
+  }
+}
+
+function renderInventoryDetail(items) {
+  const box = document.getElementById('inv-detail');
+  if (!box) return;
+  const item = items.filter(function (it) { return it.itemId === inventorySelectedId; })[0] || null;
+
+  if (!item) {
+    inventorySelectedId = null;
+    box.innerHTML = '';
+    if (box.classList && typeof box.classList.add === 'function') box.classList.add('hidden');
+    return;
+  }
+
+  const ko = String(item.nameKo || '');
+  const chips = [
+    `<span class="inv-chip">${invEscHtml(INV_KIND_LABEL[item.kind] || 'Item')}</span>`,
+    `<span class="inv-chip gold">×${item.qty} in bag</span>`
+  ];
+
+  // The bag is full of Korean the player earned, so it doubles as a review surface:
+  // syllable shape and etymology come from the same helpers the vocabulary book uses.
+  let lore = '';
+  if (typeof renderStructure === 'function') {
+    const shape = renderStructure(ko);
+    if (shape) lore += `<div class="inv-detail-note">🔠 ${invEscHtml(shape)}</div>`;
+  }
+  if (typeof renderOrigin === 'function' && typeof factsData !== 'undefined' && factsData) {
+    const origin = renderOrigin(factsData[ko.normalize('NFC')]);
+    if (origin) lore += `<div class="inv-detail-note">💡 ${invEscHtml(origin)}</div>`;
+  }
+
+  const canSpeak = typeof speakKorean === 'function';
+  const actions = canSpeak
+    ? `<div class="inv-detail-actions">
+         <button type="button" class="inv-detail-btn" id="inv-detail-speak">🔊 Listen</button>
+         <button type="button" class="inv-detail-btn" id="inv-detail-spell">🐢 Syllables</button>
+       </div>`
+    : '';
+
+  // getItemInfo falls back to the Korean key for both fields when an item is not in
+  // ITEM_DB. Printing it three times reads as a rendering fault, so drop the echoes.
+  const enLine = (item.name && item.name !== ko)
+    ? `<div class="inv-detail-en">${invEscHtml(item.name)}</div>` : '';
+  const descLine = (item.description && item.description !== ko && item.description !== item.name)
+    ? `<div class="inv-detail-note">${invEscHtml(item.description)}</div>` : '';
+
+  box.innerHTML = `
+    <div class="inv-detail-icon">${item.iconLarge || item.icon || ''}</div>
+    <div class="inv-detail-body">
+      <div class="inv-detail-ko">${invEscHtml(ko)}</div>
+      ${enLine}
+      <div class="inv-detail-meta">${chips.join('')}</div>
+      ${descLine}
+      ${lore}
+      ${actions}
+    </div>
+    <button type="button" class="inv-detail-close" id="inv-detail-close" aria-label="Close item details">✕</button>
+  `;
+  if (box.classList && typeof box.classList.remove === 'function') box.classList.remove('hidden');
+
+  const speakBtn = document.getElementById('inv-detail-speak');
+  if (speakBtn && speakBtn.addEventListener) {
+    speakBtn.addEventListener('click', function () { speakKorean(ko); });
+  }
+  const spellBtn = document.getElementById('inv-detail-spell');
+  if (spellBtn && spellBtn.addEventListener) {
+    spellBtn.addEventListener('click', function () {
+      if (typeof spellKorean === 'function') spellKorean(ko); else speakKorean(ko);
+    });
+  }
+  const closeBtn = document.getElementById('inv-detail-close');
+  if (closeBtn && closeBtn.addEventListener) {
+    closeBtn.addEventListener('click', function () { selectInventorySlot(null); });
+  }
+}
+
+function selectInventorySlot(itemId) {
+  // Clicking the open item closes it, so the strip is dismissable without hunting for
+  // the ✕.
+  inventorySelectedId = (itemId && inventorySelectedId === itemId) ? null : (itemId || null);
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  renderInventoryGrid();
+}
+
+function renderInventoryGrid() {
+  const grid = document.getElementById('inventory-grid');
   const emptyMsg = document.getElementById('inv-empty-msg');
 
   inventoryState = inventoryState || {};
@@ -378,86 +622,89 @@ function renderInventoryGrid() {
   inventoryState.maxSlots = maxSlots;
   const usedSlots = getUsedInventorySlots();
 
-  if (badge) badge.textContent = `${usedSlots} / ${maxSlots} slots`;
-  if (capText) capText.textContent = `${maxSlots} slots`;
+  renderInventoryCapacity(usedSlots, maxSlots);
+
+  const all = collectInventoryItems();
+
+  // Counts describe the whole bag, not the filtered view — a tab that reads 0 while
+  // holding items would be a lie.
+  if (typeof document !== 'undefined' && document.querySelectorAll) {
+    const counts = {
+      all: all.length,
+      ingredients: all.filter(function (i) { return i.kind !== 'dish'; }).length,
+      dishes: all.filter(function (i) { return i.kind === 'dish'; }).length
+    };
+    document.querySelectorAll('#inv-tabs .inv-tab-count').forEach(function (el) {
+      const key = el.getAttribute('data-inv-count');
+      const n = counts[key] || 0;
+      el.textContent = String(n);
+      if (el.classList && typeof el.classList.toggle === 'function') el.classList.toggle('zero', n === 0);
+    });
+  }
+
+  const items = all.filter(invMatchesTab).filter(invMatchesSearch);
+
+  if (emptyMsg) {
+    let msg = '';
+    if (all.length === 0) msg = 'Harvest crops, catch fish, or cook a dish to fill the bag.';
+    else if (items.length === 0 && inventorySearch) msg = `Nothing in the bag matches “${inventorySearch}”.`;
+    else if (items.length === 0) msg = 'Nothing of this kind in the bag yet.';
+    if (msg) emptyMsg.textContent = msg;
+    if (emptyMsg.classList && typeof emptyMsg.classList.toggle === 'function') {
+      emptyMsg.classList.toggle('hidden', msg === '');
+    }
+  }
+
+  renderInventoryDetail(items);
 
   if (!grid) return;
   grid.innerHTML = '';
 
-  const items = [];
-  const art = function (ko, fallback, px) {
-    return (typeof vocabIconHtml === 'function') ? vocabIconHtml(ko, fallback || '?', px || 40) : (fallback || '?');
-  };
-
-  if (inventoryTab !== 'dishes' && inventoryState.ingredients) {
-    for (const [nameKo, qty] of Object.entries(inventoryState.ingredients)) {
-      if (qty > 0) {
-        const info = getItemInfo(nameKo);
-        items.push({
-          itemId: info.id || nameKo,
-          name: info.name || nameKo,
-          nameKo: info.nameKo || nameKo,
-          qty: qty,
-          icon: art(info.nameKo || nameKo, info.icon, 40),
-          description: info.description || 'Harvested crop / ingredient',
-          kind: 'ingredient'
-        });
-      }
-    }
-  }
-
-  if (inventoryTab !== 'ingredients' && inventoryState.cookedDishes) {
-    for (const [recipeId, qty] of Object.entries(inventoryState.cookedDishes)) {
-      if (qty > 0) {
-        let nameKo = recipeId;
-        let nameEn = recipeId;
-        let rec = null;
-        if (typeof getActiveCookingRecipes === 'function') {
-          rec = getActiveCookingRecipes().find(r => r && r.id === recipeId) || null;
-        }
-        if (!rec && typeof UNIT10_COOKING_RECIPES !== 'undefined') {
-          rec = UNIT10_COOKING_RECIPES.find(r => r && r.id === recipeId) || null;
-        }
-        if (!rec && typeof COOKING_RECIPES !== 'undefined' && Array.isArray(COOKING_RECIPES)) {
-          rec = COOKING_RECIPES.find(r => r && r.id === recipeId) || null;
-        }
-        if (rec) {
-          nameKo = rec.nameKo || rec.name;
-          nameEn = rec.nameEn || rec.enName || rec.name;
-        }
-        items.push({
-          itemId: recipeId,
-          name: nameEn,
-          nameKo: nameKo,
-          qty: qty,
-          icon: art(nameKo, rec && rec.icon, 40),
-          description: 'Cooked dish',
-          kind: 'dish'
-        });
-      }
-    }
-  }
-
-  if (emptyMsg && emptyMsg.classList && typeof emptyMsg.classList.toggle === 'function') {
-    emptyMsg.classList.toggle('hidden', items.length > 0);
-  }
-
   const crate = (typeof crateIconHtml === 'function') ? crateIconHtml(28) : '';
-  const showSlots = inventoryTab === 'all' ? maxSlots : Math.max(items.length, 1);
+  // Empty crates communicate remaining capacity, which is worth showing — but not as a
+  // wall of them behind an empty bag, and not while a filter is narrowing the view.
+  const padWithEmpties = inventoryTab === 'all' && !inventorySearch && all.length > 0;
+  const showSlots = padWithEmpties ? Math.max(maxSlots, items.length) : items.length;
+
   for (let i = 0; i < showSlots; i++) {
     const slotEl = document.createElement('div');
     if (i < items.length) {
       const item = items[i];
-      slotEl.className = 'inv-slot';
+      const selected = item.itemId === inventorySelectedId;
+      slotEl.className = selected ? 'inv-slot selected' : 'inv-slot';
       slotEl.title = `${item.nameKo} (${item.name}): ${item.description}`;
+      if (slotEl.setAttribute) {
+        slotEl.setAttribute('role', 'listitem');
+        slotEl.setAttribute('tabindex', '0');
+        slotEl.setAttribute('data-inv-id', String(item.itemId));
+        slotEl.setAttribute('aria-pressed', selected ? 'true' : 'false');
+        slotEl.setAttribute('aria-label',
+          `${item.nameKo}, ${item.name}, ${INV_KIND_LABEL[item.kind] || 'item'}, quantity ${item.qty}`);
+      }
       slotEl.innerHTML = `
+        <div class="inv-kind-badge" aria-hidden="true">${INV_KIND_BADGE[item.kind] || '📦'}</div>
         <div class="inv-qty-badge">x${item.qty}</div>
         <div class="inv-slot-icon">${item.icon}</div>
-        <div class="inv-slot-ko">${item.nameKo}</div>
-        <div class="inv-slot-en">${item.name}</div>
+        <div class="inv-slot-ko">${invEscHtml(item.nameKo)}</div>
+        <div class="inv-slot-en">${invEscHtml(item.name)}</div>
       `;
+      // The slot has looked clickable since it was written — cursor:pointer and a hover
+      // lift — but nothing was listening. Now it opens the detail strip, by pointer or
+      // by keyboard.
+      if (slotEl.addEventListener) {
+        const id = item.itemId;
+        slotEl.addEventListener('click', function () { selectInventorySlot(id); });
+        slotEl.addEventListener('keydown', function (e) {
+          if (!e) return;
+          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+            if (typeof e.preventDefault === 'function') e.preventDefault();
+            selectInventorySlot(id);
+          }
+        });
+      }
     } else {
       slotEl.className = 'inv-slot empty';
+      if (slotEl.setAttribute) slotEl.setAttribute('aria-hidden', 'true');
       slotEl.innerHTML = `
         <div class="inv-slot-icon empty-crate">${crate}</div>
         <div class="inv-slot-en">Empty</div>
@@ -472,6 +719,8 @@ if (typeof window !== 'undefined') {
   window.closeInventoryUI = closeInventoryUI;
   window.renderInventoryGrid = renderInventoryGrid;
   window.setInventoryTab = setInventoryTab;
+  window.setInventorySearch = setInventorySearch;
+  window.selectInventorySlot = selectInventorySlot;
   window.expandInventoryCapacity = expandInventoryCapacity;
   window.addItemToInventory = addItemToInventory;
   window.removeItemFromInventory = removeItemFromInventory;

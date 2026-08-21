@@ -246,9 +246,13 @@ function removeItemFromInventory(itemId, qty = 1) {
   return true;
 }
 
+// Named because the inventory panel now prints this price and disables the button when
+// the player cannot meet it. Two copies of the number would drift.
+var INVENTORY_EXPAND_COST = 50;
+
 function expandInventoryCapacity() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  const cost = 50;
+  const cost = INVENTORY_EXPAND_COST;
   inventoryState = inventoryState || {};
   inventoryState.maxSlots = typeof inventoryState.maxSlots === 'number' ? inventoryState.maxSlots : 20;
   if (!spendCoins(cost)) {
