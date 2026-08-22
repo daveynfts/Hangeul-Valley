@@ -160,8 +160,10 @@ window.apiFetch.getUnit10Layout = () => window.apiFetch('/api/unit10/layout');
 window.apiFetch.saveUnit10Layout = (body) => window.apiFetch('/api/unit10/layout', { method: 'PUT', body });
 window.apiFetch.getUnit10Quiz = () => window.apiFetch('/api/unit10/quiz');
 window.apiFetch.saveUnit10Quiz = (body) => window.apiFetch('/api/unit10/quiz', { method: 'PUT', body });
-window.apiFetch.getUnit14Workbook = () => window.apiFetch('/api/unit14/workbook');
-window.apiFetch.saveUnit14Workbook = (body) => window.apiFetch('/api/unit14/workbook', { method: 'PUT', body });
+window.apiFetch.listWorkbooks = () => window.apiFetch('/api/workbooks');
+window.apiFetch.getWorkbook = (unit) => window.apiFetch('/api/workbook/' + encodeURIComponent(unit));
+window.apiFetch.saveWorkbook = (unit, body) =>
+  window.apiFetch('/api/workbook/' + encodeURIComponent(unit), { method: 'PUT', body });
 window.apiFetch.getUnit10World = () => window.apiFetch('/api/unit10/world');
 window.apiFetch.saveUnit10World = (body) => window.apiFetch('/api/unit10/world', { method: 'PUT', body });
 window.apiFetch.addVocabFact = (factData) => window.apiFetch('/api/vocab-facts', { method: 'POST', body: factData });

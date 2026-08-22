@@ -12,6 +12,8 @@
  */
 (function () {
   const state = {
+    unit: 'unit14',
+    units: [],
     book: null,
     index: 0,
     dirty: false
@@ -351,12 +353,13 @@
     const btn = document.getElementById('u14-save');
     if (btn) btn.disabled = true;
     try {
-      const res = await window.apiFetch.saveUnit14Workbook(state.book);
+      const res = await window.apiFetch.saveWorkbook(state.unit, state.book);
       const d = (res && res.data) || {};
       window.Toast.success(
-        `Saved ${d.exerciseCount || 0} exercises / ${d.itemCount || 0} questions to worlds/unit14-workbook.json`);
+        `Saved ${d.exerciseCount || 0} exercises / ${d.itemCount || 0} questions to `
+        + `worlds/${state.unit}-workbook.json`);
       clearDirty();
-      const fresh = await window.apiFetch.getUnit14Workbook();
+      const fresh = await window.apiFetch.getWorkbook(state.unit);
       state.book = fresh.data;
       renderList();
       renderForm();
@@ -392,16 +395,49 @@
     renderForm();
   }
 
+  // Which workbook is open. There is more than one now, and the editor used to
+  // read a fixed path — so it showed Unit 14's exercises whichever unit you had
+  // in mind.
+  function renderUnitPicker() {
+    const box = document.getElementById('u14-unit');
+    if (!box) return;
+    box.innerHTML = state.units.map((u) =>
+      `<button type="button" class="btn btn-sm ${u === state.unit ? 'btn-primary' : 'btn-secondary'}"
+        data-unit="${esc(u)}">${esc(u.replace('unit', 'Unit '))}</button>`).join('');
+    box.querySelectorAll('[data-unit]').forEach((b) => {
+      b.onclick = async () => {
+        const next = b.dataset.unit;
+        if (next === state.unit) return;
+        if (state.dirty && !window.confirm('There are unsaved changes. Switch anyway?')) return;
+        await load(next);
+      };
+    });
+  }
+
+  async function load(unit) {
+    const res = await window.apiFetch.getWorkbook(unit);
+    state.unit = unit;
+    state.book = res.data;
+    state.index = 0;
+    clearDirty();
+    renderUnitPicker();
+    renderList();
+    renderForm();
+  }
+
   window.Unit14View = {
     async render() {
-      if (!state.book) {
-        const res = await window.apiFetch.getUnit14Workbook();
-        state.book = res.data;
+      if (!state.units.length) {
+        const list = await window.apiFetch.listWorkbooks();
+        state.units = (list && list.data) || ['unit14'];
+        if (state.units.indexOf(state.unit) < 0) state.unit = state.units[0];
       }
       const saveBtn = document.getElementById('u14-save');
       if (saveBtn) saveBtn.onclick = () => window.Unit14View.save();
       const add = document.getElementById('u14-add-exercise');
       if (add) add.onclick = addExercise;
+      if (!state.book) { await load(state.unit); return; }
+      renderUnitPicker();
       renderList();
       renderForm();
     },

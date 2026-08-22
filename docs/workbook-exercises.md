@@ -292,14 +292,14 @@ Two places still name a unit, and both should:
   `getWorkbook(root, unit)` and `saveWorkbook(body, root, unit)` take that key
   and default to Unit 14
 
-The remaining gap is the **admin panel**: the server routes are `/api/unit14/…`
-and the frontend calls them by that name, so the panel edits Unit 14 only. Unit
-10's workbook is written by script and validated the same way, but not editable
-in the UI. Fixing it means a unit parameter on the route and a picker in the
-panel.
+The admin panel takes the unit in the path — `GET/PUT /api/workbook/:unit`, with
+`GET /api/workbooks` listing them — and the Workbooks tab has a picker. It used
+to be `/api/unit14/workbook`, which meant the editor showed Unit 14's exercises
+whichever unit you had in mind.
 
 A new unit therefore needs: the JSON, a line in `workbookUrl()`, an entry in
 `WORKBOOKS`, and its own test suite. Art and audio only if the unit has them.
+The panel picks it up from `WORKBOOKS` on its own.
 
 Other things that scale with the list:
 

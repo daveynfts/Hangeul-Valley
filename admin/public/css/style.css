@@ -1287,3 +1287,7 @@ body.admin-readonly .btn-delete-word {
 
 /* .text-muted is 3.07:1 on a card here. This label needs the readable token. */
 .u14-type-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+
+/* Which unit's workbook is open. More than one exists, and the editor used to
+   read a fixed path — so it showed Unit 14 whichever unit you meant. */
+.u14-unit { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }

@@ -411,13 +411,27 @@ async function runTests() {
       workbookLib.saveWorkbook(clone(), rootDir);
     });
 
-    await test('The game and the editor agree on where the file lives', () => {
-      assert(workbookLib.WORKBOOK_REL.replace(/\\/g, '/') === 'worlds/unit14-workbook.json',
-        'lib writes worlds/unit14-workbook.json');
+    await test('The game and the editor agree on where the files live', () => {
       const ui = fs.readFileSync(path.join(repoRoot, 'js', 'ui.js'), 'utf8');
-      assert(ui.indexOf("'/worlds/unit14-workbook.json'") >= 0, 'the game reads the same path');
       const server = fs.readFileSync(path.join(repoRoot, 'admin', 'server.js'), 'utf8');
-      assert(server.indexOf("'/api/unit14/workbook'") >= 0, 'the API exposes it');
+      // Every workbook the library knows about has to be reachable from both
+      // ends: the game loads it by path, the editor by unit. When the editor
+      // could only open Unit 14 it showed Unit 14's exercises whichever unit you
+      // had in mind, which is exactly the confusion this checks against.
+      const units = Object.keys(workbookLib.WORKBOOKS);
+      assert(units.length >= 2, 'more than one workbook exists (' + units.join(', ') + ')');
+      units.forEach((unit) => {
+        const rel = workbookLib.workbookRel(unit).replace(/\\/g, '/');
+        assert(rel === 'worlds/' + unit + '-workbook.json', unit + ' is named for its unit');
+        assert(fs.existsSync(path.join(repoRoot, rel)), rel + ' exists');
+        assert(ui.indexOf("'/" + rel + "'") >= 0, 'the game loads ' + rel);
+      });
+      assert(server.indexOf("'/api/workbook/:unit'") >= 0, 'the API takes the unit in the path');
+      assert(server.indexOf("'/api/unit14/workbook'") < 0,
+        'and the old Unit-14-only route is gone rather than left as a trap');
+      const front = fs.readFileSync(path.join(repoRoot, 'admin', 'public', 'js', 'workbook.js'), 'utf8');
+      assert(front.indexOf('state.unit') >= 0 && front.indexOf('renderUnitPicker') >= 0,
+        'and the panel picks which one to edit');
       assert(workbookLib.TYPES.join(",") === "fill,match,dialogue,experience,build", 'the type list is the shared contract');
       // Every type the data uses must be a type the renderer knows.
       workbookLib.TYPES.forEach((t) => {
