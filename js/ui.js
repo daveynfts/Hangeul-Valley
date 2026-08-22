@@ -2133,6 +2133,7 @@ let deskMenuIndex = 0;
 
 function workbookUrl() {
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-workbook.json';
+  if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-workbook.json';
   return null;
 }
 
@@ -2508,7 +2509,13 @@ function wbLineHtml(ex, item, chipText, opts) {
         vbEsc(ex.reply || '') + '</div>');
   }
   if (ex.type === 'match') {
-    return '<span class="wb-left">' + vbEsc(item.stemKo) + '</span>' +
+    // The left side is a phrase, or a picture where the picture is the prompt —
+    // Unit 10 matches a bowl of food to its name, and printing the name there
+    // too would answer the row.
+    const left = item.img
+      ? '<img class="wb-photo" src="/' + vbEsc(item.img) + '" alt="" loading="lazy">'
+      : vbEsc(item.stemKo);
+    return '<span class="wb-left">' + left + '</span>' +
       '<span class="wb-join">→</span>' + blank;
   }
   if (ex.type === 'experience') {
@@ -2708,6 +2715,7 @@ function renderWorkbook() {
       const wrong = st.checked && !allRight;
       const row = document.createElement('div');
       row.className = 'wb-row'
+        + (item.img ? ' photo' : '')
         + (!st.checked && i === st.focus ? ' focus' : '')
         + (right ? ' ok' : '') + (wrong ? ' bad' : '');
 

@@ -1,0 +1,192 @@
+{
+  "id": "unit10-workbook",
+  "source": "Seoul National University Korean 2B, Unit 10 · 뭐 먹을래?",
+  "titleKo": "연습 문제",
+  "titleEn": "Workbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "One exercise at a time — pick where to start.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "exercises": [
+    {
+      "id": "u10-vocab-1",
+      "type": "match",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 1",
+      "icon": "🍲",
+      "blurbEn": "Six bowls, six names. The ending tells you what kind of dish it is.",
+      "instructionKo": "그림에 알맞은 음식 이름을 연결해 보세요.",
+      "instructionEn": "Match each picture to the name of the dish.",
+      "noteEn": "The book asks you to tick the dishes you have tried, which nothing can mark — so the same twelve become the thing that can be. These six are the 찌개 and the 탕: a 찌개 is thick and eaten from the shared pot, a 탕 is the broth you get a bowl of. Every name here is its ingredient plus that ending.",
+      "bank": [
+        {
+          "id": "kimchi_stew",
+          "ko": "김치찌개"
+        },
+        {
+          "id": "soybean_paste_stew",
+          "ko": "된장찌개"
+        },
+        {
+          "id": "soft_tofu_stew",
+          "ko": "순두부찌개"
+        },
+        {
+          "id": "pork_bone_potato_stew",
+          "ko": "감자탕"
+        },
+        {
+          "id": "spicy_fish_stew",
+          "ko": "매운탕"
+        },
+        {
+          "id": "ox_bone_soup",
+          "ko": "설렁탕"
+        }
+      ],
+      "items": [
+        {
+          "n": 1,
+          "answer": "kimchi_stew",
+          "en": "kimchi stew",
+          "why": "The everyday stew, and the one that wants kimchi already gone sour — fresh kimchi will not give the broth its depth. Pork belly and tofu go in with it, which is why 삼겹살 turns up later on this page as well.",
+          "grammar": "김치 + 찌개. Nearly every stew name is built this way: the thing it is made of, then the kind of dish. Once you can hear where the seam is, half the menu reads itself.",
+          "img": "sprites/foods/kimchi_stew.png"
+        },
+        {
+          "n": 2,
+          "answer": "soybean_paste_stew",
+          "en": "soybean-paste stew",
+          "why": "된장 is fermented soybean paste, the salty brown one. The stew is what a Korean home eats with rice most nights — closer to a staple than a dish you would order out.",
+          "grammar": "된장 + 찌개. Worth keeping 된장 apart from 고추장, the red chilli paste, and 간장, soy sauce — 장 is the family word for all three.",
+          "img": "sprites/foods/soybean_paste_stew.png"
+        },
+        {
+          "n": 3,
+          "answer": "soft_tofu_stew",
+          "en": "soft-tofu stew",
+          "why": "순두부 is tofu that was never pressed, so it comes out of the pot in soft curds rather than cubes. It arrives still boiling and a raw egg is usually cracked into it at the table.",
+          "grammar": "순 + 두부 + 찌개. 순 means unmixed or pure, the same 순 as in 순수하다. So 순두부 is tofu in its first state, before anything is done to it.",
+          "img": "sprites/foods/soft_tofu_stew.png"
+        },
+        {
+          "n": 4,
+          "answer": "pork_bone_potato_stew",
+          "en": "pork-bone potato stew",
+          "why": "Pork spine simmered for hours until the meat gives, with potato, perilla leaf and greens. A late-night dish — the sort of thing eaten sitting on plastic stools after work.",
+          "grammar": "감자 + 탕. 감자 is potato, though there is a long argument that the 감자 here is a cut of the pig rather than the vegetable. Either way the ending 탕 marks it as the long-simmered kind of soup.",
+          "img": "sprites/foods/pork_bone_potato_stew.png"
+        },
+        {
+          "n": 5,
+          "answer": "spicy_fish_stew",
+          "en": "spicy fish stew",
+          "why": "Whatever fish was fresh, boiled up with chilli, radish and 쑥갓. Often what happens to the bones and head after the good cuts have been served as 회.",
+          "grammar": "맵다 → 매운 + 탕. This is the one dish on the page whose name starts with an adjective in its modifier form — 맵다 loses its 다 and takes -운, exactly as it does in 매운 음식.",
+          "img": "sprites/foods/spicy_fish_stew.png"
+        },
+        {
+          "n": 6,
+          "answer": "ox_bone_soup",
+          "en": "ox-bone soup",
+          "why": "Ox bones boiled long enough that the broth turns milky white and tastes of almost nothing until you salt it yourself at the table. The salt, spring onion and rice are the point — it arrives deliberately plain.",
+          "grammar": "설렁 + 탕. Unlike the other five this name does not come apart into words you already know; it is worth learning whole. Note it is 탕 and not 찌개 — you get your own bowl.",
+          "img": "sprites/foods/ox_bone_soup.png"
+        }
+      ]
+    },
+    {
+      "id": "u10-vocab-2",
+      "type": "match",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 2",
+      "icon": "🍜",
+      "blurbEn": "Noodles and grilled meat — six more names to put to the picture.",
+      "instructionKo": "그림에 알맞은 음식 이름을 연결해 보세요.",
+      "instructionEn": "Match each picture to the name of the dish.",
+      "noteEn": "The other six from the same page. Three noodle dishes and three ways with beef and pork — and all six names say plainly what is done to the food, once you can hear the pieces.",
+      "bank": [
+        {
+          "id": "cold_noodles",
+          "ko": "냉면"
+        },
+        {
+          "id": "knife_cut_noodles",
+          "ko": "칼국수"
+        },
+        {
+          "id": "spicy_mixed_noodles",
+          "ko": "비빔국수"
+        },
+        {
+          "id": "grilled_pork_belly",
+          "ko": "삼겹살"
+        },
+        {
+          "id": "grilled_minced_ribs",
+          "ko": "떡갈비"
+        },
+        {
+          "id": "braised_short_ribs",
+          "ko": "갈비찜"
+        }
+      ],
+      "items": [
+        {
+          "n": 1,
+          "answer": "cold_noodles",
+          "en": "cold noodles",
+          "why": "Buckwheat noodles in an icy broth, eaten in the heat of summer. Scissors come with it, because the noodles are too long and too chewy to bite through politely.",
+          "grammar": "냉(冷) + 면(麵), cold + noodle, both Sino-Korean. The same 냉 is in 냉장고, the cold-storage box, and the same 면 is in 라면.",
+          "img": "sprites/foods/cold_noodles.png"
+        },
+        {
+          "n": 2,
+          "answer": "knife_cut_noodles",
+          "en": "knife-cut noodles",
+          "why": "The dough is rolled out and cut into strips by hand, so the noodles come out uneven and the starch clouds the broth. Anchovy or clam stock, and a rainy day.",
+          "grammar": "칼 + 국수, knife + noodles. This is the native Korean word for noodles; 면 is the Sino-Korean one. Both mean the same thing, and which one a dish uses is just which language its name came from.",
+          "img": "sprites/foods/knife_cut_noodles.png"
+        },
+        {
+          "n": 3,
+          "answer": "spicy_mixed_noodles",
+          "en": "spicy mixed noodles",
+          "why": "No broth — the noodles are tossed in gochujang, vinegar and sugar until every strand is red. Served cold, usually with a boiled egg and cucumber on top.",
+          "grammar": "비비다 → 비빔 + 국수. 비비다 is to rub or mix, and 비빔 is the noun made from it. The same 비빔 gives 비빔밥, mixed rice, which is the dish this one is named after.",
+          "img": "sprites/foods/spicy_mixed_noodles.png"
+        },
+        {
+          "n": 4,
+          "answer": "grilled_pork_belly",
+          "en": "grilled pork belly",
+          "why": "Grilled at the table on a slanted pan so the fat runs off, then cut with scissors and wrapped in lettuce with garlic and ssamjang. The most sociable food in the country.",
+          "grammar": "삼(三) + 겹 + 살, three + layer + flesh. The name is a description of the cut: lean and fat in three visible bands. 오겹살, five layers, is the same cut with the skin left on.",
+          "img": "sprites/foods/grilled_pork_belly.png"
+        },
+        {
+          "n": 5,
+          "answer": "grilled_minced_ribs",
+          "en": "grilled minced ribs",
+          "why": "Rib meat taken off the bone, chopped, seasoned and pressed back into a patty before grilling. It began as court food, for eating ribs without having to pick them up.",
+          "grammar": "떡 + 갈비, rice cake + ribs. Nothing in it is rice cake — 떡 is there for the shape, because the patty is patted flat the way 떡 is.",
+          "img": "sprites/foods/grilled_minced_ribs.png"
+        },
+        {
+          "n": 6,
+          "answer": "braised_short_ribs",
+          "en": "braised short ribs",
+          "why": "Short ribs simmered slowly in soy sauce with radish, carrot, chestnut and jujube until the meat comes away from the bone. Holiday food — 설날 and 추석.",
+          "grammar": "갈비 + 찜. 찜 is the steamed or braised method, from 찌다, and it is what separates this from 갈비구이, the grilled version. The ending is the cooking, not the ingredient.",
+          "img": "sprites/foods/braised_short_ribs.png"
+        }
+      ]
+    }
+  ]
+}
