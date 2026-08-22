@@ -302,16 +302,22 @@ app.put('/api/unit10/world', (req, res, next) => {
   catch (err) { err.status = 400; next(err); }
 });
 
-// Unit 14 workbook pages. saveWorkbook refuses anything the game could not
-// render, so a bad edit fails here with a reason rather than shipping a page
-// the learner cannot finish.
-app.get('/api/unit14/workbook', (req, res, next) => {
-  try { res.json({ success: true, data: workbookLib.getWorkbook(getRootDir()) }); }
-  catch (err) { next(err); }
+// Workbook pages, per unit. saveWorkbook refuses anything the game could not
+// render, so a bad edit fails here with a reason rather than shipping a page the
+// learner cannot finish. The unit is in the path because there is more than one
+// workbook now — the route was /api/unit14/workbook, and an editor that could
+// only ever open Unit 14 showed Unit 14's exercises whichever unit you meant.
+app.get('/api/workbooks', (req, res) => {
+  res.json({ success: true, data: Object.keys(workbookLib.WORKBOOKS) });
 });
-app.put('/api/unit14/workbook', (req, res, next) => {
-  try { res.json({ success: true, data: workbookLib.saveWorkbook(req.body, getRootDir()) }); }
-  catch (err) { err.status = 400; next(err); }
+app.get('/api/workbook/:unit', (req, res, next) => {
+  try { res.json({ success: true, data: workbookLib.getWorkbook(getRootDir(), req.params.unit) }); }
+  catch (err) { err.status = 404; next(err); }
+});
+app.put('/api/workbook/:unit', (req, res, next) => {
+  try {
+    res.json({ success: true, data: workbookLib.saveWorkbook(req.body, getRootDir(), req.params.unit) });
+  } catch (err) { err.status = 400; next(err); }
 });
 
 app.get('/api/art', (req, res, next) => {
