@@ -1150,20 +1150,20 @@ console.log('\n--- 18. Listening ---');
   assert(ui.els['wb-example'].children.some(c => (c.className || '').indexOf('wb-say') === 0),
     'the worked example has one too');
 
-  // Before checking it reads the question only. Speaking the answer to a row
-  // that has not been answered would hand it over.
-  assert(ui.call('wbRowSpeech', exT, exT.items[0], false) === '이 영화를 처음 봐요?',
-    'unchecked, it speaks only the line with nothing missing');
+  // Both lines, whether or not the row has been answered: this is a
+  // listen-and-repeat drill and the model is the thing being copied.
+  const before = ui.call('wbRowSpeech', exT, exT.items[0]);
+  assert(before === '이 영화를 처음 봐요? 아니요, 전에 본 적이 있어요.',
+    'the fallback voice speaks the question and the model answer');
   ui.run("wbPickChoice(0, 'bon')");
-  const full = ui.call('wbRowSpeech', exT, exT.items[0], true);
-  assert(full === '이 영화를 처음 봐요? 아니요, 전에 본 적이 있어요.',
-    'checked, it speaks the whole exchange with the right answer in it');
-  assert(full.indexOf('{}') < 0, 'and never reads the placeholder aloud');
+  assert(ui.call('wbRowSpeech', exT, exT.items[0]) === before,
+    'and says the same thing once the row is answered');
+  assert(before.indexOf('{}') < 0, 'and never reads the placeholder aloud');
   // A two-blank row speaks both halves.
   const pair = wb.exercises.find(e => e.id === 'u14-grammar-4-1');
   const p = loadUi();
   p.setBank('u14-grammar-4-1');
-  const both = p.call('wbRowSpeech', pair, pair.items[0], true);
+  const both = p.call('wbRowSpeech', pair, pair.items[0]);
   assert(both.indexOf('해도 돼요') >= 0 && both.indexOf('하면 안 돼요') >= 0,
     'a two-blank row speaks both blanks filled');
 
@@ -1266,13 +1266,18 @@ console.log('\n--- 18. Listening ---');
   assert(!!bookBtn && bookBtn.className.indexOf('book') > 0,
     'a row with a recording is marked as playing the book, not a synthesised voice');
   assert(css.indexOf('.wb-say.book') >= 0, 'and styled apart');
-  // Until the row is answered the clip stops where the prompt ends.
+  // The clip runs to the end. It used to stop at askEnd until the row was
+  // checked, which meant the button played the question and nothing else for as
+  // long as you were actually doing the exercise.
   const play = uiSrc.slice(uiSrc.indexOf('function wbPlayClip'), uiSrc.indexOf('function wbSayButton'));
-  assert(play.indexOf('!full && clip.askEnd') >= 0,
-    'an unanswered row plays only as far as askEnd');
-  assert(play.indexOf('currentTime >= stopAt') >= 0, 'and stops itself there');
-  assert(uiSrc.indexOf('wbSayButton(wbRowSpeech(ex, item, st.checked), item.audio, st.checked)') >= 0,
-    'the row passes its own checked state, so checking unlocks the model answer');
+  assert(play.indexOf('askEnd') < 0 && play.indexOf('stopAt') < 0,
+    'nothing cuts the clip short — both lines play');
+  assert(uiSrc.indexOf('wbSayButton(wbRowSpeech(ex, item), item.audio)') >= 0,
+    'and the row asks for the whole exchange regardless of whether it is checked');
+  // askEnd stays in the data: it marks where the question ends, which is what
+  // the speech-rate check above measures the two halves against.
+  assert(drills.every(e => e.items.every(i => i.audio.askEnd > 0)),
+    'every clip still records where its question ends');
 
   // The clip harvest must not render the wrong answers as clean spoken Korean.
   const { collectTtsPhrases } = require('../scripts/ttsClips.js');
