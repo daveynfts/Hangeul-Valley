@@ -2698,6 +2698,29 @@
       grid-template-columns: auto auto minmax(0, 1fr);
     }
     .wb-row.photo .wb-left { display: flex; }
+
+    /* ── Workbook · matching two columns ────────────────────────────────────
+       Pictures down one side, names down the other, the way the book prints it.
+       Stacking the names above the pictures — which is what the shared box does
+       everywhere else — turned one exercise into two unrelated lists. */
+    .wb-items-match.wb-paired { gap: 0 !important; }
+    .wb-cols {
+      display: grid; grid-template-columns: minmax(0, 1fr) minmax(170px, 0.5fr);
+      gap: 16px; align-items: start;
+    }
+    .wb-col { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    /* The names stay put while the pictures scroll past them; with six rows the
+       column you are picking from would otherwise leave the screen. */
+    .wb-names { position: sticky; top: 0; }
+    .wb-names .wb-chip { justify-content: flex-start; width: 100%; }
+    .wb-paired .wb-row { padding: 8px 10px; }
+    /* No dashed rule running the width of the cell. The blank is a grid item, so
+       width:auto still stretches it — justify-self is what actually stops it. */
+    /* Both classes sit on #wb-items, so this has to out-specify the
+       .wb-items-match rule that sets width:100% rather than merely follow it. */
+    .wb-items-match.wb-paired .wb-blank {
+      min-width: 120px; width: auto; justify-self: start; text-align: center;
+    }
     .wb-join { color: #7a3e12; font-weight: 800; }
     .wb-items-match .wb-blank { min-width: 0; width: 100%; text-align: left; }
     .wb-bank-match { flex-direction: column; align-items: stretch; }
@@ -2725,6 +2748,11 @@
       .wb-items-match .wb-sentence { grid-template-columns: 1fr; gap: 4px; }
       .wb-join { display: none; }
       .wb-items-match .wb-blank { border-bottom-width: 2px; }
+      /* Two columns do not fit a phone. The names go back above the pictures,
+         but stay in the list so the exercise still reads as one thing. */
+      .wb-cols { grid-template-columns: 1fr; gap: 12px; }
+      .wb-names { position: static; order: -1; }
+      .wb-row.photo .wb-sentence { grid-template-columns: auto auto minmax(0, 1fr) !important; }
     }
     @media (prefers-reduced-motion: reduce) {
       .wb-pick, #wb-back { transition: none; }
