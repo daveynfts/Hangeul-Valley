@@ -1390,7 +1390,7 @@
           "grammar": "보다 → 본. A vowel stem takes the bare ㄴ. 봤은 stacks the past 았 under a form that already means past, and 적이 있다 carries the pastness by itself.",
           "audio": {
             "src": "audio/book/2b-u14-p1-1.mp3",
-            "askEnd": 3.31
+            "askEnd": 2.59
           }
         },
         {
@@ -1427,7 +1427,7 @@
           "grammar": "먹다 → 먹은. Consonant stem takes -은, vowel stem takes -ㄴ. 먹는 is the present modifier — 먹는 사람 is the person who is eating — and it cannot stand in front of 적이 있다.",
           "audio": {
             "src": "audio/book/2b-u14-p1-2.mp3",
-            "askEnd": 3.45
+            "askEnd": 2.9
           }
         },
         {
@@ -1464,7 +1464,7 @@
           "grammar": "만나다 → 만난. Vowel stem, so -ㄴ attaches straight on. Both wrong answers here are the two mistakes already seen: the present modifier, and the past put in twice.",
           "audio": {
             "src": "audio/book/2b-u14-p1-3.mp3",
-            "askEnd": 3.52
+            "askEnd": 2.87
           }
         },
         {
@@ -1500,7 +1500,8 @@
           "why": "The one the drill builds towards, and the teacher gives it away in the question: 들어요, not 듣어요. The ㄷ has already turned into ㄹ there for the same reason it does here.",
           "grammar": "듣다 → 들은. ㄷ-irregular: ㄷ becomes ㄹ before a vowel ending, then the consonant-stem -은 goes on. Compare 듣고, where a consonant follows and the ㄷ stays as it is.",
           "audio": {
-            "src": "audio/book/2b-u14-p1-4.mp3"
+            "src": "audio/book/2b-u14-p1-4.mp3",
+            "askEnd": 2.73
           }
         }
       ],
@@ -1521,7 +1522,7 @@
         "en": "T: Is this your first time going to Gyeongju? — S: No, I've been before.",
         "audio": {
           "src": "audio/book/2b-u14-p1-0.mp3",
-          "askEnd": 3.36
+          "askEnd": 2.44
         }
       }
     },
@@ -1572,7 +1573,7 @@
           "grammar": "받다 → 받았을 때. The stem vowel is ㅏ, so the ending is 았, not 었. 받을 때 drops the past entirely and would mean whenever you receive one.",
           "audio": {
             "src": "audio/book/2b-u14-p2-1.mp3",
-            "askEnd": 3.25
+            "askEnd": 2.76
           }
         },
         {
@@ -1609,7 +1610,7 @@
           "grammar": "돌아가시다 → 돌아가셨을 때. 시 + 었 → 셨. Note 슬펐어요 in the question as well: 슬프다 is a ㅡ stem, so 슬프 + 어 → 슬퍼, then 었.",
           "audio": {
             "src": "audio/book/2b-u14-p2-2.mp3",
-            "askEnd": 3.66
+            "askEnd": 2.83
           }
         },
         {
@@ -1646,7 +1647,7 @@
           "grammar": "가다 → 갔을 때. ㅏ meeting 았 leaves one syllable: 가 + 았 = 갔. 가았을 writes the vowel twice, which is the mistake this stem invites.",
           "audio": {
             "src": "audio/book/2b-u14-p2-3.mp3",
-            "askEnd": 2.75
+            "askEnd": 3.18
           }
         },
         {
@@ -1682,7 +1683,8 @@
           "why": "This is the sentence the 문법과 표현 연습 2 example was built on, turned round: there the phone rang as you arrived, here you answer for when the call came. 전화를 받다 is to take a call, the same 받다 as item 1.",
           "grammar": "도착하다 → 도착했을 때. Every 하다 verb goes 하 + 였 → 했, so 도착하았을 is wrong twice over — wrong vowel, and uncontracted.",
           "audio": {
-            "src": "audio/book/2b-u14-p2-4.mp3"
+            "src": "audio/book/2b-u14-p2-4.mp3",
+            "askEnd": 3.55
           }
         }
       ],
@@ -1703,7 +1705,7 @@
         "en": "T: When did you see that film? — S: I saw it when I was little.",
         "audio": {
           "src": "audio/book/2b-u14-p2-0.mp3",
-          "askEnd": 2.24
+          "askEnd": 2.85
         }
       }
     },
@@ -1754,7 +1756,7 @@
           "grammar": "나가다 → 나가도 돼요. The stem ends in ㅏ and the ending starts with 아, so they merge into one: 나가 + 아도 = 나가도, never 나가아도.",
           "audio": {
             "src": "audio/book/2b-u14-p3-1.mp3",
-            "askEnd": 2.26
+            "askEnd": 1.93
           }
         },
         {
@@ -1791,7 +1793,7 @@
           "grammar": "전화하다 → 전화해도 돼요. 하 takes 여, not 아/어: 하 + 여도 = 해도. 전화하도 leaves the vowel out altogether and there is nothing for -도 to attach to.",
           "audio": {
             "src": "audio/book/2b-u14-p3-2.mp3",
-            "askEnd": 2.35
+            "askEnd": 2.08
           }
         },
         {
@@ -1828,7 +1830,7 @@
           "grammar": "쓰다 → 써도 돼요. The ㅡ drops before a vowel ending and there is no syllable before it to take the vowel from, so it defaults to 어: 쓰 + 어 = 써.",
           "audio": {
             "src": "audio/book/2b-u14-p3-3.mp3",
-            "askEnd": 2.54
+            "askEnd": 2.46
           }
         },
         {
@@ -1864,7 +1866,8 @@
           "why": "The same question the 문법과 표현 sign page asked, and the answer it expects there is 먹으면 안 돼요. Asking and refusing are the two halves the book keeps putting side by side.",
           "grammar": "먹다 → 먹어도 돼요. The stem vowel is ㅓ, so the ending is 어. Only ㅏ and ㅗ stems take 아.",
           "audio": {
-            "src": "audio/book/2b-u14-p3-4.mp3"
+            "src": "audio/book/2b-u14-p3-4.mp3",
+            "askEnd": 2.89
           }
         }
       ],
@@ -1885,7 +1888,7 @@
         "en": "T: take photographs here — S: May I take photographs here?",
         "audio": {
           "src": "audio/book/2b-u14-p3-0.mp3",
-          "askEnd": 3.05
+          "askEnd": 2.72
         }
       }
     },
@@ -1936,7 +1939,7 @@
           "grammar": "주차하다 → 주차하면 안 돼요. -(으)면 goes on the plain stem 하, so the 해 that -아/어도 needed has no business here. And 하 ends in a vowel, so no 으.",
           "audio": {
             "src": "audio/book/2b-u14-p4-1.mp3",
-            "askEnd": 3.23
+            "askEnd": 2.62
           }
         },
         {
@@ -1973,7 +1976,7 @@
           "grammar": "피우다 → 피우면 안 돼요. Vowel-final stem, so plain -면. 피우으면 borrows the 으 that only consonant stems need.",
           "audio": {
             "src": "audio/book/2b-u14-p4-2.mp3",
-            "askEnd": 3.65
+            "askEnd": 3.37
           }
         },
         {
@@ -2010,7 +2013,7 @@
           "grammar": "마시다 → 마시면 안 돼요. The 셔 in the teacher’s 마셔도 is ㅣ + 어 contracting; nothing contracts before -면, so the stem comes back as 마시.",
           "audio": {
             "src": "audio/book/2b-u14-p4-3.mp3",
-            "askEnd": 3.71
+            "askEnd": 3.56
           }
         },
         {
@@ -2046,7 +2049,8 @@
           "why": "The best item in the drill. 부르다 is 르-irregular, and the teacher shows it off: 부르 + 어 doubles the ㄹ and gives 불러. Then the answer needs -면, no vowel follows, and the verb goes straight back to being ordinary.",
           "grammar": "부르다 → 부르면 안 돼요. 르-irregular verbs are only irregular before a vowel. 불러면 carries the irregular form into a place that never triggers it — the single most useful mistake to stop making.",
           "audio": {
-            "src": "audio/book/2b-u14-p4-4.mp3"
+            "src": "audio/book/2b-u14-p4-4.mp3",
+            "askEnd": 3.35
           }
         }
       ],
@@ -2067,7 +2071,7 @@
         "en": "T: May I take photographs here? — S: No, you may not take photographs.",
         "audio": {
           "src": "audio/book/2b-u14-p4-0.mp3",
-          "askEnd": 3.52
+          "askEnd": 3.24
         }
       }
     }
