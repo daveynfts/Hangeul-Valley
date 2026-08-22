@@ -2546,6 +2546,22 @@ function wbStopTrack() {
   if (typeof AudioMixer !== 'undefined' && AudioMixer.voiceEnd) AudioMixer.voiceEnd();
 }
 
+// One name from the shared box. Built here rather than inline because the box
+// sits above the rows on most types and beside them on a picture match, and both
+// want the same button.
+function wbChipButton(c, i) {
+  const st = workbookState;
+  const used = st.fill.indexOf(c.id) >= 0;
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'wb-chip' + (used ? ' used' : '');
+  b.setAttribute('data-chip', c.id);
+  b.disabled = st.checked;
+  b.innerHTML = '<span class="wb-chip-key">' + (i + 1) + '</span>' + vbEsc(wbChipText(c));
+  b.onclick = () => wbPickChip(c.id);
+  return b;
+}
+
 // A build script with its gaps filled in, as one line of speech.
 function wbScriptText(lines, texts) {
   let slot = 0;
@@ -2679,31 +2695,44 @@ function renderWorkbook() {
     }
   }
 
+  // A match exercise whose prompts are pictures is drawn as the book draws it:
+  // two columns, pictures down one side and names down the other. Stacking the
+  // names above the pictures instead — which is what every other type does —
+  // read as two unrelated lists.
+  const paired = ex.type === 'match' && items.some(it => it.img);
+
   const bank = $('wb-bank');
-  if (bank && wbPerItem(ex)) {
-    // Choices live on each row, so a shared box would just be an empty strip.
+  if (bank && (wbPerItem(ex) || paired)) {
+    // Choices live on each row, or in the second column. Either way a shared
+    // box above them would be an empty strip.
     bank.innerHTML = '';
     bank.className = 'wb-hidden';
   } else if (bank) {
     bank.innerHTML = '';
     bank.className = 'wb-bank-' + (ex.type || 'fill');
-    st.chips.forEach((c, i) => {
-      const used = st.fill.indexOf(c.id) >= 0;
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'wb-chip' + (used ? ' used' : '');
-      b.setAttribute('data-chip', c.id);
-      b.disabled = st.checked;
-      b.innerHTML = '<span class="wb-chip-key">' + (i + 1) + '</span>' + vbEsc(wbChipText(c));
-      b.onclick = () => wbPickChip(c.id);
-      bank.appendChild(b);
-    });
+    st.chips.forEach((c, i) => bank.appendChild(wbChipButton(c, i)));
   }
 
   const list = $('wb-items');
   if (list) {
     list.innerHTML = '';
-    list.className = 'wb-items-' + (ex.type || 'fill');
+    list.className = 'wb-items-' + (ex.type || 'fill') + (paired ? ' wb-paired' : '');
+    // The picture rows go in the left column and the names in the right one, so
+    // rows are appended to a column rather than straight to the list.
+    let target = list;
+    let names = null;
+    if (paired) {
+      const cols = document.createElement('div');
+      cols.className = 'wb-cols';
+      target = document.createElement('div');
+      target.className = 'wb-col';
+      names = document.createElement('div');
+      names.className = 'wb-col wb-names';
+      cols.appendChild(target);
+      cols.appendChild(names);
+      list.appendChild(cols);
+      st.chips.forEach((c, i) => names.appendChild(wbChipButton(c, i)));
+    }
     items.forEach((item, i) => {
       const chosen = st.fill[i];
       const chip = chosen ? wbChip(chosen, item) : null;
@@ -2845,7 +2874,7 @@ function renderWorkbook() {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); wbFocusBlank(i); }
         };
       }
-      list.appendChild(row);
+      target.appendChild(row);
     });
   }
 

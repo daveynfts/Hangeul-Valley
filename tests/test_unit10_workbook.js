@@ -186,14 +186,51 @@ console.log('\n--- 4. The page runs ---');
   const ui = loadUi();
   ui.open('u10-vocab-1');
   assert(ui.run('workbookState.chips.length') === 6, 'six names are offered');
-  assert(ui.els['wb-items'].className === 'wb-items-match', 'match rows use the two-column layout');
-  const rows = ui.els['wb-items'].children;
+
+  // Two columns, the way the book prints a matching exercise. The shared box
+  // above the rows — which every other type uses — put six full-width name bars
+  // over six pictures and read as two unrelated lists.
+  assert(ui.els['wb-items'].className === 'wb-items-match wb-paired',
+    'a picture match is laid out as a pair of columns');
+  assert(ui.els['wb-bank'].className === 'wb-hidden',
+    'and the box above the rows is gone, not just restyled');
+  const cols = ui.els['wb-items'].children;
+  assert(cols.length === 1 && cols[0].className === 'wb-cols', 'the list holds one two-column block');
+  const left = cols[0].children[0], right = cols[0].children[1];
+  assert(left && right && right.className.indexOf('wb-names') >= 0,
+    'pictures in the first column, names in the second');
+  const rows = left.children;
   assert(rows.length === 6, 'six picture rows');
+  assert(right.children.length === 6, 'six names beside them');
+  assert(right.children.every(c => (c.className || '').indexOf('wb-chip') === 0),
+    'the names are the same chips the other exercises use');
   assert(rows[0].innerHTML.indexOf('<img class="wb-photo"') >= 0, 'a row draws its picture');
   assert(rows[0].innerHTML.indexOf('/sprites/foods/kimchi_stew.png') >= 0,
     'from the shipped sprite');
   assert(rows[0].innerHTML.indexOf('wb-join') >= 0, 'with the join between picture and name');
-  assert(css.indexOf('.wb-photo') >= 0, 'the picture is styled');
+  assert(rows[0].className.indexOf('photo') > 0, 'and is marked as a picture row');
+  ['.wb-photo', '.wb-cols', '.wb-names'].forEach((sel) => {
+    assert(css.indexOf(sel) >= 0, sel + ' is styled');
+  });
+  // The blank is a grid item, so width:auto alone still stretches it the width
+  // of the cell — which is the dashed rule that made this look wrong.
+  assert(css.indexOf('.wb-items-match.wb-paired .wb-blank') >= 0
+    && /\.wb-items-match\.wb-paired \.wb-blank \{[^}]*justify-self: start/.test(css),
+    'and the blank is held to its own width rather than the cell’s');
+  // A match without pictures keeps the box above the rows.
+  const plain = loadUi();
+  plain.run('__wb = ' + JSON.stringify({
+    id: 'x', exercises: [{
+      id: 'p', type: 'match', section: '어휘', no: '연습 1', instructionKo: 'x',
+      bank: [{ id: 'a', ko: '가' }, { id: 'b', ko: '나' }],
+      items: [{ n: 1, stemKo: '하나', answer: 'a', en: '', why: 'w', grammar: 'g' },
+        { n: 2, stemKo: '둘', answer: 'b', en: '', why: 'w', grammar: 'g' }]
+    }]
+  }));
+  plain.run("openWorkbook(__wb); openWorkbookExercise('p')");
+  assert(plain.els['wb-items'].className === 'wb-items-match',
+    'a text match is not paired');
+  assert(plain.els['wb-bank'].children.length === 2, 'and keeps its box of chips');
 
   const ex1 = wb.exercises[0];
   ex1.items.forEach((it, i) => {
