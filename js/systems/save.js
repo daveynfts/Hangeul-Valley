@@ -670,6 +670,12 @@ function applySave(d){
   updateCurrencyHUD();
   updateRankHUD();
   if (sceneRef && typeof sceneRef.refreshPlotAccess === 'function') sceneRef.refreshPlotAccess();
+  // After refreshPlotAccess, so plots this save owns are no longer drawn as locked when the
+  // crops land on them. Without this the tiles kept showing the pre-load farm, and the next
+  // collectSave() — which reads the live scene, not plotSave — wrote that farm back over the
+  // save we had just loaded. Reachable on sign-in mid-session and on a reload that still has
+  // the Google token in sessionStorage, both of which run long after the scene is built.
+  if (sceneRef && typeof sceneRef.reloadPlotsFromSave === 'function') sceneRef.reloadPlotsFromSave();
   if (typeof checkCookingAchievements === 'function') checkCookingAchievements();
   return true;
 }

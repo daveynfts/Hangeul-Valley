@@ -3102,6 +3102,18 @@ class FarmScene extends Phaser.Scene {
     });
   }
 
+  // Re-point the visible farm at whatever plotSave now holds. _restorePlots() alone runs
+  // once, at scene creation, so loading a save into a live farm left the tiles showing the
+  // crops from before the load — and since collectSave() reads this scene rather than
+  // plotSave, the next write put the pre-load farm straight back over the copy that had
+  // just been loaded. applySave() already re-spawned ground drops for exactly this reason;
+  // plots were the half that got missed.
+  reloadPlotsFromSave(){
+    if (!this.plots) return;
+    this.resetPlots();
+    this._restorePlots();
+  }
+
   // ── DAILY REVIEW LOOP ──────────────────────────────────────────────────────
   // Words whose review date has passed appear as already-ripe crops on free plots, so
   // opening the farm answers "what do I owe today?" the way Stardew answers it: you walk
@@ -3221,8 +3233,14 @@ class FarmScene extends Phaser.Scene {
       if(p.glow){p.glow.destroy();p.glow=null;}
       if(p.hintLabel){p.hintLabel.destroy();p.hintLabel=null;}
       if(p.plant){p.plant.destroy();p.plant=null;}
+      // The crop is gone, so its drop shadow has to go with it — _clearPlot below has always
+      // done this, resetPlots never did, and the orphaned shadow stayed on the empty tile.
+      if(p.cropShadow){if(p.cropShadow.destroy) p.cropShadow.destroy(); p.cropShadow=null;}
       if(p.ko) plantedWords.delete(p.ko);
-      p.sState=''; p.ko=null; p.word=null;
+      // plantedAt and reviewModality belong to the crop that was standing here. Leaving
+      // them behind meant the next crop to land on this plot inherited the previous one's
+      // review modality, so a word restored from a save could be quizzed on the wrong skill.
+      p.sState=''; p.ko=null; p.word=null; p.plantedAt=0; p.reviewModality=null;
       p.tile.setTexture('drt_dry').setAlpha(p.active?1:0.25).setDisplaySize(PLOT_SIZE,PLOT_SIZE).clearTint();
       p.shad.setAlpha(p.active?0.3:0.1);
     });
