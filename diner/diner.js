@@ -7,9 +7,6 @@ let glossOn = true;
 let content = null;
 let selectedShop = null;
 let selectedDish = null;
-let pizzaSize = null;
-let pizzaKind = null;
-let pizzaDrink = null;
 let reviewStars = { mat: 0, bunwigi: 0, service: 0, gap: 0, gyotong: 0 };
 let intonationI = 0;
 
@@ -366,13 +363,90 @@ function pickDish(d, btn) {
 }
 
 /* ── 3 phone ────────────────────────────────────────────────── */
+// The 주문 half of Unit 10 — eighteen words the unit teaches and this scene used to touch
+// five of: 피자나라, 치즈피자, 불고기피자, 콜라, 판. The menu now comes from
+// content.json's `order` block instead of being written into the markup, so the other
+// thirteen have somewhere to be: the three pizzas nobody was offering, 사이다, both
+// chickens, the rice and noodle dishes, both counters and both delivery verbs.
+//
+// 큰 거 / 작은 거 went, and 판 / 인분 took its place. Size is not Unit 10 vocabulary;
+// counters are, and choosing between them is the one decision here with a rule behind it.
 let phoneStep = 0;
+let orderPizza = null, orderCounter = null, orderDrink = null;
+let orderSide = null, orderSideCounter = null;
+
 function scenePhone() {
   phoneStep = 0;
-  pizzaKind = null; pizzaSize = null; pizzaDrink = null;
+  orderPizza = null; orderCounter = null; orderDrink = null;
+  orderSide = null; orderSideCounter = null;
   phoneBeat();
 }
+
+const ORDER = () => (content && content.order) || {};
+const byId = (list, id) => (list || []).find((x) => x.id === id) || null;
+
+/* ── Order grading (pure) ───────────────────────────────────── */
+// Extracted from the beats so the rules can be tested without a DOM. The diner is one script
+// against real elements — `.dish[data-group=…]` needs a live selector engine — and the CI test
+// job has no npm install, so jsdom is not available to it. What is worth testing here is the
+// judgement, not the markup, and this is all of the judgement.
+//
+// The verdicts are deliberately three rather than a boolean. An incomplete pick is not a
+// mistake and must not cost a heart. A wrong counter is a real error. The right counter on a
+// dish the tape did not order is correct Korean aimed at the wrong item — the learner is told
+// that, not told they were wrong.
+const ORDER_WANT = { pizza: 'cheese', drink: 'cola', pizzaCounter: 'pan', sideCounter: 'inbun' };
+
+function gradePizzaOrder(sel) {
+  if (!sel || !sel.pizza || !sel.counter || !sel.drink) return 'incomplete';
+  if (sel.counter !== ORDER_WANT.pizzaCounter) return 'counter';
+  if (sel.pizza !== ORDER_WANT.pizza || sel.drink !== ORDER_WANT.drink) return 'other-order';
+  return 'ok';
+}
+
+// Any dish on the row is a fine thing to order, so only the counter is graded. Grading the
+// dish too would mark 양념치킨 wrong for being 양념치킨.
+function gradeSideOrder(sel) {
+  if (!sel || !sel.side || !sel.counter) return 'incomplete';
+  if (sel.counter !== ORDER_WANT.sideCounter) return 'counter';
+  return 'ok';
+}
+
+// The sentence the phone shows. Placeholders stand in for what has not been picked yet, so
+// the line reads as a sentence being built rather than appearing all at once.
+function orderLine(item, counter, drink, blankKo) {
+  const head = item ? item.ko : (blankKo || '피자');
+  const count = counter ? counter.numKo + ' ' + counter.ko : '몇';
+  const tail = drink ? '하고 ' + drink.ko + ' 하나' : '';
+  return `${head} ${count}${tail} 주세요.`;
+}
+/* ── Order grading end ──────────────────────────────────────── */
+
+// One picker row. `group` keeps the selection exclusive within its own row, so picking a
+// drink does not clear the pizza.
+function pickerHtml(group, items, labelOf) {
+  return `<div class="grid" data-group="${group}">` + items.map((it) =>
+    `<button class="dish" data-group="${group}" data-id="${it.id}">
+       <div class="name">${it.icon ? it.icon + ' ' : ''}${labelOf ? labelOf(it) : it.ko}</div>
+       <div class="meta">${glossOn ? it.en : ''}</div>
+     </button>`).join('') + `</div>`;
+}
+
+function wirePickers(onChange) {
+  document.querySelectorAll('.dish[data-group]').forEach((b) => {
+    b.onclick = () => {
+      const g = b.dataset.group;
+      document.querySelectorAll(`.dish[data-group="${g}"]`).forEach((x) => {
+        x.classList.toggle('picked', x === b);
+      });
+      onChange(g, b.dataset.id);
+    };
+  });
+}
+
 function phoneBeat() {
+  const O = ORDER();
+
   if (phoneStep === 0) {
     setStage(`
       ${formTag('nde')}
@@ -381,7 +455,7 @@ function phoneBeat() {
       <div class="bubble">
         <div class="who">스티븐</div>
         <div>
-          <div class="line-ko">점심 아직 안 먹었는데 2시에 피자 시킬래? 나는 소고기 좋아하는데 <span class="mark">불고기 피자는 싫어.</span></div>
+          <div class="line-ko" data-speak="점심 아직 안 먹었는데 2시에 피자 시킬래? 나는 소고기 좋아하는데 불고기피자는 싫어.">점심 아직 안 먹었는데 2시에 피자 시킬래? 나는 소고기 좋아하는데 <span class="mark">불고기피자는 싫어.</span></div>
           ${gloss('Still no lunch — pizza at 2? I like beef, but I don\'t like bulgogi pizza.')}
         </div>
       </div>
@@ -389,83 +463,186 @@ function phoneBeat() {
       <div class="fb" id="fb"></div>
     `);
     paintChoices('chs', [
-      { ko: '그럼 치즈 피자 시키자.', en: 'Then let\'s get cheese pizza.', ok: true, register: 'banmal', form: 'nde', why: '소고기는 좋아하는데 불고기 피자는 싫어 → 치즈 피자.' },
-      { ko: '불고기 피자 두 판 주세요.', en: 'Two bulgogi pizzas please', ok: false, register: 'jondaetmal', why: 'He just said he dislikes 불고기 피자 — and -주세요 is staff talk.' },
+      { ko: '그럼 치즈피자 시키자.', en: 'Then let\'s get cheese pizza.', ok: true, register: 'banmal', form: 'nde', why: '소고기는 좋아하는데 불고기피자는 싫어 → 치즈피자.' },
+      { ko: '불고기피자 두 판 주세요.', en: 'Two bulgogi pizzas please', ok: false, register: 'jondaetmal', why: 'He just said he dislikes 불고기피자 — and 주세요 is for the shop, not for a friend.' },
       { ko: '감자탕 또 먹을래.', en: 'Gamjatang again', ok: false, why: 'This beat is the listening: pizza at 2 o\'clock.' }
     ], () => { phoneStep = 1; phoneBeat(); });
-  } else if (phoneStep === 1) {
+    return;
+  }
+
+  if (phoneStep === 1) {
+    // The tape names the order, which is what makes one pizza and one drink the right
+    // answer: 야채피자 and 사이다 are perfectly good Korean, just not what was asked for.
+    // Only the counter is right or wrong on its own.
     setStage(`
       ${formTag('jondaetmal')}
       <div class="kicker">SCENE 3 · YOU ARE THE CUSTOMER</div>
-      <h1>여보세요, 피자나라입니다</h1>
+      <h1>여보세요, ${O.shopKo}입니다</h1>
       <div class="phone">
         <div class="notch"></div>
-        <h2>PIZZA NARA</h2>
-        <div class="sms them">여보세요, 피자나라입니다. 무엇을 도와드릴까요?</div>
+        <h2>${(O.shopEn || '').toUpperCase()}</h2>
+        <div class="sms them">여보세요, ${O.shopKo}입니다. 무엇을 도와드릴까요?</div>
         <div class="sms me" id="sms-me">…</div>
       </div>
-      <p class="lead">존댓말. Textbook order: large cheese pizza + one cola = 18,000원, 30 minutes.</p>
-      <div class="grid">
-        <button class="dish" data-k="cheese"><div class="name">치즈 피자</div><div class="meta">cheese</div></button>
-        <button class="dish" data-k="bulgogi"><div class="name">불고기 피자</div><div class="meta">he said no</div></button>
-        <button class="dish" data-s="L"><div class="name">큰 거</div><div class="meta">large</div></button>
-        <button class="dish" data-s="S"><div class="name">작은 거</div><div class="meta">small</div></button>
-        <button class="dish" data-d="cola"><div class="name">콜라 하나</div><div class="meta">cola</div></button>
-        <button class="dish" data-d="none"><div class="name">음료 없이</div><div class="meta">no drink</div></button>
-      </div>
-      <div class="built" id="built">치즈 피자 큰 거 하나하고 콜라 하나 주세요.</div>
+      <p class="lead">존댓말. The tape orders <b>치즈피자</b> and <b>콜라</b> — ${O.priceKo}, ${O.minutesKo}. Pick the pizza, then how to count it, then the drink.</p>
+      ${pickerHtml('pizza', O.pizzas)}
+      ${pickerHtml('counter', O.counters, (c) => c.numKo + ' ' + c.ko)}
+      ${pickerHtml('drink', O.drinks)}
+      <div class="built" id="built">…</div>
       <div class="fb" id="fb"></div>
       <button class="cta" id="go">Say 주세요 →</button>
     `);
-    const built = () => {
-      const k = pizzaKind === 'cheese' ? '치즈 피자' : pizzaKind === 'bulgogi' ? '불고기 피자' : '피자';
-      const s = pizzaSize === 'L' ? '큰 거' : pizzaSize === 'S' ? '작은 거' : '사이즈';
-      const d = pizzaDrink === 'cola' ? '하고 콜라 하나' : pizzaDrink === 'none' ? '' : '';
-      $('built').textContent = `${k} ${s} 하나${d} 주세요.`;
-      $('sms-me').textContent = $('built').textContent;
+    const paint = () => {
+      const line = orderLine(byId(O.pizzas, orderPizza), byId(O.counters, orderCounter), byId(O.drinks, orderDrink));
+      $('built').textContent = line;
+      $('built').setAttribute('data-speak', line);
+      $('sms-me').textContent = line;
     };
-    document.querySelectorAll('.dish').forEach((b) => {
-      b.onclick = () => {
-        if (b.dataset.k) pizzaKind = b.dataset.k;
-        if (b.dataset.s) pizzaSize = b.dataset.s;
-        if (b.dataset.d) pizzaDrink = b.dataset.d;
-        document.querySelectorAll('.dish').forEach((x) => {
-          const same = (b.dataset.k && x.dataset.k) || (b.dataset.s && x.dataset.s) || (b.dataset.d && x.dataset.d);
-          if (same) x.classList.toggle('picked', x === b);
-        });
-        built();
-      };
+    wirePickers((g, id) => {
+      if (g === 'pizza') orderPizza = id;
+      if (g === 'counter') orderCounter = id;
+      if (g === 'drink') orderDrink = id;
+      paint();
     });
+    paint();
     $('go').onclick = () => {
-      const ok = pizzaKind === 'cheese' && pizzaSize === 'L' && pizzaDrink === 'cola';
-      if (ok) {
-        bump('vocab', 2); bump('register', 1);
-        feedback($('fb'), true, '18,000원, 삼십 분 걸린다고 합니다.');
-        setTimeout(() => { phoneStep = 2; phoneBeat(); }, 800);
-      } else {
-        feedback($('fb'), false, loseHeart('다시요 — 치즈 피자 큰 거 하나, 콜라 하나 주세요.'));
+      switch (gradePizzaOrder({ pizza: orderPizza, counter: orderCounter, drink: orderDrink })) {
+        case 'incomplete':
+          feedback($('fb'), false, '피자, 개수, 음료 — 세 개 다 고르세요.');
+          return;
+        case 'counter':
+          feedback($('fb'), false, loseHeart('피자는 판으로 세요 — 치즈피자 한 판. 인분은 밥이나 국수처럼 한 사람 몫을 셀 때예요.'));
+          return;
+        case 'other-order':
+          feedback($('fb'), false, loseHeart('말은 맞지만 주문이 달라요 — 테이프는 치즈피자하고 콜라예요.'));
+          return;
+        default:
+          bump('vocab', 2); bump('register', 1);
+          feedback($('fb'), true, `${O.priceKo}이고 ${O.minutesKo} 걸린다고 합니다.`);
+          setTimeout(() => { phoneStep = 2; phoneBeat(); }, 900);
       }
     };
-  } else {
+    return;
+  }
+
+  if (phoneStep === 2) {
+    // Six sides, and the same counter row again — this time 인분 is the right one. The pair
+    // of beats is the whole point: the counter follows the thing being counted, not the shop.
     setStage(`
       ${formTag('jondaetmal')}
-      <div class="kicker">SCENE 3 · YOU ARE THE SHOP</div>
-      <h1>주문 확인</h1>
+      <div class="kicker">SCENE 3 · 정우도 배고파</div>
+      <h1>하나 더 시키자</h1>
+      <div class="bubble">
+        <div class="who">정우</div>
+        <div>
+          <div class="line-ko" data-speak="피자만 먹으면 배 안 차는데. 밥이나 치킨도 하나 시킬래?">피자만 먹으면 배 안 차는데. <span class="mark">밥이나 치킨</span>도 하나 시킬래?</div>
+          ${gloss('Pizza alone won\'t fill us. Shall we add rice or chicken?')}
+        </div>
+      </div>
+      <p class="lead">Anything on this row is a fine choice — the graded part is the counter beside it.</p>
+      ${pickerHtml('side', O.sides)}
+      ${pickerHtml('scounter', O.counters, (c) => c.numKo + ' ' + c.ko)}
+      <div class="built" id="built">…</div>
+      <div class="fb" id="fb"></div>
+      <button class="cta" id="go">주문 추가 →</button>
+    `);
+    const paint = () => {
+      const line = orderLine(byId(O.sides, orderSide), byId(O.counters, orderSideCounter), null, '음식');
+      $('built').textContent = line;
+      $('built').setAttribute('data-speak', line);
+    };
+    wirePickers((g, id) => {
+      if (g === 'side') orderSide = id;
+      if (g === 'scounter') orderSideCounter = id;
+      paint();
+    });
+    paint();
+    $('go').onclick = () => {
+      const s = byId(O.sides, orderSide);
+      switch (gradeSideOrder({ side: orderSide, counter: orderSideCounter })) {
+        case 'incomplete':
+          feedback($('fb'), false, '음식하고 개수를 고르세요.');
+          return;
+        case 'counter':
+          feedback($('fb'), false, loseHeart(`판은 피자 한 장을 세는 말이에요. ${s ? s.ko : '밥'}은 한 사람 몫이니까 인분이에요.`));
+          return;
+        default:
+          bump('vocab', 2);
+          feedback($('fb'), true, `네, ${s.ko} 이 인분이요.`);
+          setTimeout(() => { phoneStep = 3; phoneBeat(); }, 900);
+      }
+    };
+    return;
+  }
+
+  if (phoneStep === 3) {
+    // Both delivery words are used, each answering the prompt it fits, rather than one
+    // standing as a distractor for the other. 배달되다 asks whether delivery happens at all;
+    // 갖다 주다 asks a person to bring it somewhere.
+    const baedal = byId(O.delivery, 'baedal') || {};
+    const gatda = byId(O.delivery, 'gatda') || {};
+    setStage(`
+      ${formTag('jondaetmal')}
+      <div class="kicker">SCENE 3 · 배달</div>
+      <h1>기숙사까지 와요?</h1>
       <div class="phone">
         <div class="notch"></div>
-        <h2>PIZZA NARA · STAFF</h2>
-        <div class="sms them">치즈 피자 큰 거 하나하고 콜라 하나요. 맞죠?</div>
+        <h2>${(O.shopEn || '').toUpperCase()}</h2>
+        <div class="sms them">주문 다 되셨어요?</div>
       </div>
-      <p class="lead">Read back price and time from the listening passage.</p>
+      <p class="lead">You do not know yet whether they come out to the dormitory. Ask that first.</p>
       <div class="choices" id="chs"></div>
       <div class="fb" id="fb"></div>
     `);
     paintChoices('chs', [
-      { ko: '네, 만 팔천 원이고 삼십 분 걸립니다.', en: '18,000 won, 30 minutes.', ok: true, register: 'jondaetmal', why: 'Matches the listening: 18,000원 · 30분.' },
-      { ko: '만 원이고 한 시간 걸려.', en: 'Banmal + wrong numbers', ok: false, register: 'banmal', why: 'Staff uses 존댓말, and those figures are not in the passage.' },
-      { ko: '이만 원이고 십 분 걸립니다.', en: 'Wrong total / time', ok: false, why: 'Close, but the tape is 18,000 and 30 minutes.' }
-    ], nextScene);
+      { ko: baedal.askKo || '배달돼요?', en: 'Is it delivered?', ok: true, register: 'jondaetmal', why: '배달되다 — 배달이 되는지 묻는 말이에요. 사람한테 부탁하는 게 아니라 되는지 안 되는지를 물어요.' },
+      { ko: '배달해요.', en: 'I deliver.', ok: false, why: '배달하다 is the shop doing the delivering — that is their side, not your question.' },
+      { ko: gatda.askKo || '갖다 주세요.', en: 'Please bring it.', ok: false, why: '갖다 주다 asks someone to bring it — right word, wrong moment: you still do not know whether they deliver.' }
+    ], () => {
+      setStage(`
+        ${formTag('jondaetmal')}
+        <div class="kicker">SCENE 3 · 배달</div>
+        <h1>네, 배달됩니다</h1>
+        <div class="phone">
+          <div class="notch"></div>
+          <h2>${(O.shopEn || '').toUpperCase()}</h2>
+          <div class="sms them">네, 배달됩니다. 어디로 갖다 드릴까요?</div>
+        </div>
+        <p class="lead">Now it is a request. Ask them to bring it to the dormitory door.</p>
+        <div class="choices" id="chs2"></div>
+        <div class="fb" id="fb"></div>
+      `);
+      paintChoices('chs2', [
+        { ko: '기숙사 앞으로 갖다 주세요.', en: 'Please bring it to the dorm entrance.', ok: true, register: 'jondaetmal', why: '갖다 주다 — 가지고 와서 주는 것. 장소를 말하고 갖다 주세요.' },
+        { ko: '기숙사 앞으로 배달돼요.', en: 'It gets delivered to the dorm.', ok: false, why: '배달되다 states that it happens; it cannot ask them to do it.' },
+        { ko: '기숙사 앞으로 갖다 줘.', en: 'Bring it — banmal', ok: false, register: 'banmal', why: '가게 직원한테는 존댓말이에요. 정우한테 쓰는 말투가 아니에요.' }
+      ], () => { phoneStep = 4; phoneBeat(); });
+    });
+    return;
   }
+
+  // Readback. The pizza half now reads 한 판 rather than 큰 거 하나, matching what the
+  // customer beat actually built.
+  const p = byId(O.pizzas, orderPizza) || { ko: '치즈피자' };
+  const d = byId(O.drinks, orderDrink) || { ko: '콜라' };
+  setStage(`
+    ${formTag('jondaetmal')}
+    <div class="kicker">SCENE 3 · YOU ARE THE SHOP</div>
+    <h1>주문 확인</h1>
+    <div class="phone">
+      <div class="notch"></div>
+      <h2>${(O.shopEn || '').toUpperCase()} · STAFF</h2>
+      <div class="sms them">${p.ko} 한 판하고 ${d.ko} 하나요. 맞죠?</div>
+    </div>
+    <p class="lead">Read back price and time from the listening passage.</p>
+    <div class="choices" id="chs"></div>
+    <div class="fb" id="fb"></div>
+  `);
+  paintChoices('chs', [
+    { ko: `네, ${O.priceKo}이고 ${O.minutesKo} 걸립니다.`, en: '18,000 won, 30 minutes.', ok: true, register: 'jondaetmal', why: 'Matches the listening: 만 팔천 원 · 삼십 분.' },
+    { ko: '만 원이고 한 시간 걸려.', en: 'Banmal + wrong numbers', ok: false, register: 'banmal', why: 'Staff uses 존댓말, and those figures are not in the passage.' },
+    { ko: '이만 원이고 십 분 걸립니다.', en: 'Wrong total / time', ok: false, why: 'Close, but the tape is 만 팔천 원 and 삼십 분.' }
+  ], nextScene);
 }
 
 /* ── 4 review ───────────────────────────────────────────────── */
