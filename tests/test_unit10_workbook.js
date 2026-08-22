@@ -24,6 +24,7 @@ const wb = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', 'unit10-workbook
 const world = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-10.json'), 'utf8'));
 const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, 'sprites', 'catalog.json'), 'utf8'));
 const uiSrc = fs.readFileSync(path.join(ROOT, 'js', 'ui.js'), 'utf8');
+const { collectUploadFiles } = require('../scripts/r2Content.js');
 const css = fs.readFileSync(path.join(ROOT, 'css', 'game.css'), 'utf8');
 
 let passed = 0, failed = 0;
@@ -364,7 +365,8 @@ console.log('\n--- 4b. Drag and drop ---');
 
 // ── 5. 문법과 표현 1 — N 중에(서) ────────────────────────────────────────────
 console.log('\n--- 5. N 중에(서) ---');
-const grammar = wb.exercises.filter(e => e.pattern === 'N 중에(서)');
+const grammar = wb.exercises.filter(e => e.pattern === 'N 중에(서)'
+  && e.section === '문법과 표현');
 const g1 = grammar[0], g2 = grammar[1];
 assert(grammar.length === 2, 'both 연습 off the 문법과 표현 1 page are here');
 assert(grammar.every(e => e.type === 'build'), 'and each row carries its own choices');
@@ -544,7 +546,8 @@ console.log('\n--- 5b. Building the questions ---');
 
 // ── 6. 문법과 표현 2 — 반말 ──────────────────────────────────────────────────
 console.log('\n--- 6. 반말 ---');
-const banmal = wb.exercises.filter(e => e.pattern === '반말');
+const banmal = wb.exercises.filter(e => e.pattern === '반말'
+  && e.section === '문법과 표현');
 const [b1, b2, b3, b4, b5] = banmal;
 assert(banmal.length === 5, 'all five 연습 off the 반말 page are here');
 assert(banmal.map(e => e.no).join(' ') === '연습 1 연습 2 연습 3 연습 4 연습 5',
@@ -878,17 +881,7 @@ console.log('\n--- 6b. Speaking 반말 ---');
   assert(prevTags.every(c => !c.getAttribute('data-name')),
     'and keeps the pixel font, because A is a letter the font has');
 
-  // The list headlines every 문법과 표현 row with its pattern, which is what tells
-  // these five apart from the two before them. How many rows there are, and which
-  // of them can carry a number key, is checked once further down — where every
-  // page of the book exists.
-  const pick = loadUi();
-  pick.open();
-  assert(pick.els['wb-items'].className === 'wb-items-pick', 'the list draws as the picker');
-  const rows = pick.els['wb-items'].children
-    .filter(c => (c.className || '').indexOf('wb-pick') === 0);
-  assert(rows.filter(r => r.innerHTML.indexOf('>반말<') >= 0).length === 5,
-    'five of its rows are headlined 반말');
+
 }
 
 // ── 6c. Invariants across the whole book ────────────────────────────────────
@@ -926,8 +919,8 @@ console.log('\n--- 6c. Every page holds together ---');
         at + ': the [보기] has a gap for every answer it carries');
     }
   });
-  assert(rowCount === 99, 'ninety-nine questions across the sixteen pages');
-  assert(blankCount === 97, 'and ninety-seven blanks over the ten build pages');
+  assert(rowCount === 115, 'a hundred and fifteen questions across the twenty pages');
+  assert(blankCount === 121, 'and a hundred and twenty-one blanks over the fourteen build pages');
   // Nothing in the book is answered by a form it also offers as wrong.
   wb.exercises.filter(e => e.bank).forEach((ex) => {
     const answers = ex.items.map(it => it.answer);
@@ -938,7 +931,8 @@ console.log('\n--- 6c. Every page holds together ---');
 
 // ── 7. 문법과 표현 3 — V-(으)ㄹ래요 ──────────────────────────────────────────
 console.log('\n--- 7. V-(으)ㄹ래요 ---');
-const willing = wb.exercises.filter(e => e.pattern === 'V-(으)ㄹ래요');
+const willing = wb.exercises.filter(e => e.pattern === 'V-(으)ㄹ래요'
+  && e.section === '문법과 표현');
 const [w1, w2] = willing;
 assert(willing.length === 2, 'both 연습 off the V-(으)ㄹ래요 page are here');
 assert(willing.every(e => e.type === 'build' && e.section === '문법과 표현'),
@@ -1110,29 +1104,13 @@ console.log('\n--- 7b. Asking and counter-offering ---');
   half.run('checkWorkbook()');
   assert(half.run('workbookState.score') === 4, 'four right offers with four wrong counters scores 4 of 8');
 
-  // The list: thirteen rows, and only the first ten can carry a number key.
-  const pick = loadUi();
-  pick.open();
-  const kids = pick.els['wb-items'].children;
-  const rows = kids.filter(c => (c.className || '').indexOf('wb-pick') === 0);
-  assert(kids.filter(c => c.className === 'wb-group').length === 2,
-    'still two headings: 어휘 and 문법과 표현');
-  assert(rows.length === 16, 'sixteen exercises on the list');
-  const keys = rows.map((r) => {
-    const m = /wb-pick-key">([^<]*)</.exec(r.innerHTML);
-    return m ? m[1] : '?';
-  });
-  assert(keys.slice(0, 10).join('') === '1234567890', 'the first ten carry 1-9 and 0');
-  assert(keys.slice(10).join('') === '', 'and the six past the tenth carry no badge');
-  assert(rows.filter(r => r.innerHTML.indexOf('V-(으)ㄹ래요') >= 0).length === 2,
-    'the two new rows are headlined by their pattern');
-  assert(rows.slice(4).every(r => r.innerHTML.indexOf('wb-pick-pat') >= 0),
-    'as is every other 문법과 표현 row');
+
 }
 
 // ── 8. 문법과 표현 4 — A-(으)ㄴ데, V-는데, N인데 2 ─────────────────────────────
 console.log('\n--- 8. A-(으)ㄴ데, V-는데, N인데 2 ---');
-const contrast = wb.exercises.filter(e => e.pattern === 'A-(으)ㄴ데, V-는데, N인데 2');
+const contrast = wb.exercises.filter(e => e.pattern === 'A-(으)ㄴ데, V-는데, N인데 2'
+  && e.section === '문법과 표현');
 const [c1, c2, c3] = contrast;
 assert(contrast.length === 3, 'all three 연습 off the -는데 page are here');
 assert(contrast.every(e => e.section === '문법과 표현'), 'filed under 문법과 표현');
@@ -1331,25 +1309,240 @@ console.log('\n--- 8b. Saying the other half ---');
     && move.run('workbookState.fill[2]') === 'baegopayo',
     'an ending dragged to another opening leaves the first one empty');
 
-  // The list: sixteen rows now.
+
+}
+
+// ── 9. 문형 연습 — the drills off track 2 ────────────────────────────────────
+console.log('\n--- 9. 문형 연습 ---');
+const drills = wb.exercises.filter(e => e.section === '문형 연습');
+assert(drills.length === 4, 'four drills off track 2');
+assert(drills.every(e => e.type === 'build'), 'each row carries its own choices');
+assert(drills.map(e => e.no).join(' ') === '연습 1 연습 2 연습 3 연습 4',
+  'numbered as the book numbers them');
+// Each drill practises one of the unit's grammar points, in the order the
+// 문법과 표현 pages take them.
+assert(drills.map(e => e.pattern).join(' | ')
+  === 'N 중에(서) | 반말 | V-(으)ㄹ래요 | A-(으)ㄴ데, V-는데, N인데 2',
+  'and each is filed under the point it drills, in the book’s order');
+assert(drills.every(e => e.sectionEn === 'Pattern Practice'), 'the section is named in English too');
+
+// The answer key at the back, for all twenty exchanges.
+const KEY_D = [
+  ['한국 음식 중에서 비빔밥이 제일 맛있어.', '꽃 중에서 장미가 제일 예뻐.',
+    '한국 노래 중에서 이 노래가 제일 좋아.', '일주일 중에서 월요일이 제일 바빠.',
+    '우리 반 학생 중에서 샤오밍 씨가 제일 멋있어.'],
+  ['몇 시에 일어나?', '음악을 자주 들어?', '집이 여기서 멀어?', '지난 주말에 뭐 했어?',
+    '이번 방학에 어디에 갈 거야?'],
+  ['주말에 도서관에 갈래요?', '이번 방학에 제주도에 갈래요?', '저녁에 학교 앞에서 만날래요?',
+    '일요일에 우리 집에 올래요?', '점심에 비빔밥을 먹을래요?'],
+  ['축구는 잘하는데 농구는 잘 못해요.', '김치는 좋아하는데 김치찌개는 안 좋아해요.',
+    '버스 정류장은 가까운데 지하철역은 멀어요.', '얼굴은 아는데 이름은 몰라요.',
+    '아침에는 비가 왔는데 지금은 안 와요.']
+];
+const TEACHER_D = [
+  ['한국 음식, 비빔밥, 맛있다', '꽃, 장미, 예쁘다', '한국 노래, 이 노래, 좋다',
+    '일주일, 월요일, 바쁘다', '우리 반 학생, 샤오밍 씨, 멋있다'],
+  ['몇 시에 일어나요?', '음악을 자주 들어요?', '집이 여기서 멀어요?', '지난 주말에 뭐 했어요?',
+    '이번 방학에 어디에 갈 거예요?'],
+  ['주말, 도서관, 가다', '이번 방학, 제주도, 가다', '저녁, 학교 앞, 만나다',
+    '일요일, 우리 집, 오다', '점심, 비빔밥, 먹다'],
+  ['축구는 잘해요. 농구는 잘 못해요.', '김치는 좋아해요. 김치찌개는 안 좋아해요.',
+    '버스 정류장은 가까워요. 지하철역은 멀어요.', '얼굴은 알아요. 이름은 몰라요.',
+    '아침에는 비가 왔어요. 지금은 안 와요.']
+];
+// The [보기] first, then the four items — the order the recording has them in.
+const exchangesOf = (e) => [{
+  label: e.no + ' 보기', clip: e.example.audio, lines: e.example.lines,
+  filled: wbFill(e, e.example)
+}].concat(e.items.map(it => ({
+  label: e.no + ' item ' + it.n, clip: it.audio, lines: it.lines, filled: wbFill(e, it)
+})));
+drills.forEach((e, d) => {
+  const rows = exchangesOf(e);
+  assert(rows.length === 5, e.no + ' has the [보기] and four items');
+  rows.forEach((r, k) => {
+    const at = e.no + ' ' + (k === 0 ? '보기' : 'item ' + k);
+    assert(r.lines[0].who === 'T' && r.lines[1].who === 'S',
+      at + ': the teacher reads and the student answers');
+    assert(r.lines[0].ko === TEACHER_D[d][k], at + ': the teacher’s cue is ' + TEACHER_D[d][k]);
+    assert(r.lines[0].ko.indexOf('{}') < 0, at + ': the teacher’s line has no gap in it');
+    assert(r.filled === r.lines[0].ko + ' ' + KEY_D[d][k],
+      at + ' answers ' + KEY_D[d][k]);
+  });
+});
+// The particle is the drill in 연습 1 and 연습 3, and which one depends on the word
+// or the verb rather than on the position in the list.
+const p1 = drills[0], p3 = drills[2];
+assert(p1.items.map(it => (it.choices.find(c => c.id === it.answer) || {}).ko).join()
+  === '장미가,이 노래가,월요일이,샤오밍 씨가',
+  '연습 1 picks 가 after a vowel and 이 after a consonant');
+assert(p1.items.every(it => it.choices.some(c => /[을를]$/.test(c.ko))),
+  'and offers the object particle against it, which an adjective cannot take');
+assert(p3.items.map(it => (it.choices.find(c => c.id === it.answer) || {}).ko).join()
+  === '제주도에,학교 앞에서,우리 집에,비빔밥을',
+  '연습 3 takes 에 with 가다 and 오다, 에서 with 만나다, 을 with 먹다');
+assert(/에서/.test(p3.noteEn) && /만나/.test(p3.noteEn),
+  'and the page says the verb is what decides it');
+assert(p1.items[0].choices2.some(c => c.ko === '예쁘어')
+  && p1.items[2].choices2.some(c => c.ko === '바쁘아'),
+  'the two ㅡ-irregulars are put against the form with the ㅡ left in');
+drills.forEach((e) => {
+  e.items.forEach((it) => {
+    assert(it.why && it.why.length > 40, e.no + ' item ' + it.n + ' explains the exchange');
+    assert(it.grammar && it.grammar.length > 30, 'and names the rule behind the answer');
+    assert(it.en, 'and glosses it');
+  });
+});
+
+// ── 9b. The cut of track 2 ──────────────────────────────────────────────────
+console.log('\n--- 9b. Track 2, cut per exchange ---');
+{
+  // 64 kbps mono, so bytes divide straight into seconds.
+  const secondsOf = (rel) => fs.statSync(path.join(ROOT, rel)).size / 8000;
+  const clips = [];
+  drills.forEach((e) => {
+    exchangesOf(e).forEach((r) => {
+      assert(!!(r.clip && r.clip.src), r.label + ' has a clip');
+      assert(fs.existsSync(path.join(ROOT, r.clip.src)), r.clip.src + ' is on disk');
+      clips.push(r.clip.src);
+      const secs = secondsOf(r.clip.src);
+      // One exchange with the student's four seconds taken out. Anything much
+      // longer means the cut ran into the next item.
+      assert(secs > 3 && secs < 13, r.label + ' is one exchange long (' + secs.toFixed(1) + 's)');
+      assert(r.clip.askEnd > 0.5 && r.clip.askEnd < secs - 0.5,
+        r.label + ' splits inside its own clip');
+    });
+  });
+  assert(new Set(clips).size === 20, 'twenty clips, and no two rows share one');
+  assert(clips.every(s => /^audio\/book\/2b-u10-p[1-4]-[0-4]\.mp3$/.test(s)),
+    'each is named for its drill and its row');
+  assert(fs.readdirSync(path.join(ROOT, 'audio', 'book')).length === 40,
+    'forty clips in audio/book — Unit 14’s twenty and Unit 10’s twenty');
+  assert(wb.exercises.every(e => !e.audio),
+    'nothing carries a whole-drill recording; the track is cut per exchange');
+
+  // The pairing check. File sizes cannot see a pairing error — a clip holds the
+  // right amount of audio, just the wrong lines — but the reading pace can. One
+  // narrator at one pace holds a steady syllables-per-second against the text
+  // printed beside the clip.
+  //
+  // Track 2 needs its own thresholds rather than Unit 14's. On two of the four
+  // drills the teacher dictates a list of three words with a second of silence
+  // between them, so a third of that half of the clip is silence and the rate
+  // comes out near 1.8 syl/s instead of 3.2. Which shape a row has is in the
+  // text: a dictated list is printed with commas.
+  const BREATH = 0.7;
+  const syl = (s) => [...String(s).normalize('NFC')].filter(c => c >= '가' && c <= '힣').length;
+  const spread = (v) => {
+    const m = v.reduce((a, b) => a + b, 0) / v.length;
+    return { mean: m, sd: Math.sqrt(v.reduce((a, b) => a + (b - m) ** 2, 0) / v.length) };
+  };
+  const answerRates = [];
+  const teacherByDrill = [];
+  drills.forEach((e, d) => {
+    const mine = [];
+    exchangesOf(e).forEach((r, k) => {
+      const total = secondsOf(r.clip.src);
+      const askSecs = r.clip.askEnd - BREATH / 2;
+      const ansSecs = total - r.clip.askEnd - BREATH / 2;
+      assert(askSecs > 0.5 && ansSecs > 0.5, r.label + ': room for both lines');
+      const tRate = syl(TEACHER_D[d][k]) / askSecs;
+      const aRate = syl(KEY_D[d][k]) / ansSecs;
+      const dictated = r.lines[0].ko.indexOf(', ') >= 0;
+      const band = dictated ? [1.2, 2.6] : [2.4, 4.6];
+      assert(tRate > band[0] && tRate < band[1],
+        r.label + ': the teacher reads at ' + tRate.toFixed(2) + ' syl/s, in the band for '
+        + (dictated ? 'a dictated list' : 'a spoken sentence'));
+      answerRates.push([r.label, aRate]);
+      mine.push(tRate);
+    });
+    teacherByDrill.push({ no: e.no, ...spread(mine) });
+  });
+  answerRates.forEach(([what, rate]) => {
+    assert(rate > 3.0 && rate < 7.0,
+      what + ': the model answer reads at a human pace (' + rate.toFixed(2) + ' syl/s)');
+  });
+  const a = spread(answerRates.map(r => r[1]));
+  assert(answerRates.length === 20, 'twenty model answers measured');
+  assert(a.sd < 0.70, 'and they are one narrator at one pace, not two lines swapped'
+    + ' (mean ' + a.mean.toFixed(2) + ' ±' + a.sd.toFixed(2) + ' syl/s)');
+  // Shifting the pairing by one inside a drill takes this to ±0.96 or worse and
+  // pushes lines outside a human range, which is what makes it a check.
+  teacherByDrill.forEach((t) => {
+    assert(t.sd < 0.35, t.no + ': the teacher’s five lines hold one pace (±'
+      + t.sd.toFixed(2) + ' syl/s)');
+  });
+
+  // The publish batch derives audio from the workbook, so a new clip needs no
+  // edit anywhere — but it does have to actually be in the batch.
+  const batch2 = new Set(collectUploadFiles(ROOT).map(f => f.rel));
+  clips.forEach((s) => assert(batch2.has(s), s.split('/').pop() + ' is published'));
+}
+
+// ── 9c. The drills run ──────────────────────────────────────────────────────
+console.log('\n--- 9c. Listening and answering ---');
+{
+  const totals = { 'u10-pattern-1': 8, 'u10-pattern-2': 4, 'u10-pattern-3': 8, 'u10-pattern-4': 4 };
+  drills.forEach((e) => {
+    const ui = loadUi();
+    ui.open(e.id);
+    assert(ui.els['wb-count'].textContent === '0 / ' + totals[e.id],
+      e.no + ' counts ' + totals[e.id] + ' blanks');
+    e.items.forEach((it, i) => {
+      ui.run('wbPickChoice(' + i + ", '" + it.answer + "')");
+      if (it.choices2) ui.run('wbPickChoice(' + i + ", '" + it.answer2 + "', 2)");
+    });
+    assert(ui.run('wbComplete()') === true, e.no + ': every blank filled finishes it');
+    ui.run('checkWorkbook()');
+    assert(ui.run('workbookState.score') === totals[e.id],
+      e.no + ': the textbook key scores ' + totals[e.id] + ' of ' + totals[e.id]);
+    // A row with a recording says it is playing the book rather than a voice.
+    const head = ui.els['wb-items'].children[0].children[1].children[0];
+    const say = head.children.find(c => (c.className || '').indexOf('wb-say') === 0);
+    assert(!!say && say.className.indexOf('book') > 0,
+      e.no + ': the listen button plays the book’s recording');
+    assert(ui.els['wb-example'].children.some(c => (c.className || '').indexOf('wb-say') === 0),
+      e.no + ': and the [보기] has one too');
+  });
+  // The fallback voice, for a row whose clip will not load: the whole exchange
+  // with the answer in it, never the placeholder.
+  const ui = loadUi();
+  ui.open('u10-pattern-3');
+  const spoken = ui.run("wbRowSpeech(workbookState.ex, workbookState.ex.items[1])");
+  assert(spoken === '저녁, 학교 앞, 만나다 저녁에 학교 앞에서 만날래요?',
+    'the fallback voice reads the cue and the finished answer');
+  assert(spoken.indexOf('{}') < 0, 'and never the placeholder');
+
+  // The list: twenty rows in three sections now.
   const pick = loadUi();
   pick.open();
-  const rows = pick.els['wb-items'].children
-    .filter(c => (c.className || '').indexOf('wb-pick') === 0);
-  assert(rows.length === 16, 'sixteen exercises on the list');
+  const kids = pick.els['wb-items'].children;
+  const groups = kids.filter(c => c.className === 'wb-group').map(c => c.innerHTML);
+  assert(groups.length === 3 && /어휘/.test(groups[0]) && /문법과 표현/.test(groups[1])
+    && /문형 연습/.test(groups[2]), 'three headings: 어휘, 문법과 표현, 문형 연습');
+  const rows = kids.filter(c => (c.className || '').indexOf('wb-pick') === 0);
+  assert(pick.els['wb-items'].className === 'wb-items-pick', 'the list draws as the picker');
+  assert(rows.length === 20, 'twenty exercises on the list');
   const keys = rows.map((r) => {
     const m = /wb-pick-key">([^<]*)</.exec(r.innerHTML);
     return m ? m[1] : '?';
   });
-  assert(keys.slice(0, 10).join('') === '1234567890', 'the first ten carry 1-9 and 0');
+  assert(keys.slice(0, 10).join('') === '1234567890',
+    'the first ten carry the number keys 1-9 and 0');
   assert(keys.slice(10).join('') === '',
-    'and the six past them carry no badge rather than a dead key');
-  assert(rows.filter(r => r.innerHTML.indexOf('N인데 2') >= 0).length === 3,
-    'the three new rows are headlined by their pattern');
+    'and the ten past them carry no badge rather than a key that does nothing');
+  assert(rows.slice(4).every(r => r.innerHTML.indexOf('wb-pick-pat') >= 0),
+    'every row outside 어휘 is headlined by its pattern, drills included');
+  // Each grammar point heads the 문법과 표현 pages that teach it and the one drill
+  // that practises it, which is what the 문형 연습 section is for.
+  [['N 중에(서)', 3], ['>반말<', 6], ['V-(으)ㄹ래요', 3], ['N인데 2', 4]].forEach(([pat, n]) => {
+    assert(rows.filter(r => r.innerHTML.indexOf(pat) >= 0).length === n,
+      pat.replace(/[<>]/g, '') + ' heads ' + n + ' rows: its pages and its drill');
+  });
 }
 
-// ── 9. Wiring ────────────────────────────────────────────────────────────────
-console.log('\n--- 9. Wiring ---');
+// ── 10. Wiring ────────────────────────────────────────────────────────────────
+console.log('\n--- 10. Wiring ---');
 assert(uiSrc.indexOf("'/worlds/unit10-workbook.json'") >= 0,
   'the desk knows where Unit 10’s workbook lives');
 const urlFn = uiSrc.slice(uiSrc.indexOf('function workbookUrl'), uiSrc.indexOf('function loadWorkbook'));
@@ -1366,7 +1559,7 @@ assert(r2.indexOf(PATTERN) >= 0, 'the publish batch finds workbooks by pattern')
 assert(tts.indexOf(PATTERN) >= 0, 'and so does the clip harvest');
 assert(r2.indexOf("'worlds/unit14-workbook.json'") < 0,
   'no workbook is hand-listed for upload any more');
-const { collectUploadFiles } = require('../scripts/r2Content.js');
+
 const batch = new Set(collectUploadFiles(ROOT).map(f => f.rel));
 assert(batch.has('worlds/unit10-workbook.json'), 'Unit 10’s workbook is published');
 wb.exercises.forEach(e => e.items.filter(i => i.img).forEach((it) => {

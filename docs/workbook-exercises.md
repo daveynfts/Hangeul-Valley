@@ -244,7 +244,8 @@ the tone glues each answer to the next item's question, and every clip then
 leads with the answer to its own row.
 
 Measured thresholds from track 10 — check them against a new track rather than
-assuming:
+assuming. Track 2 held to every one of them, which is what makes them worth
+writing down:
 
 | | value | why |
 |---|---|---|
@@ -256,6 +257,26 @@ assuming:
 Each drill starts with an announcement: four short bursts about a second apart,
 roughly 1.2s, 1.1s, 0.45s, 2.0s. Count those to find how many drills a track
 holds.
+
+Two things about track 2 that track 10 did not show. First, the teacher does not
+always read a sentence: on two of its four drills the cue is three words dictated
+a second apart — 꽃, 장미, 예쁘다 — so the teacher's side of the clip is three
+segments with two 1.03s gaps inside it, and it is cut as one span from the first
+word to the last rather than having its pauses closed up. Second, the [보기] is on
+the tape as well, with a ~2.0s wait in front of its answer instead of the 4.0s an
+item leaves the student. That is what tells the example from the items, and it is
+also how the twenty exchanges are found in the first place: a model answer is a
+segment with a wait of 1.5s or more in front of it and 2.9s or more behind it, and
+nothing else in the track has both.
+
+Work the spans out in a script rather than by hand. Walking back from an answer
+while the gaps stay under 1.5s lands exactly on [tone, line…] for an item, because
+the break in front of the tone is the 3.0s or 4.0s one; the tone is then dropped,
+being the mark for the student to speak rather than part of what is said. The
+[보기] sits inside the announcement, where that walk would swallow the instruction
+too, so its teacher side is taken as the same number of segments the items of its
+own drill have — and the segment in front of it is asserted to be under 0.6s, so a
+wrong count fails loudly instead of shipping.
 
 Get the segment map from ffmpeg and work from it, not by ear:
 
@@ -275,10 +296,27 @@ one pace holds a steady syllables-per-second against the text the book prints,
 and a clip carrying the wrong line reads far too fast or too slow for the text
 beside it, because the two are different lengths.
 
-That check is a test now (`tests/test_unit14_workbook.js`, section 18). It splits
-each clip at `askEnd` and measures both halves. On Unit 14 it reports **3.77
-±0.35 syl/s** across forty lines; shifting the pairing by one widens the spread
-to ±0.78 and pushes four lines outside a human speaking range, which fails it.
+That check is a test now — `tests/test_unit14_workbook.js` section 18, and
+`tests/test_unit10_workbook.js` section 9b. It splits each clip at `askEnd` and
+measures both halves. On Unit 14 it reports **3.77 ±0.35 syl/s** across forty
+lines; shifting the pairing by one widens the spread to ±0.78 and pushes four
+lines outside a human speaking range, which fails it.
+
+The rate bands do not carry over between tracks, and track 2 is why. Its dictated
+drills read at **1.8 syl/s** on the teacher's side, because a third of that half
+of the clip is the silence between the three cue words — nothing is wrong with the
+cut, the span simply is not all speech. So the band is chosen per shape, and the
+shape is in the text: a dictated cue is printed with commas. Unit 10 measures
+1.43-2.10 syl/s on its dictated halves, 2.73-3.67 on its spoken ones, and **4.22
+±0.45** across the twenty model answers, where shifting the pairing by one inside
+a drill takes it to ±0.96 or worse. Run the shift before trusting the numbers: a
+band wide enough to pass everything is not a check.
+
+One more look is worth having the first time a track is cut. Decode each clip in
+the browser and measure its envelope: the 0.7s breath should be digital silence
+ending at `askEnd`, and the answer half should be three-quarters speech. Unit 10
+came out at -inf dB in the breath on all twenty clips and 74-86% speech in the
+answers, which says the cut landed where the arithmetic said it would.
 
 Run it before trusting a new cut. If the numbers disagree with your ear, believe
 your ear and fix the thresholds — the pairing was wrong twice before the ear
