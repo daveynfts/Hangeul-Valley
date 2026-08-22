@@ -304,7 +304,17 @@ const overlayIds = [
   const ww = (world.level && world.level.words) || [];
   const missing = ww.filter((w) => !w.ko || !w.en || !w.category || !w.categoryEn).map((w) => w.ko || '?');
   check('2B Unit 14 words have ko / en / category / categoryEn', missing.length === 0, missing.slice(0, 5).join(', '));
-  check('2B Unit 14 has 54 textbook headwords', ww.length === 54, `found ${ww.length}`);
+  // Split, because the two halves guarantee different things. The 54 are the textbook's own
+  // 어휘 list and that count is a fidelity claim — it must not drift. The rest are words the
+  // unit's exercises drill that the 어휘 list does not carry: the six 금지 actions off
+  // 문법과 표현 4 and 문형 연습 4, which a learner met on the page and could not otherwise learn.
+  // They are marked artPending because their icons are still to be drawn; see the art check
+  // below, which names them rather than waving them through.
+  const drawn = ww.filter((w) => !w.artPending);
+  check('2B Unit 14 keeps its 54 textbook headwords', drawn.length === 54, `found ${drawn.length}`);
+  check('2B Unit 14 exercise words are all in one group',
+    ww.filter((w) => w.artPending).every((w) => w.categoryEn === 'Public etiquette & prohibitions'),
+    ww.filter((w) => w.artPending).map((w) => w.ko + ':' + w.categoryEn).join(', '));
   const cats = new Set(ww.map((w) => w.categoryEn));
   const want = [
     'Etiquette & respect for seniors',
@@ -320,13 +330,22 @@ const overlayIds = [
   const byKo = {};
   (pack.assets || []).forEach((a) => { if (a && a.wordKo) byKo[a.wordKo] = a; });
   const artMiss = [];
-  ww.forEach((w) => {
+  ww.filter((w) => !w.artPending).forEach((w) => {
     const a = byKo[w.ko];
     if (!a || !a.id || !a.nameEn || !a.path) { artMiss.push(w.ko); return; }
     const pngRel = path.join('sprites', String(a.path).replace(/\\/g, '/'));
     if (!fs.existsSync(path.join(ROOT, pngRel))) artMiss.push(w.ko + ' png');
   });
-  check('every Unit 14 headword has catalogued PNG', artMiss.length === 0, artMiss.slice(0, 12).join(', '));
+  check('every drawn Unit 14 headword has catalogued PNG', artMiss.length === 0, artMiss.slice(0, 12).join(', '));
+  // artPending is the only way out of that check, so it has to be loud. A word carrying it
+  // renders as its `hint` emoji — vocabIconHtml falls back when there is no art file — so the
+  // unit is playable meanwhile; this line is what stops the flag becoming permanent by being
+  // forgotten. Drop the flag when the PNG lands and the check above starts covering the word.
+  const pending = ww.filter((w) => w.artPending).map((w) => w.ko);
+  check('Unit 14 words still waiting on art are declared, not silent',
+    pending.every((ko) => ww.find((w) => w.ko === ko).hint),
+    'every artPending word needs a hint emoji to render with');
+  if (pending.length) console.log(`      Unit 14 awaiting art (${pending.length}): ${pending.join(', ')}`);
 }());
 
 (function checkUnit14FarmOnly() {
