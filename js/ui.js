@@ -2546,6 +2546,97 @@ function wbStopTrack() {
   if (typeof AudioMixer !== 'undefined' && AudioMixer.voiceEnd) AudioMixer.voiceEnd();
 }
 
+// ── Dragging a name onto its blank ──────────────────────────────────────────
+// Clicking a row and then a name still works, and is what the keyboard does.
+// But dragging the name onto the picture is the gesture people reach for on a
+// matching page, so both are wired to the same one-name-per-blank state.
+//
+// Pointer events rather than HTML5 drag-and-drop: the native API does not fire
+// on a touchscreen at all. A drag only begins once the pointer has moved a few
+// pixels, so a tap still lands on the click handlers that were already there.
+let wbDrag = null;
+let wbClickBlocked = false;
+const WB_DRAG_SLOP = 5;
+
+function wbDragClear() {
+  if (!wbDrag) return;
+  if (wbDrag.ghost) { try { wbDrag.ghost.remove(); } catch (e) { /* stub */ } }
+  if (wbDrag.over && wbDrag.over.classList) wbDrag.over.classList.remove('drop');
+  if (wbDrag.source && wbDrag.source.classList) wbDrag.source.classList.remove('dragging');
+  wbDrag = null;
+}
+
+// The row under the pointer. elementFromPoint is the only way to know it: the
+// ghost follows the cursor, so as far as the event system is concerned the
+// pointer is never over the drop target.
+function wbRowAt(x, y) {
+  if (typeof document.elementFromPoint !== 'function') return null;
+  let el = document.elementFromPoint(x, y);
+  for (let hop = 0; el && hop < 8; hop++) {
+    if (el.classList && el.classList.contains('wb-row')) return el;
+    el = el.parentElement;
+  }
+  return null;
+}
+
+// `from` is the blank the name is being pulled out of, or -1 when it comes from
+// the box. Dragging one off a picture and dropping it nowhere puts it back.
+function wbDragBegin(e, id, from, source) {
+  if (!wbInExercise() || workbookState.checked) return;
+  if (!e || (e.button !== undefined && e.button > 0)) return;
+  wbDragClear();
+  wbDrag = { id, from, source, ghost: null, over: null,
+    x0: e.clientX, y0: e.clientY, moved: false };
+}
+
+function wbDragMove(e) {
+  if (!wbDrag) return;
+  if (!wbDrag.moved) {
+    if (Math.abs(e.clientX - wbDrag.x0) + Math.abs(e.clientY - wbDrag.y0) < WB_DRAG_SLOP) return;
+    wbDrag.moved = true;
+    const chip = wbChip(wbDrag.id);
+    const g = document.createElement('div');
+    g.className = 'wb-ghost';
+    g.textContent = wbChipText(chip) || wbAnswerText(chip);
+    document.body.appendChild(g);
+    wbDrag.ghost = g;
+    if (wbDrag.source && wbDrag.source.classList) wbDrag.source.classList.add('dragging');
+  }
+  if (wbDrag.ghost && wbDrag.ghost.style) {
+    wbDrag.ghost.style.left = e.clientX + 'px';
+    wbDrag.ghost.style.top = e.clientY + 'px';
+  }
+  const row = wbRowAt(e.clientX, e.clientY);
+  if (row !== wbDrag.over) {
+    if (wbDrag.over && wbDrag.over.classList) wbDrag.over.classList.remove('drop');
+    if (row && row.classList) row.classList.add('drop');
+    wbDrag.over = row;
+  }
+  if (e.preventDefault) e.preventDefault();
+}
+
+function wbDragEnd(e) {
+  if (!wbDrag) return;
+  const { moved, id, from } = wbDrag;
+  const row = moved ? wbRowAt(e.clientX, e.clientY) : null;
+  wbDragClear();
+  if (!moved) return;                      // a tap — the click handler has it
+  // The click that follows this pointerup would undo the drop, so it is dropped
+  // instead. Cleared on the next tick, after that click has been and gone.
+  wbClickBlocked = true;
+  if (typeof setTimeout === 'function') setTimeout(() => { wbClickBlocked = false; }, 0);
+  if (!wbInExercise() || workbookState.checked) return;
+  if (row) {
+    const at = Number(row.getAttribute('data-row'));
+    if (at >= 0 && at < workbookState.fill.length) {
+      workbookState.focus = at;
+      wbPickChip(id);
+      return;
+    }
+  }
+  if (from >= 0) wbClearBlank(from);
+}
+
 // One name from the shared box. Built here rather than inline because the box
 // sits above the rows on most types and beside them on a picture match, and both
 // want the same button.
@@ -2558,7 +2649,8 @@ function wbChipButton(c, i) {
   b.setAttribute('data-chip', c.id);
   b.disabled = st.checked;
   b.innerHTML = '<span class="wb-chip-key">' + (i + 1) + '</span>' + vbEsc(wbChipText(c));
-  b.onclick = () => wbPickChip(c.id);
+  b.onclick = () => { if (!wbClickBlocked) wbPickChip(c.id); };
+  b.onpointerdown = (e) => wbDragBegin(e, c.id, -1, b);
   return b;
 }
 
@@ -2866,13 +2958,20 @@ function renderWorkbook() {
         '<span class="wb-n">' + item.n + ')</span>' +
         '<span class="wb-sentence">' + wbLineHtml(ex, item, chip ? wbAnswerText(chip) : '') + '</span>' +
         (st.checked ? '<span class="wb-mark">' + (right ? '✓' : '✕') + '</span>' : '');
+      row.setAttribute('data-row', i);
       if (!st.checked) {
         row.tabIndex = 0;
         row.setAttribute('role', 'button');
-        row.onclick = () => (chosen ? wbClearBlank(i) : wbFocusBlank(i));
+        row.onclick = () => {
+          if (wbClickBlocked) return;
+          if (chosen) wbClearBlank(i); else wbFocusBlank(i);
+        };
         row.onkeydown = (e) => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); wbFocusBlank(i); }
         };
+        // A name already on a picture can be pulled off it and dropped on
+        // another, or dropped on nothing to send it back to the box.
+        if (chosen) row.onpointerdown = (e) => wbDragBegin(e, chosen, i, row);
       }
       target.appendChild(row);
     });
@@ -3018,6 +3117,14 @@ function renderWorkbookPicker() {
 // Keyboard for both desk screens. Escape is deliberately left alone — the modal
 // stack handler in this file already owns it, and handling it twice would close
 // two overlays on one press.
+// A drag is followed across the window rather than the chip, because the pointer
+// leaves the chip the moment it starts moving.
+if (typeof window !== 'undefined' && window.addEventListener) {
+  window.addEventListener('pointermove', wbDragMove, { passive: false });
+  window.addEventListener('pointerup', wbDragEnd);
+  window.addEventListener('pointercancel', wbDragClear);
+}
+
 if (typeof window !== 'undefined' && window.addEventListener) {
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') return;

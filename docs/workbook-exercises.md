@@ -34,6 +34,17 @@ Five, and the type only decides how a row is drawn.
 chip per blank, and moving a chip that is already placed relocates it rather than
 cloning it. That is what makes those puzzles self-correcting.
 
+Those three can be answered three ways, all driving the same state: click a
+blank then click a chip, drag a chip onto a blank, or use the number keys. A
+placed chip can be dragged to another blank or dropped on nothing to send it
+back. The drag runs on pointer events rather than HTML5 drag-and-drop, which
+never fires on a touchscreen, and only begins after a few pixels of movement so
+a tap still lands as a click.
+
+A `match` whose prompts are pictures is drawn as two columns — pictures down one
+side, names down the other — because a box of short names stacked above the rows
+reads as two unrelated lists.
+
 `experience` and `build` hang their choices off each row. Use them when the point
 is the conjugation rather than which phrase is left over — the learner should be
 choosing between 들은 and 듣은, not picking the only button on the row.

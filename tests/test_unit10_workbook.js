@@ -252,6 +252,63 @@ console.log('\n--- 4. The page runs ---');
   assert(move.run('workbookState.fill[3]') === 'ox_bone_soup', 'and lands on the new one');
 }
 
+// ── 4b. Dragging a name onto a picture ───────────────────────────────────────
+console.log('\n--- 4b. Drag and drop ---');
+{
+  const ui = loadUi();
+  ui.open('u10-vocab-1');
+  const cols = ui.els['wb-items'].children[0];
+  const rows = cols.children[0].children;
+  const chips = cols.children[1].children;
+
+  // Both ends of the gesture are wired: a name can be picked up, a picture can
+  // be identified as the thing it was dropped on.
+  assert(typeof chips[0].onpointerdown === 'function', 'a name can be picked up');
+  assert(rows.every((r, i) => r.attrs['data-row'] === i),
+    'and every picture row says which blank it is, so a drop knows where it landed');
+
+  // The drag runs on pointer events, not the native drag-and-drop API, because
+  // that one never fires on a touchscreen.
+  assert(uiSrc.indexOf("addEventListener('pointermove'") >= 0
+    && uiSrc.indexOf("addEventListener('pointerup'") >= 0
+    && uiSrc.indexOf("addEventListener('pointercancel'") >= 0,
+    'the drag is followed on the window, and cancelling cleans up');
+  assert(uiSrc.indexOf('dragstart') < 0 && uiSrc.indexOf('dataTransfer') < 0,
+    'and not on HTML5 drag-and-drop, which a finger cannot use');
+  assert(/WB_DRAG_SLOP/.test(uiSrc), 'a few pixels of movement separate a drag from a tap');
+  assert(css.indexOf('.wb-ghost') >= 0 && css.indexOf('.wb-row.drop') >= 0
+    && /\.wb-chip \{ touch-action: none/.test(css),
+    'the ghost, the drop target and the touch behaviour are styled');
+
+  // The click that follows a real drag would undo the drop, so it is suppressed
+  // — but only then. A plain click has to keep working, since it is what the
+  // keyboard path and every other exercise type use.
+  assert(/wbClickBlocked/.test(uiSrc), 'the click after a drag is dropped');
+  ui.run('wbClickBlocked = false');
+  ui.run('workbookState.focus = 2');
+  chips[4].onclick();
+  assert(ui.run('workbookState.fill[2]') === 'spicy_fish_stew',
+    'a plain click still assigns a name');
+  ui.run('wbClickBlocked = true');
+  ui.run('workbookState.focus = 0');
+  chips[0].onclick();
+  assert(ui.run('workbookState.fill[0]') === null,
+    'and the click right after a drop does not fire twice');
+  ui.run('wbClickBlocked = false');
+
+  // A marked page is finished; nothing may be dragged on it.
+  const done = loadUi();
+  done.open('u10-vocab-1');
+  const ex1 = wb.exercises[0];
+  ex1.items.forEach((it, i) => {
+    done.run('workbookState.focus = ' + i);
+    done.run("wbPickChip('" + it.answer + "')");
+  });
+  done.run('checkWorkbook()');
+  done.run("wbDragBegin({ clientX: 0, clientY: 0, button: 0 }, 'kimchi_stew', -1, null)");
+  assert(done.run('wbDrag') === null, 'a checked page cannot be dragged on');
+}
+
 // ── 5. Wiring ────────────────────────────────────────────────────────────────
 console.log('\n--- 5. Wiring ---');
 assert(uiSrc.indexOf("'/worlds/unit10-workbook.json'") >= 0,

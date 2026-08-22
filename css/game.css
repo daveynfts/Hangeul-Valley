@@ -2501,6 +2501,30 @@
        expression they used, and clicking the blank is what returns it. */
     .wb-chip.used { opacity: 0.4; border-style: dashed; box-shadow: none; }
     .wb-chip:disabled { cursor: default; }
+
+    /* ── Dragging a name onto its blank ─────────────────────────────────────
+       The chip stays where it is and a ghost follows the cursor, so the box
+       does not reflow mid-drag and the row you are aiming at holds still.
+       touch-action on the chip is what lets a finger drag it instead of
+       scrolling the page; the rows keep theirs so the list can still be
+       scrolled with a thumb. */
+    .wb-chip { touch-action: none; }
+    .wb-chip:not(:disabled) { cursor: grab; }
+    .wb-chip.dragging { opacity: 0.3; }
+    .wb-ghost {
+      position: fixed; z-index: 900; pointer-events: none;
+      transform: translate(-50%, -150%);
+      background: #dbe4fb; border: 2px solid #1e3a8a; border-radius: 4px;
+      padding: 6px 11px;
+      font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 700;
+      color: var(--ink); white-space: nowrap;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+    /* The row being aimed at. Same blue as focus, but filled, so it reads as
+       "let go here" rather than "this one is selected". */
+    .wb-row.drop {
+      border-color: #1e3a8a; border-width: 2px; background: #dbe4fb;
+    }
     .wb-chip-key {
       min-width: 18px; height: 18px; line-height: 16px; text-align: center;
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
