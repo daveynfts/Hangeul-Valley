@@ -412,16 +412,24 @@ const labelKo = w => String(w && w.ko || '');
 
 // ═══════════════ R2: SHOP PURCHASE QUIZ GATE ══════════════════════════════════
 let shopQuizState = { targetIdx: null, questions: [], currentQ: 0, correctCount: 0 };
+const SHOP_QUIZ_LEN = 3;   // how many questions the gate asks when the pool allows it
 
 function startShopQuizGate(idx) {
   const allWords = getUnlockedWords();
   const pool = allWords.length >= 4 ? allWords : (levelsData[0]?.words || []);
 
   // Korean is shown and the buttons carry meanings, so options are deduped on `en`.
-  const questions = shuffleInPlace([...pool]).slice(0, 3).map(target => ({
+  const questions = shuffleInPlace([...pool]).slice(0, SHOP_QUIZ_LEN).map(target => ({
     target,
     options: buildOptionSet(target, pool, 4, labelEn),
   }));
+
+  // An empty pool means levelsData never loaded. Opening the overlay anyway locked the
+  // player behind a gate with no questions in it.
+  if (!questions.length) {
+    showToast('Vocabulary is still loading — try again in a moment.');
+    return;
+  }
 
   shopQuizState = { targetIdx: idx, questions, currentQ: 0, correctCount: 0 };
   playerLocked = true;
@@ -434,7 +442,7 @@ function renderShopQuizQuestion() {
   if (!q) return;
 
   const ind = document.getElementById('sq-step-indicator');
-  if (ind) ind.textContent = `Question ${shopQuizState.currentQ + 1} of 3`;
+  if (ind) ind.textContent = `Question ${shopQuizState.currentQ + 1} of ${shopQuizState.questions.length}`;
   const wKo = document.getElementById('sq-word-ko');
   if (wKo) wKo.textContent = q.target.ko;
 
@@ -455,7 +463,12 @@ function answerShopQuiz(isCorrect) {
     playChiptuneSFX('quiz_correct');
     shopQuizState.correctCount++;
     shopQuizState.currentQ++;
-    if (shopQuizState.currentQ >= 3) {
+    // Against the list that was actually built, not the SHOP_QUIZ_LEN it was cut to. A pool
+    // shorter than that produced fewer questions, and a hardcoded 3 then sent the player
+    // back to renderShopQuizQuestion() for a question that did not exist — which bailed on
+    // its own guard and left the overlay up with playerLocked still true. The boss gate
+    // below has always compared against its own length; this is the same check.
+    if (shopQuizState.currentQ >= shopQuizState.questions.length) {
       document.getElementById('shop-quiz-overlay').classList.remove('visible');
       playerLocked = false;
       const targetIdx = shopQuizState.targetIdx;

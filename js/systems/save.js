@@ -616,6 +616,12 @@ function applySave(d){
   }
   unlockedPlots.sort((a, b) => a - b);
   unlockedPlotCount = unlockedPlots.length;
+  // Replaced, not merged. This is the only field that was accumulated into, and it is a
+  // module-level Map that outlives any one save: a guest session followed by a sign-in left
+  // the guest's counts in place for every word the incoming save did not mention. That
+  // silently suppressed harvest payouts (10 * 0.85^prev), could skip the +10 Honor that
+  // fires on exactly the tenth harvest, and inflated the mastery stats.
+  harvestCounts.clear();
   if(migrated.harvests) Object.entries(migrated.harvests).forEach(([k,v])=>harvestCounts.set(k,v));
   if(migrated.srs) srsData = migrated.srs;
   // Absent in saves written before the log existed; an empty history is correct there
@@ -670,6 +676,12 @@ function applySave(d){
   updateCurrencyHUD();
   updateRankHUD();
   if (sceneRef && typeof sceneRef.refreshPlotAccess === 'function') sceneRef.refreshPlotAccess();
+  // After refreshPlotAccess, so plots this save owns are no longer drawn as locked when the
+  // crops land on them. Without this the tiles kept showing the pre-load farm, and the next
+  // collectSave() — which reads the live scene, not plotSave — wrote that farm back over the
+  // save we had just loaded. Reachable on sign-in mid-session and on a reload that still has
+  // the Google token in sessionStorage, both of which run long after the scene is built.
+  if (sceneRef && typeof sceneRef.reloadPlotsFromSave === 'function') sceneRef.reloadPlotsFromSave();
   if (typeof checkCookingAchievements === 'function') checkCookingAchievements();
   return true;
 }
@@ -918,11 +930,21 @@ function safeGooglePhoto(url) {
   return /^https:\/\/[\w.-]+\.googleusercontent\.com\//.test(u) ? u : '';
 }
 
+// atob hands back one byte per character, but a JWT payload is UTF-8, so a display name
+// outside ASCII — which for a Korean-learning app is most of them — came through as mojibake.
+// The bytes are handed to TextDecoder instead. Not just cosmetic: this is the name the auth
+// chip shows once a player has no email on their Google profile.
 function decodeJwtPayload(token) {
   const part = String(token || '').split('.')[1] || '';
   const b64 = part.replace(/-/g, '+').replace(/_/g, '/');
   const pad = b64 + '='.repeat((4 - (b64.length % 4)) % 4);
-  return JSON.parse(atob(pad));
+  const raw = atob(pad);
+  if (typeof TextDecoder === 'function') {
+    const bytes = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+    return JSON.parse(new TextDecoder('utf-8').decode(bytes));
+  }
+  return JSON.parse(raw);
 }
 
 function renderAuthUI() {
