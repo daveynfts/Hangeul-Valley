@@ -42,6 +42,14 @@
       { "ko": "밖으로 나가다", "en": "to go outside", "hint": "🚪", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
       { "ko": "휴대전화를 끄다", "en": "to turn off the cell phone", "hint": "📴", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
 
+      { "ko": "사진을 찍다", "en": "to take a photograph", "hint": "📷", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
+      { "ko": "담배를 피우다", "en": "to smoke a cigarette", "hint": "🚭", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
+      { "ko": "수영을 하다", "en": "to swim", "hint": "🏊", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
+      { "ko": "차를 세우다", "en": "to pull the car over / to stop the car", "hint": "🚗", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
+      { "ko": "주차하다", "en": "to park", "hint": "🅿️", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
+      { "ko": "음료수를 마시다", "en": "to drink a soft drink", "hint": "🥤", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
+      { "ko": "노래를 부르다", "en": "to sing a song", "hint": "🎤", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
+
       { "ko": "실수하다", "en": "to make a mistake", "hint": "😅", "category": "회화", "categoryEn": "Real-life dialogues" },
       { "ko": "창피하다", "en": "to be embarrassed / ashamed / humiliated", "hint": "😳", "category": "회화", "categoryEn": "Real-life dialogues" },
       { "ko": "어색하다", "en": "to feel awkward / uncomfortable", "hint": "😬", "category": "회화", "categoryEn": "Real-life dialogues" },
