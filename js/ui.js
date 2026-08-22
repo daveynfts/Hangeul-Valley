@@ -2550,42 +2550,33 @@ function wbScriptText(lines, texts) {
   }).join(' ');
 }
 
-// What a row sounds like. Before it is checked that is only the lines with
-// nothing missing — the teacher's question — because reading a half-built
-// sentence aloud drills the gap instead of the pattern, and because hearing the
-// answer before choosing it is not a drill at all. Once it is checked the whole
-// exchange is spoken, correct: the model answer the book's track gives you.
-function wbRowSpeech(ex, item, checked) {
+// What a row sounds like when there is no recording for it and the browser's own
+// voice has to stand in: the whole exchange with the right answers in it, which
+// is what the recording plays where there is one. A row with nothing in the gaps
+// yet would otherwise read a half-built sentence aloud, so the correct forms go
+// in whether or not the page has been checked.
+function wbRowSpeech(ex, item) {
   if (!item || ex.type !== 'build') return '';
-  if (!checked) {
-    return (item.lines || [])
-      .filter(l => String(l.ko || '').indexOf('{}') < 0)
-      .map(l => l.ko).join(' ');
-  }
   return wbScriptText(item.lines, [
     wbAnswerText(wbChip(item.answer, item)),
     wbSlots(item) === 2 ? wbAnswerText(wbChip(item.answer2, item)) : ''
   ]);
 }
 
-// The book's recording of one exchange. Until the row has been checked it stops
-// where the teacher's line ends — the rest of the clip is the model answer, and
-// playing that to someone who has not answered yet hands them the row.
-function wbPlayClip(clip, full) {
+// The book's recording of one exchange, played whole: the teacher's question,
+// then the model answer. It used to stop at the question until the row had been
+// checked, on the reasoning that hearing the answer first gives the row away —
+// but this is a listen-and-repeat drill, and the model is the thing you are
+// meant to copy. The choices are on screen either way.
+function wbPlayClip(clip) {
   wbStopTrack();
   let el = null;
   try { el = new Audio('/' + clip.src); } catch (e) { return false; }
-  const stopAt = (!full && clip.askEnd > 0) ? clip.askEnd : 0;
   wbTrack = { el: el, src: clip.src };
   try {
     if (typeof AudioMixer !== 'undefined') {
       if (AudioMixer.voiceLevel) el.volume = AudioMixer.voiceLevel();
       if (AudioMixer.voiceStart) AudioMixer.voiceStart();
-    }
-    if (stopAt) {
-      el.ontimeupdate = () => {
-        if (wbTrack && wbTrack.el === el && el.currentTime >= stopAt) wbStopTrack();
-      };
     }
     el.onended = () => { if (wbTrack && wbTrack.el === el) wbStopTrack(); };
     el.onerror = () => { if (wbTrack && wbTrack.el === el) wbStopTrack(); };
@@ -2599,7 +2590,7 @@ function wbPlayClip(clip, full) {
 // the content names one, and speakKorean otherwise — which plays a pre-rendered
 // clip where there is one and falls back to the browser's voice, so a row is
 // never left silent.
-function wbSayButton(text, clip, full) {
+function wbSayButton(text, clip) {
   const hasClip = !!(clip && clip.src && typeof Audio === 'function');
   if (!hasClip && (!text || typeof speakKorean !== 'function')) return null;
   const b = document.createElement('button');
@@ -2610,7 +2601,7 @@ function wbSayButton(text, clip, full) {
   b.textContent = '🔊';
   b.onclick = (e) => {
     if (e && e.stopPropagation) e.stopPropagation();
-    if (hasClip && wbPlayClip(clip, full)) return;
+    if (hasClip && wbPlayClip(clip)) return;
     if (text && typeof speakKorean === 'function') speakKorean(text, { force: true });
   };
   return b;
@@ -2675,7 +2666,7 @@ function renderWorkbook() {
         // The worked example is played whole: its answer is already printed
         // above the button, so there is nothing left to give away.
         const say = wbSayButton(wbScriptText(ex.example.lines,
-          [ex.example.answerKo || '', ex.example.answer2Ko || '']), ex.example.audio, true);
+          [ex.example.answerKo || '', ex.example.answer2Ko || '']), ex.example.audio);
         if (say) exBox.appendChild(say);
       }
     }
@@ -2742,7 +2733,7 @@ function renderWorkbook() {
         head.innerHTML = art +
           '<span class="wb-exp-phrase">' + vbEsc(item.phraseKo || '') + '</span>' +
           '<span class="wb-exp-en">' + vbEsc(item.en || '') + '</span>';
-        const say = wbSayButton(wbRowSpeech(ex, item, st.checked), item.audio, st.checked);
+        const say = wbSayButton(wbRowSpeech(ex, item), item.audio);
         if (say) head.appendChild(say);
         const line = document.createElement('div');
         line.className = 'wb-exp-line';
