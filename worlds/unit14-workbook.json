@@ -1391,7 +1391,11 @@
           ],
           "en": "T: Is this your first time seeing this film? — S: No, I've seen it before.",
           "why": "처음 봐요? asks whether this is the first time, so 아니요 commits you to there having been an earlier one — which is exactly what -(으)ㄴ 적이 있다 records. 전에 pins that earlier time to somewhere before now without saying when.",
-          "grammar": "보다 → 본. A vowel stem takes the bare ㄴ. 봤은 stacks the past 았 under a form that already means past, and 적이 있다 carries the pastness by itself."
+          "grammar": "보다 → 본. A vowel stem takes the bare ㄴ. 봤은 stacks the past 았 under a form that already means past, and 적이 있다 carries the pastness by itself.",
+          "audio": {
+            "src": "audio/book/2b-u14-p1-1.mp3",
+            "askEnd": 3.31
+          }
         },
         {
           "n": 2,
@@ -1424,7 +1428,11 @@
           ],
           "en": "T: Is this your first time eating this dish? — S: No, I've eaten it before.",
           "why": "The first consonant stem in the drill, and that is why it is here. 먹 ends in ㄱ, so the ending needs its 으 to be sayable at all — the same 으 that 보다 had no use for.",
-          "grammar": "먹다 → 먹은. Consonant stem takes -은, vowel stem takes -ㄴ. 먹는 is the present modifier — 먹는 사람 is the person who is eating — and it cannot stand in front of 적이 있다."
+          "grammar": "먹다 → 먹은. Consonant stem takes -은, vowel stem takes -ㄴ. 먹는 is the present modifier — 먹는 사람 is the person who is eating — and it cannot stand in front of 적이 있다.",
+          "audio": {
+            "src": "audio/book/2b-u14-p1-2.mp3",
+            "askEnd": 3.45
+          }
         },
         {
           "n": 3,
@@ -1457,7 +1465,11 @@
           ],
           "en": "T: Is this your first time meeting Michael? — S: No, I've met him before.",
           "why": "만나다 ends in ㅏ, so it goes the way 보다 went and not the way 먹다 did. 씨 after a name is the everyday polite way to refer to someone who is not senior to you — a teacher would get 선생님 instead.",
-          "grammar": "만나다 → 만난. Vowel stem, so -ㄴ attaches straight on. Both wrong answers here are the two mistakes already seen: the present modifier, and the past put in twice."
+          "grammar": "만나다 → 만난. Vowel stem, so -ㄴ attaches straight on. Both wrong answers here are the two mistakes already seen: the present modifier, and the past put in twice.",
+          "audio": {
+            "src": "audio/book/2b-u14-p1-3.mp3",
+            "askEnd": 3.52
+          }
         },
         {
           "n": 4,
@@ -1490,7 +1502,11 @@
           ],
           "en": "T: Is this your first time hearing this song? — S: No, I've heard it before.",
           "why": "The one the drill builds towards, and the teacher gives it away in the question: 들어요, not 듣어요. The ㄷ has already turned into ㄹ there for the same reason it does here.",
-          "grammar": "듣다 → 들은. ㄷ-irregular: ㄷ becomes ㄹ before a vowel ending, then the consonant-stem -은 goes on. Compare 듣고, where a consonant follows and the ㄷ stays as it is."
+          "grammar": "듣다 → 들은. ㄷ-irregular: ㄷ becomes ㄹ before a vowel ending, then the consonant-stem -은 goes on. Compare 듣고, where a consonant follows and the ㄷ stays as it is.",
+          "audio": {
+            "src": "audio/book/2b-u14-p1-4.mp3",
+            "askEnd": 3.36
+          }
         }
       ],
       "example": {
@@ -1507,7 +1523,11 @@
           }
         ],
         "answerKo": "간",
-        "en": "T: Is this your first time going to Gyeongju? — S: No, I've been before."
+        "en": "T: Is this your first time going to Gyeongju? — S: No, I've been before.",
+        "audio": {
+          "src": "audio/book/2b-u14-p1-0.mp3",
+          "askEnd": 3.36
+        }
       }
     },
     {
@@ -1558,7 +1578,11 @@
           ],
           "en": "T: When were you happiest? — S: When I got the scholarship.",
           "why": "장학금 is a scholarship, and 받다 is the same verb the 문법과 표현 page used for 상을 받다. The answer repeats 제일 기뻤어요 from the question, which is what makes these drills quick to say out loud.",
-          "grammar": "받다 → 받았을 때. The stem vowel is ㅏ, so the ending is 았, not 었. 받을 때 drops the past entirely and would mean whenever you receive one."
+          "grammar": "받다 → 받았을 때. The stem vowel is ㅏ, so the ending is 았, not 었. 받을 때 drops the past entirely and would mean whenever you receive one.",
+          "audio": {
+            "src": "audio/book/2b-u14-p2-1.mp3",
+            "askEnd": 3.25
+          }
         },
         {
           "n": 2,
@@ -1591,7 +1615,11 @@
           ],
           "en": "T: When were you saddest? — S: When my grandmother passed away.",
           "why": "The same sentence the 문법과 표현 page asked for, now said against the clock. 돌아가시다 keeps its 시 because that is the honorific, and taking it out leaves 돌아가다 — she went back somewhere.",
-          "grammar": "돌아가시다 → 돌아가셨을 때. 시 + 었 → 셨. Note 슬펐어요 in the question as well: 슬프다 is a ㅡ stem, so 슬프 + 어 → 슬퍼, then 었."
+          "grammar": "돌아가시다 → 돌아가셨을 때. 시 + 었 → 셨. Note 슬펐어요 in the question as well: 슬프다 is a ㅡ stem, so 슬프 + 어 → 슬퍼, then 었.",
+          "audio": {
+            "src": "audio/book/2b-u14-p2-2.mp3",
+            "askEnd": 3.65
+          }
         },
         {
           "n": 3,
@@ -1624,7 +1652,11 @@
           ],
           "en": "T: When did you hear that story? — S: When I went back to my home town.",
           "why": "You heard it on a trip home, so the clause dates the hearing to that visit. 이야기를 듣다 is how Korean says to hear a story — 이야기 covers both the story and the telling of it.",
-          "grammar": "가다 → 갔을 때. ㅏ meeting 았 leaves one syllable: 가 + 았 = 갔. 가았을 writes the vowel twice, which is the mistake this stem invites."
+          "grammar": "가다 → 갔을 때. ㅏ meeting 았 leaves one syllable: 가 + 았 = 갔. 가았을 writes the vowel twice, which is the mistake this stem invites.",
+          "audio": {
+            "src": "audio/book/2b-u14-p2-3.mp3",
+            "askEnd": 2.75
+          }
         },
         {
           "n": 4,
@@ -1657,7 +1689,11 @@
           ],
           "en": "T: When did you get Nana's call? — S: When I got home.",
           "why": "This is the sentence the 문법과 표현 연습 2 example was built on, turned round: there the phone rang as you arrived, here you answer for when the call came. 전화를 받다 is to take a call, the same 받다 as item 1.",
-          "grammar": "도착하다 → 도착했을 때. Every 하다 verb goes 하 + 였 → 했, so 도착하았을 is wrong twice over — wrong vowel, and uncontracted."
+          "grammar": "도착하다 → 도착했을 때. Every 하다 verb goes 하 + 였 → 했, so 도착하았을 is wrong twice over — wrong vowel, and uncontracted.",
+          "audio": {
+            "src": "audio/book/2b-u14-p2-4.mp3",
+            "askEnd": 3.07
+          }
         }
       ],
       "example": {
@@ -1674,7 +1710,11 @@
           }
         ],
         "answerKo": "어렸을 때",
-        "en": "T: When did you see that film? — S: I saw it when I was little."
+        "en": "T: When did you see that film? — S: I saw it when I was little.",
+        "audio": {
+          "src": "audio/book/2b-u14-p2-0.mp3",
+          "askEnd": 2.25
+        }
       }
     },
     {
@@ -1725,7 +1765,11 @@
           ],
           "en": "T: go out now — S: May I go out now?",
           "why": "The trap that is not a spelling one: 나가면 돼요 is real Korean but a different question. -(으)면 되다 asks whether doing it would be enough; -아/어도 되다 asks whether you are allowed to.",
-          "grammar": "나가다 → 나가도 돼요. The stem ends in ㅏ and the ending starts with 아, so they merge into one: 나가 + 아도 = 나가도, never 나가아도."
+          "grammar": "나가다 → 나가도 돼요. The stem ends in ㅏ and the ending starts with 아, so they merge into one: 나가 + 아도 = 나가도, never 나가아도.",
+          "audio": {
+            "src": "audio/book/2b-u14-p3-1.mp3",
+            "askEnd": 2.26
+          }
         },
         {
           "n": 2,
@@ -1758,7 +1802,11 @@
           ],
           "en": "T: call at night — S: May I call at night?",
           "why": "Ringing someone late is exactly the kind of thing this pattern is for. 전화하다 is a 하다 verb like hundreds of others, so getting it right here gets all of them right.",
-          "grammar": "전화하다 → 전화해도 돼요. 하 takes 여, not 아/어: 하 + 여도 = 해도. 전화하도 leaves the vowel out altogether and there is nothing for -도 to attach to."
+          "grammar": "전화하다 → 전화해도 돼요. 하 takes 여, not 아/어: 하 + 여도 = 해도. 전화하도 leaves the vowel out altogether and there is nothing for -도 to attach to.",
+          "audio": {
+            "src": "audio/book/2b-u14-p3-2.mp3",
+            "askEnd": 2.36
+          }
         },
         {
           "n": 3,
@@ -1791,7 +1839,11 @@
           ],
           "en": "T: use this computer — S: May I use this computer?",
           "why": "쓰다 is the ㅡ stem of the set, and it is a busy verb: to write, to use, and to wear on the head. All three senses conjugate the same way.",
-          "grammar": "쓰다 → 써도 돼요. The ㅡ drops before a vowel ending and there is no syllable before it to take the vowel from, so it defaults to 어: 쓰 + 어 = 써."
+          "grammar": "쓰다 → 써도 돼요. The ㅡ drops before a vowel ending and there is no syllable before it to take the vowel from, so it defaults to 어: 쓰 + 어 = 써.",
+          "audio": {
+            "src": "audio/book/2b-u14-p3-3.mp3",
+            "askEnd": 2.53
+          }
         },
         {
           "n": 4,
@@ -1824,7 +1876,11 @@
           ],
           "en": "T: eat here — S: May I eat here?",
           "why": "The same question the 문법과 표현 sign page asked, and the answer it expects there is 먹으면 안 돼요. Asking and refusing are the two halves the book keeps putting side by side.",
-          "grammar": "먹다 → 먹어도 돼요. The stem vowel is ㅓ, so the ending is 어. Only ㅏ and ㅗ stems take 아."
+          "grammar": "먹다 → 먹어도 돼요. The stem vowel is ㅓ, so the ending is 어. Only ㅏ and ㅗ stems take 아.",
+          "audio": {
+            "src": "audio/book/2b-u14-p3-4.mp3",
+            "askEnd": 3.06
+          }
         }
       ],
       "example": {
@@ -1841,7 +1897,11 @@
           }
         ],
         "answerKo": "찍어도 돼요",
-        "en": "T: take photographs here — S: May I take photographs here?"
+        "en": "T: take photographs here — S: May I take photographs here?",
+        "audio": {
+          "src": "audio/book/2b-u14-p3-0.mp3",
+          "askEnd": 3.05
+        }
       }
     },
     {
@@ -1892,7 +1952,11 @@
           ],
           "en": "T: May I park here? — S: No, you may not park here.",
           "why": "주차 금지 from 어휘 연습 3, said to a person instead of printed on a sign. The teacher’s 주차해도 has the 해 in it, which is exactly what makes 주차해면 tempting.",
-          "grammar": "주차하다 → 주차하면 안 돼요. -(으)면 goes on the plain stem 하, so the 해 that -아/어도 needed has no business here. And 하 ends in a vowel, so no 으."
+          "grammar": "주차하다 → 주차하면 안 돼요. -(으)면 goes on the plain stem 하, so the 해 that -아/어도 needed has no business here. And 하 ends in a vowel, so no 으.",
+          "audio": {
+            "src": "audio/book/2b-u14-p4-1.mp3",
+            "askEnd": 3.23
+          }
         },
         {
           "n": 2,
@@ -1925,7 +1989,11 @@
           ],
           "en": "T: May I smoke here? — S: No, you may not smoke here.",
           "why": "The question says 피워, the answer says 피우, and both are right. ㅜ + 어 → ㅝ only happens when a vowel follows, and -면 is a consonant.",
-          "grammar": "피우다 → 피우면 안 돼요. Vowel-final stem, so plain -면. 피우으면 borrows the 으 that only consonant stems need."
+          "grammar": "피우다 → 피우면 안 돼요. Vowel-final stem, so plain -면. 피우으면 borrows the 으 that only consonant stems need.",
+          "audio": {
+            "src": "audio/book/2b-u14-p4-2.mp3",
+            "askEnd": 3.65
+          }
         },
         {
           "n": 3,
@@ -1958,7 +2026,11 @@
           ],
           "en": "T: May I drink a soft drink here? — S: No, you may not drink here.",
           "why": "음료수 is a soft drink rather than a drink in general — 마실 것 or 음료 covers that. 마시다 is the same verb 어휘 연습 1 conjugated for drinking with elders.",
-          "grammar": "마시다 → 마시면 안 돼요. The 셔 in the teacher’s 마셔도 is ㅣ + 어 contracting; nothing contracts before -면, so the stem comes back as 마시."
+          "grammar": "마시다 → 마시면 안 돼요. The 셔 in the teacher’s 마셔도 is ㅣ + 어 contracting; nothing contracts before -면, so the stem comes back as 마시.",
+          "audio": {
+            "src": "audio/book/2b-u14-p4-3.mp3",
+            "askEnd": 3.71
+          }
         },
         {
           "n": 4,
@@ -1991,7 +2063,11 @@
           ],
           "en": "T: May I sing here? — S: No, you may not sing here.",
           "why": "The best item in the drill. 부르다 is 르-irregular, and the teacher shows it off: 부르 + 어 doubles the ㄹ and gives 불러. Then the answer needs -면, no vowel follows, and the verb goes straight back to being ordinary.",
-          "grammar": "부르다 → 부르면 안 돼요. 르-irregular verbs are only irregular before a vowel. 불러면 carries the irregular form into a place that never triggers it — the single most useful mistake to stop making."
+          "grammar": "부르다 → 부르면 안 돼요. 르-irregular verbs are only irregular before a vowel. 불러면 carries the irregular form into a place that never triggers it — the single most useful mistake to stop making.",
+          "audio": {
+            "src": "audio/book/2b-u14-p4-4.mp3",
+            "askEnd": 3.56
+          }
         }
       ],
       "example": {
@@ -2008,7 +2084,11 @@
           }
         ],
         "answerKo": "사진을 찍으면 안 돼요",
-        "en": "T: May I take photographs here? — S: No, you may not take photographs."
+        "en": "T: May I take photographs here? — S: No, you may not take photographs.",
+        "audio": {
+          "src": "audio/book/2b-u14-p4-0.mp3",
+          "askEnd": 3.52
+        }
       }
     }
   ]

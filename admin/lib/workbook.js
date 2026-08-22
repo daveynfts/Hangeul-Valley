@@ -177,6 +177,8 @@ function cleanChoiceItem(item, i, where, type) {
   out.grammar = str(item.grammar);
   if (!out.why) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
   if (!out.grammar) throw new Error(`${at}: needs a grammar note`);
+  const audio = cleanAudio(item.audio, at);
+  if (audio) out.audio = audio;
   return out;
 }
 
@@ -193,6 +195,16 @@ function cleanAudio(a, where) {
   const out = { src };
   const label = str(a.labelEn);
   if (label) out.labelEn = label;
+  // How far into the clip the prompt stops and the model answer starts. A row
+  // that has not been answered plays only that much, or the recording reads the
+  // answer out before the learner has had a go at it.
+  if (a.askEnd !== undefined && a.askEnd !== null && a.askEnd !== '') {
+    const askEnd = Number(a.askEnd);
+    if (!isFinite(askEnd) || askEnd <= 0) {
+      throw new Error(`${where}: askEnd must be a positive number of seconds (got "${a.askEnd}")`);
+    }
+    out.askEnd = Math.round(askEnd * 100) / 100;
+  }
   return out;
 }
 
@@ -266,6 +278,8 @@ function cleanExercise(ex, i, seenIds) {
       };
       if (answer2Ko) eg.answer2Ko = answer2Ko;
       eg.en = str(ex.example.en);
+      const egAudio = cleanAudio(ex.example.audio, `${where} example`);
+      if (egAudio) eg.audio = egAudio;
       out.example = eg;
     } else if (ex.example) {
       const exAnswer = str(ex.example.answer);

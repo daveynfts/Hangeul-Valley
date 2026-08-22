@@ -1143,11 +1143,11 @@ console.log('\n--- 18. Listening ---');
   const ui = loadUi();
   ui.setBank('u14-pattern-1');
   const head = ui.els['wb-items'].children[0].children[1].children[0];
-  const say = head.children.find(c => c.className === 'wb-say');
+  const say = head.children.find(c => (c.className || '').indexOf('wb-say') === 0);
   assert(!!say, 'a build row carries a listen button');
-  assert(say.attrs['aria-label'] === 'Listen', 'and is labelled for a screen reader');
+  assert(say && say.attrs['aria-label'] === 'Listen', 'and is labelled for a screen reader');
   assert(css.indexOf('.wb-say') >= 0, 'the button is styled');
-  assert(ui.els['wb-example'].children.some(c => c.className === 'wb-say'),
+  assert(ui.els['wb-example'].children.some(c => (c.className || '').indexOf('wb-say') === 0),
     'the worked example has one too');
 
   // Before checking it reads the question only. Speaking the answer to a row
@@ -1205,6 +1205,48 @@ console.log('\n--- 18. Listening ---');
     const secs = Math.round(fs.statSync(f).size / 8000);
     assert(secs > 30 && secs < 120, e.no + ' clip is one drill long, not the whole track');
   });
+
+  // ── One clip per exchange ────────────────────────────────────────────────
+  // Track 10 is cut per item as well as per drill, so a row plays its own
+  // exchange instead of the learner hunting for it in a 70-second clip.
+  const secondsOf = (rel) => fs.statSync(path.join(ROOT, rel)).size / 8000;
+  drills.forEach((e) => {
+    assert(e.items.every(i => i.audio && i.audio.src), e.no + ': every item has its own clip');
+    assert(!!(e.example.audio && e.example.audio.src), e.no + ': so does the worked example');
+    const srcs = e.items.map(i => i.audio.src).concat(e.example.audio.src);
+    assert(new Set(srcs).size === srcs.length, e.no + ': no two rows share a clip');
+    srcs.forEach((s) => assert(fs.existsSync(path.join(ROOT, s)), s + ' is on disk'));
+    // Each is one exchange, not the whole drill.
+    e.items.forEach((i) => {
+      const secs = secondsOf(i.audio.src);
+      assert(secs > 4 && secs < 25, e.no + ' item ' + i.n + ' is one exchange long ('
+        + Math.round(secs) + 's)');
+      assert(i.audio.askEnd > 0 && i.audio.askEnd < secs,
+        e.no + ' item ' + i.n + ' stops the prompt inside its own clip');
+    });
+    // The last item of every drill is the short one: the teacher's question and
+    // the answering gap, with no model answer recorded after it.
+    const last = e.items[e.items.length - 1];
+    assert(secondsOf(last.audio.src) < secondsOf(e.items[0].audio.src),
+      e.no + ': the last item is the short one, as the track has it');
+  });
+  const allClips = drills.flatMap(e => e.items.map(i => i.audio.src)
+    .concat(e.example.audio.src, e.audio.src));
+  assert(new Set(allClips).size === 24, 'twenty-four clips in all — four drills and twenty rows');
+
+  // The button plays the book, and says so.
+  const bookBtn = ui2.els['wb-items'].children[0].children[1].children[0]
+    .children.find(c => (c.className || '').indexOf('wb-say') === 0);
+  assert(!!bookBtn && bookBtn.className.indexOf('book') > 0,
+    'a row with a recording is marked as playing the book, not a synthesised voice');
+  assert(css.indexOf('.wb-say.book') >= 0, 'and styled apart');
+  // Until the row is answered the clip stops where the prompt ends.
+  const play = uiSrc.slice(uiSrc.indexOf('function wbPlayClip'), uiSrc.indexOf('function wbSayButton'));
+  assert(play.indexOf('!full && clip.askEnd') >= 0,
+    'an unanswered row plays only as far as askEnd');
+  assert(play.indexOf('currentTime >= stopAt') >= 0, 'and stops itself there');
+  assert(uiSrc.indexOf('wbSayButton(wbRowSpeech(ex, item, st.checked), item.audio, st.checked)') >= 0,
+    'the row passes its own checked state, so checking unlocks the model answer');
 
   // The clip harvest must not render the wrong answers as clean spoken Korean.
   const { collectTtsPhrases } = require('../scripts/ttsClips.js');

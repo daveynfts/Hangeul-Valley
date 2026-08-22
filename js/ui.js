@@ -2618,20 +2618,50 @@ function wbRowSpeech(ex, item, checked) {
   ]);
 }
 
-// One 🔊 for anything with Korean worth hearing. speakKorean plays the
-// pre-rendered clip where there is one and falls back to the browser's own
-// voice, so this needs no assets of its own.
-function wbSayButton(text) {
-  if (!text || typeof speakKorean !== 'function') return null;
+// The book's recording of one exchange. Until the row has been checked it stops
+// where the teacher's line ends — the rest of the clip is the model answer, and
+// playing that to someone who has not answered yet hands them the row.
+function wbPlayClip(clip, full) {
+  wbStopTrack();
+  let el = null;
+  try { el = new Audio('/' + clip.src); } catch (e) { return false; }
+  const stopAt = (!full && clip.askEnd > 0) ? clip.askEnd : 0;
+  wbTrack = { el: el, src: clip.src, btn: null, fill: null };
+  try {
+    if (typeof AudioMixer !== 'undefined') {
+      if (AudioMixer.voiceLevel) el.volume = AudioMixer.voiceLevel();
+      if (AudioMixer.voiceStart) AudioMixer.voiceStart();
+    }
+    if (stopAt) {
+      el.ontimeupdate = () => {
+        if (wbTrack && wbTrack.el === el && el.currentTime >= stopAt) wbStopTrack();
+      };
+    }
+    el.onended = () => { if (wbTrack && wbTrack.el === el) wbStopTrack(); };
+    el.onerror = () => { if (wbTrack && wbTrack.el === el) wbStopTrack(); };
+    const p = el.play();
+    if (p && typeof p.catch === 'function') p.catch(() => wbStopTrack());
+    return true;
+  } catch (e) { wbStopTrack(); return false; }
+}
+
+// One 🔊 for anything with Korean worth hearing. The book's own recording where
+// the content names one, and speakKorean otherwise — which plays a pre-rendered
+// clip where there is one and falls back to the browser's voice, so a row is
+// never left silent.
+function wbSayButton(text, clip, full) {
+  const hasClip = !!(clip && clip.src && typeof Audio === 'function');
+  if (!hasClip && (!text || typeof speakKorean !== 'function')) return null;
   const b = document.createElement('button');
   b.type = 'button';
-  b.className = 'wb-say';
-  b.title = '들어 보기';
+  b.className = 'wb-say' + (hasClip ? ' book' : '');
+  b.title = hasClip ? '들어 보기 (책 녹음)' : '들어 보기';
   b.setAttribute('aria-label', 'Listen');
   b.textContent = '🔊';
   b.onclick = (e) => {
     if (e && e.stopPropagation) e.stopPropagation();
-    speakKorean(text, { force: true });
+    if (hasClip && wbPlayClip(clip, full)) return;
+    if (text && typeof speakKorean === 'function') speakKorean(text, { force: true });
   };
   return b;
 }
@@ -2694,8 +2724,10 @@ function renderWorkbook() {
       // The worked example is the one place the finished Korean is already on
       // screen, so hearing it gives nothing away.
       if (ex.type === 'build') {
+        // The worked example is played whole: its answer is already printed
+        // above the button, so there is nothing left to give away.
         const say = wbSayButton(wbScriptText(ex.example.lines,
-          [ex.example.answerKo || '', ex.example.answer2Ko || '']));
+          [ex.example.answerKo || '', ex.example.answer2Ko || '']), ex.example.audio, true);
         if (say) exBox.appendChild(say);
       }
     }
@@ -2762,7 +2794,7 @@ function renderWorkbook() {
         head.innerHTML = art +
           '<span class="wb-exp-phrase">' + vbEsc(item.phraseKo || '') + '</span>' +
           '<span class="wb-exp-en">' + vbEsc(item.en || '') + '</span>';
-        const say = wbSayButton(wbRowSpeech(ex, item, st.checked));
+        const say = wbSayButton(wbRowSpeech(ex, item, st.checked), item.audio, st.checked);
         if (say) head.appendChild(say);
         const line = document.createElement('div');
         line.className = 'wb-exp-line';
