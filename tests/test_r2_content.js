@@ -55,6 +55,21 @@ const skinCat = JSON.parse(fs.readFileSync(path.join(ROOT, 'skins', 'catalog.jso
 
 assert(set.has('worlds/unit10-layout.json'), 'Unit 10 layout is in the batch');
 assert(set.has('diner/content.json'), 'diner content is in the batch');
+
+// vercel.json rewrites /worlds/* to the CDN, so in production the repo copy of a
+// world file is never read — only the uploaded one is. A file left out of the
+// batch does not fall back to the checked-in version, it 404s, and the feature
+// that reads it goes quietly missing for everyone. The upload list is hand-kept,
+// so this is the check that catches the next one somebody forgets.
+const vercel = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
+const worldsGoToCdn = (vercel.rewrites || []).some((r) =>
+  /^\/worlds\//.test(r.source || '') && /cdn\./.test(r.destination || ''));
+assert(worldsGoToCdn, 'vercel.json still serves /worlds/* from the CDN');
+fs.readdirSync(path.join(ROOT, 'worlds'))
+  .filter((f) => f.endsWith('.json'))
+  .forEach((f) => {
+    assert(set.has('worlds/' + f), 'worlds/' + f + ' is uploaded, so production can read it');
+  });
 assert(files.some((f) => f.rel.startsWith('sprites/') && f.ctype === 'image/png'), 'PNG sprites are in the batch');
 
 const flags = parsePublishArgs(['--dry-run', '--skip-deploy', '--env', '.env.local']);
