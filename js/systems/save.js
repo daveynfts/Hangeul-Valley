@@ -616,6 +616,12 @@ function applySave(d){
   }
   unlockedPlots.sort((a, b) => a - b);
   unlockedPlotCount = unlockedPlots.length;
+  // Replaced, not merged. This is the only field that was accumulated into, and it is a
+  // module-level Map that outlives any one save: a guest session followed by a sign-in left
+  // the guest's counts in place for every word the incoming save did not mention. That
+  // silently suppressed harvest payouts (10 * 0.85^prev), could skip the +10 Honor that
+  // fires on exactly the tenth harvest, and inflated the mastery stats.
+  harvestCounts.clear();
   if(migrated.harvests) Object.entries(migrated.harvests).forEach(([k,v])=>harvestCounts.set(k,v));
   if(migrated.srs) srsData = migrated.srs;
   // Absent in saves written before the log existed; an empty history is correct there
