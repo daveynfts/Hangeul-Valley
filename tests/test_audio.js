@@ -128,7 +128,9 @@ function loadAudio(seed) {
     window: win, document: doc, localStorage: store,
     setTimeout: (fn, ms) => clock.set(fn, ms),
     clearTimeout: (id) => clock.clear(id),
-    setInterval: () => 0, clearInterval: () => {},
+    // A truthy id, because MusicDirector.playing() is "do I hold a timer" and a
+    // stub returning 0 makes it answer no while the sequencer is running.
+    setInterval: () => 1, clearInterval: () => {},
     TextEncoder
   };
   ctx.globalThis = ctx;
@@ -442,6 +444,73 @@ console.log('\n--- 11. Korean voice contract ---');
   h.run('AudioMixer.setMuted(true)');
   assert(h.run("KoreanTTS.speak('한국어')") === false, 'mute stops Korean speech as well as sound effects');
   assert(h.run("KoreanTTS.spell('한국어')") === false, 'mute stops syllable spelling too');
+}
+
+// ── Silence at the study desk ───────────────────────────────────────────────
+console.log('\n--- Music holds while the desk is open ---');
+{
+  const h = loadAudio();
+  h.run('AudioMixer.init()');
+  h.run('playSceneAudio("farm")');
+  assert(h.run('MusicDirector.playing()') === true, 'the farm has a track before the desk opens');
+  assert(h.run('AmbienceDirector.playing()') === true, 'and an ambience bed');
+
+  h.run('MusicDirector.hold(); AmbienceDirector.hold()');
+  assert(h.run('MusicDirector.playing()') === false, 'the hold parks the sequencer');
+  assert(h.run('AmbienceDirector.playing()') === false, 'and the ambience bed');
+  assert(h.run('MusicDirector.held()') === true, 'and the hold is readable');
+
+  // The reasons music stops and starts have to stack rather than cancel: none
+  // of them may put a track back under an open workbook.
+  h.run('MusicDirector.resume(); AmbienceDirector.resume()');
+  assert(h.run('MusicDirector.playing()') === false, 'a plain resume does not lift the hold');
+  h.run('AudioMixer.setMuted(true); AudioMixer.setMuted(false)');
+  assert(h.run('MusicDirector.playing()') === false, 'nor does unmuting at the desk');
+  assert(h.run('AmbienceDirector.playing()') === false, 'nor for the ambience');
+  h.run('MusicDirector.onUnlock(); AmbienceDirector.onUnlock()');
+  assert(h.run('MusicDirector.playing()') === false, 'nor an audio-context unlock');
+  // A scene re-announcing its own track is the one that would slip through
+  // play(), which does not go via resume() at all.
+  assert(h.run('MusicDirector.play("arcade")') === true, 'a held director still accepts a track');
+  assert(h.run('MusicDirector.playing()') === false, 'but does not start it');
+  h.run('playSceneAudio("farm")');
+  assert(h.run('MusicDirector.playing()') === false, 'playSceneAudio cannot restart it either');
+  assert(h.run('AmbienceDirector.playing()') === false, 'on either director');
+
+  h.run('MusicDirector.release(); AmbienceDirector.release()');
+  assert(h.run('MusicDirector.playing()') === true, 'leaving the desk gives the music back');
+  assert(h.run('AmbienceDirector.playing()') === true, 'and the ambience');
+  assert(h.run('MusicDirector.current()') === 'farm',
+    'and it comes back as the track that was queued while held');
+
+  // Muted before the desk, still muted after it.
+  const m = loadAudio();
+  m.run('AudioMixer.init()');
+  m.run('playSceneAudio("farm")');
+  m.run('AudioMixer.setMuted(true)');
+  m.run('MusicDirector.hold()');
+  m.run('MusicDirector.release()');
+  assert(m.run('MusicDirector.playing()') === false,
+    'releasing the hold does not unmute a player who muted themselves');
+}
+
+console.log('\n--- The desk drives the hold off the modal stack ---');
+{
+  const ui = fs.readFileSync(path.join(__dirname, '..', 'js', 'ui.js'), 'utf8');
+  assert(/const STUDY_OVERLAYS = \[[^\]]*desk-menu-overlay/.test(ui)
+    && /STUDY_OVERLAYS = \[[^\]]*workbook-overlay/.test(ui)
+    && /STUDY_OVERLAYS = \[[^\]]*desk-quiz-overlay/.test(ui),
+    'all three desk screens count as study');
+  const sync = ui.slice(ui.indexOf('function syncStudyQuiet'), ui.indexOf('function setModalState'));
+  assert(sync.indexOf('activeModalStack.some') >= 0,
+    'the hold is decided from the modal stack, not counted up and down per screen');
+  assert(sync.indexOf('d.hold()') >= 0 && sync.indexOf('d.release()') >= 0,
+    'and both directions are wired');
+  const setModal = ui.slice(ui.indexOf('function setModalState'), ui.indexOf('function closeTopModal'));
+  assert(setModal.indexOf('syncStudyQuiet()') >= 0,
+    'every open and close runs through it, so chaining the desk screens cannot desync');
+  assert((setModal.match(/syncStudyQuiet\(\)/g) || []).length === 1,
+    'once, at the end, after the stack has been updated');
 }
 
 console.log('\n====================================================');

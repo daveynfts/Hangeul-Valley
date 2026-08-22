@@ -261,6 +261,26 @@ function buildLevelSelectScreen() {
 // ═══════════════ CENTRALIZED UI GLASSMORPHISM MODAL MANAGER ═══════════════════
 let activeModalStack = [];
 
+// The study desk: the chooser, the workbook and the quiz. All three are places
+// you are meant to be listening to Korean, so the background score comes off
+// while any of them is open.
+const STUDY_OVERLAYS = ['desk-menu-overlay', 'workbook-overlay', 'desk-quiz-overlay'];
+
+// Decided from the modal stack rather than counted up and down by each screen.
+// The desk chains — the chooser opens the workbook, the workbook goes back to
+// the chooser — and a hold released by whichever screen closed first would let
+// the music back in over the one still open.
+function syncStudyQuiet() {
+  const quiet = activeModalStack.some(id => STUDY_OVERLAYS.indexOf(id) >= 0);
+  [typeof MusicDirector !== 'undefined' ? MusicDirector : null,
+    typeof AmbienceDirector !== 'undefined' ? AmbienceDirector : null]
+    .forEach((d) => {
+      if (!d || typeof d.hold !== 'function') return;
+      if (quiet === d.held()) return;
+      if (quiet) d.hold(); else d.release();
+    });
+}
+
 function setModalState(overlayId, isOpen) {
   const overlay = document.getElementById(overlayId);
   if (!overlay) return;
@@ -281,6 +301,7 @@ function setModalState(overlayId, isOpen) {
       playerLocked = false;
     }
   }
+  syncStudyQuiet();
 }
 
 function closeTopModal() {
