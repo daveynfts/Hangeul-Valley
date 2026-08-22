@@ -66,18 +66,26 @@ async function runTests() {
     }
   }
 
-  const statsH = require('../../api/stats');
-  const levelsH = require('../../api/levels');
-  const levelNumH = require('../../api/levels/[num]');
-  const vocabH = require('../../api/vocab-facts');
-  const artH = require('../../api/art');
-  // One handler for all three Unit 10 reads now. They were three files, which cost three of
-  // the twelve serverless functions the Hobby plan allows — and the project was on exactly
-  // twelve, so the next route added broke the deployment. The URLs are unchanged: a dynamic
-  // segment matches the literal, so /api/unit10/layout still answers.
-  const unit10H = require('../../api/unit10/[kind]');
-  const hostH = require('../../api/admin-host');
-  const skinsH = require('../../api/skins/catalog');
+  // Every admin read is one function now: api/[...path].js. They were eight files, which cost
+  // eight of the twelve serverless functions the Hobby plan allows per deployment — and the
+  // project sat on exactly twelve, so adding the leaderboard made thirteen and the Vercel
+  // build failed while CI stayed green. Four routes total now.
+  //
+  // The URLs did not change, so these shims keep the tests below reading as the paths they
+  // exercise. `seg` is what Vercel puts in req.query.path for a catch-all.
+  const apiH = require('../../api/[...path]');
+  const at = (seg) => (req, res) => {
+    req.query = Object.assign({}, req.query, { path: seg });
+    return apiH(req, res);
+  };
+  const statsH = at(['stats']);
+  const levelsH = at(['levels']);
+  const vocabH = at(['vocab-facts']);
+  const artH = at(['art']);
+  const hostH = at(['admin-host']);
+  const skinsH = at(['skins', 'catalog']);
+  const unit10At = (kind) => at(['unit10', kind]);
+  const levelNumAt = (num) => at(['levels', String(num)]);
 
   await test('GET /api/stats: Vercel body matches Express lib payload', () => {
     const res = callHandler(statsH, 'GET');
@@ -97,7 +105,7 @@ async function runTests() {
   });
 
   await test('GET /api/levels/:num: Vercel body matches Express lib payload', () => {
-    const res = callHandler(levelNumH, 'GET', { query: { num: '1' } });
+    const res = callHandler(levelNumAt('1'), 'GET');
     const expected = { success: true, data: levelsLib.getLevelByNum(1, rootDir) };
     assert(res.statusCode === 200, 'status 200, got ' + res.statusCode);
     sameKeys(res.body, expected, 'level 1');
@@ -144,21 +152,21 @@ async function runTests() {
   });
 
   await test('GET /api/unit10/layout: Vercel body matches Express lib payload', () => {
-    const res = callHandler(unit10H, 'GET', { query: { kind: 'layout' } });
+    const res = callHandler(unit10At('layout'), 'GET');
     const expected = { success: true, data: worldLib.getLayout(rootDir) };
     assert(res.statusCode === 200, 'status 200, got ' + res.statusCode);
     assert(JSON.stringify(res.body.data) === JSON.stringify(expected.data), 'layout.data equal');
   });
 
   await test('GET /api/unit10/quiz: Vercel body matches Express lib payload', () => {
-    const res = callHandler(unit10H, 'GET', { query: { kind: 'quiz' } });
+    const res = callHandler(unit10At('quiz'), 'GET');
     const expected = { success: true, data: worldLib.getQuiz(rootDir) };
     assert(res.statusCode === 200, 'status 200, got ' + res.statusCode);
     assert(JSON.stringify(res.body.data.questions) === JSON.stringify(expected.data.questions), 'quiz questions equal');
   });
 
   await test('GET /api/unit10/world: Vercel body matches Express lib payload', () => {
-    const res = callHandler(unit10H, 'GET', { query: { kind: 'world' } });
+    const res = callHandler(unit10At('world'), 'GET');
     const expected = { success: true, data: worldLib.getWorld(rootDir) };
     assert(res.statusCode === 200, 'status 200, got ' + res.statusCode);
     assert(res.body.data.id === expected.data.id, 'world id');
@@ -167,13 +175,13 @@ async function runTests() {
   // New with the merge: one route serving three names has to refuse a fourth rather than
   // answering with whichever getter happens to be first.
   await test('GET /api/unit10/<unknown>: 404, and the three names are the only ones', () => {
-    const res = callHandler(unit10H, 'GET', { query: { kind: 'saves' } });
+    const res = callHandler(unit10At('saves'), 'GET');
     assert(res.statusCode === 404, 'status 404, got ' + res.statusCode);
     assert(res.body && res.body.success === false, 'and reports failure');
-    const bare = callHandler(unit10H, 'GET', { query: {} });
+    const bare = callHandler(at(['unit10']), 'GET');
     assert(bare.statusCode === 404, 'a missing kind is also 404, got ' + bare.statusCode);
     ['layout', 'quiz', 'world'].forEach((k) => {
-      assert(callHandler(unit10H, 'GET', { query: { kind: k } }).statusCode === 200, k + ' still answers');
+      assert(callHandler(unit10At(k), 'GET').statusCode === 200, k + ' still answers');
     });
   });
 
@@ -181,9 +189,25 @@ async function runTests() {
   // writable, whichever of the three names is asked for.
   await test('PUT /api/unit10/*: still refused, as three separate files did', () => {
     ['layout', 'quiz', 'world'].forEach((k) => {
-      const res = callHandler(unit10H, 'PUT', { query: { kind: k } });
+      const res = callHandler(unit10At(k), 'PUT');
       assert(res.statusCode === 409, 'PUT ' + k + ' refused with 409, got ' + res.statusCode);
     });
+  });
+
+  // The catch-all is the lowest-priority match in Vercel's routing, so save.js, config.js and
+  // leaderboard.js keep answering their own paths. That is documented behaviour rather than
+  // something this repo can test, so the catch-all refuses those three names outright: if the
+  // precedence ever failed, the game's cloud save would arrive here and an admin 404 would look
+  // exactly like a broken save. A 500 saying what happened is the point.
+  await test('the catch-all refuses the game routes instead of answering for them', () => {
+    ['save', 'config', 'leaderboard'].forEach((name) => {
+      const res = callHandler(at([name]), 'GET');
+      assert(res.statusCode === 500, '/api/' + name + ' refused with 500, got ' + res.statusCode);
+      assert(/own function/i.test(JSON.stringify(res.body)), 'and says why for /api/' + name);
+    });
+    // A path that is simply not a route is an ordinary 404, not that 500.
+    const missing = callHandler(at(['nope']), 'GET');
+    assert(missing.statusCode === 404, 'an unknown path is 404, got ' + missing.statusCode);
   });
 
   await test('GET /api/admin-host: same keys; Vercel is read-only, Express is writable', () => {
