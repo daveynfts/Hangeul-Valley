@@ -35,7 +35,10 @@ const STATIC_FILES = [
   ['sprites/catalog.json', 'application/json'],
   ['skins/catalog.json', 'application/json'],
   ['diner/content.json', 'application/json'],
-  ['audio/book/2b-u14-pattern-1.mp3', 'audio/mpeg']
+  ['audio/book/2b-u14-pattern-1.mp3', 'audio/mpeg'],
+  ['audio/book/2b-u14-pattern-2.mp3', 'audio/mpeg'],
+  ['audio/book/2b-u14-pattern-3.mp3', 'audio/mpeg'],
+  ['audio/book/2b-u14-pattern-4.mp3', 'audio/mpeg']
 ];
 
 function loadEnvFile(file) {

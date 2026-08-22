@@ -932,14 +932,27 @@ console.log('\n--- 15. The exercise list ---');
   ui.setBank(null);
   const kids = ui.els['wb-items'].children;
   const rows = kids.filter(r => r.attrs['data-exercise']);
-  assert(rows.length === 10, 'the list offers all ten exercises');
-  // 1-9 then 0 is where a keypad runs out. An eleventh row gets no key, so its
-  // badge has to be blank rather than promising one that does nothing.
-  assert(wb.exercises.length <= 10, 'and every one is reachable by number key');
+  assert(rows.length === wb.exercises.length && rows.length === 13,
+    'the list offers all thirteen exercises');
+  // 1-9 then 0 is where a keypad runs out. Past that a row gets no key, and its
+  // badge is left blank rather than printing one that does nothing — the arrows
+  // and the mouse still reach it.
   assert(rows[9].innerHTML.indexOf('>0<') >= 0, 'the tenth row is keyed 0');
   const kbPick = uiSrc.slice(uiSrc.indexOf("if (st.mode === 'pick')"));
   assert(kbPick.indexOf('/^[0-9]$/') >= 0 && kbPick.indexOf('num === 0 ? 9') >= 0,
     'and 0 opens it');
+  rows.slice(10).forEach((r, k) => {
+    assert(/wb-pick-key"><\/span>/.test(r.innerHTML),
+      'row ' + (k + 11) + ' shows no key rather than one that does nothing');
+  });
+  {
+    const nav = loadUi();
+    nav.setBank(null);
+    nav.run('workbookState.pick = ' + (wb.exercises.length - 1));
+    nav.run("openWorkbookExercise(workbookState.bank.exercises[workbookState.pick].id)");
+    assert(nav.run('workbookState.ex.id') === wb.exercises[wb.exercises.length - 1].id,
+      'and the last row still opens by arrow and Enter');
+  }
   const html9 = rows.map(r => r.innerHTML).join('');
   assert(html9.indexOf('wb-pick-pat') >= 0, 'each grammar row prints its pattern');
   assert(html9.indexOf('A/V-았을/었을 때') >= 0 && html9.indexOf('V-(으)면 안 되다') >= 0,
@@ -1052,6 +1065,78 @@ const exT = wb.exercises.find(e => e.id === 'u14-pattern-1');
   assert(ui.run('workbookState.score') === 4, 'the textbook key scores 4 of 4');
 }
 
+// ── 17b. 문형 연습 연습 2, 3, 4 ──────────────────────────────────────────────
+console.log('\n--- 17b. The rest of the drill ---');
+{
+  const KEYS = {
+    'u14-pattern-2': ['A/V-았을/었을 때', [
+      [1, '장학금을 받았을 때', '장학금을 받다', '언제 제일 기뻤어요?'],
+      [2, '할머니가 돌아가셨을 때', '할머니가 돌아가시다', '언제 제일 슬펐어요?'],
+      [3, '고향에 갔을 때', '고향에 가다', '언제 그 이야기를 들었어요?'],
+      [4, '집에 도착했을 때', '집에 도착하다', '언제 나나 씨 전화를 받았어요?']
+    ]],
+    'u14-pattern-3': ['V-아/어도 되다', [
+      [1, '나가도 돼요', '지금 나가다', '지금 나가다'],
+      [2, '전화해도 돼요', '밤에 전화하다', '밤에 전화하다'],
+      [3, '써도 돼요', '이 컴퓨터를 쓰다', '이 컴퓨터를 쓰다'],
+      [4, '먹어도 돼요', '여기에서 음식을 먹다', '여기에서 음식을 먹다']
+    ]],
+    'u14-pattern-4': ['V-(으)면 안 되다', [
+      [1, '주차하면 안 돼요', '주차하다', '여기에 주차해도 돼요?'],
+      [2, '담배를 피우면 안 돼요', '담배를 피우다', '여기에서 담배를 피워도 돼요?'],
+      [3, '음료수를 마시면 안 돼요', '음료수를 마시다', '여기에서 음료수를 마셔도 돼요?'],
+      [4, '노래를 부르면 안 돼요', '노래를 부르다', '여기에서 노래를 불러도 돼요?']
+    ]]
+  };
+  Object.keys(KEYS).forEach((id) => {
+    const [pattern, key] = KEYS[id];
+    const e = wb.exercises.find(x => x.id === id);
+    assert(!!e && e.type === 'build' && e.section === '문형 연습', id + ' is a 문형 연습 drill');
+    assert(e.pattern === pattern, 'drilling ' + pattern);
+    assert(e.items.length === 4, 'four exchanges');
+    assert(e.items.every(i => i.lines[0].who === 'T' && i.lines[1].who === 'S'),
+      'with the book’s T and S');
+    assert(e.items.every(i => i.lines[0].ko.indexOf('{}') < 0 && i.lines[1].ko.indexOf('{}') >= 0),
+      'the teacher’s line is given and the student’s is built');
+    key.forEach(([n, form, phrase, ask]) => {
+      const item = e.items.find(i => i.n === n);
+      assert(!!item, id + ' question ' + n + ' exists');
+      assert(item.choices.find(c => c.id === item.answer).ko === form,
+        id + ' item ' + n + ' answers ' + form);
+      assert(item.phraseKo === phrase, 'from the cue ' + phrase);
+      assert(item.lines[0].ko === ask, 'and keeps the teacher’s printed line');
+    });
+    assert(e.items.every(i => i.why && i.grammar && i.en), 'every answer is explained');
+  });
+
+  // 연습 3 is the grammar point the workbook pages skip entirely.
+  assert(!wb.exercises.some(e => e.section === '문법과 표현' && e.pattern === 'V-아/어도 되다'),
+    'V-아/어도 되다 has no 문법과 표현 page in this unit');
+  assert(wb.exercises.some(e => e.pattern === 'V-아/어도 되다'),
+    'so the drill is the only place it is practised');
+
+  // 연습 4 item 4 is the one worth the whole page: 르-irregular in the question,
+  // regular in the answer.
+  const p4 = wb.exercises.find(e => e.id === 'u14-pattern-4');
+  const sing = p4.items.find(i => i.n === 4);
+  assert(sing.lines[0].ko.indexOf('불러도') >= 0, 'the teacher asks with the irregular 불러도');
+  assert(sing.choices.find(c => c.id === sing.answer).ko.indexOf('부르면') >= 0,
+    'and the answer is the regular 부르면');
+  assert(sing.choices.some(c => c.ko.indexOf('불러면') >= 0),
+    'with 불러면 on the row — carrying the irregular where it does not belong');
+  assert(/르/.test(sing.grammar), 'and the note names the 르-irregular');
+
+  // Every drill is playable end to end.
+  ['u14-pattern-2', 'u14-pattern-3', 'u14-pattern-4'].forEach((id) => {
+    const ui = loadUi();
+    ui.setBank(id);
+    const e = wb.exercises.find(x => x.id === id);
+    e.items.forEach((item, i) => ui.run('wbPickChoice(' + i + ", '" + item.answer + "')"));
+    ui.run('checkWorkbook()');
+    assert(ui.run('workbookState.score') === 4, id + ' scores 4 of 4 on the textbook key');
+  });
+}
+
 // ── 18. Hearing it ─────────────────────────────────────────────────────────
 console.log('\n--- 18. Listening ---');
 {
@@ -1104,8 +1189,22 @@ console.log('\n--- 18. Listening ---');
     const body = uiSrc.slice(uiSrc.indexOf(fn), uiSrc.indexOf(fn) + 400);
     assert(body.indexOf('wbStopTrack()') >= 0, fn.replace('function ', '') + ' stops the clip');
   });
-  assert(wb.exercises.filter(e => e.audio).length === 1,
-    'only the exercise the book records has a recording');
+  // Track 10 holds all four drills, so it is cut four ways and each 연습 gets
+  // its own piece. One shared clip would start every exercise at the top of the
+  // track and make the player useless on three of them.
+  const drills = wb.exercises.filter(e => e.section === '문형 연습');
+  assert(drills.length === 4 && drills.every(e => e.audio),
+    'all four pattern drills carry a recording');
+  assert(new Set(drills.map(e => e.audio.src)).size === 4,
+    'and each one a different piece of the track');
+  assert(wb.exercises.filter(e => e.audio).length === 4,
+    'nothing else claims a recording');
+  drills.forEach((e) => {
+    const f = path.join(ROOT, e.audio.src);
+    assert(fs.existsSync(f), e.no + ' clip is on disk');
+    const secs = Math.round(fs.statSync(f).size / 8000);
+    assert(secs > 30 && secs < 120, e.no + ' clip is one drill long, not the whole track');
+  });
 
   // The clip harvest must not render the wrong answers as clean spoken Korean.
   const { collectTtsPhrases } = require('../scripts/ttsClips.js');
