@@ -88,8 +88,26 @@
     }
   ],
   "functions": {
-    "api/[...path].js": {
-      "includeFiles": "{levels.json,facts.json,skins/catalog.json,sprites/**,worlds/**}"
+    "api/art.js": {
+      "includeFiles": "sprites/**"
+    },
+    "api/stats.js": {
+      "includeFiles": "{levels.json,facts.json}"
+    },
+    "api/levels.js": {
+      "includeFiles": "levels.json"
+    },
+    "api/levels/[num].js": {
+      "includeFiles": "levels.json"
+    },
+    "api/vocab-facts.js": {
+      "includeFiles": "{levels.json,facts.json}"
+    },
+    "api/unit10/[kind].js": {
+      "includeFiles": "worlds/**"
+    },
+    "api/skins/catalog.js": {
+      "includeFiles": "skins/catalog.json"
     }
   }
 }
