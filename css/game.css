@@ -2633,24 +2633,38 @@
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
       font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--wood-d);
     }
-    .wb-pick-icon { font-size: 26px; line-height: 1; }
-    .wb-pick-text { display: flex; flex-direction: column; min-width: 0; gap: 3px; }
+    .wb-pick-icon { font-size: 28px; line-height: 1; }
+    .wb-pick-text { display: flex; flex-direction: column; min-width: 0; gap: 4px; }
+    /* The headline: the grammar point where there is one, the 연습 number where
+       there is not. Several rows share a 연습 number and three share their
+       Korean instruction word for word, so the pattern is the only thing that
+       can carry this line. */
+    .wb-pick-title { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+    .wb-pick-pat, .wb-pick-name {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 16px; font-weight: 800;
+      color: var(--ink); letter-spacing: 0;
+    }
     .wb-pick-no {
       font-family: 'Press Start 2P', monospace; font-size: 10px; color: #7a3e12;
+      background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
+      padding: 3px 6px; white-space: nowrap;
     }
-    .wb-pick-ko {
-      font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 700; color: var(--ink);
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    .wb-pick-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; color: #5b3412; }
+
+    /* 어휘 and 문법과 표현. Nine rows in one column read as nine of the same
+       thing; split in two they read as three and six. */
+    .wb-group {
+      display: flex; align-items: baseline; gap: 9px;
+      margin: 6px 2px 0; padding-bottom: 7px;
+      border-bottom: 2px dashed var(--wood-l);
     }
-    .wb-pick-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; }
-    /* Which grammar point the 연습 belongs to. Several rows share a 연습 number,
-       so this is the line that tells them apart — it has to read as a label, not
-       as more of the heading. */
-    .wb-pick-pat {
-      display: inline-block; margin-left: 7px; padding: 1px 6px;
-      background: #fff3d6; border: 1.5px solid var(--wood-l); border-radius: 3px;
-      font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 700;
-      color: #7a3e12; letter-spacing: 0;
+    .wb-group + .wb-pick { margin-top: -3px; }
+    .wb-group-ko {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 14px; font-weight: 800; color: #7a3e12;
+    }
+    .wb-group-en {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; color: #8b5a2b;
+      text-transform: uppercase; letter-spacing: .09em;
     }
     .wb-pick-count {
       font-family: 'VT323', monospace; font-size: 17px; color: #7a3e12; white-space: nowrap;
@@ -2761,6 +2775,19 @@
     .wb-line-solo { line-height: 2; }
     .wb-line-solo + .wb-line-solo { margin-top: 4px; }
     .wb-items-build .wb-blank { min-width: 108px; }
+    .wb-items-build .wb-exp-line { font-size: 17px; padding: 8px 12px; }
+
+    /* A row with two blanks gets two groups of buttons, and which group fills
+       which blank is not readable off the buttons themselves. The break puts
+       each group on its own line and the tag repeats the speaker chip from the
+       script above, so the pairing is visible rather than inferred. */
+    .wb-picks-break { flex-basis: 100%; height: 0; margin: 0; }
+    .wb-picks-tag {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 22px; height: 24px; padding: 0 6px;
+      background: #e8dcc4; border: 1.5px solid var(--wood-m); border-radius: 3px;
+      font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--wood-d);
+    }
 
     @media (max-width: 720px) {
       .wb-exp-line { font-size: 15px; line-height: 1.9; }
