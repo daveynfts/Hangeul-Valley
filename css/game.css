@@ -572,6 +572,10 @@
       background: linear-gradient(90deg, #16a34a, #4ade80);
       transition: width .3s ease;
     }
+    /* Only once there is progress: min-width on the fill itself also widened it at 0%, which
+       put a floating green nub on a track that is deliberately transparent there. At 1-2% the
+       fill was otherwise a few pixels wide and its rounded ends made it read as a speck. */
+    #level-select-overlay .lc-progress-track:not(.empty) .lc-progress-fill { min-width: 9px; }
     /* Reserved but unpainted at zero: the space keeps the grid rows level while an empty
        track drawn round nothing read as a broken input field. */
     #level-select-overlay .lc-progress-track.empty { background: transparent; box-shadow: none; }
@@ -697,17 +701,41 @@
     #hud-rank-fill { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #f59e0b, #fde68a); }
 
     /* ── Google cloud save ───────────────────────────────────────────────── */
+    /* A row, not a block. It was a stacked box — Google button over a 16px VT323 line, inside
+       its own bordered panel — sitting in the middle of the column between the title and the
+       first thing you can click, costing about 80px of the fold to say something you only need
+       to read once.
+       It now sits on the right edge of the same 1000px column the grid uses, so it reads as
+       part of the screen's furniture rather than as a card competing with the cards. */
     #ls-auth {
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-      margin: 0 auto 18px; padding: 10px 14px;
-      background: rgba(15, 23, 42, 0.55);
-      border: 1px solid rgba(232, 192, 122, 0.28);
-      border-radius: 8px;
+      width: 100%; max-width: 1000px;
+      display: flex; flex-direction: row; align-items: center; justify-content: flex-end;
+      gap: 12px; margin: 0 0 12px; padding: 0;
+      background: none; border: none;
     }
     #ls-auth.hidden { display: none !important; }
-    .ls-auth-hint {
-      font-family: 'VT323', monospace; font-size: 16px;
-      color: rgba(232, 192, 122, 0.85); letter-spacing: 0.5px; text-align: center;
+    /* Be Vietnam Pro rather than VT323: the redesign gave the screen three faces with one job
+       each, and a fourth here for one line of helper text was the odd one out. */
+    #ls-auth .ls-auth-hint {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; font-weight: 500;
+      color: rgba(232, 192, 122, 0.7); letter-spacing: 0; text-align: right;
+      line-height: 1.35; max-width: 190px;
+      /* Before the button in reading order, though it comes after it in the markup —
+         renderAuthUI rewrites that markup, so the sequence is set here instead. Explanation
+         first, action in the corner where the eye expects it. */
+      order: -1;
+    }
+    /* Once you are signed in the sentence has already come true, so it stops being a reason
+       and starts being an unmet prompt. renderAuthUI fills #ls-auth-status only when signed
+       in, which is the signal — no JS change needed to read it. */
+    #ls-auth #ls-auth-status:not(:empty) ~ .ls-auth-hint {
+      display: none;
+    }
+    /* Narrow screens drop the explanation and keep the button. The Google button already says
+       what it does; the line only says why, and at 375px the row has no space for both. */
+    @media (max-width: 560px) {
+      #ls-auth { justify-content: center; }
+      #ls-auth .ls-auth-hint { display: none; }
     }
     #ls-auth-status, #hud-auth-status {
       display: flex; align-items: center; gap: 8px;
@@ -727,6 +755,7 @@
       font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; cursor: pointer;
     }
     .auth-out:hover { background: rgba(232, 192, 122, 0.12); }
+    #ls-auth .google-signin-slot { min-height: 0; justify-content: flex-end; }
     .google-signin-slot { min-height: 40px; display: flex; justify-content: center; }
     .google-signin-slot.hidden { display: none !important; }
     #hud-auth-status {
