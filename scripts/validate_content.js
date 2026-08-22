@@ -754,6 +754,35 @@ STATIC_FILES.forEach(([rel]) => {
   check(rel + ' exists for R2 upload', fs.existsSync(path.join(ROOT, rel)));
 });
 
+// ── Vercel's function budget ─────────────────────────────────────────────────
+// Every file under api/ that is not a helper becomes a serverless function, and the Hobby
+// plan allows twelve per deployment. Adding the thirteenth does not fail here, or in any
+// suite, or in CI — it fails in Vercel's build, minutes later, and leaves the previous
+// deployment serving. So the whole pipeline goes green and nothing ships, which is what
+// happened when api/leaderboard.js was added to a project already sitting on twelve.
+//
+// Underscore-prefixed files are modules the routes require, not routes, and are not counted.
+// Two of the three Unit 10 reads were merged into api/unit10/[kind].js to make room; if this
+// ever trips again, look for routes that differ only in which getter they call.
+(function checkVercelFunctionBudget() {
+  const VERCEL_HOBBY_MAX = 12;
+  const apiDir = path.join(ROOT, 'api');
+  const routes = [];
+  (function walk(dir, rel) {
+    for (const name of fs.readdirSync(dir)) {
+      const full = path.join(dir, name);
+      if (fs.statSync(full).isDirectory()) { walk(full, rel ? rel + '/' + name : name); continue; }
+      if (!name.endsWith('.js') || name.startsWith('_')) continue;
+      routes.push(rel ? rel + '/' + name : name);
+    }
+  }(apiDir, ''));
+  check(
+    `api/ has at most ${VERCEL_HOBBY_MAX} serverless functions`,
+    routes.length <= VERCEL_HOBBY_MAX,
+    `${routes.length} routes: ${routes.sort().join(', ')}`
+  );
+}());
+
 // ── Report ───────────────────────────────────────────────────────────────────
 console.log(`\nvalidate_content: ${checks - failures.length}/${checks} invariants hold`);
 if (failures.length) {
