@@ -1355,6 +1355,10 @@
       "instructionEn": "Answer as in the example.",
       "noteEn": "In the book this is the listening drill on track 10: the teacher asks, you answer out loud, one after another. The pattern never changes — 아니요, 전에 …-(으)ㄴ 적이 있어요 — so the only thing to get right is the modifier, and the four verbs are picked to cover all three ways it forms. Use the speaker button: say it before you read it.",
       "pattern": "V-(으)ㄴ 적(이) 있다[없다]",
+      "audio": {
+        "src": "audio/book/2b-u14-pattern-1.mp3",
+        "labelEn": "Track 10 — the drill as the book records it"
+      },
       "items": [
         {
           "n": 1,

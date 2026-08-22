@@ -70,6 +70,15 @@ fs.readdirSync(path.join(ROOT, 'worlds'))
   .forEach((f) => {
     assert(set.has('worlds/' + f), 'worlds/' + f + ' is uploaded, so production can read it');
   });
+
+// Same trap for the book recordings the workbook plays: /audio/* is rewritten to
+// the CDN too, so a clip the content names but the batch omits is a play button
+// that does nothing on the deployed site.
+const workbook = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', 'unit14-workbook.json'), 'utf8'));
+(workbook.exercises || []).filter((e) => e.audio && e.audio.src).forEach((e) => {
+  assert(fs.existsSync(path.join(ROOT, e.audio.src)), e.audio.src + ' exists on disk');
+  assert(set.has(e.audio.src), e.audio.src + ' is uploaded, so the play button works on prod');
+});
 assert(files.some((f) => f.rel.startsWith('sprites/') && f.ctype === 'image/png'), 'PNG sprites are in the batch');
 
 const flags = parsePublishArgs(['--dry-run', '--skip-deploy', '--env', '.env.local']);

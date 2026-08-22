@@ -1082,6 +1082,31 @@ console.log('\n--- 18. Listening ---');
   assert(both.indexOf('해도 돼요') >= 0 && both.indexOf('하면 안 돼요') >= 0,
     'a two-blank row speaks both blanks filled');
 
+  // The book's own recording of the drill.
+  const ui2 = loadUi();
+  ui2.setBank('u14-pattern-1');
+  assert(!!exT.audio && /^audio\/[\w./-]+\.mp3$/.test(exT.audio.src),
+    'the pattern drill names its recording');
+  const clip = path.join(ROOT, exT.audio.src);
+  assert(fs.existsSync(clip), 'and the file is on disk at ' + exT.audio.src);
+  const kb2 = Math.round(fs.statSync(clip).size / 1024);
+  assert(kb2 > 40 && kb2 < 2048, 'trimmed and re-encoded, not the whole 7 MB track (' + kb2 + ' KB)');
+  const bar = ui2.els['wb-instruction'].children.find(c => c.className === 'wb-track');
+  assert(!!bar, 'the exercise draws a player under its instruction');
+  assert(bar.children.some(c => c.className === 'wb-track-play'),
+    'with a play button');
+  assert(css.indexOf('.wb-track ') >= 0 || css.indexOf('.wb-track {') >= 0, 'the player is styled');
+  assert(uiSrc.indexOf('AudioMixer.voiceStart') >= 0 && uiSrc.indexOf('wbStopTrack') >= 0,
+    'it goes through the mixer and can be stopped');
+  // Leaving the exercise has to silence it — an exercise’s recording has no
+  // business playing over the list or over the next exercise.
+  ['function backToWorkbookList', 'function closeWorkbook'].forEach((fn) => {
+    const body = uiSrc.slice(uiSrc.indexOf(fn), uiSrc.indexOf(fn) + 400);
+    assert(body.indexOf('wbStopTrack()') >= 0, fn.replace('function ', '') + ' stops the clip');
+  });
+  assert(wb.exercises.filter(e => e.audio).length === 1,
+    'only the exercise the book records has a recording');
+
   // The clip harvest must not render the wrong answers as clean spoken Korean.
   const { collectTtsPhrases } = require('../scripts/ttsClips.js');
   const phrases = collectTtsPhrases(ROOT);

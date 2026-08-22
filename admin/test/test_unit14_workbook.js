@@ -175,6 +175,29 @@ async function runTests() {
       refuses(shared, rootDir, 'used by both blanks', 'one id serving both blanks');
     });
 
+    await test('Keeps a recording, and refuses one that points outside audio/', () => {
+      const book = workbookLib.getWorkbook(rootDir);
+      const drill = book.exercises.find((e) => e.audio);
+      assert(!!drill, 'the pattern drill carries its recording');
+      assert(/^audio\/.+\.mp3$/.test(drill.audio.src), 'stored as a path under audio/');
+      // The value goes into new Audio(src) in the browser, so anything that
+      // escapes the audio folder or names another origin has to be refused.
+      ['../../etc/passwd.mp3', 'https://evil.example/x.mp3', 'audio/../secret.mp3',
+        'audio/clip.js', '/audio/clip.mp3'].forEach((bad) => {
+        const b = clone();
+        b.exercises.find((e) => e.id === drill.id).audio = { src: bad };
+        refuses(b, rootDir, 'audio src must be a path under audio/', 'audio src "' + bad + '"');
+      });
+      // No audio at all is the normal case and must stay silent, not throw.
+      const none = clone();
+      delete none.exercises.find((e) => e.id === drill.id).audio;
+      const res = workbookLib.saveWorkbook(none, rootDir);
+      assert(res.exerciseCount === original.exercises.length, 'an exercise with no recording saves');
+      assert(!workbookLib.getWorkbook(rootDir).exercises.find((e) => e.id === drill.id).audio,
+        'and stores no empty audio key');
+      workbookLib.saveWorkbook(clone(), rootDir);
+    });
+
     await test('Refuses a build example that does not show the answer', () => {
       const bare = clone();
       const b = bare.exercises.find((e) => e.id === 'u14-grammar-2-1');
