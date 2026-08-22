@@ -431,14 +431,23 @@ console.log('\n--- 8. 연습 3 (dialogue) ---');
 const ex3 = wb.exercises.find(e => e.id === 'u14-vocab-3');
 {
   assert(!!ex3 && ex3.type === 'dialogue', '연습 3 is a dialogue exercise');
-  assert(ex3.reply === '아, 그래요? 죄송합니다.', "B's line is the same apology throughout");
+  // A dialogue is a script now, so B's line lives on each item rather than once
+  // on the exercise. On this page it happens to be the same apology every time.
+  assert(!ex3.reply, 'the shared reply is gone — the lines carry it');
+  assert(ex3.items.every(i => i.lines.length === 2
+    && i.lines[0].who === 'A' && i.lines[1].who === 'B'),
+    'every row is an A line and a B line');
+  assert(ex3.items.every(i => i.lines[1].ko === '아, 그래요? 죄송합니다.'),
+    "and B's line is the same apology throughout");
   assert(ex3.bank.length === 5, 'five signs in the box');
   assert(ex3.bank.filter(b => b.usedByExample).length === 1
     && ex3.bank.find(b => b.usedByExample).id === 'no_smoking',
     '금연 is the circled example');
   // The blank sits mid-sentence, so every line needs a placeholder.
-  assert(ex3.example.aKo.indexOf('{}') >= 0, "the example's A line marks where the sign goes");
-  assert(ex3.items.every(i => i.aKo.indexOf('{}') >= 0), 'every A line marks where the sign goes');
+  assert(ex3.example.lines[0].ko.indexOf('{}') >= 0,
+    "the example's A line marks where the sign goes");
+  assert(ex3.items.every(i => i.lines[0].ko.indexOf('{}') >= 0),
+    'every A line marks where the sign goes');
   const KEY3 = [[1, 'no_food', '음식물 반입 금지'], [2, 'no_photos', '사진 촬영 금지'],
     [3, 'no_phones', '휴대 전화 사용 금지'], [4, 'no_parking', '주차 금지']];
   KEY3.forEach(([n, id, ko]) => {

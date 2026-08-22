@@ -24,11 +24,34 @@ Five, and the type only decides how a row is drawn.
 
 | type | shape | used for |
 |---|---|---|
-| `fill` | pick from a shared box, fills a sentence ending | 어휘 연습 1 |
-| `match` | same, drawn as two columns | 어휘 연습 2 |
-| `dialogue` | same, blank sits inside A's line | 어휘 연습 3 |
+| `fill` | shared box, one sentence, gap at the end or marked with `{}` | 어휘 연습 1 |
+| `match` | shared box, prompt joined to an answer | 어휘 연습 2 |
+| `dialogue` | shared box, gap anywhere in a short script | 어휘 연습 3 |
 | `experience` | choices per row, plus an ungraded 있어요/없어요 | V-(으)ㄴ 적이 있다 |
-| `build` | choices per row, gap anywhere in a short script | everything else |
+| `build` | choices per row, gap anywhere in a short script | 문법과 표현, 문형 연습 |
+
+`dialogue` and `build` are the same shape — a `lines` array, each line with an
+optional `who`, and `{}` where the answer goes — and differ only in where the
+choices come from. Reach for `dialogue` when one box serves the whole exercise
+and `build` when each row needs its own options.
+
+A box entry carries either one piece of text (`ko`) or two (`dict` and
+`polite`): the form the box shows and the form the sentence puts in the blank.
+Which it is depends on the entry, not the type. Unit 10's 어휘 연습 2 is the
+case that makes this earn its keep — five taste adjectives, and every sentence
+wants a different shape of the same word:
+
+```
+짜다 → 짜요     해요 ending
+맵다 → 매운     ㅂ-irregular, modifier before a noun
+쓰다 → 써서     ㅡ-irregular, reason clause
+달다 → 단       ㄹ drops before ㄴ
+시다 → 시어요   uncontracted; 셔요 is what you will hear
+```
+
+Two of the five are irregular and the irregularity only shows up in some of
+those shapes. That is the whole exercise, and it is why the forms are stored
+rather than derived.
 
 `fill`, `match` and `dialogue` share one box of chips across the exercise: one
 chip per blank, and moving a chip that is already placed relocates it rather than

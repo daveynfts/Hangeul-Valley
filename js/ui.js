@@ -2482,7 +2482,9 @@ function wbLineHtml(ex, item, chipText, opts) {
         ? '<b class="wb-blank filled">' + vbEsc(text) + '</b>'
         : '<span class="wb-blank empty">&nbsp;</span>'));
   const blank = mkBlank(chipText);
-  if (ex.type === 'build') {
+  // Two types draw a script: 'build' picks from choices on the row, 'dialogue'
+  // from the shared box. What they print is identical, so it is written once.
+  if (ex.type === 'build' || ex.type === 'dialogue') {
     // The lines are a little script and the gaps are filled left to right across
     // all of it, so a second blank in B's line is simply the next one along.
     // Speaker chips are optional: 연습 3 rewrites a sentence and has nobody
@@ -2500,13 +2502,6 @@ function wbLineHtml(ex, item, chipText, opts) {
             '<span class="wb-line">' + html + '</span></div>'
         : '<div class="wb-line-solo">' + html + '</div>';
     }).join('');
-  }
-  if (ex.type === 'dialogue') {
-    const parts = String(item.aKo || '').split('{}');
-    const a = vbEsc(parts[0] || '') + blank + vbEsc(parts[1] || '');
-    return '<div class="wb-dlg"><span class="wb-spk">A</span>' + a + '</div>' +
-      (o.plain ? '' : '<div class="wb-dlg reply"><span class="wb-spk">B</span>' +
-        vbEsc(ex.reply || '') + '</div>');
   }
   if (ex.type === 'match') {
     // The left side is a phrase, or a picture where the picture is the prompt —
@@ -2529,7 +2524,15 @@ function wbLineHtml(ex, item, chipText, opts) {
     return ('저는 ' + vbEsc(item.stemKo) + ' ' + blank
       + ' 적이 ' + ownBlank + '.');
   }
-  return vbEsc(item.stemKo) + ' ' + blank + '.';
+  // A fill sentence usually ends in its blank, so the plain prompt gets one
+  // appended. Where the gap is somewhere else — Unit 10's 이 식당은 __이/가
+  // 좋아서… — the prompt marks it with {} instead.
+  const stem = String(item.stemKo || '');
+  if (stem.indexOf('{}') >= 0) {
+    const parts = stem.split('{}');
+    return vbEsc(parts[0] || '') + blank + vbEsc(parts.slice(1).join('') || '');
+  }
+  return vbEsc(stem) + ' ' + blank + '.';
 }
 
 // The book records these drills and a drill is meant to be heard, so an exercise
@@ -2771,9 +2774,6 @@ function renderWorkbook() {
         '<span class="wb-example-tag">[보기]</span> ' +
         wbLineHtml(ex, ex.example, filled,
           { plain: true, second: ex.example.answer2Ko || '' }) +
-        (ex.type === 'dialogue'
-          ? '<div class="wb-dlg reply"><span class="wb-spk">B</span>' + vbEsc(ex.reply || '') + '</div>'
-          : '') +
         '<div class="wb-example-en">' + vbEsc(ex.example.en || '') + '</div>';
       // The worked example is the one place the finished Korean is already on
       // screen, so hearing it gives nothing away.

@@ -66,18 +66,24 @@ function cleanImg(v, where) {
   return src;
 }
 
+// A box entry is either one piece of text, or two: the dictionary form the box
+// shows and the form the sentence actually needs. Which of the two it is depends
+// on the entry rather than on the exercise type — Unit 14's 어휘 연습 1 needs
+// both on a fill page, and Unit 10's taste adjectives need both on a dialogue.
+// The two forms are stored rather than derived because the conjugation is
+// irregular often enough that deriving it would be guesswork.
 function cleanChip(chip, where, type) {
   const id = str(chip && chip.id);
   if (!id) throw new Error(`${where}: every box entry needs an id`);
   const out = { id };
-  if (type === 'fill') {
-    // The learner picks the dictionary form and the sentence needs the 해요
-    // form. Both are stored because Korean conjugation here is irregular and
-    // deriving one from the other would be guesswork.
-    out.dict = str(chip.dict);
+  const dict = str(chip && chip.dict);
+  if (dict || type === 'fill') {
+    out.dict = dict;
     out.polite = str(chip.polite);
     if (!out.dict) throw new Error(`${where}: ${id} needs a dictionary form`);
-    if (!out.polite) throw new Error(`${where}: ${id} needs the conjugated (해요) form`);
+    if (!out.polite) {
+      throw new Error(`${where}: ${id} needs the form the sentence puts in the blank`);
+    }
   } else {
     out.ko = str(chip.ko);
     if (!out.ko) throw new Error(`${where}: ${id} needs Korean text`);
@@ -102,11 +108,12 @@ function cleanItem(item, i, where, type, chipIds) {
   if (!out.why) throw new Error(`${at}: needs a "why" — the page shows it after checking`);
   if (!out.grammar) throw new Error(`${at}: needs a grammar note`);
   if (type === 'dialogue') {
-    out.aKo = str(item.aKo);
-    if (!out.aKo) throw new Error(`${at}: needs A's line`);
-    if (out.aKo.indexOf('{}') < 0) {
-      throw new Error(`${at}: A's line must contain {} where the answer goes`);
-    }
+    // The same script shape 'build' uses: as many lines as the exchange needs,
+    // each with an optional speaker, and the gap wherever the book puts it. It
+    // used to be one A line plus a reply shared by the whole exercise, which
+    // could not express Unit 10's 연습 2 — there the answer falls in A's line on
+    // some items and B's on others, and B says something different every time.
+    out.lines = cleanLines(item.lines, at, 1);
   } else {
     // A picture can be the prompt on its own — Unit 10 matches a bowl of food to
     // its name, and putting the name on the left as well would answer the row.
@@ -362,11 +369,8 @@ function cleanExercise(ex, i, seenIds) {
     bank: chips,
     items: cleaned
   };
-  if (type === 'dialogue') {
-    out.reply = str(ex.reply);
-    if (!out.reply) throw new Error(`${where}: a dialogue needs B's reply`);
-  }
-  if (ex.example && (str(ex.example.answer) || str(ex.example.stemKo) || str(ex.example.aKo))) {
+  if (ex.example && (str(ex.example.answer) || str(ex.example.stemKo)
+    || (ex.example.lines && ex.example.lines.length))) {
     const answer = str(ex.example.answer);
     if (!chipIds.has(answer)) throw new Error(`${where}: the example answer is not in the box`);
     if (!spentIds.has(answer)) {
@@ -374,10 +378,7 @@ function cleanExercise(ex, i, seenIds) {
     }
     out.example = { answer, en: str(ex.example.en) };
     if (type === 'dialogue') {
-      out.example.aKo = str(ex.example.aKo);
-      if (out.example.aKo.indexOf('{}') < 0) {
-        throw new Error(`${where}: the example's A line must contain {}`);
-      }
+      out.example.lines = cleanLines(ex.example.lines, `${where} example`, 1);
     } else {
       out.example.stemKo = str(ex.example.stemKo);
       if (!out.example.stemKo) throw new Error(`${where}: the example needs its Korean prompt`);

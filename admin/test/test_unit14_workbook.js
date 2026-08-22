@@ -298,25 +298,37 @@ async function runTests() {
       refuses(book, rootDir, 'not in the box', 'fifth question pointing nowhere');
     });
 
-    await test('Refuses a fill entry missing its 해요 form', () => {
+    await test('Refuses a two-form entry missing the form that goes in the blank', () => {
       const book = clone();
       const ex = book.exercises.find((e) => e.type === 'fill');
       delete ex.bank[1].polite;
-      refuses(book, rootDir, 'conjugated', 'fill entry with no polite form');
+      refuses(book, rootDir, 'the form the sentence puts in the blank',
+        'fill entry with only its dictionary form');
+      // Two forms are a property of the entry, not of the exercise type: Unit
+      // 10's taste adjectives need both on a dialogue page.
+      const dlg = clone();
+      const d = dlg.exercises.find((e) => e.type === 'dialogue');
+      d.bank[0] = { id: d.bank[0].id, dict: '짜다' };
+      refuses(dlg, rootDir, 'the form the sentence puts in the blank',
+        'dialogue entry with a dictionary form and nothing else');
     });
 
     await test('Refuses a dialogue line with no {} placeholder', () => {
       const book = clone();
       const ex = book.exercises.find((e) => e.type === 'dialogue');
-      ex.items[0].aKo = '여기는 금연입니다.';
+      ex.items[0].lines = [{ who: 'A', ko: '여기는 금연입니다.' }];
       refuses(book, rootDir, '{}', 'dialogue line with nowhere to put the answer');
+      const two = clone();
+      const t = two.exercises.find((e) => e.type === 'dialogue');
+      t.items[0].lines[1].ko = '아, {} 그래요?';
+      refuses(two, rootDir, '{}', 'two gaps where the box fills one');
     });
 
-    await test('Refuses a dialogue with no reply for B', () => {
+    await test('Refuses a dialogue item with no lines at all', () => {
       const book = clone();
       const ex = book.exercises.find((e) => e.type === 'dialogue');
-      ex.reply = '';
-      refuses(book, rootDir, "reply", 'dialogue missing B');
+      delete ex.items[0].lines;
+      refuses(book, rootDir, 'at least one line', 'dialogue item with nothing to say');
     });
 
     await test('Refuses an unknown exercise type', () => {
