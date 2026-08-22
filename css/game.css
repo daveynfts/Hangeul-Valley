@@ -3070,4 +3070,17 @@
     .lb-table .lb-title-cell { color: #5b3412; }
     .lb-table .lb-val { color: #b45309; font-weight: 800; }
     .lb-row-player { background: #fff3d6; font-weight: bold; border-left: 3px solid #b45309; }
+    /* The board is fetched now, so it has states a hard-coded list never had: loading, offline,
+       not configured, and nobody on it yet. Each one says what happened rather than showing an
+       empty table, which reads as a bug. */
+    .lb-empty {
+      padding: 18px 14px; text-align: center; color: #78350f; line-height: 1.5;
+      background: rgba(255, 251, 235, 0.7); border: 1px dashed rgba(139, 90, 43, 0.45);
+    }
+    /* The break between the top of the board and your own row when you are below it. */
+    .lb-row-gap td {
+      text-align: center; color: #b45309; letter-spacing: 4px; padding: 2px 0;
+      background: rgba(255, 251, 235, 0.5);
+    }
+    .lb-foot { margin-top: 8px; font-size: 11px; color: #8b5a2b; text-align: center; }
 
