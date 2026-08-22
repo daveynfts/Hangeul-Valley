@@ -84,7 +84,7 @@ const EUMHUN_EN = {
   '薦 천거할 천': 'to recommend',
   '午 낮 오': 'noon',                 '子 첫째지 자': 'first zodiac branch (midnight)',
   '季 계절 계': 'season',             '節 마디 절': 'node, section',
-  '氣 기운 기': 'air, energy',        '溫 따뜻할 온': 'warm',
+  '浮 뜰 부': 'to float',              '氣 기운 기': 'air, energy',        '溫 따뜻할 온': 'warm',
   '濕 축축할 습': 'damp',             '度 법도 도': 'degree, measure',
   '運 옮길 운': 'to move, to carry',  '動 움직일 동': 'to move',
   '文 글 문': 'writing, text',        '化 될 화': 'to transform',
@@ -743,6 +743,8 @@ const SINO = {
   '심장': ['心臟', ['心 마음 심', '臟 오장 장']],
   '폐': ['肺', ['肺 허파 폐']],
   '감기': ['感氣', ['感 느낄 감', '氣 기운 기']],
+  '부기': ['浮氣', ['浮 뜰 부', '氣 기운 기']],
+  '수식': ['數式', ['數 셈 수', '式 법 식']],
   '두통': ['頭痛', ['頭 머리 두', '痛 아플 통']],
   '치통': ['齒痛', ['齒 이 치', '痛 아플 통']],
   '복통': ['腹痛', ['腹 배 복', '痛 아플 통']],
@@ -1262,7 +1264,7 @@ const SINO = {
   '가뭄': ['旱', ['旱 마를 한']],
   '지진': ['地震', ['地 땅 지', '震 우레 진']],
   '보전활동': ['保全活動', ['保 지킬 보', '全 온전 전', '活 살 활', '動 움직일 동']],
-  '지속가능': ['持續可能', ['持 가질 지', '續 이을 속', '可 옳을 가', '能 능할 능']],
+  '지속 가능성': ['持續可能性', ['持 가질 지', '續 이을 속', '可 옳을 가', '能 능할 능', '性 성품 성']],
   // Art and literature
   '무용': ['舞踊', ['舞 춤출 무', '踊 뛸 용']],
   '시': ['詩', ['詩 시 시']],
@@ -1489,7 +1491,7 @@ const MIXED = {
   '민속놀이': ['民俗', ['民 백성 민', '俗 풍속 속'], '놀이'],
   '사물놀이': ['四物', ['四 넉 사', '物 물건 물'], '놀이'],
   '교수님': ['敎授', ['敎 가르칠 교', '授 줄 수'], '님'],
-  '신경쓰다': ['神經', ['神 귀신 신', '經 지날 경'], '쓰다'],
+  '신경 쓰다': ['神經', ['神 귀신 신', '經 지날 경'], '쓰다'],
   '초조함': ['焦燥', ['焦 탈 초', '燥 마를 조'], '함'],
   '해양쓰레기': ['海洋', ['海 바다 해', '洋 큰바다 양'], '쓰레기'],
   '이웃사촌': ['四寸', ['四 넉 사', '寸 마디 촌'], '이웃'],
@@ -1533,7 +1535,7 @@ const MIXED_NATIVE = {
   '물약': ['藥', ['藥 약 약'], '물'],
   '보라색': ['色', ['色 빛 색'], '보라'],
   '지난주': ['週', ['週 돌 주'], '지난'],
-  '이번주': ['週', ['週 돌 주'], '이번'],
+  '이번 주': ['週', ['週 돌 주'], '이번'],
   '알권리': ['權利', ['權 권세 권', '利 이로울 리'], '알'],
 };
 
@@ -1559,7 +1561,7 @@ const NATIVE_NOTE = {
 const NATIVE_SET = [
   // Body
   '머리', '눈', '코', '입', '귀', '얼굴', '목', '어깨', '팔', '손', '손가락', '가슴', '배',
-  '허리', '다리', '발', '발가락', '콧물', '붓기', '기침', '흉터',
+  '허리', '다리', '발', '발가락', '콧물', '기침', '흉터',
   // Position and direction
   '앞', '뒤', '위', '아래', '옆', '사이', '안', '밖', '오른쪽', '왼쪽', '구석', '모퉁이',
   // Weather and seasons
@@ -1596,7 +1598,7 @@ const NATIVE_SET = [
   '차갑다', '비싸다', '싸다', '아쉽다', '외롭다', '두렵다', '무섭다', '착하다',
   '덤벙대다', '까다롭다', '설레다', '벅차다', '보람차다', '갈아타다', '쓸다', '닦다',
   '손님', '젓가락', '숟가락', '접시', '쓴맛', '버릇', '집안일', '동네', '놀이터',
-  '햇빛', '알림', '나눔', '존댓말', '반말', '절', '지난달', '이번달',
+  '햇빛', '알림', '나눔', '존댓말', '반말', '절', '지난달', '이번 달',
   '그림 그리기', '숲 가꾸기', '산불', '설날',
   // Native 하다 adjectives — the old suffix heuristic labelled every X하다 a Sino-Korean
   // verb, so 시원하다 / 달콤하다 / 꼼꼼하다 told the learner "하다 attaches to a Sino root"
@@ -1617,13 +1619,13 @@ const LOANWORDS = {
   // which is why its English gloss ("pain relief patch") looks nothing like the Korean.
   '인턴': 'intern',           '커리큘럼': 'curriculum',   '파스': 'pas (adhesive pain patch, via Japanese)',
   '헬스': 'health (gym)',      '스키': 'ski',             '캠핑': 'camping',
-  '보너스': 'bonus',          '펜션': 'pension (holiday cottage)', '프론트': 'front (reception desk)',
+  '보너스': 'bonus',          '펜션': 'pension (holiday cottage)', '프런트': 'front (reception desk)',
   '렌터카': 'rent-a-car',      '빌라': 'villa',           '원룸': 'one-room (studio flat)',
   '에어컨': 'air conditioner', '이슈': 'issue',           '마케팅': 'marketing',
   // Fourth pass.
   '아파트': 'apart(ment)',     '오피스텔': 'office + hotel (Korean coinage)',
   '소파': 'sofa',             '보일러': 'boiler',        '베란다': 'veranda',
-  '도어락': 'door lock',       '로봇': 'robot',           '드론': 'drone',
+  '도어록': 'door lock',       '로봇': 'robot',           '드론': 'drone',
   '디지털': 'digital',         '센서': 'sensor',          '트라우마': 'trauma',
   '피드백': 'feedback',        '해킹': 'hacking',         '다운로드': 'download',
   '뮤지컬': 'musical',         '가이드': 'guide',         '유네스코': 'UNESCO',
@@ -1702,7 +1704,7 @@ const NATIVE_PREDICATES = {
   '만나다': 'native verb stem in -나다',
   '신나다': 'native verb stem in -나다 (spirit rising)',
   '화나다': '화 (anger) + native -나다',
-  '짜증나다': '짜증 (irritation) + native -나다',
+  '짜증 나다': '짜증 (irritation) + native -나다',
   '네모나다': '네모 (four corners) + native -나다',
   '세모나다': '세모 (three corners) + native -나다',
   '헤어지다': 'native verb stem in -지다',
@@ -1742,7 +1744,7 @@ const IDIOMS = {
   '가슴을 치다': 'literally "to strike the chest" — to beat one\'s breast in grief',
   '눈이 높다': 'literally "the eyes are high" — to have exacting standards',
   '콧대가 높다': 'literally "the bridge of the nose is high" — haughty',
-  '가슴이 치밀다': 'literally "the chest surges" — emotion welling up',
+  '가슴이 벅차다': 'literally "the chest is full" — overwhelmed with emotion',
   '길을 찾다': 'literally "to look for the road" — to find one\'s way',
   '길을 잃다': 'literally "to lose the road" — to get lost',
   '눈길을 끌다': 'literally "to pull the gaze" — to catch the eye',
@@ -1773,7 +1775,7 @@ const IDIOMS = {
 const DISCOURSE = {
   '그러므로': 'native connective — 그러하다 + -므로 (because it is so)',
   '따라서': 'native connective — 따르다 (to follow) + -아서',
-  '이에따라': 'native connective — 이에 (to this) + 따라 (following)',
+  '이에 따라': 'native connective — 이에 (to this) + 따라 (following)',
   '잇따라': 'native connective — 잇다 (to join) + 따라',
   '왜냐하면': 'native connective — 왜 (why) + -냐 하면 (if one asks)',
   '그럼에도 불구하고': 'native + Sino — 그럼에도 (even so) + 不拘하고 (without regard)',
@@ -1782,22 +1784,22 @@ const DISCOURSE = {
   '다른 한편으로는': '다른 (other) + 한편 + -으로는',
   '바꾸어 말하면': 'native — 바꾸다 (to change) + 말하다 (to say) + -면',
   '말하자면': 'native — 말하다 + -자면 (if one is to say)',
-  '들자면': 'native — 들다 (to raise, cite) + -자면',
+  '예를 들자면': '例 (example) + 를 + 들다 (to cite) + -자면',
   '비유하자면': '比喩 (analogy) + 하자면',
   '정리하자면': '整理 (to order) + 하자면',
   '요약하자면': '要約 (to summarise) + 하자면',
   '요약하건대': '要約 + -하건대 (in so summarising)',
   '다음으로': 'native — 다음 (next) + -으로',
   '끝으로': 'native — 끝 (end) + -으로',
-  '다음주': 'native 다음 (next) + 週 (week)',
-  '다음달': 'native 다음 (next) + 달 (month)',
+  '다음 주': 'native 다음 (next) + 週 (week)',
+  '다음 달': 'native 다음 (next) + 달 (month)',
   '드디어': 'native adverb 드디어 (at last)',
   '도리어': 'native adverb 도리어 (on the contrary)',
   // Fourth pass.
   '요컨대': '要 (essential) + -컨대 — "if one takes the essentials"',
   '예컨대': '例 (example) + -컨대 — "if one takes an example"',
   '한마디로': 'native — 한 (one) + 마디 (word, joint) + -로',
-  '다시말해': 'native — 다시 (again) + 말하다 (to say)',
+  '다시 말해': 'native — 다시 (again) + 말하다 (to say)',
   '종래에는': '從來 (up to now) + 에는',
   '총괄하여': '總括 (to sum up) + 하여',
   '통틀어': 'native — 통 (whole) + 틀다 (to turn), taken all together',
@@ -1818,11 +1820,11 @@ const DISCOURSE = {
   '덧붙여': 'native — 덧 (in addition) + 붙이다 (to attach)',
   '반면에': '反面 (the reverse side) + 에',
   '그리하여': 'native — 그리하다 (to do so) + -여',
-  '그로인해': '그로 (by that) + 因 (cause) + 해',
+  '그로 인해': '그로 (by that) + 因 (cause) + 해',
   '그렇다면': 'native — 그렇다 (to be so) + -면',
-  '그결과': '그 (that) + 結果 (result)',
+  '그 결과': '그 (that) + 結果 (result)',
   '설날': 'native — 설 (new year) + 날 (day)',
-  '이번주': '이번 (this time) + 週 (week)',
+  '이번 주': '이번 (this time) + 週 (week)',
 };
 
 // Multi-syllable loanwords that appear inside compounds, longest first, so a compound such
