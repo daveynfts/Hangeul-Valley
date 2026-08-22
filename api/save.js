@@ -1,40 +1,8 @@
 const { GetObjectCommand, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { r2Client, r2Bucket, saveKey, setCors, verifyGoogleIdToken, readBearer } = require('./_r2');
+const { stampSave, trustedStamp } = require('./_stamp');
 
 const SAVE_BODY_MAX = 256 * 1024;
-
-// How far ahead of the server's own clock a client stamp is allowed to be. Wide enough to
-// absorb ordinary drift and the flight time of the request, narrow enough that a wrong
-// device clock cannot park the save in the future. See stampSave below.
-const CLOCK_SKEW_MAX = 5 * 60 * 1000;
-
-// updatedAt decides which copy wins, both in the staleness check below and in the client's
-// syncCloudSave. It arrives from the client, so a device whose clock is set years ahead used
-// to be able to write a timestamp no honest save could ever beat: every later PUT 409'd, and
-// on each load the client saw the remote as newer and pulled that stale copy back over the
-// player's real progress. One bad clock pinned the account permanently.
-//
-// stampSave is what gets written: a stamp that cannot be true is replaced by server time
-// rather than rejected, because the save itself is still good and refusing it would strand a
-// player behind a clock they may not know is wrong.
-function stampSave(value, now) {
-  if (!isPlausibleStamp(value, now)) return now;
-  return value;
-}
-
-// trustedStamp is what the staleness comparison reads. Here an impossible stamp has to score
-// zero, not `now` — clamping it up would outrank the timestamp the client just sent and keep
-// rejecting honest writes forever, which is the exact failure this is meant to clear.
-function trustedStamp(value, now) {
-  return isPlausibleStamp(value, now) ? value : 0;
-}
-
-function isPlausibleStamp(value, now) {
-  return typeof value === 'number'
-    && Number.isFinite(value)
-    && value >= 0
-    && value <= now + CLOCK_SKEW_MAX;
-}
 
 async function readBody(req) {
   if (req.body && typeof req.body === 'object') {
@@ -183,9 +151,3 @@ module.exports = async (req, res) => {
     res.status(500).json({ error: 'save failed' });
   }
 };
-
-// Hung off the handler so the stamp rules can be tested without a bucket or a signed token.
-// Vercel only ever calls the default export, so the extra properties are inert in production.
-module.exports.stampSave = stampSave;
-module.exports.trustedStamp = trustedStamp;
-module.exports.CLOCK_SKEW_MAX = CLOCK_SKEW_MAX;

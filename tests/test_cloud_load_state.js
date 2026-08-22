@@ -251,11 +251,13 @@ eq(R(`playerLocked`), false, 'so there is no empty overlay to be trapped behind'
 sb.__levels = realLevels;
 R(`levelsData = __levels;`);
 
-// ── 4. api/save.js timestamp rules ───────────────────────────────────────────
-console.log('\n--- 4. api/save.js timestamp rules ---');
+// ── 4. api/_stamp.js timestamp rules ─────────────────────────────────────────
+console.log('\n--- 4. api/_stamp.js timestamp rules ---');
 
-const saveApi = require(path.join('..', 'api', 'save.js'));
-const { stampSave, trustedStamp, CLOCK_SKEW_MAX } = saveApi;
+// api/_stamp.js, not api/save.js: the handler requires the AWS SDK on its first line, and the
+// CI `test` job has no npm install step, so requiring it here failed with MODULE_NOT_FOUND on
+// CI while passing locally. Anything tests/ pulls in has to be dependency-free.
+const { stampSave, trustedStamp, CLOCK_SKEW_MAX } = require(path.join('..', 'api', '_stamp.js'));
 const NOW = 1_700_000_000_000;
 
 eq(stampSave(NOW - 5000, NOW), NOW - 5000, 'an ordinary client stamp is written as sent');
