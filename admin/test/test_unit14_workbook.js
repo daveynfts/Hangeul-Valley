@@ -188,6 +188,25 @@ async function runTests() {
         b.exercises.find((e) => e.id === drill.id).audio = { src: bad };
         refuses(b, rootDir, 'audio src must be a path under audio/', 'audio src "' + bad + '"');
       });
+      // askEnd is what keeps a row from reading its own answer out, so a value
+      // that cannot mean a number of seconds has to be refused rather than
+      // quietly dropped — dropping it plays the whole clip.
+      const item = book.exercises.find((e) => e.id === 'u14-pattern-1').items[0];
+      assert(item.audio && item.audio.askEnd > 0, 'an item clip knows where its prompt ends');
+      [0, -1, 'soon', NaN].forEach((bad) => {
+        const b = clone();
+        b.exercises.find((e) => e.id === 'u14-pattern-1').items[0].audio.askEnd = bad;
+        refuses(b, rootDir, 'askEnd must be a positive number', 'askEnd "' + bad + '"');
+      });
+      // Absent is fine: it means play the whole clip.
+      const noEnd = clone();
+      delete noEnd.exercises.find((e) => e.id === 'u14-pattern-1').items[0].audio.askEnd;
+      workbookLib.saveWorkbook(noEnd, rootDir);
+      assert(!workbookLib.getWorkbook(rootDir).exercises
+        .find((e) => e.id === 'u14-pattern-1').items[0].audio.askEnd,
+        'an item clip without askEnd stores none');
+      workbookLib.saveWorkbook(clone(), rootDir);
+
       // No audio at all is the normal case and must stay silent, not throw.
       const none = clone();
       delete none.exercises.find((e) => e.id === drill.id).audio;

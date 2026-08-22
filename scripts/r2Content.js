@@ -34,11 +34,7 @@ const STATIC_FILES = [
   ['worlds/unit10-layout.json', 'application/json'],
   ['sprites/catalog.json', 'application/json'],
   ['skins/catalog.json', 'application/json'],
-  ['diner/content.json', 'application/json'],
-  ['audio/book/2b-u14-pattern-1.mp3', 'audio/mpeg'],
-  ['audio/book/2b-u14-pattern-2.mp3', 'audio/mpeg'],
-  ['audio/book/2b-u14-pattern-3.mp3', 'audio/mpeg'],
-  ['audio/book/2b-u14-pattern-4.mp3', 'audio/mpeg']
+  ['diner/content.json', 'application/json']
 ];
 
 function loadEnvFile(file) {
@@ -139,6 +135,25 @@ function collectUploadFiles(root) {
 
   const { listLocalTtsFiles } = require('./ttsClips');
   listLocalTtsFiles(base).forEach((rel) => addFile(out, seen, rel, 'audio/mpeg'));
+
+  // The workbook names its own recordings, so it decides which get uploaded
+  // rather than a hand-kept list beside it. /audio/* is rewritten to the CDN, so
+  // a clip the content names but the batch omits is a play button that does
+  // nothing on the deployed site — and that failure is silent.
+  const workbook = path.join(base, 'worlds', 'unit14-workbook.json');
+  if (fs.existsSync(workbook)) {
+    const book = JSON.parse(fs.readFileSync(workbook, 'utf8'));
+    const take = (a) => {
+      const src = a && typeof a.src === 'string' ? a.src : '';
+      if (!/^audio\/[A-Za-z0-9._/-]+\.mp3$/.test(src) || src.indexOf('..') >= 0) return;
+      addFile(out, seen, src, 'audio/mpeg');
+    };
+    (book.exercises || []).forEach((ex) => {
+      take(ex.audio);
+      (ex.items || []).forEach((it) => take(it.audio));
+      if (ex.example) take(ex.example.audio);
+    });
+  }
 
   return out;
 }
