@@ -378,6 +378,2574 @@
           "stemKo": "이 식당은 {} 편리해요. 지하철역에서 걸어서 5분 걸려요."
         }
       ]
+    },
+    {
+      "id": "u10-grammar-1-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 1",
+      "icon": "🥇",
+      "blurbEn": "Out of this lot, which one wins — and what is “this lot” called?",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "The book photographs the group and leaves the whole phrase blank. There are no photographs here, so the members are named instead — the four fruits in the picture become 사과 · 딸기 · 오렌지 · 포도, and you supply what they add up to. 중에 and 중에서 are both correct, which is what the brackets in the title mean, so the wrong answers are wrong for other reasons: 에서 wants a place, and the noun in front of 중에서 has to be the whole group rather than the one that wins.",
+      "pattern": "N 중에(서)",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "사과 · 딸기 · 오렌지 · 포도",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 뭘 제일 좋아해요?"
+            },
+            {
+              "who": "B",
+              "ko": "저는 딸기를 좋아해요."
+            }
+          ],
+          "answer": "gwail_jung",
+          "choices": [
+            {
+              "id": "gwail_jung",
+              "ko": "과일 중에서"
+            },
+            {
+              "id": "gwail_eseo",
+              "ko": "과일에서"
+            },
+            {
+              "id": "ddalgi_jung",
+              "ko": "딸기 중에서"
+            }
+          ],
+          "en": "A: Which fruit do you like best? — B: I like strawberries.",
+          "why": "B answers 딸기, and 딸기 is one of the four in the picture — so the group being asked about is what all four have in common: 과일. Ask 딸기 중에서 and you have asked which strawberry, out of one strawberry.",
+          "grammar": "N 중에서 marks the set you are choosing from and 뭘 is what you pick out of it. 과일에서 would make the fruit a place — 에서 is for 서울에서, 학교에서, somewhere you can actually be."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "김치찌개 · 비빔밥 · 냉면 · 불고기",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 뭐가 제일 맛있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "불고기가 제일 맛있어요."
+            }
+          ],
+          "answer": "eumsik_jung",
+          "choices": [
+            {
+              "id": "eumsik_jung",
+              "ko": "음식 중에서"
+            },
+            {
+              "id": "eumsik_eseo",
+              "ko": "음식에서"
+            },
+            {
+              "id": "bulgogi_jung",
+              "ko": "불고기 중에서"
+            }
+          ],
+          "en": "A: Which food tastes best? — B: Bulgogi does.",
+          "why": "Four dishes, and B picks one of them. What the four have in common is that they are all 음식, so that is the group. Note 뭐가 rather than 뭘: 맛있다 takes no object, so the thing being asked about is the subject of the sentence.",
+          "grammar": "음식 중에서 뭐가 제일 맛있어요 — the set, then the question word, then 제일. 제일 and 가장 are interchangeable here; 가장 is a shade more formal and turns up in writing more often."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "축구 · 농구 · 야구 · 수영",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 뭘 제일 잘해요?"
+            },
+            {
+              "who": "B",
+              "ko": "저는 농구를 잘해요."
+            }
+          ],
+          "answer": "undong_jung",
+          "choices": [
+            {
+              "id": "undong_jung",
+              "ko": "운동 중에서"
+            },
+            {
+              "id": "undong_eseo",
+              "ko": "운동에서"
+            },
+            {
+              "id": "nonggu_jung",
+              "ko": "농구 중에서"
+            }
+          ],
+          "en": "A: Which sport are you best at? — B: I’m good at basketball.",
+          "why": "Football, basketball, baseball, swimming — B answers with 농구, one of them, so the set is 운동. 잘해요 is 잘 + 해요, and what you are good at takes 를/을: 농구를 잘해요.",
+          "grammar": "운동 중에서 뭘 제일 잘해요. 뭘 is 무엇을 shortened, which is why it fits a verb that takes an object. 운동에서 would be reaching for the place particle on something that is not a place."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "민수 · 아키라 · 켈리",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 누가 제일 한국말을 잘해요?"
+            },
+            {
+              "who": "B",
+              "ko": "아키라 씨가 제일 잘해요."
+            }
+          ],
+          "answer": "haksaeng_jung",
+          "choices": [
+            {
+              "id": "haksaeng_jung",
+              "ko": "우리 반 학생 중에서"
+            },
+            {
+              "id": "haksaeng_eseo",
+              "ko": "우리 반 학생에서"
+            },
+            {
+              "id": "akira_jung",
+              "ko": "아키라 씨 중에서"
+            }
+          ],
+          "en": "A: Who speaks Korean best in our class? — B: Akira does.",
+          "why": "The three names are the classmates in the picture, so the group is 우리 반 학생 — the students of our class. And 누가 rather than 뭘, because the answer is a person.",
+          "grammar": "The group can be a whole phrase, not just one noun: 우리 반 학생 중에서. 우리 반에서 would also be good Korean — that is the class taken as a place, and it is what 연습 2 asks for — but 우리 반 학생에서 is neither, because 학생 is not somewhere you can be."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "1월 · 2월 · 3월 … 12월",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 몇 월이 제일 더워요?"
+            },
+            {
+              "who": "B",
+              "ko": "8월이 제일 더워요."
+            }
+          ],
+          "answer": "ilnyeon_jung",
+          "choices": [
+            {
+              "id": "ilnyeon_jung",
+              "ko": "1년 중에서"
+            },
+            {
+              "id": "ilnyeon_eseo",
+              "ko": "1년에서"
+            },
+            {
+              "id": "palwol_jung",
+              "ko": "8월 중에서"
+            }
+          ],
+          "en": "A: Which month of the year is the hottest? — B: August is.",
+          "why": "The chart in the book plots twelve months and B picks one of them, so the set the twelve add up to is 1년 — the year itself. 몇 월 asks which month, and the answer names it with a Sino-Korean number: 8월, 팔월.",
+          "grammar": "Stretches of time behave like anything else countable: 하루 중에서, 일주일 중에서, 1년 중에서. 1년에서 is not Korean for this — 에서 on a length of time only works in a range, 1년에서 2년까지."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "민수 씨 가족 사진",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "민수 씨 {} 누가 제일 키가 커요?"
+          },
+          {
+            "who": "B",
+            "ko": "동생이 제일 커요."
+          }
+        ],
+        "answerKo": "가족 중에서",
+        "en": "A: Who is the tallest in your family, Minsu? — B: My younger sibling is."
+      }
+    },
+    {
+      "id": "u10-grammar-1-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 2",
+      "icon": "🗺️",
+      "blurbEn": "Now you ask the question: the place takes 에서, and the adjective bends.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "Here the book has you write A’s whole question out of a place and an adjective — 서울 / 크다 becomes 서울에서 제일 큰 시장이 어디예요? Two decisions are left to you and the fixed words are printed: which particle the place takes, and what shape the adjective goes into in front of a noun. 중에서 is wrong on every row here, and that is why the two 연습 sit side by side — a group of things takes 중에서, a place you look inside takes 에서.",
+      "pattern": "N 중에(서)",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "세계 / 높다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 제일 {} 산이 어디예요?"
+            },
+            {
+              "who": "B",
+              "ko": "에베레스트 산이 제일 높아요."
+            }
+          ],
+          "answer": "segye_eseo",
+          "choices": [
+            {
+              "id": "segye_eseo",
+              "ko": "세계에서"
+            },
+            {
+              "id": "segye_jung",
+              "ko": "세계 중에서"
+            },
+            {
+              "id": "segye_e",
+              "ko": "세계에"
+            }
+          ],
+          "answer2": "nopeun",
+          "choices2": [
+            {
+              "id": "nopeun",
+              "ko": "높은"
+            },
+            {
+              "id": "nopneun",
+              "ko": "높는"
+            },
+            {
+              "id": "nopi",
+              "ko": "높이"
+            }
+          ],
+          "en": "A: Which is the highest mountain in the world? — B: Mount Everest is.",
+          "why": "The label hands you 세계 and 높다 and B names the mountain; the question is the part missing. 세계 is a place — the world — so it takes 에서, and the question ends 어디예요 even though the answer comes back as a name.",
+          "grammar": "높다 is an adjective, so in front of a noun it takes -(으)ㄴ: 높 + 은 = 높은. 높는 is the -는 that verbs take and an adjective never does, and 높이 is the adverb, high up."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "한국 / 크다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 제일 {} 섬이 어디예요?"
+            },
+            {
+              "who": "B",
+              "ko": "제주도가 가장 큰 섬이에요."
+            }
+          ],
+          "answer": "hanguk_eseo",
+          "choices": [
+            {
+              "id": "hanguk_eseo",
+              "ko": "한국에서"
+            },
+            {
+              "id": "hanguk_jung",
+              "ko": "한국 중에서"
+            },
+            {
+              "id": "hanguk_e",
+              "ko": "한국에"
+            }
+          ],
+          "answer2": "keun",
+          "choices2": [
+            {
+              "id": "keun",
+              "ko": "큰"
+            },
+            {
+              "id": "keueun",
+              "ko": "크은"
+            },
+            {
+              "id": "keuneun",
+              "ko": "크는"
+            }
+          ],
+          "en": "A: Which is the biggest island in Korea? — B: Jeju is the biggest island.",
+          "why": "B says 가장 큰 섬이에요 and hands you the answer’s shape while doing it — 가장 is 제일 in other words. So A asked which island is biggest, and 한국 is where to look for it.",
+          "grammar": "크다 → 큰. The stem 크 ends in a vowel, so the ending is a bare ㄴ tucked underneath rather than 은: 크 + ㄴ = 큰. 크은 spells out an 으 that a vowel stem never takes, and 크는 is again the verb ending."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "서울 / 복잡하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 제일 {} 곳이 어디예요?"
+            },
+            {
+              "who": "B",
+              "ko": "강남 근처가 제일 복잡한 것 같아요."
+            }
+          ],
+          "answer": "seoul_eseo",
+          "choices": [
+            {
+              "id": "seoul_eseo",
+              "ko": "서울에서"
+            },
+            {
+              "id": "seoul_jung",
+              "ko": "서울 중에서"
+            },
+            {
+              "id": "seoul_e",
+              "ko": "서울에"
+            }
+          ],
+          "answer2": "bokjaphan",
+          "choices2": [
+            {
+              "id": "bokjaphan",
+              "ko": "복잡한"
+            },
+            {
+              "id": "bokjaphaneun",
+              "ko": "복잡하는"
+            },
+            {
+              "id": "bokjaphaeyo",
+              "ko": "복잡해요"
+            }
+          ],
+          "en": "A: Which is the most crowded part of Seoul? — B: Somewhere around Gangnam, I’d say.",
+          "why": "B hedges with -(으)ㄴ 것 같아요 — it seems to be — instead of naming it flatly, which is what you do when you are not certain. 곳 is the general word for a place, and it is what the question needs when the answer is an area rather than one building.",
+          "grammar": "복잡하다 → 복잡한. Every 하다 adjective goes this way: 하 + ㄴ = 한. 복잡하는 is the verb ending again, and 복잡해요 is the finished 해요 form, which can end a sentence but cannot sit in front of a noun."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "학교 근처 / 맛있다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 제일 {} 식당이 어디예요?"
+            },
+            {
+              "who": "B",
+              "ko": "서울식당이 제일 맛있어요."
+            }
+          ],
+          "answer": "geuncheo_eseo",
+          "choices": [
+            {
+              "id": "geuncheo_eseo",
+              "ko": "학교 근처에서"
+            },
+            {
+              "id": "geuncheo_jung",
+              "ko": "학교 근처 중에서"
+            },
+            {
+              "id": "geuncheo_e",
+              "ko": "학교 근처에"
+            }
+          ],
+          "answer2": "masinneun",
+          "choices2": [
+            {
+              "id": "masinneun",
+              "ko": "맛있는"
+            },
+            {
+              "id": "masiseun",
+              "ko": "맛있은"
+            },
+            {
+              "id": "masitda",
+              "ko": "맛있다"
+            }
+          ],
+          "en": "A: Which restaurant near the school is the best? — B: Seoul Restaurant is.",
+          "why": "학교 근처 is a place built out of two nouns — the school, and the area around it — and it takes 에서 as one unit. B answers with a name, 서울식당, the sort of 맛집 this whole unit is about.",
+          "grammar": "맛있다 → 맛있는, and this is the one worth memorising: it is an adjective, but it is built on 있다, and 있다 takes -는 in front of a noun. 맛있은 is the regular adjective ending and it is wrong here. Same for 맛없다 → 맛없는 and 재미있다 → 재미있는."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "우리 반 / 인기가 많다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 제일 {} 사람이 누구예요?"
+            },
+            {
+              "who": "B",
+              "ko": "글쎄요, 켈리 씨인 것 같아요."
+            }
+          ],
+          "answer": "uriban_eseo",
+          "choices": [
+            {
+              "id": "uriban_eseo",
+              "ko": "우리 반에서"
+            },
+            {
+              "id": "uriban_jung",
+              "ko": "우리 반 중에서"
+            },
+            {
+              "id": "uriban_e",
+              "ko": "우리 반에"
+            }
+          ],
+          "answer2": "ingi_manheun",
+          "choices2": [
+            {
+              "id": "ingi_manheun",
+              "ko": "인기가 많은"
+            },
+            {
+              "id": "ingi_manneun",
+              "ko": "인기가 많는"
+            },
+            {
+              "id": "ingi_mani",
+              "ko": "인기가 많이"
+            }
+          ],
+          "en": "A: Who is the most popular person in our class? — B: Hmm, Kelly, I think.",
+          "why": "글쎄요 buys a moment before an answer you are not sure of, and 것 같아요 finishes the hedge — both are all over this unit. The question ends 누구예요 rather than 어디예요, because this is the one row whose answer is a person.",
+          "grammar": "많다 → 많은, a plain adjective, and 많이 is its adverb. The place is 우리 반에서 and not 우리 반 중에서: 중에서 picks out of a set of things, and 반 is one class rather than several. 연습 1 put the students in the set instead — 우리 반 학생 중에서 — which is the same idea from the other side."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "서울 / 크다",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "{} 제일 {} 시장이 어디예요?"
+          },
+          {
+            "who": "B",
+            "ko": "남대문시장이 가장 커요."
+          }
+        ],
+        "answerKo": "서울에서",
+        "answer2Ko": "큰",
+        "en": "A: Which is the biggest market in Seoul? — B: Namdaemun Market is the biggest."
+      }
+    },
+    {
+      "id": "u10-grammar-2-1",
+      "type": "dialogue",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 1",
+      "icon": "👤",
+      "blurbEn": "I and you, in 반말 — and 나 changes shape depending on what follows.",
+      "instructionKo": "[보기]와 같이 빈칸에 알맞은 단어를 골라 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue using the word from the box as shown in the example.",
+      "noteEn": "Twelve words in the box, six blanks and the worked example — so half the box is never used, exactly as the book prints it. The whole page turns on two shape changes: 나 becomes 내 in front of 가 and in front of whatever it owns, and 너 becomes 네 in the same two places. Everywhere else — 는, 를, 도, 한테 — they keep their own shape.",
+      "pattern": "반말",
+      "bank": [
+        {
+          "id": "naega",
+          "ko": "내가",
+          "usedByExample": true
+        },
+        {
+          "id": "naneun",
+          "ko": "나는"
+        },
+        {
+          "id": "nareul",
+          "ko": "나를"
+        },
+        {
+          "id": "nado",
+          "ko": "나도"
+        },
+        {
+          "id": "nahante",
+          "ko": "나한테"
+        },
+        {
+          "id": "nae",
+          "ko": "내"
+        },
+        {
+          "id": "nega",
+          "ko": "네가"
+        },
+        {
+          "id": "neoneun",
+          "ko": "너는"
+        },
+        {
+          "id": "neoreul",
+          "ko": "너를"
+        },
+        {
+          "id": "neodo",
+          "ko": "너도"
+        },
+        {
+          "id": "neohante",
+          "ko": "너한테"
+        },
+        {
+          "id": "ne",
+          "ko": "네"
+        }
+      ],
+      "items": [
+        {
+          "n": 1,
+          "answer": "nahante",
+          "en": "A: Call me when class finishes. — B: Sure, I’ll call.",
+          "why": "A is the one asking to be called, so the call comes to A — 나한테. B agrees with 그래 and -(으)ㄹ게, which is the ending for promising to do something because the other person wants it.",
+          "grammar": "나 + 한테. 한테 is the spoken word for to a person; 에게 is its written twin and 께 the honorific one. 나 keeps its own shape here — it only turns into 내 in front of 가 or a noun.",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "수업 끝나면 {} 전화해."
+            },
+            {
+              "who": "B",
+              "ko": "그래, 전화할게."
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "answer": "naneun",
+          "en": "A: Let’s have lunch together. — B: I’ve already eaten, though.",
+          "why": "B turns the invitation down by contrasting themselves with A: 나는, as for me. The sentence stops at -는데 rather than finishing, and that unfinished feel is what makes it a soft refusal instead of a flat no.",
+          "grammar": "나 + 는, the topic particle. 내는 does not exist — 내 is 나 + 가 or 나 followed by what it owns, and nothing else.",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "같이 점심 먹자."
+            },
+            {
+              "who": "B",
+              "ko": "{} 벌써 먹었는데."
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "answer": "nae",
+          "en": "A: Whose book is this? — B: Oh, that’s my book.",
+          "why": "누구 책 asks whose, so the answer has to name an owner. Watch 이거 and 그거 as well: the book is by A, so A calls it 이거, this one, and B calls it 그거, that one by you.",
+          "grammar": "나 + 의 contracts to 내, and that is the form that stands in front of the thing owned: 내 책, 내 친구, 내 생일. 저 does the same in 존댓말 — 제 책.",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이거 누구 책이야?"
+            },
+            {
+              "who": "B",
+              "ko": "아, 그거 {} 책이야."
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "answer": "neohante",
+          "en": "A: I called you earlier — you didn’t know? — B: Did you? I left my phone at home today.",
+          "why": "This is item 1 the other way round: A did the calling and B was called, so it is 너한테. A’s line already contains 내가, which is the shape 나 takes in front of 가 — the pair is worth reading together.",
+          "grammar": "너 + 한테. Like 나, 너 keeps its own shape in front of 한테; it becomes 네 only in front of 가 or a noun it owns.",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "아까 내가 {} 전화했는데 몰랐어?"
+            },
+            {
+              "who": "B",
+              "ko": "그랬어? 오늘 휴대폰을 집에 놓고 왔어."
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "answer": "ne",
+          "en": "A: Is this yours? — B: Yes, it’s mine.",
+          "why": "B claims it with 내 거, mine, so what A asked about was 네 거, yours. 거 is 것 worn down in speech, so 네 거 is literally your thing.",
+          "grammar": "너 + 의 → 네. And here is the trap: this 네 is spelled exactly like the 네 that means yes. Speakers pronounce it 니 to keep them apart — which is also why 네가 comes out as 니가 — but 네 is what gets written.",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이거 {} 거야?"
+            },
+            {
+              "who": "B",
+              "ko": "응, 내 거야."
+            }
+          ]
+        },
+        {
+          "n": 6,
+          "answer": "nado",
+          "en": "A: It’s Nana’s birthday, so I’m going over to hers tonight. You’re coming too, right? — B: Yes, I’m coming too.",
+          "why": "A ends with 너도 — you too — and B answers with the same particle pointed back: 나도. A’s -지? is asking for confirmation of something already taken for granted, so all B has to do is agree.",
+          "grammar": "나 + 도. 도 replaces 은/는 and 이/가 rather than stacking on top of them: 나도 갈 거야, never 나는도 or 내가도.",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 나나 생일이라서 저녁에 나나 집에 갈 거야. 너도 갈 거지?"
+            },
+            {
+              "who": "B",
+              "ko": "응, {} 갈 거야."
+            }
+          ]
+        }
+      ],
+      "example": {
+        "answer": "naega",
+        "en": "A: I don’t really get the grammar we did today. — B: I’ll teach you.",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "오늘 배운 문법을 잘 모르겠어."
+          },
+          {
+            "who": "B",
+            "ko": "{} 가르쳐 줄게."
+          }
+        ]
+      }
+    },
+    {
+      "id": "u10-grammar-2-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 2",
+      "icon": "✂️",
+      "blurbEn": "Take the 요 off — and find out what was hiding under it.",
+      "instructionKo": "[보기]와 같이 반말로 바꿔 보세요.",
+      "instructionEn": "Change the sentences into 반말 as shown in the example.",
+      "noteEn": "The book gives you a ruled line to write on; here the three forms are offered and one of them is right. Dropping 요 is only the first half of the job. The 아/어 underneath has to be the correct one, 이에요/예요 becomes 이야/야 rather than losing a syllable, -(으)ㄹ까요 and -아/어요 as a suggestion go somewhere else entirely, and 저/제 has to become 나/내 wherever it appears.",
+      "pattern": "반말",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "그 식당은 분위기가 좋아요.",
+          "lines": [
+            {
+              "ko": "→ 그 식당은 분위기가 {}."
+            }
+          ],
+          "answer": "joha",
+          "choices": [
+            {
+              "id": "joha",
+              "ko": "좋아"
+            },
+            {
+              "id": "johayo",
+              "ko": "좋아요"
+            },
+            {
+              "id": "joheo",
+              "ko": "좋어"
+            }
+          ],
+          "en": "That restaurant has a nice atmosphere.",
+          "why": "The gentlest case: 요 comes off and nothing else moves. 분위기 is the word from the 어휘 pages of this unit — the feel of a place rather than its food.",
+          "grammar": "좋아요 → 좋아. Taking 요 off leaves the 아/어 exposed, so it has to be the right one: 좋 has ㅗ in it, so the ending is 아. 좋어 is the same mistake as writing 좋어요."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "냉면이 좀 매워요.",
+          "lines": [
+            {
+              "ko": "→ 냉면이 좀 {}."
+            }
+          ],
+          "answer": "maewo",
+          "choices": [
+            {
+              "id": "maewo",
+              "ko": "매워"
+            },
+            {
+              "id": "maewoyo",
+              "ko": "매워요"
+            },
+            {
+              "id": "maebeo",
+              "ko": "맵어"
+            }
+          ],
+          "en": "The naengmyeon is a bit spicy.",
+          "why": "냉면 and 맵다 are both from this unit’s vocabulary, and 맵다 is one of the two irregulars the 어휘 page drilled. Here the irregularity is already done for you in the polite form — the job is to keep it.",
+          "grammar": "매워요 → 매워. 맵다 is ㅂ-irregular: before a vowel the ㅂ turns into 우, so 맵 + 어 gives 매워. 맵어 is what the rule would give if the ㅂ stayed, and it never does."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "저는 매일 아침 운동을 해요.",
+          "lines": [
+            {
+              "ko": "→ {} 매일 아침 운동을 {}."
+            }
+          ],
+          "answer": "naneun",
+          "choices": [
+            {
+              "id": "naneun",
+              "ko": "나는"
+            },
+            {
+              "id": "jeoneun",
+              "ko": "저는"
+            },
+            {
+              "id": "naeneun",
+              "ko": "내는"
+            }
+          ],
+          "answer2": "hae",
+          "choices2": [
+            {
+              "id": "hae",
+              "ko": "해"
+            },
+            {
+              "id": "haeyo",
+              "ko": "해요"
+            },
+            {
+              "id": "haeo",
+              "ko": "하어"
+            }
+          ],
+          "en": "I exercise every morning.",
+          "why": "Two things change, and the first is easy to forget: 저 is the humble I that belongs with 요, so in 반말 it has to become 나. Leave 저는 in and the sentence is half polite and half not.",
+          "grammar": "저는 → 나는, and 해요 → 해. 하다 takes 여 rather than 아/어, and 하 + 여 contracts to 해 — which is why 하어 is never a step on the way. 내는 does not exist at all: 내 is only 나 + 가 or 나 in front of a noun."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "숙제하고 나서 영화를 볼 거예요.",
+          "lines": [
+            {
+              "ko": "→ 숙제하고 나서 영화를 볼 {}."
+            }
+          ],
+          "answer": "geoya",
+          "choices": [
+            {
+              "id": "geoya",
+              "ko": "거야"
+            },
+            {
+              "id": "geoyeyo",
+              "ko": "거예요"
+            },
+            {
+              "id": "geoye",
+              "ko": "거예"
+            }
+          ],
+          "en": "I’ll watch a film after I finish my homework.",
+          "why": "A plan, stated with -(으)ㄹ 거예요. -고 나서 is what makes the order explicit: the homework is finished first, and only then the film.",
+          "grammar": "거예요 → 거야. This is the one that catches people, because it is not a matter of dropping 요: 거예요 is 거 + 이에요, and 이에요 becomes 이야, which after the vowel of 거 is just 야. 거예 is what dropping 요 alone would leave, and it is not a word."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "시험이 어렵지 않을 거예요.",
+          "lines": [
+            {
+              "ko": "→ 시험이 어렵지 않을 {}."
+            }
+          ],
+          "answer": "geoya5",
+          "choices": [
+            {
+              "id": "geoya5",
+              "ko": "거야"
+            },
+            {
+              "id": "geoyeyo5",
+              "ko": "거예요"
+            },
+            {
+              "id": "geoye5",
+              "ko": "거예"
+            }
+          ],
+          "en": "The exam won’t be difficult.",
+          "why": "The same 거예요 as item 4, but this time it is a guess about the future rather than a plan — -(으)ㄹ 거예요 does both. The negative sits earlier, in 어렵지 않다, and is not touched by the change.",
+          "grammar": "않을 거예요 → 않을 거야. Only the very end of the sentence carries the politeness, so that is the only part that moves — A/V-지 않다 stays exactly as it is."
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "친구가 제 카메라를 잃어버렸어요.",
+          "lines": [
+            {
+              "ko": "→ 친구가 {} 카메라를 {}."
+            }
+          ],
+          "answer": "nae6",
+          "choices": [
+            {
+              "id": "nae6",
+              "ko": "내"
+            },
+            {
+              "id": "je6",
+              "ko": "제"
+            },
+            {
+              "id": "na6",
+              "ko": "나"
+            }
+          ],
+          "answer2": "ireobeoryeosseo",
+          "choices2": [
+            {
+              "id": "ireobeoryeosseo",
+              "ko": "잃어버렸어"
+            },
+            {
+              "id": "ireobeoryeosseoyo",
+              "ko": "잃어버렸어요"
+            },
+            {
+              "id": "ireobeoryeossa",
+              "ko": "잃어버렸아"
+            }
+          ],
+          "en": "A friend lost my camera.",
+          "why": "제 is the humble my, so it goes the same way 저 does: 내. The friend is the subject and the camera the object, which is why 친구 takes 가 and 카메라 takes 를 — the sentence is not about who owns it but about who lost it.",
+          "grammar": "제 → 내, and 잃어버렸어요 → 잃어버렸어. 나 카메라 is wrong for the same reason 저 카메라 is: in front of a noun it owns, 나 has to become 내. And the past marker 았/었 is always followed by 어, never 아."
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "이 옷은 작년에 산 거예요.",
+          "lines": [
+            {
+              "ko": "→ 이 옷은 작년에 산 {}."
+            }
+          ],
+          "answer": "geoya7",
+          "choices": [
+            {
+              "id": "geoya7",
+              "ko": "거야"
+            },
+            {
+              "id": "geoyeyo7",
+              "ko": "거예요"
+            },
+            {
+              "id": "geoye7",
+              "ko": "거예"
+            }
+          ],
+          "en": "These clothes are ones I bought last year.",
+          "why": "거예요 for the third time, and here the 거 is not a plan or a guess but a plain fact: V-(으)ㄴ 거예요 explains what something is. 산 is 사다 in its past modifier form.",
+          "grammar": "산 거예요 → 산 거야. Whatever comes in front of 거 — 볼, 않을, 산 — the ending behaves the same, because the politeness lives in 이에요 and nowhere else."
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "내일은 제 친구 생일이에요.",
+          "lines": [
+            {
+              "ko": "→ 내일은 {} 친구 생일{}."
+            }
+          ],
+          "answer": "nae8",
+          "choices": [
+            {
+              "id": "nae8",
+              "ko": "내"
+            },
+            {
+              "id": "je8",
+              "ko": "제"
+            },
+            {
+              "id": "na8",
+              "ko": "나"
+            }
+          ],
+          "answer2": "iya",
+          "choices2": [
+            {
+              "id": "iya",
+              "ko": "이야"
+            },
+            {
+              "id": "ieyo",
+              "ko": "이에요"
+            },
+            {
+              "id": "ya",
+              "ko": "야"
+            }
+          ],
+          "en": "Tomorrow is my friend’s birthday.",
+          "why": "Two owners in a row — my friend’s birthday — and Korean stacks them without any particle at all: 내 친구 생일. 제 has to go the way 저 does, exactly as in item 6, and then the sentence ends in a noun, which is where the second change lives.",
+          "grammar": "이에요 → 이야, and which of 이야 or 야 you get depends on the noun in front: 생일 ends in a consonant, so it is 생일이야. A noun ending in a vowel takes the bare 야 — 친구야, 나나야."
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "극장에 사람이 정말 많네요.",
+          "lines": [
+            {
+              "ko": "→ 극장에 사람이 정말 {}."
+            }
+          ],
+          "answer": "manne",
+          "choices": [
+            {
+              "id": "manne",
+              "ko": "많네"
+            },
+            {
+              "id": "manneyo",
+              "ko": "많네요"
+            },
+            {
+              "id": "maneune",
+              "ko": "많으네"
+            }
+          ],
+          "en": "There really are a lot of people at the cinema.",
+          "why": "-네요 is the ending for saying out loud what you have only just noticed, and it keeps that job in 반말 — it simply loses its 요. Say 많아 instead and the surprise goes out of the sentence.",
+          "grammar": "많네요 → 많네. -네 attaches straight to the stem with no 으 in between, so 많으네 is one syllable too many. Compare -(으)면 and -(으)ㄹ 거야, which do take the 으 after a consonant."
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "같이 커피 마시러 가요.",
+          "lines": [
+            {
+              "ko": "→ 같이 커피 마시러 {}."
+            }
+          ],
+          "answer": "gaja",
+          "choices": [
+            {
+              "id": "gaja",
+              "ko": "가자"
+            },
+            {
+              "id": "gayo",
+              "ko": "가요"
+            },
+            {
+              "id": "gapsida",
+              "ko": "갑시다"
+            }
+          ],
+          "en": "Let’s go for a coffee together.",
+          "why": "같이 gives it away: this 가요 is not a statement but a suggestion, and a suggestion in 반말 is not 가 but 가자. The English let’s is the giveaway in both languages.",
+          "grammar": "가요 → 가자. -아/어요 does double duty as statement and suggestion, and only the suggestion turns into -자. 갑시다 is the same suggestion in the formal style, so it is moving away from 반말 rather than towards it."
+        },
+        {
+          "n": 11,
+          "art": "",
+          "phraseKo": "도착하면 저한테 전화해 주세요.",
+          "lines": [
+            {
+              "ko": "→ 도착하면 {} 전화해 {}."
+            }
+          ],
+          "answer": "nahante11",
+          "choices": [
+            {
+              "id": "nahante11",
+              "ko": "나한테"
+            },
+            {
+              "id": "jeohante11",
+              "ko": "저한테"
+            },
+            {
+              "id": "naehante11",
+              "ko": "내한테"
+            }
+          ],
+          "answer2": "jwo",
+          "choices2": [
+            {
+              "id": "jwo",
+              "ko": "줘"
+            },
+            {
+              "id": "juseyo",
+              "ko": "주세요"
+            },
+            {
+              "id": "jwoyo",
+              "ko": "줘요"
+            }
+          ],
+          "en": "Call me when you get there.",
+          "why": "A request, so both halves have to come down at once: the humble 저한테 becomes 나한테, and the polite 주세요 becomes 줘. This is the same 나한테 that 연습 1 asked for in its first dialogue.",
+          "grammar": "주세요 → 줘. V-아/어 주다 is asking someone to do something for you, and the 반말 of it is the plain 아/어 form of 주다: 주 + 어 contracts to 줘. 줘요 is the 해요체 version, one step short."
+        },
+        {
+          "n": 12,
+          "art": "",
+          "phraseKo": "내일은 늦지 마세요.",
+          "lines": [
+            {
+              "ko": "→ 내일은 늦지 {}."
+            }
+          ],
+          "answer": "ma",
+          "choices": [
+            {
+              "id": "ma",
+              "ko": "마"
+            },
+            {
+              "id": "maseyo",
+              "ko": "마세요"
+            },
+            {
+              "id": "maRayo",
+              "ko": "말아요"
+            }
+          ],
+          "en": "Don’t be late tomorrow.",
+          "why": "Telling someone not to do something. The negative command is V-지 말다, and 마세요 is its polite form — so the 반말 is the shortest form of the same verb.",
+          "grammar": "마세요 → 마. 말다 loses its ㄹ here, which is why it is 마 and not 말. 말아요 is the 해요체 form of the same thing, so it is still carrying its 요."
+        },
+        {
+          "n": 13,
+          "art": "",
+          "phraseKo": "제가 전화로 주문할게요.",
+          "lines": [
+            {
+              "ko": "→ {} 전화로 주문할{}."
+            }
+          ],
+          "answer": "naega13",
+          "choices": [
+            {
+              "id": "naega13",
+              "ko": "내가"
+            },
+            {
+              "id": "jega13",
+              "ko": "제가"
+            },
+            {
+              "id": "naga13",
+              "ko": "나가"
+            }
+          ],
+          "answer2": "ge",
+          "choices2": [
+            {
+              "id": "ge",
+              "ko": "게"
+            },
+            {
+              "id": "geyo",
+              "ko": "게요"
+            },
+            {
+              "id": "kke",
+              "ko": "께"
+            }
+          ],
+          "en": "I’ll order by phone.",
+          "why": "제가 is the humble I as a subject, so it becomes 내가 — the same 내가 the worked example of 연습 1 used. -(으)ㄹ게 is a promise: I will do it, since you want it done.",
+          "grammar": "주문할게요 → 주문할게. It is pronounced 주문할께, which is why 께 looks so plausible, but the spelling is 게. 나가 is not a form of 나 at all — in front of 가 it has to be 내."
+        },
+        {
+          "n": 14,
+          "art": "",
+          "phraseKo": "주말에 같이 산에 갈까요?",
+          "lines": [
+            {
+              "ko": "→ 주말에 같이 산에 {}?"
+            }
+          ],
+          "answer": "galkka",
+          "choices": [
+            {
+              "id": "galkka",
+              "ko": "갈까"
+            },
+            {
+              "id": "galkkayo",
+              "ko": "갈까요"
+            },
+            {
+              "id": "gapsida14",
+              "ko": "갑시다"
+            }
+          ],
+          "en": "Shall we go to the mountains at the weekend?",
+          "why": "A suggestion put as a question — shall we? — and it stays a question in 반말. Item 10 was the same idea stated rather than asked, which is why that one became 가자 and this one does not.",
+          "grammar": "갈까요 → 갈까. -(으)ㄹ까요 loses its 요 and nothing else, so the question mark stays too. 갑시다 answers the suggestion in the formal style instead of asking it in the plain one."
+        },
+        {
+          "n": 15,
+          "art": "",
+          "phraseKo": "오늘 날씨가 아주 춥지요?",
+          "lines": [
+            {
+              "ko": "→ 오늘 날씨가 아주 {}?"
+            }
+          ],
+          "answer": "chupji",
+          "choices": [
+            {
+              "id": "chupji",
+              "ko": "춥지"
+            },
+            {
+              "id": "chupjiyo",
+              "ko": "춥지요"
+            },
+            {
+              "id": "chuwoji",
+              "ko": "추워지"
+            }
+          ],
+          "en": "It’s really cold today, isn’t it?",
+          "why": "-지요 checks something you already believe — isn’t it? — and 반말 keeps the checking and drops the 요. It is the same -지 that 연습 1 item 6 used in 너도 갈 거지?",
+          "grammar": "춥지요 → 춥지. -지 goes on the plain stem 춥-, not on the 아/어 form, so the ㅂ-irregular never gets a chance to fire: 추워 is 춥 + 어, and there is no 어 here. That is why it is 춥지 and not 추워지."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "비빔밥이 맛있어요.",
+        "lines": [
+          {
+            "ko": "비빔밥이 맛있어요."
+          },
+          {
+            "ko": "→ 비빔밥이 {}."
+          }
+        ],
+        "answerKo": "맛있어",
+        "en": "The bibimbap is good. → the same thing said to a friend."
+      }
+    },
+    {
+      "id": "u10-grammar-2-3",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 3",
+      "icon": "💬",
+      "blurbEn": "Answer the question — in the register it was asked in.",
+      "instructionKo": "[보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue as shown in the example.",
+      "noteEn": "The book leaves B’s line blank for you to fill however you like, and prints one model answer in the key. That cannot be marked, so the model answer is offered here against two replies that answer the question but get something else wrong — the register slips back into 존댓말, or the tense does not match what was asked. Any polite word gives it away, 네 included: the 반말 yes is 응.",
+      "pattern": "반말",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금 식당에 갈 거야?"
+            },
+            {
+              "who": "B",
+              "ko": "{}"
+            }
+          ],
+          "answer": "a1",
+          "choices": [
+            {
+              "id": "a1",
+              "ko": "응, 지금 갈 거야."
+            },
+            {
+              "id": "b1",
+              "ko": "네, 지금 갈 거야."
+            },
+            {
+              "id": "c1",
+              "ko": "응, 지금 갈 거예요."
+            }
+          ],
+          "en": "A: Are you going to the restaurant now? — B: Yes, I’m going now.",
+          "why": "A yes-or-no question about a plan, so the answer confirms the plan in the same words: 갈 거야. Both wrong answers say the right thing and then betray themselves with one polite word.",
+          "grammar": "네 is the 존댓말 yes and belongs with 갈 거예요; the 반말 pair is 응 and 갈 거야. Mixing them — 네 with 거야, or 응 with 거예요 — is the commonest slip there is, because the two halves are learned separately."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "주말에 같이 영화 보러 갈까?"
+            },
+            {
+              "who": "B",
+              "ko": "{}"
+            }
+          ],
+          "answer": "a2",
+          "choices": [
+            {
+              "id": "a2",
+              "ko": "그래, 가자."
+            },
+            {
+              "id": "b2",
+              "ko": "그래, 가요."
+            },
+            {
+              "id": "c2",
+              "ko": "그래, 갈까."
+            }
+          ],
+          "en": "A: Shall we go and see a film at the weekend? — B: Sure, let’s go.",
+          "why": "A suggests with -(으)ㄹ까, and agreeing to a suggestion means making it: 가자. 갈까 would be handing the question straight back, which answers nothing.",
+          "grammar": "그래 is the 반말 agreement — 좋아 works too — and 가자 is the -자 suggestion 연습 2 item 10 drilled. 가요 is that same suggestion in 해요체, so it does not belong after 그래."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어제 뭐 했어?"
+            },
+            {
+              "who": "B",
+              "ko": "{}"
+            }
+          ],
+          "answer": "a3",
+          "choices": [
+            {
+              "id": "a3",
+              "ko": "집에서 숙제했어."
+            },
+            {
+              "id": "b3",
+              "ko": "집에서 숙제했어요."
+            },
+            {
+              "id": "c3",
+              "ko": "집에서 숙제할 거야."
+            }
+          ],
+          "en": "A: What did you do yesterday? — B: I did my homework at home.",
+          "why": "어제 puts the question in the past, so an answer about what you are going to do does not answer it, however good its 반말 is. 뭐 했어 is 무엇을 했어 worn down in speech.",
+          "grammar": "했어요 → 했어. The past 았/었 is already inside 했 — 하 + 였 — and the politeness is the 요 on the end, so that is all that comes off."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 수업 끝나고 뭐 해?"
+            },
+            {
+              "who": "B",
+              "ko": "{}"
+            }
+          ],
+          "answer": "a4",
+          "choices": [
+            {
+              "id": "a4",
+              "ko": "점심 먹으러 갈 거야."
+            },
+            {
+              "id": "b4",
+              "ko": "점심 먹으러 갈 거예요."
+            },
+            {
+              "id": "c4",
+              "ko": "점심 먹으러 갔어."
+            }
+          ],
+          "en": "A: What are you doing after class today? — B: I’m going for lunch.",
+          "why": "오늘 … 끝나고 asks about what has not happened yet, even though 뭐 해 is in the present — Korean uses the plain present for the near future all the time. So the answer looks ahead: 갈 거야.",
+          "grammar": "-(으)러 가다 is going in order to do something, and the 으 appears because 먹 ends in a consonant: 먹으러, but 마시러. The tense sits at the very end of the sentence, in 갈 거야."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "생일이 며칠이야?"
+            },
+            {
+              "who": "B",
+              "ko": "{}"
+            }
+          ],
+          "answer": "a5",
+          "choices": [
+            {
+              "id": "a5",
+              "ko": "내 생일은 9월 20일이야."
+            },
+            {
+              "id": "b5",
+              "ko": "제 생일은 9월 20일이에요."
+            },
+            {
+              "id": "c5",
+              "ko": "내 생일은 9월 20일이에요."
+            }
+          ],
+          "en": "A: When’s your birthday? — B: My birthday is the 20th of September.",
+          "why": "A asks in 반말, so answering in 존댓말 would be the odd thing to do. The third answer is the interesting one: it starts in 반말 with 내 and finishes in 존댓말 with 이에요, and a sentence cannot be both.",
+          "grammar": "제 → 내 and 이에요 → 이야, the two changes of 연습 2 item 8 in one line. 며칠 asks which day of the month; the answer reads 구월 이십일 — Sino-Korean numbers for both the month and the date."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "이 근처에 서점이 어디에 있는지 알아?"
+          },
+          {
+            "who": "B",
+            "ko": "{}"
+          }
+        ],
+        "answerKo": "응, 지하철역 옆에 있어.",
+        "en": "A: Do you know where there’s a bookshop near here? — B: Yes, next to the subway station."
+      }
+    },
+    {
+      "id": "u10-grammar-2-4",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 4",
+      "icon": "🔄",
+      "blurbEn": "Ten questions to ask a friend — some of them start out very formal indeed.",
+      "instructionKo": "[보기]와 같이 반말로 바꿔서 이야기해 보세요.",
+      "instructionEn": "Change the following sentences into 반말 as shown in the example.",
+      "noteEn": "In the book this is spoken practice with a partner; what can be marked is the transformation itself, so that is what is offered here. Every row puts the same three registers side by side — 반말, 해요체 and the formal 합니다체 — and only the first is asked for. Item 6 is the one that is not just an ending: 성함 and 되십니까 are honorifics, and 반말 has no use for either.",
+      "pattern": "반말",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "지금 어디에서 사십니까?",
+          "lines": [
+            {
+              "ko": "→ 지금 어디에서 {}?"
+            }
+          ],
+          "answer": "sara",
+          "choices": [
+            {
+              "id": "sara",
+              "ko": "살아"
+            },
+            {
+              "id": "sarayo",
+              "ko": "살아요"
+            },
+            {
+              "id": "sasimnikka",
+              "ko": "사십니까"
+            }
+          ],
+          "en": "Where do you live now?",
+          "why": "The starting point is as formal as Korean gets: 합니다체 with the honorific 시 on top. 반말 drops both at once, which is why the distance between the two versions feels so large.",
+          "grammar": "사십니까 → 살아. Take the honorific 시 out and you are back to 살다, and 살 + 아 = 살아. The ㄹ stays here because 아 is a vowel — it is 십니까 and 습니다 that make a ㄹ disappear."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "한국 생활이 재미있어요?",
+          "lines": [
+            {
+              "ko": "→ 한국 생활이 {}?"
+            }
+          ],
+          "answer": "jaemiisseo",
+          "choices": [
+            {
+              "id": "jaemiisseo",
+              "ko": "재미있어"
+            },
+            {
+              "id": "jaemiisseoyo",
+              "ko": "재미있어요"
+            },
+            {
+              "id": "jaemiissseumnikka",
+              "ko": "재미있습니까"
+            }
+          ],
+          "en": "Are you enjoying life in Korea?",
+          "why": "A 해요체 question this time, so only the 요 has to go. Asking a question in 반말 is done with the tone of voice alone — nothing is added to mark it.",
+          "grammar": "재미있어요 → 재미있어. 재미있다 is built on 있다, the same 있다 that made 맛있는 take -는 in the previous grammar point. Here it is the plain 어 form and behaves normally."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "무슨 음식을 좋아해요?",
+          "lines": [
+            {
+              "ko": "→ 무슨 음식을 {}?"
+            }
+          ],
+          "answer": "johahae",
+          "choices": [
+            {
+              "id": "johahae",
+              "ko": "좋아해"
+            },
+            {
+              "id": "johahaeyo",
+              "ko": "좋아해요"
+            },
+            {
+              "id": "johahamnikka",
+              "ko": "좋아합니까"
+            }
+          ],
+          "en": "What kind of food do you like?",
+          "why": "Worth putting beside 연습 2 item 1: that one was 좋아, this one is 좋아해. 좋다 is an adjective — it is good — and 좋아하다 is a verb, to like, which is why this sentence can take 음식을 as its object.",
+          "grammar": "좋아해요 → 좋아해. 좋아하다 is a 하다 verb, so its plain form is 좋아해, from 하 + 여. 무슨 asks which kind, as against 어느, which asks which one of a known few."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "한국어 공부 때문에 힘들지요?",
+          "lines": [
+            {
+              "ko": "→ 한국어 공부 때문에 {}?"
+            }
+          ],
+          "answer": "himdeulji",
+          "choices": [
+            {
+              "id": "himdeulji",
+              "ko": "힘들지"
+            },
+            {
+              "id": "himdeuljiyo",
+              "ko": "힘들지요"
+            },
+            {
+              "id": "himdeumnikka",
+              "ko": "힘듭니까"
+            }
+          ],
+          "en": "Korean study is hard going, isn’t it?",
+          "why": "-지요 is the ending that assumes the answer — it must be hard, mustn’t it — and 반말 keeps that and drops the 요, exactly as in 연습 2 item 15. The other two forms ask the question flat out instead of taking the answer for granted.",
+          "grammar": "힘들지요 → 힘들지. N 때문에 gives the cause: because of studying Korean. The ㄹ of 힘들다 survives in front of -지 and disappears before ㄴ, ㅂ and ㅅ — which is why the formal form on offer is 힘듭니까 and not 힘들습니까."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "몇 시쯤 집에 갈 거예요?",
+          "lines": [
+            {
+              "ko": "→ 몇 시쯤 집에 갈 {}?"
+            }
+          ],
+          "answer": "geoya5b",
+          "choices": [
+            {
+              "id": "geoya5b",
+              "ko": "거야"
+            },
+            {
+              "id": "geoyeyo5b",
+              "ko": "거예요"
+            },
+            {
+              "id": "geomnikka",
+              "ko": "겁니까"
+            }
+          ],
+          "en": "What time are you going home, roughly?",
+          "why": "The 거예요 → 거야 change again, this time inside a question. -쯤 is the about-ish suffix — 몇 시쯤 is around what time — and it makes the question easier to answer.",
+          "grammar": "갈 거예요 → 갈 거야. 겁니다 and 겁니까 are 거 + 입니다 squeezed together, the formal style of the same ending, so they are the opposite direction from 반말."
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "성함이 어떻게 되십니까?",
+          "lines": [
+            {
+              "ko": "→ {} {}?"
+            }
+          ],
+          "answer": "ireumi",
+          "choices": [
+            {
+              "id": "ireumi",
+              "ko": "이름이"
+            },
+            {
+              "id": "seonghami",
+              "ko": "성함이"
+            },
+            {
+              "id": "seonghameun",
+              "ko": "성함은"
+            }
+          ],
+          "answer2": "mwoya",
+          "choices2": [
+            {
+              "id": "mwoya",
+              "ko": "뭐야"
+            },
+            {
+              "id": "mwoyeyo",
+              "ko": "뭐예요"
+            },
+            {
+              "id": "eotteokedwoesyeo",
+              "ko": "어떻게 되셔"
+            }
+          ],
+          "en": "What’s your name?",
+          "why": "The one row where the words themselves change and not just the ending. 성함 is the honorific word for a name and 어떻게 되십니까 is the honorific way of asking for one; to a friend both are simply 이름이 뭐야. Keeping 성함 and dropping the politeness would be the strangest sentence on the page.",
+          "grammar": "Honorific nouns come in pairs with plain ones: 성함 / 이름, 연세 / 나이, 진지 / 밥, 분 / 사람. They travel with the honorific 시 — which is what the 셔 in 되셔 is — and 반말 uses neither."
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "오늘 점심 같이 먹을까요?",
+          "lines": [
+            {
+              "ko": "→ 오늘 점심 같이 {}?"
+            }
+          ],
+          "answer": "meogeulkka",
+          "choices": [
+            {
+              "id": "meogeulkka",
+              "ko": "먹을까"
+            },
+            {
+              "id": "meogeulkkayo",
+              "ko": "먹을까요"
+            },
+            {
+              "id": "meogeupsida",
+              "ko": "먹읍시다"
+            }
+          ],
+          "en": "Shall we have lunch together today?",
+          "why": "A suggestion asked as a question, like 연습 2 item 14, so it stays a question and only loses its 요. 먹읍시다 says the same thing but as a formal proposal, which is a strange thing to say to a friend about lunch.",
+          "grammar": "먹을까요 → 먹을까. Both -(으)ㄹ까 and -(으)ㅂ시다 take the 으 after a consonant stem, which is why it is 먹을까 but 갈까, 먹읍시다 but 갑시다."
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "오늘 기분이 어때요?",
+          "lines": [
+            {
+              "ko": "→ 오늘 기분이 {}?"
+            }
+          ],
+          "answer": "eottae",
+          "choices": [
+            {
+              "id": "eottae",
+              "ko": "어때"
+            },
+            {
+              "id": "eottaeyo",
+              "ko": "어때요"
+            },
+            {
+              "id": "eotteoseumnikka",
+              "ko": "어떻습니까"
+            }
+          ],
+          "en": "How are you feeling today?",
+          "why": "어때요 is so worn down that there is not much left to take off — just the 요. 기분 is how you feel rather than what you think, so this is asking after someone’s mood.",
+          "grammar": "어때요 → 어때. 어때 is 어떠하다 collapsed twice over, which is why the formal 어떻습니까 looks like a different word altogether. Both come from the same stem."
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "내일 아침에 늦지 마세요.",
+          "lines": [
+            {
+              "ko": "→ 내일 아침에 늦지 {}."
+            }
+          ],
+          "answer": "ma9",
+          "choices": [
+            {
+              "id": "ma9",
+              "ko": "마"
+            },
+            {
+              "id": "maseyo9",
+              "ko": "마세요"
+            },
+            {
+              "id": "masipsio",
+              "ko": "마십시오"
+            }
+          ],
+          "en": "Don’t be late tomorrow morning.",
+          "why": "The negative command from 연습 2 item 12, met again — the book repeats it deliberately, because 마세요 → 마 loses more than it looks like it should. 마십시오 is the formal version, the one on signs and announcements.",
+          "grammar": "마세요 → 마. V-지 말다 makes the negative command, and 말다 drops its ㄹ in front of these endings: 마세요, 마십시오, 마."
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "주말에 만납시다.",
+          "lines": [
+            {
+              "ko": "→ 주말에 {}."
+            }
+          ],
+          "answer": "mannaja",
+          "choices": [
+            {
+              "id": "mannaja",
+              "ko": "만나자"
+            },
+            {
+              "id": "mannapsida",
+              "ko": "만납시다"
+            },
+            {
+              "id": "mannayo",
+              "ko": "만나요"
+            }
+          ],
+          "en": "Let’s meet at the weekend.",
+          "why": "-(으)ㅂ시다 is a suggestion in the formal style, and the plain-style suggestion is -자. So this row and item 7 are the two halves of the same idea: 만납시다 is stated, 먹을까요 is asked.",
+          "grammar": "만납시다 → 만나자. The three suggestions to keep apart are 만나자 (반말), 만나요 (해요체) and 만납시다 (합니다체) — and 만납시다 is not as polite as it sounds, which is why 만나요 is the safer one with a stranger."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "지금 어디에서 사십니까?",
+        "lines": [
+          {
+            "ko": "지금 어디에서 사십니까?"
+          },
+          {
+            "ko": "→ 지금 어디에서 {}?"
+          }
+        ],
+        "answerKo": "살아",
+        "en": "Where do you live? — the same question put to a friend."
+      }
+    },
+    {
+      "id": "u10-grammar-2-5",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 5",
+      "icon": "📞",
+      "blurbEn": "One phone call, start to finish, taken down into 반말.",
+      "instructionKo": "[보기]와 같이 다음을 반말로 바꿔 보세요.",
+      "instructionEn": "Change the following conversation into 반말 as shown in the example.",
+      "noteEn": "The book prints the call twice — once in 존댓말 and once as a frame with fifteen blanks — and 정우’s first line is filled in as the [보기]. The frame is kept here, in order, with one change: a turn of two sentences is split into two rows, because a row draws at most two groups of buttons. The polite version of each line is printed above the row it belongs to. Note what happens to the names as well: 스티븐 씨 becomes plain 스티븐, and 스티븐 씨가 becomes 네가.",
+      "pattern": "반말",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "네, 괜찮아요.",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "{}, {}."
+            }
+          ],
+          "answer": "eung1",
+          "choices": [
+            {
+              "id": "eung1",
+              "ko": "응"
+            },
+            {
+              "id": "ne1",
+              "ko": "네"
+            },
+            {
+              "id": "ye1",
+              "ko": "예"
+            }
+          ],
+          "answer2": "gwaenchana",
+          "choices2": [
+            {
+              "id": "gwaenchana",
+              "ko": "괜찮아"
+            },
+            {
+              "id": "gwaenchanayo",
+              "ko": "괜찮아요"
+            },
+            {
+              "id": "gwaenchaneo",
+              "ko": "괜찮어"
+            }
+          ],
+          "en": "Yes, it’s fine.",
+          "why": "Two words, two decisions, and the first one is the one people forget: 네 is the polite yes and has no place in a 반말 answer. 응 is what goes there — 어 does the same job.",
+          "grammar": "괜찮아요 → 괜찮아. With the 요 gone the 아/어 is exposed, and 괜찮 has ㅏ in its last syllable, so it takes 아. 예 is 네 in its more formal dress, so it is the wrong direction twice over."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "숙제하는 중이었어요.",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "숙제하는 {}."
+            }
+          ],
+          "answer": "jungieosseo",
+          "choices": [
+            {
+              "id": "jungieosseo",
+              "ko": "중이었어"
+            },
+            {
+              "id": "jungieosseoyo",
+              "ko": "중이었어요"
+            },
+            {
+              "id": "jungiya",
+              "ko": "중이야"
+            }
+          ],
+          "en": "I was in the middle of my homework.",
+          "why": "V-는 중이다 is being in the middle of doing something, and 이었어요 puts it in the past: Steven was doing homework when the phone rang. 중이야 would move it into the present and answer a different question.",
+          "grammar": "중이었어요 → 중이었어. The chain is 중 + 이다 + 었 + 어요, and only the last piece is polite. 이었 is what 이다 becomes in the past after a consonant; after a vowel it contracts, as in 친구였어."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "스티븐 씨, 한국 전통 음악 좋아하지요?",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "스티븐, 한국 전통 음악 {}?"
+            }
+          ],
+          "answer": "johahaji",
+          "choices": [
+            {
+              "id": "johahaji",
+              "ko": "좋아하지"
+            },
+            {
+              "id": "johahajiyo",
+              "ko": "좋아하지요"
+            },
+            {
+              "id": "johahasiji",
+              "ko": "좋아하시지"
+            }
+          ],
+          "en": "Steven, you like traditional Korean music, don’t you?",
+          "why": "Jeongwoo is checking something he already believes, which is what -지요 does, and 반말 keeps the checking. Note the name: 씨 comes off, because 씨 is politeness of the same kind as 요.",
+          "grammar": "좋아하지요 → 좋아하지. 좋아하시지 keeps the honorific 시, which is for someone above you — using it on a friend inside a 반말 sentence pulls in two directions at once."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "네, 좋아해요.",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "{}, {}."
+            }
+          ],
+          "answer": "eung4",
+          "choices": [
+            {
+              "id": "eung4",
+              "ko": "응"
+            },
+            {
+              "id": "ne4",
+              "ko": "네"
+            },
+            {
+              "id": "ye4",
+              "ko": "예"
+            }
+          ],
+          "answer2": "johahae4",
+          "choices2": [
+            {
+              "id": "johahae4",
+              "ko": "좋아해"
+            },
+            {
+              "id": "johahaeyo4",
+              "ko": "좋아해요"
+            },
+            {
+              "id": "johahaeo4",
+              "ko": "좋아하어"
+            }
+          ],
+          "en": "Yes, I like it.",
+          "why": "The same 응 as item 1, and the verb from 연습 4 item 3. Steven is answering a -지 question, which is why a bare 응 is enough — he only has to confirm what was already assumed.",
+          "grammar": "좋아해요 → 좋아해. 하다 takes 여 and 하 + 여 contracts to 해, so 하어 is a form that never exists — not here and not in 해요, 했어, 해서."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "그런데 왜요?",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "그런데 {}?"
+            }
+          ],
+          "answer": "wae",
+          "choices": [
+            {
+              "id": "wae",
+              "ko": "왜"
+            },
+            {
+              "id": "waeyo",
+              "ko": "왜요"
+            },
+            {
+              "id": "waeya",
+              "ko": "왜야"
+            }
+          ],
+          "en": "But why do you ask?",
+          "why": "왜요 is a whole question in two syllables — why? — and taking the 요 off leaves 왜 standing on its own, which is exactly how it works in 반말. 그런데 is the but that changes the subject rather than contradicting.",
+          "grammar": "왜요 → 왜. 요 can be added to almost any word to make it polite without changing anything else — 왜요, 언제요, 저요 — and it comes off the same way. 왜 is not a noun, so 이야/야 has nothing to attach to."
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "국립국악원에서 하는 외국인을 위한 국악 수업이 있는데 스티븐 씨가 좋아할 것 같아서 전화했어요.",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "국립국악원에서 하는 외국인을 위한 국악 수업이 있는데 {} 좋아할 것 같아서 {}."
+            }
+          ],
+          "answer": "nega6",
+          "choices": [
+            {
+              "id": "nega6",
+              "ko": "네가"
+            },
+            {
+              "id": "seutibeunssiga",
+              "ko": "스티븐 씨가"
+            },
+            {
+              "id": "neoga6",
+              "ko": "너가"
+            }
+          ],
+          "answer2": "jeonhwahaesseo",
+          "choices2": [
+            {
+              "id": "jeonhwahaesseo",
+              "ko": "전화했어"
+            },
+            {
+              "id": "jeonhwahaesseoyo",
+              "ko": "전화했어요"
+            },
+            {
+              "id": "jeonhwahaessa",
+              "ko": "전화했아"
+            }
+          ],
+          "en": "There’s a gugak class for foreigners at the National Gugak Center, and I thought you’d like it, so I called.",
+          "why": "The long one. 스티븐 씨가 is Jeongwoo talking about the person he is talking to, in the third person — which is polite Korean and quite normal. In 반말 you address them directly instead: 네가.",
+          "grammar": "네가 is 너 + 가, and it is the standard form even though everyone pronounces it 니가 to keep it apart from 내가. 너가 is what that pronunciation gets written as, and it is not standard. -(으)ㄹ 것 같다 is the guess: I thought you would probably like it."
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "그래요? 무슨 요일에 하는데요?",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "{}? 무슨 요일에 {}?"
+            }
+          ],
+          "answer": "geurae7",
+          "choices": [
+            {
+              "id": "geurae7",
+              "ko": "그래"
+            },
+            {
+              "id": "geuraeyo7",
+              "ko": "그래요"
+            },
+            {
+              "id": "geureoseumnikka7",
+              "ko": "그렇습니까"
+            }
+          ],
+          "answer2": "haneunde",
+          "choices2": [
+            {
+              "id": "haneunde",
+              "ko": "하는데"
+            },
+            {
+              "id": "haneundeyo",
+              "ko": "하는데요"
+            },
+            {
+              "id": "haneunji",
+              "ko": "하는지"
+            }
+          ],
+          "en": "Really? What day is it on?",
+          "why": "Two questions in one turn. 그래요? is surprise — is that so? — and 하는데요? is the ending that leaves a question hanging so the other person fills it in. Both simply lose their 요.",
+          "grammar": "하는데요 → 하는데. -는데 can end a sentence like this, and 하는지 cannot: -는지 needs a verb after it to hold it up, as in 어디에 있는지 알아 in the [보기] of 연습 3."
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "토요일에 하는데 자세한 것은 전화해서 물어보세요. 문자로 전화번호 보내 줄게요.",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "토요일에 하는데 자세한 것은 전화해서 {}. 문자로 전화번호 보내 {}."
+            }
+          ],
+          "answer": "mureobwa",
+          "choices": [
+            {
+              "id": "mureobwa",
+              "ko": "물어봐"
+            },
+            {
+              "id": "mureoboseyo",
+              "ko": "물어보세요"
+            },
+            {
+              "id": "mureobwayo",
+              "ko": "물어봐요"
+            }
+          ],
+          "answer2": "julge",
+          "choices2": [
+            {
+              "id": "julge",
+              "ko": "줄게"
+            },
+            {
+              "id": "julgeyo",
+              "ko": "줄게요"
+            },
+            {
+              "id": "julkke",
+              "ko": "줄께"
+            }
+          ],
+          "en": "It’s on Saturdays. Ring them and ask for the details — I’ll text you the number.",
+          "why": "Jeongwoo tells Steven to do one thing and promises to do another, so the two blanks are two different endings: a command and a promise. -(으)ㄹ게 is always about the speaker, which is why it can only be Jeongwoo who sends the text.",
+          "grammar": "물어보세요 → 물어봐: 보 + 아 contracts to 봐. 줄게요 → 줄게, and the 게 is spelled with ㄱ even though it is pronounced 께 — the same trap as 주문할게 in 연습 2."
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "네, 고마워요.",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "{}, {}."
+            }
+          ],
+          "answer": "eung9",
+          "choices": [
+            {
+              "id": "eung9",
+              "ko": "응"
+            },
+            {
+              "id": "ne9",
+              "ko": "네"
+            },
+            {
+              "id": "ye9",
+              "ko": "예"
+            }
+          ],
+          "answer2": "gomawo",
+          "choices2": [
+            {
+              "id": "gomawo",
+              "ko": "고마워"
+            },
+            {
+              "id": "gomawoyo",
+              "ko": "고마워요"
+            },
+            {
+              "id": "gomapeo",
+              "ko": "고맙어"
+            }
+          ],
+          "en": "Yes — thanks.",
+          "why": "The call closes the way it opened, with 응. 고마워 is what you say to a friend; 감사합니다 would be for someone you are not on 반말 terms with in the first place.",
+          "grammar": "고마워요 → 고마워. 고맙다 is ㅂ-irregular, like 맵다 in 연습 2: the ㅂ becomes 우 in front of a vowel, so 고맙 + 어 = 고마워, and 고맙어 is what it would be if the ㅂ held on."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "스티븐 씨, 지금 통화 괜찮아요?",
+        "lines": [
+          {
+            "who": "정우",
+            "ko": "스티븐, 지금 통화 {}?"
+          }
+        ],
+        "answerKo": "괜찮아",
+        "en": "Steven, is now a good time to talk?"
+      }
+    },
+    {
+      "id": "u10-grammar-3-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 1",
+      "icon": "🤝",
+      "blurbEn": "I’m about to do this — do you want to come along?",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "The book prints a picture and one long blank for the whole of A’s line. Here the phrase to work from is printed above the row and the two verb forms are the choices, because those are the two decisions in it: -(으)려고 하다 for what you are about to do, and -(으)ㄹ래요 for whether the other person wants in. Both take 으 after a consonant and nothing after a vowel. And look at the [보기] before assuming the two verbs are the same one — you boil the ramyeon, and what you ask about is the eating.",
+      "pattern": "V-(으)ㄹ래요",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "영화 보러 가다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "영화 보러 {} 하는데 같이 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 좋아요."
+            }
+          ],
+          "answer": "garyeogo",
+          "choices": [
+            {
+              "id": "garyeogo",
+              "ko": "가려고"
+            },
+            {
+              "id": "gaeuryeogo",
+              "ko": "가으려고"
+            },
+            {
+              "id": "gareo",
+              "ko": "가러"
+            }
+          ],
+          "answer2": "gallaeyo",
+          "choices2": [
+            {
+              "id": "gallaeyo",
+              "ko": "갈래요"
+            },
+            {
+              "id": "galleyo",
+              "ko": "갈레요"
+            },
+            {
+              "id": "galgeyo",
+              "ko": "갈게요"
+            }
+          ],
+          "en": "A: I’m thinking of going to see a film — do you want to come? — B: Yes, I’d like that.",
+          "why": "A is not asking whether B will go to the cinema in general; A has a plan and is opening it up. That is the whole shape of the sentence: -(으)려고 하는데 lays the plan down, and -(으)ㄹ래요 hands the decision over.",
+          "grammar": "가다 → 가려고, 갈래요. The stem ends in a vowel, so no 으 goes in front of either ending, and in 갈래요 the ㄹ attaches straight to 가. 가려고 is intending to go; 가러 is not Korean, because -(으)러 only ever pairs with 가다, 오다 and 다니다 — which is exactly what 보러 가다 is doing earlier in this same line."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "태권도를 배우다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "태권도를 {} 하는데 같이 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "저는 운동하는 걸 별로 안 좋아해요."
+            }
+          ],
+          "answer": "baeuryeogo",
+          "choices": [
+            {
+              "id": "baeuryeogo",
+              "ko": "배우려고"
+            },
+            {
+              "id": "baeueuryeogo",
+              "ko": "배우으려고"
+            },
+            {
+              "id": "baeullyeogo",
+              "ko": "배울려고"
+            }
+          ],
+          "answer2": "baeullaeyo",
+          "choices2": [
+            {
+              "id": "baeullaeyo",
+              "ko": "배울래요"
+            },
+            {
+              "id": "baeulleyo",
+              "ko": "배울레요"
+            },
+            {
+              "id": "baeulgeyo",
+              "ko": "배울게요"
+            }
+          ],
+          "en": "A: I’m thinking of learning taekwondo — do you want to learn with me? — B: I’m not all that keen on doing sport.",
+          "why": "The first refusal on the page, and it refuses without ever saying no: B says what they are like rather than what they will do. 별로 is the adverb that lives with a negative — 별로 안 좋아해요, not much — and 걸 is 것을, the shortest way to make 운동하다 into something you can dislike.",
+          "grammar": "배우다 → 배우려고, 배울래요. Another vowel stem, so no 으 either time. 배울려고 is what a lot of people say out loud, and it is not the standard form: the ㄹ belongs to -(으)ㄹ래요 and has no business in -(으)려고."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "점심 먹다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "점심 {} 하는데 같이 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "전 조금 전에 친구랑 먹었어요."
+            }
+          ],
+          "answer": "meogeuryeogo",
+          "choices": [
+            {
+              "id": "meogeuryeogo",
+              "ko": "먹으려고"
+            },
+            {
+              "id": "meogryeogo",
+              "ko": "먹려고"
+            },
+            {
+              "id": "meogeureo",
+              "ko": "먹으러"
+            }
+          ],
+          "answer2": "meogeullaeyo",
+          "choices2": [
+            {
+              "id": "meogeullaeyo",
+              "ko": "먹을래요"
+            },
+            {
+              "id": "meogeulleyo",
+              "ko": "먹을레요"
+            },
+            {
+              "id": "meogeulgeyo",
+              "ko": "먹을게요"
+            }
+          ],
+          "en": "A: I’m about to have lunch — do you want to eat with me? — B: I ate with a friend a little while ago.",
+          "why": "The one consonant stem on the page, so the one row where the 으 has to be there. B turns it down with a fact rather than an opinion — already eaten — and 랑 is the spoken 와/과: 친구랑, with a friend.",
+          "grammar": "먹다 → 먹으려고, 먹을래요. 먹 ends in ㄱ, so both endings need the 으 to get started: 먹려고 and 먹래요 are what the vowel stems give and this stem cannot. Compare 가려고 and 갈래요 in item 1, where there is no 으 at all."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "산책하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 하는데 같이 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 좋아요."
+            }
+          ],
+          "answer": "sanchaekharyeogo",
+          "choices": [
+            {
+              "id": "sanchaekharyeogo",
+              "ko": "산책하려고"
+            },
+            {
+              "id": "sanchaekhaeuryeogo",
+              "ko": "산책하으려고"
+            },
+            {
+              "id": "sanchaekhareo",
+              "ko": "산책하러"
+            }
+          ],
+          "answer2": "hallaeyo",
+          "choices2": [
+            {
+              "id": "hallaeyo",
+              "ko": "할래요"
+            },
+            {
+              "id": "halleyo",
+              "ko": "할레요"
+            },
+            {
+              "id": "halgeyo",
+              "ko": "할게요"
+            }
+          ],
+          "en": "A: I’m going to take a walk — do you want to come? — B: Yes, I’d like that.",
+          "why": "Worth reading the answer twice: the second half is 할래요, not 산책할래요. Once the plan has been said there is no need to name it again, so 하다 stands in for the whole thing — which is what 하다 is for.",
+          "grammar": "산책하다 → 산책하려고, and then 할래요 on its own. 하 is a vowel stem, so no 으 goes in; 산책하러 would need a 가다 or an 오다 after it — 산책하러 나가다 — and there is none here."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "테니스를 치다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "테니스를 {} 하는데 같이 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "전 테니스를 전혀 칠 줄 몰라요."
+            }
+          ],
+          "answer": "chiryeogo",
+          "choices": [
+            {
+              "id": "chiryeogo",
+              "ko": "치려고"
+            },
+            {
+              "id": "chieuryeogo",
+              "ko": "치으려고"
+            },
+            {
+              "id": "chillyeogo",
+              "ko": "칠려고"
+            }
+          ],
+          "answer2": "chillaeyo",
+          "choices2": [
+            {
+              "id": "chillaeyo",
+              "ko": "칠래요"
+            },
+            {
+              "id": "chilleyo",
+              "ko": "칠레요"
+            },
+            {
+              "id": "chilgeyo",
+              "ko": "칠게요"
+            }
+          ],
+          "en": "A: I’m thinking of playing tennis — do you want to play with me? — B: I can’t play tennis at all.",
+          "why": "The flattest refusal of the three: not unwilling but unable. V-(으)ㄹ 줄 알다[모르다] is knowing how to do something, and 전혀 is the 별로 of item 2 turned all the way up — it too only ever appears with a negative.",
+          "grammar": "치다 → 치려고, 칠래요. The stem is the single vowel 치, so the ㄹ of -(으)ㄹ래요 lands right on it: 칠래요. And note B’s 칠 줄 — the same ㄹ, doing the same thing in front of 줄."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "라면을 끓이다",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "라면을 {} 하는데 같이 {}?"
+          },
+          {
+            "who": "B",
+            "ko": "네, 좋아요."
+          }
+        ],
+        "answerKo": "끓이려고",
+        "answer2Ko": "먹을래요",
+        "en": "A: I’m about to boil some ramyeon — want to eat with me? — B: Yes, I’d like that."
+      }
+    },
+    {
+      "id": "u10-grammar-3-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 2",
+      "icon": "⚖️",
+      "blurbEn": "Two pictures, one choice: A offers the first, B talks you into the second.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "Two pictures side by side and you choose between them: A asks about the first, B gives a reason and proposes the second. All of it is 반말, which is why this page comes after 문법과 표현 2 — the question is -(으)ㄹ래 with no 요 and the answer is -자. Watch what -(으)니까 is doing there as well: it is the reason clause a suggestion has to use, because -아/어서 cannot stand in front of -자. The book’s fifth row is two question marks — invent your own pair — and nothing can mark that, so the four the key answers are the four here.",
+      "pattern": "V-(으)ㄹ래요",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "택시 / 지하철",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "집에 갈 때 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "길이 막히니까 {}."
+            }
+          ],
+          "answer": "taxi_gallae",
+          "choices": [
+            {
+              "id": "taxi_gallae",
+              "ko": "택시 타고 갈래"
+            },
+            {
+              "id": "taxi_gallaeyo",
+              "ko": "택시 타고 갈래요"
+            },
+            {
+              "id": "taxi_gaeullae",
+              "ko": "택시 타고 가을래"
+            }
+          ],
+          "answer2": "subway_taja",
+          "choices2": [
+            {
+              "id": "subway_taja",
+              "ko": "지하철을 타자"
+            },
+            {
+              "id": "subway_tayo",
+              "ko": "지하철을 타요"
+            },
+            {
+              "id": "subway_tapsida",
+              "ko": "지하철을 탑시다"
+            }
+          ],
+          "en": "A: Shall we take a taxi home? — B: The roads are jammed, so let’s take the subway.",
+          "why": "B does not turn the taxi down and stop there — the reason comes first and then the alternative, which is the shape of every row on this page. 길이 막히다 is the roads being blocked, and it is the standard reason for choosing the subway in Seoul.",
+          "grammar": "가다 → 갈래, and 타다 → 타자. -(으)ㄹ래 is -(으)ㄹ래요 with the 요 taken off, the same as everything on the 반말 page. 탑시다 says the same thing as 타자 but in the formal style, so it does not belong in a conversation like this one."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "백화점 / 시장",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "선물 사러 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "백화점은 비싸니까 {}."
+            }
+          ],
+          "answer": "dept_gallae",
+          "choices": [
+            {
+              "id": "dept_gallae",
+              "ko": "백화점에 갈래"
+            },
+            {
+              "id": "dept_gallaeyo",
+              "ko": "백화점에 갈래요"
+            },
+            {
+              "id": "dept_galge",
+              "ko": "백화점에 갈게"
+            }
+          ],
+          "answer2": "market_gaja",
+          "choices2": [
+            {
+              "id": "market_gaja",
+              "ko": "시장에 가자"
+            },
+            {
+              "id": "market_gayo",
+              "ko": "시장에 가요"
+            },
+            {
+              "id": "market_gapsida",
+              "ko": "시장에 갑시다"
+            }
+          ],
+          "en": "A: Shall we go to the department store for a present? — B: Department stores are expensive, so let’s go to the market.",
+          "why": "사러 is the -(으)러 that item 1 of 연습 1 said only goes with 가다 and 오다 — and here it is, in front of 갈래. B’s reason is the price, so the answer moves from the 백화점 to the 시장 rather than dropping the errand.",
+          "grammar": "갈래 asks what you want; 갈게 promises what I will do, and a promise cannot be a question. They share the -(으)ㄹ and are told apart by nothing but 래 against 게, which is why they get mixed up."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "산 / 바다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이번 주말에 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "등산은 힘드니까 {}."
+            }
+          ],
+          "answer": "hike_hallae",
+          "choices": [
+            {
+              "id": "hike_hallae",
+              "ko": "등산할래"
+            },
+            {
+              "id": "hike_hallaeyo",
+              "ko": "등산할래요"
+            },
+            {
+              "id": "hike_hallae_sp",
+              "ko": "등산할레"
+            }
+          ],
+          "answer2": "sea_gaja",
+          "choices2": [
+            {
+              "id": "sea_gaja",
+              "ko": "바다에 가자"
+            },
+            {
+              "id": "sea_gayo",
+              "ko": "바다에 가요"
+            },
+            {
+              "id": "sea_gapsida",
+              "ko": "바다에 갑시다"
+            }
+          ],
+          "en": "A: Do you want to go hiking this weekend? — B: Hiking is hard work, so let’s go to the sea.",
+          "why": "The mountain against the sea, which is the whole of a Korean summer weekend. 등산 is hiking as a noun, so it takes 하다 to become something you can do, and B reuses the same noun as the subject of the reason.",
+          "grammar": "Look at B’s printed line: 힘들다 + -(으)니까 comes out as 힘드니까, not 힘들으니까 — a ㄹ stem drops its ㄹ in front of ㄴ. It is the same drop as 만들다 → 만드니까 and 살다 → 사니까."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "커피 / 아이스크림",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{}?"
+            },
+            {
+              "who": "B",
+              "ko": "커피는 아까 마셨으니까 {}."
+            }
+          ],
+          "answer": "coffee_masillae",
+          "choices": [
+            {
+              "id": "coffee_masillae",
+              "ko": "커피 마실래"
+            },
+            {
+              "id": "coffee_masillaeyo",
+              "ko": "커피 마실래요"
+            },
+            {
+              "id": "coffee_masilge",
+              "ko": "커피 마실게"
+            }
+          ],
+          "answer2": "ice_meokja",
+          "choices2": [
+            {
+              "id": "ice_meokja",
+              "ko": "아이스크림 먹자"
+            },
+            {
+              "id": "ice_meogeoyo",
+              "ko": "아이스크림 먹어요"
+            },
+            {
+              "id": "ice_meogeuja",
+              "ko": "아이스크림 먹으자"
+            }
+          ],
+          "en": "A: Do you want a coffee? — B: I’ve already had coffee, so let’s get an ice cream.",
+          "why": "The only row where A’s line is nothing but the offer, and the only one whose reason is in the past: 아까 마셨으니까, because I drank some earlier. 아까 is a little while ago — near enough to still count.",
+          "grammar": "마시다 → 마실래, and 먹다 → 먹자. -자 goes straight onto the stem and never takes 으, however the stem ends: 먹자 and 가자, never 먹으자. That is what makes it different from -(으)ㄹ래 and -(으)려고, which both need the 으 after 먹."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "갈비탕 / 냉면",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "점심에 {}?"
+          },
+          {
+            "who": "B",
+            "ko": "날씨가 더우니까 {}."
+          }
+        ],
+        "answerKo": "갈비탕 먹을래",
+        "answer2Ko": "냉면 먹자",
+        "en": "A: Do you want galbitang for lunch? — B: It’s hot out, so let’s have naengmyeon."
+      }
     }
   ]
 }

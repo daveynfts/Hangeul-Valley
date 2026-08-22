@@ -11,6 +11,11 @@ dishes you have tried, which nothing can mark; the twelve became two
 picture-to-name matching pages instead. When you change the shape of an exercise,
 say so in `noteEn` — the learner should know what the book asked for.
 
+A row can also be unmarkable on its own. V-(으)ㄹ래요 연습 2 ends with two empty
+picture frames, each holding a question mark — invent your own pair and have the
+conversation — and the answer key has nothing for it. Four rows went in and the
+fifth is named in `noteEn` rather than being invented on the book's behalf.
+
 Everything the learner sees lives in `worlds/<unit>-workbook.json`. The renderer
 is in `js/ui.js`, the art in `js/workbookArt.js`, and the save-side validator in
 `admin/lib/workbook.js`. The validator is the contract: it refuses anything the
@@ -100,11 +105,29 @@ wherever the book puts it:
 - `choices2` makes it a two-blank row. The score counts blanks, not rows, and a
   row is right only when both halves are. Use it where the book asks for a pair —
   the 해도 돼요? / -면 안 돼요 exchange loses half its point otherwise.
+- Both blanks can fall in the same line. Unit 10's 문법과 표현 연습 2 builds the
+  whole of A's question — 세계에서 제일 높은 산이 어디예요? — so both groups of
+  buttons sit under A, and the speaker chip that labels a group names nothing.
+  Where one line owns both gaps the tag prints the blank's position with it, A1
+  and A2, rather than the same chip twice.
 - The number of `{}` across all lines must equal the number of choice sets. The
   validator refuses a mismatch, because a line with nowhere to put the answer
   renders as already finished.
 - Choice ids must not repeat across `choices` and `choices2`: the renderer looks
   a placed choice up by id across the whole row.
+- Two blanks is the most a row can draw. Unit 10's 반말 연습 5 takes a whole phone
+  call down into 반말, and the book's frame puts three blanks in one turn — 네,
+  괜찮아요. 숙제하는 중이었어요. — so the turn is split at the sentence boundary into
+  two rows, each with its own polite original printed above it. That keeps the call
+  in order and reads as the book reads; merging the three into one long choice
+  would collapse three decisions into one.
+- A line with nobody speaking it gets no group tag at all. Numbering the groups on
+  their own would read as the key badges on the buttons beside them, and the break
+  between them already puts them in the order the blanks come.
+- A `who` longer than one character gets a wider chip. 연습 5 keeps the names the
+  book prints on its lines, 정우 and 스티븐, and the chip is a 19px box built for one
+  letter at 8px; `data-name`, set on the speaker chip and on the group tag, is what
+  gives a name room to be read.
 
 ### Writing the choices
 
@@ -127,6 +150,24 @@ Avoid a distractor that is also correct. `보았을 때` and `어릴 때` are bo
 Korean; marking them wrong teaches a falsehood. Where the book's own key differs
 from what the page prints, say so in `why` rather than quietly picking one — see
 `u14-grammar-4-2` item 3.
+
+That is the trap to watch on a register page, where so much of what is wrong for
+the exercise is still good Korean. 반말 연습 2 asks for 많네 out of 많네요, and 많아 is
+a perfectly good 반말 sentence — just not that transformation, so putting it up as
+wrong would teach a falsehood about the sentence. 많으네 is wrong outright, and that
+is what goes on the button. The same rules out the plain style 좋다 and the
+colloquial 갈래, and it is why 너가 gets a line in `grammar` saying it is what people
+actually say, rather than being marked wrong in silence.
+
+Where the page is about register, the three choices can be the three registers:
+살아 / 살아요 / 사십니까. One decision per row rather than three unrelated ones, and
+the wrong answers say something — 반말 is being picked out of the styles it sits
+between rather than out of noise.
+
+An exercise the book leaves open — write your own answer — becomes the key's model
+answer against two that answer the question and fail somewhere else: the register
+slips (네 where 응 belongs), or the tense does not match what was asked. Say in
+`noteEn` that the book left it open.
 
 ### Worked examples
 
@@ -151,6 +192,13 @@ row.
 **`art`** names a 16×16 matrix in `js/workbookArt.js`, drawn as SVG rects — the
 same character matrix + palette the rest of the game uses. Draw one only when
 nothing shipped fits, as Unit 14's grammar pages needed.
+
+There is a third answer, which is to say in words what the picture showed. Unit
+10's 문법과 표현 연습 1 photographs four fruits and asks what they add up to. A
+`build` row cannot take `img`, and four fruits drawn at 16px are a smudge, so the
+row's `phraseKo` lists 사과 · 딸기 · 오렌지 · 포도 and the learner supplies 과일 —
+which is the skill the page is after anyway. It is a change of shape like any
+other, so it goes in `noteEn`.
 
 Both fields are optional and a row without either just shows no picture.
 
@@ -310,7 +358,10 @@ Other things that scale with the list:
   point, so several rows are called 연습 1, and three of them print the identical
   Korean instruction. The headline is the grammar `pattern`; the instruction is
   not in the list at all. Keep it that way — it read as one row repeated when the
-  instruction was the headline.
+  instruction was the headline. `pattern` belongs to the exercise whatever its
+  type: the validator used to write it back only for `experience` and `build`, so
+  Unit 10's 반말 연습 1 — a `dialogue` — came back from a save with no headline at
+  all, and the list showed two rows called 연습 1 with nothing to tell them apart.
 - **Section grouping.** Rows are grouped under their `section`, so thirteen
   exercises read as three, six and four.
 
