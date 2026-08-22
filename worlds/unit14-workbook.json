@@ -80,7 +80,7 @@
           "n": 4,
           "answer": "yield_seat",
           "en": "If an older person is on the bus …",
-          "why": "Giving up your seat is the everyday form of 경로 우대, the senior-priority idea from this unit's culture section.",
+          "why": "Giving up your seat is the everyday form of 경로 우대, the senior-priority idea from this unit’s culture section.",
           "grammar": "양보하다 → 양보해요. The prompt is already honorific twice over: 분 is the polite counter for a person rather than 사람, and 계시다 is the honorific of 있다.",
           "stemKo": "버스에 나이가 많은 분이 계시면"
         }
@@ -169,7 +169,7 @@
       "blurbEn": "Name the sign that explains why B has to apologise.",
       "instructionKo": "[보기]와 같이 빈칸에 알맞은 것을 골라 대화를 만들어 보세요.",
       "instructionEn": "Complete each dialogue using the appropriate expression from the box, as in the example.",
-      "noteEn": "Read A's second sentence first: it says what cannot be done, and the sign is simply that rule as a noun.",
+      "noteEn": "Read A’s second sentence first: it says what cannot be done, and the sign is simply that rule as a noun.",
       "bank": [
         {
           "id": "no_smoking",
@@ -198,7 +198,7 @@
           "n": 1,
           "answer": "no_food",
           "en": "You cannot bring food in here.",
-          "why": "반입 is the act of bringing something in, so 음식물 반입 금지 forbids carrying food inside — which is word for word what A's second sentence says.",
+          "why": "반입 is the act of bringing something in, so 음식물 반입 금지 forbids carrying food inside — which is word for word what A’s second sentence says.",
           "grammar": "-을/ㄹ 수 없습니다 is \"cannot\": 들어오다 → 들어올 수 없습니다. And 여기는 X입니다 names a place by the rule that governs it.",
           "lines": [
             {
@@ -215,7 +215,7 @@
           "n": 2,
           "answer": "no_photos",
           "en": "You cannot take photographs here.",
-          "why": "촬영 is photographing or filming. The sign turns the banned action into a noun phrase, and A's next sentence spells the same thing out as a verb.",
+          "why": "촬영 is photographing or filming. The sign turns the banned action into a noun phrase, and A’s next sentence spells the same thing out as a verb.",
           "grammar": "찍다 → 찍을 수 없습니다. Note 에서 rather than 에 — the action happens *at* the place, so 에서 marks it.",
           "lines": [
             {
@@ -265,7 +265,7 @@
       ],
       "example": {
         "answer": "no_smoking",
-        "en": "A: This is a no-smoking area. You cannot smoke here. — B: Oh, really? I'm sorry.",
+        "en": "A: This is a no-smoking area. You cannot smoke here. — B: Oh, really? I’m sorry.",
         "lines": [
           {
             "who": "A",
@@ -623,7 +623,7 @@
               "ko": "볼 때부터"
             }
           ],
-          "en": "I've liked them from the first time I saw them.",
+          "en": "I’ve liked them from the first time I saw them.",
           "why": "A asked 언제부터, not 언제 — from when, not when. So the answer needs 부터 on it: the point is not that you liked them at that one moment, it is that you have liked them ever since. Reading which question was actually asked is half of this item.",
           "grammar": "보다 → 봤을 때, then 부터: 봤을 때부터. 때 is an ordinary noun, so 부터 attaches to it exactly as it would to any other."
         }
@@ -965,7 +965,7 @@
             }
           ],
           "en": "A: May I take photographs here? — B: No, you may not take photographs here.",
-          "why": "찍다 has ㅣ in the stem, and ㅣ is not one of the two vowels that take 았/았 — so 어, the same as 먹다. Museums and 공연장 are where you will actually be asked this.",
+          "why": "찍다 has ㅣ in the stem, and ㅣ is not one of the two vowels that take 아 — so 어, the same as 먹다. Museums and 공연장 are where you will actually be asked this.",
           "grammar": "찍다 → 찍어도 돼요 / 찍으면 안 돼요. Only ㅏ and ㅗ stems take 아; everything else, ㅣ included, takes 어. And 찍 ends in a consonant, so -으면 keeps its 으."
         },
         {
@@ -1062,7 +1062,7 @@
           ],
           "en": "A: May I swim here? — B: No, you may not swim here.",
           "why": "Same verb as item 1, so the trap moved: it is now the spelling of 되다 itself. 되 + 어요 contracts to 돼요, and 되요 is the single most common misspelling in Korean — native writers get it wrong too.",
-          "grammar": "하다 → 해도 돼요 / 하면 안 돼요. 되다 conjugates like any other verb: 되 + 어요 = 돼요. The test is that 돼 can stand alone as a whole word and 되 cannot, so anything ending the sentence is 돼요."
+          "grammar": "하다 → 해도 돼요 / 하면 안 돼요. 되다 conjugates like any other verb: 되 + 어요 = 돼요. The test native writers use is to try 하/해 in the same slot: if 해 fits, write 돼 — 안 해요 works, so it is 안 돼요 — and if 하 fits, write 되, as in 되세요."
         }
       ],
       "example": {
@@ -1158,7 +1158,7 @@
               "ko": "했으면 안 돼요"
             }
           ],
-          "en": "A: I don't feel like doing it now — can't I do it later? — B: No. Do it now.",
+          "en": "A: I don’t feel like doing it now — can’t I do it later? — B: No. Do it now.",
           "why": "-는데 is the little hinge A leans on: it lays out the situation and then asks for something because of it. B answers in 반말, so these two are close — but A is still asking upward, which is why the question keeps 요.",
           "grammar": "하다 → 하면 안 돼요. Two traps: 되요 for 돼요, which is 되 + 어요 uncontracted and simply wrong; and 했으면, which puts the past tense where -(으)면 안 되다 takes a plain stem."
         },
@@ -1191,7 +1191,7 @@
               "ko": "남기면 돼요"
             }
           ],
-          "en": "A: The medicine is so bitter — can't I leave just a little? — B: No. You have to take it all.",
+          "en": "A: The medicine is so bitter — can’t I leave just a little? — B: No. You have to take it all.",
           "why": "남기다 is to leave something behind, so 조금만 남기다 is leaving a little in the cup. Medicine in Korean is 먹다, eaten rather than taken. One thing to know: the book’s answer key prints 안 먹으면 안 돼요 for this item, which is good Korean and fits B’s reply, but it is not built from 조금만 남기다 — the phrase printed under the picture. This page follows the picture.",
           "grammar": "남기다 → 남기면 안 돼요. 남기 ends in a vowel, so -면 goes on bare; the 으 in 남기으면 is the one only consonant stems need. Compare 먹으면 in 연습 1, where the stem does end in a consonant."
         },
@@ -1429,7 +1429,7 @@
               "ko": "봤은"
             }
           ],
-          "en": "T: Is this your first time seeing this film? — S: No, I've seen it before.",
+          "en": "T: Is this your first time seeing this film? — S: No, I’ve seen it before.",
           "why": "처음 봐요? asks whether this is the first time, so 아니요 commits you to there having been an earlier one — which is exactly what -(으)ㄴ 적이 있다 records. 전에 pins that earlier time to somewhere before now without saying when.",
           "grammar": "보다 → 본. A vowel stem takes the bare ㄴ. 봤은 stacks the past 았 under a form that already means past, and 적이 있다 carries the pastness by itself.",
           "audio": {
@@ -1466,7 +1466,7 @@
               "ko": "먹었은"
             }
           ],
-          "en": "T: Is this your first time eating this dish? — S: No, I've eaten it before.",
+          "en": "T: Is this your first time eating this dish? — S: No, I’ve eaten it before.",
           "why": "The first consonant stem in the drill, and that is why it is here. 먹 ends in ㄱ, so the ending needs its 으 to be sayable at all — the same 으 that 보다 had no use for.",
           "grammar": "먹다 → 먹은. Consonant stem takes -은, vowel stem takes -ㄴ. 먹는 is the present modifier — 먹는 사람 is the person who is eating — and it cannot stand in front of 적이 있다.",
           "audio": {
@@ -1503,7 +1503,7 @@
               "ko": "만났은"
             }
           ],
-          "en": "T: Is this your first time meeting Michael? — S: No, I've met him before.",
+          "en": "T: Is this your first time meeting Michael? — S: No, I’ve met him before.",
           "why": "만나다 ends in ㅏ, so it goes the way 보다 went and not the way 먹다 did. 씨 after a name is the everyday polite way to refer to someone who is not senior to you — a teacher would get 선생님 instead.",
           "grammar": "만나다 → 만난. Vowel stem, so -ㄴ attaches straight on. Both wrong answers here are the two mistakes already seen: the present modifier, and the past put in twice.",
           "audio": {
@@ -1540,7 +1540,7 @@
               "ko": "들는"
             }
           ],
-          "en": "T: Is this your first time hearing this song? — S: No, I've heard it before.",
+          "en": "T: Is this your first time hearing this song? — S: No, I’ve heard it before.",
           "why": "The one the drill builds towards, and the teacher gives it away in the question: 들어요, not 듣어요. The ㄷ has already turned into ㄹ there for the same reason it does here.",
           "grammar": "듣다 → 들은. ㄷ-irregular: ㄷ becomes ㄹ before a vowel ending, then the consonant-stem -은 goes on. Compare 듣고, where a consonant follows and the ㄷ stays as it is.",
           "audio": {
@@ -1563,7 +1563,7 @@
           }
         ],
         "answerKo": "간",
-        "en": "T: Is this your first time going to Gyeongju? — S: No, I've been before.",
+        "en": "T: Is this your first time going to Gyeongju? — S: No, I’ve been before.",
         "audio": {
           "src": "audio/book/2b-u14-p1-0.mp3",
           "askEnd": 2.44
@@ -1723,7 +1723,7 @@
               "ko": "집에 도착할 때"
             }
           ],
-          "en": "T: When did you get Nana's call? — S: When I got home.",
+          "en": "T: When did you get Nana’s call? — S: When I got home.",
           "why": "This is the sentence the 문법과 표현 연습 2 example was built on, turned round: there the phone rang as you arrived, here you answer for when the call came. 전화를 받다 is to take a call, the same 받다 as item 1.",
           "grammar": "도착하다 → 도착했을 때. Every 하다 verb goes 하 + 였 → 했, so 도착하았을 is wrong twice over — wrong vowel, and uncontracted.",
           "audio": {

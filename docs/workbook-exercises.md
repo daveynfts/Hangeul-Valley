@@ -179,6 +179,63 @@ the alternative is inventing Korean that is only wrong by intention. A `match` w
 no pictures keeps its box above the rows; only a picture match is drawn as two
 columns.
 
+### Writing the explanation
+
+Three fields print under a checked row: `en` translates the finished sentence,
+`why` says what the sentence is doing and why the answer is the one that does it,
+and `grammar` shows the form being built. The split is worth keeping — `why` is
+about the sentence, `grammar` is about the ending — because a learner who wants
+one of those does not want to read the other to find it.
+
+**The explanation has to answer the buttons that were on screen.** This panel is
+read at the moment a row went wrong, by someone who wants to know about *their*
+mistake. Most single-row distractors need no naming, because the rule the row
+teaches already disposes of them: 장미 ends in a vowel, so the particle is 가, and
+that rules out 장미이 without ever printing it. What needs naming is a distractor
+whose wrongness the row's own rule does not reach.
+
+The failure mode is a distractor shape that recurs across a whole page and is
+never mentioned on it. Unit 10's V-(으)ㄹ래요 page shipped that way: -(으)ㄹ게요 and
+the 래/레 misspelling stood as wrong answers on all five rows, and neither
+`noteEn` nor any row said a word about either — so picking 갈게요, which is real
+and useful Korean and exactly the mistake to expect, returned a note about 으
+insertion. That is a check now: `tests/test_unit10_workbook.js` section 9d and
+`tests/test_unit14_workbook.js` section 19 fail when a shape wrong on half a page
+or more appears nowhere in that page's text. They also require each row's note to
+name at least one of that row's own answers, which is what caught 연습 3 of
+V-(으)ㄹ래요 2 — its note was entirely about B's printed line and said nothing
+about either blank.
+
+Both checks are deliberately loose in one direction and tight in the other. A
+literal-mention rule over every distractor fires on correct content — 91 of Unit
+10's 242 distractors are answered by a class rule rather than by name — and a
+check that flags good work gets switched off. Run any new rule against the
+pre-fix file before trusting it: if it does not fail on the bug it was written
+for, it is not checking anything.
+
+**A rule that recurs on every row goes in `noteEn`, once.** The rows then point at
+which button it is, and each says something different. Five rows carrying the same
+clause read as one row copied — the same failure the list headline had when the
+instruction was the headline.
+
+**Check every mnemonic against a counterexample before writing it down.** The
+되/돼 note used to say that anything ending the sentence is 돼요, which dies on
+되세요. What replaced it is the test native writers actually use: put 하/해 in the
+same slot, and if 해 fits, write 돼 — 안 해요 works, so it is 안 돼요. A rule stated
+wider than it is will be believed at exactly its stated width.
+
+**Do not say a form is not Korean when what is wrong is where it is.** 가러 is a
+sayable shape; it loses on that row because -(으)러 has to be followed by a verb
+of movement and the verb after the blank is 하다. Saying it is not Korean teaches
+a learner to distrust a form they will meet.
+
+**Read contrast pairs character by character.** 았/았 sat in a Unit 14 note — the
+same syllable on both sides of the slash, where 아/었 was meant. A pair is where a
+typo is least visible and most misleading, because the shape of the sentence
+around it still reads as a contrast.
+
+The apostrophe is the curly one.
+
 ### Worked examples
 
 `example` on a `build` exercise carries the finished text (`answerKo`,
@@ -419,12 +476,54 @@ needs adding to that list.
 
 ---
 
+## The order to do it in
+
+Everything above is what to write. This is when to write it, and the order is
+chosen so that the steps which can invalidate earlier work come first.
+
+1. **Read the unit's answer key before writing any JSON.** What you are looking
+   for is which exercises have one right answer and which do not — a checklist,
+   an interview, a write-your-own, a row that ends in two empty frames. Those are
+   the ones needing a change of shape, and settling the shape now saves writing
+   rows you delete. Every change goes in `noteEn`.
+2. **Cut the audio next, not last.** It is the step that can fail after
+   everything else is already right, and the tone-pairing was got wrong twice
+   before the speech-rate check existed. It also feeds back into the text: track
+   2's dictated drills are printed with commas because that is what the recording
+   does, and a drill whose teacher reads three words rather than a sentence is a
+   different exercise on the page. Get the segment map from ffmpeg, work the spans
+   out in a script, then shift the pairing by one and confirm the band widens.
+3. **Write the rows against the key**, one exercise at a time. Invariable words in
+   the template, so each choice carries only the decision.
+4. **Write the distractors from the mistakes, then the explanation against the
+   distractors** — in that order. Reversed, the buttons get invented to suit a
+   note already written, and the note stops being about the mistake.
+5. **Ask what the game already ships before drawing.** `sprites/catalog.json`
+   maps `wordKo` to a path, so the icon for a word is a lookup. Unit 10 needed no
+   new art at all. Draw a 16×16 only when nothing fits.
+6. **Wire it**: a line in `workbookUrl()`, an entry in `WORKBOOKS`, the world JSON
+   in `STATIC_FILES`, and the unit's own test suite. `tests/test_r2_content.js`
+   catches the `STATIC_FILES` line you forget; nothing catches the other three, so
+   do them together.
+7. **Run the suite, then play it wrong on purpose.** The tests check the key, the
+   art, the clips, the pace, and now that every recurring wrong answer is spoken
+   to. What they cannot check is whether an explanation reads as help. Pick the
+   distractors deliberately, on every page, and read what comes back.
+
+Adding vocabulary or exercises to a unit already built is the same list from step
+3, minus the wiring — and step 4 is still the one that decides whether the
+addition teaches anything.
+
+---
+
 ## Before committing
 
 ```bash
 npm run check && npm run validate && npm test && npm --prefix admin test
 ```
 
-`tests/test_unit14_workbook.js` is the one that matters here: textbook answer
-keys, the interaction, the art, the clips and the speech-rate check.
+The unit suites are the ones that matter here — `tests/test_unit14_workbook.js`
+and `tests/test_unit10_workbook.js`: textbook answer keys, the interaction, the
+art, the clips, the speech-rate check, and that every wrong answer a page leans
+on is spoken to somewhere on it.
 `npm run test:desktop` needs Python, which is not on every machine.

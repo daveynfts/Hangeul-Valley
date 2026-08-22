@@ -1305,6 +1305,80 @@ console.log('\n--- 18. Listening ---');
 }
 
 console.log('\n====================================================');
+// ── 19. Every wrong button is answered ────────────────────────────────────
+console.log('\n--- 19. Every wrong button is answered ---');
+{
+  // The explanation panel is what a learner reads after getting a row wrong, so
+  // a distractor the page never mentions leaves them reading about something
+  // else. Most single-row distractors are answered by a class rule rather than
+  // by name — '장미 ends in a vowel, so the particle is 가' rules out 장미이
+  // without ever printing it — and demanding the literal form everywhere would
+  // fire on correct content. The real gap is a distractor SHAPE that recurs
+  // across most of a page and is never named on it: a systematic teaching point
+  // going unmentioned, rather than a form the learner can derive.
+  //
+  // Unit 10's V-(으)ㄹ래요 page shipped exactly that — -(으)ㄹ게요 and the 래/레
+  // misspelling stood as wrong answers on all five rows with nothing said about
+  // either, so picking 갈게요 returned a note about 으 insertion instead.
+  const KO = /[^가-힣]/g;
+  let pages = 0;
+  wb.exercises.forEach((ex) => {
+    const rows = (ex.items || []).filter(it => it.choices);
+    if (rows.length < 3) return;
+    pages++;
+    const seen = new Map();
+    rows.forEach((it) => {
+      const sigs = new Set();
+      ['choices', 'choices2'].forEach((k) => {
+        (it[k] || []).forEach((c) => {
+          if (c.id === it.answer || c.id === it.answer2) return;
+          const syl = c.ko.replace(KO, '');
+          if (syl.length >= 2) sigs.add(syl.slice(-2));
+        });
+      });
+      sigs.forEach(s => seen.set(s, (seen.get(s) || 0) + 1));
+    });
+    // The whole page counts, not just the row: a rule that holds for every row
+    // belongs in noteEn, said once, and the rows then only point at it.
+    const said = [ex.noteEn || '']
+      .concat(rows.map(it => (it.why || '') + ' ' + (it.grammar || '')))
+      .join(' ').replace(KO, '');
+    seen.forEach((n, sig) => {
+      if (n >= 3 && n >= rows.length / 2) {
+        assert(said.indexOf(sig) >= 0,
+          ex.id + ': -' + sig + ' is wrong on ' + n + ' of ' + rows.length
+          + ' rows, so the page says why');
+      }
+    });
+  });
+  assert(pages >= 8, 'the check reaches every page with choices (' + pages + ')');
+
+  // And the three fields the panel prints are all there to print.
+  let rowCount = 0;
+  wb.exercises.forEach(ex => (ex.items || []).forEach((it) => {
+    rowCount++;
+    ['en', 'why', 'grammar'].forEach((f) => {
+      assert(typeof it[f] === 'string' && it[f].trim().length > 0,
+        ex.id + ' item ' + it.n + ' carries ' + f);
+    });
+    // A note that names none of the row’s own answers is a note about some
+    // other row. Only one is required: a two-blank row explains the decision it
+    // is about and leaves the routine half to the page, and demanding both would
+    // push every note towards boilerplate.
+    const tails = [it.answer, it.answer2].filter(Boolean).map((id) => {
+      const chosen = [].concat(it.choices || [], it.choices2 || [])
+        .find(c => c.id === id);
+      return chosen ? chosen.ko.replace(KO, '').slice(-2) : '';
+    }).filter(t => t.length >= 1);
+    if (tails.length) {
+      const note = (it.grammar + ' ' + it.why).replace(KO, '');
+      assert(tails.some(t => note.indexOf(t) >= 0),
+        ex.id + ' item ' + it.n + ': the note names what the row answers');
+    }
+  }));
+  assert(rowCount === 57, 'across all 57 rows');
+}
+
 console.log('RESULT: ' + passed + ' passed, ' + failed + ' failed');
 console.log('====================================================');
 process.exit(failed ? 1 : 0);
