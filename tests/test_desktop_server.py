@@ -109,7 +109,6 @@ try:
         '/js/boot.js',
         '/js/systems/save.js',
         '/vendor/phaser-3.70.0.min.js',   # vendored so the desktop build runs offline
-        '/diner/index.html',
         '/worlds/2b-unit-10.json',
         '/skins/catalog.json',
     ]

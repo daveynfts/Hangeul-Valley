@@ -85,7 +85,7 @@ console.log('\n--- 2. The CI condition: no local clips, CDN already populated --
   // Only the phrase sources are copied. audio/ko/ is deliberately absent, which is exactly
   // what actions/checkout produces.
   const base = tmpdir('ci');
-  for (const rel of ['levels.json', 'diner/content.json', 'worlds/2b-unit-10.json',
+  for (const rel of ['levels.json', 'worlds/2b-unit-10.json',
                      'worlds/2b-unit-14.json', 'worlds/unit10-desk-quiz.json',
                      'worlds/unit14-desk-quiz.json']) {
     const src = path.join(__dirname, '..', rel);

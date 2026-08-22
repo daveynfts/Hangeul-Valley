@@ -105,7 +105,7 @@ function collectTtsPhrases(root) {
   (Array.isArray(levels) ? levels : []).forEach((lvl) => {
     (lvl.words || []).forEach((w) => addKo(out, seen, w && w.ko));
   });
-  ['diner/content.json', 'worlds/2b-unit-10.json', 'worlds/2b-unit-14.json',
+  ['worlds/2b-unit-10.json', 'worlds/2b-unit-14.json',
     'worlds/unit10-desk-quiz.json', 'worlds/unit14-desk-quiz.json'].forEach((rel) => {
     const full = path.join(base, rel);
     if (!fs.existsSync(full)) return;

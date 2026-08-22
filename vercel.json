@@ -45,10 +45,6 @@
       "destination": "https://cdn.daveynfts.com/hangeul-valley/skins/:path*"
     },
     {
-      "source": "/diner/content.json",
-      "destination": "https://cdn.daveynfts.com/hangeul-valley/diner/content.json"
-    },
-    {
       "source": "/audio/:path*",
       "destination": "https://cdn.daveynfts.com/hangeul-valley/audio/:path*"
     }

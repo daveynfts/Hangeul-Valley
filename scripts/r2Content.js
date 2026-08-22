@@ -27,8 +27,7 @@ const STATIC_FILES = [
   ['levels.json', 'application/json'],
   ['facts.json', 'application/json'],
   ['sprites/catalog.json', 'application/json'],
-  ['skins/catalog.json', 'application/json'],
-  ['diner/content.json', 'application/json']
+  ['skins/catalog.json', 'application/json']
 ];
 
 function loadEnvFile(file) {
