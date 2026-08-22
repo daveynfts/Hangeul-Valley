@@ -200,7 +200,16 @@
           "en": "You cannot bring food in here.",
           "why": "반입 is the act of bringing something in, so 음식물 반입 금지 forbids carrying food inside — which is word for word what A's second sentence says.",
           "grammar": "-을/ㄹ 수 없습니다 is \"cannot\": 들어오다 → 들어올 수 없습니다. And 여기는 X입니다 names a place by the rule that governs it.",
-          "aKo": "여기는 {}입니다. 여기에 음식을 가지고 들어올 수 없습니다."
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기는 {}입니다. 여기에 음식을 가지고 들어올 수 없습니다."
+            },
+            {
+              "who": "B",
+              "ko": "아, 그래요? 죄송합니다."
+            }
+          ]
         },
         {
           "n": 2,
@@ -208,7 +217,16 @@
           "en": "You cannot take photographs here.",
           "why": "촬영 is photographing or filming. The sign turns the banned action into a noun phrase, and A's next sentence spells the same thing out as a verb.",
           "grammar": "찍다 → 찍을 수 없습니다. Note 에서 rather than 에 — the action happens *at* the place, so 에서 marks it.",
-          "aKo": "여기는 {}입니다. 여기에서 사진을 찍을 수 없습니다."
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기는 {}입니다. 여기에서 사진을 찍을 수 없습니다."
+            },
+            {
+              "who": "B",
+              "ko": "아, 그래요? 죄송합니다."
+            }
+          ]
         },
         {
           "n": 3,
@@ -216,7 +234,16 @@
           "en": "You cannot make phone calls here.",
           "why": "The banned thing is 사용 — use. The sign forbids using the phone, not carrying it, which is why A says 전화를 할 수 없습니다 rather than anything about bringing one in.",
           "grammar": "하다 → 할 수 없습니다. The sign spaces 휴대 전화; running text usually writes 휴대전화 solid.",
-          "aKo": "여기는 {}입니다. 여기에서 전화를 할 수 없습니다."
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기는 {}입니다. 여기에서 전화를 할 수 없습니다."
+            },
+            {
+              "who": "B",
+              "ko": "아, 그래요? 죄송합니다."
+            }
+          ]
         },
         {
           "n": 4,
@@ -224,14 +251,31 @@
           "en": "You cannot park a car here.",
           "why": "주차 is parking. 세우다 is to bring a vehicle to a stop and leave it, so 차를 세울 수 없습니다 is the everyday way of saying the same thing the sign says formally.",
           "grammar": "세우다 → 세울 수 없습니다. Four of these five signs end in 금지; 금연 is the odd one out, built as 금 (prohibit) + 연 (smoke) instead.",
-          "aKo": "여기는 {}입니다. 여기에 차를 세울 수 없습니다."
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기는 {}입니다. 여기에 차를 세울 수 없습니다."
+            },
+            {
+              "who": "B",
+              "ko": "아, 그래요? 죄송합니다."
+            }
+          ]
         }
       ],
-      "reply": "아, 그래요? 죄송합니다.",
       "example": {
         "answer": "no_smoking",
         "en": "A: This is a no-smoking area. You cannot smoke here. — B: Oh, really? I'm sorry.",
-        "aKo": "여기는 {}입니다. 여기에서 담배를 피울 수 없습니다."
+        "lines": [
+          {
+            "who": "A",
+            "ko": "여기는 {}입니다. 여기에서 담배를 피울 수 없습니다."
+          },
+          {
+            "who": "B",
+            "ko": "아, 그래요? 죄송합니다."
+          }
+        ]
       }
     },
     {

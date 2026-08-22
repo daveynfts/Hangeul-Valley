@@ -115,8 +115,10 @@ console.log('--- 1. Textbook fidelity ---');
 // thirteenth or renaming one.
 const BOOK = ['김치찌개', '된장찌개', '순두부찌개', '감자탕', '매운탕', '설렁탕',
   '냉면', '칼국수', '비빔국수', '삼겹살', '떡갈비', '갈비찜'];
-assert(wb.exercises.length === 2, 'the twelve dishes are split across two exercises');
-const named = wb.exercises.flatMap(e => e.bank.map(b => b.ko));
+const dishes = wb.exercises.filter(e => e.type === 'match');
+assert(wb.exercises.length === 4, 'four exercises off the 어휘 pages');
+assert(dishes.length === 2, 'the twelve dishes are split across two matching pages');
+const named = dishes.flatMap(e => e.bank.map(b => b.ko));
 assert(named.length === 12, 'twelve names in all');
 assert(JSON.stringify(named) === JSON.stringify(BOOK),
   'and they are the twelve the book prints, in the book’s order');
@@ -124,10 +126,50 @@ const worldWords = world.level.words.map(w => w.ko);
 BOOK.forEach((ko) => {
   assert(worldWords.indexOf(ko) >= 0, ko + ' is already a Unit 10 vocabulary word');
 });
-assert(wb.exercises.every(e => e.type === 'match'),
-  'both are matching exercises — the book’s tick-list cannot be marked');
-assert(/tick|check/i.test(wb.exercises[0].noteEn),
-  'and the page says what the book asked for instead');
+assert(/tick|check/i.test(dishes[0].noteEn),
+  'the page says what the book asked for, since the tick-list cannot be marked');
+
+// 연습 2 — five taste adjectives, each in a different grammatical shape. That
+// is the exercise: one word list, five endings, two of them irregular.
+const taste = wb.exercises.find(e => e.id === 'u10-vocab-3');
+assert(!!taste && taste.type === 'dialogue', '연습 3 is a dialogue page');
+const KEY2 = [[1, '짜다', '짜요'], [2, '맵다', '매운'], [3, '쓰다', '써서'],
+  [4, '달다', '단'], [5, '시다', '시어요']];
+KEY2.forEach(([n, dict, form]) => {
+  const it = taste.items.find(i => i.n === n);
+  const chip = taste.bank.find(b => b.id === it.answer);
+  assert(chip && chip.dict === dict, '연습 2 item ' + n + ' picks ' + dict);
+  assert(chip && chip.polite === form, 'and the blank fills with ' + form);
+});
+assert(new Set(taste.bank.map(b => b.polite)).size === 5,
+  'no two blanks want the same form — that is what the page drills');
+assert(taste.items.every(i => i.lines.length === 2), 'each row is a two-line exchange');
+assert(taste.items.filter(i => i.lines[0].ko.indexOf('{}') >= 0).length === 2
+  && taste.items.filter(i => i.lines[1].ko.indexOf('{}') >= 0).length === 3,
+  'and the blank falls in A’s line on two of them and B’s on three — which the'
+  + ' old one-A-line-plus-shared-reply shape could not express');
+assert(/ㅂ/.test(taste.items.find(i => i.n === 2).grammar), 'item 2 names the ㅂ-irregular');
+assert(/ㅡ/.test(taste.items.find(i => i.n === 3).grammar), 'item 3 names the ㅡ-irregular');
+assert(/ㄹ/.test(taste.items.find(i => i.n === 4).grammar), 'item 4 names the ㄹ drop');
+
+// 연습 3 — the blank sits mid-sentence and takes its particle with it.
+const rest = wb.exercises.find(e => e.id === 'u10-vocab-4');
+assert(!!rest && rest.type === 'fill', '연습 4 is a fill page');
+assert(rest.items.length === 3 && rest.bank.length === 5,
+  'three sentences out of a box of five — the book offers more than it uses');
+const KEY3 = [[1, '분위기', '분위기가'], [2, '서비스', '서비스가'], [3, '교통', '교통이']];
+KEY3.forEach(([n, dict, form]) => {
+  const it = rest.items.find(i => i.n === n);
+  const chip = rest.bank.find(b => b.id === it.answer);
+  assert(chip && chip.dict === dict, '연습 3 item ' + n + ' answers ' + dict);
+  assert(chip && chip.polite === form, 'and carries its particle: ' + form);
+});
+assert(rest.bank.every(b => /[이가]$/.test(b.polite)), 'every entry brings a subject particle');
+assert(rest.bank.filter(b => b.polite.endsWith('이')).length === 3
+  && rest.bank.filter(b => b.polite.endsWith('가')).length === 2,
+  'and the split is by final consonant, not by whim');
+assert(rest.items.every(i => i.stemKo.indexOf('{}') >= 0),
+  'the blank is marked mid-sentence rather than appended at the end');
 
 // ── 2. Pictures are reused, not redrawn ──────────────────────────────────────
 console.log('\n--- 2. Reusing the Unit 10 art ---');
@@ -135,7 +177,7 @@ const shipped = new Map((catalog.assets || [])
   .filter(a => a && a.status === 'shipped' && a.path)
   .map(a => ['sprites/' + String(a.path).replace(/\\/g, '/'), a]));
 let imgCount = 0;
-wb.exercises.forEach((e) => {
+dishes.forEach((e) => {
   e.items.forEach((it) => {
     imgCount++;
     assert(!!it.img, e.no + ' item ' + it.n + ' shows a picture');
@@ -155,7 +197,7 @@ wb.exercises.forEach((e) => {
     + ' name there would answer the row');
 });
 assert(imgCount === 12, 'twelve pictures, one per dish');
-assert(new Set(wb.exercises.flatMap(e => e.items.map(i => i.img))).size === 12,
+assert(new Set(dishes.flatMap(e => e.items.map(i => i.img))).size === 12,
   'and no picture is used twice');
 
 // ── 3. Every row is explained ────────────────────────────────────────────────
@@ -330,7 +372,7 @@ assert(r2.indexOf("'worlds/unit14-workbook.json'") < 0,
 const { collectUploadFiles } = require('../scripts/r2Content.js');
 const batch = new Set(collectUploadFiles(ROOT).map(f => f.rel));
 assert(batch.has('worlds/unit10-workbook.json'), 'Unit 10’s workbook is published');
-wb.exercises.forEach(e => e.items.forEach((it) => {
+wb.exercises.forEach(e => e.items.filter(i => i.img).forEach((it) => {
   assert(batch.has(it.img), it.img.split('/').pop() + ' is published');
 }));
 
