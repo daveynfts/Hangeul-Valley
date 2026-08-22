@@ -762,8 +762,9 @@ STATIC_FILES.forEach(([rel]) => {
 // happened when api/leaderboard.js was added to a project already sitting on twelve.
 //
 // Underscore-prefixed files are modules the routes require, not routes, and are not counted.
-// Two of the three Unit 10 reads were merged into api/unit10/[kind].js to make room; if this
-// ever trips again, look for routes that differ only in which getter they call.
+// Every admin read now lives in api/[...path].js — eight files became one — so the count sits
+// at four with room to spare. If this ever trips again, look for routes that differ only in
+// which getter they call: that is what the catch-all already absorbed.
 (function checkVercelFunctionBudget() {
   const VERCEL_HOBBY_MAX = 12;
   const apiDir = path.join(ROOT, 'api');
@@ -781,6 +782,28 @@ STATIC_FILES.forEach(([rel]) => {
     routes.length <= VERCEL_HOBBY_MAX,
     `${routes.length} routes: ${routes.sort().join(', ')}`
   );
+
+  // The other half of the same trap, and the one that actually broke the last two
+  // deployments. vercel.json's `functions` block names each function by path and lists the data
+  // files to bundle with it, so deleting or renaming a route without editing that block fails
+  // the build with "the pattern api/art.js ... doesn't match any Serverless Functions inside
+  // the api directory" — one second in, after CI has already gone green. The block is the real
+  // mechanism for getting levels.json and sprites/ into a function; the require() calls beside
+  // the handlers are not.
+  const vercelCfg = JSON.parse(read('vercel.json'));
+  const declared = Object.keys(vercelCfg.functions || {});
+  const orphaned = declared.filter((rel) => !fs.existsSync(path.join(ROOT, rel)));
+  check('every vercel.json `functions` pattern matches a file', orphaned.length === 0,
+    orphaned.join(', '));
+  // And the reverse, which fails quietly rather than loudly: a route that reads a data file but
+  // is not in the block ships without it and throws at runtime instead of at build time.
+  const undeclared = routes.filter((rel) => !declared.includes('api/' + rel));
+  check('routes outside the `functions` block need no bundled data',
+    undeclared.every((rel) => {
+      const src = read(path.join('api', rel));
+      return !/require\('\.\.\/[^']*\.json'\)/.test(src);
+    }),
+    'these require a JSON but are not in vercel.json functions: ' + undeclared.join(', '));
 }());
 
 // ── Report ───────────────────────────────────────────────────────────────────

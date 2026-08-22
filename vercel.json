@@ -88,32 +88,8 @@
     }
   ],
   "functions": {
-    "api/art.js": {
-      "includeFiles": "sprites/**"
-    },
-    "api/stats.js": {
-      "includeFiles": "{levels.json,facts.json}"
-    },
-    "api/levels.js": {
-      "includeFiles": "levels.json"
-    },
-    "api/levels/[num].js": {
-      "includeFiles": "levels.json"
-    },
-    "api/vocab-facts.js": {
-      "includeFiles": "{levels.json,facts.json}"
-    },
-    "api/unit10/layout.js": {
-      "includeFiles": "worlds/**"
-    },
-    "api/unit10/quiz.js": {
-      "includeFiles": "worlds/**"
-    },
-    "api/unit10/world.js": {
-      "includeFiles": "worlds/**"
-    },
-    "api/skins/catalog.js": {
-      "includeFiles": "skins/catalog.json"
+    "api/[...path].js": {
+      "includeFiles": "{levels.json,facts.json,skins/catalog.json,sprites/**,worlds/**}"
     }
   }
 }
