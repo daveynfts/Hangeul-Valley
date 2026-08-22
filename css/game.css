@@ -2781,6 +2781,21 @@
        which blank is not readable off the buttons themselves. The break puts
        each group on its own line and the tag repeats the speaker chip from the
        script above, so the pairing is visible rather than inferred. */
+    /* Listen to the row. Sits at the end of the header line rather than beside
+       the sentence, because the sentence is the thing being built and a control
+       inside it would read as part of the puzzle. */
+    .wb-say {
+      margin-left: auto; flex: 0 0 auto;
+      width: 32px; height: 32px; padding: 0; line-height: 1; font-size: 15px;
+      background: var(--parch-l); border: 2px solid var(--wood-m); border-radius: 4px;
+      cursor: pointer; color: var(--ink);
+      box-shadow: inset 0 1px 0 #fff, 0 2px 0 var(--wood-m);
+      transition: background .15s, transform .12s;
+    }
+    .wb-say:hover { background: #fff3d6; transform: translateY(-1px); }
+    .wb-say:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.42); }
+    #wb-example .wb-say { margin-top: 8px; margin-left: 0; }
+
     .wb-picks-break { flex-basis: 100%; height: 0; margin: 0; }
     .wb-picks-tag {
       display: inline-flex; align-items: center; justify-content: center;
@@ -2796,6 +2811,7 @@
       .wb-exp-picks { gap: 6px; }
       .wb-pick-form, .wb-pick-own { font-size: 14px; padding: 6px 9px; }
       .wb-items-build .wb-blank { min-width: 88px; }
+      .wb-say { width: 30px; height: 30px; font-size: 14px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .wb-pick-form, .wb-pick-own { transition: none; }

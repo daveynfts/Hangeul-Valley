@@ -1342,6 +1342,169 @@
         "answerKo": "안 하면",
         "en": "I really have to exercise. → Not exercising will not do."
       }
+    },
+    {
+      "id": "u14-pattern-1",
+      "type": "build",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 1",
+      "icon": "🎧",
+      "blurbEn": "The teacher asks if it is your first time. It is not.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as in the example.",
+      "noteEn": "In the book this is the listening drill on track 10: the teacher asks, you answer out loud, one after another. The pattern never changes — 아니요, 전에 …-(으)ㄴ 적이 있어요 — so the only thing to get right is the modifier, and the four verbs are picked to cover all three ways it forms. Use the speaker button: say it before you read it.",
+      "pattern": "V-(으)ㄴ 적(이) 있다[없다]",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "보다",
+          "lines": [
+            {
+              "who": "T",
+              "ko": "이 영화를 처음 봐요?"
+            },
+            {
+              "who": "S",
+              "ko": "아니요, 전에 {} 적이 있어요."
+            }
+          ],
+          "answer": "bon",
+          "choices": [
+            {
+              "id": "bon",
+              "ko": "본"
+            },
+            {
+              "id": "boeun",
+              "ko": "보은"
+            },
+            {
+              "id": "bwasseun",
+              "ko": "봤은"
+            }
+          ],
+          "en": "T: Is this your first time seeing this film? — S: No, I've seen it before.",
+          "why": "처음 봐요? asks whether this is the first time, so 아니요 commits you to there having been an earlier one — which is exactly what -(으)ㄴ 적이 있다 records. 전에 pins that earlier time to somewhere before now without saying when.",
+          "grammar": "보다 → 본. A vowel stem takes the bare ㄴ. 봤은 stacks the past 았 under a form that already means past, and 적이 있다 carries the pastness by itself."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "먹다",
+          "lines": [
+            {
+              "who": "T",
+              "ko": "이 음식을 처음 먹어요?"
+            },
+            {
+              "who": "S",
+              "ko": "아니요, 전에 {} 적이 있어요."
+            }
+          ],
+          "answer": "meogeun",
+          "choices": [
+            {
+              "id": "meogeun",
+              "ko": "먹은"
+            },
+            {
+              "id": "meogneun",
+              "ko": "먹는"
+            },
+            {
+              "id": "meogeosseun",
+              "ko": "먹었은"
+            }
+          ],
+          "en": "T: Is this your first time eating this dish? — S: No, I've eaten it before.",
+          "why": "The first consonant stem in the drill, and that is why it is here. 먹 ends in ㄱ, so the ending needs its 으 to be sayable at all — the same 으 that 보다 had no use for.",
+          "grammar": "먹다 → 먹은. Consonant stem takes -은, vowel stem takes -ㄴ. 먹는 is the present modifier — 먹는 사람 is the person who is eating — and it cannot stand in front of 적이 있다."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "만나다",
+          "lines": [
+            {
+              "who": "T",
+              "ko": "마이클 씨를 처음 만나요?"
+            },
+            {
+              "who": "S",
+              "ko": "아니요, 전에 {} 적이 있어요."
+            }
+          ],
+          "answer": "mannan",
+          "choices": [
+            {
+              "id": "mannan",
+              "ko": "만난"
+            },
+            {
+              "id": "mannaneun",
+              "ko": "만나는"
+            },
+            {
+              "id": "mannasseun",
+              "ko": "만났은"
+            }
+          ],
+          "en": "T: Is this your first time meeting Michael? — S: No, I've met him before.",
+          "why": "만나다 ends in ㅏ, so it goes the way 보다 went and not the way 먹다 did. 씨 after a name is the everyday polite way to refer to someone who is not senior to you — a teacher would get 선생님 instead.",
+          "grammar": "만나다 → 만난. Vowel stem, so -ㄴ attaches straight on. Both wrong answers here are the two mistakes already seen: the present modifier, and the past put in twice."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "듣다",
+          "lines": [
+            {
+              "who": "T",
+              "ko": "이 노래를 처음 들어요?"
+            },
+            {
+              "who": "S",
+              "ko": "아니요, 전에 {} 적이 있어요."
+            }
+          ],
+          "answer": "deureun",
+          "choices": [
+            {
+              "id": "deureun",
+              "ko": "들은"
+            },
+            {
+              "id": "deuteun",
+              "ko": "듣은"
+            },
+            {
+              "id": "deulleun",
+              "ko": "들는"
+            }
+          ],
+          "en": "T: Is this your first time hearing this song? — S: No, I've heard it before.",
+          "why": "The one the drill builds towards, and the teacher gives it away in the question: 들어요, not 듣어요. The ㄷ has already turned into ㄹ there for the same reason it does here.",
+          "grammar": "듣다 → 들은. ㄷ-irregular: ㄷ becomes ㄹ before a vowel ending, then the consonant-stem -은 goes on. Compare 듣고, where a consonant follows and the ㄷ stays as it is."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "가다",
+        "lines": [
+          {
+            "who": "T",
+            "ko": "경주에 처음 가요?"
+          },
+          {
+            "who": "S",
+            "ko": "아니요, 전에 {} 적이 있어요."
+          }
+        ],
+        "answerKo": "간",
+        "en": "T: Is this your first time going to Gyeongju? — S: No, I've been before."
+      }
     }
   ]
 }
