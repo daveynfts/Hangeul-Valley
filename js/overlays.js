@@ -1256,14 +1256,12 @@ window.closeCulturalFact = function() {
 };
 
 
-// ══════════════ LOCAL LEADERBOARD SYSTEM ═════════════════════════════════════
-
-const LOCAL_RIVALS = [
-  { name: 'Min-jun (민준)', title: 'Valley Veteran 🌾', words: 24, honor: 850, cookingTier: 'Sous Chef 🍲', arcade: 1450, dungeon: 8, rankLv: 31 },
-  { name: 'Seo-yeon (서연)', title: 'Hansik Scholar 👑', words: 18, honor: 620, cookingTier: 'Apprentice Chef 👨‍🍳', arcade: 1100, dungeon: 6, rankLv: 26 },
-  { name: 'Ji-hoon (지훈)', title: 'Arcade Ace 👾', words: 12, honor: 450, cookingTier: 'Novice Cook 🍳', arcade: 850, dungeon: 4, rankLv: 18 },
-  { name: 'Ha-eun (하은)', title: 'Art Artisan 🎨', words: 8, honor: 280, cookingTier: 'Novice Cook 🍳', arcade: 520, dungeon: 2, rankLv: 9 }
-];
+// ══════════════ LEADERBOARD ══════════════════════════════════════════════════
+// "Your records" below is local and always has been correct. The board itself is not: it is
+// read from /api/leaderboard, where each row is written by a player's own cloud save.
+//
+// The four rivals that used to live here — Min-jun, Seo-yeon, Ji-hoon, Ha-eun — are gone.
+// They were constants, so nobody could ever pass them and nobody could ever join them.
 
 function computeCookingTier() {
   const dishes = inventoryState?.cookedDishes || {};
@@ -1275,14 +1273,10 @@ function computeCookingTier() {
   return 'Novice Cook 🍳';
 }
 
-function computeCookingTierScore(tierStr) {
-  if (!tierStr) return 0;
-  if (tierStr.includes('Grand')) return 500;
-  if (tierStr.includes('Master Chef')) return 300;
-  if (tierStr.includes('Sous Chef')) return 150;
-  if (tierStr.includes('Apprentice')) return 50;
-  return 10;
-}
+// computeCookingTierScore lived here to sort the local rivals. The server orders the board now
+// and keeps its own copy of the tier table in api/_leaderboard.js, where it also decides which
+// labels are allowed to exist at all — so a second ranking rule on this side would only be
+// something to drift.
 
 function updateLeaderboardMetrics() {
   if (typeof leaderboardState === 'undefined' || !leaderboardState) leaderboardState = { personalBests: {} };
@@ -1342,99 +1336,120 @@ function closeLeaderboard() {
 }
 
 
+// The board is fetched now, not invented. It used to be four hard-coded rivals — Min-jun,
+// Seo-yeon, Ji-hoon, Ha-eun — with the real player appended as a fifth row named
+// "Player (Hero Player)". Signing in changed nothing, so every row looked like a mockup
+// including your own, and the tab that opens by default ranks on SRS-mature words, which is
+// zero for the first three weeks of any account however much has been played. The effect was
+// a signed-in player with a high score sitting last behind four people who do not exist.
+//
+// Rows come from /api/leaderboard, written by the save PUT. See api/_leaderboard.js.
+let lbRemote = { tab: null, state: 'idle', rows: [], you: null, total: 0, reason: '' };
+
+function lbFetch(tab) {
+  lbRemote = { tab, state: 'loading', rows: [], you: null, total: 0, reason: '' };
+  renderLeaderboardTable();
+  const headers = {};
+  const token = (typeof getGoogleToken === 'function') ? getGoogleToken() : '';
+  if (token) headers.Authorization = 'Bearer ' + token;
+  return fetch('/api/leaderboard?tab=' + encodeURIComponent(tab) + '&limit=20', { headers })
+    .then((r) => r.json().then((j) => ({ status: r.status, j })))
+    .then(({ status, j }) => {
+      if (lbRemote.tab !== tab) return;                   // a later tab won the race
+      if (status === 503) { lbRemote = { tab, state: 'off', rows: [], you: null, total: 0, reason: '' }; }
+      else if (status !== 200) { lbRemote = { tab, state: 'error', rows: [], you: null, total: 0, reason: 'HTTP ' + status }; }
+      else {
+        lbRemote = { tab, state: 'ok', rows: j.rows || [], you: j.you || null, total: j.total || 0, reason: '' };
+      }
+      renderLeaderboardTable();
+    })
+    .catch(() => {
+      if (lbRemote.tab !== tab) return;
+      lbRemote = { tab, state: 'error', rows: [], you: null, total: 0, reason: 'offline' };
+      renderLeaderboardTable();
+    });
+}
+
+const LB_COLS = {
+  vocab: { header: 'Words mastered (21-day interval)', val: (r) => r.words + ' words' },
+  honor: { header: 'Total Honor 🏅', val: (r) => r.honor + ' Honor 🏅' },
+  cooking: { header: 'Cooking rank', val: (r) => r.cookingTier },
+  arcade: { header: 'Arcade high score', val: (r) => r.arcade + ' pts' },
+  dungeon: { header: 'Dungeon max floor', val: (r) => 'Floor ' + r.dungeon },
+  rank: { header: 'Valley rank', val: (r) => 'Lv.' + r.rankLv }
+};
+
 function switchLeaderboardTab(tabId) {
   currentLeaderboardTab = tabId;
-
-  const tabBtns = document.querySelectorAll('.lb-tab-btn');
-  tabBtns.forEach(btn => {
-    if (btn.id === `lbtab-${tabId}` || btn.getAttribute('onclick')?.includes(`'${tabId}'`)) {
-      btn.classList.add('active');
-    } else {
-      btn.classList.remove('active');
-    }
+  document.querySelectorAll('.lb-tab-btn').forEach((btn) => {
+    const mine = btn.id === `lbtab-${tabId}` || btn.getAttribute('onclick')?.includes(`'${tabId}'`);
+    btn.classList.toggle('active', !!mine);
   });
+  if (lbRemote.tab === tabId && lbRemote.state === 'ok') renderLeaderboardTable();
+  else lbFetch(tabId);
+}
 
-  const pb = leaderboardState.personalBests;
-  const meTitle = rankTitleFor((typeof playerRank !== 'undefined' && playerRank.level) || 1);
-  const playerEntry = {
-    name: 'Player (Hero Player) 🌟',
-    title: meTitle.icon + ' ' + meTitle.en,
-    words: pb.totalWordsMastered || 0,
-    honor: pb.totalHonor || 0,
-    cookingTier: pb.highestCookingTier || 'Novice Cook 🍳',
-    arcade: pb.arcadeHighScore || 0,
-    dungeon: pb.dungeonMaxFloor || 0,
-    rankLv: (typeof playerRank !== 'undefined' && playerRank.level) || 1,
-    isPlayer: true
+// Every cell that carries a name goes through vbEsc. The rows are display names from other
+// people's Google profiles now, not four constants written into this file, and they land in
+// innerHTML. api/_leaderboard.js strips markup on the way in as well; this is the half that
+// actually has to hold.
+function renderLeaderboardTable() {
+  const container = document.getElementById('lb-table-container');
+  if (!container) return;
+  const tab = currentLeaderboardTab || 'vocab';
+  const col = LB_COLS[tab] || LB_COLS.vocab;
+
+  const note = (text) => `<div class="lb-empty">${vbEsc(text)}</div>`;
+  if (lbRemote.state === 'loading') { container.innerHTML = note('Loading the valley rankings…'); return; }
+  if (lbRemote.state === 'off') {
+    container.innerHTML = note('Rankings are not switched on for this build — your own records above are still yours.');
+    return;
+  }
+  if (lbRemote.state === 'error') {
+    container.innerHTML = note(lbRemote.reason === 'offline'
+      ? 'Cannot reach the rankings right now. Your records above are stored on this device.'
+      : 'The rankings could not be read (' + lbRemote.reason + ').');
+    return;
+  }
+  if (!lbRemote.rows.length) {
+    container.innerHTML = note('Nobody is on the board yet. Sign in and save, and you are the first.');
+    return;
+  }
+
+  const mine = lbRemote.you ? lbRemote.you.id : null;
+  const row = (r) => {
+    const badge = r.rank === 1 ? '🥇 1st' : r.rank === 2 ? '🥈 2nd' : r.rank === 3 ? '🥉 3rd' : String(r.rank);
+    const cls = (mine && r.id === mine) ? ' class="lb-row-player"' : '';
+    return `<tr${cls}>
+        <td style="font-family:'Press Start 2P',monospace; font-size:10px">${vbEsc(badge)}</td>
+        <td>${vbEsc(r.name)}</td>
+        <td class="lb-title-cell">Lv.${vbEsc(r.rankLv)}</td>
+        <td class="lb-val">${vbEsc(col.val(r))}</td>
+      </tr>`;
   };
 
-  const allEntries = [...LOCAL_RIVALS, playerEntry];
+  let body = lbRemote.rows.map(row).join('');
+  // Outside the top twenty, the player still gets to see where they stand. Without this the
+  // board is a wall of strangers and says nothing about you, which is the complaint that
+  // started all this.
+  if (lbRemote.you && !lbRemote.rows.some((r) => r.id === mine)) {
+    body += `<tr class="lb-row-gap"><td colspan="4">⋯</td></tr>` + row(lbRemote.you);
+  }
 
-  // Sort based on active tab
-  allEntries.sort((a, b) => {
-    if (tabId === 'vocab') return b.words - a.words;
-    if (tabId === 'honor') return b.honor - a.honor;
-    if (tabId === 'cooking') return computeCookingTierScore(b.cookingTier) - computeCookingTierScore(a.cookingTier);
-    if (tabId === 'arcade') return b.arcade - a.arcade;
-    if (tabId === 'dungeon') return b.dungeon - a.dungeon;
-    if (tabId === 'rank') return (b.rankLv || 0) - (a.rankLv || 0);
-    return 0;
-  });
-
-  let valColHeader = 'Score';
-  if (tabId === 'vocab') valColHeader = 'Words Mastered (>=5 Harvests)';
-  if (tabId === 'honor') valColHeader = 'Total Honor 🏅';
-  if (tabId === 'cooking') valColHeader = 'Cooking Rank';
-  if (tabId === 'arcade') valColHeader = 'Arcade High Score';
-  if (tabId === 'dungeon') valColHeader = 'Dungeon Max Floor';
-  if (tabId === 'rank') valColHeader = 'Valley Rank';
-
-  let html = `
+  container.innerHTML = `
     <table class="lb-table">
       <thead>
         <tr>
           <th style="width:10%">Rank</th>
           <th style="width:35%">Valley Resident</th>
-          <th style="width:25%">Title</th>
-          <th style="width:30%">${valColHeader}</th>
+          <th style="width:25%">Level</th>
+          <th style="width:30%">${vbEsc(col.header)}</th>
         </tr>
       </thead>
-      <tbody>
-  `;
-
-  allEntries.forEach((entry, idx) => {
-    let rankBadge = `${idx + 1}`;
-    if (idx === 0) rankBadge = '🥇 1st';
-    if (idx === 1) rankBadge = '🥈 2nd';
-    if (idx === 2) rankBadge = '🥉 3rd';
-
-    let displayVal = '';
-    if (tabId === 'vocab') displayVal = `${entry.words} words`;
-    if (tabId === 'honor') displayVal = `${entry.honor} Honor 🏅`;
-    if (tabId === 'cooking') displayVal = entry.cookingTier;
-    if (tabId === 'arcade') displayVal = `${entry.arcade} pts`;
-    if (tabId === 'dungeon') displayVal = `Floor ${entry.dungeon}`;
-    if (tabId === 'rank') displayVal = `Lv.${entry.rankLv || 1}`;
-
-    const rowClass = entry.isPlayer ? 'class="lb-row-player"' : '';
-
-    html += `
-      <tr ${rowClass}>
-        <td style="font-family:'Press Start 2P',monospace; font-size:10px">${rankBadge}</td>
-        <td>${entry.name}</td>
-        <td class="lb-title-cell">${entry.title}</td>
-        <td class="lb-val">${displayVal}</td>
-      </tr>
-    `;
-  });
-
-  html += `
-      </tbody>
+      <tbody>${body}</tbody>
     </table>
+    <div class="lb-foot">${vbEsc(lbRemote.total + ' player' + (lbRemote.total === 1 ? '' : 's') + ' on the board · scores come from each player’s own save')}</div>
   `;
-
-  const container = document.getElementById('lb-table-container');
-  if (container) container.innerHTML = html;
 }
 
 // ═══════════════ PROGRESS DASHBOARD ══════════════════════════════════════════
