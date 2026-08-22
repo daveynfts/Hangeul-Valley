@@ -1206,21 +1206,59 @@ console.log('\n--- 18. Listening ---');
       assert(i.audio.askEnd > 0 && i.audio.askEnd < secs,
         e.no + ' item ' + i.n + ' stops the prompt inside its own clip');
     });
-    // The last item of every drill is the odd one: the track asks it and moves
-    // on without recording a model answer. Consistent across all four, which is
-    // why the clip is the question alone and carries no askEnd — there is
-    // nothing after the prompt to hold back.
-    const last = e.items[e.items.length - 1];
-    assert(withAnswer.length === 3 && !last.audio.askEnd,
-      e.no + ': the last item has no model answer on the track');
-    assert(secondsOf(last.audio.src) < secondsOf(e.items[0].audio.src),
-      e.no + ': so its clip is the shorter one');
+    assert(withAnswer.length === e.items.length,
+      e.no + ': every item has a question and a model answer in its clip');
   });
   const allClips = drills.flatMap(e => e.items.map(i => i.audio.src)
     .concat(e.example.audio.src));
   assert(new Set(allClips).size === 20, 'twenty clips in all — four drills of five rows');
   assert(fs.readdirSync(path.join(ROOT, 'audio', 'book')).length === 20,
     'and nothing left over in audio/book from the earlier cuts');
+
+  // The cut was wrong twice, and both times it was a pairing error the file
+  // sizes could not see: each clip held the right amount of audio, just the
+  // wrong lines — an answer where the question belonged. What did see it is the
+  // reading pace. One narrator at one pace holds a steady syllables-per-second;
+  // a clip carrying the wrong line reads as far too fast or too slow for the
+  // text printed beside it, because the two are different lengths. So the check
+  // is on rate, and it is the regression test for the whole cutting job.
+  //
+  // askEnd splits the clip: the question before it, the model answer after,
+  // less the 0.7s breath that sits between them.
+  const BREATH = 0.7;
+  const syl = (s) => [...String(s).normalize('NFC')].filter(c => c >= '가' && c <= '힣').length;
+  const rates = [];
+  drills.forEach((e) => {
+    const rows = e.items.map(it => ({
+      label: e.no + ' item ' + it.n,
+      clip: it.audio,
+      ask: it.lines[0].ko,
+      answer: it.lines[1].ko.replace('{}', it.choices.find(c => c.id === it.answer).ko)
+    })).concat([{
+      label: e.no + ' 보기',
+      clip: e.example.audio,
+      ask: e.example.lines[0].ko,
+      answer: e.example.lines[1].ko.replace('{}', e.example.answerKo)
+    }]);
+    rows.forEach((r) => {
+      const total = secondsOf(r.clip.src);
+      const askSecs = r.clip.askEnd - BREATH / 2;
+      const ansSecs = total - r.clip.askEnd - BREATH / 2;
+      assert(askSecs > 0.5 && ansSecs > 0.5,
+        r.label + ': the clip has room for both lines');
+      rates.push([r.label + ' question', syl(r.ask) / askSecs]);
+      rates.push([r.label + ' answer', syl(r.answer) / ansSecs]);
+    });
+  });
+  rates.forEach(([what, rate]) => {
+    assert(rate > 3.0 && rate < 7.0, what + ' reads at a human pace ('
+      + rate.toFixed(1) + ' syl/s)');
+  });
+  const mean = rates.reduce((a, r) => a + r[1], 0) / rates.length;
+  const spread = Math.sqrt(rates.reduce((a, r) => a + (r[1] - mean) ** 2, 0) / rates.length);
+  assert(rates.length === 40, 'forty lines measured — five rows on each of four drills');
+  assert(spread < 0.85, 'and they are one narrator at one pace, not two lines swapped'
+    + ' (mean ' + mean.toFixed(2) + ' ±' + spread.toFixed(2) + ' syl/s)');
 
   // The button plays the book, and says so.
   const bookBtn = ui2.els['wb-items'].children[0].children[1].children[0]
