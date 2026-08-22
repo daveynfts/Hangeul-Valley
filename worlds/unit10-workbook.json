@@ -2946,6 +2946,501 @@
         "answer2Ko": "냉면 먹자",
         "en": "A: Do you want galbitang for lunch? — B: It’s hot out, so let’s have naengmyeon."
       }
+    },
+    {
+      "id": "u10-grammar-4-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 1",
+      "icon": "↔️",
+      "blurbEn": "This one yes, that one no — and the joining form depends on the word.",
+      "instructionKo": "그림을 보고 [보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each sentence as shown in the example.",
+      "noteEn": "Two pictures a row, and one sentence that turns on the contrast between them. Items 1 to 4 print everything except the joining form; the book leaves 5 and 6 blank from end to end, so the two nouns are printed here and both halves are yours. The form is the lesson: a verb takes -는데, an adjective takes -(으)ㄴ데, a noun takes -인데 — and anything in the past takes -는데 whatever it started out as. Item 4 is where that bites, because 좋다 is an adjective and still comes out 좋았는데.",
+      "pattern": "A-(으)ㄴ데, V-는데, N인데 2",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "소고기 / 돼지고기",
+          "lines": [
+            {
+              "ko": "저는 소고기는 {} 돼지고기는 안 먹어요."
+            }
+          ],
+          "answer": "meongneunde",
+          "choices": [
+            {
+              "id": "meongneunde",
+              "ko": "먹는데"
+            },
+            {
+              "id": "meogeunde",
+              "ko": "먹은데"
+            },
+            {
+              "id": "meogeuneunde",
+              "ko": "먹으는데"
+            }
+          ],
+          "en": "I eat beef, but I don’t eat pork.",
+          "why": "The same dish twice over, made of different meat, and the sentence says yes to one and no to the other. 는 on both nouns is what marks them as the two sides of it — 소고기는 … 돼지고기는.",
+          "grammar": "먹다 is a verb, so the joining form is -는데: 먹 + 는데. -(으)ㄴ데 is the adjective one, which is why 먹은데 is not a form at all, and -는데 goes straight onto the stem with no 으 in front of it."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "부산 / 제주도",
+          "lines": [
+            {
+              "ko": "저는 부산은 {} 제주도는 안 가 봤어요."
+            }
+          ],
+          "answer": "gabwatneunde",
+          "choices": [
+            {
+              "id": "gabwatneunde",
+              "ko": "가 봤는데"
+            },
+            {
+              "id": "gabwateunde",
+              "ko": "가 봤은데"
+            },
+            {
+              "id": "gaboneunde",
+              "ko": "가 보는데"
+            }
+          ],
+          "en": "I’ve been to Busan, but I haven’t been to Jeju.",
+          "why": "V-아/어 보다 is having tried something or been somewhere, and the second half repeats it in the negative — 안 가 봤어요 — so the first half has to be in the past as well.",
+          "grammar": "가 봤다 → 가 봤는데. Once 았/었 is in the stem the ending is -는데, whatever the word underneath was, so there is no such thing as an -(으)ㄴ데 after a past tense."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "나나 씨 집 / 켈리 씨 집",
+          "lines": [
+            {
+              "ko": "나나 씨 집은 학교에서 {} 켈리 씨 집은 멀어요."
+            }
+          ],
+          "answer": "gakkaunde",
+          "choices": [
+            {
+              "id": "gakkaunde",
+              "ko": "가까운데"
+            },
+            {
+              "id": "gakkapeunde",
+              "ko": "가깝은데"
+            },
+            {
+              "id": "gakkaneunde",
+              "ko": "가까는데"
+            }
+          ],
+          "en": "Nana’s place is near the school, but Kelly’s is far.",
+          "why": "가깝다 and 멀다 are the two halves, near and far, and 학교에서 is the point both are measured from — 에서 for the place you are measuring out of, as on the N 중에(서) page.",
+          "grammar": "가깝다 is an adjective, so -(으)ㄴ데 — and it is ㅂ-irregular, so the ㅂ turns into 우 before the vowel of the ending: 가깝 + 은데 = 가까운데. The same change as 맵다 → 매운 on the 어휘 page."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "어제 / 오늘",
+          "lines": [
+            {
+              "ko": "어제는 날씨가 {} 오늘은 비가 오네요."
+            }
+          ],
+          "answer": "johatneunde",
+          "choices": [
+            {
+              "id": "johatneunde",
+              "ko": "좋았는데"
+            },
+            {
+              "id": "johateunde",
+              "ko": "좋았은데"
+            },
+            {
+              "id": "joheunde",
+              "ko": "좋은데"
+            }
+          ],
+          "en": "The weather was nice yesterday, but today it’s raining.",
+          "why": "Here the two sides are two days rather than two things. 오네요 is the -네요 of the 반말 page — noticing something as you say it — which is what makes the rain sound like news.",
+          "grammar": "좋다 is an adjective and would be 좋은데 in the present. In the past it is 좋았는데, because 았/었 takes -는데. That is the one thing worth carrying out of this page: the tense decides the ending before the word class gets a say."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "코미디 영화 / 무서운 영화",
+          "lines": [
+            {
+              "ko": "코미디 영화는 {} 무서운 영화는 {}."
+            }
+          ],
+          "answer": "johahaneunde",
+          "choices": [
+            {
+              "id": "johahaneunde",
+              "ko": "좋아하는데"
+            },
+            {
+              "id": "johahaeunde",
+              "ko": "좋아하은데"
+            },
+            {
+              "id": "johahaneundae",
+              "ko": "좋아하는대"
+            }
+          ],
+          "answer2": "byeollo_an",
+          "choices2": [
+            {
+              "id": "byeollo_an",
+              "ko": "별로 안 좋아해요"
+            },
+            {
+              "id": "byeollo_no_neg",
+              "ko": "별로 좋아해요"
+            },
+            {
+              "id": "an_byeollo",
+              "ko": "안 별로 좋아해요"
+            }
+          ],
+          "en": "I like comedies, but I’m not that keen on scary films.",
+          "why": "The book leaves this row blank from one end to the other, so both halves are yours: the joining form on 좋아하다, and a second half that has to disagree with the first. 별로 is the word for not much, and it only ever turns up with a negative.",
+          "grammar": "좋아하다 → 좋아하는데, a verb like any other. In the second half 안 sits immediately in front of the verb — 별로 안 좋아해요 — and never in front of the adverb. Note the spelling too: -는데 ends in 데, while -는대 is the quotative, reporting what somebody else said."
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "녹차 / 커피",
+          "lines": [
+            {
+              "ko": "녹차는 {} 커피는 {}."
+            }
+          ],
+          "answer": "jaju_masineunde",
+          "choices": [
+            {
+              "id": "jaju_masineunde",
+              "ko": "자주 마시는데"
+            },
+            {
+              "id": "jaju_masieunde",
+              "ko": "자주 마시은데"
+            },
+            {
+              "id": "jaju_masyeoneunde",
+              "ko": "자주 마셔는데"
+            }
+          ],
+          "answer2": "jaju_an_masyeo",
+          "choices2": [
+            {
+              "id": "jaju_an_masyeo",
+              "ko": "자주 안 마셔요"
+            },
+            {
+              "id": "jaju_masyeo",
+              "ko": "자주 마셔요"
+            },
+            {
+              "id": "an_jaju_masyeo",
+              "ko": "안 자주 마셔요"
+            }
+          ],
+          "en": "I drink green tea often, but I don’t drink coffee much.",
+          "why": "The same shape as item 5 with the adverb doing the work instead of the verb: 자주 on both sides and the negative on one of them. Take the negative out and the sentence contradicts nothing, which is the one thing -는데 is here to do.",
+          "grammar": "마시다 → 마시는데. -는데 goes on the plain stem, so 마셔는데 is the 아/어 form where it has no business being — the same mistake as 추워지 for 춥지 on the 반말 page. And again 안 goes right in front of the verb: 자주 안 마셔요."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "축구 / 농구",
+        "lines": [
+          {
+            "ko": "저는 축구는 {} 농구는 못해요."
+          }
+        ],
+        "answerKo": "잘하는데",
+        "en": "I’m good at football, but I can’t play basketball."
+      }
+    },
+    {
+      "id": "u10-grammar-4-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 2",
+      "icon": "🌗",
+      "blurbEn": "Yes to half of it — and two irregulars hiding in the joining forms.",
+      "instructionKo": "[보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue as shown in the example.",
+      "noteEn": "All of it 반말, and every answer takes one side of the question before turning it. The forms are the exercise: -는데 after a verb, -(으)ㄴ데 after an adjective, -는데 after anything in the past. Two of the five hide an irregular — 덥다 loses its ㅂ, 알다 loses its ㄹ — and one hides its tense in A’s line rather than B’s.",
+      "pattern": "A-(으)ㄴ데, V-는데, N인데 2",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "나나, 어제 잘 못 잤어?"
+            },
+            {
+              "who": "B",
+              "ko": "아니, 잘 {} 피곤해."
+            }
+          ],
+          "answer": "jatneunde",
+          "choices": [
+            {
+              "id": "jatneunde",
+              "ko": "잤는데"
+            },
+            {
+              "id": "jateunde",
+              "ko": "잤은데"
+            },
+            {
+              "id": "janeunde",
+              "ko": "자는데"
+            }
+          ],
+          "en": "A: Nana, didn’t you sleep well last night? — B: No, I slept fine — but I’m tired.",
+          "why": "A guesses that Nana slept badly, so 아니 is answering the question rather than the tiredness: she did sleep well. Then the turn — well slept and tired all the same.",
+          "grammar": "자다 → 잤는데. 자 + 았 has nowhere to go but together, giving 잤, and the past takes -는데. 자는데 is the present, which cannot go with the 어제 in A’s question."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "요즘 부산 날씨는 어때?"
+            },
+            {
+              "who": "B",
+              "ko": "낮에는 좀 {} 아침, 저녁은 시원해."
+            }
+          ],
+          "answer": "deounde",
+          "choices": [
+            {
+              "id": "deounde",
+              "ko": "더운데"
+            },
+            {
+              "id": "deopeunde",
+              "ko": "덥은데"
+            },
+            {
+              "id": "deowoneunde",
+              "ko": "더워는데"
+            }
+          ],
+          "en": "A: What’s the weather like in Busan these days? — B: A bit hot in the daytime, but the mornings and evenings are cool.",
+          "why": "낮 against 아침, 저녁 — the contrast is inside a single day rather than between two things. 좀 softens it the way it always does: a bit hot, not hot.",
+          "grammar": "덥다 is an adjective, so -(으)ㄴ데, and it is ㅂ-irregular: 덥 + 은데 = 더운데. Not 덥은데, and not 더워는데 either — 더워 is the 아/어 form and -는데 does not go on it."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "샤오밍, 저 가수 노래 정말 잘하지?"
+            },
+            {
+              "who": "B",
+              "ko": "노래는 {} 춤은 잘 못 추는 것 같아."
+            }
+          ],
+          "answer": "jalhaneunde",
+          "choices": [
+            {
+              "id": "jalhaneunde",
+              "ko": "잘하는데"
+            },
+            {
+              "id": "jalhaeunde",
+              "ko": "잘하은데"
+            },
+            {
+              "id": "jalhaeneunde",
+              "ko": "잘해는데"
+            }
+          ],
+          "en": "A: Xiaoming, that singer really can sing, can’t they? — B: They can sing, but I don’t think they can dance.",
+          "why": "A asks with -지, which is asking to be agreed with, and B agrees with half of it. 노래는 … 춤은 is the same 는 … 는 pairing as 연습 1, and 것 같아 keeps the second half a guess rather than a verdict.",
+          "grammar": "잘하다 → 잘하는데, a verb. Note 춤을 추다 for dancing — Korean dances a dance — so the negative lands on 추다: 잘 못 추는 것 같아."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "스티븐, 네 친구 에도도 한국말 잘해?"
+            },
+            {
+              "who": "B",
+              "ko": "아니, 한국에서 오래 {} 잘 못해."
+            }
+          ],
+          "answer": "saratneunde",
+          "choices": [
+            {
+              "id": "saratneunde",
+              "ko": "살았는데"
+            },
+            {
+              "id": "sarateunde",
+              "ko": "살았은데"
+            },
+            {
+              "id": "salneunde",
+              "ko": "살는데"
+            }
+          ],
+          "en": "A: Steven, is your friend Edo good at Korean as well? — B: No — he lived in Korea a long time, but he isn’t.",
+          "why": "The contrast is between what living here a long time would lead you to expect and what is actually the case. 네 친구 is the 네 of the 반말 page, and the 도 in 에도도 is the particle — Edo too — sitting on a name that happens to end the same way.",
+          "grammar": "살다 → 살았는데 in the past. In the present it would be 사는데, because a ㄹ stem drops its ㄹ in front of the ㄴ of -는데; 살는데 is that drop left undone. The past sidesteps the question, since 았 + 는데 has no ㄹ left to decide about."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "한자를 쓸 줄 알아?"
+            },
+            {
+              "who": "B",
+              "ko": "아니, 읽을 줄은 {} 쓸 줄은 몰라."
+            }
+          ],
+          "answer": "aneunde",
+          "choices": [
+            {
+              "id": "aneunde",
+              "ko": "아는데"
+            },
+            {
+              "id": "alneunde",
+              "ko": "알는데"
+            },
+            {
+              "id": "aleunde",
+              "ko": "알은데"
+            }
+          ],
+          "en": "A: Can you write hanja? — B: No — I can read it, but I can’t write it.",
+          "why": "V-(으)ㄹ 줄 알다[모르다] is knowing how to do something, the same phrase as 칠 줄 몰라요 on the V-(으)ㄹ래요 page. 읽을 줄은 … 쓸 줄은 puts 는 on both, so the contrast is between the reading and the writing rather than between the knowing and the not.",
+          "grammar": "알다 → 아는데. The ㄹ drops in front of the ㄴ of -는데: 알 + 는데 = 아는데, the same drop as 살다 → 사는데 and 만들다 → 만드는데. 알은데 keeps the ㄹ and takes the adjective ending as well, so it is wrong twice over."
+        }
+      ],
+      "example": {
+        "art": "",
+        "phraseKo": "",
+        "lines": [
+          {
+            "who": "A",
+            "ko": "줄리앙, 이번 시험 잘 봤어?"
+          },
+          {
+            "who": "B",
+            "ko": "아니, 열심히 {} 생각보다 잘 못 봤어."
+          }
+        ],
+        "answerKo": "공부했는데",
+        "en": "A: Julien, did the exam go well? — B: No — I studied hard, but it went worse than I expected."
+      }
+    },
+    {
+      "id": "u10-grammar-4-3",
+      "type": "match",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar",
+      "no": "연습 3",
+      "icon": "🔗",
+      "blurbEn": "Each opening sets you up. Find the half that lets you down.",
+      "instructionKo": "[보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "Complete each sentence as shown in the example.",
+      "noteEn": "The book prints the first half and leaves the rest of the line to you, with one model answer in the key and a fifth row with nothing printed at all. Writing cannot be marked, so the four endings the key gives are shuffled here and each goes back to the opening it contradicts. That pairing is what the exercise is actually after: -는데 sets up an expectation and the second half defies it. Two of the openings are the same 먹었는데, so what tells them apart is which ending would be a surprise after it.",
+      "pattern": "A-(으)ㄴ데, V-는데, N인데 2",
+      "bank": [
+        {
+          "id": "chupji",
+          "ko": "별로 춥지 않아요",
+          "usedByExample": true
+        },
+        {
+          "id": "gongbu",
+          "ko": "공부를 많이 못 했어요"
+        },
+        {
+          "id": "apayo",
+          "ko": "아직도 아파요"
+        },
+        {
+          "id": "baegopayo",
+          "ko": "배고파요"
+        },
+        {
+          "id": "anbadasseoyo",
+          "ko": "안 받았어요"
+        }
+      ],
+      "items": [
+        {
+          "n": 1,
+          "answer": "gongbu",
+          "en": "It’s exam period, but I haven’t been able to study much.",
+          "why": "Exam weeks are when you would expect someone to be at their books, so the half that turns it has to be the studying that did not happen. 기간 is a stretch of time — 시험 기간, the weeks the exams run.",
+          "grammar": "기간 is a noun, so the form is -인데: 기간 + 인데, which is 이다 with -는데 on it. That is the N인데 in the heading of this page. And 못 했어요 is could not rather than did not — the difference between being stopped and choosing.",
+          "stemKo": "시험 기간인데"
+        },
+        {
+          "n": 2,
+          "answer": "apayo",
+          "en": "I took medicine, but it still hurts.",
+          "why": "Medicine is for stopping the hurting, so still hurting is exactly what does not follow from it. 아직도 is the still that goes with something you had every reason to expect to be over.",
+          "grammar": "약을 먹다 — Korean eats medicine rather than taking it. 먹었는데 is past, so -는데. And 아프다 → 아파요: the ㅡ drops in front of 아/어, and the syllable in front decides which one, so 아프 + 아요 = 아파요.",
+          "stemKo": "약을 먹었는데"
+        },
+        {
+          "n": 3,
+          "answer": "baegopayo",
+          "en": "I ate a lot at lunch, but I’m hungry.",
+          "why": "The other side of the same coin as item 2: a big lunch is the reason not to be hungry. Both openings are 먹었는데, and the only thing that tells them apart is which ending would be a surprise after it.",
+          "grammar": "배고프다 → 배고파요, the same ㅡ-irregular as 아프다 in item 2. 배가 고프다 is the stomach being hungry, and 배고프다 is those two words run together into one.",
+          "stemKo": "점심을 많이 먹었는데"
+        },
+        {
+          "n": 4,
+          "answer": "anbadasseoyo",
+          "en": "I called my friend, but they didn’t pick up.",
+          "why": "You ring someone in order that they answer, so not answering is the turn. 받다 is what a phone call takes in Korean — 전화를 받다, to pick up.",
+          "grammar": "하다 → 했는데: 하 + 였 gives 했, and then -는데 because it is past. 한테 is the spoken to-a-person from the 반말 page, and 안 goes right in front of the verb: 안 받았어요.",
+          "stemKo": "친구한테 전화를 했는데"
+        }
+      ],
+      "example": {
+        "answer": "chupji",
+        "en": "It’s winter, but it isn’t particularly cold.",
+        "stemKo": "겨울인데"
+      }
     }
   ]
 }

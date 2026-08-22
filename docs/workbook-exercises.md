@@ -169,6 +169,16 @@ answer against two that answer the question and fail somewhere else: the registe
 slips (네 where 응 belongs), or the tense does not match what was asked. Say in
 `noteEn` that the book left it open.
 
+That only works where something in the row makes the wrong answers wrong. On the
+-는데 page it does not: 연습 3 prints an opening and leaves the rest of the line to
+you, and -는데 takes a neutral continuation as readily as a contrastive one, so an
+ending invented to be wrong would usually be sayable. The four endings the key
+gives became a text `match` instead — one chip per opening, self-correcting, and
+the pairing is the comprehension the exercise was after. Reach for that shape when
+the alternative is inventing Korean that is only wrong by intention. A `match` with
+no pictures keeps its box above the rows; only a picture match is drawn as two
+columns.
+
 ### Worked examples
 
 `example` on a `build` exercise carries the finished text (`answerKo`,
