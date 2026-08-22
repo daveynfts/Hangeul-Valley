@@ -1,6 +1,16 @@
 const { GetObjectCommand, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { r2Client, r2Bucket, saveKey, setCors, verifyGoogleIdToken, readBearer } = require('./_r2');
 const { stampSave, trustedStamp } = require('./_stamp');
+const { PREFIX: LB_PREFIX, entryFromSave } = require('./_leaderboard');
+
+// Same sanitising as saveKey: the sub reaches a bucket key, so nothing but the safe alphabet
+// gets through. Kept next to the write rather than in _leaderboard.js, which stays free of
+// anything that could throw.
+function leaderboardKey(sub) {
+  const id = String(sub || '').replace(/[^a-zA-Z0-9._-]/g, '');
+  if (!id) throw new Error('bad user id');
+  return LB_PREFIX + id + '.json';
+}
 
 const SAVE_BODY_MAX = 256 * 1024;
 
@@ -142,6 +152,28 @@ module.exports = async (req, res) => {
         ContentType: 'application/json',
         CacheControl: 'private, no-store'
       }));
+
+      // The leaderboard row is a byproduct of the save rather than something the client posts
+      // separately. This endpoint already knows who the player is, and the numbers are already
+      // here, so a second route would only add another thing to authenticate and another place
+      // for the board to disagree with the save it came from.
+      //
+      // It is written after the save and never allowed to fail it. A player whose progress was
+      // stored but whose board row was not is behind by one save; a player told their save
+      // failed when it did not would go looking for lost progress. entryFromSave clamps and
+      // strips everything it reads — see api/_leaderboard.js.
+      try {
+        await client.send(new PutObjectCommand({
+          Bucket: r2Bucket(),
+          Key: leaderboardKey(user.sub),
+          Body: JSON.stringify(entryFromSave(payload, user, writeNow)),
+          ContentType: 'application/json',
+          CacheControl: 'public, max-age=30'
+        }));
+      } catch (e) {
+        console.warn('[save] leaderboard row not written:', e && e.name, e && e.message);
+      }
+
       res.status(200).json({ ok: true, updatedAt: payload.updatedAt });
       return;
     }
