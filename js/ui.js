@@ -197,65 +197,129 @@ function buildLevelSelectScreen() {
     const planted = plotSave.length;
     const cur = levelsData[currentLevelIndex];
     const resumeLabel = isWorldLevel(cur) ? (cur.title || levelName(cur)) : `Level ${currentLevelIndex+1}`;
+    // The default action, so it is the one thing on the screen with an accent border — and
+    // the stats read as separate facts rather than one string joined by pipes.
+    r.tabIndex = 0;
+    r.setAttribute('role', 'button');
+    r.setAttribute('aria-label',
+      `Continue in ${resumeLabel}. ${gold} gold, ${planted} crops growing.`);
     r.innerHTML = `
-      <div class="lsr-icon">▶</div>
+      <div class="lsr-icon" aria-hidden="true">▶</div>
       <div class="lsr-text">
-        <div class="lsr-title">Continue Previous Session</div>
-        <div class="lsr-sub">💰 ${gold} gold &nbsp;|&nbsp; 🌱 ${planted} crops growing &nbsp;|&nbsp; ${resumeLabel}</div>
+        <div class="lsr-title">Continue — ${vbEsc(resumeLabel)}</div>
+        <div class="lsr-sub">
+          <span><b>${gold}</b> gold</span>
+          <span><b>${planted}</b> crop${planted === 1 ? '' : 's'} growing</span>
+        </div>
       </div>`;
     r.addEventListener('click', resumeGame);
+    r.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); resumeGame(); }
+    });
     lsGrid.appendChild(r);
   }
+  // A card answers three questions and stops: what is this, can I open it, how far am I.
+  // The old one answered seven — two emoji, a level number, an English name, a Korean name, a
+  // description, a word count and a state chip — with the name set smaller than the metadata
+  // beside it. Nothing was subordinate, so nothing read first.
+  //
+  // Progress is new. A course chooser that cannot tell you where you are in a pack is missing
+  // the one thing you open it to find out; calcLevelProgress has been available all along.
   const paintCard = (lvl, idx) => {
     const world = isWorldLevel(lvl);
     const owned = world || (Array.isArray(unlockedLevels) && unlockedLevels.includes(idx));
-    const cost  = LEVEL_COST(idx);
+    const cost = LEVEL_COST(idx);
     const canAfford = gold >= cost;
     const wordCount = (lvl && Array.isArray(lvl.words)) ? lvl.words.length : 0;
+    const pct = owned && typeof calcLevelProgress === 'function' ? calcLevelProgress(idx) : 0;
+    const done = pct >= 100;
+
     const c = document.createElement('div');
-    c.className = 'level-card' + (world ? ' world-card' : '') + (!owned ? ' locked' : '');
-    c.innerHTML = `<div class="lc-badge">${world ? '📘' : (owned ? '✅' : (canAfford ? '💰' : '🔒'))}</div>
-      <div class="lc-top"><span class="lc-icon">${lvl.icon||'📚'}</span>
-      <div class="lc-meta"><div class="lc-num">${world ? (lvl.title || 'Textbook world') : `Level ${lvl.level}`}</div>
-      <div class="lc-name">${levelName(lvl)}</div>
-      <div class="lc-name-ko">${levelNameKo(lvl)}</div></div></div>
-      <div class="lc-desc">${lvl.descriptionEn || lvl.description || ''}</div>
+    c.className = 'level-card'
+      + (world ? ' world-card' : '')
+      + (!owned ? ' locked' : '')
+      + (done ? ' completed' : '');
+    // Focusable and announced, which a div with a click handler was not. The whole card is one
+    // control, so it gets one role and one label rather than a grid of unlabelled text.
+    c.tabIndex = owned || canAfford ? 0 : -1;
+    c.setAttribute('role', 'button');
+
+    // The eyebrow carries the pack's identity so the name does not have to. A world's nameEn
+    // is written "2B Unit 10 · What do you want to eat?", which under a heading that already
+    // says SNU Korean 2B printed the same words three times on one screen. The unit number
+    // moves to the eyebrow and the prefix comes off the name, leaving the part that differs.
+    const unitNo = world ? (String(lvl.level || '').match(/(\d+)\s*$/) || [])[1] : null;
+    const eyebrow = world ? (unitNo ? `Unit ${unitNo}` : 'Textbook') : `Level ${lvl.level}`;
+    // World packs carry their Korean in `name` and their English in `nameEn`; Valley packs put
+    // the Korean in `name` too. levelNameKo returns '' when there is only one, so the Korean
+    // line collapses rather than printing the English twice.
+    const heroKo = levelNameKo(lvl) || '';
+    const heroEn = String(levelName(lvl) || '').replace(/^\s*\d+[A-Za-z]?\s*Unit\s*\d+\s*[·:\-—]\s*/i, '');
+
+    const stateLabel = owned
+      ? (done ? 'Complete' : `${pct}%`)
+      : (canAfford ? `${cost} gold` : `Need ${cost - gold} more`);
+    const stateClass = owned ? '' : (canAfford ? ' price' : ' short');
+
+    c.setAttribute('aria-label',
+      `${eyebrow}: ${heroKo || heroEn}. ${wordCount} words. `
+      + (owned ? (done ? 'Complete.' : `${pct} percent learned.`) : `Locked, costs ${cost} gold.`));
+
+    c.innerHTML = `
+      <div class="lc-top">
+        <span class="lc-icon" aria-hidden="true">${vbEsc(lvl.icon || '📚')}</span>
+        <div class="lc-meta">
+          <span class="lc-num">${vbEsc(eyebrow)}</span>
+          <span class="lc-name-ko">${vbEsc(heroKo)}</span>
+          <span class="lc-name">${vbEsc(heroEn)}</span>
+        </div>
+      </div>
+      <span class="lc-desc">${vbEsc(lvl.descriptionEn || lvl.description || '')}</span>
+      <div class="lc-progress">
+        <div class="lc-progress-track" role="presentation">
+          <div class="lc-progress-fill${pct ? '' : ' zero'}" style="width:${owned ? pct : 0}%"></div>
+        </div>
+      </div>
       <div class="lc-footer">
-        <span class="lc-tag words">📝 ${wordCount} words</span>
-        ${world ? `<span class="lc-tag" style="color:#4ade80">📘 SNU 2B</span>`
-                : owned ? `<span class="lc-tag" style="color:#4ade80">✅ Owned</span>`
-                : `<span class="lc-tag target" style="color:${canAfford?'#f9c74f':'#aaa'}">💰 ${cost} gold</span>`}
+        <span class="lc-stat"><b>${wordCount}</b> words</span>
+        <span class="lc-state${stateClass}">${vbEsc(stateLabel)}</span>
       </div>`;
-    if(owned) {
-      c.addEventListener('click', () => {
-        if(idx === currentLevelIndex && hasSave){
-          resumeGame();
-        } else {
-          startLevel(idx, true);
-        }
+
+    const open = () => {
+      if (owned) {
+        if (idx === currentLevelIndex && hasSave) resumeGame();
+        else startLevel(idx, true);
+      } else if (canAfford) {
+        buyLevelFromSelect(idx);
+      }
+    };
+    if (owned || canAfford) {
+      c.addEventListener('click', open);
+      c.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
       });
-    } else if(canAfford) {
-      c.addEventListener('click', () => { buyLevelFromSelect(idx); });
-      c.title='Click to buy!';
     }
+    if (!owned && canAfford) c.title = 'Click to buy';
     lsGrid.appendChild(c);
+  };
+  // Headings rather than '── text ──'. The em dashes were doing the work of a rule, which a
+  // rule does better, and the words had to be read to find out they were only a divider.
+  const heading = (text) => {
+    const h = document.createElement('h2');
+    h.className = 'ls-sep';
+    h.textContent = text;
+    lsGrid.appendChild(h);
   };
   const worlds = [];
   const valley = [];
-  levelsData.forEach((lvl, idx) => (isWorldLevel(lvl) ? worlds : valley).push({lvl, idx}));
+  levelsData.forEach((lvl, idx) => (isWorldLevel(lvl) ? worlds : valley).push({ lvl, idx }));
   if (worlds.length) {
-    const sep = document.createElement('div');
-    sep.className = 'ls-sep';
-    sep.textContent = '── SNU Korean 2B ──';
-    lsGrid.appendChild(sep);
-    worlds.forEach(({lvl, idx}) => paintCard(lvl, idx));
+    heading('Textbook · SNU Korean 2B');
+    worlds.forEach(({ lvl, idx }) => paintCard(lvl, idx));
   }
   if (valley.length) {
-    const sep = document.createElement('div');
-    sep.className = 'ls-sep';
-    sep.textContent = hasSave || worlds.length ? '── or a Valley pack ──' : '── select a level ──';
-    lsGrid.appendChild(sep);
-    valley.forEach(({lvl, idx}) => paintCard(lvl, idx));
+    heading(worlds.length ? 'Valley packs' : 'Choose a pack');
+    valley.forEach(({ lvl, idx }) => paintCard(lvl, idx));
   }
 }
 // ═══════════════ CENTRALIZED UI GLASSMORPHISM MODAL MANAGER ═══════════════════
