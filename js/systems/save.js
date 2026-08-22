@@ -930,11 +930,21 @@ function safeGooglePhoto(url) {
   return /^https:\/\/[\w.-]+\.googleusercontent\.com\//.test(u) ? u : '';
 }
 
+// atob hands back one byte per character, but a JWT payload is UTF-8, so a display name
+// outside ASCII — which for a Korean-learning app is most of them — came through as mojibake.
+// The bytes are handed to TextDecoder instead. Not just cosmetic: this is the name the auth
+// chip shows once a player has no email on their Google profile.
 function decodeJwtPayload(token) {
   const part = String(token || '').split('.')[1] || '';
   const b64 = part.replace(/-/g, '+').replace(/_/g, '/');
   const pad = b64 + '='.repeat((4 - (b64.length % 4)) % 4);
-  return JSON.parse(atob(pad));
+  const raw = atob(pad);
+  if (typeof TextDecoder === 'function') {
+    const bytes = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+    return JSON.parse(new TextDecoder('utf-8').decode(bytes));
+  }
+  return JSON.parse(raw);
 }
 
 function renderAuthUI() {
