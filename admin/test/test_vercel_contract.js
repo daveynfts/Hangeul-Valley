@@ -71,9 +71,11 @@ async function runTests() {
   const levelNumH = require('../../api/levels/[num]');
   const vocabH = require('../../api/vocab-facts');
   const artH = require('../../api/art');
-  const layoutH = require('../../api/unit10/layout');
-  const quizH = require('../../api/unit10/quiz');
-  const worldH = require('../../api/unit10/world');
+  // One handler for all three Unit 10 reads now. They were three files, which cost three of
+  // the twelve serverless functions the Hobby plan allows — and the project was on exactly
+  // twelve, so the next route added broke the deployment. The URLs are unchanged: a dynamic
+  // segment matches the literal, so /api/unit10/layout still answers.
+  const unit10H = require('../../api/unit10/[kind]');
   const hostH = require('../../api/admin-host');
   const skinsH = require('../../api/skins/catalog');
 
@@ -142,24 +144,46 @@ async function runTests() {
   });
 
   await test('GET /api/unit10/layout: Vercel body matches Express lib payload', () => {
-    const res = callHandler(layoutH, 'GET');
+    const res = callHandler(unit10H, 'GET', { query: { kind: 'layout' } });
     const expected = { success: true, data: worldLib.getLayout(rootDir) };
     assert(res.statusCode === 200, 'status 200, got ' + res.statusCode);
     assert(JSON.stringify(res.body.data) === JSON.stringify(expected.data), 'layout.data equal');
   });
 
   await test('GET /api/unit10/quiz: Vercel body matches Express lib payload', () => {
-    const res = callHandler(quizH, 'GET');
+    const res = callHandler(unit10H, 'GET', { query: { kind: 'quiz' } });
     const expected = { success: true, data: worldLib.getQuiz(rootDir) };
     assert(res.statusCode === 200, 'status 200, got ' + res.statusCode);
     assert(JSON.stringify(res.body.data.questions) === JSON.stringify(expected.data.questions), 'quiz questions equal');
   });
 
   await test('GET /api/unit10/world: Vercel body matches Express lib payload', () => {
-    const res = callHandler(worldH, 'GET');
+    const res = callHandler(unit10H, 'GET', { query: { kind: 'world' } });
     const expected = { success: true, data: worldLib.getWorld(rootDir) };
     assert(res.statusCode === 200, 'status 200, got ' + res.statusCode);
     assert(res.body.data.id === expected.data.id, 'world id');
+  });
+
+  // New with the merge: one route serving three names has to refuse a fourth rather than
+  // answering with whichever getter happens to be first.
+  await test('GET /api/unit10/<unknown>: 404, and the three names are the only ones', () => {
+    const res = callHandler(unit10H, 'GET', { query: { kind: 'saves' } });
+    assert(res.statusCode === 404, 'status 404, got ' + res.statusCode);
+    assert(res.body && res.body.success === false, 'and reports failure');
+    const bare = callHandler(unit10H, 'GET', { query: {} });
+    assert(bare.statusCode === 404, 'a missing kind is also 404, got ' + bare.statusCode);
+    ['layout', 'quiz', 'world'].forEach((k) => {
+      assert(callHandler(unit10H, 'GET', { query: { kind: k } }).statusCode === 200, k + ' still answers');
+    });
+  });
+
+  // The read-only refusal has to survive the merge: the admin panel on Vercel must not look
+  // writable, whichever of the three names is asked for.
+  await test('PUT /api/unit10/*: still refused, as three separate files did', () => {
+    ['layout', 'quiz', 'world'].forEach((k) => {
+      const res = callHandler(unit10H, 'PUT', { query: { kind: k } });
+      assert(res.statusCode === 409, 'PUT ' + k + ' refused with 409, got ' + res.statusCode);
+    });
   });
 
   await test('GET /api/admin-host: same keys; Vercel is read-only, Express is writable', () => {
