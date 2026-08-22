@@ -2760,6 +2760,14 @@
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
       font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-d);
     }
+    /* A name rather than an initial: 스티븐 at 8px in a 19px box is a smudge, so it
+       gets room and a readable size. The family is stated for intent only — the
+       broad span:not(...) rule further up wins on font-family, and Hangul falls
+       through that stack to Noto Sans KR anyway. */
+    .wb-spk[data-name], .wb-picks-tag[data-name] {
+      min-width: 0; height: auto; padding: 1px 5px; line-height: 1.4;
+      font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 700;
+    }
     .wb-dlg.reply .wb-spk { background: #e8dcc4; }
     #wb-example .wb-dlg { line-height: 1.7; }
     #wb-example .wb-spk { background: #dbe4fb; border-color: #1e3a8a; color: #1e3a8a; }
