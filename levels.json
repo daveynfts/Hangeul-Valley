@@ -687,161 +687,161 @@
         "en": "to be delicious",
         "hint": "😋",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "맛없다",
         "en": "to be tasteless / unpalatable",
         "hint": "😝",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "매콤하다",
         "en": "to be moderately spicy",
         "hint": "🌶️",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "달콤하다",
         "en": "to be sweet",
         "hint": "🍬",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "새콤하다",
         "en": "to be sour / tangy",
         "hint": "🍋",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "고소하다",
         "en": "to be savory / nutty",
         "hint": "🥜",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "짭짤하다",
         "en": "to be pleasantly salty",
         "hint": "🧂",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "싱겁다",
         "en": "to be bland / unseasoned",
         "hint": "💧",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "쓴맛",
         "en": "bitter taste",
         "hint": "☕",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "담백하다",
         "en": "to be light / non-greasy",
         "hint": "🥣",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "기름지다",
         "en": "to be greasy",
         "hint": "🍕",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "뜨겁다",
         "en": "to be hot (temperature)",
         "hint": "🔥",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "차갑다",
         "en": "to be cold (to the touch)",
         "hint": "🧊",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "시원하다",
         "en": "to be refreshing / cool",
         "hint": "🍃",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "신선하다",
         "en": "to be fresh",
         "hint": "🌿",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "상하다",
         "en": "to spoil / go bad",
         "hint": "🤢",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "푸짐하다",
         "en": "to be abundant / generous",
         "hint": "🍲",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "부족하다",
         "en": "to be lacking / insufficient",
         "hint": "📉",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "배부르다",
         "en": "to be full",
         "hint": "🤰",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "배고프다",
         "en": "to be hungry",
         "hint": "🤤",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "목마르다",
         "en": "to be thirsty",
         "hint": "🥤",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "폭식하다",
         "en": "to binge eat",
         "hint": "🍰",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "소식하다",
         "en": "to eat lightly",
         "hint": "🥗",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Texture"
+        "categoryEn": "Taste & Condition"
       },
       {
         "ko": "조리하다",
@@ -911,14 +911,14 @@
         "categoryEn": "Time & Dates"
       },
       {
-        "ko": "이번주",
+        "ko": "이번 주",
         "en": "this week",
         "hint": "👇",
         "category": "시간과 날짜",
         "categoryEn": "Time & Dates"
       },
       {
-        "ko": "다음주",
+        "ko": "다음 주",
         "en": "next week",
         "hint": "👉",
         "category": "시간과 날짜",
@@ -932,14 +932,14 @@
         "categoryEn": "Time & Dates"
       },
       {
-        "ko": "이번달",
+        "ko": "이번 달",
         "en": "this month",
         "hint": "📌",
         "category": "시간과 날짜",
         "categoryEn": "Time & Dates"
       },
       {
-        "ko": "다음달",
+        "ko": "다음 달",
         "en": "next month",
         "hint": "🗓️",
         "category": "시간과 날짜",
@@ -1094,7 +1094,7 @@
       },
       {
         "ko": "함박눈",
-        "en": "heavy snow / large snowflakes",
+        "en": "large fluffy snowflakes",
         "hint": "❄️",
         "category": "날씨와 계절",
         "categoryEn": "Weather & Seasons"
@@ -1630,7 +1630,7 @@
       },
       {
         "ko": "선박",
-        "en": "passenger ship / vessel",
+        "en": "ship / vessel",
         "hint": "🚢",
         "category": "교통수단",
         "categoryEn": "Transport"
@@ -2117,7 +2117,7 @@
       },
       {
         "ko": "가볍다",
-        "en": "to be light",
+        "en": "to be light (in weight)",
         "hint": "🎈",
         "category": "색상과 모양",
         "categoryEn": "Colours & Shapes"
@@ -2824,7 +2824,7 @@
         "categoryEn": "Body & Symptoms"
       },
       {
-        "ko": "붓기",
+        "ko": "부기",
         "en": "swelling",
         "hint": "🦶",
         "category": "신체와 증상",
@@ -3116,7 +3116,7 @@
       },
       {
         "ko": "사회과",
-        "en": "social studies department",
+        "en": "social studies (school subject)",
         "hint": "🌍",
         "category": "학교 시설과 과목",
         "categoryEn": "School Facilities & Subjects"
@@ -3603,7 +3603,7 @@
       },
       {
         "ko": "결재",
-        "en": "approval / sanction",
+        "en": "sign-off (a superior’s approval of a document)",
         "hint": "✍️",
         "category": "업무와 과제",
         "categoryEn": "Tasks & Assignments"
@@ -3930,7 +3930,7 @@
       {
         "ko": "환전",
         "en": "currency exchange",
-        "hint": "🔱",
+        "hint": "💱",
         "category": "여행 준비",
         "categoryEn": "Trip Preparation"
       },
@@ -3978,7 +3978,7 @@
       },
       {
         "ko": "민박",
-        "en": "homestay / pension",
+        "en": "homestay / room in a private home",
         "hint": "🏠",
         "category": "교통과 숙소",
         "categoryEn": "Transport & Accommodation"
@@ -4012,7 +4012,7 @@
         "categoryEn": "Transport & Accommodation"
       },
       {
-        "ko": "프론트",
+        "ko": "프런트",
         "en": "reception desk",
         "hint": "🛎️",
         "category": "교통과 숙소",
@@ -4293,7 +4293,7 @@
       },
       {
         "ko": "추억",
-        "en": "memory / souvenir of mind",
+        "en": "memory / fond recollection",
         "hint": "📸",
         "category": "관광과 경험",
         "categoryEn": "Sightseeing & Experiences"
@@ -4395,7 +4395,7 @@
       },
       {
         "ko": "자긍심",
-        "en": "pride / self-esteem",
+        "en": "pride (in oneself) / self-pride",
         "hint": "👑",
         "category": "긍정 감정",
         "categoryEn": "Positive Emotions"
@@ -4408,7 +4408,7 @@
         "categoryEn": "Negative Emotions"
       },
       {
-        "ko": "짜증나다",
+        "ko": "짜증 나다",
         "en": "to feel annoyed",
         "hint": "😤",
         "category": "부정 감정",
@@ -4917,7 +4917,7 @@
       },
       {
         "ko": "뚱뚱하다",
-        "en": "to be chubby / obese",
+        "en": "to be fat / overweight",
         "hint": "🐻",
         "category": "외모 묘사",
         "categoryEn": "Describing Appearance"
@@ -5564,7 +5564,7 @@
         "categoryEn": "Housing Types & Furniture"
       },
       {
-        "ko": "도어락",
+        "ko": "도어록",
         "en": "digital door lock",
         "hint": "🔒",
         "category": "주거 형태와 가구",
@@ -5639,7 +5639,7 @@
       },
       {
         "ko": "요금제",
-        "en": "mobile data plan",
+        "en": "(phone) rate plan / price plan",
         "hint": "💵",
         "category": "전화와 정보통신",
         "categoryEn": "Phones & Telecoms"
@@ -5688,7 +5688,7 @@
       },
       {
         "ko": "애플리케이션",
-        "en": "application",
+        "en": "application (full loanword form of 앱)",
         "hint": "💻",
         "category": "전화와 정보통신",
         "categoryEn": "Phones & Telecoms"
@@ -6314,7 +6314,7 @@
         "categoryEn": "Manners & Etiquette"
       },
       {
-        "ko": "신경쓰다",
+        "ko": "신경 쓰다",
         "en": "to pay attention / care",
         "hint": "🧠",
         "category": "관계와 대인",
@@ -6364,7 +6364,7 @@
       },
       {
         "ko": "어색하다",
-        "en": "to be clumsy / awkward",
+        "en": "to feel awkward / ill at ease",
         "hint": "😅",
         "category": "관계와 대인",
         "categoryEn": "Relationships & Social Contact"
@@ -6441,7 +6441,7 @@
       },
       {
         "ko": "사회생활",
-        "en": "social life",
+        "en": "life in society / working life",
         "hint": "💼",
         "category": "관계와 대인",
         "categoryEn": "Relationships & Social Contact"
@@ -6851,7 +6851,7 @@
       },
       {
         "ko": "시책",
-        "en": "municipal policy measure",
+        "en": "policy measure",
         "hint": "📌",
         "category": "복지와 제도",
         "categoryEn": "Welfare & Institutions"
@@ -6864,7 +6864,7 @@
         "categoryEn": "Social Problems"
       },
       {
-        "ko": "사회적기업",
+        "ko": "사회적 기업",
         "en": "social enterprise",
         "hint": "🏢",
         "category": "복지와 제도",
@@ -7064,7 +7064,7 @@
         "categoryEn": "Consumption & Markets"
       },
       {
-        "ko": "합리적소비",
+        "ko": "합리적 소비",
         "en": "rational consumption",
         "hint": "💡",
         "category": "소비와 시장",
@@ -7219,14 +7219,14 @@
       },
       {
         "ko": "수출액",
-        "en": "export volume",
+        "en": "export value",
         "hint": "🚢",
         "category": "무역과 산업",
         "categoryEn": "Trade & Industry"
       },
       {
         "ko": "수입액",
-        "en": "import volume",
+        "en": "import value",
         "hint": "📦",
         "category": "무역과 산업",
         "categoryEn": "Trade & Industry"
@@ -7268,7 +7268,7 @@
       },
       {
         "ko": "이윤",
-        "en": "profit margin",
+        "en": "profit",
         "hint": "💰",
         "category": "금융과 경제",
         "categoryEn": "Finance & Economy"
@@ -7601,7 +7601,7 @@
       },
       {
         "ko": "기술개발",
-        "en": "R&D technology development",
+        "en": "technology development",
         "hint": "🛠️",
         "category": "첨단 기술",
         "categoryEn": "Advanced Technology"
@@ -7733,8 +7733,8 @@
         "categoryEn": "Advanced Technology"
       },
       {
-        "ko": "알고리즘 수식",
-        "en": "algorithmic expression",
+        "ko": "수식",
+        "en": "mathematical expression / formula",
         "hint": "📐",
         "category": "첨단 기술",
         "categoryEn": "Advanced Technology"
@@ -7794,7 +7794,7 @@
       },
       {
         "ko": "멸종위기",
-        "en": "endangered species",
+        "en": "danger of extinction",
         "hint": "🦣",
         "category": "생태와 자연",
         "categoryEn": "Ecology & Nature"
@@ -8025,7 +8025,7 @@
       },
       {
         "ko": "환경호르몬",
-        "en": "environmental hormone",
+        "en": "endocrine disruptor (lit. environmental hormone)",
         "hint": "🧪",
         "category": "환경 오염",
         "categoryEn": "Pollution"
@@ -8067,7 +8067,7 @@
       },
       {
         "ko": "빙하",
-        "en": "glacier / iceberg",
+        "en": "glacier",
         "hint": "🧊",
         "category": "생태와 자연",
         "categoryEn": "Ecology & Nature"
@@ -8136,7 +8136,7 @@
         "categoryEn": "Conservation & Climate"
       },
       {
-        "ko": "지속가능",
+        "ko": "지속 가능성",
         "en": "sustainability",
         "hint": "♾️",
         "category": "보전과 기후",
@@ -8379,7 +8379,7 @@
       },
       {
         "ko": "회화",
-        "en": "fine painting",
+        "en": "painting (as an art form)",
         "hint": "🖼️",
         "category": "예술과 문학",
         "categoryEn": "Art & Literature"
@@ -8739,8 +8739,8 @@
         "categoryEn": "Body Idioms"
       },
       {
-        "ko": "가슴이 치밀다",
-        "en": "to feel emotion surging",
+        "ko": "가슴이 벅차다",
+        "en": "to be overwhelmed with emotion",
         "hint": "💔",
         "category": "신체 관용구",
         "categoryEn": "Body Idioms"
@@ -9504,7 +9504,7 @@
       },
       {
         "ko": "미완성",
-        "en": "incomplete (미: un-)",
+        "en": "incomplete / unfinished (미: not yet)",
         "hint": "⏳",
         "category": "접두사·접미사 한자어",
         "categoryEn": "Sino-Korean Prefixes & Suffixes"
@@ -9679,7 +9679,7 @@
       },
       {
         "ko": "고시",
-        "en": "public notification / exam",
+        "en": "public notice / official announcement",
         "hint": "📌",
         "category": "공공 어휘",
         "categoryEn": "Public & Civic Vocabulary"
@@ -9826,7 +9826,7 @@
       },
       {
         "ko": "지속성",
-        "en": "sustainability / durability",
+        "en": "continuity / persistence / durability",
         "hint": "♾️",
         "category": "접두사·접미사 한자어",
         "categoryEn": "Sino-Korean Prefixes & Suffixes"
@@ -9916,7 +9916,7 @@
     "level": 24,
     "name": "정치·법과 행정",
     "icon": "⚖️",
-    "description": "정치 제도, 선거, 사법 법률 및 행정 시민 의무 어휘",
+    "description": "정치 제도, 선거, 사법·법률 및 행정과 시민의 권리·의무 어휘",
     "target": 9,
     "words": [
       {
@@ -10166,7 +10166,7 @@
       },
       {
         "ko": "완화",
-        "en": "deregulation / easing",
+        "en": "easing / relaxation / mitigation",
         "hint": "🔓",
         "category": "행정과 시민",
         "categoryEn": "Administration & Citizens"
@@ -10393,7 +10393,7 @@
         "categoryEn": "Logical Connectives"
       },
       {
-        "ko": "그로인해",
+        "ko": "그로 인해",
         "en": "due to that / as a result",
         "hint": "🔗",
         "category": "논리적 접속어",
@@ -10435,14 +10435,14 @@
         "categoryEn": "Logical Connectives"
       },
       {
-        "ko": "이에따라",
+        "ko": "이에 따라",
         "en": "according to this",
         "hint": "📌",
         "category": "논리적 접속어",
         "categoryEn": "Logical Connectives"
       },
       {
-        "ko": "그결과",
+        "ko": "그 결과",
         "en": "as a consequence",
         "hint": "📊",
         "category": "논리적 접속어",
@@ -10450,7 +10450,7 @@
       },
       {
         "ko": "나아가",
-        "en": "furthermore / going forward",
+        "en": "furthermore / going a step further",
         "hint": "🚀",
         "category": "전환 및 첨가 부사",
         "categoryEn": "Transition & Addition Adverbs"
@@ -10569,7 +10569,7 @@
       },
       {
         "ko": "종래에는",
-        "en": "hitherto / eventually",
+        "en": "hitherto / up to now",
         "hint": "⏳",
         "category": "담화 연결 표지",
         "categoryEn": "Discourse Markers"
@@ -10680,7 +10680,7 @@
         "categoryEn": "Discourse Markers"
       },
       {
-        "ko": "들자면",
+        "ko": "예를 들자면",
         "en": "to cite an example",
         "hint": "📌",
         "category": "담화 연결 표지",
@@ -10694,7 +10694,7 @@
         "categoryEn": "Discourse Markers"
       },
       {
-        "ko": "다시말해",
+        "ko": "다시 말해",
         "en": "that is to say",
         "hint": "🗣️",
         "category": "담화 연결 표지",
