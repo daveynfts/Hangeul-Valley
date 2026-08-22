@@ -1788,7 +1788,7 @@
           ],
           "en": "Where do you live now?",
           "why": "The starting point is as formal as Korean gets: 합니다체 with the honorific 시 on top. 반말 drops both at once, which is why the distance between the two versions feels so large.",
-          "grammar": "사십니까 → 살아. Take the honorific 시 out and you are back to 살다, and 살 + 아 = 살아. The ㄹ stays here because 아 is a vowel — it is 십니까 and 습니다 that make a ㄹ disappear."
+          "grammar": "사십니까 → 살아. Take the honorific 시 out and you are back to 살다, and 살 + 아 = 살아. The ㄹ stays because 아 is a vowel; it is the ㄴ, ㅂ and ㅅ endings that make a ㄹ disappear — 사십니까 and 삽니다, where it has gone."
         },
         {
           "n": 2,
@@ -2702,7 +2702,7 @@
           ],
           "en": "A: I’m thinking of playing tennis — do you want to play with me? — B: I can’t play tennis at all.",
           "why": "The flattest refusal of the three: not unwilling but unable. V-(으)ㄹ 줄 알다[모르다] is knowing how to do something, and 전혀 is the 별로 of item 2 turned all the way up — it too only ever appears with a negative.",
-          "grammar": "치다 → 치려고, 칠래요. The stem is the single vowel 치, so the ㄹ of -(으)ㄹ래요 lands right on it: 칠래요. And note B’s 칠 줄 — the same ㄹ, doing the same thing in front of 줄."
+          "grammar": "치다 → 치려고, 칠래요. The stem is the single vowel 치, so the ㄹ of -(으)ㄹ래요 lands right on it: 칠래요 — and 칠려고 carries that ㄹ back into an ending that has no room for it, the same slip as 배울려고 in item 2. Note B’s 칠 줄 as well: the same ㄹ, doing the same thing in front of 줄."
         }
       ],
       "example": {
@@ -3501,7 +3501,7 @@
           ],
           "en": "Of all flowers, roses are the prettiest.",
           "why": "The three words come in the order the sentence needs them: the group first, then the one that wins, then what it wins at. Only the particles and the ending are left to you.",
-          "grammar": "장미 ends in a vowel, so the subject particle is 가. And 예쁘다 → 예뻐: the ㅡ drops in front of 아/어, and with no syllable in front to borrow a vowel from it defaults to 어. 예쁜 is the form that goes before a noun, not the one that ends a sentence.",
+          "grammar": "장미 ends in a vowel, so the subject particle is 가. And 예쁘다 → 예뻐: the ㅡ drops in front of 아/어, and the vowel of the syllable before it decides which one — 예 has neither ㅏ nor ㅗ in it, so the ending is 어. 예쁜 is the form that goes before a noun, not the one that ends a sentence.",
           "audio": {
             "src": "audio/book/2b-u10-p1-1.mp3",
             "askEnd": 4.54
@@ -3605,7 +3605,7 @@
           ],
           "en": "Monday is the busiest day of the week.",
           "why": "A week is a set of days the same way a bunch of flowers is a set of flowers, which is what 일주일 중에서 says. This is the 1년 중에서 of the 문법과 표현 page at a smaller scale.",
-          "grammar": "월요일 ends in the consonant ㄹ, so the particle is 이 and not 가. 바쁘다 → 바빠: the ㅡ drops and this time there is a syllable in front with ㅏ in it, so the ending is 아. Compare 예뻐 in item 1, where there was not.",
+          "grammar": "월요일 ends in the consonant ㄹ, so the particle is 이 and not 가. 바쁘다 → 바빠: the ㅡ drops and 바 has ㅏ in it, so this time the ending is 아. Compare 예뻐 in item 1, where the syllable in front has neither ㅏ nor ㅗ and the ending falls back to 어 — and 써 on the 어휘 page, where 쓰 has no syllable in front of it at all.",
           "audio": {
             "src": "audio/book/2b-u10-p1-3.mp3",
             "askEnd": 5.02
@@ -3862,7 +3862,7 @@
           }
         ],
         "answerKo": "일어나",
-        "en": "T: What time do you get up? — S: What time do you get up?",
+        "en": "What time do you get up? — the same question, put the way a friend would put it.",
         "audio": {
           "src": "audio/book/2b-u10-p2-0.mp3",
           "askEnd": 2.45

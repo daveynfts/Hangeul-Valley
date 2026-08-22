@@ -1386,6 +1386,18 @@ assert(/에서/.test(p3.noteEn) && /만나/.test(p3.noteEn),
 assert(p1.items[0].choices2.some(c => c.ko === '예쁘어')
   && p1.items[2].choices2.some(c => c.ko === '바쁘아'),
   'the two ㅡ-irregulars are put against the form with the ㅡ left in');
+// What picks 아 or 어 once the ㅡ has dropped is the vowel of the syllable in
+// front, not whether there is one: 예쁘 has 예 in front and still takes 어. These
+// two notes said the other thing once, so the rule they give is pinned here.
+const euNote = (n) => p1.items.find(i => i.n === n).grammar;
+assert(/ㅏ/.test(euNote(1)) && /ㅗ/.test(euNote(1)),
+  '예쁘다 → 예뻐 names the two vowels that would have given 아 instead');
+assert(euNote(1).indexOf('no syllable') < 0,
+  'and does not put it down to 예쁘 having nothing in front of it');
+assert(/바 has ㅏ/.test(euNote(3)), '바쁘다 → 바빠 names the ㅏ that decides it');
+assert(/no syllable in front/.test(wb.exercises.find(e => e.id === 'u10-vocab-3')
+  .items.find(i => i.n === 3).grammar),
+  'and 쓰다 → 써 keeps that reason, which is the one word on the page it fits');
 drills.forEach((e) => {
   e.items.forEach((it) => {
     assert(it.why && it.why.length > 40, e.no + ' item ' + it.n + ' explains the exchange');
