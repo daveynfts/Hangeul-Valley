@@ -495,15 +495,20 @@
 
     /* Locked is dimmed, not greyscaled: the old filter drained the icon of the colour
        that identifies the pack, so every locked card looked like the same card. */
+    /* Its own, cooler paper. Opacity alone left a locked card indistinguishable from one
+       you own, so the only signal was the word in the footer. */
     .level-card.locked {
-      cursor: not-allowed; opacity: .72;
+      cursor: not-allowed;
+      background: linear-gradient(180deg, #e9e3d6, #d2c9b7);
       border-color: #9a8570; box-shadow: 0 2px 0 #6b5340;
     }
+    .level-card.locked .lc-desc { color: #5c5346; }
+    #level-select-overlay .lc-state.idle { color: #7a5a30; }
     .level-card.locked .lc-name, .level-card.locked .lc-name-ko { opacity: .8; }
 
     /* One coloured edge carries the state, so the card does not need a badge to say it. */
     .level-card::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px;
       background: #b98a4e;
     }
     .level-card.world-card::before { background: #16a34a; }
@@ -567,20 +572,22 @@
       background: linear-gradient(90deg, #16a34a, #4ade80);
       transition: width .3s ease;
     }
-    .lc-progress-fill.zero { background: rgba(107, 68, 32, .3); }
+    /* Reserved but unpainted at zero: the space keeps the grid rows level while an empty
+       track drawn round nothing read as a broken input field. */
+    #level-select-overlay .lc-progress-track.empty { background: transparent; box-shadow: none; }
 
     .lc-footer {
       display: flex; align-items: baseline; justify-content: space-between;
       gap: 8px; margin-top: 7px;
     }
     #level-select-overlay .lc-stat {
-      font-family: 'Press Start 2P', monospace; font-size: 9px;
-      color: #6b4420; letter-spacing: .5px;
+      font-family: 'Press Start 2P', monospace; font-size: 10px;
+      color: #6b4420; letter-spacing: 0; white-space: nowrap;
     }
     #level-select-overlay .lc-stat b { color: #2a1a0a; }
     /* No chip background to fight the card. The word does the work. */
     #level-select-overlay .lc-state {
-      font-family: 'Press Start 2P', monospace; font-size: 9px; letter-spacing: .5px;
+      font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 0;
       color: #15803d; white-space: nowrap;
     }
     #level-select-overlay .lc-state.price { color: #92400e; }

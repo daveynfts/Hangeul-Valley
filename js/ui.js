@@ -256,10 +256,17 @@ function buildLevelSelectScreen() {
     const heroKo = levelNameKo(lvl) || '';
     const heroEn = String(levelName(lvl) || '').replace(/^\s*\d+[A-Za-z]?\s*Unit\s*\d+\s*[·:\-—]\s*/i, '');
 
+    // "0%" beside an empty bar said nothing twice. The bar is only painted once there is
+    // something in it, so at zero the label carries the whole message on its own.
+    //
+    // Locked packs show the price and nothing else. "Need 1550 more" ran long enough to push
+    // "60 words" onto a second line, and the card already looks locked — the price is the part
+    // you can act on, and the shortfall is arithmetic the player can do from the gold in the
+    // HUD.
     const stateLabel = owned
-      ? (done ? 'Complete' : `${pct}%`)
-      : (canAfford ? `${cost} gold` : `Need ${cost - gold} more`);
-    const stateClass = owned ? '' : (canAfford ? ' price' : ' short');
+      ? (done ? 'Complete' : (pct > 0 ? `${pct}%` : 'Not started'))
+      : `${cost} gold`;
+    const stateClass = owned ? (pct > 0 ? '' : ' idle') : (canAfford ? ' price' : ' short');
 
     c.setAttribute('aria-label',
       `${eyebrow}: ${heroKo || heroEn}. ${wordCount} words. `
@@ -276,8 +283,8 @@ function buildLevelSelectScreen() {
       </div>
       <span class="lc-desc">${vbEsc(lvl.descriptionEn || lvl.description || '')}</span>
       <div class="lc-progress">
-        <div class="lc-progress-track" role="presentation">
-          <div class="lc-progress-fill${pct ? '' : ' zero'}" style="width:${owned ? pct : 0}%"></div>
+        <div class="lc-progress-track${pct > 0 ? '' : ' empty'}" role="presentation">
+          <div class="lc-progress-fill" style="width:${pct}%"></div>
         </div>
       </div>
       <div class="lc-footer">
