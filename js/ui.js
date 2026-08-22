@@ -2659,8 +2659,34 @@ function renderWorkbook() {
             picks.appendChild(b);
           });
         };
-        addForms(item.choices, 1);
-        if (wbSlots(item) === 2) { rule(); addForms(item.choices2, 2); }
+        if (wbSlots(item) === 2) {
+          // Six buttons in one wrapping strip, with nothing but a hairline
+          // between the two halves, left it to the learner to work out which
+          // group filled which blank. Each group now sits on its own line under
+          // the speaker chip of the line it fills — the same A and B chips as
+          // the script directly above it.
+          const gapWho = [];
+          (item.lines || []).forEach((l) => {
+            const n = String(l.ko || '').split('{}').length - 1;
+            for (let g = 0; g < n; g++) gapWho.push(l.who || '');
+          });
+          const tag = (who) => {
+            if (!who) return;
+            const t = document.createElement('span');
+            t.className = 'wb-picks-tag';
+            t.textContent = who;
+            picks.appendChild(t);
+          };
+          tag(gapWho[0]);
+          addForms(item.choices, 1);
+          const brk = document.createElement('i');
+          brk.className = 'wb-picks-break';
+          picks.appendChild(brk);
+          tag(gapWho[1]);
+          addForms(item.choices2, 2);
+        } else {
+          addForms(item.choices, 1);
+        }
         if (ex.type === 'experience') {
           rule();
           ['yes', 'no'].forEach((val) => {
@@ -2785,21 +2811,39 @@ function renderWorkbookPicker() {
   if (list) {
     list.innerHTML = '';
     list.className = 'wb-items-pick';
+    // Nine rows in one flat column is a wall. They already fall into 어휘 and
+    // 문법과 표현, so the list says so and the reader sees three plus six rather
+    // than nine of the same thing.
+    let group = null;
     exercises.forEach((ex, i) => {
+      if ((ex.section || '') !== group) {
+        group = ex.section || '';
+        const h = document.createElement('div');
+        h.className = 'wb-group';
+        h.innerHTML = '<span class="wb-group-ko">' + vbEsc(group) + '</span>' +
+          '<span class="wb-group-en">' + vbEsc(ex.sectionEn || '') + '</span>';
+        list.appendChild(h);
+      }
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'wb-pick' + (i === st.pick ? ' focus' : '');
       b.setAttribute('data-exercise', ex.id);
-      // 문법과 표현 numbers its exercises inside each grammar point, so several
-      // rows here are called 연습 1. The pattern is printed because without it
-      // the list has rows that read identically.
+      // What goes big is what tells the rows apart. The Korean instruction is
+      // not it: three exercises print the identical 그림을 보고 [보기]와 같이
+      // 대화를 만들어 보세요, so as a headline it made the list read as the same
+      // row repeated. The grammar point does tell them apart, so that is the
+      // headline, and the instruction waits until the exercise is open — which
+      // is the only place it is any use anyway.
       b.innerHTML =
         '<span class="wb-pick-key">' + (i + 1) + '</span>' +
         '<span class="wb-pick-icon">' + vbEsc(ex.icon || '📝') + '</span>' +
         '<span class="wb-pick-text">' +
-          '<span class="wb-pick-no">' + vbEsc((ex.section || '') + ' · ' + (ex.no || '')) +
-            (ex.pattern ? '<b class="wb-pick-pat">' + vbEsc(ex.pattern) + '</b>' : '') + '</span>' +
-          '<span class="wb-pick-ko">' + vbEsc(ex.instructionKo || '') + '</span>' +
+          '<span class="wb-pick-title">' +
+            (ex.pattern
+              ? '<b class="wb-pick-pat">' + vbEsc(ex.pattern) + '</b>' +
+                '<span class="wb-pick-no">' + vbEsc(ex.no || '') + '</span>'
+              : '<b class="wb-pick-name">' + vbEsc(ex.no || '') + '</b>') +
+          '</span>' +
           '<span class="wb-pick-en">' + vbEsc(ex.blurbEn || ex.instructionEn || '') + '</span>' +
         '</span>' +
         '<span class="wb-pick-count">' + ((ex.items || []).length) + '문항</span>';

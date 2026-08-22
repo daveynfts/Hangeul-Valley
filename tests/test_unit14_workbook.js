@@ -348,7 +348,9 @@ console.log('\n--- 6. Exercise list ---');
   ui.setBank(null);
   assert(ui.run('workbookState.mode') === 'pick', 'the page opens on the list, not on an exercise');
   assert(ui.run('workbookState.ex') === null, 'no exercise is loaded yet');
-  const rows = ui.els['wb-items'].children;
+  // The list is grouped, so its children are section headers plus rows. Only the
+  // rows carry data-exercise.
+  const rows = ui.els['wb-items'].children.filter(r => r.attrs['data-exercise']);
   assert(rows.length === wb.exercises.length, 'one row per exercise (' + rows.length + ')');
   assert(ui.els['wb-items'].className === 'wb-items-pick', 'the list uses its own layout');
   // Nothing that belongs to an exercise may be on screen while the list is.
@@ -847,6 +849,28 @@ const exP3 = wb.exercises.find(e => e.id === 'u14-grammar-4-3');
   const rowP = deepHtml(ui.els['wb-items'].children[0]);
   assert(rowP.indexOf('해도 돼요') >= 0 && rowP.indexOf('하면 안 돼요') >= 0,
     'the row shows both halves of the exchange');
+
+  // Six buttons in one strip left it to the learner to work out which group fed
+  // which blank. Each group is broken onto its own line under the speaker chip
+  // of the line it fills.
+  const picks = ui.els['wb-items'].children[0].children[1].children[2];
+  const kinds = picks.children.map(c => c.className);
+  assert(kinds.filter(c => c === 'wb-picks-tag').length === 2,
+    'each of the two groups is tagged');
+  assert(picks.children.filter(c => c.className === 'wb-picks-tag').map(c => c.textContent)
+    .join('') === 'AB', 'with the A and B of the lines they fill');
+  assert(kinds.indexOf('wb-picks-break') === 4,
+    'and the break falls after the first group, so the two do not run together');
+  assert(kinds.lastIndexOf('wb-picks-tag') > kinds.indexOf('wb-picks-break'),
+    "B's tag comes after the break, with its own buttons");
+  assert(css.indexOf('.wb-picks-break') >= 0 && css.indexOf('.wb-picks-tag') >= 0,
+    'both are styled');
+  // A one-blank row has one group and needs no tag at all.
+  const solo = loadUi();
+  solo.setBank('u14-grammar-2-1');
+  const soloPicks = solo.els['wb-items'].children[0].children[1].children[2];
+  assert(soloPicks.children.every(c => c.className.indexOf('wb-picks-tag') < 0),
+    'a single-blank row is left untagged');
   ui.run('checkWorkbook()');
   assert(ui.run('workbookState.score') === 10, 'the textbook key scores 10 of 10');
   assert(ui.els['wb-count'].textContent === '10 / 10' &&
@@ -906,7 +930,8 @@ console.log('\n--- 15. The exercise list ---');
 
   const ui = loadUi();
   ui.setBank(null);
-  const rows = ui.els['wb-items'].children;
+  const kids = ui.els['wb-items'].children;
+  const rows = kids.filter(r => r.attrs['data-exercise']);
   assert(rows.length === 9, 'the list offers all nine exercises');
   assert(wb.exercises.length <= 9,
     'and every one is still reachable by number key — a tenth would need another way in');
@@ -915,6 +940,28 @@ console.log('\n--- 15. The exercise list ---');
   assert(html9.indexOf('A/V-았을/었을 때') >= 0 && html9.indexOf('V-(으)면 안 되다') >= 0,
     'and both new grammar points are named');
   assert(css.indexOf('.wb-pick-pat') >= 0, 'the pattern label is styled');
+
+  // What goes big has to be what tells the rows apart. Three exercises print the
+  // same Korean instruction word for word, so it cannot be the headline — the
+  // list read as one row repeated when it was.
+  const headlines = wb.exercises.map(e => e.instructionKo);
+  assert(new Set(headlines).size < headlines.length,
+    'the Korean instruction repeats across exercises');
+  assert(html9.indexOf('그림을 보고 [보기]와 같이 대화를 만들어 보세요.') < 0,
+    'so the list does not print it — the exercise itself does');
+  assert(wb.exercises.every(e => rows.some(r =>
+    r.attrs['data-exercise'] === e.id && r.innerHTML.indexOf(e.pattern || e.no) >= 0)),
+    'every row headlines the thing that identifies it');
+
+  // 어휘 and 문법과 표현 get their own headers, so nine rows read as three and six.
+  const heads = kids.filter(r => (r.className || '').indexOf('wb-group') === 0);
+  assert(heads.length === 2, 'the list is split into two sections');
+  assert(heads[0].innerHTML.indexOf('어휘') >= 0 && heads[1].innerHTML.indexOf('문법과 표현') >= 0,
+    'named 어휘 and 문법과 표현');
+  assert(kids.indexOf(heads[1]) === kids.indexOf(rows[3]) - 1,
+    'and the grammar header sits directly above the first grammar row');
+  assert(css.indexOf('.wb-group ') >= 0 || css.indexOf('.wb-group {') >= 0,
+    'the section header is styled');
 
   ui.run("openWorkbookExercise('u14-grammar-4-3')");
   assert(ui.els['wb-sub'].textContent.indexOf('V-(으)면 안 되다') >= 0,
