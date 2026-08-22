@@ -365,10 +365,17 @@ function cleanExercise(ex, i, seenIds) {
     blurbEn: str(ex.blurbEn),
     instructionKo: str(ex.instructionKo),
     instructionEn: str(ex.instructionEn),
-    noteEn: str(ex.noteEn),
-    bank: chips,
-    items: cleaned
+    noteEn: str(ex.noteEn)
   };
+  // The grammar point the exercise belongs to. The list uses it as the headline,
+  // because 문법과 표현 numbers its 연습 inside each point — Unit 10 has two pages
+  // called 연습 1 and only the pattern tells them apart. This used to be written
+  // for the two per-question types only and dropped for everything else, so a
+  // 문법과 표현 page built out of one shared box came back without it.
+  const pattern = str(ex.pattern);
+  if (pattern) out.pattern = pattern;
+  out.bank = chips;
+  out.items = cleaned;
   if (ex.example && (str(ex.example.answer) || str(ex.example.stemKo)
     || (ex.example.lines && ex.example.lines.length))) {
     const answer = str(ex.example.answer);
