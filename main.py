@@ -57,7 +57,6 @@ ALLOWED_DIRS = frozenset({
     'audio',
     'skins',
     'worlds',
-    'diner',
 })
 
 os.makedirs(DATA_DIR, exist_ok=True)

@@ -54,7 +54,6 @@ const skinCat = JSON.parse(fs.readFileSync(path.join(ROOT, 'skins', 'catalog.jso
 });
 
 assert(set.has('worlds/unit10-layout.json'), 'Unit 10 layout is in the batch');
-assert(set.has('diner/content.json'), 'diner content is in the batch');
 
 // vercel.json rewrites /worlds/* to the CDN, so in production the repo copy of a
 // world file is never read — only the uploaded one is. A file left out of the

@@ -45,7 +45,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: audio/ko
-          key: tts-sunhi-1-${{ hashFiles('levels.json', 'diner/content.json', 'worlds/**/*.json', 'scripts/ttsClips.js', 'scripts/generate_tts.js') }}
+          key: tts-sunhi-1-${{ hashFiles('levels.json', 'worlds/**/*.json', 'scripts/ttsClips.js', 'scripts/generate_tts.js') }}
 
       - name: Publish (validate → R2 → CDN verify → Vercel)
         run: npm run publish:prod
