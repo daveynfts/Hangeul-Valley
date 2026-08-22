@@ -75,6 +75,39 @@
       "stars": { "mat": 4, "gap": 2, "gyotong": 3, "service": 4, "bunwigi": 4 }
     }
   ],
+  "order": {
+    "shopKo": "피자나라",
+    "shopEn": "Pizza Nara",
+    "priceKo": "만 팔천 원",
+    "minutesKo": "삼십 분",
+    "pizzas": [
+      { "id": "cheese", "ko": "치즈피자", "en": "cheese pizza", "icon": "🧀" },
+      { "id": "bulgogi", "ko": "불고기피자", "en": "bulgogi pizza", "icon": "🥩" },
+      { "id": "yachae", "ko": "야채피자", "en": "vegetable pizza", "icon": "🥬" },
+      { "id": "goguma", "ko": "고구마피자", "en": "sweet-potato pizza", "icon": "🍠" },
+      { "id": "pepperoni", "ko": "페퍼로니피자", "en": "pepperoni pizza", "icon": "🍕" }
+    ],
+    "drinks": [
+      { "id": "cola", "ko": "콜라", "en": "cola", "icon": "🥤" },
+      { "id": "cider", "ko": "사이다", "en": "lemon-lime soda", "icon": "🍋" }
+    ],
+    "sides": [
+      { "id": "fried-chicken", "ko": "프라이드치킨", "en": "fried chicken", "icon": "🍗" },
+      { "id": "yangnyeom-chicken", "ko": "양념치킨", "en": "seasoned fried chicken", "icon": "🌶️" },
+      { "id": "bibimbap", "ko": "비빔밥", "en": "bibimbap", "icon": "🍚" },
+      { "id": "kimchi-bokkeumbap", "ko": "김치볶음밥", "en": "kimchi fried rice", "icon": "🍳" },
+      { "id": "haemul-bokkeumbap", "ko": "해물볶음밥", "en": "seafood fried rice", "icon": "🦐" },
+      { "id": "mul-naengmyeon", "ko": "물냉면", "en": "cold noodles in broth", "icon": "🧊" }
+    ],
+    "counters": [
+      { "id": "pan", "ko": "판", "en": "a whole pizza", "numKo": "한", "forGroup": "pizza" },
+      { "id": "inbun", "ko": "인분", "en": "one person's portion", "numKo": "이", "forGroup": "side" }
+    ],
+    "delivery": [
+      { "id": "baedal", "ko": "배달되다", "en": "to be delivered", "askKo": "배달돼요?" },
+      { "id": "gatda", "ko": "갖다 주다", "en": "to bring it to someone", "askKo": "갖다 주세요." }
+    ]
+  },
   "intonation": [
     { "ko": "삼계탕 한번 먹어 볼래?", "kind": "yesno", "tip": "No question word → rise ⤴" },
     { "ko": "여기는 뭐가 맛있어요?", "kind": "wh", "tip": "Has 뭐 → level or fall ⤵" },
