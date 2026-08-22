@@ -177,15 +177,18 @@ async function runTests() {
 
     await test('Keeps a recording, and refuses one that points outside audio/', () => {
       const book = workbookLib.getWorkbook(rootDir);
-      const drill = book.exercises.find((e) => e.audio);
-      assert(!!drill, 'the pattern drill carries its recording');
-      assert(/^audio\/.+\.mp3$/.test(drill.audio.src), 'stored as a path under audio/');
+      // Recordings hang off the rows now, not the exercise: the track is cut per
+      // exchange, so there is no whole-drill clip to attach at the top.
+      const drill = book.exercises.find((e) => (e.items || []).some((i) => i.audio));
+      assert(!!drill, 'the pattern drill rows carry their recordings');
+      assert(drill.items.every((i) => /^audio\/.+\.mp3$/.test(i.audio.src)),
+        'each stored as a path under audio/');
       // The value goes into new Audio(src) in the browser, so anything that
       // escapes the audio folder or names another origin has to be refused.
       ['../../etc/passwd.mp3', 'https://evil.example/x.mp3', 'audio/../secret.mp3',
         'audio/clip.js', '/audio/clip.mp3'].forEach((bad) => {
         const b = clone();
-        b.exercises.find((e) => e.id === drill.id).audio = { src: bad };
+        b.exercises.find((e) => e.id === drill.id).items[0].audio = { src: bad };
         refuses(b, rootDir, 'audio src must be a path under audio/', 'audio src "' + bad + '"');
       });
       // askEnd is what keeps a row from reading its own answer out, so a value
@@ -207,13 +210,21 @@ async function runTests() {
         'an item clip without askEnd stores none');
       workbookLib.saveWorkbook(clone(), rootDir);
 
-      // No audio at all is the normal case and must stay silent, not throw.
+      // No audio at all is the normal case — most rows in the book have none —
+      // and must stay silent rather than throw.
       const none = clone();
-      delete none.exercises.find((e) => e.id === drill.id).audio;
+      delete none.exercises.find((e) => e.id === drill.id).items[0].audio;
       const res = workbookLib.saveWorkbook(none, rootDir);
-      assert(res.exerciseCount === original.exercises.length, 'an exercise with no recording saves');
-      assert(!workbookLib.getWorkbook(rootDir).exercises.find((e) => e.id === drill.id).audio,
+      assert(res.exerciseCount === original.exercises.length, 'a row with no recording saves');
+      assert(!workbookLib.getWorkbook(rootDir).exercises
+        .find((e) => e.id === drill.id).items[0].audio,
         'and stores no empty audio key');
+      // The clip belongs to the row, so the exercise has nowhere to put one.
+      const top = clone();
+      top.exercises.find((e) => e.id === drill.id).audio = { src: 'audio/book/whatever.mp3' };
+      workbookLib.saveWorkbook(top, rootDir);
+      assert(!workbookLib.getWorkbook(rootDir).exercises.find((e) => e.id === drill.id).audio,
+        'an exercise-level recording is dropped rather than stored where nothing reads it');
       workbookLib.saveWorkbook(clone(), rootDir);
     });
 

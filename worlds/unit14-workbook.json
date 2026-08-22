@@ -1355,10 +1355,6 @@
       "instructionEn": "Answer as in the example.",
       "noteEn": "In the book this is the listening drill on track 10: the teacher asks, you answer out loud, one after another. The pattern never changes — 아니요, 전에 …-(으)ㄴ 적이 있어요 — so the only thing to get right is the modifier, and the four verbs are picked to cover all three ways it forms. Use the speaker button: say it before you read it.",
       "pattern": "V-(으)ㄴ 적(이) 있다[없다]",
-      "audio": {
-        "src": "audio/book/2b-u14-pattern-1.mp3",
-        "labelEn": "Track 10 · 연습 1 — as the book records it"
-      },
       "items": [
         {
           "n": 1,
@@ -1504,8 +1500,7 @@
           "why": "The one the drill builds towards, and the teacher gives it away in the question: 들어요, not 듣어요. The ㄷ has already turned into ㄹ there for the same reason it does here.",
           "grammar": "듣다 → 들은. ㄷ-irregular: ㄷ becomes ㄹ before a vowel ending, then the consonant-stem -은 goes on. Compare 듣고, where a consonant follows and the ㄷ stays as it is.",
           "audio": {
-            "src": "audio/book/2b-u14-p1-4.mp3",
-            "askEnd": 3.36
+            "src": "audio/book/2b-u14-p1-4.mp3"
           }
         }
       ],
@@ -1542,10 +1537,6 @@
       "instructionEn": "Answer as in the example.",
       "noteEn": "The bracket under each question is the phrase to build the clause from — the same cue the book prints. Every answer ends by echoing the teacher’s own verb, so the only thing you supply is the 때 clause in front of it.",
       "pattern": "A/V-았을/었을 때",
-      "audio": {
-        "src": "audio/book/2b-u14-pattern-2.mp3",
-        "labelEn": "Track 10 · 연습 2 — as the book records it"
-      },
       "items": [
         {
           "n": 1,
@@ -1618,7 +1609,7 @@
           "grammar": "돌아가시다 → 돌아가셨을 때. 시 + 었 → 셨. Note 슬펐어요 in the question as well: 슬프다 is a ㅡ stem, so 슬프 + 어 → 슬퍼, then 었.",
           "audio": {
             "src": "audio/book/2b-u14-p2-2.mp3",
-            "askEnd": 3.65
+            "askEnd": 3.66
           }
         },
         {
@@ -1691,8 +1682,7 @@
           "why": "This is the sentence the 문법과 표현 연습 2 example was built on, turned round: there the phone rang as you arrived, here you answer for when the call came. 전화를 받다 is to take a call, the same 받다 as item 1.",
           "grammar": "도착하다 → 도착했을 때. Every 하다 verb goes 하 + 였 → 했, so 도착하았을 is wrong twice over — wrong vowel, and uncontracted.",
           "audio": {
-            "src": "audio/book/2b-u14-p2-4.mp3",
-            "askEnd": 3.07
+            "src": "audio/book/2b-u14-p2-4.mp3"
           }
         }
       ],
@@ -1713,7 +1703,7 @@
         "en": "T: When did you see that film? — S: I saw it when I was little.",
         "audio": {
           "src": "audio/book/2b-u14-p2-0.mp3",
-          "askEnd": 2.25
+          "askEnd": 2.24
         }
       }
     },
@@ -1729,10 +1719,6 @@
       "instructionEn": "Ask the question, as in the example.",
       "noteEn": "The other half of the pair, and the one the workbook pages skip: -아/어도 되다 is asking whether something is allowed. The teacher gives the plain phrase and you put the ending on it, which means finding the 해요-form vowel first — that is where all four of these differ.",
       "pattern": "V-아/어도 되다",
-      "audio": {
-        "src": "audio/book/2b-u14-pattern-3.mp3",
-        "labelEn": "Track 10 · 연습 3 — as the book records it"
-      },
       "items": [
         {
           "n": 1,
@@ -1805,7 +1791,7 @@
           "grammar": "전화하다 → 전화해도 돼요. 하 takes 여, not 아/어: 하 + 여도 = 해도. 전화하도 leaves the vowel out altogether and there is nothing for -도 to attach to.",
           "audio": {
             "src": "audio/book/2b-u14-p3-2.mp3",
-            "askEnd": 2.36
+            "askEnd": 2.35
           }
         },
         {
@@ -1842,7 +1828,7 @@
           "grammar": "쓰다 → 써도 돼요. The ㅡ drops before a vowel ending and there is no syllable before it to take the vowel from, so it defaults to 어: 쓰 + 어 = 써.",
           "audio": {
             "src": "audio/book/2b-u14-p3-3.mp3",
-            "askEnd": 2.53
+            "askEnd": 2.54
           }
         },
         {
@@ -1878,8 +1864,7 @@
           "why": "The same question the 문법과 표현 sign page asked, and the answer it expects there is 먹으면 안 돼요. Asking and refusing are the two halves the book keeps putting side by side.",
           "grammar": "먹다 → 먹어도 돼요. The stem vowel is ㅓ, so the ending is 어. Only ㅏ and ㅗ stems take 아.",
           "audio": {
-            "src": "audio/book/2b-u14-p3-4.mp3",
-            "askEnd": 3.06
+            "src": "audio/book/2b-u14-p3-4.mp3"
           }
         }
       ],
@@ -1916,10 +1901,6 @@
       "instructionEn": "Answer as in the example.",
       "noteEn": "The reply to 연습 3. The teacher asks with the ending that contracts and you answer with the one that does not — -(으)면 goes on the plain stem, so a verb can look irregular in the question and perfectly regular in the answer. Item 4 is where that bites.",
       "pattern": "V-(으)면 안 되다",
-      "audio": {
-        "src": "audio/book/2b-u14-pattern-4.mp3",
-        "labelEn": "Track 10 · 연습 4 — as the book records it"
-      },
       "items": [
         {
           "n": 1,
@@ -2065,8 +2046,7 @@
           "why": "The best item in the drill. 부르다 is 르-irregular, and the teacher shows it off: 부르 + 어 doubles the ㄹ and gives 불러. Then the answer needs -면, no vowel follows, and the verb goes straight back to being ordinary.",
           "grammar": "부르다 → 부르면 안 돼요. 르-irregular verbs are only irregular before a vowel. 불러면 carries the irregular form into a place that never triggers it — the single most useful mistake to stop making.",
           "audio": {
-            "src": "audio/book/2b-u14-p4-4.mp3",
-            "askEnd": 3.56
+            "src": "audio/book/2b-u14-p4-4.mp3"
           }
         }
       ],

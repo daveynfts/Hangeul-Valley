@@ -254,8 +254,6 @@ function cleanExercise(ex, i, seenIds) {
       noteEn: str(ex.noteEn),
       pattern: str(ex.pattern)
     };
-    const audio = cleanAudio(ex.audio, where);
-    if (audio) out.audio = audio;
     if (type === 'experience') {
       out.ownLabels = {
         yes: str(ex.ownLabels && ex.ownLabels.yes) || '있어요',

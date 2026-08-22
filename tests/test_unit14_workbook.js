@@ -1167,48 +1167,27 @@ console.log('\n--- 18. Listening ---');
   assert(both.indexOf('해도 돼요') >= 0 && both.indexOf('하면 안 돼요') >= 0,
     'a two-blank row speaks both blanks filled');
 
-  // The book's own recording of the drill.
   const ui2 = loadUi();
   ui2.setBank('u14-pattern-1');
-  assert(!!exT.audio && /^audio\/[\w./-]+\.mp3$/.test(exT.audio.src),
-    'the pattern drill names its recording');
-  const clip = path.join(ROOT, exT.audio.src);
-  assert(fs.existsSync(clip), 'and the file is on disk at ' + exT.audio.src);
-  const kb2 = Math.round(fs.statSync(clip).size / 1024);
-  assert(kb2 > 40 && kb2 < 2048, 'trimmed and re-encoded, not the whole 7 MB track (' + kb2 + ' KB)');
-  const bar = ui2.els['wb-instruction'].children.find(c => c.className === 'wb-track');
-  assert(!!bar, 'the exercise draws a player under its instruction');
-  assert(bar.children.some(c => c.className === 'wb-track-play'),
-    'with a play button');
-  assert(css.indexOf('.wb-track ') >= 0 || css.indexOf('.wb-track {') >= 0, 'the player is styled');
   assert(uiSrc.indexOf('AudioMixer.voiceStart') >= 0 && uiSrc.indexOf('wbStopTrack') >= 0,
-    'it goes through the mixer and can be stopped');
-  // Leaving the exercise has to silence it — an exercise’s recording has no
-  // business playing over the list or over the next exercise.
+    'a clip goes through the mixer and can be stopped');
+  // Leaving the exercise has to silence it — a row's recording has no business
+  // playing over the list or over the next exercise.
   ['function backToWorkbookList', 'function closeWorkbook'].forEach((fn) => {
     const body = uiSrc.slice(uiSrc.indexOf(fn), uiSrc.indexOf(fn) + 400);
     assert(body.indexOf('wbStopTrack()') >= 0, fn.replace('function ', '') + ' stops the clip');
   });
-  // Track 10 holds all four drills, so it is cut four ways and each 연습 gets
-  // its own piece. One shared clip would start every exercise at the top of the
-  // track and make the player useless on three of them.
-  const drills = wb.exercises.filter(e => e.section === '문형 연습');
-  assert(drills.length === 4 && drills.every(e => e.audio),
-    'all four pattern drills carry a recording');
-  assert(new Set(drills.map(e => e.audio.src)).size === 4,
-    'and each one a different piece of the track');
-  assert(wb.exercises.filter(e => e.audio).length === 4,
-    'nothing else claims a recording');
-  drills.forEach((e) => {
-    const f = path.join(ROOT, e.audio.src);
-    assert(fs.existsSync(f), e.no + ' clip is on disk');
-    const secs = Math.round(fs.statSync(f).size / 8000);
-    assert(secs > 30 && secs < 120, e.no + ' clip is one drill long, not the whole track');
-  });
 
   // ── One clip per exchange ────────────────────────────────────────────────
-  // Track 10 is cut per item as well as per drill, so a row plays its own
-  // exchange instead of the learner hunting for it in a 70-second clip.
+  // The track is cut per exchange, not per drill. A whole-drill clip was 70
+  // seconds of which a row needed six, so nothing carries one any more and the
+  // player that showed it is gone with it.
+  const drills = wb.exercises.filter(e => e.section === '문형 연습');
+  assert(drills.length === 4, 'four pattern drills');
+  assert(wb.exercises.every(e => !e.audio),
+    'no exercise carries a whole-drill recording any more');
+  assert(uiSrc.indexOf('wbTrackBar') < 0 && css.indexOf('wb-track') < 0,
+    'and the player that played one is gone rather than left inert');
   const secondsOf = (rel) => fs.statSync(path.join(ROOT, rel)).size / 8000;
   drills.forEach((e) => {
     assert(e.items.every(i => i.audio && i.audio.src), e.no + ': every item has its own clip');
@@ -1216,23 +1195,32 @@ console.log('\n--- 18. Listening ---');
     const srcs = e.items.map(i => i.audio.src).concat(e.example.audio.src);
     assert(new Set(srcs).size === srcs.length, e.no + ': no two rows share a clip');
     srcs.forEach((s) => assert(fs.existsSync(path.join(ROOT, s)), s + ' is on disk'));
-    // Each is one exchange, not the whole drill.
-    e.items.forEach((i) => {
+    // Each clip is one exchange with the four-second waits taken out: the
+    // teacher's line, a breath, the model answer. Anything much longer means the
+    // cut ran into the next item.
+    const withAnswer = e.items.filter(i => i.audio.askEnd);
+    withAnswer.forEach((i) => {
       const secs = secondsOf(i.audio.src);
-      assert(secs > 4 && secs < 25, e.no + ' item ' + i.n + ' is one exchange long ('
-        + Math.round(secs) + 's)');
+      assert(secs > 3 && secs < 12, e.no + ' item ' + i.n + ' is one exchange long ('
+        + secs.toFixed(1) + 's)');
       assert(i.audio.askEnd > 0 && i.audio.askEnd < secs,
         e.no + ' item ' + i.n + ' stops the prompt inside its own clip');
     });
-    // The last item of every drill is the short one: the teacher's question and
-    // the answering gap, with no model answer recorded after it.
+    // The last item of every drill is the odd one: the track asks it and moves
+    // on without recording a model answer. Consistent across all four, which is
+    // why the clip is the question alone and carries no askEnd — there is
+    // nothing after the prompt to hold back.
     const last = e.items[e.items.length - 1];
+    assert(withAnswer.length === 3 && !last.audio.askEnd,
+      e.no + ': the last item has no model answer on the track');
     assert(secondsOf(last.audio.src) < secondsOf(e.items[0].audio.src),
-      e.no + ': the last item is the short one, as the track has it');
+      e.no + ': so its clip is the shorter one');
   });
   const allClips = drills.flatMap(e => e.items.map(i => i.audio.src)
-    .concat(e.example.audio.src, e.audio.src));
-  assert(new Set(allClips).size === 24, 'twenty-four clips in all — four drills and twenty rows');
+    .concat(e.example.audio.src));
+  assert(new Set(allClips).size === 20, 'twenty clips in all — four drills of five rows');
+  assert(fs.readdirSync(path.join(ROOT, 'audio', 'book')).length === 20,
+    'and nothing left over in audio/book from the earlier cuts');
 
   // The button plays the book, and says so.
   const bookBtn = ui2.els['wb-items'].children[0].children[1].children[0]
