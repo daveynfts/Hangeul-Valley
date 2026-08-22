@@ -920,7 +920,7 @@ console.log('\n--- 15. The exercise list ---');
   // 문법과 표현 numbers per grammar point, so the list now holds three rows
   // called 연습 1. Without the pattern printed they would read identically.
   const ones = wb.exercises.filter(e => e.no === '연습 1');
-  assert(ones.length === 4, 'four exercises are called 연습 1');
+  assert(ones.length === 5, 'five exercises are called 연습 1');
   assert(ones.filter(e => e.section === '문법과 표현').length === 3,
     'three of them in the same section');
   assert(new Set(ones.map(e => e.section + '|' + e.no)).size < ones.length,
@@ -932,9 +932,14 @@ console.log('\n--- 15. The exercise list ---');
   ui.setBank(null);
   const kids = ui.els['wb-items'].children;
   const rows = kids.filter(r => r.attrs['data-exercise']);
-  assert(rows.length === 9, 'the list offers all nine exercises');
-  assert(wb.exercises.length <= 9,
-    'and every one is still reachable by number key — a tenth would need another way in');
+  assert(rows.length === 10, 'the list offers all ten exercises');
+  // 1-9 then 0 is where a keypad runs out. An eleventh row gets no key, so its
+  // badge has to be blank rather than promising one that does nothing.
+  assert(wb.exercises.length <= 10, 'and every one is reachable by number key');
+  assert(rows[9].innerHTML.indexOf('>0<') >= 0, 'the tenth row is keyed 0');
+  const kbPick = uiSrc.slice(uiSrc.indexOf("if (st.mode === 'pick')"));
+  assert(kbPick.indexOf('/^[0-9]$/') >= 0 && kbPick.indexOf('num === 0 ? 9') >= 0,
+    'and 0 opens it');
   const html9 = rows.map(r => r.innerHTML).join('');
   assert(html9.indexOf('wb-pick-pat') >= 0, 'each grammar row prints its pattern');
   assert(html9.indexOf('A/V-았을/었을 때') >= 0 && html9.indexOf('V-(으)면 안 되다') >= 0,
@@ -955,9 +960,10 @@ console.log('\n--- 15. The exercise list ---');
 
   // 어휘 and 문법과 표현 get their own headers, so nine rows read as three and six.
   const heads = kids.filter(r => (r.className || '').indexOf('wb-group') === 0);
-  assert(heads.length === 2, 'the list is split into two sections');
-  assert(heads[0].innerHTML.indexOf('어휘') >= 0 && heads[1].innerHTML.indexOf('문법과 표현') >= 0,
-    'named 어휘 and 문법과 표현');
+  assert(heads.length === 3, 'the list is split into three sections');
+  assert(heads[0].innerHTML.indexOf('어휘') >= 0 && heads[1].innerHTML.indexOf('문법과 표현') >= 0
+    && heads[2].innerHTML.indexOf('문형 연습') >= 0,
+    'named 어휘, 문법과 표현 and 문형 연습');
   assert(kids.indexOf(heads[1]) === kids.indexOf(rows[3]) - 1,
     'and the grammar header sits directly above the first grammar row');
   assert(css.indexOf('.wb-group ') >= 0 || css.indexOf('.wb-group {') >= 0,
@@ -991,6 +997,101 @@ console.log('\n--- 16. Art coverage ---');
     .slice(10).map(r => r.slice(10)).join('|'));
   assert(new Set(badges).size === 1, 'all five signs carry the identical 금지 badge');
   assert(badges[0].indexOf('R') >= 0, 'and it is drawn in red');
+}
+
+// ── 17. 문형 연습 — the audio drill ──────────────────────────────────────────
+console.log('\n--- 17. 문형 연습 (pattern practice) ---');
+const exT = wb.exercises.find(e => e.id === 'u14-pattern-1');
+{
+  assert(!!exT && exT.type === 'build', '문형 연습 연습 1 is a build exercise');
+  assert(exT.section === '문형 연습' && exT.sectionEn === 'Pattern Practice',
+    'it is its own section, the third in the book');
+  assert(exT.pattern === 'V-(으)ㄴ 적(이) 있다[없다]',
+    'drilling the same pattern the 문법과 표현 page taught');
+  assert(exT.items.length === 4, 'four exchanges');
+  assert(/track 10/i.test(exT.noteEn), 'the note says which track it is in the book');
+
+  // The answer key, and the three ways the modifier forms.
+  const KEYT = [
+    [1, '본', '보다', '이 영화를 처음 봐요?'],
+    [2, '먹은', '먹다', '이 음식을 처음 먹어요?'],
+    [3, '만난', '만나다', '마이클 씨를 처음 만나요?'],
+    [4, '들은', '듣다', '이 노래를 처음 들어요?']
+  ];
+  KEYT.forEach(([n, form, phrase, ask]) => {
+    const item = exT.items.find(i => i.n === n);
+    assert(!!item, 'question ' + n + ' exists');
+    assert(item.choices.find(c => c.id === item.answer).ko === form,
+      '문형 연습 item ' + n + ' answers ' + form);
+    assert(item.phraseKo === phrase, 'from ' + phrase);
+    assert(item.lines[0].ko === ask, "and keeps the teacher's printed question");
+    assert(item.lines[0].who === 'T' && item.lines[1].who === 'S',
+      'with the book’s T and S speakers');
+    assert(item.lines[1].ko === '아니요, 전에 {} 적이 있어요.',
+      'and the answer frame never changes — only the modifier does');
+  });
+  assert(exT.example.answerKo === '간' && exT.example.lines[0].ko === '경주에 처음 가요?',
+    'the worked example is the 경주 one the book prints');
+  assert(exT.items.find(i => i.n === 4).choices.some(c => c.ko === '듣은'),
+    'question 4 offers 듣은 — the ㄷ-irregular has to be on the row to be a trap');
+  assert(exT.items.find(i => i.n === 4).grammar.indexOf('ㄷ') >= 0, 'and the note names it');
+  assert(exT.items.find(i => i.n === 2).choices.some(c => c.ko === '먹는'),
+    'question 2 offers the present modifier 먹는');
+  assert(exT.items.every(i => i.why && i.grammar && i.en), 'every answer is explained');
+
+  const ui = loadUi();
+  ui.setBank('u14-pattern-1');
+  const row = ui.els['wb-items'].children[0];
+  assert(deepHtml(row).indexOf('이 영화를 처음 봐요?') >= 0, "the teacher's line is printed");
+  assert((deepHtml(row).match(/wb-spk/g) || []).length === 2, 'both speakers are shown');
+  ui.run("wbPickChoice(0, 'bon')");
+  assert(deepHtml(ui.els['wb-items'].children[0]).indexOf('본') >= 0,
+    'and the chosen modifier lands in the frame');
+  exT.items.forEach((item, i) => ui.run('wbPickChoice(' + i + ", '" + item.answer + "')"));
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.score') === 4, 'the textbook key scores 4 of 4');
+}
+
+// ── 18. Hearing it ─────────────────────────────────────────────────────────
+console.log('\n--- 18. Listening ---');
+{
+  const ui = loadUi();
+  ui.setBank('u14-pattern-1');
+  const head = ui.els['wb-items'].children[0].children[1].children[0];
+  const say = head.children.find(c => c.className === 'wb-say');
+  assert(!!say, 'a build row carries a listen button');
+  assert(say.attrs['aria-label'] === 'Listen', 'and is labelled for a screen reader');
+  assert(css.indexOf('.wb-say') >= 0, 'the button is styled');
+  assert(ui.els['wb-example'].children.some(c => c.className === 'wb-say'),
+    'the worked example has one too');
+
+  // Before checking it reads the question only. Speaking the answer to a row
+  // that has not been answered would hand it over.
+  assert(ui.call('wbRowSpeech', exT, exT.items[0], false) === '이 영화를 처음 봐요?',
+    'unchecked, it speaks only the line with nothing missing');
+  ui.run("wbPickChoice(0, 'bon')");
+  const full = ui.call('wbRowSpeech', exT, exT.items[0], true);
+  assert(full === '이 영화를 처음 봐요? 아니요, 전에 본 적이 있어요.',
+    'checked, it speaks the whole exchange with the right answer in it');
+  assert(full.indexOf('{}') < 0, 'and never reads the placeholder aloud');
+  // A two-blank row speaks both halves.
+  const pair = wb.exercises.find(e => e.id === 'u14-grammar-4-1');
+  const p = loadUi();
+  p.setBank('u14-grammar-4-1');
+  const both = p.call('wbRowSpeech', pair, pair.items[0], true);
+  assert(both.indexOf('해도 돼요') >= 0 && both.indexOf('하면 안 돼요') >= 0,
+    'a two-blank row speaks both blanks filled');
+
+  // The clip harvest must not render the wrong answers as clean spoken Korean.
+  const { collectTtsPhrases } = require('../scripts/ttsClips.js');
+  const phrases = collectTtsPhrases(ROOT);
+  assert(phrases.includes('이 영화를 처음 봐요? 아니요, 전에 본 적이 있어요.'),
+    'the model answer is queued for a clip');
+  assert(phrases.includes('이 영화를 처음 봐요?'), 'and so is the question on its own');
+  const wrong = ['하아도 돼요', '먹면 안 돼요', '어려웠을 때', '보은', '떠나았을 때'];
+  wrong.forEach((w) => {
+    assert(!phrases.some(p => p.indexOf(w) >= 0), 'no clip is made for the wrong form ' + w);
+  });
 }
 
 console.log('\n====================================================');

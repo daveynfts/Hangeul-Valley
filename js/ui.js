@@ -2500,6 +2500,53 @@ function wbLineHtml(ex, item, chipText, opts) {
   return vbEsc(item.stemKo) + ' ' + blank + '.';
 }
 
+// A build script with its gaps filled in, as one line of speech.
+function wbScriptText(lines, texts) {
+  let slot = 0;
+  return (lines || []).map((l) => {
+    const parts = String(l.ko || '').split('{}');
+    let s = parts[0] || '';
+    for (let k = 1; k < parts.length; k++) s += (texts[slot++] || '') + (parts[k] || '');
+    return s;
+  }).join(' ');
+}
+
+// What a row sounds like. Before it is checked that is only the lines with
+// nothing missing — the teacher's question — because reading a half-built
+// sentence aloud drills the gap instead of the pattern, and because hearing the
+// answer before choosing it is not a drill at all. Once it is checked the whole
+// exchange is spoken, correct: the model answer the book's track gives you.
+function wbRowSpeech(ex, item, checked) {
+  if (!item || ex.type !== 'build') return '';
+  if (!checked) {
+    return (item.lines || [])
+      .filter(l => String(l.ko || '').indexOf('{}') < 0)
+      .map(l => l.ko).join(' ');
+  }
+  return wbScriptText(item.lines, [
+    wbAnswerText(wbChip(item.answer, item)),
+    wbSlots(item) === 2 ? wbAnswerText(wbChip(item.answer2, item)) : ''
+  ]);
+}
+
+// One 🔊 for anything with Korean worth hearing. speakKorean plays the
+// pre-rendered clip where there is one and falls back to the browser's own
+// voice, so this needs no assets of its own.
+function wbSayButton(text) {
+  if (!text || typeof speakKorean !== 'function') return null;
+  const b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'wb-say';
+  b.title = '들어 보기';
+  b.setAttribute('aria-label', 'Listen');
+  b.textContent = '🔊';
+  b.onclick = (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    speakKorean(text, { force: true });
+  };
+  return b;
+}
+
 function renderWorkbook() {
   const st = workbookState;
   if (!st) return;
@@ -2553,6 +2600,13 @@ function renderWorkbook() {
           ? '<div class="wb-dlg reply"><span class="wb-spk">B</span>' + vbEsc(ex.reply || '') + '</div>'
           : '') +
         '<div class="wb-example-en">' + vbEsc(ex.example.en || '') + '</div>';
+      // The worked example is the one place the finished Korean is already on
+      // screen, so hearing it gives nothing away.
+      if (ex.type === 'build') {
+        const say = wbSayButton(wbScriptText(ex.example.lines,
+          [ex.example.answerKo || '', ex.example.answer2Ko || '']));
+        if (say) exBox.appendChild(say);
+      }
     }
   }
 
@@ -2617,6 +2671,8 @@ function renderWorkbook() {
         head.innerHTML = art +
           '<span class="wb-exp-phrase">' + vbEsc(item.phraseKo || '') + '</span>' +
           '<span class="wb-exp-en">' + vbEsc(item.en || '') + '</span>';
+        const say = wbSayButton(wbRowSpeech(ex, item, st.checked));
+        if (say) head.appendChild(say);
         const line = document.createElement('div');
         line.className = 'wb-exp-line';
         const chip2 = st.fill2[i] ? wbChip(st.fill2[i], item) : null;
@@ -2835,7 +2891,7 @@ function renderWorkbookPicker() {
       // headline, and the instruction waits until the exercise is open — which
       // is the only place it is any use anyway.
       b.innerHTML =
-        '<span class="wb-pick-key">' + (i + 1) + '</span>' +
+        '<span class="wb-pick-key">' + (i < 9 ? i + 1 : (i === 9 ? 0 : '')) + '</span>' +
         '<span class="wb-pick-icon">' + vbEsc(ex.icon || '📝') + '</span>' +
         '<span class="wb-pick-text">' +
           '<span class="wb-pick-title">' +
@@ -2897,8 +2953,12 @@ if (typeof window !== 'undefined' && window.addEventListener) {
         e.preventDefault(); st.pick = (st.pick - 1 + n) % n; renderWorkbook();
       } else if (e.key === 'Enter') {
         e.preventDefault(); openWorkbookExercise(st.bank.exercises[st.pick].id);
-      } else if (/^[1-9]$/.test(e.key)) {
-        const ex = st.bank.exercises[Number(e.key) - 1];
+      } else if (/^[0-9]$/.test(e.key)) {
+        // 1-9 are the first nine rows and 0 is the tenth, the way a keypad runs
+        // out. Beyond ten the arrows are the way in, and the badge on a row
+        // without a key is left blank rather than promising one.
+        const num = Number(e.key);
+        const ex = st.bank.exercises[num === 0 ? 9 : num - 1];
         if (ex) { e.preventDefault(); openWorkbookExercise(ex.id); }
       }
       return;

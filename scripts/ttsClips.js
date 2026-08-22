@@ -51,6 +51,45 @@ function walkKo(out, seen, node) {
   });
 }
 
+// The workbook cannot go through walkKo. Every wrong answer on it is a {ko: …}
+// too — 하아도 돼요, 먹면 안 돼요, 어려웠을 때 — and rendering those as clean
+// spoken Korean would teach them. Only what the page reads aloud is collected:
+// the lines as printed, and each script with the correct answers put in.
+function fillScript(lines, texts) {
+  let slot = 0;
+  return (lines || []).map((l) => {
+    const parts = String((l && l.ko) || '').split('{}');
+    let s = parts[0] || '';
+    for (let k = 1; k < parts.length; k++) s += (texts[slot++] || '') + (parts[k] || '');
+    return s;
+  }).join(' ');
+}
+
+function collectWorkbookPhrases(out, seen, base) {
+  const full = path.join(base, 'worlds', 'unit14-workbook.json');
+  if (!fs.existsSync(full)) return;
+  const book = JSON.parse(fs.readFileSync(full, 'utf8'));
+  (book.exercises || []).forEach((ex) => {
+    if (ex.type !== 'build') return;
+    const answerKo = (item, key) => {
+      const list = key === 'answer2' ? item.choices2 : item.choices;
+      const found = (list || []).find((c) => c && c.id === item[key]);
+      return found ? found.ko : '';
+    };
+    (ex.items || []).forEach((item) => {
+      (item.lines || []).forEach((l) => {
+        if (String((l && l.ko) || '').indexOf('{}') < 0) addKo(out, seen, l.ko);
+      });
+      addKo(out, seen, fillScript(item.lines,
+        [answerKo(item, 'answer'), answerKo(item, 'answer2')]));
+    });
+    if (ex.example) {
+      addKo(out, seen, fillScript(ex.example.lines,
+        [ex.example.answerKo || '', ex.example.answer2Ko || '']));
+    }
+  });
+}
+
 function collectTtsPhrases(root) {
   const base = root || ROOT;
   const out = [];
@@ -65,6 +104,7 @@ function collectTtsPhrases(root) {
     if (!fs.existsSync(full)) return;
     walkKo(out, seen, JSON.parse(fs.readFileSync(full, 'utf8')));
   });
+  collectWorkbookPhrases(out, seen, base);
   EXTRA_PHRASES.forEach((p) => addKo(out, seen, p));
 
   const sylSeen = new Set();
