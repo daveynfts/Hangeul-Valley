@@ -180,6 +180,22 @@ function cleanChoiceItem(item, i, where, type) {
   return out;
 }
 
+// A recording of the exercise as the book's track has it. The value goes
+// straight into new Audio(src) in the browser, so it is pinned to the folder the
+// game ships audio from: no absolute URL, no scheme, and nothing that walks out
+// of it.
+function cleanAudio(a, where) {
+  const src = str(a && a.src);
+  if (!src) return null;
+  if (src.indexOf('..') >= 0 || !/^audio\/[A-Za-z0-9._/-]+\.mp3$/.test(src)) {
+    throw new Error(`${where}: audio src must be a path under audio/ ending in .mp3 (got "${src}")`);
+  }
+  const out = { src };
+  const label = str(a.labelEn);
+  if (label) out.labelEn = label;
+  return out;
+}
+
 function cleanExercise(ex, i, seenIds) {
   const where = `Exercise ${i + 1}`;
   const id = str(ex && ex.id);
@@ -226,6 +242,8 @@ function cleanExercise(ex, i, seenIds) {
       noteEn: str(ex.noteEn),
       pattern: str(ex.pattern)
     };
+    const audio = cleanAudio(ex.audio, where);
+    if (audio) out.audio = audio;
     if (type === 'experience') {
       out.ownLabels = {
         yes: str(ex.ownLabels && ex.ownLabels.yes) || '있어요',

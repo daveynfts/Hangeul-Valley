@@ -2219,6 +2219,8 @@ function openWorkbookExercise(id) {
   const ex = (st.bank.exercises || []).find(e => e.id === id);
   if (!ex) return;
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  // One exercise's recording has nothing to say over another's.
+  if (!st.ex || st.ex.id !== ex.id) wbStopTrack();
   st.mode = 'exercise';
   st.ex = ex;
   st.chips = (ex.bank || []).filter(c => !c.usedByExample);
@@ -2243,6 +2245,7 @@ function backToWorkbookList() {
   const st = workbookState;
   if (!st) return;
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  wbStopTrack();
   st.mode = 'pick';
   st.ex = null;
   st.checked = false;
@@ -2251,6 +2254,7 @@ function backToWorkbookList() {
 
 function closeWorkbook() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  wbStopTrack();
   workbookState = null;
   setModalState('workbook-overlay', false);
 }
@@ -2500,6 +2504,91 @@ function wbLineHtml(ex, item, chipText, opts) {
   return vbEsc(item.stemKo) + ' ' + blank + '.';
 }
 
+// The book records these drills and a drill is meant to be heard, so an exercise
+// can name a clip. It plays through the same mixer the voice clips use, so the
+// volume slider and the ducking reach it like everything else — an <audio> left
+// to itself would ignore both and talk over the music.
+let wbTrack = null;
+
+function wbStopTrack() {
+  const t = wbTrack;
+  wbTrack = null;
+  if (!t) return;
+  try { t.el.pause(); t.el.currentTime = 0; } catch (e) { /* stub or already gone */ }
+  if (typeof AudioMixer !== 'undefined' && AudioMixer.voiceEnd) AudioMixer.voiceEnd();
+  if (t.btn) t.btn.textContent = '▶';
+  if (t.fill) t.fill.style.width = '0%';
+}
+
+// Built as elements because the progress bar is written to on every timeupdate
+// and the button label flips on every press; re-rendering the page to move them
+// would rebuild the <audio> and restart the clip.
+function wbTrackBar(audio) {
+  if (!audio || !audio.src || typeof Audio !== 'function') return null;
+  const wrap = document.createElement('div');
+  wrap.className = 'wb-track';
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'wb-track-play';
+  btn.textContent = '▶';
+  btn.setAttribute('aria-label', 'Play the recording');
+  const bar = document.createElement('div');
+  bar.className = 'wb-track-bar';
+  const fill = document.createElement('i');
+  bar.appendChild(fill);
+  const label = document.createElement('span');
+  label.className = 'wb-track-label';
+  label.textContent = audio.labelEn || '';
+  wrap.appendChild(btn);
+  wrap.appendChild(bar);
+  wrap.appendChild(label);
+
+  // Every pick re-renders the page and rebuilds this bar while the clip carries
+  // on playing, so a fresh bar adopts the running clip instead of drawing a
+  // stopped button over audible sound.
+  if (wbTrack && wbTrack.src === audio.src) {
+    wbTrack.btn = btn;
+    wbTrack.fill = fill;
+    let paused = true;
+    try { paused = wbTrack.el.paused; } catch (e) { /* stub */ }
+    btn.textContent = paused ? '▶' : '⏸';
+  }
+
+  btn.onclick = () => {
+    if (wbTrack && wbTrack.src === audio.src) {
+      const el = wbTrack.el;
+      let paused = true;
+      try { paused = el.paused; } catch (e) { /* stub */ }
+      if (paused) { try { el.play(); } catch (e) {} btn.textContent = '⏸'; }
+      else { try { el.pause(); } catch (e) {} btn.textContent = '▶'; }
+      return;
+    }
+    wbStopTrack();
+    let el = null;
+    try { el = new Audio('/' + audio.src); } catch (e) { return; }
+    wbTrack = { el: el, src: audio.src, btn: btn, fill: fill };
+    try {
+      if (typeof AudioMixer !== 'undefined') {
+        if (AudioMixer.voiceLevel) el.volume = AudioMixer.voiceLevel();
+        if (AudioMixer.voiceStart) AudioMixer.voiceStart();
+      }
+      el.ontimeupdate = () => {
+        // Written through wbTrack, not through the `fill` this closure was born
+        // with: a re-render swaps in a new bar and the old one is detached, so
+        // the closure's copy would be painting a element nobody can see.
+        if (!wbTrack || wbTrack.el !== el || !el.duration || !wbTrack.fill) return;
+        wbTrack.fill.style.width = Math.round((el.currentTime / el.duration) * 100) + '%';
+      };
+      el.onended = () => { if (wbTrack && wbTrack.el === el) wbStopTrack(); };
+      el.onerror = () => { if (wbTrack && wbTrack.el === el) wbStopTrack(); };
+      const p = el.play();
+      if (p && typeof p.catch === 'function') p.catch(() => wbStopTrack());
+      btn.textContent = '⏸';
+    } catch (e) { wbStopTrack(); }
+  };
+  return wrap;
+}
+
 // A build script with its gaps filled in, as one line of speech.
 function wbScriptText(lines, texts) {
   let slot = 0;
@@ -2580,6 +2669,8 @@ function renderWorkbook() {
       '<div class="wb-inst-ko">' + vbEsc(ex.instructionKo || '') + '</div>' +
       '<div class="wb-inst-en">' + vbEsc(ex.instructionEn || '') + '</div>' +
       (ex.noteEn ? '<div class="wb-inst-note">' + vbEsc(ex.noteEn) + '</div>' : '');
+    const track = wbTrackBar(ex.audio);
+    if (track) inst.appendChild(track);
   }
 
   const exBox = $('wb-example');

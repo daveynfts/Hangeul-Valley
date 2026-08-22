@@ -34,7 +34,8 @@ const STATIC_FILES = [
   ['worlds/unit10-layout.json', 'application/json'],
   ['sprites/catalog.json', 'application/json'],
   ['skins/catalog.json', 'application/json'],
-  ['diner/content.json', 'application/json']
+  ['diner/content.json', 'application/json'],
+  ['audio/book/2b-u14-pattern-1.mp3', 'audio/mpeg']
 ];
 
 function loadEnvFile(file) {
