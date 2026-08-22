@@ -20,8 +20,12 @@
 // name means the failure is loud and says what is wrong, rather than looking like a broken
 // cloud save.
 //
-// The requires are not unused: Vercel traces them to decide what to bundle, so every JSON a
-// getter reads has to be named here or the function ships without its data.
+// What actually gets the data files into the bundle is `functions` in vercel.json, not these
+// requires — and getting that wrong is what failed the previous two deployments. That block
+// names each function by path and lists its includeFiles, so deleting a route without editing
+// it fails the build with "the pattern api/art.js ... doesn't match any Serverless Functions".
+// The requires stay because artLib and friends read these files, and because naming them here
+// keeps the dependency visible next to the code that needs it.
 require('../levels.json');
 require('../facts.json');
 require('../sprites/catalog.json');
