@@ -6,7 +6,10 @@
  * picture to name — reusing the food icons Unit 10 already ships. This suite
  * checks the twelve are the twelve the book prints, that every picture is a
  * sprite on disk that the game already publishes, and that the page renders and
- * scores. The interaction runs for real against js/ui.js in a sandbox.
+ * scores. The 문법과 표현 pages are checked the same way, against the answer key
+ * the book prints at the back: the choices marked correct, dropped into the
+ * printed line, have to read as the key does. The interaction runs for real
+ * against js/ui.js in a sandbox.
  *
  * Run: node tests/test_unit10_workbook.js
  */
@@ -27,6 +30,12 @@ let passed = 0, failed = 0;
 function assert(cond, msg) {
   if (cond) { console.log('  [PASS] ' + msg); passed++; }
   else { console.error('  [FAIL] ' + msg); failed++; }
+}
+// A 'build' row is assembled from elements rather than one innerHTML string, so
+// reading it back means walking the children.
+function deepHtml(el) {
+  if (!el) return '';
+  return (el.innerHTML || '') + (el.children || []).map(deepHtml).join('');
 }
 
 // The same DOM stub the Unit 14 suite uses, kept local so the two suites cannot
@@ -116,7 +125,8 @@ console.log('--- 1. Textbook fidelity ---');
 const BOOK = ['김치찌개', '된장찌개', '순두부찌개', '감자탕', '매운탕', '설렁탕',
   '냉면', '칼국수', '비빔국수', '삼겹살', '떡갈비', '갈비찜'];
 const dishes = wb.exercises.filter(e => e.type === 'match');
-assert(wb.exercises.length === 4, 'four exercises off the 어휘 pages');
+const vocabPages = wb.exercises.filter(e => e.section === '어휘');
+assert(vocabPages.length === 4, 'four exercises off the 어휘 pages');
 assert(dishes.length === 2, 'the twelve dishes are split across two matching pages');
 const named = dishes.flatMap(e => e.bank.map(b => b.ko));
 assert(named.length === 12, 'twelve names in all');
@@ -202,7 +212,7 @@ assert(new Set(dishes.flatMap(e => e.items.map(i => i.img))).size === 12,
 
 // ── 3. Every row is explained ────────────────────────────────────────────────
 console.log('\n--- 3. What the names mean ---');
-wb.exercises.forEach((e) => {
+vocabPages.forEach((e) => {
   e.items.forEach((it) => {
     assert(it.why && it.why.length > 40, e.no + ' item ' + it.n + ' says what the dish is');
     assert(it.grammar && it.grammar.length > 30, 'and takes the name apart');
@@ -212,7 +222,7 @@ wb.exercises.forEach((e) => {
 // Korean food names are compounds, and that is the lesson worth carrying out of
 // a vocabulary page. Spot-check the ones where the seam does real work.
 const note = (ko) => {
-  const ex = wb.exercises.find(e => e.bank.some(b => b.ko === ko));
+  const ex = wb.exercises.find(e => (e.bank || []).some(b => b.ko === ko));
   const id = ex.bank.find(b => b.ko === ko).id;
   return ex.items.find(i => i.answer === id).grammar;
 };
@@ -351,8 +361,776 @@ console.log('\n--- 4b. Drag and drop ---');
   assert(done.run('wbDrag') === null, 'a checked page cannot be dragged on');
 }
 
-// ── 5. Wiring ────────────────────────────────────────────────────────────────
-console.log('\n--- 5. Wiring ---');
+// ── 5. 문법과 표현 1 — N 중에(서) ────────────────────────────────────────────
+console.log('\n--- 5. N 중에(서) ---');
+const grammar = wb.exercises.filter(e => e.pattern === 'N 중에(서)');
+const g1 = grammar[0], g2 = grammar[1];
+assert(grammar.length === 2, 'both 연습 off the 문법과 표현 1 page are here');
+assert(grammar.every(e => e.type === 'build'), 'and each row carries its own choices');
+assert(grammar.every(e => e.section === '문법과 표현'),
+  'filed under 문법과 표현, and found by their pattern — the section holds two'
+  + ' grammar points now, and both number their 연습 from 1');
+assert(grammar.map(e => e.no).join(' ') === '연습 1 연습 2', 'numbered as the book numbers them');
+
+// 연습 1 — the group is the answer. The key at the back of the book prints five
+// phrases; the choice each row marks correct has to be one of them.
+const KEY_G1 = ['과일 중에서', '음식 중에서', '운동 중에서', '우리 반 학생 중에서', '1년 중에서'];
+const ASK_G1 = ['{} 뭘 제일 좋아해요?', '{} 뭐가 제일 맛있어요?', '{} 뭘 제일 잘해요?',
+  '{} 누가 제일 한국말을 잘해요?', '{} 몇 월이 제일 더워요?'];
+const REPLY_G1 = ['저는 딸기를 좋아해요.', '불고기가 제일 맛있어요.', '저는 농구를 잘해요.',
+  '아키라 씨가 제일 잘해요.', '8월이 제일 더워요.'];
+assert(g1.items.length === 5, '연습 1 has the book’s five rows');
+g1.items.forEach((it, i) => {
+  const got = (it.choices.find(c => c.id === it.answer) || {}).ko;
+  assert(got === KEY_G1[i], '연습 1 item ' + (i + 1) + ' answers ' + KEY_G1[i]);
+  assert(it.lines.length === 2 && it.lines[0].who === 'A' && it.lines[1].who === 'B',
+    'and is an A/B exchange');
+  assert(it.lines[0].ko === ASK_G1[i], 'A asks what the book prints');
+  assert(it.lines[1].ko === REPLY_G1[i], 'and B answers what the book prints');
+});
+assert(g1.example.lines[0].ko === '민수 씨 {} 누가 제일 키가 커요?'
+  && g1.example.lines[1].ko === '동생이 제일 커요.'
+  && g1.example.answerKo === '가족 중에서',
+  'the [보기] is the family photograph the page opens with');
+
+// Two ways to be wrong, both of them mistakes a learner makes: the place
+// particle on something that is not a place, and the winner standing where the
+// group belongs.
+g1.items.forEach((it, i) => {
+  const at = '연습 1 item ' + (i + 1);
+  assert(it.choices.length === 3, at + ' offers three phrases');
+  const wrong = it.choices.filter(c => c.id !== it.answer).map(c => c.ko);
+  assert(wrong.some(k => /에서$/.test(k) && k.indexOf('중에서') < 0),
+    at + ': one wrong answer puts the place particle on a group');
+  const swap = wrong.find(k => k.indexOf('중에서') >= 0);
+  assert(!!swap, at + ': the other keeps 중에서 and swaps the noun');
+  assert(swap && it.lines[1].ko.indexOf(swap.replace(' 중에서', '')) >= 0,
+    at + ': and the noun it swaps in is the one B answers with — ' + swap);
+  // 중에 and 중에서 are both right, which is what the brackets in the title mean.
+  // Marking either wrong would teach a falsehood.
+  assert(!wrong.some(k => /중에$/.test(k)), at + ': 중에 is never a distractor, being correct');
+});
+
+// The book photographs the group and prints no words at all. There are no
+// photographs here, so the members are named in the row's phrase instead.
+assert(g1.items.every(it => !it.art), '연습 1 draws no icon');
+assert(g1.items.every(it => (it.phraseKo || '').indexOf('·') > 0),
+  'each row lists the members the photograph showed');
+assert(/photograph/i.test(g1.noteEn), 'and the page says outright what the book had there');
+assert(g1.items[0].phraseKo.indexOf('사과') >= 0 && g1.items[0].phraseKo.indexOf('딸기') >= 0,
+  'the fruit row names the fruit, one of which is what B picks');
+
+// 연습 2 — A's whole question, out of a place and an adjective. Filled in, it
+// has to come out as the key writes it.
+const KEY_G2 = [
+  '세계에서 제일 높은 산이 어디예요?',
+  '한국에서 제일 큰 섬이 어디예요?',
+  '서울에서 제일 복잡한 곳이 어디예요?',
+  '학교 근처에서 제일 맛있는 식당이 어디예요?',
+  '우리 반에서 제일 인기가 많은 사람이 누구예요?'
+];
+const REPLY_G2 = ['에베레스트 산이 제일 높아요.', '제주도가 가장 큰 섬이에요.',
+  '강남 근처가 제일 복잡한 것 같아요.', '서울식당이 제일 맛있어요.',
+  '글쎄요, 켈리 씨인 것 같아요.'];
+assert(g2.items.length === 5, '연습 2 has the book’s five rows');
+g2.items.forEach((it, i) => {
+  const a = (it.choices.find(c => c.id === it.answer) || {}).ko;
+  const b = (it.choices2.find(c => c.id === it.answer2) || {}).ko;
+  assert(it.lines[0].ko.replace('{}', a).replace('{}', b) === KEY_G2[i],
+    'the key’s question comes out whole: ' + KEY_G2[i]);
+  assert(it.lines[1].ko === REPLY_G2[i], 'and B says what the book prints');
+  assert(it.phraseKo.indexOf(' / ') > 0, 'the row carries the book’s place / adjective label');
+});
+assert(g2.example.answerKo === '서울에서' && g2.example.answer2Ko === '큰'
+  && g2.example.lines[1].ko === '남대문시장이 가장 커요.',
+  'the [보기] is the Namdaemun market one, 가장 and all');
+
+// Two blanks, two decisions, and 중에서 is the wrong one on every row — which is
+// the whole reason the two 연습 sit next to each other.
+g2.items.forEach((it, i) => {
+  const at = '연습 2 item ' + (i + 1);
+  assert(it.choices.length === 3 && it.choices2.length === 3, at + ' offers three for each blank');
+  const ids = new Set(it.choices.map(c => c.id));
+  assert(it.choices2.every(c => !ids.has(c.id)),
+    at + ': no id is shared, so a placed form cannot be read into the other blank');
+  const wrong = it.choices.filter(c => c.id !== it.answer).map(c => c.ko);
+  assert(wrong.some(k => k.indexOf('중에서') >= 0), at + ': 중에서 is offered, and is wrong here');
+  assert(wrong.some(k => /에$/.test(k)), at + ': and 에 is offered against 에서');
+  assert(it.choices2.filter(c => c.id !== it.answer2).length === 2,
+    at + ': and two endings the adjective does not take');
+});
+assert(g2.items[0].choices2.some(c => c.ko === '높는'),
+  '높다 is put against the -는 that an adjective never takes');
+assert(g2.items[1].choices2.some(c => c.ko === '크은'),
+  '크다 is put against the 으 a vowel stem never takes');
+assert(g2.items[3].choices2.some(c => c.ko === '맛있은') && /있다/.test(g2.items[3].grammar),
+  '맛있는 is put against 맛있은, and the note says 있다 is the reason');
+assert(/우리 반 학생 중에서/.test(g2.items[4].grammar),
+  'and the last row points back at 연습 1, where the students were the set');
+
+grammar.forEach((e) => {
+  e.items.forEach((it) => {
+    assert(it.why && it.why.length > 40,
+      e.no + ' item ' + it.n + ' says how the answer is arrived at');
+    assert(it.grammar && it.grammar.length > 30, 'and names the rule behind it');
+    assert(it.en, 'and glosses the exchange');
+  });
+});
+
+// ── 5b. The grammar pages run ────────────────────────────────────────────────
+console.log('\n--- 5b. Building the questions ---');
+{
+  const ui = loadUi();
+  ui.open('u10-grammar-1-1');
+  assert(ui.els['wb-bank'].className === 'wb-hidden',
+    'no shared box is drawn: the choices hang off each row');
+  assert(ui.els['wb-items'].className === 'wb-items-build', 'build rows use their own layout');
+  assert(ui.els['wb-count'].textContent === '0 / 5', 'five blanks on 연습 1');
+  g1.items.forEach((it, i) => ui.run('wbPickChoice(' + i + ", '" + it.answer + "')"));
+  assert(ui.run('wbComplete()') === true, 'one phrase per row finishes the page');
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.score') === 5, 'the textbook key scores 5 of 5');
+  const row1 = deepHtml(ui.els['wb-items'].children[0]);
+  assert(row1.indexOf('과일 중에서') >= 0 && row1.indexOf('저는 딸기를 좋아해요.') >= 0,
+    'the finished row reads as the book’s dialogue');
+  assert(row1.indexOf('사과 · 딸기 · 오렌지 · 포도') >= 0,
+    'with the group named where the photograph was');
+
+  // 연습 2 asks two things of every row and scores both.
+  const two = loadUi();
+  two.open('u10-grammar-1-2');
+  assert(two.els['wb-count'].textContent === '0 / 10',
+    'ten blanks on 연습 2 — the counter counts blanks, not rows');
+  g2.items.forEach((it, i) => two.run('wbPickChoice(' + i + ", '" + it.answer + "')"));
+  assert(two.run('wbComplete()') === false, 'the place alone does not finish a row');
+  g2.items.forEach((it, i) => two.run('wbPickChoice(' + i + ", '" + it.answer2 + "', 2)"));
+  assert(two.run('wbComplete()') === true, 'the adjective finishes it');
+  two.run('checkWorkbook()');
+  assert(two.run('workbookState.score') === 10, 'the whole key scores 10 of 10');
+  const row4 = deepHtml(two.els['wb-items'].children[3]);
+  assert(row4.indexOf('학교 근처에서') >= 0 && row4.indexOf('맛있는') >= 0,
+    'and a row shows both halves it was built from');
+  const eg = two.els['wb-example'].innerHTML;
+  assert(eg.indexOf('<b>서울에서</b>') >= 0 && eg.indexOf('<b>큰</b>') >= 0
+    && eg.indexOf('시장이 어디예요?') >= 0,
+    'the worked example prints both halves filled in, not the puzzle again');
+
+  // Both blanks fall in A's line — the book's question is one line long — so
+  // the speaker chip cannot tell the two groups of buttons apart on its own,
+  // and the tag carries the blank it fills with it.
+  const picks = two.els['wb-items'].children[0].children[1].children[2];
+  const tags = picks.children.filter(c => c.className === 'wb-picks-tag')
+    .map(c => c.textContent);
+  assert(tags.join(' ') === 'A1 A2', 'the two groups are tagged A1 and A2');
+  assert(picks.children.some(c => c.className === 'wb-picks-break'),
+    'and are broken onto their own lines, in the order the blanks come');
+
+  // Half a question is not the answer to it.
+  const half = loadUi();
+  half.open('u10-grammar-1-2');
+  g2.items.forEach((it, i) => {
+    half.run('wbPickChoice(' + i + ", '" + it.answer + "')");
+    const bad = it.choices2.find(c => c.id !== it.answer2);
+    half.run('wbPickChoice(' + i + ", '" + bad.id + "', 2)");
+  });
+  half.run('checkWorkbook()');
+  assert(half.run('workbookState.score') === 5,
+    'five right places with five wrong forms scores 5 of 10');
+  assert(half.els['wb-items'].children[0].className.indexOf('bad') > 0,
+    'and a row with one half wrong is marked wrong');
+
+}
+
+// ── 6. 문법과 표현 2 — 반말 ──────────────────────────────────────────────────
+console.log('\n--- 6. 반말 ---');
+const banmal = wb.exercises.filter(e => e.pattern === '반말');
+const [b1, b2, b3, b4, b5] = banmal;
+assert(banmal.length === 5, 'all five 연습 off the 반말 page are here');
+assert(banmal.map(e => e.no).join(' ') === '연습 1 연습 2 연습 3 연습 4 연습 5',
+  'numbered as the book numbers them');
+assert(banmal.every(e => e.section === '문법과 표현'), 'all five are filed under 문법과 표현');
+assert(b1.type === 'dialogue' && banmal.slice(1).every(e => e.type === 'build'),
+  '연습 1 shares one box of words; the other four carry their choices per row');
+
+// The text a row reads as once the answers marked correct are dropped in. Every
+// key check below goes through this, so a wrong answer id cannot pass by being
+// spelled right in the prose.
+function wbFill(ex, holder) {
+  const texts = ex.type === 'build'
+    ? [holder.answerKo !== undefined
+      ? holder.answerKo
+      : ((holder.choices || []).find(c => c.id === holder.answer) || {}).ko,
+    holder.answer2Ko !== undefined
+      ? holder.answer2Ko
+      : ((holder.choices2 || []).find(c => c.id === holder.answer2) || {}).ko]
+    : [(ex.bank.find(c => c.id === holder.answer) || {}).ko];
+  let slot = 0;
+  return (holder.lines || []).map(l => String(l.ko).replace(/\{\}/g, () => texts[slot++]))
+    .join(' ');
+}
+
+// 연습 1 — the box the book prints, in the book's order: two rows of six, 나 down
+// the first and 너 down the second.
+const BOX = ['내가', '나는', '나를', '나도', '나한테', '내',
+  '네가', '너는', '너를', '너도', '너한테', '네'];
+assert(JSON.stringify(b1.bank.map(c => c.ko)) === JSON.stringify(BOX),
+  'the box holds the twelve words the book prints, in its order');
+assert(b1.bank.filter(c => c.usedByExample).length === 1
+  && b1.bank.find(c => c.usedByExample).ko === '내가',
+  'and 내가 is spent on the [보기], as the book spends it');
+assert(wbFill(b1, b1.example) === '오늘 배운 문법을 잘 모르겠어. 내가 가르쳐 줄게.',
+  'the [보기] reads as the book prints it');
+const KEY_B1 = ['나한테', '나는', '내', '너한테', '네', '나도'];
+const SCRIPT_B1 = [
+  ['수업 끝나면 {} 전화해.', '그래, 전화할게.'],
+  ['같이 점심 먹자.', '{} 벌써 먹었는데.'],
+  ['이거 누구 책이야?', '아, 그거 {} 책이야.'],
+  ['아까 내가 {} 전화했는데 몰랐어?', '그랬어? 오늘 휴대폰을 집에 놓고 왔어.'],
+  ['이거 {} 거야?', '응, 내 거야.'],
+  ['오늘 나나 생일이라서 저녁에 나나 집에 갈 거야. 너도 갈 거지?', '응, {} 갈 거야.']
+];
+assert(b1.items.length === 6, '연습 1 has the book’s six dialogues');
+b1.items.forEach((it, i) => {
+  const at = '연습 1 item ' + (i + 1);
+  assert((b1.bank.find(c => c.id === it.answer) || {}).ko === KEY_B1[i],
+    at + ' answers ' + KEY_B1[i]);
+  assert(it.lines.length === 2 && it.lines[0].who === 'A' && it.lines[1].who === 'B',
+    at + ' is an A/B exchange');
+  assert(it.lines[0].ko === SCRIPT_B1[i][0] && it.lines[1].ko === SCRIPT_B1[i][1],
+    at + ' prints both lines as the book does');
+});
+// The blank moves between the speakers, which is the thing the old one-A-line
+// shape could not express — and it is 나 for the answers and 너 for the questions.
+assert(b1.items.filter(it => it.lines[0].ko.indexOf('{}') >= 0).map(it => it.n).join() === '1,4,5',
+  'the blank falls in A’s line on items 1, 4 and 5 and in B’s on the other three —'
+  + ' which is the shape a shared A line could not have expressed');
+assert(/내/.test(b1.noteEn) && /네/.test(b1.noteEn),
+  'the page names both shape changes up front');
+assert(/니/.test(b1.items[4].grammar),
+  'and item 5 says why 네 is pronounced 니 — it is spelled like the word for yes');
+
+// 연습 2 — fifteen sentences out of 해요체. The polite original is printed above
+// the row; the row itself is the 반말 with a gap in it.
+const SRC_B2 = ['그 식당은 분위기가 좋아요.', '냉면이 좀 매워요.', '저는 매일 아침 운동을 해요.',
+  '숙제하고 나서 영화를 볼 거예요.', '시험이 어렵지 않을 거예요.',
+  '친구가 제 카메라를 잃어버렸어요.', '이 옷은 작년에 산 거예요.', '내일은 제 친구 생일이에요.',
+  '극장에 사람이 정말 많네요.', '같이 커피 마시러 가요.', '도착하면 저한테 전화해 주세요.',
+  '내일은 늦지 마세요.', '제가 전화로 주문할게요.', '주말에 같이 산에 갈까요?',
+  '오늘 날씨가 아주 춥지요?'];
+const KEY_B2 = ['그 식당은 분위기가 좋아.', '냉면이 좀 매워.', '나는 매일 아침 운동을 해.',
+  '숙제하고 나서 영화를 볼 거야.', '시험이 어렵지 않을 거야.', '친구가 내 카메라를 잃어버렸어.',
+  '이 옷은 작년에 산 거야.', '내일은 내 친구 생일이야.', '극장에 사람이 정말 많네.',
+  '같이 커피 마시러 가자.', '도착하면 나한테 전화해 줘.', '내일은 늦지 마.',
+  '내가 전화로 주문할게.', '주말에 같이 산에 갈까?', '오늘 날씨가 아주 춥지?'];
+assert(b2.items.length === 15, '연습 2 has all fifteen sentences');
+assert(wbFill(b2, b2.example) === '비빔밥이 맛있어요. → 비빔밥이 맛있어.',
+  'the [보기] shows the 요 coming off');
+b2.items.forEach((it, i) => {
+  const at = '연습 2 item ' + (i + 1);
+  assert(it.phraseKo === SRC_B2[i], at + ' prints the polite original: ' + SRC_B2[i]);
+  assert(wbFill(b2, it) === '→ ' + KEY_B2[i], at + ' comes out as ' + KEY_B2[i]);
+  assert(!it.lines[0].who, at + ' has nobody saying it — it is a rewrite, not a dialogue');
+});
+// The rows where 저/제 has to become 나/내 are the ones the book chose to hide it
+// in, and they are the rows with two blanks.
+assert(b2.items.filter(it => it.choices2).map(it => it.n).join() === '3,6,8,11,13',
+  'five rows carry a second blank, and they are the five with 저 or 제 in them');
+b2.items.filter(it => it.choices2).forEach((it) => {
+  assert(/^(저|제)/.test(it.phraseKo) || /\s(저|제)/.test(it.phraseKo),
+    '연습 2 item ' + it.n + ' is a two-blank row because the pronoun changes too');
+  assert(/저|제/.test(it.why) || /저|제/.test(it.grammar),
+    'and it says so in the explanation');
+});
+assert(b2.items[3].choices.some(c => c.ko === '거예') && /거 \+ 이에요|거 ?\+ ?이에요/.test(b2.items[3].grammar),
+  '거예요 is put against 거예, and the note takes 거예요 apart into 거 + 이에요');
+assert(b2.items[7].choices2.map(c => c.ko).join() === '이야,이에요,야',
+  'item 8 puts 이야 against the bare 야, which is the final-consonant decision');
+assert(/자/.test(b2.items[9].grammar) && /까/.test(b2.items[13].grammar),
+  'the stated suggestion becomes -자 and the asked one keeps -(으)ㄹ까');
+assert(b2.items[12].choices2.some(c => c.ko === '께') && /께/.test(b2.items[12].grammar),
+  'and 주문할게 is put against the 께 it is pronounced as');
+
+// 연습 3 — the book leaves B's whole line open. The model answer from the key is
+// offered against two that answer the question but slip somewhere else.
+const ASK_B3 = ['지금 식당에 갈 거야?', '주말에 같이 영화 보러 갈까?', '어제 뭐 했어?',
+  '오늘 수업 끝나고 뭐 해?', '생일이 며칠이야?'];
+const KEY_B3 = ['응, 지금 갈 거야.', '그래, 가자.', '집에서 숙제했어.',
+  '점심 먹으러 갈 거야.', '내 생일은 9월 20일이야.'];
+assert(b3.items.length === 5, '연습 3 has the book’s five exchanges');
+assert(wbFill(b3, b3.example)
+  === '이 근처에 서점이 어디에 있는지 알아? 응, 지하철역 옆에 있어.',
+  'the [보기] is the bookshop one');
+b3.items.forEach((it, i) => {
+  const at = '연습 3 item ' + (i + 1);
+  assert(it.lines[0].ko === ASK_B3[i] && it.lines[0].who === 'A', at + ': A asks the book’s question');
+  assert(it.lines[1].who === 'B' && it.lines[1].ko === '{}',
+    at + ': and B’s whole line is the blank, as the book prints it');
+  assert((it.choices.find(c => c.id === it.answer) || {}).ko === KEY_B3[i],
+    at + ' answers ' + KEY_B3[i]);
+});
+assert(/네/.test(b3.noteEn), 'the page warns that 네 gives it away as surely as 요 does');
+assert(b3.items[0].choices.some(c => c.ko === '네, 지금 갈 거야.'),
+  'item 1 puts 응 against 네 with the rest of the sentence held identical');
+assert(b3.items[4].choices.some(c => c.ko === '내 생일은 9월 20일이에요.'),
+  'and item 5 offers a half-반말 half-존댓말 sentence, which is the commonest slip of all');
+
+// 연습 4 — three registers side by side, and only 반말 is asked for.
+const SRC_B4 = ['지금 어디에서 사십니까?', '한국 생활이 재미있어요?', '무슨 음식을 좋아해요?',
+  '한국어 공부 때문에 힘들지요?', '몇 시쯤 집에 갈 거예요?', '성함이 어떻게 되십니까?',
+  '오늘 점심 같이 먹을까요?', '오늘 기분이 어때요?', '내일 아침에 늦지 마세요.',
+  '주말에 만납시다.'];
+const KEY_B4 = ['지금 어디에서 살아?', '한국 생활이 재미있어?', '무슨 음식을 좋아해?',
+  '한국어 공부 때문에 힘들지?', '몇 시쯤 집에 갈 거야?', '이름이 뭐야?',
+  '오늘 점심 같이 먹을까?', '오늘 기분이 어때?', '내일 아침에 늦지 마.', '주말에 만나자.'];
+assert(b4.items.length === 10, '연습 4 has all ten sentences');
+b4.items.forEach((it, i) => {
+  const at = '연습 4 item ' + (i + 1);
+  assert(it.phraseKo === SRC_B4[i], at + ' prints the original: ' + SRC_B4[i]);
+  assert(wbFill(b4, it) === '→ ' + KEY_B4[i], at + ' comes out as ' + KEY_B4[i]);
+});
+assert(b4.items.filter(it => it.choices2).map(it => it.n).join() === '6',
+  'only item 6 needs two blanks, because only there do the words change and not the ending');
+assert(b4.items[5].choices.some(c => c.ko === '성함이')
+  && b4.items[5].choices2.some(c => c.ko === '어떻게 되셔')
+  && /성함|honorific/i.test(b4.items[5].grammar),
+  '성함 and the honorific 시 are both offered and both wrong, and the note says why');
+assert(/이름/.test(b4.items[5].grammar) && /연세|나이/.test(b4.items[5].grammar),
+  'and it gives the other honorific pairs to go with it');
+// Every row offers something from the formal style, so 반말 is being chosen out of
+// three rather than out of two.
+const FORMAL = /(니까|시다|시오|니다)$/;
+b4.items.forEach((it) => {
+  // Item 6 is the exception and has to be: what is wrong there is the honorific
+  // vocabulary, so 성함 and 되셔 are the distractors rather than a formal ending.
+  if (it.n === 6) return;
+  const wrong = it.choices.filter(c => c.id !== it.answer).map(c => c.ko)
+    .concat((it.choices2 || []).filter(c => c.id !== it.answer2).map(c => c.ko));
+  assert(wrong.some(k => FORMAL.test(k)),
+    '연습 4 item ' + it.n + ' offers the formal style as well as the polite one');
+  assert(wrong.some(k => /요[.?]?$/.test(k)),
+    'and the 해요체 form beside it, so 반말 is chosen out of three registers');
+});
+
+// 연습 5 — one call, kept in order. The book's frame has fifteen blanks; a turn
+// of two sentences becomes two rows, because a row draws at most two groups.
+const KEY_B5 = ['응', '괜찮아', '중이었어', '좋아하지', '응', '좋아해', '왜', '네가',
+  '전화했어', '그래', '하는데', '물어봐', '줄게', '응', '고마워'];
+const WHO_B5 = ['스티븐', '스티븐', '정우', '스티븐', '스티븐', '정우', '스티븐', '정우', '스티븐'];
+assert(b5.items.length === 9, 'the call comes to nine rows');
+const blanks5 = b5.items.reduce((out, it) => out.concat([
+  (it.choices.find(c => c.id === it.answer) || {}).ko,
+  it.choices2 ? (it.choices2.find(c => c.id === it.answer2) || {}).ko : null
+].filter(v => v !== null)), []);
+assert(JSON.stringify(blanks5) === JSON.stringify(KEY_B5),
+  'and its fifteen blanks are the key’s fifteen words, in the key’s order');
+assert(JSON.stringify(b5.items.map(it => it.lines[0].who)) === JSON.stringify(WHO_B5),
+  'the speakers alternate as the book has them, 정우 and 스티븐 by name');
+assert(b5.items.every(it => it.lines.length === 1),
+  'one line per row, so the polite original above it lines up with it');
+assert(wbFill(b5, b5.example) === '스티븐, 지금 통화 괜찮아?',
+  'the [보기] is 정우’s opening line, with 씨 already gone');
+assert(b5.example.phraseKo === '스티븐 씨, 지금 통화 괜찮아요?',
+  'and the polite version of it is printed above');
+assert(/씨/.test(b5.noteEn), 'the page says what happens to 씨 and to 스티븐 씨가');
+assert(b5.items[5].phraseKo.indexOf('스티븐 씨가') >= 0
+  && b5.items[5].phraseKo.indexOf('국립국악원') === 0
+  && /전화했어요\.$/.test(b5.items[5].phraseKo),
+  'the long turn is printed whole, third-person 스티븐 씨가 and all');
+assert(b5.items[5].choices.some(c => c.ko === '너가') && /표준|standard/i.test(b5.items[5].grammar),
+  '너가 is offered and the note says outright that it is not the standard form');
+assert([1, 4, 9].every(n => b5.items.find(it => it.n === n).choices
+  .map(c => c.ko).join() === '응,네,예'),
+  'the three yes-answers all put 응 against 네 and 예');
+
+// The whole point of the page: the answer never keeps its 요, and the politeness
+// is always on offer as a wrong one.
+const polite = (s) => /요[.?]?$/.test(String(s));
+banmal.slice(1).forEach((ex) => {
+  ex.items.forEach((it) => {
+    const at = ex.no + ' item ' + it.n;
+    const right = [(it.choices.find(c => c.id === it.answer) || {}).ko]
+      .concat(it.choices2 ? [(it.choices2.find(c => c.id === it.answer2) || {}).ko] : []);
+    const wrong = it.choices.filter(c => c.id !== it.answer).map(c => c.ko)
+      .concat((it.choices2 || []).filter(c => c.id !== it.answer2).map(c => c.ko));
+    assert(right.every(k => !polite(k)), at + ': no correct answer keeps its 요');
+    assert(wrong.some(k => polite(k)), at + ': and the polite form is offered as a wrong one');
+  });
+});
+banmal.forEach((e) => {
+  e.items.forEach((it) => {
+    assert(it.why && it.why.length > 40, e.no + ' item ' + it.n + ' explains the answer');
+    assert(it.grammar && it.grammar.length > 30, 'and names the rule behind it');
+    assert(it.en, 'and glosses the line');
+  });
+});
+
+// ── 6b. The 반말 pages run ───────────────────────────────────────────────────
+console.log('\n--- 6b. Speaking 반말 ---');
+{
+  // 연습 1 keeps the shared box: one word per blank, and eleven to choose from
+  // once the [보기] has spent 내가.
+  const ui = loadUi();
+  ui.open('u10-grammar-2-1');
+  assert(ui.run('workbookState.chips.length') === 11,
+    'eleven words are offered — the twelve less the one the [보기] used');
+  assert(ui.els['wb-bank'].children.length === 11, 'and the box above the rows holds them');
+  assert(ui.els['wb-example'].innerHTML.indexOf('내가') >= 0,
+    'the [보기] shows its answer filled in');
+  assert(ui.els['wb-count'].textContent === '0 / 6', 'six blanks');
+  b1.items.forEach((it, i) => {
+    ui.run('workbookState.focus = ' + i);
+    ui.run("wbPickChip('" + it.answer + "')");
+  });
+  ui.run('checkWorkbook()');
+  assert(ui.run('workbookState.score') === 6, 'the textbook key scores 6 of 6');
+  const r1 = deepHtml(ui.els['wb-items'].children[0]);
+  assert(r1.indexOf('수업 끝나면') >= 0 && r1.indexOf('나한테') >= 0
+    && r1.indexOf('그래, 전화할게.') >= 0, 'and the row reads as the book’s dialogue');
+
+  // 연습 2 — twenty blanks over fifteen rows, and the rewrite rows have nobody
+  // speaking them, so no group tag is drawn.
+  const two = loadUi();
+  two.open('u10-grammar-2-2');
+  assert(two.els['wb-bank'].className === 'wb-hidden', 'no shared box on a build page');
+  assert(two.els['wb-count'].textContent === '0 / 20',
+    'twenty blanks: fifteen rows, five of them with a second');
+  b2.items.forEach((it, i) => {
+    two.run('wbPickChoice(' + i + ", '" + it.answer + "')");
+    if (it.choices2) two.run('wbPickChoice(' + i + ", '" + it.answer2 + "', 2)");
+  });
+  assert(two.run('wbComplete()') === true, 'every blank filled finishes the page');
+  two.run('checkWorkbook()');
+  assert(two.run('workbookState.score') === 20, 'the textbook key scores 20 of 20');
+  const rowThree = two.els['wb-items'].children[2];
+  const picks3 = rowThree.children[1].children[2];
+  assert(picks3.children.filter(c => c.className === 'wb-picks-tag').length === 0,
+    'a rewrite row draws no group tag — there is no speaker to name, and a bare'
+    + ' number would read as the key badge on the button beside it');
+  assert(picks3.children.some(c => c.className === 'wb-picks-break'),
+    'the two groups are still broken onto their own lines');
+  const rowThreeHtml = deepHtml(rowThree);
+  assert(rowThreeHtml.indexOf('저는 매일 아침 운동을 해요.') >= 0,
+    'the polite original is printed on the row');
+  assert(rowThreeHtml.indexOf('나는') >= 0 && rowThreeHtml.indexOf('wb-line-solo') >= 0,
+    'and the rewrite is drawn as a line with no speaker chip');
+
+  // 연습 3 — B's whole line is one blank.
+  const three = loadUi();
+  three.open('u10-grammar-2-3');
+  assert(three.els['wb-count'].textContent === '0 / 5', 'five blanks, one per exchange');
+  b3.items.forEach((it, i) => three.run('wbPickChoice(' + i + ", '" + it.answer + "')"));
+  three.run('checkWorkbook()');
+  assert(three.run('workbookState.score') === 5, 'the model answers score 5 of 5');
+  const r3 = deepHtml(three.els['wb-items'].children[1]);
+  assert(r3.indexOf('주말에 같이 영화 보러 갈까?') >= 0 && r3.indexOf('그래, 가자.') >= 0,
+    'the exchange reads as a question and its answer');
+
+  // 연습 4 — eleven blanks, ten rows.
+  const four = loadUi();
+  four.open('u10-grammar-2-4');
+  assert(four.els['wb-count'].textContent === '0 / 11',
+    'eleven blanks: item 6 changes two things');
+  b4.items.forEach((it, i) => {
+    four.run('wbPickChoice(' + i + ", '" + it.answer + "')");
+    if (it.choices2) four.run('wbPickChoice(' + i + ", '" + it.answer2 + "', 2)");
+  });
+  four.run('checkWorkbook()');
+  assert(four.run('workbookState.score') === 11, 'the textbook key scores 11 of 11');
+  assert(deepHtml(four.els['wb-items'].children[5]).indexOf('이름이') >= 0,
+    'and 성함이 어떻게 되십니까 comes out as 이름이 뭐야');
+
+  // 연습 5 — fifteen blanks, and the speakers are names rather than initials.
+  const five = loadUi();
+  five.open('u10-grammar-2-5');
+  assert(five.els['wb-count'].textContent === '0 / 15', 'fifteen blanks, as the frame has');
+  const rowOne = deepHtml(five.els['wb-items'].children[0]);
+  assert(rowOne.indexOf('data-name') > 0 && rowOne.indexOf('스티븐') >= 0,
+    'a name-length speaker chip says so, since the pixel font has no Hangul');
+  const tags5 = five.els['wb-items'].children[0].children[1].children[2].children
+    .filter(c => c.className === 'wb-picks-tag');
+  assert(tags5.map(c => c.textContent).join(' ') === '스티븐1 스티븐2',
+    'and where one line owns both blanks the tag carries which blank it fills');
+  assert(tags5.every(c => c.getAttribute('data-name') === '1'),
+    'those tags are drawn in the Korean face too');
+  b5.items.forEach((it, i) => {
+    five.run('wbPickChoice(' + i + ", '" + it.answer + "')");
+    if (it.choices2) five.run('wbPickChoice(' + i + ", '" + it.answer2 + "', 2)");
+  });
+  five.run('checkWorkbook()');
+  assert(five.run('workbookState.score') === 15, 'the whole call scores 15 of 15');
+  assert(deepHtml(five.els['wb-items'].children[5]).indexOf('네가') >= 0,
+    '스티븐 씨가 comes out as 네가');
+  ['.wb-spk[data-name]', '.wb-picks-tag[data-name]'].forEach((sel) => {
+    assert(css.indexOf(sel.replace('[data-name]', '[data-name]')) >= 0
+      || /\.wb-spk\[data-name\], \.wb-picks-tag\[data-name\]/.test(css),
+      'the name-length chip is styled');
+  });
+
+  // A one-letter speaker is left exactly as it was — Unit 14 and the previous
+  // grammar point both depend on it.
+  const prev = loadUi();
+  prev.open('u10-grammar-1-2');
+  const prevTags = prev.els['wb-items'].children[0].children[1].children[2].children
+    .filter(c => c.className === 'wb-picks-tag');
+  assert(prevTags.map(c => c.textContent).join(' ') === 'A1 A2',
+    'A stays A, with the blank number after it');
+  assert(prevTags.every(c => !c.getAttribute('data-name')),
+    'and keeps the pixel font, because A is a letter the font has');
+
+  // The list headlines every 문법과 표현 row with its pattern, which is what tells
+  // these five apart from the two before them. How many rows there are, and which
+  // of them can carry a number key, is checked once further down — where every
+  // page of the book exists.
+  const pick = loadUi();
+  pick.open();
+  assert(pick.els['wb-items'].className === 'wb-items-pick', 'the list draws as the picker');
+  const rows = pick.els['wb-items'].children
+    .filter(c => (c.className || '').indexOf('wb-pick') === 0);
+  assert(rows.filter(r => r.innerHTML.indexOf('>반말<') >= 0).length === 5,
+    'five of its rows are headlined 반말');
+}
+
+// ── 6c. Invariants across the whole book ────────────────────────────────────
+console.log('\n--- 6c. Every page holds together ---');
+{
+  let rowCount = 0, blankCount = 0;
+  wb.exercises.forEach((ex) => {
+    const at = ex.id;
+    (ex.items || []).forEach((it) => {
+      rowCount++;
+      if (!it.choices) return;
+      const sets = [it.choices].concat(it.choices2 ? [it.choices2] : []);
+      blankCount += sets.length;
+      const ids = new Set();
+      sets.forEach((set, s) => {
+        const texts = set.map(c => c.ko);
+        assert(new Set(texts).size === texts.length,
+          at + ' item ' + it.n + ' blank ' + (s + 1) + ': no form is offered twice');
+        set.forEach((c) => {
+          assert(!ids.has(c.id),
+            at + ' item ' + it.n + ': choice id ' + c.id + ' is used once in the row');
+          ids.add(c.id);
+        });
+      });
+      // A blank the renderer can fill has to exist in the script, and a script
+      // gap with no buttons under it renders as already answered.
+      const gaps = (it.lines || []).reduce((n, l) => n + l.ko.split('{}').length - 1, 0);
+      assert(gaps === sets.length,
+        at + ' item ' + it.n + ': ' + sets.length + ' choice set(s) and ' + gaps + ' gap(s)');
+    });
+    if (ex.example && ex.type === 'build') {
+      const gaps = (ex.example.lines || [])
+        .reduce((n, l) => n + l.ko.split('{}').length - 1, 0);
+      assert(gaps === (ex.example.answer2Ko ? 2 : 1),
+        at + ': the [보기] has a gap for every answer it carries');
+    }
+  });
+  assert(rowCount === 84, 'eighty-four questions across the thirteen pages');
+  assert(blankCount === 84, 'and eighty-four blanks over the eight build pages');
+  // Nothing in the book is answered by a form it also offers as wrong.
+  wb.exercises.filter(e => e.bank).forEach((ex) => {
+    const answers = ex.items.map(it => it.answer);
+    assert(new Set(answers).size === answers.length,
+      ex.id + ': one word per blank, so no word answers two rows');
+  });
+}
+
+// ── 7. 문법과 표현 3 — V-(으)ㄹ래요 ──────────────────────────────────────────
+console.log('\n--- 7. V-(으)ㄹ래요 ---');
+const willing = wb.exercises.filter(e => e.pattern === 'V-(으)ㄹ래요');
+const [w1, w2] = willing;
+assert(willing.length === 2, 'both 연습 off the V-(으)ㄹ래요 page are here');
+assert(willing.every(e => e.type === 'build' && e.section === '문법과 표현'),
+  'both carry their choices per row, under 문법과 표현');
+assert(willing.map(e => e.no).join(' ') === '연습 1 연습 2', 'numbered as the book numbers them');
+
+// 연습 1 — the plan, then the invitation. Both blanks are in A's line.
+const KEY_W1 = [
+  '영화 보러 가려고 하는데 같이 갈래요?',
+  '태권도를 배우려고 하는데 같이 배울래요?',
+  '점심 먹으려고 하는데 같이 먹을래요?',
+  '산책하려고 하는데 같이 할래요?',
+  '테니스를 치려고 하는데 같이 칠래요?'
+];
+const REPLY_W1 = ['네, 좋아요.', '저는 운동하는 걸 별로 안 좋아해요.',
+  '전 조금 전에 친구랑 먹었어요.', '네, 좋아요.', '전 테니스를 전혀 칠 줄 몰라요.'];
+assert(w1.items.length === 5, '연습 1 has the book’s five pictures');
+assert(wbFill(w1, w1.example) === '라면을 끓이려고 하는데 같이 먹을래요? 네, 좋아요.',
+  'the [보기] is the ramyeon one');
+assert(w1.example.answerKo === '끓이려고' && w1.example.answer2Ko === '먹을래요',
+  'and its two verbs are different ones — you boil it, you ask about eating it');
+assert(/끓이|boil/i.test(w1.noteEn) || /same one/.test(w1.noteEn),
+  'which the page says outright, since every row after it uses one verb twice');
+w1.items.forEach((it, i) => {
+  const at = '연습 1 item ' + (i + 1);
+  assert(it.lines.length === 2 && it.lines[0].who === 'A' && it.lines[1].who === 'B',
+    at + ' is an A/B exchange');
+  assert(it.lines[0].ko.split('{}').length - 1 === 2,
+    at + ': both blanks fall in A’s line, which is what the book leaves open');
+  assert(wbFill(w1, it) === KEY_W1[i] + ' ' + REPLY_W1[i], at + ' comes out as ' + KEY_W1[i]);
+  assert(it.lines[1].ko === REPLY_W1[i], 'and B answers what the book prints');
+  assert(/다$/.test(it.phraseKo), at + ' names the verb in its dictionary form');
+});
+// This page is 존댓말 all through, which is what makes 연습 2 the 반말 one.
+w1.items.forEach((it) => {
+  const right = [(it.choices.find(c => c.id === it.answer) || {}).ko,
+    (it.choices2.find(c => c.id === it.answer2) || {}).ko];
+  assert(/요$/.test(right[1]), '연습 1 item ' + it.n + ' invites in 존댓말: ' + right[1]);
+  assert(right[1].indexOf('ㄹ래요') >= 0 || /래요$/.test(right[1]),
+    'and the invitation is -(으)ㄹ래요 rather than anything else');
+});
+// The 으 goes in after a consonant and nowhere else, and item 3 is the only
+// consonant stem on the page — so it is the only row whose answers carry one.
+const stem1 = (it) => (it.choices.find(c => c.id === it.answer) || {}).ko;
+assert(stem1(w1.items[2]) === '먹으려고'
+  && (w1.items[2].choices2.find(c => c.id === w1.items[2].answer2) || {}).ko === '먹을래요',
+  'item 3 is the consonant stem, so both its endings take the 으');
+assert([0, 1, 3, 4].every(i => stem1(w1.items[i]).indexOf('으려고') < 0),
+  'and no vowel stem takes one');
+assert(w1.items[2].choices.some(c => c.ko === '먹려고'),
+  'item 3 is put against the form with the 으 left out');
+assert([0, 3].every(i => w1.items[i].choices.some(c => /러$/.test(c.ko))),
+  '-(으)러 is offered against -(으)려고, which is the confusion worth having');
+// Every row puts -(으)ㄹ래요 against -(으)ㄹ게요: 래 asks you, 게 promises I.
+w1.items.forEach((it) => {
+  const wrong2 = it.choices2.filter(c => c.id !== it.answer2).map(c => c.ko);
+  assert(wrong2.some(k => /게요$/.test(k)),
+    '연습 1 item ' + it.n + ' offers the -(으)ㄹ게요 that promises instead of asking');
+  assert(wrong2.some(k => /레요$/.test(k)), 'and the 래/레 spelling it is always losing');
+});
+assert(/게/.test(w1.items[0].grammar) || /게/.test(w1.items[1].grammar)
+  || /게/.test(w1.items[3].grammar) || /게/.test(w2.items[1].grammar),
+  'and somewhere on the two pages the 래 / 게 difference is spelled out');
+assert(/할래요/.test(wbFill(w1, w1.items[3])) && /산책할래요/.test(wbFill(w1, w1.items[3])) === false,
+  'item 4 shortens to 할래요 on the second mention rather than repeating 산책');
+
+// 연습 2 — two pictures, and all of it 반말.
+const KEY_W2 = [
+  '집에 갈 때 택시 타고 갈래? 길이 막히니까 지하철을 타자.',
+  '선물 사러 백화점에 갈래? 백화점은 비싸니까 시장에 가자.',
+  '이번 주말에 등산할래? 등산은 힘드니까 바다에 가자.',
+  '커피 마실래? 커피는 아까 마셨으니까 아이스크림 먹자.'
+];
+const PAIRS_W2 = ['택시 / 지하철', '백화점 / 시장', '산 / 바다', '커피 / 아이스크림'];
+assert(w2.items.length === 4, 'four rows — the book’s fifth is two question marks');
+assert(/fifth/.test(w2.noteEn) && /question marks/.test(w2.noteEn)
+  && /invent/i.test(w2.noteEn),
+  'and the page says why the fifth is not here');
+assert(wbFill(w2, w2.example) === '점심에 갈비탕 먹을래? 날씨가 더우니까 냉면 먹자.',
+  'the [보기] is the 갈비탕 / 냉면 one');
+assert(w2.example.phraseKo === '갈비탕 / 냉면', 'labelled the way the book labels its pictures');
+w2.items.forEach((it, i) => {
+  const at = '연습 2 item ' + (i + 1);
+  assert(it.phraseKo === PAIRS_W2[i], at + ' carries the book’s two labels: ' + PAIRS_W2[i]);
+  assert(wbFill(w2, it) === KEY_W2[i], at + ' comes out as the key has it');
+  assert(it.lines[0].who === 'A' && it.lines[1].who === 'B',
+    at + ': A offers and B counters, one blank each');
+  assert(it.lines.every(l => l.ko.split('{}').length - 1 === 1),
+    at + ': the two blanks are in different lines, so the button groups are tagged A and B');
+  // The reason is printed, not asked. That is the part the book gives you.
+  assert(/니까/.test(it.lines[1].ko), at + ': B’s reason clause is printed with -(으)니까 in it');
+});
+w2.items.forEach((it) => {
+  const at = '연습 2 item ' + it.n;
+  const right1 = (it.choices.find(c => c.id === it.answer) || {}).ko;
+  const right2 = (it.choices2.find(c => c.id === it.answer2) || {}).ko;
+  assert(!polite(right1) && /래$/.test(right1), at + ': A asks in 반말 — ' + right1);
+  assert(!polite(right2) && /자$/.test(right2), at + ': and B answers with -자 — ' + right2);
+  assert(it.choices.some(c => c.ko === right1 + '요'),
+    at + ': the 요 form is offered against it, since that is the slip this page is about');
+  assert(it.choices2.filter(c => c.id !== it.answer2).some(c => polite(c.ko)),
+    at + ': and the 해요체 suggestion is offered against -자');
+});
+assert(/힘드니까/.test(w2.items[2].grammar) && /ㄹ/.test(w2.items[2].grammar),
+  'item 3 explains 힘들다 → 힘드니까, the ㄹ dropping in front of ㄴ');
+assert(w2.items[3].choices2.some(c => c.ko === '아이스크림 먹으자')
+  && /으/.test(w2.items[3].grammar),
+  'item 4 puts -자 against 먹으자, and says -자 never takes the 으');
+assert(/아서|어서/.test(w2.noteEn),
+  'and the page says why the reason is -(으)니까 and not -아/어서');
+willing.forEach((e) => {
+  e.items.forEach((it) => {
+    assert(it.why && it.why.length > 40, e.no + ' item ' + it.n + ' explains the exchange');
+    assert(it.grammar && it.grammar.length > 30, 'and names the rule behind the forms');
+    assert(it.en, 'and glosses it');
+  });
+});
+
+// ── 7b. The V-(으)ㄹ래요 pages run ───────────────────────────────────────────
+console.log('\n--- 7b. Asking and counter-offering ---');
+{
+  const one = loadUi();
+  one.open('u10-grammar-3-1');
+  assert(one.els['wb-count'].textContent === '0 / 10', 'ten blanks: five rows of two');
+  const tags1 = one.els['wb-items'].children[0].children[1].children[2].children
+    .filter(c => c.className === 'wb-picks-tag');
+  assert(tags1.map(c => c.textContent).join(' ') === 'A1 A2',
+    'both groups are A’s, so the tag says which blank each fills');
+  w1.items.forEach((it, i) => {
+    one.run('wbPickChoice(' + i + ", '" + it.answer + "')");
+    one.run('wbPickChoice(' + i + ", '" + it.answer2 + "', 2)");
+  });
+  assert(one.run('wbComplete()') === true, 'both halves of every row finish the page');
+  one.run('checkWorkbook()');
+  assert(one.run('workbookState.score') === 10, 'the textbook key scores 10 of 10');
+  const r3 = deepHtml(one.els['wb-items'].children[2]);
+  assert(r3.indexOf('점심 먹다') >= 0 && r3.indexOf('먹으려고') >= 0
+    && r3.indexOf('먹을래요') >= 0 && r3.indexOf('전 조금 전에 친구랑 먹었어요.') >= 0,
+    'the consonant-stem row reads as the book’s dialogue, 으 and all');
+
+  const two = loadUi();
+  two.open('u10-grammar-3-2');
+  assert(two.els['wb-count'].textContent === '0 / 8', 'eight blanks: four rows of two');
+  const tags2 = two.els['wb-items'].children[0].children[1].children[2].children
+    .filter(c => c.className === 'wb-picks-tag');
+  assert(tags2.map(c => c.textContent).join(' ') === 'A B',
+    'here the blanks are in different lines, so the speakers name the groups');
+  assert(tags2.every(c => !c.getAttribute('data-name')),
+    'and one-letter speakers keep the pixel font');
+  w2.items.forEach((it, i) => {
+    two.run('wbPickChoice(' + i + ", '" + it.answer + "')");
+    two.run('wbPickChoice(' + i + ", '" + it.answer2 + "', 2)");
+  });
+  two.run('checkWorkbook()');
+  assert(two.run('workbookState.score') === 8, 'the textbook key scores 8 of 8');
+  const r1 = deepHtml(two.els['wb-items'].children[0]);
+  assert(r1.indexOf('택시 / 지하철') >= 0 && r1.indexOf('택시 타고 갈래') >= 0
+    && r1.indexOf('길이 막히니까') >= 0 && r1.indexOf('지하철을 타자') >= 0,
+    'and a row shows the labels, the offer and the counter-offer');
+
+  // Half a row is not the answer to it, here as everywhere.
+  const half = loadUi();
+  half.open('u10-grammar-3-2');
+  w2.items.forEach((it, i) => {
+    half.run('wbPickChoice(' + i + ", '" + it.answer + "')");
+    const bad = it.choices2.find(c => c.id !== it.answer2);
+    half.run('wbPickChoice(' + i + ", '" + bad.id + "', 2)");
+  });
+  half.run('checkWorkbook()');
+  assert(half.run('workbookState.score') === 4, 'four right offers with four wrong counters scores 4 of 8');
+
+  // The list: thirteen rows, and only the first ten can carry a number key.
+  const pick = loadUi();
+  pick.open();
+  const kids = pick.els['wb-items'].children;
+  const rows = kids.filter(c => (c.className || '').indexOf('wb-pick') === 0);
+  assert(kids.filter(c => c.className === 'wb-group').length === 2,
+    'still two headings: 어휘 and 문법과 표현');
+  assert(rows.length === 13, 'thirteen exercises on the list');
+  const keys = rows.map((r) => {
+    const m = /wb-pick-key">([^<]*)</.exec(r.innerHTML);
+    return m ? m[1] : '?';
+  });
+  assert(keys.slice(0, 10).join('') === '1234567890', 'the first ten carry 1-9 and 0');
+  assert(keys.slice(10).join('') === '', 'and the last three carry no badge rather than a dead key');
+  assert(rows.filter(r => r.innerHTML.indexOf('V-(으)ㄹ래요') >= 0).length === 2,
+    'the two new rows are headlined by their pattern');
+  assert(rows.slice(4).every(r => r.innerHTML.indexOf('wb-pick-pat') >= 0),
+    'as is every other 문법과 표현 row');
+}
+
+// ── 8. Wiring ────────────────────────────────────────────────────────────────
+console.log('\n--- 8. Wiring ---');
 assert(uiSrc.indexOf("'/worlds/unit10-workbook.json'") >= 0,
   'the desk knows where Unit 10’s workbook lives');
 const urlFn = uiSrc.slice(uiSrc.indexOf('function workbookUrl'), uiSrc.indexOf('function loadWorkbook'));

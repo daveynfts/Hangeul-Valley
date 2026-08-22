@@ -2497,8 +2497,14 @@ function wbLineHtml(ex, item, chipText, opts) {
       for (let k = 1; k < parts.length; k++) {
         html += mkBlank(texts[slot++]) + vbEsc(parts[k] || '');
       }
+      // A speaker is usually one letter — A, B, T, S — and the chip is a 19px box
+      // sized for exactly that, at 8px type. Unit 10's 연습 5 keeps the names the
+      // book prints on its lines, 정우 and 스티븐, and three syllables at 8px are
+      // unreadable, so a label longer than one character says so and is given a
+      // box that fits it.
       return line.who
-        ? '<div class="wb-dlg"><span class="wb-spk">' + vbEsc(line.who) + '</span>' +
+        ? '<div class="wb-dlg"><span class="wb-spk"' +
+            (line.who.length > 1 ? ' data-name="1"' : '') + '>' + vbEsc(line.who) + '</span>' +
             '<span class="wb-line">' + html + '</span></div>'
         : '<div class="wb-line-solo">' + html + '</div>';
     }).join('');
@@ -2917,19 +2923,29 @@ function renderWorkbook() {
             const n = String(l.ko || '').split('{}').length - 1;
             for (let g = 0; g < n; g++) gapWho.push(l.who || '');
           });
-          const tag = (who) => {
+          // Both gaps can land in the same line — Unit 10 builds the whole of
+          // A's question — and then the speaker is the same on both groups and
+          // names nothing. Where that happens the tag carries which blank it
+          // fills as well, so the two are told apart by the slot rather than by
+          // who is speaking.
+          const oneLine = gapWho[0] === gapWho[1];
+          const tag = (who, k) => {
+            // A line with nobody speaking it — the rewrite pages — has no chip to
+            // borrow, and numbering the groups on their own would read as the key
+            // badges on the buttons beside them. The break alone orders those.
             if (!who) return;
             const t = document.createElement('span');
             t.className = 'wb-picks-tag';
-            t.textContent = who;
+            if (who.length > 1) t.setAttribute('data-name', '1');
+            t.textContent = oneLine ? who + (k + 1) : who;
             picks.appendChild(t);
           };
-          tag(gapWho[0]);
+          tag(gapWho[0], 0);
           addForms(item.choices, 1);
           const brk = document.createElement('i');
           brk.className = 'wb-picks-break';
           picks.appendChild(brk);
-          tag(gapWho[1]);
+          tag(gapWho[1], 1);
           addForms(item.choices2, 2);
         } else {
           addForms(item.choices, 1);

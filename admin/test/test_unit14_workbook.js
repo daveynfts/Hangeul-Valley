@@ -411,6 +411,42 @@ async function runTests() {
       workbookLib.saveWorkbook(clone(), rootDir);
     });
 
+    // The grammar point an exercise belongs to is what the exercise list uses as
+    // its headline, because 문법과 표현 numbers its 연습 inside each point: Unit 10
+    // has two pages called 연습 1 and only the pattern tells them apart. It used to
+    // be written back for the two per-question types and dropped for every other,
+    // so a 문법과 표현 page built out of one shared box lost its headline on save.
+    await test('A shared-box exercise keeps the grammar point it belongs to', () => {
+      const book = clone();
+      book.exercises.push({
+        id: 'u14-grammar-box',
+        type: 'dialogue',
+        section: '문법과 표현',
+        sectionEn: 'Grammar',
+        no: '연습 1',
+        pattern: 'N 중에(서)',
+        instructionKo: '빈칸에 알맞은 단어를 골라 보세요.',
+        bank: [{ id: 'x', ko: '내가' }, { id: 'y', ko: '네가' }],
+        items: [
+          { n: 1, answer: 'x', lines: [{ who: 'A', ko: '{} 할게.' }], en: 'I will',
+            why: 'because the speaker is doing it', grammar: '나 + 가 → 내가' },
+          { n: 2, answer: 'y', lines: [{ who: 'B', ko: '{} 해.' }], en: 'you do it',
+            why: 'because the listener is doing it', grammar: '너 + 가 → 네가' }
+        ]
+      });
+      workbookLib.saveWorkbook(book, rootDir);
+      const after = workbookLib.getWorkbook(rootDir);
+      const box = after.exercises.find((e) => e.id === 'u14-grammar-box');
+      assert(!!box, 'the shared-box grammar page round-trips');
+      assert(box.pattern === 'N 중에(서)', 'and comes back with its pattern, not without it');
+      assert(!!box.bank && box.bank.length === 2, 'the box itself survives alongside it');
+      // An exercise with no pattern must not gain an empty one — every 어휘 page in
+      // both workbooks would grow a field that means nothing.
+      const vocab = after.exercises.find((e) => e.id === 'u14-vocab-1');
+      assert(!('pattern' in vocab), 'a page with no grammar point gains no empty field');
+      workbookLib.saveWorkbook(clone(), rootDir);
+    });
+
     await test('The game and the editor agree on where the files live', () => {
       const ui = fs.readFileSync(path.join(repoRoot, 'js', 'ui.js'), 'utf8');
       const server = fs.readFileSync(path.join(repoRoot, 'admin', 'server.js'), 'utf8');
