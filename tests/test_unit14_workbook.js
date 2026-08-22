@@ -1221,8 +1221,12 @@ console.log('\n--- 18. Listening ---');
   const allClips = drills.flatMap(e => e.items.map(i => i.audio.src)
     .concat(e.example.audio.src));
   assert(new Set(allClips).size === 20, 'twenty clips in all — four drills of five rows');
-  assert(fs.readdirSync(path.join(ROOT, 'audio', 'book')).length === 20,
-    'and nothing left over in audio/book from the earlier cuts');
+  // Scoped to this unit's prefix: audio/book holds Unit 10's twenty as well now.
+  // A stray file under no unit's name is caught in the Unit 10 suite, which counts
+  // the folder as a whole.
+  assert(fs.readdirSync(path.join(ROOT, 'audio', 'book'))
+    .filter(f => f.indexOf('2b-u14-') === 0).length === 20,
+    'and nothing left over from the earlier cuts of track 10');
 
   // The cut was wrong twice, and both times it was a pairing error the file
   // sizes could not see: each clip held the right amount of audio, just the
