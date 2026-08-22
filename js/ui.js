@@ -2166,11 +2166,38 @@ function openStudyDesk() {
         run: () => openWorkbook(wb)
       });
     }
+    // The diner is Unit 10's third study surface and the only one that is a page of its
+    // own rather than an overlay. It shipped with Unit 10 and has always had a "← Valley"
+    // button home, but nothing in the game ever linked to it — a one-way door with the
+    // entrance missing, so no player could reach it. The desk is where Unit 10's study
+    // surfaces are chosen, so it belongs here beside the quiz and the workbook.
+    if (typeof isUnit10World === 'function' && isUnit10World()) {
+      deskMenuOptions.push({
+        key: 'diner', icon: '🍜', ko: '뭐 먹을래?',
+        en: 'Diner — pick a place, order, review in 반말/존댓말',
+        run: openDiner
+      });
+    }
     if (deskMenuOptions.length === 1) { deskMenuOptions[0].run(); return; }
     deskMenuIndex = 0;
     renderDeskMenu();
     setModalState('desk-menu-overlay', true);
   });
+}
+
+// Leaving the game entirely, so the save has to land first. pagehide already flushes, but
+// relying on the unload path for a navigation the player deliberately chose would make a
+// dropped write look like a browser quirk. The timeout is the important half: flushSave
+// awaits a cloud PUT, and an offline or hanging network must not strand the player on a
+// desk menu that has stopped responding.
+const DINER_URL = '/diner/';
+function openDiner() {
+  const go = () => { window.location.href = DINER_URL; };
+  if (typeof flushSave !== 'function') return go();
+  let gone = false;
+  const once = () => { if (!gone) { gone = true; go(); } };
+  setTimeout(once, 1200);
+  Promise.resolve(flushSave()).then(once, once);
 }
 
 function closeDeskMenu() {
