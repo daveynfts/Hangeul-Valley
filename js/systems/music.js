@@ -126,6 +126,11 @@ const MusicDirector = {
     if (!MUSIC_TRACKS[name]) return false;
     if (this._name === name && this._timer) return true;
     this._name = name;
+    // Held at the desk: remember what should be playing and let release() start
+    // it, or a scene re-announcing its track would strike up over an open
+    // workbook. _paused is what release() reads to know there is something to
+    // come back to.
+    if (this._held) { this._paused = true; return true; }
     if (!AudioMixer.ready()) return true;  // resumes from onUnlock()
     this._start(name);
     return true;
@@ -181,14 +186,23 @@ const MusicDirector = {
 
   resume() {
     if (!this._paused) return;
-    // Reachable from unmuting and from the tab regaining focus, so neither may
-    // undo the other: a hidden tab that unmutes stays quiet, and a muted tab
-    // coming back into view stays muted.
+    // Reachable from unmuting, from the tab regaining focus, and from leaving
+    // the study desk, so none of them may undo another: a hidden tab that
+    // unmutes stays quiet, a muted tab coming back into view stays muted, and
+    // neither starts a track up underneath an open workbook.
+    if (this._held) return;
     if (AudioMixer.isMuted()) return;
     if (typeof document !== 'undefined' && document.hidden) return;
     this._paused = false;
     if (this._name && AudioMixer.ready()) this._start(this._name);
   },
+
+  // The study desk is for hearing Korean, and a chiptune loop under it is one
+  // more thing to listen past. Held rather than paused because the hold has to
+  // survive every other reason the track stops and starts — see resume().
+  hold() { this._held = true; this.pause(); },
+  release() { this._held = false; this.resume(); },
+  held() { return !!this._held; },
 
   _tick() {
     const ctx = this.ctx();
@@ -303,6 +317,7 @@ const AmbienceDirector = {
     if (!AMBIENCE[name]) return false;
     if (this._name === name && this._gain) return true;
     this._name = name;
+    if (this._held) { this._paused = true; return true; }
     if (!AudioMixer.ready()) return true;
     this._start(name);
     return true;
@@ -443,11 +458,18 @@ const AmbienceDirector = {
 
   resume() {
     if (!this._paused) return;
+    if (this._held) return;
     if (AudioMixer.isMuted()) return;
     if (typeof document !== 'undefined' && document.hidden) return;
     this._paused = false;
     if (this._name && AudioMixer.ready()) this._start(this._name);
-  }
+  },
+
+  // Birdsong over a listening drill is the same problem the music is, so the
+  // bed goes quiet at the desk too.
+  hold() { this._held = true; this.pause(); },
+  release() { this._held = false; this.resume(); },
+  held() { return !!this._held; }
 };
 
 // One call for both, because every caller wants the pair to agree.
