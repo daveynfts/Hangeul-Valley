@@ -66,10 +66,17 @@ function fillScript(lines, texts) {
 }
 
 function collectWorkbookPhrases(out, seen, base) {
-  const full = path.join(base, 'worlds', 'unit14-workbook.json');
-  if (!fs.existsSync(full)) return;
+  const dir = path.join(base, 'worlds');
+  if (!fs.existsSync(dir)) return;
+  fs.readdirSync(dir).filter((f) => /-workbook\.json$/.test(f)).sort()
+    .forEach((f) => collectOneWorkbook(out, seen, path.join(dir, f)));
+}
+
+function collectOneWorkbook(out, seen, full) {
   const book = JSON.parse(fs.readFileSync(full, 'utf8'));
   (book.exercises || []).forEach((ex) => {
+    // Only the 'build' pages assemble a sentence worth speaking. The shared-box
+    // types put their Korean in the chips, and half of those chips are wrong.
     if (ex.type !== 'build') return;
     const answerKo = (item, key) => {
       const list = key === 'answer2' ? item.choices2 : item.choices;

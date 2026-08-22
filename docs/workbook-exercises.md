@@ -1,8 +1,15 @@
 # Adding workbook exercises
 
-How the study-desk workbook is built, and how to add a unit to it. Written after
-Unit 14, which took the textbook's 어휘, 문법과 표현 and 문형 연습 sections and
-the audio track that goes with them.
+How the study-desk workbook is built, and how to add a unit to it.
+
+Written after Unit 14, which took the textbook's 어휘, 문법과 표현 and 문형 연습
+sections and the audio track that goes with them, and revised after Unit 10 —
+which needed no new art at all, because the food icons were already in the game.
+
+Not every exercise ports as printed. Unit 10's 어휘 연습 1 asks you to tick the
+dishes you have tried, which nothing can mark; the twelve became two
+picture-to-name matching pages instead. When you change the shape of an exercise,
+say so in `noteEn` — the learner should know what the book asked for.
 
 Everything the learner sees lives in `worlds/<unit>-workbook.json`. The renderer
 is in `js/ui.js`, the art in `js/workbookArt.js`, and the save-side validator in
@@ -97,9 +104,21 @@ has one.
 
 ## Art
 
-16×16 matrices in `js/workbookArt.js`, drawn as SVG rects — the same character
-matrix + palette the rest of the game uses. `art` on a row names a key; the
-field is optional and a row without one just shows no picture.
+Two ways to put a picture on a row, and the first choice is whether you need to
+draw anything at all.
+
+**`img`** names a PNG the game already ships, by its path under `sprites/`. Unit
+10's matching pages use the twelve food icons from `sprites/foods/` that Unit 10
+already had — `sprites/catalog.json` maps `wordKo` to `path`, so the icon for a
+word is a lookup, not a decision. Prefer this. A `match` row whose prompt is a
+picture may leave `stemKo` out: printing the name on the left would answer the
+row.
+
+**`art`** names a 16×16 matrix in `js/workbookArt.js`, drawn as SVG rects — the
+same character matrix + palette the rest of the game uses. Draw one only when
+nothing shipped fits, as Unit 14's grammar pages needed.
+
+Both fields are optional and a row without either just shows no picture.
 
 Silhouette first. At this size a recognisable outline beats detail: a 가야금
 reads as a radiator grille, a screen-on-a-desk reads as a home computer.
@@ -222,25 +241,31 @@ each script with the correct answers filled in, and nothing else.
 
 ## Adding the next unit
 
-`worlds/unit14-workbook.json` is named in six places. Find them with
-`grep -rn unit14-workbook.json js/ scripts/ tests/ admin/`:
+Unit 10 was the second, and most of the hard-coding went with it. A workbook is
+`worlds/<unit>-workbook.json`, and the pipeline finds them by that name:
 
-| file | what it does |
-|---|---|
-| `js/ui.js` | `workbookUrl()` — returns the path when `isUnit14World()`; the game reads nothing otherwise |
-| `admin/lib/workbook.js` | `WORKBOOK_REL` — the one file the admin editor reads and writes |
-| `scripts/r2Content.js` | `STATIC_FILES` entry, and `collectUploadFiles` reading it for audio |
-| `scripts/ttsClips.js` | `collectWorkbookPhrases` — which Korean gets a clip rendered |
-| `tests/test_r2_content.js` | checks the audio it names is published |
-| `tests/test_unit14_workbook.js` | the whole suite is Unit 14's |
+- `scripts/r2Content.js` uploads every `worlds/*.json` and every `audio.src` any
+  workbook names
+- `scripts/ttsClips.js` harvests every `worlds/*-workbook.json`
 
-The admin editor is the awkward one: `WORKBOOK_REL` is a constant, so it edits
-exactly one workbook. A second unit wants that turned into a parameter and a
-picker in the panel, which is real work — worth doing on the first new unit
-rather than the third.
+**Neither needs touching for a new unit.** Do not go back to listing files.
 
-Everything else wants the same shape: a list of workbooks instead of a constant.
-Generalise on unit two, not by adding a seventh hard-coded path.
+Two places still name a unit, and both should:
+
+- `js/ui.js` — `workbookUrl()` maps world to path, one line per unit, the same
+  shape `deskQuizUrl()` already had
+- `admin/lib/workbook.js` — `WORKBOOKS` maps a unit key to its path;
+  `getWorkbook(root, unit)` and `saveWorkbook(body, root, unit)` take that key
+  and default to Unit 14
+
+The remaining gap is the **admin panel**: the server routes are `/api/unit14/…`
+and the frontend calls them by that name, so the panel edits Unit 14 only. Unit
+10's workbook is written by script and validated the same way, but not editable
+in the UI. Fixing it means a unit parameter on the route and a picker in the
+panel.
+
+A new unit therefore needs: the JSON, a line in `workbookUrl()`, an entry in
+`WORKBOOKS`, and its own test suite. Art and audio only if the unit has them.
 
 Other things that scale with the list:
 

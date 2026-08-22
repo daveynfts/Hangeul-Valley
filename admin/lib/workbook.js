@@ -31,12 +31,39 @@ function writeJson(rel, data, rootDir) {
   atomicWriteJson(path.join(rootDir, rel), json);
 }
 
-function getWorkbook(rootDir) {
-  return readJson(WORKBOOK_REL, rootDir);
+// Which workbooks exist, by the unit they belong to. Unit 14 stays the default
+// so every caller that predates a second unit keeps working; the admin panel is
+// still one of them and edits only Unit 14 until it grows a picker.
+const WORKBOOKS = {
+  unit14: path.join('worlds', 'unit14-workbook.json'),
+  unit10: path.join('worlds', 'unit10-workbook.json')
+};
+
+function workbookRel(unit) {
+  const rel = WORKBOOKS[str(unit) || 'unit14'];
+  if (!rel) throw new Error(`No workbook for "${unit}"`);
+  return rel;
+}
+
+function getWorkbook(rootDir, unit) {
+  return readJson(workbookRel(unit), rootDir);
 }
 
 function str(v) {
   return typeof v === 'string' ? v.trim() : '';
+}
+
+// A picture the game already ships, named by its path under sprites/. Reusing
+// the Unit 10 food icons rather than drawing new ones is the point, so this
+// takes a real sprite path and refuses anything that leaves the folder — the
+// value ends up in an <img src>.
+function cleanImg(v, where) {
+  const src = str(v);
+  if (!src) return '';
+  if (src.indexOf('..') >= 0 || !/^sprites\/[A-Za-z0-9._/-]+\.png$/.test(src)) {
+    throw new Error(`${where}: img must be a path under sprites/ ending in .png (got "${src}")`);
+  }
+  return src;
 }
 
 function cleanChip(chip, where, type) {
@@ -81,8 +108,14 @@ function cleanItem(item, i, where, type, chipIds) {
       throw new Error(`${at}: A's line must contain {} where the answer goes`);
     }
   } else {
+    // A picture can be the prompt on its own — Unit 10 matches a bowl of food to
+    // its name, and putting the name on the left as well would answer the row.
+    // Every other row still has to say something.
+    out.img = cleanImg(item.img, at);
+    if (!out.img) delete out.img;
     out.stemKo = str(item.stemKo);
-    if (!out.stemKo) throw new Error(`${at}: needs the Korean prompt`);
+    if (!out.stemKo && !out.img) throw new Error(`${at}: needs a Korean prompt or a picture`);
+    if (!out.stemKo) delete out.stemKo;
   }
   return out;
 }
@@ -355,7 +388,8 @@ function cleanExercise(ex, i, seenIds) {
   return out;
 }
 
-function saveWorkbook(body, rootDir) {
+function saveWorkbook(body, rootDir, unit) {
+  const rel = workbookRel(unit);
   if (!body || typeof body !== 'object') throw new Error('Workbook body must be an object');
   const list = Array.isArray(body.exercises) ? body.exercises : null;
   if (!list) throw new Error('Workbook must include an exercises array');
@@ -365,7 +399,7 @@ function saveWorkbook(body, rootDir) {
   const exercises = list.map((ex, i) => cleanExercise(ex, i, seen));
 
   const next = {
-    id: str(body.id) || 'unit14-workbook',
+    id: str(body.id) || path.basename(rel, '.json'),
     source: str(body.source),
     titleKo: str(body.titleKo) || '연습 문제',
     titleEn: str(body.titleEn) || 'Workbook',
@@ -379,8 +413,8 @@ function saveWorkbook(body, rootDir) {
     doneKo: str(body.doneKo) || '닫기',
     exercises
   };
-  writeJson(WORKBOOK_REL, next, rootDir);
+  writeJson(rel, next, rootDir);
   return { exerciseCount: exercises.length, itemCount: exercises.reduce((n, e) => n + e.items.length, 0) };
 }
 
-module.exports = { getWorkbook, saveWorkbook, WORKBOOK_REL, TYPES };
+module.exports = { getWorkbook, saveWorkbook, workbookRel, WORKBOOKS, WORKBOOK_REL, TYPES };

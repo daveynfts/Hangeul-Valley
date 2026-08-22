@@ -26,12 +26,6 @@ const REQUIRED_RELS = [
 const STATIC_FILES = [
   ['levels.json', 'application/json'],
   ['facts.json', 'application/json'],
-  ['worlds/2b-unit-10.json', 'application/json'],
-  ['worlds/2b-unit-14.json', 'application/json'],
-  ['worlds/unit10-desk-quiz.json', 'application/json'],
-  ['worlds/unit14-desk-quiz.json', 'application/json'],
-  ['worlds/unit14-workbook.json', 'application/json'],
-  ['worlds/unit10-layout.json', 'application/json'],
   ['sprites/catalog.json', 'application/json'],
   ['skins/catalog.json', 'application/json'],
   ['diner/content.json', 'application/json']
@@ -104,11 +98,34 @@ function addFile(out, seen, rel, ctype) {
   out.push({ rel: posix, ctype: ctype });
 }
 
+// Workbooks are named worlds/<unit>-workbook.json. Finding them by that pattern
+// rather than listing them means a new unit publishes itself, which is the whole
+// bug class that hid the Unit 14 workbook from production.
+function listWorkbooks(root) {
+  const dir = path.join(root || ROOT, 'worlds');
+  if (!fs.existsSync(dir)) return [];
+  return fs.readdirSync(dir)
+    .filter((f) => /-workbook\.json$/.test(f))
+    .sort()
+    .map((f) => 'worlds/' + f);
+}
+
 function collectUploadFiles(root) {
   const base = root || ROOT;
   const out = [];
   const seen = new Set();
   STATIC_FILES.forEach(([rel, ctype]) => addFile(out, seen, rel, ctype));
+
+  // Every world file, found rather than listed. vercel.json rewrites /worlds/*
+  // to the CDN, so a file left off the batch does not fall back to the repo
+  // copy — it 404s, and whatever reads it goes quietly missing. That is exactly
+  // how the Unit 14 workbook was invisible on production from the day it
+  // shipped, and a hand-kept list would have done it again on Unit 10.
+  const worldsDir = path.join(base, 'worlds');
+  if (fs.existsSync(worldsDir)) {
+    fs.readdirSync(worldsDir).filter((f) => f.endsWith('.json')).sort()
+      .forEach((f) => addFile(out, seen, 'worlds/' + f, 'application/json'));
+  }
 
   const spriteCat = path.join(base, 'sprites', 'catalog.json');
   if (fs.existsSync(spriteCat)) {
@@ -136,13 +153,12 @@ function collectUploadFiles(root) {
   const { listLocalTtsFiles } = require('./ttsClips');
   listLocalTtsFiles(base).forEach((rel) => addFile(out, seen, rel, 'audio/mpeg'));
 
-  // The workbook names its own recordings, so it decides which get uploaded
-  // rather than a hand-kept list beside it. /audio/* is rewritten to the CDN, so
-  // a clip the content names but the batch omits is a play button that does
-  // nothing on the deployed site — and that failure is silent.
-  const workbook = path.join(base, 'worlds', 'unit14-workbook.json');
-  if (fs.existsSync(workbook)) {
-    const book = JSON.parse(fs.readFileSync(workbook, 'utf8'));
+  // Every workbook names its own recordings, so the content decides what gets
+  // uploaded rather than a hand-kept list beside it. /audio/* is rewritten to
+  // the CDN, so a clip the content names but the batch omits is a play button
+  // that does nothing on the deployed site — and that failure is silent.
+  listWorkbooks(base).forEach((rel) => {
+    const book = JSON.parse(fs.readFileSync(path.join(base, rel), 'utf8'));
     const take = (a) => {
       const src = a && typeof a.src === 'string' ? a.src : '';
       if (!/^audio\/[A-Za-z0-9._/-]+\.mp3$/.test(src) || src.indexOf('..') >= 0) return;
@@ -153,7 +169,7 @@ function collectUploadFiles(root) {
       (ex.items || []).forEach((it) => take(it.audio));
       if (ex.example) take(ex.example.audio);
     });
-  }
+  });
 
   return out;
 }
@@ -512,6 +528,7 @@ module.exports = {
   parsePublishArgs,
   env,
   cacheControl,
+  listWorkbooks,
   collectUploadFiles,
   missingRequired,
   publicContentBase,

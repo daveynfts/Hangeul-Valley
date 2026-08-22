@@ -2680,6 +2680,24 @@
       align-items: center; gap: 10px;
     }
     .wb-left { font-weight: 700; }
+
+    /* A shipped food icon standing in for the prompt. Pixel art, so it scales
+       with no smoothing. The row it sits in wants different proportions from a
+       text one: the picture takes only its own width and the name gets the rest,
+       instead of a text-sized column with a picture rattling around in it. */
+    .wb-photo {
+      display: block; width: 92px; height: 92px; object-fit: contain;
+      image-rendering: pixelated;
+      background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 4px;
+      padding: 4px;
+    }
+    /* Centred, not baseline-aligned: against a 92px picture a baseline puts the
+       row number down by the plate. */
+    .wb-row.photo { align-items: center; }
+    .wb-items-match .wb-row.photo .wb-sentence {
+      grid-template-columns: auto auto minmax(0, 1fr);
+    }
+    .wb-row.photo .wb-left { display: flex; }
     .wb-join { color: #7a3e12; font-weight: 800; }
     .wb-items-match .wb-blank { min-width: 0; width: 100%; text-align: left; }
     .wb-bank-match { flex-direction: column; align-items: stretch; }
