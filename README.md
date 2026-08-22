@@ -439,13 +439,21 @@ index.html       DOM overlays + ordered <script> tags
 levels.json      curriculum (25 levels × 60 words)
 facts.json       generated word origins, lazy-loaded
 sprites/         HD PNG library + catalog.json
-worlds/          textbook worlds (Unit 10 layout, quiz, word list)
+worlds/          textbook worlds (Unit 10 layout, quiz, word list, Unit 14 workbook)
+audio/book/      textbook drill recordings, cut one clip per exchange
+docs/            procedures too long for this file
 main.py          PyWebView desktop wrapper + file-based save API
 tests/           game suites (SRS, shop, sprites, inventory, cooking)
 scripts/         data generators, content validator, R2 upload
 admin/           Express admin panel (writable locally; read-only on Vercel)
 api/             Vercel serverless functions (save, admin GET, Unit 10)
 ```
+
+The study desk runs the textbook workbook — 어휘, 문법과 표현 and 문형 연습, with
+the book's own audio on the pattern drills.
+[docs/workbook-exercises.md](docs/workbook-exercises.md) covers the data model,
+the exercise types, cutting a drill track, and what to change when a second unit
+lands.
 
 `js/scenes/` holds five scenes — `FarmScene` (the hub), `ArcadeScene`, `DungeonScene`,
 `FishingScene`, `BeeScene` — with the pixel renderer, chiptune synth, day/night and
