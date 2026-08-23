@@ -13,7 +13,7 @@
  * A PNG on disk without a catalog row, or a catalog row without a PNG, is a bug.
  * Catalog ids are <kind>.<slug> (food.kimchi_jar, item.corn_cob).
  * Trophy plaques (family trophy-icons) are ui.trophy.<name> from slug trophy_<name>.
- * HUD glyphs stay ui.hud.<slug> via sync_hud_catalog.js — do not reuse trophy_ for HUD.
+ * HUD glyphs stay ui.hud.<slug> — do not reuse trophy_ for HUD.
  */
 'use strict';
 

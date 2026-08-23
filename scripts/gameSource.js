@@ -30,10 +30,6 @@ function gameScriptPaths() {
   return GAME_SCRIPTS.map((rel) => path.join(ROOT, rel));
 }
 
-function indexScriptTags() {
-  return GAME_SCRIPTS.map((rel) => `  <script src="${rel.replace(/\\/g, '/')}"></script>`).join('\n');
-}
-
 function allGameScriptsExist() {
   return GAME_SCRIPTS.every((rel) => {
     const p = path.join(ROOT, rel);
@@ -54,11 +50,9 @@ function checkGameScripts() {
 
 module.exports = {
   ROOT,
-  MANIFEST_REL,
   GAME_SCRIPTS,
   readGameSource,
   gameScriptPaths,
-  indexScriptTags,
   allGameScriptsExist,
   checkGameScripts
 };
