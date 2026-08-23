@@ -365,384 +365,6 @@ class PixelArtRenderer {
       ]);
     });
 
-    makeTile('tile_path_straight', (g) => {
-      drawTileMatrix(g, [
-        'aaaaaAaAaAaaaaaa',
-        'ABBBBBBBBBBBBBBA',
-        'AbbbbbbbbbbbbbbA',
-        'AbbbbbbbbbbbbbbA',
-        'AAAAAAAAAAAAAAAA',
-        'ABBBBBBBBBBBBBBA',
-        'AbbbbbbbbbbbbbbA',
-        'AbbbbbbbbbbbbbbA',
-        'AAAAAAAAAAAAAAAA',
-        'ABBBBBBBBBBBBBBA',
-        'AbbbbbbbbbbbbbbA',
-        'AbbbbbbbbbbbbbbA',
-        'AAAAAAAAAAAAAAAA',
-        'ABBBBBBBBBBBBBBA',
-        'AbbbbbbbbbbbbbbA',
-        'aaaaaAaAaAaaaaaa'
-      ]);
-    });
-
-    makeTile('tile_path_corner', (g) => {
-      drawTileMatrix(g, [
-        'aaaaaAaAaAaaaaaa',
-        'ABBBBBBBBBBBBBBA',
-        'AbbbbbbbbbbbbbbA',
-        'AbbbbbbbbbbbbbbA',
-        'AAAAAAAAAAAAAAAa',
-        'ABBBBBBBBBBBBBAA',
-        'AbbbbbbbbbbbbbAA',
-        'AbbbbbbbbbbbbAAA',
-        'AAAAAAAAAAAAAaAA',
-        'ABBBBBBBBBAAaAAA',
-        'AbbbbbbbbAAaAAAA',
-        'AbbbbbbbAAaAAAAA',
-        'AAAAAAAaAaAAAAAA',
-        'AAAAAAaAaAAAAAAA',
-        'aaaaaaAaAAAAAAAA',
-        'aaaaaaaaaaaaaaaa'
-      ]);
-    });
-
-    makeTile('tile_path_cross', (g) => {
-      drawTileMatrix(g, [
-        'aAaABBBBBBBAaAaA',
-        'AaAbbbbbbbbbaAaA',
-        'aAaAbbbbbbbbaAaA',
-        'AaAbbbbbbbbbaAaA',
-        'ABBBBBBBBBBBBBBA',
-        'AbbbbbbbbbbbbbbA',
-        'AbbbbbbbbbbbbbbA',
-        'AbbbbbbbbbbbbbbA',
-        'ABBBBBBBBBBBBBBA',
-        'AaAbbbbbbbbbaAaA',
-        'aAaAbbbbbbbbaAaA',
-        'AaAbbbbbbbbbaAaA',
-        'aAaABBBBBBBAaAaA',
-        'AaAbbbbbbbbbaAaA',
-        'aAaAbbbbbbbbaAaA',
-        'aaaaaaaaaaaaaaaa'
-      ]);
-    });
-
-    makeTile('tile_path_single', (g) => {
-      drawTileMatrix(g, [
-        'gggggggggggggggg',
-        'g.KKKKKKKKKKKK.g',
-        'gKBBBBBBBBBBBBKg',
-        'gKBbbbbbbbbbbBKg',
-        'gKBbbAAAAAAbbBKg',
-        'gKBbbAaaaaAbbBKg',
-        'gKBbbAaaaaAbbBKg',
-        'gKBbbAAAAAAbbBKg',
-        'gKBbbAAAAAAbbBKg',
-        'gKBbbAaaaaAbbBKg',
-        'gKBbbAaaaaAbbBKg',
-        'gKBbbAAAAAAbbBKg',
-        'gKBbbbbbbbbbbBKg',
-        'gKBBBBBBBBBBBBKg',
-        'g.KKKKKKKKKKKK.g',
-        'MMMMMMMMMMMMMMMM'
-      ]);
-    });
-
-    makeTile('tile_path_stone', (g) => {
-      drawTileMatrix(g, [
-        'aAaABBBBBBBAaAaA',
-        'AaAKttTTTTsKaAaA',
-        'aAaKtTTTTTSsAaAa',
-        'AaAKtTTTTTSsAaAa',
-        'aAaKSSSSSSSSAaAa',
-        'AaAKKKKKKKKKaAaA',
-        'aAaABBBBBBBAaAaA',
-        'AaAKttTTTTsKaAaA',
-        'aAaKtTTTTTSsAaAa',
-        'AaAKtTTTTTSsAaAa',
-        'aAaKSSSSSSSSAaAa',
-        'AaAKKKKKKKKKaAaA',
-        'aAaABBBBBBBAaAaA',
-        'AaAbbbbbbbbbaAaA',
-        'aAaAbbbbbbbbaAaA',
-        'aaaaaaaaaaaaaaaa'
-      ]);
-    });
-
-    makeTile('tile_fence_h', (g) => {
-      drawTileMatrix(g, [
-        'GGGGGGGGGGGGGGGG',
-        'GGGGGGGGGGGGGGGG',
-        'KKKKKKKKKKKKKKKK',
-        'KOOOOOOOOOOOOOOK',
-        'KOOWWWWWWWWWWOOK',
-        'KKwWWWWWWWWWWwKK',
-        'GGGGGGGGGGGGGGGG',
-        'GGGGGGGGGGGGGGGG',
-        'GGGGGGGGGGGGGGGG',
-        'KKKKKKKKKKKKKKKK',
-        'KOOOOOOOOOOOOOOK',
-        'KOOWWWWWWWWWWOOK',
-        'KKwWWWWWWWWWWwKK',
-        'GGGGGGGGGGGGGGGG',
-        'gggggggggggggggg',
-        'MMMMMMMMMMMMMMMM'
-      ]);
-    });
-
-    makeTile('tile_fence_v', (g) => {
-      drawTileMatrix(g, [
-        'GGKKOKGKKOKGGGGG',
-        'GGKKOKGKKOKGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKOWGKKOWGGGGG',
-        'GGKKwWGKKwWGGGGG',
-        'ggKKwWGKKwWGgggg',
-        'MMKKKKGKKKKGMMMM'
-      ]);
-    });
-
-    makeTile('tile_fence_post', (g) => {
-      drawTileMatrix(g, [
-        '.....KKKKKK.....',
-        '....KOOOOoOK....',
-        '....KOOOOoOK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KggggggK....',
-        '....KMMMMMMK....'
-      ]);
-    });
-
-    makeTile('tile_fence_corner', (g) => {
-      drawTileMatrix(g, [
-        '.....KKKKKK.....',
-        '....KOOOOoOK....',
-        '....KOOOOoOK....',
-        '....KOOWWwwKKKKK',
-        '....KOOWWwwOOOOK',
-        '....KOOWWWWWWWwK',
-        '....KOOWWwwKKKKK',
-        '....KOOWWwwK....',
-        '....KOOWWwwK....',
-        '....KOOWWwwKKKKK',
-        '....KOOWWwwOOOOK',
-        '....KOOWWWWWWWwK',
-        '....KOOWWwwKKKKK',
-        '....KOOWWwwK....',
-        '....KggggggK....',
-        '....KMMMMMMK....'
-      ]);
-    });
-
-    makeTile('tile_house_roof', (g) => {
-      drawTileMatrix(g, [
-        'KKKKKKKKKKKKKKKK',
-        'KRRRRRRRRRRRRRRK',
-        'KRRRRRRRRRRRRRRK',
-        'KrrrrrrrrrrrrrrK',
-        'KKKKKKKKKKKKKKKK',
-        'KRKKKKRRKKKKRRKK',
-        'KRRRRRRRRRRRRRRK',
-        'KrrrrrrrrrrrrrrK',
-        'KKKKKKKKKKKKKKKK',
-        'KKKKRRKKKKRRKKKK',
-        'KRRRRRRRRRRRRRRK',
-        'KrrrrrrrrrrrrrrK',
-        'KKKKKKKKKKKKKKKK',
-        'KRKKKKRRKKKKRRKK',
-        'KrrrrrrrrrrrrrrK',
-        'KKKKKKKKKKKKKKKK'
-      ]);
-    });
-
-    makeTile('tile_house_wall', (g) => {
-      drawTileMatrix(g, [
-        'KKKKKKKKKKKKKKKK',
-        'KRRRRKRRRRKRRRRK',
-        'KRRRRKRRRRKRRRRK',
-        'KrrrrKrrrrKrrrrK',
-        'KKKKKKKKKKKKKKKK',
-        'KRRRRKRRRRKRRRRK',
-        'KRRRRKRRRRKRRRRK',
-        'KrrrrKrrrrKrrrrK',
-        'KKKKKKKKKKKKKKKK',
-        'KRRRRKRRRRKRRRRK',
-        'KRRRRKRRRRKRRRRK',
-        'KrrrrKrrrrKrrrrK',
-        'KKKKKKKKKKKKKKKK',
-        'KRRRRKRRRRKRRRRK',
-        'KrrrrKrrrrKrrrrK',
-        'KKKKKKKKKKKKKKKK'
-      ]);
-    });
-
-    makeTile('tile_house_door', (g) => {
-      drawTileMatrix(g, [
-        'KKKKKKKKKKKKKKKK',
-        'KRRKKKKKKKKRRRRK',
-        'KRRKOOOOOOKRRRRK',
-        'KrrKOWWWWwKrrrrK',
-        'KKKKOWWWWwKKKKKK',
-        'KRRKOWWWWwKRRRRK',
-        'KRRKOWWWWwKRRRRK',
-        'KrrKOWWYYwKrrrrK',
-        'KKKKOWWYYwKKKKKK',
-        'KRRKOWWWWwKRRRRK',
-        'KRRKOWWWWwKRRRRK',
-        'KrrKOWWWWwKrrrrK',
-        'KKKKOWWWWwKKKKKK',
-        'KRRKOWWWWwKRRRRK',
-        'KrrKowwwwwKrrrrK',
-        'KKKKKKKKKKKKKKKK'
-      ]);
-    });
-
-    makeTile('tile_house_window', (g) => {
-      drawTileMatrix(g, [
-        'KKKKKKKKKKKKKKKK',
-        'KRRKKKKKKKKRRRRK',
-        'KRRKYYYYYYKRRRRK',
-        'KrrKYYYYYYKrrrrK',
-        'KKKKYYKKYYKKKKKK',
-        'KRRKYYKKYYKRRRRK',
-        'KRRKYYYYYYKRRRRK',
-        'KrrKYYYYYYKrrrrK',
-        'KKKKKKKKKKKKKKKK',
-        'KRRRRRRRRRRRRRRK',
-        'KRRRRRRRRRRRRRRK',
-        'KrrrrrrrrrrrrrrK',
-        'KKKKKKKKKKKKKKKK',
-        'KRRRRRRRRRRRRRRK',
-        'KrrrrrrrrrrrrrrK',
-        'KKKKKKKKKKKKKKKK'
-      ]);
-    });
-
-    makeTile('tile_shore_top', (g) => {
-      drawTileMatrix(g, [
-        'GGGGGHGGGGGGGHGG',
-        'GGGGGGGGGGGGGGGG',
-        'GGgGGGGGGgGGGGGG',
-        'GGGGGGGGGGGGGGGG',
-        'GGGGGHGGGGGGGGGG',
-        'GgGGGGGGGGGGGGgG',
-        'gggggggggggggggg',
-        'MMMMMMMMMMMMMMMM',
-        'EEEEEEEEEEEEEEEE',
-        'cccccccccccccccc',
-        'CCCCCCCCCCCCCCCC',
-        'CCCCCCCCCCCCCCCC',
-        'ZZZZZZZZZZZZZZZZ',
-        'ZZZZZZZZZZZZZZZZ',
-        'zzzzzzzzzzzzzzzz',
-        'zzzzzzzzzzzzzzzz'
-      ]);
-    });
-
-    makeTile('tile_shore_bottom', (g) => {
-      drawTileMatrix(g, [
-        'zzzzzzzzzzzzzzzz',
-        'zzzzzzzzzzzzzzzz',
-        'ZZZZZZZZZZZZZZZZ',
-        'ZZZZZZZZZZZZZZZZ',
-        'CCCCCCCCCCCCCCCC',
-        'CCCCCCCCCCCCCCCC',
-        'cccccccccccccccc',
-        'EEEEEEEEEEEEEEEE',
-        'MMMMMMMMMMMMMMMM',
-        'gggggggggggggggg',
-        'GgGGGGGGGGGGGGgG',
-        'GGGGGHGGGGGGGGGG',
-        'GGgGGGGGGgGGGGGG',
-        'GGGGGGGGGGGGGGGG',
-        'GGGGGHGGGGGGGHGG',
-        'GGGGGGGGGGGGGGGG'
-      ]);
-    });
-
-    makeTile('tile_shore_left', (g) => {
-      drawTileMatrix(g, [
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGGgMECZZzzzz'
-      ]);
-    });
-
-    makeTile('tile_shore_right', (g) => {
-      drawTileMatrix(g, [
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG',
-        'zzzzZZCEMgGGGGGG'
-      ]);
-    });
-
-    makeTile('tile_shore_corner', (g) => {
-      drawTileMatrix(g, [
-        'GGGGGGGGGGGGGGGG',
-        'GGGGGGGGGGGGGGGG',
-        'GGGGGGGGGGGGGGgM',
-        'GGGGGGGGGGGGgMEC',
-        'GGGGGGGGGGgMECZZ',
-        'GGGGGGGGgMECZZzz',
-        'GGGGGGgMECZZzzzz',
-        'GGGGGgMECZZzzzzz',
-        'GGGGgMECZZzzzzzz',
-        'GGGgMECZZzzzzzzz',
-        'GGgMECZZzzzzzzzz',
-        'GgMECZZzzzzzzzzz',
-        'gMECZZzzzzzzzzzz',
-        'MECZZzzzzzzzzzzz',
-        'ECZZzzzzzzzzzzzz',
-        'CZZzzzzzzzzzzzzz'
-      ]);
-    });
-
     // ── FISHING SCENE TILEMAP TEXTURES ───────────────────────────────────────
     makeTile('tile_sand', (g) => {
       drawTileMatrix(g, [
@@ -825,27 +447,6 @@ class PixelArtRenderer {
         'KN..N......N..NK',
         'KKKKKKKKKKKKKKKK',
         'KKKKKKKKKKKKKKKK'
-      ]);
-    });
-
-    makeTile('tile_pier_post', (g) => {
-      drawTileMatrix(g, [
-        'ZZZZKKKKKKKKZZZZ',
-        'ZZZZKOOOOoOKZZZZ',
-        'ZZZZKOOOOoOKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'ZZZZKOOWWwwKZZZZ',
-        'zzzzKzzzzzzKzzzz',
-        'zzzzKzzzzzzKzzzz'
       ]);
     });
 
@@ -1031,24 +632,6 @@ class PixelArtRenderer {
       g.fillStyle(0xEAB308, 1); g.fillRect(9, 15, 30, 6); g.fillRect(9, 27, 30, 6);
       g.fillStyle(0xA855F7, 1); g.fillRect(12, 21, 24, 6);
       g.fillStyle(0x06B6D4, 1); g.fillRect(21, 21, 6, 6);
-    });
-
-    makeTile('tile_starfield', (g) => {
-      g.fillStyle(0x030712, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0xFFFFFF, 0.9); g.fillRect(6, 12, 3, 3); g.fillRect(36, 9, 3, 3); g.fillRect(21, 33, 3, 3);
-      g.fillStyle(0x38BDF8, 0.8); g.fillRect(12, 39, 2, 2); g.fillRect(42, 27, 2, 2);
-      g.fillStyle(0xFDE047, 0.8); g.fillRect(27, 15, 2, 2); g.fillRect(9, 24, 2, 2);
-      g.fillStyle(0xA855F7, 0.7); g.fillRect(30, 42, 2, 2); g.fillRect(18, 6, 2, 2);
-    });
-
-    makeTile('tile_cosmic_bridge', (g) => {
-      g.fillStyle(0x0F172A, 1); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x4338CA, 0.6); g.fillRect(0, 0, 48, 48);
-      g.fillStyle(0x6366F1, 0.8); g.fillRect(3, 3, 42, 42);
-      g.fillStyle(0x818CF8, 1);
-      g.fillRect(0, 0, 48, 3); g.fillRect(0, 45, 48, 3);
-      g.fillRect(0, 0, 3, 48); g.fillRect(45, 0, 3, 48);
-      g.fillStyle(0xC084FC, 0.9); g.fillRect(21, 21, 6, 6);
     });
 
     // ── DUNGEON SCENE TILEMAP TEXTURES ───────────────────────────────────────
@@ -1499,10 +1082,6 @@ class PixelArtRenderer {
       g.fillStyle(0xFFFFFF, 1); g.fillRect(2, 2, 2, 2);
     });
 
-    makeTex('p_honey_drip', 4, 8, (g) => {
-      g.fillStyle(0xF59E0B, 0.9); g.fillRect(1, 0, 2, 8); g.fillRect(0, 4, 4, 4);
-      g.fillStyle(0xFEF08A, 1); g.fillRect(1, 1, 1, 3);
-    });
   }
 
   // 1. Player Farmer 4-Direction Walk Cycle & Action Animations (Industrial Yellow Farmer Pixel Robot)
@@ -2054,11 +1633,6 @@ class PixelArtRenderer {
     this.createTexture(scene, 'tool_basket', tool_basket, P);
     this.createTexture(scene, 'tool_sickle', tool_sickle, P);
 
-    // Legacy farmer0..3 aliases (matrix-era HUD/portrait keys).
-    this.createTexture(scene, 'farmer0', down_0, P);
-    this.createTexture(scene, 'farmer1', down_1, P);
-    this.createTexture(scene, 'farmer2', down_0, P);
-    this.createTexture(scene, 'farmer3', down_2, P);
 
     // Deprecated: catalog skin `chef` (art: matrix) + world costumeSkinId. HD chef is a later content PR.
     const CHEF = Object.assign({}, P, {
@@ -2282,7 +1856,6 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-    const cat_npc = cat_idle_0;
 
     this.createTexture(scene, 'cat_idle_0', cat_idle_0, C);
     this.createTexture(scene, 'cat_idle_1', cat_idle_1, C);
@@ -2293,14 +1866,12 @@ class PixelArtRenderer {
     this.createTexture(scene, 'cat_sit_1', cat_sit_1, C);
     this.createTexture(scene, 'cat_sleep_0', cat_sleep_0, C);
     this.createTexture(scene, 'cat_sleep_1', cat_sleep_1, C);
-    this.createTexture(scene, 'cat_npc', cat_npc, C);
 
     const W_PAL = PixelArtRenderer.W_PAL;
     const wiz_0 = PixelArtRenderer.WIZ_0;
     const wiz_1 = PixelArtRenderer.WIZ_1;
     this.createTexture(scene, 'wizard_idle_0', wiz_0, W_PAL, 16, 20);
     this.createTexture(scene, 'wizard_idle_1', wiz_1, W_PAL, 16, 20);
-    this.createTexture(scene, 'wizard_npc', wiz_0, W_PAL, 16, 20);
 
     const anims = scene.anims;
     if (anims) {
@@ -2373,28 +1944,6 @@ class PixelArtRenderer {
       'ssssssssssssssss',
       'ssssssssssssssss'
     ];
-    const tile_grass = [
-      'GGGGGGGGGGGGGGGG',
-      'GGGGGAGGGGGGAGGG',
-      'GGGGGGGGGGGGGGGG',
-      'GGgGGGGGGGGgGGGG',
-      'GGGGGGGGGGGGGGGG',
-      'GAGGGGGGGGAGGGGG',
-      'GGGGGGGGGGGGGGGG',
-      'GGGGgGGGGGGGGgGG',
-      'GGGGGGGGGGGGGGGG',
-      'GGGAGGGGGGGAGGGG',
-      'GGGGGGGGGGGGGGGG',
-      'GGGGGGgGGGGGGGgG',
-      'GGGGGGGGGGGGGGGG',
-      'GGAGGGGGGGGAGGGG',
-      'gggggggggggggggg',
-      'gggggggggggggggg'
-    ];
-
-    this.createTexture(scene, 'tile_tilled_soil', soil_tilled, P);
-    this.createTexture(scene, 'tile_watered_soil', soil_watered, P);
-    this.createTexture(scene, 'tile_grass', tile_grass, P);
     this.createTexture(scene, 'drt_dry', soil_tilled, P);
     this.createTexture(scene, 'drt_wet', soil_watered, P);
 
@@ -2777,103 +2326,13 @@ class PixelArtRenderer {
     ];
 
     cropList.forEach((c) => {
-      this.createTexture(scene, 'crop_' + c.name + '_0', c.s0, P);
-      this.createTexture(scene, 'crop_' + c.name + '_1', c.s1, P);
-      this.createTexture(scene, 'crop_' + c.name + '_2', c.s2, P);
-      this.createTexture(scene, 'crop_' + c.name + '_3', c.s3, P);
 
       // Legacy aliases cr_X_0..3
-      this.createTexture(scene, c.cr + '_0', c.s0, P);
       this.createTexture(scene, c.cr + '_1', c.s1, P);
       this.createTexture(scene, c.cr + '_2', c.s2, P);
       this.createTexture(scene, c.cr + '_3', c.s3, P);
     });
 
-    const straw_0=[
-      '................','................','................','......KK.......',
-      '.....KGLK.......','......KgK.......','......KSK.......','.....KSSS......',
-      '....KSSSSK......','...KKSSSSKK.....','...KSSSdSSK.....','....KKSSSK......',
-      '.....KKKKK......','................','................','................'
-    ];
-    const straw_1=[
-      '................','......K.K.......','.....KLGLK......','.....KGGGK......',
-      '......KgK.......','.....KSSSK......','....KSSSSSK.....','...KKSYYSSKK....',
-      '..KKSSYRYSSKK...','..KSSSYYYSSSK...','...KKSSSSSKK....','....KKSSSKK.....',
-      '.....KKKKK......','................','................','................'
-    ];
-    const straw_2=[
-      '......K.K.......','.....KLGLK......','....KKGGGKK.....','.....KgGGgK.....',
-      '......KgK.......','.....KSSSK......','...KKSYRYSKK....','..KKSYRRRYSKK...',
-      '.KKSSYRRRYSSKK..','.KSSSYR*RYSSSK..','..KKSSYRYSSKK...','...KKSSSSSKK....',
-      '....KKSSSKK.....','.....KKKKK......','................','................'
-    ];
-    const straw_3=[
-      '.....KLKLK......','....KKGLGKK.....','...KKGGGGGKK....','....KgGGGgK.....',
-      '.....KgGgK......','....KKSSSKK.....','...KSYRRYSK.....','..KKYRRRRYKK....',
-      '.KKSYR*RRYSKK...','.KSSYR*RRYSSK...','..KKYRRRRYKK....','...KSYRRYSK.....',
-      '....KKSSSKK.....','.....KKKKK......','................','................'
-    ];
-    const corn_0=[
-      '................','................','......KK.......','.....KGLK.......',
-      '.....KGGLK......','......KgK.......','......KSK.......','.....KSSSK......',
-      '....KSSSSK......','...KKSSSSKK.....','...KSSSdSSK.....','....KKSSSK......',
-      '.....KKKKK......','................','................','................'
-    ];
-    const corn_1=[
-      '......KK........','.....KLGK.......','....KKGLKK......','....KGGGGK......',
-      '.....KgGgK......','......KgK.......','.....KSSSK......','....KSSSSSK.....',
-      '...KKSSSSSKK....','..KKSSSdSSSKK...','..KSSSSSSSSSK...','...KKSSSSSKK....',
-      '....KKSSSKK.....','.....KKKKK......','................','................'
-    ];
-    const corn_2=[
-      '.....KLKLK......','....KKGLGKK.....','...KKGGGGGKK....','....KgGGGgK.....',
-      '.....KGGGK......','......KgK.......','.....KgAgK......','....KKAaAKK.....',
-      '...KKSAAaSSKK...','..KKSSAaASSKK...','..KSSSSSSSSSK...','...KKSSSSSKK....',
-      '....KKSSSKK.....','.....KKKKK......','................','................'
-    ];
-    const corn_3=[
-      '....KLKLKLK.....','...KKGLGLGKK....','..KKGGGGGGGKK...','...KgGGGGGgK....',
-      '....KGGGGGK.....','.....KgGgK......','.....KAAaK......','....KKAaAKK.....',
-      '...KKSA*ASSKK...','..KKSSAAaSSKK...','..KSSSAAaSSSK...','...KKSSSSSKK....',
-      '....KKSSSKK.....','.....KKKKK......','................','................'
-    ];
-    const sun_0=[
-      '................','................','................','......KK.......',
-      '.....KGLK.......','......KgK.......','......KgK.......','......KSK.......',
-      '.....KSSSK......','....KSSSSSK.....','...KKSSSSSKK....','....KKSSSKK.....',
-      '.....KKKKK......','................','................','................'
-    ];
-    const sun_1=[
-      '................','......KK........','.....KGLK.......','.....KGGLK......',
-      '......KgK.......','......KgK.......','......KgK.......','......KSK.......',
-      '.....KSSSK......','....KSSSSSK.....','...KKSSSSSKK....','....KKSSSKK.....',
-      '.....KKKKK......','................','................','................'
-    ];
-    const sun_2=[
-      '.....KAAAK......','....KAaAaAK.....','.....KAJAK......','......KgK.......',
-      '......KgK.......','......KgK.......','......KgK.......','......KSK.......',
-      '.....KSSSK......','....KSSSSSK.....','...KKSSSSSKK....','....KKSSSKK.....',
-      '.....KKKKK......','................','................','................'
-    ];
-    const sun_3=[
-      '...KAAAKAAAK....','..KAAaAaAaAaAK..','.KAaAAAAAAAAaAK.','..KAAAAJAAAAK...',
-      '...KAAJAJAAK....','....KKKgKKK.....','......KgK.......','......KgK.......',
-      '......KgK.......','.....KSSSK......','....KSSSSSK.....','...KKSSSSSKK....',
-      '....KKSSSKK.....','.....KKKKK......','................','................'
-    ];
-    const pad16 = (rows) => rows.map((r) => (r + '................').slice(0, 16));
-    this.createTexture(scene, 'crop_strawberry_0', pad16(straw_0), P);
-    this.createTexture(scene, 'crop_strawberry_1', pad16(straw_1), P);
-    this.createTexture(scene, 'crop_strawberry_2', pad16(straw_2), P);
-    this.createTexture(scene, 'crop_strawberry_3', pad16(straw_3), P);
-    this.createTexture(scene, 'crop_corn_0', pad16(corn_0), P);
-    this.createTexture(scene, 'crop_corn_1', pad16(corn_1), P);
-    this.createTexture(scene, 'crop_corn_2', pad16(corn_2), P);
-    this.createTexture(scene, 'crop_corn_3', pad16(corn_3), P);
-    this.createTexture(scene, 'crop_sunflower_0', pad16(sun_0), P);
-    this.createTexture(scene, 'crop_sunflower_1', pad16(sun_1), P);
-    this.createTexture(scene, 'crop_sunflower_2', pad16(sun_2), P);
-    this.createTexture(scene, 'crop_sunflower_3', pad16(sun_3), P);
 
     // Apple trees
     const tree_summer=[
@@ -2894,27 +2353,6 @@ class PixelArtRenderer {
   '.....KKBBKK.....',
   '....KKKKKKKK....'
 ];
-    const tree_bare=[
-  '......KKKK......',
-  '....KKKKKKKK....',
-  '...KKBK..KBKK...',
-  '...KKKK..KKKK...',
-  '.....KKKKKK.....',
-  '.....KKBBKK.....',
-  '......KBBK......',
-  '......KBBK......',
-  '......KBBK......',
-  '......KBBK......',
-  '......KBBK......',
-  '......KBBK......',
-  '......KBBK......',
-  '......KBBK......',
-  '.....KKBBKK.....',
-  '....KKKKKKKK....'
-];
-
-    this.createTexture(scene, 'tree_apple_summer', tree_summer, P);
-    this.createTexture(scene, 'tree_apple_bare', tree_bare, P);
     this.createTexture(scene, 'apple_tree', tree_summer, P);
     this.createTexture(scene, 'apple_tree_ripe', tree_summer, P);
   }
@@ -3009,24 +2447,6 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-    const tuna = [
-      '................',
-      '.....KKKK.......',
-      '...KKUUUBKK.....',
-      '..KKUUUKUUUUKK..',
-      '.KKUUUWUUUUUUUVY',
-      'KUuuuuuWWWWWWWWu',
-      'KUuuuuuuuuuuuuuu',
-      '.KUuuuuuuuuuuuu.',
-      '..KUuuuuuuuuuu..',
-      '....KUuuuuuu....',
-      '.....KKKKKK.....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
     const squid = [
       '.....KKKKKK.....',
       '...KKEEEEEEKK...',
@@ -3045,24 +2465,6 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-    const eel = [
-      '................',
-      '...KKKKKK.......',
-      '..KNNNmNNNKK....',
-      '.KNNNKNNNNNNKK..',
-      'KNNNNwWWWWNNNNK.',
-      '.KNnnnnnnnnnNNK.',
-      '..KKNnnnnnnnKK..',
-      '....KKNnnnnKK...',
-      '......KKNNKK....',
-      '........KK......',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
     const goldfish = [
       '.....KKKK.......',
       '...KKFFFFKK.....',
@@ -3073,24 +2475,6 @@ class PixelArtRenderer {
       '.KffffffffffgG..',
       '..KfffffffffGG..',
       '....Kffffffk....',
-      '.....KKKKKK.....',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const seabass = [
-      '.....KKKK.......',
-      '...KKMMMTKK.....',
-      '..KKMMMKMMMMKK..',
-      '.KKMMMtWMMMMMMKM',
-      'KMmmmmmWWWWWWWWm',
-      'KMmmmmmmmmmmmmmm',
-      '.KMmmmmmmmmmmmm.',
-      '..KMmmmmmmmmmm..',
-      '....KMmmmmmm....',
       '.....KKKKKK.....',
       '................',
       '................',
@@ -3128,24 +2512,6 @@ class PixelArtRenderer {
       '..Ko.oCo..oCo.o.',
       '.Ko..oCo..oCo..o',
       '.K...k...k...K..',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................',
-      '................'
-    ];
-    const catfish = [
-      '.....KKKK.......',
-      '...KKAAAAKK.....',
-      '..KKAAAKAAAAKK..',
-      'WKKAAAAEAAAAAAKA',
-      'WKAaaaaWWWWWWWWa',
-      '.KAaaaaaaaaaaaaa',
-      '.KAaaaaaaaaaaaa.',
-      '..KAaaaaaaaaaa..',
-      '....KAaaaaaa....',
-      '.....KKKKKK.....',
       '................',
       '................',
       '................',
@@ -3210,69 +2576,18 @@ class PixelArtRenderer {
 
     // Canonical Fish Textures
     this.createTexture(scene, 'fish_carp', carp, P);
-    this.createTexture(scene, 'fish_salmon', salmon, P);
-    this.createTexture(scene, 'fish_tuna', tuna, P);
-    this.createTexture(scene, 'fish_squid', squid, P);
-    this.createTexture(scene, 'fish_eel', eel, P);
-    this.createTexture(scene, 'fish_goldfish', goldfish, P);
-    this.createTexture(scene, 'fish_seabass', seabass, P);
-    this.createTexture(scene, 'fish_shrimp', shrimp, P);
-    this.createTexture(scene, 'fish_octopus', octopus, P);
-    this.createTexture(scene, 'fish_catfish', catfish, P);
-    this.createTexture(scene, 'fish_mackerel', mackerel, P);
 
     // Legacy Aliases for fishing scene parity
     this.createTexture(scene, 'fishing_carp', carp, P);
     this.createTexture(scene, 'fishing_salmon', salmon, P);
-    this.createTexture(scene, 'fishing_tuna', tuna, P);
     this.createTexture(scene, 'fishing_squid', squid, P);
-    this.createTexture(scene, 'fishing_eel', eel, P);
     this.createTexture(scene, 'fishing_golden_fish', goldfish, P);
-    this.createTexture(scene, 'fishing_snapper', seabass, P);
     this.createTexture(scene, 'fishing_shrimp', shrimp, P);
     this.createTexture(scene, 'fishing_octopus', octopus, P);
-    this.createTexture(scene, 'fishing_catfish', catfish, P);
     this.createTexture(scene, 'fishing_mackerel', mackerel, P);
-    this.createTexture(scene, 'fishing_legendary', legendary, P);
     this.createTexture(scene, 'fishing_clam', clam, P);
 
     // Dock tiles & bobber & rod
-    const dock_plank = [
-      'KKKKKKKKKKKKKKKK',
-      'KOOOOOOOOOOOOOOK',
-      'KOOWWWWWWWWWWOOK',
-      'KKwWWWWWWWWWWwKK',
-      'KKKKKKKKKKKKKKKK',
-      'KN..N......N..NK',
-      'KN..N......N..NK',
-      'KKKKKKKKKKKKKKKK',
-      'KOOOOOOOOOOOOOOK',
-      'KOOWWWWWWWWWWOOK',
-      'KKwWWWWWWWWWWwKK',
-      'KKKKKKKKKKKKKKKK',
-      'KN..N......N..NK',
-      'KN..N......N..NK',
-      'KKKKKKKKKKKKKKKK',
-      'KKKKKKKKKKKKKKKK'
-    ];
-    const dock_post = [
-      '.....KKKK.......',
-      '.....KxDdK......',
-      '.....KxNdK......',
-      '.....KxDdK......',
-      '.....KxDdK......',
-      '.....KxDdK......',
-      '.....KxDdK......',
-      '.....KxDdK......',
-      '.....KxDdK......',
-      '.....KxDdK......',
-      '.....KxNdK......',
-      '.....KxDdK......',
-      '.....KxDdK......',
-      '.....KxDdK......',
-      '.....KxDdK......',
-      '.....KKKK.......'
-    ];
     const bobber = [
       '.....KKKKKK.....',
       '....KKRRRRKK....',
@@ -3310,11 +2625,7 @@ class PixelArtRenderer {
       'KK..............'
     ];
 
-    this.createTexture(scene, 'dock_plank', dock_plank, P);
-    this.createTexture(scene, 'dock_post', dock_post, P);
-    this.createTexture(scene, 'fishing_dock', dock_plank, P);
     this.createTexture(scene, 'fishing_bobber', bobber, P);
-    this.createTexture(scene, 'fishing_rod', rod, P);
   }
 
   // 5. Arcade Scene Textures
