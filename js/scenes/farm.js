@@ -795,45 +795,6 @@ class FarmScene extends Phaser.Scene {
     ], PORTAL_PALETTE, 0, 0, PS);
     gport.generateTexture('dungeon_portal', 20*PS, 28*PS); gport.destroy();
 
-    // Wooden Fishing Rowboat texture 28x18 (top-down, detailed)
-    const BOAT_PALETTE = {
-      '.': null,
-      'K': 0x0F172A, // Dark outline
-      'H': 0xE8C992, // Hull highlight (sunlit plank)
-      'h': 0xD99B66, // Hull warm mid
-      'W': 0xB3713D, // Hull base wood
-      'w': 0x8F5428, // Hull dark grain
-      'D': 0x573012, // Deep shadow / keel
-      'R': 0xC7C1BD, // Rope / oarlock metal light
-      'r': 0x9E9793, // Rope shadow / metal dark
-      'B': 0x7D7571, // Bucket body
-      'b': 0x4A4440, // Bucket shadow
-      'S': 0xFDE047, // Seat cushion highlight
-      's': 0xD97706, // Seat cushion shade
-      'N': 0x475569, // Oarlock / nail metal
-    };
-    const gdock = mk();
-    PixelArtRenderer.drawMatrix(gdock, [
-      '............KKKK............',  // row 0  — bow tip
-      '..........KKhhhWKK..........',  // row 1  — bow curve
-      '.........KHhRRhWwK..........',  // row 2  — bow + rope coil
-      'K.......KHhhRRhhWwK.........',  // row 3  — bow interior + rope
-      'KNK....KHhhhhhhhWwwK......K.',  // row 4  — left oar + hull
-      'KHHK..KHhhhhhhhhhWwwK..KHHK.',  // row 5  — oar blade L + hull expand + oar blade R
-      '.KK..KHhhwhhhhhhwhhWwK..KK..',  // row 6  — oar shafts + hull with grain
-      '.....KHhhwhSSSShwhhWwK.....',  // row 7  — hull + front bench seat
-      '....KHhhhwsSSSSswhhWwK.....',  // row 8  — hull + seat shadow
-      '....KHhhhhhhhhhhhhhWwK.....',  // row 9  — hull mid open
-      '....KHhhwhhhhhhhwhhWwK.....',  // row 10 — hull with grain
-      '.....KHhhwSSSShwhhWwK......',  // row 11 — hull + rear bench seat
-      '.....KHhhwsSSsswhhWwK......',  // row 12 — hull + seat shadow
-      '......KHhhhBbhhhhWwK.......',  // row 13 — stern + bait bucket
-      '.......KHhBKKbhhWwK........',  // row 14 — bucket detail
-      '........KWhhhhWwK..........',  // row 15 — stern narrowing
-      '.........KKWwWKK...........',  // row 16 — stern curve
-      '..........KKKK..............',  // row 17 — stern tip
-    ], BOAT_PALETTE, 0, 0, PS);
-    gdock.generateTexture('fishing_dock', 28*PS, 18*PS); gdock.destroy();
 
     // Arcade Machine texture 16x22
     const ga = mk();
@@ -863,10 +824,6 @@ class FarmScene extends Phaser.Scene {
     ], Object.assign({}, DECOR_PALETTE, { E: 0xA5F3FC, Y: 0xFDE047 }), 0, 0, PS);
     ga.generateTexture('arcade_machine', 16*PS, 22*PS); ga.destroy();
 
-    // Wizard NPC texture 16x20
-    const gwiz = mk();
-    PixelArtRenderer.drawMatrix(gwiz, PixelArtRenderer.WIZ_0, PixelArtRenderer.W_PAL, 0, 0, PS);
-    gwiz.generateTexture('wizard_npc', 16*PS, 20*PS); gwiz.destroy();
 
 
     // Crops (5 types × 3 stages) — unique silhouettes, 12×20, match CROP_ICONS.
@@ -920,51 +877,12 @@ class FarmScene extends Phaser.Scene {
       });
     });
 
-    // ── GINGER TABBY CAT NPC (12×16 pixels) ─────────────────────────────────
-    const GC=()=>this.make.graphics({add:false});
-    const gc2=GC();
-    const GO=0xEE7B28, GD=0x9E3B0E, GL=0xFBAE68;
-    const WH2=0xFFFFFF, EY=0x55C655, PU=0x0F172A;
-    const PK2=0xFFB3C1;
-    const pr2=(x,y,w,h,c)=>pR(gc2,x,y,w,h,c);
-    // Ginger body
-    pr2(1,8,10,8,GO);
-    // White belly/chest
-    pr2(3,9,6,7,WH2); pr2(3,8,6,1,WH2);
-    // Dark tabby flank stripes
-    pr2(1,9,1,6,GD); pr2(10,9,1,6,GD);
-    pr2(2,11,1,1,GD); pr2(9,11,1,1,GD);
-    pr2(2,13,1,1,GD); pr2(9,13,1,1,GD);
-    // White front-paw socks
-    pr2(2,14,2,2,WH2); pr2(8,14,2,2,WH2);
-    pr2(2,15,1,1,PK2); pr2(3,15,1,1,PK2); pr2(8,15,1,1,PK2); pr2(9,15,1,1,PK2);
-    // Ginger head
-    pr2(1,2,10,6,GO);
-    // White muzzle / chin blaze
-    pr2(3,5,6,3,WH2);
-    // M-mark forehead stripes
-    pr2(3,2,2,2,GD); pr2(7,2,2,2,GD); pr2(5,2,2,1,GO); pr2(5,3,2,2,GD);
-    // Amber eyes (big round)
-    pr2(2,4,3,2,EY); pr2(7,4,3,2,EY);
-    pr2(3,4,1,2,PU); pr2(8,4,1,2,PU); // pupils
-    pr2(2,3,3,1,PU); pr2(7,3,3,1,PU); // eyelash outline
-    // Pink nose
-    pr2(5,6,2,1,PK2);
-    // Whisker accent
-    pr2(1,6,1,1,GL); pr2(10,6,1,1,GL);
-    // Airplane ears (spread sideways flat)
-    pr2(0,0,2,2,GO); pr2(10,0,2,2,GO);
-    pr2(0,2,2,1,GD); pr2(10,2,2,1,GD); // ear tip stripe
-    pr2(0,1,1,1,PK2); pr2(11,1,1,1,PK2); // inner ear pink
-    // Tail (curling to right)
-    pr2(11,10,2,1,GO); pr2(12,9,1,2,GO); pr2(12,8,1,1,GL); pr2(11,8,1,1,GD);
-    gc2.generateTexture('cat_npc',13*PS,16*PS); gc2.destroy();
 
     // Force nearest-neighbor filtering on all procedural textures
     ['apple_tree', 'apple_tree_ripe', 'drt_dry', 'drt_wet', 'path_stone', 'flw_red', 'flw_yellow', 'flw_purple',
      'bf_open', 'bf_flap', 'stone_well', 'pixel_barrel', 'pixel_crate', 'signpost', 'tree', 'fnc_post', 'fnc_rail',
-     'sparkle', 'coin', 'shop_sign', 'notice_board', 'dungeon_portal', 'fishing_dock', 'arcade_machine', 'wizard_npc',
-     'cat_npc'].forEach(k => {
+     'sparkle', 'coin', 'shop_sign', 'notice_board', 'dungeon_portal',
+     'arcade_machine'].forEach(k => {
        const t = this.textures.get(k);
        if (t && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
          t.setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -976,12 +894,6 @@ class FarmScene extends Phaser.Scene {
         t.setFilter(Phaser.Textures.FilterMode.NEAREST);
       }
     });
-    for (let fr = 0; fr < 4; fr++) {
-      const t = this.textures.get('farmer' + fr);
-      if (t && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
-        t.setFilter(Phaser.Textures.FilterMode.NEAREST);
-      }
-    }
     CC.forEach((_, tIdx) => {
       for (let s = 1; s <= 3; s++) {
         const t = this.textures.get(`cr_${tIdx}_${s}`);
