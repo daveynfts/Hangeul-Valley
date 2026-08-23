@@ -35,9 +35,7 @@ jobs:
       # no-op; if this produces a diff, either someone edited the artifact directly or the
       # generator and the committed output have drifted apart.
       - name: facts.json is reproducible from its generator
-        run: |
-          node scripts/build_facts_json.js
-          git diff --exit-code -- facts.json
+        run: npm run verify:facts
 
       - name: Game suites (SRS, shop, sprites, inventory, cooking)
         run: npm test

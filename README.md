@@ -534,14 +534,18 @@ repo root, after `npm ci` in `admin/`:
 
 ```bash
 npm run validate     # data invariants — the content gate
+npm run verify:facts # facts.json still reproduces from its generator
 npm test             # SRS, shop, sprite matrices, inventory, cooking, farm hero
 npm run test:admin   # admin API, sync, frontend, edge cases
 # or: npm run test:all
 ```
 
-CI also re-runs `scripts/build_facts_json.js` and fails if that produces a diff. `facts.json`
-is a generated artifact, and the only way to notice someone hand-editing it — which the file's
-own header forbids — is to check that the generator still reproduces it exactly.
+CI runs `npm run verify:facts`, which regenerates `facts.json` and fails if the result differs
+from what was committed. `facts.json` is a generated artifact, and the only way to notice
+someone hand-editing it — which the file’s own header forbids — is to check that the generator
+still reproduces it exactly. The check reads the file before regenerating rather than diffing
+afterwards, so an uncommitted hand-edit is reported instead of being silently repaired — which
+is how one reached `main` once.
 
 Every suite exits non-zero on failure, which is what makes any of this a gate rather than
 decoration. That was not free: `test_m2_harness.js` printed `FINAL VERIFICATION RESULT: FAIL`
