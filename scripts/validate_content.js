@@ -444,8 +444,21 @@ const overlayIds = [
     /function isUnit11World\(\)[\s\S]{0,180}worldId === '2b-unit-11'/.test(gameJs));
   check('Unit 11 is the basic farm plus the desk and the cassette player',
     /'2b-unit-11': \{ extras: \[\], stations: \['desk', 'cassette'\] \}/.test(gameJs));
+  // Membership of the desk-only art branch, not the whole condition. Pinning the
+  // literal `'2b-unit-11' || '2b-unit-14'` failed the moment Unit 13 joined that same
+  // branch — a correct edit breaking a check about a different unit. What matters is
+  // that Unit 11 is in the branch that loads only the desk; which other units share
+  // it is their business, and the driven test in tests/test_unit11_world.js is what
+  // actually asserts the resulting list has one entry.
+  // Matching on "starts with study_desk_hd" is not enough — the Unit 10 branch does
+  // too, and being the first match it is what exec returns. The branch wanted is the
+  // one whose returned list holds exactly one texture.
+  const branches = [...gameJs.matchAll(/if \((id === '2b-unit-[0-9]+'(?: \|\| id === '2b-unit-[0-9]+')*)\) \{\s*return \[([\s\S]*?)\];/g)];
+  const deskOnly = branches.filter((m) => (m[2].match(/\{ key:/g) || []).length === 1
+    && m[2].indexOf("'study_desk_hd'") >= 0);
   check('Unit 11 loads the study desk art and nothing else',
-    /if \(id === '2b-unit-11' \|\| id === '2b-unit-14'\)/.test(gameJs));
+    deskOnly.some((m) => m[1].indexOf("'2b-unit-11'") >= 0),
+    branches.length + ' art branches, ' + deskOnly.length + ' desk-only');
   // Without this line the desk on Unit 11 opens Unit 10's dish quiz, which reads as
   // working software right up to the first question.
   check('desk quiz url resolves Unit 11 to its own bank',
@@ -584,6 +597,87 @@ const overlayIds = [
     absent.length === 0, absent.slice(0, 6).join(', '));
   check('the cassette content file itself publishes too',
     batch.has('worlds/unit11-cassette.json'));
+}());
+
+// ── 2B Unit 13 (주변이 조용해서 살기 좋아요) ─────────────────────────────────
+// Same shape as Unit 11: the whole-chapter word list, the desk, and the cassette
+// player with the book's own recordings behind it.
+(function checkUnit13World() {
+  const rel = path.join('worlds', '2b-unit-13.json');
+  if (!check(`${rel} exists`, fs.existsSync(path.join(ROOT, rel)))) return;
+  let world;
+  try { world = JSON.parse(read(rel)); } catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('2B Unit 13 has an id and a level',
+    !!(world.id === '2b-unit-13' && world.level && Array.isArray(world.level.words)));
+  const ww = world.level.words || [];
+  const missing = ww.filter((w) => !w.ko || !w.en || !w.category || !w.categoryEn).map((w) => w.ko || '?');
+  check('2B Unit 13 words have ko / en / category / categoryEn', missing.length === 0, missing.slice(0, 5).join(', '));
+  check('2B Unit 13 carries the whole-unit word list', ww.length === 104, `found ${ww.length}`);
+  const noHint = ww.filter((w) => !w.hint).map((w) => w.ko);
+  check('every Unit 13 word renders as a hint emoji until its icon is drawn',
+    noHint.length === 0, noHint.slice(0, 8).join(', '));
+  const want = ['주거', '집 조건', '생활비', '부동산', '문법과 표현', '읽고 쓰기', '과제', '문화와 발음'];
+  const cats = new Set(ww.map((w) => w.category));
+  check('2B Unit 13 has eight vocab groups, one per textbook section',
+    want.length === cats.size && want.every((c) => cats.has(c)), [...cats].join(', '));
+  const dups = ww.map((w) => w.ko).filter((k, i, a) => a.indexOf(k) !== i);
+  check('2B Unit 13 has no repeated headword', dups.length === 0, dups.join(', '));
+  // Three neighbours now, and the SRS state is keyed by the Korean, so one word in two
+  // farms means one review schedule shared between them with nothing saying so.
+  ['2b-unit-10', '2b-unit-11', '2b-unit-14'].forEach((other) => {
+    const owned = new Set((JSON.parse(read(path.join('worlds', other + '.json'))).level.words || []).map((w) => w.ko));
+    const shared = ww.map((w) => w.ko).filter((ko) => owned.has(ko));
+    check(`2B Unit 13 shares no headword with ${other}`, shared.length === 0, shared.join(', '));
+  });
+}());
+
+(function checkUnit13Wiring() {
+  const gameJs = readGameSource();
+  check('textbook load path lists Unit 13 JSON', gameJs.indexOf('worlds/2b-unit-13.json') >= 0);
+  check('farm preload cache key world-2b-13', gameJs.indexOf('world-2b-13') >= 0);
+  check('isUnit13World is declared and Unit-13-only',
+    /function isUnit13World\(\)[\s\S]{0,180}worldId === '2b-unit-13'/.test(gameJs));
+  check('Unit 13 is the basic farm plus the desk and the cassette player',
+    /'2b-unit-13': \{ extras: \[\], stations: \['desk', 'cassette'\] \}/.test(gameJs));
+  check('desk quiz url resolves Unit 13 to its own bank',
+    /isUnit13World\(\)\) return '\/worlds\/unit13-desk-quiz\.json'/.test(gameJs));
+  check('cassette url resolves Unit 13 to its own bank',
+    /isUnit13World\(\)\) return '\/worlds\/unit13-cassette\.json'/.test(gameJs));
+  const ttsSrc = read(path.join('scripts', 'ttsClips.js'));
+  check('TTS harvest covers Unit 13',
+    ttsSrc.indexOf('worlds/2b-unit-13.json') >= 0 && ttsSrc.indexOf('worlds/unit13-desk-quiz.json') >= 0);
+}());
+
+(function checkUnit13Cassette() {
+  const rel = path.join('worlds', 'unit13-cassette.json');
+  if (!check(`${rel} exists`, fs.existsSync(path.join(ROOT, rel)))) return;
+  const c = JSON.parse(read(rel));
+  check('cassette content belongs to Unit 13', c.unit === '2b-unit-13', String(c.unit));
+  const tracks = c.tracks || [];
+  check('all ten Unit 13 tracks are listed', tracks.length === 10, `found ${tracks.length}`);
+  check('the tracks are 32 through 41',
+    tracks.map((t) => t.n).join(',') === '32,33,34,35,36,37,38,39,40,41', tracks.map((t) => t.n).join(','));
+  const noFile = tracks.filter((t) => !fs.existsSync(path.join(ROOT, t.src || ''))).map((t) => t.n);
+  check('every Unit 13 track has its mp3 on disk', noFile.length === 0, 'missing for ' + noFile.join(','));
+  const silent = tracks.filter((t) => !Array.isArray(t.lines));
+  check('the two listen-only tracks are 38 and 39',
+    silent.map((t) => t.n).join(',') === '38,39', silent.map((t) => t.n).join(','));
+  check('and each says why it has no script', silent.every((t) => !!t.noteEn));
+  const items = (c.dictation && c.dictation.items) || [];
+  check('37 dictation sentences', items.length === 37, `found ${items.length}`);
+  const bad = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length || !i.audio || !i.audio.src).map((i) => i.id);
+  check('every Unit 13 sentence is complete', bad.length === 0, 'id ' + bad.join(','));
+  const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);
+  check('every Unit 13 dictation clip is on disk', clipMiss.length === 0, clipMiss.slice(0, 5).join(', '));
+  const scripted = new Set(tracks.filter((t) => Array.isArray(t.lines)).map((t) => t.n));
+  check('no Unit 13 sentence comes from a listen-only track', items.every((i) => scripted.has(i.track)));
+  const syl = (t) => [...String(t).normalize('NFC')].filter((ch) => ch >= '가' && ch <= '힣').length;
+  const off = items.filter((i) => syl(i.ko) !== i.syl || syl(i.ko) < 5 || syl(i.ko) > 22).map((i) => i.id);
+  check('every Unit 13 sentence is 5-22 syllables and says so truthfully', off.length === 0, 'id ' + off.join(','));
+  // The unit's 발음 page is 유기음화, so the set should lean on it — that is the point of
+  // choosing these sentences rather than any others.
+  const asp = items.filter((i) => (i.tags || []).indexOf('유기음화') >= 0).length;
+  check('the set leans on this unit’s own aspiration rule', asp >= 8, asp + ' of ' + items.length);
 }());
 
 // ── Unit 10 desk quiz ────────────────────────────────────────────────────────

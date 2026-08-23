@@ -7,6 +7,7 @@ class FarmScene extends Phaser.Scene {
     this.load.json('levels','levels.json');
     this.load.json('world-2b-10','worlds/2b-unit-10.json');
     this.load.json('world-2b-11','worlds/2b-unit-11.json');
+    this.load.json('world-2b-13','worlds/2b-unit-13.json');
     this.load.json('world-2b-14','worlds/2b-unit-14.json');
     this.load.json('unit10-layout','worlds/unit10-layout.json?v=southband');
     this.load.json('skin-catalog', 'skins/catalog.json?v=' + SKIN_CATALOG_BOOT_V);
@@ -52,6 +53,7 @@ class FarmScene extends Phaser.Scene {
     levelsData = this.cache.json.get('levels') || [];
     if (this.cache.json.exists('world-2b-10')) attachTextbookWorld(this.cache.json.get('world-2b-10'));
     if (this.cache.json.exists('world-2b-11')) attachTextbookWorld(this.cache.json.get('world-2b-11'));
+    if (this.cache.json.exists('world-2b-13')) attachTextbookWorld(this.cache.json.get('world-2b-13'));
     if (this.cache.json.exists('world-2b-14')) attachTextbookWorld(this.cache.json.get('world-2b-14'));
     applyDebugSkinQuery();
     if(!levelsData.length){
@@ -2545,18 +2547,21 @@ class FarmScene extends Phaser.Scene {
   _isUnit11(){
     return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-11';
   }
+  _isUnit13(){
+    return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-13';
+  }
   _isUnit14(){
     return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-14';
   }
   _hasStudyDesk(){
     return typeof worldPackHas === 'function'
       ? worldPackHas(null, 'station', 'desk')
-      : (this._isUnit10() || this._isUnit11() || this._isUnit14());
+      : (this._isUnit10() || this._isUnit11() || this._isUnit13() || this._isUnit14());
   }
   _isTextbookFarm(){
     if (typeof isTextbookFarmWorld === 'function') return isTextbookFarmWorld();
     const id = currentLesson() && currentLesson().worldId;
-    return id === '2b-unit-10' || id === '2b-unit-11' || id === '2b-unit-14';
+    return id === '2b-unit-10' || id === '2b-unit-11' || id === '2b-unit-13' || id === '2b-unit-14';
   }
   _propTex(hdKey, fallback) {
     if (hdKey && this.textures && this.textures.exists(hdKey)) return hdKey;

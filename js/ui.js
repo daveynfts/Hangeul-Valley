@@ -2012,6 +2012,7 @@ const QUIZ_ART_FOLDER = 'quiz';
 function deskQuizUrl() {
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-desk-quiz.json';
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-desk-quiz.json';
+  if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-desk-quiz.json';
   return '/worlds/unit10-desk-quiz.json';
 }
 
@@ -2289,6 +2290,7 @@ let cassetteMenuIndex = 0;
 
 function cassetteUrl() {
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-cassette.json';
+  if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-cassette.json';
   return null;
 }
 
@@ -2431,8 +2433,13 @@ function openListen() {
     if (!bank) return;
     // Opens on the pharmacy dialogue rather than track 12: it is the unit's first
     // real conversation, and a two-line grammar box is a thin thing to land on.
+    // Opens on the unit's first real conversation rather than on a two-line grammar
+    // box, which is a thin thing to land on. Named per unit because the track numbers
+    // are the book's, not ours.
     const tracks = bank.tracks || [];
-    const start = tracks.findIndex((t) => t.n === 14);
+    const OPEN_ON = { '2b-unit-11': 14, '2b-unit-13': 34 };
+    const want = OPEN_ON[bank.unit];
+    const start = tracks.findIndex((t) => t.n === want);
     listenState = { i: start >= 0 ? start : 0, rate: 1 };
     renderListen();
     setModalState('listen-overlay', true);
