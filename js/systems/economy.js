@@ -16,6 +16,9 @@ function isWorldLevel(lvl) {
 function isUnit10World() {
   return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-10';
 }
+function isUnit11World() {
+  return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-11';
+}
 function isUnit14World() {
   return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-14';
 }
@@ -27,6 +30,7 @@ const VALLEY_EXTRA_IDS = ['shop', 'board', 'arcade', 'wizard', 'cat', 'beehive',
 const WORLD_PACKS = {
   valley: { extras: ['shop', 'board', 'arcade', 'cat', 'beehive', 'portal', 'fishing'], stations: [] },
   '2b-unit-10': { extras: [], stations: ['desk', 'kitchen', 'taste'] },
+  '2b-unit-11': { extras: [], stations: ['desk'] },
   '2b-unit-14': { extras: [], stations: ['desk'] }
 };
 function worldPackIdForLesson(lvl) {
@@ -57,7 +61,7 @@ function artLoadForWorldPack(id) {
       { key: 'unit10_taste_stall_hd', file: 'stalls/korean_street_food_stall.png' }
     ];
   }
-  if (id === '2b-unit-14') {
+  if (id === '2b-unit-11' || id === '2b-unit-14') {
     return [
       { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' }
     ];
@@ -66,6 +70,7 @@ function artLoadForWorldPack(id) {
 }
 const TEXTBOOK_WORLD_FILES = [
   { cache: 'world-2b-10', file: 'worlds/2b-unit-10.json' },
+  { cache: 'world-2b-11', file: 'worlds/2b-unit-11.json' },
   { cache: 'world-2b-14', file: 'worlds/2b-unit-14.json' }
 ];
 const UNIT10_LAYOUT_DEFAULT = {

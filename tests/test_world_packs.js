@@ -15,6 +15,7 @@ const ROOT = path.join(__dirname, '..');
 const econ = fs.readFileSync(path.join(ROOT, 'js', 'systems', 'economy.js'), 'utf8');
 const farm = fs.readFileSync(path.join(ROOT, 'js', 'scenes', 'farm.js'), 'utf8');
 const unit10 = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-10.json'), 'utf8'));
+const unit11 = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-11.json'), 'utf8'));
 const unit14 = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-14.json'), 'utf8'));
 
 let passed = 0;
@@ -33,7 +34,8 @@ const ctx = {
   levelsData: [
     { nameEn: 'Daily Life' },
     { worldId: '2b-unit-10', map: unit10.level.map },
-    { worldId: '2b-unit-14', map: unit14.level.map }
+    { worldId: '2b-unit-14', map: unit14.level.map },
+    { worldId: '2b-unit-11', map: unit11.level.map }
   ],
   currentLevelIndex: 0
 };
@@ -53,6 +55,9 @@ assert(R("WORLD_PACKS['2b-unit-14'].stations").join(',') === 'desk',
   'unit 14 pack is desk only');
 assert(R("WORLD_PACKS['2b-unit-14'].stations").indexOf('kitchen') < 0,
   'unit 14 pack has no kitchen');
+assert(R("WORLD_PACKS['2b-unit-11'].stations").join(',') === 'desk',
+  'unit 11 pack is desk only');
+assert(R("WORLD_PACKS['2b-unit-11'].extras").length === 0, 'unit 11 pack has no valley extras');
 
 ctx.currentLevelIndex = 0;
 assert(R('currentWorldPack().id') === 'valley', 'plain levels resolve to valley');
@@ -64,10 +69,18 @@ ctx.currentLevelIndex = 2;
 assert(R('currentWorldPack().id') === '2b-unit-14', 'unit 14 lesson resolves to unit 14 pack');
 assert(R("worldPackHas(null, 'station', 'desk')") === true, 'unit 14 has desk');
 assert(R("worldPackHas(null, 'station', 'taste')") === false, 'unit 14 has no taste stall');
+ctx.currentLevelIndex = 3;
+assert(R('currentWorldPack().id') === '2b-unit-11', 'unit 11 lesson resolves to unit 11 pack');
+assert(R("worldPackHas(null, 'station', 'desk')") === true, 'unit 11 has desk');
+assert(R("worldPackHas(null, 'station', 'kitchen')") === false, 'unit 11 has no kitchen');
+assert(R("worldPackHas(null, 'extra', 'shop')") === false, 'unit 11 has no shop extra');
 
 const u10art = R("artLoadForWorldPack('2b-unit-10')");
 assert(u10art.some(a => a.key === 'unit10_kitchen_hd'), 'unit 10 art loads kitchen');
 assert(u10art.some(a => a.key === 'study_desk_hd'), 'unit 10 art loads desk');
+const u11art = R("artLoadForWorldPack('2b-unit-11')");
+assert(u11art.some(a => a.key === 'study_desk_hd'), 'unit 11 art loads desk');
+assert(u11art.length === 1, 'unit 11 loads the desk and nothing else');
 const u14art = R("artLoadForWorldPack('2b-unit-14')");
 assert(u14art.some(a => a.key === 'study_desk_hd'), 'unit 14 art loads desk');
 assert(!u14art.some(a => a.key === 'unit10_kitchen_hd'), 'unit 14 does not load kitchen art');
@@ -77,6 +90,8 @@ assert(JSON.stringify(unit10.level.map.stations) === JSON.stringify(['desk', 'ki
   'unit 10 JSON map matches the runtime pack');
 assert(JSON.stringify(unit14.level.map.stations) === JSON.stringify(['desk']),
   'unit 14 JSON map matches the runtime pack');
+assert(JSON.stringify(unit11.level.map.stations) === JSON.stringify(['desk']),
+  'unit 11 JSON map matches the runtime pack');
 
 assert(farm.indexOf('applyWorld') >= 0, 'FarmScene has applyWorld');
 assert(farm.indexOf('_teardownExtra') >= 0, 'FarmScene tears extras down');

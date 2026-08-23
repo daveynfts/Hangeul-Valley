@@ -364,6 +364,8 @@ const overlayIds = [
     gameJs.indexOf('applyWorld') >= 0
     && gameJs.indexOf('_teardownExtra') >= 0
     && !/syncUnit10World\(\)\{[\s\S]{0,400}_setMinigameSpritesVisible/.test(gameJs));
+  check('the desk-only packs are declared as such',
+    /'2b-unit-11': \{ extras: \[\], stations: \['desk'\] \}/.test(gameJs));
   check('study desk spawns on Unit 10 and Unit 14',
     gameJs.indexOf('_hasStudyDesk') >= 0 && gameJs.indexOf('_ensureStudyDesk') >= 0);
   const taste = gameJs.match(/case 'taste':[\s\S]{0,280}openTasteGame/);
@@ -380,6 +382,104 @@ const overlayIds = [
     farmJs.indexOf('[SPACE]') < 0 && farmJs.indexOf('WORLD_CLICK_HINT') >= 0);
   check('cooking recipes still Unit-10-gated',
     /isUnit10World\(\)[\s\S]{0,80}UNIT10_COOKING_RECIPES/.test(gameJs));
+}());
+
+// ── 2B Unit 11 (운동을 좀 해 보는 게 어때요?) ─────────────────────────────────
+// The unit ships as the basic farm plus the study desk: no kitchen, no taste stall,
+// no workbook yet. What it does ship is the whole word list, harvested from every
+// section of the chapter — 어휘, 문법과 표현, 말하기, 듣고 말하기, 읽고 쓰기, 과제,
+// 문화 산책 — so the farm can teach the unit before any minigame exists.
+//
+// No icons are drawn for it. Unit 14's per-word artPending flag is not used here
+// because it means "this one word is the exception"; for Unit 11 every word is
+// waiting, so the guarantee this block enforces is the one that keeps the unit
+// playable meanwhile: a hint emoji on every entry, which vocabIconHtml falls back
+// to when there is no PNG. Add the word→PNG check here when the art lands.
+(function checkUnit11World() {
+  const rel = path.join('worlds', '2b-unit-11.json');
+  const full = path.join(ROOT, rel);
+  if (!check(`${rel} exists`, fs.existsSync(full))) return;
+  let world;
+  try { world = JSON.parse(fs.readFileSync(full, 'utf8')); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('2B Unit 11 has an id and a level',
+    !!(world.id === '2b-unit-11' && world.level && Array.isArray(world.level.words)));
+  const ww = (world.level && world.level.words) || [];
+  const missing = ww.filter((w) => !w.ko || !w.en || !w.category || !w.categoryEn).map((w) => w.ko || '?');
+  check('2B Unit 11 words have ko / en / category / categoryEn', missing.length === 0, missing.slice(0, 5).join(', '));
+  check('2B Unit 11 carries the whole-unit word list', ww.length === 155, `found ${ww.length}`);
+  const noHint = ww.filter((w) => !w.hint).map((w) => w.ko);
+  check('every Unit 11 word renders as a hint emoji until its icon is drawn',
+    noHint.length === 0, noHint.slice(0, 8).join(', '));
+  check('2B Unit 11 declares no artPending exemptions',
+    ww.every((w) => !w.artPending),
+    'the unit is art-pending as a whole; the per-word flag belongs to Unit 14');
+  const cats = new Set(ww.map((w) => w.category));
+  const want = ['증상', '병원', '약', '문법과 표현', '회화', '듣고 말하기', '읽고 쓰기', '문화'];
+  check('2B Unit 11 has eight vocab groups, one per textbook section',
+    want.length === cats.size && want.every((c) => cats.has(c)), [...cats].join(', '));
+  const groups = ((world.notebook && world.notebook.groups) || []).map((g) => g.cat);
+  check('2B Unit 11 notebook groups match the categories in use',
+    want.every((c) => groups.includes(c)) && groups.every((c) => cats.has(c)), groups.join(', '));
+  const dups = ww.map((w) => w.ko).filter((k, i, a) => a.indexOf(k) !== i);
+  check('2B Unit 11 has no repeated headword', dups.length === 0, dups.join(', '));
+  // A word in two units is invisible: it just quietly turns up in the wrong farm, and the
+  // SRS state is keyed by the Korean, so the two farms would share one review schedule.
+  // Where the chapter re-uses a word an earlier unit already owns (고기, 생선, 주말, 처음,
+  // 수영을 하다), the earlier unit keeps it and Unit 11 leaves it out.
+  ['2b-unit-10', '2b-unit-14'].forEach((other) => {
+    const of = path.join(ROOT, 'worlds', other + '.json');
+    if (!fs.existsSync(of)) return;
+    const owned = new Set((JSON.parse(fs.readFileSync(of, 'utf8')).level.words || []).map((w) => w.ko));
+    const shared = ww.map((w) => w.ko).filter((ko) => owned.has(ko));
+    check(`2B Unit 11 shares no headword with ${other}`, shared.length === 0, shared.join(', '));
+  });
+}());
+
+(function checkUnit11FarmAndDesk() {
+  const gameJs = readGameSource();
+  check('textbook load path lists Unit 11 JSON', gameJs.indexOf('worlds/2b-unit-11.json') >= 0);
+  check('farm preload cache key world-2b-11', gameJs.indexOf('world-2b-11') >= 0);
+  check('isUnit11World is declared and Unit-11-only',
+    /function isUnit11World\(\)[\s\S]{0,180}worldId === '2b-unit-11'/.test(gameJs));
+  check('Unit 11 is the basic farm plus the desk',
+    /'2b-unit-11': \{ extras: \[\], stations: \['desk'\] \}/.test(gameJs));
+  check('Unit 11 loads the study desk art and nothing else',
+    /if \(id === '2b-unit-11' \|\| id === '2b-unit-14'\)/.test(gameJs));
+  // Without this line the desk on Unit 11 opens Unit 10's dish quiz, which reads as
+  // working software right up to the first question.
+  check('desk quiz url resolves Unit 11 to its own bank',
+    /isUnit11World\(\)\) return '\/worlds\/unit11-desk-quiz\.json'/.test(gameJs));
+  const ttsSrc = read(path.join('scripts', 'ttsClips.js'));
+  check('TTS harvest covers the Unit 11 word list and desk quiz',
+    ttsSrc.indexOf('worlds/2b-unit-11.json') >= 0 && ttsSrc.indexOf('worlds/unit11-desk-quiz.json') >= 0);
+}());
+
+(function checkUnit11DeskQuiz() {
+  const rel = path.join('worlds', 'unit11-desk-quiz.json');
+  const full = path.join(ROOT, rel);
+  if (!check(`${rel} exists`, fs.existsSync(full))) return;
+  let bank;
+  try { bank = JSON.parse(fs.readFileSync(full, 'utf8')); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  const qs = (bank && bank.questions) || [];
+  check('Unit 11 desk quiz has 13 questions', qs.length === 13, `found ${qs.length}`);
+  check('Unit 11 desk quiz plays 10 of them', bank.sessionSize === 10, String(bank.sessionSize));
+  const ids = new Set();
+  const bad = [];
+  qs.forEach((q, i) => {
+    if (!q || typeof q.id !== 'number') bad.push(`q${i} missing id`);
+    else if (ids.has(q.id)) bad.push(`duplicate id ${q.id}`);
+    else ids.add(q.id);
+    if (!q.q) bad.push(`q${q && q.id} has no prompt`);
+    const keys = Object.keys((q && q.choices) || {}).sort().join('');
+    if (keys !== 'ABCD') bad.push(`q${q && q.id} choices are ${keys || 'missing'}`);
+    if (!q || !q.choices || !q.choices[q.a]) bad.push(`q${q && q.id} answer ${q && q.a} is not a choice`);
+    // The illustrations come later; a row must not name a PNG that is not there,
+    // because the overlay would paint a broken image rather than fall back.
+    if (q && q.art) bad.push(`q${q.id} names art ${q.art} before any is drawn`);
+  });
+  check('Unit 11 desk quiz rows are complete and art-free', bad.length === 0, bad.slice(0, 6).join(', '));
 }());
 
 // ── Unit 10 desk quiz ────────────────────────────────────────────────────────
