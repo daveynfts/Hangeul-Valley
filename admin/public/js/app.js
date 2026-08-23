@@ -150,7 +150,6 @@ window.apiFetch = async function(endpoint, options = {}) {
 // Helper API functions
 window.apiFetch.getStats = () => window.apiFetch('/api/stats');
 window.apiFetch.getLevels = () => window.apiFetch('/api/levels');
-window.apiFetch.getLevel = (num) => window.apiFetch(`/api/levels/${num}`);
 window.apiFetch.updateLevelMeta = (num, metaData) => window.apiFetch(`/api/levels/${num}`, { method: 'PUT', body: metaData });
 window.apiFetch.addWord = (num, wordData) => window.apiFetch(`/api/levels/${num}/words`, { method: 'POST', body: wordData });
 window.apiFetch.updateWord = (num, wordIdx, wordData) => window.apiFetch(`/api/levels/${num}/words/${wordIdx}`, { method: 'PUT', body: wordData });
@@ -166,7 +165,6 @@ window.apiFetch.saveWorkbook = (unit, body) =>
   window.apiFetch('/api/workbook/' + encodeURIComponent(unit), { method: 'PUT', body });
 window.apiFetch.getUnit10World = () => window.apiFetch('/api/unit10/world');
 window.apiFetch.saveUnit10World = (body) => window.apiFetch('/api/unit10/world', { method: 'PUT', body });
-window.apiFetch.addVocabFact = (factData) => window.apiFetch('/api/vocab-facts', { method: 'POST', body: factData });
 window.apiFetch.sync = () => window.apiFetch('/api/sync', { method: 'POST' });
 window.apiFetch.getArt = () => window.apiFetch('/api/art');
 window.apiFetch.getSkinCatalog = () => window.apiFetch('/api/skins/catalog');

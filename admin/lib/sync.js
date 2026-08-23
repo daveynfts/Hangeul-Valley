@@ -111,17 +111,12 @@ function validateGameScripts(rootDir) {
   return { success: true, files: rels };
 }
 
-function syncGameJs() {
-  throw new Error('game.js is split; Sync syntax-checks js/* via validateGameScripts() and does not rewrite scripts.');
-}
-
+// Sync syntax-checks js/* via validateGameScripts() and does not rewrite scripts;
+// game.js was split into js/* and is asserted gone by validate_content.js.
 module.exports = {
   getPaths,
   validateJsSyntax,
   getGameScriptPaths,
   validateGameScripts,
-  syncLevels,
-  syncGameJs,
-  saveAndSyncLevels: syncLevels,
-  saveAndSyncGameJs: syncGameJs
+  syncLevels
 };

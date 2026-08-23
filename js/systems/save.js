@@ -270,7 +270,7 @@ var recipeState = {
   unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap', 'honey_yakgwa', 'honey_tea']
 };
 var activeBuffs = {};
-let leaderboardState = { personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 } };
+let leaderboardState = { personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, totalWordsMastered: 0 } };
 var cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
 
 function syncGoldAlias() {
@@ -380,7 +380,7 @@ function migrateSaveData(d) {
     data.gold = data.currencies.coins;
     data.quests = data.quests || {
       mainStep: 1,
-      mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0, duels: 0 },
+      mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0 },
       mainCompleted: [],
       daily: [],
       weekly: [],
@@ -395,7 +395,7 @@ function migrateSaveData(d) {
     data.recipes = data.recipes || { unlockedRecipes: ['kimchi', 'bibimbap', 'bulgogi', 'tteokbokki', 'samgyeopsal', 'haemul_pajeon', 'japchae', 'samgyetang', 'gimbap', 'honey_yakgwa', 'honey_tea'] };
     data.activeBuffs = data.activeBuffs || {};
     data.leaderboards = data.leaderboards || {
-      personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, duelMaxWinStreak: 0, totalWordsMastered: 0 }
+      personalBests: { arcadeHighScore: 0, dungeonMaxFloor: 0, totalWordsMastered: 0 }
     };
     data.droppedItems = Array.isArray(data.droppedItems) ? data.droppedItems : [];
     data.v = 4;
@@ -887,7 +887,6 @@ function pushCloudSave(data) {
   return _cloudChain;
 }
 
-function cloudSaveLastError() { return _cloudLastError; }
 // ── Cloud writes end ─────────────────────────────────────────────────────────
 
 async function syncCloudSave() {
@@ -1070,9 +1069,6 @@ if (typeof window !== 'undefined') {
 // Legacy aliases
 function saveSRS()   { persistSave(); }
 function savePlotsFn() { persistSave(); }
-function saveEconomy() { persistSave(); }
-function loadSRS()   {}
-function loadEconomy() {}
 // ── Record access ────────────────────────────────────────────────────────────
 // Reads never create. srsData is serialized into every save, so touching a word to check a
 // badge must not add 1500 empty records to it.
@@ -1132,12 +1128,6 @@ function dueModality(ko, now = Date.now()){
 }
 
 function wordIsDue(ko, now = Date.now()){ return dueModality(ko, now) !== null; }
-
-function wordNextDueAt(ko){
-  const started = startedModalities(ko);
-  if (!started.length) return 0;
-  return Math.min(...started.map(m => srsData[ko].m[m].due || Infinity));
-}
 
 // Record a review outcome. This is the only place the scheduler is advanced.
 // ── Attempt log ──────────────────────────────────────────────────────────────

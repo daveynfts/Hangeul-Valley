@@ -279,17 +279,6 @@ function spendCoins(amount) {
   return false;
 }
 
-function spendGems(amount) {
-  if (playerCurrencies.gems >= amount) {
-    playerCurrencies.gems -= amount;
-    syncGoldAlias();
-    persistSave();
-    updateCurrencyHUD();
-    return true;
-  }
-  return false;
-}
-
 function addGold(amount) {
   addCoins(amount);
 }
@@ -582,7 +571,7 @@ function cookedDishCount() {
 
 let questState = {
   mainStep: 1,
-  mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0, duels: 0 },
+  mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0 },
   mainCompleted: [],
   daily: [],
   weekly: [],
@@ -753,7 +742,7 @@ function initQuestState() {
   if (!questState || typeof questState !== 'object') {
     questState = {
       mainStep: 1,
-      mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0, duels: 0 },
+      mainProgress: { harvests: 0, mastered: 0, kills: 0, fish: 0, score: 0 },
       mainCompleted: [],
       daily: [],
       weekly: [],
@@ -1278,7 +1267,6 @@ function _afterLoad(){
   updateGoldHUD();
   buildLevelSelectScreen();
   if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
-  console.log('[Save] gold='+gold+', levels='+JSON.stringify(unlockedLevels)+', plots='+plotSave.length);
   initGoogleAuth();
 }
 // pywebview fires this event when API is ready; otherwise we init on DOMLoaded.
@@ -1294,6 +1282,6 @@ if(typeof window !== 'undefined' && window.addEventListener){
 }
 let quizOpen=false, currentWord=null, currentPlot=null;
 let playerLocked=false, plantedWords=new Set(); // words currently ON a plot
-let shopOpen=false, catDialogOpen=false, memoryOpen=false, trophyOpen=false, duelOpen=false, fishAlbumOpen=false;
+let shopOpen=false, catDialogOpen=false, memoryOpen=false, trophyOpen=false;
 let appleTreeSave = {}; // { ripeAt, ripe } persisted across sessions
 

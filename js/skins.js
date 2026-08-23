@@ -168,14 +168,8 @@ function skinUsesHd(scene, def, sceneFit) {
   if (hd === mx) return def.art === 'hd';
   return true;
 }
-function farmHdReady(scene) {
-  return !!(scene && scene.textures && scene.textures.exists('farmer_walk_down_0'));
-}
 function farmerHdTextureKey(dir, frame) {
   return 'farmer_walk_' + dir + '_' + frame;
-}
-function farmerHdAnimKey(dir) {
-  return 'farmer-hd-walk-' + dir;
 }
 function skinTextureKey(scene, state, dir, frame, sceneFit) {
   const def = resolvedSkinDef(scene);
