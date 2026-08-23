@@ -76,27 +76,31 @@ if (ffprobe) {
   console.log('      (ffprobe not on this machine — duration and pace checks skipped)');
 }
 
-// ── 2. Listen-only is stated, not implied ────────────────────────────────────
-console.log('\n--- 2. Listen-only tracks say so ---');
+// ── 2. Every track carries a script ──────────────────────────────────────────
+// This used to assert that 18 and 19 were listen-only, because the unit page prints
+// their comprehension questions and not their transcript. The 듣기 지문 at the back of
+// the book prints both, so they are scripted now and the claim is the stronger one.
+console.log('\n--- 2. Every track carries a script ---');
 const scripted = tracks.filter((t) => Array.isArray(t.lines));
-const silent = tracks.filter((t) => !Array.isArray(t.lines));
-assert(scripted.length === 6, 'six tracks carry the script the book prints');
-assert(silent.map((t) => t.n).join(',') === '18,19', 'the two without one are 듣기 1 and 듣기 2');
-assert(silent.every((t) => t.noteEn && t.noteEn.length > 20),
-  'and each says why, so the empty pane reads as a fact rather than a bug');
+assert(scripted.length === tracks.length, 'all ' + tracks.length + ' tracks carry a script');
+assert(tracks.every((t) => !t.noteEn), 'and none needs a note explaining why it has none');
 assert(scripted.every((t) => t.lines.every((l) => l.who && l.ko)), 'every script line has a speaker and Korean');
+const listening = tracks.filter((t) => t.n === 18 || t.n === 19);
+assert(listening.length === 2 && listening.every((t) => t.lines.length >= 11),
+  'the two 듣기 tracks carry their full transcript (' + listening.map((t) => t.lines.length).join(' and ') + ' lines)');
 const u11 = new Set((readJson('worlds/2b-unit-11.json').level.words || []).map((w) => nfc(w.ko)));
 const scriptText = nfc(scripted.map((t) => t.lines.map((l) => l.ko).join(' ')).join(' '));
-// A floor, not a target. 17 Unit 11 headwords are spoken in these six scripts as it
-// stands; Unit 10's list scores 1 against the same text and Unit 14's scores 0, so 15
-// is comfortably below the truth and still catches the failure this is for — scripts
-// swapped for another unit's, which reads as perfectly good Korean.
+// A floor, not a target. 23 Unit 11 headwords are spoken across these eight scripts —
+// it was 17 before the 듣기 지문 added the two listening transcripts. Unit 10's list
+// scores 2 against the same text and Unit 14's scores 0, so 18 sits comfortably below
+// the truth and still catches the failure this is for: scripts swapped for another
+// unit's, which reads as perfectly good Korean.
 const heard = [...u11].filter((w) => w.length > 1 && scriptText.indexOf(w) >= 0);
-assert(heard.length >= 15, 'the scripts speak the unit’s own vocabulary (' + heard.length + ' headwords)');
+assert(heard.length >= 18, 'the scripts speak the unit’s own vocabulary (' + heard.length + ' headwords)');
 
 // ── 3. The curated set ───────────────────────────────────────────────────────
 console.log('\n--- 3. The curated set ---');
-assert(items.length === 25, '25 sentences (' + items.length + ')');
+assert(items.length === 46, '46 sentences (' + items.length + ')');
 const ids = items.map((i) => i.id);
 assert(new Set(ids).size === ids.length && ids.every((v, k) => v === k + 1), 'ids are unique and sequential');
 const incomplete = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length || !i.audio).map((i) => i.id);
@@ -111,11 +115,15 @@ assert(stated.length === 0, 'each stated syllable count is the one its Korean ac
 // Dictation is checked against this string, so it must be Korean the clip really
 // says — which a track with no printed script cannot supply.
 const scriptedNs = new Set(scripted.map((t) => t.n));
-assert(items.every((i) => scriptedNs.has(i.track)), 'no sentence is drawn from a listen-only track');
+assert(items.every((i) => scriptedNs.has(i.track)), 'every sentence comes from a track with a script');
+// One per track at least: a set that skipped a track would leave part of the unit's
+// audio undrilled while the count still looked healthy.
+assert(tracks.every((t) => items.some((i) => i.track === t.n)),
+  'and every track contributes at least one');
 // A row shorter than the printed turn has to name the turn, or the change of shape
 // reads as the book printing short lines.
 const splits = items.filter((i) => i.splitFrom);
-assert(splits.length === 4, 'the four rows split from a longer turn are marked (' + splits.length + ')');
+assert(splits.length === 11, 'the eleven rows split from a longer turn are marked (' + splits.length + ')');
 assert(splits.every((i) => nfc(i.splitFrom).replace(/\s/g, '').indexOf(nfc(i.ko).replace(/\s/g, '')) >= 0),
   'and each is genuinely part of the turn it names');
 splits.forEach((i) => {
@@ -158,7 +166,8 @@ if (ffprobe) {
 // two lines are close enough in length that swapping them stays inside the band. What
 // pins those is structure rather than pace — the recording plays the announcement,
 // then A, then B, in the order the book prints, and there is no third possibility.
-const BAND = { 12: [3.0, 5.5], 13: [4.5, 5.8], 14: [3.8, 6.5], 15: [3.8, 6.8], 16: [5.0, 6.0], 17: [4.3, 6.6] };
+const BAND = { 12: [3.0, 5.5], 13: [4.5, 5.8], 14: [3.8, 6.5], 15: [3.8, 6.8], 16: [5.0, 6.0],
+  17: [4.3, 6.6], 18: [3.6, 6.6], 19: [3.6, 6.4] };
 if (ffprobe) {
   const byTrack = {};
   items.forEach((i) => {
@@ -177,7 +186,10 @@ if (ffprobe) {
   });
   // And the check has teeth: move each sentence's text onto the next one's clip
   // within the same track, and the two dialogues must break.
-  [14, 17].forEach((n) => {
+  // 12 and 15 hold two clips each whose lines are close enough in length that a swap
+  // stays in band — the limit named at the top of this file. The four multi-clip tracks
+  // do break, and 18 and 19 are the new ones, cut from the 듣기 지문.
+  [14, 17, 18, 19].forEach((n) => {
     const list = items.filter((i) => i.track === n);
     const [lo, hi] = BAND[n];
     const shifted = list.map((it, k) => syl(list[(k + 1) % list.length].ko) / it.audio.voiced);

@@ -126,10 +126,13 @@ if (ffprobe) {
   console.log('      (ffprobe not on this machine — duration and pace checks skipped)');
 }
 const scripted = tracks.filter((t) => Array.isArray(t.lines));
-const silent = tracks.filter((t) => !Array.isArray(t.lines));
-assert(scripted.length === 8, 'eight tracks carry the script the book prints');
-assert(silent.map((t) => t.n).join(',') === '38,39', 'the two without one are 듣기 1 and 듣기 2');
-assert(silent.every((t) => t.noteEn && t.noteEn.length > 20), 'and each says why');
+// Was: 38 and 39 are listen-only, the unit page printing only their questions. The
+// 듣기 지문 at the back prints their transcripts, so all ten are scripted now.
+assert(scripted.length === tracks.length, 'all ' + tracks.length + ' tracks carry a script');
+assert(tracks.every((t) => !t.noteEn), 'and none needs a note explaining why it has none');
+const listening = tracks.filter((t) => t.n === 38 || t.n === 39);
+assert(listening.length === 2 && listening.every((t) => t.lines.length >= 10),
+  'the two 듣기 tracks carry their full transcript (' + listening.map((t) => t.lines.length).join(' and ') + ' lines)');
 // Tracks 40 and 41 are the 발음 page. Their shape had to be worked out rather than
 // assumed: the short spans between items are the numbers 일/이/삼/사 being read, and
 // each sentence is said once, not twice.
@@ -139,7 +142,7 @@ assert(t41.lines[3].who === 'A' && t41.lines[4].who === 'B', 'and its fourth ite
 
 // ── 3. The curated set ───────────────────────────────────────────────────────
 console.log('\n--- 3. The curated set ---');
-assert(items.length === 37, '37 sentences (' + items.length + ')');
+assert(items.length === 56, '56 sentences (' + items.length + ')');
 const ids = items.map((i) => i.id);
 assert(new Set(ids).size === ids.length && ids.every((v, k) => v === k + 1), 'ids are unique and sequential');
 assert(items.every((i) => i.ko && i.en && i.why && (i.tags || []).length && i.audio && i.audio.src),
@@ -149,7 +152,8 @@ assert(band.length === 0, 'every sentence is 5-22 syllables' + (band.length ? ' 
 const stated = items.filter((i) => syl(i.ko) !== i.syl).map((i) => i.id);
 assert(stated.length === 0, 'each stated syllable count is true' + (stated.length ? ' — id ' + stated.join(',') : ''));
 const scriptedNs = new Set(scripted.map((t) => t.n));
-assert(items.every((i) => scriptedNs.has(i.track)), 'no sentence comes from a listen-only track');
+assert(items.every((i) => scriptedNs.has(i.track)), 'every sentence comes from a track with a script');
+assert(tracks.every((t) => items.some((i) => i.track === t.n)), 'and every track contributes at least one');
 // Every answer must be Korean the narrator really says as a unit: either a printed
 // line verbatim, or a run of one that the recording itself pauses around.
 const notTraced = items.filter((i) => {
@@ -163,7 +167,7 @@ const notTraced = items.filter((i) => {
 }).map((i) => i.id);
 assert(notTraced.length === 0, 'every sentence traces to a printed line'
   + (notTraced.length ? ' — id ' + notTraced.join(',') : ''));
-assert(items.filter((i) => i.splitFrom).length === 17, '17 rows are marked as split from a longer turn');
+assert(items.filter((i) => i.splitFrom).length === 23, '23 rows are marked as split from a longer turn');
 // The filter drops figures read aloud, and this is the row it was written for: 전세는
 // 7,000만 원이고… would have the learner guessing between 7,000 and 칠천.
 assert(!items.some((i) => /[0-9],[0-9]/.test(i.ko)), 'no answer contains a figure read aloud');
@@ -174,7 +178,7 @@ assert(Array.isArray(f.keep) && Array.isArray(f.drop) && !!f.splitAtClause,
 // ── 4. Built on this chapter's own 발음 rule ──────────────────────────────────
 console.log('\n--- 4. Built on 유기음화 ---');
 const asp = items.filter((i) => (i.tags || []).indexOf('유기음화') >= 0);
-assert(asp.length >= 8, 'at least eight rows turn on aspiration (' + asp.length + ' of ' + items.length + ')');
+assert(asp.length >= 12, 'at least twelve rows turn on aspiration (' + asp.length + ' of ' + items.length + ')');
 // The book's own worked examples. If the set does not contain the very words the 발음
 // page prints, it is not built on that page.
 [['축하해요', '추카'], ['깨끗한', '깨끄'], ['입학', '이팍'], ['막혀', '마켜'], ['어떡하죠', '어떠카'], ['밥하고', '바파']]
@@ -208,7 +212,7 @@ assert(new Set(items.map((i) => i.audio.src)).size === items.length, 'no two sen
 // The pace bands, per track. These are the numbers the cut was verified at; a re-cut
 // at the wrong silence threshold or the wrong turn gap lands outside them.
 const BAND = { 32: [4.5, 6.2], 33: [4.0, 5.5], 34: [4.0, 6.2], 35: [4.2, 5.6],
-  36: [3.9, 5.6], 37: [3.9, 6.8], 40: [4.0, 5.6], 41: [3.8, 6.2] };
+  36: [3.9, 5.6], 37: [3.9, 6.8], 38: [3.9, 6.4], 39: [3.9, 6.2], 40: [4.0, 5.6], 41: [3.8, 6.2] };
 const byTrack = {};
 items.forEach((i) => {
   const rate = syl(i.ko) / i.audio.voiced;

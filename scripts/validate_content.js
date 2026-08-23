@@ -518,15 +518,14 @@ const overlayIds = [
   check('every track has its mp3 on disk', noFile.length === 0, 'missing for track ' + noFile.join(','));
   // 18 and 19 are the listening sections: the book prints their questions but not
   // their script. They must stay scriptless AND say why, or the pane reads as a bug.
+  // Was six of eight, 18 and 19 being listen-only. The 듣기 지문 printed at the back of
+  // the book gives those two a transcript, so every track is scripted now.
   const scripted = tracks.filter((t) => Array.isArray(t.lines));
-  check('six tracks carry a script', scripted.length === 6, `found ${scripted.length}`);
-  const silent = tracks.filter((t) => !Array.isArray(t.lines));
-  check('the two listen-only tracks are 18 and 19',
-    silent.map((t) => t.n).join(',') === '18,19', silent.map((t) => t.n).join(','));
-  check('and each says why it has no script', silent.every((t) => !!t.noteEn));
+  check('every Unit 11 track carries a script', scripted.length === tracks.length, `${scripted.length} of ${tracks.length}`);
+  check('so none of them needs a no-script note', tracks.every((t) => !t.noteEn));
 
   const items = (c.dictation && c.dictation.items) || [];
-  check('25 dictation sentences', items.length === 25, `found ${items.length}`);
+  check('46 dictation sentences', items.length === 46, `found ${items.length}`);
   const bad = items.filter((i) => !i.ko || !i.en || !i.why || !i.tags || !i.audio || !i.audio.src).map((i) => i.id);
   check('every sentence has text, gloss, reason, tags and a clip', bad.length === 0, 'id ' + bad.join(','));
   const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);
@@ -550,7 +549,7 @@ const overlayIds = [
   // A split row must name the printed turn it came out of, so the change of shape is
   // visible rather than looking like the book prints short lines.
   const splits = items.filter((i) => i.splitFrom);
-  check('rows split from a longer turn say so', splits.length === 4, `found ${splits.length}`);
+  check('rows split from a longer turn say so', splits.length === 11, `found ${splits.length}`);
   check('and each split row is a substring of the turn it names',
     splits.every((i) => i.splitFrom.replace(/\s/g, '').indexOf(i.ko.replace(/\s/g, '')) >= 0));
 }());
@@ -659,12 +658,11 @@ const overlayIds = [
     tracks.map((t) => t.n).join(',') === '32,33,34,35,36,37,38,39,40,41', tracks.map((t) => t.n).join(','));
   const noFile = tracks.filter((t) => !fs.existsSync(path.join(ROOT, t.src || ''))).map((t) => t.n);
   check('every Unit 13 track has its mp3 on disk', noFile.length === 0, 'missing for ' + noFile.join(','));
-  const silent = tracks.filter((t) => !Array.isArray(t.lines));
-  check('the two listen-only tracks are 38 and 39',
-    silent.map((t) => t.n).join(',') === '38,39', silent.map((t) => t.n).join(','));
-  check('and each says why it has no script', silent.every((t) => !!t.noteEn));
+  check('every Unit 13 track carries a script',
+    tracks.every((t) => Array.isArray(t.lines)), tracks.filter((t) => !t.lines).map((t) => t.n).join(','));
+  check('so none of them needs a no-script note', tracks.every((t) => !t.noteEn));
   const items = (c.dictation && c.dictation.items) || [];
-  check('37 dictation sentences', items.length === 37, `found ${items.length}`);
+  check('56 dictation sentences', items.length === 56, `found ${items.length}`);
   const bad = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length || !i.audio || !i.audio.src).map((i) => i.id);
   check('every Unit 13 sentence is complete', bad.length === 0, 'id ' + bad.join(','));
   const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);
