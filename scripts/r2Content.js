@@ -152,23 +152,30 @@ function collectUploadFiles(root) {
   const { listLocalTtsFiles } = require('./ttsClips');
   listLocalTtsFiles(base).forEach((rel) => addFile(out, seen, rel, 'audio/mpeg'));
 
-  // Every workbook names its own recordings, so the content decides what gets
-  // uploaded rather than a hand-kept list beside it. /audio/* is rewritten to
-  // the CDN, so a clip the content names but the batch omits is a play button
-  // that does nothing on the deployed site — and that failure is silent.
-  listWorkbooks(base).forEach((rel) => {
-    const book = JSON.parse(fs.readFileSync(path.join(base, rel), 'utf8'));
-    const take = (a) => {
-      const src = a && typeof a.src === 'string' ? a.src : '';
-      if (!/^audio\/[A-Za-z0-9._/-]+\.mp3$/.test(src) || src.indexOf('..') >= 0) return;
+  // The content decides what gets uploaded rather than a hand-kept list beside
+  // it. /audio/* is rewritten to the CDN, so a clip the content names but the
+  // batch omits is a play button that does nothing on the deployed site — and
+  // that failure is silent.
+  //
+  // Walked generically over every world file rather than per known shape. It used
+  // to reach only into a workbook's exercises/items/example, which meant the next
+  // feature to name a clip — the Unit 11 cassette, whose file is not a workbook at
+  // all — shipped its audio nowhere. Anything anywhere in a world JSON that looks
+  // like {src: 'audio/….mp3'} is a recording the content is asking for.
+  const takeAudio = (node) => {
+    if (!node || typeof node !== 'object') return;
+    if (Array.isArray(node)) { node.forEach(takeAudio); return; }
+    const src = typeof node.src === 'string' ? node.src : '';
+    if (/^audio\/[A-Za-z0-9._/-]+\.mp3$/.test(src) && src.indexOf('..') < 0) {
       addFile(out, seen, src, 'audio/mpeg');
-    };
-    (book.exercises || []).forEach((ex) => {
-      take(ex.audio);
-      (ex.items || []).forEach((it) => take(it.audio));
-      if (ex.example) take(ex.example.audio);
+    }
+    Object.keys(node).forEach((k) => takeAudio(node[k]));
+  };
+  if (fs.existsSync(worldsDir)) {
+    fs.readdirSync(worldsDir).filter((f) => f.endsWith('.json')).sort().forEach((f) => {
+      takeAudio(JSON.parse(fs.readFileSync(path.join(worldsDir, f), 'utf8')));
     });
-  });
+  }
 
   return out;
 }

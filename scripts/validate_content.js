@@ -364,8 +364,8 @@ const overlayIds = [
     gameJs.indexOf('applyWorld') >= 0
     && gameJs.indexOf('_teardownExtra') >= 0
     && !/syncUnit10World\(\)\{[\s\S]{0,400}_setMinigameSpritesVisible/.test(gameJs));
-  check('the desk-only packs are declared as such',
-    /'2b-unit-11': \{ extras: \[\], stations: \['desk'\] \}/.test(gameJs));
+  check('Unit 14 is the desk-only pack',
+    /'2b-unit-14': \{ extras: \[\], stations: \['desk'\] \}/.test(gameJs));
   check('study desk spawns on Unit 10 and Unit 14',
     gameJs.indexOf('_hasStudyDesk') >= 0 && gameJs.indexOf('_ensureStudyDesk') >= 0);
   const taste = gameJs.match(/case 'taste':[\s\S]{0,280}openTasteGame/);
@@ -442,8 +442,8 @@ const overlayIds = [
   check('farm preload cache key world-2b-11', gameJs.indexOf('world-2b-11') >= 0);
   check('isUnit11World is declared and Unit-11-only',
     /function isUnit11World\(\)[\s\S]{0,180}worldId === '2b-unit-11'/.test(gameJs));
-  check('Unit 11 is the basic farm plus the desk',
-    /'2b-unit-11': \{ extras: \[\], stations: \['desk'\] \}/.test(gameJs));
+  check('Unit 11 is the basic farm plus the desk and the cassette player',
+    /'2b-unit-11': \{ extras: \[\], stations: \['desk', 'cassette'\] \}/.test(gameJs));
   check('Unit 11 loads the study desk art and nothing else',
     /if \(id === '2b-unit-11' \|\| id === '2b-unit-14'\)/.test(gameJs));
   // Without this line the desk on Unit 11 opens Unit 10's dish quiz, which reads as
@@ -480,6 +480,110 @@ const overlayIds = [
     if (q && q.art) bad.push(`q${q.id} names art ${q.art} before any is drawn`);
   });
   check('Unit 11 desk quiz rows are complete and art-free', bad.length === 0, bad.slice(0, 6).join(', '));
+}());
+
+// ── Unit 11 cassette player ──────────────────────────────────────────────────
+// The station plays the textbook's own recordings and runs dictation off them, so
+// what this block guards is the join between three things that are edited apart:
+// the curated sentences, the mp3s cut for them, and the upload batch. A clip the
+// content names but the batch omits is a play button that does nothing on the
+// deployed site, and nothing about it looks broken until you press it.
+(function checkUnit11Cassette() {
+  const rel = path.join('worlds', 'unit11-cassette.json');
+  const full = path.join(ROOT, rel);
+  if (!check(`${rel} exists`, fs.existsSync(full))) return;
+  let c;
+  try { c = JSON.parse(fs.readFileSync(full, 'utf8')); }
+  catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('cassette content belongs to Unit 11', c.unit === '2b-unit-11', String(c.unit));
+
+  const tracks = c.tracks || [];
+  check('all eight Unit 11 tracks are listed', tracks.length === 8, `found ${tracks.length}`);
+  check('the tracks are 12 through 19',
+    tracks.map((t) => t.n).join(',') === '12,13,14,15,16,17,18,19', tracks.map((t) => t.n).join(','));
+  const noFile = tracks.filter((t) => !fs.existsSync(path.join(ROOT, t.src || ''))).map((t) => t.n);
+  check('every track has its mp3 on disk', noFile.length === 0, 'missing for track ' + noFile.join(','));
+  // 18 and 19 are the listening sections: the book prints their questions but not
+  // their script. They must stay scriptless AND say why, or the pane reads as a bug.
+  const scripted = tracks.filter((t) => Array.isArray(t.lines));
+  check('six tracks carry a script', scripted.length === 6, `found ${scripted.length}`);
+  const silent = tracks.filter((t) => !Array.isArray(t.lines));
+  check('the two listen-only tracks are 18 and 19',
+    silent.map((t) => t.n).join(',') === '18,19', silent.map((t) => t.n).join(','));
+  check('and each says why it has no script', silent.every((t) => !!t.noteEn));
+
+  const items = (c.dictation && c.dictation.items) || [];
+  check('25 dictation sentences', items.length === 25, `found ${items.length}`);
+  const bad = items.filter((i) => !i.ko || !i.en || !i.why || !i.tags || !i.audio || !i.audio.src).map((i) => i.id);
+  check('every sentence has text, gloss, reason, tags and a clip', bad.length === 0, 'id ' + bad.join(','));
+  const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);
+  check('every dictation clip is on disk', clipMiss.length === 0, clipMiss.slice(0, 5).join(', '));
+  // Dictation is checked against this string, so it has to be the Korean the clip
+  // actually says. A sentence drawn from a track with no printed script could not be.
+  const scriptedNs = new Set(scripted.map((t) => t.n));
+  const orphan = items.filter((i) => !scriptedNs.has(i.track)).map((i) => i.id);
+  check('no sentence comes from a listen-only track', orphan.length === 0, 'id ' + orphan.join(','));
+  // The filter is content: it is what makes the set defensible rather than arbitrary,
+  // and it is shown on the page.
+  const f = (c.dictation && c.dictation.filter) || {};
+  check('the selection rule ships with the set',
+    Array.isArray(f.keep) && f.keep.length >= 3 && Array.isArray(f.drop) && f.drop.length >= 3);
+  const syl = (t) => [...String(t).normalize('NFC')].filter((ch) => ch >= '가' && ch <= '힣').length;
+  const wrong = items.filter((i) => syl(i.ko) !== i.syl).map((i) => i.id);
+  check('each stated syllable count matches its Korean', wrong.length === 0, 'id ' + wrong.join(','));
+  const outside = items.filter((i) => syl(i.ko) < 5 || syl(i.ko) > 22).map((i) => i.id);
+  check('every sentence sits in the 5-22 syllable band the filter claims',
+    outside.length === 0, 'id ' + outside.join(','));
+  // A split row must name the printed turn it came out of, so the change of shape is
+  // visible rather than looking like the book prints short lines.
+  const splits = items.filter((i) => i.splitFrom);
+  check('rows split from a longer turn say so', splits.length === 4, `found ${splits.length}`);
+  check('and each split row is a substring of the turn it names',
+    splits.every((i) => i.splitFrom.replace(/\s/g, '').indexOf(i.ko.replace(/\s/g, '')) >= 0));
+}());
+
+(function checkUnit11CassetteWiring() {
+  const gameJs = readGameSource();
+  check('the cassette sprite is baked', /createTexture\(this, 'cassette_player'/.test(gameJs));
+  check('the cassette spawns and tears down with the pack',
+    gameJs.indexOf('_ensureCassette') >= 0 && gameJs.indexOf('_teardownCassette') >= 0
+    && /stations\.indexOf\('cassette'\) >= 0/.test(gameJs));
+  check('interacting with it opens the player', /case 'cassette':[\s\S]{0,120}openCassette/.test(gameJs));
+  check('the cassette has a layout slot of its own',
+    /id: 'cassette'[\s\S]{0,120}ox: 300/.test(gameJs));
+  check('the player UI is shipped',
+    gameJs.indexOf('function openCassette') >= 0 && gameJs.indexOf('function renderDictation') >= 0);
+  // Music comes off while any study screen is open; a new one has to join that list
+  // or the score plays over the recording you are trying to hear.
+  check('the cassette screens quiet the score',
+    /STUDY_OVERLAYS = \[[^\]]*cassette-overlay/.test(gameJs));
+  const layout = JSON.parse(read(path.join('worlds', 'unit10-layout.json')));
+  const st = (layout.stations || []).find((x) => x && x.id === 'cassette');
+  check('the shared layout file carries the cassette too', !!st);
+  const spots = {};
+  let clash = '';
+  (layout.stations || []).forEach((x) => {
+    const k = x.ox + ',' + x.oy;
+    if (spots[k]) clash = x.id + ' sits on ' + spots[k];
+    spots[k] = x.id;
+  });
+  check('no two stations share a spot on the farm', !clash, clash);
+}());
+
+(function checkUnit11CassetteUploads() {
+  // The trap this exists for: the collector used to reach only into a workbook's
+  // exercises, so the cassette's clips — named by a file that is not a workbook —
+  // would have been uploaded nowhere while everything on disk looked right.
+  const { collectUploadFiles } = require(path.join(ROOT, 'scripts', 'r2Content.js'));
+  const batch = new Set(collectUploadFiles(ROOT).map((f) => f.rel.replace(/\\/g, '/')));
+  const c = JSON.parse(read(path.join('worlds', 'unit11-cassette.json')));
+  const named = [...(c.tracks || []).map((t) => t.src),
+    ...((c.dictation && c.dictation.items) || []).map((i) => i.audio.src)];
+  const absent = named.filter((s) => !batch.has(s));
+  check(`all ${named.length} cassette recordings are in the upload batch`,
+    absent.length === 0, absent.slice(0, 6).join(', '));
+  check('the cassette content file itself publishes too',
+    batch.has('worlds/unit11-cassette.json'));
 }());
 
 // ── Unit 10 desk quiz ────────────────────────────────────────────────────────

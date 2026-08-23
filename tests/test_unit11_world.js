@@ -69,8 +69,8 @@ console.log('\n--- 2. The map is the basic farm plus the desk ---');
 const map = world.level.map;
 assert(Array.isArray(map.extras) && map.extras.length === 0,
   'no valley extras — no shop, board, arcade, cat, beehive, portal or pond');
-assert(JSON.stringify(map.stations) === JSON.stringify(['desk']),
-  'exactly one station, the study desk (' + JSON.stringify(map.stations) + ')');
+assert(JSON.stringify(map.stations) === JSON.stringify(['desk', 'cassette']),
+  'two stations, the study desk and the cassette player (' + JSON.stringify(map.stations) + ')');
 assert(map.stations.indexOf('kitchen') < 0 && map.stations.indexOf('taste') < 0,
   'no kitchen and no taste stall — those are Unit 10 minigames');
 
@@ -204,10 +204,11 @@ vm.runInContext(econ.slice(start, end), ctx);
 const R = (expr) => vm.runInContext(expr, ctx);
 
 assert(R("!!WORLD_PACKS['2b-unit-11']"), 'WORLD_PACKS has a 2b-unit-11 entry');
-assert(R("WORLD_PACKS['2b-unit-11'].stations").join(',') === 'desk', 'the pack is desk only');
+assert(R("WORLD_PACKS['2b-unit-11'].stations").join(',') === 'desk,cassette', 'the pack is desk plus cassette');
 assert(R("WORLD_PACKS['2b-unit-11'].extras").length === 0, 'the pack has no valley extras');
 assert(R('currentWorldPack().id') === '2b-unit-11', 'a Unit 11 lesson resolves to the Unit 11 pack');
 assert(R("worldPackHas(null, 'station', 'desk')") === true, 'Unit 11 has the desk');
+assert(R("worldPackHas(null, 'station', 'cassette')") === true, 'Unit 11 has the cassette player');
 assert(R("worldPackHas(null, 'station', 'kitchen')") === false, 'Unit 11 has no kitchen');
 assert(R("worldPackHas(null, 'station', 'taste')") === false, 'Unit 11 has no taste stall');
 assert(R("worldPackHas(null, 'extra', 'shop')") === false, 'Unit 11 has no shop');

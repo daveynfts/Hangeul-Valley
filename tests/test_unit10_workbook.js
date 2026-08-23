@@ -1428,8 +1428,15 @@ console.log('\n--- 9b. Track 2, cut per exchange ---');
   assert(new Set(clips).size === 20, 'twenty clips, and no two rows share one');
   assert(clips.every(s => /^audio\/book\/2b-u10-p[1-4]-[0-4]\.mp3$/.test(s)),
     'each is named for its drill and its row');
-  assert(fs.readdirSync(path.join(ROOT, 'audio', 'book')).length === 40,
-    'forty clips in audio/book — Unit 14’s twenty and Unit 10’s twenty');
+  // Counts the workbook drill clips rather than the whole directory. The directory
+  // total used to stand in for this, which meant the next feature to put a legitimate
+  // recording in audio/book — the Unit 11 cassette — failed a Unit 10 assertion about
+  // Unit 10's own clips. What is being pinned is that the two workbooks own forty
+  // between them and nothing strays into their naming.
+  const drill = fs.readdirSync(path.join(ROOT, 'audio', 'book'))
+    .filter(f => /^2b-u(10|14)-p/.test(f));
+  assert(drill.length === 40,
+    'forty workbook clips in audio/book — Unit 14’s twenty and Unit 10’s twenty (found ' + drill.length + ')');
   assert(wb.exercises.every(e => !e.audio),
     'nothing carries a whole-drill recording; the track is cut per exchange');
 

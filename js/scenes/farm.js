@@ -508,6 +508,39 @@ class FarmScene extends Phaser.Scene {
       '.KK..KKKKKKKKKK..KK.'
     ], DESK_PAL, 20, 22);
 
+    // A retro deck in the farm's own cream-and-wood palette, so it sits beside the
+    // oak desk rather than next to it. Silhouette first: handle, tape window, button
+    // row, grille. The two reels are 2x2 because at 1px they vanished by game scale.
+    const CASSETTE_PAL = {
+      '.': null,
+      'K': 0x1C1917, 'k': 0x44403C,
+      'C': 0xF4D6A0, 'W': 0xFFF8E8,
+      'O': 0xC4893A, 'o': 0x8B5A2B,
+      'G': 0x93C5FD, 'g': 0x1E3A8A, 'T': 0x3D2314,
+      'S': 0x57534E, 's': 0xA8A29E,
+      'R': 0xDC2626, 'L': 0xFDE047
+    };
+    PixelArtRenderer.createTexture(this, 'cassette_player', [
+      '......KKKKKKKK......',
+      '......KoOOOOoK......',
+      '......KKKKKKKK......',
+      '.KKKKKKKKKKKKKKKKKK.',
+      '.KCWWWWWWWWWWWWWWCK.',
+      '.KCKKKKKKKKKKKKKKCK.',
+      '.KCKGGTTGGGGTTGGKCK.',
+      '.KCKGGTTGGGGTTGGKCK.',
+      '.KCKGGggggggggGGKCK.',
+      '.KCKKKKKKKKKKKKKKCK.',
+      '.KCWWWWWWWWWWWWWWCK.',
+      '.KCkKKkKKkKKkKKRLCK.',
+      '.KCWWWWWWWWWWWWWWCK.',
+      '.KCsSsSsSsSsSsSsWCK.',
+      '.KCsSsSsSsSsSsSsWCK.',
+      '.KCsSsSsSsSsSsSsWCK.',
+      '.KKKKKKKKKKKKKKKKKK.',
+      '..kkkkkkkkkkkkkkkk..'
+    ], CASSETTE_PAL, 20, 18);
+
     const KITCHEN_PAL = {
       '.': null,
       'K': 0x1C1917, 'k': 0x44403C,
@@ -2255,6 +2288,9 @@ class FarmScene extends Phaser.Scene {
     if (this.studyDesk && this.studyDesk.label) {
       this.studyDesk.label.setAlpha(showHint('desk', this.studyDesk.x, this.studyDesk.y, this.studyDesk.interact || 80) ? 1 : 0);
     }
+    if (this.cassetteStation && this.cassetteStation.label) {
+      this.cassetteStation.label.setAlpha(showHint('cassette', this.cassetteStation.x, this.cassetteStation.y, this.cassetteStation.interact || 78) ? 1 : 0);
+    }
     if (this.kitchenStation && this.kitchenStation.label) {
       this.kitchenStation.label.setAlpha(showHint('kitchen', this.kitchenStation.x, this.kitchenStation.y, this.kitchenStation.interact || 82) ? 1 : 0);
     }
@@ -2355,6 +2391,16 @@ class FarmScene extends Phaser.Scene {
         useR: this.studyDesk.interact || 80,
         label: labelOf('학습 책상'), color: 0x60A5FA, hw: 70, hh: 70,
         hy: this.studyDesk.y - 20
+      });
+    }
+    if (this.cassetteStation) {
+      mk({
+        id: 'cassette', kind: 'cassette',
+        x: this.cassetteStation.x, y: this.cassetteStation.y,
+        hitR: this.cassetteStation.interact || 78,
+        useR: this.cassetteStation.interact || 78,
+        label: labelOf('카세트'), color: 0xC084FC, hw: 66, hh: 62,
+        hy: this.cassetteStation.y - 18
       });
     }
     if (this.tasteStation) {
@@ -2557,6 +2603,8 @@ class FarmScene extends Phaser.Scene {
     });
     if (this._hasStudyDesk()) this._ensureStudyDesk();
     else this._teardownStudyDesk();
+    if (stations.indexOf('cassette') >= 0) this._ensureCassette();
+    else this._teardownCassette();
     if (this.player && this.player.active) {
       applySkinToSprite(this, this.player, FARM_SKIN_APPLY);
     }
@@ -2718,6 +2766,33 @@ class FarmScene extends Phaser.Scene {
     this.studyDesk = null;
   }
 
+  _ensureCassette(){
+    this._teardownCassette();
+    const base = this._spawnUnit10Station('cassette', {
+      hdKey: 'cassette_player_hd',
+      matrixKey: 'cassette_player',
+      lastKey: 'pixel_crate',
+      shadowW: 62,
+      matrixScale: 2.3
+    });
+    if (!base) return;
+    // The LED sits on the deck's own record light, at the matrix pixel the sprite
+    // puts it on, so it reads as the machine being on rather than as a loose dot.
+    const led = this.add.circle(base.x + base.spr.displayWidth * 0.30, base.y - base.spr.displayHeight * 0.36, 2.5, 0xFDE047, 0.9)
+      .setDepth(base.y + 8);
+    this.tweens.add({ targets: led, alpha: { from: 0.9, to: 0.25 }, duration: 1100, yoyo: true, repeat: -1 });
+    this.cassetteStation = Object.assign(base, { led });
+  }
+
+  _teardownCassette(){
+    if (!this.cassetteStation) return;
+    ['spr', 'label', 'led'].forEach(k => {
+      const s = this.cassetteStation[k];
+      if (s && s.destroy) s.destroy();
+    });
+    this.cassetteStation = null;
+  }
+
   _teardownTasteStation(){
     if (!this.tasteStation) return;
     ['spr', 'label'].forEach(k => {
@@ -2744,6 +2819,9 @@ class FarmScene extends Phaser.Scene {
         if (!this._hasStudyDesk()) return;
         if (typeof openStudyDesk === 'function') openStudyDesk();
         else if (typeof openDeskQuiz === 'function') openDeskQuiz();
+        return;
+      case 'cassette':
+        if (typeof openCassette === 'function') openCassette();
         return;
       case 'taste':
         if (this._isUnit10() && typeof openTasteGame === 'function') openTasteGame();
