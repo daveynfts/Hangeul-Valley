@@ -107,6 +107,4 @@ if (!IS_NODE && typeof document !== 'undefined') {
 
 
 
-const getCompleted  = ()=>{ try{return JSON.parse(localStorage.getItem('hv_done')||'[]')}catch{return[]} };
-const markCompleted = i=>{ const c=getCompleted(); if(!c.includes(i)){c.push(i);localStorage.setItem('hv_done',JSON.stringify(c))} };
 

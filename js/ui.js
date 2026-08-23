@@ -105,10 +105,10 @@ function triggerInteract(){
   const flags = {
     playerLocked,
     isPerformingAction: sc.isPerformingAction,
-    quizOpen, shopOpen, memoryOpen, trophyOpen, duelOpen, catDialogOpen
+    quizOpen, shopOpen, memoryOpen, trophyOpen, catDialogOpen
   };
   if (typeof worldPointerBlocked === 'function' ? worldPointerBlocked(flags)
-      : (playerLocked || sc.isPerformingAction || quizOpen || shopOpen || memoryOpen || trophyOpen || duelOpen || catDialogOpen)) {
+      : (playerLocked || sc.isPerformingAction || quizOpen || shopOpen || memoryOpen || trophyOpen || catDialogOpen)) {
     return;
   }
   sc._interact();
@@ -297,7 +297,7 @@ function buildLevelSelectScreen() {
         if (idx === currentLevelIndex && hasSave) resumeGame();
         else startLevel(idx, true);
       } else if (canAfford) {
-        buyLevelFromSelect(idx);
+        buyLevel(idx);
       }
     };
     if (owned || canAfford) {
@@ -833,14 +833,6 @@ function hideLevelSelect() {
   hud.style.display = pbWrap.style.display = '';
   if (tipEl) tipEl.style.display = 'none';
   setTouchControlsVisible(true);
-}
-
-function buyLevelFromSelect(idx) {
-  playChiptuneSFX('click');
-  const cost = LEVEL_COST(idx);
-  if (unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return; }
-  if (playerCurrencies.coins < cost) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return; }
-  startShopQuizGate(idx);
 }
 
 // ═══════════════ START LEVEL / RESUME ═════════════════════════════════════════

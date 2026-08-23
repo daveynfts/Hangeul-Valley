@@ -1300,9 +1300,6 @@ function updateLeaderboardMetrics() {
   if (typeof leaderboardState.personalBests.dungeonMaxFloor !== 'number') {
     leaderboardState.personalBests.dungeonMaxFloor = 0;
   }
-  if (typeof leaderboardState.personalBests.duelMaxWinStreak !== 'number') {
-    leaderboardState.personalBests.duelMaxWinStreak = 0;
-  }
 
   persistSave();
 }

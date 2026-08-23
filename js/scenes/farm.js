@@ -2299,7 +2299,7 @@ class FarmScene extends Phaser.Scene {
     const pointerBusy = typeof worldPointerBlocked === 'function'
       ? worldPointerBlocked({
           playerLocked, isPerformingAction: this.isPerformingAction,
-          quizOpen, shopOpen, memoryOpen, trophyOpen, duelOpen, catDialogOpen
+          quizOpen, shopOpen, memoryOpen, trophyOpen, catDialogOpen
         })
       : (playerLocked || this.isPerformingAction || quizOpen || shopOpen);
     if(!pointerBusy) this._syncPointerHover();
@@ -2371,7 +2371,7 @@ class FarmScene extends Phaser.Scene {
   _pointerFlags(){
     return {
       playerLocked, isPerformingAction: this.isPerformingAction,
-      quizOpen, shopOpen, memoryOpen, trophyOpen, duelOpen, catDialogOpen
+      quizOpen, shopOpen, memoryOpen, trophyOpen, catDialogOpen
     };
   }
 
