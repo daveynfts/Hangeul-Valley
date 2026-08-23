@@ -55,8 +55,8 @@ assert(R("WORLD_PACKS['2b-unit-14'].stations").join(',') === 'desk',
   'unit 14 pack is desk only');
 assert(R("WORLD_PACKS['2b-unit-14'].stations").indexOf('kitchen') < 0,
   'unit 14 pack has no kitchen');
-assert(R("WORLD_PACKS['2b-unit-11'].stations").join(',') === 'desk',
-  'unit 11 pack is desk only');
+assert(R("WORLD_PACKS['2b-unit-11'].stations").join(',') === 'desk,cassette',
+  'unit 11 pack is desk plus cassette');
 assert(R("WORLD_PACKS['2b-unit-11'].extras").length === 0, 'unit 11 pack has no valley extras');
 
 ctx.currentLevelIndex = 0;
@@ -90,7 +90,7 @@ assert(JSON.stringify(unit10.level.map.stations) === JSON.stringify(['desk', 'ki
   'unit 10 JSON map matches the runtime pack');
 assert(JSON.stringify(unit14.level.map.stations) === JSON.stringify(['desk']),
   'unit 14 JSON map matches the runtime pack');
-assert(JSON.stringify(unit11.level.map.stations) === JSON.stringify(['desk']),
+assert(JSON.stringify(unit11.level.map.stations) === JSON.stringify(['desk', 'cassette']),
   'unit 11 JSON map matches the runtime pack');
 
 assert(farm.indexOf('applyWorld') >= 0, 'FarmScene has applyWorld');

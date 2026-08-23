@@ -16,7 +16,7 @@
     "world": true,
     "pack": "snu-2b",
     "worldId": "2b-unit-11",
-    "map": { "extras": [], "stations": ["desk"] },
+    "map": { "extras": [], "stations": ["desk", "cassette"] },
     "target": 9,
     "words": [
       { "ko": "어디가 아프다", "en": "to hurt somewhere / where it hurts", "hint": "🩹", "category": "증상", "categoryEn": "Symptoms" },

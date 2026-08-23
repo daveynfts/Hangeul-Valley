@@ -335,7 +335,8 @@ let activeModalStack = [];
 // The study desk: the chooser, the workbook and the quiz. All three are places
 // you are meant to be listening to Korean, so the background score comes off
 // while any of them is open.
-const STUDY_OVERLAYS = ['desk-menu-overlay', 'workbook-overlay', 'desk-quiz-overlay'];
+const STUDY_OVERLAYS = ['desk-menu-overlay', 'workbook-overlay', 'desk-quiz-overlay',
+  'cassette-overlay', 'listen-overlay', 'dictation-overlay'];
 
 // Decided from the modal stack rather than counted up and down by each screen.
 // The desk chains — the chooser opens the workbook, the workbook goes back to
@@ -398,6 +399,9 @@ function closeModalById(overlayId) {
   else if (overlayId === 'progress-overlay') window.closeProgressOverlay();
   else if (overlayId === 'taste-overlay') window.closeTasteGame();
   else if (overlayId === 'desk-quiz-overlay') window.closeDeskQuiz();
+  else if (overlayId === 'cassette-overlay') window.closeCassette();
+  else if (overlayId === 'listen-overlay') window.closeListen();
+  else if (overlayId === 'dictation-overlay') window.closeDictation();
   else if (overlayId === 'rank-card-overlay') window.closeRankCard();
   else if (overlayId === 'rankup-overlay') window.closeRankUp();
   else setModalState(overlayId, false);
@@ -2270,6 +2274,434 @@ function runDeskMode(i) {
   opt.run();
 }
 
+// ═══════════════ CASSETTE PLAYER · THE BOOK'S OWN RECORDINGS ═════════════════
+// Two things live behind the deck, and they want different shapes. Listening is a
+// track and a script you follow; dictation is one sentence at a time with nothing
+// on screen until you have written it. So the sprite opens a chooser, the same way
+// the study desk does — and for the same reason: one screen doing both would show
+// you the answer while you were trying to hear it.
+
+let cassetteBank = null;
+let cassetteTrack = null;      // the <audio> currently playing, whatever screen owns it
+let listenState = null;
+let dictState = null;
+let cassetteMenuIndex = 0;
+
+function cassetteUrl() {
+  if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-cassette.json';
+  return null;
+}
+
+function loadCassette() {
+  const url = cassetteUrl();
+  if (!url) return Promise.resolve(null);
+  if (cassetteBank && cassetteBank._url === url) return Promise.resolve(cassetteBank);
+  if (typeof fetch !== 'function') return Promise.resolve(null);
+  return fetch(url)
+    .then(r => r.ok ? r.json() : null)
+    .then(d => { if (d) d._url = url; cassetteBank = d; return d; })
+    .catch(() => null);
+}
+
+// One player for every cassette screen. Switching tracks or sentences has to stop
+// what is playing rather than layer on top of it — two recordings at once is the
+// one thing a listening station must never do.
+function csStop() {
+  if (!cassetteTrack) return;
+  const el = cassetteTrack.el;
+  cassetteTrack = null;
+  try { el.pause(); el.src = ''; } catch (e) {}
+  if (typeof AudioMixer !== 'undefined' && AudioMixer.voiceEnd) AudioMixer.voiceEnd();
+  csPaintPlaying();
+}
+
+function csPlay(src, rate, onEnd) {
+  csStop();
+  if (typeof Audio !== 'function') return false;
+  let el = null;
+  try { el = new Audio('/' + src); } catch (e) { return false; }
+  cassetteTrack = { el: el, src: src };
+  try {
+    if (typeof AudioMixer !== 'undefined') {
+      if (AudioMixer.voiceLevel) el.volume = AudioMixer.voiceLevel();
+      if (AudioMixer.voiceStart) AudioMixer.voiceStart();
+    }
+    el.playbackRate = rate || 1;
+    el.onended = () => { if (cassetteTrack && cassetteTrack.el === el) { csStop(); if (onEnd) onEnd(); } };
+    el.onerror = () => { if (cassetteTrack && cassetteTrack.el === el) csStop(); };
+    el.ontimeupdate = () => { if (cassetteTrack && cassetteTrack.el === el) csPaintProgress(el); };
+    const p = el.play();
+    if (p && typeof p.catch === 'function') p.catch(() => csStop());
+    csPaintPlaying();
+    return true;
+  } catch (e) { csStop(); return false; }
+}
+
+function csIsPlaying(src) {
+  return !!(cassetteTrack && (!src || cassetteTrack.src === src));
+}
+
+function csPaintPlaying() {
+  document.querySelectorAll('.cs-play').forEach((b) => {
+    const on = csIsPlaying(b.getAttribute('data-src') || null);
+    b.classList.toggle('on', on);
+    b.textContent = on ? '❙❙' : '▶';
+  });
+}
+
+function csPaintProgress(el) {
+  const bar = $('listen-bar');
+  const clock = $('listen-clock');
+  if (!bar && !clock) return;
+  const d = el.duration || 0;
+  if (bar) bar.style.width = d ? Math.min(100, (el.currentTime / d) * 100) + '%' : '0%';
+  if (clock) clock.textContent = csClock(el.currentTime) + ' / ' + csClock(d);
+}
+
+function csClock(s) {
+  const n = Math.max(0, Math.round(s || 0));
+  return Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0');
+}
+
+// ── the chooser ─────────────────────────────────────────────────────────────
+function openCassette() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  loadCassette().then((bank) => {
+    if (!bank) return;
+    cassetteMenuIndex = 0;
+    const head = $('cassette-title');
+    if (head) head.textContent = '📻 ' + (bank.titleKo || '카세트 플레이어');
+    const sub = $('cassette-sub');
+    if (sub) sub.textContent = bank.titleEn || '';
+    const foot = $('cassette-foot');
+    if (foot) {
+      const n = (bank.tracks || []).length;
+      const d = ((bank.dictation && bank.dictation.items) || []).length;
+      foot.innerHTML = '<span class="cs-foot-ko">' + vbEsc(bank.unitKo || '') + '</span>'
+        + '<span class="cs-foot-n">' + n + ' TRACKS · ' + d + ' LINES</span>';
+    }
+    renderCassetteMenu();
+    setModalState('cassette-overlay', true);
+  });
+}
+
+function closeCassette() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  csStop();
+  setModalState('cassette-overlay', false);
+}
+
+const CASSETTE_MODES = [
+  { key: 'listen', ko: '듣기', en: 'Play a track straight through, script alongside', run: () => openListen() },
+  { key: 'dictation', ko: '받아쓰기', en: 'Hear one sentence, write it, get it checked', run: () => openDictation() }
+];
+
+function renderCassetteMenu() {
+  const box = $('cassette-list');
+  if (!box) return;
+  box.innerHTML = '';
+  CASSETTE_MODES.forEach((m, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'desk-mode' + (i === cassetteMenuIndex ? ' focus' : '');
+    b.setAttribute('data-mode', m.key);
+    b.innerHTML =
+      '<span class="desk-mode-key">' + (i + 1) + '</span>' +
+      '<span class="desk-mode-icon">' + (m.key === 'listen' ? '🎧' : '✏️') + '</span>' +
+      '<span class="desk-mode-text">' +
+        '<span class="desk-mode-ko">' + vbEsc(m.ko) + '</span>' +
+        '<span class="desk-mode-en">' + vbEsc(m.en) + '</span>' +
+      '</span>';
+    b.onclick = () => runCassetteMode(i);
+    box.appendChild(b);
+  });
+}
+
+function runCassetteMode(i) {
+  const m = CASSETTE_MODES[i];
+  if (!m) return;
+  setModalState('cassette-overlay', false);
+  m.run();
+}
+
+// ── 듣기 ─────────────────────────────────────────────────────────────────────
+function openListen() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  loadCassette().then((bank) => {
+    if (!bank) return;
+    // Opens on the pharmacy dialogue rather than track 12: it is the unit's first
+    // real conversation, and a two-line grammar box is a thin thing to land on.
+    const tracks = bank.tracks || [];
+    const start = tracks.findIndex((t) => t.n === 14);
+    listenState = { i: start >= 0 ? start : 0, rate: 1 };
+    renderListen();
+    setModalState('listen-overlay', true);
+  });
+}
+
+function closeListen() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  csStop();
+  listenState = null;
+  setModalState('listen-overlay', false);
+  openCassette();
+}
+
+function listenPick(i) {
+  if (!listenState) return;
+  csStop();
+  listenState.i = i;
+  renderListen();
+}
+
+function listenToggle() {
+  const bank = cassetteBank, st = listenState;
+  if (!bank || !st) return;
+  const t = (bank.tracks || [])[st.i];
+  if (!t) return;
+  if (csIsPlaying(t.src)) { csStop(); return; }
+  csPlay(t.src, st.rate);
+}
+
+function listenRate(r) {
+  if (!listenState) return;
+  listenState.rate = r;
+  if (cassetteTrack) cassetteTrack.el.playbackRate = r;
+  renderListen();
+}
+
+function renderListen() {
+  const bank = cassetteBank, st = listenState;
+  if (!bank || !st) return;
+  const tracks = bank.tracks || [];
+  const cur = tracks[st.i] || tracks[0];
+
+  const list = $('listen-tracks');
+  if (list) {
+    list.innerHTML = '';
+    tracks.forEach((t, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'cs-track' + (i === st.i ? ' on' : '');
+      b.innerHTML =
+        '<span class="cs-tn">' + t.n + '</span>' +
+        '<span class="cs-tt"><span class="cs-tko">' + vbEsc(t.sec) + '</span>' +
+        '<span class="cs-ten">' + vbEsc(t.secEn) + '</span></span>' +
+        '<span class="cs-td">' + csClock(t.dur) + '</span>';
+      b.onclick = () => listenPick(i);
+      list.appendChild(b);
+    });
+  }
+
+  const nm = $('listen-now');
+  if (nm) nm.textContent = cur.sec;
+  const clock = $('listen-clock');
+  if (clock) clock.textContent = '0:00 / ' + csClock(cur.dur);
+  const bar = $('listen-bar');
+  if (bar) bar.style.width = '0%';
+  const play = $('listen-play');
+  if (play) play.setAttribute('data-src', cur.src);
+  document.querySelectorAll('#listen-rates .cs-rate').forEach((b) => {
+    b.classList.toggle('on', Number(b.getAttribute('data-rate')) === st.rate);
+  });
+
+  const pane = $('listen-script');
+  if (pane) {
+    if (Array.isArray(cur.lines)) {
+      pane.className = 'cs-script';
+      pane.innerHTML = cur.lines.map((l) =>
+        '<div class="cs-line"><span class="cs-who">' + vbEsc(l.who) + '</span>' +
+        '<span class="cs-ko">' + vbEsc(l.ko) + '</span></div>').join('');
+    } else {
+      // Said rather than left blank. The book prints this track's comprehension
+      // questions and not its script, so an empty pane would read as a bug.
+      pane.className = 'cs-script empty';
+      pane.innerHTML = '<div class="cs-none"><span class="cs-none-ko">대본이 없는 트랙</span>'
+        + '<span class="cs-none-en">' + vbEsc(cur.noteEn || '') + '</span></div>';
+    }
+  }
+  csPaintPlaying();
+}
+
+// ── 받아쓰기 ─────────────────────────────────────────────────────────────────
+// Longest common subsequence over characters. A positional compare reddens the
+// whole tail the moment one syllable goes missing — and dropping a syllable is the
+// commonest dictation slip there is, so the panel would be at its most misleading
+// exactly when it was most needed.
+function dictAlign(answer, typed) {
+  const a = [...String(answer)], b = [...String(typed)];
+  const m = a.length, n = b.length;
+  const L = [];
+  for (let i = 0; i <= m; i++) L.push(new Array(n + 1).fill(0));
+  for (let i = m - 1; i >= 0; i--) {
+    for (let j = n - 1; j >= 0; j--) {
+      L[i][j] = a[i] === b[j] ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+    }
+  }
+  const ans = [], got = [];
+  let i = 0, j = 0;
+  while (i < m && j < n) {
+    if (a[i] === b[j]) { ans.push({ ch: a[i], ok: true }); got.push({ ch: b[j], ok: true }); i++; j++; }
+    else if (L[i + 1][j] >= L[i][j + 1]) { ans.push({ ch: a[i], ok: false }); i++; }
+    else { got.push({ ch: b[j], ok: false }); j++; }
+  }
+  while (i < m) ans.push({ ch: a[i++], ok: false });
+  while (j < n) got.push({ ch: b[j++], ok: false });
+  return { ans: ans, got: got };
+}
+
+// Spacing is worth marking but not worth failing on: 한번 versus 한 번 is a real
+// distinction the notes talk about, while a missing space between two clauses is
+// not what dictation is testing. So the score ignores whitespace and the answer
+// line still shows the spacing the book prints.
+function dictNorm(s) {
+  return String(s == null ? '' : s).normalize('NFC').replace(/\s+/g, '');
+}
+
+function openDictation() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  loadCassette().then((bank) => {
+    if (!bank) return;
+    const items = (bank.dictation && bank.dictation.items) || [];
+    if (!items.length) return;
+    dictState = { i: 0, typed: '', checked: false, rate: 1, right: 0, done: 0 };
+    renderDictation();
+    setModalState('dictation-overlay', true);
+    const el = $('dict-input');
+    if (el) setTimeout(() => el.focus(), 60);
+  });
+}
+
+function closeDictation() {
+  if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  csStop();
+  dictState = null;
+  setModalState('dictation-overlay', false);
+  openCassette();
+}
+
+function dictItems() {
+  return (cassetteBank && cassetteBank.dictation && cassetteBank.dictation.items) || [];
+}
+
+function dictPlay(rate) {
+  const st = dictState;
+  if (!st) return;
+  const it = dictItems()[st.i];
+  if (!it || !it.audio) return;
+  if (typeof rate === 'number') st.rate = rate;
+  csPlay(it.audio.src, st.rate);
+  renderDictationRates();
+}
+
+function dictCheck() {
+  const st = dictState;
+  if (!st || st.checked) return;
+  const el = $('dict-input');
+  st.typed = el ? el.value : '';
+  const it = dictItems()[st.i];
+  if (!it) return;
+  st.checked = true;
+  st.done += 1;
+  if (dictNorm(st.typed) === dictNorm(it.ko)) {
+    st.right += 1;
+    if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_correct');
+  } else if (typeof playChiptuneSFX === 'function') {
+    playChiptuneSFX('quiz_wrong');
+  }
+  renderDictation();
+}
+
+function dictNext() {
+  const st = dictState;
+  if (!st) return;
+  csStop();
+  st.i = (st.i + 1) % dictItems().length;
+  st.typed = '';
+  st.checked = false;
+  renderDictation();
+  const el = $('dict-input');
+  if (el) el.focus();
+}
+
+function renderDictationRates() {
+  const st = dictState;
+  if (!st) return;
+  document.querySelectorAll('#dict-rates .cs-rate').forEach((b) => {
+    b.classList.toggle('on', Number(b.getAttribute('data-rate')) === st.rate);
+  });
+  csPaintPlaying();
+}
+
+function renderDictation() {
+  const st = dictState;
+  if (!st) return;
+  const items = dictItems();
+  const it = items[st.i];
+  if (!it) return;
+
+  const pos = $('dict-pos');
+  if (pos) pos.textContent = (st.i + 1) + ' / ' + items.length + (st.done ? '  ·  ' + st.right + '/' + st.done : '');
+
+  const tags = $('dict-tags');
+  if (tags) {
+    tags.innerHTML = '<span class="cs-tag trk">TRK ' + it.track + '</span>'
+      + '<span class="cs-tag who">' + vbEsc(it.who) + '</span>'
+      + (it.tags || []).map((t) => '<span class="cs-tag lesson">' + vbEsc(t) + '</span>').join('');
+  }
+
+  const hint = $('dict-hint');
+  if (hint) hint.textContent = it.syl + ' syllables';
+  const play = $('dict-play');
+  if (play) play.setAttribute('data-src', it.audio ? it.audio.src : '');
+
+  const input = $('dict-input');
+  if (input) {
+    input.value = st.typed;
+    input.disabled = !!st.checked;
+  }
+  const check = $('dict-check');
+  if (check) {
+    check.textContent = st.checked ? '다음 ›' : '확인';
+    check.onclick = st.checked ? dictNext : dictCheck;
+  }
+
+  const out = $('dict-result');
+  if (out) {
+    if (!st.checked) { out.innerHTML = ''; out.className = 'cs-result'; }
+    else {
+      const { ans, got } = dictAlign(dictNorm(it.ko), dictNorm(st.typed));
+      const right = ans.filter((c) => c.ok).length;
+      const clean = dictNorm(st.typed) === dictNorm(it.ko);
+      // The answer is printed with the book's spacing, and marked from the aligned
+      // comparison, which ran on the spaceless forms — so the marks land on
+      // syllables while the line still reads as the book prints it.
+      let k = 0;
+      const marked = [...it.ko.normalize('NFC')].map((ch) => {
+        if (/\s/.test(ch)) return '<span class="sp"> </span>';
+        const cell = ans[k++];
+        return '<span class="' + (cell && cell.ok ? 'ok' : 'miss') + '">' + vbEsc(ch) + '</span>';
+      }).join('');
+      const extra = got.filter((c) => !c.ok);
+      out.className = 'cs-result on';
+      out.innerHTML =
+        '<div class="cs-ansbox">'
+        + '<div class="cs-ansrow"><span class="cs-lbl">정답 · ANSWER</span>'
+        + '<span class="cs-score ' + (clean ? 'good' : 'bad') + '">'
+        + (clean ? 'PERFECT' : right + ' / ' + ans.length) + '</span></div>'
+        + '<div class="cs-ans">' + marked + '</div></div>'
+        + (extra.length
+          ? '<div class="cs-yours"><span class="cs-lbl bad">내가 쓴 것 · YOU WROTE</span><div class="cs-ans">'
+            + got.map((c) => '<span class="' + (c.ok ? 'ok' : 'extra') + '">' + vbEsc(c.ch) + '</span>').join('')
+            + '</div></div>'
+          : '')
+        + '<div class="cs-why"><span class="cs-en">' + vbEsc(it.en) + '</span>'
+        + '<span class="cs-note">' + vbEsc(it.why) + '</span></div>';
+    }
+  }
+  renderDictationRates();
+}
+
 // ═══════════════ STUDY DESK · WORKBOOK ═══════════════════════════════════════
 // 어휘 연습 1 from Unit 14: five expressions in a box, one spent on the worked
 // example, four sentences to complete. Each expression is used exactly once,
@@ -3210,6 +3642,32 @@ if (typeof window !== 'undefined' && window.addEventListener) {
     if (e.key === 'Escape') return;
     const top = activeModalStack[activeModalStack.length - 1];
 
+    if (top === 'cassette-overlay') {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault(); cassetteMenuIndex = (cassetteMenuIndex + 1) % CASSETTE_MODES.length; renderCassetteMenu();
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        cassetteMenuIndex = (cassetteMenuIndex - 1 + CASSETTE_MODES.length) % CASSETTE_MODES.length;
+        renderCassetteMenu();
+      } else if (e.key === 'Enter') {
+        e.preventDefault(); runCassetteMode(cassetteMenuIndex);
+      } else if (/^[1-9]$/.test(e.key)) {
+        e.preventDefault(); runCassetteMode(Number(e.key) - 1);
+      }
+      return;
+    }
+    if (top === 'dictation-overlay') {
+      // Enter checks, then Enter again moves on: the hands are already on the
+      // keyboard, and reaching for the mouse between every sentence is the whole
+      // friction this screen could have had.
+      if (e.key === 'Enter') { e.preventDefault(); if (dictState && dictState.checked) dictNext(); else dictCheck(); }
+      else if (e.key === 'Tab') { e.preventDefault(); dictPlay(); }
+      return;
+    }
+    if (top === 'listen-overlay') {
+      if (e.key === ' ') { e.preventDefault(); listenToggle(); }
+      return;
+    }
     if (top === 'desk-menu-overlay') {
       if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
         e.preventDefault(); deskMenuIndex = (deskMenuIndex + 1) % deskMenuOptions.length; renderDeskMenu();
@@ -3294,6 +3752,18 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 }
 
 if (typeof window !== 'undefined') {
+  window.openCassette = openCassette;
+  window.closeCassette = closeCassette;
+  window.openListen = openListen;
+  window.closeListen = closeListen;
+  window.listenToggle = listenToggle;
+  window.listenRate = listenRate;
+  window.openDictation = openDictation;
+  window.closeDictation = closeDictation;
+  window.dictPlay = dictPlay;
+  window.dictCheck = dictCheck;
+  window.dictNext = dictNext;
+  window.dictAlign = dictAlign;
   window.openDeskQuiz = openDeskQuiz;
   window.closeDeskQuiz = closeDeskQuiz;
   window.openStudyDesk = openStudyDesk;

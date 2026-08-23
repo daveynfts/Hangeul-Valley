@@ -1,6 +1,9 @@
 {
   "version": 1,
-  "farm": { "w": 180, "h": 312 },
+  "farm": {
+    "w": 180,
+    "h": 312
+  },
   "stations": [
     {
       "id": "desk",
@@ -31,6 +34,16 @@
       "scale": 1,
       "originX": 0.5,
       "interact": 80
+    },
+    {
+      "id": "cassette",
+      "nameKo": "카세트 플레이어",
+      "nameEn": "Cassette player",
+      "ox": 300,
+      "oy": 478,
+      "scale": 1,
+      "originX": 0.5,
+      "interact": 78
     }
   ]
 }

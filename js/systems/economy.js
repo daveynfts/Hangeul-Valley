@@ -30,7 +30,7 @@ const VALLEY_EXTRA_IDS = ['shop', 'board', 'arcade', 'wizard', 'cat', 'beehive',
 const WORLD_PACKS = {
   valley: { extras: ['shop', 'board', 'arcade', 'cat', 'beehive', 'portal', 'fishing'], stations: [] },
   '2b-unit-10': { extras: [], stations: ['desk', 'kitchen', 'taste'] },
-  '2b-unit-11': { extras: [], stations: ['desk'] },
+  '2b-unit-11': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-14': { extras: [], stations: ['desk'] }
 };
 function worldPackIdForLesson(lvl) {
@@ -77,7 +77,8 @@ const UNIT10_LAYOUT_DEFAULT = {
   stations: [
     { id: 'desk', nameKo: '학습 책상', ox: -28, oy: 480, scale: 1, originX: 0.52, interact: 80 },
     { id: 'kitchen', nameKo: '요리 주방', ox: 328, oy: 252, scale: 1, originX: 0.48, interact: 82 },
-    { id: 'taste', nameKo: '한 입 포장마차', ox: 144, oy: 480, scale: 1, originX: 0.5, interact: 80 }
+    { id: 'taste', nameKo: '한 입 포장마차', ox: 144, oy: 480, scale: 1, originX: 0.5, interact: 80 },
+    { id: 'cassette', nameKo: '카세트 플레이어', ox: 300, oy: 478, scale: 1, originX: 0.5, interact: 78 }
   ]
 };
 function getUnit10Layout() {

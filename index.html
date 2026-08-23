@@ -735,6 +735,78 @@
     </div>
   </div>
 
+  <!-- ══════════ CASSETTE PLAYER · MODE CHOOSER ══════════ -->
+  <div id="cassette-overlay" role="dialog" aria-modal="true" aria-labelledby="cassette-title">
+    <div id="cassette-panel" class="glass-modal">
+      <div class="cs-head">
+        <div>
+          <div id="cassette-title">📻 카세트 플레이어</div>
+          <div id="cassette-sub"></div>
+        </div>
+        <button type="button" class="cs-x" onclick="closeCassette()" aria-label="Close the cassette player">✕</button>
+      </div>
+      <div id="cassette-list"></div>
+      <div id="cassette-foot"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ CASSETTE · 듣기 ══════════ -->
+  <div id="listen-overlay" role="dialog" aria-modal="true" aria-labelledby="listen-title">
+    <div id="listen-panel" class="glass-modal">
+      <div class="cs-head">
+        <div id="listen-title">듣기 · LISTEN</div>
+        <button type="button" class="cs-x" onclick="closeListen()" aria-label="Back to the cassette player">✕</button>
+      </div>
+      <div id="listen-body">
+        <div id="listen-tracks"></div>
+        <div id="listen-right">
+          <div id="listen-transport">
+            <button type="button" id="listen-play" class="cs-play" onclick="listenToggle()" aria-label="Play or pause">▶</button>
+            <div class="cs-meter">
+              <div class="cs-meterrow"><span id="listen-now"></span><span id="listen-clock"></span></div>
+              <div class="cs-bar"><div id="listen-bar"></div></div>
+            </div>
+            <div id="listen-rates">
+              <button type="button" class="cs-rate on" data-rate="1" onclick="listenRate(1)">1.0×</button>
+              <button type="button" class="cs-rate" data-rate="0.75" onclick="listenRate(0.75)">0.75×</button>
+            </div>
+          </div>
+          <div id="listen-script" class="cs-script"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ CASSETTE · 받아쓰기 ══════════ -->
+  <div id="dictation-overlay" role="dialog" aria-modal="true" aria-labelledby="dict-title">
+    <div id="dictation-panel" class="glass-modal">
+      <div class="cs-head">
+        <div id="dict-title">받아쓰기 · DICTATION</div>
+        <div class="cs-headright">
+          <span id="dict-pos"></span>
+          <button type="button" class="cs-x" onclick="closeDictation()" aria-label="Back to the cassette player">✕</button>
+        </div>
+      </div>
+      <div id="dict-body">
+        <div id="dict-tags"></div>
+        <div id="dict-transport">
+          <button type="button" id="dict-play" class="cs-play big" onclick="dictPlay()" aria-label="Play the sentence">▶</button>
+          <button type="button" class="cs-again" onclick="dictPlay()">↻ 다시</button>
+          <div id="dict-rates">
+            <button type="button" class="cs-rate on" data-rate="1" onclick="dictPlay(1)">1.0×</button>
+            <button type="button" class="cs-rate" data-rate="0.75" onclick="dictPlay(0.75)">0.75×</button>
+          </div>
+          <span id="dict-hint"></span>
+        </div>
+        <div id="dict-inputrow">
+          <input id="dict-input" type="text" autocomplete="off" spellcheck="false" placeholder="들리는 대로 쓰세요">
+          <button type="button" id="dict-check">확인</button>
+        </div>
+        <div id="dict-result" class="cs-result"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════════ STUDY DESK · MODE CHOOSER ══════════ -->
   <div id="desk-menu-overlay" role="dialog" aria-modal="true" aria-labelledby="desk-menu-title">
     <div id="desk-menu-panel" class="glass-modal">

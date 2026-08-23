@@ -1,0 +1,642 @@
+{
+  "unit": "2b-unit-11",
+  "titleKo": "카세트 플레이어",
+  "titleEn": "The book's own recordings",
+  "unitKo": "11과 운동을 좀 해 보는 게 어때요?",
+  "source": "Seoul National University Korean 2B, Unit 11, tracks 12-19",
+  "closeKo": "닫기",
+  "tracks": [
+    {
+      "n": 12,
+      "sec": "문법과 표현 1-1",
+      "secEn": "'ㅅ' 불규칙",
+      "dur": 11.8,
+      "src": "audio/book/2b-u11-trk12.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "감기 아직 안 나았어요?"
+        },
+        {
+          "who": "B",
+          "ko": "네, 기침이 계속 나요."
+        }
+      ]
+    },
+    {
+      "n": 13,
+      "sec": "문법과 표현 1-2",
+      "secEn": "N마다",
+      "dur": 12.4,
+      "src": "audio/book/2b-u11-trk13.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "이 약을 하루에 몇 번 먹어야 돼요?"
+        },
+        {
+          "who": "B",
+          "ko": "하루에 세 번씩, 여덟 시간마다 드세요."
+        }
+      ]
+    },
+    {
+      "n": 14,
+      "sec": "말하기 1",
+      "secEn": "At the pharmacy",
+      "dur": 46.1,
+      "src": "audio/book/2b-u11-trk14.mp3",
+      "lines": [
+        {
+          "who": "약사",
+          "ko": "어떻게 오셨어요?"
+        },
+        {
+          "who": "나나",
+          "ko": "배가 아파서 왔는데요."
+        },
+        {
+          "who": "약사",
+          "ko": "속도 안 좋으세요?"
+        },
+        {
+          "who": "나나",
+          "ko": "네, 속도 안 좋고 토할 것 같아요."
+        },
+        {
+          "who": "약사",
+          "ko": "언제부터 아프셨어요?"
+        },
+        {
+          "who": "나나",
+          "ko": "어제 저녁부터 계속 아파요."
+        },
+        {
+          "who": "약사",
+          "ko": "그럼 이 약을 한번 드셔 보세요. 식후 세 번, 여덟 시간마다 드시면 돼요."
+        },
+        {
+          "who": "나나",
+          "ko": "네, 얼마지요?"
+        },
+        {
+          "who": "약사",
+          "ko": "5,000원이에요. 이 약을 이틀 정도 드셔 보시고 그래도 안 나으면 병원에 가세요."
+        },
+        {
+          "who": "나나",
+          "ko": "네, 감사합니다. 안녕히 계세요."
+        }
+      ]
+    },
+    {
+      "n": 15,
+      "sec": "문법과 표현 2-1",
+      "secEn": "V-는 게 어때요?",
+      "dur": 10.7,
+      "src": "audio/book/2b-u11-trk15.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "요즘 이가 계속 아파요."
+        },
+        {
+          "who": "B",
+          "ko": "치과에 가 보는 게 어때요?"
+        }
+      ]
+    },
+    {
+      "n": 16,
+      "sec": "문법과 표현 2-2",
+      "secEn": "V-기로 하다",
+      "dur": 11,
+      "src": "audio/book/2b-u11-trk16.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "이번 주말에 뭐 해요?"
+        },
+        {
+          "who": "B",
+          "ko": "유진 씨랑 영화 보러 가기로 했어요."
+        }
+      ]
+    },
+    {
+      "n": 17,
+      "sec": "말하기 2",
+      "secEn": "Recommending exercise",
+      "dur": 50.4,
+      "src": "audio/book/2b-u11-trk17.mp3",
+      "lines": [
+        {
+          "who": "민수",
+          "ko": "아키라 씨, 왜 이렇게 기운이 없어요?"
+        },
+        {
+          "who": "아키라",
+          "ko": "모르겠어요. 요즘 계속 피곤하고 입맛도 없어요."
+        },
+        {
+          "who": "민수",
+          "ko": "그럼 운동을 좀 해 보는 게 어때요?"
+        },
+        {
+          "who": "아키라",
+          "ko": "민수 씨는 건강을 위해서 특별히 하는 운동이 있어요?"
+        },
+        {
+          "who": "민수",
+          "ko": "네, 저는 아침마다 수영을 하는데 기분도 좋고 스트레스도 풀려요."
+        },
+        {
+          "who": "아키라",
+          "ko": "그래요? 어디에서 하는데요?"
+        },
+        {
+          "who": "민수",
+          "ko": "회사 근처에 있는 수영장에서 해요. 다음 주부터 지호 씨도 같이 하기로 했는데 아키라 씨도 같이 할래요?"
+        },
+        {
+          "who": "아키라",
+          "ko": "네, 저도 시간 내서 한번 가 볼게요."
+        }
+      ]
+    },
+    {
+      "n": 18,
+      "sec": "듣기 1",
+      "secEn": "Doctor and patient",
+      "dur": 77,
+      "src": "audio/book/2b-u11-trk18.mp3",
+      "lines": null,
+      "noteEn": "The book prints this track’s questions but not its script, so it is listen-only."
+    },
+    {
+      "n": 19,
+      "sec": "듣기 2",
+      "secEn": "Marathon interview",
+      "dur": 83,
+      "src": "audio/book/2b-u11-trk19.mp3",
+      "lines": null,
+      "noteEn": "The book prints this track’s questions but not its script, so it is listen-only."
+    }
+  ],
+  "dictation": {
+    "filter": {
+      "keep": [
+        "a whole sentence someone would actually say",
+        "5-22 syllables: long enough to need listening, short enough to hold in your head",
+        "carries at least one thing you can only write correctly if you know something — the unit's grammar (ㅅ 불규칙, N마다, V-는 게 어때요, V-기로 하다), a gap between sound and spelling (this unit's 발음 point is 종성 규칙 후 연음), or a unit headword"
+      ],
+      "drop": [
+        "fixed courtesies — 안녕히 계세요, 감사합니다",
+        "bare acknowledgements — 그래요?, 모르겠어요",
+        "prices and numbers read aloud — 5,000원이에요",
+        "anything under ~5 syllables: nothing to decide when you write it",
+        "grammar from another unit — 아키라 씨도 같이 할래요? is Unit 10's -(으)ㄹ래요"
+      ],
+      "splitAtClause": "Three printed turns run past 22 syllables. Each is split at its own clause boundary (-고, -는데) rather than trimmed, so no printed line is mutilated to fit."
+    },
+    "items": [
+      {
+        "id": 1,
+        "track": 12,
+        "who": "A",
+        "ko": "감기 아직 안 나았어요?",
+        "en": "Hasn't your cold got better yet?",
+        "syl": 9,
+        "why": "ㅅ 불규칙 past. You hear [나아써요], so the ㅅ is gone from the sound — but the stem is 낫다, and 나았- is what carries it. 낫았어요 keeps a ㅅ that drops; 낳았어요 is a different verb (to give birth).",
+        "tags": [
+          "ㅅ 불규칙"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d01.mp3",
+          "voiced": 1.924,
+          "rate": 4.68
+        }
+      },
+      {
+        "id": 2,
+        "track": 12,
+        "who": "B",
+        "ko": "네, 기침이 계속 나요.",
+        "en": "Yes, I keep coughing.",
+        "syl": 8,
+        "why": "기침이 runs together as [기치미]. Writing what you hear gives 기치미; the boundary only shows if you know the noun is 기침.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d02.mp3",
+          "voiced": 2.254,
+          "rate": 3.55
+        }
+      },
+      {
+        "id": 3,
+        "track": 13,
+        "who": "A",
+        "ko": "이 약을 하루에 몇 번 먹어야 돼요?",
+        "en": "How many times a day do I take this medicine?",
+        "syl": 13,
+        "why": "Two liaisons and a tensing: 약을 [야글], 먹어야 [머거야], 몇 번 [면 번]. Nothing in the sound tells you where 약 ends.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d03.mp3",
+          "voiced": 2.521,
+          "rate": 5.16
+        }
+      },
+      {
+        "id": 4,
+        "track": 13,
+        "who": "B",
+        "ko": "하루에 세 번씩, 여덟 시간마다 드세요.",
+        "en": "Three times a day, every eight hours.",
+        "syl": 15,
+        "why": "The unit's two counters together — 씩 per dose, 마다 per interval — and 여덟 is said [여덜], the ㅂ never surfacing.",
+        "tags": [
+          "N마다",
+          "씩"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d04.mp3",
+          "voiced": 2.925,
+          "rate": 5.13
+        }
+      },
+      {
+        "id": 5,
+        "track": 14,
+        "who": "나나",
+        "ko": "배가 아파서 왔는데요.",
+        "en": "I came because my stomach hurts.",
+        "syl": 9,
+        "why": "왔는데요 is said [완는데요]: the ㅆ assimilates to the ㄴ that follows. The past tense is only visible in the spelling.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d05.mp3",
+          "voiced": 1.877,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 6,
+        "track": 14,
+        "who": "약사",
+        "ko": "속도 안 좋으세요?",
+        "en": "Is your stomach bad too?",
+        "syl": 7,
+        "why": "좋으세요 is said [조으세요] — the ㅎ drops between vowels and leaves no trace in the sound. 속도 also tenses to [속또].",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d06.mp3",
+          "voiced": 1.292,
+          "rate": 5.42
+        }
+      },
+      {
+        "id": 7,
+        "track": 14,
+        "who": "나나",
+        "ko": "네, 속도 안 좋고 토할 것 같아요.",
+        "en": "Yes, my stomach is bad and I feel like throwing up.",
+        "syl": 12,
+        "why": "Same ㅎ, opposite behaviour: before ㄱ it aspirates instead of dropping — 좋고 [조코]. And 것 같아요 is [걷까타요], where the 것 is a whole word you cannot hear as one.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d07.mp3",
+          "voiced": 2.868,
+          "rate": 4.18
+        }
+      },
+      {
+        "id": 8,
+        "track": 14,
+        "who": "약사",
+        "ko": "언제부터 아프셨어요?",
+        "en": "Since when has it hurt?",
+        "syl": 9,
+        "why": "Honorific past 셨 heard as [셔써]. The ㅅ+ㅆ that spells it is invisible in the sound.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d08.mp3",
+          "voiced": 1.779,
+          "rate": 5.06
+        }
+      },
+      {
+        "id": 9,
+        "track": 14,
+        "who": "나나",
+        "ko": "어제 저녁부터 계속 아파요.",
+        "en": "It's been hurting since yesterday evening.",
+        "syl": 11,
+        "why": "저녁부터 tenses to [저녁뿌터] — you write ㅂ and say ㅃ.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d09.mp3",
+          "voiced": 2.371,
+          "rate": 4.64
+        }
+      },
+      {
+        "id": 10,
+        "track": 14,
+        "who": "약사",
+        "ko": "그럼 이 약을 한번 드셔 보세요.",
+        "en": "Then try taking this medicine.",
+        "syl": 12,
+        "why": "약을 [야글] again, and 한번 is one word here — 'give it a try' — not 한 번, 'one time'. The spacing is the meaning.",
+        "tags": [
+          "연음",
+          "띄어쓰기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d10.mp3",
+          "voiced": 2.18,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 11,
+        "track": 14,
+        "who": "약사",
+        "ko": "식후 세 번, 여덟 시간마다 드시면 돼요.",
+        "en": "Three times after meals, every eight hours.",
+        "syl": 15,
+        "why": "식후 is said [시쿠]: ㄱ meets ㅎ and comes out as ㅋ, so the two hanja 食後 disappear into one aspirated sound. N마다 again.",
+        "tags": [
+          "N마다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d11.mp3",
+          "voiced": 3.156,
+          "rate": 4.75
+        }
+      },
+      {
+        "id": 12,
+        "track": 14,
+        "who": "약사",
+        "ko": "그래도 안 나으면 병원에 가세요.",
+        "en": "If it still doesn't get better, go to the hospital.",
+        "syl": 13,
+        "why": "The same ㅅ 불규칙 as the first sentence, but here the ㅅ is gone from the spelling too: 낫다 → 나으면. 낫으면 is the mistake this row exists for.",
+        "tags": [
+          "ㅅ 불규칙"
+        ],
+        "splitFrom": "이 약을 이틀 정도 드셔 보시고 그래도 안 나으면 병원에 가세요.",
+        "audio": {
+          "src": "audio/book/2b-u11-d12.mp3",
+          "voiced": 2.18,
+          "rate": 5.96
+        }
+      },
+      {
+        "id": 13,
+        "track": 15,
+        "who": "A",
+        "ko": "요즘 이가 계속 아파요.",
+        "en": "My tooth keeps hurting these days.",
+        "syl": 9,
+        "why": "이가 is the tooth with its subject particle, not the demonstrative 이. Only the sentence tells you which.",
+        "tags": [
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d13.mp3",
+          "voiced": 2.21,
+          "rate": 4.07
+        }
+      },
+      {
+        "id": 14,
+        "track": 15,
+        "who": "B",
+        "ko": "치과에 가 보는 게 어때요?",
+        "en": "How about going to the dentist?",
+        "syl": 10,
+        "why": "The unit's recommending pattern. 치과 is said [치꽈] with a tensed ㄱ that the spelling does not show.",
+        "tags": [
+          "V-는 게 어때요",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d14.mp3",
+          "voiced": 1.552,
+          "rate": 6.44
+        }
+      },
+      {
+        "id": 15,
+        "track": 16,
+        "who": "A",
+        "ko": "이번 주말에 뭐 해요?",
+        "en": "What are you doing this weekend?",
+        "syl": 8,
+        "why": "주말에 [주마레]. An easy row on purpose — a dictation set needs somewhere to start.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d15.mp3",
+          "voiced": 1.456,
+          "rate": 5.49
+        }
+      },
+      {
+        "id": 16,
+        "track": 16,
+        "who": "B",
+        "ko": "유진 씨랑 영화 보러 가기로 했어요.",
+        "en": "I've arranged to go see a film with Yujin.",
+        "syl": 14,
+        "why": "V-기로 하다 reports a settled arrangement, and it is always past — 했어요, not 해요. 했어요 is said [해써요].",
+        "tags": [
+          "V-기로 하다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d16.mp3",
+          "voiced": 2.53,
+          "rate": 5.53
+        }
+      },
+      {
+        "id": 17,
+        "track": 17,
+        "who": "민수",
+        "ko": "왜 이렇게 기운이 없어요?",
+        "en": "Why are you so low on energy?",
+        "syl": 10,
+        "why": "Three sound changes in a row: 이렇게 [이러케], 기운이 [기우니], 없어요 [업써요]. The ㅄ of 없다 is audible as one ㅃ and spelled with two letters.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d17.mp3",
+          "voiced": 1.844,
+          "rate": 5.42
+        }
+      },
+      {
+        "id": 18,
+        "track": 17,
+        "who": "아키라",
+        "ko": "요즘 계속 피곤하고 입맛도 없어요.",
+        "en": "Lately I'm tired all the time and have no appetite.",
+        "syl": 14,
+        "why": "입맛도 is the hardest thing on this track: [임맏또]. The ㅂ becomes ㅁ before ㅁ, the ㅅ closes to ㄷ, and the ㄷ of 도 tenses — three changes, and none of them are written.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d18.mp3",
+          "voiced": 2.966,
+          "rate": 4.72
+        }
+      },
+      {
+        "id": 19,
+        "track": 17,
+        "who": "민수",
+        "ko": "그럼 운동을 좀 해 보는 게 어때요?",
+        "en": "Then how about getting some exercise?",
+        "syl": 13,
+        "why": "The sentence the chapter is named after, and the pattern it is built on.",
+        "tags": [
+          "V-는 게 어때요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d19.mp3",
+          "voiced": 2.433,
+          "rate": 5.34
+        }
+      },
+      {
+        "id": 20,
+        "track": 17,
+        "who": "아키라",
+        "ko": "민수 씨는 건강을 위해서 특별히 하는 운동이 있어요?",
+        "en": "Minsu, is there any exercise you do particularly for your health?",
+        "syl": 21,
+        "why": "The longest row. 특별히 is said [특뼈리] — the ㅎ vanishes and the ㄹ ties on — and 을 위해서 is the unit's purpose phrase, three words that sound like one.",
+        "tags": [
+          "을/를 위해서",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d20.mp3",
+          "voiced": 3.996,
+          "rate": 5.25
+        }
+      },
+      {
+        "id": 21,
+        "track": 17,
+        "who": "민수",
+        "ko": "저는 아침마다 수영을 하는데",
+        "en": "I swim every morning, and…",
+        "syl": 12,
+        "why": "N마다 on a time noun. 수영을 [수영을] keeps its ㅇ, which is what makes it sound like one long word.",
+        "tags": [
+          "N마다"
+        ],
+        "splitFrom": "저는 아침마다 수영을 하는데 기분도 좋고 스트레스도 풀려요.",
+        "audio": {
+          "src": "audio/book/2b-u11-d21.mp3",
+          "voiced": 2.302,
+          "rate": 5.21
+        }
+      },
+      {
+        "id": 22,
+        "track": 17,
+        "who": "민수",
+        "ko": "기분도 좋고 스트레스도 풀려요.",
+        "en": "It feels good and it relieves stress.",
+        "syl": 13,
+        "why": "좋고 [조코] once more, and 풀려요 is 풀리다 — something gets relieved by itself. 풀어요 would mean you untie it.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "splitFrom": "저는 아침마다 수영을 하는데 기분도 좋고 스트레스도 풀려요.",
+        "audio": {
+          "src": "audio/book/2b-u11-d22.mp3",
+          "voiced": 2.209,
+          "rate": 5.89
+        }
+      },
+      {
+        "id": 23,
+        "track": 17,
+        "who": "민수",
+        "ko": "회사 근처에 있는 수영장에서 해요.",
+        "en": "At the pool near my office.",
+        "syl": 14,
+        "why": "근처에 있는 comes out [근처에 인는]: the ㅆ closes and assimilates. Two words, one sound.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d23.mp3",
+          "voiced": 2.667,
+          "rate": 5.25
+        }
+      },
+      {
+        "id": 24,
+        "track": 17,
+        "who": "민수",
+        "ko": "다음 주부터 지호 씨도 같이 하기로 했는데",
+        "en": "Jiho has arranged to join from next week, and…",
+        "syl": 17,
+        "why": "같이 is [가치] — ㅌ before ㅣ comes out as ㅊ, the change that catches everyone. V-기로 하다 again.",
+        "tags": [
+          "V-기로 하다",
+          "연음"
+        ],
+        "splitFrom": "다음 주부터 지호 씨도 같이 하기로 했는데 아키라 씨도 같이 할래요?",
+        "audio": {
+          "src": "audio/book/2b-u11-d24.mp3",
+          "voiced": 2.878,
+          "rate": 5.91
+        }
+      },
+      {
+        "id": 25,
+        "track": 17,
+        "who": "아키라",
+        "ko": "네, 저도 시간 내서 한번 가 볼게요.",
+        "en": "Sure, I'll make time and give it a go.",
+        "syl": 13,
+        "why": "볼게요 is said [볼께요]. The tensing is real and you must not write it — 볼께요 is the single most common misspelling of this ending.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d25.mp3",
+          "voiced": 2.573,
+          "rate": 5.05
+        }
+      }
+    ]
+  }
+}
