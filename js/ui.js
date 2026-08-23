@@ -2007,6 +2007,7 @@ const QUIZ_ART_FOLDER = 'quiz';
 
 function deskQuizUrl() {
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-desk-quiz.json';
+  if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-desk-quiz.json';
   return '/worlds/unit10-desk-quiz.json';
 }
 

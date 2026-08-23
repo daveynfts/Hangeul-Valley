@@ -1,0 +1,155 @@
+{
+  "titleKo": "학습 책상",
+  "titleEn": "Health & exercise quiz",
+  "sessionSize": 10,
+  "doneKo": "오늘 공부 끝!",
+  "againKo": "한 번 더",
+  "closeKo": "책상 닫기",
+  "correctKo": "맞아요!",
+  "wrongKo": "Answer:",
+  "questions": [
+    {
+      "id": 1,
+      "q": "At the doctor's office you say: \"속이 안 좋고 어지러워요.\" What are you describing?",
+      "a": "B",
+      "choices": {
+        "A": "A sore throat and a cough",
+        "B": "An upset stomach and dizziness",
+        "C": "A fever and aches all over",
+        "D": "No appetite and no energy"
+      }
+    },
+    {
+      "id": 2,
+      "q": "요즘 이가 계속 아파요. 어느 병원에 가는 게 좋을까요?",
+      "a": "C",
+      "choices": {
+        "A": "내과",
+        "B": "안과",
+        "C": "치과",
+        "D": "이비인후과"
+      }
+    },
+    {
+      "id": 3,
+      "q": "얼굴에 뭐가 났어요. 어느 병원에 가야 돼요?",
+      "a": "A",
+      "choices": {
+        "A": "피부과",
+        "B": "정형외과",
+        "C": "안과",
+        "D": "내과"
+      }
+    },
+    {
+      "id": 4,
+      "q": "약사가 연고를 줬어요. 연고는 어떻게 써요?",
+      "a": "D",
+      "choices": {
+        "A": "먹어요",
+        "B": "넣어요",
+        "C": "붙여요",
+        "D": "발라요"
+      }
+    },
+    {
+      "id": 5,
+      "q": "'ㅅ' 불규칙: 감기가 다 ______. (낫다)",
+      "a": "B",
+      "choices": {
+        "A": "낫았어요",
+        "B": "나았어요",
+        "C": "낳았어요",
+        "D": "났어요"
+      }
+    },
+    {
+      "id": 6,
+      "q": "커피에 설탕을 넣었으니까 잘 ______ 드세요. (젓다)",
+      "a": "B",
+      "choices": {
+        "A": "젓어서",
+        "B": "저어서",
+        "C": "젓아서",
+        "D": "젖어서"
+      }
+    },
+    {
+      "id": 7,
+      "q": "약사가 복용법을 알려 줍니다: \"하루에 세 번씩, 여덟 시간______ 드세요.\"",
+      "a": "A",
+      "choices": {
+        "A": "마다",
+        "B": "씩",
+        "C": "부터",
+        "D": "처럼"
+      }
+    },
+    {
+      "id": 8,
+      "q": "친구가 \"요즘 밤에 잠을 잘 못 자요.\"라고 해요. V-는 게 어때요? 로 따뜻한 우유를 권해 보세요.",
+      "a": "A",
+      "choices": {
+        "A": "따뜻한 우유를 마시는 게 어때요?",
+        "B": "따뜻한 우유를 마시은 게 어때요?",
+        "C": "따뜻한 우유를 마셨는 게 어때요?",
+        "D": "따뜻한 우유를 마실 게 어때요?"
+      }
+    },
+    {
+      "id": 9,
+      "q": "You already arranged with 유진 to go see a film this weekend. Which sentence reports that arrangement with V-기로 하다?",
+      "a": "A",
+      "choices": {
+        "A": "유진 씨랑 영화 보러 가기로 했어요.",
+        "B": "유진 씨랑 영화 보러 가기를 했어요.",
+        "C": "유진 씨랑 영화 보러 갈 것 같아요.",
+        "D": "유진 씨랑 영화 보러 가는 게 어때요?"
+      }
+    },
+    {
+      "id": 10,
+      "q": "읽기 '건강한 생활 습관'에서 손 씻기에 대해 뭐라고 했습니까?",
+      "a": "A",
+      "choices": {
+        "A": "손을 자주 씻으면 감기를 예방할 수 있습니다.",
+        "B": "손을 씻는 것보다 영양제를 먹는 것이 더 좋습니다.",
+        "C": "외출하기 전에 꼭 손을 씻어야 합니다.",
+        "D": "손을 씻으면 소화가 잘 됩니다."
+      }
+    },
+    {
+      "id": 11,
+      "q": "약국에 들어가면 약사가 \"어떻게 오셨어요?\"라고 물어봐요. 무슨 뜻이에요?",
+      "a": "B",
+      "choices": {
+        "A": "How did you get here — by bus or by subway?",
+        "B": "What brings you here? / What seems to be the problem?",
+        "C": "When did you get here?",
+        "D": "Who did you come with?"
+      }
+    },
+    {
+      "id": 12,
+      "q": "버스를 타면 멀미를 해요. 어떤 약이 필요해요?",
+      "a": "B",
+      "choices": {
+        "A": "해열제",
+        "B": "멀미약",
+        "C": "소화제",
+        "D": "두통약"
+      }
+    },
+    {
+      "id": 13,
+      "q": "이 과의 문화 산책은 '인삼'에 대한 것입니다. 인삼이 무엇입니까?",
+      "a": "C",
+      "choices": {
+        "A": "A medicated patch for aching muscles",
+        "B": "A rice porridge eaten for an upset stomach",
+        "C": "Korean ginseng, a root taken for health",
+        "D": "A green tea drunk after meals"
+      }
+    }
+  ]
+}
