@@ -74,6 +74,18 @@ needs: `그럼 이 약을 한번 드셔 보세요. 식후 세 번, 여덟 시간
 turn and two dictation rows, and its internal spans land exactly on the sentence
 boundary.
 
+**The turn gap is per track too.** Unit 11 grouped on 0.95s; Unit 13’s track 37 has
+within-turn pauses at 0.952s and 0.987s and needs 1.00s — at 0.95 it gives 12 turns for
+10 printed lines. Read the gap list before trusting a threshold: the real turn breaks
+clustered at 1.007s and above, the within-turn pauses otherwise topped out at 0.847s,
+and the two strays sat in between. Do not tune until the count matches — regroup, then
+let the reading pace confirm it.
+
+**A short span between items may be the item number.** Unit 13’s two 발음 tracks read
+일/이/삼/사 before each line, which arrive as 0.27–0.40s spans. Counting those as turns
+made track 41 look like ten turns for five lines — as if each line were read twice. It is
+not; each is read once, and the numbers are the difference.
+
 **Reference spans by index, never by timestamp.** `scripts/`-side, the cut list is
 `{id: [track, firstSpan, lastSpan]}` and the times are re-derived from ffmpeg on
 every run. A transcribed number is a number nothing can check.
