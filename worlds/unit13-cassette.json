@@ -170,8 +170,52 @@
       "secEn": "Talking about where you live",
       "dur": 82,
       "src": "audio/book/2b-u13-trk38.mp3",
-      "lines": null,
-      "noteEn": "The book prints this track’s questions but not its script, so it is listen-only."
+      "lines": [
+        {
+          "who": "여",
+          "ko": "어서 오세요. 집 찾기 힘들지요?"
+        },
+        {
+          "who": "남",
+          "ko": "아니에요. 어렵지 않았어요. 여기 과일을 좀 사 왔어요."
+        },
+        {
+          "who": "여",
+          "ko": "그냥 와도 괜찮은데……. 고마워요."
+        },
+        {
+          "who": "남",
+          "ko": "집이 참 밝고 깨끗하네요. 주변 환경은 어때요?"
+        },
+        {
+          "who": "여",
+          "ko": "근처에 시장도 있고 공원도 가까워서 살기 좋아요."
+        },
+        {
+          "who": "남",
+          "ko": "집세는 비싸겠어요."
+        },
+        {
+          "who": "여",
+          "ko": "네, 시설도 잘되어 있고 지하철역에서 가깝기 때문에 좀 비싼 편이에요."
+        },
+        {
+          "who": "남",
+          "ko": "저도 요즘 집을 구하고 있는데 좋은 집을 찾을 수 있을지 모르겠어요."
+        },
+        {
+          "who": "여",
+          "ko": "왜요? 지금 살고 있는 기숙사가 마음에 안 들어요?"
+        },
+        {
+          "who": "남",
+          "ko": "아니요, 생활비가 많이 안 들어서 좋기는 한데 룸메이트 때문에 좀 힘들어요. 그래서 다음 학기에 이사를 가려고 생각 중이에요."
+        },
+        {
+          "who": "여",
+          "ko": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데 거기에서 한번 찾아보세요."
+        }
+      ]
     },
     {
       "n": 39,
@@ -179,8 +223,48 @@
       "secEn": "Phoning about a room",
       "dur": 71.1,
       "src": "audio/book/2b-u13-trk39.mp3",
-      "lines": null,
-      "noteEn": "The book prints this track’s questions but not its script, so it is listen-only."
+      "lines": [
+        {
+          "who": "스티븐",
+          "ko": "저, 원룸 광고 보고 전화했는데요. 방이 아직 있습니까?"
+        },
+        {
+          "who": "집주인",
+          "ko": "네, 아직 있는데요."
+        },
+        {
+          "who": "스티븐",
+          "ko": "거기 위치가 어떻게 돼요?"
+        },
+        {
+          "who": "집주인",
+          "ko": "대학동에 있는데 서울대학교에서 걸어서 10분 정도 걸려요. 하나빌딩 3층으로 오시면 됩니다."
+        },
+        {
+          "who": "스티븐",
+          "ko": "집세가 어떻게 됩니까?"
+        },
+        {
+          "who": "집주인",
+          "ko": "보증금 천만 원에 월세 삼십오만 원입니다. 얼마 전에 새로 지었기 때문에 시설도 잘되어 있고 아주 깨끗합니다."
+        },
+        {
+          "who": "스티븐",
+          "ko": "관리비는 얼마나 나오나요?"
+        },
+        {
+          "who": "집주인",
+          "ko": "수도 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요. 한번 직접 와서 구경해 보세요."
+        },
+        {
+          "who": "스티븐",
+          "ko": "네, 지금 바로 가겠습니다. 도착하면 전화 드릴게요."
+        },
+        {
+          "who": "집주인",
+          "ko": "네, 기다리고 있겠습니다."
+        }
+      ]
     },
     {
       "n": 40,
@@ -908,7 +992,350 @@
           "voiced": 2.374,
           "rate": 4.63
         }
+      },
+      {
+        "id": 38,
+        "track": 38,
+        "who": "여",
+        "ko": "어서 오세요. 집 찾기 힘들지요?",
+        "en": "Come in. Was the place hard to find?",
+        "syl": 12,
+        "why": "집 찾기 is [집 찯끼]: the ㅊ closes to ㄷ and tenses the ㄱ. And 찾기 힘들다 is the unit's V-기 A pattern.",
+        "tags": [
+          "연음",
+          "V-기(가) A"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d38.mp3",
+          "voiced": 2.649,
+          "rate": 4.53
+        }
+      },
+      {
+        "id": 39,
+        "track": 38,
+        "who": "남",
+        "ko": "아니에요. 어렵지 않았어요. 여기 과일을 좀 사 왔어요.",
+        "en": "Not at all, it wasn't hard. I brought some fruit.",
+        "syl": 21,
+        "why": "어렵지 is [어렵찌], 않았어요 is [아나써요] with the ㅎ gone, and 과일을 is [과이를].",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d39.mp3",
+          "voiced": 4.1,
+          "rate": 5.12
+        }
+      },
+      {
+        "id": 40,
+        "track": 38,
+        "who": "남",
+        "ko": "집이 참 밝고 깨끗하네요. 주변 환경은 어때요?",
+        "en": "The place is really bright and clean. What's the area like?",
+        "syl": 18,
+        "why": "Both of this unit's rules in one line: 밝고 is [발꼬], the ㄺ cluster keeping only its ㄹ and tensing the ㄱ, and 깨끗하네요 is [깨끄타네요], the ㅅ closing to ㄷ and fusing with the ㅎ into ㅌ.",
+        "tags": [
+          "유기음화",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d40.mp3",
+          "voiced": 3.822,
+          "rate": 4.71
+        }
+      },
+      {
+        "id": 41,
+        "track": 38,
+        "who": "여",
+        "ko": "근처에 시장도 있고 공원도 가까워서 살기 좋아요.",
+        "en": "There's a market nearby and a park close by, so it's good to live here.",
+        "syl": 20,
+        "why": "The chapter's own sentence pattern, said by someone who actually lives there. 있고 is [읻꼬] and 좋아요 is [조아요].",
+        "tags": [
+          "V-기(가) A",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d41.mp3",
+          "voiced": 4.723,
+          "rate": 4.23
+        }
+      },
+      {
+        "id": 42,
+        "track": 38,
+        "who": "남",
+        "ko": "집세는 비싸겠어요.",
+        "en": "The rent must be steep.",
+        "syl": 8,
+        "why": "비싸겠어요 is [비싸게써요]. 겠 is a guess about someone else's situation, not a future.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d42.mp3",
+          "voiced": 1.771,
+          "rate": 4.52
+        }
+      },
+      {
+        "id": 43,
+        "track": 38,
+        "who": "남",
+        "ko": "저도 요즘 집을 구하고 있는데",
+        "en": "I'm looking for a place myself at the moment, and…",
+        "syl": 12,
+        "why": "집을 is [지블] and 있는데 is [인는데]. 구하다 is the unit's word for house-hunting.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "splitFrom": "저도 요즘 집을 구하고 있는데 좋은 집을 찾을 수 있을지 모르겠어요.",
+        "audio": {
+          "src": "audio/book/2b-u13-d43.mp3",
+          "voiced": 2.379,
+          "rate": 5.04
+        }
+      },
+      {
+        "id": 44,
+        "track": 38,
+        "who": "남",
+        "ko": "좋은 집을 찾을 수 있을지 모르겠어요.",
+        "en": "…I don't know whether I'll find a good one.",
+        "syl": 15,
+        "why": "The unit's uncertainty pattern. 좋은 is [조은] with the ㅎ dropped, and 찾을 is [차즐] with the ㅊ carried onto the vowel.",
+        "tags": [
+          "A/V-(으)ㄹ지 모르겠다",
+          "연음"
+        ],
+        "splitFrom": "저도 요즘 집을 구하고 있는데 좋은 집을 찾을 수 있을지 모르겠어요.",
+        "audio": {
+          "src": "audio/book/2b-u13-d44.mp3",
+          "voiced": 2.645,
+          "rate": 5.67
+        }
+      },
+      {
+        "id": 45,
+        "track": 38,
+        "who": "여",
+        "ko": "왜요? 지금 살고 있는 기숙사가 마음에 안 들어요?",
+        "en": "Why? Don't you like the dorm you're in?",
+        "syl": 19,
+        "why": "기숙사가 is [기숙싸가], 마음에 is [마으메], 들어요 is [드러요]. 마음에 들다 again — the unit's way of saying you like a place.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d45.mp3",
+          "voiced": 3.681,
+          "rate": 5.16
+        }
+      },
+      {
+        "id": 46,
+        "track": 38,
+        "who": "여",
+        "ko": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데",
+        "en": "There's a website a lot of international students use, so…",
+        "syl": 21,
+        "why": "유학생들이 is [유학쌩드리] — the ㄱ tenses the ㅅ and the ㄹ carries over — and 인터넷 사이트가 is [인터넷 사이트가] with the ㅅ closing.",
+        "tags": [
+          "연음"
+        ],
+        "splitFrom": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데 거기에서 한번 찾아보세요.",
+        "audio": {
+          "src": "audio/book/2b-u13-d46.mp3",
+          "voiced": 3.608,
+          "rate": 5.82
+        }
+      },
+      {
+        "id": 47,
+        "track": 38,
+        "who": "여",
+        "ko": "거기에서 한번 찾아보세요.",
+        "en": "…have a look on there.",
+        "syl": 11,
+        "why": "찾아보세요 is [차자보세요]. And 한번 is one word — give it a go.",
+        "tags": [
+          "연음"
+        ],
+        "splitFrom": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데 거기에서 한번 찾아보세요.",
+        "audio": {
+          "src": "audio/book/2b-u13-d47.mp3",
+          "voiced": 1.975,
+          "rate": 5.57
+        }
+      },
+      {
+        "id": 48,
+        "track": 39,
+        "who": "스티븐",
+        "ko": "저, 원룸 광고 보고 전화했는데요. 방이 아직 있습니까?",
+        "en": "I'm calling about the studio advert. Is the room still available?",
+        "syl": 21,
+        "why": "전화했는데요 is [전화핸는데요], the ㅆ assimilating to the ㄴ, and 있습니까 is [읻씀니까]. 광고 is a unit headword.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d48.mp3",
+          "voiced": 4.482,
+          "rate": 4.69
+        }
+      },
+      {
+        "id": 49,
+        "track": 39,
+        "who": "집주인",
+        "ko": "네, 아직 있는데요.",
+        "en": "Yes, it's still free.",
+        "syl": 7,
+        "why": "있는데요 is [인는데요] — the ㅆ closes to ㄷ and then becomes ㄴ. Two of the three letters are inaudible.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d49.mp3",
+          "voiced": 1.677,
+          "rate": 4.18
+        }
+      },
+      {
+        "id": 50,
+        "track": 39,
+        "who": "스티븐",
+        "ko": "거기 위치가 어떻게 돼요?",
+        "en": "Whereabouts is it?",
+        "syl": 10,
+        "why": "어떻게 is [어떠케], the unit's aspiration rule. 위치 — location — is one of the things the book has you ask about.",
+        "tags": [
+          "유기음화",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d50.mp3",
+          "voiced": 2.014,
+          "rate": 4.96
+        }
+      },
+      {
+        "id": 51,
+        "track": 39,
+        "who": "스티븐",
+        "ko": "집세가 어떻게 됩니까?",
+        "en": "What's the rent?",
+        "syl": 9,
+        "why": "어떻게 [어떠케] again, and 됩니까 is [됨니까] with the ㅂ becoming ㅁ before the ㄴ.",
+        "tags": [
+          "유기음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d51.mp3",
+          "voiced": 1.888,
+          "rate": 4.77
+        }
+      },
+      {
+        "id": 52,
+        "track": 39,
+        "who": "집주인",
+        "ko": "보증금 천만 원에 월세 삼십오만 원입니다.",
+        "en": "A ten-million deposit and three hundred and fifty thousand a month.",
+        "syl": 17,
+        "why": "The three words the whole chapter turns on — 보증금, 월세 and the figures — and here the book writes the numbers out in Hangul, so this is the one money line you can actually take down. 원입니다 is [워님니다].",
+        "tags": [
+          "어휘",
+          "연음"
+        ],
+        "splitFrom": "보증금 천만 원에 월세 삼십오만 원입니다. 얼마 전에 새로 지었기 때문에 시설도 잘되어 있고 아주 깨끗합니다.",
+        "audio": {
+          "src": "audio/book/2b-u13-d52.mp3",
+          "voiced": 3.923,
+          "rate": 4.33
+        }
+      },
+      {
+        "id": 53,
+        "track": 39,
+        "who": "스티븐",
+        "ko": "관리비는 얼마나 나오나요?",
+        "en": "How much is the maintenance fee?",
+        "syl": 11,
+        "why": "관리비 is [괄리비] — the ㄴ becomes ㄹ next to the ㄹ. And 나오다 is what a bill does in Korean.",
+        "tags": [
+          "어휘",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d53.mp3",
+          "voiced": 2.138,
+          "rate": 5.15
+        }
+      },
+      {
+        "id": 54,
+        "track": 39,
+        "who": "집주인",
+        "ko": "한번 직접 와서 구경해 보세요.",
+        "en": "Come and see it for yourself.",
+        "syl": 12,
+        "why": "직접 is [직쩝], the ㄱ tensing the ㅈ. 구경하다 is what you do at a viewing.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "splitFrom": "수도 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요. 한번 직접 와서 구경해 보세요.",
+        "audio": {
+          "src": "audio/book/2b-u13-d54.mp3",
+          "voiced": 2.526,
+          "rate": 4.75
+        }
+      },
+      {
+        "id": 55,
+        "track": 39,
+        "who": "스티븐",
+        "ko": "네, 지금 바로 가겠습니다. 도착하면 전화 드릴게요.",
+        "en": "I'll come right now. I'll ring when I arrive.",
+        "syl": 20,
+        "why": "도착하면 is [도차카면] — ㄱ plus ㅎ giving ㅋ, this unit's rule — and 드릴게요 is [드릴께요], the tensing you must not write.",
+        "tags": [
+          "유기음화",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d55.mp3",
+          "voiced": 3.748,
+          "rate": 5.34
+        }
+      },
+      {
+        "id": 56,
+        "track": 39,
+        "who": "집주인",
+        "ko": "네, 기다리고 있겠습니다.",
+        "en": "I'll be waiting.",
+        "syl": 10,
+        "why": "있겠습니다 is [읻께씀니다]: the ㅆ closes, tenses the ㄱ, and the final ㅂ becomes ㅁ. Three changes in one ending.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u13-d56.mp3",
+          "voiced": 2.058,
+          "rate": 4.86
+        }
       }
     ]
-  }
+  },
+  "listenOnly": "Every track now carries a script: the unit pages print them for the grammar and 말하기 tracks, and the 듣기 지문 at the back of the book prints them for the 듣기 tracks."
 }

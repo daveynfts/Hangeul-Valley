@@ -32,6 +32,13 @@ that it dominated: Unit 11's own 발음 section is 종성 규칙 후 연음, so 
 turn on a liaison or assimilation. `입맛도` is said [임맏또] — three changes, none of
 them written. That is a dictation exercise. `안녕히 계세요` is not.
 
+**Look at the back of the book before writing a track off.** The unit pages print only
+the comprehension questions for their 듣기 sections, which is why Unit 11's tracks 18-19
+and Unit 13's 38-39 shipped listen-only. The 듣기 지문 pages at the back print the full
+transcripts, and they turned four dead tracks into 40 more dictation sentences and
+doubled Unit 11's set. They also settle the book's own answer keys, which is a useful
+cross-check: 남자는 아침마다 두 시간씩 운동을 합니다 is on the tape, verbatim.
+
 **A track with no printed script cannot supply dictation at all.** Unit 11's tracks
 18 and 19 are the 듣기 sections: the book prints the comprehension questions and not
 the transcript, so there is nothing to check an answer against. They ship as
@@ -95,6 +102,31 @@ within-turn gap — 0.31s here — or a neighbour leaks into the clip.
 
 Mono at 64 kbps: eight whole tracks went 6.93 MB → 2.32 MB, and the 25 sentence
 clips are 570 KB together, 23 KB each.
+
+### When the gap heuristic gives up
+
+The gap rule works on the unit-page tracks because their turns are short. It fails on
+the 듣기 tracks: those turns run three sentences, they pause inside a turn as readily as
+between two, and no threshold splits them correctly — every value tried either split
+turns or merged them.
+
+What was being optimised was never the gap, though. It was pace consistency, and that
+can be optimised directly: partition the spans into as many consecutive groups as there
+are printed lines, choosing the partition that minimises the spread of
+syllables-per-second. A dynamic program does it exactly, and because the objective IS
+the verification criterion, a bad fit shows up as a wide spread rather than as a
+plausible-looking wrong answer. All four 듣기 tracks came out at ±0.30 to ±0.63.
+
+Two things that search has to allow for:
+
+- **Leading spans that are not speech.** Track 39 is a phone call and opens on a ring
+  tone, which is well above a -35dB floor and registers as a span. Track 38 has two.
+  Searching only over trailing extras put the first line at 2.81 syl/s against a track
+  mean of 4.6 — the tell that something before the dialogue was being counted.
+- **Very short lines make the spread meaningless, not wrong.** Track 18 came out at
+  ±1.14 until you notice the two one-syllable turns — 켈리 saying 네 and 아 — whose rate
+  is arithmetic on nothing. Excluding lines under five syllables gives ±0.62 across the
+  other fifteen. Check what the outliers ARE before re-cutting.
 
 ### Verifying the cut
 

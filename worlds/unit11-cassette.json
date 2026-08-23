@@ -170,8 +170,76 @@
       "secEn": "Doctor and patient",
       "dur": 77,
       "src": "audio/book/2b-u11-trk18.mp3",
-      "lines": null,
-      "noteEn": "The book prints this track’s questions but not its script, so it is listen-only."
+      "lines": [
+        {
+          "who": "간호사",
+          "ko": "어서 오세요. 저희 병원에 처음 오셨나요?"
+        },
+        {
+          "who": "켈리",
+          "ko": "네, 처음이에요."
+        },
+        {
+          "who": "간호사",
+          "ko": "그럼 여기 성함과 연락처를 쓰시고 잠깐만 기다려 주세요."
+        },
+        {
+          "who": "켈리",
+          "ko": "네."
+        },
+        {
+          "who": "간호사",
+          "ko": "켈리 씨, 들어오세요."
+        },
+        {
+          "who": "의사",
+          "ko": "어디가 아프세요?"
+        },
+        {
+          "who": "켈리",
+          "ko": "열도 나고 목도 많이 아파요."
+        },
+        {
+          "who": "의사",
+          "ko": "언제부터 그랬어요?"
+        },
+        {
+          "who": "켈리",
+          "ko": "이틀 전부터 아팠어요."
+        },
+        {
+          "who": "의사",
+          "ko": "네, 자, '아' 해 보세요."
+        },
+        {
+          "who": "켈리",
+          "ko": "아."
+        },
+        {
+          "who": "의사",
+          "ko": "목이 많이 부었네요. 기침은 안 하세요?"
+        },
+        {
+          "who": "켈리",
+          "ko": "네, 기침은 안 하는데 콧물이 나요."
+        },
+        {
+          "who": "의사",
+          "ko": "요즘 감기가 유행이에요. 약 잘 드시고 따뜻한 물을 자주 드세요."
+        },
+        {
+          "who": "켈리",
+          "ko": "내일 또 와야 하나요?"
+        },
+        {
+          "who": "의사",
+          "ko": "아니요, 약을 다 드시고 낫지 않으면 그때 다시 오세요."
+        },
+        {
+          "who": "켈리",
+          "ko": "네, 감사합니다. 안녕히 계세요."
+        }
+      ]
     },
     {
       "n": 19,
@@ -179,8 +247,52 @@
       "secEn": "Marathon interview",
       "dur": 83,
       "src": "audio/book/2b-u11-trk19.mp3",
-      "lines": null,
-      "noteEn": "The book prints this track’s questions but not its script, so it is listen-only."
+      "lines": [
+        {
+          "who": "기자",
+          "ko": "지금 막 마라톤대회가 끝났는데요. 이번 대회에 참가한 선수 중에 가장 연세가 많으신 김인창 씨와 이야기를 나눠 보겠습니다. 안녕하세요? 먼저 마라톤을 끝까지 달리신 것 축하드립니다."
+        },
+        {
+          "who": "선수",
+          "ko": "네, 감사합니다."
+        },
+        {
+          "who": "기자",
+          "ko": "마라톤에 처음 참가하신 건가요?"
+        },
+        {
+          "who": "선수",
+          "ko": "네, 마라톤은 이번이 처음입니다."
+        },
+        {
+          "who": "기자",
+          "ko": "연세가 여든 여덟이신데 정말 대단하십니다. 지금 기분이 어떠십니까?"
+        },
+        {
+          "who": "선수",
+          "ko": "정말 좋습니다. 더 달릴 수 있을 것 같은데요."
+        },
+        {
+          "who": "기자",
+          "ko": "평소에 운동을 많이 하십니까?"
+        },
+        {
+          "who": "선수",
+          "ko": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다."
+        },
+        {
+          "who": "기자",
+          "ko": "식사는 어떻게 하십니까? 건강을 위해서 특별히 드시는 것이 있습니까?"
+        },
+        {
+          "who": "선수",
+          "ko": "특별히 먹는 음식은 없고 너무 짜거나 매운 음식은 잘 먹지 않습니다."
+        },
+        {
+          "who": "기자",
+          "ko": "네, 다시 한 번 축하드립니다."
+        }
+      ]
     }
   ],
   "dictation": {
@@ -636,7 +748,379 @@
           "voiced": 2.573,
           "rate": 5.05
         }
+      },
+      {
+        "id": 26,
+        "track": 18,
+        "who": "간호사",
+        "ko": "저희 병원에 처음 오셨나요?",
+        "en": "Is this your first visit to us?",
+        "syl": 11,
+        "why": "저희 is [저히] — the ㅎ survives here — and 오셨나요 is [오션나요], the ㅆ closing and assimilating to the ㄴ.",
+        "tags": [
+          "연음"
+        ],
+        "splitFrom": "어서 오세요. 저희 병원에 처음 오셨나요?",
+        "audio": {
+          "src": "audio/book/2b-u11-d26.mp3",
+          "voiced": 1.932,
+          "rate": 5.69
+        }
+      },
+      {
+        "id": 27,
+        "track": 18,
+        "who": "켈리",
+        "ko": "네, 처음이에요.",
+        "en": "Yes, it's my first time.",
+        "syl": 6,
+        "why": "처음이에요 runs to [처으미에요]. The noun 처음 loses its edge onto the copula.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d27.mp3",
+          "voiced": 1.402,
+          "rate": 4.28
+        }
+      },
+      {
+        "id": 28,
+        "track": 18,
+        "who": "간호사",
+        "ko": "켈리 씨, 들어오세요.",
+        "en": "Kelly, come in please.",
+        "syl": 8,
+        "why": "들어오세요 is [드러오세요] — 들다 plus 오다, and neither is audible as itself.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d28.mp3",
+          "voiced": 1.538,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 29,
+        "track": 18,
+        "who": "의사",
+        "ko": "어디가 아프세요?",
+        "en": "Where does it hurt?",
+        "syl": 7,
+        "why": "The question the whole unit answers, and the honorific of 아프다.",
+        "tags": [
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d29.mp3",
+          "voiced": 1.222,
+          "rate": 5.73
+        }
+      },
+      {
+        "id": 30,
+        "track": 18,
+        "who": "켈리",
+        "ko": "열도 나고 목도 많이 아파요.",
+        "en": "I have a fever and my throat hurts a lot.",
+        "syl": 11,
+        "why": "열도 [열또] and 목도 [목또] both tense after the 받침, and 많이 is [마니] with the ㅎ gone. Two unit headwords in one line.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d30.mp3",
+          "voiced": 2.241,
+          "rate": 4.91
+        }
+      },
+      {
+        "id": 31,
+        "track": 18,
+        "who": "의사",
+        "ko": "언제부터 그랬어요?",
+        "en": "Since when has it been like that?",
+        "syl": 8,
+        "why": "그랬어요 is [그래써요]. The ㅆ of the past tense is heard once, not twice.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d31.mp3",
+          "voiced": 1.238,
+          "rate": 6.46
+        }
+      },
+      {
+        "id": 32,
+        "track": 18,
+        "who": "켈리",
+        "ko": "이틀 전부터 아팠어요.",
+        "en": "It's hurt since two days ago.",
+        "syl": 9,
+        "why": "전부터 tenses to [전부터] and 아팠어요 to [아파써요]. This is also the line the book's first comprehension question turns on — 이틀, not 사흘.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d32.mp3",
+          "voiced": 2.261,
+          "rate": 3.98
+        }
+      },
+      {
+        "id": 33,
+        "track": 18,
+        "who": "의사",
+        "ko": "목이 많이 부었네요. 기침은 안 하세요?",
+        "en": "Your throat is quite swollen. No cough?",
+        "syl": 15,
+        "why": "부었네요 is 붓다 in the past — the ㅅ-irregular of this unit — and it comes out [부언네요], where the ㅅ has already gone from the spelling and the ㅆ then assimilates to the ㄴ. 목이 is [모기].",
+        "tags": [
+          "ㅅ 불규칙",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d33.mp3",
+          "voiced": 3.208,
+          "rate": 4.68
+        }
+      },
+      {
+        "id": 34,
+        "track": 18,
+        "who": "켈리",
+        "ko": "네, 기침은 안 하는데 콧물이 나요.",
+        "en": "No cough, but I have a runny nose.",
+        "syl": 13,
+        "why": "콧물이 is [콘무리]: the ㅅ closes to ㄷ and then becomes ㄴ before the ㅁ. Nothing of the ㅅ you write is left to hear.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d34.mp3",
+          "voiced": 2.479,
+          "rate": 5.24
+        }
+      },
+      {
+        "id": 35,
+        "track": 18,
+        "who": "켈리",
+        "ko": "내일 또 와야 하나요?",
+        "en": "Do I need to come again tomorrow?",
+        "syl": 8,
+        "why": "와야 하나요 elides to [와야하나요] with the ㅎ barely there — the question is carried by intonation.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d35.mp3",
+          "voiced": 1.765,
+          "rate": 4.53
+        }
+      },
+      {
+        "id": 36,
+        "track": 18,
+        "who": "의사",
+        "ko": "아니요, 약을 다 드시고 낫지 않으면 그때 다시 오세요.",
+        "en": "No — finish the medicine, and if it doesn't get better, come back then.",
+        "syl": 21,
+        "why": "낫지 is [낟찌] — here the ㅅ of 낫다 stays in the spelling because what follows is a consonant, the opposite of 나으면. 약을 is [야글] and 않으면 is [아느면].",
+        "tags": [
+          "ㅅ 불규칙",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d36.mp3",
+          "voiced": 3.745,
+          "rate": 5.61
+        }
+      },
+      {
+        "id": 37,
+        "track": 19,
+        "who": "기자",
+        "ko": "마라톤에 처음 참가하신 건가요?",
+        "en": "Is this your first marathon?",
+        "syl": 13,
+        "why": "마라톤에 is [마라토네] and 참가하신 is [참가하신] with the ㅎ weak between vowels.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d37.mp3",
+          "voiced": 2.8,
+          "rate": 4.64
+        }
+      },
+      {
+        "id": 38,
+        "track": 19,
+        "who": "선수",
+        "ko": "네, 마라톤은 이번이 처음입니다.",
+        "en": "Yes, this is my first marathon.",
+        "syl": 13,
+        "why": "Three liaisons — 마라톤은 [마라토는], 이번이 [이버니], 처음입니다 [처으밈니다] — and this is the line that answers the book's question about whether he has run before.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d38.mp3",
+          "voiced": 2.365,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 39,
+        "track": 19,
+        "who": "기자",
+        "ko": "연세가 여든 여덟이신데 정말 대단하십니다.",
+        "en": "Eighty-eight, and still doing this — that's remarkable.",
+        "syl": 18,
+        "why": "여덟이신데 is [여덜비신데]: the ㄼ cluster gives up its ㄹ to the syllable and its ㅂ to the vowel, so both letters surface but neither where it is written.",
+        "tags": [
+          "연음"
+        ],
+        "splitFrom": "연세가 여든 여덟이신데 정말 대단하십니다. 지금 기분이 어떠십니까?",
+        "audio": {
+          "src": "audio/book/2b-u11-d39.mp3",
+          "voiced": 4.103,
+          "rate": 4.39
+        }
+      },
+      {
+        "id": 40,
+        "track": 19,
+        "who": "기자",
+        "ko": "지금 기분이 어떠십니까?",
+        "en": "How do you feel right now?",
+        "syl": 10,
+        "why": "기분이 is [기부니]. The honorific -십니까 is [심니까], the ㅂ becoming ㅁ before the ㄴ.",
+        "tags": [
+          "연음"
+        ],
+        "splitFrom": "연세가 여든 여덟이신데 정말 대단하십니다. 지금 기분이 어떠십니까?",
+        "audio": {
+          "src": "audio/book/2b-u11-d40.mp3",
+          "voiced": 1.734,
+          "rate": 5.77
+        }
+      },
+      {
+        "id": 41,
+        "track": 19,
+        "who": "선수",
+        "ko": "더 달릴 수 있을 것 같은데요.",
+        "en": "I feel like I could run further.",
+        "syl": 11,
+        "why": "있을 것 같은데요 is [이쓸 껏 까튼데요] — the 것 tenses what follows and the 같은 carries its ㅌ onto the vowel as [트].",
+        "tags": [
+          "연음"
+        ],
+        "splitFrom": "정말 좋습니다. 더 달릴 수 있을 것 같은데요.",
+        "audio": {
+          "src": "audio/book/2b-u11-d41.mp3",
+          "voiced": 2.132,
+          "rate": 5.16
+        }
+      },
+      {
+        "id": 42,
+        "track": 19,
+        "who": "기자",
+        "ko": "평소에 운동을 많이 하십니까?",
+        "en": "Do you exercise a lot ordinarily?",
+        "syl": 12,
+        "why": "평소 is a unit headword, and 운동을 많이 runs together as [운동을 마니] with the ㅎ dropping.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d42.mp3",
+          "voiced": 2.072,
+          "rate": 5.79
+        }
+      },
+      {
+        "id": 43,
+        "track": 19,
+        "who": "선수",
+        "ko": "저는 아침마다 두 시간씩 운동을 합니다.",
+        "en": "I exercise for two hours every morning.",
+        "syl": 16,
+        "why": "The unit's two counters in the sentence the book asks you to fill in: 아침마다 for the interval, 두 시간씩 for the amount.",
+        "tags": [
+          "N마다",
+          "씩"
+        ],
+        "splitFrom": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다.",
+        "audio": {
+          "src": "audio/book/2b-u11-d43.mp3",
+          "voiced": 3.448,
+          "rate": 4.64
+        }
+      },
+      {
+        "id": 44,
+        "track": 19,
+        "who": "기자",
+        "ko": "식사는 어떻게 하십니까?",
+        "en": "What about your meals?",
+        "syl": 10,
+        "why": "어떻게 is [어떠케] — the ㅎ and the ㄱ fusing into one ㅋ.",
+        "tags": [
+          "유기음화"
+        ],
+        "splitFrom": "식사는 어떻게 하십니까? 건강을 위해서 특별히 드시는 것이 있습니까?",
+        "audio": {
+          "src": "audio/book/2b-u11-d44.mp3",
+          "voiced": 1.853,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 45,
+        "track": 19,
+        "who": "기자",
+        "ko": "건강을 위해서 특별히 드시는 것이 있습니까?",
+        "en": "Is there anything in particular you eat for your health?",
+        "syl": 18,
+        "why": "특별히 is [특뼈리] and 것이 is [거시]. 을 위해서 is three words that sound like one.",
+        "tags": [
+          "을/를 위해서",
+          "연음"
+        ],
+        "splitFrom": "식사는 어떻게 하십니까? 건강을 위해서 특별히 드시는 것이 있습니까?",
+        "audio": {
+          "src": "audio/book/2b-u11-d45.mp3",
+          "voiced": 3.184,
+          "rate": 5.65
+        }
+      },
+      {
+        "id": 46,
+        "track": 19,
+        "who": "기자",
+        "ko": "네, 다시 한 번 축하드립니다.",
+        "en": "Congratulations once again.",
+        "syl": 11,
+        "why": "축하드립니다 is [추카드림니다]. Same fusion as 축하해요, and 한 번 here really is two words — one time — unlike the 한번 of 한번 해 보세요.",
+        "tags": [
+          "유기음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d46.mp3",
+          "voiced": 2.66,
+          "rate": 4.14
+        }
       }
     ]
-  }
+  },
+  "listenOnly": "Every track now carries a script: the unit pages print them for the grammar and 말하기 tracks, and the 듣기 지문 at the back of the book prints them for the 듣기 tracks."
 }
