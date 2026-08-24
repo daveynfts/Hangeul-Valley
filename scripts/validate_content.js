@@ -525,7 +525,7 @@ const overlayIds = [
   check('so none of them needs a no-script note', tracks.every((t) => !t.noteEn));
 
   const items = (c.dictation && c.dictation.items) || [];
-  check('46 dictation sentences', items.length === 46, `found ${items.length}`);
+  check('47 dictation sentences', items.length === 47, `found ${items.length}`);
   const bad = items.filter((i) => !i.ko || !i.en || !i.why || !i.tags || !i.audio || !i.audio.src).map((i) => i.id);
   check('every sentence has text, gloss, reason, tags and a clip', bad.length === 0, 'id ' + bad.join(','));
   const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);
@@ -549,7 +549,7 @@ const overlayIds = [
   // A split row must name the printed turn it came out of, so the change of shape is
   // visible rather than looking like the book prints short lines.
   const splits = items.filter((i) => i.splitFrom);
-  check('rows split from a longer turn say so', splits.length === 11, `found ${splits.length}`);
+  check('rows split from a longer turn say so', splits.length === 13, `found ${splits.length}`);
   check('and each split row is a substring of the turn it names',
     splits.every((i) => i.splitFrom.replace(/\s/g, '').indexOf(i.ko.replace(/\s/g, '')) >= 0));
 }());
@@ -662,7 +662,7 @@ const overlayIds = [
     tracks.every((t) => Array.isArray(t.lines)), tracks.filter((t) => !t.lines).map((t) => t.n).join(','));
   check('so none of them needs a no-script note', tracks.every((t) => !t.noteEn));
   const items = (c.dictation && c.dictation.items) || [];
-  check('56 dictation sentences', items.length === 56, `found ${items.length}`);
+  check('60 dictation sentences', items.length === 60, `found ${items.length}`);
   const bad = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length || !i.audio || !i.audio.src).map((i) => i.id);
   check('every Unit 13 sentence is complete', bad.length === 0, 'id ' + bad.join(','));
   const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);

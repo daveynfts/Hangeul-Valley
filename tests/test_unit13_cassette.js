@@ -142,7 +142,7 @@ assert(t41.lines[3].who === 'A' && t41.lines[4].who === 'B', 'and its fourth ite
 
 // ── 3. The curated set ───────────────────────────────────────────────────────
 console.log('\n--- 3. The curated set ---');
-assert(items.length === 56, '56 sentences (' + items.length + ')');
+assert(items.length === 60, '60 sentences (' + items.length + ')');
 const ids = items.map((i) => i.id);
 assert(new Set(ids).size === ids.length && ids.every((v, k) => v === k + 1), 'ids are unique and sequential');
 assert(items.every((i) => i.ko && i.en && i.why && (i.tags || []).length && i.audio && i.audio.src),
@@ -167,7 +167,11 @@ const notTraced = items.filter((i) => {
 }).map((i) => i.id);
 assert(notTraced.length === 0, 'every sentence traces to a printed line'
   + (notTraced.length ? ' — id ' + notTraced.join(',') : ''));
-assert(items.filter((i) => i.splitFrom).length === 23, '23 rows are marked as split from a longer turn');
+assert(items.filter((i) => i.splitFrom).length === 33, '33 rows are marked as split from a longer turn');
+// One clip, one sentence. A learner replays a dictation row several times, so a clip
+// carrying two sentences makes them sit through audio they are not asked to write.
+const oneSentence = (s) => nfc(s).split(/(?<=[.?!])\s+/).filter((x) => x.trim()).length === 1;
+assert(items.every((i) => oneSentence(i.ko)), 'no clip holds more than one sentence');
 // The filter drops figures read aloud, and this is the row it was written for: 전세는
 // 7,000만 원이고… would have the learner guessing between 7,000 and 칠천.
 assert(!items.some((i) => /[0-9],[0-9]/.test(i.ko)), 'no answer contains a figure read aloud');

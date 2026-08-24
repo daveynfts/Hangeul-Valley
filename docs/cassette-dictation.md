@@ -97,6 +97,29 @@ not; each is read once, and the numbers are the difference.
 `{id: [track, firstSpan, lastSpan]}` and the times are re-derived from ffmpeg on
 every run. A transcribed number is a number nothing can check.
 
+**One clip is one sentence, and nothing but that sentence.** Two things break that if
+you let them:
+
+- **A row holding two sentences.** Seven did. A learner replays a dictation row several
+  times, so every replay made them sit through a sentence they were not being asked to
+  write. Splitting is the same pace-minimising partition used to align the 듣기 tracks,
+  applied to the row's own sub-spans, so the cut lands where the narrator paused rather
+  than where the punctuation falls. A row whose narrator ran the sentences together
+  cannot be split; report it rather than cutting mid-breath.
+- **Silence inside the clip.** A clip cut as one slice from its first span to its last
+  carries the original pauses: one Unit 11 row ran 5.45s of clip around 3.75s of speech.
+  Rebuild from the voiced spans alone, joined by a fixed 0.18s breath. Across both units
+  that took the mean clip from 3.0s to 2.7s and the longest from 6.09s to 5.40s, and what
+  is left over the speech is now 0.3s of pad rather than seconds of dead air.
+
+**Filter the parts again after splitting.** Mechanical splitting produces fragments the
+unit's own rule excludes — 왜요? at two syllables, 아니에요. at four, 어서 오세요. a fixed
+courtesy. Three were dropped rather than shipped as exercises with nothing to decide.
+
+**And write each part its own note.** A part cannot inherit its parent's: half of them
+would explain a sound change that is in the other half. 목이 많이 부었네요 / 기침은 안 하세요
+was one note about 붓다; it is now two, and the second one talks about 기침은 [기치믄].
+
 **Pad 0.12s in front and 0.15s behind.** The tail has to stay under the smallest
 within-turn gap — 0.31s here — or a neighbour leaks into the clip.
 
