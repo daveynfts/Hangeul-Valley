@@ -285,10 +285,24 @@ const overlayIds = [
   const ww = (world.level && world.level.words) || [];
   const missing = ww.filter((w) => !w.ko || !w.en || !w.category || !w.categoryEn).map((w) => w.ko || '?');
   check('2B Unit 10 words have ko / en / category / categoryEn', missing.length === 0, missing.slice(0, 5).join(', '));
-  check('2B Unit 10 has the full textbook word list', ww.length === 80, `found ${ww.length}`);
+  // Split the same way Unit 14's is. The 80 are the textbook's own 어휘 list and that count is a
+  // fidelity claim; the rest are the words the chapter's other pages drill — the grammar boxes,
+  // 말하기, 과제 and 발음 — which have no icons yet and so render as their hint emoji.
+  const drawn10 = ww.filter((w) => !w.artPending);
+  check('2B Unit 10 keeps its 80 textbook headwords', drawn10.length === 80, `found ${drawn10.length}`);
   const cats = new Set(ww.map((w) => w.category));
-  check('2B Unit 10 has six vocab groups', ['음식', '맛', '식당 평가', '읽기', '주문', '회화'].every((c) => cats.has(c)),
+  const want10 = ['음식', '맛', '식당 평가', '읽기', '주문', '회화'];
+  check('2B Unit 10 keeps its six 어휘 vocab groups', want10.every((c) => cats.has(c)),
     [...cats].join(', '));
+  const stray10 = drawn10.filter((w) => !want10.includes(w.category)).map((w) => w.ko);
+  check('2B Unit 10 drawn headwords stay in the six 어휘 groups', stray10.length === 0, stray10.slice(0, 8).join(', '));
+  const declared10 = ((world.notebook && world.notebook.mindmap) || []).map((g) => g.cat);
+  const inUse10 = [...new Set(ww.map((w) => w.category))];
+  check('2B Unit 10 mindmap groups match the categories in use',
+    declared10.every((c) => inUse10.includes(c)) && inUse10.every((c) => declared10.includes(c)),
+    'mindmap: ' + declared10.join(', ') + ' | words: ' + inUse10.join(', '));
+  const dups10 = ww.map((w) => w.ko).filter((k, i, arr) => arr.indexOf(k) !== i);
+  check('2B Unit 10 has no repeated headword', dups10.length === 0, dups10.join(', '));
   check('2B Unit 10 does not force matrix chef', !world.costumeSkinId,
     String(world.costumeSkinId));
 }());
@@ -373,7 +387,7 @@ const overlayIds = [
   check('world packs are declared',
     gameJs.indexOf('const WORLD_PACKS') >= 0 && gameJs.indexOf('function currentWorldPack') >= 0);
   check('kitchen/taste belong to the Unit 10 pack only',
-    /'2b-unit-10': \{ extras: \[\], stations: \['desk', 'kitchen', 'taste'\] \}/.test(gameJs)
+    /'2b-unit-10': \{ extras: \[\], stations: \['desk', 'kitchen', 'taste', 'cassette'\] \}/.test(gameJs)
     && /'2b-unit-14': \{ extras: \[\], stations: \['desk', 'cassette'\] \}/.test(gameJs));
   check('farm applies world packs instead of hiding sprites',
     gameJs.indexOf('applyWorld') >= 0
@@ -832,90 +846,136 @@ const overlayIds = [
   check('Unit 14 desk quiz items are well-formed with art', bad.length === 0, bad.slice(0, 8).join(', '));
 }());
 
-// ── 2B Unit 14 교과서 pages ───────────────────────────────────────────────────
+// ── 2B 교과서 pages (Units 10 and 14) ───────────────────────────────
 // The study desk carries two sets of pages from two different books: 연습 문제 is the
 // 익힘책, and this is the 교과서's own 말하기 / 읽기 / 과제 / 문화 산책 / 발음 / 자기 평가.
 // Same file format, same renderer, one desk — which is precisely why the two have to be
 // checked against each other. Two books drilling one chapter will reach for the same
 // sentence unless something says they may not, and a learner who meets 먹으면 안 돼요 twice
 // under two names has been given one exercise and charged for two.
-(function checkUnit14Textbook() {
-  const rel = path.join('worlds', 'unit14-textbook.json');
-  if (!check(`${rel} exists`, fs.existsSync(path.join(ROOT, rel)))) return;
-  let tb;
-  try { tb = JSON.parse(read(rel)); } catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
-  check('the 교과서 bank knows which book it is from', tb.id === 'unit14-textbook' && /교과서/.test(tb.source || ''),
-    String(tb.id) + ' | ' + String(tb.source));
-  check('and the desk labels it 교과서', tb.titleKo === '교과서' && tb.titleEn === 'Textbook',
-    String(tb.titleKo) + ' / ' + String(tb.titleEn));
-  const exs = tb.exercises || [];
-  check('nine 교과서 exercises', exs.length === 9, `found ${exs.length}`);
+//
+// Both units run the same checks. Unit 14 came first and Unit 10 followed; the counts are
+// the only thing that differs between them, so they are the only thing spelled out per unit.
+(function checkTextbookBanks() {
+  const BANKS = [
+    { unit: 'unit14', label: 'Unit 14', world: 'isUnit14World', exs: 9, rows: 41 },
+    { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 }
+  ];
   const TYPES = ['fill', 'match', 'dialogue', 'experience', 'build'];
-  const rows = exs.reduce((n, e) => n + ((e.items || []).length), 0);
-  check('41 rows across them', rows === 41, `found ${rows}`);
-  const structure = [];
-  const ids = new Set();
-  exs.forEach((ex) => {
-    if (!ex.id || ids.has(ex.id)) structure.push('id ' + ex.id);
-    ids.add(ex.id);
-    if (TYPES.indexOf(ex.type) < 0) structure.push(ex.id + ' type ' + ex.type);
-    if (!ex.no || !ex.instructionKo) structure.push(ex.id + ' heading');
-    if (!ex.noteEn) structure.push(ex.id + ' noteEn');
-    (ex.items || []).forEach((it, k) => {
-      const at = ex.id + ' row ' + (k + 1);
-      if (!it.why || !it.grammar || !it.en) structure.push(at + ' prose');
-      const sets = (it.choices2 || it.answer2) ? 2 : 1;
-      const gaps = (it.lines || []).reduce((n, l) => n + String(l.ko || '').split('{}').length - 1, 0);
-      if (gaps !== sets) structure.push(at + ' has ' + gaps + ' blanks for ' + sets + ' choice sets');
-      if (!(it.choices || []).some((c) => c.id === it.answer)) structure.push(at + ' answer');
-      if (sets === 2 && !(it.choices2 || []).some((c) => c.id === it.answer2)) structure.push(at + ' answer2');
-    });
-  });
-  check('every 교과서 row is complete and fillable', structure.length === 0, structure.slice(0, 6).join(', '));
-  // Every reshaped exercise says so. The book asks for a lot of these out loud, and a
-  // learner comparing the page to the screen deserves to be told what changed.
-  check('every 교과서 exercise says how it differs from the printed page',
-    exs.every((ex) => String(ex.noteEn).length > 60), exs.filter((ex) => String(ex.noteEn).length <= 60).map((ex) => ex.id).join(', '));
-  const wbRel = path.join('worlds', 'unit14-workbook.json');
-  if (fs.existsSync(path.join(ROOT, wbRel))) {
-    const wb = JSON.parse(read(wbRel));
-    const wbIds = new Set((wb.exercises || []).map((e) => e.id));
-    const idClash = [...ids].filter((id) => wbIds.has(id));
-    check('no 교과서 exercise reuses a 연습 문제 exercise id', idClash.length === 0, idClash.join(', '));
-    const lineSet = (bank) => {
-      const out = new Set();
-      (bank.exercises || []).forEach((ex) => (ex.items || []).forEach((it) => {
-        (it.lines || []).forEach((l) => {
-          const t = String(l.ko || '').normalize('NFC').trim();
-          if (t.indexOf('{}') >= 0 && t.replace(/\{\}/g, '').length > 6) out.add(t);
-        });
-      }));
-      return out;
-    };
-    const wbLines = lineSet(wb);
-    const shared = [...lineSet(tb)].filter((t) => wbLines.has(t));
-    check('and no 교과서 row drills the same gapped sentence as a 연습 문제 row',
-      shared.length === 0, shared.slice(0, 3).join(' | '));
-  }
-  const clips = [];
-  const walkAudio = (n) => {
-    if (!n || typeof n !== 'object') return;
-    if (Array.isArray(n)) { n.forEach(walkAudio); return; }
-    if (typeof n.src === 'string' && n.src.indexOf('audio/') === 0) clips.push(n.src);
-    Object.keys(n).forEach((k) => walkAudio(n[k]));
-  };
-  walkAudio(exs);
-  const clipMiss = [...new Set(clips)].filter((s) => !fs.existsSync(path.join(ROOT, s)));
-  check('every recording the 교과서 pages name is on disk', clipMiss.length === 0, clipMiss.join(', '));
   const gameJs = readGameSource();
-  check('the desk offers the 교과서 as its own row',
-    /isUnit14World\(\)\) return '\/worlds\/unit14-textbook\.json'/.test(gameJs)
-    && gameJs.indexOf("key: 'textbook'") >= 0);
+  const wbLib = read(path.join('admin', 'lib', 'workbook.js'));
+  let anyBank = false;
+
+  BANKS.forEach((bank) => {
+    const U = bank.label + ': ';
+    const rel = path.join('worlds', bank.unit + '-textbook.json');
+    if (!check(U + rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+    let tb;
+    try { tb = JSON.parse(read(rel)); } catch (e) { check(U + rel + ' is valid JSON', false, e.message); return; }
+    anyBank = true;
+    check(U + 'the 교과서 bank knows which book it is from',
+      tb.id === bank.unit + '-textbook' && /교과서/.test(tb.source || ''),
+      String(tb.id) + ' | ' + String(tb.source));
+    check(U + 'and the desk labels it 교과서', tb.titleKo === '교과서' && tb.titleEn === 'Textbook',
+      String(tb.titleKo) + ' / ' + String(tb.titleEn));
+    const exs = tb.exercises || [];
+    check(U + bank.exs + ' 교과서 exercises', exs.length === bank.exs, 'found ' + exs.length);
+    const rows = exs.reduce((n, e) => n + ((e.items || []).length), 0);
+    check(U + bank.rows + ' rows across them', rows === bank.rows, 'found ' + rows);
+    const structure = [];
+    const ids = new Set();
+    exs.forEach((ex) => {
+      if (!ex.id || ids.has(ex.id)) structure.push('id ' + ex.id);
+      ids.add(ex.id);
+      if (TYPES.indexOf(ex.type) < 0) structure.push(ex.id + ' type ' + ex.type);
+      if (!ex.no || !ex.instructionKo) structure.push(ex.id + ' heading');
+      if (!ex.noteEn) structure.push(ex.id + ' noteEn');
+      (ex.items || []).forEach((it, k) => {
+        const at = ex.id + ' row ' + (k + 1);
+        if (!it.why || !it.grammar || !it.en) structure.push(at + ' prose');
+        const sets = (it.choices2 || it.answer2) ? 2 : 1;
+        const gaps = (it.lines || []).reduce((n, l) => n + String(l.ko || '').split('{}').length - 1, 0);
+        if (gaps !== sets) structure.push(at + ' has ' + gaps + ' blanks for ' + sets + ' choice sets');
+        if (!(it.choices || []).some((c) => c.id === it.answer)) structure.push(at + ' answer');
+        if (sets === 2 && !(it.choices2 || []).some((c) => c.id === it.answer2)) structure.push(at + ' answer2');
+      });
+    });
+    check(U + 'every 교과서 row is complete and fillable', structure.length === 0, structure.slice(0, 6).join(', '));
+    // Every reshaped exercise says so. The book asks for a lot of these out loud, and a
+    // learner comparing the page to the screen deserves to be told what changed.
+    check(U + 'every 교과서 exercise says how it differs from the printed page',
+      exs.every((ex) => String(ex.noteEn).length > 60),
+      exs.filter((ex) => String(ex.noteEn).length <= 60).map((ex) => ex.id).join(', '));
+
+    const wbRel = path.join('worlds', bank.unit + '-workbook.json');
+    if (fs.existsSync(path.join(ROOT, wbRel))) {
+      const wb = JSON.parse(read(wbRel));
+      const wbIds = new Set((wb.exercises || []).map((e) => e.id));
+      const idClash = [...ids].filter((id) => wbIds.has(id));
+      check(U + 'no 교과서 exercise reuses a 연습 문제 exercise id', idClash.length === 0, idClash.join(', '));
+      const lineSet = (b) => {
+        const out = new Set();
+        (b.exercises || []).forEach((ex) => (ex.items || []).forEach((it) => {
+          (it.lines || []).forEach((l) => {
+            const t = String(l.ko || '').normalize('NFC').trim();
+            if (t.indexOf('{}') >= 0 && t.replace(/\{\}/g, '').length > 6) out.add(t);
+          });
+        }));
+        return out;
+      };
+      const wbLines = lineSet(wb);
+      const shared = [...lineSet(tb)].filter((t) => wbLines.has(t));
+      check(U + 'and no 교과서 row drills the same gapped sentence as a 연습 문제 row',
+        shared.length === 0, shared.slice(0, 3).join(' | '));
+    }
+
+    const clips = [];
+    const walkAudio = (n) => {
+      if (!n || typeof n !== 'object') return;
+      if (Array.isArray(n)) { n.forEach(walkAudio); return; }
+      if (typeof n.src === 'string' && n.src.indexOf('audio/') === 0) clips.push(n);
+      Object.keys(n).forEach((k) => walkAudio(n[k]));
+    };
+    walkAudio(exs);
+    const srcs = [...new Set(clips.map((c) => c.src))];
+    const clipMiss = srcs.filter((s2) => !fs.existsSync(path.join(ROOT, s2)));
+    check(U + 'every recording the 교과서 pages name is on disk', clipMiss.length === 0, clipMiss.join(', '));
+    // A row that says "track 06" while playing trk02 sends the learner to the wrong page of
+    // the book, and nothing on screen gives that away. The number is in both strings, so
+    // make the two agree.
+    const drift = clips.filter((c) => {
+      const inSrc = /-trk(\d+)\.mp3$/.exec(c.src);
+      const inLbl = /track\s*(\d+)/.exec(String(c.labelEn || ''));
+      return inSrc && inLbl && Number(inSrc[1]) !== Number(inLbl[1]);
+    });
+    check(U + 'and each clip label names the track it actually plays', drift.length === 0,
+      drift.map((c) => c.src + ' labelled "' + c.labelEn + '"').join(', '));
+    // A 교과서 clip pointing at a book track the cassette does not carry is a page
+    // reference to a recording this unit never cut.
+    const csRel = path.join('worlds', bank.unit + '-cassette.json');
+    if (fs.existsSync(path.join(ROOT, csRel))) {
+      const cs = JSON.parse(read(csRel));
+      const known = new Set((cs.tracks || []).map((t) => t.src));
+      const stray = srcs.filter((s2) => /-trk\d+\.mp3$/.test(s2) && !known.has(s2));
+      check(U + 'and every book track it names is one the cassette carries', stray.length === 0, stray.join(', '));
+    }
+
+    check(U + 'the desk offers the 교과서 as its own row',
+      gameJs.indexOf(bank.world + "()) return '/worlds/" + bank.unit + "-textbook.json'") >= 0
+      && gameJs.indexOf("key: 'textbook'") >= 0);
+    // The admin editor resolves one file per key, and a key pointing at another unit's file
+    // is what "the editor shows Unit 14 for every unit" looked like.
+    check(U + "the admin registry can open this unit's 교과서",
+      wbLib.indexOf("'" + bank.unit + "-textbook': path.join('worlds', '" + bank.unit + "-textbook.json')") >= 0);
+  });
+
   // The renderer plays a book clip where the content names one and a pre-rendered TTS clip
   // otherwise, so a page missing from the harvest is a row with a dead play button.
-  const ttsSrc = read(path.join('scripts', 'ttsClips.js'));
-  check('the TTS harvest reads -textbook.json as well as -workbook.json',
-    /-\(\?:work\|text\)book\\\.json\$/.test(ttsSrc));
+  if (anyBank) {
+    const ttsSrc = read(path.join('scripts', 'ttsClips.js'));
+    check('the TTS harvest reads -textbook.json as well as -workbook.json',
+      /-\(\?:work\|text\)book\\\.json\$/.test(ttsSrc));
+  }
 }());
 
 // ── Every clip the content asks for must name a file that can exist ──────────
@@ -1178,12 +1238,15 @@ function pngSize(rel) {
 (function checkUnit10VocabArt() {
   const world = JSON.parse(read(path.join('worlds', '2b-unit-10.json')));
   const words = (((world || {}).level || {}).words) || [];
-  check('Unit 10 has 80 headwords', words.length === 80, String(words.length));
+  // artPending is the only way out of the PNG gate below, so the drawn count is what is
+  // pinned: flipping a shipped 어휘 word to artPending to dodge its picture drops it to 79.
+  const drawnArt = words.filter((w) => !w.artPending);
+  check('Unit 10 has 80 drawn headwords', drawnArt.length === 80, String(drawnArt.length));
   const pack = JSON.parse(read(path.join('sprites', 'catalog.json')));
   const byKo = {};
   (pack.assets || []).forEach((a) => { if (a && a.wordKo) byKo[a.wordKo] = a; });
   const missing = [];
-  words.forEach((w) => {
+  drawnArt.forEach((w) => {
     const a = byKo[w.ko];
     if (!a || !a.id || !a.nameEn || !a.path) { missing.push(w.ko); return; }
     const pngRel = path.join('sprites', String(a.path).replace(/\\/g, '/'));

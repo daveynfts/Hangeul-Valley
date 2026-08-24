@@ -565,6 +565,51 @@ What that costs, and what pays for it:
 An exercise reshaped because the book asks you to speak still says so in `noteEn` — and
 here that is nearly every one of them, so the test requires it rather than trusting it.
 
+### Unit 10, the second unit with two banks
+
+`worlds/unit10-textbook.json`: seven exercises, thirty rows, ids prefixed `u10sgk-`.
+Two things about it did not carry over from Unit 14.
+
+- **The 익힘책 had already taken more of the chapter.** Unit 10's 연습 문제 is twenty
+  exercises covering 어휘 and all four grammar patterns — `N 중에(서)`, 반말,
+  `V-(으)ㄹ래요`, `A-(으)ㄴ데/V-는데` — plus 문형 연습. What was left was 말하기 1,
+  말하기 2, 읽고 쓰기, 과제, 문화 산책, 발음 and 자기 평가, and that is exactly the bank.
+  `tests/test_unit10_textbook.js` section 3 checks it both ways: no gapped line shared,
+  and no *section* of the chapter claimed by both banks. The second is the stronger
+  check — it fails while the two banks are still merely adjacent, before they collide on
+  a sentence.
+- **The 발음 page is 의문문의 억양, and intonation cannot be written down.** Every other
+  unit's 발음 section is a sound rule with a spelling consequence, so it could become
+  dictation. A rising or falling pitch changes no letter at all, so this one became a
+  listening exercise: the six sentences the book prints on tracks 10 and 11, and for each
+  one, does the end rise or fall. The answers are not typed in — they are *derived*. A
+  question carrying an 의문사 falls, one without rises, so `test_unit10_textbook.js`
+  section 5 recomputes all six from the rule and compares them to what is keyed. An
+  exercise that can contradict its own rule is the failure mode worth spending a test on;
+  this one cannot. The seventh row keeps the page's own hedge — that many speakers now
+  raise 의문사 questions slightly anyway — because a learner told only the rule will hear
+  real Korean and think they misheard.
+
+Two smaller things worth copying:
+
+- **자기 평가 prints its answer key at the foot of the page.** That makes five rows
+  checkable against the book rather than against judgement, and the test pins all five.
+- **Four filled rows quote the tape word for word.** Where a row gaps a printed turn from
+  track 04 or 07, the filled line has to equal that turn exactly, and the test compares it
+  to `worlds/unit10-cassette.json` rather than to how it looked when it was typed. The
+  other rows are substitutions and models, which the book prints but the tape never reads;
+  those are not asserted against the tape and should not be.
+
+The 듣기 pages are still missing for the same reason as Unit 14's: tracks 08 and 09 print
+comprehension questions and not words, so nothing can key an answer until the 듣기 지문
+page at the back is in.
+
+Every clip a row names here is a whole track, never a dictation clip, so a label check
+stands in for Unit 14's clip-text comparison: `말하기 1 · track 04` over an mp3 that is
+`trk02` sends the learner to the wrong page of the book and nothing on screen shows it.
+`validate_content.js` and the test both require the number in the label to match the number
+in the filename, and both require the track to be one the cassette actually carries.
+
 ---
 
 ## Before committing

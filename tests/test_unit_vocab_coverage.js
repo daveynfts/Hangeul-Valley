@@ -150,15 +150,15 @@ for (const [, s] of Object.entries(state)) {
 // Counted rather than enumerated. This line used to name all seven pending headwords, back
 // when artPending meant "a word an exercise drills that the 어휘 list forgot". Unit 14 now
 // carries its whole chapter — the grammar boxes, 말하기, 듣고 말하기, 읽고 쓰기, 과제 and 발음 —
-// and none of those words have icons yet, so enumerating them would be a 71-line list that
-// grows with every unit and says nothing.
+// and none of those words have icons yet. Unit 10 has since done the same, so enumerating
+// them would be a 109-line list that grows with every unit and says nothing.
 //
 // The guarantee the list stood for is not lost, because it lives where it belongs: the
-// 'keeps its 54 textbook headwords' check in validate_content.js, paired with 'every drawn
-// Unit 14 headword has catalogued PNG'. Flipping a shipped 어휘 word to artPending to dodge
-// its picture drops drawn to 53 and fails there. What is left for this line is the thing a
-// count still catches: pending growing without anyone deciding it should.
-const PENDING_TOTAL = 71;
+// per-unit drawn-headword checks in validate_content.js — 54 for Unit 14, 80 for Unit 10 —
+// each paired with 'every drawn headword has a catalogued PNG'. Flipping a shipped 어휘 word
+// to artPending to dodge its picture drops that count and fails there. What is left for this
+// line is the thing a count still catches: pending growing without anyone deciding it should.
+const PENDING_TOTAL = 109;
 const actualPending = Object.values(state).flatMap((s) => s.words.filter((w) => w.artPending).map((w) => w.ko));
 assert(actualPending.length === pendingTotal && pendingTotal === PENDING_TOTAL,
   `exactly ${PENDING_TOTAL} words await art (found ${actualPending.length})`);
