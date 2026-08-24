@@ -504,6 +504,17 @@ function migrateSaveData(d) {
     data.v = 9;
   }
 
+  // v9 -> v10: the practice log — how many times each exercise, track and dictation line has
+  // been done. Field-fill only, and empty for everyone who came before: a count that was
+  // never recorded cannot be reconstructed, and seeding it from anything else would invent a
+  // history the player did not have.
+  if (!data.v || data.v < 10) {
+    if (!data.practice || typeof data.practice !== 'object' || Array.isArray(data.practice)) {
+      data.practice = {};
+    }
+    data.v = 10;
+  }
+
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
     data.inventory.maxSlots = 20;
   }
@@ -558,7 +569,7 @@ function collectSave(){
     : droppedItemsSave;
   droppedItemsSave = drops;
   return {
-    v: 9,
+    v: 10,
     currencies: playerCurrencies,
     gold: playerCurrencies.coins,
     unlockedLevels,
@@ -568,6 +579,7 @@ function collectSave(){
     harvests: hcObj,
     srs: srsData,
     attempts: attemptLog,
+    practice: practiceLog,
     plots,
     lastLevel: currentLevelIndex,
     playerRank: ensurePlayerRank(),
@@ -627,6 +639,8 @@ function applySave(d){
   // Absent in saves written before the log existed; an empty history is correct there
   // rather than something to reconstruct.
   attemptLog = Array.isArray(migrated.attempts) ? migrated.attempts.slice(-ATTEMPT_LOG_MAX) : [];
+  practiceLog = (migrated.practice && typeof migrated.practice === 'object'
+    && !Array.isArray(migrated.practice)) ? migrated.practice : {};
   if(migrated.plots) plotSave = migrated.plots;
   if(typeof migrated.lastLevel==='number') currentLevelIndex = migrated.lastLevel;
   if (migrated.playerRank && typeof migrated.playerRank === 'object') {
@@ -1171,6 +1185,76 @@ function wordIsDue(ko, now = Date.now()){ return dueModality(ko, now) !== null; 
 // the whole state, so it must not grow without limit.
 const ATTEMPT_LOG_MAX = 500;
 let attemptLog = [];   // [{ ko, g, m, at, ivl, st }]
+
+// ── The practice log ─────────────────────────────────────────────────────────
+// attemptLog answers "how is this word going". It cannot answer "have I done this exercise,
+// and how many times" — it is keyed by headword, bounded to the last 500 answers, and knows
+// nothing about tracks or dictation lines at all. So a second, much smaller log.
+//
+// Keyed by what was practised, valued by { n, ok, of, at }:
+//
+//   wb:<bankId>:<exerciseId>   a workbook or 교과서 page   ok/of are the blanks filled right
+//   trk:<unit>:<n>             a cassette track            ok/of stay 0; there is no score
+//   dic:<unit>:<id>            one dictation sentence      ok counts the ones typed right
+//
+// Unbounded in time but bounded by content: one entry per thing that exists, so it stops
+// growing when the units stop being added. Roughly 13 KB across three units, inside a save
+// the cloud endpoint caps at 256 KB.
+let practiceLog = {};
+
+const PRACTICE_KINDS = ['wb', 'trk', 'dic'];
+
+// The key reaches a save that is uploaded and read back, so it is built from a safe alphabet
+// rather than from whatever the content happened to name an exercise.
+function practiceKey(kind, a, b) {
+  if (PRACTICE_KINDS.indexOf(kind) < 0) return '';
+  const part = (v) => String(v == null ? '' : v).replace(/[^A-Za-z0-9._-]/g, '');
+  const one = part(a), two = part(b);
+  if (!one || !two) return '';
+  return kind + ':' + one + ':' + two;
+}
+
+// Counts one sitting. ok/of are optional — a track has no score to report — and they
+// accumulate across attempts, so the readout is lifetime accuracy rather than the last go.
+function recordPractice(key, ok, of, now = Date.now()) {
+  if (!key) return null;
+  const cur = practiceLog[key] || { n: 0, ok: 0, of: 0, at: 0 };
+  cur.n += 1;
+  if (typeof ok === 'number' && typeof of === 'number' && of > 0) {
+    cur.ok += Math.max(0, Math.min(of, ok));
+    cur.of += of;
+  }
+  cur.at = now;
+  practiceLog[key] = cur;
+  if (typeof persistSave === 'function') persistSave();
+  return cur;
+}
+
+function practiceEntry(key) {
+  return (key && practiceLog[key]) || null;
+}
+
+// Totals for the Progress panel, one row per kind.
+function practiceSummary() {
+  const out = {
+    wb: { items: 0, n: 0, ok: 0, of: 0 },
+    trk: { items: 0, n: 0, ok: 0, of: 0 },
+    dic: { items: 0, n: 0, ok: 0, of: 0 }
+  };
+  Object.keys(practiceLog).forEach((k) => {
+    const row = out[k.slice(0, k.indexOf(':'))];
+    if (!row) return;
+    const e = practiceLog[k] || {};
+    row.items += 1;
+    row.n += e.n || 0;
+    row.ok += e.ok || 0;
+    row.of += e.of || 0;
+  });
+  PRACTICE_KINDS.forEach((k) => {
+    out[k].pct = out[k].of > 0 ? Math.round((out[k].ok / out[k].of) * 100) : null;
+  });
+  return out;
+}
 
 // Rolling correct-rate over the most recent answers, used by the dashboard. Distinct from
 // srsStats().retention, which is lifetime reps-vs-lapses.

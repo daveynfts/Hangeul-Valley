@@ -2152,6 +2152,37 @@
     .cs-lb:disabled { opacity: .4; cursor: default; }
     .cs-lb:disabled:hover { background: var(--parch-l); }
     .cs-lbsep { width: 1.5px; height: 13px; background: var(--wood-l); margin: 0 3px; }
+    /* ── the practice log ──────────────────────────────────────────────── */
+    /* A count beside the thing it counts, in the list where you pick what to do next. */
+    .prac-badge {
+      margin-left: 6px; padding: 1px 4px; border-radius: 3px;
+      background: var(--parch-l); border: 1.5px solid var(--wood-l);
+      font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--wood-m);
+      white-space: nowrap;
+    }
+    .prac-badge.good { border-color: #1e7a3a; color: #1e7a3a; background: #eafaef; }
+    #dict-log {
+      margin-left: 8px; font-family: 'Press Start 2P', monospace; font-size: 8px;
+      color: var(--wood-m); white-space: nowrap;
+    }
+    .prac-row {
+      display: flex; align-items: baseline; gap: 8px; padding: 5px 2px;
+      border-bottom: 1px solid rgba(139, 90, 43, .18);
+    }
+    .prac-row:last-child { border-bottom: none; }
+    .prac-icon { flex: 0 0 auto; font-size: 13px; }
+    .prac-lbl { flex: 0 0 84px; font-size: 12px; color: var(--wood-d); }
+    .prac-n {
+      flex: 0 0 auto; min-width: 28px; text-align: right;
+      font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--wood-d);
+    }
+    .prac-sub { flex: 1 1 auto; font-size: 11px; color: var(--wood-m); }
+    .prac-pct {
+      flex: 0 0 auto; font-family: 'Press Start 2P', monospace; font-size: 9px; color: #1e7a3a;
+    }
+    .prac-pct.low { color: #a32b1c; }
+    .prac-empty { font-size: 11.5px; color: var(--wood-m); padding: 6px 2px; }
+
     #listen-abinfo, #dict-abinfo {
       margin-left: auto; font-family: 'Press Start 2P', monospace; font-size: 8px;
       color: var(--wood-m); white-space: nowrap;

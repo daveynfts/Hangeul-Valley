@@ -1494,6 +1494,36 @@ function renderProgressOverlay() {
      </div>`
   ).join('');
 
+  // The practice log: what has actually been sat down and done, as opposed to how the words
+  // are scheduled. Three rows rather than one total, because they are three different
+  // activities and a learner wondering whether they have been neglecting listening cannot
+  // read that off a sum.
+  const pbox = $('prog-practice');
+  if (pbox) {
+    const sum = typeof practiceSummary === 'function' ? practiceSummary() : null;
+    const ROWS = [
+      { k: 'wb', icon: '✍️', lbl: 'Exercises', unit: 'page' },
+      { k: 'trk', icon: '🎧', lbl: 'Listening', unit: 'track' },
+      { k: 'dic', icon: '✏️', lbl: 'Dictation', unit: 'line' }
+    ];
+    const plural = (n, word) => n + ' ' + word + (n === 1 ? '' : 's');
+    const total = sum ? ROWS.reduce((n, r) => n + sum[r.k].n, 0) : 0;
+    pbox.innerHTML = !total
+      ? '<div class="prac-empty">Nothing practised yet — the desk and the cassette player start counting from here.</div>'
+      : ROWS.map(r => {
+        const v = sum[r.k];
+        // "12 across 5 pages" rather than one number: doing one exercise twelve times and
+        // twelve exercises once are not the same week of study.
+        return `<div class="prac-row">
+            <span class="prac-icon">${r.icon}</span>
+            <span class="prac-lbl">${r.lbl}</span>
+            <span class="prac-n">${v.n}</span>
+            <span class="prac-sub">${v.items ? 'across ' + plural(v.items, r.unit) : '—'}</span>
+            <span class="prac-pct${v.pct !== null && v.pct < 70 ? ' low' : ''}">${v.pct === null ? '' : v.pct + '%'}</span>
+          </div>`;
+      }).join('');
+  }
+
   // Per level: learned as the wide bar, mature overlaid, so the gap between "seen it" and
   // "actually retained it" is visible at a glance.
   $('prog-levels').innerHTML = unlockedLevels.slice().sort((a, b) => a - b).map(i => {

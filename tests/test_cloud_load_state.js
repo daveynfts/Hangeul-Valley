@@ -336,7 +336,11 @@ const spent = RICH(CNOW);
 spent.gold = 0;
 eq(weight(spent), weight(RICH(CNOW)), 'spending every coin does not reduce the weight');
 
-// Drive syncCloudSave itself, with the network and the writers stubbed.
+// Drive syncCloudSave itself, with the network and the writers stubbed. Everything stubbed
+// here is put back afterwards: these are script-scoped bindings shared by the whole file,
+// and a section that leaves them replaced silently breaks every section after it.
+R(`__realSync = { applySave, pushCloudSave, peekLocalSave, cloudSaveRequest,
+                 collectSave, getGoogleToken };`);
 async function reconcile(local, remote) {
   sb.__local = local;
   sb.__remote = remote;
@@ -362,6 +366,94 @@ async function reconcile(local, remote) {
     'and an empty cloud still gets seeded from this device');
   eq(await reconcile(FRESH(CNOW - 86400000), RICH(CNOW)), 'pull:8400',
     'a newer cloud save wins on the timestamp alone, as before');
+
+  R(`applySave = __realSync.applySave; pushCloudSave = __realSync.pushCloudSave;
+     peekLocalSave = __realSync.peekLocalSave; cloudSaveRequest = __realSync.cloudSaveRequest;
+     collectSave = __realSync.collectSave; getGoogleToken = __realSync.getGoogleToken;`);
+
+  // ── 7. The practice log ───────────────────────────────────────────────────
+  // attemptLog answers "how is this word going" and cannot answer "have I done this
+  // exercise, and how many times": it is keyed by headword, capped at the last 500 answers,
+  // and knows nothing about tracks or dictation lines. Nothing recorded any of that before —
+  // workbookState was never saved at all, and the dictation screen's score reset every time
+  // it opened — so this is the log that makes "thành quả học" a number.
+  console.log('\n--- 7. The practice log ---');
+  R('practiceLog = {};');
+  eq(R(`practiceKey('wb', 'unit14-textbook', 'u14sgk-read-1')`), 'wb:unit14-textbook:u14sgk-read-1',
+    'a workbook key names its bank and its exercise');
+  eq(R(`practiceKey('trk', '2b-unit-14', 44)`), 'trk:2b-unit-14:44', 'a track key names its unit and number');
+  eq(R(`practiceKey('nope', 'a', 'b')`), '', 'an unknown kind makes no key');
+  eq(R(`practiceKey('wb', '', 'x')`), '', 'and neither does a missing half');
+  // The key reaches a save that is uploaded and read back, so it is built from a safe
+  // alphabet rather than from whatever the content happened to name an exercise. Dots stay —
+  // an exercise id may legitimately carry one — but a colon must not survive, because
+  // practiceSummary reads the kind back off the first one.
+  const dirty = R(`practiceKey('wb', 'a/b', 'c d:e')`);
+  eq(dirty, 'wb:ab:cde', 'slashes and spaces are stripped');
+  eq(dirty.split(':').length, 3, 'and a colon in the content cannot add a field to the key');
+  eq(dirty.slice(0, dirty.indexOf(':')), 'wb', 'so the kind still reads back off the front');
+
+  R(`recordPractice(practiceKey('wb', 'bk', 'ex1'), 7, 10, 1000);`);
+  R(`recordPractice(practiceKey('wb', 'bk', 'ex1'), 9, 10, 2000);`);
+  const e1 = R(`practiceEntry(practiceKey('wb', 'bk', 'ex1'))`);
+  eq(e1.n, 2, 'two sittings are counted as two');
+  eq(e1.ok, 16, 'and the marks accumulate across them');
+  eq(e1.of, 20, 'against the total that was on offer');
+  eq(e1.at, 2000, 'with the last time kept');
+  // Lifetime accuracy, not the last attempt: a learner improving from 7/10 to 9/10 should
+  // not see 90% and think they have always been at 90%.
+  eq(Math.round((e1.ok / e1.of) * 100), 80, 'so the readout is lifetime accuracy (80%)');
+
+  // A track has no score. It must count without inventing one.
+  R(`recordPractice(practiceKey('trk', 'u14', 44));`);
+  R(`recordPractice(practiceKey('trk', 'u14', 44));`);
+  R(`recordPractice(practiceKey('trk', 'u14', 44));`);
+  const t1 = R(`practiceEntry(practiceKey('trk', 'u14', 44))`);
+  eq(t1.n, 3, 'three listens are three');
+  eq(t1.of, 0, 'and no score is fabricated for them');
+
+  R(`recordPractice(practiceKey('dic', 'u14', 12), 1, 1);`);
+  R(`recordPractice(practiceKey('dic', 'u14', 13), 0, 1);`);
+  const sum = R('practiceSummary()');
+  eq(sum.wb.n, 2, 'the summary counts exercise sittings');
+  eq(sum.wb.items, 1, 'across the pages they were on');
+  eq(sum.wb.pct, 80, 'with lifetime accuracy');
+  eq(sum.trk.n, 3, 'listens are counted separately');
+  eq(sum.trk.pct, null, 'and carry no percentage, because there is nothing to be right about');
+  eq(sum.dic.n, 2, 'dictation lines too');
+  eq(sum.dic.items, 2, 'one entry per sentence');
+  eq(sum.dic.pct, 50, 'one right out of two');
+
+  // A bad key must not create a phantom entry.
+  const before = R('Object.keys(practiceLog).length');
+  R(`recordPractice('', 1, 1);`);
+  eq(R('Object.keys(practiceLog).length'), before, 'an empty key records nothing');
+  // ok is clamped to of, so a miscounted caller cannot push accuracy over 100%.
+  R(`recordPractice(practiceKey('wb', 'bk', 'ex2'), 99, 4);`);
+  eq(R(`practiceEntry(practiceKey('wb', 'bk', 'ex2'))`).ok, 4, 'more right than there were questions is clamped');
+
+  // It has to survive the round trip, or the count resets every time the game is closed.
+  R(`practiceLog = {}; recordPractice(practiceKey('wb', 'bk', 'ex9'), 3, 4, 500);`);
+  const round = R('migrateSaveData(JSON.parse(JSON.stringify(collectSave())))');
+  eq(round.v, 10, 'collectSave writes v10');
+  // The round trip. collectSave has been replaced by a stub in section 6, so this asserts on
+  // the shipped source for the write side and drives applySave for the read side — the two
+  // halves that decide whether a count survives closing the game.
+  const saveSrc = require('fs').readFileSync(
+    require('path').join(__dirname, '..', 'js', 'systems', 'save.js'), 'utf8');
+  assert(/practice: practiceLog,/.test(saveSrc), 'collectSave writes the practice log into the save');
+  assert(/practiceLog = \(migrated\.practice/.test(saveSrc), 'and applySave reads it back out');
+
+  sb.__round = { v: 10, practice: { 'wb:bk:ex9': { n: 4, ok: 11, of: 16, at: 500 } } };
+  R('applySave(__round);');
+  eq(R(`practiceEntry('wb:bk:ex9') && practiceEntry('wb:bk:ex9').n`), 4,
+    'a save loaded from the cloud brings its counts with it');
+  // A save from before v10 has no log at all; that must land as empty rather than as undefined,
+  // or every read after it throws.
+  sb.__old = { v: 9 };
+  R('applySave(migrateSaveData(__old));');
+  eq(R('typeof practiceLog'), 'object', 'a pre-v10 save leaves an object behind');
+  eq(R('Object.keys(practiceLog).length'), 0, 'an empty one');
 
   console.log('\n' + passed + ' passed, ' + failed + ' failed');
   process.exit(failed ? 1 : 0);

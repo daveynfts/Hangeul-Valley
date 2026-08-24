@@ -2504,6 +2504,27 @@ function csTimeAtX(x, width, dur) {
   return f * dur;
 }
 
+// ── Practice badges ─────────────────────────────────────────────────────
+// A count beside the thing it counts, in the list where you choose what to do next — which
+// is the only place the number changes a decision. "×3 · 78%" reads as three sittings at 78%
+// of blanks right; a track has no score, so it shows the count alone.
+function practiceBadge(key) {
+  if (typeof practiceEntry !== 'function') return '';
+  const e = practiceEntry(key);
+  if (!e || !e.n) return '';
+  const pct = e.of > 0 ? Math.round((e.ok / e.of) * 100) : null;
+  return '<span class="prac-badge' + (pct !== null && pct >= 90 ? ' good' : '') + '">×' + e.n
+    + (pct !== null ? ' · ' + pct + '%' : '') + '</span>';
+}
+
+function wbPracticeBadge(bankId, exId) {
+  return practiceBadge(typeof practiceKey === 'function' ? practiceKey('wb', bankId, exId) : '');
+}
+
+function csPracticeBadge(kind, unit, id) {
+  return practiceBadge(typeof practiceKey === 'function' ? practiceKey(kind, unit, id) : '');
+}
+
 function csWaveDur() {
   const st = listenState;
   if (cassetteTrack && cassetteTrack.el.duration > 0) return cassetteTrack.el.duration;
@@ -2741,6 +2762,19 @@ function csTick() {
   const jump = csRangeSeek(st.at, range, false);
   if (jump !== null) {
     try { el.currentTime = jump; st.at = jump; } catch (e) {}
+  }
+  // A listen counts once the halfway mark is passed. Counting on open would reward clicking
+  // down the track list; counting only on `ended` would miss every session that loops, which
+  // is most of them now. The flag clears when the playhead wraps back to the start, so a
+  // second pass counts again — the question is "how many times", not "have I ever".
+  if (id === 'listen-wave' && typeof recordPractice === 'function') {
+    const dur = el.duration || 0;
+    if (st.at < 1) st.counted = false;
+    else if (!st.counted && dur > 0 && st.at >= dur * 0.5) {
+      st.counted = true;
+      const cur = (cassetteBank && (cassetteBank.tracks || [])[st.i]) || null;
+      if (cur) recordPractice(practiceKey('trk', cassetteBank.unit, cur.n));
+    }
   }
   csPaintWave(id);
   if (id === 'listen-wave') csPaintProgress(el);
@@ -3002,7 +3036,8 @@ function renderListen() {
         '<span class="cs-tn">' + t.n + '</span>' +
         '<span class="cs-tt"><span class="cs-tko">' + vbEsc(t.sec) + '</span>' +
         '<span class="cs-ten">' + vbEsc(t.secEn) + '</span></span>' +
-        '<span class="cs-td">' + csClock(t.dur) + '</span>';
+        '<span class="cs-td">' + csClock(t.dur)
+          + csPracticeBadge('trk', bank.unit, t.n) + '</span>';
       b.onclick = () => listenPick(i);
       list.appendChild(b);
     });
@@ -3252,6 +3287,10 @@ function dictCheck() {
   } else if (typeof playChiptuneSFX === 'function') {
     playChiptuneSFX('quiz_wrong');
   }
+  if (typeof recordPractice === 'function') {
+    const right = dictNorm(st.typed) === dictNorm(it.ko) ? 1 : 0;
+    recordPractice(practiceKey('dic', cassetteBank && cassetteBank.unit, it.id), right, 1);
+  }
   renderDictation();
 }
 
@@ -3289,6 +3328,14 @@ function renderDictation() {
   if (!it) return;
 
   const pos = $('dict-pos');
+  const dlog = $('dict-log');
+  if (dlog) {
+    // Lifetime for THIS sentence, not the session: st.done resets every time the screen
+    // opens, and "have I written this one before" is the question the log can answer.
+    const e = typeof practiceEntry === 'function'
+      ? practiceEntry(practiceKey('dic', cassetteBank && cassetteBank.unit, it.id)) : null;
+    dlog.textContent = (e && e.n) ? '×' + e.n + (e.of ? ' · ' + Math.round((e.ok / e.of) * 100) + '%' : '') : '';
+  }
   if (pos) pos.textContent = (st.i + 1) + ' / ' + items.length + (st.done ? '  ·  ' + st.right + '/' + st.done : '');
 
   const tags = $('dict-tags');
@@ -3599,6 +3646,10 @@ function checkWorkbook() {
     if (typeof updateRankHUD === 'function') updateRankHUD();
   }
   if (typeof checkQuestProgress === 'function') checkQuestProgress('desk', { count: 1 });
+  // Recorded here rather than on open: an exercise you looked at is not one you did.
+  if (typeof recordPractice === 'function') {
+    recordPractice(practiceKey('wb', st.bank && st.bank.id, st.ex && st.ex.id), st.score, total);
+  }
   renderWorkbook();
 }
 
@@ -4261,7 +4312,8 @@ function renderWorkbookPicker() {
           '</span>' +
           '<span class="wb-pick-en">' + vbEsc(ex.blurbEn || ex.instructionEn || '') + '</span>' +
         '</span>' +
-        '<span class="wb-pick-count">' + ((ex.items || []).length) + '문항</span>';
+        '<span class="wb-pick-count">' + ((ex.items || []).length) + '문항'
+          + wbPracticeBadge(st.bank && st.bank.id, ex.id) + '</span>';
       b.onclick = () => openWorkbookExercise(ex.id);
       list.appendChild(b);
     });
