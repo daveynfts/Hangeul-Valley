@@ -308,6 +308,61 @@ assert(R(`document.getElementById('hud-auth-status').innerHTML`).includes('김�
   'so the signed-in chip shows it rather than replacement characters');
 R(`setGoogleSession('', null);`);
 
-// ── Summary ──────────────────────────────────────────────────────────────────
-console.log('\n' + passed + ' passed, ' + failed + ' failed');
-process.exit(failed ? 1 : 0);
+// ── 6. Signing in on a second machine must not upload a blank game ───────────
+// The whole point of cloud save is "open another browser, sign in, get everything back", and
+// it did the opposite. A browser that has never seen the account writes hv_save_v2 within six
+// seconds of loading the page — before any sign-in, measured on production — so that save is
+// always the newest one in existence. syncCloudSave compared timestamps alone, so signing in
+// pushed 85 gold and no review history over the player's real save.
+//
+// The rule now: a newer local save only outranks the cloud when it also holds more earned
+// progress. saveProgressWeight counts only fields that never go down — SRS records, the
+// attempt log, harvests, trophies, levels beyond the first, and the rank counters. Gold is
+// deliberately not among them, because gold is spent.
+console.log('\n--- 6. Signing in on a second machine ---');
+const CNOW = 1700000000000;
+const FRESH = (at) => ({ gold: 85, srs: {}, attempts: [], harvests: {}, unlockedLevels: [0],
+  unlockedTrophies: [], playerRank: { xp: 0, asked: 0, sessions: 0 }, updatedAt: at });
+const RICH = (at) => ({ gold: 8400, srs: { a: 1, b: 1, c: 1 }, attempts: [1, 2, 3, 4],
+  harvests: { a: 9 }, unlockedLevels: [0, 1, 2], unlockedTrophies: ['t'],
+  playerRank: { xp: 920, asked: 640, sessions: 31 }, updatedAt: at });
+
+const weight = (s) => R('saveProgressWeight(' + JSON.stringify(s) + ')');
+assert(weight(RICH(CNOW)) > weight(FRESH(CNOW)), 'a save with history outweighs a fresh one');
+eq(weight(FRESH(CNOW)), 0, 'a fresh save weighs nothing');
+assert(weight(null) < 0, 'and no save at all is lighter still, so any real save beats it');
+// Gold must not count, or spending it would look like losing progress.
+const spent = RICH(CNOW);
+spent.gold = 0;
+eq(weight(spent), weight(RICH(CNOW)), 'spending every coin does not reduce the weight');
+
+// Drive syncCloudSave itself, with the network and the writers stubbed.
+async function reconcile(local, remote) {
+  sb.__local = local;
+  sb.__remote = remote;
+  sb.__acts = [];
+  R(`peekLocalSave = () => __local;
+     cloudSaveRequest = async () => ({ status: 200, json: { user: { sub: 'u' }, data: __remote } });
+     applySave = (d) => { __acts.push('pull:' + d.gold); return true; };
+     pushCloudSave = async (d) => { __acts.push('push:' + d.gold); return { ok: true }; };
+     collectSave = () => (__local || { gold: 85, updatedAt: 1 });
+     getGoogleToken = () => 'tok';`);
+  await R('syncCloudSave()');
+  return sb.__acts.join(',');
+}
+
+(async () => {
+  eq(await reconcile(null, RICH(CNOW - 86400000)), 'pull:8400',
+    'a brand-new browser with nothing saved pulls the cloud save');
+  eq(await reconcile(FRESH(CNOW), RICH(CNOW - 86400000)), 'pull:8400',
+    'and so does one that auto-saved a blank game first — newer but emptier does not win');
+  eq(await reconcile(RICH(CNOW), RICH(CNOW - 86400000)), 'push:8400',
+    'genuine offline progress still uploads');
+  eq(await reconcile(RICH(CNOW), null), 'push:8400',
+    'and an empty cloud still gets seeded from this device');
+  eq(await reconcile(FRESH(CNOW - 86400000), RICH(CNOW)), 'pull:8400',
+    'a newer cloud save wins on the timestamp alone, as before');
+
+  console.log('\n' + passed + ' passed, ' + failed + ' failed');
+  process.exit(failed ? 1 : 0);
+})();

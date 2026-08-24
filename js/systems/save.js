@@ -889,6 +889,26 @@ function pushCloudSave(data) {
 
 // ── Cloud writes end ─────────────────────────────────────────────────────────
 
+// How much earned progress a save holds, counted only on fields that never go down over a
+// player's life. Gold is deliberately absent: it is spent, so a richer save can hold less.
+//
+// This exists because a timestamp cannot answer the question that decides a sign-in on a
+// second machine. A browser that has never seen the account writes a save within six seconds
+// of loading the page — before any sign-in — and that save is by definition the newest one in
+// existence. Comparing timestamps alone therefore made "open another browser and sign in"
+// upload a blank game over the player's real one: 85 gold and no review history replacing
+// everything. Measured on production, not theorised.
+function saveProgressWeight(s) {
+  if (!s || typeof s !== 'object') return -1;
+  const n = (v) => (Array.isArray(v) ? v.length
+    : (v && typeof v === 'object' ? Object.keys(v).length : 0));
+  const num = (v) => (typeof v === 'number' && isFinite(v) && v > 0 ? v : 0);
+  const rank = s.playerRank || {};
+  return n(s.srs) + n(s.attempts) + n(s.harvests) + n(s.unlockedTrophies)
+    + Math.max(0, n(s.unlockedLevels) - 1)
+    + num(rank.asked) + num(rank.sessions) + num(rank.xp);
+}
+
 async function syncCloudSave() {
   if (!getGoogleToken()) return;
   let remote;
@@ -902,10 +922,22 @@ async function syncCloudSave() {
   const local = peekLocalSave();
   const remoteAt = (remote && remote.updatedAt) || 0;
   const localAt = (local && local.updatedAt) || 0;
-  if (remote && remoteAt >= localAt) {
+
+  // A newer local save only outranks the cloud when it actually holds more progress. Newer
+  // and emptier means a fresh session on a machine that has not synced yet, and the cloud
+  // copy is the one to keep. Newer and equal-or-richer is genuine offline play, which wins.
+  const pullBecauseEmptier = !!(remote && localAt > remoteAt
+    && saveProgressWeight(local) < saveProgressWeight(remote));
+
+  if (remote && (remoteAt >= localAt || pullBecauseEmptier)) {
     if (applySave(remote)) {
       try { localStorage.setItem('hv_save_v2', JSON.stringify(remote)); } catch {}
-      if (typeof showToast === 'function') showToast('☁ Cloud save loaded');
+      // Said differently when this device's copy is being discarded, because it is — someone
+      // who had played here as a guest deserves to be told where it went.
+      if (typeof showToast === 'function') {
+        if (pullBecauseEmptier) showToast('☁ Cloud progress restored — this browser had none of its own.', 5000);
+        else showToast('☁ Cloud save loaded');
+      }
       if (typeof updateGoldHUD === 'function') updateGoldHUD();
       if (typeof updateRankHUD === 'function') updateRankHUD();
       if (typeof buildLevelSelectScreen === 'function') buildLevelSelectScreen();
