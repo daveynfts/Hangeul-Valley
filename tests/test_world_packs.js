@@ -51,8 +51,10 @@ assert(R('WORLD_PACKS.valley.stations').length === 0, 'valley pack has no textbo
 assert(R("WORLD_PACKS['2b-unit-10'].stations").join(',') === 'desk,kitchen,taste',
   'unit 10 pack is desk+kitchen+taste');
 assert(R("WORLD_PACKS['2b-unit-10'].extras").length === 0, 'unit 10 pack has no valley extras');
-assert(R("WORLD_PACKS['2b-unit-14'].stations").join(',') === 'desk',
-  'unit 14 pack is desk only');
+// Desk only until Unit 14's own tracks were cut; the deck joined it when tracks 42-51
+// landed, so it is now the same pack shape as Units 11 and 13.
+assert(R("WORLD_PACKS['2b-unit-14'].stations").join(',') === 'desk,cassette',
+  'unit 14 pack is desk plus cassette');
 assert(R("WORLD_PACKS['2b-unit-14'].stations").indexOf('kitchen') < 0,
   'unit 14 pack has no kitchen');
 assert(R("WORLD_PACKS['2b-unit-11'].stations").join(',') === 'desk,cassette',

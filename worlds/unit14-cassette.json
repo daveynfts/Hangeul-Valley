@@ -1,0 +1,891 @@
+{
+  "unit": "2b-unit-14",
+  "titleKo": "카세트 플레이어",
+  "titleEn": "The book's own recordings",
+  "unitKo": "14과 예의를 지켜요",
+  "source": "Seoul National University Korean 2B, Unit 14, tracks 42-51",
+  "closeKo": "닫기",
+  "tracks": [
+    {
+      "n": 42,
+      "sec": "문법과 표현 1-1",
+      "secEn": "V-(으)ㄴ 적(이) 있다[없다]",
+      "dur": 13,
+      "src": "audio/book/2b-u14-trk42.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "한국어를 잘 몰라서 실수한 적이 있어요?"
+        },
+        {
+          "who": "B",
+          "ko": "그럼요. 실수한 적 많아요."
+        }
+      ]
+    },
+    {
+      "n": 43,
+      "sec": "문법과 표현 1-2",
+      "secEn": "A/V-았을/었을 때",
+      "dur": 14.7,
+      "src": "audio/book/2b-u14-trk43.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "어른을 만나면 어떻게 인사해야 돼요?"
+        },
+        {
+          "who": "B",
+          "ko": "어른을 만났을 때는 고개를 숙여서 인사해야 돼요."
+        }
+      ]
+    },
+    {
+      "n": 44,
+      "sec": "말하기 1",
+      "secEn": "Steven and Yujin on getting Korean wrong",
+      "dur": 46,
+      "src": "audio/book/2b-u14-trk44.mp3",
+      "lines": [
+        {
+          "who": "스티븐",
+          "ko": "한국어는 참 어려운 것 같아."
+        },
+        {
+          "who": "유진",
+          "ko": "너 한국어 잘하는데 왜?"
+        },
+        {
+          "who": "스티븐",
+          "ko": "아니야. 오늘 병원에 갔을 때 한국어를 잘못해서 창피한 일이 있었어."
+        },
+        {
+          "who": "유진",
+          "ko": "무슨 일이 있었어?"
+        },
+        {
+          "who": "스티븐",
+          "ko": "의사 선생님을 '의사님'이라고 불러서 사람들이 웃었어."
+        },
+        {
+          "who": "유진",
+          "ko": "나도 가끔 처음 만난 사람을 뭐라고 불러야 할지 몰라서 어려울 때가 있어."
+        },
+        {
+          "who": "스티븐",
+          "ko": "너도 한국어 때문에 실수한 적 있어?"
+        },
+        {
+          "who": "유진",
+          "ko": "물론이지. 그래도 실수하면서 배운 것은 안 잊어버려서 좋아."
+        }
+      ]
+    },
+    {
+      "n": 45,
+      "sec": "문법과 표현 2-1",
+      "secEn": "V-아도/어도 되다",
+      "dur": 10.5,
+      "src": "audio/book/2b-u14-trk45.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "이 컴퓨터 써도 돼요?"
+        },
+        {
+          "who": "B",
+          "ko": "네, 써도 돼요."
+        }
+      ]
+    },
+    {
+      "n": 46,
+      "sec": "문법과 표현 2-2",
+      "secEn": "V-(으)면 안 되다",
+      "dur": 12.8,
+      "src": "audio/book/2b-u14-trk46.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "여기서 사진을 찍어도 돼요?"
+        },
+        {
+          "who": "B",
+          "ko": "아니요, 여기에서 사진을 찍으면 안 됩니다."
+        }
+      ]
+    },
+    {
+      "n": 47,
+      "sec": "말하기 2",
+      "secEn": "Steven and Mariko on what you may not do",
+      "dur": 61.5,
+      "src": "audio/book/2b-u14-trk47.mp3",
+      "noteEn": "The unit page prints this conversation as a picture and the 번역 page gives it in English only, so there is no Korean to check a dictation against. Listen with the translation beside you."
+    },
+    {
+      "n": 48,
+      "sec": "듣기 1",
+      "secEn": "A concert-hall announcement",
+      "dur": 53.5,
+      "src": "audio/book/2b-u14-trk48.mp3",
+      "lines": [
+        {
+          "who": "",
+          "ko": "저희 서울아트센터를 찾아 주신 여러분 감사의 말씀을 드립니다."
+        },
+        {
+          "who": "",
+          "ko": "이제 곧 공연이 시작됩니다."
+        },
+        {
+          "who": "",
+          "ko": "모두 자리에 앉아 주십시오."
+        },
+        {
+          "who": "",
+          "ko": "공연장 안에서는 음식물을 드시거나 사진 촬영을 하실 수 없습니다."
+        },
+        {
+          "who": "",
+          "ko": "공연 시작 후에는 자리를 바꾸거나 밖으로 나가실 수 없습니다."
+        },
+        {
+          "who": "",
+          "ko": "그리고 공연 중에는 휴대 전화 사용이 금지되오니 휴대 전화를 꺼 주십시오."
+        },
+        {
+          "who": "",
+          "ko": "오늘도 저희 서울아트센터와 함께해 주셔서 감사합니다."
+        },
+        {
+          "who": "",
+          "ko": "즐거운 시간 보내시기 바랍니다."
+        }
+      ]
+    },
+    {
+      "n": 49,
+      "sec": "듣기 2",
+      "secEn": "Dormitory rules",
+      "dur": 90.5,
+      "src": "audio/book/2b-u14-trk49.mp3",
+      "lines": [
+        {
+          "who": "직원",
+          "ko": "여러분, 기숙사에 오신 것을 환영합니다."
+        },
+        {
+          "who": "직원",
+          "ko": "먼저 기숙사에서 지켜야 할 것에 대해서 몇 가지 알려 드리겠습니다."
+        },
+        {
+          "who": "직원",
+          "ko": "기숙사는 여러 사람이 같이 사는 곳이기 때문에 다른 사람에게 불편을 주는 행동을 하면 안 됩니다."
+        },
+        {
+          "who": "직원",
+          "ko": "밤에 큰 소리로 음악을 듣거나 시끄럽게 떠들면 안 됩니다."
+        },
+        {
+          "who": "직원",
+          "ko": "그리고 기숙사는 금연 건물이므로 기숙사 안에서는 담배를 피울 수 없습니다."
+        },
+        {
+          "who": "직원",
+          "ko": "질문 있으십니까?"
+        },
+        {
+          "who": "학생",
+          "ko": "식사는 어떻게 하나요?"
+        },
+        {
+          "who": "직원",
+          "ko": "1층에 있는 기숙사 식당을 이용하시면 됩니다."
+        },
+        {
+          "who": "직원",
+          "ko": "하지만 일요일에는 문을 열지 않습니다."
+        },
+        {
+          "who": "학생",
+          "ko": "방에서 음식을 만들어 먹어도 되나요?"
+        },
+        {
+          "who": "직원",
+          "ko": "방에서는 요리를 하면 안 됩니다."
+        },
+        {
+          "who": "직원",
+          "ko": "음식을 만들고 싶으면 2층에 있는 부엌을 이용해 주세요."
+        },
+        {
+          "who": "학생",
+          "ko": "기숙사에 친구가 놀러 와도 됩니까?"
+        },
+        {
+          "who": "직원",
+          "ko": "네. 하지만 밤 10시 이후에는 모두 돌아가야 합니다."
+        },
+        {
+          "who": "학생",
+          "ko": "기숙사 안에 운동할 수 있는 곳이 있습니까?"
+        },
+        {
+          "who": "직원",
+          "ko": "네, 지하에 운동 시설이 있는데 기숙사에 사는 학생은 50% 싸게 이용할 수 있습니다."
+        }
+      ]
+    },
+    {
+      "n": 50,
+      "sec": "발음 · 준비",
+      "secEn": "ㄱ, ㄷ, ㅈ tensed after a ㄴ or ㅁ stem",
+      "dur": 17.2,
+      "src": "audio/book/2b-u14-trk50.mp3",
+      "lines": [
+        {
+          "who": "1",
+          "ko": "운동화를 신고 가세요."
+        },
+        {
+          "who": "2",
+          "ko": "시간이 많이 남지요?"
+        }
+      ]
+    },
+    {
+      "n": 51,
+      "sec": "발음 · 연습",
+      "secEn": "Listen and repeat",
+      "dur": 40.5,
+      "src": "audio/book/2b-u14-trk51.mp3",
+      "lines": [
+        {
+          "who": "1",
+          "ko": "의자에 앉다가 넘어졌어요."
+        },
+        {
+          "who": "2",
+          "ko": "아기를 안고 사진을 찍었어요."
+        },
+        {
+          "who": "3",
+          "ko": "너무 바빠서 머리를 감지 못했어요."
+        },
+        {
+          "who": "4 A",
+          "ko": "어제부터 배가 아프네요."
+        },
+        {
+          "who": "4 B",
+          "ko": "아프면 참지 말고 병원에 가세요."
+        }
+      ]
+    }
+  ],
+  "dictation": {
+    "filter": {
+      "keep": [
+        "a whole sentence someone would actually say",
+        "5-24 syllables: this unit's 말하기 turns run longer than Unit 11's, so the cap is four syllables wider — long enough to need listening, short enough to hold in your head",
+        "carries at least one thing you can only write correctly if you know something — the unit's grammar (V-(으)ㄴ 적(이) 있다[없다], A/V-았을/었을 때, V-아도/어도 되다, V-(으)면 안 되다), a gap between sound and spelling (this unit's 발음 point is ㄱ/ㄷ/ㅈ tensing after a ㄴ or ㅁ stem final), or a unit headword"
+      ],
+      "drop": [
+        "fixed courtesies and bare acknowledgements — 그럼요, 물론이지, 아니야, 네 써도 돼요, 아니요, and the 듣기 tracks’ own 감사의 말씀을 드립니다 / 환영합니다 / 질문 있으십니까 / 즐거운 시간 보내시기 바랍니다",
+        "anything under ~5 syllables: nothing to decide when you write it",
+        "a printed line with a numeral read aloud — 1층에, 2층에, 밤 10시, 50% 싸게. The syllable count cannot be derived from the text, so the pace check that verifies the cut has nothing to measure against",
+        "나도 가끔 처음 만난 사람을 뭐라고 불러야 할지 몰라서 어려울 때가 있어 — 35 syllables, and the narrator runs it as a single unbroken span, so it can be neither kept whole nor split at a pause",
+        "four 듣기 sentences of 25-39 syllables whose only internal pauses fall mid-clause — 공연장 안에서는 음식물을 드시거나…, 공연 시작 후에는 자리를 바꾸거나…, 먼저 기숙사에서 지켜야 할 것에 대해서…, 기숙사는 여러 사람이 같이 사는 곳이기 때문에…. Each carries unit headwords and each would have to be cut mid-breath to fit the cap, so they stay on the tape and out of the set",
+        "track 47, which has no printed script: there is nothing to check an answer against"
+      ],
+      "splitAtClause": "Six printed turns open with something the row does not want — a courtesy (아니야, 물론이지, 아니요) or a subordinate clause too long to keep — and in all six the narrator pauses at that boundary, so the split lands on the recording’s own break rather than on the punctuation. Each child names its parent in splitFrom."
+    },
+    "items": [
+      {
+        "id": 1,
+        "track": 42,
+        "who": "A",
+        "ko": "한국어를 잘 몰라서 실수한 적이 있어요?",
+        "en": "Have you ever made a mistake because your Korean let you down?",
+        "syl": 16,
+        "why": "The pattern the page teaches. 몰라서 is the 르 verb 모르다 doubling its ㄹ, and 실수한 적이 runs together as [실수한 저기] — the 적 you have to write is the syllable you cannot hear.",
+        "tags": [
+          "V-(으)ㄴ 적(이) 있다[없다]",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d01.mp3",
+          "voiced": 3.431,
+          "rate": 4.66
+        }
+      },
+      {
+        "id": 2,
+        "track": 43,
+        "who": "A",
+        "ko": "어른을 만나면 어떻게 인사해야 돼요?",
+        "en": "How should you greet someone older than you?",
+        "syl": 15,
+        "why": "어른을 is said [어르늘] and 어떻게 is [어떠케] — the ㅎ of 어떻다 fuses with the ㄱ. Two liaisons in one short question.",
+        "tags": [
+          "어른",
+          "유기음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d02.mp3",
+          "voiced": 3.195,
+          "rate": 4.69
+        }
+      },
+      {
+        "id": 3,
+        "track": 43,
+        "who": "B",
+        "ko": "어른을 만났을 때는 고개를 숙여서 인사해야 돼요.",
+        "en": "When you meet someone older, you bow your head to greet them.",
+        "syl": 20,
+        "why": "The unit grammar, and the trap is 숙여서: it is said [수겨서], so the ㄱ you write is the ㄱ you hear at the start of the next syllable.",
+        "tags": [
+          "A/V-았을/었을 때",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d03.mp3",
+          "voiced": 4.117,
+          "rate": 4.86
+        }
+      },
+      {
+        "id": 4,
+        "track": 44,
+        "who": "스티븐",
+        "ko": "한국어는 참 어려운 것 같아.",
+        "en": "Korean really does seem hard.",
+        "syl": 11,
+        "why": "것 같아 is said [걷 까타] — the 것 tenses the ㄱ of 같아 and the ㅌ carries over into the vowel. Almost nothing here is written the way it sounds.",
+        "tags": [
+          "경음화 (받침 ㄷ 뒤)",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d04.mp3",
+          "voiced": 2.44,
+          "rate": 4.51
+        }
+      },
+      {
+        "id": 5,
+        "track": 44,
+        "who": "유진",
+        "ko": "너 한국어 잘하는데 왜?",
+        "en": "But your Korean is good — why?",
+        "syl": 9,
+        "why": "잘하는데 is said [자라는데]: the ㅎ softens to almost nothing between the ㄹ and the vowel. Write what you hear and you lose 하다.",
+        "tags": [
+          "ㅎ 약화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d05.mp3",
+          "voiced": 2.05,
+          "rate": 4.39
+        }
+      },
+      {
+        "id": 6,
+        "track": 44,
+        "who": "스티븐",
+        "ko": "오늘 병원에 갔을 때 한국어를 잘못해서 창피한 일이 있었어.",
+        "en": "Today at the hospital my Korean went wrong and I was embarrassed.",
+        "syl": 24,
+        "why": "The unit grammar in the wild, and 잘못해서 is [잘모태서] — the ㅅ of 못 and the ㅎ of 하다 fuse into one aspirated ㅌ. 있었어 is [이써써].",
+        "tags": [
+          "A/V-았을/었을 때",
+          "유기음화"
+        ],
+        "splitFrom": "아니야. 오늘 병원에 갔을 때 한국어를 잘못해서 창피한 일이 있었어.",
+        "audio": {
+          "src": "audio/book/2b-u14-d06.mp3",
+          "voiced": 5.266,
+          "rate": 4.56
+        }
+      },
+      {
+        "id": 7,
+        "track": 44,
+        "who": "유진",
+        "ko": "무슨 일이 있었어?",
+        "en": "What happened?",
+        "syl": 7,
+        "why": "일이 is [이리] and 있었어 is [이써써]. Four written syllables arrive as three heard ones.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d07.mp3",
+          "voiced": 1.26,
+          "rate": 5.56
+        }
+      },
+      {
+        "id": 8,
+        "track": 44,
+        "who": "스티븐",
+        "ko": "의사 선생님을 '의사님'이라고 불러서 사람들이 웃었어.",
+        "en": "I called the doctor 'uisanim' and everyone laughed.",
+        "syl": 22,
+        "why": "웃었어 is said [우서써] — the ㅅ moves across and the ㅆ that follows sounds the same, so the spelling has to come from knowing 웃다.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d08.mp3",
+          "voiced": 4.151,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 9,
+        "track": 44,
+        "who": "스티븐",
+        "ko": "너도 한국어 때문에 실수한 적 있어?",
+        "en": "Have you ever made a mistake because of Korean too?",
+        "syl": 14,
+        "why": "The pattern again, this time with 적 standing bare before 있어 — [저기써] as one run of sound.",
+        "tags": [
+          "V-(으)ㄴ 적(이) 있다[없다]",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d09.mp3",
+          "voiced": 2.918,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 10,
+        "track": 44,
+        "who": "유진",
+        "ko": "그래도 실수하면서 배운 것은 안 잊어버려서 좋아.",
+        "en": "Still, I like it — I never forget what a mistake taught me.",
+        "syl": 20,
+        "why": "것은 is [거슨] and 잊어버려서 is [이저버려서]. 좋아 is [조아], the ㅎ dropping out between vowels and leaving no trace to write from.",
+        "tags": [
+          "연음",
+          "ㅎ 탈락"
+        ],
+        "splitFrom": "물론이지. 그래도 실수하면서 배운 것은 안 잊어버려서 좋아.",
+        "audio": {
+          "src": "audio/book/2b-u14-d10.mp3",
+          "voiced": 4.229,
+          "rate": 4.73
+        }
+      },
+      {
+        "id": 11,
+        "track": 45,
+        "who": "A",
+        "ko": "이 컴퓨터 써도 돼요?",
+        "en": "Is it all right if I use this computer?",
+        "syl": 8,
+        "why": "The permission pattern at its shortest. 돼요 and 되요 sound identical and only one is right — this is the row that teaches the difference.",
+        "tags": [
+          "V-아도/어도 되다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d11.mp3",
+          "voiced": 1.876,
+          "rate": 4.26
+        }
+      },
+      {
+        "id": 12,
+        "track": 46,
+        "who": "A",
+        "ko": "여기서 사진을 찍어도 돼요?",
+        "en": "Is it all right to take photos here?",
+        "syl": 11,
+        "why": "찍어도 is said [찌거도]: the ㄱ of 찍 hops into the next syllable, so the ㄱ you write is not where you hear it.",
+        "tags": [
+          "V-아도/어도 되다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d12.mp3",
+          "voiced": 2.097,
+          "rate": 5.25
+        }
+      },
+      {
+        "id": 13,
+        "track": 46,
+        "who": "B",
+        "ko": "여기에서 사진을 찍으면 안 됩니다.",
+        "en": "You must not take photos here.",
+        "syl": 14,
+        "why": "The prohibition pattern, and 됩니다 is said [됨니다] — the ㅂ becomes ㅁ before the ㄴ. Nothing in the sound tells you it is 되다.",
+        "tags": [
+          "V-(으)면 안 되다",
+          "비음화"
+        ],
+        "splitFrom": "아니요, 여기에서 사진을 찍으면 안 됩니다.",
+        "audio": {
+          "src": "audio/book/2b-u14-d13.mp3",
+          "voiced": 2.381,
+          "rate": 5.88
+        }
+      },
+      {
+        "id": 14,
+        "track": 50,
+        "who": "",
+        "ko": "운동화를 신고 가세요.",
+        "en": "Wear your trainers.",
+        "syl": 9,
+        "why": "The rule this unit teaches: 신고 is said [신꼬], because the ㄱ tenses after the ㄴ of a verb stem. The page prints 신고 and the tape says 신꼬.",
+        "tags": [
+          "경음화 (ㄴ, ㅁ 뒤)"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d14.mp3",
+          "voiced": 1.844,
+          "rate": 4.88
+        }
+      },
+      {
+        "id": 15,
+        "track": 50,
+        "who": "",
+        "ko": "시간이 많이 남지요?",
+        "en": "There is still plenty of time left, isn’t there?",
+        "syl": 8,
+        "why": "남지요 is said [남찌요] — the same rule after ㅁ. 많이 is [마니], the ㅎ of the ㄶ cluster dropping out entirely.",
+        "tags": [
+          "경음화 (ㄴ, ㅁ 뒤)",
+          "ㅎ 탈락"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d15.mp3",
+          "voiced": 1.822,
+          "rate": 4.39
+        }
+      },
+      {
+        "id": 16,
+        "track": 51,
+        "who": "",
+        "ko": "의자에 앉다가 넘어졌어요.",
+        "en": "I fell over as I was sitting down on the chair.",
+        "syl": 11,
+        "why": "앉다가 is said [안따가]: the ㅈ of the ㄵ cluster is not pronounced at all and the ㄷ tenses after the ㄴ that is left. Two changes, neither written.",
+        "tags": [
+          "경음화 (ㄴ, ㅁ 뒤)",
+          "자음군 단순화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d16.mp3",
+          "voiced": 2.514,
+          "rate": 4.38
+        }
+      },
+      {
+        "id": 17,
+        "track": 51,
+        "who": "",
+        "ko": "아기를 안고 사진을 찍었어요.",
+        "en": "I took the photo holding the baby.",
+        "syl": 12,
+        "why": "안고 is said [안꼬] — the rule again, and it is what separates 안다 (to hold) from 안 하다 in a dictation. 찍었어요 is [찌거써요].",
+        "tags": [
+          "경음화 (ㄴ, ㅁ 뒤)",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d17.mp3",
+          "voiced": 2.428,
+          "rate": 4.94
+        }
+      },
+      {
+        "id": 18,
+        "track": 51,
+        "who": "",
+        "ko": "너무 바빠서 머리를 감지 못했어요.",
+        "en": "I was too busy to wash my hair.",
+        "syl": 14,
+        "why": "감지 is said [감찌] after the ㅁ, and 못했어요 is [모태써요] — the ㅅ and the ㅎ fusing. The row turns on hearing 감다 rather than 갑다.",
+        "tags": [
+          "경음화 (ㄴ, ㅁ 뒤)",
+          "유기음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d18.mp3",
+          "voiced": 3.107,
+          "rate": 4.51
+        }
+      },
+      {
+        "id": 19,
+        "track": 51,
+        "who": "A",
+        "ko": "어제부터 배가 아프네요.",
+        "en": "My stomach has been hurting since yesterday.",
+        "syl": 10,
+        "why": "The one row in the set with no sound change to catch you — it is here so the ㄴ/ㅁ rule is a decision rather than a reflex.",
+        "tags": [
+          "배가 아프다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d19.mp3",
+          "voiced": 2.123,
+          "rate": 4.71
+        }
+      },
+      {
+        "id": 20,
+        "track": 51,
+        "who": "B",
+        "ko": "아프면 참지 말고 병원에 가세요.",
+        "en": "If it hurts, do not put up with it — go to the doctor.",
+        "syl": 13,
+        "why": "참지 is said [참찌], the rule after ㅁ once more. 말고 keeps its plain ㄱ because 말- is not followed by one of ㄱ/ㄷ/ㅈ in the way the rule needs — the contrast inside one sentence is the point.",
+        "tags": [
+          "경음화 (ㄴ, ㅁ 뒤)"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d20.mp3",
+          "voiced": 3.138,
+          "rate": 4.14
+        }
+      },
+      {
+        "id": 21,
+        "track": 48,
+        "who": "",
+        "ko": "이제 곧 공연이 시작됩니다.",
+        "en": "The performance is about to begin.",
+        "syl": 11,
+        "why": "시작됩니다 is said [시작뙴니다] and then [시작뗌니다]: the ㄱ of 시작 tenses the ㄷ of 되-, and the ㅂ of 됩 turns into ㅁ before the ㄴ. Three syllables and not one of them sounds like its spelling.",
+        "tags": [
+          "시작되다",
+          "경음화 (받침 ㄱ 뒤)",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d21.mp3",
+          "voiced": 1.911,
+          "rate": 5.76
+        }
+      },
+      {
+        "id": 22,
+        "track": 48,
+        "who": "",
+        "ko": "모두 자리에 앉아 주십시오.",
+        "en": "Please all take your seats.",
+        "syl": 11,
+        "why": "앉아 is said [안자]: the ㄵ cluster hands its ㅈ to the next syllable and only the ㄴ stays behind. Written 앉아 and heard as 안자, which is the whole reason this is a dictation row and not a reading one.",
+        "tags": [
+          "자리",
+          "자음군 단순화",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d22.mp3",
+          "voiced": 2.194,
+          "rate": 5.01
+        }
+      },
+      {
+        "id": 23,
+        "track": 48,
+        "who": "",
+        "ko": "휴대 전화를 꺼 주십시오.",
+        "en": "Please turn off your mobile phone.",
+        "syl": 10,
+        "why": "The unit headword 휴대전화를 끄다, in the one form where the stem all but disappears: 끄- + -어 drops the ㅡ and leaves 꺼, a single syllable. Hear [꺼] and you still have to know it is 끄다 to write it.",
+        "tags": [
+          "휴대전화를 끄다",
+          "ㅡ 탈락"
+        ],
+        "splitFrom": "그리고 공연 중에는 휴대 전화 사용이 금지되오니 휴대 전화를 꺼 주십시오.",
+        "audio": {
+          "src": "audio/book/2b-u14-d23.mp3",
+          "voiced": 1.811,
+          "rate": 5.52
+        }
+      },
+      {
+        "id": 24,
+        "track": 49,
+        "who": "직원",
+        "ko": "다른 사람에게 불편을 주는 행동을 하면 안 됩니다.",
+        "en": "You must not behave in ways that inconvenience other people.",
+        "syl": 20,
+        "why": "The unit grammar in a house rule. 불편을 is said [불펴늘] and 행동을 [행동을] — the ㄹ and the ㄴ both move across — and 됩니다 comes out [뎀니다], the ㅂ becoming ㅁ before the ㄴ.",
+        "tags": [
+          "V-(으)면 안 되다",
+          "연음",
+          "비음화"
+        ],
+        "splitFrom": "기숙사는 여러 사람이 같이 사는 곳이기 때문에 다른 사람에게 불편을 주는 행동을 하면 안 됩니다.",
+        "audio": {
+          "src": "audio/book/2b-u14-d24.mp3",
+          "voiced": 3.491,
+          "rate": 5.73
+        }
+      },
+      {
+        "id": 25,
+        "track": 49,
+        "who": "직원",
+        "ko": "밤에 큰 소리로 음악을 듣거나 시끄럽게 떠들면 안 됩니다.",
+        "en": "You must not play music loudly at night or make a racket.",
+        "syl": 23,
+        "why": "Two unit headwords and the unit grammar in one line. 듣거나 is said [듣꺼나] — the ㄱ tenses after the ㄷ 받침, a different environment from this chapter’s ㄴ/ㅁ rule and worth meeting beside it — and 음악을 is [으마글].",
+        "tags": [
+          "큰 소리로",
+          "V-(으)면 안 되다",
+          "경음화 (받침 ㄷ 뒤)",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d25.mp3",
+          "voiced": 4.646,
+          "rate": 4.95
+        }
+      },
+      {
+        "id": 26,
+        "track": 49,
+        "who": "직원",
+        "ko": "기숙사 안에서는 담배를 피울 수 없습니다.",
+        "en": "You may not smoke inside the dormitory.",
+        "syl": 17,
+        "why": "없습니다 is said [업씀니다]: the ㅄ cluster gives up its ㅅ, the ㅂ that is left tenses the following ㅅ, and then turns into ㅁ before the ㄴ. Three changes in one word, none of them written.",
+        "tags": [
+          "담배를 피우다",
+          "자음군 단순화",
+          "비음화"
+        ],
+        "splitFrom": "그리고 기숙사는 금연 건물이므로 기숙사 안에서는 담배를 피울 수 없습니다.",
+        "audio": {
+          "src": "audio/book/2b-u14-d26.mp3",
+          "voiced": 2.786,
+          "rate": 6.1
+        }
+      },
+      {
+        "id": 27,
+        "track": 49,
+        "who": "학생",
+        "ko": "식사는 어떻게 하나요?",
+        "en": "What about meals?",
+        "syl": 9,
+        "why": "어떻게 is said [어떠케] — the ㅎ of 어떻다 fuses with the ㄱ into one aspirated sound — and 식사는 is [식싸는], the ㅅ tensing after the ㄱ. Nine written syllables, two of them changed.",
+        "tags": [
+          "유기음화",
+          "경음화 (받침 ㄱ 뒤)"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d27.mp3",
+          "voiced": 1.864,
+          "rate": 4.83
+        }
+      },
+      {
+        "id": 28,
+        "track": 49,
+        "who": "직원",
+        "ko": "하지만 일요일에는 문을 열지 않습니다.",
+        "en": "On Sundays, though, it does not open.",
+        "syl": 16,
+        "why": "일요일에는 runs together as [이료이레는]: the ㄹ carries into the vowel twice over, and nothing in the sound tells you where 일요일 ends and 에는 starts. 않습니다 is [안씀니다].",
+        "tags": [
+          "문을 열다",
+          "연음",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d28.mp3",
+          "voiced": 2.86,
+          "rate": 5.59
+        }
+      },
+      {
+        "id": 29,
+        "track": 49,
+        "who": "학생",
+        "ko": "방에서 음식을 만들어 먹어도 되나요?",
+        "en": "Is it all right to cook and eat food in my room?",
+        "syl": 15,
+        "why": "The permission pattern as a real question. 음식을 is [음시글] and 먹어도 is [머거도] — both consonants hop into the next syllable, so the ㄱ you write is never where you hear it.",
+        "tags": [
+          "V-아도/어도 되다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d29.mp3",
+          "voiced": 2.974,
+          "rate": 5.04
+        }
+      },
+      {
+        "id": 30,
+        "track": 49,
+        "who": "직원",
+        "ko": "방에서는 요리를 하면 안 됩니다.",
+        "en": "You must not cook in your room.",
+        "syl": 13,
+        "why": "The refusal that answers it, and the shortest clean example of the pattern in the chapter. 됩니다 is [뎀니다]: the ㅂ becomes ㅁ before the ㄴ, so the 되다 in it is inaudible.",
+        "tags": [
+          "V-(으)면 안 되다",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d30.mp3",
+          "voiced": 2.319,
+          "rate": 5.61
+        }
+      },
+      {
+        "id": 31,
+        "track": 49,
+        "who": "학생",
+        "ko": "기숙사에 친구가 놀러 와도 됩니까?",
+        "en": "May a friend come and visit me in the dormitory?",
+        "syl": 14,
+        "why": "됩니까 is [뎀니까] on the same rule as 됩니다, and 놀러 와도 is the -(으)러 of purpose meeting the -아/어도 of permission in one phrase — two endings a learner reaches for separately.",
+        "tags": [
+          "V-아도/어도 되다",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d31.mp3",
+          "voiced": 2.951,
+          "rate": 4.74
+        }
+      },
+      {
+        "id": 32,
+        "track": 49,
+        "who": "학생",
+        "ko": "기숙사 안에 운동할 수 있는 곳이 있습니까?",
+        "en": "Is there anywhere to exercise inside the dormitory?",
+        "syl": 17,
+        "why": "곳이 is said [고시] and 있습니까 [읻씀니까] — the ㅆ closes to [ㄷ], tenses the ㅅ after it, then the ㅂ becomes ㅁ. The 곳 and the 있 are both spelled for the word, not for the sound.",
+        "tags": [
+          "운동 시설",
+          "연음",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u14-d32.mp3",
+          "voiced": 3.071,
+          "rate": 5.54
+        }
+      }
+    ]
+  },
+  "listenOnly": "Track 47 has no printed script — the unit page draws that conversation and the 번역 page gives it in English only — so the pane says so and no dictation sentence is drawn from it. Tracks 48 and 49 were listen-only until the 듣기 지문 pages at the back of the book supplied their transcripts."
+}

@@ -1,0 +1,1496 @@
+{
+  "id": "unit14-textbook",
+  "source": "Seoul National University Korean 2B (교과서), Unit 14 · 예의를 지켜요",
+  "titleKo": "교과서",
+  "titleEn": "Textbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "The chapter's own pages — one exercise at a time.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "exercises": [
+    {
+      "id": "u14sgk-speak-1",
+      "type": "build",
+      "section": "말하기 1",
+      "sectionEn": "Speaking 1",
+      "no": "연습 1",
+      "icon": "🗣️",
+      "blurbEn": "Swap the hospital for the landlord and keep the story working.",
+      "instructionKo": "[보기]와 같이 바꿔서 이야기해 보세요.",
+      "instructionEn": "Substitute the phrases into the conversation, as in the example.",
+      "noteEn": "The book prints a substitution table under the dialogue and asks you to say it aloud, which nothing can mark. The two swaps are given as the two blanks instead, so the part being drilled — the -았을/었을 때 clause and the title that got Steven laughed at — is still the part you decide. Row 3 is 연습 2, which the book leaves open: the model answer is the key's, and the wrong answers answer the question but slip on tense.",
+      "pattern": "스티븐과 유진 · 한국어 때문에 실수한 이야기",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "병원에 가다 / 의사 선생님 · 의사님",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "오늘 {} 한국어를 잘못해서 창피한 일이 있었어."
+            },
+            {
+              "who": "스티븐",
+              "ko": "{}을 '의사님'이라고 불러서 사람들이 웃었어."
+            }
+          ],
+          "answer": "byeongwon",
+          "choices": [
+            {
+              "id": "byeongwon",
+              "ko": "병원에 갔을 때"
+            },
+            {
+              "id": "byeongwon_bad",
+              "ko": "병원에 가을 때"
+            },
+            {
+              "id": "byeongwon_pres",
+              "ko": "병원에 갈 때"
+            }
+          ],
+          "answer2": "uisa_ssaem",
+          "choices2": [
+            {
+              "id": "uisa_ssaem",
+              "ko": "의사 선생님"
+            },
+            {
+              "id": "uisa_nim",
+              "ko": "의사님"
+            },
+            {
+              "id": "uisa_bare",
+              "ko": "의사"
+            }
+          ],
+          "en": "Today at the hospital my Korean went wrong and I was embarrassed. — I called the doctor 'uisanim' and everyone laughed.",
+          "why": "The joke only lands if the first blank is past. Steven is telling a story about something that already happened, and 갈 때 would make it a habit — every time I go to the hospital, my Korean goes wrong. The second blank is the word he should have used: 의사 선생님 is what you call a doctor, and 의사님 is the form he invented by bolting the honorific -님 straight onto the job title.",
+          "grammar": "가다 → 갔을 때. 가- + -았- contracts to 갔-, then -을 때. 가을 때 is the contraction skipped; 갈 때 is the plain future/habitual and says something else.",
+          "audio": {
+            "src": "audio/book/2b-u14-trk44.mp3",
+            "labelEn": "말하기 1 · track 44"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "집주인을 만났다 / 집주인 아저씨 · 주인님",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "오늘 {} 한국어를 잘못해서 당황한 일이 있었어."
+            },
+            {
+              "who": "스티븐",
+              "ko": "{}를 '주인님'이라고 불러서 사람들이 웃었어."
+            }
+          ],
+          "answer": "jibjuin",
+          "choices": [
+            {
+              "id": "jibjuin",
+              "ko": "집주인을 만났을 때"
+            },
+            {
+              "id": "jibjuin_bad",
+              "ko": "집주인을 만나을 때"
+            },
+            {
+              "id": "jibjuin_pres",
+              "ko": "집주인을 만날 때"
+            }
+          ],
+          "answer2": "ajussi",
+          "choices2": [
+            {
+              "id": "ajussi",
+              "ko": "집주인 아저씨"
+            },
+            {
+              "id": "juinnim",
+              "ko": "주인님"
+            },
+            {
+              "id": "jibjuinnim",
+              "ko": "집주인님"
+            }
+          ],
+          "en": "Today when I met the landlord my Korean went wrong and I was flustered. — I called the landlord 'juinnim' and everyone laughed.",
+          "why": "The same mistake in a second setting, which is the point of the table: 주인님 is not a way to address a person. Korean reaches for 아저씨 or 아주머니 with a role — 집주인 아저씨 — where English would use 'the owner'. 주인님 belongs to a dog and its owner, or to a period drama.",
+          "grammar": "만나다 → 만났을 때. 만나- + -았- contracts to 만났-. 만나을 때 is the same skipped contraction as row 1, and it is the mistake this exercise is really testing."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "연습 2 · 한국에 처음 왔을 때",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "마리코 씨는 한국에 처음 왔을 때 어땠어요?"
+            },
+            {
+              "who": "B",
+              "ko": "{}"
+            }
+          ],
+          "answer": "past_ok",
+          "choices": [
+            {
+              "id": "past_ok",
+              "ko": "한국어를 전혀 못해서 좀 힘들었어요."
+            },
+            {
+              "id": "pres_slip",
+              "ko": "한국어를 전혀 못해서 좀 힘들어요."
+            },
+            {
+              "id": "when_slip",
+              "ko": "한국에 처음 올 때 좀 힘들어요."
+            }
+          ],
+          "en": "How was it when you first came to Korea? — Korean was completely beyond me, so it was rather hard.",
+          "why": "The book leaves this one open — tell your own story — so the key's model answer is here against two that answer the question and fail somewhere else. 힘들어요 says it is hard now, which is not what 왔을 때 asked about; 올 때 shifts the whole question to a habit, as though you arrived in Korea repeatedly.",
+          "grammar": "The question sets the tense: 왔을 때 asks about a finished moment, so the answer takes 힘들었어요. -았/었- is not optional agreement here, it is what makes the reply an answer.",
+          "audio": {
+            "src": "audio/book/2b-u14-trk43.mp3",
+            "labelEn": "A/V-았을/었을 때 · track 43"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u14sgk-listen-1",
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "no": "듣기 1",
+      "icon": "🎻",
+      "blurbEn": "The announcement before the concert, and the one thing it does not say.",
+      "instructionKo": "잘 듣고 맞지 않는 것을 고르세요.",
+      "instructionEn": "Listen carefully and choose the statement that is different from the announcement.",
+      "noteEn": "The book prints only the three statements; the announcement itself is on the 듣기 지문 page at the back, and track 48 is on the deck. Row 1 is the book's question with the book's three options. Rows 2-4 are the lines the answer turns on, so the page is answerable from the recording rather than from a guess — the announcement says to switch a phone off, which is not the same as not bringing one in.",
+      "pattern": "서울아트센터 안내 방송",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "안내 방송",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "안내 방송의 내용과 맞지 않는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "phone_in",
+          "choices": [
+            {
+              "id": "phone_in",
+              "ko": "공연장에 휴대 전화를 가지고 들어갈 수 없습니다."
+            },
+            {
+              "id": "no_food",
+              "ko": "공연장 안은 음식물 반입 금지입니다."
+            },
+            {
+              "id": "no_out",
+              "ko": "공연이 시작하면 밖으로 나가면 안 됩니다."
+            }
+          ],
+          "en": "Which does not match the announcement? — That you may not take a mobile phone into the hall.",
+          "why": "The announcement asks you to turn the phone off — 휴대 전화를 꺼 주십시오 — which is not the same as leaving it outside. The other two are said almost word for word: 음식물을 드시거나 사진 촬영을 하실 수 없습니다, and 공연 시작 후에는 … 밖으로 나가실 수 없습니다. Hearing 휴대 전화 and 금지 in the same sentence is what makes the wrong answer feel right.",
+          "grammar": "사용이 금지되다, for a thing to be prohibited, against 가지고 들어가다, to take in with you. The announcement uses the first; the statement claims the second.",
+          "audio": {
+            "src": "audio/book/2b-u14-trk48.mp3",
+            "labelEn": "듣기 1 · track 48"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "휴대 전화를 끄다",
+          "lines": [
+            {
+              "ko": "공연 중에는 휴대 전화 사용이 금지되오니 휴대 전화를 {} 주십시오."
+            }
+          ],
+          "answer": "kkeo",
+          "choices": [
+            {
+              "id": "kkeo",
+              "ko": "꺼"
+            },
+            {
+              "id": "kkeugo",
+              "ko": "끄고"
+            },
+            {
+              "id": "kkeotseo",
+              "ko": "껐어"
+            }
+          ],
+          "en": "Mobile phone use is prohibited during the performance, so please switch your phone off.",
+          "why": "V-아/어 주십시오 needs the -아/어 form, and 끄- + -어 loses the ㅡ altogether: 꺼. 끄고 would be joining this to another verb that never comes, and 껐어 is past tense, which cannot be a request. One syllable, and the stem is invisible in it.",
+          "grammar": "끄다 → 꺼 주십시오. The ㅡ of the stem drops before -어: 끄어 is never written. Compare 쓰다 → 써, 크다 → 커.",
+          "audio": {
+            "src": "audio/book/2b-u14-d23.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "자리를 바꾸다",
+          "lines": [
+            {
+              "ko": "공연 시작 후에는 자리를 {} 밖으로 나가실 수 없습니다."
+            }
+          ],
+          "answer": "bakkugeona",
+          "choices": [
+            {
+              "id": "bakkugeona",
+              "ko": "바꾸거나"
+            },
+            {
+              "id": "bakkugeoni",
+              "ko": "바꾸거니"
+            },
+            {
+              "id": "bakkulgeona",
+              "ko": "바꿀거나"
+            }
+          ],
+          "en": "After the performance begins you may not change seats or leave the hall.",
+          "why": "-거나 joins two things either of which is forbidden, and it attaches to the plain stem: 바꾸거나. 바꾸거니 and 바꿀거나 are not forms of anything — this row is here because 자리를 바꾸다 and 밖으로 나가다 are both unit headwords and the announcement is where they appear together.",
+          "grammar": "V-거나 V, either … or. Straight onto the stem, no tense and no future -ㄹ: 바꾸거나, 나가거나, 듣거나.",
+          "audio": {
+            "src": "audio/book/2b-u14-trk48.mp3",
+            "labelEn": "듣기 1 · track 48"
+          }
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "시작되다",
+          "lines": [
+            {
+              "ko": "이제 곧 공연이 {} 모두 자리에 앉아 주십시오."
+            }
+          ],
+          "answer": "sijakdoem",
+          "choices": [
+            {
+              "id": "sijakdoem",
+              "ko": "시작됩니다."
+            },
+            {
+              "id": "sijakham",
+              "ko": "시작합니다."
+            },
+            {
+              "id": "sijakhagess",
+              "ko": "시작하겠습니다."
+            }
+          ],
+          "en": "The performance is about to begin. Please all take your seats.",
+          "why": "공연이 with the subject particle needs the intransitive 시작되다: the performance starts by itself. 공연을 시작합니다 would be correct with an object, and reaching for 시작하다 after 이 is the mistake this row exists for. On the tape it is [시작뗌니다], which hides both the 되 and the ㅂ.",
+          "grammar": "시작되다 (to begin) against 시작하다 (to begin something). N이/가 시작되다, N을/를 시작하다.",
+          "audio": {
+            "src": "audio/book/2b-u14-d21.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u14sgk-listen-2",
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "no": "듣기 2",
+      "icon": "🏢",
+      "blurbEn": "What the dormitory lets you do, and what it charges you half price for.",
+      "instructionKo": "잘 듣고 질문에 답하세요.",
+      "instructionEn": "Listen carefully and answer the questions.",
+      "noteEn": "The book asks two multiple-choice questions and prints three pictures for the first, which is why row 1 names the three in words instead. Both are the book's own questions with its own options; the transcript from the 듣기 지문 page settles them, and rows 3-6 are the lines that do the settling. Note row 2: the staff member says the gym is 50% cheaper for residents, not free, which is what makes the third option wrong.",
+      "pattern": "기숙사 규칙 안내",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "기숙사에서 해도 되는 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "기숙사에서 해도 되는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "rest",
+          "choices": [
+            {
+              "id": "rest",
+              "ko": "방에서 쉬는 것"
+            },
+            {
+              "id": "grill",
+              "ko": "방에서 고기를 구워 먹는 것"
+            },
+            {
+              "id": "smoke",
+              "ko": "방에서 담배를 피우는 것"
+            }
+          ],
+          "en": "What may you do in the dormitory? — Rest in your room.",
+          "why": "Both of the others are refused outright on the tape: 방에서는 요리를 하면 안 됩니다 rules out cooking in the room, and 기숙사 안에서는 담배를 피울 수 없습니다 rules out smoking anywhere inside. Nothing forbids resting, which is how a question of this shape is answered — by elimination rather than by finding the permission.",
+          "grammar": "V-아/어도 되다 in a noun phrase: 해도 되는 것, the thing that is all right to do. The modifier is -는 because 되다 is a verb.",
+          "audio": {
+            "src": "audio/book/2b-u14-trk49.mp3",
+            "labelEn": "듣기 2 · track 49"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "맞는 것을 고르세요",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "다음 중 맞는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "canteen",
+          "choices": [
+            {
+              "id": "canteen",
+              "ko": "기숙사 식당은 월요일부터 토요일까지 문을 엽니다."
+            },
+            {
+              "id": "novisit",
+              "ko": "기숙사에 살지 않는 사람은 기숙사에 들어올 수 없습니다."
+            },
+            {
+              "id": "freegym",
+              "ko": "기숙사에 사는 사람은 운동 시설을 무료로 이용할 수 있습니다."
+            }
+          ],
+          "en": "Which is correct? — The dormitory canteen opens Monday to Saturday.",
+          "why": "하지만 일요일에는 문을 열지 않습니다 says only Sunday is closed, so Monday to Saturday is exactly right. Visitors are allowed — 친구가 놀러 와도 됩니까? / 네 — as long as they leave by ten. And the gym is 50% 싸게, half price, not 무료: a discount and free are the two things this chapter's 문화 산책 also keeps apart.",
+          "grammar": "N부터 N까지, from … to. And 문을 열다 / 문을 열지 않다 as the way Korean says a place is open or closed.",
+          "audio": {
+            "src": "audio/book/2b-u14-trk49.mp3",
+            "labelEn": "듣기 2 · track 49"
+          }
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "시끄럽게 떠들다",
+          "lines": [
+            {
+              "who": "직원",
+              "ko": "밤에 큰 소리로 음악을 듣거나 시끄럽게 {} 안 됩니다."
+            }
+          ],
+          "answer": "tteodeulmyeon",
+          "choices": [
+            {
+              "id": "tteodeulmyeon",
+              "ko": "떠들면"
+            },
+            {
+              "id": "tteodeuleumyeon",
+              "ko": "떠들으면"
+            },
+            {
+              "id": "tteodeumyeon",
+              "ko": "떠드면"
+            }
+          ],
+          "en": "You must not play music loudly at night or make a racket.",
+          "why": "떠들- ends in ㄹ, and a ㄹ stem takes plain -면: 떠들면. 떠들으면 is the 으 inserted where no consonant stem needs it, and 떠드면 drops the ㄹ, which only happens before ㄴ, ㅅ and a few endings — not before -면. Two opposite errors on one stem.",
+          "grammar": "V-(으)면 안 되다. Consonant stem -으면, vowel or ㄹ stem -면: 먹으면, 가면, 떠들면.",
+          "audio": {
+            "src": "audio/book/2b-u14-d25.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "만들어 먹다",
+          "lines": [
+            {
+              "who": "학생",
+              "ko": "방에서 음식을 만들어 {} 되나요?"
+            },
+            {
+              "who": "직원",
+              "ko": "방에서는 요리를 하면 안 됩니다."
+            }
+          ],
+          "answer": "meogeodo",
+          "choices": [
+            {
+              "id": "meogeodo",
+              "ko": "먹어도"
+            },
+            {
+              "id": "meogado",
+              "ko": "먹아도"
+            },
+            {
+              "id": "meogeoseo",
+              "ko": "먹어서"
+            }
+          ],
+          "en": "Is it all right to cook and eat in my room? — You must not cook in your room.",
+          "why": "먹- has ㅓ, so the ending is -어도 and not -아도: 먹아도 is the wrong-vowel slip this pattern collects. 먹어서 is a reason clause, which turns a question into half a statement — and the answer that follows shows it was a question.",
+          "grammar": "V-아/어도 되다. ㅏ or ㅗ in the stem takes -아도, everything else -어도: 앉아도, 먹어도, 마셔도.",
+          "audio": {
+            "src": "audio/book/2b-u14-d29.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "놀러 오다",
+          "lines": [
+            {
+              "who": "학생",
+              "ko": "기숙사에 친구가 놀러 {} 됩니까?"
+            },
+            {
+              "who": "직원",
+              "ko": "네. 하지만 밤 10시 이후에는 모두 돌아가야 합니다."
+            }
+          ],
+          "answer": "wado",
+          "choices": [
+            {
+              "id": "wado",
+              "ko": "와도"
+            },
+            {
+              "id": "oado",
+              "ko": "오아도"
+            },
+            {
+              "id": "omyeon",
+              "ko": "오면"
+            }
+          ],
+          "en": "May a friend come and visit me in the dormitory? — Yes, but everyone has to leave after ten.",
+          "why": "오- + -아도 contracts to 와도, and 오아도 is that contraction left undone — the same slip as 가았을 for 갔을. 오면 is a condition, so the sentence would be asking what happens if a friend comes rather than whether one may.",
+          "grammar": "오다 → 와도 되다. ㅗ + 아 contracts to 와: 와도, 봐도, 와서.",
+          "audio": {
+            "src": "audio/book/2b-u14-d31.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "문을 열다",
+          "lines": [
+            {
+              "who": "직원",
+              "ko": "하지만 일요일에는 문을 {} 않습니다."
+            }
+          ],
+          "answer": "yeolji",
+          "choices": [
+            {
+              "id": "yeolji",
+              "ko": "열지"
+            },
+            {
+              "id": "yeoljireul",
+              "ko": "열지를"
+            },
+            {
+              "id": "yeoji",
+              "ko": "여지"
+            }
+          ],
+          "en": "On Sundays, though, it does not open.",
+          "why": "-지 않다 is the long negative and takes the bare stem: 열지 않습니다. 여지 has dropped the ㄹ, which 열다 does before -ㅂ니다 (엽니다) but never before -지. That contrast is the row: 문을 엽니다 and 문을 열지 않습니다 are the same verb.",
+          "grammar": "열다 → 엽니다 / 열지 않습니다. The ㄹ drops before ㄴ, ㅂ and ㅅ endings and stays everywhere else.",
+          "audio": {
+            "src": "audio/book/2b-u14-d28.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u14sgk-read-1",
+      "type": "build",
+      "section": "읽고 쓰기",
+      "sectionEn": "Reading",
+      "no": "읽기",
+      "icon": "📖",
+      "blurbEn": "Read the passage, then put back the words that carry its argument.",
+      "instructionKo": "다음을 읽고 질문에 답하세요.",
+      "instructionEn": "Read the passage and answer the questions.",
+      "noteEn": "The book asks which of three statements does not match the passage, and then asks why heads may not be touched — an open answer nothing can mark. Both are here as blanks taken from the passage itself, so every answer is checkable against the printed text rather than against an opinion. Row 6 is the book's ③: it is wrong because of whose head was patted, and that is what the blank turns on.",
+      "pattern": "우리 나라에서는 다른 사람의 머리를 만지면 안 돼요",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "머리는 그 사람의 {}이 있는 곳이기 때문입니다."
+            }
+          ],
+          "answer": "yeonghon",
+          "choices": [
+            {
+              "id": "yeonghon",
+              "ko": "영혼"
+            },
+            {
+              "id": "munhwa",
+              "ko": "문화"
+            },
+            {
+              "id": "yeui",
+              "ko": "예의"
+            }
+          ],
+          "en": "Because the head is where that person's soul is.",
+          "why": "This is the answer to the book's second question — why touching a head is not done — and the passage gives it in one clause. 문화 and 예의 are both words the passage uses elsewhere, which is what makes them tempting; neither is what the head is said to hold.",
+          "grammar": "N이기 때문입니다 gives the reason. 때문 attaches to a noun through -이기, not to a verb stem, so it is 곳이기 때문입니다 and never 곳기 때문입니다."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "우리 나라에서는 밥을 먹거나 다른 사람에게 물건을 줄 때 {} 주면 안 됩니다."
+            }
+          ],
+          "answer": "wenson",
+          "choices": [
+            {
+              "id": "wenson",
+              "ko": "왼손으로"
+            },
+            {
+              "id": "oreunson",
+              "ko": "오른손으로"
+            },
+            {
+              "id": "dusonn",
+              "ko": "두 손으로"
+            }
+          ],
+          "en": "In my country you must not hand something over with your left hand.",
+          "why": "The left hand, and only the left. 두 손으로 is the Korean politeness the chapter opens with — offering with both hands — so putting it here would have the writer forbidding the very thing the unit teaches.",
+          "grammar": "N으로 marks the instrument: 왼손으로 주다, to give by means of the left hand. After a consonant it is -으로, after a vowel or ㄹ it is -로."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "그런데 한국에서는 아이를 칭찬할 때 머리를 {} 사람들이 많습니다."
+            }
+          ],
+          "answer": "sseudadeum",
+          "choices": [
+            {
+              "id": "sseudadeum",
+              "ko": "쓰다듬는"
+            },
+            {
+              "id": "manjiji",
+              "ko": "만지지 않는"
+            },
+            {
+              "id": "sugyeo",
+              "ko": "숙이는"
+            }
+          ],
+          "en": "In Korea, though, plenty of people pat a child's head when they praise them.",
+          "why": "그런데 is the hinge of the passage: it turns from what her country forbids to what Korea does, so the blank has to be the thing being done, not its negation. 만지지 않는 would make Korea agree with her and leave 그런데 with nothing to contrast.",
+          "grammar": "쓰다듬다 → 쓰다듬는. -는 makes a present-tense modifier on a verb stem: 쓰다듬는 사람, the people who pat."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "지하철에서 어떤 할머니가 아이의 머리를 쓰다듬는 것을 보고 {} 적이 있습니다."
+            }
+          ],
+          "answer": "nollan",
+          "choices": [
+            {
+              "id": "nollan",
+              "ko": "놀란"
+            },
+            {
+              "id": "nollal",
+              "ko": "놀랄"
+            },
+            {
+              "id": "nollaneun",
+              "ko": "놀라는"
+            }
+          ],
+          "en": "I have been startled to see an elderly woman patting a child's head on the subway.",
+          "why": "The chapter's own grammar, turning up in a reading rather than a drill. -(으)ㄴ 적이 있다 needs the past modifier: the surprise already happened. 놀랄 적이 있다 and 놀라는 적이 있다 are not experiences at all — the pattern only takes -(으)ㄴ.",
+          "grammar": "놀라다 → 놀란 적이 있습니다. A vowel stem takes -ㄴ, a consonant stem takes -은: 놀란 적, 먹은 적."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "외국에서 생활을 해 보면 그 나라의 문화를 잘 {} 있어서 좋은 것 같습니다."
+            }
+          ],
+          "answer": "ihaehal_su",
+          "choices": [
+            {
+              "id": "ihaehal_su",
+              "ko": "이해할 수"
+            },
+            {
+              "id": "ihaehan_jeogi",
+              "ko": "이해한 적이"
+            },
+            {
+              "id": "ihaehamyeon",
+              "ko": "이해하면 안"
+            }
+          ],
+          "en": "Living abroad, I think it is good that you come to understand that country's culture well.",
+          "why": "The passage's closing verdict, and the only one of the three that finishes the sentence. -(으)ㄹ 수 있어서 gives the reason it is good; 이해한 적이 있어서 would say she understood it once, and 이해하면 안 있어서 is not a sentence.",
+          "grammar": "V-(으)ㄹ 수 있다, to be able to. The 있어서 already printed after the blank is the giveaway: only 수 takes 있다 in this frame."
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "할머니가 쓰다듬은 것은 {} 머리였습니다."
+            }
+          ],
+          "answer": "child",
+          "choices": [
+            {
+              "id": "child",
+              "ko": "앞에 있는 아이의"
+            },
+            {
+              "id": "writer",
+              "ko": "이 글을 쓴 사람의"
+            },
+            {
+              "id": "self",
+              "ko": "할머니 자신의"
+            }
+          ],
+          "en": "The head the elderly woman patted was the child's, in front of her.",
+          "why": "This is the book's ③ — 이 사람은 할머니가 자신의 머리를 만져서 놀랐습니다 — and why it does not match the passage. The writer was startled by what she saw done to a child, not by anything done to her. It is the easiest kind of reading mistake to make: the surprise is hers, so the head feels like it should be too.",
+          "grammar": "N의 머리, the head belonging to N. 것은 … 였습니다 is the cleft the passage's own sentence uses to put the thing being identified at the end."
+        }
+      ]
+    },
+    {
+      "id": "u14sgk-task-1",
+      "type": "build",
+      "section": "과제",
+      "sectionEn": "Task",
+      "no": "과제",
+      "icon": "🎴",
+      "blurbEn": "Find the classmate who has lost a bag, then get the story out of them.",
+      "instructionKo": "카드를 받고 카드에 적힌 경험이 있는 사람을 찾으세요.",
+      "instructionEn": "Take a card and find a person who has the same experience as written on the card.",
+      "noteEn": "In the book this is a card game round the classroom, so the answers here are the model conversation it prints: the question you go round asking, and the three follow-ups you put to whoever says yes. The two patterns of the chapter meet in it — 적이 있다 to find the person, -았을/었을 때 to place the story in time.",
+      "pattern": "가방을 잃어버린 적이 있다",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "마리코 씨는 한국에서 가방을 {} 있나요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 잃어버린 적이 있어요."
+            }
+          ],
+          "answer": "lost_past",
+          "choices": [
+            {
+              "id": "lost_past",
+              "ko": "잃어버린 적이"
+            },
+            {
+              "id": "lost_fut",
+              "ko": "잃어버릴 적이"
+            },
+            {
+              "id": "lost_pres",
+              "ko": "잃어버리는 적이"
+            }
+          ],
+          "en": "Mariko, have you ever lost a bag in Korea? — Yes, I have.",
+          "why": "The question that starts the round. B's reply is printed in full underneath, and it says 잃어버린 — the answer is sitting there for anyone who reads the whole exchange before choosing, which is the habit this row is really teaching.",
+          "grammar": "잃어버리다 → 잃어버린 적이 있다. -(으)ㄴ 적이 있다 asks whether something has ever happened; the modifier is past whatever the tense of the question."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제, 어디에서 가방을 잃어버렸어요?"
+            },
+            {
+              "who": "B",
+              "ko": "작년에 부산에 {} 잃어버렸어요."
+            }
+          ],
+          "answer": "went_past",
+          "choices": [
+            {
+              "id": "went_past",
+              "ko": "여행을 갔을 때"
+            },
+            {
+              "id": "went_bad",
+              "ko": "여행을 가을 때"
+            },
+            {
+              "id": "went_pres",
+              "ko": "여행을 갈 때"
+            }
+          ],
+          "en": "When and where did you lose it? — I lost it last year, on a trip to Busan.",
+          "why": "작년에 has already fixed the story in the past, so 갈 때 contradicts the sentence it sits in. 가을 때 is the contraction left undone — the single most common way this pattern goes wrong, and the reason the chapter drills 갔을 rather than 가았을.",
+          "grammar": "가다 → 갔을 때. 가- + -았- → 갔-. Compare 만나다 → 만났을 때 and 오다 → 왔을 때: the vowel swallows the -았-."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "가방에 뭐가 있었어요?"
+            },
+            {
+              "who": "B",
+              "ko": "{}과 여권이 있었어요."
+            }
+          ],
+          "answer": "jigap",
+          "choices": [
+            {
+              "id": "jigap",
+              "ko": "지갑"
+            },
+            {
+              "id": "jihacheol",
+              "ko": "지하철"
+            },
+            {
+              "id": "jido",
+              "ko": "지도"
+            }
+          ],
+          "en": "What was in the bag? — My wallet and my passport.",
+          "why": "A wallet and a passport are what makes losing a bag a story worth telling, and they are the two things the book prints. The distractors start with the same syllable, because 지- words are exactly what a learner reaches past when they are listening rather than reading.",
+          "grammar": "N과 N: 지갑과 여권. -과 follows a consonant, -와 a vowel — 여권과 지갑 would be the same list the other way round."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "가장 {} 경험을 한 친구는 누구입니까?"
+            },
+            {
+              "who": "B",
+              "ko": "스티븐 씨입니다."
+            }
+          ],
+          "answer": "namneun",
+          "choices": [
+            {
+              "id": "namneun",
+              "ko": "기억에 남는"
+            },
+            {
+              "id": "nameun",
+              "ko": "기억에 남은"
+            },
+            {
+              "id": "nameul",
+              "ko": "기억에 남을"
+            }
+          ],
+          "en": "Whose experience stayed with you most? — Steven's.",
+          "why": "기억에 남는 is fixed as a present modifier even though it describes something already over: the memory is still there now, which is the whole sense of it. 남은 turns it into leftovers, which is what 남다 means in a kitchen.",
+          "grammar": "남다 → 남는. A consonant stem takes -는 for the present modifier. Note the sound: 남는 is said [남는] and 남지 would be [남찌] — the ㄴ/ㅁ tensing rule this chapter's 발음 page teaches."
+        }
+      ]
+    },
+    {
+      "id": "u14sgk-culture-1",
+      "type": "build",
+      "section": "문화 산책",
+      "sectionEn": "Culture note",
+      "no": "알아보기",
+      "icon": "🚇",
+      "blurbEn": "The seats nobody sits in, and what else the pass gets you.",
+      "instructionKo": "다음을 읽고 알맞은 것을 골라 보세요.",
+      "instructionEn": "Read the culture note and choose the word that fits.",
+      "noteEn": "The book's 문화 산책 asks what your own country does for its older people — a discussion, not an exercise. The Korean side of it is a printed paragraph, so that is what is drilled here: four blanks, each answerable from the note itself.",
+      "pattern": "노약자석과 경로 우대",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "한국은 지하철이나 버스에 몸이 {} 사람들을 위한 자리가 있습니다."
+            }
+          ],
+          "answer": "bulpyeonhan",
+          "choices": [
+            {
+              "id": "bulpyeonhan",
+              "ko": "불편한"
+            },
+            {
+              "id": "bulpyeonhal",
+              "ko": "불편할"
+            },
+            {
+              "id": "bulpyeonhaneun",
+              "ko": "불편하는"
+            }
+          ],
+          "en": "Korean subways and buses have seats for people whose bodies give them difficulty.",
+          "why": "몸이 불편하다 is how Korean says it — the body is inconvenienced — and it is an adjective, so its modifier is -(으)ㄴ. 불편하는 is the error worth having on the button: -는 belongs to verbs, and 불편하다 is not one.",
+          "grammar": "A-(으)ㄴ vs V-는. 불편하다 is descriptive, so 불편한 사람. Compare 이용하다, a verb: 이용하는 사람."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "젊은 사람들은 이 자리가 {} 때에도 잘 앉지 않습니다."
+            }
+          ],
+          "answer": "bieo_isseul",
+          "choices": [
+            {
+              "id": "bieo_isseul",
+              "ko": "비어 있을"
+            },
+            {
+              "id": "bieo_isseun",
+              "ko": "비어 있은"
+            },
+            {
+              "id": "bieo_inneun",
+              "ko": "비어 있는"
+            }
+          ],
+          "en": "Young people tend not to sit there even when the seat is empty.",
+          "why": "-(으)ㄹ 때 is the frame for when, and 있다 takes -을: 있을 때. 있는 때 is not said, and 있은 does not exist at all — 있다 has no past modifier of that shape.",
+          "grammar": "있다 → 있을 때. The chapter's other pattern, -았을/었을 때, is this same 때 with the past marker in front of it: 있었을 때."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "할아버지, 할머니는 지하철을 {} 이용할 수 있습니다."
+            }
+          ],
+          "answer": "muryoro",
+          "choices": [
+            {
+              "id": "muryoro",
+              "ko": "무료로"
+            },
+            {
+              "id": "muryoga",
+              "ko": "무료가"
+            },
+            {
+              "id": "muryoreul",
+              "ko": "무료를"
+            }
+          ],
+          "en": "Older people can use the subway free of charge.",
+          "why": "무료로 is adverbial — by means of being free — and that is the only shape that can sit in front of 이용할 수 있습니다. 무료가 and 무료를 are looking for a verb that takes a subject or an object, and 이용하다 already has one: 지하철을.",
+          "grammar": "N으로/로 again, this time as manner rather than instrument: 무료로 이용하다, to use free of charge."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "그리고 {} 할인도 받을 수 있습니다."
+            }
+          ],
+          "answer": "ipjangryo",
+          "choices": [
+            {
+              "id": "ipjangryo",
+              "ko": "입장료"
+            },
+            {
+              "id": "gwanribi",
+              "ko": "관리비"
+            },
+            {
+              "id": "gyotongbi",
+              "ko": "교통비"
+            }
+          ],
+          "en": "And they can get a discount on admission too.",
+          "why": "입장료 할인 is what the note names, and it is the second half of 경로 우대: free transport plus cheaper entry. 관리비 and 교통비 are real words for real bills — they are Unit 13's — and neither is something a museum discounts.",
+          "grammar": "N도, too, stacking on what came before: free transport, and a discount as well. -도 replaces 은/는 and 이/가 rather than following them."
+        }
+      ]
+    },
+    {
+      "id": "u14sgk-pron-1",
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "no": "규칙",
+      "icon": "🔊",
+      "blurbEn": "Say it the way the tape says it, not the way it is spelled.",
+      "instructionKo": "잘 듣고 발음을 골라 보세요.",
+      "instructionEn": "Listen and choose how each word is actually pronounced.",
+      "noteEn": "The book prints the rule and three worked examples — 신고[신꼬], 앉지[안찌], 감다[감따] — and then plays them. Rows here go the same direction the page does: spelling on the left, sound on the right. The four words the chapter's own sentences use come with the recording they appear in.",
+      "pattern": "받침 [ㄴ, ㅁ] 뒤의 ㄱ, ㄷ, ㅈ → [ㄲ, ㄸ, ㅉ]",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "신고",
+          "lines": [
+            {
+              "ko": "운동화를 신고 가세요. → 신고[{}]"
+            }
+          ],
+          "answer": "sinkko",
+          "choices": [
+            {
+              "id": "sinkko",
+              "ko": "신꼬"
+            },
+            {
+              "id": "singo",
+              "ko": "신고"
+            },
+            {
+              "id": "singgo",
+              "ko": "싱고"
+            }
+          ],
+          "en": "Wear your trainers. — 신고 is said [신꼬].",
+          "why": "The rule in its plainest form: 신- ends in ㄴ, so the ㄱ that follows comes out tensed. Nothing in the spelling shows it, and 신고 written is 신고 whether it means wearing shoes or reporting a crime — only the tensing tells you this is a verb stem.",
+          "grammar": "받침 [ㄴ, ㅁ] on a verb or adjective stem tenses a following ㄱ/ㄷ/ㅈ to [ㄲ/ㄸ/ㅉ]. It is the stem that matters: the noun 신고 (a report) keeps its plain ㄱ.",
+          "audio": {
+            "src": "audio/book/2b-u14-d14.mp3",
+            "labelEn": "발음 준비 1 · track 50"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "앉지",
+          "lines": [
+            {
+              "ko": "자리에 앉지 마세요. → 앉지[{}]"
+            }
+          ],
+          "answer": "anjji",
+          "choices": [
+            {
+              "id": "anjji",
+              "ko": "안찌"
+            },
+            {
+              "id": "anji",
+              "ko": "안지"
+            },
+            {
+              "id": "anjjji",
+              "ko": "앉찌"
+            }
+          ],
+          "en": "Do not sit down. — 앉지 is said [안찌].",
+          "why": "Two changes stacked, which is why the book chose it. The ㄵ cluster loses its ㅈ entirely, leaving ㄴ; that ㄴ then tenses the ㅈ of -지. So four written letters arrive as [안찌], and 앉찌 — keeping the cluster and tensing as well — is the answer that has learned only half the rule.",
+          "grammar": "자음군 단순화 then 경음화. 앉- → [안] → [안찌]. The same pair runs 앉다 → [안따] and 앉고 → [안꼬]."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "감다",
+          "lines": [
+            {
+              "ko": "머리를 감다 → 감다[{}]"
+            }
+          ],
+          "answer": "kamtta",
+          "choices": [
+            {
+              "id": "kamtta",
+              "ko": "감따"
+            },
+            {
+              "id": "kamda",
+              "ko": "감다"
+            },
+            {
+              "id": "kantta",
+              "ko": "간따"
+            }
+          ],
+          "en": "To wash your hair — 감다 is said [감따].",
+          "why": "The ㅁ half of the rule. 간따 is the trap worth putting up: a learner who hears the tensed ㄸ often reaches back and 'corrects' the ㅁ to ㄴ, because ㄴ is the 받침 they have met more often in front of one.",
+          "grammar": "감다 → [감따]. The ㅁ does not change; only the ㄷ does. Contrast 감기 (a cold), a noun, which stays [감기]."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "남지요",
+          "lines": [
+            {
+              "ko": "시간이 많이 남지요? → 남지[{}]요"
+            }
+          ],
+          "answer": "namjji",
+          "choices": [
+            {
+              "id": "namjji",
+              "ko": "남찌"
+            },
+            {
+              "id": "namji",
+              "ko": "남지"
+            },
+            {
+              "id": "nanjji",
+              "ko": "난찌"
+            }
+          ],
+          "en": "There is still plenty of time left, isn't there? — 남지 is said [남찌].",
+          "why": "The -지요 ending is everywhere in spoken Korean, so this is the shape of the rule you will hear most often. 많이 in the same sentence is said [마니], with the ㅎ of the ㄶ cluster gone — worth noticing that two different consonant rules are running in one short question.",
+          "grammar": "남다 → 남지요 [남찌요]. Any ending starting ㄱ/ㄷ/ㅈ after a ㄴ/ㅁ stem does it: 남고 [남꼬], 남더라 [남떠라].",
+          "audio": {
+            "src": "audio/book/2b-u14-d15.mp3",
+            "labelEn": "발음 준비 2 · track 50"
+          }
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "안고",
+          "lines": [
+            {
+              "ko": "아기를 안고 사진을 찍었어요. → 안고[{}]"
+            }
+          ],
+          "answer": "ankko",
+          "choices": [
+            {
+              "id": "ankko",
+              "ko": "안꼬"
+            },
+            {
+              "id": "ango",
+              "ko": "안고"
+            },
+            {
+              "id": "anko",
+              "ko": "안코"
+            }
+          ],
+          "en": "I took the photo holding the baby. — 안고 is said [안꼬].",
+          "why": "안코 is the wrong kind of strengthening, and it is the one to watch for: tensed [ㄲ] and aspirated [ㅋ] are the two things a plain ㄱ can turn into, and this chapter is the tensing one. Aspiration is what happens next to a ㅎ — 좋고 [조코] — and there is no ㅎ here.",
+          "grammar": "안다 → 안고 [안꼬]. Tense, not aspirate: [ㄲ] and not [ㅋ].",
+          "audio": {
+            "src": "audio/book/2b-u14-d17.mp3",
+            "labelEn": "발음 연습 2 · track 51"
+          }
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "참지",
+          "lines": [
+            {
+              "ko": "아프면 참지 말고 병원에 가세요. → 참지[{}]"
+            }
+          ],
+          "answer": "chamjji",
+          "choices": [
+            {
+              "id": "chamjji",
+              "ko": "참찌"
+            },
+            {
+              "id": "chamji",
+              "ko": "참지"
+            },
+            {
+              "id": "chamchi",
+              "ko": "참치"
+            }
+          ],
+          "en": "If it hurts, do not put up with it — go to the doctor. — 참지 is said [참찌].",
+          "why": "참치 is a tuna, and it is very close to what a learner who has half-heard the rule will write. That is the value of the row: the tensing is not optional colouring, it is what keeps 참지 apart from a word that already exists.",
+          "grammar": "참다 → 참지 [참찌]. In the same sentence 말고 keeps its plain ㄱ — 말- ends in ㄹ, not ㄴ or ㅁ, so the rule does not reach it.",
+          "audio": {
+            "src": "audio/book/2b-u14-d20.mp3",
+            "labelEn": "발음 연습 4 · track 51"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u14sgk-pron-2",
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "no": "연습",
+      "icon": "✍️",
+      "blurbEn": "Now the other direction: hear the tensed sound, write the plain spelling.",
+      "instructionKo": "잘 듣고 따라 해 보세요.",
+      "instructionEn": "Listen carefully and repeat the following sentences.",
+      "noteEn": "The book has you repeat these four lines aloud, which nothing can mark. Turned round instead: the tape gives you the sound and the blank wants the spelling, which is the direction that actually costs you marks in a dictation. Every row plays the sentence it came from.",
+      "pattern": "들은 것을 받아 적기",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "의자에 {} 넘어졌어요."
+            }
+          ],
+          "answer": "anjdaga",
+          "choices": [
+            {
+              "id": "anjdaga",
+              "ko": "앉다가"
+            },
+            {
+              "id": "andaga",
+              "ko": "안다가"
+            },
+            {
+              "id": "anttaga",
+              "ko": "안따가"
+            }
+          ],
+          "en": "I fell over as I was sitting down on the chair.",
+          "why": "You hear [안따가] and all three buttons could produce it — that is the point. 안다가 is 안다, to hold, which would mean falling over while holding something; 안따가 is the sound written down as though it were the spelling. Only 앉다가 is 앉다.",
+          "grammar": "앉다 + -다가, doing one thing and then interrupting it with another. Said [안따가]: the ㄵ simplifies to ㄴ and tenses the ㄷ.",
+          "audio": {
+            "src": "audio/book/2b-u14-d16.mp3",
+            "labelEn": "발음 연습 1 · track 51"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "아기를 {} 사진을 찍었어요."
+            }
+          ],
+          "answer": "ango",
+          "choices": [
+            {
+              "id": "ango",
+              "ko": "안고"
+            },
+            {
+              "id": "anjgo",
+              "ko": "앉고"
+            },
+            {
+              "id": "anhgo",
+              "ko": "않고"
+            }
+          ],
+          "en": "I took the photo holding the baby.",
+          "why": "Three spellings, three meanings, and on the tape 안고 and 앉고 are both [안꼬]. 않고 is the negative — taking the photo *without* the baby — and it is said [안코], aspirated rather than tensed. The sentence is what tells you which: you hold a baby, you do not sit one.",
+          "grammar": "안다 (to hold) → 안고 [안꼬]. 앉다 (to sit) → 앉고 [안꼬]. 않다 (not to) → 않고 [안코]. The first two are homophones here; the third is not.",
+          "audio": {
+            "src": "audio/book/2b-u14-d17.mp3",
+            "labelEn": "발음 연습 2 · track 51"
+          }
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "너무 바빠서 머리를 {} 못했어요."
+            }
+          ],
+          "answer": "gamji",
+          "choices": [
+            {
+              "id": "gamji",
+              "ko": "감지"
+            },
+            {
+              "id": "gapji",
+              "ko": "갑지"
+            },
+            {
+              "id": "kkamji",
+              "ko": "깜지"
+            }
+          ],
+          "en": "I was too busy to wash my hair.",
+          "why": "머리를 감다 is the set phrase for washing hair — 씻다 is for the rest of you. The sound [감찌] leaves the 받침 ambiguous between ㅁ and ㅂ if you are only listening, and 갑지 is what that guess looks like written down.",
+          "grammar": "감다 + -지 못하다, to be unable to. Said [감찌 모태써요]: the ㅁ tenses the ㅈ, and 못 + 했 fuses into an aspirated [모태].",
+          "audio": {
+            "src": "audio/book/2b-u14-d18.mp3",
+            "labelEn": "발음 연습 3 · track 51"
+          }
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어제부터 배가 아프네요."
+            },
+            {
+              "who": "B",
+              "ko": "아프면 {} 말고 병원에 가세요."
+            }
+          ],
+          "answer": "chamji",
+          "choices": [
+            {
+              "id": "chamji",
+              "ko": "참지"
+            },
+            {
+              "id": "chapji",
+              "ko": "찹지"
+            },
+            {
+              "id": "chamchi",
+              "ko": "참치"
+            }
+          ],
+          "en": "My stomach has been hurting since yesterday. — If it hurts, do not put up with it, go to the doctor.",
+          "why": "-지 말고 is the frame, so the blank has to be a verb stem plus -지. 참치 fits the sound and nothing else: a tuna cannot go in front of 말고. This is the row where the grammar rescues you from the pronunciation.",
+          "grammar": "참다 + -지 말다, telling someone not to do something. Said [참찌 말고] — the tensing on 참지 and none on 말고, because ㄹ is not one of the two 받침 the rule takes.",
+          "audio": {
+            "src": "audio/book/2b-u14-d20.mp3",
+            "labelEn": "발음 연습 4 · track 51"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u14sgk-check-2",
+      "type": "build",
+      "section": "자기 평가",
+      "sectionEn": "Self-check",
+      "no": "2",
+      "icon": "✅",
+      "blurbEn": "All four patterns of the chapter, one after another.",
+      "instructionKo": "알맞은 것을 골라 문장을 만들어 보세요.",
+      "instructionEn": "Complete each dialogue using the word in parentheses and the appropriate grammar form in the box.",
+      "noteEn": "The chapter's own self-check, and the only page that puts all four patterns side by side: -(으)ㄴ 적(이) 있다[없다], -았을/었을 때, -아도/어도 되다, -(으)면 안 되다. The verb is given in brackets on the page and is printed above each row here; what you choose is which pattern the exchange is asking for.",
+      "pattern": "네 가지 문형을 한자리에서",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "내다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘까지 회비를 내야 돼요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 내일 {}."
+            }
+          ],
+          "answer": "naedo",
+          "choices": [
+            {
+              "id": "naedo",
+              "ko": "내도 돼요"
+            },
+            {
+              "id": "naemyeon",
+              "ko": "내면 안 돼요"
+            },
+            {
+              "id": "naen_jeok",
+              "ko": "낸 적이 있어요"
+            }
+          ],
+          "en": "Do I have to pay the fee by today? — No, tomorrow is fine.",
+          "why": "아니요 is answering 내야 돼요 — must I — so the reply has to lift the obligation, not add a new one. 내면 안 돼요 would forbid paying tomorrow, which contradicts the 아니요 in front of it.",
+          "grammar": "내다 → 내도 돼요. A stem ending in ㅐ takes -어도, and 내어도 contracts to 내도."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "먹다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여기에서 음식을 먹어도 돼요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 여기에서 {}."
+            }
+          ],
+          "answer": "meogeumyeon",
+          "choices": [
+            {
+              "id": "meogeumyeon",
+              "ko": "먹으면 안 돼요"
+            },
+            {
+              "id": "meogmyeon",
+              "ko": "먹면 안 돼요"
+            },
+            {
+              "id": "meogeodo",
+              "ko": "먹어도 돼요"
+            }
+          ],
+          "en": "May I eat here? — No, you may not eat here.",
+          "why": "The pair the chapter is built on: -아/어도 돼요 asks, -(으)면 안 돼요 refuses. 먹면 is the mistake to have on a button — 먹- ends in a consonant, so the 으 is not optional, and leaving it out is the single most common slip on this pattern.",
+          "grammar": "먹다 → 먹으면 안 돼요. Consonant stem takes -으면, vowel stem takes -면: 먹으면, 가면."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "가 보다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "제주도에 가 봤어요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, {}."
+            }
+          ],
+          "answer": "gabon",
+          "choices": [
+            {
+              "id": "gabon",
+              "ko": "가 본 적이 있어요"
+            },
+            {
+              "id": "gabon_no",
+              "ko": "가 본 적이 없어요"
+            },
+            {
+              "id": "gabol",
+              "ko": "가 볼 적이 있어요"
+            }
+          ],
+          "en": "Have you been to Jeju? — Yes, I have.",
+          "why": "네 commits the answer before the pattern does, so 없어요 cannot follow it. That is worth one row on its own: the yes/no word and the 있다/없다 at the end of the sentence have to agree, and they are far enough apart to be forgotten.",
+          "grammar": "가 보다 → 가 본 적이 있어요. The modifier lands on 보다, not on 가다: 가 본, never 간 본."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "먹다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "김치를 처음 {} 어땠어요?"
+            },
+            {
+              "who": "B",
+              "ko": "좀 매웠지만 맛있었어요."
+            }
+          ],
+          "answer": "meogeosseul",
+          "choices": [
+            {
+              "id": "meogeosseul",
+              "ko": "먹었을 때"
+            },
+            {
+              "id": "meogeul",
+              "ko": "먹을 때"
+            },
+            {
+              "id": "meogeumyeon2",
+              "ko": "먹으면"
+            }
+          ],
+          "en": "What was it like the first time you ate kimchi? — A bit hot, but good.",
+          "why": "처음 and B's 매웠지만 both put this in the past, so 먹을 때 — whenever I eat kimchi — does not fit either side of it. 먹으면 turns the question into a condition, and 어땠어요 cannot ask about a condition.",
+          "grammar": "먹다 → 먹었을 때. -았/었- goes in before -을 때: 먹었을, 갔을, 왔을. A stem with ㅓ takes -었-."
+        }
+      ]
+    }
+  ]
+}

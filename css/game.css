@@ -2111,8 +2111,8 @@
     .cs-meterrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .cs-meterrow span:first-child { font-size: 12px; color: var(--wood-d); }
     .cs-meterrow span:last-child { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-m); }
-    .cs-bar { height: 8px; background: var(--parch-l); border: 1.5px solid var(--wood-m); border-radius: 4px; overflow: hidden; }
-    .cs-bar > div { width: 0%; height: 100%; background: var(--wood-l); transition: width .2s linear; }
+    /* The thin progress bar this transport used to carry is gone. #listen-wave draws the
+       playhead now, and two progress readings on one row disagreed on rounding. */
     #listen-rates, #dict-rates { flex: 0 0 auto; display: flex; gap: 5px; }
     .cs-rate {
       padding: 3px 7px; background: var(--parch-l); border: 1.5px solid var(--wood-l);
@@ -2120,6 +2120,44 @@
       font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-m);
     }
     .cs-rate.on { border-color: #1e3a8a; background: #fff3d6; color: #1e3a8a; }
+
+    /* ── the waveform and its loop controls ────────────────────────────────── */
+    /* Shared by 듣기 and 받아쓰기: one strip, one set of controls, so the two screens do not
+       drift apart on something a learner uses on both. */
+    #listen-waverow, #dict-waverow {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: 12px 16px 13px; border-bottom: 2px solid var(--wood-l); flex: 0 0 auto;
+    }
+    #listen-wave, #dict-wave {
+      display: block; width: 100%; height: 56px;
+      background: var(--parch-l); border: 1.5px solid var(--wood-m); border-radius: 4px;
+      cursor: crosshair;
+      /* Without this the browser claims the drag for scrolling and the A-B gesture
+         never fires on a touchscreen — the same reason the workbook chips set it. */
+      touch-action: none;
+    }
+    #dict-wave { height: 48px; }
+    #listen-loopbar, #dict-loopbar { display: flex; align-items: center; gap: 5px; }
+    #dict-clock {
+      margin-left: auto; font-family: 'Press Start 2P', monospace; font-size: 8px;
+      color: var(--wood-m); white-space: nowrap;
+    }
+    .cs-lb {
+      padding: 3px 7px; background: var(--parch-l); border: 1.5px solid var(--wood-l);
+      border-radius: 3px; cursor: pointer;
+      font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-m);
+    }
+    .cs-lb:hover { background: #fff3d6; }
+    .cs-lb.on { border-color: #1e3a8a; background: #fff3d6; color: #1e3a8a; }
+    .cs-lb:disabled { opacity: .4; cursor: default; }
+    .cs-lb:disabled:hover { background: var(--parch-l); }
+    .cs-lbsep { width: 1.5px; height: 13px; background: var(--wood-l); margin: 0 3px; }
+    #listen-abinfo, #dict-abinfo {
+      margin-left: auto; font-family: 'Press Start 2P', monospace; font-size: 8px;
+      color: var(--wood-m); white-space: nowrap;
+    }
+    #dict-abinfo { margin-left: 8px; }
+    #listen-abinfo.on, #dict-abinfo.on { color: #1e3a8a; }
 
     .cs-script { padding: 14px 16px; overflow-y: auto; flex: 1 1 auto; min-height: 0; }
     .cs-line { display: flex; gap: 9px; align-items: baseline; margin-bottom: 8px; }

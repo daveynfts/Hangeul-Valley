@@ -764,11 +764,29 @@
             <button type="button" id="listen-play" class="cs-play" onclick="listenToggle()" aria-label="Play or pause">▶</button>
             <div class="cs-meter">
               <div class="cs-meterrow"><span id="listen-now"></span><span id="listen-clock"></span></div>
-              <div class="cs-bar"><div id="listen-bar"></div></div>
             </div>
             <div id="listen-rates">
               <button type="button" class="cs-rate on" data-rate="1" onclick="listenRate(1)">1.0×</button>
               <button type="button" class="cs-rate" data-rate="0.75" onclick="listenRate(0.75)">0.75×</button>
+              <button type="button" class="cs-rate" data-rate="0.5" onclick="listenRate(0.5)">0.5×</button>
+            </div>
+          </div>
+          <div id="listen-waverow">
+            <canvas id="listen-wave" width="820" height="112"
+                    aria-label="Waveform — click to seek, drag to mark a loop"></canvas>
+            <div id="listen-loopbar">
+              <button type="button" id="listen-loop" class="cs-lb" onclick="listenToggleLoop()"
+                      aria-label="Repeat the whole track">↻ 반복</button>
+              <span class="cs-lbsep"></span>
+              <button type="button" id="listen-seta" class="cs-lb" onclick="listenSetA()"
+                      aria-label="Mark the start of the loop">A</button>
+              <button type="button" id="listen-setb" class="cs-lb" onclick="listenSetB()"
+                      aria-label="Mark the end of the loop">B</button>
+              <button type="button" id="listen-abplay" class="cs-lb" onclick="listenReplayAB()"
+                      aria-label="Play the marked section from its start">↺ 구간</button>
+              <button type="button" id="listen-abclear" class="cs-lb" onclick="listenClearAB()"
+                      aria-label="Clear the marked section">✕</button>
+              <span id="listen-abinfo"></span>
             </div>
           </div>
           <div id="listen-script" class="cs-script"></div>
@@ -797,6 +815,23 @@
             <button type="button" class="cs-rate" data-rate="0.75" onclick="dictPlay(0.75)">0.75×</button>
           </div>
           <span id="dict-hint"></span>
+        </div>
+        <div id="dict-waverow">
+          <canvas id="dict-wave" width="820" height="96"
+                  aria-label="Waveform — click to seek, drag to mark a loop"></canvas>
+          <div id="dict-loopbar">
+            <button type="button" id="dict-loop" class="cs-lb" onclick="dictToggleLoop()"
+                    aria-label="Repeat the sentence">↻ 반복</button>
+            <span class="cs-lbsep"></span>
+            <button type="button" id="dict-seta" class="cs-lb" onclick="dictSetA()"
+                    aria-label="Mark the start of the loop">A</button>
+            <button type="button" id="dict-setb" class="cs-lb" onclick="dictSetB()"
+                    aria-label="Mark the end of the loop">B</button>
+            <button type="button" id="dict-abclear" class="cs-lb" onclick="dictClearAB()"
+                    aria-label="Clear the marked section">✕</button>
+            <span id="dict-clock"></span>
+            <span id="dict-abinfo"></span>
+          </div>
         </div>
         <div id="dict-inputrow">
           <input id="dict-input" type="text" autocomplete="off" spellcheck="false" placeholder="들리는 대로 쓰세요">

@@ -1649,7 +1649,12 @@ const tts = fs.readFileSync(path.join(ROOT, 'scripts', 'ttsClips.js'), 'utf8');
 // test a regex cannot quietly pass on the wrong escaping.
 const PATTERN = '-workbook\\.json$';
 assert(r2.indexOf(PATTERN) >= 0, 'the publish batch finds workbooks by pattern');
-assert(tts.indexOf(PATTERN) >= 0, 'and so does the clip harvest');
+// The harvest's pattern widened when Unit 14's 교과서 pages arrived: -textbook.json is the
+// same file format read by the same renderer, and that renderer falls back to a pre-rendered
+// TTS clip on any row the book has no tape for — so a page outside the harvest is a row with
+// a dead play button. Still a pattern and still no unit named, which is what this checks.
+const TTS_PATTERN = '-(?:work|text)book\\.json$';
+assert(tts.indexOf(TTS_PATTERN) >= 0, 'and so does the clip harvest, for both books');
 assert(r2.indexOf("'worlds/unit14-workbook.json'") < 0,
   'no workbook is hand-listed for upload any more');
 

@@ -408,15 +408,18 @@ it shipped.
 
 In `scripts/r2Content.js`:
 
-- **audio derives itself** — `collectUploadFiles` reads the workbook and takes
-  every `audio.src` it names, on exercises, items and examples alike. Add a clip
-  to the content and it publishes.
-- **world JSON is still hand-listed** in `STATIC_FILES`. `tests/test_r2_content.js`
-  scans `worlds/` and fails if any file on disk is missing from the batch, so the
-  omission is caught — but you do have to add the line.
+- **audio derives itself** — `collectUploadFiles` walks every `worlds/*.json`
+  generically for anything shaped like `{src: 'audio/….mp3'}`, on exercises, items,
+  examples, cassette tracks and dictation rows alike. Add a clip to the content and
+  it publishes.
+- **world JSON derives itself too**, and no longer needs a line. `STATIC_FILES` is
+  down to the four files that are not under `worlds/` — `levels.json`, `facts.json`
+  and the two catalogs — and the collector globs the directory for the rest.
+  `tests/test_r2_content.js` still scans `worlds/` and fails on anything missing
+  from the batch, so a regression here is caught rather than shipped.
 
-Do not hand-list audio. If a future unit needs its clips uploaded, extend the
-collector to read that unit's workbook rather than pasting paths.
+Do not hand-list either. The whole bug class this replaced was a file on disk that
+no batch named, which does not fall back to the repo copy — it 404s.
 
 **TTS clips.** `collectTtsPhrases` in `scripts/ttsClips.js` cannot walk the
 workbook for `{ko: …}` the way it walks the other content: **every wrong answer
@@ -432,8 +435,9 @@ Unit 10 was the second, and most of the hard-coding went with it. A workbook is
 `worlds/<unit>-workbook.json`, and the pipeline finds them by that name:
 
 - `scripts/r2Content.js` uploads every `worlds/*.json` and every `audio.src` any
-  workbook names
-- `scripts/ttsClips.js` harvests every `worlds/*-workbook.json`
+  world file names
+- `scripts/ttsClips.js` harvests every `worlds/*-workbook.json` **and every
+  `worlds/*-textbook.json`** — see the section below on the second bank
 
 **Neither needs touching for a new unit.** Do not go back to listing files.
 
@@ -501,10 +505,10 @@ chosen so that the steps which can invalidate earlier work come first.
 5. **Ask what the game already ships before drawing.** `sprites/catalog.json`
    maps `wordKo` to a path, so the icon for a word is a lookup. Unit 10 needed no
    new art at all. Draw a 16×16 only when nothing fits.
-6. **Wire it**: a line in `workbookUrl()`, an entry in `WORKBOOKS`, the world JSON
-   in `STATIC_FILES`, and the unit's own test suite. `tests/test_r2_content.js`
-   catches the `STATIC_FILES` line you forget; nothing catches the other three, so
-   do them together.
+6. **Wire it**: a line in `workbookUrl()` (or `textbookUrl()`), an entry in
+   `WORKBOOKS`, and the unit's own test suite. Upload and TTS harvest both find the
+   file by name, so there is nothing to list — but nothing catches a missing
+   `workbookUrl()` line either, so do the three together.
 7. **Run the suite, then play it wrong on purpose.** The tests check the key, the
    art, the clips, the pace, and now that every recurring wrong answer is spoken
    to. What they cannot check is whether an explanation reads as help. Pick the
@@ -513,6 +517,53 @@ chosen so that the steps which can invalidate earlier work come first.
 Adding vocabulary or exercises to a unit already built is the same list from step
 3, minus the wiring — and step 4 is still the one that decides whether the
 addition teaches anything.
+
+---
+
+## The second bank: 교과서 pages beside 익힘책 pages
+
+Unit 14 is the first unit with two banks on one desk, and they come from two different
+books. `worlds/unit14-workbook.json` is the **익힘책** — its rows drill 러시아에 가다,
+연애편지를 쓰다, 수료식에서 상을 받다, none of which appear anywhere in the 교과서.
+`worlds/unit14-textbook.json` is the **교과서's** own 말하기, 읽기, 과제, 문화 산책,
+발음 and 자기 평가 pages. Same file format, same renderer, same validator; the desk
+menu is what tells them apart, at 📖 교과서 and ✍️ 연습 문제.
+
+What that costs, and what pays for it:
+
+- **They will reach for the same sentence unless something stops them.** Two books on
+  one chapter drill one grammar point, and a learner who meets 먹으면 안 돼요 under two
+  names has done one exercise and been charged for two. `validate_content.js` and
+  `tests/test_unit14_textbook.js` compare the two banks: no shared exercise id, and no
+  gapped line appearing in both. The 교과서 ids carry a `u14sgk-` prefix so the two are
+  told apart at a glance, and the desk quiz counts as a third thing on the same desk —
+  no filled sentence may already be one of its choices.
+- **Pick the exercises the other book does not have.** Most of the 교과서 page asks you
+  to speak, and the 익힘책 already covers 어휘 and 문법과 표현 in writing. What was left
+  and is worth having: the two 듣기 sections, the reading passage, the 과제 conversation,
+  the culture note, the 발음 rule, and 자기 평가 2, which is the only page in the chapter
+  that puts all four patterns side by side.
+- **A 듣기 page cannot be built from the unit pages alone.** They print the comprehension
+  questions and not the words, so there is no way to key an answer — and guessing at a
+  key is the one thing not on offer. The 듣기 지문 pages at the back are what make those
+  two exercises possible, and they also supply the lines the answers turn on: rows 2-4 of
+  듣기 1 and rows 3-6 of 듣기 2 are quotations, so the page is answerable from the
+  recording rather than from an opinion. Wait for that page rather than inventing one.
+- **The loader caches per url.** `deskBanks` is keyed by path; a single variable would
+  have the second bank evict the first every time the desk opened, so both rows would
+  refetch on every visit.
+- **The harvest has to read both.** `collectWorkbookPhrases` matches
+  `-(?:work|text)book\.json$`. The renderer plays a book clip where the content names
+  one and a pre-rendered TTS clip otherwise, so a bank outside the harvest is a row
+  whose play button does nothing — silently, on production only.
+- **Audio on a row can be checked against the cassette.** Ten 교과서 rows name a
+  recording, and six of them name a dictation clip whose text is written down in
+  `worlds/unit14-cassette.json`. That makes "this mp3 is that sentence" a claim with a
+  source, and the test asserts the clip's text really is the sentence the row builds.
+  Attach clips that already exist rather than cutting new ones.
+
+An exercise reshaped because the book asks you to speak still says so in `noteEn` — and
+here that is nearly every one of them, so the test requires it rather than trusting it.
 
 ---
 

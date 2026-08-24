@@ -12,89 +12,1004 @@
     "nameEn": "2B Unit 14 · Observe etiquette",
     "icon": "🙇",
     "description": "Farm the Unit 14 word list — respect for seniors, public etiquette, dialogues, dorm rules, culture.",
-    "descriptionEn": "Same farm loop. Fifty-four textbook words from 14과 예의를 지켜요. Minigames come later.",
+    "descriptionEn": "Same farm loop. The 54 drawn 어휘 headwords from 14과 예의를 지켜요, plus 71 more the unit's own pages drill — grammar boxes, 말하기, 듣고 말하기, 읽고 쓰기, 과제, 발음 — still waiting on art.",
     "world": true,
     "pack": "snu-2b",
     "worldId": "2b-unit-14",
-    "map": { "extras": [], "stations": ["desk"] },
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk"
+      ]
+    },
     "target": 9,
     "words": [
-      { "ko": "반말을 하다", "en": "to speak in informal/casual language (banmal)", "hint": "💬", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-      { "ko": "높임말[존댓말]을 하다", "en": "to speak in honorific/polite language", "hint": "🙇", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-      { "ko": "이름을 부르다", "en": "to call someone's name", "hint": "📛", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-      { "ko": "한 손으로 받다", "en": "to receive/take something with only one hand", "hint": "✋", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-      { "ko": "두 손으로 드리다", "en": "to give/offer something with both hands", "hint": "🙌", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-      { "ko": "자리를 양보하다", "en": "to yield/offer one's seat to others", "hint": "💺", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-      { "ko": "다리를 꼬고 앉다", "en": "to sit with one's legs crossed", "hint": "🦵", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-      { "ko": "고개를 돌리고 마시다", "en": "to turn one's head away while drinking", "hint": "🍶", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-      { "ko": "고개를 숙여서 인사하다", "en": "to greet someone while bowing one's head/body", "hint": "🙇", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-      { "ko": "야단(을) 맞다", "en": "to get scolded / to receive a scolding", "hint": "💢", "category": "예의", "categoryEn": "Etiquette & respect for seniors" },
-
-      { "ko": "금연", "en": "No Smoking", "hint": "🚭", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "주차 금지", "en": "No Parking", "hint": "🚫", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "사진 촬영 금지", "en": "No Photographs / Photography Prohibited", "hint": "📷", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "음식물 반입 금지", "en": "No Food or Drinks allowed inside", "hint": "🥤", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "휴대 전화 사용 금지", "en": "No Cell Phones / Cell phone use is prohibited", "hint": "📵", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "음식물을 먹다", "en": "to eat food", "hint": "🍚", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "전화를 하다", "en": "to make a phone call", "hint": "📞", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "시끄럽게 하다", "en": "to make noise / to be noisy", "hint": "📢", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "자리를 바꾸다", "en": "to change/swap seats", "hint": "🔄", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "밖으로 나가다", "en": "to go outside", "hint": "🚪", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-      { "ko": "휴대전화를 끄다", "en": "to turn off the cell phone", "hint": "📴", "category": "금지", "categoryEn": "Public etiquette & prohibitions" },
-
-      { "ko": "사진을 찍다", "en": "to take a photograph", "hint": "📷", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
-      { "ko": "담배를 피우다", "en": "to smoke a cigarette", "hint": "🚭", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
-      { "ko": "수영을 하다", "en": "to swim", "hint": "🏊", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
-      { "ko": "차를 세우다", "en": "to pull the car over / to stop the car", "hint": "🚗", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
-      { "ko": "주차하다", "en": "to park", "hint": "🅿️", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
-      { "ko": "음료수를 마시다", "en": "to drink a soft drink", "hint": "🥤", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
-      { "ko": "노래를 부르다", "en": "to sing a song", "hint": "🎤", "category": "금지", "categoryEn": "Public etiquette & prohibitions", "artPending": true },
-
-      { "ko": "실수하다", "en": "to make a mistake", "hint": "😅", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "창피하다", "en": "to be embarrassed / ashamed / humiliated", "hint": "😳", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "어색하다", "en": "to feel awkward / uncomfortable", "hint": "😬", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "의사 선생님", "en": "Doctor (polite/honorific form)", "hint": "🩺", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "처음 만난 사람", "en": "a person met for the first time", "hint": "🤝", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "물론이지", "en": "of course / certainly", "hint": "👍", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "잊어버리다", "en": "to forget", "hint": "💭", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "복잡하다", "en": "to be complicated / complex", "hint": "🧩", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "우리나라", "en": "our/my country", "hint": "🇰🇷", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "비슷하다", "en": "to be similar", "hint": "⚖️", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "다르다", "en": "to be different", "hint": "↔️", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "가까운 나라", "en": "a close/neighboring country", "hint": "🗺️", "category": "회화", "categoryEn": "Real-life dialogues" },
-      { "ko": "지각하다", "en": "to be late / to arrive late", "hint": "⏰", "category": "회화", "categoryEn": "Real-life dialogues" },
-
-      { "ko": "공연", "en": "performance / show / concert", "hint": "🎭", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-      { "ko": "시작되다", "en": "to begin / to start", "hint": "🎬", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-      { "ko": "안내 방송", "en": "announcement / informative broadcast", "hint": "📣", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-      { "ko": "지키다", "en": "to keep / observe / obey (rules)", "hint": "✅", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-      { "ko": "어기다", "en": "to break / violate (rules)", "hint": "❌", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-      { "ko": "기숙사 규칙", "en": "dormitory rules / regulations", "hint": "📋", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-      { "ko": "공중도덕", "en": "public etiquette / public morals", "hint": "🏛️", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-      { "ko": "식당", "en": "cafeteria / restaurant", "hint": "🍽️", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-      { "ko": "운동 시설", "en": "sports/workout facilities", "hint": "🏋️", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-      { "ko": "무료로 이용하다", "en": "to use for free / free of charge", "hint": "🎫", "category": "기숙사", "categoryEn": "Listening & dormitory rules" },
-
-      { "ko": "문화 차이", "en": "cultural differences", "hint": "🌍", "category": "문화", "categoryEn": "Reading & culture" },
-      { "ko": "당황하다", "en": "to be flustered / taken aback / embarrassed", "hint": "😲", "category": "문화", "categoryEn": "Reading & culture" },
-      { "ko": "왼손으로 물건을 주다", "en": "to give/hand over items with the left hand", "hint": "👈", "category": "문화", "categoryEn": "Reading & culture" },
-      { "ko": "머리를 만지다", "en": "to touch someone's head", "hint": "🖐️", "category": "문화", "categoryEn": "Reading & culture" },
-      { "ko": "경로 우대", "en": "respect/preferential treatment for senior citizens", "hint": "🎖️", "category": "문화", "categoryEn": "Reading & culture" },
-      { "ko": "노인", "en": "the elderly / senior citizens", "hint": "👴", "category": "문화", "categoryEn": "Reading & culture" },
-      { "ko": "몸이 불편한 사람", "en": "disabled people / people with physical difficulties", "hint": "♿", "category": "문화", "categoryEn": "Reading & culture" },
-      { "ko": "비어 있다", "en": "to be empty / unoccupied", "hint": "🪑", "category": "문화", "categoryEn": "Reading & culture" },
-      { "ko": "입장료 할인", "en": "admission fee discount", "hint": "🏷️", "category": "문화", "categoryEn": "Reading & culture" },
-      { "ko": "제도", "en": "system / policy / institution", "hint": "⚖️", "category": "문화", "categoryEn": "Reading & culture" }
+      {
+        "ko": "반말을 하다",
+        "en": "to speak in informal/casual language (banmal)",
+        "hint": "💬",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "높임말[존댓말]을 하다",
+        "en": "to speak in honorific/polite language",
+        "hint": "🙇",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "이름을 부르다",
+        "en": "to call someone's name",
+        "hint": "📛",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "한 손으로 받다",
+        "en": "to receive/take something with only one hand",
+        "hint": "✋",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "두 손으로 드리다",
+        "en": "to give/offer something with both hands",
+        "hint": "🙌",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "자리를 양보하다",
+        "en": "to yield/offer one's seat to others",
+        "hint": "💺",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "다리를 꼬고 앉다",
+        "en": "to sit with one's legs crossed",
+        "hint": "🦵",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "고개를 돌리고 마시다",
+        "en": "to turn one's head away while drinking",
+        "hint": "🍶",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "고개를 숙여서 인사하다",
+        "en": "to greet someone while bowing one's head/body",
+        "hint": "🙇",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "야단(을) 맞다",
+        "en": "to get scolded / to receive a scolding",
+        "hint": "💢",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors"
+      },
+      {
+        "ko": "어른",
+        "en": "an adult; one's elders",
+        "hint": "🧑‍🦳",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors",
+        "artPending": true
+      },
+      {
+        "ko": "드시다",
+        "en": "to eat, to drink (honorific)",
+        "hint": "🍚",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors",
+        "artPending": true
+      },
+      {
+        "ko": "앞에서",
+        "en": "in front of, in the presence of",
+        "hint": "🙋",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors",
+        "artPending": true
+      },
+      {
+        "ko": "젊은 사람",
+        "en": "young people",
+        "hint": "🧑",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors",
+        "artPending": true
+      },
+      {
+        "ko": "나이 든 분",
+        "en": "an older person (polite)",
+        "hint": "👴",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors",
+        "artPending": true
+      },
+      {
+        "ko": "위하다",
+        "en": "to be for the sake of",
+        "hint": "💟",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors",
+        "artPending": true
+      },
+      {
+        "ko": "잘하다",
+        "en": "to be good at",
+        "hint": "👏",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors",
+        "artPending": true
+      },
+      {
+        "ko": "잘못하다",
+        "en": "to do badly, to get it wrong",
+        "hint": "🙅",
+        "category": "예의",
+        "categoryEn": "Etiquette & respect for seniors",
+        "artPending": true
+      },
+      {
+        "ko": "금연",
+        "en": "No Smoking",
+        "hint": "🚭",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "주차 금지",
+        "en": "No Parking",
+        "hint": "🚫",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "사진 촬영 금지",
+        "en": "No Photographs / Photography Prohibited",
+        "hint": "📷",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "음식물 반입 금지",
+        "en": "No Food or Drinks allowed inside",
+        "hint": "🥤",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "휴대 전화 사용 금지",
+        "en": "No Cell Phones / Cell phone use is prohibited",
+        "hint": "📵",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "음식물을 먹다",
+        "en": "to eat food",
+        "hint": "🍚",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "전화를 하다",
+        "en": "to make a phone call",
+        "hint": "📞",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "시끄럽게 하다",
+        "en": "to make noise / to be noisy",
+        "hint": "📢",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "자리를 바꾸다",
+        "en": "to change/swap seats",
+        "hint": "🔄",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "밖으로 나가다",
+        "en": "to go outside",
+        "hint": "🚪",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "휴대전화를 끄다",
+        "en": "to turn off the cell phone",
+        "hint": "📴",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions"
+      },
+      {
+        "ko": "사진을 찍다",
+        "en": "to take a photograph",
+        "hint": "📷",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "담배를 피우다",
+        "en": "to smoke a cigarette",
+        "hint": "🚭",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "수영을 하다",
+        "en": "to swim",
+        "hint": "🏊",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "차를 세우다",
+        "en": "to pull the car over / to stop the car",
+        "hint": "🚗",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "주차하다",
+        "en": "to park",
+        "hint": "🅿️",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "음료수를 마시다",
+        "en": "to drink a soft drink",
+        "hint": "🥤",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "노래를 부르다",
+        "en": "to sing a song",
+        "hint": "🎤",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "표지판",
+        "en": "a sign, a signboard",
+        "hint": "🚧",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "큰 소리로",
+        "en": "loudly, in a loud voice",
+        "hint": "📢",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "통화하다",
+        "en": "to talk on the phone",
+        "hint": "📱",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "가지고 들어가다",
+        "en": "to take in with you",
+        "hint": "🎒",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "술",
+        "en": "alcohol, a drink",
+        "hint": "🍶",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "건강에 안 좋다",
+        "en": "to be bad for your health",
+        "hint": "🩺",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "컴퓨터",
+        "en": "a computer",
+        "hint": "💻",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "계산기",
+        "en": "a calculator",
+        "hint": "🧮",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "노트북",
+        "en": "a laptop",
+        "hint": "🖥️",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "의자",
+        "en": "a chair",
+        "hint": "🪑",
+        "category": "금지",
+        "categoryEn": "Public etiquette & prohibitions",
+        "artPending": true
+      },
+      {
+        "ko": "실수하다",
+        "en": "to make a mistake",
+        "hint": "😅",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "창피하다",
+        "en": "to be embarrassed / ashamed / humiliated",
+        "hint": "😳",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "어색하다",
+        "en": "to feel awkward / uncomfortable",
+        "hint": "😬",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "의사 선생님",
+        "en": "Doctor (polite/honorific form)",
+        "hint": "🩺",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "처음 만난 사람",
+        "en": "a person met for the first time",
+        "hint": "🤝",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "물론이지",
+        "en": "of course / certainly",
+        "hint": "👍",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "잊어버리다",
+        "en": "to forget",
+        "hint": "💭",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "복잡하다",
+        "en": "to be complicated / complex",
+        "hint": "🧩",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "우리나라",
+        "en": "our/my country",
+        "hint": "🇰🇷",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "비슷하다",
+        "en": "to be similar",
+        "hint": "⚖️",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "다르다",
+        "en": "to be different",
+        "hint": "↔️",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "가까운 나라",
+        "en": "a close/neighboring country",
+        "hint": "🗺️",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "지각하다",
+        "en": "to be late / to arrive late",
+        "hint": "⏰",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues"
+      },
+      {
+        "ko": "아저씨",
+        "en": "mister — an older man",
+        "hint": "👨",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "주인님",
+        "en": "master — the over-honorific Steven reached for",
+        "hint": "🙇",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "집주인",
+        "en": "the landlord, the owner",
+        "hint": "🧑",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "뭐라고 부르다",
+        "en": "what to call someone",
+        "hint": "🏷️",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "참",
+        "en": "really, truly",
+        "hint": "❗",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "그럼요",
+        "en": "of course, certainly",
+        "hint": "👌",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "곤란하다",
+        "en": "to be awkward, to be in a bind",
+        "hint": "😖",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "어리다",
+        "en": "to be young",
+        "hint": "🧒",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "도착하다",
+        "en": "to arrive",
+        "hint": "🛬",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "전혀",
+        "en": "not at all",
+        "hint": "🚫",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "소설책",
+        "en": "a novel",
+        "hint": "📕",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "전에",
+        "en": "before, previously",
+        "hint": "⏮️",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "외국 여행",
+        "en": "travel abroad",
+        "hint": "✈️",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "일본",
+        "en": "Japan",
+        "hint": "🇯🇵",
+        "category": "회화",
+        "categoryEn": "Real-life dialogues",
+        "artPending": true
+      },
+      {
+        "ko": "공연",
+        "en": "performance / show / concert",
+        "hint": "🎭",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "시작되다",
+        "en": "to begin / to start",
+        "hint": "🎬",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "안내 방송",
+        "en": "announcement / informative broadcast",
+        "hint": "📣",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "지키다",
+        "en": "to keep / observe / obey (rules)",
+        "hint": "✅",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "어기다",
+        "en": "to break / violate (rules)",
+        "hint": "❌",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "기숙사 규칙",
+        "en": "dormitory rules / regulations",
+        "hint": "📋",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "공중도덕",
+        "en": "public etiquette / public morals",
+        "hint": "🏛️",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "식당",
+        "en": "cafeteria / restaurant",
+        "hint": "🍽️",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "운동 시설",
+        "en": "sports/workout facilities",
+        "hint": "🏋️",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "무료로 이용하다",
+        "en": "to use for free / free of charge",
+        "hint": "🎫",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules"
+      },
+      {
+        "ko": "문을 열다",
+        "en": "to open (for business)",
+        "hint": "🚪",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules",
+        "artPending": true
+      },
+      {
+        "ko": "들어오다",
+        "en": "to come in, to enter",
+        "hint": "🚶",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules",
+        "artPending": true
+      },
+      {
+        "ko": "자리",
+        "en": "a seat, a place",
+        "hint": "💺",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules",
+        "artPending": true
+      },
+      {
+        "ko": "이용하다",
+        "en": "to use (a facility)",
+        "hint": "🎫",
+        "category": "기숙사",
+        "categoryEn": "Listening & dormitory rules",
+        "artPending": true
+      },
+      {
+        "ko": "문화 차이",
+        "en": "cultural differences",
+        "hint": "🌍",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "당황하다",
+        "en": "to be flustered / taken aback / embarrassed",
+        "hint": "😲",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "왼손으로 물건을 주다",
+        "en": "to give/hand over items with the left hand",
+        "hint": "👈",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "머리를 만지다",
+        "en": "to touch someone's head",
+        "hint": "🖐️",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "경로 우대",
+        "en": "respect/preferential treatment for senior citizens",
+        "hint": "🎖️",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "노인",
+        "en": "the elderly / senior citizens",
+        "hint": "👴",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "몸이 불편한 사람",
+        "en": "disabled people / people with physical difficulties",
+        "hint": "♿",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "비어 있다",
+        "en": "to be empty / unoccupied",
+        "hint": "🪑",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "입장료 할인",
+        "en": "admission fee discount",
+        "hint": "🏷️",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "제도",
+        "en": "system / policy / institution",
+        "hint": "⚖️",
+        "category": "문화",
+        "categoryEn": "Reading & culture"
+      },
+      {
+        "ko": "어떤",
+        "en": "some, a certain",
+        "hint": "❓",
+        "category": "문화",
+        "categoryEn": "Reading & culture",
+        "artPending": true
+      },
+      {
+        "ko": "쓰다듬다",
+        "en": "to pat, to stroke",
+        "hint": "🤲",
+        "category": "문화",
+        "categoryEn": "Reading & culture",
+        "artPending": true
+      },
+      {
+        "ko": "영혼",
+        "en": "the soul",
+        "hint": "👻",
+        "category": "문화",
+        "categoryEn": "Reading & culture",
+        "artPending": true
+      },
+      {
+        "ko": "칭찬하다",
+        "en": "to compliment, to praise",
+        "hint": "👏",
+        "category": "문화",
+        "categoryEn": "Reading & culture",
+        "artPending": true
+      },
+      {
+        "ko": "상관없다",
+        "en": "not to matter",
+        "hint": "🤷",
+        "category": "문화",
+        "categoryEn": "Reading & culture",
+        "artPending": true
+      },
+      {
+        "ko": "만지다",
+        "en": "to touch",
+        "hint": "👆",
+        "category": "문화",
+        "categoryEn": "Reading & culture",
+        "artPending": true
+      },
+      {
+        "ko": "왼손",
+        "en": "the left hand",
+        "hint": "🤚",
+        "category": "문화",
+        "categoryEn": "Reading & culture",
+        "artPending": true
+      },
+      {
+        "ko": "아이",
+        "en": "a child",
+        "hint": "🧒",
+        "category": "문화",
+        "categoryEn": "Reading & culture",
+        "artPending": true
+      },
+      {
+        "ko": "이해하다",
+        "en": "to understand",
+        "hint": "💡",
+        "category": "문화",
+        "categoryEn": "Reading & culture",
+        "artPending": true
+      },
+      {
+        "ko": "경험",
+        "en": "an experience",
+        "hint": "🧭",
+        "category": "과제",
+        "categoryEn": "Task · experiences you have had",
+        "artPending": true
+      },
+      {
+        "ko": "가방을 잃어버리다",
+        "en": "to lose your bag",
+        "hint": "🎒",
+        "category": "과제",
+        "categoryEn": "Task · experiences you have had",
+        "artPending": true
+      },
+      {
+        "ko": "기억에 남다",
+        "en": "to stay in the memory",
+        "hint": "🧠",
+        "category": "과제",
+        "categoryEn": "Task · experiences you have had",
+        "artPending": true
+      },
+      {
+        "ko": "부산",
+        "en": "Busan",
+        "hint": "🌊",
+        "category": "과제",
+        "categoryEn": "Task · experiences you have had",
+        "artPending": true
+      },
+      {
+        "ko": "제주도",
+        "en": "Jeju Island",
+        "hint": "🏝️",
+        "category": "과제",
+        "categoryEn": "Task · experiences you have had",
+        "artPending": true
+      },
+      {
+        "ko": "눈사람",
+        "en": "a snowman",
+        "hint": "⛄",
+        "category": "과제",
+        "categoryEn": "Task · experiences you have had",
+        "artPending": true
+      },
+      {
+        "ko": "카드를 받다",
+        "en": "to take a card",
+        "hint": "🃏",
+        "category": "과제",
+        "categoryEn": "Task · experiences you have had",
+        "artPending": true
+      },
+      {
+        "ko": "지갑",
+        "en": "a wallet",
+        "hint": "👛",
+        "category": "과제",
+        "categoryEn": "Task · experiences you have had",
+        "artPending": true
+      },
+      {
+        "ko": "여권",
+        "en": "a passport",
+        "hint": "🛂",
+        "category": "과제",
+        "categoryEn": "Task · experiences you have had",
+        "artPending": true
+      },
+      {
+        "ko": "받침소리",
+        "en": "the final-consonant sound",
+        "hint": "🔤",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      },
+      {
+        "ko": "신다",
+        "en": "to put on (shoes)",
+        "hint": "🥿",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      },
+      {
+        "ko": "남다",
+        "en": "to be left over",
+        "hint": "⏳",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      },
+      {
+        "ko": "앉다",
+        "en": "to sit down",
+        "hint": "🪑",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      },
+      {
+        "ko": "넘어지다",
+        "en": "to fall over",
+        "hint": "🤕",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      },
+      {
+        "ko": "아기",
+        "en": "a baby",
+        "hint": "👶",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      },
+      {
+        "ko": "안다",
+        "en": "to hold, to embrace",
+        "hint": "🤗",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      },
+      {
+        "ko": "머리를 감다",
+        "en": "to wash your hair",
+        "hint": "🚿",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      },
+      {
+        "ko": "참다",
+        "en": "to endure, to put up with",
+        "hint": "😣",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      },
+      {
+        "ko": "회비",
+        "en": "a membership fee, dues",
+        "hint": "💳",
+        "category": "발음",
+        "categoryEn": "Pronunciation practice",
+        "artPending": true
+      }
     ]
   },
   "notebook": {
     "title": "Unit 14 · Observe etiquette",
     "groups": [
-      { "ko": "예의", "en": "Etiquette & respect for seniors", "cat": "예의" },
-      { "ko": "금지", "en": "Public etiquette & prohibitions", "cat": "금지" },
-      { "ko": "회화", "en": "Real-life dialogues", "cat": "회화" },
-      { "ko": "기숙사", "en": "Listening & dormitory rules", "cat": "기숙사" },
-      { "ko": "문화", "en": "Reading & culture", "cat": "문화" }
+      {
+        "ko": "예의",
+        "en": "Etiquette & respect for seniors",
+        "cat": "예의"
+      },
+      {
+        "ko": "금지",
+        "en": "Public etiquette & prohibitions",
+        "cat": "금지"
+      },
+      {
+        "ko": "회화",
+        "en": "Real-life dialogues",
+        "cat": "회화"
+      },
+      {
+        "ko": "기숙사",
+        "en": "Listening & dormitory rules",
+        "cat": "기숙사"
+      },
+      {
+        "ko": "문화",
+        "en": "Reading & culture",
+        "cat": "문화"
+      },
+      {
+        "ko": "과제",
+        "en": "Task · experiences you have had",
+        "cat": "과제"
+      },
+      {
+        "ko": "발음",
+        "en": "Pronunciation practice",
+        "cat": "발음"
+      }
     ]
   }
 }
