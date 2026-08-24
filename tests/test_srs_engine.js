@@ -263,7 +263,10 @@ const legacy = {
   srs: { '아버지': { p2At: null, p3At: null, harvests: 7 }, '바다': { p2At: T0, p3At: null } }
 };
 const out = migrate(legacy);
-eq(out.v, 9, 'save is bumped to v9');
+eq(out.v, 10, 'save is bumped to v10');
+eq(typeof out.practice, 'object', 'v10 fills the practice log');
+eq(Object.keys(out.practice).length, 0,
+  'and it starts empty — a count that was never recorded cannot be reconstructed');
 eq(out.equippedSkinId, 'farmer', 'v9 fills equippedSkinId');
 assert(Array.isArray(out.ownedSkinIds) && out.ownedSkinIds[0] === 'farmer', 'v9 owns farmer');
 
@@ -296,7 +299,7 @@ assert(new Set(dues).size > 1, 'migrated reviews are staggered, not all dumped o
 
 console.log('\n--- 12b. Migration is idempotent ---');
 const twice = migrate(out);
-eq(JSON.stringify(twice.srs), JSON.stringify(out.srs), 'migrating an already-v9 save changes nothing');
+eq(JSON.stringify(twice.srs), JSON.stringify(out.srs), 'migrating an already-migrated save changes nothing');
 
 const alreadyV6 = migrate({
   v: 6,
@@ -306,7 +309,7 @@ eq(alreadyV6.srs['테스트'].m.type.ivl, 99, 'existing v6 entries are left unto
 
 // A v5 save skipping straight past v5 into v6 must still land on the production track.
 const fromV5 = migrate({ v: 5, srs: { '바나나': { st: 'review', ivl: 12, ease: 2.4, reps: 3, lapses: 1, due: T0, last: T0, step: 0 } } });
-eq(fromV5.v, 9, 'a v5 save migrates all the way to v9');
+eq(fromV5.v, 10, 'a v5 save migrates all the way to v10');
 eq(fromV5.srs['바나나'].m.type.ivl, 12, 'and its schedule moves under the production modality intact');
 eq(fromV5.srs['바나나'].m.type.lapses, 1, 'keeping its lapse count');
 
@@ -346,7 +349,7 @@ const preRespell = {
   attempts: [{ ko: '어깨가무겁다', g: 2, m: 'type', at: T0, ivl: 34, st: 'review' }]
 };
 const resp = migrate(preRespell);
-eq(resp.v, 9, 'save is bumped to v9');
+eq(resp.v, 10, 'save is bumped to v10');
 eq(resp.srs['어깨가무겁다'], undefined, 'the unspaced key is gone');
 assert(!!resp.srs['어깨가 무겁다'], 'and the record now lives under the spaced spelling');
 eq(resp.srs['어깨가 무겁다'].m.type.ivl, 34, 'carrying its interval — 8 reps of history are not thrown away');
@@ -412,7 +415,7 @@ const chain = migrate({
   plots:    [{ i: 1, ko: '발을벗고나서다', sState: 1, plantedAt: T0 }],
   attempts: [{ ko: '어플리케이션', g: 1, m: 'type', at: T0, ivl: 7, st: 'review' }]
 });
-eq(chain.v, 9, 'a v6 save lands on v9');
+eq(chain.v, 10, 'a v6 save lands on v10');
 eq(chain.srs['발을벗고나서다'], undefined, 'the pre-v7 spelling is gone');
 eq(chain.srs['발을 벗고 나서다'], undefined, 'and so is the v7 intermediate');
 assert(!!chain.srs['발 벗고 나서다'], 'the record ends up under the corrected idiom');
