@@ -428,6 +428,20 @@ const ChiptuneSynth = {
 // play HTML audio. The stem helper must stay in lockstep with scripts/ttsClips.js.
 const TTS_CLIP_DIR = 'audio/ko/';
 const TTS_CACHE_KEY = 'sunhi-1';
+const TTS_STEM_MAX = 240;
+const TTS_STEM_KEEP = 160;
+// FNV-1a plus a second independent 32-bit mix, so the pair come to 64 bits. Number
+// arithmetic only, so the browser and scripts/ttsClips.js can compute the identical name;
+// tests/test_tts_clips.js runs both and asserts they agree.
+function ttsHash(bytes) {
+  let a = 0x811c9dc5, b = 0x01000193;
+  for (let i = 0; i < bytes.length; i++) {
+    a = Math.imul(a ^ bytes[i], 0x01000193) >>> 0;
+    b = Math.imul(b + bytes[i] + 1, 0x85ebca6b) >>> 0;
+    b = ((b << 13) | (b >>> 19)) >>> 0;
+  }
+  return a.toString(16).padStart(8, '0') + b.toString(16).padStart(8, '0');
+}
 function ttsClipStem(text) {
   const nfc = String(text || '').normalize('NFC');
   const bytes = (typeof TextEncoder !== 'undefined')
@@ -435,7 +449,12 @@ function ttsClipStem(text) {
     : [];
   let hex = '';
   for (let i = 0; i < bytes.length; i++) hex += (bytes[i] + 256).toString(16).slice(1);
-  return hex;
+  // Six hex characters per Korean syllable, so a 40-syllable script overruns the 255-byte
+  // filename limit every filesystem has. Over the cap the name is a readable prefix plus a
+  // 64-bit hash — still pure hex, because the upload collector picks clips off disk with
+  // /^[0-9a-f]+\.mp3$/ and a separator would render a clip that then never uploads.
+  if (hex.length <= TTS_STEM_MAX) return hex;
+  return hex.slice(0, TTS_STEM_KEEP) + ttsHash(bytes);
 }
 function ttsClipUrl(text) {
   return TTS_CLIP_DIR + ttsClipStem(text) + '.mp3?v=' + encodeURIComponent(TTS_CACHE_KEY);

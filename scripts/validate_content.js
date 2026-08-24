@@ -904,6 +904,34 @@ const overlayIds = [
     /-\(\?:work\|text\)book\\\.json\$/.test(ttsSrc));
 }());
 
+// ── Every clip the content asks for must name a file that can exist ──────────
+// A clip is named for its text in hex, six characters per Korean syllable, so a 40-syllable
+// script overruns the 255-byte filename limit. Three of them did, and the publish job died
+// with ENAMETOOLONG halfway through rendering — after this validator had passed, because
+// nothing but that job ever writes a clip. The check belongs here and not only in the test
+// suite: the publish job runs this first, so this is the last gate before the render.
+(function checkTtsClipNames() {
+  const tts = require(path.join(ROOT, 'scripts', 'ttsClips.js'));
+  let phrases = [];
+  try { phrases = tts.collectTtsPhrases(ROOT); } catch (e) {
+    check('the TTS phrase harvest runs', false, e.message);
+    return;
+  }
+  check('the TTS harvest finds the whole corpus', phrases.length > 1500, String(phrases.length));
+  const LIMIT = 255;
+  const names = phrases.map((p) => ({ p: p, n: tts.ttsClipStem(p) + '.mp3' }));
+  const over = names.filter((x) => x.n.length > LIMIT);
+  check('every clip the content asks for names a file the filesystem will accept',
+    over.length === 0,
+    over.length + ' too long, longest ' + Math.max(0, ...over.map((x) => x.n.length))
+      + ' bytes, e.g. ' + (over[0] ? over[0].p.slice(0, 40) : ''));
+  // listLocalTtsFiles picks clips off disk with /^[0-9a-f]+\.mp3$/, so a name outside that
+  // renders a clip which then never reaches the upload batch — silently, on production only.
+  const bad = names.filter((x) => !/^[0-9a-f]+\.mp3$/.test(x.n));
+  check('and a name the upload collector will pick up', bad.length === 0,
+    bad.slice(0, 3).map((x) => x.p.slice(0, 24)).join(' | '));
+}());
+
 function pngSize(rel) {
   const buf = fs.readFileSync(path.join(ROOT, rel));
   if (buf.length < 24 || buf.toString('ascii', 1, 4) !== 'PNG') {

@@ -14,12 +14,42 @@ const TTS_CACHE_KEY = 'sunhi-1';
 const TTS_DIR_REL = 'audio/ko';
 const EXTRA_PHRASES = ['한국어'];
 
+// A clip is named for its text: the hex of its UTF-8 bytes, six characters per Korean
+// syllable. A long enough phrase therefore overruns the 255-byte filename limit every
+// filesystem has — which is how three 40-syllable 교과서 scripts took a publish down with
+// ENAMETOOLONG after `npm run validate` and the whole suite had passed. Nothing renders the
+// clips except the publish job, so nothing else could have caught it; there is an invariant
+// for it now in validate_content.js and tests/test_tts_clips.js.
+//
+// 240 rather than the 251 a name can actually reach: 240 is above the longest stem already
+// on the CDN, so nothing that has been rendered gets renamed by this and no clip has to be
+// re-rendered. Anything longer than 240 could never have worked in the first place.
+const TTS_STEM_MAX = 240;
+const TTS_STEM_KEEP = 160;
+
+// FNV-1a plus a second independent 32-bit mix, so the pair come to 64 bits. Number
+// arithmetic only, because js/audio.js has to compute the identical name in a browser —
+// tests/test_tts_clips.js runs both implementations and asserts they agree.
+function ttsHash(bytes) {
+  let a = 0x811c9dc5, b = 0x01000193;
+  for (let i = 0; i < bytes.length; i++) {
+    a = Math.imul(a ^ bytes[i], 0x01000193) >>> 0;
+    b = Math.imul(b + bytes[i] + 1, 0x85ebca6b) >>> 0;
+    b = ((b << 13) | (b >>> 19)) >>> 0;
+  }
+  return a.toString(16).padStart(8, '0') + b.toString(16).padStart(8, '0');
+}
+
 function ttsClipStem(text) {
   const nfc = String(text || '').normalize('NFC');
   const bytes = Buffer.from(nfc, 'utf8');
   let hex = '';
   for (let i = 0; i < bytes.length; i++) hex += (bytes[i] + 256).toString(16).slice(1);
-  return hex;
+  if (hex.length <= TTS_STEM_MAX) return hex;
+  // Still pure hex, and deliberately so: listLocalTtsFiles picks clips off disk with
+  // /^[0-9a-f]+\.mp3$/, so a separator here would render a clip that then never uploads —
+  // the silent-failure shape this pipeline has been bitten by twice already.
+  return hex.slice(0, TTS_STEM_KEEP) + ttsHash(bytes);
 }
 
 function ttsClipRel(text) {
