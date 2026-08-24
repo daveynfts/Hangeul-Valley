@@ -35,7 +35,7 @@ const WORLD_PACKS = {
   '2b-unit-10': { extras: [], stations: ['desk', 'kitchen', 'taste'] },
   '2b-unit-11': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-13': { extras: [], stations: ['desk', 'cassette'] },
-  '2b-unit-14': { extras: [], stations: ['desk'] }
+  '2b-unit-14': { extras: [], stations: ['desk', 'cassette'] }
 };
 function worldPackIdForLesson(lvl) {
   if (lvl && lvl.worldId && WORLD_PACKS[lvl.worldId]) return lvl.worldId;

@@ -65,10 +65,15 @@ function fillScript(lines, texts) {
   }).join(' ');
 }
 
+// -textbook.json as well as -workbook.json. They are the same file format read by the
+// same renderer, and that renderer plays a book clip where the content names one and a
+// pre-rendered TTS clip otherwise. A 교과서 page left out of this harvest would come up
+// with a play button that does nothing on every row the book has no recording for —
+// which is the failure the 어휘 pages hit before this function walked the directory.
 function collectWorkbookPhrases(out, seen, base) {
   const dir = path.join(base, 'worlds');
   if (!fs.existsSync(dir)) return;
-  fs.readdirSync(dir).filter((f) => /-workbook\.json$/.test(f)).sort()
+  fs.readdirSync(dir).filter((f) => /-(?:work|text)book\.json$/.test(f)).sort()
     .forEach((f) => collectOneWorkbook(out, seen, path.join(dir, f)));
 }
 

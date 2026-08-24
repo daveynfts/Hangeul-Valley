@@ -147,19 +147,31 @@ for (const [, s] of Object.entries(state)) {
     console.log(`      ${s.label} awaiting art (${pending.length}): ${pending.map((w) => w.ko).join(', ')}`);
   }
 }
-// Pinned rather than merely counted. artPending suspends a shipping guarantee, so the set
-// that holds it is named here: adding a word to it is then a deliberate edit to this line
-// rather than something that slips in with the content.
-const AWAITING_ART = [
+// Counted rather than enumerated. This line used to name all seven pending headwords, back
+// when artPending meant "a word an exercise drills that the 어휘 list forgot". Unit 14 now
+// carries its whole chapter — the grammar boxes, 말하기, 듣고 말하기, 읽고 쓰기, 과제 and 발음 —
+// and none of those words have icons yet, so enumerating them would be a 71-line list that
+// grows with every unit and says nothing.
+//
+// The guarantee the list stood for is not lost, because it lives where it belongs: the
+// 'keeps its 54 textbook headwords' check in validate_content.js, paired with 'every drawn
+// Unit 14 headword has catalogued PNG'. Flipping a shipped 어휘 word to artPending to dodge
+// its picture drops drawn to 53 and fails there. What is left for this line is the thing a
+// count still catches: pending growing without anyone deciding it should.
+const PENDING_TOTAL = 71;
+const actualPending = Object.values(state).flatMap((s) => s.words.filter((w) => w.artPending).map((w) => w.ko));
+assert(actualPending.length === pendingTotal && pendingTotal === PENDING_TOTAL,
+  `exactly ${PENDING_TOTAL} words await art (found ${actualPending.length})`);
+
+// The seven 금지 actions are a different case from the rest, and the difference is the whole
+// reason they were allowed to ship without art: they are not on the 어휘 pages at all. They
+// exist in the word list *because* 문법과 표현 4 and 문형 연습 4 drill them, so if a rewrite ever
+// drops them from the workbook they have no reason to be in the unit either. The rest of the
+// pending set is the chapter's own vocabulary and stands on the farm without an exercise.
+const EXERCISE_ONLY = [
   '사진을 찍다', '담배를 피우다', '수영을 하다',
   '차를 세우다', '주차하다', '음료수를 마시다', '노래를 부르다'
 ];
-const actualPending = Object.values(state).flatMap((s) => s.words.filter((w) => w.artPending).map((w) => w.ko));
-assert(actualPending.length === pendingTotal && pendingTotal === AWAITING_ART.length
-  && AWAITING_ART.every((ko) => actualPending.includes(ko)),
-  `exactly the ${AWAITING_ART.length} declared words await art (found ${actualPending.length}: ${actualPending.join(', ')})`);
-
-// The pending set must not be a dumping ground: every one of them is drilled somewhere.
 for (const [, s] of Object.entries(state)) {
   const drilled = new Set();
   for (const ex of s.wb.exercises || []) {
@@ -168,9 +180,10 @@ for (const [, s] of Object.entries(state)) {
       if (it.phraseKo) drilled.add(nfc(it.phraseKo));
     }
   }
-  const idle = s.words.filter((w) => w.artPending && !drilled.has(w.ko)).map((w) => w.ko);
+  const owned = new Set(s.words.map((w) => w.ko));
+  const idle = EXERCISE_ONLY.filter((ko) => owned.has(ko) && !drilled.has(ko));
   assert(idle.length === 0,
-    `${s.label}: every word awaiting art is one the workbook actually drills`
+    `${s.label}: every exercise-only word is still one the workbook drills`
     + (idle.length ? ' — idle: ' + idle.join(', ') : ''));
 }
 

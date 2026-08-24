@@ -85,8 +85,8 @@ and click-to-interact (only when the farmer is in range). Movement stays on WASD
 stick — clicking empty ground does not walk.
 
 Each unit is a world pack (`WORLD_PACKS`): Valley spawns shop/minigames/pond; Unit 10
-spawns desk+kitchen+taste; Unit 14 spawns the desk. Switching units tears the previous
-pack down instead of hiding sprites.
+spawns desk+kitchen+taste; Units 11, 13 and 14 spawn the desk and the cassette player.
+Switching units tears the previous pack down instead of hiding sprites.
 
 ### On-screen furniture
 
@@ -449,11 +449,26 @@ admin/           Express admin panel (writable locally; read-only on Vercel)
 api/             Vercel serverless functions (save, admin GET, Unit 10)
 ```
 
-The study desk runs the textbook workbook — 어휘, 문법과 표현 and 문형 연습, with
-the book's own audio on the pattern drills.
+The study desk offers up to three things, and Unit 14 is the first unit with all
+three: 퀴즈 (multiple choice), 교과서 — the 교과서's own 말하기 / 듣기 / 읽기 / 과제 /
+문화 산책 / 발음 / 자기 평가 pages — and 연습 문제, the 익힘책's 어휘, 문법과 표현
+and 문형 연습 with the book's own audio on the pattern drills. Both exercise banks
+are the same file format read by the same renderer; what separates them is the row
+of the desk menu that opened them, so nothing drills the same sentence twice.
 [docs/workbook-exercises.md](docs/workbook-exercises.md) covers the data model,
 the exercise types, cutting a drill track, and what to change when a second unit
 lands.
+
+The cassette player beside the desk plays the book's own tracks with the script alongside,
+and takes dictation one sentence at a time. Both screens draw the recording as a waveform:
+click to seek, drag out a stretch to loop it, `↻ 반복` to repeat the whole thing, and
+0.5×/0.75× to slow it down. 듣기 also takes keys — space, `a` / `b` to mark the loop, `r` to
+replay it, `c` to clear, arrows to nudge and change track; 받아쓰기 deliberately takes none,
+because it has a text input. The peaks are decoded from the mp3 at runtime — nothing to
+regenerate when a clip is re-cut, and a strip still decoding says `WAVEFORM…` rather than
+drawing bars that would read as a flat recording.
+[docs/cassette-dictation.md](docs/cassette-dictation.md) covers cutting a book track,
+aligning a 듣기 transcript, and why the loop is two mechanisms rather than one.
 
 `js/scenes/` holds five scenes — `FarmScene` (the hub), `ArcadeScene`, `DungeonScene`,
 `FishingScene`, `BeeScene` — with the pixel renderer, chiptune synth, day/night and

@@ -233,3 +233,169 @@ perfectly right — the same silent failure the Unit 14 workbook shipped with.
 
 It now walks **every** `worlds/*.json` generically for anything shaped like
 `{src: 'audio/….mp3'}`. Do not add a second hand-list.
+
+---
+
+## Unit 14, and a unit that is not all-scripted
+
+Tracks 42-51. Three things differ from Units 11 and 13, and all three are assertions in
+`tests/test_unit14_cassette.js` rather than notes.
+
+**Nine of the ten tracks have a script, and the tenth never will.** The 듣기 지문 pages at
+the back supplied 48 and 49, the same way they did for Units 11 and 13 — worth saying
+again, because it is the single highest-value page in the book for this pipeline. Track 47
+is the exception: the unit page draws that conversation and the 번역 page gives it in
+English only, so there is nothing for a dictation answer to be checked against. It ships
+listen-only and the count is pinned at nine-and-one.
+
+**The cap is 24 syllables, not 22.** Two 말하기 1 turns land at 22 and 24. The
+alternative was splitting a whole sentence into phrase fragments — 의사 선생님을 /
+'의사님'이라고 불러서 / 사람들이 웃었어 — that nobody would say on their own, and the rule
+above is that a row has to be a sentence someone would say. The cap rides in
+`dictation.filter` and the test checks the rows against it.
+
+**Span 0 of every track is the announcement.** All ten open with a 2.42-2.67s span and
+then a 1.2-1.5s gap; it is never part of a row. On the two 발음 tracks span 1 is the
+printed instruction and the 0.26-0.44s spans are the narrator reading 일/이/삼/사 — the
+same trap Unit 13's 발음 tracks set, and counting those as content is how a five-line
+track comes out looking like ten.
+
+The silencedetect settings held from Unit 13 — −35dB/0.35 for the two-line grammar boxes,
+−40dB/0.30 for the dialogues — and so did the turn gap: within-turn pauses top out at
+0.85s and the turn breaks cluster at 1.00-1.12s, so 0.95s groups track 44's thirteen
+content spans into exactly its eight printed turns.
+
+**Verify by pace spread, not by eye.** The thirty-two clips read at 4.14-6.10 syl/s, and
+that band being narrow is the evidence the span map is right. The test stores a band per
+track and then shifts the text-to-clip pairing by one to check the band would actually
+fail. It does on every multi-clip track except 50, whose two lines are 9 and 8 syllables
+over 1.844s and 1.822s — recorded as blind rather than papered over.
+
+### Aligning a 듣기 transcript
+
+The gap heuristic that works on a unit-page track **fails on a 듣기 track**, and it is worth
+knowing why before trying it: an announcement or a briefing pauses inside a sentence as
+readily as between two, so no single threshold separates the two kinds of break. Track 49
+has within-turn gaps of 0.33s and between-turn gaps of 1.06s, and also the reverse.
+
+What is actually being optimised is pace consistency, so optimise that directly. Partition
+the spans into as many consecutive groups as the transcript has lines and take the partition
+minimising the spread of syllables-per-second. It is a small exact search — the spans are
+few — and the useful part is that **the objective is the verification criterion**: a bad fit
+comes out as a wide spread rather than as a plausible-looking wrong answer.
+
+It also settles questions the ear cannot. Both 듣기 tracks open with three spans before the
+content: the recorded track number, the section heading and the printed instruction, the
+same shape the 발음 tracks have. Dropping three gives track 48 a spread of 1.60 syl/s;
+dropping one gives 2.65. That is the answer, and nobody had to guess at it.
+
+**A numeral read aloud makes a line uncuttable.** 1층에, 밤 10시, 50% 싸게 — the syllable
+count cannot be derived from the printed text, so the pace check has nothing to measure
+against and the row cannot be verified. Four of Unit 14's 듣기 lines went out on that rule,
+and it is in `dictation.filter.drop` rather than being a silent omission.
+
+**A long 듣기 sentence is usually not splittable.** Four of them run 25-39 syllables and
+carry unit headwords, and every internal pause falls mid-clause — 음식물을 드시거나 …,
+자리를 바꾸거나 …. Splitting there would cut mid-breath and leave a dangling -거나 that
+nobody would say, so they stay on the tape and out of the set. Six other turns split
+cleanly, because the narrator pauses exactly where the courtesy ends and the sentence
+begins.
+
+**The clip arithmetic, if it ever has to be reproduced.** A clip is its voiced spans
+joined by a fixed 0.18s breath, with 0.12s of real audio in front of the first and 0.15s
+behind the last. That reproduces the shipped Unit 13 clips exactly — `2b-u13-d01` is
+3.213s of voice over two spans and the file is 3.66s = 3.213 + 0.12 + 0.15 + 0.18 — which
+is what keeps a later unit's clips consistent with the earlier ones.
+
+---
+
+## The waveform, and looping a stretch of it
+
+A listening station needs three things a play button cannot give you: repeat the track,
+repeat one phrase of it, and see where in the recording you are. The third is what makes the
+second usable — a loop whose edges you cannot see is a loop you set by guessing.
+
+Both 듣기 and 받아쓰기 carry the strip. One table (`CS_WAVES`), one painter (`csPaintWave`),
+one pointer binding, one ticker: a screen describes itself in the table rather than the
+strip reaching into a global, which is what keeps the two from drifting apart on something a
+learner uses on both. 받아쓰기 has it for a different reason than 듣기 — on a 24-syllable
+sentence the part you cannot hear is three syllables long, and looping those three at 0.5×
+is the whole exercise.
+
+`tests/test_listen_loop.js` drives the rules; what follows is why they are what they are.
+
+**The loading state must not be a waveform.** This one shipped broken, and the shape of the
+mistake is worth keeping. The strip drew a row of uniform short bars while the decode was in
+flight — and a flat, evenly-spaced comb is exactly what a real waveform of a silent
+recording looks like. Every track therefore *looked* broken for the 50-250ms before its
+peaks arrived, and the first report of it was a screenshot of a perfectly healthy track.
+
+Measured before changing anything: **all 207 audio files in the repo decode, in 49ms on
+average, slowest 255ms.** Nothing was broken. The loading state was lying.
+
+So there are three states now and only one of them draws bars:
+
+| state | drawn | said |
+|---|---|---|
+| `ready` | bars | `DRAG TO LOOP` |
+| `wait` | dashes on the centre line | `WAVEFORM…` |
+| `none` | a solid centre rule | `NO WAVEFORM` |
+
+Nobody mistakes a straight line for audio. The region shading and the playhead draw in all
+three, because seeking and looping work whatever the bars are doing.
+
+**Bars are the mean and the peak, halved together.** Max alone saturates on speech this
+compressed — the book's tracks run at a peak of ~1.1 with 60% of samples voiced — and
+flattens the envelope to a block. Mean alone loses a one-bucket consonant burst. Halfway
+between the two keeps both.
+
+**The peaks are decoded at runtime, not cut into the JSON.** `csLoadPeaks` fetches the mp3,
+hands it to Web Audio, reduces the first channel to 480 buckets and caches that for the
+session. Putting them in the content instead would mean a peak file to regenerate beside
+every re-cut clip, and a stale one would draw a waveform for audio that is no longer there —
+so the strip has no content dependency at all. Where Web Audio is missing or the decode
+fails it still draws, still seeks and still loops; it just has no bars. That is a
+degradation, and the test drives it against a fake decoder that fails four different ways.
+
+**Peaks are normalised against the loudest bucket.** The book's tracks vary a lot in level,
+and an absolute scale draws the quiet ones as a flat line.
+
+**Two mechanisms, because there is only one native one.** Repeating the whole track is the
+`<audio>` element's own `loop`: gapless, and no timer involved. A stretch inside the track
+has no native equivalent, so a 30ms interval watches the playhead and jumps it. 30ms is
+chosen so the overshoot is not heard — measured on track 44 the jump lands 10-50ms after A.
+
+**An armed A-B beats whole-track repeat**, and the ticker re-asserts that on every tick
+rather than at play time: the duration is not known until metadata arrives, so whether a
+pair of marks is a valid loop cannot be decided when playback starts.
+
+**`ended` has to ask the same question as the ticker.** A loop whose end sits on the last
+frame gets no tick before the element stops itself, so `csRangeSeek` takes an `ended` flag
+and both callers consult it. That edge is a test case rather than a comment.
+
+**A pair set backwards is the same loop the other way round** — sorted, not refused. A pair
+closer together than 0.25s *is* refused, because a loop that short stutters rather than
+repeats. Both decisions live in `csRange`, once, rather than at each of its five call sites.
+
+**Marks belong to the track they were drawn on.** `listenPick` clears them. Carrying
+4.2-6.8s across to a 13-second grammar box would loop a different sentence and look
+deliberate.
+
+**Pause resumes where it stopped.** `csStop` is a hard stop — one player for every cassette
+screen is the invariant that keeps two recordings from ever playing at once — so the
+position is remembered in `listenState.at` and handed back through `csPlay`'s `startAt`,
+which waits for `loadedmetadata` because `currentTime` before that is ignored or throws.
+
+**The thin progress bar is gone.** It and the waveform both claimed to show progress and
+rounded differently, so they disagreed on screen. `csPaintProgress` is the clock only.
+
+**No letter shortcuts on 받아쓰기.** 듣기 has `a` / `b` / `l` / `r` / `c` because there is
+nothing to type on it. 받아쓰기 has a text input, and a dictation screen that swallowed the
+letter you typed would be worse than having no shortcuts at all. Drag and the buttons only.
+
+**A marked stretch belongs to the recording it was drawn on.** `listenPick` and `dictNext`
+both clear it. 1.2-2.4s of the next sentence is a different three syllables.
+
+A note for anyone writing tests against the shipped files: this repo has no
+`.gitattributes`, so a working copy is CRLF on Windows and LF in CI. A regex with a literal
+`\n` in it passes on one and fails on the other. Slice the region and match with `[\s\S]`.

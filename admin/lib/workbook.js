@@ -34,8 +34,18 @@ function writeJson(rel, data, rootDir) {
 // Which workbooks exist, by the unit they belong to. Unit 14 stays the default
 // so every caller that predates a second unit keeps working; the admin panel is
 // still one of them and edits only Unit 14 until it grows a picker.
+// 'unit14-textbook' is the same file format from the other book. The 익힘책 pages are
+// 'unit14'; this is the 교과서's own 말하기 / 읽기 / 과제 / 문화 산책 / 발음 / 자기 평가
+// exercises, which the study desk offers as a separate section because they come from a
+// separate book and drill separate things.
+//
+// The key names its own file either way: a bare unit key means <unit>-workbook.json, and a
+// key that already carries the book name means exactly that file. Nothing here may point at
+// a file belonging to another key — that is what the editor showing Unit 14's exercises for
+// every unit looked like, and admin/test asserts against it.
 const WORKBOOKS = {
   unit14: path.join('worlds', 'unit14-workbook.json'),
+  'unit14-textbook': path.join('worlds', 'unit14-textbook.json'),
   unit10: path.join('worlds', 'unit10-workbook.json')
 };
 

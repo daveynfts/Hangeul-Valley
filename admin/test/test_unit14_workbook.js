@@ -458,7 +458,14 @@ async function runTests() {
       assert(units.length >= 2, 'more than one workbook exists (' + units.join(', ') + ')');
       units.forEach((unit) => {
         const rel = workbookLib.workbookRel(unit).replace(/\\/g, '/');
-        assert(rel === 'worlds/' + unit + '-workbook.json', unit + ' is named for its unit');
+        // Two books now. A bare unit key means that unit's 익힘책 pages,
+        // worlds/<unit>-workbook.json; a key that already carries the book name — Unit 14's
+        // 교과서 pages, under 'unit14-textbook' — means exactly that file. Either way the key
+        // names its own file, which is the property that stops one unit's key resolving to
+        // another unit's exercises.
+        const stem = rel.replace(/^worlds\//, '').replace(/\.json$/, '');
+        assert(stem === unit || stem === unit + '-workbook',
+          unit + ' is named for its own file (' + rel + ')');
         assert(fs.existsSync(path.join(repoRoot, rel)), rel + ' exists');
         assert(ui.indexOf("'/" + rel + "'") >= 0, 'the game loads ' + rel);
       });

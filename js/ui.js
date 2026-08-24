@@ -2192,13 +2192,21 @@ function answerDeskQuiz(key, btn) {
 // recognising the right answer among four, versus choosing an expression and
 // putting it in the form the sentence needs. So the desk now asks which.
 //
-// Only Unit 14 has a workbook page so far. Rather than show a menu with one
-// live row and one dead one, a desk with a single mode opens it directly.
+// A desk with a single mode opens it directly rather than showing a menu with one
+// live row and one dead one, which is what Unit 10's desk still does.
+//
+// Unit 14 has two sets of pages and they come from two different books: the 교과서's
+// own 말하기 / 읽기 / 과제 / 문화 산책 / 발음 / 자기 평가 exercises, and the 익힘책's
+// 어휘 / 문법과 표현 / 문형 연습. Same file format, same renderer — what separates
+// them is the row of the menu that opened them, because a learner who has worked
+// through the textbook page should not meet it again under another name.
 
-let workbookBank = null;
 let workbookState = null;
 let deskMenuOptions = [];
 let deskMenuIndex = 0;
+// Keyed by url rather than a single slot: with two banks live on the same desk, one
+// variable would have the second load evict the first on every visit.
+const deskBanks = {};
 
 function workbookUrl() {
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-workbook.json';
@@ -2206,29 +2214,46 @@ function workbookUrl() {
   return null;
 }
 
-function loadWorkbook() {
-  const url = workbookUrl();
+function textbookUrl() {
+  if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-textbook.json';
+  return null;
+}
+
+function loadDeskBank(url) {
   if (!url) return Promise.resolve(null);
-  if (workbookBank && workbookBank._url === url) return Promise.resolve(workbookBank);
+  if (deskBanks[url]) return Promise.resolve(deskBanks[url]);
   if (typeof fetch !== 'function') return Promise.resolve(null);
   return fetch(url)
     .then(r => r.ok ? r.json() : null)
     .then(d => {
-      if (d) d._url = url;
-      workbookBank = d;
+      if (d) {
+        d._url = url;
+        deskBanks[url] = d;
+      }
       return d;
     })
     .catch(() => null);
 }
 
+function loadWorkbook() { return loadDeskBank(workbookUrl()); }
+function loadTextbook() { return loadDeskBank(textbookUrl()); }
+
 function openStudyDesk() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  loadWorkbook().then(wb => {
-    const exercises = (wb && wb.exercises) || [];
+  Promise.all([loadTextbook(), loadWorkbook()]).then(([tb, wb]) => {
     deskMenuOptions = [
       { key: 'quiz', icon: '📝', ko: '퀴즈', en: 'Multiple choice', run: openDeskQuiz }
     ];
-    if (exercises.length) {
+    // 교과서 before 연습 문제: it is the chapter you sat through, and the 익힘책 is the
+    // homework on top of it. A unit with only one of the two still gets one row.
+    if (((tb && tb.exercises) || []).length) {
+      deskMenuOptions.push({
+        key: 'textbook', icon: '📖', ko: '교과서',
+        en: "Textbook — the chapter's own pages",
+        run: () => openWorkbook(tb)
+      });
+    }
+    if (((wb && wb.exercises) || []).length) {
       deskMenuOptions.push({
         key: 'workbook', icon: '✍️', ko: '연습 문제',
         en: 'Workbook — build the sentences',
@@ -2291,6 +2316,7 @@ let cassetteMenuIndex = 0;
 function cassetteUrl() {
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-cassette.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-cassette.json';
+  if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-cassette.json';
   return null;
 }
 
@@ -2309,15 +2335,20 @@ function loadCassette() {
 // what is playing rather than layer on top of it — two recordings at once is the
 // one thing a listening station must never do.
 function csStop() {
+  csTickStop();
   if (!cassetteTrack) return;
   const el = cassetteTrack.el;
   cassetteTrack = null;
   try { el.pause(); el.src = ''; } catch (e) {}
   if (typeof AudioMixer !== 'undefined' && AudioMixer.voiceEnd) AudioMixer.voiceEnd();
   csPaintPlaying();
+  const live = csLiveWave();
+  if (live) csPaintWave(live);
 }
 
-function csPlay(src, rate, onEnd) {
+// opts.loop repeats the whole track, opts.startAt resumes from a position. Both are the
+// 듣기 screen's; dictation passes neither and behaves exactly as it did.
+function csPlay(src, rate, onEnd, opts) {
   csStop();
   if (typeof Audio !== 'function') return false;
   let el = null;
@@ -2329,12 +2360,34 @@ function csPlay(src, rate, onEnd) {
       if (AudioMixer.voiceStart) AudioMixer.voiceStart();
     }
     el.playbackRate = rate || 1;
-    el.onended = () => { if (cassetteTrack && cassetteTrack.el === el) { csStop(); if (onEnd) onEnd(); } };
+    el.loop = !!(opts && opts.loop);
+    const startAt = (opts && opts.startAt) || 0;
+    if (startAt > 0) {
+      // currentTime before metadata is either ignored or throws, so wait for it when it
+      // has not arrived — which on a cold CDN fetch it will not have.
+      const seek = () => { try { el.currentTime = startAt; } catch (e) {} };
+      if (el.readyState >= 1) seek();
+      else if (typeof el.addEventListener === 'function') el.addEventListener('loadedmetadata', seek, { once: true });
+    }
+    el.onended = () => {
+      if (!cassetteTrack || cassetteTrack.el !== el) return;
+      // A loop whose end sits on the last frame gets no tick before the element stops, so
+      // `ended` is where that case is caught.
+      const live = csLiveWave();
+      const st = live ? CS_WAVES[live].st() : null;
+      const jump = csRangeSeek(el.currentTime || 0, st ? csRange(st.a, st.b, el.duration || 0) : null, true);
+      if (jump !== null) {
+        try { el.currentTime = jump; el.play(); return; } catch (e) {}
+      }
+      csStop();
+      if (onEnd) onEnd();
+    };
     el.onerror = () => { if (cassetteTrack && cassetteTrack.el === el) csStop(); };
     el.ontimeupdate = () => { if (cassetteTrack && cassetteTrack.el === el) csPaintProgress(el); };
     const p = el.play();
     if (p && typeof p.catch === 'function') p.catch(() => csStop());
     csPaintPlaying();
+    csTickStart();
     return true;
   } catch (e) { csStop(); return false; }
 }
@@ -2351,18 +2404,396 @@ function csPaintPlaying() {
   });
 }
 
+// The clock only. The playhead moved to #listen-wave, which the ticker repaints — a bar and
+// a waveform both claiming to show progress rounded differently and disagreed on screen.
+// Reads from state when there is no element, so the readout survives a pause.
 function csPaintProgress(el) {
-  const bar = $('listen-bar');
   const clock = $('listen-clock');
-  if (!bar && !clock) return;
-  const d = el.duration || 0;
-  if (bar) bar.style.width = d ? Math.min(100, (el.currentTime / d) * 100) + '%' : '0%';
-  if (clock) clock.textContent = csClock(el.currentTime) + ' / ' + csClock(d);
+  if (!clock) return;
+  const st = listenState;
+  const cur = (st && cassetteBank) ? (cassetteBank.tracks || [])[st.i] : null;
+  const d = (el && el.duration) || (cur && cur.dur) || 0;
+  const t = el ? (el.currentTime || 0) : ((st && st.at) || 0);
+  clock.textContent = csClock(t) + ' / ' + csClock(d);
 }
 
 function csClock(s) {
   const n = Math.max(0, Math.round(s || 0));
   return Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0');
+}
+
+// Tenths, for the A-B readout only. csClock rounds to the second, which is the right
+// resolution for a track and the wrong one for a two-second stretch of it — 0:02-0:04
+// says nothing about a loop you are about to hear forty times.
+function csClockMs(s) {
+  const v = Math.max(0, s || 0);
+  const m = Math.floor(v / 60);
+  const rest = v - m * 60;
+  return m + ':' + (rest < 10 ? '0' : '') + rest.toFixed(1);
+}
+
+// ── the waveform, and looping a stretch of it ────────────────────────────────
+// Three things a listening station needs that a play button cannot give you: repeat the
+// track, repeat one phrase of it, and see where in the recording you are. The first is the
+// <audio> element's own `loop`. The other two need the waveform, because a loop you cannot
+// see the edges of is a loop you set by guessing.
+//
+// The peaks come from decoding the mp3 with Web Audio, not from data cut into the JSON.
+// That keeps the pipeline out of it — no peak file to regenerate when a clip is re-cut, and
+// nothing to go stale — and costs one decode per track per session, cached below. Where
+// Web Audio is missing or the decode fails the strip still draws, still seeks and still
+// loops; it simply has no bars, which is a degradation rather than a break.
+const CS_PEAK_BUCKETS = 480;
+const CS_AB_MIN = 0.25;          // a shorter loop than this is a stutter, not a phrase
+const CS_TICK_MS = 30;           // fine enough that an A-B jump is not heard as an overshoot
+const CS_DRAG_PX = 4;            // below this a pointer gesture is a seek, not a selection
+const csPeakCache = {};          // src → number[] , or null for "tried and could not"
+const csPeakPending = {};
+let csTicker = null;
+let csWaveDrag = null;
+
+// Reduce decoded samples to one 0..1 peak per bucket. Normalised against the loudest
+// bucket so a quietly-recorded track is not drawn as a flat line.
+function csPeaksFrom(samples, buckets) {
+  const n = Math.max(1, buckets | 0);
+  const out = new Array(n).fill(0);
+  const len = samples ? samples.length : 0;
+  if (!len) return out;
+  for (let i = 0; i < n; i++) {
+    const from = Math.floor(i * len / n);
+    const to = Math.min(len, Math.max(from + 1, Math.floor((i + 1) * len / n)));
+    let peak = 0;
+    for (let k = from; k < to; k++) {
+      const v = samples[k] < 0 ? -samples[k] : samples[k];
+      if (v > peak) peak = v;
+    }
+    out[i] = peak;
+  }
+  let max = 0;
+  for (let i = 0; i < n; i++) if (out[i] > max) max = out[i];
+  if (max > 0) for (let i = 0; i < n; i++) out[i] = out[i] / max;
+  return out;
+}
+
+// The armed loop, or null. Marks set backwards are the same loop the other way round, so
+// they are sorted rather than refused; a pair too close together is refused, because a
+// sub-quarter-second loop spins rather than repeats.
+function csRange(a, b, dur) {
+  if (typeof a !== 'number' || typeof b !== 'number') return null;
+  if (!isFinite(a) || !isFinite(b)) return null;
+  const cap = dur > 0 ? dur : Math.max(a, b);
+  const lo = Math.max(0, Math.min(a, b));
+  const hi = Math.min(cap, Math.max(a, b));
+  if (!(hi - lo >= CS_AB_MIN)) return null;
+  return { a: lo, b: hi };
+}
+
+// Where the playhead has to go, or null to leave it alone. Both the ticker and the
+// element's own `ended` ask this: a loop whose end sits on the last frame of the track
+// never gets a tick before the element stops itself, and `ended` is the only warning.
+function csRangeSeek(t, range, ended) {
+  if (!range) return null;
+  if (ended) return range.a;
+  return t >= range.b ? range.a : null;
+}
+
+// x within a strip of the given width → a time in the track.
+function csTimeAtX(x, width, dur) {
+  if (!(width > 0) || !(dur > 0)) return 0;
+  const f = Math.max(0, Math.min(1, x / width));
+  return f * dur;
+}
+
+function csWaveDur() {
+  const st = listenState;
+  if (cassetteTrack && cassetteTrack.el.duration > 0) return cassetteTrack.el.duration;
+  const cur = st && cassetteBank ? (cassetteBank.tracks || [])[st.i] : null;
+  return (cur && cur.dur) || 0;
+}
+
+function csHeadTime() {
+  if (cassetteTrack) return cassetteTrack.el.currentTime || 0;
+  return (listenState && listenState.at) || 0;
+}
+
+function csLoadPeaks(src) {
+  if (Object.prototype.hasOwnProperty.call(csPeakCache, src)) return Promise.resolve(csPeakCache[src]);
+  if (csPeakPending[src]) return csPeakPending[src];
+  const AC = typeof AudioContext === 'function' ? AudioContext
+    : (typeof webkitAudioContext === 'function' ? webkitAudioContext : null);
+  if (!AC || typeof fetch !== 'function') {
+    csPeakCache[src] = null;
+    return Promise.resolve(null);
+  }
+  const p = fetch('/' + src)
+    .then((r) => (r.ok ? r.arrayBuffer() : null))
+    .then((buf) => {
+      if (!buf) return null;
+      let ctx = null;
+      try { ctx = new AC(); } catch (e) { return null; }
+      return new Promise((res) => {
+        // The callback form: decodeAudioData does not return a promise everywhere, and the
+        // context has to be closed either way or a tab full of them exhausts the hardware.
+        const done = (audio) => { try { ctx.close(); } catch (e) {} res(audio || null); };
+        try { ctx.decodeAudioData(buf, done, () => done(null)); } catch (e) { done(null); }
+      });
+    })
+    .then((audio) => {
+      let peaks = null;
+      try { peaks = audio ? csPeaksFrom(audio.getChannelData(0), CS_PEAK_BUCKETS) : null; }
+      catch (e) { peaks = null; }
+      csPeakCache[src] = peaks;
+      delete csPeakPending[src];
+      return peaks;
+    })
+    .catch(() => { csPeakCache[src] = null; delete csPeakPending[src]; return null; });
+  csPeakPending[src] = p;
+  return p;
+}
+
+// Which screens carry a strip. A screen describes itself here rather than the strip reaching
+// into a global, so 듣기 and 받아쓰기 can each own one without either knowing about the other.
+const CS_WAVES = {
+  'listen-wave': {
+    overlay: 'listen-overlay',
+    st: () => listenState,
+    src: () => {
+      const s = listenState;
+      const c = (s && cassetteBank) ? (cassetteBank.tracks || [])[s.i] : null;
+      return (c && c.src) || '';
+    },
+    dur: () => csWaveDur(),
+    at: () => csHeadTime(),
+    seek: (t) => listenSeek(t),
+    commit: () => listenReplayAB(),
+    render: () => renderListen()
+  },
+  'dict-wave': {
+    overlay: 'dictation-overlay',
+    st: () => dictState,
+    src: () => {
+      const s = dictState;
+      const it = s ? dictItems()[s.i] : null;
+      return (it && it.audio && it.audio.src) || '';
+    },
+    dur: () => dictWaveDur(),
+    at: () => dictHeadTime(),
+    seek: (t) => dictSeek(t),
+    commit: () => dictReplayAB(),
+    render: () => renderDictation()
+  }
+};
+
+// Which strip is on screen. Both states can be live at once if a screen was left open
+// behind another, so the visible overlay decides rather than whichever state is non-null.
+function csLiveWave() {
+  const keys = Object.keys(CS_WAVES);
+  for (let i = 0; i < keys.length; i++) {
+    const w = CS_WAVES[keys[i]];
+    const el = $(w.overlay);
+    if (el && el.classList && el.classList.contains('visible') && w.st()) return keys[i];
+  }
+  return null;
+}
+
+// 'ready' once the peaks are in, 'none' once a decode has been tried and failed, 'wait'
+// until then. Three states rather than two, because the honest thing to draw while waiting
+// is not a waveform — see the drawing below.
+function csWaveState(src) {
+  if (!src) return 'none';
+  const p = csPeakCache[src];
+  if (p && p.length) return 'ready';
+  if (Object.prototype.hasOwnProperty.call(csPeakCache, src)) return 'none';
+  return 'wait';
+}
+
+// The strip. Bars when the peaks are in; a RULE — not bars — when they are not.
+//
+// This used to draw a row of uniform short bars while the decode was in flight, which was a
+// mistake worth naming: a flat evenly-spaced comb is indistinguishable from a real waveform
+// of a silent recording, so a strip that was merely still loading looked broken. It is a
+// line now, and the caller says WAVEFORM… or NO WAVEFORM beside it. Nobody mistakes a
+// straight line for audio.
+function csPaintWave(id) {
+  const w = CS_WAVES[id];
+  const cv = $(id);
+  if (!w || !cv || typeof cv.getContext !== 'function') return;
+  const st = w.st();
+  if (!st) return;
+  let ctx = null;
+  try { ctx = cv.getContext('2d'); } catch (e) { return; }
+  if (!ctx) return;
+
+  const W = cv.width, H = cv.height, mid = Math.round(H / 2);
+  const src = w.src();
+  const dur = w.dur();
+  const at = w.at();
+  const state = csWaveState(src);
+  const peaks = state === 'ready' ? csPeakCache[src] : null;
+  const range = csRange(st.a, st.b, dur);
+  const played = dur > 0 ? Math.max(0, Math.min(1, at / dur)) : 0;
+
+  ctx.clearRect(0, 0, W, H);
+
+  if (peaks) {
+    // Integer rects on a 2x canvas, so the bars land on device pixels and read as pixel art
+    // rather than as a blurred line. Mean of the peaks under a bar rather than max: max
+    // saturates on speech this compressed and flattens the envelope.
+    const step = 6, barW = 4;
+    const bars = Math.max(1, Math.floor(W / step));
+    const per = peaks.length / bars;
+    for (let i = 0; i < bars; i++) {
+      const from = Math.floor(i * per);
+      const to = Math.min(peaks.length, Math.max(from + 1, Math.floor((i + 1) * per)));
+      let sum = 0, n = 0, top = 0;
+      for (let k = from; k < to; k++) { sum += peaks[k]; n++; if (peaks[k] > top) top = peaks[k]; }
+      // Halfway between the mean and the loudest sample under the bar: the mean alone loses
+      // a one-bucket consonant burst, the max alone loses the envelope.
+      const v = n ? (sum / n + top) / 2 : 0;
+      const h = Math.max(2, Math.round(v * (H - 10)));
+      ctx.fillStyle = ((i + 0.5) / bars) <= played ? '#4a2a0d' : '#c4893a';
+      ctx.fillRect(i * step + 1, mid - Math.round(h / 2), barW, h);
+    }
+  } else if (state === 'wait') {
+    // Dashes, so it reads as "not yet" rather than as a recording.
+    ctx.fillStyle = '#d8b483';
+    for (let x = 2; x < W - 8; x += 16) ctx.fillRect(x, mid - 1, 8, 2);
+  } else {
+    ctx.fillStyle = '#d8b483';
+    ctx.fillRect(2, mid - 1, W - 4, 2);
+  }
+
+  // Seeking and looping work whatever the bars are doing, so these draw in every state.
+  if (range && dur > 0) {
+    const x1 = Math.round((range.a / dur) * W);
+    const x2 = Math.round((range.b / dur) * W);
+    ctx.fillStyle = 'rgba(30, 58, 138, 0.14)';
+    ctx.fillRect(x1, 0, Math.max(2, x2 - x1), H);
+    ctx.fillStyle = '#1e3a8a';
+    ctx.fillRect(x1, 0, 2, H);
+    ctx.fillRect(Math.max(x1 + 2, x2 - 2), 0, 2, H);
+  } else if (dur > 0) {
+    // Half a loop shows as a stub rather than as nothing, so a mark that landed looks like
+    // it landed: A hangs from the top, B rises from the bottom.
+    [st.a, st.b].forEach((m, k) => {
+      if (typeof m !== 'number') return;
+      const x = Math.max(0, Math.min(W - 2, Math.round((m / dur) * W)));
+      ctx.fillStyle = '#1e3a8a';
+      ctx.fillRect(x, k ? H - 16 : 0, 2, 16);
+    });
+  }
+
+  if (dur > 0) {
+    ctx.fillStyle = '#a32b1c';
+    ctx.fillRect(Math.max(0, Math.min(W - 2, Math.round(played * W))), 0, 2, H);
+  }
+}
+
+// What the caller prints beside the strip, so a loading strip says so in words as well.
+function csWaveLabel(id) {
+  const w = CS_WAVES[id];
+  if (!w) return '';
+  const st = w.st();
+  if (!st) return '';
+  const range = csRange(st.a, st.b, w.dur());
+  if (range) {
+    return csClockMs(range.a) + '-' + csClockMs(range.b) + ' · ' + (range.b - range.a).toFixed(1) + 'S';
+  }
+  if (typeof st.a === 'number') return 'A SET · NOW SET B';
+  if (typeof st.b === 'number') return 'B SET · NOW SET A';
+  const state = csWaveState(w.src());
+  if (state === 'wait') return 'WAVEFORM…';
+  if (state === 'none') return 'NO WAVEFORM · DRAG TO LOOP';
+  return 'DRAG TO LOOP';
+}
+
+// Ask for the peaks and repaint when they land. Safe to call on every render: the cache and
+// the in-flight map between them mean one decode per recording per session.
+function csWaveLoad(id) {
+  const w = CS_WAVES[id];
+  if (!w) return;
+  const src = w.src();
+  if (!src || csWaveState(src) !== 'wait') return;
+  csLoadPeaks(src).then(() => {
+    // The screen may have moved on to another recording while this was decoding.
+    if (w.src() === src) { csPaintWave(id); if (w.render) w.render(); }
+  });
+}
+
+function csTickStop() {
+  if (csTicker !== null && typeof clearInterval === 'function') clearInterval(csTicker);
+  csTicker = null;
+}
+
+// One ticker for whichever strip is on screen. 듣기 and 받아쓰기 loop by the same rules, so
+// they run the same tick rather than each growing its own timer.
+function csTick() {
+  const id = csLiveWave();
+  if (!id || !cassetteTrack) { csTickStop(); return; }
+  const w = CS_WAVES[id];
+  const st = w.st();
+  const el = cassetteTrack.el;
+  st.at = el.currentTime || 0;
+  const range = csRange(st.a, st.b, el.duration || 0);
+  // Whole-track repeat is the element's own loop, but an armed stretch governs instead —
+  // otherwise the native wrap fires at the end of the track and the stretch never gets to.
+  el.loop = !!st.loop && !range;
+  const jump = csRangeSeek(st.at, range, false);
+  if (jump !== null) {
+    try { el.currentTime = jump; st.at = jump; } catch (e) {}
+  }
+  csPaintWave(id);
+  if (id === 'listen-wave') csPaintProgress(el);
+  else csPaintDictClock(el);
+}
+
+function csTickStart() {
+  csTickStop();
+  if (typeof setInterval !== 'function') return;
+  csTicker = setInterval(csTick, CS_TICK_MS);
+}
+
+function csWaveBind(id) {
+  const w = CS_WAVES[id];
+  const cv = $(id);
+  if (!w || !cv || cv._csBound || typeof cv.addEventListener !== 'function') return;
+  cv._csBound = true;
+  const pos = (e) => {
+    const r = cv.getBoundingClientRect();
+    const x = (e.clientX || 0) - r.left;
+    return { x: x, t: csTimeAtX(x, r.width, w.dur()) };
+  };
+  // Pointer events rather than mouse events, and a few pixels of slop before a press counts
+  // as a drag — the same rule the workbook chips follow, and for the same reason: a tap on a
+  // touchscreen wanders by a pixel or two and would otherwise arm a nonsense loop.
+  cv.addEventListener('pointerdown', (e) => {
+    if (!w.st()) return;
+    e.preventDefault();
+    try { cv.setPointerCapture(e.pointerId); } catch (err) {}
+    const p = pos(e);
+    csWaveDrag = { id: id, x0: p.x, t0: p.t, t1: p.t, moved: false };
+  });
+  cv.addEventListener('pointermove', (e) => {
+    if (!csWaveDrag || csWaveDrag.id !== id) return;
+    const p = pos(e);
+    csWaveDrag.t1 = p.t;
+    if (Math.abs(p.x - csWaveDrag.x0) >= CS_DRAG_PX) csWaveDrag.moved = true;
+    const st = w.st();
+    if (csWaveDrag.moved && st) {
+      st.a = Math.min(csWaveDrag.t0, csWaveDrag.t1);
+      st.b = Math.max(csWaveDrag.t0, csWaveDrag.t1);
+      csPaintWave(id);
+    }
+  });
+  const finish = () => {
+    const d = csWaveDrag;
+    csWaveDrag = null;
+    if (!d || d.id !== id || !w.st()) return;
+    if (d.moved) w.commit();
+    else w.seek(d.t0);
+  };
+  cv.addEventListener('pointerup', finish);
+  cv.addEventListener('pointercancel', () => { csWaveDrag = null; if (w.render) w.render(); });
 }
 
 // ── the chooser ─────────────────────────────────────────────────────────────
@@ -2431,16 +2862,14 @@ function openListen() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
   loadCassette().then((bank) => {
     if (!bank) return;
-    // Opens on the pharmacy dialogue rather than track 12: it is the unit's first
-    // real conversation, and a two-line grammar box is a thin thing to land on.
     // Opens on the unit's first real conversation rather than on a two-line grammar
     // box, which is a thin thing to land on. Named per unit because the track numbers
     // are the book's, not ours.
     const tracks = bank.tracks || [];
-    const OPEN_ON = { '2b-unit-11': 14, '2b-unit-13': 34 };
+    const OPEN_ON = { '2b-unit-11': 14, '2b-unit-13': 34, '2b-unit-14': 44 };
     const want = OPEN_ON[bank.unit];
     const start = tracks.findIndex((t) => t.n === want);
-    listenState = { i: start >= 0 ? start : 0, rate: 1 };
+    listenState = { i: start >= 0 ? start : 0, rate: 1, loop: false, a: null, b: null, at: 0 };
     renderListen();
     setModalState('listen-overlay', true);
   });
@@ -2458,6 +2887,11 @@ function listenPick(i) {
   if (!listenState) return;
   csStop();
   listenState.i = i;
+  // A loop belongs to the track it was drawn on. Carrying 4.2-6.8s across to a 13-second
+  // grammar box would loop a different sentence and look like it had been kept on purpose.
+  listenState.a = null;
+  listenState.b = null;
+  listenState.at = 0;
   renderListen();
 }
 
@@ -2466,14 +2900,88 @@ function listenToggle() {
   if (!bank || !st) return;
   const t = (bank.tracks || [])[st.i];
   if (!t) return;
-  if (csIsPlaying(t.src)) { csStop(); return; }
-  csPlay(t.src, st.rate);
+  if (csIsPlaying(t.src)) { st.at = csHeadTime(); csStop(); return; }
+  // Resumes where it stopped rather than from the top. csStop is a hard stop — one player
+  // for every cassette screen is the invariant — so the position is remembered here and
+  // handed back in, which is the same thing from the listener's side.
+  const range = csRange(st.a, st.b, csWaveDur());
+  const at = (st.at > 0 && (!range || st.at < range.b)) ? st.at : (range ? range.a : 0);
+  csPlay(t.src, st.rate, null, { loop: st.loop && !range, startAt: at });
 }
 
 function listenRate(r) {
   if (!listenState) return;
   listenState.rate = r;
   if (cassetteTrack) cassetteTrack.el.playbackRate = r;
+  renderListen();
+}
+
+function listenToggleLoop() {
+  const st = listenState;
+  if (!st) return;
+  st.loop = !st.loop;
+  if (cassetteTrack) cassetteTrack.el.loop = st.loop && !csRange(st.a, st.b, csWaveDur());
+  renderListen();
+}
+
+function listenSeek(t) {
+  const st = listenState;
+  if (!st) return;
+  st.at = Math.max(0, Math.min(csWaveDur() || t || 0, t || 0));
+  if (cassetteTrack) { try { cassetteTrack.el.currentTime = st.at; } catch (e) {} }
+  csPaintWave('listen-wave');
+  csPaintProgress(cassetteTrack ? cassetteTrack.el : null);
+}
+
+function listenNudge(by) {
+  listenSeek(csHeadTime() + by);
+}
+
+function listenStep(by) {
+  const st = listenState;
+  if (!st || !cassetteBank) return;
+  const n = (cassetteBank.tracks || []).length;
+  if (!n) return;
+  listenPick((st.i + by + n) % n);
+}
+
+function listenSetA() {
+  const st = listenState;
+  if (!st) return;
+  st.a = csHeadTime();
+  // B before A is not a loop. Dropping it is kinder than silently swapping the two, because
+  // the next thing the listener does is set B where they actually want it.
+  if (typeof st.b === 'number' && st.b <= st.a + CS_AB_MIN) st.b = null;
+  renderListen();
+}
+
+function listenSetB() {
+  const st = listenState;
+  if (!st) return;
+  st.b = csHeadTime();
+  if (typeof st.a === 'number' && st.b <= st.a + CS_AB_MIN) st.a = null;
+  renderListen();
+}
+
+function listenClearAB() {
+  const st = listenState;
+  if (!st) return;
+  st.a = null;
+  st.b = null;
+  if (cassetteTrack) cassetteTrack.el.loop = !!st.loop;
+  renderListen();
+}
+
+// Play the marked stretch from its start — the button a listener reaches for after dragging
+// one out. With nothing marked it is a plain replay from the top, which is what ↺ says.
+function listenReplayAB() {
+  const bank = cassetteBank, st = listenState;
+  if (!bank || !st) return;
+  const t = (bank.tracks || [])[st.i];
+  if (!t) return;
+  const range = csRange(st.a, st.b, csWaveDur());
+  st.at = range ? range.a : 0;
+  csPlay(t.src, st.rate, null, { loop: st.loop && !range, startAt: st.at });
   renderListen();
 }
 
@@ -2502,15 +3010,37 @@ function renderListen() {
 
   const nm = $('listen-now');
   if (nm) nm.textContent = cur.sec;
-  const clock = $('listen-clock');
-  if (clock) clock.textContent = '0:00 / ' + csClock(cur.dur);
-  const bar = $('listen-bar');
-  if (bar) bar.style.width = '0%';
   const play = $('listen-play');
   if (play) play.setAttribute('data-src', cur.src);
   document.querySelectorAll('#listen-rates .cs-rate').forEach((b) => {
     b.classList.toggle('on', Number(b.getAttribute('data-rate')) === st.rate);
   });
+  csPaintProgress(cassetteTrack ? cassetteTrack.el : null);
+
+  // ── the waveform and the loop controls ──
+  const dur = csWaveDur();
+  const range = csRange(st.a, st.b, dur);
+  const halfMark = typeof st.a === 'number' || typeof st.b === 'number';
+  const lp = $('listen-loop');
+  if (lp) lp.classList.toggle('on', !!st.loop);
+  const sa = $('listen-seta');
+  if (sa) sa.classList.toggle('on', typeof st.a === 'number');
+  const sb = $('listen-setb');
+  if (sb) sb.classList.toggle('on', typeof st.b === 'number');
+  const abc = $('listen-abclear');
+  if (abc) abc.disabled = !halfMark;
+  const info = $('listen-abinfo');
+  if (info) {
+    info.classList.toggle('on', !!range);
+    // csWaveLabel also reports WAVEFORM… / NO WAVEFORM, which is half the point: a strip
+    // still decoding says so in words rather than looking like a waveform that came out flat.
+    info.textContent = csWaveLabel('listen-wave') + (range || halfMark ? '' : ' · A B L R C');
+  }
+  csWaveBind('listen-wave');
+  csPaintWave('listen-wave');
+  // Decoding is per track per session and the strip works without it, so this is fired and
+  // forgotten rather than awaited — the screen is usable while the bars arrive.
+  csWaveLoad('listen-wave');
 
   const pane = $('listen-script');
   if (pane) {
@@ -2571,7 +3101,8 @@ function openDictation() {
     if (!bank) return;
     const items = (bank.dictation && bank.dictation.items) || [];
     if (!items.length) return;
-    dictState = { i: 0, typed: '', checked: false, rate: 1, right: 0, done: 0 };
+    dictState = { i: 0, typed: '', checked: false, rate: 1, right: 0, done: 0,
+      loop: false, a: null, b: null, at: 0 };
     renderDictation();
     setModalState('dictation-overlay', true);
     const el = $('dict-input');
@@ -2597,8 +3128,113 @@ function dictPlay(rate) {
   const it = dictItems()[st.i];
   if (!it || !it.audio) return;
   if (typeof rate === 'number') st.rate = rate;
-  csPlay(it.audio.src, st.rate);
+  // ↻ 다시 has always meant "from the top", so a bare dictPlay() restarts. A marked stretch
+  // starts at its own beginning instead, because that is the thing being replayed.
+  const range = csRange(st.a, st.b, dictWaveDur());
+  st.at = range ? range.a : 0;
+  csPlay(it.audio.src, st.rate, null, { loop: st.loop && !range, startAt: st.at });
   renderDictationRates();
+  renderDictationWave();
+}
+
+// ── the strip on 받아쓰기 ─────────────────────────────────────────────────────
+// The same component 듣기 uses, and worth having here for a different reason: on a
+// 24-syllable sentence the part you cannot hear is three syllables long, and looping those
+// three at 0.5× is the whole exercise. No letter shortcuts on this screen — it has a text
+// input, and a dictation screen that swallowed the letter you typed would be worse than
+// having no shortcuts at all.
+function dictWaveDur() {
+  const st = dictState;
+  if (cassetteTrack && cassetteTrack.el.duration > 0) return cassetteTrack.el.duration;
+  const it = st ? dictItems()[st.i] : null;
+  // A dictation row declares no duration, but `voiced` plus the pads the cut added is the
+  // length of the file to within a few hundredths — enough to click on before it has played.
+  if (it && it.audio && it.audio.voiced > 0) return it.audio.voiced + 0.27;
+  return 0;
+}
+
+function dictHeadTime() {
+  if (cassetteTrack) return cassetteTrack.el.currentTime || 0;
+  return (dictState && dictState.at) || 0;
+}
+
+// Tenths here rather than whole seconds: every clip on this screen is under ten of them.
+function csPaintDictClock(el) {
+  const clock = $('dict-clock');
+  if (!clock) return;
+  const d = (el && el.duration) || dictWaveDur() || 0;
+  const t = el ? (el.currentTime || 0) : ((dictState && dictState.at) || 0);
+  clock.textContent = csClockMs(t) + ' / ' + csClockMs(d);
+}
+
+function dictSeek(t) {
+  const st = dictState;
+  if (!st) return;
+  st.at = Math.max(0, Math.min(dictWaveDur() || t || 0, t || 0));
+  if (cassetteTrack) { try { cassetteTrack.el.currentTime = st.at; } catch (e) {} }
+  csPaintWave('dict-wave');
+  csPaintDictClock(cassetteTrack ? cassetteTrack.el : null);
+}
+
+function dictToggleLoop() {
+  const st = dictState;
+  if (!st) return;
+  st.loop = !st.loop;
+  if (cassetteTrack) cassetteTrack.el.loop = st.loop && !csRange(st.a, st.b, dictWaveDur());
+  renderDictationWave();
+}
+
+function dictSetA() {
+  const st = dictState;
+  if (!st) return;
+  st.a = dictHeadTime();
+  if (typeof st.b === 'number' && st.b <= st.a + CS_AB_MIN) st.b = null;
+  renderDictationWave();
+}
+
+function dictSetB() {
+  const st = dictState;
+  if (!st) return;
+  st.b = dictHeadTime();
+  if (typeof st.a === 'number' && st.b <= st.a + CS_AB_MIN) st.a = null;
+  renderDictationWave();
+}
+
+function dictClearAB() {
+  const st = dictState;
+  if (!st) return;
+  st.a = null;
+  st.b = null;
+  if (cassetteTrack) cassetteTrack.el.loop = !!st.loop;
+  renderDictationWave();
+}
+
+function dictReplayAB() {
+  dictPlay();
+}
+
+function renderDictationWave() {
+  const st = dictState;
+  if (!st) return;
+  const range = csRange(st.a, st.b, dictWaveDur());
+  const marked = typeof st.a === 'number' || typeof st.b === 'number';
+  const lp = $('dict-loop');
+  if (lp) lp.classList.toggle('on', !!st.loop);
+  const sa = $('dict-seta');
+  if (sa) sa.classList.toggle('on', typeof st.a === 'number');
+  const sb = $('dict-setb');
+  if (sb) sb.classList.toggle('on', typeof st.b === 'number');
+  const abc = $('dict-abclear');
+  if (abc) abc.disabled = !marked;
+  const info = $('dict-abinfo');
+  if (info) {
+    info.classList.toggle('on', !!range);
+    info.textContent = csWaveLabel('dict-wave');
+  }
+  csPaintDictClock(cassetteTrack ? cassetteTrack.el : null);
+  csWaveBind('dict-wave');
+  csPaintWave('dict-wave');
+  csWaveLoad('dict-wave');
 }
 
 function dictCheck() {
@@ -2626,6 +3262,11 @@ function dictNext() {
   st.i = (st.i + 1) % dictItems().length;
   st.typed = '';
   st.checked = false;
+  // A marked stretch belongs to the clip it was drawn on, the same as on 듣기: 1.2-2.4s of
+  // the next sentence is a different three syllables.
+  st.a = null;
+  st.b = null;
+  st.at = 0;
   renderDictation();
   const el = $('dict-input');
   if (el) el.focus();
@@ -2667,6 +3308,7 @@ function renderDictation() {
     input.value = st.typed;
     input.disabled = !!st.checked;
   }
+  renderDictationWave();
   const check = $('dict-check');
   if (check) {
     check.textContent = st.checked ? '다음 ›' : '확인';
@@ -3672,7 +4314,19 @@ if (typeof window !== 'undefined' && window.addEventListener) {
       return;
     }
     if (top === 'listen-overlay') {
-      if (e.key === ' ') { e.preventDefault(); listenToggle(); }
+      // No text input on this screen, so single letters are free: a/b mark the loop, l
+      // repeats the track, r replays the marked stretch, c clears it.
+      const k = e.key;
+      if (k === ' ') { e.preventDefault(); listenToggle(); }
+      else if (k === 'a' || k === 'A') { e.preventDefault(); listenSetA(); }
+      else if (k === 'b' || k === 'B') { e.preventDefault(); listenSetB(); }
+      else if (k === 'l' || k === 'L') { e.preventDefault(); listenToggleLoop(); }
+      else if (k === 'r' || k === 'R') { e.preventDefault(); listenReplayAB(); }
+      else if (k === 'c' || k === 'C' || k === 'Backspace') { e.preventDefault(); listenClearAB(); }
+      else if (k === 'ArrowLeft') { e.preventDefault(); listenNudge(-2); }
+      else if (k === 'ArrowRight') { e.preventDefault(); listenNudge(2); }
+      else if (k === 'ArrowUp') { e.preventDefault(); listenStep(-1); }
+      else if (k === 'ArrowDown') { e.preventDefault(); listenStep(1); }
       return;
     }
     if (top === 'desk-menu-overlay') {
@@ -3765,9 +4419,21 @@ if (typeof window !== 'undefined') {
   window.closeListen = closeListen;
   window.listenToggle = listenToggle;
   window.listenRate = listenRate;
+  window.listenToggleLoop = listenToggleLoop;
+  window.listenSetA = listenSetA;
+  window.listenSetB = listenSetB;
+  window.listenClearAB = listenClearAB;
+  window.listenReplayAB = listenReplayAB;
+  window.listenSeek = listenSeek;
   window.openDictation = openDictation;
   window.closeDictation = closeDictation;
   window.dictPlay = dictPlay;
+  window.dictToggleLoop = dictToggleLoop;
+  window.dictSetA = dictSetA;
+  window.dictSetB = dictSetB;
+  window.dictClearAB = dictClearAB;
+  window.dictReplayAB = dictReplayAB;
+  window.dictSeek = dictSeek;
   window.dictCheck = dictCheck;
   window.dictNext = dictNext;
   window.dictAlign = dictAlign;
