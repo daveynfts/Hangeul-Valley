@@ -875,22 +875,41 @@
         "id": 33,
         "track": 18,
         "who": "의사",
-        "ko": "목이 많이 부었네요. 기침은 안 하세요?",
-        "en": "Your throat is quite swollen. No cough?",
-        "syl": 15,
-        "why": "부었네요 is 붓다 in the past — the ㅅ-irregular of this unit — and it comes out [부언네요], where the ㅅ has already gone from the spelling and the ㅆ then assimilates to the ㄴ. 목이 is [모기].",
+        "ko": "목이 많이 부었네요.",
+        "en": "Your throat is quite swollen.",
+        "syl": 8,
+        "why": "부었네요 is 붓다 in the past, the ㅅ-irregular of this unit: the ㅅ is already gone from the spelling, and the ㅆ that replaces it then assimilates to the ㄴ, so it comes out [부언네요]. 목이 is [모기].",
         "tags": [
           "ㅅ 불규칙",
           "연음"
         ],
         "audio": {
           "src": "audio/book/2b-u11-d33.mp3",
-          "voiced": 3.208,
-          "rate": 4.68
-        }
+          "voiced": 1.588,
+          "rate": 5.04
+        },
+        "splitFrom": "목이 많이 부었네요. 기침은 안 하세요?"
       },
       {
         "id": 34,
+        "track": 18,
+        "who": "의사",
+        "ko": "기침은 안 하세요?",
+        "en": "No cough?",
+        "syl": 7,
+        "why": "기침은 is [기치믄] — the ㅁ of 침 carries onto the particle, so the noun 기침 has no audible edge.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u11-d34.mp3",
+          "voiced": 1.62,
+          "rate": 4.32
+        },
+        "splitFrom": "목이 많이 부었네요. 기침은 안 하세요?"
+      },
+      {
+        "id": 35,
         "track": 18,
         "who": "켈리",
         "ko": "네, 기침은 안 하는데 콧물이 나요.",
@@ -901,13 +920,13 @@
           "연음"
         ],
         "audio": {
-          "src": "audio/book/2b-u11-d34.mp3",
+          "src": "audio/book/2b-u11-d35.mp3",
           "voiced": 2.479,
           "rate": 5.24
         }
       },
       {
-        "id": 35,
+        "id": 36,
         "track": 18,
         "who": "켈리",
         "ko": "내일 또 와야 하나요?",
@@ -918,13 +937,13 @@
           "연음"
         ],
         "audio": {
-          "src": "audio/book/2b-u11-d35.mp3",
+          "src": "audio/book/2b-u11-d36.mp3",
           "voiced": 1.765,
           "rate": 4.53
         }
       },
       {
-        "id": 36,
+        "id": 37,
         "track": 18,
         "who": "의사",
         "ko": "아니요, 약을 다 드시고 낫지 않으면 그때 다시 오세요.",
@@ -936,13 +955,13 @@
           "연음"
         ],
         "audio": {
-          "src": "audio/book/2b-u11-d36.mp3",
+          "src": "audio/book/2b-u11-d37.mp3",
           "voiced": 3.745,
           "rate": 5.61
         }
       },
       {
-        "id": 37,
+        "id": 38,
         "track": 19,
         "who": "기자",
         "ko": "마라톤에 처음 참가하신 건가요?",
@@ -953,13 +972,13 @@
           "연음"
         ],
         "audio": {
-          "src": "audio/book/2b-u11-d37.mp3",
+          "src": "audio/book/2b-u11-d38.mp3",
           "voiced": 2.8,
           "rate": 4.64
         }
       },
       {
-        "id": 38,
+        "id": 39,
         "track": 19,
         "who": "선수",
         "ko": "네, 마라톤은 이번이 처음입니다.",
@@ -970,13 +989,13 @@
           "연음"
         ],
         "audio": {
-          "src": "audio/book/2b-u11-d38.mp3",
+          "src": "audio/book/2b-u11-d39.mp3",
           "voiced": 2.365,
           "rate": 5.5
         }
       },
       {
-        "id": 39,
+        "id": 40,
         "track": 19,
         "who": "기자",
         "ko": "연세가 여든 여덟이신데 정말 대단하십니다.",
@@ -988,13 +1007,13 @@
         ],
         "splitFrom": "연세가 여든 여덟이신데 정말 대단하십니다. 지금 기분이 어떠십니까?",
         "audio": {
-          "src": "audio/book/2b-u11-d39.mp3",
+          "src": "audio/book/2b-u11-d40.mp3",
           "voiced": 4.103,
           "rate": 4.39
         }
       },
       {
-        "id": 40,
+        "id": 41,
         "track": 19,
         "who": "기자",
         "ko": "지금 기분이 어떠십니까?",
@@ -1006,13 +1025,13 @@
         ],
         "splitFrom": "연세가 여든 여덟이신데 정말 대단하십니다. 지금 기분이 어떠십니까?",
         "audio": {
-          "src": "audio/book/2b-u11-d40.mp3",
+          "src": "audio/book/2b-u11-d41.mp3",
           "voiced": 1.734,
           "rate": 5.77
         }
       },
       {
-        "id": 41,
+        "id": 42,
         "track": 19,
         "who": "선수",
         "ko": "더 달릴 수 있을 것 같은데요.",
@@ -1024,13 +1043,13 @@
         ],
         "splitFrom": "정말 좋습니다. 더 달릴 수 있을 것 같은데요.",
         "audio": {
-          "src": "audio/book/2b-u11-d41.mp3",
+          "src": "audio/book/2b-u11-d42.mp3",
           "voiced": 2.132,
           "rate": 5.16
         }
       },
       {
-        "id": 42,
+        "id": 43,
         "track": 19,
         "who": "기자",
         "ko": "평소에 운동을 많이 하십니까?",
@@ -1042,13 +1061,13 @@
           "어휘"
         ],
         "audio": {
-          "src": "audio/book/2b-u11-d42.mp3",
+          "src": "audio/book/2b-u11-d43.mp3",
           "voiced": 2.072,
           "rate": 5.79
         }
       },
       {
-        "id": 43,
+        "id": 44,
         "track": 19,
         "who": "선수",
         "ko": "저는 아침마다 두 시간씩 운동을 합니다.",
@@ -1061,13 +1080,13 @@
         ],
         "splitFrom": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다.",
         "audio": {
-          "src": "audio/book/2b-u11-d43.mp3",
+          "src": "audio/book/2b-u11-d44.mp3",
           "voiced": 3.448,
           "rate": 4.64
         }
       },
       {
-        "id": 44,
+        "id": 45,
         "track": 19,
         "who": "기자",
         "ko": "식사는 어떻게 하십니까?",
@@ -1079,13 +1098,13 @@
         ],
         "splitFrom": "식사는 어떻게 하십니까? 건강을 위해서 특별히 드시는 것이 있습니까?",
         "audio": {
-          "src": "audio/book/2b-u11-d44.mp3",
+          "src": "audio/book/2b-u11-d45.mp3",
           "voiced": 1.853,
           "rate": 5.4
         }
       },
       {
-        "id": 45,
+        "id": 46,
         "track": 19,
         "who": "기자",
         "ko": "건강을 위해서 특별히 드시는 것이 있습니까?",
@@ -1098,13 +1117,13 @@
         ],
         "splitFrom": "식사는 어떻게 하십니까? 건강을 위해서 특별히 드시는 것이 있습니까?",
         "audio": {
-          "src": "audio/book/2b-u11-d45.mp3",
+          "src": "audio/book/2b-u11-d46.mp3",
           "voiced": 3.184,
           "rate": 5.65
         }
       },
       {
-        "id": 46,
+        "id": 47,
         "track": 19,
         "who": "기자",
         "ko": "네, 다시 한 번 축하드립니다.",
@@ -1115,7 +1134,7 @@
           "유기음화"
         ],
         "audio": {
-          "src": "audio/book/2b-u11-d46.mp3",
+          "src": "audio/book/2b-u11-d47.mp3",
           "voiced": 2.66,
           "rate": 4.14
         }

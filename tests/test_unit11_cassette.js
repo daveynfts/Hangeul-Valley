@@ -98,9 +98,19 @@ const scriptText = nfc(scripted.map((t) => t.lines.map((l) => l.ko).join(' ')).j
 const heard = [...u11].filter((w) => w.length > 1 && scriptText.indexOf(w) >= 0);
 assert(heard.length >= 18, 'the scripts speak the unit’s own vocabulary (' + heard.length + ' headwords)');
 
+// One clip is one sentence. A learner replays a dictation row several times, so a clip
+// carrying two sentences — or carrying the original silence between its own spans —
+// makes them sit through audio they are not being asked to write.
+const oneSentence = (s) => nfc(s).split(/(?<=[.?!])\s+/).filter((x) => x.trim()).length === 1;
+assert(items.every((i) => oneSentence(i.ko)), 'no clip holds more than one sentence');
+// And the clip is not padded out with the silence that sat between its own spans: a
+// clip used to be one continuous slice from first span to last, so id36 ran 5.45s
+// around 3.75s of speech. Now the voiced parts are joined by a fixed breath.
+assert(items.every((i) => i.audio.voiced > 0.5), 'every clip carries at least half a second of speech');
+
 // ── 3. The curated set ───────────────────────────────────────────────────────
 console.log('\n--- 3. The curated set ---');
-assert(items.length === 46, '46 sentences (' + items.length + ')');
+assert(items.length === 47, '47 sentences (' + items.length + ')');
 const ids = items.map((i) => i.id);
 assert(new Set(ids).size === ids.length && ids.every((v, k) => v === k + 1), 'ids are unique and sequential');
 const incomplete = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length || !i.audio).map((i) => i.id);
@@ -123,7 +133,7 @@ assert(tracks.every((t) => items.some((i) => i.track === t.n)),
 // A row shorter than the printed turn has to name the turn, or the change of shape
 // reads as the book printing short lines.
 const splits = items.filter((i) => i.splitFrom);
-assert(splits.length === 11, 'the eleven rows split from a longer turn are marked (' + splits.length + ')');
+assert(splits.length === 13, 'the thirteen rows split from a longer turn are marked (' + splits.length + ')');
 assert(splits.every((i) => nfc(i.splitFrom).replace(/\s/g, '').indexOf(nfc(i.ko).replace(/\s/g, '')) >= 0),
   'and each is genuinely part of the turn it names');
 splits.forEach((i) => {
