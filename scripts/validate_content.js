@@ -385,6 +385,20 @@ const overlayIds = [
     /'2b-unit-14': \{ extras: \[\], stations: \['desk', 'cassette'\] \}/.test(gameJs));
   check('cassette url resolves Unit 14 to its own bank',
     /isUnit14World\(\)\) return '\/worlds\/unit14-cassette\.json'/.test(gameJs));
+  // BOTH lists, for every unit, because currentWorldPack() prefers lvl.map.stations from the
+  // world JSON and falls back to WORLD_PACKS only when the JSON has none. Editing the pack
+  // alone therefore leaves the station not spawning while every grep says it is wired —
+  // which is exactly how Unit 14's cassette player shipped invisible. Unit 11's suite has
+  // asserted this for itself since it was built; nothing asserted it for the others.
+  ['2b-unit-10', '2b-unit-11', '2b-unit-13', '2b-unit-14'].forEach((u) => {
+    const world = JSON.parse(read(path.join('worlds', u + '.json')));
+    const json = ((world.level && world.level.map && world.level.map.stations) || []);
+    const m = new RegExp("'" + u + "': \\{ extras: \\[\\], stations: \\[([^\\]]*)\\]").exec(gameJs);
+    const pack = m ? m[1].replace(/['\s]/g, '').split(',').filter(Boolean) : null;
+    check(`${u} lists the same stations in its world JSON as in WORLD_PACKS`,
+      !!pack && pack.join(',') === json.join(','),
+      'pack [' + (pack || []).join(',') + '] vs json [' + json.join(',') + ']');
+  });
   check('study desk spawns on Unit 10 and Unit 14',
     gameJs.indexOf('_hasStudyDesk') >= 0 && gameJs.indexOf('_ensureStudyDesk') >= 0);
   const taste = gameJs.match(/case 'taste':[\s\S]{0,280}openTasteGame/);

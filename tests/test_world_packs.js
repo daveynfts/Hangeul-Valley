@@ -88,9 +88,17 @@ assert(u14art.some(a => a.key === 'study_desk_hd'), 'unit 14 art loads desk');
 assert(!u14art.some(a => a.key === 'unit10_kitchen_hd'), 'unit 14 does not load kitchen art');
 assert(R("artLoadForWorldPack('valley')").length === 0, 'valley boot does not pull unit station art');
 
+// These three pin the world JSON, which is what currentWorldPack() actually reads —
+// WORLD_PACKS is only the fallback for a world whose JSON declares no map. Pinning both
+// sides is the point, and it is worth saying why in the strongest terms available: Unit 14's
+// cassette player shipped invisible because the pack gained 'cassette' while the JSON below
+// still said ['desk'], and this assertion passed the whole time because it was faithfully
+// asserting the broken state. A literal list on each side is not enough on its own — see the
+// '<unit> lists the same stations in its world JSON as in WORLD_PACKS' check in
+// validate_content.js, which compares the two rather than trusting either.
 assert(JSON.stringify(unit10.level.map.stations) === JSON.stringify(['desk', 'kitchen', 'taste']),
   'unit 10 JSON map matches the runtime pack');
-assert(JSON.stringify(unit14.level.map.stations) === JSON.stringify(['desk']),
+assert(JSON.stringify(unit14.level.map.stations) === JSON.stringify(['desk', 'cassette']),
   'unit 14 JSON map matches the runtime pack');
 assert(JSON.stringify(unit11.level.map.stations) === JSON.stringify(['desk', 'cassette']),
   'unit 11 JSON map matches the runtime pack');
