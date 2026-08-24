@@ -1,0 +1,1161 @@
+{
+  "id": "unit10-textbook",
+  "source": "Seoul National University Korean 2B (교과서), Unit 10 · 뭐 먹을래?",
+  "titleKo": "교과서",
+  "titleEn": "Textbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "The chapter's own pages — one exercise at a time.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "exercises": [
+    {
+      "id": "u10sgk-speak-1",
+      "type": "build",
+      "section": "말하기 1",
+      "sectionEn": "Speaking 1",
+      "no": "연습 1",
+      "icon": "🍽️",
+      "blurbEn": "Swap the class birthday for grandfather's, and keep the recommendation working.",
+      "instructionKo": "[보기]와 같이 바꿔서 이야기해 보세요.",
+      "instructionEn": "Substitute the phrases into the conversation, as in the example.",
+      "noteEn": "The book prints a two-column substitution table under the dialogue and asks you to say it aloud, which nothing can mark. The swaps are the blanks instead, so what you decide is still the part being drilled — the reason for the meal, and the thing about the diners that decides which restaurant suits.",
+      "pattern": "스티븐과 정우 · 식당 추천하기",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "우리 반 친구 생일 / 매운 음식을 잘 못 먹다",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "다음 주 토요일이 {} 친구들하고 같이 저녁 먹으려고."
+            },
+            {
+              "who": "스티븐",
+              "ko": "다 잘 먹는데 친구들 중에 {} 사람이 있어."
+            }
+          ],
+          "answer": "birthday",
+          "choices": [
+            {
+              "id": "birthday",
+              "ko": "우리 반 친구 생일이라서"
+            },
+            {
+              "id": "birthday_bad",
+              "ko": "우리 반 친구 생일라서"
+            },
+            {
+              "id": "birthday_ko",
+              "ko": "우리 반 친구 생일이고"
+            }
+          ],
+          "answer2": "spicy",
+          "choices2": [
+            {
+              "id": "spicy",
+              "ko": "매운 음식을 잘 못 먹는"
+            },
+            {
+              "id": "spicy_bad",
+              "ko": "매운 음식을 잘 못 먹은"
+            },
+            {
+              "id": "spicy_pos",
+              "ko": "매운 음식을 잘 먹는"
+            }
+          ],
+          "en": "Next Saturday is a classmate's birthday, so I want to eat out with them. — They all eat well, but one of them cannot manage spicy food.",
+          "why": "생일이라서 needs the -이- that joins 이다 to -아서: a noun cannot take -아서 on its own, and 생일라서 is what dropping it looks like. The second blank has to stay negative — the whole point of the conversation is that the restaurant must suit someone who cannot eat spice.",
+          "grammar": "N(이)라서, the 이다 form of -아/어서. Consonant-final noun takes 이라서, vowel-final takes 라서: 생일이라서, 친구라서.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk04.mp3",
+            "labelEn": "말하기 1 · track 04"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "할아버지 생신 / 생선을 안 좋아하다",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "다음 주 토요일이 {} 가족들하고 같이 저녁 먹으려고."
+            },
+            {
+              "who": "스티븐",
+              "ko": "다 잘 드시는데 가족들 중에 {} 사람이 있어."
+            }
+          ],
+          "answer": "birthday_hon",
+          "choices": [
+            {
+              "id": "birthday_hon",
+              "ko": "할아버지 생신이라서"
+            },
+            {
+              "id": "birthday_plain",
+              "ko": "할아버지 생일이라서"
+            },
+            {
+              "id": "birthday_wrong",
+              "ko": "할아버지 생신라서"
+            }
+          ],
+          "answer2": "fish",
+          "choices2": [
+            {
+              "id": "fish",
+              "ko": "생선을 안 좋아하는"
+            },
+            {
+              "id": "fish_past",
+              "ko": "생선을 안 좋아한"
+            },
+            {
+              "id": "fish_pos",
+              "ko": "생선을 좋아하는"
+            }
+          ],
+          "en": "Next Saturday is grandfather's birthday, so I want to eat out with the family. — They all eat well, but one of them does not like fish.",
+          "why": "생신 is the honorific of 생일, and it is the whole reason the book gives this second column: the same sentence, one word different, because the person having the birthday is older. 드시는데 in the printed line has already switched to the honorific for the same reason.",
+          "grammar": "생신 for 생일, 드시다 for 먹다 — the noun and the verb both go honorific together when the subject deserves it."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "연습 2 · 반말로 추천하기",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "그럼 떡갈비도 먹어 봤어?"
+            },
+            {
+              "who": "B",
+              "ko": "{}"
+            }
+          ],
+          "answer": "not_yet",
+          "choices": [
+            {
+              "id": "not_yet",
+              "ko": "아니, 아직 안 먹어 봤어."
+            },
+            {
+              "id": "polite_slip",
+              "ko": "아니요, 아직 안 먹어 봤어요."
+            },
+            {
+              "id": "tense_slip",
+              "ko": "아니, 아직 안 먹어 볼 거야."
+            }
+          ],
+          "en": "Have you tried tteokgalbi then? — No, not yet.",
+          "why": "The book leaves 연습 2 open — recommend something of your own — so the key's model answer stands here against two that answer the question and slip. 아니요 … 봤어요 is the polite style the whole page has just left behind; 먹어 볼 거야 answers a question about the future that was not asked.",
+          "grammar": "아니 is the 반말 of 아니요, and -아/어 봤어 is the 반말 past of -아/어 보다. The register has to hold across both halves of the reply.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk03.mp3",
+            "labelEn": "반말 · track 03"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u10sgk-speak-2",
+      "type": "build",
+      "section": "말하기 2",
+      "sectionEn": "Speaking 2",
+      "no": "연습 1",
+      "icon": "🍲",
+      "blurbEn": "Recommend a dish, get turned down, recommend another.",
+      "instructionKo": "[보기]와 같이 바꿔서 이야기해 보세요.",
+      "instructionEn": "Substitute the phrases into the conversation, as in the example.",
+      "noteEn": "The same shape as 말하기 1: a substitution table the book asks you to speak. The two columns are the two blanks, and they are the pair that has to agree — the dish the restaurant is known for, and the reason the other person turns it down.",
+      "pattern": "메뉴 추천하고 주문하기",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "삼계탕이 맛있다 / 삼계탕은 별로 안 좋아하다",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "이 식당은 {} 한번 먹어 볼래?"
+            },
+            {
+              "who": "스티븐",
+              "ko": "음, 난 닭고기는 좋아하는데 {}."
+            }
+          ],
+          "answer": "samgye",
+          "choices": [
+            {
+              "id": "samgye",
+              "ko": "삼계탕이 맛있는데"
+            },
+            {
+              "id": "samgye_a",
+              "ko": "삼계탕이 맛있은데"
+            },
+            {
+              "id": "samgye_no",
+              "ko": "삼계탕이 맛있어서"
+            }
+          ],
+          "answer2": "not_keen",
+          "choices2": [
+            {
+              "id": "not_keen",
+              "ko": "삼계탕은 별로 안 좋아해"
+            },
+            {
+              "id": "not_keen_pol",
+              "ko": "삼계탕은 별로 안 좋아해요"
+            },
+            {
+              "id": "not_keen_neg",
+              "ko": "삼계탕은 별로 좋아해"
+            }
+          ],
+          "en": "The samgyetang here is good — will you try it? — I like chicken, but I am not that keen on samgyetang.",
+          "why": "맛있다 is a 있다 adjective, and 있다 takes -는데 rather than -(으)ㄴ데 however adjectival it feels: 맛있는데, never 맛있은데. The second blank has to stay negative, because 별로 only ever goes with a negative — 별로 좋아해 is not a sentence.",
+          "grammar": "A-(으)ㄴ데 but 있다/없다-는데. 좋은데, 바쁜데, but 맛있는데, 재미있는데.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk07.mp3",
+            "labelEn": "말하기 2 · track 07"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "생선회가 유명하다 / 생선회는 안 먹다",
+          "lines": [
+            {
+              "who": "정우",
+              "ko": "이 식당은 {} 한번 먹어 볼래?"
+            },
+            {
+              "who": "스티븐",
+              "ko": "음, 난 생선 요리는 잘 먹는데 {}."
+            }
+          ],
+          "answer": "hoe",
+          "choices": [
+            {
+              "id": "hoe",
+              "ko": "생선회가 유명한데"
+            },
+            {
+              "id": "hoe_bad",
+              "ko": "생선회가 유명하는데"
+            },
+            {
+              "id": "hoe_no",
+              "ko": "생선회가 유명해서"
+            }
+          ],
+          "answer2": "no_hoe",
+          "choices2": [
+            {
+              "id": "no_hoe",
+              "ko": "생선회는 안 먹어"
+            },
+            {
+              "id": "no_hoe_pol",
+              "ko": "생선회는 안 먹어요"
+            },
+            {
+              "id": "no_hoe_pos",
+              "ko": "생선회는 먹어"
+            }
+          ],
+          "en": "The raw fish here is famous — will you try it? — I eat cooked fish happily, but I do not eat it raw.",
+          "why": "유명하다 is a 하다 adjective, so it takes -(으)ㄴ데: 유명한데. 유명하는데 is the verb ending on an adjective, which is the mistake the row is built around — and the contrast with 맛있는데 one row above is exactly why both are here.",
+          "grammar": "하다 adjectives take -(으)ㄴ데 (유명한데, 친절한데); 하다 verbs take -는데 (주문하는데, 추천하는데). The same 하다, two endings."
+        }
+      ]
+    },
+    {
+      "id": "u10sgk-read-1",
+      "type": "build",
+      "section": "읽고 쓰기",
+      "sectionEn": "Reading",
+      "no": "읽기",
+      "icon": "📖",
+      "blurbEn": "A blog review, and the two questions the book asks about it.",
+      "instructionKo": "다음을 읽고 질문에 답하세요.",
+      "instructionEn": "Read the passage and answer the following questions.",
+      "noteEn": "The book asks which description of the restaurant is correct and which statement does not match the passage. Both are here with the book's own three options, and rows 3-6 are the sentences the answers turn on — so the page is answerable from the review rather than from an impression of it.",
+      "pattern": "〈큰사랑 한정식집〉을 추천합니다",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "이 식당에 대한 설명으로 맞는 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "이 식당에 대한 설명으로 맞는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "mood",
+          "choices": [
+            {
+              "id": "mood",
+              "ko": "분위기와 서비스가 좋습니다."
+            },
+            {
+              "id": "transport",
+              "ko": "교통이 편리합니다."
+            },
+            {
+              "id": "cheap",
+              "ko": "음식값이 비싸지 않습니다."
+            }
+          ],
+          "en": "Which is true of this restaurant? — The atmosphere and the service are good.",
+          "why": "The review says 지하철역에서 좀 멀지만, so the transport is not convenient — and the star rating gives it 2점, the lowest on the card. It also says 값은 좀 비싼데, so it is not cheap either. What it does say twice is 전통적인 분위기도 느낄 수 있고 직원들도 친절합니다, both scored 5점.",
+          "grammar": "N에 대한 N, about something. 대하다 → 대한, the adjective form: 식당에 대한 설명."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "이 글의 내용과 같지 않은 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "이 글의 내용과 같지 않은 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "often",
+          "choices": [
+            {
+              "id": "often",
+              "ko": "이 사람은 한정식을 좋아해서 자주 먹습니다."
+            },
+            {
+              "id": "recommend",
+              "ko": "이 글은 좋은 식당을 추천하는 글입니다."
+            },
+            {
+              "id": "galbi",
+              "ko": "이 사람은 떡갈비가 가장 마음에 들었습니다."
+            }
+          ],
+          "en": "Which does not match the passage? — That the writer eats hanjeongsik often because they like it.",
+          "why": "저는 이 식당에서 한정식을 처음 먹어 봤는데 — the first time, which is the opposite of often. The other two are said outright: the title is 추천합니다, and 그중에서 떡갈비가 제 입에 제일 잘 맞았습니다.",
+          "grammar": "-지 않은 것, the thing that is not. 같다 → 같지 않은: the long negative, attached to the plain stem."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "큰사랑 한정식집은 인사동에 {} 지하철역에서 좀 멀어요."
+            }
+          ],
+          "answer": "innunde",
+          "choices": [
+            {
+              "id": "innunde",
+              "ko": "있는데"
+            },
+            {
+              "id": "isseunde",
+              "ko": "있은데"
+            },
+            {
+              "id": "isseoseo",
+              "ko": "있어서"
+            }
+          ],
+          "en": "Keunsarang Hanjeongsikjip is in Insadong, but it is a little far from the subway station.",
+          "why": "있다 takes -는데, the same rule as 맛있는데 on the 말하기 2 page. And the sentence is a contrast rather than a reason, so 있어서 would turn 'it is in Insadong but far from the station' into 'it is far because it is in Insadong'.",
+          "grammar": "있다 → 있는데. The -는데 of contrast, which is what makes the second half a complaint rather than a consequence."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "한정식을 시키면 큰 상에 고기, 생선, 야채 등 여러 가지 음식이 아주 많이 {}."
+            }
+          ],
+          "answer": "nawayo",
+          "choices": [
+            {
+              "id": "nawayo",
+              "ko": "나와요"
+            },
+            {
+              "id": "naeyo",
+              "ko": "내요"
+            },
+            {
+              "id": "meogeoyo",
+              "ko": "먹어요"
+            }
+          ],
+          "en": "Order the hanjeongsik and a great many dishes come out on one big table — meat, fish, vegetables and so on.",
+          "why": "나오다 is what food does in Korean: it comes out. 내다 is to put something out, which needs a person doing it, and 먹어요 would make the dishes the eater. The subject here is 음식, so only the intransitive works.",
+          "grammar": "음식이 나오다, for food to be served. Compare 음식을 내다, for someone to serve it."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "값은 좀 {} 음식이 모두 맛있어서 돈이 아깝지 않았습니다."
+            }
+          ],
+          "answer": "bissande",
+          "choices": [
+            {
+              "id": "bissande",
+              "ko": "비싼데"
+            },
+            {
+              "id": "bissaneunde",
+              "ko": "비싸는데"
+            },
+            {
+              "id": "bissaseo",
+              "ko": "비싸서"
+            }
+          ],
+          "en": "It is a little pricey, but everything was good, so the money did not feel wasted.",
+          "why": "비싸다 is an adjective, so -(으)ㄴ데: 비싼데. 비싸는데 is the verb ending again — the same slip as 유명하는데 — and this row is the third place the chapter sets that trap, which is how you know it is the one worth learning.",
+          "grammar": "A-(으)ㄴ데 with a vowel stem takes plain -ㄴ데: 비싼데, 바쁜데, 큰데.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk06.mp3",
+            "labelEn": "-(으)ㄴ데 / -는데 · track 06"
+          }
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "그중에서 떡갈비가 제 입에 제일 잘 {}."
+            }
+          ],
+          "answer": "majatseumnida",
+          "choices": [
+            {
+              "id": "majatseumnida",
+              "ko": "맞았습니다"
+            },
+            {
+              "id": "matatseumnida",
+              "ko": "맡았습니다"
+            },
+            {
+              "id": "meogeotseumnida",
+              "ko": "먹었습니다"
+            }
+          ],
+          "en": "Of them all, the tteokgalbi suited my taste best.",
+          "why": "입에 맞다 is the unit headword, and 맞았습니다 is said [마잗씀니다] — the ㅈ closes to [ㄷ] before the ㅆ. 맡다 sounds near enough identical in that form and means to take charge of something, which is why the spelling has to come from knowing the phrase.",
+          "grammar": "입에 맞다, to be to one's taste. 그중에서 is the 중에서 of the chapter's first pattern, pointing back at a list already given.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk02.mp3",
+            "labelEn": "N 중에(서) · track 02"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u10sgk-task-1",
+      "type": "build",
+      "section": "과제",
+      "sectionEn": "Task",
+      "no": "과제",
+      "icon": "🎪",
+      "blurbEn": "Run a stall at the food festival, or eat at one.",
+      "instructionKo": "식당 주인과 손님이 되어 역할극을 해 보세요.",
+      "instructionEn": "Take the role of a restaurant owner or a customer and do a role-play.",
+      "noteEn": "In the book this is a role-play around the classroom, so the answers here are the model conversation it prints — the customer deciding where to go, and then asking the owner about a dish they have never met. Both halves of the chapter's grammar turn up in it.",
+      "pattern": "세계 전통 음식 축제 · 역할극",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 점심은 전통 음식 축제에 가서 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "좋아. 어떤 나라 음식들을 파는데?"
+            }
+          ],
+          "answer": "meogeulkka",
+          "choices": [
+            {
+              "id": "meogeulkka",
+              "ko": "먹을까"
+            },
+            {
+              "id": "meogeulrae",
+              "ko": "먹을래"
+            },
+            {
+              "id": "meogeulkkayo",
+              "ko": "먹을까요"
+            }
+          ],
+          "en": "Shall we go and eat at the traditional food festival for lunch? — Sure. What countries' food are they selling?",
+          "why": "-(으)ㄹ까 proposes something the two of them do together, which is what 오늘 점심은 … 가서 sets up. -(으)ㄹ래 asks what the other person wants, and the reply 좋아 is an agreement to a plan rather than an answer about a preference.",
+          "grammar": "V-(으)ㄹ까 for a suggestion, V-(으)ㄹ래 for asking a preference. Both are 반말; 먹을까요 would be the polite one, which does not match 좋아."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "중국, 터키, 멕시코, 베트남 등 여러 나라 음식들이 {} 어느 식당으로 갈래?"
+            },
+            {
+              "who": "B",
+              "ko": "터키 식당에 한번 가 보자."
+            }
+          ],
+          "answer": "innunde2",
+          "choices": [
+            {
+              "id": "innunde2",
+              "ko": "있는데"
+            },
+            {
+              "id": "isseoseo2",
+              "ko": "있어서"
+            },
+            {
+              "id": "itgo",
+              "ko": "있고"
+            }
+          ],
+          "en": "There is food from China, Turkey, Mexico, Vietnam and so on — which stall shall we go to?",
+          "why": "-는데 sets the scene for a question, which is the use the chapter's second grammar box leads with. 있어서 makes the choice a consequence of there being many stalls, and 있고 just lists, leaving the question hanging with nothing to hang on.",
+          "grammar": "A/V-는데 as background before a question: 여러 나라 음식들이 있는데 어느 식당으로 갈래?",
+          "audio": {
+            "src": "audio/book/2b-u10-trk06.mp3",
+            "labelEn": "-(으)ㄴ데 / -는데 · track 06"
+          }
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "손님",
+              "ko": "저, 터키 식당에 처음 왔는데 {}?"
+            },
+            {
+              "who": "주인",
+              "ko": "터키는 케밥이 유명한데 드셔 보셨어요?"
+            }
+          ],
+          "answer": "masisseoyo",
+          "choices": [
+            {
+              "id": "masisseoyo",
+              "ko": "뭐가 맛있어요"
+            },
+            {
+              "id": "masisseo",
+              "ko": "뭐가 맛있어"
+            },
+            {
+              "id": "masitda",
+              "ko": "뭐가 맛있다"
+            }
+          ],
+          "en": "Excuse me, it is my first time at a Turkish place — what is good here?",
+          "why": "The customer does not know the owner, so the register goes back up to 해요: 맛있어요. The whole 말하기 page before this was 반말 between friends, and the switch is the thing to notice — the owner answers in 해요 too, with 드셔 보셨어요.",
+          "grammar": "저, as a way of opening with a stranger, and the 해요 that has to follow it. 반말 to a friend, 해요 to a shopkeeper."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "who": "주인",
+              "ko": "고기하고 야채로 {} 아주 맛있어요."
+            },
+            {
+              "who": "손님",
+              "ko": "그럼 케밥 두 개 주세요."
+            }
+          ],
+          "answer": "mandeuneunde",
+          "choices": [
+            {
+              "id": "mandeuneunde",
+              "ko": "만드는데"
+            },
+            {
+              "id": "mandeunde",
+              "ko": "만든데"
+            },
+            {
+              "id": "mandeureoseo",
+              "ko": "만들어서"
+            }
+          ],
+          "en": "It is made with meat and vegetables, and it is very good.",
+          "why": "만들다 is a verb, so -는데 — and its ㄹ drops before the ㄴ: 만들 + 는데 → 만드는데. 만든데 is what you get by treating it as an adjective, and the dropped ㄹ makes that look almost right.",
+          "grammar": "ㄹ-stem verbs lose the ㄹ before ㄴ, ㅂ and ㅅ endings: 만드는데, 만듭니다, 만드세요 — but 만들어서, 만들고."
+        }
+      ]
+    },
+    {
+      "id": "u10sgk-culture-1",
+      "type": "build",
+      "section": "문화 산책",
+      "sectionEn": "Culture note",
+      "no": "알아보기",
+      "icon": "🗣️",
+      "blurbEn": "Who you drop the polite endings with, and when.",
+      "instructionKo": "다음을 읽고 알맞은 것을 골라 보세요.",
+      "instructionEn": "Read the culture note and choose the word that fits.",
+      "noteEn": "The 문화 산책 asks whether your own language has formal and informal levels — a discussion rather than an exercise. The Korean side of it is a printed paragraph, so that is what is drilled: three blanks, each answerable from the note itself.",
+      "pattern": "반말 · 누구와 말을 놓는가",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "어제 친구와 같이 학교에 가다가 아는 {}를 만났습니다."
+            }
+          ],
+          "answer": "seonbae",
+          "choices": [
+            {
+              "id": "seonbae",
+              "ko": "선배"
+            },
+            {
+              "id": "hubae",
+              "ko": "후배"
+            },
+            {
+              "id": "donggap",
+              "ko": "동갑"
+            }
+          ],
+          "en": "Yesterday, walking to school with a friend, we ran into a senior we know.",
+          "why": "The surprise in the note only works with a 선배: the writer expected the friend to use 높임말 upward and heard 반말 instead. With a 후배 or a 동갑 there would be nothing to be surprised about.",
+          "grammar": "선배 is anyone ahead of you at school or work, 후배 anyone behind, 동갑 someone born the same year. The three words are the whole social map this note is drawn on.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk03.mp3",
+            "labelEn": "반말 · track 03"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "친구가 \"난 저 선배랑 친해서 반말로 이야기해.\"라고 {}."
+            }
+          ],
+          "answer": "malhaetseumnida",
+          "choices": [
+            {
+              "id": "malhaetseumnida",
+              "ko": "말했습니다"
+            },
+            {
+              "id": "mureotseumnida",
+              "ko": "물었습니다"
+            },
+            {
+              "id": "deureotseumnida",
+              "ko": "들었습니다"
+            }
+          ],
+          "en": "My friend said, \"I am close to that senior, so I speak banmal with him.\"",
+          "why": "-라고 하다 reports what someone said, so the verb after it has to be a verb of saying. 물었습니다 would make the quoted sentence a question, which it is not, and 들었습니다 would put the friend on the listening end of their own words.",
+          "grammar": "\"…\"라고 말하다 for reporting speech directly. The quotation keeps whatever register the speaker used — which is why 반말 sits inside a 합니다 sentence here."
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "",
+          "lines": [
+            {
+              "ko": "저는 지금까지 나이가 많은 사람에게는 항상 {}을 썼습니다."
+            }
+          ],
+          "answer": "nopimmal",
+          "choices": [
+            {
+              "id": "nopimmal",
+              "ko": "높임말"
+            },
+            {
+              "id": "banmal",
+              "ko": "반말"
+            },
+            {
+              "id": "jondaenmal",
+              "ko": "존대"
+            }
+          ],
+          "en": "Up to now I have always used polite speech with people older than me.",
+          "why": "높임말 is the word the note uses and the opposite of the 반말 the whole chapter is about. 반말 here would contradict the next sentence, where the writer says they would like to have a senior close enough to drop it with.",
+          "grammar": "말을 쓰다, to use a form of speech. And 말을 놓다 — the unit headword — for dropping it: literally putting the speech down."
+        }
+      ]
+    },
+    {
+      "id": "u10sgk-pron-1",
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "no": "규칙",
+      "icon": "🎵",
+      "blurbEn": "Which questions rise at the end, and which fall.",
+      "instructionKo": "잘 듣고 문장의 끝을 올리는지 내리는지 골라 보세요.",
+      "instructionEn": "Listen, and choose whether the end of each question rises or falls.",
+      "noteEn": "This is the one 발음 page in the book that a dictation cannot test — nothing about a rising or falling pitch changes a single letter you write. So it is a listening exercise instead, built on the book's own six sentences: the rule decides the answer and the recording confirms it. Row 7 keeps the page's own hedge, because it is the honest half of the rule.",
+      "pattern": "의문문의 억양",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "음식이 입에 맞아?",
+          "lines": [
+            {
+              "ko": "음식이 입에 맞아? — 문장의 끝을 {}."
+            }
+          ],
+          "answer": "rise1",
+          "choices": [
+            {
+              "id": "rise1",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall1",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat1",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "Is the food to your taste? — The end rises.",
+          "why": "There is no question word in it, so the pitch is the only thing marking it as a question. That is the rule in its plainest form — and it is the sentence the book leads with.",
+          "grammar": "의문사가 없는 의문문 takes rising intonation.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk10.mp3",
+            "labelEn": "발음 준비 · track 10"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "뭐 먹을래?",
+          "lines": [
+            {
+              "ko": "뭐 먹을래? — 문장의 끝을 {}."
+            }
+          ],
+          "answer": "fall2",
+          "choices": [
+            {
+              "id": "rise2",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall2",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat2",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "What will you eat? — Because of 뭐, the end falls.",
+          "why": "뭐 already says it is a question, so the pitch does not have to. The chapter title itself is the example: 뭐 먹을래? falls, even though 먹을래? on its own would rise.",
+          "grammar": "의문사가 있는 의문문 — 뭐, 어디, 언제, 누구, 왜, 어떻게, 무슨 — takes falling intonation.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk10.mp3",
+            "labelEn": "발음 준비 · track 10"
+          }
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "저 식당에 가 봤어요?",
+          "lines": [
+            {
+              "ko": "저 식당에 가 봤어요? — 문장의 끝을 {}."
+            }
+          ],
+          "answer": "rise3",
+          "choices": [
+            {
+              "id": "rise3",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall3",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat3",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "Have you been to that restaurant? — The end rises.",
+          "why": "A yes-no question again: the answer is 네 or 아니요, and nothing in the words says so. Only the rise does.",
+          "grammar": "V-아/어 봤어요? asks whether something has ever been done — a yes-no question.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk11.mp3",
+            "labelEn": "발음 연습 · track 11"
+          }
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "방학에 어디 갈 거야?",
+          "lines": [
+            {
+              "ko": "방학에 어디 갈 거야? — 문장의 끝을 {}."
+            }
+          ],
+          "answer": "fall4",
+          "choices": [
+            {
+              "id": "rise4",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall4",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat4",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "Where are you going in the holidays? — Because of 어디, the end falls.",
+          "why": "어디 carries the question, so the end falls. Said with a rise it turns into a different question — whether you are going anywhere at all — which is exactly what the rule is for.",
+          "grammar": "어디 as an interrogative takes a falling end; 어디 as \"somewhere\" is what the rising version means.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk11.mp3",
+            "labelEn": "발음 연습 · track 11"
+          }
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "무슨 운동을 좋아해요?",
+          "lines": [
+            {
+              "ko": "무슨 운동을 좋아해요? — 문장의 끝을 {}."
+            }
+          ],
+          "answer": "fall5",
+          "choices": [
+            {
+              "id": "rise5",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall5",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat5",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "What sport do you like? — Because of 무슨, the end falls.",
+          "why": "무슨 is an interrogative too, even though it sits in the middle of the sentence rather than at the front. Position does not matter; presence does.",
+          "grammar": "무슨 N, which N. It counts as an 의문사 wherever it appears in the sentence.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk11.mp3",
+            "labelEn": "발음 연습 · track 11"
+          }
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "우리 오늘 뭐 할까? / 영화 보러 갈까?",
+          "lines": [
+            {
+              "ko": "영화 보러 갈까? — 문장의 끝을 {}."
+            }
+          ],
+          "answer": "rise6",
+          "choices": [
+            {
+              "id": "rise6",
+              "ko": "올려서 말합니다"
+            },
+            {
+              "id": "fall6",
+              "ko": "내려서 말합니다"
+            },
+            {
+              "id": "flat6",
+              "ko": "그대로 말합니다"
+            }
+          ],
+          "en": "Shall we go and see a film? — The end rises.",
+          "why": "The book prints this one as a pair, and the pair is the whole lesson: 우리 오늘 뭐 할까? falls because of 뭐, and the reply 영화 보러 갈까? rises because there is no question word left in it. Same ending, same speaker, two seconds apart, opposite pitch.",
+          "grammar": "The ending does not decide the intonation — whether an 의문사 is present does.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk11.mp3",
+            "labelEn": "발음 연습 · track 11"
+          }
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "요즘의 억양",
+          "lines": [
+            {
+              "ko": "요즘은 의문사가 있는 의문문도 문장의 끝을 {} 사람이 많습니다."
+            }
+          ],
+          "answer": "slight",
+          "choices": [
+            {
+              "id": "slight",
+              "ko": "약간 올려서 말하는"
+            },
+            {
+              "id": "strong",
+              "ko": "크게 올려서 말하는"
+            },
+            {
+              "id": "never",
+              "ko": "절대 올리지 않는"
+            }
+          ],
+          "en": "These days many people raise the ending slightly even on questions that have an interrogative.",
+          "why": "The book states its own rule and then says how often it is broken, and that is worth keeping rather than tidying away: 약간, slightly, is the word it uses. A learner told only the rule will hear real Korean and think they misheard.",
+          "grammar": "Falling is the standard for 의문사 questions; a slight rise is common and not wrong."
+        }
+      ]
+    },
+    {
+      "id": "u10sgk-check-2",
+      "type": "build",
+      "section": "자기 평가",
+      "sectionEn": "Self-check",
+      "no": "2 · 3",
+      "icon": "✅",
+      "blurbEn": "The chapter's four patterns, then the same sentence dropped into banmal.",
+      "instructionKo": "알맞은 것을 골라 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue using the word in parentheses and the appropriate grammar form in the box.",
+      "noteEn": "The chapter's own self-check, and the only page that puts all four patterns in one place. Rows 4 and 5 are question 3, which asks for the whole exchange in banmal — the book prints its answer key at the foot of the page, and these are it.",
+      "pattern": "네 가지 문형과 반말 바꾸기",
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "마시다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "뭐 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "저는 커피 주세요."
+            }
+          ],
+          "answer": "masilrae",
+          "choices": [
+            {
+              "id": "masilrae",
+              "ko": "마실래요"
+            },
+            {
+              "id": "masilkka",
+              "ko": "마실까요"
+            },
+            {
+              "id": "masineunde",
+              "ko": "마시는데요"
+            }
+          ],
+          "en": "What would you like to drink? — Coffee for me, please.",
+          "why": "B answers with what B wants, so A must have asked about B's preference — that is -(으)ㄹ래요. 마실까요 would propose drinking something together, and the reply 저는 커피 주세요 is not an answer to that.",
+          "grammar": "마시다 → 마실래요. A vowel stem takes -ㄹ래요; a consonant stem takes -을래요: 먹을래요.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk05.mp3",
+            "labelEn": "V-(으)ㄹ래요 · track 05"
+          }
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "한국 음식",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금까지 먹어 본 {} 뭐가 제일 맛있었어요?"
+            },
+            {
+              "who": "B",
+              "ko": "삼계탕이 제일 맛있었어요."
+            }
+          ],
+          "answer": "jungeseo",
+          "choices": [
+            {
+              "id": "jungeseo",
+              "ko": "한국 음식 중에서"
+            },
+            {
+              "id": "jungeuro",
+              "ko": "한국 음식으로"
+            },
+            {
+              "id": "jungbuteo",
+              "ko": "한국 음식부터"
+            }
+          ],
+          "en": "Of the Korean dishes you have tried so far, which was the best? — Samgyetang.",
+          "why": "제일 needs a group to be best out of, and 중에서 is what marks it. 으로 would make the food the means, 부터 the starting point — neither gives 제일 anything to compare within.",
+          "grammar": "N 중에(서) … 제일/가장. The 서 is optional: 중에 and 중에서 are both correct.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk02.mp3",
+            "labelEn": "N 중에(서) · track 02"
+          }
+        },
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "덥다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어제는 {} 오늘은 시원하네요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 시원해서 좋네요."
+            }
+          ],
+          "answer": "deowotneunde",
+          "choices": [
+            {
+              "id": "deowotneunde",
+              "ko": "더웠는데"
+            },
+            {
+              "id": "deounde",
+              "ko": "더운데"
+            },
+            {
+              "id": "deopneunde",
+              "ko": "덥는데"
+            }
+          ],
+          "en": "Yesterday was hot, but today is cool.",
+          "why": "어제 puts it in the past, and a past form always takes -는데 whatever the word class: 더웠는데. 더운데 is the present adjective, which loses the yesterday-and-today contrast the sentence is made of, and 덥는데 forgets that 덥다 is ㅂ-irregular.",
+          "grammar": "-았/었- + -는데 for any past. 더웠는데, 갔는데, 좋았는데 — the -(으)ㄴ데/-는데 split only applies in the present.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk06.mp3",
+            "labelEn": "-(으)ㄴ데 / -는데 · track 06"
+          }
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "3번 · 반말로 바꾸기 (A)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "한국 음식 중에서 뭐가 제일 입에 {}?"
+            }
+          ],
+          "answer": "maja",
+          "choices": [
+            {
+              "id": "maja",
+              "ko": "맞아"
+            },
+            {
+              "id": "majayo",
+              "ko": "맞아요"
+            },
+            {
+              "id": "matni",
+              "ko": "맞니"
+            }
+          ],
+          "en": "Which Korean food suits you best?",
+          "why": "The 해요 of 맞아요 drops its 요 and nothing else changes — that is the whole of 반말 for this form. 맞니 is a different informal ending altogether, used downward rather than between equals, and the book's key gives 맞아.",
+          "grammar": "해요 → 해체: drop the 요. 맞아요 → 맞아, 좋아요 → 좋아, 먹어요 → 먹어.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk03.mp3",
+            "labelEn": "반말 · track 03"
+          }
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "3번 · 반말로 바꾸기 (B)",
+          "lines": [
+            {
+              "who": "B",
+              "ko": "{} 떡볶이를 제일 좋아해."
+            }
+          ],
+          "answer": "nan",
+          "choices": [
+            {
+              "id": "nan",
+              "ko": "나는"
+            },
+            {
+              "id": "jeoneun",
+              "ko": "저는"
+            },
+            {
+              "id": "naega",
+              "ko": "내가"
+            }
+          ],
+          "en": "I like tteokbokki best.",
+          "why": "저 is the humble first person and belongs with 해요; in 반말 it becomes 나. Dropping the 요 from the verb while leaving 저 in front of it is the half-converted sentence this row exists to catch. 내가 is the subject form, which would answer 누가 rather than state a preference.",
+          "grammar": "저 → 나, 제가 → 내가. The pronoun changes with the register, not only the ending."
+        }
+      ]
+    }
+  ]
+}

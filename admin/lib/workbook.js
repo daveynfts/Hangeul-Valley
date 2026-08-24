@@ -46,7 +46,8 @@ function writeJson(rel, data, rootDir) {
 const WORKBOOKS = {
   unit14: path.join('worlds', 'unit14-workbook.json'),
   'unit14-textbook': path.join('worlds', 'unit14-textbook.json'),
-  unit10: path.join('worlds', 'unit10-workbook.json')
+  unit10: path.join('worlds', 'unit10-workbook.json'),
+  'unit10-textbook': path.join('worlds', 'unit10-textbook.json')
 };
 
 function workbookRel(unit) {

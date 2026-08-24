@@ -32,7 +32,7 @@ function isTextbookFarmWorld() {
 const VALLEY_EXTRA_IDS = ['shop', 'board', 'arcade', 'wizard', 'cat', 'beehive', 'portal', 'fishing'];
 const WORLD_PACKS = {
   valley: { extras: ['shop', 'board', 'arcade', 'cat', 'beehive', 'portal', 'fishing'], stations: [] },
-  '2b-unit-10': { extras: [], stations: ['desk', 'kitchen', 'taste'] },
+  '2b-unit-10': { extras: [], stations: ['desk', 'kitchen', 'taste', 'cassette'] },
   '2b-unit-11': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-13': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-14': { extras: [], stations: ['desk', 'cassette'] }

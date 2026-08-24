@@ -48,8 +48,8 @@ assert(R('WORLD_PACKS.valley.extras').indexOf('shop') >= 0, 'valley pack include
 assert(R('WORLD_PACKS.valley.extras').indexOf('fishing') >= 0, 'valley pack includes fishing pond');
 assert(R('WORLD_PACKS.valley.extras').indexOf('wizard') < 0, 'valley pack has no duel wizard');
 assert(R('WORLD_PACKS.valley.stations').length === 0, 'valley pack has no textbook stations');
-assert(R("WORLD_PACKS['2b-unit-10'].stations").join(',') === 'desk,kitchen,taste',
-  'unit 10 pack is desk+kitchen+taste');
+assert(R("WORLD_PACKS['2b-unit-10'].stations").join(',') === 'desk,kitchen,taste,cassette',
+  'unit 10 pack is desk+kitchen+taste+cassette');
 assert(R("WORLD_PACKS['2b-unit-10'].extras").length === 0, 'unit 10 pack has no valley extras');
 // Desk only until Unit 14's own tracks were cut; the deck joined it when tracks 42-51
 // landed, so it is now the same pack shape as Units 11 and 13.
@@ -66,6 +66,7 @@ assert(R('currentWorldPack().id') === 'valley', 'plain levels resolve to valley'
 ctx.currentLevelIndex = 1;
 assert(R('currentWorldPack().id') === '2b-unit-10', 'unit 10 lesson resolves to unit 10 pack');
 assert(R("worldPackHas(null, 'station', 'kitchen')") === true, 'unit 10 has kitchen');
+assert(R("worldPackHas(null, 'station', 'cassette')") === true, 'unit 10 has the cassette player');
 assert(R("worldPackHas(null, 'extra', 'shop')") === false, 'unit 10 has no shop extra');
 ctx.currentLevelIndex = 2;
 assert(R('currentWorldPack().id') === '2b-unit-14', 'unit 14 lesson resolves to unit 14 pack');
@@ -96,7 +97,7 @@ assert(R("artLoadForWorldPack('valley')").length === 0, 'valley boot does not pu
 // asserting the broken state. A literal list on each side is not enough on its own — see the
 // '<unit> lists the same stations in its world JSON as in WORLD_PACKS' check in
 // validate_content.js, which compares the two rather than trusting either.
-assert(JSON.stringify(unit10.level.map.stations) === JSON.stringify(['desk', 'kitchen', 'taste']),
+assert(JSON.stringify(unit10.level.map.stations) === JSON.stringify(['desk', 'kitchen', 'taste', 'cassette']),
   'unit 10 JSON map matches the runtime pack');
 assert(JSON.stringify(unit14.level.map.stations) === JSON.stringify(['desk', 'cassette']),
   'unit 14 JSON map matches the runtime pack');

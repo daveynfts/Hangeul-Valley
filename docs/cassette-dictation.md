@@ -309,6 +309,44 @@ is what keeps a later unit's clips consistent with the earlier ones.
 
 ---
 
+## Unit 10, and a unit whose 발음 page leaves no trace
+
+Tracks 02-11: eight scripted, two listen-only (08 and 09, the 듣기 pages, waiting on the
+듣기 지문 like every other unit's), thirty-two printed lines, twenty-seven dictation rows.
+The cut itself was uneventful — the Unit 13 silencedetect settings held again, and the
+clips read at 4.23-6.04 syl/s with nothing flagged. One thing about the *set* is new.
+
+**This chapter has no 발음 rule a dictation can test.** Unit 11 had 종성 규칙 후 연음,
+Unit 13 had 유기음화, Unit 14 had 경음화 after ㄴ/ㅁ, and in each case the set could be
+counted against the rule: so many rows turn on it, and they come from the 발음 tracks.
+Unit 10's 발음 page is 의문문의 억양 — whether a question rises or falls at the end — and
+no intonation changes a single letter you write down. There is nothing for dictation to
+catch.
+
+The honest response is to say so in the file rather than let a row count imply coverage
+that is not there. `dictation.note` states it, and the set leans on what it *can* teach:
+the chapter's four grammar patterns, and the liaison and assimilation that happen anyway.
+`tests/test_unit10_cassette.js` section 4 checks that shape directly — the note exists and
+mentions the problem, all four patterns are drilled, at least twelve rows turn on a sound
+change, and both of the chapter's 경음화 environments are named rather than tagged with a
+bare 경음화 that would let them blur together. The 발음 page itself became a *listening*
+exercise on the 교과서 desk instead, which is where it belongs; see
+`docs/workbook-exercises.md`.
+
+**Two tracks contribute a single clip each, so their pairing is unfalsifiable by pace.**
+The shift-by-one check needs two clips on a track to have anything to shift. Tracks 05 and
+10 have one apiece; the test asserts that they have exactly one and records that their
+pairing rests on the span map alone, the same way Unit 14 recorded track 50 as blind.
+Every other track fails the shifted pairing on most of its clips, so the bands have teeth.
+
+**Four syllables is where a headword can be lost.** 입에 맞아 and 맛이 어때 are both under
+the five-syllable floor, and 입에 맞다 is a unit headword. They are in
+`dictation.filter.drop` by name, because a drop list that only mentions courtesies reads
+as though nothing of value was left out. The same list records 감자탕 2인분 주세요, dropped
+under the numeral rule from Unit 14.
+
+---
+
 ## The waveform, and looping a stretch of it
 
 A listening station needs three things a play button cannot give you: repeat the track,

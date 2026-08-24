@@ -85,7 +85,10 @@ and click-to-interact (only when the farmer is in range). Movement stays on WASD
 stick — clicking empty ground does not walk.
 
 Each unit is a world pack (`WORLD_PACKS`): Valley spawns shop/minigames/pond; Unit 10
-spawns desk+kitchen+taste; Units 11, 13 and 14 spawn the desk and the cassette player.
+spawns desk+kitchen+taste+cassette; Units 11, 13 and 14 spawn the desk and the cassette
+player. `currentWorldPack()` reads the station list out of the world JSON and falls back
+to `WORLD_PACKS`, so the two have to agree — a station listed in only one of them is a
+station that does not appear.
 Switching units tears the previous pack down instead of hiding sprites.
 
 ### On-screen furniture
@@ -449,7 +452,7 @@ admin/           Express admin panel (writable locally; read-only on Vercel)
 api/             Vercel serverless functions (save, admin GET, Unit 10)
 ```
 
-The study desk offers up to three things, and Unit 14 is the first unit with all
+The study desk offers up to three things, and Units 10 and 14 carry all
 three: 퀴즈 (multiple choice), 교과서 — the 교과서's own 말하기 / 듣기 / 읽기 / 과제 /
 문화 산책 / 발음 / 자기 평가 pages — and 연습 문제, the 익힘책's 어휘, 문법과 표현
 and 문형 연습 with the book's own audio on the pattern drills. Both exercise banks
