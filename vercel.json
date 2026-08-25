@@ -9,7 +9,6 @@
   ],
   "rewrites": [
     {
-      "_comment": "api/admin-host.js was folded into the single admin function to stay under the twelve-function ceiling. The old URL is what admin/public/js/app.js asks for, so it is kept as a rewrite rather than broken.",
       "source": "/api/admin-host",
       "destination": "/api/admin/host"
     },

@@ -1190,6 +1190,37 @@ const overlayIds = [
     found.length <= LIMIT, found.join(', '));
 }());
 
+// ── vercel.json says only what Vercel understands ───────────────────────────
+// JSON has no comments, and Vercel validates this file against a closed schema: an extra key
+// on a rewrite is not ignored, it fails the build. The failure surfaces nowhere useful — CI
+// stays green, the deploy dies, and the status link points at the configuration docs rather
+// than at the offending line. That is exactly what an "_comment" key on a rewrite did.
+(function checkVercelConfig() {
+  const rel = 'vercel.json';
+  if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+  let cfg;
+  try { cfg = JSON.parse(read(rel)); } catch (e) { check(rel + ' is valid JSON', false, e.message); return; }
+  const ALLOWED = {
+    rewrites: ['source', 'destination', 'has', 'missing', 'statusCode'],
+    redirects: ['source', 'destination', 'permanent', 'statusCode', 'has', 'missing'],
+    headers: ['source', 'headers', 'has', 'missing']
+  };
+  const stray = [];
+  Object.keys(ALLOWED).forEach((section) => {
+    (Array.isArray(cfg[section]) ? cfg[section] : []).forEach((entry, i) => {
+      Object.keys(entry || {}).forEach((k) => {
+        if (ALLOWED[section].indexOf(k) < 0) stray.push(`${section}[${i}].${k}`);
+      });
+    });
+  });
+  check('no rewrite, redirect or header carries a key Vercel would reject',
+    stray.length === 0, stray.join(', '));
+  // The admin frontend still asks for the old URL, and the function that used to answer it is
+  // gone. Without this rewrite the panel loads and silently believes it cannot write.
+  const rw = (cfg.rewrites || []).some((r) => r.source === '/api/admin-host' && r.destination === '/api/admin/host');
+  check('the old /api/admin-host URL still resolves to the merged admin function', rw);
+}());
+
 // ── Every clip the content asks for must name a file that can exist ──────────
 // A clip is named for its text in hex, six characters per Korean syllable, so a 40-syllable
 // script overruns the 255-byte filename limit. Three of them did, and the publish job died
