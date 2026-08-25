@@ -612,6 +612,75 @@ in the filename, and both require the track to be one the cassette actually carr
 
 ---
 
+## A third kind of bank: the exam world
+
+`worlds/topik2-questions.json` is the same file format again, but the world behind it is not
+a chapter of anything. TOPIK II is a *format*, not a syllabus, so this bank breaks three
+habits the unit banks keep — each on purpose.
+
+- **It has no fixed size.** Questions arrive one at a time, so there is no "this chapter has
+  N rows" number to pin. `validate_content.js` and `tests/test_topik_map.js` pin the shape of
+  a row instead: four choices always (TOPIK prints four; three means a transcription dropped
+  one), a keyed answer among them, and `en` / `why` / `grammar` on every row with the `why`
+  over eighty characters. That floor is not decoration — **the explanation is the product**
+  of this world, and a one-line note is a question filed rather than taught.
+- **Exercises group by question type, not by arrival.** 빈칸 넣기, 내용 일치, 주제 고르기 and
+  so on, with rows accumulating inside. The desk list therefore stays short however many
+  questions land, and working a type in a block is how TOPIK is actually revised.
+- **Overlapping vocabulary is allowed, and is the point.** `worlds/topik-2.json` may list a
+  word `levels.json` or a unit already teaches. This is a personal study room: a word met in
+  an exam question belongs in the exam room whether or not it was first met on a farm. It
+  costs nothing, because `srsData` is keyed by the Korean word **globally** — a repeat shares
+  one card rather than making a second — and `srsDueWords()` dedupes before planting.
+  `tests/test_topik_map.js` section 3 drives both of those in a VM so the allowance is
+  asserted rather than assumed, and so nobody later "fixes" it into a defect.
+
+Two traps this world found, both now guarded:
+
+- **`deskQuizUrl()` used to end in a bare `return '/worlds/unit10-desk-quiz.json'`.** Any
+  world with a desk and no quiz of its own was silently served Unit 10's 퀴즈 — a screen full
+  of 10과 food words on a map with nothing to do with 10과, working perfectly and asking the
+  wrong questions. Every branch now names its own world and the function returns `null`
+  otherwise, and `openStudyDesk` only builds a 퀴즈 row when there is a quiz to open.
+- **A world with an empty `words` array killed manual planting.** `getUnlockedWords()`
+  returns only `lesson.words` on a world level, and `_pickWord()` hands back `undefined` from
+  an empty pool. An empty world list now falls through to the global pool, which on an exam
+  map is the right pool anyway. Automatic review planting never needed this: it goes through
+  `srsDueWords()`, which has always walked every unlocked level.
+
+### Two study aids the exam world carries
+
+Both are small, both are opt-in, and both are the kind of feature that can go silently inert
+— so `validate_content.js` and `tests/test_topik_map.js` assert each one is actually wired.
+
+**Hover a hard word in the explanation and it tells you what it means.** After a row is
+checked, `wbApplyGloss()` walks the text nodes of `#wb-explain` and wraps every headword the
+current world teaches in a `.wb-gl` span carrying the gloss. Three things about it:
+
+- **The vocabulary list is the dictionary.** There is no second list to keep in step: the
+  words a question brings in are the words that become hoverable, so the feature gets better
+  on its own as the world fills up. It applies to the unit banks too — Unit 10's 읽고 쓰기
+  explanation picks up two dozen glosses at about one per hundred characters, which is sparse
+  enough to still read as prose.
+- **It runs over text nodes, not over strings.** The corrected sentence arrives from
+  `wbLineHtml` as markup, and matching Korean inside a string of HTML would eventually wrap
+  something that lives inside an attribute. A text node cannot contain an attribute, so that
+  class of bug is gone rather than guarded against.
+- **A word can list the shapes it wears.** 썰렁하다 never appears as 썰렁하다 — it turns up as
+  썰렁한 — and getting there by rule needs a conjugator. So a word entry may carry
+  `forms: ["썰렁한"]`, and the index takes those as extra keys. Anything under two characters
+  is dropped, because a one-syllable key matches half the sentence; the validator rejects a
+  short form rather than letting it look like it works. Longest match wins, so 재래시장 is
+  explained whole instead of as 시장.
+
+**A bank can hold its translation back until the row is checked.** `"holdGloss": true` on the
+bank. On a textbook page the English beside the sentence is a help; on an exam question it is
+the answer — a gap-fill testing V-고 for sequence is over the moment the gloss says "put on
+thick clothes **and** went out". Off by default, so the unit banks keep the behaviour they
+were written for, and the flag survives `saveWorkbook` rather than being normalised away.
+
+---
+
 ## Before committing
 
 ```bash

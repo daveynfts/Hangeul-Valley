@@ -404,7 +404,7 @@ const overlayIds = [
   // alone therefore leaves the station not spawning while every grep says it is wired —
   // which is exactly how Unit 14's cassette player shipped invisible. Unit 11's suite has
   // asserted this for itself since it was built; nothing asserted it for the others.
-  ['2b-unit-10', '2b-unit-11', '2b-unit-13', '2b-unit-14'].forEach((u) => {
+  ['2b-unit-10', '2b-unit-11', '2b-unit-13', '2b-unit-14', 'topik-2'].forEach((u) => {
     const world = JSON.parse(read(path.join('worlds', u + '.json')));
     const json = ((world.level && world.level.map && world.level.map.stations) || []);
     const m = new RegExp("'" + u + "': \\{ extras: \\[\\], stations: \\[([^\\]]*)\\]").exec(gameJs);
@@ -976,6 +976,249 @@ const overlayIds = [
     check('the TTS harvest reads -textbook.json as well as -workbook.json',
       /-\(\?:work\|text\)book\\\.json\$/.test(ttsSrc));
   }
+}());
+
+// ── The exam world ───────────────────────────────────────────────────
+// TOPIK II is not a chapter of anything, so this world breaks the shape every other world
+// keeps: no fixed word list, no 퀴즈, no tape. Questions arrive one at a time and the word list
+// grows out of them, so the usual "this chapter has exactly N words" check has nothing to pin.
+// What is worth pinning instead is the shape of each entry, the wiring, and one thing that is
+// deliberately NOT checked — see the note on cross-world overlap below.
+(function checkTopikWorld() {
+  const rel = path.join('worlds', 'topik-2.json');
+  if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+  let world;
+  try { world = JSON.parse(read(rel)); } catch (e) { check(rel + ' is valid JSON', false, e.message); return; }
+  check('the exam world names itself topik-2',
+    world.id === 'topik-2' && world.level && world.level.worldId === 'topik-2', String(world.id));
+  check('and it is a world level carrying a study desk',
+    world.level.world === true
+    && ((world.level.map && world.level.map.stations) || []).indexOf('desk') >= 0);
+
+  const ww = (world.level && world.level.words) || [];
+  const thinWord = ww.filter((w) => !w || !w.ko || !w.en || !w.category || !w.categoryEn || !w.hint)
+    .map((w) => (w && w.ko) || '?');
+  check('every exam-world word has ko / en / category / categoryEn / hint',
+    thinWord.length === 0, thinWord.slice(0, 6).join(', '));
+  const kos = ww.map((w) => String(w.ko).normalize('NFC'));
+  const dups = kos.filter((k, i) => kos.indexOf(k) !== i);
+  check('and no word is listed twice inside the exam world itself', dups.length === 0, dups.join(', '));
+  // A word may list the shapes it actually wears in a sentence, because 썬렁하다 turns up as
+  // 썬렁한 and no rule short of a conjugator gets there. The gloss table drops any key under
+  // two characters, so a one-character form is dead weight that looks like it works.
+  const badForms = [];
+  ww.forEach((wd) => {
+    if (wd.forms === undefined) return;
+    if (!Array.isArray(wd.forms) || !wd.forms.length) {
+      badForms.push(wd.ko + ': forms must be a non-empty array'); return;
+    }
+    wd.forms.forEach((f) => {
+      if (typeof f !== 'string' || f.trim().length < 2) {
+        badForms.push(wd.ko + ': "' + f + '" is too short to ever match');
+      }
+    });
+  });
+  check('every surface form a word lists is long enough to match', badForms.length === 0,
+    badForms.slice(0, 5).join(', '));
+  // Deliberately absent: any check that a word here is absent from levels.json or from a unit.
+  // This is a personal study room, not a syllabus — a word met in an exam question belongs in
+  // the exam room whether or not it was first met on a farm. It costs nothing either, because
+  // srsData is keyed by the Korean word globally, so a repeat shares one card rather than
+  // creating a second, and srsDueWords() already dedupes before planting. Anyone tempted to
+  // "fix" this with a cross-world dedupe should read section 3 of tests/test_topik_map.js,
+  // which asserts the overlap is allowed on purpose.
+  const declared = ((world.notebook && world.notebook.mindmap) || []).map((g) => g.cat);
+  const inUse = [...new Set(ww.map((w) => w.category))];
+  check('the exam world mindmap names exactly the categories its words use',
+    inUse.every((c) => declared.includes(c)) && declared.every((c) => inUse.includes(c)),
+    'mindmap: ' + declared.join(', ') + ' | words: ' + inUse.join(', '));
+
+  const bankRel = path.join('worlds', 'topik2-questions.json');
+  if (check(bankRel + ' exists', fs.existsSync(path.join(ROOT, bankRel)))) {
+    let bank;
+    try { bank = JSON.parse(read(bankRel)); } catch (e) { bank = null; check(bankRel + ' is valid JSON', false, e.message); }
+    if (bank) {
+      check('the exam bank names itself topik2-questions', bank.id === 'topik2-questions', String(bank.id));
+      check('and the desk labels it 기출 문제', bank.titleKo === '기출 문제', String(bank.titleKo));
+      const exs = Array.isArray(bank.exercises) ? bank.exercises : null;
+      check('the exam bank holds an exercises array', !!exs);
+      if (exs) {
+        const ids = exs.map((e) => e.id);
+        check('no two question groups share an id', new Set(ids).size === ids.length, ids.join(', '));
+        const thin = [];
+        exs.forEach((ex) => {
+          if (!ex.id || !ex.no || !ex.instructionKo) thin.push(String(ex.id) + ' heading');
+          (ex.items || []).forEach((it, k) => {
+            const at = ex.id + ' row ' + (k + 1);
+            if (!it.why || !it.grammar || !it.en) thin.push(at + ' prose');
+            // The explanation is the product of this world, not a nicety on top of it.
+            if (String(it.why || '').length < 80) thin.push(at + ' why too thin');
+            const sets = (it.choices2 || it.answer2) ? 2 : 1;
+            const gaps = (it.lines || []).reduce((n, l) => n + String(l.ko || '').split('{}').length - 1, 0);
+            if (gaps !== sets) thin.push(at + ' has ' + gaps + ' blanks for ' + sets + ' choice sets');
+            if (!(it.choices || []).some((c) => c.id === it.answer)) thin.push(at + ' answer');
+            // TOPIK prints four options, always. Three is a transcription that dropped one.
+            if ((it.choices || []).length !== 4) thin.push(at + ' has ' + (it.choices || []).length + ' choices, not 4');
+          });
+        });
+        check('every exam question is complete, four-choice and explained', thin.length === 0,
+          thin.slice(0, 6).join(', '));
+      }
+    }
+  }
+
+  const gameJs = readGameSource();
+  check('the desk offers the exam bank on the exam world',
+    gameJs.indexOf("isTopikWorld()) return '/worlds/topik2-questions.json'") >= 0);
+  check('and isTopikWorld is defined against the world id',
+    /function isTopikWorld\(\)[\s\S]{0,200}'topik-2'/.test(gameJs));
+  check('the exam world is fetched alongside the textbook worlds',
+    gameJs.indexOf("file: 'worlds/topik-2.json'") >= 0);
+  // The bug this world was the first to expose. deskQuizUrl used to end in a bare return of
+  // Unit 10's quiz, so any world with a desk and no quiz of its own was silently served 10과
+  // food words — a screen that works perfectly and asks the wrong questions. Sliced and read
+  // line by line rather than matched as one regex, because the repo has no .gitattributes and
+  // a pattern spanning a literal newline passes in CI and fails on a Windows checkout.
+  const dqAt = gameJs.indexOf('function deskQuizUrl()');
+  const dqBody = dqAt >= 0 ? gameJs.slice(dqAt, gameJs.indexOf('function loadDeskQuiz', dqAt)) : '';
+  const unguarded = dqBody.split(/\r?\n/)
+    .filter((l) => /return '\/worlds\//.test(l) && !/isUnit\d+World\(\)/.test(l));
+  check('every quiz url in deskQuizUrl is guarded by its own world test',
+    dqBody.length > 0 && unguarded.length === 0, unguarded.join(' | '));
+  check('and deskQuizUrl returns null for a world that has no quiz', /return null;/.test(dqBody));
+  check('the desk only offers a 퀴즈 row when there is a quiz to open',
+    /if \(deskQuizUrl\(\)\) \{/.test(gameJs));
+  // An empty word list on a world makes _pickWord() hand back undefined, so this guard is what
+  // keeps the map plantable between the day it is created and its first question.
+  check('an empty world word list falls through to the global pool',
+    /const own = isWorldLevel\(lesson\) \? \(lesson\.words \|\| \[\]\) : null;/.test(gameJs)
+    && /if \(own && own\.length\) return own\.slice\(\);/.test(gameJs));
+  const wbLib = read(path.join('admin', 'lib', 'workbook.js'));
+  check('the admin registry can open the exam bank',
+    wbLib.indexOf("'topik2-questions': path.join('worlds', 'topik2-questions.json')") >= 0);
+  check('and it keeps holdGloss through a save rather than normalising it away',
+    wbLib.indexOf('holdGloss: body.holdGloss === true') >= 0);
+  // The two study aids this world exists to carry. Both are one line away from being
+  // silently inert — a gloss pass nobody calls, a stylesheet with no rule for the span —
+  // and neither failure shows up as an error, only as a feature quietly not happening.
+  check('the answer view runs the gloss pass over what it just rendered',
+    gameJs.indexOf('wbApplyGloss(explain);') >= 0
+    && gameJs.indexOf('function wbApplyGloss(') >= 0
+    && gameJs.indexOf('function wbGlossTable(') >= 0);
+  check('and a glossed word is reachable without a mouse',
+    gameJs.indexOf("className = 'wb-gl'") >= 0
+    && gameJs.indexOf("setAttribute('tabindex', '0')") >= 0);
+  const css = read(path.join('css', 'game.css'));
+  check('the stylesheet draws the gloss and its tooltip',
+    css.indexOf('.wb-gl') >= 0 && css.indexOf('content: attr(data-gl)') >= 0
+    && css.indexOf('.wb-gl:focus-visible::after') >= 0);
+  check('a bank can hold its translation back until the row is checked',
+    gameJs.indexOf('st.bank && st.bank.holdGloss') >= 0
+    && gameJs.indexOf("holdGloss ? '' :") >= 0);
+}());
+
+// ── Every piece of content has a way into the admin ──────────────────────────
+// Admin routes were added a unit at a time, and the result was uneven in a way no single file
+// showed: levels.json and Unit 10 were fully editable while Units 11, 13 and 14, the whole
+// TOPIK world and every cassette bank had no route at all. Nothing was broken — they were
+// simply never connected, and there was nowhere for that absence to surface.
+//
+// So it surfaces here. Every file the publish step actually uploads is either registered in
+// admin/lib/content.js or listed as deliberately not editable, with a reason. Adding a world
+// without an admin route now fails the build instead of going unnoticed for four units.
+(function checkAdminCoverage() {
+  let content, r2;
+  try {
+    content = require(path.join(ROOT, 'admin', 'lib', 'content.js'));
+    r2 = require(path.join(ROOT, 'scripts', 'r2Content.js'));
+  } catch (e) {
+    check('the content registry loads', false, e.message);
+    return;
+  }
+  check('the content registry loads', true);
+  const rels = r2.collectUploadFiles(ROOT).map((f) => f.rel);
+  const cov = content.coverage(rels);
+  check('every published file is either editable in the admin or excused by name',
+    cov.uncovered.length === 0,
+    cov.uncovered.slice(0, 8).join(', '));
+  // A reason is required. "Not in the table" and "not editable on purpose" look identical
+  // from outside, and only one of them is fine.
+  const mute = (content.UNEDITABLE || []).filter((u) => String(u.why || '').length < 20);
+  check('and every excuse says why', mute.length === 0,
+    mute.map((u) => String(u.rel || u.match)).join(', '));
+  // Two keys pointing at one file is what "the editor shows Unit 14 for every unit" looked
+  // like, and the registry is now the only place that mistake can be made.
+  const paths = (content.CONTENT || []).map((c) => String(c.rel).split(path.sep).join('/'));
+  const dupPath = paths.filter((r, i) => paths.indexOf(r) !== i);
+  check('no two registry keys point at the same file', dupPath.length === 0, dupPath.join(', '));
+  const keys = (content.CONTENT || []).map((c) => c.key);
+  check('and no key is registered twice', new Set(keys).size === keys.length);
+  const noFile = paths.filter((r) => !fs.existsSync(path.join(ROOT, r)));
+  check('every registered file is on disk', noFile.length === 0, noFile.join(', '));
+  // The registry is worth nothing if its validators do not accept what the repo ships.
+  const rejects = [];
+  (content.CONTENT || []).forEach((c) => {
+    const full = path.join(ROOT, c.rel);
+    if (!fs.existsSync(full)) return;
+    try { c.validate(JSON.parse(fs.readFileSync(full, 'utf8')), { rootDir: ROOT, rel: c.rel }); }
+    catch (e) { rejects.push(c.key + ': ' + e.message); }
+  });
+  check('and every shipped file passes the validator that guards it', rejects.length === 0,
+    rejects.slice(0, 4).join(' | '));
+}());
+
+// ── The Vercel function ceiling ────────────────────────────────────────
+// The Hobby plan allows twelve serverless functions. Crossing that does not fail a test or
+// print a warning: the build fails on Vercel while CI stays green and nothing ships, which is
+// how api/unit10/[kind].js came to have three routes in one file. A count is cheap; finding
+// out the other way costs a deploy.
+(function checkFunctionBudget() {
+  const LIMIT = 12;
+  const dir = path.join(ROOT, 'api');
+  const found = [];
+  const walk = (d, prefix) => {
+    fs.readdirSync(d, { withFileTypes: true }).forEach((e) => {
+      if (e.isDirectory()) { walk(path.join(d, e.name), prefix + e.name + '/'); return; }
+      if (!e.name.endsWith('.js')) return;
+      // A leading underscore marks a helper; Vercel does not turn those into functions.
+      if (e.name.charAt(0) === '_') return;
+      found.push(prefix + e.name);
+    });
+  };
+  if (fs.existsSync(dir)) walk(dir, '');
+  check(`api/ holds at most ${LIMIT} serverless functions (found ${found.length})`,
+    found.length <= LIMIT, found.join(', '));
+}());
+
+// ── vercel.json says only what Vercel understands ───────────────────────────
+// JSON has no comments, and Vercel validates this file against a closed schema: an extra key
+// on a rewrite is not ignored, it fails the build. The failure surfaces nowhere useful — CI
+// stays green, the deploy dies, and the status link points at the configuration docs rather
+// than at the offending line. That is exactly what an "_comment" key on a rewrite did.
+(function checkVercelConfig() {
+  const rel = 'vercel.json';
+  if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+  let cfg;
+  try { cfg = JSON.parse(read(rel)); } catch (e) { check(rel + ' is valid JSON', false, e.message); return; }
+  const ALLOWED = {
+    rewrites: ['source', 'destination', 'has', 'missing', 'statusCode'],
+    redirects: ['source', 'destination', 'permanent', 'statusCode', 'has', 'missing'],
+    headers: ['source', 'headers', 'has', 'missing']
+  };
+  const stray = [];
+  Object.keys(ALLOWED).forEach((section) => {
+    (Array.isArray(cfg[section]) ? cfg[section] : []).forEach((entry, i) => {
+      Object.keys(entry || {}).forEach((k) => {
+        if (ALLOWED[section].indexOf(k) < 0) stray.push(`${section}[${i}].${k}`);
+      });
+    });
+  });
+  check('no rewrite, redirect or header carries a key Vercel would reject',
+    stray.length === 0, stray.join(', '));
+  // The admin frontend still asks for the old URL, and the function that used to answer it is
+  // gone. Without this rewrite the panel loads and silently believes it cannot write.
+  const rw = (cfg.rewrites || []).some((r) => r.source === '/api/admin-host' && r.destination === '/api/admin/host');
+  check('the old /api/admin-host URL still resolves to the merged admin function', rw);
 }());
 
 // ── Every clip the content asks for must name a file that can exist ──────────

@@ -1,0 +1,469 @@
+{
+  "id": "topik-2",
+  "pack": "topik",
+  "source": "TOPIK II — questions added one at a time, from the papers the player brings",
+  "title": "TOPIK II",
+  "titleKo": "토픽 II 준비",
+  "icon": "🎓",
+  "pages": "TOPIK II",
+  "level": {
+    "level": "TOPIK-II",
+    "name": "토픽 II 준비",
+    "nameEn": "TOPIK II · Exam practice",
+    "icon": "🎓",
+    "description": "Farm the words the exam questions bring in, and work the questions at the desk.",
+    "descriptionEn": "A practice world for TOPIK II, band 3-4급. Unlike the textbook units this one has no fixed chapter: questions arrive one at a time and the word list grows out of them. Words already taught elsewhere are kept here too — this is a study room, not a syllabus, and a word you meet in an exam question belongs in the exam room whether or not you first met it on a farm.",
+    "world": true,
+    "pack": "topik",
+    "worldId": "topik-2",
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk"
+      ]
+    },
+    "target": 9,
+    "words": [
+      {
+        "ko": "재래시장",
+        "en": "a traditional market",
+        "hint": "🏪",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "썰렁하다",
+        "en": "to be deserted, to have no custom; (of air) chilly",
+        "hint": "🥶",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "썰렁한",
+          "썰렁해"
+        ]
+      },
+      {
+        "ko": "배달",
+        "en": "delivery",
+        "hint": "🛵",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "출구",
+        "en": "a way out of trouble; an exit",
+        "hint": "🚪",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "모색",
+        "en": "a search for a way forward",
+        "hint": "🔦",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "모색하다",
+        "en": "to cast about for a way forward",
+        "hint": "🔦",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "출입구",
+        "en": "an entrance and exit, a gateway",
+        "hint": "🚧",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "여러 곳",
+        "en": "several places",
+        "hint": "📍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "찾다",
+        "en": "to visit a place; to look for",
+        "hint": "🚶",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "찾는",
+          "찾기",
+          "찾아"
+        ]
+      },
+      {
+        "ko": "직접",
+        "en": "in person, directly",
+        "hint": "🙋",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "추워지다",
+        "en": "to turn cold",
+        "hint": "🌡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "추워지자",
+          "추워졌다"
+        ]
+      },
+      {
+        "ko": "손님",
+        "en": "a customer",
+        "hint": "🧍",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "줄다",
+        "en": "to fall, to drop off",
+        "hint": "📉",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "줄었다",
+          "줄어",
+          "줄어들다"
+        ]
+      },
+      {
+        "ko": "서비스",
+        "en": "a service",
+        "hint": "🛎️",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "통하다",
+        "en": "to go through, to be by way of",
+        "hint": "➡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "통해",
+          "통한"
+        ]
+      },
+      {
+        "ko": "경기",
+        "en": "business conditions, how trade is going",
+        "hint": "📊",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "회복",
+        "en": "a recovery",
+        "hint": "📈",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "회복하다",
+        "en": "to recover, to come back",
+        "hint": "📈",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "노력",
+        "en": "effort",
+        "hint": "💪",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "노력하다",
+        "en": "to make an effort",
+        "hint": "💪",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "상품",
+        "en": "goods, a product",
+        "hint": "📦",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "구매",
+        "en": "a purchase",
+        "hint": "🧾",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "구매하다",
+        "en": "to buy, to purchase",
+        "hint": "🧾",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "원하다",
+        "en": "to want",
+        "hint": "🙏",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "원하는",
+          "원해"
+        ]
+      },
+      {
+        "ko": "많아지다",
+        "en": "to grow in number",
+        "hint": "➕",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "많아졌다",
+          "많아진"
+        ]
+      },
+      {
+        "ko": "신문 기사",
+        "en": "a newspaper article",
+        "hint": "📰",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "기사",
+        "en": "an article, a news report",
+        "hint": "📰",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "제목",
+        "en": "a headline, a title",
+        "hint": "🏷️",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "설명하다",
+        "en": "to explain",
+        "hint": "💬",
+        "category": "언론",
+        "categoryEn": "Media & headlines",
+        "forms": [
+          "설명한",
+          "설명"
+        ]
+      },
+      {
+        "ko": "나서다",
+        "en": "to step forward, to take something on",
+        "hint": "🚀",
+        "category": "언론",
+        "categoryEn": "Media & headlines",
+        "forms": [
+          "나섰다",
+          "나서"
+        ]
+      },
+      {
+        "ko": "전망",
+        "en": "an outlook, a forecast",
+        "hint": "🔭",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "대책",
+        "en": "a countermeasure, something done about it",
+        "hint": "🧰",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "방안",
+        "en": "a plan, a way of doing it",
+        "hint": "🗺️",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "위기",
+        "en": "a crisis",
+        "hint": "⚠️",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "대형 마트",
+        "en": "a big supermarket",
+        "hint": "🏬",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "소상공인",
+        "en": "a small trader, a shopkeeper",
+        "hint": "🧑‍🌾",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "상인",
+        "en": "a trader, a stallholder",
+        "hint": "🧑‍💼",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "단골",
+        "en": "a regular customer",
+        "hint": "💛",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "매출",
+        "en": "sales, takings",
+        "hint": "💰",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "불황",
+        "en": "a slump, hard times for trade",
+        "hint": "📉",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "침체",
+        "en": "stagnation, going nowhere",
+        "hint": "🕳️",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "활성화",
+        "en": "bringing something back to life",
+        "hint": "✨",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "유통",
+        "en": "distribution, getting goods to the shop",
+        "hint": "🚚",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "소비자",
+        "en": "a consumer",
+        "hint": "🛒",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "수요",
+        "en": "demand",
+        "hint": "📈",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "공급",
+        "en": "supply",
+        "hint": "📦",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "주문",
+        "en": "an order",
+        "hint": "📝",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "주문하다",
+        "en": "to place an order",
+        "hint": "📝",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "배송",
+        "en": "shipping, sending goods out",
+        "hint": "📮",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "비대면",
+        "en": "without meeting face to face",
+        "hint": "📱",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "물가",
+        "en": "the cost of living, prices",
+        "hint": "🏷️",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "경쟁력",
+        "en": "competitiveness",
+        "hint": "🥇",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "전통",
+        "en": "tradition",
+        "hint": "🏮",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "살리다",
+        "en": "to revive, to bring back to life",
+        "hint": "🌱",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "살리기",
+          "살려"
+        ]
+      }
+    ]
+  },
+  "notebook": {
+    "title": "TOPIK II · Exam practice",
+    "mindmap": [
+      {
+        "ko": "경제",
+        "en": "Economy & business",
+        "cat": "경제"
+      },
+      {
+        "ko": "사회",
+        "en": "Society & everyday life",
+        "cat": "사회"
+      },
+      {
+        "ko": "언론",
+        "en": "Media & headlines",
+        "cat": "언론"
+      }
+    ]
+  }
+}

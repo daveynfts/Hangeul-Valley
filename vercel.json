@@ -9,6 +9,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/admin-host",
+      "destination": "/api/admin/host"
+    },
+    {
       "source": "/admin/",
       "destination": "/admin/public/index.html"
     },

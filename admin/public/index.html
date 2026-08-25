@@ -46,7 +46,8 @@
       </nav>
 
       <div class="header-actions">
-        <span class="readonly-pill hidden" id="admin-readonly-pill" title="This Vercel copy cannot write files">Read-only</span>
+        <div class="admin-auth hidden" id="admin-auth"></div>
+        <span class="readonly-pill hidden" id="admin-readonly-pill" title="Sign in as the owner to edit">Read-only</span>
         <div class="sync-status" id="sync-indicator" title="Data Synchronization Status">
           <span class="status-dot green" id="sync-dot"></span>
           <span class="status-text" id="sync-text">In Sync</span>
@@ -626,7 +627,8 @@
   </div>
 
   <!-- JavaScript Modules -->
-  <script src="js/app.js"></script>
+  <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
   <script src="js/dashboard.js"></script>
   <script src="js/levels.js"></script>
   <script src="js/vocab.js"></script>

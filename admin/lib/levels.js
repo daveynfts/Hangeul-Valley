@@ -22,6 +22,41 @@ function getLevelByNum(levelNum, rootDir) {
   return levelObj || null;
 }
 
+// The whole file at once, checked and not written. The word-level routes below are what the
+// local editor uses; this is what the content registry hands the Vercel function, where there
+// is no disk to write to and the same rules still have to hold.
+//
+// The two totals are pinned rather than left as "some levels with some words", because they
+// are the shape the game and scripts/validate_content.js both assume. A save that quietly
+// dropped a level would pass every structural check without them.
+const LEVEL_COUNT = 25;
+const WORD_COUNT = 1500;
+
+function validateLevels(body) {
+  const levels = Array.isArray(body) ? body : (body && Array.isArray(body.levels) ? body.levels : null);
+  if (!levels) throw new Error('levels.json must be an array of levels');
+  if (levels.length !== LEVEL_COUNT) throw new Error(`Expected ${LEVEL_COUNT} levels, got ${levels.length}`);
+  const seen = new Map();
+  const thin = [];
+  let total = 0;
+  levels.forEach((lvl, i) => {
+    if (!lvl || typeof lvl !== 'object') throw new Error(`Level ${i + 1} is not an object`);
+    const words = Array.isArray(lvl.words) ? lvl.words : null;
+    if (!words) throw new Error(`Level ${lvl.level || i + 1} has no words array`);
+    total += words.length;
+    words.forEach((w, k) => {
+      if (!w || !w.ko || !w.en || !w.category) { thin.push(`level ${lvl.level || i + 1} word ${k + 1} is missing ko / en / category`); return; }
+      if (!w.categoryEn) { thin.push(`${w.ko} is missing categoryEn`); return; }
+      const ko = String(w.ko).normalize('NFC');
+      if (seen.has(ko)) thin.push(`${ko} is already in level ${seen.get(ko)}`);
+      else seen.set(ko, lvl.level || i + 1);
+    });
+  });
+  if (thin.length) throw new Error(`${thin.length} problem(s): ${thin.slice(0, 4).join('; ')}`);
+  if (total !== WORD_COUNT) throw new Error(`Expected ${WORD_COUNT} words across the levels, got ${total}`);
+  return levels;
+}
+
 function updateLevels(newLevels, rootDir) {
   return syncLevels(newLevels, rootDir);
 }
@@ -182,6 +217,7 @@ function getStats(rootDir) {
 module.exports = {
   getLevels,
   getLevelByNum,
+  validateLevels,
   updateLevels,
   updateLevelMetadata,
   addWord,

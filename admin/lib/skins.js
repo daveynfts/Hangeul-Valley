@@ -24,6 +24,11 @@ function readJson(rel, rootDir) {
   return JSON.parse(fs.readFileSync(full, 'utf8'));
 }
 
+function hasSpriteTree(rootDir) {
+  try { return !!rootDir && fs.existsSync(path.join(rootDir, 'sprites')); }
+  catch (e) { return false; }
+}
+
 function validateCatalog(pack, rootDir) {
   if (!pack || typeof pack !== 'object') throw new Error('Catalog must be an object');
   if (!Array.isArray(pack.skins) || pack.skins.length < 1) {
@@ -53,6 +58,13 @@ function validateCatalog(pack, rootDir) {
         if (!name || /[\\/]/.test(name) || String(name).indexOf('..') >= 0) {
           throw new Error(`${s.id} file must be a basename`);
         }
+        // Only checkable where the art is. The 276 sprite PNGs are served from R2 and are not
+        // bundled into a Vercel function, so on production this check has nothing to look at
+        // and would refuse every catalogue rather than find a fault. It is skipped there and
+        // left to CI, which runs against a full checkout — recorded rather than silently
+        // weakened, because "the file is missing" and "the folder is missing" are different
+        // failures and only one of them is the editor's business.
+        if (!hasSpriteTree(rootDir)) return;
         const full = path.join(rootDir, 'sprites', folder, name);
         if (!fs.existsSync(full)) throw new Error(`Missing ${path.join('sprites', folder, name)}`);
       });
@@ -90,9 +102,12 @@ function getCatalog(rootDir) {
   };
 }
 
-function saveCatalog(body, rootDir) {
+// Checking and normalising, without touching disk, so the same rules can run inside a Vercel
+// function where the write goes to GitHub and R2 instead. rootDir is still needed here: this
+// is the one validator that reaches for the repo, because it checks the sprites exist.
+function normaliseCatalog(body, rootDir) {
   validateCatalog(body, rootDir);
-  const next = {
+  return {
     version: typeof body.version === 'number' ? body.version : 1,
     cacheKey: String(body.cacheKey || ''),
     defaultSkinId: body.defaultSkinId || 'farmer',
@@ -112,8 +127,11 @@ function saveCatalog(body, rootDir) {
       states: s.states || undefined
     }))
   };
-  writeJson(CATALOG_REL, next, rootDir);
+}
+
+function saveCatalog(body, rootDir) {
+  writeJson(CATALOG_REL, normaliseCatalog(body, rootDir), rootDir);
   return getCatalog(rootDir);
 }
 
-module.exports = { getCatalog, saveCatalog, validateCatalog, CATALOG_REL };
+module.exports = { getCatalog, saveCatalog, normaliseCatalog, validateCatalog, CATALOG_REL };

@@ -10,6 +10,7 @@ const worldLib = require('./lib/world');
 const workbookLib = require('./lib/workbook');
 const artLib = require('./lib/art');
 const skinsLib = require('./lib/skins');
+const contentLib = require('./lib/content');
 
 const app = express();
 
@@ -332,6 +333,44 @@ app.get('/api/skins/catalog', (req, res, next) => {
 app.put('/api/skins/catalog', (req, res, next) => {
   try { res.json({ success: true, data: skinsLib.saveCatalog(req.body, getRootDir()) }); }
   catch (err) { err.status = 400; next(err); }
+});
+
+// The content registry, exposed on the same URLs the Vercel function answers on. Routes
+// here used to be added a unit at a time, which is how Units 11, 13 and 14, the TOPIK world
+// and every cassette bank ended up with no way in at all — not broken, just never connected,
+// and nowhere for that to show. Everything now resolves through one table, and
+// scripts/validate_content.js fails the build if a published file is missing from it.
+//
+// The older per-resource routes above are left alone: the existing editor screens call them,
+// and rewriting those is a separate job from making every file reachable.
+app.get('/api/admin/content', (req, res) => {
+  res.json({ success: true, data: contentLib.list() });
+});
+app.get('/api/admin/content/*', (req, res, next) => {
+  try {
+    const key = req.params[0];
+    const entry = contentLib.byKey(key);
+    if (!entry) { const e = new Error(`No content registered under "${key}"`); e.status = 404; throw e; }
+    const full = path.join(getRootDir(), entry.rel);
+    const body = JSON.parse(fs.readFileSync(full, 'utf8'));
+    res.json({ success: true, data: { key: entry.key, label: entry.label, group: entry.group, rel: entry.rel, body } });
+  } catch (err) { next(err); }
+});
+app.put('/api/admin/content/*', (req, res, next) => {
+  try {
+    const key = req.params[0];
+    const entry = contentLib.byKey(key);
+    if (!entry) { const e = new Error(`No content registered under "${key}"`); e.status = 404; throw e; }
+    const root = getRootDir();
+    let normalised;
+    try { normalised = entry.validate(req.body, { rootDir: root, rel: entry.rel }); }
+    catch (e) { e.status = 400; throw e; }
+    // Locally the write is the write — there is no commit and no CDN, because the repo on this
+    // machine is the thing being edited.
+    const { atomicWriteJson } = require('./lib/atomicWrite');
+    atomicWriteJson(path.join(root, entry.rel), JSON.stringify(normalised, null, 2) + '\n');
+    res.json({ success: true, data: { key: entry.key, rel: entry.rel, body: normalised, live: false, note: 'Written to the working tree. Commit and publish to ship it.' } });
+  } catch (err) { next(err); }
 });
 
 app.get('/api/admin-host', (req, res) => {
