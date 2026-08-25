@@ -1163,6 +1163,240 @@
         "forms": [
           "잡기"
         ]
+      },
+      {
+        "ko": "개",
+        "en": "a dog",
+        "hint": "🐕",
+        "category": "동물",
+        "categoryEn": "Animals & pets"
+      },
+      {
+        "ko": "반려견",
+        "en": "a pet dog — the word a paper uses, not 개",
+        "hint": "🐩",
+        "category": "동물",
+        "categoryEn": "Animals & pets",
+        "forms": [
+          "반려견은",
+          "반려견에게"
+        ]
+      },
+      {
+        "ko": "주인",
+        "en": "an owner",
+        "hint": "🧑",
+        "category": "동물",
+        "categoryEn": "Animals & pets",
+        "forms": [
+          "주인들"
+        ]
+      },
+      {
+        "ko": "키우다",
+        "en": "to keep, to raise an animal",
+        "hint": "🦴",
+        "category": "동물",
+        "categoryEn": "Animals & pets",
+        "forms": [
+          "키우기"
+        ]
+      },
+      {
+        "ko": "물다",
+        "en": "to bite",
+        "hint": "🦷",
+        "category": "동물",
+        "categoryEn": "Animals & pets",
+        "forms": [
+          "물어요",
+          "물지"
+        ]
+      },
+      {
+        "ko": "물리다",
+        "en": "to get bitten — the passive of 물다",
+        "hint": "🩹",
+        "category": "동물",
+        "categoryEn": "Animals & pets",
+        "forms": [
+          "물리는"
+        ]
+      },
+      {
+        "ko": "특성",
+        "en": "a characteristic, what something is like by nature",
+        "hint": "🧬",
+        "category": "동물",
+        "categoryEn": "Animals & pets"
+      },
+      {
+        "ko": "착각",
+        "en": "a thing people are sure of and wrong about",
+        "hint": "💭",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "흔하다",
+        "en": "to be common",
+        "hint": "🔁",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "흔한"
+        ]
+      },
+      {
+        "ko": "확신하다",
+        "en": "to be certain of it",
+        "hint": "✅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "확신하는"
+        ]
+      },
+      {
+        "ko": "잘못되다",
+        "en": "to be mistaken, to be wrong",
+        "hint": "❌",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "잘못된"
+        ]
+      },
+      {
+        "ko": "알아보다",
+        "en": "to look into it, to find out",
+        "hint": "🔍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "알아봐야"
+        ]
+      },
+      {
+        "ko": "자신",
+        "en": "oneself, one’s own",
+        "hint": "🪞",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "자신의"
+        ]
+      },
+      {
+        "ko": "우리",
+        "en": "our",
+        "hint": "👪",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "사람",
+        "en": "a person",
+        "hint": "🧍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "사람들"
+        ]
+      },
+      {
+        "ko": "늘다",
+        "en": "to grow in number",
+        "hint": "📈",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "늘고"
+        ]
+      },
+      {
+        "ko": "한번",
+        "en": "once, one time",
+        "hint": "1️⃣",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "다시",
+        "en": "again",
+        "hint": "🔄",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "안 + V",
+        "en": "the short negative — 안 물어요 = doesn’t bite, said out loud",
+        "hint": "🚫",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "안 물어요"
+        ]
+      },
+      {
+        "ko": "-지 않다",
+        "en": "the long negative — 물지 않는다 = does not bite, as a paper writes it",
+        "hint": "✖️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "물지 않는다"
+        ]
+      },
+      {
+        "ko": "-다고 하다",
+        "en": "to say that — and with 확신하다, to be sure that",
+        "hint": "💬",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "않는다고"
+        ]
+      },
+      {
+        "ko": "-기 전에",
+        "en": "before doing it",
+        "hint": "⏮️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "키우기 전에"
+        ]
+      },
+      {
+        "ko": "N에 대해서",
+        "en": "about N",
+        "hint": "📎",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "대해서"
+        ]
+      },
+      {
+        "ko": "-(으)ㄴ 적이 있다",
+        "en": "to have ever done it",
+        "hint": "📜",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "적이 있는"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 수 있다",
+        "en": "can, might",
+        "hint": "🔓",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "수 있다"
+        ]
       }
     ]
   },
@@ -1218,6 +1452,11 @@
         "ko": "정치",
         "en": "Politics & government",
         "cat": "정치"
+      },
+      {
+        "ko": "동물",
+        "en": "Animals & pets",
+        "cat": "동물"
       }
     ]
   }

@@ -25,7 +25,7 @@
       "blurbEn": "A headline in compressed newspaper Korean, and four readings of it — three of which are what taking one word literally looks like.",
       "instructionKo": "다음 신문 기사의 제목을 가장 잘 설명한 것을 고르십시오.",
       "instructionEn": "Choose the sentence that best explains the newspaper headline.",
-      "noteEn": "A headline drops its particles and its verb endings, so every word left carries more than usual and can usually be read two ways. The options are not four summaries — they are four readings, and the wrong ones are wrong in a small number of repeating shapes.\n\nFour questions in, the shapes are these. A figurative word taken at face value: 출구 as a door, 관리 as a job. A description turned into a recommendation, which is what -어야 한다 and 필요가 있다 are doing when you see them in an option. An addition read as a comparison — enjoying food with the eyes *as well* is not taste mattering less. And the subject quietly swapped, so a problem the headline gave to one party is handed to another.\n\nSo: find the words that can be read two ways and settle them; check who the headline says is doing what; and distrust any option that advises rather than reports. A fifth shape, from question 5: a time or quantity expression read as something adjacent. N 만에 is a point measured back to the last occurrence; N 동안 is the whole stretch. Swap them and the sentence still reads well and claims something else entirely. And a sixth, from question 6: the headline reversed in its own vocabulary. Every word of the option comes from the headline, and the claim is the opposite one. Reusing the words is what makes it look like a summary; check the direction of the claim, not the overlap. Question 7 adds a habit rather than a trap. When all four options open with the same words, that shared part is not what is being asked — it is there so the options look alike. Read past it to where they diverge, and settle that.",
+      "noteEn": "A headline drops its particles and its verb endings, so every word left carries more than usual and can usually be read two ways. The options are not four summaries — they are four readings, and the wrong ones are wrong in a small number of repeating shapes.\n\nFour questions in, the shapes are these. A figurative word taken at face value: 출구 as a door, 관리 as a job. A description turned into a recommendation, which is what -어야 한다 and 필요가 있다 are doing when you see them in an option. An addition read as a comparison — enjoying food with the eyes *as well* is not taste mattering less. And the subject quietly swapped, so a problem the headline gave to one party is handed to another.\n\nSo: find the words that can be read two ways and settle them; check who the headline says is doing what; and distrust any option that advises rather than reports. A fifth shape, from question 5: a time or quantity expression read as something adjacent. N 만에 is a point measured back to the last occurrence; N 동안 is the whole stretch. Swap them and the sentence still reads well and claims something else entirely. And a sixth, from question 6: the headline reversed in its own vocabulary. Every word of the option comes from the headline, and the claim is the opposite one. Reusing the words is what makes it look like a summary; check the direction of the claim, not the overlap. Question 7 adds a habit rather than a trap. When all four options open with the same words, that shared part is not what is being asked — it is there so the options look alike. Read past it to where they diverge, and settle that. Question 8 adds a shape of headline rather than a shape of trap: a quotation with a verdict attached — \"…\" plus 착각, 논란, 오해. The quote is not the news. The verdict on it is, and the answer will be about the belief rather than about what the belief is about.",
       "pattern": "제목을 가장 잘 설명한 것 고르기",
       "items": [
         {
@@ -280,6 +280,42 @@
           "en": "The government's drive to rein in house prices is pouring cold water on ordinary households. Meaning: the policy is doing harm to the everyday economy.",
           "why": "Start with what the four options have in common, because it is not the question. All four open with 정부의 부동산 정책 — the standard paraphrase of 정부의 집값 잡기. Shared wording cannot separate them, so the whole question is in what comes after it, and what comes after it is four readings of 찬물 끼얹는 중.\n\n찬물을 끼얹다 is an idiom: to throw cold water over something that was going well and spoil it. It is never neutral and never good.\n\nTwo of the options take the cold literally, and go opposite ways with it. Option 3 hears 찬 and arrives at 냉정하게, cool-headed — and while it is there it also swaps who acts on whom: in the headline the policy chills the economy, in option 3 the citizens coolly appraise the policy. Option 4 hears the same cold and arrives at 시원하게, refreshing, which flips the sentence from harm to relief while leaving every other word alone — the reversal from question 6, done through a feeling rather than through vocabulary.\n\nOption 2 changes one noun. 집값 is house prices; 물가 is what everything costs. They are not the same thing, and a headline saying the drive is chilling household budgets is not saying those budgets got cheaper. Falling 물가 would be the good news the idiom rules out.\n\nThat leaves 1, which is the idiom in plain words: 악영향을 미치고 있다, it is having a bad effect. Cold water on something, said without the picture.",
           "grammar": "찬물을 끼얹다 is fixed: literally to pour cold water over, used only of spoiling a good mood or a good run. Learn it whole — the parts do not add up to the meaning, which is exactly what options 3 and 4 are built on.\n\n-는 중 is in the middle of doing, the same 중 as 관리 중 in question 3. And 잡기 is 잡다 with -기, the ending that turns a verb into something a headline can put a possessive in front of: 정부의 집값 잡기. Seven headlines, seven nouns standing where a verb belongs — 모색, 천국, 불티, 관리 중, 바닥으로, 낭패, 잡기.\n\nIn the options: 영향을 미치다 is the set phrase for having an effect (악영향 is the bad kind), N 때문에 gives a cause, and -게 하다 makes something turn out a certain way — 시원하게 해 주다, to leave someone feeling refreshed."
+        },
+        {
+          "n": 8,
+          "phraseKo": "\"우리 개는 안 물어요.\" 주인들의 흔한 착각",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "\"우리 개는 안 물어요.\" 주인들의 흔한 착각"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "belief_wrong",
+          "choices": [
+            {
+              "id": "more_bitten",
+              "ko": "자신의 반려견에게 물리는 사람들이 늘고 있다."
+            },
+            {
+              "id": "research_first",
+              "ko": "개를 키우기 전에 개의 특성에 대해서 알아봐야 한다."
+            },
+            {
+              "id": "repeat_biter",
+              "ko": "한번 사람을 문 적이 있는 개는 다시 사람을 물 수 있다."
+            },
+            {
+              "id": "belief_wrong",
+              "ko": "자신의 반려견은 물지 않는다고 확신하는 것은 잘못된 것이다."
+            }
+          ],
+          "en": "\"Our dog doesn’t bite.\" — the mistake owners keep making. Meaning: being sure your own dog will never bite is itself the error.",
+          "why": "This headline is built differently from the seven before it. It is a quotation followed by a verdict on the quotation: someone says 우리 개는 안 물어요, and the paper labels that 흔한 착각. A headline that quotes a line and then names it a 착각 is not passing the line on — it is correcting it. The label is the news, and if you read past 착각 the headline appears to be saying dogs do not bite.\n\nNow look at what the second half is grammatically about. Not dogs. 착각 is a thought, and the headline is about what owners believe. Three of the four options are about dogs: who gets bitten, what to research, which dogs bite twice. Only one is about the belief, and that is 4 — 확신하는 것은 잘못된 것이다, being certain is the thing that is wrong. It even keeps the quotation, turning the spoken 안 물어요 into the written 물지 않는다.\n\nOption 1 makes it a statistic. 늘고 있다 counts something, and the headline counts nothing; it reports a mistake, not a trend.\n\nOption 2 is advice again — 알아봐야 한다. That is the fifth time in eight questions that an option has turned a report into a recommendation, and it has been wrong every time.\n\nOption 3 is the quiet one, and it is true: a dog that has bitten once may bite again. But it is about a different set of dogs entirely. The headline is about owners whose dogs have never bitten anyone — that is precisely why they are sure. A statement can be true about the subject and still not be a reading of the sentence.",
+          "grammar": "착각 carries the whole headline and it is a bare noun: 주인들의 흔한 착각, with 착각이다 or 착각하고 있다 left off. Eight headlines, eight nouns standing where a verb belongs — 모색, 천국, 불티, 관리 중, 바닥으로, 낭패, 잡기, 착각.\n\nThe two negatives are worth putting side by side, because this question has both. 안 물어요 is the short negative, which is what people say out loud; 물지 않는다 is the long one, which is what a written option uses. Same claim, two registers, and the shift from one to the other is a sign an option is quoting the headline back at you.\n\n물다 is to bite and 물리다 is to be bitten — the passive, which is why option 1 has 물리는 사람들, people getting bitten. And -다고 확신하다 is to be certain that: an indirect quotation with the verb of believing attached to it."
         }
       ]
     }
