@@ -264,6 +264,13 @@ window.AppController = {
       return;
     }
     const who = (you && (you.email || you.sub)) || 'signed in';
+    // A branch that does not publish is a standing hazard, not a per-save footnote: every
+    // edit made while it is set goes live and stays absent from main.
+    if (data.scratchBranch && data.writable) {
+      window.Toast.error('Saves commit to ' + data.branch + ', which does not publish. The CDN'
+        + ' goes live but main never sees the change, and the next publish from main undoes it.',
+        'Writing to a scratch branch');
+    }
     if (data.writable) {
       box.innerHTML = '<span class="auth-note" title="Editing as ' + who + '"><b>' + who + '</b>'
         + (data.branch ? ' \u2192 <code>' + data.branch + '</code>' : '') + '</span>'

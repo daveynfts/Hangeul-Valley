@@ -127,6 +127,11 @@ async function handleHost(req, res) {
       // What the token can actually do, checked rather than assumed. Without this the first
       // sign of a read-only token is a 403 at the end of an edit.
       git,
+      // Writing to a branch that does not publish puts the CDN ahead of the repository: the
+      // change is live for players, and the branch the pipeline builds from has never seen it.
+      // The next publish then reverts it without a word. Worth saying out loud on every screen
+      // rather than discovering from a stray "(test)" in a learner's instruction line.
+      scratchBranch: !!(gh && gh.branch !== 'main'),
       needsEnv: missing,
       // Four states, not three. Collapsing 'not signed in' into 'signed in as the wrong
       // person' told an anonymous caller they were signed in, which is both untrue and the
@@ -218,7 +223,10 @@ async function handleWrite(req, res, key) {
       // Said plainly rather than reported as "Saved": the CDN is live now, the invariants run
       // afterwards, and those are two different kinds of done.
       note: published
-        ? 'Live on the CDN now. CI will run the full invariant set against the commit.'
+        ? (gh.branch === 'main'
+          ? 'Live on the CDN now. CI will run the full invariant set against the commit.'
+          : 'Live on the CDN now, but committed to ' + gh.branch + ' — main has not seen this,'
+            + ' and the next publish from main will overwrite it.')
         : 'Committed, but the CDN upload failed — it will catch up on the next publish.'
     }
   });
