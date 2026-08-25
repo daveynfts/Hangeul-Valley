@@ -1221,6 +1221,62 @@ const overlayIds = [
   check('the old /api/admin-host URL still resolves to the merged admin function', rw);
 }());
 
+// ── The admin suite can run on its own dependencies ─────────────────────────
+// CI runs `npm ci` and `npm test` inside admin/, which installs express and cors and nothing
+// else. The contract test reaches into api/ from there, so anything it loads must not need a
+// root-only dependency at import time.
+//
+// This is another failure that cannot be seen from a developer machine: locally the root
+// node_modules sits one directory up and Node finds it, so the suite passes; on CI it is not
+// there and the suite crashes on require. It cost a red build on main. Simulated here by
+// making the package unresolvable in a child process, which is the only honest way to check
+// an absence on a machine where the thing is present.
+(function checkAdminDependencyClosure() {
+  const ROOT_ONLY = Object.keys(JSON.parse(read('package.json')).dependencies || {});
+  const ADMIN_DEPS = Object.keys(JSON.parse(read(path.join('admin', 'package.json'))).dependencies || {});
+  const forbidden = ROOT_ONLY.filter((d) => ADMIN_DEPS.indexOf(d) < 0);
+  check('the admin package installs fewer dependencies than the root, so the check has teeth',
+    forbidden.length > 0, 'root-only: ' + forbidden.join(', '));
+  if (!forbidden.length) return;
+
+  const ENTRIES = [
+    path.join('api', '_r2.js'),
+    path.join('api', 'admin', '[...path].js'),
+    path.join('admin', 'lib', 'content.js')
+  ].filter((rel) => fs.existsSync(path.join(ROOT, rel)));
+
+  const script = `
+    const Module = require('module');
+    const blocked = ${JSON.stringify(forbidden)};
+    const real = Module._resolveFilename;
+    Module._resolveFilename = function (req, ...rest) {
+      if (blocked.indexOf(req) >= 0 || blocked.some((b) => req.indexOf(b + '/') === 0)) {
+        const e = new Error("Cannot find module '" + req + "'");
+        e.code = 'MODULE_NOT_FOUND';
+        throw e;
+      }
+      return real.call(this, req, ...rest);
+    };
+    const bad = [];
+    ${JSON.stringify(ENTRIES)}.forEach((rel) => {
+      try { require(require('path').join(${JSON.stringify(ROOT)}, rel)); }
+      catch (e) { bad.push(rel + ': ' + e.message); }
+    });
+    process.stdout.write(JSON.stringify(bad));
+  `;
+  let out = '[]';
+  try {
+    const { execFileSync } = require('child_process');
+    out = execFileSync(process.execPath, ['-e', script], { encoding: 'utf8', stdio: 'pipe' });
+  } catch (e) {
+    out = JSON.stringify(['the probe itself failed: ' + (e.message || e)]);
+  }
+  let bad = [];
+  try { bad = JSON.parse(out || '[]'); } catch (e) { bad = ['unreadable probe output']; }
+  check('nothing the admin suite loads needs a root-only dependency at import time',
+    bad.length === 0, bad.slice(0, 3).join(' | '));
+}());
+
 // ── Every clip the content asks for must name a file that can exist ──────────
 // A clip is named for its text in hex, six characters per Korean syllable, so a 40-syllable
 // script overruns the 255-byte filename limit. Three of them did, and the publish job died

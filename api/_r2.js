@@ -1,10 +1,15 @@
-const { S3Client } = require('@aws-sdk/client-s3');
+// Loaded where it is used, not here. The admin test suite installs only express and cors
+// and reaches into this file for setCors and verifyGoogleIdToken; a top-level require of a
+// root-only dependency made `npm --prefix admin test` fail on CI while passing on a machine
+// that happens to have the root node_modules beside it. A cold start that only needs CORS
+// should not pay for the S3 client either.
 
 function env(name) {
   return String(process.env[name] || '').trim().replace(/^["']|["']$/g, '');
 }
 
 function r2Client() {
+  const { S3Client } = require('@aws-sdk/client-s3');
   const accountId = env('R2_ACCOUNT_ID');
   const accessKeyId = env('R2_ACCESS_KEY_ID');
   const secretAccessKey = env('R2_SECRET_ACCESS_KEY');
