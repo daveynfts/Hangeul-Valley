@@ -1342,7 +1342,11 @@ body.admin-readonly .btn-delete-word {
    server the operator is already the operator, so it stays hidden there. */
 .admin-auth { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); }
 .admin-auth.hidden { display: none; }
-.admin-auth .auth-note { opacity: .85; max-width: 46ch; line-height: 1.35; }
+.admin-auth .auth-note {
+  opacity: .85; line-height: 1.35;
+  /* Whatever it says, it must not be what decides the header height. */
+  max-width: 30ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
 .admin-auth code { font-size: var(--fs-xs); padding: 1px 4px; border-radius: var(--radius-xs);
   background: rgba(255,255,255,.08); user-select: all; }
 .admin-auth .btn-small { font: inherit; padding: 3px 9px; border-radius: var(--radius-xs);

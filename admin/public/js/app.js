@@ -215,15 +215,16 @@ window.AppController = {
     if (!needsAuth) { box.innerHTML = ''; box.classList.add('hidden'); return; }
     box.classList.remove('hidden');
     if (!signedIn) {
-      box.innerHTML = '<span class="auth-note">Read-only until you sign in.</span>'
-        + '<button type="button" id="btn-admin-signin" class="btn-small">Sign in with Google</button>';
+      // The button says what it does and the read-only pill beside it says the consequence,
+      // so a sentence repeating both cost 170px and wrapped the header onto a second row.
+      box.innerHTML = '<button type="button" id="btn-admin-signin" class="btn-small">Sign in</button>';
       const b = document.getElementById('btn-admin-signin');
       if (b) b.onclick = () => window.AdminAuth.signIn(() => this.fetchAllData());
       return;
     }
     const who = (you && (you.email || you.sub)) || 'signed in';
     if (data.writable) {
-      box.innerHTML = '<span class="auth-note">Editing as <b>' + who + '</b>'
+      box.innerHTML = '<span class="auth-note" title="Editing as ' + who + '"><b>' + who + '</b>'
         + (data.branch ? ' \u2192 <code>' + data.branch + '</code>' : '') + '</span>'
         + '<button type="button" id="btn-admin-signout" class="btn-small">Sign out</button>';
     } else {
