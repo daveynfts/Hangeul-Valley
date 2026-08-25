@@ -14,7 +14,7 @@
     },
     {
       "source": "/admin/",
-      "destination": "/admin/public/index.html"
+      "destination": "/admin/public"
     },
     {
       "source": "/admin/css/:path*",

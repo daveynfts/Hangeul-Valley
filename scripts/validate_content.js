@@ -1215,6 +1215,17 @@ const overlayIds = [
   });
   check('no rewrite, redirect or header carries a key Vercel would reject',
     stray.length === 0, stray.join(', '));
+  // cleanUrls strips /index.html and .html from URLs and 308s anything that still carries
+  // one. A rewrite whose destination ends in .html therefore points at an address the router
+  // will redirect away from, and the rewrite dead-ends in a 404 — which is how /admin/ came to
+  // return "The page could not be found" while every asset under it served fine.
+  if (cfg.cleanUrls === true) {
+    const dotHtml = (cfg.rewrites || [])
+      .filter((r) => /\.html$/.test(String(r.destination || '')))
+      .map((r) => r.source + ' → ' + r.destination);
+    check('with cleanUrls on, no rewrite points at a .html address the router redirects away from',
+      dotHtml.length === 0, dotHtml.join(', '));
+  }
   // The admin frontend still asks for the old URL, and the function that used to answer it is
   // gone. Without this rewrite the panel loads and silently believes it cannot write.
   const rw = (cfg.rewrites || []).some((r) => r.source === '/api/admin-host' && r.destination === '/api/admin/host');

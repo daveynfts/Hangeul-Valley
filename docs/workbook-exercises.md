@@ -692,3 +692,35 @@ and `tests/test_unit10_workbook.js`: textbook answer keys, the interaction, the
 art, the clips, the speech-rate check, and that every wrong answer a page leans
 on is spoken to somewhere on it.
 `npm run test:desktop` needs Python, which is not on every machine.
+
+---
+
+## Vercel's routing, measured twice
+
+Two limits shape `api/` in ways nothing local can show, and both have now been hit on
+production more than once. They are written down here because each cost a deploy cycle to
+rediscover, and the second one had already been discovered and reverted before
+(`232df0b`, "Vercel has no catch-all here") without leaving a note where the next person
+would look.
+
+- **Twelve serverless functions on the Hobby plan, and the project uses eleven.** Crossing it
+  does not fail a test: the build fails on Vercel while CI stays green and nothing ships. That
+  is why `api/unit10/[kind].js` serves three routes and why the whole admin API is one
+  function. `validate_content.js` counts the files under `api/` that are not underscore-
+  prefixed and fails at thirteen.
+- **A `[...path].js` catch-all matches exactly one segment here.** `/api/admin/content`
+  answers; `/api/admin/content/levels` is a platform 404 that never reaches the file. And
+  `req.query.path` arrives empty, so the handler has to read `req.url` as well. The fix is not
+  to fight it: the content key rides in `?key=world/topik-2`, where depth cannot go wrong.
+
+Two smaller ones from the same afternoon:
+
+- **`vercel.json` is validated against a closed schema.** JSON has no comments, and an
+  `_comment` key on a rewrite does not get ignored — it fails the build, with a status link
+  pointing at the configuration docs rather than at the line. Guarded now.
+- **`cleanUrls: true` 308s anything ending in `.html`,** so a rewrite whose *destination* ends
+  in `.html` dead-ends. `/admin/` had been returning "The page could not be found" for this
+  reason while every asset beneath it served fine. Also guarded.
+
+The rule these share: a failure that happens after the tests pass needs an invariant of its
+own, because nothing else in this repo will ever see it.
