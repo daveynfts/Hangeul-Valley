@@ -355,9 +355,11 @@
     try {
       const res = await window.apiFetch.saveWorkbook(state.unit, state.book);
       const d = (res && res.data) || {};
+      // The path comes back from the save rather than being guessed from the unit key: not
+      // every bank is <unit>-workbook.json — the textbook banks and the TOPIK one are not.
       window.Toast.success(
-        `Saved ${d.exerciseCount || 0} exercises / ${d.itemCount || 0} questions to `
-        + `worlds/${state.unit}-workbook.json`);
+        `Saved ${d.exerciseCount || 0} exercises / ${d.itemCount || 0} questions`
+        + (d.rel ? ` to ${d.rel}` : ''));
       clearDirty();
       const fresh = await window.apiFetch.getWorkbook(state.unit);
       state.book = fresh.data;
@@ -401,9 +403,10 @@
   function renderUnitPicker() {
     const box = document.getElementById('u14-unit');
     if (!box) return;
+    const labels = (window.AppState || {}).bankLabels || {};
     box.innerHTML = state.units.map((u) =>
       `<button type="button" class="btn btn-sm ${u === state.unit ? 'btn-primary' : 'btn-secondary'}"
-        data-unit="${esc(u)}">${esc(u.replace('unit', 'Unit '))}</button>`).join('');
+        data-unit="${esc(u)}">${esc(labels[u] || u.replace('unit', 'Unit '))}</button>`).join('');
     box.querySelectorAll('[data-unit]').forEach((b) => {
       b.onclick = async () => {
         const next = b.dataset.unit;
@@ -427,6 +430,8 @@
 
   window.Unit14View = {
     async render() {
+      const focus = (window.AppState || {}).focus;
+      if (focus && focus.unit) { window.AppState.focus = null; state.unit = focus.unit; state.book = null; }
       if (!state.units.length) {
         const list = await window.apiFetch.listWorkbooks();
         state.units = (list && list.data) || ['unit14'];

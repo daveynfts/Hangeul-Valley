@@ -116,6 +116,27 @@ const UNEDITABLE = [
   { rel: 'facts.json', why: 'generated from levels.json — edit the words, then regenerate (npm run verify:facts)' }
 ];
 
+// Where a file is properly edited, when somewhere better than a JSON box exists. Most of
+// these files do have a real editor — a word table, a quiz builder, an exercise page — and
+// the Content tab was listing all twenty-one as raw JSON without saying so, which made the
+// whole panel look harder than it is. A file with no `editor` is one where JSON genuinely is
+// the only way in, and saying that plainly is more useful than pretending otherwise.
+const EDITORS = {
+  levels: { tab: 'levels', label: 'Levels tab' },
+  skins: { tab: 'skins', label: 'Skins tab' },
+  layout: { tab: 'unit10', panel: 'layout', label: 'Units tab, Map layout' }
+};
+WORLD_IDS.forEach((w) => {
+  EDITORS['world/' + w.id] = { tab: 'unit10', panel: 'words', unit: w.id, label: 'Units tab, word table' };
+});
+QUIZ_UNITS.forEach((u) => {
+  const world = '2b-' + u.replace('unit', 'unit-');
+  EDITORS['quiz/' + u] = { tab: 'unit10', panel: 'quiz', unit: world, label: 'Units tab, quiz builder' };
+});
+Object.keys(workbook.WORKBOOKS).forEach((unit) => {
+  EDITORS['bank/' + unit] = { tab: 'unit14', unit, label: 'Workbooks tab' };
+});
+
 function byKey(key) {
   return CONTENT.find((c) => c.key === key) || null;
 }
@@ -129,7 +150,12 @@ function relOf(key) {
 // What the picker in the admin is built from: no validators, no paths that would let a
 // browser guess at the repo layout.
 function list() {
-  return CONTENT.map((c) => ({ key: c.key, group: c.group, label: c.label }));
+  return CONTENT.map((c) => ({
+    key: c.key,
+    group: c.group,
+    label: c.label,
+    editor: EDITORS[c.key] || null
+  }));
 }
 
 // Is this published file accounted for? Used by scripts/validate_content.js against the real
@@ -146,4 +172,4 @@ function coverage(rels) {
   return { uncovered, editable: known.size };
 }
 
-module.exports = { CONTENT, UNEDITABLE, byKey, relOf, list, coverage };
+module.exports = { CONTENT, UNEDITABLE, EDITORS, byKey, relOf, list, coverage };

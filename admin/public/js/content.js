@@ -5,11 +5,16 @@
  * until now none of it was reachable: the panel had a screen for Unit 10 and a screen for
  * workbooks, and the other nineteen files had nowhere to be opened from. This is that place.
  *
- * It is deliberately a JSON editor rather than a form per kind. A form would be nicer for the
- * three or four files that have a settled shape, and wrong for the rest — a cassette bank and
- * a level list have almost nothing in common, and a form that half-fits invites edits the
- * validator then refuses. The validator is the same one CI runs, so what this screen owes the
- * user is a clear refusal, not a shape guess.
+ * It is a directory first and a JSON editor second, and that order matters. Seventeen of the
+ * twenty-one files already have a proper editor somewhere in this panel — a word table, a quiz
+ * builder, an exercise page — and listing all of them as raw JSON made the whole thing look
+ * far harder than it is. Each row now says where its file is really edited and takes you
+ * there; the JSON box is the way in for the four cassette banks, which have no editor of their
+ * own, and the way out of trouble for everything else.
+ *
+ * No form per kind, though. A cassette bank and a level list have almost nothing in common,
+ * and a form that half-fits invites edits the validator then refuses. The validator is the
+ * same one CI runs, so what the JSON box owes the user is a clear refusal, not a shape guess.
  */
 (function () {
   'use strict';
@@ -42,6 +47,20 @@
       + (S.status.detail ? '<span>' + esc(S.status.detail) + '</span>' : '');
   }
 
+  // Jump to wherever a file is properly edited, carrying which unit and which panel with it.
+  // The target view reads AppState.focus on render, so this works whether or not that tab has
+  // been opened before.
+  function jump(entry) {
+    if (!entry || !entry.editor) return;
+    window.AppState = window.AppState || {};
+    window.AppState.focus = {
+      panel: entry.editor.panel || null,
+      unit: entry.editor.unit || null,
+      key: entry.key
+    };
+    location.hash = '#' + entry.editor.tab;
+  }
+
   function paintList() {
     const box = el('content-list');
     if (!box) return;
@@ -55,12 +74,26 @@
     box.innerHTML = groups.map((g) =>
       '<div class="content-group">'
       + '<h4 class="content-group-title">' + esc(g.name) + '</h4>'
-      + g.items.map((c) =>
-        '<button type="button" class="content-pick' + (c.key === S.key ? ' active' : '') + '"'
-        + ' data-key="' + esc(c.key) + '">' + esc(c.label) + '</button>').join('')
+      + g.items.map((c) => {
+        const where = c.editor
+          ? '<span class="content-where">' + esc(c.editor.label) + '</span>'
+          : '<span class="content-where none">JSON only</span>';
+        const go = c.editor
+          ? '<button type="button" class="content-go" data-go="' + esc(c.key) + '">Open</button>'
+          : '';
+        return '<div class="content-row' + (c.key === S.key ? ' active' : '') + '">'
+          + '<span class="content-name">' + esc(c.label) + '</span>'
+          + where + go
+          + '<button type="button" class="content-json-btn" data-key="' + esc(c.key) + '"'
+          + ' title="Edit the raw file">JSON</button>'
+          + '</div>';
+      }).join('')
       + '</div>').join('');
-    box.querySelectorAll('.content-pick').forEach((b) => {
+    box.querySelectorAll('.content-json-btn').forEach((b) => {
       b.onclick = () => open(b.getAttribute('data-key'));
+    });
+    box.querySelectorAll('.content-go').forEach((b) => {
+      b.onclick = () => jump(S.list.find((c) => c.key === b.getAttribute('data-go')));
     });
   }
 
@@ -71,8 +104,11 @@
     const revert = el('content-revert');
     if (!head || !area) return;
     if (!S.key) {
-      head.innerHTML = '<h3 class="content-title">Pick a file</h3>'
-        + '<p class="content-sub">Everything the game loads that can be edited by hand is on the left.</p>';
+      head.innerHTML = '<h3 class="content-title">Every file the game loads</h3>'
+        + '<p class="content-sub">Most of them have a proper editor \u2014 a word table, a quiz'
+        + ' builder, an exercise page \u2014 and <b>Open</b> takes you straight there. <b>JSON</b>'
+        + ' edits the raw file, which is the only way in for the cassette banks and a way out of'
+        + ' trouble for everything else.</p>';
       area.value = '';
       area.disabled = true;
       if (save) save.disabled = true;

@@ -353,6 +353,13 @@
 
   window.Unit10View = {
     async render() {
+      // Arrived from the Content tab? It said which unit and which panel it meant.
+      const focus = (window.AppState || {}).focus;
+      if (focus) {
+        window.AppState.focus = null;
+        if (focus.unit && focus.unit !== state.unit) { state.unit = focus.unit; state.layout = null; }
+        if (focus.panel) state.panel = focus.panel;
+      }
       if (!state.layout) await loadAll();
       paintUnitPicker();
       paintPanelAvailability();

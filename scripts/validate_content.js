@@ -1354,6 +1354,57 @@ const overlayIds = [
     html.indexOf('id="u10-unitpick"') >= 0 && view.indexOf("paintUnitPicker") >= 0);
 }());
 
+// ── The panel only calls endpoints production actually has ────────────────────
+// admin/server.js and api/ are two different servers. A route that exists only in Express
+// works perfectly on a developer machine and 404s on the deployed site, and nothing in the
+// test suite can see the difference — the Workbooks tab called /api/workbooks and had been
+// broken on production since the day it was written.
+//
+// So: every /api/ path the browser code asks for must be answerable by something under api/,
+// either as a file or through the one admin function.
+(function checkFrontendEndpoints() {
+  const dir = path.join(ROOT, "admin", "public", "js");
+  if (!fs.existsSync(dir)) { check("the admin frontend is present", false); return; }
+  const asked = new Set();
+  fs.readdirSync(dir).filter((f) => f.endsWith(".js")).forEach((f) => {
+    const src = fs.readFileSync(path.join(dir, f), "utf8");
+    (src.match(/['"`]\/api\/[A-Za-z0-9_\-\/]*/g) || []).forEach((m) => {
+      asked.add(m.slice(1).split("?")[0].replace(/\/$/, ""));
+    });
+  });
+  // What api/ can answer: a file per route, plus everything the admin function dispatches.
+  const served = new Set(["/api/admin", "/api/admin/host", "/api/admin/content", "/api/admin-host"]);
+  // Routes that exist only on the local Express server, on purpose. /api/sync rewrites files
+  // on disk, which a Vercel function has none of. Being on this list is a promise that the
+  // panel hides the control where it cannot work — asserted just below.
+  const LOCAL_ONLY = { "/api/sync": "btn-sync-now" };
+  Object.keys(LOCAL_ONLY).forEach((r) => served.add(r));
+  const walk = (d, prefix) => {
+    fs.readdirSync(d, { withFileTypes: true }).forEach((e) => {
+      if (e.isDirectory()) { walk(path.join(d, e.name), prefix + e.name + "/"); return; }
+      if (!e.name.endsWith(".js") || e.name.charAt(0) === "_") return;
+      served.add("/api/" + prefix + e.name.replace(/\.js$/, "").replace(/^index$/, ""));
+    });
+  };
+  walk(path.join(ROOT, "api"), "");
+  // A dynamic segment answers for anything one level below it.
+  const dynamicParents = [...served].filter((r) => r.indexOf("[") >= 0)
+    .map((r) => r.slice(0, r.lastIndexOf("/")));
+  const missing = [...asked].filter((r) => {
+    if (served.has(r)) return false;
+    if (dynamicParents.some((p) => r.indexOf(p + "/") === 0)) return false;
+    // A concrete path under a route file, e.g. /api/levels/3 under api/levels/[num].js.
+    return ![...served].some((sv) => r.indexOf(sv + "/") === 0);
+  });
+  check("every /api/ path the admin panel calls is answerable on production",
+    missing.length === 0, missing.sort().join(", "));
+  const appJs = read(path.join("admin", "public", "js", "app.js"));
+  const unhidden = Object.keys(LOCAL_ONLY).filter((r) =>
+    appJs.indexOf(LOCAL_ONLY[r]) < 0 || appJs.indexOf(".hidden = !isLocal") < 0);
+  check("and a local-only control is hidden where it cannot work", unhidden.length === 0,
+    unhidden.join(", "));
+}());
+
 // ── Every clip the content asks for must name a file that can exist ──────────
 // A clip is named for its text in hex, six characters per Korean syllable, so a 40-syllable
 // script overruns the 255-byte filename limit. Three of them did, and the publish job died

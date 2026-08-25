@@ -162,10 +162,42 @@ window.apiFetch.getUnit10Layout = () => window.apiFetch('/api/unit10/layout');
 window.apiFetch.saveUnit10Layout = (body) => window.apiFetch('/api/unit10/layout', { method: 'PUT', body });
 window.apiFetch.getUnit10Quiz = () => window.apiFetch('/api/unit10/quiz');
 window.apiFetch.saveUnit10Quiz = (body) => window.apiFetch('/api/unit10/quiz', { method: 'PUT', body });
-window.apiFetch.listWorkbooks = () => window.apiFetch('/api/workbooks');
-window.apiFetch.getWorkbook = (unit) => window.apiFetch('/api/workbook/' + encodeURIComponent(unit));
-window.apiFetch.saveWorkbook = (unit, body) =>
-  window.apiFetch('/api/workbook/' + encodeURIComponent(unit), { method: 'PUT', body });
+// The exercise banks go through the content registry, which is the only one of the two that
+// exists on production. /api/workbooks and /api/workbook/:unit are Express-only routes: there
+// is no serverless function behind either, so the Workbooks tab answered 404 on the deployed
+// site from the day it was written. Nobody added the functions because the Hobby plan allows
+// twelve and the project was already at the ceiling — which is the whole reason the registry
+// is one function serving everything.
+//
+// Adapted here rather than in workbook.js so that view keeps its own shape: it asks for a
+// bank by the key WORKBOOKS uses, and gets back the file, exactly as before.
+const bankKey = (unit) => 'bank/' + unit;
+window.apiFetch.listWorkbooks = () => window.apiFetch.listContent().then((r) => {
+  const banks = (r.data || []).filter((c) => c.key.indexOf('bank/') === 0);
+  // The keys are file stems and read like it — 'topik2-questions', 'unit10-textbook'. The
+  // registry already carries a human name for each, so it comes along rather than being
+  // reinvented by string surgery at the call site.
+  window.AppState = window.AppState || {};
+  window.AppState.bankLabels = {};
+  banks.forEach((c) => { window.AppState.bankLabels[c.key.slice(5)] = c.label; });
+  return { success: true, data: banks.map((c) => c.key.slice(5)) };
+});
+window.apiFetch.getWorkbook = (unit) => window.apiFetch.getContent(bankKey(unit))
+  .then((r) => ({ success: true, data: r.data.body, rel: r.data.rel }));
+window.apiFetch.saveWorkbook = (unit, body) => window.apiFetch.saveContent(bankKey(unit), body)
+  .then((r) => {
+    const b = r.data.body || {};
+    const exercises = b.exercises || [];
+    return {
+      success: true,
+      data: {
+        exerciseCount: exercises.length,
+        itemCount: exercises.reduce((n, e) => n + ((e.items || []).length), 0),
+        rel: r.data.rel,
+        note: r.data.note
+      }
+    };
+  });
 window.apiFetch.getUnit10World = () => window.apiFetch('/api/unit10/world');
 window.apiFetch.saveUnit10World = (body) => window.apiFetch('/api/unit10/world', { method: 'PUT', body });
 window.apiFetch.sync = () => window.apiFetch('/api/sync', { method: 'POST' });
@@ -202,6 +234,15 @@ window.AppController = {
       a.setAttribute('href', window.AppState.gameUrl);
     });
     document.body.classList.toggle('admin-readonly', !window.AppState.adminWritable);
+    // Sync regenerates files on disk, so it belongs to the copy that has a disk. Hidden
+    // rather than left to 404, which is what it did on production until the endpoint check
+    // in validate_content went looking for callers with nothing to answer them.
+    const isLocal = data.gameUrl === 'http://localhost:8742/';
+    const sync = document.getElementById('btn-sync-now');
+    if (sync) {
+      sync.hidden = !isLocal;
+      sync.title = isLocal ? '' : 'Runs on the local admin only — it rewrites files on disk.';
+    }
   },
 
   renderAuth(data) {
