@@ -33,9 +33,32 @@
   --accent-rose-hover: #e11d48;
   --accent-rose-bg: rgba(244, 63, 94, 0.15);
 
-  --radius-card: 0.75rem;
+  --radius-xs: 0.25rem;
   --radius-btn: 0.5rem;
+  --radius-card: 0.75rem;
   --radius-pill: 9999px;
+
+  /* One type scale, because there were twenty-four sizes and no two screens agreed.
+     Three bases were in play at once: rem against the 16px root, rem written as though
+     it were against body's 0.95rem, and raw px. Every value maps to its nearest step,
+     so nothing moved by more than a pixel; what changes is that the next rule has a
+     name to reach for instead of a number to invent. */
+  --fs-xs: 0.75rem;     /* 12 - table meta, chips, captions */
+  --fs-sm: 0.8125rem;   /* 13 - secondary labels, dense controls */
+  --fs-base: 0.875rem;  /* 14 - body copy, inputs, buttons */
+  --fs-md: 1rem;        /* 16 - emphasised body, card titles */
+  --fs-lg: 1.25rem;     /* 20 - section headings */
+  --fs-xl: 1.5rem;      /* 24 - page headings */
+  --fs-2xl: 1.75rem;    /* 28 - the one number a dashboard tile shouts */
+  --fs-3xl: 2.5rem;     /* 40 - an empty-state glyph */
+
+  /* And one spacing scale, on a 4px grid. */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
 
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
@@ -56,8 +79,8 @@ body {
   background-color: var(--bg-app);
   color: var(--text-primary);
   font-family: var(--font-sans);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: var(--fs-base);
+  line-height: 1.55;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -76,14 +99,22 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+/* Three children on one line: brand, tabs, actions. They stopped fitting once the tab list
+   grew to seven and the actions gained a sign-in strip — nav measured 857px, actions 268px,
+   and the row 1265px, so the actions hung 61px off the right edge and the whole page scrolled
+   sideways. Nothing said so; it just looked cramped.
+
+   The tab list is the part that should give: it shrinks and scrolls, the actions keep their
+   size, and below 900px the tabs take a line of their own. */
 .header-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0.75rem 1.5rem;
+  padding: var(--sp-3) var(--sp-5);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
 }
 
 .brand {
@@ -93,19 +124,19 @@ body {
 }
 
 .brand-logo {
-  font-size: 1.75rem;
+  font-size: var(--fs-2xl);
   line-height: 1;
 }
 
 .brand-title {
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.025em;
 }
 
 .brand-subtitle {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   color: var(--accent-indigo);
   font-weight: 600;
   text-transform: uppercase;
@@ -116,21 +147,32 @@ body {
 .nav-tabs {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--sp-1);
   background-color: rgba(30, 41, 59, 0.6);
-  padding: 0.25rem;
+  padding: var(--sp-1);
   border-radius: var(--radius-btn);
   border: 1px solid var(--border-card);
+  /* min-width:0 is the load-bearing line. Without it a flex item refuses to shrink below
+     its content and pushes its siblings out of the box instead of scrolling. */
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-input) transparent;
 }
+.nav-tabs::-webkit-scrollbar { height: 4px; }
+.nav-tabs::-webkit-scrollbar-thumb { background: var(--border-input); border-radius: var(--radius-pill); }
 
 .nav-btn {
   background: transparent;
   border: none;
   color: var(--text-secondary);
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: var(--fs-base);
   font-weight: 500;
-  padding: 0.5rem 1rem;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: var(--sp-2) var(--sp-3);
   border-radius: var(--radius-btn);
   cursor: pointer;
   display: flex;
@@ -154,14 +196,15 @@ body {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  flex: 0 0 auto;
+  gap: var(--sp-3);
 }
 
 .sync-status {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 500;
   color: var(--text-secondary);
   background-color: rgba(30, 41, 59, 0.8);
@@ -225,7 +268,7 @@ body {
   justify-content: center;
   gap: 0.5rem;
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   padding: 0.6rem 1.2rem;
   border-radius: var(--radius-btn);
@@ -237,7 +280,7 @@ body {
 
 .btn-sm {
   padding: 0.4rem 0.8rem;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
 }
 
 .btn-primary {
@@ -285,13 +328,13 @@ body {
 }
 
 .section-title {
-  font-size: 1.5rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
   letter-spacing: -0.02em;
 }
 
 .section-desc {
-  font-size: 0.875rem;
+  font-size: var(--fs-base);
   color: var(--text-secondary);
   margin-top: 0.25rem;
 }
@@ -335,7 +378,7 @@ body {
 }
 
 .stat-label {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--text-secondary);
   text-transform: uppercase;
@@ -343,11 +386,11 @@ body {
 }
 
 .stat-icon {
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
 }
 
 .stat-value {
-  font-size: 1.85rem;
+  font-size: var(--fs-2xl);
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
@@ -359,7 +402,7 @@ body {
 .text-indigo { color: var(--accent-indigo); }
 
 .stat-subtext {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   color: var(--text-muted);
   margin-top: 0.4rem;
 }
@@ -379,12 +422,12 @@ body {
 }
 
 .widget-title {
-  font-size: 1.1rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
 }
 
 .widget-subtitle {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--text-secondary);
   margin-top: 0.2rem;
 }
@@ -399,7 +442,7 @@ body {
   align-items: center;
   padding: 0.25rem 0.65rem;
   border-radius: var(--radius-pill);
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   font-weight: 600;
 }
 
@@ -475,7 +518,7 @@ body {
 .progress-legend {
   display: flex;
   gap: 1.5rem;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--text-secondary);
 }
 
@@ -522,7 +565,7 @@ body {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 0.875rem;
+  font-size: var(--fs-base);
 }
 
 .data-table th {
@@ -530,7 +573,7 @@ body {
   color: var(--text-secondary);
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   letter-spacing: 0.05em;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border-card);
@@ -560,11 +603,11 @@ body {
 
 code.key-badge {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   background-color: rgba(15, 23, 42, 0.8);
   color: var(--accent-blue);
   padding: 0.2rem 0.4rem;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
@@ -597,7 +640,7 @@ code.key-badge {
 }
 
 .sidebar-title {
-  font-size: 1rem;
+  font-size: var(--fs-md);
   font-weight: 700;
 }
 
@@ -615,7 +658,7 @@ code.key-badge {
   border: 1px solid var(--border-card);
   color: var(--text-secondary);
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: var(--fs-base);
   font-weight: 600;
   padding: 0.6rem 0.4rem;
   border-radius: var(--radius-btn);
@@ -652,7 +695,7 @@ code.key-badge {
 }
 
 .level-icon-wrapper {
-  font-size: 2.5rem;
+  font-size: var(--fs-3xl);
   background-color: var(--bg-app);
   width: 60px;
   height: 60px;
@@ -670,18 +713,18 @@ code.key-badge {
 }
 
 .level-meta-title {
-  font-size: 1.35rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
 }
 
 .level-meta-desc {
-  font-size: 0.875rem;
+  font-size: var(--fs-base);
   color: var(--text-secondary);
   margin-top: 0.25rem;
 }
 
 .level-target-info {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   color: var(--text-muted);
   font-weight: 500;
   margin-top: 0.2rem;
@@ -712,7 +755,7 @@ code.key-badge {
   position: absolute;
   left: 0.75rem;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: var(--fs-base);
   pointer-events: none;
 }
 
@@ -722,7 +765,7 @@ code.key-badge {
   border: 1px solid var(--border-input);
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: var(--fs-base);
   padding: 0.55rem 0.75rem 0.55rem 2.25rem;
   border-radius: var(--radius-btn);
   outline: none;
@@ -741,7 +784,7 @@ code.key-badge {
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: var(--fs-base);
 }
 .btn-clear:hover { color: var(--text-primary); }
 .hidden { display: none !important; }
@@ -753,7 +796,7 @@ code.key-badge {
 }
 
 .filter-label {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--text-secondary);
 }
@@ -763,7 +806,7 @@ code.key-badge {
   border: 1px solid var(--border-input);
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 0.875rem;
+  font-size: var(--fs-base);
   padding: 0.55rem 2rem 0.55rem 0.75rem;
   border-radius: var(--radius-btn);
   outline: none;
@@ -781,7 +824,7 @@ code.key-badge {
 }
 
 .search-results-info {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--accent-blue);
   font-weight: 500;
 }
@@ -814,7 +857,7 @@ code.key-badge {
   border: none;
   color: var(--text-secondary);
   font-family: inherit;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 500;
   padding: 0.4rem 0.85rem;
   border-radius: var(--radius-btn);
@@ -846,7 +889,7 @@ code.key-badge {
 }
 
 .pagination-info {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   color: var(--text-secondary);
 }
 
@@ -861,7 +904,7 @@ code.key-badge {
   border: 1px solid var(--border-card);
   color: var(--text-secondary);
   font-family: inherit;
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 500;
   padding: 0.3rem 0.65rem;
   border-radius: var(--radius-btn);
@@ -891,9 +934,9 @@ code.key-badge {
   border: 1px solid var(--border-input);
   color: var(--text-primary);
   font-family: inherit;
-  font-size: 0.85rem;
+  font-size: var(--fs-base);
   padding: 0.3rem 0.5rem;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 .inline-input:focus {
   border-color: var(--border-focus);
@@ -942,7 +985,7 @@ code.key-badge {
 }
 
 .modal-title {
-  font-size: 1.15rem;
+  font-size: var(--fs-lg);
   font-weight: 700;
 }
 
@@ -950,7 +993,7 @@ code.key-badge {
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-size: 1.25rem;
+  font-size: var(--fs-lg);
   cursor: pointer;
 }
 .modal-close:hover { color: var(--text-primary); }
@@ -981,13 +1024,13 @@ code.key-badge {
 }
 
 .form-label {
-  font-size: 0.8rem;
+  font-size: var(--fs-sm);
   font-weight: 600;
   color: var(--text-secondary);
 }
 
 .form-hint {
-  font-size: 0.75rem;
+  font-size: var(--fs-xs);
   color: var(--text-muted);
 }
 
@@ -1006,9 +1049,9 @@ code.key-badge {
 .emoji-btn {
   background: transparent;
   border: 1px solid transparent;
-  font-size: 1.2rem;
+  font-size: var(--fs-lg);
   padding: 0.25rem 0.4rem;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
   cursor: pointer;
   transition: transform 0.1s ease, background 0.1s ease;
 }
@@ -1050,16 +1093,16 @@ code.key-badge {
   to { opacity: 1; transform: translateX(0); }
 }
 
-.toast-icon { font-size: 1.2rem; line-height: 1; }
+.toast-icon { font-size: var(--fs-lg); line-height: 1; }
 .toast-content { flex: 1; }
-.toast-title { font-size: 0.875rem; font-weight: 600; }
-.toast-message { font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.15rem; }
+.toast-title { font-size: var(--fs-base); font-weight: 600; }
+.toast-message { font-size: var(--fs-sm); color: var(--text-secondary); margin-top: 0.15rem; }
 .toast-close {
   background: transparent;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: var(--fs-md);
 }
 .toast-close:hover { color: var(--text-primary); }
 
@@ -1076,7 +1119,7 @@ code.key-badge {
 .u10-subbtn {
   background: var(--bg-card); color: var(--text-secondary);
   border: 1px solid var(--border-card); border-radius: var(--radius-pill);
-  padding: 6px 14px; cursor: pointer; font-weight: 600; font-size: 0.85rem;
+  padding: 6px 14px; cursor: pointer; font-weight: 600; font-size: var(--fs-base);
 }
 .u10-subbtn.active { background: var(--accent-indigo); color: #fff; border-color: var(--accent-indigo); }
 .u10-layout-grid, .u10-quiz-workspace {
@@ -1090,31 +1133,31 @@ code.key-badge {
   background:
     radial-gradient(circle at 20% 20%, rgba(74,222,128,.08), transparent 40%),
     #16301e;
-  border: 1px solid #24522f; border-radius: 12px; overflow: hidden;
+  border: 1px solid #24522f; border-radius: var(--radius-card); overflow: hidden;
 }
 .u10-farm {
   position: absolute; display: flex; align-items: center; justify-content: center;
-  background: #8b5a2b; color: #fff3d6; font-weight: 700; font-size: 13px;
-  border: 2px solid #e8c07a; border-radius: 6px; pointer-events: none;
+  background: #8b5a2b; color: #fff3d6; font-weight: 700; font-size: var(--fs-sm);
+  border: 2px solid #e8c07a; border-radius: var(--radius-btn); pointer-events: none;
 }
 .u10-pin {
   position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px;
   border-radius: 50%; border: 2px solid #fff; background: #1e293b;
   display: flex; align-items: center; justify-content: center;
-  cursor: grab; z-index: 2; font-size: 16px; user-select: none;
+  cursor: grab; z-index: 2; font-size: var(--fs-md); user-select: none;
   box-shadow: 0 4px 10px rgba(0,0,0,.35);
 }
 .u10-pin.active { outline: 3px solid var(--accent-amber); }
 .form-stack { display: flex; flex-direction: column; gap: 10px; }
 .form-stack .form-input, .u10-panel .form-input { padding-left: 0.75rem; }
-.form-stack label { display: flex; flex-direction: column; gap: 4px; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); }
+.form-stack label { display: flex; flex-direction: column; gap: 4px; font-size: var(--fs-sm); font-weight: 600; color: var(--text-secondary); }
 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .card-header-row { display: flex; flex-direction: column; gap: 4px; }
 .u10-quiz-workspace .data-table tbody tr.selected { background: rgba(99,102,241,.18); }
 .u10-words-table input { width: 100%; }
 
 .readonly-pill {
-  font-size: 0.7rem;
+  font-size: var(--fs-xs);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -1155,14 +1198,14 @@ body.admin-readonly .btn-delete-word {
   background-color: #1e293b;
   image-rendering: pixelated;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: var(--radius-btn);
   border: 1px solid var(--border-card);
 }
 .art-thumb { width: 72px; height: 72px; }
 .art-thumb-sm { width: 36px; height: 36px; }
 .art-preview-lg { width: 100%; max-height: 280px; margin-bottom: 12px; }
 .art-row { cursor: pointer; }
-.art-table code { font-size: 0.75rem; }
+.art-table code { font-size: var(--fs-xs); }
 .art-issue-list { margin: 8px 0 0 18px; color: var(--accent-rose); }
 .skins-layout {
   display: grid;
@@ -1176,13 +1219,13 @@ body.admin-readonly .btn-delete-word {
   padding: 12px 14px;
   border: 1px solid var(--border-card);
   background: var(--bg-card);
-  border-radius: 10px;
+  border-radius: var(--radius-card);
   color: inherit;
   cursor: pointer;
 }
 .skin-card.active { border-color: var(--accent-emerald); box-shadow: 0 0 0 1px var(--accent-emerald); }
 .skin-card-name { display: block; font-weight: 600; }
-.skin-card-meta { display: block; font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+.skin-card-meta { display: block; font-size: var(--fs-sm); color: var(--text-muted); margin-top: 2px; }
 .skins-preview-card { padding: 16px; }
 .skins-preview-frame {
   min-height: 220px;
@@ -1195,7 +1238,7 @@ body.admin-readonly .btn-delete-word {
   .skins-layout { grid-template-columns: 1fr; }
 }
 .art-dl { display: grid; grid-template-columns: 140px 1fr; gap: 8px 12px; }
-.art-dl dt { color: var(--text-muted); font-size: 0.8rem; }
+.art-dl dt { color: var(--text-muted); font-size: var(--fs-sm); }
 .art-dl dd { margin: 0; }
 @media (max-width: 980px) {
   .art-stats-grid { grid-template-columns: 1fr 1fr; }
@@ -1207,7 +1250,7 @@ body.admin-readonly .btn-delete-word {
    --text-primary. An earlier pass invented names like --bg-elevated, whose #fff
    fallback put near-white text on a white ground at about 1.05:1. */
 .u14-actions { display: flex; align-items: center; gap: 10px; }
-.u14-dirty { font-size: 12px; font-weight: 700; color: var(--accent-amber); }
+.u14-dirty { font-size: var(--fs-xs); font-weight: 700; color: var(--accent-amber); }
 
 .u14-layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 18px; align-items: start; }
 .u14-side { position: sticky; top: 18px; }
@@ -1227,13 +1270,13 @@ body.admin-readonly .btn-delete-word {
   box-shadow: 0 0 0 2px rgba(99, 102, 241, .28);
 }
 .u14-listbtn:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--border-focus); }
-.u14-list-icon { font-size: 20px; line-height: 1; flex: 0 0 auto; }
+.u14-list-icon { font-size: var(--fs-lg); line-height: 1; flex: 0 0 auto; }
 .u14-list-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.u14-list-no { font-size: 13px; font-weight: 700; color: var(--text-primary); }
-.u14-list-type { font-size: 11px; color: var(--text-secondary); }
+.u14-list-no { font-size: var(--fs-sm); font-weight: 700; color: var(--text-primary); }
+.u14-list-type { font-size: var(--fs-xs); color: var(--text-secondary); }
 
 .u14-grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
-.u14-main label { display: block; font-size: 12px; font-weight: 600; color: var(--text-secondary); margin-top: 12px; }
+.u14-main label { display: block; font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); margin-top: 12px; }
 .u14-main label .form-input,
 .u14-main label .form-select { margin-top: 4px; width: 100%; }
 .u14-main textarea.form-input { resize: vertical; line-height: 1.5; }
@@ -1256,7 +1299,7 @@ body.admin-readonly .btn-delete-word {
   background: var(--bg-app); border: 1px solid var(--border-card);
 }
 .u14-item-head { display: flex; align-items: flex-end; gap: 12px; }
-.u14-item-n { font-size: 16px; font-weight: 800; color: var(--text-primary); padding-bottom: 7px; }
+.u14-item-n { font-size: var(--fs-md); font-weight: 800; color: var(--text-primary); padding-bottom: 7px; }
 .u14-answer { flex: 1 1 auto; margin-top: 0 !important; min-width: 0; }
 .u14-item-head .btn { flex: 0 0 auto; }
 
@@ -1264,18 +1307,18 @@ body.admin-readonly .btn-delete-word {
    as inputs, so it has to read as a display and not as a form gone flat. */
 .u14-item.u14-readonly { border-style: dashed; }
 .u14-readonly .u14-item-head { align-items: center; margin-bottom: 8px; }
-.u14-ro-phrase { font-size: 15px; font-weight: 700; color: var(--text-primary); }
-.u14-ro-art { font-size: 11px; color: var(--text-secondary); }
-.u14-ro-line { font-size: 14px; color: var(--text-primary); line-height: 1.8; }
+.u14-ro-phrase { font-size: var(--fs-md); font-weight: 700; color: var(--text-primary); }
+.u14-ro-art { font-size: var(--fs-xs); color: var(--text-secondary); }
+.u14-ro-line { font-size: var(--fs-base); color: var(--text-primary); line-height: 1.8; }
 .u14-ro-forms { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .u14-ro-chip {
-  padding: 3px 9px; border-radius: var(--radius-btn); font-size: 13px;
+  padding: 3px 9px; border-radius: var(--radius-btn); font-size: var(--fs-sm);
   background: var(--bg-card); border: 1px solid var(--border-card); color: var(--text-primary);
 }
 .u14-ro-chip.key {
   background: rgba(34, 197, 94, .14); border-color: rgba(34, 197, 94, .55); font-weight: 700;
 }
-.u14-ro-en { margin-top: 8px; font-size: 12px; font-style: italic; color: var(--text-secondary); }
+.u14-ro-en { margin-top: 8px; font-size: var(--fs-xs); font-style: italic; color: var(--text-secondary); }
 
 @media (max-width: 1000px) {
   .u14-layout { grid-template-columns: 1fr; }
@@ -1286,7 +1329,7 @@ body.admin-readonly .btn-delete-word {
 }
 
 /* .text-muted is 3.07:1 on a card here. This label needs the readable token. */
-.u14-type-label { font-size: 12px; font-weight: 600; color: var(--text-secondary); }
+.u14-type-label { font-size: var(--fs-xs); font-weight: 600; color: var(--text-secondary); }
 
 /* Which unit's workbook is open. More than one exists, and the editor used to
    read a fixed path — so it showed Unit 14 whichever unit you meant. */
@@ -1294,11 +1337,108 @@ body.admin-readonly .btn-delete-word {
 
 /* The sign-in strip. It only appears where a token means something — on the local
    server the operator is already the operator, so it stays hidden there. */
-.admin-auth { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.admin-auth { display: flex; align-items: center; gap: 8px; font-size: var(--fs-xs); }
 .admin-auth.hidden { display: none; }
 .admin-auth .auth-note { opacity: .85; max-width: 46ch; line-height: 1.35; }
-.admin-auth code { font-size: 11px; padding: 1px 4px; border-radius: 3px;
+.admin-auth code { font-size: var(--fs-xs); padding: 1px 4px; border-radius: var(--radius-xs);
   background: rgba(255,255,255,.08); user-select: all; }
-.admin-auth .btn-small { font: inherit; padding: 3px 9px; border-radius: 4px;
+.admin-auth .btn-small { font: inherit; padding: 3px 9px; border-radius: var(--radius-xs);
   border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
 .admin-auth .btn-small:hover { background: rgba(255,255,255,.1); }
+
+/* Below this the seven tabs cannot share a line with the brand and the actions, so they
+   take one of their own and the brand sheds its subtitle. */
+@media (max-width: 900px) {
+  .nav-tabs { order: 3; flex-basis: 100%; }
+  .brand-subtitle { display: none; }
+  .header-container { row-gap: var(--sp-2); }
+}
+@media (max-width: 560px) {
+  .header-container { padding: var(--sp-2) var(--sp-3); }
+  .app-main { padding: var(--sp-4) var(--sp-3) !important; }
+  .admin-auth .auth-note { max-width: none; }
+}
+
+/* Under 720px the two-column workspaces have nowhere to put their second column: each one
+   pins a sidebar at 220-290px against a 1fr pane, which on a 375px screen means a card 537px
+   wide and a page that scrolls sideways. They stack instead, and wide tables scroll inside
+   themselves rather than dragging the page with them. */
+@media (max-width: 720px) {
+  .skins-layout,
+  .u14-layout,
+  .u10-layout-grid,
+  .u10-quiz-workspace,
+  .levels-container {
+    grid-template-columns: 1fr;
+  }
+  .u14-side, .skins-side { position: static; }
+  .art-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .art-dl { grid-template-columns: 1fr; gap: var(--sp-1) 0; }
+  /* The card scrolls, not the table. Forcing display:block onto a <table> collapses the
+     column widths it exists to compute, so the wide child is left alone and its container
+     is what gains the scrollbar. */
+  .card { padding: var(--sp-4); overflow-x: auto; }
+}
+
+/* --- Content tab: the registry, and one JSON editor for all of it --- */
+.content-layout {
+  display: grid;
+  grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
+  gap: var(--sp-4);
+  align-items: start;
+}
+.content-side { max-height: 70vh; overflow-y: auto; padding: var(--sp-3); }
+.content-group + .content-group { margin-top: var(--sp-4); }
+.content-group-title {
+  font-size: var(--fs-xs); font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin: 0 0 var(--sp-2) var(--sp-1);
+}
+.content-pick {
+  display: block; width: 100%; text-align: left;
+  background: transparent; border: 1px solid transparent;
+  border-radius: var(--radius-btn); color: var(--text-secondary);
+  font: inherit; font-size: var(--fs-sm); padding: var(--sp-2) var(--sp-3);
+  cursor: pointer; transition: background-color .15s ease, color .15s ease;
+}
+.content-pick:hover { background: var(--bg-card-hover); color: var(--text-primary); }
+.content-pick.active {
+  background: var(--accent-indigo); color: #fff; font-weight: 600;
+  border-color: var(--accent-indigo);
+}
+.content-pane { display: flex; flex-direction: column; gap: var(--sp-3); }
+.content-title { font-size: var(--fs-md); font-weight: 700; margin: 0; }
+.content-sub { font-size: var(--fs-xs); color: var(--text-muted); margin: var(--sp-1) 0 0; }
+.content-sub code { font-family: var(--font-mono); }
+.content-empty { font-size: var(--fs-sm); color: var(--text-muted); margin: 0; }
+
+/* A refusal is the main thing this screen has to say, so it gets room and colour rather
+   than a toast that has gone by the time you look up from the editor. */
+.content-status { display: none; }
+.content-status.ok, .content-status.bad, .content-status.busy {
+  display: block; font-size: var(--fs-sm); line-height: 1.5;
+  padding: var(--sp-2) var(--sp-3); border-radius: var(--radius-btn);
+  border: 1px solid transparent;
+}
+.content-status strong { display: block; font-weight: 700; }
+.content-status span { display: block; margin-top: 2px; opacity: .9; }
+.content-status.ok { background: rgba(16,185,129,.12); border-color: var(--accent-emerald); color: #d1fae5; }
+.content-status.bad { background: var(--accent-rose-bg); border-color: var(--accent-rose); color: #ffe4e6; }
+.content-status.busy { background: var(--bg-card-hover); border-color: var(--border-card); color: var(--text-secondary); }
+
+.content-json {
+  width: 100%; min-height: 52vh; resize: vertical;
+  background: var(--bg-input); color: var(--text-primary);
+  border: 1px solid var(--border-input); border-radius: var(--radius-btn);
+  font-family: var(--font-mono); font-size: var(--fs-sm); line-height: 1.55;
+  padding: var(--sp-3); tab-size: 2;
+}
+.content-json:focus { outline: none; border-color: var(--border-focus); }
+.content-json:disabled { opacity: .6; }
+.content-actions { display: flex; justify-content: flex-end; gap: var(--sp-2); }
+
+@media (max-width: 720px) {
+  .content-layout { grid-template-columns: 1fr; }
+  .content-side { max-height: 240px; }
+  .content-json { min-height: 40vh; }
+}

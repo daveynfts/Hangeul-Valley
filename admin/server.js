@@ -343,11 +343,10 @@ app.put('/api/skins/catalog', (req, res, next) => {
 //
 // The older per-resource routes above are left alone: the existing editor screens call them,
 // and rewriting those is a separate job from making every file reachable.
-app.get('/api/admin/content', (req, res) => {
-  res.json({ success: true, data: contentLib.list() });
-});
 // ?key= is the primary form, because that is what works on Vercel; the path form is kept
-// so the two halves accept the same requests either way.
+// so the two halves accept the same requests either way. One handler, not two: Express
+// takes the first route that matches, so a second app.get on the same path is dead code
+// that registers without complaint and never runs.
 app.get('/api/admin/content', (req, res, next) => {
   if (!req.query.key) { res.json({ success: true, data: contentLib.list() }); return; }
   serveContent(req.query.key, res, next);

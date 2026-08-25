@@ -313,6 +313,7 @@ window.AppController = {
 window.AppRouter = {
   routes: {
     'dashboard': () => window.DashboardView && window.DashboardView.render(),
+    'content': () => window.ContentView && window.ContentView.render(),
     'levels': () => window.LevelsView && window.LevelsView.render(),
     'vocab': () => window.VocabView && window.VocabView.render(),
     'unit10': () => window.Unit10View && window.Unit10View.render(),

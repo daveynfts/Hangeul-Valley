@@ -1288,6 +1288,39 @@ const overlayIds = [
     bad.length === 0, bad.slice(0, 3).join(' | '));
 }());
 
+// ── The admin can actually be used ─────────────────────────────────────
+// A registry with no screen is a feature nobody can reach, which is the state the panel was
+// in for four units: routes existed for Unit 10 and the workbooks, and the other nineteen
+// files had nowhere to be opened from. A tab is four separate pieces — button, section,
+// route, script — and losing any one of them leaves the other three looking fine.
+(function checkAdminContentTab() {
+  const html = read(path.join("admin", "public", "index.html"));
+  const app = read(path.join("admin", "public", "js", "app.js"));
+  check("the admin has a Content tab button", html.indexOf('data-tab="content"') >= 0);
+  check("and a section for it to render into", html.indexOf('id="tab-content"') >= 0);
+  check("and the view script is loaded", html.indexOf("js/content.js") >= 0);
+  check("and the router knows the route",
+    /'content':\s*\(\)\s*=>\s*window\.ContentView/.test(app));
+  const view = read(path.join("admin", "public", "js", "content.js"));
+  check("the view reads its list from the server rather than a copy",
+    view.indexOf("apiFetch.listContent") >= 0 && view.indexOf("apiFetch.saveContent") >= 0);
+  // Two handlers on one Express path is dead code that registers without complaint: the
+  // first match wins and the second never runs. That is how ?key= silently returned the
+  // whole list instead of the file.
+  const server = read(path.join("admin", "server.js"));
+  // Counted by literal, not matched by pattern: the route strings contain slashes and the
+  // escaping is not worth the risk of a regex that quietly matches nothing.
+  const countOf = (needle) => server.split(needle).length - 1;
+  const dupes = [];
+  ['/api/admin/content', '/api/admin-host', '/api/workbook/:unit', '/api/skins/catalog']
+    .forEach((route) => {
+      ['get', 'put'].forEach((verb) => {
+        if (countOf("app." + verb + "('" + route + "'") > 1) dupes.push(verb.toUpperCase() + ' ' + route);
+      });
+    });
+  check("no Express path is registered twice for the same method", dupes.length === 0, dupes.join(", "));
+}());
+
 // ── Every clip the content asks for must name a file that can exist ──────────
 // A clip is named for its text in hex, six characters per Korean syllable, so a 40-syllable
 // script overruns the 255-byte filename limit. Three of them did, and the publish job died
