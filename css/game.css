@@ -1403,18 +1403,41 @@
       cursor: pointer; box-shadow: 0 3px 0 #166534;
     }
     #quiz-result-continue:hover { filter: brightness(1.05); }
-    #quiz-ui.quiz-success #quiz-hint-box,
-    #quiz-ui.quiz-success #question-text,
-    #quiz-ui.quiz-success #en-word-display,
-    #quiz-ui.quiz-success #quiz-ko-prompt,
-    #quiz-ui.quiz-success #quiz-choices,
-    #quiz-ui.quiz-success #quiz-listen-controls,
-    #quiz-ui.quiz-success #quiz-funfact-box,
-    #quiz-ui.quiz-success #quiz-tier-hints,
-    #quiz-ui.quiz-success #quiz-hint-reveal-card,
-    #quiz-ui.quiz-success #answer-input,
-    #quiz-ui.quiz-success #feedback-text,
-    #quiz-ui.quiz-success .quiz-buttons { display: none !important; }
+    #quiz-result-typed {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #9a3412;
+      text-decoration: line-through; text-decoration-color: #dc2626aa;
+    }
+    #quiz-result-note {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #92400e;
+      background: #fef3c7; border: 1px solid #fcd34d; border-radius: 6px;
+      padding: 5px 9px; margin-top: 2px;
+    }
+    #quiz-result-typed.hidden, #quiz-result-note.hidden { display: none !important; }
+
+    /* An answered question hides the question, whether it was answered right or wrong —
+       so the hiding hangs on .quiz-done, and .quiz-success / .quiz-lapsed carry only the
+       colour. Before the lapse reveal existed the two were the same thing and the list
+       below was keyed to .quiz-success, which is the sort of coupling that quietly makes
+       a second outcome impossible to add. */
+    #quiz-ui.quiz-done #quiz-hint-box,
+    #quiz-ui.quiz-done #question-text,
+    #quiz-ui.quiz-done #en-word-display,
+    #quiz-ui.quiz-done #quiz-ko-prompt,
+    #quiz-ui.quiz-done #quiz-choices,
+    #quiz-ui.quiz-done #quiz-listen-controls,
+    #quiz-ui.quiz-done #quiz-funfact-box,
+    #quiz-ui.quiz-done #quiz-tier-hints,
+    #quiz-ui.quiz-done #quiz-hint-reveal-card,
+    #quiz-ui.quiz-done #answer-input,
+    #quiz-ui.quiz-done #feedback-text,
+    #quiz-ui.quiz-done .quiz-buttons { display: none !important; }
+
+    #quiz-ui.quiz-lapsed { border-color: #b91c1c; }
+    #quiz-ui.quiz-lapsed #quiz-result-msg { color: #b91c1c; }
+    #quiz-ui.quiz-lapsed #quiz-result-continue {
+      background: linear-gradient(180deg, #fdba74, #fb923c);
+      border-color: #9a3412; color: #7c2d12; box-shadow: 0 3px 0 #9a3412;
+    }
 
     /* ── VOCABULARY BOOK ─────────────────────────────────────────────────── */
     #vocab-overlay {

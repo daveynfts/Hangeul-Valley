@@ -1001,7 +1001,7 @@ function showQuizSuccess({ message, ko, en, continueLabel, delay, onDone }){
   }
   if (box) box.classList.remove('hidden');
   const qui = $('quiz-ui');
-  if (qui) qui.classList.add('quiz-success');
+  if (qui) { qui.classList.add('quiz-done'); qui.classList.add('quiz-success'); }
   clearQuizFinishTimer();
   // delay === 0: harvest stays open so the player can reread the word, then dismiss.
   if (delay === 0) {
@@ -1010,6 +1010,60 @@ function showQuizSuccess({ message, ko, en, continueLabel, delay, onDone }){
   }
   const wait = typeof delay === 'number' ? delay : 2800;
   quizFinishTimer = setTimeout(settleQuizAdvance, wait);
+}
+
+// The mirror of showQuizSuccess, for the one place an attempt ends in failure rather than
+// looping back: a phase-3 lapse. That path used to print "Wrong! Plant regressed to Phase 2!"
+// and close itself 1.8s later without ever showing what the word was — the learner left the
+// one moment they most needed to see it, and 1.8s is not enough to read a word you have just
+// got wrong in any case. The multiple-choice path had this right all along: it lights up the
+// correct button on a miss, "a wrong guess is the moment the word is learned". Typing did not.
+//
+// So the answer is shown, said aloud, and set against what was actually typed, and the panel
+// waits to be dismissed instead of timing out. Deliberately no checkQuestProgress('quiz'):
+// this is a miss, and the miss was already counted by the caller.
+function showQuizReveal({ message, ko, en, typed, note, continueLabel, onDone }){
+  pendingQuizAdvance = onDone;
+  const box = $('quiz-result');
+  const art = $('quiz-result-art');
+  const msg = $('quiz-result-msg');
+  const koEl = $('quiz-result-ko');
+  const enEl = $('quiz-result-en');
+  const tyEl = $('quiz-result-typed');
+  const noteEl = $('quiz-result-note');
+  const go = $('quiz-result-continue');
+  if (msg) msg.textContent = message || '';
+  if (koEl) koEl.textContent = ko || '';
+  if (enEl) enEl.textContent = en || '';
+  // Shown only when there is something to compare against. A blank submission has nothing to
+  // teach, and an empty struck-through row reads as a rendering fault rather than as silence.
+  if (tyEl) {
+    const t = String(typed || '').trim();
+    tyEl.textContent = t ? 'You wrote: ' + t : '';
+    tyEl.classList.toggle('hidden', !t);
+  }
+  if (noteEl) {
+    noteEl.textContent = note || '';
+    noteEl.classList.toggle('hidden', !note);
+  }
+  if (art) {
+    art.innerHTML = (ko && typeof vocabIconHtml === 'function')
+      ? vocabIconHtml(ko, '', 64)
+      : '';
+  }
+  if (go) {
+    go.textContent = continueLabel || 'Continue';
+    go.onclick = closeQuiz;
+  }
+  if (box) box.classList.remove('hidden');
+  const qui = $('quiz-ui');
+  if (qui) { qui.classList.add('quiz-done'); qui.classList.add('quiz-lapsed'); }
+  // No timer: the panel is the study, so it stays until it is dismissed.
+  clearQuizFinishTimer();
+  // Hearing it once here is the repetition worth having, and it is not a hint — the answer
+  // is already on screen and the grade is already recorded.
+  if (ko) setTimeout(() => speakKorean(ko), 220);
+  if (go) setTimeout(() => { try { go.focus(); } catch (e) {} }, 40);
 }
 
 // ── Answer matching ──────────────────────────────────────────────────────────
@@ -1347,6 +1401,12 @@ function closeQuiz(){
   appleTreeQuizPending=false; // always reset on close
   const hc = $('quiz-hint-reveal-card'); if(hc) { hc.innerHTML = ''; hc.classList.add('hidden'); }
   const res = $('quiz-result'); if(res) res.classList.add('hidden');
+  // The reveal fills two rows the success panel never touches, so they are cleared here
+  // rather than there: otherwise a lapse followed by a win leaves "You wrote: …" from the
+  // previous word sitting under a green Harvested.
+  ['quiz-result-typed', 'quiz-result-note'].forEach((id) => {
+    const el = $(id); if (el) { el.textContent = ''; el.classList.add('hidden'); }
+  });
   quizBackdrop.classList.remove('visible');
   const qui=$('quiz-ui'); if(qui) qui.className='';
   // Restore the typing layout so the next quiz opens in a known state.
@@ -1419,6 +1479,9 @@ function submitAnswer(){
     // exactly the signal SM-2's "Hard" is meant to capture.
     currentQuizMeta.attempts++;
     const isApple = appleTreeQuizPending;
+    // Captured before the box is cleared: the reveal shows it back, and seeing the near-miss
+    // beside the word is most of what there is to learn from a lapse.
+    const typedRaw = answerInput.value;
     const wrong = isApple ? '❌ Wrong! Try again to harvest!' : (currentPhase===3?'❌ Wrong! Plant regressed to Phase 2!':'❌ Wrong! Try again.');
     feedbackText.textContent=wrong; feedbackText.className='';
     answerInput.value=''; answerInput.focus();
@@ -1432,10 +1495,18 @@ function submitAnswer(){
       // Failing at phase 3 is a lapse: a mature word drops to relearning and loses half
       // its interval, a learning word restarts its steps.
       const after = gradeWord(cw.ko, GRADE.AGAIN);
-      if(after.lapses > 0){
-        feedbackText.textContent = `❌ Lapsed — interval reset to ${srsIntervalLabel(after)} after relearning.`;
-      }
-      setTimeout(()=>{ closeQuiz(); if(sceneRef) sceneRef.regressionPlot(cp,cw); },1800);
+      // The apple-tree quiz is the exception and keeps its retry: it is answered again for
+      // the same reward, so showing the word there would be handing over the payout.
+      showQuizReveal({
+        message: after.lapses > 0 ? 'Lapsed' : 'The answer was',
+        ko: cw.ko, en: cw.en,
+        typed: typedRaw,
+        note: after.lapses > 0
+          ? `Back to Phase 2 · next review in ${srsIntervalLabel(after)} after relearning.`
+          : 'Back to Phase 2 — water it again to bring it back.',
+        continueLabel: 'Got it — back to Phase 2',
+        onDone: () => { if(sceneRef) sceneRef.regressionPlot(cp,cw); }
+      });
     }
   }
 }
