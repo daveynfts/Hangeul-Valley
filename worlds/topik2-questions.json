@@ -22,7 +22,7 @@
       "icon": "📰",
       "blurbEn": "A headline in compressed newspaper Korean, and four readings of it — three of which are what taking one word literally looks like.",
       "instructionKo": "다음 신문 기사의 제목을 가장 잘 설명한 것을 고르십시오.",
-      "instructionEn": "Choose the sentence that best explains the newspaper headline. (test v2)",
+      "instructionEn": "Choose the sentence that best explains the newspaper headline.",
       "noteEn": "A headline drops its particles and its verb endings, so every word left has to carry more than usual and each one can be read two ways. That is the whole of this question type: the options are not four summaries, they are four readings, and three of them take a figurative word at face value. Work the hinge words first — here 썰렁하다 and 출구 — and the options sort themselves.",
       "pattern": "제목을 가장 잘 설명한 것 고르기",
       "items": [
