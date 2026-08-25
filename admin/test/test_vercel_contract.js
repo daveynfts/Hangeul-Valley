@@ -262,6 +262,11 @@ async function runTests() {
     };
     const host = await call('/api/admin/host');
     assert(host.statusCode === 200 && host.body.data.writable === false, 'host resolves from the url');
+    // '/api/admin' is a prefix of '/api/admin-host', so a naive strip leaves '-host'. That is
+    // exactly what happened, and it 404'd the one URL the existing panel asks for.
+    const legacy = await call('/api/admin-host');
+    assert(legacy.statusCode === 200 && legacy.body.data.writable === false,
+      'and the old /api/admin-host URL still lands on host, got ' + legacy.statusCode);
     const list = await call('/api/admin/content');
     assert(Array.isArray(list.body.data) && list.body.data.length >= 20, 'the registry resolves from the url');
     // A key with a slash in it is the case a naive split would lose. Checked with a write
@@ -275,6 +280,22 @@ async function runTests() {
     assert(res.statusCode === 401, 'a multi-segment key resolves, then refuses the write: got ' + res.statusCode);
     const gone = await call('/api/admin/content/world/no-such-world');
     assert(gone.statusCode === 404, 'while an unknown one 404s, got ' + gone.statusCode);
+  });
+
+  // How the key actually travels in production. Vercel matches exactly one segment after
+  // /api/admin/, so /api/admin/content/world/topik-2 is a platform 404 that never reaches the
+  // function — the key rides in the query instead, where depth cannot go wrong.
+  await test('the content key travels in ?key=, which is what production can route', async () => {
+    const call = async (method, key, body) => {
+      const req = { method, url: '/api/admin/content', headers: {}, query: { path: ['content'], key }, body };
+      const res = Object.assign(mockRes(), { headers: {}, setHeader(k, v) { this.headers[k] = v; return this; } });
+      await adminH(req, res);
+      return res;
+    };
+    const put = await call('PUT', 'world/topik-2', {});
+    assert(put.statusCode === 401, 'a key with a slash resolves, then refuses the write: got ' + put.statusCode);
+    const gone = await call('PUT', 'world/no-such-world', {});
+    assert(gone.statusCode === 404, 'and an unknown key is still 404, got ' + gone.statusCode);
   });
 
   await test('PUT on a Vercel GET handler is refused with 409', () => {

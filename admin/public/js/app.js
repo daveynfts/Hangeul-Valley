@@ -175,9 +175,12 @@ window.apiFetch.getAdminHost = () => window.apiFetch('/api/admin-host');
 // The content registry. One list, one place, and the same URLs on both halves — which is
 // what stops a unit being added to the game and quietly having no way in here.
 window.apiFetch.listContent = () => window.apiFetch('/api/admin/content');
-window.apiFetch.getContent = (key) => window.apiFetch('/api/admin/content/' + key);
+// ?key= rather than a path segment: Vercel matches only one segment after /api/admin/, so
+// /api/admin/content/world/topik-2 never reaches the function at all.
+window.apiFetch.getContent = (key) =>
+  window.apiFetch('/api/admin/content?key=' + encodeURIComponent(key));
 window.apiFetch.saveContent = (key, body) =>
-  window.apiFetch('/api/admin/content/' + key, { method: 'PUT', body });
+  window.apiFetch('/api/admin/content?key=' + encodeURIComponent(key), { method: 'PUT', body });
 
 // 5. Data Refresh & Synchronization Manager
 window.AppController = {

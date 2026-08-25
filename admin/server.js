@@ -346,19 +346,26 @@ app.put('/api/skins/catalog', (req, res, next) => {
 app.get('/api/admin/content', (req, res) => {
   res.json({ success: true, data: contentLib.list() });
 });
-app.get('/api/admin/content/*', (req, res, next) => {
+// ?key= is the primary form, because that is what works on Vercel; the path form is kept
+// so the two halves accept the same requests either way.
+app.get('/api/admin/content', (req, res, next) => {
+  if (!req.query.key) { res.json({ success: true, data: contentLib.list() }); return; }
+  serveContent(req.query.key, res, next);
+});
+app.get('/api/admin/content/*', (req, res, next) => serveContent(req.params[0], res, next));
+function serveContent(key, res, next) {
   try {
-    const key = req.params[0];
     const entry = contentLib.byKey(key);
     if (!entry) { const e = new Error(`No content registered under "${key}"`); e.status = 404; throw e; }
     const full = path.join(getRootDir(), entry.rel);
     const body = JSON.parse(fs.readFileSync(full, 'utf8'));
     res.json({ success: true, data: { key: entry.key, label: entry.label, group: entry.group, rel: entry.rel, body } });
   } catch (err) { next(err); }
-});
-app.put('/api/admin/content/*', (req, res, next) => {
+}
+app.put('/api/admin/content', (req, res, next) => saveContent(req.query.key, req, res, next));
+app.put('/api/admin/content/*', (req, res, next) => saveContent(req.params[0], req, res, next));
+function saveContent(key, req, res, next) {
   try {
-    const key = req.params[0];
     const entry = contentLib.byKey(key);
     if (!entry) { const e = new Error(`No content registered under "${key}"`); e.status = 404; throw e; }
     const root = getRootDir();
@@ -371,7 +378,7 @@ app.put('/api/admin/content/*', (req, res, next) => {
     atomicWriteJson(path.join(root, entry.rel), JSON.stringify(normalised, null, 2) + '\n');
     res.json({ success: true, data: { key: entry.key, rel: entry.rel, body: normalised, live: false, note: 'Written to the working tree. Commit and publish to ship it.' } });
   } catch (err) { next(err); }
-});
+}
 
 app.get('/api/admin-host', (req, res) => {
   res.json({

@@ -40,12 +40,31 @@ const json = (res, code, body) => { res.status(code).json(body); };
 // and on this project it arrives empty — so the URL is read as well and whichever answers
 // wins. Trusting one mechanism is what made every route 404 on production while the function
 // itself was plainly running and returning its own error text.
+// The content key travels in a query parameter, not in the path.
+//
+// api/admin/[...path].js is named as a catch-all and Vercel matches exactly one segment after
+// /api/admin/ — /api/admin/content answers, /api/admin/content/levels is a platform 404 that
+// never reaches this file. Rather than keep guessing at the router across deploys, the key
+// stops being part of the path: ?key=world/topik-2 has no depth to get wrong, and one segment
+// is demonstrably enough. The path form is still read so the local Express server and any
+// direct call keep working.
+function keyOf(req, parts) {
+  const q = (req.query && req.query.key) || '';
+  if (q) return String(Array.isArray(q) ? q[0] : q);
+  return parts.slice(1).join('/');
+}
+
 function segmentsOf(req) {
   const fromQuery = [].concat((req.query && req.query.path) || []).filter(Boolean);
   if (fromQuery.length) return fromQuery.map(String);
-  const raw = String(req.url || '').split('?')[0];
-  const at = raw.indexOf('/api/admin');
-  const tail = at >= 0 ? raw.slice(at + '/api/admin'.length) : raw;
+  const raw = String(req.url || '').split('?')[0].replace(/\/+$/, '');
+  // The legacy URL, which vercel.json rewrites here. It has to be matched before the prefix
+  // strip below, because '/api/admin' is a prefix of '/api/admin-host' and stripping it
+  // leaves '-host' — which is how this endpoint 404'd while every other route worked.
+  if (raw === '/api/admin-host') return ['host'];
+  const base = '/api/admin/';
+  const at = raw.indexOf(base);
+  const tail = at >= 0 ? raw.slice(at + base.length) : raw.replace(/^\/+/, '');
   return tail.split('/').filter(Boolean).map(decodeURIComponent);
 }
 const fail = (res, code, error, details) =>
@@ -185,7 +204,7 @@ module.exports = async (req, res) => {
 
   const parts = segmentsOf(req);
   const head = parts[0] || '';
-  const key = parts.slice(1).join('/');
+  const key = keyOf(req, parts);
 
   try {
     if (head === 'host') {
