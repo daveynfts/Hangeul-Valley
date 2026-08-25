@@ -68,6 +68,38 @@ function readBearer(req) {
   return m ? m[1] : '';
 }
 
+// Where the game's content lives in the bucket. vercel.json rewrites /worlds/:path* and its
+// siblings to cdn.daveynfts.com/hangeul-valley/, so a file written under this prefix is the
+// file the game will load on the next request — no deploy in between.
+const CONTENT_PREFIX = 'hangeul-valley/';
+// The public face of the same objects. vercel.json rewrites /worlds/:path* here, so this
+// is what the game reads and therefore what the admin has to read back after a save —
+// the copy bundled into a deployment goes stale the moment an edit lands.
+const CONTENT_CDN = 'https://cdn.daveynfts.com/' + CONTENT_PREFIX;
+
+// Push one edited content file straight to the CDN, so an admin save is live at once.
+//
+// The commit still happens: the repo is the source of truth, and scripts/r2Content.js
+// re-uploads from it on every publish. Doing both is what keeps that from mattering — the
+// bytes here and the bytes in the commit are the same, so the next publish rewrites this
+// object with what is already in it. Writing to R2 *alone* would work for about as long as
+// it took someone to run publish, and then silently revert.
+async function putContent(rel, text) {
+  const client = r2Client();
+  if (!client) throw new Error('R2 is not configured');
+  const { PutObjectCommand } = require('@aws-sdk/client-s3');
+  const key = CONTENT_PREFIX + String(rel).split('\\').join('/');
+  await client.send(new PutObjectCommand({
+    Bucket: r2Bucket(),
+    Key: key,
+    Body: Buffer.from(text, 'utf8'),
+    ContentType: 'application/json; charset=utf-8',
+    CacheControl: 'public, max-age=60'
+  }));
+  return key;
+}
+
 module.exports = {
-  env, r2Client, r2Bucket, saveKey, setCors, verifyGoogleIdToken, readBearer
+  env, r2Client, r2Bucket, saveKey, setCors, verifyGoogleIdToken, readBearer,
+  putContent, CONTENT_PREFIX, CONTENT_CDN
 };

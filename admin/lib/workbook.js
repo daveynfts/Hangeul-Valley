@@ -47,7 +47,10 @@ const WORKBOOKS = {
   unit14: path.join('worlds', 'unit14-workbook.json'),
   'unit14-textbook': path.join('worlds', 'unit14-textbook.json'),
   unit10: path.join('worlds', 'unit10-workbook.json'),
-  'unit10-textbook': path.join('worlds', 'unit10-textbook.json')
+  'unit10-textbook': path.join('worlds', 'unit10-textbook.json'),
+  // Not a unit at all: the exam world's bank, which grows a question at a time rather than
+  // arriving whole from a chapter. Same format, same validator, same editor.
+  'topik2-questions': path.join('worlds', 'topik2-questions.json')
 };
 
 function workbookRel(unit) {
@@ -407,8 +410,11 @@ function cleanExercise(ex, i, seenIds) {
   return out;
 }
 
-function saveWorkbook(body, rootDir, unit) {
-  const rel = workbookRel(unit);
+// Checking and writing are separate so the same rules can run inside a Vercel function,
+// where the filesystem is read-only and the write goes to GitHub and R2 instead. `rel` is
+// only ever read for the fallback id, so a caller with no file in mind can pass the name it
+// wants the bank to have.
+function validateWorkbook(body, rel) {
   if (!body || typeof body !== 'object') throw new Error('Workbook body must be an object');
   const list = Array.isArray(body.exercises) ? body.exercises : null;
   if (!list) throw new Error('Workbook must include an exercises array');
@@ -417,7 +423,7 @@ function saveWorkbook(body, rootDir, unit) {
   const seen = new Set();
   const exercises = list.map((ex, i) => cleanExercise(ex, i, seen));
 
-  const next = {
+  return {
     id: str(body.id) || path.basename(rel, '.json'),
     source: str(body.source),
     titleKo: str(body.titleKo) || '연습 문제',
@@ -430,10 +436,23 @@ function saveWorkbook(body, rootDir, unit) {
     againKo: str(body.againKo) || '다시 풀기',
     backKo: str(body.backKo) || '연습 목록',
     doneKo: str(body.doneKo) || '닫기',
+    // A bank may hold its English gloss back until the row is checked. Off unless asked for,
+    // because on a textbook page the gloss beside the sentence is a help, not a giveaway.
+    holdGloss: body.holdGloss === true,
     exercises
   };
-  writeJson(rel, next, rootDir);
-  return { exerciseCount: exercises.length, itemCount: exercises.reduce((n, e) => n + e.items.length, 0) };
 }
 
-module.exports = { getWorkbook, saveWorkbook, workbookRel, WORKBOOKS, WORKBOOK_REL, TYPES };
+function saveWorkbook(body, rootDir, unit) {
+  const rel = workbookRel(unit);
+  const next = validateWorkbook(body, rel);
+  writeJson(rel, next, rootDir);
+  return {
+    exerciseCount: next.exercises.length,
+    itemCount: next.exercises.reduce((n, e) => n + e.items.length, 0)
+  };
+}
+
+module.exports = {
+  getWorkbook, saveWorkbook, validateWorkbook, workbookRel, WORKBOOKS, WORKBOOK_REL, TYPES
+};

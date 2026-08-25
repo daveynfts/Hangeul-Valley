@@ -3,7 +3,10 @@
 /**
  * Asserts Vercel serverless GET handlers return the same JSON shape (and, where
  * they share a lib, the same payload) as the local Express admin server.
- * Writes on Vercel must 409. admin-host.writable is false on Vercel, true locally.
+ * Writes on Vercel used to 409 for everything. That changed deliberately: the admin can now
+ * edit content on production, so the contract is no longer read-only-versus-writable but
+ * who-you-are. Reads stay open, and a write is refused with 401 unsigned and 403 signed as
+ * anyone but the owner. The old per-resource GET handlers keep refusing writes as before.
  */
 
 const path = require('path');
@@ -76,7 +79,10 @@ async function runTests() {
   // twelve, so the next route added broke the deployment. The URLs are unchanged: a dynamic
   // segment matches the literal, so /api/unit10/layout still answers.
   const unit10H = require('../../api/unit10/[kind]');
-  const hostH = require('../../api/admin-host');
+  // api/admin-host.js was folded into the one admin function, which is what keeps the
+  // project at eleven of the twelve serverless functions the Hobby plan allows. The old
+  // URL survives as a rewrite in vercel.json to /api/admin/host.
+  const adminH = require('../../api/admin/[...path]');
   const skinsH = require('../../api/skins/catalog');
 
   await test('GET /api/stats: Vercel body matches Express lib payload', () => {
@@ -186,18 +192,62 @@ async function runTests() {
     });
   });
 
-  await test('GET /api/admin-host: same keys; Vercel is read-only, Express is writable', () => {
-    const vercel = callHandler(hostH, 'GET');
-    const local = {
-      success: true,
-      data: { writable: true, gameUrl: 'http://localhost:8742/', hint: '' }
-    };
-    assert(vercel.statusCode === 200, 'status 200');
-    sameKeys(vercel.body, local, 'admin-host');
-    sameKeys(vercel.body.data, local.data, 'admin-host.data');
-    assert(vercel.body.data.writable === false, 'Vercel writable is false');
-    assert(typeof vercel.body.data.gameUrl === 'string', 'gameUrl is a string');
-    assert(typeof vercel.body.data.hint === 'string', 'hint is a string');
+  // The admin function is async, so its response lands after the handler returns.
+  const callAdmin = async (method, parts, extra) => {
+    const req = Object.assign({ method, headers: {}, query: { path: parts } }, extra || {});
+    // setCors reads req.headers.origin and sets response headers, so the mock has to carry
+    // both. The older handlers never touched either, which is why mockRes did not have it.
+    const res = Object.assign(mockRes(), { headers: {}, setHeader(k, v) { this.headers[k] = v; return this; } });
+    await adminH(req, res);
+    return res;
+  };
+
+  await test('GET /api/admin/host: readable by anyone, writable by nobody unsigned', async () => {
+    const res = await callAdmin('GET', ['host']);
+    assert(res.statusCode === 200, 'status 200, got ' + res.statusCode);
+    const d = res.body && res.body.data;
+    assert(d && d.writable === false, 'an unsigned caller cannot write');
+    assert(d.signedIn === false && d.you === null, 'and is reported as signed out');
+    assert(typeof d.gameUrl === 'string' && typeof d.hint === 'string', 'gameUrl and hint are strings');
+    assert(Array.isArray(d.needsEnv), 'it says which environment variables are still missing');
+  });
+
+  await test('GET /api/admin/content: the registry, so a picker can be built from it', async () => {
+    const res = await callAdmin('GET', ['content']);
+    assert(res.statusCode === 200, 'status 200, got ' + res.statusCode);
+    const list = res.body && res.body.data;
+    assert(Array.isArray(list) && list.length >= 20, 'every registered file is listed (' + (list || []).length + ')');
+    assert(list.every((c) => c.key && c.label && c.group), 'each row carries key, label and group');
+    // Paths stay server-side: a picker needs a name, not the repo layout.
+    assert(list.every((c) => c.rel === undefined), 'and no row leaks a file path');
+  });
+
+  // The gate. These are the assertions that stand between a public URL and anyone rewriting
+  // the game's content, so they check the refusal happens before any work, not after.
+  await test('PUT /api/admin/content/<key> unsigned: 401, and nothing is validated', async () => {
+    const res = await callAdmin('PUT', ['content', 'quiz/unit10'], { body: { questions: [] } });
+    assert(res.statusCode === 401, 'unsigned write → 401, got ' + res.statusCode);
+    assert(res.body && res.body.success === false, 'success false');
+    // An empty questions array would fail validation too. Getting 401 rather than 400 is the
+    // proof that the identity check runs first.
+    assert(/sign in/i.test(res.body.details || ''), 'and the reason is the sign-in, not the payload');
+  });
+
+  await test('PUT /api/admin/content/<key> with a junk token: still 401', async () => {
+    const res = await callAdmin('PUT', ['content', 'quiz/unit10'],
+      { headers: { authorization: 'Bearer not-a-real-token' }, body: {} });
+    assert(res.statusCode === 401 || res.statusCode === 503,
+      'a token Google will not vouch for is refused, got ' + res.statusCode);
+  });
+
+  await test('an unknown content key is 404, not a path traversed', async () => {
+    const res = await callAdmin('GET', ['content', '../../package.json']);
+    assert(res.statusCode === 404, 'unknown key → 404, got ' + res.statusCode);
+  });
+
+  await test('an unknown admin route is 404', async () => {
+    const res = await callAdmin('GET', ['nonsense']);
+    assert(res.statusCode === 404, 'unknown route → 404, got ' + res.statusCode);
   });
 
   await test('PUT on a Vercel GET handler is refused with 409', () => {
@@ -207,9 +257,9 @@ async function runTests() {
     assert(/read-only/i.test(res.body.details || ''), 'details mention read-only');
   });
 
-  await test('PUT /api/admin-host is refused', () => {
-    const res = callHandler(hostH, 'PUT');
-    assert(res.statusCode === 405 || res.statusCode === 409, 'PUT admin-host is not 200, got ' + res.statusCode);
+  await test('PUT /api/admin/host is refused: it reports, it does not set', async () => {
+    const res = await callAdmin('PUT', ['host']);
+    assert(res.statusCode === 405, 'PUT host → 405, got ' + res.statusCode);
     assert(res.body && res.body.success === false, 'success false');
   });
 

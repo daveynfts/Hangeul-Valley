@@ -2968,6 +2968,31 @@
       background: #f7f0ff; border: 1px solid #a855f7; border-radius: 3px; padding: 6px 8px;
     }
 
+    /* A hard word inside an explanation, hoverable for its meaning. Dotted rather than
+       solid so a sentence full of them still reads as a sentence, and the tooltip sits
+       above the word so it never covers the line you are still reading. */
+    .wb-gl {
+      border-bottom: 1px dotted #a16207; cursor: help; position: relative; outline: none;
+    }
+    .wb-gl:hover, .wb-gl:focus-visible { background: #fef3c7; border-bottom-style: solid; }
+    .wb-gl:hover::after, .wb-gl:focus-visible::after {
+      content: attr(data-gl);
+      position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, -7px);
+      background: #3b2410; color: #fdf6e3; font-size: 11px; font-style: normal;
+      line-height: 1.45; letter-spacing: 0; text-align: left;
+      padding: 5px 8px; border-radius: 4px; border: 1px solid #a16207;
+      /* Wide enough for a real gloss, capped so it never spans the panel. */
+      min-width: 80px; max-width: 260px; width: max-content;
+      white-space: normal; z-index: 40; pointer-events: none;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, .35);
+    }
+    .wb-gl:hover::before, .wb-gl:focus-visible::before {
+      content: ''; position: absolute; left: 50%; bottom: 100%;
+      transform: translate(-50%, -1px);
+      border: 5px solid transparent; border-top-color: #3b2410; z-index: 41;
+      pointer-events: none;
+    }
+
     #wb-foot {
       display: flex; align-items: center; gap: 10px; flex-shrink: 0;
       padding: 12px 16px; border-top: 2px dashed #c4893a;

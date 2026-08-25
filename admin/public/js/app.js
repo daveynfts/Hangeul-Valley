@@ -123,9 +123,12 @@ window.Modal = {
 window.apiFetch = async function(endpoint, options = {}) {
   try {
     const defaultHeaders = { 'Content-Type': 'application/json' };
+    // Reads are open and ignore it; a write is refused without it. Attached in one place
+    // so no route can be added later that forgets to send it.
+    const authHeaders = (window.AdminAuth && window.AdminAuth.headers()) || {};
     const config = {
       method: options.method || 'GET',
-      headers: { ...defaultHeaders, ...(options.headers || {}) }
+      headers: { ...defaultHeaders, ...authHeaders, ...(options.headers || {}) }
     };
     if (options.body) {
       config.body = typeof options.body === 'string' ? options.body : JSON.stringify(options.body);
@@ -169,6 +172,12 @@ window.apiFetch.sync = () => window.apiFetch('/api/sync', { method: 'POST' });
 window.apiFetch.getArt = () => window.apiFetch('/api/art');
 window.apiFetch.getSkinCatalog = () => window.apiFetch('/api/skins/catalog');
 window.apiFetch.getAdminHost = () => window.apiFetch('/api/admin-host');
+// The content registry. One list, one place, and the same URLs on both halves — which is
+// what stops a unit being added to the game and quietly having no way in here.
+window.apiFetch.listContent = () => window.apiFetch('/api/admin/content');
+window.apiFetch.getContent = (key) => window.apiFetch('/api/admin/content/' + key);
+window.apiFetch.saveContent = (key, body) =>
+  window.apiFetch('/api/admin/content/' + key, { method: 'PUT', body });
 
 // 5. Data Refresh & Synchronization Manager
 window.AppController = {
@@ -176,18 +185,52 @@ window.AppController = {
     const data = host || { writable: true, gameUrl: 'http://localhost:8742/' };
     window.AppState.adminWritable = data.writable !== false;
     window.AppState.gameUrl = data.gameUrl || '/';
+    window.AppState.host = data;
     const pill = document.getElementById('admin-readonly-pill');
     if (pill) {
       if (window.AppState.adminWritable) pill.classList.add('hidden');
       else {
         pill.classList.remove('hidden');
-        pill.title = data.hint || 'Read-only on Vercel';
+        pill.title = data.hint || 'Read-only';
       }
     }
+    this.renderAuth(data);
     document.querySelectorAll('#btn-open-game').forEach((a) => {
       a.setAttribute('href', window.AppState.gameUrl);
     });
     document.body.classList.toggle('admin-readonly', !window.AppState.adminWritable);
+  },
+
+  renderAuth(data) {
+    const box = document.getElementById('admin-auth');
+    if (!box) return;
+    const signedIn = !!(window.AdminAuth && window.AdminAuth.signedIn());
+    const you = data && data.you;
+    // Sign-in only means something where a token is checked. On the local server the operator
+    // is already the operator, so the strip stays out of the way.
+    const needsAuth = !!(data && data.gameUrl !== 'http://localhost:8742/');
+    if (!needsAuth) { box.innerHTML = ''; box.classList.add('hidden'); return; }
+    box.classList.remove('hidden');
+    if (!signedIn) {
+      box.innerHTML = '<span class="auth-note">Read-only until you sign in.</span>'
+        + '<button type="button" id="btn-admin-signin" class="btn-small">Sign in with Google</button>';
+      const b = document.getElementById('btn-admin-signin');
+      if (b) b.onclick = () => window.AdminAuth.signIn(() => this.fetchAllData());
+      return;
+    }
+    const who = (you && (you.email || you.sub)) || 'signed in';
+    if (data.writable) {
+      box.innerHTML = '<span class="auth-note">Editing as <b>' + who + '</b>'
+        + (data.branch ? ' \u2192 <code>' + data.branch + '</code>' : '') + '</span>'
+        + '<button type="button" id="btn-admin-signout" class="btn-small">Sign out</button>';
+    } else {
+      const sub = (you && you.sub) || '';
+      box.innerHTML = '<span class="auth-note">Signed in as <b>' + who + '</b> \u2014 still read-only.'
+        + (sub ? ' Set <code>ADMIN_GOOGLE_SUB</code> to <code>' + sub + '</code> in Vercel to unlock editing.' : '')
+        + '</span><button type="button" id="btn-admin-signout" class="btn-small">Sign out</button>';
+    }
+    const o = document.getElementById('btn-admin-signout');
+    if (o) o.onclick = () => window.AdminAuth.signOut(() => this.fetchAllData());
   },
 
   async fetchAllData() {

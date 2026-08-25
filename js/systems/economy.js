@@ -25,6 +25,13 @@ function isUnit13World() {
 function isUnit14World() {
   return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-14';
 }
+// The exam world. Not a chapter of anything: it has no fixed word list, no 퀴즈 and no tape,
+// and its content arrives one question at a time. Everything else about it is an ordinary
+// world — a farm and a study desk — which is the point, since the words an exam question
+// brings in should be farmable like any other.
+function isTopikWorld() {
+  return isWorldLevel(currentLesson()) && currentLesson().worldId === 'topik-2';
+}
 function isTextbookFarmWorld() {
   const p = typeof currentWorldPack === 'function' ? currentWorldPack() : null;
   return !!(p && p.id && p.id !== 'valley');
@@ -35,7 +42,8 @@ const WORLD_PACKS = {
   '2b-unit-10': { extras: [], stations: ['desk', 'kitchen', 'taste', 'cassette'] },
   '2b-unit-11': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-13': { extras: [], stations: ['desk', 'cassette'] },
-  '2b-unit-14': { extras: [], stations: ['desk', 'cassette'] }
+  '2b-unit-14': { extras: [], stations: ['desk', 'cassette'] },
+  'topik-2': { extras: [], stations: ['desk'] }
 };
 function worldPackIdForLesson(lvl) {
   if (lvl && lvl.worldId && WORLD_PACKS[lvl.worldId]) return lvl.worldId;
@@ -76,7 +84,9 @@ const TEXTBOOK_WORLD_FILES = [
   { cache: 'world-2b-10', file: 'worlds/2b-unit-10.json' },
   { cache: 'world-2b-11', file: 'worlds/2b-unit-11.json' },
   { cache: 'world-2b-13', file: 'worlds/2b-unit-13.json' },
-  { cache: 'world-2b-14', file: 'worlds/2b-unit-14.json' }
+  { cache: 'world-2b-14', file: 'worlds/2b-unit-14.json' },
+  // Not from a textbook, but it loads the same way and the list is what attaches a world.
+  { cache: 'world-topik-2', file: 'worlds/topik-2.json' }
 ];
 const UNIT10_LAYOUT_DEFAULT = {
   stations: [
@@ -231,7 +241,13 @@ function loadTextbookWorlds(done) {
 
 function getUnlockedWords() {
   const lesson = currentLesson();
-  if (isWorldLevel(lesson)) return (lesson.words || []).slice();
+  // A world farms its own chapter list. The exam world is the exception: its list grows one
+  // question at a time and starts empty, and an empty pool makes _pickWord() hand back
+  // undefined — manual planting dies on a map that otherwise looks perfectly fine. So an
+  // empty world list falls through to everything the player owns, which on an exam map is
+  // the right pool to be drawing from anyway. A world that has words behaves as before.
+  const own = isWorldLevel(lesson) ? (lesson.words || []) : null;
+  if (own && own.length) return own.slice();
   if (typeof unlockedLevels === 'undefined' || !Array.isArray(unlockedLevels)) {
     return (typeof levelsData !== 'undefined' && levelsData[0]?.words) ? levelsData[0].words : [];
   }

@@ -1,0 +1,68 @@
+{
+  "id": "topik2-questions",
+  "source": "TOPIK II — questions added one at a time, grouped by the type of question rather than by the day they arrived",
+  "titleKo": "기출 문제",
+  "titleEn": "TOPIK II",
+  "pickKo": "어떤 유형을 풀까요?",
+  "pickEn": "Grouped by question type — pick one and work through it.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "유형 목록",
+  "doneKo": "닫기",
+  "exercises": [
+    {
+      "id": "topik2-headline",
+      "type": "build",
+      "section": "신문 기사 제목",
+      "sectionEn": "Newspaper headlines",
+      "no": "유형 · 문항 25-27",
+      "icon": "📰",
+      "pattern": "제목을 가장 잘 설명한 것 고르기",
+      "blurbEn": "A headline in compressed newspaper Korean, and four readings of it — three of which are what taking one word literally looks like.",
+      "instructionKo": "다음 신문 기사의 제목을 가장 잘 설명한 것을 고르십시오.",
+      "instructionEn": "Choose the sentence that best explains the newspaper headline.",
+      "noteEn": "A headline drops its particles and its verb endings, so every word left has to carry more than usual and each one can be read two ways. That is the whole of this question type: the options are not four summaries, they are four readings, and three of them take a figurative word at face value. Work the hinge words first — here 썰렁하다 and 출구 — and the options sort themselves.",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "썰렁한 재래시장, 배달로 출구 모색",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "썰렁한 재래시장, 배달로 출구 모색"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "revive",
+          "choices": [
+            {
+              "id": "gates",
+              "ko": "재래시장은 출입구가 여러 곳에 있어 찾기가 쉽지 않다."
+            },
+            {
+              "id": "weather",
+              "ko": "날씨가 추워지자 재래시장을 직접 찾는 손님들이 줄었다."
+            },
+            {
+              "id": "revive",
+              "ko": "재래시장에서 배달 서비스를 통해 경기 회복의 노력을 하고 있다."
+            },
+            {
+              "id": "demand",
+              "ko": "재래시장에서 상품을 구매한 후 배달을 원하는 사람들이 많아졌다."
+            }
+          ],
+          "en": "Deserted traditional markets seek a way out through delivery — the markets are trying to bring trade back with a delivery service.",
+          "why": "Two words in the headline can each be read two ways, and every wrong option is one of them taken at face value.\n\n썰렁하다 is the first. Day to day it means chilly, but said of a shop or a street it means empty — nobody in it, nothing selling. A market headline wants that second sense, and option 2 is exactly what choosing the first one looks like: a perfectly good Korean sentence about the weather that says nothing at all about the other half of the headline.\n\n출구 is the second. On a door it is the way out of a building; in 출구를 모색하다 it is the way out of trouble, and 모색 is casting about for one. Option 1 reads it as a door and ends up describing the floor plan.\n\nThat leaves who is doing the seeking. The headline's subject is the market, so the market is the one turning to delivery. Option 4 keeps every word and swaps the actor — customers wanting delivery is a different story, and swapping who acts is one of the commonest ways this question type is got wrong. Option 3 is the only reading that keeps the market as the agent and takes both hinge words figuratively: 경기 회복의 노력 is 출구 모색 said plainly.",
+          "grammar": "Headline Korean. A Sino-Korean noun stands in for its verb — 모색 does the work of 모색하고 있다 — and the comma does the work of a subject marker. N(으)로 marks the means: 배달로 = by way of delivery. In the options, N을/를 통해 is the same idea spelled out, and -자 in 추워지자 means 'as soon as / once', linking a change to what followed it."
+        }
+      ]
+    }
+  ],
+  "holdGloss": true
+}

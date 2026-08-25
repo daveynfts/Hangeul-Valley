@@ -2009,15 +2009,22 @@ let deskQuizBank = null;
 let deskQuizState = null;
 const QUIZ_ART_FOLDER = 'quiz';
 
+// One branch per world that owns a quiz, and null for every world that does not. This used
+// to end in a bare `return '/worlds/unit10-desk-quiz.json'`, which meant any new world with a
+// desk was silently served Unit 10's 퀴즈 — a screen full of 10과 food words on a map that has
+// nothing to do with 10과, working perfectly and answering the wrong question. The exam world
+// is the first caller to land here, and null is what stops the 퀴즈 row being offered at all.
 function deskQuizUrl() {
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-desk-quiz.json';
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-desk-quiz.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-desk-quiz.json';
-  return '/worlds/unit10-desk-quiz.json';
+  if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-desk-quiz.json';
+  return null;
 }
 
 function loadDeskQuiz() {
   const url = deskQuizUrl();
+  if (!url) return Promise.resolve(null);
   if (deskQuizBank && deskQuizBank._url === url) return Promise.resolve(deskQuizBank);
   if (typeof fetch !== 'function') return Promise.resolve(null);
   return fetch(url)
@@ -2220,6 +2227,14 @@ function textbookUrl() {
   return null;
 }
 
+// The exam world's own bank. Same file format and same renderer as the two textbook banks —
+// what differs is that it has no chapter behind it: questions are added one at a time, so the
+// file grows for as long as the exam is being studied for.
+function topikBankUrl() {
+  if (typeof isTopikWorld === 'function' && isTopikWorld()) return '/worlds/topik2-questions.json';
+  return null;
+}
+
 function loadDeskBank(url) {
   if (!url) return Promise.resolve(null);
   if (deskBanks[url]) return Promise.resolve(deskBanks[url]);
@@ -2238,13 +2253,18 @@ function loadDeskBank(url) {
 
 function loadWorkbook() { return loadDeskBank(workbookUrl()); }
 function loadTextbook() { return loadDeskBank(textbookUrl()); }
+function loadTopikBank() { return loadDeskBank(topikBankUrl()); }
 
 function openStudyDesk() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
-  Promise.all([loadTextbook(), loadWorkbook()]).then(([tb, wb]) => {
-    deskMenuOptions = [
-      { key: 'quiz', icon: '📝', ko: '퀴즈', en: 'Multiple choice', run: openDeskQuiz }
-    ];
+  Promise.all([loadTextbook(), loadWorkbook(), loadTopikBank()]).then(([tb, wb, tk]) => {
+    // Every row is earned by content that actually loaded. 퀴즈 used to be added
+    // unconditionally, which was fine while every desk belonged to a unit that had one — see
+    // deskQuizUrl for what that cost the moment one did not.
+    deskMenuOptions = [];
+    if (deskQuizUrl()) {
+      deskMenuOptions.push({ key: 'quiz', icon: '📝', ko: '퀴즈', en: 'Multiple choice', run: openDeskQuiz });
+    }
     // 교과서 before 연습 문제: it is the chapter you sat through, and the 익힘책 is the
     // homework on top of it. A unit with only one of the two still gets one row.
     if (((tb && tb.exercises) || []).length) {
@@ -2260,6 +2280,20 @@ function openStudyDesk() {
         en: 'Workbook — build the sentences',
         run: () => openWorkbook(wb)
       });
+    }
+    if (((tk && tk.exercises) || []).length) {
+      deskMenuOptions.push({
+        key: 'topik', icon: '🎓', ko: '기출 문제',
+        en: 'TOPIK II — the questions collected so far',
+        run: () => openWorkbook(tk)
+      });
+    }
+    // A desk with nothing on it says so. The exam world sits here until its first question
+    // is added, and an empty menu overlay would read as a broken screen rather than an empty
+    // one.
+    if (!deskMenuOptions.length) {
+      if (typeof showToast === 'function') showToast('📭 아직 문제가 없어요 — no questions here yet', 3200);
+      return;
     }
     if (deskMenuOptions.length === 1) { deskMenuOptions[0].run(); return; }
     deskMenuIndex = 0;
@@ -3669,6 +3703,92 @@ function resetWorkbook() {
   renderWorkbook();
 }
 
+// ── Hover glosses on the answer view ─────────────────────────────────────────
+// Reading the explanation is where a hard word actually stops you: the right answer is on
+// screen and you still cannot see why, because one word in the sentence means nothing yet.
+// So every headword the current world teaches becomes hoverable inside the explanation. The
+// vocabulary list doubles as the dictionary, which means the feature improves by itself
+// every time a question adds words — there is no second list to keep in step with the first.
+//
+// Two decisions worth keeping:
+//
+//   * It runs over rendered text nodes, not over the strings before they are escaped. The
+//     corrected sentence arrives from wbLineHtml as markup, and matching Korean inside a
+//     string of HTML would eventually wrap something living inside an attribute. A text node
+//     cannot contain an attribute, so that whole class of bug is gone rather than guarded.
+//   * Longest match wins. 재래시장 is one word, and explaining it as 시장 would be worse than
+//     saying nothing, because a wrong gloss still looks like an answer.
+let wbGlossIndex = null;
+let wbGlossFor = null;
+
+function wbReEsc(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+function wbGlossTable() {
+  const lvl = (typeof currentLesson === 'function') ? currentLesson() : null;
+  const words = (lvl && lvl.words) || [];
+  if (wbGlossFor === words) return wbGlossIndex;
+  const map = new Map();
+  words.forEach((w) => {
+    const gloss = String((w && w.en) || '').trim();
+    if (!gloss) return;
+    // A word may list the shapes it actually wears in a sentence. 썰렁하다 never appears as
+    // 썰렁하다 — it turns up as 썰렁한 — and deriving that by rule would need a conjugator,
+    // so the entry says so instead.
+    const keys = [String((w && w.ko) || '').trim()]
+      .concat(Array.isArray(w.forms) ? w.forms : []);
+    keys.forEach((k) => {
+      const key = String(k || '').trim();
+      // Two characters minimum: a single syllable matches half the sentence and the
+      // explanation turns into a wall of dotted underlines.
+      if (key.length < 2 || map.has(key)) return;
+      map.set(key, gloss);
+    });
+  });
+  const keys = [...map.keys()].sort((a, b) => b.length - a.length);
+  wbGlossFor = words;
+  wbGlossIndex = keys.length
+    ? { map, re: new RegExp(keys.map(wbReEsc).join('|'), 'g') }
+    : null;
+  return wbGlossIndex;
+}
+
+function wbApplyGloss(root) {
+  const idx = wbGlossTable();
+  if (!root || !idx || typeof document === 'undefined' || !document.createTreeWalker) return 0;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+  const targets = [];
+  let node;
+  while ((node = walker.nextNode())) {
+    if (node.parentElement && node.parentElement.closest('.wb-gl')) continue;
+    idx.re.lastIndex = 0;
+    if (idx.re.test(node.nodeValue)) targets.push(node);
+  }
+  let wrapped = 0;
+  targets.forEach((n) => {
+    const text = n.nodeValue;
+    const frag = document.createDocumentFragment();
+    let at = 0, m;
+    idx.re.lastIndex = 0;
+    while ((m = idx.re.exec(text))) {
+      if (m.index > at) frag.appendChild(document.createTextNode(text.slice(at, m.index)));
+      const span = document.createElement('span');
+      span.className = 'wb-gl';
+      span.setAttribute('data-gl', idx.map.get(m[0]));
+      // A hover tooltip is unreachable by keyboard and invisible on a phone, so the same
+      // text goes in title as well. Two mechanisms, one string.
+      span.setAttribute('title', m[0] + ' — ' + idx.map.get(m[0]));
+      span.setAttribute('tabindex', '0');
+      span.textContent = m[0];
+      frag.appendChild(span);
+      at = m.index + m[0].length;
+      wrapped += 1;
+    }
+    if (at < text.length) frag.appendChild(document.createTextNode(text.slice(at)));
+    n.parentNode.replaceChild(frag, n);
+  });
+  return wrapped;
+}
+
 // The sentence a completed row reads as, which is also what the explanation
 // card has to print. Each type assembles it differently, so it lives in one
 // place rather than being spelled out twice per type.
@@ -4063,9 +4183,14 @@ function renderWorkbook() {
         exp.className = 'wb-exp';
         const head = document.createElement('div');
         head.className = 'wb-exp-head';
+        // A bank may hold its translation back until the row is checked. On a textbook page
+        // the gloss beside the sentence is an aid; on an exam question it is the answer —
+        // "put on thick clothes AND went out" hands over the sequence the blank is testing.
+        // Opt-in per bank so the units keep the behaviour they were written for.
+        const holdGloss = !!(st.bank && st.bank.holdGloss) && !st.checked;
         head.innerHTML = art +
           '<span class="wb-exp-phrase">' + vbEsc(item.phraseKo || '') + '</span>' +
-          '<span class="wb-exp-en">' + vbEsc(item.en || '') + '</span>';
+          (holdGloss ? '' : '<span class="wb-exp-en">' + vbEsc(item.en || '') + '</span>');
         const say = wbSayButton(wbRowSpeech(ex, item), item.audio);
         if (say) head.appendChild(say);
         const line = document.createElement('div');
@@ -4218,6 +4343,8 @@ function renderWorkbook() {
           '<div class="wb-why-gram">📐 ' + vbEsc(item.grammar || '') + '</div>' +
         '</div>';
       }).join('');
+      // Every headword this world teaches becomes hoverable inside the explanation.
+      wbApplyGloss(explain);
     }
   }
 

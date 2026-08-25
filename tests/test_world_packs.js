@@ -17,6 +17,7 @@ const farm = fs.readFileSync(path.join(ROOT, 'js', 'scenes', 'farm.js'), 'utf8')
 const unit10 = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-10.json'), 'utf8'));
 const unit11 = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-11.json'), 'utf8'));
 const unit14 = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-14.json'), 'utf8'));
+const topik2 = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', 'topik-2.json'), 'utf8'));
 
 let passed = 0;
 let failed = 0;
@@ -35,7 +36,8 @@ const ctx = {
     { nameEn: 'Daily Life' },
     { worldId: '2b-unit-10', map: unit10.level.map },
     { worldId: '2b-unit-14', map: unit14.level.map },
-    { worldId: '2b-unit-11', map: unit11.level.map }
+    { worldId: '2b-unit-11', map: unit11.level.map },
+    { worldId: 'topik-2', map: topik2.level.map }
   ],
   currentLevelIndex: 0
 };
@@ -60,6 +62,11 @@ assert(R("WORLD_PACKS['2b-unit-14'].stations").indexOf('kitchen') < 0,
 assert(R("WORLD_PACKS['2b-unit-11'].stations").join(',') === 'desk,cassette',
   'unit 11 pack is desk plus cassette');
 assert(R("WORLD_PACKS['2b-unit-11'].extras").length === 0, 'unit 11 pack has no valley extras');
+// The exam world is a farm and a desk and nothing else — no tape, because there is no exam
+// audio yet, and no 퀴즈, because it has no quiz bank of its own.
+assert(R("WORLD_PACKS['topik-2'].stations").join(',') === 'desk',
+  'topik-2 pack is the study desk alone');
+assert(R("WORLD_PACKS['topik-2'].extras").length === 0, 'topik-2 pack has no valley extras');
 
 ctx.currentLevelIndex = 0;
 assert(R('currentWorldPack().id') === 'valley', 'plain levels resolve to valley');
@@ -103,6 +110,8 @@ assert(JSON.stringify(unit14.level.map.stations) === JSON.stringify(['desk', 'ca
   'unit 14 JSON map matches the runtime pack');
 assert(JSON.stringify(unit11.level.map.stations) === JSON.stringify(['desk', 'cassette']),
   'unit 11 JSON map matches the runtime pack');
+assert(JSON.stringify(topik2.level.map.stations) === JSON.stringify(['desk']),
+  'topik-2 JSON map matches the runtime pack');
 
 assert(farm.indexOf('applyWorld') >= 0, 'FarmScene has applyWorld');
 assert(farm.indexOf('_teardownExtra') >= 0, 'FarmScene tears extras down');
