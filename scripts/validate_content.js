@@ -1093,11 +1093,37 @@ const overlayIds = [
         });
         check('every exam question is complete, four-choice and explained', thin.length === 0,
           thin.slice(0, 6).join(', '));
+        // A sitting at the exam desk is one question drawn from the whole paper. That is a
+        // property of the content and the renderer together — the bank opts in, the renderer
+        // honours it, and the button afterwards offers the next question rather than the same
+        // one again. Any one of the three on its own is a feature that does not work.
+        check('the exam bank draws one question a sitting', bank.drawOne === true,
+          String(bank.drawOne));
+        check('and names the button that draws the next one',
+          !!String(bank.nextKo || '').trim(), String(bank.nextKo));
+        const paper = (exs[0] && exs[0].items) || [];
+        check('with enough questions for the draw to mean anything', paper.length >= 3,
+          String(paper.length));
       }
     }
   }
 
   const gameJs = readGameSource();
+  const uiForDraw = read(path.join('js', 'ui.js'));
+  check('openWorkbookExercise draws instead of opening the whole paper',
+    /const ex = wbDrawOne\(st\.bank, whole\)/.test(uiForDraw));
+  check('and a bank that did not ask for it is handed back untouched',
+    /if \(!bank \|\| !bank\.drawOne \|\| items\.length < 2\) return ex;/.test(uiForDraw));
+  check('the draw is a bag, not a bare Math.random on every press',
+    uiForDraw.indexOf('wbDrawBags') >= 0 && /bag\.left\.pop\(\)/.test(uiForDraw));
+  check('after checking, a drawn paper offers the next question rather than the same one',
+    /btn\.onclick = drawn \? \(\) => openWorkbookExercise\(st\.ex\.id\) : resetWorkbook;/.test(uiForDraw));
+  // Glossing the question before it is answered underlines the words it turns on, which is
+  // most of the way to answering it. Once the answer is out there is nothing left to give away.
+  check('the question is glossed only once the answer is out',
+    /if \(st\.checked\) wbApplyGloss\(list\);/.test(uiForDraw));
+  check('and the explanation is glossed as it always was',
+    uiForDraw.indexOf('wbApplyGloss(explain)') >= 0);
   check('the desk offers the exam bank on the exam world',
     gameJs.indexOf("isTopikWorld()) return '/worlds/topik2-questions.json'") >= 0);
   check('and isTopikWorld is defined against the world id',

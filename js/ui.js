@@ -3550,11 +3550,54 @@ function openWorkbook(bank) {
   setModalState('workbook-overlay', true);
 }
 
+// One question per sitting, drawn without replacement. A bank of past-paper questions is
+// not a page to be worked through once — it is a pile to be met again in a different order,
+// and the point of a sitting is the single question and its explanation.
+//
+// Not Math.random() on its own: with six questions that repeats the one just answered a sixth
+// of the time, which reads as broken rather than as random, and it lets a third of the bank go
+// unseen for a week. The bag holds every question once and refills when empty, so a full round
+// is guaranteed before anything comes back; a refill never opens with the question that closed
+// the previous one.
+const wbDrawBags = new Map();
+function wbDrawIndex(key, count) {
+  if (count <= 1) return 0;
+  let bag = wbDrawBags.get(key);
+  if (!bag || bag.count !== count || !bag.left.length) {
+    const left = [];
+    for (let i = 0; i < count; i++) left.push(i);
+    for (let i = left.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = left[i]; left[i] = left[j]; left[j] = t;
+    }
+    // Drawn from the end, so the next one out is the last element.
+    const last = bag ? bag.last : -1;
+    if (left.length > 1 && left[left.length - 1] === last) {
+      const t = left[left.length - 1]; left[left.length - 1] = left[0]; left[0] = t;
+    }
+    bag = { left: left, last: last, count: count };
+    wbDrawBags.set(key, bag);
+  }
+  const idx = bag.left.pop();
+  bag.last = idx;
+  return idx;
+}
+
+// A shallow clone carrying one item. Everything downstream reads ex.items — the renderer, the
+// scorer, the explanation, the gloss — so none of them need to know a draw happened.
+function wbDrawOne(bank, ex) {
+  const items = (ex && ex.items) || [];
+  if (!bank || !bank.drawOne || items.length < 2) return ex;
+  const i = wbDrawIndex(String(bank.id || '') + '/' + String(ex.id || ''), items.length);
+  return Object.assign({}, ex, { items: [items[i]], drawnFrom: items.length, drawnAt: i });
+}
+
 function openWorkbookExercise(id) {
   const st = workbookState;
   if (!st) return;
-  const ex = (st.bank.exercises || []).find(e => e.id === id);
-  if (!ex) return;
+  const whole = (st.bank.exercises || []).find(e => e.id === id);
+  if (!whole) return;
+  const ex = wbDrawOne(st.bank, whole);
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
   // One exercise's recording has nothing to say over another's.
   if (!st.ex || st.ex.id !== ex.id) wbStopTrack();
@@ -4401,6 +4444,10 @@ function renderWorkbook() {
       }
       target.appendChild(row);
     });
+    // Hoverable meanings over the question and the options too, but only once the answer is
+    // out. Before that the gloss would underline exactly the words the question turns on —
+    // 만, 안심하고 — and marking them as the hard ones is most of the way to answering it.
+    if (st.checked) wbApplyGloss(list);
   }
 
   const explain = $('wb-explain');
@@ -4451,8 +4498,13 @@ function renderWorkbook() {
   if (btn) {
     btn.className = '';
     if (st.checked) {
-      btn.textContent = st.bank.againKo || '다시 풀기';
-      btn.onclick = resetWorkbook;
+      // Re-asking a question whose answer is on screen teaches nothing, so a draw-one bank
+      // offers the next question instead of the same one again.
+      const drawn = !!(st.bank.drawOne && st.ex && st.ex.drawnFrom > 1);
+      btn.textContent = drawn
+        ? (st.bank.nextKo || '다음 문제') + ' →'
+        : (st.bank.againKo || '다시 풀기');
+      btn.onclick = drawn ? () => openWorkbookExercise(st.ex.id) : resetWorkbook;
       btn.disabled = false;
     } else {
       btn.textContent = (st.bank.checkKo || '확인') + ' ' + (st.bank.checkEn || 'Check');
@@ -4528,7 +4580,10 @@ function renderWorkbookPicker() {
           '</span>' +
           '<span class="wb-pick-en">' + vbEsc(ex.blurbEn || ex.instructionEn || '') + '</span>' +
         '</span>' +
-        '<span class="wb-pick-count">' + ((ex.items || []).length) + '문항'
+        '<span class="wb-pick-count">' +
+          (st.bank.drawOne && (ex.items || []).length > 1
+            ? '1/' + ((ex.items || []).length) + '문항 무작위'
+            : ((ex.items || []).length) + '문항')
           + wbPracticeBadge(st.bank && st.bank.id, ex.id) + '</span>';
       b.onclick = () => openWorkbookExercise(ex.id);
       list.appendChild(b);

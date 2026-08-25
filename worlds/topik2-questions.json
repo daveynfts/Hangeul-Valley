@@ -5,13 +5,15 @@
   "titleEn": "TOPIK II",
   "pickKo": "어떤 유형을 풀까요?",
   "pickEn": "Grouped by question type — pick one and work through it.",
-  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "hintKo": "한 번에 한 문제씩 무작위로 나와요. 답을 고르고 확인하면 해설이 열려요.",
   "checkKo": "확인",
   "checkEn": "Check",
   "againKo": "다시 풀기",
   "backKo": "유형 목록",
   "doneKo": "닫기",
   "holdGloss": true,
+  "drawOne": true,
+  "nextKo": "다음 문제",
   "exercises": [
     {
       "id": "topik2-headline",
@@ -23,7 +25,7 @@
       "blurbEn": "A headline in compressed newspaper Korean, and four readings of it — three of which are what taking one word literally looks like.",
       "instructionKo": "다음 신문 기사의 제목을 가장 잘 설명한 것을 고르십시오.",
       "instructionEn": "Choose the sentence that best explains the newspaper headline.",
-      "noteEn": "A headline drops its particles and its verb endings, so every word left carries more than usual and can usually be read two ways. The options are not four summaries — they are four readings, and the wrong ones are wrong in a small number of repeating shapes.\n\nFour questions in, the shapes are these. A figurative word taken at face value: 출구 as a door, 관리 as a job. A description turned into a recommendation, which is what -어야 한다 and 필요가 있다 are doing when you see them in an option. An addition read as a comparison — enjoying food with the eyes *as well* is not taste mattering less. And the subject quietly swapped, so a problem the headline gave to one party is handed to another.\n\nSo: find the words that can be read two ways and settle them; check who the headline says is doing what; and distrust any option that advises rather than reports. A fifth shape, from question 5: a time or quantity expression read as something adjacent. N 만에 is a point measured back to the last occurrence; N 동안 is the whole stretch. Swap them and the sentence still reads well and claims something else entirely.",
+      "noteEn": "A headline drops its particles and its verb endings, so every word left carries more than usual and can usually be read two ways. The options are not four summaries — they are four readings, and the wrong ones are wrong in a small number of repeating shapes.\n\nFour questions in, the shapes are these. A figurative word taken at face value: 출구 as a door, 관리 as a job. A description turned into a recommendation, which is what -어야 한다 and 필요가 있다 are doing when you see them in an option. An addition read as a comparison — enjoying food with the eyes *as well* is not taste mattering less. And the subject quietly swapped, so a problem the headline gave to one party is handed to another.\n\nSo: find the words that can be read two ways and settle them; check who the headline says is doing what; and distrust any option that advises rather than reports. A fifth shape, from question 5: a time or quantity expression read as something adjacent. N 만에 is a point measured back to the last occurrence; N 동안 is the whole stretch. Swap them and the sentence still reads well and claims something else entirely. And a sixth, from question 6: the headline reversed in its own vocabulary. Every word of the option comes from the headline, and the claim is the opposite one. Reusing the words is what makes it look like a summary; check the direction of the claim, not the overlap.",
       "pattern": "제목을 가장 잘 설명한 것 고르기",
       "items": [
         {
@@ -206,6 +208,42 @@
           "en": "The savings rate has hit rock bottom for the first time in 24 years, and even the young are indifferent to saving. Meaning: the savings rate, the young included, has come out at its lowest in 24 years.",
           "why": "The hinge here is not a metaphor. It is a time expression, and three of the four options get it wrong in three different ways.\n\nN 만에 means after an interval of N — in practice, for the first time in N years, measured from the last time it happened. It does not mean *during* N years, which is N 동안, and option 1 is that one substitution and nothing else: 24년 동안 … 오르지 않고 있다 claims the rate has failed to rise for twenty-four years running. That is a far stronger statement than the headline makes. The headline says only that today's figure is the lowest since twenty-four years ago; about the twenty-three years in between it says nothing at all.\n\nOption 3 turns the interval into a mechanism — twenty-four years for the rate to fall and climb back. Nothing in the headline is about recovery; it reports a floor, not a cycle.\n\nOption 2 turns it into advice on how long to save for, which misreads 만에 and is also the recommendation shape that keeps turning up in this question type.\n\nThat leaves 4, which is the easy half done right. 바닥 is rock bottom and 가장 낮게 is that said plainly; 만에 survives intact; and 젊은층도 becomes 젊은층을 비롯해서 — the 도 saying the young are part of the fall, not a separate story beside it.",
           "grammar": "N 만에 against N 동안 is the whole question. 24년 만에 = for the first time in 24 years, measured from the last occurrence; 24년 동안 = throughout 24 years. One names a point, the other a stretch, and swapping them changes what is being claimed rather than how it is worded.\n\nN을/를 비롯해서 = including N, and N first among them, which is the work 도 does in 젊은층도. And 바닥으로 is a bare noun plus 으로 where a verb belongs: the headline standing in for 바닥으로 떨어졌다, the same compression as 모색, 천국, 불티 and 관리 중 before it."
+        },
+        {
+          "n": 6,
+          "phraseKo": "여름철 음식 보관, 냉장고만 믿어서는 낭패!",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "여름철 음식 보관, 냉장고만 믿어서는 낭패!"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "not_safe",
+          "choices": [
+            {
+              "id": "leftovers",
+              "ko": "먹던 음식을 냉장고에 넣는 것은 좋지 않다."
+            },
+            {
+              "id": "fridge_all",
+              "ko": "여름에는 모든 음식을 냉장고에 보관해야 한다."
+            },
+            {
+              "id": "not_safe",
+              "ko": "여름에는 냉장고 안의 음식도 안심하고 먹을 수 없다."
+            },
+            {
+              "id": "special",
+              "ko": "여름철에 음식을 보관하려면 특별한 냉장고를 마련해야 한다."
+            }
+          ],
+          "en": "Storing food in summer: trusting the fridge and nothing else is asking for trouble. Meaning: in summer even the food inside the fridge cannot be eaten with confidence.",
+          "why": "The whole question is one particle. Cover 만 and the headline says something close to the opposite.\n\n냉장고만 믿어서는 낭패 is: rely on the fridge *alone* and you will come unstuck. It does not say the fridge is useless, and it does not say to use it more. It says the fridge is not enough by itself — so the food inside one is not automatically safe.\n\nOption 2 is that reversed while keeping every word. 여름, 음식, 냉장고, 보관 are all from the headline, and 모든 음식을 냉장고에 보관해야 한다 tells you to trust the fridge more, which is the one instruction the headline is warning against. Reusing the vocabulary is what makes it look right; it is also all it has.\n\nOption 4 recommends buying something. 특별한 냉장고 appears nowhere in the headline, and a headline saying the fridge is not enough is not selling a better fridge. Option 2 and option 4 are both -해야 한다 — that is four of the six questions so far where an option turns a report into advice.\n\nOption 1 is the quieter trap: 먹던 음식을 냉장고에 넣는 것은 좋지 않다 is true as food safety goes, and 먹던 음식 is nowhere in the headline. It is a fact about the topic rather than a reading of the sentence — the same move as 사회적 지위 in question 3.\n\nThat leaves 3, and it is 만 unpacked. If the fridge alone is a 낭패, then 냉장고 안의 음식도 — the food inside it *too* — is not something you can eat 안심하고. The 도 is the same particle that carried the news in question 3: even this one, on top of what you already assumed.",
+          "grammar": "N만 = N and nothing besides. It is the load-bearing word here, and it is one syllable: 냉장고를 믿어서는 낭패 would be \"trusting fridges is a disaster\", while 냉장고만 믿어서는 낭패 is \"trusting only fridges is\". The exam puts the whole question on that difference.\n\nV-아/어서는 introduces a course of action that ends badly, and what ends it is always negative — here 낭패. The full sentence is 믿어서는 낭패를 본다; the headline keeps the noun and drops the verb, which is now six headlines running to do it: 모색, 천국, 불티, 관리 중, 바닥으로, 낭패.\n\nIn the options: -던 (먹던 음식) is the one you were in the middle of eating, -(으)려면 (보관하려면) is if you intend to, and -아/어야 하다 is the recommendation shape worth being suspicious of."
         }
       ]
     }

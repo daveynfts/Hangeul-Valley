@@ -761,6 +761,186 @@
         "forms": [
           "비롯해서"
         ]
+      },
+      {
+        "ko": "여름철",
+        "en": "the summer months",
+        "hint": "☀️",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "여름",
+        "en": "summer",
+        "hint": "🏖️",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "보관",
+        "en": "storage, keeping",
+        "hint": "📦",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "보관하다",
+        "en": "to store, to keep",
+        "hint": "🧊",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "보관해야",
+          "보관하려면"
+        ]
+      },
+      {
+        "ko": "냉장고",
+        "en": "a fridge",
+        "hint": "🧊",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "냉장고 안",
+        "en": "inside the fridge",
+        "hint": "🚪",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "냉장고 안의"
+        ]
+      },
+      {
+        "ko": "넣다",
+        "en": "to put in",
+        "hint": "📥",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "넣는"
+        ]
+      },
+      {
+        "ko": "믿다",
+        "en": "to trust, to rely on",
+        "hint": "🤝",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "믿어서는"
+        ]
+      },
+      {
+        "ko": "낭패",
+        "en": "a fiasco — a plan that lets you down at the worst moment",
+        "hint": "💥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "안심하다",
+        "en": "to be at ease about something",
+        "hint": "😌",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "안심하고"
+        ]
+      },
+      {
+        "ko": "모든",
+        "en": "every, all",
+        "hint": "🌐",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "특별하다",
+        "en": "to be special",
+        "hint": "⭐",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "특별한"
+        ]
+      },
+      {
+        "ko": "마련하다",
+        "en": "to get hold of, to arrange for",
+        "hint": "🛒",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "마련해야"
+        ]
+      },
+      {
+        "ko": "좋지 않다",
+        "en": "is not a good idea",
+        "hint": "🚫",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "N만",
+        "en": "N only, N and nothing besides",
+        "hint": "☝️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "냉장고만"
+        ]
+      },
+      {
+        "ko": "-아/어서는",
+        "en": "if you go on doing it — and what follows is the bad outcome",
+        "hint": "⚠️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "믿어서는"
+        ]
+      },
+      {
+        "ko": "-던",
+        "en": "the one you were in the middle of",
+        "hint": "⏸️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "먹던"
+        ]
+      },
+      {
+        "ko": "-아/어야 하다",
+        "en": "must, have to",
+        "hint": "❗",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "해야 한다"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 수 없다",
+        "en": "cannot",
+        "hint": "🚷",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "을 수 없다"
+        ]
+      },
+      {
+        "ko": "-(으)려면",
+        "en": "if you intend to",
+        "hint": "🎯",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "하려면"
+        ]
       }
     ]
   },
