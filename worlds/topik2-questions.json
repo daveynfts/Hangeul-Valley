@@ -23,7 +23,7 @@
       "blurbEn": "A headline in compressed newspaper Korean, and four readings of it — three of which are what taking one word literally looks like.",
       "instructionKo": "다음 신문 기사의 제목을 가장 잘 설명한 것을 고르십시오.",
       "instructionEn": "Choose the sentence that best explains the newspaper headline.",
-      "noteEn": "A headline drops its particles and its verb endings, so every word left carries more than usual and can usually be read two ways. The options are not four summaries — they are four readings, and the wrong ones are wrong in a small number of repeating shapes.\n\nFour questions in, the shapes are these. A figurative word taken at face value: 출구 as a door, 관리 as a job. A description turned into a recommendation, which is what -어야 한다 and 필요가 있다 are doing when you see them in an option. An addition read as a comparison — enjoying food with the eyes *as well* is not taste mattering less. And the subject quietly swapped, so a problem the headline gave to one party is handed to another.\n\nSo: find the words that can be read two ways and settle them; check who the headline says is doing what; and distrust any option that advises rather than reports.",
+      "noteEn": "A headline drops its particles and its verb endings, so every word left carries more than usual and can usually be read two ways. The options are not four summaries — they are four readings, and the wrong ones are wrong in a small number of repeating shapes.\n\nFour questions in, the shapes are these. A figurative word taken at face value: 출구 as a door, 관리 as a job. A description turned into a recommendation, which is what -어야 한다 and 필요가 있다 are doing when you see them in an option. An addition read as a comparison — enjoying food with the eyes *as well* is not taste mattering less. And the subject quietly swapped, so a problem the headline gave to one party is handed to another.\n\nSo: find the words that can be read two ways and settle them; check who the headline says is doing what; and distrust any option that advises rather than reports. A fifth shape, from question 5: a time or quantity expression read as something adjacent. N 만에 is a point measured back to the last occurrence; N 동안 is the whole stretch. Swap them and the sentence still reads well and claims something else entirely.",
       "pattern": "제목을 가장 잘 설명한 것 고르기",
       "items": [
         {
@@ -170,6 +170,42 @@
           "en": "For holidaymakers a war with the heat, for the resorts a war with the rubbish. Meaning: clearing the volume of litter left behind has become a serious problem where people go to escape the summer.",
           "why": "This one is not a word with two readings. It is a pairing, and the pairing is the whole question.\n\nThe headline sets two subjects against two different enemies: 피서객 against the heat, 피서지 against the rubbish. Two of the wrong options simply swap them. Option 2 has the holidaymakers clearing litter in the heat, option 4 has them inconvenienced by the litter — both hand 피서객 a problem the headline gave to the resort. Every word in them is a word from the headline, which is exactly what makes them attractive.\n\nOption 3 takes only the first half and then adds to it. 편하게 쉴 수 없다 is a conclusion about resting that the headline never draws; it says holidaymakers are fighting the heat, not that the trip is ruined.\n\nThat leaves 1, which is the second half decoded. 전쟁 is the metaphor to unpack: a headline calls something a war when it is a problem nobody is winning, and 심각하다 is that said plainly. The 많은 양 is where the war comes from.\n\nWorth noticing which half the answer comes from. Both halves are true, and the one the options are built around is the second — the newsworthy one. A headline in two halves does not promise the answer covers both.",
           "grammar": "N와/과의 전쟁 — a war *with* N. 와/과 marks who the fight is against, and 의 turns the whole thing into something that can sit as a noun in a headline, where a verb would otherwise be needed. The same compression as 모색, 천국 and 불티 in the questions before it.\n\nIn the options: -기 위해 states a purpose (치우기 위해 = in order to clear), and N(으)로 인해 states a cause in the formal register the papers use (쓰레기 문제로 인해 = owing to the rubbish problem)."
+        },
+        {
+          "n": 5,
+          "phraseKo": "저축률 24년 만에 바닥으로, 젊은층도 저축 무관심!",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "저축률 24년 만에 바닥으로, 젊은층도 저축 무관심!"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "lowest",
+          "choices": [
+            {
+              "id": "never_rose",
+              "ko": "24년 동안 저축률이 계속 오르지 않고 있다."
+            },
+            {
+              "id": "advice",
+              "ko": "젊은 때 저축을 시작해서 24년 정도 하는 게 좋다."
+            },
+            {
+              "id": "recovery",
+              "ko": "저축률이 한 번 떨어졌다 올라가는 데 24년이 걸린다."
+            },
+            {
+              "id": "lowest",
+              "ko": "젊은층을 비롯해서 저축률이 24년 만에 가장 낮게 나타났다."
+            }
+          ],
+          "en": "The savings rate has hit rock bottom for the first time in 24 years, and even the young are indifferent to saving. Meaning: the savings rate, the young included, has come out at its lowest in 24 years.",
+          "why": "The hinge here is not a metaphor. It is a time expression, and three of the four options get it wrong in three different ways.\n\nN 만에 means after an interval of N — in practice, for the first time in N years, measured from the last time it happened. It does not mean *during* N years, which is N 동안, and option 1 is that one substitution and nothing else: 24년 동안 … 오르지 않고 있다 claims the rate has failed to rise for twenty-four years running. That is a far stronger statement than the headline makes. The headline says only that today's figure is the lowest since twenty-four years ago; about the twenty-three years in between it says nothing at all.\n\nOption 3 turns the interval into a mechanism — twenty-four years for the rate to fall and climb back. Nothing in the headline is about recovery; it reports a floor, not a cycle.\n\nOption 2 turns it into advice on how long to save for, which misreads 만에 and is also the recommendation shape that keeps turning up in this question type.\n\nThat leaves 4, which is the easy half done right. 바닥 is rock bottom and 가장 낮게 is that said plainly; 만에 survives intact; and 젊은층도 becomes 젊은층을 비롯해서 — the 도 saying the young are part of the fall, not a separate story beside it.",
+          "grammar": "N 만에 against N 동안 is the whole question. 24년 만에 = for the first time in 24 years, measured from the last occurrence; 24년 동안 = throughout 24 years. One names a point, the other a stretch, and swapping them changes what is being claimed rather than how it is worded.\n\nN을/를 비롯해서 = including N, and N first among them, which is the work 도 does in 젊은층도. And 바닥으로 is a bare noun plus 으로 where a verb belongs: the headline standing in for 바닥으로 떨어졌다, the same compression as 모색, 천국, 불티 and 관리 중 before it."
         }
       ]
     }

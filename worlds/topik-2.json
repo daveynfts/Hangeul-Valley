@@ -567,8 +567,8 @@
         "ko": "-기 위해",
         "en": "in order to",
         "hint": "🎯",
-        "category": "사회",
-        "categoryEn": "Society & everyday life",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
         "forms": [
           "기 위해"
         ]
@@ -577,8 +577,8 @@
         "ko": "-(으)로 인해",
         "en": "owing to, because of",
         "hint": "➡️",
-        "category": "사회",
-        "categoryEn": "Society & everyday life",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
         "forms": [
           "로 인해"
         ]
@@ -608,6 +608,158 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "겪고"
+        ]
+      },
+      {
+        "ko": "저축률",
+        "en": "the savings rate",
+        "hint": "📉",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "저축",
+        "en": "saving, savings",
+        "hint": "🏦",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "바닥",
+        "en": "the bottom — of a figure, rock bottom",
+        "hint": "⬇️",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "바닥으로"
+        ]
+      },
+      {
+        "ko": "오르다",
+        "en": "to rise",
+        "hint": "📈",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "오르지"
+        ]
+      },
+      {
+        "ko": "떨어지다",
+        "en": "to fall",
+        "hint": "📉",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "떨어졌다"
+        ]
+      },
+      {
+        "ko": "올라가다",
+        "en": "to climb back up",
+        "hint": "🧗",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "올라가는"
+        ]
+      },
+      {
+        "ko": "낮다",
+        "en": "to be low",
+        "hint": "🔽",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "낮게"
+        ]
+      },
+      {
+        "ko": "젊은층",
+        "en": "the young, as an age group",
+        "hint": "🧑",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "젊다",
+        "en": "to be young",
+        "hint": "🌱",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "젊은"
+        ]
+      },
+      {
+        "ko": "무관심",
+        "en": "indifference",
+        "hint": "🤷",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "계속",
+        "en": "continuously",
+        "hint": "➰",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "정도",
+        "en": "about, roughly",
+        "hint": "📏",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "걸리다",
+        "en": "to take (an amount of time)",
+        "hint": "⏳",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "걸린다"
+        ]
+      },
+      {
+        "ko": "나타나다",
+        "en": "to come out, to show up — of a figure or a result",
+        "hint": "📊",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "나타났다"
+        ]
+      },
+      {
+        "ko": "N 만에",
+        "en": "for the first time in N — measured from the last time it happened",
+        "hint": "🗓️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "만에"
+        ]
+      },
+      {
+        "ko": "N 동안",
+        "en": "throughout N, for the whole of N",
+        "hint": "📆",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "동안"
+        ]
+      },
+      {
+        "ko": "N을/를 비롯해서",
+        "en": "including N, and N first among them",
+        "hint": "➕",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "비롯해서"
         ]
       }
     ]
@@ -654,6 +806,11 @@
         "ko": "환경",
         "en": "Environment & waste",
         "cat": "환경"
+      },
+      {
+        "ko": "문법",
+        "en": "Grammar & expressions",
+        "cat": "문법"
       }
     ]
   }
