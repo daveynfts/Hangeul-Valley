@@ -369,6 +369,119 @@
         "forms": [
           "중요해졌다"
         ]
+      },
+      {
+        "ko": "색조 화장품",
+        "en": "colour cosmetics — makeup, as against skincare",
+        "hint": "💄",
+        "category": "미용",
+        "categoryEn": "Beauty & appearance"
+      },
+      {
+        "ko": "화장품",
+        "en": "cosmetics",
+        "hint": "🧴",
+        "category": "미용",
+        "categoryEn": "Beauty & appearance"
+      },
+      {
+        "ko": "화장을 하다",
+        "en": "to wear makeup",
+        "hint": "💅",
+        "category": "미용",
+        "categoryEn": "Beauty & appearance",
+        "forms": [
+          "화장을 하는"
+        ]
+      },
+      {
+        "ko": "외모",
+        "en": "a person's looks",
+        "hint": "🪞",
+        "category": "미용",
+        "categoryEn": "Beauty & appearance"
+      },
+      {
+        "ko": "가꾸다",
+        "en": "to tend, to groom — used of looks and of gardens alike",
+        "hint": "🌿",
+        "category": "미용",
+        "categoryEn": "Beauty & appearance",
+        "forms": [
+          "가꾸는"
+        ]
+      },
+      {
+        "ko": "불티",
+        "en": "a spark — in a headline, short for 불티나다, to sell out fast",
+        "hint": "🔥",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "관리",
+        "en": "looking after something; also being in charge of it",
+        "hint": "🧰",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "늘어나다",
+        "en": "to grow in number",
+        "hint": "📈",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "늘어났다"
+        ]
+      },
+      {
+        "ko": "다양하다",
+        "en": "to be varied",
+        "hint": "🎛️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "다양하게"
+        ]
+      },
+      {
+        "ko": "필요가 있다",
+        "en": "there is a need to",
+        "hint": "❗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "주로",
+        "en": "mainly",
+        "hint": "🎯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "담당하다",
+        "en": "to be in charge of, to handle",
+        "hint": "👔",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "담당하고"
+        ]
+      },
+      {
+        "ko": "사회적 지위",
+        "en": "social standing",
+        "hint": "🏛️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "관심",
+        "en": "interest, attention",
+        "hint": "👁️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
       }
     ]
   },
@@ -399,6 +512,11 @@
         "ko": "문화",
         "en": "Culture & media",
         "cat": "문화"
+      },
+      {
+        "ko": "미용",
+        "en": "Beauty & appearance",
+        "cat": "미용"
       }
     ]
   }

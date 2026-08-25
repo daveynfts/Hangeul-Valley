@@ -98,6 +98,42 @@
           "en": "An age of eating with the eyes and tasting with the ears — a paradise of cooking programmes. Meaning: there are a great many cooking programmes on television now.",
           "why": "천국 is the hinge, and it is not a place. 요리 프로그램 천국 says there are so many cooking programmes that the country is awash with them, and option 2 is that said in plain words: 아주 많다.\n\nThe first half describes rather than instructs. 눈으로 먹고 귀로 맛보는 시대 says this is the age we are in — food consumed through pictures and sound. Option 1 turns it into 즐겨야 한다, an obligation nobody in the headline is under. A headline reports a state of affairs; it does not tell the reader what to do.\n\nOption 3 goes further than the words allow. Enjoying food with the eyes and ears *as well* says nothing about taste mattering less — the headline adds senses, it does not rank them. Reading a comparison into an addition is the commonest way to overshoot on this question type.\n\nOption 4 reverses the second half outright. A cooking-programme paradise is the opposite of television showing pictures instead of cooking.",
           "grammar": "N(으)로 marks the instrument: 눈으로, 귀로 — with the eyes, with the ears. -는 시대 makes a whole clause modify 시대, so 눈으로 먹고 귀로 맛보는 all describes the era rather than being separate statements. And the headline ends on a bare noun where a verb belongs: 천국! stands in for 천국이다, the same compression as 모색 for 모색하고 있다 in question 1."
+        },
+        {
+          "n": 3,
+          "phraseKo": "색조 화장품도 불티, 남자는 관리 중",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "색조 화장품도 불티, 남자는 관리 중"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "grooming",
+          "choices": [
+            {
+              "id": "grooming",
+              "ko": "화장을 하는 등 외모를 가꾸는 남자들이 늘어났다."
+            },
+            {
+              "id": "need",
+              "ko": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
+            },
+            {
+              "id": "job",
+              "ko": "화장품의 색을 만드는 일은 주로 남자들이 담당하고 있다."
+            },
+            {
+              "id": "status",
+              "ko": "사회적 지위가 높은 남자들이 외모에 관심을 많이 갖는다."
+            }
+          ],
+          "en": "Colour cosmetics selling out too, and men are grooming. Meaning: more men are looking after their appearance, makeup included.",
+          "why": "Two words with two readings each, which by now is the shape of this question type rather than a coincidence.\n\n불티 is a spark, and on its own says nothing about selling. It is the front half of 불티나다 — to go like sparks off a fire — which is what Korean says when stock clears as fast as it arrives. The headline keeps the spark and drops the verb. The particle 도 is doing the real work: colour cosmetics *as well*, not just the skincare a reader would already expect men to buy.\n\n관리 중 is the second. 관리하다 is both to look after and to be in charge of, and 중 is in the middle of doing it. Of a person and their own face it is grooming; of a person and a task it is a job. Option 3 takes the second reading and builds a workplace out of it — men run the colour-making — and has to misread 색조 화장품 as \"making colours\" to get there at all.\n\nOption 2 turns a report into a recommendation: 만들 필요가 있다 is advice, and a headline advises nobody. That is the same miss as option 1 in question 2.\n\nOption 4 adds a fact the headline does not contain. 사회적 지위 appears nowhere in it — the headline says men, not men of a certain standing.\n\nWhich leaves 1, and it is both halves said plainly: cosmetics flying off shelves means men buying them, 관리 중 means grooming, and 늘어났다 is the trend that 도 was pointing at.",
+          "grammar": "Headline compression twice in one line: 불티 stands in for 불티나게 팔린다 and 관리 중 for 관리하고 있다 — the third headline running to put a noun where the verb belongs. N도 is the particle carrying the news: 색조 화장품도 means these too, on top of what you would expect. And in option 1, -는 등 names one example among several: 화장을 하는 등 = by wearing makeup and so on."
         }
       ]
     }
