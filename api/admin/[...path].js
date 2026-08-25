@@ -30,7 +30,7 @@ const path = require('path');
 const {
   setCors, verifyGoogleIdToken, readBearer, env, putContent, CONTENT_CDN
 } = require('../_r2');
-const { githubConfig, commitFile } = require('../_github');
+const { githubConfig, commitFile, probe } = require('../_github');
 const { repoRoot } = require('../_repoRoot');
 const content = require('../../admin/lib/content');
 
@@ -102,6 +102,9 @@ async function readCurrent(rel) {
 async function handleHost(req, res) {
   const { user, owner } = await whoami(req);
   const gh = (() => { try { return githubConfig(); } catch (e) { return null; } })();
+  // Asked only for the account that could actually use the answer: it is two GitHub calls,
+  // and telling an anonymous visitor about the repository's permissions is not its business.
+  const git = (gh && owner) ? await probe(gh).catch(() => null) : null;
   const allowed = env('ADMIN_GOOGLE_SUB');
   const missing = [];
   if (!gh) missing.push('GITHUB_TOKEN and GITHUB_REPO');
@@ -109,7 +112,10 @@ async function handleHost(req, res) {
   return json(res, 200, {
     success: true,
     data: {
-      writable: !!(gh && owner),
+      // A token that cannot write makes this copy read-only in fact, so it says so rather
+      // than offering a Save that will spend an edit and come back 403. If the probe itself
+      // could not run, that is not evidence of anything and does not block.
+      writable: !!(gh && owner && (!git || git.canWrite)),
       gameUrl: '/',
       signedIn: !!user,
       // Shown so the first sign-in can supply the value that unlocks editing: there is no way
@@ -118,6 +124,9 @@ async function handleHost(req, res) {
       you: user ? { sub: user.sub, email: user.email, name: user.name } : null,
       owner,
       branch: gh ? gh.branch : null,
+      // What the token can actually do, checked rather than assumed. Without this the first
+      // sign of a read-only token is a 403 at the end of an edit.
+      git,
       needsEnv: missing,
       // Four states, not three. Collapsing 'not signed in' into 'signed in as the wrong
       // person' told an anonymous caller they were signed in, which is both untrue and the
@@ -128,7 +137,9 @@ async function handleHost(req, res) {
           ? 'Sign in, then set ADMIN_GOOGLE_SUB to the sub shown here to unlock editing.'
           : (!user
             ? 'Sign in with Google to edit.'
-            : (owner ? '' : 'Signed in, but this is not the account allowed to edit.')))
+            : (!owner
+              ? 'Signed in, but this is not the account allowed to edit.'
+              : ((git && git.why) || ''))))
     }
   });
 }
@@ -173,7 +184,17 @@ async function handleWrite(req, res, key) {
   try {
     commit = await commitFile(gh, rel, text, message);
   } catch (e) {
-    return fail(res, e.status === 409 ? 409 : 502, e.status === 409 ? 'Conflict' : 'GitHub write failed', e.message);
+    if (e.status === 409) return fail(res, 409, 'Conflict', e.message);
+    // A 403 here is almost always the token's permissions, and GitHub's own wording — "Resource
+    // not accessible by personal access token" — is true and tells you nothing about which of
+    // the three usual causes it is. Ask, then say.
+    if (/403/.test(e.message)) {
+      const p = await probe(gh).catch(() => null);
+      return fail(res, 403, 'GitHub refused the write',
+        (p && p.why) || 'The token cannot write to ' + gh.repo
+        + '. Check Repository permissions → Contents: Read and write.');
+    }
+    return fail(res, 502, 'GitHub write failed', e.message);
   }
 
   // Only after the commit. If the upload fails the repo is still right and the next publish

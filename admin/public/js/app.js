@@ -270,9 +270,19 @@ window.AppController = {
         + '<button type="button" id="btn-admin-signout" class="btn-small">Sign out</button>';
     } else {
       const sub = (you && you.sub) || '';
-      box.innerHTML = '<span class="auth-note">Signed in as <b>' + who + '</b> \u2014 still read-only.'
-        + (sub ? ' Set <code>ADMIN_GOOGLE_SUB</code> to <code>' + sub + '</code> in Vercel to unlock editing.' : '')
-        + '</span><button type="button" id="btn-admin-signout" class="btn-small">Sign out</button>';
+      // Three different reasons to be read-only while signed in, and they need different
+      // actions: the wrong account, a sub that was never set, or a token that cannot write
+      // to the repository. The server works out which; this only has to avoid flattening
+      // them into one sentence that fits none of them.
+      const why = data.hint
+        || (sub ? 'Set ADMIN_GOOGLE_SUB to ' + sub + ' in Vercel to unlock editing.' : '');
+      box.innerHTML = '<span class="auth-note" title="' + why.replace(/"/g, '') + '">'
+        + '<b>' + who + '</b> \u2014 read-only</span>'
+        + '<button type="button" id="btn-admin-signout" class="btn-small">Sign out</button>';
+      // Too long for the header strip and too important to leave in a tooltip.
+      const pill = document.getElementById('admin-readonly-pill');
+      if (pill && why) pill.title = why;
+      if (why) window.Toast.error(why, 'Cannot edit yet');
     }
     const o = document.getElementById('btn-admin-signout');
     if (o) o.onclick = () => window.AdminAuth.signOut(() => this.fetchAllData());

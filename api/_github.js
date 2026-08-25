@@ -95,4 +95,35 @@ async function commitFile(cfg, rel, text, message) {
   };
 }
 
-module.exports = { githubConfig, commitFile, currentSha };
+// Can this token actually write here, and does the branch exist? Both are knowable before a
+// save is attempted, and finding out at save time costs a filled-in form and a 403 whose text
+// says only "Resource not accessible by personal access token" — true, unhelpful, and silent
+// about which of the three usual causes it is.
+async function probe(cfg) {
+  const out = { repo: cfg.repo, branch: cfg.branch, canWrite: false, branchExists: false, why: '' };
+  let r;
+  try { r = await api(cfg, '', { method: 'GET' }); }
+  catch (e) { out.why = 'GitHub could not be reached: ' + e.message; return out; }
+  if (r.status === 401) { out.why = 'The token is not valid — it may have expired or been revoked.'; return out; }
+  if (r.status === 404) {
+    out.why = 'The token cannot see ' + cfg.repo + '. On a fine-grained token, Repository access'
+      + ' must name this repository — the default of Public repositories is not enough.';
+    return out;
+  }
+  if (!r.ok) { out.why = 'GitHub answered ' + r.status + ' when asked about the repository.'; return out; }
+  const repo = await r.json();
+  // push is the permission the Contents API writes under.
+  out.canWrite = !!(repo.permissions && repo.permissions.push);
+  if (!out.canWrite) {
+    out.why = 'The token can read ' + cfg.repo + ' but not write to it. Set Repository'
+      + ' permissions → Contents to Read and write.';
+  }
+  const b = await api(cfg, '/branches/' + encodeURIComponent(cfg.branch), { method: 'GET' });
+  out.branchExists = b.ok;
+  if (out.canWrite && !out.branchExists) {
+    out.why = 'Branch ' + cfg.branch + ' does not exist on ' + cfg.repo + '.';
+  }
+  return out;
+}
+
+module.exports = { githubConfig, commitFile, currentSha, probe };
