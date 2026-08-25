@@ -200,7 +200,7 @@ window.LevelsView = {
           <td class="font-bold">${this.escapeHtml(item.ko)}</td>
           <td><code class="key-badge">${this.escapeHtml(item.en)}</code></td>
           <td><span class="badge ${catBadgeClass}">${this.escapeHtml(item.category || '기타')}</span></td>
-          <td class="text-center" style="font-size: 1.1rem;">${this.escapeHtml(item.hint || '')}</td>
+          <td class="text-center cell-glyph">${this.escapeHtml(item.hint || '')}</td>
           <td class="text-right">${actions}</td>
         </tr>
       `;
