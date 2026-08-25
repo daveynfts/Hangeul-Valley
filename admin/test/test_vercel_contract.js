@@ -250,6 +250,33 @@ async function runTests() {
     assert(res.statusCode === 404, 'unknown route → 404, got ' + res.statusCode);
   });
 
+  // The routing bug that made every admin URL 404 on production while the function itself was
+  // plainly running: req.query.path arrived empty, and nothing else was consulted. Every case
+  // above passes the segments through the query, so only this one covers the other source.
+  await test('routes resolve from the URL when the query carries no segments', async () => {
+    const call = async (url) => {
+      const req = { method: 'GET', url, headers: {}, query: {} };
+      const res = Object.assign(mockRes(), { headers: {}, setHeader(k, v) { this.headers[k] = v; return this; } });
+      await adminH(req, res);
+      return res;
+    };
+    const host = await call('/api/admin/host');
+    assert(host.statusCode === 200 && host.body.data.writable === false, 'host resolves from the url');
+    const list = await call('/api/admin/content');
+    assert(Array.isArray(list.body.data) && list.body.data.length >= 20, 'the registry resolves from the url');
+    // A key with a slash in it is the case a naive split would lose. Checked with a write
+    // rather than a read: a read fetches the file from the CDN, and a unit test that needs
+    // the network is a unit test that fails on a train. An unsigned write is refused with
+    // 401 only after the key resolves to a real entry — an unknown key 404s first — so the
+    // 401 is the proof that world/topik-2 came through whole.
+    const req = { method: 'PUT', url: '/api/admin/content/world/topik-2', headers: {}, query: {}, body: {} };
+    const res = Object.assign(mockRes(), { headers: {}, setHeader(k, v) { this.headers[k] = v; return this; } });
+    await adminH(req, res);
+    assert(res.statusCode === 401, 'a multi-segment key resolves, then refuses the write: got ' + res.statusCode);
+    const gone = await call('/api/admin/content/world/no-such-world');
+    assert(gone.statusCode === 404, 'while an unknown one 404s, got ' + gone.statusCode);
+  });
+
   await test('PUT on a Vercel GET handler is refused with 409', () => {
     const res = callHandler(statsH, 'PUT');
     assert(res.statusCode === 409, 'PUT /api/stats → 409, got ' + res.statusCode);

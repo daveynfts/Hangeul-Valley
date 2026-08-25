@@ -35,6 +35,19 @@ const { repoRoot } = require('../_repoRoot');
 const content = require('../../admin/lib/content');
 
 const json = (res, code, body) => { res.status(code).json(body); };
+
+// Where the route segments come from. req.query.path is the documented home for a catch-all,
+// and on this project it arrives empty — so the URL is read as well and whichever answers
+// wins. Trusting one mechanism is what made every route 404 on production while the function
+// itself was plainly running and returning its own error text.
+function segmentsOf(req) {
+  const fromQuery = [].concat((req.query && req.query.path) || []).filter(Boolean);
+  if (fromQuery.length) return fromQuery.map(String);
+  const raw = String(req.url || '').split('?')[0];
+  const at = raw.indexOf('/api/admin');
+  const tail = at >= 0 ? raw.slice(at + '/api/admin'.length) : raw;
+  return tail.split('/').filter(Boolean).map(decodeURIComponent);
+}
 const fail = (res, code, error, details) =>
   json(res, code, { success: false, error, details: details || undefined });
 
@@ -170,7 +183,7 @@ module.exports = async (req, res) => {
   setCors(req, res);
   if (req.method === 'OPTIONS') { res.status(204).end(); return; }
 
-  const parts = [].concat(req.query.path || []).filter(Boolean);
+  const parts = segmentsOf(req);
   const head = parts[0] || '';
   const key = parts.slice(1).join('/');
 
@@ -188,7 +201,8 @@ module.exports = async (req, res) => {
       if (req.method === 'PUT') return await handleWrite(req, res, key);
       return fail(res, 405, 'Method Not Allowed');
     }
-    return fail(res, 404, 'Not Found', `Unknown admin route "${parts.join('/')}"`);
+    return fail(res, 404, 'Not Found',
+      `Unknown admin route "${parts.join('/')}" (url ${String(req.url || '').split('?')[0]})`);
   } catch (e) {
     return fail(res, e.status || 500, 'Server error', e.message);
   }
