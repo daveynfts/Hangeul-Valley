@@ -11,6 +11,7 @@
   };
 
   const state = {
+    unit: '2b-unit-10',
     panel: 'layout',
     layout: null,
     selected: 'desk',
@@ -127,9 +128,11 @@
       drawMap();
     });
     document.getElementById('u10-save-layout').addEventListener('click', async () => {
-      const saved = await window.apiFetch.saveUnit10Layout(state.layout);
-      state.layout = saved.data;
-      window.Toast.success('Layout saved to worlds/unit10-layout.json');
+      const saved = await window.apiFetch.saveContent('layout', state.layout);
+      // .body, not .data: the registry answers with the file wrapped in its metadata, and
+      // assigning the wrapper here would have sent the wrapper back on the next save.
+      state.layout = saved.data.body;
+      window.Toast.success('Layout saved — it is the one file every unit shares');
       drawMap();
     });
   }
@@ -216,9 +219,9 @@
     document.getElementById('u10-save-quiz').addEventListener('click', async () => {
       readQuizEditor();
       state.quiz.sessionSize = Number(document.getElementById('u10-session-size').value) || 5;
-      const saved = await window.apiFetch.saveUnit10Quiz(state.quiz);
-      state.quiz = saved.data;
-      window.Toast.success('Quiz saved (' + state.quiz.questions.length + ' questions)');
+      const saved = await window.apiFetch.saveContent(currentUnit().quiz, state.quiz);
+      state.quiz = saved.data.body;
+      window.Toast.success(currentUnit().label + ' quiz saved (' + state.quiz.questions.length + ' questions)');
       renderQuiz();
     });
   }
@@ -275,8 +278,12 @@
       renderWords();
     });
     document.getElementById('u10-save-world').addEventListener('click', async () => {
-      const saved = await window.apiFetch.saveUnit10World(state.world);
-      window.Toast.success('Word list saved (' + saved.data.wordCount + ' words)');
+      const saved = await window.apiFetch.saveContent('world/' + currentUnit().id, state.world);
+      // The registry save answers with the normalised file, not a summary, so the count is
+      // read off what was actually stored rather than off a field the old route happened to
+      // return. It said 'undefined words' for exactly as long as nobody looked.
+      const n = ((saved.data.body || {}).level || {}).words || [];
+      window.Toast.success(currentUnit().label + ' word list saved (' + n.length + ' words)');
     });
   }
 
@@ -285,20 +292,70 @@
   }
   function escapeAttr(s) { return escapeHtml(s); }
 
+  // Every unit, not just the one this screen was written for. The map layout is a single
+  // file shared by all of them, so it does not move with the picker; the quiz and the word
+  // list do. TOPIK has no desk quiz, which is why the panel can be absent rather than empty.
+  const UNITS = [
+    { id: '2b-unit-10', label: 'Unit 10', quiz: 'quiz/unit10' },
+    { id: '2b-unit-11', label: 'Unit 11', quiz: 'quiz/unit11' },
+    { id: '2b-unit-13', label: 'Unit 13', quiz: 'quiz/unit13' },
+    { id: '2b-unit-14', label: 'Unit 14', quiz: 'quiz/unit14' },
+    { id: 'topik-2', label: 'TOPIK II', quiz: null }
+  ];
+
+  function currentUnit() {
+    return UNITS.find((u) => u.id === state.unit) || UNITS[0];
+  }
+
   async function loadAll() {
-    const [layout, quiz, world] = await Promise.all([
-      window.apiFetch.getUnit10Layout(),
-      window.apiFetch.getUnit10Quiz(),
-      window.apiFetch.getUnit10World()
-    ]);
-    state.layout = layout.data;
-    state.quiz = quiz.data;
-    state.world = world.data;
+    const u = currentUnit();
+    const wants = [
+      window.apiFetch.getContent('layout'),
+      window.apiFetch.getContent('world/' + u.id),
+      u.quiz ? window.apiFetch.getContent(u.quiz) : Promise.resolve(null)
+    ];
+    const [layout, world, quiz] = await Promise.all(wants);
+    state.layout = layout.data.body;
+    state.world = world.data.body;
+    state.quiz = quiz ? quiz.data.body : null;
+  }
+
+  function paintUnitPicker() {
+    const box = document.getElementById('u10-unitpick');
+    if (!box) return;
+    box.innerHTML = UNITS.map((u) => '<button type="button" class="u10-unitbtn'
+      + (u.id === state.unit ? ' active' : '') + '" data-unit="' + u.id + '">'
+      + u.label + '</button>').join('');
+    box.querySelectorAll('.u10-unitbtn').forEach((b) => {
+      b.onclick = async () => {
+        if (b.dataset.unit === state.unit) return;
+        state.unit = b.dataset.unit;
+        state.layout = null;
+        await loadAll();
+        paintUnitPicker();
+        // A unit with no quiz must not leave you staring at the last unit's questions.
+        if (!currentUnit().quiz && state.panel === 'quiz') state.panel = 'words';
+        paintPanelAvailability();
+        setPanel(state.panel);
+      };
+    });
+  }
+
+  function paintPanelAvailability() {
+    const hasQuiz = !!currentUnit().quiz;
+    const btn = document.querySelector('.u10-subbtn[data-panel="quiz"]');
+    if (btn) {
+      btn.disabled = !hasQuiz;
+      btn.title = hasQuiz ? '' : currentUnit().label + ' has no desk quiz.';
+      btn.classList.toggle('is-unavailable', !hasQuiz);
+    }
   }
 
   window.Unit10View = {
     async render() {
       if (!state.layout) await loadAll();
+      paintUnitPicker();
+      paintPanelAvailability();
       document.querySelectorAll('.u10-subbtn').forEach((b) => {
         b.onclick = () => setPanel(b.dataset.panel);
       });

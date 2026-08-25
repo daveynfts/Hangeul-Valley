@@ -1321,6 +1321,39 @@ const overlayIds = [
   check("no Express path is registered twice for the same method", dupes.length === 0, dupes.join(", "));
 }());
 
+// ── The units workspace offers every unit ─────────────────────────────────
+// The screen with the map pins, the desk quiz and the word table was written when Unit 10
+// was the only unit, and stayed pinned to it for four more — so the nav read "Unit 10" and
+// every other unit had no friendly editor at all, only raw JSON. The panels were always
+// general; only the six API calls were not.
+//
+// This is what stops it happening again: the units it offers are compared against the worlds
+// the content registry knows, so adding a world without adding it here fails the build.
+(function checkUnitsWorkspace() {
+  const view = read(path.join("admin", "public", "js", "world.js"));
+  const html = read(path.join("admin", "public", "index.html"));
+  let registry;
+  try { registry = require(path.join(ROOT, "admin", "lib", "content.js")); }
+  catch (e) { check("the units workspace can be checked against the registry", false, e.message); return; }
+
+  const inRegistry = registry.CONTENT.filter((c) => c.key.indexOf("world/") === 0)
+    .map((c) => c.key.slice("world/".length)).sort();
+  const offered = (view.match(/id: '([a-z0-9-]+)', label:/g) || [])
+    .map((m) => m.replace(/^id: '/, "").replace(/', label:$/, "")).sort();
+  check("the workspace offers every world the registry carries",
+    offered.length > 0 && offered.join(",") === inRegistry.join(","),
+    "offered [" + offered.join(", ") + "] vs registry [" + inRegistry.join(", ") + "]");
+
+  // The old per-unit helpers are what the coupling looked like. Their absence is the
+  // difference between a screen that happens to work for Unit 10 and one that is unit-aware.
+  const stale = ["getUnit10World", "saveUnit10World", "getUnit10Quiz", "saveUnit10Quiz"]
+    .filter((fn) => view.indexOf(fn) >= 0);
+  check("and it no longer reaches for the Unit-10-only endpoints", stale.length === 0, stale.join(", "));
+  check("the nav does not call the workspace Unit 10", html.indexOf("</span> Unit 10") < 0);
+  check("and the workspace has somewhere to draw its unit picker",
+    html.indexOf('id="u10-unitpick"') >= 0 && view.indexOf("paintUnitPicker") >= 0);
+}());
+
 // ── Every clip the content asks for must name a file that can exist ──────────
 // A clip is named for its text in hex, six characters per Korean syllable, so a 40-syllable
 // script overruns the 255-byte filename limit. Three of them did, and the publish job died

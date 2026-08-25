@@ -1458,3 +1458,17 @@ body.admin-readonly .btn-delete-word {
 
 /* 1.55 is a reading measure. A table is scanned, not read. */
 .data-table td, .data-table th { line-height: 1.35; }
+
+/* Which unit the workspace is looking at. Sits above the panel tabs because it changes what
+   they contain, not which one is showing. */
+.u10-unitpick { display: flex; gap: var(--sp-1); flex-wrap: wrap; margin-bottom: var(--sp-3); }
+.u10-unitbtn {
+  background: var(--bg-card); color: var(--text-secondary);
+  border: 1px solid var(--border-card); border-radius: var(--radius-btn);
+  font: inherit; font-size: var(--fs-sm); font-weight: 600;
+  padding: var(--sp-1) var(--sp-4); cursor: pointer;
+}
+.u10-unitbtn:hover { color: var(--text-primary); background: var(--bg-card-hover); }
+.u10-unitbtn.active { background: var(--accent-emerald); border-color: var(--accent-emerald); color: #04231a; }
+/* A panel a unit does not have is shown as absent, not as empty. */
+.u10-subbtn.is-unavailable { opacity: .4; cursor: not-allowed; }
