@@ -5,10 +5,11 @@ class FarmScene extends Phaser.Scene {
     PixelArtRenderer.generateAllTextures(this);
     PixelArtRenderer.generateTilemapTextures(this);
     this.load.json('levels','levels.json');
-    this.load.json('world-2b-10','worlds/2b-unit-10.json');
-    this.load.json('world-2b-11','worlds/2b-unit-11.json');
-    this.load.json('world-2b-13','worlds/2b-unit-13.json');
-    this.load.json('world-2b-14','worlds/2b-unit-14.json');
+    // Read from the same list the runtime loader uses, not typed out again. A world absent
+    // here still attaches — loadTextbookWorlds fetches it — but it arrives after the level
+    // select has painted, so its card is simply missing from a screen that looks complete.
+    // That is how the TOPIK world was in levelsData and not on the menu at the same time.
+    TEXTBOOK_WORLD_FILES.forEach((spec) => this.load.json(spec.cache, spec.file));
     this.load.json('unit10-layout','worlds/unit10-layout.json?v=southband');
     this.load.json('skin-catalog', 'skins/catalog.json?v=' + SKIN_CATALOG_BOOT_V);
     ART_LOAD.forEach((a) => { this.load.image(a.key, artUrl(a.file)); });
@@ -51,10 +52,9 @@ class FarmScene extends Phaser.Scene {
       this._refreshDueReviews();
     });
     levelsData = this.cache.json.get('levels') || [];
-    if (this.cache.json.exists('world-2b-10')) attachTextbookWorld(this.cache.json.get('world-2b-10'));
-    if (this.cache.json.exists('world-2b-11')) attachTextbookWorld(this.cache.json.get('world-2b-11'));
-    if (this.cache.json.exists('world-2b-13')) attachTextbookWorld(this.cache.json.get('world-2b-13'));
-    if (this.cache.json.exists('world-2b-14')) attachTextbookWorld(this.cache.json.get('world-2b-14'));
+    TEXTBOOK_WORLD_FILES.forEach((spec) => {
+      if (this.cache.json.exists(spec.cache)) attachTextbookWorld(this.cache.json.get(spec.cache));
+    });
     applyDebugSkinQuery();
     if(!levelsData.length){
       console.error('levels.json missing');

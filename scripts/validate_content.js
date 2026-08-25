@@ -1435,6 +1435,59 @@ const overlayIds = [
     unhidden.join(", "));
 }());
 
+// ── A world on the menu, not just in memory ────────────────────────────────
+// A world reaches levelsData two ways: the scene preloads it into Phaser's cache, or
+// loadTextbookWorlds fetches it later. Both work, and only the first is in time for the
+// level select to paint — so a world missing from the preload is present in memory and
+// absent from the menu, which is a bug with nothing to look at. The TOPIK world spent a day
+// like that.
+//
+// farm.js used to name the four worlds twice, once to load and once to attach. It reads the
+// list now, and this is what keeps it reading rather than drifting back to a copy.
+(function checkWorldPreload() {
+  const farm = read(path.join("js", "scenes", "farm.js"));
+  const econ = read(path.join("js", "systems", "economy.js"));
+  const specs = (econ.match(/cache: '[^']+', file: '[^']+'/g) || [])
+    .map((m) => m.replace(/^cache: '/, "").split("'")[0]);
+  check("economy.js declares the worlds to load", specs.length >= 5, specs.join(", "));
+  // Named individually rather than looped is the shape that drifts.
+  const hardcoded = specs.filter((key) => farm.indexOf("'" + key + "'") >= 0);
+  check("farm.js does not name individual worlds, it walks the list",
+    hardcoded.length === 0, hardcoded.join(", "));
+  check("and it uses that list for both the preload and the attach",
+    (farm.match(/TEXTBOOK_WORLD_FILES/g) || []).length >= 2);
+}());
+
+// ── A world card says which world it is ───────────────────────────────────
+// The label used to be rebuilt from the trailing digits of lvl.level, which works for
+// 2B-14 and yields nothing for TOPIK-II — that card came out reading "Textbook", the one
+// word on it that said nothing about which world it was. And its heading said SNU Korean
+// 2B over a world that is not from that book. Both facts live in the world JSON already,
+// so the rule is that the screen reads them rather than deriving them.
+(function checkWorldCardLabels() {
+  const econ = read(path.join('js', 'systems', 'economy.js'));
+  const files = (econ.match(/file: '([^']+)'/g) || []).map((m) => m.split("'")[1])
+    .filter((f) => f.indexOf('worlds/') === 0);
+  const ui = read(path.join('js', 'ui.js'));
+  const headed = (ui.match(/PACK_HEADING = \{([^}]*)\}/) || [])[1] || '';
+  const packs = [];
+  files.forEach((rel) => {
+    let w = null;
+    try { w = JSON.parse(read(rel)); } catch (e) { w = null; }
+    if (!w) { check(rel + ' parses', false); return; }
+    check(rel + ' names itself for the card', !!String(w.pages || '').trim(),
+      JSON.stringify(w.pages || ''));
+    const pack = String((w.level && w.level.pack) || w.pack || '');
+    if (pack && packs.indexOf(pack) < 0) packs.push(pack);
+  });
+  const homeless = packs.filter((p) => headed.indexOf("'" + p + "'") < 0
+    && headed.indexOf(p + ':') < 0);
+  check('and every world pack has a heading of its own on the level select',
+    homeless.length === 0, homeless.join(', '));
+  check('the card label is read from the world, not rebuilt from the level id',
+    ui.indexOf("String(lvl.pages || '').trim()") >= 0);
+}());
+
 // ── Every clip the content asks for must name a file that can exist ──────────
 // A clip is named for its text in hex, six characters per Korean syllable, so a 40-syllable
 // script overruns the 255-byte filename limit. Three of them did, and the publish job died

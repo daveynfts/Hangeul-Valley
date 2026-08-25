@@ -248,8 +248,14 @@ function buildLevelSelectScreen() {
     // is written "2B Unit 10 · What do you want to eat?", which under a heading that already
     // says SNU Korean 2B printed the same words three times on one screen. The unit number
     // moves to the eyebrow and the prefix comes off the name, leaving the part that differs.
+    // A world says what it is called in `pages` — "Unit 10", "TOPIK II" — so the label is read
+    // rather than reconstructed. It used to be built from the trailing digits of lvl.level,
+    // which works for 2B-14 and gives nothing for TOPIK-II: the card came out labelled
+    // "Textbook", the one word on it that was not about which world it was.
     const unitNo = world ? (String(lvl.level || '').match(/(\d+)\s*$/) || [])[1] : null;
-    const eyebrow = world ? (unitNo ? `Unit ${unitNo}` : 'Textbook') : `Level ${lvl.level}`;
+    const eyebrow = world
+      ? (String(lvl.pages || '').trim() || (unitNo ? `Unit ${unitNo}` : 'Textbook'))
+      : `Level ${lvl.level}`;
     // World packs carry their Korean in `name` and their English in `nameEn`; Valley packs put
     // the Korean in `name` too. levelNameKo returns '' when there is only one, so the Korean
     // line collapses rather than printing the English twice.
@@ -317,13 +323,23 @@ function buildLevelSelectScreen() {
     h.textContent = text;
     lsGrid.appendChild(h);
   };
-  const worlds = [];
+  // Worlds group by the pack they belong to. One heading served while every world was a
+  // chapter of the same book; the exam world is not, and filing it under "SNU Korean 2B"
+  // would have been the heading telling a small lie to keep its shape.
+  const PACK_HEADING = { 'snu-2b': 'Textbook · SNU Korean 2B', topik: 'Exam practice' };
+  const byPack = new Map();
   const valley = [];
-  levelsData.forEach((lvl, idx) => (isWorldLevel(lvl) ? worlds : valley).push({ lvl, idx }));
-  if (worlds.length) {
-    heading('Textbook · SNU Korean 2B');
-    worlds.forEach(({ lvl, idx }) => paintCard(lvl, idx));
-  }
+  levelsData.forEach((lvl, idx) => {
+    if (!isWorldLevel(lvl)) { valley.push({ lvl, idx }); return; }
+    const pack = String((lvl && lvl.pack) || 'snu-2b');
+    if (!byPack.has(pack)) byPack.set(pack, []);
+    byPack.get(pack).push({ lvl, idx });
+  });
+  const worlds = [...byPack.values()].flat();
+  byPack.forEach((list, pack) => {
+    heading(PACK_HEADING[pack] || pack);
+    list.forEach(({ lvl, idx }) => paintCard(lvl, idx));
+  });
   if (valley.length) {
     heading(worlds.length ? 'Valley packs' : 'Choose a pack');
     valley.forEach(({ lvl, idx }) => paintCard(lvl, idx));

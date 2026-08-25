@@ -231,10 +231,17 @@ assert(/function isUnit10World\(\)[\s\S]{0,180}worldId === '2b-unit-10'/.test(ec
 
 // ── 9. The farm scene ────────────────────────────────────────────────────────
 console.log('\n--- 9. The farm scene ---');
-assert(farm.indexOf("this.load.json('world-2b-11','worlds/2b-unit-11.json')") >= 0,
-  'FarmScene preloads the Unit 11 world');
-assert(farm.indexOf("if (this.cache.json.exists('world-2b-11')) attachTextbookWorld") >= 0,
-  'and attaches it, so the level select can list it');
+// This used to pin the literal line `this.load.json('world-2b-11', ...)`, which passed for
+// as long as farm.js named every world by hand — the shape that let a fifth world be in
+// the list and off the menu at once. The property was never that the string is present; it
+// is that Unit 11 gets preloaded and attached. It is in TEXTBOOK_WORLD_FILES (asserted
+// above) and farm.js walks that list for both, so the guarantee holds without the typing.
+assert(/TEXTBOOK_WORLD_FILES\.forEach\([\s\S]{0,200}this\.load\.json\(spec\.cache, spec\.file\)/.test(farm),
+  'FarmScene preloads every world on the list, Unit 11 among them');
+assert(/TEXTBOOK_WORLD_FILES\.forEach\([\s\S]{0,240}cache\.json\.exists\(spec\.cache\)[\s\S]{0,120}attachTextbookWorld/.test(farm),
+  'and attaches every one of them, so the level select can list it');
+assert(farm.indexOf("'world-2b-11'") < 0 && farm.indexOf("'2b-unit-11.json'") < 0,
+  'without naming Unit 11 a second time, where the two lists could drift apart');
 assert(/_isUnit11\(\)\{[\s\S]{0,160}'2b-unit-11'/.test(farm), 'FarmScene knows Unit 11');
 assert(/_hasStudyDesk\(\)[\s\S]{0,240}_isUnit11\(\)/.test(farm),
   'the desk fallback covers Unit 11 for the case where worldPackHas is unavailable');
