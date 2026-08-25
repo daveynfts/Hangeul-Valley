@@ -119,11 +119,16 @@ async function handleHost(req, res) {
       owner,
       branch: gh ? gh.branch : null,
       needsEnv: missing,
+      // Four states, not three. Collapsing 'not signed in' into 'signed in as the wrong
+      // person' told an anonymous caller they were signed in, which is both untrue and the
+      // opposite of the instruction they needed.
       hint: !gh
         ? 'Set GITHUB_TOKEN and GITHUB_REPO in Vercel to edit from here.'
         : (!allowed
           ? 'Sign in, then set ADMIN_GOOGLE_SUB to the sub shown here to unlock editing.'
-          : (owner ? '' : 'Signed in, but this is not the account allowed to edit.'))
+          : (!user
+            ? 'Sign in with Google to edit.'
+            : (owner ? '' : 'Signed in, but this is not the account allowed to edit.')))
     }
   });
 }

@@ -210,6 +210,10 @@ async function runTests() {
     assert(d.signedIn === false && d.you === null, 'and is reported as signed out');
     assert(typeof d.gameUrl === 'string' && typeof d.hint === 'string', 'gameUrl and hint are strings');
     assert(Array.isArray(d.needsEnv), 'it says which environment variables are still missing');
+    // The hint is the whole instruction an unconfigured admin gets, so it has to describe the
+    // state the caller is actually in. It once told an anonymous caller they were signed in.
+    assert(!/signed in, but/i.test(d.hint || ''),
+      'and it does not tell a signed-out caller they are signed in: ' + JSON.stringify(d.hint));
   });
 
   await test('GET /api/admin/content: the registry, so a picker can be built from it', async () => {
