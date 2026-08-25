@@ -23,7 +23,7 @@
       "blurbEn": "A headline in compressed newspaper Korean, and four readings of it — three of which are what taking one word literally looks like.",
       "instructionKo": "다음 신문 기사의 제목을 가장 잘 설명한 것을 고르십시오.",
       "instructionEn": "Choose the sentence that best explains the newspaper headline.",
-      "noteEn": "A headline drops its particles and its verb endings, so every word left has to carry more than usual and each one can be read two ways. That is the whole of this question type: the options are not four summaries, they are four readings, and three of them take a figurative word at face value. Work the hinge words first — here 썰렁하다 and 출구 — and the options sort themselves.",
+      "noteEn": "A headline drops its particles and its verb endings, so every word left carries more than usual and can usually be read two ways. The options are not four summaries — they are four readings, and the wrong ones are wrong in a small number of repeating shapes.\n\nFour questions in, the shapes are these. A figurative word taken at face value: 출구 as a door, 관리 as a job. A description turned into a recommendation, which is what -어야 한다 and 필요가 있다 are doing when you see them in an option. An addition read as a comparison — enjoying food with the eyes *as well* is not taste mattering less. And the subject quietly swapped, so a problem the headline gave to one party is handed to another.\n\nSo: find the words that can be read two ways and settle them; check who the headline says is doing what; and distrust any option that advises rather than reports.",
       "pattern": "제목을 가장 잘 설명한 것 고르기",
       "items": [
         {
@@ -134,6 +134,42 @@
           "en": "Colour cosmetics selling out too, and men are grooming. Meaning: more men are looking after their appearance, makeup included.",
           "why": "Two words with two readings each, which by now is the shape of this question type rather than a coincidence.\n\n불티 is a spark, and on its own says nothing about selling. It is the front half of 불티나다 — to go like sparks off a fire — which is what Korean says when stock clears as fast as it arrives. The headline keeps the spark and drops the verb. The particle 도 is doing the real work: colour cosmetics *as well*, not just the skincare a reader would already expect men to buy.\n\n관리 중 is the second. 관리하다 is both to look after and to be in charge of, and 중 is in the middle of doing it. Of a person and their own face it is grooming; of a person and a task it is a job. Option 3 takes the second reading and builds a workplace out of it — men run the colour-making — and has to misread 색조 화장품 as \"making colours\" to get there at all.\n\nOption 2 turns a report into a recommendation: 만들 필요가 있다 is advice, and a headline advises nobody. That is the same miss as option 1 in question 2.\n\nOption 4 adds a fact the headline does not contain. 사회적 지위 appears nowhere in it — the headline says men, not men of a certain standing.\n\nWhich leaves 1, and it is both halves said plainly: cosmetics flying off shelves means men buying them, 관리 중 means grooming, and 늘어났다 is the trend that 도 was pointing at.",
           "grammar": "Headline compression twice in one line: 불티 stands in for 불티나게 팔린다 and 관리 중 for 관리하고 있다 — the third headline running to put a noun where the verb belongs. N도 is the particle carrying the news: 색조 화장품도 means these too, on top of what you would expect. And in option 1, -는 등 names one example among several: 화장을 하는 등 = by wearing makeup and so on."
+        },
+        {
+          "n": 4,
+          "phraseKo": "피서객은 '더위와의 전쟁', 피서지는 '쓰레기와의 전쟁'",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "피서객은 '더위와의 전쟁', 피서지는 '쓰레기와의 전쟁'"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "litter",
+          "choices": [
+            {
+              "id": "litter",
+              "ko": "피서지에서는 많은 양의 쓰레기를 치우는 문제가 심각하다."
+            },
+            {
+              "id": "guests_clean",
+              "ko": "피서객들이 더위 속에서 쓰레기를 치우기 위해 애쓰고 있다."
+            },
+            {
+              "id": "too_hot",
+              "ko": "피서지에 가도 날씨가 너무 덥기 때문에 편하게 쉴 수 없다."
+            },
+            {
+              "id": "guests_suffer",
+              "ko": "피서객들이 쓰레기 문제로 인해 여러 가지로 불편을 겪고 있다."
+            }
+          ],
+          "en": "For holidaymakers a war with the heat, for the resorts a war with the rubbish. Meaning: clearing the volume of litter left behind has become a serious problem where people go to escape the summer.",
+          "why": "This one is not a word with two readings. It is a pairing, and the pairing is the whole question.\n\nThe headline sets two subjects against two different enemies: 피서객 against the heat, 피서지 against the rubbish. Two of the wrong options simply swap them. Option 2 has the holidaymakers clearing litter in the heat, option 4 has them inconvenienced by the litter — both hand 피서객 a problem the headline gave to the resort. Every word in them is a word from the headline, which is exactly what makes them attractive.\n\nOption 3 takes only the first half and then adds to it. 편하게 쉴 수 없다 is a conclusion about resting that the headline never draws; it says holidaymakers are fighting the heat, not that the trip is ruined.\n\nThat leaves 1, which is the second half decoded. 전쟁 is the metaphor to unpack: a headline calls something a war when it is a problem nobody is winning, and 심각하다 is that said plainly. The 많은 양 is where the war comes from.\n\nWorth noticing which half the answer comes from. Both halves are true, and the one the options are built around is the second — the newsworthy one. A headline in two halves does not promise the answer covers both.",
+          "grammar": "N와/과의 전쟁 — a war *with* N. 와/과 marks who the fight is against, and 의 turns the whole thing into something that can sit as a noun in a headline, where a verb would otherwise be needed. The same compression as 모색, 천국 and 불티 in the questions before it.\n\nIn the options: -기 위해 states a purpose (치우기 위해 = in order to clear), and N(으)로 인해 states a cause in the formal register the papers use (쓰레기 문제로 인해 = owing to the rubbish problem)."
         }
       ]
     }

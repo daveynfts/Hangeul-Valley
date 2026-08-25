@@ -482,6 +482,133 @@
         "hint": "👁️",
         "category": "사회",
         "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "피서객",
+        "en": "a holidaymaker escaping the heat",
+        "hint": "🏖️",
+        "category": "여행",
+        "categoryEn": "Travel & leisure"
+      },
+      {
+        "ko": "피서지",
+        "en": "a place people go to escape the heat",
+        "hint": "⛱️",
+        "category": "여행",
+        "categoryEn": "Travel & leisure"
+      },
+      {
+        "ko": "더위",
+        "en": "the heat",
+        "hint": "🥵",
+        "category": "여행",
+        "categoryEn": "Travel & leisure"
+      },
+      {
+        "ko": "쓰레기",
+        "en": "rubbish",
+        "hint": "🗑️",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "치우다",
+        "en": "to clear away",
+        "hint": "🧹",
+        "category": "환경",
+        "categoryEn": "Environment & waste",
+        "forms": [
+          "치우는",
+          "치우기"
+        ]
+      },
+      {
+        "ko": "양",
+        "en": "a quantity",
+        "hint": "⚖️",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "전쟁",
+        "en": "a war",
+        "hint": "⚔️",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "N와의 전쟁",
+        "en": "a war with N — what a headline calls a problem it cannot solve",
+        "hint": "⚔️",
+        "category": "언론",
+        "categoryEn": "Media & headlines",
+        "forms": [
+          "와의 전쟁"
+        ]
+      },
+      {
+        "ko": "심각하다",
+        "en": "to be serious",
+        "hint": "⚠️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "애쓰다",
+        "en": "to struggle, to take pains",
+        "hint": "💦",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "애쓰고"
+        ]
+      },
+      {
+        "ko": "-기 위해",
+        "en": "in order to",
+        "hint": "🎯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "기 위해"
+        ]
+      },
+      {
+        "ko": "-(으)로 인해",
+        "en": "owing to, because of",
+        "hint": "➡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "로 인해"
+        ]
+      },
+      {
+        "ko": "여러 가지로",
+        "en": "in various ways",
+        "hint": "🔀",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "불편",
+        "en": "inconvenience",
+        "hint": "😣",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "불편을"
+        ]
+      },
+      {
+        "ko": "겪다",
+        "en": "to go through, to suffer",
+        "hint": "🧗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "겪고"
+        ]
       }
     ]
   },
@@ -517,6 +644,16 @@
         "ko": "미용",
         "en": "Beauty & appearance",
         "cat": "미용"
+      },
+      {
+        "ko": "여행",
+        "en": "Travel & leisure",
+        "cat": "여행"
+      },
+      {
+        "ko": "환경",
+        "en": "Environment & waste",
+        "cat": "환경"
       }
     ]
   }
