@@ -651,7 +651,8 @@
         "category": "경제",
         "categoryEn": "Economy & business",
         "forms": [
-          "떨어졌다"
+          "떨어졌다",
+          "떨어지고"
         ]
       },
       {
@@ -941,6 +942,227 @@
         "forms": [
           "하려면"
         ]
+      },
+      {
+        "ko": "정부",
+        "en": "the government",
+        "hint": "🏛️",
+        "category": "정치",
+        "categoryEn": "Politics & government",
+        "forms": [
+          "정부의"
+        ]
+      },
+      {
+        "ko": "정책",
+        "en": "a policy",
+        "hint": "📜",
+        "category": "정치",
+        "categoryEn": "Politics & government"
+      },
+      {
+        "ko": "부동산 정책",
+        "en": "real-estate policy",
+        "hint": "🏠",
+        "category": "정치",
+        "categoryEn": "Politics & government"
+      },
+      {
+        "ko": "시민",
+        "en": "a citizen",
+        "hint": "🙋",
+        "category": "정치",
+        "categoryEn": "Politics & government",
+        "forms": [
+          "시민들"
+        ]
+      },
+      {
+        "ko": "평가하다",
+        "en": "to judge, to rate",
+        "hint": "⚖️",
+        "category": "정치",
+        "categoryEn": "Politics & government",
+        "forms": [
+          "평가하고"
+        ]
+      },
+      {
+        "ko": "집값",
+        "en": "house prices",
+        "hint": "🏘️",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "집값 잡기",
+        "en": "reining house prices back in",
+        "hint": "🪤",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "부동산",
+        "en": "property, real estate",
+        "hint": "🏢",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "서민",
+        "en": "ordinary working people",
+        "hint": "🧍",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "서민 경제",
+        "en": "the household economy of ordinary people",
+        "hint": "🧺",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "경제",
+        "en": "an economy",
+        "hint": "📊",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "물가",
+        "en": "the cost of living",
+        "hint": "🧾",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "악영향",
+        "en": "a harmful effect",
+        "hint": "☠️",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "영향을 미치다",
+        "en": "to have an effect on",
+        "hint": "➡️",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "영향을 미치고"
+        ]
+      },
+      {
+        "ko": "찬물",
+        "en": "cold water",
+        "hint": "🧊",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "찬물을 끼얹다",
+        "en": "to pour cold water on it — to spoil something that was going well",
+        "hint": "🪣",
+        "category": "언론",
+        "categoryEn": "Media & headlines",
+        "forms": [
+          "찬물 끼얹는"
+        ]
+      },
+      {
+        "ko": "잡다",
+        "en": "to catch; to get something under control",
+        "hint": "✊",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "잡기"
+        ]
+      },
+      {
+        "ko": "냉정하다",
+        "en": "to be cool-headed, unsentimental",
+        "hint": "🧠",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "냉정하게"
+        ]
+      },
+      {
+        "ko": "시원하다",
+        "en": "to feel refreshingly cool",
+        "hint": "🌬️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "시원하게"
+        ]
+      },
+      {
+        "ko": "마음",
+        "en": "the heart, how one feels",
+        "hint": "💗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "마음을"
+        ]
+      },
+      {
+        "ko": "아주",
+        "en": "very",
+        "hint": "💯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "많이",
+        "en": "a lot",
+        "hint": "🔺",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-는 중",
+        "en": "in the middle of doing it",
+        "hint": "⏳",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "끼얹는 중"
+        ]
+      },
+      {
+        "ko": "N 때문에",
+        "en": "because of N",
+        "hint": "➰",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "때문에"
+        ]
+      },
+      {
+        "ko": "-게 하다",
+        "en": "to make something turn out that way",
+        "hint": "🎚️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "시원하게 해"
+        ]
+      },
+      {
+        "ko": "-기",
+        "en": "the -ing form: turns a verb into something a headline can name",
+        "hint": "🔤",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "잡기"
+        ]
       }
     ]
   },
@@ -991,6 +1213,11 @@
         "ko": "문법",
         "en": "Grammar & expressions",
         "cat": "문법"
+      },
+      {
+        "ko": "정치",
+        "en": "Politics & government",
+        "cat": "정치"
       }
     ]
   }

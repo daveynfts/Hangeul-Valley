@@ -25,7 +25,7 @@
       "blurbEn": "A headline in compressed newspaper Korean, and four readings of it — three of which are what taking one word literally looks like.",
       "instructionKo": "다음 신문 기사의 제목을 가장 잘 설명한 것을 고르십시오.",
       "instructionEn": "Choose the sentence that best explains the newspaper headline.",
-      "noteEn": "A headline drops its particles and its verb endings, so every word left carries more than usual and can usually be read two ways. The options are not four summaries — they are four readings, and the wrong ones are wrong in a small number of repeating shapes.\n\nFour questions in, the shapes are these. A figurative word taken at face value: 출구 as a door, 관리 as a job. A description turned into a recommendation, which is what -어야 한다 and 필요가 있다 are doing when you see them in an option. An addition read as a comparison — enjoying food with the eyes *as well* is not taste mattering less. And the subject quietly swapped, so a problem the headline gave to one party is handed to another.\n\nSo: find the words that can be read two ways and settle them; check who the headline says is doing what; and distrust any option that advises rather than reports. A fifth shape, from question 5: a time or quantity expression read as something adjacent. N 만에 is a point measured back to the last occurrence; N 동안 is the whole stretch. Swap them and the sentence still reads well and claims something else entirely. And a sixth, from question 6: the headline reversed in its own vocabulary. Every word of the option comes from the headline, and the claim is the opposite one. Reusing the words is what makes it look like a summary; check the direction of the claim, not the overlap.",
+      "noteEn": "A headline drops its particles and its verb endings, so every word left carries more than usual and can usually be read two ways. The options are not four summaries — they are four readings, and the wrong ones are wrong in a small number of repeating shapes.\n\nFour questions in, the shapes are these. A figurative word taken at face value: 출구 as a door, 관리 as a job. A description turned into a recommendation, which is what -어야 한다 and 필요가 있다 are doing when you see them in an option. An addition read as a comparison — enjoying food with the eyes *as well* is not taste mattering less. And the subject quietly swapped, so a problem the headline gave to one party is handed to another.\n\nSo: find the words that can be read two ways and settle them; check who the headline says is doing what; and distrust any option that advises rather than reports. A fifth shape, from question 5: a time or quantity expression read as something adjacent. N 만에 is a point measured back to the last occurrence; N 동안 is the whole stretch. Swap them and the sentence still reads well and claims something else entirely. And a sixth, from question 6: the headline reversed in its own vocabulary. Every word of the option comes from the headline, and the claim is the opposite one. Reusing the words is what makes it look like a summary; check the direction of the claim, not the overlap. Question 7 adds a habit rather than a trap. When all four options open with the same words, that shared part is not what is being asked — it is there so the options look alike. Read past it to where they diverge, and settle that.",
       "pattern": "제목을 가장 잘 설명한 것 고르기",
       "items": [
         {
@@ -244,6 +244,42 @@
           "en": "Storing food in summer: trusting the fridge and nothing else is asking for trouble. Meaning: in summer even the food inside the fridge cannot be eaten with confidence.",
           "why": "The whole question is one particle. Cover 만 and the headline says something close to the opposite.\n\n냉장고만 믿어서는 낭패 is: rely on the fridge *alone* and you will come unstuck. It does not say the fridge is useless, and it does not say to use it more. It says the fridge is not enough by itself — so the food inside one is not automatically safe.\n\nOption 2 is that reversed while keeping every word. 여름, 음식, 냉장고, 보관 are all from the headline, and 모든 음식을 냉장고에 보관해야 한다 tells you to trust the fridge more, which is the one instruction the headline is warning against. Reusing the vocabulary is what makes it look right; it is also all it has.\n\nOption 4 recommends buying something. 특별한 냉장고 appears nowhere in the headline, and a headline saying the fridge is not enough is not selling a better fridge. Option 2 and option 4 are both -해야 한다 — that is four of the six questions so far where an option turns a report into advice.\n\nOption 1 is the quieter trap: 먹던 음식을 냉장고에 넣는 것은 좋지 않다 is true as food safety goes, and 먹던 음식 is nowhere in the headline. It is a fact about the topic rather than a reading of the sentence — the same move as 사회적 지위 in question 3.\n\nThat leaves 3, and it is 만 unpacked. If the fridge alone is a 낭패, then 냉장고 안의 음식도 — the food inside it *too* — is not something you can eat 안심하고. The 도 is the same particle that carried the news in question 3: even this one, on top of what you already assumed.",
           "grammar": "N만 = N and nothing besides. It is the load-bearing word here, and it is one syllable: 냉장고를 믿어서는 낭패 would be \"trusting fridges is a disaster\", while 냉장고만 믿어서는 낭패 is \"trusting only fridges is\". The exam puts the whole question on that difference.\n\nV-아/어서는 introduces a course of action that ends badly, and what ends it is always negative — here 낭패. The full sentence is 믿어서는 낭패를 본다; the headline keeps the noun and drops the verb, which is now six headlines running to do it: 모색, 천국, 불티, 관리 중, 바닥으로, 낭패.\n\nIn the options: -던 (먹던 음식) is the one you were in the middle of eating, -(으)려면 (보관하려면) is if you intend to, and -아/어야 하다 is the recommendation shape worth being suspicious of."
+        },
+        {
+          "n": 7,
+          "phraseKo": "정부의 집값 잡기, 서민 경제에 찬물 끼얹는 중",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "정부의 집값 잡기, 서민 경제에 찬물 끼얹는 중"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "harm",
+          "choices": [
+            {
+              "id": "harm",
+              "ko": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
+            },
+            {
+              "id": "cheaper",
+              "ko": "정부의 부동산 정책 때문에 서민 물가가 많이 떨어지고 있다."
+            },
+            {
+              "id": "coolly",
+              "ko": "정부의 부동산 정책을 시민들이 아주 냉정하게 평가하고 있다."
+            },
+            {
+              "id": "refreshing",
+              "ko": "정부의 부동산 정책이 시민들의 마음을 시원하게 해 주고 있다."
+            }
+          ],
+          "en": "The government's drive to rein in house prices is pouring cold water on ordinary households. Meaning: the policy is doing harm to the everyday economy.",
+          "why": "Start with what the four options have in common, because it is not the question. All four open with 정부의 부동산 정책 — the standard paraphrase of 정부의 집값 잡기. Shared wording cannot separate them, so the whole question is in what comes after it, and what comes after it is four readings of 찬물 끼얹는 중.\n\n찬물을 끼얹다 is an idiom: to throw cold water over something that was going well and spoil it. It is never neutral and never good.\n\nTwo of the options take the cold literally, and go opposite ways with it. Option 3 hears 찬 and arrives at 냉정하게, cool-headed — and while it is there it also swaps who acts on whom: in the headline the policy chills the economy, in option 3 the citizens coolly appraise the policy. Option 4 hears the same cold and arrives at 시원하게, refreshing, which flips the sentence from harm to relief while leaving every other word alone — the reversal from question 6, done through a feeling rather than through vocabulary.\n\nOption 2 changes one noun. 집값 is house prices; 물가 is what everything costs. They are not the same thing, and a headline saying the drive is chilling household budgets is not saying those budgets got cheaper. Falling 물가 would be the good news the idiom rules out.\n\nThat leaves 1, which is the idiom in plain words: 악영향을 미치고 있다, it is having a bad effect. Cold water on something, said without the picture.",
+          "grammar": "찬물을 끼얹다 is fixed: literally to pour cold water over, used only of spoiling a good mood or a good run. Learn it whole — the parts do not add up to the meaning, which is exactly what options 3 and 4 are built on.\n\n-는 중 is in the middle of doing, the same 중 as 관리 중 in question 3. And 잡기 is 잡다 with -기, the ending that turns a verb into something a headline can put a possessive in front of: 정부의 집값 잡기. Seven headlines, seven nouns standing where a verb belongs — 모색, 천국, 불티, 관리 중, 바닥으로, 낭패, 잡기.\n\nIn the options: 영향을 미치다 is the set phrase for having an effect (악영향 is the bad kind), N 때문에 gives a cause, and -게 하다 makes something turn out a certain way — 시원하게 해 주다, to leave someone feeling refreshed."
         }
       ]
     }
