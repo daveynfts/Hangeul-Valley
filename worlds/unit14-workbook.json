@@ -11,6 +11,7 @@
   "againKo": "다시 풀기",
   "backKo": "연습 목록",
   "doneKo": "닫기",
+  "holdGloss": false,
   "exercises": [
     {
       "id": "u14-vocab-1",
@@ -21,7 +22,7 @@
       "icon": "✍️",
       "blurbEn": "Pick the etiquette that fits each moment, and see it conjugated.",
       "instructionKo": "[보기]와 같이 알맞은 것을 골라 문장을 만들어 보세요.",
-      "instructionEn": "Complete each sentence using the appropriate expression from the box, as in the example.",
+      "instructionEn": "Complete each sentence using the appropriate expression from the box, as in the example. (test)",
       "noteEn": "Each expression is used exactly once. Pick the dictionary form — the blank fills with the 해요 form the sentence actually needs.",
       "bank": [
         {
