@@ -1003,6 +1003,36 @@ const overlayIds = [
   const kos = ww.map((w) => String(w.ko).normalize('NFC'));
   const dups = kos.filter((k, i) => kos.indexOf(k) !== i);
   check('and no word is listed twice inside the exam world itself', dups.length === 0, dups.join(', '));
+  // Every word here has to come from a question. The list started with a field of 경제
+  // vocabulary I wrote out myself — 매출, 불황, 유통, twenty-nine words in all — which read as
+  // useful and was not: a personal study room fills up from the papers that go through it,
+  // and anything else is a guess about what the exam will ask. The check is cheap and the
+  // rule is the point, so it is enforced rather than remembered.
+  const bankRelForWords = path.join('worlds', 'topik2-questions.json');
+  if (fs.existsSync(path.join(ROOT, bankRelForWords))) {
+    let qbank = null;
+    try { qbank = JSON.parse(read(bankRelForWords)); } catch (e) { qbank = null; }
+    if (qbank) {
+      const seen2 = [];
+      (qbank.exercises || []).forEach((ex) => {
+        seen2.push(ex.instructionKo, ex.pattern, ex.section);
+        (ex.items || []).forEach((it) => {
+          seen2.push(it.phraseKo);
+          (it.lines || []).forEach((l) => seen2.push(l.ko));
+          (it.choices || []).forEach((c) => seen2.push(c.ko));
+          (it.choices2 || []).forEach((c) => seen2.push(c.ko));
+        });
+      });
+      const corpus = seen2.filter(Boolean).map((t) => String(t).normalize('NFC')).join(' | ');
+      const rootless = ww.filter((wd) => {
+        const keys = [String(wd.ko).normalize('NFC')]
+          .concat(Array.isArray(wd.forms) ? wd.forms.map((f) => String(f).normalize('NFC')) : []);
+        return !keys.some((k) => k && corpus.indexOf(k) >= 0);
+      }).map((wd) => wd.ko);
+      check('every exam-world word traces back to a question, in the shape the question uses',
+        rootless.length === 0, rootless.slice(0, 8).join(', '));
+    }
+  }
   // A word may list the shapes it actually wears in a sentence, because 썬렁하다 turns up as
   // 썬렁한 and no rule short of a conjugator gets there. The gloss table drops any key under
   // two characters, so a one-character form is dead weight that looks like it works.

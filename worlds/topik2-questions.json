@@ -62,6 +62,42 @@
           "en": "Deserted traditional markets seek a way out through delivery — the markets are trying to bring trade back with a delivery service.",
           "why": "Two words in the headline can each be read two ways, and every wrong option is one of them taken at face value.\n\n썰렁하다 is the first. Day to day it means chilly, but said of a shop or a street it means empty — nobody in it, nothing selling. A market headline wants that second sense, and option 2 is exactly what choosing the first one looks like: a perfectly good Korean sentence about the weather that says nothing at all about the other half of the headline.\n\n출구 is the second. On a door it is the way out of a building; in 출구를 모색하다 it is the way out of trouble, and 모색 is casting about for one. Option 1 reads it as a door and ends up describing the floor plan.\n\nThat leaves who is doing the seeking. The headline's subject is the market, so the market is the one turning to delivery. Option 4 keeps every word and swaps the actor — customers wanting delivery is a different story, and swapping who acts is one of the commonest ways this question type is got wrong. Option 3 is the only reading that keeps the market as the agent and takes both hinge words figuratively: 경기 회복의 노력 is 출구 모색 said plainly.",
           "grammar": "Headline Korean. A Sino-Korean noun stands in for its verb — 모색 does the work of 모색하고 있다 — and the comma does the work of a subject marker. N(으)로 marks the means: 배달로 = by way of delivery. In the options, N을/를 통해 is the same idea spelled out, and -자 in 추워지자 means 'as soon as / once', linking a change to what followed it."
+        },
+        {
+          "n": 2,
+          "phraseKo": "눈으로 먹고 귀로 맛보는 시대, 요리 프로그램 천국!",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "눈으로 먹고 귀로 맛보는 시대, 요리 프로그램 천국!"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "many",
+          "choices": [
+            {
+              "id": "should",
+              "ko": "음식을 먹을 때에는 눈과 귀로도 즐겨야 한다."
+            },
+            {
+              "id": "many",
+              "ko": "요즘 요리에 관련된 텔레비전 프로그램이 아주 많다."
+            },
+            {
+              "id": "looks",
+              "ko": "이제는 음식의 맛보다 모양이나 색깔이 더 중요해졌다."
+            },
+            {
+              "id": "pictures",
+              "ko": "텔레비전에서는 실제 요리보다 사진이나 그림을 더 많이 보여준다."
+            }
+          ],
+          "en": "An age of eating with the eyes and tasting with the ears — a paradise of cooking programmes. Meaning: there are a great many cooking programmes on television now.",
+          "why": "천국 is the hinge, and it is not a place. 요리 프로그램 천국 says there are so many cooking programmes that the country is awash with them, and option 2 is that said in plain words: 아주 많다.\n\nThe first half describes rather than instructs. 눈으로 먹고 귀로 맛보는 시대 says this is the age we are in — food consumed through pictures and sound. Option 1 turns it into 즐겨야 한다, an obligation nobody in the headline is under. A headline reports a state of affairs; it does not tell the reader what to do.\n\nOption 3 goes further than the words allow. Enjoying food with the eyes and ears *as well* says nothing about taste mattering less — the headline adds senses, it does not rank them. Reading a comparison into an addition is the commonest way to overshoot on this question type.\n\nOption 4 reverses the second half outright. A cooking-programme paradise is the opposite of television showing pictures instead of cooking.",
+          "grammar": "N(으)로 marks the instrument: 눈으로, 귀로 — with the eyes, with the ears. -는 시대 makes a whole clause modify 시대, so 눈으로 먹고 귀로 맛보는 all describes the era rather than being separate statements. And the headline ends on a bare noun where a verb belongs: 천국! stands in for 천국이다, the same compression as 모색 for 모색하고 있다 in question 1."
         }
       ]
     }

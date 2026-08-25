@@ -64,13 +64,6 @@
         "categoryEn": "Economy & business"
       },
       {
-        "ko": "모색하다",
-        "en": "to cast about for a way forward",
-        "hint": "🔦",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
         "ko": "출입구",
         "en": "an entrance and exit, a gateway",
         "hint": "🚧",
@@ -166,22 +159,8 @@
         "categoryEn": "Economy & business"
       },
       {
-        "ko": "회복하다",
-        "en": "to recover, to come back",
-        "hint": "📈",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
         "ko": "노력",
         "en": "effort",
-        "hint": "💪",
-        "category": "사회",
-        "categoryEn": "Society & everyday life"
-      },
-      {
-        "ko": "노력하다",
-        "en": "to make an effort",
         "hint": "💪",
         "category": "사회",
         "categoryEn": "Society & everyday life"
@@ -194,18 +173,14 @@
         "categoryEn": "Economy & business"
       },
       {
-        "ko": "구매",
-        "en": "a purchase",
-        "hint": "🧾",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
         "ko": "구매하다",
         "en": "to buy, to purchase",
         "hint": "🧾",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "forms": [
+          "구매한"
+        ]
       },
       {
         "ko": "원하다",
@@ -262,186 +237,137 @@
         ]
       },
       {
-        "ko": "나서다",
-        "en": "to step forward, to take something on",
-        "hint": "🚀",
-        "category": "언론",
-        "categoryEn": "Media & headlines",
+        "ko": "눈으로 먹다",
+        "en": "to eat with the eyes — to enjoy food by looking at it",
+        "hint": "👀",
+        "category": "음식",
+        "categoryEn": "Food & taste",
         "forms": [
-          "나섰다",
-          "나서"
+          "눈으로 먹고"
         ]
       },
       {
-        "ko": "전망",
-        "en": "an outlook, a forecast",
-        "hint": "🔭",
-        "category": "언론",
-        "categoryEn": "Media & headlines"
-      },
-      {
-        "ko": "대책",
-        "en": "a countermeasure, something done about it",
-        "hint": "🧰",
-        "category": "언론",
-        "categoryEn": "Media & headlines"
-      },
-      {
-        "ko": "방안",
-        "en": "a plan, a way of doing it",
-        "hint": "🗺️",
-        "category": "언론",
-        "categoryEn": "Media & headlines"
-      },
-      {
-        "ko": "위기",
-        "en": "a crisis",
-        "hint": "⚠️",
-        "category": "언론",
-        "categoryEn": "Media & headlines"
-      },
-      {
-        "ko": "대형 마트",
-        "en": "a big supermarket",
-        "hint": "🏬",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "소상공인",
-        "en": "a small trader, a shopkeeper",
-        "hint": "🧑‍🌾",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "상인",
-        "en": "a trader, a stallholder",
-        "hint": "🧑‍💼",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "단골",
-        "en": "a regular customer",
-        "hint": "💛",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "매출",
-        "en": "sales, takings",
-        "hint": "💰",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "불황",
-        "en": "a slump, hard times for trade",
-        "hint": "📉",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "침체",
-        "en": "stagnation, going nowhere",
-        "hint": "🕳️",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "활성화",
-        "en": "bringing something back to life",
-        "hint": "✨",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "유통",
-        "en": "distribution, getting goods to the shop",
-        "hint": "🚚",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "소비자",
-        "en": "a consumer",
-        "hint": "🛒",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "수요",
-        "en": "demand",
-        "hint": "📈",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "공급",
-        "en": "supply",
-        "hint": "📦",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "주문",
-        "en": "an order",
-        "hint": "📝",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "주문하다",
-        "en": "to place an order",
-        "hint": "📝",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "배송",
-        "en": "shipping, sending goods out",
-        "hint": "📮",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "비대면",
-        "en": "without meeting face to face",
-        "hint": "📱",
-        "category": "사회",
-        "categoryEn": "Society & everyday life"
-      },
-      {
-        "ko": "물가",
-        "en": "the cost of living, prices",
-        "hint": "🏷️",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "경쟁력",
-        "en": "competitiveness",
-        "hint": "🥇",
-        "category": "경제",
-        "categoryEn": "Economy & business"
-      },
-      {
-        "ko": "전통",
-        "en": "tradition",
-        "hint": "🏮",
-        "category": "사회",
-        "categoryEn": "Society & everyday life"
-      },
-      {
-        "ko": "살리다",
-        "en": "to revive, to bring back to life",
-        "hint": "🌱",
-        "category": "경제",
-        "categoryEn": "Economy & business",
+        "ko": "귀로 맛보다",
+        "en": "to taste with the ears — to enjoy food through its sounds",
+        "hint": "👂",
+        "category": "음식",
+        "categoryEn": "Food & taste",
         "forms": [
-          "살리기",
-          "살려"
+          "귀로 맛보는"
+        ]
+      },
+      {
+        "ko": "맛보다",
+        "en": "to taste",
+        "hint": "👅",
+        "category": "음식",
+        "categoryEn": "Food & taste",
+        "forms": [
+          "맛보는"
+        ]
+      },
+      {
+        "ko": "음식",
+        "en": "food",
+        "hint": "🍽️",
+        "category": "음식",
+        "categoryEn": "Food & taste"
+      },
+      {
+        "ko": "모양",
+        "en": "the shape of a thing",
+        "hint": "🔷",
+        "category": "음식",
+        "categoryEn": "Food & taste"
+      },
+      {
+        "ko": "색깔",
+        "en": "colour",
+        "hint": "🎨",
+        "category": "음식",
+        "categoryEn": "Food & taste"
+      },
+      {
+        "ko": "시대",
+        "en": "an age, an era",
+        "hint": "🕰️",
+        "category": "문화",
+        "categoryEn": "Culture & media"
+      },
+      {
+        "ko": "천국",
+        "en": "heaven — in a headline, \"awash with\"",
+        "hint": "☁️",
+        "category": "문화",
+        "categoryEn": "Culture & media"
+      },
+      {
+        "ko": "요리 프로그램",
+        "en": "a cooking programme",
+        "hint": "📺",
+        "category": "문화",
+        "categoryEn": "Culture & media"
+      },
+      {
+        "ko": "텔레비전 프로그램",
+        "en": "a television programme",
+        "hint": "📺",
+        "category": "문화",
+        "categoryEn": "Culture & media"
+      },
+      {
+        "ko": "실제",
+        "en": "the real thing, actual",
+        "hint": "🔎",
+        "category": "문화",
+        "categoryEn": "Culture & media"
+      },
+      {
+        "ko": "보여주다",
+        "en": "to show",
+        "hint": "🖥️",
+        "category": "문화",
+        "categoryEn": "Culture & media",
+        "forms": [
+          "보여준다"
+        ]
+      },
+      {
+        "ko": "즐기다",
+        "en": "to enjoy",
+        "hint": "😊",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "즐겨야",
+          "즐겨"
+        ]
+      },
+      {
+        "ko": "관련되다",
+        "en": "to be related to",
+        "hint": "🔗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "관련된"
+        ]
+      },
+      {
+        "ko": "요즘",
+        "en": "these days",
+        "hint": "📅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "중요해지다",
+        "en": "to become important",
+        "hint": "⬆️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "중요해졌다"
         ]
       }
     ]
@@ -463,6 +389,16 @@
         "ko": "언론",
         "en": "Media & headlines",
         "cat": "언론"
+      },
+      {
+        "ko": "음식",
+        "en": "Food & taste",
+        "cat": "음식"
+      },
+      {
+        "ko": "문화",
+        "en": "Culture & media",
+        "cat": "문화"
       }
     ]
   }
