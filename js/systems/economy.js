@@ -215,27 +215,33 @@ let textbookWorldsTried = false;
 function loadTextbookWorlds(done) {
   const specs = TEXTBOOK_WORLD_FILES;
   let remaining = specs.length;
-  const one = (data) => {
-    if (data) attachTextbookWorld(data);
+  // Attached in list order, not in the order the network answers. These five fetches run at
+  // once, so whoever comes back first used to land first — which on localhost is the list
+  // order and over a CDN is by file size, putting Unit 10 last. The menu reshuffled itself
+  // between page loads. Results are parked by index and attached when all five have settled.
+  const got = new Array(specs.length).fill(null);
+  const one = (data, i) => {
+    got[i] = data || null;
     remaining--;
     if (remaining <= 0) {
+      got.forEach((w) => { if (w) attachTextbookWorld(w); });
       textbookWorldsTried = true;
       if (typeof done === 'function') done();
     }
   };
-  specs.forEach((spec) => {
+  specs.forEach((spec, i) => {
     if (typeof sceneRef !== 'undefined' && sceneRef?.cache?.json?.exists?.(spec.cache)) {
-      one(sceneRef.cache.json.get(spec.cache));
+      one(sceneRef.cache.json.get(spec.cache), i);
       return;
     }
     if ((typeof IS_NODE !== 'undefined' && IS_NODE) || typeof fetch !== 'function') {
-      one(null);
+      one(null, i);
       return;
     }
     fetch(spec.file)
       .then(r => r && r.ok ? r.json() : null)
-      .then(one)
-      .catch(() => one(null));
+      .then((d) => one(d, i))
+      .catch(() => one(null, i));
   });
 }
 
