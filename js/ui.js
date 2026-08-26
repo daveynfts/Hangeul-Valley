@@ -2442,6 +2442,7 @@ function cassetteUrl() {
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-cassette.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-cassette.json';
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-cassette.json';
+  if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/unit15-cassette.json';
   return null;
 }
 

@@ -530,6 +530,79 @@ const overlayIds = [
     listen.map((e) => e.id).join(', '));
 }());
 
+(function checkUnit15Cassette() {
+  const rel = path.join('worlds', 'unit15-cassette.json');
+  if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+  let c;
+  try { c = JSON.parse(read(rel)); } catch (e) {
+    check(rel + ' is valid JSON', false, e.message); return;
+  }
+  const tracks = c.tracks || [];
+  check('the Unit 15 tape holds tracks 52-61',
+    tracks.map((t) => t.n).join(',') === '52,53,54,55,56,57,58,59,60,61',
+    tracks.map((t) => t.n).join(','));
+  // Every clip the tape names has to be a file that exists. A missing one is a button
+  // that plays nothing, and the pane cannot tell the difference until it is pressed.
+  const srcs = tracks.map((t) => t.src)
+    .concat(((c.dictation || {}).items || []).map((i) => (i.audio || {}).src));
+  const gone = srcs.filter((p) => !p || !fs.existsSync(path.join(ROOT, p)));
+  check('every recording the Unit 15 tape names is on disk',
+    gone.length === 0, gone.slice(0, 4).join(', '));
+  // The other direction: a clip nothing points at still ships, because publish uploads
+  // whatever is in audio/book. Five were left behind by the keep/drop pass the first time.
+  const dir = path.join(ROOT, 'audio', 'book');
+  const present = fs.readdirSync(dir).filter((f) => f.indexOf('2b-u15-') === 0)
+    .map((f) => 'audio/book/' + f);
+  const used = new Set(srcs.map((p) => String(p).replace(/\\/g, '/')));
+  const orphans = present.filter((p) => !used.has(p));
+  check('and no Unit 15 recording ships that nothing can play',
+    orphans.length === 0, orphans.slice(0, 4).join(', '));
+
+  const scripted = tracks.filter((t) => (t.lines || []).length);
+  const silent = tracks.filter((t) => !(t.lines || []).length);
+  check('seven Unit 15 tracks carry their printed script',
+    scripted.length === 7, String(scripted.length));
+  // 57, 58 and 59 have no Korean here — 말하기 2's page was not photographed and the two
+  // 듣기 transcripts live on the 듣기 지문 pages. A track with no script has to say so on
+  // screen rather than open an empty pane.
+  check('and the three without one explain why, on the track itself',
+    silent.length === 3 && silent.every((t) => String(t.noteEn || '').length > 40),
+    silent.map((t) => t.n).join(','));
+  check('no dictation line is drawn from a track with no script',
+    ((c.dictation || {}).items || []).every((i) => [57, 58, 59].indexOf(i.track) < 0));
+
+  const items = (c.dictation || {}).items || [];
+  check('the Unit 15 dictation set is worth sitting down to', items.length >= 20,
+    String(items.length));
+  const thin = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length
+    || !i.audio || !i.audio.src);
+  check('every dictation line has its text, its meaning, its reason and its clip',
+    thin.length === 0, thin.slice(0, 4).map((i) => i.id).join(', '));
+  // A syllable count that does not match the clip means the clip holds different words.
+  // The band is calibrated to this tape rather than guessed: the 21 lines on it run 3.6 to
+  // 6.3 syllables a second, so the guard sits just outside that. It has to be that tight to
+  // be worth anything — the bug it exists for, the 발음 item numbers being cut into the
+  // sentence, read 3.14, and a floor of 3.0 waved it through when it was probed.
+  const syl = (t) => (String(t).match(/[\uac00-\ud7a3]/g) || []).length;
+  const off = items.filter((i) => {
+    if (syl(i.ko) !== i.syl) return true;
+    const r = i.syl / i.audio.voiced;
+    return !(r > 3.4 && r < 6.8) || Math.abs(r - i.audio.rate) > 0.05;
+  }).map((i) => i.id + ' (' + (i.syl / i.audio.voiced).toFixed(1) + '/s)');
+  check('and a length that matches the words it claims to hold',
+    off.length === 0, off.slice(0, 5).join(', '));
+  const long = items.filter((i) => i.syl > 24 || i.syl < 7).map((i) => i.id + ':' + i.syl);
+  check('every line is between 7 and 24 syllables, as the filter says',
+    long.length === 0, long.join(', '));
+  const ids = items.map((i) => i.id);
+  check('and the ids run without a gap or a repeat',
+    ids.join(',') === ids.map((_, k) => k + 1).join(','));
+
+  const uiTape = read(path.join('js', 'ui.js'));
+  check('the desk offers the Unit 15 tape on the Unit 15 world',
+    uiTape.indexOf("isUnit15World()) return '/worlds/unit15-cassette.json'") >= 0);
+}());
+
 (function checkUnit15DeskQuiz() {
   const rel = path.join('worlds', 'unit15-desk-quiz.json');
   if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;

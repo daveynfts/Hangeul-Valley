@@ -46,10 +46,7 @@ const WORLD_PACKS = {
   '2b-unit-11': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-13': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-14': { extras: [], stations: ['desk', 'cassette'] },
-  // No tape yet: tracks 52-61 need the book's recording, which has not been supplied. The
-  // moment it lands this becomes ['desk', 'cassette'] here and in worlds/2b-unit-15.json,
-  // which the validator checks against each other.
-  '2b-unit-15': { extras: [], stations: ['desk'] },
+  '2b-unit-15': { extras: [], stations: ['desk', 'cassette'] },
   'topik-2': { extras: [], stations: ['desk'] }
 };
 function worldPackIdForLesson(lvl) {

@@ -19,7 +19,8 @@
     "map": {
       "extras": [],
       "stations": [
-        "desk"
+        "desk",
+        "cassette"
       ]
     },
     "target": 9,
