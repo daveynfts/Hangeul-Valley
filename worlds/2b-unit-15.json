@@ -1,0 +1,797 @@
+{
+  "id": "2b-unit-15",
+  "pack": "snu-2b",
+  "source": "Seoul National University Korean 2B, Unit 15",
+  "title": "2B Unit 15",
+  "titleKo": "15과 인생과 변화",
+  "icon": "🌱",
+  "pages": "Unit 15",
+  "level": {
+    "level": "2B-15",
+    "name": "인생과 변화",
+    "nameEn": "2B Unit 15 · A life, and what changes",
+    "icon": "🌱",
+    "description": "15과 낱말밭을 가꿔요 — 태어나고 졸업하고 취직하는 인생의 순서, 그리고 늘고 줄고 오르고 내리는 변화의 말들.",
+    "descriptionEn": "Same farm loop. The 17 drawn 어휘 headwords from 15과 — the life events and the six change verbs — plus the words the other pages drill, in seven groups.",
+    "world": true,
+    "pack": "snu-2b",
+    "worldId": "2b-unit-15",
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk"
+      ]
+    },
+    "target": 9,
+    "words": [
+      {
+        "ko": "태어나다",
+        "en": "to be born",
+        "hint": "👶",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "입학하다",
+        "en": "to enter a school",
+        "hint": "🎒",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "친구를 사귀다",
+        "en": "to make a friend",
+        "hint": "🤝",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "사랑에 빠지다",
+        "en": "to fall in love",
+        "hint": "💘",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "졸업하다",
+        "en": "to graduate",
+        "hint": "🎓",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "취직하다",
+        "en": "to get a job",
+        "hint": "💼",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "결혼하다",
+        "en": "to marry",
+        "hint": "💍",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "아기를 낳다",
+        "en": "to give birth to a child",
+        "hint": "🍼",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "승진하다",
+        "en": "to get a promotion",
+        "hint": "📈",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "은퇴하다",
+        "en": "to retire",
+        "hint": "🎁",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "죽다",
+        "en": "to die",
+        "hint": "🕯️",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "인생",
+        "en": "a life, a lifetime",
+        "hint": "🛤️",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "고생하다",
+        "en": "to go through a hard time",
+        "hint": "😓",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "꿈",
+        "en": "a dream, what one wants to become",
+        "hint": "💭",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "변호사",
+        "en": "a lawyer",
+        "hint": "⚖️",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "대학원",
+        "en": "graduate school",
+        "hint": "🏛️",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "중학생",
+        "en": "a middle-school student",
+        "hint": "🎒",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "고등학교",
+        "en": "high school",
+        "hint": "🏫",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "봉사 활동",
+        "en": "volunteer work",
+        "hint": "🧡",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "은퇴",
+        "en": "retirement",
+        "hint": "🌅",
+        "category": "인생",
+        "categoryEn": "Life events & milestones"
+      },
+      {
+        "ko": "늘다",
+        "en": "to increase",
+        "hint": "📈",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "줄다",
+        "en": "to decrease",
+        "hint": "📉",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "오르다",
+        "en": "to go up",
+        "hint": "⬆️",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "내리다",
+        "en": "to go down",
+        "hint": "⬇️",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "생기다",
+        "en": "to be formed, to come into being",
+        "hint": "🆕",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "발전하다",
+        "en": "to develop",
+        "hint": "🏗️",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "인구",
+        "en": "population",
+        "hint": "👥",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "물건값",
+        "en": "the price of goods",
+        "hint": "🏷️",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "시골",
+        "en": "the countryside",
+        "hint": "🌾",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "수",
+        "en": "a number, a count",
+        "hint": "🔢",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "과일값",
+        "en": "the price of fruit",
+        "hint": "🍎",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "점점",
+        "en": "little by little",
+        "hint": "🐢",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "달라지다",
+        "en": "to become different",
+        "hint": "🔀",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "옛날",
+        "en": "the old days",
+        "hint": "📜",
+        "category": "변화",
+        "categoryEn": "Change & figures"
+      },
+      {
+        "ko": "A-아지다/어지다",
+        "en": "to get / to become — an adjective turning into a change",
+        "hint": "🔁",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "V-게 되다",
+        "en": "to end up doing it, to come to do it",
+        "hint": "🎯",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "익숙하다",
+        "en": "to be accustomed to it",
+        "hint": "🧭",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "이제",
+        "en": "now, by now",
+        "hint": "⏰",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "친해지다",
+        "en": "to become close",
+        "hint": "🫂",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "알게 되다",
+        "en": "to come to know",
+        "hint": "💡",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "건강해지다",
+        "en": "to get healthier",
+        "hint": "💪",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "오래간만이다",
+        "en": "it's been a long time",
+        "hint": "👋",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "별일 없다",
+        "en": "to have nothing much going on",
+        "hint": "🙂",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "그동안",
+        "en": "in the meantime, since we last met",
+        "hint": "⏳",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "걱정하다",
+        "en": "to worry",
+        "hint": "😰",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "곧",
+        "en": "soon",
+        "hint": "⏭️",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "안부",
+        "en": "how someone is keeping",
+        "hint": "💌",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "안부를 묻다",
+        "en": "to ask after someone",
+        "hint": "🙋",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "근황",
+        "en": "what someone has been up to lately",
+        "hint": "📰",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "얼마나",
+        "en": "how long, how much",
+        "hint": "❓",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "처음에는",
+        "en": "at first",
+        "hint": "🚪",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "외국",
+        "en": "a foreign country",
+        "hint": "🌐",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "V-기 전에",
+        "en": "before doing it",
+        "hint": "⏮️",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "V-(으)ㄴ 후에",
+        "en": "after doing it",
+        "hint": "⏭️",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "출발하다",
+        "en": "to set off",
+        "hint": "🚌",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "준비 운동",
+        "en": "a warm-up",
+        "hint": "🤸",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "다니다",
+        "en": "to attend, to go regularly",
+        "hint": "🚶",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "먼저",
+        "en": "first, before anything else",
+        "hint": "1️⃣",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "숙제",
+        "en": "homework",
+        "hint": "📝",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "놀다",
+        "en": "to hang out, to play",
+        "hint": "🎈",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "마치다",
+        "en": "to finish something",
+        "hint": "🏁",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "-고 나서",
+        "en": "and then, once that is done",
+        "hint": "➡️",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "-기로 하다",
+        "en": "to arrange to, to decide to",
+        "hint": "🤝",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "-려고 하다",
+        "en": "to be planning to",
+        "hint": "🎯",
+        "category": "회화",
+        "categoryEn": "Conversation & grammar"
+      },
+      {
+        "ko": "곳",
+        "en": "a place",
+        "hint": "📍",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "프랑스",
+        "en": "France",
+        "hint": "🇫🇷",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "파리",
+        "en": "Paris",
+        "hint": "🗼",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "거의",
+        "en": "almost, hardly any",
+        "hint": "➖",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "예전에",
+        "en": "in the old days",
+        "hint": "🕰️",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "근처",
+        "en": "nearby",
+        "hint": "📌",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "호선",
+        "en": "line number — 9호선 is Line 9",
+        "hint": "9️⃣",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "훨씬",
+        "en": "far more",
+        "hint": "📈",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "편리하다",
+        "en": "to be convenient",
+        "hint": "✅",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "외국인",
+        "en": "a foreigner",
+        "hint": "🌏",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "어디에서나",
+        "en": "anywhere at all",
+        "hint": "🧭",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "앞으로",
+        "en": "from now on",
+        "hint": "➡️",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "기대가 되다",
+        "en": "to be something to look forward to",
+        "hint": "🤞",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "N에 대한",
+        "en": "about N, concerning N",
+        "hint": "📎",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "N(이)나",
+        "en": "N or something like it",
+        "hint": "➗",
+        "category": "서울",
+        "categoryEn": "Reading · 내 고향 서울"
+      },
+      {
+        "ko": "강남",
+        "en": "Gangnam, south of the river",
+        "hint": "🌆",
+        "category": "문화",
+        "categoryEn": "Culture · 서울의 변화"
+      },
+      {
+        "ko": "한강",
+        "en": "the Han River",
+        "hint": "🌊",
+        "category": "문화",
+        "categoryEn": "Culture · 서울의 변화"
+      },
+      {
+        "ko": "1970년대",
+        "en": "the 1970s — N년대 is the decade",
+        "hint": "📅",
+        "category": "문화",
+        "categoryEn": "Culture · 서울의 변화"
+      },
+      {
+        "ko": "수도",
+        "en": "a capital city",
+        "hint": "🏛️",
+        "category": "문화",
+        "categoryEn": "Culture · 서울의 변화"
+      },
+      {
+        "ko": "과거",
+        "en": "the past",
+        "hint": "🕰️",
+        "category": "문화",
+        "categoryEn": "Culture · 서울의 변화"
+      },
+      {
+        "ko": "명",
+        "en": "the counter for people",
+        "hint": "🧍",
+        "category": "문화",
+        "categoryEn": "Culture · 서울의 변화"
+      },
+      {
+        "ko": "그래프",
+        "en": "a graph",
+        "hint": "📉",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "초등학교",
+        "en": "elementary school",
+        "hint": "🏫",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "행복",
+        "en": "happiness",
+        "hint": "😊",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "불행",
+        "en": "unhappiness",
+        "hint": "😞",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "점을 찍다",
+        "en": "to mark a dot",
+        "hint": "🔵",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "연결하다",
+        "en": "to join up, to connect",
+        "hint": "🔗",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "부모님",
+        "en": "one’s parents",
+        "hint": "👨‍👩‍👦",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "그때",
+        "en": "at that time",
+        "hint": "⏳",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "그 후로",
+        "en": "ever since then",
+        "hint": "➡️",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "아프다",
+        "en": "to be ill",
+        "hint": "🤒",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "기다리다",
+        "en": "to wait for",
+        "hint": "⌛",
+        "category": "과제",
+        "categoryEn": "Task · 인생 그래프"
+      },
+      {
+        "ko": "탈락",
+        "en": "dropping — a sound that stops being pronounced",
+        "hint": "🔇",
+        "category": "발음",
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+      },
+      {
+        "ko": "모음",
+        "en": "a vowel",
+        "hint": "🅰️",
+        "category": "발음",
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+      },
+      {
+        "ko": "싫다",
+        "en": "to dislike",
+        "hint": "🙅",
+        "category": "발음",
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+      },
+      {
+        "ko": "끓다",
+        "en": "to boil",
+        "hint": "♨️",
+        "category": "발음",
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+      },
+      {
+        "ko": "극장",
+        "en": "a cinema",
+        "hint": "🎬",
+        "category": "발음",
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+      },
+      {
+        "ko": "기분",
+        "en": "a mood, how one feels",
+        "hint": "🎭",
+        "category": "발음",
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+      },
+      {
+        "ko": "낳다",
+        "en": "to give birth",
+        "hint": "👶",
+        "category": "발음",
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+      },
+      {
+        "ko": "괜찮아지다",
+        "en": "to get better, to come right",
+        "hint": "👌",
+        "category": "발음",
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+      }
+    ]
+  },
+  "notebook": {
+    "title": "Unit 15 · A life, and what changes",
+    "groups": [
+      {
+        "ko": "인생",
+        "en": "Life events & milestones",
+        "cat": "인생"
+      },
+      {
+        "ko": "변화",
+        "en": "Change & figures",
+        "cat": "변화"
+      },
+      {
+        "ko": "회화",
+        "en": "Conversation & grammar",
+        "cat": "회화"
+      },
+      {
+        "ko": "서울",
+        "en": "Reading · 내 고향 서울",
+        "cat": "서울"
+      },
+      {
+        "ko": "문화",
+        "en": "Culture · 서울의 변화",
+        "cat": "문화"
+      },
+      {
+        "ko": "과제",
+        "en": "Task · 인생 그래프",
+        "cat": "과제"
+      },
+      {
+        "ko": "발음",
+        "en": "Pronunciation · 'ㅎ' 탈락",
+        "cat": "발음"
+      }
+    ]
+  }
+}

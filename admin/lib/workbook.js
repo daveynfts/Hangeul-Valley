@@ -46,6 +46,9 @@ function writeJson(rel, data, rootDir) {
 const WORKBOOKS = {
   unit14: path.join('worlds', 'unit14-workbook.json'),
   'unit14-textbook': path.join('worlds', 'unit14-textbook.json'),
+  // Unit 15 has no 익힘책 of its own yet — only the 교과서 pages — so it appears here once
+  // rather than twice, and the registry lists exactly what exists.
+  'unit15-textbook': path.join('worlds', 'unit15-textbook.json'),
   unit10: path.join('worlds', 'unit10-workbook.json'),
   'unit10-textbook': path.join('worlds', 'unit10-textbook.json'),
   // Not a unit at all: the exam world's bank, which grows a question at a time rather than

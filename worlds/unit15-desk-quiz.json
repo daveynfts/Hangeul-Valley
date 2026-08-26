@@ -1,0 +1,155 @@
+{
+  "titleKo": "학습 책상",
+  "titleEn": "Life & change quiz",
+  "sessionSize": 10,
+  "doneKo": "오늘 공부 끝!",
+  "againKo": "한 번 더",
+  "closeKo": "책상 닫기",
+  "correctKo": "맞아요!",
+  "wrongKo": "Answer:",
+  "questions": [
+    {
+      "id": 1,
+      "q": "Which pattern goes with an adjective, and which with a verb?",
+      "a": "C",
+      "choices": {
+        "A": "-게 되다 with adjectives, -아/어지다 with verbs",
+        "B": "Both attach to either",
+        "C": "-아/어지다 with adjectives, -게 되다 with verbs",
+        "D": "Neither attaches to a verb"
+      }
+    },
+    {
+      "id": 2,
+      "q": "\"처음에는 매운 음식을 잘 못 먹었는데 지금은 잘 ____.\" Which fits?",
+      "a": "B",
+      "choices": {
+        "A": "먹어졌어요",
+        "B": "먹게 됐어요",
+        "C": "먹기 전이에요",
+        "D": "먹을 뻔했어요"
+      }
+    },
+    {
+      "id": 3,
+      "q": "익숙하다 becomes which form when it describes a change?",
+      "a": "A",
+      "choices": {
+        "A": "익숙해지다",
+        "B": "익숙아지다",
+        "C": "익숙게 되다",
+        "D": "익숙하아지다"
+      }
+    },
+    {
+      "id": 4,
+      "q": "덥다 is a ㅂ-irregular. What is \"to get hotter\"?",
+      "a": "D",
+      "choices": {
+        "A": "덥어지다",
+        "B": "덥게 되다",
+        "C": "더우지다",
+        "D": "더워지다"
+      }
+    },
+    {
+      "id": 5,
+      "q": "The price of goods went from 500원 to 1,000원. Which verb?",
+      "a": "B",
+      "choices": {
+        "A": "물건값이 늘었어요",
+        "B": "물건값이 올랐어요",
+        "C": "물건값이 생겼어요",
+        "D": "물건값이 발전했어요"
+      }
+    },
+    {
+      "id": 6,
+      "q": "An empty lot now has a library on it. Which verb?",
+      "a": "C",
+      "choices": {
+        "A": "도서관이 늘었어요",
+        "B": "도서관이 올랐어요",
+        "C": "도서관이 생겼어요",
+        "D": "도서관이 발전했어요"
+      }
+    },
+    {
+      "id": 7,
+      "q": "시골에서 사는 사람의 수가 ____. The subject is a count, so:",
+      "a": "A",
+      "choices": {
+        "A": "줄었어요",
+        "B": "내렸어요",
+        "C": "생겼어요",
+        "D": "발전했어요"
+      }
+    },
+    {
+      "id": 8,
+      "q": "Which is correct for \"before I came to Korea\"?",
+      "a": "B",
+      "choices": {
+        "A": "한국에 왔기 전에",
+        "B": "한국에 오기 전에",
+        "C": "한국에 올 전에",
+        "D": "한국에 온 전에"
+      }
+    },
+    {
+      "id": 9,
+      "q": "Which is correct for \"after class finishes\"?",
+      "a": "D",
+      "choices": {
+        "A": "수업이 끝나기 후에",
+        "B": "수업이 끝나는 후에",
+        "C": "수업이 끝날 후에",
+        "D": "수업이 끝난 후에"
+      }
+    },
+    {
+      "id": 10,
+      "q": "살다 before -기 전에. Which is right?",
+      "a": "A",
+      "choices": {
+        "A": "살기 전에",
+        "B": "사기 전에",
+        "C": "산 전에",
+        "D": "살고 전에"
+      }
+    },
+    {
+      "id": 11,
+      "q": "많아져요 is pronounced how?",
+      "a": "C",
+      "choices": {
+        "A": "[만하져요]",
+        "B": "[만카져요]",
+        "C": "[마나져요]",
+        "D": "[많아져요]"
+      }
+    },
+    {
+      "id": 12,
+      "q": "입학하다 and 졸업하다 take which particles?",
+      "a": "B",
+      "choices": {
+        "A": "학교를 입학하다 / 학교에 졸업하다",
+        "B": "학교에 입학하다 / 학교를 졸업하다",
+        "C": "Both take 에",
+        "D": "Both take 를"
+      }
+    },
+    {
+      "id": 13,
+      "q": "태어나다 and 낳다 — who does which?",
+      "a": "A",
+      "choices": {
+        "A": "The child 태어나다, the mother 낳다",
+        "B": "The mother 태어나다, the child 낳다",
+        "C": "They are interchangeable",
+        "D": "Both need an object"
+      }
+    }
+  ]
+}

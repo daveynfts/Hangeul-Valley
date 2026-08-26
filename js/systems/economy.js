@@ -25,6 +25,9 @@ function isUnit13World() {
 function isUnit14World() {
   return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-14';
 }
+function isUnit15World() {
+  return isWorldLevel(currentLesson()) && currentLesson().worldId === '2b-unit-15';
+}
 // The exam world. Not a chapter of anything: it has no fixed word list, no 퀴즈 and no tape,
 // and its content arrives one question at a time. Everything else about it is an ordinary
 // world — a farm and a study desk — which is the point, since the words an exam question
@@ -43,6 +46,10 @@ const WORLD_PACKS = {
   '2b-unit-11': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-13': { extras: [], stations: ['desk', 'cassette'] },
   '2b-unit-14': { extras: [], stations: ['desk', 'cassette'] },
+  // No tape yet: tracks 52-61 need the book's recording, which has not been supplied. The
+  // moment it lands this becomes ['desk', 'cassette'] here and in worlds/2b-unit-15.json,
+  // which the validator checks against each other.
+  '2b-unit-15': { extras: [], stations: ['desk'] },
   'topik-2': { extras: [], stations: ['desk'] }
 };
 function worldPackIdForLesson(lvl) {
@@ -73,7 +80,7 @@ function artLoadForWorldPack(id) {
       { key: 'unit10_taste_stall_hd', file: 'stalls/korean_street_food_stall.png' }
     ];
   }
-  if (id === '2b-unit-11' || id === '2b-unit-13' || id === '2b-unit-14') {
+  if (id === '2b-unit-11' || id === '2b-unit-13' || id === '2b-unit-14' || id === '2b-unit-15') {
     return [
       { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' }
     ];
@@ -85,6 +92,7 @@ const TEXTBOOK_WORLD_FILES = [
   { cache: 'world-2b-11', file: 'worlds/2b-unit-11.json' },
   { cache: 'world-2b-13', file: 'worlds/2b-unit-13.json' },
   { cache: 'world-2b-14', file: 'worlds/2b-unit-14.json' },
+  { cache: 'world-2b-15', file: 'worlds/2b-unit-15.json' },
   // Not from a textbook, but it loads the same way and the list is what attaches a world.
   { cache: 'world-topik-2', file: 'worlds/topik-2.json' }
 ];

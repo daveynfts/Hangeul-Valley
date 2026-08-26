@@ -38,10 +38,11 @@ const WORLD_IDS = [
   { id: '2b-unit-11', label: '2B Unit 11 · 운동을 좀 해 보는 게 어때요?' },
   { id: '2b-unit-13', label: '2B Unit 13 · 조용해서 살기 좋아요' },
   { id: '2b-unit-14', label: '2B Unit 14 · 예절을 지킵시다' },
+  { id: '2b-unit-15', label: '2B Unit 15 · 인생과 변화' },
   { id: 'topik-2', label: 'TOPIK II · exam practice' }
 ];
 
-const QUIZ_UNITS = ['unit10', 'unit11', 'unit13', 'unit14'];
+const QUIZ_UNITS = ['unit10', 'unit11', 'unit13', 'unit14', 'unit15'];
 const CASSETTE_UNITS = ['unit10', 'unit11', 'unit13', 'unit14'];
 
 // Human names for the bank keys, which are otherwise file stems. Derived from WORKBOOKS
@@ -49,6 +50,7 @@ const CASSETTE_UNITS = ['unit10', 'unit11', 'unit13', 'unit14'];
 const BANK_LABEL = {
   unit14: 'Unit 14 · 연습 문제 (익힘책)',
   'unit14-textbook': 'Unit 14 · 교과서',
+  'unit15-textbook': 'Unit 15 · 교과서',
   unit10: 'Unit 10 · 연습 문제 (익힘책)',
   'unit10-textbook': 'Unit 10 · 교과서',
   'topik2-questions': 'TOPIK II · 기출 문제'

@@ -442,6 +442,120 @@ const overlayIds = [
 // waiting, so the guarantee this block enforces is the one that keeps the unit
 // playable meanwhile: a hint emoji on every entry, which vocabIconHtml falls back
 // to when there is no PNG. Add the word→PNG check here when the art lands.
+(function checkUnit15World() {
+  const rel = path.join('worlds', '2b-unit-15.json');
+  if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+  let world;
+  try { world = JSON.parse(read(rel)); } catch (e) {
+    check(rel + ' is valid JSON', false, e.message); return;
+  }
+  check('Unit 15 names itself 2b-unit-15',
+    world.id === '2b-unit-15' && world.level.worldId === '2b-unit-15');
+  check('and says which pages it is, so the level select can label its card',
+    world.pages === 'Unit 15', String(world.pages));
+  const ww = world.level.words || [];
+  check('every Unit 15 word has ko / en / hint / category / categoryEn',
+    ww.every((w) => w.ko && w.en && w.hint && w.category && w.categoryEn));
+  const kos = ww.map((w) => w.ko);
+  const dup = kos.filter((k, i) => kos.indexOf(k) !== i);
+  check('and no word twice inside Unit 15', dup.length === 0, dup.join(', '));
+
+  // The 어휘 pages draw 17 headwords — eleven life events and six change verbs — and all
+  // seventeen are here whatever else in the game already carries them. Everything else
+  // that collided with another unit or with levels.json was dropped, because srsData is
+  // keyed by the Korean word across the whole game and two entries for one word are one
+  // entry with two glosses fighting over it. This list is the fidelity claim; if a word
+  // ever goes missing from it, the unit has stopped matching the book.
+  const DRAWN = ['태어나다', '입학하다', '친구를 사귀다', '사랑에 빠지다', '졸업하다',
+    '취직하다', '결혼하다', '아기를 낳다', '승진하다', '은퇴하다', '죽다',
+    '늘다', '줄다', '오르다', '내리다', '생기다', '발전하다'];
+  const missing = DRAWN.filter((k) => kos.indexOf(k) < 0);
+  check('all 17 drawn 어휘 headwords are in the Unit 15 list',
+    missing.length === 0, missing.join(', '));
+
+  // Stations are declared twice — in the world JSON and in WORLD_PACKS — and the farm
+  // reads whichever it finds first, so a disagreement is a station that appears on one
+  // path and not the other. The tape is deliberately absent from both until the book's
+  // recording exists; this check is what will make adding it to one place only fail.
+  const econ15 = read(path.join('js', 'systems', 'economy.js'));
+  const pack = (econ15.match(/'2b-unit-15': \{ extras: \[([^\]]*)\], stations: \[([^\]]*)\] \}/) || []);
+  check('economy.js declares a pack for Unit 15', pack.length > 0);
+  if (pack.length) {
+    const packStations = pack[2].split(',').map((t) => t.trim().replace(/'/g, '')).filter(Boolean);
+    const jsonStations = (world.level.map && world.level.map.stations) || [];
+    check('and its stations match the ones in the world JSON',
+      packStations.join(',') === jsonStations.join(','),
+      packStations.join(',') + ' vs ' + jsonStations.join(','));
+  }
+  check('Unit 15 is on the list the loader walks',
+    econ15.indexOf("{ cache: 'world-2b-15', file: 'worlds/2b-unit-15.json' }") >= 0);
+  check('and isUnit15World is defined against the world id',
+    /function isUnit15World\(\)[\s\S]{0,200}'2b-unit-15'/.test(econ15));
+}());
+
+(function checkUnit15Textbook() {
+  const rel = path.join('worlds', 'unit15-textbook.json');
+  if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+  let bank;
+  try { bank = JSON.parse(read(rel)); } catch (e) {
+    check(rel + ' is valid JSON', false, e.message); return;
+  }
+  const exs = bank.exercises || [];
+  check('the Unit 15 교과서 holds its pages', exs.length >= 10, String(exs.length));
+  const ids = exs.map((e) => e.id);
+  check('no two pages share an id', new Set(ids).size === ids.length);
+  const thin = [];
+  exs.forEach((e) => {
+    (e.items || []).forEach((it) => {
+      const at = e.id + '#' + it.n;
+      if (!it.phraseKo || !it.en || !it.why || !it.grammar) thin.push(at + ' fields');
+      if (!(it.choices || []).some((c) => c.id === it.answer)) thin.push(at + ' answer');
+      if ((it.choices || []).length < 3) thin.push(at + ' choices');
+      const blanks = (it.lines || []).reduce((n, l) => n + (String(l.ko).match(/\{\}/g) || []).length, 0);
+      const slots = it.answer2 ? 2 : 1;
+      if (blanks !== slots) thin.push(at + ' has ' + blanks + ' blanks for ' + slots);
+      if (it.answer2 && !(it.choices2 || []).some((c) => c.id === it.answer2)) thin.push(at + ' answer2');
+    });
+  });
+  check('every Unit 15 교과서 row is complete and its answer is among its choices',
+    thin.length === 0, thin.slice(0, 6).join(', '));
+  // 듣기 1 and 듣기 2 are absent on purpose — both ask the learner to choose after
+  // listening, and the recording has not been supplied. Writing an answer key for a
+  // conversation nobody can hear would mean inventing one. If a 듣기 page ever appears
+  // here it has to bring an audio source with it.
+  const listen = exs.filter((e) => String(e.section || '').indexOf('듣기') >= 0
+    || String(e.no || '').indexOf('듣기') >= 0);
+  check('no Unit 15 듣기 page ships without a recording',
+    listen.every((e) => (e.items || []).every((it) => it.audio && it.audio.src)),
+    listen.map((e) => e.id).join(', '));
+}());
+
+(function checkUnit15DeskQuiz() {
+  const rel = path.join('worlds', 'unit15-desk-quiz.json');
+  if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+  let q;
+  try { q = JSON.parse(read(rel)); } catch (e) {
+    check(rel + ' is valid JSON', false, e.message); return;
+  }
+  const rows = q.questions || [];
+  check('the Unit 15 quiz has more rows than a session, so two sittings differ',
+    rows.length > (q.sessionSize || 10), rows.length + ' rows, session ' + q.sessionSize);
+  const bad = rows.filter((r) => {
+    const vals = Object.keys(r.choices || {}).map((k) => r.choices[k]);
+    return vals.length !== 4 || new Set(vals).size !== 4 || !r.choices[r.a];
+  }).map((r) => r.id);
+  check('every row has four distinct choices and an answer among them',
+    bad.length === 0, bad.join(', '));
+  const keys = rows.map((r) => r.a).join('');
+  check('and the answers are spread over at least three letters',
+    new Set(keys.split('')).size >= 3, keys);
+  // Nothing has been drawn for Unit 15, and a row naming a picture that is not there
+  // renders an empty frame rather than failing loudly.
+  const art = rows.filter((r) => r.art).map((r) => r.art);
+  check('no Unit 15 quiz row names art before any is drawn', art.length === 0,
+    art.slice(0, 3).join(', '));
+}());
+
 (function checkUnit11World() {
   const rel = path.join('worlds', '2b-unit-11.json');
   const full = path.join(ROOT, rel);

@@ -2103,6 +2103,7 @@ const QUIZ_ART_FOLDER = 'quiz';
 // is the first caller to land here, and null is what stops the 퀴즈 row being offered at all.
 function deskQuizUrl() {
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-desk-quiz.json';
+  if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/unit15-desk-quiz.json';
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-desk-quiz.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-desk-quiz.json';
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-desk-quiz.json';
@@ -2310,6 +2311,7 @@ function workbookUrl() {
 
 function textbookUrl() {
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-textbook.json';
+  if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/unit15-textbook.json';
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-textbook.json';
   return null;
 }
