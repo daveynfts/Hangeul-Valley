@@ -1367,7 +1367,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "전에"
+          "자기 전에",
+          "키우기 전에"
         ]
       },
       {
@@ -1597,6 +1598,211 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "불안감도"
+        ]
+      },
+      {
+        "ko": "서점",
+        "en": "a bookshop",
+        "hint": "🏬",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "서점가",
+        "en": "the book trade — 가 as in 대학가, a whole scene rather than one shop",
+        "hint": "📚",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "책",
+        "en": "a book",
+        "hint": "📕",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "책이",
+          "책을"
+        ]
+      },
+      {
+        "ko": "행복",
+        "en": "happiness",
+        "hint": "🍀",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "열차",
+        "en": "a train",
+        "hint": "🚄",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "행복 열차",
+        "en": "'Happiness Train' — the name of the book, which is why it is in quotes",
+        "hint": "📗",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "읽다",
+        "en": "to read",
+        "hint": "👓",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "읽고"
+        ]
+      },
+      {
+        "ko": "큰 인기를 얻다",
+        "en": "to be enjoying great popularity — 인기 is popularity, 얻다 to obtain it",
+        "hint": "🌟",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "큰 인기를 얻고"
+        ]
+      },
+      {
+        "ko": "10만 부나",
+        "en": "as many as a hundred thousand copies — 부 counts books, and 나 says the number is larger than you would expect",
+        "hint": "💯",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "10만 부나"
+        ]
+      },
+      {
+        "ko": "팔리다",
+        "en": "to sell, to be sold",
+        "hint": "🛒",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "팔려"
+        ]
+      },
+      {
+        "ko": "판매되다",
+        "en": "to be on sale — the formal word for the same thing",
+        "hint": "🏷️",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "판매된다"
+        ]
+      },
+      {
+        "ko": "운행",
+        "en": "running a service",
+        "hint": "🚉",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "-앓이",
+        "en": "the -앓이 ending: a craze for it. From 앓다, to be ill — but nobody is ill.",
+        "hint": "🤒",
+        "category": "언론",
+        "categoryEn": "Media & headlines",
+        "forms": [
+          "앓이"
+        ]
+      },
+      {
+        "ko": "지금",
+        "en": "now",
+        "hint": "⌚",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "현재",
+        "en": "at present — the written form of 지금",
+        "hint": "📅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "최근",
+        "en": "recently",
+        "hint": "🕐",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "이름",
+        "en": "a name",
+        "hint": "🏷️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "시작하다",
+        "en": "to start",
+        "hint": "▶️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "시작했다"
+        ]
+      },
+      {
+        "ko": "가다",
+        "en": "to go",
+        "hint": "🚶",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "가면"
+        ]
+      },
+      {
+        "ko": "많다",
+        "en": "to be many",
+        "hint": "🔢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "많다"
+        ]
+      },
+      {
+        "ko": "한 달 새",
+        "en": "in the space of one month — 새 is 사이, the gap between",
+        "hint": "📆",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "이번 달",
+        "en": "this month",
+        "hint": "🗓️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "N(이)라는",
+        "en": "called N, going by the name N",
+        "hint": "💬",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "라는"
+        ]
+      },
+      {
+        "ko": "-까지만",
+        "en": "only up to — and the 만 is where the trap is",
+        "hint": "⛔",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "까지만"
         ]
       }
     ]

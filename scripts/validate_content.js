@@ -1173,6 +1173,40 @@ const overlayIds = [
       .map((wd) => wd.ko);
     check('every exam-world word wins a position, rather than sitting inside a longer key',
       shadowed.length === 0, shadowed.slice(0, 8).join(', '));
+    // A gloss that fires inside a different word. Korean does not space within a word, so a
+    // key landing with Hangul on both sides is underlining part of something else — '전에'
+    // did exactly that across the middle of 텔레비전에서는, captioned "before doing it".
+    //
+    // Endings and particles are the exception, and only in one direction: 와의 전쟁, 로 인해,
+    // 라는 and 앟이 are built to attach to the noun or stem in front of them. They are told
+    // apart by their headword — an ending is written '-…' or 'N…' — which is why 앟이 is filed
+    // as -앟이 rather than as a noun. A content word has no such licence: '책이' would put
+    // "a book" under the tail of 정책이, and today it only escapes because 부동산 정책 is longer
+    // and wins first.
+    //
+    // Known limit, found by probing rather than by reasoning: the Hangul-on-both-sides half
+    // cannot tell a particle stack from a word. 텔레비전에서는 breaks as 텔레비전 + 에서 + 는,
+    // so a key on 에서 would sit between two Hangul syllables and be flagged even though it is
+    // parsing correctly. Nothing in the world hits that today. If a stacking particle is ever
+    // added and this fails on it, the check is wrong and not the content — loosen it then,
+    // with the case written down here.
+    const isEnding = (ko) => /^[-N]/.test(String(ko || ''));
+    const hangul = (ch) => !!ch && ch >= '\uac00' && ch <= '\ud7a3';
+    const midWord = [];
+    re.lastIndex = 0;
+    let hit;
+    while ((hit = re.exec(text))) {
+      const before = hit.index > 0 ? text[hit.index - 1] : '';
+      if (!hangul(before)) continue;
+      const after = text[hit.index + hit[0].length] || '';
+      const insideAWord = hangul(after);
+      const unlicensed = !isEnding(owner.get(hit[0]));
+      if (!insideAWord && !unlicensed) continue;
+      const at = before + '[' + hit[0] + ']' + after;
+      if (midWord.indexOf(at) < 0) midWord.push(at);
+    }
+    check('no gloss fires inside another word', midWord.length === 0,
+      midWord.slice(0, 6).join('  '));
   }());
 
   const uiForDraw = read(path.join('js', 'ui.js'));
