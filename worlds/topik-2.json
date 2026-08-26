@@ -524,10 +524,13 @@
       },
       {
         "ko": "양",
-        "en": "a quantity",
+        "en": "a quantity, an amount",
         "hint": "⚖️",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "forms": [
+          "양의"
+        ]
       },
       {
         "ko": "전쟁",
@@ -895,13 +898,10 @@
       },
       {
         "ko": "-아/어서는",
-        "en": "if you go on doing it — and what follows is the bad outcome",
+        "en": "if you go on doing it, and what follows is bad — 믿어서는, if you go on trusting only that",
         "hint": "⚠️",
         "category": "문법",
-        "categoryEn": "Grammar & expressions",
-        "forms": [
-          "믿어서는"
-        ]
+        "categoryEn": "Grammar & expressions"
       },
       {
         "ko": "-던",
@@ -1156,20 +1156,22 @@
       },
       {
         "ko": "-기",
-        "en": "the -ing form: turns a verb into something a headline can name",
+        "en": "the -ing form, turning a verb into something a headline can name — 잡기, the catching of it",
         "hint": "🔤",
         "category": "문법",
-        "categoryEn": "Grammar & expressions",
-        "forms": [
-          "잡기"
-        ]
+        "categoryEn": "Grammar & expressions"
       },
       {
         "ko": "개",
         "en": "a dog",
         "hint": "🐕",
         "category": "동물",
-        "categoryEn": "Animals & pets"
+        "categoryEn": "Animals & pets",
+        "forms": [
+          "개는",
+          "개를",
+          "개의"
+        ]
       },
       {
         "ko": "반려견",
@@ -1340,12 +1342,12 @@
       },
       {
         "ko": "-지 않다",
-        "en": "the long negative — 물지 않는다 = does not bite, as a paper writes it",
+        "en": "the long negative, the one papers write — 오르지 않고, 물지 않는다",
         "hint": "✖️",
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "물지 않는다"
+          "않고"
         ]
       },
       {
@@ -1360,12 +1362,12 @@
       },
       {
         "ko": "-기 전에",
-        "en": "before doing it",
+        "en": "before doing it — 키우기 전에, before you get one",
         "hint": "⏮️",
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "키우기 전에"
+          "전에"
         ]
       },
       {
@@ -1396,6 +1398,205 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "수 있다"
+        ]
+      },
+      {
+        "ko": "바나나",
+        "en": "a banana",
+        "hint": "🍌",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "꿀",
+        "en": "honey",
+        "hint": "🍯",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "꿀과"
+        ]
+      },
+      {
+        "ko": "먹다",
+        "en": "to eat",
+        "hint": "🍽️",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "먹으면"
+        ]
+      },
+      {
+        "ko": "꿀잠",
+        "en": "honey sleep — a deep, sweet night. No honey involved.",
+        "hint": "😴",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "잠",
+        "en": "sleep",
+        "hint": "🛌",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "잠을"
+        ]
+      },
+      {
+        "ko": "자다",
+        "en": "to sleep",
+        "hint": "💤",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "자기"
+        ]
+      },
+      {
+        "ko": "숙면",
+        "en": "sound sleep — the clinical word for the same thing",
+        "hint": "🌙",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "푹",
+        "en": "soundly, right through",
+        "hint": "🪶",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "푹 잘"
+        ]
+      },
+      {
+        "ko": "불안감",
+        "en": "anxiety, a feeling of unease",
+        "hint": "😰",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "효과",
+        "en": "an effect",
+        "hint": "✨",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "도움이 되다",
+        "en": "to be a help",
+        "hint": "🤲",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "도움이 될"
+        ]
+      },
+      {
+        "ko": "없애다",
+        "en": "to get rid of it",
+        "hint": "🧹",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "없애 준다"
+        ]
+      },
+      {
+        "ko": "속",
+        "en": "the stomach, the insides",
+        "hint": "🫃",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "속이"
+        ]
+      },
+      {
+        "ko": "불편하다",
+        "en": "to be uncomfortable",
+        "hint": "😖",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "불편한"
+        ]
+      },
+      {
+        "ko": "사르르",
+        "en": "the word for melting quietly away — a headline quotes it and drops the verb",
+        "hint": "🫧",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "함께",
+        "en": "together with",
+        "hint": "🤝",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-게 해 주다",
+        "en": "to let someone do it, to make it possible",
+        "hint": "🔑",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "자게 해 주는"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ뿐더러",
+        "en": "not only that, but also — the written form of stacking with 도",
+        "hint": "➕",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "뿐더러"
+        ]
+      },
+      {
+        "ko": "-아/어야",
+        "en": "only if you — a condition, not a recommendation",
+        "hint": "🔐",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "먹어야"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 때",
+        "en": "when you do it",
+        "hint": "🕐",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "먹을 때"
+        ]
+      },
+      {
+        "ko": "-는 게 좋다",
+        "en": "it is a good idea to",
+        "hint": "👍",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "먹는 게 좋다"
+        ]
+      },
+      {
+        "ko": "N도",
+        "en": "N as well, on top of what was already said",
+        "hint": "➕",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "불안감도"
         ]
       }
     ]
@@ -1457,6 +1658,11 @@
         "ko": "동물",
         "en": "Animals & pets",
         "cat": "동물"
+      },
+      {
+        "ko": "건강",
+        "en": "Health & the body",
+        "cat": "건강"
       }
     ]
   }

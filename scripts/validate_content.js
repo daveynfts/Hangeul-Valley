@@ -1018,6 +1018,14 @@ const overlayIds = [
         seen2.push(ex.instructionKo, ex.pattern, ex.section);
         (ex.items || []).forEach((it) => {
           seen2.push(it.phraseKo);
+          // The per-question notes count as source too. A verb and its ending sometimes
+          // appear only fused — 믿어서는 is the only shape 믿다 wears in any paper here — and
+          // exactly one of the two can own that string for the hover to work. The other is
+          // found by its own name, which is printed in the grammar note. Widening the
+          // corpus is what lets the note carry it. The rule still binds every word to a
+          // paper the user sent, which is what it was written for; what it no longer
+          // catches is a word introduced only by the commentary on a real question.
+          seen2.push(it.why, it.grammar);
           (it.lines || []).forEach((l) => seen2.push(l.ko));
           (it.choices || []).forEach((c) => seen2.push(c.ko));
           (it.choices2 || []).forEach((c) => seen2.push(c.ko));
@@ -1109,6 +1117,64 @@ const overlayIds = [
   }
 
   const gameJs = readGameSource();
+  // ── Every word can actually be hovered ─────────────────────────────────
+  // wbGlossTable keys on ko plus forms, drops anything under two characters, keeps the first
+  // claimant of a key, and matches longest-first. So two entries claiming the same string
+  // silently hands the hover to whichever was listed earlier, and a short form sitting inside
+  // a longer one from a different entry never wins a position at all. Both had already
+  // happened by question 9 — '안 물어요' swallowing 물다, and '적이 있' underlining half a
+  // modifier — and both were found by reading rather than by running, which does not scale
+  // past a couple of hundred entries.
+  (function checkExamGlossKeys() {
+    const wRel = path.join('worlds', 'topik-2.json');
+    const bRel = path.join('worlds', 'topik2-questions.json');
+    if (!fs.existsSync(path.join(ROOT, wRel)) || !fs.existsSync(path.join(ROOT, bRel))) return;
+    let world = null, qbank = null;
+    try { world = JSON.parse(read(wRel)); qbank = JSON.parse(read(bRel)); } catch (e) { return; }
+    const words = (world.level && world.level.words) || [];
+    const keysOf = (wd) => [wd.ko].concat(Array.isArray(wd.forms) ? wd.forms : [])
+      .map((k) => String(k || '').normalize('NFC').trim())
+      .filter((k) => k.length >= 2);
+    const owner = new Map();
+    const clash = [];
+    words.forEach((wd) => {
+      keysOf(wd).forEach((key) => {
+        if (!owner.has(key)) { owner.set(key, wd.ko); return; }
+        if (owner.get(key) !== wd.ko) clash.push(key + ' (' + owner.get(key) + ' vs ' + wd.ko + ')');
+      });
+    });
+    check('no two exam-world entries claim the same hover key',
+      clash.length === 0, clash.slice(0, 6).join(', '));
+    const short = words.filter((wd) => keysOf(wd).length === 0).map((wd) => wd.ko);
+    check('and every entry has at least one key long enough to be indexed',
+      short.length === 0, short.slice(0, 6).join(', '));
+    const corpus = [];
+    (qbank.exercises || []).forEach((ex) => {
+      corpus.push(ex.instructionKo, ex.noteEn);
+      (ex.items || []).forEach((it) => {
+        corpus.push(it.phraseKo, it.en, it.why, it.grammar);
+        (it.lines || []).forEach((l) => corpus.push(l.ko));
+        (it.choices || []).forEach((c) => corpus.push(c.ko));
+      });
+    });
+    // Two spaces between fields, so a key cannot match across a boundary that is not
+    // really there. A newline would do as well, but a plain separator survives being
+    // written out through a shell heredoc — which this line did not, the first time.
+    const text = corpus.filter(Boolean).map((t) => String(t).normalize('NFC')).join('  ');
+    const keys = [...owner.keys()].sort((a, b) => b.length - a.length);
+    if (!keys.length) return;
+    const esc = (k) => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(keys.map(esc).join('|'), 'g');
+    const winners = new Set();
+    let m;
+    while ((m = re.exec(text))) winners.add(m[0]);
+    const shadowed = words
+      .filter((wd) => !keysOf(wd).some((k) => owner.get(k) === wd.ko && winners.has(k)))
+      .map((wd) => wd.ko);
+    check('every exam-world word wins a position, rather than sitting inside a longer key',
+      shadowed.length === 0, shadowed.slice(0, 8).join(', '));
+  }());
+
   const uiForDraw = read(path.join('js', 'ui.js'));
   check('openWorkbookExercise draws instead of opening the whole paper',
     /const ex = wbDrawOne\(st\.bank, whole\)/.test(uiForDraw));
