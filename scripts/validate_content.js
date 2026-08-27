@@ -1439,6 +1439,44 @@ const overlayIds = [
       midWord.slice(0, 6).join('  '));
   }());
 
+  // ── A world with a quiz has to be offered that quiz by the admin too ────────────
+  // deskQuizUrl is what the game reads; admin/public/js/world.js is what the editor reads.
+  // They are two lists of the same fact, and the exam world got its quiz in one of them
+  // only — the picker went on saying quiz: null, which is the admin quietly reporting that
+  // this world has none.
+  (function checkAdminQuizPicker() {
+    const uiRel = path.join('js', 'ui.js');
+    const pickerRel = path.join('admin', 'public', 'js', 'world.js');
+    if (!fs.existsSync(path.join(ROOT, pickerRel))) return;
+    const uiSrc = read(uiRel);
+    const picker = read(pickerRel);
+    const dqFrom = uiSrc.indexOf('function deskQuizUrl()');
+    const dqTo = uiSrc.indexOf('function loadDeskQuiz', dqFrom);
+    const body = dqFrom >= 0 && dqTo > dqFrom ? uiSrc.slice(dqFrom, dqTo) : '';
+    const served = (body.match(/'\/worlds\/([a-z0-9-]+)-desk-quiz\.json'/g) || [])
+      .map((m) => m.replace(/^'\/worlds\//, '').replace(/-desk-quiz\.json'$/, ''));
+    check('the game serves at least five desk quizzes', served.length >= 5,
+      served.join(', '));
+    const nulled = served.filter((stem) => {
+      const world = stem.indexOf('unit') === 0 ? '2b-' + stem.replace('unit', 'unit-')
+        : (stem === 'topik2' ? 'topik-2' : stem);
+      const row = picker.match(new RegExp("\\{ id: '" + world + "'[^}]*\\}"));
+      return row && /quiz:\s*null/.test(row[0]);
+    });
+    check('and every one of them is offered by the admin unit picker as well',
+      nulled.length === 0, nulled.join(', '));
+
+    // 'topik2'.replace('unit', 'Unit ') is 'topik2'. Every other key is unitNN, which is
+    // why the row read 'topik2 · 퀵즈' and nobody saw it until the panel was opened.
+    const reg = require(path.join(ROOT, 'admin', 'lib', 'content.js'));
+    const ugly = (reg.list ? reg.list() : [])
+      .filter((e) => String(e.key || '').indexOf('quiz/') === 0)
+      .filter((e) => /^[a-z0-9]+ ·/.test(String(e.label || '')))
+      .map((e) => e.key + ': ' + e.label);
+    check('and no quiz row is labelled with its raw file stem', ugly.length === 0,
+      ugly.join(', '));
+  }());
+
   const uiForDraw = read(path.join('js', 'ui.js'));
   check('openWorkbookExercise draws instead of opening the whole paper',
     /const ex = wbDrawOne\(st\.bank, whole\)/.test(uiForDraw));

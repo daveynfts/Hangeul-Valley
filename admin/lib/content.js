@@ -90,7 +90,9 @@ const CONTENT = [
     key: 'quiz/' + u,
     rel: p('worlds', u + '-desk-quiz.json'),
     group: 'Desk quizzes',
-    label: u.replace('unit', 'Unit ') + ' · 퀴즈',
+    // Every other quiz key is unitNN, so replace('unit', 'Unit ') was enough until a key
+    // that is not one arrived: it left the exam row reading 'topik2 · 퀴즈'.
+    label: (u === 'topik2' ? 'TOPIK II' : u.replace('unit', 'Unit ')) + ' · 퀴즈',
     validate: (body) => world.validateQuiz(body)
   })),
   ...CASSETTE_UNITS.map((u) => ({
