@@ -1575,7 +1575,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "먹어야"
+          "먹어야",
+          "늘어야"
         ]
       },
       {
@@ -2520,6 +2521,84 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "에 달려 있다"
+        ]
+      },
+      {
+        "ko": "올해",
+        "en": "this year",
+        "hint": "📅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "과일",
+        "en": "fruit",
+        "hint": "🍎",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "생산량",
+        "en": "output, how much is produced",
+        "hint": "🏭",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "대체적으로",
+        "en": "on the whole, broadly speaking",
+        "hint": "📊",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "가격",
+        "en": "a price",
+        "hint": "🏷️",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "가격이"
+        ]
+      },
+      {
+        "ko": "내리다",
+        "en": "to come down — of a price or a figure",
+        "hint": "⬇️",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "내렸다"
+        ]
+      },
+      {
+        "ko": "-(ㄴ/는)다면",
+        "en": "if it were to — a supposition, not a fact",
+        "hint": "❓",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "는다면"
+        ]
+      },
+      {
+        "ko": "-(ㄴ/는)다거나",
+        "en": "or it does … — offering one of several",
+        "hint": "🔀",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "는다거나"
+        ]
+      },
+      {
+        "ko": "-아/어서인지",
+        "en": "perhaps because — a cause offered with a hedge on it",
+        "hint": "🤔",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "늘어서인지"
         ]
       }
     ]

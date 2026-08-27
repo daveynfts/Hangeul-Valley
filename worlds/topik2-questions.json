@@ -535,6 +535,39 @@
           "en": "As the weather warms from now on, the mountains will gradually turn green. The ending has to carry a change moving away from now.",
           "why": "All four are 변하다 with a different helping verb behind it, and two of them are a genuine pair worth learning together.\n\n-아/어 가다 and -아/어 오다 both describe a change in progress, and they differ only in direction. 가다 runs away from now into the future; 오다 runs from the past up to now. 살아 왔다 is the life you have lived so far; 살아 갈 것이다 is the life ahead.\n\nThe sentence settles it in its first word. 앞으로 means from now on, and 점점 says the change is gradual rather than done. A gradual change pointed at the future is -아/어 가다, and 올 것이다 would have the greening arrive from the past, which 앞으로 has just ruled out.\n\n-아/어 보다 is to try doing something, and trying needs somebody who decides to try. A mountain does not attempt to be green.\n\n-아/어 대다 is to keep on doing something more than one would like, and it is used of people and usually with disapproval — 떠들어 대다, 먹어 대다. Neither the subject nor the tone fits.\n\nWorth noticing what decided it: one adverb. The vocabulary of the sentence never came into it, which is what this question type does.",
           "grammar": "변하다 is to change into something else. Behind it, -아/어 가다 and -아/어 오다 are the aspectual pair for a change under way, and the arrow is the whole difference: 가다 forward from now, 오다 backward to now.\n\n-아/어 보다 (try) and -아/어 대다 (keep on, excessively) are the other two helping verbs learners meet at the same time. 대다 carries disapproval and needs a human subject, which is why it can be ruled out without reading the rest.\n\n따뜻해지면서 is three pieces: 따뜻하다, the change ending -아/어지다 from Unit 15, and -(으)면서, which runs two things alongside each other. 푸르게 is 푸르다 in its adverbial form, describing how the mountain changes."
+        },
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "올해는 과일 생산량이 (   ) 대체적으로 과일 가격이 내렸다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "올해는 과일 생산량이 {} 대체적으로 과일 가격이 내렸다."
+            }
+          ],
+          "answer": "seoinji",
+          "choices": [
+            {
+              "id": "damyeon",
+              "ko": "는다면"
+            },
+            {
+              "id": "eoya",
+              "ko": "늘어야"
+            },
+            {
+              "id": "dageona",
+              "ko": "는다거나"
+            },
+            {
+              "id": "seoinji",
+              "ko": "늘어서인지"
+            }
+          ],
+          "en": "Perhaps because fruit output was up this year, fruit prices have generally come down. The ending has to offer a cause, and offer it tentatively.",
+          "why": "Look at the half after the blank before the options. 내렸다 is finished and past, and 대체적으로 hedges it — broadly speaking, on the whole. Something that has already happened, reported with a hedge, is waiting for a reason that is also hedged.\n\n-아/어서인지 is exactly that: -아/어서 gives the cause, and -인지 admits the speaker is guessing. Perhaps because output rose. It is the only one of the four that offers a reason at all.\n\nThe other three are all about things that have not happened. -(ㄴ/는)다면 supposes — if output were to rise — and you cannot suppose your way to a price that has already fallen. -아/어야 sets a requirement, and requires a second clause that waits on it: 생산량이 늘어야 가격이 내린다, output has to rise for prices to fall. That is a rule, and this sentence is a report. -(ㄴ/는)다거나 offers one of several possibilities and needs the others named.\n\nThere is a spelling trap in two of them worth seeing. 늘다 is a ㄹ-stem, and the ㄹ drops before ㄴ, so 늘다 + -ㄴ다면 comes out 는다면 — the stem has vanished from the written form. Options 1 and 3 look as though they are missing their verb. They are not; the verb is the 느 you can no longer see.",
+          "grammar": "-아/어서인지 is three pieces: -아/어서 (because), 이다, and -(으)ㄴ지 (whether). Together they mean I am not certain, but perhaps because. Papers and reports like it because it lets them name a cause without claiming it.\n\nThe ㄹ-stem rule is what makes options 1 and 3 look strange. 늘다, 살다, 알다 and 만들다 all drop their ㄹ before ㄴ, ㅂ and ㅅ: 늘다 → 는다, 삽니다, 아세요, 만드는. Before a vowel the ㄹ stays, which is why options 2 and 4 keep 늘어-.\n\n대체적으로 belongs to the same register as the sentence — written, careful, and unwilling to overstate. 생산량 is 생산 plus 량, the counter suffix for quantity: 강수량, 수출량, 통화량."
         }
       ]
     },

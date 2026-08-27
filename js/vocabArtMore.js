@@ -734,7 +734,16 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "교육 정책", slug: 'system_policy', folder: 'items', nameEn: "education policy", family: 'fill' },
   { ko: "달라지다", slug: 'different', folder: 'items', nameEn: "to come out differently", family: 'fill' },
   { ko: "되다", slug: 'gold_spiral', folder: 'items', nameEn: "to become", family: 'fill' },
-  { ko: "N에 달려 있다", slug: 'justice_scales', folder: 'items', nameEn: "to depend on N, to rest on N", family: 'fill' }
+  { ko: "N에 달려 있다", slug: 'justice_scales', folder: 'items', nameEn: "to depend on N, to rest on N", family: 'fill' },
+  { ko: "올해", slug: 'wall_calendar', folder: 'items', nameEn: "this year", family: 'fill' },
+  { ko: "과일", slug: 'farm_apple', folder: 'items', nameEn: "fruit", family: 'fill' },
+  { ko: "생산량", slug: 'line_graph', folder: 'items', nameEn: "output, how much is produced", family: 'fill' },
+  { ko: "대체적으로", slug: 'kinds_types', folder: 'items', nameEn: "on the whole, broadly speaking", family: 'fill' },
+  { ko: "가격", slug: 'price_coins', folder: 'items', nameEn: "a price", family: 'fill' },
+  { ko: "내리다", slug: 'gold_spiral', folder: 'items', nameEn: "to come down — of a price or a figure", family: 'fill' },
+  { ko: "-(ㄴ/는)다면", slug: 'kinds_types', folder: 'items', nameEn: "if it were to — a supposition, not a fact", family: 'fill' },
+  { ko: "-(ㄴ/는)다거나", slug: 'kinds_types', folder: 'items', nameEn: "or it does … — offering one of several", family: 'fill' },
+  { ko: "-아/어서인지", slug: 'kinds_types', folder: 'items', nameEn: "perhaps because — a cause with a hedge on it", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
