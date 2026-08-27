@@ -750,7 +750,26 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "식사량", slug: 'servings', folder: 'items', nameEn: "how much one eats", family: 'fill' },
   { ko: "조절하다", slug: 'justice_scales', folder: 'items', nameEn: "to regulate, to keep in check", family: 'fill' },
   { ko: "N에게", slug: 'kinds_types', folder: 'items', nameEn: "to N — the marker a causative takes", family: 'fill' },
-  { ko: "-게 되다", slug: 'kinds_types', folder: 'items', nameEn: "to come to be that way, with nobody making it happen", family: 'fill' }
+  { ko: "-게 되다", slug: 'kinds_types', folder: 'items', nameEn: "to come to be that way, with nobody making it happen", family: 'fill' },
+  { ko: "꽃병", slug: 'vinegar_bottle', folder: 'items', nameEn: "a vase", family: 'fill' },
+  { ko: "개나리", slug: 'green_onion', folder: 'items', nameEn: "forsythia — the first shrub of spring", family: 'fill' },
+  { ko: "꽃", slug: 'garden_strawberry', folder: 'items', nameEn: "a flower", family: 'fill' },
+  { ko: "꽂다", slug: 'kinds_types', folder: 'items', nameEn: "to stand something upright in", family: 'fill' },
+  { ko: "책상", slug: 'homework_notebook', folder: 'items', nameEn: "a desk", family: 'fill' },
+  { ko: "놓다", slug: 'give_two_hands', folder: 'items', nameEn: "to put something down and leave it", family: 'fill' },
+  { ko: "봄", slug: 'sun_icon', folder: 'items', nameEn: "spring", family: 'fill' },
+  { ko: "-아/어다가", slug: 'kinds_types', folder: 'items', nameEn: "do it, then take it somewhere and do the next thing", family: 'fill' },
+  { ko: "-(으)ㄹ 뿐", slug: 'kinds_types', folder: 'items', nameEn: "only that, and nothing more", family: 'fill' },
+  { ko: "-았/었기에", slug: 'kinds_types', folder: 'items', nameEn: "because it did — a formal, written cause", family: 'fill' },
+  { ko: "-(으)ㄴ 바람에", slug: 'kinds_types', folder: 'items', nameEn: "because of it — and what followed was unwelcome", family: 'fill' },
+  { ko: "국가", slug: 'neighboring_country', folder: 'items', nameEn: "a state, a nation", family: 'fill' },
+  { ko: "상황", slug: 'line_graph', folder: 'items', nameEn: "the situation", family: 'fill' },
+  { ko: "나아지다", slug: 'gold_spiral', folder: 'items', nameEn: "to get better", family: 'fill' },
+  { ko: "안타깝다", slug: 'get_scolded', folder: 'items', nameEn: "to be a shame, to be painful to watch", family: 'fill' },
+  { ko: "-(으)ㄹ 따름이다", slug: 'kinds_types', folder: 'items', nameEn: "it is only that, and nothing more", family: 'fill' },
+  { ko: "-(으)ㄹ 뿐이다", slug: 'kinds_types', folder: 'items', nameEn: "it is only that — the twin of -(으)ㄹ 따름이다", family: 'fill' },
+  { ko: "-(으)ㄹ 정도이다", slug: 'kinds_types', folder: 'items', nameEn: "it is to the extent that", family: 'fill' },
+  { ko: "-(으)ㄹ 리가 없다", slug: 'kinds_types', folder: 'items', nameEn: "there is no way it could be", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {

@@ -1889,7 +1889,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "와 가지고"
+          "와 가지고",
+          "꽂아 가지고"
         ]
       },
       {
@@ -2664,6 +2665,187 @@
         "forms": [
           "조절하게 되었다"
         ]
+      },
+      {
+        "ko": "꽃병",
+        "en": "a vase",
+        "hint": "🏺",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons",
+        "forms": [
+          "꽃병에"
+        ]
+      },
+      {
+        "ko": "개나리",
+        "en": "forsythia — the yellow shrub that opens first in spring",
+        "hint": "🌼",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "꽃",
+        "en": "a flower",
+        "hint": "🌸",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons",
+        "forms": [
+          "꽃을"
+        ]
+      },
+      {
+        "ko": "꽂다",
+        "en": "to stand something upright in, to stick in",
+        "hint": "📌",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "책상",
+        "en": "a desk",
+        "hint": "🪑",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "책상 위"
+        ]
+      },
+      {
+        "ko": "놓다",
+        "en": "to put something down and leave it",
+        "hint": "🤲",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "놓으니"
+        ]
+      },
+      {
+        "ko": "봄",
+        "en": "spring",
+        "hint": "🌷",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons",
+        "forms": [
+          "봄이"
+        ]
+      },
+      {
+        "ko": "-아/어다가",
+        "en": "do it, then take it somewhere and do the next thing",
+        "hint": "➡️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "꽂아다가"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 뿐",
+        "en": "only that, and nothing more",
+        "hint": "☝️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "꽂을 뿐"
+        ]
+      },
+      {
+        "ko": "-았/었기에",
+        "en": "because it did — a formal, written cause",
+        "hint": "📜",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "꽂았기에"
+        ]
+      },
+      {
+        "ko": "-(으)ㄴ 바람에",
+        "en": "because of it — and what followed was unwelcome",
+        "hint": "💨",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "꽂은 바람에"
+        ]
+      },
+      {
+        "ko": "국가",
+        "en": "a state, a nation",
+        "hint": "🏛️",
+        "category": "정치",
+        "categoryEn": "Politics & government",
+        "forms": [
+          "국가의"
+        ]
+      },
+      {
+        "ko": "상황",
+        "en": "the situation",
+        "hint": "📊",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "나아지다",
+        "en": "to get better",
+        "hint": "📈",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "나아지지"
+        ]
+      },
+      {
+        "ko": "안타깝다",
+        "en": "to be a shame, to be painful to watch",
+        "hint": "😔",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "안타까울"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 따름이다",
+        "en": "it is only that, and nothing more",
+        "hint": "☝️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "따름이다"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 뿐이다",
+        "en": "it is only that — the twin of -(으)ㄹ 따름이다",
+        "hint": "☝️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "뿐이다"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 정도이다",
+        "en": "it is to the extent that",
+        "hint": "📏",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "정도이다"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 리가 없다",
+        "en": "there is no way it could be",
+        "hint": "🚫",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "리가 없다"
+        ]
       }
     ]
   },
@@ -2734,6 +2916,11 @@
         "ko": "날씨",
         "en": "Weather & seasons",
         "cat": "날씨"
+      },
+      {
+        "ko": "자연",
+        "en": "Nature & the seasons",
+        "cat": "자연"
       }
     ]
   }
