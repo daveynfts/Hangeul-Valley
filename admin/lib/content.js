@@ -42,7 +42,7 @@ const WORLD_IDS = [
   { id: 'topik-2', label: 'TOPIK II · exam practice' }
 ];
 
-const QUIZ_UNITS = ['unit10', 'unit11', 'unit13', 'unit14', 'unit15'];
+const QUIZ_UNITS = ['unit10', 'unit11', 'unit13', 'unit14', 'unit15', 'topik2'];
 const CASSETTE_UNITS = ['unit10', 'unit11', 'unit13', 'unit14', 'unit15'];
 
 // Human names for the bank keys, which are otherwise file stems. Derived from WORKBOOKS

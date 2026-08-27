@@ -1,0 +1,232 @@
+{
+  "titleKo": "학습 책상",
+  "titleEn": "TOPIK grammar review",
+  "sessionSize": 10,
+  "doneKo": "오늘 공부 끝!",
+  "againKo": "한 번 더",
+  "closeKo": "책상 닫기",
+  "correctKo": "맞아요!",
+  "wrongKo": "Answer:",
+  "questions": [
+    {
+      "id": 1,
+      "q": "오전에는 비가 많이 ___ 지금은 맑게 개었다. Which ending holds a then and a now that disagree?",
+      "a": "B",
+      "choices": {
+        "A": "오더라도",
+        "B": "오더니",
+        "C": "와 가지고",
+        "D": "오는 대신에"
+      }
+    },
+    {
+      "id": 2,
+      "q": "-더니 and -더라도. What is the difference?",
+      "a": "C",
+      "choices": {
+        "A": "Both concede a hypothetical",
+        "B": "Both report what you saw",
+        "C": "-더니 reports a change you saw; -더라도 concedes something that may not happen",
+        "D": "-더니 is spoken, -더라도 is written"
+      }
+    },
+    {
+      "id": 3,
+      "q": "수민이는 \"오늘은 일찍 집에 가서 ___!\" 하고 말했다. Sumin is talking about herself.",
+      "a": "A",
+      "choices": {
+        "A": "쉬어야지",
+        "B": "쉬더라",
+        "C": "쉴걸",
+        "D": "쉬기도 해"
+      }
+    },
+    {
+      "id": 4,
+      "q": "Why can -더라 not fill that blank?",
+      "a": "D",
+      "choices": {
+        "A": "It is too formal for speech",
+        "B": "It needs a future tense after it",
+        "C": "It cannot follow a quotation mark",
+        "D": "It reports what you witnessed of someone else, not of yourself"
+      }
+    },
+    {
+      "id": 5,
+      "q": "외모로 인하여 means the same as which?",
+      "a": "B",
+      "choices": {
+        "A": "외모에 따라서",
+        "B": "외모로 말미암아",
+        "C": "외모를 비롯해서",
+        "D": "외모에도 불구하고"
+      }
+    },
+    {
+      "id": 6,
+      "q": "N에 따라서, N을 비롯해서, N에도 불구하고 — in that order, these are:",
+      "a": "A",
+      "choices": {
+        "A": "correlation, addition, concession",
+        "B": "cause, correlation, addition",
+        "C": "concession, cause, correlation",
+        "D": "addition, concession, cause"
+      }
+    },
+    {
+      "id": 7,
+      "q": "불을 켜 놓았다 means the same as which?",
+      "a": "D",
+      "choices": {
+        "A": "켜야 했다",
+        "B": "켜곤 했다",
+        "C": "켜게 했다",
+        "D": "켜 두었다"
+      }
+    },
+    {
+      "id": 8,
+      "q": "비장애인도 쉽지 ___ 불편한 몸으로 산에 오르다니 대단하다.",
+      "a": "A",
+      "choices": {
+        "A": "않을 텐데",
+        "B": "않을까 봐",
+        "C": "않을 테니까",
+        "D": "않은 데다가"
+      }
+    },
+    {
+      "id": 9,
+      "q": "-(으)ㄹ 텐데 and -(으)ㄹ 테니까 share the same 터. What differs?",
+      "a": "C",
+      "choices": {
+        "A": "텐데 is past, 테니까 is future",
+        "B": "텐데 needs a person, 테니까 needs a thing",
+        "C": "텐데 leans into a contrast; 테니까 gives a reason for an instruction",
+        "D": "They are interchangeable"
+      }
+    },
+    {
+      "id": 10,
+      "q": "앞으로 산이 점점 푸르게 ___. Which direction does the change run?",
+      "a": "B",
+      "choices": {
+        "A": "변해 올 것이다",
+        "B": "변해 갈 것이다",
+        "C": "변해 볼 것이다",
+        "D": "변해 댈 것이다"
+      }
+    },
+    {
+      "id": 11,
+      "q": "친구가 시험에 합격하도록 떡을 주었다. Why is 합격하려고 wrong here?",
+      "a": "C",
+      "choices": {
+        "A": "-(으)려고 cannot follow 하다 verbs",
+        "B": "-(으)려고 is only used in speech",
+        "C": "-(으)려고 needs the intender and the doer to be the same person",
+        "D": "-(으)려고 cannot take an object"
+      }
+    },
+    {
+      "id": 12,
+      "q": "교육 정책에 따라 달라진다 means the same as which?",
+      "a": "A",
+      "choices": {
+        "A": "교육 정책에 달려 있다",
+        "B": "교육 정책이 되었다",
+        "C": "교육 정책일 수가 있다",
+        "D": "교육 정책으로 인한 것이다"
+      }
+    },
+    {
+      "id": 13,
+      "q": "생산량이 ___ 대체적으로 가격이 내렸다. The fall already happened and is hedged.",
+      "a": "D",
+      "choices": {
+        "A": "는다면",
+        "B": "늘어야",
+        "C": "는다거나",
+        "D": "늘어서인지"
+      }
+    },
+    {
+      "id": 14,
+      "q": "늘다 + -ㄴ다면 is written 는다면. Why does the stem disappear?",
+      "a": "B",
+      "choices": {
+        "A": "The ㄴ is dropped after a vowel",
+        "B": "A ㄹ-stem drops its ㄹ before ㄴ",
+        "C": "늘다 is irregular in the past only",
+        "D": "The ending absorbs the whole stem"
+      }
+    },
+    {
+      "id": 15,
+      "q": "의사는 환자에게 식사량을 ___. Which ending takes 에게?",
+      "a": "A",
+      "choices": {
+        "A": "조절하게 했다",
+        "B": "조절하게 되었다",
+        "C": "조절한다고 한다",
+        "D": "조절하려고 했다"
+      }
+    },
+    {
+      "id": 16,
+      "q": "-게 하다 and -게 되다. Which is right?",
+      "a": "C",
+      "choices": {
+        "A": "Both need an agent",
+        "B": "Neither takes 에게",
+        "C": "하다 means somebody made it happen; 되다 means it came about by itself",
+        "D": "되다 is the polite form of 하다"
+      }
+    },
+    {
+      "id": 17,
+      "q": "꽂아다가 means the same as which?",
+      "a": "B",
+      "choices": {
+        "A": "꽂을 뿐",
+        "B": "꽂아 가지고",
+        "C": "꽂았기에",
+        "D": "꽂은 바람에"
+      }
+    },
+    {
+      "id": 18,
+      "q": "안타까울 따름이다 means the same as which?",
+      "a": "A",
+      "choices": {
+        "A": "안타까울 뿐이다",
+        "B": "안타까울 수 있다",
+        "C": "안타까울 정도이다",
+        "D": "안타까울 리가 없다"
+      }
+    },
+    {
+      "id": 19,
+      "q": "냉장고만 믿어서는 낭패! What does 만 do to the headline?",
+      "a": "C",
+      "choices": {
+        "A": "It makes the fridge the subject",
+        "B": "It marks the fridge as new information",
+        "C": "It says the fridge alone is not enough",
+        "D": "It makes the sentence a question"
+      }
+    },
+    {
+      "id": 20,
+      "q": "서점가는 지금 '행복 열차' 앓이. What is 앓이 doing?",
+      "a": "B",
+      "choices": {
+        "A": "Reporting an illness among booksellers",
+        "B": "Turning the title into a craze — from 앓다, to be ill",
+        "C": "Naming the author of the book",
+        "D": "Marking the sentence as a quotation"
+      }
+    }
+  ]
+}

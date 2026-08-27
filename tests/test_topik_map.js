@@ -167,13 +167,21 @@ const dqAt = src.indexOf('function deskQuizUrl()');
 const dqBody = dqAt >= 0 ? src.slice(dqAt, src.indexOf('function loadDeskQuiz', dqAt)) : '';
 assert(dqBody.length > 0, 'deskQuizUrl is where it is expected to be');
 const unguarded = dqBody.split(/\r?\n/)
-  .filter((l) => /return '\/worlds\//.test(l) && !/isUnit\d+World\(\)/.test(l));
+  .filter((l) => /return '\/worlds\//.test(l) && !/is[A-Za-z0-9]+World\(\)/.test(l));
 assert(unguarded.length === 0, 'every quiz url it returns is guarded by that world\'s own test'
   + (unguarded.length ? ' — ' + unguarded.map((l) => l.trim()).join(' | ') : ''));
 assert(/return null;/.test(dqBody), 'and a world with no quiz of its own gets null');
 assert(/if \(deskQuizUrl\(\)\) \{/.test(src), 'the desk only builds a 퀴즈 row when there is a quiz to open');
-assert(!fs.existsSync(path.join(ROOT, 'worlds', 'topik2-desk-quiz.json')),
-  'the exam world genuinely has no quiz file — so this is the case that would have broken');
+// The exam world had no quiz of its own when this test was written, which is what made it
+// the case the bare return would have broken. It has one now, so the check moved with the
+// fact: what still has to be true is that the desk serves the exam world its own quiz and
+// not another world's.
+assert(/isTopikWorld\(\)\) return '\/worlds\/topik2-desk-quiz\.json'/.test(dqBody),
+  'the exam desk is served its own quiz, guarded by its own world test');
+assert(fs.existsSync(path.join(ROOT, 'worlds', 'topik2-desk-quiz.json')),
+  'and that quiz file is on disk');
+assert(!/isTopikWorld\(\)\) return '\/worlds\/unit\d+-desk-quiz/.test(dqBody),
+  'and never a unit quiz — that was the bug');
 
 // (b) an empty world word list used to make _pickWord() hand back undefined.
 // Sliced between two function names — no newline in either marker, for the reason given at

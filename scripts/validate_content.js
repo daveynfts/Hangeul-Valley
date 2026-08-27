@@ -1426,8 +1426,13 @@ const overlayIds = [
   // a pattern spanning a literal newline passes in CI and fails on a Windows checkout.
   const dqAt = gameJs.indexOf('function deskQuizUrl()');
   const dqBody = dqAt >= 0 ? gameJs.slice(dqAt, gameJs.indexOf('function loadDeskQuiz', dqAt)) : '';
+  // Widened from /isUnit\d+World/ when the exam desk gained a quiz of its own: its guard
+  // is isTopikWorld, a world test that is not named after a unit number. What this rule is
+  // for is that no line hands back a quiz without first asking which world it is in — the
+  // shape of the guard's name was never the point, and pinning it would have meant every
+  // future non-unit world failing a check about Unit 10's bug.
   const unguarded = dqBody.split(/\r?\n/)
-    .filter((l) => /return '\/worlds\//.test(l) && !/isUnit\d+World\(\)/.test(l));
+    .filter((l) => /return '\/worlds\//.test(l) && !/is[A-Za-z0-9]+World\(\)/.test(l));
   check('every quiz url in deskQuizUrl is guarded by its own world test',
     dqBody.length > 0 && unguarded.length === 0, unguarded.join(' | '));
   check('and deskQuizUrl returns null for a world that has no quiz', /return null;/.test(dqBody));

@@ -2107,6 +2107,10 @@ function deskQuizUrl() {
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-desk-quiz.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-desk-quiz.json';
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-desk-quiz.json';
+  // The exam desk had the paper and nothing beside it, while every other desk offers a quiz
+  // as well. This one is revision of the paper rather than a second syllabus: every row
+  // drills a distinction one of the questions already turned on.
+  if (typeof isTopikWorld === 'function' && isTopikWorld()) return '/worlds/topik2-desk-quiz.json';
   return null;
 }
 
