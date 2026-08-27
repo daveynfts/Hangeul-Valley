@@ -913,6 +913,39 @@
           "en": "The number of international students coming to Korea in order to enter a Korean university is rising by the day. The underlined part is a purpose.",
           "why": "-고자 states a purpose in the written register: they come in order to enrol. Its everyday twin is -기 위해서, and that is the answer — the same swap this question type keeps asking for, where the stiff form is underlined and the plain one is what you must recognise.\n\nThe other three are all about time or futility, and none of them is a reason for coming.\n\n-고서 is sequence: enrol first, then come. That reverses the order of events, because you cannot enrol at a Korean university and then travel to Korea to do it.\n\n-자마자 is immediacy: the moment they enrol, they come. Same problem, tighter timing.\n\n-아/어 봤자 concedes and then dismisses: even if they get in, it is no use. That is not why anybody buys a plane ticket, and the second half of the sentence — numbers rising by the day — says the opposite.\n\nWorth noticing that the sentence would still read smoothly with any of them. What rules out three is not grammar but the direction of time and of intent, which is the same test question 11 of this type set with 꽂아다가.",
           "grammar": "입학하다 is to be admitted to a school, and it takes 에: 대학교에 입학하다. 졸업하다 takes 를. -고자 belongs to writing and speeches: 말씀드리고자 합니다, 알아보고자 한다. In speech people say -(으)려고 or -기 위해서 instead. All three are purpose, and -(으)려고 is the one with the same-subject restriction that decided question 7 and question 10 — -고자 and -기 위해서 share it, which is why they can stand in for each other here.\n\n-고서 is -고 with 서 pinning the order down, so it is sequence and never cause. -자마자 is tighter still: no gap at all between the two.\n\n-아/어 봤자 is 보다 turned into a dismissal: 아무리 -아/어 봤자 소용없다. It always expects a negative outcome behind it.\n\n날로 is day by day and goes with a verb of increase: 날로 증가하다, 날로 발전하다. 증가하다 is the formal counterpart of 늘다 from the 어휘 pages."
+        },
+        {
+          "n": 16,
+          "art": "",
+          "phraseKo": "무슨 일이든 처음 시작할 때는 힘든 법이다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "무슨 일이든 처음 시작할 때는 {}."
+            }
+          ],
+          "answer": "maryeon",
+          "choices": [
+            {
+              "id": "doeda",
+              "ko": "힘들어도 된다"
+            },
+            {
+              "id": "gimanhada",
+              "ko": "힘들기만 하다"
+            },
+            {
+              "id": "moyang",
+              "ko": "힘든 모양이다"
+            },
+            {
+              "id": "maryeon",
+              "ko": "힘들기 마련이다"
+            }
+          ],
+          "en": "Whatever the task, the beginning is bound to be hard. The underlined part states an inevitability, not an observation.",
+          "why": "-(으)ㄴ/는 법이다 says: that is how things are and could not be otherwise. It is a statement about the nature of the thing, which is why 무슨 일이든 — whatever the task — is standing in front of it. The sentence is a general truth, not a report about one job.\n\n-기 마련이다 means exactly that and is the answer. The two are close enough that Korean teaching materials introduce them on the same page.\n\nThe other three are three different things, and each of them narrows the sentence from a truth to a case.\n\n-아/어도 되다 is permission: it is all right for it to be hard. That says somebody is allowed something, and nobody is asking permission here.\n\n-기만 하다 is exclusivity: it does nothing but be hard. That is a complaint about one job rather than a rule about all of them, and 무슨 일이든 has already said all of them.\n\n-(으)ㄴ 모양이다 is inference from evidence: it looks as though it is hard. An inference is drawn from something in front of you, and a general truth has nothing in front of it to look at.\n\nSorting them by what they do is the whole method of this type: inevitability, permission, exclusivity, inference — and the underlined phrase is the first.",
+          "grammar": "-(으)ㄴ/는 법이다 and -기 마련이다 are the pair to learn together: 노력하면 성공하는 법이다 = 노력하면 성공하기 마련이다. 법이다 takes the modifier (힘든, 하는), 마련이다 takes -기 (힘들기, 하기), which is the only thing to keep straight when swapping one for the other.\n\n-(으)ㄴ 모양이다 is worth separating from both. It is inference, so it needs evidence: 불이 꺼진 걸 보니 잔 모양이다. That is why it cannot state a truth about every task.\n\n힘들다 is a ㄹ-stem: 힘든 before ㄴ with the ㄹ dropped, 힘들기 before -기 with it kept. Both appear in this question, which is a fair test on its own — the same rule that made 늘다 come out 는다면 in question 9 of the 빈칸 set."
         }
       ]
     }

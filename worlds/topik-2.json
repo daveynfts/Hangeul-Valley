@@ -3048,6 +3048,82 @@
         "forms": [
           "입학하자마자"
         ]
+      },
+      {
+        "ko": "무슨 일이든",
+        "en": "whatever the task, no matter what it is",
+        "hint": "🗂️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "처음",
+        "en": "the first time, the beginning",
+        "hint": "1️⃣",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "힘들다",
+        "en": "to be hard going",
+        "hint": "😮",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "힘든",
+          "힘들기",
+          "힘들어도"
+        ]
+      },
+      {
+        "ko": "-(으)ㄴ/는 법이다",
+        "en": "that is the way of things — it could not be otherwise",
+        "hint": "⚖️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "힘든 법이다"
+        ]
+      },
+      {
+        "ko": "-기 마련이다",
+        "en": "it is bound to be — the twin of -(으)ㄴ/는 법이다",
+        "hint": "🔁",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "기 마련이다"
+        ]
+      },
+      {
+        "ko": "-아/어도 되다",
+        "en": "it is all right to, you may",
+        "hint": "👌",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "힘들어도 된다"
+        ]
+      },
+      {
+        "ko": "-기만 하다",
+        "en": "it does nothing but",
+        "hint": "☝️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "힘들기만 하다"
+        ]
+      },
+      {
+        "ko": "-(으)ㄴ 모양이다",
+        "en": "it looks as though — an inference from what you can see",
+        "hint": "👀",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "힘든 모양이다"
+        ]
       }
     ]
   },

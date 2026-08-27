@@ -783,7 +783,14 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "-고자", slug: 'kinds_types', folder: 'items', nameEn: "in order to — the written twin of -기 위해서", family: 'fill' },
   { ko: "-고서", slug: 'kinds_types', folder: 'items', nameEn: "having done it, and then", family: 'fill' },
   { ko: "-아/어 봤자", slug: 'kinds_types', folder: 'items', nameEn: "even if you try, it will get you nowhere", family: 'fill' },
-  { ko: "-자마자", slug: 'kinds_types', folder: 'items', nameEn: "the moment it happens", family: 'fill' }
+  { ko: "-자마자", slug: 'kinds_types', folder: 'items', nameEn: "the moment it happens", family: 'fill' },
+  { ko: "무슨 일이든", slug: 'briefcase', folder: 'items', nameEn: "whatever the task", family: 'fill' },
+  { ko: "처음", slug: 'to_begin', folder: 'items', nameEn: "the first time, the beginning", family: 'fill' },
+  { ko: "-(으)ㄴ/는 법이다", slug: 'justice_scales', folder: 'items', nameEn: "that is the way of things", family: 'fill' },
+  { ko: "-기 마련이다", slug: 'justice_scales', folder: 'items', nameEn: "it is bound to be", family: 'fill' },
+  { ko: "-아/어도 되다", slug: 'kinds_types', folder: 'items', nameEn: "it is all right to, you may", family: 'fill' },
+  { ko: "-기만 하다", slug: 'kinds_types', folder: 'items', nameEn: "it does nothing but", family: 'fill' },
+  { ko: "-(으)ㄴ 모양이다", slug: 'kinds_types', folder: 'items', nameEn: "it looks as though", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
