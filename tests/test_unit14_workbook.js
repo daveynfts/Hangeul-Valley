@@ -546,10 +546,16 @@ const exG = wb.exercises.find(e => e.id === 'u14-grammar-1');
   const artKeys = base.run('workbookArtKeys()');
   assert(artKeys.length >= 6, 'the art table holds at least six icons');
   exG.items.forEach((item) => {
-    assert(artKeys.includes(item.art), item.art + ' exists in the art table');
-    const size = base.run("workbookArtSize('" + item.art + "')");
-    assert(size.w === 16 && size.h === 16, item.art + ' is 16x16 (got ' + size.w + 'x' + size.h + ')');
-    assert(size.ragged === 0, item.art + ' has no ragged rows');
+    const key = item.art;
+    if (key && (String(key).indexOf('/') !== -1 || /\.png$/i.test(key))) {
+      const rel = String(key).replace(/^sprites\//, '');
+      assert(fs.existsSync(path.join(ROOT, 'sprites', rel)), key + ' png exists');
+      return;
+    }
+    assert(artKeys.includes(key), key + ' exists in the art table');
+    const size = base.run("workbookArtSize('" + key + "')");
+    assert(size.w === 16 && size.h === 16, key + ' is 16x16 (got ' + size.w + 'x' + size.h + ')');
+    assert(size.ragged === 0, key + ' has no ragged rows');
   });
   const pal = base.run('WORKBOOK_ART_PALETTE');
   artKeys.forEach((k) => {
@@ -1005,6 +1011,13 @@ console.log('\n--- 16. Art coverage ---');
     .filter(Boolean))];
   assert(named.length >= 21, 'the workbook names ' + named.length + ' pictures');
   named.forEach((key) => {
+    if (key && (String(key).indexOf('/') !== -1 || /\.png$/i.test(key))) {
+      const rel = String(key).replace(/^sprites\//, '');
+      assert(fs.existsSync(path.join(ROOT, 'sprites', rel)), key + ' png exists');
+      const html = base.run("workbookIconSvg('" + key + "', 4)");
+      assert(html.indexOf('<img') === 0, key + ' renders as a png');
+      return;
+    }
     assert(artKeys.includes(key), key + ' exists in the art table');
     const size = base.run("workbookArtSize('" + key + "')");
     assert(size.w === 16 && size.h === 16, key + ' is 16x16 (got ' + size.w + 'x' + size.h + ')');

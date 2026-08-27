@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260821b",
+  "cacheKey": "art-20260827e",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -4562,6 +4562,2215 @@
       ],
       "notes": "16-bit still-icon for inventory / recipe / fishing. Magenta-keyed. HTML overlay.",
       "wordKo": "조개"
+    },
+    {
+      "id": "item.medicine_bottle",
+      "nameEn": "Medicine",
+      "kind": "item",
+      "family": "health",
+      "role": "medicine_bottle",
+      "path": "items/medicine_bottle.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.medicine_bottle",
+      "usedBy": [
+        "2b-unit-11",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "약"
+    },
+    {
+      "id": "item.ointment_tube",
+      "nameEn": "Ointment",
+      "kind": "item",
+      "family": "health",
+      "role": "ointment_tube",
+      "path": "items/ointment_tube.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.ointment_tube",
+      "usedBy": [
+        "2b-unit-11",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "연고"
+    },
+    {
+      "id": "item.ginseng_root",
+      "nameEn": "Korean ginseng",
+      "kind": "item",
+      "family": "health",
+      "role": "ginseng_root",
+      "path": "items/ginseng_root.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.ginseng_root",
+      "usedBy": [
+        "2b-unit-11",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "인삼"
+    },
+    {
+      "id": "item.clinic_building",
+      "nameEn": "Hospital / clinic",
+      "kind": "item",
+      "family": "place",
+      "role": "clinic_building",
+      "path": "items/clinic_building.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.clinic_building",
+      "usedBy": [
+        "2b-unit-11",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "병원"
+    },
+    {
+      "id": "food.milk_bottle",
+      "nameEn": "Milk",
+      "kind": "food",
+      "family": "drink",
+      "role": "milk_bottle",
+      "path": "foods/milk_bottle.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.milk_bottle",
+      "usedBy": [
+        "2b-unit-11",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "우유"
+    },
+    {
+      "id": "item.pharmacy_shop",
+      "nameEn": "Pharmacy",
+      "kind": "item",
+      "family": "place",
+      "role": "pharmacy_shop",
+      "path": "items/pharmacy_shop.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.pharmacy_shop",
+      "usedBy": [
+        "2b-unit-11",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "약국"
+    },
+    {
+      "id": "item.medicine_capsule",
+      "nameEn": "Cold medicine capsule",
+      "kind": "item",
+      "family": "health",
+      "role": "medicine_capsule",
+      "path": "items/medicine_capsule.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.medicine_capsule",
+      "usedBy": [
+        "2b-unit-11",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "감기약"
+    },
+    {
+      "id": "item.eye_drops",
+      "nameEn": "Eye drops",
+      "kind": "item",
+      "family": "health",
+      "role": "eye_drops",
+      "path": "items/eye_drops.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.eye_drops",
+      "usedBy": [
+        "2b-unit-11",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "안약"
+    },
+    {
+      "id": "food.jjajangmyeon",
+      "nameEn": "Jjajangmyeon",
+      "kind": "food",
+      "family": "noodle",
+      "role": "jjajangmyeon",
+      "path": "foods/jjajangmyeon.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.jjajangmyeon",
+      "usedBy": [
+        "2b-unit-10",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "짜장면"
+    },
+    {
+      "id": "food.kebab_skewer",
+      "nameEn": "Kebab",
+      "kind": "food",
+      "family": "meat",
+      "role": "kebab_skewer",
+      "path": "foods/kebab_skewer.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.kebab_skewer",
+      "usedBy": [
+        "2b-unit-10",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "케밥"
+    },
+    {
+      "id": "food.green_tea",
+      "nameEn": "Green tea",
+      "kind": "food",
+      "family": "drink",
+      "role": "green_tea",
+      "path": "foods/green_tea.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.green_tea",
+      "usedBy": [
+        "2b-unit-10",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "녹차"
+    },
+    {
+      "id": "item.soy_sauce",
+      "nameEn": "Soy sauce",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "soy_sauce",
+      "path": "items/soy_sauce.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.soy_sauce",
+      "usedBy": [
+        "2b-unit-10",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "간장"
+    },
+    {
+      "id": "item.gochujang_jar",
+      "nameEn": "Chili paste",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "gochujang_jar",
+      "path": "items/gochujang_jar.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.gochujang_jar",
+      "usedBy": [
+        "2b-unit-10",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "고추장"
+    },
+    {
+      "id": "item.vinegar_bottle",
+      "nameEn": "Vinegar",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "vinegar_bottle",
+      "path": "items/vinegar_bottle.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.vinegar_bottle",
+      "usedBy": [
+        "2b-unit-10",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "식초"
+    },
+    {
+      "id": "food.sashimi_plate",
+      "nameEn": "Sliced raw fish",
+      "kind": "food",
+      "family": "meat",
+      "role": "sashimi_plate",
+      "path": "foods/sashimi_plate.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.sashimi_plate",
+      "usedBy": [
+        "2b-unit-10",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "생선회"
+    },
+    {
+      "id": "item.studio_oneroom",
+      "nameEn": "One-room studio",
+      "kind": "item",
+      "family": "place",
+      "role": "studio_oneroom",
+      "path": "items/studio_oneroom.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.studio_oneroom",
+      "usedBy": [
+        "2b-unit-13",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "원룸"
+    },
+    {
+      "id": "quiz.unit11.q01_upset_dizzy",
+      "nameEn": "Unit 11 desk quiz illustration 1",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q1",
+      "path": "quiz/unit11_q01_upset_dizzy.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q02_dentist",
+      "nameEn": "Unit 11 desk quiz illustration 2",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q2",
+      "path": "quiz/unit11_q02_dentist.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q03_dermatology",
+      "nameEn": "Unit 11 desk quiz illustration 3",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q3",
+      "path": "quiz/unit11_q03_dermatology.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q04_ointment",
+      "nameEn": "Unit 11 desk quiz illustration 4",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q4",
+      "path": "quiz/unit11_q04_ointment.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q05_recovered",
+      "nameEn": "Unit 11 desk quiz illustration 5",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q5",
+      "path": "quiz/unit11_q05_recovered.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q06_stir_coffee",
+      "nameEn": "Unit 11 desk quiz illustration 6",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q6",
+      "path": "quiz/unit11_q06_stir_coffee.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q07_medicine_schedule",
+      "nameEn": "Unit 11 desk quiz illustration 7",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q7",
+      "path": "quiz/unit11_q07_medicine_schedule.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q08_warm_milk",
+      "nameEn": "Unit 11 desk quiz illustration 8",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q8",
+      "path": "quiz/unit11_q08_warm_milk.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q09_movie_plan",
+      "nameEn": "Unit 11 desk quiz illustration 9",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q9",
+      "path": "quiz/unit11_q09_movie_plan.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q10_wash_hands",
+      "nameEn": "Unit 11 desk quiz illustration 10",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q10",
+      "path": "quiz/unit11_q10_wash_hands.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q11_pharmacist",
+      "nameEn": "Unit 11 desk quiz illustration 11",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q11",
+      "path": "quiz/unit11_q11_pharmacist.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q12_motion_sickness",
+      "nameEn": "Unit 11 desk quiz illustration 12",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q12",
+      "path": "quiz/unit11_q12_motion_sickness.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit11.q13_ginseng",
+      "nameEn": "Unit 11 desk quiz illustration 13",
+      "kind": "quiz",
+      "family": "unit11-desk-quiz",
+      "role": "q13",
+      "path": "quiz/unit11_q13_ginseng.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-11"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q01_oneroom",
+      "nameEn": "Unit 13 desk quiz illustration 1",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q1",
+      "path": "quiz/unit13_q01_oneroom.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q02_entryway",
+      "nameEn": "Unit 13 desk quiz illustration 2",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q2",
+      "path": "quiz/unit13_q02_entryway.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q03_unsure_house",
+      "nameEn": "Unit 13 desk quiz illustration 3",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q3",
+      "path": "quiz/unit13_q03_unsure_house.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q04_noisy_station",
+      "nameEn": "Unit 13 desk quiz illustration 4",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q4",
+      "path": "quiz/unit13_q04_noisy_station.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q05_lease_ending",
+      "nameEn": "Unit 13 desk quiz illustration 5",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q5",
+      "path": "quiz/unit13_q05_lease_ending.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q06_convenient",
+      "nameEn": "Unit 13 desk quiz illustration 6",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q6",
+      "path": "quiz/unit13_q06_convenient.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q07_deposit_rent",
+      "nameEn": "Unit 13 desk quiz illustration 7",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q7",
+      "path": "quiz/unit13_q07_deposit_rent.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q08_maintenance",
+      "nameEn": "Unit 13 desk quiz illustration 8",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q8",
+      "path": "quiz/unit13_q08_maintenance.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q09_celebrate",
+      "nameEn": "Unit 13 desk quiz illustration 9",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q9",
+      "path": "quiz/unit13_q09_celebrate.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q10_clean",
+      "nameEn": "Unit 13 desk quiz illustration 10",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q10",
+      "path": "quiz/unit13_q10_clean.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q11_boarding_to_studio",
+      "nameEn": "Unit 13 desk quiz illustration 11",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q11",
+      "path": "quiz/unit13_q11_boarding_to_studio.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q12_new_studio",
+      "nameEn": "Unit 13 desk quiz illustration 12",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q12",
+      "path": "quiz/unit13_q12_new_studio.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit13.q13_hanok",
+      "nameEn": "Unit 13 desk quiz illustration 13",
+      "kind": "quiz",
+      "family": "unit13-desk-quiz",
+      "role": "q13",
+      "path": "quiz/unit13_q13_hanok.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-13"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q01_change_paths",
+      "nameEn": "Unit 15 desk quiz illustration 1",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q1",
+      "path": "quiz/unit15_q01_change_paths.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q02_spicy_food",
+      "nameEn": "Unit 15 desk quiz illustration 2",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q2",
+      "path": "quiz/unit15_q02_spicy_food.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q03_become_familiar",
+      "nameEn": "Unit 15 desk quiz illustration 3",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q3",
+      "path": "quiz/unit15_q03_become_familiar.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q04_get_hotter",
+      "nameEn": "Unit 15 desk quiz illustration 4",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q4",
+      "path": "quiz/unit15_q04_get_hotter.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q05_price_up",
+      "nameEn": "Unit 15 desk quiz illustration 5",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q5",
+      "path": "quiz/unit15_q05_price_up.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q06_library_appears",
+      "nameEn": "Unit 15 desk quiz illustration 6",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q6",
+      "path": "quiz/unit15_q06_library_appears.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q07_village_shrink",
+      "nameEn": "Unit 15 desk quiz illustration 7",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q7",
+      "path": "quiz/unit15_q07_village_shrink.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q08_before_korea",
+      "nameEn": "Unit 15 desk quiz illustration 8",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q8",
+      "path": "quiz/unit15_q08_before_korea.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q09_after_class",
+      "nameEn": "Unit 15 desk quiz illustration 9",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q9",
+      "path": "quiz/unit15_q09_after_class.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q10_before_living",
+      "nameEn": "Unit 15 desk quiz illustration 10",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q10",
+      "path": "quiz/unit15_q10_before_living.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q11_become_many",
+      "nameEn": "Unit 15 desk quiz illustration 11",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q11",
+      "path": "quiz/unit15_q11_become_many.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q12_enter_graduate",
+      "nameEn": "Unit 15 desk quiz illustration 12",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q12",
+      "path": "quiz/unit15_q12_enter_graduate.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "quiz.unit15.q13_birth",
+      "nameEn": "Unit 15 desk quiz illustration 13",
+      "kind": "quiz",
+      "family": "unit15-desk-quiz",
+      "role": "q13",
+      "path": "quiz/unit15_q13_birth.png",
+      "status": "shipped",
+      "heightClass": "illustration",
+      "parentId": "quiz.unit14.q01_two_hands",
+      "usedBy": [
+        "2b-unit-15"
+      ],
+      "notes": "Desk-quiz illustration. 16-bit framed scene. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.heat_patch",
+      "nameEn": "Medicated heat patch",
+      "kind": "item",
+      "family": "health",
+      "role": "heat_patch",
+      "path": "items/heat_patch.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.heat_patch",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "파스"
+    },
+    {
+      "id": "item.bandaged_boot",
+      "nameEn": "Bandaged boot",
+      "kind": "item",
+      "family": "health",
+      "role": "bandaged_boot",
+      "path": "items/bandaged_boot.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.bandaged_boot",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "다리를 다치다"
+    },
+    {
+      "id": "item.ice_pack",
+      "nameEn": "Ice pack",
+      "kind": "item",
+      "family": "health",
+      "role": "ice_pack",
+      "path": "items/ice_pack.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.ice_pack",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "머리가 아프다"
+    },
+    {
+      "id": "item.eyeglasses",
+      "nameEn": "Eyeglasses",
+      "kind": "item",
+      "family": "health",
+      "role": "eyeglasses",
+      "path": "items/eyeglasses.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.eyeglasses",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "안과"
+    },
+    {
+      "id": "item.tissue_box",
+      "nameEn": "Tissue box",
+      "kind": "item",
+      "family": "health",
+      "role": "tissue_box",
+      "path": "items/tissue_box.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.tissue_box",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "감기에 걸리다"
+    },
+    {
+      "id": "item.cracked_tooth",
+      "nameEn": "Aching tooth",
+      "kind": "item",
+      "family": "health",
+      "role": "cracked_tooth",
+      "path": "items/cracked_tooth.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.cracked_tooth",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "이가 아프다"
+    },
+    {
+      "id": "item.stethoscope",
+      "nameEn": "Stethoscope",
+      "kind": "item",
+      "family": "health",
+      "role": "stethoscope",
+      "path": "items/stethoscope.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.stethoscope",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "내과"
+    },
+    {
+      "id": "item.thermometer",
+      "nameEn": "Thermometer",
+      "kind": "item",
+      "family": "health",
+      "role": "thermometer",
+      "path": "items/thermometer.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.thermometer",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "열이 나다"
+    },
+    {
+      "id": "item.human_ear",
+      "nameEn": "Ear",
+      "kind": "item",
+      "family": "health",
+      "role": "human_ear",
+      "path": "items/human_ear.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.human_ear",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "이비인후과"
+    },
+    {
+      "id": "item.sugar_bowl",
+      "nameEn": "Sugar bowl",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "sugar_bowl",
+      "path": "items/sugar_bowl.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.sugar_bowl",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "설탕"
+    },
+    {
+      "id": "item.femur_bone",
+      "nameEn": "Bone",
+      "kind": "item",
+      "family": "health",
+      "role": "femur_bone",
+      "path": "items/femur_bone.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.femur_bone",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "정형외과"
+    },
+    {
+      "id": "item.wooden_spoon",
+      "nameEn": "Wooden spoon",
+      "kind": "item",
+      "family": "action",
+      "role": "wooden_spoon",
+      "path": "items/wooden_spoon.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.wooden_spoon",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "젓다"
+    },
+    {
+      "id": "item.prescription_slip",
+      "nameEn": "Prescription",
+      "kind": "item",
+      "family": "health",
+      "role": "prescription_slip",
+      "path": "items/prescription_slip.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.prescription_slip",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "처방"
+    },
+    {
+      "id": "item.salt_shaker",
+      "nameEn": "Salt shaker",
+      "kind": "item",
+      "family": "ingredient",
+      "role": "salt_shaker",
+      "path": "items/salt_shaker.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.salt_shaker",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "소금"
+    },
+    {
+      "id": "item.empty_plate",
+      "nameEn": "Empty plate",
+      "kind": "item",
+      "family": "health",
+      "role": "empty_plate",
+      "path": "items/empty_plate.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.empty_plate",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "입맛이 없다"
+    },
+    {
+      "id": "item.soap_bar",
+      "nameEn": "Bar of soap",
+      "kind": "item",
+      "family": "health",
+      "role": "soap_bar",
+      "path": "items/soap_bar.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.soap_bar",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "손을 씻다"
+    },
+    {
+      "id": "item.green_sofa",
+      "nameEn": "Sofa",
+      "kind": "item",
+      "family": "place",
+      "role": "green_sofa",
+      "path": "items/green_sofa.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.green_sofa",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "거실"
+    },
+    {
+      "id": "item.apartment_block",
+      "nameEn": "Apartment block",
+      "kind": "item",
+      "family": "place",
+      "role": "apartment_block",
+      "path": "items/apartment_block.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.apartment_block",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "아파트"
+    },
+    {
+      "id": "item.kitchen_stove",
+      "nameEn": "Kitchen stove",
+      "kind": "item",
+      "family": "place",
+      "role": "kitchen_stove",
+      "path": "items/kitchen_stove.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.kitchen_stove",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "부엌"
+    },
+    {
+      "id": "item.toilet",
+      "nameEn": "Toilet",
+      "kind": "item",
+      "family": "place",
+      "role": "toilet",
+      "path": "items/toilet.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.toilet",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "화장실"
+    },
+    {
+      "id": "item.hanok_house",
+      "nameEn": "Hanok",
+      "kind": "item",
+      "family": "place",
+      "role": "hanok_house",
+      "path": "items/hanok_house.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.hanok_house",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "한옥"
+    },
+    {
+      "id": "item.dormitory",
+      "nameEn": "Dormitory",
+      "kind": "item",
+      "family": "place",
+      "role": "dormitory",
+      "path": "items/dormitory.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.dormitory",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "기숙사"
+    },
+    {
+      "id": "item.moving_boxes",
+      "nameEn": "Moving boxes",
+      "kind": "item",
+      "family": "place",
+      "role": "moving_boxes",
+      "path": "items/moving_boxes.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.moving_boxes",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "이사하다"
+    },
+    {
+      "id": "item.wrapped_baby",
+      "nameEn": "Newborn",
+      "kind": "item",
+      "family": "people",
+      "role": "wrapped_baby",
+      "path": "items/wrapped_baby.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.wrapped_baby",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "태어나다"
+    },
+    {
+      "id": "item.wedding_rings",
+      "nameEn": "Wedding rings",
+      "kind": "item",
+      "family": "people",
+      "role": "wedding_rings",
+      "path": "items/wedding_rings.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.wedding_rings",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "결혼하다"
+    },
+    {
+      "id": "item.exit_door",
+      "nameEn": "Exit door",
+      "kind": "item",
+      "family": "place",
+      "role": "exit_door",
+      "path": "items/exit_door.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.exit_door",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "출구"
+    },
+    {
+      "id": "item.briefcase",
+      "nameEn": "Briefcase",
+      "kind": "item",
+      "family": "people",
+      "role": "briefcase",
+      "path": "items/briefcase.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.briefcase",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "취직하다"
+    },
+    {
+      "id": "item.detached_house",
+      "nameEn": "Detached house",
+      "kind": "item",
+      "family": "place",
+      "role": "detached_house",
+      "path": "items/detached_house.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.detached_house",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "주택"
+    },
+    {
+      "id": "item.diploma_scroll",
+      "nameEn": "Diploma",
+      "kind": "item",
+      "family": "people",
+      "role": "diploma_scroll",
+      "path": "items/diploma_scroll.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.diploma_scroll",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "졸업하다"
+    },
+    {
+      "id": "item.school_backpack",
+      "nameEn": "School backpack",
+      "kind": "item",
+      "family": "people",
+      "role": "school_backpack",
+      "path": "items/school_backpack.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.school_backpack",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "친구를 사귀다"
+    },
+    {
+      "id": "item.market_stall_icon",
+      "nameEn": "Market stall",
+      "kind": "item",
+      "family": "place",
+      "role": "market_stall_icon",
+      "path": "items/market_stall_icon.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.market_stall_icon",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "재래시장"
+    },
+    {
+      "id": "item.light_bulb",
+      "nameEn": "Light bulb",
+      "kind": "item",
+      "family": "place",
+      "role": "light_bulb",
+      "path": "items/light_bulb.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.light_bulb",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "전기 요금"
+    },
+    {
+      "id": "item.white_pillow",
+      "nameEn": "Pillow",
+      "kind": "item",
+      "family": "health",
+      "role": "white_pillow",
+      "path": "items/white_pillow.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.white_pillow",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "잠을 잘 못 자다"
+    },
+    {
+      "id": "item.contract_seal",
+      "nameEn": "Sealed contract",
+      "kind": "item",
+      "family": "place",
+      "role": "contract_seal",
+      "path": "items/contract_seal.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.contract_seal",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "계약"
+    },
+    {
+      "id": "item.taekwondo_dobok",
+      "nameEn": "Taekwondo uniform",
+      "kind": "item",
+      "family": "people",
+      "role": "taekwondo_dobok",
+      "path": "items/taekwondo_dobok.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.taekwondo_dobok",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "태권도"
+    },
+    {
+      "id": "item.water_faucet",
+      "nameEn": "Water faucet",
+      "kind": "item",
+      "family": "place",
+      "role": "water_faucet",
+      "path": "items/water_faucet.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.water_faucet",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "수도 요금"
+    },
+    {
+      "id": "item.running_shoe",
+      "nameEn": "Running shoe",
+      "kind": "item",
+      "family": "people",
+      "role": "running_shoe",
+      "path": "items/running_shoe.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.running_shoe",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "운동"
+    },
+    {
+      "id": "item.wall_calendar",
+      "nameEn": "Calendar",
+      "kind": "item",
+      "family": "abstract",
+      "role": "wall_calendar",
+      "path": "items/wall_calendar.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.wall_calendar",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "하루"
+    },
+    {
+      "id": "item.sun_icon",
+      "nameEn": "Sun",
+      "kind": "item",
+      "family": "time",
+      "role": "sun_icon",
+      "path": "items/sun_icon.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.sun_icon",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "낮"
+    },
+    {
+      "id": "item.newspaper",
+      "nameEn": "Newspaper",
+      "kind": "item",
+      "family": "media",
+      "role": "newspaper",
+      "path": "items/newspaper.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.newspaper",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "기사"
+    },
+    {
+      "id": "item.vitamin_bottle",
+      "nameEn": "Vitamin bottle",
+      "kind": "item",
+      "family": "health",
+      "role": "vitamin_bottle",
+      "path": "items/vitamin_bottle.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.vitamin_bottle",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "영양제"
+    },
+    {
+      "id": "item.justice_scales",
+      "nameEn": "Scales of justice",
+      "kind": "item",
+      "family": "people",
+      "role": "justice_scales",
+      "path": "items/justice_scales.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.justice_scales",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "변호사"
+    },
+    {
+      "id": "item.crescent_moon",
+      "nameEn": "Moon",
+      "kind": "item",
+      "family": "time",
+      "role": "crescent_moon",
+      "path": "items/crescent_moon.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.crescent_moon",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "밤"
+    },
+    {
+      "id": "item.desk_globe",
+      "nameEn": "Globe",
+      "kind": "item",
+      "family": "place",
+      "role": "desk_globe",
+      "path": "items/desk_globe.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.desk_globe",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "세계"
+    },
+    {
+      "id": "item.leather_wallet",
+      "nameEn": "Wallet",
+      "kind": "item",
+      "family": "money",
+      "role": "leather_wallet",
+      "path": "items/leather_wallet.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.leather_wallet",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "지갑"
+    },
+    {
+      "id": "item.lit_candle",
+      "nameEn": "Candle",
+      "kind": "item",
+      "family": "people",
+      "role": "lit_candle",
+      "path": "items/lit_candle.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.lit_candle",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "죽다"
+    },
+    {
+      "id": "item.schoolhouse",
+      "nameEn": "Schoolhouse",
+      "kind": "item",
+      "family": "place",
+      "role": "schoolhouse",
+      "path": "items/schoolhouse.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.schoolhouse",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "고등학교"
+    },
+    {
+      "id": "item.red_heart",
+      "nameEn": "Heart",
+      "kind": "item",
+      "family": "people",
+      "role": "red_heart",
+      "path": "items/red_heart.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.red_heart",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "사랑에 빠지다"
+    },
+    {
+      "id": "item.silver_mic",
+      "nameEn": "Microphone",
+      "kind": "item",
+      "family": "people",
+      "role": "silver_mic",
+      "path": "items/silver_mic.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.silver_mic",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "발표하다"
+    },
+    {
+      "id": "item.balcony_rail",
+      "nameEn": "Balcony",
+      "kind": "item",
+      "family": "place",
+      "role": "balcony_rail",
+      "path": "items/balcony_rail.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.balcony_rail",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "베란다"
+    },
+    {
+      "id": "item.line_graph",
+      "nameEn": "Line graph",
+      "kind": "item",
+      "family": "abstract",
+      "role": "line_graph",
+      "path": "items/line_graph.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.line_graph",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "line_graph"
+    },
+    {
+      "id": "item.fridge",
+      "nameEn": "Refrigerator",
+      "kind": "item",
+      "family": "place",
+      "role": "fridge",
+      "path": "items/fridge.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.fridge",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "fridge"
+    },
+    {
+      "id": "item.hardcover_book",
+      "nameEn": "Book",
+      "kind": "item",
+      "family": "item",
+      "role": "hardcover_book",
+      "path": "items/hardcover_book.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.hardcover_book",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "hardcover_book"
+    },
+    {
+      "id": "item.cinema_house",
+      "nameEn": "Cinema",
+      "kind": "item",
+      "family": "place",
+      "role": "cinema_house",
+      "path": "items/cinema_house.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.cinema_house",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "cinema_house"
+    },
+    {
+      "id": "item.homework_notebook",
+      "nameEn": "Homework notebook",
+      "kind": "item",
+      "family": "item",
+      "role": "homework_notebook",
+      "path": "items/homework_notebook.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.homework_notebook",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "homework_notebook"
+    },
+    {
+      "id": "item.trash_bag",
+      "nameEn": "Trash bag",
+      "kind": "item",
+      "family": "item",
+      "role": "trash_bag",
+      "path": "items/trash_bag.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.trash_bag",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "trash_bag"
+    },
+    {
+      "id": "item.farm_dog",
+      "nameEn": "Dog",
+      "kind": "item",
+      "family": "people",
+      "role": "farm_dog",
+      "path": "items/farm_dog.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.farm_dog",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "farm_dog"
+    },
+    {
+      "id": "item.estate_broker",
+      "nameEn": "Estate agent",
+      "kind": "item",
+      "family": "people",
+      "role": "estate_broker",
+      "path": "items/estate_broker.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.estate_broker",
+      "usedBy": [
+        "2b-unit-11",
+        "2b-unit-13",
+        "2b-unit-15",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Vocab still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "estate_broker"
+    },
+    {
+      "id": "character.valley_farmer.water.down.0",
+      "nameEn": "Valley farmer watering — south, lift can",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_down_0",
+      "path": "characters/valley-farmer/water_down_0.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_down_0"
+    },
+    {
+      "id": "character.valley_farmer.water.down.1",
+      "nameEn": "Valley farmer watering — south, pour",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_down_1",
+      "path": "characters/valley-farmer/water_down_1.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_down_1"
+    },
+    {
+      "id": "character.valley_farmer.water.down.2",
+      "nameEn": "Valley farmer watering — south, stream",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_down_2",
+      "path": "characters/valley-farmer/water_down_2.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_down_2"
+    },
+    {
+      "id": "character.valley_farmer.water.left.0",
+      "nameEn": "Valley farmer watering — west, lift can",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_left_0",
+      "path": "characters/valley-farmer/water_left_0.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_left_0"
+    },
+    {
+      "id": "character.valley_farmer.water.left.1",
+      "nameEn": "Valley farmer watering — west, pour",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_left_1",
+      "path": "characters/valley-farmer/water_left_1.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_left_1"
+    },
+    {
+      "id": "character.valley_farmer.water.right.1",
+      "nameEn": "Valley farmer watering — east, pour",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_right_1",
+      "path": "characters/valley-farmer/water_right_1.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_right_1"
+    },
+    {
+      "id": "character.valley_farmer.water.up.0",
+      "nameEn": "Valley farmer watering — north, pour",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_up_0",
+      "path": "characters/valley-farmer/water_up_0.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_up_0"
+    },
+    {
+      "id": "character.valley_farmer.water.left.2",
+      "nameEn": "Valley farmer watering — water left 2",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_left_2",
+      "path": "characters/valley-farmer/water_left_2.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_left_2"
+    },
+    {
+      "id": "character.valley_farmer.water.right.0",
+      "nameEn": "Valley farmer watering — water right 0",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_right_0",
+      "path": "characters/valley-farmer/water_right_0.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_right_0"
+    },
+    {
+      "id": "character.valley_farmer.water.right.2",
+      "nameEn": "Valley farmer watering — water right 2",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_right_2",
+      "path": "characters/valley-farmer/water_right_2.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_right_2"
+    },
+    {
+      "id": "character.valley_farmer.water.up.1",
+      "nameEn": "Valley farmer watering — water up 1",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_up_1",
+      "path": "characters/valley-farmer/water_up_1.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_up_1"
+    },
+    {
+      "id": "character.valley_farmer.water.up.2",
+      "nameEn": "Valley farmer watering — water up 2",
+      "kind": "character",
+      "family": "valley-farmer",
+      "role": "water_up_2",
+      "path": "characters/valley-farmer/water_up_2.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_farmer.walk.down.0",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
+      "phaserKey": "farmer_water_up_2"
     }
   ]
 }

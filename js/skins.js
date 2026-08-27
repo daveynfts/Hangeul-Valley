@@ -1,6 +1,6 @@
 // ═══════════════ SKIN CATALOG + FARM HERO ═══════════════════════════════════
 const SKIN_DEFAULT_ID = 'farmer';
-const SKIN_CATALOG_BOOT_V = 'skins-20260820a';
+const SKIN_CATALOG_BOOT_V = 'skins-20260827a';
 const SKIN_CATALOG_DEFAULT = {
   version: 1,
   cacheKey: 'skins-boot',
@@ -20,11 +20,16 @@ const SKIN_CATALOG_DEFAULT = {
         'walk_down_0.png', 'walk_down_1.png', 'walk_down_2.png',
         'walk_up_0.png', 'walk_up_1.png', 'walk_up_2.png',
         'walk_left_0.png', 'walk_left_1.png', 'walk_left_2.png',
-        'walk_right_0.png', 'walk_right_1.png', 'walk_right_2.png'
+        'walk_right_0.png', 'walk_right_1.png', 'walk_right_2.png',
+        'water_down_0.png', 'water_down_1.png', 'water_down_2.png',
+        'water_up_0.png', 'water_up_1.png', 'water_up_2.png',
+        'water_left_0.png', 'water_left_1.png', 'water_left_2.png',
+        'water_right_0.png', 'water_right_1.png', 'water_right_2.png'
       ],
       preview: 'walk_down_0.png',
       states: {
         walk: { dirs: ['down', 'up', 'left', 'right'], frames: 3 },
+        water: { dirs: ['down', 'up', 'left', 'right'], frames: 3 },
         idle: { derived: 'walk/0' }
       }
     },
@@ -69,7 +74,10 @@ function skinStates(def) {
   const walk = (def && def.states && def.states.walk)
     ? def.states.walk
     : { dirs: FARMER_HD_DIRS.slice(), frames: FARMER_HD_FRAMES };
-  return { walk, idle: { derived: 'walk/0' } };
+  const water = (def && def.states && def.states.water)
+    ? def.states.water
+    : { dirs: FARMER_HD_DIRS.slice(), frames: FARMER_HD_FRAMES };
+  return { walk, water, idle: { derived: 'walk/0' } };
 }
 function uniqSkinIds(arr) {
   const out = [];
@@ -171,6 +179,12 @@ function skinUsesHd(scene, def, sceneFit) {
 function farmerHdTextureKey(dir, frame) {
   return 'farmer_walk_' + dir + '_' + frame;
 }
+function skinHasHdAction(scene, state, dir, sceneFit) {
+  const def = resolvedSkinDef(scene);
+  if (!skinUsesHd(scene, def, sceneFit || 'farm')) return false;
+  const key = skinHdKey(def, state || 'water', dir || 'down', 0);
+  return !!(scene && scene.textures && scene.textures.exists(key));
+}
 function skinTextureKey(scene, state, dir, frame, sceneFit) {
   const def = resolvedSkinDef(scene);
   const fit = sceneFit || 'farm';
@@ -186,7 +200,15 @@ function skinTextureKey(scene, state, dir, frame, sceneFit) {
     }
     return mx;
   }
-  if (skinUsesHd(scene, def, fit)) return hd;
+  if (skinUsesHd(scene, def, fit)) {
+    if (st === 'water') {
+      if (scene.textures.exists(hd)) return hd;
+      const down = skinHdKey(def, 'water', 'down', f);
+      if (scene.textures.exists(down)) return down;
+    } else {
+      return hd;
+    }
+  }
   if (scene && scene.textures && scene.textures.exists(mx)) return mx;
   if (scene && scene.textures && scene.textures.exists('player_walk_down_0')) return 'player_walk_' + d + '_' + f;
   return mx;
@@ -212,10 +234,36 @@ function ensureSkinAnims(scene, def, sceneFit) {
     }));
     scene.anims.create({ key, frames, frameRate: 8, repeat: -1 });
   });
+  if (art === 'hd') {
+    const wdirs = (states.water && states.water.dirs) || dirs;
+    const wcount = (states.water && states.water.frames) || FARMER_HD_FRAMES;
+    wdirs.forEach(dir => {
+      const wkey = def.id + '-' + art + '-water-' + dir;
+      if (scene.anims.exists(wkey)) return;
+      const wframes = [];
+      for (let fr = 0; fr < wcount; fr++) {
+        const tex = skinHdKey(def, 'water', dir, fr);
+        if (!scene.textures.exists(tex)) return;
+        wframes.push({ key: tex });
+      }
+      if (wframes.length) scene.anims.create({ key: wkey, frames: wframes, frameRate: 8, repeat: 0 });
+    });
+  }
   if (art === 'hd' && scene.textures && scene.textures.get) {
     dirs.forEach(dir => {
       for (let f = 0; f < FARMER_HD_FRAMES; f++) {
         const tex = scene.textures.get(skinHdKey(def, 'walk', dir, f));
+        if (tex && tex.setFilter && typeof Phaser !== 'undefined' && Phaser.Textures) {
+          tex.setFilter(Phaser.Textures.FilterMode.NEAREST);
+        }
+      }
+    });
+    const wdirs = (states.water && states.water.dirs) || dirs;
+    wdirs.forEach(dir => {
+      for (let f = 0; f < FARMER_HD_FRAMES; f++) {
+        const key = skinHdKey(def, 'water', dir, f);
+        if (!scene.textures.exists(key)) continue;
+        const tex = scene.textures.get(key);
         if (tex && tex.setFilter && typeof Phaser !== 'undefined' && Phaser.Textures) {
           tex.setFilter(Phaser.Textures.FilterMode.NEAREST);
         }

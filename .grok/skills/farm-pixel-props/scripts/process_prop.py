@@ -113,9 +113,9 @@ def process(src: Path, dest: Path, max_h: int = 156, pad: int = 2) -> None:
 
 def pad_set(root: Path, subdir: str, height: int = 80) -> None:
     d = root / "sprites" / safe_subdir(subdir)
-    files = sorted(d.glob("walk_*.png"))
+    files = sorted(list(d.glob("walk_*.png")) + list(d.glob("water_*.png")))
     if not files:
-        raise SystemExit(f"no walk_*.png in {d}")
+        raise SystemExit(f"no walk_*.png or water_*.png in {d}")
     loaded: list[tuple[Path, Image.Image]] = []
     max_w = 0
     for f in files:

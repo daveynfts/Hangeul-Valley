@@ -218,6 +218,45 @@ assert(src.indexOf('farmCostumeSkinId') >= 0, 'farmCostumeSkinId is the Unit 10 
 assert(src.indexOf("if (!skinUsesHd(scene, def, 'farm')) return null;") >= 0,
   'matrix chef does not overlay the HD farmer');
 
+console.log('\n--- 11. HD watering action ---');
+assert(src.indexOf("skinAnimKey(this, 'water', dir, 'farm')") >= 0,
+  'playPlayerAction plays HD water via skinAnimKey');
+assert(src.indexOf('skinHasHdAction(this, \'water\'') >= 0
+  || src.indexOf('skinHasHdAction(this, "water"') >= 0,
+  'playPlayerAction gates HD water on skinHasHdAction');
+assert(src.indexOf('useHdWater') >= 0 && src.indexOf("tool_watering_can") >= 0,
+  'old watering-can overlay stays as matrix fallback');
+assert(src.indexOf('function _waterSplash') >= 0 || src.indexOf('_waterSplash(targetX') >= 0,
+  'HD water spills droplet tweens toward the plot');
+assert(fs.existsSync(path.join(ROOT, 'sprites', 'characters', 'valley-farmer', 'water_down_0.png')),
+  'water_down_0.png is on disk');
+assert(fs.existsSync(path.join(ROOT, 'sprites', 'characters', 'valley-farmer', 'water_down_1.png')),
+  'water_down_1.png is on disk');
+assert(fs.existsSync(path.join(ROOT, 'sprites', 'characters', 'valley-farmer', 'water_down_2.png')),
+  'water_down_2.png is on disk');
+{
+  const waterRows = (catalog.assets || []).filter((a) => a && /^characters\/valley-farmer\/water_/.test(a.path));
+  assert(waterRows.length === 12, 'catalog has 12 HD watering frames (got ' + waterRows.length + ')');
+  waterRows.forEach((a) => {
+    assert(a.phaserKey && a.phaserKey.indexOf('farmer_water_') === 0,
+      a.path + ' phaserKey is farmer_water_*');
+  });
+}
+{
+  const hd = mockScene(true, 'down');
+  hd.textures.exists = function (k) {
+    return k === 'farmer_walk_down_0' || k === 'farmer_water_down_0'
+      || k === 'farmer_water_down_1' || k === 'farmer_water_down_2';
+  };
+  ctx._scene = hd;
+  assert(R('skinHasHdAction(_scene, "water", "down", "farm")') === true,
+    'skinHasHdAction is true when farmer_water_down_0 exists');
+  assert(R('skinTextureKey(_scene, "water", "down", 1, "farm")') === 'farmer_water_down_1',
+    'skinTextureKey water uses farmer_water_*');
+  assert(R('skinAnimKey(_scene, "water", "down", "farm")') === 'farmer-hd-water-down',
+    'skinAnimKey water is farmer-hd-water-down');
+}
+
 console.log('\n--- 10. Stardew contact shadows ---');
 assert(src.indexOf('_penumbra') < 0, 'no sun-stretched penumbra layer');
 assert(src.indexOf("container._type = 'contact'") >= 0, 'shadows are a single contact blob');

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "skins-20260820a",
+  "cacheKey": "skins-20260827a",
   "defaultSkinId": "farmer",
   "skins": [
     {
@@ -25,11 +25,24 @@
         "walk_left_2.png",
         "walk_right_0.png",
         "walk_right_1.png",
-        "walk_right_2.png"
+        "walk_right_2.png",
+        "water_down_0.png",
+        "water_down_1.png",
+        "water_down_2.png",
+        "water_up_0.png",
+        "water_up_1.png",
+        "water_up_2.png",
+        "water_left_0.png",
+        "water_left_1.png",
+        "water_left_2.png",
+        "water_right_0.png",
+        "water_right_1.png",
+        "water_right_2.png"
       ],
       "preview": "walk_down_0.png",
       "states": {
         "walk": { "dirs": ["down", "up", "left", "right"], "frames": 3 },
+        "water": { "dirs": ["down", "up", "left", "right"], "frames": 3 },
         "idle": { "derived": "walk/0" }
       }
     },

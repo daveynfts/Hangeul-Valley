@@ -17,7 +17,8 @@
         "B": "An upset stomach and dizziness",
         "C": "A fever and aches all over",
         "D": "No appetite and no energy"
-      }
+      },
+      "art": "quiz/unit11_q01_upset_dizzy.png"
     },
     {
       "id": 2,
@@ -28,7 +29,8 @@
         "B": "안과",
         "C": "치과",
         "D": "이비인후과"
-      }
+      },
+      "art": "quiz/unit11_q02_dentist.png"
     },
     {
       "id": 3,
@@ -39,7 +41,8 @@
         "B": "정형외과",
         "C": "안과",
         "D": "내과"
-      }
+      },
+      "art": "quiz/unit11_q03_dermatology.png"
     },
     {
       "id": 4,
@@ -50,7 +53,8 @@
         "B": "넣어요",
         "C": "붙여요",
         "D": "발라요"
-      }
+      },
+      "art": "quiz/unit11_q04_ointment.png"
     },
     {
       "id": 5,
@@ -61,7 +65,8 @@
         "B": "나았어요",
         "C": "낳았어요",
         "D": "났어요"
-      }
+      },
+      "art": "quiz/unit11_q05_recovered.png"
     },
     {
       "id": 6,
@@ -72,7 +77,8 @@
         "B": "저어서",
         "C": "젓아서",
         "D": "젖어서"
-      }
+      },
+      "art": "quiz/unit11_q06_stir_coffee.png"
     },
     {
       "id": 7,
@@ -83,7 +89,8 @@
         "B": "씩",
         "C": "부터",
         "D": "처럼"
-      }
+      },
+      "art": "quiz/unit11_q07_medicine_schedule.png"
     },
     {
       "id": 8,
@@ -94,7 +101,8 @@
         "B": "따뜻한 우유를 마시은 게 어때요?",
         "C": "따뜻한 우유를 마셨는 게 어때요?",
         "D": "따뜻한 우유를 마실 게 어때요?"
-      }
+      },
+      "art": "quiz/unit11_q08_warm_milk.png"
     },
     {
       "id": 9,
@@ -105,7 +113,8 @@
         "B": "유진 씨랑 영화 보러 가기를 했어요.",
         "C": "유진 씨랑 영화 보러 갈 것 같아요.",
         "D": "유진 씨랑 영화 보러 가는 게 어때요?"
-      }
+      },
+      "art": "quiz/unit11_q09_movie_plan.png"
     },
     {
       "id": 10,
@@ -116,7 +125,8 @@
         "B": "손을 씻는 것보다 영양제를 먹는 것이 더 좋습니다.",
         "C": "외출하기 전에 꼭 손을 씻어야 합니다.",
         "D": "손을 씻으면 소화가 잘 됩니다."
-      }
+      },
+      "art": "quiz/unit11_q10_wash_hands.png"
     },
     {
       "id": 11,
@@ -127,7 +137,8 @@
         "B": "What brings you here? / What seems to be the problem?",
         "C": "When did you get here?",
         "D": "Who did you come with?"
-      }
+      },
+      "art": "quiz/unit11_q11_pharmacist.png"
     },
     {
       "id": 12,
@@ -138,7 +149,8 @@
         "B": "멀미약",
         "C": "소화제",
         "D": "두통약"
-      }
+      },
+      "art": "quiz/unit11_q12_motion_sickness.png"
     },
     {
       "id": 13,
@@ -149,7 +161,8 @@
         "B": "A rice porridge eaten for an upset stomach",
         "C": "Korean ginseng, a root taken for health",
         "D": "A green tea drunk after meals"
-      }
+      },
+      "art": "quiz/unit11_q13_ginseng.png"
     }
   ]
 }

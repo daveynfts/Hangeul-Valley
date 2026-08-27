@@ -56,7 +56,8 @@
           "en": "kimchi stew",
           "why": "The everyday stew, and the one that wants kimchi already gone sour — fresh kimchi will not give the broth its depth. Pork belly and tofu go in with it, which is why 삼겹살 turns up later on this page as well.",
           "grammar": "김치 + 찌개. Nearly every stew name is built this way: the thing it is made of, then the kind of dish. Once you can hear where the seam is, half the menu reads itself.",
-          "img": "sprites/foods/kimchi_stew.png"
+          "img": "sprites/foods/kimchi_stew.png",
+          "art": "quiz/unit10_q01_kimchi_stew.png"
         },
         {
           "n": 2,
@@ -64,7 +65,8 @@
           "en": "soybean-paste stew",
           "why": "된장 is fermented soybean paste, the salty brown one. The stew is what a Korean home eats with rice most nights — closer to a staple than a dish you would order out.",
           "grammar": "된장 + 찌개. Worth keeping 된장 apart from 고추장, the red chilli paste, and 간장, soy sauce — 장 is the family word for all three.",
-          "img": "sprites/foods/soybean_paste_stew.png"
+          "img": "sprites/foods/soybean_paste_stew.png",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png"
         },
         {
           "n": 3,
@@ -72,7 +74,8 @@
           "en": "soft-tofu stew",
           "why": "순두부 is tofu that was never pressed, so it comes out of the pot in soft curds rather than cubes. It arrives still boiling and a raw egg is usually cracked into it at the table.",
           "grammar": "순 + 두부 + 찌개. 순 means unmixed or pure, the same 순 as in 순수하다. So 순두부 is tofu in its first state, before anything is done to it.",
-          "img": "sprites/foods/soft_tofu_stew.png"
+          "img": "sprites/foods/soft_tofu_stew.png",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png"
         },
         {
           "n": 4,
@@ -80,7 +83,8 @@
           "en": "pork-bone potato stew",
           "why": "Pork spine simmered for hours until the meat gives, with potato, perilla leaf and greens. A late-night dish — the sort of thing eaten sitting on plastic stools after work.",
           "grammar": "감자 + 탕. 감자 is potato, though there is a long argument that the 감자 here is a cut of the pig rather than the vegetable. Either way the ending 탕 marks it as the long-simmered kind of soup.",
-          "img": "sprites/foods/pork_bone_potato_stew.png"
+          "img": "sprites/foods/pork_bone_potato_stew.png",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png"
         },
         {
           "n": 5,
@@ -88,7 +92,8 @@
           "en": "spicy fish stew",
           "why": "Whatever fish was fresh, boiled up with chilli, radish and 쑥갓. Often what happens to the bones and head after the good cuts have been served as 회.",
           "grammar": "맵다 → 매운 + 탕. This is the one dish on the page whose name starts with an adjective in its modifier form — 맵다 loses its 다 and takes -운, exactly as it does in 매운 음식.",
-          "img": "sprites/foods/spicy_fish_stew.png"
+          "img": "sprites/foods/spicy_fish_stew.png",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png"
         },
         {
           "n": 6,
@@ -96,7 +101,8 @@
           "en": "ox-bone soup",
           "why": "Ox bones boiled long enough that the broth turns milky white and tastes of almost nothing until you salt it yourself at the table. The salt, spring onion and rice are the point — it arrives deliberately plain.",
           "grammar": "설렁 + 탕. Unlike the other five this name does not come apart into words you already know; it is worth learning whole. Note it is 탕 and not 찌개 — you get your own bowl.",
-          "img": "sprites/foods/ox_bone_soup.png"
+          "img": "sprites/foods/ox_bone_soup.png",
+          "art": "quiz/unit10_q06_ox_bone_soup.png"
         }
       ]
     },
@@ -144,7 +150,8 @@
           "en": "cold noodles",
           "why": "Buckwheat noodles in an icy broth, eaten in the heat of summer. Scissors come with it, because the noodles are too long and too chewy to bite through politely.",
           "grammar": "냉(冷) + 면(麵), cold + noodle, both Sino-Korean. The same 냉 is in 냉장고, the cold-storage box, and the same 면 is in 라면.",
-          "img": "sprites/foods/cold_noodles.png"
+          "img": "sprites/foods/cold_noodles.png",
+          "art": "quiz/unit10_q01_kimchi_stew.png"
         },
         {
           "n": 2,
@@ -152,7 +159,8 @@
           "en": "knife-cut noodles",
           "why": "The dough is rolled out and cut into strips by hand, so the noodles come out uneven and the starch clouds the broth. Anchovy or clam stock, and a rainy day.",
           "grammar": "칼 + 국수, knife + noodles. This is the native Korean word for noodles; 면 is the Sino-Korean one. Both mean the same thing, and which one a dish uses is just which language its name came from.",
-          "img": "sprites/foods/knife_cut_noodles.png"
+          "img": "sprites/foods/knife_cut_noodles.png",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png"
         },
         {
           "n": 3,
@@ -160,7 +168,8 @@
           "en": "spicy mixed noodles",
           "why": "No broth — the noodles are tossed in gochujang, vinegar and sugar until every strand is red. Served cold, usually with a boiled egg and cucumber on top.",
           "grammar": "비비다 → 비빔 + 국수. 비비다 is to rub or mix, and 비빔 is the noun made from it. The same 비빔 gives 비빔밥, mixed rice, which is the dish this one is named after.",
-          "img": "sprites/foods/spicy_mixed_noodles.png"
+          "img": "sprites/foods/spicy_mixed_noodles.png",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png"
         },
         {
           "n": 4,
@@ -168,7 +177,8 @@
           "en": "grilled pork belly",
           "why": "Grilled at the table on a slanted pan so the fat runs off, then cut with scissors and wrapped in lettuce with garlic and ssamjang. The most sociable food in the country.",
           "grammar": "삼(三) + 겹 + 살, three + layer + flesh. The name is a description of the cut: lean and fat in three visible bands. 오겹살, five layers, is the same cut with the skin left on.",
-          "img": "sprites/foods/grilled_pork_belly.png"
+          "img": "sprites/foods/grilled_pork_belly.png",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png"
         },
         {
           "n": 5,
@@ -176,7 +186,8 @@
           "en": "grilled minced ribs",
           "why": "Rib meat taken off the bone, chopped, seasoned and pressed back into a patty before grilling. It began as court food, for eating ribs without having to pick them up.",
           "grammar": "떡 + 갈비, rice cake + ribs. Nothing in it is rice cake — 떡 is there for the shape, because the patty is patted flat the way 떡 is.",
-          "img": "sprites/foods/grilled_minced_ribs.png"
+          "img": "sprites/foods/grilled_minced_ribs.png",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png"
         },
         {
           "n": 6,
@@ -184,7 +195,8 @@
           "en": "braised short ribs",
           "why": "Short ribs simmered slowly in soy sauce with radish, carrot, chestnut and jujube until the meat comes away from the bone. Holiday food — 설날 and 추석.",
           "grammar": "갈비 + 찜. 찜 is the steamed or braised method, from 찌다, and it is what separates this from 갈비구이, the grilled version. The ending is the cooking, not the ingredient.",
-          "img": "sprites/foods/braised_short_ribs.png"
+          "img": "sprites/foods/braised_short_ribs.png",
+          "art": "quiz/unit10_q06_ox_bone_soup.png"
         }
       ]
     },
@@ -242,7 +254,8 @@
               "who": "B",
               "ko": "소금을 좀 많이 넣은 것 같아요."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q01_kimchi_stew.png"
         },
         {
           "n": 2,
@@ -259,7 +272,8 @@
               "who": "B",
               "ko": "저는 {} 음식을 잘 못 먹어요."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q02_soybean_paste_stew.png"
         },
         {
           "n": 3,
@@ -276,7 +290,8 @@
               "who": "B",
               "ko": "그럼 우유나 설탕을 좀 넣으세요."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q03_soft_tofu_stew.png"
         },
         {
           "n": 4,
@@ -293,7 +308,8 @@
               "who": "B",
               "ko": "아, 제가 요즘 다이어트 중이에요. 그래서 {} 것을 안 먹어요."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png"
         },
         {
           "n": 5,
@@ -310,7 +326,8 @@
               "who": "B",
               "ko": "식초를 많이 넣어서 좀 {}."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q05_spicy_fish_stew.png"
         }
       ]
     },
@@ -359,7 +376,8 @@
           "en": "This restaurant has a nice atmosphere, so it would be a good place for a date.",
           "why": "Nothing about the food or the price — the reason given is that it suits a date, and that is what 분위기 covers: the feel of a place, its lighting and quiet and how it makes you want to behave.",
           "grammar": "분위기 ends in the vowel ㅣ, so the subject particle is 가. -아/어서 gives the reason, and -(으)ㄹ 것 같다 at the end is a guess: it would probably be good.",
-          "stemKo": "이 식당은 {} 좋아서 데이트할 때 가면 좋을 것 같아요."
+          "stemKo": "이 식당은 {} 좋아서 데이트할 때 가면 좋을 것 같아요.",
+          "art": "items/cafeteria.png"
         },
         {
           "n": 2,
@@ -367,7 +385,8 @@
           "en": "This restaurant has good service. The staff are very kind.",
           "why": "The second sentence explains the first: the staff are kind, so what is good is the service. 서비스 in Korean also stretches to mean something given free — a dish 서비스로 is on the house.",
           "grammar": "서비스 ends in the vowel ㅡ, so again 가. Note 직원들 — 들 marks the plural, which Korean uses only when it matters.",
-          "stemKo": "이 식당은 {} 좋아요. 직원들이 아주 친절해요."
+          "stemKo": "이 식당은 {} 좋아요. 직원들이 아주 친절해요.",
+          "art": "items/restaurant_staff.png"
         },
         {
           "n": 3,
@@ -375,7 +394,8 @@
           "en": "This restaurant is easy to get to. It’s a five-minute walk from the subway station.",
           "why": "Five minutes from the station is about getting there, not about the food, so it is 교통. 편리하다 is the word for convenient in this sense — easy to reach.",
           "grammar": "교통 ends in the consonant ㅇ, so the particle is 이 rather than 가. 걸어서 is 걷다 with -아/어서: the ㄷ turns to ㄹ before a vowel, the same ㄷ-irregular as 듣다 → 들어요.",
-          "stemKo": "이 식당은 {} 편리해요. 지하철역에서 걸어서 5분 걸려요."
+          "stemKo": "이 식당은 {} 편리해요. 지하철역에서 걸어서 5분 걸려요.",
+          "art": "items/subway_station.png"
         }
       ]
     },
@@ -394,7 +414,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "items/garden_strawberry.png",
           "phraseKo": "사과 · 딸기 · 오렌지 · 포도",
           "lines": [
             {
@@ -427,7 +447,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "foods/kimchi_stew.png",
           "phraseKo": "김치찌개 · 비빔밥 · 냉면 · 불고기",
           "lines": [
             {
@@ -460,7 +480,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "축구 · 농구 · 야구 · 수영",
           "lines": [
             {
@@ -493,7 +513,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "민수 · 아키라 · 켈리",
           "lines": [
             {
@@ -526,7 +546,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png",
           "phraseKo": "1월 · 2월 · 3월 … 12월",
           "lines": [
             {
@@ -559,7 +579,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q01_kimchi_stew.png",
         "phraseKo": "민수 씨 가족 사진",
         "lines": [
           {
@@ -590,7 +610,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "세계 / 높다",
           "lines": [
             {
@@ -638,7 +658,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "한국 / 크다",
           "lines": [
             {
@@ -686,7 +706,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "items/complicated.png",
           "phraseKo": "서울 / 복잡하다",
           "lines": [
             {
@@ -734,7 +754,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "items/flavor.png",
           "phraseKo": "학교 근처 / 맛있다",
           "lines": [
             {
@@ -782,7 +802,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png",
           "phraseKo": "우리 반 / 인기가 많다",
           "lines": [
             {
@@ -830,7 +850,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q02_soybean_paste_stew.png",
         "phraseKo": "서울 / 크다",
         "lines": [
           {
@@ -926,7 +946,8 @@
               "who": "B",
               "ko": "그래, 전화할게."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q01_kimchi_stew.png"
         },
         {
           "n": 2,
@@ -943,7 +964,8 @@
               "who": "B",
               "ko": "{} 벌써 먹었는데."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q02_soybean_paste_stew.png"
         },
         {
           "n": 3,
@@ -960,7 +982,8 @@
               "who": "B",
               "ko": "아, 그거 {} 책이야."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q03_soft_tofu_stew.png"
         },
         {
           "n": 4,
@@ -977,7 +1000,8 @@
               "who": "B",
               "ko": "그랬어? 오늘 휴대폰을 집에 놓고 왔어."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png"
         },
         {
           "n": 5,
@@ -994,7 +1018,8 @@
               "who": "B",
               "ko": "응, 내 거야."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q05_spicy_fish_stew.png"
         },
         {
           "n": 6,
@@ -1011,7 +1036,8 @@
               "who": "B",
               "ko": "응, {} 갈 거야."
             }
-          ]
+          ],
+          "art": "quiz/unit10_q06_ox_bone_soup.png"
         }
       ],
       "example": {
@@ -1044,7 +1070,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "items/candlelit_table.png",
           "phraseKo": "그 식당은 분위기가 좋아요.",
           "lines": [
             {
@@ -1072,7 +1098,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "foods/cold_noodles.png",
           "phraseKo": "냉면이 좀 매워요.",
           "lines": [
             {
@@ -1100,7 +1126,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "저는 매일 아침 운동을 해요.",
           "lines": [
             {
@@ -1143,7 +1169,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "숙제하고 나서 영화를 볼 거예요.",
           "lines": [
             {
@@ -1171,7 +1197,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png",
           "phraseKo": "시험이 어렵지 않을 거예요.",
           "lines": [
             {
@@ -1199,7 +1225,7 @@
         },
         {
           "n": 6,
-          "art": "",
+          "art": "quiz/unit10_q06_ox_bone_soup.png",
           "phraseKo": "친구가 제 카메라를 잃어버렸어요.",
           "lines": [
             {
@@ -1242,7 +1268,7 @@
         },
         {
           "n": 7,
-          "art": "",
+          "art": "quiz/unit10_q07_cold_noodles.png",
           "phraseKo": "이 옷은 작년에 산 거예요.",
           "lines": [
             {
@@ -1270,7 +1296,7 @@
         },
         {
           "n": 8,
-          "art": "",
+          "art": "items/birthday_cake.png",
           "phraseKo": "내일은 제 친구 생일이에요.",
           "lines": [
             {
@@ -1313,7 +1339,7 @@
         },
         {
           "n": 9,
-          "art": "",
+          "art": "quiz/unit10_q09_spicy_mixed_noodles.png",
           "phraseKo": "극장에 사람이 정말 많네요.",
           "lines": [
             {
@@ -1341,7 +1367,7 @@
         },
         {
           "n": 10,
-          "art": "",
+          "art": "quiz/unit10_q10_grilled_pork_belly.png",
           "phraseKo": "같이 커피 마시러 가요.",
           "lines": [
             {
@@ -1369,7 +1395,7 @@
         },
         {
           "n": 11,
-          "art": "",
+          "art": "quiz/unit10_q11_grilled_minced_ribs.png",
           "phraseKo": "도착하면 저한테 전화해 주세요.",
           "lines": [
             {
@@ -1412,7 +1438,7 @@
         },
         {
           "n": 12,
-          "art": "",
+          "art": "quiz/unit10_q12_braised_short_ribs.png",
           "phraseKo": "내일은 늦지 마세요.",
           "lines": [
             {
@@ -1440,7 +1466,7 @@
         },
         {
           "n": 13,
-          "art": "",
+          "art": "quiz/unit10_q13_ginseng_chicken_soup.png",
           "phraseKo": "제가 전화로 주문할게요.",
           "lines": [
             {
@@ -1483,7 +1509,7 @@
         },
         {
           "n": 14,
-          "art": "",
+          "art": "items/weekend.png",
           "phraseKo": "주말에 같이 산에 갈까요?",
           "lines": [
             {
@@ -1511,7 +1537,7 @@
         },
         {
           "n": 15,
-          "art": "",
+          "art": "quiz/unit10_q15_sweet.png",
           "phraseKo": "오늘 날씨가 아주 춥지요?",
           "lines": [
             {
@@ -1539,7 +1565,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q03_soft_tofu_stew.png",
         "phraseKo": "비빔밥이 맛있어요.",
         "lines": [
           {
@@ -1568,7 +1594,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1601,7 +1627,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1634,7 +1660,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1667,7 +1693,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1700,7 +1726,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1733,7 +1759,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
         "phraseKo": "",
         "lines": [
           {
@@ -1764,7 +1790,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "지금 어디에서 사십니까?",
           "lines": [
             {
@@ -1792,7 +1818,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "한국 생활이 재미있어요?",
           "lines": [
             {
@@ -1820,7 +1846,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "items/korean_radish.png",
           "phraseKo": "무슨 음식을 좋아해요?",
           "lines": [
             {
@@ -1848,7 +1874,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "한국어 공부 때문에 힘들지요?",
           "lines": [
             {
@@ -1876,7 +1902,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png",
           "phraseKo": "몇 시쯤 집에 갈 거예요?",
           "lines": [
             {
@@ -1904,7 +1930,7 @@
         },
         {
           "n": 6,
-          "art": "",
+          "art": "quiz/unit10_q06_ox_bone_soup.png",
           "phraseKo": "성함이 어떻게 되십니까?",
           "lines": [
             {
@@ -1947,7 +1973,7 @@
         },
         {
           "n": 7,
-          "art": "",
+          "art": "quiz/unit10_q07_cold_noodles.png",
           "phraseKo": "오늘 점심 같이 먹을까요?",
           "lines": [
             {
@@ -1975,7 +2001,7 @@
         },
         {
           "n": 8,
-          "art": "",
+          "art": "quiz/unit10_q08_knife_cut_noodles.png",
           "phraseKo": "오늘 기분이 어때요?",
           "lines": [
             {
@@ -2003,7 +2029,7 @@
         },
         {
           "n": 9,
-          "art": "",
+          "art": "quiz/unit10_q09_spicy_mixed_noodles.png",
           "phraseKo": "내일 아침에 늦지 마세요.",
           "lines": [
             {
@@ -2031,7 +2057,7 @@
         },
         {
           "n": 10,
-          "art": "",
+          "art": "items/sour_taste.png",
           "phraseKo": "주말에 만납시다.",
           "lines": [
             {
@@ -2059,7 +2085,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q05_spicy_fish_stew.png",
         "phraseKo": "지금 어디에서 사십니까?",
         "lines": [
           {
@@ -2088,7 +2114,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "네, 괜찮아요.",
           "lines": [
             {
@@ -2132,7 +2158,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "숙제하는 중이었어요.",
           "lines": [
             {
@@ -2161,7 +2187,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "스티븐 씨, 한국 전통 음악 좋아하지요?",
           "lines": [
             {
@@ -2190,7 +2216,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "네, 좋아해요.",
           "lines": [
             {
@@ -2234,7 +2260,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png",
           "phraseKo": "그런데 왜요?",
           "lines": [
             {
@@ -2263,7 +2289,7 @@
         },
         {
           "n": 6,
-          "art": "",
+          "art": "quiz/unit10_q06_ox_bone_soup.png",
           "phraseKo": "국립국악원에서 하는 외국인을 위한 국악 수업이 있는데 스티븐 씨가 좋아할 것 같아서 전화했어요.",
           "lines": [
             {
@@ -2307,7 +2333,7 @@
         },
         {
           "n": 7,
-          "art": "",
+          "art": "items/korean_radish.png",
           "phraseKo": "그래요? 무슨 요일에 하는데요?",
           "lines": [
             {
@@ -2351,7 +2377,7 @@
         },
         {
           "n": 8,
-          "art": "",
+          "art": "quiz/unit10_q08_knife_cut_noodles.png",
           "phraseKo": "토요일에 하는데 자세한 것은 전화해서 물어보세요. 문자로 전화번호 보내 줄게요.",
           "lines": [
             {
@@ -2395,7 +2421,7 @@
         },
         {
           "n": 9,
-          "art": "",
+          "art": "quiz/unit10_q09_spicy_mixed_noodles.png",
           "phraseKo": "네, 고마워요.",
           "lines": [
             {
@@ -2439,7 +2465,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q06_ox_bone_soup.png",
         "phraseKo": "스티븐 씨, 지금 통화 괜찮아요?",
         "lines": [
           {
@@ -2466,7 +2492,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "영화 보러 가다",
           "lines": [
             {
@@ -2514,7 +2540,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "태권도를 배우다",
           "lines": [
             {
@@ -2562,7 +2588,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "점심 먹다",
           "lines": [
             {
@@ -2610,7 +2636,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "산책하다",
           "lines": [
             {
@@ -2658,7 +2684,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png",
           "phraseKo": "테니스를 치다",
           "lines": [
             {
@@ -2706,7 +2732,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q07_cold_noodles.png",
         "phraseKo": "라면을 끓이다",
         "lines": [
           {
@@ -2738,7 +2764,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "택시 / 지하철",
           "lines": [
             {
@@ -2786,7 +2812,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "백화점 / 시장",
           "lines": [
             {
@@ -2834,7 +2860,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "산 / 바다",
           "lines": [
             {
@@ -2882,7 +2908,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "커피 / 아이스크림",
           "lines": [
             {
@@ -2930,7 +2956,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q08_knife_cut_noodles.png",
         "phraseKo": "갈비탕 / 냉면",
         "lines": [
           {
@@ -2962,7 +2988,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "foods/meat.png",
           "phraseKo": "소고기 / 돼지고기",
           "lines": [
             {
@@ -2990,7 +3016,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "부산 / 제주도",
           "lines": [
             {
@@ -3018,7 +3044,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "나나 씨 집 / 켈리 씨 집",
           "lines": [
             {
@@ -3046,7 +3072,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "어제 / 오늘",
           "lines": [
             {
@@ -3074,7 +3100,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "items/korean_radish.png",
           "phraseKo": "코미디 영화 / 무서운 영화",
           "lines": [
             {
@@ -3117,7 +3143,7 @@
         },
         {
           "n": 6,
-          "art": "",
+          "art": "foods/green_tea.png",
           "phraseKo": "녹차 / 커피",
           "lines": [
             {
@@ -3160,7 +3186,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q09_spicy_mixed_noodles.png",
         "phraseKo": "축구 / 농구",
         "lines": [
           {
@@ -3186,7 +3212,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3219,7 +3245,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3252,7 +3278,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3285,7 +3311,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3318,7 +3344,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3351,7 +3377,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q10_grilled_pork_belly.png",
         "phraseKo": "",
         "lines": [
           {
@@ -3409,7 +3435,8 @@
           "en": "It’s exam period, but I haven’t been able to study much.",
           "why": "Exam weeks are when you would expect someone to be at their books, so the half that turns it has to be the studying that did not happen. 기간 is a stretch of time — 시험 기간, the weeks the exams run.",
           "grammar": "기간 is a noun, so the form is -인데: 기간 + 인데, which is 이다 with -는데 on it. That is the N인데 in the heading of this page. And 못 했어요 is could not rather than did not — the difference between being stopped and choosing.",
-          "stemKo": "시험 기간인데"
+          "stemKo": "시험 기간인데",
+          "art": "quiz/unit10_q01_kimchi_stew.png"
         },
         {
           "n": 2,
@@ -3417,7 +3444,8 @@
           "en": "I took medicine, but it still hurts.",
           "why": "Medicine is for stopping the hurting, so still hurting is exactly what does not follow from it. 아직도 is the still that goes with something you had every reason to expect to be over.",
           "grammar": "약을 먹다 — Korean eats medicine rather than taking it. 먹었는데 is past, so -는데. And 아프다 → 아파요: the ㅡ drops in front of 아/어, and the syllable in front decides which one, so 아프 + 아요 = 아파요.",
-          "stemKo": "약을 먹었는데"
+          "stemKo": "약을 먹었는데",
+          "art": "items/medicine_bottle.png"
         },
         {
           "n": 3,
@@ -3425,7 +3453,8 @@
           "en": "I ate a lot at lunch, but I’m hungry.",
           "why": "The other side of the same coin as item 2: a big lunch is the reason not to be hungry. Both openings are 먹었는데, and the only thing that tells them apart is which ending would be a surprise after it.",
           "grammar": "배고프다 → 배고파요, the same ㅡ-irregular as 아프다 in item 2. 배가 고프다 is the stomach being hungry, and 배고프다 is those two words run together into one.",
-          "stemKo": "점심을 많이 먹었는데"
+          "stemKo": "점심을 많이 먹었는데",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png"
         },
         {
           "n": 4,
@@ -3433,7 +3462,8 @@
           "en": "I called my friend, but they didn’t pick up.",
           "why": "You ring someone in order that they answer, so not answering is the turn. 받다 is what a phone call takes in Korean — 전화를 받다, to pick up.",
           "grammar": "하다 → 했는데: 하 + 였 gives 했, and then -는데 because it is past. 한테 is the spoken to-a-person from the 반말 page, and 안 goes right in front of the verb: 안 받았어요.",
-          "stemKo": "친구한테 전화를 했는데"
+          "stemKo": "친구한테 전화를 했는데",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png"
         }
       ],
       "example": {
@@ -3457,7 +3487,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3509,7 +3539,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3561,7 +3591,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3613,7 +3643,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3665,7 +3695,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q11_grilled_minced_ribs.png",
         "phraseKo": "",
         "lines": [
           {
@@ -3701,7 +3731,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3738,7 +3768,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3775,7 +3805,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3812,7 +3842,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3849,7 +3879,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q12_braised_short_ribs.png",
         "phraseKo": "",
         "lines": [
           {
@@ -3884,7 +3914,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3936,7 +3966,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -3988,7 +4018,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -4040,7 +4070,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -4092,7 +4122,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q13_ginseng_chicken_soup.png",
         "phraseKo": "",
         "lines": [
           {
@@ -4128,7 +4158,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -4165,7 +4195,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -4202,7 +4232,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -4239,7 +4269,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -4276,7 +4306,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit10_q14_chicken_meat.png",
         "phraseKo": "",
         "lines": [
           {

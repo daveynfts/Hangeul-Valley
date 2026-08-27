@@ -144,6 +144,10 @@ console.log('\n--- 1. Catalog helpers ---');
   assert(R(ctx, 'getSkinDef("farmer")').art === 'hd', 'DEFAULT farmer is the HD valley farmer');
   assert((R(ctx, 'getSkinDef("farmer")').files || []).indexOf('walk_down_0.png') >= 0,
     'DEFAULT farmer lists HD walk files');
+  assert((R(ctx, 'getSkinDef("farmer")').files || []).indexOf('water_down_0.png') >= 0,
+    'DEFAULT farmer lists HD watering files');
+  assert(R(ctx, 'getSkinDef("farmer")').states.water.frames === 3,
+    'DEFAULT farmer water state is 3 frames');
   assert(R(ctx, 'getSkinDef("chef")').matrixPrefix === 'chef', 'DEFAULT chef matrixPrefix is chef');
 }
 
@@ -253,7 +257,10 @@ console.log('\n--- 6. Load queue: overlap + no matrix 404s ---');
   ctx._lesson = { worldId: '2b-unit-10', costumeSkinId: 'chef' };
   const textures = { player_walk_down_0: true, chef_walk_down_0: true };
   ['down', 'up', 'left', 'right'].forEach((dir) => {
-    for (let f = 0; f < 3; f++) textures['farmer_walk_' + dir + '_' + f] = true;
+    for (let f = 0; f < 3; f++) {
+      textures['farmer_walk_' + dir + '_' + f] = true;
+      textures['farmer_water_' + dir + '_' + f] = true;
+    }
   });
   const scene = mockScene({
     key: 'FarmScene',

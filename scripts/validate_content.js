@@ -622,11 +622,12 @@ const overlayIds = [
   const keys = rows.map((r) => r.a).join('');
   check('and the answers are spread over at least three letters',
     new Set(keys.split('')).size >= 3, keys);
-  // Nothing has been drawn for Unit 15, and a row naming a picture that is not there
-  // renders an empty frame rather than failing loudly.
-  const art = rows.filter((r) => r.art).map((r) => r.art);
-  check('no Unit 15 quiz row names art before any is drawn', art.length === 0,
-    art.slice(0, 3).join(', '));
+  const artMissing = rows.filter((r) => {
+    if (!r.art || !String(r.art).startsWith('quiz/')) return true;
+    return !fs.existsSync(path.join(ROOT, 'sprites', String(r.art).replace(/\\/g, '/')));
+  }).map((r) => r.id);
+  check('every Unit 15 quiz row names a quiz PNG that is on disk',
+    artMissing.length === 0, artMissing.slice(0, 6).join(', '));
 }());
 
 (function checkUnit11World() {
@@ -722,11 +723,12 @@ const overlayIds = [
     const keys = Object.keys((q && q.choices) || {}).sort().join('');
     if (keys !== 'ABCD') bad.push(`q${q && q.id} choices are ${keys || 'missing'}`);
     if (!q || !q.choices || !q.choices[q.a]) bad.push(`q${q && q.id} answer ${q && q.a} is not a choice`);
-    // The illustrations come later; a row must not name a PNG that is not there,
-    // because the overlay would paint a broken image rather than fall back.
-    if (q && q.art) bad.push(`q${q.id} names art ${q.art} before any is drawn`);
+    if (!q || !q.art || !String(q.art).startsWith('quiz/')) bad.push(`q${q && q.id} missing quiz art`);
+    else if (!fs.existsSync(path.join(ROOT, 'sprites', String(q.art).replace(/\\/g, '/')))) {
+      bad.push(`q${q.id} art missing`);
+    }
   });
-  check('Unit 11 desk quiz rows are complete and art-free', bad.length === 0, bad.slice(0, 6).join(', '));
+  check('Unit 11 desk quiz rows are complete with art', bad.length === 0, bad.slice(0, 6).join(', '));
 }());
 
 // ── Unit 11 cassette player ──────────────────────────────────────────────────

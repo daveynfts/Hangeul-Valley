@@ -262,11 +262,14 @@ const qproblems = [];
   if (!q.q) qproblems.push('q' + q.id + ' has no prompt');
   if (Object.keys(q.choices || {}).sort().join('') !== 'ABCD') qproblems.push('q' + q.id + ' choices');
   if (!q.choices || !q.choices[q.a]) qproblems.push('q' + q.id + ' answer not among choices');
-  if (q.art) qproblems.push('q' + q.id + ' names art before any is drawn');
+  if (!q.art || !String(q.art).startsWith('quiz/')) qproblems.push('q' + q.id + ' missing quiz art');
+  else if (!fs.existsSync(path.join(ROOT, 'sprites', String(q.art).replace(/\\/g, '/')))) {
+    qproblems.push('q' + q.id + ' art missing');
+  }
   const texts = Object.values(q.choices || {}).map(nfc);
   if (new Set(texts).size !== texts.length) qproblems.push('q' + q.id + ' repeats a choice');
 });
-assert(qproblems.length === 0, 'every quiz row is complete and art-free'
+assert(qproblems.length === 0, 'every quiz row is complete with art'
   + (qproblems.length ? ' — ' + qproblems.slice(0, 5).join(', ') : ''));
 const KEYS = ['C', 'B', 'A', 'B', 'C', 'A', 'B', 'D', 'B', 'C', 'A', 'D', 'B'];
 assert(JSON.stringify((quiz.questions || []).map((q) => q.a)) === JSON.stringify(KEYS),

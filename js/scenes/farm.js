@@ -1977,27 +1977,29 @@ class FarmScene extends Phaser.Scene {
     playerLocked = true;
     this.player.setVelocity(0, 0);
 
+    let dir = this.playerFacing || 'down';
     if (typeof targetX === 'number' && typeof targetY === 'number') {
       const dx = targetX - this.player.x;
       const dy = targetY - this.player.y;
-      if (Math.abs(dx) >= Math.abs(dy)) {
-        this.player.setFlipX(dx < 0);
-      } else {
-        this.player.setFlipX(false);
-      }
+      dir = Math.abs(dx) >= Math.abs(dy) ? (dx < 0 ? 'left' : 'right') : (dy < 0 ? 'up' : 'down');
+      this.playerFacing = dir;
     }
+    this.player.setFlipX(false);
 
-    const animKey = `player-${actionType}`;
-    const toolKey = actionType === 'water' ? 'tool_watering_can' :
-                    actionType === 'harvest' ? 'tool_sickle' :
-                    actionType === 'pick' ? 'tool_basket' : null;
+    const useHdWater = actionType === 'water' && typeof skinHasHdAction === 'function'
+      && skinHasHdAction(this, 'water', dir, 'farm');
 
     let toolSprite = null;
-    if (toolKey && this.textures && this.textures.exists(toolKey)) {
-      const offsetX = this.player.flipX ? -12 : 12;
-      const toolY = playerFeetY(this.player) - (this.player.displayHeight * 0.55);
-      toolSprite = this.add.image(this.player.x + offsetX, toolY, toolKey)
-        .setDepth(this.player.depth + 1);
+    if (!useHdWater) {
+      const toolKey = actionType === 'water' ? 'tool_watering_can' :
+                      actionType === 'harvest' ? 'tool_sickle' :
+                      actionType === 'pick' ? 'tool_basket' : null;
+      if (toolKey && this.textures && this.textures.exists(toolKey)) {
+        const offsetX = dir === 'left' ? -12 : 12;
+        const toolY = playerFeetY(this.player) - (this.player.displayHeight * 0.55);
+        toolSprite = this.add.image(this.player.x + offsetX, toolY, toolKey)
+          .setDepth(this.player.depth + 1);
+      }
     }
 
     let cleanedUp = false;
@@ -2013,10 +2015,24 @@ class FarmScene extends Phaser.Scene {
       if (typeof callback === 'function') callback();
     };
 
+    if (useHdWater) {
+      this._waterSplash(targetX, targetY);
+      const def = typeof resolvedSkinDef === 'function' ? resolvedSkinDef(this) : null;
+      if (def) ensureSkinAnims(this, def, 'farm');
+      const hdKey = skinAnimKey(this, 'water', dir, 'farm');
+      if (this.anims && this.anims.exists(hdKey)) {
+        this.player.anims.play(hdKey, true);
+        this.player.once('animationcomplete-' + hdKey, restoreState);
+        this.time.delayedCall(750, restoreState);
+        return;
+      }
+    }
+
+    const animKey = 'player-' + actionType;
     const duration = 650;
     if (this.anims && this.anims.exists(animKey)) {
       this.player.anims.play(animKey, true);
-      this.player.once(`animationcomplete-${animKey}`, restoreState);
+      this.player.once('animationcomplete-' + animKey, restoreState);
       this.time.delayedCall(duration + 100, restoreState);
     } else {
       this.tweens.add({
@@ -2024,6 +2040,27 @@ class FarmScene extends Phaser.Scene {
         scaleY: 0.8, scaleX: 1.2,
         duration: 150, yoyo: true, repeat: 1,
         onComplete: restoreState
+      });
+    }
+  }
+
+  _waterSplash(targetX, targetY) {
+    if (!this.player || !this.add) return;
+    const ox = this.player.x;
+    const oy = playerFeetY(this.player) - Math.round(this.player.displayHeight * 0.35);
+    const aimX = typeof targetX === 'number' ? targetX : ox;
+    const aimY = typeof targetY === 'number' ? targetY : oy + 12;
+    for (let i = 0; i < 6; i++) {
+      const drop = this.add.ellipse(ox, oy, 4, 5, 0x5EC8F0, 0.9)
+        .setDepth((this.player.depth || 0) + 2);
+      this.tweens.add({
+        targets: drop,
+        x: ox + (aimX - ox) * (0.35 + Math.random() * 0.5) + (Math.random() * 12 - 6),
+        y: oy + (aimY - oy) * (0.4 + Math.random() * 0.5),
+        alpha: 0,
+        scale: 0.25,
+        duration: 260 + i * 35,
+        onComplete: function () { drop.destroy(); }
       });
     }
   }

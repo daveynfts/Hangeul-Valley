@@ -502,9 +502,27 @@ function workbookArtKeys() {
 // One <rect> per opaque pixel. Runs of the same colour on a row are merged into
 // a single rect, which cuts a 16x16 icon from ~200 nodes to a few dozen — worth
 // it when six of them are on screen at once.
+function workbookPngHtml(file, px) {
+  const size = (px || 4) * 16;
+  if (!file) return '';
+  const rel = String(file).replace(/^sprites\//, '');
+  const src = (typeof artUrl === 'function') ? artUrl(rel) : ('sprites/' + rel);
+  return '<img class="wb-art vocab-art-icon" src="' + src + '" width="' + size + '" height="' + size +
+    '" alt="" style="image-rendering:pixelated;image-rendering:crisp-edges;vertical-align:middle;object-fit:contain">';
+}
 function workbookIconSvg(key, px) {
+  if (!key) return '';
+  if (/\.png$/i.test(key) || String(key).indexOf('/') !== -1) {
+    return workbookPngHtml(key, px);
+  }
   const matrix = WORKBOOK_ART[key];
-  if (!matrix) return '';
+  if (!matrix) {
+    if (typeof vocabArtFile === 'function') {
+      const file = vocabArtFile(key);
+      if (file) return workbookPngHtml(file, px);
+    }
+    return '';
+  }
   const size = px || 4;
   const w = matrix.reduce((max, row) => Math.max(max, row.length), 0);
   const h = matrix.length;

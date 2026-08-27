@@ -298,8 +298,11 @@ assert(problems.length === 0,
 // The illustrations come later. renderDeskQuiz hides the slot when a row has no `art`,
 // but a row naming a PNG that is not on disk paints a broken image instead.
 const named = (quiz.questions || []).filter((q) => q.art);
-assert(named.length === 0,
-  'no row names art before any is drawn' + (named.length ? ' — ' + named.map((q) => q.art).join(', ') : ''));
+assert(named.length === (quiz.questions || []).length,
+  'every desk-quiz row names an illustration');
+const missingPng = named.filter((q) => !fs.existsSync(path.join(ROOT, 'sprites', String(q.art).replace(/^sprites\//, ''))));
+assert(missingPng.length === 0,
+  'and each illustration is on disk' + (missingPng.length ? ' — ' + missingPng.map((q) => q.art).join(', ') : ''));
 // The answer keys, pinned. This is the half a re-edit gets wrong silently: the questions
 // still read correctly and the marking is wrong.
 const KEYS = ['B', 'C', 'A', 'D', 'B', 'B', 'A', 'A', 'A', 'A', 'B', 'B', 'C'];

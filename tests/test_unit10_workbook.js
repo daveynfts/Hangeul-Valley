@@ -416,7 +416,9 @@ g1.items.forEach((it, i) => {
 
 // The book photographs the group and prints no words at all. There are no
 // photographs here, so the members are named in the row's phrase instead.
-assert(g1.items.every(it => !it.art), '연습 1 draws no icon');
+assert(g1.items.every(it => it.art), '연습 1 has an illustration on every row');
+assert(g1.items.every(it => fs.existsSync(path.join(ROOT, 'sprites', String(it.art).replace(/^sprites\//, '')))),
+  'and each illustration is on disk');
 assert(g1.items.every(it => (it.phraseKo || '').indexOf('·') > 0),
   'each row lists the members the photograph showed');
 assert(/photograph/i.test(g1.noteEn), 'and the page says outright what the book had there');

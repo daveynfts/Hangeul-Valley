@@ -27,7 +27,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "items/doctor.png",
           "phraseKo": "병원에 가다 / 의사 선생님 · 의사님",
           "lines": [
             {
@@ -79,7 +79,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "집주인을 만났다 / 집주인 아저씨 · 주인님",
           "lines": [
             {
@@ -127,7 +127,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "items/first_time.png",
           "phraseKo": "연습 2 · 한국에 처음 왔을 때",
           "lines": [
             {
@@ -179,7 +179,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "items/announcement.png",
           "phraseKo": "안내 방송",
           "lines": [
             {
@@ -216,7 +216,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "휴대 전화를 끄다",
           "lines": [
             {
@@ -248,7 +248,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "items/swap_seats.png",
           "phraseKo": "자리를 바꾸다",
           "lines": [
             {
@@ -280,7 +280,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "items/to_begin.png",
           "phraseKo": "시작되다",
           "lines": [
             {
@@ -327,7 +327,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "기숙사에서 해도 되는 것",
           "lines": [
             {
@@ -364,7 +364,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "맞는 것을 고르세요",
           "lines": [
             {
@@ -401,7 +401,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "시끄럽게 떠들다",
           "lines": [
             {
@@ -434,7 +434,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "만들어 먹다",
           "lines": [
             {
@@ -471,7 +471,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit14_q05_embarrassed.png",
           "phraseKo": "놀러 오다",
           "lines": [
             {
@@ -508,7 +508,7 @@
         },
         {
           "n": 6,
-          "art": "",
+          "art": "quiz/unit14_q06_priority_seat.png",
           "phraseKo": "문을 열다",
           "lines": [
             {
@@ -556,7 +556,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "",
           "lines": [
             {
@@ -584,7 +584,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "",
           "lines": [
             {
@@ -612,7 +612,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "",
           "lines": [
             {
@@ -640,7 +640,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "",
           "lines": [
             {
@@ -668,7 +668,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit14_q05_embarrassed.png",
           "phraseKo": "",
           "lines": [
             {
@@ -696,7 +696,7 @@
         },
         {
           "n": 6,
-          "art": "",
+          "art": "quiz/unit14_q06_priority_seat.png",
           "phraseKo": "",
           "lines": [
             {
@@ -739,7 +739,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "",
           "lines": [
             {
@@ -772,7 +772,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "",
           "lines": [
             {
@@ -805,7 +805,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "",
           "lines": [
             {
@@ -838,7 +838,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "",
           "lines": [
             {
@@ -886,7 +886,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "",
           "lines": [
             {
@@ -914,7 +914,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "",
           "lines": [
             {
@@ -942,7 +942,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "",
           "lines": [
             {
@@ -970,7 +970,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1013,7 +1013,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "신고",
           "lines": [
             {
@@ -1045,7 +1045,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "앉지",
           "lines": [
             {
@@ -1073,7 +1073,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "감다",
           "lines": [
             {
@@ -1101,7 +1101,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "남지요",
           "lines": [
             {
@@ -1133,7 +1133,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit14_q05_embarrassed.png",
           "phraseKo": "안고",
           "lines": [
             {
@@ -1165,7 +1165,7 @@
         },
         {
           "n": 6,
-          "art": "",
+          "art": "quiz/unit14_q06_priority_seat.png",
           "phraseKo": "참지",
           "lines": [
             {
@@ -1212,7 +1212,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1244,7 +1244,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1276,7 +1276,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1308,7 +1308,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "",
           "lines": [
             {
@@ -1360,7 +1360,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "내다",
           "lines": [
             {
@@ -1393,7 +1393,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "먹다",
           "lines": [
             {
@@ -1426,7 +1426,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "가 보다",
           "lines": [
             {
@@ -1459,7 +1459,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "먹다",
           "lines": [
             {

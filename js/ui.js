@@ -4307,8 +4307,8 @@ function renderWorkbook() {
         // to fish the button container back out. The container is needed as an
         // object either way, so writing it as markup first only to look it up
         // again is a round trip through the parser for nothing.
-        const art = (typeof workbookIconSvg === 'function' && item.art)
-          ? workbookIconSvg(item.art, 4) : '';
+        const art = (typeof workbookIconSvg === 'function')
+          ? workbookIconSvg(item.art || item.phraseKo || item.ko || '', 4) : '';
         const num = document.createElement('span');
         num.className = 'wb-n';
         num.textContent = item.n + ')';

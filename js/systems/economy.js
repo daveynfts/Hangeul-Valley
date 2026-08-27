@@ -125,7 +125,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-20260821b';
+const ART_CACHE_KEY = 'art-20260827e';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }

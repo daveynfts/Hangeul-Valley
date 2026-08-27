@@ -17,7 +17,8 @@
         "B": "Both attach to either",
         "C": "-아/어지다 with adjectives, -게 되다 with verbs",
         "D": "Neither attaches to a verb"
-      }
+      },
+      "art": "quiz/unit15_q01_change_paths.png"
     },
     {
       "id": 2,
@@ -28,7 +29,8 @@
         "B": "먹게 됐어요",
         "C": "먹기 전이에요",
         "D": "먹을 뻔했어요"
-      }
+      },
+      "art": "quiz/unit15_q02_spicy_food.png"
     },
     {
       "id": 3,
@@ -39,7 +41,8 @@
         "B": "익숙아지다",
         "C": "익숙게 되다",
         "D": "익숙하아지다"
-      }
+      },
+      "art": "quiz/unit15_q03_become_familiar.png"
     },
     {
       "id": 4,
@@ -50,7 +53,8 @@
         "B": "덥게 되다",
         "C": "더우지다",
         "D": "더워지다"
-      }
+      },
+      "art": "quiz/unit15_q04_get_hotter.png"
     },
     {
       "id": 5,
@@ -61,7 +65,8 @@
         "B": "물건값이 올랐어요",
         "C": "물건값이 생겼어요",
         "D": "물건값이 발전했어요"
-      }
+      },
+      "art": "quiz/unit15_q05_price_up.png"
     },
     {
       "id": 6,
@@ -72,7 +77,8 @@
         "B": "도서관이 올랐어요",
         "C": "도서관이 생겼어요",
         "D": "도서관이 발전했어요"
-      }
+      },
+      "art": "quiz/unit15_q06_library_appears.png"
     },
     {
       "id": 7,
@@ -83,7 +89,8 @@
         "B": "내렸어요",
         "C": "생겼어요",
         "D": "발전했어요"
-      }
+      },
+      "art": "quiz/unit15_q07_village_shrink.png"
     },
     {
       "id": 8,
@@ -94,7 +101,8 @@
         "B": "한국에 오기 전에",
         "C": "한국에 올 전에",
         "D": "한국에 온 전에"
-      }
+      },
+      "art": "quiz/unit15_q08_before_korea.png"
     },
     {
       "id": 9,
@@ -105,7 +113,8 @@
         "B": "수업이 끝나는 후에",
         "C": "수업이 끝날 후에",
         "D": "수업이 끝난 후에"
-      }
+      },
+      "art": "quiz/unit15_q09_after_class.png"
     },
     {
       "id": 10,
@@ -116,7 +125,8 @@
         "B": "사기 전에",
         "C": "산 전에",
         "D": "살고 전에"
-      }
+      },
+      "art": "quiz/unit15_q10_before_living.png"
     },
     {
       "id": 11,
@@ -127,7 +137,8 @@
         "B": "[만카져요]",
         "C": "[마나져요]",
         "D": "[많아져요]"
-      }
+      },
+      "art": "quiz/unit15_q11_become_many.png"
     },
     {
       "id": 12,
@@ -138,7 +149,8 @@
         "B": "학교에 입학하다 / 학교를 졸업하다",
         "C": "Both take 에",
         "D": "Both take 를"
-      }
+      },
+      "art": "quiz/unit15_q12_enter_graduate.png"
     },
     {
       "id": 13,
@@ -149,7 +161,8 @@
         "B": "The mother 태어나다, the child 낳다",
         "C": "They are interchangeable",
         "D": "Both need an object"
-      }
+      },
+      "art": "quiz/unit15_q13_birth.png"
     }
   ]
 }

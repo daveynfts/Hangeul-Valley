@@ -27,7 +27,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "items/birthday_cake.png",
           "phraseKo": "우리 반 친구 생일 / 매운 음식을 잘 못 먹다",
           "lines": [
             {
@@ -79,7 +79,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "foods/whole_fish.png",
           "phraseKo": "할아버지 생신 / 생선을 안 좋아하다",
           "lines": [
             {
@@ -127,7 +127,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "items/casual_speech.png",
           "phraseKo": "연습 2 · 반말로 추천하기",
           "lines": [
             {
@@ -179,7 +179,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "foods/ginseng_chicken_soup.png",
           "phraseKo": "삼계탕이 맛있다 / 삼계탕은 별로 안 좋아하다",
           "lines": [
             {
@@ -231,7 +231,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "foods/whole_fish.png",
           "phraseKo": "생선회가 유명하다 / 생선회는 안 먹다",
           "lines": [
             {
@@ -294,7 +294,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "items/cafeteria.png",
           "phraseKo": "이 식당에 대한 설명으로 맞는 것",
           "lines": [
             {
@@ -327,7 +327,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "이 글의 내용과 같지 않은 것",
           "lines": [
             {
@@ -360,7 +360,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -388,7 +388,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -416,7 +416,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "quiz/unit10_q05_spicy_fish_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -448,7 +448,7 @@
         },
         {
           "n": 6,
-          "art": "",
+          "art": "quiz/unit10_q06_ox_bone_soup.png",
           "phraseKo": "",
           "lines": [
             {
@@ -495,7 +495,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -528,7 +528,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -565,7 +565,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -598,7 +598,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -646,7 +646,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -678,7 +678,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -706,7 +706,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "",
           "lines": [
             {
@@ -749,7 +749,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit10_q01_kimchi_stew.png",
           "phraseKo": "음식이 입에 맞아?",
           "lines": [
             {
@@ -781,7 +781,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "뭐 먹을래?",
           "lines": [
             {
@@ -813,7 +813,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "items/cafeteria.png",
           "phraseKo": "저 식당에 가 봤어요?",
           "lines": [
             {
@@ -845,7 +845,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit10_q04_pork_bone_potato_stew.png",
           "phraseKo": "방학에 어디 갈 거야?",
           "lines": [
             {
@@ -877,7 +877,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "items/korean_radish.png",
           "phraseKo": "무슨 운동을 좋아해요?",
           "lines": [
             {
@@ -909,7 +909,7 @@
         },
         {
           "n": 6,
-          "art": "",
+          "art": "quiz/unit10_q06_ox_bone_soup.png",
           "phraseKo": "우리 오늘 뭐 할까? / 영화 보러 갈까?",
           "lines": [
             {
@@ -941,7 +941,7 @@
         },
         {
           "n": 7,
-          "art": "",
+          "art": "quiz/unit10_q07_cold_noodles.png",
           "phraseKo": "요즘의 억양",
           "lines": [
             {
@@ -984,7 +984,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "items/sour_taste.png",
           "phraseKo": "마시다",
           "lines": [
             {
@@ -1021,7 +1021,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit10_q02_soybean_paste_stew.png",
           "phraseKo": "한국 음식",
           "lines": [
             {
@@ -1058,7 +1058,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit10_q03_soft_tofu_stew.png",
           "phraseKo": "덥다",
           "lines": [
             {
@@ -1095,7 +1095,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "items/casual_speech.png",
           "phraseKo": "3번 · 반말로 바꾸기 (A)",
           "lines": [
             {
@@ -1128,7 +1128,7 @@
         },
         {
           "n": 5,
-          "art": "",
+          "art": "items/casual_speech.png",
           "phraseKo": "3번 · 반말로 바꾸기 (B)",
           "lines": [
             {

@@ -58,7 +58,8 @@
           "en": "When you drink with elders …",
           "why": "Drinking while facing an elder head-on reads as placing yourself on their level. You turn your head aside so the act is not done straight at them — the same instinct behind receiving with both hands.",
           "grammar": "마시다 → 마셔요. The stem 마시- ends in ㅣ, and ㅣ + 어요 contracts to 셔요.",
-          "stemKo": "어른들과 술을 마실 때"
+          "stemKo": "어른들과 술을 마실 때",
+          "art": "quiz/unit14_q01_two_hands.png"
         },
         {
           "n": 2,
@@ -66,7 +67,8 @@
           "en": "When you greet elders …",
           "why": "A greeting to an elder is carried by the bow, not by the words. 고개를 숙여서 is bowing the head, and -아/어서 links the two actions: you bow, and by bowing you greet.",
           "grammar": "인사하다 → 인사해요. Every 하다 verb is irregular this way: 하 + 여요 → 해요. Note 께 in the prompt — it is the honorific of 에게/한테.",
-          "stemKo": "어른들께 인사할 때"
+          "stemKo": "어른들께 인사할 때",
+          "art": "quiz/unit14_q02_no_smoking.png"
         },
         {
           "n": 3,
@@ -74,7 +76,8 @@
           "en": "When you talk with someone you have just met …",
           "why": "With a person you have just met you do not yet know their age or standing, so 높임말 is the safe default. 반말 is for close friends or someone clearly younger — opening with it to a stranger is exactly the mistake this unit warns about.",
           "grammar": "하다 → 해요. 높임말 and 존댓말 mean the same thing here; the textbook prints both, and the answer keeps just 높임말을 해요.",
-          "stemKo": "처음 만난 사람과 이야기할 때"
+          "stemKo": "처음 만난 사람과 이야기할 때",
+          "art": "items/first_time.png"
         },
         {
           "n": 4,
@@ -82,7 +85,8 @@
           "en": "If an older person is on the bus …",
           "why": "Giving up your seat is the everyday form of 경로 우대, the senior-priority idea from this unit’s culture section.",
           "grammar": "양보하다 → 양보해요. The prompt is already honorific twice over: 분 is the polite counter for a person rather than 사람, and 계시다 is the honorific of 있다.",
-          "stemKo": "버스에 나이가 많은 분이 계시면"
+          "stemKo": "버스에 나이가 많은 분이 계시면",
+          "art": "quiz/unit14_q04_library_quiet.png"
         }
       ],
       "example": {
@@ -131,7 +135,8 @@
           "en": "When you address an elder …",
           "why": "You do not call an elder by their given name. Korean reaches for a title or a kinship term instead — 선생님, 사장님, 아버님 — because a bare name puts the two of you on level terms.",
           "grammar": "부르다 → 부르지 마세요. -지 마세요 attaches to the plain stem and is the polite way to tell someone not to do something.",
-          "stemKo": "어른을 부를 때"
+          "stemKo": "어른을 부를 때",
+          "art": "quiz/unit14_q01_two_hands.png"
         },
         {
           "n": 2,
@@ -139,7 +144,8 @@
           "en": "When you receive something from a teacher …",
           "why": "Taking something one-handed from someone senior is casual to the point of rude. Both hands — or the right hand with the left supporting the wrist — is the respectful form. This is 두 손으로 드리다 from 연습 1 seen from the receiving side.",
           "grammar": "받다 → 받지 마세요. 께 in the prompt is the honorific of 에게/한테, so the sentence has already marked the teacher as senior.",
-          "stemKo": "선생님께 물건을 받을 때"
+          "stemKo": "선생님께 물건을 받을 때",
+          "art": "quiz/unit14_q02_no_smoking.png"
         },
         {
           "n": 3,
@@ -147,7 +153,8 @@
           "en": "When an elder is in front of you …",
           "why": "Crossing your legs in front of an elder reads as relaxed and unbothered. The cue that the person present is senior is 계시다 — the honorific of 있다.",
           "grammar": "앉다 → 앉지 마세요. -고 links the two actions: 다리를 꼬고 앉다 is to cross the legs and sit that way.",
-          "stemKo": "어른이 앞에 계실 때"
+          "stemKo": "어른이 앞에 계실 때",
+          "art": "quiz/unit14_q03_may_i_photo.png"
         },
         {
           "n": 4,
@@ -155,7 +162,8 @@
           "en": "When you talk with a teacher …",
           "why": "반말 is for close friends and people clearly younger. A teacher gets 높임말 whatever their age — the same choice 연습 1 asked about with 처음 만난 사람.",
           "grammar": "하다 → 하지 마세요. Worth noticing: 하다 is irregular for 해요, but perfectly regular here — the stem 하 is untouched.",
-          "stemKo": "선생님과 이야기할 때"
+          "stemKo": "선생님과 이야기할 때",
+          "art": "quiz/unit14_q04_library_quiet.png"
         }
       ]
     },
@@ -209,7 +217,8 @@
               "who": "B",
               "ko": "아, 그래요? 죄송합니다."
             }
-          ]
+          ],
+          "art": "quiz/unit14_q01_two_hands.png"
         },
         {
           "n": 2,
@@ -226,7 +235,8 @@
               "who": "B",
               "ko": "아, 그래요? 죄송합니다."
             }
-          ]
+          ],
+          "art": "quiz/unit14_q02_no_smoking.png"
         },
         {
           "n": 3,
@@ -243,7 +253,8 @@
               "who": "B",
               "ko": "아, 그래요? 죄송합니다."
             }
-          ]
+          ],
+          "art": "quiz/unit14_q03_may_i_photo.png"
         },
         {
           "n": 4,
@@ -260,7 +271,8 @@
               "who": "B",
               "ko": "아, 그래요? 죄송합니다."
             }
-          ]
+          ],
+          "art": "quiz/unit14_q04_library_quiet.png"
         }
       ],
       "example": {
@@ -800,7 +812,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit14_q01_two_hands.png",
         "phraseKo": "집에 도착하다",
         "lines": [
           {
@@ -1066,7 +1078,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit14_q02_no_smoking.png",
         "phraseKo": "차를 세우다",
         "lines": [
           {
@@ -1098,7 +1110,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "원고를 보면서 하다",
           "lines": [
             {
@@ -1131,7 +1143,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "나중에 하다",
           "lines": [
             {
@@ -1164,7 +1176,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "조금만 남기다",
           "lines": [
             {
@@ -1197,7 +1209,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "내일 입다",
           "lines": [
             {
@@ -1230,7 +1242,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit14_q03_may_i_photo.png",
         "phraseKo": "밖에 나가다",
         "lines": [
           {
@@ -1261,7 +1273,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "내일까지 숙제를 꼭 해야 돼요.",
           "lines": [
             {
@@ -1289,7 +1301,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "담배를 꼭 끊어야 돼요.",
           "lines": [
             {
@@ -1317,7 +1329,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "아침 9시까지 학교에 꼭 가야 돼요.",
           "lines": [
             {
@@ -1345,7 +1357,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "오늘 택배를 꼭 받아야 해요.",
           "lines": [
             {
@@ -1373,7 +1385,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit14_q04_library_quiet.png",
         "phraseKo": "운동을 꼭 해야 돼요.",
         "lines": [
           {
@@ -1402,7 +1414,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "보다",
           "lines": [
             {
@@ -1439,7 +1451,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "먹다",
           "lines": [
             {
@@ -1476,7 +1488,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "만나다",
           "lines": [
             {
@@ -1513,7 +1525,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "듣다",
           "lines": [
             {
@@ -1550,7 +1562,7 @@
         }
       ],
       "example": {
-        "art": "",
+        "art": "quiz/unit14_q05_embarrassed.png",
         "phraseKo": "가다",
         "lines": [
           {
@@ -1659,7 +1671,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "quiz/unit14_q03_may_i_photo.png",
           "phraseKo": "고향에 가다",
           "lines": [
             {
@@ -1696,7 +1708,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "집에 도착하다",
           "lines": [
             {
@@ -1768,7 +1780,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "지금 나가다",
           "lines": [
             {
@@ -1805,7 +1817,7 @@
         },
         {
           "n": 2,
-          "art": "",
+          "art": "quiz/unit14_q02_no_smoking.png",
           "phraseKo": "밤에 전화하다",
           "lines": [
             {
@@ -1842,7 +1854,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "items/bitter_taste.png",
           "phraseKo": "이 컴퓨터를 쓰다",
           "lines": [
             {
@@ -1951,7 +1963,7 @@
       "items": [
         {
           "n": 1,
-          "art": "",
+          "art": "quiz/unit14_q01_two_hands.png",
           "phraseKo": "주차하다",
           "lines": [
             {
@@ -2025,7 +2037,7 @@
         },
         {
           "n": 3,
-          "art": "",
+          "art": "items/sour_taste.png",
           "phraseKo": "음료수를 마시다",
           "lines": [
             {
@@ -2062,7 +2074,7 @@
         },
         {
           "n": 4,
-          "art": "",
+          "art": "quiz/unit14_q04_library_quiet.png",
           "phraseKo": "노래를 부르다",
           "lines": [
             {

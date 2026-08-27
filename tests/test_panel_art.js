@@ -18,6 +18,8 @@ const ui = fs.readFileSync(path.join(ROOT, 'js', 'ui.js'), 'utf8');
 const overlays = fs.readFileSync(path.join(ROOT, 'js', 'overlays.js'), 'utf8');
 const trophyArt = fs.readFileSync(path.join(ROOT, 'js', 'trophyArt.js'), 'utf8');
 const vocabArt = fs.readFileSync(path.join(ROOT, 'js', 'vocabArt.js'), 'utf8');
+const vocabArtUnit14 = fs.readFileSync(path.join(ROOT, 'js', 'vocabArtUnit14.js'), 'utf8');
+const vocabArtMore = fs.readFileSync(path.join(ROOT, 'js', 'vocabArtMore.js'), 'utf8');
 const css = fs.readFileSync(path.join(ROOT, 'css', 'game.css'), 'utf8');
 const econ = fs.readFileSync(path.join(ROOT, 'js', 'systems', 'economy.js'), 'utf8');
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'js', 'manifest.json'), 'utf8'));
@@ -80,7 +82,31 @@ const uniqueBySlug = {};
 assert(vctx.ROWS.find((r) => r.ko === '옥수수구이').slug === 'roasted_corn',
   'roasted corn is not the raw cob');
 
-assert(econ.indexOf("ART_CACHE_KEY = 'art-20260821b'") >= 0, 'economy cache key matches the new art batch');
-assert(catalog.cacheKey === 'art-20260821b', 'catalog cacheKey is art-20260821b');
+const vctxAll = {};
+vm.runInNewContext(
+  vocabArt + '\n' + vocabArtUnit14 + '\n' + vocabArtMore + '\nthis.ROWS = VOCAB_ART_ROWS;',
+  vctxAll
+);
+['2b-unit-11', '2b-unit-13', '2b-unit-15', 'topik-2'].forEach((id) => {
+  const world = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', id + '.json'), 'utf8'));
+  const seen = new Set();
+  const gaps = [];
+  ((world.level && world.level.words) || []).forEach((word) => {
+    if (!word || !word.ko || seen.has(word.ko)) return;
+    seen.add(word.ko);
+    const row = vctxAll.ROWS.find((r) => r && r.ko === word.ko);
+    if (!row) {
+      gaps.push(word.ko);
+      return;
+    }
+    if (!fs.existsSync(path.join(ROOT, 'sprites', row.folder, row.slug + '.png'))) {
+      gaps.push(word.ko + ' png');
+    }
+  });
+  assert(gaps.length === 0, id + ' farm kos resolve to on-disk still-icons (' + seen.size + ')');
+});
+
+assert(econ.indexOf("ART_CACHE_KEY = 'art-20260827e'") >= 0, 'economy cache key matches the new art batch');
+assert(catalog.cacheKey === 'art-20260827e', 'catalog cacheKey is art-20260827e');
 
 console.log('\ntest_panel_art: all passed');
