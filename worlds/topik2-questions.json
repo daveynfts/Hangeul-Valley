@@ -616,6 +616,39 @@
           "en": "So many students were studying during the exam period that the library left its lights on all night. The underlined part is a state left standing.",
           "why": "불을 켜 놓았다 is not simply that the light went on. -아/어 놓다 says: do it, and leave the result standing. The light was switched on and stayed on, which is what 밤새도록 is there to tell you.\n\n-아/어 두다 is its twin. Both mean do it and leave it, and they are near enough interchangeable that the difference is a matter of feel: 놓다 leans towards something you will come back to soon, 두다 towards something left for longer. Either fits a library at night, and that is why 4 is the answer.\n\nThe other three are three different things and none of them is a state. -아/어야 했다 is obligation, and nobody in the sentence was obliged to do anything. -곤 했다 is a habit repeated over time, but the sentence describes one exam period, not a recurring one. -게 했다 is causative — it would need somebody being made to switch the light on, and there is no such person here.\n\nFour endings on 켜다, four grammatical categories: state, obligation, habit, cause. That is the shape of this question type, and it is the same shape as question 2 of the blank-filling set.",
           "grammar": "-아/어 놓다 and -아/어 두다 are the resultative pair: 창문을 열어 놓다 (open the window and leave it open), 표를 미리 사 두다 (buy the ticket and have it ready). Without them, 불을 켰다 would only say the switch was flipped.\n\n-곤 하다 is the repeated past: 주말이면 등산을 하곤 했다. -게 하다 is the causative, which has now appeared three times in this paper — 시원하게 해 주다 in question 7 of the headline set is the same ending.\n\n밤새도록 is 밤새다 with -도록, which sets a limit: until the night is through. And 많아서 is -아/어서 giving the reason, the ending question 2 of the blank set had to be told apart from -(으)니까."
+        },
+        {
+          "n": 7,
+          "art": "",
+          "phraseKo": "친구가 입사 시험에 합격하도록 엿과 떡을 선물로 주었다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "친구가 입사 시험에 {} 엿과 떡을 선물로 주었다."
+            }
+          ],
+          "answer": "ge",
+          "choices": [
+            {
+              "id": "ge",
+              "ko": "합격하게"
+            },
+            {
+              "id": "geodeun",
+              "ko": "합격하거든"
+            },
+            {
+              "id": "ryeogo",
+              "ko": "합격하려고"
+            },
+            {
+              "id": "mankeum",
+              "ko": "합격할 만큼"
+            }
+          ],
+          "en": "I gave my friend yeot and tteok so that he would pass the company entrance exam. The underlined part is a purpose, and its replacement has to be one too.",
+          "why": "Two people are doing two different things in this sentence, and that is what decides it. The friend is the one who passes; the speaker is the one who gives the sweets. Once you have noticed that, one option is simply ungrammatical rather than merely wrong.\n\n-(으)려고 is the trap, and it is a good one, because in English \"in order to pass\" sounds exactly right. Korean does not allow it: -(으)려고 requires the intender and the doer to be the same person. 내가 합격하려고 공부했다 is fine — I studied, I intended to pass. 친구가 합격하려고 내가 떡을 주었다 is not a sentence.\n\n-도록 has no such restriction, which is exactly why the sentence uses it, and V-게 is its everyday twin. 아이가 잘 자도록 불을 껐다 and 아이가 잘 자게 불을 껐다 are the same sentence in two registers. That is the answer.\n\n-거든 is a condition: if he passes. That would make the sweets a reward afterwards rather than a wish beforehand, and the tense would have to change with it.\n\n-(으)ㄹ 만큼 is degree: enough to pass. It would say the sweets were sufficient in quantity to constitute passing, which is not a thought anyone has had.\n\nSo the four are a purpose, a condition, a same-subject intention and a degree — and the sentence has two subjects, which removes the intention before you weigh anything else.",
+          "grammar": "합격하다 is to pass an exam — the one thing every option in the list agrees on. -도록 and V-게 both mean so that, and neither cares whether the two clauses share a subject. -(으)려고 does care, and that single restriction is the whole of this question. It is worth memorising as a pair of sentences rather than as a rule: 친구가 합격하도록 떡을 주었다 (fine) against 친구가 합격하려고 떡을 주었다 (not a sentence).\n\n-도록 has other senses the exam also uses — 밤새도록 in question 4 of this same type is the \"until, to the extent of\" one. Purpose and extent are the two, and which one is meant is decided by what the clause is about.\n\nThe sweets are not random. 엿 and 떡 are sticky, and 붙다 means both to stick and to pass an exam, so sticky food is what Korea gives a candidate. The opposite superstition runs alongside it: you do not eat 미역국 the morning of a test, because seaweed soup is slippery."
         }
       ]
     }

@@ -2353,6 +2353,110 @@
         "forms": [
           "변해 댈"
         ]
+      },
+      {
+        "ko": "입사 시험",
+        "en": "the entrance exam a company sets",
+        "hint": "🏢",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "합격하다",
+        "en": "to pass an exam, to get in",
+        "hint": "🎉",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "엿",
+        "en": "yeot — a hard, sticky taffy",
+        "hint": "🍬",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "엿과"
+        ]
+      },
+      {
+        "ko": "떡",
+        "en": "tteok — rice cake",
+        "hint": "🍡",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "떡을"
+        ]
+      },
+      {
+        "ko": "선물",
+        "en": "a present",
+        "hint": "🎁",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "선물로"
+        ]
+      },
+      {
+        "ko": "주다",
+        "en": "to give",
+        "hint": "🤲",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "주었다"
+        ]
+      },
+      {
+        "ko": "-도록",
+        "en": "so that it happens — a purpose, and the two clauses may have different subjects",
+        "hint": "🎯",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "합격하도록"
+        ]
+      },
+      {
+        "ko": "V-게",
+        "en": "so that — the everyday twin of -도록",
+        "hint": "🎯",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "합격하게"
+        ]
+      },
+      {
+        "ko": "-거든",
+        "en": "if it happens, when it happens",
+        "hint": "🔀",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "합격하거든"
+        ]
+      },
+      {
+        "ko": "-(으)려고",
+        "en": "intending to — and the intender must be the one who acts",
+        "hint": "🧭",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "합격하려고"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 만큼",
+        "en": "to the extent that, as much as",
+        "hint": "📏",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "합격할 만큼"
+        ]
       }
     ]
   },

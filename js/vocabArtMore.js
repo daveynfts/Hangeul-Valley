@@ -716,7 +716,18 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "안다", slug: 'red_heart', folder: 'items', nameEn: "to hold", family: 'fill' },
   { ko: "머리를 감다", slug: 'soap_bar', folder: 'items', nameEn: "to wash your hair", family: 'fill' },
   { ko: "참다", slug: 'ice_pack', folder: 'items', nameEn: "to endure", family: 'fill' },
-  { ko: "회비", slug: 'leather_wallet', folder: 'items', nameEn: "membership dues", family: 'fill' }
+  { ko: "회비", slug: 'leather_wallet', folder: 'items', nameEn: "membership dues", family: 'fill' },
+  { ko: "입사 시험", slug: 'diploma_scroll', folder: 'items', nameEn: "the entrance exam a company sets", family: 'fill' },
+  { ko: "합격하다", slug: 'diploma_scroll', folder: 'items', nameEn: "to pass an exam, to get in", family: 'fill' },
+  { ko: "엿", slug: 'honey_jar', folder: 'items', nameEn: "yeot — a hard, sticky taffy", family: 'fill' },
+  { ko: "떡", slug: 'tteokbokki_bowl', folder: 'foods', nameEn: "tteok — rice cake", family: 'fill' },
+  { ko: "선물", slug: 'birthday_cake', folder: 'items', nameEn: "a present", family: 'fill' },
+  { ko: "주다", slug: 'give_two_hands', folder: 'items', nameEn: "to give", family: 'fill' },
+  { ko: "-도록", slug: 'kinds_types', folder: 'items', nameEn: "so that it happens — subjects may differ", family: 'fill' },
+  { ko: "V-게", slug: 'kinds_types', folder: 'items', nameEn: "so that — the everyday twin of -도록", family: 'fill' },
+  { ko: "-거든", slug: 'kinds_types', folder: 'items', nameEn: "if it happens, when it happens", family: 'fill' },
+  { ko: "-(으)려고", slug: 'kinds_types', folder: 'items', nameEn: "intending to — same subject required", family: 'fill' },
+  { ko: "-(으)ㄹ 만큼", slug: 'kinds_types', folder: 'items', nameEn: "to the extent that, as much as", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
