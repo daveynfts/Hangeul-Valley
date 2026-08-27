@@ -560,7 +560,19 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "한 달 새", slug: 'public_etiquette', folder: 'items', nameEn: "in the space of one month — 새 is 사이, the gap between", family: 'fill' },
   { ko: "이번 달", slug: 'public_etiquette', folder: 'items', nameEn: "this month", family: 'fill' },
   { ko: "N(이)라는", slug: 'kinds_types', folder: 'items', nameEn: "called N, going by the name N", family: 'fill' },
-  { ko: "-까지만", slug: 'kinds_types', folder: 'items', nameEn: "only up to — and the 만 is where the trap is", family: 'fill' }
+  { ko: "-까지만", slug: 'kinds_types', folder: 'items', nameEn: "only up to — and the 만 is where the trap is", family: 'fill' },
+  // The blank-filling question type, added with 문항 1-2. Weather words take the sun and
+  // the tap; the four endings take kinds_types, the tile every grammar point already uses —
+  // there is nothing to draw for -더니 that a learner would recognise as -더니.
+  { ko: "날씨", slug: 'sun_icon', folder: 'items', nameEn: "the weather", family: 'fill' },
+  { ko: "비가 오다", slug: 'water_faucet', folder: 'items', nameEn: "to rain", family: 'fill' },
+  { ko: "맑다", slug: 'sun_icon', folder: 'items', nameEn: "to be clear, to be fine", family: 'fill' },
+  { ko: "개다", slug: 'sun_icon', folder: 'items', nameEn: "to clear up after rain", family: 'fill' },
+  { ko: "오전", slug: 'sun_icon', folder: 'items', nameEn: "the morning, before noon", family: 'fill' },
+  { ko: "-더니", slug: 'kinds_types', folder: 'items', nameEn: "I saw A, and then B", family: 'fill' },
+  { ko: "-더라도", slug: 'kinds_types', folder: 'items', nameEn: "even if it does", family: 'fill' },
+  { ko: "-아/어 가지고", slug: 'kinds_types', folder: 'items', nameEn: "and so — the spoken -아/어서", family: 'fill' },
+  { ko: "-는 대신에", slug: 'kinds_types', folder: 'items', nameEn: "instead of doing it", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {

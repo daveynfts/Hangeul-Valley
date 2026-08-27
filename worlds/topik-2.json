@@ -1804,6 +1804,90 @@
         "forms": [
           "까지만"
         ]
+      },
+      {
+        "ko": "날씨",
+        "en": "the weather",
+        "hint": "🌤️",
+        "category": "날씨",
+        "categoryEn": "Weather & seasons"
+      },
+      {
+        "ko": "비가 오다",
+        "en": "to rain",
+        "hint": "🌧️",
+        "category": "날씨",
+        "categoryEn": "Weather & seasons",
+        "forms": [
+          "비가"
+        ]
+      },
+      {
+        "ko": "맑다",
+        "en": "to be clear, to be fine",
+        "hint": "☀️",
+        "category": "날씨",
+        "categoryEn": "Weather & seasons",
+        "forms": [
+          "맑게"
+        ]
+      },
+      {
+        "ko": "개다",
+        "en": "to clear up — of weather after rain",
+        "hint": "🌈",
+        "category": "날씨",
+        "categoryEn": "Weather & seasons",
+        "forms": [
+          "개었다"
+        ]
+      },
+      {
+        "ko": "오전",
+        "en": "the morning, before noon",
+        "hint": "🌅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-더니",
+        "en": "I saw A, and then B — a change the speaker watched happen",
+        "hint": "🔀",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "오더니"
+        ]
+      },
+      {
+        "ko": "-더라도",
+        "en": "even if it does — and what follows holds anyway",
+        "hint": "🛡️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "오더라도"
+        ]
+      },
+      {
+        "ko": "-아/어 가지고",
+        "en": "and so, and then — the spoken form of -아/어서",
+        "hint": "➡️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "와 가지고"
+        ]
+      },
+      {
+        "ko": "-는 대신에",
+        "en": "instead of doing it",
+        "hint": "🔁",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "오는 대신에"
+        ]
       }
     ]
   },
@@ -1869,6 +1953,11 @@
         "ko": "건강",
         "en": "Health & the body",
         "cat": "건강"
+      },
+      {
+        "ko": "날씨",
+        "en": "Weather & seasons",
+        "cat": "날씨"
       }
     ]
   }

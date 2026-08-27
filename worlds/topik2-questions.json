@@ -390,6 +390,54 @@
           "grammar": "-앓이 is productive: 앓다 (to be ill) gives 앓이, and it attaches to whatever people are obsessed with — 아이돌 앓이, 몸살앓이. In a headline it is always a craze, never a diagnosis.\n\nN(이)라는 = called N. '행복 열차'라는 책 is a book called Happiness Train, and it is how three of the four options tell you what kind of thing they are talking about. 이름의 in option 2 does the same job for the train it invented.\n\n새 is 사이 worn short: 한 달 새 = 한 달 사이, in the space of a month. And N(이)나 after a quantity means as many as — 10만 부나 팔려 — which is a different 나 from the one meaning or.\n\n팔려 is 팔리다 clipped where a headline would rather stop than conjugate: tenth headline, tenth verb either cut short or replaced by a noun."
         }
       ]
+    },
+    {
+      "id": "topik2-blank",
+      "type": "build",
+      "no": "유형 · 문항 1-2",
+      "pattern": "( )에 들어갈 말 고르기",
+      "section": "빈칸 채우기",
+      "icon": "🧩",
+      "instructionKo": "( )에 들어갈 말로 가장 알맞은 것을 고르십시오.",
+      "instructionEn": "Choose the expression that best fits the blank.",
+      "blurbEn": "One sentence, one gap, and four endings on the same verb — so the answer is never in the vocabulary.",
+      "noteEn": "Questions 1 and 2 give you a sentence with a hole in it and four endings on the same verb. Because the verb never changes, no amount of vocabulary will settle it — the answer is always in the words around the blank.\n\nWhat to read first: time words and the particles on them. 오전에는 … 지금은 with 은/는 on both is a contrast being set up, and only some endings can hold one. Then check whether the first clause is a fact or a supposition, because half the endings offered will be concessive or conditional and those need a supposition.\n\nThe four that keep turning up in this slot: -더니 (I saw A, then B, and B surprises), -더라도 (even if A, still B), -아/어 가지고 (A, and so B), -는 대신에 (B in place of A). Three of them need the two clauses to agree in direction. Only -더니 wants them to differ.",
+      "bank": [],
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "phraseKo": "오전에는 비가 많이 (   ) 지금은 날씨가 맑게 개었다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "오전에는 비가 많이 {} 지금은 날씨가 맑게 개었다."
+            }
+          ],
+          "answer": "deoni",
+          "choices": [
+            {
+              "id": "deoni",
+              "ko": "오더니"
+            },
+            {
+              "id": "deorado",
+              "ko": "오더라도"
+            },
+            {
+              "id": "gajigo",
+              "ko": "와 가지고"
+            },
+            {
+              "id": "daesine",
+              "ko": "오는 대신에"
+            }
+          ],
+          "en": "It rained hard in the morning, and now the sky has cleared. The ending has to carry a then and a now that disagree.",
+          "why": "All four options are the same verb. 오다 does not move; only the ending does, and that is what this question type is. So the sentence around the blank is the whole of the evidence — and the sentence gives you two time words, 오전에는 and 지금은, set against each other, with 은/는 on both marking the contrast.\n\nOne ending is built for exactly that. -더니 says: I saw A, and then B, and B is not what A led you to expect. 오전에는 비가 오더니 지금은 개었다 is its natural shape.\n\nOption 2 is the concessive. -더라도 means even if, and what it concedes is hypothetical — it might rain, it might not. But 오전에는 pins the rain to a past morning as a fact, and 개었다 is a finished event rather than something that holds in spite of rain.\n\nOption 3 is 와서 in its spoken clothes. -아/어 가지고 makes the first clause the cause of the second or the step before it, so the sentence would have to end with something the rain brought about. Clearing up is the opposite of what rain brings about.\n\nOption 4 says the rain did not happen. -는 대신에 puts one thing in place of another, and 비가 많이 says plainly that it did.\n\nWhich leaves 1. Worth noticing how little Korean you had to read: the two time markers decided it, and the vocabulary in the sentence never mattered.",
+          "grammar": "A/V-더니 reports something the speaker witnessed and then a change that followed. Two things go with it. The first clause is normally about someone or something other than the speaker — 내가 밥을 먹더니 is wrong — and the second clause is usually a contrast rather than a consequence.\n\nThe three it is set against are the three endings that look nearby and are not: -더라도 concedes a hypothetical (와도 in a stronger form), -아/어 가지고 is -아/어서 as people say it out loud, and -는 대신에 substitutes.\n\n개다 is the weather verb for clearing after rain, and 맑게 개다 is the set phrase. Note the written ending: 개었다, not 개었어요 — questions 1 and 2 of the paper are printed in the plain written style throughout."
+        }
+      ]
     }
   ]
 }
