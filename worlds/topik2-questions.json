@@ -568,6 +568,39 @@
           "en": "Perhaps because fruit output was up this year, fruit prices have generally come down. The ending has to offer a cause, and offer it tentatively.",
           "why": "Look at the half after the blank before the options. 내렸다 is finished and past, and 대체적으로 hedges it — broadly speaking, on the whole. Something that has already happened, reported with a hedge, is waiting for a reason that is also hedged.\n\n-아/어서인지 is exactly that: -아/어서 gives the cause, and -인지 admits the speaker is guessing. Perhaps because output rose. It is the only one of the four that offers a reason at all.\n\nThe other three are all about things that have not happened. -(ㄴ/는)다면 supposes — if output were to rise — and you cannot suppose your way to a price that has already fallen. -아/어야 sets a requirement, and requires a second clause that waits on it: 생산량이 늘어야 가격이 내린다, output has to rise for prices to fall. That is a rule, and this sentence is a report. -(ㄴ/는)다거나 offers one of several possibilities and needs the others named.\n\nThere is a spelling trap in two of them worth seeing. 늘다 is a ㄹ-stem, and the ㄹ drops before ㄴ, so 늘다 + -ㄴ다면 comes out 는다면 — the stem has vanished from the written form. Options 1 and 3 look as though they are missing their verb. They are not; the verb is the 느 you can no longer see.",
           "grammar": "-아/어서인지 is three pieces: -아/어서 (because), 이다, and -(으)ㄴ지 (whether). Together they mean I am not certain, but perhaps because. Papers and reports like it because it lets them name a cause without claiming it.\n\nThe ㄹ-stem rule is what makes options 1 and 3 look strange. 늘다, 살다, 알다 and 만들다 all drop their ㄹ before ㄴ, ㅂ and ㅅ: 늘다 → 는다, 삽니다, 아세요, 만드는. Before a vowel the ㄹ stays, which is why options 2 and 4 keep 늘어-.\n\n대체적으로 belongs to the same register as the sentence — written, careful, and unwilling to overstate. 생산량 is 생산 plus 량, the counter suffix for quantity: 강수량, 수출량, 통화량."
+        },
+        {
+          "n": 10,
+          "art": "",
+          "phraseKo": "의사는 위염 환자에게 식사량을 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "의사는 위염 환자에게 식사량을 {}."
+            }
+          ],
+          "answer": "gehaetda",
+          "choices": [
+            {
+              "id": "gehaetda",
+              "ko": "조절하게 했다"
+            },
+            {
+              "id": "handago",
+              "ko": "조절한다고 한다"
+            },
+            {
+              "id": "ryeogo",
+              "ko": "조절하려고 했다"
+            },
+            {
+              "id": "gedoeeotda",
+              "ko": "조절하게 되었다"
+            }
+          ],
+          "en": "The doctor had the gastritis patients cut down how much they ate. One particle in the sentence decides which ending can follow.",
+          "why": "The whole question is 에게, and it is worth circling. 에게 marks a person something is done to, and here that person is the patient. So the ending has to be one that can act on somebody — and only one of the four can.\n\n-게 하다 is the causative: A makes B do it. 의사가 환자에게 조절하게 했다, the doctor had the patients regulate their intake. 에게 is exactly the marker it takes.\n\n-게 되다 is its twin and its opposite. 하다 means somebody made it happen; 되다 means it came about with nobody making it. 환자가 조절하게 되었다 would be fine on its own — the patients came to cut down — but then the doctor has nothing to do and 에게 has no one to point at. This is the pair Unit 15 drills as V-게 되다, and the exam is checking you know the other half of it.\n\n-(으)려고 fails for the same reason it failed in question 7 of the 유사 표현 set: the intender must be the doer. 의사가 조절하려고 했다 says the doctor intended to regulate — his own intake — and 환자에게 then has nowhere to attach. Twice now this ending has been the trap, and both times the tell was a second person in the sentence.\n\n-ㄴ다고 한다 reports something at second hand: it is said that they regulate. A report is not an instruction, and again 에게 is left with no job.\n\nOne particle, four endings, and three of them have no use for it.",
+          "grammar": "조절하다 is to regulate or keep in check — 식사량을 조절하다, 온도를 조절하다.\n\n-게 하다 and -게 되다 are the pair to hold side by side. -게 하다 needs an agent and marks the one made to act with 에게 or 을/를: 아이에게 약을 먹게 했다. -게 되다 has no agent at all: 약을 먹게 되었다, I ended up taking it. Unit 15 teaches the second; this question checks the first.\n\n에게 is for people and animals; 에 is for places and things; 한테 is 에게 in speech. 환자에게 is the written one, which suits a sentence about a doctor.\n\n식사량 is 식사 plus 량, the same quantity suffix as 생산량 in question 9."
         }
       ]
     },

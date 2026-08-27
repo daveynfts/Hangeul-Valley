@@ -743,7 +743,14 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "내리다", slug: 'gold_spiral', folder: 'items', nameEn: "to come down — of a price or a figure", family: 'fill' },
   { ko: "-(ㄴ/는)다면", slug: 'kinds_types', folder: 'items', nameEn: "if it were to — a supposition, not a fact", family: 'fill' },
   { ko: "-(ㄴ/는)다거나", slug: 'kinds_types', folder: 'items', nameEn: "or it does … — offering one of several", family: 'fill' },
-  { ko: "-아/어서인지", slug: 'kinds_types', folder: 'items', nameEn: "perhaps because — a cause with a hedge on it", family: 'fill' }
+  { ko: "-아/어서인지", slug: 'kinds_types', folder: 'items', nameEn: "perhaps because — a cause with a hedge on it", family: 'fill' },
+  { ko: "의사", slug: 'doctor', folder: 'items', nameEn: "a doctor", family: 'fill' },
+  { ko: "위염", slug: 'medicine_bottle', folder: 'items', nameEn: "gastritis, an inflamed stomach", family: 'fill' },
+  { ko: "환자", slug: 'clinic_building', folder: 'items', nameEn: "a patient", family: 'fill' },
+  { ko: "식사량", slug: 'servings', folder: 'items', nameEn: "how much one eats", family: 'fill' },
+  { ko: "조절하다", slug: 'justice_scales', folder: 'items', nameEn: "to regulate, to keep in check", family: 'fill' },
+  { ko: "N에게", slug: 'kinds_types', folder: 'items', nameEn: "to N — the marker a causative takes", family: 'fill' },
+  { ko: "-게 되다", slug: 'kinds_types', folder: 'items', nameEn: "to come to be that way, with nobody making it happen", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {

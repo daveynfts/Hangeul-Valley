@@ -1155,7 +1155,8 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "시원하게 해",
-          "켜게 했다"
+          "켜게 했다",
+          "조절하게 했다"
         ]
       },
       {
@@ -1363,7 +1364,8 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "않는다고",
-          "있다고"
+          "있다고",
+          "한다고 한다"
         ]
       },
       {
@@ -2449,7 +2451,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "합격하려고"
+          "합격하려고",
+          "조절하려고"
         ]
       },
       {
@@ -2599,6 +2602,67 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "늘어서인지"
+        ]
+      },
+      {
+        "ko": "의사",
+        "en": "a doctor",
+        "hint": "🩺",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "의사는"
+        ]
+      },
+      {
+        "ko": "위염",
+        "en": "gastritis, an inflamed stomach",
+        "hint": "🔥",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "환자",
+        "en": "a patient",
+        "hint": "🤕",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "환자에게"
+        ]
+      },
+      {
+        "ko": "식사량",
+        "en": "how much one eats",
+        "hint": "🍚",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "조절하다",
+        "en": "to regulate, to keep something in check",
+        "hint": "🎚️",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "N에게",
+        "en": "to N — and it marks the person a causative acts on",
+        "hint": "👉",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "에게"
+        ]
+      },
+      {
+        "ko": "-게 되다",
+        "en": "to come to be that way, with nobody making it happen",
+        "hint": "🔄",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "조절하게 되었다"
         ]
       }
     ]
