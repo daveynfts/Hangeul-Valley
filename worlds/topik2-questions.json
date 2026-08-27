@@ -880,6 +880,39 @@
           "en": "Despite the government’s efforts, that the country’s economy is not improving is simply a shame. The underlined part is a limit — only this, nothing more.",
           "why": "-(으)ㄹ 따름이다 and -(으)ㄹ 뿐이다 are the same expression in two registers. Both mean: it is only this and there is nothing else to say. 따름 is the stiffer of the two, which is why the written sentence uses it and why the exam asks for the everyday one.\n\nThe other three are three different modal claims and none of them is a limit. -(으)ㄹ 수 있다 says it might be a shame, leaving the door open. -(으)ㄹ 정도이다 measures: to such an extent that it is a shame, which would need something being measured. -(으)ㄹ 리가 없다 denies outright: there is no way it could be a shame, which reverses the sentence.\n\nAnd 뿐 is worth looking at twice. It was option 1 in question 11, where it was wrong; here it is the answer. Nothing about the word changed — what changed is that question 11 wanted a sequence and this one wants a limit. That is the whole lesson of this question type in two consecutive questions.",
           "grammar": "-(으)ㄹ 따름이다 = -(으)ㄹ 뿐이다 = only this, nothing further. Both attach to the future modifier: 감사할 따름이다, 부끄러울 뿐이다.\n\nNote that 뿐 has two lives. After a modifier it is this limiting one; after a noun it means only that noun — 너뿐이야. And in question 11 it appeared as -(으)ㄹ 뿐 without 이다, which limits an action rather than closing a sentence.\n\nN에도 불구하고 is the concessive from question 3 of this type, here doing its proper job at last. 나아지다 is 낫다 with the change ending -아/어지다 — to be better, then to get better — and 안타깝다 is the ㅂ-irregular, giving 안타까울."
+        },
+        {
+          "n": 15,
+          "art": "",
+          "phraseKo": "한국의 대학교에 입학하고자 한국으로 오는 유학생들이 날로 증가하고 있다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "한국의 대학교에 {} 한국으로 오는 유학생들이 날로 증가하고 있다."
+            }
+          ],
+          "answer": "wihaeseo",
+          "choices": [
+            {
+              "id": "goseo",
+              "ko": "입학하고서"
+            },
+            {
+              "id": "bwatja",
+              "ko": "입학해 봤자"
+            },
+            {
+              "id": "jamaja",
+              "ko": "입학하자마자"
+            },
+            {
+              "id": "wihaeseo",
+              "ko": "입학하기 위해서"
+            }
+          ],
+          "en": "The number of international students coming to Korea in order to enter a Korean university is rising by the day. The underlined part is a purpose.",
+          "why": "-고자 states a purpose in the written register: they come in order to enrol. Its everyday twin is -기 위해서, and that is the answer — the same swap this question type keeps asking for, where the stiff form is underlined and the plain one is what you must recognise.\n\nThe other three are all about time or futility, and none of them is a reason for coming.\n\n-고서 is sequence: enrol first, then come. That reverses the order of events, because you cannot enrol at a Korean university and then travel to Korea to do it.\n\n-자마자 is immediacy: the moment they enrol, they come. Same problem, tighter timing.\n\n-아/어 봤자 concedes and then dismisses: even if they get in, it is no use. That is not why anybody buys a plane ticket, and the second half of the sentence — numbers rising by the day — says the opposite.\n\nWorth noticing that the sentence would still read smoothly with any of them. What rules out three is not grammar but the direction of time and of intent, which is the same test question 11 of this type set with 꽂아다가.",
+          "grammar": "입학하다 is to be admitted to a school, and it takes 에: 대학교에 입학하다. 졸업하다 takes 를. -고자 belongs to writing and speeches: 말씀드리고자 합니다, 알아보고자 한다. In speech people say -(으)려고 or -기 위해서 instead. All three are purpose, and -(으)려고 is the one with the same-subject restriction that decided question 7 and question 10 — -고자 and -기 위해서 share it, which is why they can stand in for each other here.\n\n-고서 is -고 with 서 pinning the order down, so it is sequence and never cause. -자마자 is tighter still: no gap at all between the two.\n\n-아/어 봤자 is 보다 turned into a dismissal: 아무리 -아/어 봤자 소용없다. It always expects a negative outcome behind it.\n\n날로 is day by day and goes with a verb of increase: 날로 증가하다, 날로 발전하다. 증가하다 is the formal counterpart of 늘다 from the 어휘 pages."
         }
       ]
     }

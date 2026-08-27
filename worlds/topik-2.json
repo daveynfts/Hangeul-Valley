@@ -573,7 +573,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "기 위해"
+          "기 위해",
+          "기 위해서"
         ]
       },
       {
@@ -2951,6 +2952,101 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "느끼는 듯했다"
+        ]
+      },
+      {
+        "ko": "대학교",
+        "en": "a university",
+        "hint": "🏫",
+        "category": "정치",
+        "categoryEn": "Politics & government",
+        "forms": [
+          "대학교에"
+        ]
+      },
+      {
+        "ko": "입학하다",
+        "en": "to enter a school, to be admitted",
+        "hint": "🎒",
+        "category": "정치",
+        "categoryEn": "Politics & government"
+      },
+      {
+        "ko": "유학생",
+        "en": "a student studying abroad",
+        "hint": "🎓",
+        "category": "정치",
+        "categoryEn": "Politics & government",
+        "forms": [
+          "유학생들"
+        ]
+      },
+      {
+        "ko": "날로",
+        "en": "day by day, more so every day",
+        "hint": "📈",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "증가하다",
+        "en": "to increase — the formal word, used of figures",
+        "hint": "📊",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "증가하고"
+        ]
+      },
+      {
+        "ko": "한국",
+        "en": "Korea",
+        "hint": "🇰🇷",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "한국의",
+          "한국으로"
+        ]
+      },
+      {
+        "ko": "-고자",
+        "en": "in order to — the written twin of -기 위해서",
+        "hint": "🎯",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "입학하고자"
+        ]
+      },
+      {
+        "ko": "-고서",
+        "en": "having done it, and then",
+        "hint": "➡️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "입학하고서"
+        ]
+      },
+      {
+        "ko": "-아/어 봤자",
+        "en": "even if you try, it will get you nowhere",
+        "hint": "🚫",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "입학해 봤자"
+        ]
+      },
+      {
+        "ko": "-자마자",
+        "en": "the moment it happens",
+        "hint": "⚡",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "입학하자마자"
         ]
       }
     ]

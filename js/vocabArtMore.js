@@ -774,7 +774,16 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "-(으)려야 -(으)ㄹ 수 없다", slug: 'kinds_types', folder: 'items', nameEn: "try as you might, you cannot", family: 'fill' },
   { ko: "-아/어도", slug: 'kinds_types', folder: 'items', nameEn: "even if you do", family: 'fill' },
   { ko: "-는 통에", slug: 'kinds_types', folder: 'items', nameEn: "in the confusion of it", family: 'fill' },
-  { ko: "-는 듯하다", slug: 'kinds_types', folder: 'items', nameEn: "to seem to be doing it", family: 'fill' }
+  { ko: "-는 듯하다", slug: 'kinds_types', folder: 'items', nameEn: "to seem to be doing it", family: 'fill' },
+  { ko: "대학교", slug: 'schoolhouse', folder: 'items', nameEn: "a university", family: 'fill' },
+  { ko: "유학생", slug: 'desk_globe', folder: 'items', nameEn: "a student studying abroad", family: 'fill' },
+  { ko: "날로", slug: 'line_graph', folder: 'items', nameEn: "day by day, more so every day", family: 'fill' },
+  { ko: "증가하다", slug: 'line_graph', folder: 'items', nameEn: "to increase — the formal word", family: 'fill' },
+  { ko: "한국", slug: 'neighboring_country', folder: 'items', nameEn: "Korea", family: 'fill' },
+  { ko: "-고자", slug: 'kinds_types', folder: 'items', nameEn: "in order to — the written twin of -기 위해서", family: 'fill' },
+  { ko: "-고서", slug: 'kinds_types', folder: 'items', nameEn: "having done it, and then", family: 'fill' },
+  { ko: "-아/어 봤자", slug: 'kinds_types', folder: 'items', nameEn: "even if you try, it will get you nowhere", family: 'fill' },
+  { ko: "-자마자", slug: 'kinds_types', folder: 'items', nameEn: "the moment it happens", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
