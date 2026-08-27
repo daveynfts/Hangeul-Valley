@@ -1306,7 +1306,8 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "사람들"
+          "사람들",
+          "사람이다"
         ]
       },
       {
@@ -2155,6 +2156,202 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "켜곤 했다"
+        ]
+      },
+      {
+        "ko": "비장애인",
+        "en": "a person without a disability",
+        "hint": "🧍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "쉽지 않다",
+        "en": "to be no easy thing",
+        "hint": "😤",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "쉽지"
+        ]
+      },
+      {
+        "ko": "몸",
+        "en": "a body",
+        "hint": "🫀",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "몸으로"
+        ]
+      },
+      {
+        "ko": "높다",
+        "en": "to be high",
+        "hint": "⛰️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "높은"
+        ]
+      },
+      {
+        "ko": "산",
+        "en": "a mountain",
+        "hint": "🏔️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "산에",
+          "산이"
+        ]
+      },
+      {
+        "ko": "정말",
+        "en": "really, truly",
+        "hint": "💯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "대단하다",
+        "en": "to be remarkable",
+        "hint": "🏅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "대단한"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 텐데",
+        "en": "it would surely be … and yet — a supposition with a contrast behind it",
+        "hint": "🤔",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "않을 텐데"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ까 봐",
+        "en": "for fear that it might",
+        "hint": "😰",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "않을까 봐"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 테니까",
+        "en": "since it will surely be … , so do this",
+        "hint": "👉",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "않을 테니까"
+        ]
+      },
+      {
+        "ko": "-(으)ㄴ 데다가",
+        "en": "on top of being …",
+        "hint": "➕",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "않은 데다가"
+        ]
+      },
+      {
+        "ko": "-다니",
+        "en": "to think that … ! — surprise or admiration",
+        "hint": "😮",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "오르다니"
+        ]
+      },
+      {
+        "ko": "앞으로",
+        "en": "from now on",
+        "hint": "➡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "점점",
+        "en": "little by little",
+        "hint": "🐢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "따뜻해지다",
+        "en": "to get warmer — 따뜻하다 with the change ending",
+        "hint": "🌡️",
+        "category": "날씨",
+        "categoryEn": "Weather & seasons",
+        "forms": [
+          "따뜻해지면서"
+        ]
+      },
+      {
+        "ko": "푸르다",
+        "en": "to be green, to be verdant",
+        "hint": "🌲",
+        "category": "날씨",
+        "categoryEn": "Weather & seasons",
+        "forms": [
+          "푸르게"
+        ]
+      },
+      {
+        "ko": "변하다",
+        "en": "to change, to turn into something else",
+        "hint": "🔄",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-아/어 가다",
+        "en": "the change carries on away from now, into the future",
+        "hint": "⏩",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "변해 갈"
+        ]
+      },
+      {
+        "ko": "-아/어 오다",
+        "en": "the change has been running from the past up to now",
+        "hint": "⏪",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "변해 올"
+        ]
+      },
+      {
+        "ko": "-아/어 보다",
+        "en": "to try doing it",
+        "hint": "🧪",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "변해 볼"
+        ]
+      },
+      {
+        "ko": "-아/어 대다",
+        "en": "to keep on doing it, more than one would like",
+        "hint": "🔁",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "변해 댈"
         ]
       }
     ]

@@ -602,7 +602,28 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "켜다", slug: 'light_bulb', folder: 'items', nameEn: "to switch on", family: 'fill' },
   { ko: "-아/어 놓다", slug: 'kinds_types', folder: 'items', nameEn: "do it and leave it that way", family: 'fill' },
   { ko: "-아/어 두다", slug: 'kinds_types', folder: 'items', nameEn: "do it and leave it that way — the twin of -아/어 놓다", family: 'fill' },
-  { ko: "-곤 하다", slug: 'kinds_types', folder: 'items', nameEn: "used to do it, again and again", family: 'fill' }
+  { ko: "-곤 하다", slug: 'kinds_types', folder: 'items', nameEn: "used to do it, again and again", family: 'fill' },
+  { ko: "비장애인", slug: 'disabled_person', folder: 'items', nameEn: "a person without a disability", family: 'fill' },
+  { ko: "쉽지 않다", slug: 'complicated', folder: 'items', nameEn: "to be no easy thing", family: 'fill' },
+  { ko: "몸", slug: 'femur_bone', folder: 'items', nameEn: "a body", family: 'fill' },
+  { ko: "높다", slug: 'apartment_block', folder: 'items', nameEn: "to be high", family: 'fill' },
+  { ko: "산", slug: 'desk_globe', folder: 'items', nameEn: "a mountain", family: 'fill' },
+  { ko: "정말", slug: 'of_course', folder: 'items', nameEn: "really, truly", family: 'fill' },
+  { ko: "대단하다", slug: 'performance', folder: 'items', nameEn: "to be remarkable", family: 'fill' },
+  { ko: "-(으)ㄹ 텐데", slug: 'kinds_types', folder: 'items', nameEn: "it would surely be … and yet", family: 'fill' },
+  { ko: "-(으)ㄹ까 봐", slug: 'kinds_types', folder: 'items', nameEn: "for fear that it might", family: 'fill' },
+  { ko: "-(으)ㄹ 테니까", slug: 'kinds_types', folder: 'items', nameEn: "since it will surely be … , so do this", family: 'fill' },
+  { ko: "-(으)ㄴ 데다가", slug: 'kinds_types', folder: 'items', nameEn: "on top of being …", family: 'fill' },
+  { ko: "-다니", slug: 'kinds_types', folder: 'items', nameEn: "to think that … !", family: 'fill' },
+  { ko: "앞으로", slug: 'in_advance', folder: 'items', nameEn: "from now on", family: 'fill' },
+  { ko: "점점", slug: 'line_graph', folder: 'items', nameEn: "little by little", family: 'fill' },
+  { ko: "따뜻해지다", slug: 'sun_icon', folder: 'items', nameEn: "to get warmer", family: 'fill' },
+  { ko: "푸르다", slug: 'green_onion', folder: 'items', nameEn: "to be green, to be verdant", family: 'fill' },
+  { ko: "변하다", slug: 'different', folder: 'items', nameEn: "to change into something else", family: 'fill' },
+  { ko: "-아/어 가다", slug: 'kinds_types', folder: 'items', nameEn: "the change carries on into the future", family: 'fill' },
+  { ko: "-아/어 오다", slug: 'kinds_types', folder: 'items', nameEn: "the change has run from the past up to now", family: 'fill' },
+  { ko: "-아/어 보다", slug: 'kinds_types', folder: 'items', nameEn: "to try doing it", family: 'fill' },
+  { ko: "-아/어 대다", slug: 'kinds_types', folder: 'items', nameEn: "to keep on doing it, more than one would like", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {

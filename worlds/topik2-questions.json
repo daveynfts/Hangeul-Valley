@@ -401,7 +401,7 @@
       "instructionKo": "( )에 들어갈 말로 가장 알맞은 것을 고르십시오.",
       "instructionEn": "Choose the expression that best fits the blank.",
       "blurbEn": "One sentence, one gap, and four endings on the same verb — so the answer is never in the vocabulary.",
-      "noteEn": "Questions 1 and 2 give you a sentence with a hole in it and four endings on the same verb. Because the verb never changes, no amount of vocabulary will settle it — the answer is always in the words around the blank.\n\nWhat to read first: time words and the particles on them. 오전에는 … 지금은 with 은/는 on both is a contrast being set up, and only some endings can hold one. Then check whether the first clause is a fact or a supposition, because half the endings offered will be concessive or conditional and those need a supposition.\n\nThe four that keep turning up in this slot: -더니 (I saw A, then B, and B surprises), -더라도 (even if A, still B), -아/어 가지고 (A, and so B), -는 대신에 (B in place of A). Three of them need the two clauses to agree in direction. Only -더니 wants them to differ.\n\nA second habit, from question 2: find who is speaking, and about whom. Several of the endings that turn up in this slot are restricted by person — -더라 needs someone other than the speaker, -아/어야지 needs the speaker themselves — so a quotation mark or a name in front of the sentence can settle two options before you have weighed what any of them mean.",
+      "noteEn": "Questions 1 and 2 give you a sentence with a hole in it and four endings on the same verb. Because the verb never changes, no amount of vocabulary will settle it — the answer is always in the words around the blank.\n\nWhat to read first: time words and the particles on them. 오전에는 … 지금은 with 은/는 on both is a contrast being set up, and only some endings can hold one. Then check whether the first clause is a fact or a supposition, because half the endings offered will be concessive or conditional and those need a supposition.\n\nThe four that keep turning up in this slot: -더니 (I saw A, then B, and B surprises), -더라도 (even if A, still B), -아/어 가지고 (A, and so B), -는 대신에 (B in place of A). Three of them need the two clauses to agree in direction. Only -더니 wants them to differ.\n\nA second habit, from question 2: find who is speaking, and about whom. Several of the endings that turn up in this slot are restricted by person — -더라 needs someone other than the speaker, -아/어야지 needs the speaker themselves — so a quotation mark or a name in front of the sentence can settle two options before you have weighed what any of them mean.\n\nA third habit, from questions 5 and 6: read the ending of the sentence before you read the options. Question 5 ends in -다니, which needs a contrast in front of it; question 6 opens with 앞으로, which fixes the direction of travel. In both, one word outside the brackets settles the answer, and none of the words inside them do.",
       "bank": [],
       "items": [
         {
@@ -469,6 +469,72 @@
           "en": "Sumin said, \"I’m so tired — today I’ll go straight home and get some rest!\" The ending has to be a resolution the speaker makes to herself.",
           "why": "Read the frame before the gap. 수민이는 \"…\" 하고 말했다 is direct quotation: everything between the marks is Sumin speaking, so the \"I\" inside is Sumin. That one fact removes two of the four options before you weigh their meanings, because two of these endings are restricted by person.\n\n-더라 reports what you witnessed of somebody else. 쉬더라 is \"(I saw that) they rested\". Korean will not let you use it of your own resting, and inside this quotation the rester is the speaker.\n\n-(으)ㄹ걸 has two lives and neither fits. As regret it looks back at what you did not do — I should have rested — while 오늘은 … 가서 is a plan for a day that has not finished. As conjecture it guesses about someone else, which the quotation again rules out.\n\n-기도 하다 is the additive one: I also rest, I sometimes rest. But 오늘은 carries 은, setting today against other days, and the sentence ends in an exclamation mark. Both are asking for a decision, and a habit is not a decision.\n\nWhich leaves 3. -아/어야지 is the ending Korean uses to tell yourself what you are going to do. Everything in the sentence has been building to it: 너무 피곤하니까 gives the reason, 오늘은 marks the break from routine, and the exclamation mark is the resolve landing.\n\nWorth noticing that the same habit settled both questions of this type. Question 1 turned on two time words; this one turns on who is speaking. Neither needed the vocabulary.",
           "grammar": "-아/어야지 is a resolution spoken to oneself: 이제 자야지, 나도 운동해야지. Said to someone else with the right intonation it becomes a nudge — 빨리 자야지 — but the first-person use is what the exam tests.\n\nThe three it is set against are all person-restricted or aspect-restricted. -더라 needs a subject other than the speaker and something the speaker saw. -(으)ㄹ걸 is regret (안 갈걸 그랬다) or supposition (지금쯤 도착했을걸). -기도 하다 adds an occasional or additional case.\n\n쉬다 is to rest, and 피곤하다 is to be tired — the two words the sentence is built out of. 하고 말했다 is direct quotation, keeping the words as spoken; 라고 is the other direct marker, and indirect speech would be -다고 or -냐고.\n\nOne more thing the sentence is quietly teaching: it uses -(으)니까 for the reason rather than -아/어서. That is the rule — when what follows is a suggestion, a command or a resolve, Korean wants -(으)니까. 피곤해서 쉬어야지 is the version that sounds wrong to a native ear."
+        },
+        {
+          "n": 5,
+          "art": "",
+          "phraseKo": "비장애인도 쉽지 (   ) 불편한 몸으로 높은 산에 오르다니 정말 대단한 사람이다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "비장애인도 쉽지 {} 불편한 몸으로 높은 산에 오르다니 정말 대단한 사람이다."
+            }
+          ],
+          "answer": "tende",
+          "choices": [
+            {
+              "id": "tende",
+              "ko": "않을 텐데"
+            },
+            {
+              "id": "kkabwa",
+              "ko": "않을까 봐"
+            },
+            {
+              "id": "tenikka",
+              "ko": "않을 테니까"
+            },
+            {
+              "id": "dedaga",
+              "ko": "않은 데다가"
+            }
+          ],
+          "en": "It would hardly be easy even for someone without a disability — and to climb a high mountain with a body that struggles! A truly remarkable person.",
+          "why": "The sentence ends in admiration: 오르다니 정말 대단한 사람이다. -다니 is the ending for being struck by something, so whatever fills the blank has to set that up.\n\nWhat sets admiration up is a contrast, and the sentence has already built one: 비장애인도, with 도 meaning even — even someone who has no disability. The half before the blank is saying the climb is hard for anybody; the half after is saying this person did it anyway.\n\n-(으)ㄹ 텐데 is exactly that shape. It supposes — it would surely not be easy — and the 데 leaves the sentence hanging on a but. Nothing else in the list does both.\n\n-(으)ㄹ까 봐 is worry: 쉽지 않을까 봐 means fearing it might not be easy, and it needs a second clause where somebody takes a precaution. Admiring a stranger is not a precaution.\n\n-(으)ㄹ 테니까 supposes and then gives an instruction: 쉽지 않을 테니까 준비를 잘 하세요. The second half here is an exclamation, and you cannot base a command on it.\n\n-(으)ㄴ 데다가 adds a second drawback to the first. It would need what follows to be another difficulty, and what follows is the achievement.\n\nSo the four are a contrast, a worry, a reason for an instruction and an addition. Only the contrast can carry a 다니.",
+          "grammar": "-(으)ㄹ 텐데 is 터 (a supposition) plus -인데, and the 데 is what makes it lean forward: 비가 올 텐데 우산을 안 가져갔어요. Notice that it is built from the same 터 as -(으)ㄹ 테니까 — the difference is entirely in what comes after, a contrast against a reason.\n\n-다니 expresses being struck by something, and it takes the plain form: 오르다니, 먹다니, 그렇게 빠르다니. It almost always wants a contrast in front of it, which is why this question can be answered from the ending alone.\n\n비장애인 is 비- (non-) plus 장애인, the same prefix as 비공개, 비무장. And 도 here is even, not also — 비장애인도 쉽지 않다 means it is not easy even for them."
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "앞으로 날씨가 따뜻해지면서 산이 점점 푸르게 (   ).",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "앞으로 날씨가 따뜻해지면서 산이 점점 푸르게 {}."
+            }
+          ],
+          "answer": "gada",
+          "choices": [
+            {
+              "id": "gada",
+              "ko": "변해 갈 것이다"
+            },
+            {
+              "id": "oda",
+              "ko": "변해 올 것이다"
+            },
+            {
+              "id": "boda",
+              "ko": "변해 볼 것이다"
+            },
+            {
+              "id": "daeda",
+              "ko": "변해 댈 것이다"
+            }
+          ],
+          "en": "As the weather warms from now on, the mountains will gradually turn green. The ending has to carry a change moving away from now.",
+          "why": "All four are 변하다 with a different helping verb behind it, and two of them are a genuine pair worth learning together.\n\n-아/어 가다 and -아/어 오다 both describe a change in progress, and they differ only in direction. 가다 runs away from now into the future; 오다 runs from the past up to now. 살아 왔다 is the life you have lived so far; 살아 갈 것이다 is the life ahead.\n\nThe sentence settles it in its first word. 앞으로 means from now on, and 점점 says the change is gradual rather than done. A gradual change pointed at the future is -아/어 가다, and 올 것이다 would have the greening arrive from the past, which 앞으로 has just ruled out.\n\n-아/어 보다 is to try doing something, and trying needs somebody who decides to try. A mountain does not attempt to be green.\n\n-아/어 대다 is to keep on doing something more than one would like, and it is used of people and usually with disapproval — 떠들어 대다, 먹어 대다. Neither the subject nor the tone fits.\n\nWorth noticing what decided it: one adverb. The vocabulary of the sentence never came into it, which is what this question type does.",
+          "grammar": "변하다 is to change into something else. Behind it, -아/어 가다 and -아/어 오다 are the aspectual pair for a change under way, and the arrow is the whole difference: 가다 forward from now, 오다 backward to now.\n\n-아/어 보다 (try) and -아/어 대다 (keep on, excessively) are the other two helping verbs learners meet at the same time. 대다 carries disapproval and needs a human subject, which is why it can be ruled out without reading the rest.\n\n따뜻해지면서 is three pieces: 따뜻하다, the change ending -아/어지다 from Unit 15, and -(으)면서, which runs two things alongside each other. 푸르게 is 푸르다 in its adverbial form, describing how the mountain changes."
         }
       ]
     },
