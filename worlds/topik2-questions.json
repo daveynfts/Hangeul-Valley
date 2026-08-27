@@ -649,6 +649,39 @@
           "en": "I gave my friend yeot and tteok so that he would pass the company entrance exam. The underlined part is a purpose, and its replacement has to be one too.",
           "why": "Two people are doing two different things in this sentence, and that is what decides it. The friend is the one who passes; the speaker is the one who gives the sweets. Once you have noticed that, one option is simply ungrammatical rather than merely wrong.\n\n-(으)려고 is the trap, and it is a good one, because in English \"in order to pass\" sounds exactly right. Korean does not allow it: -(으)려고 requires the intender and the doer to be the same person. 내가 합격하려고 공부했다 is fine — I studied, I intended to pass. 친구가 합격하려고 내가 떡을 주었다 is not a sentence.\n\n-도록 has no such restriction, which is exactly why the sentence uses it, and V-게 is its everyday twin. 아이가 잘 자도록 불을 껐다 and 아이가 잘 자게 불을 껐다 are the same sentence in two registers. That is the answer.\n\n-거든 is a condition: if he passes. That would make the sweets a reward afterwards rather than a wish beforehand, and the tense would have to change with it.\n\n-(으)ㄹ 만큼 is degree: enough to pass. It would say the sweets were sufficient in quantity to constitute passing, which is not a thought anyone has had.\n\nSo the four are a purpose, a condition, a same-subject intention and a degree — and the sentence has two subjects, which removes the intention before you weigh anything else.",
           "grammar": "합격하다 is to pass an exam — the one thing every option in the list agrees on. -도록 and V-게 both mean so that, and neither cares whether the two clauses share a subject. -(으)려고 does care, and that single restriction is the whole of this question. It is worth memorising as a pair of sentences rather than as a rule: 친구가 합격하도록 떡을 주었다 (fine) against 친구가 합격하려고 떡을 주었다 (not a sentence).\n\n-도록 has other senses the exam also uses — 밤새도록 in question 4 of this same type is the \"until, to the extent of\" one. Purpose and extent are the two, and which one is meant is decided by what the clause is about.\n\nThe sweets are not random. 엿 and 떡 are sticky, and 붙다 means both to stick and to pass an exam, so sticky food is what Korea gives a candidate. The opposite superstition runs alongside it: you do not eat 미역국 the morning of a test, because seaweed soup is slippery."
+        },
+        {
+          "n": 8,
+          "art": "",
+          "phraseKo": "한 나라의 미래는 그 나라의 교육 정책에 따라 달라진다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "한 나라의 미래는 그 나라의 {}."
+            }
+          ],
+          "answer": "dallyeo",
+          "choices": [
+            {
+              "id": "doeeotda",
+              "ko": "교육 정책이 되었다"
+            },
+            {
+              "id": "ilsuga",
+              "ko": "교육 정책일 수가 있다"
+            },
+            {
+              "id": "dallyeo",
+              "ko": "교육 정책에 달려 있다"
+            },
+            {
+              "id": "inhan",
+              "ko": "교육 정책으로 인한 것이다"
+            }
+          ],
+          "en": "A country's future varies with its education policy. The underlined part says one thing depends on another, and so must its replacement.",
+          "why": "N에 따라 달라지다 says two things move together: change the policy and the future changes with it. N에 달려 있다 says the same thing in four words — it hangs on the policy. That is the answer, and the two are close enough that Korean uses them interchangeably in exactly this kind of sentence.\n\nOptions 1 and 2 both say the future *is* the policy rather than *depends on* it, which is a different relation altogether — and option 1 adds a past tense to a sentence that is a general truth in the present. 되었다 against 달라진다 is enough on its own.\n\nOption 4 is the one worth slowing down for. (으)로 인한 것이다 states a cause, and a cause is not the same as a variable. 달라진다 says different policies give different futures; (으)로 인한 것이다 says the future that exists was produced by the policy. The first is a rule about how two things vary, the second is a claim about one outcome that has already happened.\n\nThere is a nice trap in that. (으)로 인하여 was the phrase question 3 of this same type was built on, where its twin (으)로 말미암아 was the answer. Here the same expression is the distractor. What a question asks you to match is never the word on its own — it is the relation the word names in that sentence.",
+          "grammar": "교육 is education and 정책 is a policy, so 교육 정책 is two ordinary words rather than one hard one — the same build as 부동산 정책 in question 7 of the headline set.\n\nN에 따라 달라지다 and N에 달려 있다 are the pair to learn together: 성적은 노력에 따라 달라진다 = 성적은 노력에 달려 있다. 달려 있다 comes from 달리다, to hang, and the picture holds — the outcome hangs on the thing named.\n\nN에 따라 and N에 따라서 are the same expression; the 서 is optional. Do not confuse either with N에 따르면, which reports a source: 신문에 따르면.\n\n-일 수가 있다 in option 2 is -(으)ㄹ 수 있다 with 가 added for emphasis, and it attaches to a noun here through 이다: 정책 + 이 + ㄹ 수가 있다 → 정책일 수가 있다.\n\n달라지다 is 다르다 with the change ending -아/어지다 — the same ending Unit 15 drills. To be different, and then to become different."
         }
       ]
     }

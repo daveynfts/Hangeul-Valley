@@ -727,7 +727,14 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "V-게", slug: 'kinds_types', folder: 'items', nameEn: "so that — the everyday twin of -도록", family: 'fill' },
   { ko: "-거든", slug: 'kinds_types', folder: 'items', nameEn: "if it happens, when it happens", family: 'fill' },
   { ko: "-(으)려고", slug: 'kinds_types', folder: 'items', nameEn: "intending to — same subject required", family: 'fill' },
-  { ko: "-(으)ㄹ 만큼", slug: 'kinds_types', folder: 'items', nameEn: "to the extent that, as much as", family: 'fill' }
+  { ko: "-(으)ㄹ 만큼", slug: 'kinds_types', folder: 'items', nameEn: "to the extent that, as much as", family: 'fill' },
+  { ko: "나라", slug: 'neighboring_country', folder: 'items', nameEn: "a country", family: 'fill' },
+  { ko: "미래", slug: 'hourglass_ornament', folder: 'items', nameEn: "the future", family: 'fill' },
+  { ko: "교육", slug: 'schoolhouse', folder: 'items', nameEn: "education", family: 'fill' },
+  { ko: "교육 정책", slug: 'system_policy', folder: 'items', nameEn: "education policy", family: 'fill' },
+  { ko: "달라지다", slug: 'different', folder: 'items', nameEn: "to come out differently", family: 'fill' },
+  { ko: "되다", slug: 'gold_spiral', folder: 'items', nameEn: "to become", family: 'fill' },
+  { ko: "N에 달려 있다", slug: 'justice_scales', folder: 'items', nameEn: "to depend on N, to rest on N", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {

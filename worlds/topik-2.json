@@ -584,7 +584,8 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "로 인해",
-          "로 인하여"
+          "로 인하여",
+          "으로 인한"
         ]
       },
       {
@@ -1404,7 +1405,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "수 있다"
+          "수 있다",
+          "수가 있다"
         ]
       },
       {
@@ -2060,7 +2062,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "에 따라서"
+          "에 따라서",
+          "에 따라"
         ]
       },
       {
@@ -2456,6 +2459,67 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "합격할 만큼"
+        ]
+      },
+      {
+        "ko": "나라",
+        "en": "a country",
+        "hint": "🌏",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "나라의"
+        ]
+      },
+      {
+        "ko": "미래",
+        "en": "the future",
+        "hint": "⏳",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "교육",
+        "en": "education",
+        "hint": "🏫",
+        "category": "정치",
+        "categoryEn": "Politics & government"
+      },
+      {
+        "ko": "교육 정책",
+        "en": "education policy",
+        "hint": "📜",
+        "category": "정치",
+        "categoryEn": "Politics & government"
+      },
+      {
+        "ko": "달라지다",
+        "en": "to come out differently",
+        "hint": "🔀",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "달라진다"
+        ]
+      },
+      {
+        "ko": "되다",
+        "en": "to become",
+        "hint": "➡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "되었다"
+        ]
+      },
+      {
+        "ko": "N에 달려 있다",
+        "en": "to depend on N, to rest on N",
+        "hint": "⚖️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "에 달려 있다"
         ]
       }
     ]
