@@ -401,7 +401,7 @@
       "instructionKo": "( )에 들어갈 말로 가장 알맞은 것을 고르십시오.",
       "instructionEn": "Choose the expression that best fits the blank.",
       "blurbEn": "One sentence, one gap, and four endings on the same verb — so the answer is never in the vocabulary.",
-      "noteEn": "Questions 1 and 2 give you a sentence with a hole in it and four endings on the same verb. Because the verb never changes, no amount of vocabulary will settle it — the answer is always in the words around the blank.\n\nWhat to read first: time words and the particles on them. 오전에는 … 지금은 with 은/는 on both is a contrast being set up, and only some endings can hold one. Then check whether the first clause is a fact or a supposition, because half the endings offered will be concessive or conditional and those need a supposition.\n\nThe four that keep turning up in this slot: -더니 (I saw A, then B, and B surprises), -더라도 (even if A, still B), -아/어 가지고 (A, and so B), -는 대신에 (B in place of A). Three of them need the two clauses to agree in direction. Only -더니 wants them to differ.",
+      "noteEn": "Questions 1 and 2 give you a sentence with a hole in it and four endings on the same verb. Because the verb never changes, no amount of vocabulary will settle it — the answer is always in the words around the blank.\n\nWhat to read first: time words and the particles on them. 오전에는 … 지금은 with 은/는 on both is a contrast being set up, and only some endings can hold one. Then check whether the first clause is a fact or a supposition, because half the endings offered will be concessive or conditional and those need a supposition.\n\nThe four that keep turning up in this slot: -더니 (I saw A, then B, and B surprises), -더라도 (even if A, still B), -아/어 가지고 (A, and so B), -는 대신에 (B in place of A). Three of them need the two clauses to agree in direction. Only -더니 wants them to differ.\n\nA second habit, from question 2: find who is speaking, and about whom. Several of the endings that turn up in this slot are restricted by person — -더라 needs someone other than the speaker, -아/어야지 needs the speaker themselves — so a quotation mark or a name in front of the sentence can settle two options before you have weighed what any of them mean.",
       "bank": [],
       "items": [
         {
@@ -436,6 +436,39 @@
           "en": "It rained hard in the morning, and now the sky has cleared. The ending has to carry a then and a now that disagree.",
           "why": "All four options are the same verb. 오다 does not move; only the ending does, and that is what this question type is. So the sentence around the blank is the whole of the evidence — and the sentence gives you two time words, 오전에는 and 지금은, set against each other, with 은/는 on both marking the contrast.\n\nOne ending is built for exactly that. -더니 says: I saw A, and then B, and B is not what A led you to expect. 오전에는 비가 오더니 지금은 개었다 is its natural shape.\n\nOption 2 is the concessive. -더라도 means even if, and what it concedes is hypothetical — it might rain, it might not. But 오전에는 pins the rain to a past morning as a fact, and 개었다 is a finished event rather than something that holds in spite of rain.\n\nOption 3 is 와서 in its spoken clothes. -아/어 가지고 makes the first clause the cause of the second or the step before it, so the sentence would have to end with something the rain brought about. Clearing up is the opposite of what rain brings about.\n\nOption 4 says the rain did not happen. -는 대신에 puts one thing in place of another, and 비가 많이 says plainly that it did.\n\nWhich leaves 1. Worth noticing how little Korean you had to read: the two time markers decided it, and the vocabulary in the sentence never mattered.",
           "grammar": "A/V-더니 reports something the speaker witnessed and then a change that followed. Two things go with it. The first clause is normally about someone or something other than the speaker — 내가 밥을 먹더니 is wrong — and the second clause is usually a contrast rather than a consequence.\n\nThe three it is set against are the three endings that look nearby and are not: -더라도 concedes a hypothetical (와도 in a stronger form), -아/어 가지고 is -아/어서 as people say it out loud, and -는 대신에 substitutes.\n\n개다 is the weather verb for clearing after rain, and 맑게 개다 is the set phrase. Note the written ending: 개었다, not 개었어요 — questions 1 and 2 of the paper are printed in the plain written style throughout."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "phraseKo": "수민이는 \"너무 피곤하니까 오늘은 일찍 집에 가서 (   )!\" 하고 말했다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "수민이는 \"너무 피곤하니까 오늘은 일찍 집에 가서 {}!\" 하고 말했다."
+            }
+          ],
+          "answer": "eoyaji",
+          "choices": [
+            {
+              "id": "olgeol",
+              "ko": "쉴걸"
+            },
+            {
+              "id": "deora",
+              "ko": "쉬더라"
+            },
+            {
+              "id": "eoyaji",
+              "ko": "쉬어야지"
+            },
+            {
+              "id": "gido",
+              "ko": "쉬기도 해"
+            }
+          ],
+          "en": "Sumin said, \"I’m so tired — today I’ll go straight home and get some rest!\" The ending has to be a resolution the speaker makes to herself.",
+          "why": "Read the frame before the gap. 수민이는 \"…\" 하고 말했다 is direct quotation: everything between the marks is Sumin speaking, so the \"I\" inside is Sumin. That one fact removes two of the four options before you weigh their meanings, because two of these endings are restricted by person.\n\n-더라 reports what you witnessed of somebody else. 쉬더라 is \"(I saw that) they rested\". Korean will not let you use it of your own resting, and inside this quotation the rester is the speaker.\n\n-(으)ㄹ걸 has two lives and neither fits. As regret it looks back at what you did not do — I should have rested — while 오늘은 … 가서 is a plan for a day that has not finished. As conjecture it guesses about someone else, which the quotation again rules out.\n\n-기도 하다 is the additive one: I also rest, I sometimes rest. But 오늘은 carries 은, setting today against other days, and the sentence ends in an exclamation mark. Both are asking for a decision, and a habit is not a decision.\n\nWhich leaves 3. -아/어야지 is the ending Korean uses to tell yourself what you are going to do. Everything in the sentence has been building to it: 너무 피곤하니까 gives the reason, 오늘은 marks the break from routine, and the exclamation mark is the resolve landing.\n\nWorth noticing that the same habit settled both questions of this type. Question 1 turned on two time words; this one turns on who is speaking. Neither needed the vocabulary.",
+          "grammar": "-아/어야지 is a resolution spoken to oneself: 이제 자야지, 나도 운동해야지. Said to someone else with the right intonation it becomes a nudge — 빨리 자야지 — but the first-person use is what the exam tests.\n\nThe three it is set against are all person-restricted or aspect-restricted. -더라 needs a subject other than the speaker and something the speaker saw. -(으)ㄹ걸 is regret (안 갈걸 그랬다) or supposition (지금쯤 도착했을걸). -기도 하다 adds an occasional or additional case.\n\n쉬다 is to rest, and 피곤하다 is to be tired — the two words the sentence is built out of. 하고 말했다 is direct quotation, keeping the words as spoken; 라고 is the other direct marker, and indirect speech would be -다고 or -냐고.\n\nOne more thing the sentence is quietly teaching: it uses -(으)니까 for the reason rather than -아/어서. That is the rule — when what follows is a suggestion, a command or a resolve, Korean wants -(으)니까. 피곤해서 쉬어야지 is the version that sounds wrong to a native ear."
         }
       ]
     }

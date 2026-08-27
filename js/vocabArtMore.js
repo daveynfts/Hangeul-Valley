@@ -572,7 +572,19 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "-더니", slug: 'kinds_types', folder: 'items', nameEn: "I saw A, and then B", family: 'fill' },
   { ko: "-더라도", slug: 'kinds_types', folder: 'items', nameEn: "even if it does", family: 'fill' },
   { ko: "-아/어 가지고", slug: 'kinds_types', folder: 'items', nameEn: "and so — the spoken -아/어서", family: 'fill' },
-  { ko: "-는 대신에", slug: 'kinds_types', folder: 'items', nameEn: "instead of doing it", family: 'fill' }
+  { ko: "-는 대신에", slug: 'kinds_types', folder: 'items', nameEn: "instead of doing it", family: 'fill' },
+  { ko: "피곳하다", slug: 'get_scolded', folder: 'items', nameEn: "to be tired", family: 'fill' },
+  { ko: "쉬다", slug: 'white_pillow', folder: 'items', nameEn: "to rest — the pillow 푹 쉬다 already uses", family: 'fill' },
+  { ko: "일찍", slug: 'wall_calendar', folder: 'items', nameEn: "early", family: 'fill' },
+  { ko: "너무", slug: 'kinds_types', folder: 'items', nameEn: "too, far too", family: 'fill' },
+  { ko: "오늘", slug: 'wall_calendar', folder: 'items', nameEn: "today", family: 'fill' },
+  { ko: "집", slug: 'detached_house', folder: 'items', nameEn: "home", family: 'fill' },
+  { ko: "-아/어야지", slug: 'kinds_types', folder: 'items', nameEn: "I really must — a resolve", family: 'fill' },
+  { ko: "-(으)ㄹ걸", slug: 'kinds_types', folder: 'items', nameEn: "I should have — a regret or a guess", family: 'fill' },
+  { ko: "-더라", slug: 'kinds_types', folder: 'items', nameEn: "I saw that they did", family: 'fill' },
+  { ko: "-기도 하다", slug: 'kinds_types', folder: 'items', nameEn: "also does it, sometimes does it", family: 'fill' },
+  { ko: "-(으)니까", slug: 'kinds_types', folder: 'items', nameEn: "because — before a decision", family: 'fill' },
+  { ko: "하고 말하다", slug: 'kinds_types', folder: 'items', nameEn: "to say, quoting the words as spoken", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {

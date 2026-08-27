@@ -1758,7 +1758,8 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "가면"
+          "가면",
+          "가서"
         ]
       },
       {
@@ -1887,6 +1888,111 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "오는 대신에"
+        ]
+      },
+      {
+        "ko": "피곤하다",
+        "en": "to be tired",
+        "hint": "😩",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "피곤하니까"
+        ]
+      },
+      {
+        "ko": "쉬다",
+        "en": "to rest",
+        "hint": "🛋️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "일찍",
+        "en": "early",
+        "hint": "🌄",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "너무",
+        "en": "too, far too",
+        "hint": "🔺",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "오늘",
+        "en": "today",
+        "hint": "📆",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "집",
+        "en": "home",
+        "hint": "🏠",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "집에"
+        ]
+      },
+      {
+        "ko": "-아/어야지",
+        "en": "I really must — what you say to yourself when you decide",
+        "hint": "💪",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "쉬어야지"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ걸",
+        "en": "I should have — a regret, or a guess about someone else",
+        "hint": "😔",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "쉴걸"
+        ]
+      },
+      {
+        "ko": "-더라",
+        "en": "I saw that they did — reporting what you witnessed of someone else",
+        "hint": "👀",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "쉬더라"
+        ]
+      },
+      {
+        "ko": "-기도 하다",
+        "en": "also does it, sometimes does it",
+        "hint": "➕",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "쉬기도 해"
+        ]
+      },
+      {
+        "ko": "-(으)니까",
+        "en": "because — the reason you give before a decision or a suggestion",
+        "hint": "➡️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "하고 말하다",
+        "en": "to say \"…\" — 하고 keeps the words exactly as they were spoken",
+        "hint": "💬",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "하고 말했다"
         ]
       }
     ]
