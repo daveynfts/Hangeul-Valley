@@ -1875,7 +1875,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "오더라도"
+          "오더라도",
+          "믿더라도"
         ]
       },
       {
@@ -2344,7 +2345,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "변해 볼"
+          "변해 볼",
+          "느껴 봤다"
         ]
       },
       {
@@ -2830,7 +2832,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "정도이다"
+          "정도이다",
+          "느낄 정도였다"
         ]
       },
       {
@@ -2841,6 +2844,113 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "리가 없다"
+        ]
+      },
+      {
+        "ko": "행동",
+        "en": "behaviour, the way someone acts",
+        "hint": "🚶",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "행동을"
+        ]
+      },
+      {
+        "ko": "간호하다",
+        "en": "to nurse someone, to look after them when ill",
+        "hint": "🩹",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "간호해 주시는"
+        ]
+      },
+      {
+        "ko": "어머니",
+        "en": "mother",
+        "hint": "👩",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "어머니의"
+        ]
+      },
+      {
+        "ko": "손",
+        "en": "a hand",
+        "hint": "✋",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "손에서"
+        ]
+      },
+      {
+        "ko": "사랑",
+        "en": "love",
+        "hint": "❤️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "사랑이"
+        ]
+      },
+      {
+        "ko": "느끼다",
+        "en": "to feel something — the active one, taking 을/를",
+        "hint": "🫱",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "느껴지다",
+        "en": "to be felt — the passive, taking 이/가",
+        "hint": "💗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "느껴졌다"
+        ]
+      },
+      {
+        "ko": "-(으)려야 -(으)ㄹ 수 없다",
+        "en": "try as you might to, you cannot — the same verb twice",
+        "hint": "🚫",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "믿으려야"
+        ]
+      },
+      {
+        "ko": "-아/어도",
+        "en": "even if you do",
+        "hint": "🔁",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "믿어도"
+        ]
+      },
+      {
+        "ko": "-는 통에",
+        "en": "in the confusion of it — a cause, and a chaotic one",
+        "hint": "💥",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "믿는 통에"
+        ]
+      },
+      {
+        "ko": "-는 듯하다",
+        "en": "to seem to be doing it",
+        "hint": "🌫️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "느끼는 듯했다"
         ]
       }
     ]

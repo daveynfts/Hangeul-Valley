@@ -446,6 +446,65 @@ const overlayIds = [
 // Two words with one gloss, a category with two English names, a forms list naming its own
 // headword. All three were found in the exam world and fixed there; running them over the
 // units found five more categories in Unit 10 with two names apiece.
+// ── The art table must not name a word twice ─────────────────────────────────
+// VOCAB_ART_ROWS is built by pushing rows and skipping any ko already present, so a repeat
+// is silent: the second row is simply ignored and whichever came first wins. Nine had
+// accumulated across several sittings before anything looked, and the effect is that an
+// edit to the visible row does nothing while the invisible one keeps deciding the picture.
+// ── Every option in an exam question has to be hoverable ───────────────────
+// The check done by hand in a browser after every question, run over all of them instead.
+// It caught four options that no gloss touched — 가서, 꽂아 가지고, 믿더라도 and two more — and
+// every one had the same cause: the entry existed from an earlier question, so the builder
+// skipped it and the new form was never added.
+//
+// Deliberately weak: one key winning somewhere inside the option is enough. 오는 대신에 is a
+// grammar point and a verb, and demanding every syllable be covered would be demanding a
+// dictionary. What this catches is an option nothing touches at all.
+(function checkExamChoicesGloss() {
+  const wRel = path.join('worlds', 'topik-2.json');
+  const bRel = path.join('worlds', 'topik2-questions.json');
+  if (!fs.existsSync(path.join(ROOT, wRel)) || !fs.existsSync(path.join(ROOT, bRel))) return;
+  let world = null, qbank = null;
+  try { world = JSON.parse(read(wRel)); qbank = JSON.parse(read(bRel)); } catch (e) { return; }
+  const keys = [];
+  ((world.level && world.level.words) || []).forEach((wd) => {
+    [wd.ko].concat(Array.isArray(wd.forms) ? wd.forms : []).forEach((k) => {
+      const key = String(k || '').normalize('NFC').trim();
+      if (key.length >= 2 && keys.indexOf(key) < 0) keys.push(key);
+    });
+  });
+  if (!keys.length) return;
+  keys.sort((a, b) => b.length - a.length);
+  const esc = (k) => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(keys.map(esc).join('|'), 'g');
+  const dark = [];
+  (qbank.exercises || []).forEach((ex) => {
+    (ex.items || []).forEach((it) => {
+      (it.choices || []).concat(it.choices2 || []).forEach((c) => {
+        const text = String(c.ko || '').normalize('NFC');
+        if (!text) return;
+        re.lastIndex = 0;
+        if (!re.test(text)) dark.push('q' + it.n + ' "' + text.slice(0, 22) + '"');
+      });
+    });
+  });
+  check('every exam option has at least one word a learner can hover',
+    dark.length === 0, dark.slice(0, 6).join(', '));
+}());
+
+(function checkArtRowsUnique() {
+  const rel = path.join('js', 'vocabArtMore.js');
+  if (!fs.existsSync(path.join(ROOT, rel))) return;
+  const src = read(rel);
+  const kos = (src.match(/{ ko: "[^"]+"/g) || []).map((m) => m.slice(7, -1));
+  check('the art table lists rows', kos.length > 200, String(kos.length));
+  const seen = new Set();
+  const dup = [];
+  kos.forEach((k) => { if (seen.has(k)) dup.push(k); else seen.add(k); });
+  check('and never names the same word twice', dup.length === 0,
+    [...new Set(dup)].slice(0, 6).join(', '));
+}());
+
 (function checkEveryWorldCoheres() {
   const dir = path.join(ROOT, 'worlds');
   const files = fs.readdirSync(dir).filter((f) => /^(2b-unit-\d+|topik-2)\.json$/.test(f));
