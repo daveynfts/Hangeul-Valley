@@ -442,6 +442,49 @@ const overlayIds = [
 // waiting, so the guarantee this block enforces is the one that keeps the unit
 // playable meanwhile: a hint emoji on every entry, which vocabIconHtml falls back
 // to when there is no PNG. Add the word→PNG check here when the art lands.
+// ── The same three coherence checks, over every world ────────────────────────
+// Two words with one gloss, a category with two English names, a forms list naming its own
+// headword. All three were found in the exam world and fixed there; running them over the
+// units found five more categories in Unit 10 with two names apiece.
+(function checkEveryWorldCoheres() {
+  const dir = path.join(ROOT, 'worlds');
+  const files = fs.readdirSync(dir).filter((f) => /^(2b-unit-\d+|topik-2)\.json$/.test(f));
+  check('there are worlds to check', files.length >= 5, String(files.length));
+  const sameGloss = [];
+  const catClash = [];
+  const selfForm = [];
+  files.forEach((f) => {
+    let world = null;
+    try { world = JSON.parse(read(path.join('worlds', f))); } catch (e) { return; }
+    const words = (world.level && world.level.words) || [];
+    const seenEn = new Map();
+    const seenCat = new Map();
+    words.forEach((wd) => {
+      const g = String(wd.en || '').trim().toLowerCase();
+      if (g) {
+        if (seenEn.has(g)) sameGloss.push(f + ': ' + seenEn.get(g) + ' / ' + wd.ko);
+        else seenEn.set(g, wd.ko);
+      }
+      if (wd.category) {
+        if (!seenCat.has(wd.category)) seenCat.set(wd.category, wd.categoryEn);
+        else if (seenCat.get(wd.category) !== wd.categoryEn) {
+          catClash.push(f + ' ' + wd.category + ': ' + seenCat.get(wd.category)
+            + ' vs ' + wd.categoryEn);
+        }
+      }
+      if (Array.isArray(wd.forms) && wd.forms.indexOf(wd.ko) >= 0) {
+        selfForm.push(f + ': ' + wd.ko);
+      }
+    });
+  });
+  check('no world gives two of its words the same gloss', sameGloss.length === 0,
+    sameGloss.slice(0, 4).join(', '));
+  check('and every category has one English name in the world that uses it',
+    catClash.length === 0, [...new Set(catClash)].slice(0, 4).join(' | '));
+  check('and no entry anywhere lists its own headword among its forms',
+    selfForm.length === 0, selfForm.slice(0, 4).join(', '));
+}());
+
 (function checkUnit15World() {
   const rel = path.join('worlds', '2b-unit-15.json');
   if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
