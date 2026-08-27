@@ -584,7 +584,25 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "-더라", slug: 'kinds_types', folder: 'items', nameEn: "I saw that they did", family: 'fill' },
   { ko: "-기도 하다", slug: 'kinds_types', folder: 'items', nameEn: "also does it, sometimes does it", family: 'fill' },
   { ko: "-(으)니까", slug: 'kinds_types', folder: 'items', nameEn: "because — before a decision", family: 'fill' },
-  { ko: "하고 말하다", slug: 'kinds_types', folder: 'items', nameEn: "to say, quoting the words as spoken", family: 'fill' }
+  { ko: "하고 말하다", slug: 'kinds_types', folder: 'items', nameEn: "to say, quoting the words as spoken", family: 'fill' },
+  { ko: "취업 준비생", slug: 'restaurant_staff', folder: 'items', nameEn: "someone preparing to enter the job market", family: 'fill' },
+  { ko: "이상", slug: 'kinds_types', folder: 'items', nameEn: "or more, upwards of", family: 'fill' },
+  { ko: "면접시험", slug: 'restaurant_staff', folder: 'items', nameEn: "a job interview", family: 'fill' },
+  { ko: "준비", slug: 'homework_notebook', folder: 'items', nameEn: "preparation", family: 'fill' },
+  { ko: "고민하다", slug: 'get_scolded', folder: 'items', nameEn: "to agonise over something", family: 'fill' },
+  { ko: "N(으)로 말미암아", slug: 'kinds_types', folder: 'items', nameEn: "owing to N — the formal twin of (으)로 인하여", family: 'fill' },
+  { ko: "N에 따라서", slug: 'kinds_types', folder: 'items', nameEn: "depending on N — a correlation, not a cause", family: 'fill' },
+  { ko: "N에도 불구하고", slug: 'kinds_types', folder: 'items', nameEn: "despite N", family: 'fill' },
+  { ko: "시험 기간", slug: 'wall_calendar', folder: 'items', nameEn: "the exam period", family: 'fill' },
+  { ko: "공부하다", slug: 'homework_notebook', folder: 'items', nameEn: "to study", family: 'fill' },
+  { ko: "학생", slug: 'schoolhouse', folder: 'items', nameEn: "a student", family: 'fill' },
+  { ko: "도서관", slug: 'hardcover_book', folder: 'items', nameEn: "a library", family: 'fill' },
+  { ko: "밤새도록", slug: 'crescent_moon', folder: 'items', nameEn: "all night long", family: 'fill' },
+  { ko: "불을 켜다", slug: 'light_bulb', folder: 'items', nameEn: "to switch a light on", family: 'fill' },
+  { ko: "켜다", slug: 'light_bulb', folder: 'items', nameEn: "to switch on", family: 'fill' },
+  { ko: "-아/어 놓다", slug: 'kinds_types', folder: 'items', nameEn: "do it and leave it that way", family: 'fill' },
+  { ko: "-아/어 두다", slug: 'kinds_types', folder: 'items', nameEn: "do it and leave it that way — the twin of -아/어 놓다", family: 'fill' },
+  { ko: "-곤 하다", slug: 'kinds_types', folder: 'items', nameEn: "used to do it, again and again", family: 'fill' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {

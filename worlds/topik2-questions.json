@@ -471,6 +471,87 @@
           "grammar": "-아/어야지 is a resolution spoken to oneself: 이제 자야지, 나도 운동해야지. Said to someone else with the right intonation it becomes a nudge — 빨리 자야지 — but the first-person use is what the exam tests.\n\nThe three it is set against are all person-restricted or aspect-restricted. -더라 needs a subject other than the speaker and something the speaker saw. -(으)ㄹ걸 is regret (안 갈걸 그랬다) or supposition (지금쯤 도착했을걸). -기도 하다 adds an occasional or additional case.\n\n쉬다 is to rest, and 피곤하다 is to be tired — the two words the sentence is built out of. 하고 말했다 is direct quotation, keeping the words as spoken; 라고 is the other direct marker, and indirect speech would be -다고 or -냐고.\n\nOne more thing the sentence is quietly teaching: it uses -(으)니까 for the reason rather than -아/어서. That is the rule — when what follows is a suggestion, a command or a resolve, Korean wants -(으)니까. 피곤해서 쉬어야지 is the version that sounds wrong to a native ear."
         }
       ]
+    },
+    {
+      "id": "topik2-synonym",
+      "type": "build",
+      "no": "유형 · 문항 3-4",
+      "pattern": "밑줄 친 부분과 의미가 비슷한 것 고르기",
+      "section": "유사 표현",
+      "icon": "🔗",
+      "instructionKo": "다음 밑줄 친 부분과 의미가 비슷한 것을 고르십시오.",
+      "instructionEn": "Choose the expression closest in meaning to the underlined part.",
+      "blurbEn": "Four connectives on the same word, and only one of them names the same relation as the phrase underlined.",
+      "noteEn": "Questions 3 and 4 underline a phrase and ask for one that means the same. The four options always keep the same head word and change only what is attached to it, so vocabulary settles nothing — what is being tested is whether you can name the relation.\n\nSort them by what they do before you weigh them. Question 3 offers a cause, a correlation, an addition and a concession, and the underlined phrase is a cause. Question 4 offers a state left standing, an obligation, a habit and a causative, and the underlined phrase is a state. Once the four are sorted, the answer is whichever one lands in the same box.\n\nExpect the answer to be the stiffer of two synonyms. (으)로 인하여 pairs with (으)로 말미암아 and -아/어 놓다 with -아/어 두다: in both cases the everyday form is underlined and the formal one is the answer, because that is the word the paper is checking you know.",
+      "bank": [],
+      "items": [
+        {
+          "n": 3,
+          "art": "",
+          "phraseKo": "취업 준비생의 70% 이상이 면접시험 준비를 할 때 외모로 인하여 고민해 본 적이 있다고 말했다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "취업 준비생의 70% 이상이 면접시험 준비를 할 때 {} 고민해 본 적이 있다고 말했다."
+            }
+          ],
+          "answer": "malmiama",
+          "choices": [
+            {
+              "id": "ttara",
+              "ko": "외모에 따라서"
+            },
+            {
+              "id": "birot",
+              "ko": "외모를 비롯해서"
+            },
+            {
+              "id": "malmiama",
+              "ko": "외모로 말미암아"
+            },
+            {
+              "id": "bulguhago",
+              "ko": "외모에도 불구하고"
+            }
+          ],
+          "en": "Over 70% of job-seekers said they had worried about their looks when preparing for interviews. The underlined part states a cause, so its replacement must too.",
+          "why": "외모로 인하여 states a cause: because of appearance. Every option keeps 외모 and changes only what is attached to it, so the question is entirely about four connectives — and they are four different relations.\n\nN에 따라서 is correlation. 외모에 따라서 결과가 다르다 means the outcome varies with appearance. Two things moving together is not one thing causing another, and the sentence is about what the worry came from.\n\nN을/를 비롯해서 adds. It means including N, N first among them, and it is the same expression question 5 of the headline set turned on. Nothing in it explains anything.\n\nN에도 불구하고 concedes, and it runs the opposite way: despite appearance. That would say the worrying happened even though looks were involved, which reverses the sentence.\n\nThat leaves 3. N(으)로 말미암아 is the formal twin of (으)로 인하여 — same meaning, same written register, and it is the answer precisely because it is the one of the four that nobody says casually. This question type rewards knowing the stiff written synonym rather than the everyday one.",
+          "grammar": "N(으)로 인하여 and N(으)로 인해(서) are one expression with two endings; 인하여 is the fuller written form, which is why it turns up in a report about a survey. N(으)로 말미암아 matches it in both meaning and register.\n\nThe three it is set against are the connectives learners meet at the same time and confuse: N에 따라서 (depending on — and note N에 따르면 is a different thing, according to a source), N을/를 비롯해서 (including), N에도 불구하고 (despite).\n\n-아/어 보다 in 고민해 본 적이 있다 is the try-doing form, and -(으)ㄴ 적이 있다 is to have ever done it. Stacked, 고민해 본 적이 있다 = have had occasion to worry about it. Then -다고 말했다 reports it at second hand."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "시험 기간 동안 공부하는 학생이 많아서 도서관에 밤새도록 불을 켜 놓았다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "시험 기간 동안 공부하는 학생이 많아서 도서관에 밤새도록 불을 {}."
+            }
+          ],
+          "answer": "dueotda",
+          "choices": [
+            {
+              "id": "yahaetda",
+              "ko": "켜야 했다"
+            },
+            {
+              "id": "gonhaetda",
+              "ko": "켜곤 했다"
+            },
+            {
+              "id": "gehaetda",
+              "ko": "켜게 했다"
+            },
+            {
+              "id": "dueotda",
+              "ko": "켜 두었다"
+            }
+          ],
+          "en": "So many students were studying during the exam period that the library left its lights on all night. The underlined part is a state left standing.",
+          "why": "불을 켜 놓았다 is not simply that the light went on. -아/어 놓다 says: do it, and leave the result standing. The light was switched on and stayed on, which is what 밤새도록 is there to tell you.\n\n-아/어 두다 is its twin. Both mean do it and leave it, and they are near enough interchangeable that the difference is a matter of feel: 놓다 leans towards something you will come back to soon, 두다 towards something left for longer. Either fits a library at night, and that is why 4 is the answer.\n\nThe other three are three different things and none of them is a state. -아/어야 했다 is obligation, and nobody in the sentence was obliged to do anything. -곤 했다 is a habit repeated over time, but the sentence describes one exam period, not a recurring one. -게 했다 is causative — it would need somebody being made to switch the light on, and there is no such person here.\n\nFour endings on 켜다, four grammatical categories: state, obligation, habit, cause. That is the shape of this question type, and it is the same shape as question 2 of the blank-filling set.",
+          "grammar": "-아/어 놓다 and -아/어 두다 are the resultative pair: 창문을 열어 놓다 (open the window and leave it open), 표를 미리 사 두다 (buy the ticket and have it ready). Without them, 불을 켰다 would only say the switch was flipped.\n\n-곤 하다 is the repeated past: 주말이면 등산을 하곤 했다. -게 하다 is the causative, which has now appeared three times in this paper — 시원하게 해 주다 in question 7 of the headline set is the same ending.\n\n밤새도록 is 밤새다 with -도록, which sets a limit: until the night is through. And 많아서 is -아/어서 giving the reason, the ending question 2 of the blank set had to be told apart from -(으)니까."
+        }
+      ]
     }
   ]
 }

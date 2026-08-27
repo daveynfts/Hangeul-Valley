@@ -583,7 +583,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "로 인해"
+          "로 인해",
+          "로 인하여"
         ]
       },
       {
@@ -920,7 +921,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "해야 한다"
+          "해야 한다",
+          "켜야 했다"
         ]
       },
       {
@@ -1151,7 +1153,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "시원하게 해"
+          "시원하게 해",
+          "켜게 했다"
         ]
       },
       {
@@ -1357,7 +1360,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "않는다고"
+          "않는다고",
+          "있다고"
         ]
       },
       {
@@ -1388,7 +1392,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "적이 있는"
+          "적이 있는",
+          "본 적이"
         ]
       },
       {
@@ -1769,7 +1774,8 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "많다"
+          "많다",
+          "많아서"
         ]
       },
       {
@@ -1993,6 +1999,162 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "하고 말했다"
+        ]
+      },
+      {
+        "ko": "취업 준비생",
+        "en": "someone preparing to enter the job market",
+        "hint": "💼",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "이상",
+        "en": "or more, upwards of",
+        "hint": "⬆️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "면접시험",
+        "en": "a job interview",
+        "hint": "🎙️",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "준비",
+        "en": "preparation",
+        "hint": "📋",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "준비를"
+        ]
+      },
+      {
+        "ko": "고민하다",
+        "en": "to agonise over something",
+        "hint": "😖",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "고민해"
+        ]
+      },
+      {
+        "ko": "N(으)로 말미암아",
+        "en": "owing to N — the formal twin of (으)로 인하여",
+        "hint": "➡️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "로 말미암아"
+        ]
+      },
+      {
+        "ko": "N에 따라서",
+        "en": "depending on N, in line with N — a correlation, not a cause",
+        "hint": "📈",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "에 따라서"
+        ]
+      },
+      {
+        "ko": "N에도 불구하고",
+        "en": "despite N",
+        "hint": "🚧",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "에도 불구하고"
+        ]
+      },
+      {
+        "ko": "시험 기간",
+        "en": "the exam period",
+        "hint": "📅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "공부하다",
+        "en": "to study",
+        "hint": "📖",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "공부하는"
+        ]
+      },
+      {
+        "ko": "학생",
+        "en": "a student",
+        "hint": "🎓",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "도서관",
+        "en": "a library",
+        "hint": "📚",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "밤새도록",
+        "en": "all night long",
+        "hint": "🌙",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "불을 켜다",
+        "en": "to switch a light on",
+        "hint": "💡",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "불을"
+        ]
+      },
+      {
+        "ko": "켜다",
+        "en": "to switch on",
+        "hint": "🔛",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-아/어 놓다",
+        "en": "do it and leave it that way",
+        "hint": "🔓",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "켜 놓았다"
+        ]
+      },
+      {
+        "ko": "-아/어 두다",
+        "en": "do it and leave it that way — the twin of -아/어 놓다",
+        "hint": "📥",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "켜 두었다"
+        ]
+      },
+      {
+        "ko": "-곤 하다",
+        "en": "used to do it, again and again",
+        "hint": "🔁",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "켜곤 했다"
         ]
       }
     ]
