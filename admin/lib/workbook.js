@@ -141,6 +141,11 @@ function cleanItem(item, i, where, type, chipIds) {
     if (!out.stemKo && !out.img) throw new Error(`${at}: needs a Korean prompt or a picture`);
     if (!out.stemKo) delete out.stemKo;
   }
+  const art = str(item.art);
+  if (art) {
+    if (art.indexOf('..') >= 0) throw new Error(`${at}: art cannot walk out of the tree (got "${art}")`);
+    out.art = art;
+  }
   return out;
 }
 
