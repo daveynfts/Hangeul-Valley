@@ -1192,6 +1192,47 @@ const overlayIds = [
   const kos = ww.map((w) => String(w.ko).normalize('NFC'));
   const dups = kos.filter((k, i) => kos.indexOf(k) !== i);
   check('and no word is listed twice inside the exam world itself', dups.length === 0, dups.join(', '));
+  // ── Faults that accrue when a list grows one question at a time ─────────────────
+  // The list reached 317 words across 22 questions before anything looked at it as a whole.
+  // These three are what that first look found, and all three are invisible to the checks
+  // above, which ask whether a word can be reached rather than whether it makes sense.
+  //
+  // Two other findings from the same pass were false positives and are deliberately not
+  // enforced: N와의 전쟁 and -앟이 sit under 언론 because they are headline devices, and
+  // 안 + V and 하고 말하다 sit under 문법 despite not starting with - or N.
+  const glossOf = new Map();
+  const sameGloss = [];
+  ww.forEach((wd) => {
+    const k = String(wd.en || '').trim().toLowerCase();
+    if (!k) return;
+    if (glossOf.has(k)) sameGloss.push(glossOf.get(k) + ' / ' + wd.ko);
+    else glossOf.set(k, wd.ko);
+  });
+  // Three words once read 'to grow in number' — 늘다, 늘어나다 and 많아지다. Hovering
+  // any of them returned the same sentence, which is the one thing a gloss exists not to do.
+  check('no two exam-world words carry the same gloss', sameGloss.length === 0,
+    sameGloss.slice(0, 4).join(', '));
+
+  // The label a category shows depends on whichever of its words is read first, so two
+  // English names for one category is a coin toss on screen. 음식 and 문화 each had two.
+  const catName = new Map();
+  const catClash = [];
+  ww.forEach((wd) => {
+    if (!wd.category) return;
+    if (!catName.has(wd.category)) catName.set(wd.category, wd.categoryEn);
+    else if (catName.get(wd.category) !== wd.categoryEn) {
+      catClash.push(wd.category + ': ' + catName.get(wd.category) + ' vs ' + wd.categoryEn);
+    }
+  });
+  check('each exam-world category has exactly one English name',
+    catClash.length === 0, [...new Set(catClash)].slice(0, 3).join(' | '));
+
+  // A forms list saying the word wears a shape it does not wear. Harmless to the gloss
+  // table, which dedupes its keys, and still a list that is not true.
+  const selfForm = ww.filter((wd) => Array.isArray(wd.forms) && wd.forms.indexOf(wd.ko) >= 0)
+    .map((wd) => wd.ko);
+  check('and no entry lists its own headword among its forms',
+    selfForm.length === 0, selfForm.slice(0, 4).join(', '));
   // Every word here has to come from a question. The list started with a field of 경제
   // vocabulary I wrote out myself — 매출, 불황, 유통, twenty-nine words in all — which read as
   // useful and was not: a personal study room fills up from the papers that go through it,

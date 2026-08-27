@@ -195,7 +195,7 @@
       },
       {
         "ko": "많아지다",
-        "en": "to grow in number",
+        "en": "to become more numerous — 많다 with the change ending -아/어지다",
         "hint": "➕",
         "category": "사회",
         "categoryEn": "Society & everyday life",
@@ -241,7 +241,7 @@
         "en": "to eat with the eyes — to enjoy food by looking at it",
         "hint": "👀",
         "category": "음식",
-        "categoryEn": "Food & taste",
+        "categoryEn": "Food & eating",
         "forms": [
           "눈으로 먹고"
         ]
@@ -251,7 +251,7 @@
         "en": "to taste with the ears — to enjoy food through its sounds",
         "hint": "👂",
         "category": "음식",
-        "categoryEn": "Food & taste",
+        "categoryEn": "Food & eating",
         "forms": [
           "귀로 맛보는"
         ]
@@ -261,7 +261,7 @@
         "en": "to taste",
         "hint": "👅",
         "category": "음식",
-        "categoryEn": "Food & taste",
+        "categoryEn": "Food & eating",
         "forms": [
           "맛보는"
         ]
@@ -271,63 +271,63 @@
         "en": "food",
         "hint": "🍽️",
         "category": "음식",
-        "categoryEn": "Food & taste"
+        "categoryEn": "Food & eating"
       },
       {
         "ko": "모양",
         "en": "the shape of a thing",
         "hint": "🔷",
         "category": "음식",
-        "categoryEn": "Food & taste"
+        "categoryEn": "Food & eating"
       },
       {
         "ko": "색깔",
         "en": "colour",
         "hint": "🎨",
         "category": "음식",
-        "categoryEn": "Food & taste"
+        "categoryEn": "Food & eating"
       },
       {
         "ko": "시대",
         "en": "an age, an era",
         "hint": "🕰️",
         "category": "문화",
-        "categoryEn": "Culture & media"
+        "categoryEn": "Culture & entertainment"
       },
       {
         "ko": "천국",
         "en": "heaven — in a headline, \"awash with\"",
         "hint": "☁️",
         "category": "문화",
-        "categoryEn": "Culture & media"
+        "categoryEn": "Culture & entertainment"
       },
       {
         "ko": "요리 프로그램",
         "en": "a cooking programme",
         "hint": "📺",
         "category": "문화",
-        "categoryEn": "Culture & media"
+        "categoryEn": "Culture & entertainment"
       },
       {
         "ko": "텔레비전 프로그램",
         "en": "a television programme",
         "hint": "📺",
         "category": "문화",
-        "categoryEn": "Culture & media"
+        "categoryEn": "Culture & entertainment"
       },
       {
         "ko": "실제",
         "en": "the real thing, actual",
         "hint": "🔎",
         "category": "문화",
-        "categoryEn": "Culture & media"
+        "categoryEn": "Culture & entertainment"
       },
       {
         "ko": "보여주다",
         "en": "to show",
         "hint": "🖥️",
         "category": "문화",
-        "categoryEn": "Culture & media",
+        "categoryEn": "Culture & entertainment",
         "forms": [
           "보여준다"
         ]
@@ -427,7 +427,7 @@
       },
       {
         "ko": "늘어나다",
-        "en": "to grow in number",
+        "en": "to grow, to stretch out — of a number, and of time too",
         "hint": "📈",
         "category": "사회",
         "categoryEn": "Society & everyday life",
@@ -1314,7 +1314,7 @@
       },
       {
         "ko": "늘다",
-        "en": "to grow in number",
+        "en": "to increase — the plain one, of counts and amounts",
         "hint": "📈",
         "category": "사회",
         "categoryEn": "Society & everyday life",
@@ -1682,10 +1682,7 @@
         "en": "as many as a hundred thousand copies — 부 counts books, and 나 says the number is larger than you would expect",
         "hint": "💯",
         "category": "경제",
-        "categoryEn": "Economy & business",
-        "forms": [
-          "10만 부나"
-        ]
+        "categoryEn": "Economy & business"
       },
       {
         "ko": "팔리다",
@@ -1780,7 +1777,6 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "많다",
           "많아서"
         ]
       },
@@ -2869,12 +2865,12 @@
       },
       {
         "ko": "음식",
-        "en": "Food & taste",
+        "en": "Food & eating",
         "cat": "음식"
       },
       {
         "ko": "문화",
-        "en": "Culture & media",
+        "en": "Culture & entertainment",
         "cat": "문화"
       },
       {
