@@ -15,7 +15,7 @@ const path = require('path');
 const vm = require('vm');
 
 const ROOT = path.join(__dirname, '..');
-const WORLDS = ['2b-unit-11', '2b-unit-13', '2b-unit-15', 'topik-2'];
+const WORLDS = ['2b-unit-10', '2b-unit-11', '2b-unit-13', '2b-unit-14', '2b-unit-15', 'topik-2'];
 
 function assert(cond, msg) {
   if (!cond) {
@@ -94,7 +94,7 @@ assert(rowFor('낮다').slug !== 'sun_icon', '낮다 does not share the sun slug
 
 const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, 'sprites', 'catalog.json'), 'utf8'));
 const econ = fs.readFileSync(path.join(ROOT, 'js', 'systems', 'economy.js'), 'utf8');
-assert(catalog.cacheKey === 'art-20260827e', 'catalog cacheKey is art-20260827e');
-assert(econ.indexOf("ART_CACHE_KEY = 'art-20260827e'") >= 0, 'economy cache key is art-20260827e');
+assert(catalog.cacheKey === 'art-20260827g', 'catalog cacheKey is art-20260827g');
+assert(econ.indexOf("ART_CACHE_KEY = 'art-20260827g'") >= 0, 'economy cache key is art-20260827g');
 
 console.log('\ntest_farm_vocab_art: all passed');

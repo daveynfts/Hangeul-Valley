@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260827e",
+  "cacheKey": "art-20260827g",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -6771,6 +6771,445 @@
       ],
       "notes": "HD watering frame. Magenta-keyed, pad-set with walk.",
       "phaserKey": "farmer_water_up_2"
+    },
+    {
+      "id": "item.hand_mirror",
+      "nameEn": "Hand mirror",
+      "kind": "item",
+      "family": "beauty",
+      "role": "hand_mirror",
+      "path": "items/hand_mirror.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.hand_mirror",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "hand_mirror"
+    },
+    {
+      "id": "item.rain_cloud",
+      "nameEn": "Rain cloud",
+      "kind": "item",
+      "family": "weather",
+      "role": "rain_cloud",
+      "path": "items/rain_cloud.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.rain_cloud",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "rain_cloud"
+    },
+    {
+      "id": "item.snow_peak",
+      "nameEn": "Mountain peak",
+      "kind": "item",
+      "family": "place",
+      "role": "snow_peak",
+      "path": "items/snow_peak.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.snow_peak",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "snow_peak"
+    },
+    {
+      "id": "item.wooden_tv",
+      "nameEn": "Television",
+      "kind": "item",
+      "family": "media",
+      "role": "wooden_tv",
+      "path": "items/wooden_tv.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.wooden_tv",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "wooden_tv"
+    },
+    {
+      "id": "item.paint_palette",
+      "nameEn": "Painter palette",
+      "kind": "item",
+      "family": "beauty",
+      "role": "paint_palette",
+      "path": "items/paint_palette.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.paint_palette",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "paint_palette"
+    },
+    {
+      "id": "item.lipstick_tube",
+      "nameEn": "Lipstick",
+      "kind": "item",
+      "family": "beauty",
+      "role": "lipstick_tube",
+      "path": "items/lipstick_tube.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.lipstick_tube",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "lipstick_tube"
+    },
+    {
+      "id": "item.piggy_bank",
+      "nameEn": "Piggy bank",
+      "kind": "item",
+      "family": "money",
+      "role": "piggy_bank",
+      "path": "items/piggy_bank.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.piggy_bank",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "piggy_bank"
+    },
+    {
+      "id": "item.beach_parasol",
+      "nameEn": "Beach parasol",
+      "kind": "item",
+      "family": "place",
+      "role": "beach_parasol",
+      "path": "items/beach_parasol.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.beach_parasol",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "beach_parasol"
+    },
+    {
+      "id": "item.grammar_scroll",
+      "nameEn": "Calligraphy scroll",
+      "kind": "item",
+      "family": "abstract",
+      "role": "grammar_scroll",
+      "path": "items/grammar_scroll.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.grammar_scroll",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "grammar_scroll"
+    },
+    {
+      "id": "item.government_hall",
+      "nameEn": "Government hall",
+      "kind": "item",
+      "family": "place",
+      "role": "government_hall",
+      "path": "items/government_hall.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.government_hall",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "government_hall"
+    },
+    {
+      "id": "item.pine_tree",
+      "nameEn": "Pine tree",
+      "kind": "item",
+      "family": "place",
+      "role": "pine_tree",
+      "path": "items/pine_tree.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.pine_tree",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "TOPIK still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser.",
+      "wordKo": "pine_tree"
+    },
+    {
+      "id": "item.hourglass_ornament",
+      "nameEn": "Hourglass",
+      "kind": "item",
+      "family": "abstract",
+      "role": "hourglass_ornament",
+      "path": "items/hourglass_ornament.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.hourglass_ornament",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.gold_starburst",
+      "nameEn": "Gold star",
+      "kind": "item",
+      "family": "abstract",
+      "role": "gold_starburst",
+      "path": "items/gold_starburst.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.gold_starburst",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.cream_waves",
+      "nameEn": "Stacked waves",
+      "kind": "item",
+      "family": "abstract",
+      "role": "cream_waves",
+      "path": "items/cream_waves.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.cream_waves",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.knot_tile",
+      "nameEn": "Knot tile",
+      "kind": "item",
+      "family": "abstract",
+      "role": "knot_tile",
+      "path": "items/knot_tile.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.knot_tile",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.gold_spiral",
+      "nameEn": "Gold spiral",
+      "kind": "item",
+      "family": "abstract",
+      "role": "gold_spiral",
+      "path": "items/gold_spiral.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.gold_spiral",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.oak_rings",
+      "nameEn": "Interlocking rings",
+      "kind": "item",
+      "family": "abstract",
+      "role": "oak_rings",
+      "path": "items/oak_rings.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.oak_rings",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.chevron_badge",
+      "nameEn": "Chevron badge",
+      "kind": "item",
+      "family": "abstract",
+      "role": "chevron_badge",
+      "path": "items/chevron_badge.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.chevron_badge",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.teal_gem",
+      "nameEn": "Teal gem",
+      "kind": "item",
+      "family": "abstract",
+      "role": "teal_gem",
+      "path": "items/teal_gem.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.teal_gem",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.wooden_chair",
+      "nameEn": "Wooden chair",
+      "kind": "item",
+      "family": "place",
+      "role": "wooden_chair",
+      "path": "items/wooden_chair.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.wooden_chair",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.paper_lantern",
+      "nameEn": "Festival lantern",
+      "kind": "item",
+      "family": "place",
+      "role": "paper_lantern",
+      "path": "items/paper_lantern.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.paper_lantern",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.pocket_calculator",
+      "nameEn": "Calculator",
+      "kind": "item",
+      "family": "item",
+      "role": "pocket_calculator",
+      "path": "items/pocket_calculator.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.pocket_calculator",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.brown_laptop",
+      "nameEn": "Laptop",
+      "kind": "item",
+      "family": "item",
+      "role": "brown_laptop",
+      "path": "items/brown_laptop.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.brown_laptop",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.box_camera",
+      "nameEn": "Camera",
+      "kind": "item",
+      "family": "item",
+      "role": "box_camera",
+      "path": "items/box_camera.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.box_camera",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.soju_bottle",
+      "nameEn": "Soju bottle",
+      "kind": "item",
+      "family": "drink",
+      "role": "soju_bottle",
+      "path": "items/soju_bottle.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.soju_bottle",
+      "usedBy": [
+        "2b-unit-10",
+        "2b-unit-14",
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
     }
   ]
 }
