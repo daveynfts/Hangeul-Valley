@@ -460,6 +460,56 @@ const overlayIds = [
 // Deliberately weak: one key winning somewhere inside the option is enough. 오는 대신에 is a
 // grammar point and a verb, and demanding every syllable be covered would be demanding a
 // dictionary. What this catches is an option nothing touches at all.
+// ── The desk quiz may not test what the paper has not taught ───────────────────
+// The 20-row quiz beside the exam desk was written before most of the 27 questions existed,
+// and the two grow separately. A row asking about a pattern no question introduces and no
+// word list carries is asking the learner something they have not met — which is worse than
+// a wrong answer key, because it reads as their fault rather than the paper's.
+//
+// Runs of three syllables or more only: two-syllable fragments match half the corpus and
+// would make this pass no matter what the quiz said.
+(function checkExamQuizTeachesFirst() {
+  const wRel = path.join('worlds', 'topik-2.json');
+  const bRel = path.join('worlds', 'topik2-questions.json');
+  const qRel = path.join('worlds', 'topik2-desk-quiz.json');
+  if (![wRel, bRel, qRel].every((r) => fs.existsSync(path.join(ROOT, r)))) return;
+  let world = null, qbank = null, quiz = null;
+  try {
+    world = JSON.parse(read(wRel));
+    qbank = JSON.parse(read(bRel));
+    quiz = JSON.parse(read(qRel));
+  } catch (e) { return; }
+  const taught = [];
+  ((world.level && world.level.words) || []).forEach((wd) => {
+    [wd.ko].concat(Array.isArray(wd.forms) ? wd.forms : []).forEach((k) => taught.push(k));
+  });
+  (qbank.exercises || []).forEach((ex) => {
+    taught.push(ex.instructionKo, ex.noteEn, ex.pattern, ex.section);
+    (ex.items || []).forEach((it) => {
+      taught.push(it.phraseKo, it.why, it.grammar);
+      (it.lines || []).forEach((l) => taught.push(l.ko));
+      (it.choices || []).forEach((c) => taught.push(c.ko));
+    });
+  });
+  const corpus = taught.filter(Boolean)
+    .map((t) => String(t).normalize('NFC')).join('  ');
+  const runs = (t) => (String(t).normalize('NFC')
+    .match(/[\uac00-\ud7a3]{3,}/g) || []);
+  const untaught = [];
+  (quiz.questions || []).forEach((q) => {
+    [q.q].concat(Object.keys(q.choices || {}).map((k) => q.choices[k])).forEach((bit) => {
+      runs(bit).forEach((r) => {
+        if (corpus.indexOf(r) < 0) {
+          const at = '#' + q.id + ' ' + r;
+          if (untaught.indexOf(at) < 0) untaught.push(at);
+        }
+      });
+    });
+  });
+  check('the exam desk quiz tests nothing the paper has not taught',
+    untaught.length === 0, untaught.slice(0, 6).join(', '));
+}());
+
 (function checkExamChoicesGloss() {
   const wRel = path.join('worlds', 'topik-2.json');
   const bRel = path.join('worlds', 'topik2-questions.json');
