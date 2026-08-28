@@ -1791,7 +1791,39 @@ const overlayIds = [
     rejects.slice(0, 4).join(' | '));
 }());
 
-// ── The README's three numbers ───────────────────────────────────────────────
+// ── The docs point at files that exist ───────────────────────────────────────
+// Prose rots two ways: numbers and names. The numbers are guarded below. This guards the names,
+// which happen to be healthy right now — 110 file references across README.md and docs/, none
+// broken — and that is the moment to put the net up rather than after a rename lands.
+//
+// A path written as "no `tests/test_unit15_cassette.js`" is asserting the file's absence on
+// purpose, so a line that says "no" before the path is left alone. Bare filenames with no
+// directory are prose, not references, and are skipped too.
+(function checkDocFileRefs() {
+  const docs = ['README.md'].concat(
+    fs.readdirSync(path.join(ROOT, 'docs'))
+      .filter((f) => f.endsWith('.md'))
+      .map((f) => 'docs/' + f)
+  );
+  let seen = 0;
+  const missing = [];
+  docs.forEach((d) => {
+    read(d).split('\n').forEach((line) => {
+      [...line.matchAll(/`([\w./-]+\.(?:js|json|md|css|html))`/g)].forEach((m) => {
+        const rel = m[1];
+        if (rel.indexOf('/') < 0) return;                       // a bare filename is prose
+        if (rel.indexOf('*') >= 0) return;                      // a glob describes many
+        if (new RegExp('\\bno\\s+`?' + rel.replace(/[.[\]/]/g, '\\$&')).test(line)) return;
+        seen++;
+        if (!fs.existsSync(path.join(ROOT, rel))) missing.push(d + ' -> ' + rel);
+      });
+    });
+  });
+  check('the docs reference files, and they were found', seen > 50, `only ${seen} references`);
+  check(`all ${seen} files the docs name exist`, missing.length === 0, missing.join('; '));
+}());
+
+// ── The README's numbers ─────────────────────────────────────────────────────
 // A count written into prose goes stale the next time a unit lands, and it had happened four
 // times before this check existed: the function ceiling said four when it was eleven, the world
 // loader said five fetches over six worlds, the save comment said thirteen KB across three units
