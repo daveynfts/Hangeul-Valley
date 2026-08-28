@@ -11,8 +11,8 @@ const LEVEL_COST = (idx) => idx === 0 ? 0 : Math.floor(50 * Math.pow(1.8, idx - 
 //
 // Previously `SR1`/`SR2` were the whole of "SRS": two fixed timers, 30 and 90 seconds,
 // with no interval, ease factor or due date stored anywhere. That is crop-growth
-// pacing, not spaced repetition — a player could reach "100% mastery" on 1500 words in
-// one sitting and remember none of it the next day.
+// pacing, not spaced repetition — a player could reach "100% mastery" on the game's whole
+// vocabulary in one sitting and remember none of it the next day.
 //
 // The fix keeps the game feel intact by recognising that the existing three-touch loop
 // (plant → 30s → water → 90s → harvest) is exactly Anki's *learning steps*. So those

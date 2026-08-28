@@ -702,7 +702,8 @@ function applySave(d){
 
 // Write to file (pywebview) AND localStorage backup.
 //
-// collectSave() serializes the entire game state — currencies, SRS for 1500 words,
+// collectSave() serializes the entire game state — currencies, SRS for every word in the
+// game (srsData is keyed by `ko` globally, so the level ladder and the worlds share one map),
 // plots, inventory, quests, recipes, buffs, leaderboards, ground drops.
 // persistSave() is called from ~35 places, including on every quiz answer, so writes
 // are coalesced behind a trailing debounce. Use flushSave() when the state must reach

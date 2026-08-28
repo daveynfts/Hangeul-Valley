@@ -1791,6 +1791,59 @@ const overlayIds = [
     rejects.slice(0, 4).join(' | '));
 }());
 
+// ── The README's three numbers ───────────────────────────────────────────────
+// A count written into prose goes stale the next time a unit lands, and it had happened four
+// times before this check existed: the function ceiling said four when it was eleven, the world
+// loader said five fetches over six worlds, the save comment said thirteen KB across three units
+// over five, and the README said 1,500 words when the worlds had taken the game to 2,313.
+//
+// Everywhere else the fix was to stop writing the number down. The README is the one place a
+// concrete figure earns its keep — it is the first thing anyone reads — so the figure stays and
+// this check keeps it honest. Words are deduped by `ko`, which is how srsData is keyed, so a word
+// a world shares with levels.json counts once.
+(function checkReadmeCounts() {
+  const readme = read('README.md');
+  const claim = (label, re) => {
+    const m = readme.match(re);
+    if (!m) { check(`README states its ${label}`, false, 'no match for ' + re); return null; }
+    return Number(m[1].replace(/,/g, ''));
+  };
+  const levelsClaim = claim('level count', /([\d,]+) levels of/);
+  const wordsClaim = claim('level-mode word count', /levels of ([\d,]+) words/);
+  const worldsClaim = claim('world count', /plus (six|seven|eight|nine|ten|[\d,]+) textbook/);
+  const totalClaim = claim('total word count', /([\d,]+) unique\s+words/);
+
+  const NUMBER_WORDS = { six: 6, seven: 7, eight: 8, nine: 9, ten: 10 };
+  const worldsSaid = Number.isNaN(worldsClaim)
+    ? NUMBER_WORDS[(readme.match(/plus (\w+) textbook/) || [])[1]]
+    : worldsClaim;
+
+  const levels = (function () {
+    const lv = JSON.parse(read('levels.json'));
+    return lv.levels || lv;
+  }());
+  const seen = new Set();
+  levels.forEach((l) => (l.words || []).forEach((w) => { if (w && w.ko) seen.add(w.ko); }));
+  const levelWords = seen.size;
+
+  const worldFiles = fs.readdirSync(path.join(ROOT, 'worlds'))
+    .filter((f) => /^(2b-unit-\d+|topik-2)\.json$/.test(f));
+  worldFiles.forEach((f) => {
+    const w = JSON.parse(read(path.join('worlds', f)));
+    const lvls = Array.isArray(w.level) ? w.level : [w.level];
+    lvls.forEach((l) => ((l && l.words) || []).forEach((x) => { if (x && x.ko) seen.add(x.ko); }));
+  });
+
+  check(`README says ${levelsClaim} levels and levels.json has ${levels.length}`,
+    levelsClaim === levels.length);
+  check(`README says ${wordsClaim} words in level mode, and there are ${levelWords}`,
+    wordsClaim === levelWords);
+  check(`README says ${worldsSaid} worlds and worlds/ holds ${worldFiles.length}`,
+    worldsSaid === worldFiles.length, worldFiles.join(', '));
+  check(`README says ${totalClaim} unique words in all, and there are ${seen.size}`,
+    totalClaim === seen.size);
+}());
+
 // ── The Vercel function ceiling ────────────────────────────────────────
 // The Hobby plan allows twelve serverless functions, and every file under api/ that is not a
 // helper becomes one. Crossing the ceiling fails no test, no suite and not CI: the build fails
