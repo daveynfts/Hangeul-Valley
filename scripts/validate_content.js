@@ -1790,10 +1790,19 @@ const overlayIds = [
 }());
 
 // ── The Vercel function ceiling ────────────────────────────────────────
-// The Hobby plan allows twelve serverless functions. Crossing that does not fail a test or
-// print a warning: the build fails on Vercel while CI stays green and nothing ships, which is
-// how api/unit10/[kind].js came to have three routes in one file. A count is cheap; finding
-// out the other way costs a deploy.
+// The Hobby plan allows twelve serverless functions, and every file under api/ that is not a
+// helper becomes one. Crossing the ceiling fails no test, no suite and not CI: the build fails
+// minutes later on Vercel, the previous deployment keeps serving, and the whole pipeline reads
+// green while nothing ships. A count is cheap; finding out the other way costs a deploy.
+//
+// Room has been made twice, both times by merging rather than deleting: api/unit10/[kind].js
+// carries three routes in one file, and every admin read lives in api/admin/[...path].js. If
+// this trips, look for routes that differ only in which getter they call.
+//
+// The remaining headroom is deliberately not written down here. A second copy of this check,
+// further down the file, said the count "sits at four with room to spare" when the true figure
+// was eleven of twelve — the opposite of a warning, and stale within a week of being typed.
+// The check prints the live number and the routes behind it, which cannot go out of date.
 (function checkFunctionBudget() {
   const LIMIT = 12;
   const dir = path.join(ROOT, 'api');
@@ -2420,19 +2429,11 @@ STATIC_FILES.forEach(([rel]) => {
   check(rel + ' exists for R2 upload', fs.existsSync(path.join(ROOT, rel)));
 });
 
-// ── Vercel's function budget ─────────────────────────────────────────────────
-// Every file under api/ that is not a helper becomes a serverless function, and the Hobby
-// plan allows twelve per deployment. Adding the thirteenth does not fail here, or in any
-// suite, or in CI — it fails in Vercel's build, minutes later, and leaves the previous
-// deployment serving. So the whole pipeline goes green and nothing ships, which is what
-// happened when api/leaderboard.js was added to a project already sitting on twelve.
-//
-// Underscore-prefixed files are modules the routes require, not routes, and are not counted.
-// Every admin read now lives in api/[...path].js — eight files became one — so the count sits
-// at four with room to spare. If this ever trips again, look for routes that differ only in
-// which getter they call: that is what the catch-all already absorbed.
-(function checkVercelFunctionBudget() {
-  const VERCEL_HOBBY_MAX = 12;
+// ── vercel.json's `functions` block matches the routes on disk ───────────────
+// The ceiling itself is counted once, under "The Vercel function ceiling" above; a second copy
+// lived here and drifted, so what stays is only the half that has no other home. The route list
+// is rebuilt here because both checks below are about which routes vercel.json names.
+(function checkVercelFunctionsBlock() {
   const apiDir = path.join(ROOT, 'api');
   const routes = [];
   (function walk(dir, rel) {
@@ -2443,11 +2444,6 @@ STATIC_FILES.forEach(([rel]) => {
       routes.push(rel ? rel + '/' + name : name);
     }
   }(apiDir, ''));
-  check(
-    `api/ has at most ${VERCEL_HOBBY_MAX} serverless functions`,
-    routes.length <= VERCEL_HOBBY_MAX,
-    `${routes.length} routes: ${routes.sort().join(', ')}`
-  );
 
   // The other half of the same trap, and the one that actually broke the last two
   // deployments. vercel.json's `functions` block names each function by path and lists the data
