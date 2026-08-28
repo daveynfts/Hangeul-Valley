@@ -2883,6 +2883,11 @@
       font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #7a3e12;
       margin-top: 6px; padding: 7px 9px; border-radius: 4px;
       background: #fff3d6; border: 1px solid var(--wood-l);
+      /* The exam notes are written with paragraphs and a numbered list of the shapes a
+         wrong answer takes. Every one of those breaks was being collapsed, so a note
+         meant to be scanned arrived as a wall. The 60 unit notes hold no newlines at
+         all, so this changes nothing for them. */
+      white-space: pre-wrap;
     }
     #wb-example {
       background: #eef4ff; border: 1.5px solid #1e3a8a; border-radius: 4px;
