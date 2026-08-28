@@ -473,6 +473,13 @@ drawing bars that would read as a flat recording.
 [docs/cassette-dictation.md](docs/cassette-dictation.md) covers cutting a book track,
 aligning a 듣기 transcript, and why the loop is two mechanisms rather than one.
 
+The exam world beside the textbook units is not a chapter: it grows one TOPIK question at
+a time from photographs, grouped by question type rather than by the day a question
+arrived, and a sitting draws one question from the whole paper.
+[docs/exam-questions.md](docs/exam-questions.md) covers adding a question, the rule that
+every word must trace back to a paper, and the gloss-key discipline that decides whether
+a learner can hover the thing the question is actually testing.
+
 `js/scenes/` holds five scenes — `FarmScene` (the hub), `ArcadeScene`, `DungeonScene`,
 `FishingScene`, `BeeScene` — with the pixel renderer, chiptune synth, day/night and
 weather systems, and the economy, quest, inventory and cooking systems in `js/systems/`
