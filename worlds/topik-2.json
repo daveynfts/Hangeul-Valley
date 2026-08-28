@@ -518,8 +518,7 @@
         "category": "환경",
         "categoryEn": "Environment & waste",
         "forms": [
-          "치우는",
-          "치우기"
+          "치우는"
         ]
       },
       {
@@ -795,11 +794,7 @@
         "en": "to store, to keep",
         "hint": "🧊",
         "category": "음식",
-        "categoryEn": "Food & eating",
-        "forms": [
-          "보관해야",
-          "보관하려면"
-        ]
+        "categoryEn": "Food & eating"
       },
       {
         "ko": "냉장고",
@@ -877,10 +872,7 @@
         "en": "to get hold of, to arrange for",
         "hint": "🛒",
         "category": "사회",
-        "categoryEn": "Society & everyday life",
-        "forms": [
-          "마련해야"
-        ]
+        "categoryEn": "Society & everyday life"
       },
       {
         "ko": "좋지 않다",
@@ -923,7 +915,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "해야 한다",
+          "보관해야 한다",
+          "마련해야 한다",
           "켜야 했다"
         ]
       },
@@ -1069,10 +1062,7 @@
         "en": "to pour cold water on it — to spoil something that was going well",
         "hint": "🪣",
         "category": "언론",
-        "categoryEn": "Media & headlines",
-        "forms": [
-          "찬물 끼얹는"
-        ]
+        "categoryEn": "Media & headlines"
       },
       {
         "ko": "잡다",
@@ -1186,8 +1176,7 @@
         "category": "동물",
         "categoryEn": "Animals & pets",
         "forms": [
-          "반려견은",
-          "반려견에게"
+          "반려견은"
         ]
       },
       {
@@ -2626,10 +2615,7 @@
         "en": "a patient",
         "hint": "🤕",
         "category": "건강",
-        "categoryEn": "Health & the body",
-        "forms": [
-          "환자에게"
-        ]
+        "categoryEn": "Health & the body"
       },
       {
         "ko": "식사량",
@@ -3070,9 +3056,7 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "힘든",
-          "힘들기",
-          "힘들어도"
+          "힘든"
         ]
       },
       {
@@ -3082,7 +3066,7 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "힘든 법이다"
+          "법이다"
         ]
       },
       {
@@ -3102,7 +3086,7 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "힘들어도 된다"
+          "어도 된다"
         ]
       },
       {
@@ -3112,7 +3096,7 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "힘들기만 하다"
+          "기만 하다"
         ]
       },
       {
@@ -3122,7 +3106,145 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "힘든 모양이다"
+          "모양이다"
+        ]
+      },
+      {
+        "ko": "노인",
+        "en": "an older person",
+        "hint": "🧓",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "취업",
+        "en": "getting work, employment",
+        "hint": "💼",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "설문 조사",
+        "en": "a survey",
+        "hint": "📋",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "건강",
+        "en": "health",
+        "hint": "🩺",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "건강이"
+        ]
+      },
+      {
+        "ko": "허락하다",
+        "en": "to permit, to allow",
+        "hint": "👍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "일하다",
+        "en": "to work",
+        "hint": "🛠️",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "일하고"
+        ]
+      },
+      {
+        "ko": "응답",
+        "en": "a reply given to a survey",
+        "hint": "🎙️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "응답이"
+        ]
+      },
+      {
+        "ko": "과반수",
+        "en": "more than half",
+        "hint": "📊",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "과반수를"
+        ]
+      },
+      {
+        "ko": "넘다",
+        "en": "to go past, to exceed",
+        "hint": "📈",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "넘었다"
+        ]
+      },
+      {
+        "ko": "N에 대한",
+        "en": "about N, concerning N",
+        "hint": "📎",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "에 대한"
+        ]
+      },
+      {
+        "ko": "-는 한",
+        "en": "for as long as it holds",
+        "hint": "⏳",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "허락하는 한"
+        ]
+      },
+      {
+        "ko": "-길래",
+        "en": "seeing that it was so, I …",
+        "hint": "👀",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "허락하길래"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ지라도",
+        "en": "even if it should",
+        "hint": "🛡️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "허락할지라도"
+        ]
+      },
+      {
+        "ko": "-ㄴ/는다고 해도",
+        "en": "even supposing it does",
+        "hint": "🛡️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "허락한다고 해도"
+        ]
+      },
+      {
+        "ko": "-고 싶다",
+        "en": "to want to",
+        "hint": "💭",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "싶다는"
         ]
       }
     ]

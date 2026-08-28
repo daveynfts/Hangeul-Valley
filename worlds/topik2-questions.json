@@ -243,7 +243,7 @@
           ],
           "en": "Storing food in summer: trusting the fridge and nothing else is asking for trouble. Meaning: in summer even the food inside the fridge cannot be eaten with confidence.",
           "why": "The whole question is one particle. Cover 만 and the headline says something close to the opposite.\n\n냉장고만 믿어서는 낭패 is: rely on the fridge *alone* and you will come unstuck. It does not say the fridge is useless, and it does not say to use it more. It says the fridge is not enough by itself — so the food inside one is not automatically safe.\n\nOption 2 is that reversed while keeping every word. 여름, 음식, 냉장고, 보관 are all from the headline, and 모든 음식을 냉장고에 보관해야 한다 tells you to trust the fridge more, which is the one instruction the headline is warning against. Reusing the vocabulary is what makes it look right; it is also all it has.\n\nOption 4 recommends buying something. 특별한 냉장고 appears nowhere in the headline, and a headline saying the fridge is not enough is not selling a better fridge. Option 2 and option 4 are both -해야 한다 — that is four of the six questions so far where an option turns a report into advice.\n\nOption 1 is the quieter trap: 먹던 음식을 냉장고에 넣는 것은 좋지 않다 is true as food safety goes, and 먹던 음식 is nowhere in the headline. It is a fact about the topic rather than a reading of the sentence — the same move as 사회적 지위 in question 3.\n\nThat leaves 3, and it is 만 unpacked. If the fridge alone is a 낭패, then 냉장고 안의 음식도 — the food inside it *too* — is not something you can eat 안심하고. The 도 is the same particle that carried the news in question 3: even this one, on top of what you already assumed.",
-          "grammar": "N만 = N and nothing besides. It is the load-bearing word here, and it is one syllable: 냉장고를 믿어서는 낭패 would be \"trusting fridges is a disaster\", while 냉장고만 믿어서는 낭패 is \"trusting only fridges is\". The exam puts the whole question on that difference.\n\nV-아/어서는 introduces a course of action that ends badly, and what ends it is always negative — here 낭패. The full sentence is 믿어서는 낭패를 본다; the headline keeps the noun and drops the verb, which is now six headlines running to do it: 모색, 천국, 불티, 관리 중, 바닥으로, 낭패.\n\nIn the options: -던 (먹던 음식) is the one you were in the middle of eating, -(으)려면 (보관하려면) is if you intend to, and -아/어야 하다 is the recommendation shape worth being suspicious of. 믿다 is to trust, and 믿어서는 is that verb wearing the ending above."
+          "grammar": "N만 = N and nothing besides. It is the load-bearing word here, and it is one syllable: 냉장고를 믿어서는 낭패 would be \"trusting fridges is a disaster\", while 냉장고만 믿어서는 낭패 is \"trusting only fridges is\". The exam puts the whole question on that difference.\n\nV-아/어서는 introduces a course of action that ends badly, and what ends it is always negative — here 낭패. The full sentence is 믿어서는 낭패를 본다; the headline keeps the noun and drops the verb, which is now six headlines running to do it: 모색, 천국, 불티, 관리 중, 바닥으로, 낭패.\n\nIn the options: -던 (먹던 음식) is the one you were in the middle of eating, -(으)려면 (보관하려면) is if you intend to, and -아/어야 하다 is the recommendation shape worth being suspicious of. 믿다 is to trust, and 믿어서는 is that verb wearing the ending above. 두 동사도 함께: 보관하다 is to store and 마련하다 is to get hold of — the second is what options 2 and 4 are really asking you to do, and neither is what the headline says."
         },
         {
           "n": 7,
@@ -667,6 +667,39 @@
           "en": "In the hands of the mother nursing me, love could be felt. One particle decides which of the four can stand.",
           "why": "Look at 사랑이. The particle is 이, so 사랑 is the subject of whatever fills the blank — love is the thing doing, not the thing being done to. That rules out three of the four before their meanings matter.\n\n느끼다 is the active verb and takes 을/를: 사랑을 느꼈다, I felt love. Every option except the first is built on it, so every one of them wants 사랑을 and gets 사랑이. 느껴 봤다 is trying to feel, 느끼는 듯했다 is seeming to feel, 느낄 정도였다 is to the extent of feeling — all three need a person as subject, and the person in this sentence is in 어머니의 손에서, marked as a place rather than an agent.\n\n느껴지다 is the passive, and it takes 이/가: 사랑이 느껴졌다, love was felt. It is the only option that agrees with the particle already on the page.\n\nQuestion 10 of this type turned on 에게 and this one turns on 이. Both are the same lesson: in Korean the particles are load-bearing, and an ending that disagrees with one is not a weaker answer but a broken sentence.",
           "grammar": "느끼다 → 느껴지다 is the -아/어지다 passive, the same ending Unit 15 teaches as a change: 만들다 → 만들어지다, 보다 → 보여지다. With adjectives it makes a change; with transitive verbs it makes a passive.\n\nThe particle pair is the thing to hold: 사랑을 느끼다 against 사랑이 느껴지다. Swap the particle and you must swap the verb.\n\n간호해 주시는 is three pieces — 간호하다, -아/어 주다 for doing it for someone, and -시- for the honorific, because it is 어머니. And 손에서 is 에서 marking where something comes from rather than who does it."
+        },
+        {
+          "n": 17,
+          "art": "",
+          "phraseKo": "노인 취업에 대한 설문 조사에서 건강이 (   ) 계속 일하고 싶다는 응답이 과반수를 넘었다.",
+          "lines": [
+            {
+              "who": "문장",
+              "ko": "노인 취업에 대한 설문 조사에서 건강이 {} 계속 일하고 싶다는 응답이 과반수를 넘었다."
+            }
+          ],
+          "answer": "neunhan",
+          "choices": [
+            {
+              "id": "gillae",
+              "ko": "허락하길래"
+            },
+            {
+              "id": "neunhan",
+              "ko": "허락하는 한"
+            },
+            {
+              "id": "jirado",
+              "ko": "허락할지라도"
+            },
+            {
+              "id": "daegodo",
+              "ko": "허락한다고 해도"
+            }
+          ],
+          "en": "In a survey on employment among older people, more than half replied that they want to keep working for as long as their health allows.",
+          "why": "건강이 허락하는 한 is a set phrase: for as long as health permits. Learn it whole, because it turns up wherever anyone talks about working or travelling into old age.\n\nThe relation the sentence needs is a condition that has to keep holding. They want to go on working, and the working stops when the health does. -는 한 is the ending for exactly that: it holds while the condition holds.\n\nOptions 3 and 4 are both concessive, and they are concessive in the same direction. -(으)ㄹ지라도 and -ㄴ다고 해도 both mean even if health permits — which would say the wanting to work survives the health being fine. That is not a thought. Two options meaning the same thing is itself a signal: an exam does not offer two correct answers, so if you can see that a pair matches, both are wrong.\n\n-길래 is a reason drawn from something observed, and it needs the speaker to do something about it: 날씨가 좋길래 산책했다. Here the second half is not something the speaker did; it is what a survey found.",
+          "grammar": "허락하다 is to permit. 건강이 허락하는 한, 시간이 허락하는 한 — the subject is the thing doing the permitting, which is why it is 건강이 and not 건강을.\n\n-는 한 attaches to the present modifier and states a boundary: 내가 아는 한 (as far as I know), 특별한 일이 없는 한 (barring anything unusual).\n\n-길래 is spoken and needs a first-person main clause with a completed action. -(으)ㄹ지라도 is the formal concessive, one step stiffer than -아/어도. -ㄴ/는다고 해도 concedes a supposition: even supposing that.\n\n과반수 is 과 (exceeding) + 반수 (half the number), so 과반수를 넘었다 is strictly more than half of more than half — a doubling the papers use anyway. And N에 대한 modifies a noun (조사), where N에 대해서 would modify a verb."
         }
       ]
     },

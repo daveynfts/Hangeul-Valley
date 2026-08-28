@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-20260827g",
+  "cacheKey": "art-20260827h",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -7210,6 +7210,216 @@
         "vocab"
       ],
       "notes": "Still-icon. Magenta-keyed 16-bit. HTML overlay, not Phaser."
+    },
+    {
+      "id": "item.wooden_study_desk",
+      "nameEn": "Wooden study desk",
+      "kind": "item",
+      "family": "furniture",
+      "role": "wooden_study_desk",
+      "path": "items/wooden_study_desk.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.wooden_study_desk",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.wrapped_gift",
+      "nameEn": "Wrapped gift",
+      "kind": "item",
+      "family": "gift",
+      "role": "wrapped_gift",
+      "path": "items/wrapped_gift.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.wrapped_gift",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.forsythia_spray",
+      "nameEn": "Forsythia spray",
+      "kind": "item",
+      "family": "plant",
+      "role": "forsythia_spray",
+      "path": "items/forsythia_spray.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.forsythia_spray",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.pink_blossom",
+      "nameEn": "Pink blossom",
+      "kind": "item",
+      "family": "plant",
+      "role": "pink_blossom",
+      "path": "items/pink_blossom.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.pink_blossom",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.celadon_vase",
+      "nameEn": "Celadon vase",
+      "kind": "item",
+      "family": "vessel",
+      "role": "celadon_vase",
+      "path": "items/celadon_vase.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.celadon_vase",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.exam_papers",
+      "nameEn": "Exam papers",
+      "kind": "item",
+      "family": "exam",
+      "role": "exam_papers",
+      "path": "items/exam_papers.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.exam_papers",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "food.yeot_taffy",
+      "nameEn": "Yeot taffy",
+      "kind": "food",
+      "family": "candy",
+      "role": "yeot_taffy",
+      "path": "foods/yeot_taffy.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.yeot_taffy",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "food.white_tteok",
+      "nameEn": "White tteok",
+      "kind": "food",
+      "family": "rice-cake",
+      "role": "white_tteok",
+      "path": "foods/white_tteok.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.white_tteok",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.campus_building",
+      "nameEn": "Campus building",
+      "kind": "item",
+      "family": "place",
+      "role": "campus_building",
+      "path": "items/campus_building.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.campus_building",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.mother_portrait",
+      "nameEn": "Mother portrait",
+      "kind": "item",
+      "family": "people",
+      "role": "mother_portrait",
+      "path": "items/mother_portrait.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.mother_portrait",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.brick_workshop",
+      "nameEn": "Brick workshop",
+      "kind": "item",
+      "family": "place",
+      "role": "brick_workshop",
+      "path": "items/brick_workshop.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.brick_workshop",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.indigo_diamond",
+      "nameEn": "Indigo diamond",
+      "kind": "item",
+      "family": "ornament",
+      "role": "indigo_diamond",
+      "path": "items/indigo_diamond.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.indigo_diamond",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.coral_ring",
+      "nameEn": "Coral ring",
+      "kind": "item",
+      "family": "ornament",
+      "role": "coral_ring",
+      "path": "items/coral_ring.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.coral_ring",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "item.violet_petals",
+      "nameEn": "Violet petals",
+      "kind": "item",
+      "family": "ornament",
+      "role": "violet_petals",
+      "path": "items/violet_petals.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.violet_petals",
+      "usedBy": [
+        "FarmScene"
+      ],
+      "notes": ""
     }
   ]
 }

@@ -490,6 +490,47 @@ const overlayIds = [
   });
   check('every exam option has at least one word a learner can hover',
     dark.length === 0, dark.slice(0, 6).join(', '));
+
+  // The same check over the whole question, narrowed to the patterns the paper is testing.
+  //
+  // The broad version — every entry whose key appears must win — flagged six things and only
+  // half were faults: 영향을 미치고 loses to 악영향 and 책이 to 부동산 정책, and in both the
+  // learner hovers and gets a gloss that is right for what is under the cursor. Shipping a
+  // check that cries wolf half the time is shipping a check nobody reads.
+  //
+  // So: only grammar entries, and only when no key of the entry wins anywhere in the item.
+  // A pattern the question exists to test, with no gloss at all on the page that tests it,
+  // is a fault every time. 에 대한 in question 17 was one — 취업 had been keyed on 취업에,
+  // which ate the 에 it needed.
+  const stemDark = [];
+  const grammarWords = ((world.level && world.level.words) || [])
+    .filter((wd) => /^[-N]/.test(String(wd.ko || '')));
+  (qbank.exercises || []).forEach((ex) => {
+    (ex.items || []).forEach((it) => {
+      const shown = [it.phraseKo].concat((it.lines || []).map((l) => l.ko))
+        .concat((it.choices || []).map((c) => c.ko));
+      const onScreen = shown.filter(Boolean).map((t) => String(t).normalize('NFC')).join('  ');
+      if (!onScreen) return;
+      // Winners are counted on the sentence and its options only, never on the notes. The
+      // first version counted the notes too, and that masked the very bug it was written
+      // for: 에 대한 is named in question 17's grammar note, so the entry looked reachable
+      // while the option line it belongs to had no gloss on it at all.
+      const winners = new Set();
+      re.lastIndex = 0;
+      let m;
+      while ((m = re.exec(onScreen))) winners.add(m[0]);
+      grammarWords.forEach((wd) => {
+        const mine = [wd.ko].concat(Array.isArray(wd.forms) ? wd.forms : [])
+          .map((k) => String(k || '').normalize('NFC').trim())
+          .filter((k) => k.length >= 2);
+        if (!mine.some((k) => onScreen.indexOf(k) >= 0)) return;
+        if (mine.some((k) => winners.has(k))) return;
+        stemDark.push('q' + it.n + ' ' + wd.ko);
+      });
+    });
+  });
+  check('and every grammar point a question uses is hoverable somewhere in that question',
+    stemDark.length === 0, stemDark.slice(0, 6).join(', '));
 }());
 
 (function checkArtRowsUnique() {

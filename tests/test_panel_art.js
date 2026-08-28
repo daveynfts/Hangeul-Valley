@@ -106,7 +106,7 @@ vm.runInNewContext(
   assert(gaps.length === 0, id + ' farm kos resolve to on-disk still-icons (' + seen.size + ')');
 });
 
-assert(econ.indexOf("ART_CACHE_KEY = 'art-20260827g'") >= 0, 'economy cache key matches the new art batch');
-assert(catalog.cacheKey === 'art-20260827g', 'catalog cacheKey is art-20260827g');
+assert(econ.indexOf("ART_CACHE_KEY = 'art-20260827h'") >= 0, 'economy cache key matches the new art batch');
+assert(catalog.cacheKey === 'art-20260827h', 'catalog cacheKey is art-20260827h');
 
 console.log('\ntest_panel_art: all passed');

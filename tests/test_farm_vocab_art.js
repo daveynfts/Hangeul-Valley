@@ -92,9 +92,31 @@ assert(rowFor('파리').slug === 'desk_globe', '파리 maps to desk_globe');
 assert(rowFor('한강').slug === 'desk_globe', '한강 maps to desk_globe');
 assert(rowFor('낮다').slug !== 'sun_icon', '낮다 does not share the sun slug');
 
+['엿', '떡', '선물', '꽃병', '개나리', '꽃', '책상', '어머니', '대학교',
+  '입사 시험', '한국', '생산량', '-도록'].forEach((ko) => {
+  const row = rowFor(ko);
+  assert(!!row, 'new TOPIK word maps ' + ko);
+  assert(DUMP.indexOf(row.slug) < 0, ko + ' is not a dump slug (got ' + (row && row.slug) + ')');
+  assert(fs.existsSync(path.join(ROOT, 'sprites', row.folder, row.slug + '.png')),
+    ko + ' still-icon exists');
+});
+assert(rowFor('엿').slug === 'yeot_taffy', '엿 maps to yeot_taffy');
+assert(rowFor('떡').slug === 'white_tteok', '떡 maps to white_tteok');
+assert(rowFor('선물').slug === 'wrapped_gift', '선물 maps to wrapped_gift');
+assert(rowFor('꽃병').slug === 'celadon_vase', '꽃병 maps to celadon_vase');
+assert(rowFor('개나리').slug === 'forsythia_spray', '개나리 maps to forsythia_spray');
+assert(rowFor('꽃').slug === 'pink_blossom', '꽃 maps to pink_blossom');
+assert(rowFor('책상').slug === 'wooden_study_desk', '책상 maps to wooden_study_desk');
+assert(rowFor('어머니').slug === 'mother_portrait', '어머니 maps to mother_portrait');
+assert(rowFor('대학교').slug === 'campus_building', '대학교 maps to campus_building');
+assert(rowFor('입사 시험').slug === 'exam_papers', '입사 시험 maps to exam_papers');
+assert(rowFor('한국').slug === 'our_country', '한국 maps to our_country');
+assert(rowFor('생산량').slug === 'brick_workshop', '생산량 maps to brick_workshop');
+assert(rowFor('-도록').slug !== 'kinds_types', '-도록 is not the pizza dump');
+
 const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, 'sprites', 'catalog.json'), 'utf8'));
 const econ = fs.readFileSync(path.join(ROOT, 'js', 'systems', 'economy.js'), 'utf8');
-assert(catalog.cacheKey === 'art-20260827g', 'catalog cacheKey is art-20260827g');
-assert(econ.indexOf("ART_CACHE_KEY = 'art-20260827g'") >= 0, 'economy cache key is art-20260827g');
+assert(catalog.cacheKey === 'art-20260827h', 'catalog cacheKey is art-20260827h');
+assert(econ.indexOf("ART_CACHE_KEY = 'art-20260827h'") >= 0, 'economy cache key is art-20260827h');
 
 console.log('\ntest_farm_vocab_art: all passed');
