@@ -951,7 +951,8 @@ const overlayIds = [
   // the book gives those two a transcript, so every track is scripted now.
   const scripted = tracks.filter((t) => Array.isArray(t.lines));
   check('every Unit 11 track carries a script', scripted.length === tracks.length, `${scripted.length} of ${tracks.length}`);
-  check('so none of them needs a no-script note', tracks.every((t) => !t.noteEn));
+  check('so no Unit 11 track needs a no-script note', tracks.every((t) => !t.noteEn),
+    tracks.filter((t) => t.noteEn).map((t) => t.n).join(','));
 
   const items = (c.dictation && c.dictation.items) || [];
   check('47 dictation sentences', items.length === 47, `found ${items.length}`);
@@ -1089,7 +1090,8 @@ const overlayIds = [
   check('every Unit 13 track has its mp3 on disk', noFile.length === 0, 'missing for ' + noFile.join(','));
   check('every Unit 13 track carries a script',
     tracks.every((t) => Array.isArray(t.lines)), tracks.filter((t) => !t.lines).map((t) => t.n).join(','));
-  check('so none of them needs a no-script note', tracks.every((t) => !t.noteEn));
+  check('so no Unit 13 track needs a no-script note', tracks.every((t) => !t.noteEn),
+    tracks.filter((t) => t.noteEn).map((t) => t.n).join(','));
   const items = (c.dictation && c.dictation.items) || [];
   check('60 dictation sentences', items.length === 60, `found ${items.length}`);
   const bad = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length || !i.audio || !i.audio.src).map((i) => i.id);
