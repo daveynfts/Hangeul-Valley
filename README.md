@@ -581,6 +581,21 @@ and then exited 0, so a broken sprite matrix would have gone green. Both it and
 `validate_content.js` were checked by deliberately breaking the thing they guard and
 confirming a non-zero exit.
 
+A check can also fail to be a gate while exiting correctly, in two ways worth auditing for.
+One is unreachable: a check for a manifest entry with no file could never fire, because every
+listed script is read hundreds of lines earlier and throws first. The other is vacuous:
+`[].every(...)` is `true` and `[].some(...)` is `false`, so a check over a collection that
+turned out empty passes without examining anything — which is indistinguishable from passing
+for the right reason, and is what a probe looking for the wrong key produces.
+
+Both were swept for by instrumenting the runtime rather than reading the source: patch
+`Array.prototype.every/some/filter` to record the call site whenever the receiver is empty,
+then run the validator and each test file and attribute the hits. Swept once across the whole
+suite as it stood — 2,439 invariants and 2,168 assertions — which turned up one dead check,
+since deleted, and no vacuous ones. Attribution
+lands on the nearest frame in the file being audited, so a hit is a candidate to read rather
+than a defect — of the five in `tests/`, all five were sound.
+
 `validate_content.js` is the one to run before committing data changes. It asserts the
 shape of `levels.json` and `facts.json` (25 levels, 1500 words, no duplicate Korean
 headwords, every word carrying `categoryEn`, every `facts.json` entry matching a real
