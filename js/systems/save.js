@@ -1198,8 +1198,11 @@ let attemptLog = [];   // [{ ko, g, m, at, ivl, st }]
 //   dic:<unit>:<id>            one dictation sentence      ok counts the ones typed right
 //
 // Unbounded in time but bounded by content: one entry per thing that exists, so it stops
-// growing when the units stop being added. Roughly 13 KB across three units, inside a save
-// the cloud endpoint caps at 256 KB.
+// growing when the units stop being added. The safety argument is the ratio, not the figure —
+// every practisable thing in the game seen once was 501 entries and 18.5 KB when last measured,
+// against a cloud cap of 256 KB. Growth is linear in content, so a unit costs roughly what the
+// last one did, and the headroom is in multiples rather than percent. (This said "13 KB across
+// three units" while five had shipped; the conclusion held, the number did not.)
 let practiceLog = {};
 
 const PRACTICE_KINDS = ['wb', 'trk', 'dic'];

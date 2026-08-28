@@ -3561,9 +3561,11 @@ function openWorkbook(bank) {
 // not a page to be worked through once — it is a pile to be met again in a different order,
 // and the point of a sitting is the single question and its explanation.
 //
-// Not Math.random() on its own: with six questions that repeats the one just answered a sixth
-// of the time, which reads as broken rather than as random, and it lets a third of the bank go
-// unseen for a week. The bag holds every question once and refills when empty, so a full round
+// Not Math.random() on its own: over a bank of N it repeats the question just answered one
+// sitting in N, which reads as broken rather than as random, and it leaves part of the bank
+// unseen for a week however large the bank gets — the smaller the bank, the worse it feels, and
+// this was written when there were six. The bag holds every question once and refills when
+// empty, so a full round
 // is guaranteed before anything comes back; a refill never opens with the question that closed
 // the previous one.
 const wbDrawBags = new Map();

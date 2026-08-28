@@ -220,10 +220,12 @@ let textbookWorldsTried = false;
 function loadTextbookWorlds(done) {
   const specs = TEXTBOOK_WORLD_FILES;
   let remaining = specs.length;
-  // Attached in list order, not in the order the network answers. These five fetches run at
-  // once, so whoever comes back first used to land first — which on localhost is the list
+  // Attached in list order, not in the order the network answers. Every spec above is fetched
+  // at once, so whoever came back first used to land first — which on localhost is the list
   // order and over a CDN is by file size, putting Unit 10 last. The menu reshuffled itself
-  // between page loads. Results are parked by index and attached when all five have settled.
+  // between page loads. Results are parked by index and attached once all of them have settled.
+  // A fetch that fails parks null and still counts, so one dead world costs that world and
+  // nothing else. The count is deliberately not written here: it said "five" until Unit 15.
   const got = new Array(specs.length).fill(null);
   const one = (data, i) => {
     got[i] = data || null;
