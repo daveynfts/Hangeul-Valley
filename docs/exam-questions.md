@@ -143,5 +143,17 @@ a learner would recognise as -더니, and the same is true of 근황.
 4. Write the question, the words and the art rows **in one pass**. Splitting them is
    how `test_panel_art` went green on a commit where the words were absent.
 5. Run `node scripts/validate_content.js`, then `npm run test:all`.
-6. Open it in the browser and answer it. Every gap that survived the invariants was
-   found here: 될뿐더러, 꽂아 가지고, 가서, 에 대한.
+6. Open it in the browser and answer it.
+
+Step 6 used to be where every hover gap turned up — 될뿐더러, 꽂아 가지고, 가서 and
+에 대한 were all found by reading a rendered page, one per question, four times over.
+Three checks have since taken most of that over:
+
+- every option carries at least one hoverable word;
+- every grammar point a question uses is hoverable somewhere in that question,
+  counted on the sentence and its options and never on the notes;
+- the desk quiz tests nothing the paper has not taught.
+
+What the browser is still for is the rest of the surface — that the question draws,
+that the answer marks ✓, that the explanation opens, that the art renders. Those have
+no invariant and are cheap to check: answer the question once.
