@@ -22,8 +22,19 @@ function loadManifest() {
 
 const GAME_SCRIPTS = loadManifest();
 
+// loadManifest() explains itself when the manifest is unreadable; this did not, and a manifest
+// entry whose file has been renamed or deleted came out as a bare ENOENT stack trace from inside
+// a helper, several frames from anything a reader would recognise. Renaming a script and
+// forgetting the manifest is an ordinary mistake and deserves an ordinary sentence.
 function readGameSource() {
-  return GAME_SCRIPTS.map((rel) => fs.readFileSync(path.join(ROOT, rel), 'utf8')).join('\n');
+  return GAME_SCRIPTS.map((rel) => {
+    try {
+      return fs.readFileSync(path.join(ROOT, rel), 'utf8');
+    } catch (e) {
+      throw new Error('js/manifest.json lists ' + rel + ', which is not on disk'
+        + (e.code === 'ENOENT' ? '' : ' (' + e.message + ')'));
+    }
+  }).join('\n');
 }
 
 function gameScriptPaths() {

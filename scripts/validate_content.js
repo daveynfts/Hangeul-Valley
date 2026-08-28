@@ -225,6 +225,38 @@ check('index.html script tags match js/manifest.json',
   JSON.stringify(scriptSrcs) === JSON.stringify(GAME_SCRIPTS),
   scriptSrcs.join(',') + ' vs ' + GAME_SCRIPTS.join(','));
 
+// The check above compares two files a person edits together, so it agrees even when both are
+// wrong about what is on disk. A .js file added to js/ and left out of the manifest is never
+// loaded by anything: no 404, no console error, just whatever it defined quietly absent. That
+// matters here because a second session works in this checkout and adds files to js/.
+//
+// A file may be deliberately unloaded, but it has to say so here with a reason.
+(function checkEveryScriptLoads() {
+  const NOT_LOADED = {
+    // 'js/example.js': 'why this one is intentionally not in the manifest',
+  };
+  const found = [];
+  (function walk(dir) {
+    fs.readdirSync(dir).forEach((n) => {
+      const f = path.join(dir, n);
+      if (fs.statSync(f).isDirectory()) return walk(f);
+      if (n.endsWith('.js')) found.push('js/' + path.relative(path.join(ROOT, 'js'), f).split(path.sep).join('/'));
+    });
+  }(path.join(ROOT, 'js')));
+
+  check('there are scripts on disk to compare against', found.length > 10, `${found.length} found`);
+
+  const listed = new Set(GAME_SCRIPTS);
+  const unloaded = found.filter((f) => !listed.has(f) && !NOT_LOADED[f]);
+  check('every .js in js/ is loaded, or says why not', unloaded.length === 0,
+    unloaded.join(', ') + ' — add to js/manifest.json, or to NOT_LOADED with a reason');
+
+  // The reverse — a manifest entry with no file — is deliberately not checked here. Every listed
+  // script is read by readGameSource() far above this line, so such a check could never fire; it
+  // would sit in the count looking like protection. gameSource.js reports it instead, and says
+  // "js/manifest.json lists X, which is not on disk" rather than throwing a bare ENOENT.
+}());
+
 ['index.html', path.join('css', 'game.css'), path.join('sprites', 'catalog.json'), path.join('skins', 'catalog.json')]
   .concat(GAME_SCRIPTS)
   .forEach((f) => {
