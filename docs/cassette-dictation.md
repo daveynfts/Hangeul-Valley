@@ -309,6 +309,37 @@ is what keeps a later unit's clips consistent with the earlier ones.
 
 ---
 
+## Unit 15, and the difference between silent and not yet scripted
+
+Tracks 52-61. Three of the ten ship listen-only, the largest share of any unit here, and the
+reason is not Unit 14's reason.
+
+Unit 14's track 47 is silent **permanently**: the conversation is drawn on the unit page and
+the 번역 page gives it in English, so the Korean was never printed anywhere and no dictation
+answer could ever be checked against it. The count is pinned at nine-and-one because it will
+always be nine-and-one.
+
+Unit 15's three are silent **pending a page**. Track 57 (말하기 2) needs the Korean 말하기 2
+page; tracks 58 and 59 (듣기 1 and 듣기 2) need the 듣기 지문 pages at the back, the same
+pages that supplied Units 11, 13 and 14. All three conversations are on the tape in full and
+already play. Each page that arrives moves one or two tracks across, in whatever order the
+pages turn up.
+
+So the seven-and-three in the invariants is a **description, not a pin**. Changing it is
+expected; the check beside it is the one that must not be relaxed — every scriptless track
+carries a `noteEn` saying which page it is waiting for. That is what stops "no script yet"
+from decaying into "no script", and it is why the learner sees a reason rather than a gap.
+
+Two consequences worth knowing before editing this unit:
+
+- **The dictation set may not draw from a scriptless track.** The invariant exists because the
+  tape holds the audio for all ten, so nothing about the clip files would object.
+- **There is no `tests/test_unit15_cassette.js`.** Unit 14 has a dedicated suite; Unit 15's
+  assertions live in `checkUnit15Cassette` in `scripts/validate_content.js` instead. Both
+  conventions are in the repo — look in the validator before concluding a unit is untested.
+
+---
+
 ## Unit 10, and a unit whose 발음 page leaves no trace
 
 Tracks 02-11: eight scripted, two listen-only (08 and 09, the 듣기 pages, waiting on the
