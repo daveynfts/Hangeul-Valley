@@ -1198,12 +1198,15 @@ let attemptLog = [];   // [{ ko, g, m, at, ivl, st }]
 //   trk:<unit>:<n>             a cassette track            ok/of stay 0; there is no score
 //   dic:<unit>:<id>            one dictation sentence      ok counts the ones typed right
 //
-// Unbounded in time but bounded by content: one entry per thing that exists, so it stops
-// growing when the units stop being added. The safety argument is the ratio, not the figure —
-// every practisable thing in the game seen once was 501 entries and 18.5 KB when last measured,
-// against a cloud cap of 256 KB. Growth is linear in content, so a unit costs roughly what the
-// last one did, and the headroom is in multiples rather than percent. (This said "13 KB across
-// three units" while five had shipped; the conclusion held, the number did not.)
+// Unbounded in time but bounded by content: the three shapes above are one entry per exercise,
+// one per track and one per dictation sentence, so the log stops growing when the units stop
+// being added. That composition is the durable statement; with everything shipped so far seen
+// once it weighed 18.7 KB against a cloud cap of 256 KB, measured 2026-08-28. Growth is linear
+// in content, so a unit costs roughly what the last one did and the headroom stays in multiples.
+//
+// Two wrong figures have stood here. It said "13 KB across three units" while five had shipped,
+// and then "501 entries" — a probe that counted wb: per item rather than per exercise and
+// skipped trk: entirely, which is 298. Count by the key shapes above, not by content rows.
 let practiceLog = {};
 
 const PRACTICE_KINDS = ['wb', 'trk', 'dic'];

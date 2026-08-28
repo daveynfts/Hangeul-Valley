@@ -126,7 +126,9 @@ this repo and rewrites slugs in `js/vocabArtMore.js`; a row named as an anchor m
 no longer say what it said an hour ago. It has already replaced stand-ins with real
 tiles — 산 went from a `desk_globe` placeholder to a `snow_peak`.
 
-Sharing a tile is normal — 121 slugs serve more than one word. `kinds_types` is the
+Sharing a tile is normal — around two fifths of the slugs serve more than one word, and
+the exact figure moves whenever the other session rewrites `js/vocabArtMore.js`, so it is
+not worth writing down. (It said 121 here while the count was 103.) `kinds_types` is the
 one to reach for when nothing can be drawn: 59 words sit on it, and only nine are
 grammar patterns. The rest are abstract nouns and verbs — 종류, 위치, 거리, 기대가
 되다 — which is the honest reason it exists. There is nothing to draw for -더니 that
