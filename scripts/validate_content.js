@@ -748,9 +748,15 @@ const overlayIds = [
   // listening, and the recording has not been supplied. Writing an answer key for a
   // conversation nobody can hear would mean inventing one. If a 듣기 page ever appears
   // here it has to bring an audio source with it.
+  //
+  // This is a tripwire for a page that does not exist yet, so `listen` is empty and the
+  // check passes over nothing. That is intended, but an empty pass and a real pass read
+  // identically, and a filter that quietly stopped matching would look the same again —
+  // so the count goes in the message. `exs` is asserted non-empty above, which is what
+  // keeps the emptiness a fact about the content rather than about the filter.
   const listen = exs.filter((e) => String(e.section || '').indexOf('듣기') >= 0
     || String(e.no || '').indexOf('듣기') >= 0);
-  check('no Unit 15 듣기 page ships without a recording',
+  check(`no Unit 15 듣기 page ships without a recording (${listen.length} on the page)`,
     listen.every((e) => (e.items || []).every((it) => it.audio && it.audio.src)),
     listen.map((e) => e.id).join(', '));
 }());
