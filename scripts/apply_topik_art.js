@@ -11,6 +11,38 @@ const { loadRows } = require('./audit_vocab_art');
 const BEGIN = '// BEGIN REVIEWED TOPIK ART';
 const END = '// END REVIEWED TOPIK ART';
 
+function appendReviewedArtFingerprint(root, fingerprint) {
+  // TOPIK owns the shared runtime cache key, so other reviewed sprite batches must
+  // participate in its fingerprint or the next TOPIK sync would roll their cache bust back.
+  const files = ['docs/valley-map-art-manifest.json'];
+  let count = 0;
+  files.forEach((manifestFile) => {
+    const fullManifest = path.join(root, manifestFile);
+    if (!fs.existsSync(fullManifest)) return;
+    const manifest = JSON.parse(fs.readFileSync(fullManifest, 'utf8'));
+    const entries = Array.isArray(manifest.entries) ? manifest.entries.filter(entry => entry.reviewed === true) : [];
+    entries.sort((a, b) => String(a.file || '').localeCompare(String(b.file || ''))).forEach((entry) => {
+      if (!/^sprites\/(characters|decorations|furniture|stalls)\/[a-z][a-z0-9_]*\.png$/.test(entry.file || '')) {
+        throw new Error('Invalid reviewed art path in ' + manifestFile + ': ' + (entry.file || 'missing'));
+      }
+      const full = path.join(root, entry.file);
+      if (!fs.existsSync(full)) throw new Error('Reviewed art is missing: ' + entry.file);
+      const data = fs.readFileSync(full);
+      fingerprint.update(JSON.stringify({
+        manifest: manifestFile,
+        role: entry.role,
+        file: entry.file,
+        sourceImage: entry.sourceImage,
+        height: entry.height,
+        mapScale: entry.mapScale
+      }));
+      fingerprint.update(crypto.createHash('sha256').update(data).digest('hex'));
+      count++;
+    });
+  });
+  return count;
+}
+
 function prepareTopikArt(root, options = {}) {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'docs/topik-art-manifest.json'), 'utf8'));
   const world = JSON.parse(fs.readFileSync(path.join(root, 'worlds/topik-2.json'), 'utf8'));
@@ -77,7 +109,10 @@ function prepareTopikArt(root, options = {}) {
   }
   const fingerprint = crypto.createHash('sha256').update(JSON.stringify(rows));
   for (const hash of hashes.keys()) fingerprint.update(hash);
-  const cacheKey = 'art-topik-' + ready.length + '-' + fingerprint.digest('hex').slice(0, 12);
+  const supplemental = appendReviewedArtFingerprint(root, fingerprint);
+  const cacheKey = 'art-topik-' + ready.length
+    + (supplemental ? '-extra-' + supplemental : '')
+    + '-' + fingerprint.digest('hex').slice(0, 12);
   pack.cacheKey = cacheKey;
   const block = BEGIN + '\n'
     + '// Generated from docs/topik-art-manifest.json by scripts/apply_topik_art.js.\n'
@@ -92,14 +127,16 @@ function prepareTopikArt(root, options = {}) {
     + 'if (typeof window !== \'undefined\') window.TOPIK_VOCAB_ART_ROWS = TOPIK_VOCAB_ART_ROWS;\n'
     + END;
   let source = fs.readFileSync(path.join(root, 'js/vocabArtMore.js'), 'utf8');
+  const newline = source.includes('\r\n') ? '\r\n' : '\n';
+  const sourceBlock = newline === '\n' ? block : block.replace(/\n/g, newline);
   const start = source.indexOf(BEGIN);
   if (start >= 0) {
     const finish = source.indexOf(END, start);
     if (finish < 0 || source.indexOf(BEGIN, start + BEGIN.length) >= 0) throw new Error('Invalid TOPIK mapping block');
-    source = source.slice(0, start) + block + source.slice(finish + END.length);
+    source = source.slice(0, start) + sourceBlock + source.slice(finish + END.length);
   } else {
     if (source.includes(END)) throw new Error('Invalid TOPIK mapping block');
-    source = source.trimEnd() + '\n\n' + block + '\n';
+    source = source.trimEnd() + newline + newline + sourceBlock + newline;
   }
   const economy = fs.readFileSync(path.join(root, 'js/systems/economy.js'), 'utf8');
   if (!/ART_CACHE_KEY = '[^']+'/.test(economy)) throw new Error('Cannot locate runtime art cache key');

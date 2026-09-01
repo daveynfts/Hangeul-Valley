@@ -1,0 +1,115 @@
+{
+  "date": "2026-09-01",
+  "tool": "Built-in Imagegen; individually reviewed and corrected before processing",
+  "parent": "sprites/characters/valley-farmer/walk_down_0.png",
+  "family": "valley-map-extras",
+  "processing": {
+    "script": ".grok/skills/farm-pixel-props/scripts/process_prop.py",
+    "colors": 32,
+    "sampling": "nearest-neighbor",
+    "alpha": "binary from reserved #FF00FF magenta key"
+  },
+  "entries": [
+    {
+      "role": "cassette",
+      "slug": "valley_cassette_player",
+      "file": "sprites/furniture/valley_cassette_player.png",
+      "phaserKey": "cassette_player_hd",
+      "sourceImage": "exec-a757a393-91eb-4c53-b0f3-3fb539a53f69.png",
+      "height": 156,
+      "mapScale": 0.72,
+      "reviewed": true,
+      "brief": "Portable oak-and-cream cassette player with an unmistakable handle, tape window, two reels, speaker, and transport controls."
+    },
+    {
+      "role": "beehive",
+      "slug": "valley_apiary_hive",
+      "file": "sprites/decorations/valley_apiary_hive.png",
+      "phaserKey": "valley_apiary_hive_hd",
+      "sourceImage": "exec-b493bf95-ed6f-42e6-9456-2c5193e2f23d.png",
+      "height": 64,
+      "mapScale": 1.15,
+      "reviewed": true,
+      "brief": "Warm wooden apiary hive with layered honey boxes and a clear entrance."
+    },
+    {
+      "role": "wizard",
+      "slug": "valley_spell_witch",
+      "file": "sprites/characters/valley_spell_witch.png",
+      "phaserKey": "valley_spell_witch_hd",
+      "sourceImage": "exec-784166d7-10af-469f-916f-9482389c1930.png",
+      "height": 80,
+      "mapScale": 1,
+      "reviewed": true,
+      "brief": "Complete spell-witch silhouette in the shared valley palette for the legacy wizard spawn path."
+    },
+    {
+      "role": "cat",
+      "slug": "valley_ginger_cat",
+      "file": "sprites/characters/valley_ginger_cat.png",
+      "phaserKey": "valley_ginger_cat_hd",
+      "sourceImage": "exec-bd934b59-e356-4574-bf18-53e249d554b5.png",
+      "height": 80,
+      "mapScale": 0.58,
+      "reviewed": true,
+      "brief": "Readable ginger tabby with a complete curled tail and friendly face."
+    },
+    {
+      "role": "shop",
+      "slug": "valley_seed_shop",
+      "file": "sprites/stalls/valley_seed_shop.png",
+      "phaserKey": "valley_seed_shop_hd",
+      "sourceImage": "exec-99928181-1756-4de2-9f85-d3c03e219e67.png",
+      "height": 156,
+      "mapScale": 0.78,
+      "reviewed": true,
+      "brief": "Seed shop with a striped canopy, labeled-by-shape seed sacks, and watering can; no text baked into the sprite."
+    },
+    {
+      "role": "board",
+      "slug": "valley_notice_board",
+      "file": "sprites/decorations/valley_notice_board.png",
+      "phaserKey": "valley_notice_board_hd",
+      "sourceImage": "exec-270c1170-173f-4715-b812-018f56f0a2dd.png",
+      "height": 80,
+      "mapScale": 1,
+      "reviewed": true,
+      "brief": "Oak notice board with four quiet parchment cards and no unreadable fake lettering."
+    },
+    {
+      "role": "arcade",
+      "slug": "valley_arcade_cabinet",
+      "file": "sprites/furniture/valley_arcade_cabinet.png",
+      "phaserKey": "valley_arcade_cabinet_hd",
+      "sourceImage": "exec-8c5f3ff1-ab74-4fc1-8028-339a1abfa32e.png",
+      "height": 156,
+      "mapScale": 0.76,
+      "reviewed": true,
+      "brief": "Navy-and-walnut arcade cabinet with a cyan screen, amber joystick, and distinct buttons."
+    },
+    {
+      "role": "portal",
+      "slug": "valley_dungeon_portal",
+      "file": "sprites/decorations/valley_dungeon_portal.png",
+      "phaserKey": "valley_dungeon_portal_hd",
+      "sourceImage": "exec-cfe0f937-b5b9-4771-8845-18b6560fc589.png",
+      "height": 180,
+      "mapScale": 0.72,
+      "reviewed": true,
+      "correction": "Regenerated after the first source accidentally included the farmer reference.",
+      "brief": "Stable stone arch with a clean blue magical opening and no embedded character."
+    },
+    {
+      "role": "fishing",
+      "slug": "valley_fishing_pond",
+      "file": "sprites/decorations/valley_fishing_pond.png",
+      "phaserKey": "valley_fishing_pond_hd",
+      "sourceImage": "exec-38ac345e-4131-4974-a6e1-c921faa31053.png",
+      "height": 180,
+      "mapScale": 0.72,
+      "reviewed": true,
+      "correction": "Regenerated on the reserved magenta matte after the first source returned an opaque white background.",
+      "brief": "Single coherent stone pond with reeds, lily pads, water ripples, and a small dock."
+    }
+  ]
+}

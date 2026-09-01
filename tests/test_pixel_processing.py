@@ -69,6 +69,24 @@ class PixelProcessingTests(unittest.TestCase):
             sprite.putpixel((1, y), color)
         self.assertEqual(processor.key_magenta(sprite).tobytes(), sprite.tobytes())
 
+    def test_reviewed_valley_map_sprites_keep_declared_size_and_clean_alpha(self):
+        manifest = json.loads((ROOT / "docs/valley-map-art-manifest.json").read_text(encoding="utf-8"))
+        entries = manifest["entries"]
+        self.assertEqual(len(entries), 9, "Do not silently skip a redesigned map sprite")
+        self.assertEqual(len({entry["file"] for entry in entries}), 9, "Every map role needs its own PNG")
+        for entry in entries:
+            with self.subTest(role=entry["role"], file=entry["file"]):
+                with Image.open(ROOT / entry["file"]) as source:
+                    self.assertEqual(source.format, "PNG")
+                    self.assertEqual(source.height, entry["height"])
+                    sprite = source.convert("RGBA")
+                pixels = list(sprite.getdata())
+                self.assertEqual({p[3] for p in pixels}, {0, 255}, "No blurred alpha edges")
+                self.assertLessEqual(len({p[:3] for p in pixels if p[3]}), 32)
+                self.assertGreater(sum(p[3] == 255 for p in pixels), 100, "Keep a visible subject")
+                self.assertEqual(sprite.getchannel("A").getbbox()[3], entry["height"], "Art sits on its baseline")
+                self.assertFalse(any(processor.is_key_color(*p) for p in pixels), "No magenta matte islands")
+
     def test_magenta_key_keeps_enclosed_artwork(self):
         sprite = Image.new("RGBA", (7, 7), (255, 0, 255, 255))
         for x in range(1, 6):

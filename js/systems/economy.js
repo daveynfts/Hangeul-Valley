@@ -98,7 +98,7 @@ const UNIT10_LAYOUT_DEFAULT = {
     { id: 'desk', nameKo: '학습 책상', ox: -28, oy: 480, scale: 1, originX: 0.52, interact: 80 },
     { id: 'kitchen', nameKo: '요리 주방', ox: 328, oy: 252, scale: 1, originX: 0.48, interact: 82 },
     { id: 'taste', nameKo: '한 입 포장마차', ox: 144, oy: 480, scale: 1, originX: 0.5, interact: 80 },
-    { id: 'cassette', nameKo: '카세트 플레이어', ox: 300, oy: 478, scale: 1, originX: 0.5, interact: 78 }
+    { id: 'cassette', nameKo: '카세트 플레이어', ox: 300, oy: 478, scale: 0.72, originX: 0.5, interact: 78 }
   ]
 };
 function getUnit10Layout() {
@@ -125,7 +125,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-topik-213-dcc77f35b626';
+const ART_CACHE_KEY = 'art-topik-213-extra-9-5c706711d8f1';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }
@@ -146,7 +146,16 @@ const ART_LOAD = [
   { key: 'stone_well_hd', file: 'decorations/stone_well.png' },
   { key: 'wooden_signpost_hd', file: 'decorations/wooden_signpost.png' },
   { key: 'oak_fence_post_hd', file: 'decorations/oak_fence_post.png' },
-  { key: 'oak_fence_rail_hd', file: 'decorations/oak_fence_rail.png' }
+  { key: 'oak_fence_rail_hd', file: 'decorations/oak_fence_rail.png' },
+  { key: 'valley_seed_shop_hd', file: 'stalls/valley_seed_shop.png' },
+  { key: 'valley_notice_board_hd', file: 'decorations/valley_notice_board.png' },
+  { key: 'valley_arcade_cabinet_hd', file: 'furniture/valley_arcade_cabinet.png' },
+  { key: 'valley_spell_witch_hd', file: 'characters/valley_spell_witch.png' },
+  { key: 'valley_ginger_cat_hd', file: 'characters/valley_ginger_cat.png' },
+  { key: 'valley_apiary_hive_hd', file: 'decorations/valley_apiary_hive.png' },
+  { key: 'valley_dungeon_portal_hd', file: 'decorations/valley_dungeon_portal.png' },
+  { key: 'valley_fishing_pond_hd', file: 'decorations/valley_fishing_pond.png' },
+  { key: 'cassette_player_hd', file: 'furniture/valley_cassette_player.png' }
 ];
 const CROP_ART_FOLDER = {
   blossom: 'plants/cherry_blossom',

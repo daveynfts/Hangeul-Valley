@@ -221,8 +221,9 @@ Two that are easy to miss:
 - **`closeModalById`.** Escape falls through to a generic hide otherwise, which leaves
   a clip playing.
 
-Stations take an HD PNG first and fall back to the matrix, so a painted
-`cassette_player_hd` can replace the drawn one later without touching anything else.
+Stations take an HD PNG first and fall back to the matrix. The shipped cassette uses
+`sprites/furniture/valley_cassette_player.png` as `cassette_player_hd`; its source and
+review record live in `docs/valley-map-art-manifest.json`.
 
 ### The upload trap, again
 

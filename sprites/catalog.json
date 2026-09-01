@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-topik-213-dcc77f35b626",
+  "cacheKey": "art-topik-213-extra-9-5c706711d8f1",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -10834,6 +10834,150 @@
       "usedBy": [],
       "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "밤새도록"
+    },
+    {
+      "id": "furniture.valley_cassette_player",
+      "nameEn": "Valley cassette player",
+      "kind": "furniture",
+      "family": "valley-map-stations",
+      "role": "cassette",
+      "path": "furniture/valley_cassette_player.png",
+      "status": "shipped",
+      "heightClass": "station",
+      "parentId": "furniture.valley_cassette_player",
+      "usedBy": [
+        "FarmScene",
+        "Cassette player"
+      ],
+      "notes": "Dedicated daily-use cassette station; reviewed Imagegen source with visible tape reels and transport controls."
+    },
+    {
+      "id": "decoration.valley_apiary_hive",
+      "nameEn": "Valley apiary hive",
+      "kind": "decoration",
+      "family": "valley-map-extras",
+      "role": "beehive",
+      "path": "decorations/valley_apiary_hive.png",
+      "status": "shipped",
+      "heightClass": "decoration",
+      "parentId": "decoration.valley_apiary_hive",
+      "usedBy": [
+        "FarmScene",
+        "Beehive minigame"
+      ],
+      "notes": "Dedicated countryside apiary prop for the original Valley map."
+    },
+    {
+      "id": "character.valley_spell_witch",
+      "nameEn": "Valley spell witch",
+      "kind": "character",
+      "family": "valley-spell-witch",
+      "role": "wizard",
+      "path": "characters/valley_spell_witch.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_spell_witch",
+      "usedBy": [
+        "FarmScene",
+        "Spell Duel"
+      ],
+      "notes": "Dedicated full-body Spell Duel NPC for the original Valley map."
+    },
+    {
+      "id": "character.valley_ginger_cat",
+      "nameEn": "Valley ginger cat",
+      "kind": "character",
+      "family": "valley-ginger-cat",
+      "role": "cat",
+      "path": "characters/valley_ginger_cat.png",
+      "status": "shipped",
+      "heightClass": "character",
+      "parentId": "character.valley_ginger_cat",
+      "usedBy": [
+        "FarmScene",
+        "Cat dialogue"
+      ],
+      "notes": "Dedicated ginger tabby NPC for the original Valley map."
+    },
+    {
+      "id": "stall.valley_seed_shop",
+      "nameEn": "Valley seed shop",
+      "kind": "stall",
+      "family": "valley-map-extras",
+      "role": "shop",
+      "path": "stalls/valley_seed_shop.png",
+      "status": "shipped",
+      "heightClass": "station",
+      "parentId": "stall.valley_seed_shop",
+      "usedBy": [
+        "FarmScene",
+        "Shop"
+      ],
+      "notes": "Reviewed ImageGen valley shop with clear awning, seed sacks, and watering can."
+    },
+    {
+      "id": "decoration.valley_notice_board",
+      "nameEn": "Valley notice board",
+      "kind": "decoration",
+      "family": "valley-map-extras",
+      "role": "board",
+      "path": "decorations/valley_notice_board.png",
+      "status": "shipped",
+      "heightClass": "well",
+      "parentId": "decoration.valley_notice_board",
+      "usedBy": [
+        "FarmScene",
+        "MinigameBoard"
+      ],
+      "notes": "Reviewed ImageGen oak notice board with uncluttered parchment cards."
+    },
+    {
+      "id": "furniture.valley_arcade_cabinet",
+      "nameEn": "Valley arcade cabinet",
+      "kind": "furniture",
+      "family": "valley-map-extras",
+      "role": "arcade",
+      "path": "furniture/valley_arcade_cabinet.png",
+      "status": "shipped",
+      "heightClass": "station",
+      "parentId": "furniture.valley_arcade_cabinet",
+      "usedBy": [
+        "FarmScene",
+        "Arcade"
+      ],
+      "notes": "Reviewed ImageGen navy and walnut arcade cabinet with cyan screen and distinct controls."
+    },
+    {
+      "id": "decoration.valley_dungeon_portal",
+      "nameEn": "Valley dungeon portal",
+      "kind": "decoration",
+      "family": "valley-map-extras",
+      "role": "portal",
+      "path": "decorations/valley_dungeon_portal.png",
+      "status": "shipped",
+      "heightClass": "landmark",
+      "parentId": "decoration.valley_dungeon_portal",
+      "usedBy": [
+        "FarmScene",
+        "Dungeon"
+      ],
+      "notes": "Corrected and reviewed ImageGen stone portal with a clean blue magical opening and no embedded character."
+    },
+    {
+      "id": "decoration.valley_fishing_pond",
+      "nameEn": "Valley fishing pond",
+      "kind": "decoration",
+      "family": "valley-map-extras",
+      "role": "fishing",
+      "path": "decorations/valley_fishing_pond.png",
+      "status": "shipped",
+      "heightClass": "landmark",
+      "parentId": "decoration.valley_fishing_pond",
+      "usedBy": [
+        "FarmScene",
+        "Fishing"
+      ],
+      "notes": "Corrected and reviewed ImageGen stone pond with reeds, lily pads, and a small dock on a transparent-ready magenta matte."
     }
   ]
 }

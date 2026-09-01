@@ -10,7 +10,7 @@ class FarmScene extends Phaser.Scene {
     // select has painted, so its card is simply missing from a screen that looks complete.
     // That is how the TOPIK world was in levelsData and not on the menu at the same time.
     TEXTBOOK_WORLD_FILES.forEach((spec) => this.load.json(spec.cache, spec.file));
-    this.load.json('unit10-layout','worlds/unit10-layout.json?v=southband');
+    this.load.json('unit10-layout','worlds/unit10-layout.json?v=valley-map-art-9');
     this.load.json('skin-catalog', 'skins/catalog.json?v=' + SKIN_CATALOG_BOOT_V);
     ART_LOAD.forEach((a) => { this.load.image(a.key, artUrl(a.file)); });
     if (typeof vocabArtLoadEntries === 'function') {
@@ -995,13 +995,13 @@ class FarmScene extends Phaser.Scene {
 
     const bx = this.farm.x + this.farm.w / 2;
     const by = this.farm.y - 95;
-    const sx = this.farm.x + this.farm.w + 175;
+    const sx = Math.min(W - 90, this.farm.x + this.farm.w + 150);
     const sy = this.farm.y + this.farm.h / 2 + 25;
 
     // Scatter wildflower clumps on grass (HD when catalogued; matrix fallback).
     const flowerColors = ['red', 'yellow', 'purple'];
     const flowerList = [];
-    const pondX = this.farm.x - 190;
+    const pondX = Math.max(105, this.farm.x - 150);
     const pondY = this.farm.y + this.farm.h / 2 + 40;
     const inKeepout = (fx, fy) => {
       if (fx > this.farm.x - 24 && fx < this.farm.x + this.farm.w + 24 &&
@@ -1043,7 +1043,7 @@ class FarmScene extends Phaser.Scene {
     }
 
     // Micro World Details: Stone Well & Water Sparkles (Widened Placement)
-    const wellX = this.farm.x - 190;
+    const wellX = Math.max(48, this.farm.x - 170);
     const wellY = this.farm.y + this.farm.h + 85;
     const wellTex = this._propTex('stone_well_hd', 'stone_well');
     const wellHd = wellTex.indexOf('_hd') >= 0;
@@ -1290,11 +1290,15 @@ class FarmScene extends Phaser.Scene {
   // ── SHOP NPC ───────────────────────────────────────────────────────────────
   _createShopNPC(W, H){
     if (this.shopNPC) return;
-    const sx = this.farm.x + this.farm.w + 175;
+    const sx = Math.min(W - 90, this.farm.x + this.farm.w + 150);
     const sy = this.farm.y + this.farm.h / 2 + 25;
-    this.shopNPC = this.add.image(sx, sy, 'shop_sign')
-      .setOrigin(0.5, 1).setScale(1.3).setDepth(sy);
-    if (this.shadows) this.shadows.createShadow(this.shopNPC, 48, 14, 1);
+    const tex = this._propTex('valley_seed_shop_hd', 'shop_sign');
+    const hd = tex === 'valley_seed_shop_hd';
+    this.shopBaseScale = hd ? 0.78 : 1.3;
+    this.shopNPC = this.add.image(sx, sy, tex)
+      .setOrigin(0.5, 1).setScale(this.shopBaseScale).setDepth(sy);
+    if (hd && this.shopNPC.texture) this.shopNPC.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.shopNPC, hd ? 76 : 48, hd ? 18 : 14, 1);
 
     this.tweens.add({ targets: this.shopNPC, y: sy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
 
@@ -1311,9 +1315,12 @@ class FarmScene extends Phaser.Scene {
     if (this.boardSprite) return;
     const bx = this.farm.x + this.farm.w / 2;
     const by = this.farm.y - 95;
-    this.boardSprite = this.add.image(bx, by, 'notice_board').setOrigin(0.5,1).setScale(1.3).setDepth(by);
-    if (this.shadows) this.shadows.createShadow(this.boardSprite, 46, 13, 1);
-    this.boardHint = this.add.text(bx, by-40, '📋 Minigame\n' + WORLD_CLICK_HINT, {
+    const tex = this._propTex('valley_notice_board_hd', 'notice_board');
+    const hd = tex === 'valley_notice_board_hd';
+    this.boardSprite = this.add.image(bx, by, tex).setOrigin(0.5,1).setScale(hd ? 1 : 1.3).setDepth(by);
+    if (hd && this.boardSprite.texture) this.boardSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.boardSprite, hd ? 54 : 46, 13, 1);
+    this.boardHint = this.add.text(bx, by - this.boardSprite.displayHeight - 8, '📋 Minigame\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#FF88FF', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(by+1).setAlpha(0);
@@ -1324,12 +1331,16 @@ class FarmScene extends Phaser.Scene {
   // ── ARCADE MACHINE ─────────────────────────────────────────────────────────
   _createArcadeNPC(W, H){
     if (this.arcadeSprite) return;
-    const ax = this.farm.x - 200;
+    const ax = Math.max(72, this.farm.x - 150);
     const ay = this.farm.y + 20;
-    this.arcadeSprite = this.add.image(ax, ay, 'arcade_machine').setOrigin(0.5,1).setScale(1.5).setDepth(ay);
-    if (this.shadows) this.shadows.createShadow(this.arcadeSprite, 48, 14, 1);
-    this.tweens.add({ targets: this.arcadeSprite, scaleY: { from: 1.5, to: 1.54 }, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-    this.arcadeHint = this.add.text(ax, ay-60, '👾 ARCADE\n' + WORLD_CLICK_HINT, {
+    const tex = this._propTex('valley_arcade_cabinet_hd', 'arcade_machine');
+    const hd = tex === 'valley_arcade_cabinet_hd';
+    this.arcadeBaseScale = hd ? 0.76 : 1.5;
+    this.arcadeSprite = this.add.image(ax, ay, tex).setOrigin(0.5,1).setScale(this.arcadeBaseScale).setDepth(ay);
+    if (hd && this.arcadeSprite.texture) this.arcadeSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.arcadeSprite, hd ? 46 : 48, 14, 1);
+    this.tweens.add({ targets: this.arcadeSprite, y: ay - 3, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    this.arcadeHint = this.add.text(ax, ay - this.arcadeSprite.displayHeight - 8, '👾 ARCADE\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#00FFFF', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(ay+1).setAlpha(0);
@@ -1340,14 +1351,20 @@ class FarmScene extends Phaser.Scene {
   // ── WIZARD NPC ─────────────────────────────────────────────────────────────
   _createWizardNPC(W, H){
     if (this.wizardSprite) return;
-    const wx = this.farm.x + this.farm.w + 160;
+    const wx = Math.min(W - 62, this.farm.x + this.farm.w + 145);
     const wy = this.farm.y - 85;
-    this.wizardSprite = this.add.sprite(wx, wy, 'wizard_idle_0');
-    if (this.wizardSprite.play) this.wizardSprite.play('wizard-idle').setOrigin(0.5,1).setScale(1.8).setDepth(wy);
-    if (this.shadows) this.shadows.createShadow(this.wizardSprite, 38, 12, 1);
+    const hd = this.textures.exists('valley_spell_witch_hd');
+    this.wizardBaseScale = hd ? 1 : 1.8;
+    this.wizardSprite = hd
+      ? this.add.image(wx, wy, 'valley_spell_witch_hd')
+      : this.add.sprite(wx, wy, 'wizard_idle_0');
+    this.wizardSprite.setOrigin(0.5,1).setScale(this.wizardBaseScale).setDepth(wy);
+    if (hd && this.wizardSprite.texture) this.wizardSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (!hd && this.wizardSprite.play) this.wizardSprite.play('wizard-idle');
+    if (this.shadows) this.shadows.createShadow(this.wizardSprite, hd ? 34 : 38, 12, 1);
     this.tweens.add({ targets: this.wizardSprite, y: wy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
-    this.wizardHint = this.add.text(wx, wy-68, '⚡ SPELL DUEL\n' + WORLD_CLICK_HINT, {
+    this.wizardHint = this.add.text(wx, wy - this.wizardSprite.displayHeight - 8, '⚡ SPELL DUEL\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#A855F7', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(wy+1).setAlpha(0);
@@ -1359,14 +1376,19 @@ class FarmScene extends Phaser.Scene {
   // ── CAT NPC ────────────────────────────────────────────────────────────────
   _createCatNPC(W, H){
     if (this.catSprite) return;
-    const cx = this.farm.x - 120;
+    const cx = Math.max(120, this.farm.x - 80);
     const cy = this.farm.y + this.farm.h + 75;
-    this.catSprite = this.add.sprite(cx, cy, 'cat_idle_0');
-    if (this.catSprite.play) this.catSprite.play('cat-idle')
-      .setOrigin(0.5,1).setScale(0.75).setDepth(cy);
-    if (this.shadows) this.shadows.createShadow(this.catSprite, 20, 6, 1);
+    this.catUsesHd = this.textures.exists('valley_ginger_cat_hd');
+    this.catBaseScale = this.catUsesHd ? 0.58 : 0.75;
+    this.catSprite = this.catUsesHd
+      ? this.add.image(cx, cy, 'valley_ginger_cat_hd')
+      : this.add.sprite(cx, cy, 'cat_idle_0');
+    this.catSprite.setOrigin(0.5,1).setScale(this.catBaseScale).setDepth(cy);
+    if (this.catUsesHd && this.catSprite.texture) this.catSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (!this.catUsesHd && this.catSprite.play) this.catSprite.play('cat-idle');
+    if (this.shadows) this.shadows.createShadow(this.catSprite, this.catUsesHd ? 30 : 20, 6, 1);
     this.tweens.add({ targets:this.catSprite, y:cy-3, duration:1200, yoyo:true, repeat:-1, ease:'Sine.InOut' });
-    this.catHint = this.add.text(cx, cy-38, '🐱 야옹\n' + WORLD_CLICK_HINT, {
+    this.catHint = this.add.text(cx, cy - this.catSprite.displayHeight - 6, '🐱 야옹\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#FFCC44', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(cy+1).setAlpha(0);
@@ -1377,13 +1399,17 @@ class FarmScene extends Phaser.Scene {
   // ── DUNGEON PORTAL NPC ─────────────────────────────────────────────────────
   _createPortalNPC(W, H){
     if (this.portalSprite) return;
-    const px = this.farm.x + this.farm.w + 140;
+    const px = Math.min(W - 64, this.farm.x + this.farm.w + 135);
     const py = this.farm.y + this.farm.h + 80;
-    this.portalSprite = this.add.image(px, py, 'dungeon_portal').setOrigin(0.5,1).setScale(1.6).setDepth(py);
-    if (this.shadows) this.shadows.createShadow(this.portalSprite, 72, 20, 1);
-    this.tweens.add({ targets: this.portalSprite, scaleX: 1.65, scaleY: 1.55, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
+    const tex = this._propTex('valley_dungeon_portal_hd', 'dungeon_portal');
+    const hd = tex === 'valley_dungeon_portal_hd';
+    this.portalBaseScale = hd ? 0.72 : 1.6;
+    this.portalSprite = this.add.image(px, py, tex).setOrigin(0.5,1).setScale(this.portalBaseScale).setDepth(py);
+    if (hd && this.portalSprite.texture) this.portalSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.portalSprite, hd ? 82 : 72, hd ? 22 : 20, 1);
+    this.tweens.add({ targets: this.portalSprite, alpha: { from: 0.9, to: 1 }, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
-    this.portalHint = this.add.text(px, py-75, '🌀 DUNGEON\n' + WORLD_CLICK_HINT, {
+    this.portalHint = this.add.text(px, py - this.portalSprite.displayHeight - 8, '🌀 DUNGEON\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#EC4899', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(py+1).setAlpha(0);
@@ -1395,11 +1421,58 @@ class FarmScene extends Phaser.Scene {
   // ── FISHING SPOT NPC / DOCK ────────────────────────────────────────────────
   _createFishingSpot(W, H){
     if (this.fishX != null) return;
-    const fx = this.farm.x - 190;
+    const fx = Math.max(105, this.farm.x - 150);
     const fy = this.farm.y + this.farm.h / 2 + 20;
     this.dockSprite = null; // No boat — pure pond
     const layerStart = this.children.list.length;
     this._fishingTimers = [];
+
+    // The reviewed pond is one coherent landmark. Keep the old generated pond below as
+    // a network-failure fallback, but never stack its random rocks and reeds over the art.
+    if (this.textures.exists('valley_fishing_pond_hd')) {
+      this.dockBaseScale = 0.72;
+      this.dockSprite = this.add.image(fx, fy + 20, 'valley_fishing_pond_hd')
+        .setOrigin(0.5).setScale(this.dockBaseScale).setDepth(fy - 4);
+      if (this.dockSprite.texture) this.dockSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      this.pondWater = null;
+
+      for (let i = 0; i < 5; i++) {
+        const sparkle = this.add.circle(
+          fx - 55 + i * 27,
+          fy + 4 + (i % 2) * 15,
+          1.5,
+          0xECFEFF,
+          0.8
+        ).setDepth(fy + 1);
+        this.tweens.add({
+          targets: sparkle,
+          alpha: { from: 0.18, to: 0.9 },
+          scale: { from: 0.7, to: 1.5 },
+          duration: 900 + i * 240,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.InOut'
+        });
+      }
+
+      this.fishHint = this.add.text(
+        fx,
+        this.dockSprite.y - this.dockSprite.displayHeight / 2 - 8,
+        '🎣 FISHING POND\n' + WORLD_CLICK_HINT,
+        {
+          fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+          color:'#38BDF8', stroke:'#000', strokeThickness:3, align:'center'
+        }
+      ).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
+      this.tweens.add({ targets: this.fishHint, y: this.fishHint.y - 3, duration: 700, yoyo: true, repeat: -1 });
+
+      this.fishX = fx; this.fishY = fy;
+      this._pondVisible = true;
+      this._worldLayers = this._worldLayers || {};
+      this._worldLayers.fishing = this.children.list.slice(layerStart);
+      this._fishingTimers.push(this.time.addEvent({ delay: 4000, loop: true, callback: () => this._triggerFishJump(fx, fy) }));
+      return;
+    }
 
     // ── Large stones (outer ring) ─────────────────────────────────────────
     const stoneColors = [0x7D7571, 0x6B6360, 0x8A8480, 0x5C5652];
@@ -1457,6 +1530,7 @@ class FarmScene extends Phaser.Scene {
       const pondMask = maskG.createGeometryMask();
       this.pondWater = this.add.tileSprite(fx, fy + 20, 260, 86, 'tile_ocean_deep_0')
         .setDepth(fy - 4).setMask(pondMask);
+      this.dockSprite = this.pondWater;
       this.pondWaterFrame = 0;
       this._fishingTimers.push(this.time.addEvent({
         delay: 280,
@@ -1470,8 +1544,11 @@ class FarmScene extends Phaser.Scene {
       }));
     } else {
       const pond = this.add.ellipse(fx, fy + 20, 250, 76, 0x0E7490, 0.9).setDepth(fy - 4);
+      this.pondWater = pond;
+      this.dockSprite = pond;
       this.tweens.add({ targets: pond, scaleX: 1.03, scaleY: 0.97, duration: 2200, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     }
+    this.dockBaseScale = 1;
     this.add.ellipse(fx - 36, fy + 10, 90, 30, 0x5EEAD4, 0.18).setDepth(fy - 3);
     this.add.ellipse(fx + 48, fy + 26, 56, 18, 0x67E8F9, 0.14).setDepth(fy - 3);
 
@@ -1644,8 +1721,8 @@ class FarmScene extends Phaser.Scene {
   // ── APPLE TREE ─────────────────────────────────────────────────────────────
   _createAppleTree(W, H){
     if (this.appleTreeSprite) return;
-    const ax = this.farm.x - 130;
-    const ay = this.farm.y - 85;
+    const ax = Math.max(92, this.farm.x - 115);
+    const ay = Math.max(184, this.farm.y - 10);
     const hd = this.textures.exists('apple_tree_hd');
     this.appleTreeSprite = this.add.image(ax, ay, appleTreeTex(this, false))
       .setOrigin(0.5, 1).setScale(hd ? 1 : 3.6).setDepth(ay+1);
@@ -1664,7 +1741,7 @@ class FarmScene extends Phaser.Scene {
       angle: { from: -1.2, to: 1.2 },
       duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.InOut'
     });
-    const labelY = ay - (hd ? 188 : 260);
+    const labelY = Math.max(70, ay - (hd ? 188 : 260));
     this.appleTreeLabel = this.add.text(ax, labelY, '🍎 HARVEST!\n' + WORLD_CLICK_HINT, {
       fontFamily: '"Press Start 2P",monospace', fontSize: '14px',
       color: '#FFFFFF', stroke: '#000', strokeThickness: 4, align: 'center'
@@ -1689,14 +1766,18 @@ class FarmScene extends Phaser.Scene {
   // ── BEEHIVE NPC ────────────────────────────────────────────────────────────
   _createBeehiveNPC(W, H){
     if (this.beehiveSprite) return;
-    const bx = this.farm.x - 65;
-    const by = this.farm.y - 70;
+    const bx = this.farm.x + 10;
+    const by = this.farm.y - 25;
     this.beehiveX = bx;
     this.beehiveY = by;
 
-    this.beehiveSprite = this.add.image(bx, by, 'beehive')
-      .setOrigin(0.5, 1).setScale(1.6).setDepth(by);
-    if (this.shadows) this.shadows.createShadow(this.beehiveSprite, 38, 12, 1);
+    const tex = this._propTex('valley_apiary_hive_hd', 'beehive');
+    const hd = tex === 'valley_apiary_hive_hd';
+    this.beehiveBaseScale = hd ? 1.15 : 1.6;
+    this.beehiveSprite = this.add.image(bx, by, tex)
+      .setOrigin(0.5, 1).setScale(this.beehiveBaseScale).setDepth(by);
+    if (hd && this.beehiveSprite.texture) this.beehiveSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.beehiveSprite, hd ? 42 : 38, 12, 1);
 
     this.tweens.add({
       targets: this.beehiveSprite,
@@ -1723,7 +1804,7 @@ class FarmScene extends Phaser.Scene {
       });
     }
 
-    this.beehiveHint = this.add.text(bx, by - 56, '🐝 Beehive\n' + WORLD_CLICK_HINT, {
+    this.beehiveHint = this.add.text(bx, by - this.beehiveSprite.displayHeight - 8, '🐝 Beehive\n' + WORLD_CLICK_HINT, {
       fontFamily: '"Press Start 2P",monospace',
       fontSize: '12px',
       color: '#FFFFFF',
@@ -2095,7 +2176,11 @@ class FarmScene extends Phaser.Scene {
 
     if (this.catCurrentAnim !== targetAnim) {
       this.catCurrentAnim = targetAnim;
-      if (this.anims && this.anims.exists(targetAnim)) {
+      if (this.catUsesHd) {
+        if (targetAnim === 'cat-sleep') this.catSprite.setScale(0.66, 0.46);
+        else if (targetAnim === 'cat-sit') this.catSprite.setScale(0.62, 0.58);
+        else this.catSprite.setScale(this.catBaseScale || 0.58);
+      } else if (this.anims && this.anims.exists(targetAnim)) {
         this.catSprite.play(targetAnim, true);
       }
     }
@@ -2678,26 +2763,32 @@ class FarmScene extends Phaser.Scene {
     if (id === 'shop') {
       this._destroyWorldObj(this.shopNPC); this._destroyWorldObj(this.shopHint);
       this.shopNPC = this.shopHint = null; this.shopX = this.shopY = null;
+      this.shopBaseScale = null;
     } else if (id === 'board') {
       this._destroyWorldObj(this.boardSprite); this._destroyWorldObj(this.boardHint);
       this.boardSprite = this.boardHint = null; this.boardX = this.boardY = null;
     } else if (id === 'arcade') {
       this._destroyWorldObj(this.arcadeSprite); this._destroyWorldObj(this.arcadeHint);
       this.arcadeSprite = this.arcadeHint = null; this.arcadeX = this.arcadeY = null;
+      this.arcadeBaseScale = null;
     } else if (id === 'wizard') {
       this._destroyWorldObj(this.wizardSprite); this._destroyWorldObj(this.wizardHint);
       this.wizardSprite = this.wizardHint = null; this.wizardX = this.wizardY = null;
+      this.wizardBaseScale = null;
     } else if (id === 'cat') {
       this._destroyWorldObj(this.catSprite); this._destroyWorldObj(this.catHint);
       this.catSprite = this.catHint = null; this.catX = this.catY = null;
+      this.catUsesHd = false; this.catBaseScale = null; this.catCurrentAnim = null;
     } else if (id === 'portal') {
       this._destroyWorldObj(this.portalSprite); this._destroyWorldObj(this.portalHint);
       this.portalSprite = this.portalHint = null; this.portalX = this.portalY = null;
+      this.portalBaseScale = null;
     } else if (id === 'beehive') {
       this._destroyWorldObj(this.beehiveSprite); this._destroyWorldObj(this.beehiveHint);
       (this.beehiveBees || []).forEach(b => this._destroyWorldObj(b && b.sprite));
       this.beehiveBees = [];
       this.beehiveSprite = this.beehiveHint = null; this.beehiveX = this.beehiveY = null;
+      this.beehiveBaseScale = null;
     } else if (id === 'fishing') {
       (this._fishingTimers || []).forEach(ev => { if (ev && ev.remove) ev.remove(false); });
       this._fishingTimers = [];
@@ -2706,6 +2797,7 @@ class FarmScene extends Phaser.Scene {
       this._destroyWorldObj(this.pondWater); this._destroyWorldObj(this.fishHint); this._destroyWorldObj(this.dockSprite);
       this.pondWater = this.fishHint = this.dockSprite = null;
       this.fishX = this.fishY = null;
+      this.dockBaseScale = null;
       this._pondVisible = false;
     }
   }
@@ -2728,7 +2820,7 @@ class FarmScene extends Phaser.Scene {
       fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
       color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
     }).setOrigin(0.5, 0).setDepth(pos.y + 10).setAlpha(0);
-    return { x: pos.x, y: pos.y, spr, label, interact: spec.interact || 80 };
+    return { x: pos.x, y: pos.y, spr, label, interact: spec.interact || 80, hd };
   }
 
   _ensureTasteStation(){
@@ -2818,11 +2910,16 @@ class FarmScene extends Phaser.Scene {
       matrixScale: 2.3
     });
     if (!base) return;
-    // The LED sits on the deck's own record light, at the matrix pixel the sprite
-    // puts it on, so it reads as the machine being on rather than as a loose dot.
-    const led = this.add.circle(base.x + base.spr.displayWidth * 0.30, base.y - base.spr.displayHeight * 0.36, 2.5, 0xFDE047, 0.9)
-      .setDepth(base.y + 8);
-    this.tweens.add({ targets: led, alpha: { from: 0.9, to: 0.25 }, duration: 1100, yoyo: true, repeat: -1 });
+    // The reviewed cassette already contains its amber power light. The overlay LED is
+    // only for the generated fallback; otherwise it lands on top of the tape controls.
+    const led = base.hd ? null : this.add.circle(
+      base.x + base.spr.displayWidth * 0.30,
+      base.y - base.spr.displayHeight * 0.36,
+      2.5,
+      0xFDE047,
+      0.9
+    ).setDepth(base.y + 8);
+    if (led) this.tweens.add({ targets: led, alpha: { from: 0.9, to: 0.25 }, duration: 1100, yoyo: true, repeat: -1 });
     this.cassetteStation = Object.assign(base, { led });
   }
 
@@ -2898,13 +2995,25 @@ class FarmScene extends Phaser.Scene {
         return;
       }
       case 'cat':
-        this.tweens.add({targets:this.catSprite,scale:{from:0.75,to:0.95},duration:100,yoyo:true,ease:'Back.Out(2)'});
+        {
+          const baseX = Math.abs(this.catSprite.scaleX || this.catBaseScale || 0.75);
+          const baseY = Math.abs(this.catSprite.scaleY || this.catBaseScale || 0.75);
+          this.tweens.add({
+            targets:this.catSprite,
+            scaleX:{from:baseX,to:baseX + 0.16},
+            scaleY:{from:baseY,to:baseY + 0.16},
+            duration:100,
+            yoyo:true,
+            ease:'Back.Out(2)'
+          });
+        }
         showCatDialog();
         return;
       case 'wizard':
         return;
       case 'portal': {
-        this.tweens.add({targets:this.portalSprite,scale:{from:1.6,to:1.9},duration:120,yoyo:true,ease:'Back.Out(2)'});
+        const base = this.portalBaseScale || 1.6;
+        this.tweens.add({targets:this.portalSprite,scale:{from:base,to:base * 1.16},duration:120,yoyo:true,ease:'Back.Out(2)'});
         const chk = isZoneUnlocked('dungeon');
         if(!chk.unlocked){ showHardLockToast('dungeon'); return; }
         this.cameras.main.fadeOut(300, 0, 0, 0);
@@ -2915,7 +3024,8 @@ class FarmScene extends Phaser.Scene {
         return;
       }
       case 'fish': {
-        this.tweens.add({targets:this.dockSprite,scale:{from:1.6,to:1.8},duration:120,yoyo:true,ease:'Back.Out(2)'});
+        const base = this.dockBaseScale || 1.6;
+        this.tweens.add({targets:this.dockSprite,scale:{from:base,to:base * 1.12},duration:120,yoyo:true,ease:'Back.Out(2)'});
         const chk = isZoneUnlocked('fishing');
         if(!chk.unlocked){ showHardLockToast('fishing'); return; }
         this.cameras.main.fadeOut(300, 0, 0, 0);
@@ -2926,7 +3036,10 @@ class FarmScene extends Phaser.Scene {
         return;
       }
       case 'beehive':
-        this.tweens.add({targets:this.beehiveSprite,scale:{from:1.6,to:1.85},duration:120,yoyo:true,ease:'Back.Out(2)'});
+        {
+          const base = this.beehiveBaseScale || 1.6;
+          this.tweens.add({targets:this.beehiveSprite,scale:{from:base,to:base * 1.14},duration:120,yoyo:true,ease:'Back.Out(2)'});
+        }
         this.cameras.main.fadeOut(300, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
           this.scene.pause();
@@ -2934,7 +3047,8 @@ class FarmScene extends Phaser.Scene {
         });
         return;
       case 'arcade': {
-        this.tweens.add({targets:this.arcadeSprite,scale:{from:1.5,to:1.6},duration:100,yoyo:true});
+        const base = this.arcadeBaseScale || 1.5;
+        this.tweens.add({targets:this.arcadeSprite,scale:{from:base,to:base * 1.08},duration:100,yoyo:true});
         const chk = isZoneUnlocked('arcade');
         if(!chk.unlocked){ showHardLockToast('arcade'); return; }
         this.cameras.main.fadeOut(300, 0, 0, 0);

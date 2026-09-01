@@ -56,6 +56,24 @@ fixture(({ temp }) => {
 });
 console.log('ok  reviewed artwork replaces the actual lookup, preserves existing code and invalidates stale caches');
 
+fixture(({ temp, write }) => {
+  const before = prepareTopikArt(temp).cacheKey;
+  write('docs/valley-map-art-manifest.json', {
+    entries: [{
+      role: 'cassette', file: 'sprites/furniture/valley_cassette_player.png',
+      sourceImage: 'cassette-source.png', height: 156, mapScale: 0.72, reviewed: true
+    }]
+  });
+  fs.mkdirSync(path.join(temp, 'sprites/furniture'), { recursive: true });
+  fs.copyFileSync(
+    path.join(ROOT, 'sprites/furniture/valley_cassette_player.png'),
+    path.join(temp, 'sprites/furniture/valley_cassette_player.png')
+  );
+  assert.notEqual(prepareTopikArt(temp).cacheKey, before,
+    'a reviewed non-TOPIK sprite batch participates in the shared cache key');
+});
+console.log('ok  shared cache fingerprint includes reviewed Valley map art');
+
 const failures = [
   ['unfinished batch', ({ manifest }) => { manifest.entries[0].reviewed = false; }, /before completion/],
   ['missing original review', ({ manifest }) => { manifest.entries[0].rawReviewed = false; }, /review evidence/],
