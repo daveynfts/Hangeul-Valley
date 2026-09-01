@@ -125,7 +125,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-topik-213-extra-10-a87f32476a13';
+const ART_CACHE_KEY = 'art-topik-213-extra-12-766839d3adf5';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }
@@ -153,6 +153,8 @@ const ART_LOAD = [
   { key: 'valley_spell_witch_hd', file: 'characters/valley_spell_witch.png' },
   { key: 'valley_ginger_cat_hd', file: 'characters/valley_ginger_cat.png' },
   { key: 'valley_apiary_hive_hd', file: 'decorations/valley_apiary_hive.png' },
+  { key: 'valley_honey_bee_open_hd', file: 'decorations/valley_honey_bee_open.png' },
+  { key: 'valley_honey_bee_flap_hd', file: 'decorations/valley_honey_bee_flap.png' },
   { key: 'valley_dungeon_portal_hd', file: 'decorations/valley_dungeon_portal.png' },
   { key: 'valley_fishing_pond_hd', file: 'decorations/valley_fishing_pond.png' },
   { key: 'valley_pond_carp_hd', file: 'decorations/valley_pond_carp.png' },

@@ -1057,21 +1057,25 @@ class FarmScene extends Phaser.Scene {
       this.tweens.add({ targets: sp, alpha: 0.2, scale: 1.8, duration: 800 + i*300, yoyo: true, repeat: -1 });
     }
 
-    // Micro World Details: Barrels & Crates next to Shop (kitchen yard on Unit 10)
-    const bxl = sx + 28, byl = sy - 10;
-    const barrelTex = this._propTex('oak_barrel_hd', 'pixel_barrel');
-    const crateTex = this._propTex('wooden_crate_hd', 'pixel_crate');
-    const barrelHd = barrelTex.indexOf('_hd') >= 0;
-    const crateHd = crateTex.indexOf('_hd') >= 0;
-    const barrelSprite = this.add.image(bxl, byl, barrelTex)
-      .setOrigin(0.5, 1).setScale(barrelHd ? 1 : 0.9).setDepth(byl);
-    const crateSprite = this.add.image(bxl + (crateHd ? 44 : 18), byl + 6, crateTex)
-      .setOrigin(0.5, 1).setScale(crateHd ? 1 : 0.9).setDepth(byl+6);
-    if (barrelHd && barrelSprite.texture) barrelSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (crateHd && crateSprite.texture) crateSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (this.shadows) {
-      this.shadows.createShadow(barrelSprite, barrelHd ? 36 : 18, barrelHd ? 12 : 6, 0);
-      this.shadows.createShadow(crateSprite, crateHd ? 40 : 20, crateHd ? 12 : 6, 0);
+    // The reviewed shop already includes its own sacks, baskets, and counter display.
+    // Keep the old loose barrel/crate garnish only when that asset failed to load;
+    // otherwise the two designs occupy the same footprint and read as an overlap.
+    if (!this.textures.exists('valley_seed_shop_hd')) {
+      const bxl = sx + 28, byl = sy - 10;
+      const barrelTex = this._propTex('oak_barrel_hd', 'pixel_barrel');
+      const crateTex = this._propTex('wooden_crate_hd', 'pixel_crate');
+      const barrelHd = barrelTex.indexOf('_hd') >= 0;
+      const crateHd = crateTex.indexOf('_hd') >= 0;
+      const barrelSprite = this.add.image(bxl, byl, barrelTex)
+        .setOrigin(0.5, 1).setScale(barrelHd ? 1 : 0.9).setDepth(byl);
+      const crateSprite = this.add.image(bxl + (crateHd ? 44 : 18), byl + 6, crateTex)
+        .setOrigin(0.5, 1).setScale(crateHd ? 1 : 0.9).setDepth(byl+6);
+      if (barrelHd && barrelSprite.texture) barrelSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      if (crateHd && crateSprite.texture) crateSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      if (this.shadows) {
+        this.shadows.createShadow(barrelSprite, barrelHd ? 36 : 18, barrelHd ? 12 : 6, 0);
+        this.shadows.createShadow(crateSprite, crateHd ? 40 : 20, crateHd ? 12 : 6, 0);
+      }
     }
 
     // Micro World Details: Directional Signpost
@@ -1295,12 +1299,19 @@ class FarmScene extends Phaser.Scene {
     const tex = this._propTex('valley_seed_shop_hd', 'shop_sign');
     const hd = tex === 'valley_seed_shop_hd';
     this.shopBaseScale = hd ? 0.78 : 1.3;
+
+    // A broad two-tone grass pad gives the stall an explicit contact plane. The shop is
+    // a frequently used landmark, so its building stays still while only its hint animates.
+    this.shopGround = this.add.graphics().setDepth(sy - 2);
+    this.shopGround.fillStyle(0x43512F, 0.64);
+    this.shopGround.fillEllipse(sx, sy - 1, hd ? 162 : 70, hd ? 24 : 16);
+    this.shopGround.fillStyle(0x819B4A, 0.72);
+    this.shopGround.fillEllipse(sx, sy - 5, hd ? 142 : 58, hd ? 14 : 9);
+
     this.shopNPC = this.add.image(sx, sy, tex)
       .setOrigin(0.5, 1).setScale(this.shopBaseScale).setDepth(sy);
     if (hd && this.shopNPC.texture) this.shopNPC.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (this.shadows) this.shadows.createShadow(this.shopNPC, hd ? 76 : 48, hd ? 18 : 14, 1);
-
-    this.tweens.add({ targets: this.shopNPC, y: sy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
 
     this.shopHint = this.add.text(sx, sy + 10, '🏪 SHOP\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'14px',
@@ -1822,19 +1833,38 @@ class FarmScene extends Phaser.Scene {
     if (hd && this.beehiveSprite.texture) this.beehiveSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (this.shadows) this.shadows.createShadow(this.beehiveSprite, hd ? 42 : 38, 12, 1);
 
+    const beeFrames = ['valley_honey_bee_open_hd', 'valley_honey_bee_flap_hd'];
+    const beeAnimKey = 'valley-honey-bee-fly';
+    const beeUsesHd = beeFrames.every((key) => this.textures.exists(key));
+    if (beeUsesHd) {
+      beeFrames.forEach((key) => this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST));
+      if (!this.anims.exists(beeAnimKey)) {
+        this.anims.create({
+          key: beeAnimKey,
+          frames: beeFrames.map((key) => ({ key })),
+          frameRate: 10,
+          repeat: -1
+        });
+      }
+    }
+
     this.beehiveBees = [];
     const numBees = 4;
     for (let i = 0; i < numBees; i++) {
-      const beeSprite = this.add.image(bx, by - 22, 'p_tiny_bee')
-        .setScale(1.2).setDepth(by + 10);
+      const beeSprite = beeUsesHd
+        ? this.add.sprite(bx, by - 42, beeFrames[i % beeFrames.length])
+        : this.add.image(bx, by - 42, 'p_tiny_bee');
+      beeSprite.setScale(beeUsesHd ? 0.95 - (i % 2) * 0.08 : 1.2).setDepth(by + 10);
+      if (beeUsesHd) beeSprite.play({ key: beeAnimKey, delay: i * 35 });
       this.beehiveBees.push({
         sprite: beeSprite,
         baseX: bx,
-        baseY: by - 22,
+        baseY: by - 42,
         angle: (Math.PI * 2 / numBees) * i,
-        radiusX: 16 + (i % 2) * 6,
-        radiusY: 10 + (i % 2) * 4,
-        speed: 0.04 + i * 0.01
+        radiusX: 23 + (i % 2) * 7,
+        radiusY: 13 + (i % 2) * 4,
+        speed: 0.035 + i * 0.008,
+        usesHd: beeUsesHd
       });
     }
 
@@ -2595,7 +2625,9 @@ class FarmScene extends Phaser.Scene {
     if (this.beehiveBees && this.beehiveBees.length) {
       this.beehiveBees.forEach((bee) => {
         bee.angle += bee.speed;
-        bee.sprite.x = bee.baseX + Math.cos(bee.angle) * bee.radiusX + Math.sin(bee.angle * 2.2) * 2;
+        const nextX = bee.baseX + Math.cos(bee.angle) * bee.radiusX + Math.sin(bee.angle * 2.2) * 2;
+        if (bee.usesHd && bee.sprite.setFlipX) bee.sprite.setFlipX(nextX > bee.sprite.x);
+        bee.sprite.x = nextX;
         bee.sprite.y = bee.baseY + Math.sin(bee.angle) * bee.radiusY + Math.cos(bee.angle * 1.7) * 2;
       });
     }
@@ -2931,8 +2963,8 @@ class FarmScene extends Phaser.Scene {
 
   _teardownExtra(id){
     if (id === 'shop') {
-      this._destroyWorldObj(this.shopNPC); this._destroyWorldObj(this.shopHint);
-      this.shopNPC = this.shopHint = null; this.shopX = this.shopY = null;
+      this._destroyWorldObj(this.shopGround); this._destroyWorldObj(this.shopNPC); this._destroyWorldObj(this.shopHint);
+      this.shopGround = this.shopNPC = this.shopHint = null; this.shopX = this.shopY = null;
       this.shopBaseScale = null;
     } else if (id === 'board') {
       this._destroyWorldObj(this.boardSprite); this._destroyWorldObj(this.boardHint);

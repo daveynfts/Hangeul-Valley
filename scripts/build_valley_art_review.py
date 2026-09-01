@@ -38,6 +38,8 @@ def build_layout_preview(entries: list[dict]) -> None:
         (103, "board", 288, 103, "bottom"),
         (188, "apple", 92, 188, "bottom"),
         (192, "beehive", 453, 192, "bottom"),
+        (202, "honey_bee_open", 425, 145, "center"),
+        (202, "honey_bee_flap", 486, 158, "center"),
         (315, "arcade", 72, 315, "bottom"),
         (394, "fishing", 105, 414, "center"),
         (396, "pond_fish", 67, 412, "center"),
@@ -54,6 +56,9 @@ def build_layout_preview(entries: list[dict]) -> None:
         if role == "beehive":
             draw.ellipse((x - 29, y - 9, x + 29, y + 7), fill=(67, 81, 47, 158))
             draw.ellipse((x - 23, y - 8, x + 23, y + 1), fill=(129, 155, 74, 184))
+        elif role == "shop":
+            draw.ellipse((x - 81, y - 13, x + 81, y + 11), fill=(67, 81, 47, 163))
+            draw.ellipse((x - 71, y - 12, x + 71, y + 2), fill=(129, 155, 74, 184))
         if role in by_role:
             entry = by_role[role]
             sprite = load_scaled(entry["file"], float(entry["mapScale"]))
@@ -63,7 +68,7 @@ def build_layout_preview(entries: list[dict]) -> None:
         px = round(x - sprite.width / 2)
         py = round(y - (sprite.height if origin == "bottom" else sprite.height / 2))
         layout.alpha_composite(sprite, (px, py))
-        if role not in ("apple", "well"):
+        if role not in ("apple", "well", "honey_bee_open", "honey_bee_flap"):
             draw.text((max(2, px), max(2, py - 12)), role, fill=(255, 248, 232, 255), stroke_width=1, stroke_fill=(35, 25, 18, 255))
 
     draw.rectangle((8, 728, 568, 758), fill=(36, 48, 34, 220), outline=(245, 224, 176, 255))
@@ -92,6 +97,8 @@ def main() -> None:
         map_scale = float(entry["mapScale"])
         # Show roughly the in-game footprint, enlarged by 1.35 for a readable review.
         preview_scale = map_scale * 1.35
+        if sprite.height <= 24:
+            preview_scale = max(preview_scale, 5.0)
         preview_scale = min(preview_scale, 260 / sprite.width, 165 / sprite.height)
         size = (
             max(1, round(sprite.width * preview_scale)),

@@ -14,20 +14,27 @@ uses the same pipeline so its map object reads as a cassette player before it is
 | Arcade | `valley_arcade_cabinet_hd` | `furniture/valley_arcade_cabinet.png` | 0.68 |
 | Ginger cat | `valley_ginger_cat_hd` | `characters/valley_ginger_cat.png` | 0.58 |
 | Apiary | `valley_apiary_hive_hd` | `decorations/valley_apiary_hive.png` | 1.15 |
+| Honey bee, wings open | `valley_honey_bee_open_hd` | `decorations/valley_honey_bee_open.png` | 0.95 |
+| Honey bee, wings lowered | `valley_honey_bee_flap_hd` | `decorations/valley_honey_bee_flap.png` | 0.95 |
 | Dungeon portal | `valley_dungeon_portal_hd` | `decorations/valley_dungeon_portal.png` | 0.72 |
 | Fishing pond | `valley_fishing_pond_hd` | `decorations/valley_fishing_pond.png` | 0.72 |
 | Pond carp | `valley_pond_carp_hd` | `decorations/valley_pond_carp.png` | 0.82 |
 | Spell witch | `valley_spell_witch_hd` | `characters/valley_spell_witch.png` | 1.00 |
 
-The active Valley pack contains shop, board, arcade, cat, apiary, portal, pond, and carp.
+The active Valley pack contains shop, board, arcade, cat, apiary, animated bees, portal,
+pond, and carp.
 Spell Duel was intentionally removed in commit `a872a6d`, so the witch is not re-enabled
 as a dead interaction. Its retained legacy spawn path now uses the redesigned witch if an
 older or custom world requests `wizard`.
 
-All nine creators keep their procedural texture as a load-failure fallback. The reviewed
+Each landmark creator keeps its procedural texture as a load-failure fallback. The reviewed
 fishing pond branches before the generated rocks and reeds, so the two designs cannot stack.
-The cat's old animation calls are also skipped for the new single-frame illustration while
-the proximity, sleeping, facing, dialogue, and click behavior remain intact.
+The shop follows the same rule: its old loose barrel and crate garnish appears only if the
+reviewed stall fails to load. A two-tone ground patch anchors the shop and the building no
+longer bobs. The detached legacy bee silhouettes were removed from the hive PNG, and the two
+reviewed bee frames now animate independently around the stationary apiary.
+The cat's old animation calls are skipped for the new single-frame illustration while the
+proximity, sleeping, facing, dialogue, and click behavior remain intact.
 
 ## Layout review
 
@@ -36,9 +43,9 @@ the proximity, sleeping, facing, dialogue, and click behavior remain intact.
 landmarks are clamped inside the canvas; the existing HD apple tree and well were moved in
 from the edges, and the cat and apiary were separated from them.
 
-`valley-map-art-review.png` is the nine-asset contact sheet. Its deterministic builder is
+`valley-map-art-review.png` is the twelve-asset contact sheet. Its deterministic builder is
 `scripts/build_valley_art_review.py`. Source image names, corrections, processing sizes,
 and review state are recorded in `valley-map-art-manifest.json`.
 
-The catalog and runtime share cache key `art-topik-213-extra-10-a87f32476a13`, which forces
+The catalog and runtime share cache key `art-topik-213-extra-12-766839d3adf5`, which forces
 browsers to fetch these files instead of retaining the old map sprites.

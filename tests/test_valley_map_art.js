@@ -18,9 +18,9 @@ function assert(cond, msg) {
   console.log('ok  ' + msg);
 }
 
-assert(manifest.entries.length === 10, 'manifest covers the ten redesigned map assets');
+assert(manifest.entries.length === 12, 'manifest covers the twelve redesigned map assets and bee frames');
 assert(manifest.entries.every((entry) => entry.reviewed), 'every source and processed sprite was reviewed');
-assert(new Set(manifest.entries.map((entry) => entry.role)).size === 10, 'each map role has one dedicated asset');
+assert(new Set(manifest.entries.map((entry) => entry.role)).size === 12, 'each map role and animation frame has one dedicated asset');
 
 manifest.entries.forEach((entry) => {
   assert(/^[a-z][a-z0-9_]*$/.test(entry.slug), entry.slug + ' follows snake_case');
@@ -75,6 +75,20 @@ assert(/Math\.min\(W - 70, this\.farm\.x \+ this\.farm\.w \+ 78\)/.test(farm)
   'beehive sits outside the plot fence and apple canopy');
 assert(/this\.beehiveGround[\s\S]{0,240}fillEllipse/.test(farm), 'beehive has a visible ground contact patch');
 assert(!/targets: this\.beehiveSprite,[\s\S]{0,100}repeat: -1/.test(farm), 'beehive body no longer floats or shakes forever');
+assert(/const beeFrames = \['valley_honey_bee_open_hd', 'valley_honey_bee_flap_hd'\]/.test(farm)
+  && /frames: beeFrames\.map/.test(farm) && /frameRate: 10/.test(farm),
+  'apiary bees use the reviewed two-frame wing animation');
+assert(/this\.add\.sprite\(bx, by - 42, beeFrames\[i % beeFrames\.length\]\)/.test(farm)
+  && /this\.add\.image\(bx, by - 42, 'p_tiny_bee'\)/.test(farm),
+  'all four apiary bees prefer reviewed art and retain a load-failure fallback');
+assert(/setFlipX\(nextX > bee\.sprite\.x\)/.test(farm), 'reviewed bees turn to face their flight direction');
+
+const shop = farm.slice(farm.indexOf('  _createShopNPC(W, H){'), farm.indexOf('  _createBoardNPC(W, H){'));
+assert(/this\.shopGround[\s\S]{0,420}fillEllipse/.test(shop), 'shop has a broad visible ground contact patch');
+assert(!/targets: this\.shopNPC/.test(shop), 'shop building stays grounded instead of bobbing in the air');
+assert(/if \(!this\.textures\.exists\('valley_seed_shop_hd'\)\)[\s\S]{0,700}oak_barrel_hd[\s\S]{0,300}wooden_crate_hd/.test(farm),
+  'legacy barrel and crate garnish is hidden whenever the reviewed shop is available');
+assert(/this\._destroyWorldObj\(this\.shopGround\)/.test(farm), 'shop ground is removed with the optional landmark');
 
 const cassette = layout.stations.find((station) => station.id === 'cassette');
 assert(cassette && cassette.scale === 0.72, 'cassette uses the reviewed station scale');

@@ -2,6 +2,7 @@
 import importlib.util
 import hashlib
 import json
+from collections import deque
 from pathlib import Path
 import tempfile
 import unittest
@@ -72,8 +73,8 @@ class PixelProcessingTests(unittest.TestCase):
     def test_reviewed_valley_map_sprites_keep_declared_size_and_clean_alpha(self):
         manifest = json.loads((ROOT / "docs/valley-map-art-manifest.json").read_text(encoding="utf-8"))
         entries = manifest["entries"]
-        self.assertEqual(len(entries), 10, "Do not silently skip a redesigned map sprite")
-        self.assertEqual(len({entry["file"] for entry in entries}), 10, "Every map role needs its own PNG")
+        self.assertEqual(len(entries), 12, "Do not silently skip a redesigned map sprite or bee frame")
+        self.assertEqual(len({entry["file"] for entry in entries}), 12, "Every map role and frame needs its own PNG")
         for entry in entries:
             with self.subTest(role=entry["role"], file=entry["file"]):
                 with Image.open(ROOT / entry["file"]) as source:
@@ -83,9 +84,34 @@ class PixelProcessingTests(unittest.TestCase):
                 pixels = list(sprite.getdata())
                 self.assertEqual({p[3] for p in pixels}, {0, 255}, "No blurred alpha edges")
                 self.assertLessEqual(len({p[:3] for p in pixels if p[3]}), 32)
-                self.assertGreater(sum(p[3] == 255 for p in pixels), 100, "Keep a visible subject")
+                minimum_visible = 35 if entry["height"] <= 24 else 100
+                self.assertGreater(sum(p[3] == 255 for p in pixels), minimum_visible, "Keep a visible subject")
                 self.assertEqual(sprite.getchannel("A").getbbox()[3], entry["height"], "Art sits on its baseline")
                 self.assertFalse(any(processor.is_key_color(*p) for p in pixels), "No magenta matte islands")
+
+        bee_frames = {entry["role"]: entry for entry in entries if entry["role"].startswith("honey_bee_")}
+        self.assertEqual(set(bee_frames), {"honey_bee_open", "honey_bee_flap"})
+        with Image.open(ROOT / bee_frames["honey_bee_open"]["file"]) as open_frame, \
+             Image.open(ROOT / bee_frames["honey_bee_flap"]["file"]) as flap_frame:
+            self.assertEqual(open_frame.size, flap_frame.size, "Bee body must not jump between wing frames")
+            self.assertEqual(open_frame.size, (17, 18), "Bee frames keep their reviewed shared canvas")
+
+        hive_entry = next(entry for entry in entries if entry["role"] == "beehive")
+        with Image.open(ROOT / hive_entry["file"]) as hive_source:
+            hive = hive_source.convert("RGBA")
+        opaque = {(x, y) for y in range(hive.height) for x in range(hive.width)
+                  if hive.getpixel((x, y))[3]}
+        components = 0
+        while opaque:
+            components += 1
+            queue = deque([opaque.pop()])
+            while queue:
+                x, y = queue.popleft()
+                for neighbor in ((x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)):
+                    if neighbor in opaque:
+                        opaque.remove(neighbor)
+                        queue.append(neighbor)
+        self.assertEqual(components, 1, "Hive PNG must not retain detached legacy bee silhouettes")
 
     def test_magenta_key_keeps_enclosed_artwork(self):
         sprite = Image.new("RGBA", (7, 7), (255, 0, 255, 255))

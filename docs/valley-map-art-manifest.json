@@ -30,7 +30,31 @@
       "height": 64,
       "mapScale": 1.15,
       "reviewed": true,
+      "correction": "Removed the two detached legacy bee silhouettes from the hive PNG so every visible bee uses the shared animated bee set.",
       "brief": "Warm wooden apiary hive with layered honey boxes and a clear entrance."
+    },
+    {
+      "role": "honey_bee_open",
+      "slug": "valley_honey_bee_open",
+      "file": "sprites/decorations/valley_honey_bee_open.png",
+      "phaserKey": "valley_honey_bee_open_hd",
+      "sourceImage": "exec-c6b40088-4227-427e-b67f-82b18545fe52.png",
+      "height": 18,
+      "mapScale": 0.95,
+      "reviewed": true,
+      "brief": "Amber honey bee with raised cream wings, a dark outline, and the same warm palette as the apiary hive."
+    },
+    {
+      "role": "honey_bee_flap",
+      "slug": "valley_honey_bee_flap",
+      "file": "sprites/decorations/valley_honey_bee_flap.png",
+      "phaserKey": "valley_honey_bee_flap_hd",
+      "sourceImage": "exec-a718d564-9215-48e8-9931-46916a5bfdbf.png",
+      "height": 18,
+      "mapScale": 0.95,
+      "reviewed": true,
+      "correction": "Normalized with the open-wing source on one shared crop, palette, and 17x18 canvas so the body remains stable during animation.",
+      "brief": "Matching downstroke frame for the apiary bee flight loop."
     },
     {
       "role": "wizard",

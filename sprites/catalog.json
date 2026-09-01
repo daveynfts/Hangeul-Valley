@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-topik-213-extra-10-a87f32476a13",
+  "cacheKey": "art-topik-213-extra-12-766839d3adf5",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -10994,6 +10994,38 @@
         "Fishing pond"
       ],
       "notes": "Reviewed golden carp used for the visible pond swimmer and ambient jump."
+    },
+    {
+      "id": "decoration.valley_honey_bee_open",
+      "nameEn": "Valley honey bee - wings open",
+      "kind": "decoration",
+      "family": "valley-apiary-fauna",
+      "role": "honey_bee_open",
+      "path": "decorations/valley_honey_bee_open.png",
+      "status": "shipped",
+      "heightClass": "fauna",
+      "parentId": "decoration.valley_honey_bee_open",
+      "usedBy": [
+        "FarmScene",
+        "Beehive"
+      ],
+      "notes": "Reviewed two-frame apiary bee; normalized with its flap frame to a shared 17x18 canvas."
+    },
+    {
+      "id": "decoration.valley_honey_bee_flap",
+      "nameEn": "Valley honey bee - wings lowered",
+      "kind": "decoration",
+      "family": "valley-apiary-fauna",
+      "role": "honey_bee_flap",
+      "path": "decorations/valley_honey_bee_flap.png",
+      "status": "shipped",
+      "heightClass": "fauna",
+      "parentId": "decoration.valley_honey_bee_flap",
+      "usedBy": [
+        "FarmScene",
+        "Beehive"
+      ],
+      "notes": "Reviewed downstroke frame; shares body scale, palette, and canvas with the open-wing frame."
     }
   ]
 }
