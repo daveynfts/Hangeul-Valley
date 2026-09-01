@@ -72,8 +72,8 @@ class PixelProcessingTests(unittest.TestCase):
     def test_reviewed_valley_map_sprites_keep_declared_size_and_clean_alpha(self):
         manifest = json.loads((ROOT / "docs/valley-map-art-manifest.json").read_text(encoding="utf-8"))
         entries = manifest["entries"]
-        self.assertEqual(len(entries), 9, "Do not silently skip a redesigned map sprite")
-        self.assertEqual(len({entry["file"] for entry in entries}), 9, "Every map role needs its own PNG")
+        self.assertEqual(len(entries), 10, "Do not silently skip a redesigned map sprite")
+        self.assertEqual(len({entry["file"] for entry in entries}), 10, "Every map role needs its own PNG")
         for entry in entries:
             with self.subTest(role=entry["role"], file=entry["file"]):
                 with Image.open(ROOT / entry["file"]) as source:

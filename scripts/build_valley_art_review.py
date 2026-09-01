@@ -36,10 +36,11 @@ def build_layout_preview(entries: list[dict]) -> None:
     objects = [
         # depth, role, x, y, origin
         (103, "board", 288, 103, "bottom"),
-        (173, "beehive", 208, 173, "bottom"),
         (188, "apple", 92, 188, "bottom"),
-        (218, "arcade", 72, 218, "bottom"),
-        (374, "fishing", 105, 394, "center"),
+        (192, "beehive", 453, 192, "bottom"),
+        (315, "arcade", 72, 315, "bottom"),
+        (394, "fishing", 105, 414, "center"),
+        (396, "pond_fish", 67, 412, "center"),
         (379, "shop", 486, 379, "bottom"),
         (585, "cat", 120, 585, "bottom"),
         (590, "portal", 512, 590, "bottom"),
@@ -50,6 +51,9 @@ def build_layout_preview(entries: list[dict]) -> None:
         "well": ("sprites/decorations/stone_well.png", 1.0),
     }
     for _depth, role, x, y, origin in sorted(objects):
+        if role == "beehive":
+            draw.ellipse((x - 29, y - 9, x + 29, y + 7), fill=(67, 81, 47, 158))
+            draw.ellipse((x - 23, y - 8, x + 23, y + 1), fill=(129, 155, 74, 184))
         if role in by_role:
             entry = by_role[role]
             sprite = load_scaled(entry["file"], float(entry["mapScale"]))

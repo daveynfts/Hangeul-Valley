@@ -1002,7 +1002,7 @@ class FarmScene extends Phaser.Scene {
     const flowerColors = ['red', 'yellow', 'purple'];
     const flowerList = [];
     const pondX = Math.max(105, this.farm.x - 150);
-    const pondY = this.farm.y + this.farm.h / 2 + 40;
+    const pondY = this.farm.y + this.farm.h / 2 + 60;
     const inKeepout = (fx, fy) => {
       if (fx > this.farm.x - 24 && fx < this.farm.x + this.farm.w + 24 &&
           fy > this.farm.y - 24 && fy < this.farm.y + this.farm.h + 24) return true;
@@ -1331,15 +1331,16 @@ class FarmScene extends Phaser.Scene {
   // ── ARCADE MACHINE ─────────────────────────────────────────────────────────
   _createArcadeNPC(W, H){
     if (this.arcadeSprite) return;
-    const ax = Math.max(72, this.farm.x - 150);
-    const ay = this.farm.y + 20;
+    // The cabinet needs its own patch of ground. The earlier placement shared the
+    // apple canopy and made both landmarks hard to read, especially at desktop widths.
+    const ax = Math.max(72, this.farm.x - 205);
+    const ay = this.farm.y + 117;
     const tex = this._propTex('valley_arcade_cabinet_hd', 'arcade_machine');
     const hd = tex === 'valley_arcade_cabinet_hd';
-    this.arcadeBaseScale = hd ? 0.76 : 1.5;
+    this.arcadeBaseScale = hd ? 0.68 : 1.5;
     this.arcadeSprite = this.add.image(ax, ay, tex).setOrigin(0.5,1).setScale(this.arcadeBaseScale).setDepth(ay);
     if (hd && this.arcadeSprite.texture) this.arcadeSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (this.shadows) this.shadows.createShadow(this.arcadeSprite, hd ? 46 : 48, 14, 1);
-    this.tweens.add({ targets: this.arcadeSprite, y: ay - 3, duration: 1100, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     this.arcadeHint = this.add.text(ax, ay - this.arcadeSprite.displayHeight - 8, '👾 ARCADE\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#00FFFF', stroke:'#000', strokeThickness:3, align:'center'
@@ -1422,10 +1423,11 @@ class FarmScene extends Phaser.Scene {
   _createFishingSpot(W, H){
     if (this.fishX != null) return;
     const fx = Math.max(105, this.farm.x - 150);
-    const fy = this.farm.y + this.farm.h / 2 + 20;
+    const fy = this.farm.y + this.farm.h / 2 + 40;
     this.dockSprite = null; // No boat — pure pond
     const layerStart = this.children.list.length;
     this._fishingTimers = [];
+    this.pondFishSprite = null;
 
     // The reviewed pond is one coherent landmark. Keep the old generated pond below as
     // a network-failure fallback, but never stack its random rocks and reeds over the art.
@@ -1454,6 +1456,8 @@ class FarmScene extends Phaser.Scene {
           ease: 'Sine.InOut'
         });
       }
+
+      this._createPondFish(fx, fy);
 
       this.fishHint = this.add.text(
         fx,
@@ -1593,6 +1597,8 @@ class FarmScene extends Phaser.Scene {
       });
     }
 
+    this._createPondFish(fx, fy);
+
     // ── Hint & Label ──────────────────────────────────────────────────────
     this.fishHint = this.add.text(fx, fy - 40, '🎣 FISHING POND\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
@@ -1607,6 +1613,32 @@ class FarmScene extends Phaser.Scene {
 
     // Ambient Fish Jumping Effect
     this._fishingTimers.push(this.time.addEvent({ delay: 4000, loop: true, callback: () => this._triggerFishJump(fx, fy) }));
+  }
+
+  _createPondFish(fx, fy) {
+    const fishTex = this._propTex('valley_pond_carp_hd', 'fish_carp');
+    const hd = fishTex === 'valley_pond_carp_hd';
+    this.pondFishBaseScale = hd ? 0.82 : 0.75;
+    this.pondFishSprite = this.add.image(fx - 38, fy + 18, fishTex)
+      .setScale(this.pondFishBaseScale).setAlpha(0.82).setDepth(fy + 2);
+    if (hd && this.pondFishSprite.texture) {
+      this.pondFishSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    }
+    this.tweens.add({
+      targets: this.pondFishSprite,
+      x: fx + 22,
+      y: fy + 13,
+      duration: 2700,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.InOut',
+      onYoyo: () => {
+        if (this.pondFishSprite && this.pondFishSprite.active) this.pondFishSprite.setFlipX(true);
+      },
+      onRepeat: () => {
+        if (this.pondFishSprite && this.pondFishSprite.active) this.pondFishSprite.setFlipX(false);
+      }
+    });
   }
 
   _triggerFishJump(fx, fy) {
@@ -1624,7 +1656,10 @@ class FarmScene extends Phaser.Scene {
     this._createSplashRipples(startX, startY);
     this._createSplashDroplets(startX, startY);
 
-    const fish = this.add.image(startX, startY, 'fish_carp').setScale(1.0).setDepth(fy + 5);
+    const fishTex = this._propTex('valley_pond_carp_hd', 'fish_carp');
+    const hd = fishTex === 'valley_pond_carp_hd';
+    const fish = this.add.image(startX, startY, fishTex).setScale(hd ? 0.95 : 1.0).setDepth(fy + 5);
+    if (hd && fish.texture) fish.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (isLeft) fish.setFlipX(true);
 
     const startAngle = isLeft ? 40 : -40;
@@ -1766,10 +1801,18 @@ class FarmScene extends Phaser.Scene {
   // ── BEEHIVE NPC ────────────────────────────────────────────────────────────
   _createBeehiveNPC(W, H){
     if (this.beehiveSprite) return;
-    const bx = this.farm.x + 10;
-    const by = this.farm.y - 25;
+    // Keep the apiary outside the plot fence and away from the apple canopy. A painted
+    // ground patch makes its contact point unambiguous while only the bees stay airborne.
+    const bx = Math.min(W - 70, this.farm.x + this.farm.w + 78);
+    const by = Math.max(180, this.farm.y - 6);
     this.beehiveX = bx;
     this.beehiveY = by;
+
+    this.beehiveGround = this.add.graphics().setDepth(by - 2);
+    this.beehiveGround.fillStyle(0x43512F, 0.62);
+    this.beehiveGround.fillEllipse(bx, by - 1, 58, 16);
+    this.beehiveGround.fillStyle(0x819B4A, 0.72);
+    this.beehiveGround.fillEllipse(bx, by - 4, 46, 9);
 
     const tex = this._propTex('valley_apiary_hive_hd', 'beehive');
     const hd = tex === 'valley_apiary_hive_hd';
@@ -1778,15 +1821,6 @@ class FarmScene extends Phaser.Scene {
       .setOrigin(0.5, 1).setScale(this.beehiveBaseScale).setDepth(by);
     if (hd && this.beehiveSprite.texture) this.beehiveSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (this.shadows) this.shadows.createShadow(this.beehiveSprite, hd ? 42 : 38, 12, 1);
-
-    this.tweens.add({
-      targets: this.beehiveSprite,
-      x: { from: bx - 1.5, to: bx + 1.5 },
-      duration: 85,
-      yoyo: true,
-      repeat: -1,
-      ease: 'Sine.InOut'
-    });
 
     this.beehiveBees = [];
     const numBees = 4;
@@ -2069,6 +2103,8 @@ class FarmScene extends Phaser.Scene {
 
     const useHdWater = actionType === 'water' && typeof skinHasHdAction === 'function'
       && skinHasHdAction(this, 'water', dir, 'farm');
+    const useHdHarvestGesture = (actionType === 'harvest' || actionType === 'pick')
+      && typeof skinUsesHd === 'function' && skinUsesHd(this, resolvedSkinDef(this), 'farm');
 
     let toolSprite = null;
     if (!useHdWater) {
@@ -2096,6 +2132,11 @@ class FarmScene extends Phaser.Scene {
       if (typeof callback === 'function') callback();
     };
 
+    if (useHdHarvestGesture) {
+      this._playHarvestGesture(actionType, targetX, targetY, toolSprite, restoreState);
+      return;
+    }
+
     if (useHdWater) {
       this._waterSplash(targetX, targetY);
       const def = typeof resolvedSkinDef === 'function' ? resolvedSkinDef(this) : null;
@@ -2121,6 +2162,135 @@ class FarmScene extends Phaser.Scene {
         scaleY: 0.8, scaleX: 1.2,
         duration: 150, yoyo: true, repeat: 1,
         onComplete: restoreState
+      });
+    }
+  }
+
+  _playHarvestGesture(actionType, targetX, targetY, toolSprite, done) {
+    const player = this.player;
+    if (!player || !player.active) { done(); return; }
+
+    const baseX = player.x;
+    const baseY = player.y;
+    const baseScaleX = Math.abs(player.scaleX) || 1;
+    const baseScaleY = Math.abs(player.scaleY) || 1;
+    const baseAngle = player.angle || 0;
+    const dx = (typeof targetX === 'number' ? targetX : baseX) - baseX;
+    const dy = (typeof targetY === 'number' ? targetY : baseY) - baseY;
+    const distance = Math.max(1, Math.sqrt(dx * dx + dy * dy));
+    const ux = dx / distance;
+    const uy = dy / distance;
+    const lean = Math.abs(ux) > 0.25 ? (ux < 0 ? -7 : 7) : ux * 7;
+    const dir = this.playerFacing || 'down';
+
+    if (player.anims) player.anims.stop();
+    player.setTexture(skinTextureKey(this, 'walk', dir, 1, 'farm'));
+
+    if (toolSprite && toolSprite.active) {
+      const side = dir === 'left' ? -1 : 1;
+      const toolScale = actionType === 'pick' ? 0.72 : 0.78;
+      const handHeight = actionType === 'pick' ? 0.27 : 0.42;
+      toolSprite.setOrigin(0.5, 0.82).setScale(toolScale);
+      toolSprite.setPosition(
+        baseX + side * 14,
+        playerFeetY(player) - player.displayHeight * handHeight
+      );
+      toolSprite.setAngle(actionType === 'harvest' ? -70 * side : -14 * side);
+      this.tweens.add({
+        targets: toolSprite,
+        x: toolSprite.x + ux * 8,
+        y: toolSprite.y + uy * 5,
+        angle: actionType === 'harvest' ? 58 * side : 18 * side,
+        duration: 150,
+        yoyo: true,
+        repeat: 1,
+        ease: 'Sine.InOut'
+      });
+    }
+
+    this.tweens.add({
+      targets: player,
+      x: baseX - ux * 3,
+      y: baseY - uy * 2,
+      angle: baseAngle - lean,
+      scaleX: baseScaleX * 0.94,
+      scaleY: baseScaleY * 1.06,
+      duration: 120,
+      ease: 'Quad.Out',
+      onComplete: () => {
+        if (!player.active) { done(); return; }
+        this._createHarvestTrail(actionType, targetX, targetY);
+        this.tweens.add({
+          targets: player,
+          x: baseX + ux * 8,
+          y: baseY + uy * 4,
+          angle: baseAngle + lean,
+          scaleX: baseScaleX * 1.08,
+          scaleY: baseScaleY * 0.9,
+          duration: 145,
+          yoyo: true,
+          repeat: 1,
+          ease: 'Sine.InOut',
+          onComplete: () => {
+            if (!player.active) { done(); return; }
+            this.tweens.add({
+              targets: player,
+              x: baseX,
+              y: baseY,
+              angle: baseAngle,
+              scaleX: baseScaleX,
+              scaleY: baseScaleY,
+              duration: 110,
+              ease: 'Back.Out(1.6)',
+              onComplete: done
+            });
+          }
+        });
+      }
+    });
+  }
+
+  _createHarvestTrail(actionType, targetX, targetY) {
+    if (!this.player || typeof targetX !== 'number' || typeof targetY !== 'number') return;
+    const pickingApple = actionType === 'pick';
+    const sourceY = pickingApple && this.appleTreeSprite
+      ? targetY - this.appleTreeSprite.displayHeight * 0.55
+      : targetY - 8;
+    const destinationX = this.player.x + (this.playerFacing === 'left' ? -10 : 10);
+    const destinationY = playerFeetY(this.player) - this.player.displayHeight * 0.38;
+    const colors = pickingApple ? [0xDC3B32, 0xF0523C, 0xF7A33A] : [0xF5C84B, 0x83A94A, 0xE59A3A];
+
+    for (let i = 0; i < 3; i++) {
+      const particle = this.add.container(targetX - 10 + i * 9, sourceY + (i % 2) * 5)
+        .setDepth((this.player.depth || 500) + 3);
+      const body = this.add.rectangle(0, 0, pickingApple ? 6 : 4, pickingApple ? 6 : 7, colors[i]);
+      body.setStrokeStyle(1, pickingApple ? 0x5B2318 : 0x465326, 1);
+      particle.add(body);
+      if (pickingApple) particle.add(this.add.rectangle(1, -4, 2, 2, 0x6E8737));
+      this.time.delayedCall(i * 65, () => {
+        if (!particle.active) return;
+        this.tweens.add({
+          targets: particle,
+          x: (particle.x + destinationX) / 2,
+          y: Math.min(particle.y, destinationY) - 18,
+          angle: i % 2 ? 28 : -28,
+          duration: 150,
+          ease: 'Quad.Out',
+          onComplete: () => {
+            if (!particle.active) return;
+            this.tweens.add({
+              targets: particle,
+              x: destinationX,
+              y: destinationY,
+              alpha: 0.15,
+              scale: 0.55,
+              angle: 0,
+              duration: 180,
+              ease: 'Quad.In',
+              onComplete: () => particle.destroy()
+            });
+          }
+        });
       });
     }
   }
@@ -2784,10 +2954,10 @@ class FarmScene extends Phaser.Scene {
       this.portalSprite = this.portalHint = null; this.portalX = this.portalY = null;
       this.portalBaseScale = null;
     } else if (id === 'beehive') {
-      this._destroyWorldObj(this.beehiveSprite); this._destroyWorldObj(this.beehiveHint);
+      this._destroyWorldObj(this.beehiveGround); this._destroyWorldObj(this.beehiveSprite); this._destroyWorldObj(this.beehiveHint);
       (this.beehiveBees || []).forEach(b => this._destroyWorldObj(b && b.sprite));
       this.beehiveBees = [];
-      this.beehiveSprite = this.beehiveHint = null; this.beehiveX = this.beehiveY = null;
+      this.beehiveGround = this.beehiveSprite = this.beehiveHint = null; this.beehiveX = this.beehiveY = null;
       this.beehiveBaseScale = null;
     } else if (id === 'fishing') {
       (this._fishingTimers || []).forEach(ev => { if (ev && ev.remove) ev.remove(false); });
@@ -2795,9 +2965,9 @@ class FarmScene extends Phaser.Scene {
       (this._worldLayers && this._worldLayers.fishing || []).forEach(o => this._destroyWorldObj(o));
       if (this._worldLayers) this._worldLayers.fishing = [];
       this._destroyWorldObj(this.pondWater); this._destroyWorldObj(this.fishHint); this._destroyWorldObj(this.dockSprite);
-      this.pondWater = this.fishHint = this.dockSprite = null;
+      this.pondWater = this.pondFishSprite = this.fishHint = this.dockSprite = null;
       this.fishX = this.fishY = null;
-      this.dockBaseScale = null;
+      this.dockBaseScale = this.pondFishBaseScale = null;
       this._pondVisible = false;
     }
   }

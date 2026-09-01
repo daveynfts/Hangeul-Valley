@@ -125,7 +125,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-topik-213-extra-9-5c706711d8f1';
+const ART_CACHE_KEY = 'art-topik-213-extra-10-a87f32476a13';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }
@@ -155,6 +155,7 @@ const ART_LOAD = [
   { key: 'valley_apiary_hive_hd', file: 'decorations/valley_apiary_hive.png' },
   { key: 'valley_dungeon_portal_hd', file: 'decorations/valley_dungeon_portal.png' },
   { key: 'valley_fishing_pond_hd', file: 'decorations/valley_fishing_pond.png' },
+  { key: 'valley_pond_carp_hd', file: 'decorations/valley_pond_carp.png' },
   { key: 'cassette_player_hd', file: 'furniture/valley_cassette_player.png' }
 ];
 const CROP_ART_FOLDER = {

@@ -83,7 +83,7 @@
       "phaserKey": "valley_arcade_cabinet_hd",
       "sourceImage": "exec-8c5f3ff1-ab74-4fc1-8028-339a1abfa32e.png",
       "height": 156,
-      "mapScale": 0.76,
+      "mapScale": 0.68,
       "reviewed": true,
       "brief": "Navy-and-walnut arcade cabinet with a cyan screen, amber joystick, and distinct buttons."
     },
@@ -110,6 +110,17 @@
       "reviewed": true,
       "correction": "Regenerated on the reserved magenta matte after the first source returned an opaque white background.",
       "brief": "Single coherent stone pond with reeds, lily pads, water ripples, and a small dock."
+    },
+    {
+      "role": "pond_fish",
+      "slug": "valley_pond_carp",
+      "file": "sprites/decorations/valley_pond_carp.png",
+      "phaserKey": "valley_pond_carp_hd",
+      "sourceImage": "exec-ab377fee-8670-4099-b186-4d632f558638.png",
+      "height": 24,
+      "mapScale": 0.82,
+      "reviewed": true,
+      "brief": "Side-view golden pond carp with a complete fin and tail silhouette for the visible swimmer and ambient jump."
     }
   ]
 }

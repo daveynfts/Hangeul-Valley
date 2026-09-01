@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-topik-213-extra-9-5c706711d8f1",
+  "cacheKey": "art-topik-213-extra-10-a87f32476a13",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -10978,6 +10978,22 @@
         "Fishing"
       ],
       "notes": "Corrected and reviewed ImageGen stone pond with reeds, lily pads, and a small dock on a transparent-ready magenta matte."
+    },
+    {
+      "id": "decoration.valley_pond_carp",
+      "nameEn": "Valley pond carp",
+      "kind": "decoration",
+      "family": "valley-pond-fauna",
+      "role": "pond_fish",
+      "path": "decorations/valley_pond_carp.png",
+      "status": "shipped",
+      "heightClass": "fauna",
+      "parentId": "decoration.valley_pond_carp",
+      "usedBy": [
+        "FarmScene",
+        "Fishing pond"
+      ],
+      "notes": "Reviewed golden carp used for the visible pond swimmer and ambient jump."
     }
   ]
 }
