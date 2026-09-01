@@ -1,0 +1,183 @@
+{
+  "date": "2026-08-31",
+  "tool": "Built-in Imagegen (one call per image, edited from the shared accepted style reference)",
+  "parent": "sprites/characters/valley-farmer/walk_down_0.png",
+  "processing": {
+    "script": ".grok/skills/farm-pixel-props/scripts/process_prop.py",
+    "height": 48,
+    "colors": 32,
+    "sampling": "nearest-neighbor",
+    "alpha": "binary; preserve source cutout"
+  },
+  "entries": [
+    {
+      "ko": "달리다",
+      "slug": "running_farmer",
+      "file": "sprites/items/running_farmer.png",
+      "sourceImage": "exec-0c92353b-436b-4884-be41-1c699ee9ac2c.png",
+      "prompt": "Use case: style-transfer. Edit the supplied accepted Hangeul Valley farmer reference into a new vocabulary icon for Korean “달리다”. Input image is the shared STYLE and character parent, not a subject to copy unchanged. The same farmer RUNNING in a clear side profile to the right, long airborne stride with both feet off the ground, knees high, arms bent and pumping, hat secure. No bag, no shoe alone. Use two short motion ticks behind the body. The full body and BOTH complete legs and boots must be intact.\nStyle: authentic SNES / Stardew 16-bit pixel art, designed on a strict 48 by 48 logical pixel grid, enlarged with nearest-neighbor square pixels. Chunky 1-2 logical pixel deep-brown outline, warm oak, cream, muted sage, denim blue and amber palette, simple flat clusters, at most 20 colors. Keep large readable silhouettes and complete solid shapes when reduced to 48px tall. Front-facing orthographic 2D except the explicitly requested side/top pose. Exactly one isolated semantic vignette, centered with a small transparent margin. TRUE TRANSPARENT background; no magenta, white backing, floor, ground, text, letters, frame, gradient, glow, blur, anti-aliasing, dithering or tiny noisy details. Preserve the family warmth and farmer identity where a person is requested; make the requested subject unmistakable.",
+      "backgroundEditPrompt": "Use case: background-extraction. Edit ONLY the backdrop of the supplied finished pixel-art vocabulary icon. Replace every white/light-grey checkerboard background square with ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA backdrop, including background gaps inside the silhouette. The checkerboard is an unwanted baked background; remove it entirely. Keep the subject's silhouette, pose, anatomy, complete dark outline, all skin/cream clothes, foreground colors, square pixel edges and composition unchanged. No new details, no text, no shadow, no fake transparency, no checkerboard, no smoothing. Export an opaque PNG on flat magenta for our color-key pipeline.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "틀다",
+      "slug": "turn_radio_dial",
+      "file": "sprites/items/turn_radio_dial.png",
+      "sourceImage": "exec-c1155d08-b040-4e34-b998-11d3a7e59f4a.png",
+      "prompt": "Use case: style-transfer. Edit the supplied accepted Hangeul Valley farmer reference into a new vocabulary icon for Korean “틀다”. Input image is the shared STYLE and character parent, not a subject to copy unchanged. A close-up of one hand turning the large round volume knob of an oak-and-sage portable radio. Two tiny pixel music notes are emerging from the speaker, showing that the act has started playback. The HAND clearly grips and rotates the knob. Do not depict a fan or a light bulb.\nStyle: authentic SNES / Stardew 16-bit pixel art, designed on a strict 48 by 48 logical pixel grid, enlarged with nearest-neighbor square pixels. Chunky 1-2 logical pixel deep-brown outline, warm oak, cream, muted sage, denim blue and amber palette, simple flat clusters, at most 20 colors. Keep large readable silhouettes and complete solid shapes when reduced to 48px tall. Front-facing orthographic 2D except the explicitly requested side/top pose. Exactly one isolated semantic vignette, centered with a small transparent margin. TRUE TRANSPARENT background; no magenta, white backing, floor, ground, text, letters, frame, gradient, glow, blur, anti-aliasing, dithering or tiny noisy details. Preserve the family warmth and farmer identity where a person is requested; make the requested subject unmistakable.",
+      "backgroundEditPrompt": "Use case: background-extraction. Edit ONLY the backdrop of the supplied finished pixel-art vocabulary icon. Replace every white/light-grey checkerboard background square with ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA backdrop, including background gaps inside the silhouette. The checkerboard is an unwanted baked background; remove it entirely. Keep the subject's silhouette, pose, anatomy, complete dark outline, all skin/cream clothes, foreground colors, square pixel edges and composition unchanged. No new details, no text, no shadow, no fake transparency, no checkerboard, no smoothing. Export an opaque PNG on flat magenta for our color-key pipeline.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "켜다",
+      "slug": "switch_on",
+      "file": "sprites/items/switch_on.png",
+      "sourceImage": "exec-0329c5cf-4e03-4ce3-9e97-f0d9b79aed68.png",
+      "prompt": "Use case: style-transfer. Edit the supplied accepted Hangeul Valley farmer reference into a new vocabulary icon for Korean “켜다”. Input image is the shared STYLE and character parent, not a subject to copy unchanged. A close-up of a complete hand pressing the upper half of a cream wall rocker switch into its ON position. A small amber lamp indicator beside it shines with three square rays. The finger and toggle are the focus, distinct from a standalone light bulb and from a radio dial. No lettering or power-symbol text.\nStyle: authentic SNES / Stardew 16-bit pixel art, designed on a strict 48 by 48 logical pixel grid, enlarged with nearest-neighbor square pixels. Chunky 1-2 logical pixel deep-brown outline, warm oak, cream, muted sage, denim blue and amber palette, simple flat clusters, at most 20 colors. Keep large readable silhouettes and complete solid shapes when reduced to 48px tall. Front-facing orthographic 2D except the explicitly requested side/top pose. Exactly one isolated semantic vignette, centered with a small transparent margin. TRUE TRANSPARENT background; no magenta, white backing, floor, ground, text, letters, frame, gradient, glow, blur, anti-aliasing, dithering or tiny noisy details. Preserve the family warmth and farmer identity where a person is requested; make the requested subject unmistakable."
+    },
+    {
+      "ko": "편하다",
+      "slug": "comfortable_farmer",
+      "file": "sprites/items/comfortable_farmer.png",
+      "sourceImage": "exec-fd73fe16-5fde-4a51-a581-65681dbe3cac.png",
+      "prompt": "Use case: style-transfer. Edit the supplied accepted Hangeul Valley farmer reference into a new vocabulary icon for Korean “편하다”. Input image is the shared STYLE and character parent, not a subject to copy unchanged. The same farmer reclining comfortably in a soft sage-green armchair, shoulders relaxed, eyes gently closed and smiling, both arms resting on broad cushions and feet relaxed on a small oak footrest. Show visible cushion softness with only two broad shade blocks. Clearly express COMFORT, not merely a sofa or sleeping.\nStyle: authentic SNES / Stardew 16-bit pixel art, designed on a strict 48 by 48 logical pixel grid, enlarged with nearest-neighbor square pixels. Chunky 1-2 logical pixel deep-brown outline, warm oak, cream, muted sage, denim blue and amber palette, simple flat clusters, at most 20 colors. Keep large readable silhouettes and complete solid shapes when reduced to 48px tall. Front-facing orthographic 2D except the explicitly requested side/top pose. Exactly one isolated semantic vignette, centered with a small transparent margin. TRUE TRANSPARENT background; no magenta, white backing, floor, ground, text, letters, frame, gradient, glow, blur, anti-aliasing, dithering or tiny noisy details. Preserve the family warmth and farmer identity where a person is requested; make the requested subject unmistakable."
+    },
+    {
+      "ko": "맡기다",
+      "slug": "entrust_laundry",
+      "file": "sprites/items/entrust_laundry.png",
+      "sourceImage": "exec-ce7e808e-c872-472d-be0c-e85ac48a76ae.png",
+      "prompt": "Use case: style-transfer. Edit the supplied accepted Hangeul Valley farmer reference into a new vocabulary icon for Korean “맡기다”. Input image is the shared STYLE and character parent, not a subject to copy unchanged. A single compact vignette of a customer handing a neatly tied cream-and-sage laundry bundle into the two waiting hands of an aproned shopkeeper. Show the customer on the left and shopkeeper on the right, waist-up; both sets of hands meet around the bundle so responsibility is clearly being transferred. A small blank hanging receipt tag stays on the bundle. No shop facade, no gift bow, no money.\nStyle: authentic SNES / Stardew 16-bit pixel art, designed on a strict 48 by 48 logical pixel grid, enlarged with nearest-neighbor square pixels. Chunky 1-2 logical pixel deep-brown outline, warm oak, cream, muted sage, denim blue and amber palette, simple flat clusters, at most 20 colors. Keep large readable silhouettes and complete solid shapes when reduced to 48px tall. Front-facing orthographic 2D except the explicitly requested side/top pose. Exactly one isolated semantic vignette, centered with a small transparent margin. TRUE TRANSPARENT background; no magenta, white backing, floor, ground, text, letters, frame, gradient, glow, blur, anti-aliasing, dithering or tiny noisy details. Preserve the family warmth and farmer identity where a person is requested; make the requested subject unmistakable."
+    },
+    {
+      "ko": "바로",
+      "slug": "act_immediately",
+      "file": "sprites/items/act_immediately.png",
+      "sourceImage": "exec-40fd826d-59e1-403e-9da1-7b6ae78b79fd.png",
+      "prompt": "Use case: style-transfer. Edit the supplied accepted Hangeul Valley farmer reference into a new vocabulary icon for Korean “바로”. Input image is the shared STYLE and character parent, not a subject to copy unchanged. The same farmer promptly opening an oak door at the very moment its small brass doorbell rings: one hand is already on the turning handle, body leaning into the immediate action, two short ringing marks at the little bell. Tightly cropped single action vignette, no house, no ground. Express an immediate response and direct action; do not use a lone shoe or a generic lightning badge.\nStyle: authentic SNES / Stardew 16-bit pixel art, designed on a strict 48 by 48 logical pixel grid, enlarged with nearest-neighbor square pixels. Chunky 1-2 logical pixel deep-brown outline, warm oak, cream, muted sage, denim blue and amber palette, simple flat clusters, at most 20 colors. Keep large readable silhouettes and complete solid shapes when reduced to 48px tall. Front-facing orthographic 2D except the explicitly requested side/top pose. Exactly one isolated semantic vignette, centered with a small transparent margin. TRUE TRANSPARENT background; no magenta, white backing, floor, ground, text, letters, frame, gradient, glow, blur, anti-aliasing, dithering or tiny noisy details. Preserve the family warmth and farmer identity where a person is requested; make the requested subject unmistakable.",
+      "backgroundEditPrompt": "Use case: background-extraction. Edit ONLY the backdrop of the supplied finished pixel-art vocabulary icon. Replace every white/light-grey checkerboard background square with ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA backdrop, including background gaps inside the silhouette. The checkerboard is an unwanted baked background; remove it entirely. Keep the subject's silhouette, pose, anatomy, complete dark outline, all skin/cream clothes, foreground colors, square pixel edges and composition unchanged. No new details, no text, no shadow, no fake transparency, no checkerboard, no smoothing. Export an opaque PNG on flat magenta for our color-key pipeline.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "활기차다",
+      "slug": "lively_farmer",
+      "file": "sprites/items/lively_farmer.png",
+      "sourceImage": "exec-11f1e3da-93ed-40a4-b400-40f75d67c7bd.png",
+      "prompt": "Use case: style-transfer. Redesign the first supplied Hangeul Valley vocabulary icon for Korean 활기차다, meaning lively and full of energy. The second supplied accepted farmer is the shared character/style reference. Replace the standing arms-raised pose completely: draw the SAME smiling farmer energetically JUMPING ROPE, with both complete boots a little above the ground, knees bent, elbows low at waist level, one handle in each hand, and one large clearly readable rope arc around the full body. Hands must stay low beside the hips; NOT hands raised beside the face, no surprised expression, no exclamation marks. Give a broad cheerful smile and relaxed confident posture. This should clearly look like an enthusiastic lively morning exercise, visually distinct from being startled and from walking/running. Keep one isolated complete person with the rope, front orthographic view, a small empty margin all around, no floor or scenery. Authentic SNES / Stardew 16-bit pixel art, designed on a strict 48x48 logical pixel grid enlarged with nearest-neighbor square cells; thick 1-2 logical pixel dark brown outline; warm oak, cream, muted sage, denim blue, amber, and muted red boots. No gradients, anti-aliasing, blur, dithering, text or tiny noisy details. At most 24 flat colors in large pixel clusters. Background must be one perfectly solid #FF00FF magenta, also inside rope/arm/leg gaps. Reserve magenta only for the background, no magenta in foreground. Keep outlines, cream clothing, limbs and feet complete and solid, readable at 48px height.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "발",
+      "slug": "bare_foot",
+      "file": "sprites/items/bare_foot.png",
+      "sourceImage": "exec-b3ce06d8-8bba-4588-ab1c-331983257819.png",
+      "prompt": "Use case: style-transfer. Edit the supplied accepted Hangeul Valley farmer reference into a new vocabulary icon for Korean “발”. Input image is the shared STYLE and character parent, not a subject to copy unchanged. One anatomically recognizable bare human FOOT with five clearly separated toes, a rounded heel, a gentle arch and a short ankle, warm tan skin. Use a diagonal top view so all five toes are visible, largest toe on the inner side and four progressively smaller toes. No shoe, no boot, no sock, no cropped toes; keep a continuous dark outline.\nStyle: authentic SNES / Stardew 16-bit pixel art, designed on a strict 48 by 48 logical pixel grid, enlarged with nearest-neighbor square pixels. Chunky 1-2 logical pixel deep-brown outline, warm oak, cream, muted sage, denim blue and amber palette, simple flat clusters, at most 20 colors. Keep large readable silhouettes and complete solid shapes when reduced to 48px tall. Front-facing orthographic 2D except the explicitly requested side/top pose. Exactly one isolated semantic vignette, centered with a small transparent margin. TRUE TRANSPARENT background; no magenta, white backing, floor, ground, text, letters, frame, gradient, glow, blur, anti-aliasing, dithering or tiny noisy details. Preserve the family warmth and farmer identity where a person is requested; make the requested subject unmistakable.",
+      "backgroundEditPrompt": "Use case: background-extraction. Edit ONLY the backdrop of the supplied finished pixel-art vocabulary icon. Replace every white/light-grey checkerboard background square with ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA backdrop, including background gaps inside the silhouette. The checkerboard is an unwanted baked background; remove it entirely. Keep the subject's silhouette, pose, anatomy, complete dark outline, all skin/cream clothes, foreground colors, square pixel edges and composition unchanged. No new details, no text, no shadow, no fake transparency, no checkerboard, no smoothing. Export an opaque PNG on flat magenta for our color-key pipeline.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "놀라다",
+      "slug": "surprise_burst",
+      "file": "sprites/items/surprise_burst.png",
+      "sourceImage": "exec-2c60db28-3623-48d3-80fd-a4b2eab1aa48.png",
+      "prompt": "Use case: style-transfer. Create the repaired Hangeul Valley vocabulary sprite for Korean “놀라다”. A surprised farmer facing forward, eyebrows raised, eyes wide, small open round mouth, hands raised with palms visible. His cream shirt, blue overalls and BOTH complete legs and boots must be fully solid and intact. Three small angular surprise marks. No broken body or transparent holes in clothes. Image 1 is the damaged sprite to replace, not damage to preserve; image 2 is the accepted shared character/palette reference. Authentic SNES 16-bit pixel art on a strict 48-by-48 logical grid, crisp square pixels enlarged nearest-neighbor, chunky continuous dark-brown outline, broad flat clusters, at most 20 colors, warm oak/cream/denim/sage/terracotta. Straight-on orthographic 2D, one centered isolated vignette with a little margin. BACKGROUND MUST BE ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA COLOR, including gaps between limbs or objects. Do NOT draw a checkerboard or fake transparency. No scene, floor, grass, shadow, text, letters, anti-aliasing, blur, gradients, dithering or noisy tiny details. Semantic clarity and complete silhouettes at 48px are essential.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "높임말[존댓말]을 하다",
+      "slug": "speak_honorific",
+      "file": "sprites/items/speak_honorific.png",
+      "sourceImage": "exec-88e9997c-7847-4aaf-9083-0cedfc4c483d.png",
+      "prompt": "Use case: style-transfer. Create the repaired Hangeul Valley vocabulary sprite for Korean “높임말[존댓말]을 하다”. The complete farmer politely speaking to an older grey-haired person: slight respectful bow, hands joined in front, small cream speech bubble with no letters. Two simple figures standing, both with complete solid clothing and feet. The farmer is visibly respectful, and the older listener attentive. Image 1 is the damaged sprite to replace, not damage to preserve; image 2 is the accepted shared character/palette reference. Authentic SNES 16-bit pixel art on a strict 48-by-48 logical grid, crisp square pixels enlarged nearest-neighbor, chunky continuous dark-brown outline, broad flat clusters, at most 20 colors, warm oak/cream/denim/sage/terracotta. Straight-on orthographic 2D, one centered isolated vignette with a little margin. BACKGROUND MUST BE ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA COLOR, including gaps between limbs or objects. Do NOT draw a checkerboard or fake transparency. No scene, floor, grass, shadow, text, letters, anti-aliasing, blur, gradients, dithering or noisy tiny details. Semantic clarity and complete silhouettes at 48px are essential.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "창피하다",
+      "slug": "feel_embarrassed",
+      "file": "sprites/items/feel_embarrassed.png",
+      "sourceImage": "exec-a0bb4f37-a956-49f7-b91e-2cd1d5e34515.png",
+      "prompt": "Use case: style-transfer. Create the repaired Hangeul Valley vocabulary sprite for Korean “창피하다”. A complete farmer with rosy cheeks and downcast embarrassed eyes, one hand behind his head, shoulders slightly hunched, knees close together. Keep BOTH entire trouser legs and boots opaque and visible; keep the cream sleeves solid. Two tiny warm blush accents, no generic badge. Image 1 is the damaged sprite to replace, not damage to preserve; image 2 is the accepted shared character/palette reference. Authentic SNES 16-bit pixel art on a strict 48-by-48 logical grid, crisp square pixels enlarged nearest-neighbor, chunky continuous dark-brown outline, broad flat clusters, at most 20 colors, warm oak/cream/denim/sage/terracotta. Straight-on orthographic 2D, one centered isolated vignette with a little margin. BACKGROUND MUST BE ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA COLOR, including gaps between limbs or objects. Do NOT draw a checkerboard or fake transparency. No scene, floor, grass, shadow, text, letters, anti-aliasing, blur, gradients, dithering or noisy tiny details. Semantic clarity and complete silhouettes at 48px are essential.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "시작되다",
+      "slug": "to_begin",
+      "file": "sprites/items/to_begin.png",
+      "sourceImage": "exec-f8d47a6a-47f0-4fa9-9807-2b309bdead67.png",
+      "prompt": "Use case: style-transfer. Create the repaired Hangeul Valley vocabulary sprite for Korean “시작되다”. A small oak theatre stage at the instant a performance BEGINS: rich red curtains have just opened outward to reveal one performer taking the first bow under a warm amber stage lamp. The curtain edge suggests opening with two small motion marks. One readable compact prop-vignette; all roof, curtain and platform pixels complete. No building facade, no text. Image 1 is the damaged sprite to replace, not damage to preserve; image 2 is the accepted shared character/palette reference. Authentic SNES 16-bit pixel art on a strict 48-by-48 logical grid, crisp square pixels enlarged nearest-neighbor, chunky continuous dark-brown outline, broad flat clusters, at most 20 colors, warm oak/cream/denim/sage/terracotta. Straight-on orthographic 2D, one centered isolated vignette with a little margin. BACKGROUND MUST BE ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA COLOR, including gaps between limbs or objects. Do NOT draw a checkerboard or fake transparency. No scene, floor, grass, shadow, text, letters, anti-aliasing, blur, gradients, dithering or noisy tiny details. Semantic clarity and complete silhouettes at 48px are essential.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "식당",
+      "slug": "cafeteria",
+      "file": "sprites/items/cafeteria.png",
+      "sourceImage": "exec-d1b1892d-8389-4dac-80e7-1fd498a81b50.png",
+      "prompt": "Use case: style-transfer. Create the repaired Hangeul Valley vocabulary sprite for Korean “식당”. A cozy small Korean cafeteria kiosk seen straight-on: a COMPLETE cream-and-terracotta striped canopy, warm oak counter, a bowl of rice, steaming soup and metal chopsticks clearly visible on a tray. A small bowl-and-spoon pictogram hanging sign, no lettering. All canopy panels, support posts and counter boards solid and intact; no missing pixels. Image 1 is the damaged sprite to replace, not damage to preserve; image 2 is the accepted shared character/palette reference. Authentic SNES 16-bit pixel art on a strict 48-by-48 logical grid, crisp square pixels enlarged nearest-neighbor, chunky continuous dark-brown outline, broad flat clusters, at most 20 colors, warm oak/cream/denim/sage/terracotta. Straight-on orthographic 2D, one centered isolated vignette with a little margin. BACKGROUND MUST BE ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA COLOR, including gaps between limbs or objects. Do NOT draw a checkerboard or fake transparency. No scene, floor, grass, shadow, text, letters, anti-aliasing, blur, gradients, dithering or noisy tiny details. Semantic clarity and complete silhouettes at 48px are essential.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "바나나",
+      "slug": "banana_bunch",
+      "file": "sprites/items/banana_bunch.png",
+      "sourceImage": "exec-a019fed8-fd1e-4a26-a42c-982f03bbe191.png",
+      "prompt": "Use case: style-transfer. Create the repaired Hangeul Valley vocabulary sprite for Korean “바나나”. One small bunch of three curved ripe yellow BANANAS, joined at a short dark brown stem, one banana slightly peeled to expose cream fruit. Each banana has an unmistakable long curved silhouette. No apple, no basket, no other fruit. The input supplies the accepted farm palette and pixel style. Authentic SNES 16-bit pixel art on a strict 48-by-48 logical grid, crisp square pixels enlarged nearest-neighbor, chunky continuous dark-brown outline, broad flat clusters, at most 20 colors, warm oak/cream/denim/sage/terracotta. Straight-on orthographic 2D, one centered isolated vignette with a little margin. BACKGROUND MUST BE ONE PERFECTLY FLAT SOLID #FF00FF MAGENTA COLOR, including gaps between limbs or objects. Do NOT draw a checkerboard or fake transparency. No scene, floor, grass, shadow, text, letters, anti-aliasing, blur, gradients, dithering or noisy tiny details. Semantic clarity and complete silhouettes at 48px are essential.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "걷다",
+      "slug": "walking_farmer",
+      "file": "sprites/items/walking_farmer.png",
+      "sourceImage": "exec-43f02e8f-fe1a-4cde-bb57-dd5954dc4a78.png",
+      "prompt": "Use case: style-transfer. Transform the supplied accepted Hangeul Valley style parent into a distinct vocabulary illustration for Korean “걷다”. The accepted farmer taking an EASY WALK to the right in exact side profile. Front heel touches the ground, rear foot trails with its toes still down, arms swing gently and are almost straight. An upright relaxed torso, calm expression, COMPLETE cream shirt, blue overalls, both legs and brown boots. No bag, no running streaks, no bent sprinting arms, no airborne running pose. The input is the shared pixel-style and warm palette reference; include its farmer identity ONLY if a farmer is requested. Authentic SNES / Stardew 16-bit game sprite on a simple 48 by 48 logical pixel grid, crisp square edges, chunky continuous dark-brown outline, flat clusters and at most 20 colors; warm oak, cream, denim blue, sage and amber palette with subject-required colors. Front-facing orthographic 2D except the explicitly requested walking side profile. Exactly one compact semantic icon, centered with small margins. BACKGROUND: perfectly flat solid #FF00FF MAGENTA, also in gaps inside the subject; reserve this color only for the background. No checkerboard, no fake transparency, no words, no watermark, no ground shadow, no gradients, no blur, no anti-aliasing, no dithering or tiny noisy details. All limbs and outlines complete. The defining meaning must remain visible at 48px high.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "프랑스",
+      "slug": "france_flag",
+      "file": "sprites/items/france_flag.png",
+      "sourceImage": "exec-1db1bcd8-8eff-49d7-a00a-30384d82733b.png",
+      "prompt": "Use case: style-transfer. Transform the supplied accepted Hangeul Valley style parent into a distinct vocabulary illustration for Korean “프랑스”. The national flag of FRANCE on a short oak pole: three clean equal VERTICAL bands, deep BLUE at the pole on the left, CREAM-WHITE in the middle, RED on the right. One gently waving flag; keep the band order unmistakable. No globe, no Eiffel Tower, no lettering, no other country. The input is the shared pixel-style and warm palette reference; include its farmer identity ONLY if a farmer is requested. Authentic SNES / Stardew 16-bit game sprite on a simple 48 by 48 logical pixel grid, crisp square edges, chunky continuous dark-brown outline, flat clusters and at most 20 colors; warm oak, cream, denim blue, sage and amber palette with subject-required colors. Front-facing orthographic 2D except the explicitly requested walking side profile. Exactly one compact semantic icon, centered with small margins. BACKGROUND: perfectly flat solid #FF00FF MAGENTA, also in gaps inside the subject; reserve this color only for the background. No checkerboard, no fake transparency, no words, no watermark, no ground shadow, no gradients, no blur, no anti-aliasing, no dithering or tiny noisy details. All limbs and outlines complete. The defining meaning must remain visible at 48px high.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "파리",
+      "slug": "paris_eiffel_tower",
+      "file": "sprites/items/paris_eiffel_tower.png",
+      "sourceImage": "exec-619342ae-907c-426f-9a38-5ce8ed7e8f47.png",
+      "prompt": "Use case: style-transfer. Transform the supplied accepted Hangeul Valley style parent into a distinct vocabulary illustration for Korean “파리”. A compact, unmistakable EIFFEL TOWER representing PARIS: warm bronze tapering iron tower, broad curved arch between its four feet, two clear horizontal observation platforms and a short antenna at the top. Symmetric front silhouette, only large readable ironwork clusters. No globe, no flag, no city scene or text. The input is the shared pixel-style and warm palette reference; include its farmer identity ONLY if a farmer is requested. Authentic SNES / Stardew 16-bit game sprite on a simple 48 by 48 logical pixel grid, crisp square edges, chunky continuous dark-brown outline, flat clusters and at most 20 colors; warm oak, cream, denim blue, sage and amber palette with subject-required colors. Front-facing orthographic 2D except the explicitly requested walking side profile. Exactly one compact semantic icon, centered with small margins. BACKGROUND: perfectly flat solid #FF00FF MAGENTA, also in gaps inside the subject; reserve this color only for the background. No checkerboard, no fake transparency, no words, no watermark, no ground shadow, no gradients, no blur, no anti-aliasing, no dithering or tiny noisy details. All limbs and outlines complete. The defining meaning must remain visible at 48px high.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "한강",
+      "slug": "han_river",
+      "file": "sprites/items/han_river.png",
+      "sourceImage": "exec-8141629b-a96a-4788-9097-be91c9ad7bd9.png",
+      "prompt": "Use case: style-transfer. Transform the supplied accepted Hangeul Valley style parent into a distinct vocabulary illustration for Korean “한강”. A compact geographical vignette of SEOUL'S HAN RIVER: a broad curving teal-blue river with a cream-and-oak bridge crossing it, green riverbanks and a tiny recognizable Namsan Seoul Tower silhouette on a distant green hill. The RIVER occupies most of the icon, so the word is learned as a river, not a globe or city building. No unrelated decorations, no lettering, no frame. The input is the shared pixel-style and warm palette reference; include its farmer identity ONLY if a farmer is requested. Authentic SNES / Stardew 16-bit game sprite on a simple 48 by 48 logical pixel grid, crisp square edges, chunky continuous dark-brown outline, flat clusters and at most 20 colors; warm oak, cream, denim blue, sage and amber palette with subject-required colors. Front-facing orthographic 2D except the explicitly requested walking side profile. Exactly one compact semantic icon, centered with small margins. BACKGROUND: perfectly flat solid #FF00FF MAGENTA, also in gaps inside the subject; reserve this color only for the background. No checkerboard, no fake transparency, no words, no watermark, no ground shadow, no gradients, no blur, no anti-aliasing, no dithering or tiny noisy details. All limbs and outlines complete. The defining meaning must remain visible at 48px high.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "열차",
+      "slug": "passenger_train",
+      "file": "sprites/items/passenger_train.png",
+      "sourceImage": "exec-e300900d-60f5-4f35-a81d-3c51b7d71308.png",
+      "prompt": "Use case: style-transfer. Transform the supplied accepted Hangeul Valley style parent into a distinct vocabulary illustration for Korean “열차”. An unmistakable PASSENGER TRAIN, seen straight-on from the front: sage-green and cream train body, large dark windshield, two round amber headlights, a central front door, dark wheels on two short silver rails. A complete rail vehicle, not a subway entrance, not a bus. No station, no lettering or logo. The input is the shared pixel-style and warm palette reference; include its farmer identity ONLY if a farmer is requested. Authentic SNES / Stardew 16-bit game sprite on a simple 48 by 48 logical pixel grid, crisp square edges, chunky continuous dark-brown outline, flat clusters and at most 20 colors; warm oak, cream, denim blue, sage and amber palette with subject-required colors. Front-facing orthographic 2D except the explicitly requested walking side profile. Exactly one compact semantic icon, centered with small margins. BACKGROUND: perfectly flat solid #FF00FF MAGENTA, also in gaps inside the subject; reserve this color only for the background. No checkerboard, no fake transparency, no words, no watermark, no ground shadow, no gradients, no blur, no anti-aliasing, no dithering or tiny noisy details. All limbs and outlines complete. The defining meaning must remain visible at 48px high.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "고시원",
+      "slug": "gosiwon_room",
+      "file": "sprites/items/gosiwon_room.png",
+      "sourceImage": "exec-e7cb77af-4e6b-44ac-b5db-9dabfa154f52.png",
+      "prompt": "Use case: style-transfer. Transform the supplied accepted Hangeul Valley style parent into a distinct vocabulary illustration for Korean “고시원”. A tiny GOSIWON study-and-sleep room in a compact front cutaway: one very narrow single bed with sage blanket packed directly beside a small oak study desk, one book and a lamp, a small high window. Show the tight small-room arrangement and the lack of a separate kitchen or lounge. Simple cream interior walls with continuous dark outline. No house facade, no text, no extra objects. The input is the shared pixel-style and warm palette reference; include its farmer identity ONLY if a farmer is requested. Authentic SNES / Stardew 16-bit game sprite on a simple 48 by 48 logical pixel grid, crisp square edges, chunky continuous dark-brown outline, flat clusters and at most 20 colors; warm oak, cream, denim blue, sage and amber palette with subject-required colors. Front-facing orthographic 2D except the explicitly requested walking side profile. Exactly one compact semantic icon, centered with small margins. BACKGROUND: perfectly flat solid #FF00FF MAGENTA, also in gaps inside the subject; reserve this color only for the background. No checkerboard, no fake transparency, no words, no watermark, no ground shadow, no gradients, no blur, no anti-aliasing, no dithering or tiny noisy details. All limbs and outlines complete. The defining meaning must remain visible at 48px high.",
+      "keyMagenta": true
+    },
+    {
+      "ko": "젓다",
+      "slug": "stir_drink",
+      "file": "sprites/items/stir_drink.png",
+      "sourceImage": "exec-96cb4b21-f927-4e0c-a263-1969fe8a98b6.png",
+      "prompt": "Use case: style-transfer. Transform the supplied accepted Hangeul Valley style parent into a distinct vocabulary illustration for Korean “젓다”. A complete hand visibly STIRRING a wooden spoon inside a large cream mug of brown tea. Show the spoon entering the drink, and one small curved motion arrow following the spoon around the inside of the mug. Make hand, spoon and mug large and clear. No decorative jewel, no spoon floating by itself, no text, no tabletop. The input is the shared pixel-style and warm palette reference; include its farmer identity ONLY if a farmer is requested. Authentic SNES / Stardew 16-bit game sprite on a simple 48 by 48 logical pixel grid, crisp square edges, chunky continuous dark-brown outline, flat clusters and at most 20 colors; warm oak, cream, denim blue, sage and amber palette with subject-required colors. Front-facing orthographic 2D except the explicitly requested walking side profile. Exactly one compact semantic icon, centered with small margins. BACKGROUND: perfectly flat solid #FF00FF MAGENTA, also in gaps inside the subject; reserve this color only for the background. No checkerboard, no fake transparency, no words, no watermark, no ground shadow, no gradients, no blur, no anti-aliasing, no dithering or tiny noisy details. All limbs and outlines complete. The defining meaning must remain visible at 48px high.",
+      "keyMagenta": true
+    }
+  ]
+}

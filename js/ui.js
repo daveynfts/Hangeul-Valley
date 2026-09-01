@@ -1679,14 +1679,21 @@ function buildVocabBook() {
   const ko = levelNameKo(lvl);
   vocabSubtitle.textContent = `Level ${lvl.level} – ${levelName(lvl)}${ko ? ` (${ko})` : ''}`;
   const cats = ['all', '⏰ Due', '⚪ New', '🌱 Learning', '🍎 Review', '🌟 Mature', ...new Set(lvl.words.map(wordCategory).filter(Boolean))];
+  const filterScrollTop = catFiltersEl.scrollTop;
   catFiltersEl.innerHTML = '';
   cats.forEach(cc => {
     const b = document.createElement('button');
     b.className = 'cat-filter-btn' + (cc === activeCat ? ' active' : '');
+    b.setAttribute('aria-pressed', String(cc === activeCat));
     b.textContent = cc === 'all' ? '🌐 All' : cc;
-    b.onclick = () => { activeCat = cc; buildVocabBook(); };
+    b.onclick = () => {
+      activeCat = cc;
+      buildVocabBook();
+      $('vocab-grid-wrap').scrollTop = 0;
+    };
     catFiltersEl.appendChild(b);
   });
+  catFiltersEl.scrollTop = filterScrollTop;
   renderVocabCards();
 }
 // ══════ WORD ORIGIN DATA ═════════════════════════════════════════════════════
@@ -1949,9 +1956,16 @@ function showVocabFunFact(word) {
   const exBox = $('vff-fact-example');
   const exSec = $('vff-example-section');
   if (exBox) {
-    const line = word.example ? (word.exampleEn ? `${word.example} — ${word.exampleEn}` : word.example) : '';
-    exBox.textContent = line;
-    if (exSec) exSec.style.display = line ? '' : 'none';
+    const example = String(word.example || '').trim();
+    exBox.textContent = example;
+    const translation = $('vff-example-en');
+    if (translation) translation.textContent = example ? (word.exampleEn || '') : '';
+    const say = $('vff-example-speak');
+    if (say) {
+      say.disabled = !example;
+      say.onclick = example ? () => speakKorean(example, { force: true }) : null;
+    }
+    if (exSec) exSec.style.display = example ? '' : 'none';
   }
   modal.classList.add('visible');
 }
@@ -2440,6 +2454,84 @@ let cassetteTrack = null;      // the <audio> currently playing, whatever screen
 let listenState = null;
 let dictState = null;
 let cassetteMenuIndex = 0;
+
+// The cassette is opened repeatedly, often to continue the same recording. Keep only
+// navigation preferences here — progress and scores already belong to practiceLog and the
+// unified save. A track number and sentence id survive content being reordered; an array
+// index would quietly resume the wrong recording after an edit.
+const CASSETTE_PREFS_KEY = 'hv_cassette_prefs_v2';
+let cassettePrefs = (() => {
+  if (typeof localStorage === 'undefined') return {};
+  try {
+    const value = JSON.parse(localStorage.getItem(CASSETTE_PREFS_KEY) || '{}');
+    return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+  } catch (e) { return {}; }
+})();
+
+function csUnitPrefs(unit) {
+  const key = String(unit || '');
+  if (!key) return {};
+  const row = cassettePrefs[key];
+  return row && typeof row === 'object' && !Array.isArray(row) ? row : {};
+}
+
+function csWritePrefs(unit, patch) {
+  const key = String(unit || '');
+  if (!key) return;
+  cassettePrefs[key] = Object.assign({}, csUnitPrefs(key), patch || {});
+  if (typeof localStorage === 'undefined') return;
+  try { localStorage.setItem(CASSETTE_PREFS_KEY, JSON.stringify(cassettePrefs)); } catch (e) {}
+}
+
+function csSafeRate(rate, fallback) {
+  return [1, 0.75, 0.5].indexOf(Number(rate)) >= 0 ? Number(rate) : (fallback || 1);
+}
+
+function csRememberListen() {
+  const st = listenState, bank = cassetteBank;
+  if (!st || !bank) return;
+  const cur = (bank.tracks || [])[st.i];
+  if (!cur) return;
+  const at = cassetteTrack ? (cassetteTrack.el.currentTime || 0) : (st.at || 0);
+  st.at = at;
+  csWritePrefs(bank.unit, {
+    track: cur.n,
+    listenRate: csSafeRate(st.rate, 1),
+    listenAt: Math.max(0, at),
+    showScript: st.showScript !== false
+  });
+}
+
+function csRememberDictation() {
+  const st = dictState, bank = cassetteBank;
+  if (!st || !bank) return;
+  const it = dictItems()[st.i];
+  if (!it) return;
+  csWritePrefs(bank.unit, { dictationId: it.id, dictationRate: csSafeRate(st.rate, 1) });
+}
+
+function cassetteModeProgress(bank, mode) {
+  const rows = mode === 'listen'
+    ? (bank.tracks || []).map((t) => ({ kind: 'trk', id: t.n }))
+    : (((bank.dictation && bank.dictation.items) || []).map((it) => ({ kind: 'dic', id: it.id })));
+  let done = 0, attempts = 0, ok = 0, of = 0;
+  rows.forEach((row) => {
+    if (typeof practiceEntry !== 'function' || typeof practiceKey !== 'function') return;
+    const e = practiceEntry(practiceKey(row.kind, bank.unit, row.id));
+    if (!e || !e.n) return;
+    done += 1;
+    attempts += e.n || 0;
+    ok += e.ok || 0;
+    of += e.of || 0;
+  });
+  return {
+    done: done,
+    total: rows.length,
+    attempts: attempts,
+    pct: rows.length ? Math.round((done / rows.length) * 100) : 0,
+    accuracy: of > 0 ? Math.round((ok / of) * 100) : null
+  };
+}
 
 function cassetteUrl() {
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-cassette.json';
@@ -2975,7 +3067,7 @@ function openCassette() {
       const n = (bank.tracks || []).length;
       const d = ((bank.dictation && bank.dictation.items) || []).length;
       foot.innerHTML = '<span class="cs-foot-ko">' + vbEsc(bank.unitKo || '') + '</span>'
-        + '<span class="cs-foot-n">' + n + ' TRACKS · ' + d + ' LINES</span>';
+        + '<span class="cs-foot-n">' + n + ' TRACKS · ' + d + ' LINES · 1/2 QUICK START</span>';
     }
     renderCassetteMenu();
     setModalState('cassette-overlay', true);
@@ -2989,8 +3081,10 @@ function closeCassette() {
 }
 
 const CASSETTE_MODES = [
-  { key: 'listen', ko: '듣기', en: 'Play a track straight through, script alongside', run: () => openListen() },
-  { key: 'dictation', ko: '받아쓰기', en: 'Hear one sentence, write it, get it checked', run: () => openDictation() }
+  { key: 'listen', ko: '듣기', label: 'LISTEN', icon: '🎧',
+    en: 'Listen, slow down, hide the script, or loop one difficult phrase.', run: () => openListen() },
+  { key: 'dictation', ko: '받아쓰기', label: 'DICTATION', icon: '✏️',
+    en: 'Write one sentence at a time and compare only the syllables you missed.', run: () => openDictation() }
 ];
 
 function renderCassetteMenu() {
@@ -2998,17 +3092,23 @@ function renderCassetteMenu() {
   if (!box) return;
   box.innerHTML = '';
   CASSETTE_MODES.forEach((m, i) => {
+    const p = cassetteModeProgress(cassetteBank || {}, m.key);
+    const second = p.accuracy !== null
+      ? p.accuracy + '% accuracy'
+      : (p.attempts ? p.attempts + ' sittings' : 'Ready to start');
     const b = document.createElement('button');
     b.type = 'button';
-    b.className = 'desk-mode' + (i === cassetteMenuIndex ? ' focus' : '');
+    b.className = 'cs-mode-card' + (i === cassetteMenuIndex ? ' focus' : '');
     b.setAttribute('data-mode', m.key);
+    b.setAttribute('aria-label', m.ko + ' · ' + m.label + '. ' + p.done + ' of ' + p.total + ' practised.');
     b.innerHTML =
-      '<span class="desk-mode-key">' + (i + 1) + '</span>' +
-      '<span class="desk-mode-icon">' + (m.key === 'listen' ? '🎧' : '✏️') + '</span>' +
-      '<span class="desk-mode-text">' +
-        '<span class="desk-mode-ko">' + vbEsc(m.ko) + '</span>' +
-        '<span class="desk-mode-en">' + vbEsc(m.en) + '</span>' +
-      '</span>';
+      '<span class="cs-mode-top"><span class="cs-mode-icon">' + vbEsc(m.icon) + '</span>' +
+        '<span class="cs-mode-key">' + (i + 1) + '</span></span>' +
+      '<span class="cs-mode-title">' + vbEsc(m.ko) + '<small>' + vbEsc(m.label) + '</small></span>' +
+      '<span class="cs-mode-desc">' + vbEsc(m.en) + '</span>' +
+      '<span class="cs-mode-meta"><span>' + p.done + ' / ' + p.total + ' practised</span>' +
+        '<span>' + vbEsc(second) + '</span></span>' +
+      '<span class="cs-mode-progress" aria-hidden="true"><span style="width:' + p.pct + '%"></span></span>';
     b.onclick = () => runCassetteMode(i);
     box.appendChild(b);
   });
@@ -3031,9 +3131,17 @@ function openListen() {
     // are the book's, not ours.
     const tracks = bank.tracks || [];
     const OPEN_ON = { '2b-unit-10': 4, '2b-unit-11': 14, '2b-unit-13': 34, '2b-unit-14': 44 };
-    const want = OPEN_ON[bank.unit];
+    const pref = csUnitPrefs(bank.unit);
+    const want = pref.track !== undefined ? pref.track : OPEN_ON[bank.unit];
     const start = tracks.findIndex((t) => t.n === want);
-    listenState = { i: start >= 0 ? start : 0, rate: 1, loop: false, a: null, b: null, at: 0 };
+    const i = start >= 0 ? start : 0;
+    const cur = tracks[i];
+    const savedAt = Number(pref.listenAt) || 0;
+    const at = cur && savedAt > 0 && savedAt < Math.max(0, (cur.dur || 0) - 0.2) ? savedAt : 0;
+    listenState = {
+      i: i, rate: csSafeRate(pref.listenRate, 1), loop: false,
+      a: null, b: null, at: at, counted: false, query: '', showScript: pref.showScript !== false
+    };
     renderListen();
     setModalState('listen-overlay', true);
   });
@@ -3041,6 +3149,7 @@ function openListen() {
 
 function closeListen() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  csRememberListen();
   csStop();
   listenState = null;
   setModalState('listen-overlay', false);
@@ -3049,6 +3158,8 @@ function closeListen() {
 
 function listenPick(i) {
   if (!listenState) return;
+  if (cassetteTrack) listenState.at = csHeadTime();
+  csRememberListen();
   csStop();
   listenState.i = i;
   // A loop belongs to the track it was drawn on. Carrying 4.2-6.8s across to a 13-second
@@ -3056,6 +3167,8 @@ function listenPick(i) {
   listenState.a = null;
   listenState.b = null;
   listenState.at = 0;
+  listenState.counted = false;
+  csRememberListen();
   renderListen();
 }
 
@@ -3064,19 +3177,39 @@ function listenToggle() {
   if (!bank || !st) return;
   const t = (bank.tracks || [])[st.i];
   if (!t) return;
-  if (csIsPlaying(t.src)) { st.at = csHeadTime(); csStop(); return; }
+  if (csIsPlaying(t.src)) { st.at = csHeadTime(); csRememberListen(); csStop(); return; }
   // Resumes where it stopped rather than from the top. csStop is a hard stop — one player
   // for every cassette screen is the invariant — so the position is remembered here and
   // handed back in, which is the same thing from the listener's side.
   const range = csRange(st.a, st.b, csWaveDur());
   const at = (st.at > 0 && (!range || st.at < range.b)) ? st.at : (range ? range.a : 0);
-  csPlay(t.src, st.rate, null, { loop: st.loop && !range, startAt: at });
+  csPlay(t.src, st.rate, () => {
+    if (!listenState) return;
+    listenState.at = 0;
+    listenState.counted = false;
+    csRememberListen();
+    renderListen();
+  }, { loop: st.loop && !range, startAt: at });
 }
 
 function listenRate(r) {
   if (!listenState) return;
   listenState.rate = r;
   if (cassetteTrack) cassetteTrack.el.playbackRate = r;
+  csRememberListen();
+  renderListen();
+}
+
+function listenFilter(value) {
+  if (!listenState) return;
+  listenState.query = String(value || '').trim().toLowerCase();
+  renderListen();
+}
+
+function listenToggleScript() {
+  if (!listenState) return;
+  listenState.showScript = !listenState.showScript;
+  csRememberListen();
   renderListen();
 }
 
@@ -3154,14 +3287,30 @@ function renderListen() {
   if (!bank || !st) return;
   const tracks = bank.tracks || [];
   const cur = tracks[st.i] || tracks[0];
+  if (!cur) return;
+
+  const heading = $('listen-title');
+  if (heading) heading.textContent = (bank.titleKo || '카세트') + ' · 듣기';
+  const context = $('listen-context');
+  if (context) context.textContent = (bank.unitKo || '') + ' · 이어서 듣는 위치와 속도를 자동으로 기억합니다';
+
+  const query = String(st.query || '').toLowerCase();
+  const visible = tracks.map((t, i) => ({ t: t, i: i })).filter((row) => {
+    if (!query) return true;
+    const hay = [row.t.n, row.t.sec, row.t.secEn].map((v) => String(v || '').toLowerCase()).join(' ');
+    return hay.indexOf(query) >= 0;
+  });
 
   const list = $('listen-tracks');
   if (list) {
     list.innerHTML = '';
-    tracks.forEach((t, i) => {
+    visible.forEach((row) => {
+      const t = row.t, i = row.i;
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'cs-track' + (i === st.i ? ' on' : '');
+      b.setAttribute('data-track-index', i);
+      b.setAttribute('aria-pressed', i === st.i ? 'true' : 'false');
       b.innerHTML =
         '<span class="cs-tn">' + t.n + '</span>' +
         '<span class="cs-tt"><span class="cs-tko">' + vbEsc(t.sec) + '</span>' +
@@ -3171,10 +3320,25 @@ function renderListen() {
       b.onclick = () => listenPick(i);
       list.appendChild(b);
     });
+    if (!visible.length) {
+      const empty = document.createElement('div');
+      empty.className = 'prac-empty';
+      empty.textContent = '검색 결과가 없습니다 · No matching track';
+      list.appendChild(empty);
+    }
   }
+
+  const filter = $('listen-search');
+  if (filter && filter.value !== (st.query || '')) filter.value = st.query || '';
+  const trackCount = $('listen-track-count');
+  if (trackCount) trackCount.textContent = visible.length + ' / ' + tracks.length;
 
   const nm = $('listen-now');
   if (nm) nm.textContent = cur.sec;
+  const nowEn = $('listen-now-en');
+  if (nowEn) nowEn.textContent = cur.secEn || '';
+  const nowKicker = $('listen-now-kicker');
+  if (nowKicker) nowKicker.textContent = 'TRK ' + cur.n + ' · ' + (st.i + 1) + ' / ' + tracks.length;
   const play = $('listen-play');
   if (play) play.setAttribute('data-src', cur.src);
   document.querySelectorAll('#listen-rates .cs-rate').forEach((b) => {
@@ -3199,7 +3363,7 @@ function renderListen() {
     info.classList.toggle('on', !!range);
     // csWaveLabel also reports WAVEFORM… / NO WAVEFORM, which is half the point: a strip
     // still decoding says so in words rather than looking like a waveform that came out flat.
-    info.textContent = csWaveLabel('listen-wave') + (range || halfMark ? '' : ' · A B L R C');
+    info.textContent = csWaveLabel('listen-wave') + (range || halfMark ? '' : ' · DRAG A PHRASE TO LOOP');
   }
   csWaveBind('listen-wave');
   csPaintWave('listen-wave');
@@ -3210,17 +3374,27 @@ function renderListen() {
   const pane = $('listen-script');
   if (pane) {
     if (Array.isArray(cur.lines)) {
-      pane.className = 'cs-script';
+      pane.className = 'cs-script' + (st.showScript ? '' : ' is-hidden');
       pane.innerHTML = cur.lines.map((l) =>
         '<div class="cs-line"><span class="cs-who">' + vbEsc(l.who) + '</span>' +
         '<span class="cs-ko">' + vbEsc(l.ko) + '</span></div>').join('');
     } else {
       // Said rather than left blank. The book prints this track's comprehension
       // questions and not its script, so an empty pane would read as a bug.
-      pane.className = 'cs-script empty';
+      pane.className = 'cs-script empty' + (st.showScript ? '' : ' is-hidden');
       pane.innerHTML = '<div class="cs-none"><span class="cs-none-ko">대본이 없는 트랙</span>'
         + '<span class="cs-none-en">' + vbEsc(cur.noteEn || '') + '</span></div>';
     }
+    if (!st.showScript) {
+      pane.innerHTML += '<div class="cs-script-cover"><b>대본을 가렸습니다.</b><br>'
+        + '먼저 소리에 집중하고, 막히면 위의 “대본 보기”를 누르세요.<br>'
+        + '<span>Transcript hidden for a listening-first pass.</span></div>';
+    }
+  }
+  const scriptToggle = $('listen-script-toggle');
+  if (scriptToggle) {
+    scriptToggle.textContent = st.showScript ? '대본 숨기기' : '대본 보기';
+    scriptToggle.setAttribute('aria-pressed', st.showScript ? 'false' : 'true');
   }
   csPaintPlaying();
 }
@@ -3266,7 +3440,10 @@ function openDictation() {
     if (!bank) return;
     const items = (bank.dictation && bank.dictation.items) || [];
     if (!items.length) return;
-    dictState = { i: 0, typed: '', checked: false, rate: 1, right: 0, done: 0,
+    const pref = csUnitPrefs(bank.unit);
+    const saved = items.findIndex((it) => it.id === pref.dictationId);
+    dictState = { i: saved >= 0 ? saved : 0, typed: '', checked: false,
+      rate: csSafeRate(pref.dictationRate, 1), right: 0, done: 0,
       loop: false, a: null, b: null, at: 0 };
     renderDictation();
     setModalState('dictation-overlay', true);
@@ -3277,6 +3454,7 @@ function openDictation() {
 
 function closeDictation() {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('click');
+  csRememberDictation();
   csStop();
   dictState = null;
   setModalState('dictation-overlay', false);
@@ -3293,6 +3471,7 @@ function dictPlay(rate) {
   const it = dictItems()[st.i];
   if (!it || !it.audio) return;
   if (typeof rate === 'number') st.rate = rate;
+  csRememberDictation();
   // ↻ 다시 has always meant "from the top", so a bare dictPlay() restarts. A marked stretch
   // starts at its own beginning instead, because that is the thing being replayed.
   const range = csRange(st.a, st.b, dictWaveDur());
@@ -3424,11 +3603,13 @@ function dictCheck() {
   renderDictation();
 }
 
-function dictNext() {
+function dictMove(by) {
   const st = dictState;
   if (!st) return;
   csStop();
-  st.i = (st.i + 1) % dictItems().length;
+  const rows = dictItems();
+  if (!rows.length) return;
+  st.i = (st.i + by + rows.length) % rows.length;
   st.typed = '';
   st.checked = false;
   // A marked stretch belongs to the clip it was drawn on, the same as on 듣기: 1.2-2.4s of
@@ -3436,10 +3617,14 @@ function dictNext() {
   st.a = null;
   st.b = null;
   st.at = 0;
+  csRememberDictation();
   renderDictation();
   const el = $('dict-input');
   if (el) el.focus();
 }
+
+function dictNext() { dictMove(1); }
+function dictPrev() { dictMove(-1); }
 
 function renderDictationRates() {
   const st = dictState;
@@ -3467,6 +3652,10 @@ function renderDictation() {
     dlog.textContent = (e && e.n) ? '×' + e.n + (e.of ? ' · ' + Math.round((e.ok / e.of) * 100) + '%' : '') : '';
   }
   if (pos) pos.textContent = (st.i + 1) + ' / ' + items.length + (st.done ? '  ·  ' + st.right + '/' + st.done : '');
+  const progress = $('dict-progress-fill');
+  if (progress) progress.style.width = Math.round(((st.i + 1) / items.length) * 100) + '%';
+  const title = $('dict-title');
+  if (title) title.textContent = (cassetteBank.titleKo || '카세트') + ' · 받아쓰기';
 
   const tags = $('dict-tags');
   if (tags) {
@@ -4188,6 +4377,44 @@ function wbSayButton(text, clip) {
   return b;
 }
 
+// TOPIK explanations are deliberately thorough, but a thorough answer should not arrive as
+// one uninterrupted paragraph. The bank already separates its reasoning with blank lines:
+// the first paragraph names the hinge to notice, and the remaining paragraphs walk through
+// the readings or distractors. Preserve every word while revealing it in that order.
+function wbWhyParagraphs(value) {
+  return String(value || '').split(/\r?\n\s*\r?\n/).map((p) => p.trim()).filter(Boolean);
+}
+
+function wbTopikWhyHtml(ex, item, view) {
+  const parts = wbWhyParagraphs(item.why);
+  const lead = parts.shift() || '';
+  const detail = parts;
+  const state = view.ok ? '정답 · CORRECT' : '다시 보기 · REVIEW';
+  const detailHtml = detail.length
+    ? '<details class="wb-analysis">' +
+        '<summary><span>선택지 비교 · FULL REASONING</span><b>' + detail.length + '단계</b></summary>' +
+        '<div class="wb-analysis-list">' + detail.map((p, k) =>
+          '<div class="wb-analysis-step"><span>' + String(k + 1).padStart(2, '0') + '</span>' +
+          '<p>' + vbEsc(p) + '</p></div>').join('') + '</div>' +
+      '</details>'
+    : '';
+  return '<article class="wb-why wb-why-topik ' + (view.ok ? 'ok' : 'bad') + '">' +
+    '<div class="wb-topik-status"><span>' + state + '</span><b>정답 · ANSWER</b></div>' +
+    '<div class="wb-why-head">' + item.n + ') ' +
+      wbLineHtml(ex, item, wbAnswerText(view.correct), {
+        plain: true, own: view.own, second: view.correct2 ? wbAnswerText(view.correct2) : ''
+      }) + '</div>' +
+    (view.ok ? '' : '<div class="wb-why-yours">내 답 · YOU PUT: ' + vbEsc(view.yours) + '</div>') +
+    '<div class="wb-topik-meaning"><span>뜻 · MEANING</span><p>' + vbEsc(item.en || '') + '</p></div>' +
+    '<div class="wb-learn-grid">' +
+      (lead ? '<section class="wb-learn-card wb-learn-clue"><span>01 · 핵심 단서 · WHAT TO NOTICE</span>' +
+        '<p>' + vbEsc(lead) + '</p></section>' : '') +
+      (item.grammar ? '<section class="wb-learn-card wb-learn-rule"><span>02 · 문법 포인트 · RULE</span>' +
+        '<p>' + vbEsc(item.grammar) + '</p></section>' : '') +
+    '</div>' + detailHtml +
+  '</article>';
+}
+
 function renderWorkbook() {
   const st = workbookState;
   if (!st) return;
@@ -4475,6 +4702,15 @@ function renderWorkbook() {
         // learner can see which half went wrong rather than just that one did.
         const yours = (two ? [chosen, chosen2] : [chosen])
           .map(c => (c ? wbAnswerText(c) : '—')).join(' / ');
+        if (st.bank && st.bank.id === 'topik2-questions') {
+          return wbTopikWhyHtml(ex, item, {
+            ok: ok,
+            correct: correct,
+            correct2: correct2,
+            yours: yours,
+            own: st.own && st.own[i]
+          });
+        }
         return '<div class="wb-why' + (ok ? ' ok' : ' bad') + '">' +
           '<div class="wb-why-head">' + item.n + ') ' + (ok ? '✓' : '✕') + ' ' +
             wbLineHtml(ex, item, wbAnswerText(correct),
@@ -4757,6 +4993,10 @@ if (typeof window !== 'undefined') {
   window.listenClearAB = listenClearAB;
   window.listenReplayAB = listenReplayAB;
   window.listenSeek = listenSeek;
+  window.listenNudge = listenNudge;
+  window.listenStep = listenStep;
+  window.listenFilter = listenFilter;
+  window.listenToggleScript = listenToggleScript;
   window.openDictation = openDictation;
   window.closeDictation = closeDictation;
   window.dictPlay = dictPlay;
@@ -4768,6 +5008,7 @@ if (typeof window !== 'undefined') {
   window.dictSeek = dictSeek;
   window.dictCheck = dictCheck;
   window.dictNext = dictNext;
+  window.dictPrev = dictPrev;
   window.dictAlign = dictAlign;
   window.openDeskQuiz = openDeskQuiz;
   window.closeDeskQuiz = closeDeskQuiz;
@@ -4871,7 +5112,7 @@ function renderVocabCards() {
     div.setAttribute('aria-label', `${w.ko}, ${w.en}. ${mBadgeLabel}${mBadgeSuffix}. Open word details`);
     div.innerHTML = `
       <button type="button" class="speak-btn vc-speak tts-only" title="Hear this word" aria-label="Hear ${vbEsc(w.ko)}">🔊</button>
-      <span class="vc-emoji">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(w.ko, w.hint || '📝', 40) : (w.hint || '📝')}</span>
+      <span class="vc-emoji">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(w.ko, w.hint || '📝', 48) : (w.hint || '📝')}</span>
       <span class="vc-ko${vbKoSizeClass(w.ko)}" lang="ko">${vbEsc(w.ko)}</span>
       <span class="vc-en">${vbEsc(w.en)}</span>
       <span class="vc-meta">
@@ -4899,7 +5140,10 @@ vocabBtn.addEventListener('click', () => vocabOverlay.classList.contains('visibl
   ? vocabOverlay.classList.remove('visible')
   : (buildVocabBook(), vocabOverlay.classList.add('visible')));
 $('vocab-close-btn').addEventListener('click', () => vocabOverlay.classList.remove('visible'));
-vocabSearch.addEventListener('input', renderVocabCards);
+vocabSearch.addEventListener('input', () => {
+  renderVocabCards();
+  $('vocab-grid-wrap').scrollTop = 0;
+});
 hudMenuBtn.addEventListener('click', () => { closeQuiz(); showLevelSelect(); });
 
 // Legacy overlays (now rarely triggered, economy is main flow)

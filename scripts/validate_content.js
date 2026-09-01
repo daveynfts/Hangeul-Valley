@@ -1466,11 +1466,39 @@ const overlayIds = [
     .map((wd) => wd.ko);
   check('and no entry lists its own headword among its forms',
     selfForm.length === 0, selfForm.slice(0, 4).join(', '));
-  // Every word here has to come from a question. The list started with a field of 경제
+  // Words come from a paper or an explicit learner-supplied list. The list started with a field of 경제
   // vocabulary I wrote out myself — 매출, 불황, 유통, twenty-nine words in all — which read as
   // useful and was not: a personal study room fills up from the papers that go through it,
   // and anything else is a guess about what the exam will ask. The check is cheap and the
-  // rule is the point, so it is enforced rather than remembered.
+  // rule is the point, so it is enforced rather than remembered. User lists are recorded
+  // separately; never invent a paper or put unrelated vocabulary into an explanation.
+  const requestedWords = new Set();
+  const sourceIds = new Set();
+  const sourceProblems = [];
+  const sources = world.vocabularySources === undefined ? [] : world.vocabularySources;
+  if (!Array.isArray(sources)) sourceProblems.push('vocabularySources must be an array');
+  (Array.isArray(sources) ? sources : []).forEach((source) => {
+    if (!source || source.type !== 'user-list' || !source.id || !source.titleEn
+      || !source.note || !/^\d{4}-\d{2}-\d{2}$/.test(source.date || '')) {
+      sourceProblems.push('a user list needs its id, date, title and source note');
+      return;
+    }
+    if (sourceIds.has(source.id)) sourceProblems.push('duplicate source: ' + source.id);
+    sourceIds.add(source.id);
+    if (!Array.isArray(source.words) || !source.words.length) {
+      sourceProblems.push(source.id + ': needs headwords'); return;
+    }
+    const inList = new Set();
+    source.words.forEach((ko) => {
+      if (typeof ko !== 'string' || !kos.includes(ko) || inList.has(ko)) {
+        sourceProblems.push(source.id + ': missing or repeated headword ' + ko); return;
+      }
+      inList.add(ko);
+      requestedWords.add(ko);
+    });
+  });
+  check('explicit learner vocabulary lists name real, unique headwords and their source',
+    sourceProblems.length === 0, sourceProblems.slice(0, 5).join(', '));
   const bankRelForWords = path.join('worlds', 'topik2-questions.json');
   if (fs.existsSync(path.join(ROOT, bankRelForWords))) {
     let qbank = null;
@@ -1496,11 +1524,12 @@ const overlayIds = [
       });
       const corpus = seen2.filter(Boolean).map((t) => String(t).normalize('NFC')).join(' | ');
       const rootless = ww.filter((wd) => {
+        if (requestedWords.has(wd.ko)) return false;
         const keys = [String(wd.ko).normalize('NFC')]
           .concat(Array.isArray(wd.forms) ? wd.forms.map((f) => String(f).normalize('NFC')) : []);
         return !keys.some((k) => k && corpus.indexOf(k) >= 0);
       }).map((wd) => wd.ko);
-      check('every exam-world word traces back to a question, in the shape the question uses',
+      check('every exam-world word traces to a question or an explicit learner vocabulary list',
         rootless.length === 0, rootless.slice(0, 8).join(', '));
     }
   }
@@ -1608,8 +1637,11 @@ const overlayIds = [
     });
     check('no two exam-world entries claim the same hover key',
       clash.length === 0, clash.slice(0, 6).join(', '));
-    const short = words.filter((wd) => keysOf(wd).length === 0).map((wd) => wd.ko);
-    check('and every entry has at least one key long enough to be indexed',
+    // A learner may request a one-syllable word such as 발 for the farm. It does
+    // not need a fabricated particle form merely to be indexed in an exam paper.
+    const short = words.filter((wd) => !requestedWords.has(wd.ko) && keysOf(wd).length === 0)
+      .map((wd) => wd.ko);
+    check('and every paper-derived entry has a key long enough to be indexed',
       short.length === 0, short.slice(0, 6).join(', '));
     const corpus = [];
     (qbank.exercises || []).forEach((ex) => {
@@ -1632,9 +1664,12 @@ const overlayIds = [
     let m;
     while ((m = re.exec(text))) winners.add(m[0]);
     const shadowed = words
+      // Supplemental words need a paper hover only if an indexable key actually
+      // occurs there. Keep them in owner/re so they cannot hide an existing gloss.
+      .filter((wd) => !requestedWords.has(wd.ko) || keysOf(wd).some((k) => text.includes(k)))
       .filter((wd) => !keysOf(wd).some((k) => owner.get(k) === wd.ko && winners.has(k)))
       .map((wd) => wd.ko);
-    check('every exam-world word wins a position, rather than sitting inside a longer key',
+    check('every word used by the exam paper wins a hover position',
       shadowed.length === 0, shadowed.slice(0, 8).join(', '));
     // A gloss that fires inside a different word. Korean does not space within a word, so a
     // key landing with Hangul on both sides is underlining part of something else — '전에'

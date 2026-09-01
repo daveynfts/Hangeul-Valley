@@ -2,6 +2,7 @@
  * Pre-render Korean vocab as SunHi MP3s for the CDN.
  *
  *   npm run tts:generate
+ *   npm run tts:generate -- --world topik-2
  *   node scripts/generate_tts.js --force
  *
  * Missing clips only, unless --force. Publish calls this before R2 upload.
@@ -20,12 +21,16 @@ const CONCURRENCY = 4;
 const RETRIES = 4;
 
 function parseArgs(argv) {
-  const flags = { force: false, limit: 0 };
+  const flags = { force: false, limit: 0, world: '' };
   const list = Array.isArray(argv) ? argv : [];
   for (let i = 0; i < list.length; i++) {
     const a = list[i];
     if (a === '--force') flags.force = true;
     else if (a === '--limit') flags.limit = Math.max(0, Number(list[++i]) || 0);
+    else if (a === '--world') {
+      flags.world = list[++i];
+      if (!flags.world || flags.world.startsWith('--')) throw new Error('--world needs a world id');
+    }
     else throw new Error('Unknown flag: ' + a);
   }
   return flags;
@@ -89,7 +94,7 @@ async function generateTtsClips(argv, root, opts) {
   const dir = path.join(base, TTS_DIR_REL);
   fs.mkdirSync(dir, { recursive: true });
 
-  let phrases = collectTtsPhrases(base);
+  let phrases = collectTtsPhrases(base, flags.world);
   if (flags.limit) phrases = phrases.slice(0, flags.limit);
 
   let onCdn = 0;

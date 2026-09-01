@@ -46,12 +46,12 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "해열제", slug: 'thermometer', folder: 'items', nameEn: "Thermometer", family: 'health' },
   { ko: "낫다", slug: 'teal_gem', folder: 'items', nameEn: "Thermometer", family: 'health' },
   { ko: "이비인후과", slug: 'human_ear', folder: 'items', nameEn: "Ear", family: 'health' },
-  { ko: "설탕", slug: 'gold_starburst', folder: 'items', nameEn: "Sugar bowl", family: 'ingredient' },
+  { ko: "설탕", slug: 'sugar_bowl', folder: 'items', nameEn: "Sugar bowl", family: 'ingredient' },
   { ko: "정형외과", slug: 'femur_bone', folder: 'items', nameEn: "Bone", family: 'health' },
-  { ko: "젓다", slug: 'teal_gem', folder: 'items', nameEn: "Wooden spoon", family: 'action' },
+  { ko: "젓다", slug: 'stir_drink', folder: 'items', nameEn: "Stirring a drink with a spoon", family: 'action' },
   { ko: "처방", slug: 'prescription_slip', folder: 'items', nameEn: "Prescription", family: 'health' },
   { ko: "주의사항", slug: 'prescription_slip', folder: 'items', nameEn: "Prescription", family: 'health' },
-  { ko: "소금", slug: 'gold_spiral', folder: 'items', nameEn: "Salt shaker", family: 'ingredient' },
+  { ko: "소금", slug: 'salt_shaker', folder: 'items', nameEn: "Salt shaker", family: 'ingredient' },
   { ko: "싱겁다", slug: 'chevron_badge', folder: 'items', nameEn: "Salt shaker", family: 'ingredient' },
   { ko: "입맛이 없다", slug: 'empty_plate', folder: 'items', nameEn: "Empty plate", family: 'health' },
   { ko: "소화가 안되다", slug: 'empty_plate', folder: 'items', nameEn: "Empty plate", family: 'health' },
@@ -108,7 +108,7 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "수영장", slug: 'water_faucet', folder: 'items', nameEn: "Water faucet", family: 'place' },
   { ko: "운동", slug: 'running_shoe', folder: 'items', nameEn: "Running shoe", family: 'people' },
   { ko: "운동을 하다", slug: 'running_shoe', folder: 'items', nameEn: "Running shoe", family: 'people' },
-  { ko: "달리다", slug: 'running_shoe', folder: 'items', nameEn: "Running shoe", family: 'people' },
+  { ko: "달리다", slug: 'running_farmer', folder: 'items', nameEn: "A farmer running", family: 'action' },
   { ko: "달리기", slug: 'running_shoe', folder: 'items', nameEn: "Running shoe", family: 'people' },
   { ko: "마라톤", slug: 'running_shoe', folder: 'items', nameEn: "Running shoe", family: 'people' },
   { ko: "건강", slug: 'running_shoe', folder: 'items', nameEn: "Running shoe", family: 'people' },
@@ -181,7 +181,7 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "자꾸", slug: 'hourglass_ornament', folder: 'items', nameEn: "repeatedly, again and again", family: 'fill' },
   { ko: "화해하다", slug: 'gold_spiral', folder: 'items', nameEn: "to make up, reconcile", family: 'fill' },
   { ko: "싸우다", slug: 'gold_spiral', folder: 'items', nameEn: "to quarrel, fight", family: 'fill' },
-  { ko: "가볍다", slug: 'gold_starburst', folder: 'items', nameEn: "to be light", family: 'fill' },
+  { ko: "가볍다", slug: 'light_feather', folder: 'items', nameEn: "Light feather", family: 'household' },
   { ko: "어떻게 오셨어요?", slug: 'running_shoe', folder: 'items', nameEn: "What brings you here?", family: 'fill' },
   { ko: "언제부터", slug: 'wall_calendar', folder: 'items', nameEn: "since when", family: 'fill' },
   { ko: "이틀", slug: 'wall_calendar', folder: 'items', nameEn: "two days", family: 'fill' },
@@ -229,11 +229,11 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "한 번에", slug: 'running_shoe', folder: 'items', nameEn: "all at once, in one go", family: 'fill' },
   { ko: "외출하다", slug: 'go_outside', folder: 'items', nameEn: "to go out (leave the house)", family: 'fill' },
   { ko: "돌아오다", slug: 'go_outside', folder: 'items', nameEn: "to come back", family: 'fill' },
-  { ko: "바로", slug: 'running_shoe', folder: 'items', nameEn: "right away", family: 'fill' },
+  { ko: "바로", slug: 'act_immediately', folder: 'items', nameEn: "Responding immediately to a bell", family: 'action' },
   { ko: "예방하다", slug: 'detached_house', folder: 'items', nameEn: "to prevent", family: 'fill' },
   { ko: "꼭", slug: 'running_shoe', folder: 'items', nameEn: "without fail, be sure to", family: 'fill' },
   { ko: "하숙집", slug: 'dormitory', folder: 'items', nameEn: "boarding house (room with meals)", family: 'fill' },
-  { ko: "고시원", slug: 'studio_oneroom', folder: 'items', nameEn: "gosiwon — a tiny single room", family: 'fill' },
+  { ko: "고시원", slug: 'gosiwon_room', folder: 'items', nameEn: "A tiny study-and-sleep room", family: 'place' },
   { ko: "1인실", slug: 'studio_oneroom', folder: 'items', nameEn: "single room (for one)", family: 'fill' },
   { ko: "방이 넓다", slug: 'detached_house', folder: 'items', nameEn: "the room is spacious", family: 'fill' },
   { ko: "방이 좁다", slug: 'detached_house', folder: 'items', nameEn: "the room is cramped", family: 'fill' },
@@ -268,7 +268,7 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "공기", slug: 'oak_rings', folder: 'items', nameEn: "air", family: 'fill' },
   { ko: "마침", slug: 'hourglass_ornament', folder: 'items', nameEn: "as it happens, just then", family: 'fill' },
   { ko: "회사를 옮기다", slug: 'chevron_badge', folder: 'items', nameEn: "to move to another company", family: 'fill' },
-  { ko: "편하다", slug: 'gold_spiral', folder: 'items', nameEn: "to be comfortable, easy", family: 'fill' },
+  { ko: "편하다", slug: 'comfortable_farmer', folder: 'items', nameEn: "Feeling comfortable in a cushioned chair", family: 'action' },
   { ko: "불편하다", slug: 'gold_spiral', folder: 'items', nameEn: "to be inconvenient", family: 'fill' },
   { ko: "힘들다", slug: 'hourglass_ornament', folder: 'items', nameEn: "to be hard going", family: 'fill' },
   { ko: "연락하다", slug: 'gold_starburst', folder: 'items', nameEn: "to get in touch", family: 'fill' },
@@ -342,8 +342,8 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "-기로 하다", slug: 'oak_rings', folder: 'items', nameEn: "to arrange to, to decide to", family: 'fill' },
   { ko: "-려고 하다", slug: 'oak_rings', folder: 'items', nameEn: "to be planning to", family: 'fill' },
   { ko: "곳", slug: 'kinds_types', folder: 'items', nameEn: "a place", family: 'fill' },
-  { ko: "프랑스", slug: 'desk_globe', folder: 'items', nameEn: "France", family: 'fill' },
-  { ko: "파리", slug: 'desk_globe', folder: 'items', nameEn: "Paris", family: 'fill' },
+  { ko: "프랑스", slug: 'france_flag', folder: 'items', nameEn: "France", family: 'place' },
+  { ko: "파리", slug: 'paris_eiffel_tower', folder: 'items', nameEn: "The Eiffel Tower in Paris", family: 'place' },
   { ko: "거의", slug: 'kinds_types', folder: 'items', nameEn: "almost, hardly any", family: 'fill' },
   { ko: "예전에", slug: 'kinds_types', folder: 'items', nameEn: "in the old days", family: 'fill' },
   { ko: "근처", slug: 'kinds_types', folder: 'items', nameEn: "nearby", family: 'fill' },
@@ -357,7 +357,7 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "N에 대한", slug: 'cream_waves', folder: 'items', nameEn: "about N, concerning N", family: 'fill' },
   { ko: "N(이)나", slug: 'knot_tile', folder: 'items', nameEn: "N or something like it", family: 'fill' },
   { ko: "강남", slug: 'desk_globe', folder: 'items', nameEn: "Gangnam, south of the river", family: 'fill' },
-  { ko: "한강", slug: 'desk_globe', folder: 'items', nameEn: "the Han River", family: 'fill' },
+  { ko: "한강", slug: 'han_river', folder: 'items', nameEn: "The Han River and a bridge in Seoul", family: 'place' },
   { ko: "1970년대", slug: 'light_bulb', folder: 'items', nameEn: "the 1970s — N년대 is the decade", family: 'fill' },
   { ko: "수도", slug: 'desk_globe', folder: 'items', nameEn: "a capital city", family: 'fill' },
   { ko: "과거", slug: 'light_bulb', folder: 'items', nameEn: "the past", family: 'fill' },
@@ -519,7 +519,7 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "N에 대해서", slug: 'chevron_badge', folder: 'items', nameEn: "about N", family: 'fill' },
   { ko: "-(으)ㄴ 적이 있다", slug: 'teal_gem', folder: 'items', nameEn: "to have ever done it", family: 'fill' },
   { ko: "-(으)ㄹ 수 있다", slug: 'teal_gem', folder: 'items', nameEn: "can, might", family: 'fill' },
-  { ko: "바나나", slug: 'farm_apple', folder: 'items', nameEn: "a banana", family: 'fill' },
+  { ko: "바나나", slug: 'banana_bunch', folder: 'items', nameEn: "A bunch of ripe bananas", family: 'ingredient' },
   { ko: "꿀잠", slug: 'crescent_moon', folder: 'items', nameEn: "honey sleep — a deep, sweet night. No honey involved.", family: 'fill' },
   { ko: "잠", slug: 'white_pillow', folder: 'items', nameEn: "sleep", family: 'fill' },
   { ko: "자다", slug: 'white_pillow', folder: 'items', nameEn: "to sleep", family: 'fill' },
@@ -541,7 +541,7 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "서점", slug: 'hardcover_book', folder: 'items', nameEn: "a bookshop", family: 'fill' },
   { ko: "서점가", slug: 'hardcover_book', folder: 'items', nameEn: "the book trade — 가 as in 대학가, a whole scene rather than one ", family: 'fill' },
   { ko: "책", slug: 'hardcover_book', folder: 'items', nameEn: "a book", family: 'fill' },
-  { ko: "열차", slug: 'subway_station', folder: 'items', nameEn: "a train", family: 'fill' },
+  { ko: "열차", slug: 'passenger_train', folder: 'items', nameEn: "A passenger train", family: 'transport' },
   { ko: "행복 열차", slug: 'subway_station', folder: 'items', nameEn: "'Happiness Train' — the name of the book, which is why it is", family: 'fill' },
   { ko: "읽다", slug: 'hardcover_book', folder: 'items', nameEn: "to read", family: 'fill' },
   { ko: "큰 인기를 얻다", slug: 'newspaper', folder: 'items', nameEn: "to be enjoying great popularity — 인기 is popularity, 얻다 to ob", family: 'fill' },
@@ -599,7 +599,7 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "도서관", slug: 'hardcover_book', folder: 'items', nameEn: "a library", family: 'fill' },
   { ko: "밤새도록", slug: 'crescent_moon', folder: 'items', nameEn: "all night long", family: 'fill' },
   { ko: "불을 켜다", slug: 'light_bulb', folder: 'items', nameEn: "to switch a light on", family: 'fill' },
-  { ko: "켜다", slug: 'light_bulb', folder: 'items', nameEn: "to switch on", family: 'fill' },
+  { ko: "켜다", slug: 'switch_on', folder: 'items', nameEn: "Switching the light on", family: 'action' },
   { ko: "-아/어 놓다", slug: 'knot_tile', folder: 'items', nameEn: "do it and leave it that way", family: 'fill' },
   { ko: "-아/어 두다", slug: 'hourglass_ornament', folder: 'items', nameEn: "do it and leave it that way — the twin of -아/어 놓다", family: 'fill' },
   { ko: "-곤 하다", slug: 'oak_rings', folder: 'items', nameEn: "used to do it, again and again", family: 'fill' },
@@ -803,7 +803,17 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: "-길래", slug: 'kinds_types', folder: 'items', nameEn: "seeing that it was so, I …", family: 'fill' },
   { ko: "-(으)ㄹ지라도", slug: 'kinds_types', folder: 'items', nameEn: "even if it should", family: 'fill' },
   { ko: "-ㄴ/는다고 해도", slug: 'kinds_types', folder: 'items', nameEn: "even supposing it does", family: 'fill' },
-  { ko: "-고 싶다", slug: 'kinds_types', folder: 'items', nameEn: "to want to", family: 'fill' }
+  { ko: "-고 싶다", slug: 'kinds_types', folder: 'items', nameEn: "to want to", family: 'fill' },
+  // Dedicated daily-life illustrations: preserve the shared style, not shared subjects.
+  { ko: '걷다', slug: 'walking_farmer', folder: 'items', nameEn: 'Walking farmer', family: 'action' },
+  { ko: '발', slug: 'bare_foot', folder: 'items', nameEn: 'Foot', family: 'health' },
+  { ko: '선풍기', slug: 'desk_fan', folder: 'items', nameEn: 'Electric fan', family: 'household' },
+  { ko: '틀다', slug: 'turn_radio_dial', folder: 'items', nameEn: 'Turning on a radio', family: 'action' },
+  { ko: '더럽다', slug: 'dirty_laundry', folder: 'items', nameEn: 'Dirty laundry', family: 'household' },
+  { ko: '이불', slug: 'folded_quilt', folder: 'items', nameEn: 'Quilt', family: 'household' },
+  { ko: '맡기다', slug: 'entrust_laundry', folder: 'items', nameEn: 'Entrusting laundry to a shopkeeper', family: 'action' },
+  { ko: '세탁소', slug: 'laundry_shop', folder: 'items', nameEn: "Dry cleaner's shop", family: 'place' },
+  { ko: '활기차다', slug: 'lively_farmer', folder: 'items', nameEn: 'A lively farmer full of energy', family: 'action' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
@@ -813,3 +823,1942 @@ if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
 if (typeof window !== 'undefined') {
   window.VOCAB_ART_MORE_ROWS = VOCAB_ART_MORE_ROWS;
 }
+
+// BEGIN REVIEWED TOPIK ART
+// Generated from docs/topik-art-manifest.json by scripts/apply_topik_art.js.
+const TOPIK_VOCAB_ART_ROWS = [
+  {
+    "ko": "재래시장",
+    "slug": "market_stall_icon",
+    "folder": "items",
+    "nameEn": "a traditional market",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "썰렁하다",
+    "slug": "topik_deserted_market",
+    "folder": "items",
+    "nameEn": "to be deserted, to have no custom; (of air) chilly",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "배달",
+    "slug": "delivery_scooter",
+    "folder": "items",
+    "nameEn": "delivery",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "출구",
+    "slug": "exit_door",
+    "folder": "items",
+    "nameEn": "a way out of trouble; an exit",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "모색",
+    "slug": "topik_search_for_way",
+    "folder": "items",
+    "nameEn": "a search for a way forward",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "출입구",
+    "slug": "topik_gateway",
+    "folder": "items",
+    "nameEn": "an entrance and exit, a gateway",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여러 곳",
+    "slug": "topik_several_places",
+    "folder": "items",
+    "nameEn": "several places",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "찾다",
+    "slug": "topik_visit_place",
+    "folder": "items",
+    "nameEn": "to visit a place; to look for",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "직접",
+    "slug": "topik_in_person",
+    "folder": "items",
+    "nameEn": "in person, directly",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "추워지다",
+    "slug": "topik_turn_cold",
+    "folder": "items",
+    "nameEn": "to turn cold",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "손님",
+    "slug": "topik_customer",
+    "folder": "items",
+    "nameEn": "a customer",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "줄다",
+    "slug": "topik_decrease_count",
+    "folder": "items",
+    "nameEn": "to fall, to drop off",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "서비스",
+    "slug": "service_bell",
+    "folder": "items",
+    "nameEn": "a service",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "통하다",
+    "slug": "topik_go_through",
+    "folder": "items",
+    "nameEn": "to go through, to be by way of",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "경기",
+    "slug": "topik_business_conditions",
+    "folder": "items",
+    "nameEn": "business conditions, how trade is going",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "회복",
+    "slug": "topik_economic_recovery",
+    "folder": "items",
+    "nameEn": "a recovery",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "노력",
+    "slug": "topik_effort",
+    "folder": "items",
+    "nameEn": "effort",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "상품",
+    "slug": "topik_merchandise",
+    "folder": "items",
+    "nameEn": "goods, a product",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "구매하다",
+    "slug": "topik_purchase",
+    "folder": "items",
+    "nameEn": "to buy, to purchase",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "원하다",
+    "slug": "topik_want",
+    "folder": "items",
+    "nameEn": "to want",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "많아지다",
+    "slug": "topik_become_numerous",
+    "folder": "items",
+    "nameEn": "to become more numerous — 많다 with the change ending -아/어지다",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "신문 기사",
+    "slug": "newspaper",
+    "folder": "items",
+    "nameEn": "a newspaper article",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "기사",
+    "slug": "topik_news_article",
+    "folder": "items",
+    "nameEn": "an article, a news report",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "제목",
+    "slug": "topik_headline",
+    "folder": "items",
+    "nameEn": "a headline, a title",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "설명하다",
+    "slug": "topik_explain",
+    "folder": "items",
+    "nameEn": "to explain",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "눈으로 먹다",
+    "slug": "topik_eat_with_eyes",
+    "folder": "items",
+    "nameEn": "to eat with the eyes — to enjoy food by looking at it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "귀로 맛보다",
+    "slug": "topik_taste_with_ears",
+    "folder": "items",
+    "nameEn": "to taste with the ears — to enjoy food through its sounds",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "맛보다",
+    "slug": "topik_taste_food",
+    "folder": "items",
+    "nameEn": "to taste",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "음식",
+    "slug": "topik_prepared_food",
+    "folder": "items",
+    "nameEn": "food",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "모양",
+    "slug": "topik_shapes",
+    "folder": "items",
+    "nameEn": "the shape of a thing",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "색깔",
+    "slug": "paint_palette",
+    "folder": "items",
+    "nameEn": "colour",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "시대",
+    "slug": "topik_era",
+    "folder": "items",
+    "nameEn": "an age, an era",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "천국",
+    "slug": "topik_heaven_abundance",
+    "folder": "items",
+    "nameEn": "heaven — in a headline, \"awash with\"",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "요리 프로그램",
+    "slug": "topik_cooking_programme",
+    "folder": "items",
+    "nameEn": "a cooking programme",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "텔레비전 프로그램",
+    "slug": "wooden_tv",
+    "folder": "items",
+    "nameEn": "a television programme",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "실제",
+    "slug": "topik_actual_thing",
+    "folder": "items",
+    "nameEn": "the real thing, actual",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "보여주다",
+    "slug": "topik_show_something",
+    "folder": "items",
+    "nameEn": "to show",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "즐기다",
+    "slug": "topik_enjoy",
+    "folder": "items",
+    "nameEn": "to enjoy",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "관련되다",
+    "slug": "topik_related",
+    "folder": "items",
+    "nameEn": "to be related to",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "요즘",
+    "slug": "topik_these_days",
+    "folder": "items",
+    "nameEn": "these days",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "중요해지다",
+    "slug": "topik_become_important",
+    "folder": "items",
+    "nameEn": "to become important",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "색조 화장품",
+    "slug": "topik_colour_cosmetics",
+    "folder": "items",
+    "nameEn": "colour cosmetics — makeup, as against skincare",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "화장품",
+    "slug": "lipstick_tube",
+    "folder": "items",
+    "nameEn": "cosmetics",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "화장을 하다",
+    "slug": "topik_apply_makeup",
+    "folder": "items",
+    "nameEn": "to wear makeup",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "외모",
+    "slug": "hand_mirror",
+    "folder": "items",
+    "nameEn": "a person's looks",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가꾸다",
+    "slug": "topik_tend_garden",
+    "folder": "items",
+    "nameEn": "to tend, to groom — used of looks and of gardens alike",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "불티",
+    "slug": "topik_flying_sparks",
+    "folder": "items",
+    "nameEn": "a spark — in a headline, short for 불티나다, to sell out fast",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "관리",
+    "slug": "topik_management",
+    "folder": "items",
+    "nameEn": "looking after something; also being in charge of it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "늘어나다",
+    "slug": "topik_stretch_longer",
+    "folder": "items",
+    "nameEn": "to grow, to stretch out — of a number, and of time too",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "다양하다",
+    "slug": "diversity_spread",
+    "folder": "items",
+    "nameEn": "to be varied",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "필요가 있다",
+    "slug": "topik_need_to",
+    "folder": "items",
+    "nameEn": "there is a need to",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "주로",
+    "slug": "topik_mainly",
+    "folder": "items",
+    "nameEn": "mainly",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "담당하다",
+    "slug": "topik_in_charge",
+    "folder": "items",
+    "nameEn": "to be in charge of, to handle",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사회적 지위",
+    "slug": "topik_social_standing",
+    "folder": "items",
+    "nameEn": "social standing",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "관심",
+    "slug": "topik_interest_attention",
+    "folder": "items",
+    "nameEn": "interest, attention",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "피서객",
+    "slug": "topik_summer_holidaymaker",
+    "folder": "items",
+    "nameEn": "a holidaymaker escaping the heat",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "피서지",
+    "slug": "beach_parasol",
+    "folder": "items",
+    "nameEn": "a place people go to escape the heat",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "더위",
+    "slug": "topik_hot_weather",
+    "folder": "items",
+    "nameEn": "the heat",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "쓰레기",
+    "slug": "trash_bag",
+    "folder": "items",
+    "nameEn": "rubbish",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "치우다",
+    "slug": "topik_clear_away",
+    "folder": "items",
+    "nameEn": "to clear away",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "양",
+    "slug": "topik_quantity",
+    "folder": "items",
+    "nameEn": "a quantity, an amount",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "전쟁",
+    "slug": "topik_war",
+    "folder": "items",
+    "nameEn": "a war",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N와의 전쟁",
+    "slug": "topik_war_with_problem",
+    "folder": "items",
+    "nameEn": "a war with N — what a headline calls a problem it cannot solve",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "심각하다",
+    "slug": "topik_serious_problem",
+    "folder": "items",
+    "nameEn": "to be serious",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "애쓰다",
+    "slug": "topik_strive_hard",
+    "folder": "items",
+    "nameEn": "to struggle, to take pains",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-기 위해",
+    "slug": "topik_in_order_to",
+    "folder": "items",
+    "nameEn": "in order to",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)로 인해",
+    "slug": "topik_owing_to",
+    "folder": "items",
+    "nameEn": "owing to, because of",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여러 가지로",
+    "slug": "topik_various_ways",
+    "folder": "items",
+    "nameEn": "in various ways",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "불편",
+    "slug": "topik_inconvenience",
+    "folder": "items",
+    "nameEn": "inconvenience",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "겪다",
+    "slug": "topik_go_through_hardship",
+    "folder": "items",
+    "nameEn": "to go through, to suffer",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "저축률",
+    "slug": "topik_savings_rate",
+    "folder": "items",
+    "nameEn": "the savings rate",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "저축",
+    "slug": "piggy_bank",
+    "folder": "items",
+    "nameEn": "saving, savings",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "바닥",
+    "slug": "topik_rock_bottom",
+    "folder": "items",
+    "nameEn": "the bottom — of a figure, rock bottom",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "오르다",
+    "slug": "topik_rise",
+    "folder": "items",
+    "nameEn": "to rise",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "떨어지다",
+    "slug": "topik_fall_down",
+    "folder": "items",
+    "nameEn": "to fall",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "올라가다",
+    "slug": "topik_climb_up",
+    "folder": "items",
+    "nameEn": "to climb back up",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "낮다",
+    "slug": "topik_low_height",
+    "folder": "items",
+    "nameEn": "to be low",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "젊은층",
+    "slug": "topik_young_generation",
+    "folder": "items",
+    "nameEn": "the young, as an age group",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "젊다",
+    "slug": "topik_young_person",
+    "folder": "items",
+    "nameEn": "to be young",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "무관심",
+    "slug": "topik_indifference",
+    "folder": "items",
+    "nameEn": "indifference",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "계속",
+    "slug": "topik_continuously",
+    "folder": "items",
+    "nameEn": "continuously",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "정도",
+    "slug": "topik_approximately",
+    "folder": "items",
+    "nameEn": "about, roughly",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "걸리다",
+    "slug": "topik_takes_time",
+    "folder": "items",
+    "nameEn": "to take (an amount of time)",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "나타나다",
+    "slug": "topik_appear",
+    "folder": "items",
+    "nameEn": "to come out, to show up — of a figure or a result",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N 만에",
+    "slug": "topik_after_interval",
+    "folder": "items",
+    "nameEn": "for the first time in N — measured from the last time it happened",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N 동안",
+    "slug": "topik_throughout_period",
+    "folder": "items",
+    "nameEn": "throughout N, for the whole of N",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N을/를 비롯해서",
+    "slug": "topik_including_first",
+    "folder": "items",
+    "nameEn": "including N, and N first among them",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여름철",
+    "slug": "topik_summer_months",
+    "folder": "items",
+    "nameEn": "the summer months",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여름",
+    "slug": "topik_summer_season",
+    "folder": "items",
+    "nameEn": "summer",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "보관",
+    "slug": "topik_storage",
+    "folder": "items",
+    "nameEn": "storage, keeping",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "보관하다",
+    "slug": "topik_store_away",
+    "folder": "items",
+    "nameEn": "to store, to keep",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "냉장고",
+    "slug": "fridge",
+    "folder": "items",
+    "nameEn": "a fridge",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "냉장고 안",
+    "slug": "topik_inside_fridge",
+    "folder": "items",
+    "nameEn": "inside the fridge",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "넣다",
+    "slug": "topik_put_inside",
+    "folder": "items",
+    "nameEn": "to put in",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "믿다",
+    "slug": "topik_trust",
+    "folder": "items",
+    "nameEn": "to trust, to rely on",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "낭패",
+    "slug": "topik_fiasco",
+    "folder": "items",
+    "nameEn": "a fiasco — a plan that lets you down at the worst moment",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "안심하다",
+    "slug": "topik_feel_reassured",
+    "folder": "items",
+    "nameEn": "to be at ease about something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "모든",
+    "slug": "topik_every_all",
+    "folder": "items",
+    "nameEn": "every, all",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "특별하다",
+    "slug": "topik_special",
+    "folder": "items",
+    "nameEn": "to be special",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "마련하다",
+    "slug": "topik_arrange_provisions",
+    "folder": "items",
+    "nameEn": "to get hold of, to arrange for",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "좋지 않다",
+    "slug": "topik_not_good_idea",
+    "folder": "items",
+    "nameEn": "is not a good idea",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N만",
+    "slug": "topik_only_noun",
+    "folder": "items",
+    "nameEn": "N only, N and nothing besides",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-아/어서는",
+    "slug": "topik_bad_if_continued",
+    "folder": "items",
+    "nameEn": "if you go on doing it, and what follows is bad — 믿어서는, if you go on trusting only that",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-던",
+    "slug": "topik_unfinished_past",
+    "folder": "items",
+    "nameEn": "the one you were in the middle of",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-아/어야 하다",
+    "slug": "topik_must_do",
+    "folder": "items",
+    "nameEn": "must, have to",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄹ 수 없다",
+    "slug": "topik_cannot",
+    "folder": "items",
+    "nameEn": "cannot",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)려면",
+    "slug": "topik_if_intending",
+    "folder": "items",
+    "nameEn": "if you intend to",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "정부",
+    "slug": "government_hall",
+    "folder": "items",
+    "nameEn": "the government",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "정책",
+    "slug": "topik_public_policy",
+    "folder": "items",
+    "nameEn": "a policy",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "부동산 정책",
+    "slug": "topik_property_policy",
+    "folder": "items",
+    "nameEn": "real-estate policy",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "시민",
+    "slug": "topik_citizen",
+    "folder": "items",
+    "nameEn": "a citizen",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "평가하다",
+    "slug": "topik_evaluate",
+    "folder": "items",
+    "nameEn": "to judge, to rate",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "집값",
+    "slug": "topik_house_prices",
+    "folder": "items",
+    "nameEn": "house prices",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "집값 잡기",
+    "slug": "topik_control_house_prices",
+    "folder": "items",
+    "nameEn": "reining house prices back in",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "부동산",
+    "slug": "apartment_block",
+    "folder": "items",
+    "nameEn": "property, real estate",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "서민",
+    "slug": "topik_working_people",
+    "folder": "items",
+    "nameEn": "ordinary working people",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "서민 경제",
+    "slug": "topik_household_economy",
+    "folder": "items",
+    "nameEn": "the household economy of ordinary people",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "경제",
+    "slug": "topik_economy",
+    "folder": "items",
+    "nameEn": "an economy",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "물가",
+    "slug": "topik_cost_of_living",
+    "folder": "items",
+    "nameEn": "the cost of living",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "악영향",
+    "slug": "topik_harmful_effect",
+    "folder": "items",
+    "nameEn": "a harmful effect — and it comes with 미치다: 악영향을 미치다, to have a bad effect on",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "영향을 미치다",
+    "slug": "topik_have_effect",
+    "folder": "items",
+    "nameEn": "to have an effect on",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "찬물",
+    "slug": "topik_cold_water",
+    "folder": "items",
+    "nameEn": "cold water",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "찬물을 끼얹다",
+    "slug": "topik_spoil_enthusiasm",
+    "folder": "items",
+    "nameEn": "to pour cold water on it — to spoil something that was going well",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "잡다",
+    "slug": "topik_catch",
+    "folder": "items",
+    "nameEn": "to catch; to get something under control",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "냉정하다",
+    "slug": "topik_cool_headed",
+    "folder": "items",
+    "nameEn": "to be cool-headed, unsentimental",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "시원하다",
+    "slug": "topik_refreshingly_cool",
+    "folder": "items",
+    "nameEn": "to feel refreshingly cool",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "마음",
+    "slug": "topik_inner_heart",
+    "folder": "items",
+    "nameEn": "the heart, how one feels",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "아주",
+    "slug": "topik_very",
+    "folder": "items",
+    "nameEn": "very",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "많이",
+    "slug": "topik_a_lot",
+    "folder": "items",
+    "nameEn": "a lot",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-는 중",
+    "slug": "topik_in_middle_of",
+    "folder": "items",
+    "nameEn": "in the middle of doing it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N 때문에",
+    "slug": "topik_because_of_noun",
+    "folder": "items",
+    "nameEn": "because of N",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-게 하다",
+    "slug": "topik_make_result",
+    "folder": "items",
+    "nameEn": "to make something turn out that way",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-기",
+    "slug": "topik_action_as_noun",
+    "folder": "items",
+    "nameEn": "the -ing form, turning a verb into something a headline can name — 잡기, the catching of it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "개",
+    "slug": "farm_dog",
+    "folder": "items",
+    "nameEn": "a dog",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "반려견",
+    "slug": "topik_pet_dog",
+    "folder": "items",
+    "nameEn": "a pet dog — the word a paper uses, not 개",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "주인",
+    "slug": "topik_owner",
+    "folder": "items",
+    "nameEn": "an owner",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "키우다",
+    "slug": "topik_raise_animal",
+    "folder": "items",
+    "nameEn": "to keep, to raise an animal",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "물다",
+    "slug": "topik_bite",
+    "folder": "items",
+    "nameEn": "to bite",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "물리다",
+    "slug": "topik_be_bitten",
+    "folder": "items",
+    "nameEn": "to get bitten — the passive of 물다",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "특성",
+    "slug": "topik_characteristic",
+    "folder": "items",
+    "nameEn": "a characteristic, what something is like by nature",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "착각",
+    "slug": "topik_mistaken_belief",
+    "folder": "items",
+    "nameEn": "a thing people are sure of and wrong about",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "흔하다",
+    "slug": "topik_common",
+    "folder": "items",
+    "nameEn": "to be common",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "확신하다",
+    "slug": "topik_certain",
+    "folder": "items",
+    "nameEn": "to be certain of it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "잘못되다",
+    "slug": "topik_wrong_result",
+    "folder": "items",
+    "nameEn": "to be mistaken, to be wrong",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "알아보다",
+    "slug": "topik_investigate",
+    "folder": "items",
+    "nameEn": "to look into it, to find out",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "자신",
+    "slug": "topik_oneself",
+    "folder": "items",
+    "nameEn": "oneself, one’s own",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "우리",
+    "slug": "topik_our",
+    "folder": "items",
+    "nameEn": "our",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사람",
+    "slug": "topik_person",
+    "folder": "items",
+    "nameEn": "a person",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "늘다",
+    "slug": "topik_increase_amount",
+    "folder": "items",
+    "nameEn": "to increase — the plain one, of counts and amounts",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "한번",
+    "slug": "topik_once",
+    "folder": "items",
+    "nameEn": "once, one time",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "다시",
+    "slug": "topik_again",
+    "folder": "items",
+    "nameEn": "again",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "안 + V",
+    "slug": "topik_short_negative",
+    "folder": "items",
+    "nameEn": "the short negative — 안 물어요 = doesn’t bite, said out loud",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-지 않다",
+    "slug": "topik_long_negative",
+    "folder": "items",
+    "nameEn": "the long negative, the one papers write — 오르지 않고, 물지 않는다",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-다고 하다",
+    "slug": "topik_say_that",
+    "folder": "items",
+    "nameEn": "to say that — and with 확신하다, to be sure that",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-기 전에",
+    "slug": "topik_before_doing",
+    "folder": "items",
+    "nameEn": "before doing it — 키우기 전에, before you get one",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N에 대해서",
+    "slug": "topik_about_topic",
+    "folder": "items",
+    "nameEn": "about N",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄴ 적이 있다",
+    "slug": "topik_ever_done",
+    "folder": "items",
+    "nameEn": "to have ever done it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄹ 수 있다",
+    "slug": "topik_can_do",
+    "folder": "items",
+    "nameEn": "can, might",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "바나나",
+    "slug": "banana_bunch",
+    "folder": "items",
+    "nameEn": "a banana",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "꿀",
+    "slug": "honey_jar",
+    "folder": "items",
+    "nameEn": "honey",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "먹다",
+    "slug": "topik_eat",
+    "folder": "items",
+    "nameEn": "to eat",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "꿀잠",
+    "slug": "topik_sweet_sleep",
+    "folder": "items",
+    "nameEn": "honey sleep — a deep, sweet night. No honey involved.",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "잠",
+    "slug": "white_pillow",
+    "folder": "items",
+    "nameEn": "sleep",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "자다",
+    "slug": "topik_sleep",
+    "folder": "items",
+    "nameEn": "to sleep",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "숙면",
+    "slug": "topik_sound_sleep",
+    "folder": "items",
+    "nameEn": "sound sleep — the clinical word for the same thing",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "푹",
+    "slug": "topik_soundly",
+    "folder": "items",
+    "nameEn": "soundly, right through",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "불안감",
+    "slug": "topik_anxiety",
+    "folder": "items",
+    "nameEn": "anxiety, a feeling of unease",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "효과",
+    "slug": "topik_effect",
+    "folder": "items",
+    "nameEn": "an effect",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "도움이 되다",
+    "slug": "topik_be_helpful",
+    "folder": "items",
+    "nameEn": "to be a help",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "없애다",
+    "slug": "topik_remove",
+    "folder": "items",
+    "nameEn": "to get rid of it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "속",
+    "slug": "topik_stomach_inside",
+    "folder": "items",
+    "nameEn": "the stomach, the insides",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "불편하다",
+    "slug": "topik_uncomfortable",
+    "folder": "items",
+    "nameEn": "to be uncomfortable",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사르르",
+    "slug": "topik_melt_gently",
+    "folder": "items",
+    "nameEn": "the word for melting quietly away — a headline quotes it and drops the verb",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "함께",
+    "slug": "topik_together",
+    "folder": "items",
+    "nameEn": "together with",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-게 해 주다",
+    "slug": "topik_enable_someone",
+    "folder": "items",
+    "nameEn": "to let someone do it, to make it possible",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄹ뿐더러",
+    "slug": "topik_not_only_but_also",
+    "folder": "items",
+    "nameEn": "not only that, but also — the written form of stacking with 도",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-아/어야",
+    "slug": "topik_only_if",
+    "folder": "items",
+    "nameEn": "only if you — a condition, not a recommendation",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄹ 때",
+    "slug": "topik_when_doing",
+    "folder": "items",
+    "nameEn": "when you do it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-는 게 좋다",
+    "slug": "topik_good_idea_to",
+    "folder": "items",
+    "nameEn": "it is a good idea to",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N도",
+    "slug": "topik_also_noun",
+    "folder": "items",
+    "nameEn": "N as well, on top of what was already said",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "서점",
+    "slug": "topik_bookshop",
+    "folder": "items",
+    "nameEn": "a bookshop",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "서점가",
+    "slug": "topik_book_trade",
+    "folder": "items",
+    "nameEn": "the book trade — 가 as in 대학가, a whole scene rather than one shop",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "책",
+    "slug": "hardcover_book",
+    "folder": "items",
+    "nameEn": "a book",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "행복",
+    "slug": "topik_happiness",
+    "folder": "items",
+    "nameEn": "happiness",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "열차",
+    "slug": "passenger_train",
+    "folder": "items",
+    "nameEn": "a train",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "행복 열차",
+    "slug": "topik_happiness_train_book",
+    "folder": "items",
+    "nameEn": "'Happiness Train' — the name of the book, which is why it is in quotes",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "읽다",
+    "slug": "topik_read",
+    "folder": "items",
+    "nameEn": "to read",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "큰 인기를 얻다",
+    "slug": "topik_great_popularity",
+    "folder": "items",
+    "nameEn": "to be enjoying great popularity — 인기 is popularity, 얻다 to obtain it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "10만 부나",
+    "slug": "topik_so_many_copies",
+    "folder": "items",
+    "nameEn": "as many as a hundred thousand copies — 부 counts books, and 나 says the number is larger than you would expect",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "팔리다",
+    "slug": "topik_sold",
+    "folder": "items",
+    "nameEn": "to sell, to be sold",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "판매되다",
+    "slug": "topik_on_sale",
+    "folder": "items",
+    "nameEn": "to be on sale — the formal word for the same thing",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "운행",
+    "slug": "topik_service_running",
+    "folder": "items",
+    "nameEn": "running a service",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-앓이",
+    "slug": "topik_craze",
+    "folder": "items",
+    "nameEn": "the -앓이 ending: a craze for it. From 앓다, to be ill — but nobody is ill.",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "지금",
+    "slug": "topik_now",
+    "folder": "items",
+    "nameEn": "now",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "현재",
+    "slug": "topik_at_present",
+    "folder": "items",
+    "nameEn": "at present — the written form of 지금",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "최근",
+    "slug": "topik_recently",
+    "folder": "items",
+    "nameEn": "recently",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이름",
+    "slug": "topik_name",
+    "folder": "items",
+    "nameEn": "a name",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "시작하다",
+    "slug": "topik_start_action",
+    "folder": "items",
+    "nameEn": "to start",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가다",
+    "slug": "topik_go",
+    "folder": "items",
+    "nameEn": "to go",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "많다",
+    "slug": "topik_many",
+    "folder": "items",
+    "nameEn": "to be many",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "한 달 새",
+    "slug": "topik_within_one_month",
+    "folder": "items",
+    "nameEn": "in the space of one month — 새 is 사이, the gap between",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이번 달",
+    "slug": "topik_this_month",
+    "folder": "items",
+    "nameEn": "this month",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N(이)라는",
+    "slug": "topik_called_named",
+    "folder": "items",
+    "nameEn": "called N, going by the name N",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-까지만",
+    "slug": "topik_only_until",
+    "folder": "items",
+    "nameEn": "only up to — and the 만 is where the trap is",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "날씨",
+    "slug": "topik_weather",
+    "folder": "items",
+    "nameEn": "the weather",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "비가 오다",
+    "slug": "rain_cloud",
+    "folder": "items",
+    "nameEn": "to rain",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "맑다",
+    "slug": "sun_icon",
+    "folder": "items",
+    "nameEn": "to be clear, to be fine",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "개다",
+    "slug": "topik_clear_after_rain",
+    "folder": "items",
+    "nameEn": "to clear up — of weather after rain",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "오전",
+    "slug": "topik_morning",
+    "folder": "items",
+    "nameEn": "the morning, before noon",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-더니",
+    "slug": "topik_observed_change",
+    "folder": "items",
+    "nameEn": "I saw A, and then B — a change the speaker watched happen",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-더라도",
+    "slug": "topik_even_if",
+    "folder": "items",
+    "nameEn": "even if it does — and what follows holds anyway",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-아/어 가지고",
+    "slug": "topik_and_so",
+    "folder": "items",
+    "nameEn": "and so, and then — the spoken form of -아/어서",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-는 대신에",
+    "slug": "topik_instead_of",
+    "folder": "items",
+    "nameEn": "instead of doing it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "피곤하다",
+    "slug": "topik_tired",
+    "folder": "items",
+    "nameEn": "to be tired",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "쉬다",
+    "slug": "topik_rest",
+    "folder": "items",
+    "nameEn": "to rest",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "일찍",
+    "slug": "topik_early",
+    "folder": "items",
+    "nameEn": "early",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "너무",
+    "slug": "topik_too_much",
+    "folder": "items",
+    "nameEn": "too, far too",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "오늘",
+    "slug": "topik_today",
+    "folder": "items",
+    "nameEn": "today",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "집",
+    "slug": "detached_house",
+    "folder": "items",
+    "nameEn": "home",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-아/어야지",
+    "slug": "topik_i_really_must",
+    "folder": "items",
+    "nameEn": "I really must — what you say to yourself when you decide",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄹ걸",
+    "slug": "topik_should_have",
+    "folder": "items",
+    "nameEn": "I should have — a regret, or a guess about someone else",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-더라",
+    "slug": "topik_saw_that",
+    "folder": "items",
+    "nameEn": "I saw that they did — reporting what you witnessed of someone else",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-기도 하다",
+    "slug": "topik_sometimes_also",
+    "folder": "items",
+    "nameEn": "also does it, sometimes does it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)니까",
+    "slug": "topik_reason_for_decision",
+    "folder": "items",
+    "nameEn": "because — the reason you give before a decision or a suggestion",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "하고 말하다",
+    "slug": "topik_quote_speech",
+    "folder": "items",
+    "nameEn": "to say \"…\" — 하고 keeps the words exactly as they were spoken",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "취업 준비생",
+    "slug": "topik_job_seeker",
+    "folder": "items",
+    "nameEn": "someone preparing to enter the job market",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이상",
+    "slug": "topik_at_least",
+    "folder": "items",
+    "nameEn": "or more, upwards of",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "면접시험",
+    "slug": "topik_job_interview",
+    "folder": "items",
+    "nameEn": "a job interview",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "준비",
+    "slug": "topik_preparation",
+    "folder": "items",
+    "nameEn": "preparation",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "고민하다",
+    "slug": "topik_agonise",
+    "folder": "items",
+    "nameEn": "to agonise over something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N(으)로 말미암아",
+    "slug": "topik_formal_owing_to",
+    "folder": "items",
+    "nameEn": "owing to N — the formal twin of (으)로 인하여",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N에 따라서",
+    "slug": "topik_depending_on",
+    "folder": "items",
+    "nameEn": "depending on N, in line with N — a correlation, not a cause",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N에도 불구하고",
+    "slug": "topik_despite",
+    "folder": "items",
+    "nameEn": "despite N",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "시험 기간",
+    "slug": "topik_exam_period",
+    "folder": "items",
+    "nameEn": "the exam period",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "공부하다",
+    "slug": "topik_study",
+    "folder": "items",
+    "nameEn": "to study",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "학생",
+    "slug": "topik_student",
+    "folder": "items",
+    "nameEn": "a student",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "도서관",
+    "slug": "topik_library",
+    "folder": "items",
+    "nameEn": "a library",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "밤새도록",
+    "slug": "topik_all_night",
+    "folder": "items",
+    "nameEn": "all night long",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "켜다",
+    "slug": "switch_on",
+    "folder": "items",
+    "nameEn": "to switch on",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "산",
+    "slug": "snow_peak",
+    "folder": "items",
+    "nameEn": "a mountain",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "푸르다",
+    "slug": "pine_tree",
+    "folder": "items",
+    "nameEn": "to be green, to be verdant",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "입사 시험",
+    "slug": "exam_papers",
+    "folder": "items",
+    "nameEn": "the entrance exam a company sets",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "합격하다",
+    "slug": "diploma_scroll",
+    "folder": "items",
+    "nameEn": "to pass an exam, to get in",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "엿",
+    "slug": "yeot_taffy",
+    "folder": "foods",
+    "nameEn": "yeot — a hard, sticky taffy",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "떡",
+    "slug": "white_tteok",
+    "folder": "foods",
+    "nameEn": "tteok — rice cake",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "선물",
+    "slug": "wrapped_gift",
+    "folder": "items",
+    "nameEn": "a present",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "주다",
+    "slug": "give_two_hands",
+    "folder": "items",
+    "nameEn": "to give",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "교육",
+    "slug": "schoolhouse",
+    "folder": "items",
+    "nameEn": "education",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가격",
+    "slug": "price_coins",
+    "folder": "items",
+    "nameEn": "a price",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "의사",
+    "slug": "doctor",
+    "folder": "items",
+    "nameEn": "a doctor",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "식사량",
+    "slug": "servings",
+    "folder": "items",
+    "nameEn": "how much one eats",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "꽃병",
+    "slug": "celadon_vase",
+    "folder": "items",
+    "nameEn": "a vase",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "개나리",
+    "slug": "forsythia_spray",
+    "folder": "items",
+    "nameEn": "forsythia — the yellow shrub that opens first in spring",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "꽃",
+    "slug": "pink_blossom",
+    "folder": "items",
+    "nameEn": "a flower",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "책상",
+    "slug": "wooden_study_desk",
+    "folder": "items",
+    "nameEn": "a desk",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "어머니",
+    "slug": "mother_portrait",
+    "folder": "items",
+    "nameEn": "mother",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사랑",
+    "slug": "red_heart",
+    "folder": "items",
+    "nameEn": "love",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "대학교",
+    "slug": "campus_building",
+    "folder": "items",
+    "nameEn": "a university",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "한국",
+    "slug": "our_country",
+    "folder": "items",
+    "nameEn": "Korea",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "노인",
+    "slug": "elderly",
+    "folder": "items",
+    "nameEn": "an older person",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "취업",
+    "slug": "restaurant_staff",
+    "folder": "items",
+    "nameEn": "getting work, employment",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "허락하다",
+    "slug": "of_course",
+    "folder": "items",
+    "nameEn": "to permit, to allow",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "걷다",
+    "slug": "walking_farmer",
+    "folder": "items",
+    "nameEn": "to walk",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "발",
+    "slug": "bare_foot",
+    "folder": "items",
+    "nameEn": "foot",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "편하다",
+    "slug": "comfortable_farmer",
+    "folder": "items",
+    "nameEn": "to be comfortable, at ease",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가볍다",
+    "slug": "light_feather",
+    "folder": "items",
+    "nameEn": "to be light in weight",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "선풍기",
+    "slug": "desk_fan",
+    "folder": "items",
+    "nameEn": "an electric fan",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "틀다",
+    "slug": "turn_radio_dial",
+    "folder": "items",
+    "nameEn": "to turn on a fan, radio or tap",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "더럽다",
+    "slug": "dirty_laundry",
+    "folder": "items",
+    "nameEn": "to be dirty",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이불",
+    "slug": "folded_quilt",
+    "folder": "items",
+    "nameEn": "a quilt or blanket",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "맡기다",
+    "slug": "entrust_laundry",
+    "folder": "items",
+    "nameEn": "to entrust; to leave in someone's care",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "세탁소",
+    "slug": "laundry_shop",
+    "folder": "items",
+    "nameEn": "a dry cleaner's; a laundry shop",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "달리다",
+    "slug": "running_farmer",
+    "folder": "items",
+    "nameEn": "to run",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "바로",
+    "slug": "act_immediately",
+    "folder": "items",
+    "nameEn": "right away; directly",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "활기차다",
+    "slug": "lively_farmer",
+    "folder": "items",
+    "nameEn": "to be lively, full of energy",
+    "family": "topik-vocabulary"
+  }
+];
+if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
+  TOPIK_VOCAB_ART_ROWS.forEach(function (row) {
+    const existing = VOCAB_ART_ROWS.find(function (item) { return item && item.ko === row.ko; });
+    if (existing) Object.assign(existing, row);
+    else VOCAB_ART_ROWS.push(row);
+  });
+}
+if (typeof window !== 'undefined') window.TOPIK_VOCAB_ART_ROWS = TOPIK_VOCAB_ART_ROWS;
+// END REVIEWED TOPIK ART

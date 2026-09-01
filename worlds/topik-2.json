@@ -1,7 +1,7 @@
 {
   "id": "topik-2",
   "pack": "topik",
-  "source": "TOPIK II — questions added one at a time, from the papers the player brings",
+  "source": "TOPIK II — questions from the papers the player brings, plus explicitly requested vocabulary lists",
   "title": "TOPIK II",
   "titleKo": "토픽 II 준비",
   "icon": "🎓",
@@ -11,8 +11,8 @@
     "name": "토픽 II 준비",
     "nameEn": "TOPIK II · Exam practice",
     "icon": "🎓",
-    "description": "Farm the words the exam questions bring in, and work the questions at the desk.",
-    "descriptionEn": "A practice world for TOPIK II, band 3-4급. Unlike the textbook units this one has no fixed chapter: questions arrive one at a time and the word list grows out of them. Words already taught elsewhere are kept here too — this is a study room, not a syllabus, and a word you meet in an exam question belongs in the exam room whether or not you first met it on a farm.",
+    "description": "Farm exam vocabulary and your own word lists, and work the questions at the desk.",
+    "descriptionEn": "A practice world for TOPIK II, band 3-4급. Questions arrive one at a time, and the vocabulary grows from those papers and the word lists you explicitly add. Words already taught elsewhere stay here too and share the same learning progress.",
     "world": true,
     "pack": "topik",
     "worldId": "topik-2",
@@ -2119,8 +2119,10 @@
         "ko": "켜다",
         "en": "to switch on",
         "hint": "🔛",
-        "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "방이 어두워서 불을 켰어요.",
+        "exampleEn": "The room was dark, so I switched on the light."
       },
       {
         "ko": "-아/어 놓다",
@@ -3246,6 +3248,123 @@
         "forms": [
           "싶다는"
         ]
+      },
+      {
+        "ko": "걷다",
+        "en": "to walk",
+        "hint": "🚶",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "매일 아침 공원에서 걸어요.",
+        "exampleEn": "I walk in the park every morning."
+      },
+      {
+        "ko": "발",
+        "en": "foot",
+        "hint": "🦶",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "오래 걸어서 발이 아파요.",
+        "exampleEn": "My feet hurt from walking for a long time."
+      },
+      {
+        "ko": "편하다",
+        "en": "to be comfortable, at ease",
+        "hint": "🛋️",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "이 신발은 발이 편해요.",
+        "exampleEn": "These shoes are comfortable on my feet."
+      },
+      {
+        "ko": "가볍다",
+        "en": "to be light in weight",
+        "hint": "🪶",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "이 운동화는 가벼워서 걷기 좋아요.",
+        "exampleEn": "These trainers are light, so they are good for walking."
+      },
+      {
+        "ko": "선풍기",
+        "en": "an electric fan",
+        "hint": "🌀",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "날씨가 더워서 선풍기를 틀었어요.",
+        "exampleEn": "It was hot, so I turned on the fan."
+      },
+      {
+        "ko": "틀다",
+        "en": "to turn on a fan, radio or tap",
+        "hint": "🎛️",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "더우면 선풍기를 틀어 주세요.",
+        "exampleEn": "If you are hot, please turn on the fan."
+      },
+      {
+        "ko": "더럽다",
+        "en": "to be dirty",
+        "hint": "🧺",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "이불이 더러워서 빨아야 해요.",
+        "exampleEn": "The quilt is dirty, so I need to wash it."
+      },
+      {
+        "ko": "이불",
+        "en": "a quilt or blanket",
+        "hint": "🛏️",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "따뜻한 이불을 덮고 잤어요.",
+        "exampleEn": "I slept under a warm quilt."
+      },
+      {
+        "ko": "맡기다",
+        "en": "to entrust; to leave in someone's care",
+        "hint": "🤲",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "이불을 세탁소에 맡겼어요.",
+        "exampleEn": "I left my quilt at the dry cleaner's."
+      },
+      {
+        "ko": "세탁소",
+        "en": "a dry cleaner's; a laundry shop",
+        "hint": "🧺",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "집 앞 세탁소에서 옷을 찾았어요.",
+        "exampleEn": "I picked up my clothes at the dry cleaner's in front of my house."
+      },
+      {
+        "ko": "달리다",
+        "en": "to run",
+        "hint": "🏃",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "아침마다 공원에서 달려요.",
+        "exampleEn": "I run in the park every morning."
+      },
+      {
+        "ko": "바로",
+        "en": "right away; directly",
+        "hint": "⚡",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "집에 오면 바로 손을 씻어요.",
+        "exampleEn": "When I get home, I wash my hands right away."
+      },
+      {
+        "ko": "활기차다",
+        "en": "to be lively, full of energy",
+        "hint": "🌞",
+        "category": "일상생활",
+        "categoryEn": "Daily routines & home",
+        "example": "아침에 운동하면 하루가 활기차요.",
+        "exampleEn": "My day feels full of energy when I exercise in the morning."
       }
     ]
   },
@@ -3321,7 +3440,37 @@
         "ko": "자연",
         "en": "Nature & the seasons",
         "cat": "자연"
+      },
+      {
+        "ko": "일상생활",
+        "en": "Daily routines & home",
+        "cat": "일상생활"
       }
     ]
-  }
+  },
+  "vocabularySources": [
+    {
+      "id": "user-2026-08-31",
+      "type": "user-list",
+      "date": "2026-08-31",
+      "titleEn": "Daily routines & home",
+      "note": "Fourteen headwords explicitly supplied by the learner. Example sentences are original practice material, not quotations from an exam paper.",
+      "words": [
+        "걷다",
+        "발",
+        "편하다",
+        "가볍다",
+        "선풍기",
+        "틀다",
+        "켜다",
+        "더럽다",
+        "이불",
+        "맡기다",
+        "세탁소",
+        "달리다",
+        "바로",
+        "활기차다"
+      ]
+    }
+  ]
 }

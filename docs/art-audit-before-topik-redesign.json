@@ -1,0 +1,1410 @@
+{
+  "scope": "all mapped vocabulary",
+  "words": 979,
+  "uniqueImages": 306,
+  "extraSharedMappings": 673,
+  "missing": [],
+  "reusedImages": [
+    {
+      "file": "sprites/items/kinds_types.png",
+      "words": [
+        "종류",
+        "상을 받다",
+        "여러 번",
+        "가장",
+        "새로 지었다",
+        "주변이 조용하다",
+        "주변 환경",
+        "크기",
+        "반씩",
+        "나오다",
+        "위치",
+        "기타",
+        "구하다",
+        "결정하다",
+        "구경하다",
+        "문의하다",
+        "거리",
+        "소개하다",
+        "좋은 점",
+        "나쁜 점",
+        "어울리다",
+        "A-아지다/어지다",
+        "V-게 되다",
+        "익숙하다",
+        "알게 되다",
+        "오래간만이다",
+        "별일 없다",
+        "안부",
+        "안부를 묻다",
+        "근황",
+        "얼마나",
+        "처음에는",
+        "V-기 전에",
+        "V-(으)ㄴ 후에",
+        "출발하다",
+        "다니다",
+        "먼저",
+        "놀다",
+        "마치다",
+        "곳",
+        "거의",
+        "예전에",
+        "근처",
+        "호선",
+        "훨씬",
+        "편리하다",
+        "어디에서나",
+        "기대가 되다",
+        "탈락",
+        "모음",
+        "싫다",
+        "끓다",
+        "낳다",
+        "괜찮아지다",
+        "-는 한",
+        "-길래",
+        "-(으)ㄹ지라도",
+        "-ㄴ/는다고 해도",
+        "-고 싶다"
+      ]
+    },
+    {
+      "file": "sprites/items/running_shoe.png",
+      "words": [
+        "운동",
+        "운동을 하다",
+        "달리기",
+        "마라톤",
+        "건강",
+        "어떻게 오셨어요?",
+        "정도",
+        "그래도",
+        "을/를 위해서",
+        "특별히",
+        "무슨 일 있어요?",
+        "완주",
+        "대회",
+        "빠르다",
+        "건강 비결",
+        "생활",
+        "습관",
+        "생활 습관",
+        "건강하다",
+        "몸에 좋다",
+        "그러나",
+        "중요하다",
+        "모든",
+        "좋은 쪽으로 생각하다",
+        "노력하다",
+        "오래",
+        "한 번에",
+        "꼭",
+        "생활하다",
+        "건강해지다",
+        "준비 운동",
+        "모색",
+        "노력",
+        "중요해지다",
+        "젊은층",
+        "젊다",
+        "불안감",
+        "효과",
+        "도움이 되다",
+        "없애다",
+        "속",
+        "빨리",
+        "열심히",
+        "젊은 사람",
+        "신다"
+      ]
+    },
+    {
+      "file": "sprites/items/red_heart.png",
+      "words": [
+        "사랑에 빠지다",
+        "친해지다",
+        "기분이 좋다",
+        "마음에 들다",
+        "인생",
+        "고생하다",
+        "꿈",
+        "봉사 활동",
+        "행복",
+        "불행",
+        "점을 찍다",
+        "연결하다",
+        "부모님",
+        "그때",
+        "그 후로",
+        "기다리다",
+        "기분",
+        "원하다",
+        "즐기다",
+        "관심",
+        "심각하다",
+        "애쓰다",
+        "겪다",
+        "믿다",
+        "안심하다",
+        "냉정하다",
+        "마음",
+        "확신하다",
+        "자신",
+        "우리",
+        "지내다",
+        "친하다",
+        "위하다",
+        "기억에 남다",
+        "안다",
+        "사랑",
+        "느껴지다"
+      ]
+    },
+    {
+      "file": "sprites/items/wall_calendar.png",
+      "words": [
+        "하루",
+        "매일",
+        "식후",
+        "언제부터",
+        "이틀",
+        "시간을 내다",
+        "사흘",
+        "평소",
+        "나중에",
+        "이제",
+        "그동안",
+        "곧",
+        "앞으로",
+        "요즘",
+        "걸리다",
+        "한번",
+        "다시",
+        "지금",
+        "현재",
+        "최근",
+        "한 달 새",
+        "이번 달",
+        "일찍",
+        "오늘",
+        "시험 기간",
+        "약속",
+        "올해"
+      ]
+    },
+    {
+      "file": "sprites/items/gold_spiral.png",
+      "words": [
+        "춘천",
+        "돈이 들다",
+        "발표하다",
+        "마다",
+        "심심하다",
+        "화해하다",
+        "싸우다",
+        "불편하다",
+        "-아/어서는",
+        "-아/어야 하다",
+        "-는 게 좋다",
+        "-앓이",
+        "-아/어 가지고",
+        "하고 말하다",
+        "-아/어 오다",
+        "-아/어 보다",
+        "되다",
+        "대체적으로",
+        "나아지다",
+        "-(으)ㄹ 정도이다",
+        "-(으)ㄴ 모양이다",
+        "넘다"
+      ]
+    },
+    {
+      "file": "sprites/items/gold_starburst.png",
+      "words": [
+        "장을 보다",
+        "푹 쉬다",
+        "씩",
+        "계속",
+        "계획을 세우다",
+        "연락하다",
+        "그렇지 않아도",
+        "길이 막히다",
+        "-고 나서",
+        "안 + V",
+        "-기 전에",
+        "-더니",
+        "-더라도",
+        "-는 대신에",
+        "-다니",
+        "선택하다",
+        "잘하다",
+        "참",
+        "칭찬하다",
+        "-거든",
+        "-(으)ㄴ 바람에",
+        "-자마자"
+      ]
+    },
+    {
+      "file": "sprites/items/oak_rings.png",
+      "words": [
+        "생활비",
+        "공기",
+        "높은 곳",
+        "-기로 하다",
+        "-려고 하다",
+        "-기 위해",
+        "-던",
+        "-(으)ㄹ 수 없다",
+        "-게 하다",
+        "-기",
+        "-다고 하다",
+        "-게 해 주다",
+        "-까지만",
+        "-더라",
+        "-기도 하다",
+        "-곤 하다",
+        "그중에서",
+        "서로",
+        "상관없다",
+        "-(ㄴ/는)다면",
+        "-(으)ㄹ 리가 없다"
+      ]
+    },
+    {
+      "file": "sprites/items/leather_wallet.png",
+      "words": [
+        "지갑",
+        "방값이 싸다",
+        "매매",
+        "물건값",
+        "과일값",
+        "경기",
+        "회복",
+        "구매하다",
+        "바닥",
+        "떨어지다",
+        "올라가다",
+        "낮다",
+        "악영향",
+        "영향을 미치다",
+        "10만 부나",
+        "팔리다",
+        "판매되다",
+        "운행",
+        "카드를 받다",
+        "회비"
+      ]
+    },
+    {
+      "file": "sprites/items/desk_globe.png",
+      "words": [
+        "세계",
+        "유학",
+        "여행을 다녀오다",
+        "대부분",
+        "인구",
+        "수",
+        "외국",
+        "외국인",
+        "강남",
+        "수도",
+        "여러 곳",
+        "자유 여행",
+        "패키지여행",
+        "터키",
+        "외국 여행",
+        "일본",
+        "부산",
+        "제주도",
+        "유학생"
+      ]
+    },
+    {
+      "file": "sprites/items/hourglass_ornament.png",
+      "words": [
+        "쉬는 시간",
+        "시간이 나다",
+        "자꾸",
+        "떠들다",
+        "마침",
+        "힘들다",
+        "N을/를 비롯해서",
+        "-아/어야",
+        "-아/어야지",
+        "-아/어 두다",
+        "-아/어 가다",
+        "-아/어 대다",
+        "전에",
+        "경험",
+        "V-게",
+        "미래",
+        "-았/었기에",
+        "-아/어 봤자"
+      ]
+    },
+    {
+      "file": "sprites/items/ice_pack.png",
+      "words": [
+        "머리가 아프다",
+        "두통약",
+        "어지럽다",
+        "어디가 아프다",
+        "스트레스가 풀리다",
+        "스트레스가 많다",
+        "고민",
+        "걱정하다",
+        "썰렁하다",
+        "추워지다",
+        "불편",
+        "무관심",
+        "낭패",
+        "착각",
+        "잘못되다",
+        "고민하다",
+        "쉽지 않다",
+        "참다"
+      ]
+    },
+    {
+      "file": "sprites/items/detached_house.png",
+      "words": [
+        "주택",
+        "빌라",
+        "예방하다",
+        "방이 넓다",
+        "방이 좁다",
+        "시설이 잘되어 있다",
+        "집주인이 좋다",
+        "살기 좋다",
+        "어둡다",
+        "궁금하다",
+        "혹시",
+        "가꾸다",
+        "집값",
+        "집값 잡기",
+        "집",
+        "고향",
+        "집주인"
+      ]
+    },
+    {
+      "file": "sprites/items/light_bulb.png",
+      "words": [
+        "전기 요금",
+        "바꾸다",
+        "바뀌다",
+        "늘다",
+        "줄다",
+        "오르다",
+        "내리다",
+        "생기다",
+        "발전하다",
+        "점점",
+        "달라지다",
+        "옛날",
+        "1970년대",
+        "과거",
+        "명",
+        "늘어나다",
+        "불을 켜다"
+      ]
+    },
+    {
+      "file": "sprites/items/cream_waves.png",
+      "words": [
+        "방학",
+        "N에 대한",
+        "-(으)로 인해",
+        "N 만에",
+        "N만",
+        "-(으)려면",
+        "-는 중",
+        "N 때문에",
+        "N도",
+        "-(으)ㄴ 데다가",
+        "의문문",
+        "억양",
+        "받침소리",
+        "-(으)려고",
+        "-(으)ㄹ 따름이다",
+        "-아/어도 되다"
+      ]
+    },
+    {
+      "file": "sprites/items/empty_plate.png",
+      "words": [
+        "입맛이 없다",
+        "소화가 안되다",
+        "속이 안 좋다",
+        "배가 아프다",
+        "배탈이 나다",
+        "토하다",
+        "소화제",
+        "식비",
+        "식사",
+        "눈으로 먹다",
+        "귀로 맛보다",
+        "맛보다",
+        "음식",
+        "메뉴를 만들다",
+        "드시다"
+      ]
+    },
+    {
+      "file": "sprites/items/line_graph.png",
+      "words": [
+        "그래프",
+        "많아지다",
+        "양",
+        "나타나다",
+        "서민 경제",
+        "경제",
+        "물가",
+        "많다",
+        "이상",
+        "남다",
+        "상황",
+        "날로",
+        "증가하다",
+        "과반수"
+      ]
+    },
+    {
+      "file": "sprites/items/newspaper.png",
+      "words": [
+        "기사",
+        "신문 기사",
+        "기자",
+        "광고",
+        "제목",
+        "시대",
+        "천국",
+        "실제",
+        "불티",
+        "전쟁",
+        "사르르",
+        "큰 인기를 얻다",
+        "이름",
+        "설문 조사"
+      ]
+    },
+    {
+      "file": "sprites/items/teal_gem.png",
+      "words": [
+        "붓다",
+        "낫다",
+        "짓다",
+        "따뜻하다",
+        "N 동안",
+        "-(으)ㄴ 적이 있다",
+        "-(으)ㄹ 수 있다",
+        "-(으)ㄹ 때",
+        "N(으)로 말미암아",
+        "-(으)ㄹ까 봐",
+        "어떤",
+        "영혼",
+        "-아/어서인지",
+        "-아/어도"
+      ]
+    },
+    {
+      "file": "sprites/items/grammar_scroll.png",
+      "words": [
+        "특별하다",
+        "관련되다",
+        "필요가 있다",
+        "주로",
+        "여러 가지로",
+        "좋지 않다",
+        "아주",
+        "많이",
+        "흔하다",
+        "너무",
+        "-도록",
+        "-(으)ㄹ 뿐",
+        "-고서"
+      ]
+    },
+    {
+      "file": "sprites/items/knot_tile.png",
+      "words": [
+        "N(이)나",
+        "N와의 전쟁",
+        "-지 않다",
+        "-(으)ㄹ뿐더러",
+        "N(이)라는",
+        "-(으)ㄹ걸",
+        "-아/어 놓다",
+        "-(으)ㄹ 텐데",
+        "-(으)ㄹ 테니까",
+        "이해하다",
+        "-(으)ㄹ 만큼",
+        "-(으)ㄹ 뿐이다",
+        "-기만 하다"
+      ]
+    },
+    {
+      "file": "sprites/items/elderly.png",
+      "words": [
+        "노인",
+        "나이",
+        "아주머니",
+        "가족처럼",
+        "손님",
+        "서민",
+        "사람",
+        "비장애인",
+        "어른",
+        "나이 든 분",
+        "아저씨",
+        "주인님"
+      ]
+    },
+    {
+      "file": "sprites/items/briefcase.png",
+      "words": [
+        "취직하다",
+        "승진하다",
+        "관리",
+        "담당하다",
+        "마련하다",
+        "잡다",
+        "취업 준비생",
+        "준비",
+        "무슨 일이든",
+        "일하다"
+      ]
+    },
+    {
+      "file": "sprites/items/chevron_badge.png",
+      "words": [
+        "싱겁다",
+        "걱정",
+        "회사를 옮기다",
+        "N에 대해서",
+        "-(으)니까",
+        "N에 따라서",
+        "N에도 불구하고",
+        "전혀",
+        "-(ㄴ/는)다거나",
+        "-(으)려야 -(으)ㄹ 수 없다"
+      ]
+    },
+    {
+      "file": "sprites/items/school_backpack.png",
+      "words": [
+        "친구를 사귀다",
+        "동호회",
+        "참가하다",
+        "선수",
+        "룸메이트",
+        "공부하다",
+        "학생",
+        "가지고 들어가다",
+        "가방을 잃어버리다"
+      ]
+    },
+    {
+      "file": "sprites/items/white_pillow.png",
+      "words": [
+        "잠을 잘 못 자다",
+        "피곤하다",
+        "기운이 없다",
+        "잠",
+        "자다",
+        "숙면",
+        "푹",
+        "쉬다",
+        "눈사람"
+      ]
+    },
+    {
+      "file": "sprites/items/go_outside.png",
+      "words": [
+        "밖으로 나가다",
+        "나가다",
+        "외출하다",
+        "돌아오다",
+        "놀러 가다",
+        "찾다",
+        "시작하다",
+        "가다"
+      ]
+    },
+    {
+      "file": "sprites/items/sun_icon.png",
+      "words": [
+        "낮",
+        "아침",
+        "날씨",
+        "맑다",
+        "개다",
+        "오전",
+        "따뜻해지다",
+        "봄"
+      ]
+    },
+    {
+      "file": "sprites/items/farm_dog.png",
+      "words": [
+        "개",
+        "반려견",
+        "주인",
+        "키우다",
+        "물다",
+        "물리다",
+        "특성"
+      ]
+    },
+    {
+      "file": "sprites/items/government_hall.png",
+      "words": [
+        "사회적 지위",
+        "정부",
+        "정책",
+        "부동산 정책",
+        "시민",
+        "평가하다",
+        "국가"
+      ]
+    },
+    {
+      "file": "sprites/items/hardcover_book.png",
+      "words": [
+        "서점",
+        "서점가",
+        "책",
+        "읽다",
+        "도서관",
+        "소설책",
+        "여권"
+      ]
+    },
+    {
+      "file": "sprites/items/silver_mic.png",
+      "words": [
+        "인터뷰",
+        "설명하다",
+        "역할극",
+        "조언",
+        "면접시험",
+        "노래를 부르다",
+        "응답"
+      ]
+    },
+    {
+      "file": "sprites/items/subway_station.png",
+      "words": [
+        "지하철역",
+        "교통이 편리하다",
+        "교통편",
+        "교통비",
+        "교통이 불편하다",
+        "행복 열차",
+        "도착하다"
+      ]
+    },
+    {
+      "file": "sprites/items/contract_seal.png",
+      "words": [
+        "계약",
+        "계약 기간",
+        "전세",
+        "이하",
+        "포함되다",
+        "조건"
+      ]
+    },
+    {
+      "file": "sprites/items/exit_door.png",
+      "words": [
+        "출구",
+        "출입구",
+        "직접",
+        "통하다",
+        "문을 열다",
+        "들어오다"
+      ]
+    },
+    {
+      "file": "sprites/items/price_coins.png",
+      "words": [
+        "값",
+        "음식값",
+        "월세",
+        "집세",
+        "보증금",
+        "가격"
+      ]
+    },
+    {
+      "file": "sprites/items/stethoscope.png",
+      "words": [
+        "내과",
+        "진료를 받다",
+        "환자",
+        "몸",
+        "건강에 안 좋다",
+        "간호하다"
+      ]
+    },
+    {
+      "file": "sprites/items/beach_parasol.png",
+      "words": [
+        "피서객",
+        "피서지",
+        "더위",
+        "여름철",
+        "여름"
+      ]
+    },
+    {
+      "file": "sprites/items/birthday_cake.png",
+      "words": [
+        "생일",
+        "축하하다",
+        "웃다",
+        "잘됐다",
+        "후식"
+      ]
+    },
+    {
+      "file": "sprites/items/justice_scales.png",
+      "words": [
+        "변호사",
+        "N에 달려 있다",
+        "조절하다",
+        "-(으)ㄴ/는 법이다",
+        "-기 마련이다"
+      ]
+    },
+    {
+      "file": "sprites/items/schoolhouse.png",
+      "words": [
+        "고등학교",
+        "대학원",
+        "중학생",
+        "초등학교",
+        "교육"
+      ]
+    },
+    {
+      "file": "sprites/items/soap_bar.png",
+      "words": [
+        "손을 씻다",
+        "청소",
+        "깨끗하다",
+        "관리비",
+        "머리를 감다"
+      ]
+    },
+    {
+      "file": "sprites/items/wrapped_baby.png",
+      "words": [
+        "태어나다",
+        "아기를 낳다",
+        "아기",
+        "어리다",
+        "아이"
+      ]
+    },
+    {
+      "file": "sprites/items/apartment_block.png",
+      "words": [
+        "아파트",
+        "주거",
+        "오피스텔",
+        "부동산"
+      ]
+    },
+    {
+      "file": "sprites/items/balcony_rail.png",
+      "words": [
+        "베란다",
+        "전망이 좋다",
+        "바람이 통하다",
+        "시원하다"
+      ]
+    },
+    {
+      "file": "sprites/items/crescent_moon.png",
+      "words": [
+        "밤",
+        "저녁",
+        "꿀잠",
+        "밤새도록"
+      ]
+    },
+    {
+      "file": "sprites/items/fridge.png",
+      "words": [
+        "보관",
+        "보관하다",
+        "냉장고",
+        "냉장고 안"
+      ]
+    },
+    {
+      "file": "sprites/items/get_scolded.png",
+      "words": [
+        "야단(을) 맞다",
+        "피곳하다",
+        "안타깝다",
+        "행동"
+      ]
+    },
+    {
+      "file": "sprites/items/hanok_house.png",
+      "words": [
+        "한옥",
+        "북촌 한옥마을",
+        "민속촌",
+        "시골"
+      ]
+    },
+    {
+      "file": "sprites/items/make_phone_call.png",
+      "words": [
+        "전화를 하다",
+        "전화를 걸다",
+        "전화 요금",
+        "통화하다"
+      ]
+    },
+    {
+      "file": "sprites/items/medicine_capsule.png",
+      "words": [
+        "감기약",
+        "먹다",
+        "멀미를 하다",
+        "멀미약"
+      ]
+    },
+    {
+      "file": "sprites/items/of_course.png",
+      "words": [
+        "물론이지",
+        "정말",
+        "그럼요",
+        "허락하다"
+      ]
+    },
+    {
+      "file": "sprites/items/ointment_tube.png",
+      "words": [
+        "연고",
+        "바르다",
+        "얼굴에 뭐가 나다",
+        "피부과"
+      ]
+    },
+    {
+      "file": "sprites/items/snow_peak.png",
+      "words": [
+        "높다",
+        "산",
+        "키가 크다",
+        "산에 가다"
+      ]
+    },
+    {
+      "file": "sprites/items/bandaged_boot.png",
+      "words": [
+        "다리를 다치다",
+        "몸살이 나다",
+        "넘어지다"
+      ]
+    },
+    {
+      "file": "sprites/items/diploma_scroll.png",
+      "words": [
+        "졸업하다",
+        "입학",
+        "합격하다"
+      ]
+    },
+    {
+      "file": "sprites/items/eyeglasses.png",
+      "words": [
+        "안과",
+        "눈이 아프다",
+        "알아보다"
+      ]
+    },
+    {
+      "file": "sprites/items/lipstick_tube.png",
+      "words": [
+        "색조 화장품",
+        "화장품",
+        "화장을 하다"
+      ]
+    },
+    {
+      "file": "sprites/items/lit_candle.png",
+      "words": [
+        "죽다",
+        "은퇴하다",
+        "은퇴"
+      ]
+    },
+    {
+      "file": "sprites/items/make_noise.png",
+      "words": [
+        "시끄럽게 하다",
+        "시끄럽다",
+        "큰 소리로"
+      ]
+    },
+    {
+      "file": "sprites/items/medicine_bottle.png",
+      "words": [
+        "약",
+        "아프다",
+        "위염"
+      ]
+    },
+    {
+      "file": "sprites/items/no_parking.png",
+      "words": [
+        "주차 금지",
+        "차를 세우다",
+        "주차하다"
+      ]
+    },
+    {
+      "file": "sprites/items/no_smoking.png",
+      "words": [
+        "금연",
+        "담배를 피우다",
+        "표지판"
+      ]
+    },
+    {
+      "file": "sprites/items/rain_cloud.png",
+      "words": [
+        "찬물",
+        "찬물을 끼얹다",
+        "비가 오다"
+      ]
+    },
+    {
+      "file": "sprites/items/studio_oneroom.png",
+      "words": [
+        "원룸",
+        "현관",
+        "1인실"
+      ]
+    },
+    {
+      "file": "sprites/items/tissue_box.png",
+      "words": [
+        "감기에 걸리다",
+        "기침이 나다",
+        "목이 붓다"
+      ]
+    },
+    {
+      "file": "sprites/items/touch_head.png",
+      "words": [
+        "머리를 만지다",
+        "쓰다듬다",
+        "만지다"
+      ]
+    },
+    {
+      "file": "sprites/items/vegetable_pile.png",
+      "words": [
+        "야채",
+        "채소",
+        "반찬"
+      ]
+    },
+    {
+      "file": "sprites/items/violet_petals.png",
+      "words": [
+        "느끼다",
+        "-아/어다가",
+        "-고자"
+      ]
+    },
+    {
+      "file": "sprites/items/water_faucet.png",
+      "words": [
+        "수도 요금",
+        "수영장",
+        "수영을 하다"
+      ]
+    },
+    {
+      "file": "sprites/items/wooden_chair.png",
+      "words": [
+        "의자",
+        "자리",
+        "앉다"
+      ]
+    },
+    {
+      "file": "sprites/items/wooden_tv.png",
+      "words": [
+        "요리 프로그램",
+        "텔레비전 프로그램",
+        "보여주다"
+      ]
+    },
+    {
+      "file": "sprites/foods/cola.png",
+      "words": [
+        "콜라",
+        "음료수를 마시다"
+      ]
+    },
+    {
+      "file": "sprites/foods/fried_chicken.png",
+      "words": [
+        "프라이드치킨",
+        "꼬꼬치킨"
+      ]
+    },
+    {
+      "file": "sprites/foods/korean_set_meal.png",
+      "words": [
+        "한정식",
+        "전통 음식"
+      ]
+    },
+    {
+      "file": "sprites/items/be_empty.png",
+      "words": [
+        "비어 있다",
+        "빈방"
+      ]
+    },
+    {
+      "file": "sprites/items/be_late.png",
+      "words": [
+        "지각하다",
+        "늦다"
+      ]
+    },
+    {
+      "file": "sprites/items/bow_greeting.png",
+      "words": [
+        "고개를 숙여서 인사하다",
+        "앞에서"
+      ]
+    },
+    {
+      "file": "sprites/items/brown_laptop.png",
+      "words": [
+        "컴퓨터",
+        "노트북"
+      ]
+    },
+    {
+      "file": "sprites/items/cafeteria.png",
+      "words": [
+        "식당",
+        "엄마손식당"
+      ]
+    },
+    {
+      "file": "sprites/items/call_by_name.png",
+      "words": [
+        "이름을 부르다",
+        "뭐라고 부르다"
+      ]
+    },
+    {
+      "file": "sprites/items/campus_building.png",
+      "words": [
+        "입학하다",
+        "대학교"
+      ]
+    },
+    {
+      "file": "sprites/items/celadon_vase.png",
+      "words": [
+        "꽃병",
+        "꽂다"
+      ]
+    },
+    {
+      "file": "sprites/items/cinema_house.png",
+      "words": [
+        "극장",
+        "영화를 보다"
+      ]
+    },
+    {
+      "file": "sprites/items/clinic_building.png",
+      "words": [
+        "병원",
+        "의원"
+      ]
+    },
+    {
+      "file": "sprites/items/coral_ring.png",
+      "words": [
+        "-게 되다",
+        "-는 듯하다"
+      ]
+    },
+    {
+      "file": "sprites/items/cracked_tooth.png",
+      "words": [
+        "이가 아프다",
+        "치과"
+      ]
+    },
+    {
+      "file": "sprites/items/delivery_scooter.png",
+      "words": [
+        "배달되다",
+        "배달"
+      ]
+    },
+    {
+      "file": "sprites/items/doctor.png",
+      "words": [
+        "의사 선생님",
+        "의사"
+      ]
+    },
+    {
+      "file": "sprites/items/dorm_rules.png",
+      "words": [
+        "기숙사 규칙",
+        "규칙"
+      ]
+    },
+    {
+      "file": "sprites/items/dormitory.png",
+      "words": [
+        "기숙사",
+        "하숙집"
+      ]
+    },
+    {
+      "file": "sprites/items/eye_drops.png",
+      "words": [
+        "안약",
+        "넣다"
+      ]
+    },
+    {
+      "file": "sprites/items/farm_apple.png",
+      "words": [
+        "사과",
+        "과일"
+      ]
+    },
+    {
+      "file": "sprites/items/feel_awkward.png",
+      "words": [
+        "어색하다",
+        "곤란하다"
+      ]
+    },
+    {
+      "file": "sprites/items/give_left_hand.png",
+      "words": [
+        "왼손으로 물건을 주다",
+        "왼손"
+      ]
+    },
+    {
+      "file": "sprites/items/give_two_hands.png",
+      "words": [
+        "두 손으로 드리다",
+        "주다"
+      ]
+    },
+    {
+      "file": "sprites/items/green_sofa.png",
+      "words": [
+        "거실",
+        "방"
+      ]
+    },
+    {
+      "file": "sprites/items/heat_patch.png",
+      "words": [
+        "파스",
+        "붙이다"
+      ]
+    },
+    {
+      "file": "sprites/items/indigo_diamond.png",
+      "words": [
+        "N에게",
+        "-는 통에"
+      ]
+    },
+    {
+      "file": "sprites/items/kitchen_stove.png",
+      "words": [
+        "부엌",
+        "가스 요금"
+      ]
+    },
+    {
+      "file": "sprites/items/make_mistake.png",
+      "words": [
+        "실수하다",
+        "잘못하다"
+      ]
+    },
+    {
+      "file": "sprites/items/market_stall_icon.png",
+      "words": [
+        "재래시장",
+        "쇼핑하다"
+      ]
+    },
+    {
+      "file": "sprites/items/moving_boxes.png",
+      "words": [
+        "이사하다",
+        "상품"
+      ]
+    },
+    {
+      "file": "sprites/items/neighboring_country.png",
+      "words": [
+        "가까운 나라",
+        "나라"
+      ]
+    },
+    {
+      "file": "sprites/items/our_country.png",
+      "words": [
+        "우리나라",
+        "한국"
+      ]
+    },
+    {
+      "file": "sprites/items/paint_palette.png",
+      "words": [
+        "모양",
+        "색깔"
+      ]
+    },
+    {
+      "file": "sprites/items/performance.png",
+      "words": [
+        "공연",
+        "대단하다"
+      ]
+    },
+    {
+      "file": "sprites/items/pharmacy_shop.png",
+      "words": [
+        "약국",
+        "약사"
+      ]
+    },
+    {
+      "file": "sprites/items/piggy_bank.png",
+      "words": [
+        "저축률",
+        "저축"
+      ]
+    },
+    {
+      "file": "sprites/items/pine_tree.png",
+      "words": [
+        "푸르다",
+        "변하다"
+      ]
+    },
+    {
+      "file": "sprites/items/prescription_slip.png",
+      "words": [
+        "처방",
+        "주의사항"
+      ]
+    },
+    {
+      "file": "sprites/items/public_etiquette.png",
+      "words": [
+        "공중도덕",
+        "함께"
+      ]
+    },
+    {
+      "file": "sprites/items/receive_one_hand.png",
+      "words": [
+        "한 손으로 받다",
+        "손"
+      ]
+    },
+    {
+      "file": "sprites/items/recommend.png",
+      "words": [
+        "추천하다",
+        "추천"
+      ]
+    },
+    {
+      "file": "sprites/items/restaurant_staff.png",
+      "words": [
+        "직원",
+        "취업"
+      ]
+    },
+    {
+      "file": "sprites/items/servings.png",
+      "words": [
+        "인분",
+        "식사량"
+      ]
+    },
+    {
+      "file": "sprites/items/system_policy.png",
+      "words": [
+        "제도",
+        "교육 정책"
+      ]
+    },
+    {
+      "file": "sprites/items/taekwondo_dobok.png",
+      "words": [
+        "태권도",
+        "태권도장"
+      ]
+    },
+    {
+      "file": "sprites/items/thermometer.png",
+      "words": [
+        "열이 나다",
+        "해열제"
+      ]
+    },
+    {
+      "file": "sprites/items/trash_bag.png",
+      "words": [
+        "쓰레기",
+        "치우다"
+      ]
+    },
+    {
+      "file": "sprites/items/use_for_free.png",
+      "words": [
+        "무료로 이용하다",
+        "이용하다"
+      ]
+    },
+    {
+      "file": "sprites/items/wooden_study_desk.png",
+      "words": [
+        "책상",
+        "놓다"
+      ]
+    }
+  ],
+  "identicalFiles": [],
+  "structurallyUnique": false
+}

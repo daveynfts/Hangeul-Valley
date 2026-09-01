@@ -83,13 +83,17 @@ const DUMP = ['kinds_types', 'red_heart', 'light_bulb', 'restaurant_staff', 'bal
   assert(fs.existsSync(path.join(ROOT, 'sprites', row.folder, row.slug + '.png')),
     ko + ' still-icon exists');
 });
-assert(rowFor('고시원').slug === 'studio_oneroom', '고시원 maps to studio_oneroom');
+assert(rowFor('고시원').slug === 'gosiwon_room', '고시원 shows a small room for study and sleep');
 assert(rowFor('중개인').slug === 'estate_broker', '중개인 maps to estate_broker');
-assert(rowFor('열차').slug === 'subway_station', '열차 maps to subway_station');
-assert(rowFor('바나나').slug === 'farm_apple', '바나나 maps to farm_apple');
-assert(rowFor('프랑스').slug === 'desk_globe', '프랑스 maps to desk_globe');
-assert(rowFor('파리').slug === 'desk_globe', '파리 maps to desk_globe');
-assert(rowFor('한강').slug === 'desk_globe', '한강 maps to desk_globe');
+assert(rowFor('열차').slug === 'passenger_train', '열차 shows a train rather than a station entrance');
+assert(rowFor('바나나').slug === 'banana_bunch', '바나나 has an actual banana illustration');
+assert(rowFor('바나나').slug !== rowFor('사과').slug, 'banana and apple have different subjects');
+assert(rowFor('프랑스').slug === 'france_flag', '프랑스 has its national flag');
+assert(rowFor('파리').slug === 'paris_eiffel_tower', '파리 has a recognizable Paris landmark');
+assert(rowFor('한강').slug === 'han_river', '한강 has a river illustration');
+assert(new Set(['프랑스', '파리', '한강', '세계'].map((ko) => rowFor(ko).slug)).size === 4,
+  'France, Paris, the Han River and the world are visually distinct');
+assert(rowFor('젓다').slug === 'stir_drink', '젓다 shows the stirring action');
 assert(rowFor('낮다').slug !== 'sun_icon', '낮다 does not share the sun slug');
 
 ['엿', '떡', '선물', '꽃병', '개나리', '꽃', '책상', '어머니', '대학교',
@@ -114,9 +118,25 @@ assert(rowFor('한국').slug === 'our_country', '한국 maps to our_country');
 assert(rowFor('생산량').slug === 'brick_workshop', '생산량 maps to brick_workshop');
 assert(rowFor('-도록').slug !== 'kinds_types', '-도록 is not the pizza dump');
 
+// These words were specifically redesigned after the visual audit. A different
+// filename alone is insufficient: catch copied files as well as reused paths.
+const { auditVocabArt } = require('../scripts/audit_vocab_art');
+const dailyWords = ['걷다', '발', '편하다', '가볍다', '선풍기', '틀다', '켜다',
+  '더럽다', '이불', '맡기다', '세탁소', '달리다', '바로', '활기차다'];
+const dailyAudit = auditVocabArt(ROOT, { words: dailyWords });
+assert(dailyAudit.words === 14 && dailyAudit.uniqueImages === 14, 'the uniqueness audit actually examines all 14 images');
+assert(dailyAudit.structurallyUnique, 'all 14 daily-life words have distinct on-disk images, including file contents');
+dailyWords.forEach((ko) => {
+  const row = rowFor(ko);
+  const otherWords = vctx.ROWS.filter((r) => r.ko !== ko && r.folder === row.folder && r.slug === row.slug);
+  assert(otherWords.length === 0, ko + ' illustration is not borrowed by another word');
+});
+assert(rowFor('설탕').slug === 'sugar_bowl', 'sugar uses the sugar bowl rather than an ornament');
+assert(rowFor('소금').slug === 'salt_shaker', 'salt uses the salt shaker rather than an ornament');
+
 const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, 'sprites', 'catalog.json'), 'utf8'));
 const econ = fs.readFileSync(path.join(ROOT, 'js', 'systems', 'economy.js'), 'utf8');
-assert(catalog.cacheKey === 'art-20260827h', 'catalog cacheKey is art-20260827h');
-assert(econ.indexOf("ART_CACHE_KEY = 'art-20260827h'") >= 0, 'economy cache key is art-20260827h');
+assert(!!catalog.cacheKey, 'the art catalog has a cache key');
+assert(econ.includes("ART_CACHE_KEY = '" + catalog.cacheKey + "'"), 'runtime and catalog use the same art cache key');
 
 console.log('\ntest_farm_vocab_art: all passed');

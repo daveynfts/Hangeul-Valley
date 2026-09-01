@@ -455,6 +455,26 @@ screen is the invariant that keeps two recordings from ever playing at once — 
 position is remembered in `listenState.at` and handed back through `csPlay`'s `startAt`,
 which waits for `loadedmetadata` because `currentTime` before that is ignored or throws.
 
+## The daily-use interaction contract
+
+The cassette is a repeat destination, so closing it no longer means starting over. A small,
+versioned `hv_cassette_prefs_v2` record remembers, per unit, the stable track number, the
+playhead, playback speed, transcript visibility, the stable dictation sentence id and its
+speed. It deliberately does not hold scores or practice counts; those remain in
+`practiceLog` and travel with the unified save. Stable ids matter here: remembering array
+position 4 would silently resume a different recording when a track is inserted above it.
+
+The primary row now keeps previous, five seconds back, play, five seconds forward and next in
+one fixed group. Search lives with the track rail, the current recording has one persistent
+heading, and the transcript can be hidden without leaving the track. A-B tools stay below
+the waveform. Their capability is unchanged, but they no longer compete visually with Play.
+On a narrow screen the track rail becomes a horizontal strip and the primary controls remain
+centred rather than squeezing into two small columns.
+
+Dictation remembers the last sentence, adds a previous action and displays position as a
+progress strip. `tests/test_listen_loop.js` checks these persistence anchors, stable ids,
+visible controls and exports in addition to the waveform rules.
+
 **The thin progress bar is gone.** It and the waveform both claimed to show progress and
 rounded differently, so they disagreed on screen. `csPaintProgress` is the clock only.
 

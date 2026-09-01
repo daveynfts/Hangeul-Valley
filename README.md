@@ -3,13 +3,20 @@
 A Stardew-Valley-flavoured Korean vocabulary game. You plant a Korean word, answer a
 three-phase quiz as the crop grows, harvest it for Gold, and spend the Gold on new
 vocabulary packs, farm plots and cosmetics. 25 levels of 1,500 words in the TOPIK 1–3
-range, plus six textbook and exam worlds that carry their own vocabulary — 2,313 unique
+range, plus six textbook and exam worlds that carry their own vocabulary — 2,319 unique
 words across the game. (`checkReadmeCounts` in `scripts/validate_content.js` fails if any
 figure in this paragraph drifts from the content.)
 
 Built with Phaser 3 and vanilla JS — no build step, no framework, no bundler.
 Farm props and the player walk cycle are HD PNGs in `sprites/` (catalogued in
 `sprites/catalog.json`); letter-matrix sprites in `js/renderer.js` remain as fallback.
+
+The [TOPIK artwork review](docs/topik-art-review.md) tracks individual images
+for the full TOPIK Vocabulary Book, with per-word prompts and review progress.
+The [initial vocabulary art review](docs/art-review.md) preserves the earlier
+before/after repairs. Use `npm run audit:vocab-art` to check image sharing separately from
+catalog integrity; `npm run test:pixel-art` checks the sprite processor (Python
+and Pillow required).
 
 ---
 
@@ -238,14 +245,17 @@ and per-level learned-vs-mature bars.
 
 ## Korean pronunciation
 
-Words are read aloud in `ko-KR` through the Web Speech API — 🔊 buttons in the vocab
-book, fun-fact modal and cat dialog, plus automatic playback when you answer
-correctly. A 🐢 button re-reads the word syllable by syllable.
+Words and example sentences use pre-rendered `ko-KR-SunHiNeural` MP3s at `-12%`
+speed. The same clips work locally from `audio/ko/` and on the production CDN;
+Web Speech with an installed Korean voice is the fallback for a missing clip.
+The vocabulary book, word details and corrected exercises have 🔊 controls,
+and 🐢 reads a word syllable by syllable. Playback can be muted from the HUD.
 
-This needs a Korean voice installed on the operating system. Where none is available
-every speak control hides itself (`.tts-unavailable .tts-only`) rather than offering
-buttons that do nothing, and the paid audio hint refuses without charging. Playback
-can be muted from the 🔊 Audio button in the HUD; the choice persists.
+Generated clips are gitignored. After a fresh checkout, generate missing clips with
+`npm run tts:generate`, or limit the work to the exam world with
+`npm run tts:generate -- --world topik-2`. The harvest includes the TOPIK words,
+their example sentences and the questions with correct answers filled in; it never
+reads the question bank's wrong choices as model Korean.
 
 ---
 
@@ -480,8 +490,10 @@ The exam world beside the textbook units is not a chapter: it grows one TOPIK qu
 a time from photographs, grouped by question type rather than by the day a question
 arrived, and a sitting draws one question from the whole paper.
 [docs/exam-questions.md](docs/exam-questions.md) covers adding a question, the rule that
-every word must trace back to a paper, and the gloss-key discipline that decides whether
+every word must trace back to a paper or an explicit learner vocabulary list, and the gloss-key discipline that decides whether
 a learner can hover the thing the question is actually testing.
+[docs/topik-vocabulary.md](docs/topik-vocabulary.md) records the daily-life word list,
+its practice examples, icon references and the scoped TTS command.
 
 `js/scenes/` holds five scenes — `FarmScene` (the hub), `ArcadeScene`, `DungeonScene`,
 `FishingScene`, `BeeScene` — with the pixel renderer, chiptune synth, day/night and

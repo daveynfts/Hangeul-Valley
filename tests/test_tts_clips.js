@@ -99,6 +99,56 @@ assert(phrases.includes('한국어'), 'includes the HUD sample word');
 assert(phrases.some((p) => p.length === 1 && p.charCodeAt(0) >= 0xac00 && p.charCodeAt(0) <= 0xd7a3),
   'includes isolated Hangul syllables for spell()');
 
+// The exam world used to be absent from the harvest despite every word and
+// completed question having a play button. Pin the actual content coverage.
+const topik = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds/topik-2.json'), 'utf8'));
+const topikPhrases = collectTtsPhrases(ROOT, 'topik-2');
+const topikGaps = topik.level.words.filter((w) => !phrases.includes(w.ko)
+  || !topikPhrases.includes(w.ko)
+  || (w.example && (!phrases.includes(w.example) || !topikPhrases.includes(w.example))));
+assert(topikGaps.length === 0, 'full and scoped harvests cover TOPIK words and examples'
+  + (topikGaps.length ? ': ' + topikGaps.map((w) => w.ko).join(', ') : ''));
+
+// Exercise both slots, complete lines and the model example in isolation. Wrong
+// answers are deliberately malformed: walking the whole bank's `ko` fields
+// would turn them into recordings and make this fail.
+const os = require('os');
+const fixture = fs.mkdtempSync(path.join(os.tmpdir(), 'hv-topik-tts-'));
+try {
+  fs.mkdirSync(path.join(fixture, 'worlds'));
+  const writeJson = (rel, value) => fs.writeFileSync(path.join(fixture, rel), JSON.stringify(value));
+  writeJson('levels.json', [{ words: [{ ko: '바나나' }] }]);
+  writeJson('worlds/topik-2.json', { level: { words: [
+    { ko: '걷다', example: '공원에서 걸어요.', exampleEn: 'I walk in the park.' }
+  ] } });
+  writeJson('worlds/topik2-questions.json', { exercises: [{
+    type: 'build',
+    example: { lines: [{ ko: '{} 가요.' }], answerKo: '바로' },
+    items: [{
+      lines: [{ ko: '오늘은 더워요.' }, { ko: '선풍기를 {} 불을 {}.' }],
+      choices: [{ id: 'a', ko: '틀고' }, { id: 'b', ko: '틀으고' }], answer: 'a',
+      choices2: [{ id: 'a2', ko: '켜요' }, { id: 'b2', ko: '켜아요' }], answer2: 'a2'
+    }]
+  }] });
+  const scoped = collectTtsPhrases(fixture, 'topik-2');
+  assert(scoped.includes('오늘은 더워요. 선풍기를 틀고 불을 켜요.'),
+    'TOPIK speech fills both blanks with the correct answers');
+  assert(scoped.includes('오늘은 더워요.') && scoped.includes('바로 가요.'),
+    'complete lines and the worked example are recorded too');
+  assert(scoped.includes('공원에서 걸어요.') && scoped.includes('걷'),
+    'a vocabulary example and syllables are included in scoped generation');
+  assert(!scoped.includes('바나나') && !scoped.includes('I walk in the park.'),
+    'scoped generation excludes other worlds and English translations');
+  assert(!scoped.some((p) => /\{\}|틀으고|켜아요/.test(p)),
+    'no unfilled prompt or malformed distractor is recorded');
+  let rejected = false;
+  try { collectTtsPhrases(fixture, '../levels'); } catch (e) { rejected = /Unknown TTS world/.test(e.message); }
+  assert(rejected, 'a world id cannot escape the world directory');
+} finally {
+  if (path.dirname(fixture) === path.resolve(os.tmpdir())
+    && path.basename(fixture).startsWith('hv-topik-tts-')) fs.rmSync(fixture, { recursive: true, force: true });
+}
+
 const vercel = fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8');
 assert(vercel.indexOf('/audio/:path*') >= 0, 'Vercel rewrites /audio to the CDN');
 assert(vercel.indexOf('hangeul-valley/audio/') >= 0, 'CDN destination is hangeul-valley/audio');
@@ -109,6 +159,7 @@ const flags = parsePublishArgs(['--skip-tts', '--dry-run']);
 assert(flags.skipTts && flags.dryRun, 'publish accepts --skip-tts');
 const genFlags = parseArgs(['--force', '--limit', '4']);
 assert(genFlags.force && genFlags.limit === 4, 'generate_tts parses --force and --limit');
+assert(parseArgs(['--world', 'topik-2']).world === 'topik-2', 'generate_tts accepts a scoped world');
 
 assert(!looksLikeMp3(Buffer.alloc(10)), 'tiny buffers are not mp3');
 assert(looksLikeMp3(Buffer.concat([Buffer.from([0xff, 0xfb]), Buffer.alloc(500)])), 'ff fb frame counts as mp3');

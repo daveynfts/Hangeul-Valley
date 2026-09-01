@@ -75,6 +75,7 @@ function walkKo(out, seen, node) {
   }
   if (typeof node !== 'object') return;
   if (typeof node.ko === 'string') addKo(out, seen, node.ko);
+  if (typeof node.example === 'string') addKo(out, seen, node.example);
   Object.keys(node).forEach((k) => {
     if (k === 'ko') return;
     walkKo(out, seen, node[k]);
@@ -100,10 +101,11 @@ function fillScript(lines, texts) {
 // pre-rendered TTS clip otherwise. A 교과서 page left out of this harvest would come up
 // with a play button that does nothing on every row the book has no recording for —
 // which is the failure the 어휘 pages hit before this function walked the directory.
-function collectWorkbookPhrases(out, seen, base) {
+function collectWorkbookPhrases(out, seen, base, stem) {
   const dir = path.join(base, 'worlds');
   if (!fs.existsSync(dir)) return;
-  fs.readdirSync(dir).filter((f) => /-(?:work|text)book\.json$/.test(f)).sort()
+  fs.readdirSync(dir).filter((f) => /-(?:work|text)book\.json$/.test(f)
+    && (!stem || f.startsWith(stem + '-'))).sort()
     .forEach((f) => collectOneWorkbook(out, seen, path.join(dir, f)));
 }
 
@@ -132,24 +134,41 @@ function collectOneWorkbook(out, seen, full) {
   });
 }
 
-function collectTtsPhrases(root) {
+function collectTtsPhrases(root, worldId) {
   const base = root || ROOT;
   const out = [];
   const seen = new Set();
-  const levels = JSON.parse(fs.readFileSync(path.join(base, 'levels.json'), 'utf8'));
-  (Array.isArray(levels) ? levels : []).forEach((lvl) => {
-    (lvl.words || []).forEach((w) => addKo(out, seen, w && w.ko));
-  });
+  const worldFile = worldId ? 'worlds/' + worldId + '.json' : '';
+  if (worldId && (!/^(?:2b-unit-\d+|topik-\d+)$/.test(worldId)
+    || !fs.existsSync(path.join(base, worldFile)))) {
+    throw new Error('Unknown TTS world: ' + worldId);
+  }
+  const stem = worldId ? worldId.replace(/^2b-/, '').replace(/-(\d+)$/, '$1') : '';
+  if (!worldId) {
+    const levels = JSON.parse(fs.readFileSync(path.join(base, 'levels.json'), 'utf8'));
+    (Array.isArray(levels) ? levels : []).forEach((lvl) => {
+      (lvl.words || []).forEach((w) => walkKo(out, seen, w));
+    });
+  }
   ['worlds/2b-unit-10.json', 'worlds/2b-unit-11.json', 'worlds/2b-unit-13.json',
-    'worlds/2b-unit-14.json', 'worlds/unit10-desk-quiz.json',
+    'worlds/2b-unit-14.json', 'worlds/2b-unit-15.json', 'worlds/topik-2.json',
+    'worlds/unit10-desk-quiz.json',
     'worlds/unit11-desk-quiz.json', 'worlds/unit13-desk-quiz.json',
-    'worlds/unit14-desk-quiz.json'].forEach((rel) => {
+    'worlds/unit14-desk-quiz.json', 'worlds/unit15-desk-quiz.json'].filter((rel) =>
+    !worldId || rel === worldFile || rel === 'worlds/' + stem + '-desk-quiz.json'
+  ).forEach((rel) => {
     const full = path.join(base, rel);
     if (!fs.existsSync(full)) return;
     walkKo(out, seen, JSON.parse(fs.readFileSync(full, 'utf8')));
   });
-  collectWorkbookPhrases(out, seen, base);
-  EXTRA_PHRASES.forEach((p) => addKo(out, seen, p));
+  collectWorkbookPhrases(out, seen, base, stem);
+  // TOPIK uses the workbook renderer too. Only harvest the completed correct
+  // scripts, never its distractors or lines with an unfilled blank.
+  const exam = path.join(base, 'worlds', 'topik2-questions.json');
+  if ((!worldId || worldId === 'topik-2') && fs.existsSync(exam)) {
+    collectOneWorkbook(out, seen, exam);
+  }
+  if (!worldId) EXTRA_PHRASES.forEach((p) => addKo(out, seen, p));
 
   const sylSeen = new Set();
   out.slice().forEach((phrase) => {

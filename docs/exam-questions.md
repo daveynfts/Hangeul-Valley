@@ -25,10 +25,17 @@ the hover glosses are held back with it. Both appear together.
 
 ## The vocabulary rule
 
-Every word in the exam world must trace back to something a paper actually printed.
+Every paper-derived word in the exam world must trace back to something a paper actually printed.
 The list started with a field of economics vocabulary written from imagination —
 매출, 불황, 유통, twenty-nine words — which read as useful and was not. A personal
 study room fills up from the papers that go through it.
+
+The learner may also explicitly supply a word list. Record it separately in the
+world's `vocabularySources` with `type: "user-list"`, a dated source note and the
+exact headwords. The validator checks those references and permits those words
+without inventing a paper. All other words still need a question source. Original
+practice examples belong on the words as `example` / `exampleEn`, not in the exam
+bank. See [topik-vocabulary.md](topik-vocabulary.md) for the first such list.
 
 `checkTopikWorld` enforces it. The corpus a word may trace to is the question's
 `phraseKo`, `lines`, `choices`, **and** its `why` and `grammar` notes. That last
@@ -159,3 +166,20 @@ Three checks have since taken most of that over:
 What the browser is still for is the rest of the surface — that the question draws,
 that the answer marks ✓, that the explanation opens, that the art renders. Those have
 no invariant and are cheap to check: answer the question once.
+
+## Explanation reading order
+
+The `why` fields are intentionally detailed: each blank-line paragraph handles a hinge,
+reading or distractor. The TOPIK answer view keeps every paragraph but no longer presents
+them as one dense block. It now reads in this order:
+
+1. the correct completed sentence and its meaning;
+2. the first `why` paragraph as **핵심 단서 / what to notice**;
+3. the separate `grammar` field as **문법 포인트 / rule**;
+4. the remaining paragraphs inside a collapsed **선택지 비교 / full reasoning** section.
+
+This is scoped to `topik2-questions`; unit workbooks retain their existing answer cards. The
+source text stays untouched and searchable in the DOM when the disclosure is closed.
+`tests/test_topik_draw.js` verifies all 27 current questions have enough paragraph structure,
+that LF and CRLF split identically, that the detailed section is collapsed by default and
+that readable line lengths are capped in CSS.

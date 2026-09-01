@@ -21,6 +21,7 @@ const vm = require('vm');
 
 const ROOT = path.join(__dirname, '..');
 const ui = fs.readFileSync(path.join(ROOT, 'js', 'ui.js'), 'utf8');
+const css = fs.readFileSync(path.join(ROOT, 'css', 'game.css'), 'utf8');
 const bank = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', 'topik2-questions.json'), 'utf8'));
 
 let passed = 0;
@@ -130,8 +131,34 @@ assert(typeof one.items[0].why === 'string' && one.items[0].why.length > 200,
   'the drawn question brings its explanation with it');
 assert((one.items[0].choices || []).length === 4, 'and its four options');
 
-// ── 7. A bank that did not ask for it is untouched ───────────────────────────
-console.log('\n--- 7. Opt-in only ---');
+// ── 7. The thorough explanation is revealed in a learnable order ────────────
+console.log('\n--- 7. Progressive TOPIK explanations ---');
+const whyFrom = ui.indexOf('function wbWhyParagraphs');
+const whyTo = ui.indexOf('function wbTopikWhyHtml');
+assert(whyFrom > 0 && whyTo > whyFrom, 'the paragraph splitter is a named, testable rule');
+const whyCtx = {};
+vm.createContext(whyCtx);
+vm.runInContext(ui.slice(whyFrom, whyTo) + '\nthis.splitWhy = wbWhyParagraphs;', whyCtx);
+const split = whyCtx.splitWhy('Core clue.\n\nOption one.\r\n\r\nOption two.');
+assert(split.length === 3 && split[0] === 'Core clue.' && split[2] === 'Option two.',
+  'blank lines split the key cue from choice-by-choice analysis on LF and CRLF');
+const allQuestions = bank.exercises.flatMap((paper) => paper.items || []);
+assert(allQuestions.length === 27, 'all 27 TOPIK questions use the shared explanation renderer');
+assert(allQuestions.every((item) => whyCtx.splitWhy(item.why).length >= 3),
+  'every current explanation has a visible key cue and at least two details to disclose');
+const explainSrc = ui.slice(whyTo, ui.indexOf('function renderWorkbook'));
+assert(explainSrc.indexOf('<details class="wb-analysis">') >= 0
+    && explainSrc.indexOf('<details class="wb-analysis" open') < 0,
+  'the full comparison stays in the document but is collapsed by default');
+assert(ui.indexOf("st.bank.id === 'topik2-questions'") >= 0,
+  'progressive disclosure is scoped to the TOPIK paper rather than changing every workbook');
+assert(css.indexOf('.wb-learn-grid') >= 0 && css.indexOf('.wb-analysis-step') >= 0,
+  'the key clue, rule and detailed steps have separate readable layouts');
+assert(/max-width: 7[26]ch/.test(css),
+  'long reasoning lines are capped to a readable measure instead of spanning the panel');
+
+// ── 8. A bank that did not ask for it is untouched ───────────────────────────
+console.log('\n--- 8. Opt-in only ---');
 const plain = c4.wbDrawOne({ id: 'x' }, ex);
 assert(plain === ex, 'a bank without drawOne gets the whole exercise back, unchanged');
 const single = c4.wbDrawOne(bank, { id: 'y', items: [{ n: 1 }] });

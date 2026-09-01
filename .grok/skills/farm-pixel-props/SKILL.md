@@ -20,11 +20,18 @@ Prompt shape (2–5 sentences):
 
 - Stardew / SNES-style 16-bit pixel-art game prop
 - straight-on front view facing the camera (orthographic 2D, not isometric)
-- isolated on flat solid magenta `#FF00FF`
+- isolated on a true transparent background (preferred), or flat solid magenta `#FF00FF`
 - chunky dark outline, warm oak + farm palette
 - no text, no grass, no floor, no drop shadow, no scene
 
 Keep later variants on `image_edit` from the first accepted PNG so the set matches.
+
+Vocabulary illustrations must have distinct subjects or actions for distinct words.
+Do not reuse a generic ornament, shoe, heart, or an unrelated noun just to fill a
+missing mapping. The same Korean word may keep its illustration across worlds.
+For verbs show the action; for abstract meanings show a specific, readable situation.
+Inspect both the original and the final 48 px sprite: complete limbs, clothing,
+outlines, and the feature that conveys the meaning must survive processing.
 
 ## 1b. Set contract
 
@@ -70,7 +77,7 @@ Naming lives in `sprites/catalog.json` (id, real-world `nameEn`, `path`, Phaser 
 1. Pick folder + snake_case slug. Register first so the file cannot land unnamed:
    `npm run register:art -- --folder foods --slug kimchi_jar --name-en "Kimchi"`
    (`registerArt()` writes `id`, `nameEn`, `path`, `kind`, `family`). Ids are `<kind>.<slug>` (`food.kimchi_jar`, `item.corn_cob`). Trophy plaques use `--family trophy-icons` so the id is `ui.trophy.<name>`.
-2. Imagine on magenta `#FF00FF`. Key/crop/resize with `process_prop.py --height <class> --subdir <folder> <src> <slug>`. Height and `--subdir` come from `processArgs()`.
+2. Generate with real alpha (or magenta `#FF00FF`). Key/crop/resize with `process_prop.py --height <class> --subdir <folder> <src> <slug>`. Height and `--subdir` come from `processArgs()`.
 3. The PNG must land at `sprites/<folder>/<slug>.png` — the same path as the catalog row. Do not leave a generated file in `images/` or the session dump.
 4. Bump `sprites/catalog.json` `cacheKey` and `ART_CACHE_KEY` together.
 5. `npm run audit:art` (also gated by `validate_content`). Zero orphans, zero missing files, snake_case names, ids start with folder kind.
@@ -83,7 +90,19 @@ One Phaser spawn path per family: `*_hd` key, matrix fallback, scale 1 on HD, no
 
 ## 2. Key, crop, size
 
-Run `scripts/process_prop.py` (Pillow) with the class `--height`. It keys magenta / rose, crops 2px pad (feet stay the last opaque row), resizes, keys again, and writes `sprites/<subdir>/<slug>.png` (repo root is the source of truth). Height and `--subdir` come from `processArgs()` in `scripts/art_library.js`.
+Run `scripts/process_prop.py` (Pillow) with the class `--height`. It preserves an
+existing alpha cutout; for an opaque image it removes magenta connected to the
+border and the same matte color inside enclosed gaps. Reserve that exact magenta
+for the backdrop. It never guesses white, black, cream, or dusty purple as background.
+It crops with 2 px padding, resizes with nearest-neighbor sampling, makes alpha
+binary, and limits the visible palette to 32 colors without dithering. Use
+`--colors 64` for a more detailed station, or `--colors 0` to preserve the source
+palette. Do not smooth-resample or re-key an already transparent sprite.
+If a generator removed only the outer matte but left magenta inside enclosed
+gaps (for example, a fan grille), `--key-magenta` explicitly removes the reserved
+magenta there too. Never use this override on intentionally pink/purple artwork.
+The output is `sprites/<subdir>/<slug>.png`; the repo root is the source of truth.
+Height and `--subdir` come from `processArgs()` in `scripts/art_library.js`.
 
 Character sets: `--height 80 --subdir characters/<slug>` per frame, then one `--pad-set characters/<slug>` so every `walk_*.png` shares the same width (torso centered, extra rows above, feet last opaque row). Do not skip `--pad-set` — unequal widths sway the sprite. Register the frames in `sprites/catalog.json`.
 

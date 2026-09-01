@@ -254,6 +254,14 @@ function finish() {
   assert(css.indexOf('.cs-lb') >= 0 && css.indexOf('#listen-loopbar') >= 0, 'the loop bar is styled');
   // Slowing a recording down is what you reach for once you are looping one phrase of it.
   assert(/data-rate="0\.5"/.test(html), 'a 0.5x rate joined the transport');
+  assert(html.indexOf('id="listen-search"') >= 0 && ui.indexOf('function listenFilter') >= 0,
+    'a long track list can be searched without leaving the player');
+  assert(html.indexOf('id="listen-script-toggle"') >= 0 && ui.indexOf('function listenToggleScript') >= 0,
+    'the transcript can be hidden for a listening-first pass and restored in place');
+  assert(/listenNudge\(-5\)/.test(html) && /listenNudge\(5\)/.test(html),
+    'five-second back and forward controls are visible rather than hidden behind shortcuts');
+  assert(css.indexOf('.cs-play-primary') >= 0 && css.indexOf('.cs-main-controls') >= 0,
+    'the frequent playback controls have their own large, stable visual group');
   // Two progress readings on one row rounded differently and disagreed on screen.
   assert(html.indexOf('id="listen-bar"') < 0, 'the old thin progress bar is gone from the page');
   assert(css.indexOf('.cs-bar ') < 0 && css.indexOf('.cs-bar>') < 0 && css.indexOf('.cs-bar {') < 0,
@@ -302,6 +310,28 @@ function finish() {
     .forEach(([fn, key]) => assert(keys.indexOf(fn) >= 0, key + ' is bound on the 듣기 screen'));
   assert(keys.indexOf('listenToggle()') >= 0, 'and space still plays');
 
+  // ── 8a. Daily use resumes where the learner left off ─────────────────────
+  console.log('\n--- 8a. Daily-use memory and progressive controls ---');
+  assert(/CASSETTE_PREFS_KEY = 'hv_cassette_prefs_v2'/.test(ui),
+    'cassette navigation preferences have a versioned, isolated local key');
+  assert(/track: cur\.n/.test(ui) && /dictationId: it\.id/.test(ui),
+    'resume targets stable content ids rather than array positions');
+  assert(/listenAt: Math\.max\(0, at\)/.test(ui) && /listenRate: csSafeRate/.test(ui),
+    'the selected speed and playhead are remembered together');
+  const openListen = ui.slice(ui.indexOf('function openListen'), ui.indexOf('function closeListen'));
+  assert(/pref\.track/.test(openListen) && /pref\.listenAt/.test(openListen) && /pref\.showScript/.test(openListen),
+    'opening Listen restores the track, position and transcript preference');
+  const closeListen = ui.slice(ui.indexOf('function closeListen'), ui.indexOf('function listenPick'));
+  assert(closeListen.indexOf('csRememberListen()') < closeListen.indexOf('csStop()'),
+    'closing remembers the live playhead before the shared player clears it');
+  const openDict = ui.slice(ui.indexOf('function openDictation'), ui.indexOf('function closeDictation'));
+  assert(/pref\.dictationId/.test(openDict) && /pref\.dictationRate/.test(openDict),
+    'dictation resumes the last sentence and speed instead of returning to line one');
+  assert(html.indexOf('id="dict-progress-fill"') >= 0 && ui.indexOf("$('dict-progress-fill')") >= 0,
+    'dictation has a visible sentence-progress strip');
+  assert(ui.indexOf('function dictPrev') >= 0 && html.indexOf('onclick="dictPrev()"') >= 0,
+    'dictation can move backwards as well as forwards');
+
   // ── 8b. 받아쓰기 carries the same strip ────────────────────────────────────
   // One component, two screens. A learner who has used the loop on 듣기 should not find a
   // different set of controls on the screen where looping three syllables matters most.
@@ -310,7 +340,7 @@ function finish() {
     .forEach((id) => assert(html.indexOf('id="' + id + '"') >= 0, id + ' is in the page'));
   assert(/#dict-wave/.test(css) && /#listen-wave, #dict-wave/.test(css),
     'and both strips share one rule rather than being styled twice');
-  ['dictToggleLoop', 'dictSetA', 'dictSetB', 'dictClearAB', 'dictReplayAB', 'dictSeek']
+  ['dictToggleLoop', 'dictSetA', 'dictSetB', 'dictClearAB', 'dictReplayAB', 'dictSeek', 'dictPrev']
     .forEach((fn) => {
       assert(ui.indexOf('window.' + fn) >= 0, fn + ' is exported');
       assert(ui.indexOf('function ' + fn) >= 0, 'and defined');
