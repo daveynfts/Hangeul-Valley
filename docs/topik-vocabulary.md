@@ -10,6 +10,27 @@ the TOPIK world from 361 to 374 words. They share the category `일상생활` /
 `Daily routines & home`, available in the existing notebook and vocabulary book.
 Words repeated in another world retain the game's shared Korean-keyed SRS card.
 
+## Volunteer recruitment and chart language — 2026-09-01
+
+The learner supplied a second list of 21 headwords:
+
+그림책, 자원봉사자, 모집, 꿈, 희망, 자격, 고등학생, 또는, 신청 방법,
+홈페이지, 활동 기간, 봉사 활동, 참여하다, 그래프, 고려 사항, 기준, 규모,
+비율, 전체, 이상, 이하.
+
+`이상` already existed and is reused, so 20 entries are appended and the TOPIK
+world now contains 394 words. The new cards are grouped into `봉사·모집` /
+`Volunteering & applications` and `자료 해석` / `Charts & data` to keep the
+recruitment-notice language separate from graph-reading language. The reused
+`이상` card keeps its existing `사회` category and now also has an example.
+
+All 21 entries have original Korean practice sentences and English explanations.
+The source record `user-2026-09-01-volunteer-data` preserves the learner's exact
+list and explicitly records that the examples are practice material rather than
+quotations attributed to a TOPIK paper. Twenty new dedicated art briefs are
+registered as pending; semantic fallback illustrations keep every card usable
+while those assets await individual visual review.
+
 `worlds/topik-2.json` records this request in `vocabularySources`. These are
 explicit learner additions, not words attributed to an invented exam paper.
 The 14 `example` / `exampleEn` pairs are original practice material. In particular,
@@ -46,7 +67,7 @@ Actions show people or hands doing the action, rather than a shared shoe, sun,
 sofa or fan. Full redesign prompts and source-image identifiers are recorded in
 `docs/art-redesign.json`. The follow-up [full TOPIK art review](topik-art-review.md)
 and [per-word manifest](topik-art-manifest.json) cover the later request to
-replace shared images throughout the 374-word TOPIK Vocabulary Book.
+replace shared images throughout the 394-word TOPIK Vocabulary Book.
 
 | File under `sprites/items/` | Style parent | Subject prompt |
 |---|---|---|

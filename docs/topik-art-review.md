@@ -3,10 +3,11 @@
 Status: in progress. The per-word manifest is the source of truth for completed
 reviews; an entry with only a brief is not a finished image.
 
-The follow-up covers all 374 words in `worlds/topik-2.json`. The starting book
-used 106 images, with 268 extra shared assignments across 53 reuse groups.
-The plan retains 62 suitable existing illustrations and separately generates
-312 replacements. Similar words receive different actions or objects: a closed
+The follow-up now covers all 394 words in `worlds/topik-2.json`. The original
+374-word book used 106 images, with 268 extra shared assignments across 53 reuse
+groups. The expanded plan retains 62 suitable existing illustrations and
+separately generates 332 replacements. Similar words receive different actions
+or objects: a closed
 fridge versus its contents, storage versus putting something away, and rising
 versus climbing stairs. Grammar and abstract words use visual situations as
 memory aids alongside the existing Korean headword and English explanation.
@@ -65,8 +66,10 @@ outside this follow-up's scope and can still be shared.
 
 The game, desktop and admin suites passed with 213 replacements applied and 62
 retained illustrations, for 275 unique live TOPIK images. All nine
-pixel-processing tests passed against those images. Ninety-nine replacements
-remain; the final complete audit will be recorded after they are integrated.
+pixel-processing tests passed against those images. The original ninety-nine
+pending replacements plus twenty briefs for the 2026-09-01 learner list leave
+119 replacements; the final complete audit will be recorded after they are
+integrated.
 
 Browser navigation was blocked by the in-app Browser security policy during
 this continuation. No alternate browser or policy workaround was used, and

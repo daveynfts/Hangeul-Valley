@@ -2007,7 +2007,9 @@
         "en": "or more, upwards of",
         "hint": "⬆️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "신청자는 고등학생 이상이어야 합니다.",
+        "exampleEn": "Applicants must be high school students or older."
       },
       {
         "ko": "면접시험",
@@ -3365,6 +3367,195 @@
         "categoryEn": "Daily routines & home",
         "example": "아침에 운동하면 하루가 활기차요.",
         "exampleEn": "My day feels full of energy when I exercise in the morning."
+      },
+      {
+        "ko": "그림책",
+        "en": "a picture book",
+        "hint": "📖",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "아이들에게 그림책을 읽어 주었어요.",
+        "exampleEn": "I read a picture book to the children."
+      },
+      {
+        "ko": "자원봉사자",
+        "en": "a volunteer worker",
+        "hint": "🙋",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "행사에 필요한 자원봉사자를 모집합니다.",
+        "exampleEn": "We are recruiting volunteers needed for the event."
+      },
+      {
+        "ko": "모집",
+        "en": "recruitment; accepting applications",
+        "hint": "📣",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "forms": [
+          "모집하다",
+          "모집합니다"
+        ],
+        "example": "자원봉사자 모집은 이번 주 금요일에 끝나요.",
+        "exampleEn": "Volunteer recruitment ends this Friday."
+      },
+      {
+        "ko": "꿈",
+        "en": "a dream or personal aspiration",
+        "hint": "🌟",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "제 꿈은 아이들을 가르치는 선생님이 되는 것입니다.",
+        "exampleEn": "My dream is to become a teacher who teaches children."
+      },
+      {
+        "ko": "희망",
+        "en": "hope; a desired future",
+        "hint": "🌅",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "봉사 활동은 아이들에게 희망을 줄 수 있어요.",
+        "exampleEn": "Volunteer work can give children hope."
+      },
+      {
+        "ko": "자격",
+        "en": "eligibility; a qualification",
+        "hint": "✅",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "지원 자격은 고등학생 이상입니다.",
+        "exampleEn": "Applicants must be high school students or older."
+      },
+      {
+        "ko": "고등학생",
+        "en": "a high school student",
+        "hint": "🎒",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "이 프로그램에는 고등학생도 참여할 수 있어요.",
+        "exampleEn": "High school students can also participate in this program."
+      },
+      {
+        "ko": "또는",
+        "en": "or; alternatively (written choice connector)",
+        "hint": "↔️",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "신청서는 이메일 또는 홈페이지로 보내 주세요.",
+        "exampleEn": "Please send the application by email or through the website."
+      },
+      {
+        "ko": "신청 방법",
+        "en": "how to apply; the application method",
+        "hint": "📝",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "자세한 신청 방법은 홈페이지에서 확인하세요.",
+        "exampleEn": "Check the website for detailed application instructions."
+      },
+      {
+        "ko": "홈페이지",
+        "en": "a website or homepage",
+        "hint": "🌐",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "활동 일정은 홈페이지에 공지됩니다.",
+        "exampleEn": "The activity schedule will be posted on the website."
+      },
+      {
+        "ko": "활동 기간",
+        "en": "the activity period",
+        "hint": "📅",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "활동 기간은 7월부터 8월까지입니다.",
+        "exampleEn": "The activity period runs from July through August."
+      },
+      {
+        "ko": "봉사 활동",
+        "en": "volunteer work or service activities",
+        "hint": "🤝",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "example": "주말마다 도서관에서 봉사 활동을 합니다.",
+        "exampleEn": "I do volunteer work at the library every weekend."
+      },
+      {
+        "ko": "참여하다",
+        "en": "to take part; to participate in an activity",
+        "hint": "🙌",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications",
+        "forms": [
+          "참여해요",
+          "참여할",
+          "참여했습니다"
+        ],
+        "example": "친구와 함께 환경 보호 활동에 참여했어요.",
+        "exampleEn": "I took part in an environmental protection activity with a friend."
+      },
+      {
+        "ko": "그래프",
+        "en": "a graph or chart",
+        "hint": "📊",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data",
+        "example": "그래프를 보면 참여자의 비율을 알 수 있어요.",
+        "exampleEn": "The graph shows the proportion of participants."
+      },
+      {
+        "ko": "고려 사항",
+        "en": "a consideration; a factor to consider",
+        "hint": "🤔",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data",
+        "example": "장소를 정할 때 교통편도 중요한 고려 사항입니다.",
+        "exampleEn": "Transportation is an important consideration when choosing a location."
+      },
+      {
+        "ko": "기준",
+        "en": "a criterion or standard for judgment",
+        "hint": "📏",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data",
+        "example": "지원자를 뽑는 기준은 경험과 책임감입니다.",
+        "exampleEn": "The criteria for selecting applicants are experience and responsibility."
+      },
+      {
+        "ko": "규모",
+        "en": "the scale or size of an undertaking",
+        "hint": "🏢",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data",
+        "example": "행사 규모가 커서 많은 자원봉사자가 필요해요.",
+        "exampleEn": "The event is large, so many volunteers are needed."
+      },
+      {
+        "ko": "비율",
+        "en": "a ratio or proportion",
+        "hint": "🥧",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data",
+        "example": "전체 참가자 중 고등학생의 비율이 가장 높아요.",
+        "exampleEn": "High school students make up the largest proportion of all participants."
+      },
+      {
+        "ko": "전체",
+        "en": "the whole or total; all of a group",
+        "hint": "🧩",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data",
+        "example": "전체 신청자 중 절반이 봉사 경험이 있어요.",
+        "exampleEn": "Half of all applicants have volunteer experience."
+      },
+      {
+        "ko": "이하",
+        "en": "or less; no more than",
+        "hint": "⬇️",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data",
+        "example": "참가 인원이 열 명 이하이면 한 팀으로 활동합니다.",
+        "exampleEn": "If there are ten participants or fewer, they work as one team."
       }
     ]
   },
@@ -3445,6 +3636,16 @@
         "ko": "일상생활",
         "en": "Daily routines & home",
         "cat": "일상생활"
+      },
+      {
+        "ko": "봉사·모집",
+        "en": "Volunteering & applications",
+        "cat": "봉사·모집"
+      },
+      {
+        "ko": "자료 해석",
+        "en": "Charts & data",
+        "cat": "자료 해석"
       }
     ]
   },
@@ -3470,6 +3671,36 @@
         "달리다",
         "바로",
         "활기차다"
+      ]
+    },
+    {
+      "id": "user-2026-09-01-volunteer-data",
+      "type": "user-list",
+      "date": "2026-09-01",
+      "titleEn": "Volunteer recruitment & chart language",
+      "note": "Twenty-one headwords explicitly supplied by the learner. 이상 already existed and is reused; twenty new entries were appended. Example sentences are original practice material, not quotations from an exam paper.",
+      "words": [
+        "그림책",
+        "자원봉사자",
+        "모집",
+        "꿈",
+        "희망",
+        "자격",
+        "고등학생",
+        "또는",
+        "신청 방법",
+        "홈페이지",
+        "활동 기간",
+        "봉사 활동",
+        "참여하다",
+        "그래프",
+        "고려 사항",
+        "기준",
+        "규모",
+        "비율",
+        "전체",
+        "이상",
+        "이하"
       ]
     }
   ]

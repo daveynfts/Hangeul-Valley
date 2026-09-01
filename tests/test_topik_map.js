@@ -93,6 +93,30 @@ assert(inUse.every((c) => declared.includes(c)) && declared.every((c) => inUse.i
   'the mindmap names exactly the categories the words use ('
   + (declared.length ? declared.join(', ') : 'none yet') + ')');
 
+const volunteerDataWords = [
+  '그림책', '자원봉사자', '모집', '꿈', '희망', '자격', '고등학생', '또는',
+  '신청 방법', '홈페이지', '활동 기간', '봉사 활동', '참여하다', '그래프',
+  '고려 사항', '기준', '규모', '비율', '전체', '이상', '이하'
+];
+const volunteerDataSource = (world.vocabularySources || [])
+  .find((source) => source.id === 'user-2026-09-01-volunteer-data');
+assert(!!volunteerDataSource, 'the volunteer and chart list records its learner-supplied provenance');
+assert(!!volunteerDataSource
+    && volunteerDataSource.words.map(nfc).join('|') === volunteerDataWords.join('|'),
+  'its source record preserves all 21 requested headwords in order');
+const volunteerDataEntries = volunteerDataWords
+  .map((ko) => words.find((word) => nfc(word.ko) === ko))
+  .filter(Boolean);
+assert(volunteerDataEntries.length === volunteerDataWords.length,
+  'all 21 volunteer, application and chart headwords are available in the TOPIK map');
+assert(volunteerDataWords.every((ko) => kos.filter((listed) => listed === ko).length === 1),
+  'each requested headword appears exactly once, including the reused 이상 entry');
+assert(volunteerDataEntries.every((word) => nfc(word.example) && nfc(word.exampleEn)),
+  'every requested headword has an original Korean example and an English explanation');
+assert(volunteerDataEntries.filter((word) => word.ko !== '이상')
+  .every((word) => ['봉사·모집', '자료 해석'].includes(word.category)),
+  'the 20 appended entries are grouped for recruitment reading or chart interpretation');
+
 // ── 2. The question bank ─────────────────────────────────────────────────────
 console.log('\n--- 2. The question bank ---');
 assert(bank.id === 'topik2-questions', 'the bank names itself topik2-questions');
