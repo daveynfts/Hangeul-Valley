@@ -3574,7 +3574,11 @@
       "folder": "items",
       "brief": "A hand pulls the cord of a tall cream floor lamp as its shade lights up with three amber rays. Turning on a light, distinct from pressing the wall switch illustration.",
       "priorFile": "sprites/items/light_bulb.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-40cf21f3-827f-4131-b8c5-20f7c64b62f4.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 240,
@@ -3585,7 +3589,11 @@
       "folder": "items",
       "brief": "A person props an oak door open with a wedge and then steps away, leaving the door visibly open. The action leaves a continuing state.",
       "priorFile": "sprites/items/knot_tile.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-f1f794c5-2909-4df1-a45f-e1e07b07e9d3.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 241,
@@ -3596,7 +3604,11 @@
       "folder": "items",
       "brief": "Hands fill two capped water bottles and put them neatly in an emergency supply basket for later use. Completed preparation kept available, not a door-opening scene.",
       "priorFile": "sprites/items/hourglass_ornament.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-5592f17c-f9bd-4311-a70b-1ab23242e348.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 242,
@@ -3607,7 +3619,11 @@
       "folder": "items",
       "brief": "An adult walks a familiar loop from their little house to a garden bed along three pairs of faded bootprints, with one looping arrow. A repeated past routine.",
       "priorFile": "sprites/items/oak_rings.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-198e19c6-afdf-46cc-847e-72edc1d26579.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 243,
@@ -3618,7 +3634,11 @@
       "folder": "items",
       "brief": "An ordinary adult carries a light box up two broad steps comfortably, with an unobstructed complete head-to-toe figure. Neutral everyday mobility, no crossed-out disability symbols or superiority cues.",
       "priorFile": "sprites/items/elderly.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-70ec586d-6f47-4202-95e6-8360737edf9b.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 244,
@@ -3629,7 +3649,11 @@
       "folder": "items",
       "brief": "A patient adult struggles to untangle a thick knot in a rope with both hands, frowning in concentration. A task with real difficulty, no generic warning badge.",
       "priorFile": "sprites/items/ice_pack.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-46bda109-13fb-484f-a3a8-ba6736d25c21.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 245,
@@ -3640,7 +3664,11 @@
       "folder": "items",
       "brief": "A simple front-facing fully clothed human figure with arms slightly away from the torso and legs apart, each body region clearly visible. Neutral anatomy overview, no profession props.",
       "priorFile": "sprites/items/stethoscope.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-8028ea45-8705-42f7-b2e2-20cdcf64084f.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 246,
@@ -3651,7 +3679,11 @@
       "folder": "items",
       "brief": "A small bird nest sits on the very top of a tall narrow oak post, with an upward measuring arrow running along the post. Height clearly emphasized.",
       "priorFile": "sprites/items/snow_peak.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-2c9954e3-dcfb-4013-96ce-573d3bbadda1.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 248,
@@ -3662,7 +3694,11 @@
       "folder": "items",
       "brief": "A curious person touches a real sprouting seedling while comparing it with a smaller matching sketch, then nods with a firm check. Confirming that something is actually true.",
       "priorFile": "sprites/items/of_course.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-f7664b49-96e6-4eb3-bfcd-4c97a87089c8.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 249,
@@ -3673,7 +3709,11 @@
       "folder": "items",
       "brief": "An amazed observer applauds a gardener holding an impressively enormous prize pumpkin, with two broad admiration rays. A remarkable achievement, no isolated trophy icon.",
       "priorFile": "sprites/items/performance.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-722bd1fa-a97d-4930-9c9a-4f4d63b66b21.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 250,
@@ -3684,7 +3724,11 @@
       "folder": "items",
       "brief": "A person lifts a cooking-pot lid expecting a full meal shown in a thought bubble, but the actual pot is empty; uncertain disappointed expression. Expectation with an implied contrast.",
       "priorFile": "sprites/items/knot_tile.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ece57223-7954-4e2b-a300-7dc483e3f8a2.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 251,
@@ -3695,7 +3739,11 @@
       "folder": "items",
       "brief": "A worried traveler wraps a treasured book in a protective cloth while imagining a rain cloud in a thought bubble. Precaution driven by fear of a possible event.",
       "priorFile": "sprites/items/teal_gem.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-50f6b90a-54e8-4c47-beb2-678179bd62e1.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 252,
@@ -3706,7 +3754,11 @@
       "folder": "items",
       "brief": "A person points to an approaching rain cloud through a window and hands a friend an umbrella to take out. A confident prediction followed by advice.",
       "priorFile": "sprites/items/knot_tile.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-47601fb4-c87a-4ca2-9c5e-b6278860466f.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 253,
@@ -3717,7 +3769,11 @@
       "folder": "items",
       "brief": "A bundled traveler faces both falling snow and a sideways gust, visibly adding a scarf over an already warm coat. One condition stacked on another.",
       "priorFile": "sprites/items/cream_waves.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-1cf2d534-22b5-4e99-b362-697b4c48abbc.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 254,
@@ -3728,7 +3784,11 @@
       "folder": "items",
       "brief": "A surprised farmer leans back with open hands at a tiny seed that has produced a huge sunflower, mouth open and eyebrows raised. Astonishment at an unexpected fact.",
       "priorFile": "sprites/items/gold_starburst.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-66f44deb-517c-430a-83f6-98a82309752c.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 255,
@@ -3739,7 +3799,11 @@
       "folder": "items",
       "brief": "A gardener plants a new sapling at the start of a short forward path leading to a small future orchard silhouette. A fresh commitment moving onward.",
       "priorFile": "sprites/items/wall_calendar.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-4043c129-1e2b-4801-8c03-7e6e2ab6e5d7.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 256,
@@ -3750,7 +3814,11 @@
       "folder": "items",
       "brief": "Three small clear jars show water levels rising in small equal increments from left to right, linked by two short arrows. Gradual change, not one sudden jump.",
       "priorFile": "sprites/items/light_bulb.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-0dfe3d2a-6dac-4b54-b09c-39803b66429d.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 257,
@@ -3761,7 +3829,11 @@
       "folder": "items",
       "brief": "A chunk of ice gradually melts beside a thermometer whose amber column rises, with a gentle small sun above. Increasing warmth, no snowflakes or shivering person.",
       "priorFile": "sprites/items/sun_icon.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-bfae8154-de6d-4742-8dec-ffcc45c8d1c1.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 259,
@@ -3772,7 +3844,11 @@
       "folder": "items",
       "brief": "A simple green caterpillar on one leaf changes through a gold arrow into a warm amber butterfly with open wings. A clear transformation between different forms.",
       "priorFile": "sprites/items/pine_tree.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-9196e5ce-a30d-45da-a0d8-bf3472e4e076.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 260,
@@ -3783,7 +3859,11 @@
       "folder": "items",
       "brief": "A present-day sapling grows along a rightward arrow into two larger future tree silhouettes, the farthest tree lightly outlined. Change continuing away from now.",
       "priorFile": "sprites/items/hourglass_ornament.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-d13ee726-93d0-4ab6-a9c4-8c5f972bac65.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 261,
@@ -3794,7 +3874,11 @@
       "folder": "items",
       "brief": "A faint seed and small sprout on the left lead through an arrow to a solid full leafy plant at the right, with the final plant emphasized. A process continuing from the past to now.",
       "priorFile": "sprites/items/gold_spiral.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-22f6d075-ca0e-4312-94bd-ec64723228ba.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 262,
@@ -3805,7 +3889,11 @@
       "folder": "items",
       "brief": "A cautious beginner tries playing one note on a small flute, fingers tentative and one questioning tilt of the head. A first experimental attempt, not a performance.",
       "priorFile": "sprites/items/gold_spiral.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-8d6cf858-ee13-4cc7-bb53-266ffadb0ec4.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 263,
@@ -3816,7 +3904,11 @@
       "folder": "items",
       "brief": "A noisy woodpecker repeatedly taps a wooden post beside a reader covering one ear; three short tap marks emphasize bothersome repetition. No written sound effects.",
       "priorFile": "sprites/items/hourglass_ornament.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-b5fb9dae-7939-4ba1-b8ce-02d6b2d5e7aa.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 270,
@@ -3827,7 +3919,11 @@
       "folder": "items",
       "brief": "A parent angles a desk lamp toward a child reading an open book, carefully directing the light onto the page. One person acts so another can do something.",
       "priorFile": "sprites/items/grammar_scroll.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-d363e0af-b6dc-44c7-b7ff-ba5e3dd36b3a.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 271,
@@ -3838,7 +3934,11 @@
       "folder": "items",
       "brief": "A taller adult lowers a fruit basket to child height so a child can reach and pick a pear. Enabling a result through a concrete adjustment.",
       "priorFile": "sprites/items/hourglass_ornament.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-4a7c3302-eac5-49ed-bd1c-7dc16b37678f.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 272,
@@ -3849,7 +3949,11 @@
       "folder": "items",
       "brief": "A shopkeeper waits beside a counter, then reaches for a parcel when a small door bell rings, shown by a bell-to-hand arrow. Acting if or when a condition occurs.",
       "priorFile": "sprites/items/gold_starburst.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-0bc31692-3eaf-4cea-9858-cbceb8071df6.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 273,
@@ -3860,7 +3964,11 @@
       "folder": "items",
       "brief": "An angler deliberately packs a fishing rod and bait while imagining a fish in a small thought bubble. The same person prepares and intends to act.",
       "priorFile": "sprites/items/cream_waves.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-bae63e1e-b71f-41b2-ba00-9a462492f81e.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 274,
@@ -3871,7 +3979,11 @@
       "folder": "items",
       "brief": "A wooden shelf bows visibly under a huge stack of books while a surprised person supports the middle with both palms. So much weight that a clear consequence follows.",
       "priorFile": "sprites/items/knot_tile.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-96ef55df-bfb9-4e57-bbec-ccc90f5bafa3.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 275,
@@ -3882,7 +3994,11 @@
       "folder": "items",
       "brief": "An isolated bounded island map contains one mountain, a river and a tiny settlement with a plain sage flag. A whole country as territory, distinct from the Korean peninsula.",
       "priorFile": "sprites/items/neighboring_country.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-9784c4bd-7370-4a73-a95a-25a75f021143.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 276,
@@ -3893,7 +4009,11 @@
       "folder": "items",
       "brief": "A child holds a tiny sapling while imagining a mature fruit tree inside a cloud-shaped window ahead, joined by a forward arrow. A hopeful future state.",
       "priorFile": "sprites/items/hourglass_ornament.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-6250944a-a177-4de3-ba58-072ecf9f6342.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 278,
@@ -3904,7 +4024,11 @@
       "folder": "items",
       "brief": "An official cream document bearing a schoolhouse diagram receives an oak seal beside a stack of textbooks. Rules and planning for education, no real text.",
       "priorFile": "sprites/items/system_policy.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-a82dcc45-abbb-42d1-ad86-496a3bfd522d.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 279,
@@ -3915,7 +4039,11 @@
       "folder": "items",
       "brief": "Two identical clay lumps become two visibly different finished bowls in separate hands, one tall and one shallow. The outcomes turn out differently.",
       "priorFile": "sprites/items/light_bulb.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-c7e954f6-db79-489d-97e4-76fcd92ad368.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 280,
@@ -3926,7 +4054,11 @@
       "folder": "items",
       "brief": "A plain-clothed apprentice pulls on a cream chef hat and apron, with a small old shirt silhouette behind a forward arrow. Becoming a new role.",
       "priorFile": "sprites/items/gold_spiral.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-eff7a741-4429-4e95-8519-3f8ba2806419.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 281,
@@ -3937,7 +4069,11 @@
       "folder": "items",
       "brief": "A small tabletop carrying a potted plant balances on one central sturdy support, with that support highlighted amber and a downward arrow pointing to it. The result rests on a key condition.",
       "priorFile": "sprites/items/justice_scales.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-4c713db4-852a-4256-b68b-5757ef3df8a4.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 282,
@@ -3948,7 +4084,11 @@
       "folder": "items",
       "brief": "A compact year planner opens to twelve blank month blocks arranged three by four, all enclosed by one sage frame with an amber selector. The whole current year, no numerals.",
       "priorFile": "sprites/items/wall_calendar.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-80ee18fd-276c-4347-9766-c24618112630.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 283,
@@ -3959,7 +4099,11 @@
       "folder": "items",
       "brief": "A shallow woven basket holds a red apple, golden pear, purple grapes and one orange, each clearly distinct. A mixed fruit category rather than one fruit species.",
       "priorFile": "sprites/items/farm_apple.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-bec485ac-5b93-4c4b-ae48-8c40e0734038.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 284,
@@ -3970,7 +4114,11 @@
       "folder": "items",
       "brief": "A farmer counts three full harvest crates of matching apples beside a small fruit tree, with a simple tally board made only of dots. The quantity produced, not a factory building.",
       "priorFile": "sprites/items/brick_workshop.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-4952f5f7-5a6e-4ef9-abc9-14a2559606c3.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 285,
@@ -3981,7 +4129,11 @@
       "folder": "items",
       "brief": "A gardener surveys four pots: three healthy green plants and one slightly wilted plant; a broad curved bracket embraces the whole group. A general overall judgment with an exception.",
       "priorFile": "sprites/items/gold_spiral.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ecdd9d06-aa7d-42cd-b0c2-12c59a859fbd.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 287,
@@ -3992,7 +4144,11 @@
       "folder": "items",
       "brief": "A plain price tag hanging from an apple basket is lowered down a short vertical rail beside a shrinking gold coin stack. A falling price, distinct from a physical falling person.",
       "priorFile": "sprites/items/light_bulb.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-c3b8a001-d29a-4060-916a-1d827fc0ff64.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 288,
@@ -4003,7 +4159,11 @@
       "folder": "items",
       "brief": "A person imagines a small key opening a treasure box inside a cloud-shaped thought bubble, while the real closed box remains untouched below. A supposition, not an actual event.",
       "priorFile": "sprites/items/oak_rings.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-3ab97c5b-2edb-4aeb-aa23-e1b6db429592.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 289,
@@ -4014,7 +4174,11 @@
       "folder": "items",
       "brief": "An open travel bag sits below a forked path of two thought bubbles: one shows a mountain boot, the other a beach shell. Two offered possibilities, neither selected yet.",
       "priorFile": "sprites/items/chevron_badge.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-5c9c886d-a2ba-41b4-8a45-92e51f2cb8b1.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 290,
@@ -4025,7 +4189,11 @@
       "folder": "items",
       "brief": "A person looks at a drooping potted plant and tentatively points to a nearly empty watering can, with a dotted cause arrow between them. An uncertain explanation, not a firm conclusion.",
       "priorFile": "sprites/items/teal_gem.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-74bc03bb-2d42-4b73-83ca-a0e4d11a943a.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 292,
@@ -4036,7 +4204,11 @@
       "folder": "items",
       "brief": "A simple cream-clothed torso has a small stomach-shaped cutaway glowing coral with two gentle irritation marks, and a concerned hand resting over the abdomen. Non-graphic educational symptom illustration.",
       "priorFile": "sprites/items/medicine_bottle.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-f12da016-71b9-4753-a6ca-ef207cd93303.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 293,
@@ -4047,7 +4219,11 @@
       "folder": "items",
       "brief": "A person in a simple sage hospital gown sits calmly on a clinic bed while holding a thermometer, with a folded blanket over the knees. A patient receiving care, no medical logo.",
       "priorFile": "sprites/items/stethoscope.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-8fa52e05-0e01-4771-ba02-35722bf91222.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 295,
@@ -4058,7 +4234,11 @@
       "folder": "items",
       "brief": "A hand adjusts a large oak dial to the middle of a green safe range, with one small flow valve below responding. Keeping an amount under control, no numerals.",
       "priorFile": "sprites/items/justice_scales.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-1dd7d1f6-3907-4e2c-8ac3-f4a29bf0db81.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 296,
@@ -4069,7 +4249,11 @@
       "folder": "items",
       "brief": "A letter travels along a short curved arrow from a sending hand into the open hands of a smiling recipient, whose torso is emphasized. The person receiving, not the sending action.",
       "priorFile": "sprites/items/indigo_diamond.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-3dbf4ebc-7964-48f6-9bb4-e845539e1e37.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 297,
@@ -4080,7 +4264,11 @@
       "folder": "items",
       "brief": "A wind-blown seed lands naturally in an empty flowerpot and grows into a small sprout, with no person planting it. A result arising without anyone deliberately causing it.",
       "priorFile": "sprites/items/coral_ring.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-b5c27976-1b8b-4739-8949-558bb48af3f5.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 301,
@@ -4091,7 +4279,11 @@
       "folder": "items",
       "brief": "A hand carefully places a long-stemmed yellow flower upright into the narrow neck of a celadon vase, stem visibly crossing the opening. Inserting vertically, not just displaying a vase.",
       "priorFile": "sprites/items/celadon_vase.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-b2e4a541-cd15-4c26-b591-6db7c9c4c4fa.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 303,
@@ -4102,7 +4294,11 @@
       "folder": "items",
       "brief": "Two hands lower a closed cream book flat onto an oak desk, with one short downward arrow ending at the tabletop. Putting an object down and leaving it there.",
       "priorFile": "sprites/items/wooden_study_desk.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-9d8ea117-d941-4646-b79e-8b609e15f561.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 304,
@@ -4113,7 +4309,11 @@
       "folder": "items",
       "brief": "A short branch has fresh green buds and three pale blossoms beside a tiny returning swallow; gentle warm colors, no full summer tree or snow.",
       "priorFile": "sprites/items/sun_icon.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-5dbb5170-4238-4174-8d06-228b593401c2.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 305,
@@ -4124,7 +4324,11 @@
       "folder": "items",
       "brief": "A farmer carries a basket of freshly picked strawberries from a small plant to a waiting dessert plate, one strawberry being transferred by hand. Do something, take the result elsewhere and use it.",
       "priorFile": "sprites/items/violet_petals.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-dbf0c1bf-41a9-4314-a5f5-3b84c107622e.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 306,
@@ -4135,7 +4339,11 @@
       "folder": "items",
       "brief": "A humble traveler opens a lunch tin containing a single plain bread roll and shrugs gently, showing there is nothing besides it. A limited result, no extra fruit or plus sign.",
       "priorFile": "sprites/items/grammar_scroll.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-1e349111-066e-4f80-a7ee-a6c8f4524a3a.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 307,
@@ -4146,7 +4354,11 @@
       "folder": "items",
       "brief": "A walker examines a small map showing an already broken bridge and chooses the intact detour, a clear cause arrow from bridge drawing to new route. A factual past reason for an action.",
       "priorFile": "sprites/items/hourglass_ornament.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-4143237c-8d93-4d29-843a-0a7b6c0ccffe.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 308,
@@ -4157,7 +4369,11 @@
       "folder": "items",
       "brief": "A sudden gust flips an open umbrella inside out and blows a carefully arranged stack of papers from a startled person. An unwanted consequence from an unexpected cause.",
       "priorFile": "sprites/items/gold_starburst.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-62aca0f7-4efc-4e8e-87d6-0ea15d280b7b.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 309,
@@ -4168,7 +4384,11 @@
       "folder": "items",
       "brief": "A compact civic hall with a plain flag stands over an outlined territory map beside a closed constitution-like book with no writing. A state as an institution, not just geographic land.",
       "priorFile": "sprites/items/government_hall.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-5ad2b9bf-4d58-4cbe-93f1-0d0e69b772fd.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 310,
@@ -4179,7 +4399,11 @@
       "folder": "items",
       "brief": "A thoughtful person surveys a workbench with one spilled cup, a half-built stool and a waiting toolbox, hand at the chin. Assessing the current circumstances as a whole.",
       "priorFile": "sprites/items/line_graph.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-5ac8fce8-b884-4379-9cf4-89f1e5f586e8.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 311,
@@ -4190,7 +4414,11 @@
       "folder": "items",
       "brief": "A recovering adult sets aside a walking cane and takes a comfortable step with a small green upward arrow, a light ankle wrap still visible. An improving condition, no before-after diagnosis chart.",
       "priorFile": "sprites/items/gold_spiral.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-a39a3a52-9af4-4542-84fe-47de489bad4e.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 312,
@@ -4201,7 +4429,11 @@
       "folder": "items",
       "brief": "A concerned gardener clasps their hands while looking at a snapped sunflower stem beyond a small fence, sad eyebrows and a fallen petal. Regret at an unfortunate sight, no gore.",
       "priorFile": "sprites/items/get_scolded.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ea9eef07-591a-44e6-a9c8-808d7183bd1e.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 313,
@@ -4212,7 +4444,11 @@
       "folder": "items",
       "brief": "A worried friend waits outside a closed clinic door with hands clasped in quiet hope and a small warm thought glow. Only wishing or feeling, with nothing further they can do.",
       "priorFile": "sprites/items/cream_waves.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-f6ace53d-25ae-4fb9-87ce-72ae94949f05.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 314,
@@ -4223,7 +4459,11 @@
       "folder": "items",
       "brief": "A seated person quietly watches raindrops through a little window, hands resting still in their lap and no other activity. Doing only that and nothing more.",
       "priorFile": "sprites/items/knot_tile.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-9d7888ba-fe34-4036-972d-47161e0b0611.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 315,
@@ -4234,7 +4474,11 @@
       "folder": "items",
       "brief": "An ice cream cone melts rapidly under a very strong small sun, with a surprised person holding a napkin beneath the drips. A degree so great that an observable consequence follows.",
       "priorFile": "sprites/items/gold_spiral.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-d4e94bec-7b19-4bb9-af21-a6036dd0eff3.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 316,
@@ -4245,7 +4489,11 @@
       "folder": "items",
       "brief": "A tiny teacup is compared with an enormous round pumpkin that cannot possibly fit inside, with a crossed-out inward arrow and astonished hands. A clearly impossible proposition.",
       "priorFile": "sprites/items/oak_rings.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-f49eab98-3320-429e-ab2c-40c291090d9a.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 317,
@@ -4256,7 +4504,11 @@
       "folder": "items",
       "brief": "An adult deliberately picks up a dropped wrapper beside a bin while another person watches approvingly. A visible considerate behavior rather than a static person portrait.",
       "priorFile": "sprites/items/get_scolded.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-8c2c2839-b453-4e2b-a342-d4fab411cccb.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 318,
@@ -4267,7 +4519,11 @@
       "folder": "items",
       "brief": "A caregiver gently adjusts a blanket around an ill person seated in bed and offers a cup of water. Warm attentive care, complete hands and calm faces, no medical labels.",
       "priorFile": "sprites/items/stethoscope.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-2745ed6e-5a3b-4ae2-9af7-594bd3c34746.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 320,
@@ -4278,7 +4534,11 @@
       "folder": "items",
       "brief": "One complete open human hand shown palm-forward with exactly five clearly separated fingers, a visible thumb and a short wrist. Warm skin palette and crisp dark-brown outline.",
       "priorFile": "sprites/items/receive_one_hand.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-95de0efd-5245-4e7c-b65c-1e507bae714d.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 322,
@@ -4289,7 +4549,11 @@
       "folder": "items",
       "brief": "A person closes their eyes while rubbing a soft cream cloth between two fingertips, focusing deliberately on its texture. Active sensing through touch.",
       "priorFile": "sprites/items/violet_petals.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-38473496-c8e5-433f-930d-86ef588e5d4a.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 323,
@@ -4300,7 +4564,11 @@
       "folder": "items",
       "brief": "A seated person relaxes as a caring hand rests on their shoulder, a warm amber comfort glow arriving around the shoulder. A feeling received rather than an active touching gesture.",
       "priorFile": "sprites/items/red_heart.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-84d1ebd8-f4e1-411a-8a4b-abe1819b68d4.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 324,
@@ -4311,7 +4579,11 @@
       "folder": "items",
       "brief": "A frustrated person tries to press a large square wooden block into a small round hole, bracing both hands; the block remains outside despite effort. Try as one might, the action is impossible.",
       "priorFile": "sprites/items/chevron_badge.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-e3c44d93-01aa-4b24-a6f4-d49a9a176f38.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 325,
@@ -4322,7 +4594,11 @@
       "folder": "items",
       "brief": "A diligent person continues kneading dough even as flour spills onto their apron, calmly keeping both hands working. The main action holds despite an inconvenience.",
       "priorFile": "sprites/items/teal_gem.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-72cbf5b1-48b4-4a03-975d-96382ceea023.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 326,
@@ -4333,7 +4609,11 @@
       "folder": "items",
       "brief": "Several reaching hands jostle a small desk full of loose papers while one person tries to recover a fallen notebook. A chaotic surrounding situation causes the mishap.",
       "priorFile": "sprites/items/indigo_diamond.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-a1414df6-cdae-4c4f-b1d5-a04309deb171.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 327,
@@ -4344,7 +4624,11 @@
       "folder": "items",
       "brief": "A person tilts their head toward a closed kettle with a small steam curl escaping the lid, tentatively inferring it is boiling. Evidence suggests an ongoing action.",
       "priorFile": "sprites/items/coral_ring.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-8f179e74-e884-404f-810d-b58dc9fb76d7.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 329,
@@ -4355,7 +4639,11 @@
       "folder": "items",
       "brief": "A new student with a blue backpack steps through an open school gate holding a cream admission envelope, smiling toward the building. Entering school as a new member.",
       "priorFile": "sprites/items/campus_building.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-cbc86773-3f35-4c7e-928d-f266b52b3a01.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 330,
@@ -4366,7 +4654,11 @@
       "folder": "items",
       "brief": "A student wearing a plain graduation cap holds a textbook beside a travel suitcase and a small globe with a curved travel route. Studying in another country, not tourism alone.",
       "priorFile": "sprites/items/desk_globe.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-75f47a0b-8245-46c3-a3f0-85b0f6ba9313.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 331,
@@ -4377,7 +4669,11 @@
       "folder": "items",
       "brief": "Three successive small sunrise discs arch above three matching plants of steadily increasing height, connected by short daily steps. Growth that increases every day.",
       "priorFile": "sprites/items/line_graph.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-6df04b73-f2af-486e-b096-2f190c7c403c.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 332,
@@ -4388,7 +4684,11 @@
       "folder": "items",
       "brief": "An oak presentation board holds three ascending sage bars and one clear upward gold trend arrow; a hand points to the latest highest bar. A formal increase in figures, no written numbers.",
       "priorFile": "sprites/items/line_graph.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ea82bc66-4c8d-4694-a56c-9ee60274b02f.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 334,
@@ -4399,7 +4699,11 @@
       "folder": "items",
       "brief": "A chef plans a future meal on a cream clipboard showing a pie sketch, then sets a mixing bowl beside it with a purposeful gesture. Deliberate intention expressed as a plan.",
       "priorFile": "sprites/items/violet_petals.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-54b070de-8ecd-410e-875a-28e83595a392.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 335,
@@ -4410,7 +4714,11 @@
       "folder": "items",
       "brief": "A painter finishes rinsing a brush in a water jar and hangs the now-clean brush on a peg, a forward arrow linking wash to hang. The first action is completed before the second.",
       "priorFile": "sprites/items/grammar_scroll.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-9225baaf-234e-40ed-a3c3-d566de5a6462.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 336,
@@ -4421,7 +4729,11 @@
       "folder": "items",
       "brief": "A person pours water into a bucket with a large obvious hole; every drop leaks immediately into a puddle and the bucket stays empty. Trying produces no useful result.",
       "priorFile": "sprites/items/hourglass_ornament.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-9158968c-8d4b-402d-9f78-5494abf2e89b.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 337,
@@ -4432,7 +4744,11 @@
       "folder": "items",
       "brief": "A slice of toast springs from a small toaster directly into a waiting hand, with a very short action arrow and two pop rays. An immediate response the instant something happens.",
       "priorFile": "sprites/items/gold_starburst.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-4e6a4467-8e6d-4029-878e-e05a1e68c891.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 338,
@@ -4443,7 +4759,11 @@
       "folder": "items",
       "brief": "A willing helper rolls up both sleeves beside three distinct task tools: a broom, a wooden spoon and a wrench. Ready for whichever task is needed, no decorative question mark.",
       "priorFile": "sprites/items/briefcase.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-b04a37b2-283d-4ec7-9cbb-8ecf568b5323.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 339,
@@ -4454,7 +4774,11 @@
       "folder": "items",
       "brief": "A cautious child wearing a safe swim float touches the edge of a shallow practice pool with one toe for the first time, an encouraging adult hand nearby. A new unfamiliar first experience.",
       "priorFile": "sprites/items/first_time.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-7dc75a6b-f8d8-453c-af74-72cb1c2e3f1d.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 340,
@@ -4465,7 +4789,11 @@
       "folder": "items",
       "brief": "A weary hiker with a heavy blue backpack leans forward on a walking stick while climbing two steep rock steps, sweat drop and bent knees. Sustained difficulty, not casual running.",
       "priorFile": "sprites/items/hourglass_ornament.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-65be909f-55c8-4194-8726-f1dc9f0d3d70.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 341,
@@ -4476,7 +4804,11 @@
       "folder": "items",
       "brief": "A rooster raises its head to crow as the sun rises behind a short fence post, linked by a small repeating cycle arrow. A regular natural pattern that is expected.",
       "priorFile": "sprites/items/justice_scales.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-8f107b88-b9b6-44e8-b5a8-eaced5b086f8.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 342,
@@ -4487,7 +4819,11 @@
       "folder": "items",
       "brief": "A very ripe apple bends its thin twig and starts falling into a waiting basket below, with one downward motion trail. A natural inevitable consequence.",
       "priorFile": "sprites/items/justice_scales.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-cefe1b87-933f-454c-a126-6e2655274859.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 343,
@@ -4498,7 +4834,11 @@
       "folder": "items",
       "brief": "A child holds a small kite while a supervising adult gives a clear welcoming open-palm permission gesture toward an open gate. Permission to do the activity, not an order.",
       "priorFile": "sprites/items/cream_waves.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-d64df412-c0b6-4b43-9f78-e52b78908010.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 344,
@@ -4509,7 +4849,11 @@
       "folder": "items",
       "brief": "An absorbed reader remains with a book while an untouched broom and empty watering can wait beside the chair; a small sun-to-moon arc suggests doing only that all day.",
       "priorFile": "sprites/items/knot_tile.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-d3339c8a-fd45-46a8-82de-948b17367687.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 345,
@@ -4520,7 +4864,11 @@
       "folder": "items",
       "brief": "An observer notices muddy boots and a wet umbrella by a doorway, with a faint rain-cloud thought bubble inferred from those clues. A conclusion from visible evidence.",
       "priorFile": "sprites/items/gold_spiral.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-f77249a9-1d42-491b-b67c-30cd455857fd.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 348,
@@ -4531,7 +4879,11 @@
       "folder": "items",
       "brief": "A friendly interviewer holds a clipboard with three large empty response circles while asking another adult a question; pencil poised, attentive expressions, no text.",
       "priorFile": "sprites/items/newspaper.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ec09cb1e-c417-4e41-a593-9cdbf24d08c4.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 349,
@@ -4542,7 +4894,11 @@
       "folder": "items",
       "brief": "A cheerful adult stretches both arms above their shoulders beside a small basket of fruit and a water bottle. Everyday wellbeing and healthy movement, no medicine advertisement.",
       "priorFile": "sprites/items/running_shoe.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-693fcf52-3bd8-4bd4-8061-62c2f3acac0d.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 351,
@@ -4553,7 +4909,11 @@
       "folder": "items",
       "brief": "An apron-wearing carpenter carefully planes a board on an oak workbench, hands firmly guiding the tool and two wood shavings curling away. Productive work in progress.",
       "priorFile": "sprites/items/briefcase.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-1dbc6aed-8747-42e0-859c-8535121fe3ec.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 352,
@@ -4564,7 +4924,11 @@
       "folder": "items",
       "brief": "A close-up hand marks exactly one of three large response circles on a cream survey sheet held by another hand. Giving a survey answer, no letters or numbers.",
       "priorFile": "sprites/items/silver_mic.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-0193f9ea-f57b-45a5-8413-8f098d591f27.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 353,
@@ -4575,7 +4939,11 @@
       "folder": "items",
       "brief": "Seven identical round counters arranged clearly as four sage counters and three cream counters inside one oak tray; the group of four is enclosed by a gold bracket. An unmistakable majority.",
       "priorFile": "sprites/items/line_graph.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-530dcde6-0c24-4d91-a9ec-dc81cbe9f3d9.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 354,
@@ -4586,7 +4954,11 @@
       "folder": "items",
       "brief": "A small athlete jumps cleanly over a horizontal wooden marker, feet visibly above the marker with a short upward-and-over arrow. Passing beyond a threshold.",
       "priorFile": "sprites/items/gold_spiral.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ea04dddb-1088-4d4a-9efc-db7ec0b86270.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 355,
@@ -4597,7 +4969,11 @@
       "folder": "items",
       "brief": "A closed reference book bears a simple leaf emblem; opening its cover reveals a matching larger leaf drawing with three small feature callouts. Content concerning a specific topic, no writing.",
       "priorFile": "sprites/items/cream_waves.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ced79623-d02d-4310-8af5-0d523b35bbd0.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 356,
@@ -4608,7 +4984,11 @@
       "folder": "items",
       "brief": "A small lamp stays lit while its cord remains firmly plugged into a socket, the connection highlighted by a green enclosing bracket. The result continues while its condition holds.",
       "priorFile": "sprites/items/kinds_types.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-6f4e25eb-346b-4d92-ae51-acb691793705.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 357,
@@ -4619,7 +4999,11 @@
       "folder": "items",
       "brief": "A passerby notices an older adult drop a grocery bag and immediately bends down to help gather two fallen apples. A witnessed circumstance prompts a personal response.",
       "priorFile": "sprites/items/kinds_types.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-35f98a28-9e5f-4577-ae76-d0cd4e3ffcd0.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 358,
@@ -4630,7 +5014,11 @@
       "folder": "items",
       "brief": "A student calmly keeps practicing in an open notebook despite an intimidating stack of difficult books beside them, with a faint tall stack in a thought bubble. Perseverance even under a hypothetical difficulty.",
       "priorFile": "sprites/items/kinds_types.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-c5f30929-0a6d-403d-be5c-9fdcab8c75ad.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 359,
@@ -4641,7 +5029,11 @@
       "folder": "items",
       "brief": "A shopper imagines a full coin purse in a thought bubble but still faces a firmly closed shop shutter below. Even assuming the condition, the outcome remains unavailable.",
       "priorFile": "sprites/items/kinds_types.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-d93e905a-ebb3-4b14-ae19-f49791e8bfc4.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 360,
@@ -4652,7 +5044,11 @@
       "folder": "items",
       "brief": "A hopeful beginner holds a paintbrush while imagining themselves painting a sunflower on an easel in a thought bubble. Desire to perform an activity rather than desire for an object.",
       "priorFile": "sprites/items/kinds_types.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-e585f116-3099-463d-9356-c7233a0b8dfd.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 374,
@@ -4663,7 +5059,11 @@
       "folder": "items",
       "brief": "An open picture book with two large colorful illustrations and thick page edges, clearly a children’s book without any written text.",
       "priorFile": "sprites/items/hardcover_book.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-258f8b03-84c3-4e83-9add-c98465bf7b47.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 375,
@@ -4674,7 +5074,11 @@
       "folder": "items",
       "brief": "A friendly volunteer wearing a simple heart badge hands a picture book to a child, both complete figures and no lettering.",
       "priorFile": "sprites/items/red_heart.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-b28c39ba-bd4d-429b-a6d2-bb56318ba8a3.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 376,
@@ -4685,7 +5089,11 @@
       "folder": "items",
       "brief": "A small notice board with three blank applicant cards beside a handheld megaphone, showing an open call for people without text.",
       "priorFile": "sprites/items/newspaper.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-604dfb59-ae90-4745-99c0-15250ef1641f.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 377,
@@ -4696,7 +5104,11 @@
       "folder": "items",
       "brief": "A sleeping student beside a thought bubble showing their future self happily teaching at a classroom board, with no writing.",
       "priorFile": "sprites/items/red_heart.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-d9d05c89-e51d-4e06-bf77-8fbb10101c8c.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 378,
@@ -4707,7 +5119,11 @@
       "folder": "items",
       "brief": "Two careful hands lift a fresh green seedling toward a warm sunrise, a clear visual metaphor for hope and a brighter future.",
       "priorFile": "sprites/items/gold_starburst.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-9e898d44-1bb8-4019-a190-7b36c0df5123.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 379,
@@ -4718,7 +5134,11 @@
       "folder": "items",
       "brief": "A tidy checklist card with two check marks, a small student portrait and an approval seal, showing eligibility without text.",
       "priorFile": "sprites/items/contract_seal.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ed343ad9-c383-4af0-aa71-38d5621c9561.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 380,
@@ -4729,7 +5149,11 @@
       "folder": "items",
       "brief": "A Korean high school student in a neat school uniform stands with a backpack and notebook, shown as a complete readable figure.",
       "priorFile": "sprites/items/school_backpack.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-320f309c-ca2c-4837-8479-e7f2667696e3.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 381,
@@ -4740,7 +5164,11 @@
       "folder": "items",
       "brief": "One path divides evenly toward two clear arrow destinations, presenting two alternative choices with no labels or symbols made from text.",
       "priorFile": "sprites/items/knot_tile.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-d1e85653-e536-4c7d-ae54-906febfe228d.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 382,
@@ -4751,7 +5179,11 @@
       "folder": "items",
       "brief": "A blank application form, pencil and envelope arranged in a short visual sequence that shows how to apply, without writing.",
       "priorFile": "sprites/items/homework_notebook.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ad554c4e-4e09-487c-ab8c-19073067e7cf.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 383,
@@ -4762,7 +5194,11 @@
       "folder": "items",
       "brief": "A desktop monitor displaying a simple home page layout with header blocks, picture tile and buttons, but no readable text or logos.",
       "priorFile": "sprites/items/wooden_tv.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-3b201299-fb42-4ccd-9134-060c57ccbed5.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 384,
@@ -4773,7 +5209,11 @@
       "folder": "items",
       "brief": "A wall calendar with a continuous highlighted span between a start marker and an end marker, no numbers or writing.",
       "priorFile": "sprites/items/wall_calendar.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-89a61b10-754a-46ef-b40c-7600ca4c6261.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 385,
@@ -4784,7 +5224,11 @@
       "folder": "items",
       "brief": "A volunteer sits beside a child and reads an open picture book aloud, with a small heart badge and complete hands.",
       "priorFile": "sprites/items/red_heart.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-4f839b54-aab3-4d5e-a0c0-36ac8b77d6f6.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 386,
@@ -4795,7 +5239,11 @@
       "folder": "items",
       "brief": "One newcomer steps into an open circle of three welcoming people, clearly joining their shared activity.",
       "priorFile": "sprites/items/red_heart.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ec72cd80-cdb5-45cc-ac98-2e4860c9a3d7.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 387,
@@ -4806,7 +5254,11 @@
       "folder": "items",
       "brief": "A clean combination chart with three bars and one rising line with round data points, no labels or numbers.",
       "priorFile": "sprites/items/line_graph.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-ea070702-9637-4978-8ed0-80273ace3d7b.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 388,
@@ -4817,7 +5269,11 @@
       "folder": "items",
       "brief": "A thoughtful planner compares three simple cards for time, transport and cost before making a decision, without text.",
       "priorFile": "sprites/items/grammar_scroll.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-460b9621-aa7e-49bf-ad9d-66efc994e31d.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 389,
@@ -4828,7 +5284,11 @@
       "folder": "items",
       "brief": "Balanced scales compare two checked candidate cards against one fixed measuring marker, representing a selection criterion.",
       "priorFile": "sprites/items/justice_scales.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-42865157-5a3a-49ba-aa46-fafa7d0fe5d2.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 390,
@@ -4839,7 +5299,11 @@
       "folder": "items",
       "brief": "Three event tents increase clearly from small to medium to large, showing the scale or size of an undertaking.",
       "priorFile": "sprites/items/moving_boxes.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-af1d21e9-a3a5-41e1-b202-e43da76799f3.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 391,
@@ -4850,7 +5314,11 @@
       "folder": "items",
       "brief": "A round chart divided into three strongly different proportions, with one segment emphasized and no numbers.",
       "priorFile": "sprites/items/line_graph.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-5a6b06e7-40da-49cd-bc94-5c8968fea952.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 392,
@@ -4861,7 +5329,11 @@
       "folder": "items",
       "brief": "Several varied people and objects are enclosed together by one complete circular boundary, indicating the whole group.",
       "priorFile": "sprites/items/kinds_types.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-764a30cc-a1bf-49ef-a268-29aec2e2c2fc.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     },
     {
       "index": 393,
@@ -4872,7 +5344,11 @@
       "folder": "items",
       "brief": "A short stack remains visibly below a firm horizontal limit marker, conveying no more than a set threshold without numbers.",
       "priorFile": "sprites/items/contract_seal.png",
-      "status": "pending"
+      "status": "reviewed",
+      "sourceImage": "exec-8e56301a-046e-4c54-8e04-c04172150647.png",
+      "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
+      "rawReviewed": true,
+      "reviewed": true
     }
   ],
   "sourceThread": "01a0579e-2ec8-7401-a057-99845528295c",

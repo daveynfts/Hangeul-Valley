@@ -115,7 +115,7 @@ assert(rowFor('어머니').slug === 'mother_portrait', '어머니 maps to mother
 assert(rowFor('대학교').slug === 'campus_building', '대학교 maps to campus_building');
 assert(rowFor('입사 시험').slug === 'exam_papers', '입사 시험 maps to exam_papers');
 assert(rowFor('한국').slug === 'our_country', '한국 maps to our_country');
-assert(rowFor('생산량').slug === 'brick_workshop', '생산량 maps to brick_workshop');
+assert(rowFor('생산량').slug === 'topik_fruit_output', '생산량 maps to topik_fruit_output');
 assert(rowFor('-도록').slug !== 'kinds_types', '-도록 is not the pizza dump');
 
 // These words were specifically redesigned after the visual audit. A different
