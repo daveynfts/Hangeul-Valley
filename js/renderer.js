@@ -100,88 +100,6 @@ const STARDEW_PALETTE = {
 // ═══════════════ PIXEL ART RENDERER & CHARACTER SYSTEM ═══════════════════════
 
 class PixelArtRenderer {
-  static W_PAL = {
-    '.': null,
-    'K': 0x0F172A, // 1px Dark Slate Outline
-    'k': 0x1E1B4B, // Deep shadow outline
-    'p': 0xC084FC, // Bright lavender highlight
-    'P': 0xA855F7, // Robe highlight purple
-    'h': 0x8B5CF6, // Robe base purple
-    'H': 0x7C3AED, // Robe mid purple
-    'v': 0x6D28D9, // Robe deep purple
-    'V': 0x4C1D95, // Robe shadow purple
-    'u': 0x3B0764, // Robe darkest fold shadow
-    'm': 0xFDE047, // Bright gold embroidery star/moon highlight
-    'M': 0xF59E0B, // Gold embroidery midtone
-    'y': 0xD97706, // Gold embroidery shadow
-    'Y': 0xB45309, // Gold embroidery deep shadow
-    'W': 0xFFFFFF, // Pure white beard highlight / aura glint
-    'w': 0xF8FAFC, // Soft white beard top
-    'd': 0xE2E8F0, // Light gray beard midtone
-    'D': 0xCBD5E1, // Silver gray beard body
-    'b': 0x94A3B8, // Blue-gray beard shadow
-    'B': 0x64748B, // Deep beard shadow
-    'S': 0x92400E, // Staff light wood
-    's': 0x78350F, // Staff base wood
-    'z': 0x451A03, // Staff dark wood shadow
-    'q': 0xE0F2FE, // Orb core brilliant white-cyan
-    'Q': 0xA5F3FC, // Orb inner glow cyan
-    'c': 0x38BDF8, // Orb bright cyan
-    'C': 0x0284C7, // Orb deep cyan
-    'e': 0x0369A1, // Orb shadow cyan
-    'a': 0xE9D5FF, // Mystical aura light purple sparkle
-    'A': 0x67E8F9, // Mystical aura cyan sparkle
-    'f': 0xFDE68A, // Star sparkle gold
-    'X': 0xFFDDAD, // Skin peach
-    'x': 0xC87858  // Skin shadow
-  };
-
-  static WIZ_0 = [
-    '.......KfmK.....',
-    '......KphhPK....',
-    '.....KphHHHhK...',
-    '....KphHHHHHhK.a',
-    '...KphHHHHHHHhK.',
-    '..KpvVVVVVVVVvpK',
-    '..KmMMMyyMMMMMmK',
-    '....KXxXKKXxXK.A',
-    '....KwwWWwwwwK.q',
-    '....KddDBBDddK.Q',
-    '...KphHHDDbHHhKc',
-    '..KphHHmMMmHHhKC',
-    '..KphHHvVVvHHhKs',
-    '..KphHHvVVvHHhKS',
-    '.KphHHHvVVvHHHhS',
-    '.KpvVVVuuuuVVvPS',
-    '.KmMMMYYMMMMMmKS',
-    '..KuuuuuuuuuuKs.',
-    '.......KsK...KzK',
-    '.......KzK......'
-  ];
-
-  static WIZ_1 = [
-    '.......KmfK.....',
-    '......KphhPK....',
-    '.....KphHHHhK.a.',
-    '....KphHHHHHhK..',
-    '...KphHHHHHHHhKA',
-    '..KpvVVVVVVVVvpK',
-    '..KmMMMMMMMMMMmK',
-    '....KXkXKKXkXK.a',
-    '....KwwwwwwwwK.Q',
-    '....KddDDDDddK.q',
-    '...KphHHDDbHHhKC',
-    '..KphHHmMMmHHhKe',
-    '..KphHHvVVvHHhKs',
-    '..KphHHvVVvHHhKS',
-    '.KphHHHvVVvHHHhS',
-    '.KpvVVVuuuuVVvPS',
-    '.KmMMMMMMMMMMmKS',
-    '..KuuuuuuuuuuKs.',
-    '.......KsK...KzK',
-    '.......KzK......'
-  ];
-
   static drawMatrix(g, matrix, palette, ox = 0, oy = 0, ps = 3) {
     matrix.forEach((row, ry) => {
       for (let rx = 0; rx < row.length; rx++) {
@@ -220,7 +138,6 @@ class PixelArtRenderer {
     scene._pixelArtTexturesBaked = true;
 
     this._genPlayerTextures(scene);
-    this._genNpcTextures(scene);
     this._genCropAndTreeTextures(scene);
     this._genFishingTextures(scene);
     this._genArcadeTextures(scene);
@@ -231,7 +148,6 @@ class PixelArtRenderer {
     this._genLightingTextures(scene);
     this._genParallaxTextures(scene);
     this._genWaterTextures(scene);
-    this._genBeehiveTextures(scene);
     this._genBeeTextures(scene);
   }
 
@@ -944,75 +860,6 @@ class PixelArtRenderer {
     ], REED_PAL);
   }
 
-  static _genBeehiveTextures(scene) {
-    if (!scene || !scene.textures || scene.textures.exists('beehive')) return;
-
-    const BEEHIVE_PALETTE = {
-      '.': null,
-      'K': 0x0F172A,
-      'k': 0x1E293B,
-      'b': 0x451A03,
-      'B': 0x78350F,
-      'W': 0x92400E,
-      'w': 0xB45309,
-      'O': 0xD97706,
-      'S': 0x642404,
-      'D': 0x853208,
-      'A': 0xA7490A,
-      'M': 0xC46808,
-      'Y': 0xFACC15,
-      'y': 0xFDE047,
-      'H': 0xFEF08A,
-      'C': 0xFFFBEB,
-      'G': 0xF59E0B,
-      'g': 0xE08208
-    };
-
-    this.createTexture(scene, 'beehive', [
-      ".......KKKKKK.......",
-      ".....KKyHHHHyyKK....",
-      "....KyHHyYYYYyHHyK..",
-      "...KyHYDMDMDMDMYyYK.",
-      "..KyYYMDMDMDMDMDYYyK",
-      "..KSSSACAMMACASSSyK.",
-      ".KyHYDMDMKKKKMDMDMYK",
-      ".KyYMDMDkKKKKkMDMYyK",
-      "KyHYDMDkKKKKKKkMDMYK",
-      "KyYMDMDkKKKKKKkMDYyK",
-      "KyHYDMDkKKKKKKkMDMYK",
-      "KyYMDMDMkKKKKkMDMYyK",
-      ".KyHYDMDMAAAAMDMDMYK",
-      ".KyYSSSSSACASSSSSSyK",
-      "..KyYYYYYYYYYYYYYyK.",
-      "..KSSSGgCGgCGgGSSyK.",
-      "...KGgC..GgC..GgCK..",
-      "...Kgg...gG...ggKK..",
-      "..KbOOOOOOOOOOOOwKb.",
-      ".bBWWWWWWWWWWWWWWBBb",
-      "bBBBBBBBBBBBBBBBBBBb",
-      "bKKKKKKKKKKKKKKKKKKb"
-    ], BEEHIVE_PALETTE, 20, 22, 2);
-
-    const makeTex = (key, w, h, drawFn) => {
-      if (scene.textures.exists(key)) scene.textures.remove(key);
-      const g = scene.make.graphics({ add: false });
-      drawFn(g);
-      g.generateTexture(key, w, h);
-      g.destroy();
-      const tex = scene.textures.get(key);
-      if (tex && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
-        tex.setFilter(Phaser.Textures.FilterMode.NEAREST);
-      }
-    };
-
-    makeTex('p_tiny_bee', 5, 5, (g) => {
-      g.fillStyle(0x0F172A, 1); g.fillRect(0, 0, 5, 5);
-      g.fillStyle(0xFDE047, 1); g.fillRect(1, 1, 3, 3);
-      g.fillStyle(0x1E293B, 1); g.fillRect(2, 1, 1, 3);
-      g.fillStyle(0xE0F2FE, 1); g.fillRect(1, 0, 2, 1);
-    });
-  }
-
   static _genBeeTextures(scene) {
     if (!scene || !scene.textures || scene.textures.exists('bee_fly_0')) return;
 
@@ -1681,216 +1528,6 @@ class PixelArtRenderer {
   }
 
   // 2. NPCs (Ginger Cat & Wizard)
-  static _genNpcTextures(scene) {
-    const C = {
-      '.': null,
-      'K': 0x0F172A, 'k': 0x121016,
-      'H': 0xFBAE68, 'G': 0xEE7B28, 'g': 0xC86228, 'D': 0x9E3B0E, 'd': 0x782D00,
-      'W': 0xFFFFFF, 'C': 0xFFF3E0, 'c': 0xF1F5F9, 'w': 0xCBD5E1,
-      'P': 0xFFB3C1, 'p': 0xE67E90,
-      'E': 0x55C655, 'I': 0x22C55E, 'e': 0x1E4A1E, 'L': 0xA3F0A3,
-      'Z': 0x93C5FD, 'z': 0xBFDBFE
-    };
-    const cat_idle_0 = [
-      '................',
-      '...KPK.....KPK..',
-      '..KHpKK...KHpKK.',
-      '.KGddGGGGGGGddGK',
-      '.KGdGGGGGGGGGdGK',
-      '.KGWEILGGGEILWGK',
-      'wKGCCCpPCCCgGKw.',
-      '.KGGCCCCCCCCGGGK',
-      '..KGDDCCCCDDGGK.',
-      '..KGGCCCCCCGGK.K',
-      '..KGgCCCCCCgGK.K',
-      '..KDGCCCCCCDGGKK',
-      '.KGDGGGGGGGGDDGK',
-      '.KCCCCG....CCCCK',
-      '.KCcCcK....KCcCc',
-      '................'
-    ];
-    const cat_idle_1 = [
-      '................',
-      '...KPK.....KPK..',
-      '..KHpKK...KHpKK.',
-      '.KGddGGGGGGGddGK',
-      '.KGdGGGGGGGGGdGK',
-      '.KGeKkGGGGeKkGgK',
-      'wKGCCCpPCCCgGKw.',
-      '.KGGCCCCCCCCGGGK',
-      '..KGDDCCCCCCDDGK',
-      '..KGGCCCCCCCgK.K',
-      '..KGgCCCCCCCgKK.',
-      '..KDGCCCCCCDGGK.',
-      '.KGDGGGGGGGGDDGK',
-      '.KCCCCG....CCCCK',
-      '.KCcCcK....KCcCc',
-      '................'
-    ];
-
-    const cat_walk_0 = [
-      '................',
-      '..KPK.....KPK...',
-      '.KHpKK...KHpKK..',
-      'KGddGGGGGGGddGK.',
-      'KGdGGGGGGGGGdGK.',
-      'KGWEILGGGEILWGgK',
-      'wGCCCPPCCCgGKw..',
-      'KGGCCCCCCCCGGGK.',
-      '.KGDDCCCCDDGGK..',
-      '.KGGCCCCCCGGGK.K',
-      '.KGgCCCCCCgGGKK.',
-      '.KDGCCCCCCDGGK..',
-      '..KCCCCG..KCCCCK',
-      '..KCcCcK...KCcCc',
-      '................',
-      '................'
-    ];
-    const cat_walk_1 = [
-      '...KPK.....KPK..',
-      '..KHpKK...KHpKK.',
-      '.KGddGGGGGGGddGK',
-      '.KGdGGGGGGGGGdGK',
-      '.KGWEILGGGEILWGK',
-      'wKGCCCpPCCCgGKw.',
-      '.KGGCCCCCCCCGGGK',
-      '..KGDDCCCCDDGGK.',
-      '..KGGCCCCCCGGGK.',
-      '..KGgCCCCCCgGGK.',
-      '..KDGCCCCCCDGGK.',
-      '..KGDGGGGGGDDGK.',
-      '...KCCCC..KCCCCK',
-      '...KCcCc..KCcCcK',
-      '................',
-      '................'
-    ];
-    const cat_walk_2 = [
-      '................',
-      '....KPK.....KPK.',
-      '...KHpKK...KHpKK',
-      '..KGddGGGGGGGddG',
-      '..KGdGGGGGGGGGDG',
-      '..KGWEILGGGEILWG',
-      '.wKGCCCPPCCCgGKw',
-      '..KGGCCCCCCCCGGG',
-      '...KGDDCCCCDDGGK',
-      'K..KGGCCCCCCGGGK',
-      'KK.KGgCCCCCCgGGK',
-      '.K.KDGCCCCCCDGGK',
-      'KCCCCK...KCCCCG.',
-      'KCcCcK....KCcCcK',
-      '................',
-      '................'
-    ];
-
-    const cat_sit_0 = [
-      '................',
-      '....KPK...KPK...',
-      '...KHpKK.KHpKK..',
-      '..KGddGGGGddGK..',
-      '..KGdGGGGGGGdGK.',
-      '..KGWEILGGGEILGK',
-      '.wKGCCCPPCCCgGKw',
-      '..KGGCCCCCCCCGK.',
-      '..KGDDCCCCDDGGK.',
-      '.KGGCCCCCCCCGGGK',
-      '.KGgCCCCCCCCgGGK',
-      'KDGCCCCCCCCCgGGK',
-      'KCCCCCCCgGGGGGGK',
-      'KCcCcCcGGGGGGGK.',
-      'KGGDDGGGGGGGGK..',
-      '................'
-    ];
-    const cat_sit_1 = [
-      '................',
-      '...KpKK...KPK...',
-      '..KHpKK..KHpKK..',
-      '..KGddGGGGddGK..',
-      '..KGdGGGGGGGdGK.',
-      '..KGeKkGGGeEWGgK',
-      '.wKGCCCPPCCCgGKw',
-      '..KGGCCCCCCCCGK.',
-      '..KGDDCCCCDDGGK.',
-      '.KGGCCCCCCCCGGGK',
-      '.KGgCCCCCCCCgGGK',
-      'KDGCCCCCCCCCgGGK',
-      'KCCCCCCCgGGGGGGK',
-      'KCcCcCcGGGGGGGK.',
-      '.KGGDDGGGGGGGK..',
-      '................'
-    ];
-
-    const cat_sleep_0 = [
-      '................',
-      '................',
-      '................',
-      '................',
-      '....KPK...KPK...',
-      '...KHpKK.KHpKK..',
-      '..KGddGGGGddGGK.',
-      '.KGGeKkGGGeKkGGK',
-      '.KGCCCCPCCCCGGGK',
-      'KGGCCCCCCCCCCGGK',
-      'KGDDCCCCCCCCDDGK',
-      'KGGGGGGGGGGGGGGK',
-      '.KGGDDGGGGGGDDGK',
-      '..KGGGGGGGGGGGK.',
-      '................',
-      '................'
-    ];
-    const cat_sleep_1 = [
-      '.........Z......',
-      '........Z.......',
-      '.......z........',
-      '................',
-      '....KPK...KPK...',
-      '...KHpKK.KHpKK..',
-      '..KGddGGGGddGGK.',
-      '.KGGeKkGGGeKkGGK',
-      '.KGCCCCPCCCCGGGK',
-      'KGGGCCCCCCCCCGGK',
-      'KGDDDCCCCCCDDDGK',
-      'KGGGGGGGGGGGGGGK',
-      '.KGGDDGGGGGGDDGK',
-      '..KGGGGGGGGGGGK.',
-      '................',
-      '................'
-    ];
-
-    this.createTexture(scene, 'cat_idle_0', cat_idle_0, C);
-    this.createTexture(scene, 'cat_idle_1', cat_idle_1, C);
-    this.createTexture(scene, 'cat_walk_0', cat_walk_0, C);
-    this.createTexture(scene, 'cat_walk_1', cat_walk_1, C);
-    this.createTexture(scene, 'cat_walk_2', cat_walk_2, C);
-    this.createTexture(scene, 'cat_sit_0', cat_sit_0, C);
-    this.createTexture(scene, 'cat_sit_1', cat_sit_1, C);
-    this.createTexture(scene, 'cat_sleep_0', cat_sleep_0, C);
-    this.createTexture(scene, 'cat_sleep_1', cat_sleep_1, C);
-
-    const W_PAL = PixelArtRenderer.W_PAL;
-    const wiz_0 = PixelArtRenderer.WIZ_0;
-    const wiz_1 = PixelArtRenderer.WIZ_1;
-    this.createTexture(scene, 'wizard_idle_0', wiz_0, W_PAL, 16, 20);
-    this.createTexture(scene, 'wizard_idle_1', wiz_1, W_PAL, 16, 20);
-
-    const anims = scene.anims;
-    if (anims) {
-      const regCatAnim = (key, frames, frameRate, repeat = -1) => {
-        if (!anims.exists(key)) {
-          anims.create({ key, frames: frames.map(f => ({ key: f })), frameRate: frameRate, repeat: repeat });
-        }
-      };
-      regCatAnim('cat-idle', ['cat_idle_0', 'cat_idle_1'], 3, -1);
-      regCatAnim('cat-walk', ['cat_walk_0', 'cat_walk_1', 'cat_walk_2', 'cat_walk_1'], 6, -1);
-      regCatAnim('cat-sit', ['cat_sit_0', 'cat_sit_1'], 3, -1);
-      regCatAnim('cat-sleep', ['cat_sleep_0', 'cat_sleep_1'], 2, -1);
-
-      if (!anims.exists('wizard-idle')) {
-        anims.create({ key: 'wizard-idle', frames: [{ key: 'wizard_idle_0' }, { key: 'wizard_idle_1' }], frameRate: 3, repeat: -1 });
-      }
-    }
-  }
-
   // 3. Farm Crops & Trees & Soils
   static _genCropAndTreeTextures(scene) {
     const P = {
@@ -2573,9 +2210,6 @@ class PixelArtRenderer {
       '................',
       '................'
     ];
-
-    // Canonical Fish Textures
-    this.createTexture(scene, 'fish_carp', carp, P);
 
     // Legacy Aliases for fishing scene parity
     this.createTexture(scene, 'fishing_carp', carp, P);

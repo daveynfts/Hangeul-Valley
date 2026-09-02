@@ -33,33 +33,40 @@ manifest.entries.forEach((entry) => {
     entry.phaserKey + ' is loaded from its catalog path');
 });
 
+const functionSlice = (start, end) => {
+  const startIndex = farm.indexOf(start);
+  return farm.slice(startIndex, farm.indexOf(end, startIndex));
+};
 [
-  ['shop', 'valley_seed_shop_hd', 'shop_sign'],
-  ['board', 'valley_notice_board_hd', 'notice_board'],
-  ['arcade', 'valley_arcade_cabinet_hd', 'arcade_machine'],
-  ['portal', 'valley_dungeon_portal_hd', 'dungeon_portal'],
-  ['beehive', 'valley_apiary_hive_hd', 'beehive']
-].forEach(([role, hd, fallback]) => {
-  assert(farm.includes("this._propTex('" + hd + "', '" + fallback + "')"),
-    role + ' prefers reviewed art and keeps a procedural failure fallback');
+  ['shop', '_createShopNPC(W, H){', '_createBoardNPC(W, H){', 'valley_seed_shop_hd', 'shop_sign'],
+  ['board', '_createBoardNPC(W, H){', '_createArcadeNPC(W, H){', 'valley_notice_board_hd', 'notice_board'],
+  ['arcade', '_createArcadeNPC(W, H){', '_createWizardNPC(W, H){', 'valley_arcade_cabinet_hd', 'arcade_machine'],
+  ['witch', '_createWizardNPC(W, H){', '_createCatNPC(W, H){', 'valley_spell_witch_hd', 'wizard_idle_0'],
+  ['cat', '_createCatNPC(W, H){', '_createPortalNPC(W, H){', 'valley_ginger_cat_hd', 'cat_idle_0'],
+  ['portal', '_createPortalNPC(W, H){', '_createFishingSpot(W, H){', 'valley_dungeon_portal_hd', 'dungeon_portal']
+].forEach(([role, start, end, reviewed, obsolete]) => {
+  const block = functionSlice(start, end);
+  assert(block.includes("this._reviewedTex('" + reviewed + "')"), role + ' requires reviewed art');
+  const obsoleteKey = new RegExp("['\"]" + obsolete.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + "['\"]");
+  assert(!obsoleteKey.test(block) && !block.includes('_propTex('), role + ' cannot restore its old design');
 });
-assert(/valley_spell_witch_hd[\s\S]{0,220}wizard_idle_0/.test(farm), 'legacy wizard path prefers the redesigned witch');
-assert(/valley_ginger_cat_hd[\s\S]{0,220}cat_idle_0/.test(farm), 'cat path prefers the redesigned ginger cat');
-assert(/if \(this\.catUsesHd\)[\s\S]{0,260}cat-sleep/.test(farm), 'still-image cat states do not request missing animation frames');
+const catBehavior = functionSlice('_updateCatNPC(dt) {', '_createPlots(W, H){');
+assert(/targetPose = 'sleep'/.test(catBehavior) && !/cat-(idle|walk|sit|sleep)/.test(catBehavior),
+  'the redesigned still-image cat has pose feedback without legacy animation frames');
 
 const fishing = farm.slice(farm.indexOf('  _createFishingSpot(W, H){'), farm.indexOf('  _triggerFishJump(fx, fy) {'));
-assert(fishing.indexOf("textures.exists('valley_fishing_pond_hd')") >= 0, 'fishing uses the coherent pond landmark');
-assert(fishing.indexOf("textures.exists('valley_fishing_pond_hd')") < fishing.indexOf('Large stones'),
-  'reviewed pond branches before procedural rocks are drawn');
+assert(fishing.indexOf("this._reviewedTex('valley_fishing_pond_hd')") >= 0, 'fishing requires the coherent pond landmark');
+assert(!/Large stones|pondRadiusX|tile_ocean_deep_0|pond_reed/.test(fishing),
+  'the procedural pond design has been removed');
 assert(/dockSprite = this\.add\.image/.test(fishing) && /this\._triggerFishJump/.test(fishing),
   'new pond remains clickable and keeps the ambient fish interaction');
 assert(/this\._createPondFish\(fx, fy\)/.test(fishing), 'redesigned carp is visibly swimming inside the pond');
-assert((fishing.match(/this\.fishX = fx; this\.fishY = fy;/g) || []).length === 2,
-  'pond depth anchor stays below the visible swimmer in both render branches');
-assert(/this\.dockSprite = this\.pondWater/.test(fishing) && /this\.dockSprite = pond/.test(fishing),
-  'procedural pond fallback also remains clickable after a failed image load');
-assert(/this\._propTex\('valley_pond_carp_hd', 'fish_carp'\)/.test(farm),
-  'visible and jumping fish prefer the reviewed carp with a failure fallback');
+assert((fishing.match(/this\.fishX = fx; this\.fishY = fy;/g) || []).length === 1,
+  'the reviewed pond has one interaction anchor');
+const pondFish = functionSlice('_createPondFish(fx, fy) {', '_createSplashRipples(rx, ry) {');
+assert((pondFish.match(/this\._reviewedTex\('valley_pond_carp_hd'\)/g) || []).length === 2,
+  'visible and jumping fish both require the reviewed carp');
+assert(!/fish_carp|_propTex\(/.test(pondFish), 'the old carp sprite cannot reappear');
 
 assert(/Math\.max\(72, this\.farm\.x - 205\)/.test(farm) && /this\.farm\.y \+ 117/.test(farm),
   'arcade has a separate grounded space between the apple tree and pond');
@@ -78,22 +85,34 @@ assert(!/targets: this\.beehiveSprite,[\s\S]{0,100}repeat: -1/.test(farm), 'beeh
 assert(/const beeFrames = \['valley_honey_bee_open_hd', 'valley_honey_bee_flap_hd'\]/.test(farm)
   && /frames: beeFrames\.map/.test(farm) && /frameRate: 10/.test(farm),
   'apiary bees use the reviewed two-frame wing animation');
-assert(/this\.add\.sprite\(bx, by - 42, beeFrames\[i % beeFrames\.length\]\)/.test(farm)
-  && /this\.add\.image\(bx, by - 42, 'p_tiny_bee'\)/.test(farm),
-  'all four apiary bees prefer reviewed art and retain a load-failure fallback');
+const apiary = functionSlice('_createBeehiveNPC(W, H){', '_createFallingLeaves(ax, ay){');
+assert(/this\._reviewedTex\('valley_apiary_hive_hd'\)/.test(apiary)
+  && /this\.add\.sprite\(bx, by - 42, beeFrames\[i % beeFrames\.length\]\)/.test(apiary),
+  'hive and all four apiary bees require reviewed art');
+assert(!/p_tiny_bee|_propTex\([^)]*beehive/.test(apiary),
+  'old hive and tiny-bee designs cannot reappear');
 assert(/setFlipX\(nextX > bee\.sprite\.x\)/.test(farm), 'reviewed bees turn to face their flight direction');
 
 const shop = farm.slice(farm.indexOf('  _createShopNPC(W, H){'), farm.indexOf('  _createBoardNPC(W, H){'));
 assert(/this\.shopGround[\s\S]{0,420}fillEllipse/.test(shop), 'shop has a broad visible ground contact patch');
 assert(!/targets: this\.shopNPC/.test(shop), 'shop building stays grounded instead of bobbing in the air');
-assert(/if \(!this\.textures\.exists\('valley_seed_shop_hd'\)\)[\s\S]{0,700}oak_barrel_hd[\s\S]{0,300}wooden_crate_hd/.test(farm),
-  'legacy barrel and crate garnish is hidden whenever the reviewed shop is available');
+assert(!/old loose barrel|oak_barrel_hd[\s\S]{0,300}wooden_crate_hd/.test(farm.slice(farm.indexOf('// Micro World Details: Stone Well'), farm.indexOf('// Micro World Details: Directional Signpost'))),
+  'legacy shop garnish has been deleted rather than conditionally hidden');
 assert(/this\._destroyWorldObj\(this\.shopGround\)/.test(farm), 'shop ground is removed with the optional landmark');
 
 const cassette = layout.stations.find((station) => station.id === 'cassette');
 assert(cassette && cassette.scale === 0.72, 'cassette uses the reviewed station scale');
-assert(/hdKey: 'cassette_player_hd'/.test(farm), 'cassette station prefers the reviewed cassette sprite');
-assert(/const led = base\.hd \? null/.test(farm), 'reviewed cassette does not get a loose LED over its controls');
+const cassetteSpawner = functionSlice('_ensureCassette(){', '_teardownCassette(){');
+assert(/hdKey: 'cassette_player_hd'/.test(cassetteSpawner)
+  && /const tex = this\._reviewedTex\(hdKey\)/.test(farm),
+  'cassette station requires the reviewed cassette sprite');
+assert(!/matrixKey:|lastKey:|cassette_player'|pixel_crate/.test(cassetteSpawner)
+  && /led: null/.test(cassetteSpawner),
+  'old cassette sprites and overlay controls have been removed');
+assert(/if \(id === 'valley'\)[\s\S]{0,180}VALLEY_REVIEWED_ART_KEYS/.test(econ)
+  && /CASSETTE_REVIEWED_ART/.test(econ)
+  && /if \(id === 'topik-2'\)[\s\S]{0,120}study_desk_hd/.test(econ),
+  'world changes retry reviewed Valley, study-desk and cassette assets');
 assert(/beehiveBaseScale/.test(farm) && /portalBaseScale/.test(farm) && /dockBaseScale/.test(farm),
   'interaction feedback returns each redesigned sprite to its own map scale');
 assert(/const baseX = Math\.abs\(this\.catSprite\.scaleX/.test(farm),

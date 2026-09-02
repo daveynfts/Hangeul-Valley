@@ -5,6 +5,9 @@ class DungeonScene extends Phaser.Scene {
   preload(){
     PixelArtRenderer.generateAllTextures(this);
     PixelArtRenderer.generateTilemapTextures(this);
+    if (!this.textures.exists('valley_dungeon_portal_hd')) {
+      this.load.image('valley_dungeon_portal_hd', artUrl('decorations/valley_dungeon_portal.png'));
+    }
   }
 
   create(){
@@ -315,7 +318,10 @@ class DungeonScene extends Phaser.Scene {
 
   spawnBossPortal(){
     if(this.bossPortal) return;
-    const portal = this.add.sprite(this.W/2, 100, 'dungeon_portal').setOrigin(0.5).setDepth(20);
+    if (!this.textures.exists('valley_dungeon_portal_hd')) return;
+    const portal = this.add.image(this.W/2, 100, 'valley_dungeon_portal_hd')
+      .setOrigin(0.5).setScale(0.52).setDepth(20);
+    if (portal.texture) portal.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     this.physics.add.existing(portal);
     portal.body.setSize(48, 48);
     this.bossPortal = portal;

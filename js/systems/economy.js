@@ -69,15 +69,39 @@ function worldPackHas(pack, kind, id) {
   const list = kind === 'station' ? p.stations : p.extras;
   return !!(list && list.indexOf(id) >= 0);
 }
+const VALLEY_REVIEWED_ART_KEYS = [
+  'valley_seed_shop_hd',
+  'valley_notice_board_hd',
+  'valley_arcade_cabinet_hd',
+  'valley_spell_witch_hd',
+  'valley_ginger_cat_hd',
+  'valley_apiary_hive_hd',
+  'valley_honey_bee_open_hd',
+  'valley_honey_bee_flap_hd',
+  'valley_dungeon_portal_hd',
+  'valley_fishing_pond_hd',
+  'valley_pond_carp_hd'
+];
+const CASSETTE_REVIEWED_ART = { key: 'cassette_player_hd', file: 'furniture/valley_cassette_player.png' };
 function artLoadForWorldPack(id) {
+  if (id === 'valley') {
+    return ART_LOAD.filter((entry) => VALLEY_REVIEWED_ART_KEYS.indexOf(entry.key) >= 0);
+  }
   if (id === '2b-unit-10') {
     return [
       { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' },
       { key: 'unit10_kitchen_hd', file: 'furniture/farmhouse_kitchen.png' },
-      { key: 'unit10_taste_stall_hd', file: 'stalls/korean_street_food_stall.png' }
+      { key: 'unit10_taste_stall_hd', file: 'stalls/korean_street_food_stall.png' },
+      CASSETTE_REVIEWED_ART
     ];
   }
   if (id === '2b-unit-11' || id === '2b-unit-13' || id === '2b-unit-14' || id === '2b-unit-15') {
+    return [
+      { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' },
+      CASSETTE_REVIEWED_ART
+    ];
+  }
+  if (id === 'topik-2') {
     return [
       { key: 'study_desk_hd', file: 'furniture/oak_study_desk.png' }
     ];

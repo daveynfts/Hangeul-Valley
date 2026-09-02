@@ -45,6 +45,7 @@ function assert(cond, msg) {
 const c = readJson('worlds/unit11-cassette.json');
 const ui = read('js/ui.js');
 const farm = read('js/scenes/farm.js');
+const economy = read('js/systems/economy.js');
 const html = read('index.html');
 const css = read('css/game.css');
 const tracks = c.tracks || [];
@@ -268,16 +269,15 @@ assert(/function dictNorm/.test(ui) && /replace\(\/\\s\+\/g, ''\)/.test(ui), 'th
 
 // ── 6. Wiring ────────────────────────────────────────────────────────────────
 console.log('\n--- 6. Wiring ---');
-assert(/createTexture\(this, 'cassette_player'/.test(farm), 'the sprite is baked from a matrix');
-const mtx = farm.slice(farm.indexOf("createTexture(this, 'cassette_player'"));
-const rows = (mtx.slice(0, mtx.indexOf(']')).match(/'[.A-Za-z]{4,}'/g) || []).map((s) => s.slice(1, -1));
-assert(rows.length === 18, 'the matrix is 18 rows (' + rows.length + ')');
-assert(rows.every((x) => x.length === 20), 'every row is 20 wide');
-const palBlock = farm.slice(farm.indexOf('const CASSETTE_PAL'), farm.indexOf("createTexture(this, 'cassette_player'"));
-const keys = (palBlock.match(/'(.)':/g) || []).map((s) => s[1]);
-const used = new Set(rows.join('').split(''));
-assert([...used].every((ch) => keys.indexOf(ch) >= 0), 'every character it draws with is in the palette');
-assert(keys.every((k) => used.has(k)), 'and every palette entry is used');
+assert(!/createTexture\(this, 'cassette_player'/.test(farm), 'the obsolete matrix cassette has been removed');
+assert(/key: 'cassette_player_hd', file: 'furniture\/valley_cassette_player\.png'/.test(economy),
+  'the cassette uses the reviewed sprite file');
+const cassetteSpawner = farm.slice(farm.indexOf('  _ensureCassette(){'), farm.indexOf('  _teardownCassette(){'));
+assert(/hdKey: 'cassette_player_hd'/.test(cassetteSpawner)
+  && /const tex = this\._reviewedTex\(hdKey\)/.test(farm),
+  'the station requires reviewed cassette art');
+assert(!/matrixKey:|lastKey:|cassette_player'|pixel_crate/.test(cassetteSpawner),
+  'the cassette cannot fall back to the old generated design');
 assert(farm.indexOf('_ensureCassette') >= 0 && farm.indexOf('_teardownCassette') >= 0,
   'the station spawns and tears down');
 assert(/stations\.indexOf\('cassette'\) >= 0/.test(farm), 'driven by the pack, not by a unit check');

@@ -75,6 +75,20 @@ assert(html.indexOf('js/vocabStudy.js') >= 0 && html.indexOf('js/vocabStudy.js')
 
 assert(/#vocab-panel\s*\{[^}]*width:\s*100%[^}]*height:\s*100vh;\s*height:\s*100dvh/s.test(css),
   'vocabulary book fills the viewport');
+const vocabPanelBlock = (css.match(/#vocab-panel\s*\{[^}]*\}/s) || [''])[0];
+assert(!/width:\s*min\(1000px,\s*94vw\)/.test(vocabPanelBlock)
+  && !/height:\s*86vh/.test(vocabPanelBlock)
+  && !/max-height:\s*800px/.test(vocabPanelBlock),
+  'the old centered vocabulary modal sizing has been removed');
+assert(!/@media \(max-width:\s*768px\)[\s\S]*?#vocab-panel[\s\S]*?width:\s*96vw/.test(css)
+  && !/@media \(max-width:\s*480px\)[\s\S]*?#vocab-panel[\s\S]*?width:\s*98vw/.test(css),
+  'mobile rules cannot restore the old inset vocabulary modal');
+const release = (html.match(/<body\b[^>]*\bdata-ui-release="([^"]+)"/) || [])[1];
+assert(!!release
+  && html.includes(`href="css/game.css?v=${release}"`)
+  && [...html.matchAll(/<script\b[^>]*\bsrc="(js\/[^"]+)"/g)]
+    .every(([, src]) => src.endsWith(`?v=${release}`)),
+  'all vocabulary UI code is tied to one cache-busted release');
 assert(/#vocab-grid\s*\{[^}]*minmax\(232px,\s*1fr\)/s.test(css),
   'desktop vocabulary cards use a large readable minimum width');
 assert(/\.vc-emoji img\.vocab-art-icon\s*\{[^}]*height:\s*86px/s.test(css),

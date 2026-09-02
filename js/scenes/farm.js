@@ -445,137 +445,7 @@ class FarmScene extends Phaser.Scene {
     ], DECOR_PALETTE, 0, 0, PS);
     gcrat.generateTexture('pixel_crate', 12*PS, 12*PS); gcrat.destroy();
 
-    const TASTE_STALL_PAL = {
-      '.': null,
-      'K': 0x2A1A0A, 'k': 0x4A2A0D,
-      'R': 0xDC2626, 'r': 0x9F1239, 'P': 0xF87171,
-      'W': 0xFFF8E8, 'w': 0xF4D6A0, 'Y': 0xE8C07A,
-      'O': 0xC4893A, 'o': 0x8B5A2B,
-      'B': 0x78350F, 'b': 0xB45309,
-      'N': 0x166534, 'n': 0x86EFAC,
-      'C': 0xFDE047, 'S': 0xE2E8F0
-    };
-    PixelArtRenderer.createTexture(this, 'taste_stall', [
-      '......SS.SS.......',
-      '.....S..S..S......',
-      '..KKKKKKKKKKKKKK..',
-      '.KRrRrRrRrRrRrRrK.',
-      '.KPRPRPRPRPRPRPRK.',
-      '.KRrRrRrRrRrRrRrK.',
-      '.KKKKKKKKKKKKKKKK.',
-      '.KoYYYYYYYYYYYYOk.',
-      '.KoW..........WOk.',
-      '.KoW.bB.CC.nN.WOk.',
-      '.KoW.BB.CC.NN.WOk.',
-      '.KoWWWWWWWWWWWWOk.',
-      '.KOOOOOOOOOOOOOOK.',
-      '.KoOoOoOoOoOoOoOk.',
-      '.KKKKKKKKKKKKKKKK.',
-      '..................'
-    ], TASTE_STALL_PAL, 18, 16);
-
-    const DESK_PAL = {
-      '.': null,
-      'K': 0x1A0E06, 'k': 0x3D2314,
-      'O': 0xC4893A, 'o': 0x8B5A2B, 'Y': 0xE8C07A,
-      'W': 0xFFF8E8, 'w': 0xF4D6A0,
-      'B': 0x1E3A8A, 'b': 0x93C5FD,
-      'P': 0x9F1239, 'p': 0xFECACA,
-      'G': 0x166534, 'g': 0x86EFAC,
-      'L': 0xFDE047, 'l': 0xF59E0B, 'A': 0xFEF3C7,
-      'N': 0x1C1917
-    };
-    PixelArtRenderer.createTexture(this, 'study_desk', [
-      '........KKKK........',
-      '.......KlAAlK.......',
-      '......KlAAAAlK......',
-      '......KlALLAlK......',
-      '.......KllllK.......',
-      '........KkKk........',
-      '..KKKKKKKKKKKKKKKK..',
-      '.KoBBYYYYYYYYYYGGoK.',
-      '.KoBbYYYYYYYYYYGgoK.',
-      '.KKKKKKKKKKKKKKKKKK.',
-      '.KoYYYYYYYYYYYYYYoK.',
-      '.KoWbbWWWWWPPwwwwOk.',
-      '.KoWbBWWWWWpRwwwWOk.',
-      '.KoWWWWWWNNWWWWWWoK.',
-      '.KoWWWWWWWWWWWWWWoK.',
-      '.KOOOOOOOOOOOOOOOOK.',
-      '.KoOoYoOoYoOoYoOoOk.',
-      '.KK..KKKKKKKKKK..KK.',
-      '.KO..KooooooooK..OK.',
-      '.KO..KoWWWWWWoK..OK.',
-      '.KO..KoWbbbbWoK..OK.',
-      '.KK..KKKKKKKKKK..KK.'
-    ], DESK_PAL, 20, 22);
-
-    // A retro deck in the farm's own cream-and-wood palette, so it sits beside the
-    // oak desk rather than next to it. Silhouette first: handle, tape window, button
-    // row, grille. The two reels are 2x2 because at 1px they vanished by game scale.
-    const CASSETTE_PAL = {
-      '.': null,
-      'K': 0x1C1917, 'k': 0x44403C,
-      'C': 0xF4D6A0, 'W': 0xFFF8E8,
-      'O': 0xC4893A, 'o': 0x8B5A2B,
-      'G': 0x93C5FD, 'g': 0x1E3A8A, 'T': 0x3D2314,
-      'S': 0x57534E, 's': 0xA8A29E,
-      'R': 0xDC2626, 'L': 0xFDE047
-    };
-    PixelArtRenderer.createTexture(this, 'cassette_player', [
-      '......KKKKKKKK......',
-      '......KoOOOOoK......',
-      '......KKKKKKKK......',
-      '.KKKKKKKKKKKKKKKKKK.',
-      '.KCWWWWWWWWWWWWWWCK.',
-      '.KCKKKKKKKKKKKKKKCK.',
-      '.KCKGGTTGGGGTTGGKCK.',
-      '.KCKGGTTGGGGTTGGKCK.',
-      '.KCKGGggggggggGGKCK.',
-      '.KCKKKKKKKKKKKKKKCK.',
-      '.KCWWWWWWWWWWWWWWCK.',
-      '.KCkKKkKKkKKkKKRLCK.',
-      '.KCWWWWWWWWWWWWWWCK.',
-      '.KCsSsSsSsSsSsSsWCK.',
-      '.KCsSsSsSsSsSsSsWCK.',
-      '.KCsSsSsSsSsSsSsWCK.',
-      '.KKKKKKKKKKKKKKKKKK.',
-      '..kkkkkkkkkkkkkkkk..'
-    ], CASSETTE_PAL, 20, 18);
-
-    const KITCHEN_PAL = {
-      '.': null,
-      'K': 0x1C1917, 'k': 0x44403C,
-      'I': 0xA8A29E, 'i': 0x78716C, 'S': 0xE7E5E4,
-      'R': 0xDC2626, 'r': 0x9F1239, 'F': 0xF97316, 'Y': 0xFDE047,
-      'O': 0xC4893A, 'o': 0x8B5A2B, 'W': 0xFFF8E8,
-      'B': 0x292524, 'G': 0x16A34A, 'N': 0x166534,
-      'M': 0x7F1D1D, 'm': 0xFECACA
-    };
-    PixelArtRenderer.createTexture(this, 'unit10_kitchen', [
-      '....KKKKKKKKKKKK....',
-      '...KiiiiiiiiiiiiK...',
-      '...KiSSSSSSSSSSSiK..',
-      '....KKKKKKKKKKKK....',
-      '......YFFYYFFR......',
-      '..KKKKKKKKKKKKKKKK..',
-      '.KIIIIIIIIIIIIIIIIK.',
-      '.KIWWWWWWWWWWWWWWIK.',
-      '.KIW.MM.YYYY.GG.NWIK',
-      '.KIW.Mm.YYYY.Gg.NWIK',
-      '.KIW.KK.KKKK.KK.KWIK',
-      '.KIIIIIIIIIIIIIIIIK.',
-      '.KOOOOOOOOOOOOOOOOK.',
-      '.KoOoYoOoYoOoYoOoOoK',
-      '.KKBBBBBBBBBBBBBBKK.',
-      '.KB..............BK.',
-      '.KB.KKK......KKK.BK.',
-      '.KB.KkK......kKk.BK.',
-      '.KB.KKK......KKK.BK.',
-      '.KBBBBBBBBBBBBBBBBK.',
-      '.KKKKKKKKKKKKKKKKKK.',
-      '....................'
-    ], KITCHEN_PAL, 20, 22);
+    // Learning stations use their reviewed catalog art; no generated legacy variants.
 
     // Directional Signpost (12x14)
     const gsgn = mk();
@@ -694,175 +564,6 @@ class FarmScene extends Phaser.Scene {
     ], DECOR_PALETTE, 0, 0, PS);
     gc.generateTexture('coin', 8*PS, 8*PS); gc.destroy();
 
-    // Shop sign texture 18x22 (Korean Merchant Character)
-    const SHOP_PALETTE = Object.assign({}, DECOR_PALETTE, {
-      'B': 0x1E293B, // Gat hat dark slate
-      'A': 0x38BDF8, // Hat ribbon cyan blue
-      'X': 0xFFDDAD, // Skin base warm peach
-      'x': 0xF4A261, // Skin shadow
-      'f': 0xFFF0D5, // Skin highlight
-      'Q': 0xE76F51, // Warm cheek blush
-      'U': 0xF8FAFC, // Hanbok white collar / apron highlight
-      'u': 0xCBD5E1, // Cream apron shadow
-      'J': 0x1E3A8A, // Navy hanbok vest
-      'j': 0x172554, // Deep navy vest shadow
-      'm': 0xF59E0B  // Gold embroidery on vest
-    });
-    const gs = mk();
-    PixelArtRenderer.drawMatrix(gs, [
-      '.....KKKKKKKK.....',
-      '....KBBBBBBBBK....',
-      '....KBBttttBBK....',
-      '.KKKKKBBBBBBKKKKK.',
-      '.KBBBBBBBBBBBBBBK.',
-      '...KAAfXXXXXfAAK..',
-      '...KXffffffffXK...',
-      '...KXKNXKKXNKXK...',
-      '...KXfQffffQfXK...',
-      '...KXxKKmmKKxXK...',
-      '..KKUJJJmJmJJUKK..',
-      '.KUuuJJmYYYmJJuuK.',
-      '.KuuJmJJJJJJmJuuK.',
-      '.KuuJjJjJjJjJjuuK.',
-      'KKKKKKKKKKKKKKKKKK',
-      'KOOOOOOOOOOOOOOOoK',
-      'KOWWKYyKYyKYyKWwwK',
-      'KOWWYYYYYYYYYYWwwK',
-      'KOWWKYyYmmYyYKWwwK',
-      'KOWWWWWWWWWWwwwwwK',
-      'KOwwwwwwwwwwwwwwwK',
-      'KKKKKKKKKKKKKKKKKK'
-    ], Object.assign({}, SHOP_PALETTE, { t: 0xF8D88E }), 0, 0, PS);
-    gs.generateTexture('shop_sign', 18*PS, 22*PS); gs.destroy();
-
-    // Notice Board texture 18x16
-    const NOTICE_BOARD_PALETTE = Object.assign({}, DECOR_PALETTE, {
-      'K': 0x0F172A,
-      'O': 0xE5A96E,
-      'o': 0xC8864B,
-      'W': 0x965A2C,
-      'w': 0x643714,
-      'd': 0x3E2009,
-      'b': 0xFFF3C7,
-      'B': 0xFFFAF0,
-      'u': 0xE2E8F0,
-      'N': 0x334155,
-      'n': 0x64748B,
-      'R': 0xEF4444,
-      'r': 0x991B1B,
-      'M': 0x475569,
-      'm': 0x1E293B,
-      'Y': 0xFEF08A,
-      'y': 0xF59E0B,
-      'g': 0xFB7185
-    });
-
-    const gb = mk();
-    PixelArtRenderer.drawMatrix(gb, [
-      '.....KKKKKKKK.....',
-      '....KKmMYYMYyKKK..',
-      '..KKKKKMYgMYgKKKKK',
-      '.KOOOOOOOOOOOOOOOo',
-      '.KOWKKKKKKKKKKKKWw',
-      '.KOWKRbBrKRbBrKKWw',
-      '.KOWKbNnbKbNNbKKWw',
-      '.KOWKbuubKbuubKKWw',
-      '.KOWKdWWdKRbBbKKWw',
-      '.KOWKbNNbKbNnbKKWw',
-      '.KOWKbuubKbuubKKWw',
-      '.KOWKKKKKKKKKKKKWw',
-      '.KOwwwwwwwwwwwwwww',
-      '.KKKKKKKKKKKKKKKKK',
-      '..KdWWK......KdWWK',
-      '..KKKK......KKKK..'
-    ], NOTICE_BOARD_PALETTE, 0, 0, PS);
-    gb.generateTexture('notice_board', 18*PS, 16*PS); gb.destroy();
-
-    // Dungeon Portal texture 20x28
-    const PORTAL_PALETTE = Object.assign({}, DECOR_PALETTE, {
-      'K': 0x0F172A,
-      't': 0xE2E8F0,
-      'T': 0x94A3B8,
-      'S': 0x475569,
-      's': 0x1E293B,
-      'C': 0x38BDF8,
-      'Q': 0xF43F5E,
-      'Y': 0xFACC15,
-      'P': 0xD8B4FE,
-      'p': 0x9333EA,
-      'm': 0x581C87,
-      'V': 0x2563EB,
-      'v': 0x0284C7,
-      'E': 0xA5F3FC,
-      'W': 0xFFFFFF,
-      'z': 0xF472B6,
-      'X': 0xE0E7FF
-    });
-
-    const gport = mk();
-    PixelArtRenderer.drawMatrix(gport, [
-      '.......KKKKKK.......',
-      '.....KKtTTTTtKK.....',
-      '....KtTTSCSSTtK....',
-      '...KtTTTTTTTTTTtK...',
-      '..KtTTSQSSTSQSStK..',
-      '.KtTTSKKKKKKKKSttSK.',
-      '.KtSKPPPPPPzPPPPKSK.',
-      'KTTKPPPPPzPPPPPPKTTK',
-      'KTTKPpPvvVVvvPPpPKTTK',
-      'KTTKPpvVEEWEVvpPPKTTK',
-      'KCTKPpvVWEWEVvppPKCK',
-      'KTTKPpvVEEWEVvpPPKTTK',
-      'KQTKPpPvvVVvvPPpPKQK',
-      'KTTKPmPvvVVvvPmPPKTTK',
-      'KTTKPpvVEEWEVvpPPKTTK',
-      'KYTKPpvVWEWEVvpPPKYK',
-      'KTTKPpvVEEWEVvpPPKTTK',
-      'KTTKPpPvvVVvvPPpPKTTK',
-      'KCTKPppppXppppppPKCK',
-      'KTTKPpppppppppppPKTTK',
-      'KQTKPPPPPPPPPPPPKQK',
-      'KTTKPPPPPzPPPPPPKTTK',
-      'KTTKPPPPPPPPPPPPKTTK',
-      '.KTTKPPPPPPPPPPKTTK.',
-      '.KTTTTKKKKKKKKTTTTK.',
-      'KTTTTTTSSSSSSSSTTTTK',
-      'KssssssssssssssssssK',
-      'KKKKKKKKKKKKKKKKKKKK'
-    ], PORTAL_PALETTE, 0, 0, PS);
-    gport.generateTexture('dungeon_portal', 20*PS, 28*PS); gport.destroy();
-
-
-    // Arcade Machine texture 16x22
-    const ga = mk();
-    PixelArtRenderer.drawMatrix(ga, [
-      '....KKKKKKKK....',
-      '....KPppppPK....',
-      '....KpYYYYpK....',
-      '..KKKKKKKKKKKK..',
-      '..KOWWWWWWWWoK..',
-      '..KOWKEEEEEKWK..',
-      '..KOWKvCvCvKWK..',
-      '..KOWKCvCvCKWK..',
-      '..KOWKvCvCvKWK..',
-      '..KOWKvvvvvKWK..',
-      '..KOWWWWWWWWoK..',
-      '..KKKKKKKKKKKK..',
-      '..KRYrrrrrrYRK..',
-      '..KRrrYYYYrrRK..',
-      '..KKKKKKKKKKKK..',
-      '..KOWWWWWWWWoK..',
-      '..KOWKYYKKYWK..',
-      '..KOWKYYKKYWK..',
-      '..KOWWWWWWWWoK..',
-      '..KOwwwwwwwwwK..',
-      '..KOWWWWWWWWoK..',
-      '..KKKKKKKKKKKK..'
-    ], Object.assign({}, DECOR_PALETTE, { E: 0xA5F3FC, Y: 0xFDE047 }), 0, 0, PS);
-    ga.generateTexture('arcade_machine', 16*PS, 22*PS); ga.destroy();
-
-
-
     // Crops (5 types × 3 stages) — unique silhouettes, 12×20, match CROP_ICONS.
     const CROP_FARM_PAL = {
       '.': null,
@@ -918,8 +619,7 @@ class FarmScene extends Phaser.Scene {
     // Force nearest-neighbor filtering on all procedural textures
     ['apple_tree', 'apple_tree_ripe', 'drt_dry', 'drt_wet', 'path_stone', 'flw_red', 'flw_yellow', 'flw_purple',
      'bf_open', 'bf_flap', 'stone_well', 'pixel_barrel', 'pixel_crate', 'signpost', 'tree', 'fnc_post', 'fnc_rail',
-     'sparkle', 'coin', 'shop_sign', 'notice_board', 'dungeon_portal',
-     'arcade_machine'].forEach(k => {
+     'sparkle', 'coin'].forEach(k => {
        const t = this.textures.get(k);
        if (t && typeof Phaser !== 'undefined' && Phaser.Textures && Phaser.Textures.FilterMode) {
          t.setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -1055,27 +755,6 @@ class FarmScene extends Phaser.Scene {
     for(let i=0; i<4; i++){
       const sp = this.add.circle(wellX + (Math.random()-0.5)*18, waterY + (Math.random()-0.5)*12, 1.5, 0x67E8F9, 0.9).setDepth(wellY+1);
       this.tweens.add({ targets: sp, alpha: 0.2, scale: 1.8, duration: 800 + i*300, yoyo: true, repeat: -1 });
-    }
-
-    // The reviewed shop already includes its own sacks, baskets, and counter display.
-    // Keep the old loose barrel/crate garnish only when that asset failed to load;
-    // otherwise the two designs occupy the same footprint and read as an overlap.
-    if (!this.textures.exists('valley_seed_shop_hd')) {
-      const bxl = sx + 28, byl = sy - 10;
-      const barrelTex = this._propTex('oak_barrel_hd', 'pixel_barrel');
-      const crateTex = this._propTex('wooden_crate_hd', 'pixel_crate');
-      const barrelHd = barrelTex.indexOf('_hd') >= 0;
-      const crateHd = crateTex.indexOf('_hd') >= 0;
-      const barrelSprite = this.add.image(bxl, byl, barrelTex)
-        .setOrigin(0.5, 1).setScale(barrelHd ? 1 : 0.9).setDepth(byl);
-      const crateSprite = this.add.image(bxl + (crateHd ? 44 : 18), byl + 6, crateTex)
-        .setOrigin(0.5, 1).setScale(crateHd ? 1 : 0.9).setDepth(byl+6);
-      if (barrelHd && barrelSprite.texture) barrelSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-      if (crateHd && crateSprite.texture) crateSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-      if (this.shadows) {
-        this.shadows.createShadow(barrelSprite, barrelHd ? 36 : 18, barrelHd ? 12 : 6, 0);
-        this.shadows.createShadow(crateSprite, crateHd ? 40 : 20, crateHd ? 12 : 6, 0);
-      }
     }
 
     // Micro World Details: Directional Signpost
@@ -1294,24 +973,24 @@ class FarmScene extends Phaser.Scene {
   // ── SHOP NPC ───────────────────────────────────────────────────────────────
   _createShopNPC(W, H){
     if (this.shopNPC) return;
+    const tex = this._reviewedTex('valley_seed_shop_hd');
+    if (!tex) return;
     const sx = Math.min(W - 90, this.farm.x + this.farm.w + 150);
     const sy = this.farm.y + this.farm.h / 2 + 25;
-    const tex = this._propTex('valley_seed_shop_hd', 'shop_sign');
-    const hd = tex === 'valley_seed_shop_hd';
-    this.shopBaseScale = hd ? 0.78 : 1.3;
+    this.shopBaseScale = 0.78;
 
     // A broad two-tone grass pad gives the stall an explicit contact plane. The shop is
     // a frequently used landmark, so its building stays still while only its hint animates.
     this.shopGround = this.add.graphics().setDepth(sy - 2);
     this.shopGround.fillStyle(0x43512F, 0.64);
-    this.shopGround.fillEllipse(sx, sy - 1, hd ? 162 : 70, hd ? 24 : 16);
+    this.shopGround.fillEllipse(sx, sy - 1, 162, 24);
     this.shopGround.fillStyle(0x819B4A, 0.72);
-    this.shopGround.fillEllipse(sx, sy - 5, hd ? 142 : 58, hd ? 14 : 9);
+    this.shopGround.fillEllipse(sx, sy - 5, 142, 14);
 
     this.shopNPC = this.add.image(sx, sy, tex)
       .setOrigin(0.5, 1).setScale(this.shopBaseScale).setDepth(sy);
-    if (hd && this.shopNPC.texture) this.shopNPC.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (this.shadows) this.shadows.createShadow(this.shopNPC, hd ? 76 : 48, hd ? 18 : 14, 1);
+    if (this.shopNPC.texture) this.shopNPC.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.shopNPC, 76, 18, 1);
 
     this.shopHint = this.add.text(sx, sy + 10, '🏪 SHOP\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'14px',
@@ -1324,13 +1003,13 @@ class FarmScene extends Phaser.Scene {
   // ── NOTICE BOARD ───────────────────────────────────────────────────────────
   _createBoardNPC(W, H){
     if (this.boardSprite) return;
+    const tex = this._reviewedTex('valley_notice_board_hd');
+    if (!tex) return;
     const bx = this.farm.x + this.farm.w / 2;
     const by = this.farm.y - 95;
-    const tex = this._propTex('valley_notice_board_hd', 'notice_board');
-    const hd = tex === 'valley_notice_board_hd';
-    this.boardSprite = this.add.image(bx, by, tex).setOrigin(0.5,1).setScale(hd ? 1 : 1.3).setDepth(by);
-    if (hd && this.boardSprite.texture) this.boardSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (this.shadows) this.shadows.createShadow(this.boardSprite, hd ? 54 : 46, 13, 1);
+    this.boardSprite = this.add.image(bx, by, tex).setOrigin(0.5,1).setScale(1).setDepth(by);
+    if (this.boardSprite.texture) this.boardSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.boardSprite, 54, 13, 1);
     this.boardHint = this.add.text(bx, by - this.boardSprite.displayHeight - 8, '📋 Minigame\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#FF88FF', stroke:'#000', strokeThickness:3, align:'center'
@@ -1342,16 +1021,16 @@ class FarmScene extends Phaser.Scene {
   // ── ARCADE MACHINE ─────────────────────────────────────────────────────────
   _createArcadeNPC(W, H){
     if (this.arcadeSprite) return;
+    const tex = this._reviewedTex('valley_arcade_cabinet_hd');
+    if (!tex) return;
     // The cabinet needs its own patch of ground. The earlier placement shared the
     // apple canopy and made both landmarks hard to read, especially at desktop widths.
     const ax = Math.max(72, this.farm.x - 205);
     const ay = this.farm.y + 117;
-    const tex = this._propTex('valley_arcade_cabinet_hd', 'arcade_machine');
-    const hd = tex === 'valley_arcade_cabinet_hd';
-    this.arcadeBaseScale = hd ? 0.68 : 1.5;
+    this.arcadeBaseScale = 0.68;
     this.arcadeSprite = this.add.image(ax, ay, tex).setOrigin(0.5,1).setScale(this.arcadeBaseScale).setDepth(ay);
-    if (hd && this.arcadeSprite.texture) this.arcadeSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (this.shadows) this.shadows.createShadow(this.arcadeSprite, hd ? 46 : 48, 14, 1);
+    if (this.arcadeSprite.texture) this.arcadeSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.arcadeSprite, 46, 14, 1);
     this.arcadeHint = this.add.text(ax, ay - this.arcadeSprite.displayHeight - 8, '👾 ARCADE\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
       color:'#00FFFF', stroke:'#000', strokeThickness:3, align:'center'
@@ -1363,17 +1042,15 @@ class FarmScene extends Phaser.Scene {
   // ── WIZARD NPC ─────────────────────────────────────────────────────────────
   _createWizardNPC(W, H){
     if (this.wizardSprite) return;
+    const tex = this._reviewedTex('valley_spell_witch_hd');
+    if (!tex) return;
     const wx = Math.min(W - 62, this.farm.x + this.farm.w + 145);
     const wy = this.farm.y - 85;
-    const hd = this.textures.exists('valley_spell_witch_hd');
-    this.wizardBaseScale = hd ? 1 : 1.8;
-    this.wizardSprite = hd
-      ? this.add.image(wx, wy, 'valley_spell_witch_hd')
-      : this.add.sprite(wx, wy, 'wizard_idle_0');
+    this.wizardBaseScale = 1;
+    this.wizardSprite = this.add.image(wx, wy, tex);
     this.wizardSprite.setOrigin(0.5,1).setScale(this.wizardBaseScale).setDepth(wy);
-    if (hd && this.wizardSprite.texture) this.wizardSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (!hd && this.wizardSprite.play) this.wizardSprite.play('wizard-idle');
-    if (this.shadows) this.shadows.createShadow(this.wizardSprite, hd ? 34 : 38, 12, 1);
+    if (this.wizardSprite.texture) this.wizardSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.wizardSprite, 34, 12, 1);
     this.tweens.add({ targets: this.wizardSprite, y: wy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
     this.wizardHint = this.add.text(wx, wy - this.wizardSprite.displayHeight - 8, '⚡ SPELL DUEL\n' + WORLD_CLICK_HINT, {
@@ -1388,17 +1065,15 @@ class FarmScene extends Phaser.Scene {
   // ── CAT NPC ────────────────────────────────────────────────────────────────
   _createCatNPC(W, H){
     if (this.catSprite) return;
+    const tex = this._reviewedTex('valley_ginger_cat_hd');
+    if (!tex) return;
     const cx = Math.max(120, this.farm.x - 80);
     const cy = this.farm.y + this.farm.h + 75;
-    this.catUsesHd = this.textures.exists('valley_ginger_cat_hd');
-    this.catBaseScale = this.catUsesHd ? 0.58 : 0.75;
-    this.catSprite = this.catUsesHd
-      ? this.add.image(cx, cy, 'valley_ginger_cat_hd')
-      : this.add.sprite(cx, cy, 'cat_idle_0');
+    this.catBaseScale = 0.58;
+    this.catSprite = this.add.image(cx, cy, tex);
     this.catSprite.setOrigin(0.5,1).setScale(this.catBaseScale).setDepth(cy);
-    if (this.catUsesHd && this.catSprite.texture) this.catSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (!this.catUsesHd && this.catSprite.play) this.catSprite.play('cat-idle');
-    if (this.shadows) this.shadows.createShadow(this.catSprite, this.catUsesHd ? 30 : 20, 6, 1);
+    if (this.catSprite.texture) this.catSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.catSprite, 30, 6, 1);
     this.tweens.add({ targets:this.catSprite, y:cy-3, duration:1200, yoyo:true, repeat:-1, ease:'Sine.InOut' });
     this.catHint = this.add.text(cx, cy - this.catSprite.displayHeight - 6, '🐱 야옹\n' + WORLD_CLICK_HINT, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
@@ -1411,14 +1086,14 @@ class FarmScene extends Phaser.Scene {
   // ── DUNGEON PORTAL NPC ─────────────────────────────────────────────────────
   _createPortalNPC(W, H){
     if (this.portalSprite) return;
+    const tex = this._reviewedTex('valley_dungeon_portal_hd');
+    if (!tex) return;
     const px = Math.min(W - 64, this.farm.x + this.farm.w + 135);
     const py = this.farm.y + this.farm.h + 80;
-    const tex = this._propTex('valley_dungeon_portal_hd', 'dungeon_portal');
-    const hd = tex === 'valley_dungeon_portal_hd';
-    this.portalBaseScale = hd ? 0.72 : 1.6;
+    this.portalBaseScale = 0.72;
     this.portalSprite = this.add.image(px, py, tex).setOrigin(0.5,1).setScale(this.portalBaseScale).setDepth(py);
-    if (hd && this.portalSprite.texture) this.portalSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (this.shadows) this.shadows.createShadow(this.portalSprite, hd ? 82 : 72, hd ? 22 : 20, 1);
+    if (this.portalSprite.texture) this.portalSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.portalSprite, 82, 22, 1);
     this.tweens.add({ targets: this.portalSprite, alpha: { from: 0.9, to: 1 }, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
     this.portalHint = this.add.text(px, py - this.portalSprite.displayHeight - 8, '🌀 DUNGEON\n' + WORLD_CLICK_HINT, {
@@ -1433,206 +1108,66 @@ class FarmScene extends Phaser.Scene {
   // ── FISHING SPOT NPC / DOCK ────────────────────────────────────────────────
   _createFishingSpot(W, H){
     if (this.fishX != null) return;
+    const pondTex = this._reviewedTex('valley_fishing_pond_hd');
+    if (!pondTex) return;
+
     const fx = Math.max(105, this.farm.x - 150);
     const fy = this.farm.y + this.farm.h / 2 + 40;
-    this.dockSprite = null; // No boat — pure pond
     const layerStart = this.children.list.length;
     this._fishingTimers = [];
     this.pondFishSprite = null;
+    this.pondWater = null;
+    this.dockBaseScale = 0.72;
 
-    // The reviewed pond is one coherent landmark. Keep the old generated pond below as
-    // a network-failure fallback, but never stack its random rocks and reeds over the art.
-    if (this.textures.exists('valley_fishing_pond_hd')) {
-      this.dockBaseScale = 0.72;
-      this.dockSprite = this.add.image(fx, fy + 20, 'valley_fishing_pond_hd')
-        .setOrigin(0.5).setScale(this.dockBaseScale).setDepth(fy - 4);
-      if (this.dockSprite.texture) this.dockSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-      this.pondWater = null;
+    this.dockSprite = this.add.image(fx, fy + 20, pondTex)
+      .setOrigin(0.5).setScale(this.dockBaseScale).setDepth(fy - 4);
+    if (this.dockSprite.texture) this.dockSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
 
-      for (let i = 0; i < 5; i++) {
-        const sparkle = this.add.circle(
-          fx - 55 + i * 27,
-          fy + 4 + (i % 2) * 15,
-          1.5,
-          0xECFEFF,
-          0.8
-        ).setDepth(fy + 1);
-        this.tweens.add({
-          targets: sparkle,
-          alpha: { from: 0.18, to: 0.9 },
-          scale: { from: 0.7, to: 1.5 },
-          duration: 900 + i * 240,
-          yoyo: true,
-          repeat: -1,
-          ease: 'Sine.InOut'
-        });
-      }
-
-      this._createPondFish(fx, fy);
-
-      this.fishHint = this.add.text(
-        fx,
-        this.dockSprite.y - this.dockSprite.displayHeight / 2 - 8,
-        '🎣 FISHING POND\n' + WORLD_CLICK_HINT,
-        {
-          fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
-          color:'#38BDF8', stroke:'#000', strokeThickness:3, align:'center'
-        }
-      ).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
-      this.tweens.add({ targets: this.fishHint, y: this.fishHint.y - 3, duration: 700, yoyo: true, repeat: -1 });
-
-      this.fishX = fx; this.fishY = fy;
-      this._pondVisible = true;
-      this._worldLayers = this._worldLayers || {};
-      this._worldLayers.fishing = this.children.list.slice(layerStart);
-      this._fishingTimers.push(this.time.addEvent({ delay: 4000, loop: true, callback: () => this._triggerFishJump(fx, fy) }));
-      return;
-    }
-
-    // ── Large stones (outer ring) ─────────────────────────────────────────
-    const stoneColors = [0x7D7571, 0x6B6360, 0x8A8480, 0x5C5652];
-    const pondRadiusX = 140, pondRadiusY = 50;
-    for (let angle = 0; angle < Math.PI * 2; angle += 0.22) {
-      const jitter = 0.88 + Math.random() * 0.24;
-      const px = fx + Math.cos(angle) * (pondRadiusX + 14) * jitter;
-      const py = fy + 20 + Math.sin(angle) * (pondRadiusY + 14) * jitter;
-      const size = 5 + Math.random() * 5;
-      const col = stoneColors[Math.floor(Math.random() * stoneColors.length)];
-      const stone = this.add.ellipse(px, py, size * 1.4, size, col, 0.95).setDepth(fy - 8);
-      stone.setAngle(Math.random() * 360);
-    }
-
-    // ── Mid cobblestone ring ──────────────────────────────────────────────
-    const pebbleColors = [0x9E9793, 0xC7C1BD, 0xB0A8A3, 0x8A827E];
-    for (let angle = 0; angle < Math.PI * 2; angle += 0.16) {
-      const jitter = 0.85 + Math.random() * 0.3;
-      const px = fx + Math.cos(angle) * (pondRadiusX + 6) * jitter;
-      const py = fy + 20 + Math.sin(angle) * (pondRadiusY + 6) * jitter;
-      const size = 3 + Math.random() * 4;
-      const col = pebbleColors[Math.floor(Math.random() * pebbleColors.length)];
-      this.add.circle(px, py, size, col, 0.9).setDepth(fy - 7);
-    }
-
-    // ── Inner small pebbles ───────────────────────────────────────────────
-    const smallColors = [0xC7C1BD, 0xB0A8A3, 0xD5CFCB, 0x9E9793];
-    for (let angle = 0; angle < Math.PI * 2; angle += 0.2) {
-      const jitter = 0.9 + Math.random() * 0.2;
-      const px = fx + Math.cos(angle) * (pondRadiusX - 4) * jitter;
-      const py = fy + 20 + Math.sin(angle) * (pondRadiusY - 4) * jitter;
-      const size = 1.5 + Math.random() * 2.5;
-      const col = smallColors[Math.floor(Math.random() * smallColors.length)];
-      this.add.circle(px, py, size, col, 0.75).setDepth(fy - 6);
-    }
-
-    // ── Scattered accent rocks (random clusters) ──────────────────────────
-    for (let i = 0; i < 14; i++) {
-      const rAngle = Math.random() * Math.PI * 2;
-      const rDist = 0.95 + Math.random() * 0.35;
-      const rx = fx + Math.cos(rAngle) * (pondRadiusX + 22) * rDist;
-      const ry = fy + 20 + Math.sin(rAngle) * (pondRadiusY + 22) * rDist;
-      const rSize = 3 + Math.random() * 6;
-      const rCol = stoneColors[Math.floor(Math.random() * stoneColors.length)];
-      const rock = this.add.ellipse(rx, ry, rSize * 1.6, rSize, rCol, 0.85).setDepth(fy - 8);
-      rock.setAngle(Math.random() * 360);
-    }
-
-    // ── Crystal Pond (tiled water + depth rings) ──────────────────────────
-    this.add.ellipse(fx, fy + 24, 268, 90, 0x134E4A, 0.95).setDepth(fy - 6);
-    if (this.textures.exists('tile_ocean_deep_0')) {
-      const maskG = this.make.graphics({ add: false });
-      maskG.fillStyle(0xffffff, 1);
-      maskG.fillEllipse(fx, fy + 20, 250, 76);
-      const pondMask = maskG.createGeometryMask();
-      this.pondWater = this.add.tileSprite(fx, fy + 20, 260, 86, 'tile_ocean_deep_0')
-        .setDepth(fy - 4).setMask(pondMask);
-      this.dockSprite = this.pondWater;
-      this.pondWaterFrame = 0;
-      this._fishingTimers.push(this.time.addEvent({
-        delay: 280,
-        loop: true,
-        callback: () => {
-          if (!this.pondWater || !this.sys || !this.sys.isActive()) return;
-          this.pondWaterFrame = (this.pondWaterFrame + 1) % 4;
-          const key = `tile_ocean_deep_${this.pondWaterFrame}`;
-          if (this.textures.exists(key)) this.pondWater.setTexture(key);
-        }
-      }));
-    } else {
-      const pond = this.add.ellipse(fx, fy + 20, 250, 76, 0x0E7490, 0.9).setDepth(fy - 4);
-      this.pondWater = pond;
-      this.dockSprite = pond;
-      this.tweens.add({ targets: pond, scaleX: 1.03, scaleY: 0.97, duration: 2200, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-    }
-    this.dockBaseScale = 1;
-    this.add.ellipse(fx - 36, fy + 10, 90, 30, 0x5EEAD4, 0.18).setDepth(fy - 3);
-    this.add.ellipse(fx + 48, fy + 26, 56, 18, 0x67E8F9, 0.14).setDepth(fy - 3);
-
-    // ── Water sparkle particles ───────────────────────────────────────────
-    for (let i = 0; i < 10; i++) {
-      const sx = fx + (Math.random() - 0.5) * 200;
-      const sy = fy + 10 + (Math.random() - 0.5) * 50;
-      const sparkle = this.add.circle(sx, sy, 1.5, 0xECFEFF, 0.85).setDepth(fy - 2);
+    for (let i = 0; i < 5; i++) {
+      const sparkle = this.add.circle(
+        fx - 55 + i * 27,
+        fy + 4 + (i % 2) * 15,
+        1.5,
+        0xECFEFF,
+        0.8
+      ).setDepth(fy + 1);
       this.tweens.add({
-        targets: sparkle, alpha: { from: 0.15, to: 0.95 }, scale: { from: 0.7, to: 1.7 },
-        duration: 900 + i * 280, yoyo: true, repeat: -1, ease: 'Sine.InOut'
-      });
-    }
-
-    // ── Floating Lily Pads ────────────────────────────────────────────────
-    const lilyPositions = [[-70, 18], [78, 26], [-18, 30], [42, 12], [-92, 8]];
-    lilyPositions.forEach(([lx, ly], i) => {
-      const key = this.textures.exists('lily_pad') ? 'lily_pad' : null;
-      const lily = key
-        ? this.add.image(fx + lx, fy + ly, key).setScale(0.9 + Math.random() * 0.25).setDepth(fy - 1)
-        : this.add.ellipse(fx + lx, fy + ly, 16, 10, 0x4ADE80, 0.7).setDepth(fy - 1);
-      this.tweens.add({ targets: lily, y: `+=${1.5 + Math.random()}`, duration: 1800 + i * 280, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-      if (i % 2 === 0 && this.textures.exists('lily_bloom')) {
-        const bloom = this.add.image(fx + lx, fy + ly - 6, 'lily_bloom').setScale(0.7).setDepth(fy);
-        this.tweens.add({ targets: bloom, y: `+=${1.5 + Math.random()}`, duration: 1800 + i * 280, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-      }
-    });
-
-    if (this.textures.exists('pond_reed')) {
-      [[-132, 8], [-118, 28], [124, 6], [136, 24], [-108, -8]].forEach(([rx, ry], i) => {
-        const reed = this.add.image(fx + rx, fy + ry, 'pond_reed').setOrigin(0.5, 1).setScale(1.1).setDepth(fy + 2);
-        this.tweens.add({ targets: reed, angle: { from: -4, to: 5 }, duration: 1600 + i * 220, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
-      });
-    }
-
-    // ── Water ripple waves ────────────────────────────────────────────────
-    for (let i = 0; i < 4; i++) {
-      const ripple = this.add.ellipse(fx + (i - 1.5) * 40, fy + 20, 24, 7, 0x38BDF8, 0.3).setDepth(fy - 1);
-      this.tweens.add({
-        targets: ripple, scaleX: { from: 1, to: 2.8 }, scaleY: { from: 1, to: 1.4 }, alpha: { from: 0.3, to: 0 },
-        duration: 3000, delay: i * 700, repeat: -1, ease: 'Quad.Out'
+        targets: sparkle,
+        alpha: { from: 0.18, to: 0.9 },
+        scale: { from: 0.7, to: 1.5 },
+        duration: 900 + i * 240,
+        yoyo: true,
+        repeat: -1,
+        ease: 'Sine.InOut'
       });
     }
 
     this._createPondFish(fx, fy);
-
-    // ── Hint & Label ──────────────────────────────────────────────────────
-    this.fishHint = this.add.text(fx, fy - 40, '🎣 FISHING POND\n' + WORLD_CLICK_HINT, {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
-      color:'#38BDF8', stroke:'#000', strokeThickness:3, align:'center'
-    }).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
+    this.fishHint = this.add.text(
+      fx,
+      this.dockSprite.y - this.dockSprite.displayHeight / 2 - 8,
+      '🎣 FISHING POND\n' + WORLD_CLICK_HINT,
+      {
+        fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+        color:'#38BDF8', stroke:'#000', strokeThickness:3, align:'center'
+      }
+    ).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
     this.tweens.add({ targets: this.fishHint, y: this.fishHint.y - 3, duration: 700, yoyo: true, repeat: -1 });
 
     this.fishX = fx; this.fishY = fy;
     this._pondVisible = true;
     this._worldLayers = this._worldLayers || {};
     this._worldLayers.fishing = this.children.list.slice(layerStart);
-
-    // Ambient Fish Jumping Effect
     this._fishingTimers.push(this.time.addEvent({ delay: 4000, loop: true, callback: () => this._triggerFishJump(fx, fy) }));
   }
 
   _createPondFish(fx, fy) {
-    const fishTex = this._propTex('valley_pond_carp_hd', 'fish_carp');
-    const hd = fishTex === 'valley_pond_carp_hd';
-    this.pondFishBaseScale = hd ? 0.82 : 0.75;
+    const fishTex = this._reviewedTex('valley_pond_carp_hd');
+    if (!fishTex) return;
+    this.pondFishBaseScale = 0.82;
     this.pondFishSprite = this.add.image(fx - 38, fy + 18, fishTex)
       .setScale(this.pondFishBaseScale).setAlpha(0.82).setDepth(fy + 2);
-    if (hd && this.pondFishSprite.texture) {
+    if (this.pondFishSprite.texture) {
       this.pondFishSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     }
     this.tweens.add({
@@ -1655,6 +1190,8 @@ class FarmScene extends Phaser.Scene {
   _triggerFishJump(fx, fy) {
     if (!this.sys || !this.sys.isActive()) return;
     if (this.fishX == null) return;
+    const fishTex = this._reviewedTex('valley_pond_carp_hd');
+    if (!fishTex) return;
     const isLeft = Math.random() < 0.5;
     const jumpDist = Phaser.Math.Between(40, 70) * (isLeft ? -1 : 1);
     const startX = fx + Phaser.Math.Between(-40, 40);
@@ -1667,10 +1204,8 @@ class FarmScene extends Phaser.Scene {
     this._createSplashRipples(startX, startY);
     this._createSplashDroplets(startX, startY);
 
-    const fishTex = this._propTex('valley_pond_carp_hd', 'fish_carp');
-    const hd = fishTex === 'valley_pond_carp_hd';
-    const fish = this.add.image(startX, startY, fishTex).setScale(hd ? 0.95 : 1.0).setDepth(fy + 5);
-    if (hd && fish.texture) fish.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    const fish = this.add.image(startX, startY, fishTex).setScale(0.95).setDepth(fy + 5);
+    if (fish.texture) fish.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (isLeft) fish.setFlipX(true);
 
     const startAngle = isLeft ? 40 : -40;
@@ -1812,6 +1347,8 @@ class FarmScene extends Phaser.Scene {
   // ── BEEHIVE NPC ────────────────────────────────────────────────────────────
   _createBeehiveNPC(W, H){
     if (this.beehiveSprite) return;
+    const hiveTex = this._reviewedTex('valley_apiary_hive_hd');
+    if (!hiveTex) return;
     // Keep the apiary outside the plot fence and away from the apple canopy. A painted
     // ground patch makes its contact point unambiguous while only the bees stay airborne.
     const bx = Math.min(W - 70, this.farm.x + this.farm.w + 78);
@@ -1825,18 +1362,16 @@ class FarmScene extends Phaser.Scene {
     this.beehiveGround.fillStyle(0x819B4A, 0.72);
     this.beehiveGround.fillEllipse(bx, by - 4, 46, 9);
 
-    const tex = this._propTex('valley_apiary_hive_hd', 'beehive');
-    const hd = tex === 'valley_apiary_hive_hd';
-    this.beehiveBaseScale = hd ? 1.15 : 1.6;
-    this.beehiveSprite = this.add.image(bx, by, tex)
+    this.beehiveBaseScale = 1.15;
+    this.beehiveSprite = this.add.image(bx, by, hiveTex)
       .setOrigin(0.5, 1).setScale(this.beehiveBaseScale).setDepth(by);
-    if (hd && this.beehiveSprite.texture) this.beehiveSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (this.shadows) this.shadows.createShadow(this.beehiveSprite, hd ? 42 : 38, 12, 1);
+    if (this.beehiveSprite.texture) this.beehiveSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (this.shadows) this.shadows.createShadow(this.beehiveSprite, 42, 12, 1);
 
     const beeFrames = ['valley_honey_bee_open_hd', 'valley_honey_bee_flap_hd'];
     const beeAnimKey = 'valley-honey-bee-fly';
-    const beeUsesHd = beeFrames.every((key) => this.textures.exists(key));
-    if (beeUsesHd) {
+    const beeArtReady = beeFrames.every((key) => !!this._reviewedTex(key));
+    if (beeArtReady) {
       beeFrames.forEach((key) => this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST));
       if (!this.anims.exists(beeAnimKey)) {
         this.anims.create({
@@ -1850,22 +1385,22 @@ class FarmScene extends Phaser.Scene {
 
     this.beehiveBees = [];
     const numBees = 4;
-    for (let i = 0; i < numBees; i++) {
-      const beeSprite = beeUsesHd
-        ? this.add.sprite(bx, by - 42, beeFrames[i % beeFrames.length])
-        : this.add.image(bx, by - 42, 'p_tiny_bee');
-      beeSprite.setScale(beeUsesHd ? 0.95 - (i % 2) * 0.08 : 1.2).setDepth(by + 10);
-      if (beeUsesHd) beeSprite.play({ key: beeAnimKey, delay: i * 35 });
-      this.beehiveBees.push({
-        sprite: beeSprite,
-        baseX: bx,
-        baseY: by - 42,
-        angle: (Math.PI * 2 / numBees) * i,
-        radiusX: 23 + (i % 2) * 7,
-        radiusY: 13 + (i % 2) * 4,
-        speed: 0.035 + i * 0.008,
-        usesHd: beeUsesHd
-      });
+    if (beeArtReady) {
+      for (let i = 0; i < numBees; i++) {
+        const beeSprite = this.add.sprite(bx, by - 42, beeFrames[i % beeFrames.length]);
+        beeSprite.setScale(0.95 - (i % 2) * 0.08).setDepth(by + 10);
+        beeSprite.play({ key: beeAnimKey, delay: i * 35 });
+        this.beehiveBees.push({
+          sprite: beeSprite,
+          baseX: bx,
+          baseY: by - 42,
+          angle: (Math.PI * 2 / numBees) * i,
+          radiusX: 23 + (i % 2) * 7,
+          radiusY: 13 + (i % 2) * 4,
+          speed: 0.035 + i * 0.008,
+          usesHd: true
+        });
+      }
     }
 
     this.beehiveHint = this.add.text(bx, by - this.beehiveSprite.displayHeight - 8, '🐝 Beehive\n' + WORLD_CLICK_HINT, {
@@ -2352,37 +1887,33 @@ class FarmScene extends Phaser.Scene {
     if (!this.catSprite || !this.player) return;
 
     const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.catX, this.catY);
-    let targetAnim = 'cat-idle';
+    let targetPose = 'idle';
     const isCatTalking = typeof catDialogOpen !== 'undefined' && catDialogOpen;
 
     if (this.catIsMoving) {
-      targetAnim = 'cat-walk';
+      targetPose = 'walk';
     } else if (isCatTalking || dist < 65) {
-      targetAnim = 'cat-sit';
+      targetPose = 'sit';
       this.catSprite.setFlipX(this.player.x < this.catX);
       this.catIdleTimer = 0;
     } else if (dist > 250) {
       this.catIdleTimer = (this.catIdleTimer || 0) + (dt || 16);
       if (this.catIdleTimer > 5000) {
-        targetAnim = 'cat-sleep';
+        targetPose = 'sleep';
       } else {
-        targetAnim = 'cat-idle';
+        targetPose = 'idle';
       }
     } else {
       this.catIdleTimer = 0;
       this.catSprite.setFlipX(this.player.x < this.catX);
-      targetAnim = 'cat-idle';
+      targetPose = 'idle';
     }
 
-    if (this.catCurrentAnim !== targetAnim) {
-      this.catCurrentAnim = targetAnim;
-      if (this.catUsesHd) {
-        if (targetAnim === 'cat-sleep') this.catSprite.setScale(0.66, 0.46);
-        else if (targetAnim === 'cat-sit') this.catSprite.setScale(0.62, 0.58);
-        else this.catSprite.setScale(this.catBaseScale || 0.58);
-      } else if (this.anims && this.anims.exists(targetAnim)) {
-        this.catSprite.play(targetAnim, true);
-      }
+    if (this.catCurrentPose !== targetPose) {
+      this.catCurrentPose = targetPose;
+      if (targetPose === 'sleep') this.catSprite.setScale(0.66, 0.46);
+      else if (targetPose === 'sit') this.catSprite.setScale(0.62, 0.58);
+      else this.catSprite.setScale(this.catBaseScale || 0.58);
     }
   }
 
@@ -2892,6 +2423,16 @@ class FarmScene extends Phaser.Scene {
     return fallback;
   }
 
+  _reviewedTex(key) {
+    if (key && this.textures && this.textures.exists(key)) return key;
+    this._missingReviewedArt = this._missingReviewedArt || new Set();
+    if (!this._missingReviewedArt.has(key)) {
+      this._missingReviewedArt.add(key);
+      console.warn('[FarmScene] Required reviewed art did not load:', key);
+    }
+    return null;
+  }
+
   // ── World packs: spawn/teardown extras+stations. Do not hide leftover sprites. ──
   syncUnit10World(){ this.applyWorld(); }
 
@@ -2980,7 +2521,7 @@ class FarmScene extends Phaser.Scene {
     } else if (id === 'cat') {
       this._destroyWorldObj(this.catSprite); this._destroyWorldObj(this.catHint);
       this.catSprite = this.catHint = null; this.catX = this.catY = null;
-      this.catUsesHd = false; this.catBaseScale = null; this.catCurrentAnim = null;
+      this.catBaseScale = null; this.catCurrentPose = null;
     } else if (id === 'portal') {
       this._destroyWorldObj(this.portalSprite); this._destroyWorldObj(this.portalHint);
       this.portalSprite = this.portalHint = null; this.portalX = this.portalY = null;
@@ -3004,35 +2545,31 @@ class FarmScene extends Phaser.Scene {
     }
   }
 
-  _spawnUnit10Station(id, { hdKey, matrixKey, lastKey, shadowW, matrixScale }) {
+  _spawnUnit10Station(id, { hdKey, shadowW }) {
     if (!this.farm) return null;
     const spec = getUnit10Station(id);
     const pos = unit10StationXY(this.farm, spec);
-    const hd = this.textures.exists(hdKey);
-    const tex = hd ? hdKey
-      : (this.textures.exists(matrixKey) ? matrixKey : lastKey);
+    const tex = this._reviewedTex(hdKey);
+    if (!tex) return null;
     const spr = this.add.image(pos.x, pos.y, tex)
       .setOrigin(spec.originX || 0.5, 1)
-      .setScale(hd ? hdStationScale(spec) : matrixScale)
+      .setScale(hdStationScale(spec))
       .setDepth(pos.y + 6);
-    if (hd && spr.texture) spr.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (spr.texture) spr.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     const hdShadowW = typeof shadowW === 'function' ? shadowW(spr) : shadowW;
-    if (this.shadows) this.shadows.createShadow(spr, hd ? hdShadowW : 52, 16, 1);
+    if (this.shadows) this.shadows.createShadow(spr, hdShadowW, 16, 1);
     const label = this.add.text(pos.x, pos.y + 8, (spec.nameKo || id) + '\n' + WORLD_CLICK_HINT, {
       fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
       color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
     }).setOrigin(0.5, 0).setDepth(pos.y + 10).setAlpha(0);
-    return { x: pos.x, y: pos.y, spr, label, interact: spec.interact || 80, hd };
+    return { x: pos.x, y: pos.y, spr, label, interact: spec.interact || 80, hd: true };
   }
 
   _ensureTasteStation(){
     this._teardownTasteStation();
     const base = this._spawnUnit10Station('taste', {
       hdKey: 'unit10_taste_stall_hd',
-      matrixKey: 'taste_stall',
-      lastKey: 'shop_sign',
-      shadowW: (spr) => Math.min(90, Math.round(spr.displayWidth * 0.55)),
-      matrixScale: 2.4
+      shadowW: (spr) => Math.min(90, Math.round(spr.displayWidth * 0.55))
     });
     if (!base) return;
     const steam = [];
@@ -3052,10 +2589,7 @@ class FarmScene extends Phaser.Scene {
     this._teardownStudyDesk();
     const base = this._spawnUnit10Station('desk', {
       hdKey: 'study_desk_hd',
-      matrixKey: 'study_desk',
-      lastKey: 'pixel_crate',
-      shadowW: 78,
-      matrixScale: 2.3
+      shadowW: 78
     });
     if (!base) return;
     const glow = this.add.circle(base.x - 26, base.y - base.spr.displayHeight * 0.63, 8, 0xFDE047, 0.22).setDepth(base.y + 8);
@@ -3067,10 +2601,7 @@ class FarmScene extends Phaser.Scene {
     this._teardownKitchen();
     const base = this._spawnUnit10Station('kitchen', {
       hdKey: 'unit10_kitchen_hd',
-      matrixKey: 'unit10_kitchen',
-      lastKey: 'shop_sign',
-      shadowW: 58,
-      matrixScale: 2.35
+      shadowW: 58
     });
     if (!base) return;
     const flame = [];
@@ -3106,23 +2637,10 @@ class FarmScene extends Phaser.Scene {
     this._teardownCassette();
     const base = this._spawnUnit10Station('cassette', {
       hdKey: 'cassette_player_hd',
-      matrixKey: 'cassette_player',
-      lastKey: 'pixel_crate',
-      shadowW: 62,
-      matrixScale: 2.3
+      shadowW: 62
     });
     if (!base) return;
-    // The reviewed cassette already contains its amber power light. The overlay LED is
-    // only for the generated fallback; otherwise it lands on top of the tape controls.
-    const led = base.hd ? null : this.add.circle(
-      base.x + base.spr.displayWidth * 0.30,
-      base.y - base.spr.displayHeight * 0.36,
-      2.5,
-      0xFDE047,
-      0.9
-    ).setDepth(base.y + 8);
-    if (led) this.tweens.add({ targets: led, alpha: { from: 0.9, to: 0.25 }, duration: 1100, yoyo: true, repeat: -1 });
-    this.cassetteStation = Object.assign(base, { led });
+    this.cassetteStation = Object.assign(base, { led: null });
   }
 
   _teardownCassette(){

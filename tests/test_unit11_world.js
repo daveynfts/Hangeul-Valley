@@ -218,9 +218,10 @@ assert(JSON.stringify(R("WORLD_PACKS['2b-unit-11'].stations")) === JSON.stringif
 
 const art = R("artLoadForWorldPack('2b-unit-11')");
 assert(art.some((a) => a.key === 'study_desk_hd'), 'Unit 11 boot loads the study desk art');
+assert(art.some((a) => a.key === 'cassette_player_hd'), 'Unit 11 boot loads the reviewed cassette art');
 assert(!art.some((a) => a.key === 'unit10_kitchen_hd' || a.key === 'unit10_taste_stall_hd'),
   'and pulls neither the kitchen nor the stall');
-assert(art.length === 1, 'one texture, not a copy of the Unit 10 list (' + art.length + ')');
+assert(art.length === 2, 'two reviewed textures, not a copy of the Unit 10 list (' + art.length + ')');
 
 assert(econ.indexOf("{ cache: 'world-2b-11', file: 'worlds/2b-unit-11.json' }") >= 0,
   'TEXTBOOK_WORLD_FILES lists the Unit 11 JSON for the non-Phaser load path');

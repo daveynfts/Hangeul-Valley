@@ -944,8 +944,6 @@
       position: absolute; top: 6px; right: 6px;
       padding: 1px 6px; font-size: 13px;
     }
-    .vocab-card { position: relative; }
-
     /* ── MAIN HUD BAR ─────────────────────────────────────────────────────── */
     #hud {
       position: fixed; top: 10px; left: 50%; transform: translateX(-50%);

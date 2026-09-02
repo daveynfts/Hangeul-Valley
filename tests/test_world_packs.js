@@ -32,6 +32,20 @@ assert(start >= 0 && end > start, 'world pack helpers are in economy.js');
 
 const ctx = {
   console,
+  ART_LOAD: [
+    { key: 'valley_seed_shop_hd' },
+    { key: 'valley_notice_board_hd' },
+    { key: 'valley_arcade_cabinet_hd' },
+    { key: 'valley_spell_witch_hd' },
+    { key: 'valley_ginger_cat_hd' },
+    { key: 'valley_apiary_hive_hd' },
+    { key: 'valley_honey_bee_open_hd' },
+    { key: 'valley_honey_bee_flap_hd' },
+    { key: 'valley_dungeon_portal_hd' },
+    { key: 'valley_fishing_pond_hd' },
+    { key: 'valley_pond_carp_hd' },
+    { key: 'legacy_asset_that_must_not_load' }
+  ],
   levelsData: [
     { nameEn: 'Daily Life' },
     { worldId: '2b-unit-10', map: unit10.level.map },
@@ -90,11 +104,15 @@ assert(u10art.some(a => a.key === 'unit10_kitchen_hd'), 'unit 10 art loads kitch
 assert(u10art.some(a => a.key === 'study_desk_hd'), 'unit 10 art loads desk');
 const u11art = R("artLoadForWorldPack('2b-unit-11')");
 assert(u11art.some(a => a.key === 'study_desk_hd'), 'unit 11 art loads desk');
-assert(u11art.length === 1, 'unit 11 loads the desk and nothing else');
+assert(u11art.some(a => a.key === 'cassette_player_hd'), 'unit 11 art loads the reviewed cassette');
+assert(u11art.length === 2, 'unit 11 loads exactly its two reviewed station textures');
 const u14art = R("artLoadForWorldPack('2b-unit-14')");
 assert(u14art.some(a => a.key === 'study_desk_hd'), 'unit 14 art loads desk');
+assert(u14art.some(a => a.key === 'cassette_player_hd'), 'unit 14 art loads the reviewed cassette');
 assert(!u14art.some(a => a.key === 'unit10_kitchen_hd'), 'unit 14 does not load kitchen art');
-assert(R("artLoadForWorldPack('valley')").length === 0, 'valley boot does not pull unit station art');
+const valleyArt = R("artLoadForWorldPack('valley')");
+assert(valleyArt.length === 11, 'valley boot retries every reviewed landmark and creature texture');
+assert(!valleyArt.some(a => a.key === 'legacy_asset_that_must_not_load'), 'valley boot never retries a legacy texture');
 
 // These three pin the world JSON, which is what currentWorldPack() actually reads —
 // WORLD_PACKS is only the fallback for a world whose JSON declares no map. Pinning both

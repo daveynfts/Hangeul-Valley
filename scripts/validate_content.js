@@ -176,7 +176,8 @@ check('game.js monolith is gone', !fs.existsSync(path.join(ROOT, 'game.js')));
 check('js/manifest.json lists scripts', Array.isArray(GAME_SCRIPTS) && GAME_SCRIPTS.length > 0);
 
 const html = read('index.html');
-check('index.html links css/game.css', html.indexOf('href="css/game.css"') >= 0);
+check('index.html links a cache-busted css/game.css',
+  /href="css\/game\.css\?v=[a-z0-9-]+"/i.test(html));
 check('quiz has no romanization hint', html.indexOf("revealQuizHint('roman')") < 0);
 check('vocab book cards use vocabIconHtml',
   /vc-emoji[\s\S]{0,120}vocabIconHtml|vocabIconHtml\([\s\S]{0,40}vc-emoji/.test(gameJs)
@@ -220,7 +221,12 @@ check('Korean audio plays CDN clips before Web Speech',
   && gameJs.indexOf('function ttsClipStem') >= 0
   && gameJs.indexOf('this._playClip') >= 0
   && gameJs.indexOf("TTS_CACHE_KEY = 'sunhi-1'") >= 0);
-const scriptSrcs = [...html.matchAll(/<script\b[^>]*\bsrc="(js\/[^"]+)"[^>]*><\/script>/gi)].map((m) => m[1]);
+const appRelease = (html.match(/<body\b[^>]*\bdata-ui-release="([^"]+)"/i) || [])[1] || '';
+const scriptSrcsWithVersion = [...html.matchAll(/<script\b[^>]*\bsrc="(js\/[^"]+)"[^>]*><\/script>/gi)].map((m) => m[1]);
+const scriptSrcs = scriptSrcsWithVersion.map((src) => src.split('?')[0]);
+check('every app script uses the current cache-busting release',
+  !!appRelease && scriptSrcsWithVersion.every((src) => src.endsWith('?v=' + appRelease)),
+  appRelease || 'missing data-ui-release');
 check('index.html script tags match js/manifest.json',
   JSON.stringify(scriptSrcs) === JSON.stringify(GAME_SCRIPTS),
   scriptSrcs.join(',') + ' vs ' + GAME_SCRIPTS.join(','));
@@ -1024,7 +1030,10 @@ const overlayIds = [
 
 (function checkUnit11CassetteWiring() {
   const gameJs = readGameSource();
-  check('the cassette sprite is baked', /createTexture\(this, 'cassette_player'/.test(gameJs));
+  check('the cassette uses only its reviewed sprite',
+    /hdKey: 'cassette_player_hd'/.test(gameJs)
+    && /const tex = this\._reviewedTex\(hdKey\)/.test(gameJs)
+    && !/createTexture\(this, 'cassette_player'/.test(gameJs));
   check('the cassette spawns and tears down with the pack',
     gameJs.indexOf('_ensureCassette') >= 0 && gameJs.indexOf('_teardownCassette') >= 0
     && /stations\.indexOf\('cassette'\) >= 0/.test(gameJs));
