@@ -9,6 +9,7 @@ const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(ROOT, 'css', 'game.css'), 'utf8');
 const ui = fs.readFileSync(path.join(ROOT, 'js', 'ui.js'), 'utf8');
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'js', 'manifest.json'), 'utf8'));
+const topikArtManifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs', 'topik-art-manifest.json'), 'utf8'));
 
 function assert(condition, message) {
   if (!condition) {
@@ -91,8 +92,12 @@ assert(!!release
   'all vocabulary UI code is tied to one cache-busted release');
 assert(/#vocab-grid\s*\{[^}]*minmax\(232px,\s*1fr\)/s.test(css),
   'desktop vocabulary cards use a large readable minimum width');
-assert(/\.vc-emoji img\.vocab-art-icon\s*\{[^}]*height:\s*86px/s.test(css),
-  'card artwork is enlarged to 86px on desktop');
+assert(topikArtManifest.outputHeight === 96, 'reviewed TOPIK artwork keeps a sharp 96px production source');
+assert(/\.vc-emoji img\.vocab-art-icon\s*\{[^}]*height:\s*96px/s.test(css)
+  && !/\.vc-emoji img\.vocab-art-icon\s*\{[^}]*height:\s*(?:62|72|86)px/s.test(css),
+  'word cards render artwork at one consistent 96px size without fractional enlargement');
+assert(/#vff-emoji img\.vocab-art-icon\s*\{[^}]*height:\s*96px/s.test(css),
+  'word details also keep TOPIK artwork at its native 96px height');
 assert(/#vff-inner\s*\{[^}]*height:\s*100vh;\s*height:\s*100dvh/s.test(css),
   'individual word details also fill the viewport');
 assert(ui.includes('[w.ko, w.en, w.category, w.categoryEn, romanized]'),

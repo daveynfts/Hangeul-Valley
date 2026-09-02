@@ -48,6 +48,10 @@ function prepareTopikArt(root, options = {}) {
   const world = JSON.parse(fs.readFileSync(path.join(root, 'worlds/topik-2.json'), 'utf8'));
   if (manifest.world !== 'topik-2' || !Array.isArray(manifest.entries)
       || !Array.isArray(manifest.retained)) throw new Error('Invalid TOPIK art manifest');
+  const outputHeight = Number(manifest.outputHeight || 48);
+  if (!Number.isInteger(outputHeight) || outputHeight < 48 || outputHeight > 256) {
+    throw new Error('Invalid TOPIK outputHeight');
+  }
   const words = world.level.words;
   const declared = [...manifest.retained, ...manifest.entries];
   const declaredWords = new Set(declared.map(entry => entry.ko));
@@ -81,8 +85,8 @@ function prepareTopikArt(root, options = {}) {
     const data = fs.readFileSync(full);
     if (data.length < 33 || !data.subarray(0, 8).equals(Buffer.from('89504e470d0a1a0a', 'hex'))
         || data.toString('ascii', 12, 16) !== 'IHDR') throw new Error('Invalid PNG for ' + entry.ko);
-    if (generated && (data.readUInt32BE(20) !== 48 || data.readUInt32BE(16) < 8)) {
-      throw new Error('Reviewed sprite must be 48 px tall: ' + entry.ko);
+    if (generated && (data.readUInt32BE(20) !== outputHeight || data.readUInt32BE(16) < 8)) {
+      throw new Error('Reviewed sprite must be ' + outputHeight + ' px tall: ' + entry.ko);
     }
     if (files.has(file)) throw new Error('Shared image: ' + entry.ko + ' / ' + files.get(file));
     files.set(file, entry.ko);
@@ -95,7 +99,8 @@ function prepareTopikArt(root, options = {}) {
     if (generated) {
       readyPaths.set(file, entry.ko);
       asset.status = 'shipped';
-      asset.notes = 'Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.';
+      asset.notes = 'Dedicated TOPIK illustration; individually reviewed at ' + outputHeight
+        + ' px. Prompt and source in docs/topik-art-manifest.json.';
     }
     return { ko: entry.ko, slug: path.posix.basename(file, '.png'),
       folder: file.split('/')[1], nameEn: words[entry.index].en, family: 'topik-vocabulary' };

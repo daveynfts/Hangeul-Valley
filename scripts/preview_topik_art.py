@@ -1,4 +1,4 @@
-"""Compare Imagegen sources with their actual 48 px sprites; never alters art."""
+"""Compare Imagegen sources with their production sprites; never alters art."""
 from __future__ import annotations
 
 import argparse
@@ -43,7 +43,7 @@ def main() -> None:
         raise SystemExit('Install a Korean font and point font_path at it before rendering')
     font = ImageFont.truetype(str(font_path), 17)
     small = ImageFont.truetype(str(font_path), 12)
-    cell_w, cell_h, columns = (240, 244, 5) if args.gallery else (400, 316, 3)
+    cell_w, cell_h, columns = (240, 260, 5) if args.gallery else (400, 316, 3)
     canvas = Image.new('RGB', (columns * cell_w, math.ceil(len(entries) / columns) * cell_h), '#f4eddc')
     draw = ImageDraw.Draw(canvas)
     for n, entry in enumerate(entries):
@@ -62,11 +62,11 @@ def main() -> None:
         draw.text((x + 15, y + 10), title, font=font, fill='#30291f')
         sprite = Image.open(ROOT / 'sprites' / entry['folder'] / (entry['slug'] + '.png')).convert('RGBA')
         if args.gallery:
-            scale = max(1, min(2, 210 // sprite.width, 100 // sprite.height))
+            scale = max(1, min(2, 210 // sprite.width, 140 // sprite.height))
             enlarged = sprite.resize((sprite.width * scale, sprite.height * scale), Image.Resampling.NEAREST)
-            canvas.paste(enlarged, (x + (cell_w - enlarged.width) // 2, y + 58), enlarged)
-            canvas.paste(sprite, (x + (cell_w - sprite.width) // 2, y + 163), sprite)
-            draw.text((x + 15, y + 219), textwrap.shorten(entry['en'], 32, placeholder='…'), font=small, fill='#645844')
+            art_y = y + 56 + (150 - enlarged.height) // 2
+            canvas.paste(enlarged, (x + (cell_w - enlarged.width) // 2, art_y), enlarged)
+            draw.text((x + 15, y + 229), textwrap.shorten(entry['en'], 32, placeholder='…'), font=small, fill='#645844')
             continue
         source = Path(entry['sourceImage']) if entry.get('sourceImage') else ROOT / entry['file']
         if entry.get('sourceImage') and not source.is_absolute():

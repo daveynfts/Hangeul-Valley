@@ -39,27 +39,29 @@ class PixelProcessingTests(unittest.TestCase):
 
     def test_reviewed_sprites_keep_native_size_and_crisp_pixels(self):
         manifest = json.loads((ROOT / "docs/art-redesign.json").read_text(encoding="utf-8"))
-        files = [entry["file"] for entry in manifest["entries"]]
-        files += ["sprites/items/" + slug + ".png" for slug in [
+        files = [(entry["file"], 48) for entry in manifest["entries"]]
+        files += [("sprites/items/" + slug + ".png", 48) for slug in [
             "desk_fan", "light_feather", "dirty_laundry", "folded_quilt", "laundry_shop"
         ]]
-        self.assertEqual(len(set(files)), 26, "Do not silently skip reviewed assets")
+        self.assertEqual(len({file for file, _ in files}), 26, "Do not silently skip reviewed assets")
         topik = json.loads((ROOT / "docs/topik-art-manifest.json").read_text(encoding="utf-8"))
         reviewed = [entry for entry in topik["entries"] if entry.get("reviewed")]
         self.assertGreater(len(reviewed), 0, "Do not skip the resumed TOPIK artwork")
-        files += ["sprites/" + entry["folder"] + "/" + entry["slug"] + ".png" for entry in reviewed]
-        self.assertEqual(len(files), len(set(files)), "No repeated reviewed file paths")
-        for file in files:
+        topik_height = topik.get("outputHeight", 48)
+        files += [("sprites/" + entry["folder"] + "/" + entry["slug"] + ".png", topik_height)
+                  for entry in reviewed]
+        self.assertEqual(len(files), len({file for file, _ in files}), "No repeated reviewed file paths")
+        for file, expected_height in files:
             with self.subTest(file=file):
                 with Image.open(ROOT / file) as source:
                     self.assertEqual(source.format, "PNG")
-                    self.assertEqual(source.height, 48)
+                    self.assertEqual(source.height, expected_height)
                     sprite = source.convert("RGBA")
                 pixels = list(sprite.getdata())
                 self.assertEqual({p[3] for p in pixels}, {0, 255}, "No blurred alpha edges")
                 self.assertLessEqual(len({p[:3] for p in pixels if p[3]}), 32)
                 self.assertGreater(sum(p[3] == 255 for p in pixels), 100, "Keep a visible subject")
-                self.assertEqual(sprite.getchannel("A").getbbox()[3], 48, "Feet stay on the baseline")
+                self.assertEqual(sprite.getchannel("A").getbbox()[3], expected_height, "Feet stay on the baseline")
                 self.assertFalse(any(processor.is_key_color(*p) for p in pixels), "No magenta matte islands")
 
     def test_native_transparency_preserves_black_cream_and_purple(self):

@@ -60,7 +60,7 @@ local vocabulary does not itself publish or upload anything.
 
 Generated with the built-in Imagegen tool and the repository's
 `farm-pixel-props` workflow. Each new asset is a separate image, registered in
-`sprites/catalog.json`, processed with `process_prop.py --height 48 --subdir items`,
+`sprites/catalog.json`, processed at the TOPIK manifest's 96 px output height,
 and consumed by `js/vocabArtMore.js`. Following the visual review, all 14 words
 have a dedicated illustration: no other vocabulary entry borrows those files.
 Actions show people or hands doing the action, rather than a shared shoe, sun,
@@ -92,14 +92,16 @@ crisp pixel clusters readable at 48px; one centered subject in a square image;
 orthographic 2D rather than isometric; flat magenta `#FF00FF` for chroma key;
 no floor, grass, cast shadow, text, logos, watermark, glossy 3D or vector curves.
 The processor preserves native alpha, uses nearest-neighbor resizing and a
-32-color palette, and keeps every output exactly 48 px tall. The desk fan uses
+32-color palette. Dedicated TOPIK outputs are 96 px tall; the original general
+vocabulary icons remain 48 px. The desk fan uses
 the explicit `--key-magenta` option because its generated cutout retained matte
 inside the grille. Clothes and outlines are never guessed as background.
 
 The initial repair used cache key `art-20260831-semantic-v3`; the follow-up
 generates a content-based key shared by the runtime and sprite catalog, so
 replacing an image also invalidates cached art. The vocabulary book displays
-the icons at their native 48 px height and natural aspect ratio without a blurred
-shadow. Category/search changes reset the result list to the top. Scene placement,
+dedicated TOPIK icons at their native 96 px height and retained 48 px icons at
+an exact 2× scale, with natural aspect ratios and no blurred shadow. Category/search
+changes reset the result list to the top. Scene placement,
 farm physics, word content, saved progress and the Korean TTS clips are unchanged
 by the art redesign.

@@ -17,7 +17,8 @@ function fixture(run) {
     fs.writeFileSync(path.join(temp, file), typeof data === 'string' ? data : JSON.stringify(data));
   };
   const manifest = {
-    world: 'topik-2', retained: [{ index: 0, ko: '사과', file: 'sprites/items/farm_apple.png', reviewed: true }],
+    world: 'topik-2', outputHeight: 96,
+    retained: [{ index: 0, ko: '사과', file: 'sprites/items/farm_apple.png', reviewed: true }],
     entries: [{ index: 1, ko: '배', slug: 'test_pear', folder: 'items',
       sourceImage: 'generated.png', rawReviewed: true, reviewed: true, status: 'reviewed' }]
   };
@@ -83,7 +84,9 @@ const failures = [
   ['unsafe sprite path', ({ manifest }) => { manifest.entries[0].slug = '../outside'; }, /Invalid sprite path/],
   ['missing PNG', ({ temp }) => { fs.unlinkSync(path.join(temp, 'sprites/items/test_pear.png')); }, /image is missing/],
   ['copied PNG under another filename', ({ temp }) => {
-    fs.copyFileSync(path.join(temp, 'sprites/items/farm_apple.png'), path.join(temp, 'sprites/items/test_pear.png'));
+    const source = path.join(ROOT, 'sprites/items/topik_search_for_way.png');
+    fs.copyFileSync(source, path.join(temp, 'sprites/items/farm_apple.png'));
+    fs.copyFileSync(source, path.join(temp, 'sprites/items/test_pear.png'));
   }, /Copied PNG/],
   ['missing registration', ({ temp, write }) => {
     const pack = JSON.parse(fs.readFileSync(path.join(temp, 'sprites/catalog.json'), 'utf8'));

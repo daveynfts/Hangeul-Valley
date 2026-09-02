@@ -3,6 +3,7 @@
   "world": "topik-2",
   "tool": "Built-in Imagegen; one separately prompted illustration per word",
   "parent": "sprites/characters/valley-farmer/walk_down_0.png",
+  "outputHeight": 96,
   "stylePrompt": "Use case: style-transfer. Create ONE Hangeul Valley vocabulary sprite from the supplied accepted farmer STYLE reference; retain the shared warm oak, cream, muted sage, denim, amber palette and chunky dark-brown outlines, but replace the subject as described. Only include people if the subject brief asks for them. Authentic SNES 16-bit pixel art, 48x48 logical pixel grid, broad clean color clusters, at most 24 colors; designed to read clearly when reduced to 48 pixels tall. Front orthographic 2D view, one centered isolated vignette, complete silhouettes and complete hands/legs where present, a small empty margin. Opaque perfectly flat #FF00FF magenta background, including all gaps, reserved ONLY for the background. No magenta or purple foreground. No text, letters, numbers, logos, floors, scenery, shadows, smooth curves, gradients, anti-aliasing, blur, dithering or tiny noisy details. Do not repeat the farmer's original idle pose unless specifically requested.",
   "retained": [
     {
@@ -463,7 +464,8 @@
       "status": "reviewed",
       "sourceImage": "exec-e28155c1-89a8-48a0-8f9a-b10e0d0f018f.png",
       "rawReviewed": true,
-      "reviewed": true
+      "reviewed": true,
+      "keyMagenta": true
     },
     {
       "index": 9,
@@ -1222,7 +1224,8 @@
       "sourceImage": "exec-0014114d-e1ae-4b0a-a843-2d75eaf24637.png",
       "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
       "rawReviewed": true,
-      "reviewed": true
+      "reviewed": true,
+      "keyMagenta": true
     },
     {
       "index": 69,
@@ -1267,7 +1270,8 @@
       "sourceImage": "exec-18292b9b-c0b1-4e1a-af76-f5f5131dcabf.png",
       "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
       "rawReviewed": true,
-      "reviewed": true
+      "reviewed": true,
+      "keyMagenta": true
     },
     {
       "index": 73,
@@ -1477,7 +1481,8 @@
       "sourceImage": "exec-c050e63a-40c3-48cb-923c-4be1fa4f46d5.png",
       "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
       "rawReviewed": true,
-      "reviewed": true
+      "reviewed": true,
+      "keyMagenta": true
     },
     {
       "index": 87,
@@ -1717,7 +1722,8 @@
       "sourceImage": "exec-98dadce7-4a02-4d72-8e0f-6c2d37a4f425.png",
       "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
       "rawReviewed": true,
-      "reviewed": true
+      "reviewed": true,
+      "keyMagenta": true
     },
     {
       "index": 104,
@@ -2903,7 +2909,8 @@
       "sourceImage": "exec-2fea01d7-e370-4a67-80e1-76908c2ae737.png",
       "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
       "rawReviewed": true,
-      "reviewed": true
+      "reviewed": true,
+      "keyMagenta": true
     },
     {
       "index": 191,
@@ -3458,7 +3465,8 @@
       "sourceImage": "exec-9af448c5-9b3e-46e8-877f-6d943ef6d5ed.png",
       "sourceThread": "01a058ad-0267-7370-958f-344df576b58e",
       "rawReviewed": true,
-      "reviewed": true
+      "reviewed": true,
+      "keyMagenta": true
     },
     {
       "index": 231,

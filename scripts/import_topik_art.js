@@ -2,7 +2,7 @@
 'use strict';
 
 // Import the outputs of separate Imagegen calls. Review the originals before
-// passing --raw-reviewed; final 48 px approval remains a separate manual step.
+// passing --raw-reviewed; final processed-art approval remains a separate manual step.
 const fs = require('fs');
 const path = require('path');
 const { spawnSync } = require('child_process');
@@ -16,6 +16,10 @@ const imports = JSON.parse(fs.readFileSync(0, 'utf8'));
 if (!Array.isArray(imports) || !imports.length) throw new Error('Pass a nonempty JSON array on stdin');
 const manifestPath = path.join(ROOT, 'docs/topik-art-manifest.json');
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+const outputHeight = Number(manifest.outputHeight || 48);
+if (!Number.isInteger(outputHeight) || outputHeight < 48 || outputHeight > 256) {
+  throw new Error('Invalid TOPIK outputHeight');
+}
 const seen = new Set();
 for (const row of imports) {
   const entry = manifest.entries.find(e => e.slug === row.slug);
@@ -31,7 +35,8 @@ for (const row of imports) {
   registerArt(pack, {
     folder: entry.folder, slug: entry.slug, nameEn: entry.en,
     family: 'topik-vocabulary', wordKo: entry.ko, status: 'unused',
-    notes: 'Imagegen illustration; awaiting final 48 px review in docs/topik-art-manifest.json.'
+    notes: 'Imagegen illustration; awaiting final ' + outputHeight
+      + ' px review in docs/topik-art-manifest.json.'
   });
 }
 // Register the batch once before processing, rather than rewriting the catalog
@@ -41,7 +46,7 @@ for (const row of imports) {
   const entry = manifest.entries.find(e => e.slug === row.slug);
   const result = spawnSync(python, [
     path.join(ROOT, '.grok/skills/farm-pixel-props/scripts/process_prop.py'),
-    '--root', ROOT, '--height', '48', '--subdir', entry.folder,
+    '--root', ROOT, '--height', String(outputHeight), '--subdir', entry.folder,
     // Opt in only after confirming that magenta is reserved for the backdrop.
     ...(args.includes('--key-magenta') ? ['--key-magenta'] : []),
     row.sourcePath, entry.slug
@@ -55,4 +60,5 @@ for (const row of imports) {
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   console.log(entry.ko + ': ' + entry.folder + '/' + entry.slug + '.png');
 }
-console.log(imports.length + ' imported; inspect the 48 px previews before setting reviewed: true.');
+console.log(imports.length + ' imported; inspect the ' + outputHeight
+  + ' px previews before setting reviewed: true.');

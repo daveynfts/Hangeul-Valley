@@ -29,8 +29,9 @@ vocabulary library has a distinct illustration for every word**.
   nearest-neighbor sampling and limit new sprites to 32 colors. The desk fan
   explicitly keys reserved magenta left inside its grille. No guessing that
   white clothes or a dark outline are background.
-- Display vocabulary-book sprites at their native 48 px height with their
-  natural aspect ratios and without a blurred shadow. Changing a category or
+- Display vocabulary-book sprites at a crisp integer scale with their natural
+  aspect ratios and without a blurred shadow. The later TOPIK set uses native
+  96 px files; retained 48 px files use an exact 2× scale. Changing a category or
   search resets the results to the top. On phones, filters have a bounded scroll
   area so they cannot push every word card out of view; the selected filter's
   position is preserved.
@@ -94,7 +95,7 @@ globe-for-every-place assignments.
 
 Verified locally: the full game/desktop/admin suite, all eight pixel-processing
 tests, catalog integrity and a clean whitespace diff. The browser review checked
-all 14 images loaded at their native 48 px height, distinct source URLs, no
+all 14 images loaded at a crisp integer scale, distinct source URLs, no
 horizontal overflow, category/search positioning and the example-audio button.
 At 390 × 844, the filter area is 120 px tall and leaves about 435 px for the word
 list; switching categories returns the list from a scrolled position to zero.

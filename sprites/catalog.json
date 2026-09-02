@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-topik-332-extra-12-aa94b78cde02",
+  "cacheKey": "art-topik-332-extra-12-5f1b8eccc53a",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -7820,7 +7820,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "썰렁하다"
     },
     {
@@ -7838,7 +7838,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "모색"
     },
     {
@@ -7856,7 +7856,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "출입구"
     },
     {
@@ -7874,7 +7874,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "여러 곳"
     },
     {
@@ -7892,7 +7892,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "찾다"
     },
     {
@@ -7910,7 +7910,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "직접"
     },
     {
@@ -7928,7 +7928,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "추워지다"
     },
     {
@@ -7946,7 +7946,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "손님"
     },
     {
@@ -7964,7 +7964,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "줄다"
     },
     {
@@ -7982,7 +7982,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "통하다"
     },
     {
@@ -8000,7 +8000,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "경기"
     },
     {
@@ -8018,7 +8018,7 @@
         "word-detail",
         "farm"
       ],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "회복"
     },
     {
@@ -8032,7 +8032,7 @@
       "heightClass": "item",
       "parentId": "item.topik_effort",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "노력"
     },
     {
@@ -8046,7 +8046,7 @@
       "heightClass": "item",
       "parentId": "item.topik_merchandise",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "상품"
     },
     {
@@ -8060,7 +8060,7 @@
       "heightClass": "item",
       "parentId": "item.topik_purchase",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "구매하다"
     },
     {
@@ -8074,7 +8074,7 @@
       "heightClass": "item",
       "parentId": "item.topik_want",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "원하다"
     },
     {
@@ -8088,7 +8088,7 @@
       "heightClass": "item",
       "parentId": "item.topik_become_numerous",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "많아지다"
     },
     {
@@ -8102,7 +8102,7 @@
       "heightClass": "item",
       "parentId": "item.topik_news_article",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "기사"
     },
     {
@@ -8116,7 +8116,7 @@
       "heightClass": "item",
       "parentId": "item.topik_headline",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "제목"
     },
     {
@@ -8130,7 +8130,7 @@
       "heightClass": "item",
       "parentId": "item.topik_explain",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "설명하다"
     },
     {
@@ -8144,7 +8144,7 @@
       "heightClass": "item",
       "parentId": "item.topik_eat_with_eyes",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "눈으로 먹다"
     },
     {
@@ -8158,7 +8158,7 @@
       "heightClass": "item",
       "parentId": "item.topik_taste_with_ears",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "귀로 맛보다"
     },
     {
@@ -8172,7 +8172,7 @@
       "heightClass": "item",
       "parentId": "item.topik_taste_food",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "맛보다"
     },
     {
@@ -8186,7 +8186,7 @@
       "heightClass": "item",
       "parentId": "item.topik_prepared_food",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "음식"
     },
     {
@@ -8200,7 +8200,7 @@
       "heightClass": "item",
       "parentId": "item.topik_shapes",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "모양"
     },
     {
@@ -8214,7 +8214,7 @@
       "heightClass": "item",
       "parentId": "item.topik_era",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "시대"
     },
     {
@@ -8228,7 +8228,7 @@
       "heightClass": "item",
       "parentId": "item.topik_heaven_abundance",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "천국"
     },
     {
@@ -8242,7 +8242,7 @@
       "heightClass": "item",
       "parentId": "item.topik_cooking_programme",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "요리 프로그램"
     },
     {
@@ -8256,7 +8256,7 @@
       "heightClass": "item",
       "parentId": "item.topik_actual_thing",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "실제"
     },
     {
@@ -8270,7 +8270,7 @@
       "heightClass": "item",
       "parentId": "item.topik_show_something",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "보여주다"
     },
     {
@@ -8284,7 +8284,7 @@
       "heightClass": "item",
       "parentId": "item.topik_enjoy",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "즐기다"
     },
     {
@@ -8298,7 +8298,7 @@
       "heightClass": "item",
       "parentId": "item.topik_related",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "관련되다"
     },
     {
@@ -8312,7 +8312,7 @@
       "heightClass": "item",
       "parentId": "item.topik_these_days",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "요즘"
     },
     {
@@ -8326,7 +8326,7 @@
       "heightClass": "item",
       "parentId": "item.topik_become_important",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "중요해지다"
     },
     {
@@ -8340,7 +8340,7 @@
       "heightClass": "item",
       "parentId": "item.topik_colour_cosmetics",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "색조 화장품"
     },
     {
@@ -8354,7 +8354,7 @@
       "heightClass": "item",
       "parentId": "item.topik_apply_makeup",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "화장을 하다"
     },
     {
@@ -8368,7 +8368,7 @@
       "heightClass": "item",
       "parentId": "item.topik_tend_garden",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "가꾸다"
     },
     {
@@ -8382,7 +8382,7 @@
       "heightClass": "item",
       "parentId": "item.topik_flying_sparks",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "불티"
     },
     {
@@ -8396,7 +8396,7 @@
       "heightClass": "item",
       "parentId": "item.topik_management",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "관리"
     },
     {
@@ -8410,7 +8410,7 @@
       "heightClass": "item",
       "parentId": "item.topik_stretch_longer",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "늘어나다"
     },
     {
@@ -8424,7 +8424,7 @@
       "heightClass": "item",
       "parentId": "item.topik_need_to",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "필요가 있다"
     },
     {
@@ -8438,7 +8438,7 @@
       "heightClass": "item",
       "parentId": "item.topik_mainly",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "주로"
     },
     {
@@ -8452,7 +8452,7 @@
       "heightClass": "item",
       "parentId": "item.topik_in_charge",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "담당하다"
     },
     {
@@ -8466,7 +8466,7 @@
       "heightClass": "item",
       "parentId": "item.topik_social_standing",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "사회적 지위"
     },
     {
@@ -8480,7 +8480,7 @@
       "heightClass": "item",
       "parentId": "item.topik_interest_attention",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "관심"
     },
     {
@@ -8494,7 +8494,7 @@
       "heightClass": "item",
       "parentId": "item.topik_summer_holidaymaker",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "피서객"
     },
     {
@@ -8508,7 +8508,7 @@
       "heightClass": "item",
       "parentId": "item.topik_hot_weather",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "더위"
     },
     {
@@ -8522,7 +8522,7 @@
       "heightClass": "item",
       "parentId": "item.topik_clear_away",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "치우다"
     },
     {
@@ -8536,7 +8536,7 @@
       "heightClass": "item",
       "parentId": "item.topik_quantity",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "양"
     },
     {
@@ -8550,7 +8550,7 @@
       "heightClass": "item",
       "parentId": "item.topik_war",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "전쟁"
     },
     {
@@ -8564,7 +8564,7 @@
       "heightClass": "item",
       "parentId": "item.topik_war_with_problem",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N와의 전쟁"
     },
     {
@@ -8578,7 +8578,7 @@
       "heightClass": "item",
       "parentId": "item.topik_serious_problem",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "심각하다"
     },
     {
@@ -8592,7 +8592,7 @@
       "heightClass": "item",
       "parentId": "item.topik_strive_hard",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "애쓰다"
     },
     {
@@ -8606,7 +8606,7 @@
       "heightClass": "item",
       "parentId": "item.topik_in_order_to",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-기 위해"
     },
     {
@@ -8620,7 +8620,7 @@
       "heightClass": "item",
       "parentId": "item.topik_owing_to",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)로 인해"
     },
     {
@@ -8634,7 +8634,7 @@
       "heightClass": "item",
       "parentId": "item.topik_various_ways",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "여러 가지로"
     },
     {
@@ -8648,7 +8648,7 @@
       "heightClass": "item",
       "parentId": "item.topik_inconvenience",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "불편"
     },
     {
@@ -8662,7 +8662,7 @@
       "heightClass": "item",
       "parentId": "item.topik_go_through_hardship",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "겪다"
     },
     {
@@ -8676,7 +8676,7 @@
       "heightClass": "item",
       "parentId": "item.topik_savings_rate",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "저축률"
     },
     {
@@ -8690,7 +8690,7 @@
       "heightClass": "item",
       "parentId": "item.topik_rock_bottom",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "바닥"
     },
     {
@@ -8704,7 +8704,7 @@
       "heightClass": "item",
       "parentId": "item.topik_rise",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "오르다"
     },
     {
@@ -8718,7 +8718,7 @@
       "heightClass": "item",
       "parentId": "item.topik_fall_down",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "떨어지다"
     },
     {
@@ -8732,7 +8732,7 @@
       "heightClass": "item",
       "parentId": "item.topik_climb_up",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "올라가다"
     },
     {
@@ -8746,7 +8746,7 @@
       "heightClass": "item",
       "parentId": "item.topik_low_height",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "낮다"
     },
     {
@@ -8760,7 +8760,7 @@
       "heightClass": "item",
       "parentId": "item.topik_young_generation",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "젊은층"
     },
     {
@@ -8774,7 +8774,7 @@
       "heightClass": "item",
       "parentId": "item.topik_young_person",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "젊다"
     },
     {
@@ -8788,7 +8788,7 @@
       "heightClass": "item",
       "parentId": "item.topik_indifference",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "무관심"
     },
     {
@@ -8802,7 +8802,7 @@
       "heightClass": "item",
       "parentId": "item.topik_continuously",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "계속"
     },
     {
@@ -8816,7 +8816,7 @@
       "heightClass": "item",
       "parentId": "item.topik_approximately",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "정도"
     },
     {
@@ -8830,7 +8830,7 @@
       "heightClass": "item",
       "parentId": "item.topik_takes_time",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "걸리다"
     },
     {
@@ -8844,7 +8844,7 @@
       "heightClass": "item",
       "parentId": "item.topik_appear",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "나타나다"
     },
     {
@@ -8858,7 +8858,7 @@
       "heightClass": "item",
       "parentId": "item.topik_after_interval",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N 만에"
     },
     {
@@ -8872,7 +8872,7 @@
       "heightClass": "item",
       "parentId": "item.topik_throughout_period",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N 동안"
     },
     {
@@ -8886,7 +8886,7 @@
       "heightClass": "item",
       "parentId": "item.topik_including_first",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N을/를 비롯해서"
     },
     {
@@ -8900,7 +8900,7 @@
       "heightClass": "item",
       "parentId": "item.topik_summer_months",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "여름철"
     },
     {
@@ -8914,7 +8914,7 @@
       "heightClass": "item",
       "parentId": "item.topik_summer_season",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "여름"
     },
     {
@@ -8928,7 +8928,7 @@
       "heightClass": "item",
       "parentId": "item.topik_storage",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "보관"
     },
     {
@@ -8942,7 +8942,7 @@
       "heightClass": "item",
       "parentId": "item.topik_store_away",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "보관하다"
     },
     {
@@ -8956,7 +8956,7 @@
       "heightClass": "item",
       "parentId": "item.topik_inside_fridge",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "냉장고 안"
     },
     {
@@ -8970,7 +8970,7 @@
       "heightClass": "item",
       "parentId": "item.topik_put_inside",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "넣다"
     },
     {
@@ -8984,7 +8984,7 @@
       "heightClass": "item",
       "parentId": "item.topik_trust",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "믿다"
     },
     {
@@ -8998,7 +8998,7 @@
       "heightClass": "item",
       "parentId": "item.topik_fiasco",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "낭패"
     },
     {
@@ -9012,7 +9012,7 @@
       "heightClass": "item",
       "parentId": "item.topik_feel_reassured",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "안심하다"
     },
     {
@@ -9026,7 +9026,7 @@
       "heightClass": "item",
       "parentId": "item.topik_every_all",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "모든"
     },
     {
@@ -9040,7 +9040,7 @@
       "heightClass": "item",
       "parentId": "item.topik_special",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "특별하다"
     },
     {
@@ -9054,7 +9054,7 @@
       "heightClass": "item",
       "parentId": "item.topik_arrange_provisions",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "마련하다"
     },
     {
@@ -9068,7 +9068,7 @@
       "heightClass": "item",
       "parentId": "item.topik_not_good_idea",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "좋지 않다"
     },
     {
@@ -9082,7 +9082,7 @@
       "heightClass": "item",
       "parentId": "item.topik_only_noun",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N만"
     },
     {
@@ -9096,7 +9096,7 @@
       "heightClass": "item",
       "parentId": "item.topik_bad_if_continued",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어서는"
     },
     {
@@ -9110,7 +9110,7 @@
       "heightClass": "item",
       "parentId": "item.topik_unfinished_past",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-던"
     },
     {
@@ -9124,7 +9124,7 @@
       "heightClass": "item",
       "parentId": "item.topik_must_do",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어야 하다"
     },
     {
@@ -9138,7 +9138,7 @@
       "heightClass": "item",
       "parentId": "item.topik_cannot",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 수 없다"
     },
     {
@@ -9152,7 +9152,7 @@
       "heightClass": "item",
       "parentId": "item.topik_if_intending",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)려면"
     },
     {
@@ -9166,7 +9166,7 @@
       "heightClass": "item",
       "parentId": "item.topik_public_policy",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "정책"
     },
     {
@@ -9180,7 +9180,7 @@
       "heightClass": "item",
       "parentId": "item.topik_property_policy",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "부동산 정책"
     },
     {
@@ -9194,7 +9194,7 @@
       "heightClass": "item",
       "parentId": "item.topik_citizen",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "시민"
     },
     {
@@ -9208,7 +9208,7 @@
       "heightClass": "item",
       "parentId": "item.topik_evaluate",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "평가하다"
     },
     {
@@ -9222,7 +9222,7 @@
       "heightClass": "item",
       "parentId": "item.topik_house_prices",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "집값"
     },
     {
@@ -9236,7 +9236,7 @@
       "heightClass": "item",
       "parentId": "item.topik_control_house_prices",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "집값 잡기"
     },
     {
@@ -9250,7 +9250,7 @@
       "heightClass": "item",
       "parentId": "item.topik_working_people",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "서민"
     },
     {
@@ -9264,7 +9264,7 @@
       "heightClass": "item",
       "parentId": "item.topik_household_economy",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "서민 경제"
     },
     {
@@ -9278,7 +9278,7 @@
       "heightClass": "item",
       "parentId": "item.topik_economy",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "경제"
     },
     {
@@ -9292,7 +9292,7 @@
       "heightClass": "item",
       "parentId": "item.topik_cost_of_living",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "물가"
     },
     {
@@ -9306,7 +9306,7 @@
       "heightClass": "item",
       "parentId": "item.topik_harmful_effect",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "악영향"
     },
     {
@@ -9320,7 +9320,7 @@
       "heightClass": "item",
       "parentId": "item.topik_have_effect",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "영향을 미치다"
     },
     {
@@ -9334,7 +9334,7 @@
       "heightClass": "item",
       "parentId": "item.topik_cold_water",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "찬물"
     },
     {
@@ -9348,7 +9348,7 @@
       "heightClass": "item",
       "parentId": "item.topik_spoil_enthusiasm",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "찬물을 끼얹다"
     },
     {
@@ -9362,7 +9362,7 @@
       "heightClass": "item",
       "parentId": "item.topik_catch",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "잡다"
     },
     {
@@ -9376,7 +9376,7 @@
       "heightClass": "item",
       "parentId": "item.topik_cool_headed",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "냉정하다"
     },
     {
@@ -9390,7 +9390,7 @@
       "heightClass": "item",
       "parentId": "item.topik_refreshingly_cool",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "시원하다"
     },
     {
@@ -9404,7 +9404,7 @@
       "heightClass": "item",
       "parentId": "item.topik_inner_heart",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "마음"
     },
     {
@@ -9418,7 +9418,7 @@
       "heightClass": "item",
       "parentId": "item.topik_very",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "아주"
     },
     {
@@ -9432,7 +9432,7 @@
       "heightClass": "item",
       "parentId": "item.topik_a_lot",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "많이"
     },
     {
@@ -9446,7 +9446,7 @@
       "heightClass": "item",
       "parentId": "item.topik_in_middle_of",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-는 중"
     },
     {
@@ -9460,7 +9460,7 @@
       "heightClass": "item",
       "parentId": "item.topik_because_of_noun",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N 때문에"
     },
     {
@@ -9474,7 +9474,7 @@
       "heightClass": "item",
       "parentId": "item.topik_make_result",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-게 하다"
     },
     {
@@ -9488,7 +9488,7 @@
       "heightClass": "item",
       "parentId": "item.topik_action_as_noun",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-기"
     },
     {
@@ -9502,7 +9502,7 @@
       "heightClass": "item",
       "parentId": "item.topik_pet_dog",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "반려견"
     },
     {
@@ -9516,7 +9516,7 @@
       "heightClass": "item",
       "parentId": "item.topik_owner",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "주인"
     },
     {
@@ -9530,7 +9530,7 @@
       "heightClass": "item",
       "parentId": "item.topik_raise_animal",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "키우다"
     },
     {
@@ -9544,7 +9544,7 @@
       "heightClass": "item",
       "parentId": "item.topik_bite",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "물다"
     },
     {
@@ -9558,7 +9558,7 @@
       "heightClass": "item",
       "parentId": "item.topik_characteristic",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "특성"
     },
     {
@@ -9572,7 +9572,7 @@
       "heightClass": "item",
       "parentId": "item.topik_mistaken_belief",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "착각"
     },
     {
@@ -9586,7 +9586,7 @@
       "heightClass": "item",
       "parentId": "item.topik_common",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "흔하다"
     },
     {
@@ -9600,7 +9600,7 @@
       "heightClass": "item",
       "parentId": "item.topik_certain",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "확신하다"
     },
     {
@@ -9614,7 +9614,7 @@
       "heightClass": "item",
       "parentId": "item.topik_wrong_result",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "잘못되다"
     },
     {
@@ -9628,7 +9628,7 @@
       "heightClass": "item",
       "parentId": "item.topik_investigate",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "알아보다"
     },
     {
@@ -9642,7 +9642,7 @@
       "heightClass": "item",
       "parentId": "item.topik_oneself",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "자신"
     },
     {
@@ -9656,7 +9656,7 @@
       "heightClass": "item",
       "parentId": "item.topik_our",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "우리"
     },
     {
@@ -9670,7 +9670,7 @@
       "heightClass": "item",
       "parentId": "item.topik_person",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "사람"
     },
     {
@@ -9684,7 +9684,7 @@
       "heightClass": "item",
       "parentId": "item.topik_increase_amount",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "늘다"
     },
     {
@@ -9698,7 +9698,7 @@
       "heightClass": "item",
       "parentId": "item.topik_once",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "한번"
     },
     {
@@ -9712,7 +9712,7 @@
       "heightClass": "item",
       "parentId": "item.topik_again",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "다시"
     },
     {
@@ -9726,7 +9726,7 @@
       "heightClass": "item",
       "parentId": "item.topik_short_negative",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "안 + V"
     },
     {
@@ -9740,7 +9740,7 @@
       "heightClass": "item",
       "parentId": "item.topik_long_negative",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-지 않다"
     },
     {
@@ -9754,7 +9754,7 @@
       "heightClass": "item",
       "parentId": "item.topik_say_that",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-다고 하다"
     },
     {
@@ -9768,7 +9768,7 @@
       "heightClass": "item",
       "parentId": "item.topik_before_doing",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-기 전에"
     },
     {
@@ -9782,7 +9782,7 @@
       "heightClass": "item",
       "parentId": "item.topik_about_topic",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N에 대해서"
     },
     {
@@ -9796,7 +9796,7 @@
       "heightClass": "item",
       "parentId": "item.topik_ever_done",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄴ 적이 있다"
     },
     {
@@ -9810,7 +9810,7 @@
       "heightClass": "item",
       "parentId": "item.topik_can_do",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 수 있다"
     },
     {
@@ -9824,7 +9824,7 @@
       "heightClass": "item",
       "parentId": "item.topik_eat",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "먹다"
     },
     {
@@ -9838,7 +9838,7 @@
       "heightClass": "item",
       "parentId": "item.topik_sweet_sleep",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "꿀잠"
     },
     {
@@ -9852,7 +9852,7 @@
       "heightClass": "item",
       "parentId": "item.topik_sleep",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "자다"
     },
     {
@@ -9866,7 +9866,7 @@
       "heightClass": "item",
       "parentId": "item.topik_be_bitten",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "물리다"
     },
     {
@@ -9880,7 +9880,7 @@
       "heightClass": "item",
       "parentId": "item.topik_sound_sleep",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "숙면"
     },
     {
@@ -9894,7 +9894,7 @@
       "heightClass": "item",
       "parentId": "item.topik_soundly",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "푹"
     },
     {
@@ -9908,7 +9908,7 @@
       "heightClass": "item",
       "parentId": "item.topik_anxiety",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "불안감"
     },
     {
@@ -9922,7 +9922,7 @@
       "heightClass": "item",
       "parentId": "item.topik_effect",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "효과"
     },
     {
@@ -9936,7 +9936,7 @@
       "heightClass": "item",
       "parentId": "item.topik_be_helpful",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "도움이 되다"
     },
     {
@@ -9950,7 +9950,7 @@
       "heightClass": "item",
       "parentId": "item.topik_remove",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "없애다"
     },
     {
@@ -9964,7 +9964,7 @@
       "heightClass": "item",
       "parentId": "item.topik_stomach_inside",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "속"
     },
     {
@@ -9978,7 +9978,7 @@
       "heightClass": "item",
       "parentId": "item.topik_uncomfortable",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "불편하다"
     },
     {
@@ -9992,7 +9992,7 @@
       "heightClass": "item",
       "parentId": "item.topik_melt_gently",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "사르르"
     },
     {
@@ -10006,7 +10006,7 @@
       "heightClass": "item",
       "parentId": "item.topik_together",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "함께"
     },
     {
@@ -10020,7 +10020,7 @@
       "heightClass": "item",
       "parentId": "item.topik_enable_someone",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-게 해 주다"
     },
     {
@@ -10034,7 +10034,7 @@
       "heightClass": "item",
       "parentId": "item.topik_not_only_but_also",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ뿐더러"
     },
     {
@@ -10048,7 +10048,7 @@
       "heightClass": "item",
       "parentId": "item.topik_only_if",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어야"
     },
     {
@@ -10062,7 +10062,7 @@
       "heightClass": "item",
       "parentId": "item.topik_when_doing",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 때"
     },
     {
@@ -10076,7 +10076,7 @@
       "heightClass": "item",
       "parentId": "item.topik_good_idea_to",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-는 게 좋다"
     },
     {
@@ -10090,7 +10090,7 @@
       "heightClass": "item",
       "parentId": "item.topik_also_noun",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N도"
     },
     {
@@ -10104,7 +10104,7 @@
       "heightClass": "item",
       "parentId": "item.topik_bookshop",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "서점"
     },
     {
@@ -10118,7 +10118,7 @@
       "heightClass": "item",
       "parentId": "item.topik_book_trade",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "서점가"
     },
     {
@@ -10132,7 +10132,7 @@
       "heightClass": "item",
       "parentId": "item.topik_happiness",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "행복"
     },
     {
@@ -10146,7 +10146,7 @@
       "heightClass": "item",
       "parentId": "item.topik_happiness_train_book",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "행복 열차"
     },
     {
@@ -10160,7 +10160,7 @@
       "heightClass": "item",
       "parentId": "item.topik_read",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "읽다"
     },
     {
@@ -10174,7 +10174,7 @@
       "heightClass": "item",
       "parentId": "item.topik_great_popularity",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "큰 인기를 얻다"
     },
     {
@@ -10188,7 +10188,7 @@
       "heightClass": "item",
       "parentId": "item.topik_so_many_copies",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "10만 부나"
     },
     {
@@ -10202,7 +10202,7 @@
       "heightClass": "item",
       "parentId": "item.topik_sold",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "팔리다"
     },
     {
@@ -10216,7 +10216,7 @@
       "heightClass": "item",
       "parentId": "item.topik_on_sale",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "판매되다"
     },
     {
@@ -10230,7 +10230,7 @@
       "heightClass": "item",
       "parentId": "item.topik_service_running",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "운행"
     },
     {
@@ -10244,7 +10244,7 @@
       "heightClass": "item",
       "parentId": "item.topik_craze",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-앓이"
     },
     {
@@ -10258,7 +10258,7 @@
       "heightClass": "item",
       "parentId": "item.topik_now",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "지금"
     },
     {
@@ -10272,7 +10272,7 @@
       "heightClass": "item",
       "parentId": "item.topik_at_present",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "현재"
     },
     {
@@ -10286,7 +10286,7 @@
       "heightClass": "item",
       "parentId": "item.topik_recently",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "최근"
     },
     {
@@ -10300,7 +10300,7 @@
       "heightClass": "item",
       "parentId": "item.topik_name",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "이름"
     },
     {
@@ -10314,7 +10314,7 @@
       "heightClass": "item",
       "parentId": "item.topik_start_action",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "시작하다"
     },
     {
@@ -10328,7 +10328,7 @@
       "heightClass": "item",
       "parentId": "item.topik_go",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "가다"
     },
     {
@@ -10342,7 +10342,7 @@
       "heightClass": "item",
       "parentId": "item.topik_many",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "많다"
     },
     {
@@ -10356,7 +10356,7 @@
       "heightClass": "item",
       "parentId": "item.topik_within_one_month",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "한 달 새"
     },
     {
@@ -10370,7 +10370,7 @@
       "heightClass": "item",
       "parentId": "item.topik_this_month",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "이번 달"
     },
     {
@@ -10384,7 +10384,7 @@
       "heightClass": "item",
       "parentId": "item.topik_called_named",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N(이)라는"
     },
     {
@@ -10398,7 +10398,7 @@
       "heightClass": "item",
       "parentId": "item.topik_only_until",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-까지만"
     },
     {
@@ -10412,7 +10412,7 @@
       "heightClass": "item",
       "parentId": "item.topik_weather",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "날씨"
     },
     {
@@ -10426,7 +10426,7 @@
       "heightClass": "item",
       "parentId": "item.topik_clear_after_rain",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "개다"
     },
     {
@@ -10440,7 +10440,7 @@
       "heightClass": "item",
       "parentId": "item.topik_morning",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "오전"
     },
     {
@@ -10454,7 +10454,7 @@
       "heightClass": "item",
       "parentId": "item.topik_observed_change",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-더니"
     },
     {
@@ -10468,7 +10468,7 @@
       "heightClass": "item",
       "parentId": "item.topik_even_if",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-더라도"
     },
     {
@@ -10482,7 +10482,7 @@
       "heightClass": "item",
       "parentId": "item.topik_and_so",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어 가지고"
     },
     {
@@ -10496,7 +10496,7 @@
       "heightClass": "item",
       "parentId": "item.topik_instead_of",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-는 대신에"
     },
     {
@@ -10510,7 +10510,7 @@
       "heightClass": "item",
       "parentId": "item.topik_tired",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "피곤하다"
     },
     {
@@ -10524,7 +10524,7 @@
       "heightClass": "item",
       "parentId": "item.topik_rest",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "쉬다"
     },
     {
@@ -10538,7 +10538,7 @@
       "heightClass": "item",
       "parentId": "item.topik_early",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "일찍"
     },
     {
@@ -10552,7 +10552,7 @@
       "heightClass": "item",
       "parentId": "item.topik_too_much",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "너무"
     },
     {
@@ -10566,7 +10566,7 @@
       "heightClass": "item",
       "parentId": "item.topik_today",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "오늘"
     },
     {
@@ -10580,7 +10580,7 @@
       "heightClass": "item",
       "parentId": "item.topik_i_really_must",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어야지"
     },
     {
@@ -10594,7 +10594,7 @@
       "heightClass": "item",
       "parentId": "item.topik_should_have",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ걸"
     },
     {
@@ -10608,7 +10608,7 @@
       "heightClass": "item",
       "parentId": "item.topik_saw_that",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-더라"
     },
     {
@@ -10622,7 +10622,7 @@
       "heightClass": "item",
       "parentId": "item.topik_sometimes_also",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-기도 하다"
     },
     {
@@ -10636,7 +10636,7 @@
       "heightClass": "item",
       "parentId": "item.topik_reason_for_decision",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)니까"
     },
     {
@@ -10650,7 +10650,7 @@
       "heightClass": "item",
       "parentId": "item.topik_quote_speech",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "하고 말하다"
     },
     {
@@ -10664,7 +10664,7 @@
       "heightClass": "item",
       "parentId": "item.topik_job_seeker",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "취업 준비생"
     },
     {
@@ -10678,7 +10678,7 @@
       "heightClass": "item",
       "parentId": "item.topik_at_least",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "이상"
     },
     {
@@ -10692,7 +10692,7 @@
       "heightClass": "item",
       "parentId": "item.topik_job_interview",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "면접시험"
     },
     {
@@ -10706,7 +10706,7 @@
       "heightClass": "item",
       "parentId": "item.topik_preparation",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "준비"
     },
     {
@@ -10720,7 +10720,7 @@
       "heightClass": "item",
       "parentId": "item.topik_agonise",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "고민하다"
     },
     {
@@ -10734,7 +10734,7 @@
       "heightClass": "item",
       "parentId": "item.topik_formal_owing_to",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N(으)로 말미암아"
     },
     {
@@ -10748,7 +10748,7 @@
       "heightClass": "item",
       "parentId": "item.topik_depending_on",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N에 따라서"
     },
     {
@@ -10762,7 +10762,7 @@
       "heightClass": "item",
       "parentId": "item.topik_despite",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N에도 불구하고"
     },
     {
@@ -10776,7 +10776,7 @@
       "heightClass": "item",
       "parentId": "item.topik_exam_period",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "시험 기간"
     },
     {
@@ -10790,7 +10790,7 @@
       "heightClass": "item",
       "parentId": "item.topik_study",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "공부하다"
     },
     {
@@ -10804,7 +10804,7 @@
       "heightClass": "item",
       "parentId": "item.topik_student",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "학생"
     },
     {
@@ -10818,7 +10818,7 @@
       "heightClass": "item",
       "parentId": "item.topik_library",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "도서관"
     },
     {
@@ -10832,7 +10832,7 @@
       "heightClass": "item",
       "parentId": "item.topik_all_night",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "밤새도록"
     },
     {
@@ -11038,7 +11038,7 @@
       "heightClass": "item",
       "parentId": "item.topik_light_on",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "불을 켜다"
     },
     {
@@ -11052,7 +11052,7 @@
       "heightClass": "item",
       "parentId": "item.topik_do_and_leave",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어 놓다"
     },
     {
@@ -11066,7 +11066,7 @@
       "heightClass": "item",
       "parentId": "item.topik_prepare_and_keep",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어 두다"
     },
     {
@@ -11080,7 +11080,7 @@
       "heightClass": "item",
       "parentId": "item.topik_repeated_habit",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-곤 하다"
     },
     {
@@ -11094,7 +11094,7 @@
       "heightClass": "item",
       "parentId": "item.topik_without_disability",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "비장애인"
     },
     {
@@ -11108,7 +11108,7 @@
       "heightClass": "item",
       "parentId": "item.topik_not_easy",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "쉽지 않다"
     },
     {
@@ -11122,7 +11122,7 @@
       "heightClass": "item",
       "parentId": "item.topik_body",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "몸"
     },
     {
@@ -11136,7 +11136,7 @@
       "heightClass": "item",
       "parentId": "item.topik_high",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "높다"
     },
     {
@@ -11150,7 +11150,7 @@
       "heightClass": "item",
       "parentId": "item.topik_really_true",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "정말"
     },
     {
@@ -11164,7 +11164,7 @@
       "heightClass": "item",
       "parentId": "item.topik_remarkable",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "대단하다"
     },
     {
@@ -11178,7 +11178,7 @@
       "heightClass": "item",
       "parentId": "item.topik_expected_but",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 텐데"
     },
     {
@@ -11192,7 +11192,7 @@
       "heightClass": "item",
       "parentId": "item.topik_for_fear_of",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ까 봐"
     },
     {
@@ -11206,7 +11206,7 @@
       "heightClass": "item",
       "parentId": "item.topik_since_it_will",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 테니까"
     },
     {
@@ -11220,7 +11220,7 @@
       "heightClass": "item",
       "parentId": "item.topik_on_top_of",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄴ 데다가"
     },
     {
@@ -11234,7 +11234,7 @@
       "heightClass": "item",
       "parentId": "item.topik_to_think_that",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-다니"
     },
     {
@@ -11248,7 +11248,7 @@
       "heightClass": "item",
       "parentId": "item.topik_from_now_on",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "앞으로"
     },
     {
@@ -11262,7 +11262,7 @@
       "heightClass": "item",
       "parentId": "item.topik_little_by_little",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "점점"
     },
     {
@@ -11276,7 +11276,7 @@
       "heightClass": "item",
       "parentId": "item.topik_get_warmer",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "따뜻해지다"
     },
     {
@@ -11290,7 +11290,7 @@
       "heightClass": "item",
       "parentId": "item.topik_transform",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "변하다"
     },
     {
@@ -11304,7 +11304,7 @@
       "heightClass": "item",
       "parentId": "item.topik_change_into_future",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어 가다"
     },
     {
@@ -11318,7 +11318,7 @@
       "heightClass": "item",
       "parentId": "item.topik_change_until_now",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어 오다"
     },
     {
@@ -11332,7 +11332,7 @@
       "heightClass": "item",
       "parentId": "item.topik_try_doing",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어 보다"
     },
     {
@@ -11346,7 +11346,7 @@
       "heightClass": "item",
       "parentId": "item.topik_keep_doing_excessively",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어 대다"
     },
     {
@@ -11360,7 +11360,7 @@
       "heightClass": "item",
       "parentId": "item.topik_so_that_other",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-도록"
     },
     {
@@ -11374,7 +11374,7 @@
       "heightClass": "item",
       "parentId": "item.topik_so_that",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "V-게"
     },
     {
@@ -11388,7 +11388,7 @@
       "heightClass": "item",
       "parentId": "item.topik_if_when_happens",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-거든"
     },
     {
@@ -11402,7 +11402,7 @@
       "heightClass": "item",
       "parentId": "item.topik_intending_to",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)려고"
     },
     {
@@ -11416,7 +11416,7 @@
       "heightClass": "item",
       "parentId": "item.topik_to_extent",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 만큼"
     },
     {
@@ -11430,7 +11430,7 @@
       "heightClass": "item",
       "parentId": "item.topik_country",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "나라"
     },
     {
@@ -11444,7 +11444,7 @@
       "heightClass": "item",
       "parentId": "item.topik_future",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "미래"
     },
     {
@@ -11458,7 +11458,7 @@
       "heightClass": "item",
       "parentId": "item.topik_education_policy",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "교육 정책"
     },
     {
@@ -11472,7 +11472,7 @@
       "heightClass": "item",
       "parentId": "item.topik_turn_out_different",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "달라지다"
     },
     {
@@ -11486,7 +11486,7 @@
       "heightClass": "item",
       "parentId": "item.topik_become",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "되다"
     },
     {
@@ -11500,7 +11500,7 @@
       "heightClass": "item",
       "parentId": "item.topik_depend_on",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N에 달려 있다"
     },
     {
@@ -11514,7 +11514,7 @@
       "heightClass": "item",
       "parentId": "item.topik_this_year",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "올해"
     },
     {
@@ -11528,7 +11528,7 @@
       "heightClass": "item",
       "parentId": "item.topik_fruit",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "과일"
     },
     {
@@ -11542,7 +11542,7 @@
       "heightClass": "item",
       "parentId": "item.topik_fruit_output",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "생산량"
     },
     {
@@ -11556,7 +11556,7 @@
       "heightClass": "item",
       "parentId": "item.topik_on_the_whole",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "대체적으로"
     },
     {
@@ -11570,7 +11570,7 @@
       "heightClass": "item",
       "parentId": "item.topik_price_comes_down",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "내리다"
     },
     {
@@ -11584,7 +11584,7 @@
       "heightClass": "item",
       "parentId": "item.topik_hypothetical_if",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(ㄴ/는)다면"
     },
     {
@@ -11598,7 +11598,7 @@
       "heightClass": "item",
       "parentId": "item.topik_or_alternative",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(ㄴ/는)다거나"
     },
     {
@@ -11612,7 +11612,7 @@
       "heightClass": "item",
       "parentId": "item.topik_perhaps_because",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어서인지"
     },
     {
@@ -11626,7 +11626,7 @@
       "heightClass": "item",
       "parentId": "item.topik_gastritis",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "위염"
     },
     {
@@ -11640,7 +11640,7 @@
       "heightClass": "item",
       "parentId": "item.topik_patient",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "환자"
     },
     {
@@ -11654,7 +11654,7 @@
       "heightClass": "item",
       "parentId": "item.topik_regulate",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "조절하다"
     },
     {
@@ -11668,7 +11668,7 @@
       "heightClass": "item",
       "parentId": "item.topik_to_recipient",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N에게"
     },
     {
@@ -11682,7 +11682,7 @@
       "heightClass": "item",
       "parentId": "item.topik_come_to_be",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-게 되다"
     },
     {
@@ -11696,7 +11696,7 @@
       "heightClass": "item",
       "parentId": "item.topik_insert_upright",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "꽂다"
     },
     {
@@ -11710,7 +11710,7 @@
       "heightClass": "item",
       "parentId": "item.topik_put_down",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "놓다"
     },
     {
@@ -11724,7 +11724,7 @@
       "heightClass": "item",
       "parentId": "item.topik_spring",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "봄"
     },
     {
@@ -11738,7 +11738,7 @@
       "heightClass": "item",
       "parentId": "item.topik_do_take_then",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어다가"
     },
     {
@@ -11752,7 +11752,7 @@
       "heightClass": "item",
       "parentId": "item.topik_only_nothing_more",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 뿐"
     },
     {
@@ -11766,7 +11766,7 @@
       "heightClass": "item",
       "parentId": "item.topik_because_past",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-았/었기에"
     },
     {
@@ -11780,7 +11780,7 @@
       "heightClass": "item",
       "parentId": "item.topik_unwelcome_because",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄴ 바람에"
     },
     {
@@ -11794,7 +11794,7 @@
       "heightClass": "item",
       "parentId": "item.topik_state_nation",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "국가"
     },
     {
@@ -11808,7 +11808,7 @@
       "heightClass": "item",
       "parentId": "item.topik_situation",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "상황"
     },
     {
@@ -11822,7 +11822,7 @@
       "heightClass": "item",
       "parentId": "item.topik_get_better",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "나아지다"
     },
     {
@@ -11836,7 +11836,7 @@
       "heightClass": "item",
       "parentId": "item.topik_painful_to_watch",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "안타깝다"
     },
     {
@@ -11850,7 +11850,7 @@
       "heightClass": "item",
       "parentId": "item.topik_only_feeling",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 따름이다"
     },
     {
@@ -11864,7 +11864,7 @@
       "heightClass": "item",
       "parentId": "item.topik_only_that",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 뿐이다"
     },
     {
@@ -11878,7 +11878,7 @@
       "heightClass": "item",
       "parentId": "item.topik_to_such_degree",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 정도이다"
     },
     {
@@ -11892,7 +11892,7 @@
       "heightClass": "item",
       "parentId": "item.topik_no_way_possible",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ 리가 없다"
     },
     {
@@ -11906,7 +11906,7 @@
       "heightClass": "item",
       "parentId": "item.topik_behaviour",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "행동"
     },
     {
@@ -11920,7 +11920,7 @@
       "heightClass": "item",
       "parentId": "item.topik_nurse_someone",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "간호하다"
     },
     {
@@ -11934,7 +11934,7 @@
       "heightClass": "item",
       "parentId": "item.topik_hand",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "손"
     },
     {
@@ -11948,7 +11948,7 @@
       "heightClass": "item",
       "parentId": "item.topik_feel_actively",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "느끼다"
     },
     {
@@ -11962,7 +11962,7 @@
       "heightClass": "item",
       "parentId": "item.topik_feeling_received",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "느껴지다"
     },
     {
@@ -11976,7 +11976,7 @@
       "heightClass": "item",
       "parentId": "item.topik_try_but_cannot",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)려야 -(으)ㄹ 수 없다"
     },
     {
@@ -11990,7 +11990,7 @@
       "heightClass": "item",
       "parentId": "item.topik_even_if_doing",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어도"
     },
     {
@@ -12004,7 +12004,7 @@
       "heightClass": "item",
       "parentId": "item.topik_in_confusion",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-는 통에"
     },
     {
@@ -12018,7 +12018,7 @@
       "heightClass": "item",
       "parentId": "item.topik_seems_doing",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-는 듯하다"
     },
     {
@@ -12032,7 +12032,7 @@
       "heightClass": "item",
       "parentId": "item.topik_enter_school",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "입학하다"
     },
     {
@@ -12046,7 +12046,7 @@
       "heightClass": "item",
       "parentId": "item.topik_study_abroad",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "유학생"
     },
     {
@@ -12060,7 +12060,7 @@
       "heightClass": "item",
       "parentId": "item.topik_day_by_day",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "날로"
     },
     {
@@ -12074,7 +12074,7 @@
       "heightClass": "item",
       "parentId": "item.topik_statistical_increase",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "증가하다"
     },
     {
@@ -12088,7 +12088,7 @@
       "heightClass": "item",
       "parentId": "item.topik_formal_intention",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-고자"
     },
     {
@@ -12102,7 +12102,7 @@
       "heightClass": "item",
       "parentId": "item.topik_having_done_then",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-고서"
     },
     {
@@ -12116,7 +12116,7 @@
       "heightClass": "item",
       "parentId": "item.topik_trying_is_futile",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어 봤자"
     },
     {
@@ -12130,7 +12130,7 @@
       "heightClass": "item",
       "parentId": "item.topik_as_soon_as",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-자마자"
     },
     {
@@ -12144,7 +12144,7 @@
       "heightClass": "item",
       "parentId": "item.topik_whatever_task",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "무슨 일이든"
     },
     {
@@ -12158,7 +12158,7 @@
       "heightClass": "item",
       "parentId": "item.topik_first_time",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "처음"
     },
     {
@@ -12172,7 +12172,7 @@
       "heightClass": "item",
       "parentId": "item.topik_hard_going",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "힘들다"
     },
     {
@@ -12186,7 +12186,7 @@
       "heightClass": "item",
       "parentId": "item.topik_way_of_things",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄴ/는 법이다"
     },
     {
@@ -12200,7 +12200,7 @@
       "heightClass": "item",
       "parentId": "item.topik_bound_to_happen",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-기 마련이다"
     },
     {
@@ -12214,7 +12214,7 @@
       "heightClass": "item",
       "parentId": "item.topik_may_do",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-아/어도 되다"
     },
     {
@@ -12228,7 +12228,7 @@
       "heightClass": "item",
       "parentId": "item.topik_does_nothing_but",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-기만 하다"
     },
     {
@@ -12242,7 +12242,7 @@
       "heightClass": "item",
       "parentId": "item.topik_looks_as_though",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄴ 모양이다"
     },
     {
@@ -12256,7 +12256,7 @@
       "heightClass": "item",
       "parentId": "item.topik_survey",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "설문 조사"
     },
     {
@@ -12270,7 +12270,7 @@
       "heightClass": "item",
       "parentId": "item.topik_health",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "건강"
     },
     {
@@ -12284,7 +12284,7 @@
       "heightClass": "item",
       "parentId": "item.topik_work",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "일하다"
     },
     {
@@ -12298,7 +12298,7 @@
       "heightClass": "item",
       "parentId": "item.topik_survey_reply",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "응답"
     },
     {
@@ -12312,7 +12312,7 @@
       "heightClass": "item",
       "parentId": "item.topik_more_than_half",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "과반수"
     },
     {
@@ -12326,7 +12326,7 @@
       "heightClass": "item",
       "parentId": "item.topik_exceed",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "넘다"
     },
     {
@@ -12340,7 +12340,7 @@
       "heightClass": "item",
       "parentId": "item.topik_concerning_topic",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "N에 대한"
     },
     {
@@ -12354,7 +12354,7 @@
       "heightClass": "item",
       "parentId": "item.topik_as_long_as",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-는 한"
     },
     {
@@ -12368,7 +12368,7 @@
       "heightClass": "item",
       "parentId": "item.topik_seeing_that_i",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-길래"
     },
     {
@@ -12382,7 +12382,7 @@
       "heightClass": "item",
       "parentId": "item.topik_even_if_should",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-(으)ㄹ지라도"
     },
     {
@@ -12396,7 +12396,7 @@
       "heightClass": "item",
       "parentId": "item.topik_even_supposing",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-ㄴ/는다고 해도"
     },
     {
@@ -12410,7 +12410,7 @@
       "heightClass": "item",
       "parentId": "item.topik_want_to_do",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "-고 싶다"
     },
     {
@@ -12424,7 +12424,7 @@
       "heightClass": "item",
       "parentId": "item.topik_picture_book",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "그림책"
     },
     {
@@ -12438,7 +12438,7 @@
       "heightClass": "item",
       "parentId": "item.topik_volunteer_worker",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "자원봉사자"
     },
     {
@@ -12452,7 +12452,7 @@
       "heightClass": "item",
       "parentId": "item.topik_recruitment",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "모집"
     },
     {
@@ -12466,7 +12466,7 @@
       "heightClass": "item",
       "parentId": "item.topik_personal_dream",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "꿈"
     },
     {
@@ -12480,7 +12480,7 @@
       "heightClass": "item",
       "parentId": "item.topik_hope",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "희망"
     },
     {
@@ -12494,7 +12494,7 @@
       "heightClass": "item",
       "parentId": "item.topik_eligibility",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "자격"
     },
     {
@@ -12508,7 +12508,7 @@
       "heightClass": "item",
       "parentId": "item.topik_high_school_student",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "고등학생"
     },
     {
@@ -12522,7 +12522,7 @@
       "heightClass": "item",
       "parentId": "item.topik_alternatively",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "또는"
     },
     {
@@ -12536,7 +12536,7 @@
       "heightClass": "item",
       "parentId": "item.topik_application_method",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "신청 방법"
     },
     {
@@ -12550,7 +12550,7 @@
       "heightClass": "item",
       "parentId": "item.topik_homepage",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "홈페이지"
     },
     {
@@ -12564,7 +12564,7 @@
       "heightClass": "item",
       "parentId": "item.topik_activity_period",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "활동 기간"
     },
     {
@@ -12578,7 +12578,7 @@
       "heightClass": "item",
       "parentId": "item.topik_volunteer_activity",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "봉사 활동"
     },
     {
@@ -12592,7 +12592,7 @@
       "heightClass": "item",
       "parentId": "item.topik_participate",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "참여하다"
     },
     {
@@ -12606,7 +12606,7 @@
       "heightClass": "item",
       "parentId": "item.topik_graph",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "그래프"
     },
     {
@@ -12620,7 +12620,7 @@
       "heightClass": "item",
       "parentId": "item.topik_consideration",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "고려 사항"
     },
     {
@@ -12634,7 +12634,7 @@
       "heightClass": "item",
       "parentId": "item.topik_criterion",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "기준"
     },
     {
@@ -12648,7 +12648,7 @@
       "heightClass": "item",
       "parentId": "item.topik_scale_size",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "규모"
     },
     {
@@ -12662,7 +12662,7 @@
       "heightClass": "item",
       "parentId": "item.topik_ratio",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "비율"
     },
     {
@@ -12676,7 +12676,7 @@
       "heightClass": "item",
       "parentId": "item.topik_whole_total",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "전체"
     },
     {
@@ -12690,7 +12690,7 @@
       "heightClass": "item",
       "parentId": "item.topik_at_most",
       "usedBy": [],
-      "notes": "Dedicated TOPIK illustration; individually reviewed at 48 px. Prompt and source in docs/topik-art-manifest.json.",
+      "notes": "Dedicated TOPIK illustration; individually reviewed at 96 px. Prompt and source in docs/topik-art-manifest.json.",
       "wordKo": "이하"
     }
   ]

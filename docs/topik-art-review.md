@@ -27,11 +27,14 @@ and English explanation.
 
 Each replacement was generated through its own Imagegen call with a unique
 subject brief. The source identifier, semantic slug, review state and original
-mapping are recorded in [the manifest](topik-art-manifest.json). Sources were
+mapping are recorded in [the manifest](topik-art-manifest.json). Sources are
 processed through the existing pixel-prop pipeline into transparent PNGs exactly
-48 px tall, with nearest-neighbor reduction, binary alpha and a compact palette.
+96 px tall, with nearest-neighbor reduction, binary alpha and a compact palette.
+The first release reduced them to 48 px; the full-screen Vocabulary Book exposed
+that loss of detail by enlarging them to a fractional 86 px. The reviewed sources
+were therefore rebuilt at the 96 px display size instead of enlarged in CSS.
 
-Both the source image and its processed 48 px result were inspected before an
+Both the source image and its processed result were inspected before an
 entry was marked reviewed. The continuation review sheets cover
 [238–242](topik-art-review-238-242.png),
 [243–251](topik-art-review-243-251.png),
@@ -56,7 +59,7 @@ again after the last mapping update.
 
 `scripts/import_topik_art.js` accepts an array of `{slug, sourcePath}` on stdin.
 It registers the batch and records the source after pixel processing. Raw-source
-approval and final 48 px approval remain separate review steps.
+approval and final 96 px approval remain separate review steps.
 
 `scripts/apply_topik_art.js` validates the complete manifest and every proposed
 runtime change before writing the reviewed block in `js/vocabArtMore.js`. It
