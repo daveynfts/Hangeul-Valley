@@ -420,6 +420,8 @@ function closeModalById(overlayId) {
   else if (overlayId === 'dictation-overlay') window.closeDictation();
   else if (overlayId === 'rank-card-overlay') window.closeRankCard();
   else if (overlayId === 'rankup-overlay') window.closeRankUp();
+  else if (overlayId === 'vocab-ff-modal') closeVocabFunFact();
+  else if (overlayId === 'vocab-overlay') closeVocabBook();
   else setModalState(overlayId, false);
 }
 
@@ -1672,6 +1674,9 @@ $('shop-overlay').addEventListener('keydown', e => e.stopPropagation());
 // ═══════════════ VOCAB BOOK ══════════════════════════════════════════════════
 let activeCat = 'all';
 let activeMasteryFilter = 'all';
+let visibleVocabWords = [];
+let activeVocabDetailWord = null;
+let vocabDetailReturnFocus = null;
 
 function buildVocabBook() {
   if(!levelsData.length) return;
@@ -1679,6 +1684,15 @@ function buildVocabBook() {
   const ko = levelNameKo(lvl);
   vocabSubtitle.textContent = `Level ${lvl.level} – ${levelName(lvl)}${ko ? ` (${ko})` : ''}`;
   const cats = ['all', '⏰ Due', '⚪ New', '🌱 Learning', '🍎 Review', '🌟 Mature', ...new Set(lvl.words.map(wordCategory).filter(Boolean))];
+  if (!cats.includes(activeCat)) activeCat = 'all';
+  const started = lvl.words.filter(w => {
+    const e = peekSrs(w.ko);
+    return e && e.st !== 'new';
+  }).length;
+  const mature = lvl.words.filter(w => srsIsMature(peekSrs(w.ko))).length;
+  const due = lvl.words.filter(w => wordIsDue(w.ko)).length;
+  const summary = $('vocab-progress-summary');
+  if (summary) summary.textContent = `${started} started · ${mature} mature${due ? ` · ${due} due now` : ''}`;
   const filterScrollTop = catFiltersEl.scrollTop;
   catFiltersEl.innerHTML = '';
   cats.forEach(cc => {
@@ -1707,6 +1721,8 @@ function buildVocabBook() {
 // are deliberately not stored.
 let factsData = {};
 let factsLoaded = false;
+let factsLoadPromise = null;
+let factsLoadSettled = false;
 
 // Non-blocking: origins are only needed once a fun-fact panel is opened, and
 // getFunFact() degrades to pronunciation-only until the fetch lands. Guarded so the
@@ -1716,11 +1732,18 @@ function loadFacts(){
   // Browser-only: Node has a global fetch but no base URL, so a relative one throws
   // ERR_INVALID_URL. This checked `typeof document` and one harness mocks document, so the
   // guard passed and every run of it dumped that error. IS_NODE is the check that holds.
-  if (IS_NODE || typeof fetch !== 'function') return Promise.resolve();
-  return fetch('facts.json')
+  if (IS_NODE || typeof fetch !== 'function') {
+    factsLoadSettled = true;
+    return Promise.resolve(factsData);
+  }
+  if (factsLoaded) return Promise.resolve(factsData);
+  if (factsLoadPromise) return factsLoadPromise;
+  factsLoadPromise = fetch('facts.json')
     .then(r => r.json())
-    .then(d => { factsData = d || {}; factsLoaded = true; })
-    .catch(e => { console.warn('facts.json failed to load:', e); factsData = {}; });
+    .then(d => { factsData = d || {}; factsLoaded = true; factsLoadSettled = true; return factsData; })
+    .catch(e => { console.warn('facts.json failed to load:', e); factsData = {}; factsLoadSettled = true; return factsData; })
+    .then(d => { factsLoadPromise = null; return d; });
+  return factsLoadPromise;
 }
 loadFacts();
 
@@ -1906,6 +1929,26 @@ function renderCategoryHint(cat) {
     return '👨‍👩‍👧 People & relationships vocabulary. Korean puts real weight on using the right title for the right relationship.';
   if (has('동작', '행동', '업무'))
     return '⚡ Action vocabulary. These land at the end of the sentence in Korean word order (subject – object – verb).';
+  if (has('economy', 'business', '경제', '사업', '시장', '금융'))
+    return '📊 Economy & business vocabulary. Watch for compact Sino-Korean compounds: recognizing each block often reveals the meaning of a longer headline or notice.';
+  if (has('volunteer', 'application', '봉사', '신청', '모집', '자격'))
+    return '🤝 Applications & volunteering vocabulary. These words often appear together in public notices, especially around eligibility, dates and how to apply.';
+  if (has('chart', 'data', 'graph', '그래프', '통계', '비율', '자료'))
+    return '📈 Charts & data vocabulary. TOPIK questions often pair these terms with increases, decreases, comparisons and proportions.';
+  if (has('grammar', 'expression', '문법', '표현'))
+    return '🧩 Grammar & expressions. Learn the surrounding pattern and the speaker’s intent, then compare it with a complete curated example.';
+  if (has('society', 'daily life', '생활', '사회', '일상'))
+    return '🏙️ Society & daily-life vocabulary. Expect these words in notices, surveys and passages about routines or changing social habits.';
+  if (has('media', 'headline', '뉴스', '언론', '기사'))
+    return '📰 Media & headline vocabulary. Korean headlines often omit particles, so identify the nouns and final predicate before reconstructing the full relation.';
+  if (has('culture', 'entertainment', '문화', '예술', '공연'))
+    return '🎭 Culture & entertainment vocabulary. Link the word to a venue, event or activity to make it easier to retrieve in a reading passage.';
+  if (has('beauty', 'appearance', '미용', '외모'))
+    return '✨ Appearance vocabulary. Pay attention to whether the word names a feature, a state or an action, because Korean uses different predicate patterns for each.';
+  if (has('travel', 'leisure', '여행', '여가', '관광'))
+    return '🧳 Travel & leisure vocabulary. Group it with places, transport and activity verbs so it becomes a usable travel phrase rather than an isolated label.';
+  if (has('politics', 'government', '정치', '정부', '행정'))
+    return '🏛️ Politics & government vocabulary. These formal Sino-Korean terms recur in news, policies and TOPIK reading passages.';
   return '✨ Everyday Korean vocabulary — common in conversation, dramas and daily life.';
 }
 
@@ -1919,57 +1962,283 @@ function getFunFact(word) {
   return {
     origin: renderOrigin(factsData[ko]),
     structure: renderStructure(ko),
-    hint: renderCategoryHint(word.categoryEn || word.category)
+    hint: renderCategoryHint(`${word.categoryEn || ''} ${word.category || ''}`)
   };
 }
 
+function vocabRenderChips(target, values) {
+  if (!target) return;
+  target.innerHTML = '';
+  (values || []).forEach(value => {
+    const chip = document.createElement('span');
+    chip.className = 'vff-study-chip';
+    chip.textContent = value;
+    target.appendChild(chip);
+  });
+}
+
+function vocabSkillDescription(entry) {
+  if (!entry || entry.st === 'new') return 'Not studied yet';
+  const parts = [];
+  if (srsIsMature(entry)) parts.push('Mature');
+  else if (entry.st === 'review') parts.push('In review');
+  else if (entry.st === 'relearn') parts.push('Relearning');
+  else if (entry.st === 'learn') parts.push('Learning');
+  else parts.push(entry.st);
+  if (srsIsGraduated(entry)) parts.push(`interval ${srsIntervalLabel(entry)}`);
+  if (srsIsDue(entry)) parts.push('due now');
+  if (entry.lapses) parts.push(`${entry.lapses} lapse${entry.lapses === 1 ? '' : 's'}`);
+  return parts.join(' · ');
+}
+
+function vocabRenderSkillGrid(word) {
+  const grid = $('vff-skill-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const labels = {
+    type: { icon: '⌨️', name: 'Produce · type' },
+    recognise: { icon: '👁️', name: 'Recognise · see' },
+    listen: { icon: '👂', name: 'Understand · hear' }
+  };
+  MODALITIES.forEach(modality => {
+    const row = document.createElement('div');
+    row.className = 'vff-skill-card';
+    const icon = document.createElement('span');
+    icon.className = 'vff-skill-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = labels[modality].icon;
+    const copy = document.createElement('div');
+    const name = document.createElement('div');
+    name.className = 'vff-skill-name';
+    name.textContent = labels[modality].name;
+    const state = document.createElement('div');
+    state.className = 'vff-skill-state';
+    state.textContent = vocabSkillDescription(peekSrs(word.ko, modality));
+    copy.appendChild(name);
+    copy.appendChild(state);
+    row.appendChild(icon);
+    row.appendChild(copy);
+    grid.appendChild(row);
+  });
+}
+
+function vocabRelatedWords(word, limit) {
+  const lvl = levelsData[currentLevelIndex];
+  const all = (lvl && Array.isArray(lvl.words)) ? lvl.words : [];
+  const index = all.findIndex(w => w && w.ko === word.ko);
+  const category = wordCategory(word);
+  return all
+    .map((candidate, i) => ({
+      candidate,
+      i,
+      sameCategory: wordCategory(candidate) === category
+    }))
+    .filter(row => row.candidate && row.candidate.ko !== word.ko)
+    .sort((a, b) => {
+      if (a.sameCategory !== b.sameCategory) return a.sameCategory ? -1 : 1;
+      return Math.abs(a.i - index) - Math.abs(b.i - index);
+    })
+    .slice(0, limit || 6)
+    .map(row => row.candidate);
+}
+
+function vocabRenderRelatedWords(word) {
+  const grid = $('vff-related-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const related = vocabRelatedWords(word, 6);
+  if (!related.length) {
+    const empty = document.createElement('div');
+    empty.className = 'vff-related-empty';
+    empty.textContent = 'No other entries are available in this level yet.';
+    grid.appendChild(empty);
+    return;
+  }
+  related.forEach(candidate => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'vff-related-word';
+    button.setAttribute('aria-label', `Open ${candidate.ko}, ${candidate.en}`);
+
+    const art = document.createElement('span');
+    art.className = 'vff-related-art';
+    art.innerHTML = (typeof vocabIconHtml === 'function')
+      ? vocabIconHtml(candidate.ko, candidate.hint || '📝', 42)
+      : (candidate.hint || '📝');
+    const copy = document.createElement('span');
+    copy.className = 'vff-related-copy';
+    const ko = document.createElement('span');
+    ko.className = 'vff-related-ko';
+    ko.lang = 'ko';
+    ko.textContent = candidate.ko;
+    const en = document.createElement('span');
+    en.className = 'vff-related-en';
+    en.textContent = candidate.en;
+    copy.appendChild(ko);
+    copy.appendChild(en);
+    const arrow = document.createElement('span');
+    arrow.className = 'vff-related-arrow';
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '→';
+    button.appendChild(art);
+    button.appendChild(copy);
+    button.appendChild(arrow);
+    button.addEventListener('click', () => showVocabFunFact(candidate));
+    grid.appendChild(button);
+  });
+}
+
+function vocabDetailNavigation(word) {
+  const lvl = levelsData[currentLevelIndex];
+  let list = visibleVocabWords.filter(Boolean);
+  let index = list.findIndex(w => w.ko === word.ko);
+  if (index < 0) {
+    list = (lvl && Array.isArray(lvl.words)) ? lvl.words : [];
+    index = list.findIndex(w => w.ko === word.ko);
+  }
+  return { list, index };
+}
+
+function browseVocabDetail(delta) {
+  if (!activeVocabDetailWord) return;
+  const nav = vocabDetailNavigation(activeVocabDetailWord);
+  if (nav.list.length < 2 || nav.index < 0) return;
+  const next = (nav.index + delta + nav.list.length) % nav.list.length;
+  showVocabFunFact(nav.list[next]);
+}
+
 function showVocabFunFact(word) {
+  if (!word || !word.ko) return;
+  const modal = $('vocab-ff-modal');
+  const wasOpen = modal.classList.contains('visible');
+  if (!wasOpen && typeof document !== 'undefined') vocabDetailReturnFocus = document.activeElement;
+  activeVocabDetailWord = word;
+
+  const normalizedKo = word.ko.normalize('NFC');
+  const originData = factsData[normalizedKo] || null;
   const fact = getFunFact(word);
-  const srs  = getSrs(word.ko);
+  const model = vbDetailModel(word, originData);
+  const srs = getSrs(word.ko);
   const harvests = harvestCounts.get(word.ko) || 0;
-  // Report the scheduler's own view of the word instead of guessing a phase from timers.
+
   let stageLabel = 'Not started';
   if (srsIsMature(srs))          stageLabel = '🌟 Mature';
   else if (srs.st === 'review')  stageLabel = '🍎 In review';
   else if (srs.st === 'relearn') stageLabel = '🔁 Relearning';
   else if (srs.st === 'learn')   stageLabel = '🌱 Learning';
-  const modal = $('vocab-ff-modal');
-  $('vff-emoji').innerHTML      = (typeof vocabIconHtml === 'function')
-    ? vocabIconHtml(word.ko, word.hint || '📝', 56)
+
+  $('vff-emoji').innerHTML = (typeof vocabIconHtml === 'function')
+    ? vocabIconHtml(word.ko, word.hint || '📝', 126)
     : (word.hint || '📝');
-  $('vff-en').textContent       = word.en;
-  $('vff-ko').textContent       = word.ko;
-  $('vff-cat').textContent      = wordCategory(word) + (word.categoryEn && word.category ? ` · ${word.category}` : '');
-  $('vff-phase').textContent    = stageLabel;
-  // Each skill has its own schedule, so show them separately — an average would hide the
-  // usual case, which is recognition running well ahead of production.
-  const MOD_LABEL = { type: '⌨️ Type', recognise: '👁 Recognise', listen: '👂 Listen' };
-  const perMod = MODALITIES
-    .map(m => ({ m, e: peekSrs(word.ko, m) }))
-    .filter(x => x.e && x.e.st !== 'new')
-    .map(({ m, e }) => `${MOD_LABEL[m]} ${srsIntervalLabel(e)}${e.lapses ? ` (${e.lapses}✗)` : ''}`);
-  $('vff-harvests').textContent = perMod.length
-    ? perMod.join('  ·  ')
-    : (harvests > 0 ? `✅ Harvested ×${harvests}` : '🌱 Not started');
-  $('vff-fact-origin').textContent    = fact.origin || fact.hint;
-  $('vff-fact-structure').textContent = fact.structure;
-  const exBox = $('vff-fact-example');
+  $('vff-en').textContent = word.en;
+  $('vff-ko').textContent = word.ko;
+  $('vff-romanization').textContent = model.romanization
+    ? `Written-form guide · ${model.romanization}`
+    : 'Use the audio controls for pronunciation.';
+  $('vff-cat').textContent = wordCategory(word) + (word.categoryEn && word.category ? ` · ${word.category}` : '');
+  $('vff-phase').textContent = stageLabel;
+
+  const studiedSkills = MODALITIES
+    .map(modality => peekSrs(word.ko, modality))
+    .filter(entry => entry && entry.st !== 'new').length;
+  $('vff-harvests').textContent = studiedSkills
+    ? `${studiedSkills} of ${MODALITIES.length} skills started${harvests ? ` · harvested ×${harvests}` : ''}`
+    : (harvests > 0 ? `Harvested ×${harvests}` : 'Open a farm quiz to begin learning.');
+
+  $('vff-word-type').textContent = model.type;
+  $('vff-syllable-count').textContent = model.syllableCount
+    ? `${model.syllableCount} block${model.syllableCount === 1 ? '' : 's'}`
+    : 'Latin-letter spelling';
+  $('vff-final-sound').textContent = model.ending.label;
+  $('vff-chosung').textContent = getChosung(word.ko) || '—';
+  $('vff-fact-origin').textContent = fact.origin || 'No verified etymology note is available for this entry yet.';
+  $('vff-fact-structure').textContent = fact.structure
+    || 'This entry is written with Latin letters rather than Hangul blocks.';
+  $('vff-study-note').textContent = model.studyNote;
+  $('vff-category-hint').textContent = fact.hint;
+
+  const example = String(word.example || '').trim();
   const exSec = $('vff-example-section');
-  if (exBox) {
-    const example = String(word.example || '').trim();
-    exBox.textContent = example;
-    const translation = $('vff-example-en');
-    if (translation) translation.textContent = example ? (word.exampleEn || '') : '';
-    const say = $('vff-example-speak');
-    if (say) {
-      say.disabled = !example;
-      say.onclick = example ? () => speakKorean(example, { force: true }) : null;
-    }
-    if (exSec) exSec.style.display = example ? '' : 'none';
+  $('vff-fact-example').textContent = example;
+  $('vff-example-en').textContent = example ? (word.exampleEn || '') : '';
+  const say = $('vff-example-speak');
+  say.disabled = !example;
+  say.onclick = example ? () => speakKorean(example, { force: true }) : null;
+  exSec.hidden = !example;
+
+  const formsSec = $('vff-forms-section');
+  vocabRenderChips($('vff-forms'), model.forms);
+  formsSec.hidden = model.forms.length === 0;
+
+  const syllables = $('vff-syllable-grid');
+  syllables.innerHTML = '';
+  model.blocks.forEach(block => {
+    const card = document.createElement('div');
+    card.className = 'vff-syllable-card';
+    const char = document.createElement('span');
+    char.className = 'vff-syllable-char';
+    char.lang = 'ko';
+    char.textContent = block.char;
+    const jamo = document.createElement('span');
+    jamo.className = 'vff-syllable-jamo';
+    jamo.textContent = [block.initial, block.vowel, block.final].filter(Boolean).join(' + ');
+    const roman = document.createElement('span');
+    roman.className = 'vff-syllable-roman';
+    roman.textContent = block.romanized;
+    card.appendChild(char);
+    card.appendChild(jamo);
+    card.appendChild(roman);
+    syllables.appendChild(card);
+  });
+
+  vocabRenderChips($('vff-particle-row'), model.ending.available ? [
+    `Topic · ${model.ending.topic}`,
+    `Subject · ${model.ending.subject}`,
+    `Object · ${model.ending.object}`,
+    `Direction · ${model.ending.direction}`
+  ] : ['Listen for the final sound before choosing a particle']);
+  vocabRenderSkillGrid(word);
+  vocabRenderRelatedWords(word);
+
+  const nav = vocabDetailNavigation(word);
+  const navPosition = $('vff-nav-position');
+  navPosition.textContent = nav.index >= 0 ? `${nav.index + 1} / ${nav.list.length}` : '';
+  $('vff-prev-btn').disabled = nav.list.length < 2;
+  $('vff-next-btn').disabled = nav.list.length < 2;
+  $('vff-prev-btn').title = nav.list.length > 1 ? 'Previous word in this view' : 'No other word in this view';
+  $('vff-next-btn').title = nav.list.length > 1 ? 'Next word in this view' : 'No other word in this view';
+
+  setModalState('vocab-ff-modal', true);
+  const scroll = $('vff-scroll');
+  if (scroll) scroll.scrollTop = 0;
+  if (!wasOpen && typeof setTimeout === 'function') {
+    setTimeout(() => {
+      const back = $('vff-back-btn');
+      if (back && typeof back.focus === 'function') back.focus();
+    }, 0);
   }
-  modal.classList.add('visible');
+
+  // If the user opens the page before the small origin file has arrived, refresh only
+  // this still-open word once the verified data is ready.
+  if (!factsLoadSettled) {
+    loadFacts().then(() => {
+      if (activeVocabDetailWord && activeVocabDetailWord.ko === word.ko
+          && modal.classList.contains('visible')) showVocabFunFact(activeVocabDetailWord);
+    });
+  }
 }
-function closeVocabFunFact() { $('vocab-ff-modal').classList.remove('visible'); }
+
+function closeVocabFunFact() {
+  const modal = $('vocab-ff-modal');
+  setModalState('vocab-ff-modal', false);
+  activeVocabDetailWord = null;
+  const returnFocus = vocabDetailReturnFocus;
+  vocabDetailReturnFocus = null;
+  if (returnFocus && typeof returnFocus.focus === 'function'
+      && typeof document !== 'undefined' && document.documentElement.contains(returnFocus)) {
+    returnFocus.focus();
+  }
+}
 
 const TASTE_LABELS = [
   { ko: '달다', en: 'sweet' },
@@ -5066,7 +5335,14 @@ function renderVocabCards() {
     else words = words.filter(w => wordCategory(w) === activeCat);
   }
 
-  if(q) words = words.filter(w => w.ko.toLowerCase().includes(q) || w.en.toLowerCase().includes(q));
+  if(q) words = words.filter(w => {
+    const romanized = (typeof vbRomanize === 'function') ? vbRomanize(w.ko) : '';
+    return [w.ko, w.en, w.category, w.categoryEn, romanized]
+      .filter(Boolean)
+      .some(value => String(value).toLowerCase().includes(q));
+  });
+
+  visibleVocabWords = words.slice();
 
   vocabCountEl.textContent = words.length === lvl.words.length
     ? `${words.length} words`
@@ -5101,9 +5377,9 @@ function renderVocabCards() {
 
     const div = document.createElement('div');
     div.className = `vocab-card ${mBadgeClass}` + (times > 0 || srsIsGraduated(e) ? ' planted' : '') + (planted ? ' growing' : '');
-    // The gloss is clamped to two lines on the card, so the full text has to stay
+    // The gloss is clamped to three lines on the card, so the full text has to stay
     // reachable somewhere — the tooltip carries it, and so does the fun-fact panel.
-    div.title = `${w.ko} — ${w.en}\nClick for word origin and hints`;
+    div.title = `${w.ko} — ${w.en}\nOpen the complete study page`;
     // A div rather than a button: the speak control is itself a button, and a button
     // inside a button is invalid markup. role + tabindex + a key handler gets the same
     // keyboard behaviour without nesting one inside the other.
@@ -5112,13 +5388,15 @@ function renderVocabCards() {
     div.setAttribute('aria-label', `${w.ko}, ${w.en}. ${mBadgeLabel}${mBadgeSuffix}. Open word details`);
     div.innerHTML = `
       <button type="button" class="speak-btn vc-speak tts-only" title="Hear this word" aria-label="Hear ${vbEsc(w.ko)}">🔊</button>
-      <span class="vc-emoji">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(w.ko, w.hint || '📝', 48) : (w.hint || '📝')}</span>
+      <span class="vc-category" title="${vbEsc(wordCategory(w))}">${vbEsc(wordCategory(w))}</span>
+      <span class="vc-emoji">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(w.ko, w.hint || '📝', 86) : (w.hint || '📝')}</span>
       <span class="vc-ko${vbKoSizeClass(w.ko)}" lang="ko">${vbEsc(w.ko)}</span>
       <span class="vc-en">${vbEsc(w.en)}</span>
       <span class="vc-meta">
         <span class="vc-chosung" title="Initial consonants (초성)">${vbEsc(chosung)}</span>
         <span class="mastery-badge ${mBadgeClass}">${mBadgeLabel}${mBadgeSuffix}</span>
-      </span>`;
+      </span>
+      <span class="vc-open-hint">Study this word →</span>`;
     // Free here: the vocab book already shows the answer, so audio adds nothing to give away.
     div.querySelector('.vc-speak').addEventListener('click', (ev) => {
       ev.stopPropagation();          // don't also open the fun-fact modal
@@ -5136,13 +5414,36 @@ function renderVocabCards() {
   });
 }
 function updateVocabBook() { if(vocabOverlay.classList.contains('visible')) renderVocabCards(); }
+function openVocabBook() {
+  buildVocabBook();
+  setModalState('vocab-overlay', true);
+  vocabBtn.setAttribute('aria-expanded', 'true');
+}
+function closeVocabBook() {
+  if ($('vocab-ff-modal').classList.contains('visible')) closeVocabFunFact();
+  setModalState('vocab-overlay', false);
+  vocabBtn.setAttribute('aria-expanded', 'false');
+  if (typeof vocabBtn.focus === 'function') vocabBtn.focus();
+}
+vocabBtn.setAttribute('aria-haspopup', 'dialog');
+vocabBtn.setAttribute('aria-expanded', 'false');
 vocabBtn.addEventListener('click', () => vocabOverlay.classList.contains('visible')
-  ? vocabOverlay.classList.remove('visible')
-  : (buildVocabBook(), vocabOverlay.classList.add('visible')));
-$('vocab-close-btn').addEventListener('click', () => vocabOverlay.classList.remove('visible'));
+  ? closeVocabBook()
+  : openVocabBook());
+$('vocab-close-btn').addEventListener('click', closeVocabBook);
 vocabSearch.addEventListener('input', () => {
   renderVocabCards();
   $('vocab-grid-wrap').scrollTop = 0;
+});
+$('vff-prev-btn').addEventListener('click', () => browseVocabDetail(-1));
+$('vff-next-btn').addEventListener('click', () => browseVocabDetail(1));
+$('vocab-ff-modal').addEventListener('keydown', ev => {
+  if (!ev || (ev.key !== 'ArrowLeft' && ev.key !== 'ArrowRight')) return;
+  const active = document.activeElement;
+  if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable)) return;
+  if (typeof ev.preventDefault === 'function') ev.preventDefault();
+  if (typeof ev.stopPropagation === 'function') ev.stopPropagation();
+  browseVocabDetail(ev.key === 'ArrowLeft' ? -1 : 1);
 });
 hudMenuBtn.addEventListener('click', () => { closeQuiz(); showLevelSelect(); });
 

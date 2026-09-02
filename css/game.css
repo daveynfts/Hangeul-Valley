@@ -1439,145 +1439,192 @@
       border-color: #9a3412; color: #7c2d12; box-shadow: 0 3px 0 #9a3412;
     }
 
-    /* ── VOCABULARY BOOK ─────────────────────────────────────────────────── */
+    /* ── VOCABULARY BOOK · FULL-SCREEN LIBRARY ───────────────────────────── */
     #vocab-overlay {
       display: none; position: fixed; inset: 0; z-index: 400;
-      background: var(--farm-veil);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      flex-direction: column;
+      background: #2a1a0a; flex-direction: column;
     }
-    #vocab-overlay.visible { display: flex; animation: fadeIn .25s ease; }
+    #vocab-overlay.visible { display: flex; animation: fadeIn .2s ease; }
 
     #vocab-panel {
-      display: flex; flex-direction: column;
-      width: min(1000px, 94vw); margin: auto;
-      height: 86vh; max-height: 800px;
-      background: linear-gradient(180deg, #f6deaa, #e8c07a);
-      border: 4px solid #8b5a2b;
-      border-radius: 8px; overflow: hidden;
-      box-shadow: 0 0 0 3px #4a2a0d, inset 0 0 0 2px #c4893a, 0 18px 40px rgba(0,0,0,.45);
-      animation: slideUp .28s cubic-bezier(.4,0,.2,1);
-      color: var(--ink);
+      position: relative; display: flex; flex-direction: column;
+      width: 100%; height: 100vh; height: 100dvh; max-height: none; margin: 0;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(255,255,255,.34), transparent 25%),
+        linear-gradient(180deg, #f8e8c3 0%, #efd39a 52%, #e4bb72 100%);
+      border: 0; border-radius: 0; overflow: hidden;
+      box-shadow: inset 0 0 0 3px #8b5a2b, inset 0 0 0 6px #c4893a;
+      color: var(--ink); animation: fadeIn .22s ease;
     }
 
     #vocab-header {
-      padding: 12px 16px;
-      background: linear-gradient(180deg, #fff3d6 0%, transparent);
-      border-bottom: 2px dashed #c4893a;
-      display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+      min-height: 78px; padding: 14px clamp(18px, 3vw, 48px);
+      background: linear-gradient(180deg, rgba(255,250,240,.96), rgba(246,222,170,.9));
+      border-bottom: 2px dashed #b9792c;
+      display: flex; align-items: center; gap: 16px; flex-shrink: 0;
+      box-shadow: 0 4px 14px rgba(91,52,18,.12);
+    }
+    .vocab-book-mark {
+      width: 54px; height: 54px; border-radius: 12px;
+      display: grid; place-items: center; flex-shrink: 0;
+      font-size: 34px; background: #fff8e8; border: 2px solid #c4893a;
+      box-shadow: inset 0 1px #fff, 0 3px 0 #8b5a2b;
     }
     #vocab-title-wrap { flex: 1; min-width: 0; }
-    #vocab-title { font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12; }
-    #vocab-subtitle { font-family: 'VT323', monospace; font-size: 16px; color: #8b5a2b; margin-top: 2px; letter-spacing: 1px; }
-    /* Was #fff on a parchment header — a 1.32:1 ✕ that was effectively invisible. */
-    #vocab-close-btn {
-      background: var(--parch-l); border: 1.5px solid var(--wood-m);
-      border-radius: 4px; color: var(--wood-d); font-size: 18px; width: 36px; height: 36px;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: background .15s, border-color .15s, color .15s;
+    #vocab-title {
+      font-family: 'Press Start 2P', monospace; font-size: clamp(14px, 1.35vw, 20px);
+      color: #5b3412; line-height: 1.35;
     }
-    #vocab-close-btn:hover { background: #ffd9d9; border-color: #b91c1c; color: #b91c1c; }
-    #vocab-close-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.45); }
+    #vocab-subtitle {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 700;
+      color: #7a3e12; margin-top: 4px; letter-spacing: .2px;
+    }
+    #vocab-progress-summary {
+      min-height: 18px; margin-top: 3px; color: #166534;
+      font-size: 13px; font-weight: 700;
+    }
+    #vocab-close-btn {
+      background: #fff8e8; border: 2px solid #8b5a2b;
+      border-radius: 10px; color: #5b3412; font-size: 22px; width: 46px; height: 46px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background .15s, border-color .15s, color .15s, transform .15s;
+      box-shadow: 0 3px 0 #8b5a2b;
+    }
+    #vocab-close-btn:hover { background: #fee2e2; border-color: #b91c1c; color: #991b1b; transform: translateY(-1px); }
+    #vocab-close-btn:focus-visible { outline: none; box-shadow: 0 3px 0 #8b5a2b, 0 0 0 4px rgba(74,42,13,.32); }
 
     #vocab-controls {
-      padding: 12px 22px; display: flex; gap: 10px; flex-shrink: 0;
-      border-bottom: 1px solid rgba(139, 90, 43, 0.25); flex-wrap: wrap;
+      padding: 14px clamp(18px, 3vw, 48px); display: grid;
+      grid-template-columns: minmax(280px, 430px) minmax(0, 1fr); gap: 18px;
+      flex-shrink: 0; border-bottom: 1px solid rgba(139,90,43,.3);
+      background: rgba(255,248,232,.55);
     }
+    .vocab-search-wrap, .vocab-filter-wrap { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .vocab-control-label {
+      font-family: 'Press Start 2P', monospace; font-size: 8px; line-height: 1.4;
+      color: #7a3e12; text-transform: uppercase; letter-spacing: .2px;
+    }
+    .vocab-search-field {
+      height: 44px; display: flex; align-items: center; gap: 8px;
+      background: #fffdf7; border: 2px solid #8b5a2b; border-radius: 8px;
+      padding: 0 12px; color: #8b5a2b; box-shadow: inset 0 2px 5px rgba(91,52,18,.08);
+    }
+    .vocab-search-field:focus-within { border-color: #166534; box-shadow: 0 0 0 3px rgba(22,101,52,.2); }
     #vocab-search {
-      flex: 1; min-width: 180px;
-      background: #fffaf0;
-      border: 1.5px solid #8b5a2b; border-radius: 4px; padding: 6px 10px;
-      font-family: 'VT323', monospace; font-size: 18px; color: var(--ink); outline: none;
+      flex: 1; min-width: 0; width: 100%; background: transparent; border: 0;
+      padding: 8px 0; font-family: 'Be Vietnam Pro', sans-serif; font-size: 15px;
+      color: var(--ink); outline: none;
     }
-    #vocab-search:focus { box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.35); }
-    #vocab-search::placeholder { color: #b8894a; }
+    #vocab-search::placeholder { color: #9a6f3a; opacity: .9; }
+    #cat-filters {
+      display: flex; align-items: center; gap: 7px; min-width: 0; min-height: 44px;
+      overflow-x: auto; overflow-y: hidden; padding: 2px 3px 5px;
+      scrollbar-width: thin; scrollbar-color: #8b5a2b rgba(139,90,43,.12);
+    }
     .cat-filter-btn {
-      border: 1.5px solid #c4893a; border-radius: 4px;
-      background: #fff8e8; color: #5b3412;
-      padding: 4px 10px; font-family: 'VT323', monospace; font-size: 16px;
-      cursor: pointer; letter-spacing: .5px; white-space: nowrap; transition: all .15s;
+      min-height: 36px; border: 1.5px solid #b9792c; border-radius: 999px;
+      background: #fff8e8; color: #5b3412; padding: 6px 12px;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 750;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      transition: background .15s, border-color .15s, color .15s, transform .15s;
     }
     .cat-filter-btn.active { background: #dcfce7; border-color: #166534; color: #14532d; }
-    /* Hover used to set color:#fff over a near-transparent white — the label vanished
-       against the parchment on the way to being clicked. */
-    .cat-filter-btn:hover:not(.active) { background: #ffe9b8; border-color: var(--wood-m); color: var(--wood-d); }
-    .cat-filter-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,0.4); }
+    .cat-filter-btn:hover:not(.active) { background: #ffe9b8; border-color: #8b5a2b; color: #4a2a0d; transform: translateY(-1px); }
+    .cat-filter-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(74,42,13,.32); }
 
-    #vocab-grid-wrap { flex: 1; min-height: 0; overflow-y: auto; padding: 16px 20px; }
-    #vocab-grid-wrap::-webkit-scrollbar { width: 8px; }
-    #vocab-grid-wrap::-webkit-scrollbar-track { background: rgba(139,90,43,0.15); border-radius: 4px; }
-    #vocab-grid-wrap::-webkit-scrollbar-thumb { background: var(--wood-m); border-radius: 4px; }
-    /* Was rgba(226,232,240,.5) — near-white at half opacity on parchment, 1.07:1. */
-    #vocab-count {
-      font-family: 'VT323', monospace; font-size: 19px; color: #7a3e12;
-      margin-bottom: 12px; letter-spacing: 1px;
+    #vocab-grid-wrap {
+      flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+      padding: 18px clamp(18px, 3vw, 48px) 44px;
     }
+    #vocab-grid-wrap::-webkit-scrollbar { width: 10px; }
+    #vocab-grid-wrap::-webkit-scrollbar-track { background: rgba(139,90,43,.14); }
+    #vocab-grid-wrap::-webkit-scrollbar-thumb { background: #8b5a2b; border-radius: 8px; border: 2px solid #efd39a; }
+    #vocab-grid-heading {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+      margin-bottom: 14px;
+    }
+    #vocab-count {
+      font-family: 'Press Start 2P', monospace; font-size: 10px; color: #5b3412;
+      line-height: 1.5; letter-spacing: .1px;
+    }
+    .vocab-grid-help { color: #7a3e12; font-size: 13px; text-align: right; }
 
-    /* Wider cells and a fixed row height. The Korean is the reason this screen exists, so
-       it gets the room; the old 118px cell forced a 3-syllable word onto two lines at
-       18px and let taller cards spill past their neighbours. */
     #vocab-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
-      gap: 12px;
-      align-items: stretch;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+      gap: 18px; align-items: stretch;
     }
     .vocab-card {
-      background: #fff8e8;
-      border: 2px solid #c4893a;
-      border-radius: 6px; padding: 14px 10px 10px; text-align: center;
+      background: linear-gradient(180deg, #fffdf7 0%, #fff4d9 100%);
+      border: 2px solid #c4893a; border-radius: 12px;
+      padding: 18px 14px 13px; text-align: center;
       transition: transform .15s, border-color .15s, box-shadow .15s;
-      cursor: pointer; position: relative;
+      cursor: pointer; position: relative; overflow: hidden;
       display: flex; flex-direction: column; align-items: center;
-      min-height: 190px;
-      box-shadow: inset 0 1px 0 #fff, 0 2px 0 #8b5a2b;
+      min-height: 286px;
+      box-shadow: inset 0 1px 0 #fff, 0 4px 0 #8b5a2b, 0 9px 18px rgba(91,52,18,.12);
     }
-    .vocab-card:hover { transform: translateY(-2px); border-color: #166534; }
+    .vocab-card::after {
+      content: ''; position: absolute; inset: auto 10px 8px; height: 3px;
+      border-radius: 99px; background: rgba(196,137,58,.25); pointer-events: none;
+    }
+    .vocab-card:hover {
+      transform: translateY(-4px); border-color: #166534;
+      box-shadow: inset 0 1px 0 #fff, 0 4px 0 #166534, 0 12px 22px rgba(22,101,52,.15);
+    }
     .vocab-card:focus-visible {
       outline: none; border-color: #166534;
-      box-shadow: inset 0 1px 0 #fff, 0 2px 0 #8b5a2b, 0 0 0 3px rgba(22,101,52,.5);
+      box-shadow: inset 0 1px 0 #fff, 0 4px 0 #166534, 0 0 0 4px rgba(22,101,52,.35);
     }
-    .vocab-card.planted { border-color: #166534; background: #e8f8dc; }
-
-    .vc-emoji { font-size: 30px; display: block; line-height: 1; margin-bottom: 6px; max-width: 100%; min-height: 48px; }
-    /* Use the native 48 px sprite height; forcing a wide prop into a 44 px
-       square shrank its defining details. No blurred shadow around pixel art. */
-    .vc-emoji img.vocab-art-icon { width: auto; max-width: 100%; height: 48px; display: inline-block; filter: none; }
-    /* 18px -> 29px. Three steps down for the long headwords: most entries are three
-       syllables, but the idioms run to thirteen characters and would overflow. */
+    .vocab-card.planted { border-color: #287448; background: linear-gradient(180deg, #f4fff0, #e4f5d8); }
+    .vocab-card .vc-speak {
+      top: 10px; right: 10px; width: 34px; height: 32px; padding: 0;
+      color: #14532d; background: #ecfdf5; border-color: #4d9366;
+    }
+    .vocab-card .vc-speak:hover { background: #dcfce7; }
+    .vc-category {
+      align-self: flex-start; max-width: calc(100% - 38px); margin-bottom: 8px;
+      padding: 4px 8px; border-radius: 999px; background: #f6deaa;
+      border: 1px solid #d6a45e; color: #6b3d14; font-size: 10px; font-weight: 800;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .vc-emoji {
+      font-size: 52px; display: flex; align-items: center; justify-content: center;
+      line-height: 1; margin: 1px 0 10px; width: 100%; min-height: 86px;
+    }
+    .vc-emoji img.vocab-art-icon {
+      width: auto; max-width: 100%; height: 86px; display: inline-block;
+      filter: none; image-rendering: pixelated;
+    }
     .vc-ko {
-      font-size: 29px; font-weight: 900; color: var(--ink);
+      font-size: 34px; font-weight: 900; color: #241407;
       font-family: 'Noto Sans KR', sans-serif; display: block;
-      line-height: 1.18; margin-bottom: 5px; word-break: keep-all;
+      line-height: 1.18; margin-bottom: 7px; word-break: keep-all;
     }
-    .vc-ko.vc-ko-sm { font-size: 23px; }
-    .vc-ko.vc-ko-xs { font-size: 18px; }
-    /* Clamped to two lines so a 43-character gloss cannot set the height of every row.
-       The full text stays in the card's tooltip and in the fun-fact panel. */
+    .vc-ko.vc-ko-sm { font-size: 27px; }
+    .vc-ko.vc-ko-xs { font-size: 21px; }
     .vc-en {
-      font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; color: #7a3e12;
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-      overflow: hidden; line-height: 1.35; letter-spacing: .2px;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 15px; font-weight: 650; color: #6b3d14;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      overflow: hidden; line-height: 1.45; letter-spacing: .1px;
     }
-    /* Pinned to the bottom so the badges line up across a row however tall the gloss is. */
     .vc-meta {
-      margin-top: auto; padding-top: 8px; display: flex; flex-direction: column;
-      align-items: center; gap: 5px; width: 100%;
+      margin-top: auto; padding-top: 11px; display: flex; flex-direction: row;
+      align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; width: 100%;
     }
-    /* Was inline color:#fde047 — yellow on cream, 1.25:1, and unreadable. */
     .vc-chosung {
-      font-family: 'Noto Sans KR', monospace; font-size: 12px; font-weight: 700;
+      font-family: 'Noto Sans KR', monospace; font-size: 12px; font-weight: 800;
       color: #5b3412; background: #fff3d6; border: 1px solid #d9b072;
-      border-radius: 3px; padding: 2px 7px; letter-spacing: 2px;
+      border-radius: 5px; padding: 3px 7px; letter-spacing: 2px;
       max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
+    .vc-open-hint {
+      margin-top: 9px; color: #166534; font-size: 11px; font-weight: 800;
+      letter-spacing: .15px;
+    }
 
-    /* All four badges were dark-theme fills — light text on translucent colour, landing
-       on a cream card. "New" measured 2.42:1. Same semantics, parchment palette. */
     .mastery-badge {
-      display: inline-block; padding: 4px 8px; border-radius: 3px;
-      font-family: 'Press Start 2P', monospace; font-size: 8px; font-weight: 700;
+      display: inline-block; padding: 4px 8px; border-radius: 5px;
+      font-family: 'Press Start 2P', monospace; font-size: 7px; font-weight: 700;
       line-height: 1.5; border: 1.5px solid; max-width: 100%;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
@@ -1585,20 +1632,18 @@
     .mastery-badge.practicing { background: #dbeafe; color: #1e3a8a; border-color: #2563eb; }
     .mastery-badge.mastered   { background: #f3e8ff; color: #581c87; border-color: #7e22ce; }
     .mastery-badge.legendary  { background: #fef3c7; color: #78350f; border-color: #b45309; }
-
-    .vocab-card.mastered  { border-color: #7e22ce; box-shadow: inset 0 1px 0 #fff, 0 2px 0 #6b21a8; }
-    .vocab-card.legendary { border-color: #b45309; box-shadow: inset 0 1px 0 #fff, 0 2px 0 #92400e; }
+    .vocab-card.mastered  { border-color: #7e22ce; box-shadow: inset 0 1px 0 #fff, 0 4px 0 #6b21a8, 0 9px 18px rgba(91,33,182,.12); }
+    .vocab-card.legendary { border-color: #b45309; box-shadow: inset 0 1px 0 #fff, 0 4px 0 #92400e, 0 9px 18px rgba(146,64,14,.12); }
 
     .vocab-empty {
-      grid-column: 1 / -1; text-align: center; padding: 32px 12px;
-      font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; color: #7a3e12;
+      grid-column: 1 / -1; text-align: center; padding: 64px 12px;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; color: #7a3e12;
     }
 
     @media (prefers-reduced-motion: reduce) {
-      #vocab-overlay.visible { animation: none; }
-      #vocab-panel { animation: none; }
+      #vocab-overlay.visible, #vocab-panel { animation: none; }
       .vocab-card, .cat-filter-btn, #vocab-close-btn { transition: none; }
-      .vocab-card:hover { transform: none; }
+      .vocab-card:hover, .cat-filter-btn:hover:not(.active), #vocab-close-btn:hover { transform: none; }
     }
 
 
@@ -1811,71 +1856,218 @@
       font-weight: 800; color: #fff; font-size: 20px; line-height: 1.2;
     }
 
-    /* ── VOCAB FUN FACT MODAL ────────────────────────────────────────────── */
+    /* ── VOCABULARY DETAIL · FULL-SCREEN STUDY PAGE ─────────────────────── */
     #vocab-ff-modal {
       position: fixed; inset: 0; z-index: 600; display: none;
-      background: rgba(10, 15, 30, 0.85); backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      align-items: center; justify-content: center; animation: fadeIn .2s;
+      background: #2a1a0a; align-items: stretch; justify-content: stretch;
+      animation: fadeIn .18s;
     }
     #vocab-ff-modal.visible { display: flex; }
     #vff-inner {
-      background: rgba(15, 35, 20, 0.92);
-      border: 2px solid var(--neon-green); border-radius: 8px;
-      max-width: 500px; width: 92%; max-height: 88vh; overflow-y: auto;
-      box-shadow: 0 0 0 2px #0f172a, var(--glow-green), 0 20px 60px rgba(0,0,0,.9);
-      position: relative;
+      position: relative; display: flex; flex-direction: column;
+      width: 100%; height: 100vh; height: 100dvh; max-width: none; max-height: none;
+      overflow: hidden; border: 0; border-radius: 0;
+      background:
+        radial-gradient(circle at 80% 6%, rgba(255,255,255,.28), transparent 22%),
+        linear-gradient(180deg, #f8e8c3 0%, #efd39a 100%);
+      color: #241407; box-shadow: inset 0 0 0 3px #8b5a2b;
     }
     #vff-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 20px; background: rgba(74, 222, 128, 0.12);
-      border-bottom: 1px solid rgba(74, 222, 128, 0.25);
+      min-height: 62px; flex-shrink: 0; display: grid;
+      grid-template-columns: minmax(180px, 1fr) auto minmax(260px, 1fr);
+      align-items: center; gap: 16px; padding: 10px clamp(16px, 3vw, 44px);
+      background: linear-gradient(180deg, #5b3412, #3f230d);
+      border-bottom: 3px solid #c4893a; box-shadow: 0 4px 14px rgba(42,26,10,.28);
     }
-    #vff-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--neon-green); }
+    #vff-title {
+      font-family: 'Press Start 2P', monospace; font-size: 11px;
+      color: #f6deaa; text-transform: uppercase; text-align: center;
+    }
     #vff-header button {
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.2);
-      color: #fff; border-radius: 4px; padding: 4px 10px; font-size: 14px; cursor: pointer;
+      min-height: 38px; background: #fff3d6; border: 1.5px solid #d9b072;
+      color: #4a2a0d; border-radius: 8px; padding: 7px 12px;
+      font-size: 13px; font-weight: 800; cursor: pointer;
+      transition: background .15s, transform .15s, opacity .15s;
     }
-    #vff-word-row { display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-bottom: 1px solid rgba(74,222,128,.15); }
-    #vff-emoji { font-size: 42px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; min-width: 56px; min-height: 56px; }
-    #vff-emoji img.vocab-art-icon { width: 56px; height: 56px; }
-    /* Demoted under the Korean. This is the word-detail view of a Hangul learning
-       game, and the gloss was set larger than the headword it explains. */
-    #vff-en { font-size: 17px; font-weight: 700; color: rgba(255,255,255,0.92); font-family: 'Be Vietnam Pro', sans-serif; }
-    #vff-cat { font-size: 14px; color: var(--neon-green); margin-top: 2px; font-family: 'Be Vietnam Pro', sans-serif; }
-    #vff-ko-row { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
-    /* 18px -> 34px: the headword now leads the panel, matching the card that opens it. */
-    #vff-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 34px; font-weight: 800; color: #fde047; line-height: 1.15; word-break: keep-all; }
-    /* The headword grew to 34px and squeezed this column until "Not started" broke
-       over two lines. The word block absorbs the slack; the status keeps its width. */
-    #vff-word-row > div:not(#vff-status) { flex: 1 1 auto; min-width: 0; }
-    /* nowrap only on the phase label — that is the short one that was breaking into
-       "Not / started". The modality line grows to three entries once a word is
-       studied in all three skills, and pinning that open overflowed the modal on a
-       phone, so it is allowed to wrap and to shrink. */
-    #vff-status { margin-left: auto; text-align: right; flex: 0 1 auto; min-width: 0; max-width: 46%; }
-    #vff-phase { white-space: nowrap; }
-    #vff-phase { font-size: 14px; color: var(--neon-gold); font-weight: 700; font-family: 'Be Vietnam Pro', sans-serif; }
-    /* Was 0.5 alpha, composited to 4.36:1 — under AA for 13px text. */
-    #vff-harvests { font-size: 13px; color: rgba(226, 232, 240, 0.78); margin-top: 3px; font-family: 'Be Vietnam Pro', sans-serif; }
-    .vff-section { padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.06); }
-    /* Was 0.4 alpha, composited to 3.28:1 — a 10px label that failed AA outright. */
-    .vff-section-title { font-family: 'Press Start 2P', monospace; font-size: 10px; color: rgba(226, 232, 240, 0.75); margin-bottom: 8px; text-transform: uppercase; }
-    .vff-fact-text { font-size: 15px; line-height: 1.7; color: rgba(226, 232, 240, 0.9); font-family: 'Be Vietnam Pro', sans-serif; }
-    .vff-hint-box { background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 8px; padding: 12px 14px; color: #fde047; font-weight: 600; }
-    #vff-example-row { display: flex; align-items: flex-start; gap: 10px; }
-    #vff-fact-example { flex: 1; min-width: 0; font-family: 'Noto Sans KR', sans-serif; word-break: keep-all; overflow-wrap: anywhere; }
-    #vff-example-speak { flex-shrink: 0; }
-    #vff-example-en { margin-top: 6px; color: rgba(226, 232, 240, 0.9); font-weight: 400; }
+    #vff-header button:hover:not(:disabled) { background: #fffaf0; transform: translateY(-1px); }
+    #vff-header button:focus-visible { outline: 3px solid #86efac; outline-offset: 2px; }
+    #vff-header button:disabled { opacity: .4; cursor: default; }
+    #vff-back-btn { justify-self: start; }
+    #vff-nav { justify-self: end; display: flex; align-items: center; gap: 7px; }
+    #vff-nav-position { min-width: 88px; color: #f6deaa; font-size: 12px; text-align: right; }
+    #vff-prev-btn, #vff-next-btn, #vff-header-close { width: 40px; padding: 7px 0 !important; }
+    #vff-header-close { margin-left: 4px; color: #991b1b !important; background: #fee2e2 !important; border-color: #fca5a5 !important; }
+
+    #vff-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+    #vff-scroll::-webkit-scrollbar { width: 10px; }
+    #vff-scroll::-webkit-scrollbar-track { background: rgba(139,90,43,.14); }
+    #vff-scroll::-webkit-scrollbar-thumb { background: #8b5a2b; border: 2px solid #efd39a; border-radius: 9px; }
+    #vff-word-row {
+      display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(220px, 300px);
+      align-items: center; gap: clamp(18px, 3vw, 42px);
+      padding: clamp(22px, 3vw, 42px) clamp(18px, 5vw, 76px);
+      background: rgba(255,250,240,.68); border-bottom: 2px dashed #c4893a;
+    }
+    #vff-emoji {
+      width: 150px; height: 150px; flex-shrink: 0; display: flex;
+      align-items: center; justify-content: center; font-size: 86px;
+      background: #fffdf7; border: 2px solid #c4893a; border-radius: 18px;
+      box-shadow: inset 0 1px #fff, 0 5px 0 #8b5a2b, 0 14px 24px rgba(91,52,18,.13);
+    }
+    #vff-emoji img.vocab-art-icon {
+      width: auto; max-width: 132px; height: 126px;
+      image-rendering: pixelated; object-fit: contain;
+    }
+    .vff-word-copy { min-width: 0; }
+    #vff-ko-row { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; }
+    #vff-ko {
+      font-family: 'Noto Sans KR', sans-serif; font-size: clamp(40px, 4.5vw, 68px);
+      font-weight: 900; color: #241407; line-height: 1.12; word-break: keep-all;
+    }
+    .vff-audio-btn {
+      width: 44px; height: 40px; padding: 0; font-size: 18px;
+      color: #14532d; background: #ecfdf5; border: 1.5px solid #4d9366;
+    }
+    #vff-romanization {
+      margin-top: 5px; color: #7a3e12; font-size: 16px; font-weight: 750;
+      letter-spacing: .3px; font-style: italic;
+    }
+    #vff-en {
+      margin-top: 10px; font-size: clamp(19px, 2vw, 28px); font-weight: 800;
+      line-height: 1.3; color: #5b3412; font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    #vff-cat {
+      display: inline-flex; margin-top: 10px; padding: 5px 10px; border-radius: 999px;
+      background: #dcfce7; border: 1px solid #4d9366; color: #14532d;
+      font-size: 12px; font-weight: 800;
+    }
+    #vff-status {
+      min-width: 0; padding: 17px 18px; text-align: left;
+      background: #fff8e8; border: 2px solid #d6a45e; border-radius: 12px;
+      box-shadow: inset 0 1px #fff, 0 3px 0 #b9792c;
+    }
+    .vff-status-label {
+      margin-bottom: 7px; color: #7a3e12; font-family: 'Press Start 2P', monospace;
+      font-size: 8px; line-height: 1.4; text-transform: uppercase;
+    }
+    #vff-phase { color: #166534; font-size: 17px; font-weight: 900; line-height: 1.35; }
+    #vff-harvests { color: #6b3d14; font-size: 12px; line-height: 1.55; margin-top: 4px; }
+
+    #vff-content-grid {
+      width: min(1440px, 100%); margin: 0 auto; padding: 24px clamp(16px, 3vw, 42px) 34px;
+      display: grid; grid-template-columns: minmax(0, 2fr) minmax(310px, .85fr);
+      gap: 20px; align-items: start;
+    }
+    #vff-main-content, #vff-side-content { display: grid; gap: 16px; min-width: 0; }
+    .vff-section {
+      padding: 20px; background: rgba(255,253,247,.86);
+      border: 1.5px solid #d6a45e; border-radius: 12px;
+      box-shadow: 0 3px 0 rgba(139,90,43,.55), 0 8px 18px rgba(91,52,18,.08);
+    }
+    .vff-section-title {
+      font-family: 'Press Start 2P', monospace; font-size: 9px; line-height: 1.5;
+      color: #6b3d14; margin-bottom: 13px; text-transform: uppercase;
+    }
+    .vff-fact-text {
+      font-size: 15px; line-height: 1.72; color: #3f2a16;
+      font-family: 'Be Vietnam Pro', sans-serif;
+    }
+    #vff-overview-grid {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px;
+    }
+    .vff-overview-item {
+      min-width: 0; padding: 12px; background: #fff8e8;
+      border: 1px solid #d9b072; border-radius: 8px;
+    }
+    .vff-overview-item span {
+      display: block; margin-bottom: 5px; color: #8b5a2b; font-size: 10px;
+      font-weight: 800; text-transform: uppercase; letter-spacing: .35px;
+    }
+    .vff-overview-item strong {
+      display: block; color: #3f230d; font-size: 14px; line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+    .vff-example-card {
+      background: linear-gradient(135deg, #eff6ff, #e0f2fe);
+      border: 1.5px solid #60a5fa; border-radius: 10px; padding: 16px;
+    }
+    #vff-example-row { display: flex; align-items: flex-start; gap: 12px; }
+    #vff-fact-example {
+      flex: 1; min-width: 0; font-family: 'Noto Sans KR', sans-serif;
+      font-size: 21px; font-weight: 800; color: #172554; line-height: 1.55;
+      word-break: keep-all; overflow-wrap: anywhere;
+    }
+    #vff-example-speak { flex-shrink: 0; color: #1e3a8a; border-color: #60a5fa; background: #dbeafe; }
+    #vff-example-en { margin-top: 8px; color: #1e3a5f; font-size: 14px; font-weight: 550; line-height: 1.55; }
     #vff-example-en:empty { display: none; }
-    #vff-close-btn {
-      display: block; width: calc(100% - 40px); margin: 16px 20px;
-      background: linear-gradient(180deg, var(--neon-green), #16a34a);
-      border: 1.5px solid #86efac; border-radius: 8px; padding: 12px;
-      font-family: 'Be Vietnam Pro', sans-serif; font-size: 16px; font-weight: 800;
-      color: #0f172a; cursor: pointer; transition: filter .15s;
+    .vff-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .vff-study-chip {
+      display: inline-flex; align-items: center; min-height: 34px; padding: 5px 10px;
+      border: 1px solid #d6a45e; border-radius: 8px; background: #fff3d6;
+      color: #4a2a0d; font-family: 'Noto Sans KR', 'Be Vietnam Pro', sans-serif;
+      font-size: 14px; font-weight: 800;
     }
-    #vff-close-btn:hover { filter: brightness(1.15); }
+    #vff-syllable-grid { display: flex; align-items: stretch; flex-wrap: wrap; gap: 10px; }
+    .vff-syllable-card {
+      min-width: 104px; padding: 12px 10px; text-align: center;
+      background: #fff8e8; border: 1.5px solid #b9792c; border-radius: 10px;
+    }
+    .vff-syllable-char {
+      display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 34px;
+      font-weight: 900; line-height: 1.1; color: #241407;
+    }
+    .vff-syllable-jamo {
+      display: block; margin-top: 7px; color: #6b3d14; font-size: 13px;
+      font-family: 'Noto Sans KR', sans-serif; font-weight: 750;
+    }
+    .vff-syllable-roman { display: block; margin-top: 4px; color: #166534; font-size: 11px; font-weight: 800; }
+    .vff-structure-note { margin-top: 11px; color: #6b3d14; font-size: 13px; line-height: 1.55; }
+    .vff-romanization-note {
+      margin-top: 8px; padding: 9px 11px; color: #713f12; background: #fef3c7;
+      border-left: 4px solid #d97706; border-radius: 6px; font-size: 12px; line-height: 1.55;
+    }
+    .vff-study-note { padding-left: 14px; border-left: 4px solid #16a34a; }
+
+    #vff-skill-grid { display: grid; gap: 9px; }
+    .vff-skill-card {
+      display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: center;
+      padding: 11px; background: #fff8e8; border: 1px solid #d9b072; border-radius: 9px;
+    }
+    .vff-skill-icon { width: 32px; height: 32px; display: grid; place-items: center; font-size: 20px; }
+    .vff-skill-name { color: #4a2a0d; font-size: 12px; font-weight: 900; }
+    .vff-skill-state { margin-top: 2px; color: #7a3e12; font-size: 11px; line-height: 1.45; }
+    #vff-category-hint { padding-left: 13px; border-left: 4px solid #d97706; }
+    #vff-related-grid { display: grid; gap: 8px; }
+    .vff-related-word {
+      width: 100%; min-width: 0; display: grid; grid-template-columns: 42px minmax(0, 1fr) auto;
+      align-items: center; gap: 9px; padding: 8px 9px; text-align: left;
+      background: #fff8e8; border: 1px solid #d9b072; border-radius: 8px;
+      color: #4a2a0d; cursor: pointer; transition: border-color .15s, transform .15s, background .15s;
+    }
+    .vff-related-word:hover { background: #ecfdf5; border-color: #4d9366; transform: translateX(2px); }
+    .vff-related-word:focus-visible { outline: 3px solid rgba(22,101,52,.35); outline-offset: 1px; }
+    .vff-related-art { width: 42px; height: 42px; display: grid; place-items: center; font-size: 24px; }
+    .vff-related-art img.vocab-art-icon { width: auto; max-width: 42px; height: 40px; }
+    .vff-related-copy { min-width: 0; }
+    .vff-related-ko { display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 17px; font-weight: 900; }
+    .vff-related-en { display: block; margin-top: 1px; color: #7a3e12; font-size: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .vff-related-arrow { color: #166534; font-weight: 900; }
+    .vff-related-empty { color: #7a3e12; font-size: 12px; line-height: 1.5; }
+
+    #vff-detail-footer {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 0 clamp(16px, 3vw, 42px) 42px; width: min(1440px, 100%); margin: 0 auto;
+      color: #6b3d14; font-size: 12px;
+    }
+    #vff-close-btn {
+      min-height: 46px; margin: 0; padding: 10px 18px;
+      background: linear-gradient(180deg, #4ade80, #22c55e);
+      border: 2px solid #166534; border-radius: 9px;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; font-weight: 900;
+      color: #052e16; cursor: pointer; box-shadow: 0 3px 0 #166534;
+      transition: filter .15s, transform .15s;
+    }
+    #vff-close-btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
 
     /* ── CAT NPC DIALOG ──────────────────────────────────────────────────── */
     #cat-dialog {
@@ -1990,6 +2182,19 @@
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(-5px); }
 
+    @media (max-width: 1100px) {
+      #vff-content-grid { grid-template-columns: minmax(0, 1.6fr) minmax(280px, .9fr); }
+      #vff-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 900px) {
+      #vocab-controls { grid-template-columns: 1fr; gap: 11px; }
+      #cat-filters { min-height: 40px; }
+      #vff-content-grid { grid-template-columns: 1fr; }
+      #vff-side-content { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #vff-side-content .vff-section:first-child { grid-row: span 2; }
+    }
+
     /* ── RESPONSIVE MEDIA QUERIES (MAX-WIDTH: 768px & 480px) ──────────────── */
     @media (max-width: 768px) {
       #hud {
@@ -2011,36 +2216,63 @@
 
       #controls-tip { bottom: 6px; font-size: 14px; padding: 4px 10px; }
 
-      #quiz-ui, #vocab-panel, #shop-panel, #fish-album-panel,
-      #trophy-panel, #memory-panel, #vff-inner,
+      #quiz-ui, #shop-panel, #fish-album-panel,
+      #trophy-panel, #memory-panel,
       #cat-dialog-inner, #levelup-card, #alldone-card {
         width: 96vw !important; max-height: 90vh !important;
         padding: 16px !important; margin: auto !important;
       }
 
       .ls-grid { grid-template-columns: 1fr; }
-      #vocab-header { padding: 10px 12px; gap: 8px; }
-      #vocab-subtitle { font-size: 14px; line-height: 1.35; letter-spacing: .5px; }
-      #vocab-controls { padding: 10px 12px; gap: 8px; }
-      /* A world can have twenty filters. Keep a few rows in their own scroll
-         area so the word cards remain visible on a phone. */
-      #cat-filters {
-        display: flex; flex-wrap: wrap; gap: 4px; width: 100%;
-        max-height: min(120px, 22vh); overflow-y: auto;
-        overscroll-behavior: contain; padding: 3px 4px 3px 3px;
-        scrollbar-width: thin; scrollbar-color: var(--wood-m) rgba(139,90,43,.15);
+      #vocab-header { min-height: 68px; padding: 10px 14px; gap: 10px; }
+      .vocab-book-mark { width: 44px; height: 44px; font-size: 27px; border-radius: 9px; }
+      #vocab-title { font-size: 12px; }
+      #vocab-subtitle { font-size: 13px; line-height: 1.35; }
+      #vocab-progress-summary { font-size: 11px; }
+      #vocab-close-btn { width: 42px; height: 42px; }
+      #vocab-controls { padding: 10px 14px; gap: 9px; }
+      .vocab-search-field { height: 40px; }
+      #cat-filters { min-height: 36px; padding-bottom: 3px; }
+      #cat-filters .cat-filter-btn { min-height: 34px; font-size: 12px; }
+      #vocab-grid-wrap { padding: 13px 14px 34px; }
+      #vocab-grid-heading { align-items: flex-start; margin-bottom: 10px; }
+      .vocab-grid-help { display: none; }
+      #vocab-grid { grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: 12px; }
+      .vocab-card { min-height: 254px; padding: 14px 10px 11px; border-radius: 10px; }
+      .vc-category { font-size: 9px; margin-bottom: 6px; }
+      .vc-emoji { min-height: 72px; margin-bottom: 7px; }
+      .vc-emoji img.vocab-art-icon { height: 72px; }
+      .vc-ko { font-size: 29px; }
+      .vc-ko.vc-ko-sm { font-size: 23px; }
+      .vc-ko.vc-ko-xs { font-size: 18px; }
+      .vc-en { font-size: 13px; }
+
+      #vff-header {
+        grid-template-columns: auto 1fr; min-height: 58px; gap: 9px;
+        padding: 8px 12px;
       }
-      #cat-filters .cat-filter-btn { min-height: 36px; flex-shrink: 0; }
-      #vocab-grid-wrap { padding: 12px; }
-      /* Two real columns rather than four cramped ones. minmax(110px) used to squeeze
-         four cards onto a phone and put every headword on two lines; 140px overshot the
-         other way and left one 288px column, which is a lot of scrolling for 60 words.
-         130 + 8 gap fits two in the 288px the grid actually gets at 375px wide. */
-      #vocab-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
-      .vocab-card { min-height: 172px; padding: 12px 8px 8px; }
-      .vc-ko { font-size: 25px; }
-      .vc-ko.vc-ko-sm { font-size: 20px; }
-      .vc-ko.vc-ko-xs { font-size: 16px; }
+      #vff-title { display: none; }
+      #vff-nav { justify-self: end; }
+      #vff-nav-position { min-width: 58px; font-size: 10px; }
+      #vff-header button { min-height: 36px; padding: 6px 9px; font-size: 11px; }
+      #vff-word-row {
+        grid-template-columns: 104px minmax(0, 1fr); gap: 16px;
+        padding: 20px 16px;
+      }
+      #vff-emoji { width: 104px; height: 104px; font-size: 58px; border-radius: 13px; }
+      #vff-emoji img.vocab-art-icon { max-width: 92px; height: 88px; }
+      #vff-ko { font-size: clamp(32px, 8vw, 46px); }
+      #vff-en { font-size: 18px; }
+      #vff-status { grid-column: 1 / -1; padding: 12px 14px; }
+      #vff-content-grid { padding: 16px 12px 26px; gap: 13px; }
+      #vff-main-content, #vff-side-content { gap: 12px; }
+      #vff-side-content { grid-template-columns: 1fr; }
+      #vff-side-content .vff-section:first-child { grid-row: auto; }
+      .vff-section { padding: 16px; }
+      #vff-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      #vff-fact-example { font-size: 18px; }
+      #vff-detail-footer { padding: 0 12px 28px; }
+      #vff-detail-footer > span { display: none; }
       #shop-level-grid { grid-template-columns: 1fr; }
       #fish-album-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
       .trophy-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
@@ -2051,10 +2283,6 @@
       #cat-portrait-canvas { width: 90px; height: 135px; }
       #cat-word-wrap { padding: 12px; }
       #cat-ko { font-size: 32px; }
-      /* Headword, gloss and study status cannot share one row at this width. */
-      #vff-word-row { flex-wrap: wrap; }
-      #vff-status { margin-left: 0; text-align: left; max-width: 100%; flex: 1 1 100%; }
-      #vff-ko { font-size: 28px; }
       #cat-dialog-emoji-word { justify-content: center; }
 
     }
@@ -2062,12 +2290,45 @@
     @media (max-width: 480px) {
       #hud { padding: 5px 6px !important; gap: 4px !important; }
       .hud-chip { font-size: 16px; }
-      #quiz-ui, #vocab-panel, #shop-panel, #fish-album-panel,
-      #trophy-panel, #memory-panel, #vff-inner,
+      #quiz-ui, #shop-panel, #fish-album-panel,
+      #trophy-panel, #memory-panel,
       #cat-dialog-inner, #levelup-card, #alldone-card {
         width: 98vw !important; max-height: 92vh !important;
         padding: 12px !important;
       }
+      #vocab-header { padding: 8px 10px; }
+      .vocab-book-mark { display: none; }
+      #vocab-title { font-size: 10px; }
+      #vocab-subtitle { font-size: 12px; }
+      #vocab-progress-summary { display: none; }
+      #vocab-controls { padding: 8px 10px; }
+      .vocab-control-label { display: none; }
+      #vocab-grid-wrap { padding: 10px 10px 28px; }
+      #vocab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .vocab-card { min-height: 238px; padding: 12px 7px 9px; }
+      .vocab-card .vc-speak { top: 7px; right: 7px; }
+      .vc-category { max-width: calc(100% - 34px); padding: 3px 6px; }
+      .vc-emoji { min-height: 62px; }
+      .vc-emoji img.vocab-art-icon { height: 62px; }
+      .vc-ko { font-size: 25px; }
+      .vc-ko.vc-ko-sm { font-size: 19px; }
+      .vc-ko.vc-ko-xs { font-size: 15px; }
+      .vc-en { font-size: 12px; -webkit-line-clamp: 3; }
+      .vc-open-hint { font-size: 10px; }
+      #vff-back-btn { max-width: 118px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      #vff-nav-position { display: none; }
+      #vff-word-row { grid-template-columns: 82px minmax(0, 1fr); padding: 16px 11px; gap: 12px; }
+      #vff-emoji { width: 82px; height: 82px; font-size: 46px; }
+      #vff-emoji img.vocab-art-icon { max-width: 74px; height: 70px; }
+      #vff-ko { font-size: 30px; }
+      .vff-audio-btn { width: 37px; height: 35px; font-size: 15px; }
+      #vff-romanization { font-size: 13px; }
+      #vff-en { font-size: 16px; margin-top: 6px; }
+      #vff-cat { font-size: 10px; }
+      #vff-overview-grid { grid-template-columns: 1fr; }
+      #vff-syllable-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .vff-syllable-card { min-width: 0; }
+      #vff-close-btn { width: 100%; }
       #memory-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
       .mem-card-front { font-size: 15px; padding: 4px; }
     }
