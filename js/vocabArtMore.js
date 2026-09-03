@@ -5497,6 +5497,230 @@ const TOPIK_VOCAB_ART_ROWS = [
     "folder": "items",
     "nameEn": "a solution",
     "family": "topik-vocabulary"
+  },
+  {
+    "ko": "인주시",
+    "slug": "emoji_1f3d9_2",
+    "folder": "items",
+    "nameEn": "Inju City — the invented city these papers are set in",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "거리",
+    "slug": "emoji_1f6e3_2",
+    "folder": "items",
+    "nameEn": "a street",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "식당",
+    "slug": "emoji_1f37d",
+    "folder": "items",
+    "nameEn": "a restaurant",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "카페",
+    "slug": "emoji_2615",
+    "folder": "items",
+    "nameEn": "a café",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "먹거리",
+    "slug": "emoji_1f362",
+    "folder": "items",
+    "nameEn": "things to eat",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "골목",
+    "slug": "emoji_1f3d8_2",
+    "folder": "items",
+    "nameEn": "a narrow street, an alley",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "모이다",
+    "slug": "emoji_1f465_3",
+    "folder": "items",
+    "nameEn": "to come together in one place",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "특화되다",
+    "slug": "emoji_2b50",
+    "folder": "items",
+    "nameEn": "to become known for one thing",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이곳",
+    "slug": "emoji_1f4cd",
+    "folder": "items",
+    "nameEn": "this place, here",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "통행",
+    "slug": "emoji_1f6a6",
+    "folder": "items",
+    "nameEn": "traffic passing through",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "막다",
+    "slug": "emoji_1f6a7",
+    "folder": "items",
+    "nameEn": "to block the way",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "한가운데",
+    "slug": "emoji_1f3af",
+    "folder": "items",
+    "nameEn": "the very middle",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "찍다",
+    "slug": "emoji_1f4f8",
+    "folder": "items",
+    "nameEn": "to take a photograph",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "횡단보도",
+    "slug": "emoji_1f6b8",
+    "folder": "items",
+    "nameEn": "a pedestrian crossing",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "삼각대",
+    "slug": "emoji_1f4d0_2",
+    "folder": "items",
+    "nameEn": "a camera tripod",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "촬영하다",
+    "slug": "emoji_1f3a5",
+    "folder": "items",
+    "nameEn": "to film, to shoot footage",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "일부",
+    "slug": "emoji_1f9e9_2",
+    "folder": "items",
+    "nameEn": "some of them, a portion",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "방문객",
+    "slug": "emoji_1f9f3_2",
+    "folder": "items",
+    "nameEn": "a visitor",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사고",
+    "slug": "emoji_1f4a5_3",
+    "folder": "items",
+    "nameEn": "an accident",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄹ 뻔하다",
+    "slug": "emoji_1f630",
+    "folder": "items",
+    "nameEn": "came close to happening and did not",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "위험하다",
+    "slug": "emoji_26a0_2",
+    "folder": "items",
+    "nameEn": "to be dangerous",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "운전자",
+    "slug": "emoji_1f697",
+    "folder": "items",
+    "nameEn": "a driver",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N 간에",
+    "slug": "emoji_2194_2",
+    "folder": "items",
+    "nameEn": "between N — the written form of 사이에",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사이",
+    "slug": "emoji_1f51b",
+    "folder": "items",
+    "nameEn": "the space between two things",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "다투다",
+    "slug": "emoji_1f624_2",
+    "folder": "items",
+    "nameEn": "to quarrel",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "잦아지다",
+    "slug": "emoji_1f4c8_2",
+    "folder": "items",
+    "nameEn": "to grow more frequent",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "금지하다",
+    "slug": "emoji_1f6ab_2",
+    "folder": "items",
+    "nameEn": "to ban",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "갈등",
+    "slug": "emoji_2694",
+    "folder": "items",
+    "nameEn": "conflict between people",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "목이 빠지다",
+    "slug": "emoji_1f992",
+    "folder": "items",
+    "nameEn": "to wait and wait for something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "한숨을 돌리다",
+    "slug": "emoji_1f60c",
+    "folder": "items",
+    "nameEn": "to get a breather once the worst has passed",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "눈살을 찌푸리다",
+    "slug": "emoji_1f616",
+    "folder": "items",
+    "nameEn": "to frown in disapproval at what you see",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "코가 납작해지다",
+    "slug": "emoji_1f443_2",
+    "folder": "items",
+    "nameEn": "to be humbled after boasting",
+    "family": "topik-vocabulary"
   }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {

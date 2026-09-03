@@ -2157,6 +2157,230 @@
       "file": "sprites/items/emoji_1f511.png",
       "reviewed": true,
       "standIn": true
+    },
+    {
+      "index": 648,
+      "ko": "인주시",
+      "file": "sprites/items/emoji_1f3d9_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 649,
+      "ko": "거리",
+      "file": "sprites/items/emoji_1f6e3_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 650,
+      "ko": "식당",
+      "file": "sprites/items/emoji_1f37d.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 651,
+      "ko": "카페",
+      "file": "sprites/items/emoji_2615.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 652,
+      "ko": "먹거리",
+      "file": "sprites/items/emoji_1f362.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 653,
+      "ko": "골목",
+      "file": "sprites/items/emoji_1f3d8_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 654,
+      "ko": "모이다",
+      "file": "sprites/items/emoji_1f465_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 655,
+      "ko": "특화되다",
+      "file": "sprites/items/emoji_2b50.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 656,
+      "ko": "이곳",
+      "file": "sprites/items/emoji_1f4cd.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 657,
+      "ko": "통행",
+      "file": "sprites/items/emoji_1f6a6.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 658,
+      "ko": "막다",
+      "file": "sprites/items/emoji_1f6a7.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 659,
+      "ko": "한가운데",
+      "file": "sprites/items/emoji_1f3af.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 660,
+      "ko": "찍다",
+      "file": "sprites/items/emoji_1f4f8.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 661,
+      "ko": "횡단보도",
+      "file": "sprites/items/emoji_1f6b8.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 662,
+      "ko": "삼각대",
+      "file": "sprites/items/emoji_1f4d0_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 663,
+      "ko": "촬영하다",
+      "file": "sprites/items/emoji_1f3a5.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 664,
+      "ko": "일부",
+      "file": "sprites/items/emoji_1f9e9_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 665,
+      "ko": "방문객",
+      "file": "sprites/items/emoji_1f9f3_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 666,
+      "ko": "사고",
+      "file": "sprites/items/emoji_1f4a5_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 667,
+      "ko": "-(으)ㄹ 뻔하다",
+      "file": "sprites/items/emoji_1f630.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 668,
+      "ko": "위험하다",
+      "file": "sprites/items/emoji_26a0_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 669,
+      "ko": "운전자",
+      "file": "sprites/items/emoji_1f697.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 670,
+      "ko": "N 간에",
+      "file": "sprites/items/emoji_2194_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 671,
+      "ko": "사이",
+      "file": "sprites/items/emoji_1f51b.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 672,
+      "ko": "다투다",
+      "file": "sprites/items/emoji_1f624_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 673,
+      "ko": "잦아지다",
+      "file": "sprites/items/emoji_1f4c8_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 674,
+      "ko": "금지하다",
+      "file": "sprites/items/emoji_1f6ab_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 675,
+      "ko": "갈등",
+      "file": "sprites/items/emoji_2694.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 676,
+      "ko": "목이 빠지다",
+      "file": "sprites/items/emoji_1f992.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 677,
+      "ko": "한숨을 돌리다",
+      "file": "sprites/items/emoji_1f60c.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 678,
+      "ko": "눈살을 찌푸리다",
+      "file": "sprites/items/emoji_1f616.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 679,
+      "ko": "코가 납작해지다",
+      "file": "sprites/items/emoji_1f443_2.png",
+      "reviewed": true,
+      "standIn": true
     }
   ],
   "entries": [

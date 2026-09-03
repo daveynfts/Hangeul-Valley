@@ -124,7 +124,8 @@
           "줄었다",
           "줄어",
           "줄어들다",
-          "줄어들게"
+          "줄어들게",
+          "줄어들었다"
         ]
       },
       {
@@ -5653,6 +5654,279 @@
         "hint": "🔑",
         "category": "사회",
         "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "인주시",
+        "en": "Inju City — the invented city these papers are set in",
+        "hint": "🏙️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "거리",
+        "en": "a street",
+        "hint": "🛣️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "식당",
+        "en": "a restaurant",
+        "hint": "🍽️",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "카페",
+        "en": "a café",
+        "hint": "☕",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "먹거리",
+        "en": "things to eat",
+        "hint": "🍢",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "골목",
+        "en": "a narrow street, an alley",
+        "hint": "🏘️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "모이다",
+        "en": "to come together in one place",
+        "hint": "👥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "모인"
+        ]
+      },
+      {
+        "ko": "특화되다",
+        "en": "to become known for one thing",
+        "hint": "⭐",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "특화되면서"
+        ]
+      },
+      {
+        "ko": "이곳",
+        "en": "this place, here",
+        "hint": "📍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "통행",
+        "en": "traffic passing through",
+        "hint": "🚦",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "막다",
+        "en": "to block the way",
+        "hint": "🚧",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "막고"
+        ]
+      },
+      {
+        "ko": "한가운데",
+        "en": "the very middle",
+        "hint": "🎯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "찍다",
+        "en": "to take a photograph",
+        "hint": "📸",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "찍거나",
+          "찍는"
+        ]
+      },
+      {
+        "ko": "횡단보도",
+        "en": "a pedestrian crossing",
+        "hint": "🚸",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "삼각대",
+        "en": "a camera tripod",
+        "hint": "📐",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "촬영하다",
+        "en": "to film, to shoot footage",
+        "hint": "🎥",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "촬영하는"
+        ]
+      },
+      {
+        "ko": "일부",
+        "en": "some of them, a portion",
+        "hint": "🧩",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "방문객",
+        "en": "a visitor",
+        "hint": "🧳",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "방문객들"
+        ]
+      },
+      {
+        "ko": "사고",
+        "en": "an accident",
+        "hint": "💥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-(으)ㄹ 뻔하다",
+        "en": "came close to happening and did not",
+        "hint": "😰",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "날 뻔한"
+        ]
+      },
+      {
+        "ko": "위험하다",
+        "en": "to be dangerous",
+        "hint": "⚠️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "위험한"
+        ]
+      },
+      {
+        "ko": "운전자",
+        "en": "a driver",
+        "hint": "🚗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "N 간에",
+        "en": "between N — the written form of 사이에",
+        "hint": "↔️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "간에"
+        ]
+      },
+      {
+        "ko": "사이",
+        "en": "the space between two things",
+        "hint": "🔛",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "다투다",
+        "en": "to quarrel",
+        "hint": "😤",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "다투는"
+        ]
+      },
+      {
+        "ko": "잦아지다",
+        "en": "to grow more frequent",
+        "hint": "📈",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "잦아지고"
+        ]
+      },
+      {
+        "ko": "금지하다",
+        "en": "to ban",
+        "hint": "🚫",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "금지했다"
+        ]
+      },
+      {
+        "ko": "갈등",
+        "en": "conflict between people",
+        "hint": "⚔️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "목이 빠지다",
+        "en": "to wait and wait for something",
+        "hint": "🦒",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "목이 빠지게"
+        ]
+      },
+      {
+        "ko": "한숨을 돌리다",
+        "en": "to get a breather once the worst has passed",
+        "hint": "😌",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "한숨을 돌리게"
+        ]
+      },
+      {
+        "ko": "눈살을 찌푸리다",
+        "en": "to frown in disapproval at what you see",
+        "hint": "😖",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "눈살을 찌푸리게"
+        ]
+      },
+      {
+        "ko": "코가 납작해지다",
+        "en": "to be humbled after boasting",
+        "hint": "👃",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "코가 납작해지게"
+        ]
       }
     ]
   },

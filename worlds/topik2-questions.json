@@ -1514,15 +1514,15 @@
     {
       "id": "topik2-double",
       "type": "build",
-      "no": "유형 · 문항 19-20",
+      "no": "유형 · 문항 19-22",
       "pattern": "한 지문, 두 문항",
       "section": "읽고 답하기",
       "sectionEn": "One passage, two questions",
       "icon": "📖",
       "instructionKo": "다음을 읽고 물음에 답하십시오.",
       "instructionEn": "Read the passage and answer both questions.",
-      "blurbEn": "One passage answering two questions at once: a connective missing from it, and what the whole thing is about.",
-      "noteEn": "From 문항 19 on, a passage carries two questions rather than one, and the two want opposite kinds of reading. The first is usually a connective cut out of the text, which is decided by the two sentences on either side of the gap and nothing else. The second asks for the 주제 — what the passage as a whole is for — which is decided by everything except the sentence you are looking at.\n\nDo the connective first, and do it locally. Read the clause before the gap and the clause after it, and name the relation between them: are they two of the same thing, or does the second turn against the first? Two benefits in a row want 또한 or 게다가. A reversal wants 반면 or 그러나. A supposition being conceded wants 비록, and 비록 is never alone — it needs -지만 or -더라도 later in its own sentence, so its absence rules 비록 out without reading the meaning at all.\n\nThen do the 주제, and do it globally. A 주제 option has to cover the passage rather than appear in it, and the three wrong ones fail in the same three ways every time.\n\n1. A true detail promoted to the theme. 도로 침수 really is in the passage — as one of the problems being solved, not as the point. If an option restates one sentence, it is a detail.\n\n2. A word from the passage in a claim the passage never makes. 오염 sounds like it belongs to a paragraph about groundwater and rain, and it is simply not there.\n\n3. Something plausible that the passage has no sentence for. 도시마다의 환경적 특성 is a reasonable thing to say about paving; nothing in these six sentences says it.\n\nA useful check: the answer to a 주제 question almost always names the thing the passage introduced with 그런데 or 최근 — the new development the rest of the paragraph exists to explain.",
+      "blurbEn": "One passage answering two questions: something cut out of the text, and a second question about the passage as a whole.",
+      "noteEn": "From 문항 19 on, a passage carries two questions rather than one, and the two want opposite kinds of reading. The first is a gap in the text, decided by the sentences on either side of it and nothing else. The second is about the passage as a whole — its 주제, or which statement agrees with it — and is decided by everything except the sentence you are looking at.\n\nDo the gap first, and do it locally.\n\nWhere the gap takes a connective, read the clause before it and the clause after it and name the relation. Two benefits in a row want 또한 or 게다가. A reversal wants 반면 or 그러나. 비록 is never alone — it needs -지만 or -더라도 later in its own sentence, so its absence rules 비록 out before you have weighed any meaning.\n\nWhere the gap takes an idiom, all four options will be body parts and only one of them will be about the right feeling. Sort them by whose feeling they describe: 눈살을 찌푸리다 is other people disapproving of what they see, 코가 납작해지다 is the subject being humbled, 한숨을 돌리다 is relief after strain, 목이 빠지다 is waiting. Then ask whose feeling the sentence needs. 행동이 … 한다 with a causative -게 하다 needs an effect on somebody else, which halves the list on grammar alone.\n\nThen do the second question, and do it globally. Its wrong options fail in a small number of ways.\n\n1. A true detail promoted to the theme, when the question asks for a 주제. 도로 침수 is in the passage, as one of the problems being solved rather than the point of it.\n\n2. The direction reversed, when the question asks what agrees with the passage. Visitors increasing becomes visitors decreasing; the visitors blocking traffic becomes the city banning it. Both use the passage's own words, which is what makes them read well.\n\n3. A word from the passage in a claim it never makes, or something plausible with no sentence behind it at all. 오염 beside groundwater, 식당이 없어 beside a street of restaurants.\n\nFor a 주제 question, the answer almost always names whatever the passage introduced with 그런데 or 최근. For an agreement question, take each option to the one sentence it is about and compare only those two.",
       "bank": [],
       "items": [
         {
@@ -1594,6 +1594,67 @@
           "en": "City roads are mostly covered in asphalt, which water cannot soak through. So when it rains, the rainwater does not drain well into the ground: groundwater runs short, and roads flood often. Recently, though, a road surfacing material that water passes through easily has been developed. It is full of fine holes, so rainwater goes straight through and the groundwater supply is replenished. It also means less water rushing into the drains, so the risk of roads flooding falls as well.",
           "why": "The gap takes 또한. The sentence before it says the new surface replenishes groundwater; the sentence after says less water floods the drains, so roads flood less. Both are benefits of the same material, so the relation is addition, and 또한 is the word for a second item of the same kind.\n\n반면 is the trap, and the only one worth weighing. It marks a contrast, and there is a surface reason to expect one — the paragraph did open on a problem. But by this point the problem is two sentences behind and both clauses around the gap are advantages. What decides it is the pair either side of the gap, never the shape of the paragraph as a whole.\n\n비록 can be ruled out without reading for meaning at all: it needs -지만 or -더라도 later in its own sentence, and there is none. 과연 is a speaker's reaction — sure enough, I wonder — and belongs to speech rather than to an explanatory paragraph.\n\nThe 주제 is ④. The passage is built as a problem and its answer: asphalt keeps water out, so groundwater runs short and roads flood; a new permeable material fixes both. ④ names the new material and both problems, which is the whole shape of the paragraph in one sentence.\n\n③ is the detail promoted to a theme. 도로 침수 is genuinely in the passage, but as one of the two things being solved, and an option that restates a single sentence is a detail rather than a point. ① uses 오염, which is nowhere in the text — a word that sounds at home beside groundwater and rain, and is simply absent. ② says something reasonable about paving varying by city; no sentence here says it.\n\nThe quick route to a 주제: find what the passage introduced with 그런데 or 최근. Here it is 새 포장재, and the three sentences after it exist to explain what it does. That is the theme, and ④ is the only option built round it.",
           "grammar": "또한 adds a second item of the same kind and belongs to writing; 게다가 is its spoken cousin and carries a hint of piling on. 반면 marks a contrast and usually takes -(으)ㄴ 반면 on a clause. 비록 must be answered later in the sentence by -지만 or -더라도, so a sentence without one cannot be taking 비록. 과연 is the speaker reacting — 과연 그렇구나 — and does not join two facts.\n\n스며들다 is to soak through, and it takes the thing soaked in with 에: 물이 땅에 스며들다. 통과하다 is to pass through and takes 을/를. The passage uses both of the same water.\n\n-아/어지다 turns an adjective into a change of state: 부족하다 is to be short, 부족해지다 is to become short. The same shape gives 많아지다, 좋아지다, and it is why the sentence reads 부족해지고 rather than 부족하고.\n\n뒤덮여 있다 is -아/어 있다 on a passive: covered over, and still in that state. Keep it apart from 뒤덮고 있다, which would mean something is doing the covering right now.\n\n줄다 and 줄어들다 are both to decrease, with 줄어들다 the more gradual of the two, and the passage uses one of each in the same sentence. -게 되다 on the end — 줄어들게 된다 — says the decrease comes about as a result rather than because anyone arranged it."
+        },
+        {
+          "n": 21,
+          "art": "",
+          "phraseKo": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다.",
+          "lines": [
+            {
+              "ko": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다."
+            },
+            {
+              "ko": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 {} 한다."
+            },
+            {
+              "ko": "차량이 오는 것을 보지 못하고 촬영을 하다 사고가 날 뻔한 위험한 상황이 자주 발생하면서 운전자와 방문객 간에 다투는 일도 잦아지고 있다."
+            },
+            {
+              "who": "일치",
+              "ko": "{}"
+            }
+          ],
+          "answer": "frown",
+          "choices": [
+            {
+              "id": "waiting",
+              "ko": "목이 빠지게"
+            },
+            {
+              "id": "relief",
+              "ko": "한숨을 돌리게"
+            },
+            {
+              "id": "frown",
+              "ko": "눈살을 찌푸리게"
+            },
+            {
+              "id": "humbled",
+              "ko": "코가 납작해지게"
+            }
+          ],
+          "answer2": "conflict",
+          "choices2": [
+            {
+              "id": "fewer",
+              "ko": "이 거리에서 사진을 찍는 방문객이 줄어들었다."
+            },
+            {
+              "id": "banned",
+              "ko": "인주시가 최근 이 거리의 차량 통행을 금지했다."
+            },
+            {
+              "id": "conflict",
+              "ko": "이 거리의 방문객과 운전자 사이에 갈등이 늘고 있다."
+            },
+            {
+              "id": "norestaurant",
+              "ko": "이 거리에는 식당이 없어 방문객들이 불편을 겪고 있다."
+            }
+          ],
+          "en": "A street in Inju has become known as a food alley, packed with restaurants and cafés, and the number of people going there has risen lately. But some visitors behave in ways that make others frown: blocking traffic to take photographs in the middle of the road, setting up tripods on the pedestrian crossing to film. Near-accidents caused by filming without watching for cars have become common, and quarrels between drivers and visitors are growing more frequent too.",
+          "why": "The gap takes 눈살을 찌푸리게. The behaviour described just before it — blocking traffic, photographing in the middle of the road, tripods on the crossing — is behaviour other people disapprove of, and 눈살을 찌푸리다 is exactly that disapproval: the frown on the face of whoever is watching.\n\nThe grammar halves the list before any of the idioms are weighed. 행동이 ( ) 한다 is a causative: the behaviour makes somebody do something. So the idiom in the gap has to describe an effect on other people, and only 눈살을 찌푸리다 and 코가 납작해지다 can be caused in someone at all. 목이 빠지다 and 한숨을 돌리다 are states you fall into, not states an action puts other people in.\n\n코가 납작해지다 is then wrong on meaning: it is being humbled, taken down a peg, and it happens to the person who was overconfident. Bad behaviour in a street does not humble the onlookers. 한숨을 돌리다 is relief after a strain and 목이 빠지다 is waiting a long time for something — neither has anything to do with what the paragraph describes.\n\nThe second question is ③. 운전자와 방문객 간에 다투는 일도 잦아지고 있다 is the last clause of the passage, and 갈등이 늘고 있다 is that same fact in plainer words: quarrels growing more frequent is conflict increasing.\n\n① and ② are the passage's own words pointed the wrong way. Visitors are 늘고 있다, not 줄어들었다. And it is the visitors who 차량 통행을 막고 — the blocking is something they do, not something 인주시 decided; nothing in the passage says the city banned anything. An option built from words already on the page is always worth checking for direction and for who is doing what.\n\n④ contradicts the first sentence outright: the street is a 먹거리 골목 where 식당과 카페가 모인, so 식당이 없어 is the opposite of what it says.",
+          "grammar": "Four body-part idioms, and they are worth learning as a set because this slot keeps asking for them. 눈살을 찌푸리다 is to frown in disapproval — the 눈살 is the skin between the brows. 코가 납작해지다 is to have your nose flattened, meaning to be humbled after boasting. 한숨을 돌리다 is to let a sigh out, so to get a breather once the worst has passed. 목이 빠지다 is to have your neck fall off from craning, so to wait and wait — 목이 빠지게 기다리다.\n\n-게 하다 is the causative: 눈살을 찌푸리게 하다 is to make someone frown. It is what forces the gap to hold an idiom about other people, and it is the same -게 하다 the 빈칸 questions of 문항 1-2 set against -게 되다.\n\n-(으)ㄹ 뻔하다 is came close to happening and did not. 사고가 날 뻔한 상황 is a situation where there nearly was an accident, and the -았/었 form 뻔했다 is how it is usually reported.\n\nN 간에 is between N, and it belongs to writing where speech would say 사이에: 운전자와 방문객 간에. Both appear in this question, one in the passage and one in the options, which is how the paper checks you know they are the same thing.\n\n-아/어지다 again, twice: 잦아지다 is 잦다 becoming, so growing more frequent, and 납작해지다 is 납작하다 becoming. The pattern turns a description into a change, which is why both belong to a paragraph about something getting worse."
         }
       ]
     }
