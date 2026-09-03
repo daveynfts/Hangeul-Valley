@@ -383,889 +383,889 @@
     {
       "index": 394,
       "ko": "어린이",
-      "file": "sprites/items/junior.png",
+      "file": "sprites/items/emoji_1f9d2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 395,
       "ko": "아이",
-      "file": "sprites/items/wrapped_baby.png",
+      "file": "sprites/items/emoji_1f476.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 396,
       "ko": "대학생",
-      "file": "sprites/items/school_backpack.png",
+      "file": "sprites/items/emoji_1f393.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 397,
       "ko": "봉사자",
-      "file": "sprites/items/kindness.png",
+      "file": "sprites/items/emoji_1f64b.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 398,
       "ko": "신청",
-      "file": "sprites/items/homework_notebook.png",
+      "file": "sprites/items/emoji_270d.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 399,
       "ko": "모집 기간",
-      "file": "sprites/items/wall_calendar.png",
+      "file": "sprites/items/emoji_1f5d3.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 400,
       "ko": "인주어린이도서관",
-      "file": "sprites/items/brick_workshop.png",
+      "file": "sprites/items/emoji_1f3db.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 401,
       "ko": "가능",
-      "file": "sprites/items/keep_rules.png",
+      "file": "sprites/items/emoji_2705.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 402,
       "ko": "외국인",
-      "file": "sprites/items/france_flag.png",
+      "file": "sprites/items/emoji_1f30f.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 403,
       "ko": "한국어",
-      "file": "sprites/items/grammar_scroll.png",
+      "file": "sprites/items/emoji_1f5e3.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 404,
       "ko": "선물하다",
-      "file": "sprites/items/give_left_hand.png",
+      "file": "sprites/items/emoji_1f381.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 405,
       "ko": "두 달",
-      "file": "sprites/items/crescent_moon.png",
+      "file": "sprites/items/emoji_1f4c6.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 406,
       "ko": "-아/어 주다",
-      "file": "sprites/items/receive_one_hand.png",
+      "file": "sprites/items/emoji_1f932.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 407,
       "ko": "여행사",
-      "file": "sprites/items/estate_broker.png",
+      "file": "sprites/items/emoji_1f9f3.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 408,
       "ko": "여행 상품",
-      "file": "sprites/items/paris_eiffel_tower.png",
+      "file": "sprites/items/emoji_1f5fa.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 409,
       "ko": "이용 후기",
-      "file": "sprites/items/recommend.png",
+      "file": "sprites/items/emoji_1f4dd.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 410,
       "ko": "선택하다",
-      "file": "sprites/items/crossroads.png",
+      "file": "sprites/items/emoji_1f500.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 411,
       "ko": "중요하다",
-      "file": "sprites/items/teal_gem.png",
+      "file": "sprites/items/emoji_1f48e.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 412,
       "ko": "회사",
-      "file": "sprites/items/briefcase.png",
+      "file": "sprites/items/emoji_1f3e2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 413,
       "ko": "성인",
-      "file": "sprites/items/senior.png",
+      "file": "sprites/items/emoji_1f9d1.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 414,
       "ko": "남녀",
-      "file": "sprites/items/same_age.png",
+      "file": "sprites/items/emoji_1f46b.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 415,
       "ko": "다양성",
-      "file": "sprites/items/kinds_types.png",
+      "file": "sprites/items/emoji_1f3a8.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 416,
       "ko": "적다",
-      "file": "sprites/items/be_empty.png",
+      "file": "sprites/items/emoji_1f4c9.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 417,
       "ko": "가장",
-      "file": "sprites/items/gold_starburst.png",
+      "file": "sprites/items/emoji_1f31f.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 418,
       "ko": "기타",
-      "file": "sprites/items/different.png",
+      "file": "sprites/items/emoji_1f5c2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 419,
       "ko": "설문 대상",
-      "file": "sprites/items/silver_mic.png",
+      "file": "sprites/items/emoji_1f3a4.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 420,
       "ko": "두 배",
-      "file": "sprites/items/pocket_calculator.png",
+      "file": "sprites/items/emoji_1f9ee.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 421,
       "ko": "우표",
-      "file": "sprites/items/prescription_slip.png",
+      "file": "sprites/items/emoji_1f4ee.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 422,
       "ko": "박물관",
-      "file": "sprites/items/traditional_hanok.png",
+      "file": "sprites/items/emoji_1f3db_2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 423,
       "ko": "역사",
-      "file": "sprites/items/oak_rings.png",
+      "file": "sprites/items/emoji_1f4dc.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 424,
       "ko": "역사실",
-      "file": "sprites/items/cinema_house.png",
+      "file": "sprites/items/emoji_1f5bc.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 425,
       "ko": "체험실",
-      "file": "sprites/items/sports_facility.png",
+      "file": "sprites/items/emoji_270b.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 426,
       "ko": "사진",
-      "file": "sprites/items/box_camera.png",
+      "file": "sprites/items/emoji_1f4f7.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 427,
       "ko": "편지",
-      "file": "sprites/items/announcement.png",
+      "file": "sprites/items/emoji_2709.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 428,
       "ko": "우체통",
-      "file": "sprites/items/moving_boxes.png",
+      "file": "sprites/items/emoji_1f4ea.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 429,
       "ko": "인기를 끌다",
-      "file": "sprites/items/famous.png",
+      "file": "sprites/items/emoji_1f525.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 430,
       "ko": "지난달",
-      "file": "sprites/items/already.png",
+      "file": "sprites/items/emoji_1f4c5.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 431,
       "ko": "일 년 뒤",
-      "file": "sprites/items/hourglass_ornament.png",
+      "file": "sprites/items/emoji_23f3.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 432,
       "ko": "일 년 전",
-      "file": "sprites/items/after_a_long_time.png",
+      "file": "sprites/items/emoji_1f570.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 433,
       "ko": "문을 열다",
-      "file": "sprites/items/to_begin.png",
+      "file": "sprites/items/emoji_1f6aa.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 434,
       "ko": "운영",
-      "file": "sprites/items/system_policy.png",
+      "file": "sprites/items/emoji_2699.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 435,
       "ko": "한눈에",
-      "file": "sprites/items/let_me_see.png",
+      "file": "sprites/items/emoji_1f441.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 436,
       "ko": "향기",
-      "file": "sprites/items/violet_petals.png",
+      "file": "sprites/items/emoji_1f338.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 437,
       "ko": "나무",
-      "file": "sprites/items/wooden_chair.png",
+      "file": "sprites/items/emoji_1f333.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 438,
       "ko": "받다",
-      "file": "sprites/items/leather_wallet.png",
+      "file": "sprites/items/emoji_1f91d.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 439,
       "ko": "맡다",
-      "file": "sprites/items/flavor.png",
+      "file": "sprites/items/emoji_1f443.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 440,
       "ko": "만지다",
-      "file": "sprites/items/touch_head.png",
+      "file": "sprites/items/emoji_1f590.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 441,
       "ko": "들어가다",
-      "file": "sprites/items/subway_access.png",
+      "file": "sprites/items/emoji_27a1.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 442,
       "ko": "만들다",
-      "file": "sprites/items/kitchen_stove.png",
+      "file": "sprites/items/emoji_1f528.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 443,
       "ko": "쓰다",
-      "file": "sprites/items/brown_laptop.png",
+      "file": "sprites/items/emoji_270d_2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 444,
       "ko": "보내다",
-      "file": "sprites/items/delivery_bag.png",
+      "file": "sprites/items/emoji_1f4e4.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 445,
       "ko": "느리다",
-      "file": "sprites/items/be_late.png",
+      "file": "sprites/items/emoji_1f422.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 446,
       "ko": "휴일",
-      "file": "sprites/items/weekend.png",
+      "file": "sprites/items/emoji_1f3d6.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 447,
       "ko": "경찰",
-      "file": "sprites/items/justice_scales.png",
+      "file": "sprites/items/emoji_1f46e.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 448,
       "ko": "경위",
-      "file": "sprites/items/chevron_badge.png",
+      "file": "sprites/items/emoji_1f396.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 449,
       "ko": "등산객",
-      "file": "sprites/items/go_outside.png",
+      "file": "sprites/items/emoji_1f97e.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 450,
       "ko": "정상",
-      "file": "sprites/items/gold_spiral.png",
+      "file": "sprites/items/emoji_26f0.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 451,
       "ko": "중턱",
-      "file": "sprites/items/balcony_rail.png",
+      "file": "sprites/items/emoji_1f3de.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 452,
       "ko": "대피소",
-      "file": "sprites/items/gosiwon_room.png",
+      "file": "sprites/items/emoji_1f6d6.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 453,
       "ko": "구조하다",
-      "file": "sprites/items/yield_seat.png",
+      "file": "sprites/items/emoji_1f198.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 454,
       "ko": "구조대",
-      "file": "sprites/items/public_etiquette.png",
+      "file": "sprites/items/emoji_1f6a8.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 455,
       "ko": "여성",
-      "file": "sprites/items/bow_greeting.png",
+      "file": "sprites/items/emoji_1f64b_2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 456,
       "ko": "쓰러지다",
-      "file": "sprites/items/bandaged_boot.png",
+      "file": "sprites/items/emoji_1f4ab.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 457,
       "ko": "발견하다",
-      "file": "sprites/items/eyeglasses.png",
+      "file": "sprites/items/emoji_1f50d.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 458,
       "ko": "체온",
-      "file": "sprites/items/thermometer.png",
+      "file": "sprites/items/emoji_1f321.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 459,
       "ko": "겉옷",
-      "file": "sprites/items/taekwondo_dobok.png",
+      "file": "sprites/items/emoji_1f9e5.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 460,
       "ko": "벗다",
-      "file": "sprites/items/drop_honorifics.png",
+      "file": "sprites/items/emoji_1f455.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 461,
       "ko": "덮다",
-      "file": "sprites/items/heat_patch.png",
+      "file": "sprites/items/emoji_1f6cf.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 462,
       "ko": "신고하다",
-      "file": "sprites/items/make_phone_call.png",
+      "file": "sprites/items/emoji_1f4de.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 463,
       "ko": "이후",
-      "file": "sprites/items/knot_tile.png",
+      "file": "sprites/items/emoji_27a1_2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 464,
       "ko": "차량",
-      "file": "sprites/items/subway_station.png",
+      "file": "sprites/items/emoji_1f690.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 465,
       "ko": "업다",
-      "file": "sprites/items/senior_preference.png",
+      "file": "sprites/items/emoji_1f392.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 466,
       "ko": "뛰다",
-      "file": "sprites/items/running_shoe.png",
+      "file": "sprites/items/emoji_1f3c3.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 467,
       "ko": "내려가다",
-      "file": "sprites/items/cream_waves.png",
+      "file": "sprites/items/emoji_2b07.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 468,
       "ko": "병원",
-      "file": "sprites/items/clinic_building.png",
+      "file": "sprites/items/emoji_1f3e5.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 469,
       "ko": "이송되다",
-      "file": "sprites/items/stethoscope.png",
+      "file": "sprites/items/emoji_1f691.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 470,
       "ko": "치료",
-      "file": "sprites/items/medicine_bottle.png",
+      "file": "sprites/items/emoji_1f48a.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 471,
       "ko": "되찾다",
-      "file": "sprites/items/vitamin_bottle.png",
+      "file": "sprites/items/emoji_1f49a.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 472,
       "ko": "이동하다",
-      "file": "sprites/items/swap_seats.png",
+      "file": "sprites/items/emoji_1f501.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 473,
       "ko": "복숭아",
-      "file": "sprites/items/garden_strawberry.png",
+      "file": "sprites/items/emoji_1f351.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 474,
       "ko": "껍질",
-      "file": "sprites/items/farm_apple.png",
+      "file": "sprites/items/emoji_1f34a.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 475,
       "ko": "껍질째",
-      "file": "sprites/items/eat_food.png",
+      "file": "sprites/items/emoji_1f34f.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 476,
       "ko": "딱딱하다",
-      "file": "sprites/items/cracked_tooth.png",
+      "file": "sprites/items/emoji_1f9b7.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 477,
       "ko": "식감",
-      "file": "sprites/items/suit_ones_taste.png",
+      "file": "sprites/items/emoji_1f60b.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 478,
       "ko": "얇다",
-      "file": "sprites/items/tissue_box.png",
+      "file": "sprites/items/emoji_1f4c4.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 479,
       "ko": "부드럽다",
-      "file": "sprites/items/soap_bar.png",
+      "file": "sprites/items/emoji_1f9fc.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 480,
       "ko": "소개되다",
-      "file": "sprites/items/first_meeting.png",
+      "file": "sprites/items/emoji_1f91d_2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 481,
       "ko": "N에 비해",
-      "file": "sprites/items/similar.png",
+      "file": "sprites/items/emoji_2696.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 482,
       "ko": "이르다",
-      "file": "sprites/items/in_advance.png",
+      "file": "sprites/items/emoji_23f0.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 483,
       "ko": "시기",
-      "file": "sprites/items/always.png",
+      "file": "sprites/items/emoji_1f5d3_2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 484,
       "ko": "장점",
-      "file": "sprites/items/admission_discount.png",
+      "file": "sprites/items/emoji_1f381_2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 485,
       "ko": "결합하다",
-      "file": "sprites/items/wedding_rings.png",
+      "file": "sprites/items/emoji_1f48d.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 486,
       "ko": "감기에 걸리다",
-      "file": "sprites/items/medicine_capsule.png",
+      "file": "sprites/items/emoji_1f927.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 487,
       "ko": "밤새",
-      "file": "sprites/items/candlelit_table.png",
+      "file": "sprites/items/emoji_1f56f.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 488,
       "ko": "소리",
-      "file": "sprites/items/human_ear.png",
+      "file": "sprites/items/emoji_1f442.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 489,
       "ko": "울다",
-      "file": "sprites/items/eye_drops.png",
+      "file": "sprites/items/emoji_1f622.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 490,
       "ko": "울음소리",
-      "file": "sprites/items/make_noise.png",
+      "file": "sprites/items/emoji_1f4e3.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 491,
       "ko": "아주머니",
-      "file": "sprites/items/sit_cross_legged.png",
+      "file": "sprites/items/emoji_1f9cd.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 492,
       "ko": "아프다",
-      "file": "sprites/items/ice_pack.png",
+      "file": "sprites/items/emoji_1f9ca.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 493,
       "ko": "오히려",
-      "file": "sprites/items/surprise_burst.png",
+      "file": "sprites/items/emoji_1f4a5.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 494,
       "ko": "걱정하다",
-      "file": "sprites/items/feel_flustered.png",
+      "file": "sprites/items/emoji_1f61f.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 495,
       "ko": "아침",
-      "file": "sprites/items/light_bulb.png",
+      "file": "sprites/items/emoji_1f4a1.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 496,
       "ko": "나서다",
-      "file": "sprites/items/around_here.png",
+      "file": "sprites/items/emoji_1f6b6.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 497,
       "ko": "옆집",
-      "file": "sprites/items/hanok_house.png",
+      "file": "sprites/items/emoji_1f3e0.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 498,
       "ko": "만나다",
-      "file": "sprites/items/call_by_name.png",
+      "file": "sprites/items/emoji_1f64c.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 499,
       "ko": "달래다",
-      "file": "sprites/items/paper_lantern.png",
+      "file": "sprites/items/emoji_1f3ee.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 500,
       "ko": "이웃",
-      "file": "sprites/items/neighboring_country.png",
+      "file": "sprites/items/emoji_1f3d8.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 501,
       "ko": "온라인",
-      "file": "sprites/items/desk_globe.png",
+      "file": "sprites/items/emoji_1f310.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 502,
       "ko": "가구",
-      "file": "sprites/items/green_sofa.png",
+      "file": "sprites/items/emoji_1f6cb.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 503,
       "ko": "구매",
-      "file": "sprites/items/place_order.png",
+      "file": "sprites/items/emoji_1f9fe.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 504,
       "ko": "반품",
-      "file": "sprites/items/empty_plate.png",
+      "file": "sprites/items/emoji_1f4e6.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 505,
       "ko": "사례",
-      "file": "sprites/items/line_graph.png",
+      "file": "sprites/items/emoji_1f4ca.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 506,
       "ko": "그런데",
-      "file": "sprites/items/complicated.png",
+      "file": "sprites/items/emoji_1f300.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 507,
       "ko": "비싸다",
-      "file": "sprites/items/wasted_money.png",
+      "file": "sprites/items/emoji_1f4b8.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 508,
       "ko": "비용",
-      "file": "sprites/items/coral_ring.png",
+      "file": "sprites/items/emoji_1f4b0.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 509,
       "ko": "피해를 보다",
-      "file": "sprites/items/get_scolded.png",
+      "file": "sprites/items/emoji_1f624.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 510,
       "ko": "소비자",
-      "file": "sprites/items/order_food.png",
+      "file": "sprites/items/emoji_1f6d2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 511,
       "ko": "따라서",
-      "file": "sprites/items/contract_seal.png",
+      "file": "sprites/items/emoji_1f4dc_2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 512,
       "ko": "조건",
-      "file": "sprites/items/dorm_rules.png",
+      "file": "sprites/items/emoji_1f4cb.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 513,
       "ko": "확인하다",
-      "file": "sprites/items/reservation.png",
+      "file": "sprites/items/emoji_2705_2.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 514,
       "ko": "업체",
-      "file": "sprites/items/pizza_nara_shop.png",
+      "file": "sprites/items/emoji_1f3ea.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 515,
       "ko": "까다롭다",
-      "file": "sprites/items/bitter_taste.png",
+      "file": "sprites/items/emoji_1f62c.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 516,
       "ko": "내세우다",
-      "file": "sprites/items/no_smoking.png",
+      "file": "sprites/items/emoji_1f6ad.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 517,
       "ko": "거절하다",
-      "file": "sprites/items/no_cell_phones.png",
+      "file": "sprites/items/emoji_1f645.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 518,
       "ko": "경우",
-      "file": "sprites/items/first_time.png",
+      "file": "sprites/items/emoji_1f516.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 519,
       "ko": "발생하다",
-      "file": "sprites/items/make_mistake.png",
+      "file": "sprites/items/emoji_26a1.png",
       "reviewed": true,
       "standIn": true
     },
     {
       "index": 520,
       "ko": "-(으)면서",
-      "file": "sprites/items/turn_head_drink.png",
+      "file": "sprites/items/emoji_1f504.png",
       "reviewed": true,
       "standIn": true
     }
