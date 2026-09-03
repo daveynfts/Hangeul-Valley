@@ -457,6 +457,90 @@
       "ko": "-아/어 주다",
       "file": "sprites/items/receive_one_hand.png",
       "reviewed": true
+    },
+    {
+      "index": 407,
+      "ko": "여행사",
+      "file": "sprites/items/estate_broker.png",
+      "reviewed": true
+    },
+    {
+      "index": 408,
+      "ko": "여행 상품",
+      "file": "sprites/items/paris_eiffel_tower.png",
+      "reviewed": true
+    },
+    {
+      "index": 409,
+      "ko": "이용 후기",
+      "file": "sprites/items/recommend.png",
+      "reviewed": true
+    },
+    {
+      "index": 410,
+      "ko": "선택하다",
+      "file": "sprites/items/crossroads.png",
+      "reviewed": true
+    },
+    {
+      "index": 411,
+      "ko": "중요하다",
+      "file": "sprites/items/teal_gem.png",
+      "reviewed": true
+    },
+    {
+      "index": 412,
+      "ko": "회사",
+      "file": "sprites/items/briefcase.png",
+      "reviewed": true
+    },
+    {
+      "index": 413,
+      "ko": "성인",
+      "file": "sprites/items/senior.png",
+      "reviewed": true
+    },
+    {
+      "index": 414,
+      "ko": "남녀",
+      "file": "sprites/items/same_age.png",
+      "reviewed": true
+    },
+    {
+      "index": 415,
+      "ko": "다양성",
+      "file": "sprites/items/kinds_types.png",
+      "reviewed": true
+    },
+    {
+      "index": 416,
+      "ko": "적다",
+      "file": "sprites/items/be_empty.png",
+      "reviewed": true
+    },
+    {
+      "index": 417,
+      "ko": "가장",
+      "file": "sprites/items/gold_starburst.png",
+      "reviewed": true
+    },
+    {
+      "index": 418,
+      "ko": "기타",
+      "file": "sprites/items/different.png",
+      "reviewed": true
+    },
+    {
+      "index": 419,
+      "ko": "설문 대상",
+      "file": "sprites/items/silver_mic.png",
+      "reviewed": true
+    },
+    {
+      "index": 420,
+      "ko": "두 배",
+      "file": "sprites/items/pocket_calculator.png",
+      "reviewed": true
     }
   ],
   "entries": [

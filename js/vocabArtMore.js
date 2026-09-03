@@ -843,7 +843,18 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: '한국어', slug: 'grammar_scroll', folder: 'items', nameEn: 'The Korean language', family: 'abstract' },
   { ko: '선물하다', slug: 'give_left_hand', folder: 'items', nameEn: 'To give as a present', family: 'action' },
   { ko: '두 달', slug: 'crescent_moon', folder: 'items', nameEn: 'Two months', family: 'time' },
-  { ko: '-아/어 주다', slug: 'receive_one_hand', folder: 'items', nameEn: 'To do it for someone else', family: 'grammar' }
+  { ko: '-아/어 주다', slug: 'receive_one_hand', folder: 'items', nameEn: 'To do it for someone else', family: 'grammar' },
+  // The 도표 question: choosing a travel agency, and the words the chart prints.
+  { ko: '여행사', slug: 'estate_broker', folder: 'items', nameEn: 'Travel agency', family: 'place' },
+  { ko: '여행 상품', slug: 'paris_eiffel_tower', folder: 'items', nameEn: 'A travel package', family: 'place' },
+  { ko: '이용 후기', slug: 'recommend', folder: 'items', nameEn: 'Customer reviews', family: 'abstract' },
+  { ko: '회사', slug: 'briefcase', folder: 'items', nameEn: 'A company', family: 'place' },
+  { ko: '성인', slug: 'senior', folder: 'items', nameEn: 'An adult', family: 'people' },
+  { ko: '남녀', slug: 'same_age', folder: 'items', nameEn: 'Men and women', family: 'people' },
+  { ko: '다양성', slug: 'kinds_types', folder: 'items', nameEn: 'Variety', family: 'abstract' },
+  { ko: '적다', slug: 'be_empty', folder: 'items', nameEn: 'To be few', family: 'abstract' },
+  { ko: '설문 대상', slug: 'silver_mic', folder: 'items', nameEn: 'Survey respondents', family: 'data' },
+  { ko: '두 배', slug: 'pocket_calculator', folder: 'items', nameEn: 'Twice as many', family: 'data' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
@@ -3704,6 +3715,104 @@ const TOPIK_VOCAB_ART_ROWS = [
     "slug": "receive_one_hand",
     "folder": "items",
     "nameEn": "to do it for someone else, as a favour to them",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여행사",
+    "slug": "estate_broker",
+    "folder": "items",
+    "nameEn": "a travel agency",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여행 상품",
+    "slug": "paris_eiffel_tower",
+    "folder": "items",
+    "nameEn": "a travel package sold by an agency",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이용 후기",
+    "slug": "recommend",
+    "folder": "items",
+    "nameEn": "customer reviews — what earlier users wrote",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "선택하다",
+    "slug": "crossroads",
+    "folder": "items",
+    "nameEn": "to pick one out of several",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "중요하다",
+    "slug": "teal_gem",
+    "folder": "items",
+    "nameEn": "to matter, to carry weight",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "회사",
+    "slug": "briefcase",
+    "folder": "items",
+    "nameEn": "a company",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "성인",
+    "slug": "senior",
+    "folder": "items",
+    "nameEn": "a grown adult",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "남녀",
+    "slug": "same_age",
+    "folder": "items",
+    "nameEn": "men and women, taken together",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "다양성",
+    "slug": "kinds_types",
+    "folder": "items",
+    "nameEn": "variety — how wide the range on offer is",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "적다",
+    "slug": "be_empty",
+    "folder": "items",
+    "nameEn": "to be few in number",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가장",
+    "slug": "gold_starburst",
+    "folder": "items",
+    "nameEn": "most — the superlative, and a claim about every other case",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "기타",
+    "slug": "different",
+    "folder": "items",
+    "nameEn": "other; everything that did not earn a slice of its own",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "설문 대상",
+    "slug": "silver_mic",
+    "folder": "items",
+    "nameEn": "the people a survey was put to",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "두 배",
+    "slug": "pocket_calculator",
+    "folder": "items",
+    "nameEn": "twice as many; double",
     "family": "topik-vocabulary"
   }
 ];

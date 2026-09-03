@@ -3188,7 +3188,8 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "넘었다"
+          "넘었다",
+          "넘는다"
         ]
       },
       {
@@ -3654,6 +3655,112 @@
           "읽어 주는",
           "읽어 줄"
         ]
+      },
+      {
+        "ko": "여행사",
+        "en": "a travel agency",
+        "hint": "🧳",
+        "category": "여행",
+        "categoryEn": "Travel & leisure"
+      },
+      {
+        "ko": "여행 상품",
+        "en": "a travel package sold by an agency",
+        "hint": "🗺️",
+        "category": "여행",
+        "categoryEn": "Travel & leisure"
+      },
+      {
+        "ko": "이용 후기",
+        "en": "customer reviews — what earlier users wrote",
+        "hint": "📝",
+        "category": "여행",
+        "categoryEn": "Travel & leisure"
+      },
+      {
+        "ko": "선택하다",
+        "en": "to pick one out of several",
+        "hint": "🔀",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "선택할"
+        ]
+      },
+      {
+        "ko": "중요하다",
+        "en": "to matter, to carry weight",
+        "hint": "💎",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "중요하게",
+          "중요하다고",
+          "중요하다는"
+        ]
+      },
+      {
+        "ko": "회사",
+        "en": "a company",
+        "hint": "🏢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "성인",
+        "en": "a grown adult",
+        "hint": "🧑",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "남녀",
+        "en": "men and women, taken together",
+        "hint": "👫",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "다양성",
+        "en": "variety — how wide the range on offer is",
+        "hint": "🎨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "적다",
+        "en": "to be few in number",
+        "hint": "📉",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "가장",
+        "en": "most — the superlative, and a claim about every other case",
+        "hint": "🌟",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "기타",
+        "en": "other; everything that did not earn a slice of its own",
+        "hint": "🗂️",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data"
+      },
+      {
+        "ko": "설문 대상",
+        "en": "the people a survey was put to",
+        "hint": "🎤",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data"
+      },
+      {
+        "ko": "두 배",
+        "en": "twice as many; double",
+        "hint": "🧮",
+        "category": "자료 해석",
+        "categoryEn": "Charts & data"
       }
     ]
   },

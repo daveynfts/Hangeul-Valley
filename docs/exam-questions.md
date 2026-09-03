@@ -45,6 +45,12 @@ sometimes appear only fused — 믿어서는 is the only shape 믿다 wears in a
 — and exactly one of the two can own that string. The other is found by its
 dictionary form, which the grammar note prints.
 
+What is **not** in that corpus is a line's `who` label. A 안내문 or a 도표 is built out of
+labels — 자격, 모집 기간, 설문 대상 — and a word that appears only there traces to nothing
+and wins no hover position, which is two failures for one omission. 설문 대상 in question 10
+was exactly that. Name such a word in the `why` or the `grammar` note as well; on a chart
+question there is usually something worth saying about it anyway.
+
 `forms` are **the shapes the question uses**, not a conjugation table. 썰렁하다 never
 appears as 썰렁하다; it turns up as 썰렁한.
 
