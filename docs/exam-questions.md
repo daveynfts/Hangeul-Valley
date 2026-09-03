@@ -6,13 +6,14 @@ going wrong in the same way and the fix was never obvious from the code.
 The exam world is `worlds/topik-2.json` (the farm word list) and
 `worlds/topik2-questions.json` (the questions). Unlike a unit, it grows one question
 at a time from photographs the user sends, and it is grouped by **question type**
-rather than by the day a question arrived. Three types so far:
+rather than by the day a question arrived. The types so far:
 
 | exercise id | 유형 | what it tests |
 |---|---|---|
 | `topik2-headline` | 신문 기사 제목 | a compressed headline and four readings of it |
 | `topik2-blank` | 빈칸 채우기 | one gap, four endings on the same verb |
 | `topik2-synonym` | 유사 표현 | an underlined phrase and four expressions to match it |
+| `topik2-notice` | 안내문·도표 | a poster or a chart and four statements, three of which alter one detail |
 
 The bank sets `drawOne: true`, so a sitting is one question drawn from the whole
 paper rather than the paper worked through. The draw is a bag, not `Math.random()` —
@@ -180,6 +181,6 @@ them as one dense block. It now reads in this order:
 
 This is scoped to `topik2-questions`; unit workbooks retain their existing answer cards. The
 source text stays untouched and searchable in the DOM when the disclosure is closed.
-`tests/test_topik_draw.js` verifies all 27 current questions have enough paragraph structure,
+`tests/test_topik_draw.js` verifies every question in the bank has enough paragraph structure,
 that LF and CRLF split identically, that the detailed section is collapsed by default and
 that readable line lengths are capped in CSS.

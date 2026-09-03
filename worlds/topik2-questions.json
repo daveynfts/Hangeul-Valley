@@ -981,6 +981,78 @@
           "grammar": "-(으)ㄴ/는 법이다 and -기 마련이다 are the pair to learn together: 노력하면 성공하는 법이다 = 노력하면 성공하기 마련이다. 법이다 takes the modifier (힘든, 하는), 마련이다 takes -기 (힘들기, 하기), which is the only thing to keep straight when swapping one for the other.\n\n-(으)ㄴ 모양이다 is worth separating from both. It is inference, so it needs evidence: 불이 꺼진 걸 보니 잔 모양이다. That is why it cannot state a truth about every task.\n\n힘들다 is a ㄹ-stem: 힘든 before ㄴ with the ㄹ dropped, 힘들기 before -기 with it kept. Both appear in this question, which is a fair test on its own — the same rule that made 늘다 come out 는다면 in question 9 of the 빈칸 set."
         }
       ]
+    },
+    {
+      "id": "topik2-notice",
+      "type": "build",
+      "no": "유형 · 문항 9-12",
+      "pattern": "내용과 같은 것 고르기",
+      "section": "안내문·도표",
+      "sectionEn": "Notices and charts",
+      "icon": "📋",
+      "instructionKo": "다음 글 또는 도표의 내용과 같은 것을 고르십시오.",
+      "instructionEn": "Choose the statement that agrees with the notice.",
+      "blurbEn": "A poster with its four labelled lines, and four statements — three of which change one detail the poster had already settled.",
+      "noteEn": "A notice — a poster, a leaflet, a chart — and four statements about it. One of them survives a check against the page and the other three each change exactly one thing the notice had already settled.\n\nSo this is a checking job rather than a reading one, and it goes faster done backwards. Take a statement, find the single line of the notice it is about, and compare those two only. A poster prints four or five labelled lines and the four options divide them up between themselves, so nearly every option is settled by one line and nothing else on the page matters to it.\n\nFour places the change is usually made.\n\n1. The wrong date range. An event notice prints two of them — the window for applying and the stretch the thing actually runs — and the option quotes one while asking about the other. Count the named months of the second range on your fingers; the arithmetic between the two dates is not what is being asked.\n\n2. The channel swapped. Apply on the website becomes apply in person, or the other way round. A notice names one way of applying and only one, so 직접 or 홈페이지 in an option is a word to go straight back to the 신청 방법 line with.\n\n3. Eligibility widened out of its category. A bracketed also-eligible extends a list without leaving it: 고등학생 또는 대학생, and then foreign students who speak Korean — still students. The option that turns that into anybody has crossed a line the bracket did not cross.\n\n4. The title said again in easier words. 모집 becomes 찾고 있다, 어린이 becomes 아이, 그림책 becomes 책. Nothing added and nothing dropped — which is what a correct option looks like on this type, and why it reads as too obvious to be the answer.\n\nThe habit worth building is to read the labels down the left of the notice before reading a single option — 자격, 모집 기간, 신청 방법, 활동 기간. Those labels are the four things that can be asked about, and knowing them in advance turns each option into one lookup.",
+      "bank": [],
+      "items": [
+        {
+          "n": 9,
+          "art": "",
+          "phraseKo": "그림책 읽어 주는 자원봉사자 모집",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "그림책 읽어 주는 자원봉사자 모집"
+            },
+            {
+              "ko": "\"어린이들에게 꿈과 희망을 선물하세요.\""
+            },
+            {
+              "who": "자격",
+              "ko": "고등학생 또는 대학생 (※한국어를 잘하는 외국인 학생도 가능)"
+            },
+            {
+              "who": "모집 기간",
+              "ko": "11월 10일(월) ~ 11월 21일(금)"
+            },
+            {
+              "who": "신청 방법",
+              "ko": "인주어린이도서관 홈페이지 (www.injulibrary.or.kr)"
+            },
+            {
+              "who": "활동 기간",
+              "ko": "2025년 12월 1일(월) ~ 2026년 2월 28일(토)"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "reader",
+          "choices": [
+            {
+              "id": "twomonths",
+              "ko": "봉사 활동은 두 달 동안 하게 된다."
+            },
+            {
+              "id": "reader",
+              "ko": "아이들에게 책을 읽어 줄 봉사자를 찾고 있다."
+            },
+            {
+              "id": "inperson",
+              "ko": "봉사자 신청은 도서관에 직접 가서 해야 한다."
+            },
+            {
+              "id": "nonstudent",
+              "ko": "학생이 아닌 사람들도 이 봉사에 참여할 수 있다."
+            }
+          ],
+          "en": "Volunteers wanted to read picture books aloud. \"Give children a dream and a hope.\" Eligible: high school or university students (a foreign student with good Korean is eligible too). Applications 10–21 November, through the Inju Children’s Library website. The work runs 1 December 2025 to 28 February 2026.",
+          "why": "The title is the answer, in easier words. 그림책 읽어 주는 자원봉사자 모집 is a call for volunteers who read picture books aloud, and option 2 says the same thing with everyday vocabulary: 모집 becomes 찾고 있다, 어린이 becomes 아이, 그림책 becomes 책, and 읽어 주는 becomes 읽어 줄. Nothing has been added and nothing dropped, which is the shape a correct option takes on this type.\n\nOption 1 counts the wrong range, and then counts it wrong. The poster prints two date ranges and only the second one is the volunteering: 활동 기간 runs 2025년 12월 1일 to 2026년 2월 28일, which is December, January and February — three months. The 모집 기간 above it is eleven days. Neither range is two months, so the number in the option is not on the page at all.\n\nOption 3 swaps the channel. 신청 방법 names one way to apply and it is a web address, so 도서관에 직접 가서 해야 한다 is the opposite of what the line says. 직접 is the tell — the moment an option says in person, go back to the 신청 방법 line and read it again.\n\nOption 4 widens the eligibility out of its own category. 자격 says 고등학생 또는 대학생, and the bracket after it adds foreign students who speak Korean well. That extends the list without leaving it: every person the bracket lets in is still 학생. 학생이 아닌 사람들 is exactly who the 자격 line rules out, and a bracketed exception on this type is almost always an extension rather than an exit.\n\nRead in the other order — labels first, options second — three of the four are settled by one line each: 활동 기간 kills option 1, 신청 방법 kills option 3, 자격 kills option 4. The one left is checked against the title, and it matches.",
+          "grammar": "읽어 주는 is 읽다 plus -아/어 주다, which is doing something for somebody else rather than for yourself. 그림책을 읽다 is reading a picture book; 그림책을 읽어 주다 is reading one to someone. The whole notice rests on that 주다 — without it the volunteers would be reading to themselves. 읽어 주는 is the present modifier (the volunteer who reads) and 읽어 줄 the future one (the volunteer who will read), and the option swapping one for the other changes nothing.\n\n어린이 and 아이 are the same person in two registers. 어린이 is the word institutions and notices use — 어린이집, 어린이날, and the 인주어린이도서관 on this poster — and 아이 is what anyone says out loud. Recognising that they refer to the same children is half of what this question tests.\n\n또는 joins two nouns in written Korean where speech would use 이나: 고등학생 또는 대학생 is 고등학생이나 대학생. It belongs with 및 and 등 as notice vocabulary rather than conversation.\n\n선물하다 is 선물 turned into a verb, and 꿈과 희망을 선물하다 is a fixed piece of poster Korean — you give someone a dream and a hope. The imperative 선물하세요 is aimed at the reader, which is why a recruitment poster addresses the volunteer rather than the children.\n\n도 in 외국인 학생도 가능 adds to a list that has already been given; it never replaces it. That is the particle deciding option 4, and it is the same 도 in 사람들도 — which is the option trying to add a group the 자격 line never opened."
+        }
+      ]
     }
   ]
 }

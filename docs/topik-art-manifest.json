@@ -379,6 +379,84 @@
       "ko": "활기차다",
       "file": "sprites/items/lively_farmer.png",
       "reviewed": true
+    },
+    {
+      "index": 394,
+      "ko": "어린이",
+      "file": "sprites/items/junior.png",
+      "reviewed": true
+    },
+    {
+      "index": 395,
+      "ko": "아이",
+      "file": "sprites/items/wrapped_baby.png",
+      "reviewed": true
+    },
+    {
+      "index": 396,
+      "ko": "대학생",
+      "file": "sprites/items/school_backpack.png",
+      "reviewed": true
+    },
+    {
+      "index": 397,
+      "ko": "봉사자",
+      "file": "sprites/items/kindness.png",
+      "reviewed": true
+    },
+    {
+      "index": 398,
+      "ko": "신청",
+      "file": "sprites/items/homework_notebook.png",
+      "reviewed": true
+    },
+    {
+      "index": 399,
+      "ko": "모집 기간",
+      "file": "sprites/items/wall_calendar.png",
+      "reviewed": true
+    },
+    {
+      "index": 400,
+      "ko": "인주어린이도서관",
+      "file": "sprites/items/brick_workshop.png",
+      "reviewed": true
+    },
+    {
+      "index": 401,
+      "ko": "가능",
+      "file": "sprites/items/keep_rules.png",
+      "reviewed": true
+    },
+    {
+      "index": 402,
+      "ko": "외국인",
+      "file": "sprites/items/france_flag.png",
+      "reviewed": true
+    },
+    {
+      "index": 403,
+      "ko": "한국어",
+      "file": "sprites/items/grammar_scroll.png",
+      "reviewed": true
+    },
+    {
+      "index": 404,
+      "ko": "선물하다",
+      "file": "sprites/items/give_left_hand.png",
+      "reviewed": true
+    },
+    {
+      "index": 405,
+      "ko": "두 달",
+      "file": "sprites/items/crescent_moon.png",
+      "reviewed": true
+    },
+    {
+      "index": 406,
+      "ko": "-아/어 주다",
+      "file": "sprites/items/receive_one_hand.png",
+      "reviewed": true
     }
   ],
   "entries": [
@@ -5360,5 +5438,5 @@
     }
   ],
   "sourceThread": "01a0579e-2ec8-7401-a057-99845528295c",
-  "updated": "2026-09-01"
+  "updated": "2026-09-03"
 }

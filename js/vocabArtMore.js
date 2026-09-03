@@ -831,7 +831,19 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: '이불', slug: 'folded_quilt', folder: 'items', nameEn: 'Quilt', family: 'household' },
   { ko: '맡기다', slug: 'entrust_laundry', folder: 'items', nameEn: 'Entrusting laundry to a shopkeeper', family: 'action' },
   { ko: '세탁소', slug: 'laundry_shop', folder: 'items', nameEn: "Dry cleaner's shop", family: 'place' },
-  { ko: '활기차다', slug: 'lively_farmer', folder: 'items', nameEn: 'A lively farmer full of energy', family: 'action' }
+  { ko: '활기차다', slug: 'lively_farmer', folder: 'items', nameEn: 'A lively farmer full of energy', family: 'action' },
+  // The 안내문 question: a recruitment poster and the words it prints.
+  { ko: '어린이', slug: 'junior', folder: 'items', nameEn: 'A child', family: 'people' },
+  { ko: '대학생', slug: 'school_backpack', folder: 'items', nameEn: 'University student', family: 'people' },
+  { ko: '봉사자', slug: 'kindness', folder: 'items', nameEn: 'A volunteer', family: 'people' },
+  { ko: '신청', slug: 'homework_notebook', folder: 'items', nameEn: 'An application', family: 'abstract' },
+  { ko: '모집 기간', slug: 'wall_calendar', folder: 'items', nameEn: 'The application window', family: 'time' },
+  { ko: '인주어린이도서관', slug: 'brick_workshop', folder: 'items', nameEn: 'Inju Children\'s Library', family: 'place' },
+  { ko: '가능', slug: 'keep_rules', folder: 'items', nameEn: 'Possible; eligible', family: 'abstract' },
+  { ko: '한국어', slug: 'grammar_scroll', folder: 'items', nameEn: 'The Korean language', family: 'abstract' },
+  { ko: '선물하다', slug: 'give_left_hand', folder: 'items', nameEn: 'To give as a present', family: 'action' },
+  { ko: '두 달', slug: 'crescent_moon', folder: 'items', nameEn: 'Two months', family: 'time' },
+  { ko: '-아/어 주다', slug: 'receive_one_hand', folder: 'items', nameEn: 'To do it for someone else', family: 'grammar' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
@@ -3601,6 +3613,97 @@ const TOPIK_VOCAB_ART_ROWS = [
     "slug": "topik_at_most",
     "folder": "items",
     "nameEn": "or less; no more than",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "어린이",
+    "slug": "junior",
+    "folder": "items",
+    "nameEn": "a child — the formal word, the one notices use",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "아이",
+    "slug": "wrapped_baby",
+    "folder": "items",
+    "nameEn": "a child — the everyday word",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "대학생",
+    "slug": "school_backpack",
+    "folder": "items",
+    "nameEn": "a university student",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "봉사자",
+    "slug": "kindness",
+    "folder": "items",
+    "nameEn": "a volunteer — 자원봉사자 cut short",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "신청",
+    "slug": "homework_notebook",
+    "folder": "items",
+    "nameEn": "an application; putting your name down",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "모집 기간",
+    "slug": "wall_calendar",
+    "folder": "items",
+    "nameEn": "the window in which applications are taken",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "인주어린이도서관",
+    "slug": "brick_workshop",
+    "folder": "items",
+    "nameEn": "Inju Children's Library — 인주 is the invented town TOPIK papers are set in",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가능",
+    "slug": "keep_rules",
+    "folder": "items",
+    "nameEn": "possible; eligible as well",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "외국인",
+    "slug": "france_flag",
+    "folder": "items",
+    "nameEn": "a foreign national",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "한국어",
+    "slug": "grammar_scroll",
+    "folder": "items",
+    "nameEn": "the Korean language",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "선물하다",
+    "slug": "give_left_hand",
+    "folder": "items",
+    "nameEn": "to give something as a present",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "두 달",
+    "slug": "crescent_moon",
+    "folder": "items",
+    "nameEn": "two months",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-아/어 주다",
+    "slug": "receive_one_hand",
+    "folder": "items",
+    "nameEn": "to do it for someone else, as a favour to them",
     "family": "topik-vocabulary"
   }
 ];

@@ -142,8 +142,13 @@ vm.runInContext(ui.slice(whyFrom, whyTo) + '\nthis.splitWhy = wbWhyParagraphs;',
 const split = whyCtx.splitWhy('Core clue.\n\nOption one.\r\n\r\nOption two.');
 assert(split.length === 3 && split[0] === 'Core clue.' && split[2] === 'Option two.',
   'blank lines split the key cue from choice-by-choice analysis on LF and CRLF');
+// The paper grows a question at a time, so a literal count here would be a number that has to
+// be edited every time content lands — and one that says nothing when it is right. What has to
+// hold is that every group carries questions and every one of them goes through this renderer.
 const allQuestions = bank.exercises.flatMap((paper) => paper.items || []);
-assert(allQuestions.length === 27, 'all 27 TOPIK questions use the shared explanation renderer');
+assert(bank.exercises.length > 0 && bank.exercises.every((paper) => (paper.items || []).length > 0),
+  'every question group in the bank feeds the shared explanation renderer ('
+    + allQuestions.length + ' questions across ' + bank.exercises.length + ' groups)');
 assert(allQuestions.every((item) => whyCtx.splitWhy(item.why).length >= 3),
   'every current explanation has a visible key cue and at least two details to disclose');
 const explainSrc = ui.slice(whyTo, ui.indexOf('function renderWorkbook'));

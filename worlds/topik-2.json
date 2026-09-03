@@ -3556,6 +3556,104 @@
         "categoryEn": "Charts & data",
         "example": "참가 인원이 열 명 이하이면 한 팀으로 활동합니다.",
         "exampleEn": "If there are ten participants or fewer, they work as one team."
+      },
+      {
+        "ko": "어린이",
+        "en": "a child — the formal word, the one notices use",
+        "hint": "🧒",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "아이",
+        "en": "a child — the everyday word",
+        "hint": "👶",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "대학생",
+        "en": "a university student",
+        "hint": "🎓",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "봉사자",
+        "en": "a volunteer — 자원봉사자 cut short",
+        "hint": "🙋",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "신청",
+        "en": "an application; putting your name down",
+        "hint": "✍️",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "모집 기간",
+        "en": "the window in which applications are taken",
+        "hint": "🗓️",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "인주어린이도서관",
+        "en": "Inju Children's Library — 인주 is the invented town TOPIK papers are set in",
+        "hint": "🏛️",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "가능",
+        "en": "possible; eligible as well",
+        "hint": "✅",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "외국인",
+        "en": "a foreign national",
+        "hint": "🌏",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "한국어",
+        "en": "the Korean language",
+        "hint": "🗣️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "선물하다",
+        "en": "to give something as a present",
+        "hint": "🎁",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "선물하세요"
+        ]
+      },
+      {
+        "ko": "두 달",
+        "en": "two months",
+        "hint": "📆",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-아/어 주다",
+        "en": "to do it for someone else, as a favour to them",
+        "hint": "🤲",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "읽어 주는",
+          "읽어 줄"
+        ]
       }
     ]
   },
