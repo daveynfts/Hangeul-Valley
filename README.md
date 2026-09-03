@@ -3,7 +3,7 @@
 A Stardew-Valley-flavoured Korean vocabulary game. You plant a Korean word, answer a
 three-phase quiz as the crop grows, harvest it for Gold, and spend the Gold on new
 vocabulary packs, farm plots and cosmetics. 25 levels of 1,500 words in the TOPIK 1–3
-range, plus six textbook and exam worlds that carry their own vocabulary — 2,352 unique
+range, plus six textbook and exam worlds that carry their own vocabulary — 2,371 unique
 words across the game. (`checkReadmeCounts` in `scripts/validate_content.js` fails if any
 figure in this paragraph drifts from the content.)
 

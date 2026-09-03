@@ -854,7 +854,31 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: '다양성', slug: 'kinds_types', folder: 'items', nameEn: 'Variety', family: 'abstract' },
   { ko: '적다', slug: 'be_empty', folder: 'items', nameEn: 'To be few', family: 'abstract' },
   { ko: '설문 대상', slug: 'silver_mic', folder: 'items', nameEn: 'Survey respondents', family: 'data' },
-  { ko: '두 배', slug: 'pocket_calculator', folder: 'items', nameEn: 'Twice as many', family: 'data' }
+  { ko: '두 배', slug: 'pocket_calculator', folder: 'items', nameEn: 'Twice as many', family: 'data' },
+  // The 우표 박물관 passage. Stand-in tiles: existing art reused, not drawn for these words.
+  { ko: '우표', slug: 'prescription_slip', folder: 'items', nameEn: 'A postage stamp', family: 'culture' },
+  { ko: '박물관', slug: 'traditional_hanok', folder: 'items', nameEn: 'A museum', family: 'place' },
+  { ko: '역사', slug: 'oak_rings', folder: 'items', nameEn: 'History', family: 'abstract' },
+  { ko: '역사실', slug: 'cinema_house', folder: 'items', nameEn: 'A history room', family: 'place' },
+  { ko: '체험실', slug: 'sports_facility', folder: 'items', nameEn: 'A hands-on room', family: 'place' },
+  { ko: '사진', slug: 'box_camera', folder: 'items', nameEn: 'A photograph', family: 'culture' },
+  { ko: '편지', slug: 'announcement', folder: 'items', nameEn: 'A letter', family: 'culture' },
+  { ko: '우체통', slug: 'moving_boxes', folder: 'items', nameEn: 'A postbox', family: 'culture' },
+  { ko: '인기를 끌다', slug: 'famous', folder: 'items', nameEn: 'To draw a crowd', family: 'abstract' },
+  { ko: '지난달', slug: 'already', folder: 'items', nameEn: 'Last month', family: 'time' },
+  { ko: '일 년 뒤', slug: 'hourglass_ornament', folder: 'items', nameEn: 'A year later', family: 'time' },
+  { ko: '일 년 전', slug: 'after_a_long_time', folder: 'items', nameEn: 'A year ago', family: 'time' },
+  { ko: '운영', slug: 'system_policy', folder: 'items', nameEn: 'The running of a place', family: 'abstract' },
+  { ko: '한눈에', slug: 'let_me_see', folder: 'items', nameEn: 'In a single glance', family: 'abstract' },
+  { ko: '향기', slug: 'violet_petals', folder: 'items', nameEn: 'A scent', family: 'abstract' },
+  { ko: '나무', slug: 'wooden_chair', folder: 'items', nameEn: 'Wood', family: 'household' },
+  { ko: '받다', slug: 'leather_wallet', folder: 'items', nameEn: 'To receive', family: 'action' },
+  { ko: '맡다', slug: 'flavor', folder: 'items', nameEn: 'To smell', family: 'action' },
+  { ko: '들어가다', slug: 'subway_access', folder: 'items', nameEn: 'To go in', family: 'action' },
+  { ko: '만들다', slug: 'kitchen_stove', folder: 'items', nameEn: 'To make', family: 'action' },
+  { ko: '쓰다', slug: 'brown_laptop', folder: 'items', nameEn: 'To write', family: 'action' },
+  { ko: '보내다', slug: 'delivery_bag', folder: 'items', nameEn: 'To send', family: 'action' },
+  { ko: '느리다', slug: 'be_late', folder: 'items', nameEn: 'To be slow', family: 'abstract' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
@@ -3813,6 +3837,181 @@ const TOPIK_VOCAB_ART_ROWS = [
     "slug": "pocket_calculator",
     "folder": "items",
     "nameEn": "twice as many; double",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "우표",
+    "slug": "prescription_slip",
+    "folder": "items",
+    "nameEn": "a postage stamp",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "박물관",
+    "slug": "traditional_hanok",
+    "folder": "items",
+    "nameEn": "a museum",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "역사",
+    "slug": "oak_rings",
+    "folder": "items",
+    "nameEn": "history",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "역사실",
+    "slug": "cinema_house",
+    "folder": "items",
+    "nameEn": "the history room of a museum",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "체험실",
+    "slug": "sports_facility",
+    "folder": "items",
+    "nameEn": "a hands-on room where visitors try things for themselves",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사진",
+    "slug": "box_camera",
+    "folder": "items",
+    "nameEn": "a photograph",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "편지",
+    "slug": "announcement",
+    "folder": "items",
+    "nameEn": "a letter",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "우체통",
+    "slug": "moving_boxes",
+    "folder": "items",
+    "nameEn": "a postbox",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "인기를 끌다",
+    "slug": "famous",
+    "folder": "items",
+    "nameEn": "to be drawing a crowd",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "지난달",
+    "slug": "already",
+    "folder": "items",
+    "nameEn": "last month",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "일 년 뒤",
+    "slug": "hourglass_ornament",
+    "folder": "items",
+    "nameEn": "a year later",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "일 년 전",
+    "slug": "after_a_long_time",
+    "folder": "items",
+    "nameEn": "a year ago",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "문을 열다",
+    "slug": "to_begin",
+    "folder": "items",
+    "nameEn": "to open for business",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "운영",
+    "slug": "system_policy",
+    "folder": "items",
+    "nameEn": "the running of a place",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "한눈에",
+    "slug": "let_me_see",
+    "folder": "items",
+    "nameEn": "in a single glance",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "향기",
+    "slug": "violet_petals",
+    "folder": "items",
+    "nameEn": "a scent",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "나무",
+    "slug": "wooden_chair",
+    "folder": "items",
+    "nameEn": "wood; a tree",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "받다",
+    "slug": "leather_wallet",
+    "folder": "items",
+    "nameEn": "to receive",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "맡다",
+    "slug": "flavor",
+    "folder": "items",
+    "nameEn": "to smell something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "만지다",
+    "slug": "touch_head",
+    "folder": "items",
+    "nameEn": "to touch, to handle",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "들어가다",
+    "slug": "subway_access",
+    "folder": "items",
+    "nameEn": "to go in; to be set into",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "만들다",
+    "slug": "kitchen_stove",
+    "folder": "items",
+    "nameEn": "to make",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "쓰다",
+    "slug": "brown_laptop",
+    "folder": "items",
+    "nameEn": "to write",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "보내다",
+    "slug": "delivery_bag",
+    "folder": "items",
+    "nameEn": "to send",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "느리다",
+    "slug": "be_late",
+    "folder": "items",
+    "nameEn": "to be slow",
     "family": "topik-vocabulary"
   }
 ];

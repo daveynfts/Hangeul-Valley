@@ -541,6 +541,181 @@
       "ko": "두 배",
       "file": "sprites/items/pocket_calculator.png",
       "reviewed": true
+    },
+    {
+      "index": 421,
+      "ko": "우표",
+      "file": "sprites/items/prescription_slip.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 422,
+      "ko": "박물관",
+      "file": "sprites/items/traditional_hanok.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 423,
+      "ko": "역사",
+      "file": "sprites/items/oak_rings.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 424,
+      "ko": "역사실",
+      "file": "sprites/items/cinema_house.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 425,
+      "ko": "체험실",
+      "file": "sprites/items/sports_facility.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 426,
+      "ko": "사진",
+      "file": "sprites/items/box_camera.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 427,
+      "ko": "편지",
+      "file": "sprites/items/announcement.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 428,
+      "ko": "우체통",
+      "file": "sprites/items/moving_boxes.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 429,
+      "ko": "인기를 끌다",
+      "file": "sprites/items/famous.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 430,
+      "ko": "지난달",
+      "file": "sprites/items/already.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 431,
+      "ko": "일 년 뒤",
+      "file": "sprites/items/hourglass_ornament.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 432,
+      "ko": "일 년 전",
+      "file": "sprites/items/after_a_long_time.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 433,
+      "ko": "문을 열다",
+      "file": "sprites/items/to_begin.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 434,
+      "ko": "운영",
+      "file": "sprites/items/system_policy.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 435,
+      "ko": "한눈에",
+      "file": "sprites/items/let_me_see.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 436,
+      "ko": "향기",
+      "file": "sprites/items/violet_petals.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 437,
+      "ko": "나무",
+      "file": "sprites/items/wooden_chair.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 438,
+      "ko": "받다",
+      "file": "sprites/items/leather_wallet.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 439,
+      "ko": "맡다",
+      "file": "sprites/items/flavor.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 440,
+      "ko": "만지다",
+      "file": "sprites/items/touch_head.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 441,
+      "ko": "들어가다",
+      "file": "sprites/items/subway_access.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 442,
+      "ko": "만들다",
+      "file": "sprites/items/kitchen_stove.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 443,
+      "ko": "쓰다",
+      "file": "sprites/items/brown_laptop.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 444,
+      "ko": "보내다",
+      "file": "sprites/items/delivery_bag.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 445,
+      "ko": "느리다",
+      "file": "sprites/items/be_late.png",
+      "reviewed": true,
+      "standIn": true
     }
   ],
   "entries": [

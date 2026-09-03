@@ -1112,6 +1112,54 @@
           "en": "What people weigh when choosing a travel agency. Price 48%, the range of travel packages 25%, the size of the company 16%, customer reviews 9%, other 2%. (Surveyed: 1,600 adult men and women.)",
           "why": "A chart question is a comparison, not a calculation. Every option names two slices and says something about the pair, so the work is to find which two and then read only those. Option 4 names 여행 상품의 다양성 at 25% and 회사의 규모 at 16%, and 16 is the smaller of the two — which is exactly what it claims. Nothing else on the chart bears on it.\n\nOption 1 fails on 가장. 회사의 규모 is 16%, the third of five slices: 기타 sits at 2% and 이용 후기 at 9%, both below it. 가장 is a claim about every other slice at once, so a single smaller one settles it, and a chart of five will usually print two below whatever the option picks.\n\nOption 2 fails by two points. 전체의 반 is 50% and 가격 is 48%, and 반을 넘는다 needs more than half rather than nearly half. A number just short of a round threshold is a shape this type keeps using: 48, 49, 33 against a third. Read the threshold before the slice.\n\nOption 3 has the two sides the wrong way round. 이용 후기 is 9% and 여행 상품의 다양성 is 25%, so the bigger of that pair is 다양성, and it is 다양성 that is nearly three times 후기 rather than the reverse. 두 배 이상 is doing work of its own: it survives only if the ratio reaches two, and 9 to 25 is 2.8 in the other direction. A comparison that still reads well with its two nouns exchanged is worth checking in both directions before it is believed.\n\nThe habit for this type is to read the option backwards — verb first. 가장 낮다, 반을 넘는다, 두 배 이상 많다, 더 적다 each ask for a different pair of numbers, and naming the pair first turns four options into four lookups. Three of these are settled without ever reading the fourth slice.",
           "grammar": "보다 attaches to the thing being compared against, and the sentence then says something about the other one. 여행 상품의 다양성보다 회사의 규모를 … 더 적다 makes 다양성 the standard and 규모 the thing measured, so 규모 is what comes out smaller. Exchange the two nouns and the sentence still reads perfectly while claiming the opposite — which is the whole of option 3.\n\n중요하다 turns up in three shapes here and the ending says what each clause is doing. 중요하게 is the adverb on 생각하다: 중요하게 생각하다 is to regard something as important, and it is the standard way a survey question is worded. 중요하다고 is the quoted form under 응답하다. 중요하다는 is that same quotation turned into a modifier, so 중요하다는 응답 is a response to the effect that it matters.\n\n가장 is the superlative and it goes in front of the adjective: 가장 낮다, 가장 많다. It claims about the whole set at once, which is why it is the easiest word on a chart question to disprove.\n\n전체의 반 is half of the whole, and 반을 넘다 is to pass it. The noun for the same idea is 과반수, which the 빈칸 set already used as 과반수를 넘었다 — 과 exceeding plus 반수 half the number, so it says twice over what 반을 넘다 says once.\n\nEvery label on this chart is N의 N: 회사의 규모, 여행 상품의 다양성, and that is how a survey names a criterion rather than a thing. 기타 closes almost every Korean chart. It is not a word anyone says out loud; it means everything that did not earn a slice of its own. The 설문 대상 line under the chart names who was asked — 성인 남녀 1,600명 — and it is what turns a percentage into a number of people. Three of these four options talk about 사람 or 응답 rather than 비율, and that line is what licenses them to."
+        },
+        {
+          "n": 11,
+          "art": "",
+          "phraseKo": "지난달 문을 연 우표 박물관이 시민들에게 사랑을 받고 있다.",
+          "lines": [
+            {
+              "ko": "지난달 문을 연 우표 박물관이 시민들에게 사랑을 받고 있다."
+            },
+            {
+              "ko": "박물관 내 역사실에서는 우표의 역사를 한눈에 볼 수 있다."
+            },
+            {
+              "ko": "또 어린이 체험실에서는 향기 나는 우표의 향을 맡거나 나무 우표 등을 만져 볼 수 있다."
+            },
+            {
+              "ko": "자신의 사진이 들어간 우표도 직접 만들 수 있다."
+            },
+            {
+              "ko": "편지를 써서 넣으면 일 년 뒤에 받아 볼 수 있는 박물관의 ‘느린 우체통’도 인기를 끌고 있다."
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "make",
+          "choices": [
+            {
+              "id": "yearold",
+              "ko": "이 박물관은 일 년 전부터 운영을 시작했다."
+            },
+            {
+              "id": "make",
+              "ko": "이 박물관에서는 직접 우표를 만들어 볼 수 있다."
+            },
+            {
+              "id": "notouch",
+              "ko": "이 박물관의 체험실에 있는 우표는 만질 수 없다."
+            },
+            {
+              "id": "nosend",
+              "ko": "이 박물관의 느린 우체통으로는 편지를 보내지 못한다."
+            }
+          ],
+          "en": "A stamp museum that opened last month is proving a hit with the public. In the museum's history room you can take in the history of the postage stamp at a glance. In the children's hands-on room you can smell scented stamps or handle wooden ones. You can also make a stamp of your own with your photograph set into it. And the museum's \"slow postbox\" — write a letter, drop it in, and receive it a year later — is drawing a crowd of its own.",
+          "why": "Option 2 is the passage's fourth sentence with nothing changed. 자신의 사진이 들어간 우표도 직접 만들 수 있다 and 직접 우표를 만들어 볼 수 있다 say the same thing; the only difference is -아/어 보다 added to the verb, which does not change what is on offer. On a prose passage the right option is usually the one sentence rewritten rather than the one summarised.\n\nOption 1 takes a number out of the wrong sentence. The museum 지난달 문을 열었다 — it opened last month. 일 년 appears in the passage, but it belongs to the postbox: 일 년 뒤에 받아 볼 수 있는. Lifting a figure from one sentence and attaching it to another is the commonest move this type makes on prose, and it works because the number really is on the page.\n\nOption 3 negates a verb the passage states. 나무 우표 등을 만져 볼 수 있다 says the wooden stamps in the 체험실 can be handled, and 만질 수 없다 says they cannot. An option carrying 없다 or 못하다 is worth taking straight to the verb it denies; a passage this short will usually have said it outright.\n\nOption 4 does the same to the postbox. 편지를 써서 넣으면 … 받아 볼 수 있는 describes writing a letter, posting it, and getting it back a year later, so 편지를 보내지 못한다 contradicts the first half of that sentence. Note that the sentence is doing two things at once — you send and you receive — and the option denies only one of them, which is what makes it read as plausible.\n\nEvery option here maps onto exactly one sentence and no sentence is used twice. That is the structure to exploit on a passage: read the five sentences first, then take each option to the single sentence it belongs to rather than re-reading the whole thing four times. The second sentence — the 역사실 — is the one no option touches, and a passage always prints more than it asks about.",
+          "grammar": "문을 열다 is to open the door, and of a shop or a museum it is to open for business. 지난달 문을 연 우표 박물관 puts it on the modifier: 열다 is a ㄹ-stem, so -(으)ㄴ drops the ㄹ and gives 연. The opposite is 문을 닫다, which likewise means to close down rather than to shut a door.\n\n-아/어 보다 is trying something out, and this passage uses it three times — 맡거나, 만져 볼 수 있다, 받아 볼 수 있다 — because that is what a 체험실 is for. It is also why option 2 can add 볼 to 만들 수 있다 without changing the claim: 만들 수 있다 and 만들어 볼 수 있다 both mean you are allowed to make one.\n\n나다 is the verb for something coming off a thing — a smell, a sound, a fever. 향기(가) 나다 is to give off a scent, so 향기 나는 우표 is a scented stamp. And 들어가다 is to go in: 사진이 들어간 우표 is a stamp with a photograph set into it, where the thing that went in takes 이/가 rather than 을/를.\n\n느린 우체통 is a real fixture in Korea rather than an invention of this paper — you post a letter and it is delivered a year later. 인기를 끌다 is to pull in popularity, so 인기를 끌고 있다 is to be drawing a crowd right now; it sits alongside 인기가 있다 and 인기가 많다.\n\n한눈에 is in a single glance, and 한눈에 볼 수 있다 is the standard phrase for a display that lets you take everything in at once. 써서 is 쓰다 plus -아/어서 in its sequence sense — write it, and then put it in — and 넣으면 is the condition that the rest of the sentence answers."
         }
       ]
     }

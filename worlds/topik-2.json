@@ -820,7 +820,8 @@
         "category": "음식",
         "categoryEn": "Food & eating",
         "forms": [
-          "넣는"
+          "넣는",
+          "넣으면"
         ]
       },
       {
@@ -927,7 +928,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "을 수 없다"
+          "을 수 없다",
+          "수 없다"
         ]
       },
       {
@@ -3761,6 +3763,214 @@
         "hint": "🧮",
         "category": "자료 해석",
         "categoryEn": "Charts & data"
+      },
+      {
+        "ko": "우표",
+        "en": "a postage stamp",
+        "hint": "📮",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "박물관",
+        "en": "a museum",
+        "hint": "🏛️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "역사",
+        "en": "history",
+        "hint": "📜",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "역사실",
+        "en": "the history room of a museum",
+        "hint": "🖼️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "체험실",
+        "en": "a hands-on room where visitors try things for themselves",
+        "hint": "✋",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "사진",
+        "en": "a photograph",
+        "hint": "📷",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "편지",
+        "en": "a letter",
+        "hint": "✉️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "우체통",
+        "en": "a postbox",
+        "hint": "📪",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "인기를 끌다",
+        "en": "to be drawing a crowd",
+        "hint": "🔥",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "인기를 끌고"
+        ]
+      },
+      {
+        "ko": "지난달",
+        "en": "last month",
+        "hint": "📅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "일 년 뒤",
+        "en": "a year later",
+        "hint": "⏳",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "일 년 전",
+        "en": "a year ago",
+        "hint": "🕰️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "문을 열다",
+        "en": "to open for business",
+        "hint": "🚪",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "문을 연"
+        ]
+      },
+      {
+        "ko": "운영",
+        "en": "the running of a place",
+        "hint": "⚙️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "한눈에",
+        "en": "in a single glance",
+        "hint": "👁️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "향기",
+        "en": "a scent",
+        "hint": "🌸",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "나무",
+        "en": "wood; a tree",
+        "hint": "🌳",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "받다",
+        "en": "to receive",
+        "hint": "🤝",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "받고",
+          "받아"
+        ]
+      },
+      {
+        "ko": "맡다",
+        "en": "to smell something",
+        "hint": "👃",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "맡거나"
+        ]
+      },
+      {
+        "ko": "만지다",
+        "en": "to touch, to handle",
+        "hint": "🖐️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "만져",
+          "만질"
+        ]
+      },
+      {
+        "ko": "들어가다",
+        "en": "to go in; to be set into",
+        "hint": "➡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "들어간"
+        ]
+      },
+      {
+        "ko": "만들다",
+        "en": "to make",
+        "hint": "🔨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "만들",
+          "만들어"
+        ]
+      },
+      {
+        "ko": "쓰다",
+        "en": "to write",
+        "hint": "✍️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "써서"
+        ]
+      },
+      {
+        "ko": "보내다",
+        "en": "to send",
+        "hint": "📤",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "보내지"
+        ]
+      },
+      {
+        "ko": "느리다",
+        "en": "to be slow",
+        "hint": "🐢",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "느린"
+        ]
       }
     ]
   },
