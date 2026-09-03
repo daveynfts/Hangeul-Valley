@@ -4438,7 +4438,7 @@ const TOPIK_VOCAB_ART_ROWS = [
     "ko": "나서다",
     "slug": "emoji_1f6b6",
     "folder": "items",
-    "nameEn": "to set out from a place",
+    "nameEn": "to set out from a place; and after -고, to step forward and act",
     "family": "topik-vocabulary"
   },
   {
@@ -5720,6 +5720,363 @@ const TOPIK_VOCAB_ART_ROWS = [
     "slug": "emoji_1f443_2",
     "folder": "items",
     "nameEn": "to be humbled after boasting",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "방영",
+    "slug": "emoji_1f4fa",
+    "folder": "items",
+    "nameEn": "the airing of a programme",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "톡톡히",
+    "slug": "emoji_1f4a5_4",
+    "folder": "items",
+    "nameEn": "handsomely — of a benefit actually felt",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "관광객",
+    "slug": "emoji_1f9f3_3",
+    "folder": "items",
+    "nameEn": "a tourist",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "물결",
+    "slug": "emoji_1f30a_3",
+    "folder": "items",
+    "nameEn": "a wave — of people, or of feeling",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "제작자",
+    "slug": "emoji_1f3ac",
+    "folder": "items",
+    "nameEn": "a producer of a programme",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "모여들다",
+    "slug": "emoji_1f465_4",
+    "folder": "items",
+    "nameEn": "to flock in from all sides",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "덕분에",
+    "slug": "emoji_1f64f",
+    "folder": "items",
+    "nameEn": "thanks to — and the outcome is good",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "방문하다",
+    "slug": "emoji_1f6aa_3",
+    "folder": "items",
+    "nameEn": "to visit a place",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "유치",
+    "slug": "emoji_1f3a3",
+    "folder": "items",
+    "nameEn": "attracting visitors or business to a place",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "홍보",
+    "slug": "emoji_1f4e2_2",
+    "folder": "items",
+    "nameEn": "publicity",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "방송",
+    "slug": "emoji_1f4fb",
+    "folder": "items",
+    "nameEn": "a broadcast",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여러",
+    "slug": "emoji_1f522_2",
+    "folder": "items",
+    "nameEn": "several, various",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "문제",
+    "slug": "emoji_2753_2",
+    "folder": "items",
+    "nameEn": "a problem",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "선수",
+    "slug": "emoji_1f3c5",
+    "folder": "items",
+    "nameEn": "an athlete",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "시상대",
+    "slug": "emoji_1f947",
+    "folder": "items",
+    "nameEn": "the winners’ podium",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "펜싱",
+    "slug": "emoji_1f93a",
+    "folder": "items",
+    "nameEn": "fencing",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "종목",
+    "slug": "emoji_1f3c6",
+    "folder": "items",
+    "nameEn": "an event or discipline in a sport",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "메달",
+    "slug": "emoji_1f396_2",
+    "folder": "items",
+    "nameEn": "a medal",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가뭄",
+    "slug": "emoji_1f3dc",
+    "folder": "items",
+    "nameEn": "a drought — of rain, or of anything wanted",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "대표팀",
+    "slug": "emoji_1f3df",
+    "folder": "items",
+    "nameEn": "the national team",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "목표",
+    "slug": "emoji_1f3af_2",
+    "folder": "items",
+    "nameEn": "a goal aimed at",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "열심히",
+    "slug": "emoji_1f525_2",
+    "folder": "items",
+    "nameEn": "hard, with effort",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "훈련하다",
+    "slug": "emoji_1f3cb_2",
+    "folder": "items",
+    "nameEn": "to train",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "따다",
+    "slug": "emoji_1f3c6_2",
+    "folder": "items",
+    "nameEn": "to take a medal or a licence",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "오랜만에",
+    "slug": "emoji_23f3_2",
+    "folder": "items",
+    "nameEn": "after a long interval",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "나오다",
+    "slug": "emoji_2728_2",
+    "folder": "items",
+    "nameEn": "to come out, to appear",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "신기록",
+    "slug": "emoji_1f4ca_2",
+    "folder": "items",
+    "nameEn": "a new record",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "경기를 펼치다",
+    "slug": "emoji_1f93a_2",
+    "folder": "items",
+    "nameEn": "to put on a performance in a match — 경기 in its sporting sense",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "아쉽게",
+    "slug": "emoji_1f61e",
+    "folder": "items",
+    "nameEn": "disappointingly, by a narrow margin",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "놓치다",
+    "slug": "emoji_1f4a8",
+    "folder": "items",
+    "nameEn": "to let something slip",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "선 넘다",
+    "slug": "emoji_1f6b7",
+    "folder": "items",
+    "nameEn": "to cross the line",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "악성",
+    "slug": "emoji_2620",
+    "folder": "items",
+    "nameEn": "malicious — straight onto a noun",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "악의적",
+    "slug": "emoji_1f608",
+    "folder": "items",
+    "nameEn": "malicious — and it needs -인 before a noun",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "댓글",
+    "slug": "emoji_1f4ac",
+    "folder": "items",
+    "nameEn": "a comment posted online",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "처벌",
+    "slug": "emoji_2696_3",
+    "folder": "items",
+    "nameEn": "punishment",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여전히",
+    "slug": "emoji_1f501_4",
+    "folder": "items",
+    "nameEn": "still — nothing has changed",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "솜방망이",
+    "slug": "emoji_1f9f8_2",
+    "folder": "items",
+    "nameEn": "a cotton club — a penalty too light to deter",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄴ 만큼",
+    "slug": "emoji_1f4cf_2",
+    "folder": "items",
+    "nameEn": "to the extent that",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "수위",
+    "slug": "emoji_1f4f6_2",
+    "folder": "items",
+    "nameEn": "the level, of water or of severity",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "낮추다",
+    "slug": "emoji_2b07_3",
+    "folder": "items",
+    "nameEn": "to lower something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "의견",
+    "slug": "emoji_1f4ad",
+    "folder": "items",
+    "nameEn": "an opinion put forward",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "제기되다",
+    "slug": "emoji_1f64b_3",
+    "folder": "items",
+    "nameEn": "to be raised, of an argument",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "강화하다",
+    "slug": "emoji_1f4aa_2",
+    "folder": "items",
+    "nameEn": "to tighten or strengthen",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "감소하다",
+    "slug": "emoji_1f4c9_4",
+    "folder": "items",
+    "nameEn": "to decrease — the formal word",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "지나치게",
+    "slug": "emoji_26a0_3",
+    "folder": "items",
+    "nameEn": "excessively",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "심각해지다",
+    "slug": "emoji_1f630_2",
+    "folder": "items",
+    "nameEn": "to grow serious",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "아직도",
+    "slug": "emoji_231b_2",
+    "folder": "items",
+    "nameEn": "still — when it ought to have finished by now",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이어지다",
+    "slug": "emoji_27b0",
+    "folder": "items",
+    "nameEn": "to go on, one after another",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "피해자",
+    "slug": "emoji_1f622_2",
+    "folder": "items",
+    "nameEn": "a victim",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "무겁다",
+    "slug": "emoji_1faa8_3",
+    "folder": "items",
+    "nameEn": "to be heavy — of a penalty as well as a weight",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "요구하다",
+    "slug": "emoji_270a",
+    "folder": "items",
+    "nameEn": "to demand",
     "family": "topik-vocabulary"
   }
 ];

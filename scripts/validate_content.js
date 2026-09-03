@@ -610,14 +610,31 @@ const overlayIds = [
       // for: 에 대한 is named in question 17's grammar note, so the entry looked reachable
       // while the option line it belongs to had no gloss on it at all.
       const winners = new Set();
+      const spans = [];
       re.lastIndex = 0;
       let m;
-      while ((m = re.exec(onScreen))) winners.add(m[0]);
+      while ((m = re.exec(onScreen))) {
+        winners.add(m[0]);
+        spans.push([m.index, m.index + m[0].length]);
+      }
+      // An occurrence swallowed whole by a longer key that did win is not dark: the learner
+      // hovers that position and gets a gloss, and it is the right gloss for what is under
+      // the cursor. 만에 inside 오럜만에 and 만큼 inside 그만큼 are both that — the letters are
+      // there and the pattern is not, which is a fact about Korean rather than a gap in the
+      // page. Only an occurrence no winner covers means the learner would hover and get
+      // nothing.
+      const uncovered = (k) => {
+        for (let i = onScreen.indexOf(k); i >= 0; i = onScreen.indexOf(k, i + 1)) {
+          const end = i + k.length;
+          if (!spans.some(([a, b]) => a <= i && end <= b)) return true;
+        }
+        return false;
+      };
       grammarWords.forEach((wd) => {
         const mine = [wd.ko].concat(Array.isArray(wd.forms) ? wd.forms : [])
           .map((k) => String(k || '').normalize('NFC').trim())
           .filter((k) => k.length >= 2);
-        if (!mine.some((k) => onScreen.indexOf(k) >= 0)) return;
+        if (!mine.some(uncovered)) return;
         if (mine.some((k) => winners.has(k))) return;
         stemDark.push('q' + it.n + ' ' + wd.ko);
       });

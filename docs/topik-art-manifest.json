@@ -2381,6 +2381,363 @@
       "file": "sprites/items/emoji_1f443_2.png",
       "reviewed": true,
       "standIn": true
+    },
+    {
+      "index": 680,
+      "ko": "방영",
+      "file": "sprites/items/emoji_1f4fa.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 681,
+      "ko": "톡톡히",
+      "file": "sprites/items/emoji_1f4a5_4.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 682,
+      "ko": "관광객",
+      "file": "sprites/items/emoji_1f9f3_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 683,
+      "ko": "물결",
+      "file": "sprites/items/emoji_1f30a_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 684,
+      "ko": "제작자",
+      "file": "sprites/items/emoji_1f3ac.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 685,
+      "ko": "모여들다",
+      "file": "sprites/items/emoji_1f465_4.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 686,
+      "ko": "덕분에",
+      "file": "sprites/items/emoji_1f64f.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 687,
+      "ko": "방문하다",
+      "file": "sprites/items/emoji_1f6aa_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 688,
+      "ko": "유치",
+      "file": "sprites/items/emoji_1f3a3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 689,
+      "ko": "홍보",
+      "file": "sprites/items/emoji_1f4e2_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 690,
+      "ko": "방송",
+      "file": "sprites/items/emoji_1f4fb.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 691,
+      "ko": "여러",
+      "file": "sprites/items/emoji_1f522_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 692,
+      "ko": "문제",
+      "file": "sprites/items/emoji_2753_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 693,
+      "ko": "선수",
+      "file": "sprites/items/emoji_1f3c5.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 694,
+      "ko": "시상대",
+      "file": "sprites/items/emoji_1f947.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 695,
+      "ko": "펜싱",
+      "file": "sprites/items/emoji_1f93a.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 696,
+      "ko": "종목",
+      "file": "sprites/items/emoji_1f3c6.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 697,
+      "ko": "메달",
+      "file": "sprites/items/emoji_1f396_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 698,
+      "ko": "가뭄",
+      "file": "sprites/items/emoji_1f3dc.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 699,
+      "ko": "대표팀",
+      "file": "sprites/items/emoji_1f3df.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 700,
+      "ko": "목표",
+      "file": "sprites/items/emoji_1f3af_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 701,
+      "ko": "열심히",
+      "file": "sprites/items/emoji_1f525_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 702,
+      "ko": "훈련하다",
+      "file": "sprites/items/emoji_1f3cb_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 703,
+      "ko": "따다",
+      "file": "sprites/items/emoji_1f3c6_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 704,
+      "ko": "오랜만에",
+      "file": "sprites/items/emoji_23f3_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 705,
+      "ko": "나오다",
+      "file": "sprites/items/emoji_2728_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 706,
+      "ko": "신기록",
+      "file": "sprites/items/emoji_1f4ca_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 707,
+      "ko": "경기를 펼치다",
+      "file": "sprites/items/emoji_1f93a_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 708,
+      "ko": "아쉽게",
+      "file": "sprites/items/emoji_1f61e.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 709,
+      "ko": "놓치다",
+      "file": "sprites/items/emoji_1f4a8.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 710,
+      "ko": "선 넘다",
+      "file": "sprites/items/emoji_1f6b7.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 711,
+      "ko": "악성",
+      "file": "sprites/items/emoji_2620.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 712,
+      "ko": "악의적",
+      "file": "sprites/items/emoji_1f608.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 713,
+      "ko": "댓글",
+      "file": "sprites/items/emoji_1f4ac.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 714,
+      "ko": "처벌",
+      "file": "sprites/items/emoji_2696_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 715,
+      "ko": "여전히",
+      "file": "sprites/items/emoji_1f501_4.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 716,
+      "ko": "솜방망이",
+      "file": "sprites/items/emoji_1f9f8_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 717,
+      "ko": "-(으)ㄴ 만큼",
+      "file": "sprites/items/emoji_1f4cf_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 718,
+      "ko": "수위",
+      "file": "sprites/items/emoji_1f4f6_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 719,
+      "ko": "낮추다",
+      "file": "sprites/items/emoji_2b07_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 720,
+      "ko": "의견",
+      "file": "sprites/items/emoji_1f4ad.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 721,
+      "ko": "제기되다",
+      "file": "sprites/items/emoji_1f64b_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 722,
+      "ko": "강화하다",
+      "file": "sprites/items/emoji_1f4aa_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 723,
+      "ko": "감소하다",
+      "file": "sprites/items/emoji_1f4c9_4.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 724,
+      "ko": "지나치게",
+      "file": "sprites/items/emoji_26a0_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 725,
+      "ko": "심각해지다",
+      "file": "sprites/items/emoji_1f630_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 726,
+      "ko": "아직도",
+      "file": "sprites/items/emoji_231b_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 727,
+      "ko": "이어지다",
+      "file": "sprites/items/emoji_27b0.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 728,
+      "ko": "피해자",
+      "file": "sprites/items/emoji_1f622_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 729,
+      "ko": "무겁다",
+      "file": "sprites/items/emoji_1faa8_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 730,
+      "ko": "요구하다",
+      "file": "sprites/items/emoji_270a.png",
+      "reviewed": true,
+      "standIn": true
     }
   ],
   "entries": [

@@ -388,6 +388,117 @@
           "en": "The book trade has 'Happiness Train' fever — a hundred thousand copies in a single month. Meaning: the book called 'Happiness Train' is hugely popular right now.",
           "why": "Three things to settle, and the headline hands you all three.\n\nFirst the quotation marks. '행복 열차' is in quotes, and 서점가 says what world we are in: the book trade. So it is a title, and the words inside a title are not there to be read for their meaning. Option 2 reads them anyway and puts a real train on real rails — 열차가 운행을 시작했다. This is the second question running where quotation marks are the signal: question 9 put 사르르 in them to mark a word standing in for a verb. One mark, two jobs, and both times the job is do not read this as ordinary running text.\n\nWorth noticing what the other three options do with it. All of them say 책. They agree because 서점가 already settled it, and option 2 is the one that ignored a context word the headline gave away for free. That is the tell — not that three options outvote one, but that one of them contradicts something already fixed.\n\nSecond, 앓이. It comes from 앓다, to be ill, and as an ending it turns whatever it attaches to into a craze for that thing. 서점가는 지금 '행복 열차' 앓이 = the book trade has come down with it. Nobody is ill, and nobody is standing in a shop. Option 4 invents a symptom — people reading on the premises — and to get there it swaps 서점가, the trade, for 서점, a shop you can walk into, and 팔리다, sold, for 읽다, being read. The headline counts sales.\n\nThird, 한 달 새 10만 부나 팔려. The 나 is the whole point of the number: it means as many as, and it exists to say the figure is larger than you would expect. That is the evidence for the craze. Option 3 turns the month back to front. 한 달 새 is a month that has already gone by; 이번 달까지만 판매된다 is a deadline still ahead. The word doing the damage is 만 — the same particle that decided question 6, this time narrowing rather than excluding.\n\nWhich leaves 1, and it is the whole headline in five words: 큰 인기를 얻고 있다.",
           "grammar": "-앓이 is productive: 앓다 (to be ill) gives 앓이, and it attaches to whatever people are obsessed with — 아이돌 앓이, 몸살앓이. In a headline it is always a craze, never a diagnosis.\n\nN(이)라는 = called N. '행복 열차'라는 책 is a book called Happiness Train, and it is how three of the four options tell you what kind of thing they are talking about. 이름의 in option 2 does the same job for the train it invented.\n\n새 is 사이 worn short: 한 달 새 = 한 달 사이, in the space of a month. And N(이)나 after a quantity means as many as — 10만 부나 팔려 — which is a different 나 from the one meaning or.\n\n팔려 is 팔리다 clipped where a headline would rather stop than conjugate: tenth headline, tenth verb either cut short or replaced by a noun."
+        },
+        {
+          "n": 25,
+          "art": "",
+          "phraseKo": "TV 프로그램 방영 효과 '톡톡', 인주시는 관광객 물결",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "TV 프로그램 방영 효과 '톡톡', 인주시는 관광객 물결"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "thanks",
+          "choices": [
+            {
+              "id": "filming",
+              "ko": "TV 프로그램 제작자들이 관광객을 촬영하러 인주시로 모여들었다."
+            },
+            {
+              "id": "thanks",
+              "ko": "인주시가 TV 프로그램에 나온 덕분에 많은 관광객이 방문하고 있다."
+            },
+            {
+              "id": "planning",
+              "ko": "인주시가 관광객 유치를 위해 TV 프로그램 홍보 방송을 준비하고 있다."
+            },
+            {
+              "id": "trouble",
+              "ko": "TV 프로그램 방송 후에 관광객이 증가해 인주시에 여러 문제가 발생했다."
+            }
+          ],
+          "en": "A television programme has paid off handsomely, and Inju City is awash with tourists.",
+          "why": "방영 효과 톡톡 is the broadcast paying off, and 관광객 물결 is what it paid off in — a wave of visitors. So the headline says one thing: being on television has filled Inju with tourists. ② says exactly that, and 덕분에 is the causal word 톡톡 is implying.\n\n① keeps every noun and reverses the direction of travel. The headline has tourists arriving in Inju; ① has programme-makers arriving to film the tourists. That is the subject quietly swapped, the fourth of the shapes this type keeps using, and reusing the vocabulary is what makes it read like a summary.\n\n③ turns a result into a plan. 준비하고 있다 means the broadcast has not gone out yet, and 방영 효과 means it has and the effect is already being felt. A headline reporting an effect is never reporting a preparation.\n\n④ imports a downside from nowhere. 물결 is a wave of visitors and 톡톡 is a pleased word; the headline is reporting a success. 여러 문제가 발생했다 is a claim about consequences that none of these seven words makes.",
+          "grammar": "톡톡히 is the word to know. 효과를 톡톡히 보다 is to get a solid benefit out of something, and a headline clipping it to 톡톡 inside quotation marks is quoting the adverb rather than a sound. Quotation marks in a headline always mark something not to be read as ordinary text.\n\n물결 is a wave, and Korean uses it for any surge of people or of feeling: 관광객 물결, 시위 물결. It is a noun, so the headline ends without a verb — normal in this register and part of why the options have to supply one.\n\n덕분에 credits a good outcome to something, 때문에 is neutral and 탓에 blames. Only 덕분에 fits a headline pleased about what happened.\n\n유치 is attracting something to your area — 관광객 유치, 기업 유치, 올림픽 유치. It is not the 유치하다 that means childish, which is a different word entirely."
+        },
+        {
+          "n": 26,
+          "art": "",
+          "phraseKo": "김수미 선수 시상대에 올라, 펜싱 종목 메달 가뭄 끝",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "김수미 선수 시상대에 올라, 펜싱 종목 메달 가뭄 끝"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "ended",
+          "choices": [
+            {
+              "id": "trained",
+              "ko": "김 선수가 펜싱 대표팀에서 메달을 목표로 열심히 훈련했다."
+            },
+            {
+              "id": "ended",
+              "ko": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다."
+            },
+            {
+              "id": "record",
+              "ko": "김 선수가 가장 많은 메달을 따며 펜싱 종목에서 신기록을 세웠다."
+            },
+            {
+              "id": "missed",
+              "ko": "김 선수가 펜싱 종목에서 좋은 경기를 펼쳤지만 아쉽게 메달을 놓쳤다."
+            }
+          ],
+          "en": "Kim Su-mi steps onto the podium, ending the medal drought in fencing.",
+          "why": "시상대에 올라 is stepping onto the winners' podium, so she took a medal. 메달 가뭄 끝 says the drought is over: fencing had gone a long time without one. ② carries both halves — she won a medal, and 오랜만에 a medal came in the fencing.\n\n④ is the headline reversed in its own vocabulary, which is the sixth shape and the one worth checking hardest. 시상대에 오르다 and 메달을 놓쳤다 cannot both be true. Every word of the option comes from the headline and the claim is the opposite one.\n\n③ overstates what a drought ending means. 가뭄 끝 is one medal after a long gap — the lowest bar there is — and 가장 많은 메달 with 신기록 is the highest. Nothing in the headline compares her with anyone.\n\n① reports the preparation rather than the result. 훈련했다 is what happened before, and 메달을 목표로 puts the medal still ahead of her. The headline has her already on the podium.",
+          "grammar": "가뭄 is a drought of rain, and Korean lends it to any long absence of something wanted: 메달 가뭄, 골 가뭄, 일감 가뭄. 끝 after it is a noun, so the whole headline runs without a verb.\n\n시상대에 오르다 takes 에, like 무대에 오르다 and 정상에 오르다. It is the standard way of saying someone placed, and it does not say which colour of medal.\n\n따다 is what you do to a medal, a licence or a fruit — 메달을 따다, 자격증을 따다. Its opposite here is 놓치다, to let something slip, which takes the same object.\n\n경기 in this paper means business conditions, and the 경기 in 좋은 경기를 펼치다 is the other one — a sporting contest. 경기를 펼치다 is to put on a performance, and it is entered here as a phrase so that the trade sense stays where it belongs.\n\n오랜만에 is after a long interval, and it is one word: the 만에 inside it is not the N 만에 that measures back to a last occurrence."
+        },
+        {
+          "n": 27,
+          "art": "",
+          "phraseKo": "선 넘은 악성 댓글, 처벌은 여전히 솜방망이",
+          "lines": [
+            {
+              "who": "제목",
+              "ko": "선 넘은 악성 댓글, 처벌은 여전히 솜방망이"
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "toolight",
+          "choices": [
+            {
+              "id": "lower",
+              "ko": "악의적인 댓글이 줄어든 만큼 처벌 수위를 낮추자는 의견이 제기됐다."
+            },
+            {
+              "id": "stronger",
+              "ko": "악의적인 댓글에 대한 처벌을 강화했으나 피해는 감소하지 않고 있다."
+            },
+            {
+              "id": "toolight",
+              "ko": "악의적인 댓글이 지나치게 심각해졌음에도 처벌 수위는 아직도 너무 낮다."
+            },
+            {
+              "id": "victims",
+              "ko": "악의적인 댓글이 계속 이어지자 피해자들이 무거운 처벌을 요구하고 나섰다."
+            }
+          ],
+          "en": "Malicious comments have gone past the line, and the punishment is still a slap on the wrist.",
+          "why": "Two halves pulling against each other. 선 넘은 악성 댓글 says the comments have gone past what is acceptable; 처벌은 여전히 솜방망이 says the penalty is still far too soft. The problem got worse and the punishment did not move. ③ says both.\n\n솜방망이 is the whole question. A 방망이 is a club; one made of 솜 — cotton wool — hits nothing. 솜방망이 처벌 is the set phrase for a penalty too light to deter anyone, and once it is read as light rather than as an object, the headline's complaint is plain.\n\n② has the punishment strengthened, which is what 여전히 rules out. 여전히 is not decoration: it says nothing has changed, so any option describing a change is wrong before its second half is read.\n\n① reverses both halves at once — comments falling, penalties to be lowered — while using the headline's own nouns. 선 넘다 is an increase in the problem, not a decrease.\n\n④ brings in people the headline never mentions. Victims stepping forward to demand heavier punishment is a plausible next article, and there is nothing in these eight words about victims or about anyone demanding anything. A headline complains here; it does not report a campaign.",
+          "grammar": "선(을) 넘다 is to cross the line, in the same figurative sense English has. The headline drops the particle, as headlines do, leaving 선 넘은 as a modifier on 댓글.\n\n악성 and 악의적 are both malicious and the paper uses one in the headline and the other in every option. 악성 attaches straight to a noun — 악성 댓글, 악성 코드 — while 악의적 needs -인 before one.\n\n여전히 is still, of a state that has not changed, and 아직도 is still, of something that ought to have finished by now. The headline uses the first and the answer uses the second, which is the swap that makes ③ a paraphrase rather than a repetition.\n\n수위 is a water level, and 처벌 수위 borrows it for how severe a punishment is: 수위를 높이다, 수위를 낮추다. -(으)ㄴ 만큼 in ① measures one thing against another — to the extent that they have fallen.\n\n-았/었음에도 is even though, built on the noun form -(으)ㅁ, and it belongs to writing. Its everyday twin is -았/었는데도."
         }
       ]
     },

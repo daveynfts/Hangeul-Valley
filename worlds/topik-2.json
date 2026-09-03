@@ -4407,10 +4407,13 @@
       },
       {
         "ko": "나서다",
-        "en": "to set out from a place",
+        "en": "to set out from a place; and after -고, to step forward and act",
         "hint": "🚶",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "나섰다"
+        ]
       },
       {
         "ko": "옆집",
@@ -5926,6 +5929,428 @@
         "categoryEn": "Health & the body",
         "forms": [
           "코가 납작해지게"
+        ]
+      },
+      {
+        "ko": "방영",
+        "en": "the airing of a programme",
+        "hint": "📺",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "톡톡히",
+        "en": "handsomely — of a benefit actually felt",
+        "hint": "💥",
+        "category": "언론",
+        "categoryEn": "Media & headlines",
+        "forms": [
+          "톡톡"
+        ]
+      },
+      {
+        "ko": "관광객",
+        "en": "a tourist",
+        "hint": "🧳",
+        "category": "여행",
+        "categoryEn": "Travel & leisure"
+      },
+      {
+        "ko": "물결",
+        "en": "a wave — of people, or of feeling",
+        "hint": "🌊",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "제작자",
+        "en": "a producer of a programme",
+        "hint": "🎬",
+        "category": "언론",
+        "categoryEn": "Media & headlines",
+        "forms": [
+          "제작자들"
+        ]
+      },
+      {
+        "ko": "모여들다",
+        "en": "to flock in from all sides",
+        "hint": "👥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "모여들었다"
+        ]
+      },
+      {
+        "ko": "덕분에",
+        "en": "thanks to — and the outcome is good",
+        "hint": "🙏",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "방문하다",
+        "en": "to visit a place",
+        "hint": "🚪",
+        "category": "여행",
+        "categoryEn": "Travel & leisure",
+        "forms": [
+          "방문하고"
+        ]
+      },
+      {
+        "ko": "유치",
+        "en": "attracting visitors or business to a place",
+        "hint": "🎣",
+        "category": "정치",
+        "categoryEn": "Politics & government"
+      },
+      {
+        "ko": "홍보",
+        "en": "publicity",
+        "hint": "📢",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "방송",
+        "en": "a broadcast",
+        "hint": "📻",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "여러",
+        "en": "several, various",
+        "hint": "🔢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "문제",
+        "en": "a problem",
+        "hint": "❓",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "선수",
+        "en": "an athlete",
+        "hint": "🏅",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "시상대",
+        "en": "the winners’ podium",
+        "hint": "🥇",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "펜싱",
+        "en": "fencing",
+        "hint": "🤺",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "종목",
+        "en": "an event or discipline in a sport",
+        "hint": "🏆",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "메달",
+        "en": "a medal",
+        "hint": "🎖️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "가뭄",
+        "en": "a drought — of rain, or of anything wanted",
+        "hint": "🏜️",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "대표팀",
+        "en": "the national team",
+        "hint": "🏟️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "목표",
+        "en": "a goal aimed at",
+        "hint": "🎯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "열심히",
+        "en": "hard, with effort",
+        "hint": "🔥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "훈련하다",
+        "en": "to train",
+        "hint": "🏋️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "훈련했다"
+        ]
+      },
+      {
+        "ko": "따다",
+        "en": "to take a medal or a licence",
+        "hint": "🏆",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "따면서",
+          "따며"
+        ]
+      },
+      {
+        "ko": "오랜만에",
+        "en": "after a long interval",
+        "hint": "⏳",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "나오다",
+        "en": "to come out, to appear",
+        "hint": "✨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "나왔다",
+          "나온"
+        ]
+      },
+      {
+        "ko": "신기록",
+        "en": "a new record",
+        "hint": "📊",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "경기를 펼치다",
+        "en": "to put on a performance in a match — 경기 in its sporting sense",
+        "hint": "🤺",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "경기를 펼쳤지만"
+        ]
+      },
+      {
+        "ko": "아쉽게",
+        "en": "disappointingly, by a narrow margin",
+        "hint": "😞",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "놓치다",
+        "en": "to let something slip",
+        "hint": "💨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "놓쳤다"
+        ]
+      },
+      {
+        "ko": "선 넘다",
+        "en": "to cross the line",
+        "hint": "🚷",
+        "category": "언론",
+        "categoryEn": "Media & headlines",
+        "forms": [
+          "선 넘은"
+        ]
+      },
+      {
+        "ko": "악성",
+        "en": "malicious — straight onto a noun",
+        "hint": "☠️",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "악의적",
+        "en": "malicious — and it needs -인 before a noun",
+        "hint": "😈",
+        "category": "언론",
+        "categoryEn": "Media & headlines",
+        "forms": [
+          "악의적인"
+        ]
+      },
+      {
+        "ko": "댓글",
+        "en": "a comment posted online",
+        "hint": "💬",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "처벌",
+        "en": "punishment",
+        "hint": "⚖️",
+        "category": "정치",
+        "categoryEn": "Politics & government"
+      },
+      {
+        "ko": "여전히",
+        "en": "still — nothing has changed",
+        "hint": "🔁",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "솜방망이",
+        "en": "a cotton club — a penalty too light to deter",
+        "hint": "🧸",
+        "category": "언론",
+        "categoryEn": "Media & headlines"
+      },
+      {
+        "ko": "-(으)ㄴ 만큼",
+        "en": "to the extent that",
+        "hint": "📏",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "만큼"
+        ]
+      },
+      {
+        "ko": "수위",
+        "en": "the level, of water or of severity",
+        "hint": "📶",
+        "category": "정치",
+        "categoryEn": "Politics & government"
+      },
+      {
+        "ko": "낮추다",
+        "en": "to lower something",
+        "hint": "⬇️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "낮추자는"
+        ]
+      },
+      {
+        "ko": "의견",
+        "en": "an opinion put forward",
+        "hint": "💭",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "제기되다",
+        "en": "to be raised, of an argument",
+        "hint": "🙋",
+        "category": "정치",
+        "categoryEn": "Politics & government",
+        "forms": [
+          "제기됐다"
+        ]
+      },
+      {
+        "ko": "강화하다",
+        "en": "to tighten or strengthen",
+        "hint": "💪",
+        "category": "정치",
+        "categoryEn": "Politics & government",
+        "forms": [
+          "강화했으나"
+        ]
+      },
+      {
+        "ko": "감소하다",
+        "en": "to decrease — the formal word",
+        "hint": "📉",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "감소하지"
+        ]
+      },
+      {
+        "ko": "지나치게",
+        "en": "excessively",
+        "hint": "⚠️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "심각해지다",
+        "en": "to grow serious",
+        "hint": "😰",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "심각해졌음에도"
+        ]
+      },
+      {
+        "ko": "아직도",
+        "en": "still — when it ought to have finished by now",
+        "hint": "⌛",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "이어지다",
+        "en": "to go on, one after another",
+        "hint": "➰",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "이어지자"
+        ]
+      },
+      {
+        "ko": "피해자",
+        "en": "a victim",
+        "hint": "😢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "피해자들"
+        ]
+      },
+      {
+        "ko": "무겁다",
+        "en": "to be heavy — of a penalty as well as a weight",
+        "hint": "🪨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "무거운"
+        ]
+      },
+      {
+        "ko": "요구하다",
+        "en": "to demand",
+        "hint": "✊",
+        "category": "정치",
+        "categoryEn": "Politics & government",
+        "forms": [
+          "요구하고"
         ]
       }
     ]
