@@ -16,6 +16,7 @@ rather than by the day a question arrived. The types so far:
 | `topik2-notice` | 안내문·도표 | a poster or a chart and four statements, three of which alter one detail |
 | `topik2-order` | 순서 배열 | four sentences out of order, and four orderings of them |
 | `topik2-passage` | 지문 빈칸 | a passage with one phrase cut out, and four ideas to fill it |
+| `topik2-double` | 읽고 답하기 | one passage, two questions — a connective and the 주제, on `choices2` |
 
 The bank sets `drawOne: true`, so a sitting is one question drawn from the whole
 paper rather than the paper worked through. The draw is a bag, not `Math.random()` —
@@ -122,6 +123,18 @@ character each, which the index drops. Set `labelOptions: true` on the exercise 
 skips it. It is declared rather than sniffed out of the option text, so an ordinary option that
 has genuinely lost its vocabulary still fails. The four lines above the options are untouched
 by the exemption and still carry the whole question's vocabulary.
+
+### Rule 6 — a second question lives in `choices2`, and two checks did not know
+
+문항 19-20 is one passage answering two questions, which the renderer has always supported:
+`choices2` plus `answer2`, two `{}` in the lines, scored 2/2. No exam question had used it,
+and two of the gloss checks in `validate_content.js` built their corpus from `choices` alone —
+so seven words that appear only in the second question could never win a hover position and
+were reported as unreachable. Both now read `choices.concat(choices2)`, which is what
+`checkExamChoicesGloss` had been doing all along.
+
+The same shape is worth watching for anywhere a field is optional: a check written before the
+field was ever used will not fail loudly, it will report the content as broken.
 
 ### What the invariants deliberately do not catch
 

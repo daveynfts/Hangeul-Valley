@@ -1510,6 +1510,92 @@
           "grammar": "N에 달하다 is to reach a figure, and the figure takes 에: 수십 톤에 달하다, 백만 명에 달하다. It belongs to writing and to news.\n\n-(으)려면 is if you mean to. 운반하고 세우려면 … 힘이 필요했다 — the first clause is the intention and the second what it requires. It is the conditional that assumes someone wants the thing done.\n\n-(으)ㄹ 정도로 is to the degree that. Whatever follows it is measured against the clause in front, which is exactly why it is where this question hides its work: 시킬 수 있을 정도로 대단한 권력.\n\n-았을 것으로 보인다 is it appears to have been — a conclusion with a hedge on it, and the standard register for writing about the distant past. The paper uses it because the claim is inferred from stones rather than recorded.\n\n시키다 is to make someone do a thing and takes 을/를 for the work itself: 일을 시키다, 숙제를 시키다. The general causative 하게 하다 puts the person in 에게 instead, and the two are not interchangeable here."
         }
       ]
+    },
+    {
+      "id": "topik2-double",
+      "type": "build",
+      "no": "유형 · 문항 19-20",
+      "pattern": "한 지문, 두 문항",
+      "section": "읽고 답하기",
+      "sectionEn": "One passage, two questions",
+      "icon": "📖",
+      "instructionKo": "다음을 읽고 물음에 답하십시오.",
+      "instructionEn": "Read the passage and answer both questions.",
+      "blurbEn": "One passage answering two questions at once: a connective missing from it, and what the whole thing is about.",
+      "noteEn": "From 문항 19 on, a passage carries two questions rather than one, and the two want opposite kinds of reading. The first is usually a connective cut out of the text, which is decided by the two sentences on either side of the gap and nothing else. The second asks for the 주제 — what the passage as a whole is for — which is decided by everything except the sentence you are looking at.\n\nDo the connective first, and do it locally. Read the clause before the gap and the clause after it, and name the relation between them: are they two of the same thing, or does the second turn against the first? Two benefits in a row want 또한 or 게다가. A reversal wants 반면 or 그러나. A supposition being conceded wants 비록, and 비록 is never alone — it needs -지만 or -더라도 later in its own sentence, so its absence rules 비록 out without reading the meaning at all.\n\nThen do the 주제, and do it globally. A 주제 option has to cover the passage rather than appear in it, and the three wrong ones fail in the same three ways every time.\n\n1. A true detail promoted to the theme. 도로 침수 really is in the passage — as one of the problems being solved, not as the point. If an option restates one sentence, it is a detail.\n\n2. A word from the passage in a claim the passage never makes. 오염 sounds like it belongs to a paragraph about groundwater and rain, and it is simply not there.\n\n3. Something plausible that the passage has no sentence for. 도시마다의 환경적 특성 is a reasonable thing to say about paving; nothing in these six sentences says it.\n\nA useful check: the answer to a 주제 question almost always names the thing the passage introduced with 그런데 or 최근 — the new development the rest of the paragraph exists to explain.",
+      "bank": [],
+      "items": [
+        {
+          "n": 19,
+          "art": "",
+          "phraseKo": "도시의 도로는 대부분 물이 스며들지 않는 아스팔트로 뒤덮여 있다.",
+          "lines": [
+            {
+              "ko": "도시의 도로는 대부분 물이 스며들지 않는 아스팔트로 뒤덮여 있다."
+            },
+            {
+              "ko": "그래서 비가 오면 빗물이 지하로 잘 흘러 들어가지 못해 지하수가 부족해지고 도로가 물에 잠기는 일도 자주 발생한다."
+            },
+            {
+              "ko": "그런데 최근 물이 잘 스며드는 도로 포장재가 개발되었다."
+            },
+            {
+              "ko": "이 포장재에는 미세한 구멍이 많다."
+            },
+            {
+              "ko": "그래서 빗물이 쉽게 통과해 지하수 자원이 보충된다."
+            },
+            {
+              "ko": "{} 하수구로 몰리는 빗물의 양이 줄어 도로 침수의 위험도 줄어들게 된다."
+            },
+            {
+              "who": "주제",
+              "ko": "{}"
+            }
+          ],
+          "answer": "tohan",
+          "choices": [
+            {
+              "id": "tohan",
+              "ko": "또한"
+            },
+            {
+              "id": "birok",
+              "ko": "비록"
+            },
+            {
+              "id": "gwayeon",
+              "ko": "과연"
+            },
+            {
+              "id": "banmyeon",
+              "ko": "반면"
+            }
+          ],
+          "answer2": "newpave",
+          "choices2": [
+            {
+              "id": "pollution",
+              "ko": "빗물은 지하수 오염을 줄이는 데 중요한 역할을 한다."
+            },
+            {
+              "id": "percity",
+              "ko": "도로 포장재에는 도시마다의 환경적 특성이 반영되어 있다."
+            },
+            {
+              "id": "flooding",
+              "ko": "도로 침수는 도시에 매우 심각한 피해를 입히는 요인 중 하나이다."
+            },
+            {
+              "id": "newpave",
+              "ko": "새 포장재가 지하수 부족과 도로 침수 문제 해결에 도움이 될 것이다."
+            }
+          ],
+          "en": "City roads are mostly covered in asphalt, which water cannot soak through. So when it rains, the rainwater does not drain well into the ground: groundwater runs short, and roads flood often. Recently, though, a road surfacing material that water passes through easily has been developed. It is full of fine holes, so rainwater goes straight through and the groundwater supply is replenished. It also means less water rushing into the drains, so the risk of roads flooding falls as well.",
+          "why": "The gap takes 또한. The sentence before it says the new surface replenishes groundwater; the sentence after says less water floods the drains, so roads flood less. Both are benefits of the same material, so the relation is addition, and 또한 is the word for a second item of the same kind.\n\n반면 is the trap, and the only one worth weighing. It marks a contrast, and there is a surface reason to expect one — the paragraph did open on a problem. But by this point the problem is two sentences behind and both clauses around the gap are advantages. What decides it is the pair either side of the gap, never the shape of the paragraph as a whole.\n\n비록 can be ruled out without reading for meaning at all: it needs -지만 or -더라도 later in its own sentence, and there is none. 과연 is a speaker's reaction — sure enough, I wonder — and belongs to speech rather than to an explanatory paragraph.\n\nThe 주제 is ④. The passage is built as a problem and its answer: asphalt keeps water out, so groundwater runs short and roads flood; a new permeable material fixes both. ④ names the new material and both problems, which is the whole shape of the paragraph in one sentence.\n\n③ is the detail promoted to a theme. 도로 침수 is genuinely in the passage, but as one of the two things being solved, and an option that restates a single sentence is a detail rather than a point. ① uses 오염, which is nowhere in the text — a word that sounds at home beside groundwater and rain, and is simply absent. ② says something reasonable about paving varying by city; no sentence here says it.\n\nThe quick route to a 주제: find what the passage introduced with 그런데 or 최근. Here it is 새 포장재, and the three sentences after it exist to explain what it does. That is the theme, and ④ is the only option built round it.",
+          "grammar": "또한 adds a second item of the same kind and belongs to writing; 게다가 is its spoken cousin and carries a hint of piling on. 반면 marks a contrast and usually takes -(으)ㄴ 반면 on a clause. 비록 must be answered later in the sentence by -지만 or -더라도, so a sentence without one cannot be taking 비록. 과연 is the speaker reacting — 과연 그렇구나 — and does not join two facts.\n\n스며들다 is to soak through, and it takes the thing soaked in with 에: 물이 땅에 스며들다. 통과하다 is to pass through and takes 을/를. The passage uses both of the same water.\n\n-아/어지다 turns an adjective into a change of state: 부족하다 is to be short, 부족해지다 is to become short. The same shape gives 많아지다, 좋아지다, and it is why the sentence reads 부족해지고 rather than 부족하고.\n\n뒤덮여 있다 is -아/어 있다 on a passive: covered over, and still in that state. Keep it apart from 뒤덮고 있다, which would mean something is doing the covering right now.\n\n줄다 and 줄어들다 are both to decrease, with 줄어들다 the more gradual of the two, and the passage uses one of each in the same sentence. -게 되다 on the end — 줄어들게 된다 — says the decrease comes about as a result rather than because anyone arranged it."
+        }
+      ]
     }
   ]
 }

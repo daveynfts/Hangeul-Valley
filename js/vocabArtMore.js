@@ -5217,6 +5217,286 @@ const TOPIK_VOCAB_ART_ROWS = [
     "folder": "items",
     "nameEn": "to the degree that",
     "family": "topik-vocabulary"
+  },
+  {
+    "ko": "도시",
+    "slug": "emoji_1f3d9",
+    "folder": "items",
+    "nameEn": "a city",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "도로",
+    "slug": "emoji_1f6e3",
+    "folder": "items",
+    "nameEn": "a road",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "대부분",
+    "slug": "emoji_1f967",
+    "folder": "items",
+    "nameEn": "for the most part",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "아스팔트",
+    "slug": "emoji_2b1b",
+    "folder": "items",
+    "nameEn": "asphalt",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "스며들다",
+    "slug": "emoji_1f4a7",
+    "folder": "items",
+    "nameEn": "to soak through into",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "뒤덮이다",
+    "slug": "emoji_1f32b",
+    "folder": "items",
+    "nameEn": "to be covered over",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "빗물",
+    "slug": "emoji_1f327",
+    "folder": "items",
+    "nameEn": "rainwater",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "지하",
+    "slug": "emoji_2b07_2",
+    "folder": "items",
+    "nameEn": "underground",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "흘러 들어가다",
+    "slug": "emoji_1f30a",
+    "folder": "items",
+    "nameEn": "to flow in",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "지하수",
+    "slug": "emoji_1f6b0",
+    "folder": "items",
+    "nameEn": "groundwater",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "부족",
+    "slug": "emoji_1f573",
+    "folder": "items",
+    "nameEn": "a shortage",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "부족해지다",
+    "slug": "emoji_1f4c9_3",
+    "folder": "items",
+    "nameEn": "to run short",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "잠기다",
+    "slug": "emoji_1f6df",
+    "folder": "items",
+    "nameEn": "to be submerged",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "자주",
+    "slug": "emoji_1f501_2",
+    "folder": "items",
+    "nameEn": "often",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "포장재",
+    "slug": "emoji_1f9f1_2",
+    "folder": "items",
+    "nameEn": "a surfacing material",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "개발되다",
+    "slug": "emoji_1f52c",
+    "folder": "items",
+    "nameEn": "to be developed, of a product",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "미세하다",
+    "slug": "emoji_1f50d_2",
+    "folder": "items",
+    "nameEn": "to be minute",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "구멍",
+    "slug": "emoji_1f573_2",
+    "folder": "items",
+    "nameEn": "a hole",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "쉽게",
+    "slug": "emoji_1f44c_2",
+    "folder": "items",
+    "nameEn": "easily",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "통과하다",
+    "slug": "emoji_1f6aa_2",
+    "folder": "items",
+    "nameEn": "to pass through",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "자원",
+    "slug": "emoji_1f48e_2",
+    "folder": "items",
+    "nameEn": "a natural resource",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "보충되다",
+    "slug": "emoji_2795",
+    "folder": "items",
+    "nameEn": "to be replenished",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "하수구",
+    "slug": "emoji_1f6bf",
+    "folder": "items",
+    "nameEn": "a drain",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "몰리다",
+    "slug": "emoji_1f300_2",
+    "folder": "items",
+    "nameEn": "to rush together into one place",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "침수",
+    "slug": "emoji_1f30a_2",
+    "folder": "items",
+    "nameEn": "flooding",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "위험",
+    "slug": "emoji_26a0",
+    "folder": "items",
+    "nameEn": "a risk",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "또한",
+    "slug": "emoji_2795_2",
+    "folder": "items",
+    "nameEn": "and also — a second thing of the same kind",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "비록",
+    "slug": "emoji_1f937",
+    "folder": "items",
+    "nameEn": "although — and it needs -지만 later in the sentence",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "과연",
+    "slug": "emoji_2753",
+    "folder": "items",
+    "nameEn": "sure enough — the speaker reacting",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "반면",
+    "slug": "emoji_2194",
+    "folder": "items",
+    "nameEn": "on the other hand",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "오염",
+    "slug": "emoji_1f3ed",
+    "folder": "items",
+    "nameEn": "pollution",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "역할",
+    "slug": "emoji_1f3ad",
+    "folder": "items",
+    "nameEn": "a role something plays",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N마다",
+    "slug": "emoji_1f502_2",
+    "folder": "items",
+    "nameEn": "each and every N",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "환경적",
+    "slug": "emoji_1f331_2",
+    "folder": "items",
+    "nameEn": "environmental",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "반영되다",
+    "slug": "emoji_1fa9e",
+    "folder": "items",
+    "nameEn": "to be reflected in",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "매우",
+    "slug": "emoji_2757_2",
+    "folder": "items",
+    "nameEn": "very — the written one, a step stiffer than 아주",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "피해를 입히다",
+    "slug": "emoji_1f4a5_2",
+    "folder": "items",
+    "nameEn": "to do harm to",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "요인",
+    "slug": "emoji_1f9e9",
+    "folder": "items",
+    "nameEn": "a contributing factor",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "중 하나",
+    "slug": "emoji_31_20e3",
+    "folder": "items",
+    "nameEn": "one of the …",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "해결",
+    "slug": "emoji_1f511",
+    "folder": "items",
+    "nameEn": "a solution",
+    "family": "topik-vocabulary"
   }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {

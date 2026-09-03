@@ -123,7 +123,8 @@
         "forms": [
           "줄었다",
           "줄어",
-          "줄어들다"
+          "줄어들다",
+          "줄어들게"
         ]
       },
       {
@@ -5332,6 +5333,326 @@
         "forms": [
           "있을 정도로"
         ]
+      },
+      {
+        "ko": "도시",
+        "en": "a city",
+        "hint": "🏙️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "도로",
+        "en": "a road",
+        "hint": "🛣️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "대부분",
+        "en": "for the most part",
+        "hint": "🥧",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "아스팔트",
+        "en": "asphalt",
+        "hint": "⬛",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "스며들다",
+        "en": "to soak through into",
+        "hint": "💧",
+        "category": "환경",
+        "categoryEn": "Environment & waste",
+        "forms": [
+          "스며들지",
+          "스며드는"
+        ]
+      },
+      {
+        "ko": "뒤덮이다",
+        "en": "to be covered over",
+        "hint": "🌫️",
+        "category": "환경",
+        "categoryEn": "Environment & waste",
+        "forms": [
+          "뒤덮여"
+        ]
+      },
+      {
+        "ko": "빗물",
+        "en": "rainwater",
+        "hint": "🌧️",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "지하",
+        "en": "underground",
+        "hint": "⬇️",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "흘러 들어가다",
+        "en": "to flow in",
+        "hint": "🌊",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons",
+        "forms": [
+          "흘러 들어가지"
+        ]
+      },
+      {
+        "ko": "지하수",
+        "en": "groundwater",
+        "hint": "🚰",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "부족",
+        "en": "a shortage",
+        "hint": "🕳️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "부족해지다",
+        "en": "to run short",
+        "hint": "📉",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "부족해지고"
+        ]
+      },
+      {
+        "ko": "잠기다",
+        "en": "to be submerged",
+        "hint": "🛟",
+        "category": "환경",
+        "categoryEn": "Environment & waste",
+        "forms": [
+          "잠기는"
+        ]
+      },
+      {
+        "ko": "자주",
+        "en": "often",
+        "hint": "🔁",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "포장재",
+        "en": "a surfacing material",
+        "hint": "🧱",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "개발되다",
+        "en": "to be developed, of a product",
+        "hint": "🔬",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "개발되었다"
+        ]
+      },
+      {
+        "ko": "미세하다",
+        "en": "to be minute",
+        "hint": "🔍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "미세한"
+        ]
+      },
+      {
+        "ko": "구멍",
+        "en": "a hole",
+        "hint": "🕳️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "쉽게",
+        "en": "easily",
+        "hint": "👌",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "통과하다",
+        "en": "to pass through",
+        "hint": "🚪",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "통과해"
+        ]
+      },
+      {
+        "ko": "자원",
+        "en": "a natural resource",
+        "hint": "💎",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "보충되다",
+        "en": "to be replenished",
+        "hint": "➕",
+        "category": "환경",
+        "categoryEn": "Environment & waste",
+        "forms": [
+          "보충된다"
+        ]
+      },
+      {
+        "ko": "하수구",
+        "en": "a drain",
+        "hint": "🚿",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "몰리다",
+        "en": "to rush together into one place",
+        "hint": "🌀",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "몰리는"
+        ]
+      },
+      {
+        "ko": "침수",
+        "en": "flooding",
+        "hint": "🌊",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "위험",
+        "en": "a risk",
+        "hint": "⚠️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "또한",
+        "en": "and also — a second thing of the same kind",
+        "hint": "➕",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "비록",
+        "en": "although — and it needs -지만 later in the sentence",
+        "hint": "🤷",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "과연",
+        "en": "sure enough — the speaker reacting",
+        "hint": "❓",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "반면",
+        "en": "on the other hand",
+        "hint": "↔️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "오염",
+        "en": "pollution",
+        "hint": "🏭",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "역할",
+        "en": "a role something plays",
+        "hint": "🎭",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "N마다",
+        "en": "each and every N",
+        "hint": "🔂",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "마다"
+        ]
+      },
+      {
+        "ko": "환경적",
+        "en": "environmental",
+        "hint": "🌱",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "반영되다",
+        "en": "to be reflected in",
+        "hint": "🪞",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "반영되어"
+        ]
+      },
+      {
+        "ko": "매우",
+        "en": "very — the written one, a step stiffer than 아주",
+        "hint": "❗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "피해를 입히다",
+        "en": "to do harm to",
+        "hint": "💥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "피해를 입히는"
+        ]
+      },
+      {
+        "ko": "요인",
+        "en": "a contributing factor",
+        "hint": "🧩",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "중 하나",
+        "en": "one of the …",
+        "hint": "1️⃣",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "해결",
+        "en": "a solution",
+        "hint": "🔑",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
       }
     ]
   },

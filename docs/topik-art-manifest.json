@@ -1877,6 +1877,286 @@
       "file": "sprites/items/emoji_1f4f6.png",
       "reviewed": true,
       "standIn": true
+    },
+    {
+      "index": 608,
+      "ko": "도시",
+      "file": "sprites/items/emoji_1f3d9.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 609,
+      "ko": "도로",
+      "file": "sprites/items/emoji_1f6e3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 610,
+      "ko": "대부분",
+      "file": "sprites/items/emoji_1f967.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 611,
+      "ko": "아스팔트",
+      "file": "sprites/items/emoji_2b1b.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 612,
+      "ko": "스며들다",
+      "file": "sprites/items/emoji_1f4a7.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 613,
+      "ko": "뒤덮이다",
+      "file": "sprites/items/emoji_1f32b.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 614,
+      "ko": "빗물",
+      "file": "sprites/items/emoji_1f327.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 615,
+      "ko": "지하",
+      "file": "sprites/items/emoji_2b07_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 616,
+      "ko": "흘러 들어가다",
+      "file": "sprites/items/emoji_1f30a.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 617,
+      "ko": "지하수",
+      "file": "sprites/items/emoji_1f6b0.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 618,
+      "ko": "부족",
+      "file": "sprites/items/emoji_1f573.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 619,
+      "ko": "부족해지다",
+      "file": "sprites/items/emoji_1f4c9_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 620,
+      "ko": "잠기다",
+      "file": "sprites/items/emoji_1f6df.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 621,
+      "ko": "자주",
+      "file": "sprites/items/emoji_1f501_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 622,
+      "ko": "포장재",
+      "file": "sprites/items/emoji_1f9f1_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 623,
+      "ko": "개발되다",
+      "file": "sprites/items/emoji_1f52c.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 624,
+      "ko": "미세하다",
+      "file": "sprites/items/emoji_1f50d_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 625,
+      "ko": "구멍",
+      "file": "sprites/items/emoji_1f573_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 626,
+      "ko": "쉽게",
+      "file": "sprites/items/emoji_1f44c_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 627,
+      "ko": "통과하다",
+      "file": "sprites/items/emoji_1f6aa_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 628,
+      "ko": "자원",
+      "file": "sprites/items/emoji_1f48e_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 629,
+      "ko": "보충되다",
+      "file": "sprites/items/emoji_2795.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 630,
+      "ko": "하수구",
+      "file": "sprites/items/emoji_1f6bf.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 631,
+      "ko": "몰리다",
+      "file": "sprites/items/emoji_1f300_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 632,
+      "ko": "침수",
+      "file": "sprites/items/emoji_1f30a_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 633,
+      "ko": "위험",
+      "file": "sprites/items/emoji_26a0.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 634,
+      "ko": "또한",
+      "file": "sprites/items/emoji_2795_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 635,
+      "ko": "비록",
+      "file": "sprites/items/emoji_1f937.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 636,
+      "ko": "과연",
+      "file": "sprites/items/emoji_2753.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 637,
+      "ko": "반면",
+      "file": "sprites/items/emoji_2194.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 638,
+      "ko": "오염",
+      "file": "sprites/items/emoji_1f3ed.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 639,
+      "ko": "역할",
+      "file": "sprites/items/emoji_1f3ad.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 640,
+      "ko": "N마다",
+      "file": "sprites/items/emoji_1f502_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 641,
+      "ko": "환경적",
+      "file": "sprites/items/emoji_1f331_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 642,
+      "ko": "반영되다",
+      "file": "sprites/items/emoji_1fa9e.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 643,
+      "ko": "매우",
+      "file": "sprites/items/emoji_2757_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 644,
+      "ko": "피해를 입히다",
+      "file": "sprites/items/emoji_1f4a5_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 645,
+      "ko": "요인",
+      "file": "sprites/items/emoji_1f9e9.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 646,
+      "ko": "중 하나",
+      "file": "sprites/items/emoji_31_20e3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 647,
+      "ko": "해결",
+      "file": "sprites/items/emoji_1f511.png",
+      "reviewed": true,
+      "standIn": true
     }
   ],
   "entries": [

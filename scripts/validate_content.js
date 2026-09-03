@@ -602,7 +602,7 @@ const overlayIds = [
   (qbank.exercises || []).forEach((ex) => {
     (ex.items || []).forEach((it) => {
       const shown = [it.phraseKo].concat((it.lines || []).map((l) => l.ko))
-        .concat((it.choices || []).map((c) => c.ko));
+        .concat((it.choices || []).concat(it.choices2 || []).map((c) => c.ko));
       const onScreen = shown.filter(Boolean).map((t) => String(t).normalize('NFC')).join('  ');
       if (!onScreen) return;
       // Winners are counted on the sentence and its options only, never on the notes. The
@@ -1664,7 +1664,9 @@ const overlayIds = [
       (ex.items || []).forEach((it) => {
         corpus.push(it.phraseKo, it.en, it.why, it.grammar);
         (it.lines || []).forEach((l) => corpus.push(l.ko));
-        (it.choices || []).forEach((c) => corpus.push(c.ko));
+        // choices2 too: 문항 19-20 puts a whole second question in it, and a word that lives
+        // only there is still a word the learner reads.
+        (it.choices || []).concat(it.choices2 || []).forEach((c) => corpus.push(c.ko));
       });
     });
     // Two spaces between fields, so a key cannot match across a boundary that is not
@@ -1697,12 +1699,16 @@ const overlayIds = [
     // "a book" under the tail of 정책이, and today it only escapes because 부동산 정책 is longer
     // and wins first.
     //
-    // Known limit, found by probing rather than by reasoning: the Hangul-on-both-sides half
-    // cannot tell a particle stack from a word. 텔레비전에서는 breaks as 텔레비전 + 에서 + 는,
-    // so a key on 에서 would sit between two Hangul syllables and be flagged even though it is
-    // parsing correctly. Nothing in the world hits that today. If a stacking particle is ever
-    // added and this fails on it, the check is wrong and not the content — loosen it then,
-    // with the case written down here.
+    // That limit arrived, as predicted. The Hangul-on-both-sides half could not tell a particle
+    // stack from a word: 도시마다의 is 도시 + 마다 + 의, so N마다 sits between two Hangul
+    // syllables and was flagged while parsing exactly right — the same shape the note here
+    // predicted for 텔레비전에서는 (텔레비전 + 에서 + 는). So the check no longer looks at what
+    // follows an ending at all: an ending or a particle attaches to whatever is in front of it
+    // and Korean stacks them freely, and this check has no way to tell a stack from a word.
+    //
+    // A content word keeps the strict rule, which is the half that earned its place: '전에'
+    // firing across the middle of 텔레비전에서는, or '책이' under the tail of 정책이, are
+    // still caught, because neither headword is written '-…' or 'N…'.
     const isEnding = (ko) => /^[-N]/.test(String(ko || ''));
     const hangul = (ch) => !!ch && ch >= '\uac00' && ch <= '\ud7a3';
     const midWord = [];
@@ -1711,10 +1717,8 @@ const overlayIds = [
     while ((hit = re.exec(text))) {
       const before = hit.index > 0 ? text[hit.index - 1] : '';
       if (!hangul(before)) continue;
+      if (isEnding(owner.get(hit[0]))) continue;
       const after = text[hit.index + hit[0].length] || '';
-      const insideAWord = hangul(after);
-      const unlicensed = !isEnding(owner.get(hit[0]));
-      if (!insideAWord && !unlicensed) continue;
       const at = before + '[' + hit[0] + ']' + after;
       if (midWord.indexOf(at) < 0) midWord.push(at);
     }
