@@ -1210,6 +1210,170 @@
           "grammar": "-던 marks an action that was under way at the time: 산을 오르던 경찰 is a policeman in the middle of a climb, not one who climbs. It is what makes 휴일에 do its work — he was off duty and out walking rather than on patrol, which is the fact option 4 needs you to have missed.\n\n-아/어 있다 is a state left standing after an action finishes, not an action in progress. 쓰러져 있다 is lying collapsed; 앉아 있다 is seated. 쓰러지고 있다 would be falling over at that moment, which is a different picture and not what anyone finds at a summit.\n\n-지 않게 states the purpose the next action serves. 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 is one continuous act built out of three verbs: -아/어서 is sequence (take it off, and then), -아/어 주다 is doing it for her rather than for himself, and -고 carries on to the next thing he did.\n\n업다 is to carry on your back, and it is worth keeping apart from 안다, which is in your arms, and 들다, which is in your hands. 뛰어 내려가다 stacks two directions of travel on each other — running, and going down — the way Korean regularly does with movement verbs.\n\n이송되다 is the passive of 이송하다 and belongs to hospital and emergency reporting rather than to conversation: 병원으로 이송되다 is the phrase a news item uses. And 되찾다 carries the prefix 되-, which puts back or again on a verb: 되찾다 to get back and 되살리다 to bring back to life."
         }
       ]
+    },
+    {
+      "id": "topik2-order",
+      "type": "build",
+      "no": "유형 · 문항 13-15",
+      "pattern": "순서에 맞게 배열하기",
+      "section": "순서 배열",
+      "sectionEn": "Putting sentences in order",
+      "icon": "🔢",
+      "instructionKo": "다음을 순서에 맞게 배열한 것을 고르십시오.",
+      "instructionEn": "Choose the correct order for the sentences.",
+      "blurbEn": "Four sentences out of order and four orderings — but the sentence that can open, and one connective, usually settle it.",
+      "labelOptions": true,
+      "noteEn": "Four sentences printed out of order, four orderings offered, and the options do a good deal of the work for you. Read what they propose as the first sentence before reading the sentences themselves; that alone usually leaves two.\n\nThe opening sentence is the one that needs nothing in front of it. It names its subject with 은/는 instead of pointing back at one, and it carries no connective at all. A sentence that begins 그래서, 그런데, 따라서, 이후 or 그 is out of first place before you have read what it says.\n\nConnectives then pin sentences to each other, and two pins usually finish the ordering. 그래서 and 따라서 need a cause standing in front of them. 그런데 needs something to turn against. 오히려 needs an expectation, stated earlier, that it can overturn.\n\n도 and 까지 mark an addition, so a sentence carrying either cannot be the first of the things being added. 것도 장점이다 is a second advantage, so the first one is somewhere above it. 거절하는 경우까지 발생한다 is the far end of a problem, so the ordinary case comes before.\n\nA conclusion goes last. 따라서 … 해야 한다 is advice drawn from everything above it, and advice placed in the middle would be advice about nothing yet said.\n\nWhere a paragraph also runs on a clock — 밤새, 아침에 — check that the time words and the connectives agree. When they do you can stop reading; when they do not, you have misread one of them, and it is nearly always the connective.",
+      "bank": [],
+      "items": [
+        {
+          "n": 13,
+          "art": "",
+          "phraseKo": "신비 복숭아는 2017년에 한국에 처음 소개된 여름 과일이다.",
+          "lines": [
+            {
+              "who": "가",
+              "ko": "그래서 껍질째 먹기도 편하고 딱딱하지 않아서 식감도 좋다."
+            },
+            {
+              "who": "나",
+              "ko": "신비 복숭아는 2017년에 한국에 처음 소개된 여름 과일이다."
+            },
+            {
+              "who": "다",
+              "ko": "다른 복숭아에 비해 이른 시기에 먹을 수 있다는 것도 장점이다."
+            },
+            {
+              "who": "라",
+              "ko": "껍질이 얇은 복숭아와 속이 부드러운 복숭아의 장점을 결합해 만들었다."
+            },
+            {
+              "who": "순서",
+              "ko": "{}"
+            }
+          ],
+          "answer": "nrgd",
+          "choices": [
+            {
+              "id": "nrgd",
+              "ko": "(나) - (라) - (가) - (다)"
+            },
+            {
+              "id": "ngdr",
+              "ko": "(나) - (가) - (다) - (라)"
+            },
+            {
+              "id": "rndg",
+              "ko": "(라) - (나) - (다) - (가)"
+            },
+            {
+              "id": "ndgr",
+              "ko": "(나) - (다) - (가) - (라)"
+            }
+          ],
+          "en": "The Sinbi peach is a summer fruit first introduced to Korea in 2017. It was made by combining the strengths of a thin-skinned peach and a soft-fleshed one. So it is easy to eat skin and all, and it is not hard, so the texture is good too. That it can be eaten earlier in the season than other peaches is a further advantage.",
+          "why": "(나) is the only sentence that can open. It names its subject and says what it is — 신비 복숭아는 … 여름 과일이다 — with nothing pointing back at anything. (라) has no subject of its own, (가) begins 그래서, and (다) says 것도, which needs an advantage above it. Three of the four options open with (나) even so, so this only removes ③.\n\n그래서 pins (가) to whatever explains it, and (라) is that explanation. (가) says the peach is easy to eat skin and all and is not hard; (라) says it was made by combining a thin-skinned peach with a soft-fleshed one. Thin skin gives 껍질째, soft flesh gives 딱딱하지 않아서. So (라) comes immediately before (가), and only ① does that.\n\n(다) confirms the reading rather than deciding it. 것도 장점이다 marks a further advantage, so an advantage has to have been given already, and the advantages are in (가). A sentence carrying 도 is almost never the first of the things it is adding to.\n\nNotice what does not decide this one. 2017년 and 처음 look like the start of a chronology, but no other sentence is dated, so there is no timeline to sort. The joins here are logical, and the year is only there to make (나) sound like an opening — which it is, for a different reason.",
+          "grammar": "N째 means without removing it: 껍질째 is skin and all, 통째로 is whole, 그릇째 is dish and all. It attaches straight to the noun with no particle.\n\nN에 비해 is compared with N, and it takes a noun and never a clause — 다른 복숭아에 비해. To compare with a whole clause you need -(으)ㄴ 것에 비해 instead.\n\n이르다 here is to be early, and its modifier is 이른 시기. Keep it apart from the other 이르다, to reach, which comes out 이르러 and belongs to different sentences entirely.\n\n먹을 수 있다는 것도 장점이다 turns a whole clause into a noun with -다는 것 and then marks it 도. That 도 is the piece of grammar the ordering actually turns on: it says another advantage has already been given.\n\n결합해 만들었다 chains two verbs with -아/어: they combined them and made it. 결합하다 is to join two things into one thing, which is stronger than 합치다."
+        },
+        {
+          "n": 14,
+          "art": "",
+          "phraseKo": "아이가 감기에 걸려 밤새 큰 소리로 울었다.",
+          "lines": [
+            {
+              "who": "가",
+              "ko": "아이가 감기에 걸려 밤새 큰 소리로 울었다."
+            },
+            {
+              "who": "나",
+              "ko": "아주머니는 아이가 많이 아팠냐며 오히려 걱정해 주셨다."
+            },
+            {
+              "who": "다",
+              "ko": "아침에 아이와 병원에 가려고 집을 나서다 옆집 아주머니를 만났다."
+            },
+            {
+              "who": "라",
+              "ko": "나는 우는 아이를 달래면서도 울음소리에 이웃들이 깰까 봐 걱정했다."
+            },
+            {
+              "who": "순서",
+              "ko": "{}"
+            }
+          ],
+          "answer": "grdn",
+          "choices": [
+            {
+              "id": "gnrd",
+              "ko": "(가) - (나) - (라) - (다)"
+            },
+            {
+              "id": "grdn",
+              "ko": "(가) - (라) - (다) - (나)"
+            },
+            {
+              "id": "ngdr",
+              "ko": "(나) - (가) - (다) - (라)"
+            },
+            {
+              "id": "ndrg",
+              "ko": "(나) - (다) - (라) - (가)"
+            }
+          ],
+          "en": "My child caught a cold and cried loudly all night. I soothed the crying child, and all the while worried that the sound would wake the neighbours. In the morning, as I was leaving the house to take the child to the doctor, I ran into the lady next door. She asked whether the child had been very ill — if anything, she was worried for us.",
+          "why": "(가) is the only sentence with no thread running back to another. It sets the scene: the child caught a cold and cried all night. (나) opens with 아주머니는, a person nobody has introduced yet; (다) is where she is introduced; (라) begins 나는 우는 아이를, which needs the crying already on the page. So (가) is first, and ③ and ④ go together.\n\nThat leaves whether (나) or (라) comes second, and (나) cannot: it is the neighbour replying, and she has not been met yet. The meeting is in (다), so (다) must stand before (나) — which only ② does. One sentence naming a person and another one introducing them is the commonest single clue in this type.\n\n오히려 confirms it. It overturns an expectation, and the expectation is in (라): the speaker feared the neighbours would be woken and put out. 오히려 걱정해 주셨다 — she was worried for them instead. An 오히려 sentence always points back at a fear or an assumption someone has already stated.\n\nThe paragraph also runs on a clock — 밤새, then 아침에 — and the clock agrees with the logic. When the time words and the connectives agree you can stop checking. When they disagree, you have misread one of them.",
+          "grammar": "감기에 걸리다 is to catch a cold, and 걸리다 takes 에 for the illness. The same verb is 시간이 걸리다, to take time, so the particle carries more of the meaning here than the verb does.\n\n아팠냐며 is -냐고 하며 worn down: asking whether it was so, and going on to do something else in the same breath. It reports a question inside a narrative without stopping to quote it, which is why it reads as one continuous action with 걱정해 주셨다.\n\n오히려 is on the contrary, if anything. It needs an expectation to work against, and it is worth treating as a pointer: whatever it overturns is in an earlier sentence.\n\n-(으)면서도 is while doing, and yet. 달래면서도 걱정했다 is two things at once that pull against each other. Drop the 도 and it is simply while, with no tension in it.\n\n-(으)ㄹ까 봐 is for fear that. 깰까 봐 걱정했다 puts the feared thing in front and the reaction behind, and it only ever takes a verb of worrying, avoiding or preparing."
+        },
+        {
+          "n": 15,
+          "art": "",
+          "phraseKo": "최근 온라인 가구 구매가 늘면서 반품 사례가 많아지고 있다.",
+          "lines": [
+            {
+              "who": "가",
+              "ko": "최근 온라인 가구 구매가 늘면서 반품 사례가 많아지고 있다."
+            },
+            {
+              "who": "나",
+              "ko": "그런데 비싼 반품 비용으로 인해 피해를 보는 소비자가 늘고 있다."
+            },
+            {
+              "who": "다",
+              "ko": "따라서 소비자는 구매 전에 반품 비용과 조건을 잘 확인해야 한다."
+            },
+            {
+              "who": "라",
+              "ko": "업체가 까다로운 조건을 내세워 반품을 거절하는 경우까지 발생한다."
+            },
+            {
+              "who": "순서",
+              "ko": "{}"
+            }
+          ],
+          "answer": "gnrd",
+          "choices": [
+            {
+              "id": "gnrd",
+              "ko": "(가) - (나) - (라) - (다)"
+            },
+            {
+              "id": "grdn",
+              "ko": "(가) - (라) - (다) - (나)"
+            },
+            {
+              "id": "rgnd",
+              "ko": "(라) - (가) - (나) - (다)"
+            },
+            {
+              "id": "gdrn",
+              "ko": "(가) - (다) - (라) - (나)"
+            }
+          ],
+          "en": "Online furniture buying has risen lately, and with it the number of returns. But the cost of returning an item is high, and more and more consumers are losing out by it. There are even cases of firms setting demanding conditions and refusing the return outright. Consumers should therefore check the cost and the terms of returns before they buy.",
+          "why": "(가) is the general situation and the only sentence that can state one. It carries no connective and introduces both nouns the rest depends on — 온라인 가구 구매 and 반품. (나) opens 그런데, (다) opens 따라서, and (라) describes a case that only means anything once a problem exists. Three options begin with (가), so this removes ③ alone.\n\n따라서 goes last, and that is what finishes the question. It draws advice — 확인해야 한다 — from what came before it, and advice in the middle of a paragraph would be advice about nothing yet said. ② and ④ both bury it, so both go, and ① is what is left.\n\nThe remaining join runs by degree. (나) is the problem: returns cost so much that consumers lose out. (라) is worse than that — 거절하는 경우까지 발생한다, where 까지 says this is the far end of it. An escalation follows the thing it escalates from and never precedes it.\n\n그런데 in (나) wants something neutral to turn against, and (가) is exactly that: a rising trend, stated without comment. Fact, then a 그런데 problem, then a worse case, then a 따라서 conclusion — a great many of these paragraphs are built on that frame, and recognising it is worth more than reading all four sentences closely.",
+          "grammar": "-(으)면서 here is not one person doing two things but one change accompanying another: 구매가 늘면서 반품 사례가 많아지고 있다, as buying rises, returns rise with it. That use belongs to written Korean and turns up constantly in this kind of paragraph.\n\n(으)로 인해 is owing to, and it is the formal cause connector — 비싼 반품 비용으로 인해. It attaches to a noun, where -아/어서 attaches to a clause, and the paper prefers it in anything argumentative.\n\n피해를 보다 is to suffer harm. 보다 collocates with 피해, 손해 and 이익: in Korean you see a loss rather than take one. 피해를 주다 is the other side of it, to do the harm.\n\n까지 is as far as, even. 거절하는 경우까지 발생한다 pushes the claim to its extreme, which is exactly why that sentence cannot come first among the problems it belongs to.\n\n따라서 is therefore in writing; 그래서 is its spoken twin. 따라서 introduces the conclusion of an argument rather than the result of an event, which is why it so reliably marks the last sentence of a paragraph like this one."
+        }
+      ]
     }
   ]
 }

@@ -14,6 +14,7 @@ rather than by the day a question arrived. The types so far:
 | `topik2-blank` | 빈칸 채우기 | one gap, four endings on the same verb |
 | `topik2-synonym` | 유사 표현 | an underlined phrase and four expressions to match it |
 | `topik2-notice` | 안내문·도표 | a poster or a chart and four statements, three of which alter one detail |
+| `topik2-order` | 순서 배열 | four sentences out of order, and four orderings of them |
 
 The bank sets `drawOne: true`, so a sitting is one question drawn from the whole
 paper rather than the paper worked through. The draw is a bag, not `Math.random()` —
@@ -111,6 +112,15 @@ reason.
 never on the notes. The first version counted the notes too, and that masked the
 very bug it was written for: `N에 대한` is named in question 17's grammar note, so
 the entry looked reachable while the option line had nothing on it at all.
+
+### Rule 5 — an ordering question has no options to gloss
+
+`checkExamChoicesGloss` requires every option to carry one hoverable word. 순서 배열 offers
+orderings instead of sentences — `(나) - (라) - (가) - (다)` — and the labels are one
+character each, which the index drops. Set `labelOptions: true` on the exercise and the check
+skips it. It is declared rather than sniffed out of the option text, so an ordinary option that
+has genuinely lost its vocabulary still fails. The four lines above the options are untouched
+by the exemption and still carry the whole question's vocabulary.
 
 ### What the invariants deliberately do not catch
 

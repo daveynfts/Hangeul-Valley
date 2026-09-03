@@ -2243,7 +2243,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "않을까 봐"
+          "않을까 봐",
+          "깰까 봐"
         ]
       },
       {
@@ -3282,7 +3283,10 @@
         "category": "일상생활",
         "categoryEn": "Daily routines & home",
         "example": "이 신발은 발이 편해요.",
-        "exampleEn": "These shoes are comfortable on my feet."
+        "exampleEn": "These shoes are comfortable on my feet.",
+        "forms": [
+          "편하고"
+        ]
       },
       {
         "ko": "가볍다",
@@ -3659,7 +3663,8 @@
         "forms": [
           "읽어 주는",
           "읽어 줄",
-          "주고"
+          "주고",
+          "주셨다"
         ]
       },
       {
@@ -4200,6 +4205,410 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "이동했다"
+        ]
+      },
+      {
+        "ko": "복숭아",
+        "en": "a peach",
+        "hint": "🍑",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "껍질",
+        "en": "the skin of a fruit",
+        "hint": "🍊",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "껍질째",
+        "en": "skin and all, without peeling it",
+        "hint": "🍏",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "딱딱하다",
+        "en": "to be hard to the bite",
+        "hint": "🦷",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "딱딱하지"
+        ]
+      },
+      {
+        "ko": "식감",
+        "en": "mouthfeel, the texture of a food",
+        "hint": "😋",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "얇다",
+        "en": "to be thin",
+        "hint": "📄",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "얇은"
+        ]
+      },
+      {
+        "ko": "부드럽다",
+        "en": "to be soft",
+        "hint": "🧼",
+        "category": "음식",
+        "categoryEn": "Food & eating",
+        "forms": [
+          "부드러운"
+        ]
+      },
+      {
+        "ko": "소개되다",
+        "en": "to be introduced to a place",
+        "hint": "🤝",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "소개된"
+        ]
+      },
+      {
+        "ko": "N에 비해",
+        "en": "compared with N",
+        "hint": "⚖️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "에 비해"
+        ]
+      },
+      {
+        "ko": "이르다",
+        "en": "to be early in the season",
+        "hint": "⏰",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "이른"
+        ]
+      },
+      {
+        "ko": "시기",
+        "en": "a time of year, a period",
+        "hint": "🗓️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "장점",
+        "en": "a strong point, an advantage",
+        "hint": "🎁",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "결합하다",
+        "en": "to combine two things into one",
+        "hint": "💍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "결합해"
+        ]
+      },
+      {
+        "ko": "감기에 걸리다",
+        "en": "to catch a cold",
+        "hint": "🤧",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "감기에 걸려"
+        ]
+      },
+      {
+        "ko": "밤새",
+        "en": "the whole night through — the bare form of 밤새도록",
+        "hint": "🕯️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "소리",
+        "en": "a sound",
+        "hint": "👂",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "울다",
+        "en": "to cry",
+        "hint": "😢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "울었다",
+          "우는"
+        ]
+      },
+      {
+        "ko": "울음소리",
+        "en": "the sound of crying",
+        "hint": "📣",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "아주머니",
+        "en": "a middle-aged woman, ma’am",
+        "hint": "🧍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "아프다",
+        "en": "to be ill, to hurt",
+        "hint": "🧊",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "아팠냐며"
+        ]
+      },
+      {
+        "ko": "오히려",
+        "en": "on the contrary, if anything",
+        "hint": "💥",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "걱정하다",
+        "en": "to worry",
+        "hint": "😟",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "걱정해",
+          "걱정했다"
+        ]
+      },
+      {
+        "ko": "아침",
+        "en": "the morning",
+        "hint": "💡",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "나서다",
+        "en": "to set out from a place",
+        "hint": "🚶",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "옆집",
+        "en": "the house next door",
+        "hint": "🏠",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "만나다",
+        "en": "to meet",
+        "hint": "🙌",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "만났다"
+        ]
+      },
+      {
+        "ko": "달래다",
+        "en": "to soothe a crying child",
+        "hint": "🏮",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "달래면서도"
+        ]
+      },
+      {
+        "ko": "이웃",
+        "en": "a neighbour",
+        "hint": "🏘️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "이웃들"
+        ]
+      },
+      {
+        "ko": "온라인",
+        "en": "online",
+        "hint": "🌐",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "가구",
+        "en": "furniture",
+        "hint": "🛋️",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "구매",
+        "en": "a purchase",
+        "hint": "🧾",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "반품",
+        "en": "sending goods back",
+        "hint": "📦",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "사례",
+        "en": "an instance, a reported case",
+        "hint": "📊",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "그런데",
+        "en": "however — the turn into a problem",
+        "hint": "🌀",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "비싸다",
+        "en": "to be expensive",
+        "hint": "💸",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "비싼"
+        ]
+      },
+      {
+        "ko": "비용",
+        "en": "a cost",
+        "hint": "💰",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "피해를 보다",
+        "en": "to lose out, to suffer harm",
+        "hint": "😤",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "피해를 보는"
+        ]
+      },
+      {
+        "ko": "소비자",
+        "en": "a consumer",
+        "hint": "🛒",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "따라서",
+        "en": "therefore — the written conclusion marker",
+        "hint": "📜",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "조건",
+        "en": "terms and conditions",
+        "hint": "📋",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "확인하다",
+        "en": "to check something",
+        "hint": "✅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "확인해야"
+        ]
+      },
+      {
+        "ko": "업체",
+        "en": "a firm, a business",
+        "hint": "🏪",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "까다롭다",
+        "en": "to be demanding, hard to satisfy",
+        "hint": "😬",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "까다로운"
+        ]
+      },
+      {
+        "ko": "내세우다",
+        "en": "to put a condition forward",
+        "hint": "🚭",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "내세워"
+        ]
+      },
+      {
+        "ko": "거절하다",
+        "en": "to refuse",
+        "hint": "🙅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "거절하는"
+        ]
+      },
+      {
+        "ko": "경우",
+        "en": "a case, an occasion",
+        "hint": "🔖",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "발생하다",
+        "en": "to occur, to arise",
+        "hint": "⚡",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "발생한다"
+        ]
+      },
+      {
+        "ko": "-(으)면서",
+        "en": "as one thing rises, so does the other",
+        "hint": "🔄",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "늘면서"
         ]
       }
     ]

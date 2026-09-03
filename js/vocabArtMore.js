@@ -905,7 +905,50 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: '이송되다', slug: 'stethoscope', folder: 'items', nameEn: 'To be taken to hospital', family: 'health' },
   { ko: '치료', slug: 'medicine_bottle', folder: 'items', nameEn: 'Medical treatment', family: 'health' },
   { ko: '되찾다', slug: 'vitamin_bottle', folder: 'items', nameEn: 'To get it back', family: 'action' },
-  { ko: '이동하다', slug: 'swap_seats', folder: 'items', nameEn: 'To move place', family: 'action' }
+  { ko: '이동하다', slug: 'swap_seats', folder: 'items', nameEn: 'To move place', family: 'action' },
+  // 순서 배열 questions 13-15. Stand-in tiles: existing art reused, not drawn for these.
+  { ko: '복숭아', slug: 'garden_strawberry', folder: 'items', nameEn: 'A peach', family: 'food' },
+  { ko: '껍질', slug: 'farm_apple', folder: 'items', nameEn: 'Fruit skin', family: 'food' },
+  { ko: '껍질째', slug: 'eat_food', folder: 'items', nameEn: 'Skin and all', family: 'food' },
+  { ko: '딱딱하다', slug: 'cracked_tooth', folder: 'items', nameEn: 'To be hard', family: 'food' },
+  { ko: '식감', slug: 'suit_ones_taste', folder: 'items', nameEn: 'Mouthfeel', family: 'food' },
+  { ko: '얇다', slug: 'tissue_box', folder: 'items', nameEn: 'To be thin', family: 'abstract' },
+  { ko: '부드럽다', slug: 'soap_bar', folder: 'items', nameEn: 'To be soft', family: 'abstract' },
+  { ko: '소개되다', slug: 'first_meeting', folder: 'items', nameEn: 'To be introduced', family: 'action' },
+  { ko: 'N에 비해', slug: 'similar', folder: 'items', nameEn: 'Compared with', family: 'grammar' },
+  { ko: '이르다', slug: 'in_advance', folder: 'items', nameEn: 'To be early', family: 'time' },
+  { ko: '시기', slug: 'always', folder: 'items', nameEn: 'A period', family: 'time' },
+  { ko: '장점', slug: 'admission_discount', folder: 'items', nameEn: 'An advantage', family: 'abstract' },
+  { ko: '결합하다', slug: 'wedding_rings', folder: 'items', nameEn: 'To combine', family: 'action' },
+  { ko: '밤새', slug: 'candlelit_table', folder: 'items', nameEn: 'All night', family: 'time' },
+  { ko: '소리', slug: 'human_ear', folder: 'items', nameEn: 'A sound', family: 'abstract' },
+  { ko: '울다', slug: 'eye_drops', folder: 'items', nameEn: 'To cry', family: 'action' },
+  { ko: '울음소리', slug: 'make_noise', folder: 'items', nameEn: 'The sound of crying', family: 'abstract' },
+  { ko: '오히려', slug: 'surprise_burst', folder: 'items', nameEn: 'On the contrary', family: 'grammar' },
+  { ko: '나서다', slug: 'around_here', folder: 'items', nameEn: 'To set out', family: 'action' },
+  { ko: '옆집', slug: 'hanok_house', folder: 'items', nameEn: 'Next door', family: 'place' },
+  { ko: '만나다', slug: 'call_by_name', folder: 'items', nameEn: 'To meet', family: 'action' },
+  { ko: '달래다', slug: 'paper_lantern', folder: 'items', nameEn: 'To soothe', family: 'action' },
+  { ko: '이웃', slug: 'neighboring_country', folder: 'items', nameEn: 'A neighbour', family: 'people' },
+  { ko: '온라인', slug: 'desk_globe', folder: 'items', nameEn: 'Online', family: 'technology' },
+  { ko: '가구', slug: 'green_sofa', folder: 'items', nameEn: 'Furniture', family: 'household' },
+  { ko: '구매', slug: 'place_order', folder: 'items', nameEn: 'A purchase', family: 'abstract' },
+  { ko: '반품', slug: 'empty_plate', folder: 'items', nameEn: 'Sending goods back', family: 'abstract' },
+  { ko: '사례', slug: 'line_graph', folder: 'items', nameEn: 'An instance', family: 'data' },
+  { ko: '그런데', slug: 'complicated', folder: 'items', nameEn: 'However', family: 'grammar' },
+  { ko: '비싸다', slug: 'wasted_money', folder: 'items', nameEn: 'To be expensive', family: 'abstract' },
+  { ko: '비용', slug: 'coral_ring', folder: 'items', nameEn: 'A cost', family: 'abstract' },
+  { ko: '피해를 보다', slug: 'get_scolded', folder: 'items', nameEn: 'To lose out', family: 'abstract' },
+  { ko: '소비자', slug: 'order_food', folder: 'items', nameEn: 'A consumer', family: 'people' },
+  { ko: '따라서', slug: 'contract_seal', folder: 'items', nameEn: 'Therefore', family: 'grammar' },
+  { ko: '확인하다', slug: 'reservation', folder: 'items', nameEn: 'To check', family: 'action' },
+  { ko: '업체', slug: 'pizza_nara_shop', folder: 'items', nameEn: 'A firm', family: 'place' },
+  { ko: '까다롭다', slug: 'bitter_taste', folder: 'items', nameEn: 'To be demanding', family: 'abstract' },
+  { ko: '내세우다', slug: 'no_smoking', folder: 'items', nameEn: 'To put forward', family: 'action' },
+  { ko: '거절하다', slug: 'no_cell_phones', folder: 'items', nameEn: 'To refuse', family: 'action' },
+  { ko: '경우', slug: 'first_time', folder: 'items', nameEn: 'A case', family: 'abstract' },
+  { ko: '발생하다', slug: 'make_mistake', folder: 'items', nameEn: 'To occur', family: 'action' },
+  { ko: '-(으)면서', slug: 'turn_head_drink', folder: 'items', nameEn: 'As one thing, so the other', family: 'grammar' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
@@ -4228,6 +4271,342 @@ const TOPIK_VOCAB_ART_ROWS = [
     "slug": "swap_seats",
     "folder": "items",
     "nameEn": "to move from one place to another",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "복숭아",
+    "slug": "garden_strawberry",
+    "folder": "items",
+    "nameEn": "a peach",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "껍질",
+    "slug": "farm_apple",
+    "folder": "items",
+    "nameEn": "the skin of a fruit",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "껍질째",
+    "slug": "eat_food",
+    "folder": "items",
+    "nameEn": "skin and all, without peeling it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "딱딱하다",
+    "slug": "cracked_tooth",
+    "folder": "items",
+    "nameEn": "to be hard to the bite",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "식감",
+    "slug": "suit_ones_taste",
+    "folder": "items",
+    "nameEn": "mouthfeel, the texture of a food",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "얇다",
+    "slug": "tissue_box",
+    "folder": "items",
+    "nameEn": "to be thin",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "부드럽다",
+    "slug": "soap_bar",
+    "folder": "items",
+    "nameEn": "to be soft",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "소개되다",
+    "slug": "first_meeting",
+    "folder": "items",
+    "nameEn": "to be introduced to a place",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N에 비해",
+    "slug": "similar",
+    "folder": "items",
+    "nameEn": "compared with N",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이르다",
+    "slug": "in_advance",
+    "folder": "items",
+    "nameEn": "to be early in the season",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "시기",
+    "slug": "always",
+    "folder": "items",
+    "nameEn": "a time of year, a period",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "장점",
+    "slug": "admission_discount",
+    "folder": "items",
+    "nameEn": "a strong point, an advantage",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "결합하다",
+    "slug": "wedding_rings",
+    "folder": "items",
+    "nameEn": "to combine two things into one",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "감기에 걸리다",
+    "slug": "medicine_capsule",
+    "folder": "items",
+    "nameEn": "to catch a cold",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "밤새",
+    "slug": "candlelit_table",
+    "folder": "items",
+    "nameEn": "the whole night through — the bare form of 밤새도록",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "소리",
+    "slug": "human_ear",
+    "folder": "items",
+    "nameEn": "a sound",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "울다",
+    "slug": "eye_drops",
+    "folder": "items",
+    "nameEn": "to cry",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "울음소리",
+    "slug": "make_noise",
+    "folder": "items",
+    "nameEn": "the sound of crying",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "아주머니",
+    "slug": "sit_cross_legged",
+    "folder": "items",
+    "nameEn": "a middle-aged woman, ma’am",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "아프다",
+    "slug": "ice_pack",
+    "folder": "items",
+    "nameEn": "to be ill, to hurt",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "오히려",
+    "slug": "surprise_burst",
+    "folder": "items",
+    "nameEn": "on the contrary, if anything",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "걱정하다",
+    "slug": "feel_flustered",
+    "folder": "items",
+    "nameEn": "to worry",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "아침",
+    "slug": "light_bulb",
+    "folder": "items",
+    "nameEn": "the morning",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "나서다",
+    "slug": "around_here",
+    "folder": "items",
+    "nameEn": "to set out from a place",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "옆집",
+    "slug": "hanok_house",
+    "folder": "items",
+    "nameEn": "the house next door",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "만나다",
+    "slug": "call_by_name",
+    "folder": "items",
+    "nameEn": "to meet",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "달래다",
+    "slug": "paper_lantern",
+    "folder": "items",
+    "nameEn": "to soothe a crying child",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이웃",
+    "slug": "neighboring_country",
+    "folder": "items",
+    "nameEn": "a neighbour",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "온라인",
+    "slug": "desk_globe",
+    "folder": "items",
+    "nameEn": "online",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가구",
+    "slug": "green_sofa",
+    "folder": "items",
+    "nameEn": "furniture",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "구매",
+    "slug": "place_order",
+    "folder": "items",
+    "nameEn": "a purchase",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "반품",
+    "slug": "empty_plate",
+    "folder": "items",
+    "nameEn": "sending goods back",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사례",
+    "slug": "line_graph",
+    "folder": "items",
+    "nameEn": "an instance, a reported case",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "그런데",
+    "slug": "complicated",
+    "folder": "items",
+    "nameEn": "however — the turn into a problem",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "비싸다",
+    "slug": "wasted_money",
+    "folder": "items",
+    "nameEn": "to be expensive",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "비용",
+    "slug": "coral_ring",
+    "folder": "items",
+    "nameEn": "a cost",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "피해를 보다",
+    "slug": "get_scolded",
+    "folder": "items",
+    "nameEn": "to lose out, to suffer harm",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "소비자",
+    "slug": "order_food",
+    "folder": "items",
+    "nameEn": "a consumer",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "따라서",
+    "slug": "contract_seal",
+    "folder": "items",
+    "nameEn": "therefore — the written conclusion marker",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "조건",
+    "slug": "dorm_rules",
+    "folder": "items",
+    "nameEn": "terms and conditions",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "확인하다",
+    "slug": "reservation",
+    "folder": "items",
+    "nameEn": "to check something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "업체",
+    "slug": "pizza_nara_shop",
+    "folder": "items",
+    "nameEn": "a firm, a business",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "까다롭다",
+    "slug": "bitter_taste",
+    "folder": "items",
+    "nameEn": "to be demanding, hard to satisfy",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "내세우다",
+    "slug": "no_smoking",
+    "folder": "items",
+    "nameEn": "to put a condition forward",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "거절하다",
+    "slug": "no_cell_phones",
+    "folder": "items",
+    "nameEn": "to refuse",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "경우",
+    "slug": "first_time",
+    "folder": "items",
+    "nameEn": "a case, an occasion",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "발생하다",
+    "slug": "make_mistake",
+    "folder": "items",
+    "nameEn": "to occur, to arise",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)면서",
+    "slug": "turn_head_drink",
+    "folder": "items",
+    "nameEn": "as one thing rises, so does the other",
     "family": "topik-vocabulary"
   }
 ];

@@ -567,6 +567,12 @@ const overlayIds = [
   const re = new RegExp(keys.map(esc).join('|'), 'g');
   const dark = [];
   (qbank.exercises || []).forEach((ex) => {
+    // 순서 배열 offers orderings rather than sentences — '(나) - (라) - (가) - (다)' — and the
+    // labels are one character each, which the gloss index drops. There is nothing to hover
+    // there and nothing a learner needs to hover: the words are all in the four lines above,
+    // which this check still covers. Declared on the exercise rather than sniffed out of the
+    // option text, so an ordinary option that has genuinely lost its vocabulary still fails.
+    if (ex.labelOptions === true) return;
     (ex.items || []).forEach((it) => {
       (it.choices || []).concat(it.choices2 || []).forEach((c) => {
         const text = String(c.ko || '').normalize('NFC');

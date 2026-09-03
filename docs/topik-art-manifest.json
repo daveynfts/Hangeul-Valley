@@ -932,6 +932,342 @@
       "file": "sprites/items/swap_seats.png",
       "reviewed": true,
       "standIn": true
+    },
+    {
+      "index": 473,
+      "ko": "복숭아",
+      "file": "sprites/items/garden_strawberry.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 474,
+      "ko": "껍질",
+      "file": "sprites/items/farm_apple.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 475,
+      "ko": "껍질째",
+      "file": "sprites/items/eat_food.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 476,
+      "ko": "딱딱하다",
+      "file": "sprites/items/cracked_tooth.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 477,
+      "ko": "식감",
+      "file": "sprites/items/suit_ones_taste.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 478,
+      "ko": "얇다",
+      "file": "sprites/items/tissue_box.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 479,
+      "ko": "부드럽다",
+      "file": "sprites/items/soap_bar.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 480,
+      "ko": "소개되다",
+      "file": "sprites/items/first_meeting.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 481,
+      "ko": "N에 비해",
+      "file": "sprites/items/similar.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 482,
+      "ko": "이르다",
+      "file": "sprites/items/in_advance.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 483,
+      "ko": "시기",
+      "file": "sprites/items/always.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 484,
+      "ko": "장점",
+      "file": "sprites/items/admission_discount.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 485,
+      "ko": "결합하다",
+      "file": "sprites/items/wedding_rings.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 486,
+      "ko": "감기에 걸리다",
+      "file": "sprites/items/medicine_capsule.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 487,
+      "ko": "밤새",
+      "file": "sprites/items/candlelit_table.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 488,
+      "ko": "소리",
+      "file": "sprites/items/human_ear.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 489,
+      "ko": "울다",
+      "file": "sprites/items/eye_drops.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 490,
+      "ko": "울음소리",
+      "file": "sprites/items/make_noise.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 491,
+      "ko": "아주머니",
+      "file": "sprites/items/sit_cross_legged.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 492,
+      "ko": "아프다",
+      "file": "sprites/items/ice_pack.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 493,
+      "ko": "오히려",
+      "file": "sprites/items/surprise_burst.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 494,
+      "ko": "걱정하다",
+      "file": "sprites/items/feel_flustered.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 495,
+      "ko": "아침",
+      "file": "sprites/items/light_bulb.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 496,
+      "ko": "나서다",
+      "file": "sprites/items/around_here.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 497,
+      "ko": "옆집",
+      "file": "sprites/items/hanok_house.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 498,
+      "ko": "만나다",
+      "file": "sprites/items/call_by_name.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 499,
+      "ko": "달래다",
+      "file": "sprites/items/paper_lantern.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 500,
+      "ko": "이웃",
+      "file": "sprites/items/neighboring_country.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 501,
+      "ko": "온라인",
+      "file": "sprites/items/desk_globe.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 502,
+      "ko": "가구",
+      "file": "sprites/items/green_sofa.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 503,
+      "ko": "구매",
+      "file": "sprites/items/place_order.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 504,
+      "ko": "반품",
+      "file": "sprites/items/empty_plate.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 505,
+      "ko": "사례",
+      "file": "sprites/items/line_graph.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 506,
+      "ko": "그런데",
+      "file": "sprites/items/complicated.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 507,
+      "ko": "비싸다",
+      "file": "sprites/items/wasted_money.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 508,
+      "ko": "비용",
+      "file": "sprites/items/coral_ring.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 509,
+      "ko": "피해를 보다",
+      "file": "sprites/items/get_scolded.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 510,
+      "ko": "소비자",
+      "file": "sprites/items/order_food.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 511,
+      "ko": "따라서",
+      "file": "sprites/items/contract_seal.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 512,
+      "ko": "조건",
+      "file": "sprites/items/dorm_rules.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 513,
+      "ko": "확인하다",
+      "file": "sprites/items/reservation.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 514,
+      "ko": "업체",
+      "file": "sprites/items/pizza_nara_shop.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 515,
+      "ko": "까다롭다",
+      "file": "sprites/items/bitter_taste.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 516,
+      "ko": "내세우다",
+      "file": "sprites/items/no_smoking.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 517,
+      "ko": "거절하다",
+      "file": "sprites/items/no_cell_phones.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 518,
+      "ko": "경우",
+      "file": "sprites/items/first_time.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 519,
+      "ko": "발생하다",
+      "file": "sprites/items/make_mistake.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 520,
+      "ko": "-(으)면서",
+      "file": "sprites/items/turn_head_drink.png",
+      "reviewed": true,
+      "standIn": true
     }
   ],
   "entries": [
