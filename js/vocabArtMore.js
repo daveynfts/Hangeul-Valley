@@ -4608,6 +4608,615 @@ const TOPIK_VOCAB_ART_ROWS = [
     "folder": "items",
     "nameEn": "as one thing rises, so does the other",
     "family": "topik-vocabulary"
+  },
+  {
+    "ko": "북극여우",
+    "slug": "emoji_1f98a",
+    "folder": "items",
+    "nameEn": "an arctic fox",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "북극",
+    "slug": "emoji_2744",
+    "folder": "items",
+    "nameEn": "the Arctic",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "계절",
+    "slug": "emoji_1f342",
+    "folder": "items",
+    "nameEn": "a season of the year",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "겨울",
+    "slug": "emoji_26c4",
+    "folder": "items",
+    "nameEn": "winter",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "바위",
+    "slug": "emoji_1faa8",
+    "folder": "items",
+    "nameEn": "a rock",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "흰색",
+    "slug": "emoji_2b1c",
+    "folder": "items",
+    "nameEn": "the colour white",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "갈색빛",
+    "slug": "emoji_1f7e4",
+    "folder": "items",
+    "nameEn": "a brownish tinge",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "동물",
+    "slug": "emoji_1f43e",
+    "folder": "items",
+    "nameEn": "an animal",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "천적",
+    "slug": "emoji_1f985",
+    "folder": "items",
+    "nameEn": "a natural predator",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "먹잇감",
+    "slug": "emoji_1f401",
+    "folder": "items",
+    "nameEn": "prey",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "무리를 이루다",
+    "slug": "emoji_1f43a",
+    "folder": "items",
+    "nameEn": "to gather into a pack",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "발자국",
+    "slug": "emoji_1f463",
+    "folder": "items",
+    "nameEn": "a footprint",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사냥하다",
+    "slug": "emoji_1f3f9",
+    "folder": "items",
+    "nameEn": "to hunt",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "바꾸다",
+    "slug": "emoji_1f500_2",
+    "folder": "items",
+    "nameEn": "to change something — the one with an object",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "바뀌다",
+    "slug": "emoji_1f504_2",
+    "folder": "items",
+    "nameEn": "to change of itself — the one without",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "비슷하다",
+    "slug": "emoji_1f46f",
+    "folder": "items",
+    "nameEn": "to be close to, to resemble",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "변화",
+    "slug": "emoji_1f317",
+    "folder": "items",
+    "nameEn": "a change that has taken place",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "숨기다",
+    "slug": "emoji_1f648",
+    "folder": "items",
+    "nameEn": "to hide something away",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "특수하다",
+    "slug": "emoji_2728",
+    "folder": "items",
+    "nameEn": "to be out of the ordinary",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "환경",
+    "slug": "emoji_1f30d",
+    "folder": "items",
+    "nameEn": "an environment",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N(으)로부터",
+    "slug": "emoji_21a9",
+    "folder": "items",
+    "nameEn": "from N — a source you move away from",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "보호하다",
+    "slug": "emoji_1f6e1",
+    "folder": "items",
+    "nameEn": "to protect",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "동료",
+    "slug": "emoji_1f465",
+    "folder": "items",
+    "nameEn": "a fellow, one of your own kind",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "몰래",
+    "slug": "emoji_1f92b",
+    "folder": "items",
+    "nameEn": "without being noticed",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "다가가다",
+    "slug": "emoji_1f6b6_2",
+    "folder": "items",
+    "nameEn": "to draw closer to",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "적절히",
+    "slug": "emoji_1f39a",
+    "folder": "items",
+    "nameEn": "to the right degree",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "유지하다",
+    "slug": "emoji_267b",
+    "folder": "items",
+    "nameEn": "to keep something as it is",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "남기다",
+    "slug": "emoji_1f4cc",
+    "folder": "items",
+    "nameEn": "to leave something behind",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "연필",
+    "slug": "emoji_270f",
+    "folder": "items",
+    "nameEn": "a pencil",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "글씨",
+    "slug": "emoji_1f58b",
+    "folder": "items",
+    "nameEn": "handwriting",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "반듯하다",
+    "slug": "emoji_1f4d0",
+    "folder": "items",
+    "nameEn": "to be straight and even",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "어려움",
+    "slug": "emoji_1f623",
+    "folder": "items",
+    "nameEn": "difficulty",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "나이",
+    "slug": "emoji_1f382",
+    "folder": "items",
+    "nameEn": "age, in years",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "전자 기기",
+    "slug": "emoji_1f4f1",
+    "folder": "items",
+    "nameEn": "an electronic device",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "장시간",
+    "slug": "emoji_23f1",
+    "folder": "items",
+    "nameEn": "for a long stretch",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사용하다",
+    "slug": "emoji_1f5b1",
+    "folder": "items",
+    "nameEn": "to use",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄴ 탓이다",
+    "slug": "emoji_1f449",
+    "folder": "items",
+    "nameEn": "it is because of — and the cause is blamed",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "화면",
+    "slug": "emoji_1f5a5",
+    "folder": "items",
+    "nameEn": "a screen",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "단순히",
+    "slug": "emoji_2796",
+    "folder": "items",
+    "nameEn": "merely, and nothing more",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "누르다",
+    "slug": "emoji_1f447",
+    "folder": "items",
+    "nameEn": "to press",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "밀다",
+    "slug": "emoji_27a1_3",
+    "folder": "items",
+    "nameEn": "to push, to swipe",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "동작",
+    "slug": "emoji_1f938",
+    "folder": "items",
+    "nameEn": "a movement of the body",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "반복하다",
+    "slug": "emoji_1f502",
+    "folder": "items",
+    "nameEn": "to repeat",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "근육",
+    "slug": "emoji_1f4aa",
+    "folder": "items",
+    "nameEn": "a muscle",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "소근육",
+    "slug": "emoji_1f90f",
+    "folder": "items",
+    "nameEn": "the fine muscles of the hand",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "발달하다",
+    "slug": "emoji_1f331",
+    "folder": "items",
+    "nameEn": "to develop, of a faculty",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "손가락",
+    "slug": "emoji_261d",
+    "folder": "items",
+    "nameEn": "a finger",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "움직이다",
+    "slug": "emoji_1f93e",
+    "folder": "items",
+    "nameEn": "to move a part of the body",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "놀이",
+    "slug": "emoji_1f9f8",
+    "folder": "items",
+    "nameEn": "play, a game children do",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "전문가",
+    "slug": "emoji_1f393_2",
+    "folder": "items",
+    "nameEn": "a specialist",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "제대로",
+    "slug": "emoji_1f44c",
+    "folder": "items",
+    "nameEn": "properly, as it should be",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "감싸다",
+    "slug": "emoji_1f932_2",
+    "folder": "items",
+    "nameEn": "to wrap the hand around",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "빠르게",
+    "slug": "emoji_26a1_2",
+    "folder": "items",
+    "nameEn": "quickly",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "줄이다",
+    "slug": "emoji_1f4c9_2",
+    "folder": "items",
+    "nameEn": "to reduce something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "충분히",
+    "slug": "emoji_1f235",
+    "folder": "items",
+    "nameEn": "enough, to a sufficient degree",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "완전히",
+    "slug": "emoji_1f4af",
+    "folder": "items",
+    "nameEn": "completely",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-지 못하다",
+    "slug": "emoji_1f6ab",
+    "folder": "items",
+    "nameEn": "cannot manage to — inability, not refusal",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-도록 하다",
+    "slug": "emoji_1f4cb_2",
+    "folder": "items",
+    "nameEn": "to see to it that someone does it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "고인돌",
+    "slug": "emoji_1f5ff",
+    "folder": "items",
+    "nameEn": "a dolmen",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "옛날",
+    "slug": "emoji_1f4dc_3",
+    "folder": "items",
+    "nameEn": "long ago",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "청동기 시대",
+    "slug": "emoji_26b1",
+    "folder": "items",
+    "nameEn": "the Bronze Age",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "무덤",
+    "slug": "emoji_26b0",
+    "folder": "items",
+    "nameEn": "a tomb",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "받침돌",
+    "slug": "emoji_1f9f1",
+    "folder": "items",
+    "nameEn": "a supporting stone",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "덮개돌",
+    "slug": "emoji_1faa8_2",
+    "folder": "items",
+    "nameEn": "a capstone",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "세우다",
+    "slug": "emoji_1f3d7",
+    "folder": "items",
+    "nameEn": "to stand something upright",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "얹다",
+    "slug": "emoji_1f51d",
+    "folder": "items",
+    "nameEn": "to lay one thing on top of another",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "형태",
+    "slug": "emoji_1f537",
+    "folder": "items",
+    "nameEn": "the form a thing takes",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "무게",
+    "slug": "emoji_2696_2",
+    "folder": "items",
+    "nameEn": "weight",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "수십",
+    "slug": "emoji_1f522",
+    "folder": "items",
+    "nameEn": "tens of, several dozen",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "달하다",
+    "slug": "emoji_1f4c8",
+    "folder": "items",
+    "nameEn": "to reach a figure",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "거대하다",
+    "slug": "emoji_1f418",
+    "folder": "items",
+    "nameEn": "to be enormous",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "운반하다",
+    "slug": "emoji_1f69a",
+    "folder": "items",
+    "nameEn": "to carry something heavy",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "그만큼",
+    "slug": "emoji_1f501_3",
+    "folder": "items",
+    "nameEn": "correspondingly much",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "필요하다",
+    "slug": "emoji_2757",
+    "folder": "items",
+    "nameEn": "to be needed",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "부르다",
+    "slug": "emoji_1f4e3_2",
+    "folder": "items",
+    "nameEn": "to call someone over",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "모으다",
+    "slug": "emoji_1f465_2",
+    "folder": "items",
+    "nameEn": "to gather people together",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "시키다",
+    "slug": "emoji_1f4e2",
+    "folder": "items",
+    "nameEn": "to set someone to a task",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "권력",
+    "slug": "emoji_1f451",
+    "folder": "items",
+    "nameEn": "power over other people",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "체력",
+    "slug": "emoji_1f3cb",
+    "folder": "items",
+    "nameEn": "physical strength",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "굉장히",
+    "slug": "emoji_1f92f",
+    "folder": "items",
+    "nameEn": "tremendously",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "약하다",
+    "slug": "emoji_1f343",
+    "folder": "items",
+    "nameEn": "to be weak",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "무기",
+    "slug": "emoji_1f5e1",
+    "folder": "items",
+    "nameEn": "a weapon",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "제작하다",
+    "slug": "emoji_1f528_2",
+    "folder": "items",
+    "nameEn": "to manufacture",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "수명",
+    "slug": "emoji_231b",
+    "folder": "items",
+    "nameEn": "a lifespan",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "남들",
+    "slug": "emoji_1f46b_2",
+    "folder": "items",
+    "nameEn": "other people",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "짧다",
+    "slug": "emoji_1f4cf",
+    "folder": "items",
+    "nameEn": "to be short",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄹ 정도로",
+    "slug": "emoji_1f4f6",
+    "folder": "items",
+    "nameEn": "to the degree that",
+    "family": "topik-vocabulary"
   }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {

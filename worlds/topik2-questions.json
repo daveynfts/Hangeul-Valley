@@ -1374,6 +1374,142 @@
           "grammar": "-(으)면서 here is not one person doing two things but one change accompanying another: 구매가 늘면서 반품 사례가 많아지고 있다, as buying rises, returns rise with it. That use belongs to written Korean and turns up constantly in this kind of paragraph.\n\n(으)로 인해 is owing to, and it is the formal cause connector — 비싼 반품 비용으로 인해. It attaches to a noun, where -아/어서 attaches to a clause, and the paper prefers it in anything argumentative.\n\n피해를 보다 is to suffer harm. 보다 collocates with 피해, 손해 and 이익: in Korean you see a loss rather than take one. 피해를 주다 is the other side of it, to do the harm.\n\n까지 is as far as, even. 거절하는 경우까지 발생한다 pushes the claim to its extreme, which is exactly why that sentence cannot come first among the problems it belongs to.\n\n따라서 is therefore in writing; 그래서 is its spoken twin. 따라서 introduces the conclusion of an argument rather than the result of an event, which is why it so reliably marks the last sentence of a paragraph like this one."
         }
       ]
+    },
+    {
+      "id": "topik2-passage",
+      "type": "build",
+      "no": "유형 · 문항 16-18",
+      "pattern": "( )에 들어갈 내용 고르기",
+      "section": "지문 빈칸",
+      "sectionEn": "A blank inside a passage",
+      "icon": "🧠",
+      "instructionKo": "( )에 들어갈 말로 가장 알맞은 것을 고르십시오.",
+      "instructionEn": "Choose the phrase that best fits the blank.",
+      "blurbEn": "A short passage with one phrase cut out of it. The vocabulary is not the question — what fills the gap is whatever the rest of the paragraph has been arguing for.",
+      "noteEn": "Four or five sentences and one phrase removed, usually from the last of them. Unlike the 빈칸 of 문항 1-2, where four endings sit on the same verb, here the options are four different ideas and the grammar is nearly always already correct. So the question is not what fits the sentence but what the paragraph has spent its other sentences establishing.\n\nRead the sentence the blank is in first, and read it to the end. The words after the gap decide more than the words before it: 못한다 means the blank is part of a failure, 정도로 means it is being measured against the clause in front, 수 있다 means it is an ability the passage has been explaining.\n\nThen find the sentence that gives the reason. These paragraphs are built as a claim followed by its ground, or a ground followed by its conclusion, and the blank is nearly always one half of that pair. If the last sentence recommends something, the blank is the problem the recommendation answers; if the passage measures a weight, the blank is what the weight proves.\n\nThe wrong options come in three shapes worth knowing on sight.\n\n1. True of the subject but absent from the passage. An arctic fox does keep warm by its fur, and 체온을 유지하다 is a fact about foxes — but the passage is about colour, and colour does not warm anything. This is the trap that catches people who know the topic.\n\n2. Brought in from outside knowledge. 청동기 시대 makes anyone think of bronze weapons, and an option about making weapons is waiting for exactly that. The passage argues only from the weight of the stones; nothing else may be used.\n\n3. The right idea pointing the wrong way. 빠르게 줄이지 못한다 names the muscle and the change, and reverses which of them is failing. Check the direction of every option that uses the passage's own words.",
+      "bank": [],
+      "items": [
+        {
+          "n": 16,
+          "art": "",
+          "phraseKo": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다.",
+          "lines": [
+            {
+              "ko": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다."
+            },
+            {
+              "ko": "북극여우의 털은 겨울에는 눈과 같은 흰색으로, 여름에는 바위나 흙과 비슷한 갈색빛으로 바뀐다."
+            },
+            {
+              "ko": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 {} 수 있다."
+            }
+          ],
+          "answer": "sneak",
+          "choices": [
+            {
+              "id": "pack",
+              "ko": "동료와 무리를 이룰"
+            },
+            {
+              "id": "sneak",
+              "ko": "먹잇감에 몰래 다가갈"
+            },
+            {
+              "id": "warm",
+              "ko": "체온을 적절히 유지할"
+            },
+            {
+              "id": "tracks",
+              "ko": "발자국을 남기지 않을"
+            }
+          ],
+          "en": "The arctic fox is an animal that changes the colour of its coat with the season. Its fur turns white as snow in winter and a brown close to rock and soil in summer. That change of colour lets the arctic fox protect itself from predators even in the bare Arctic, where there is nowhere to hide — and get close to its prey unnoticed when it hunts.",
+          "why": "The whole passage is about one mechanism: a coat the colour of whatever is behind it. White against snow, brown against rock and soil. Camouflage does two jobs and the sentence names them both — 천적으로부터 자신을 보호하고, and then the blank, under 사냥할 때. Being unseen while hunting is getting close to prey without being noticed, which is ②.\n\n하고 is what pins it. 보호하고 … 사냥할 때 links two uses of the same trick, one defensive and one offensive, so whatever fills the blank has to be the hunting counterpart of hiding from predators. An option that is not about being unseen cannot be the other half of that pair.\n\n③ is the trap for people who know the animal. Fur does keep a fox warm and 체온을 유지하다 is a true sentence about arctic foxes — but the passage discusses 색깔, and a colour does not warm anything. True of the subject and absent from the text is the commonest wrong answer in this type.\n\n① and ④ have no footing in the passage at all: nothing is said about company or about tracks. ① also runs against what little the paragraph implies, since an animal described as hiding itself is not being described as one that gathers into packs.",
+          "grammar": "N에 따라 is varying with N — 계절에 따라 색깔이 바뀐다. It attaches to a noun; for a whole clause you need -(으)ㅁ에 따라.\n\n바꾸다 and 바뀌다 are the transitive and intransitive halves of one change, and this passage uses both a sentence apart: 여우가 색깔을 바꾸다 is the fox changing it, 색깔이 바뀌다 is the colour changing. The pair to learn alongside 늘리다/늘다 and 줄이다/줄다.\n\nN(으)로부터 marks a source you move away from: 천적으로부터 보호하다, 부모로부터 독립하다. With a person in conversation Korean prefers 에게서.\n\n숨길 곳이 없는 puts a modifier on 곳 and then denies the place exists — nowhere to hide. The same frame gives 할 말이 없다, 갈 데가 없다.\n\n몰래 is without being noticed, and it stands directly in front of its verb: 몰래 다가가다, 몰래 보다. It is an adverb, so nothing attaches to it."
+        },
+        {
+          "n": 17,
+          "art": "",
+          "phraseKo": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다.",
+          "lines": [
+            {
+              "ko": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다."
+            },
+            {
+              "ko": "어린 나이부터 전자 기기를 장시간 사용한 탓이다."
+            },
+            {
+              "ko": "전자 기기의 화면을 단순히 누르거나 미는 동작을 반복하다 보면 손에 있는 근육을 {} 못한다."
+            },
+            {
+              "ko": "그래서 전문가들은 소근육이 발달하는 11세까지 손가락을 움직여서 하는 놀이를 많이 하도록 하는 것이 좋다고 말한다."
+            }
+          ],
+          "answer": "enough",
+          "choices": [
+            {
+              "id": "wrap",
+              "ko": "제대로 감싸지"
+            },
+            {
+              "id": "reduce",
+              "ko": "빠르게 줄이지"
+            },
+            {
+              "id": "enough",
+              "ko": "충분히 사용하지"
+            },
+            {
+              "id": "recover",
+              "ko": "완전히 회복하지"
+            }
+          ],
+          "en": "A lot of children now find it hard to hold a pencil and write neatly. It is because they have used electronic devices for long stretches from an early age. Keep repeating the simple press-or-swipe motion on a screen and the muscles in the hand do not get enough use. So specialists say it is good to have children do plenty of play that moves the fingers, up to the age of eleven while the fine muscles are developing.",
+          "why": "The blank sits in 근육을 ( ) 못한다, and 못한다 tells you before anything else that the sentence describes a failure. The paragraph's argument is already laid out: children cannot write neatly, because of long screen use, because pressing and swiping repeat one narrow motion. What that narrow motion fails to do is work the hand. ③.\n\nThe last sentence settles it from the other end. The recommendation is 손가락을 움직여서 하는 놀이를 많이 — plenty of play that moves the fingers — and a recommendation is only a remedy for the thing it supplies. More finger movement answers too little finger movement. On this type, reading the advice is often the fastest way to read the blank.\n\n② uses the passage's own idea and points it the wrong way. Muscle being reduced is what the paragraph says is happening; 빠르게 줄이지 못한다 would mean the children are failing to reduce it, which is the opposite claim. Any option built from words already on the page is worth checking for direction before meaning.\n\n④ assumes an injury the passage never gives — nothing has been damaged, so nothing is recovering. ① belongs to a different noun: 감싸다 is wrapping the hand around something, which is 연필을 잡고 from the first sentence, and it cannot take 근육을 as its object.\n\nWorth noticing that all four options end in -지, because 못한다 follows the gap. The grammar is correct in every option, which is the usual state of affairs in this type and the reason it cannot be answered the way 문항 1-2 can.",
+          "grammar": "-(으)ㄴ 탓이다 gives a cause and blames it: 사용한 탓이다. Its neutral twin is 때문이다 and its grateful one 덕분이다, and choosing between the three is choosing an attitude rather than a meaning.\n\n-다 보면 is keep doing it and eventually. 반복하다 보면 — the result comes from repetition rather than from one occasion. Keep it apart from -다 보니, which reports what was discovered after the fact rather than what will happen.\n\n-거나 joins alternatives inside a clause: 누르거나 미는 동작, a pressing or swiping motion, with both verbs modifying 동작.\n\n-지 못하다 is the long negative of inability, and it is not 안 하다. 사용하지 못한다 is cannot manage to use; 사용하지 않는다 would be chooses not to. The whole question turns on it being the first.\n\n-도록 하다 is to see to it that someone does something, which is why the advice reads 놀이를 많이 하도록 하는 것이 좋다 rather than 놀이를 많이 하는 것이 좋다: the specialists are telling adults to arrange it for children."
+        },
+        {
+          "n": 18,
+          "art": "",
+          "phraseKo": "고인돌은 옛날 청동기 시대의 무덤이다.",
+          "lines": [
+            {
+              "ko": "고인돌은 옛날 청동기 시대의 무덤이다."
+            },
+            {
+              "ko": "고인돌은 받침돌 두 개를 세우고 그 위에 덮개돌을 얹은 형태인데 덮개돌 하나의 무게가 수십 톤에 달하는 것도 있다."
+            },
+            {
+              "ko": "이와 같이 거대한 돌을 운반하고 세우려면 그만큼 많은 사람들의 힘이 필요했다."
+            },
+            {
+              "ko": "그래서 고인돌은 사람들을 불러 모아 무덤 만드는 일을 시킬 수 있을 정도로 {} 사람의 무덤이었을 것으로 보인다."
+            }
+          ],
+          "answer": "power",
+          "choices": [
+            {
+              "id": "power",
+              "ko": "대단한 권력을 가진"
+            },
+            {
+              "id": "weak",
+              "ko": "체력이 굉장히 약한"
+            },
+            {
+              "id": "weapons",
+              "ko": "무기를 잘 제작하는"
+            },
+            {
+              "id": "shortlife",
+              "ko": "수명이 남들보다 짧은"
+            }
+          ],
+          "en": "A dolmen is a tomb from the Bronze Age. It is built by standing two support stones and laying a capstone across them, and a single capstone can weigh tens of tons. Carrying and raising a stone that size took the strength of a correspondingly large number of people. So a dolmen appears to have been the tomb of someone with power enough to call people together and set them to the work of building it.",
+          "why": "The blank takes the whole argument that came before it. Capstones run to tens of tons; moving and raising one needed many people; so the tomb belonged to someone who could 사람들을 불러 모아 … 일을 시킬 수 있을. Being able to summon people and set them to work is power, and ① says so.\n\n정도로 is the hinge, and it is worth reading as an instruction. It measures the blank against the clause standing in front of it: to the degree that he could gather people and put them to work. So the blank must name something that would produce that ability, not something that merely sat alongside it.\n\n③ is the outside-knowledge trap and the most tempting of the three, because 청동기 시대 brings bronze weapons to mind before the option is even read. But making weapons well is nowhere in the passage, and the passage argues from one thing only: the weight of the stone. Anything the paragraph has not measured cannot be what the paragraph concludes.\n\n② and ④ both describe the buried person's body, which the passage never discusses, and neither would follow from a heavy tomb even if it did. ② additionally runs backwards: a paragraph about the labour a burial commanded is not building towards physical weakness.\n\nThe general rule this question teaches: when a blank follows 정도로, -(으)ㄹ 만큼 or -게, read the clause in front of it and ask what would cause it. What goes in the gap is a cause, not a description.",
+          "grammar": "N에 달하다 is to reach a figure, and the figure takes 에: 수십 톤에 달하다, 백만 명에 달하다. It belongs to writing and to news.\n\n-(으)려면 is if you mean to. 운반하고 세우려면 … 힘이 필요했다 — the first clause is the intention and the second what it requires. It is the conditional that assumes someone wants the thing done.\n\n-(으)ㄹ 정도로 is to the degree that. Whatever follows it is measured against the clause in front, which is exactly why it is where this question hides its work: 시킬 수 있을 정도로 대단한 권력.\n\n-았을 것으로 보인다 is it appears to have been — a conclusion with a hedge on it, and the standard register for writing about the distant past. The paper uses it because the claim is inferred from stones rather than recorded.\n\n시키다 is to make someone do a thing and takes 을/를 for the work itself: 일을 시키다, 숙제를 시키다. The general causative 하게 하다 puts the person in 에게 instead, and the two are not interchangeable here."
+        }
+      ]
     }
   ]
 }

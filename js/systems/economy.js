@@ -149,7 +149,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-topik-332-extra-12-b2e8e1fa82da';
+const ART_CACHE_KEY = 'art-topik-332-extra-12-21b68b17954d';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }

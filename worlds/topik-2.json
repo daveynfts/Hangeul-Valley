@@ -4610,6 +4610,728 @@
         "forms": [
           "늘면서"
         ]
+      },
+      {
+        "ko": "북극여우",
+        "en": "an arctic fox",
+        "hint": "🦊",
+        "category": "동물",
+        "categoryEn": "Animals & pets"
+      },
+      {
+        "ko": "북극",
+        "en": "the Arctic",
+        "hint": "❄️",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "계절",
+        "en": "a season of the year",
+        "hint": "🍂",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "겨울",
+        "en": "winter",
+        "hint": "⛄",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "바위",
+        "en": "a rock",
+        "hint": "🪨",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "흰색",
+        "en": "the colour white",
+        "hint": "⬜",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "갈색빛",
+        "en": "a brownish tinge",
+        "hint": "🟤",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "동물",
+        "en": "an animal",
+        "hint": "🐾",
+        "category": "동물",
+        "categoryEn": "Animals & pets"
+      },
+      {
+        "ko": "천적",
+        "en": "a natural predator",
+        "hint": "🦅",
+        "category": "동물",
+        "categoryEn": "Animals & pets"
+      },
+      {
+        "ko": "먹잇감",
+        "en": "prey",
+        "hint": "🐁",
+        "category": "동물",
+        "categoryEn": "Animals & pets"
+      },
+      {
+        "ko": "무리를 이루다",
+        "en": "to gather into a pack",
+        "hint": "🐺",
+        "category": "동물",
+        "categoryEn": "Animals & pets",
+        "forms": [
+          "무리를 이룰"
+        ]
+      },
+      {
+        "ko": "발자국",
+        "en": "a footprint",
+        "hint": "👣",
+        "category": "동물",
+        "categoryEn": "Animals & pets"
+      },
+      {
+        "ko": "사냥하다",
+        "en": "to hunt",
+        "hint": "🏹",
+        "category": "동물",
+        "categoryEn": "Animals & pets",
+        "forms": [
+          "사냥할"
+        ]
+      },
+      {
+        "ko": "바꾸다",
+        "en": "to change something — the one with an object",
+        "hint": "🔀",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "바꾸는"
+        ]
+      },
+      {
+        "ko": "바뀌다",
+        "en": "to change of itself — the one without",
+        "hint": "🔄",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "바뀐다"
+        ]
+      },
+      {
+        "ko": "비슷하다",
+        "en": "to be close to, to resemble",
+        "hint": "👯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "비슷한"
+        ]
+      },
+      {
+        "ko": "변화",
+        "en": "a change that has taken place",
+        "hint": "🌗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "숨기다",
+        "en": "to hide something away",
+        "hint": "🙈",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "숨길"
+        ]
+      },
+      {
+        "ko": "특수하다",
+        "en": "to be out of the ordinary",
+        "hint": "✨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "특수한"
+        ]
+      },
+      {
+        "ko": "환경",
+        "en": "an environment",
+        "hint": "🌍",
+        "category": "환경",
+        "categoryEn": "Environment & waste"
+      },
+      {
+        "ko": "N(으)로부터",
+        "en": "from N — a source you move away from",
+        "hint": "↩️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "으로부터"
+        ]
+      },
+      {
+        "ko": "보호하다",
+        "en": "to protect",
+        "hint": "🛡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "보호하고"
+        ]
+      },
+      {
+        "ko": "동료",
+        "en": "a fellow, one of your own kind",
+        "hint": "👥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "몰래",
+        "en": "without being noticed",
+        "hint": "🤫",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "다가가다",
+        "en": "to draw closer to",
+        "hint": "🚶",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "다가갈"
+        ]
+      },
+      {
+        "ko": "적절히",
+        "en": "to the right degree",
+        "hint": "🎚️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "유지하다",
+        "en": "to keep something as it is",
+        "hint": "♻️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "유지할"
+        ]
+      },
+      {
+        "ko": "남기다",
+        "en": "to leave something behind",
+        "hint": "📌",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "남기지"
+        ]
+      },
+      {
+        "ko": "연필",
+        "en": "a pencil",
+        "hint": "✏️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "글씨",
+        "en": "handwriting",
+        "hint": "🖋️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "반듯하다",
+        "en": "to be straight and even",
+        "hint": "📐",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "반듯하게"
+        ]
+      },
+      {
+        "ko": "어려움",
+        "en": "difficulty",
+        "hint": "😣",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "나이",
+        "en": "age, in years",
+        "hint": "🎂",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "전자 기기",
+        "en": "an electronic device",
+        "hint": "📱",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "장시간",
+        "en": "for a long stretch",
+        "hint": "⏱️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "사용하다",
+        "en": "to use",
+        "hint": "🖱️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "사용한",
+          "사용하지"
+        ]
+      },
+      {
+        "ko": "-(으)ㄴ 탓이다",
+        "en": "it is because of — and the cause is blamed",
+        "hint": "👉",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "탓이다"
+        ]
+      },
+      {
+        "ko": "화면",
+        "en": "a screen",
+        "hint": "🖥️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "단순히",
+        "en": "merely, and nothing more",
+        "hint": "➖",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "누르다",
+        "en": "to press",
+        "hint": "👇",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "누르거나"
+        ]
+      },
+      {
+        "ko": "밀다",
+        "en": "to push, to swipe",
+        "hint": "➡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "미는"
+        ]
+      },
+      {
+        "ko": "동작",
+        "en": "a movement of the body",
+        "hint": "🤸",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "반복하다",
+        "en": "to repeat",
+        "hint": "🔂",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "근육",
+        "en": "a muscle",
+        "hint": "💪",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "소근육",
+        "en": "the fine muscles of the hand",
+        "hint": "🤏",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "발달하다",
+        "en": "to develop, of a faculty",
+        "hint": "🌱",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "발달하는"
+        ]
+      },
+      {
+        "ko": "손가락",
+        "en": "a finger",
+        "hint": "☝️",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "움직이다",
+        "en": "to move a part of the body",
+        "hint": "🤾",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "움직여서"
+        ]
+      },
+      {
+        "ko": "놀이",
+        "en": "play, a game children do",
+        "hint": "🧸",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "전문가",
+        "en": "a specialist",
+        "hint": "🎓",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "전문가들"
+        ]
+      },
+      {
+        "ko": "제대로",
+        "en": "properly, as it should be",
+        "hint": "👌",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "감싸다",
+        "en": "to wrap the hand around",
+        "hint": "🤲",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "감싸지"
+        ]
+      },
+      {
+        "ko": "빠르게",
+        "en": "quickly",
+        "hint": "⚡",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "줄이다",
+        "en": "to reduce something",
+        "hint": "📉",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "줄이지"
+        ]
+      },
+      {
+        "ko": "충분히",
+        "en": "enough, to a sufficient degree",
+        "hint": "🈵",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "완전히",
+        "en": "completely",
+        "hint": "💯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-지 못하다",
+        "en": "cannot manage to — inability, not refusal",
+        "hint": "🚫",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "하지 못한다"
+        ]
+      },
+      {
+        "ko": "-도록 하다",
+        "en": "to see to it that someone does it",
+        "hint": "📋",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "하도록 하는"
+        ]
+      },
+      {
+        "ko": "고인돌",
+        "en": "a dolmen",
+        "hint": "🗿",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "옛날",
+        "en": "long ago",
+        "hint": "📜",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "청동기 시대",
+        "en": "the Bronze Age",
+        "hint": "⚱️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "무덤",
+        "en": "a tomb",
+        "hint": "⚰️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "받침돌",
+        "en": "a supporting stone",
+        "hint": "🧱",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "덮개돌",
+        "en": "a capstone",
+        "hint": "🪨",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "세우다",
+        "en": "to stand something upright",
+        "hint": "🏗️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "세우고",
+          "세우려면"
+        ]
+      },
+      {
+        "ko": "얹다",
+        "en": "to lay one thing on top of another",
+        "hint": "🔝",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "얹은"
+        ]
+      },
+      {
+        "ko": "형태",
+        "en": "the form a thing takes",
+        "hint": "🔷",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "무게",
+        "en": "weight",
+        "hint": "⚖️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "수십",
+        "en": "tens of, several dozen",
+        "hint": "🔢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "달하다",
+        "en": "to reach a figure",
+        "hint": "📈",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "달하는"
+        ]
+      },
+      {
+        "ko": "거대하다",
+        "en": "to be enormous",
+        "hint": "🐘",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "거대한"
+        ]
+      },
+      {
+        "ko": "운반하다",
+        "en": "to carry something heavy",
+        "hint": "🚚",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "운반하고"
+        ]
+      },
+      {
+        "ko": "그만큼",
+        "en": "correspondingly much",
+        "hint": "🔁",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "필요하다",
+        "en": "to be needed",
+        "hint": "❗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "필요했다"
+        ]
+      },
+      {
+        "ko": "부르다",
+        "en": "to call someone over",
+        "hint": "📣",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "불러"
+        ]
+      },
+      {
+        "ko": "모으다",
+        "en": "to gather people together",
+        "hint": "👥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "모아"
+        ]
+      },
+      {
+        "ko": "시키다",
+        "en": "to set someone to a task",
+        "hint": "📢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "시킬"
+        ]
+      },
+      {
+        "ko": "권력",
+        "en": "power over other people",
+        "hint": "👑",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "체력",
+        "en": "physical strength",
+        "hint": "🏋️",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "굉장히",
+        "en": "tremendously",
+        "hint": "🤯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "약하다",
+        "en": "to be weak",
+        "hint": "🍃",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "약한"
+        ]
+      },
+      {
+        "ko": "무기",
+        "en": "a weapon",
+        "hint": "🗡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "제작하다",
+        "en": "to manufacture",
+        "hint": "🔨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "제작하는"
+        ]
+      },
+      {
+        "ko": "수명",
+        "en": "a lifespan",
+        "hint": "⌛",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "남들",
+        "en": "other people",
+        "hint": "👫",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "짧다",
+        "en": "to be short",
+        "hint": "📏",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "짧은"
+        ]
+      },
+      {
+        "ko": "-(으)ㄹ 정도로",
+        "en": "to the degree that",
+        "hint": "📶",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "있을 정도로"
+        ]
       }
     ]
   },
