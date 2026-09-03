@@ -384,163 +384,190 @@
       "index": 394,
       "ko": "어린이",
       "file": "sprites/items/junior.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 395,
       "ko": "아이",
       "file": "sprites/items/wrapped_baby.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 396,
       "ko": "대학생",
       "file": "sprites/items/school_backpack.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 397,
       "ko": "봉사자",
       "file": "sprites/items/kindness.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 398,
       "ko": "신청",
       "file": "sprites/items/homework_notebook.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 399,
       "ko": "모집 기간",
       "file": "sprites/items/wall_calendar.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 400,
       "ko": "인주어린이도서관",
       "file": "sprites/items/brick_workshop.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 401,
       "ko": "가능",
       "file": "sprites/items/keep_rules.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 402,
       "ko": "외국인",
       "file": "sprites/items/france_flag.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 403,
       "ko": "한국어",
       "file": "sprites/items/grammar_scroll.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 404,
       "ko": "선물하다",
       "file": "sprites/items/give_left_hand.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 405,
       "ko": "두 달",
       "file": "sprites/items/crescent_moon.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 406,
       "ko": "-아/어 주다",
       "file": "sprites/items/receive_one_hand.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 407,
       "ko": "여행사",
       "file": "sprites/items/estate_broker.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 408,
       "ko": "여행 상품",
       "file": "sprites/items/paris_eiffel_tower.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 409,
       "ko": "이용 후기",
       "file": "sprites/items/recommend.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 410,
       "ko": "선택하다",
       "file": "sprites/items/crossroads.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 411,
       "ko": "중요하다",
       "file": "sprites/items/teal_gem.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 412,
       "ko": "회사",
       "file": "sprites/items/briefcase.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 413,
       "ko": "성인",
       "file": "sprites/items/senior.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 414,
       "ko": "남녀",
       "file": "sprites/items/same_age.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 415,
       "ko": "다양성",
       "file": "sprites/items/kinds_types.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 416,
       "ko": "적다",
       "file": "sprites/items/be_empty.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 417,
       "ko": "가장",
       "file": "sprites/items/gold_starburst.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 418,
       "ko": "기타",
       "file": "sprites/items/different.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 419,
       "ko": "설문 대상",
       "file": "sprites/items/silver_mic.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 420,
       "ko": "두 배",
       "file": "sprites/items/pocket_calculator.png",
-      "reviewed": true
+      "reviewed": true,
+      "standIn": true
     },
     {
       "index": 421,

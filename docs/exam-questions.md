@@ -148,6 +148,27 @@ grammar patterns. The rest are abstract nouns and verbs — 종류, 위치, 거�
 되다 — which is the honest reason it exists. There is nothing to draw for -더니 that
 a learner would recognise as -더니, and the same is true of 근황.
 
+That last paragraph is true of `VOCAB_ART_ROWS` at large and **false for this world**.
+`scripts/apply_topik_art.js` requires every word in `worlds/topik-2.json` to be declared in
+`docs/topik-art-manifest.json` at its exact array index, against an image no other topik-2
+word uses — it throws `Every TOPIK word must be declared once` for a missing word and
+`Shared image` / `Copied PNG` for a reused one. So append new words at the **end** of the word
+list, or every index after the insertion point shifts and the whole manifest is wrong. None of
+this is caught by `test_panel_art`; it fails at the very end of `npm test`, in `test_topik_art`.
+
+A word that does not warrant new artwork gets a `retained` entry — `{ index, ko, file,
+reviewed: true }` — pointing at a free registered sprite, and then `npm run art:topik:apply`
+regenerates the mapping block, the catalog cache key and `ART_CACHE_KEY`. Where the tile is a
+stand-in rather than a considered match, add `standIn: true`. It is metadata only — it does not
+reach the generated rows or the cache key — and it is what makes the redesign backlog listable:
+
+```bash
+node -e "require('./docs/topik-art-manifest.json').retained.filter(e=>e.standIn).forEach(e=>console.log(e.ko,'->',e.file))"
+```
+
+Replacing one later means editing that entry and re-running the apply script; nothing in the
+questions or the word list has to move.
+
 ---
 
 ## The order that works
