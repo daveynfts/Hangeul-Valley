@@ -4970,7 +4970,7 @@ const TOPIK_VOCAB_ART_ROWS = [
     "ko": "감싸다",
     "slug": "emoji_1f932_2",
     "folder": "items",
-    "nameEn": "to wrap the hand around",
+    "nameEn": "to wrap around — a hand round a pencil, or material round a bottle",
     "family": "topik-vocabulary"
   },
   {
@@ -6497,6 +6497,349 @@ const TOPIK_VOCAB_ART_ROWS = [
     "slug": "emoji_1f372",
     "folder": "items",
     "nameEn": "foodstuff, matter that is food",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "누군가",
+    "slug": "emoji_1f937_2",
+    "folder": "items",
+    "nameEn": "someone or other",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "해를 입히다",
+    "slug": "emoji_1f4a2",
+    "folder": "items",
+    "nameEn": "to injure someone",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄴ 척하다",
+    "slug": "emoji_1f3ad_2",
+    "folder": "items",
+    "nameEn": "to pretend to be",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "거짓으로",
+    "slug": "emoji_1f925",
+    "folder": "items",
+    "nameEn": "falsely, not meaning it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "흘리다",
+    "slug": "emoji_1f4a7_2",
+    "folder": "items",
+    "nameEn": "to shed, to let run",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "눈물",
+    "slug": "emoji_1f622_3",
+    "folder": "items",
+    "nameEn": "a tear",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "눈물샘",
+    "slug": "emoji_1f4a6",
+    "folder": "items",
+    "nameEn": "the tear gland",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "악어",
+    "slug": "emoji_1f40a",
+    "folder": "items",
+    "nameEn": "a crocodile",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "비유하다",
+    "slug": "emoji_1f500_3",
+    "folder": "items",
+    "nameEn": "to liken one thing to another",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "실제로",
+    "slug": "emoji_2705_3",
+    "folder": "items",
+    "nameEn": "in actual fact",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "잡아먹다",
+    "slug": "emoji_1f356",
+    "folder": "items",
+    "nameEn": "to catch and eat",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "신경",
+    "slug": "emoji_1f9e0",
+    "folder": "items",
+    "nameEn": "a nerve",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "연결되다",
+    "slug": "emoji_1f517",
+    "folder": "items",
+    "nameEn": "to be wired together",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "씹다",
+    "slug": "emoji_1f62c_2",
+    "folder": "items",
+    "nameEn": "to chew",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "마치",
+    "slug": "emoji_1f3aa",
+    "folder": "items",
+    "nameEn": "as if — and it wants -는 것처럼 to close it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "표현",
+    "slug": "emoji_1f4ac_3",
+    "folder": "items",
+    "nameEn": "a turn of phrase",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "인간",
+    "slug": "emoji_1f9cd_2",
+    "folder": "items",
+    "nameEn": "a human being",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가식적",
+    "slug": "emoji_1f3a0",
+    "folder": "items",
+    "nameEn": "put on, insincere",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "행위",
+    "slug": "emoji_1f6b6_3",
+    "folder": "items",
+    "nameEn": "an act, a piece of behaviour",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "생리적",
+    "slug": "emoji_1f9ec",
+    "folder": "items",
+    "nameEn": "physiological",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "현상",
+    "slug": "emoji_1f50d_3",
+    "folder": "items",
+    "nameEn": "a phenomenon",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "두려움",
+    "slug": "emoji_1f628",
+    "folder": "items",
+    "nameEn": "fear",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "떨다",
+    "slug": "emoji_1f976",
+    "folder": "items",
+    "nameEn": "to tremble",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "죄책감",
+    "slug": "emoji_1f614",
+    "folder": "items",
+    "nameEn": "guilt at what one has done",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "갈증",
+    "slug": "emoji_1f975",
+    "folder": "items",
+    "nameEn": "thirst",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "해소하다",
+    "slug": "emoji_1f6bf_2",
+    "folder": "items",
+    "nameEn": "to relieve, to clear away",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "배부름",
+    "slug": "emoji_1f37d_3",
+    "folder": "items",
+    "nameEn": "the state of being full",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "만족하다",
+    "slug": "emoji_1f60c_2",
+    "folder": "items",
+    "nameEn": "to be satisfied",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "음료수",
+    "slug": "emoji_1f964",
+    "folder": "items",
+    "nameEn": "a soft drink",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "액체",
+    "slug": "emoji_1f4a7_3",
+    "folder": "items",
+    "nameEn": "a liquid",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "담다",
+    "slug": "emoji_1f4e6_2",
+    "folder": "items",
+    "nameEn": "to hold something inside it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "용기",
+    "slug": "emoji_1f9f4",
+    "folder": "items",
+    "nameEn": "a container",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "원기둥",
+    "slug": "emoji_1f96b",
+    "folder": "items",
+    "nameEn": "a cylinder",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이유",
+    "slug": "emoji_2754",
+    "folder": "items",
+    "nameEn": "a reason",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "예를 들다",
+    "slug": "emoji_1f449_2",
+    "folder": "items",
+    "nameEn": "to give an example",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "밑면",
+    "slug": "emoji_2b07_4",
+    "folder": "items",
+    "nameEn": "the base face of a shape",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "정사각형",
+    "slug": "emoji_1f7e5",
+    "folder": "items",
+    "nameEn": "a square",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "정삼각형",
+    "slug": "emoji_1f53a",
+    "folder": "items",
+    "nameEn": "an equilateral triangle",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "비교하다",
+    "slug": "emoji_2696_5",
+    "folder": "items",
+    "nameEn": "to compare",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "넓이",
+    "slug": "emoji_1f4d0_4",
+    "folder": "items",
+    "nameEn": "area",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "똑같이",
+    "slug": "emoji_1f46f_2",
+    "folder": "items",
+    "nameEn": "identically",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "둘레",
+    "slug": "emoji_2b55",
+    "folder": "items",
+    "nameEn": "the distance round the outside",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "각각",
+    "slug": "emoji_1f522_5",
+    "folder": "items",
+    "nameEn": "each one respectively",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "재료",
+    "slug": "emoji_1f9f1_3",
+    "folder": "items",
+    "nameEn": "material a thing is made from",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "적게",
+    "slug": "emoji_1f53d",
+    "folder": "items",
+    "nameEn": "little, in small amount",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "들다",
+    "slug": "emoji_1f4b8_2",
+    "folder": "items",
+    "nameEn": "to be spent — of material, money or time",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "생산비",
+    "slug": "emoji_1f3ed_2",
+    "folder": "items",
+    "nameEn": "the cost of producing something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "편리하다",
+    "slug": "emoji_1f44d",
+    "folder": "items",
+    "nameEn": "to be convenient",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "제작",
+    "slug": "emoji_1f527",
+    "folder": "items",
+    "nameEn": "manufacture, the making of a thing",
     "family": "topik-vocabulary"
   }
 ];

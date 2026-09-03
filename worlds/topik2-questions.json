@@ -1704,6 +1704,96 @@
           "en": "People usually brush their teeth right after eating. But brushing straight after something sharply sour, lemon for instance, is not a good idea. The acid in sour food weakens the enamel for a while, so irritating it at once with a brush damages the teeth further. For the enamel to come back to its original hardness the acid has to be neutralised by saliva, and that takes about thirty minutes. So after eating something sharply sour you should wait at least thirty minutes before brushing.",
           "why": "The sentence the blank sits in is a cause: 산성이 치아 보호막을 ( ) 때문에 … 치아가 더 손상된다. So the gap has to name what the acid does to the enamel that makes brushing harmful. ③ 일시적으로 약화시키기 — weakens it for a while.\n\nThe next sentence proves both halves of ③ separately, which is why it is there. 원래 강도로 돌아오려면 says the hardness has dropped and has to come back, and that is 약화. 30분 정도가 소요된다 says it does come back, and soon, and that is 일시적. The passage hands you the word and its qualifier one after the other.\n\n④ describes what the 보호막 does rather than what the acid does to it, and it makes the sentence argue against itself: if the acid protected the enamel from food, brushing would not damage anything and there would be nothing to explain.\n\n① and ② are inventions. Colour is never mentioned. And 여러 겹으로 만들기 would make the layer thicker — the opposite of a reason to leave the teeth alone for half an hour.\n\nThe paragraph is one piece of advice with its reason attached, and it closes on a number. When a passage ends in a figure, check whether the blank is the thing that figure measures: here the thirty minutes is exactly how long the weakening lasts.",
           "grammar": "All four options end in -기 because the gap is followed by 때문에, which needs a noun in front of it. -기 때문에 is the nominalised cause; -아/어서 is the same idea on a clause and cannot take 때문에.\n\n-시키다 makes a causative out of a 하다 noun: 약화하다 is to weaken, 약화시키다 is to make something weaken. 발전 and 안정 make the same pair, each with a 하다 form for the thing itself and a 시키다 form for causing it, and the 시키다 here is the same verb as question 18's 일을 시키다.\n\n-(으)려면 is if it is to, and it sets up a requirement: 돌아오려면 … 중화되어야 하는데. Question 18 used it the same way with 운반하고 세우려면.\n\n소요되다 is to be taken up, of time or money, and belongs to writing and to notices: 30분이 소요된다. In speech it is 30분이 걸린다.\n\n최소 … 이상 stacks two words that each already mean at least, which reads as redundant and is perfectly normal in instructions. 섭취하다 is likewise the clinical word for eating, used wherever the writing is about nutrition rather than about meals."
+        },
+        {
+          "n": 30,
+          "art": "",
+          "source": "제102회 TOPIK II 읽기",
+          "phraseKo": "누군가에게 해를 입히고 미안한 척 거짓으로 흘리는 눈물을 '악어의 눈물'에 비유한다.",
+          "lines": [
+            {
+              "ko": "누군가에게 해를 입히고 미안한 척 거짓으로 흘리는 눈물을 '악어의 눈물'에 비유한다."
+            },
+            {
+              "ko": "실제로 악어는 먹잇감을 잡아먹으면서 눈물을 흘린다."
+            },
+            {
+              "ko": "눈물샘을 담당하는 신경과 턱을 움직이는 신경이 연결되어 있기 때문에 음식을 씹을 때면 눈물이 나오는 것이다."
+            },
+            {
+              "ko": "이 눈물 때문에 악어는 마치 다른 동물을 잡아먹으면서 {} 것처럼 보인다."
+            },
+            {
+              "ko": "'악어의 눈물'이라는 표현은 인간의 가식적인 행위를 악어의 생리적 현상에 비유한 것이다."
+            }
+          ],
+          "answer": "guilt",
+          "choices": [
+            {
+              "id": "fear",
+              "ko": "두려움에 떠는"
+            },
+            {
+              "id": "guilt",
+              "ko": "죄책감을 느끼는"
+            },
+            {
+              "id": "thirst",
+              "ko": "갈증을 해소하는"
+            },
+            {
+              "id": "full",
+              "ko": "배부름에 만족하는"
+            }
+          ],
+          "en": "Tears shed falsely, in feigned apology by someone who has done another harm, are likened to \"crocodile tears\". Crocodiles really do shed tears while eating their prey. The nerve that serves the tear gland and the nerve that moves the jaw are connected, so tears come when the animal chews. Because of those tears a crocodile looks as though it feels guilty while eating another creature. The phrase \"crocodile tears\" likens a piece of human pretence to a crocodile's physiology.",
+          "why": "The first sentence defines the idiom and the last one restates it, and the blank sits between them with both ends pinned. 미안한 척 거짓으로 흘리는 눈물 above it says the human version is feigned remorse; 인간의 가식적인 행위 below it says the same thing again. So what the crocodile appears to feel has to be the sincere version of that pretence — remorse. ② 죄책감을 느끼는.\n\n④ is the interesting wrong answer, because it is the one that could actually be true. An animal finishing a meal may well be pleased about it. That is exactly what rules it out: the idiom exists to describe a feeling that is *not* real, and an option naming a genuine one cannot be what 가식적 is pointing at.\n\n③ takes the tears literally in the other direction — tears are water, so perhaps it looks like drinking. But the paragraph has already given the physiology in full: the tear-gland nerve and the jaw nerve are wired together, and chewing sets them off. Thirst is not in it.\n\n① has nobody frightened. The crocodile is the one doing the eating, and fear appears nowhere in these five sentences.\n\nThe shape to carry away: when a passage defines an expression at the top and explains the comparison at the bottom, a blank in the middle is almost always the definition said once more, in the terms of whatever the expression is compared to.",
+          "grammar": "-(으)ㄴ 척하다 is to pretend: 미안한 척하다, 모르는 척하다. The 척 can stand on its own in front of the next verb, which is what it does here — 미안한 척 거짓으로 흘리는.\n\n마치 … -는 것처럼 is as if, and the two halves belong together: 마치 opens it and -는 것처럼 closes it. Neither is complete without the other in careful writing.\n\nA를 B에 비유하다 is to liken A to B, with 에 on the thing being compared to. The passage uses it at both ends — 눈물을 악어의 눈물에 비유한다, then 행위를 현상에 비유한 것이다 — which is how the paragraph closes its own frame.\n\n담당하다 takes 을/를: 눈물샘을 담당하는 신경, the nerve responsible for the tear gland. 연결되다 is the passive of 연결하다, so the nerves are wired together rather than wiring anything.\n\n-적 turns a Sino-Korean root into a describing word — 가식적, 생리적 — and it needs -인 before a noun: 가식적인 행위. Without a noun after it, it stands bare: 생리적 현상 is the exception that proves how loose the rule is in practice."
+        },
+        {
+          "n": 31,
+          "art": "",
+          "source": "제102회 TOPIK II 읽기",
+          "phraseKo": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다.",
+          "lines": [
+            {
+              "ko": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다."
+            },
+            {
+              "ko": "원기둥을 선택하는 가장 큰 이유는 {} 위해서이다."
+            },
+            {
+              "ko": "예를 들어 음료수 병의 밑면이 정사각형, 정삼각형, 원일 경우를 비교해 보자."
+            },
+            {
+              "ko": "밑면의 넓이가 똑같이 100cm²일 때 둘레는 각각 40cm, 46cm, 35cm 정도로 원의 둘레가 가장 짧다."
+            },
+            {
+              "ko": "따라서 같은 양의 액체를 담는 조건이라면 둘레를 감싸는 재료가 가장 적게 드는 원기둥으로 만들어 생산비를 낮추고자 하는 것이다."
+            }
+          ],
+          "answer": "cost",
+          "choices": [
+            {
+              "id": "looks",
+              "ko": "보기 좋게 만들기"
+            },
+            {
+              "id": "storage",
+              "ko": "보관을 편리하게 하기"
+            },
+            {
+              "id": "grip",
+              "ko": "손으로 잡기 편하게 하기"
+            },
+            {
+              "id": "cost",
+              "ko": "용기의 제작 비용을 줄이기"
+            }
+          ],
+          "en": "Containers that hold liquid, drinks bottles among them, are mostly cylinders. The main reason for choosing a cylinder is to cut the cost of making the container. Compare a bottle whose base is a square, an equilateral triangle and a circle. With the base area the same 100cm² in each case, the perimeters come to about 40cm, 46cm and 35cm — the circle's is the shortest. So, holding the same volume of liquid, a cylinder needs the least material around its side, and making it that way brings the production cost down.",
+          "why": "위해서이다 follows the gap, so the blank is a purpose, and the last sentence states that purpose in as many words: 재료가 가장 적게 드는 원기둥으로 만들어 생산비를 낮추고자. Less material, lower production cost. ④.\n\nThe middle of the paragraph is the arithmetic that gets there, and it is worth reading as an argument rather than as numbers. Same base area, 100cm² in every case; perimeters of 40, 46 and 35; the circle is shortest. A shorter perimeter is less material wrapped round the side, and material is money.\n\n①, ② and ③ are all perfectly true of a round bottle. It does look better, it does store more conveniently, and it is easier to hold. Not one of them is measured or argued for anywhere in the passage, which measures exactly one thing: perimeter. Only cost follows from perimeter.\n\nThat is the same trap question 16 set with 체온을 적절히 유지할 — an option true of the subject and absent from the reasoning. On this type the test is never whether a statement is true; it is whether this paragraph got there.\n\nRead what comes after the gap before reading the options. 위해서이다 wants a purpose, 때문에 wants a cause, 것처럼 보인다 wants an appearance. The grammar behind the blank tells you what kind of thing you are looking for, and it is why all four options here end in -기.",
+          "grammar": "이유는 … -기 위해서이다 is a frame: the reason is in order to. It binds a reason to a purpose, and it is what forces the blank into a -기 form. Left as -기 위해서 alone the sentence would not close.\n\n예를 들어 is for example, and the 들다 in it is the citing sense — 예를 들다, 손을 들다 — not the one three lines later.\n\n들다 for cost takes the thing spent as its subject: 재료가 적게 들다, 돈이 많이 들다, 시간이 들다. The spender does not appear, which is why the sentence reads as a property of the shape rather than of the manufacturer.\n\nN(이)라면 is if it is a case of N: 조건이라면, under that condition. It sets up the comparison the last sentence concludes from.\n\n-고자 하다 is intends to, in writing, and it closes the paragraph the way 위해서이다 opened it. The 유사 표현 set already paired -고자 with -기 위해서; here both appear in one passage, four sentences apart."
         }
       ]
     },

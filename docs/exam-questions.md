@@ -195,6 +195,23 @@ questions or the word list has to move.
 
 ---
 
+## Which paper a question came from
+
+An item may carry `source` — `"제102회 TOPIK II 읽기"` — naming the sitting it was printed in.
+The group's `no` says which 문항 numbers the *type* occupies, which is a different fact: `n` is
+the number on the page, and two questions from different sittings can share it.
+
+It is data rather than display; nothing renders it yet. To list what is tagged, and what is
+not:
+
+```bash
+node -e "require('./worlds/topik2-questions.json').exercises.forEach(e=>e.items.forEach(i=>console.log(e.id, i.n, i.source||'(no source)')))"
+```
+
+Tag a question when you know the sitting. Do not infer one from a neighbouring question:
+questions arrive as photographs and two consecutive numbers are usually but not always the
+same paper.
+
 ## The order that works
 
 1. Read the photograph. Decide which type it belongs to, and which relation the

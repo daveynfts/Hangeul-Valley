@@ -3014,7 +3014,8 @@
         "category": "문법",
         "categoryEn": "Grammar & expressions",
         "forms": [
-          "입학하고자"
+          "입학하고자",
+          "낮추고자"
         ]
       },
       {
@@ -3950,7 +3951,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "만들",
-          "만들어"
+          "만들어",
+          "만드는"
         ]
       },
       {
@@ -5036,12 +5038,13 @@
       },
       {
         "ko": "감싸다",
-        "en": "to wrap the hand around",
+        "en": "to wrap around — a hand round a pencil, or material round a bottle",
         "hint": "🤲",
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "감싸지"
+          "감싸지",
+          "감싸는"
         ]
       },
       {
@@ -6856,6 +6859,399 @@
         "hint": "🍲",
         "category": "음식",
         "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "누군가",
+        "en": "someone or other",
+        "hint": "🤷",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "해를 입히다",
+        "en": "to injure someone",
+        "hint": "💢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "해를 입히고"
+        ]
+      },
+      {
+        "ko": "-(으)ㄴ 척하다",
+        "en": "to pretend to be",
+        "hint": "🎭",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "미안한 척"
+        ]
+      },
+      {
+        "ko": "거짓으로",
+        "en": "falsely, not meaning it",
+        "hint": "🤥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "흘리다",
+        "en": "to shed, to let run",
+        "hint": "💧",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "흘리는",
+          "흘린다"
+        ]
+      },
+      {
+        "ko": "눈물",
+        "en": "a tear",
+        "hint": "😢",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "눈물샘",
+        "en": "the tear gland",
+        "hint": "💦",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "악어",
+        "en": "a crocodile",
+        "hint": "🐊",
+        "category": "동물",
+        "categoryEn": "Animals & pets"
+      },
+      {
+        "ko": "비유하다",
+        "en": "to liken one thing to another",
+        "hint": "🔀",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "비유한다",
+          "비유한"
+        ]
+      },
+      {
+        "ko": "실제로",
+        "en": "in actual fact",
+        "hint": "✅",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "잡아먹다",
+        "en": "to catch and eat",
+        "hint": "🍖",
+        "category": "동물",
+        "categoryEn": "Animals & pets",
+        "forms": [
+          "잡아먹으면서"
+        ]
+      },
+      {
+        "ko": "신경",
+        "en": "a nerve",
+        "hint": "🧠",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "연결되다",
+        "en": "to be wired together",
+        "hint": "🔗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "연결되어"
+        ]
+      },
+      {
+        "ko": "씹다",
+        "en": "to chew",
+        "hint": "😬",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "씹을"
+        ]
+      },
+      {
+        "ko": "마치",
+        "en": "as if — and it wants -는 것처럼 to close it",
+        "hint": "🎪",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "표현",
+        "en": "a turn of phrase",
+        "hint": "💬",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "인간",
+        "en": "a human being",
+        "hint": "🧍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "가식적",
+        "en": "put on, insincere",
+        "hint": "🎠",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "가식적인"
+        ]
+      },
+      {
+        "ko": "행위",
+        "en": "an act, a piece of behaviour",
+        "hint": "🚶",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "생리적",
+        "en": "physiological",
+        "hint": "🧬",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "현상",
+        "en": "a phenomenon",
+        "hint": "🔍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "두려움",
+        "en": "fear",
+        "hint": "😨",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "떨다",
+        "en": "to tremble",
+        "hint": "🥶",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "떠는"
+        ]
+      },
+      {
+        "ko": "죄책감",
+        "en": "guilt at what one has done",
+        "hint": "😔",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "갈증",
+        "en": "thirst",
+        "hint": "🥵",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "해소하다",
+        "en": "to relieve, to clear away",
+        "hint": "🚿",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "해소하는"
+        ]
+      },
+      {
+        "ko": "배부름",
+        "en": "the state of being full",
+        "hint": "🍽️",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "만족하다",
+        "en": "to be satisfied",
+        "hint": "😌",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "만족하는"
+        ]
+      },
+      {
+        "ko": "음료수",
+        "en": "a soft drink",
+        "hint": "🥤",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "액체",
+        "en": "a liquid",
+        "hint": "💧",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "담다",
+        "en": "to hold something inside it",
+        "hint": "📦",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "담는"
+        ]
+      },
+      {
+        "ko": "용기",
+        "en": "a container",
+        "hint": "🧴",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "원기둥",
+        "en": "a cylinder",
+        "hint": "🥫",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "이유",
+        "en": "a reason",
+        "hint": "❔",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "예를 들다",
+        "en": "to give an example",
+        "hint": "👉",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "예를 들어"
+        ]
+      },
+      {
+        "ko": "밑면",
+        "en": "the base face of a shape",
+        "hint": "⬇️",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "정사각형",
+        "en": "a square",
+        "hint": "🟥",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "정삼각형",
+        "en": "an equilateral triangle",
+        "hint": "🔺",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "비교하다",
+        "en": "to compare",
+        "hint": "⚖️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "비교해"
+        ]
+      },
+      {
+        "ko": "넓이",
+        "en": "area",
+        "hint": "📐",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "똑같이",
+        "en": "identically",
+        "hint": "👯",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "둘레",
+        "en": "the distance round the outside",
+        "hint": "⭕",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "각각",
+        "en": "each one respectively",
+        "hint": "🔢",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "재료",
+        "en": "material a thing is made from",
+        "hint": "🧱",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "적게",
+        "en": "little, in small amount",
+        "hint": "🔽",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "들다",
+        "en": "to be spent — of material, money or time",
+        "hint": "💸",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "드는"
+        ]
+      },
+      {
+        "ko": "생산비",
+        "en": "the cost of producing something",
+        "hint": "🏭",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "편리하다",
+        "en": "to be convenient",
+        "hint": "👍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "편리하게"
+        ]
+      },
+      {
+        "ko": "제작",
+        "en": "manufacture, the making of a thing",
+        "hint": "🔧",
+        "category": "경제",
+        "categoryEn": "Economy & business"
       }
     ]
   },

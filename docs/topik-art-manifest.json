@@ -3158,6 +3158,349 @@
       "file": "sprites/items/emoji_1f372.png",
       "reviewed": true,
       "standIn": true
+    },
+    {
+      "index": 791,
+      "ko": "누군가",
+      "file": "sprites/items/emoji_1f937_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 792,
+      "ko": "해를 입히다",
+      "file": "sprites/items/emoji_1f4a2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 793,
+      "ko": "-(으)ㄴ 척하다",
+      "file": "sprites/items/emoji_1f3ad_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 794,
+      "ko": "거짓으로",
+      "file": "sprites/items/emoji_1f925.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 795,
+      "ko": "흘리다",
+      "file": "sprites/items/emoji_1f4a7_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 796,
+      "ko": "눈물",
+      "file": "sprites/items/emoji_1f622_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 797,
+      "ko": "눈물샘",
+      "file": "sprites/items/emoji_1f4a6.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 798,
+      "ko": "악어",
+      "file": "sprites/items/emoji_1f40a.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 799,
+      "ko": "비유하다",
+      "file": "sprites/items/emoji_1f500_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 800,
+      "ko": "실제로",
+      "file": "sprites/items/emoji_2705_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 801,
+      "ko": "잡아먹다",
+      "file": "sprites/items/emoji_1f356.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 802,
+      "ko": "신경",
+      "file": "sprites/items/emoji_1f9e0.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 803,
+      "ko": "연결되다",
+      "file": "sprites/items/emoji_1f517.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 804,
+      "ko": "씹다",
+      "file": "sprites/items/emoji_1f62c_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 805,
+      "ko": "마치",
+      "file": "sprites/items/emoji_1f3aa.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 806,
+      "ko": "표현",
+      "file": "sprites/items/emoji_1f4ac_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 807,
+      "ko": "인간",
+      "file": "sprites/items/emoji_1f9cd_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 808,
+      "ko": "가식적",
+      "file": "sprites/items/emoji_1f3a0.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 809,
+      "ko": "행위",
+      "file": "sprites/items/emoji_1f6b6_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 810,
+      "ko": "생리적",
+      "file": "sprites/items/emoji_1f9ec.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 811,
+      "ko": "현상",
+      "file": "sprites/items/emoji_1f50d_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 812,
+      "ko": "두려움",
+      "file": "sprites/items/emoji_1f628.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 813,
+      "ko": "떨다",
+      "file": "sprites/items/emoji_1f976.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 814,
+      "ko": "죄책감",
+      "file": "sprites/items/emoji_1f614.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 815,
+      "ko": "갈증",
+      "file": "sprites/items/emoji_1f975.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 816,
+      "ko": "해소하다",
+      "file": "sprites/items/emoji_1f6bf_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 817,
+      "ko": "배부름",
+      "file": "sprites/items/emoji_1f37d_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 818,
+      "ko": "만족하다",
+      "file": "sprites/items/emoji_1f60c_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 819,
+      "ko": "음료수",
+      "file": "sprites/items/emoji_1f964.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 820,
+      "ko": "액체",
+      "file": "sprites/items/emoji_1f4a7_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 821,
+      "ko": "담다",
+      "file": "sprites/items/emoji_1f4e6_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 822,
+      "ko": "용기",
+      "file": "sprites/items/emoji_1f9f4.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 823,
+      "ko": "원기둥",
+      "file": "sprites/items/emoji_1f96b.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 824,
+      "ko": "이유",
+      "file": "sprites/items/emoji_2754.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 825,
+      "ko": "예를 들다",
+      "file": "sprites/items/emoji_1f449_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 826,
+      "ko": "밑면",
+      "file": "sprites/items/emoji_2b07_4.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 827,
+      "ko": "정사각형",
+      "file": "sprites/items/emoji_1f7e5.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 828,
+      "ko": "정삼각형",
+      "file": "sprites/items/emoji_1f53a.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 829,
+      "ko": "비교하다",
+      "file": "sprites/items/emoji_2696_5.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 830,
+      "ko": "넓이",
+      "file": "sprites/items/emoji_1f4d0_4.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 831,
+      "ko": "똑같이",
+      "file": "sprites/items/emoji_1f46f_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 832,
+      "ko": "둘레",
+      "file": "sprites/items/emoji_2b55.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 833,
+      "ko": "각각",
+      "file": "sprites/items/emoji_1f522_5.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 834,
+      "ko": "재료",
+      "file": "sprites/items/emoji_1f9f1_3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 835,
+      "ko": "적게",
+      "file": "sprites/items/emoji_1f53d.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 836,
+      "ko": "들다",
+      "file": "sprites/items/emoji_1f4b8_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 837,
+      "ko": "생산비",
+      "file": "sprites/items/emoji_1f3ed_2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 838,
+      "ko": "편리하다",
+      "file": "sprites/items/emoji_1f44d.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 839,
+      "ko": "제작",
+      "file": "sprites/items/emoji_1f527.png",
+      "reviewed": true,
+      "standIn": true
     }
   ],
   "entries": [
