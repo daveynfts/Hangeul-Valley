@@ -878,7 +878,34 @@ const VOCAB_ART_MORE_ROWS = [
   { ko: '만들다', slug: 'kitchen_stove', folder: 'items', nameEn: 'To make', family: 'action' },
   { ko: '쓰다', slug: 'brown_laptop', folder: 'items', nameEn: 'To write', family: 'action' },
   { ko: '보내다', slug: 'delivery_bag', folder: 'items', nameEn: 'To send', family: 'action' },
-  { ko: '느리다', slug: 'be_late', folder: 'items', nameEn: 'To be slow', family: 'abstract' }
+  { ko: '느리다', slug: 'be_late', folder: 'items', nameEn: 'To be slow', family: 'abstract' },
+  // The mountain rescue passage. Stand-in tiles: existing art reused, not drawn for these.
+  { ko: '휴일', slug: 'weekend', folder: 'items', nameEn: 'A day off', family: 'time' },
+  { ko: '경찰', slug: 'justice_scales', folder: 'items', nameEn: 'The police', family: 'people' },
+  { ko: '경위', slug: 'chevron_badge', folder: 'items', nameEn: 'A police lieutenant', family: 'people' },
+  { ko: '등산객', slug: 'go_outside', folder: 'items', nameEn: 'A hiker', family: 'people' },
+  { ko: '정상', slug: 'gold_spiral', folder: 'items', nameEn: 'A summit', family: 'place' },
+  { ko: '중턱', slug: 'balcony_rail', folder: 'items', nameEn: 'Halfway up', family: 'place' },
+  { ko: '대피소', slug: 'gosiwon_room', folder: 'items', nameEn: 'A shelter', family: 'place' },
+  { ko: '구조하다', slug: 'yield_seat', folder: 'items', nameEn: 'To rescue', family: 'action' },
+  { ko: '구조대', slug: 'public_etiquette', folder: 'items', nameEn: 'A rescue team', family: 'people' },
+  { ko: '여성', slug: 'bow_greeting', folder: 'items', nameEn: 'A woman', family: 'people' },
+  { ko: '쓰러지다', slug: 'bandaged_boot', folder: 'items', nameEn: 'To collapse', family: 'health' },
+  { ko: '발견하다', slug: 'eyeglasses', folder: 'items', nameEn: 'To spot', family: 'action' },
+  { ko: '체온', slug: 'thermometer', folder: 'items', nameEn: 'Body temperature', family: 'health' },
+  { ko: '겉옷', slug: 'taekwondo_dobok', folder: 'items', nameEn: 'An outer coat', family: 'household' },
+  { ko: '벗다', slug: 'drop_honorifics', folder: 'items', nameEn: 'To take off', family: 'action' },
+  { ko: '덮다', slug: 'heat_patch', folder: 'items', nameEn: 'To cover over', family: 'action' },
+  { ko: '신고하다', slug: 'make_phone_call', folder: 'items', nameEn: 'To report it', family: 'action' },
+  { ko: '이후', slug: 'knot_tile', folder: 'items', nameEn: 'After that', family: 'abstract' },
+  { ko: '차량', slug: 'subway_station', folder: 'items', nameEn: 'A vehicle', family: 'place' },
+  { ko: '업다', slug: 'senior_preference', folder: 'items', nameEn: 'To carry on the back', family: 'action' },
+  { ko: '뛰다', slug: 'running_shoe', folder: 'items', nameEn: 'To run', family: 'action' },
+  { ko: '내려가다', slug: 'cream_waves', folder: 'items', nameEn: 'To go down', family: 'action' },
+  { ko: '이송되다', slug: 'stethoscope', folder: 'items', nameEn: 'To be taken to hospital', family: 'health' },
+  { ko: '치료', slug: 'medicine_bottle', folder: 'items', nameEn: 'Medical treatment', family: 'health' },
+  { ko: '되찾다', slug: 'vitamin_bottle', folder: 'items', nameEn: 'To get it back', family: 'action' },
+  { ko: '이동하다', slug: 'swap_seats', folder: 'items', nameEn: 'To move place', family: 'action' }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {
   VOCAB_ART_MORE_ROWS.forEach(function (r) {
@@ -4012,6 +4039,195 @@ const TOPIK_VOCAB_ART_ROWS = [
     "slug": "be_late",
     "folder": "items",
     "nameEn": "to be slow",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "휴일",
+    "slug": "weekend",
+    "folder": "items",
+    "nameEn": "a day off, a public holiday",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "경찰",
+    "slug": "justice_scales",
+    "folder": "items",
+    "nameEn": "the police",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "경위",
+    "slug": "chevron_badge",
+    "folder": "items",
+    "nameEn": "a police lieutenant — the rank the name is followed by",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "등산객",
+    "slug": "go_outside",
+    "folder": "items",
+    "nameEn": "a hiker",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "정상",
+    "slug": "gold_spiral",
+    "folder": "items",
+    "nameEn": "the summit of a mountain",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "중턱",
+    "slug": "balcony_rail",
+    "folder": "items",
+    "nameEn": "halfway up a mountain",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "대피소",
+    "slug": "gosiwon_room",
+    "folder": "items",
+    "nameEn": "a shelter",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "구조하다",
+    "slug": "yield_seat",
+    "folder": "items",
+    "nameEn": "to rescue",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "구조대",
+    "slug": "public_etiquette",
+    "folder": "items",
+    "nameEn": "a rescue team",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여성",
+    "slug": "bow_greeting",
+    "folder": "items",
+    "nameEn": "a woman",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "쓰러지다",
+    "slug": "bandaged_boot",
+    "folder": "items",
+    "nameEn": "to collapse",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "발견하다",
+    "slug": "eyeglasses",
+    "folder": "items",
+    "nameEn": "to spot, to come across",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "체온",
+    "slug": "thermometer",
+    "folder": "items",
+    "nameEn": "body temperature",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "겉옷",
+    "slug": "taekwondo_dobok",
+    "folder": "items",
+    "nameEn": "an outer coat",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "벗다",
+    "slug": "drop_honorifics",
+    "folder": "items",
+    "nameEn": "to take off a garment",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "덮다",
+    "slug": "heat_patch",
+    "folder": "items",
+    "nameEn": "to cover something over",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "신고하다",
+    "slug": "make_phone_call",
+    "folder": "items",
+    "nameEn": "to report it to the authorities",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이후",
+    "slug": "knot_tile",
+    "folder": "items",
+    "nameEn": "after that, from then on",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "차량",
+    "slug": "subway_station",
+    "folder": "items",
+    "nameEn": "a vehicle",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "업다",
+    "slug": "senior_preference",
+    "folder": "items",
+    "nameEn": "to carry someone on your back",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "뛰다",
+    "slug": "running_shoe",
+    "folder": "items",
+    "nameEn": "to run, and to jump — the same verb does both",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "내려가다",
+    "slug": "cream_waves",
+    "folder": "items",
+    "nameEn": "to go down",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "병원",
+    "slug": "clinic_building",
+    "folder": "items",
+    "nameEn": "a hospital",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이송되다",
+    "slug": "stethoscope",
+    "folder": "items",
+    "nameEn": "to be taken to hospital — the word a news report uses",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "치료",
+    "slug": "medicine_bottle",
+    "folder": "items",
+    "nameEn": "medical treatment",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "되찾다",
+    "slug": "vitamin_bottle",
+    "folder": "items",
+    "nameEn": "to get it back again",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "이동하다",
+    "slug": "swap_seats",
+    "folder": "items",
+    "nameEn": "to move from one place to another",
     "family": "topik-vocabulary"
   }
 ];

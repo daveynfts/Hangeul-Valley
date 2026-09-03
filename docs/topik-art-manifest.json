@@ -716,6 +716,195 @@
       "file": "sprites/items/be_late.png",
       "reviewed": true,
       "standIn": true
+    },
+    {
+      "index": 446,
+      "ko": "휴일",
+      "file": "sprites/items/weekend.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 447,
+      "ko": "경찰",
+      "file": "sprites/items/justice_scales.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 448,
+      "ko": "경위",
+      "file": "sprites/items/chevron_badge.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 449,
+      "ko": "등산객",
+      "file": "sprites/items/go_outside.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 450,
+      "ko": "정상",
+      "file": "sprites/items/gold_spiral.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 451,
+      "ko": "중턱",
+      "file": "sprites/items/balcony_rail.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 452,
+      "ko": "대피소",
+      "file": "sprites/items/gosiwon_room.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 453,
+      "ko": "구조하다",
+      "file": "sprites/items/yield_seat.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 454,
+      "ko": "구조대",
+      "file": "sprites/items/public_etiquette.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 455,
+      "ko": "여성",
+      "file": "sprites/items/bow_greeting.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 456,
+      "ko": "쓰러지다",
+      "file": "sprites/items/bandaged_boot.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 457,
+      "ko": "발견하다",
+      "file": "sprites/items/eyeglasses.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 458,
+      "ko": "체온",
+      "file": "sprites/items/thermometer.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 459,
+      "ko": "겉옷",
+      "file": "sprites/items/taekwondo_dobok.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 460,
+      "ko": "벗다",
+      "file": "sprites/items/drop_honorifics.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 461,
+      "ko": "덮다",
+      "file": "sprites/items/heat_patch.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 462,
+      "ko": "신고하다",
+      "file": "sprites/items/make_phone_call.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 463,
+      "ko": "이후",
+      "file": "sprites/items/knot_tile.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 464,
+      "ko": "차량",
+      "file": "sprites/items/subway_station.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 465,
+      "ko": "업다",
+      "file": "sprites/items/senior_preference.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 466,
+      "ko": "뛰다",
+      "file": "sprites/items/running_shoe.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 467,
+      "ko": "내려가다",
+      "file": "sprites/items/cream_waves.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 468,
+      "ko": "병원",
+      "file": "sprites/items/clinic_building.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 469,
+      "ko": "이송되다",
+      "file": "sprites/items/stethoscope.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 470,
+      "ko": "치료",
+      "file": "sprites/items/medicine_bottle.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 471,
+      "ko": "되찾다",
+      "file": "sprites/items/vitamin_bottle.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 472,
+      "ko": "이동하다",
+      "file": "sprites/items/swap_seats.png",
+      "reviewed": true,
+      "standIn": true
     }
   ],
   "entries": [

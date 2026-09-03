@@ -646,7 +646,8 @@
         "category": "경제",
         "categoryEn": "Economy & business",
         "forms": [
-          "오르지"
+          "오르지",
+          "오르던"
         ]
       },
       {
@@ -657,7 +658,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "떨어졌다",
-          "떨어지고"
+          "떨어지고",
+          "떨어지지"
         ]
       },
       {
@@ -667,7 +669,8 @@
         "category": "경제",
         "categoryEn": "Economy & business",
         "forms": [
-          "올라가는"
+          "올라가는",
+          "올라갔다"
         ]
       },
       {
@@ -3655,7 +3658,8 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "읽어 주는",
-          "읽어 줄"
+          "읽어 줄",
+          "주고"
         ]
       },
       {
@@ -3970,6 +3974,232 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "느린"
+        ]
+      },
+      {
+        "ko": "휴일",
+        "en": "a day off, a public holiday",
+        "hint": "🏖️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "경찰",
+        "en": "the police",
+        "hint": "👮",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "경위",
+        "en": "a police lieutenant — the rank the name is followed by",
+        "hint": "🎖️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "등산객",
+        "en": "a hiker",
+        "hint": "🥾",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "정상",
+        "en": "the summit of a mountain",
+        "hint": "⛰️",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "중턱",
+        "en": "halfway up a mountain",
+        "hint": "🏞️",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "대피소",
+        "en": "a shelter",
+        "hint": "🛖",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "구조하다",
+        "en": "to rescue",
+        "hint": "🆘",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "구조했다"
+        ]
+      },
+      {
+        "ko": "구조대",
+        "en": "a rescue team",
+        "hint": "🚨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "여성",
+        "en": "a woman",
+        "hint": "🙋",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "쓰러지다",
+        "en": "to collapse",
+        "hint": "💫",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "쓰러져"
+        ]
+      },
+      {
+        "ko": "발견하다",
+        "en": "to spot, to come across",
+        "hint": "🔍",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "발견했다"
+        ]
+      },
+      {
+        "ko": "체온",
+        "en": "body temperature",
+        "hint": "🌡️",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "겉옷",
+        "en": "an outer coat",
+        "hint": "🧥",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "벗다",
+        "en": "to take off a garment",
+        "hint": "👕",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "벗어서"
+        ]
+      },
+      {
+        "ko": "덮다",
+        "en": "to cover something over",
+        "hint": "🛏️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "덮어"
+        ]
+      },
+      {
+        "ko": "신고하다",
+        "en": "to report it to the authorities",
+        "hint": "📞",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "신고했다",
+          "신고를"
+        ]
+      },
+      {
+        "ko": "이후",
+        "en": "after that, from then on",
+        "hint": "➡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "차량",
+        "en": "a vehicle",
+        "hint": "🚐",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "업다",
+        "en": "to carry someone on your back",
+        "hint": "🎒",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "업고"
+        ]
+      },
+      {
+        "ko": "뛰다",
+        "en": "to run, and to jump — the same verb does both",
+        "hint": "🏃",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "뛰어"
+        ]
+      },
+      {
+        "ko": "내려가다",
+        "en": "to go down",
+        "hint": "⬇️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "내려갔다"
+        ]
+      },
+      {
+        "ko": "병원",
+        "en": "a hospital",
+        "hint": "🏥",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "이송되다",
+        "en": "to be taken to hospital — the word a news report uses",
+        "hint": "🚑",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "이송된"
+        ]
+      },
+      {
+        "ko": "치료",
+        "en": "medical treatment",
+        "hint": "💊",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "되찾다",
+        "en": "to get it back again",
+        "hint": "💚",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "되찾았다"
+        ]
+      },
+      {
+        "ko": "이동하다",
+        "en": "to move from one place to another",
+        "hint": "🔁",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "이동했다"
         ]
       }
     ]

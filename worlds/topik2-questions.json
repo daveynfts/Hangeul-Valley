@@ -1160,6 +1160,54 @@
           "en": "A stamp museum that opened last month is proving a hit with the public. In the museum's history room you can take in the history of the postage stamp at a glance. In the children's hands-on room you can smell scented stamps or handle wooden ones. You can also make a stamp of your own with your photograph set into it. And the museum's \"slow postbox\" — write a letter, drop it in, and receive it a year later — is drawing a crowd of its own.",
           "why": "Option 2 is the passage's fourth sentence with nothing changed. 자신의 사진이 들어간 우표도 직접 만들 수 있다 and 직접 우표를 만들어 볼 수 있다 say the same thing; the only difference is -아/어 보다 added to the verb, which does not change what is on offer. On a prose passage the right option is usually the one sentence rewritten rather than the one summarised.\n\nOption 1 takes a number out of the wrong sentence. The museum 지난달 문을 열었다 — it opened last month. 일 년 appears in the passage, but it belongs to the postbox: 일 년 뒤에 받아 볼 수 있는. Lifting a figure from one sentence and attaching it to another is the commonest move this type makes on prose, and it works because the number really is on the page.\n\nOption 3 negates a verb the passage states. 나무 우표 등을 만져 볼 수 있다 says the wooden stamps in the 체험실 can be handled, and 만질 수 없다 says they cannot. An option carrying 없다 or 못하다 is worth taking straight to the verb it denies; a passage this short will usually have said it outright.\n\nOption 4 does the same to the postbox. 편지를 써서 넣으면 … 받아 볼 수 있는 describes writing a letter, posting it, and getting it back a year later, so 편지를 보내지 못한다 contradicts the first half of that sentence. Note that the sentence is doing two things at once — you send and you receive — and the option denies only one of them, which is what makes it read as plausible.\n\nEvery option here maps onto exactly one sentence and no sentence is used twice. That is the structure to exploit on a passage: read the five sentences first, then take each option to the single sentence it belongs to rather than re-reading the whole thing four times. The second sentence — the 역사실 — is the one no option touches, and a passage always prints more than it asks about.",
           "grammar": "문을 열다 is to open the door, and of a shop or a museum it is to open for business. 지난달 문을 연 우표 박물관 puts it on the modifier: 열다 is a ㄹ-stem, so -(으)ㄴ drops the ㄹ and gives 연. The opposite is 문을 닫다, which likewise means to close down rather than to shut a door.\n\n-아/어 보다 is trying something out, and this passage uses it three times — 맡거나, 만져 볼 수 있다, 받아 볼 수 있다 — because that is what a 체험실 is for. It is also why option 2 can add 볼 to 만들 수 있다 without changing the claim: 만들 수 있다 and 만들어 볼 수 있다 both mean you are allowed to make one.\n\n나다 is the verb for something coming off a thing — a smell, a sound, a fever. 향기(가) 나다 is to give off a scent, so 향기 나는 우표 is a scented stamp. And 들어가다 is to go in: 사진이 들어간 우표 is a stamp with a photograph set into it, where the thing that went in takes 이/가 rather than 을/를.\n\n느린 우체통 is a real fixture in Korea rather than an invention of this paper — you post a letter and it is delivered a year later. 인기를 끌다 is to pull in popularity, so 인기를 끌고 있다 is to be drawing a crowd right now; it sits alongside 인기가 있다 and 인기가 많다.\n\n한눈에 is in a single glance, and 한눈에 볼 수 있다 is the standard phrase for a display that lets you take everything in at once. 써서 is 쓰다 plus -아/어서 in its sequence sense — write it, and then put it in — and 넣으면 is the condition that the rest of the sentence answers."
+        },
+        {
+          "n": 12,
+          "art": "",
+          "phraseKo": "휴일에 산을 오르던 경찰이 등산객을 구조했다.",
+          "lines": [
+            {
+              "ko": "휴일에 산을 오르던 경찰이 등산객을 구조했다."
+            },
+            {
+              "ko": "지난 1일 김민수 경위는 인주산 정상에서 한 여성이 쓰러져 있는 것을 발견했다."
+            },
+            {
+              "ko": "김 경위는 바로 여성의 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 119에 신고했다."
+            },
+            {
+              "ko": "이후 김 경위는 구조대 차량이 올 수 있는 산 중턱 대피소까지 여성을 업고 뛰어 내려갔다."
+            },
+            {
+              "ko": "병원으로 이송된 여성은 치료를 받고 건강을 되찾았다."
+            },
+            {
+              "who": "설명",
+              "ko": "{}"
+            }
+          ],
+          "answer": "collapsed",
+          "choices": [
+            {
+              "id": "collapsed",
+              "ko": "한 등산객이 산 정상에 쓰러져 있었다."
+            },
+            {
+              "id": "byvehicle",
+              "ko": "김 경위는 대피소까지 차량으로 이동했다."
+            },
+            {
+              "id": "teamcarried",
+              "ko": "구조대가 등산객을 업고 병원으로 뛰어갔다."
+            },
+            {
+              "id": "calledin",
+              "ko": "김 경위는 등산객의 신고를 받고 산에 올라갔다."
+            }
+          ],
+          "en": "A policeman out climbing on his day off rescued a hiker. On the 1st, Lieutenant Kim Min-su found a woman lying collapsed at the summit of Mount Inju. He at once took off his coat and covered her so that her body temperature would not drop, and called 119. He then carried her on his back and ran down to the shelter halfway up the mountain, as far as a rescue vehicle could come. Taken on to hospital, the woman was treated and recovered her health.",
+          "why": "Option 1 is the second sentence with one word exchanged, and the first sentence is what licenses the exchange. 인주산 정상에서 한 여성이 쓰러져 있는 것을 발견했다 says a woman was lying collapsed at the summit; 경찰이 등산객을 구조했다, one sentence earlier, has already told you that the person rescued was a hiker. Carrying 등산객 = 여성 across from sentence one to sentence two is the whole of what this question asks.\n\nOption 2 gives 김 경위 the vehicle. 구조대 차량이 올 수 있는 산 중턱 대피소 is a long modifier on 대피소 — the shelter is as high as a rescue vehicle can reach — and the officer himself 업고 뛰어 내려갔다, carrying her on his back on foot. A noun buried under a relative clause is where this type puts the thing it means to swap.\n\nOption 3 changes the actor and the destination at once. It was 김 경위 who carried her, not the 구조대, and he carried her to the 대피소, not to the hospital. The hospital comes in the last sentence and by a different means: 병원으로 이송된 여성 — she was transported there, which is what the rescue team did after the shelter. Either change alone would sink the option; having both is what makes it read like a summary.\n\nOption 4 reverses the direction of the report. 휴일에 산을 오르던 경찰 puts the officer on the mountain on his own time, and it was he who 119에 신고했다. 등산객의 신고를 받고 산에 올라갔다 makes him an officer answering a call and going up in response — an ordinary story, and not this one. 휴일 in the first sentence is there precisely to rule it out.\n\nThe passage is a chain of actions with one actor each, and every wrong option moves an action to the wrong actor or the wrong place. So the quick read is to list who did what before looking at the options at all: 김 경위 found her, covered her, called 119, and carried her down to the shelter; the 구조대 took her on to hospital. Four facts, and three of the four options fall out of them.",
+          "grammar": "-던 marks an action that was under way at the time: 산을 오르던 경찰 is a policeman in the middle of a climb, not one who climbs. It is what makes 휴일에 do its work — he was off duty and out walking rather than on patrol, which is the fact option 4 needs you to have missed.\n\n-아/어 있다 is a state left standing after an action finishes, not an action in progress. 쓰러져 있다 is lying collapsed; 앉아 있다 is seated. 쓰러지고 있다 would be falling over at that moment, which is a different picture and not what anyone finds at a summit.\n\n-지 않게 states the purpose the next action serves. 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 is one continuous act built out of three verbs: -아/어서 is sequence (take it off, and then), -아/어 주다 is doing it for her rather than for himself, and -고 carries on to the next thing he did.\n\n업다 is to carry on your back, and it is worth keeping apart from 안다, which is in your arms, and 들다, which is in your hands. 뛰어 내려가다 stacks two directions of travel on each other — running, and going down — the way Korean regularly does with movement verbs.\n\n이송되다 is the passive of 이송하다 and belongs to hospital and emergency reporting rather than to conversation: 병원으로 이송되다 is the phrase a news item uses. And 되찾다 carries the prefix 되-, which puts back or again on a verb: 되찾다 to get back and 되살리다 to bring back to life."
         }
       ]
     }
