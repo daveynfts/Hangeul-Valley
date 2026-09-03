@@ -1489,7 +1489,7 @@
     {
       "id": "topik2-passage",
       "type": "build",
-      "no": "유형 · 문항 16-18",
+      "no": "유형 · 문항 16-18, 28-31",
       "pattern": "( )에 들어갈 내용 고르기",
       "section": "지문 빈칸",
       "sectionEn": "A blank inside a passage",
@@ -1619,6 +1619,91 @@
           "en": "A dolmen is a tomb from the Bronze Age. It is built by standing two support stones and laying a capstone across them, and a single capstone can weigh tens of tons. Carrying and raising a stone that size took the strength of a correspondingly large number of people. So a dolmen appears to have been the tomb of someone with power enough to call people together and set them to the work of building it.",
           "why": "The blank takes the whole argument that came before it. Capstones run to tens of tons; moving and raising one needed many people; so the tomb belonged to someone who could 사람들을 불러 모아 … 일을 시킬 수 있을. Being able to summon people and set them to work is power, and ① says so.\n\n정도로 is the hinge, and it is worth reading as an instruction. It measures the blank against the clause standing in front of it: to the degree that he could gather people and put them to work. So the blank must name something that would produce that ability, not something that merely sat alongside it.\n\n③ is the outside-knowledge trap and the most tempting of the three, because 청동기 시대 brings bronze weapons to mind before the option is even read. But making weapons well is nowhere in the passage, and the passage argues from one thing only: the weight of the stone. Anything the paragraph has not measured cannot be what the paragraph concludes.\n\n② and ④ both describe the buried person's body, which the passage never discusses, and neither would follow from a heavy tomb even if it did. ② additionally runs backwards: a paragraph about the labour a burial commanded is not building towards physical weakness.\n\nThe general rule this question teaches: when a blank follows 정도로, -(으)ㄹ 만큼 or -게, read the clause in front of it and ask what would cause it. What goes in the gap is a cause, not a description.",
           "grammar": "N에 달하다 is to reach a figure, and the figure takes 에: 수십 톤에 달하다, 백만 명에 달하다. It belongs to writing and to news.\n\n-(으)려면 is if you mean to. 운반하고 세우려면 … 힘이 필요했다 — the first clause is the intention and the second what it requires. It is the conditional that assumes someone wants the thing done.\n\n-(으)ㄹ 정도로 is to the degree that. Whatever follows it is measured against the clause in front, which is exactly why it is where this question hides its work: 시킬 수 있을 정도로 대단한 권력.\n\n-았을 것으로 보인다 is it appears to have been — a conclusion with a hedge on it, and the standard register for writing about the distant past. The paper uses it because the claim is inferred from stones rather than recorded.\n\n시키다 is to make someone do a thing and takes 을/를 for the work itself: 일을 시키다, 숙제를 시키다. The general causative 하게 하다 puts the person in 에게 instead, and the two are not interchangeable here."
+        },
+        {
+          "n": 28,
+          "art": "",
+          "phraseKo": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다.",
+          "lines": [
+            {
+              "ko": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
+            },
+            {
+              "ko": "영국의 화가 윌리엄 호가스는 드라마 못지않게 흥미진진한 이야기를 여러 장의 그림으로 나누어 구성했다."
+            },
+            {
+              "ko": "그리고 이를 판화에 새긴 후 {} 순서대로 인쇄해 판매했다."
+            },
+            {
+              "ko": "독자들은 다음 회를 손꼽아 기다렸고 그의 그림을 보기 위해 기꺼이 돈을 지불했다."
+            }
+          ],
+          "answer": "interval",
+          "choices": [
+            {
+              "id": "cartoonist",
+              "ko": "만화가가 되려고"
+            },
+            {
+              "id": "noorders",
+              "ko": "주문을 받지 않고"
+            },
+            {
+              "id": "anonymous",
+              "ko": "작가를 밝히지 않고"
+            },
+            {
+              "id": "interval",
+              "ko": "일정한 기간을 두고"
+            }
+          ],
+          "en": "The form we know from today's serialised comics — a story carried on instalment by instalment — already existed in the eighteenth century. The English painter William Hogarth composed stories as gripping as any drama, divided across several pictures. He then engraved them and printed and sold them in order, leaving a set interval between them. Readers counted the days until the next instalment and paid gladly to see his pictures.",
+          "why": "The passage is about serialisation and says so twice: 회차별로 이어지는 in the first sentence, 다음 회를 손꼽아 기다렸고 in the last. For readers to wait for a next instalment, the instalments have to appear apart in time, and ④ 일정한 기간을 두고 is what puts them apart.\n\nThe last sentence is the proof rather than a decoration. 손꼽아 기다리다 is counting the days on your fingers, and nobody counts days for something already in their hands. Had Hogarth printed and sold the whole set at once there would have been nothing to wait for and no reason for the sentence to exist.\n\n③ contradicts that same sentence from the other side. 그의 그림을 보기 위해 — they paid to see his pictures, so they knew whose they were. 작가를 밝히지 않고 would make that impossible, and it uses a word the passage never raises.\n\n① mistakes a comparison for an ambition. 오늘날의 연재 만화처럼 is the writer explaining an old form through a modern one; Hogarth was 영국의 화가 in the eighteenth century and was not trying to become a cartoonist, which did not yet exist as a job. ② is about orders, and nothing anywhere in the paragraph is.\n\nWorth noticing where the deciding sentence is. The blank sits in the sentence about how he sold them, and what settles it is the sentence after, not the one before. On this type the evidence is very often downstream of the gap.",
+          "grammar": "N 못지않게 is no less than N: 드라마 못지않게 흥미진진한 이야기, a story as gripping as any drama. It attaches to a bare noun and modifies whatever follows.\n\nN별로 is by each N — 회차별로 is instalment by instalment, and the same shape gives 나라별로, 학년별로. N대로 is as per N, so 순서대로 is in the order given, and 말대로, 계획대로 work the same way.\n\n손꼽아 기다리다 is to count on the fingers while waiting, so to look forward to something keenly. It is fixed: 손꼽다 hardly appears without 기다리다 behind it.\n\n-(으)ㄴ 후 is after, on a completed action: 새긴 후 인쇄했다. Its spoken twin is -고 나서, and -(으)ㄴ 뒤 is interchangeable with it.\n\n기꺼이 is gladly, of something done without being pressed, and it collocates with paying, giving and helping: 기꺼이 돈을 지불하다, 기꺼이 돕다."
+        },
+        {
+          "n": 29,
+          "art": "",
+          "phraseKo": "사람들은 보통 식후에 바로 이를 닦는다.",
+          "lines": [
+            {
+              "ko": "사람들은 보통 식후에 바로 이를 닦는다."
+            },
+            {
+              "ko": "하지만 레몬 등 신맛이 강한 음식을 먹은 후에 바로 양치질을 하는 것은 좋지 않다."
+            },
+            {
+              "ko": "신 음식에 있는 산성이 치아 보호막을 {} 때문에 바로 칫솔질로 자극하면 치아가 더 손상된다."
+            },
+            {
+              "ko": "치아 보호막이 원래 강도로 돌아오려면 침으로 산성이 중화되어야 하는데 여기에 30분 정도가 소요된다."
+            },
+            {
+              "ko": "그래서 신맛이 강한 음식을 섭취하면 최소 30분 이상 지나서 양치해야 한다."
+            }
+          ],
+          "answer": "weaken",
+          "choices": [
+            {
+              "id": "yellow",
+              "ko": "누렇게 바꾸기"
+            },
+            {
+              "id": "layers",
+              "ko": "여러 겹으로 만들기"
+            },
+            {
+              "id": "weaken",
+              "ko": "일시적으로 약화시키기"
+            },
+            {
+              "id": "protect",
+              "ko": "음식물로부터 보호하기"
+            }
+          ],
+          "en": "People usually brush their teeth right after eating. But brushing straight after something sharply sour, lemon for instance, is not a good idea. The acid in sour food weakens the enamel for a while, so irritating it at once with a brush damages the teeth further. For the enamel to come back to its original hardness the acid has to be neutralised by saliva, and that takes about thirty minutes. So after eating something sharply sour you should wait at least thirty minutes before brushing.",
+          "why": "The sentence the blank sits in is a cause: 산성이 치아 보호막을 ( ) 때문에 … 치아가 더 손상된다. So the gap has to name what the acid does to the enamel that makes brushing harmful. ③ 일시적으로 약화시키기 — weakens it for a while.\n\nThe next sentence proves both halves of ③ separately, which is why it is there. 원래 강도로 돌아오려면 says the hardness has dropped and has to come back, and that is 약화. 30분 정도가 소요된다 says it does come back, and soon, and that is 일시적. The passage hands you the word and its qualifier one after the other.\n\n④ describes what the 보호막 does rather than what the acid does to it, and it makes the sentence argue against itself: if the acid protected the enamel from food, brushing would not damage anything and there would be nothing to explain.\n\n① and ② are inventions. Colour is never mentioned. And 여러 겹으로 만들기 would make the layer thicker — the opposite of a reason to leave the teeth alone for half an hour.\n\nThe paragraph is one piece of advice with its reason attached, and it closes on a number. When a passage ends in a figure, check whether the blank is the thing that figure measures: here the thirty minutes is exactly how long the weakening lasts.",
+          "grammar": "All four options end in -기 because the gap is followed by 때문에, which needs a noun in front of it. -기 때문에 is the nominalised cause; -아/어서 is the same idea on a clause and cannot take 때문에.\n\n-시키다 makes a causative out of a 하다 noun: 약화하다 is to weaken, 약화시키다 is to make something weaken. 발전 and 안정 make the same pair, each with a 하다 form for the thing itself and a 시키다 form for causing it, and the 시키다 here is the same verb as question 18's 일을 시키다.\n\n-(으)려면 is if it is to, and it sets up a requirement: 돌아오려면 … 중화되어야 하는데. Question 18 used it the same way with 운반하고 세우려면.\n\n소요되다 is to be taken up, of time or money, and belongs to writing and to notices: 30분이 소요된다. In speech it is 30분이 걸린다.\n\n최소 … 이상 stacks two words that each already mean at least, which reads as redundant and is perfectly normal in instructions. 섭취하다 is likewise the clinical word for eating, used wherever the writing is about nutrition rather than about meals."
         }
       ]
     },

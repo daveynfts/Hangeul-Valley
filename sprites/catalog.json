@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-topik-332-extra-12-9ed56c3661e9",
+  "cacheKey": "art-topik-332-extra-12-7985caa7a9d5",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -18421,6 +18421,1026 @@
       ],
       "notes": "Emoji stand-in drawn from the word's own hint (✊). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
       "wordKo": "요구하다"
+    },
+    {
+      "id": "item.emoji_1f4c5_2",
+      "nameEn": "nowadays, in our own time",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4c5_2",
+      "path": "items/emoji_1f4c5_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4c5_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (📅). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "오늘날"
+    },
+    {
+      "id": "item.emoji_1f4da",
+      "nameEn": "serialisation, publishing in instalments",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4da",
+      "path": "items/emoji_1f4da.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4da",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (📚). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "연재"
+    },
+    {
+      "id": "item.emoji_1f5bc_2",
+      "nameEn": "a comic",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f5bc_2",
+      "path": "items/emoji_1f5bc_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f5bc_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🖼️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "만화"
+    },
+    {
+      "id": "item.emoji_270f_2",
+      "nameEn": "a cartoonist",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_270f_2",
+      "path": "items/emoji_270f_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_270f_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (✏️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "만화가"
+    },
+    {
+      "id": "item.emoji_1f4ac_2",
+      "nameEn": "a story",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4ac_2",
+      "path": "items/emoji_1f4ac_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4ac_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (💬). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "이야기"
+    },
+    {
+      "id": "item.emoji_1f522_3",
+      "nameEn": "by each N, one N at a time",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f522_3",
+      "path": "items/emoji_1f522_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f522_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🔢). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "N별로"
+    },
+    {
+      "id": "item.emoji_1f3a8_2",
+      "nameEn": "a work of art",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f3a8_2",
+      "path": "items/emoji_1f3a8_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f3a8_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🎨). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "작품"
+    },
+    {
+      "id": "item.emoji_1f4d0_3",
+      "nameEn": "the form a thing is cast in",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4d0_3",
+      "path": "items/emoji_1f4d0_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4d0_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (📐). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "형식"
+    },
+    {
+      "id": "item.emoji_23ea",
+      "nameEn": "already, by then",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_23ea",
+      "path": "items/emoji_23ea.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_23ea",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (⏪). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "이미"
+    },
+    {
+      "id": "item.emoji_1f3db_3",
+      "nameEn": "a century",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f3db_3",
+      "path": "items/emoji_1f3db_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f3db_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🏛️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "세기"
+    },
+    {
+      "id": "item.emoji_2728_3",
+      "nameEn": "to exist",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_2728_3",
+      "path": "items/emoji_2728_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_2728_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (✨). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "존재하다"
+    },
+    {
+      "id": "item.emoji_1f3f0",
+      "nameEn": "England, Britain",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f3f0",
+      "path": "items/emoji_1f3f0.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f3f0",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🏰). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "영국"
+    },
+    {
+      "id": "item.emoji_1f58c",
+      "nameEn": "a painter",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f58c",
+      "path": "items/emoji_1f58c.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f58c",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🖌️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "화가"
+    },
+    {
+      "id": "item.emoji_2696_4",
+      "nameEn": "no less than N",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_2696_4",
+      "path": "items/emoji_2696_4.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_2696_4",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (⚖️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "N 못지않게"
+    },
+    {
+      "id": "item.emoji_1f37f",
+      "nameEn": "to be gripping",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f37f",
+      "path": "items/emoji_1f37f.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f37f",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🍿). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "흥미진진하다"
+    },
+    {
+      "id": "item.emoji_1f3a8_3",
+      "nameEn": "a picture",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f3a8_3",
+      "path": "items/emoji_1f3a8_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f3a8_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🎨). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "그림"
+    },
+    {
+      "id": "item.emoji_2702",
+      "nameEn": "to divide something up",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_2702",
+      "path": "items/emoji_2702.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_2702",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (✂️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "나누다"
+    },
+    {
+      "id": "item.emoji_1f9e9_3",
+      "nameEn": "to put together, to compose",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f9e9_3",
+      "path": "items/emoji_1f9e9_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f9e9_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🧩). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "구성하다"
+    },
+    {
+      "id": "item.emoji_1f5de",
+      "nameEn": "a print made from an engraving",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f5de",
+      "path": "items/emoji_1f5de.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f5de",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🗞️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "판화"
+    },
+    {
+      "id": "item.emoji_1f528_3",
+      "nameEn": "to carve into a surface",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f528_3",
+      "path": "items/emoji_1f528_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f528_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🔨). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "새기다"
+    },
+    {
+      "id": "item.emoji_1f522_4",
+      "nameEn": "in the order given",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f522_4",
+      "path": "items/emoji_1f522_4.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f522_4",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🔢). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "순서대로"
+    },
+    {
+      "id": "item.emoji_1f5a8",
+      "nameEn": "to print",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f5a8",
+      "path": "items/emoji_1f5a8.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f5a8",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🖨️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "인쇄하다"
+    },
+    {
+      "id": "item.emoji_1f3f7",
+      "nameEn": "to sell",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f3f7",
+      "path": "items/emoji_1f3f7.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f3f7",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🏷️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "판매하다"
+    },
+    {
+      "id": "item.emoji_1f453",
+      "nameEn": "a reader",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f453",
+      "path": "items/emoji_1f453.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f453",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (👓). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "독자"
+    },
+    {
+      "id": "item.emoji_27a1_4",
+      "nameEn": "the next one",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_27a1_4",
+      "path": "items/emoji_27a1_4.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_27a1_4",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (➡️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "다음"
+    },
+    {
+      "id": "item.emoji_1f91e",
+      "nameEn": "to count the days until it comes",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f91e",
+      "path": "items/emoji_1f91e.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f91e",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🤞). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "손꼽아 기다리다"
+    },
+    {
+      "id": "item.emoji_1f60a",
+      "nameEn": "gladly, without being pressed",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f60a",
+      "path": "items/emoji_1f60a.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f60a",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (😊). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "기꺼이"
+    },
+    {
+      "id": "item.emoji_1f4b3",
+      "nameEn": "to pay a sum",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4b3",
+      "path": "items/emoji_1f4b3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4b3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (💳). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "지불하다"
+    },
+    {
+      "id": "item.emoji_1f4cb_3",
+      "nameEn": "an order placed for something",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4cb_3",
+      "path": "items/emoji_1f4cb_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4cb_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (📋). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "주문"
+    },
+    {
+      "id": "item.emoji_1f58b_2",
+      "nameEn": "the author of a work",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f58b_2",
+      "path": "items/emoji_1f58b_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f58b_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🖋️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "작가"
+    },
+    {
+      "id": "item.emoji_1f526",
+      "nameEn": "to make something known",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f526",
+      "path": "items/emoji_1f526.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f526",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🔦). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "밝히다"
+    },
+    {
+      "id": "item.emoji_1f4cf_3",
+      "nameEn": "to be regular, at a fixed size or spacing",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4cf_3",
+      "path": "items/emoji_1f4cf_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4cf_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (📏). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "일정하다"
+    },
+    {
+      "id": "item.emoji_1f5d3_3",
+      "nameEn": "a stretch of time",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f5d3_3",
+      "path": "items/emoji_1f5d3_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f5d3_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🗓️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "기간"
+    },
+    {
+      "id": "item.emoji_23f8",
+      "nameEn": "to leave a gap or an interval",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_23f8",
+      "path": "items/emoji_23f8.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_23f8",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (⏸️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "두다"
+    },
+    {
+      "id": "item.emoji_1f4ca_3",
+      "nameEn": "usually, as a rule",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4ca_3",
+      "path": "items/emoji_1f4ca_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4ca_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (📊). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "보통"
+    },
+    {
+      "id": "item.emoji_1f37d_2",
+      "nameEn": "after a meal",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f37d_2",
+      "path": "items/emoji_1f37d_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f37d_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🍽️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "식후"
+    },
+    {
+      "id": "item.emoji_1faa5",
+      "nameEn": "to brush or wipe clean",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1faa5",
+      "path": "items/emoji_1faa5.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1faa5",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🪥). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "닦다"
+    },
+    {
+      "id": "item.emoji_1f34b",
+      "nameEn": "a lemon",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f34b",
+      "path": "items/emoji_1f34b.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f34b",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🍋). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "레몬"
+    },
+    {
+      "id": "item.emoji_1f616_2",
+      "nameEn": "a sour taste",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f616_2",
+      "path": "items/emoji_1f616_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f616_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (😖). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "신맛"
+    },
+    {
+      "id": "item.emoji_1f4aa_3",
+      "nameEn": "to be strong, of a taste or a force",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4aa_3",
+      "path": "items/emoji_1f4aa_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4aa_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (💪). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "강하다"
+    },
+    {
+      "id": "item.emoji_1f9b7_2",
+      "nameEn": "brushing the teeth",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f9b7_2",
+      "path": "items/emoji_1f9b7_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f9b7_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🦷). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "양치질"
+    },
+    {
+      "id": "item.emoji_1f601",
+      "nameEn": "to brush the teeth",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f601",
+      "path": "items/emoji_1f601.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f601",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (😁). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "양치하다"
+    },
+    {
+      "id": "item.emoji_1f9ea",
+      "nameEn": "acidity",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f9ea",
+      "path": "items/emoji_1f9ea.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f9ea",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🧪). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "산성"
+    },
+    {
+      "id": "item.emoji_1f9bf",
+      "nameEn": "a tooth — the clinical word",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f9bf",
+      "path": "items/emoji_1f9bf.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f9bf",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🦿). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "치아"
+    },
+    {
+      "id": "item.emoji_1f6e1_2",
+      "nameEn": "a protective layer",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f6e1_2",
+      "path": "items/emoji_1f6e1_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f6e1_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🛡️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "보호막"
+    },
+    {
+      "id": "item.emoji_1f9f9",
+      "nameEn": "brushing with a toothbrush",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f9f9",
+      "path": "items/emoji_1f9f9.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f9f9",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🧹). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "칫솔질"
+    },
+    {
+      "id": "item.emoji_26a1_3",
+      "nameEn": "to irritate",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_26a1_3",
+      "path": "items/emoji_26a1_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_26a1_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (⚡). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "자극하다"
+    },
+    {
+      "id": "item.emoji_1f494",
+      "nameEn": "to get damaged",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f494",
+      "path": "items/emoji_1f494.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f494",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (💔). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "손상되다"
+    },
+    {
+      "id": "item.emoji_1f519",
+      "nameEn": "originally, as it first was",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f519",
+      "path": "items/emoji_1f519.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f519",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🔙). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "원래"
+    },
+    {
+      "id": "item.emoji_1faa8_4",
+      "nameEn": "hardness, how strong a thing is",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1faa8_4",
+      "path": "items/emoji_1faa8_4.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1faa8_4",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🪨). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "강도"
+    },
+    {
+      "id": "item.emoji_1f504_3",
+      "nameEn": "to come back",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f504_3",
+      "path": "items/emoji_1f504_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f504_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🔄). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "돌아오다"
+    },
+    {
+      "id": "item.emoji_2697",
+      "nameEn": "to be neutralised",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_2697",
+      "path": "items/emoji_2697.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_2697",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (⚗️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "중화되다"
+    },
+    {
+      "id": "item.emoji_23f1_2",
+      "nameEn": "to be taken up, of time — the written word",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_23f1_2",
+      "path": "items/emoji_23f1_2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_23f1_2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (⏱️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "소요되다"
+    },
+    {
+      "id": "item.emoji_1f374",
+      "nameEn": "to take in food — the clinical word for eating",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f374",
+      "path": "items/emoji_1f374.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f374",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🍴). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "섭취하다"
+    },
+    {
+      "id": "item.emoji_1f53b",
+      "nameEn": "at the very least",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f53b",
+      "path": "items/emoji_1f53b.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f53b",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🔻). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "최소"
+    },
+    {
+      "id": "item.emoji_23f3_3",
+      "nameEn": "to go by, of time",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_23f3_3",
+      "path": "items/emoji_23f3_3.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_23f3_3",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (⏳). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "지나다"
+    },
+    {
+      "id": "item.emoji_1f7e1",
+      "nameEn": "to be a dull yellow",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f7e1",
+      "path": "items/emoji_1f7e1.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f7e1",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🟡). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "누렇다"
+    },
+    {
+      "id": "item.emoji_23f2",
+      "nameEn": "temporary",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_23f2",
+      "path": "items/emoji_23f2.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_23f2",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (⏲️). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "일시적"
+    },
+    {
+      "id": "item.emoji_1f4c9_5",
+      "nameEn": "to make something weaken",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f4c9_5",
+      "path": "items/emoji_1f4c9_5.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f4c9_5",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (📉). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "약화시키다"
+    },
+    {
+      "id": "item.emoji_1f372",
+      "nameEn": "foodstuff, matter that is food",
+      "kind": "item",
+      "family": "topik-emoji-standin",
+      "role": "emoji_1f372",
+      "path": "items/emoji_1f372.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.emoji_1f372",
+      "usedBy": [
+        "topik-2",
+        "vocab"
+      ],
+      "notes": "Emoji stand-in drawn from the word's own hint (🍲). Placeholder until reviewed artwork replaces it; see standIn in docs/topik-art-manifest.json.",
+      "wordKo": "음식물"
     }
   ]
 }

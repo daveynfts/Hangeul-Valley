@@ -6352,6 +6352,510 @@
         "forms": [
           "요구하고"
         ]
+      },
+      {
+        "ko": "오늘날",
+        "en": "nowadays, in our own time",
+        "hint": "📅",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "연재",
+        "en": "serialisation, publishing in instalments",
+        "hint": "📚",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "만화",
+        "en": "a comic",
+        "hint": "🖼️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "만화가",
+        "en": "a cartoonist",
+        "hint": "✏️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "이야기",
+        "en": "a story",
+        "hint": "💬",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "N별로",
+        "en": "by each N, one N at a time",
+        "hint": "🔢",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "별로"
+        ]
+      },
+      {
+        "ko": "작품",
+        "en": "a work of art",
+        "hint": "🎨",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "형식",
+        "en": "the form a thing is cast in",
+        "hint": "📐",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "이미",
+        "en": "already, by then",
+        "hint": "⏪",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "세기",
+        "en": "a century",
+        "hint": "🏛️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "존재하다",
+        "en": "to exist",
+        "hint": "✨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "존재했다"
+        ]
+      },
+      {
+        "ko": "영국",
+        "en": "England, Britain",
+        "hint": "🏰",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "화가",
+        "en": "a painter",
+        "hint": "🖌️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "N 못지않게",
+        "en": "no less than N",
+        "hint": "⚖️",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "못지않게"
+        ]
+      },
+      {
+        "ko": "흥미진진하다",
+        "en": "to be gripping",
+        "hint": "🍿",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "흥미진진한"
+        ]
+      },
+      {
+        "ko": "그림",
+        "en": "a picture",
+        "hint": "🎨",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "나누다",
+        "en": "to divide something up",
+        "hint": "✂️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "나누어"
+        ]
+      },
+      {
+        "ko": "구성하다",
+        "en": "to put together, to compose",
+        "hint": "🧩",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "구성했다"
+        ]
+      },
+      {
+        "ko": "판화",
+        "en": "a print made from an engraving",
+        "hint": "🗞️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "새기다",
+        "en": "to carve into a surface",
+        "hint": "🔨",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "새긴"
+        ]
+      },
+      {
+        "ko": "순서대로",
+        "en": "in the order given",
+        "hint": "🔢",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "인쇄하다",
+        "en": "to print",
+        "hint": "🖨️",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "인쇄해"
+        ]
+      },
+      {
+        "ko": "판매하다",
+        "en": "to sell",
+        "hint": "🏷️",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "판매했다"
+        ]
+      },
+      {
+        "ko": "독자",
+        "en": "a reader",
+        "hint": "👓",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "독자들"
+        ]
+      },
+      {
+        "ko": "다음",
+        "en": "the next one",
+        "hint": "➡️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "손꼽아 기다리다",
+        "en": "to count the days until it comes",
+        "hint": "🤞",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "손꼽아 기다렸고"
+        ]
+      },
+      {
+        "ko": "기꺼이",
+        "en": "gladly, without being pressed",
+        "hint": "😊",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "지불하다",
+        "en": "to pay a sum",
+        "hint": "💳",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "지불했다"
+        ]
+      },
+      {
+        "ko": "주문",
+        "en": "an order placed for something",
+        "hint": "📋",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "작가",
+        "en": "the author of a work",
+        "hint": "🖋️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "밝히다",
+        "en": "to make something known",
+        "hint": "🔦",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "밝히지"
+        ]
+      },
+      {
+        "ko": "일정하다",
+        "en": "to be regular, at a fixed size or spacing",
+        "hint": "📏",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "일정한"
+        ]
+      },
+      {
+        "ko": "기간",
+        "en": "a stretch of time",
+        "hint": "🗓️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "두다",
+        "en": "to leave a gap or an interval",
+        "hint": "⏸️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "두고"
+        ]
+      },
+      {
+        "ko": "보통",
+        "en": "usually, as a rule",
+        "hint": "📊",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "식후",
+        "en": "after a meal",
+        "hint": "🍽️",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "닦다",
+        "en": "to brush or wipe clean",
+        "hint": "🪥",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "닦는다"
+        ]
+      },
+      {
+        "ko": "레몬",
+        "en": "a lemon",
+        "hint": "🍋",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "신맛",
+        "en": "a sour taste",
+        "hint": "😖",
+        "category": "음식",
+        "categoryEn": "Food & eating"
+      },
+      {
+        "ko": "강하다",
+        "en": "to be strong, of a taste or a force",
+        "hint": "💪",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "강한"
+        ]
+      },
+      {
+        "ko": "양치질",
+        "en": "brushing the teeth",
+        "hint": "🦷",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "양치하다",
+        "en": "to brush the teeth",
+        "hint": "😁",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "양치해야"
+        ]
+      },
+      {
+        "ko": "산성",
+        "en": "acidity",
+        "hint": "🧪",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "치아",
+        "en": "a tooth — the clinical word",
+        "hint": "🦿",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "보호막",
+        "en": "a protective layer",
+        "hint": "🛡️",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "칫솔질",
+        "en": "brushing with a toothbrush",
+        "hint": "🧹",
+        "category": "건강",
+        "categoryEn": "Health & the body"
+      },
+      {
+        "ko": "자극하다",
+        "en": "to irritate",
+        "hint": "⚡",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "자극하면"
+        ]
+      },
+      {
+        "ko": "손상되다",
+        "en": "to get damaged",
+        "hint": "💔",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "손상된다"
+        ]
+      },
+      {
+        "ko": "원래",
+        "en": "originally, as it first was",
+        "hint": "🔙",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "강도",
+        "en": "hardness, how strong a thing is",
+        "hint": "🪨",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "돌아오다",
+        "en": "to come back",
+        "hint": "🔄",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "돌아오려면"
+        ]
+      },
+      {
+        "ko": "중화되다",
+        "en": "to be neutralised",
+        "hint": "⚗️",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "중화되어야"
+        ]
+      },
+      {
+        "ko": "소요되다",
+        "en": "to be taken up, of time — the written word",
+        "hint": "⏱️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "소요된다"
+        ]
+      },
+      {
+        "ko": "섭취하다",
+        "en": "to take in food — the clinical word for eating",
+        "hint": "🍴",
+        "category": "건강",
+        "categoryEn": "Health & the body",
+        "forms": [
+          "섭취하면"
+        ]
+      },
+      {
+        "ko": "최소",
+        "en": "at the very least",
+        "hint": "🔻",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "지나다",
+        "en": "to go by, of time",
+        "hint": "⏳",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "지나서"
+        ]
+      },
+      {
+        "ko": "누렇다",
+        "en": "to be a dull yellow",
+        "hint": "🟡",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "누렇게"
+        ]
+      },
+      {
+        "ko": "일시적",
+        "en": "temporary",
+        "hint": "⏲️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "일시적으로"
+        ]
+      },
+      {
+        "ko": "약화시키다",
+        "en": "to make something weaken",
+        "hint": "📉",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "약화시키기"
+        ]
+      },
+      {
+        "ko": "음식물",
+        "en": "foodstuff, matter that is food",
+        "hint": "🍲",
+        "category": "음식",
+        "categoryEn": "Food & eating"
       }
     ]
   },

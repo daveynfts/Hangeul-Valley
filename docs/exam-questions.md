@@ -15,7 +15,7 @@ rather than by the day a question arrived. The types so far:
 | `topik2-synonym` | 유사 표현 | an underlined phrase and four expressions to match it |
 | `topik2-notice` | 안내문·도표 | a poster or a chart and four statements, three of which alter one detail |
 | `topik2-order` | 순서 배열 | four sentences out of order, and four orderings of them |
-| `topik2-passage` | 지문 빈칸 | a passage with one phrase cut out, and four ideas to fill it |
+| `topik2-passage` | 지문 빈칸 | a passage with one phrase cut out, and four ideas to fill it (16-18, 28-31) |
 | `topik2-double` | 읽고 답하기 | one passage, two questions on `choices2` — a gap, then 주제 or 내용 일치 |
 
 The bank sets `drawOne: true`, so a sitting is one question drawn from the whole
