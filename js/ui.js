@@ -1196,7 +1196,7 @@ function openQuiz(word, plot, phase=1){
   // Fill data (CSS controls visibility per phase)
   if (hintEmoji) {
     if (typeof vocabIconHtml === 'function') {
-      hintEmoji.innerHTML = vocabIconHtml(word.ko, word.hint || '?', 72);
+      hintEmoji.innerHTML = vocabIconHtml(word.ko, word.hint || '?', 192);
     } else {
       hintEmoji.textContent = word.hint || '?';
     }
