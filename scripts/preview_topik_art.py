@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -18,15 +19,23 @@ def main() -> None:
     parser.add_argument('--pending', action='store_true', help='Only sprites awaiting final review')
     parser.add_argument('--retained', action='store_true', help='Inspect the existing illustrations kept for TOPIK')
     parser.add_argument('--gallery', action='store_true', help='Show the actual mapped sprites without source images')
+    parser.add_argument('--queue', action='store_true', help='Inspect generated replacements from the stand-in queue')
     parser.add_argument('--start', type=int, default=0)
     parser.add_argument('--count', type=int, default=12)
+    parser.add_argument('--indices', help='Comma-separated world indices; stable while the queue grows')
     parser.add_argument('--output', default='docs/topik-art-progress.png')
     parser.add_argument('--source-root', type=Path, default=Path.home() / '.codex/generated_images')
     args = parser.parse_args()
     manifest = json.loads((ROOT / 'docs/topik-art-manifest.json').read_text(encoding='utf-8'))
     entries = [e for e in manifest['entries'] if e.get('sourceImage')
                and (not args.pending or e.get('status') == 'processed')]
-    if args.retained or args.gallery:
+    if args.queue:
+        if args.pending or args.retained:
+            parser.error('--queue cannot be combined with --pending/--retained')
+        queue = json.loads((ROOT / 'docs/topik-standin-art-queue.json').read_text(encoding='utf-8'))
+        entries = [e for e in queue['entries'] if e.get('sourceImage')]
+        manifest = queue
+    if (args.retained or args.gallery) and not args.queue:
         if args.pending:
             parser.error('--retained/--gallery and --pending cannot be combined')
         words = json.loads((ROOT / 'worlds/topik-2.json').read_text(encoding='utf-8'))['level']['words']
@@ -34,7 +43,14 @@ def main() -> None:
                      'folder': Path(e['file']).parent.name, 'slug': Path(e['file']).stem}
                     for e in manifest['retained']]
         entries = retained if args.retained else retained + [e for e in entries if e.get('reviewed')]
-    entries = sorted(entries, key=lambda e: e['index'])[args.start:args.start + args.count]
+    entries = sorted(entries, key=lambda e: e['index'])
+    if args.indices:
+        requested = {int(value) for value in args.indices.split(',')}
+        entries = [entry for entry in entries if entry['index'] in requested]
+        if {entry['index'] for entry in entries} != requested:
+            raise SystemExit('Some requested images have no generated source yet')
+    else:
+        entries = entries[args.start:args.start + args.count]
     if not entries:
         raise SystemExit('No matching images to preview')
     fonts = Path(os.environ.get('WINDIR', 'C:/Windows')) / 'Fonts'
@@ -43,9 +59,10 @@ def main() -> None:
         raise SystemExit('Install a Korean font and point font_path at it before rendering')
     font = ImageFont.truetype(str(font_path), 17)
     small = ImageFont.truetype(str(font_path), 12)
-    cell_w, cell_h, columns = (240, 260, 5) if args.gallery else (400, 316, 3)
+    cell_w, cell_h, columns = (240, 260, 5) if args.gallery else (400, 410, 3)
     canvas = Image.new('RGB', (columns * cell_w, math.ceil(len(entries) / columns) * cell_h), '#f4eddc')
     draw = ImageDraw.Draw(canvas)
+    evidence = []
     for n, entry in enumerate(entries):
         x, y = (n % columns) * cell_w, (n // columns) * cell_h
         draw.rectangle((x + 5, y + 5, x + cell_w - 6, y + cell_h - 6), fill='#fffaf0', outline='#d5c8ad')
@@ -60,7 +77,14 @@ def main() -> None:
             lines.append(line)
             title = '\n'.join(lines)
         draw.text((x + 15, y + 10), title, font=font, fill='#30291f')
-        sprite = Image.open(ROOT / 'sprites' / entry['folder'] / (entry['slug'] + '.png')).convert('RGBA')
+        sprite_path = ROOT / 'sprites' / entry['folder'] / (entry['slug'] + '.png')
+        sprite = Image.open(sprite_path).convert('RGBA')
+        if args.queue:
+            evidence.append({
+                'index': entry['index'], 'sourceImage': entry['sourceImage'],
+                'sourceThread': entry['sourceThread'], 'reviewPage': args.output,
+                'reviewedHash': hashlib.sha256(sprite_path.read_bytes()).hexdigest()
+            })
         if args.gallery:
             scale = max(1, min(2, 210 // sprite.width, 140 // sprite.height))
             enlarged = sprite.resize((sprite.width * scale, sprite.height * scale), Image.Resampling.NEAREST)
@@ -77,14 +101,16 @@ def main() -> None:
             canvas.paste(raw, (x + 11 + (184 - raw.width) // 2, y + 44 + (208 - raw.height) // 2), raw)
         else:
             draw.text((x + 15, y + 120), 'Original source unavailable', font=small, fill='#645844')
-        scale = max(1, min(3, 180 // sprite.width))
+        scale = max(1, min(3, 180 // sprite.width, 192 // sprite.height))
         enlarged = sprite.resize((sprite.width * scale, sprite.height * scale), Image.Resampling.NEAREST)
         canvas.paste(enlarged, (x + 202 + (180 - enlarged.width) // 2, y + 64), enlarged)
-        canvas.paste(sprite, (x + 202 + (180 - sprite.width) // 2, y + 216), sprite)
-        draw.text((x + 15, y + 272), '\n'.join(textwrap.wrap(entry['en'], 52)[:2]), font=small, fill='#645844')
+        canvas.paste(sprite, (x + 202 + (180 - sprite.width) // 2, y + 265), sprite)
+        draw.text((x + 15, y + 370), '\n'.join(textwrap.wrap(entry['en'], 52)[:2]), font=small, fill='#645844')
     output = ROOT / args.output
     output.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(output)
+    if args.queue and not args.gallery:
+        output.with_suffix('.review.json').write_text(json.dumps(evidence, indent=2) + '\n', encoding='utf-8')
     print(f'{len(entries)} previewed side by side: {output}')
 
 

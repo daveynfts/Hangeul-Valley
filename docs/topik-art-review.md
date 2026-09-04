@@ -1,100 +1,67 @@
-# TOPIK Vocabulary Book artwork — 2026-09-02
+# TOPIK Vocabulary Book artwork — 2026-09-04
 
 Status: complete.
 
-The TOPIK II Vocabulary Book now has a one-to-one illustration set for all 394
-headwords in `worlds/topik-2.json`. The final set retains 62 existing images that
-were already specific and readable, and adds 332 dedicated illustrations. Every
-generated file uses a semantic `topik_<concept>.png` name rather than a numeric or
-temporary Imagegen filename.
+The TOPIK II Vocabulary Book has 840 headwords and 840 distinct illustration
+paths. This expansion replaces all 446 emoji stand-ins at indices 394–839 with
+individually generated artwork. The earlier 394 words keep their existing art:
+332 generated illustrations and 62 retained images. The complete manifest now
+contains 778 generated illustrations, 62 retained images, and no stand-ins.
 
-The completed runtime audit reports:
+## Assets and provenance
 
-- 394 words and 394 distinct PNG paths
-- 0 reused image paths
-- 0 extra shared mappings
-- 0 missing files
-- 0 byte-identical image groups
+Every production asset is a semantically named PNG in
+`sprites/items/topik_<concept>.png`. Original Imagegen source filenames, source
+thread, individual briefs, superseded candidates, review pages and accepted PNG
+hashes are recorded in [the queue](topik-standin-art-queue.json) and
+[the canonical manifest](topik-art-manifest.json). Original source images remain
+in the local Imagegen archive; runtime URLs use only the checked-in PNGs.
 
-The redesign deliberately separates concepts that previously shared generic
-art. Similar words use different actions or objects: a closed refrigerator versus
-its contents, storing an item versus putting it inside, a single volunteer versus
-a volunteer activity, and a chart versus a ratio. Grammar and abstract words use
-small visual situations as memory cues alongside the existing Korean headword
-and English explanation.
+Each image was generated in a separate built-in Imagegen call. The existing
+pixel processor exports a transparent cutout exactly 96 px tall, using
+nearest-neighbor reduction, binary alpha and at most 32 visible colors. Sources
+with baked backgrounds were corrected with Imagegen and the reserved magenta
+matte workflow. Candidates that leaked the open-book style reference were
+replaced by standalone compositions without that reference.
 
-## Production assets and review evidence
+Both the source and processed result were inspected before approval. Review
+records bind approval to the exact source and exported PNG hash. The final
+correction pages include [order and daily actions](topik-new-art-review-751-776-769df81f.png),
+[abstract and body words](topik-new-art-review-698-798-ccd7ed14.png),
+[expressions and explanations](topik-new-art-review-800-826-c7182066.png), and
+[geometry and materials](topik-new-art-review-827-838-b590e5f1.png).
+The other accepted review pages are referenced individually by the manifest.
 
-Each replacement was generated through its own Imagegen call with a unique
-subject brief. The source identifier, semantic slug, review state and original
-mapping are recorded in [the manifest](topik-art-manifest.json). Sources are
-processed through the existing pixel-prop pipeline into transparent PNGs exactly
-96 px tall, with nearest-neighbor reduction, binary alpha and a compact palette.
-The first release reduced them to 48 px; the full-screen Vocabulary Book exposed
-that loss of detail by enlarging them to a fractional 86 px. The reviewed sources
-were therefore rebuilt at the 96 px display size instead of enlarged in CSS.
+## Promotion and cache
 
-Both the source image and its processed result were inspected before an
-entry was marked reviewed. The continuation review sheets cover
-[238–242](topik-art-review-238-242.png),
-[243–251](topik-art-review-243-251.png),
-[252–260](topik-art-review-252-260.png),
-[261–274](topik-art-review-261-274.png),
-[275–288](topik-art-review-275-288.png),
-[289–301](topik-art-review-289-301.png),
-[303–310](topik-art-review-303-310.png),
-[311–318](topik-art-review-311-318.png),
-[320–329](topik-art-review-320-329.png),
-[330–338](topik-art-review-330-338.png),
-[339–348](topik-art-review-339-348.png),
-[349–357](topik-art-review-349-357.png),
-[358–378](topik-art-review-358-378.png),
-[379–386](topik-art-review-379-386.png), and
-[387–393](topik-art-review-387-393.png). Earlier accepted work is represented by
-the checked-in gallery and review sheets. A final gallery was regenerated from
-the live runtime mapping in four sections and all 394 entries were inspected
-again after the last mapping update.
+The finalizer validated every replacement, registered the new files, updated
+the real Vocabulary Book lookup and removed only the 446 obsolete placeholder
+files after checking that no other word used them. It keeps byte-for-byte
+backups during promotion so a late failure cannot leave a partial update.
 
-## Mapping safeguards
-
-`scripts/import_topik_art.js` accepts an array of `{slug, sourcePath}` on stdin.
-It registers the batch and records the source after pixel processing. Raw-source
-approval and final 96 px approval remain separate review steps.
-
-`scripts/apply_topik_art.js` validates the complete manifest and every proposed
-runtime change before writing the reviewed block in `js/vocabArtMore.js`. It
-updates the first match used by the real Vocabulary Book lookup, preserves other
-tables and synchronizes the catalog and runtime cache keys. The cache fingerprint
-includes PNG contents. A different Korean word cannot borrow a newly drawn TOPIK
-illustration, even from another world.
-
-Regression coverage rejects shared paths, byte-identical files with different
-names, re-encoded copies with identical decoded pixels, missing source or review
-evidence, incorrect word indices, missing catalog entries and unsafe output
-paths. The checked-in [current audit](topik-art-audit-current.json) is generated
-from the actual runtime lookup rather than inferred from the manifest.
+The shared artwork fingerprint is
+`art-topik-778-extra-12-710a89040456`. All 28 UI stylesheet/script/release
+references use `20260904-topik-art-v5`, so a new page load receives the matching
+mapping and assets. This work does not alter vocabulary text, audio, gameplay
+rules or saved learning progress.
 
 ## Validation
 
-The completed set passed:
+- [Source/export quality audit](topik-new-art-quality.json): 446 generated,
+  446 reviewed, zero issues, including transparency, palette, baseline, stale
+  exports, duplicate PNG bytes and duplicate visible pixels.
+- [Runtime vocabulary audit](topik-art-audit-current.json): 840 words, 840 unique
+  PNG paths, zero reused paths, missing files or identical-file groups.
+- Art library audit: 1,250 catalog entries and 1,250 PNGs on disk.
+- Complete game test suite, syntax checks and generated-facts verification: pass.
+- Content validation: 5,688/5,688 invariants hold.
+- Pixel processing: 10 tests passed; desktop server: 52 passed; admin: 111 passed.
+- In-app browser QA at the default desktop viewport and 390 × 844: Vocabulary
+  Book and word details fill the viewport, the wide `똑같이` illustration keeps
+  its proportions without clipping, and the new `액체` card loads the current
+  semantic PNG and artwork cache key. No horizontal page overflow or browser
+  console errors were observed. The temporary viewport was reset afterward.
 
-- `node scripts/apply_topik_art.js --check --require-complete`
-- `npm run audit:vocab-art -- --world topik-2 --strict`
-- `npm run audit:art` — 804 catalog entries and 804 PNGs on disk
-- pixel processing tests — 10 passed
-- game test suite — passed after updating the stale `생산량` expectation to its
-  dedicated `topik_fruit_output` illustration
-- desktop server suite — 52 passed
-- admin suite — 111 passed
-- syntax, content and generated-facts checks; content validation reports
-  3,902/3,902 invariants
-
-The in-app Browser security policy blocked navigation to the localhost test URL,
-so this continuation does not claim a browser-based local run. The final gallery
-uses the same runtime lookup and processed files that the game loads, and the
-map, draw, lookup, asset-presence and cache-key paths are covered by the passing
-automated suites.
-
-This work changes TOPIK illustration assets, their runtime mappings, catalog
-metadata, cache key and the stale art expectation. It does not change Korean
-audio, vocabulary text, gameplay physics or saved progress.
+The initial 394-word batch's historical review sheets remain in the repository.
+The new expansion preserves those assets and adds dedicated memory cues for
+every newly added TOPIK word.

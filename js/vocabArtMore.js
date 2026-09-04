@@ -3722,3122 +3722,3122 @@ const TOPIK_VOCAB_ART_ROWS = [
   },
   {
     "ko": "어린이",
-    "slug": "emoji_1f9d2",
+    "slug": "topik_child_formal_notices_use",
     "folder": "items",
     "nameEn": "a child — the formal word, the one notices use",
     "family": "topik-vocabulary"
   },
   {
     "ko": "아이",
-    "slug": "emoji_1f476",
+    "slug": "topik_child_everyday",
     "folder": "items",
     "nameEn": "a child — the everyday word",
     "family": "topik-vocabulary"
   },
   {
     "ko": "대학생",
-    "slug": "emoji_1f393",
+    "slug": "topik_university_student",
     "folder": "items",
     "nameEn": "a university student",
     "family": "topik-vocabulary"
   },
   {
     "ko": "봉사자",
-    "slug": "emoji_1f64b",
+    "slug": "topik_volunteer",
     "folder": "items",
     "nameEn": "a volunteer — 자원봉사자 cut short",
     "family": "topik-vocabulary"
   },
   {
     "ko": "신청",
-    "slug": "emoji_270d",
+    "slug": "topik_application",
     "folder": "items",
     "nameEn": "an application; putting your name down",
     "family": "topik-vocabulary"
   },
   {
     "ko": "모집 기간",
-    "slug": "emoji_1f5d3",
+    "slug": "topik_window_which_applications_are_taken",
     "folder": "items",
     "nameEn": "the window in which applications are taken",
     "family": "topik-vocabulary"
   },
   {
     "ko": "인주어린이도서관",
-    "slug": "emoji_1f3db",
+    "slug": "topik_inju_childrens_library",
     "folder": "items",
     "nameEn": "Inju Children's Library — 인주 is the invented town TOPIK papers are set in",
     "family": "topik-vocabulary"
   },
   {
     "ko": "가능",
-    "slug": "emoji_2705",
+    "slug": "topik_possible",
     "folder": "items",
     "nameEn": "possible; eligible as well",
     "family": "topik-vocabulary"
   },
   {
     "ko": "외국인",
-    "slug": "emoji_1f30f",
+    "slug": "topik_foreign_national",
     "folder": "items",
     "nameEn": "a foreign national",
     "family": "topik-vocabulary"
   },
   {
     "ko": "한국어",
-    "slug": "emoji_1f5e3",
+    "slug": "topik_korean_language",
     "folder": "items",
     "nameEn": "the Korean language",
     "family": "topik-vocabulary"
   },
   {
     "ko": "선물하다",
-    "slug": "emoji_1f381",
+    "slug": "topik_give_present",
     "folder": "items",
     "nameEn": "to give something as a present",
     "family": "topik-vocabulary"
   },
   {
     "ko": "두 달",
-    "slug": "emoji_1f4c6",
+    "slug": "topik_two_months",
     "folder": "items",
     "nameEn": "two months",
     "family": "topik-vocabulary"
   },
   {
     "ko": "-아/어 주다",
-    "slug": "emoji_1f932",
+    "slug": "topik_do_someone_favour",
     "folder": "items",
     "nameEn": "to do it for someone else, as a favour to them",
     "family": "topik-vocabulary"
   },
   {
     "ko": "여행사",
-    "slug": "emoji_1f9f3",
+    "slug": "topik_travel_agency",
     "folder": "items",
     "nameEn": "a travel agency",
     "family": "topik-vocabulary"
   },
   {
     "ko": "여행 상품",
-    "slug": "emoji_1f5fa",
+    "slug": "topik_travel_package_sold_agency",
     "folder": "items",
     "nameEn": "a travel package sold by an agency",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이용 후기",
-    "slug": "emoji_1f4dd",
+    "slug": "topik_customer_reviews",
     "folder": "items",
     "nameEn": "customer reviews — what earlier users wrote",
     "family": "topik-vocabulary"
   },
   {
     "ko": "선택하다",
-    "slug": "emoji_1f500",
+    "slug": "topik_pick_several",
     "folder": "items",
     "nameEn": "to pick one out of several",
     "family": "topik-vocabulary"
   },
   {
     "ko": "중요하다",
-    "slug": "emoji_1f48e",
+    "slug": "topik_matter_carry_weight",
     "folder": "items",
     "nameEn": "to matter, to carry weight",
     "family": "topik-vocabulary"
   },
   {
     "ko": "회사",
-    "slug": "emoji_1f3e2",
+    "slug": "topik_company",
     "folder": "items",
     "nameEn": "a company",
     "family": "topik-vocabulary"
   },
   {
     "ko": "성인",
-    "slug": "emoji_1f9d1",
+    "slug": "topik_grown_adult",
     "folder": "items",
     "nameEn": "a grown adult",
     "family": "topik-vocabulary"
   },
   {
     "ko": "남녀",
-    "slug": "emoji_1f46b",
+    "slug": "topik_men_women_taken_together",
     "folder": "items",
     "nameEn": "men and women, taken together",
     "family": "topik-vocabulary"
   },
   {
     "ko": "다양성",
-    "slug": "emoji_1f3a8",
+    "slug": "topik_variety",
     "folder": "items",
     "nameEn": "variety — how wide the range on offer is",
     "family": "topik-vocabulary"
   },
   {
     "ko": "적다",
-    "slug": "emoji_1f4c9",
+    "slug": "topik_few_number",
     "folder": "items",
     "nameEn": "to be few in number",
     "family": "topik-vocabulary"
   },
   {
     "ko": "가장",
-    "slug": "emoji_1f31f",
+    "slug": "topik_most",
     "folder": "items",
     "nameEn": "most — the superlative, and a claim about every other case",
     "family": "topik-vocabulary"
   },
   {
     "ko": "기타",
-    "slug": "emoji_1f5c2",
+    "slug": "topik_other",
     "folder": "items",
     "nameEn": "other; everything that did not earn a slice of its own",
     "family": "topik-vocabulary"
   },
   {
     "ko": "설문 대상",
-    "slug": "emoji_1f3a4",
+    "slug": "topik_people_survey_was_put",
     "folder": "items",
     "nameEn": "the people a survey was put to",
     "family": "topik-vocabulary"
   },
   {
     "ko": "두 배",
-    "slug": "emoji_1f9ee",
+    "slug": "topik_twice_many",
     "folder": "items",
     "nameEn": "twice as many; double",
     "family": "topik-vocabulary"
   },
   {
     "ko": "우표",
-    "slug": "emoji_1f4ee",
+    "slug": "topik_postage_stamp",
     "folder": "items",
     "nameEn": "a postage stamp",
     "family": "topik-vocabulary"
   },
   {
     "ko": "박물관",
-    "slug": "emoji_1f3db_2",
+    "slug": "topik_museum",
     "folder": "items",
     "nameEn": "a museum",
     "family": "topik-vocabulary"
   },
   {
     "ko": "역사",
-    "slug": "emoji_1f4dc",
+    "slug": "topik_history",
     "folder": "items",
     "nameEn": "history",
     "family": "topik-vocabulary"
   },
   {
     "ko": "역사실",
-    "slug": "emoji_1f5bc",
+    "slug": "topik_history_room_museum",
     "folder": "items",
     "nameEn": "the history room of a museum",
     "family": "topik-vocabulary"
   },
   {
     "ko": "체험실",
-    "slug": "emoji_270b",
+    "slug": "topik_hands_room_where_visitors_try_things_themselves",
     "folder": "items",
     "nameEn": "a hands-on room where visitors try things for themselves",
     "family": "topik-vocabulary"
   },
   {
     "ko": "사진",
-    "slug": "emoji_1f4f7",
+    "slug": "topik_photograph",
     "folder": "items",
     "nameEn": "a photograph",
     "family": "topik-vocabulary"
   },
   {
     "ko": "편지",
-    "slug": "emoji_2709",
+    "slug": "topik_letter",
     "folder": "items",
     "nameEn": "a letter",
     "family": "topik-vocabulary"
   },
   {
     "ko": "우체통",
-    "slug": "emoji_1f4ea",
+    "slug": "topik_postbox",
     "folder": "items",
     "nameEn": "a postbox",
     "family": "topik-vocabulary"
   },
   {
     "ko": "인기를 끌다",
-    "slug": "emoji_1f525",
+    "slug": "topik_drawing_crowd",
     "folder": "items",
     "nameEn": "to be drawing a crowd",
     "family": "topik-vocabulary"
   },
   {
     "ko": "지난달",
-    "slug": "emoji_1f4c5",
+    "slug": "topik_last_month",
     "folder": "items",
     "nameEn": "last month",
     "family": "topik-vocabulary"
   },
   {
     "ko": "일 년 뒤",
-    "slug": "emoji_23f3",
+    "slug": "topik_year_later",
     "folder": "items",
     "nameEn": "a year later",
     "family": "topik-vocabulary"
   },
   {
     "ko": "일 년 전",
-    "slug": "emoji_1f570",
+    "slug": "topik_year_ago",
     "folder": "items",
     "nameEn": "a year ago",
     "family": "topik-vocabulary"
   },
   {
     "ko": "문을 열다",
-    "slug": "emoji_1f6aa",
+    "slug": "topik_open_business",
     "folder": "items",
     "nameEn": "to open for business",
     "family": "topik-vocabulary"
   },
   {
     "ko": "운영",
-    "slug": "emoji_2699",
+    "slug": "topik_running_place",
     "folder": "items",
     "nameEn": "the running of a place",
     "family": "topik-vocabulary"
   },
   {
     "ko": "한눈에",
-    "slug": "emoji_1f441",
+    "slug": "topik_single_glance",
     "folder": "items",
     "nameEn": "in a single glance",
     "family": "topik-vocabulary"
   },
   {
     "ko": "향기",
-    "slug": "emoji_1f338",
+    "slug": "topik_scent",
     "folder": "items",
     "nameEn": "a scent",
     "family": "topik-vocabulary"
   },
   {
     "ko": "나무",
-    "slug": "emoji_1f333",
+    "slug": "topik_wood",
     "folder": "items",
     "nameEn": "wood; a tree",
     "family": "topik-vocabulary"
   },
   {
     "ko": "받다",
-    "slug": "emoji_1f91d",
+    "slug": "topik_receive",
     "folder": "items",
     "nameEn": "to receive",
     "family": "topik-vocabulary"
   },
   {
     "ko": "맡다",
-    "slug": "emoji_1f443",
+    "slug": "topik_smell",
     "folder": "items",
     "nameEn": "to smell something",
     "family": "topik-vocabulary"
   },
   {
     "ko": "만지다",
-    "slug": "emoji_1f590",
+    "slug": "topik_touch_handle",
     "folder": "items",
     "nameEn": "to touch, to handle",
     "family": "topik-vocabulary"
   },
   {
     "ko": "들어가다",
-    "slug": "emoji_27a1",
+    "slug": "topik_go_set",
     "folder": "items",
     "nameEn": "to go in; to be set into",
     "family": "topik-vocabulary"
   },
   {
     "ko": "만들다",
-    "slug": "emoji_1f528",
+    "slug": "topik_make",
     "folder": "items",
     "nameEn": "to make",
     "family": "topik-vocabulary"
   },
   {
     "ko": "쓰다",
-    "slug": "emoji_270d_2",
+    "slug": "topik_write",
     "folder": "items",
     "nameEn": "to write",
     "family": "topik-vocabulary"
   },
   {
     "ko": "보내다",
-    "slug": "emoji_1f4e4",
+    "slug": "topik_send",
     "folder": "items",
     "nameEn": "to send",
     "family": "topik-vocabulary"
   },
   {
     "ko": "느리다",
-    "slug": "emoji_1f422",
+    "slug": "topik_slow",
     "folder": "items",
     "nameEn": "to be slow",
     "family": "topik-vocabulary"
   },
   {
     "ko": "휴일",
-    "slug": "emoji_1f3d6",
+    "slug": "topik_day_off_public_holiday",
     "folder": "items",
     "nameEn": "a day off, a public holiday",
     "family": "topik-vocabulary"
   },
   {
     "ko": "경찰",
-    "slug": "emoji_1f46e",
+    "slug": "topik_police",
     "folder": "items",
     "nameEn": "the police",
     "family": "topik-vocabulary"
   },
   {
     "ko": "경위",
-    "slug": "emoji_1f396",
+    "slug": "topik_police_lieutenant",
     "folder": "items",
     "nameEn": "a police lieutenant — the rank the name is followed by",
     "family": "topik-vocabulary"
   },
   {
     "ko": "등산객",
-    "slug": "emoji_1f97e",
+    "slug": "topik_hiker",
     "folder": "items",
     "nameEn": "a hiker",
     "family": "topik-vocabulary"
   },
   {
     "ko": "정상",
-    "slug": "emoji_26f0",
+    "slug": "topik_summit_mountain",
     "folder": "items",
     "nameEn": "the summit of a mountain",
     "family": "topik-vocabulary"
   },
   {
     "ko": "중턱",
-    "slug": "emoji_1f3de",
+    "slug": "topik_halfway_mountain",
     "folder": "items",
     "nameEn": "halfway up a mountain",
     "family": "topik-vocabulary"
   },
   {
     "ko": "대피소",
-    "slug": "emoji_1f6d6",
+    "slug": "topik_shelter",
     "folder": "items",
     "nameEn": "a shelter",
     "family": "topik-vocabulary"
   },
   {
     "ko": "구조하다",
-    "slug": "emoji_1f198",
+    "slug": "topik_rescue",
     "folder": "items",
     "nameEn": "to rescue",
     "family": "topik-vocabulary"
   },
   {
     "ko": "구조대",
-    "slug": "emoji_1f6a8",
+    "slug": "topik_rescue_team",
     "folder": "items",
     "nameEn": "a rescue team",
     "family": "topik-vocabulary"
   },
   {
     "ko": "여성",
-    "slug": "emoji_1f64b_2",
+    "slug": "topik_woman",
     "folder": "items",
     "nameEn": "a woman",
     "family": "topik-vocabulary"
   },
   {
     "ko": "쓰러지다",
-    "slug": "emoji_1f4ab",
+    "slug": "topik_collapse",
     "folder": "items",
     "nameEn": "to collapse",
     "family": "topik-vocabulary"
   },
   {
     "ko": "발견하다",
-    "slug": "emoji_1f50d",
+    "slug": "topik_spot_come_across",
     "folder": "items",
     "nameEn": "to spot, to come across",
     "family": "topik-vocabulary"
   },
   {
     "ko": "체온",
-    "slug": "emoji_1f321",
+    "slug": "topik_body_temperature",
     "folder": "items",
     "nameEn": "body temperature",
     "family": "topik-vocabulary"
   },
   {
     "ko": "겉옷",
-    "slug": "emoji_1f9e5",
+    "slug": "topik_outer_coat",
     "folder": "items",
     "nameEn": "an outer coat",
     "family": "topik-vocabulary"
   },
   {
     "ko": "벗다",
-    "slug": "emoji_1f455",
+    "slug": "topik_take_off_garment",
     "folder": "items",
     "nameEn": "to take off a garment",
     "family": "topik-vocabulary"
   },
   {
     "ko": "덮다",
-    "slug": "emoji_1f6cf",
+    "slug": "topik_cover",
     "folder": "items",
     "nameEn": "to cover something over",
     "family": "topik-vocabulary"
   },
   {
     "ko": "신고하다",
-    "slug": "emoji_1f4de",
+    "slug": "topik_report_authorities",
     "folder": "items",
     "nameEn": "to report it to the authorities",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이후",
-    "slug": "emoji_27a1_2",
+    "slug": "topik_then",
     "folder": "items",
     "nameEn": "after that, from then on",
     "family": "topik-vocabulary"
   },
   {
     "ko": "차량",
-    "slug": "emoji_1f690",
+    "slug": "topik_vehicle",
     "folder": "items",
     "nameEn": "a vehicle",
     "family": "topik-vocabulary"
   },
   {
     "ko": "업다",
-    "slug": "emoji_1f392",
+    "slug": "topik_carry_someone_back",
     "folder": "items",
     "nameEn": "to carry someone on your back",
     "family": "topik-vocabulary"
   },
   {
     "ko": "뛰다",
-    "slug": "emoji_1f3c3",
+    "slug": "topik_run_jump",
     "folder": "items",
     "nameEn": "to run, and to jump — the same verb does both",
     "family": "topik-vocabulary"
   },
   {
     "ko": "내려가다",
-    "slug": "emoji_2b07",
+    "slug": "topik_go_down",
     "folder": "items",
     "nameEn": "to go down",
     "family": "topik-vocabulary"
   },
   {
     "ko": "병원",
-    "slug": "emoji_1f3e5",
+    "slug": "topik_hospital",
     "folder": "items",
     "nameEn": "a hospital",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이송되다",
-    "slug": "emoji_1f691",
+    "slug": "topik_taken_hospital",
     "folder": "items",
     "nameEn": "to be taken to hospital — the word a news report uses",
     "family": "topik-vocabulary"
   },
   {
     "ko": "치료",
-    "slug": "emoji_1f48a",
+    "slug": "topik_medical_treatment",
     "folder": "items",
     "nameEn": "medical treatment",
     "family": "topik-vocabulary"
   },
   {
     "ko": "되찾다",
-    "slug": "emoji_1f49a",
+    "slug": "topik_get_back_again",
     "folder": "items",
     "nameEn": "to get it back again",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이동하다",
-    "slug": "emoji_1f501",
+    "slug": "topik_move_place_another",
     "folder": "items",
     "nameEn": "to move from one place to another",
     "family": "topik-vocabulary"
   },
   {
     "ko": "복숭아",
-    "slug": "emoji_1f351",
+    "slug": "topik_peach",
     "folder": "items",
     "nameEn": "a peach",
     "family": "topik-vocabulary"
   },
   {
     "ko": "껍질",
-    "slug": "emoji_1f34a",
+    "slug": "topik_skin_fruit",
     "folder": "items",
     "nameEn": "the skin of a fruit",
     "family": "topik-vocabulary"
   },
   {
     "ko": "껍질째",
-    "slug": "emoji_1f34f",
+    "slug": "topik_skin_all_without_peeling",
     "folder": "items",
     "nameEn": "skin and all, without peeling it",
     "family": "topik-vocabulary"
   },
   {
     "ko": "딱딱하다",
-    "slug": "emoji_1f9b7",
+    "slug": "topik_hard_bite",
     "folder": "items",
     "nameEn": "to be hard to the bite",
     "family": "topik-vocabulary"
   },
   {
     "ko": "식감",
-    "slug": "emoji_1f60b",
+    "slug": "topik_mouthfeel_texture_food",
     "folder": "items",
     "nameEn": "mouthfeel, the texture of a food",
     "family": "topik-vocabulary"
   },
   {
     "ko": "얇다",
-    "slug": "emoji_1f4c4",
+    "slug": "topik_thin",
     "folder": "items",
     "nameEn": "to be thin",
     "family": "topik-vocabulary"
   },
   {
     "ko": "부드럽다",
-    "slug": "emoji_1f9fc",
+    "slug": "topik_soft",
     "folder": "items",
     "nameEn": "to be soft",
     "family": "topik-vocabulary"
   },
   {
     "ko": "소개되다",
-    "slug": "emoji_1f91d_2",
+    "slug": "topik_introduced_place",
     "folder": "items",
     "nameEn": "to be introduced to a place",
     "family": "topik-vocabulary"
   },
   {
     "ko": "N에 비해",
-    "slug": "emoji_2696",
+    "slug": "topik_compared_n",
     "folder": "items",
     "nameEn": "compared with N",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이르다",
-    "slug": "emoji_23f0",
+    "slug": "topik_early_season",
     "folder": "items",
     "nameEn": "to be early in the season",
     "family": "topik-vocabulary"
   },
   {
     "ko": "시기",
-    "slug": "emoji_1f5d3_2",
+    "slug": "topik_time_year_period",
     "folder": "items",
     "nameEn": "a time of year, a period",
     "family": "topik-vocabulary"
   },
   {
     "ko": "장점",
-    "slug": "emoji_1f381_2",
+    "slug": "topik_strong_point_advantage",
     "folder": "items",
     "nameEn": "a strong point, an advantage",
     "family": "topik-vocabulary"
   },
   {
     "ko": "결합하다",
-    "slug": "emoji_1f48d",
+    "slug": "topik_combine_two_things",
     "folder": "items",
     "nameEn": "to combine two things into one",
     "family": "topik-vocabulary"
   },
   {
     "ko": "감기에 걸리다",
-    "slug": "emoji_1f927",
+    "slug": "topik_catch_cold",
     "folder": "items",
     "nameEn": "to catch a cold",
     "family": "topik-vocabulary"
   },
   {
     "ko": "밤새",
-    "slug": "emoji_1f56f",
+    "slug": "topik_whole_night_through",
     "folder": "items",
     "nameEn": "the whole night through — the bare form of 밤새도록",
     "family": "topik-vocabulary"
   },
   {
     "ko": "소리",
-    "slug": "emoji_1f442",
+    "slug": "topik_sound",
     "folder": "items",
     "nameEn": "a sound",
     "family": "topik-vocabulary"
   },
   {
     "ko": "울다",
-    "slug": "emoji_1f622",
+    "slug": "topik_cry",
     "folder": "items",
     "nameEn": "to cry",
     "family": "topik-vocabulary"
   },
   {
     "ko": "울음소리",
-    "slug": "emoji_1f4e3",
+    "slug": "topik_sound_crying",
     "folder": "items",
     "nameEn": "the sound of crying",
     "family": "topik-vocabulary"
   },
   {
     "ko": "아주머니",
-    "slug": "emoji_1f9cd",
+    "slug": "topik_middle_aged_woman_maam",
     "folder": "items",
     "nameEn": "a middle-aged woman, ma’am",
     "family": "topik-vocabulary"
   },
   {
     "ko": "아프다",
-    "slug": "emoji_1f9ca",
+    "slug": "topik_ill_hurt",
     "folder": "items",
     "nameEn": "to be ill, to hurt",
     "family": "topik-vocabulary"
   },
   {
     "ko": "오히려",
-    "slug": "emoji_1f4a5",
+    "slug": "topik_contrary_if_anything",
     "folder": "items",
     "nameEn": "on the contrary, if anything",
     "family": "topik-vocabulary"
   },
   {
     "ko": "걱정하다",
-    "slug": "emoji_1f61f",
+    "slug": "topik_worry",
     "folder": "items",
     "nameEn": "to worry",
     "family": "topik-vocabulary"
   },
   {
     "ko": "아침",
-    "slug": "emoji_1f4a1",
+    "slug": "topik_morning_2",
     "folder": "items",
     "nameEn": "the morning",
     "family": "topik-vocabulary"
   },
   {
     "ko": "나서다",
-    "slug": "emoji_1f6b6",
+    "slug": "topik_set_place",
     "folder": "items",
     "nameEn": "to set out from a place; and after -고, to step forward and act",
     "family": "topik-vocabulary"
   },
   {
     "ko": "옆집",
-    "slug": "emoji_1f3e0",
+    "slug": "topik_house_next_door",
     "folder": "items",
     "nameEn": "the house next door",
     "family": "topik-vocabulary"
   },
   {
     "ko": "만나다",
-    "slug": "emoji_1f64c",
+    "slug": "topik_meet",
     "folder": "items",
     "nameEn": "to meet",
     "family": "topik-vocabulary"
   },
   {
     "ko": "달래다",
-    "slug": "emoji_1f3ee",
+    "slug": "topik_soothe_crying_child",
     "folder": "items",
     "nameEn": "to soothe a crying child",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이웃",
-    "slug": "emoji_1f3d8",
+    "slug": "topik_neighbour",
     "folder": "items",
     "nameEn": "a neighbour",
     "family": "topik-vocabulary"
   },
   {
     "ko": "온라인",
-    "slug": "emoji_1f310",
+    "slug": "topik_online",
     "folder": "items",
     "nameEn": "online",
     "family": "topik-vocabulary"
   },
   {
     "ko": "가구",
-    "slug": "emoji_1f6cb",
+    "slug": "topik_furniture",
     "folder": "items",
     "nameEn": "furniture",
     "family": "topik-vocabulary"
   },
   {
     "ko": "구매",
-    "slug": "emoji_1f9fe",
+    "slug": "topik_purchase_2",
     "folder": "items",
     "nameEn": "a purchase",
     "family": "topik-vocabulary"
   },
   {
     "ko": "반품",
-    "slug": "emoji_1f4e6",
+    "slug": "topik_sending_goods_back",
     "folder": "items",
     "nameEn": "sending goods back",
     "family": "topik-vocabulary"
   },
   {
     "ko": "사례",
-    "slug": "emoji_1f4ca",
+    "slug": "topik_instance_reported_case",
     "folder": "items",
     "nameEn": "an instance, a reported case",
     "family": "topik-vocabulary"
   },
   {
     "ko": "그런데",
-    "slug": "emoji_1f300",
+    "slug": "topik_however",
     "folder": "items",
     "nameEn": "however — the turn into a problem",
     "family": "topik-vocabulary"
   },
   {
     "ko": "비싸다",
-    "slug": "emoji_1f4b8",
+    "slug": "topik_expensive",
     "folder": "items",
     "nameEn": "to be expensive",
     "family": "topik-vocabulary"
   },
   {
     "ko": "비용",
-    "slug": "emoji_1f4b0",
+    "slug": "topik_cost",
     "folder": "items",
     "nameEn": "a cost",
     "family": "topik-vocabulary"
   },
   {
     "ko": "피해를 보다",
-    "slug": "emoji_1f624",
+    "slug": "topik_lose_suffer_harm",
     "folder": "items",
     "nameEn": "to lose out, to suffer harm",
     "family": "topik-vocabulary"
   },
   {
     "ko": "소비자",
-    "slug": "emoji_1f6d2",
+    "slug": "topik_consumer",
     "folder": "items",
     "nameEn": "a consumer",
     "family": "topik-vocabulary"
   },
   {
     "ko": "따라서",
-    "slug": "emoji_1f4dc_2",
+    "slug": "topik_therefore",
     "folder": "items",
     "nameEn": "therefore — the written conclusion marker",
     "family": "topik-vocabulary"
   },
   {
     "ko": "조건",
-    "slug": "emoji_1f4cb",
+    "slug": "topik_terms_conditions",
     "folder": "items",
     "nameEn": "terms and conditions",
     "family": "topik-vocabulary"
   },
   {
     "ko": "확인하다",
-    "slug": "emoji_2705_2",
+    "slug": "topik_check",
     "folder": "items",
     "nameEn": "to check something",
     "family": "topik-vocabulary"
   },
   {
     "ko": "업체",
-    "slug": "emoji_1f3ea",
+    "slug": "topik_firm_business",
     "folder": "items",
     "nameEn": "a firm, a business",
     "family": "topik-vocabulary"
   },
   {
     "ko": "까다롭다",
-    "slug": "emoji_1f62c",
+    "slug": "topik_demanding_hard_satisfy",
     "folder": "items",
     "nameEn": "to be demanding, hard to satisfy",
     "family": "topik-vocabulary"
   },
   {
     "ko": "내세우다",
-    "slug": "emoji_1f6ad",
+    "slug": "topik_put_condition_forward",
     "folder": "items",
     "nameEn": "to put a condition forward",
     "family": "topik-vocabulary"
   },
   {
     "ko": "거절하다",
-    "slug": "emoji_1f645",
+    "slug": "topik_refuse",
     "folder": "items",
     "nameEn": "to refuse",
     "family": "topik-vocabulary"
   },
   {
     "ko": "경우",
-    "slug": "emoji_1f516",
+    "slug": "topik_case_occasion",
     "folder": "items",
     "nameEn": "a case, an occasion",
     "family": "topik-vocabulary"
   },
   {
     "ko": "발생하다",
-    "slug": "emoji_26a1",
+    "slug": "topik_occur_arise",
     "folder": "items",
     "nameEn": "to occur, to arise",
     "family": "topik-vocabulary"
   },
   {
     "ko": "-(으)면서",
-    "slug": "emoji_1f504",
+    "slug": "topik_thing_rises_so_does_other",
     "folder": "items",
     "nameEn": "as one thing rises, so does the other",
     "family": "topik-vocabulary"
   },
   {
     "ko": "북극여우",
-    "slug": "emoji_1f98a",
+    "slug": "topik_arctic_fox",
     "folder": "items",
     "nameEn": "an arctic fox",
     "family": "topik-vocabulary"
   },
   {
     "ko": "북극",
-    "slug": "emoji_2744",
+    "slug": "topik_arctic",
     "folder": "items",
     "nameEn": "the Arctic",
     "family": "topik-vocabulary"
   },
   {
     "ko": "계절",
-    "slug": "emoji_1f342",
+    "slug": "topik_season_year",
     "folder": "items",
     "nameEn": "a season of the year",
     "family": "topik-vocabulary"
   },
   {
     "ko": "겨울",
-    "slug": "emoji_26c4",
+    "slug": "topik_winter",
     "folder": "items",
     "nameEn": "winter",
     "family": "topik-vocabulary"
   },
   {
     "ko": "바위",
-    "slug": "emoji_1faa8",
+    "slug": "topik_rock",
     "folder": "items",
     "nameEn": "a rock",
     "family": "topik-vocabulary"
   },
   {
     "ko": "흰색",
-    "slug": "emoji_2b1c",
+    "slug": "topik_colour_white",
     "folder": "items",
     "nameEn": "the colour white",
     "family": "topik-vocabulary"
   },
   {
     "ko": "갈색빛",
-    "slug": "emoji_1f7e4",
+    "slug": "topik_brownish_tinge",
     "folder": "items",
     "nameEn": "a brownish tinge",
     "family": "topik-vocabulary"
   },
   {
     "ko": "동물",
-    "slug": "emoji_1f43e",
+    "slug": "topik_animal",
     "folder": "items",
     "nameEn": "an animal",
     "family": "topik-vocabulary"
   },
   {
     "ko": "천적",
-    "slug": "emoji_1f985",
+    "slug": "topik_natural_predator",
     "folder": "items",
     "nameEn": "a natural predator",
     "family": "topik-vocabulary"
   },
   {
     "ko": "먹잇감",
-    "slug": "emoji_1f401",
+    "slug": "topik_prey",
     "folder": "items",
     "nameEn": "prey",
     "family": "topik-vocabulary"
   },
   {
     "ko": "무리를 이루다",
-    "slug": "emoji_1f43a",
+    "slug": "topik_gather_pack",
     "folder": "items",
     "nameEn": "to gather into a pack",
     "family": "topik-vocabulary"
   },
   {
     "ko": "발자국",
-    "slug": "emoji_1f463",
+    "slug": "topik_footprint",
     "folder": "items",
     "nameEn": "a footprint",
     "family": "topik-vocabulary"
   },
   {
     "ko": "사냥하다",
-    "slug": "emoji_1f3f9",
+    "slug": "topik_hunt",
     "folder": "items",
     "nameEn": "to hunt",
     "family": "topik-vocabulary"
   },
   {
     "ko": "바꾸다",
-    "slug": "emoji_1f500_2",
+    "slug": "topik_change",
     "folder": "items",
     "nameEn": "to change something — the one with an object",
     "family": "topik-vocabulary"
   },
   {
     "ko": "바뀌다",
-    "slug": "emoji_1f504_2",
+    "slug": "topik_change_itself",
     "folder": "items",
     "nameEn": "to change of itself — the one without",
     "family": "topik-vocabulary"
   },
   {
     "ko": "비슷하다",
-    "slug": "emoji_1f46f",
+    "slug": "topik_close_resemble",
     "folder": "items",
     "nameEn": "to be close to, to resemble",
     "family": "topik-vocabulary"
   },
   {
     "ko": "변화",
-    "slug": "emoji_1f317",
+    "slug": "topik_change_has_taken_place",
     "folder": "items",
     "nameEn": "a change that has taken place",
     "family": "topik-vocabulary"
   },
   {
     "ko": "숨기다",
-    "slug": "emoji_1f648",
+    "slug": "topik_hide_away",
     "folder": "items",
     "nameEn": "to hide something away",
     "family": "topik-vocabulary"
   },
   {
     "ko": "특수하다",
-    "slug": "emoji_2728",
+    "slug": "topik_ordinary",
     "folder": "items",
     "nameEn": "to be out of the ordinary",
     "family": "topik-vocabulary"
   },
   {
     "ko": "환경",
-    "slug": "emoji_1f30d",
+    "slug": "topik_environment",
     "folder": "items",
     "nameEn": "an environment",
     "family": "topik-vocabulary"
   },
   {
     "ko": "N(으)로부터",
-    "slug": "emoji_21a9",
+    "slug": "topik_n",
     "folder": "items",
     "nameEn": "from N — a source you move away from",
     "family": "topik-vocabulary"
   },
   {
     "ko": "보호하다",
-    "slug": "emoji_1f6e1",
+    "slug": "topik_protect",
     "folder": "items",
     "nameEn": "to protect",
     "family": "topik-vocabulary"
   },
   {
     "ko": "동료",
-    "slug": "emoji_1f465",
+    "slug": "topik_fellow_own_kind",
     "folder": "items",
     "nameEn": "a fellow, one of your own kind",
     "family": "topik-vocabulary"
   },
   {
     "ko": "몰래",
-    "slug": "emoji_1f92b",
+    "slug": "topik_without_being_noticed",
     "folder": "items",
     "nameEn": "without being noticed",
     "family": "topik-vocabulary"
   },
   {
     "ko": "다가가다",
-    "slug": "emoji_1f6b6_2",
+    "slug": "topik_draw_closer",
     "folder": "items",
     "nameEn": "to draw closer to",
     "family": "topik-vocabulary"
   },
   {
     "ko": "적절히",
-    "slug": "emoji_1f39a",
+    "slug": "topik_right_degree",
     "folder": "items",
     "nameEn": "to the right degree",
     "family": "topik-vocabulary"
   },
   {
     "ko": "유지하다",
-    "slug": "emoji_267b",
+    "slug": "topik_keep",
     "folder": "items",
     "nameEn": "to keep something as it is",
     "family": "topik-vocabulary"
   },
   {
     "ko": "남기다",
-    "slug": "emoji_1f4cc",
+    "slug": "topik_leave_behind",
     "folder": "items",
     "nameEn": "to leave something behind",
     "family": "topik-vocabulary"
   },
   {
     "ko": "연필",
-    "slug": "emoji_270f",
+    "slug": "topik_pencil",
     "folder": "items",
     "nameEn": "a pencil",
     "family": "topik-vocabulary"
   },
   {
     "ko": "글씨",
-    "slug": "emoji_1f58b",
+    "slug": "topik_handwriting",
     "folder": "items",
     "nameEn": "handwriting",
     "family": "topik-vocabulary"
   },
   {
     "ko": "반듯하다",
-    "slug": "emoji_1f4d0",
+    "slug": "topik_straight_even",
     "folder": "items",
     "nameEn": "to be straight and even",
     "family": "topik-vocabulary"
   },
   {
     "ko": "어려움",
-    "slug": "emoji_1f623",
+    "slug": "topik_difficulty",
     "folder": "items",
     "nameEn": "difficulty",
     "family": "topik-vocabulary"
   },
   {
     "ko": "나이",
-    "slug": "emoji_1f382",
+    "slug": "topik_age_years",
     "folder": "items",
     "nameEn": "age, in years",
     "family": "topik-vocabulary"
   },
   {
     "ko": "전자 기기",
-    "slug": "emoji_1f4f1",
+    "slug": "topik_electronic_device",
     "folder": "items",
     "nameEn": "an electronic device",
     "family": "topik-vocabulary"
   },
   {
     "ko": "장시간",
-    "slug": "emoji_23f1",
+    "slug": "topik_long_stretch",
     "folder": "items",
     "nameEn": "for a long stretch",
     "family": "topik-vocabulary"
   },
   {
     "ko": "사용하다",
-    "slug": "emoji_1f5b1",
+    "slug": "topik_use",
     "folder": "items",
     "nameEn": "to use",
     "family": "topik-vocabulary"
   },
   {
     "ko": "-(으)ㄴ 탓이다",
-    "slug": "emoji_1f449",
+    "slug": "topik_because",
     "folder": "items",
     "nameEn": "it is because of — and the cause is blamed",
     "family": "topik-vocabulary"
   },
   {
     "ko": "화면",
-    "slug": "emoji_1f5a5",
+    "slug": "topik_screen",
     "folder": "items",
     "nameEn": "a screen",
     "family": "topik-vocabulary"
   },
   {
     "ko": "단순히",
-    "slug": "emoji_2796",
+    "slug": "topik_merely_nothing_more",
     "folder": "items",
     "nameEn": "merely, and nothing more",
     "family": "topik-vocabulary"
   },
   {
     "ko": "누르다",
-    "slug": "emoji_1f447",
+    "slug": "topik_press",
     "folder": "items",
     "nameEn": "to press",
     "family": "topik-vocabulary"
   },
   {
     "ko": "밀다",
-    "slug": "emoji_27a1_3",
+    "slug": "topik_push_swipe",
     "folder": "items",
     "nameEn": "to push, to swipe",
     "family": "topik-vocabulary"
   },
   {
     "ko": "동작",
-    "slug": "emoji_1f938",
+    "slug": "topik_movement_body",
     "folder": "items",
     "nameEn": "a movement of the body",
     "family": "topik-vocabulary"
   },
   {
     "ko": "반복하다",
-    "slug": "emoji_1f502",
+    "slug": "topik_repeat",
     "folder": "items",
     "nameEn": "to repeat",
     "family": "topik-vocabulary"
   },
   {
     "ko": "근육",
-    "slug": "emoji_1f4aa",
+    "slug": "topik_muscle",
     "folder": "items",
     "nameEn": "a muscle",
     "family": "topik-vocabulary"
   },
   {
     "ko": "소근육",
-    "slug": "emoji_1f90f",
+    "slug": "topik_fine_muscles_hand",
     "folder": "items",
     "nameEn": "the fine muscles of the hand",
     "family": "topik-vocabulary"
   },
   {
     "ko": "발달하다",
-    "slug": "emoji_1f331",
+    "slug": "topik_develop_faculty",
     "folder": "items",
     "nameEn": "to develop, of a faculty",
     "family": "topik-vocabulary"
   },
   {
     "ko": "손가락",
-    "slug": "emoji_261d",
+    "slug": "topik_finger",
     "folder": "items",
     "nameEn": "a finger",
     "family": "topik-vocabulary"
   },
   {
     "ko": "움직이다",
-    "slug": "emoji_1f93e",
+    "slug": "topik_move_part_body",
     "folder": "items",
     "nameEn": "to move a part of the body",
     "family": "topik-vocabulary"
   },
   {
     "ko": "놀이",
-    "slug": "emoji_1f9f8",
+    "slug": "topik_play_game_children_do",
     "folder": "items",
     "nameEn": "play, a game children do",
     "family": "topik-vocabulary"
   },
   {
     "ko": "전문가",
-    "slug": "emoji_1f393_2",
+    "slug": "topik_specialist",
     "folder": "items",
     "nameEn": "a specialist",
     "family": "topik-vocabulary"
   },
   {
     "ko": "제대로",
-    "slug": "emoji_1f44c",
+    "slug": "topik_properly_should",
     "folder": "items",
     "nameEn": "properly, as it should be",
     "family": "topik-vocabulary"
   },
   {
     "ko": "감싸다",
-    "slug": "emoji_1f932_2",
+    "slug": "topik_wrap_around",
     "folder": "items",
     "nameEn": "to wrap around — a hand round a pencil, or material round a bottle",
     "family": "topik-vocabulary"
   },
   {
     "ko": "빠르게",
-    "slug": "emoji_26a1_2",
+    "slug": "topik_quickly",
     "folder": "items",
     "nameEn": "quickly",
     "family": "topik-vocabulary"
   },
   {
     "ko": "줄이다",
-    "slug": "emoji_1f4c9_2",
+    "slug": "topik_reduce",
     "folder": "items",
     "nameEn": "to reduce something",
     "family": "topik-vocabulary"
   },
   {
     "ko": "충분히",
-    "slug": "emoji_1f235",
+    "slug": "topik_enough_sufficient_degree",
     "folder": "items",
     "nameEn": "enough, to a sufficient degree",
     "family": "topik-vocabulary"
   },
   {
     "ko": "완전히",
-    "slug": "emoji_1f4af",
+    "slug": "topik_completely",
     "folder": "items",
     "nameEn": "completely",
     "family": "topik-vocabulary"
   },
   {
     "ko": "-지 못하다",
-    "slug": "emoji_1f6ab",
+    "slug": "topik_cannot_manage",
     "folder": "items",
     "nameEn": "cannot manage to — inability, not refusal",
     "family": "topik-vocabulary"
   },
   {
     "ko": "-도록 하다",
-    "slug": "emoji_1f4cb_2",
+    "slug": "topik_see_someone_does",
     "folder": "items",
     "nameEn": "to see to it that someone does it",
     "family": "topik-vocabulary"
   },
   {
     "ko": "고인돌",
-    "slug": "emoji_1f5ff",
+    "slug": "topik_dolmen",
     "folder": "items",
     "nameEn": "a dolmen",
     "family": "topik-vocabulary"
   },
   {
     "ko": "옛날",
-    "slug": "emoji_1f4dc_3",
+    "slug": "topik_long_ago",
     "folder": "items",
     "nameEn": "long ago",
     "family": "topik-vocabulary"
   },
   {
     "ko": "청동기 시대",
-    "slug": "emoji_26b1",
+    "slug": "topik_bronze_age",
     "folder": "items",
     "nameEn": "the Bronze Age",
     "family": "topik-vocabulary"
   },
   {
     "ko": "무덤",
-    "slug": "emoji_26b0",
+    "slug": "topik_tomb",
     "folder": "items",
     "nameEn": "a tomb",
     "family": "topik-vocabulary"
   },
   {
     "ko": "받침돌",
-    "slug": "emoji_1f9f1",
+    "slug": "topik_supporting_stone",
     "folder": "items",
     "nameEn": "a supporting stone",
     "family": "topik-vocabulary"
   },
   {
     "ko": "덮개돌",
-    "slug": "emoji_1faa8_2",
+    "slug": "topik_capstone",
     "folder": "items",
     "nameEn": "a capstone",
     "family": "topik-vocabulary"
   },
   {
     "ko": "세우다",
-    "slug": "emoji_1f3d7",
+    "slug": "topik_stand_upright",
     "folder": "items",
     "nameEn": "to stand something upright",
     "family": "topik-vocabulary"
   },
   {
     "ko": "얹다",
-    "slug": "emoji_1f51d",
+    "slug": "topik_lay_thing_top_another",
     "folder": "items",
     "nameEn": "to lay one thing on top of another",
     "family": "topik-vocabulary"
   },
   {
     "ko": "형태",
-    "slug": "emoji_1f537",
+    "slug": "topik_form_thing_takes",
     "folder": "items",
     "nameEn": "the form a thing takes",
     "family": "topik-vocabulary"
   },
   {
     "ko": "무게",
-    "slug": "emoji_2696_2",
+    "slug": "topik_weight",
     "folder": "items",
     "nameEn": "weight",
     "family": "topik-vocabulary"
   },
   {
     "ko": "수십",
-    "slug": "emoji_1f522",
+    "slug": "topik_tens_several_dozen",
     "folder": "items",
     "nameEn": "tens of, several dozen",
     "family": "topik-vocabulary"
   },
   {
     "ko": "달하다",
-    "slug": "emoji_1f4c8",
+    "slug": "topik_reach_figure",
     "folder": "items",
     "nameEn": "to reach a figure",
     "family": "topik-vocabulary"
   },
   {
     "ko": "거대하다",
-    "slug": "emoji_1f418",
+    "slug": "topik_enormous",
     "folder": "items",
     "nameEn": "to be enormous",
     "family": "topik-vocabulary"
   },
   {
     "ko": "운반하다",
-    "slug": "emoji_1f69a",
+    "slug": "topik_carry_heavy",
     "folder": "items",
     "nameEn": "to carry something heavy",
     "family": "topik-vocabulary"
   },
   {
     "ko": "그만큼",
-    "slug": "emoji_1f501_3",
+    "slug": "topik_correspondingly_much",
     "folder": "items",
     "nameEn": "correspondingly much",
     "family": "topik-vocabulary"
   },
   {
     "ko": "필요하다",
-    "slug": "emoji_2757",
+    "slug": "topik_needed",
     "folder": "items",
     "nameEn": "to be needed",
     "family": "topik-vocabulary"
   },
   {
     "ko": "부르다",
-    "slug": "emoji_1f4e3_2",
+    "slug": "topik_call_someone",
     "folder": "items",
     "nameEn": "to call someone over",
     "family": "topik-vocabulary"
   },
   {
     "ko": "모으다",
-    "slug": "emoji_1f465_2",
+    "slug": "topik_gather_people_together",
     "folder": "items",
     "nameEn": "to gather people together",
     "family": "topik-vocabulary"
   },
   {
     "ko": "시키다",
-    "slug": "emoji_1f4e2",
+    "slug": "topik_set_someone_task",
     "folder": "items",
     "nameEn": "to set someone to a task",
     "family": "topik-vocabulary"
   },
   {
     "ko": "권력",
-    "slug": "emoji_1f451",
+    "slug": "topik_power_other_people",
     "folder": "items",
     "nameEn": "power over other people",
     "family": "topik-vocabulary"
   },
   {
     "ko": "체력",
-    "slug": "emoji_1f3cb",
+    "slug": "topik_physical_strength",
     "folder": "items",
     "nameEn": "physical strength",
     "family": "topik-vocabulary"
   },
   {
     "ko": "굉장히",
-    "slug": "emoji_1f92f",
+    "slug": "topik_tremendously",
     "folder": "items",
     "nameEn": "tremendously",
     "family": "topik-vocabulary"
   },
   {
     "ko": "약하다",
-    "slug": "emoji_1f343",
+    "slug": "topik_weak",
     "folder": "items",
     "nameEn": "to be weak",
     "family": "topik-vocabulary"
   },
   {
     "ko": "무기",
-    "slug": "emoji_1f5e1",
+    "slug": "topik_weapon",
     "folder": "items",
     "nameEn": "a weapon",
     "family": "topik-vocabulary"
   },
   {
     "ko": "제작하다",
-    "slug": "emoji_1f528_2",
+    "slug": "topik_manufacture",
     "folder": "items",
     "nameEn": "to manufacture",
     "family": "topik-vocabulary"
   },
   {
     "ko": "수명",
-    "slug": "emoji_231b",
+    "slug": "topik_lifespan",
     "folder": "items",
     "nameEn": "a lifespan",
     "family": "topik-vocabulary"
   },
   {
     "ko": "남들",
-    "slug": "emoji_1f46b_2",
+    "slug": "topik_other_people",
     "folder": "items",
     "nameEn": "other people",
     "family": "topik-vocabulary"
   },
   {
     "ko": "짧다",
-    "slug": "emoji_1f4cf",
+    "slug": "topik_short",
     "folder": "items",
     "nameEn": "to be short",
     "family": "topik-vocabulary"
   },
   {
     "ko": "-(으)ㄹ 정도로",
-    "slug": "emoji_1f4f6",
+    "slug": "topik_degree",
     "folder": "items",
     "nameEn": "to the degree that",
     "family": "topik-vocabulary"
   },
   {
     "ko": "도시",
-    "slug": "emoji_1f3d9",
+    "slug": "topik_city",
     "folder": "items",
     "nameEn": "a city",
     "family": "topik-vocabulary"
   },
   {
     "ko": "도로",
-    "slug": "emoji_1f6e3",
+    "slug": "topik_road",
     "folder": "items",
     "nameEn": "a road",
     "family": "topik-vocabulary"
   },
   {
     "ko": "대부분",
-    "slug": "emoji_1f967",
+    "slug": "topik_most_part",
     "folder": "items",
     "nameEn": "for the most part",
     "family": "topik-vocabulary"
   },
   {
     "ko": "아스팔트",
-    "slug": "emoji_2b1b",
+    "slug": "topik_asphalt",
     "folder": "items",
     "nameEn": "asphalt",
     "family": "topik-vocabulary"
   },
   {
     "ko": "스며들다",
-    "slug": "emoji_1f4a7",
+    "slug": "topik_soak_through",
     "folder": "items",
     "nameEn": "to soak through into",
     "family": "topik-vocabulary"
   },
   {
     "ko": "뒤덮이다",
-    "slug": "emoji_1f32b",
+    "slug": "topik_covered",
     "folder": "items",
     "nameEn": "to be covered over",
     "family": "topik-vocabulary"
   },
   {
     "ko": "빗물",
-    "slug": "emoji_1f327",
+    "slug": "topik_rainwater",
     "folder": "items",
     "nameEn": "rainwater",
     "family": "topik-vocabulary"
   },
   {
     "ko": "지하",
-    "slug": "emoji_2b07_2",
+    "slug": "topik_underground",
     "folder": "items",
     "nameEn": "underground",
     "family": "topik-vocabulary"
   },
   {
     "ko": "흘러 들어가다",
-    "slug": "emoji_1f30a",
+    "slug": "topik_flow",
     "folder": "items",
     "nameEn": "to flow in",
     "family": "topik-vocabulary"
   },
   {
     "ko": "지하수",
-    "slug": "emoji_1f6b0",
+    "slug": "topik_groundwater",
     "folder": "items",
     "nameEn": "groundwater",
     "family": "topik-vocabulary"
   },
   {
     "ko": "부족",
-    "slug": "emoji_1f573",
+    "slug": "topik_shortage",
     "folder": "items",
     "nameEn": "a shortage",
     "family": "topik-vocabulary"
   },
   {
     "ko": "부족해지다",
-    "slug": "emoji_1f4c9_3",
+    "slug": "topik_run_short",
     "folder": "items",
     "nameEn": "to run short",
     "family": "topik-vocabulary"
   },
   {
     "ko": "잠기다",
-    "slug": "emoji_1f6df",
+    "slug": "topik_submerged",
     "folder": "items",
     "nameEn": "to be submerged",
     "family": "topik-vocabulary"
   },
   {
     "ko": "자주",
-    "slug": "emoji_1f501_2",
+    "slug": "topik_often",
     "folder": "items",
     "nameEn": "often",
     "family": "topik-vocabulary"
   },
   {
     "ko": "포장재",
-    "slug": "emoji_1f9f1_2",
+    "slug": "topik_surfacing_material",
     "folder": "items",
     "nameEn": "a surfacing material",
     "family": "topik-vocabulary"
   },
   {
     "ko": "개발되다",
-    "slug": "emoji_1f52c",
+    "slug": "topik_developed_product",
     "folder": "items",
     "nameEn": "to be developed, of a product",
     "family": "topik-vocabulary"
   },
   {
     "ko": "미세하다",
-    "slug": "emoji_1f50d_2",
+    "slug": "topik_minute",
     "folder": "items",
     "nameEn": "to be minute",
     "family": "topik-vocabulary"
   },
   {
     "ko": "구멍",
-    "slug": "emoji_1f573_2",
+    "slug": "topik_hole",
     "folder": "items",
     "nameEn": "a hole",
     "family": "topik-vocabulary"
   },
   {
     "ko": "쉽게",
-    "slug": "emoji_1f44c_2",
+    "slug": "topik_easily",
     "folder": "items",
     "nameEn": "easily",
     "family": "topik-vocabulary"
   },
   {
     "ko": "통과하다",
-    "slug": "emoji_1f6aa_2",
+    "slug": "topik_pass_through",
     "folder": "items",
     "nameEn": "to pass through",
     "family": "topik-vocabulary"
   },
   {
     "ko": "자원",
-    "slug": "emoji_1f48e_2",
+    "slug": "topik_natural_resource",
     "folder": "items",
     "nameEn": "a natural resource",
     "family": "topik-vocabulary"
   },
   {
     "ko": "보충되다",
-    "slug": "emoji_2795",
+    "slug": "topik_replenished",
     "folder": "items",
     "nameEn": "to be replenished",
     "family": "topik-vocabulary"
   },
   {
     "ko": "하수구",
-    "slug": "emoji_1f6bf",
+    "slug": "topik_drain",
     "folder": "items",
     "nameEn": "a drain",
     "family": "topik-vocabulary"
   },
   {
     "ko": "몰리다",
-    "slug": "emoji_1f300_2",
+    "slug": "topik_rush_together_place",
     "folder": "items",
     "nameEn": "to rush together into one place",
     "family": "topik-vocabulary"
   },
   {
     "ko": "침수",
-    "slug": "emoji_1f30a_2",
+    "slug": "topik_flooding",
     "folder": "items",
     "nameEn": "flooding",
     "family": "topik-vocabulary"
   },
   {
     "ko": "위험",
-    "slug": "emoji_26a0",
+    "slug": "topik_risk",
     "folder": "items",
     "nameEn": "a risk",
     "family": "topik-vocabulary"
   },
   {
     "ko": "또한",
-    "slug": "emoji_2795_2",
+    "slug": "topik_also",
     "folder": "items",
     "nameEn": "and also — a second thing of the same kind",
     "family": "topik-vocabulary"
   },
   {
     "ko": "비록",
-    "slug": "emoji_1f937",
+    "slug": "topik_although",
     "folder": "items",
     "nameEn": "although — and it needs -지만 later in the sentence",
     "family": "topik-vocabulary"
   },
   {
     "ko": "과연",
-    "slug": "emoji_2753",
+    "slug": "topik_sure_enough",
     "folder": "items",
     "nameEn": "sure enough — the speaker reacting",
     "family": "topik-vocabulary"
   },
   {
     "ko": "반면",
-    "slug": "emoji_2194",
+    "slug": "topik_other_hand",
     "folder": "items",
     "nameEn": "on the other hand",
     "family": "topik-vocabulary"
   },
   {
     "ko": "오염",
-    "slug": "emoji_1f3ed",
+    "slug": "topik_pollution",
     "folder": "items",
     "nameEn": "pollution",
     "family": "topik-vocabulary"
   },
   {
     "ko": "역할",
-    "slug": "emoji_1f3ad",
+    "slug": "topik_role_plays",
     "folder": "items",
     "nameEn": "a role something plays",
     "family": "topik-vocabulary"
   },
   {
     "ko": "N마다",
-    "slug": "emoji_1f502_2",
+    "slug": "topik_each_every_n",
     "folder": "items",
     "nameEn": "each and every N",
     "family": "topik-vocabulary"
   },
   {
     "ko": "환경적",
-    "slug": "emoji_1f331_2",
+    "slug": "topik_environmental",
     "folder": "items",
     "nameEn": "environmental",
     "family": "topik-vocabulary"
   },
   {
     "ko": "반영되다",
-    "slug": "emoji_1fa9e",
+    "slug": "topik_reflected",
     "folder": "items",
     "nameEn": "to be reflected in",
     "family": "topik-vocabulary"
   },
   {
     "ko": "매우",
-    "slug": "emoji_2757_2",
+    "slug": "topik_very_written_step_stiffer_than",
     "folder": "items",
     "nameEn": "very — the written one, a step stiffer than 아주",
     "family": "topik-vocabulary"
   },
   {
     "ko": "피해를 입히다",
-    "slug": "emoji_1f4a5_2",
+    "slug": "topik_do_harm",
     "folder": "items",
     "nameEn": "to do harm to",
     "family": "topik-vocabulary"
   },
   {
     "ko": "요인",
-    "slug": "emoji_1f9e9",
+    "slug": "topik_contributing_factor",
     "folder": "items",
     "nameEn": "a contributing factor",
     "family": "topik-vocabulary"
   },
   {
     "ko": "중 하나",
-    "slug": "emoji_31_20e3",
+    "slug": "topik_one_of_the",
     "folder": "items",
     "nameEn": "one of the …",
     "family": "topik-vocabulary"
   },
   {
     "ko": "해결",
-    "slug": "emoji_1f511",
+    "slug": "topik_solution",
     "folder": "items",
     "nameEn": "a solution",
     "family": "topik-vocabulary"
   },
   {
     "ko": "인주시",
-    "slug": "emoji_1f3d9_2",
+    "slug": "topik_inju_city",
     "folder": "items",
     "nameEn": "Inju City — the invented city these papers are set in",
     "family": "topik-vocabulary"
   },
   {
     "ko": "거리",
-    "slug": "emoji_1f6e3_2",
+    "slug": "topik_street",
     "folder": "items",
     "nameEn": "a street",
     "family": "topik-vocabulary"
   },
   {
     "ko": "식당",
-    "slug": "emoji_1f37d",
+    "slug": "topik_restaurant",
     "folder": "items",
     "nameEn": "a restaurant",
     "family": "topik-vocabulary"
   },
   {
     "ko": "카페",
-    "slug": "emoji_2615",
+    "slug": "topik_cafe",
     "folder": "items",
     "nameEn": "a café",
     "family": "topik-vocabulary"
   },
   {
     "ko": "먹거리",
-    "slug": "emoji_1f362",
+    "slug": "topik_things_eat",
     "folder": "items",
     "nameEn": "things to eat",
     "family": "topik-vocabulary"
   },
   {
     "ko": "골목",
-    "slug": "emoji_1f3d8_2",
+    "slug": "topik_narrow_street_alley",
     "folder": "items",
     "nameEn": "a narrow street, an alley",
     "family": "topik-vocabulary"
   },
   {
     "ko": "모이다",
-    "slug": "emoji_1f465_3",
+    "slug": "topik_come_together_place",
     "folder": "items",
     "nameEn": "to come together in one place",
     "family": "topik-vocabulary"
   },
   {
     "ko": "특화되다",
-    "slug": "emoji_2b50",
+    "slug": "topik_become_known_thing",
     "folder": "items",
     "nameEn": "to become known for one thing",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이곳",
-    "slug": "emoji_1f4cd",
+    "slug": "topik_place_here",
     "folder": "items",
     "nameEn": "this place, here",
     "family": "topik-vocabulary"
   },
   {
     "ko": "통행",
-    "slug": "emoji_1f6a6",
+    "slug": "topik_traffic_passing_through",
     "folder": "items",
     "nameEn": "traffic passing through",
     "family": "topik-vocabulary"
   },
   {
     "ko": "막다",
-    "slug": "emoji_1f6a7",
+    "slug": "topik_block_way",
     "folder": "items",
     "nameEn": "to block the way",
     "family": "topik-vocabulary"
   },
   {
     "ko": "한가운데",
-    "slug": "emoji_1f3af",
+    "slug": "topik_very_middle",
     "folder": "items",
     "nameEn": "the very middle",
     "family": "topik-vocabulary"
   },
   {
     "ko": "찍다",
-    "slug": "emoji_1f4f8",
+    "slug": "topik_take_photograph",
     "folder": "items",
     "nameEn": "to take a photograph",
     "family": "topik-vocabulary"
   },
   {
     "ko": "횡단보도",
-    "slug": "emoji_1f6b8",
+    "slug": "topik_pedestrian_crossing",
     "folder": "items",
     "nameEn": "a pedestrian crossing",
     "family": "topik-vocabulary"
   },
   {
     "ko": "삼각대",
-    "slug": "emoji_1f4d0_2",
+    "slug": "topik_camera_tripod",
     "folder": "items",
     "nameEn": "a camera tripod",
     "family": "topik-vocabulary"
   },
   {
     "ko": "촬영하다",
-    "slug": "emoji_1f3a5",
+    "slug": "topik_film_shoot_footage",
     "folder": "items",
     "nameEn": "to film, to shoot footage",
     "family": "topik-vocabulary"
   },
   {
     "ko": "일부",
-    "slug": "emoji_1f9e9_2",
+    "slug": "topik_portion",
     "folder": "items",
     "nameEn": "some of them, a portion",
     "family": "topik-vocabulary"
   },
   {
     "ko": "방문객",
-    "slug": "emoji_1f9f3_2",
+    "slug": "topik_visitor",
     "folder": "items",
     "nameEn": "a visitor",
     "family": "topik-vocabulary"
   },
   {
     "ko": "사고",
-    "slug": "emoji_1f4a5_3",
+    "slug": "topik_accident",
     "folder": "items",
     "nameEn": "an accident",
     "family": "topik-vocabulary"
   },
   {
     "ko": "-(으)ㄹ 뻔하다",
-    "slug": "emoji_1f630",
+    "slug": "topik_came_close_happening_did_not",
     "folder": "items",
     "nameEn": "came close to happening and did not",
     "family": "topik-vocabulary"
   },
   {
     "ko": "위험하다",
-    "slug": "emoji_26a0_2",
+    "slug": "topik_dangerous",
     "folder": "items",
     "nameEn": "to be dangerous",
     "family": "topik-vocabulary"
   },
   {
     "ko": "운전자",
-    "slug": "emoji_1f697",
+    "slug": "topik_driver",
     "folder": "items",
     "nameEn": "a driver",
     "family": "topik-vocabulary"
   },
   {
     "ko": "N 간에",
-    "slug": "emoji_2194_2",
+    "slug": "topik_between_n",
     "folder": "items",
     "nameEn": "between N — the written form of 사이에",
     "family": "topik-vocabulary"
   },
   {
     "ko": "사이",
-    "slug": "emoji_1f51b",
+    "slug": "topik_space_between_two_things",
     "folder": "items",
     "nameEn": "the space between two things",
     "family": "topik-vocabulary"
   },
   {
     "ko": "다투다",
-    "slug": "emoji_1f624_2",
+    "slug": "topik_quarrel",
     "folder": "items",
     "nameEn": "to quarrel",
     "family": "topik-vocabulary"
   },
   {
     "ko": "잦아지다",
-    "slug": "emoji_1f4c8_2",
+    "slug": "topik_grow_more_frequent",
     "folder": "items",
     "nameEn": "to grow more frequent",
     "family": "topik-vocabulary"
   },
   {
     "ko": "금지하다",
-    "slug": "emoji_1f6ab_2",
+    "slug": "topik_ban",
     "folder": "items",
     "nameEn": "to ban",
     "family": "topik-vocabulary"
   },
   {
     "ko": "갈등",
-    "slug": "emoji_2694",
+    "slug": "topik_conflict_between_people",
     "folder": "items",
     "nameEn": "conflict between people",
     "family": "topik-vocabulary"
   },
   {
     "ko": "목이 빠지다",
-    "slug": "emoji_1f992",
+    "slug": "topik_wait_wait",
     "folder": "items",
     "nameEn": "to wait and wait for something",
     "family": "topik-vocabulary"
   },
   {
     "ko": "한숨을 돌리다",
-    "slug": "emoji_1f60c",
+    "slug": "topik_get_breather_once_worst_has_passed",
     "folder": "items",
     "nameEn": "to get a breather once the worst has passed",
     "family": "topik-vocabulary"
   },
   {
     "ko": "눈살을 찌푸리다",
-    "slug": "emoji_1f616",
+    "slug": "topik_frown_disapproval_what_you_see",
     "folder": "items",
     "nameEn": "to frown in disapproval at what you see",
     "family": "topik-vocabulary"
   },
   {
     "ko": "코가 납작해지다",
-    "slug": "emoji_1f443_2",
+    "slug": "topik_humbled_boasting",
     "folder": "items",
     "nameEn": "to be humbled after boasting",
     "family": "topik-vocabulary"
   },
   {
     "ko": "방영",
-    "slug": "emoji_1f4fa",
+    "slug": "topik_airing_programme",
     "folder": "items",
     "nameEn": "the airing of a programme",
     "family": "topik-vocabulary"
   },
   {
     "ko": "톡톡히",
-    "slug": "emoji_1f4a5_4",
+    "slug": "topik_handsomely",
     "folder": "items",
     "nameEn": "handsomely — of a benefit actually felt",
     "family": "topik-vocabulary"
   },
   {
     "ko": "관광객",
-    "slug": "emoji_1f9f3_3",
+    "slug": "topik_tourist",
     "folder": "items",
     "nameEn": "a tourist",
     "family": "topik-vocabulary"
   },
   {
     "ko": "물결",
-    "slug": "emoji_1f30a_3",
+    "slug": "topik_wave",
     "folder": "items",
     "nameEn": "a wave — of people, or of feeling",
     "family": "topik-vocabulary"
   },
   {
     "ko": "제작자",
-    "slug": "emoji_1f3ac",
+    "slug": "topik_producer_programme",
     "folder": "items",
     "nameEn": "a producer of a programme",
     "family": "topik-vocabulary"
   },
   {
     "ko": "모여들다",
-    "slug": "emoji_1f465_4",
+    "slug": "topik_flock_all_sides",
     "folder": "items",
     "nameEn": "to flock in from all sides",
     "family": "topik-vocabulary"
   },
   {
     "ko": "덕분에",
-    "slug": "emoji_1f64f",
+    "slug": "topik_thanks",
     "folder": "items",
     "nameEn": "thanks to — and the outcome is good",
     "family": "topik-vocabulary"
   },
   {
     "ko": "방문하다",
-    "slug": "emoji_1f6aa_3",
+    "slug": "topik_visit_place_2",
     "folder": "items",
     "nameEn": "to visit a place",
     "family": "topik-vocabulary"
   },
   {
     "ko": "유치",
-    "slug": "emoji_1f3a3",
+    "slug": "topik_attracting_visitors_business_place",
     "folder": "items",
     "nameEn": "attracting visitors or business to a place",
     "family": "topik-vocabulary"
   },
   {
     "ko": "홍보",
-    "slug": "emoji_1f4e2_2",
+    "slug": "topik_publicity",
     "folder": "items",
     "nameEn": "publicity",
     "family": "topik-vocabulary"
   },
   {
     "ko": "방송",
-    "slug": "emoji_1f4fb",
+    "slug": "topik_broadcast",
     "folder": "items",
     "nameEn": "a broadcast",
     "family": "topik-vocabulary"
   },
   {
     "ko": "여러",
-    "slug": "emoji_1f522_2",
+    "slug": "topik_several_various",
     "folder": "items",
     "nameEn": "several, various",
     "family": "topik-vocabulary"
   },
   {
     "ko": "문제",
-    "slug": "emoji_2753_2",
+    "slug": "topik_problem",
     "folder": "items",
     "nameEn": "a problem",
     "family": "topik-vocabulary"
   },
   {
     "ko": "선수",
-    "slug": "emoji_1f3c5",
+    "slug": "topik_athlete",
     "folder": "items",
     "nameEn": "an athlete",
     "family": "topik-vocabulary"
   },
   {
     "ko": "시상대",
-    "slug": "emoji_1f947",
+    "slug": "topik_winners_podium",
     "folder": "items",
     "nameEn": "the winners’ podium",
     "family": "topik-vocabulary"
   },
   {
     "ko": "펜싱",
-    "slug": "emoji_1f93a",
+    "slug": "topik_fencing",
     "folder": "items",
     "nameEn": "fencing",
     "family": "topik-vocabulary"
   },
   {
     "ko": "종목",
-    "slug": "emoji_1f3c6",
+    "slug": "topik_event_discipline_sport",
     "folder": "items",
     "nameEn": "an event or discipline in a sport",
     "family": "topik-vocabulary"
   },
   {
     "ko": "메달",
-    "slug": "emoji_1f396_2",
+    "slug": "topik_medal",
     "folder": "items",
     "nameEn": "a medal",
     "family": "topik-vocabulary"
   },
   {
     "ko": "가뭄",
-    "slug": "emoji_1f3dc",
+    "slug": "topik_drought",
     "folder": "items",
     "nameEn": "a drought — of rain, or of anything wanted",
     "family": "topik-vocabulary"
   },
   {
     "ko": "대표팀",
-    "slug": "emoji_1f3df",
+    "slug": "topik_national_team",
     "folder": "items",
     "nameEn": "the national team",
     "family": "topik-vocabulary"
   },
   {
     "ko": "목표",
-    "slug": "emoji_1f3af_2",
+    "slug": "topik_goal_aimed",
     "folder": "items",
     "nameEn": "a goal aimed at",
     "family": "topik-vocabulary"
   },
   {
     "ko": "열심히",
-    "slug": "emoji_1f525_2",
+    "slug": "topik_hard_effort",
     "folder": "items",
     "nameEn": "hard, with effort",
     "family": "topik-vocabulary"
   },
   {
     "ko": "훈련하다",
-    "slug": "emoji_1f3cb_2",
+    "slug": "topik_train",
     "folder": "items",
     "nameEn": "to train",
     "family": "topik-vocabulary"
   },
   {
     "ko": "따다",
-    "slug": "emoji_1f3c6_2",
+    "slug": "topik_take_medal_licence",
     "folder": "items",
     "nameEn": "to take a medal or a licence",
     "family": "topik-vocabulary"
   },
   {
     "ko": "오랜만에",
-    "slug": "emoji_23f3_2",
+    "slug": "topik_long_interval",
     "folder": "items",
     "nameEn": "after a long interval",
     "family": "topik-vocabulary"
   },
   {
     "ko": "나오다",
-    "slug": "emoji_2728_2",
+    "slug": "topik_come_appear",
     "folder": "items",
     "nameEn": "to come out, to appear",
     "family": "topik-vocabulary"
   },
   {
     "ko": "신기록",
-    "slug": "emoji_1f4ca_2",
+    "slug": "topik_new_record",
     "folder": "items",
     "nameEn": "a new record",
     "family": "topik-vocabulary"
   },
   {
     "ko": "경기를 펼치다",
-    "slug": "emoji_1f93a_2",
+    "slug": "topik_put_performance_match",
     "folder": "items",
     "nameEn": "to put on a performance in a match — 경기 in its sporting sense",
     "family": "topik-vocabulary"
   },
   {
     "ko": "아쉽게",
-    "slug": "emoji_1f61e",
+    "slug": "topik_disappointingly_narrow_margin",
     "folder": "items",
     "nameEn": "disappointingly, by a narrow margin",
     "family": "topik-vocabulary"
   },
   {
     "ko": "놓치다",
-    "slug": "emoji_1f4a8",
+    "slug": "topik_let_slip",
     "folder": "items",
     "nameEn": "to let something slip",
     "family": "topik-vocabulary"
   },
   {
     "ko": "선 넘다",
-    "slug": "emoji_1f6b7",
+    "slug": "topik_cross_line",
     "folder": "items",
     "nameEn": "to cross the line",
     "family": "topik-vocabulary"
   },
   {
     "ko": "악성",
-    "slug": "emoji_2620",
+    "slug": "topik_malicious_straight_onto_noun",
     "folder": "items",
     "nameEn": "malicious — straight onto a noun",
     "family": "topik-vocabulary"
   },
   {
     "ko": "악의적",
-    "slug": "emoji_1f608",
+    "slug": "topik_malicious_needs_noun",
     "folder": "items",
     "nameEn": "malicious — and it needs -인 before a noun",
     "family": "topik-vocabulary"
   },
   {
     "ko": "댓글",
-    "slug": "emoji_1f4ac",
+    "slug": "topik_comment_posted_online",
     "folder": "items",
     "nameEn": "a comment posted online",
     "family": "topik-vocabulary"
   },
   {
     "ko": "처벌",
-    "slug": "emoji_2696_3",
+    "slug": "topik_punishment",
     "folder": "items",
     "nameEn": "punishment",
     "family": "topik-vocabulary"
   },
   {
     "ko": "여전히",
-    "slug": "emoji_1f501_4",
+    "slug": "topik_still_nothing_has_changed",
     "folder": "items",
     "nameEn": "still — nothing has changed",
     "family": "topik-vocabulary"
   },
   {
     "ko": "솜방망이",
-    "slug": "emoji_1f9f8_2",
+    "slug": "topik_cotton_club",
     "folder": "items",
     "nameEn": "a cotton club — a penalty too light to deter",
     "family": "topik-vocabulary"
   },
   {
     "ko": "-(으)ㄴ 만큼",
-    "slug": "emoji_1f4cf_2",
+    "slug": "topik_extent",
     "folder": "items",
     "nameEn": "to the extent that",
     "family": "topik-vocabulary"
   },
   {
     "ko": "수위",
-    "slug": "emoji_1f4f6_2",
+    "slug": "topik_level_water_severity",
     "folder": "items",
     "nameEn": "the level, of water or of severity",
     "family": "topik-vocabulary"
   },
   {
     "ko": "낮추다",
-    "slug": "emoji_2b07_3",
+    "slug": "topik_lower",
     "folder": "items",
     "nameEn": "to lower something",
     "family": "topik-vocabulary"
   },
   {
     "ko": "의견",
-    "slug": "emoji_1f4ad",
+    "slug": "topik_opinion_put_forward",
     "folder": "items",
     "nameEn": "an opinion put forward",
     "family": "topik-vocabulary"
   },
   {
     "ko": "제기되다",
-    "slug": "emoji_1f64b_3",
+    "slug": "topik_raised_argument",
     "folder": "items",
     "nameEn": "to be raised, of an argument",
     "family": "topik-vocabulary"
   },
   {
     "ko": "강화하다",
-    "slug": "emoji_1f4aa_2",
+    "slug": "topik_tighten_strengthen",
     "folder": "items",
     "nameEn": "to tighten or strengthen",
     "family": "topik-vocabulary"
   },
   {
     "ko": "감소하다",
-    "slug": "emoji_1f4c9_4",
+    "slug": "topik_decrease",
     "folder": "items",
     "nameEn": "to decrease — the formal word",
     "family": "topik-vocabulary"
   },
   {
     "ko": "지나치게",
-    "slug": "emoji_26a0_3",
+    "slug": "topik_excessively",
     "folder": "items",
     "nameEn": "excessively",
     "family": "topik-vocabulary"
   },
   {
     "ko": "심각해지다",
-    "slug": "emoji_1f630_2",
+    "slug": "topik_grow_serious",
     "folder": "items",
     "nameEn": "to grow serious",
     "family": "topik-vocabulary"
   },
   {
     "ko": "아직도",
-    "slug": "emoji_231b_2",
+    "slug": "topik_still_ought_have_finished_now",
     "folder": "items",
     "nameEn": "still — when it ought to have finished by now",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이어지다",
-    "slug": "emoji_27b0",
+    "slug": "topik_go_another",
     "folder": "items",
     "nameEn": "to go on, one after another",
     "family": "topik-vocabulary"
   },
   {
     "ko": "피해자",
-    "slug": "emoji_1f622_2",
+    "slug": "topik_victim",
     "folder": "items",
     "nameEn": "a victim",
     "family": "topik-vocabulary"
   },
   {
     "ko": "무겁다",
-    "slug": "emoji_1faa8_3",
+    "slug": "topik_heavy",
     "folder": "items",
     "nameEn": "to be heavy — of a penalty as well as a weight",
     "family": "topik-vocabulary"
   },
   {
     "ko": "요구하다",
-    "slug": "emoji_270a",
+    "slug": "topik_demand",
     "folder": "items",
     "nameEn": "to demand",
     "family": "topik-vocabulary"
   },
   {
     "ko": "오늘날",
-    "slug": "emoji_1f4c5_2",
+    "slug": "topik_nowadays_our_own_time",
     "folder": "items",
     "nameEn": "nowadays, in our own time",
     "family": "topik-vocabulary"
   },
   {
     "ko": "연재",
-    "slug": "emoji_1f4da",
+    "slug": "topik_serialisation_publishing_instalments",
     "folder": "items",
     "nameEn": "serialisation, publishing in instalments",
     "family": "topik-vocabulary"
   },
   {
     "ko": "만화",
-    "slug": "emoji_1f5bc_2",
+    "slug": "topik_comic",
     "folder": "items",
     "nameEn": "a comic",
     "family": "topik-vocabulary"
   },
   {
     "ko": "만화가",
-    "slug": "emoji_270f_2",
+    "slug": "topik_cartoonist",
     "folder": "items",
     "nameEn": "a cartoonist",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이야기",
-    "slug": "emoji_1f4ac_2",
+    "slug": "topik_story",
     "folder": "items",
     "nameEn": "a story",
     "family": "topik-vocabulary"
   },
   {
     "ko": "N별로",
-    "slug": "emoji_1f522_3",
+    "slug": "topik_each_n_n_time",
     "folder": "items",
     "nameEn": "by each N, one N at a time",
     "family": "topik-vocabulary"
   },
   {
     "ko": "작품",
-    "slug": "emoji_1f3a8_2",
+    "slug": "topik_work_art",
     "folder": "items",
     "nameEn": "a work of art",
     "family": "topik-vocabulary"
   },
   {
     "ko": "형식",
-    "slug": "emoji_1f4d0_3",
+    "slug": "topik_form_thing_cast",
     "folder": "items",
     "nameEn": "the form a thing is cast in",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이미",
-    "slug": "emoji_23ea",
+    "slug": "topik_already_then",
     "folder": "items",
     "nameEn": "already, by then",
     "family": "topik-vocabulary"
   },
   {
     "ko": "세기",
-    "slug": "emoji_1f3db_3",
+    "slug": "topik_century",
     "folder": "items",
     "nameEn": "a century",
     "family": "topik-vocabulary"
   },
   {
     "ko": "존재하다",
-    "slug": "emoji_2728_3",
+    "slug": "topik_exist",
     "folder": "items",
     "nameEn": "to exist",
     "family": "topik-vocabulary"
   },
   {
     "ko": "영국",
-    "slug": "emoji_1f3f0",
+    "slug": "topik_england_britain",
     "folder": "items",
     "nameEn": "England, Britain",
     "family": "topik-vocabulary"
   },
   {
     "ko": "화가",
-    "slug": "emoji_1f58c",
+    "slug": "topik_painter",
     "folder": "items",
     "nameEn": "a painter",
     "family": "topik-vocabulary"
   },
   {
     "ko": "N 못지않게",
-    "slug": "emoji_2696_4",
+    "slug": "topik_no_less_than_n",
     "folder": "items",
     "nameEn": "no less than N",
     "family": "topik-vocabulary"
   },
   {
     "ko": "흥미진진하다",
-    "slug": "emoji_1f37f",
+    "slug": "topik_gripping",
     "folder": "items",
     "nameEn": "to be gripping",
     "family": "topik-vocabulary"
   },
   {
     "ko": "그림",
-    "slug": "emoji_1f3a8_3",
+    "slug": "topik_picture",
     "folder": "items",
     "nameEn": "a picture",
     "family": "topik-vocabulary"
   },
   {
     "ko": "나누다",
-    "slug": "emoji_2702",
+    "slug": "topik_divide",
     "folder": "items",
     "nameEn": "to divide something up",
     "family": "topik-vocabulary"
   },
   {
     "ko": "구성하다",
-    "slug": "emoji_1f9e9_3",
+    "slug": "topik_put_together_compose",
     "folder": "items",
     "nameEn": "to put together, to compose",
     "family": "topik-vocabulary"
   },
   {
     "ko": "판화",
-    "slug": "emoji_1f5de",
+    "slug": "topik_print_made_engraving",
     "folder": "items",
     "nameEn": "a print made from an engraving",
     "family": "topik-vocabulary"
   },
   {
     "ko": "새기다",
-    "slug": "emoji_1f528_3",
+    "slug": "topik_carve_surface",
     "folder": "items",
     "nameEn": "to carve into a surface",
     "family": "topik-vocabulary"
   },
   {
     "ko": "순서대로",
-    "slug": "emoji_1f522_4",
+    "slug": "topik_order_given",
     "folder": "items",
     "nameEn": "in the order given",
     "family": "topik-vocabulary"
   },
   {
     "ko": "인쇄하다",
-    "slug": "emoji_1f5a8",
+    "slug": "topik_print",
     "folder": "items",
     "nameEn": "to print",
     "family": "topik-vocabulary"
   },
   {
     "ko": "판매하다",
-    "slug": "emoji_1f3f7",
+    "slug": "topik_sell",
     "folder": "items",
     "nameEn": "to sell",
     "family": "topik-vocabulary"
   },
   {
     "ko": "독자",
-    "slug": "emoji_1f453",
+    "slug": "topik_reader",
     "folder": "items",
     "nameEn": "a reader",
     "family": "topik-vocabulary"
   },
   {
     "ko": "다음",
-    "slug": "emoji_27a1_4",
+    "slug": "topik_next",
     "folder": "items",
     "nameEn": "the next one",
     "family": "topik-vocabulary"
   },
   {
     "ko": "손꼽아 기다리다",
-    "slug": "emoji_1f91e",
+    "slug": "topik_count_days_until_comes",
     "folder": "items",
     "nameEn": "to count the days until it comes",
     "family": "topik-vocabulary"
   },
   {
     "ko": "기꺼이",
-    "slug": "emoji_1f60a",
+    "slug": "topik_gladly_without_being_pressed",
     "folder": "items",
     "nameEn": "gladly, without being pressed",
     "family": "topik-vocabulary"
   },
   {
     "ko": "지불하다",
-    "slug": "emoji_1f4b3",
+    "slug": "topik_pay_sum",
     "folder": "items",
     "nameEn": "to pay a sum",
     "family": "topik-vocabulary"
   },
   {
     "ko": "주문",
-    "slug": "emoji_1f4cb_3",
+    "slug": "topik_order_placed",
     "folder": "items",
     "nameEn": "an order placed for something",
     "family": "topik-vocabulary"
   },
   {
     "ko": "작가",
-    "slug": "emoji_1f58b_2",
+    "slug": "topik_author_work",
     "folder": "items",
     "nameEn": "the author of a work",
     "family": "topik-vocabulary"
   },
   {
     "ko": "밝히다",
-    "slug": "emoji_1f526",
+    "slug": "topik_make_known",
     "folder": "items",
     "nameEn": "to make something known",
     "family": "topik-vocabulary"
   },
   {
     "ko": "일정하다",
-    "slug": "emoji_1f4cf_3",
+    "slug": "topik_regular_fixed_size_spacing",
     "folder": "items",
     "nameEn": "to be regular, at a fixed size or spacing",
     "family": "topik-vocabulary"
   },
   {
     "ko": "기간",
-    "slug": "emoji_1f5d3_3",
+    "slug": "topik_stretch_time",
     "folder": "items",
     "nameEn": "a stretch of time",
     "family": "topik-vocabulary"
   },
   {
     "ko": "두다",
-    "slug": "emoji_23f8",
+    "slug": "topik_leave_gap_interval",
     "folder": "items",
     "nameEn": "to leave a gap or an interval",
     "family": "topik-vocabulary"
   },
   {
     "ko": "보통",
-    "slug": "emoji_1f4ca_3",
+    "slug": "topik_usually_rule",
     "folder": "items",
     "nameEn": "usually, as a rule",
     "family": "topik-vocabulary"
   },
   {
     "ko": "식후",
-    "slug": "emoji_1f37d_2",
+    "slug": "topik_meal",
     "folder": "items",
     "nameEn": "after a meal",
     "family": "topik-vocabulary"
   },
   {
     "ko": "닦다",
-    "slug": "emoji_1faa5",
+    "slug": "topik_brush_wipe_clean",
     "folder": "items",
     "nameEn": "to brush or wipe clean",
     "family": "topik-vocabulary"
   },
   {
     "ko": "레몬",
-    "slug": "emoji_1f34b",
+    "slug": "topik_lemon",
     "folder": "items",
     "nameEn": "a lemon",
     "family": "topik-vocabulary"
   },
   {
     "ko": "신맛",
-    "slug": "emoji_1f616_2",
+    "slug": "topik_sour_taste",
     "folder": "items",
     "nameEn": "a sour taste",
     "family": "topik-vocabulary"
   },
   {
     "ko": "강하다",
-    "slug": "emoji_1f4aa_3",
+    "slug": "topik_strong_taste_force",
     "folder": "items",
     "nameEn": "to be strong, of a taste or a force",
     "family": "topik-vocabulary"
   },
   {
     "ko": "양치질",
-    "slug": "emoji_1f9b7_2",
+    "slug": "topik_brushing_teeth",
     "folder": "items",
     "nameEn": "brushing the teeth",
     "family": "topik-vocabulary"
   },
   {
     "ko": "양치하다",
-    "slug": "emoji_1f601",
+    "slug": "topik_brush_teeth",
     "folder": "items",
     "nameEn": "to brush the teeth",
     "family": "topik-vocabulary"
   },
   {
     "ko": "산성",
-    "slug": "emoji_1f9ea",
+    "slug": "topik_acidity",
     "folder": "items",
     "nameEn": "acidity",
     "family": "topik-vocabulary"
   },
   {
     "ko": "치아",
-    "slug": "emoji_1f9bf",
+    "slug": "topik_tooth",
     "folder": "items",
     "nameEn": "a tooth — the clinical word",
     "family": "topik-vocabulary"
   },
   {
     "ko": "보호막",
-    "slug": "emoji_1f6e1_2",
+    "slug": "topik_protective_layer",
     "folder": "items",
     "nameEn": "a protective layer",
     "family": "topik-vocabulary"
   },
   {
     "ko": "칫솔질",
-    "slug": "emoji_1f9f9",
+    "slug": "topik_brushing_toothbrush",
     "folder": "items",
     "nameEn": "brushing with a toothbrush",
     "family": "topik-vocabulary"
   },
   {
     "ko": "자극하다",
-    "slug": "emoji_26a1_3",
+    "slug": "topik_irritate",
     "folder": "items",
     "nameEn": "to irritate",
     "family": "topik-vocabulary"
   },
   {
     "ko": "손상되다",
-    "slug": "emoji_1f494",
+    "slug": "topik_get_damaged",
     "folder": "items",
     "nameEn": "to get damaged",
     "family": "topik-vocabulary"
   },
   {
     "ko": "원래",
-    "slug": "emoji_1f519",
+    "slug": "topik_originally_first_was",
     "folder": "items",
     "nameEn": "originally, as it first was",
     "family": "topik-vocabulary"
   },
   {
     "ko": "강도",
-    "slug": "emoji_1faa8_4",
+    "slug": "topik_hardness_how_strong_thing",
     "folder": "items",
     "nameEn": "hardness, how strong a thing is",
     "family": "topik-vocabulary"
   },
   {
     "ko": "돌아오다",
-    "slug": "emoji_1f504_3",
+    "slug": "topik_come_back",
     "folder": "items",
     "nameEn": "to come back",
     "family": "topik-vocabulary"
   },
   {
     "ko": "중화되다",
-    "slug": "emoji_2697",
+    "slug": "topik_neutralised",
     "folder": "items",
     "nameEn": "to be neutralised",
     "family": "topik-vocabulary"
   },
   {
     "ko": "소요되다",
-    "slug": "emoji_23f1_2",
+    "slug": "topik_taken_time",
     "folder": "items",
     "nameEn": "to be taken up, of time — the written word",
     "family": "topik-vocabulary"
   },
   {
     "ko": "섭취하다",
-    "slug": "emoji_1f374",
+    "slug": "topik_take_food",
     "folder": "items",
     "nameEn": "to take in food — the clinical word for eating",
     "family": "topik-vocabulary"
   },
   {
     "ko": "최소",
-    "slug": "emoji_1f53b",
+    "slug": "topik_very_least",
     "folder": "items",
     "nameEn": "at the very least",
     "family": "topik-vocabulary"
   },
   {
     "ko": "지나다",
-    "slug": "emoji_23f3_3",
+    "slug": "topik_go_time",
     "folder": "items",
     "nameEn": "to go by, of time",
     "family": "topik-vocabulary"
   },
   {
     "ko": "누렇다",
-    "slug": "emoji_1f7e1",
+    "slug": "topik_dull_yellow",
     "folder": "items",
     "nameEn": "to be a dull yellow",
     "family": "topik-vocabulary"
   },
   {
     "ko": "일시적",
-    "slug": "emoji_23f2",
+    "slug": "topik_temporary",
     "folder": "items",
     "nameEn": "temporary",
     "family": "topik-vocabulary"
   },
   {
     "ko": "약화시키다",
-    "slug": "emoji_1f4c9_5",
+    "slug": "topik_make_weaken",
     "folder": "items",
     "nameEn": "to make something weaken",
     "family": "topik-vocabulary"
   },
   {
     "ko": "음식물",
-    "slug": "emoji_1f372",
+    "slug": "topik_foodstuff_matter_food",
     "folder": "items",
     "nameEn": "foodstuff, matter that is food",
     "family": "topik-vocabulary"
   },
   {
     "ko": "누군가",
-    "slug": "emoji_1f937_2",
+    "slug": "topik_someone_other",
     "folder": "items",
     "nameEn": "someone or other",
     "family": "topik-vocabulary"
   },
   {
     "ko": "해를 입히다",
-    "slug": "emoji_1f4a2",
+    "slug": "topik_injure_someone",
     "folder": "items",
     "nameEn": "to injure someone",
     "family": "topik-vocabulary"
   },
   {
     "ko": "-(으)ㄴ 척하다",
-    "slug": "emoji_1f3ad_2",
+    "slug": "topik_pretend",
     "folder": "items",
     "nameEn": "to pretend to be",
     "family": "topik-vocabulary"
   },
   {
     "ko": "거짓으로",
-    "slug": "emoji_1f925",
+    "slug": "topik_falsely_not_meaning",
     "folder": "items",
     "nameEn": "falsely, not meaning it",
     "family": "topik-vocabulary"
   },
   {
     "ko": "흘리다",
-    "slug": "emoji_1f4a7_2",
+    "slug": "topik_shed_let_run",
     "folder": "items",
     "nameEn": "to shed, to let run",
     "family": "topik-vocabulary"
   },
   {
     "ko": "눈물",
-    "slug": "emoji_1f622_3",
+    "slug": "topik_tear",
     "folder": "items",
     "nameEn": "a tear",
     "family": "topik-vocabulary"
   },
   {
     "ko": "눈물샘",
-    "slug": "emoji_1f4a6",
+    "slug": "topik_tear_gland",
     "folder": "items",
     "nameEn": "the tear gland",
     "family": "topik-vocabulary"
   },
   {
     "ko": "악어",
-    "slug": "emoji_1f40a",
+    "slug": "topik_crocodile",
     "folder": "items",
     "nameEn": "a crocodile",
     "family": "topik-vocabulary"
   },
   {
     "ko": "비유하다",
-    "slug": "emoji_1f500_3",
+    "slug": "topik_liken_thing_another",
     "folder": "items",
     "nameEn": "to liken one thing to another",
     "family": "topik-vocabulary"
   },
   {
     "ko": "실제로",
-    "slug": "emoji_2705_3",
+    "slug": "topik_actual_fact",
     "folder": "items",
     "nameEn": "in actual fact",
     "family": "topik-vocabulary"
   },
   {
     "ko": "잡아먹다",
-    "slug": "emoji_1f356",
+    "slug": "topik_catch_eat",
     "folder": "items",
     "nameEn": "to catch and eat",
     "family": "topik-vocabulary"
   },
   {
     "ko": "신경",
-    "slug": "emoji_1f9e0",
+    "slug": "topik_nerve",
     "folder": "items",
     "nameEn": "a nerve",
     "family": "topik-vocabulary"
   },
   {
     "ko": "연결되다",
-    "slug": "emoji_1f517",
+    "slug": "topik_wired_together",
     "folder": "items",
     "nameEn": "to be wired together",
     "family": "topik-vocabulary"
   },
   {
     "ko": "씹다",
-    "slug": "emoji_1f62c_2",
+    "slug": "topik_chew",
     "folder": "items",
     "nameEn": "to chew",
     "family": "topik-vocabulary"
   },
   {
     "ko": "마치",
-    "slug": "emoji_1f3aa",
+    "slug": "topik_if",
     "folder": "items",
     "nameEn": "as if — and it wants -는 것처럼 to close it",
     "family": "topik-vocabulary"
   },
   {
     "ko": "표현",
-    "slug": "emoji_1f4ac_3",
+    "slug": "topik_turn_phrase",
     "folder": "items",
     "nameEn": "a turn of phrase",
     "family": "topik-vocabulary"
   },
   {
     "ko": "인간",
-    "slug": "emoji_1f9cd_2",
+    "slug": "topik_human_being",
     "folder": "items",
     "nameEn": "a human being",
     "family": "topik-vocabulary"
   },
   {
     "ko": "가식적",
-    "slug": "emoji_1f3a0",
+    "slug": "topik_put_insincere",
     "folder": "items",
     "nameEn": "put on, insincere",
     "family": "topik-vocabulary"
   },
   {
     "ko": "행위",
-    "slug": "emoji_1f6b6_3",
+    "slug": "topik_act_piece_behaviour",
     "folder": "items",
     "nameEn": "an act, a piece of behaviour",
     "family": "topik-vocabulary"
   },
   {
     "ko": "생리적",
-    "slug": "emoji_1f9ec",
+    "slug": "topik_physiological",
     "folder": "items",
     "nameEn": "physiological",
     "family": "topik-vocabulary"
   },
   {
     "ko": "현상",
-    "slug": "emoji_1f50d_3",
+    "slug": "topik_phenomenon",
     "folder": "items",
     "nameEn": "a phenomenon",
     "family": "topik-vocabulary"
   },
   {
     "ko": "두려움",
-    "slug": "emoji_1f628",
+    "slug": "topik_fear",
     "folder": "items",
     "nameEn": "fear",
     "family": "topik-vocabulary"
   },
   {
     "ko": "떨다",
-    "slug": "emoji_1f976",
+    "slug": "topik_tremble",
     "folder": "items",
     "nameEn": "to tremble",
     "family": "topik-vocabulary"
   },
   {
     "ko": "죄책감",
-    "slug": "emoji_1f614",
+    "slug": "topik_guilt_what_has_done",
     "folder": "items",
     "nameEn": "guilt at what one has done",
     "family": "topik-vocabulary"
   },
   {
     "ko": "갈증",
-    "slug": "emoji_1f975",
+    "slug": "topik_thirst",
     "folder": "items",
     "nameEn": "thirst",
     "family": "topik-vocabulary"
   },
   {
     "ko": "해소하다",
-    "slug": "emoji_1f6bf_2",
+    "slug": "topik_relieve_clear_away",
     "folder": "items",
     "nameEn": "to relieve, to clear away",
     "family": "topik-vocabulary"
   },
   {
     "ko": "배부름",
-    "slug": "emoji_1f37d_3",
+    "slug": "topik_state_being_full",
     "folder": "items",
     "nameEn": "the state of being full",
     "family": "topik-vocabulary"
   },
   {
     "ko": "만족하다",
-    "slug": "emoji_1f60c_2",
+    "slug": "topik_satisfied",
     "folder": "items",
     "nameEn": "to be satisfied",
     "family": "topik-vocabulary"
   },
   {
     "ko": "음료수",
-    "slug": "emoji_1f964",
+    "slug": "topik_soft_drink",
     "folder": "items",
     "nameEn": "a soft drink",
     "family": "topik-vocabulary"
   },
   {
     "ko": "액체",
-    "slug": "emoji_1f4a7_3",
+    "slug": "topik_liquid",
     "folder": "items",
     "nameEn": "a liquid",
     "family": "topik-vocabulary"
   },
   {
     "ko": "담다",
-    "slug": "emoji_1f4e6_2",
+    "slug": "topik_hold_inside",
     "folder": "items",
     "nameEn": "to hold something inside it",
     "family": "topik-vocabulary"
   },
   {
     "ko": "용기",
-    "slug": "emoji_1f9f4",
+    "slug": "topik_container",
     "folder": "items",
     "nameEn": "a container",
     "family": "topik-vocabulary"
   },
   {
     "ko": "원기둥",
-    "slug": "emoji_1f96b",
+    "slug": "topik_cylinder",
     "folder": "items",
     "nameEn": "a cylinder",
     "family": "topik-vocabulary"
   },
   {
     "ko": "이유",
-    "slug": "emoji_2754",
+    "slug": "topik_reason",
     "folder": "items",
     "nameEn": "a reason",
     "family": "topik-vocabulary"
   },
   {
     "ko": "예를 들다",
-    "slug": "emoji_1f449_2",
+    "slug": "topik_give_example",
     "folder": "items",
     "nameEn": "to give an example",
     "family": "topik-vocabulary"
   },
   {
     "ko": "밑면",
-    "slug": "emoji_2b07_4",
+    "slug": "topik_base_face_shape",
     "folder": "items",
     "nameEn": "the base face of a shape",
     "family": "topik-vocabulary"
   },
   {
     "ko": "정사각형",
-    "slug": "emoji_1f7e5",
+    "slug": "topik_square",
     "folder": "items",
     "nameEn": "a square",
     "family": "topik-vocabulary"
   },
   {
     "ko": "정삼각형",
-    "slug": "emoji_1f53a",
+    "slug": "topik_equilateral_triangle",
     "folder": "items",
     "nameEn": "an equilateral triangle",
     "family": "topik-vocabulary"
   },
   {
     "ko": "비교하다",
-    "slug": "emoji_2696_5",
+    "slug": "topik_compare",
     "folder": "items",
     "nameEn": "to compare",
     "family": "topik-vocabulary"
   },
   {
     "ko": "넓이",
-    "slug": "emoji_1f4d0_4",
+    "slug": "topik_area",
     "folder": "items",
     "nameEn": "area",
     "family": "topik-vocabulary"
   },
   {
     "ko": "똑같이",
-    "slug": "emoji_1f46f_2",
+    "slug": "topik_identically",
     "folder": "items",
     "nameEn": "identically",
     "family": "topik-vocabulary"
   },
   {
     "ko": "둘레",
-    "slug": "emoji_2b55",
+    "slug": "topik_distance_round_outside",
     "folder": "items",
     "nameEn": "the distance round the outside",
     "family": "topik-vocabulary"
   },
   {
     "ko": "각각",
-    "slug": "emoji_1f522_5",
+    "slug": "topik_each_respectively",
     "folder": "items",
     "nameEn": "each one respectively",
     "family": "topik-vocabulary"
   },
   {
     "ko": "재료",
-    "slug": "emoji_1f9f1_3",
+    "slug": "topik_material_thing_made",
     "folder": "items",
     "nameEn": "material a thing is made from",
     "family": "topik-vocabulary"
   },
   {
     "ko": "적게",
-    "slug": "emoji_1f53d",
+    "slug": "topik_little_small_amount",
     "folder": "items",
     "nameEn": "little, in small amount",
     "family": "topik-vocabulary"
   },
   {
     "ko": "들다",
-    "slug": "emoji_1f4b8_2",
+    "slug": "topik_spent",
     "folder": "items",
     "nameEn": "to be spent — of material, money or time",
     "family": "topik-vocabulary"
   },
   {
     "ko": "생산비",
-    "slug": "emoji_1f3ed_2",
+    "slug": "topik_cost_producing",
     "folder": "items",
     "nameEn": "the cost of producing something",
     "family": "topik-vocabulary"
   },
   {
     "ko": "편리하다",
-    "slug": "emoji_1f44d",
+    "slug": "topik_convenient",
     "folder": "items",
     "nameEn": "to be convenient",
     "family": "topik-vocabulary"
   },
   {
     "ko": "제작",
-    "slug": "emoji_1f527",
+    "slug": "topik_manufacture_making_thing",
     "folder": "items",
     "nameEn": "manufacture, the making of a thing",
     "family": "topik-vocabulary"
