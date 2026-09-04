@@ -1,4 +1,5 @@
 'use strict';
+const fs = require('fs');
 const path = require('path');
 const {
   ART_FOLDERS,
@@ -76,5 +77,24 @@ assert(report.unnamed.length === 0, 'every catalog row has id, nameEn, path, kin
 assert(report.badFolder.length === 0, 'every catalog path uses a known folder');
 assert(report.badSlug.length === 0, 'every PNG basename is snake_case');
 assert(report.badId.length === 0, 'every catalog id starts with folder kind');
+
+// The admin puts a picture next to a word by looking the word up in the catalogue, so a
+// vocabulary tile that does not name its words is invisible from the word table even though
+// the game draws it. Unit 11 showed 98 of its 155 words as blank that way. The index is
+// derived, so the only thing worth pinning is that it has been run.
+const { indexArtWords } = require('../scripts/index_art_words');
+const { loadRows } = require('../scripts/audit_vocab_art');
+const { pack: indexed, report: wordIndex } = indexArtWords(ROOT, { check: true });
+const catalogueOnDisk = fs.readFileSync(path.join(ROOT, 'sprites', 'catalog.json'), 'utf8');
+assert(catalogueOnDisk === JSON.stringify(indexed, null, 2) + '\n',
+  'catalogued headwords are current — run npm run art:words');
+assert(wordIndex.unmapped.length === 0, 'vocabulary art points only at catalogued files');
+const rows = loadRows(ROOT);
+const drawn = new Set(rows.map((r) => r.ko));
+const named = new Set();
+(indexed.assets || []).forEach((a) => (a.words || []).forEach((ko) => named.add(ko)));
+const unfindable = [...drawn].filter((ko) => !named.has(ko));
+assert(unfindable.length === 0, 'all ' + drawn.size + ' drawn headwords are findable by their own word'
+  + (unfindable.length ? ' — missing ' + unfindable.slice(0, 8).join(', ') : ''));
 
 console.log('\ntest_art_library: all passed');

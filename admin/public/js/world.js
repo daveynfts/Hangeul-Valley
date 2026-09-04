@@ -17,7 +17,9 @@
     selected: 'desk',
     quiz: null,
     qIndex: -1,
-    world: null
+    world: null,
+    // Korean headword -> sprite preview URL, built once from the art catalogue.
+    artByKo: null
   };
 
   function farmToMap(ox, oy) {
@@ -246,6 +248,7 @@
     body.innerHTML = rows.map(({ w, i }) => (
       '<tr data-i="' + i + '">' +
       '<td>' + (i + 1) + '</td>' +
+      wordArtCell(w.ko) +
       '<td><input class="form-input" data-f="ko" value="' + escapeAttr(w.ko) + '"></td>' +
       '<td><input class="form-input" data-f="en" value="' + escapeAttr(w.en) + '"></td>' +
       '<td><input class="form-input" data-f="hint" value="' + escapeAttr(w.hint || '') + '"></td>' +
@@ -319,6 +322,36 @@
     state.layout = layout.data.body;
     state.world = world.data.body;
     state.quiz = quiz ? quiz.data.body : null;
+    await loadArtIndex();
+  }
+
+  // The word table used to show only the `hint` emoji — which for the 840 TOPIK words is the
+  // stand-in the artwork replaced, so the table advertised exactly what is no longer used.
+  // The catalogue already records the headword each picture was drawn for, so one report is
+  // enough to put the real illustration beside the word.
+  async function loadArtIndex() {
+    if (state.artByKo) return;
+    try {
+      if (!window.AppState.art) await window.ArtView.load();
+      const map = {};
+      (window.AppState.art.assets || []).forEach((a) => {
+        // Normalised, because Hangul typed here and Hangul in the catalogue can be composed
+        // differently and still be the same word.
+        (a.words && a.words.length ? a.words : (a.wordKo ? [a.wordKo] : [])).forEach((ko) => {
+          map[String(ko).normalize('NFC')] = a.preview;
+        });
+      });
+      state.artByKo = map;
+    } catch (e) {
+      // A word table that loads is worth more than one that refuses to without pictures.
+      state.artByKo = {};
+    }
+  }
+
+  function wordArtCell(ko) {
+    const src = state.artByKo && state.artByKo[String(ko || '').normalize('NFC')];
+    if (!src) return '<td class="word-art-cell"><span class="word-art-none">—</span></td>';
+    return '<td class="word-art-cell"><img class="word-art" src="' + escapeAttr(src) + '" alt="" loading="lazy"></td>';
   }
 
   function paintUnitPicker() {

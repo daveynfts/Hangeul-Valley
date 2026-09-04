@@ -193,6 +193,24 @@ node -e "require('./docs/topik-art-manifest.json').retained.filter(e=>e.standIn)
 Replacing one later means editing that entry and re-running the apply script; nothing in the
 questions or the word list has to move.
 
+### Then make it findable
+
+`npm run art:words` writes onto every catalogued sprite the list of headwords that actually
+draw it, read from `VOCAB_ART_ROWS` — the same first-match lookup the game uses. Run it
+**after** `art:topik:apply`, which is what rewrites `js/vocabArtMore.js`.
+
+This is what the admin looks a word up in. Without it a picture is only findable under the one
+word it was registered as: the art library could not be searched in Korean at all, and the word
+table showed an empty art cell for 98 of Unit 11's 155 words while the game drew every one of
+them — the mapping is many-to-one and `wordKo` is one-to-one. `npm run art:words:check` and
+`tests/test_art_library.js` both fail if the index is stale, so the way to lose a drawing is no
+longer to simply not mention it.
+
+The apply script also files each TOPIK image under its manifest `category`, so the library
+shelves them as sixteen named groups rather than one pile of 778 headed by whichever gloss
+sorted first. A manifest entry with no category, or a catalogued image whose `wordKo` does not
+match its headword, fails the apply before anything is written.
+
 ---
 
 ## Which paper a question came from

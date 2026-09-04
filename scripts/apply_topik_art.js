@@ -43,6 +43,17 @@ function appendReviewedArtFingerprint(root, fingerprint) {
   return count;
 }
 
+// 'Society & everyday life' -> 'topik-society-and-everyday-life'. The '&' becomes a spelled
+// 'and' rather than vanishing, because the admin reads the key back as the shelf's heading
+// and a dropped ampersand cannot be told from a missing word: 'Health & the body' would
+// come back as 'Health the body' with nothing to say which one it had been.
+function topikFamily(category) {
+  const slug = String(category).toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  if (!slug) throw new Error('Unusable TOPIK category: ' + category);
+  return 'topik-' + slug;
+}
+
 function prepareTopikArt(root, options = {}) {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'docs/topik-art-manifest.json'), 'utf8'));
   const world = JSON.parse(fs.readFileSync(path.join(root, 'worlds/topik-2.json'), 'utf8'));
@@ -101,7 +112,27 @@ function prepareTopikArt(root, options = {}) {
       asset.status = 'shipped';
       asset.notes = 'Dedicated TOPIK illustration; individually reviewed at ' + outputHeight
         + ' px. Prompt and source in docs/topik-art-manifest.json.';
+      // The catalogue is what the admin art library reads, and for a while every one of
+      // these landed in a single `topik-vocabulary` family: 778 rows in one table, headed
+      // by whichever gloss happened to sort first. The manifest already knows which of the
+      // sixteen categories a word belongs to, so the family follows the category and the
+      // library gets sixteen named shelves instead of one unlabelled pile.
+      if (!entry.category) throw new Error('Manifest entry needs a category: ' + entry.ko);
+      asset.family = topikFamily(entry.category);
+      // Searching by the Korean word is the whole point of a vocabulary illustration,
+      // so refuse to ship one the registration forgot to name.
+      if (asset.wordKo !== entry.ko) {
+        throw new Error('Catalogued image must record its headword: ' + entry.ko
+          + ' (catalogue says ' + JSON.stringify(asset.wordKo || null) + ')');
+      }
+      // Where the picture actually shows up. Left empty, the admin's detail panel reports
+      // "Not referenced in-game" for art the vocabulary book draws on every card.
+      asset.usedBy = ['vocabulary-book', 'word-detail', 'farm'];
     }
+    // Which headwords draw the picture is deliberately not written here. It is derivable for
+    // the whole library from the runtime rows, and two scripts stamping one field is how the
+    // field starts disagreeing with itself — scripts/index_art_words.js owns it, and runs
+    // after this one because this one is what rewrites the rows it reads.
     return { ko: entry.ko, slug: path.posix.basename(file, '.png'),
       folder: file.split('/')[1], nameEn: words[entry.index].en, family: 'topik-vocabulary' };
   });

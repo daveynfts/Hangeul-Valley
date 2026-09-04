@@ -19,6 +19,8 @@
     "publish:prod": "node scripts/publish.js",
     "art:topik:apply": "node scripts/apply_topik_art.js",
     "art:topik:check": "node scripts/apply_topik_art.js --check",
+    "art:words": "node scripts/index_art_words.js",
+    "art:words:check": "node scripts/index_art_words.js --check",
     "test:topik-art": "node tests/test_topik_art.js"
   },
   "dependencies": {

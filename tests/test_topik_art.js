@@ -19,13 +19,14 @@ function fixture(run) {
   const manifest = {
     world: 'topik-2', outputHeight: 96,
     retained: [{ index: 0, ko: '사과', file: 'sprites/items/farm_apple.png', reviewed: true }],
-    entries: [{ index: 1, ko: '배', slug: 'test_pear', folder: 'items',
+    entries: [{ index: 1, ko: '배', slug: 'test_pear', folder: 'items', category: 'Food & eating',
       sourceImage: 'generated.png', rawReviewed: true, reviewed: true, status: 'reviewed' }]
   };
   write('docs/topik-art-manifest.json', manifest);
   write('worlds/topik-2.json', { level: { words: [{ ko: '사과', en: 'apple' }, { ko: '배', en: 'pear' }] } });
   write('sprites/catalog.json', { cacheKey: 'before', assets: [
-    { path: 'items/farm_apple.png', status: 'shipped' }, { path: 'items/test_pear.png', status: 'unused' }
+    { path: 'items/farm_apple.png', status: 'shipped' },
+    { path: 'items/test_pear.png', status: 'unused', wordKo: '배' }
   ] });
   write('js/vocabArt.js', "const VOCAB_ART_ROWS = [{ko:'사과',slug:'farm_apple',folder:'items'}, {ko:'배',slug:'farm_apple',folder:'items'}];\n");
   write('js/vocabArtUnit14.js', '// No extra fixture words.\n');
@@ -95,7 +96,15 @@ const failures = [
   ['foreign word borrowing a dedicated image', ({ write }) => {
     write('js/vocabArtMore.js', "VOCAB_ART_ROWS.push({ko:'다른 말',slug:'test_pear',folder:'items'});\n");
   }, /borrowed by/],
-  ['missing runtime cache anchor', ({ write }) => { write('js/systems/economy.js', '// Missing anchor\n'); }, /runtime art cache key/]
+  ['missing runtime cache anchor', ({ write }) => { write('js/systems/economy.js', '// Missing anchor\n'); }, /runtime art cache key/],
+  // The catalogue is the only index the admin art library has. A picture filed under no
+  // category joins a nameless pile, and one filed under no headword cannot be searched for
+  // in the language it illustrates — both are how a drawing gets lost while still shipping.
+  ['uncategorised illustration', ({ manifest }) => { delete manifest.entries[0].category; }, /needs a category/],
+  ['catalogued image that does not name its headword', ({ temp, write }) => {
+    const pack = JSON.parse(fs.readFileSync(path.join(temp, 'sprites/catalog.json'), 'utf8'));
+    delete pack.assets[1].wordKo; write('sprites/catalog.json', pack);
+  }, /must record its headword/]
 ];
 for (const [name, mutate, expected] of failures) {
   fixture(context => {

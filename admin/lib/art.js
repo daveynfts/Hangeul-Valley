@@ -37,6 +37,22 @@ function pngSize(full) {
   return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) };
 }
 
+// 'topik-society-and-everyday-life' -> 'TOPIK · Society & everyday life'; 'hud-icons' ->
+// 'Hud icons'. The catalogue writes the category into the family key, so reading it back is
+// all the labelling this needs — no second table to fall out of step with the first.
+// Sentence case, because that is the case the categories are written in.
+function familyLabel(key) {
+  const raw = String(key || '').trim();
+  if (!raw) return 'Unfiled';
+  const topik = /^topik-(.+)$/.exec(raw);
+  const words = (topik ? topik[1] : raw).split('-').filter(Boolean);
+  if (!words.length) return 'TOPIK';
+  const joined = words.map((w, i) => (w === 'and' && i ? '&' : w))
+    // 'unit10' is one slug token but two words to a reader.
+    .map((w) => w.replace(/^([a-z]+)(\d+)$/, '$1 $2')).join(' ');
+  return (topik ? 'TOPIK · ' : '') + joined.charAt(0).toUpperCase() + joined.slice(1);
+}
+
 function buildReport(rootDir) {
   const pack = loadCatalog(rootDir);
   const spriteRoot = path.join(rootDir, 'sprites');
@@ -65,6 +81,14 @@ function buildReport(rootDir) {
     assets.push({
       id: a.id,
       nameEn: a.nameEn || a.id,
+      // The Korean headword the picture was drawn for. The catalogue has carried this on
+      // 1045 of its rows all along; this report used to drop it, which is why the library
+      // could not be searched in the language its vocabulary art is about.
+      wordKo: a.wordKo || '',
+      // Every headword that draws this picture, which is not always just `wordKo`: a
+      // retained tile is registered under the farm word it was drawn for and lent to a
+      // TOPIK word besides.
+      words: Array.isArray(a.words) ? a.words.slice() : (a.wordKo ? [a.wordKo] : []),
       kind: a.kind || 'other',
       family: a.family || '',
       role: a.role || '',
@@ -90,7 +114,12 @@ function buildReport(rootDir) {
       families[key] = {
         family: key,
         kind: a.kind,
-        nameEn: a.nameEn.replace(/ — .*$/, ''),
+        // What the shelf is called. This used to be one member's name, which reads fine for
+        // a family of four and absurdly for one of 321 — the TOPIK shelf was headed "to be
+        // deserted, to have no custom; (of air) chilly". The family key is the honest label;
+        // `sampleName` keeps the old string for the families where it was a nice touch.
+        nameEn: familyLabel(key),
+        sampleName: a.nameEn.replace(/ — .*$/, ''),
         count: 0,
         shipped: 0,
         unused: 0,
@@ -105,8 +134,10 @@ function buildReport(rootDir) {
     if (a.status === 'unused') fam.unused++;
     if (a.status === 'missing') fam.missing++;
     if (a.role === 'ripe' || a.role === 'prop' || a.role === 'walk_down_0' || a.role === 'summer' || a.role === 'bloom' || a.role === 'ground-bloom' || a.role === 'open') {
+      // A crop family has one frame that says what the crop is; use it for the thumbnail.
+      // The heading stays the family's own name — the frame is a picture, not a title.
       fam.preview = a.preview;
-      fam.nameEn = a.nameEn.replace(/ — .*$/, '');
+      fam.sampleName = a.nameEn.replace(/ — .*$/, '');
     }
     fam.assets.push(a);
   });
