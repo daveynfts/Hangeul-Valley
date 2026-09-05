@@ -1,0 +1,22 @@
+# Line endings for the generated artifacts that are compared byte for byte.
+#
+# sprites/catalog.json is written by scripts/art_library.js (saveCatalog),
+# scripts/index_art_words.js and scripts/apply_topik_art.js, all of which emit
+# `JSON.stringify(pack, null, 2) + '\n'` — LF, on every platform. Two suites then
+# assert that the file on disk is exactly those bytes:
+#
+#   tests/test_art_library.js   catalogued headwords are current
+#   tests/test_topik_art.js     TOPIK art is out of sync
+#
+# Without this line a Windows checkout under core.autocrlf=true materialises the
+# file with CRLF, so both suites fail on a clean tree with a message that blames
+# the content — which is identical. Running the generator they recommend rewrites
+# the file as LF and the tests pass, until the next checkout restores CRLF and
+# they fail again. CI never sees it: ubuntu-latest checks out LF either way.
+#
+# js/vocabArtMore.js and js/systems/economy.js are written by the same script and
+# are deliberately absent here: apply_topik_art.js sniffs their existing newline
+# and preserves it, so they match whatever the checkout produced.
+#
+# A new generated file that gets byte-compared belongs on this list.
+sprites/catalog.json text eol=lf
