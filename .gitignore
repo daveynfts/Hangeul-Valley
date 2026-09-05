@@ -12,6 +12,13 @@ node_modules/
 # Kept on disk, out of the repo.
 .agents/
 
+# The same thing at the repo root: test logs, contact-sheet PNGs and intermediate
+# JSON left by art-pipeline runs. Twenty-six of them, ~5 MB, none ever committed —
+# they only made `git status` long enough that a real untracked file could hide in
+# it. Named artifacts under docs/ are deliberately NOT covered: 83 review PNGs are
+# tracked there on purpose.
+.codex-*
+
 # Editor / tooling
 .claude/
 _game_temp.js
