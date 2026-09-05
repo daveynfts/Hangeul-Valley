@@ -1665,7 +1665,7 @@ function buildShopGrid() {
   // Section 2: Vocabulary Level Packs
   const lvlHeader = document.createElement('div');
   lvlHeader.className = 'shop-section-header';
-  lvlHeader.style.cssText = 'grid-column: 1 / -1; font-family: "Press Start 2P", monospace; font-size: 13px; color: #1e3a8a; margin: 20px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(29, 78, 216, 0.35); display: flex; align-items: center; gap: 8px;';
+  lvlHeader.style.cssText = 'grid-column: 1 / -1; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 13px; color: #1e3a8a; margin: 20px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(29, 78, 216, 0.35); display: flex; align-items: center; gap: 8px;';
   lvlHeader.innerHTML = '📚 ' + vbEsc(hvT('ui.shop.packs.header'));
   grid.appendChild(lvlHeader);
 

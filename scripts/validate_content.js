@@ -2325,6 +2325,110 @@ const overlayIds = [
   }
 }());
 
+// ── The pixel face is asked for by variable, never by name ───────────────────
+// Press Start 2P's Google Fonts build ships latin, latin-ext, greek and cyrillic and no
+// vietnamese subset. It therefore draws đ and ư, which live in latin-ext, and refuses ắ, ự
+// and ấ, which do not. The result is never a missing word — it is a heading rendered half
+// in the pixel face and half in whatever the browser reaches for next, at whatever size
+// that face happens to be. No error is raised, and the English build looks perfect.
+//
+// The stylesheet moved 96 rules onto --font-pixel, but a CSS variable cannot reach an
+// inline style= attribute, and that is exactly where the shop's section headings, the three
+// unlock gates, the recipe book and the cooking panel still named the face by hand. Eleven
+// places, every one of them carrying data-i18n — so every one of them broken in Vietnamese,
+// and invisible to a sweep of the stylesheet.
+//
+// So the face is named twice in the whole game and nowhere else: once as the default of
+// --font-pixel, and once in HV_PIXEL_FONTS for Phaser, which draws to a canvas and cannot
+// read a CSS variable. Everything else asks through one of those two.
+(function checkPixelFontIsIndirect() {
+  const FACE = 'Press Start 2P';
+  const strip = (text) => text
+    .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' '))
+    .replace(/<!--[\s\S]*?-->/g, (m) => m.replace(/[^\n]/g, ' '))
+    .replace(/(^|[^:])\/\/[^\n]*/g, '$1');
+
+  // The two sanctioned declarations, blanked before the sweep so the sweep can be absolute.
+  const DECLARATIONS = [
+    [path.join('css', 'game.css'), /--font-pixel:\s*'Press Start 2P',\s*monospace;/],
+    [path.join('js', 'i18n.js'), /const HV_PIXEL_FONTS = \{[^}]*\};/]
+  ];
+
+  const files = ['index.html', path.join('css', 'game.css')]
+    .concat(JSON.parse(read(path.join('js', 'manifest.json')))
+      .map((rel) => rel.split('/').join(path.sep)))
+    .filter((rel) => fs.existsSync(path.join(ROOT, rel)));
+
+  const named = [];
+  files.forEach((rel) => {
+    let text = strip(read(rel));
+    DECLARATIONS.forEach((d) => { if (rel === d[0]) text = text.replace(d[1], ' '); });
+    text.split('\n').forEach((line, i) => {
+      if (line.indexOf(FACE) >= 0) named.push(rel + ':' + (i + 1));
+    });
+  });
+  check('nothing but --font-pixel and HV_PIXEL_FONTS names the pixel face',
+    named.length === 0,
+    named.slice(0, 8).join(', ')
+    + ' — in markup use font-family: var(--font-pixel) with'
+    + ' font-size-adjust: var(--font-pixel-adjust); on a Phaser canvas use hvPixelFont()');
+
+  // Both declarations are still there to be asked through. Deleting one would quietly empty
+  // the sweep above rather than fail it.
+  DECLARATIONS.forEach((d) => {
+    check(d[0] + ' still declares the pixel face', d[1].test(read(d[0])));
+  });
+
+  // The swap the whole scheme rests on. Without this rule Vietnamese keeps the English face
+  // and every check above still passes.
+  const css = read(path.join('css', 'game.css'));
+  const at = css.indexOf('html[lang="vi"]');
+  const viBlock = at < 0 ? '' : css.slice(at, css.indexOf('}', at));
+  check('css/game.css swaps the pixel face for Vietnamese',
+    /--font-pixel:\s*'VT323'/.test(viBlock)
+    && /--font-pixel-adjust:\s*0?\.\d+/.test(viBlock),
+    at < 0 ? 'no html[lang="vi"] rule at all' : viBlock.replace(/\s+/g, ' ').slice(0, 90));
+  check('index.html loads the face that swap asks for',
+    read('index.html').indexOf('family=VT323') >= 0);
+
+  // A language added without a pixel face inherits English's by omission — which is this
+  // whole section's bug again, one release later and with nothing to point at. Both tables
+  // must answer for every language the game offers, including English.
+  const i18nSrc = read(path.join('js', 'i18n.js'));
+  const table = (name) => {
+    const start = i18nSrc.indexOf('const ' + name + ' = {');
+    const end = i18nSrc.indexOf('};', start);
+    if (start < 0 || end < 0) return null;
+    try {
+      // eslint-disable-next-line no-eval
+      return eval('(' + i18nSrc.slice(start + ('const ' + name + ' = ').length, end + 1) + ')');
+    } catch (e) { return null; }
+  };
+  const rule = require(path.join(ROOT, 'js', 'i18n.js'));
+  ['HV_PIXEL_FONTS', 'HV_PIXEL_SCALE'].forEach((name) => {
+    const t = table(name);
+    check(name + ' is readable', !!t);
+    if (!t) return;
+    const gaps = rule.HV_LANGS.map((l) => l.code)
+      .filter((code) => !Object.prototype.hasOwnProperty.call(t, code));
+    check('every language has its own entry in ' + name, gaps.length === 0,
+      gaps.join(', ') + ' — a language with no entry silently inherits '
+      + rule.HV_DEFAULT_LANG + "'s face");
+  });
+
+  // Getting the face right is only half of it on a canvas. Phaser rasterises a Text when the
+  // object is constructed and never revisits it, and FarmScene builds its labels the moment
+  // js/boot.js runs — while a face served in unicode-range slices is still being fetched.
+  // Nothing re-reads the family later on its own, so the label keeps the fallback for the
+  // life of the scene, and only in Vietnamese does that fallback look wrong.
+  const boot = read(path.join('js', 'boot.js'));
+  check('js/boot.js redraws canvas text once the faces land',
+    boot.indexOf('document.fonts.load') >= 0
+    && boot.indexOf('updateText()') >= 0
+    && boot.indexOf('hvPixelFont()') >= 0,
+    'a scene that draws before the font arrives keeps the fallback permanently');
+}());
+
 // ── vercel.json says only what Vercel understands ───────────────────────────
 // JSON has no comments, and Vercel validates this file against a closed schema: an extra key
 // on a rewrite is not ignored, it fails the build. The failure surfaces nowhere useful — CI
