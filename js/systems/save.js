@@ -971,9 +971,30 @@ function escapeAuthText(s) {
   }[c]));
 }
 
+// The avatar URL is the one value on the auth chip that does not come from this project —
+// it is the `picture` claim of a Google ID token, and renderAuthUI writes it into an
+// attribute of a string it hands to innerHTML.
+//
+// The test used to be an unanchored regex. `^https://…googleusercontent.com/` matched a
+// *prefix*, so everything after the first slash was waved through, and
+//
+//   https://lh3.googleusercontent.com/a/x" onerror="…
+//
+// passed as a legitimate photo and then closed the src attribute early — the browser parsed
+// the tail as an onerror handler. Nothing about the value was checked past the host.
+//
+// Parsing is the fix rather than a longer regex. new URL() rejects what is not a URL at all
+// and percent-encodes the quotes and spaces that break out of an attribute, so `href` is the
+// same picture expressed in a form that cannot be anything else. The host is then compared as
+// a host — equal to googleusercontent.com or a subdomain of it — which also settles
+// evil-googleusercontent.com, a string the old character class was happy with.
 function safeGooglePhoto(url) {
-  const u = String(url || '');
-  return /^https:\/\/[\w.-]+\.googleusercontent\.com\//.test(u) ? u : '';
+  let u;
+  try { u = new URL(String(url || '')); } catch (_) { return ''; }
+  if (u.protocol !== 'https:') return '';
+  const host = u.hostname.toLowerCase();
+  if (host !== 'googleusercontent.com' && !host.endsWith('.googleusercontent.com')) return '';
+  return u.href;
 }
 
 // atob hands back one byte per character, but a JWT payload is UTF-8, so a display name
@@ -1001,8 +1022,11 @@ function renderAuthUI() {
     const el = document.getElementById(id);
     if (!el) return;
     if (signed) {
+      // Escaped as well as validated, for the same reason the name beside it is: this is a
+      // string being concatenated into HTML, and safeGooglePhoto having to be perfect was
+      // how the attribute got broken out of once already.
       const src = safeGooglePhoto(user.picture);
-      const photo = src ? '<img class="auth-photo" alt="" src="' + src + '">' : '';
+      const photo = src ? '<img class="auth-photo" alt="" src="' + escapeAuthText(src) + '">' : '';
       const label = escapeAuthText(user.email || user.name || 'Signed in');
       el.innerHTML = photo + '<span class="auth-name">' + label + '</span>' +
         '<button type="button" class="auth-out" onclick="signOutGoogle()">Sign out</button>';
