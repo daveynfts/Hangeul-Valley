@@ -20,6 +20,15 @@ const vm = require('vm');
 const { readGameSource } = require('../scripts/gameSource');
 
 const src = readGameSource();
+
+// The cloud-write block speaks through hvT now, so every sandbox below needs the real one
+// over the shipped English table — a stub would answer with the key, and the assertions here
+// are about what the player is told.
+const path = require('path');
+const i18n = require('../js/i18n.js');
+i18n.hvRegisterLocale('en',
+  require('../admin/lib/i18n.js').readChromeTable(path.join(__dirname, '..'), 'en'));
+const hvT = i18n.hvT;
 let passed = 0, failed = 0;
 function assert(cond, msg) {
   if (cond) { console.log('  [PASS] ' + msg); passed++; }
@@ -103,7 +112,7 @@ const cctx = {
   console,
   getGoogleToken: () => 'stub-token',
   setGoogleSession: () => {},
-  showToast: () => {},
+  showToast: () => {}, hvT,
   // Slower for the first call, so a naive implementation would let #2 overtake #1.
   cloudSaveRequest: async (method, body) => {
     inFlight++;
@@ -137,7 +146,7 @@ const push = vm.runInContext('pushCloudSave', cctx);
     console,
     getGoogleToken: () => 'stub-token',
     setGoogleSession: () => {},
-    showToast: () => {},
+    showToast: () => {}, hvT,
     cloudSaveRequest: async () => { throw new Error('offline'); }
   };
   vm.createContext(fctx);
@@ -150,7 +159,7 @@ const push = vm.runInContext('pushCloudSave', cctx);
     console,
     getGoogleToken: () => 'stub-token',
     setGoogleSession: () => {},
-    showToast: () => {},
+    showToast: () => {}, hvT,
     cloudSaveRequest: async () => ({ status: 409, json: { error: 'stale save' } })
   };
   vm.createContext(sctx);
@@ -169,7 +178,7 @@ function runSignedOut() {
     console,
     getGoogleToken: () => '',
     setGoogleSession: () => {},
-    showToast: () => {},
+    showToast: () => {}, hvT,
     cloudSaveRequest: async () => { throw new Error('must not be called when signed out'); }
   };
   vm.createContext(octx);

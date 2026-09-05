@@ -47,16 +47,31 @@ async function readBody(req) {
 }
 
 async function getObjectJson(client, Key) {
+  let text;
   try {
     const out = await client.send(new GetObjectCommand({ Bucket: r2Bucket(), Key }));
-    const text = await out.Body.transformToString();
-    return JSON.parse(text);
+    text = await out.Body.transformToString();
   } catch (e) {
     const name = e && e.name;
     if (name === 'NoSuchKey' || name === 'NotFound' || (e.$metadata && e.$metadata.httpStatusCode === 404)) {
       return null;
     }
     throw e;
+  }
+  // An object that is there but does not parse counts as no object, not as a failed request.
+  //
+  // It used to throw, and the throw reached the handler's catch and came back as a 500. That
+  // is the worst possible answer here, because the GET is what runs at sign-in: one truncated
+  // or half-written save and the account could never sign in again — and never overwrite the
+  // bad copy either, because the write it needed was on the other side of the read that kept
+  // failing. Returning null lets the client sign in and push its own save over the top, which
+  // is the only recovery there is. api/leaderboard.js already treats its rows this way.
+  try {
+    return JSON.parse(text);
+  } catch (e) {
+    console.error('[save] unreadable object at', Key, '-', e && e.message,
+      '- treating as absent so the account can recover');
+    return null;
   }
 }
 
@@ -78,14 +93,29 @@ module.exports = async (req, res) => {
       res.status(503).json({ error: 'sign in not configured' });
       return;
     }
-    throw e;
+    // Anything else here is a failure to reach Google, not a failure of the save. It used to
+    // be rethrown from outside the try below, so it escaped the handler entirely: the platform
+    // turned it into a 500 with nothing in the log to say why, and the client read that as
+    // "the save is broken" rather than "try again". 502 says which side it was.
+    console.error('[save] token check failed:', e && e.name, e && e.message);
+    res.status(502).json({ error: 'could not reach the sign-in service' });
+    return;
   }
   if (!user) {
     res.status(401).json({ error: 'sign in required' });
     return;
   }
 
-  const Key = saveKey(user.sub);
+  // saveKey throws on an id that sanitises to nothing. That cannot come from a verified
+  // Google token, but it sat outside the try below where a throw would have been a bare 500.
+  let Key;
+  try {
+    Key = saveKey(user.sub);
+  } catch (e) {
+    console.error('[save] unusable account id:', e && e.message);
+    res.status(400).json({ error: 'unusable account id' });
+    return;
+  }
 
   try {
     if (req.method === 'GET') {

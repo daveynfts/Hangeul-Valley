@@ -259,13 +259,15 @@ function expandInventoryCapacity() {
   inventoryState = inventoryState || {};
   inventoryState.maxSlots = typeof inventoryState.maxSlots === 'number' ? inventoryState.maxSlots : 20;
   if (!spendCoins(cost)) {
-    if (typeof showToast === 'function') showToast(`Need ${cost} Coins 🪙 to expand inventory capacity!`);
+    if (typeof showToast === 'function') showToast(hvT('ui.inv.expand.need', { n: cost }));
     return false;
   }
   inventoryState.maxSlots += 5;
   if (typeof persistSave === 'function') persistSave();
   if (typeof renderInventoryGrid === 'function') renderInventoryGrid();
-  if (typeof showToast === 'function') showToast(`🎒 Capacity expanded +5 slots! Total: ${inventoryState.maxSlots} slots.`);
+  if (typeof showToast === 'function') {
+    showToast('🎒 ' + hvT('ui.inv.expand.done', { n: 5, total: inventoryState.maxSlots }));
+  }
   return true;
 }
 
@@ -802,7 +804,7 @@ async function loadSave(){
   console.log('[Save] No save found – fresh start.');
 }
 
-let googleAuth = { clientId: '', token: '', user: null, ready: false };
+let googleAuth = { clientId: '', token: '', user: null, ready: false, exp: 0 };
 
 function peekLocalSave() {
   try { return JSON.parse(localStorage.getItem('hv_save_v2') || 'null'); } catch { return null; }
@@ -816,21 +818,101 @@ function getGoogleToken() {
 function setGoogleSession(token, user) {
   googleAuth.token = token || '';
   googleAuth.user = user || null;
+  googleAuth.exp = token ? tokenExpiry(token) : 0;
   try {
     if (token) sessionStorage.setItem('hv_google_token', token);
     else sessionStorage.removeItem('hv_google_token');
     if (user) localStorage.setItem('hv_google_user', JSON.stringify(user));
     else localStorage.removeItem('hv_google_user');
   } catch {}
+  if (token) _cloudLastError = '';
   renderAuthUI();
+  // A fresh token means whatever was waiting on the old one can go now.
+  if (token && typeof _resolveRenew === 'function') { const f = _resolveRenew; _resolveRenew = null; f(true); }
+}
+
+// ── Token expiry ─────────────────────────────────────────────────────────────
+//
+// A Google ID token is good for an hour and there is no quiet way to extend one. The old
+// code found out the way you find out about a wall: it sent the request anyway, got a 401,
+// and signed the player out mid-session. The expiry is in the token itself, so it can be
+// read once and honoured before a doomed request is ever built.
+//
+// The margin is a minute — enough that a request started just inside the window still
+// arrives with a token the server will accept.
+const TOKEN_MARGIN_MS = 60 * 1000;
+
+function tokenExpiry(token) {
+  try {
+    const exp = decodeJwtPayload(token).exp;
+    return (typeof exp === 'number' && isFinite(exp)) ? exp * 1000 : 0;
+  } catch { return 0; }
+}
+
+/** False once the token is inside its last minute. An unreadable exp is treated as fresh:
+ *  guessing it is expired would sign out a session that is very likely still good, and the
+ *  server's 401 remains the backstop. */
+function googleTokenIsFresh() {
+  const exp = googleAuth.exp || tokenExpiry(getGoogleToken());
+  if (!exp) return true;
+  return Date.now() < exp - TOKEN_MARGIN_MS;
+}
+
+// One renewal at a time, and never one that hangs. google.accounts.id.prompt() asks Google
+// to re-issue silently; whether it can depends on the browser's One Tap rules, so this
+// resolves false rather than waiting on something that may never come.
+const RENEW_TIMEOUT_MS = 8000;
+let _renewInFlight = null;
+let _resolveRenew = null;
+
+function renewGoogleToken() {
+  if (_renewInFlight) return _renewInFlight;
+  const gis = (typeof window !== 'undefined' && window.google
+    && google.accounts && google.accounts.id) || null;
+  if (!gis || typeof gis.prompt !== 'function') return Promise.resolve(false);
+  _renewInFlight = new Promise((resolve) => {
+    let done = false;
+    const finish = (ok) => {
+      if (done) return;
+      done = true;
+      _resolveRenew = null;
+      _renewInFlight = null;
+      resolve(!!ok);
+    };
+    // onGoogleCredential calls setGoogleSession, which calls this when a token arrives.
+    _resolveRenew = finish;
+    setTimeout(() => finish(false), RENEW_TIMEOUT_MS);
+    try {
+      // A notification that the prompt was not displayed is an answer, not an error.
+      gis.prompt((n) => {
+        if (!n) return;
+        const skipped = (typeof n.isNotDisplayed === 'function' && n.isNotDisplayed())
+          || (typeof n.isSkippedMoment === 'function' && n.isSkippedMoment());
+        if (skipped) finish(false);
+      });
+    } catch (e) {
+      console.warn('Could not ask Google for a fresh token', e);
+      finish(false);
+    }
+  });
+  return _renewInFlight;
 }
 
 // A hung request must not wedge the Save button, which now awaits this.
 const CLOUD_TIMEOUT_MS = 15000;
 
 async function cloudSaveRequest(method, body) {
-  const token = getGoogleToken();
+  let token = getGoogleToken();
   if (!token) return { status: 401, json: null };
+  // Spend the last minute of a token asking for a new one rather than on a request that is
+  // already refused. If Google will not re-issue quietly, the 401 below is the honest answer
+  // and the caller says so — which is better than sending it and being told the same thing
+  // a round trip later.
+  if (!googleTokenIsFresh()) {
+    const renewed = await renewGoogleToken();
+    token = getGoogleToken();
+    if (!renewed || !token || !googleTokenIsFresh()) return { status: 401, json: null, expired: true };
+  }
   const opts = {
     method,
     headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }
@@ -875,7 +957,7 @@ function pushCloudSave(data) {
       const { status } = await cloudSaveRequest('PUT', payload);
       if (status === 401) {
         setGoogleSession('', null);
-        if (typeof showToast === 'function') showToast('Sign in again to keep cloud save.');
+        if (typeof showToast === 'function') showToast(hvT('ui.cloud.signInAgain'));
         return { ok: false, status, reason: 'signed-out' };
       }
       if (status === 409) {
@@ -884,7 +966,7 @@ function pushCloudSave(data) {
         // from under the player either; syncCloudSave() reconciles on the next load.
         _cloudLastError = 'cloud has newer progress';
         if (typeof showToast === 'function') {
-          showToast('☁ Another device has newer progress — not overwriting it.', 4200);
+          showToast('☁ ' + hvT('ui.cloud.newerElsewhere'), 4200);
         }
         return { ok: false, status, reason: _cloudLastError };
       }
@@ -927,16 +1009,64 @@ function saveProgressWeight(s) {
     + num(rank.asked) + num(rank.sessions) + num(rank.xp);
 }
 
+/**
+ * Read the cloud copy and reconcile it with this device's.
+ *
+ * This is the request that runs the moment someone signs in, and it used to end in one of
+ * three bare `return`s — 401, any other non-200, and a thrown fetch. So a 500 from the save
+ * endpoint looked, from the player's side, exactly like nothing: the toast said "syncing
+ * save…" and then the session went on with no cloud save, no message and no retry, because
+ * nothing calls this again until the next page load. The write path had said all of this out
+ * loud for a while; the read path had not.
+ */
+// Two more goes at a failure that is probably a blip, then stop. Nothing else calls
+// syncCloudSave until the next page load, so giving up on the first hiccup meant no cloud
+// save for the rest of the session; retrying for ever would mean a dead endpoint pestering
+// the player instead. Held in a variable so tests can run the loop without the wait.
+let _cloudSleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const CLOUD_RETRY_DELAYS = [2000, 6000];
+
+/** GET the cloud copy, retrying what is worth retrying. Returns the remote save, or a
+ *  reason nobody has to guess at. */
+async function fetchCloudSave() {
+  for (let attempt = 0; ; attempt++) {
+    let status;
+    let json;
+    try {
+      const r = await cloudSaveRequest('GET');
+      status = r.status;
+      json = r.json;
+    } catch (e) {
+      const why = (e && e.name === 'AbortError') ? 'timed out' : 'network error';
+      if (attempt < CLOUD_RETRY_DELAYS.length) { await _cloudSleep(CLOUD_RETRY_DELAYS[attempt]); continue; }
+      return { ok: false, why, toast: 'ui.cloud.offline' };
+    }
+    if (status === 200) return { ok: true, json };
+    // 401 and 503 are settled answers: the token is no good, or the feature is off. Asking
+    // again changes neither, and the retry would only delay telling the player.
+    if (status === 401) return { ok: false, why: 'signed out', signedOut: true, toast: 'ui.cloud.signInAgain' };
+    if (status === 503) return { ok: false, why: 'cloud save unavailable', toast: 'ui.cloud.unavailable' };
+    if (attempt < CLOUD_RETRY_DELAYS.length) { await _cloudSleep(CLOUD_RETRY_DELAYS[attempt]); continue; }
+    return { ok: false, why: 'HTTP ' + status, status, json, toast: 'ui.cloud.syncFailed' };
+  }
+}
+
 async function syncCloudSave() {
   if (!getGoogleToken()) return;
-  let remote;
-  try {
-    const { status, json } = await cloudSaveRequest('GET');
-    if (status === 401) { setGoogleSession('', null); return; }
-    if (status !== 200) return;
-    remote = json && json.data;
-    if (json && json.user) googleAuth.user = json.user;
-  } catch { return; }
+  const got = await fetchCloudSave();
+  if (!got.ok) {
+    _cloudLastError = got.why;
+    if (got.signedOut) setGoogleSession('', null);
+    console.warn('Cloud sync failed:', got.why, got.json || '');
+    if (typeof showToast === 'function') showToast(hvT(got.toast), got.signedOut ? 5000 : 6000);
+    renderAuthUI();
+    return;
+  }
+  const json = got.json;
+  const remote = json && json.data;
+  if (json && json.user) googleAuth.user = json.user;
+  _cloudLastError = '';
+  renderAuthUI();
   const local = peekLocalSave();
   const remoteAt = (remote && remote.updatedAt) || 0;
   const localAt = (local && local.updatedAt) || 0;
@@ -953,8 +1083,8 @@ async function syncCloudSave() {
       // Said differently when this device's copy is being discarded, because it is — someone
       // who had played here as a guest deserves to be told where it went.
       if (typeof showToast === 'function') {
-        if (pullBecauseEmptier) showToast('☁ Cloud progress restored — this browser had none of its own.', 5000);
-        else showToast('☁ Cloud save loaded');
+        if (pullBecauseEmptier) showToast('☁ ' + hvT('ui.cloud.restored'), 5000);
+        else showToast('☁ ' + hvT('ui.cloud.loaded'));
       }
       if (typeof updateGoldHUD === 'function') updateGoldHUD();
       if (typeof updateRankHUD === 'function') updateRankHUD();
@@ -1030,9 +1160,17 @@ function renderAuthUI() {
       // how the attribute got broken out of once already.
       const src = safeGooglePhoto(user.picture);
       const photo = src ? '<img class="auth-photo" alt="" src="' + escapeAuthText(src) + '">' : '';
-      const label = escapeAuthText(user.email || user.name || 'Signed in');
-      el.innerHTML = photo + '<span class="auth-name">' + label + '</span>' +
-        '<button type="button" class="auth-out" onclick="signOutGoogle()">Sign out</button>';
+      const label = escapeAuthText(user.email || user.name || hvT('ui.cloud.signedInShort'));
+      // Whether the last sync worked. It was recorded and never shown, so "signed in" and
+      // "signed in but nothing has reached the cloud for an hour" looked identical — which
+      // is the same silence this whole path had, one layer up.
+      const warn = _cloudLastError
+        ? '<span class="auth-sync-warn" title="' + escapeAuthText(_cloudLastError) + '">⚠ '
+          + escapeAuthText(hvT('ui.cloud.notSynced')) + '</span>'
+        : '';
+      el.innerHTML = photo + '<span class="auth-name">' + label + '</span>' + warn +
+        '<button type="button" class="auth-out" onclick="signOutGoogle()">'
+        + escapeAuthText(hvT('ui.cloud.signOut')) + '</button>';
     } else {
       el.innerHTML = '';
     }
@@ -1053,7 +1191,7 @@ function onGoogleCredential(resp) {
     user = { email: payload.email || '', name: payload.name || '', picture: payload.picture || '', sub: payload.sub };
   } catch {}
   setGoogleSession(token, user);
-  if (typeof showToast === 'function') showToast('Signed in — syncing save…');
+  if (typeof showToast === 'function') showToast(hvT('ui.cloud.signedIn'));
   syncCloudSave();
 }
 
@@ -1062,7 +1200,7 @@ function signOutGoogle() {
   try {
     if (window.google && google.accounts && google.accounts.id) google.accounts.id.disableAutoSelect();
   } catch {}
-  if (typeof showToast === 'function') showToast('Signed out. Progress stays on this device.');
+  if (typeof showToast === 'function') showToast(hvT('ui.cloud.signedOut'));
 }
 
 async function initGoogleAuth() {
