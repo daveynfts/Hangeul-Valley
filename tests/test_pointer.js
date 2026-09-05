@@ -26,7 +26,12 @@ function assert(cond, msg) {
   else { console.error('  [FAIL] ' + msg); failed++; }
 }
 
-const ctx = { console };
+// The hints come from the catalogue now, so the context gets the real hvT over the real
+// js/locales/en.js. A stub would answer with the key and the assertions below would be
+// checking that a lookup happened rather than what it says.
+const i18n = require('../js/i18n.js');
+i18n.hvRegisterLocale('en', require('../admin/lib/i18n.js').readChromeTable(ROOT, 'en'));
+const ctx = { console, hvT: i18n.hvT };
 vm.createContext(ctx);
 vm.runInContext(pointerSrc, ctx);
 const R = (expr) => vm.runInContext(expr, ctx);
@@ -34,8 +39,8 @@ const R = (expr) => vm.runInContext(expr, ctx);
 assert(typeof R('pickInteractableAt') === 'function', 'pickInteractableAt is shipped');
 assert(typeof R('pointerWorldPlan') === 'function', 'pointerWorldPlan is shipped');
 assert(typeof R('nearestInRange') === 'function', 'nearestInRange is shipped');
-assert(R('WORLD_CLICK_HINT') === 'Click', 'WORLD_CLICK_HINT is Click');
-assert(R('WORLD_TOO_FAR_HINT') === 'Walk closer', 'too-far hint is Walk closer');
+assert(R('worldClickHint()') === 'Click', 'worldClickHint() is Click');
+assert(R('worldTooFarHint()') === 'Walk closer', 'too-far hint is Walk closer');
 
 const ripe = { id: 'plot:0', kind: 'plot-ripe', x: 160, y: 200, hitR: 34, useR: 72 };
 const empty = { id: 'plot:1', kind: 'plot-empty', x: 240, y: 200, hitR: 34, useR: 72 };

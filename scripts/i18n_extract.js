@@ -32,9 +32,13 @@ const ROOT = path.join(__dirname, '..');
 const HTML_REL = 'index.html';
 const CHECK = process.argv.indexOf('--check') >= 0;
 
-// Elements whose text is not language: script, style, and the two pixel-font displays whose
-// content is a number the game rewrites every frame.
-const SKIP_ELEMENTS = ['script', 'style', 'svg', 'canvas'];
+// Elements that carry no language at all — their contents are code, not words.
+const SKIP_ELEMENTS = ['script', 'style'];
+// Elements whose *text* is not language — a drawing, or a number the game rewrites every
+// frame — but whose attributes still are. A canvas has no text by definition, so skipping it
+// outright also skipped its aria-label, which is the only thing a screen reader is given for
+// it: the waveform read out as "Waveform — click to seek" in English under every locale.
+const SKIP_TEXT_ELEMENTS = ['svg', 'canvas'];
 const VOID_ELEMENTS = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link',
   'meta', 'param', 'source', 'track', 'wbr'];
 // Attributes worth translating. `value` is deliberately absent: every value= in this file is
@@ -138,13 +142,17 @@ function run() {
     const tag = parseTag(raw);
     if (!tag) return;
     if (tag.closing) {
-      if (SKIP_ELEMENTS.indexOf(tag.name) >= 0 && skipDepth > 0) skipDepth--;
+      if ((SKIP_ELEMENTS.indexOf(tag.name) >= 0 || SKIP_TEXT_ELEMENTS.indexOf(tag.name) >= 0)
+        && skipDepth > 0) skipDepth--;
       for (let i = stack.length - 1; i >= 0; i--) {
         if (stack[i].name === tag.name) { stack.length = i; break; }
       }
       return;
     }
     if (SKIP_ELEMENTS.indexOf(tag.name) >= 0) { if (!tag.selfClosing) skipDepth++; return; }
+    // Text-only skip: the element is still collected so ATTRS are read off it, but its
+    // contents never reach `texts`, so it can never pick up a data-i18n of its own.
+    const textSkipped = SKIP_TEXT_ELEMENTS.indexOf(tag.name) >= 0;
     // Where a new attribute goes: immediately after the last one, before the '>' or '/>'
     // that closes the opening tag. Computed here, from this tag's own text, rather than by
     // searching backwards for a '>' at patch time — a backwards search from a tag that does
@@ -169,6 +177,7 @@ function run() {
       if (ICON_ATTR.test(raw)) el.parent.iconChildren++;
     }
     elements.push(el);
+    if (textSkipped) { if (!tag.selfClosing) skipDepth++; return; }
     if (!tag.selfClosing && skipDepth === 0) stack.push(el);
   });
 
@@ -280,9 +289,39 @@ function scanCodeKeys() {
     const full = path.join(ROOT, rel.split('/').join(path.sep));
     if (!fs.existsSync(full)) return;
     const src = fs.readFileSync(full, 'utf8');
-    for (const m of src.matchAll(/\bhvT\(\s*['"]([^'"]+)['"]/g)) keys.add(m[1]);
+    for (const m of src.matchAll(/\bhvT\(/g)) keyArg(src, m.index + m[0].length).forEach((k) => keys.add(k));
   });
   return [...keys].sort();
+}
+
+/**
+ * The keys in one hvT() call's first argument.
+ *
+ * A regex for a quote straight after the paren finds `hvT('a.b')` and nothing else — so
+ * `hvT(n === 1 ? 'a.one' : 'a')`, which is how the plural forms are written, went unseen and
+ * both of its keys shipped with no English behind them and nothing to say so. Reading the
+ * argument as a span and taking every key-shaped literal in it covers the ternary without
+ * pretending to parse JavaScript.
+ */
+const KEY_SHAPE = /^[a-z][A-Za-z0-9]*(\.[A-Za-z0-9]+)+$/;
+function keyArg(src, from) {
+  let depth = 0;
+  let i = from;
+  for (; i < src.length; i++) {
+    const c = src[i];
+    if (c === '(' || c === '[' || c === '{') depth++;
+    else if (c === ')' && depth === 0) break;
+    else if (c === ')' || c === ']' || c === '}') depth--;
+    else if (c === ',' && depth === 0) break;
+    else if (c === '\n' && depth === 0 && i - from > 400) break;
+  }
+  const arg = src.slice(from, i);
+  const out = [];
+  for (const m of arg.matchAll(/'([^'\n]*)'|"([^"\n]*)"/g)) {
+    const lit = m[1] !== undefined ? m[1] : m[2];
+    if (KEY_SHAPE.test(lit)) out.push(lit);
+  }
+  return out;
 }
 
 // Chrome is not curriculum: a bare number, a percent readout or an emoji on its own is not

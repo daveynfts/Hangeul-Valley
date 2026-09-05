@@ -15,7 +15,9 @@ window.openFishAlbum = function(){
       <div class="fish-card-icon">${f.hint}</div>
       <div class="fish-card-ko">${unlocked ? f.ko : '???'}</div>
       <div class="fish-card-en">${unlocked ? tr(f, 'en') : hvT('ui.fish.locked')}</div>
-      <div class="fish-card-catches">${unlocked ? `Caught ×${count}` : '🔒 Uncaught'}</div>`;
+      <div class="fish-card-catches">${unlocked
+        ? hvT('ui.fish.caught', { n: count })
+        : '🔒 ' + hvT('ui.fish.uncaught')}</div>`;
     grid.appendChild(card);
   });
 
@@ -41,8 +43,8 @@ window.openMemoryGame = function(){
   memoryOpen = true;
   const overlay = document.getElementById('memory-overlay');
   const grid = document.getElementById('memory-grid');
-  document.getElementById('memory-matches').textContent = 'Matches: 0/8';
-  document.getElementById('memory-flips').textContent = 'Flips: 0';
+  document.getElementById('memory-matches').textContent = hvT('ui.memory.matches.fmt', { n: 0, total: 8 });
+  document.getElementById('memory-flips').textContent = hvT('ui.memory.flips.fmt', { n: 0 });
   grid.innerHTML = '';
   flippedIndices = []; matchedPairs = 0; memoryFlips = 0;
   
@@ -87,7 +89,7 @@ window.onMemoryCardClick = function(idx, cardEl){
   
   if(flippedIndices.length === 2){
     memoryFlips++;
-    document.getElementById('memory-flips').textContent = `Flips: ${memoryFlips}`;
+    document.getElementById('memory-flips').textContent = hvT('ui.memory.flips.fmt', { n: memoryFlips });
     
     const i1 = flippedIndices[0], i2 = flippedIndices[1];
     const c1 = memoryCards[i1], c2 = memoryCards[i2];
@@ -100,7 +102,8 @@ window.onMemoryCardClick = function(idx, cardEl){
         document.getElementById('memory-grid').children[i2].classList.add('matched');
         flippedIndices = [];
         matchedPairs++;
-        document.getElementById('memory-matches').textContent = `Matches: ${matchedPairs}/8`;
+        document.getElementById('memory-matches').textContent =
+          hvT('ui.memory.matches.fmt', { n: matchedPairs, total: 8 });
         
         if(matchedPairs === 8){
            const reward = Math.max(15, 60 - memoryFlips);
@@ -134,16 +137,16 @@ window.closeMemoryGame = function(){
 
 // ══════════════ TROPHIES ═════════════════════════════════════════════════════
 const TROPHIES_DB = [
-  { id: 'bronze_apple', name: 'Rookie (신입)', icon: '🥉', reqHarvests: 10, cost: 50 },
-  { id: 'silver_spade', name: 'Farmer (농부)', icon: '🥈', reqHarvests: 50, cost: 300 },
-  { id: 'gold_tractor', name: 'Expert (전문가)', icon: '🥇', reqHarvests: 150, cost: 1000 },
-  { id: 'diamond_crown', name: 'Master (달인)', icon: '💎', reqHarvests: 500, cost: 5000 },
-  { id: 'master_scholar', name: 'Legend (전설)', icon: '👑', reqHarvests: 1000, cost: 20000 },
+  { id: 'bronze_apple', name: 'Rookie (신입)', nameVi: 'Tân binh (신입)', icon: '🥉', reqHarvests: 10, cost: 50 },
+  { id: 'silver_spade', name: 'Farmer (농부)', nameVi: 'Nhà nông (농부)', icon: '🥈', reqHarvests: 50, cost: 300 },
+  { id: 'gold_tractor', name: 'Expert (전문가)', nameVi: 'Chuyên gia (전문가)', icon: '🥇', reqHarvests: 150, cost: 1000 },
+  { id: 'diamond_crown', name: 'Master (달인)', nameVi: 'Cao thủ (달인)', icon: '💎', reqHarvests: 500, cost: 5000 },
+  { id: 'master_scholar', name: 'Legend (전설)', nameVi: 'Huyền thoại (전설)', icon: '👑', reqHarvests: 1000, cost: 20000 },
   // No hardcoded recipe count. It used to carry `reqRecipes: 10`, which the trophy card
   // preferred over COOKING_RECIPES.length while the actual unlock below compared against the
   // real length — so once the two honey recipes brought the total to 12, the card read 10/10
   // and showed the requirement as met on a trophy that would never unlock.
-  { id: 'master_chef', name: 'Master Chef (요리 왕)', icon: '👨‍🍳', desc: 'Cook every recipe at least once', type: 'cooking', cost: 0 }
+  { id: 'master_chef', name: 'Master Chef (요리 왕)', nameVi: 'Đầu bếp bậc thầy (요리 왕)', icon: '👨‍🍳', desc: 'Cook every recipe at least once', descriptionVi: 'Nấu mỗi món ít nhất một lần', type: 'cooking', cost: 0 }
 ];
 
 window.getTotalHarvests = function() {
@@ -184,10 +187,10 @@ window.renderTrophies = function() {
       // in checkMasterChefTrophy cannot disagree the way they did.
       const targetCount = (typeof COOKING_RECIPES !== 'undefined' ? COOKING_RECIPES.length : 0);
       reqMet = totalCooked >= targetCount;
-      reqText = `<span style="font-size:12px;color:#5b3412;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Cooking</span><br/>${totalCooked}/${targetCount}`;
+      reqText = `<span style="font-size:12px;color:#5b3412;font-family:'Noto Sans KR',sans-serif;font-weight:700;">${hvT('ui.trophy.req.cooking')}</span><br/>${totalCooked}/${targetCount}`;
     } else {
       reqMet = totalHarvests >= t.reqHarvests;
-      reqText = `<span style="font-size:12px;color:#5b3412;font-family:'Noto Sans KR',sans-serif;font-weight:700;">Harvests</span><br/>${totalHarvests}/${t.reqHarvests}`;
+      reqText = `<span style="font-size:12px;color:#5b3412;font-family:'Noto Sans KR',sans-serif;font-weight:700;">${hvT('ui.trophy.req.harvests')}</span><br/>${totalHarvests}/${t.reqHarvests}`;
     }
 
     const canAfford = gold >= t.cost;
@@ -202,13 +205,14 @@ window.renderTrophies = function() {
     div.innerHTML = `
       <div>
         <div class="trophy-icon">${art}</div>
-        <div class="trophy-name">${t.name}</div>
+        <div class="trophy-name">${tr(t, 'name')}</div>
         <div class="trophy-req">${reqText}</div>
       </div>
       ${isBought ?
-        '<div class="trophy-unlocked-badge">Unlocked</div>' :
+        '<div class="trophy-unlocked-badge">' + hvT('ui.trophy.unlocked') + '</div>' :
         '<button class="trophy-buy-btn" ' + ((!reqMet || (!canAfford && t.cost > 0)) ? 'disabled' : '') + '>' +
-           (!reqMet ? 'Locked' : (t.cost > 0 ? ('Buy ' + coin + t.cost) : 'Claim')) +
+           (!reqMet ? hvT('ui.quest.locked')
+             : (t.cost > 0 ? hvT('ui.trophy.buy') + ' ' + coin + t.cost : hvT('ui.trophy.claim'))) +
          '</button>'
       }
     `;
@@ -218,7 +222,7 @@ window.renderTrophies = function() {
          if (t.cost > 0 && !spendCoins(t.cost)) return;
          unlockedTrophies.push(t.id);
          window.renderTrophies();
-         showToast('🏆 Congratulations! You earned the ' + t.name + ' trophy!');
+         showToast('🏆 ' + hvT('ui.trophy.won', { name: tr(t, 'name') }));
       });
     }
     grid.appendChild(div);
@@ -236,10 +240,10 @@ if(trophyCloseBtn) trophyCloseBtn.addEventListener('click', window.closeTrophies
 var COOKING_RECIPES = [
   {
     id: 'kimchi',
-    nameEn: 'Kimchi',
+    nameEn: 'Kimchi', nameVi: 'Kimchi',
     nameKo: '김치',
     icon: '🥬',
-    description: 'Traditional spicy fermented Napa cabbage with chili and garlic.',
+    description: 'Traditional spicy fermented Napa cabbage with chili and garlic.', descriptionVi: 'Cải thảo muối lên men cay truyền thống với ớt và tỏi.',
     ingredients: [
       { itemId: 'cabbage', count: 1 },
       { itemId: 'chili', count: 1 },
@@ -250,10 +254,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'radish_rice',
-    nameEn: 'Radish Rice',
+    nameEn: 'Radish Rice', nameVi: 'Cơm củ cải',
     nameKo: '무밥',
     icon: '🍚',
-    description: 'Comforting Korean steamed rice infused with sweet sliced radish.',
+    description: 'Comforting Korean steamed rice infused with sweet sliced radish.', descriptionVi: 'Cơm hấp Hàn Quốc ấm bụng, trộn củ cải thái ngọt.',
     ingredients: [
       { itemId: 'rice', count: 1 },
       { itemId: 'radish', count: 1 }
@@ -263,10 +267,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'roasted_corn',
-    nameEn: 'Roasted Corn',
+    nameEn: 'Roasted Corn', nameVi: 'Ngô nướng',
     nameKo: '옥수수구이',
     icon: '🌽',
-    description: 'Sweet juicy corn on the cob roasted over open farm embers.',
+    description: 'Sweet juicy corn on the cob roasted over open farm embers.', descriptionVi: 'Bắp ngô ngọt mọng nướng trên than hồng của nông trại.',
     ingredients: [
       { itemId: 'corn', count: 2 }
     ],
@@ -275,10 +279,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'strawberry_jam',
-    nameEn: 'Strawberry Jam',
+    nameEn: 'Strawberry Jam', nameVi: 'Mứt dâu',
     nameKo: '딸기잼',
     icon: '🍓',
-    description: 'Sweet homemade jam boiled down from fresh garden strawberries.',
+    description: 'Sweet homemade jam boiled down from fresh garden strawberries.', descriptionVi: 'Mứt nhà làm ngọt lịm, sên từ dâu tây tươi hái trong vườn.',
     ingredients: [
       { itemId: 'strawberry', count: 2 }
     ],
@@ -287,10 +291,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'gimbap',
-    nameEn: 'Gimbap',
+    nameEn: 'Gimbap', nameVi: 'Gimbap',
     nameKo: '김밥',
     icon: '🍱',
-    description: 'Savory seaweed rice roll filled with carrots and pickled radish.',
+    description: 'Savory seaweed rice roll filled with carrots and pickled radish.', descriptionVi: 'Cơm cuộn rong biển đậm đà với cà rốt và củ cải muối.',
     ingredients: [
       { itemId: 'rice', count: 1 },
       { itemId: 'carrot', count: 1 },
@@ -301,10 +305,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'tteokbokki',
-    nameEn: 'Tteokbokki',
+    nameEn: 'Tteokbokki', nameVi: 'Tteokbokki',
     nameKo: '떡볶이',
     icon: '🍢',
-    description: 'Chewy rice cakes simmered in spicy gochujang and green onion.',
+    description: 'Chewy rice cakes simmered in spicy gochujang and green onion.', descriptionVi: 'Bánh gạo dai om trong sốt gochujang cay cùng hành lá.',
     ingredients: [
       { itemId: 'rice', count: 2 },
       { itemId: 'chili', count: 1 },
@@ -315,10 +319,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'gamjajeon',
-    nameEn: 'Potato Pancake',
+    nameEn: 'Potato Pancake', nameVi: 'Bánh khoai tây',
     nameKo: '감자전',
     icon: '🥔',
-    description: 'Crispy pan-fried potato pancake seasoned with green onions and garlic.',
+    description: 'Crispy pan-fried potato pancake seasoned with green onions and garlic.', descriptionVi: 'Bánh khoai tây áp chảo giòn rụm, nêm hành lá và tỏi.',
     ingredients: [
       { itemId: 'potato', count: 2 },
       { itemId: 'green_onion', count: 1 },
@@ -329,10 +333,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'bibimbap',
-    nameEn: 'Bibimbap',
+    nameEn: 'Bibimbap', nameVi: 'Bibimbap',
     nameKo: '비빔밥',
     icon: '🥗',
-    description: 'Nourishing bowl of rice topped with cabbage, carrot, soybean, and chili.',
+    description: 'Nourishing bowl of rice topped with cabbage, carrot, soybean, and chili.', descriptionVi: 'Bát cơm bổ dưỡng phủ cải thảo, cà rốt, đậu nành và ớt.',
     ingredients: [
       { itemId: 'rice', count: 1 },
       { itemId: 'cabbage', count: 1 },
@@ -344,10 +348,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'bulgogi',
-    nameEn: 'Bulgogi',
+    nameEn: 'Bulgogi', nameVi: 'Bulgogi',
     nameKo: '불고기',
     icon: '🍖',
-    description: 'Flavorful marinated dish with garlic, green onions, and soybeans.',
+    description: 'Flavorful marinated dish with garlic, green onions, and soybeans.', descriptionVi: 'Món thịt ướp đậm vị với tỏi, hành lá và đậu nành.',
     ingredients: [
       { itemId: 'green_onion', count: 2 },
       { itemId: 'garlic', count: 2 },
@@ -358,10 +362,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'samgyetang',
-    nameEn: 'Samgyetang',
+    nameEn: 'Samgyetang', nameVi: 'Samgyetang',
     nameKo: '궁중 삼계탕',
     icon: '🍲',
-    description: 'Royal ginseng chicken soup cooked with rice, garlic, radish, and green onions.',
+    description: 'Royal ginseng chicken soup cooked with rice, garlic, radish, and green onions.', descriptionVi: 'Canh gà hầm sâm kiểu cung đình, nấu cùng gạo, tỏi, củ cải và hành lá.',
     ingredients: [
       { itemId: 'rice', count: 2 },
       { itemId: 'garlic', count: 2 },
@@ -373,10 +377,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'honey_yakgwa',
-    nameEn: 'Honey Yakgwa',
+    nameEn: 'Honey Yakgwa', nameVi: 'Bánh mật Yakgwa',
     nameKo: '꿀약과',
     icon: '🥮',
-    description: 'Traditional Korean honey pastry made with wheat, honey, and sesame oil.',
+    description: 'Traditional Korean honey pastry made with wheat, honey, and sesame oil.', descriptionVi: 'Bánh mật ong truyền thống Hàn Quốc làm từ bột mì, mật ong và dầu vừng.',
     ingredients: [
       { itemId: 'honey', count: 2 },
       { itemId: 'cabbage', count: 1 }
@@ -386,10 +390,10 @@ var COOKING_RECIPES = [
   },
   {
     id: 'honey_tea',
-    nameEn: 'Honey Tea',
+    nameEn: 'Honey Tea', nameVi: 'Trà mật ong',
     nameKo: '꿀차',
     icon: '🍵',
-    description: 'Warm soothing tea sweetened with fresh natural honey.',
+    description: 'Warm soothing tea sweetened with fresh natural honey.', descriptionVi: 'Tách trà ấm dịu, pha ngọt bằng mật ong nguyên chất.',
     ingredients: [
       { itemId: 'honey', count: 2 }
     ],
@@ -413,52 +417,52 @@ var UNIT10_WORD_DROP = {
   '야채': '배추', '고기': '파', '생선': '무'
 };
 var UNIT10_COOKING_RECIPES = [
-  { id: 'u10-kimchi-jjigae', nameEn: 'Kimchi stew', nameKo: '김치찌개', icon: '🍲',
-    description: 'Spicy stew. Grow 배추, 고추, 마늘, 파.',
+  { id: 'u10-kimchi-jjigae', nameEn: 'Kimchi stew', nameVi: 'Canh kimchi', nameKo: '김치찌개', icon: '🍲',
+    description: 'Spicy stew. Grow 배추, 고추, 마늘, 파.', descriptionVi: 'Canh cay. Trồng 배추, 고추, 마늘, 파.',
     ingredients: [{ itemId: '배추', count: 1 }, { itemId: '고추', count: 1 }, { itemId: '마늘', count: 1 }, { itemId: '파', count: 1 }],
     xpReward: 30, goldReward: 35 },
-  { id: 'u10-doenjang-jjigae', nameEn: 'Soybean-paste stew', nameKo: '된장찌개', icon: '🥘',
-    description: 'Earthy stew. Grow 콩, 감자, 파, 마늘.',
+  { id: 'u10-doenjang-jjigae', nameEn: 'Soybean-paste stew', nameVi: 'Canh tương đậu', nameKo: '된장찌개', icon: '🥘',
+    description: 'Earthy stew. Grow 콩, 감자, 파, 마늘.', descriptionVi: 'Canh vị đậm mộc mạc. Trồng 콩, 감자, 파, 마늘.',
     ingredients: [{ itemId: '콩', count: 1 }, { itemId: '감자', count: 1 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
     xpReward: 30, goldReward: 35 },
-  { id: 'u10-sundubu', nameEn: 'Soft-tofu stew', nameKo: '순두부찌개', icon: '🥣',
-    description: 'Soft tofu stew. Grow 콩, 고추, 파, 마늘.',
+  { id: 'u10-sundubu', nameEn: 'Soft-tofu stew', nameVi: 'Canh đậu hũ non', nameKo: '순두부찌개', icon: '🥣',
+    description: 'Soft tofu stew. Grow 콩, 고추, 파, 마늘.', descriptionVi: 'Canh đậu hũ non. Trồng 콩, 고추, 파, 마늘.',
     ingredients: [{ itemId: '콩', count: 1 }, { itemId: '고추', count: 1 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
     xpReward: 32, goldReward: 38 },
-  { id: 'u10-gamjatang', nameEn: 'Pork-bone potato stew', nameKo: '감자탕', icon: '🍖',
-    description: 'Potato stew. Grow 감자, 파, 고추, 마늘.',
+  { id: 'u10-gamjatang', nameEn: 'Pork-bone potato stew', nameVi: 'Canh xương khoai tây', nameKo: '감자탕', icon: '🍖',
+    description: 'Potato stew. Grow 감자, 파, 고추, 마늘.', descriptionVi: 'Canh khoai tây. Trồng 감자, 파, 고추, 마늘.',
     ingredients: [{ itemId: '감자', count: 2 }, { itemId: '파', count: 1 }, { itemId: '고추', count: 1 }, { itemId: '마늘', count: 1 }],
     xpReward: 36, goldReward: 42 },
-  { id: 'u10-maeuntang', nameEn: 'Spicy fish stew', nameKo: '매운탕', icon: '🐟',
-    description: 'Spicy broth veg. Grow 고추, 무, 파, 마늘.',
+  { id: 'u10-maeuntang', nameEn: 'Spicy fish stew', nameVi: 'Canh cá cay', nameKo: '매운탕', icon: '🐟',
+    description: 'Spicy broth veg. Grow 고추, 무, 파, 마늘.', descriptionVi: 'Rau cho nước dùng cay. Trồng 고추, 무, 파, 마늘.',
     ingredients: [{ itemId: '고추', count: 2 }, { itemId: '무', count: 1 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
     xpReward: 34, goldReward: 40 },
-  { id: 'u10-naengmyeon', nameEn: 'Cold noodles', nameKo: '냉면', icon: '🍜',
-    description: 'Summer cold noodles. Grow 오이, 무, 파.',
+  { id: 'u10-naengmyeon', nameEn: 'Cold noodles', nameVi: 'Mì lạnh', nameKo: '냉면', icon: '🍜',
+    description: 'Summer cold noodles. Grow 오이, 무, 파.', descriptionVi: 'Mì lạnh mùa hè. Trồng 오이, 무, 파.',
     ingredients: [{ itemId: '오이', count: 1 }, { itemId: '무', count: 1 }, { itemId: '파', count: 1 }],
     xpReward: 28, goldReward: 32 },
-  { id: 'u10-kalguksu', nameEn: 'Knife-cut noodles', nameKo: '칼국수', icon: '🍝',
-    description: 'Hand-cut noodle soup. Grow 쌀, 파, 마늘.',
+  { id: 'u10-kalguksu', nameEn: 'Knife-cut noodles', nameVi: 'Mì thái tay', nameKo: '칼국수', icon: '🍝',
+    description: 'Hand-cut noodle soup. Grow 쌀, 파, 마늘.', descriptionVi: 'Canh mì thái tay. Trồng 쌀, 파, 마늘.',
     ingredients: [{ itemId: '쌀', count: 2 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
     xpReward: 30, goldReward: 34 },
-  { id: 'u10-bibim-guksu', nameEn: 'Spicy mixed noodles', nameKo: '비빔국수', icon: '🥗',
-    description: 'Spicy mixed noodles. Grow 오이, 고추, 파.',
+  { id: 'u10-bibim-guksu', nameEn: 'Spicy mixed noodles', nameVi: 'Mì trộn cay', nameKo: '비빔국수', icon: '🥗',
+    description: 'Spicy mixed noodles. Grow 오이, 고추, 파.', descriptionVi: 'Mì trộn cay. Trồng 오이, 고추, 파.',
     ingredients: [{ itemId: '오이', count: 1 }, { itemId: '고추', count: 1 }, { itemId: '파', count: 1 }],
     xpReward: 28, goldReward: 32 },
-  { id: 'u10-bibimbap', nameEn: 'Bibimbap', nameKo: '비빔밥', icon: '🍚',
-    description: 'Mixed rice. Grow 쌀, 당근, 콩나물, 고추.',
+  { id: 'u10-bibimbap', nameEn: 'Bibimbap', nameVi: 'Cơm trộn', nameKo: '비빔밥', icon: '🍚',
+    description: 'Mixed rice. Grow 쌀, 당근, 콩나물, 고추.', descriptionVi: 'Cơm trộn. Trồng 쌀, 당근, 콩나물, 고추.',
     ingredients: [{ itemId: '쌀', count: 1 }, { itemId: '당근', count: 1 }, { itemId: '콩나물', count: 1 }, { itemId: '고추', count: 1 }],
     xpReward: 40, goldReward: 48 },
-  { id: 'u10-samgyeopsal', nameEn: 'Grilled pork belly', nameKo: '삼겹살', icon: '🥓',
-    description: 'Ssam wrap sides. Grow 상추, 마늘, 고추.',
+  { id: 'u10-samgyeopsal', nameEn: 'Grilled pork belly', nameVi: 'Ba chỉ nướng', nameKo: '삼겹살', icon: '🥓',
+    description: 'Ssam wrap sides. Grow 상추, 마늘, 고추.', descriptionVi: 'Rau ăn kèm cuốn ssam. Trồng 상추, 마늘, 고추.',
     ingredients: [{ itemId: '상추', count: 2 }, { itemId: '마늘', count: 1 }, { itemId: '고추', count: 1 }],
     xpReward: 34, goldReward: 40 },
-  { id: 'u10-galbijjim', nameEn: 'Braised short ribs', nameKo: '갈비찜', icon: '🍖',
-    description: 'Braised-rib veg. Grow 당근, 감자, 파, 마늘.',
+  { id: 'u10-galbijjim', nameEn: 'Braised short ribs', nameVi: 'Sườn om', nameKo: '갈비찜', icon: '🍖',
+    description: 'Braised-rib veg. Grow 당근, 감자, 파, 마늘.', descriptionVi: 'Rau cho món sườn om. Trồng 당근, 감자, 파, 마늘.',
     ingredients: [{ itemId: '당근', count: 1 }, { itemId: '감자', count: 1 }, { itemId: '파', count: 1 }, { itemId: '마늘', count: 1 }],
     xpReward: 38, goldReward: 46 },
-  { id: 'u10-samgyetang', nameEn: 'Ginseng chicken soup', nameKo: '삼계탕', icon: '🐔',
-    description: 'Chicken soup aromatics. Grow 쌀, 마늘, 파, 생강.',
+  { id: 'u10-samgyetang', nameEn: 'Ginseng chicken soup', nameVi: 'Gà hầm sâm', nameKo: '삼계탕', icon: '🐔',
+    description: 'Chicken soup aromatics. Grow 쌀, 마늘, 파, 생강.', descriptionVi: 'Gia vị thơm cho canh gà. Trồng 쌀, 마늘, 파, 생강.',
     ingredients: [{ itemId: '쌀', count: 2 }, { itemId: '마늘', count: 1 }, { itemId: '파', count: 1 }, { itemId: '생강', count: 1 }],
     xpReward: 42, goldReward: 50 }
 ];
@@ -588,7 +592,7 @@ function renderCookingGrid(selectId) {
     pantryList.innerHTML = '';
     const entries = Object.entries(ingMap).filter(([_, count]) => count > 0);
     if (entries.length === 0) {
-      pantryList.innerHTML = '<span class="ck-pantry-empty">No crop ingredients in pantry. Harvest crops to start cooking!</span>';
+      pantryList.innerHTML = '<span class="ck-pantry-empty">' + vbEsc(hvT('ui.cook.pantry.empty')) + '</span>';
     } else {
       const needMap = {};
       if (selectedRow) selectedRow.st.need.forEach(function (n) { needMap[n.key] = n; });
@@ -597,7 +601,7 @@ function renderCookingGrid(selectId) {
         const n = needMap[info.key || ingKey];
         const tag = document.createElement('span');
         tag.className = 'ck-pantry-chip' + (n ? (n.ok ? ' needed' : ' short') : '');
-        if (n) tag.title = `${n.nameKo}: this dish needs ${n.want}, you have ${n.have}`;
+        if (n) tag.title = hvT('ui.cook.need', { dish: n.nameKo, want: n.want, have: n.have });
         tag.innerHTML = `${ckArt(info.nameKo || ingKey, info.icon, 20)} ${ckEsc(info.nameKo || ingKey)}: ×${cnt}`;
         pantryList.appendChild(tag);
       });
@@ -606,7 +610,8 @@ function renderCookingGrid(selectId) {
 
   // 2. Progress — count plus a bar.
   const masteredCount = cookedRecipes.filter(id => recipes.some(r => r.id === id)).length;
-  if (progressBadge) progressBadge.textContent = `Cooked: ${masteredCount} / ${recipes.length}`;
+  if (progressBadge) progressBadge.textContent =
+    hvT('ui.cook.cooked', { n: masteredCount, total: recipes.length });
   const pFill = document.getElementById('ck-progress-fill');
   const pTrack = document.getElementById('ck-progress-track');
   if (pFill && pFill.style) {
@@ -615,7 +620,8 @@ function renderCookingGrid(selectId) {
   if (pTrack && pTrack.setAttribute) {
     pTrack.setAttribute('aria-valuenow', String(masteredCount));
     pTrack.setAttribute('aria-valuemax', String(recipes.length));
-    pTrack.setAttribute('aria-valuetext', `${masteredCount} of ${recipes.length} dishes mastered`);
+    pTrack.setAttribute('aria-valuetext',
+      hvT('ui.recipe.mastered.aria', { n: masteredCount, total: recipes.length }));
   }
 
   // 3. Filter counts describe the whole cookbook, not the filtered view.
@@ -682,13 +688,19 @@ function renderCookingGrid(selectId) {
       // Tab plus Enter and Space for free.
       card.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
       card.setAttribute('aria-label',
-        `${r.nameKo}, ${tr(r, 'nameEn')}, ${row.st.canCook ? 'ready to cook' : row.st.missing.length + ' ingredients missing'}${row.cooked ? ', already mastered' : ''}`);
+        hvT('ui.cook.card.aria', {
+          ko: r.nameKo,
+          name: tr(r, 'nameEn'),
+          state: row.st.canCook
+            ? hvT('ui.cook.ready')
+            : hvT('ui.cook.missing', { n: row.st.missing.length })
+        }) + (row.cooked ? ' ' + hvT('ui.cook.mastered') : ''));
     }
 
     const tags = [];
     if (row.cooked) tags.push('<span class="ck-tag cooked">✓ Cooked</span>');
     tags.push(row.st.canCook
-      ? '<span class="ck-tag ready">Ready</span>'
+      ? '<span class="ck-tag ready">' + ckEsc(hvT('ui.cooking.filter.ready')) + '</span>'
       : `<span class="ck-tag short">−${row.st.missing.length}</span>`);
 
     card.innerHTML = `
@@ -740,7 +752,7 @@ function renderCookingGrid(selectId) {
             <div class="ck-detail-en">${ckEsc(tr(recipe, 'nameEn'))}</div>
           </div>
         </div>
-        ${recipe.description ? `<div class="ck-detail-desc">${ckEsc(recipe.description)}</div>` : ''}
+        ${recipe.description ? `<div class="ck-detail-desc">${ckEsc(tr(recipe, 'description'))}</div>` : ''}
 
         <div class="ck-section">
           <div class="ck-section-head">Required Ingredients (재료)</div>
@@ -748,11 +760,11 @@ function renderCookingGrid(selectId) {
         </div>
 
         <div class="ck-section">
-          <div class="ck-section-head">Rewards</div>
+          <div class="ck-section-head">${ckEsc(hvT('ui.cook.rewards'))}</div>
           <div class="ck-chips">
-            <span class="ck-reward xp">⭐ +${Number(recipe.xpReward) || 0} XP</span>
-            <span class="ck-reward gold">🪙 +${Number(recipe.goldReward) || 0} Gold</span>
-            ${row.cooked ? '<span class="ck-reward master">✓ Mastered</span>' : ''}
+            <span class="ck-reward xp">⭐ ${ckEsc(hvT('ui.cook.reward.xp', { n: Number(recipe.xpReward) || 0 }))}</span>
+            <span class="ck-reward gold">🪙 ${ckEsc(hvT('ui.cook.reward.gold', { n: Number(recipe.goldReward) || 0 }))}</span>
+            ${row.cooked ? '<span class="ck-reward master">✓ ' + ckEsc(hvT('ui.cook.mastered.chip')) + '</span>' : ''}
           </div>
         </div>
 
@@ -801,7 +813,10 @@ function cookRecipe(recipeId) {
     const have = ingMap[key] || 0;
     if (have < req.count) {
       if (typeof showToast === 'function') {
-        showToast(`⚠️ Missing ingredient for ${recipe.nameKo || tr(recipe, 'nameEn')}: Need ${req.count}x ${info.nameKo || key} (have ${have})`);
+        showToast('⚠️ ' + hvT('ui.cook.missingToast', {
+          dish: recipe.nameKo || tr(recipe, 'nameEn'),
+          need: req.count, item: info.nameKo || key, have
+        }));
       }
       return false;
     }
@@ -847,7 +862,9 @@ function cookRecipe(recipeId) {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('complete');
 
   if (typeof showToast === 'function') {
-    showToast(`🍳 Cooked ${recipe.nameKo || tr(recipe, 'nameEn')}! +${goldReward} Gold 🪙, +${xpReward} XP ⭐`);
+    showToast('🍳 ' + hvT('ui.cook.doneToast', {
+      dish: recipe.nameKo || tr(recipe, 'nameEn'), gold: goldReward, xp: xpReward
+    }));
   }
 
   if (typeof renderInventoryGrid === 'function') renderInventoryGrid();
@@ -890,58 +907,67 @@ var KOREAN_INGREDIENTS = [
 
 var RECIPE_DB = [
   {
-    id: 'kimchi', name: '김치', enName: 'Kimchi', icon: '🥬',
+    id: 'kimchi', name: '김치', enName: 'Kimchi', enNameVi: 'Kimchi', icon: '🥬',
     req: { '배추': 1, '고추': 1, '마늘': 1 },
-    buff: { type: 'coin_boost', name: '2x Coin Rate (김치 파워)', durationMs: 300000, value: 2.0 },
-    culturalFact: 'Kimchi (김치) is Korea’s national fermented dish. Kimjang (김장), the collective winter Kimchi-making tradition, is inscribed on UNESCO’s Intangible Cultural Heritage list!'
+    buff: { type: 'coin_boost', name: '2x Coin Rate (김치 파워)', nameVi: '2x tốc độ ra xu (김치 파워)', durationMs: 300000, value: 2.0 },
+    culturalFact: 'Kimchi (김치) is Korea’s national fermented dish. Kimjang (김장), the collective winter Kimchi-making tradition, is inscribed on UNESCO’s Intangible Cultural Heritage list!',
+    culturalFactVi: 'Kimchi (김치) là món lên men quốc hồn quốc tuý của Hàn Quốc. Kimjang (김장) — tục cả nhà cùng muối kimchi vào mùa đông — đã được UNESCO ghi danh là Di sản văn hoá phi vật thể!'
   },
   {
-    id: 'bibimbap', name: '비빔밥', enName: 'Bibimbap', icon: '🥗',
+    id: 'bibimbap', name: '비빔밥', enName: 'Bibimbap', enNameVi: 'Bibimbap', icon: '🥗',
     req: { '쌀': 1, '당근': 1, '콩': 1 },
-    buff: { type: 'crop_speed', name: '+50% Crop Speed (비빔밥 에너지)', durationMs: 360000, value: 0.50 },
-    culturalFact: 'Bibimbap (비빔밥) translates to "mixed rice". Famous in Jeonju, it combines vegetables and gochujang, reflecting the five traditional Korean cardinal colors (오방색).'
+    buff: { type: 'crop_speed', name: '+50% Crop Speed (비빔밥 에너지)', nameVi: '+50% tốc độ cây lớn (비빔밥 에너지)', durationMs: 360000, value: 0.50 },
+    culturalFact: 'Bibimbap (비빔밥) translates to "mixed rice". Famous in Jeonju, it combines vegetables and gochujang, reflecting the five traditional Korean cardinal colors (오방색).',
+    culturalFactVi: 'Bibimbap (비빔밥) nghĩa là "cơm trộn". Nổi tiếng ở Jeonju, món này trộn rau với gochujang và mang đủ năm màu truyền thống của Hàn Quốc (오방색).'
   },
   {
-    id: 'bulgogi', name: '불고기', enName: 'Bulgogi', icon: '🍖',
+    id: 'bulgogi', name: '불고기', enName: 'Bulgogi', enNameVi: 'Bulgogi', icon: '🍖',
     req: { '파': 1, '마늘': 1, '콩': 1 },
-    buff: { type: 'combat_damage', name: '+25% Combat Damage (불고기 힘)', durationMs: 420000, value: 0.25 },
-    culturalFact: 'Bulgogi (불고기 - "fire meat") traces back over 1,000 years to Goguryeo as maekjeok. Thinly sliced beef is marinated in soy sauce, garlic, and sesame oil.'
+    buff: { type: 'combat_damage', name: '+25% Combat Damage (불고기 힘)', nameVi: '+25% sát thương (불고기 힘)', durationMs: 420000, value: 0.25 },
+    culturalFact: 'Bulgogi (불고기 - "fire meat") traces back over 1,000 years to Goguryeo as maekjeok. Thinly sliced beef is marinated in soy sauce, garlic, and sesame oil.',
+    culturalFactVi: 'Bulgogi (불고기 — "thịt lửa") có gốc từ hơn 1.000 năm trước ở Goguryeo với tên maekjeok. Thịt bò thái mỏng được ướp xì dầu, tỏi và dầu vừng.'
   },
   {
-    id: 'tteokbokki', name: '떡볶이', enName: 'Tteokbokki', icon: '🍢',
+    id: 'tteokbokki', name: '떡볶이', enName: 'Tteokbokki', enNameVi: 'Tteokbokki', icon: '🍢',
     req: { '쌀': 1, '고추': 1, '파': 1 },
-    buff: { type: 'quiz_hints', name: '+1 Extra Quiz Hint (떡볶이 열정)', durationMs: 300000, value: 1 },
-    culturalFact: 'Tteokbokki (떡볶이) originated as royal court soy sauce rice cakes. The iconic spicy gochujang street-food version was created in Seoul in 1953!'
+    buff: { type: 'quiz_hints', name: '+1 Extra Quiz Hint (떡볶이 열정)', nameVi: '+1 gợi ý cho câu hỏi (떡볶이 열정)', durationMs: 300000, value: 1 },
+    culturalFact: 'Tteokbokki (떡볶이) originated as royal court soy sauce rice cakes. The iconic spicy gochujang street-food version was created in Seoul in 1953!',
+    culturalFactVi: 'Tteokbokki (떡볶이) khởi đầu là món bánh gạo xào xì dầu trong cung đình. Phiên bản cay gochujang trứ danh của ẩm thực đường phố ra đời ở Seoul năm 1953!'
   },
   {
-    id: 'samgyeopsal', name: '삼겹살', enName: 'Samgyeopsal', icon: '🥓',
+    id: 'samgyeopsal', name: '삼겹살', enName: 'Samgyeopsal', enNameVi: 'Samgyeopsal', icon: '🥓',
     req: { '마늘': 2, '파': 1 },
-    buff: { type: 'combat_damage', name: '+25% Combat Damage (삼겹살 활력)', durationMs: 480000, value: 0.25 },
-    culturalFact: 'Samgyeopsal (삼겹살 - "three-layer pork belly") is Korea’s favorite tabletop grill dish, eaten wrapped in lettuce with grilled garlic and ssamjang paste.'
+    buff: { type: 'combat_damage', name: '+25% Combat Damage (삼겹살 활력)', nameVi: '+25% sát thương (삼겹살 활력)', durationMs: 480000, value: 0.25 },
+    culturalFact: 'Samgyeopsal (삼겹살 - "three-layer pork belly") is Korea’s favorite tabletop grill dish, eaten wrapped in lettuce with grilled garlic and ssamjang paste.',
+    culturalFactVi: 'Samgyeopsal (삼겹살 — "ba chỉ ba lớp") là món nướng tại bàn được người Hàn yêu thích nhất, ăn cuốn trong lá xà lách cùng tỏi nướng và tương ssamjang.'
   },
   {
-    id: 'haemul_pajeon', name: '해물파전', enName: 'Seafood Pajeon', icon: '🥞',
+    id: 'haemul_pajeon', name: '해물파전', enName: 'Seafood Pajeon', enNameVi: 'Bánh xèo hải sản', icon: '🥞',
     req: { '파': 2, '오징어': 1, '새우': 1 },
-    buff: { type: 'fishing_luck', name: '+50% Fishing Luck (해물파전 행운)', durationMs: 360000, value: 0.50 },
-    culturalFact: 'Haemul Pajeon (해물파전) is a crispy green onion pancake filled with fresh squid and shrimp. Koreans famously love eating Pajeon on rainy days!'
+    buff: { type: 'fishing_luck', name: '+50% Fishing Luck (해물파전 행운)', nameVi: '+50% may mắn khi câu (해물파전 행운)', durationMs: 360000, value: 0.50 },
+    culturalFact: 'Haemul Pajeon (해물파전) is a crispy green onion pancake filled with fresh squid and shrimp. Koreans famously love eating Pajeon on rainy days!',
+    culturalFactVi: 'Haemul Pajeon (해물파전) là bánh hành giòn rụm với mực và tôm tươi. Người Hàn nổi tiếng là mê ăn pajeon vào những ngày mưa!'
   },
   {
-    id: 'japchae', name: '잡채', enName: 'Japchae', icon: '🍜',
+    id: 'japchae', name: '잡채', enName: 'Japchae', enNameVi: 'Japchae', icon: '🍜',
     req: { '당근': 1, '파': 1, '무': 1 },
-    buff: { type: 'coin_boost', name: '2x Coin Rate (잡채 잔치)', durationMs: 300000, value: 2.0 },
-    culturalFact: 'Japchae (잡채) was created in the 17th century for King Gwanghaegun. Glass noodles stir-fried with sweet carrot and veggies are served at every festive celebration.'
+    buff: { type: 'coin_boost', name: '2x Coin Rate (잡채 잔치)', nameVi: '2x tốc độ ra xu (잡채 잔치)', durationMs: 300000, value: 2.0 },
+    culturalFact: 'Japchae (잡채) was created in the 17th century for King Gwanghaegun. Glass noodles stir-fried with sweet carrot and veggies are served at every festive celebration.',
+    culturalFactVi: 'Japchae (잡채) ra đời ở thế kỷ 17 để dâng vua Gwanghaegun. Miến xào cùng cà rốt ngọt và rau củ luôn có mặt trong mọi dịp lễ tiệc.'
   },
   {
-    id: 'samgyetang', name: '삼계탕', enName: 'Samgyetang', icon: '🍲',
+    id: 'samgyetang', name: '삼계탕', enName: 'Samgyetang', enNameVi: 'Samgyetang', icon: '🍲',
     req: { '쌀': 1, '마늘': 2, '무': 1 },
-    buff: { type: 'crop_speed', name: '+50% Crop Speed (삼계탕 보양)', durationMs: 480000, value: 0.50 },
-    culturalFact: 'Samgyetang (삼계탕 - ginseng chicken soup) is traditional stamina food eaten during Sambok (삼복), the peak heat of summer, to "fight heat with heat" (이열치열).'
+    buff: { type: 'crop_speed', name: '+50% Crop Speed (삼계탕 보양)', nameVi: '+50% tốc độ cây lớn (삼계탕 보양)', durationMs: 480000, value: 0.50 },
+    culturalFact: 'Samgyetang (삼계탕 - ginseng chicken soup) is traditional stamina food eaten during Sambok (삼복), the peak heat of summer, to "fight heat with heat" (이열치열).',
+    culturalFactVi: 'Samgyetang (삼계탕 — canh gà hầm sâm) là món bồi bổ truyền thống, ăn vào Sambok (삼복) giữa cao điểm nắng nóng để "lấy nhiệt trị nhiệt" (이열치열).'
   },
   {
-    id: 'gimbap', name: '김밥', enName: 'Gimbap', icon: '🍱',
+    id: 'gimbap', name: '김밥', enName: 'Gimbap', enNameVi: 'Gimbap', icon: '🍱',
     req: { '쌀': 1, '당근': 1, '무': 1 },
-    buff: { type: 'quiz_hints', name: '+1 Extra Quiz Hint (김밥 소풍)', durationMs: 300000, value: 1 },
-    culturalFact: 'Gimbap (김밥) is dried seaweed (김) rolled with rice (밥) and pickled radish. It is the quintessential Korean picnic and travel comfort food!'
+    buff: { type: 'quiz_hints', name: '+1 Extra Quiz Hint (김밥 소풍)', nameVi: '+1 gợi ý cho câu hỏi (김밥 소풍)', durationMs: 300000, value: 1 },
+    culturalFact: 'Gimbap (김밥) is dried seaweed (김) rolled with rice (밥) and pickled radish. It is the quintessential Korean picnic and travel comfort food!',
+    culturalFactVi: 'Gimbap (김밥) là rong biển khô (김) cuốn với cơm (밥) và củ cải muối. Đây là món ăn dã ngoại và ăn đường xa kinh điển của người Hàn!'
   }
 ];
 
@@ -994,7 +1020,7 @@ function updateBuffHUD() {
     const badge = document.createElement('div');
     badge.className = 'buff-badge';
     badge.innerHTML = `<span>${buff.icon || '✨'}</span> <span>${m}:${String(s).padStart(2, '0')}</span>`;
-    badge.title = buff.name;
+    badge.title = tr(buff, 'name');
     bar.appendChild(badge);
   });
 }
@@ -1025,7 +1051,7 @@ window.openRecipeBook = function() {
     return (typeof vocabIconHtml === 'function') ? vocabIconHtml(ko, fallback || '?', px || 20) : (fallback || '');
   };
   if (entries.length === 0) {
-    pantryList.innerHTML = '<span class="recipe-pantry-empty">Pantry is empty. Harvest a crop or catch a fish.</span>';
+    pantryList.innerHTML = '<span class="recipe-pantry-empty">' + vbEsc(hvT('ui.recipe.pantry.empty')) + '</span>';
   } else {
     entries.forEach(([ing, cnt]) => {
       const info = (typeof getItemInfo === 'function') ? getItemInfo(ing) : { nameKo: ing };
@@ -1061,12 +1087,12 @@ window.openRecipeBook = function() {
     card.innerHTML = `
       <div class="recipe-card-icon">${art(r.name, r.icon, 48)}</div>
       <div class="recipe-card-title">${r.name}</div>
-      <div class="recipe-card-sub">${r.enName}</div>
+      <div class="recipe-card-sub">${tr(r, 'enName')}</div>
       <div class="recipe-req-list">${reqBits.join('')}</div>
-      <div class="recipe-buff-badge">${r.buff.name}</div>
+      <div class="recipe-buff-badge">${tr(r.buff, 'name')}</div>
       <div class="recipe-card-actions">
-        <button class="cook-btn" ${canCook ? '' : 'disabled'} onclick="startCookingMinigame('${r.id}')">Cook</button>
-        <button type="button" class="recipe-info-btn" onclick="showCulturalFact('${r.id}')">Info</button>
+        <button class="cook-btn" ${canCook ? '' : 'disabled'} onclick="startCookingMinigame('${r.id}')">${vbEsc(hvT('ui.recipe.cook'))}</button>
+        <button type="button" class="recipe-info-btn" onclick="showCulturalFact('${r.id}')">${vbEsc(hvT('ui.recipe.info'))}</button>
       </div>
     `;
     grid.appendChild(card);
@@ -1126,10 +1152,10 @@ function renderCookingStage() {
   if (!currentCookingRecipe || !container) return;
 
   dishIcon.textContent = currentCookingRecipe.icon;
-  dishName.textContent = `${currentCookingRecipe.name} (${currentCookingRecipe.enName})`;
+  dishName.textContent = `${currentCookingRecipe.name} (${tr(currentCookingRecipe, 'enName')})`;
 
   if (cookingStage === 1) {
-    stepDesc.textContent = 'Stage 1/2: Prep Ingredients - Select the correct Korean name!';
+    stepDesc.textContent = hvT('ui.cook.stage1');
     const correctTarget = Object.keys(currentCookingRecipe.req)[0];
     // Shuffle the pool *before* taking three, not the result after. The old loop walked
     // KOREAN_INGREDIENTS in declaration order and stopped once it had four, so every prep
@@ -1147,7 +1173,7 @@ function renderCookingStage() {
       </div>
     `;
   } else if (cookingStage === 2) {
-    stepDesc.textContent = 'Stage 2/2: Heat Adjustment - Click when heat is IN THE GREEN ZONE!';
+    stepDesc.textContent = hvT('ui.cook.stage2');
     
     let sliderPos = 0;
     let direction = 1;
@@ -1243,8 +1269,9 @@ window.showCulturalFact = function(recipeId, grade = null) {
   const textEl = document.getElementById('cf-text');
 
   if (iconEl) iconEl.textContent = recipe.icon;
-  if (titleEl) titleEl.textContent = grade ? `Grade ${grade}! ${recipe.name} (${recipe.enName})` : `${recipe.name} (${recipe.enName})`;
-  if (textEl) textEl.textContent = recipe.culturalFact;
+  const dish = `${recipe.name} (${tr(recipe, 'enName')})`;
+  if (titleEl) titleEl.textContent = grade ? hvT('ui.recipe.grade', { grade, dish }) : dish;
+  if (textEl) textEl.textContent = tr(recipe, 'culturalFact');
 
   const overlay = document.getElementById('cultural-fact-overlay');
   if (overlay) overlay.classList.add('visible');
@@ -1266,11 +1293,11 @@ window.closeCulturalFact = function() {
 function computeCookingTier() {
   const dishes = inventoryState?.cookedDishes || {};
   const totalCooked = Object.values(dishes).reduce((a, b) => a + b, 0);
-  if (totalCooked >= 50) return 'Grand Hansik Master 👑';
-  if (totalCooked >= 30) return 'Master Chef 🌟';
-  if (totalCooked >= 15) return 'Sous Chef 🍲';
-  if (totalCooked >= 5) return 'Apprentice Chef 👨‍🍳';
-  return 'Novice Cook 🍳';
+  if (totalCooked >= 50) return hvT('ui.cook.tier.grand') + ' 👑';
+  if (totalCooked >= 30) return hvT('ui.cook.tier.master') + ' 🌟';
+  if (totalCooked >= 15) return hvT('ui.cook.tier.sous') + ' 🍲';
+  if (totalCooked >= 5) return hvT('ui.cook.tier.apprentice') + ' 👨‍🍳';
+  return hvT('ui.cook.tier.novice') + ' 🍳';
 }
 
 // computeCookingTierScore lived here to sort the local rivals. The server orders the board now
@@ -1312,12 +1339,12 @@ function openLeaderboard(tab = 'vocab') {
   if (pbGrid) {
     const pb = leaderboardState.personalBests;
     pbGrid.innerHTML = `
-      <div class="lb-pb-chip">Words mastered: <b>${pb.totalWordsMastered}</b></div>
-      <div class="lb-pb-chip">Valley rank: <b>Lv.${pb.valleyLevel || 1} ${pb.valleyTitle || ''}</b></div>
-      <div class="lb-pb-chip">Honor: <b>${pb.totalHonor}</b></div>
-      <div class="lb-pb-chip">Cooking: <b>${pb.highestCookingTier}</b></div>
-      <div class="lb-pb-chip">Arcade: <b>${pb.arcadeHighScore}</b></div>
-      <div class="lb-pb-chip">Dungeon: <b>Floor ${pb.dungeonMaxFloor}</b></div>
+      <div class="lb-pb-chip">${vbEsc(hvT('ui.lb.pb.words'))} <b>${pb.totalWordsMastered}</b></div>
+      <div class="lb-pb-chip">${vbEsc(hvT('ui.lb.pb.rank'))} <b>${vbEsc(hvT('ui.rank.short', { n: pb.valleyLevel || 1 }))} ${vbEsc(pb.valleyTitle || '')}</b></div>
+      <div class="lb-pb-chip">${vbEsc(hvT('ui.lb.pb.honor'))} <b>${pb.totalHonor}</b></div>
+      <div class="lb-pb-chip">${vbEsc(hvT('ui.lb.pb.cooking'))} <b>${vbEsc(pb.highestCookingTier)}</b></div>
+      <div class="lb-pb-chip">${vbEsc(hvT('ui.lb.pb.arcade'))} <b>${pb.arcadeHighScore}</b></div>
+      <div class="lb-pb-chip">${vbEsc(hvT('ui.lb.pb.dungeon'))} <b>${vbEsc(hvT('ui.lb.val.floor', { n: pb.dungeonMaxFloor }))}</b></div>
     `;
   }
 
@@ -1368,12 +1395,12 @@ function lbFetch(tab) {
 }
 
 const LB_COLS = {
-  vocab: { header: 'Words mastered (21-day interval)', val: (r) => r.words + ' words' },
-  honor: { header: 'Total Honor 🏅', val: (r) => r.honor + ' Honor 🏅' },
-  cooking: { header: 'Cooking rank', val: (r) => r.cookingTier },
-  arcade: { header: 'Arcade high score', val: (r) => r.arcade + ' pts' },
-  dungeon: { header: 'Dungeon max floor', val: (r) => 'Floor ' + r.dungeon },
-  rank: { header: 'Valley rank', val: (r) => 'Lv.' + r.rankLv }
+  vocab: { header: () => hvT('ui.lb.col.vocab'), val: (r) => hvT('ui.lb.val.words', { n: r.words }) },
+  honor: { header: () => hvT('ui.lb.col.honor') + ' 🏅', val: (r) => r.honor + ' 🏅' },
+  cooking: { header: () => hvT('ui.lb.col.cooking'), val: (r) => r.cookingTier },
+  arcade: { header: () => hvT('ui.lb.col.arcade'), val: (r) => hvT('ui.lb.val.pts', { n: r.arcade }) },
+  dungeon: { header: () => hvT('ui.lb.col.dungeon'), val: (r) => hvT('ui.lb.val.floor', { n: r.dungeon }) },
+  rank: { header: () => hvT('ui.lb.col.rank'), val: (r) => hvT('ui.rank.short', { n: r.rankLv }) }
 };
 
 function switchLeaderboardTab(tabId) {
@@ -1397,19 +1424,19 @@ function renderLeaderboardTable() {
   const col = LB_COLS[tab] || LB_COLS.vocab;
 
   const note = (text) => `<div class="lb-empty">${vbEsc(text)}</div>`;
-  if (lbRemote.state === 'loading') { container.innerHTML = note('Loading the valley rankings…'); return; }
+  if (lbRemote.state === 'loading') { container.innerHTML = note(hvT('ui.lb.loading')); return; }
   if (lbRemote.state === 'off') {
-    container.innerHTML = note('Rankings are not switched on for this build — your own records above are still yours.');
+    container.innerHTML = note(hvT('ui.lb.off'));
     return;
   }
   if (lbRemote.state === 'error') {
     container.innerHTML = note(lbRemote.reason === 'offline'
-      ? 'Cannot reach the rankings right now. Your records above are stored on this device.'
-      : 'The rankings could not be read (' + lbRemote.reason + ').');
+      ? hvT('ui.lb.offline')
+      : hvT('ui.lb.error', { reason: lbRemote.reason }));
     return;
   }
   if (!lbRemote.rows.length) {
-    container.innerHTML = note('Nobody is on the board yet. Sign in and save, and you are the first.');
+    container.innerHTML = note(hvT('ui.lb.empty'));
     return;
   }
 
@@ -1440,7 +1467,7 @@ function renderLeaderboardTable() {
           <th style="width:10%">Rank</th>
           <th style="width:35%">Valley Resident</th>
           <th style="width:25%">Level</th>
-          <th style="width:30%">${vbEsc(col.header)}</th>
+          <th style="width:30%">${vbEsc(col.header())}</th>
         </tr>
       </thead>
       <tbody>${body}</tbody>
@@ -1461,19 +1488,19 @@ function renderProgressOverlay() {
 
   const totalWords = unlockedLevels.reduce((a, i) => a + (levelsData[i]?.words?.length || 0), 0);
   const cards = [
-    { cls: 'gold',  val: s.dueNow,                       lbl: 'Due now' },
-    { cls: 'green', val: s.mature,                       lbl: `Mature (${SRS_CFG.MATURE_IVL}d+)` },
-    { cls: '',      val: s.graduated,                    lbl: 'Learned' },
-    { cls: '',      val: s.learning,                     lbl: 'In learning' },
-    { cls: '',      val: Math.max(0, totalWords - s.seen), lbl: 'Untouched' },
+    { cls: 'gold',  val: s.dueNow,                       lbl: hvT('ui.prog.dueNow') },
+    { cls: 'green', val: s.mature,                       lbl: hvT('ui.prog.mature', { d: SRS_CFG.MATURE_IVL }) },
+    { cls: '',      val: s.graduated,                    lbl: hvT('ui.prog.learned') },
+    { cls: '',      val: s.learning,                     lbl: hvT('ui.prog.learning') },
+    { cls: '',      val: Math.max(0, totalWords - s.seen), lbl: hvT('ui.prog.untouched') },
     { cls: s.retention !== null && s.retention < 80 ? 'rose' : 'green',
-      val: s.retention === null ? '—' : s.retention + '%', lbl: 'Retention' },
+      val: s.retention === null ? '—' : s.retention + '%', lbl: hvT('ui.prog.retention') },
   ];
   // Lifetime retention moves slowly once there is history behind it, so a rolling figure
   // over the last 50 answers is what actually reflects how the current session is going.
   const recent = recentAccuracy(50);
   if (recent !== null) {
-    cards.push({ cls: recent < 70 ? 'rose' : '', val: recent + '%', lbl: 'Last 50 answers' });
+    cards.push({ cls: recent < 70 ? 'rose' : '', val: recent + '%', lbl: hvT('ui.prog.last50', { n: 50 }) });
   }
   grid.innerHTML = cards.map(c =>
     `<div class="prog-stat ${c.cls}"><div class="prog-stat-val">${c.val}</div><div class="prog-stat-lbl">${c.lbl}</div></div>`
@@ -1484,8 +1511,8 @@ function renderProgressOverlay() {
   const peak = Math.max(1, ...fc);
   const now = new Date();
   const labels = fc.map((_, i) => i === 0
-    ? 'Today'
-    : new Date(now.getTime() + i * DAY_MS).toLocaleDateString(undefined, { weekday: 'short' }));
+    ? hvT('ui.prog.today')
+    : new Date(now.getTime() + i * DAY_MS).toLocaleDateString(hvLang(), { weekday: 'short' }));
   $('prog-forecast').innerHTML = fc.map((n, i) =>
     `<div class="prog-bar-col">
        <span class="prog-bar-n">${n || ''}</span>
@@ -1509,7 +1536,7 @@ function renderProgressOverlay() {
     const plural = (n, word) => n + ' ' + word + (n === 1 ? '' : 's');
     const total = sum ? ROWS.reduce((n, r) => n + sum[r.k].n, 0) : 0;
     pbox.innerHTML = !total
-      ? '<div class="prac-empty">Nothing practised yet — the desk and the cassette player start counting from here.</div>'
+      ? '<div class="prac-empty">' + vbEsc(hvT('ui.prog.prac.empty')) + '</div>'
       : ROWS.map(r => {
         const v = sum[r.k];
         // "12 across 5 pages" rather than one number: doing one exercise twelve times and
@@ -1581,10 +1608,8 @@ function renderProgressOverlay() {
   }
 
   $('prog-footnote').innerHTML =
-    `Blue = learned, brown = mature. A word becomes <b>mature</b> once its review interval reaches
-     ${SRS_CFG.MATURE_IVL} days, which takes several correctly spaced reviews — it cannot be rushed in
-     one session. <b>Retention</b> is the share of reviews passed without a lapse.
-     ${s.avgEase !== null ? `Average ease ${s.avgEase}.` : ''}`;
+    hvT('ui.prog.footnote', { d: SRS_CFG.MATURE_IVL })
+    + (s.avgEase !== null ? ' ' + hvT('ui.prog.avgEase', { n: s.avgEase }) : '');
 }
 
 function openProgressOverlay() {

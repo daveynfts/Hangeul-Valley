@@ -752,14 +752,14 @@ function syncAudioPanel() {
     const mute = document.getElementById('audio-mute-btn');
     if (mute) {
       const on = AudioMixer.isMuted();
-      mute.textContent = on ? '🔇 Sound is off' : '🔊 Sound is on';
+      mute.textContent = on ? '🔇 ' + hvT('ui.audio.sound.off') : '🔊 ' + hvT('ui.audio.sound.on');
       mute.setAttribute('aria-pressed', on ? 'true' : 'false');
       if (mute.classList && mute.classList.toggle) mute.classList.toggle('audio-off', on);
     }
     const speech = document.getElementById('audio-speech-btn');
     if (speech) {
       const on = !!KoreanTTS.enabled;
-      speech.textContent = on ? '🗣️ Pronunciation on' : '🔇 Pronunciation off';
+      speech.textContent = on ? '🗣️ ' + hvT('ui.audio.tts.on') : '🔇 ' + hvT('ui.audio.tts.off');
       speech.setAttribute('aria-pressed', on ? 'true' : 'false');
       if (speech.classList && speech.classList.toggle) speech.classList.toggle('audio-off', !on);
     }

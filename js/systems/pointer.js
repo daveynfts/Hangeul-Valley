@@ -4,8 +4,11 @@
 // hover and whether a click is in range. Keyboard / the interact button still
 // use nearestInRange().
 
-const WORLD_CLICK_HINT = 'Click';
-const WORLD_TOO_FAR_HINT = 'Walk closer';
+// Functions rather than constants: the hint is drawn into the world on every label, and a
+// constant read at load time would be the one string on the farm still in English if the
+// catalogue is ever registered after this file — which is exactly what a `const` hides.
+function worldClickHint() { return hvT('ui.world.click'); }
+function worldTooFarHint() { return hvT('ui.world.tooFar'); }
 
 function pointerDist(ax, ay, bx, by) {
   const dx = (ax || 0) - (bx || 0);
@@ -51,8 +54,8 @@ function pointerWorldPlan(player, targets, wx, wy) {
 
 function pointerHoverLabel(player, target) {
   if (!target) return '';
-  if (inUseRange(player, target)) return target.label || WORLD_CLICK_HINT;
-  return WORLD_TOO_FAR_HINT;
+  if (inUseRange(player, target)) return target.label || worldClickHint();
+  return worldTooFarHint();
 }
 
 // First in-range target in catalog order. Keyboard / touch interact keep the
@@ -72,5 +75,5 @@ function pointerOrNear(player, hover, id, x, y, r) {
 }
 
 function clickActionLabel(verb) {
-  return WORLD_CLICK_HINT + (verb ? ' ' + verb : '');
+  return worldClickHint() + (verb ? ' ' + verb : '');
 }

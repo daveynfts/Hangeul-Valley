@@ -101,12 +101,12 @@ class FishingScene extends Phaser.Scene {
     // UI Header Frame
     const infoBg = this.add.rectangle(this.W/2, 60, 520, 50, 0x0F172A, 0.9)
       .setStrokeStyle(3, 0x38BDF8).setOrigin(0.5);
-    this.infoTxt = this.add.text(this.W/2, 60, '🎣 CLICK TO CAST LINE!', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'13px', color:'#FDE047', align:'center'
+    this.infoTxt = this.add.text(this.W/2, 60, '🎣 ' + hvT('ui.fishing.cast'), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(13), color:'#FDE047', align:'center'
     }).setOrigin(0.5);
 
-    const exitBtn = this.add.text(this.W - 20, 20, '[ESC] LEAVE POND', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'13px', color:'#7DD3FC', backgroundColor:'rgba(15,23,42,0.8)', padding:{x:8,y:4}
+    const exitBtn = this.add.text(this.W - 20, 20, hvT('ui.fishing.exit'), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(13), color:'#7DD3FC', backgroundColor:'rgba(15,23,42,0.8)', padding:{x:8,y:4}
     }).setOrigin(1,0).setInteractive({useHandCursor:true}).setDepth(100);
     exitBtn.on('pointerdown', () => this.exitFishing());
     this.input.keyboard.on('keydown-ESC', () => this.exitFishing());
@@ -144,8 +144,8 @@ class FishingScene extends Phaser.Scene {
       .setOrigin(0.5, 1).setVisible(false);
 
     // Dynamic "HOLD SPACE" helper label next to tension bar
-    this.holdTip = this.add.text(this.barX - 110, this.barY, 'HOLD CLICK\nTO REEL!', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'10px', color:'#4ADE80', align:'center', stroke:'#000', strokeThickness:3
+    this.holdTip = this.add.text(this.barX - 110, this.barY, hvT('ui.fishing.reel'), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(10), color:'#4ADE80', align:'center', stroke:'#000', strokeThickness:3
     }).setOrigin(0.5).setVisible(false);
 
     // ── RESIZE HANDLER ──
@@ -163,7 +163,7 @@ class FishingScene extends Phaser.Scene {
   castLine(){
     playChiptuneSFX('fishing_pull');
     this.state = 'WAITING';
-    this.infoTxt.setText('⏳ Waiting for a bite...');
+    this.infoTxt.setText('⏳ ' + hvT('ui.fishing.waiting'));
 
     // Floating bobber with water ripples
     this.bobber = this.add.sprite(this.W/2 + Phaser.Math.Between(-60, 60), this.H/2 + 20, 'fishing_bobber').setOrigin(0.5);
@@ -183,14 +183,14 @@ class FishingScene extends Phaser.Scene {
   triggerBite(){
     playChiptuneSFX('fishing_pull');
     this.state = 'REELING';
-    this.infoTxt.setText('❗ BITE! Hold click to keep fish in Green Zone!');
+    this.infoTxt.setText('❗ ' + hvT('ui.fishing.bite'));
 
     if (this.splashEmitter && this.bobber) {
       try { this.splashEmitter.explode(12, this.bobber.x, this.bobber.y); } catch(e) {}
     }
 
     const ex = this.add.text(this.bobber.x, this.bobber.y - 35, '💦 BITE!', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'24px', color:'#EF4444', stroke:'#000', strokeThickness:4
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(24), color:'#EF4444', stroke:'#000', strokeThickness:4
     }).setOrigin(0.5);
     this.tweens.add({ targets:ex, scale:1.4, alpha:0, duration:800, onComplete:()=>ex.destroy() });
 
@@ -269,7 +269,7 @@ class FishingScene extends Phaser.Scene {
     } else {
       this.catchProgress = Math.max(0.0, this.catchProgress - 0.0015); // Very forgiving penalty!
       this.catchZone.setFillStyle(0xEF4444, 0.85);
-      this.holdTip.setText('⚠️ HOLD CLICK!').setColor('#EF4444');
+      this.holdTip.setText('⚠️ ' + hvT('ui.fishing.hold')).setColor('#EF4444');
     }
 
     // Update Progress Bar
@@ -298,8 +298,8 @@ class FishingScene extends Phaser.Scene {
     // Render Quiz Card Overlay
     const container = this.add.container(this.W/2, this.H/2).setDepth(200);
     const bg = this.add.rectangle(0, 0, 360, 240, 0x0F172A, 0.95).setStrokeStyle(3, 0x38BDF8).setOrigin(0.5);
-    const title = this.add.text(0, -90, `What is the English for "${fish.ko}"?`, {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'12px', color:'#38BDF8', align:'center'
+    const title = this.add.text(0, -90, hvT('ui.fishing.prompt', { word: fish.ko }), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(12), color:'#38BDF8', align:'center'
     }).setOrigin(0.5);
 
     container.add([bg, title]);
@@ -349,7 +349,7 @@ class FishingScene extends Phaser.Scene {
     if(this.bobber) this.bobber.destroy();
 
     this.state = 'CASTING';
-    this.infoTxt.setText('🎣 Caught! Click to Cast Again!');
+    this.infoTxt.setText('🎣 ' + hvT('ui.fishing.caught'));
   }
 
 
@@ -358,7 +358,7 @@ class FishingScene extends Phaser.Scene {
     this.hideTensionBar();
     if(this.bobber) this.bobber.destroy();
     showToast('💨 The fish got away! Try again.');
-    this.infoTxt.setText('🎣 Click to Cast Line Again!');
+    this.infoTxt.setText('🎣 ' + hvT('ui.fishing.again'));
   }
 
   hideTensionBar(){

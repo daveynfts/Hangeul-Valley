@@ -2,6 +2,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     
     :root {
+      /* The pixel accent face, named once so a locale can change it.
+         Press Start 2P has no Vietnamese diacritics — its Google Fonts build ships latin,
+         latin-ext, greek and cyrillic and no vietnamese subset — so "BÀI 10" came out
+         "BAI 10" and every tone mark fell through to whatever the system had, at whatever
+         size that font happened to be. VT323 is the other pixel face the page already
+         loads and it does carry them.
+         font-size-adjust is what makes the swap invisible: VT323 at the same px is about
+         two-thirds the height, and 0.769 is Press Start 2P's own x-height ratio, so the
+         replacement renders at the height of the face it replaces rather than smaller. */
+      --font-pixel: 'Press Start 2P', monospace;
+      --font-pixel-adjust: none;
+
       /* 64-Bit Pixel Glass Surface Palette */
       --glass-bg-primary: rgba(15, 23, 42, 0.85);
       --glass-bg-darker: rgba(10, 15, 30, 0.92);
@@ -41,6 +53,14 @@
       --green-l:  #4ade80;
       --green-d:  #16a34a;
       --farm-veil: rgba(42, 26, 10, 0.58);
+    }
+
+    /* js/i18n.js writes the language onto <html> before first paint, so this is settled by
+       the time anything is measured. Any locale whose script Press Start 2P does not cover
+       joins this rule; every other locale keeps the face the game was designed in. */
+    html[lang="vi"] {
+      --font-pixel: 'VT323', monospace;
+      --font-pixel-adjust: 0.769;
     }
 
     body {
@@ -136,7 +156,7 @@
       padding-bottom: 14px; margin-bottom: 16px;
     }
     .inv-header-id { display: flex; align-items: center; gap: 10px; }
-    .inv-title { font-family: 'Press Start 2P', monospace; font-size: 15px; color: var(--wood-d); line-height: 1.4; }
+    .inv-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 15px; color: var(--wood-d); line-height: 1.4; }
     .inv-subtitle { font-size: 12px; color: #7a3e12; margin-top: 5px; font-family: 'Be Vietnam Pro', sans-serif; }
     .inv-close {
       background: var(--parch-l); border: 1.5px solid var(--wood-m);
@@ -156,7 +176,7 @@
     .inv-capacity-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
     .inv-capacity-label { font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 700; color: #5b3412; }
     .inv-capacity-badge {
-      font-family: 'Press Start 2P', monospace; font-size: 10px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px;
       background: var(--parch-l); border: 1.5px solid var(--wood-m);
       color: var(--wood-d); padding: 5px 10px; border-radius: 4px; white-space: nowrap;
       transition: color .2s, border-color .2s, background .2s;
@@ -227,7 +247,7 @@
     }
     .inv-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
     .inv-tab {
-      font-family: 'Press Start 2P', monospace; font-size: 9px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px;
       padding: 7px 9px; border-radius: 4px; cursor: pointer;
       background: var(--parch-l); color: #7a3e12; border: 1.5px solid var(--wood-l);
       display: inline-flex; align-items: center; gap: 5px;
@@ -294,7 +314,7 @@
     .inv-qty-badge {
       position: absolute; top: 6px; right: 6px;
       background: #fef3c7; color: #78350f; border: 1px solid #b45309;
-      font-family: 'Press Start 2P', monospace; font-size: 9px; font-weight: bold;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; font-weight: bold;
       padding: 2px 5px; border-radius: 3px;
     }
     /* A dish and a crop are different things to the player, and the slot said so only in
@@ -344,7 +364,7 @@
     }
     .inv-detail-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
     .inv-detail-btn {
-      font-family: 'Press Start 2P', monospace; font-size: 9px; padding: 8px 11px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; padding: 8px 11px;
       border-radius: 4px; cursor: pointer; color: var(--wood-d);
       background: var(--parch-l); border: 1.5px solid var(--wood-m);
       transition: background .15s, border-color .15s;
@@ -393,7 +413,7 @@
     .ls-title-wrap { text-align: center; margin-bottom: 16px; }
     .ls-logo { font-size: clamp(36px, 5vw, 48px); margin-bottom: 6px; filter: drop-shadow(0 0 12px rgba(245, 158, 11, 0.45)); }
     .ls-title {
-      font-family: 'Press Start 2P', monospace;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust);
       font-size: clamp(18px, 3vw, 26px); letter-spacing: 2px;
       color: #f4d6a0;
       text-shadow: 0 2px 0 #4a2a0d;
@@ -452,7 +472,7 @@
       display: grid; place-items: center; flex-shrink: 0; font-weight: 700;
     }
     #level-select-overlay .lsr-title {
-      font-family: 'Press Start 2P', monospace; font-size: 11px; letter-spacing: .5px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px; letter-spacing: .5px;
       color: #dcfce7; margin-bottom: 7px;
     }
     #level-select-overlay .lsr-sub {
@@ -466,7 +486,7 @@
     #level-select-overlay .ls-sep {
       grid-column: 1 / -1;
       display: flex; align-items: center; gap: 12px;
-      font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 1px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; letter-spacing: 1px;
       color: #fcd34d; text-transform: uppercase;
       margin: 10px 0 -2px;
     }
@@ -528,7 +548,7 @@
        it — which is what the 16px cyan version was doing. #6b4420 on cream is 7.4:1. */
     #level-select-overlay .lc-num {
       display: block;
-      font-family: 'Press Start 2P', monospace; font-size: 9px; letter-spacing: .5px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; letter-spacing: .5px;
       color: #6b4420; text-transform: uppercase; margin-bottom: 5px;
     }
     /* The hero. Korean first, because this is a Korean course and the Korean is the
@@ -585,13 +605,13 @@
       gap: 8px; margin-top: 7px;
     }
     #level-select-overlay .lc-stat {
-      font-family: 'Press Start 2P', monospace; font-size: 10px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px;
       color: #6b4420; letter-spacing: 0; white-space: nowrap;
     }
     #level-select-overlay .lc-stat b { color: #2a1a0a; }
     /* No chip background to fight the card. The word does the work. */
     #level-select-overlay .lc-state {
-      font-family: 'Press Start 2P', monospace; font-size: 10px; letter-spacing: 0;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; letter-spacing: 0;
       color: #15803d; white-space: nowrap;
     }
     #level-select-overlay .lc-state.price { color: #92400e; }
@@ -693,7 +713,7 @@
     #hud-rank.pop { transform: scale(1.1); }
     #hud-rank-icon { font-size: 14px; line-height: 1; display: inline-flex; align-items: center; }
     #hud-rank-icon .hud-art-icon { width: 18px; height: 18px; }
-    #hud-rank-lv { font-family: 'Press Start 2P', monospace; font-size: 9px; color: #fde68a; }
+    #hud-rank-lv { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: #fde68a; }
     #hud-rank-bar {
       width: 42px; height: 6px; background: rgba(42,26,10,.55); border-radius: 2px; overflow: hidden;
       border: 1px solid rgba(232, 192, 122, 0.35);
@@ -780,7 +800,7 @@
     }
     #rank-seal { font-size: 56px; filter: drop-shadow(0 6px 12px rgba(0,0,0,.45)); }
     #rank-lv {
-      font-family: 'Press Start 2P', monospace; font-size: 13px; color: #fde68a;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 13px; color: #fde68a;
       letter-spacing: 2px; margin: 8px 0 6px;
     }
     #rank-title-ko {
@@ -801,7 +821,7 @@
     .rank-stat {
       background: rgba(255,248,232,.08); border: 1px solid rgba(253,230,138,.25); border-radius: 8px; padding: 8px 4px;
     }
-    .rank-stat b { display: block; font-family: 'Press Start 2P', monospace; font-size: 11px; color: #fde68a; margin-bottom: 4px; }
+    .rank-stat b { display: block; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px; color: #fde68a; margin-bottom: 4px; }
     .rank-stat span { font-size: 12px; font-weight: 700; color: #f6deaa; }
     #rank-next { font-size: 13px; font-weight: 700; color: #fde68a; margin: 6px 0 14px; }
     #rankup-card {
@@ -811,9 +831,9 @@
       box-shadow: 0 0 0 2px #0f172a, 0 0 40px rgba(253,224,71,.45);
       animation: popIn .35s cubic-bezier(.4,0,.2,1);
     }
-    #rankup-kicker { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #fde047; letter-spacing: 2px; }
+    #rankup-kicker { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 12px; color: #fde047; letter-spacing: 2px; }
     #rankup-icon { font-size: 64px; margin: 10px 0; }
-    #rankup-lv { font-family: 'Press Start 2P', monospace; font-size: 16px; color: #fde68a; }
+    #rankup-lv { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 16px; color: #fde68a; }
     #rankup-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 36px; font-weight: 900; color: #fff8e8; }
     #rankup-en { font-size: 16px; font-weight: 700; color: #fde68a; margin-bottom: 18px; }
 
@@ -875,7 +895,7 @@
       border-bottom: 2px dashed #c4893a;
     }
     #progress-title {
-      font-family: 'Press Start 2P', monospace; font-size: 11px; color: #4a2a0d;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px; color: #4a2a0d;
       display: inline-flex; align-items: center; gap: 8px;
     }
     .prog-close {
@@ -898,7 +918,7 @@
     .prog-stat.rose  .prog-stat-val { color: #9f1239; }
     .prog-section { margin-bottom: 18px; }
     .prog-section-title {
-      font-family: 'Press Start 2P', monospace; font-size: 10px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px;
       color: #4a2a0d; margin-bottom: 10px;
     }
     #prog-forecast { display: flex; align-items: flex-end; gap: 6px; height: 96px; }
@@ -1163,7 +1183,7 @@
       box-shadow: 0 0 0 2px #0f172a, 0 6px 18px rgba(0, 0, 0, 0.55);
       color: #06280f; cursor: pointer;
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-      font-family: 'Press Start 2P', monospace; font-size: 11px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px;
       user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
     }
     #tc-action:active { transform: scale(0.94); filter: brightness(1.1); }
@@ -1190,7 +1210,7 @@
       display: inline-block;
       background: rgba(30, 41, 59, 0.9);
       border: 1.5px solid var(--neon-cyan); border-radius: 4px;
-      padding: 0 6px; font-size: 12px; font-family: 'Press Start 2P', monospace;
+      padding: 0 6px; font-size: 12px; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust);
       color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
     }
 
@@ -1233,7 +1253,7 @@
       color: #4a2a0d; text-align: center; letter-spacing: 1px;
     }
     #en-word-display {
-      font-family: 'Press Start 2P', monospace; font-size: 22px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 22px;
       color: #7a3e12; display: block; margin-top: 6px;
       text-shadow: 0 1px 0 #fff3d6;
     }
@@ -1254,7 +1274,7 @@
     }
     #quiz-funfact-box.hidden { display: none !important; }
     #quiz-funfact-title {
-      font-family: 'Press Start 2P', monospace; font-size: 9px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px;
       color: #7a3e12; margin-bottom: 6px;
     }
     #quiz-funfact-text { font-size: 15px; font-weight: 700; line-height: 1.4; }
@@ -1374,7 +1394,7 @@
     #quiz-tier-hints { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
     .quiz-tier-btn {
       background: #fff3c7; border: 1.5px solid #b8894a;
-      border-radius: 4px; color: #7a3e12; font-family: 'Press Start 2P', monospace;
+      border-radius: 4px; color: #7a3e12; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust);
       font-size: 9px; padding: 6px 10px; cursor: pointer; transition: all 0.15s;
     }
     .quiz-tier-btn:hover { background: #fde68a; border-color: #92400e; transform: translateY(-1px); }
@@ -1407,7 +1427,7 @@
     #quiz-ui.phase-3 .quiz-step.active { background: #b45309; border-color: #92400e; }
     .quiz-step-line { flex: 1; height: 2px; background: #c4893a; min-width: 8px; }
     #quiz-gold-reward {
-      font-family: 'Press Start 2P', monospace; font-size: 9px; color: #b45309;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: #b45309;
     }
     #quiz-ui.phase-1 { border-color: #166534; }
     #quiz-ui.phase-2 { border-color: #1d4ed8; }
@@ -1508,7 +1528,7 @@
     }
     #vocab-title-wrap { flex: 1; min-width: 0; }
     #vocab-title {
-      font-family: 'Press Start 2P', monospace; font-size: clamp(14px, 1.35vw, 20px);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: clamp(14px, 1.35vw, 20px);
       color: #5b3412; line-height: 1.35;
     }
     #vocab-subtitle {
@@ -1537,7 +1557,7 @@
     }
     .vocab-search-wrap, .vocab-filter-wrap { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
     .vocab-control-label {
-      font-family: 'Press Start 2P', monospace; font-size: 8px; line-height: 1.4;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; line-height: 1.4;
       color: #7a3e12; text-transform: uppercase; letter-spacing: .2px;
     }
     .vocab-search-field {
@@ -1580,7 +1600,7 @@
       margin-bottom: 14px;
     }
     #vocab-count {
-      font-family: 'Press Start 2P', monospace; font-size: 10px; color: #5b3412;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; color: #5b3412;
       line-height: 1.5; letter-spacing: .1px;
     }
     .vocab-grid-help { color: #7a3e12; font-size: 13px; text-align: right; }
@@ -1660,7 +1680,7 @@
 
     .mastery-badge {
       display: inline-block; padding: 4px 8px; border-radius: 5px;
-      font-family: 'Press Start 2P', monospace; font-size: 7px; font-weight: 700;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 7px; font-weight: 700;
       line-height: 1.5; border: 1.5px solid; max-width: 100%;
       overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
@@ -1700,14 +1720,14 @@
       position: relative; color: var(--ink);
     }
     #shop-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    #shop-title { font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12; }
+    #shop-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 13px; color: #7a3e12; }
     /* Neon gold on parchment measured 1.35:1. Same gold semantics, in the palette
        `.inv-chip.gold` already uses for a gold value on a light ground. The trophy
        badge keeps the neon fill — its panel is still dark slate. */
     #shop-gold-badge {
       display: flex; align-items: center; gap: 7px; background: #fef3c7;
       border: 1.5px solid #b45309; border-radius: 8px; padding: 4px 16px;
-      font-family: 'Press Start 2P', monospace; font-size: 14px; color: #78350f;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 14px; color: #78350f;
     }
     /* Was #fff on a parchment panel — a 1.45:1 ✕, the same defect the vocab book had. */
     #shop-close-btn {
@@ -1728,16 +1748,16 @@
     .shop-card.owned { border-color: #166534; background: #e8f8dc; }
     .shop-card.too-expensive { opacity: .5; }
     .shop-card-icon { font-size: 26px; text-align: center; margin-bottom: 4px; }
-    .shop-card-name { font-family: 'Press Start 2P', monospace; font-size: 10px; color: var(--ink); margin-bottom: 4px; }
+    .shop-card-name { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; color: var(--ink); margin-bottom: 4px; }
     .shop-card-desc { font-size: 12px; color: #5b3412; margin-bottom: 8px; }
     .shop-card-price { display: flex; align-items: center; justify-content: space-between; }
     /* Neon gold on a cream card was 2.03:1, on 31 price labels. #b45309 is the gold-value
        tone `.inv-capacity-hint strong` and `.lb-pb-chip b` already use. */
-    .shop-card-cost { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #b45309; }
+    .shop-card-cost { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 12px; color: #b45309; }
     .shop-buy-btn {
       background: linear-gradient(180deg, var(--neon-gold), #d4a017);
       border: none; border-radius: 4px; padding: 6px 14px;
-      font-family: 'Press Start 2P', monospace; font-size: 10px; color: #0f172a;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; color: #0f172a;
       cursor: pointer; transition: filter .15s, transform .1s;
     }
     .shop-buy-btn:hover { filter: brightness(1.15); transform: translateY(-1px); }
@@ -1763,7 +1783,7 @@
       display: flex; align-items: center; gap: 12px; margin-bottom: 18px; padding-bottom: 12px;
       border-bottom: 1px solid rgba(56, 189, 248, 0.3);
     }
-    #fish-album-title { font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12; }
+    #fish-album-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 13px; color: #7a3e12; }
     #fish-album-sub { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 4px; }
     #fish-album-close-btn {
       margin-left: auto; background: var(--parch-l); border: 1.5px solid var(--wood-m);
@@ -1784,7 +1804,7 @@
     .fish-card-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 18px; font-weight: bold; color: var(--ink); }
 
     .fish-card-en { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 2px; }
-    .fish-card-catches { font-family: 'Press Start 2P', monospace; font-size: 10px; color: #b45309; margin-top: 8px; }
+    .fish-card-catches { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; color: #b45309; margin-top: 8px; }
 
     /* ── TROPHIES ────────────────────────────────────────────────────────── */
     #trophy-overlay {
@@ -1801,11 +1821,11 @@
       position: relative;
     }
     #trophy-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-    #trophy-title { font-family: 'Press Start 2P', monospace; font-size: 16px; color: var(--neon-gold); display: flex; align-items: center; gap: 8px; }
+    #trophy-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 16px; color: var(--neon-gold); display: flex; align-items: center; gap: 8px; }
     #trophy-gold-badge {
       display: flex; align-items: center; gap: 7px; background: rgba(245, 158, 11, 0.15);
       border: 1.5px solid var(--neon-gold); border-radius: 8px; padding: 4px 16px;
-      font-family: 'Press Start 2P', monospace; font-size: 14px; color: var(--neon-gold);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 14px; color: var(--neon-gold);
     }
     .trophy-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
     .trophy-card {
@@ -1823,17 +1843,17 @@
       width: 56px; height: 56px; object-fit: contain;
       image-rendering: pixelated; image-rendering: crisp-edges;
     }
-    .trophy-name { font-family: 'Press Start 2P', monospace; font-size: 11px; color: #7a3e12; margin-bottom: 8px; line-height: 1.4; }
+    .trophy-name { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px; color: #7a3e12; margin-bottom: 8px; line-height: 1.4; }
     .trophy-req { font-family: 'VT323', monospace; font-size: 18px; color: #5b3412; margin-bottom: 10px; }
     .trophy-buy-btn {
       background: linear-gradient(180deg, var(--neon-gold), #d4a017);
       border: none; border-radius: 4px; padding: 6px 14px; width: 100%;
-      font-family: 'Press Start 2P', monospace; font-size: 10px; color: #0f172a;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; color: #0f172a;
       cursor: pointer; transition: filter .1s;
     }
     .trophy-buy-btn:hover { filter: brightness(1.15); }
     .trophy-buy-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .trophy-unlocked-badge { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--neon-green); font-weight: 800; padding: 4px; }
+    .trophy-unlocked-badge { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px; color: var(--neon-green); font-weight: 800; padding: 4px; }
 
     /* Shop / boss-gate multiple-choice buttons (kept after Spell Duel was removed). */
     .duel-option-btn {
@@ -1862,7 +1882,7 @@
       animation: popIn .3s cubic-bezier(.4,0,.2,1); position: relative;
     }
     #memory-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-    #memory-title { font-family: 'Press Start 2P', monospace; font-size: 18px; color: var(--neon-purple); }
+    #memory-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 18px; color: var(--neon-purple); }
     #memory-close-btn {
       background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff; border-radius: 4px; width: 36px; height: 36px; font-size: 18px;
@@ -1916,7 +1936,7 @@
       border-bottom: 3px solid #c4893a; box-shadow: 0 4px 14px rgba(42,26,10,.28);
     }
     #vff-title {
-      font-family: 'Press Start 2P', monospace; font-size: 11px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px;
       color: #f6deaa; text-transform: uppercase; text-align: center;
     }
     #vff-header button {
@@ -1983,7 +2003,7 @@
       box-shadow: inset 0 1px #fff, 0 3px 0 #b9792c;
     }
     .vff-status-label {
-      margin-bottom: 7px; color: #7a3e12; font-family: 'Press Start 2P', monospace;
+      margin-bottom: 7px; color: #7a3e12; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust);
       font-size: 8px; line-height: 1.4; text-transform: uppercase;
     }
     #vff-phase { color: #166534; font-size: 17px; font-weight: 900; line-height: 1.35; }
@@ -2001,7 +2021,7 @@
       box-shadow: 0 3px 0 rgba(139,90,43,.55), 0 8px 18px rgba(91,52,18,.08);
     }
     .vff-section-title {
-      font-family: 'Press Start 2P', monospace; font-size: 9px; line-height: 1.5;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; line-height: 1.5;
       color: #6b3d14; margin-bottom: 13px; text-transform: uppercase;
     }
     .vff-fact-text {
@@ -2126,7 +2146,7 @@
       padding: 10px 18px; background: rgba(244, 63, 94, 0.12);
       border-bottom: 1px solid rgba(244, 63, 94, 0.2);
     }
-    #cat-dialog-name { font-family: 'Press Start 2P', monospace; font-size: 12px; color: var(--neon-pink); }
+    #cat-dialog-name { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 12px; color: var(--neon-pink); }
     #cat-dialog-close {
       background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
       color: #fff; border-radius: 4px; padding: 4px 10px; font-size: 14px; cursor: pointer;
@@ -2147,7 +2167,7 @@
     }
     #cat-speech-tail { display: none; }
     #cat-word-wrap { flex: 1; padding: 18px 20px 14px 18px; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
-    #cat-dialog-label { font-family: 'Press Start 2P', monospace; font-size: 10px; color: rgba(226, 232, 240, 0.4); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+    #cat-dialog-label { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; color: rgba(226, 232, 240, 0.4); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
     #cat-dialog-emoji-word { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
     #cat-emoji { font-size: 42px; flex-shrink: 0; }
     #cat-ko { font-family: 'Noto Sans KR', sans-serif; font-size: 38px; font-weight: 900; color: #fff; text-shadow: 0 0 12px rgba(244, 63, 94, 0.5); line-height: 1.2; }
@@ -2182,7 +2202,7 @@
       animation: popIn .35s cubic-bezier(.4,0,.2,1); position: relative;
     }
     #levelup-card .trophy { font-size: 58px; margin-bottom: 14px; filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.6)); }
-    #levelup-card h1 { font-family: 'Press Start 2P', monospace; font-size: 22px; color: var(--neon-gold); margin-bottom: 10px; }
+    #levelup-card h1 { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 22px; color: var(--neon-gold); margin-bottom: 10px; }
     #levelup-card p { font-family: 'VT323', monospace; font-size: 22px; color: rgba(226, 232, 240, 0.8); margin-bottom: 24px; }
     .levelup-btns, .alldone-btns { display: flex; gap: 12px; }
     #levelup-next-btn, #levelup-menu-btn, #replay-btn, #menu-btn {
@@ -2202,7 +2222,7 @@
       animation: popIn .4s cubic-bezier(.4,0,.2,1); position: relative;
     }
     #alldone-card .star { font-size: 64px; margin-bottom: 14px; filter: drop-shadow(0 0 16px rgba(74, 222, 128, 0.6)); }
-    #alldone-card h1 { font-family: 'Press Start 2P', monospace; font-size: 22px; color: var(--neon-green); margin-bottom: 10px; }
+    #alldone-card h1 { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 22px; color: var(--neon-green); margin-bottom: 10px; }
     #alldone-card p { font-family: 'VT323', monospace; font-size: 22px; color: rgba(226, 232, 240, 0.8); margin-bottom: 24px; }
     #replay-btn { background: linear-gradient(180deg, var(--neon-green), #16a34a); border-color: #86efac; color: #0f172a; font-weight: bold; }
     #replay-btn:hover { filter: brightness(1.15); transform: translateY(-2px); }
@@ -2212,7 +2232,7 @@
       position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 23, 42, 0.95); color: var(--neon-gold);
       border: 2px solid var(--neon-gold); border-radius: 4px;
-      padding: 10px 20px; font-family: 'Press Start 2P', monospace; font-size: 11px;
+      padding: 10px 20px; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px;
       z-index: 600; pointer-events: none; opacity: 0; transition: opacity .3s, transform .3s;
       box-shadow: 0 0 0 2px #0f172a, var(--glow-gold);
     }
@@ -2390,10 +2410,10 @@
       padding: 14px 18px; border-bottom: 2px solid var(--wood-l); flex: 0 0 auto;
     }
     .cs-headright { display: flex; align-items: center; gap: 10px; }
-    #cassette-title { font-family: 'Press Start 2P', monospace; font-size: 13px; line-height: 1.5; color: var(--wood-d); }
+    #cassette-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 13px; line-height: 1.5; color: var(--wood-d); }
     #cassette-sub { font-size: 12px; color: #6b4a22; margin-top: 5px; }
-    #listen-title, #dict-title { font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--wood-d); }
-    #dict-pos { font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--wood-m); }
+    #listen-title, #dict-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px; color: var(--wood-d); }
+    #dict-pos { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: var(--wood-m); }
     .cs-x {
       flex: 0 0 auto; background: var(--parch-l); border: 2px solid var(--wood-m);
       border-radius: 4px; padding: 2px 10px; cursor: pointer; font-size: 13px; color: var(--ink);
@@ -2406,7 +2426,7 @@
       padding: 11px 18px 13px; border-top: 2px solid var(--wood-l); background: rgba(255,248,232,0.45);
     }
     .cs-foot-ko { font-size: 11.5px; color: #6b4a22; }
-    .cs-foot-n { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-m); }
+    .cs-foot-n { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-m); }
 
     /* ── 듣기 ── */
     #listen-body { display: grid; grid-template-columns: 268px minmax(0, 1fr); min-height: 0; flex: 1 1 auto; }
@@ -2426,12 +2446,12 @@
     .cs-tn {
       flex: 0 0 auto; min-width: 24px; height: 20px; line-height: 18px; text-align: center;
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
-      font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-d);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-d);
     }
     .cs-tt { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
     .cs-tko { font-size: 13px; font-weight: 500; }
     .cs-ten { font-size: 10.5px; color: #6b4a22; }
-    .cs-td { flex: 0 0 auto; margin-left: auto; font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-m); }
+    .cs-td { flex: 0 0 auto; margin-left: auto; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-m); }
 
     #listen-right { display: flex; flex-direction: column; min-width: 0; }
     #listen-transport {
@@ -2450,14 +2470,14 @@
     .cs-meter { display: flex; flex-direction: column; gap: 6px; flex-grow: 1; min-width: 0; }
     .cs-meterrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     .cs-meterrow span:first-child { font-size: 12px; color: var(--wood-d); }
-    .cs-meterrow span:last-child { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-m); }
+    .cs-meterrow span:last-child { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-m); }
     /* The thin progress bar this transport used to carry is gone. #listen-wave draws the
        playhead now, and two progress readings on one row disagreed on rounding. */
     #listen-rates, #dict-rates { flex: 0 0 auto; display: flex; gap: 5px; }
     .cs-rate {
       padding: 3px 7px; background: var(--parch-l); border: 1.5px solid var(--wood-l);
       border-radius: 3px; cursor: pointer;
-      font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-m);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-m);
     }
     .cs-rate.on { border-color: #1e3a8a; background: #fff3d6; color: #1e3a8a; }
 
@@ -2479,13 +2499,13 @@
     #dict-wave { height: 48px; }
     #listen-loopbar, #dict-loopbar { display: flex; align-items: center; gap: 5px; }
     #dict-clock {
-      margin-left: auto; font-family: 'Press Start 2P', monospace; font-size: 8px;
+      margin-left: auto; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px;
       color: var(--wood-m); white-space: nowrap;
     }
     .cs-lb {
       padding: 3px 7px; background: var(--parch-l); border: 1.5px solid var(--wood-l);
       border-radius: 3px; cursor: pointer;
-      font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-m);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-m);
     }
     .cs-lb:hover { background: #fff3d6; }
     .cs-lb.on { border-color: #1e3a8a; background: #fff3d6; color: #1e3a8a; }
@@ -2497,12 +2517,12 @@
     .prac-badge {
       margin-left: 6px; padding: 1px 4px; border-radius: 3px;
       background: var(--parch-l); border: 1.5px solid var(--wood-l);
-      font-family: 'Press Start 2P', monospace; font-size: 7px; color: var(--wood-m);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 7px; color: var(--wood-m);
       white-space: nowrap;
     }
     .prac-badge.good { border-color: #1e7a3a; color: #1e7a3a; background: #eafaef; }
     #dict-log {
-      margin-left: 8px; font-family: 'Press Start 2P', monospace; font-size: 8px;
+      margin-left: 8px; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px;
       color: var(--wood-m); white-space: nowrap;
     }
     .prac-row {
@@ -2514,17 +2534,17 @@
     .prac-lbl { flex: 0 0 84px; font-size: 12px; color: var(--wood-d); }
     .prac-n {
       flex: 0 0 auto; min-width: 28px; text-align: right;
-      font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--wood-d);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px; color: var(--wood-d);
     }
     .prac-sub { flex: 1 1 auto; font-size: 11px; color: var(--wood-m); }
     .prac-pct {
-      flex: 0 0 auto; font-family: 'Press Start 2P', monospace; font-size: 9px; color: #1e7a3a;
+      flex: 0 0 auto; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: #1e7a3a;
     }
     .prac-pct.low { color: #a32b1c; }
     .prac-empty { font-size: 11.5px; color: var(--wood-m); padding: 6px 2px; }
 
     #listen-abinfo, #dict-abinfo {
-      margin-left: auto; font-family: 'Press Start 2P', monospace; font-size: 8px;
+      margin-left: auto; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px;
       color: var(--wood-m); white-space: nowrap;
     }
     #dict-abinfo { margin-left: 8px; }
@@ -2550,7 +2570,7 @@
     #dict-body { display: flex; flex-direction: column; gap: 14px; padding: 18px; overflow-y: auto; min-height: 0; }
     #dict-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
     .cs-tag { padding: 3px 8px; border-radius: 3px; font-size: 11px; }
-    .cs-tag.trk { background: var(--parch); border: 1.5px solid var(--wood-l); color: var(--wood-d); font-family: 'Press Start 2P', monospace; font-size: 8px; }
+    .cs-tag.trk { background: var(--parch); border: 1.5px solid var(--wood-l); color: var(--wood-d); font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; }
     .cs-tag.who { background: var(--parch); border: 1.5px solid var(--wood-l); color: var(--wood-d); }
     .cs-tag.lesson { background: rgba(30,58,138,0.09); border: 1.5px solid #1e3a8a; color: #1e3a8a; }
     #dict-transport {
@@ -2586,9 +2606,9 @@
       background: rgba(255,248,232,0.7); border: 2px solid var(--wood-l); border-radius: 6px;
     }
     .cs-ansrow { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
-    .cs-lbl { font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-m); }
+    .cs-lbl { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-m); }
     .cs-lbl.bad { color: #9f1239; }
-    .cs-score { font-family: 'Press Start 2P', monospace; font-size: 8px; }
+    .cs-score { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; }
     .cs-score.good { color: #166534; }
     .cs-score.bad { color: #9f1239; }
     .cs-ans { font-size: 19px; line-height: 1.6; word-break: keep-all; }
@@ -2693,7 +2713,7 @@
     .cs-mode-key {
       width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center;
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 4px;
-      font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--wood-d);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: var(--wood-d);
     }
     .cs-mode-title {
       display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
@@ -2934,7 +2954,7 @@
       border-bottom: 2px dashed #c4893a; flex-shrink: 0;
     }
     #quest-title {
-      font-family: 'Press Start 2P', monospace; font-size: 11px; color: #4a2a0d;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px; color: #4a2a0d;
       display: inline-flex; align-items: center; gap: 8px;
     }
     #quest-body { padding: 14px 16px 18px; overflow-y: auto; }
@@ -3086,7 +3106,7 @@
       image-rendering: pixelated; image-rendering: crisp-edges;
     }
     .recipe-card.ready { border-color: #16a34a; }
-    .recipe-card-title { font-family: 'Press Start 2P', monospace; font-size: 10px; color: #7a3e12; text-align: center; }
+    .recipe-card-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; color: #7a3e12; text-align: center; }
     .recipe-card-sub { font-size: 11px; color: #5b3412; text-align: center; }
     .recipe-req-list { display: flex; flex-wrap: wrap; gap: 4px; background: #fff3d6; padding: 6px; border-radius: 4px; }
     .recipe-req-chip {
@@ -3109,11 +3129,11 @@
     .recipe-info-btn {
       background: #fff8e8; border: 1.5px solid #c4893a; color: #7a3e12;
       border-radius: 4px; padding: 8px 10px; font-size: 10px; cursor: pointer;
-      font-family: 'Press Start 2P', monospace;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust);
     }
     .cook-btn {
       background: linear-gradient(135deg, #f59e0b, #d97706); border: none; border-radius: 4px;
-      color: #fff; font-family: 'Press Start 2P', monospace; font-size: 10px; padding: 8px;
+      color: #fff; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; padding: 8px;
       cursor: pointer; transition: opacity 0.15s, transform 0.1s; text-align: center;
     }
     .cook-btn:hover { opacity: 0.9; transform: scale(1.02); }
@@ -3140,7 +3160,7 @@
       padding-bottom: 14px; margin-bottom: 14px;
     }
     .ck-header-id { display: flex; align-items: center; gap: 10px; }
-    .ck-title { font-family: 'Press Start 2P', monospace; font-size: 15px; color: var(--wood-d); line-height: 1.4; }
+    .ck-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 15px; color: var(--wood-d); line-height: 1.4; }
     .ck-subtitle { font-size: 12px; color: #7a3e12; margin-top: 5px; font-family: 'Be Vietnam Pro', sans-serif; }
     .ck-close {
       background: var(--parch-l); border: 1.5px solid var(--wood-m);
@@ -3159,7 +3179,7 @@
     .ck-progress-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
     .ck-progress-label { font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 700; color: #5b3412; }
     .ck-progress-badge {
-      font-family: 'Press Start 2P', monospace; font-size: 10px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px;
       background: var(--parch-l); border: 1.5px solid var(--wood-m);
       color: var(--wood-d); padding: 5px 10px; border-radius: 4px; white-space: nowrap;
     }
@@ -3180,7 +3200,7 @@
       box-shadow: inset 0 1px 0 #fff;
     }
     .ck-pantry-head {
-      font-family: 'Press Start 2P', monospace; font-size: 9px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px;
       color: var(--wood-d); margin-bottom: 8px;
     }
     .ck-pantry-list { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -3204,7 +3224,7 @@
     }
     .ck-filters { display: flex; gap: 6px; flex-wrap: wrap; }
     .ck-filter {
-      font-family: 'Press Start 2P', monospace; font-size: 9px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px;
       padding: 7px 9px; border-radius: 4px; cursor: pointer;
       background: var(--parch-l); color: #7a3e12; border: 1.5px solid var(--wood-l);
       display: inline-flex; align-items: center; gap: 5px;
@@ -3242,7 +3262,7 @@
     .ck-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
     .ck-col { min-width: 0; }
     .ck-col-head {
-      font-family: 'Press Start 2P', monospace; font-size: 10px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px;
       color: var(--wood-d); margin-bottom: 8px;
     }
     .ck-recipe-list {
@@ -3288,7 +3308,7 @@
     }
     .ck-card-tags { flex: 0 0 auto; display: flex; flex-direction: column; gap: 3px; align-items: flex-end; }
     .ck-tag {
-      font-family: 'Press Start 2P', monospace; font-size: 7px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 7px;
       padding: 3px 5px; border-radius: 4px; white-space: nowrap; border: 1px solid;
     }
     .ck-tag.cooked { background: #dcfce7; border-color: #15803d; color: #14532d; }
@@ -3310,7 +3330,7 @@
     .ck-detail-desc { font-size: 12px; color: #5b3412; line-height: 1.55; font-family: 'Be Vietnam Pro', sans-serif; }
     .ck-section { border-top: 1.5px solid rgba(139,90,43,0.35); padding-top: 10px; }
     .ck-section-head {
-      font-family: 'Press Start 2P', monospace; font-size: 9px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px;
       color: var(--wood-d); margin-bottom: 8px;
     }
     .ck-chips { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -3324,7 +3344,7 @@
     .ck-ing.miss { background: #ffe9e9; border-color: #b91c1c; color: #7f1d1d; }
     .ck-reward {
       padding: 5px 10px; border-radius: 3px; font-size: 9px;
-      font-family: 'Press Start 2P', monospace; white-space: nowrap; border: 1.5px solid;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); white-space: nowrap; border: 1.5px solid;
     }
     .ck-reward.xp     { background: #f3e8ff; border-color: #7e22ce; color: #581c87; }
     .ck-reward.gold   { background: #fef3c7; border-color: #b45309; color: #78350f; }
@@ -3333,7 +3353,7 @@
     .ck-cook-wrap { margin-top: auto; padding-top: 10px; }
     .ck-cook-btn {
       width: 100%; padding: 13px; border: 2px solid #b45309; border-radius: 8px; color: #fff;
-      font-family: 'Press Start 2P', monospace; font-size: 11px; line-height: 1.5;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 11px; line-height: 1.5;
       background: linear-gradient(180deg, #f59e0b, #d97706);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.45), 0 3px 0 #92400e;
       cursor: pointer; transition: filter .15s, transform .1s;
@@ -3396,7 +3416,7 @@
       padding-bottom: 12px; margin-bottom: 14px; border-bottom: 2px dashed #c4893a;
     }
     #desk-menu-title {
-      font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12; line-height: 1.4;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 13px; color: #7a3e12; line-height: 1.4;
     }
     #desk-menu-sub {
       font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 5px;
@@ -3427,7 +3447,7 @@
     .desk-mode-key {
       flex: 0 0 auto; min-width: 20px; height: 20px; line-height: 18px; text-align: center;
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
-      font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--wood-d);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: var(--wood-d);
     }
     .desk-mode-icon { flex: 0 0 auto; font-size: 22px; line-height: 1; }
     .desk-mode-text { display: flex; flex-direction: column; min-width: 0; }
@@ -3456,7 +3476,7 @@
       background: linear-gradient(180deg, #fff3d6 0%, transparent);
     }
     #wb-title-wrap { flex: 1; min-width: 0; }
-    #wb-title { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #7a3e12; line-height: 1.4; }
+    #wb-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 12px; color: #7a3e12; line-height: 1.4; }
     #wb-sub { font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #5b3412; margin-top: 5px; }
     #wb-count {
       flex: 0 0 auto; font-family: 'VT323', monospace; font-size: 20px; color: #7a3e12;
@@ -3486,7 +3506,7 @@
       padding: 10px 12px; font-family: 'Noto Sans KR', sans-serif; font-size: 15px; color: #1a1208;
     }
     .wb-example-tag {
-      font-family: 'Press Start 2P', monospace; font-size: 9px; color: #1e3a8a; margin-right: 4px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: #1e3a8a; margin-right: 4px;
     }
     .wb-example-en {
       font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #3b4a6b; margin-top: 4px;
@@ -3534,7 +3554,7 @@
     .wb-chip-key {
       min-width: 18px; height: 18px; line-height: 16px; text-align: center;
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
-      font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-d);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-d);
     }
 
     #wb-items { display: flex; flex-direction: column; gap: 8px; }
@@ -3727,7 +3747,7 @@
       flex: 0 0 auto; padding: 10px 18px; border-radius: 4px; cursor: pointer;
       background: linear-gradient(180deg, #86efac, #4ade80);
       border: 2px solid #166534; color: #14532d;
-      font-family: 'Press Start 2P', monospace; font-size: 10px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 3px 0 #166534;
     }
     #wb-check:hover:not(:disabled) { filter: brightness(1.05); }
@@ -3789,7 +3809,7 @@
     .wb-pick-key {
       min-width: 22px; height: 22px; line-height: 20px; text-align: center;
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
-      font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--wood-d);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: var(--wood-d);
     }
     .wb-pick-icon { font-size: 28px; line-height: 1; }
     .wb-pick-text { display: flex; flex-direction: column; min-width: 0; gap: 4px; }
@@ -3803,7 +3823,7 @@
       color: var(--ink); letter-spacing: 0;
     }
     .wb-pick-no {
-      font-family: 'Press Start 2P', monospace; font-size: 10px; color: #7a3e12;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; color: #7a3e12;
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
       padding: 3px 6px; white-space: nowrap;
     }
@@ -3892,7 +3912,7 @@
     .wb-spk {
       flex: 0 0 auto; min-width: 19px; height: 19px; line-height: 17px; text-align: center;
       background: var(--parch-l); border: 1.5px solid var(--wood-l); border-radius: 3px;
-      font-family: 'Press Start 2P', monospace; font-size: 8px; color: var(--wood-d);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-d);
     }
     /* A name rather than an initial: 스티븐 at 8px in a 19px box is a smudge, so it
        gets room and a readable size. The family is stated for intent only — the
@@ -4018,7 +4038,7 @@
       display: inline-flex; align-items: center; justify-content: center;
       min-width: 22px; height: 24px; padding: 0 6px;
       background: #e8dcc4; border: 1.5px solid var(--wood-m); border-radius: 3px;
-      font-family: 'Press Start 2P', monospace; font-size: 9px; color: var(--wood-d);
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: var(--wood-d);
     }
 
     @media (max-width: 720px) {
@@ -4063,7 +4083,7 @@
     }
     #audio-title-wrap { flex: 1; min-width: 0; }
     #audio-title {
-      font-family: 'Press Start 2P', monospace; font-size: 13px; color: #7a3e12;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 13px; color: #7a3e12;
       display: flex; align-items: center; gap: 8px; line-height: 1.4;
     }
     #audio-sub {
@@ -4202,7 +4222,7 @@
     .lb-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #c4893a; padding-bottom: 14px; margin-bottom: 16px; }
     .lb-head-copy { display: flex; align-items: center; gap: 10px; }
     .lb-seal { font-size: 32px; line-height: 1; }
-    .lb-title { font-family: 'Press Start 2P', monospace; font-size: 14px; color: #4a2a0d; }
+    .lb-title { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 14px; color: #4a2a0d; }
     .lb-sub { font-size: 12px; font-weight: 700; color: #5b3412; margin-top: 4px; }
     .lb-close {
       background: #fff8e8; border: 2px solid #8b5a2b; color: #2a1a0a;
@@ -4213,7 +4233,7 @@
       padding: 14px; margin-bottom: 16px; color: #2a1a0a;
     }
     .lb-pb-kicker {
-      font-family: 'Press Start 2P', monospace; font-size: 10px; color: #4a2a0d; margin-bottom: 8px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 10px; color: #4a2a0d; margin-bottom: 8px;
     }
     #lb-pb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; font-size: 12px; }
     .lb-pb-chip {
@@ -4225,12 +4245,12 @@
     .lb-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; border-bottom: 2px dashed #c4893a; padding-bottom: 8px; }
     .lb-tab-btn {
       background: #fff8e8; border: 2px solid #8b5a2b; border-radius: 4px; color: #4a2a0d;
-      font-family: 'Press Start 2P', monospace; font-size: 9px; padding: 6px 10px; cursor: pointer;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; padding: 6px 10px; cursor: pointer;
     }
     .lb-tab-btn.active { background: #fde68a; border-color: #b45309; color: #4a2a0d; }
 
     .lb-table { width: 100%; border-collapse: collapse; margin-top: 8px; color: #2a1a0a; }
-    .lb-table th { font-family: 'Press Start 2P', monospace; font-size: 9px; color: #4a2a0d; text-align: left; padding: 8px; border-bottom: 2px solid #8b5a2b; }
+    .lb-table th { font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 9px; color: #4a2a0d; text-align: left; padding: 8px; border-bottom: 2px solid #8b5a2b; }
     .lb-table td { font-size: 13px; font-weight: 600; padding: 8px; border-bottom: 1px solid #e8c07a; color: #2a1a0a; }
     .lb-table .lb-title-cell { color: #5b3412; }
     .lb-table .lb-val { color: #b45309; font-weight: 800; }

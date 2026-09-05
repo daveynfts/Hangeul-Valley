@@ -998,8 +998,8 @@ class FarmScene extends Phaser.Scene {
     if (this.shopNPC.texture) this.shopNPC.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (this.shadows) this.shadows.createShadow(this.shopNPC, 76, 18, 1);
 
-    this.shopHint = this.add.text(sx, sy + 10, '🏪 SHOP\n' + WORLD_CLICK_HINT, {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'14px',
+    this.shopHint = this.add.text(sx, sy + 10, '🏪 ' + hvT('ui.farm.shop') + '\n' + worldClickHint(), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(14),
       color:'#FFD700', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5, 0).setDepth(sy+1).setAlpha(0);
 
@@ -1016,8 +1016,8 @@ class FarmScene extends Phaser.Scene {
     this.boardSprite = this.add.image(bx, by, tex).setOrigin(0.5,1).setScale(1).setDepth(by);
     if (this.boardSprite.texture) this.boardSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (this.shadows) this.shadows.createShadow(this.boardSprite, 54, 13, 1);
-    this.boardHint = this.add.text(bx, by - this.boardSprite.displayHeight - 8, '📋 Minigame\n' + WORLD_CLICK_HINT, {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+    this.boardHint = this.add.text(bx, by - this.boardSprite.displayHeight - 8, '📋 ' + hvT('ui.farm.minigame') + '\n' + worldClickHint(), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(12),
       color:'#FF88FF', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(by+1).setAlpha(0);
     this.tweens.add({targets:this.boardHint, y:this.boardHint.y-3, duration:700, yoyo:true, repeat:-1});
@@ -1037,8 +1037,8 @@ class FarmScene extends Phaser.Scene {
     this.arcadeSprite = this.add.image(ax, ay, tex).setOrigin(0.5,1).setScale(this.arcadeBaseScale).setDepth(ay);
     if (this.arcadeSprite.texture) this.arcadeSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (this.shadows) this.shadows.createShadow(this.arcadeSprite, 46, 14, 1);
-    this.arcadeHint = this.add.text(ax, ay - this.arcadeSprite.displayHeight - 8, '👾 ARCADE\n' + WORLD_CLICK_HINT, {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+    this.arcadeHint = this.add.text(ax, ay - this.arcadeSprite.displayHeight - 8, '👾 ' + hvT('ui.farm.arcade') + '\n' + worldClickHint(), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(12),
       color:'#00FFFF', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(ay+1).setAlpha(0);
     this.tweens.add({targets:this.arcadeHint, y:this.arcadeHint.y-3, duration:600, yoyo:true, repeat:-1});
@@ -1059,8 +1059,8 @@ class FarmScene extends Phaser.Scene {
     if (this.shadows) this.shadows.createShadow(this.wizardSprite, 34, 12, 1);
     this.tweens.add({ targets: this.wizardSprite, y: wy - 4, duration: 900, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
-    this.wizardHint = this.add.text(wx, wy - this.wizardSprite.displayHeight - 8, '⚡ SPELL DUEL\n' + WORLD_CLICK_HINT, {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+    this.wizardHint = this.add.text(wx, wy - this.wizardSprite.displayHeight - 8, '⚡ ' + hvT('ui.farm.spellDuel') + '\n' + worldClickHint(), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(12),
       color:'#A855F7', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(wy+1).setAlpha(0);
     this.tweens.add({ targets: this.wizardHint, y: this.wizardHint.y - 3, duration: 600, yoyo: true, repeat: -1 });
@@ -1081,8 +1081,8 @@ class FarmScene extends Phaser.Scene {
     if (this.catSprite.texture) this.catSprite.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     if (this.shadows) this.shadows.createShadow(this.catSprite, 30, 6, 1);
     this.tweens.add({ targets:this.catSprite, y:cy-3, duration:1200, yoyo:true, repeat:-1, ease:'Sine.InOut' });
-    this.catHint = this.add.text(cx, cy - this.catSprite.displayHeight - 6, '🐱 야옹\n' + WORLD_CLICK_HINT, {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+    this.catHint = this.add.text(cx, cy - this.catSprite.displayHeight - 6, '🐱 야옹\n' + worldClickHint(), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(12),
       color:'#FFCC44', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(cy+1).setAlpha(0);
     this.tweens.add({ targets:this.catHint, y:this.catHint.y-3, duration:700, yoyo:true, repeat:-1 });
@@ -1102,8 +1102,8 @@ class FarmScene extends Phaser.Scene {
     if (this.shadows) this.shadows.createShadow(this.portalSprite, 82, 22, 1);
     this.tweens.add({ targets: this.portalSprite, alpha: { from: 0.9, to: 1 }, duration: 800, yoyo: true, repeat: -1, ease: 'Sine.InOut' });
     
-    this.portalHint = this.add.text(px, py - this.portalSprite.displayHeight - 8, '🌀 DUNGEON\n' + WORLD_CLICK_HINT, {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+    this.portalHint = this.add.text(px, py - this.portalSprite.displayHeight - 8, '🌀 ' + hvT('ui.farm.dungeon') + '\n' + worldClickHint(), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(12),
       color:'#EC4899', stroke:'#000', strokeThickness:3, align:'center'
     }).setOrigin(0.5,1).setDepth(py+1).setAlpha(0);
     this.tweens.add({ targets: this.portalHint, y: this.portalHint.y - 3, duration: 600, yoyo: true, repeat: -1 });
@@ -1152,9 +1152,9 @@ class FarmScene extends Phaser.Scene {
     this.fishHint = this.add.text(
       fx,
       this.dockSprite.y - this.dockSprite.displayHeight / 2 - 8,
-      '🎣 FISHING POND\n' + WORLD_CLICK_HINT,
+      '🎣 ' + hvT('ui.farm.pond') + '\n' + worldClickHint(),
       {
-        fontFamily:'"Press Start 2P",monospace', fontSize:'12px',
+        fontFamily: hvPixelFont(), fontSize: hvPixelSize(12),
         color:'#38BDF8', stroke:'#000', strokeThickness:3, align:'center'
       }
     ).setOrigin(0.5,1).setDepth(fy+1).setAlpha(0);
@@ -1329,8 +1329,8 @@ class FarmScene extends Phaser.Scene {
       duration: 3200, yoyo: true, repeat: -1, ease: 'Sine.InOut'
     });
     const labelY = Math.max(70, ay - (hd ? 188 : 260));
-    this.appleTreeLabel = this.add.text(ax, labelY, '🍎 HARVEST!\n' + WORLD_CLICK_HINT, {
-      fontFamily: '"Press Start 2P",monospace', fontSize: '14px',
+    this.appleTreeLabel = this.add.text(ax, labelY, '🍎 ' + hvT('ui.farm.harvest') + '\n' + worldClickHint(), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(14),
       color: '#FFFFFF', stroke: '#000', strokeThickness: 4, align: 'center'
     }).setOrigin(0.5, 1).setDepth(ay + 100).setAlpha(0);
     this.tweens.add({ targets: this.appleTreeLabel, y: this.appleTreeLabel.y - 8,
@@ -1339,7 +1339,7 @@ class FarmScene extends Phaser.Scene {
     this.tweens.add({ targets: this.appleTreeGlow, alpha: { from: 1, to: 0.1 },
       duration: 750, yoyo: true, repeat: -1 });
     this.appleTreeTimer = this.add.text(ax, ay + 8, '', {
-      fontFamily: '"Press Start 2P",monospace', fontSize: '10px',
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(10),
       color: '#AAFFAA', stroke: '#000', strokeThickness: 2, align: 'center'
     }).setOrigin(0.5, 0).setDepth(ay + 10);
     // Name tag
@@ -1409,9 +1409,9 @@ class FarmScene extends Phaser.Scene {
       }
     }
 
-    this.beehiveHint = this.add.text(bx, by - this.beehiveSprite.displayHeight - 8, '🐝 Beehive\n' + WORLD_CLICK_HINT, {
-      fontFamily: '"Press Start 2P",monospace',
-      fontSize: '12px',
+    this.beehiveHint = this.add.text(bx, by - this.beehiveSprite.displayHeight - 8, '🐝 ' + hvT('ui.farm.beehive') + '\n' + worldClickHint(), {
+      fontFamily: hvPixelFont(),
+      fontSize: hvPixelSize(12),
       color: '#FFFFFF',
       stroke: '#000',
       strokeThickness: 4,
@@ -1540,8 +1540,8 @@ class FarmScene extends Phaser.Scene {
 
     // Korean Label
     const labelText = this.add.text(0, 16, nameKo, {
-      fontFamily: '"Press Start 2P", "Noto Sans KR", monospace',
-      fontSize: '9px',
+      fontFamily: hvPixelFont() + ',"Noto Sans KR"',
+      fontSize: hvPixelSize(9),
       color: '#FFFFFF',
       stroke: '#000000',
       strokeThickness: 2
@@ -2233,7 +2233,7 @@ class FarmScene extends Phaser.Scene {
     const plotHit = PLOT_SIZE / 2 + 10;
     const plotUse = PLOT_SIZE + 24;
     const plots = this.plots || [];
-    const labelOf = (typeof clickActionLabel === 'function') ? clickActionLabel : (v) => 'Click ' + v;
+    const labelOf = (typeof clickActionLabel === 'function') ? clickActionLabel : (v) => hvT('ui.world.click') + ' ' + v;
     const mk = (o) => { list.push(o); };
 
     if (this.kitchenStation) {
@@ -2281,7 +2281,7 @@ class FarmScene extends Phaser.Scene {
         id: 'apple', kind: 'apple',
         x: this.appleX, y: this.appleY - 30,
         hitR: 70, useR: 95,
-        label: labelOf('Harvest 🍎 Bonus!'), color: 0xFF3333, hw: 60, hh: 70,
+        label: labelOf(hvT('ui.farm.act.harvestBonus')), color: 0xFF3333, hw: 60, hh: 70,
         hy: this.appleY - 50
       });
     }
@@ -2289,36 +2289,36 @@ class FarmScene extends Phaser.Scene {
       if (p.sState === '4') mk({
         id: 'plot:' + p.index, kind: 'plot-ripe', plot: p,
         x: p.x, y: p.y, hitR: plotHit, useR: plotUse,
-        label: labelOf('Harvest +Gold'), color: 0xFFD700, hw: PLOT_SIZE, hh: PLOT_SIZE, hy: p.y
+        label: labelOf(hvT('ui.farm.act.harvestGold')), color: 0xFFD700, hw: PLOT_SIZE, hh: PLOT_SIZE, hy: p.y
       });
     });
     plots.forEach((p) => {
       if (p.sState === '2') mk({
         id: 'plot:' + p.index, kind: 'plot-water', plot: p,
         x: p.x, y: p.y, hitR: plotHit, useR: plotUse,
-        label: labelOf('Water'), color: 0x55CCFF, hw: PLOT_SIZE, hh: PLOT_SIZE, hy: p.y
+        label: labelOf(hvT('ui.farm.act.water')), color: 0x55CCFF, hw: PLOT_SIZE, hh: PLOT_SIZE, hy: p.y
       });
     });
     if (extrasOn) {
       if (this.catSprite && this.catSprite.visible && this.catX) mk({
         id: 'cat', kind: 'cat', x: this.catX, y: this.catY, hitR: 48, useR: 65,
-        label: labelOf('Talk to Ginger Cat'), color: 0xFF88CC, hw: 44, hh: 44, hy: this.catY - 20
+        label: labelOf(hvT('ui.farm.act.cat')), color: 0xFF88CC, hw: 44, hh: 44, hy: this.catY - 20
       });
       if (this.wizardSprite && this.wizardSprite.visible && this.wizardX) mk({
         id: 'wizard', kind: 'wizard', x: this.wizardX, y: this.wizardY, hitR: 56, useR: 85,
-        label: labelOf('Wizard'), color: 0xA855F7, hw: 44, hh: 50, hy: this.wizardY - 25
+        label: labelOf(hvT('ui.farm.act.wizard')), color: 0xA855F7, hw: 44, hh: 50, hy: this.wizardY - 25
       });
       if (this.portalSprite && this.portalSprite.visible && this.portalX) mk({
         id: 'portal', kind: 'portal', x: this.portalX, y: this.portalY, hitR: 56, useR: 90,
-        label: labelOf('Enter Dungeon'), color: 0xEC4899, hw: 50, hh: 60, hy: this.portalY - 30
+        label: labelOf(hvT('ui.farm.act.dungeon')), color: 0xEC4899, hw: 50, hh: 60, hy: this.portalY - 30
       });
       if (this.dockSprite && this.dockSprite.visible && this.fishX) mk({
         id: 'fish', kind: 'fish', x: this.fishX, y: this.fishY, hitR: 56, useR: 85,
-        label: labelOf('Start Fishing'), color: 0x38BDF8, hw: 50, hh: 50, hy: this.fishY - 25
+        label: labelOf(hvT('ui.farm.act.fishing')), color: 0x38BDF8, hw: 50, hh: 50, hy: this.fishY - 25
       });
       if (this.beehiveSprite && this.beehiveSprite.visible && this.beehiveX) mk({
         id: 'beehive', kind: 'beehive', x: this.beehiveX, y: this.beehiveY, hitR: 52, useR: 85,
-        label: labelOf('Beehive Minigame'), color: 0xFACC15, hw: 44, hh: 50, hy: this.beehiveY - 25
+        label: labelOf(hvT('ui.farm.act.beehive')), color: 0xFACC15, hw: 44, hh: 50, hy: this.beehiveY - 25
       });
       if (this.arcadeSprite && this.arcadeSprite.visible && this.arcadeX) mk({
         id: 'arcade', kind: 'arcade', x: this.arcadeX, y: this.arcadeY, hitR: 52, useR: 80,
@@ -2384,7 +2384,7 @@ class FarmScene extends Phaser.Scene {
     });
     const lbl = (typeof pointerHoverLabel === 'function')
       ? pointerHoverLabel(this.player, target)
-      : (target.label || WORLD_CLICK_HINT);
+      : (target.label || worldClickHint());
     this._tLbl.setPosition(hx, hy-hh/2-14).setText(lbl).setAlpha(0.9+pulse*0.1);
   }
 
@@ -2564,7 +2564,7 @@ class FarmScene extends Phaser.Scene {
     if (spr.texture) spr.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     const hdShadowW = typeof shadowW === 'function' ? shadowW(spr) : shadowW;
     if (this.shadows) this.shadows.createShadow(spr, hdShadowW, 16, 1);
-    const label = this.add.text(pos.x, pos.y + 8, (spec.nameKo || id) + '\n' + WORLD_CLICK_HINT, {
+    const label = this.add.text(pos.x, pos.y + 8, (spec.nameKo || id) + '\n' + worldClickHint(), {
       fontFamily: '"Noto Sans KR",sans-serif', fontSize: '14px',
       color: '#fff8e8', stroke: '#2a1a0a', strokeThickness: 4, align: 'center'
     }).setOrigin(0.5, 0).setDepth(pos.y + 10).setAlpha(0);
@@ -2926,7 +2926,7 @@ class FarmScene extends Phaser.Scene {
     } else if(s==='4'){  // ripe - harvest!
       if(plot.plant) plot.plant.setTexture(cropTex(this,t,3)).clearTint();
       this._addGlow(plot,0xFFD700);
-      this._addLabel(plot, WORLD_CLICK_HINT, '#FFD700');
+      this._addLabel(plot, worldClickHint(), '#FFD700');
       if (plot.plant && this.shadows) {
         plot.cropShadow = this.shadows.createShadow(plot.plant, 22, 7, 0);
       }
@@ -2942,7 +2942,7 @@ class FarmScene extends Phaser.Scene {
   _addLabel(plot,txt,color){
     if(plot.hintLabel) plot.hintLabel.destroy();
     const l=this.add.text(plot.x,plot.y-PLOT_SIZE/2-6,txt,{
-      fontFamily:'"Press Start 2P",monospace',fontSize:'12px',color,stroke:'#000',strokeThickness:3
+      fontFamily: hvPixelFont(),fontSize: hvPixelSize(12),color,stroke:'#000',strokeThickness:3
     }).setOrigin(0.5,1).setDepth(plot.y+6);
     plot.hintLabel=l;
     this.tweens.add({targets:l,y:l.y-3,duration:550,yoyo:true,repeat:-1});
@@ -3100,7 +3100,7 @@ class FarmScene extends Phaser.Scene {
     }
   }
   _label(x,y,msg){
-    const txt=this.add.text(x,y,msg,{fontFamily:'"Press Start 2P",monospace',fontSize:'14px',
+    const txt=this.add.text(x,y,msg,{fontFamily: hvPixelFont(),fontSize: hvPixelSize(14),
       color:'#FFD700',stroke:'#000',strokeThickness:4}).setOrigin(0.5,1).setDepth(y+40);
     this.tweens.add({targets:txt,y:y-65,alpha:0,scale:1.4,duration:1100,ease:'Power2.Out',onComplete:()=>txt.destroy()});
   }

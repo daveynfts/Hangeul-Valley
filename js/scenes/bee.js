@@ -70,8 +70,8 @@ class BeeScene extends Phaser.Scene {
       .setStrokeStyle(3, 0xF59E0B).setDepth(100);
 
     this.targetText = this.add.text(this.W / 2, 45, '', {
-      fontFamily: '"Press Start 2P", "Galmuri11", monospace',
-      fontSize: '18px',
+      fontFamily: hvPixelFont() + ',"Galmuri11"',
+      fontSize: hvPixelSize(18),
       color: '#FDE047',
       stroke: '#0F172A',
       strokeThickness: 5,
@@ -79,17 +79,17 @@ class BeeScene extends Phaser.Scene {
     }).setOrigin(0.5).setDepth(101);
 
     this.hudText = this.add.text(20, 20, '', {
-      fontFamily: '"Press Start 2P", monospace',
-      fontSize: '13px',
+      fontFamily: hvPixelFont(),
+      fontSize: hvPixelSize(13),
       color: '#FFFFFF',
       stroke: '#0F172A',
       strokeThickness: 4,
       lineSpacing: 6
     }).setDepth(100);
 
-    const exitBtn = this.add.text(this.W - 20, 20, '[ESC] EXIT', {
-      fontFamily: '"Press Start 2P", monospace',
-      fontSize: '13px',
+    const exitBtn = this.add.text(this.W - 20, 20, hvT('ui.game.exit'), {
+      fontFamily: hvPixelFont(),
+      fontSize: hvPixelSize(13),
       color: '#FF66B2',
       stroke: '#0F172A',
       strokeThickness: 4,
@@ -139,8 +139,8 @@ class BeeScene extends Phaser.Scene {
       if (isRightToLeft) sprite.setFlipX(true);
 
       const text = this.add.text(0, 28, wordObj.ko, {
-        fontFamily: '"Press Start 2P", "Galmuri11", sans-serif',
-        fontSize: '15px',
+        fontFamily: hvPixelFont() + ',"Galmuri11",sans-serif',
+        fontSize: hvPixelSize(15),
         color: '#FFFFFF',
         stroke: '#0F172A',
         strokeThickness: 5,
@@ -196,8 +196,8 @@ class BeeScene extends Phaser.Scene {
 
       const comboLabel = this.combo > 1 ? ` +${pts} (${this.combo}x Combo!)` : ` +${pts}`;
       const floatTxt = this.add.text(bee.container.x, bee.container.y - 20, comboLabel, {
-        fontFamily: '"Press Start 2P", monospace',
-        fontSize: '16px',
+        fontFamily: hvPixelFont(),
+        fontSize: hvPixelSize(16),
         color: '#FDE047',
         stroke: '#000',
         strokeThickness: 4
@@ -293,9 +293,9 @@ class BeeScene extends Phaser.Scene {
     this.add.rectangle(this.W / 2, this.H / 2, modalWidth, modalHeight, 0x0F172A, 0.94)
       .setStrokeStyle(4, 0xF59E0B).setDepth(201);
 
-    this.add.text(this.W / 2, this.H / 2 - 110, '🐝 BEEHIVE HARVEST COMPLETE!', {
-      fontFamily: '"Press Start 2P", monospace',
-      fontSize: '16px',
+    this.add.text(this.W / 2, this.H / 2 - 110, '🐝 ' + hvT('ui.bee.complete'), {
+      fontFamily: hvPixelFont(),
+      fontSize: hvPixelSize(16),
       color: '#FDE047',
       align: 'center'
     }).setOrigin(0.5).setDepth(202);
@@ -307,16 +307,16 @@ class BeeScene extends Phaser.Scene {
       `HONEY REWARD: +${totalHoney} 🍯`;
 
     this.add.text(this.W / 2, this.H / 2 - 20, summaryText, {
-      fontFamily: '"Press Start 2P", monospace',
-      fontSize: '13px',
+      fontFamily: hvPixelFont(),
+      fontSize: hvPixelSize(13),
       color: '#FFFFFF',
       align: 'center',
       lineSpacing: 4
     }).setOrigin(0.5).setDepth(202);
 
-    const closeBtn = this.add.text(this.W / 2, this.H / 2 + 105, '[ RETURN TO FARM ]', {
-      fontFamily: '"Press Start 2P", monospace',
-      fontSize: '14px',
+    const closeBtn = this.add.text(this.W / 2, this.H / 2 + 105, hvT('ui.bee.return'), {
+      fontFamily: hvPixelFont(),
+      fontSize: hvPixelSize(14),
       color: '#4ADE80',
       stroke: '#0F172A',
       strokeThickness: 3,

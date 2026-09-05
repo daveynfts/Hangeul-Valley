@@ -60,11 +60,11 @@ class ArcadeScene extends Phaser.Scene {
     this.nukeCount = 1;
 
     // UI Header
-    this.scoreText = this.add.text(20, 20, 'SCORE: 0', {fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#00FFFF'}).setDepth(10);
-    this.hpText = this.add.text(20, 48, '❤️ HP: 100/100', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#EF4444'}).setDepth(10);
-    this.powerText = this.add.text(20, 72, '💣 NUKES: 1 [PRESS B]', {fontFamily:'"Press Start 2P",monospace', fontSize:'12px', color:'#FDE047'}).setDepth(10);
+    this.scoreText = this.add.text(20, 20, hvT('ui.arcade.score', { n: 0 }), {fontFamily: hvPixelFont(), fontSize: hvPixelSize(16), color:'#00FFFF'}).setDepth(10);
+    this.hpText = this.add.text(20, 48, '❤️ ' + hvT('ui.arcade.hp', { hp: 100, max: 100 }), {fontFamily: hvPixelFont(), fontSize: hvPixelSize(14), color:'#EF4444'}).setDepth(10);
+    this.powerText = this.add.text(20, 72, '💣 ' + hvT('ui.arcade.nukes', { n: 1 }), {fontFamily: hvPixelFont(), fontSize: hvPixelSize(12), color:'#FDE047'}).setDepth(10);
 
-    const exitTxt = this.add.text(this.W - 20, 20, '[ESC] EXIT', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#FF00FF', backgroundColor:'rgba(15,23,42,0.8)', padding:{x:8,y:4}})
+    const exitTxt = this.add.text(this.W - 20, 20, hvT('ui.game.exit'), {fontFamily: hvPixelFont(), fontSize: hvPixelSize(14), color:'#FF00FF', backgroundColor:'rgba(15,23,42,0.8)', padding:{x:8,y:4}})
       .setOrigin(1,0).setInteractive({useHandCursor:true}).setDepth(100);
     exitTxt.on('pointerdown', ()=>this.exitGame());
     this.input.keyboard.on('keydown-ESC', ()=>this.exitGame());
@@ -115,7 +115,7 @@ class ArcadeScene extends Phaser.Scene {
 
     this.bossContainer = this.add.container(this.W/2, 120).setDepth(15);
     this.bossSprite = this.add.sprite(0, 0, 'alien_boss').setOrigin(0.5);
-    this.bossName = this.add.text(0, -55, '🌌 KING HANGEUL ALIEN', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#EC4899', stroke:'#000', strokeThickness:4}).setOrigin(0.5);
+    this.bossName = this.add.text(0, -55, '🌌 ' + hvT('ui.arcade.boss'), {fontFamily: hvPixelFont(), fontSize: hvPixelSize(14), color:'#EC4899', stroke:'#000', strokeThickness:4}).setOrigin(0.5);
 
     // Boss Shield Visual Barrier
     this.bossBarrier = this.add.circle(0, 0, 75, 0x38BDF8, 0.4).setStrokeStyle(4, 0x38BDF8).setVisible(false);
@@ -241,7 +241,7 @@ class ArcadeScene extends Phaser.Scene {
     const mx = minion.x, my = minion.y;
     minion.destroy();
     this.score += 15;
-    this.scoreText.setText('SCORE: ' + this.score);
+    this.scoreText.setText(hvT('ui.arcade.score', { n: this.score }));
 
     // Drop Power-up chance (40%)
     if(Math.random() < 0.4){
@@ -270,14 +270,14 @@ class ArcadeScene extends Phaser.Scene {
       showToast('🛡️ ENERGY SHIELD ACTIVATED!', 2000);
     } else if(type === '💣'){
       this.nukeCount++;
-      this.powerText.setText(`💣 NUKES: ${this.nukeCount} [PRESS B]`);
+      this.powerText.setText('💣 ' + hvT('ui.arcade.nukes', { n: this.nukeCount }));
       showToast('💣 ATOMIC BOMB ACQUIRED!', 2000);
     }
   }
 
   detonateNuke(){
     this.nukeCount--;
-    this.powerText.setText(`💣 NUKES: ${this.nukeCount} [PRESS B]`);
+    this.powerText.setText('💣 ' + hvT('ui.arcade.nukes', { n: this.nukeCount }));
     this.cameras.main.flash(300, 255, 255, 255);
     this.cameras.main.shake(300, 0.03);
 
@@ -304,7 +304,7 @@ class ArcadeScene extends Phaser.Scene {
     this.spellBanner = this.add.container(this.W/2, 170).setDepth(40);
     const sBg = this.add.rectangle(0, 0, 480, 45, 0x0F172A, 0.95).setStrokeStyle(3, 0x38BDF8);
     const sTxt = this.add.text(0, 0, `🎯 ${hvT('ui.arcade.shootTarget')} "${tr(targetWord, 'en')}"`, {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'11px', color:'#FDE047'
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(11), color:'#FDE047'
     }).setOrigin(0.5);
     this.spellBanner.add([sBg, sTxt]);
 
@@ -372,7 +372,7 @@ class ArcadeScene extends Phaser.Scene {
 
     this.bossHP = Math.max(0, this.bossHP - 15);
     this.score += 10;
-    this.scoreText.setText('SCORE: ' + this.score);
+    this.scoreText.setText(hvT('ui.arcade.score', { n: this.score }));
     this.updateBossHPBar();
 
     this.bossSprite.setTint(0xFF0000);
@@ -412,7 +412,7 @@ class ArcadeScene extends Phaser.Scene {
     }
 
     this.playerHP = Math.max(0, this.playerHP - 20);
-    this.hpText.setText(`❤️ HP: ${this.playerHP}/100`);
+    this.hpText.setText('❤️ ' + hvT('ui.arcade.hp', { hp: this.playerHP, max: 100 }));
     this.cameras.main.shake(150, 0.02);
 
     this.ship.setTint(0xFF0000);

@@ -218,8 +218,16 @@ console.log('\n--- 5. csLoadPeaks: decoded once, cached, safe when it fails ---'
     'nothing invents a uniform bar height — that was the flat comb that looked like a fault');
   assert(/state === 'wait'/.test(paint) && /mid - 1, 8, 2/.test(paint),
     'the waiting state is dashes on the centre line, which nobody reads as audio');
+  // The words themselves live in js/locales/en.js now, so the question is asked of the
+  // catalogue rather than of the source: the two states have to name keys, and the keys have
+  // to come back as the sentences. Grepping the function for "WAVEFORM" would have passed on
+  // a key that nothing answers, which is the failure this guards against.
   const label = ui.slice(ui.indexOf('function csWaveLabel'), ui.indexOf('function csWaveLoad'));
-  assert(/WAVEFORM/.test(label) && /NO WAVEFORM/.test(label),
+  const enTable = require('../admin/lib/i18n.js').readChromeTable(ROOT, 'en');
+  assert(/ui\.listen\.wave\.wait/.test(label) && /ui\.listen\.wave\.none/.test(label),
+    'the two decode states are named rather than hard-coded');
+  assert(/WAVEFORM/.test(enTable['ui.listen.wave.wait'] || '')
+    && /NO WAVEFORM/.test(enTable['ui.listen.wave.none'] || ''),
     'and it says so in words as well, so a slow decode is legible rather than mysterious');
 
   // ── 6. Where the duration and the playhead come from ───────────────────────

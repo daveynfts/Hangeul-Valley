@@ -805,9 +805,9 @@
           <div class="inv-capacity-fill" id="inv-capacity-fill"></div>
         </div>
         <div class="inv-capacity-foot">
-          <span class="inv-capacity-hint">Limit <strong id="inv-capacity-text" data-i18n="ui.inv.capacity.text">20 slots</strong> · items stack automatically</span>
+          <span class="inv-capacity-hint"><span data-i18n="ui.inv.capacity.limit">Limit</span> <strong id="inv-capacity-text" data-i18n="ui.inv.capacity.text">20 slots</strong> <span data-i18n="ui.inv.capacity.stack">· items stack automatically</span></span>
           <button type="button" class="hud-btn inv-expand-btn" id="inv-expand-btn" onclick="expandInventoryCapacity()">
-            Expand +5 <span data-hud-icon="coin" data-hud-size="16">🪙</span> 50
+            <span data-i18n="ui.inv.expand.label">Expand +5</span> <span data-hud-icon="coin" data-hud-size="16">🪙</span> 50
           </button>
         </div>
       </div>
@@ -920,7 +920,7 @@
           </div>
           <div id="listen-waverow">
             <canvas id="listen-wave" width="820" height="112"
-                    aria-label="Waveform — click to seek, drag to mark a loop"></canvas>
+                    aria-label="Waveform — click to seek, drag to mark a loop" data-i18n-aria-label="ui.listen.wave.aria"></canvas>
             <div id="listen-loopbar">
               <button type="button" id="listen-loop" class="cs-lb" onclick="listenToggleLoop()"
                       aria-label="Repeat the whole track" data-i18n-aria-label="ui.listen.loop.aria">↻ 전체 반복</button>
@@ -972,7 +972,7 @@
         </div>
         <div id="dict-waverow">
           <canvas id="dict-wave" width="820" height="96"
-                  aria-label="Waveform — click to seek, drag to mark a loop"></canvas>
+                  aria-label="Waveform — click to seek, drag to mark a loop" data-i18n-aria-label="ui.dict.wave.aria"></canvas>
           <div id="dict-loopbar">
             <button type="button" id="dict-loop" class="cs-lb" onclick="dictToggleLoop()"
                     aria-label="Repeat the sentence" data-i18n-aria-label="ui.dict.loop.aria">↻ 반복</button>

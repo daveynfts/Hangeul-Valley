@@ -111,18 +111,18 @@ class DungeonScene extends Phaser.Scene {
     this.wordPool = all.length > 0 ? all : [{ko:'한글', en:'Hangeul', hint:'📝'}];
 
     // HUD Header
-    this.hpText = this.add.text(20, 20, '❤️ HP: 100/100', {fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#EF4444'}).setDepth(100);
-    this.goldText = this.add.text(20, 50, '💰 GOLD: 0', {fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#F59E0B'}).setDepth(100);
-    this.scrollText = this.add.text(20, 80, '📜 SCROLLS: 0', {fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#A855F7'}).setDepth(100);
+    this.hpText = this.add.text(20, 20, '❤️ ' + hvT('ui.dungeon.hp', { hp: 100, max: 100 }), {fontFamily: hvPixelFont(), fontSize: hvPixelSize(16), color:'#EF4444'}).setDepth(100);
+    this.goldText = this.add.text(20, 50, '💰 ' + hvT('ui.dungeon.gold', { n: 0 }), {fontFamily: hvPixelFont(), fontSize: hvPixelSize(16), color:'#F59E0B'}).setDepth(100);
+    this.scrollText = this.add.text(20, 80, '📜 ' + hvT('ui.dungeon.scrolls', { n: 0 }), {fontFamily: hvPixelFont(), fontSize: hvPixelSize(16), color:'#A855F7'}).setDepth(100);
 
-    const exitBtn = this.add.text(this.W - 20, 20, '[ESC] LEAVE DUNGEON', {fontFamily:'"Press Start 2P",monospace', fontSize:'14px', color:'#EC4899'})
+    const exitBtn = this.add.text(this.W - 20, 20, hvT('ui.dungeon.exit'), {fontFamily: hvPixelFont(), fontSize: hvPixelSize(14), color:'#EC4899'})
       .setOrigin(1,0).setInteractive({useHandCursor:true}).setDepth(100);
     exitBtn.on('pointerdown', () => this.exitDungeon());
     this.input.keyboard.on('keydown-ESC', () => this.exitDungeon());
 
     // Title Toast
-    const title = this.add.text(this.W/2, this.H/2 - 60, '⚔️ ANCIENT DUNGEON\nWASD to Move | Click to Slash!', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'18px', color:'#EC4899', align:'center', lineHeight:1.5, stroke:'#000', strokeThickness:4
+    const title = this.add.text(this.W/2, this.H/2 - 60, '⚔️ ' + hvT('ui.dungeon.title') + '\n' + hvT('ui.dungeon.hint'), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(18), color:'#EC4899', align:'center', lineHeight:1.5, stroke:'#000', strokeThickness:4
     }).setOrigin(0.5).setDepth(100);
     this.tweens.add({ targets:title, alpha:0, delay:2500, duration:1000, onComplete:()=>title.destroy() });
 
@@ -224,7 +224,7 @@ class DungeonScene extends Phaser.Scene {
           
           // Floating damage text
           const dmg = this.add.text(m.x, m.y - 20, '-35', {
-            fontFamily:'"Press Start 2P",monospace', fontSize:'16px', color:'#22C55E', stroke:'#000', strokeThickness:3
+            fontFamily: hvPixelFont(), fontSize: hvPixelSize(16), color:'#22C55E', stroke:'#000', strokeThickness:3
           }).setOrigin(0.5).setDepth(60);
           this.tweens.add({ targets:dmg, y:m.y-50, alpha:0, duration:600, onComplete:()=>dmg.destroy() });
 
@@ -326,8 +326,8 @@ class DungeonScene extends Phaser.Scene {
     portal.body.setSize(48, 48);
     this.bossPortal = portal;
 
-    this.add.text(this.W/2, 140, 'BOSS CHAMBER PORTAL', {
-      fontFamily:'"Press Start 2P",monospace', fontSize:'12px', color:'#EC4899', stroke:'#000', strokeThickness:3
+    this.add.text(this.W/2, 140, hvT('ui.dungeon.bossPortal'), {
+      fontFamily: hvPixelFont(), fontSize: hvPixelSize(12), color:'#EC4899', stroke:'#000', strokeThickness:3
     }).setOrigin(0.5).setDepth(21);
 
     this.physics.add.overlap(this.player, portal, () => {
@@ -375,8 +375,8 @@ class DungeonScene extends Phaser.Scene {
     this.lootedScrolls++;
     this.lootedGold += 25;
 
-    this.goldText.setText(`💰 COINS: ${this.lootedGold}`);
-    this.scrollText.setText(`📜 SCROLLS: ${this.lootedScrolls}`);
+    this.goldText.setText('💰 ' + hvT('ui.dungeon.gold', { n: this.lootedGold }));
+    this.scrollText.setText('📜 ' + hvT('ui.dungeon.scrolls', { n: this.lootedScrolls }));
 
     this.showLootFlashcard(word);
   }
@@ -417,7 +417,7 @@ class DungeonScene extends Phaser.Scene {
     this.invulnerableTime = this.time.now + 800;
 
     this.playerHP = Math.max(0, this.playerHP - 15);
-    this.hpText.setText(`❤️ HP: ${this.playerHP}/100`);
+    this.hpText.setText('❤️ ' + hvT('ui.dungeon.hp', { hp: this.playerHP, max: 100 }));
 
     this.cameras.main.shake(200, 0.02);
     this.player.setTint(0xFF0000);

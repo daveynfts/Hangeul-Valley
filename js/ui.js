@@ -152,12 +152,15 @@ function updateHUD() {
   const due = srsDueWords().length;
   const maturePct = calcLevelMastery(currentLevelIndex);
   hudProgressEl.textContent = `${learnedPct}%`;
-  hudProgressEl.title = `${learnedPct}% learned, ${maturePct}% mature` + (due ? `, ${due} due` : '');
+  hudProgressEl.title = hvT('ui.hud.progress.title', { learned: learnedPct, mature: maturePct })
+    + (due ? hvT('ui.hud.progress.due', { n: due }) : '');
   const dueEl = $('hud-due');
   if (dueEl) {
     dueEl.textContent = due > 0 ? String(due) : '';
     dueEl.classList.toggle('has-due', due > 0);
-    dueEl.title = due > 0 ? `${due} review${due === 1 ? '' : 's'} due` : '';
+    dueEl.title = due > 0
+      ? hvT(due === 1 ? 'ui.hud.due.one' : 'ui.hud.due', { n: due })
+      : '';
   }
   if(pbFill) pbFill.style.width = learnedPct + '%';
   updateGoldHUD();
@@ -172,14 +175,14 @@ function buildLevelSelectScreen() {
       levelsData = sceneRef.cache.json.get('levels') || [];
     }
     if(!levelsData || !levelsData.length){
-      lsGrid.innerHTML = '<div class="ls-sep">Loading levels…</div>';
+      lsGrid.innerHTML = '<div class="ls-sep">' + hvT('ui.ls.loading') + '</div>';
       fetch('levels.json').then(r => r.ok ? r.json() : Promise.reject(new Error('levels '+r.status)))
         .then(d => hvLocalizeAsync('levels.json', d)).then(d => {
         levelsData = Array.isArray(d) ? d : [];
         loadTextbookWorlds(() => buildLevelSelectScreen());
       }).catch(err => {
         console.error('Failed to load levels.json:', err);
-        lsGrid.innerHTML = '<div class="ls-sep">Could not load levels. Click to retry.</div>';
+        lsGrid.innerHTML = '<div class="ls-sep">' + hvT('ui.ls.loadFailed') + '</div>';
         lsGrid.onclick = () => { lsGrid.onclick = null; buildLevelSelectScreen(); };
       });
       return;
@@ -197,20 +200,25 @@ function buildLevelSelectScreen() {
     r.className = 'ls-resume-card';
     const planted = plotSave.length;
     const cur = levelsData[currentLevelIndex];
-    const resumeLabel = isWorldLevel(cur) ? (cur.title || levelName(cur)) : `Level ${currentLevelIndex+1}`;
+    const resumeLabel = isWorldLevel(cur)
+      ? (cur.title || levelName(cur))
+      : hvT('ui.ls.card.level', { n: currentLevelIndex + 1 });
     // The default action, so it is the one thing on the screen with an accent border — and
     // the stats read as separate facts rather than one string joined by pipes.
     r.tabIndex = 0;
     r.setAttribute('role', 'button');
     r.setAttribute('aria-label',
-      `Continue in ${resumeLabel}. ${gold} gold, ${planted} crops growing.`);
+      hvT('ui.ls.resume.aria', { level: resumeLabel, gold, crops: planted }));
+    // The counts stay outside the key so a translation cannot lose the <b>, and so a language
+    // that puts the number after the noun can still say so by moving {n} in its own string.
     r.innerHTML = `
       <div class="lsr-icon" aria-hidden="true">▶</div>
       <div class="lsr-text">
-        <div class="lsr-title">Continue — ${vbEsc(resumeLabel)}</div>
+        <div class="lsr-title">${vbEsc(hvT('ui.ls.resume.title', { level: resumeLabel }))}</div>
         <div class="lsr-sub">
-          <span><b>${gold}</b> gold</span>
-          <span><b>${planted}</b> crop${planted === 1 ? '' : 's'} growing</span>
+          <span>${hvT('ui.ls.resume.gold', { n: `<b>${gold}</b>` })}</span>
+          <span>${hvT(planted === 1 ? 'ui.ls.resume.crops.one' : 'ui.ls.resume.crops',
+            { n: `<b>${planted}</b>` })}</span>
         </div>
       </div>`;
     r.addEventListener('click', resumeGame);
@@ -255,8 +263,9 @@ function buildLevelSelectScreen() {
     // "Textbook", the one word on it that was not about which world it was.
     const unitNo = world ? (String(lvl.level || '').match(/(\d+)\s*$/) || [])[1] : null;
     const eyebrow = world
-      ? (String(lvl.pages || '').trim() || (unitNo ? `Unit ${unitNo}` : 'Textbook'))
-      : `Level ${lvl.level}`;
+      ? (String(lvl.pages || '').trim()
+        || (unitNo ? hvT('ui.ls.card.unit', { n: unitNo }) : hvT('ui.ls.card.textbook')))
+      : hvT('ui.ls.card.level', { n: lvl.level });
     // World packs carry their Korean in `name` and their English in `nameEn`; Valley packs put
     // the Korean in `name` too. levelNameKo returns '' when there is only one, so the Korean
     // line collapses rather than printing the English twice.
@@ -271,13 +280,15 @@ function buildLevelSelectScreen() {
     // you can act on, and the shortfall is arithmetic the player can do from the gold in the
     // HUD.
     const stateLabel = owned
-      ? (done ? 'Complete' : (pct > 0 ? `${pct}%` : 'Not started'))
-      : `${cost} gold`;
+      ? (done ? hvT('ui.ls.card.complete') : (pct > 0 ? `${pct}%` : hvT('ui.ls.card.notStarted')))
+      : hvT('ui.ls.card.price', { n: cost });
     const stateClass = owned ? (pct > 0 ? '' : ' idle') : (canAfford ? ' price' : ' short');
 
     c.setAttribute('aria-label',
-      `${eyebrow}: ${heroKo || heroEn}. ${wordCount} words. `
-      + (owned ? (done ? 'Complete.' : `${pct} percent learned.`) : `Locked, costs ${cost} gold.`));
+      hvT('ui.ls.card.aria', { eyebrow, name: heroKo || heroEn, words: wordCount }) + ' '
+      + (owned
+        ? (done ? hvT('ui.ls.card.aria.complete') : hvT('ui.ls.card.aria.learned', { pct }))
+        : hvT('ui.ls.card.aria.locked', { n: cost })));
 
     c.innerHTML = `
       <div class="lc-top">
@@ -295,7 +306,7 @@ function buildLevelSelectScreen() {
         </div>
       </div>
       <div class="lc-footer">
-        <span class="lc-stat"><b>${wordCount}</b> words</span>
+        <span class="lc-stat">${hvT('ui.ls.card.words', { n: `<b>${wordCount}</b>` })}</span>
         <span class="lc-state${stateClass}">${vbEsc(stateLabel)}</span>
       </div>`;
 
@@ -313,7 +324,7 @@ function buildLevelSelectScreen() {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
       });
     }
-    if (!owned && canAfford) c.title = 'Click to buy';
+    if (!owned && canAfford) c.title = hvT('ui.ls.card.buy');
     lsGrid.appendChild(c);
   };
   // Headings rather than '── text ──'. The em dashes were doing the work of a rule, which a
@@ -327,7 +338,13 @@ function buildLevelSelectScreen() {
   // Worlds group by the pack they belong to. One heading served while every world was a
   // chapter of the same book; the exam world is not, and filing it under "SNU Korean 2B"
   // would have been the heading telling a small lie to keep its shape.
-  const PACK_HEADING = { 'snu-2b': 'Textbook · SNU Korean 2B', topik: 'Exam practice' };
+  // Resolved here rather than held as keys and looked up below: scripts/i18n_extract.js and
+  // the validator both find hvT() keys by reading the literal out of the call, so a key that
+  // only ever reaches hvT through a variable is a key nothing checks has an English string.
+  const PACK_HEADING = {
+    'snu-2b': hvT('ui.ls.pack.snu2b'),
+    topik: hvT('ui.ls.pack.topik')
+  };
   const byPack = new Map();
   const valley = [];
   levelsData.forEach((lvl, idx) => {
@@ -338,11 +355,12 @@ function buildLevelSelectScreen() {
   });
   const worlds = [...byPack.values()].flat();
   byPack.forEach((list, pack) => {
+    // An unknown pack falls back to its own id rather than to a key that would print raw.
     heading(PACK_HEADING[pack] || pack);
     list.forEach(({ lvl, idx }) => paintCard(lvl, idx));
   });
   if (valley.length) {
-    heading(worlds.length ? 'Valley packs' : 'Choose a pack');
+    heading(hvT(worlds.length ? 'ui.ls.pack.valley' : 'ui.ls.pack.choose'));
     valley.forEach(({ lvl, idx }) => paintCard(lvl, idx));
   }
 }
@@ -498,7 +516,10 @@ function invEscHtml(v) {
 // under the player's cursor.
 const INV_KIND_ORDER = { ingredient: 0, seed: 1, dish: 2 };
 const INV_KIND_BADGE = { ingredient: '🌿', seed: '🌱', dish: '🍲' };
-const INV_KIND_LABEL = { ingredient: 'Crop / ingredient', seed: 'Seed', dish: 'Cooked dish' };
+const INV_KIND_LABEL = { ingredient: 'ui.inv.kind.ingredient', seed: 'ui.inv.kind.seed', dish: 'ui.inv.kind.dish' };
+// The map holds keys rather than words, so a kind that is not in it falls back to a generic
+// label instead of printing a key at the player.
+const invKindLabel = (kind) => (INV_KIND_LABEL[kind] ? hvT(INV_KIND_LABEL[kind]) : hvT('ui.inv.kind.item'));
 
 // Read from the one place that charges it, so the label and the till cannot disagree.
 function invExpandCost() {
@@ -558,12 +579,12 @@ function collectInventoryItems() {
       const info = getItemInfo(nameKo);
       items.push({
         itemId: info.id || nameKo,
-        name: info.name || nameKo,
+        name: tr(info, 'name') || nameKo,
         nameKo: info.nameKo || nameKo,
         qty: qty,
         icon: art(info.nameKo || nameKo, info.icon, 40),
         iconLarge: art(info.nameKo || nameKo, info.icon, 56),
-        description: info.description || src.fallbackDesc,
+        description: tr(info, 'description') || src.fallbackDesc,
         kind: src.kind
       });
     }
@@ -616,15 +637,15 @@ function renderInventoryCapacity(usedSlots, maxSlots) {
   const track = document.getElementById('inv-capacity-track');
   const expand = document.getElementById('inv-expand-btn');
 
-  if (badge) badge.textContent = `${usedSlots} / ${maxSlots} slots`;
-  if (capText) capText.textContent = `${maxSlots} slots`;
+  if (badge) badge.textContent = hvT('ui.inv.capacity.badge.fmt', { used: usedSlots, max: maxSlots });
+  if (capText) capText.textContent = hvT('ui.inv.capacity.text.fmt', { n: maxSlots });
 
   const ratio = maxSlots > 0 ? usedSlots / maxSlots : 0;
   if (fill && fill.style) fill.style.width = Math.min(100, Math.round(ratio * 100)) + '%';
   if (track && track.setAttribute) {
     track.setAttribute('aria-valuenow', String(usedSlots));
     track.setAttribute('aria-valuemax', String(maxSlots));
-    track.setAttribute('aria-valuetext', `${usedSlots} of ${maxSlots} slots used`);
+    track.setAttribute('aria-valuetext', hvT('ui.inv.slots.aria', { used: usedSlots, max: maxSlots }));
   }
   if (wrap && wrap.classList && typeof wrap.classList.toggle === 'function') {
     wrap.classList.toggle('full', usedSlots >= maxSlots);
@@ -640,8 +661,8 @@ function renderInventoryCapacity(usedSlots, maxSlots) {
     const affordable = coins >= cost;
     expand.disabled = !affordable;
     expand.title = affordable
-      ? `Add 5 slots for ${cost} Coins`
-      : `Needs ${cost} Coins — you have ${coins}`;
+      ? hvT('ui.inv.expand.title', { n: 5, cost })
+      : hvT('ui.inv.expand.short', { cost, coins });
   }
 }
 
@@ -659,8 +680,8 @@ function renderInventoryDetail(items) {
 
   const ko = String(item.nameKo || '');
   const chips = [
-    `<span class="inv-chip">${invEscHtml(INV_KIND_LABEL[item.kind] || 'Item')}</span>`,
-    `<span class="inv-chip gold">×${item.qty} in bag</span>`
+    `<span class="inv-chip">${invEscHtml(invKindLabel(item.kind))}</span>`,
+    `<span class="inv-chip gold">${invEscHtml(hvT('ui.inv.inBag', { n: item.qty }))}</span>`
   ];
 
   // The bag is full of Korean the player earned, so it doubles as a review surface:
@@ -700,7 +721,7 @@ function renderInventoryDetail(items) {
       ${lore}
       ${actions}
     </div>
-    <button type="button" class="inv-detail-close" id="inv-detail-close" aria-label="Close item details">✕</button>
+    <button type="button" class="inv-detail-close" id="inv-detail-close" aria-label="${vbEsc(hvT('ui.inv.detail.close.aria'))}">✕</button>
   `;
   if (box.classList && typeof box.classList.remove === 'function') box.classList.remove('hidden');
 
@@ -787,14 +808,15 @@ function renderInventoryGrid() {
       const item = items[i];
       const selected = item.itemId === inventorySelectedId;
       slotEl.className = selected ? 'inv-slot selected' : 'inv-slot';
-      slotEl.title = `${item.nameKo} (${item.name}): ${item.description}`;
+      slotEl.title = `${item.nameKo} (${item.name}): ${item.description}`;   // all three already translated
       if (slotEl.setAttribute) {
         slotEl.setAttribute('role', 'listitem');
         slotEl.setAttribute('tabindex', '0');
         slotEl.setAttribute('data-inv-id', String(item.itemId));
         slotEl.setAttribute('aria-pressed', selected ? 'true' : 'false');
         slotEl.setAttribute('aria-label',
-          `${item.nameKo}, ${item.name}, ${INV_KIND_LABEL[item.kind] || 'item'}, quantity ${item.qty}`);
+          hvT('ui.inv.slot.aria',
+            { ko: item.nameKo, name: item.name, kind: invKindLabel(item.kind), qty: item.qty }));
       }
       slotEl.innerHTML = `
         <div class="inv-kind-badge" aria-hidden="true">${INV_KIND_BADGE[item.kind] || '📦'}</div>
@@ -822,7 +844,7 @@ function renderInventoryGrid() {
       if (slotEl.setAttribute) slotEl.setAttribute('aria-hidden', 'true');
       slotEl.innerHTML = `
         <div class="inv-slot-icon empty-crate">${crate}</div>
-        <div class="inv-slot-en">Empty</div>
+        <div class="inv-slot-en">${invEscHtml(hvT('ui.inv.slot.empty'))}</div>
       `;
     }
     grid.appendChild(slotEl);
@@ -932,7 +954,7 @@ function revealQuizHint(tier){
     if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 for the origin hint!'); return; }
     currentQuizMeta.paidHints++;
     const fact = getFunFact(currentWord);
-    box.innerHTML = `💡 <b>Word origin:</b> ${fact.origin || fact.hint}`;
+    box.innerHTML = `💡 <b>${vbEsc(hvT('ui.quiz.wordOrigin'))}</b> ${fact.origin || fact.hint}`;
   }
   box.classList.remove('hidden');
 }
@@ -1042,7 +1064,7 @@ function showQuizReveal({ message, ko, en, typed, note, continueLabel, onDone })
   // teach, and an empty struck-through row reads as a rendering fault rather than as silence.
   if (tyEl) {
     const t = String(typed || '').trim();
-    tyEl.textContent = t ? 'You wrote: ' + t : '';
+    tyEl.textContent = t ? hvT('ui.quiz.youWrote', { text: t }) : '';
     tyEl.classList.toggle('hidden', !t);
   }
   if (noteEl) {
@@ -1287,8 +1309,8 @@ function bindListenReplay(word, show){
     replay.type = 'button';
     replay.id = 'quiz-listen-replay';
     replay.className = 'speak-btn';
-    replay.title = 'Play the word again';
-    replay.textContent = '▶ Hear again';
+    replay.title = hvT('ui.quiz.replay.title');
+    replay.textContent = '▶ ' + hvT('ui.quiz.replay');
     box.appendChild(replay);
   }
   replay.onclick = (ev) => {
@@ -1318,16 +1340,16 @@ function applyQuizMode(word, phase, plot){
   bindListenReplay(word, currentQuizMode === 'listen');
   enWordDisplay.style.display = showTyping ? '' : 'none';
 
-  if (showTyping) { qText.textContent = 'Type in Korean for:'; currentChoices = []; return; }
+  if (showTyping) { qText.textContent = hvT('ui.quiz.prompt.type'); currentChoices = []; return; }
 
   if (currentQuizMode === 'recognise') {
-    qText.textContent = 'What does this word mean?';
+    qText.textContent = hvT('ui.quiz.prompt.recognise');
     $('quiz-ko-word').textContent = word.ko;
     const speak = $('quiz-ko-speak');
     if (speak) speak.onclick = () => speakKorean(word.ko, { force: true });
     speakKorean(word.ko);          // free here: the spelling is already visible
   } else {
-    qText.textContent = 'Listen — which word was that?';
+    qText.textContent = hvT('ui.quiz.prompt.listen');
     speakKorean(word.ko);
   }
 
@@ -1391,7 +1413,7 @@ function answerChoice(opt, btn){
     setTimeout(()=>{
       if(!quizOpen || !currentWord) return;
       applyQuizMode(currentWord, currentPhase, currentPlot);
-      feedbackText.textContent = 'Try again — which one is it?';
+      feedbackText.textContent = hvT('ui.quiz.feedback.retry');
     }, 1500);
   }
 }
@@ -1571,13 +1593,13 @@ function buyPlotExpansion(idx) {
 
   if (!isPlotExpansionAvailable(idx)) {
     if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
-    showToast(`🔒 Unlock Farm Plot #${plotIndex} first!`);
+    showToast('🔒 ' + hvT('ui.shop.plot.needPrev', { n: plotIndex }));
     return;
   }
 
   if (playerCurrencies.coins < cost) {
     if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
-    showToast(`Need ${cost} Gold 🪙 to unlock Farm Plot #${plotIndex + 1}!`);
+    showToast(hvT('ui.shop.plot.needGold', { cost, n: plotIndex + 1 }));
     return;
   }
 
@@ -1596,7 +1618,7 @@ function buyPlotExpansion(idx) {
   }
 
   persistSave();
-  showToast(`🎉 Unlocked Farm Plot #${plotIndex + 1}!`);
+  showToast('🎉 ' + hvT('ui.shop.plot.bought', { n: plotIndex + 1 }));
   buildShopGrid();
   updateGoldHUD();
 }
@@ -1607,8 +1629,9 @@ function buildShopGrid() {
   // Section 1: Farm Plot Expansions
   const plotHeader = document.createElement('div');
   plotHeader.className = 'shop-section-header';
-  plotHeader.style.cssText = 'grid-column: 1 / -1; font-family: "Press Start 2P", monospace; font-size: 13px; color: #78350f; margin: 10px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(139, 90, 43, 0.45); display: flex; align-items: center; gap: 8px;';
-  plotHeader.innerHTML = `🌾 Farm Plot Expansions (${unlockedPlots.length}/15 Unlocked)`;
+  plotHeader.style.cssText = 'grid-column: 1 / -1; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 13px; color: #78350f; margin: 10px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(139, 90, 43, 0.45); display: flex; align-items: center; gap: 8px;';
+  plotHeader.innerHTML = '🌾 ' + vbEsc(hvT('ui.shop.plots.header',
+    { n: unlockedPlots.length, total: 15 }));
   grid.appendChild(plotHeader);
 
   PLOT_UNLOCK_COSTS.forEach((cost, idx) => {
@@ -1622,17 +1645,18 @@ function buildShopGrid() {
     card.className = 'shop-card' + (isOwned ? ' owned' : (!buyable ? ' too-expensive' : ''));
     card.innerHTML = `
       <div class="shop-card-icon">${isOwned || available ? '🌾' : '🔒'}</div>
-      <div class="shop-card-name">Plot #${idx + 1} Expansion</div>
-      <div class="shop-card-desc">Unlock Farm Plot #${plotIndex + 1} for ${cost} Gold</div>
+      <div class="shop-card-name">${vbEsc(hvT('ui.shop.plot.name', { n: idx + 1 }))}</div>
+      <div class="shop-card-desc">${vbEsc(hvT('ui.shop.plot.desc', { n: plotIndex + 1, cost }))}</div>
       <div class="shop-card-price">
         ${isOwned
-          ? `<span class="shop-owned-badge">✅ Owned</span>
-             <button class="shop-buy-btn" disabled>Unlocked</button>`
-          : `<span class="shop-card-cost">💰 ${cost} gold</span>
+          ? `<span class="shop-owned-badge">✅ ${vbEsc(hvT('ui.shop.card.owned'))}</span>
+             <button class="shop-buy-btn" disabled>${vbEsc(hvT('ui.shop.plot.unlocked'))}</button>`
+          : `<span class="shop-card-cost">💰 ${vbEsc(hvT('ui.ls.card.price', { n: cost }))}</span>
              <button class="shop-buy-btn" ${buyable ? '' : 'disabled'} onclick="buyPlotExpansion(${idx})">
                ${!available
-                  ? `Unlock Plot #${plotIndex} first`
-                  : (canAfford ? '🛒 Buy Now' : `Need ${cost - playerCurrencies.coins} gold`)}
+                  ? vbEsc(hvT('ui.shop.plot.needPrev', { n: plotIndex }))
+                  : (canAfford ? '🛒 ' + vbEsc(hvT('ui.shop.card.buy'))
+                     : vbEsc(hvT('ui.shop.plot.short', { n: cost - playerCurrencies.coins })))}
              </button>`}
       </div>`;
     grid.appendChild(card);
@@ -1642,7 +1666,7 @@ function buildShopGrid() {
   const lvlHeader = document.createElement('div');
   lvlHeader.className = 'shop-section-header';
   lvlHeader.style.cssText = 'grid-column: 1 / -1; font-family: "Press Start 2P", monospace; font-size: 13px; color: #1e3a8a; margin: 20px 0 6px 0; padding-bottom: 6px; border-bottom: 1px solid rgba(29, 78, 216, 0.35); display: flex; align-items: center; gap: 8px;';
-  lvlHeader.innerHTML = `📚 Vocabulary Level Packs`;
+  lvlHeader.innerHTML = '📚 ' + vbEsc(hvT('ui.shop.packs.header'));
   grid.appendChild(lvlHeader);
 
   levelsData.forEach((lvl, idx) => {
@@ -1654,15 +1678,15 @@ function buildShopGrid() {
     card.className = 'shop-card' + (owned ? ' owned' : (!canAfford ? ' too-expensive' : ''));
     card.innerHTML = `
       <div class="shop-card-icon">${lvl.icon||'📚'}</div>
-      <div class="shop-card-name">Level ${lvl.level}: ${levelName(lvl)}</div>
-      <div class="shop-card-desc">${lvl.description||''} — ${lvl.words.length} words</div>
+      <div class="shop-card-name">${hvT('ui.ls.card.level', { n: lvl.level })}: ${levelName(lvl)}</div>
+      <div class="shop-card-desc">${tr(lvl, 'descriptionEn') || lvl.description || ''} — ${hvT('ui.shop.card.words', { n: lvl.words.length })}</div>
       <div class="shop-card-price">
         ${owned
-          ? `<span class="shop-owned-badge">✅ Owned</span>
-             <button class="shop-buy-btn" onclick="closeShop();startLevel(${idx})">🌾 Play</button>`
-          : `<span class="shop-card-cost">💰 ${cost} gold</span>
+          ? `<span class="shop-owned-badge">✅ ${hvT('ui.shop.card.owned')}</span>
+             <button class="shop-buy-btn" onclick="closeShop();startLevel(${idx})">🌾 ${hvT('ui.shop.card.play')}</button>`
+          : `<span class="shop-card-cost">💰 ${hvT('ui.ls.card.price', { n: cost })}</span>
              <button class="shop-buy-btn" ${canAfford?'':'disabled'} onclick="buyLevel(${idx})">
-               ${canAfford ? '🛒 Buy Now' : `Need ${cost-gold} more gold`}
+               ${canAfford ? '🛒 ' + hvT('ui.shop.card.buy') : hvT('ui.shop.card.short', { n: cost - gold })}
              </button>`}
       </div>`;
     grid.appendChild(card);
@@ -2072,7 +2096,7 @@ function vocabRenderRelatedWords(word) {
   if (!related.length) {
     const empty = document.createElement('div');
     empty.className = 'vff-related-empty';
-    empty.textContent = 'No other entries are available in this level yet.';
+    empty.textContent = hvT('ui.vff.related.empty');
     grid.appendChild(empty);
     return;
   }
@@ -2173,7 +2197,7 @@ function showVocabFunFact(word) {
     : 'Latin-letter spelling';
   $('vff-final-sound').textContent = model.ending.label;
   $('vff-chosung').textContent = getChosung(word.ko) || '—';
-  $('vff-fact-origin').textContent = fact.origin || 'No verified etymology note is available for this entry yet.';
+  $('vff-fact-origin').textContent = fact.origin || hvT('ui.vff.fact.none');
   $('vff-fact-structure').textContent = fact.structure
     || 'This entry is written with Latin letters rather than Hangul blocks.';
   $('vff-study-note').textContent = model.studyNote;
@@ -2227,8 +2251,9 @@ function showVocabFunFact(word) {
   navPosition.textContent = nav.index >= 0 ? `${nav.index + 1} / ${nav.list.length}` : '';
   $('vff-prev-btn').disabled = nav.list.length < 2;
   $('vff-next-btn').disabled = nav.list.length < 2;
-  $('vff-prev-btn').title = nav.list.length > 1 ? 'Previous word in this view' : 'No other word in this view';
-  $('vff-next-btn').title = nav.list.length > 1 ? 'Next word in this view' : 'No other word in this view';
+  const navNone = hvT('ui.vff.nav.none');
+  $('vff-prev-btn').title = nav.list.length > 1 ? hvT('ui.vff.nav.prev') : navNone;
+  $('vff-next-btn').title = nav.list.length > 1 ? hvT('ui.vff.nav.next') : navNone;
 
   setModalState('vocab-ff-modal', true);
   const scroll = $('vff-scroll');
@@ -2263,11 +2288,11 @@ function closeVocabFunFact() {
 }
 
 const TASTE_LABELS = [
-  { ko: '달다', en: 'sweet' },
-  { ko: '짜다', en: 'salty' },
-  { ko: '쓰다', en: 'bitter' },
-  { ko: '시다', en: 'sour' },
-  { ko: '맵다', en: 'spicy' }
+  { ko: '달다', en: 'sweet',  vi: 'ngọt' },
+  { ko: '짜다', en: 'salty',  vi: 'mặn' },
+  { ko: '쓰다', en: 'bitter', vi: 'đắng' },
+  { ko: '시다', en: 'sour',   vi: 'chua' },
+  { ko: '맵다', en: 'spicy',  vi: 'cay' }
 ];
 const TASTE_DISHES = [
   { ko: '김치찌개', icon: '🍲', answer: '맵다' },
@@ -2322,7 +2347,7 @@ function renderTasteRound() {
     if (prog) prog.textContent = tasteState.score + ' / ' + total;
     if (icon) icon.textContent = '😋';
     if (ko) ko.textContent = '잘 먹었습니다';
-    if (prompt) prompt.textContent = tasteState.score + ' of ' + total + ' tastes right';
+    if (prompt) prompt.textContent = hvT('ui.taste.score', { n: tasteState.score, total });
     if (box) box.innerHTML = '<button class="taste-btn" onclick="closeTasteGame()">닫기</button>';
     return;
   }
@@ -2511,12 +2536,13 @@ function renderDeskResults() {
   if (nEl) nEl.textContent = st.score + ' / ' + total;
   if (qEl) {
     qEl.innerHTML = ((st.bank && st.bank.doneKo) || 'Done.') +
-      '<div class="desk-xp">+' + xp + ' EXP · ' + t.icon + ' Lv.' + playerRank.level + ' ' + t.ko +
+      '<div class="desk-xp">' + hvT('ui.desk.xpGain', { n: xp }) + ' · ' + t.icon + ' '
+        + hvT('ui.rank.short', { n: playerRank.level }) + ' ' + t.ko +
       (hops ? '  ▲' : '') + '</div>';
   }
   if (fb) {
     fb.className = 'fb good';
-    fb.textContent = st.score === total ? 'Perfect set!' : (st.score + ' correct');
+    fb.textContent = st.score === total ? hvT('ui.wb.perfect') : hvT('ui.wb.correct', { n: st.score });
   }
   if (box) {
     const again = (st.bank && st.bank.againKo) || 'Again';
@@ -2554,13 +2580,13 @@ function renderDeskQuiz() {
       art.hidden = true;
     }
   }
-  if (qEl) qEl.textContent = (st.i + 1) + '. ' + item.q;
+  if (qEl) qEl.textContent = (st.i + 1) + '. ' + tr(item, 'q');
   if (box) {
     box.innerHTML = '';
     ['A', 'B', 'C', 'D'].forEach(key => {
       const b = document.createElement('button');
       b.className = 'desk-opt';
-      b.textContent = key + '. ' + item.choices[key];
+      b.textContent = key + '. ' + tr(item.choices, key);
       b.onclick = () => answerDeskQuiz(key, b);
       box.appendChild(b);
     });
@@ -2663,7 +2689,8 @@ function openStudyDesk() {
     // deskQuizUrl for what that cost the moment one did not.
     deskMenuOptions = [];
     if (deskQuizUrl()) {
-      deskMenuOptions.push({ key: 'quiz', icon: '📝', ko: '퀴즈', en: 'Multiple choice', run: openDeskQuiz });
+      deskMenuOptions.push({ key: 'quiz', icon: '📝', ko: '퀴즈',
+        en: 'Multiple choice', vi: 'Trắc nghiệm', run: openDeskQuiz });
     }
     // 교과서 before 연습 문제: it is the chapter you sat through, and the 익힘책 is the
     // homework on top of it. A unit with only one of the two still gets one row.
@@ -2671,6 +2698,7 @@ function openStudyDesk() {
       deskMenuOptions.push({
         key: 'textbook', icon: '📖', ko: '교과서',
         en: "Textbook — the chapter's own pages",
+        vi: 'Giáo trình — chính các trang của chương',
         run: () => openWorkbook(tb)
       });
     }
@@ -2678,6 +2706,7 @@ function openStudyDesk() {
       deskMenuOptions.push({
         key: 'workbook', icon: '✍️', ko: '연습 문제',
         en: 'Workbook — build the sentences',
+        vi: 'Sách bài tập — ghép thành câu',
         run: () => openWorkbook(wb)
       });
     }
@@ -2685,6 +2714,7 @@ function openStudyDesk() {
       deskMenuOptions.push({
         key: 'topik', icon: '🎓', ko: '기출 문제',
         en: 'TOPIK II — the questions collected so far',
+        vi: 'TOPIK II — những câu hỏi đã gom được',
         run: () => openWorkbook(tk)
       });
     }
@@ -3236,12 +3266,12 @@ function csWaveLabel(id) {
   if (range) {
     return csClockMs(range.a) + '-' + csClockMs(range.b) + ' · ' + (range.b - range.a).toFixed(1) + 'S';
   }
-  if (typeof st.a === 'number') return 'A SET · NOW SET B';
-  if (typeof st.b === 'number') return 'B SET · NOW SET A';
+  if (typeof st.a === 'number') return hvT('ui.listen.ab.aSet');
+  if (typeof st.b === 'number') return hvT('ui.listen.ab.bSet');
   const state = csWaveState(w.src());
-  if (state === 'wait') return 'WAVEFORM…';
-  if (state === 'none') return 'NO WAVEFORM · DRAG TO LOOP';
-  return 'DRAG TO LOOP';
+  if (state === 'wait') return hvT('ui.listen.wave.wait');
+  if (state === 'none') return hvT('ui.listen.wave.none');
+  return hvT('ui.listen.wave.drag');
 }
 
 // Ask for the peaks and repaint when they land. Safe to call on every render: the cache and
@@ -3361,7 +3391,7 @@ function openCassette() {
       const n = (bank.tracks || []).length;
       const d = ((bank.dictation && bank.dictation.items) || []).length;
       foot.innerHTML = '<span class="cs-foot-ko">' + vbEsc(bank.unitKo || '') + '</span>'
-        + '<span class="cs-foot-n">' + n + ' TRACKS · ' + d + ' LINES · 1/2 QUICK START</span>';
+        + '<span class="cs-foot-n">' + vbEsc(hvT('ui.cassette.foot', { tracks: n, lines: d })) + '</span>';
     }
     renderCassetteMenu();
     setModalState('cassette-overlay', true);
@@ -3375,10 +3405,12 @@ function closeCassette() {
 }
 
 const CASSETTE_MODES = [
-  { key: 'listen', ko: '듣기', label: 'LISTEN', icon: '🎧',
-    en: 'Listen, slow down, hide the script, or loop one difficult phrase.', run: () => openListen() },
-  { key: 'dictation', ko: '받아쓰기', label: 'DICTATION', icon: '✏️',
-    en: 'Write one sentence at a time and compare only the syllables you missed.', run: () => openDictation() }
+  { key: 'listen', ko: '듣기', label: 'LISTEN', labelVi: 'NGHE', icon: '🎧',
+    en: 'Listen, slow down, hide the script, or loop one difficult phrase.',
+    vi: 'Nghe, chậm lại, giấu lời thoại, hoặc lặp một câu khó.', run: () => openListen() },
+  { key: 'dictation', ko: '받아쓰기', label: 'DICTATION', labelVi: 'CHÉP CHÍNH TẢ', icon: '✏️',
+    en: 'Write one sentence at a time and compare only the syllables you missed.',
+    vi: 'Viết từng câu một rồi chỉ đối chiếu những âm tiết bạn viết sai.', run: () => openDictation() }
 ];
 
 function renderCassetteMenu() {
@@ -3388,19 +3420,20 @@ function renderCassetteMenu() {
   CASSETTE_MODES.forEach((m, i) => {
     const p = cassetteModeProgress(cassetteBank || {}, m.key);
     const second = p.accuracy !== null
-      ? p.accuracy + '% accuracy'
-      : (p.attempts ? p.attempts + ' sittings' : 'Ready to start');
+      ? hvT('ui.cassette.accuracy', { n: p.accuracy })
+      : (p.attempts ? hvT('ui.cassette.sittings', { n: p.attempts }) : hvT('ui.cassette.ready'));
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'cs-mode-card' + (i === cassetteMenuIndex ? ' focus' : '');
     b.setAttribute('data-mode', m.key);
-    b.setAttribute('aria-label', m.ko + ' · ' + m.label + '. ' + p.done + ' of ' + p.total + ' practised.');
+    b.setAttribute('aria-label', m.ko + ' · ' + tr(m, 'label') + '. '
+      + hvT('ui.cassette.practised', { n: p.done, total: p.total }));
     b.innerHTML =
       '<span class="cs-mode-top"><span class="cs-mode-icon">' + vbEsc(m.icon) + '</span>' +
         '<span class="cs-mode-key">' + (i + 1) + '</span></span>' +
-      '<span class="cs-mode-title">' + vbEsc(m.ko) + '<small>' + vbEsc(m.label) + '</small></span>' +
+      '<span class="cs-mode-title">' + vbEsc(m.ko) + '<small>' + vbEsc(tr(m, 'label')) + '</small></span>' +
       '<span class="cs-mode-desc">' + vbEsc(tr(m, 'en')) + '</span>' +
-      '<span class="cs-mode-meta"><span>' + p.done + ' / ' + p.total + ' practised</span>' +
+      '<span class="cs-mode-meta"><span>' + vbEsc(hvT('ui.cassette.practisedShort', { n: p.done, total: p.total })) + '</span>' +
         '<span>' + vbEsc(second) + '</span></span>' +
       '<span class="cs-mode-progress" aria-hidden="true"><span style="width:' + p.pct + '%"></span></span>';
     b.onclick = () => runCassetteMode(i);
@@ -3632,7 +3665,8 @@ function renderListen() {
   const nowEn = $('listen-now-en');
   if (nowEn) nowEn.textContent = tr(cur, 'secEn') || '';
   const nowKicker = $('listen-now-kicker');
-  if (nowKicker) nowKicker.textContent = 'TRK ' + cur.n + ' · ' + (st.i + 1) + ' / ' + tracks.length;
+  if (nowKicker) nowKicker.textContent = hvT('ui.cassette.track', { n: cur.n })
+    + ' · ' + (st.i + 1) + ' / ' + tracks.length;
   const play = $('listen-play');
   if (play) play.setAttribute('data-src', cur.src);
   document.querySelectorAll('#listen-rates .cs-rate').forEach((b) => {
@@ -3657,7 +3691,8 @@ function renderListen() {
     info.classList.toggle('on', !!range);
     // csWaveLabel also reports WAVEFORM… / NO WAVEFORM, which is half the point: a strip
     // still decoding says so in words rather than looking like a waveform that came out flat.
-    info.textContent = csWaveLabel('listen-wave') + (range || halfMark ? '' : ' · DRAG A PHRASE TO LOOP');
+    info.textContent = csWaveLabel('listen-wave')
+      + (range || halfMark ? '' : ' · ' + hvT('ui.listen.wave.dragPhrase'));
   }
   csWaveBind('listen-wave');
   csPaintWave('listen-wave');
@@ -3953,13 +3988,13 @@ function renderDictation() {
 
   const tags = $('dict-tags');
   if (tags) {
-    tags.innerHTML = '<span class="cs-tag trk">TRK ' + it.track + '</span>'
+    tags.innerHTML = '<span class="cs-tag trk">' + vbEsc(hvT('ui.cassette.track', { n: it.track })) + '</span>'
       + '<span class="cs-tag who">' + vbEsc(it.who) + '</span>'
       + (it.tags || []).map((t) => '<span class="cs-tag lesson">' + vbEsc(t) + '</span>').join('');
   }
 
   const hint = $('dict-hint');
-  if (hint) hint.textContent = it.syl + ' syllables';
+  if (hint) hint.textContent = hvT('ui.dict.syllables', { n: it.syl });
   const play = $('dict-play');
   if (play) play.setAttribute('data-src', it.audio ? it.audio.src : '');
 
@@ -5371,8 +5406,8 @@ function renderVocabCards() {
   visibleVocabWords = words.slice();
 
   vocabCountEl.textContent = words.length === lvl.words.length
-    ? `${words.length} words`
-    : `${words.length} of ${lvl.words.length} words`;
+    ? hvT('ui.vocab.count', { n: words.length })
+    : hvT('ui.vocab.count.filtered', { n: words.length, total: lvl.words.length });
   vocabGrid.innerHTML = '';
 
   if (!words.length) {
@@ -5394,10 +5429,12 @@ function renderVocabCards() {
 
     // Badge reflects scheduler state; the suffix shows the current interval, which is the
     // number that actually tells a learner how well they know the word.
-    let mBadgeClass = 'novice', mBadgeLabel = '⚪ New', mBadgeSuffix = '';
-    if(srsIsMature(e))        { mBadgeClass='legendary'; mBadgeLabel='🌟 Mature'; }
+    let mBadgeClass = 'novice', mBadgeLabel = '⚪ ' + hvT('ui.vocab.filter.new'), mBadgeSuffix = '';
+    if(srsIsMature(e))        { mBadgeClass='legendary'; mBadgeLabel='🌟 ' + hvT('ui.vocab.filter.mature'); }
     else if(e && e.st==='review'){ mBadgeClass='mastered';  mBadgeLabel='🍎 ' + hvT('ui.vocab.filter.review'); }
-    else if(srsIsLearning(e)) { mBadgeClass='practicing'; mBadgeLabel = e.st==='relearn' ? '🔁 Relearning' : '🌱 Learning'; }
+    else if(srsIsLearning(e)) { mBadgeClass='practicing'; mBadgeLabel = e.st==='relearn'
+      ? '🔁 ' + hvT('ui.vocab.stage.relearning')
+      : '🌱 ' + hvT('ui.vocab.filter.learning'); }
     if(srsIsGraduated(e)) mBadgeSuffix = ` (${srsIntervalLabel(e)})`;
     if(srsIsDue(e, now))  mBadgeSuffix += ' ⏰';
 
@@ -5413,7 +5450,7 @@ function renderVocabCards() {
     div.setAttribute('tabindex', '0');
     div.setAttribute('aria-label', `${w.ko}, ${tr(w, 'en')}. ${mBadgeLabel}${mBadgeSuffix}. ${hvT('ui.vocab.openWordDetails')}`);
     div.innerHTML = `
-      <button type="button" class="speak-btn vc-speak tts-only" title="Hear this word" aria-label="Hear ${vbEsc(w.ko)}">🔊</button>
+      <button type="button" class="speak-btn vc-speak tts-only" title="${vbEsc(hvT('ui.vocab.speak.title'))}" aria-label="${vbEsc(hvT('ui.vocab.speak.aria', { word: w.ko }))}">🔊</button>
       <span class="vc-category" title="${vbEsc(wordCategory(w))}">${vbEsc(wordCategory(w))}</span>
       <span class="vc-emoji">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(w.ko, w.hint || '📝', 86) : (w.hint || '📝')}</span>
       <span class="vc-ko${vbKoSizeClass(w.ko)}" lang="ko">${vbEsc(w.ko)}</span>

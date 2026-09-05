@@ -10,19 +10,19 @@ var playerRank = { xp: 0, level: 1, sessions: 0, correct: 0, asked: 0, perfects:
 
 const RANK_MAX = 60;
 const VALLEY_RANKS = [
-  { min: 1,  ko: '입문자',      en: 'Newcomer',           icon: '🌱' },
-  { min: 2,  ko: '견습생',      en: 'Apprentice',         icon: '✏️' },
-  { min: 4,  ko: '맛초보',      en: 'Taste Rookie',       icon: '🥄' },
-  { min: 7,  ko: '밭지기',      en: 'Plot Keeper',        icon: '🌾' },
-  { min: 10, ko: '주방보조',    en: 'Kitchen Hand',       icon: '🥢' },
-  { min: 14, ko: '맛감정사',    en: 'Palate Scout',       icon: '🧂' },
-  { min: 18, ko: '수습요리사',  en: 'Line Cook',          icon: '🍳' },
-  { min: 23, ko: '한식학도',    en: 'Hansik Scholar',     icon: '📘' },
-  { min: 28, ko: '수셰프',      en: 'Sous Chef',          icon: '🍲' },
-  { min: 34, ko: '한식당장',    en: 'Dining Master',      icon: '🏅' },
-  { min: 40, ko: '미식가',      en: 'Gourmet',            icon: '👑' },
-  { min: 47, ko: '전설의 셰프', en: 'Legend Chef',        icon: '🔥' },
-  { min: 55, ko: '한식의 달인', en: 'Hansik Grandmaster', icon: '💎' }
+  { min: 1,  ko: '입문자',      en: 'Newcomer', vi: 'Người mới',           icon: '🌱' },
+  { min: 2,  ko: '견습생',      en: 'Apprentice', vi: 'Học việc',         icon: '✏️' },
+  { min: 4,  ko: '맛초보',      en: 'Taste Rookie', vi: 'Tân binh nếm món',       icon: '🥄' },
+  { min: 7,  ko: '밭지기',      en: 'Plot Keeper', vi: 'Người giữ ruộng',        icon: '🌾' },
+  { min: 10, ko: '주방보조',    en: 'Kitchen Hand', vi: 'Phụ bếp',       icon: '🥢' },
+  { min: 14, ko: '맛감정사',    en: 'Palate Scout', vi: 'Người sành vị',       icon: '🧂' },
+  { min: 18, ko: '수습요리사',  en: 'Line Cook', vi: 'Đầu bếp tập sự',          icon: '🍳' },
+  { min: 23, ko: '한식학도',    en: 'Hansik Scholar', vi: 'Môn sinh Hansik',     icon: '📘' },
+  { min: 28, ko: '수셰프',      en: 'Sous Chef', vi: 'Bếp phó',          icon: '🍲' },
+  { min: 34, ko: '한식당장',    en: 'Dining Master', vi: 'Chủ quán Hansik',      icon: '🏅' },
+  { min: 40, ko: '미식가',      en: 'Gourmet', vi: 'Người sành ăn',            icon: '👑' },
+  { min: 47, ko: '전설의 셰프', en: 'Legend Chef', vi: 'Đầu bếp huyền thoại',        icon: '🔥' },
+  { min: 55, ko: '한식의 달인', en: 'Hansik Grandmaster', vi: 'Đại sư Hansik', icon: '💎' }
 ];
 
 function defaultPlayerRank() {
@@ -85,9 +85,10 @@ function updateRankHUD() {
   if (icon && !(typeof icon.getAttribute === 'function' && icon.getAttribute('data-hud-icon'))) {
     icon.textContent = t.icon;
   }
-  if (lv) lv.textContent = 'Lv.' + playerRank.level;
+  if (lv) lv.textContent = hvT('ui.rank.short', { n: playerRank.level });
   if (fill) fill.style.width = pct + '%';
-  if (chip) chip.title = t.ko + ' · ' + tr(t, 'en') + ' · ' + playerRank.xp + '/' + need + ' EXP';
+  if (chip) chip.title = t.ko + ' · ' + tr(t, 'en') + ' · '
+    + hvT('ui.rank.xp.short', { xp: playerRank.xp, need });
 }
 function renderRankCard() {
   ensurePlayerRank();
@@ -98,10 +99,12 @@ function renderRankCard() {
   const acc = playerRank.asked ? Math.round((playerRank.correct / playerRank.asked) * 100) : 0;
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   set('rank-seal', t.icon);
-  set('rank-lv', 'LV. ' + playerRank.level);
+  set('rank-lv', hvT('ui.rank.lv.fmt', { n: playerRank.level }));
   set('rank-title-ko', t.ko);
   set('rank-title-en', tr(t, 'en'));
-  set('rank-xp-num', playerRank.level >= RANK_MAX ? 'MAX' : (playerRank.xp + ' / ' + need + ' EXP'));
+  set('rank-xp-num', playerRank.level >= RANK_MAX
+    ? hvT('ui.rank.max')
+    : hvT('ui.rank.xp.fmt', { xp: playerRank.xp, need }));
   const fill = document.getElementById('rank-xp-fill');
   if (fill) fill.style.width = pct + '%';
   set('rank-stat-sessions', String(playerRank.sessions));
@@ -122,7 +125,7 @@ function showRankUp(title, hops) {
   const t = title || rankTitleFor(playerRank.level);
   const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   set('rankup-icon', t.icon);
-  set('rankup-lv', 'LV. ' + playerRank.level);
+  set('rankup-lv', hvT('ui.rank.lv.fmt', { n: playerRank.level }));
   set('rankup-ko', t.ko);
   set('rankup-en', tr(t, 'en') + (hops > 1 ? '  (+' + hops + ')' : ''));
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('levelup');
@@ -136,32 +139,32 @@ var gold = 85; // kept in sync for 100% backward compatibility
 var quizStreak = 0; // consecutive correct quiz streak
 
 var ITEM_DB = {
-  '배추': { id: 'cabbage', name: 'Napa Cabbage', nameKo: '배추', icon: '🥬', description: 'Fresh Napa cabbage harvested from the plot.' },
-  '무': { id: 'radish', name: 'Korean Radish', nameKo: '무', icon: '🥔', description: 'Crunchy white Korean radish.' },
-  '파': { id: 'green_onion', name: 'Green Onion', nameKo: '파', icon: '🌱', description: 'Fragrant green onions.' },
-  '고추': { id: 'chili', name: 'Chili Pepper', nameKo: '고추', icon: '🌶️', description: 'Spicy red chili pepper.' },
-  '마늘': { id: 'garlic', name: 'Garlic', nameKo: '마늘', icon: '🧄', description: 'Pungent garlic cloves.' },
-  '쌀': { id: 'rice', name: 'Rice', nameKo: '쌀', icon: '🌾', description: 'Staple Korean white rice.' },
-  '콩': { id: 'soybean', name: 'Soybean', nameKo: '콩', icon: '🫘', description: 'Nutritious yellow soybeans.' },
-  '당근': { id: 'carrot', name: 'Carrot', nameKo: '당근', icon: '🥕', description: 'Sweet orange carrot.' },
-  '감자': { id: 'potato', name: 'Potato', nameKo: '감자', icon: '🥔', description: 'Fresh farm potato.' },
-  '옥수수': { id: 'corn', name: 'Corn', nameKo: '옥수수', icon: '🌽', description: 'Sweet farm corn on the cob.' },
-  '딸기': { id: 'strawberry', name: 'Strawberry', nameKo: '딸기', icon: '🍓', description: 'Sweet garden strawberry.' },
-  '사과': { id: 'apple', name: 'Apple', nameKo: '사과', icon: '🍎', description: 'Crisp Orchard Apple.' },
-  '연어': { id: 'salmon', name: 'Salmon', nameKo: '연어', icon: '🐟', description: 'Fresh river salmon.' },
-  '고등어': { id: 'mackerel', name: 'Mackerel', nameKo: '고등어', icon: '🐟', description: 'Flavorful ocean mackerel.' },
-  '오징어': { id: 'squid', name: 'Squid', nameKo: '오징어', icon: '🦑', description: 'Tender ocean squid.' },
-  '잉어': { id: 'carp', name: 'Carp', nameKo: '잉어', icon: '🐟', description: 'Crystal pond carp.' },
-  '새우': { id: 'shrimp', name: 'Shrimp', nameKo: '새우', icon: '🦐', description: 'Fresh sea shrimp.' },
-  '문어': { id: 'octopus', name: 'Octopus', nameKo: '문어', icon: '🐙', description: 'Giant sea octopus.' },
-  '조개': { id: 'clam', name: 'Clam', nameKo: '조개', icon: '🦪', description: 'Fresh shore clam.' },
-  '황금물고기': { id: 'golden_fish', name: 'Golden Fish', nameKo: '황금물고기', icon: '🐠', description: 'Rare golden fish.' },
-  '꿀': { id: 'honey', name: 'Honey', nameKo: '꿀', icon: '🍯', type: 'ingredient', description: 'Sweet golden honey harvested from the beehive.' },
-  '오이': { id: 'cucumber', name: 'Cucumber', nameKo: '오이', icon: '🥒', description: 'Crisp cucumber for 냉면 and 비빔국수.' },
-  '양파': { id: 'onion', name: 'Onion', nameKo: '양파', icon: '🧅', description: 'Onion for Korean stews.' },
-  '콩나물': { id: 'bean_sprout', name: 'Bean sprouts', nameKo: '콩나물', icon: '🌱', description: 'Soybean sprouts for 된장찌개 and 비빔밥.' },
-  '상추': { id: 'lettuce', name: 'Lettuce', nameKo: '상추', icon: '🥬', description: 'Lettuce wraps for 삼겹살.' },
-  '생강': { id: 'ginger', name: 'Ginger', nameKo: '생강', icon: '🫚', description: 'Ginger for 감자탕 and 삼계탕 broth.' }
+  '배추': { id: 'cabbage', name: 'Napa Cabbage', nameVi: 'Cải thảo', nameKo: '배추', icon: '🥬', description: 'Fresh Napa cabbage harvested from the plot.', descriptionVi: 'Cải thảo tươi vừa hái ngoài ruộng.' },
+  '무': { id: 'radish', name: 'Korean Radish', nameVi: 'Củ cải Hàn', nameKo: '무', icon: '🥔', description: 'Crunchy white Korean radish.', descriptionVi: 'Củ cải trắng Hàn Quốc giòn rụm.' },
+  '파': { id: 'green_onion', name: 'Green Onion', nameVi: 'Hành lá', nameKo: '파', icon: '🌱', description: 'Fragrant green onions.', descriptionVi: 'Hành lá thơm nức.' },
+  '고추': { id: 'chili', name: 'Chili Pepper', nameVi: 'Ớt', nameKo: '고추', icon: '🌶️', description: 'Spicy red chili pepper.', descriptionVi: 'Ớt đỏ cay xè.' },
+  '마늘': { id: 'garlic', name: 'Garlic', nameVi: 'Tỏi', nameKo: '마늘', icon: '🧄', description: 'Pungent garlic cloves.', descriptionVi: 'Những tép tỏi nồng.' },
+  '쌀': { id: 'rice', name: 'Rice', nameVi: 'Gạo', nameKo: '쌀', icon: '🌾', description: 'Staple Korean white rice.', descriptionVi: 'Gạo trắng, món chính của bữa cơm Hàn.' },
+  '콩': { id: 'soybean', name: 'Soybean', nameVi: 'Đậu nành', nameKo: '콩', icon: '🫘', description: 'Nutritious yellow soybeans.', descriptionVi: 'Đậu nành vàng bổ dưỡng.' },
+  '당근': { id: 'carrot', name: 'Carrot', nameVi: 'Cà rốt', nameKo: '당근', icon: '🥕', description: 'Sweet orange carrot.', descriptionVi: 'Cà rốt cam ngọt.' },
+  '감자': { id: 'potato', name: 'Potato', nameVi: 'Khoai tây', nameKo: '감자', icon: '🥔', description: 'Fresh farm potato.', descriptionVi: 'Khoai tây tươi từ nông trại.' },
+  '옥수수': { id: 'corn', name: 'Corn', nameVi: 'Ngô', nameKo: '옥수수', icon: '🌽', description: 'Sweet farm corn on the cob.', descriptionVi: 'Bắp ngô ngọt của nông trại.' },
+  '딸기': { id: 'strawberry', name: 'Strawberry', nameVi: 'Dâu tây', nameKo: '딸기', icon: '🍓', description: 'Sweet garden strawberry.', descriptionVi: 'Dâu tây ngọt hái trong vườn.' },
+  '사과': { id: 'apple', name: 'Apple', nameVi: 'Táo', nameKo: '사과', icon: '🍎', description: 'Crisp Orchard Apple.', descriptionVi: 'Táo vườn giòn tan.' },
+  '연어': { id: 'salmon', name: 'Salmon', nameVi: 'Cá hồi', nameKo: '연어', icon: '🐟', description: 'Fresh river salmon.', descriptionVi: 'Cá hồi sông tươi.' },
+  '고등어': { id: 'mackerel', name: 'Mackerel', nameVi: 'Cá thu', nameKo: '고등어', icon: '🐟', description: 'Flavorful ocean mackerel.', descriptionVi: 'Cá thu biển đậm vị.' },
+  '오징어': { id: 'squid', name: 'Squid', nameVi: 'Mực', nameKo: '오징어', icon: '🦑', description: 'Tender ocean squid.', descriptionVi: 'Mực biển mềm.' },
+  '잉어': { id: 'carp', name: 'Carp', nameVi: 'Cá chép', nameKo: '잉어', icon: '🐟', description: 'Crystal pond carp.', descriptionVi: 'Cá chép Ao Pha Lê.' },
+  '새우': { id: 'shrimp', name: 'Shrimp', nameVi: 'Tôm', nameKo: '새우', icon: '🦐', description: 'Fresh sea shrimp.', descriptionVi: 'Tôm biển tươi.' },
+  '문어': { id: 'octopus', name: 'Octopus', nameVi: 'Bạch tuộc', nameKo: '문어', icon: '🐙', description: 'Giant sea octopus.', descriptionVi: 'Bạch tuộc biển khổng lồ.' },
+  '조개': { id: 'clam', name: 'Clam', nameVi: 'Nghêu', nameKo: '조개', icon: '🦪', description: 'Fresh shore clam.', descriptionVi: 'Nghêu tươi bắt ven bờ.' },
+  '황금물고기': { id: 'golden_fish', name: 'Golden Fish', nameVi: 'Cá vàng', nameKo: '황금물고기', icon: '🐠', description: 'Rare golden fish.', descriptionVi: 'Cá vàng hiếm gặp.' },
+  '꿀': { id: 'honey', name: 'Honey', nameVi: 'Mật ong', nameKo: '꿀', icon: '🍯', type: 'ingredient', description: 'Sweet golden honey harvested from the beehive.', descriptionVi: 'Mật ong vàng ngọt lấy từ tổ ong.' },
+  '오이': { id: 'cucumber', name: 'Cucumber', nameVi: 'Dưa chuột', nameKo: '오이', icon: '🥒', description: 'Crisp cucumber for 냉면 and 비빔국수.', descriptionVi: 'Dưa chuột giòn cho 냉면 và 비빔국수.' },
+  '양파': { id: 'onion', name: 'Onion', nameVi: 'Hành tây', nameKo: '양파', icon: '🧅', description: 'Onion for Korean stews.', descriptionVi: 'Hành tây cho các món canh hầm Hàn Quốc.' },
+  '콩나물': { id: 'bean_sprout', name: 'Bean sprouts', nameVi: 'Giá đỗ', nameKo: '콩나물', icon: '🌱', description: 'Soybean sprouts for 된장찌개 and 비빔밥.', descriptionVi: 'Giá đậu nành cho 된장찌개 và 비빔밥.' },
+  '상추': { id: 'lettuce', name: 'Lettuce', nameVi: 'Xà lách', nameKo: '상추', icon: '🥬', description: 'Lettuce wraps for 삼겹살.', descriptionVi: 'Xà lách cuốn cho món 삼겹살.' },
+  '생강': { id: 'ginger', name: 'Ginger', nameVi: 'Gừng', nameKo: '생강', icon: '🫚', description: 'Ginger for 감자탕 and 삼계탕 broth.', descriptionVi: 'Gừng cho nước dùng 감자탕 và 삼계탕.' }
 };
 
 function getItemInfo(keyOrId) {

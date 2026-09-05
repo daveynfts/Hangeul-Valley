@@ -248,8 +248,11 @@ function attachTextbookWorld(world) {
     costumeSkinId: world.costumeSkinId || (world.level && world.level.costumeSkinId) || null,
     notebook: world.notebook || null,
     upcoming: world.upcoming || [],
-    source: world.source || '',
-    pages: world.pages || '',
+    // Through tr(), like `title` below: hvLocalize has already put the translation on the
+    // world object beside the English, and reading the English field directly is how the
+    // level-select eyebrow went on saying "Unit 10" with a finished Vietnamese catalogue.
+    source: tr(world, 'source') || world.source || '',
+    pages: tr(world, 'pages') || world.pages || '',
     title: tr(world, 'title') || tr(world.level, 'nameEn'),
     titleKo: world.titleKo || world.level.name
   });
@@ -665,6 +668,29 @@ let questState = {
   quizStreakToday: 0
 };
 
+/**
+ * The wording of one quest, story act or tag, in the player's language.
+ *
+ * The three tables below stay in English and stay readable — a quest is easier to reason
+ * about as one line than as three keys — and the translation hangs off the id it already
+ * has. The English in the table is the fallback, so a quest added without a catalogue entry
+ * still reads correctly; scripts/validate_content.js is what says so out loud.
+ */
+function questText(q, field) {
+  if (!q || !q[field]) return '';
+  const key = 'quest.' + q.id + '.' + field;
+  const s = typeof hvT === 'function' ? hvT(key) : key;
+  return s === key ? q[field] : s;
+}
+
+/** The one-word category badge on a quest card — Farm, Study, Valley, Kitchen. */
+function questTagText(tag) {
+  if (!tag) return '';
+  const key = 'quest.tag.' + String(tag).toLowerCase();
+  const s = typeof hvT === 'function' ? hvT(key) : key;
+  return s === key ? tag : s;
+}
+
 const MAIN_STORYLINE = [
   { act: 1, id: 'act_1', title: 'Harvest of Hangeul', desc: 'Harvest 3 ripe words on the farm. Learn 80% of Level 1 (Daily Life & People).', target: 3, reqLevel: 0, minPct: 80, rCoins: 100, rGems: 10, rHonor: 50, icon: '🌾' },
   { act: 2, id: 'act_2', title: 'Beast Master', desc: 'Defeat 5 dungeon beasts. Learn 80% of Level 2 (Food & Dining).', target: 5, reqLevel: 1, minPct: 80, rCoins: 150, rGems: 15, rHonor: 75, icon: '⚔️' },
@@ -966,7 +992,7 @@ function updateQuestHudBadge() {
   if (btn) {
     if (n > 0) btn.setAttribute('data-quest-ready', String(n));
     else btn.removeAttribute('data-quest-ready');
-    btn.title = n > 0 ? ('Quest Log — ' + n + ' ready to claim') : 'Quest Log';
+    btn.title = n > 0 ? hvT('ui.quest.btn.title.ready', { n }) : hvT('ui.quest.btn.title');
   }
   const more = document.getElementById('hud-more-btn');
   if (more) more.classList.toggle('has-quest-ready', n > 0);
@@ -1067,13 +1093,15 @@ function renderQuestMeta() {
     const list = questState.daily || [];
     const done = list.filter(q => q.claimed).length;
     const ready = questListReadyCount(list);
-    line.textContent = done + ' / ' + list.length + ' claimed  ·  resets in ' + formatQuestCountdown(msUntilNextLocalDay(now));
+    line.textContent = hvT('ui.quest.daily.line',
+      { done, total: list.length, countdown: formatQuestCountdown(msUntilNextLocalDay(now)) });
     if (ready) line.textContent += '  ·  ' + ready + ' ready';
   } else {
     const list = questState.weekly || [];
     const done = list.filter(q => q.claimed).length;
     const ready = questListReadyCount(list);
-    line.textContent = done + ' / ' + list.length + ' claimed  ·  week resets in ' + formatQuestCountdown(msUntilNextLocalWeek(now));
+    line.textContent = hvT('ui.quest.weekly.line',
+      { done, total: list.length, countdown: formatQuestCountdown(msUntilNextLocalWeek(now)) });
     if (ready) line.textContent += '  ·  ' + ready + ' ready';
   }
   meta.appendChild(line);
@@ -1083,7 +1111,7 @@ function renderQuestMeta() {
   if (ready > 0) {
     const btn = questEl('button', 'quest-claim-all');
     btn.type = 'button';
-    btn.textContent = 'Claim all (' + ready + ')';
+    btn.textContent = hvT('ui.quest.claimAll', { n: ready });
     btn.onclick = () => claimReadySideQuests(activeQuestTab);
     meta.appendChild(btn);
   }
@@ -1131,21 +1159,25 @@ function renderQuestList() {
       const head = questEl('div', 'quest-card-header');
       const titleWrap = questEl('div', 'quest-card-title-wrap');
       titleWrap.appendChild(questEl('span', 'quest-card-icon', act.icon || '📖'));
-      titleWrap.appendChild(questEl('span', 'quest-card-title', 'Act ' + act.act + ' · ' + act.title));
+      titleWrap.appendChild(questEl('span', 'quest-card-title',
+        hvT('ui.quest.act', { n: act.act }) + ' · ' + questText(act, 'title')));
       head.appendChild(titleWrap);
       head.appendChild(questEl('span', 'quest-card-badge' + (isCompleted ? ' claimed' : (reqMet ? ' ready' : (isLocked ? ' locked' : ''))),
-        isCompleted ? 'Claimed' : (isLocked ? 'Locked' : (reqMet ? 'Ready' : 'Act ' + act.act))));
+        isCompleted ? hvT('ui.quest.claimed')
+          : (isLocked ? hvT('ui.quest.locked')
+            : (reqMet ? hvT('ui.quest.ready') : hvT('ui.quest.act', { n: act.act })))));
       card.appendChild(head);
-      card.appendChild(questEl('div', 'quest-card-desc', isLocked ? 'Finish the previous act to unlock this chapter.' : act.desc));
+      card.appendChild(questEl('div', 'quest-card-desc',
+        isLocked ? hvT('ui.quest.act.locked') : questText(act, 'desc')));
 
       if (!isLocked) {
         const labels = questEl('div', 'quest-progress-labels');
-        labels.appendChild(questEl('span', '', 'Goal'));
+        labels.appendChild(questEl('span', '', hvT('ui.quest.goal')));
         labels.appendChild(questEl('span', '', curr + ' / ' + act.target));
         card.appendChild(labels);
         renderQuestBar(card, curr, act.target);
         const srsRow = questEl('div', 'quest-progress-labels');
-        srsRow.appendChild(questEl('span', '', 'Learned'));
+        srsRow.appendChild(questEl('span', '', hvT('ui.quest.learned')));
         srsRow.appendChild(questEl('span', '', srsPct + '% / ' + act.minPct + '%'));
         card.appendChild(srsRow);
         renderQuestBar(card, srsPct, act.minPct);
@@ -1154,11 +1186,11 @@ function renderQuestList() {
       const row = questEl('div', 'quest-rewards-row');
       renderQuestRewards(row, act.rCoins, act.rGems, act.rHonor);
       if (isCompleted) {
-        row.appendChild(questEl('span', 'quest-claimed-label', 'Claimed'));
+        row.appendChild(questEl('span', 'quest-claimed-label', hvT('ui.quest.claimed')));
       } else if (!isLocked) {
         const btn = questEl('button', 'quest-claim-btn');
         btn.type = 'button';
-        btn.textContent = reqMet ? 'Claim rewards' : 'In progress';
+        btn.textContent = hvT(reqMet ? 'ui.quest.claim' : 'ui.quest.inProgress');
         btn.disabled = !reqMet;
         btn.onclick = () => claimMainQuest(act.act);
         row.appendChild(btn);
@@ -1176,7 +1208,7 @@ function renderQuestList() {
     return ra - rb;
   });
   if (!list.length) {
-    container.appendChild(questEl('div', 'quest-empty', 'No quests on this board yet. Check back after a reset.'));
+    container.appendChild(questEl('div', 'quest-empty', hvT('ui.quest.empty')));
     return;
   }
   list.forEach(q => {
@@ -1185,30 +1217,32 @@ function renderQuestList() {
     const head = questEl('div', 'quest-card-header');
     const titleWrap = questEl('div', 'quest-card-title-wrap');
     titleWrap.appendChild(questEl('span', 'quest-card-icon', q.icon || '📜'));
-    titleWrap.appendChild(questEl('span', 'quest-card-title', q.title));
+    titleWrap.appendChild(questEl('span', 'quest-card-title', questText(q, 'title')));
     head.appendChild(titleWrap);
     const badgeWrap = questEl('div', 'quest-card-badges');
-    if (q.tag) badgeWrap.appendChild(questEl('span', 'quest-card-tag', q.tag));
+    if (q.tag) badgeWrap.appendChild(questEl('span', 'quest-card-tag', questTagText(q.tag)));
     badgeWrap.appendChild(questEl('span', 'quest-card-badge' + (q.claimed ? ' claimed' : (ready ? ' ready' : '')),
-      q.claimed ? 'Claimed' : (ready ? 'Ready' : Math.min(100, Math.floor(((q.current || 0) / q.target) * 100)) + '%')));
+      q.claimed ? hvT('ui.quest.claimed')
+        : (ready ? hvT('ui.quest.ready')
+          : Math.min(100, Math.floor(((q.current || 0) / q.target) * 100)) + '%')));
     head.appendChild(badgeWrap);
     card.appendChild(head);
-    card.appendChild(questEl('div', 'quest-card-desc', q.desc));
-    const how = q.how || ((DAILY_QUEST_POOL.concat(WEEKLY_QUEST_POOL).find(p => p.id === q.id) || {}).how) || '';
+    card.appendChild(questEl('div', 'quest-card-desc', questText(q, 'desc')));
+    const how = questText(q.how ? q : (DAILY_QUEST_POOL.concat(WEEKLY_QUEST_POOL).find(p => p.id === q.id) || {}), 'how');
     if (how && !q.claimed) card.appendChild(questEl('div', 'quest-card-how', how));
     const labels = questEl('div', 'quest-progress-labels');
-    labels.appendChild(questEl('span', '', 'Progress'));
+    labels.appendChild(questEl('span', '', hvT('ui.quest.progress')));
     labels.appendChild(questEl('span', '', (q.current || 0) + ' / ' + q.target));
     card.appendChild(labels);
     renderQuestBar(card, q.current || 0, q.target);
     const row = questEl('div', 'quest-rewards-row');
     renderQuestRewards(row, q.rCoins, q.rGems, q.rHonor);
     if (q.claimed) {
-      row.appendChild(questEl('span', 'quest-claimed-label', 'Claimed'));
+      row.appendChild(questEl('span', 'quest-claimed-label', hvT('ui.quest.claimed')));
     } else {
       const btn = questEl('button', 'quest-claim-btn');
       btn.type = 'button';
-      btn.textContent = ready ? 'Claim rewards' : 'In progress';
+      btn.textContent = hvT(ready ? 'ui.quest.claim' : 'ui.quest.inProgress');
       btn.disabled = !ready;
       btn.onclick = () => claimSideQuest(activeQuestTab, q.id);
       row.appendChild(btn);
@@ -1239,7 +1273,7 @@ function claimMainQuest(actNum) {
   addGems(act.rGems);
   addHonor(act.rHonor);
 
-  showToast('Story complete: ' + act.title + ' — rewards claimed!', 4000);
+  showToast(hvT('ui.quest.storyDone', { title: questText(act, 'title') }), 4000);
   updateQuestHudBadge();
   renderQuestList();
 }
@@ -1254,7 +1288,8 @@ function claimSideQuest(tab, qId) {
   addGems(q.rGems);
   addHonor(q.rHonor);
 
-  showToast('Claimed "' + q.title + '"  ·  +' + q.rCoins + ' coins, +' + q.rGems + ' gems, +' + q.rHonor + ' honor', 4000);
+  showToast(hvT('ui.quest.claimedToast',
+    { title: questText(q, 'title'), coins: q.rCoins, gems: q.rGems, honor: q.rHonor }), 4000);
   updateQuestHudBadge();
   renderQuestList();
 }

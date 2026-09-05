@@ -273,10 +273,20 @@ check('index.html script tags match js/manifest.json',
 //
 // So: the catalogues are exempt, because holding Vietnamese is their entire job, and the
 // language table in js/i18n.js is exempt, because "Tiếng Việt" is the one label that must
-// never be translated or transliterated. Everything else stays under the rule.
+// never be translated or transliterated.
+//
+// The rest of the game keeps the rule, made narrower rather than dropped. A handful of tables
+// are written in code — the valley ranks, the inventory, the recipes, the desk and cassette
+// menus — and they now carry their translation beside the English, in the `vi` / `nameVi` /
+// `descriptionVi` / `labelVi` field that tr() reads. A line holding one of those is allowed
+// to hold Vietnamese; a line that does not is not. That keeps the thing actually worth
+// catching — Vietnamese sitting in a field the game renders as English — under the rule,
+// which an exemption for the whole file would have given up.
 const VIETNAMESE_ALLOWED = new Set(
   ['js/i18n.js'].concat(GAME_SCRIPTS.filter((f) => f.indexOf('js/locales/') === 0))
 );
+// `vi:` / `nameVi:` / `labelVi:` / `descriptionVi:` — a translation field in a data table.
+const VI_FIELD = /(^|[^A-Za-z0-9_])(vi|[A-Za-z0-9_]+Vi)\s*:/;
 ['index.html', path.join('css', 'game.css'), path.join('sprites', 'catalog.json'), path.join('skins', 'catalog.json')]
   .concat(GAME_SCRIPTS)
   .forEach((f) => {
@@ -289,9 +299,10 @@ const VIETNAMESE_ALLOWED = new Set(
     if (VIETNAMESE_ALLOWED.has(String(f).split(path.sep).join('/'))) return;
     const hits = src.split('\n')
       .map((line, i) => ({ line, n: i + 1 }))
-      .filter(({ line }) => VIETNAMESE.test(line))
+      .filter(({ line }) => VIETNAMESE.test(line) && !VI_FIELD.test(line))
       .map(({ line, n }) => `${f}:${n}: ${line.trim().slice(0, 70)}`);
-    check(`no Vietnamese in ${f}`, hits.length === 0, hits.slice(0, 5).join('\n      '));
+    check(`no Vietnamese outside a translation field in ${f}`, hits.length === 0,
+      hits.slice(0, 5).join('\n      '));
   });
 
 // Modal overlays are `position:fixed` siblings of <body>. If one is nested inside
@@ -479,7 +490,7 @@ const overlayIds = [
     && gameJs.indexOf('function nearestInRange') >= 0);
   const farmJs = read(path.join('js', 'scenes', 'farm.js'));
   check('farm world prompts are Click not SPACE',
-    farmJs.indexOf('[SPACE]') < 0 && farmJs.indexOf('WORLD_CLICK_HINT') >= 0);
+    farmJs.indexOf('[SPACE]') < 0 && farmJs.indexOf('worldClickHint()') >= 0);
   check('cooking recipes still Unit-10-gated',
     /isUnit10World\(\)[\s\S]{0,80}UNIT10_COOKING_RECIPES/.test(gameJs));
 }());
@@ -2174,6 +2185,54 @@ const overlayIds = [
     check(`no two headwords share a ${lang} gloss`, shared.length === 0,
       shared.slice(0, 5).join('\n      '));
   });
+
+  // ── The data tables the generic scan cannot see ──────────────────────────
+  //
+  // A quest reaches the screen through questText(q, field), which builds its key from the
+  // id at run time. scripts/i18n_extract.js finds keys by reading the literal out of an
+  // hvT() call, so it can see neither these keys nor a quest added without them — the
+  // quest would simply render in English under every language and nothing would say so.
+  // Read the tables and ask the question directly instead.
+  const economy = read(path.join('js', 'systems', 'economy.js'));
+  const questPool = (name) => {
+    const at = economy.indexOf('const ' + name + ' = [');
+    if (at < 0) return null;
+    const end = economy.indexOf('\n];', at);
+    if (end < 0) return null;
+    try {
+      // eslint-disable-next-line no-eval
+      return eval(economy.slice(at + ('const ' + name + ' = ').length, end + 2));
+    } catch (e) { return null; }
+  };
+  const pools = ['MAIN_STORYLINE', 'DAILY_QUEST_POOL', 'WEEKLY_QUEST_POOL'].map(questPool);
+  check('the three quest tables are readable', pools.every(Array.isArray));
+  if (pools.every(Array.isArray)) {
+    const quests = [].concat.apply([], pools);
+    check('every quest carries an id', quests.every((q) => q && q.id));
+    const tags = new Set();
+    const en = i18nLib.readChromeTable(ROOT, 'en');
+    i18nLib.LANG_CODES.forEach((lang) => {
+      if (lang === 'en') return;
+      const table = i18nLib.readChromeTable(ROOT, lang);
+      const gaps = [];
+      quests.forEach((q) => {
+        if (q.tag) tags.add(String(q.tag).toLowerCase());
+        ['title', 'desc', 'how'].forEach((f) => {
+          if (!q[f]) return;
+          const key = 'quest.' + q.id + '.' + f;
+          if (en[key] !== q[f]) gaps.push(key + ' (English drifted from the table)');
+          else if (!table[key] || !String(table[key]).trim()) gaps.push(key);
+        });
+      });
+      [...tags].forEach((t) => {
+        const key = 'quest.tag.' + t;
+        if (!en[key]) gaps.push(key + ' (no English)');
+        else if (!table[key]) gaps.push(key);
+      });
+      check(`every quest string is answered in ${lang}`, gaps.length === 0,
+        gaps.slice(0, 6).join('\n      '));
+    });
+  }
 }());
 
 // ── vercel.json says only what Vercel understands ───────────────────────────
@@ -2704,10 +2763,10 @@ function pngSize(rel) {
 (function checkUnit10VocabArt() {
   const world = JSON.parse(read(path.join('worlds', '2b-unit-10.json')));
   const words = (((world || {}).level || {}).words) || [];
-  // artPending is the only way out of the PNG gate below, so the drawn count is what is
-  // pinned: flipping a shipped 어휘 word to artPending to dodge its picture drops it to 79.
+  // Textbook provenance stays fixed while chapter supplements receive their artwork.
   const drawnArt = words.filter((w) => !w.artPending);
-  check('Unit 10 has 80 drawn headwords', drawnArt.length === 80, String(drawnArt.length));
+  const textbookWords = drawnArt.filter((w) => !w.chapterSupplement);
+  check('Unit 10 retains 80 original 어휘 headwords', textbookWords.length === 80, String(textbookWords.length));
   const pack = JSON.parse(read(path.join('sprites', 'catalog.json')));
   const byKo = {};
   (pack.assets || []).forEach((a) => { if (a && a.wordKo) byKo[a.wordKo] = a; });

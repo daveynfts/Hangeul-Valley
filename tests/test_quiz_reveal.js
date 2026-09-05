@@ -56,6 +56,18 @@ function makeEl(id) {
 const PANEL_IDS = ['quiz-result', 'quiz-result-art', 'quiz-result-msg', 'quiz-result-ko',
   'quiz-result-en', 'quiz-result-typed', 'quiz-result-note', 'quiz-result-continue', 'quiz-ui'];
 
+// The shipped English table, loaded into the shipped hvT. js/locales/en.js is a browser
+// script; its payload is plain JSON between markers, which is what admin/lib/i18n.js reads.
+let englishHvTCached = null;
+function englishHvT() {
+  if (!englishHvTCached) {
+    const i18n = require('../js/i18n.js');
+    i18n.hvRegisterLocale('en', require('../admin/lib/i18n.js').readChromeTable(ROOT, 'en'));
+    englishHvTCached = i18n.hvT;
+  }
+  return englishHvTCached;
+}
+
 function harness() {
   const els = {};
   PANEL_IDS.forEach((id) => { els[id] = makeEl(id); });
@@ -65,6 +77,11 @@ function harness() {
   const closed = [];
   const ctx = {
     console,
+    // The real hvT over the real js/locales/en.js, not a stub: the panel's wording now comes
+    // from the catalogue, and a stub that echoed its key would let a missing English string
+    // pass this test — hvT falls back to printing the key, which drops the interpolated
+    // values with it, so "You wrote: 저축량" would come out as "ui.quiz.youWrote".
+    hvT: englishHvT(),
     $: (id) => els[id] || null,
     speakKorean: (ko) => { spoke.push(ko); return true; },
     checkQuestProgress: (kind) => quests.push(kind),

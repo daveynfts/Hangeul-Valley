@@ -76,7 +76,11 @@ const HV_TEXT_FIELDS = [
   'noteEn', 'exampleEn', 'sectionEn', 'secEn', 'pickEn', 'checkEn', 'againEn',
   'backEn', 'doneEn', 'hintEn', 'promptEn', 'subtitleEn', 'labelEn',
   'why', 'q', 'A', 'B', 'C', 'D',
-  'note', 'l', 'description', 'source', 'title'
+  'note', 'l', 'description', 'source', 'title',
+  // The eyebrow on a level-select card — "Unit 10", "TOPIK II". Two words on a card is easy
+  // to mistake for an identifier and leave out; it is the first thing on the first screen,
+  // and it was the last English left on it.
+  'pages'
 ];
 
 // Fields that look like prose to a regular expression and are not. Kept as a list
@@ -446,6 +450,33 @@ const HV_CATALOG_SOURCES = [
   'worlds/unit15-cassette.json'
 ];
 
+// ═══════════════ THE PIXEL FACE ══════════════════════════════════════════════
+//
+// css/game.css swaps the pixel accent face per locale through --font-pixel, because Press
+// Start 2P ships no Vietnamese diacritics. Phaser draws its text to a canvas and takes the
+// family as a string, so it cannot read that variable — these two do the same job for it.
+//
+// Kept beside the language rather than in the scenes: there is one answer to "which pixel
+// face does this locale get", and a scene that hard-codes the family is a screen that will
+// be missed the next time a language is added.
+const HV_PIXEL_FONTS = { en: '"Press Start 2P",monospace', vi: '"VT323",monospace' };
+// VT323 is about two-thirds the height of Press Start 2P at the same px, so a scene asking
+// for 14px gets 19px and the text stays the size the layout was drawn around.
+const HV_PIXEL_SCALE = { en: 1, vi: 1.45 };
+
+function hvPixelFont(lang) {
+  const code = lang || hvCurrentLang;
+  return HV_PIXEL_FONTS[code] || HV_PIXEL_FONTS[HV_DEFAULT_LANG];
+}
+
+/** A Phaser fontSize for a size chosen against the English face. Accepts 14 or '14px'. */
+function hvPixelSize(px, lang) {
+  const code = lang || hvCurrentLang;
+  const n = parseFloat(px);
+  if (!isFinite(n)) return px;
+  return Math.round(n * (HV_PIXEL_SCALE[code] || 1)) + 'px';
+}
+
 // ═══════════════ THE DOM PASS ════════════════════════════════════════════════
 //
 // Static chrome carries its key in the markup, so index.html stays readable as English
@@ -547,6 +578,7 @@ if (typeof module !== 'undefined' && module.exports) {
     hvLang, hvSetLang, hvLangInfo, hvRegisterLocale, hvT, hvHasKey,
     tr, trPair, hvLocalize, hvLocalizeAsync, hvRegisterCatalog, hvCatalogFor, hvRel,
     hvPreloadCatalogs, hvAdoptPhaserCatalogs, hvCatalogsFor, applyI18n, hvRenderLangPickers,
+    hvPixelFont, hvPixelSize,
     hvLoadCatalogs, hvCatalogsReady, hvDetectLang,
     _setLangForTest(code) { hvCurrentLang = code; }
   };
