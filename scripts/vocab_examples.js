@@ -265,9 +265,52 @@ function matchesForm(text, form, edges) {
       // is more ending — 먹었 is inside 먹었어요 and that is the word, not a different one.
       if (edges === 'left') return true;
       const after = text[at + form.length];
-      if (!after || RIGHT_EDGE.test(after) || PARTICLE_START.indexOf(after) >= 0) return true;
+      if (!after || RIGHT_EDGE.test(after)) return true;
+      if (PARTICLE_START.indexOf(after) >= 0 && !swallowedByLongerWord(text, at, form)) return true;
     }
     at = text.indexOf(form, at + 1);
+  }
+  return false;
+}
+
+/**
+ * Every headword the content teaches, one word per entry.
+ *
+ * A particle is one syllable and so is half the vocabulary, which makes "noun + particle"
+ * and "the first half of a longer noun" the same shape on the page. 국 followed by 가 reads
+ * as soup-as-subject and is 국가, a country; the sentence picked for 국 (soup) was about the
+ * national economy. Nothing in the string settles it — but the game's own word list does,
+ * and asking it costs one lookup where a morphological analyser would be a dependency.
+ */
+let _known = null;
+function knownHeadwords() {
+  if (_known) return _known;
+  _known = new Set();
+  WORD_FILES.forEach((wf) => {
+    let doc;
+    try { doc = JSON.parse(fs.readFileSync(path.join(ROOT, wf.rel.split('/').join(path.sep)), 'utf8')); }
+    catch (e) { return; }
+    wordsOf(doc, wf.rel).forEach(({ w }) => {
+      // Whole headwords only. Splitting a multi-word entry into parts puts its middle in the
+      // set — 목이 붓다 contributes 목이, which is 목 carrying a subject marker, and then the
+      // rule below reads every 목이 in every sentence as some longer word. The words that can
+      // swallow a token are the ones that are a token.
+      const ko = String((w && w.ko) || '').trim();
+      if (ko && !/\s/.test(ko)) _known.add(ko);
+    });
+  });
+  return _known;
+}
+
+/** Is the match only the front of a longer word this vocabulary already knows? */
+function swallowedByLongerWord(text, at, form) {
+  let end = at;
+  while (end < text.length && HANGUL.test(text[end])) end++;
+  const token = text.slice(at, end);
+  if (token.length <= form.length) return false;
+  const known = knownHeadwords();
+  for (let n = form.length + 1; n <= token.length; n++) {
+    if (known.has(token.slice(0, n))) return true;
   }
   return false;
 }
@@ -339,10 +382,6 @@ function matchParts(text, headword, strictAboutAmbiguity) {
   const parts = String(headword).trim().split(/\s+/).filter(Boolean);
   return parts.every((part) => {
     const dictionaryForm = part.length >= 2 && part.endsWith('다');
-    // A one-syllable stem builds one-syllable forms, and every one of them lives inside
-    // other words: 셔서 is in 주셔서, where the 시 is the honorific infix and not 시다 at all.
-    // So for those, every form has to start where a word starts.
-    const shortStem = dictionaryForm && part.length === 2;
     // Which of the two reached the shared form honestly. 들다 builds 들어요 straight off its
     // own stem; 듣다 only gets there by turning its ㄷ into a ㄹ — landing on a word that had
     // one all along. So a shared form stays with the headword it is a plain extension of,
@@ -351,12 +390,19 @@ function matchParts(text, headword, strictAboutAmbiguity) {
     return surfaceForms(part).some((f) => {
       const owners = shared && shared.get(f);
       if (owners && !(owners.size === 1 && owners.has(part)) && f.indexOf(stem) !== 0) return false;
-      // Both edges for the two shapes that hide inside longer words: a dictionary form
-      // (쓰다 inside 쓰다듬은) and a single syllable (상 inside 항상). A two-syllable noun is
-      // specific enough on its own — 사항 has to be allowed to be followed by 입니다.
-      const strict = (f === part && dictionaryForm) || part.length === 1;
-      if (strict) return matchesForm(text, f, 'both');
-      return matchesForm(text, f, shortStem ? 'left' : 'none');
+      // Korean attaches particles and endings to the RIGHT of a word and never to the left,
+      // so a left edge is not a special case for short stems — it is what "the word is here"
+      // means. Treating it as optional is how 아버지 was matched inside 할아버지, 요가 inside
+      // 필요가 and 산에 가다 inside 부동산에 가서: the sentence passed "contains its word" and
+      // still never showed the word, or was about something else entirely.
+      //
+      // The right edge stays optional, because that is the side a noun's particle and a
+      // verb's ending arrive on — 사항 has to be allowed to be followed by 입니다. It is
+      // checked only for the two shapes whose right side is also ambiguous: a dictionary
+      // form, which is a substring of every longer verb built on it (쓰다 inside 쓰다듬은),
+      // and a single syllable, which is inside half the vocabulary (상 inside 항상).
+      const bothEdges = (f === part && dictionaryForm) || part.length === 1;
+      return matchesForm(text, f, bothEdges ? 'both' : 'left');
     });
   });
 }
@@ -489,6 +535,45 @@ function collect() {
   return out;
 }
 
+// ═══════════════ THE SENSE THE GLOSS PROMISED ════════════════════════════════
+//
+// Everything above asks whether the word is in the sentence. It cannot ask which of the
+// word's meanings the sentence is using, and Korean gives one spelling several: 다리 is a
+// leg and a bridge, 거리 a distance and a street, 동안 a span of time and a youthful face,
+// 쓰다 to write and to use, and 보다 is both "to see" and the auxiliary that means "try it".
+// A sentence using the other sense passes every check here and still teaches the wrong word.
+//
+// No rule available to this script decides that — it is a reading, not a test. So the
+// readings live here. They are keyed on the headword AND its gloss, because the gloss is
+// what names the sense: the word lists carry 쓰다 twice, once as "to write" and once as "to
+// be bitter", and a table keyed on the spelling alone would rule the same sentence in and
+// out at once. Keying on the headword alone is exactly the mistake that blocked 거리 "a
+// street" from the one sentence in the corpus that shows it being a street.
+//
+// `require` is for a sense the corpus shows rarely and something else shows constantly —
+// 보다 as "to see" against -아/어 보다, the auxiliary meaning "try it", which is in almost
+// every sentence with 봐 in it. `forbid` is for a sense that has a distinctive wrong context.
+const SENSE_RULES = [
+  // An adverb can sit between the object and the verb — 영화를 처음 봐요 — so the two halves
+  // are required in order rather than adjacent.
+  { ko: '보다', gloss: /see|watch/i, require: /((영화|텔레비전|드라마|경기|공연)(을|를)[^.?!]{0,12}(보|봐|봤|본)|보고 있|보러 가|봅니다)/ },
+  { ko: '쓰다', gloss: /write/i, require: /(편지를 (쓰|써|썼)|글을 (쓰|써|썼)|이름을 (쓰|써|썼))/ },
+  { ko: '쓰다', gloss: /bitter/i, require: /(맛이 쓰|쓴맛|쓴 약|약이 쓰)/ },
+  // 동안 the span of time is one of the commonest words in the corpus and 동안 the youthful
+  // face (童顔) is not in it at all, so listing the spans to forbid is a list with no end —
+  // 기간 동안 slipped past 년/달/주일. Requiring the rare sense is the honest way round: it
+  // finds nothing, and the word keeps no example, which is the true answer.
+  { ko: '동안', gloss: /face|youthful/i, require: /동안(이다|이에요|입니다|인 편|비결|미인)|동안을 유지/ },
+  { ko: '다리', gloss: /leg/i, forbid: /(한강|다리를 건너|다리 위)/ },
+  { ko: '거리', gloss: /distance|walk away/i, forbid: /(한 거리|거리가 식당|먹거리|거리 축제)/ }
+];
+function wrongSense(headword, gloss, text) {
+  return SENSE_RULES.some((r) => {
+    if (r.ko !== headword || !r.gloss.test(String(gloss || ''))) return false;
+    return r.require ? !r.require.test(text) : r.forbid.test(text);
+  });
+}
+
 // ═══════════════ CHOOSING ONE ════════════════════════════════════════════════
 //
 // Several sentences will use a common word. The one worth keeping is the one from the
@@ -556,6 +641,7 @@ function main() {
       for (const s of corpus) {
         if (s.text === w.ko) continue;            // the headword alone is not a sentence
         if (!sentenceProvesUse(s.text, w.ko)) continue;
+        if (wrongSense(w.ko, w.en, s.text)) continue;
         const sc = score(s, wf.unit, w.ko);
         if (sc > bestScore) { bestScore = sc; best = s; }
       }
@@ -607,4 +693,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { surfaceForms, sentenceUses, sentenceProvesUse, collect, matchesForm, ambiguousForms };
+module.exports = { surfaceForms, sentenceUses, sentenceProvesUse, collect, matchesForm, ambiguousForms, wrongSense, SENSE_RULES, knownHeadwords };

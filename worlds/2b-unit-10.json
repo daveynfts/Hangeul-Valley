@@ -143,8 +143,7 @@
         "hint": "🦴",
         "category": "음식",
         "categoryEn": "Food",
-        "example": "그중에서 떡갈비가 제 입에 제일 잘 맞았습니다.",
-        "exampleEn": "Of them all, the tteokgalbi suited my taste best."
+        "example": "그럼 사거리에 있는 서울식당이 어때? 서울식당은 갈비가 유명한데 다른 음식도 다 맛있고 값도 비싸지 않아."
       },
       {
         "ko": "김밥",
@@ -199,9 +198,7 @@
         "en": "to be bitter",
         "hint": "💊",
         "category": "맛",
-        "categoryEn": "Taste",
-        "example": "저는 지금까지 나이가 많은 사람에게는 항상 높임말을 썼습니다.",
-        "exampleEn": "Up to now I have always used polite speech with people older than me."
+        "categoryEn": "Taste"
       },
       {
         "ko": "시다",
@@ -366,8 +363,8 @@
         "hint": "🥩",
         "category": "읽기",
         "categoryEn": "Reading",
-        "example": "불고기를 제일 좋아해요.",
-        "exampleEn": "I like bulgogi best."
+        "example": "한정식을 시키면 큰 상에 고기, 생선, 야채 등 여러 가지 음식이 아주 많이 나와요.",
+        "exampleEn": "Order the hanjeongsik and a great many dishes come out on one big table — meat, fish, vegetables and so on."
       },
       {
         "ko": "생선",
@@ -879,9 +876,7 @@
         "hint": "⛰️",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "artPending": true,
-        "example": "부동산에 가서 한번 물어보세요.",
-        "exampleEn": "Go to an estate agency and ask."
+        "artPending": true
       },
       {
         "ko": "열심히",
@@ -934,7 +929,7 @@
         "category": "과제",
         "categoryEn": "Task · the food festival",
         "artPending": true,
-        "example": "오늘 집주인을 만났을 때 한국어를 잘못해서 당황한 일이 있었어."
+        "example": "집주인을 만났을 때를 '주인님'이라고 불러서 사람들이 웃었어."
       },
       {
         "ko": "터키",

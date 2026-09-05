@@ -542,9 +542,7 @@
         "en": "distance; a walk away",
         "hint": "📐",
         "category": "부동산",
-        "categoryEn": "Finding a place",
-        "example": "그럼 사거리에 있는 서울식당이 어때?",
-        "exampleEn": "How about the Seoul Restaurant at the crossroads?"
+        "categoryEn": "Finding a place"
       },
       {
         "ko": "떠들다",
