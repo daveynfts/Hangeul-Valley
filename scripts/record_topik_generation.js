@@ -11,6 +11,13 @@ const crypto = require('crypto');
 const ROOT = path.resolve(__dirname, '..');
 const QUEUE_FILE = path.join(ROOT, 'docs', 'topik-standin-art-queue.json');
 const LOCK_FILE = QUEUE_FILE + '.lock';
+// Named up here rather than beside the write, so the finally below can reach it. The write
+// used to declare it inside the try, which put it out of scope of the only cleanup this
+// script has: a rename that exhausted its retries, or failed for a reason other than a
+// Windows sharing violation, threw with the temp file still on disk. One of them —
+// docs/topik-standin-art-queue.json.34604.tmp, 380 KB — sat in the working tree untracked,
+// one `git add .` away from being committed as a near-copy of the queue it was replacing.
+const TEMP_FILE = QUEUE_FILE + '.' + process.pid + '.tmp';
 if (process.argv.length !== 3 || !/^[A-Za-z0-9+/=]+$/.test(process.argv[2])) {
   throw new Error('Pass exactly one base64 JSON argument');
 }
@@ -76,12 +83,11 @@ try {
       delete entry[key];
     }
   }
-  const temporary = QUEUE_FILE + '.' + process.pid + '.tmp';
-  fs.writeFileSync(temporary, JSON.stringify(queue, null, 2) + '\n');
+  fs.writeFileSync(TEMP_FILE, JSON.stringify(queue, null, 2) + '\n');
   let renamed = false;
   for (let attempt = 0; attempt < 60; attempt++) {
     try {
-      fs.renameSync(temporary, QUEUE_FILE);
+      fs.renameSync(TEMP_FILE, QUEUE_FILE);
       renamed = true;
       break;
     } catch (error) {
@@ -91,6 +97,10 @@ try {
   }
   if (!renamed) throw new Error('Timed out replacing the TOPIK generation queue');
 } finally {
+  // The temp file is gone on success — the rename consumed it — so this only fires on the
+  // failure paths. Same shape as admin/lib/atomicWrite.js: never leave the scratch copy
+  // behind, and never let cleanup mask the error that got us here.
+  try { fs.unlinkSync(TEMP_FILE); } catch (_) {}
   fs.closeSync(lock);
   fs.unlinkSync(LOCK_FILE);
 }
