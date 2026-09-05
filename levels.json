@@ -11,14 +11,17 @@
         "en": "father",
         "hint": "👨",
         "category": "가족과 사람",
-        "categoryEn": "Family & People"
+        "categoryEn": "Family & People",
+        "example": "할아버지, 할머니는 지하철을 무료로 이용할 수 있습니다.",
+        "exampleEn": "Older people can use the subway free of charge."
       },
       {
         "ko": "어머니",
         "en": "mother",
         "hint": "👩",
         "category": "가족과 사람",
-        "categoryEn": "Family & People"
+        "categoryEn": "Family & People",
+        "example": "나를 간호해 주시는 어머니의 손에서 사랑이 느껴졌다."
       },
       {
         "ko": "형",
@@ -46,7 +49,9 @@
         "en": "older sister (for female)",
         "hint": "👱‍♀️",
         "category": "가족과 사람",
-        "categoryEn": "Family & People"
+        "categoryEn": "Family & People",
+        "example": "언니가 아기를 낳았어요.",
+        "exampleEn": "My older sister had a baby."
       },
       {
         "ko": "남동생",
@@ -67,14 +72,18 @@
         "en": "grandfather",
         "hint": "👴",
         "category": "가족과 사람",
-        "categoryEn": "Family & People"
+        "categoryEn": "Family & People",
+        "example": "할아버지, 할머니는 지하철을 무료로 이용할 수 있습니다.",
+        "exampleEn": "Older people can use the subway free of charge."
       },
       {
         "ko": "할머니",
         "en": "grandmother",
         "hint": "👵",
         "category": "가족과 사람",
-        "categoryEn": "Family & People"
+        "categoryEn": "Family & People",
+        "example": "할머니가 쓰다듬은 것은 앞에 있는 아이의 머리였습니다.",
+        "exampleEn": "The head the elderly woman patted was the child's, in front of her."
       },
       {
         "ko": "삼촌",
@@ -123,7 +132,8 @@
         "en": "parents",
         "hint": "👩‍👩‍👦",
         "category": "가족과 사람",
-        "categoryEn": "Family & People"
+        "categoryEn": "Family & People",
+        "example": "제가 태어났을 때 부모님이 정말 좋아하셨습니다."
       },
       {
         "ko": "자녀",
@@ -144,7 +154,8 @@
         "en": "neighbor",
         "hint": "🏡",
         "category": "가족과 사람",
-        "categoryEn": "Family & People"
+        "categoryEn": "Family & People",
+        "example": "나는 우는 아이를 달래면서도 울음소리에 이웃들이 깰까 봐 걱정했다."
       },
       {
         "ko": "일어나다",
@@ -158,70 +169,85 @@
         "en": "to sleep",
         "hint": "😴",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "나나, 어제 잘 못 잤어?"
       },
       {
         "ko": "먹다",
         "en": "to eat",
         "hint": "🍚",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "안 먹어 봤으면 한번 먹어 봐.",
+        "exampleEn": "If you have not tried it, give it a go."
       },
       {
         "ko": "마시다",
         "en": "to drink",
         "hint": "🥛",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "아니요, 음료수를 마시면 안 돼요."
       },
       {
         "ko": "보다",
         "en": "to see / watch",
         "hint": "👀",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "안 먹어 봤으면 한번 먹어 봐.",
+        "exampleEn": "If you have not tried it, give it a go."
       },
       {
         "ko": "듣다",
         "en": "to listen",
         "hint": "🎧",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "지금 사는 집이 마음에 안 들어요?",
+        "exampleEn": "You don't like the place you're in?"
       },
       {
         "ko": "읽다",
         "en": "to read",
         "hint": "📖",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "아니, 읽을 줄은 아는데 쓸 줄은 몰라."
       },
       {
         "ko": "쓰다",
         "en": "to write",
         "hint": "✏️",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "저는 지금까지 나이가 많은 사람에게는 항상 높임말을 썼습니다.",
+        "exampleEn": "Up to now I have always used polite speech with people older than me."
       },
       {
         "ko": "말하다",
         "en": "to speak",
         "hint": "🗣️",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "요즘은 의문사가 있는 의문문도 문장의 끝을 약간 올려서 말하는 사람이 많습니다."
       },
       {
         "ko": "걷다",
         "en": "to walk",
         "hint": "🚶",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "대학동에 있는데 서울대학교에서 걸어서 10분 정도 걸려요. 하나빌딩 3층으로 오시면 됩니다."
       },
       {
         "ko": "달리다",
         "en": "to run",
         "hint": "🏃",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "더 달릴 수 있을 것 같은데요.",
+        "exampleEn": "I feel like I could run further."
       },
       {
         "ko": "쉬다",
@@ -263,14 +289,17 @@
         "en": "to cry",
         "hint": "😭",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "아이가 감기에 걸려 밤새 큰 소리로 울었다."
       },
       {
         "ko": "만나다",
         "en": "to meet",
         "hint": "🤝",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "어른을 만나면 어떻게 인사해야 돼요?",
+        "exampleEn": "How should you greet someone older than you?"
       },
       {
         "ko": "헤어지다",
@@ -284,14 +313,18 @@
         "en": "to live",
         "hint": "🏠",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions"
+        "categoryEn": "Everyday Actions",
+        "example": "지금 살고 있는 집은 어때요?",
+        "exampleEn": "What's the place you're living in like?"
       },
       {
         "ko": "바쁘다",
         "en": "to be busy",
         "hint": "🏃",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "너무 바빠서 머리를 감지 못했어요.",
+        "exampleEn": "I was too busy to wash my hair."
       },
       {
         "ko": "한가하다",
@@ -305,21 +338,25 @@
         "en": "to be glad / happy",
         "hint": "😊",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "언제 제일 기뻤어요?"
       },
       {
         "ko": "슬프다",
         "en": "to be sad",
         "hint": "😢",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "언제 제일 슬펐어요?"
       },
       {
         "ko": "좋다",
         "en": "to be good",
         "hint": "👍",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "네, 속도 안 좋고 토할 것 같아요.",
+        "exampleEn": "Yes, my stomach is bad and I feel like throwing up."
       },
       {
         "ko": "나쁘다",
@@ -347,14 +384,17 @@
         "en": "to be many / much",
         "hint": "📦",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "요즘 새로 지은 원룸이 많으니까",
+        "exampleEn": "There are a lot of newly built studios these days, so…"
       },
       {
         "ko": "적다",
         "en": "to be few / little",
         "hint": "💧",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "여행 상품의 다양성보다 회사의 규모를 중요하게 생각하는 사람이 더 적다."
       },
       {
         "ko": "길다",
@@ -368,21 +408,24 @@
         "en": "to be short",
         "hint": "✂️",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "밑면의 넓이가 똑같이 100cm²일 때 둘레는 각각 40cm, 46cm, 35cm 정도로 원의 둘레가 가장 짧다."
       },
       {
         "ko": "높다",
         "en": "to be high",
         "hint": "🏔️",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "에베레스트 산이 제일 높아요."
       },
       {
         "ko": "낮다",
         "en": "to be low",
         "hint": "📉",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "젊은층을 비롯해서 저축률이 24년 만에 가장 낮게 나타났다."
       },
       {
         "ko": "예쁘다",
@@ -403,7 +446,9 @@
         "en": "to be clean",
         "hint": "✨",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "집이 참 밝고 깨끗하네요.",
+        "exampleEn": "The place is really bright and clean."
       },
       {
         "ko": "더럽다",
@@ -417,14 +462,17 @@
         "en": "to be tired",
         "hint": "🥱",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "요즘 계속 피곤하고 입맛도 없어요.",
+        "exampleEn": "Lately I'm tired all the time and have no appetite."
       },
       {
         "ko": "건강하다",
         "en": "to be healthy",
         "hint": "💪",
         "category": "기본 상태",
-        "categoryEn": "Basic States"
+        "categoryEn": "Basic States",
+        "example": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다."
       }
     ],
     "nameEn": "Daily Life & People",
@@ -442,42 +490,52 @@
         "en": "cooked rice / meal",
         "hint": "🍚",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "밥하고 김치만 있으면 돼요.",
+        "exampleEn": "Rice and kimchi will do."
       },
       {
         "ko": "국",
         "en": "soup",
         "hint": "🍲",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "정부의 노력에도 불구하고 국가의 경제 상황이 나아지지 않는 것이 안타까울 뿐이다."
       },
       {
         "ko": "찌개",
         "en": "stew",
         "hint": "🥘",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "김치는 좋아해요. 김치찌개는 안 좋아해요."
       },
       {
         "ko": "반찬",
         "en": "side dish",
         "hint": "🥗",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "반찬이 없는데 어떡하죠?",
+        "exampleEn": "There are no side dishes — what shall we do?"
       },
       {
         "ko": "김치",
         "en": "kimchi",
         "hint": "🥬",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "밥하고 김치만 있으면 돼요.",
+        "exampleEn": "Rice and kimchi will do."
       },
       {
         "ko": "불고기",
         "en": "bulgogi",
         "hint": "🥩",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "불고기를 제일 좋아해요.",
+        "exampleEn": "I like bulgogi best."
       },
       {
         "ko": "비빔밥",
@@ -491,14 +549,16 @@
         "en": "cold noodles",
         "hint": "🍜",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "냉면 맛이 어때요?"
       },
       {
         "ko": "떡볶이",
         "en": "tteokbokki",
         "hint": "🍢",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "나는 떡볶이를 제일 좋아해."
       },
       {
         "ko": "만두",
@@ -512,7 +572,9 @@
         "en": "ramen / instant noodles",
         "hint": "🍜",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "언제 라면을 넣어요?",
+        "exampleEn": "When do I put the noodles in?"
       },
       {
         "ko": "삼겹살",
@@ -526,7 +588,9 @@
         "en": "ribs",
         "hint": "🍖",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "그중에서 떡갈비가 제 입에 제일 잘 맞았습니다.",
+        "exampleEn": "Of them all, the tteokgalbi suited my taste best."
       },
       {
         "ko": "튀김",
@@ -554,14 +618,17 @@
         "en": "fruit",
         "hint": "🍎",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "여기 과일을 좀 사 왔어요.",
+        "exampleEn": "I brought some fruit."
       },
       {
         "ko": "음료수",
         "en": "beverage",
         "hint": "🥤",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "여기에서 음료수를 마셔도 돼요?"
       },
       {
         "ko": "차",
@@ -575,14 +642,18 @@
         "en": "coffee",
         "hint": "☕",
         "category": "음식과 음료",
-        "categoryEn": "Food & Drink"
+        "categoryEn": "Food & Drink",
+        "example": "커피 마시러 갈까요?",
+        "exampleEn": "Shall we go for a coffee?"
       },
       {
         "ko": "식당",
         "en": "restaurant",
         "hint": "🍽️",
         "category": "식당과 주문",
-        "categoryEn": "Restaurants & Ordering"
+        "categoryEn": "Restaurants & Ordering",
+        "example": "그럼 사거리에 있는 서울식당이 어때?",
+        "exampleEn": "How about the Seoul Restaurant at the crossroads?"
       },
       {
         "ko": "메뉴판",
@@ -603,7 +674,8 @@
         "en": "to recommend",
         "hint": "👍",
         "category": "식당과 주문",
-        "categoryEn": "Restaurants & Ordering"
+        "categoryEn": "Restaurants & Ordering",
+        "example": "이 글은 좋은 식당을 추천하는 글입니다."
       },
       {
         "ko": "계산하다",
@@ -631,14 +703,17 @@
         "en": "guest / customer",
         "hint": "🙋",
         "category": "식당과 주문",
-        "categoryEn": "Restaurants & Ordering"
+        "categoryEn": "Restaurants & Ordering",
+        "example": "날씨가 추워지자 재래시장을 직접 찾는 손님들이 줄었다."
       },
       {
         "ko": "예약하다",
         "en": "to reserve",
         "hint": "📅",
         "category": "식당과 주문",
-        "categoryEn": "Restaurants & Ordering"
+        "categoryEn": "Restaurants & Ordering",
+        "example": "주말에는 항상 사람이 많으니까 예약해야 될 거야.",
+        "exampleEn": "Weekends are always busy, so we will have to book."
       },
       {
         "ko": "포장하다",
@@ -673,7 +748,8 @@
         "en": "plate",
         "hint": "🍽️",
         "category": "식당과 주문",
-        "categoryEn": "Restaurants & Ordering"
+        "categoryEn": "Restaurants & Ordering",
+        "example": "취업 준비생의 70% 이상이 면접시험 준비를 할 때 외모로 말미암아 고민해 본 적이 있다고 말했다."
       },
       {
         "ko": "컵",
@@ -687,7 +763,9 @@
         "en": "to be delicious",
         "hint": "😋",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Condition"
+        "categoryEn": "Taste & Condition",
+        "example": "값은 좀 비싼데 음식이 모두 맛있어서 돈이 아깝지 않았습니다.",
+        "exampleEn": "It is a little pricey, but everything was good, so the money did not feel wasted."
       },
       {
         "ko": "맛없다",
@@ -778,7 +856,8 @@
         "en": "to be refreshing / cool",
         "hint": "🍃",
         "category": "맛과 상태",
-        "categoryEn": "Taste & Condition"
+        "categoryEn": "Taste & Condition",
+        "example": "어제는 더웠는데 오늘은 시원하네요."
       },
       {
         "ko": "신선하다",
@@ -873,21 +952,27 @@
         "en": "today",
         "hint": "📅",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "우리 오늘 뭐 할까?",
+        "exampleEn": "What shall we do today?"
       },
       {
         "ko": "어제",
         "en": "yesterday",
         "hint": "⏪",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "어제 저녁부터 계속 아파요.",
+        "exampleEn": "It's been hurting since yesterday evening."
       },
       {
         "ko": "내일",
         "en": "tomorrow",
         "hint": "⏩",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "내일 또 와야 하나요?",
+        "exampleEn": "Do I need to come again tomorrow?"
       },
       {
         "ko": "모레",
@@ -922,42 +1007,49 @@
         "en": "next week",
         "hint": "👉",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "다음 주 토요일이 우리 반 친구 생일이라서 친구들하고 같이 저녁 먹으려고."
       },
       {
         "ko": "지난달",
         "en": "last month",
         "hint": "📆",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "지난달에 아팠을 때 고향에 가고 싶었어요."
       },
       {
         "ko": "이번 달",
         "en": "this month",
         "hint": "📌",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "'행복 열차'라는 책이 서점에서 이번 달까지만 판매된다."
       },
       {
         "ko": "다음 달",
         "en": "next month",
         "hint": "🗓️",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "전 다음 달부터 중국에서 일하게 됐어요.",
+        "exampleEn": "I'm going to be working in China from next month."
       },
       {
         "ko": "작년",
         "en": "last year",
         "hint": "📜",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "이 옷은 작년에 산 거야."
       },
       {
         "ko": "올해",
         "en": "this year",
         "hint": "🗓️",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "올해는 과일 생산량이 늘어서인지 대체적으로 과일 가격이 내렸다."
       },
       {
         "ko": "내년",
@@ -971,7 +1063,9 @@
         "en": "weekend",
         "hint": "🎉",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "이번 주말에 뭐 해요?",
+        "exampleEn": "What are you doing this weekend?"
       },
       {
         "ko": "평일",
@@ -985,28 +1079,35 @@
         "en": "morning",
         "hint": "🌅",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "저는 아침마다 두 시간씩 운동을 합니다.",
+        "exampleEn": "I exercise for two hours every morning."
       },
       {
         "ko": "점심",
         "en": "noon / lunch",
         "hint": "☀️",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "점심 먹으러 갈 거야."
       },
       {
         "ko": "저녁",
         "en": "evening",
         "hint": "🌆",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "어제 저녁부터 계속 아파요.",
+        "exampleEn": "It's been hurting since yesterday evening."
       },
       {
         "ko": "밤",
         "en": "night",
         "hint": "🌙",
         "category": "시간과 날짜",
-        "categoryEn": "Time & Dates"
+        "categoryEn": "Time & Dates",
+        "example": "밤에 큰 소리로 음악을 듣거나 시끄럽게 떠들면 안 됩니다.",
+        "exampleEn": "You must not play music loudly at night or make a racket."
       },
       {
         "ko": "새벽",
@@ -1034,21 +1135,24 @@
         "en": "season",
         "hint": "🍂",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다."
       },
       {
         "ko": "봄",
         "en": "spring",
         "hint": "🌸",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "꽃병에 개나리 꽃을 꽂아 가지고 책상 위에 놓으니 봄이 온 것 같다."
       },
       {
         "ko": "여름",
         "en": "summer",
         "hint": "🏖️",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "여름철 음식 보관, 냉장고만 믿어서는 낭패!"
       },
       {
         "ko": "가을",
@@ -1062,14 +1166,16 @@
         "en": "winter",
         "hint": "☃️",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "북극여우의 털은 겨울에는 눈과 같은 흰색으로, 여름에는 바위나 흙과 비슷한 갈색빛으로 바뀐다."
       },
       {
         "ko": "날씨",
         "en": "weather",
         "hint": "🌤️",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "오늘 날씨가 아주 춥지?"
       },
       {
         "ko": "맑음",
@@ -1090,7 +1196,8 @@
         "en": "rain",
         "hint": "🌧️",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "아침에는 비가 왔어요. 지금은 안 와요."
       },
       {
         "ko": "함박눈",
@@ -1174,7 +1281,8 @@
         "en": "to be clear / sunny",
         "hint": "☀️",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "오전에는 비가 많이 오더니 지금은 날씨가 맑게 개었다."
       },
       {
         "ko": "흐리다",
@@ -1188,14 +1296,16 @@
         "en": "to be cold (weather)",
         "hint": "🥶",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "오늘 날씨가 아주 춥지?"
       },
       {
         "ko": "덥다",
         "en": "to be hot",
         "hint": "🥵",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "8월이 제일 더워요."
       },
       {
         "ko": "쌀쌀하다",
@@ -1209,14 +1319,16 @@
         "en": "to be warm",
         "hint": "☀️",
         "category": "날씨와 계절",
-        "categoryEn": "Weather & Seasons"
+        "categoryEn": "Weather & Seasons",
+        "example": "요즘 감기가 유행이에요. 약 잘 드시고 따뜻한 물을 자주 드세요."
       },
       {
         "ko": "일찍",
         "en": "early",
         "hint": "⏰",
         "category": "시간 부사",
-        "categoryEn": "Time Adverbs"
+        "categoryEn": "Time Adverbs",
+        "example": "수민이는 \"너무 피곤하니까 오늘은 일찍 집에 가서 쉬어야지!\" 하고 말했다."
       },
       {
         "ko": "늦게",
@@ -1237,35 +1349,42 @@
         "en": "already / beforehand",
         "hint": "✅",
         "category": "시간 부사",
-        "categoryEn": "Time Adverbs"
+        "categoryEn": "Time Adverbs",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "아직",
         "en": "yet / still",
         "hint": "⏳",
         "category": "시간 부사",
-        "categoryEn": "Time Adverbs"
+        "categoryEn": "Time Adverbs",
+        "example": "방이 아직 있습니까?",
+        "exampleEn": "Is the room still available?"
       },
       {
         "ko": "자주",
         "en": "often",
         "hint": "🔄",
         "category": "시간 부사",
-        "categoryEn": "Time Adverbs"
+        "categoryEn": "Time Adverbs",
+        "example": "음악을 자주 들어요?"
       },
       {
         "ko": "가끔",
         "en": "sometimes",
         "hint": "🎲",
         "category": "시간 부사",
-        "categoryEn": "Time Adverbs"
+        "categoryEn": "Time Adverbs",
+        "example": "나도 가끔 처음 만난 사람을 뭐라고 불러야 할지 몰라서 어려울 때가 있어."
       },
       {
         "ko": "항상",
         "en": "always",
         "hint": "♾️",
         "category": "시간 부사",
-        "categoryEn": "Time Adverbs"
+        "categoryEn": "Time Adverbs",
+        "example": "저는 지금까지 나이가 많은 사람에게는 항상 높임말을 썼습니다.",
+        "exampleEn": "Up to now I have always used polite speech with people older than me."
       },
       {
         "ko": "늘",
@@ -1304,14 +1423,18 @@
         "en": "school",
         "hint": "🏫",
         "category": "건물과 장소",
-        "categoryEn": "Buildings & Places"
+        "categoryEn": "Buildings & Places",
+        "example": "학교에서 너무 멀어요.",
+        "exampleEn": "…it's much too far from school."
       },
       {
         "ko": "병원",
         "en": "hospital",
         "hint": "🏥",
         "category": "건물과 장소",
-        "categoryEn": "Buildings & Places"
+        "categoryEn": "Buildings & Places",
+        "example": "그래도 안 나으면 병원에 가세요.",
+        "exampleEn": "If it still doesn't get better, go to the hospital."
       },
       {
         "ko": "약국",
@@ -1353,7 +1476,8 @@
         "en": "department store",
         "hint": "🏬",
         "category": "건물과 장소",
-        "categoryEn": "Buildings & Places"
+        "categoryEn": "Buildings & Places",
+        "example": "선물 사러 백화점에 갈래?"
       },
       {
         "ko": "마트",
@@ -1367,14 +1491,16 @@
         "en": "library",
         "hint": "📚",
         "category": "건물과 장소",
-        "categoryEn": "Buildings & Places"
+        "categoryEn": "Buildings & Places",
+        "example": "도서관이 생겼어요."
       },
       {
         "ko": "박물관",
         "en": "museum",
         "hint": "🏛️",
         "category": "건물과 장소",
-        "categoryEn": "Buildings & Places"
+        "categoryEn": "Buildings & Places",
+        "example": "지난달 문을 연 우표 박물관이 시민들에게 사랑을 받고 있다."
       },
       {
         "ko": "미술관",
@@ -1388,7 +1514,9 @@
         "en": "park",
         "hint": "🏞️",
         "category": "건물과 장소",
-        "categoryEn": "Buildings & Places"
+        "categoryEn": "Buildings & Places",
+        "example": "근처에 공원도 있고 주변이 조용해서 살기 좋아요.",
+        "exampleEn": "There's a park nearby and the area is quiet, so it's good to live in."
       },
       {
         "ko": "영화관",
@@ -1409,7 +1537,9 @@
         "en": "subway station",
         "hint": "🚇",
         "category": "건물과 장소",
-        "categoryEn": "Buildings & Places"
+        "categoryEn": "Buildings & Places",
+        "example": "큰사랑 한정식집은 인사동에 있는데 지하철역에서 좀 멀어요.",
+        "exampleEn": "Keunsarang Hanjeongsikjip is in Insadong, but it is a little far from the subway station."
       },
       {
         "ko": "버스정류장",
@@ -1444,21 +1574,26 @@
         "en": "front",
         "hint": "⬆️",
         "category": "위치와 방향",
-        "categoryEn": "Position & Direction"
+        "categoryEn": "Position & Direction",
+        "example": "할머니가 쓰다듬은 것은 앞에 있는 아이의 머리였습니다.",
+        "exampleEn": "The head the elderly woman patted was the child's, in front of her."
       },
       {
         "ko": "뒤",
         "en": "back / behind",
         "hint": "⬇️",
         "category": "위치와 방향",
-        "categoryEn": "Position & Direction"
+        "categoryEn": "Position & Direction",
+        "example": "편지를 써서 넣으면 일 년 뒤에 받아 볼 수 있는 박물관의 ‘느린 우체통’도 인기를 끌고 있다."
       },
       {
         "ko": "위",
         "en": "top / above",
         "hint": "🔝",
         "category": "위치와 방향",
-        "categoryEn": "Position & Direction"
+        "categoryEn": "Position & Direction",
+        "example": "한국은 지하철이나 버스에 몸이 불편한 사람들을 위한 자리가 있습니다.",
+        "exampleEn": "Korean subways and buses have seats for people whose bodies give them difficulty."
       },
       {
         "ko": "아래",
@@ -1479,14 +1614,17 @@
         "en": "between",
         "hint": "↔️",
         "category": "위치와 방향",
-        "categoryEn": "Position & Direction"
+        "categoryEn": "Position & Direction",
+        "example": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데 거기에서 한번 찾아보세요."
       },
       {
         "ko": "안",
         "en": "inside",
         "hint": "📥",
         "category": "위치와 방향",
-        "categoryEn": "Position & Direction"
+        "categoryEn": "Position & Direction",
+        "example": "속도 안 좋으세요?",
+        "exampleEn": "Is your stomach bad too?"
       },
       {
         "ko": "밖",
@@ -1584,21 +1722,26 @@
         "en": "subway",
         "hint": "🚇",
         "category": "교통수단",
-        "categoryEn": "Transport"
+        "categoryEn": "Transport",
+        "example": "큰사랑 한정식집은 인사동에 있는데 지하철역에서 좀 멀어요.",
+        "exampleEn": "Keunsarang Hanjeongsikjip is in Insadong, but it is a little far from the subway station."
       },
       {
         "ko": "버스",
         "en": "bus",
         "hint": "🚌",
         "category": "교통수단",
-        "categoryEn": "Transport"
+        "categoryEn": "Transport",
+        "example": "한국은 지하철이나 버스에 몸이 불편한 사람들을 위한 자리가 있습니다.",
+        "exampleEn": "Korean subways and buses have seats for people whose bodies give them difficulty."
       },
       {
         "ko": "택시",
         "en": "taxi",
         "hint": "🚕",
         "category": "교통수단",
-        "categoryEn": "Transport"
+        "categoryEn": "Transport",
+        "example": "집에 갈 때 택시 타고 갈래?"
       },
       {
         "ko": "기차",
@@ -1661,7 +1804,8 @@
         "en": "fare / fee",
         "hint": "💵",
         "category": "교통수단",
-        "categoryEn": "Transport"
+        "categoryEn": "Transport",
+        "example": "전화 요금이 내렸어요."
       },
       {
         "ko": "노선",
@@ -1735,7 +1879,9 @@
         "en": "clothes",
         "hint": "👔",
         "category": "물건과 의류",
-        "categoryEn": "Objects & Clothing"
+        "categoryEn": "Objects & Clothing",
+        "example": "그 신발이 이 옷하고 잘 어울려요.",
+        "exampleEn": "Those shoes go well with this outfit."
       },
       {
         "ko": "바지",
@@ -1784,14 +1930,18 @@
         "en": "shoes",
         "hint": "👞",
         "category": "물건과 의류",
-        "categoryEn": "Objects & Clothing"
+        "categoryEn": "Objects & Clothing",
+        "example": "그 신발이 이 옷하고 잘 어울려요.",
+        "exampleEn": "Those shoes go well with this outfit."
       },
       {
         "ko": "운동화",
         "en": "sneakers",
         "hint": "👟",
         "category": "물건과 의류",
-        "categoryEn": "Objects & Clothing"
+        "categoryEn": "Objects & Clothing",
+        "example": "운동화를 신고 가세요.",
+        "exampleEn": "Wear your trainers."
       },
       {
         "ko": "구두",
@@ -1826,14 +1976,16 @@
         "en": "bag",
         "hint": "🎒",
         "category": "물건과 의류",
-        "categoryEn": "Objects & Clothing"
+        "categoryEn": "Objects & Clothing",
+        "example": "언제, 어디에서 가방을 잃어버렸어요?"
       },
       {
         "ko": "지갑",
         "en": "wallet",
         "hint": "👛",
         "category": "물건과 의류",
-        "categoryEn": "Objects & Clothing"
+        "categoryEn": "Objects & Clothing",
+        "example": "언제 지갑 잃어버린 것을 알았어요?"
       },
       {
         "ko": "시계",
@@ -1854,14 +2006,16 @@
         "en": "cosmetics",
         "hint": "💄",
         "category": "물건과 의류",
-        "categoryEn": "Objects & Clothing"
+        "categoryEn": "Objects & Clothing",
+        "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
       },
       {
         "ko": "칫솔",
         "en": "toothbrush",
         "hint": "🪥",
         "category": "물건과 의류",
-        "categoryEn": "Objects & Clothing"
+        "categoryEn": "Objects & Clothing",
+        "example": "신 음식에 있는 산성이 치아 보호막을 일시적으로 약화시키기 때문에 바로 칫솔질로 자극하면 치아가 더 손상된다."
       },
       {
         "ko": "치약",
@@ -1875,14 +2029,17 @@
         "en": "price",
         "hint": "🏷️",
         "category": "쇼핑과 경제기초",
-        "categoryEn": "Shopping & Basic Economics"
+        "categoryEn": "Shopping & Basic Economics",
+        "example": "올해는 과일 생산량이 늘어서인지 대체적으로 과일 가격이 내렸다."
       },
       {
         "ko": "할인",
         "en": "discount",
         "hint": "🏷️",
         "category": "쇼핑과 경제기초",
-        "categoryEn": "Shopping & Basic Economics"
+        "categoryEn": "Shopping & Basic Economics",
+        "example": "그리고 입장료 할인도 받을 수 있습니다.",
+        "exampleEn": "And they can get a discount on admission too."
       },
       {
         "ko": "세일",
@@ -1952,14 +2109,16 @@
         "en": "to purchase",
         "hint": "🛒",
         "category": "쇼핑과 경제기초",
-        "categoryEn": "Shopping & Basic Economics"
+        "categoryEn": "Shopping & Basic Economics",
+        "example": "재래시장에서 상품을 구매한 후 배달을 원하는 사람들이 많아졌다."
       },
       {
         "ko": "판매하다",
         "en": "to sell",
         "hint": "🏷️",
         "category": "쇼핑과 경제기초",
-        "categoryEn": "Shopping & Basic Economics"
+        "categoryEn": "Shopping & Basic Economics",
+        "example": "그리고 이를 판화에 새긴 후 일정한 기간을 두고 순서대로 인쇄해 판매했다."
       },
       {
         "ko": "소비하다",
@@ -1987,7 +2146,8 @@
         "en": "color",
         "hint": "🎨",
         "category": "색상과 모양",
-        "categoryEn": "Colours & Shapes"
+        "categoryEn": "Colours & Shapes",
+        "example": "이제는 음식의 맛보다 모양이나 색깔이 더 중요해졌다."
       },
       {
         "ko": "빨간색",
@@ -2085,7 +2245,8 @@
         "en": "to be wide",
         "hint": "↔️",
         "category": "색상과 모양",
-        "categoryEn": "Colours & Shapes"
+        "categoryEn": "Colours & Shapes",
+        "example": "지금 사는 집은 방이 넓어서 좋기는 하지만 학교에서 너무 멀어요."
       },
       {
         "ko": "좁다",
@@ -2106,14 +2267,16 @@
         "en": "to be thin",
         "hint": "📄",
         "category": "색상과 모양",
-        "categoryEn": "Colours & Shapes"
+        "categoryEn": "Colours & Shapes",
+        "example": "껍질이 얇은 복숭아와 속이 부드러운 복숭아의 장점을 결합해 만들었다."
       },
       {
         "ko": "무겁다",
         "en": "to be heavy",
         "hint": "🏋️",
         "category": "색상과 모양",
-        "categoryEn": "Colours & Shapes"
+        "categoryEn": "Colours & Shapes",
+        "example": "악의적인 댓글이 계속 이어지자 피해자들이 무거운 처벌을 요구하고 나섰다."
       },
       {
         "ko": "가볍다",
@@ -2127,7 +2290,9 @@
         "en": "to be expensive",
         "hint": "💎",
         "category": "쇼핑과 경제기초",
-        "categoryEn": "Shopping & Basic Economics"
+        "categoryEn": "Shopping & Basic Economics",
+        "example": "집세는 비싸겠어요.",
+        "exampleEn": "The rent must be steep."
       },
       {
         "ko": "싸다",
@@ -2148,7 +2313,9 @@
         "en": "free of charge",
         "hint": "🎁",
         "category": "쇼핑과 경제기초",
-        "categoryEn": "Shopping & Basic Economics"
+        "categoryEn": "Shopping & Basic Economics",
+        "example": "할아버지, 할머니는 지하철을 무료로 이용할 수 있습니다.",
+        "exampleEn": "Older people can use the subway free of charge."
       }
     ],
     "nameEn": "Shopping & Things",
@@ -2166,14 +2333,16 @@
         "en": "soccer",
         "hint": "⚽",
         "category": "운동과 스포츠",
-        "categoryEn": "Exercise & Sports"
+        "categoryEn": "Exercise & Sports",
+        "example": "저는 어렸을 때 친구들과 축구를 많이 했어요."
       },
       {
         "ko": "농구",
         "en": "basketball",
         "hint": "🏀",
         "category": "운동과 스포츠",
-        "categoryEn": "Exercise & Sports"
+        "categoryEn": "Exercise & Sports",
+        "example": "저는 농구를 잘해요."
       },
       {
         "ko": "야구",
@@ -2194,21 +2363,25 @@
         "en": "tennis",
         "hint": "🎾",
         "category": "운동과 스포츠",
-        "categoryEn": "Exercise & Sports"
+        "categoryEn": "Exercise & Sports",
+        "example": "전 테니스를 전혀 칠 줄 몰라요."
       },
       {
         "ko": "수영",
         "en": "swimming",
         "hint": "🏊",
         "category": "운동과 스포츠",
-        "categoryEn": "Exercise & Sports"
+        "categoryEn": "Exercise & Sports",
+        "example": "회사 근처에 있는 수영장에서 해요.",
+        "exampleEn": "At the pool near my office."
       },
       {
         "ko": "등산",
         "en": "hiking / mountaineering",
         "hint": "🧗",
         "category": "운동과 스포츠",
-        "categoryEn": "Exercise & Sports"
+        "categoryEn": "Exercise & Sports",
+        "example": "한 등산객이 산 정상에 쓰러져 있었다."
       },
       {
         "ko": "조깅",
@@ -2229,7 +2402,8 @@
         "en": "yoga",
         "hint": "🧘",
         "category": "운동과 스포츠",
-        "categoryEn": "Exercise & Sports"
+        "categoryEn": "Exercise & Sports",
+        "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
       },
       {
         "ko": "골프",
@@ -2250,7 +2424,9 @@
         "en": "marathon",
         "hint": "🏃",
         "category": "운동과 스포츠",
-        "categoryEn": "Exercise & Sports"
+        "categoryEn": "Exercise & Sports",
+        "example": "마라톤에 처음 참가하신 건가요?",
+        "exampleEn": "Is this your first marathon?"
       },
       {
         "ko": "자전거 타기",
@@ -2292,7 +2468,8 @@
         "en": "travel",
         "hint": "✈️",
         "category": "문화와 여가",
-        "categoryEn": "Culture & Leisure"
+        "categoryEn": "Culture & Leisure",
+        "example": "작년에 부산에 여행을 갔을 때 잃어버렸어요."
       },
       {
         "ko": "사진촬영",
@@ -2320,7 +2497,9 @@
         "en": "cooking",
         "hint": "🍳",
         "category": "문화와 여가",
-        "categoryEn": "Culture & Leisure"
+        "categoryEn": "Culture & Leisure",
+        "example": "방에서는 요리를 하면 안 됩니다.",
+        "exampleEn": "You must not cook in your room."
       },
       {
         "ko": "캠핑",
@@ -2341,7 +2520,9 @@
         "en": "performance / show",
         "hint": "🎭",
         "category": "문화와 여가",
-        "categoryEn": "Culture & Leisure"
+        "categoryEn": "Culture & Leisure",
+        "example": "이제 곧 공연이 시작됩니다.",
+        "exampleEn": "The performance is about to begin."
       },
       {
         "ko": "콘서트",
@@ -2411,14 +2592,16 @@
         "en": "to be enjoyable",
         "hint": "😃",
         "category": "감상과 평가",
-        "categoryEn": "Appreciation & Evaluation"
+        "categoryEn": "Appreciation & Evaluation",
+        "example": "즐거운 시간 보내시기 바랍니다."
       },
       {
         "ko": "재미있다",
         "en": "to be fun / interesting",
         "hint": "😆",
         "category": "감상과 평가",
-        "categoryEn": "Appreciation & Evaluation"
+        "categoryEn": "Appreciation & Evaluation",
+        "example": "한국 생활이 재미있어요?"
       },
       {
         "ko": "신나다",
@@ -2537,7 +2720,8 @@
         "en": "to participate",
         "hint": "🙋",
         "category": "문화와 여가",
-        "categoryEn": "Culture & Leisure"
+        "categoryEn": "Culture & Leisure",
+        "example": "학생이 아닌 사람들도 이 봉사에 참여할 수 있다."
       },
       {
         "ko": "관객",
@@ -2565,7 +2749,8 @@
         "en": "artwork / work",
         "hint": "🎨",
         "category": "감상과 평가",
-        "categoryEn": "Appreciation & Evaluation"
+        "categoryEn": "Appreciation & Evaluation",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "감상문",
@@ -2597,14 +2782,17 @@
         "en": "head / hair",
         "hint": "👨",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "너무 바빠서 머리를 감지 못했어요.",
+        "exampleEn": "I was too busy to wash my hair."
       },
       {
         "ko": "눈",
         "en": "eye",
         "hint": "👁️",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "음식을 먹을 때에는 눈과 귀로도 즐겨야 한다."
       },
       {
         "ko": "코",
@@ -2618,28 +2806,34 @@
         "en": "mouth",
         "hint": "👄",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "음식이 입에 맞아?",
+        "exampleEn": "Is the food to your taste?"
       },
       {
         "ko": "귀",
         "en": "ear",
         "hint": "👂",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "눈으로 먹고 귀로 맛보는 시대, 요리 프로그램 천국!"
       },
       {
         "ko": "얼굴",
         "en": "face",
         "hint": "😀",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "얼굴은 알아요. 이름은 몰라요."
       },
       {
         "ko": "목",
         "en": "neck / throat",
         "hint": "🦒",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "목이 많이 부었네요.",
+        "exampleEn": "Your throat is quite swollen."
       },
       {
         "ko": "어깨",
@@ -2660,14 +2854,16 @@
         "en": "hand",
         "hint": "✋",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "나를 간호해 주시는 어머니의 손에서 사랑이 느껴졌다."
       },
       {
         "ko": "손가락",
         "en": "finger",
         "hint": "👆",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "그래서 전문가들은 소근육이 발달하는 11세까지 손가락을 움직여서 하는 놀이를 많이 하도록 하는 것이 좋다고 말한다."
       },
       {
         "ko": "가슴",
@@ -2681,7 +2877,9 @@
         "en": "stomach / abdomen",
         "hint": "🤰",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "배가 아파서 왔는데요.",
+        "exampleEn": "I came because my stomach hurts."
       },
       {
         "ko": "허리",
@@ -2695,7 +2893,9 @@
         "en": "leg",
         "hint": "🦵",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "네, 기다리고 있겠습니다.",
+        "exampleEn": "I'll be waiting."
       },
       {
         "ko": "발",
@@ -2737,7 +2937,9 @@
         "en": "cold / flu",
         "hint": "😷",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "감기 아직 안 나았어요?",
+        "exampleEn": "Hasn't your cold got better yet?"
       },
       {
         "ko": "두통",
@@ -2772,21 +2974,27 @@
         "en": "fever",
         "hint": "🌡️",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "열도 나고 목도 많이 아파요.",
+        "exampleEn": "I have a fever and my throat hurts a lot."
       },
       {
         "ko": "기침",
         "en": "cough",
         "hint": "🗣️",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "기침은 안 하세요?",
+        "exampleEn": "No cough?"
       },
       {
         "ko": "콧물",
         "en": "runny nose",
         "hint": "🤧",
         "category": "신체와 증상",
-        "categoryEn": "Body & Symptoms"
+        "categoryEn": "Body & Symptoms",
+        "example": "네, 기침은 안 하는데 콧물이 나요.",
+        "exampleEn": "No cough, but I have a runny nose."
       },
       {
         "ko": "설사",
@@ -2842,7 +3050,9 @@
         "en": "doctor",
         "hint": "👨‍⚕️",
         "category": "병원과 약국",
-        "categoryEn": "Hospital & Pharmacy"
+        "categoryEn": "Hospital & Pharmacy",
+        "example": "의사 선생님을 '의사님'이라고 불러서 사람들이 웃었어.",
+        "exampleEn": "I called the doctor 'uisanim' and everyone laughed."
       },
       {
         "ko": "간호사",
@@ -2856,7 +3066,8 @@
         "en": "patient",
         "hint": "🛌",
         "category": "병원과 약국",
-        "categoryEn": "Hospital & Pharmacy"
+        "categoryEn": "Hospital & Pharmacy",
+        "example": "의사는 위염 환자에게 식사량을 ( )."
       },
       {
         "ko": "내과",
@@ -2891,7 +3102,9 @@
         "en": "dentistry",
         "hint": "🦷",
         "category": "병원과 약국",
-        "categoryEn": "Hospital & Pharmacy"
+        "categoryEn": "Hospital & Pharmacy",
+        "example": "치과에 가 보는 게 어때요?",
+        "exampleEn": "How about going to the dentist?"
       },
       {
         "ko": "피부과",
@@ -3063,7 +3276,9 @@
         "en": "dormitory",
         "hint": "🏢",
         "category": "학교 시설과 과목",
-        "categoryEn": "School Facilities & Subjects"
+        "categoryEn": "School Facilities & Subjects",
+        "example": "기숙사 안에서는 담배를 피울 수 없습니다.",
+        "exampleEn": "You may not smoke inside the dormitory."
       },
       {
         "ko": "학과사무실",
@@ -3098,7 +3313,9 @@
         "en": "national language (Korean)",
         "hint": "🇰🇷",
         "category": "학교 시설과 과목",
-        "categoryEn": "School Facilities & Subjects"
+        "categoryEn": "School Facilities & Subjects",
+        "example": "한국어를 잘 몰라서 실수한 적이 있어요?",
+        "exampleEn": "Have you ever made a mistake because your Korean let you down?"
       },
       {
         "ko": "영어",
@@ -3147,7 +3364,9 @@
         "en": "music",
         "hint": "🎵",
         "category": "학교 시설과 과목",
-        "categoryEn": "School Facilities & Subjects"
+        "categoryEn": "School Facilities & Subjects",
+        "example": "밤에 큰 소리로 음악을 듣거나 시끄럽게 떠들면 안 됩니다.",
+        "exampleEn": "You must not play music loudly at night or make a racket."
       },
       {
         "ko": "미술",
@@ -3175,7 +3394,9 @@
         "en": "class / lesson",
         "hint": "✍️",
         "category": "수업과 시험",
-        "categoryEn": "Classes & Exams"
+        "categoryEn": "Classes & Exams",
+        "example": "수업 끝나고 뭐 해?",
+        "exampleEn": "What are you doing after class?"
       },
       {
         "ko": "강의",
@@ -3231,7 +3452,8 @@
         "en": "exam / test",
         "hint": "📝",
         "category": "수업과 시험",
-        "categoryEn": "Classes & Exams"
+        "categoryEn": "Classes & Exams",
+        "example": "시험이 어렵지 않을 거야."
       },
       {
         "ko": "중간고사",
@@ -3273,42 +3495,50 @@
         "en": "scholarship",
         "hint": "🎓",
         "category": "수업과 시험",
-        "categoryEn": "Classes & Exams"
+        "categoryEn": "Classes & Exams",
+        "example": "장학금을 받았을 때 제일 기뻤어요."
       },
       {
         "ko": "졸업",
         "en": "graduation",
         "hint": "🎓",
         "category": "수업과 시험",
-        "categoryEn": "Classes & Exams"
+        "categoryEn": "Classes & Exams",
+        "example": "대학교를 졸업한 후에 뭐 할 거예요?"
       },
       {
         "ko": "입학",
         "en": "admission / entrance",
         "hint": "🏫",
         "category": "수업과 시험",
-        "categoryEn": "Classes & Exams"
+        "categoryEn": "Classes & Exams",
+        "example": "입학을 축하합니다.",
+        "exampleEn": "Congratulations on starting school."
       },
       {
         "ko": "학기",
         "en": "semester / term",
         "hint": "📅",
         "category": "수업과 시험",
-        "categoryEn": "Classes & Exams"
+        "categoryEn": "Classes & Exams",
+        "example": "아니요, 생활비가 많이 안 들어서 좋기는 한데 룸메이트 때문에 좀 힘들어요. 그래서 다음 학기에 이사를 가려고 생각 중이에요."
       },
       {
         "ko": "방학",
         "en": "vacation / break",
         "hint": "🏖️",
         "category": "수업과 시험",
-        "categoryEn": "Classes & Exams"
+        "categoryEn": "Classes & Exams",
+        "example": "방학에 어디 갈 거야?",
+        "exampleEn": "Where are you going in the holidays?"
       },
       {
         "ko": "공부하다",
         "en": "to study",
         "hint": "✏️",
         "category": "학업 동작",
-        "categoryEn": "Study Actions"
+        "categoryEn": "Study Actions",
+        "example": "시험 기간 동안 공부하는 학생이 많아서 도서관에 밤새도록 불을 켜 두었다."
       },
       {
         "ko": "복습하다",
@@ -3336,7 +3566,9 @@
         "en": "to understand",
         "hint": "💡",
         "category": "학업 동작",
-        "categoryEn": "Study Actions"
+        "categoryEn": "Study Actions",
+        "example": "외국에서 생활을 해 보면 그 나라의 문화를 잘 이해할 수 있어서 좋은 것 같습니다.",
+        "exampleEn": "Living abroad, I think it is good that you come to understand that country's culture well."
       },
       {
         "ko": "질문하다",
@@ -3357,7 +3589,8 @@
         "en": "to evaluate",
         "hint": "📊",
         "category": "학업 동작",
-        "categoryEn": "Study Actions"
+        "categoryEn": "Study Actions",
+        "example": "정부의 부동산 정책을 시민들이 아주 냉정하게 평가하고 있다."
       },
       {
         "ko": "성적표",
@@ -3392,7 +3625,8 @@
         "en": "to pass (exam)",
         "hint": "✅",
         "category": "학업 동작",
-        "categoryEn": "Study Actions"
+        "categoryEn": "Study Actions",
+        "example": "그래서 빗물이 쉽게 통과해 지하수 자원이 보충된다."
       },
       {
         "ko": "낙제하다",
@@ -3466,7 +3700,9 @@
         "en": "director / executive",
         "hint": "💼",
         "category": "직업과 부서",
-        "categoryEn": "Jobs & Departments"
+        "categoryEn": "Jobs & Departments",
+        "example": "이사해야 하는데 어디가 좋을지 모르겠어요.",
+        "exampleEn": "I have to move, and I've no idea where would be good."
       },
       {
         "ko": "부장",
@@ -3774,7 +4010,8 @@
         "en": "subordinate",
         "hint": "🧑‍💼",
         "category": "직장 관계",
-        "categoryEn": "Workplace Relationships"
+        "categoryEn": "Workplace Relationships",
+        "example": "시험 기간 동안 공부하는 학생이 많아서 도서관에 밤새도록 불을 켜 두었다."
       },
       {
         "ko": "동료",
@@ -3890,14 +4127,16 @@
         "en": "passport",
         "hint": "📕",
         "category": "여행 준비",
-        "categoryEn": "Trip Preparation"
+        "categoryEn": "Trip Preparation",
+        "example": "지갑과 여권이 있었어요."
       },
       {
         "ko": "비자",
         "en": "visa",
         "hint": "📄",
         "category": "여행 준비",
-        "categoryEn": "Trip Preparation"
+        "categoryEn": "Trip Preparation",
+        "example": "그런데 비싼 반품 비용으로 인해 피해를 보는 소비자가 늘고 있다."
       },
       {
         "ko": "항공권",
@@ -3995,7 +4234,9 @@
         "en": "reservation / booking",
         "hint": "📲",
         "category": "교통과 숙소",
-        "categoryEn": "Transport & Accommodation"
+        "categoryEn": "Transport & Accommodation",
+        "example": "미리 예약을 해야 할까?",
+        "exampleEn": "Should we book ahead?"
       },
       {
         "ko": "체크인",
@@ -4149,7 +4390,9 @@
         "en": "to sightsee / look around",
         "hint": "👀",
         "category": "관광과 경험",
-        "categoryEn": "Sightseeing & Experiences"
+        "categoryEn": "Sightseeing & Experiences",
+        "example": "한번 구경해 보세요.",
+        "exampleEn": "Have a look round."
       },
       {
         "ko": "둘러보다",
@@ -4170,7 +4413,9 @@
         "en": "to take photos",
         "hint": "📸",
         "category": "관광과 경험",
-        "categoryEn": "Sightseeing & Experiences"
+        "categoryEn": "Sightseeing & Experiences",
+        "example": "아기를 안고 사진을 찍었어요.",
+        "exampleEn": "I took the photo holding the baby."
       },
       {
         "ko": "체험하다",
@@ -4377,7 +4622,8 @@
         "en": "to be grateful",
         "hint": "🙏",
         "category": "긍정 감정",
-        "categoryEn": "Positive Emotions"
+        "categoryEn": "Positive Emotions",
+        "example": "네, 감사합니다. 안녕히 계세요."
       },
       {
         "ko": "만족스럽다",
@@ -4440,7 +4686,8 @@
         "en": "to feel it is a pity",
         "hint": "💔",
         "category": "부정 감정",
-        "categoryEn": "Negative Emotions"
+        "categoryEn": "Negative Emotions",
+        "example": "김 선수가 펜싱 종목에서 좋은 경기를 펼쳤지만 아쉽게 메달을 놓쳤다."
       },
       {
         "ko": "답답하다",
@@ -4552,7 +4799,9 @@
         "en": "stress",
         "hint": "🤯",
         "category": "심리 상태",
-        "categoryEn": "Mental States"
+        "categoryEn": "Mental States",
+        "example": "기분도 좋고 스트레스도 풀려요.",
+        "exampleEn": "It feels good and it relieves stress."
       },
       {
         "ko": "긴장감",
@@ -4566,7 +4815,8 @@
         "en": "sense of anxiety",
         "hint": "😰",
         "category": "심리 상태",
-        "categoryEn": "Mental States"
+        "categoryEn": "Mental States",
+        "example": "바나나는 자기 전에 먹어야 불안감에도 효과가 있다."
       },
       {
         "ko": "초조함",
@@ -4587,7 +4837,8 @@
         "en": "guilt",
         "hint": "⚖️",
         "category": "심리 상태",
-        "categoryEn": "Mental States"
+        "categoryEn": "Mental States",
+        "example": "이 눈물 때문에 악어는 마치 다른 동물을 잡아먹으면서 죄책감을 느끼는 것처럼 보인다."
       },
       {
         "ko": "공포",
@@ -4766,7 +5017,9 @@
         "en": "to be good-natured / kind",
         "hint": "😇",
         "category": "성격 특징",
-        "categoryEn": "Personality Traits"
+        "categoryEn": "Personality Traits",
+        "example": "도착하면 전화 드릴게요.",
+        "exampleEn": "I'll ring when I arrive."
       },
       {
         "ko": "친절하다",
@@ -4871,7 +5124,8 @@
         "en": "to be particular / picky",
         "hint": "🧐",
         "category": "성격 특징",
-        "categoryEn": "Personality Traits"
+        "categoryEn": "Personality Traits",
+        "example": "업체가 까다로운 조건을 내세워 반품을 거절하는 경우까지 발생한다."
       },
       {
         "ko": "털털하다",
@@ -4990,7 +5244,9 @@
         "en": "baby face / youthful look",
         "hint": "👶",
         "category": "외모 묘사",
-        "categoryEn": "Describing Appearance"
+        "categoryEn": "Describing Appearance",
+        "example": "네, 안녕하세요? 지훈 씨, 그동안 잘 지냈어요?",
+        "exampleEn": "Hello, Jihun. How have you been keeping?"
       },
       {
         "ko": "노안",
@@ -5039,7 +5295,9 @@
         "en": "behavior / action",
         "hint": "🚶",
         "category": "태도와 행동",
-        "categoryEn": "Attitude & Behaviour"
+        "categoryEn": "Attitude & Behaviour",
+        "example": "다른 사람에게 불편을 주는 행동을 하면 안 됩니다.",
+        "exampleEn": "You must not behave in ways that inconvenience other people."
       },
       {
         "ko": "습관",
@@ -5158,7 +5416,8 @@
         "en": "to be cold-hearted / calm",
         "hint": "🧊",
         "category": "성격 특징",
-        "categoryEn": "Personality Traits"
+        "categoryEn": "Personality Traits",
+        "example": "정부의 부동산 정책을 시민들이 아주 냉정하게 평가하고 있다."
       },
       {
         "ko": "다정하다",
@@ -5204,7 +5463,9 @@
         "en": "studio apartment",
         "hint": "🛋️",
         "category": "주거 형태와 가구",
-        "categoryEn": "Housing Types & Furniture"
+        "categoryEn": "Housing Types & Furniture",
+        "example": "요즘 새로 지은 원룸이 많으니까",
+        "exampleEn": "There are a lot of newly built studios these days, so…"
       },
       {
         "ko": "오피스텔",
@@ -5218,14 +5479,17 @@
         "en": "lump-sum deposit lease",
         "hint": "🔑",
         "category": "주거 형태와 가구",
-        "categoryEn": "Housing Types & Furniture"
+        "categoryEn": "Housing Types & Furniture",
+        "example": "전세는 7,000만 원이고 월세는 보증금 1,000만 원에 50만 원이에요."
       },
       {
         "ko": "월세",
         "en": "monthly rent",
         "hint": "💵",
         "category": "주거 형태와 가구",
-        "categoryEn": "Housing Types & Furniture"
+        "categoryEn": "Housing Types & Furniture",
+        "example": "보증금 천만 원에 월세 삼십오만 원입니다.",
+        "exampleEn": "A ten-million deposit and three hundred and fifty thousand a month."
       },
       {
         "ko": "매매",
@@ -5239,7 +5503,9 @@
         "en": "lease deposit",
         "hint": "💰",
         "category": "주거 형태와 가구",
-        "categoryEn": "Housing Types & Furniture"
+        "categoryEn": "Housing Types & Furniture",
+        "example": "보증금 천만 원에 월세 삼십오만 원입니다.",
+        "exampleEn": "A ten-million deposit and three hundred and fifty thousand a month."
       },
       {
         "ko": "계약서",
@@ -5267,7 +5533,8 @@
         "en": "desk",
         "hint": "🖥️",
         "category": "주거 형태와 가구",
-        "categoryEn": "Housing Types & Furniture"
+        "categoryEn": "Housing Types & Furniture",
+        "example": "꽃병에 개나리 꽃을 꽂아 가지고 책상 위에 놓으니 봄이 온 것 같다."
       },
       {
         "ko": "옷장",
@@ -5288,7 +5555,8 @@
         "en": "refrigerator",
         "hint": "🧊",
         "category": "주거 형태와 가구",
-        "categoryEn": "Housing Types & Furniture"
+        "categoryEn": "Housing Types & Furniture",
+        "example": "여름철 음식 보관, 냉장고만 믿어서는 낭패!"
       },
       {
         "ko": "세탁기",
@@ -5358,7 +5626,8 @@
         "en": "to wipe clean",
         "hint": "🧽",
         "category": "집안일과 관리",
-        "categoryEn": "Housework & Upkeep"
+        "categoryEn": "Housework & Upkeep",
+        "example": "사람들은 보통 식후에 바로 이를 닦는다."
       },
       {
         "ko": "정리정돈",
@@ -5386,7 +5655,9 @@
         "en": "building maintenance fee",
         "hint": "🧾",
         "category": "집안일과 관리",
-        "categoryEn": "Housework & Upkeep"
+        "categoryEn": "Housework & Upkeep",
+        "example": "관리비는 얼마나 나오나요?",
+        "exampleEn": "How much is the maintenance fee?"
       },
       {
         "ko": "수도세",
@@ -5526,7 +5797,8 @@
         "en": "to move to new house",
         "hint": "📦",
         "category": "주거 형태와 가구",
-        "categoryEn": "Housing Types & Furniture"
+        "categoryEn": "Housing Types & Furniture",
+        "example": "학교 근처로 이사하고 싶은데 괜찮은 집이 있을지 모르겠어요."
       },
       {
         "ko": "집들이",
@@ -5698,7 +5970,8 @@
         "en": "internet",
         "hint": "🌐",
         "category": "인터넷과 SNS",
-        "categoryEn": "Internet & Social Media"
+        "categoryEn": "Internet & Social Media",
+        "example": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데 거기에서 한번 찾아보세요."
       },
       {
         "ko": "웹사이트",
@@ -5761,14 +6034,17 @@
         "en": "comment",
         "hint": "💬",
         "category": "인터넷과 SNS",
-        "categoryEn": "Internet & Social Media"
+        "categoryEn": "Internet & Social Media",
+        "example": "악의적인 댓글이 지나치게 심각해졌음에도 처벌 수위는 아직도 너무 낮다."
       },
       {
         "ko": "좋아요",
         "en": "like button / upvote",
         "hint": "👍",
         "category": "인터넷과 SNS",
-        "categoryEn": "Internet & Social Media"
+        "categoryEn": "Internet & Social Media",
+        "example": "근처에 공원도 있고 주변이 조용해서 살기 좋아요.",
+        "exampleEn": "There's a park nearby and the area is quiet, so it's good to live in."
       },
       {
         "ko": "공유하다",
@@ -5824,7 +6100,8 @@
         "en": "broadcast / show",
         "hint": "📺",
         "category": "신문과 방송",
-        "categoryEn": "Press & Broadcasting"
+        "categoryEn": "Press & Broadcasting",
+        "example": "안내 방송의 내용과 맞지 않는 것은 무엇입니까?"
       },
       {
         "ko": "뉴스",
@@ -5845,7 +6122,8 @@
         "en": "television",
         "hint": "📺",
         "category": "신문과 방송",
-        "categoryEn": "Press & Broadcasting"
+        "categoryEn": "Press & Broadcasting",
+        "example": "요즘 요리에 관련된 텔레비전 프로그램이 아주 많다."
       },
       {
         "ko": "언론",
@@ -6052,7 +6330,9 @@
         "en": "senior colleague/student",
         "hint": "🧑‍🎓",
         "category": "관계와 대인",
-        "categoryEn": "Relationships & Social Contact"
+        "categoryEn": "Relationships & Social Contact",
+        "example": "어제 친구와 같이 학교에 가다가 아는 선배를 만났습니다.",
+        "exampleEn": "Yesterday, walking to school with a friend, we ran into a senior we know."
       },
       {
         "ko": "후배",
@@ -6136,14 +6416,18 @@
         "en": "informal / casual speech",
         "hint": "🗣️",
         "category": "예절과 에티켓",
-        "categoryEn": "Manners & Etiquette"
+        "categoryEn": "Manners & Etiquette",
+        "example": "친구가 \"난 저 선배랑 친해서 반말로 이야기해.\"라고 말했습니다.",
+        "exampleEn": "My friend said, \"I am close to that senior, so I speak banmal with him.\""
       },
       {
         "ko": "인사",
         "en": "greeting / bow",
         "hint": "🙇",
         "category": "예절과 에티켓",
-        "categoryEn": "Manners & Etiquette"
+        "categoryEn": "Manners & Etiquette",
+        "example": "어른을 만나면 어떻게 인사해야 돼요?",
+        "exampleEn": "How should you greet someone older than you?"
       },
       {
         "ko": "악수",
@@ -6476,7 +6760,8 @@
         "en": "society",
         "hint": "🏛️",
         "category": "사회 현상",
-        "categoryEn": "Social Phenomena"
+        "categoryEn": "Social Phenomena",
+        "example": "사회적 지위가 높은 남자들이 외모에 관심을 많이 갖는다."
       },
       {
         "ko": "공동체",
@@ -6490,7 +6775,8 @@
         "en": "citizen",
         "hint": "🏙️",
         "category": "사회 현상",
-        "categoryEn": "Social Phenomena"
+        "categoryEn": "Social Phenomena",
+        "example": "정부의 부동산 정책을 시민들이 아주 냉정하게 평가하고 있다."
       },
       {
         "ko": "대중",
@@ -6504,7 +6790,8 @@
         "en": "population",
         "hint": "📊",
         "category": "사회 현상",
-        "categoryEn": "Social Phenomena"
+        "categoryEn": "Social Phenomena",
+        "example": "세계 인구가 늘었어요."
       },
       {
         "ko": "저출산",
@@ -6665,7 +6952,8 @@
         "en": "discrimination",
         "hint": "🚫",
         "category": "사회 문제",
-        "categoryEn": "Social Problems"
+        "categoryEn": "Social Problems",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "편견",
@@ -6686,14 +6974,16 @@
         "en": "phenomenon",
         "hint": "🔍",
         "category": "사회 현상",
-        "categoryEn": "Social Phenomena"
+        "categoryEn": "Social Phenomena",
+        "example": "'악어의 눈물'이라는 표현은 인간의 가식적인 행위를 악어의 생리적 현상에 비유한 것이다."
       },
       {
         "ko": "변화",
         "en": "change / shift",
         "hint": "🔄",
         "category": "사회 현상",
-        "categoryEn": "Social Phenomena"
+        "categoryEn": "Social Phenomena",
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "추세",
@@ -6833,7 +7123,8 @@
         "en": "policy",
         "hint": "📜",
         "category": "복지와 제도",
-        "categoryEn": "Welfare & Institutions"
+        "categoryEn": "Welfare & Institutions",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "제도",
@@ -6907,7 +7198,8 @@
         "en": "economy",
         "hint": "📈",
         "category": "금융과 경제",
-        "categoryEn": "Finance & Economy"
+        "categoryEn": "Finance & Economy",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "금융",
@@ -6942,7 +7234,8 @@
         "en": "savings",
         "hint": "🏦",
         "category": "금융과 경제",
-        "categoryEn": "Finance & Economy"
+        "categoryEn": "Finance & Economy",
+        "example": "저축률 24년 만에 바닥으로, 젊은층도 저축 무관심!"
       },
       {
         "ko": "예금",
@@ -6984,7 +7277,8 @@
         "en": "consumer prices",
         "hint": "🏷️",
         "category": "금융과 경제",
-        "categoryEn": "Finance & Economy"
+        "categoryEn": "Finance & Economy",
+        "example": "정부의 부동산 정책 때문에 서민 물가가 많이 떨어지고 있다."
       },
       {
         "ko": "물가상승",
@@ -7005,7 +7299,8 @@
         "en": "economic condition",
         "hint": "📉",
         "category": "금융과 경제",
-        "categoryEn": "Finance & Economy"
+        "categoryEn": "Finance & Economy",
+        "example": "재래시장에서 배달 서비스를 통해 경기 회복의 노력을 하고 있다."
       },
       {
         "ko": "불경기",
@@ -7040,14 +7335,16 @@
         "en": "consumption",
         "hint": "🛍️",
         "category": "소비와 시장",
-        "categoryEn": "Consumption & Markets"
+        "categoryEn": "Consumption & Markets",
+        "example": "그런데 비싼 반품 비용으로 인해 피해를 보는 소비자가 늘고 있다."
       },
       {
         "ko": "소비자",
         "en": "consumer",
         "hint": "🛒",
         "category": "소비와 시장",
-        "categoryEn": "Consumption & Markets"
+        "categoryEn": "Consumption & Markets",
+        "example": "그런데 비싼 반품 비용으로 인해 피해를 보는 소비자가 늘고 있다."
       },
       {
         "ko": "구매력",
@@ -7089,7 +7386,9 @@
         "en": "market",
         "hint": "🏪",
         "category": "소비와 시장",
-        "categoryEn": "Consumption & Markets"
+        "categoryEn": "Consumption & Markets",
+        "example": "주변에 시장도 있고 지하철역도 가까워서 살기 편해요.",
+        "exampleEn": "There's a market nearby and the subway station is close, so it's easy to live here."
       },
       {
         "ko": "유통",
@@ -7380,7 +7679,8 @@
         "en": "discovery",
         "hint": "💡",
         "category": "과학과 연구",
-        "categoryEn": "Science & Research"
+        "categoryEn": "Science & Research",
+        "example": "지난 1일 김민수 경위는 인주산 정상에서 한 여성이 쓰러져 있는 것을 발견했다."
       },
       {
         "ko": "발명",
@@ -7653,7 +7953,8 @@
         "en": "physics",
         "hint": "🧲",
         "category": "과학과 연구",
-        "categoryEn": "Science & Research"
+        "categoryEn": "Science & Research",
+        "example": "자신의 반려견에게 물리는 사람들이 늘고 있다."
       },
       {
         "ko": "화학",
@@ -7916,7 +8217,8 @@
         "en": "protection",
         "hint": "🤲",
         "category": "보전과 기후",
-        "categoryEn": "Conservation & Climate"
+        "categoryEn": "Conservation & Climate",
+        "example": "치아 보호막이 원래 강도로 돌아오려면 침으로 산성이 중화되어야 하는데 여기에 30분 정도가 소요된다."
       },
       {
         "ko": "탄소중립",
@@ -8200,7 +8502,9 @@
         "en": "culture",
         "hint": "🎭",
         "category": "전통과 유산",
-        "categoryEn": "Tradition & Heritage"
+        "categoryEn": "Tradition & Heritage",
+        "example": "외국에서 생활을 해 보면 그 나라의 문화를 잘 이해할 수 있어서 좋은 것 같습니다.",
+        "exampleEn": "Living abroad, I think it is good that you come to understand that country's culture well."
       },
       {
         "ko": "유산",
@@ -8256,7 +8560,8 @@
         "en": "history",
         "hint": "📜",
         "category": "전통과 유산",
-        "categoryEn": "Tradition & Heritage"
+        "categoryEn": "Tradition & Heritage",
+        "example": "박물관 내 역사실에서는 우표의 역사를 한눈에 볼 수 있다."
       },
       {
         "ko": "왕조",
@@ -8361,7 +8666,8 @@
         "en": "poem",
         "hint": "📝",
         "category": "예술과 문학",
-        "categoryEn": "Art & Literature"
+        "categoryEn": "Art & Literature",
+        "example": "아침 9시까지 학교에 안 가면 안 돼요."
       },
       {
         "ko": "소설",
@@ -8417,7 +8723,8 @@
         "en": "Korean traditional music",
         "hint": "🎼",
         "category": "풍습과 공연",
-        "categoryEn": "Customs & Performance"
+        "categoryEn": "Customs & Performance",
+        "example": "국립국악원에서 하는 외국인을 위한 국악 수업이 있는데 스티븐 씨가 좋아할 것 같아서 전화했어요."
       },
       {
         "ko": "전통공연",
@@ -8452,7 +8759,8 @@
         "en": "performance venue",
         "hint": "🎪",
         "category": "풍습과 공연",
-        "categoryEn": "Customs & Performance"
+        "categoryEn": "Customs & Performance",
+        "example": "공연장 안은 음식물 반입 금지입니다."
       },
       {
         "ko": "국립극장",
@@ -8487,7 +8795,8 @@
         "en": "traditional melody / rhythm",
         "hint": "🎶",
         "category": "풍습과 공연",
-        "categoryEn": "Customs & Performance"
+        "categoryEn": "Customs & Performance",
+        "example": "그래서 전문가들은 소근육이 발달하는 11세까지 손가락을 움직여서 하는 놀이를 많이 하도록 하는 것이 좋다고 말한다."
       },
       {
         "ko": "정신문화",
@@ -8673,7 +8982,9 @@
         "en": "to be envious of others",
         "hint": "🤢",
         "category": "신체 관용구",
-        "categoryEn": "Body Idioms"
+        "categoryEn": "Body Idioms",
+        "example": "어제부터 배가 아프네요.",
+        "exampleEn": "My stomach has been hurting since yesterday."
       },
       {
         "ko": "발 벗고 나서다",
@@ -9062,7 +9373,8 @@
         "en": "thinking / cognition",
         "hint": "🧠",
         "category": "사고와 판단",
-        "categoryEn": "Thought & Judgement"
+        "categoryEn": "Thought & Judgement",
+        "example": "차량이 오는 것을 보지 못하고 촬영을 하다 사고가 날 뻔한 위험한 상황이 자주 발생하면서 운전자와 방문객 간에 다투는 일도 잦아지고 있다."
       },
       {
         "ko": "판단",
@@ -9153,7 +9465,8 @@
         "en": "structure",
         "hint": "🏗️",
         "category": "개념과 원리",
-        "categoryEn": "Concepts & Principles"
+        "categoryEn": "Concepts & Principles",
+        "example": "구조대가 등산객을 업고 병원으로 뛰어갔다."
       },
       {
         "ko": "체계",
@@ -9447,7 +9760,8 @@
         "en": "diversity",
         "hint": "🎨",
         "category": "가치와 기준",
-        "categoryEn": "Values & Standards"
+        "categoryEn": "Values & Standards",
+        "example": "여행 상품의 다양성보다 회사의 규모를 중요하게 생각하는 사람이 더 적다."
       },
       {
         "ko": "상호작용",
@@ -9931,7 +10245,8 @@
         "en": "government",
         "hint": "🏛️",
         "category": "정치와 정부",
-        "categoryEn": "Politics & Government"
+        "categoryEn": "Politics & Government",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "국회",
@@ -10050,7 +10365,8 @@
         "en": "plaintiff",
         "hint": "🙋",
         "category": "법과 질서",
-        "categoryEn": "Law & Order"
+        "categoryEn": "Law & Order",
+        "example": "발표할 때 원고를 보면서 하면 안 돼요?"
       },
       {
         "ko": "소송",
@@ -10211,7 +10527,8 @@
         "en": "political power",
         "hint": "👑",
         "category": "정치와 정부",
-        "categoryEn": "Politics & Government"
+        "categoryEn": "Politics & Government",
+        "example": "그래서 고인돌은 사람들을 불러 모아 무덤 만드는 일을 시킬 수 있을 정도로 대단한 권력을 가진 사람의 무덤이었을 것으로 보인다."
       },
       {
         "ko": "민주주의",
@@ -10362,7 +10679,8 @@
         "en": "accordingly / thus",
         "hint": "➡️",
         "category": "논리적 접속어",
-        "categoryEn": "Logical Connectives"
+        "categoryEn": "Logical Connectives",
+        "example": "따라서 소비자는 구매 전에 반품 비용과 조건을 잘 확인해야 한다."
       },
       {
         "ko": "즉",
@@ -10460,7 +10778,8 @@
         "en": "on the contrary / rather",
         "hint": "🔄",
         "category": "전환 및 첨가 부사",
-        "categoryEn": "Transition & Addition Adverbs"
+        "categoryEn": "Transition & Addition Adverbs",
+        "example": "아주머니는 아이가 많이 아팠냐며 오히려 걱정해 주셨다."
       },
       {
         "ko": "반면에",

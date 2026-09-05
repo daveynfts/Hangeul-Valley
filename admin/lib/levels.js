@@ -2,6 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const { syncLevels, getPaths } = require('./sync');
 
+// What a word may carry beyond ko / en / hint / category. Named here rather than assumed
+// away: the routes below used to rebuild a word from those four alone, which meant every
+// edit through the admin quietly deleted the rest.
+const OPTIONAL_TEXT = ['categoryEn', 'example', 'exampleEn'];
+
 function readLevelsFile(rootDir) {
   const paths = getPaths(rootDir);
   if (!fs.existsSync(paths.levelsPath)) {
@@ -106,6 +111,13 @@ function addWord(levelNum, wordObj, rootDir) {
     hint: wordObj.hint !== undefined ? String(wordObj.hint).trim() : '💡',
     category: wordObj.category !== undefined ? String(wordObj.category).trim() : targetLevel.name
   };
+  // The rest of what a word can carry: the English group name, and the example sentence the
+  // game prints under the headword with its translation. All optional, all kept when sent.
+  OPTIONAL_TEXT.forEach((f) => {
+    if (wordObj[f] === undefined) return;
+    const v = String(wordObj[f]).trim();
+    if (v) cleanWord[f] = v;
+  });
 
   targetLevel.words.push(cleanWord);
   syncLevels(levels, rootDir);
@@ -131,12 +143,18 @@ function updateWord(levelNum, wordIndex, wordObj, rootDir) {
   }
 
   const existing = targetLevel.words[idx];
-  const updatedWord = {
-    ko: wordObj.ko !== undefined ? String(wordObj.ko).trim() : existing.ko,
-    en: wordObj.en !== undefined ? String(wordObj.en).trim() : existing.en,
-    hint: wordObj.hint !== undefined ? String(wordObj.hint).trim() : existing.hint,
-    category: wordObj.category !== undefined ? String(wordObj.category).trim() : existing.category
-  };
+  // Built on top of what is there, not from four named fields. The old version rebuilt the
+  // object from ko/en/hint/category alone, so every edit through this route silently dropped
+  // categoryEn — and would now drop the example sentence and its translation with it. A
+  // field this does not know about belongs to whoever put it there.
+  const updatedWord = Object.assign({}, existing);
+  OPTIONAL_TEXT.concat(['ko', 'en', 'hint', 'category']).forEach((f) => {
+    if (wordObj[f] === undefined) return;
+    const v = String(wordObj[f]).trim();
+    // A cleared optional field is an absent one; a cleared required field keeps what it had.
+    if (!v && OPTIONAL_TEXT.indexOf(f) >= 0) delete updatedWord[f];
+    else if (v || ['ko', 'en', 'hint', 'category'].indexOf(f) < 0) updatedWord[f] = v;
+  });
 
   targetLevel.words[idx] = updatedWord;
   syncLevels(levels, rootDir);

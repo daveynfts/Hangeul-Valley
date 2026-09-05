@@ -1941,7 +1941,8 @@ function renderRecallScaffold(ko) {
   const n = groups.reduce((acc, g) => acc + g.length, 0);
   if (!n) return '';
   const cls = recallOriginClass(ko);
-  return [n + (n === 1 ? ' block' : ' blocks'), cls].filter(Boolean).join(' · ');
+  return [hvT(n === 1 ? 'ui.vb.blocks.one' : 'ui.vb.blocks', { n }), cls]
+    .filter(Boolean).join(' · ');
 }
 function renderRecallScaffoldHtml(ko) {
   const groups = hangulSyllableGroups(ko);
@@ -1957,45 +1958,37 @@ function renderRecallScaffoldHtml(ko) {
   };
 }
 
-// English topical note, used when a word has no curated origin.
-function renderCategoryHint(cat) {
+// Which topical note a word gets, as an id. The note itself is in the catalogue: it is a
+// sentence of teaching advice, and the word-detail page shows it under the headword when the
+// word has no curated origin of its own.
+const CATEGORY_TOPICS = [
+  ['food', ['food', '음식', '식당', '맛']],
+  ['animal', ['animal', '동물']],
+  ['nature', ['nature', '자연', '계절', '날씨', '환경']],
+  ['body', ['body', '신체', '건강', '증상']],
+  ['place', ['place', '장소', '건물', '교통', '숙소']],
+  ['people', ['가족', '사람', '관계']],
+  ['action', ['동작', '행동', '업무']],
+  ['economy', ['economy', 'business', '경제', '사업', '시장', '금융']],
+  ['volunteer', ['volunteer', 'application', '봉사', '신청', '모집', '자격']],
+  ['chart', ['chart', 'data', 'graph', '그래프', '통계', '비율', '자료']],
+  ['grammar', ['grammar', 'expression', '문법', '표현']],
+  ['society', ['society', 'daily life', '생활', '사회', '일상']],
+  ['media', ['media', 'headline', '뉴스', '언론', '기사']],
+  ['culture', ['culture', 'entertainment', '문화', '예술', '공연']],
+  ['beauty', ['beauty', 'appearance', '미용', '외모']],
+  ['travel', ['travel', 'leisure', '여행', '여가', '관광']],
+  ['politics', ['politics', 'government', '정치', '정부', '행정']]
+];
+
+function categoryTopicId(cat) {
   const c = (cat || '').toLowerCase();
-  const has = (...ks) => ks.some(k => c.includes(k));
-  if (has('food', '음식', '식당', '맛'))
-    return '🍽️ Food & dining vocabulary. Korean meals are built around balancing flavours and sharing dishes at the table.';
-  if (has('animal', '동물'))
-    return '🐾 Animal vocabulary. Animals turn up constantly in Korean proverbs, folk tales and pet cafés.';
-  if (has('nature', '자연', '계절', '날씨', '환경'))
-    return '🌿 Nature & environment vocabulary. Korea has four sharply distinct seasons, so the scenery shifts dramatically through the year.';
-  if (has('body', '신체', '건강', '증상'))
-    return '💪 Body & health vocabulary. Many Korean body-part words double as metaphors for emotion and attitude.';
-  if (has('place', '장소', '건물', '교통', '숙소'))
-    return '📍 Places & transport vocabulary. Useful for getting around, asking directions and travelling in Korea.';
-  if (has('가족', '사람', '관계'))
-    return '👨‍👩‍👧 People & relationships vocabulary. Korean puts real weight on using the right title for the right relationship.';
-  if (has('동작', '행동', '업무'))
-    return '⚡ Action vocabulary. These land at the end of the sentence in Korean word order (subject – object – verb).';
-  if (has('economy', 'business', '경제', '사업', '시장', '금융'))
-    return '📊 Economy & business vocabulary. Watch for compact Sino-Korean compounds: recognizing each block often reveals the meaning of a longer headline or notice.';
-  if (has('volunteer', 'application', '봉사', '신청', '모집', '자격'))
-    return '🤝 Applications & volunteering vocabulary. These words often appear together in public notices, especially around eligibility, dates and how to apply.';
-  if (has('chart', 'data', 'graph', '그래프', '통계', '비율', '자료'))
-    return '📈 Charts & data vocabulary. TOPIK questions often pair these terms with increases, decreases, comparisons and proportions.';
-  if (has('grammar', 'expression', '문법', '표현'))
-    return '🧩 Grammar & expressions. Learn the surrounding pattern and the speaker’s intent, then compare it with a complete curated example.';
-  if (has('society', 'daily life', '생활', '사회', '일상'))
-    return '🏙️ Society & daily-life vocabulary. Expect these words in notices, surveys and passages about routines or changing social habits.';
-  if (has('media', 'headline', '뉴스', '언론', '기사'))
-    return '📰 Media & headline vocabulary. Korean headlines often omit particles, so identify the nouns and final predicate before reconstructing the full relation.';
-  if (has('culture', 'entertainment', '문화', '예술', '공연'))
-    return '🎭 Culture & entertainment vocabulary. Link the word to a venue, event or activity to make it easier to retrieve in a reading passage.';
-  if (has('beauty', 'appearance', '미용', '외모'))
-    return '✨ Appearance vocabulary. Pay attention to whether the word names a feature, a state or an action, because Korean uses different predicate patterns for each.';
-  if (has('travel', 'leisure', '여행', '여가', '관광'))
-    return '🧳 Travel & leisure vocabulary. Group it with places, transport and activity verbs so it becomes a usable travel phrase rather than an isolated label.';
-  if (has('politics', 'government', '정치', '정부', '행정'))
-    return '🏛️ Politics & government vocabulary. These formal Sino-Korean terms recur in news, policies and TOPIK reading passages.';
-  return '✨ Everyday Korean vocabulary — common in conversation, dramas and daily life.';
+  const hit = CATEGORY_TOPICS.find(([, keys]) => keys.some((k) => c.indexOf(k) >= 0));
+  return hit ? hit[0] : 'everyday';
+}
+
+function renderCategoryHint(cat) {
+  return hvT('ui.vb.topic.' + categoryTopicId(cat));
 }
 
 // Returns { origin, structure, hint } for any word.
@@ -2024,16 +2017,18 @@ function vocabRenderChips(target, values) {
 }
 
 function vocabSkillDescription(entry) {
-  if (!entry || entry.st === 'new') return 'Not studied yet';
+  if (!entry || entry.st === 'new') return hvT('ui.vb.skill.none');
   const parts = [];
-  if (srsIsMature(entry)) parts.push('Mature');
-  else if (entry.st === 'review') parts.push('In review');
-  else if (entry.st === 'relearn') parts.push('Relearning');
+  if (srsIsMature(entry)) parts.push(hvT('ui.vocab.filter.mature'));
+  else if (entry.st === 'review') parts.push(hvT('ui.vb.stage.review'));
+  else if (entry.st === 'relearn') parts.push(hvT('ui.vocab.stage.relearning'));
   else if (entry.st === 'learn') parts.push(hvT('ui.vocab.filter.learning'));
   else parts.push(entry.st);
-  if (srsIsGraduated(entry)) parts.push(`interval ${srsIntervalLabel(entry)}`);
-  if (srsIsDue(entry)) parts.push('due now');
-  if (entry.lapses) parts.push(`${entry.lapses} lapse${entry.lapses === 1 ? '' : 's'}`);
+  if (srsIsGraduated(entry)) parts.push(hvT('ui.vb.interval', { n: srsIntervalLabel(entry) }));
+  if (srsIsDue(entry)) parts.push(hvT('ui.vb.dueNow'));
+  if (entry.lapses) {
+    parts.push(hvT(entry.lapses === 1 ? 'ui.vb.lapses.one' : 'ui.vb.lapses', { n: entry.lapses }));
+  }
   return parts.join(' · ');
 }
 
@@ -2042,9 +2037,9 @@ function vocabRenderSkillGrid(word) {
   if (!grid) return;
   grid.innerHTML = '';
   const labels = {
-    type: { icon: '⌨️', name: 'Produce · type' },
-    recognise: { icon: '👁️', name: 'Recognise · see' },
-    listen: { icon: '👂', name: 'Understand · hear' }
+    type: { icon: '⌨️', name: hvT('ui.vb.skill.type') },
+    recognise: { icon: '👁️', name: hvT('ui.vb.skill.recognise') },
+    listen: { icon: '👂', name: hvT('ui.vb.skill.listen') }
   };
   MODALITIES.forEach(modality => {
     const row = document.createElement('div');
@@ -2167,11 +2162,11 @@ function showVocabFunFact(word) {
   const srs = getSrs(word.ko);
   const harvests = harvestCounts.get(word.ko) || 0;
 
-  let stageLabel = 'Not started';
-  if (srsIsMature(srs))          stageLabel = '🌟 Mature';
-  else if (srs.st === 'review')  stageLabel = '🍎 In review';
-  else if (srs.st === 'relearn') stageLabel = '🔁 Relearning';
-  else if (srs.st === 'learn')   stageLabel = '🌱 Learning';
+  let stageLabel = hvT('ui.ls.card.notStarted');
+  if (srsIsMature(srs))          stageLabel = '🌟 ' + hvT('ui.vocab.filter.mature');
+  else if (srs.st === 'review')  stageLabel = '🍎 ' + hvT('ui.vb.stage.review');
+  else if (srs.st === 'relearn') stageLabel = '🔁 ' + hvT('ui.vocab.stage.relearning');
+  else if (srs.st === 'learn')   stageLabel = '🌱 ' + hvT('ui.vocab.filter.learning');
 
   $('vff-emoji').innerHTML = (typeof vocabIconHtml === 'function')
     ? vocabIconHtml(word.ko, word.hint || '📝', 126)
@@ -2179,8 +2174,8 @@ function showVocabFunFact(word) {
   $('vff-en').textContent = tr(word, 'en');
   $('vff-ko').textContent = word.ko;
   $('vff-romanization').textContent = model.romanization
-    ? `Written-form guide · ${model.romanization}`
-    : 'Use the audio controls for pronunciation.';
+    ? hvT('ui.vb.romanization', { text: model.romanization })
+    : hvT('ui.vb.romanization.none');
   $('vff-cat').textContent = wordCategory(word) + (word.categoryEn && word.category ? ` · ${word.category}` : '');
   $('vff-phase').textContent = stageLabel;
 
@@ -2188,13 +2183,14 @@ function showVocabFunFact(word) {
     .map(modality => peekSrs(word.ko, modality))
     .filter(entry => entry && entry.st !== 'new').length;
   $('vff-harvests').textContent = studiedSkills
-    ? `${studiedSkills} of ${MODALITIES.length} skills started${harvests ? ` · harvested ×${harvests}` : ''}`
-    : (harvests > 0 ? `Harvested ×${harvests}` : 'Open a farm quiz to begin learning.');
+    ? hvT('ui.vb.skills.started', { n: studiedSkills, total: MODALITIES.length })
+      + (harvests ? ' · ' + hvT('ui.vb.harvested', { n: harvests }) : '')
+    : (harvests > 0 ? hvT('ui.vb.harvested', { n: harvests }) : hvT('ui.vb.notStudied'));
 
   $('vff-word-type').textContent = model.type;
   $('vff-syllable-count').textContent = model.syllableCount
-    ? `${model.syllableCount} block${model.syllableCount === 1 ? '' : 's'}`
-    : 'Latin-letter spelling';
+    ? hvT(model.syllableCount === 1 ? 'ui.vb.blocks.one' : 'ui.vb.blocks', { n: model.syllableCount })
+    : hvT('ui.vb.blocks.latin');
   $('vff-final-sound').textContent = model.ending.label;
   $('vff-chosung').textContent = getChosung(word.ko) || '—';
   $('vff-fact-origin').textContent = fact.origin || hvT('ui.vff.fact.none');

@@ -2,9 +2,19 @@
 
 const fs = require('fs');
 const path = require('path');
-const study = require('../js/vocabStudy');
 
 const ROOT = path.join(__dirname, '..');
+
+// The study labels come from the catalogue now, and js/vocabStudy.js reaches for hvT as a
+// global — which in a bare `require` is not there, so it falls back to returning the key.
+// Registering the shipped English before the module loads is what makes the assertions below
+// about the wording rather than about the lookup having happened.
+const i18n = require('../js/i18n.js');
+i18n.hvRegisterLocale('en', require('../admin/lib/i18n.js').readChromeTable(ROOT, 'en'));
+global.hvT = i18n.hvT;
+global.tr = i18n.tr;
+
+const study = require('../js/vocabStudy');
 const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(ROOT, 'css', 'game.css'), 'utf8');
 const ui = fs.readFileSync(path.join(ROOT, 'js', 'ui.js'), 'utf8');

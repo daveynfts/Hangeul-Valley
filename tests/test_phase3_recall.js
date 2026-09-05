@@ -14,9 +14,15 @@ function assert(cond, msg) {
 }
 
 const start = ui.indexOf('function decomposeHangulWord');
-const end = ui.indexOf('// English topical note, used when a word has no curated origin.');
+const end = ui.indexOf('// Which topical note a word gets, as an id.');
 assert(start >= 0 && end > start, 'recall helpers are in js/ui.js');
+// The block count is worded from the catalogue now, so the context needs the real hvT over
+// the real js/locales/en.js — a stub would answer with the key and the assertions below would
+// be checking that a lookup happened rather than what it says.
+const i18n = require('../js/i18n.js');
+i18n.hvRegisterLocale('en', require('../admin/lib/i18n.js').readChromeTable(ROOT, 'en'));
 const ctx = {
+  hvT: i18n.hvT,
   factsData: {
     '김치찌개': { o: 'sino' },
     '냉면': { o: 'sino' },

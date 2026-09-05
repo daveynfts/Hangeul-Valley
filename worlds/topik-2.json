@@ -29,7 +29,8 @@
         "en": "a traditional market",
         "hint": "🏪",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "재래시장에서 배달 서비스를 통해 경기 회복의 노력을 하고 있다."
       },
       {
         "ko": "썰렁하다",
@@ -47,7 +48,8 @@
         "en": "delivery",
         "hint": "🛵",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "재래시장에서 배달 서비스를 통해 경기 회복의 노력을 하고 있다."
       },
       {
         "ko": "출구",
@@ -68,14 +70,16 @@
         "en": "an entrance and exit, a gateway",
         "hint": "🚧",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "재래시장은 출입구가 여러 곳에 있어 찾기가 쉽지 않다."
       },
       {
         "ko": "여러 곳",
         "en": "several places",
         "hint": "📍",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "재래시장은 출입구가 여러 곳에 있어 찾기가 쉽지 않다."
       },
       {
         "ko": "찾다",
@@ -87,14 +91,16 @@
           "찾는",
           "찾기",
           "찾아"
-        ]
+        ],
+        "example": "날씨가 추워지자 재래시장을 직접 찾는 손님들이 줄었다."
       },
       {
         "ko": "직접",
         "en": "in person, directly",
         "hint": "🙋",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "날씨가 추워지자 재래시장을 직접 찾는 손님들이 줄었다."
       },
       {
         "ko": "추워지다",
@@ -112,7 +118,8 @@
         "en": "a customer",
         "hint": "🧍",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "날씨가 추워지자 재래시장을 직접 찾는 손님들이 줄었다."
       },
       {
         "ko": "줄다",
@@ -126,14 +133,16 @@
           "줄어들다",
           "줄어들게",
           "줄어들었다"
-        ]
+        ],
+        "example": "날씨가 추워지자 재래시장을 직접 찾는 손님들이 줄었다."
       },
       {
         "ko": "서비스",
         "en": "a service",
         "hint": "🛎️",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "재래시장에서 배달 서비스를 통해 경기 회복의 노력을 하고 있다."
       },
       {
         "ko": "통하다",
@@ -144,35 +153,40 @@
         "forms": [
           "통해",
           "통한"
-        ]
+        ],
+        "example": "재래시장에서 배달 서비스를 통해 경기 회복의 노력을 하고 있다."
       },
       {
         "ko": "경기",
         "en": "business conditions, how trade is going",
         "hint": "📊",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "재래시장에서 배달 서비스를 통해 경기 회복의 노력을 하고 있다."
       },
       {
         "ko": "회복",
         "en": "a recovery",
         "hint": "📈",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "재래시장에서 배달 서비스를 통해 경기 회복의 노력을 하고 있다."
       },
       {
         "ko": "노력",
         "en": "effort",
         "hint": "💪",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "재래시장에서 배달 서비스를 통해 경기 회복의 노력을 하고 있다."
       },
       {
         "ko": "상품",
         "en": "goods, a product",
         "hint": "📦",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "재래시장에서 상품을 구매한 후 배달을 원하는 사람들이 많아졌다."
       },
       {
         "ko": "구매하다",
@@ -182,7 +196,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "구매한"
-        ]
+        ],
+        "example": "재래시장에서 상품을 구매한 후 배달을 원하는 사람들이 많아졌다."
       },
       {
         "ko": "원하다",
@@ -193,7 +208,8 @@
         "forms": [
           "원하는",
           "원해"
-        ]
+        ],
+        "example": "재래시장에서 상품을 구매한 후 배달을 원하는 사람들이 많아졌다."
       },
       {
         "ko": "많아지다",
@@ -204,7 +220,8 @@
         "forms": [
           "많아졌다",
           "많아진"
-        ]
+        ],
+        "example": "최근 온라인 가구 구매가 늘면서 반품 사례가 많아지고 있다."
       },
       {
         "ko": "신문 기사",
@@ -246,7 +263,8 @@
         "categoryEn": "Food & eating",
         "forms": [
           "눈으로 먹고"
-        ]
+        ],
+        "example": "눈으로 먹고 귀로 맛보는 시대, 요리 프로그램 천국!"
       },
       {
         "ko": "귀로 맛보다",
@@ -256,7 +274,8 @@
         "categoryEn": "Food & eating",
         "forms": [
           "귀로 맛보는"
-        ]
+        ],
+        "example": "눈으로 먹고 귀로 맛보는 시대, 요리 프로그램 천국!"
       },
       {
         "ko": "맛보다",
@@ -266,63 +285,72 @@
         "categoryEn": "Food & eating",
         "forms": [
           "맛보는"
-        ]
+        ],
+        "example": "눈으로 먹고 귀로 맛보는 시대, 요리 프로그램 천국!"
       },
       {
         "ko": "음식",
         "en": "food",
         "hint": "🍽️",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "음식을 먹을 때에는 눈과 귀로도 즐겨야 한다."
       },
       {
         "ko": "모양",
         "en": "the shape of a thing",
         "hint": "🔷",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "이제는 음식의 맛보다 모양이나 색깔이 더 중요해졌다."
       },
       {
         "ko": "색깔",
         "en": "colour",
         "hint": "🎨",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "이제는 음식의 맛보다 모양이나 색깔이 더 중요해졌다."
       },
       {
         "ko": "시대",
         "en": "an age, an era",
         "hint": "🕰️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "고인돌은 옛날 청동기 시대의 무덤이다."
       },
       {
         "ko": "천국",
         "en": "heaven — in a headline, \"awash with\"",
         "hint": "☁️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "눈으로 먹고 귀로 맛보는 시대, 요리 프로그램 천국!"
       },
       {
         "ko": "요리 프로그램",
         "en": "a cooking programme",
         "hint": "📺",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "눈으로 먹고 귀로 맛보는 시대, 요리 프로그램 천국!"
       },
       {
         "ko": "텔레비전 프로그램",
         "en": "a television programme",
         "hint": "📺",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "요즘 요리에 관련된 텔레비전 프로그램이 아주 많다."
       },
       {
         "ko": "실제",
         "en": "the real thing, actual",
         "hint": "🔎",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "텔레비전에서는 실제 요리보다 사진이나 그림을 더 많이 보여준다."
       },
       {
         "ko": "보여주다",
@@ -343,7 +371,8 @@
         "forms": [
           "즐겨야",
           "즐겨"
-        ]
+        ],
+        "example": "음식을 먹을 때에는 눈과 귀로도 즐겨야 한다."
       },
       {
         "ko": "관련되다",
@@ -353,14 +382,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "관련된"
-        ]
+        ],
+        "example": "요즘 요리에 관련된 텔레비전 프로그램이 아주 많다."
       },
       {
         "ko": "요즘",
         "en": "these days",
         "hint": "📅",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "요즘 요리에 관련된 텔레비전 프로그램이 아주 많다."
       },
       {
         "ko": "중요해지다",
@@ -370,7 +401,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "중요해졌다"
-        ]
+        ],
+        "example": "이제는 음식의 맛보다 모양이나 색깔이 더 중요해졌다."
       },
       {
         "ko": "색조 화장품",
@@ -384,7 +416,8 @@
         "en": "cosmetics",
         "hint": "🧴",
         "category": "미용",
-        "categoryEn": "Beauty & appearance"
+        "categoryEn": "Beauty & appearance",
+        "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
       },
       {
         "ko": "화장을 하다",
@@ -401,7 +434,8 @@
         "en": "a person's looks",
         "hint": "🪞",
         "category": "미용",
-        "categoryEn": "Beauty & appearance"
+        "categoryEn": "Beauty & appearance",
+        "example": "화장을 하는 등 외모를 가꾸는 남자들이 늘어났다."
       },
       {
         "ko": "가꾸다",
@@ -411,7 +445,8 @@
         "categoryEn": "Beauty & appearance",
         "forms": [
           "가꾸는"
-        ]
+        ],
+        "example": "화장을 하는 등 외모를 가꾸는 남자들이 늘어났다."
       },
       {
         "ko": "불티",
@@ -425,7 +460,9 @@
         "en": "looking after something; also being in charge of it",
         "hint": "🧰",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "관리비는 얼마나 나오나요?",
+        "exampleEn": "How much is the maintenance fee?"
       },
       {
         "ko": "늘어나다",
@@ -435,7 +472,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "늘어났다"
-        ]
+        ],
+        "example": "화장을 하는 등 외모를 가꾸는 남자들이 늘어났다."
       },
       {
         "ko": "다양하다",
@@ -445,21 +483,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "다양하게"
-        ]
+        ],
+        "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
       },
       {
         "ko": "필요가 있다",
         "en": "there is a need to",
         "hint": "❗",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
       },
       {
         "ko": "주로",
         "en": "mainly",
         "hint": "🎯",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "화장품의 색을 만드는 일은 주로 남자들이 담당하고 있다."
       },
       {
         "ko": "담당하다",
@@ -469,49 +510,56 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "담당하고"
-        ]
+        ],
+        "example": "화장품의 색을 만드는 일은 주로 남자들이 담당하고 있다."
       },
       {
         "ko": "사회적 지위",
         "en": "social standing",
         "hint": "🏛️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "사회적 지위가 높은 남자들이 외모에 관심을 많이 갖는다."
       },
       {
         "ko": "관심",
         "en": "interest, attention",
         "hint": "👁️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "사회적 지위가 높은 남자들이 외모에 관심을 많이 갖는다."
       },
       {
         "ko": "피서객",
         "en": "a holidaymaker escaping the heat",
         "hint": "🏖️",
         "category": "여행",
-        "categoryEn": "Travel & leisure"
+        "categoryEn": "Travel & leisure",
+        "example": "피서객들이 더위 속에서 쓰레기를 치우기 위해 애쓰고 있다."
       },
       {
         "ko": "피서지",
         "en": "a place people go to escape the heat",
         "hint": "⛱️",
         "category": "여행",
-        "categoryEn": "Travel & leisure"
+        "categoryEn": "Travel & leisure",
+        "example": "피서지에서는 많은 양의 쓰레기를 치우는 문제가 심각하다."
       },
       {
         "ko": "더위",
         "en": "the heat",
         "hint": "🥵",
         "category": "여행",
-        "categoryEn": "Travel & leisure"
+        "categoryEn": "Travel & leisure",
+        "example": "피서객들이 더위 속에서 쓰레기를 치우기 위해 애쓰고 있다."
       },
       {
         "ko": "쓰레기",
         "en": "rubbish",
         "hint": "🗑️",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "example": "피서지에서는 많은 양의 쓰레기를 치우는 문제가 심각하다."
       },
       {
         "ko": "치우다",
@@ -521,7 +569,8 @@
         "categoryEn": "Environment & waste",
         "forms": [
           "치우는"
-        ]
+        ],
+        "example": "피서지에서는 많은 양의 쓰레기를 치우는 문제가 심각하다."
       },
       {
         "ko": "양",
@@ -531,7 +580,8 @@
         "categoryEn": "Environment & waste",
         "forms": [
           "양의"
-        ]
+        ],
+        "example": "피서지에서는 많은 양의 쓰레기를 치우는 문제가 심각하다."
       },
       {
         "ko": "전쟁",
@@ -555,7 +605,8 @@
         "en": "to be serious",
         "hint": "⚠️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "피서지에서는 많은 양의 쓰레기를 치우는 문제가 심각하다."
       },
       {
         "ko": "애쓰다",
@@ -565,7 +616,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "애쓰고"
-        ]
+        ],
+        "example": "피서객들이 더위 속에서 쓰레기를 치우기 위해 애쓰고 있다."
       },
       {
         "ko": "-기 위해",
@@ -595,7 +647,8 @@
         "en": "in various ways",
         "hint": "🔀",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "피서객들이 쓰레기 문제로 인해 여러 가지로 불편을 겪고 있다."
       },
       {
         "ko": "불편",
@@ -605,7 +658,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "불편을"
-        ]
+        ],
+        "example": "피서객들이 쓰레기 문제로 인해 여러 가지로 불편을 겪고 있다."
       },
       {
         "ko": "겪다",
@@ -615,21 +669,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "겪고"
-        ]
+        ],
+        "example": "피서객들이 쓰레기 문제로 인해 여러 가지로 불편을 겪고 있다."
       },
       {
         "ko": "저축률",
         "en": "the savings rate",
         "hint": "📉",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "저축률 24년 만에 바닥으로, 젊은층도 저축 무관심!"
       },
       {
         "ko": "저축",
         "en": "saving, savings",
         "hint": "🏦",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "저축률 24년 만에 바닥으로, 젊은층도 저축 무관심!"
       },
       {
         "ko": "바닥",
@@ -639,7 +696,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "바닥으로"
-        ]
+        ],
+        "example": "저축률 24년 만에 바닥으로, 젊은층도 저축 무관심!"
       },
       {
         "ko": "오르다",
@@ -650,7 +708,8 @@
         "forms": [
           "오르지",
           "오르던"
-        ]
+        ],
+        "example": "24년 동안 저축률이 계속 오르지 않고 있다."
       },
       {
         "ko": "떨어지다",
@@ -662,7 +721,8 @@
           "떨어졌다",
           "떨어지고",
           "떨어지지"
-        ]
+        ],
+        "example": "정부의 부동산 정책 때문에 서민 물가가 많이 떨어지고 있다."
       },
       {
         "ko": "올라가다",
@@ -673,7 +733,8 @@
         "forms": [
           "올라가는",
           "올라갔다"
-        ]
+        ],
+        "example": "저축률이 한 번 떨어졌다 올라가는 데 24년이 걸린다."
       },
       {
         "ko": "낮다",
@@ -683,14 +744,16 @@
         "categoryEn": "Economy & business",
         "forms": [
           "낮게"
-        ]
+        ],
+        "example": "젊은층을 비롯해서 저축률이 24년 만에 가장 낮게 나타났다."
       },
       {
         "ko": "젊은층",
         "en": "the young, as an age group",
         "hint": "🧑",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "저축률 24년 만에 바닥으로, 젊은층도 저축 무관심!"
       },
       {
         "ko": "젊다",
@@ -700,28 +763,32 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "젊은"
-        ]
+        ],
+        "example": "젊은 때 저축을 시작해서 24년 정도 하는 게 좋다."
       },
       {
         "ko": "무관심",
         "en": "indifference",
         "hint": "🤷",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "저축률 24년 만에 바닥으로, 젊은층도 저축 무관심!"
       },
       {
         "ko": "계속",
         "en": "continuously",
         "hint": "➰",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "24년 동안 저축률이 계속 오르지 않고 있다."
       },
       {
         "ko": "정도",
         "en": "about, roughly",
         "hint": "📏",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "젊은 때 저축을 시작해서 24년 정도 하는 게 좋다."
       },
       {
         "ko": "걸리다",
@@ -731,7 +798,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "걸린다"
-        ]
+        ],
+        "example": "아이가 감기에 걸려 밤새 큰 소리로 울었다."
       },
       {
         "ko": "나타나다",
@@ -741,7 +809,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "나타났다"
-        ]
+        ],
+        "example": "젊은층을 비롯해서 저축률이 24년 만에 가장 낮게 나타났다."
       },
       {
         "ko": "N 만에",
@@ -778,35 +847,40 @@
         "en": "the summer months",
         "hint": "☀️",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "여름철 음식 보관, 냉장고만 믿어서는 낭패!"
       },
       {
         "ko": "여름",
         "en": "summer",
         "hint": "🏖️",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "여름철 음식 보관, 냉장고만 믿어서는 낭패!"
       },
       {
         "ko": "보관",
         "en": "storage, keeping",
         "hint": "📦",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "여름철 음식 보관, 냉장고만 믿어서는 낭패!"
       },
       {
         "ko": "보관하다",
         "en": "to store, to keep",
         "hint": "🧊",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "여름에는 모든 음식을 냉장고에 보관해야 한다."
       },
       {
         "ko": "냉장고",
         "en": "a fridge",
         "hint": "🧊",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "여름철 음식 보관, 냉장고만 믿어서는 낭패!"
       },
       {
         "ko": "냉장고 안",
@@ -816,7 +890,8 @@
         "categoryEn": "Food & eating",
         "forms": [
           "냉장고 안의"
-        ]
+        ],
+        "example": "여름에는 냉장고 안의 음식도 안심하고 먹을 수 없다."
       },
       {
         "ko": "넣다",
@@ -827,7 +902,9 @@
         "forms": [
           "넣는",
           "넣으면"
-        ]
+        ],
+        "example": "네, 저도 시간 내서 한번 가 볼게요.",
+        "exampleEn": "Sure, I'll make time and give it a go."
       },
       {
         "ko": "믿다",
@@ -844,7 +921,8 @@
         "en": "a fiasco — a plan that lets you down at the worst moment",
         "hint": "💥",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "여름철 음식 보관, 냉장고만 믿어서는 낭패!"
       },
       {
         "ko": "안심하다",
@@ -854,14 +932,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "안심하고"
-        ]
+        ],
+        "example": "여름에는 냉장고 안의 음식도 안심하고 먹을 수 없다."
       },
       {
         "ko": "모든",
         "en": "every, all",
         "hint": "🌐",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "여름에는 모든 음식을 냉장고에 보관해야 한다."
       },
       {
         "ko": "특별하다",
@@ -871,21 +951,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "특별한"
-        ]
+        ],
+        "example": "여름철에 음식을 보관하려면 특별한 냉장고를 마련해야 한다."
       },
       {
         "ko": "마련하다",
         "en": "to get hold of, to arrange for",
         "hint": "🛒",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "여름철에 음식을 보관하려면 특별한 냉장고를 마련해야 한다."
       },
       {
         "ko": "좋지 않다",
         "en": "is not a good idea",
         "hint": "🚫",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "먹던 음식을 냉장고에 넣는 것은 좋지 않다."
       },
       {
         "ko": "N만",
@@ -955,21 +1038,24 @@
         "categoryEn": "Politics & government",
         "forms": [
           "정부의"
-        ]
+        ],
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "정책",
         "en": "a policy",
         "hint": "📜",
         "category": "정치",
-        "categoryEn": "Politics & government"
+        "categoryEn": "Politics & government",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "부동산 정책",
         "en": "real-estate policy",
         "hint": "🏠",
         "category": "정치",
-        "categoryEn": "Politics & government"
+        "categoryEn": "Politics & government",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "시민",
@@ -979,7 +1065,8 @@
         "categoryEn": "Politics & government",
         "forms": [
           "시민들"
-        ]
+        ],
+        "example": "정부의 부동산 정책을 시민들이 아주 냉정하게 평가하고 있다."
       },
       {
         "ko": "평가하다",
@@ -989,7 +1076,8 @@
         "categoryEn": "Politics & government",
         "forms": [
           "평가하고"
-        ]
+        ],
+        "example": "정부의 부동산 정책을 시민들이 아주 냉정하게 평가하고 있다."
       },
       {
         "ko": "집값",
@@ -1010,42 +1098,48 @@
         "en": "property, real estate",
         "hint": "🏢",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "서민",
         "en": "ordinary working people",
         "hint": "🧍",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "서민 경제",
         "en": "the household economy of ordinary people",
         "hint": "🧺",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "경제",
         "en": "an economy",
         "hint": "📊",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "물가",
         "en": "the cost of living",
         "hint": "🧾",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "정부의 부동산 정책 때문에 서민 물가가 많이 떨어지고 있다."
       },
       {
         "ko": "악영향",
         "en": "a harmful effect — and it comes with 미치다: 악영향을 미치다, to have a bad effect on",
         "hint": "☠️",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "영향을 미치다",
@@ -1055,7 +1149,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "영향을 미치고"
-        ]
+        ],
+        "example": "정부의 부동산 정책이 서민 경제에 악영향을 미치고 있다."
       },
       {
         "ko": "찬물",
@@ -1079,7 +1174,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "잡기"
-        ]
+        ],
+        "example": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다."
       },
       {
         "ko": "냉정하다",
@@ -1089,7 +1185,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "냉정하게"
-        ]
+        ],
+        "example": "정부의 부동산 정책을 시민들이 아주 냉정하게 평가하고 있다."
       },
       {
         "ko": "시원하다",
@@ -1099,7 +1196,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "시원하게"
-        ]
+        ],
+        "example": "정부의 부동산 정책이 시민들의 마음을 시원하게 해 주고 있다."
       },
       {
         "ko": "마음",
@@ -1109,21 +1207,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "마음을"
-        ]
+        ],
+        "example": "정부의 부동산 정책이 시민들의 마음을 시원하게 해 주고 있다."
       },
       {
         "ko": "아주",
         "en": "very",
         "hint": "💯",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "요즘 요리에 관련된 텔레비전 프로그램이 아주 많다."
       },
       {
         "ko": "많이",
         "en": "a lot",
         "hint": "🔺",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "텔레비전에서는 실제 요리보다 사진이나 그림을 더 많이 보여준다."
       },
       {
         "ko": "-는 중",
@@ -1174,7 +1275,8 @@
           "개는",
           "개를",
           "개의"
-        ]
+        ],
+        "example": "개를 키우기 전에 개의 특성에 대해서 알아봐야 한다."
       },
       {
         "ko": "반려견",
@@ -1184,7 +1286,8 @@
         "categoryEn": "Animals & pets",
         "forms": [
           "반려견은"
-        ]
+        ],
+        "example": "자신의 반려견은 물지 않는다고 확신하는 것은 잘못된 것이다."
       },
       {
         "ko": "주인",
@@ -1194,7 +1297,8 @@
         "categoryEn": "Animals & pets",
         "forms": [
           "주인들"
-        ]
+        ],
+        "example": "오늘 집주인을 만났을 때 한국어를 잘못해서 당황한 일이 있었어."
       },
       {
         "ko": "키우다",
@@ -1215,7 +1319,8 @@
         "forms": [
           "물어요",
           "물지"
-        ]
+        ],
+        "example": "자신의 반려견은 물지 않는다고 확신하는 것은 잘못된 것이다."
       },
       {
         "ko": "물리다",
@@ -1225,14 +1330,16 @@
         "categoryEn": "Animals & pets",
         "forms": [
           "물리는"
-        ]
+        ],
+        "example": "자신의 반려견에게 물리는 사람들이 늘고 있다."
       },
       {
         "ko": "특성",
         "en": "a characteristic, what something is like by nature",
         "hint": "🧬",
         "category": "동물",
-        "categoryEn": "Animals & pets"
+        "categoryEn": "Animals & pets",
+        "example": "개를 키우기 전에 개의 특성에 대해서 알아봐야 한다."
       },
       {
         "ko": "착각",
@@ -1259,7 +1366,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "확신하는"
-        ]
+        ],
+        "example": "자신의 반려견은 물지 않는다고 확신하는 것은 잘못된 것이다."
       },
       {
         "ko": "잘못되다",
@@ -1269,7 +1377,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "잘못된"
-        ]
+        ],
+        "example": "자신의 반려견은 물지 않는다고 확신하는 것은 잘못된 것이다."
       },
       {
         "ko": "알아보다",
@@ -1279,7 +1388,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "알아봐야"
-        ]
+        ],
+        "example": "개를 키우기 전에 개의 특성에 대해서 알아봐야 한다."
       },
       {
         "ko": "자신",
@@ -1289,14 +1399,17 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "자신의"
-        ]
+        ],
+        "example": "자신의 반려견은 물지 않는다고 확신하는 것은 잘못된 것이다."
       },
       {
         "ko": "우리",
         "en": "our",
         "hint": "👪",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "우리 오늘 뭐 할까?",
+        "exampleEn": "What shall we do today?"
       },
       {
         "ko": "사람",
@@ -1307,7 +1420,8 @@
         "forms": [
           "사람들",
           "사람이다"
-        ]
+        ],
+        "example": "사람들은 보통 식후에 바로 이를 닦는다."
       },
       {
         "ko": "늘다",
@@ -1317,21 +1431,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "늘고"
-        ]
+        ],
+        "example": "자신의 반려견에게 물리는 사람들이 늘고 있다."
       },
       {
         "ko": "한번",
         "en": "once, one time",
         "hint": "1️⃣",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "한번 사람을 문 적이 있는 개는 다시 사람을 물 수 있다."
       },
       {
         "ko": "다시",
         "en": "again",
         "hint": "🔄",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "한번 사람을 문 적이 있는 개는 다시 사람을 물 수 있다."
       },
       {
         "ko": "안 + V",
@@ -1413,7 +1530,8 @@
         "en": "a banana",
         "hint": "🍌",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "바나나를 꿀과 함께 먹으면 잠을 푹 잘 수 있다."
       },
       {
         "ko": "꿀",
@@ -1423,7 +1541,8 @@
         "categoryEn": "Food & eating",
         "forms": [
           "꿀과"
-        ]
+        ],
+        "example": "바나나를 꿀과 함께 먹으면 잠을 푹 잘 수 있다."
       },
       {
         "ko": "먹다",
@@ -1433,7 +1552,8 @@
         "categoryEn": "Food & eating",
         "forms": [
           "먹으면"
-        ]
+        ],
+        "example": "눈으로 먹고 귀로 맛보는 시대, 요리 프로그램 천국!"
       },
       {
         "ko": "꿀잠",
@@ -1450,7 +1570,8 @@
         "categoryEn": "Health & the body",
         "forms": [
           "잠을"
-        ]
+        ],
+        "example": "바나나를 꿀과 함께 먹으면 잠을 푹 잘 수 있다."
       },
       {
         "ko": "자다",
@@ -1460,7 +1581,8 @@
         "categoryEn": "Health & the body",
         "forms": [
           "자기"
-        ]
+        ],
+        "example": "나나, 어제 잘 못 잤어?"
       },
       {
         "ko": "숙면",
@@ -1477,21 +1599,24 @@
         "categoryEn": "Health & the body",
         "forms": [
           "푹 잘"
-        ]
+        ],
+        "example": "바나나를 꿀과 함께 먹으면 잠을 푹 잘 수 있다."
       },
       {
         "ko": "불안감",
         "en": "anxiety, a feeling of unease",
         "hint": "😰",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "바나나는 자기 전에 먹어야 불안감에도 효과가 있다."
       },
       {
         "ko": "효과",
         "en": "an effect",
         "hint": "✨",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "바나나는 자기 전에 먹어야 불안감에도 효과가 있다."
       },
       {
         "ko": "도움이 되다",
@@ -1521,7 +1646,8 @@
         "categoryEn": "Health & the body",
         "forms": [
           "속이"
-        ]
+        ],
+        "example": "피서객들이 더위 속에서 쓰레기를 치우기 위해 애쓰고 있다."
       },
       {
         "ko": "불편하다",
@@ -1531,7 +1657,8 @@
         "categoryEn": "Health & the body",
         "forms": [
           "불편한"
-        ]
+        ],
+        "example": "바나나를 먹을 때 속이 불편한 사람은 꿀과 함께 먹는 게 좋다."
       },
       {
         "ko": "사르르",
@@ -1545,7 +1672,8 @@
         "en": "together with",
         "hint": "🤝",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "바나나를 꿀과 함께 먹으면 잠을 푹 잘 수 있다."
       },
       {
         "ko": "-게 해 주다",
@@ -1613,7 +1741,8 @@
         "en": "a bookshop",
         "hint": "🏬",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "'행복 열차'라는 책이 서점에서 이번 달까지만 판매된다."
       },
       {
         "ko": "서점가",
@@ -1631,28 +1760,32 @@
         "forms": [
           "책이",
           "책을"
-        ]
+        ],
+        "example": "현재 '행복 열차'라는 책이 큰 인기를 얻고 있다."
       },
       {
         "ko": "행복",
         "en": "happiness",
         "hint": "🍀",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "현재 '행복 열차'라는 책이 큰 인기를 얻고 있다."
       },
       {
         "ko": "열차",
         "en": "a train",
         "hint": "🚄",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "현재 '행복 열차'라는 책이 큰 인기를 얻고 있다."
       },
       {
         "ko": "행복 열차",
         "en": "'Happiness Train' — the name of the book, which is why it is in quotes",
         "hint": "📗",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "현재 '행복 열차'라는 책이 큰 인기를 얻고 있다."
       },
       {
         "ko": "읽다",
@@ -1662,7 +1795,8 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "읽고"
-        ]
+        ],
+        "example": "서점에 가면 '행복 열차'라는 책을 읽고 있는 사람들이 많다."
       },
       {
         "ko": "큰 인기를 얻다",
@@ -1672,7 +1806,8 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "큰 인기를 얻고"
-        ]
+        ],
+        "example": "현재 '행복 열차'라는 책이 큰 인기를 얻고 있다."
       },
       {
         "ko": "10만 부나",
@@ -1706,7 +1841,8 @@
         "en": "running a service",
         "hint": "🚉",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "최근 '행복'이라는 이름의 열차가 운행을 시작했다."
       },
       {
         "ko": "-앓이",
@@ -1723,28 +1859,32 @@
         "en": "now",
         "hint": "⌚",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "오전에는 비가 많이 오더니 지금은 날씨가 맑게 개었다."
       },
       {
         "ko": "현재",
         "en": "at present — the written form of 지금",
         "hint": "📅",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "현재 '행복 열차'라는 책이 큰 인기를 얻고 있다."
       },
       {
         "ko": "최근",
         "en": "recently",
         "hint": "🕐",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "최근 '행복'이라는 이름의 열차가 운행을 시작했다."
       },
       {
         "ko": "이름",
         "en": "a name",
         "hint": "🏷️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "최근 '행복'이라는 이름의 열차가 운행을 시작했다."
       },
       {
         "ko": "시작하다",
@@ -1754,7 +1894,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "시작했다"
-        ]
+        ],
+        "example": "젊은 때 저축을 시작해서 24년 정도 하는 게 좋다."
       },
       {
         "ko": "가다",
@@ -1765,7 +1906,8 @@
         "forms": [
           "가면",
           "가서"
-        ]
+        ],
+        "example": "봉사자 신청은 도서관에 직접 가서 해야 한다."
       },
       {
         "ko": "많다",
@@ -1775,7 +1917,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "많아서"
-        ]
+        ],
+        "example": "이 포장재에는 미세한 구멍이 많다."
       },
       {
         "ko": "한 달 새",
@@ -1789,7 +1932,8 @@
         "en": "this month",
         "hint": "🗓️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "'행복 열차'라는 책이 서점에서 이번 달까지만 판매된다."
       },
       {
         "ko": "N(이)라는",
@@ -1816,7 +1960,8 @@
         "en": "the weather",
         "hint": "🌤️",
         "category": "날씨",
-        "categoryEn": "Weather & seasons"
+        "categoryEn": "Weather & seasons",
+        "example": "날씨가 추워지자 재래시장을 직접 찾는 손님들이 줄었다."
       },
       {
         "ko": "비가 오다",
@@ -1826,7 +1971,8 @@
         "categoryEn": "Weather & seasons",
         "forms": [
           "비가"
-        ]
+        ],
+        "example": "아침에는 비가 왔어요. 지금은 안 와요."
       },
       {
         "ko": "맑다",
@@ -1836,7 +1982,8 @@
         "categoryEn": "Weather & seasons",
         "forms": [
           "맑게"
-        ]
+        ],
+        "example": "오전에는 비가 많이 오더니 지금은 날씨가 맑게 개었다."
       },
       {
         "ko": "개다",
@@ -1853,7 +2000,8 @@
         "en": "the morning, before noon",
         "hint": "🌅",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "오전에는 비가 많이 오더니 지금은 날씨가 맑게 개었다."
       },
       {
         "ko": "-더니",
@@ -1905,7 +2053,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "피곤하니까"
-        ]
+        ],
+        "example": "수민이는 \"너무 피곤하니까 오늘은 일찍 집에 가서 쉬어야지!\" 하고 말했다."
       },
       {
         "ko": "쉬다",
@@ -1919,21 +2068,24 @@
         "en": "early",
         "hint": "🌄",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "수민이는 \"너무 피곤하니까 오늘은 일찍 집에 가서 쉬어야지!\" 하고 말했다."
       },
       {
         "ko": "너무",
         "en": "too, far too",
         "hint": "🔺",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "피서지에 가도 날씨가 너무 덥기 때문에 편하게 쉴 수 없다."
       },
       {
         "ko": "오늘",
         "en": "today",
         "hint": "📆",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "수민이는 \"너무 피곤하니까 오늘은 일찍 집에 가서 쉬어야지!\" 하고 말했다."
       },
       {
         "ko": "집",
@@ -1943,7 +2095,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "집에"
-        ]
+        ],
+        "example": "수민이는 \"너무 피곤하니까 오늘은 일찍 집에 가서 쉬어야지!\" 하고 말했다."
       },
       {
         "ko": "-아/어야지",
@@ -2000,14 +2153,16 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "하고 말했다"
-        ]
+        ],
+        "example": "수민이는 \"너무 피곤하니까 오늘은 일찍 집에 가서 쉬어야지!\" 하고 말했다."
       },
       {
         "ko": "취업 준비생",
         "en": "someone preparing to enter the job market",
         "hint": "💼",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "취업 준비생의 70% 이상이 면접시험 준비를 할 때 외모로 말미암아 고민해 본 적이 있다고 말했다."
       },
       {
         "ko": "이상",
@@ -2023,7 +2178,8 @@
         "en": "a job interview",
         "hint": "🎙️",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "취업 준비생의 70% 이상이 면접시험 준비를 할 때 외모로 말미암아 고민해 본 적이 있다고 말했다."
       },
       {
         "ko": "준비",
@@ -2033,7 +2189,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "준비를"
-        ]
+        ],
+        "example": "인주시가 관광객 유치를 위해 TV 프로그램 홍보 방송을 준비하고 있다."
       },
       {
         "ko": "고민하다",
@@ -2043,7 +2200,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "고민해"
-        ]
+        ],
+        "example": "취업 준비생의 70% 이상이 면접시험 준비를 할 때 외모로 말미암아 고민해 본 적이 있다고 말했다."
       },
       {
         "ko": "N(으)로 말미암아",
@@ -2081,7 +2239,8 @@
         "en": "the exam period",
         "hint": "📅",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "시험 기간 동안 공부하는 학생이 많아서 도서관에 밤새도록 불을 켜 두었다."
       },
       {
         "ko": "공부하다",
@@ -2091,28 +2250,32 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "공부하는"
-        ]
+        ],
+        "example": "시험 기간 동안 공부하는 학생이 많아서 도서관에 밤새도록 불을 켜 두었다."
       },
       {
         "ko": "학생",
         "en": "a student",
         "hint": "🎓",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "학생이 아닌 사람들도 이 봉사에 참여할 수 있다."
       },
       {
         "ko": "도서관",
         "en": "a library",
         "hint": "📚",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "봉사자 신청은 도서관에 직접 가서 해야 한다."
       },
       {
         "ko": "밤새도록",
         "en": "all night long",
         "hint": "🌙",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "시험 기간 동안 공부하는 학생이 많아서 도서관에 밤새도록 불을 켜 두었다."
       },
       {
         "ko": "불을 켜다",
@@ -2168,7 +2331,8 @@
         "en": "a person without a disability",
         "hint": "🧍",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "비장애인도 쉽지 ( ) 불편한 몸으로 높은 산에 오르다니 정말 대단한 사람이다."
       },
       {
         "ko": "쉽지 않다",
@@ -2178,7 +2342,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "쉽지"
-        ]
+        ],
+        "example": "재래시장은 출입구가 여러 곳에 있어 찾기가 쉽지 않다."
       },
       {
         "ko": "몸",
@@ -2188,7 +2353,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "몸으로"
-        ]
+        ],
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "높다",
@@ -2198,7 +2364,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "높은"
-        ]
+        ],
+        "example": "사회적 지위가 높은 남자들이 외모에 관심을 많이 갖는다."
       },
       {
         "ko": "산",
@@ -2209,14 +2376,16 @@
         "forms": [
           "산에",
           "산이"
-        ]
+        ],
+        "example": "한 등산객이 산 정상에 쓰러져 있었다."
       },
       {
         "ko": "정말",
         "en": "really, truly",
         "hint": "💯",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "비장애인도 쉽지 ( ) 불편한 몸으로 높은 산에 오르다니 정말 대단한 사람이다."
       },
       {
         "ko": "대단하다",
@@ -2226,7 +2395,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "대단한"
-        ]
+        ],
+        "example": "비장애인도 쉽지 ( ) 불편한 몸으로 높은 산에 오르다니 정말 대단한 사람이다."
       },
       {
         "ko": "-(으)ㄹ 텐데",
@@ -2284,14 +2454,16 @@
         "en": "from now on",
         "hint": "➡️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "앞으로 날씨가 따뜻해지면서 산이 점점 푸르게 변해 갈 것이다."
       },
       {
         "ko": "점점",
         "en": "little by little",
         "hint": "🐢",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "앞으로 날씨가 따뜻해지면서 산이 점점 푸르게 변해 갈 것이다."
       },
       {
         "ko": "따뜻해지다",
@@ -2301,7 +2473,8 @@
         "categoryEn": "Weather & seasons",
         "forms": [
           "따뜻해지면서"
-        ]
+        ],
+        "example": "앞으로 날씨가 따뜻해지면서 산이 점점 푸르게 변해 갈 것이다."
       },
       {
         "ko": "푸르다",
@@ -2311,14 +2484,16 @@
         "categoryEn": "Weather & seasons",
         "forms": [
           "푸르게"
-        ]
+        ],
+        "example": "앞으로 날씨가 따뜻해지면서 산이 점점 푸르게 변해 갈 것이다."
       },
       {
         "ko": "변하다",
         "en": "to change, to turn into something else",
         "hint": "🔄",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "앞으로 날씨가 따뜻해지면서 산이 점점 푸르게 변해 갈 것이다."
       },
       {
         "ko": "-아/어 가다",
@@ -2366,14 +2541,16 @@
         "en": "the entrance exam a company sets",
         "hint": "🏢",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "친구가 입사 시험에 합격하게 엿과 떡을 선물로 주었다."
       },
       {
         "ko": "합격하다",
         "en": "to pass an exam, to get in",
         "hint": "🎉",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "친구가 입사 시험에 합격하게 엿과 떡을 선물로 주었다."
       },
       {
         "ko": "엿",
@@ -2383,7 +2560,8 @@
         "categoryEn": "Food & eating",
         "forms": [
           "엿과"
-        ]
+        ],
+        "example": "친구가 입사 시험에 합격하게 엿과 떡을 선물로 주었다."
       },
       {
         "ko": "떡",
@@ -2393,7 +2571,8 @@
         "categoryEn": "Food & eating",
         "forms": [
           "떡을"
-        ]
+        ],
+        "example": "친구가 입사 시험에 합격하게 엿과 떡을 선물로 주었다."
       },
       {
         "ko": "선물",
@@ -2403,7 +2582,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "선물로"
-        ]
+        ],
+        "example": "친구가 입사 시험에 합격하게 엿과 떡을 선물로 주었다."
       },
       {
         "ko": "주다",
@@ -2413,7 +2593,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "주었다"
-        ]
+        ],
+        "example": "어제 지갑을 잃어버렸을 때 친구가 같이 찾아 줬어요."
       },
       {
         "ko": "-도록",
@@ -2474,28 +2655,32 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "나라의"
-        ]
+        ],
+        "example": "한 나라의 미래는 그 나라의 교육 정책에 달려 있다."
       },
       {
         "ko": "미래",
         "en": "the future",
         "hint": "⏳",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "한 나라의 미래는 그 나라의 교육 정책에 달려 있다."
       },
       {
         "ko": "교육",
         "en": "education",
         "hint": "🏫",
         "category": "정치",
-        "categoryEn": "Politics & government"
+        "categoryEn": "Politics & government",
+        "example": "한 나라의 미래는 그 나라의 교육 정책에 달려 있다."
       },
       {
         "ko": "교육 정책",
         "en": "education policy",
         "hint": "📜",
         "category": "정치",
-        "categoryEn": "Politics & government"
+        "categoryEn": "Politics & government",
+        "example": "한 나라의 미래는 그 나라의 교육 정책에 달려 있다."
       },
       {
         "ko": "달라지다",
@@ -2505,7 +2690,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "달라진다"
-        ]
+        ],
+        "example": "서울이 어떻게 달라졌습니까?"
       },
       {
         "ko": "되다",
@@ -2515,7 +2701,9 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "되었다"
-        ]
+        ],
+        "example": "집세는 어떻게 돼요?",
+        "exampleEn": "What's the rent?"
       },
       {
         "ko": "N에 달려 있다",
@@ -2532,28 +2720,32 @@
         "en": "this year",
         "hint": "📅",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "올해는 과일 생산량이 늘어서인지 대체적으로 과일 가격이 내렸다."
       },
       {
         "ko": "과일",
         "en": "fruit",
         "hint": "🍎",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "올해는 과일 생산량이 늘어서인지 대체적으로 과일 가격이 내렸다."
       },
       {
         "ko": "생산량",
         "en": "output, how much is produced",
         "hint": "🏭",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "올해는 과일 생산량이 늘어서인지 대체적으로 과일 가격이 내렸다."
       },
       {
         "ko": "대체적으로",
         "en": "on the whole, broadly speaking",
         "hint": "📊",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "올해는 과일 생산량이 늘어서인지 대체적으로 과일 가격이 내렸다."
       },
       {
         "ko": "가격",
@@ -2563,7 +2755,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "가격이"
-        ]
+        ],
+        "example": "올해는 과일 생산량이 늘어서인지 대체적으로 과일 가격이 내렸다."
       },
       {
         "ko": "내리다",
@@ -2573,7 +2766,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "내렸다"
-        ]
+        ],
+        "example": "올해는 과일 생산량이 늘어서인지 대체적으로 과일 가격이 내렸다."
       },
       {
         "ko": "-(ㄴ/는)다면",
@@ -2613,35 +2807,40 @@
         "categoryEn": "Health & the body",
         "forms": [
           "의사는"
-        ]
+        ],
+        "example": "의사는 위염 환자에게 식사량을 ( )."
       },
       {
         "ko": "위염",
         "en": "gastritis, an inflamed stomach",
         "hint": "🔥",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "의사는 위염 환자에게 식사량을 ( )."
       },
       {
         "ko": "환자",
         "en": "a patient",
         "hint": "🤕",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "의사는 위염 환자에게 식사량을 ( )."
       },
       {
         "ko": "식사량",
         "en": "how much one eats",
         "hint": "🍚",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "의사는 위염 환자에게 식사량을 ( )."
       },
       {
         "ko": "조절하다",
         "en": "to regulate, to keep something in check",
         "hint": "🎚️",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "의사는 위염 환자에게 식사량을 조절하게 했다."
       },
       {
         "ko": "N에게",
@@ -2671,14 +2870,16 @@
         "categoryEn": "Nature & the seasons",
         "forms": [
           "꽃병에"
-        ]
+        ],
+        "example": "꽃병에 개나리 꽃을 꽂아 가지고 책상 위에 놓으니 봄이 온 것 같다."
       },
       {
         "ko": "개나리",
         "en": "forsythia — the yellow shrub that opens first in spring",
         "hint": "🌼",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "꽃병에 개나리 꽃을 꽂아 가지고 책상 위에 놓으니 봄이 온 것 같다."
       },
       {
         "ko": "꽃",
@@ -2688,14 +2889,16 @@
         "categoryEn": "Nature & the seasons",
         "forms": [
           "꽃을"
-        ]
+        ],
+        "example": "꽃병에 개나리 꽃을 꽂아 가지고 책상 위에 놓으니 봄이 온 것 같다."
       },
       {
         "ko": "꽂다",
         "en": "to stand something upright in, to stick in",
         "hint": "📌",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "꽃병에 개나리 꽃을 꽂아 가지고 책상 위에 놓으니 봄이 온 것 같다."
       },
       {
         "ko": "책상",
@@ -2705,7 +2908,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "책상 위"
-        ]
+        ],
+        "example": "꽃병에 개나리 꽃을 꽂아 가지고 책상 위에 놓으니 봄이 온 것 같다."
       },
       {
         "ko": "놓다",
@@ -2715,7 +2919,9 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "놓으니"
-        ]
+        ],
+        "example": "네, 저도 시간 내서 한번 가 볼게요.",
+        "exampleEn": "Sure, I'll make time and give it a go."
       },
       {
         "ko": "봄",
@@ -2725,7 +2931,8 @@
         "categoryEn": "Nature & the seasons",
         "forms": [
           "봄이"
-        ]
+        ],
+        "example": "꽃병에 개나리 꽃을 꽂아 가지고 책상 위에 놓으니 봄이 온 것 같다."
       },
       {
         "ko": "-아/어다가",
@@ -2775,14 +2982,16 @@
         "categoryEn": "Politics & government",
         "forms": [
           "국가의"
-        ]
+        ],
+        "example": "정부의 노력에도 불구하고 국가의 경제 상황이 나아지지 않는 것이 안타까울 뿐이다."
       },
       {
         "ko": "상황",
         "en": "the situation",
         "hint": "📊",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "정부의 노력에도 불구하고 국가의 경제 상황이 나아지지 않는 것이 안타까울 뿐이다."
       },
       {
         "ko": "나아지다",
@@ -2792,7 +3001,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "나아지지"
-        ]
+        ],
+        "example": "정부의 노력에도 불구하고 국가의 경제 상황이 나아지지 않는 것이 안타까울 뿐이다."
       },
       {
         "ko": "안타깝다",
@@ -2802,7 +3012,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "안타까울"
-        ]
+        ],
+        "example": "정부의 노력에도 불구하고 국가의 경제 상황이 나아지지 않는 것이 안타까울 뿐이다."
       },
       {
         "ko": "-(으)ㄹ 따름이다",
@@ -2853,7 +3064,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "행동을"
-        ]
+        ],
+        "example": "그의 행동을 보면 그는 믿으려야 믿을 수가 없는 사람이다."
       },
       {
         "ko": "간호하다",
@@ -2863,7 +3075,8 @@
         "categoryEn": "Health & the body",
         "forms": [
           "간호해 주시는"
-        ]
+        ],
+        "example": "나를 간호해 주시는 어머니의 손에서 사랑이 느껴졌다."
       },
       {
         "ko": "어머니",
@@ -2873,7 +3086,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "어머니의"
-        ]
+        ],
+        "example": "나를 간호해 주시는 어머니의 손에서 사랑이 느껴졌다."
       },
       {
         "ko": "손",
@@ -2883,7 +3097,8 @@
         "categoryEn": "Health & the body",
         "forms": [
           "손에서"
-        ]
+        ],
+        "example": "나를 간호해 주시는 어머니의 손에서 사랑이 느껴졌다."
       },
       {
         "ko": "사랑",
@@ -2893,14 +3108,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "사랑이"
-        ]
+        ],
+        "example": "나를 간호해 주시는 어머니의 손에서 사랑이 느껴졌다."
       },
       {
         "ko": "느끼다",
         "en": "to feel something — the active one, taking 을/를",
         "hint": "🫱",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다."
       },
       {
         "ko": "느껴지다",
@@ -2910,7 +3127,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "느껴졌다"
-        ]
+        ],
+        "example": "나를 간호해 주시는 어머니의 손에서 사랑이 느껴졌다."
       },
       {
         "ko": "-(으)려야 -(으)ㄹ 수 없다",
@@ -2960,14 +3178,16 @@
         "categoryEn": "Politics & government",
         "forms": [
           "대학교에"
-        ]
+        ],
+        "example": "한국의 대학교에 입학하기 위해서 한국으로 오는 유학생들이 날로 증가하고 있다."
       },
       {
         "ko": "입학하다",
         "en": "to enter a school, to be admitted",
         "hint": "🎒",
         "category": "정치",
-        "categoryEn": "Politics & government"
+        "categoryEn": "Politics & government",
+        "example": "한국의 대학교에 입학하고자 한국으로 오는 유학생들이 날로 증가하고 있다."
       },
       {
         "ko": "유학생",
@@ -2977,14 +3197,16 @@
         "categoryEn": "Politics & government",
         "forms": [
           "유학생들"
-        ]
+        ],
+        "example": "한국의 대학교에 입학하기 위해서 한국으로 오는 유학생들이 날로 증가하고 있다."
       },
       {
         "ko": "날로",
         "en": "day by day, more so every day",
         "hint": "📈",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "한국의 대학교에 입학하기 위해서 한국으로 오는 유학생들이 날로 증가하고 있다."
       },
       {
         "ko": "증가하다",
@@ -2994,7 +3216,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "증가하고"
-        ]
+        ],
+        "example": "한국의 대학교에 입학하기 위해서 한국으로 오는 유학생들이 날로 증가하고 있다."
       },
       {
         "ko": "한국",
@@ -3005,7 +3228,8 @@
         "forms": [
           "한국의",
           "한국으로"
-        ]
+        ],
+        "example": "신비 복숭아는 2017년에 한국에 처음 소개된 여름 과일이다."
       },
       {
         "ko": "-고자",
@@ -3053,14 +3277,16 @@
         "en": "whatever the task, no matter what it is",
         "hint": "🗂️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "무슨 일이든 처음 시작할 때는 힘들기 마련이다."
       },
       {
         "ko": "처음",
         "en": "the first time, the beginning",
         "hint": "1️⃣",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "무슨 일이든 처음 시작할 때는 힘들기 마련이다."
       },
       {
         "ko": "힘들다",
@@ -3070,7 +3296,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "힘든"
-        ]
+        ],
+        "example": "무슨 일이든 처음 시작할 때는 힘든 법이다."
       },
       {
         "ko": "-(으)ㄴ/는 법이다",
@@ -3127,21 +3354,24 @@
         "en": "an older person",
         "hint": "🧓",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "노인 취업에 대한 설문 조사에서 건강이 허락하는 한 계속 일하고 싶다는 응답이 과반수를 넘었다."
       },
       {
         "ko": "취업",
         "en": "getting work, employment",
         "hint": "💼",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "노인 취업에 대한 설문 조사에서 건강이 허락하는 한 계속 일하고 싶다는 응답이 과반수를 넘었다."
       },
       {
         "ko": "설문 조사",
         "en": "a survey",
         "hint": "📋",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "노인 취업에 대한 설문 조사에서 건강이 허락하는 한 계속 일하고 싶다는 응답이 과반수를 넘었다."
       },
       {
         "ko": "건강",
@@ -3151,14 +3381,16 @@
         "categoryEn": "Health & the body",
         "forms": [
           "건강이"
-        ]
+        ],
+        "example": "병원으로 이송된 여성은 치료를 받고 건강을 되찾았다."
       },
       {
         "ko": "허락하다",
         "en": "to permit, to allow",
         "hint": "👍",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "노인 취업에 대한 설문 조사에서 건강이 허락하는 한 계속 일하고 싶다는 응답이 과반수를 넘었다."
       },
       {
         "ko": "일하다",
@@ -3168,7 +3400,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "일하고"
-        ]
+        ],
+        "example": "노인 취업에 대한 설문 조사에서 건강이 허락하는 한 계속 일하고 싶다는 응답이 과반수를 넘었다."
       },
       {
         "ko": "응답",
@@ -3178,7 +3411,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "응답이"
-        ]
+        ],
+        "example": "회사의 규모가 중요하다고 응답한 비율이 가장 낮다."
       },
       {
         "ko": "과반수",
@@ -3188,7 +3422,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "과반수를"
-        ]
+        ],
+        "example": "노인 취업에 대한 설문 조사에서 건강이 허락하는 한 계속 일하고 싶다는 응답이 과반수를 넘었다."
       },
       {
         "ko": "넘다",
@@ -3199,7 +3434,8 @@
         "forms": [
           "넘었다",
           "넘는다"
-        ]
+        ],
+        "example": "가격을 중요하게 생각하는 사람이 전체의 반을 넘는다."
       },
       {
         "ko": "N에 대한",
@@ -3575,14 +3811,16 @@
         "en": "a child — the formal word, the one notices use",
         "hint": "🧒",
         "category": "봉사·모집",
-        "categoryEn": "Volunteering & applications"
+        "categoryEn": "Volunteering & applications",
+        "example": "또 어린이 체험실에서는 향기 나는 우표의 향을 맡거나 나무 우표 등을 만져 볼 수 있다."
       },
       {
         "ko": "아이",
         "en": "a child — the everyday word",
         "hint": "👶",
         "category": "봉사·모집",
-        "categoryEn": "Volunteering & applications"
+        "categoryEn": "Volunteering & applications",
+        "example": "아이들에게 책을 읽어 줄 봉사자를 찾고 있다."
       },
       {
         "ko": "대학생",
@@ -3596,14 +3834,16 @@
         "en": "a volunteer — 자원봉사자 cut short",
         "hint": "🙋",
         "category": "봉사·모집",
-        "categoryEn": "Volunteering & applications"
+        "categoryEn": "Volunteering & applications",
+        "example": "아이들에게 책을 읽어 줄 봉사자를 찾고 있다."
       },
       {
         "ko": "신청",
         "en": "an application; putting your name down",
         "hint": "✍️",
         "category": "봉사·모집",
-        "categoryEn": "Volunteering & applications"
+        "categoryEn": "Volunteering & applications",
+        "example": "봉사자 신청은 도서관에 직접 가서 해야 한다."
       },
       {
         "ko": "모집 기간",
@@ -3631,14 +3871,17 @@
         "en": "a foreign national",
         "hint": "🌏",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "서울에 사는 외국인이 많아졌습니다."
       },
       {
         "ko": "한국어",
         "en": "the Korean language",
         "hint": "🗣️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "한국어를 잘 몰라서 실수한 적이 있어요?",
+        "exampleEn": "Have you ever made a mistake because your Korean let you down?"
       },
       {
         "ko": "선물하다",
@@ -3655,7 +3898,8 @@
         "en": "two months",
         "hint": "📆",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "봉사 활동은 두 달 동안 하게 된다."
       },
       {
         "ko": "-아/어 주다",
@@ -3682,14 +3926,16 @@
         "en": "a travel package sold by an agency",
         "hint": "🗺️",
         "category": "여행",
-        "categoryEn": "Travel & leisure"
+        "categoryEn": "Travel & leisure",
+        "example": "여행 상품의 다양성보다 회사의 규모를 중요하게 생각하는 사람이 더 적다."
       },
       {
         "ko": "이용 후기",
         "en": "customer reviews — what earlier users wrote",
         "hint": "📝",
         "category": "여행",
-        "categoryEn": "Travel & leisure"
+        "categoryEn": "Travel & leisure",
+        "example": "이용 후기가 여행 상품의 다양성보다 중요하다는 응답이 두 배 이상 많다."
       },
       {
         "ko": "선택하다",
@@ -3699,7 +3945,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "선택할"
-        ]
+        ],
+        "example": "원기둥을 선택하는 가장 큰 이유는 용기의 제작 비용을 줄이기 위해서이다."
       },
       {
         "ko": "중요하다",
@@ -3711,14 +3958,16 @@
           "중요하게",
           "중요하다고",
           "중요하다는"
-        ]
+        ],
+        "example": "가격을 중요하게 생각하는 사람이 전체의 반을 넘는다."
       },
       {
         "ko": "회사",
         "en": "a company",
         "hint": "🏢",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "회사의 규모가 중요하다고 응답한 비율이 가장 낮다."
       },
       {
         "ko": "성인",
@@ -3739,21 +3988,24 @@
         "en": "variety — how wide the range on offer is",
         "hint": "🎨",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "여행 상품의 다양성보다 회사의 규모를 중요하게 생각하는 사람이 더 적다."
       },
       {
         "ko": "적다",
         "en": "to be few in number",
         "hint": "📉",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "여행 상품의 다양성보다 회사의 규모를 중요하게 생각하는 사람이 더 적다."
       },
       {
         "ko": "가장",
         "en": "most — the superlative, and a claim about every other case",
         "hint": "🌟",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "젊은층을 비롯해서 저축률이 24년 만에 가장 낮게 나타났다."
       },
       {
         "ko": "기타",
@@ -3774,63 +4026,72 @@
         "en": "twice as many; double",
         "hint": "🧮",
         "category": "자료 해석",
-        "categoryEn": "Charts & data"
+        "categoryEn": "Charts & data",
+        "example": "이용 후기가 여행 상품의 다양성보다 중요하다는 응답이 두 배 이상 많다."
       },
       {
         "ko": "우표",
         "en": "a postage stamp",
         "hint": "📮",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "지난달 문을 연 우표 박물관이 시민들에게 사랑을 받고 있다."
       },
       {
         "ko": "박물관",
         "en": "a museum",
         "hint": "🏛️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "지난달 문을 연 우표 박물관이 시민들에게 사랑을 받고 있다."
       },
       {
         "ko": "역사",
         "en": "history",
         "hint": "📜",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "박물관 내 역사실에서는 우표의 역사를 한눈에 볼 수 있다."
       },
       {
         "ko": "역사실",
         "en": "the history room of a museum",
         "hint": "🖼️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "박물관 내 역사실에서는 우표의 역사를 한눈에 볼 수 있다."
       },
       {
         "ko": "체험실",
         "en": "a hands-on room where visitors try things for themselves",
         "hint": "✋",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "이 박물관의 체험실에 있는 우표는 만질 수 없다."
       },
       {
         "ko": "사진",
         "en": "a photograph",
         "hint": "📷",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "텔레비전에서는 실제 요리보다 사진이나 그림을 더 많이 보여준다."
       },
       {
         "ko": "편지",
         "en": "a letter",
         "hint": "✉️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "이 박물관의 느린 우체통으로는 편지를 보내지 못한다."
       },
       {
         "ko": "우체통",
         "en": "a postbox",
         "hint": "📪",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "이 박물관의 느린 우체통으로는 편지를 보내지 못한다."
       },
       {
         "ko": "인기를 끌다",
@@ -3840,28 +4101,32 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "인기를 끌고"
-        ]
+        ],
+        "example": "편지를 써서 넣으면 일 년 뒤에 받아 볼 수 있는 박물관의 ‘느린 우체통’도 인기를 끌고 있다."
       },
       {
         "ko": "지난달",
         "en": "last month",
         "hint": "📅",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "지난달 문을 연 우표 박물관이 시민들에게 사랑을 받고 있다."
       },
       {
         "ko": "일 년 뒤",
         "en": "a year later",
         "hint": "⏳",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "편지를 써서 넣으면 일 년 뒤에 받아 볼 수 있는 박물관의 ‘느린 우체통’도 인기를 끌고 있다."
       },
       {
         "ko": "일 년 전",
         "en": "a year ago",
         "hint": "🕰️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "이 박물관은 일 년 전부터 운영을 시작했다."
       },
       {
         "ko": "문을 열다",
@@ -3871,35 +4136,41 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "문을 연"
-        ]
+        ],
+        "example": "하지만 일요일에는 문을 열지 않습니다.",
+        "exampleEn": "On Sundays, though, it does not open."
       },
       {
         "ko": "운영",
         "en": "the running of a place",
         "hint": "⚙️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "이 박물관은 일 년 전부터 운영을 시작했다."
       },
       {
         "ko": "한눈에",
         "en": "in a single glance",
         "hint": "👁️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "박물관 내 역사실에서는 우표의 역사를 한눈에 볼 수 있다."
       },
       {
         "ko": "향기",
         "en": "a scent",
         "hint": "🌸",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "또 어린이 체험실에서는 향기 나는 우표의 향을 맡거나 나무 우표 등을 만져 볼 수 있다."
       },
       {
         "ko": "나무",
         "en": "wood; a tree",
         "hint": "🌳",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "또 어린이 체험실에서는 향기 나는 우표의 향을 맡거나 나무 우표 등을 만져 볼 수 있다."
       },
       {
         "ko": "받다",
@@ -3910,7 +4181,8 @@
         "forms": [
           "받고",
           "받아"
-        ]
+        ],
+        "example": "지난달 문을 연 우표 박물관이 시민들에게 사랑을 받고 있다."
       },
       {
         "ko": "맡다",
@@ -3920,7 +4192,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "맡거나"
-        ]
+        ],
+        "example": "또 어린이 체험실에서는 향기 나는 우표의 향을 맡거나 나무 우표 등을 만져 볼 수 있다."
       },
       {
         "ko": "만지다",
@@ -3931,7 +4204,8 @@
         "forms": [
           "만져",
           "만질"
-        ]
+        ],
+        "example": "이 박물관의 체험실에 있는 우표는 만질 수 없다."
       },
       {
         "ko": "들어가다",
@@ -3941,7 +4215,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "들어간"
-        ]
+        ],
+        "example": "그래서 비가 오면 빗물이 지하로 잘 흘러 들어가지 못해 지하수가 부족해지고 도로가 물에 잠기는 일도 자주 발생한다."
       },
       {
         "ko": "만들다",
@@ -3953,7 +4228,8 @@
           "만들",
           "만들어",
           "만드는"
-        ]
+        ],
+        "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
       },
       {
         "ko": "쓰다",
@@ -3963,7 +4239,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "써서"
-        ]
+        ],
+        "example": "편지를 써서 넣으면 일 년 뒤에 받아 볼 수 있는 박물관의 ‘느린 우체통’도 인기를 끌고 있다."
       },
       {
         "ko": "보내다",
@@ -3973,7 +4250,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "보내지"
-        ]
+        ],
+        "example": "이 박물관의 느린 우체통으로는 편지를 보내지 못한다."
       },
       {
         "ko": "느리다",
@@ -3983,56 +4261,64 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "느린"
-        ]
+        ],
+        "example": "이 박물관의 느린 우체통으로는 편지를 보내지 못한다."
       },
       {
         "ko": "휴일",
         "en": "a day off, a public holiday",
         "hint": "🏖️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "휴일에 산을 오르던 경찰이 등산객을 구조했다."
       },
       {
         "ko": "경찰",
         "en": "the police",
         "hint": "👮",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "휴일에 산을 오르던 경찰이 등산객을 구조했다."
       },
       {
         "ko": "경위",
         "en": "a police lieutenant — the rank the name is followed by",
         "hint": "🎖️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "김 경위는 대피소까지 차량으로 이동했다."
       },
       {
         "ko": "등산객",
         "en": "a hiker",
         "hint": "🥾",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "한 등산객이 산 정상에 쓰러져 있었다."
       },
       {
         "ko": "정상",
         "en": "the summit of a mountain",
         "hint": "⛰️",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "한 등산객이 산 정상에 쓰러져 있었다."
       },
       {
         "ko": "중턱",
         "en": "halfway up a mountain",
         "hint": "🏞️",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "이후 김 경위는 구조대 차량이 올 수 있는 산 중턱 대피소까지 여성을 업고 뛰어 내려갔다."
       },
       {
         "ko": "대피소",
         "en": "a shelter",
         "hint": "🛖",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "김 경위는 대피소까지 차량으로 이동했다."
       },
       {
         "ko": "구조하다",
@@ -4042,21 +4328,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "구조했다"
-        ]
+        ],
+        "example": "휴일에 산을 오르던 경찰이 등산객을 구조했다."
       },
       {
         "ko": "구조대",
         "en": "a rescue team",
         "hint": "🚨",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "구조대가 등산객을 업고 병원으로 뛰어갔다."
       },
       {
         "ko": "여성",
         "en": "a woman",
         "hint": "🙋",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "병원으로 이송된 여성은 치료를 받고 건강을 되찾았다."
       },
       {
         "ko": "쓰러지다",
@@ -4066,7 +4355,8 @@
         "categoryEn": "Health & the body",
         "forms": [
           "쓰러져"
-        ]
+        ],
+        "example": "한 등산객이 산 정상에 쓰러져 있었다."
       },
       {
         "ko": "발견하다",
@@ -4076,21 +4366,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "발견했다"
-        ]
+        ],
+        "example": "지난 1일 김민수 경위는 인주산 정상에서 한 여성이 쓰러져 있는 것을 발견했다."
       },
       {
         "ko": "체온",
         "en": "body temperature",
         "hint": "🌡️",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "김 경위는 바로 여성의 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 119에 신고했다."
       },
       {
         "ko": "겉옷",
         "en": "an outer coat",
         "hint": "🧥",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "김 경위는 바로 여성의 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 119에 신고했다."
       },
       {
         "ko": "벗다",
@@ -4110,7 +4403,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "덮어"
-        ]
+        ],
+        "example": "김 경위는 바로 여성의 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 119에 신고했다."
       },
       {
         "ko": "신고하다",
@@ -4121,21 +4415,24 @@
         "forms": [
           "신고했다",
           "신고를"
-        ]
+        ],
+        "example": "김 경위는 바로 여성의 체온이 떨어지지 않게 겉옷을 벗어서 덮어 주고 119에 신고했다."
       },
       {
         "ko": "이후",
         "en": "after that, from then on",
         "hint": "➡️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "이후 김 경위는 구조대 차량이 올 수 있는 산 중턱 대피소까지 여성을 업고 뛰어 내려갔다."
       },
       {
         "ko": "차량",
         "en": "a vehicle",
         "hint": "🚐",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "김 경위는 대피소까지 차량으로 이동했다."
       },
       {
         "ko": "업다",
@@ -4145,7 +4442,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "업고"
-        ]
+        ],
+        "example": "구조대가 등산객을 업고 병원으로 뛰어갔다."
       },
       {
         "ko": "뛰다",
@@ -4165,14 +4463,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "내려갔다"
-        ]
+        ],
+        "example": "이후 김 경위는 구조대 차량이 올 수 있는 산 중턱 대피소까지 여성을 업고 뛰어 내려갔다."
       },
       {
         "ko": "병원",
         "en": "a hospital",
         "hint": "🏥",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "구조대가 등산객을 업고 병원으로 뛰어갔다."
       },
       {
         "ko": "이송되다",
@@ -4182,14 +4482,16 @@
         "categoryEn": "Health & the body",
         "forms": [
           "이송된"
-        ]
+        ],
+        "example": "병원으로 이송된 여성은 치료를 받고 건강을 되찾았다."
       },
       {
         "ko": "치료",
         "en": "medical treatment",
         "hint": "💊",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "병원으로 이송된 여성은 치료를 받고 건강을 되찾았다."
       },
       {
         "ko": "되찾다",
@@ -4199,7 +4501,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "되찾았다"
-        ]
+        ],
+        "example": "병원으로 이송된 여성은 치료를 받고 건강을 되찾았다."
       },
       {
         "ko": "이동하다",
@@ -4209,28 +4512,32 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "이동했다"
-        ]
+        ],
+        "example": "김 경위는 대피소까지 차량으로 이동했다."
       },
       {
         "ko": "복숭아",
         "en": "a peach",
         "hint": "🍑",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "신비 복숭아는 2017년에 한국에 처음 소개된 여름 과일이다."
       },
       {
         "ko": "껍질",
         "en": "the skin of a fruit",
         "hint": "🍊",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "그래서 껍질째 먹기도 편하고 딱딱하지 않아서 식감도 좋다."
       },
       {
         "ko": "껍질째",
         "en": "skin and all, without peeling it",
         "hint": "🍏",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "그래서 껍질째 먹기도 편하고 딱딱하지 않아서 식감도 좋다."
       },
       {
         "ko": "딱딱하다",
@@ -4240,14 +4547,16 @@
         "categoryEn": "Food & eating",
         "forms": [
           "딱딱하지"
-        ]
+        ],
+        "example": "그래서 껍질째 먹기도 편하고 딱딱하지 않아서 식감도 좋다."
       },
       {
         "ko": "식감",
         "en": "mouthfeel, the texture of a food",
         "hint": "😋",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "그래서 껍질째 먹기도 편하고 딱딱하지 않아서 식감도 좋다."
       },
       {
         "ko": "얇다",
@@ -4257,7 +4566,8 @@
         "categoryEn": "Food & eating",
         "forms": [
           "얇은"
-        ]
+        ],
+        "example": "껍질이 얇은 복숭아와 속이 부드러운 복숭아의 장점을 결합해 만들었다."
       },
       {
         "ko": "부드럽다",
@@ -4267,7 +4577,8 @@
         "categoryEn": "Food & eating",
         "forms": [
           "부드러운"
-        ]
+        ],
+        "example": "껍질이 얇은 복숭아와 속이 부드러운 복숭아의 장점을 결합해 만들었다."
       },
       {
         "ko": "소개되다",
@@ -4277,7 +4588,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "소개된"
-        ]
+        ],
+        "example": "신비 복숭아는 2017년에 한국에 처음 소개된 여름 과일이다."
       },
       {
         "ko": "N에 비해",
@@ -4297,21 +4609,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "이른"
-        ]
+        ],
+        "example": "사람들은 보통 식후에 바로 이를 닦는다."
       },
       {
         "ko": "시기",
         "en": "a time of year, a period",
         "hint": "🗓️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "다른 복숭아에 비해 이른 시기에 먹을 수 있다는 것도 장점이다."
       },
       {
         "ko": "장점",
         "en": "a strong point, an advantage",
         "hint": "🎁",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "다른 복숭아에 비해 이른 시기에 먹을 수 있다는 것도 장점이다."
       },
       {
         "ko": "결합하다",
@@ -4321,7 +4636,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "결합해"
-        ]
+        ],
+        "example": "껍질이 얇은 복숭아와 속이 부드러운 복숭아의 장점을 결합해 만들었다."
       },
       {
         "ko": "감기에 걸리다",
@@ -4331,21 +4647,24 @@
         "categoryEn": "Health & the body",
         "forms": [
           "감기에 걸려"
-        ]
+        ],
+        "example": "아이가 감기에 걸려 밤새 큰 소리로 울었다."
       },
       {
         "ko": "밤새",
         "en": "the whole night through — the bare form of 밤새도록",
         "hint": "🕯️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "아이가 감기에 걸려 밤새 큰 소리로 울었다."
       },
       {
         "ko": "소리",
         "en": "a sound",
         "hint": "👂",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "아이가 감기에 걸려 밤새 큰 소리로 울었다."
       },
       {
         "ko": "울다",
@@ -4356,21 +4675,24 @@
         "forms": [
           "울었다",
           "우는"
-        ]
+        ],
+        "example": "아이가 감기에 걸려 밤새 큰 소리로 울었다."
       },
       {
         "ko": "울음소리",
         "en": "the sound of crying",
         "hint": "📣",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "나는 우는 아이를 달래면서도 울음소리에 이웃들이 깰까 봐 걱정했다."
       },
       {
         "ko": "아주머니",
         "en": "a middle-aged woman, ma’am",
         "hint": "🧍",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "아주머니는 아이가 많이 아팠냐며 오히려 걱정해 주셨다."
       },
       {
         "ko": "아프다",
@@ -4380,14 +4702,16 @@
         "categoryEn": "Health & the body",
         "forms": [
           "아팠냐며"
-        ]
+        ],
+        "example": "아주머니는 아이가 많이 아팠냐며 오히려 걱정해 주셨다."
       },
       {
         "ko": "오히려",
         "en": "on the contrary, if anything",
         "hint": "💥",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "아주머니는 아이가 많이 아팠냐며 오히려 걱정해 주셨다."
       },
       {
         "ko": "걱정하다",
@@ -4398,14 +4722,16 @@
         "forms": [
           "걱정해",
           "걱정했다"
-        ]
+        ],
+        "example": "아주머니는 아이가 많이 아팠냐며 오히려 걱정해 주셨다."
       },
       {
         "ko": "아침",
         "en": "the morning",
         "hint": "💡",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "아침에 아이와 병원에 가려고 집을 나서다 옆집 아주머니를 만났다."
       },
       {
         "ko": "나서다",
@@ -4415,14 +4741,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "나섰다"
-        ]
+        ],
+        "example": "아침에 아이와 병원에 가려고 집을 나서다 옆집 아주머니를 만났다."
       },
       {
         "ko": "옆집",
         "en": "the house next door",
         "hint": "🏠",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "아침에 아이와 병원에 가려고 집을 나서다 옆집 아주머니를 만났다."
       },
       {
         "ko": "만나다",
@@ -4432,7 +4760,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "만났다"
-        ]
+        ],
+        "example": "아침에 아이와 병원에 가려고 집을 나서다 옆집 아주머니를 만났다."
       },
       {
         "ko": "달래다",
@@ -4442,7 +4771,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "달래면서도"
-        ]
+        ],
+        "example": "나는 우는 아이를 달래면서도 울음소리에 이웃들이 깰까 봐 걱정했다."
       },
       {
         "ko": "이웃",
@@ -4452,49 +4782,56 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "이웃들"
-        ]
+        ],
+        "example": "나는 우는 아이를 달래면서도 울음소리에 이웃들이 깰까 봐 걱정했다."
       },
       {
         "ko": "온라인",
         "en": "online",
         "hint": "🌐",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "최근 온라인 가구 구매가 늘면서 반품 사례가 많아지고 있다."
       },
       {
         "ko": "가구",
         "en": "furniture",
         "hint": "🛋️",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "최근 온라인 가구 구매가 늘면서 반품 사례가 많아지고 있다."
       },
       {
         "ko": "구매",
         "en": "a purchase",
         "hint": "🧾",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "재래시장에서 상품을 구매한 후 배달을 원하는 사람들이 많아졌다."
       },
       {
         "ko": "반품",
         "en": "sending goods back",
         "hint": "📦",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "최근 온라인 가구 구매가 늘면서 반품 사례가 많아지고 있다."
       },
       {
         "ko": "사례",
         "en": "an instance, a reported case",
         "hint": "📊",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "최근 온라인 가구 구매가 늘면서 반품 사례가 많아지고 있다."
       },
       {
         "ko": "그런데",
         "en": "however — the turn into a problem",
         "hint": "🌀",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "그런데 최근 물이 잘 스며드는 도로 포장재가 개발되었다."
       },
       {
         "ko": "비싸다",
@@ -4504,14 +4841,16 @@
         "categoryEn": "Economy & business",
         "forms": [
           "비싼"
-        ]
+        ],
+        "example": "그런데 비싼 반품 비용으로 인해 피해를 보는 소비자가 늘고 있다."
       },
       {
         "ko": "비용",
         "en": "a cost",
         "hint": "💰",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "그런데 비싼 반품 비용으로 인해 피해를 보는 소비자가 늘고 있다."
       },
       {
         "ko": "피해를 보다",
@@ -4528,21 +4867,24 @@
         "en": "a consumer",
         "hint": "🛒",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "그런데 비싼 반품 비용으로 인해 피해를 보는 소비자가 늘고 있다."
       },
       {
         "ko": "따라서",
         "en": "therefore — the written conclusion marker",
         "hint": "📜",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "따라서 소비자는 구매 전에 반품 비용과 조건을 잘 확인해야 한다."
       },
       {
         "ko": "조건",
         "en": "terms and conditions",
         "hint": "📋",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "따라서 소비자는 구매 전에 반품 비용과 조건을 잘 확인해야 한다."
       },
       {
         "ko": "확인하다",
@@ -4552,14 +4894,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "확인해야"
-        ]
+        ],
+        "example": "따라서 소비자는 구매 전에 반품 비용과 조건을 잘 확인해야 한다."
       },
       {
         "ko": "업체",
         "en": "a firm, a business",
         "hint": "🏪",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "업체가 까다로운 조건을 내세워 반품을 거절하는 경우까지 발생한다."
       },
       {
         "ko": "까다롭다",
@@ -4569,7 +4913,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "까다로운"
-        ]
+        ],
+        "example": "업체가 까다로운 조건을 내세워 반품을 거절하는 경우까지 발생한다."
       },
       {
         "ko": "내세우다",
@@ -4579,7 +4924,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "내세워"
-        ]
+        ],
+        "example": "업체가 까다로운 조건을 내세워 반품을 거절하는 경우까지 발생한다."
       },
       {
         "ko": "거절하다",
@@ -4589,14 +4935,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "거절하는"
-        ]
+        ],
+        "example": "업체가 까다로운 조건을 내세워 반품을 거절하는 경우까지 발생한다."
       },
       {
         "ko": "경우",
         "en": "a case, an occasion",
         "hint": "🔖",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "업체가 까다로운 조건을 내세워 반품을 거절하는 경우까지 발생한다."
       },
       {
         "ko": "발생하다",
@@ -4606,7 +4954,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "발생한다"
-        ]
+        ],
+        "example": "차량이 오는 것을 보지 못하고 촬영을 하다 사고가 날 뻔한 위험한 상황이 자주 발생하면서 운전자와 방문객 간에 다투는 일도 잦아지고 있다."
       },
       {
         "ko": "-(으)면서",
@@ -4623,70 +4972,80 @@
         "en": "an arctic fox",
         "hint": "🦊",
         "category": "동물",
-        "categoryEn": "Animals & pets"
+        "categoryEn": "Animals & pets",
+        "example": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다."
       },
       {
         "ko": "북극",
         "en": "the Arctic",
         "hint": "❄️",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다."
       },
       {
         "ko": "계절",
         "en": "a season of the year",
         "hint": "🍂",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다."
       },
       {
         "ko": "겨울",
         "en": "winter",
         "hint": "⛄",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "북극여우의 털은 겨울에는 눈과 같은 흰색으로, 여름에는 바위나 흙과 비슷한 갈색빛으로 바뀐다."
       },
       {
         "ko": "바위",
         "en": "a rock",
         "hint": "🪨",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "북극여우의 털은 겨울에는 눈과 같은 흰색으로, 여름에는 바위나 흙과 비슷한 갈색빛으로 바뀐다."
       },
       {
         "ko": "흰색",
         "en": "the colour white",
         "hint": "⬜",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "북극여우의 털은 겨울에는 눈과 같은 흰색으로, 여름에는 바위나 흙과 비슷한 갈색빛으로 바뀐다."
       },
       {
         "ko": "갈색빛",
         "en": "a brownish tinge",
         "hint": "🟤",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "북극여우의 털은 겨울에는 눈과 같은 흰색으로, 여름에는 바위나 흙과 비슷한 갈색빛으로 바뀐다."
       },
       {
         "ko": "동물",
         "en": "an animal",
         "hint": "🐾",
         "category": "동물",
-        "categoryEn": "Animals & pets"
+        "categoryEn": "Animals & pets",
+        "example": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다."
       },
       {
         "ko": "천적",
         "en": "a natural predator",
         "hint": "🦅",
         "category": "동물",
-        "categoryEn": "Animals & pets"
+        "categoryEn": "Animals & pets",
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "먹잇감",
         "en": "prey",
         "hint": "🐁",
         "category": "동물",
-        "categoryEn": "Animals & pets"
+        "categoryEn": "Animals & pets",
+        "example": "실제로 악어는 먹잇감을 잡아먹으면서 눈물을 흘린다."
       },
       {
         "ko": "무리를 이루다",
@@ -4713,7 +5072,8 @@
         "categoryEn": "Animals & pets",
         "forms": [
           "사냥할"
-        ]
+        ],
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "바꾸다",
@@ -4723,7 +5083,8 @@
         "categoryEn": "Grammar & expressions",
         "forms": [
           "바꾸는"
-        ]
+        ],
+        "example": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다."
       },
       {
         "ko": "바뀌다",
@@ -4743,14 +5104,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "비슷한"
-        ]
+        ],
+        "example": "북극여우의 털은 겨울에는 눈과 같은 흰색으로, 여름에는 바위나 흙과 비슷한 갈색빛으로 바뀐다."
       },
       {
         "ko": "변화",
         "en": "a change that has taken place",
         "hint": "🌗",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "숨기다",
@@ -4760,7 +5123,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "숨길"
-        ]
+        ],
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "특수하다",
@@ -4770,14 +5134,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "특수한"
-        ]
+        ],
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "환경",
         "en": "an environment",
         "hint": "🌍",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "N(으)로부터",
@@ -4797,7 +5163,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "보호하고"
-        ]
+        ],
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "동료",
@@ -4811,7 +5178,8 @@
         "en": "without being noticed",
         "hint": "🤫",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "다가가다",
@@ -4821,7 +5189,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "다가갈"
-        ]
+        ],
+        "example": "이러한 털 색깔의 변화로 북극여우는 몸을 숨길 곳이 없는 북극의 특수한 환경에서도 천적으로부터 자신을 보호하고 사냥할 때 먹잇감에 몰래 다가갈 수 있다."
       },
       {
         "ko": "적절히",
@@ -4848,21 +5217,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "남기지"
-        ]
+        ],
+        "example": "약이 너무 쓴데 조금만 남기면 안 돼요?"
       },
       {
         "ko": "연필",
         "en": "a pencil",
         "hint": "✏️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다."
       },
       {
         "ko": "글씨",
         "en": "handwriting",
         "hint": "🖋️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다."
       },
       {
         "ko": "반듯하다",
@@ -4872,35 +5244,40 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "반듯하게"
-        ]
+        ],
+        "example": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다."
       },
       {
         "ko": "어려움",
         "en": "difficulty",
         "hint": "😣",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다."
       },
       {
         "ko": "나이",
         "en": "age, in years",
         "hint": "🎂",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "어린 나이부터 전자 기기를 장시간 사용한 탓이다."
       },
       {
         "ko": "전자 기기",
         "en": "an electronic device",
         "hint": "📱",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "어린 나이부터 전자 기기를 장시간 사용한 탓이다."
       },
       {
         "ko": "장시간",
         "en": "for a long stretch",
         "hint": "⏱️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "어린 나이부터 전자 기기를 장시간 사용한 탓이다."
       },
       {
         "ko": "사용하다",
@@ -4911,7 +5288,8 @@
         "forms": [
           "사용한",
           "사용하지"
-        ]
+        ],
+        "example": "전자 기기의 화면을 단순히 누르거나 미는 동작을 반복하다 보면 손에 있는 근육을 충분히 사용하지 못한다."
       },
       {
         "ko": "-(으)ㄴ 탓이다",
@@ -4928,14 +5306,16 @@
         "en": "a screen",
         "hint": "🖥️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "전자 기기의 화면을 단순히 누르거나 미는 동작을 반복하다 보면 손에 있는 근육을 충분히 사용하지 못한다."
       },
       {
         "ko": "단순히",
         "en": "merely, and nothing more",
         "hint": "➖",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "전자 기기의 화면을 단순히 누르거나 미는 동작을 반복하다 보면 손에 있는 근육을 충분히 사용하지 못한다."
       },
       {
         "ko": "누르다",
@@ -4945,7 +5325,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "누르거나"
-        ]
+        ],
+        "example": "전자 기기의 화면을 단순히 누르거나 미는 동작을 반복하다 보면 손에 있는 근육을 충분히 사용하지 못한다."
       },
       {
         "ko": "밀다",
@@ -4962,28 +5343,32 @@
         "en": "a movement of the body",
         "hint": "🤸",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "전자 기기의 화면을 단순히 누르거나 미는 동작을 반복하다 보면 손에 있는 근육을 충분히 사용하지 못한다."
       },
       {
         "ko": "반복하다",
         "en": "to repeat",
         "hint": "🔂",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "전자 기기의 화면을 단순히 누르거나 미는 동작을 반복하다 보면 손에 있는 근육을 충분히 사용하지 못한다."
       },
       {
         "ko": "근육",
         "en": "a muscle",
         "hint": "💪",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "전자 기기의 화면을 단순히 누르거나 미는 동작을 반복하다 보면 손에 있는 근육을 충분히 사용하지 못한다."
       },
       {
         "ko": "소근육",
         "en": "the fine muscles of the hand",
         "hint": "🤏",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "그래서 전문가들은 소근육이 발달하는 11세까지 손가락을 움직여서 하는 놀이를 많이 하도록 하는 것이 좋다고 말한다."
       },
       {
         "ko": "발달하다",
@@ -4993,14 +5378,16 @@
         "categoryEn": "Health & the body",
         "forms": [
           "발달하는"
-        ]
+        ],
+        "example": "그래서 전문가들은 소근육이 발달하는 11세까지 손가락을 움직여서 하는 놀이를 많이 하도록 하는 것이 좋다고 말한다."
       },
       {
         "ko": "손가락",
         "en": "a finger",
         "hint": "☝️",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "그래서 전문가들은 소근육이 발달하는 11세까지 손가락을 움직여서 하는 놀이를 많이 하도록 하는 것이 좋다고 말한다."
       },
       {
         "ko": "움직이다",
@@ -5010,14 +5397,16 @@
         "categoryEn": "Health & the body",
         "forms": [
           "움직여서"
-        ]
+        ],
+        "example": "눈물샘을 담당하는 신경과 턱을 움직이는 신경이 연결되어 있기 때문에 음식을 씹을 때면 눈물이 나오는 것이다."
       },
       {
         "ko": "놀이",
         "en": "play, a game children do",
         "hint": "🧸",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "그래서 전문가들은 소근육이 발달하는 11세까지 손가락을 움직여서 하는 놀이를 많이 하도록 하는 것이 좋다고 말한다."
       },
       {
         "ko": "전문가",
@@ -5027,7 +5416,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "전문가들"
-        ]
+        ],
+        "example": "그래서 전문가들은 소근육이 발달하는 11세까지 손가락을 움직여서 하는 놀이를 많이 하도록 하는 것이 좋다고 말한다."
       },
       {
         "ko": "제대로",
@@ -5045,7 +5435,8 @@
         "forms": [
           "감싸지",
           "감싸는"
-        ]
+        ],
+        "example": "따라서 같은 양의 액체를 담는 조건이라면 둘레를 감싸는 재료가 가장 적게 드는 원기둥으로 만들어 생산비를 낮추고자 하는 것이다."
       },
       {
         "ko": "빠르게",
@@ -5069,7 +5460,8 @@
         "en": "enough, to a sufficient degree",
         "hint": "🈵",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "전자 기기의 화면을 단순히 누르거나 미는 동작을 반복하다 보면 손에 있는 근육을 충분히 사용하지 못한다."
       },
       {
         "ko": "완전히",
@@ -5103,42 +5495,48 @@
         "en": "a dolmen",
         "hint": "🗿",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "고인돌은 옛날 청동기 시대의 무덤이다."
       },
       {
         "ko": "옛날",
         "en": "long ago",
         "hint": "📜",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "고인돌은 옛날 청동기 시대의 무덤이다."
       },
       {
         "ko": "청동기 시대",
         "en": "the Bronze Age",
         "hint": "⚱️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "고인돌은 옛날 청동기 시대의 무덤이다."
       },
       {
         "ko": "무덤",
         "en": "a tomb",
         "hint": "⚰️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "고인돌은 옛날 청동기 시대의 무덤이다."
       },
       {
         "ko": "받침돌",
         "en": "a supporting stone",
         "hint": "🧱",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "고인돌은 받침돌 두 개를 세우고 그 위에 덮개돌을 얹은 형태인데 덮개돌 하나의 무게가 수십 톤에 달하는 것도 있다."
       },
       {
         "ko": "덮개돌",
         "en": "a capstone",
         "hint": "🪨",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "고인돌은 받침돌 두 개를 세우고 그 위에 덮개돌을 얹은 형태인데 덮개돌 하나의 무게가 수십 톤에 달하는 것도 있다."
       },
       {
         "ko": "세우다",
@@ -5149,7 +5547,8 @@
         "forms": [
           "세우고",
           "세우려면"
-        ]
+        ],
+        "example": "고인돌은 받침돌 두 개를 세우고 그 위에 덮개돌을 얹은 형태인데 덮개돌 하나의 무게가 수십 톤에 달하는 것도 있다."
       },
       {
         "ko": "얹다",
@@ -5159,28 +5558,32 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "얹은"
-        ]
+        ],
+        "example": "고인돌은 받침돌 두 개를 세우고 그 위에 덮개돌을 얹은 형태인데 덮개돌 하나의 무게가 수십 톤에 달하는 것도 있다."
       },
       {
         "ko": "형태",
         "en": "the form a thing takes",
         "hint": "🔷",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "고인돌은 받침돌 두 개를 세우고 그 위에 덮개돌을 얹은 형태인데 덮개돌 하나의 무게가 수십 톤에 달하는 것도 있다."
       },
       {
         "ko": "무게",
         "en": "weight",
         "hint": "⚖️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "고인돌은 받침돌 두 개를 세우고 그 위에 덮개돌을 얹은 형태인데 덮개돌 하나의 무게가 수십 톤에 달하는 것도 있다."
       },
       {
         "ko": "수십",
         "en": "tens of, several dozen",
         "hint": "🔢",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "고인돌은 받침돌 두 개를 세우고 그 위에 덮개돌을 얹은 형태인데 덮개돌 하나의 무게가 수십 톤에 달하는 것도 있다."
       },
       {
         "ko": "달하다",
@@ -5190,7 +5593,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "달하는"
-        ]
+        ],
+        "example": "그래서 전문가들은 소근육이 발달하는 11세까지 손가락을 움직여서 하는 놀이를 많이 하도록 하는 것이 좋다고 말한다."
       },
       {
         "ko": "거대하다",
@@ -5200,7 +5604,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "거대한"
-        ]
+        ],
+        "example": "이와 같이 거대한 돌을 운반하고 세우려면 그만큼 많은 사람들의 힘이 필요했다."
       },
       {
         "ko": "운반하다",
@@ -5210,14 +5615,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "운반하고"
-        ]
+        ],
+        "example": "이와 같이 거대한 돌을 운반하고 세우려면 그만큼 많은 사람들의 힘이 필요했다."
       },
       {
         "ko": "그만큼",
         "en": "correspondingly much",
         "hint": "🔁",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "이와 같이 거대한 돌을 운반하고 세우려면 그만큼 많은 사람들의 힘이 필요했다."
       },
       {
         "ko": "필요하다",
@@ -5227,7 +5634,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "필요했다"
-        ]
+        ],
+        "example": "이와 같이 거대한 돌을 운반하고 세우려면 그만큼 많은 사람들의 힘이 필요했다."
       },
       {
         "ko": "부르다",
@@ -5237,7 +5645,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "불러"
-        ]
+        ],
+        "example": "그래서 고인돌은 사람들을 불러 모아 무덤 만드는 일을 시킬 수 있을 정도로 대단한 권력을 가진 사람의 무덤이었을 것으로 보인다."
       },
       {
         "ko": "모으다",
@@ -5247,7 +5656,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "모아"
-        ]
+        ],
+        "example": "그래서 고인돌은 사람들을 불러 모아 무덤 만드는 일을 시킬 수 있을 정도로 대단한 권력을 가진 사람의 무덤이었을 것으로 보인다."
       },
       {
         "ko": "시키다",
@@ -5257,14 +5667,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "시킬"
-        ]
+        ],
+        "example": "그래서 고인돌은 사람들을 불러 모아 무덤 만드는 일을 시킬 수 있을 정도로 대단한 권력을 가진 사람의 무덤이었을 것으로 보인다."
       },
       {
         "ko": "권력",
         "en": "power over other people",
         "hint": "👑",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그래서 고인돌은 사람들을 불러 모아 무덤 만드는 일을 시킬 수 있을 정도로 대단한 권력을 가진 사람의 무덤이었을 것으로 보인다."
       },
       {
         "ko": "체력",
@@ -5288,7 +5700,9 @@
         "categoryEn": "Health & the body",
         "forms": [
           "약한"
-        ]
+        ],
+        "example": "주말에는 항상 사람이 많으니까 예약해야 될 거야.",
+        "exampleEn": "Weekends are always busy, so we will have to book."
       },
       {
         "ko": "무기",
@@ -5329,7 +5743,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "짧은"
-        ]
+        ],
+        "example": "밑면의 넓이가 똑같이 100cm²일 때 둘레는 각각 40cm, 46cm, 35cm 정도로 원의 둘레가 가장 짧다."
       },
       {
         "ko": "-(으)ㄹ 정도로",
@@ -5346,28 +5761,32 @@
         "en": "a city",
         "hint": "🏙️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "도시의 도로는 대부분 물이 스며들지 않는 아스팔트로 뒤덮여 있다."
       },
       {
         "ko": "도로",
         "en": "a road",
         "hint": "🛣️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그런데 최근 물이 잘 스며드는 도로 포장재가 개발되었다."
       },
       {
         "ko": "대부분",
         "en": "for the most part",
         "hint": "🥧",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다."
       },
       {
         "ko": "아스팔트",
         "en": "asphalt",
         "hint": "⬛",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "example": "도시의 도로는 대부분 물이 스며들지 않는 아스팔트로 뒤덮여 있다."
       },
       {
         "ko": "스며들다",
@@ -5378,7 +5797,8 @@
         "forms": [
           "스며들지",
           "스며드는"
-        ]
+        ],
+        "example": "도시의 도로는 대부분 물이 스며들지 않는 아스팔트로 뒤덮여 있다."
       },
       {
         "ko": "뒤덮이다",
@@ -5388,21 +5808,24 @@
         "categoryEn": "Environment & waste",
         "forms": [
           "뒤덮여"
-        ]
+        ],
+        "example": "도시의 도로는 대부분 물이 스며들지 않는 아스팔트로 뒤덮여 있다."
       },
       {
         "ko": "빗물",
         "en": "rainwater",
         "hint": "🌧️",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "그래서 빗물이 쉽게 통과해 지하수 자원이 보충된다."
       },
       {
         "ko": "지하",
         "en": "underground",
         "hint": "⬇️",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "example": "그래서 빗물이 쉽게 통과해 지하수 자원이 보충된다."
       },
       {
         "ko": "흘러 들어가다",
@@ -5412,21 +5835,24 @@
         "categoryEn": "Nature & the seasons",
         "forms": [
           "흘러 들어가지"
-        ]
+        ],
+        "example": "그래서 비가 오면 빗물이 지하로 잘 흘러 들어가지 못해 지하수가 부족해지고 도로가 물에 잠기는 일도 자주 발생한다."
       },
       {
         "ko": "지하수",
         "en": "groundwater",
         "hint": "🚰",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "example": "그래서 빗물이 쉽게 통과해 지하수 자원이 보충된다."
       },
       {
         "ko": "부족",
         "en": "a shortage",
         "hint": "🕳️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그래서 비가 오면 빗물이 지하로 잘 흘러 들어가지 못해 지하수가 부족해지고 도로가 물에 잠기는 일도 자주 발생한다."
       },
       {
         "ko": "부족해지다",
@@ -5436,7 +5862,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "부족해지고"
-        ]
+        ],
+        "example": "그래서 비가 오면 빗물이 지하로 잘 흘러 들어가지 못해 지하수가 부족해지고 도로가 물에 잠기는 일도 자주 발생한다."
       },
       {
         "ko": "잠기다",
@@ -5446,21 +5873,24 @@
         "categoryEn": "Environment & waste",
         "forms": [
           "잠기는"
-        ]
+        ],
+        "example": "그래서 비가 오면 빗물이 지하로 잘 흘러 들어가지 못해 지하수가 부족해지고 도로가 물에 잠기는 일도 자주 발생한다."
       },
       {
         "ko": "자주",
         "en": "often",
         "hint": "🔁",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그래서 비가 오면 빗물이 지하로 잘 흘러 들어가지 못해 지하수가 부족해지고 도로가 물에 잠기는 일도 자주 발생한다."
       },
       {
         "ko": "포장재",
         "en": "a surfacing material",
         "hint": "🧱",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "example": "이 포장재에는 미세한 구멍이 많다."
       },
       {
         "ko": "개발되다",
@@ -5480,21 +5910,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "미세한"
-        ]
+        ],
+        "example": "이 포장재에는 미세한 구멍이 많다."
       },
       {
         "ko": "구멍",
         "en": "a hole",
         "hint": "🕳️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "이 포장재에는 미세한 구멍이 많다."
       },
       {
         "ko": "쉽게",
         "en": "easily",
         "hint": "👌",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그래서 빗물이 쉽게 통과해 지하수 자원이 보충된다."
       },
       {
         "ko": "통과하다",
@@ -5504,14 +5937,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "통과해"
-        ]
+        ],
+        "example": "그래서 빗물이 쉽게 통과해 지하수 자원이 보충된다."
       },
       {
         "ko": "자원",
         "en": "a natural resource",
         "hint": "💎",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "example": "그래서 빗물이 쉽게 통과해 지하수 자원이 보충된다."
       },
       {
         "ko": "보충되다",
@@ -5528,7 +5963,8 @@
         "en": "a drain",
         "hint": "🚿",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "example": "또한 하수구로 몰리는 빗물의 양이 줄어 도로 침수의 위험도 줄어들게 된다."
       },
       {
         "ko": "몰리다",
@@ -5538,28 +5974,32 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "몰리는"
-        ]
+        ],
+        "example": "또한 하수구로 몰리는 빗물의 양이 줄어 도로 침수의 위험도 줄어들게 된다."
       },
       {
         "ko": "침수",
         "en": "flooding",
         "hint": "🌊",
         "category": "환경",
-        "categoryEn": "Environment & waste"
+        "categoryEn": "Environment & waste",
+        "example": "또한 하수구로 몰리는 빗물의 양이 줄어 도로 침수의 위험도 줄어들게 된다."
       },
       {
         "ko": "위험",
         "en": "a risk",
         "hint": "⚠️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "또한 하수구로 몰리는 빗물의 양이 줄어 도로 침수의 위험도 줄어들게 된다."
       },
       {
         "ko": "또한",
         "en": "and also — a second thing of the same kind",
         "hint": "➕",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "또한 하수구로 몰리는 빗물의 양이 줄어 도로 침수의 위험도 줄어들게 된다."
       },
       {
         "ko": "비록",
@@ -5666,42 +6106,48 @@
         "en": "Inju City — the invented city these papers are set in",
         "hint": "🏙️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "TV 프로그램 제작자들이 관광객을 촬영하러 인주시로 모여들었다."
       },
       {
         "ko": "거리",
         "en": "a street",
         "hint": "🛣️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다."
       },
       {
         "ko": "식당",
         "en": "a restaurant",
         "hint": "🍽️",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다."
       },
       {
         "ko": "카페",
         "en": "a café",
         "hint": "☕",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다."
       },
       {
         "ko": "먹거리",
         "en": "things to eat",
         "hint": "🍢",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다."
       },
       {
         "ko": "골목",
         "en": "a narrow street, an alley",
         "hint": "🏘️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다."
       },
       {
         "ko": "모이다",
@@ -5711,7 +6157,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "모인"
-        ]
+        ],
+        "example": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다."
       },
       {
         "ko": "특화되다",
@@ -5721,21 +6168,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "특화되면서"
-        ]
+        ],
+        "example": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다."
       },
       {
         "ko": "이곳",
         "en": "this place, here",
         "hint": "📍",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "인주시의 한 거리가 식당과 카페가 모인 먹거리 골목으로 특화되면서 최근 이곳을 찾는 사람들이 늘고 있다."
       },
       {
         "ko": "통행",
         "en": "traffic passing through",
         "hint": "🚦",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "막다",
@@ -5745,14 +6195,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "막고"
-        ]
+        ],
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "한가운데",
         "en": "the very middle",
         "hint": "🎯",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "찍다",
@@ -5763,21 +6215,24 @@
         "forms": [
           "찍거나",
           "찍는"
-        ]
+        ],
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "횡단보도",
         "en": "a pedestrian crossing",
         "hint": "🚸",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "삼각대",
         "en": "a camera tripod",
         "hint": "📐",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "촬영하다",
@@ -5787,14 +6242,16 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "촬영하는"
-        ]
+        ],
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "일부",
         "en": "some of them, a portion",
         "hint": "🧩",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "방문객",
@@ -5804,14 +6261,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "방문객들"
-        ]
+        ],
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "사고",
         "en": "an accident",
         "hint": "💥",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "차량이 오는 것을 보지 못하고 촬영을 하다 사고가 날 뻔한 위험한 상황이 자주 발생하면서 운전자와 방문객 간에 다투는 일도 잦아지고 있다."
       },
       {
         "ko": "-(으)ㄹ 뻔하다",
@@ -5831,14 +6290,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "위험한"
-        ]
+        ],
+        "example": "차량이 오는 것을 보지 못하고 촬영을 하다 사고가 날 뻔한 위험한 상황이 자주 발생하면서 운전자와 방문객 간에 다투는 일도 잦아지고 있다."
       },
       {
         "ko": "운전자",
         "en": "a driver",
         "hint": "🚗",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "차량이 오는 것을 보지 못하고 촬영을 하다 사고가 날 뻔한 위험한 상황이 자주 발생하면서 운전자와 방문객 간에 다투는 일도 잦아지고 있다."
       },
       {
         "ko": "N 간에",
@@ -5855,7 +6316,8 @@
         "en": "the space between two things",
         "hint": "🔛",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데 거기에서 한번 찾아보세요."
       },
       {
         "ko": "다투다",
@@ -5865,7 +6327,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "다투는"
-        ]
+        ],
+        "example": "차량이 오는 것을 보지 못하고 촬영을 하다 사고가 날 뻔한 위험한 상황이 자주 발생하면서 운전자와 방문객 간에 다투는 일도 잦아지고 있다."
       },
       {
         "ko": "잦아지다",
@@ -5875,7 +6338,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "잦아지고"
-        ]
+        ],
+        "example": "차량이 오는 것을 보지 못하고 촬영을 하다 사고가 날 뻔한 위험한 상황이 자주 발생하면서 운전자와 방문객 간에 다투는 일도 잦아지고 있다."
       },
       {
         "ko": "금지하다",
@@ -5922,7 +6386,8 @@
         "categoryEn": "Health & the body",
         "forms": [
           "눈살을 찌푸리게"
-        ]
+        ],
+        "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
       {
         "ko": "코가 납작해지다",
@@ -5956,7 +6421,8 @@
         "en": "a tourist",
         "hint": "🧳",
         "category": "여행",
-        "categoryEn": "Travel & leisure"
+        "categoryEn": "Travel & leisure",
+        "example": "TV 프로그램 제작자들이 관광객을 촬영하러 인주시로 모여들었다."
       },
       {
         "ko": "물결",
@@ -5973,7 +6439,8 @@
         "categoryEn": "Media & headlines",
         "forms": [
           "제작자들"
-        ]
+        ],
+        "example": "TV 프로그램 제작자들이 관광객을 촬영하러 인주시로 모여들었다."
       },
       {
         "ko": "모여들다",
@@ -5983,14 +6450,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "모여들었다"
-        ]
+        ],
+        "example": "TV 프로그램 제작자들이 관광객을 촬영하러 인주시로 모여들었다."
       },
       {
         "ko": "덕분에",
         "en": "thanks to — and the outcome is good",
         "hint": "🙏",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "인주시가 TV 프로그램에 나온 덕분에 많은 관광객이 방문하고 있다."
       },
       {
         "ko": "방문하다",
@@ -6000,49 +6469,56 @@
         "categoryEn": "Travel & leisure",
         "forms": [
           "방문하고"
-        ]
+        ],
+        "example": "인주시가 TV 프로그램에 나온 덕분에 많은 관광객이 방문하고 있다."
       },
       {
         "ko": "유치",
         "en": "attracting visitors or business to a place",
         "hint": "🎣",
         "category": "정치",
-        "categoryEn": "Politics & government"
+        "categoryEn": "Politics & government",
+        "example": "인주시가 관광객 유치를 위해 TV 프로그램 홍보 방송을 준비하고 있다."
       },
       {
         "ko": "홍보",
         "en": "publicity",
         "hint": "📢",
         "category": "언론",
-        "categoryEn": "Media & headlines"
+        "categoryEn": "Media & headlines",
+        "example": "인주시가 관광객 유치를 위해 TV 프로그램 홍보 방송을 준비하고 있다."
       },
       {
         "ko": "방송",
         "en": "a broadcast",
         "hint": "📻",
         "category": "언론",
-        "categoryEn": "Media & headlines"
+        "categoryEn": "Media & headlines",
+        "example": "인주시가 관광객 유치를 위해 TV 프로그램 홍보 방송을 준비하고 있다."
       },
       {
         "ko": "여러",
         "en": "several, various",
         "hint": "🔢",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "재래시장은 출입구가 여러 곳에 있어 찾기가 쉽지 않다."
       },
       {
         "ko": "문제",
         "en": "a problem",
         "hint": "❓",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "피서지에서는 많은 양의 쓰레기를 치우는 문제가 심각하다."
       },
       {
         "ko": "선수",
         "en": "an athlete",
         "hint": "🏅",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다."
       },
       {
         "ko": "시상대",
@@ -6056,21 +6532,24 @@
         "en": "fencing",
         "hint": "🤺",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다."
       },
       {
         "ko": "종목",
         "en": "an event or discipline in a sport",
         "hint": "🏆",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다."
       },
       {
         "ko": "메달",
         "en": "a medal",
         "hint": "🎖️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다."
       },
       {
         "ko": "가뭄",
@@ -6084,21 +6563,24 @@
         "en": "the national team",
         "hint": "🏟️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "김 선수가 펜싱 대표팀에서 메달을 목표로 열심히 훈련했다."
       },
       {
         "ko": "목표",
         "en": "a goal aimed at",
         "hint": "🎯",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "김 선수가 펜싱 대표팀에서 메달을 목표로 열심히 훈련했다."
       },
       {
         "ko": "열심히",
         "en": "hard, with effort",
         "hint": "🔥",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "김 선수가 펜싱 대표팀에서 메달을 목표로 열심히 훈련했다."
       },
       {
         "ko": "훈련하다",
@@ -6108,7 +6590,8 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "훈련했다"
-        ]
+        ],
+        "example": "김 선수가 펜싱 대표팀에서 메달을 목표로 열심히 훈련했다."
       },
       {
         "ko": "따다",
@@ -6126,7 +6609,8 @@
         "en": "after a long interval",
         "hint": "⏳",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다."
       },
       {
         "ko": "나오다",
@@ -6137,14 +6621,16 @@
         "forms": [
           "나왔다",
           "나온"
-        ]
+        ],
+        "example": "눈물샘을 담당하는 신경과 턱을 움직이는 신경이 연결되어 있기 때문에 음식을 씹을 때면 눈물이 나오는 것이다."
       },
       {
         "ko": "신기록",
         "en": "a new record",
         "hint": "📊",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "김 선수가 가장 많은 메달을 따며 펜싱 종목에서 신기록을 세웠다."
       },
       {
         "ko": "경기를 펼치다",
@@ -6154,14 +6640,16 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "경기를 펼쳤지만"
-        ]
+        ],
+        "example": "김 선수가 펜싱 종목에서 좋은 경기를 펼쳤지만 아쉽게 메달을 놓쳤다."
       },
       {
         "ko": "아쉽게",
         "en": "disappointingly, by a narrow margin",
         "hint": "😞",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "김 선수가 펜싱 종목에서 좋은 경기를 펼쳤지만 아쉽게 메달을 놓쳤다."
       },
       {
         "ko": "놓치다",
@@ -6171,7 +6659,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "놓쳤다"
-        ]
+        ],
+        "example": "김 선수가 펜싱 종목에서 좋은 경기를 펼쳤지만 아쉽게 메달을 놓쳤다."
       },
       {
         "ko": "선 넘다",
@@ -6198,21 +6687,24 @@
         "categoryEn": "Media & headlines",
         "forms": [
           "악의적인"
-        ]
+        ],
+        "example": "악의적인 댓글이 지나치게 심각해졌음에도 처벌 수위는 아직도 너무 낮다."
       },
       {
         "ko": "댓글",
         "en": "a comment posted online",
         "hint": "💬",
         "category": "언론",
-        "categoryEn": "Media & headlines"
+        "categoryEn": "Media & headlines",
+        "example": "악의적인 댓글이 지나치게 심각해졌음에도 처벌 수위는 아직도 너무 낮다."
       },
       {
         "ko": "처벌",
         "en": "punishment",
         "hint": "⚖️",
         "category": "정치",
-        "categoryEn": "Politics & government"
+        "categoryEn": "Politics & government",
+        "example": "악의적인 댓글이 지나치게 심각해졌음에도 처벌 수위는 아직도 너무 낮다."
       },
       {
         "ko": "여전히",
@@ -6243,7 +6735,8 @@
         "en": "the level, of water or of severity",
         "hint": "📶",
         "category": "정치",
-        "categoryEn": "Politics & government"
+        "categoryEn": "Politics & government",
+        "example": "악의적인 댓글이 지나치게 심각해졌음에도 처벌 수위는 아직도 너무 낮다."
       },
       {
         "ko": "낮추다",
@@ -6253,14 +6746,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "낮추자는"
-        ]
+        ],
+        "example": "따라서 같은 양의 액체를 담는 조건이라면 둘레를 감싸는 재료가 가장 적게 드는 원기둥으로 만들어 생산비를 낮추고자 하는 것이다."
       },
       {
         "ko": "의견",
         "en": "an opinion put forward",
         "hint": "💭",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "악의적인 댓글이 줄어든 만큼 처벌 수위를 낮추자는 의견이 제기됐다."
       },
       {
         "ko": "제기되다",
@@ -6270,7 +6765,8 @@
         "categoryEn": "Politics & government",
         "forms": [
           "제기됐다"
-        ]
+        ],
+        "example": "악의적인 댓글이 줄어든 만큼 처벌 수위를 낮추자는 의견이 제기됐다."
       },
       {
         "ko": "강화하다",
@@ -6280,7 +6776,8 @@
         "categoryEn": "Politics & government",
         "forms": [
           "강화했으나"
-        ]
+        ],
+        "example": "악의적인 댓글에 대한 처벌을 강화했으나 피해는 감소하지 않고 있다."
       },
       {
         "ko": "감소하다",
@@ -6290,14 +6787,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "감소하지"
-        ]
+        ],
+        "example": "악의적인 댓글에 대한 처벌을 강화했으나 피해는 감소하지 않고 있다."
       },
       {
         "ko": "지나치게",
         "en": "excessively",
         "hint": "⚠️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "악의적인 댓글이 지나치게 심각해졌음에도 처벌 수위는 아직도 너무 낮다."
       },
       {
         "ko": "심각해지다",
@@ -6307,14 +6806,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "심각해졌음에도"
-        ]
+        ],
+        "example": "악의적인 댓글이 지나치게 심각해졌음에도 처벌 수위는 아직도 너무 낮다."
       },
       {
         "ko": "아직도",
         "en": "still — when it ought to have finished by now",
         "hint": "⌛",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "악의적인 댓글이 지나치게 심각해졌음에도 처벌 수위는 아직도 너무 낮다."
       },
       {
         "ko": "이어지다",
@@ -6324,7 +6825,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "이어지자"
-        ]
+        ],
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "피해자",
@@ -6334,7 +6836,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "피해자들"
-        ]
+        ],
+        "example": "악의적인 댓글이 계속 이어지자 피해자들이 무거운 처벌을 요구하고 나섰다."
       },
       {
         "ko": "무겁다",
@@ -6344,7 +6847,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "무거운"
-        ]
+        ],
+        "example": "악의적인 댓글이 계속 이어지자 피해자들이 무거운 처벌을 요구하고 나섰다."
       },
       {
         "ko": "요구하다",
@@ -6354,28 +6858,32 @@
         "categoryEn": "Politics & government",
         "forms": [
           "요구하고"
-        ]
+        ],
+        "example": "악의적인 댓글이 계속 이어지자 피해자들이 무거운 처벌을 요구하고 나섰다."
       },
       {
         "ko": "오늘날",
         "en": "nowadays, in our own time",
         "hint": "📅",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "연재",
         "en": "serialisation, publishing in instalments",
         "hint": "📚",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "만화",
         "en": "a comic",
         "hint": "🖼️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "만화가",
@@ -6389,7 +6897,8 @@
         "en": "a story",
         "hint": "💬",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "N별로",
@@ -6406,28 +6915,32 @@
         "en": "a work of art",
         "hint": "🎨",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "형식",
         "en": "the form a thing is cast in",
         "hint": "📐",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "이미",
         "en": "already, by then",
         "hint": "⏪",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "세기",
         "en": "a century",
         "hint": "🏛️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "존재하다",
@@ -6437,21 +6950,24 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "존재했다"
-        ]
+        ],
+        "example": "오늘날의 연재 만화처럼 이야기가 회차별로 이어지는 작품의 형식은 이미 18세기에도 존재했다."
       },
       {
         "ko": "영국",
         "en": "England, Britain",
         "hint": "🏰",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "영국의 화가 윌리엄 호가스는 드라마 못지않게 흥미진진한 이야기를 여러 장의 그림으로 나누어 구성했다."
       },
       {
         "ko": "화가",
         "en": "a painter",
         "hint": "🖌️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "영국의 화가 윌리엄 호가스는 드라마 못지않게 흥미진진한 이야기를 여러 장의 그림으로 나누어 구성했다."
       },
       {
         "ko": "N 못지않게",
@@ -6471,14 +6987,16 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "흥미진진한"
-        ]
+        ],
+        "example": "영국의 화가 윌리엄 호가스는 드라마 못지않게 흥미진진한 이야기를 여러 장의 그림으로 나누어 구성했다."
       },
       {
         "ko": "그림",
         "en": "a picture",
         "hint": "🎨",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "텔레비전에서는 실제 요리보다 사진이나 그림을 더 많이 보여준다."
       },
       {
         "ko": "나누다",
@@ -6498,14 +7016,16 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "구성했다"
-        ]
+        ],
+        "example": "영국의 화가 윌리엄 호가스는 드라마 못지않게 흥미진진한 이야기를 여러 장의 그림으로 나누어 구성했다."
       },
       {
         "ko": "판화",
         "en": "a print made from an engraving",
         "hint": "🗞️",
         "category": "문화",
-        "categoryEn": "Culture & entertainment"
+        "categoryEn": "Culture & entertainment",
+        "example": "그리고 이를 판화에 새긴 후 일정한 기간을 두고 순서대로 인쇄해 판매했다."
       },
       {
         "ko": "새기다",
@@ -6515,14 +7035,16 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "새긴"
-        ]
+        ],
+        "example": "그리고 이를 판화에 새긴 후 일정한 기간을 두고 순서대로 인쇄해 판매했다."
       },
       {
         "ko": "순서대로",
         "en": "in the order given",
         "hint": "🔢",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "그리고 이를 판화에 새긴 후 일정한 기간을 두고 순서대로 인쇄해 판매했다."
       },
       {
         "ko": "인쇄하다",
@@ -6532,7 +7054,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "인쇄해"
-        ]
+        ],
+        "example": "그리고 이를 판화에 새긴 후 일정한 기간을 두고 순서대로 인쇄해 판매했다."
       },
       {
         "ko": "판매하다",
@@ -6542,7 +7065,8 @@
         "categoryEn": "Economy & business",
         "forms": [
           "판매했다"
-        ]
+        ],
+        "example": "그리고 이를 판화에 새긴 후 일정한 기간을 두고 순서대로 인쇄해 판매했다."
       },
       {
         "ko": "독자",
@@ -6552,14 +7076,16 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "독자들"
-        ]
+        ],
+        "example": "독자들은 다음 회를 손꼽아 기다렸고 그의 그림을 보기 위해 기꺼이 돈을 지불했다."
       },
       {
         "ko": "다음",
         "en": "the next one",
         "hint": "➡️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "독자들은 다음 회를 손꼽아 기다렸고 그의 그림을 보기 위해 기꺼이 돈을 지불했다."
       },
       {
         "ko": "손꼽아 기다리다",
@@ -6569,14 +7095,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "손꼽아 기다렸고"
-        ]
+        ],
+        "example": "독자들은 다음 회를 손꼽아 기다렸고 그의 그림을 보기 위해 기꺼이 돈을 지불했다."
       },
       {
         "ko": "기꺼이",
         "en": "gladly, without being pressed",
         "hint": "😊",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "독자들은 다음 회를 손꼽아 기다렸고 그의 그림을 보기 위해 기꺼이 돈을 지불했다."
       },
       {
         "ko": "지불하다",
@@ -6586,14 +7114,16 @@
         "categoryEn": "Economy & business",
         "forms": [
           "지불했다"
-        ]
+        ],
+        "example": "독자들은 다음 회를 손꼽아 기다렸고 그의 그림을 보기 위해 기꺼이 돈을 지불했다."
       },
       {
         "ko": "주문",
         "en": "an order placed for something",
         "hint": "📋",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "제가 전화로 주문할게요."
       },
       {
         "ko": "작가",
@@ -6620,14 +7150,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "일정한"
-        ]
+        ],
+        "example": "그리고 이를 판화에 새긴 후 일정한 기간을 두고 순서대로 인쇄해 판매했다."
       },
       {
         "ko": "기간",
         "en": "a stretch of time",
         "hint": "🗓️",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "시험 기간 동안 공부하는 학생이 많아서 도서관에 밤새도록 불을 켜 두었다."
       },
       {
         "ko": "두다",
@@ -6644,14 +7176,16 @@
         "en": "usually, as a rule",
         "hint": "📊",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "사람들은 보통 식후에 바로 이를 닦는다."
       },
       {
         "ko": "식후",
         "en": "after a meal",
         "hint": "🍽️",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "사람들은 보통 식후에 바로 이를 닦는다."
       },
       {
         "ko": "닦다",
@@ -6661,21 +7195,24 @@
         "categoryEn": "Health & the body",
         "forms": [
           "닦는다"
-        ]
+        ],
+        "example": "사람들은 보통 식후에 바로 이를 닦는다."
       },
       {
         "ko": "레몬",
         "en": "a lemon",
         "hint": "🍋",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "하지만 레몬 등 신맛이 강한 음식을 먹은 후에 바로 양치질을 하는 것은 좋지 않다."
       },
       {
         "ko": "신맛",
         "en": "a sour taste",
         "hint": "😖",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "그래서 신맛이 강한 음식을 섭취하면 최소 30분 이상 지나서 양치해야 한다."
       },
       {
         "ko": "강하다",
@@ -6685,14 +7222,16 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "강한"
-        ]
+        ],
+        "example": "그래서 신맛이 강한 음식을 섭취하면 최소 30분 이상 지나서 양치해야 한다."
       },
       {
         "ko": "양치질",
         "en": "brushing the teeth",
         "hint": "🦷",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "하지만 레몬 등 신맛이 강한 음식을 먹은 후에 바로 양치질을 하는 것은 좋지 않다."
       },
       {
         "ko": "양치하다",
@@ -6702,35 +7241,40 @@
         "categoryEn": "Health & the body",
         "forms": [
           "양치해야"
-        ]
+        ],
+        "example": "그래서 신맛이 강한 음식을 섭취하면 최소 30분 이상 지나서 양치해야 한다."
       },
       {
         "ko": "산성",
         "en": "acidity",
         "hint": "🧪",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "치아 보호막이 원래 강도로 돌아오려면 침으로 산성이 중화되어야 하는데 여기에 30분 정도가 소요된다."
       },
       {
         "ko": "치아",
         "en": "a tooth — the clinical word",
         "hint": "🦿",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "치아 보호막이 원래 강도로 돌아오려면 침으로 산성이 중화되어야 하는데 여기에 30분 정도가 소요된다."
       },
       {
         "ko": "보호막",
         "en": "a protective layer",
         "hint": "🛡️",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "치아 보호막이 원래 강도로 돌아오려면 침으로 산성이 중화되어야 하는데 여기에 30분 정도가 소요된다."
       },
       {
         "ko": "칫솔질",
         "en": "brushing with a toothbrush",
         "hint": "🧹",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "신 음식에 있는 산성이 치아 보호막을 일시적으로 약화시키기 때문에 바로 칫솔질로 자극하면 치아가 더 손상된다."
       },
       {
         "ko": "자극하다",
@@ -6740,7 +7284,8 @@
         "categoryEn": "Health & the body",
         "forms": [
           "자극하면"
-        ]
+        ],
+        "example": "신 음식에 있는 산성이 치아 보호막을 일시적으로 약화시키기 때문에 바로 칫솔질로 자극하면 치아가 더 손상된다."
       },
       {
         "ko": "손상되다",
@@ -6757,14 +7302,16 @@
         "en": "originally, as it first was",
         "hint": "🔙",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "치아 보호막이 원래 강도로 돌아오려면 침으로 산성이 중화되어야 하는데 여기에 30분 정도가 소요된다."
       },
       {
         "ko": "강도",
         "en": "hardness, how strong a thing is",
         "hint": "🪨",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "치아 보호막이 원래 강도로 돌아오려면 침으로 산성이 중화되어야 하는데 여기에 30분 정도가 소요된다."
       },
       {
         "ko": "돌아오다",
@@ -6804,14 +7351,16 @@
         "categoryEn": "Health & the body",
         "forms": [
           "섭취하면"
-        ]
+        ],
+        "example": "그래서 신맛이 강한 음식을 섭취하면 최소 30분 이상 지나서 양치해야 한다."
       },
       {
         "ko": "최소",
         "en": "at the very least",
         "hint": "🔻",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "그래서 신맛이 강한 음식을 섭취하면 최소 30분 이상 지나서 양치해야 한다."
       },
       {
         "ko": "지나다",
@@ -6821,7 +7370,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "지나서"
-        ]
+        ],
+        "example": "그래서 신맛이 강한 음식을 섭취하면 최소 30분 이상 지나서 양치해야 한다."
       },
       {
         "ko": "누렇다",
@@ -6841,7 +7391,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "일시적으로"
-        ]
+        ],
+        "example": "신 음식에 있는 산성이 치아 보호막을 일시적으로 약화시키기 때문에 바로 칫솔질로 자극하면 치아가 더 손상된다."
       },
       {
         "ko": "약화시키다",
@@ -6858,14 +7409,16 @@
         "en": "foodstuff, matter that is food",
         "hint": "🍲",
         "category": "음식",
-        "categoryEn": "Food & eating"
+        "categoryEn": "Food & eating",
+        "example": "공연장 안은 음식물 반입 금지입니다."
       },
       {
         "ko": "누군가",
         "en": "someone or other",
         "hint": "🤷",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "누군가에게 해를 입히고 미안한 척 거짓으로 흘리는 눈물을 '악어의 눈물'에 비유한다."
       },
       {
         "ko": "해를 입히다",
@@ -6875,7 +7428,8 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "해를 입히고"
-        ]
+        ],
+        "example": "누군가에게 해를 입히고 미안한 척 거짓으로 흘리는 눈물을 '악어의 눈물'에 비유한다."
       },
       {
         "ko": "-(으)ㄴ 척하다",
@@ -6892,7 +7446,8 @@
         "en": "falsely, not meaning it",
         "hint": "🤥",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "누군가에게 해를 입히고 미안한 척 거짓으로 흘리는 눈물을 '악어의 눈물'에 비유한다."
       },
       {
         "ko": "흘리다",
@@ -6903,28 +7458,32 @@
         "forms": [
           "흘리는",
           "흘린다"
-        ]
+        ],
+        "example": "누군가에게 해를 입히고 미안한 척 거짓으로 흘리는 눈물을 '악어의 눈물'에 비유한다."
       },
       {
         "ko": "눈물",
         "en": "a tear",
         "hint": "😢",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "실제로 악어는 먹잇감을 잡아먹으면서 눈물을 흘린다."
       },
       {
         "ko": "눈물샘",
         "en": "the tear gland",
         "hint": "💦",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "눈물샘을 담당하는 신경과 턱을 움직이는 신경이 연결되어 있기 때문에 음식을 씹을 때면 눈물이 나오는 것이다."
       },
       {
         "ko": "악어",
         "en": "a crocodile",
         "hint": "🐊",
         "category": "동물",
-        "categoryEn": "Animals & pets"
+        "categoryEn": "Animals & pets",
+        "example": "실제로 악어는 먹잇감을 잡아먹으면서 눈물을 흘린다."
       },
       {
         "ko": "비유하다",
@@ -6935,14 +7494,16 @@
         "forms": [
           "비유한다",
           "비유한"
-        ]
+        ],
+        "example": "'악어의 눈물'이라는 표현은 인간의 가식적인 행위를 악어의 생리적 현상에 비유한 것이다."
       },
       {
         "ko": "실제로",
         "en": "in actual fact",
         "hint": "✅",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "실제로 악어는 먹잇감을 잡아먹으면서 눈물을 흘린다."
       },
       {
         "ko": "잡아먹다",
@@ -6952,14 +7513,16 @@
         "categoryEn": "Animals & pets",
         "forms": [
           "잡아먹으면서"
-        ]
+        ],
+        "example": "실제로 악어는 먹잇감을 잡아먹으면서 눈물을 흘린다."
       },
       {
         "ko": "신경",
         "en": "a nerve",
         "hint": "🧠",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "눈물샘을 담당하는 신경과 턱을 움직이는 신경이 연결되어 있기 때문에 음식을 씹을 때면 눈물이 나오는 것이다."
       },
       {
         "ko": "연결되다",
@@ -6986,21 +7549,24 @@
         "en": "as if — and it wants -는 것처럼 to close it",
         "hint": "🎪",
         "category": "문법",
-        "categoryEn": "Grammar & expressions"
+        "categoryEn": "Grammar & expressions",
+        "example": "이 눈물 때문에 악어는 마치 다른 동물을 잡아먹으면서 죄책감을 느끼는 것처럼 보인다."
       },
       {
         "ko": "표현",
         "en": "a turn of phrase",
         "hint": "💬",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "'악어의 눈물'이라는 표현은 인간의 가식적인 행위를 악어의 생리적 현상에 비유한 것이다."
       },
       {
         "ko": "인간",
         "en": "a human being",
         "hint": "🧍",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "'악어의 눈물'이라는 표현은 인간의 가식적인 행위를 악어의 생리적 현상에 비유한 것이다."
       },
       {
         "ko": "가식적",
@@ -7010,28 +7576,32 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "가식적인"
-        ]
+        ],
+        "example": "'악어의 눈물'이라는 표현은 인간의 가식적인 행위를 악어의 생리적 현상에 비유한 것이다."
       },
       {
         "ko": "행위",
         "en": "an act, a piece of behaviour",
         "hint": "🚶",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "'악어의 눈물'이라는 표현은 인간의 가식적인 행위를 악어의 생리적 현상에 비유한 것이다."
       },
       {
         "ko": "생리적",
         "en": "physiological",
         "hint": "🧬",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "'악어의 눈물'이라는 표현은 인간의 가식적인 행위를 악어의 생리적 현상에 비유한 것이다."
       },
       {
         "ko": "현상",
         "en": "a phenomenon",
         "hint": "🔍",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "'악어의 눈물'이라는 표현은 인간의 가식적인 행위를 악어의 생리적 현상에 비유한 것이다."
       },
       {
         "ko": "두려움",
@@ -7055,7 +7625,8 @@
         "en": "guilt at what one has done",
         "hint": "😔",
         "category": "건강",
-        "categoryEn": "Health & the body"
+        "categoryEn": "Health & the body",
+        "example": "이 눈물 때문에 악어는 마치 다른 동물을 잡아먹으면서 죄책감을 느끼는 것처럼 보인다."
       },
       {
         "ko": "갈증",
@@ -7096,14 +7667,16 @@
         "en": "a soft drink",
         "hint": "🥤",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다."
       },
       {
         "ko": "액체",
         "en": "a liquid",
         "hint": "💧",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다."
       },
       {
         "ko": "담다",
@@ -7113,28 +7686,32 @@
         "categoryEn": "Society & everyday life",
         "forms": [
           "담는"
-        ]
+        ],
+        "example": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다."
       },
       {
         "ko": "용기",
         "en": "a container",
         "hint": "🧴",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다."
       },
       {
         "ko": "원기둥",
         "en": "a cylinder",
         "hint": "🥫",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다."
       },
       {
         "ko": "이유",
         "en": "a reason",
         "hint": "❔",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "원기둥을 선택하는 가장 큰 이유는 용기의 제작 비용을 줄이기 위해서이다."
       },
       {
         "ko": "예를 들다",
@@ -7151,7 +7728,8 @@
         "en": "the base face of a shape",
         "hint": "⬇️",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "밑면의 넓이가 똑같이 100cm²일 때 둘레는 각각 40cm, 46cm, 35cm 정도로 원의 둘레가 가장 짧다."
       },
       {
         "ko": "정사각형",
@@ -7182,42 +7760,48 @@
         "en": "area",
         "hint": "📐",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "밑면의 넓이가 똑같이 100cm²일 때 둘레는 각각 40cm, 46cm, 35cm 정도로 원의 둘레가 가장 짧다."
       },
       {
         "ko": "똑같이",
         "en": "identically",
         "hint": "👯",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "밑면의 넓이가 똑같이 100cm²일 때 둘레는 각각 40cm, 46cm, 35cm 정도로 원의 둘레가 가장 짧다."
       },
       {
         "ko": "둘레",
         "en": "the distance round the outside",
         "hint": "⭕",
         "category": "자연",
-        "categoryEn": "Nature & the seasons"
+        "categoryEn": "Nature & the seasons",
+        "example": "밑면의 넓이가 똑같이 100cm²일 때 둘레는 각각 40cm, 46cm, 35cm 정도로 원의 둘레가 가장 짧다."
       },
       {
         "ko": "각각",
         "en": "each one respectively",
         "hint": "🔢",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "밑면의 넓이가 똑같이 100cm²일 때 둘레는 각각 40cm, 46cm, 35cm 정도로 원의 둘레가 가장 짧다."
       },
       {
         "ko": "재료",
         "en": "material a thing is made from",
         "hint": "🧱",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "따라서 같은 양의 액체를 담는 조건이라면 둘레를 감싸는 재료가 가장 적게 드는 원기둥으로 만들어 생산비를 낮추고자 하는 것이다."
       },
       {
         "ko": "적게",
         "en": "little, in small amount",
         "hint": "🔽",
         "category": "사회",
-        "categoryEn": "Society & everyday life"
+        "categoryEn": "Society & everyday life",
+        "example": "따라서 같은 양의 액체를 담는 조건이라면 둘레를 감싸는 재료가 가장 적게 드는 원기둥으로 만들어 생산비를 낮추고자 하는 것이다."
       },
       {
         "ko": "들다",
@@ -7227,14 +7811,17 @@
         "categoryEn": "Economy & business",
         "forms": [
           "드는"
-        ]
+        ],
+        "example": "지금 사는 집이 마음에 안 들어요?",
+        "exampleEn": "You don't like the place you're in?"
       },
       {
         "ko": "생산비",
         "en": "the cost of producing something",
         "hint": "🏭",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "따라서 같은 양의 액체를 담는 조건이라면 둘레를 감싸는 재료가 가장 적게 드는 원기둥으로 만들어 생산비를 낮추고자 하는 것이다."
       },
       {
         "ko": "편리하다",
@@ -7251,7 +7838,8 @@
         "en": "manufacture, the making of a thing",
         "hint": "🔧",
         "category": "경제",
-        "categoryEn": "Economy & business"
+        "categoryEn": "Economy & business",
+        "example": "TV 프로그램 제작자들이 관광객을 촬영하러 인주시로 모여들었다."
       }
     ]
   },

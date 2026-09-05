@@ -241,7 +241,8 @@
     const rows = words.map((w, i) => ({ w, i })).filter(({ w }) => {
       if (cat && w.category !== cat) return false;
       if (!q) return true;
-      return (w.ko + ' ' + w.en + ' ' + (w.categoryEn || '')).toLowerCase().includes(q);
+      return (w.ko + ' ' + w.en + ' ' + (w.categoryEn || '') + ' ' + (w.example || ''))
+        .toLowerCase().includes(q);
     });
     document.getElementById('u10-word-count').textContent = rows.length + ' / ' + words.length + ' words';
     const body = document.getElementById('u10-words-tbody');
@@ -254,12 +255,22 @@
       '<td><input class="form-input" data-f="hint" value="' + escapeAttr(w.hint || '') + '"></td>' +
       '<td><input class="form-input" data-f="category" value="' + escapeAttr(w.category) + '"></td>' +
       '<td><input class="form-input" data-f="categoryEn" value="' + escapeAttr(w.categoryEn) + '"></td>' +
+      '<td><input class="form-input" data-f="example" value="' + escapeAttr(w.example || '') + '" placeholder="—"></td>' +
+      '<td><input class="form-input" data-f="exampleEn" value="' + escapeAttr(w.exampleEn || '') + '" placeholder="—"></td>' +
       '<td><button class="btn btn-secondary btn-sm" data-del="' + i + '">✕</button></td></tr>'
     )).join('');
     body.querySelectorAll('input').forEach((inp) => {
       inp.addEventListener('input', () => {
         const i = Number(inp.closest('tr').dataset.i);
-        state.world.level.words[i][inp.dataset.f] = inp.value;
+        const field = inp.dataset.f;
+        // An example that has been cleared is a word with no example, not a word with an
+        // empty one. The optional fields come off the object rather than being stored blank,
+        // so "has an example" stays a question about whether the key is there.
+        if ((field === 'example' || field === 'exampleEn') && !inp.value.trim()) {
+          delete state.world.level.words[i][field];
+          return;
+        }
+        state.world.level.words[i][field] = inp.value;
       });
     });
     body.querySelectorAll('[data-del]').forEach((btn) => {

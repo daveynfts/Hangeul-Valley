@@ -86,7 +86,9 @@
         "en": "to greet someone while bowing one's head/body",
         "hint": "🙇",
         "category": "예의",
-        "categoryEn": "Etiquette & respect for seniors"
+        "categoryEn": "Etiquette & respect for seniors",
+        "example": "어른을 만났을 때는 고개를 숙여서 인사해야 돼요.",
+        "exampleEn": "When you meet someone older, you bow your head to greet them."
       },
       {
         "ko": "야단(을) 맞다",
@@ -101,7 +103,9 @@
         "hint": "🧑‍🦳",
         "category": "예의",
         "categoryEn": "Etiquette & respect for seniors",
-        "artPending": true
+        "artPending": true,
+        "example": "어른을 만나면 어떻게 인사해야 돼요?",
+        "exampleEn": "How should you greet someone older than you?"
       },
       {
         "ko": "드시다",
@@ -109,7 +113,8 @@
         "hint": "🍚",
         "category": "예의",
         "categoryEn": "Etiquette & respect for seniors",
-        "artPending": true
+        "artPending": true,
+        "example": "공연장 안에서는 음식물을 드시거나 사진 촬영을 하실 수 없습니다."
       },
       {
         "ko": "앞에서",
@@ -125,7 +130,9 @@
         "hint": "🧑",
         "category": "예의",
         "categoryEn": "Etiquette & respect for seniors",
-        "artPending": true
+        "artPending": true,
+        "example": "젊은 사람들은 이 자리가 비어 있을 때에도 잘 앉지 않습니다.",
+        "exampleEn": "Young people tend not to sit there even when the seat is empty."
       },
       {
         "ko": "나이 든 분",
@@ -141,7 +148,9 @@
         "hint": "💟",
         "category": "예의",
         "categoryEn": "Etiquette & respect for seniors",
-        "artPending": true
+        "artPending": true,
+        "example": "한국은 지하철이나 버스에 몸이 불편한 사람들을 위한 자리가 있습니다.",
+        "exampleEn": "Korean subways and buses have seats for people whose bodies give them difficulty."
       },
       {
         "ko": "잘하다",
@@ -149,7 +158,9 @@
         "hint": "👏",
         "category": "예의",
         "categoryEn": "Etiquette & respect for seniors",
-        "artPending": true
+        "artPending": true,
+        "example": "너 한국어 잘하는데 왜?",
+        "exampleEn": "But your Korean is good — why?"
       },
       {
         "ko": "잘못하다",
@@ -157,14 +168,17 @@
         "hint": "🙅",
         "category": "예의",
         "categoryEn": "Etiquette & respect for seniors",
-        "artPending": true
+        "artPending": true,
+        "example": "오늘 병원에 갔을 때 한국어를 잘못해서 창피한 일이 있었어.",
+        "exampleEn": "Today at the hospital my Korean went wrong and I was embarrassed."
       },
       {
         "ko": "금연",
         "en": "No Smoking",
         "hint": "🚭",
         "category": "금지",
-        "categoryEn": "Public etiquette & prohibitions"
+        "categoryEn": "Public etiquette & prohibitions",
+        "example": "그리고 기숙사는 금연 건물이므로 기숙사 안에서는 담배를 피울 수 없습니다."
       },
       {
         "ko": "주차 금지",
@@ -185,14 +199,16 @@
         "en": "No Food or Drinks allowed inside",
         "hint": "🥤",
         "category": "금지",
-        "categoryEn": "Public etiquette & prohibitions"
+        "categoryEn": "Public etiquette & prohibitions",
+        "example": "공연장 안은 음식물 반입 금지입니다."
       },
       {
         "ko": "휴대 전화 사용 금지",
         "en": "No Cell Phones / Cell phone use is prohibited",
         "hint": "📵",
         "category": "금지",
-        "categoryEn": "Public etiquette & prohibitions"
+        "categoryEn": "Public etiquette & prohibitions",
+        "example": "공연 중에는 휴대 전화 사용이 금지되오니 휴대 전화를 꺼 주십시오."
       },
       {
         "ko": "음식물을 먹다",
@@ -220,14 +236,16 @@
         "en": "to change/swap seats",
         "hint": "🔄",
         "category": "금지",
-        "categoryEn": "Public etiquette & prohibitions"
+        "categoryEn": "Public etiquette & prohibitions",
+        "example": "공연 시작 후에는 자리를 바꾸거나 밖으로 나가실 수 없습니다."
       },
       {
         "ko": "밖으로 나가다",
         "en": "to go outside",
         "hint": "🚪",
         "category": "금지",
-        "categoryEn": "Public etiquette & prohibitions"
+        "categoryEn": "Public etiquette & prohibitions",
+        "example": "공연이 시작하면 밖으로 나가면 안 됩니다."
       },
       {
         "ko": "휴대전화를 끄다",
@@ -242,7 +260,9 @@
         "hint": "📷",
         "category": "금지",
         "categoryEn": "Public etiquette & prohibitions",
-        "artPending": true
+        "artPending": true,
+        "example": "아기를 안고 사진을 찍었어요.",
+        "exampleEn": "I took the photo holding the baby."
       },
       {
         "ko": "담배를 피우다",
@@ -250,7 +270,8 @@
         "hint": "🚭",
         "category": "금지",
         "categoryEn": "Public etiquette & prohibitions",
-        "artPending": true
+        "artPending": true,
+        "example": "아니요, 담배를 피우면 안 돼요."
       },
       {
         "ko": "수영을 하다",
@@ -274,7 +295,8 @@
         "hint": "🅿️",
         "category": "금지",
         "categoryEn": "Public etiquette & prohibitions",
-        "artPending": true
+        "artPending": true,
+        "example": "아니요, 주차하면 안 돼요."
       },
       {
         "ko": "음료수를 마시다",
@@ -282,7 +304,8 @@
         "hint": "🥤",
         "category": "금지",
         "categoryEn": "Public etiquette & prohibitions",
-        "artPending": true
+        "artPending": true,
+        "example": "아니요, 음료수를 마시면 안 돼요."
       },
       {
         "ko": "노래를 부르다",
@@ -290,7 +313,8 @@
         "hint": "🎤",
         "category": "금지",
         "categoryEn": "Public etiquette & prohibitions",
-        "artPending": true
+        "artPending": true,
+        "example": "아니요, 노래를 부르면 안 돼요."
       },
       {
         "ko": "표지판",
@@ -306,7 +330,9 @@
         "hint": "📢",
         "category": "금지",
         "categoryEn": "Public etiquette & prohibitions",
-        "artPending": true
+        "artPending": true,
+        "example": "밤에 큰 소리로 음악을 듣거나 시끄럽게 떠들면 안 됩니다.",
+        "exampleEn": "You must not play music loudly at night or make a racket."
       },
       {
         "ko": "통화하다",
@@ -322,7 +348,8 @@
         "hint": "🎒",
         "category": "금지",
         "categoryEn": "Public etiquette & prohibitions",
-        "artPending": true
+        "artPending": true,
+        "example": "공연장에 휴대 전화를 가지고 들어갈 수 없습니다."
       },
       {
         "ko": "술",
@@ -346,7 +373,9 @@
         "hint": "💻",
         "category": "금지",
         "categoryEn": "Public etiquette & prohibitions",
-        "artPending": true
+        "artPending": true,
+        "example": "이 컴퓨터 써도 돼요?",
+        "exampleEn": "Is it all right if I use this computer?"
       },
       {
         "ko": "계산기",
@@ -370,21 +399,27 @@
         "hint": "🪑",
         "category": "금지",
         "categoryEn": "Public etiquette & prohibitions",
-        "artPending": true
+        "artPending": true,
+        "example": "의자에 앉다가 넘어졌어요.",
+        "exampleEn": "I fell over as I was sitting down on the chair."
       },
       {
         "ko": "실수하다",
         "en": "to make a mistake",
         "hint": "😅",
         "category": "회화",
-        "categoryEn": "Real-life dialogues"
+        "categoryEn": "Real-life dialogues",
+        "example": "그래도 실수하면서 배운 것은 안 잊어버려서 좋아.",
+        "exampleEn": "Still, I like it — I never forget what a mistake taught me."
       },
       {
         "ko": "창피하다",
         "en": "to be embarrassed / ashamed / humiliated",
         "hint": "😳",
         "category": "회화",
-        "categoryEn": "Real-life dialogues"
+        "categoryEn": "Real-life dialogues",
+        "example": "오늘 병원에 갔을 때 한국어를 잘못해서 창피한 일이 있었어.",
+        "exampleEn": "Today at the hospital my Korean went wrong and I was embarrassed."
       },
       {
         "ko": "어색하다",
@@ -398,35 +433,42 @@
         "en": "Doctor (polite/honorific form)",
         "hint": "🩺",
         "category": "회화",
-        "categoryEn": "Real-life dialogues"
+        "categoryEn": "Real-life dialogues",
+        "example": "의사 선생님을 '의사님'이라고 불러서 사람들이 웃었어.",
+        "exampleEn": "I called the doctor 'uisanim' and everyone laughed."
       },
       {
         "ko": "처음 만난 사람",
         "en": "a person met for the first time",
         "hint": "🤝",
         "category": "회화",
-        "categoryEn": "Real-life dialogues"
+        "categoryEn": "Real-life dialogues",
+        "example": "나도 가끔 처음 만난 사람을 뭐라고 불러야 할지 몰라서 어려울 때가 있어."
       },
       {
         "ko": "물론이지",
         "en": "of course / certainly",
         "hint": "👍",
         "category": "회화",
-        "categoryEn": "Real-life dialogues"
+        "categoryEn": "Real-life dialogues",
+        "example": "물론이지. 그래도 실수하면서 배운 것은 안 잊어버려서 좋아."
       },
       {
         "ko": "잊어버리다",
         "en": "to forget",
         "hint": "💭",
         "category": "회화",
-        "categoryEn": "Real-life dialogues"
+        "categoryEn": "Real-life dialogues",
+        "example": "그래도 실수하면서 배운 것은 안 잊어버려서 좋아.",
+        "exampleEn": "Still, I like it — I never forget what a mistake taught me."
       },
       {
         "ko": "복잡하다",
         "en": "to be complicated / complex",
         "hint": "🧩",
         "category": "회화",
-        "categoryEn": "Real-life dialogues"
+        "categoryEn": "Real-life dialogues",
+        "example": "강남 근처가 제일 복잡한 것 같아요."
       },
       {
         "ko": "우리나라",
@@ -440,14 +482,17 @@
         "en": "to be similar",
         "hint": "⚖️",
         "category": "회화",
-        "categoryEn": "Real-life dialogues"
+        "categoryEn": "Real-life dialogues",
+        "example": "북극여우의 털은 겨울에는 눈과 같은 흰색으로, 여름에는 바위나 흙과 비슷한 갈색빛으로 바뀐다."
       },
       {
         "ko": "다르다",
         "en": "to be different",
         "hint": "↔️",
         "category": "회화",
-        "categoryEn": "Real-life dialogues"
+        "categoryEn": "Real-life dialogues",
+        "example": "다른 사람에게 불편을 주는 행동을 하면 안 됩니다.",
+        "exampleEn": "You must not behave in ways that inconvenience other people."
       },
       {
         "ko": "가까운 나라",
@@ -477,7 +522,8 @@
         "hint": "🙇",
         "category": "회화",
         "categoryEn": "Real-life dialogues",
-        "artPending": true
+        "artPending": true,
+        "example": "집주인을 만났을 때를 '주인님'이라고 불러서 사람들이 웃었어."
       },
       {
         "ko": "집주인",
@@ -485,7 +531,8 @@
         "hint": "🧑",
         "category": "회화",
         "categoryEn": "Real-life dialogues",
-        "artPending": true
+        "artPending": true,
+        "example": "오늘 집주인을 만났을 때 한국어를 잘못해서 당황한 일이 있었어."
       },
       {
         "ko": "뭐라고 부르다",
@@ -493,7 +540,8 @@
         "hint": "🏷️",
         "category": "회화",
         "categoryEn": "Real-life dialogues",
-        "artPending": true
+        "artPending": true,
+        "example": "나도 가끔 처음 만난 사람을 뭐라고 불러야 할지 몰라서 어려울 때가 있어."
       },
       {
         "ko": "참",
@@ -501,7 +549,9 @@
         "hint": "❗",
         "category": "회화",
         "categoryEn": "Real-life dialogues",
-        "artPending": true
+        "artPending": true,
+        "example": "한국어는 참 어려운 것 같아.",
+        "exampleEn": "Korean really does seem hard."
       },
       {
         "ko": "그럼요",
@@ -509,7 +559,8 @@
         "hint": "👌",
         "category": "회화",
         "categoryEn": "Real-life dialogues",
-        "artPending": true
+        "artPending": true,
+        "example": "그럼요. 실수한 적 많아요."
       },
       {
         "ko": "곤란하다",
@@ -525,7 +576,8 @@
         "hint": "🧒",
         "category": "회화",
         "categoryEn": "Real-life dialogues",
-        "artPending": true
+        "artPending": true,
+        "example": "저는 어렸을 때 친구들과 축구를 많이 했어요."
       },
       {
         "ko": "도착하다",
@@ -533,7 +585,8 @@
         "hint": "🛬",
         "category": "회화",
         "categoryEn": "Real-life dialogues",
-        "artPending": true
+        "artPending": true,
+        "example": "집에 도착했을 때 받았어요."
       },
       {
         "ko": "전혀",
@@ -541,7 +594,8 @@
         "hint": "🚫",
         "category": "회화",
         "categoryEn": "Real-life dialogues",
-        "artPending": true
+        "artPending": true,
+        "example": "한국어를 전혀 못해서 좀 힘들었어요."
       },
       {
         "ko": "소설책",
@@ -557,7 +611,8 @@
         "hint": "⏮️",
         "category": "회화",
         "categoryEn": "Real-life dialogues",
-        "artPending": true
+        "artPending": true,
+        "example": "아니요, 전에 본 적이 있어요."
       },
       {
         "ko": "외국 여행",
@@ -580,28 +635,34 @@
         "en": "performance / show / concert",
         "hint": "🎭",
         "category": "기숙사",
-        "categoryEn": "Listening & dormitory rules"
+        "categoryEn": "Listening & dormitory rules",
+        "example": "이제 곧 공연이 시작됩니다.",
+        "exampleEn": "The performance is about to begin."
       },
       {
         "ko": "시작되다",
         "en": "to begin / to start",
         "hint": "🎬",
         "category": "기숙사",
-        "categoryEn": "Listening & dormitory rules"
+        "categoryEn": "Listening & dormitory rules",
+        "example": "이제 곧 공연이 시작됩니다.",
+        "exampleEn": "The performance is about to begin."
       },
       {
         "ko": "안내 방송",
         "en": "announcement / informative broadcast",
         "hint": "📣",
         "category": "기숙사",
-        "categoryEn": "Listening & dormitory rules"
+        "categoryEn": "Listening & dormitory rules",
+        "example": "안내 방송의 내용과 맞지 않는 것은 무엇입니까?"
       },
       {
         "ko": "지키다",
         "en": "to keep / observe / obey (rules)",
         "hint": "✅",
         "category": "기숙사",
-        "categoryEn": "Listening & dormitory rules"
+        "categoryEn": "Listening & dormitory rules",
+        "example": "먼저 기숙사에서 지켜야 할 것에 대해서 몇 가지 알려 드리겠습니다."
       },
       {
         "ko": "어기다",
@@ -629,21 +690,25 @@
         "en": "cafeteria / restaurant",
         "hint": "🍽️",
         "category": "기숙사",
-        "categoryEn": "Listening & dormitory rules"
+        "categoryEn": "Listening & dormitory rules",
+        "example": "기숙사 식당은 월요일부터 토요일까지 문을 엽니다."
       },
       {
         "ko": "운동 시설",
         "en": "sports/workout facilities",
         "hint": "🏋️",
         "category": "기숙사",
-        "categoryEn": "Listening & dormitory rules"
+        "categoryEn": "Listening & dormitory rules",
+        "example": "기숙사에 사는 사람은 운동 시설을 무료로 이용할 수 있습니다."
       },
       {
         "ko": "무료로 이용하다",
         "en": "to use for free / free of charge",
         "hint": "🎫",
         "category": "기숙사",
-        "categoryEn": "Listening & dormitory rules"
+        "categoryEn": "Listening & dormitory rules",
+        "example": "할아버지, 할머니는 지하철을 무료로 이용할 수 있습니다.",
+        "exampleEn": "Older people can use the subway free of charge."
       },
       {
         "ko": "문을 열다",
@@ -651,7 +716,9 @@
         "hint": "🚪",
         "category": "기숙사",
         "categoryEn": "Listening & dormitory rules",
-        "artPending": true
+        "artPending": true,
+        "example": "하지만 일요일에는 문을 열지 않습니다.",
+        "exampleEn": "On Sundays, though, it does not open."
       },
       {
         "ko": "들어오다",
@@ -659,7 +726,8 @@
         "hint": "🚶",
         "category": "기숙사",
         "categoryEn": "Listening & dormitory rules",
-        "artPending": true
+        "artPending": true,
+        "example": "기숙사에 살지 않는 사람은 기숙사에 들어올 수 없습니다."
       },
       {
         "ko": "자리",
@@ -667,7 +735,9 @@
         "hint": "💺",
         "category": "기숙사",
         "categoryEn": "Listening & dormitory rules",
-        "artPending": true
+        "artPending": true,
+        "example": "모두 자리에 앉아 주십시오.",
+        "exampleEn": "Please all take your seats."
       },
       {
         "ko": "이용하다",
@@ -675,7 +745,9 @@
         "hint": "🎫",
         "category": "기숙사",
         "categoryEn": "Listening & dormitory rules",
-        "artPending": true
+        "artPending": true,
+        "example": "할아버지, 할머니는 지하철을 무료로 이용할 수 있습니다.",
+        "exampleEn": "Older people can use the subway free of charge."
       },
       {
         "ko": "문화 차이",
@@ -689,7 +761,8 @@
         "en": "to be flustered / taken aback / embarrassed",
         "hint": "😲",
         "category": "문화",
-        "categoryEn": "Reading & culture"
+        "categoryEn": "Reading & culture",
+        "example": "오늘 집주인을 만났을 때 한국어를 잘못해서 당황한 일이 있었어."
       },
       {
         "ko": "왼손으로 물건을 주다",
@@ -717,28 +790,35 @@
         "en": "the elderly / senior citizens",
         "hint": "👴",
         "category": "문화",
-        "categoryEn": "Reading & culture"
+        "categoryEn": "Reading & culture",
+        "example": "노인 취업에 대한 설문 조사에서 건강이 허락하는 한 계속 일하고 싶다는 응답이 과반수를 넘었다."
       },
       {
         "ko": "몸이 불편한 사람",
         "en": "disabled people / people with physical difficulties",
         "hint": "♿",
         "category": "문화",
-        "categoryEn": "Reading & culture"
+        "categoryEn": "Reading & culture",
+        "example": "한국은 지하철이나 버스에 몸이 불편한 사람들을 위한 자리가 있습니다.",
+        "exampleEn": "Korean subways and buses have seats for people whose bodies give them difficulty."
       },
       {
         "ko": "비어 있다",
         "en": "to be empty / unoccupied",
         "hint": "🪑",
         "category": "문화",
-        "categoryEn": "Reading & culture"
+        "categoryEn": "Reading & culture",
+        "example": "젊은 사람들은 이 자리가 비어 있을 때에도 잘 앉지 않습니다.",
+        "exampleEn": "Young people tend not to sit there even when the seat is empty."
       },
       {
         "ko": "입장료 할인",
         "en": "admission fee discount",
         "hint": "🏷️",
         "category": "문화",
-        "categoryEn": "Reading & culture"
+        "categoryEn": "Reading & culture",
+        "example": "그리고 입장료 할인도 받을 수 있습니다.",
+        "exampleEn": "And they can get a discount on admission too."
       },
       {
         "ko": "제도",
@@ -753,7 +833,9 @@
         "hint": "❓",
         "category": "문화",
         "categoryEn": "Reading & culture",
-        "artPending": true
+        "artPending": true,
+        "example": "지하철에서 어떤 할머니가 아이의 머리를 쓰다듬는 것을 보고 놀란 적이 있습니다.",
+        "exampleEn": "I have been startled to see an elderly woman patting a child's head on the subway."
       },
       {
         "ko": "쓰다듬다",
@@ -761,7 +843,9 @@
         "hint": "🤲",
         "category": "문화",
         "categoryEn": "Reading & culture",
-        "artPending": true
+        "artPending": true,
+        "example": "할머니가 쓰다듬은 것은 앞에 있는 아이의 머리였습니다.",
+        "exampleEn": "The head the elderly woman patted was the child's, in front of her."
       },
       {
         "ko": "영혼",
@@ -769,7 +853,9 @@
         "hint": "👻",
         "category": "문화",
         "categoryEn": "Reading & culture",
-        "artPending": true
+        "artPending": true,
+        "example": "머리는 그 사람의 영혼이 있는 곳이기 때문입니다.",
+        "exampleEn": "Because the head is where that person's soul is."
       },
       {
         "ko": "칭찬하다",
@@ -777,7 +863,9 @@
         "hint": "👏",
         "category": "문화",
         "categoryEn": "Reading & culture",
-        "artPending": true
+        "artPending": true,
+        "example": "그런데 한국에서는 아이를 칭찬할 때 머리를 쓰다듬는 사람들이 많습니다.",
+        "exampleEn": "In Korea, though, plenty of people pat a child's head when they praise them."
       },
       {
         "ko": "상관없다",
@@ -793,7 +881,8 @@
         "hint": "👆",
         "category": "문화",
         "categoryEn": "Reading & culture",
-        "artPending": true
+        "artPending": true,
+        "example": "이 박물관의 체험실에 있는 우표는 만질 수 없다."
       },
       {
         "ko": "왼손",
@@ -801,7 +890,9 @@
         "hint": "🤚",
         "category": "문화",
         "categoryEn": "Reading & culture",
-        "artPending": true
+        "artPending": true,
+        "example": "우리 나라에서는 밥을 먹거나 다른 사람에게 물건을 줄 때 왼손으로 주면 안 됩니다.",
+        "exampleEn": "In my country you must not hand something over with your left hand."
       },
       {
         "ko": "아이",
@@ -809,7 +900,9 @@
         "hint": "🧒",
         "category": "문화",
         "categoryEn": "Reading & culture",
-        "artPending": true
+        "artPending": true,
+        "example": "할머니가 쓰다듬은 것은 앞에 있는 아이의 머리였습니다.",
+        "exampleEn": "The head the elderly woman patted was the child's, in front of her."
       },
       {
         "ko": "이해하다",
@@ -817,7 +910,9 @@
         "hint": "💡",
         "category": "문화",
         "categoryEn": "Reading & culture",
-        "artPending": true
+        "artPending": true,
+        "example": "외국에서 생활을 해 보면 그 나라의 문화를 잘 이해할 수 있어서 좋은 것 같습니다.",
+        "exampleEn": "Living abroad, I think it is good that you come to understand that country's culture well."
       },
       {
         "ko": "경험",
@@ -825,7 +920,8 @@
         "hint": "🧭",
         "category": "과제",
         "categoryEn": "Task · experiences you have had",
-        "artPending": true
+        "artPending": true,
+        "example": "가장 기억에 남는 경험을 한 친구는 누구입니까?"
       },
       {
         "ko": "가방을 잃어버리다",
@@ -833,7 +929,8 @@
         "hint": "🎒",
         "category": "과제",
         "categoryEn": "Task · experiences you have had",
-        "artPending": true
+        "artPending": true,
+        "example": "언제, 어디에서 가방을 잃어버렸어요?"
       },
       {
         "ko": "기억에 남다",
@@ -841,7 +938,8 @@
         "hint": "🧠",
         "category": "과제",
         "categoryEn": "Task · experiences you have had",
-        "artPending": true
+        "artPending": true,
+        "example": "가장 기억에 남는 경험을 한 친구는 누구입니까?"
       },
       {
         "ko": "부산",
@@ -849,7 +947,8 @@
         "hint": "🌊",
         "category": "과제",
         "categoryEn": "Task · experiences you have had",
-        "artPending": true
+        "artPending": true,
+        "example": "작년에 부산에 여행을 갔을 때 잃어버렸어요."
       },
       {
         "ko": "제주도",
@@ -857,7 +956,8 @@
         "hint": "🏝️",
         "category": "과제",
         "categoryEn": "Task · experiences you have had",
-        "artPending": true
+        "artPending": true,
+        "example": "제주도에 가 봤어요?"
       },
       {
         "ko": "눈사람",
@@ -881,7 +981,8 @@
         "hint": "👛",
         "category": "과제",
         "categoryEn": "Task · experiences you have had",
-        "artPending": true
+        "artPending": true,
+        "example": "언제 지갑 잃어버린 것을 알았어요?"
       },
       {
         "ko": "여권",
@@ -889,7 +990,8 @@
         "hint": "🛂",
         "category": "과제",
         "categoryEn": "Task · experiences you have had",
-        "artPending": true
+        "artPending": true,
+        "example": "지갑과 여권이 있었어요."
       },
       {
         "ko": "받침소리",
@@ -905,7 +1007,9 @@
         "hint": "🥿",
         "category": "발음",
         "categoryEn": "Pronunciation practice",
-        "artPending": true
+        "artPending": true,
+        "example": "운동화를 신고 가세요.",
+        "exampleEn": "Wear your trainers."
       },
       {
         "ko": "남다",
@@ -913,7 +1017,9 @@
         "hint": "⏳",
         "category": "발음",
         "categoryEn": "Pronunciation practice",
-        "artPending": true
+        "artPending": true,
+        "example": "시간이 많이 남지요?",
+        "exampleEn": "There is still plenty of time left, isn’t there?"
       },
       {
         "ko": "앉다",
@@ -921,7 +1027,9 @@
         "hint": "🪑",
         "category": "발음",
         "categoryEn": "Pronunciation practice",
-        "artPending": true
+        "artPending": true,
+        "example": "의자에 앉다가 넘어졌어요.",
+        "exampleEn": "I fell over as I was sitting down on the chair."
       },
       {
         "ko": "넘어지다",
@@ -929,7 +1037,9 @@
         "hint": "🤕",
         "category": "발음",
         "categoryEn": "Pronunciation practice",
-        "artPending": true
+        "artPending": true,
+        "example": "의자에 앉다가 넘어졌어요.",
+        "exampleEn": "I fell over as I was sitting down on the chair."
       },
       {
         "ko": "아기",
@@ -937,7 +1047,9 @@
         "hint": "👶",
         "category": "발음",
         "categoryEn": "Pronunciation practice",
-        "artPending": true
+        "artPending": true,
+        "example": "아기를 안고 사진을 찍었어요.",
+        "exampleEn": "I took the photo holding the baby."
       },
       {
         "ko": "안다",
@@ -945,7 +1057,9 @@
         "hint": "🤗",
         "category": "발음",
         "categoryEn": "Pronunciation practice",
-        "artPending": true
+        "artPending": true,
+        "example": "아기를 안고 사진을 찍었어요.",
+        "exampleEn": "I took the photo holding the baby."
       },
       {
         "ko": "머리를 감다",
@@ -953,7 +1067,9 @@
         "hint": "🚿",
         "category": "발음",
         "categoryEn": "Pronunciation practice",
-        "artPending": true
+        "artPending": true,
+        "example": "너무 바빠서 머리를 감지 못했어요.",
+        "exampleEn": "I was too busy to wash my hair."
       },
       {
         "ko": "참다",
@@ -961,7 +1077,9 @@
         "hint": "😣",
         "category": "발음",
         "categoryEn": "Pronunciation practice",
-        "artPending": true
+        "artPending": true,
+        "example": "아프면 참지 말고 병원에 가세요.",
+        "exampleEn": "If it hurts, do not put up with it — go to the doctor."
       },
       {
         "ko": "회비",
@@ -969,7 +1087,8 @@
         "hint": "💳",
         "category": "발음",
         "categoryEn": "Pronunciation practice",
-        "artPending": true
+        "artPending": true,
+        "example": "오늘까지 회비를 내야 돼요?"
       }
     ]
   },

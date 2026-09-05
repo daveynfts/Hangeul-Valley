@@ -135,6 +135,22 @@ function validateWorld(body) {
       if (typeof f !== 'string' || f.trim().length < 2) throw new Error(`${w.ko}: form "${f}" is too short to ever match`);
     });
   });
+  // The example sentence, and the translation printed under it. Blank is the right answer for
+  // most words — scripts/vocab_examples.js only fills what it can find in the question banks —
+  // so what is refused here is a translation with nothing above it, and a sentence that still
+  // has an exercise's blank in it.
+  words.forEach((w) => {
+    ['example', 'exampleEn'].forEach((f) => {
+      if (w[f] !== undefined && typeof w[f] !== 'string') {
+        throw new Error(`${w.ko}: ${f} must be a string`);
+      }
+    });
+    const ex = String(w.example || '').trim();
+    if (ex.indexOf('{}') >= 0) throw new Error(`${w.ko}: the example still has a blank in it`);
+    if (!ex && String(w.exampleEn || '').trim()) {
+      throw new Error(`${w.ko}: exampleEn has no example to translate`);
+    }
+  });
   // The notebook names the groups the vocabulary is filed under, and the two have to agree in
   // both directions — a category with no group is a word filed nowhere, a group with no
   // category is an empty page. Units 11 and 14 spell it `groups`, Units 10 and topik-2 spell

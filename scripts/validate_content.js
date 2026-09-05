@@ -131,6 +131,54 @@ const sharedGlosses = [...byGloss.entries()]
 check('no two headwords share an English gloss', sharedGlosses.length === 0,
   sharedGlosses.slice(0, 5).join('\n      '));
 
+// ── The example sentence ─────────────────────────────────────────────────────
+//
+// A word may carry one sentence showing it in use; the word-detail page prints it under the
+// headword with a speak button. Most were found by scripts/vocab_examples.js in the question
+// banks, and a blank is a valid answer — what is not valid is a sentence that does not
+// contain the word it is meant to illustrate, or an English gloss with no Korean above it.
+(function checkExamples() {
+  const vocabExamples = require(path.join(ROOT, 'scripts', 'vocab_examples.js'));
+  const orphanGloss = [];
+  const notAnExample = [];
+  const stillABlank = [];
+  let withExample = 0;
+  // Every list, not just the valley packs: the units and the TOPIK bank are where most of
+  // these sentences came from and where a bad one would be seen first.
+  const everyWord = words.slice();
+  ['2b-unit-10', '2b-unit-11', '2b-unit-13', '2b-unit-14', '2b-unit-15', 'topik-2']
+    .forEach((id) => {
+      const doc = JSON.parse(read(path.join('worlds', id + '.json')));
+      (((doc || {}).level || {}).words || []).forEach((w) => everyWord.push(w));
+    });
+  everyWord.forEach((w) => {
+    const ex = String(w.example || '').trim();
+    if (w.exampleEn && !ex) orphanGloss.push(w.ko);
+    if (!ex) return;
+    withExample++;
+    if (ex.indexOf('{}') >= 0) stillABlank.push(w.ko);
+    if (!vocabExamples.sentenceUses(ex, w.ko)) notAnExample.push(w.ko + ' — ' + ex);
+  });
+  check('an example sentence contains the word it illustrates', notAnExample.length === 0,
+    notAnExample.slice(0, 6).join('\n      '));
+  check('no example is a fill-in-the-blank with the blank still in it', stillABlank.length === 0,
+    stillABlank.slice(0, 6).join(', '));
+  check('no example translation without an example to translate', orphanGloss.length === 0,
+    orphanGloss.slice(0, 6).join(', '));
+  console.log('      example sentences: ' + withExample + '/' + everyWord.length + ' headwords');
+}());
+
+// The admin used to rebuild a word from ko/en/hint/category when saving an edit, which threw
+// away everything else it carried — categoryEn then, the example sentence now. The list the
+// library keeps is what stops that, so it has to name every optional field a word can hold.
+(function checkAdminKeepsOptionalFields() {
+  const src = read(path.join('admin', 'lib', 'levels.js'));
+  const declared = (src.match(/const OPTIONAL_TEXT = \[([^\]]*)\]/) || [])[1] || '';
+  ['categoryEn', 'example', 'exampleEn'].forEach((f) => {
+    check(`admin word edits keep ${f}`, declared.indexOf("'" + f + "'") >= 0);
+  });
+}());
+
 const viInData = [];
 words.forEach((w) => {
   ['en', 'categoryEn'].forEach((f) => {
@@ -2231,6 +2279,48 @@ const overlayIds = [
       });
       check(`every quest string is answered in ${lang}`, gaps.length === 0,
         gaps.slice(0, 6).join('\n      '));
+
+      // The word-detail page names its entry kinds by id and builds the key from it, so the
+      // generic scan sees 'ui.vb.type.' + id and nothing else. Every kind vbStudyType can
+      // return needs a label and a study note behind it.
+      // Read out of the function itself rather than off a list kept here, so a kind added
+      // there without a label is what this notices. Two of them come back from a ternary
+      // rather than a `return`, which is why the whole body is scanned for the quoted ids.
+      const study = read(path.join('js', 'vocabStudy.js'));
+      const body = study.slice(study.indexOf('function vbStudyType'),
+        study.indexOf('function vbStudyTypeLabel'));
+      const KINDS = /'(idiom|discourse|abbreviation|grammar|multiword|descriptive|dictionary|noun|vocab)'/g;
+      const kinds = [...new Set((body.match(KINDS) || []).map((m) => m.slice(1, -1)))];
+      const vbGaps = [];
+      check('vbStudyType still answers with ids', kinds.length === 9,
+        'found ' + kinds.length + ': ' + kinds.join(', '));
+      kinds.forEach((k) => {
+        const key = 'ui.vb.type.' + k;
+        if (!en[key]) vbGaps.push(key + ' (no English)');
+        else if (!table[key]) vbGaps.push(key);
+      });
+      ['predicate', 'multiword', 'grammar', 'discourse', 'idiom', 'abbreviation',
+        'forms', 'closed', 'open'].forEach((n) => {
+        const key = 'ui.vb.note.' + n;
+        if (!en[key]) vbGaps.push(key + ' (no English)');
+        else if (!table[key]) vbGaps.push(key);
+      });
+      // Same shape for the topical note: CATEGORY_TOPICS in js/ui.js names the ids, and the
+      // key is built from whichever one matched.
+      const uiSrc = read(path.join('js', 'ui.js'));
+      const topicBlock = uiSrc.slice(uiSrc.indexOf('const CATEGORY_TOPICS = ['),
+        uiSrc.indexOf('function categoryTopicId'));
+      const topics = (topicBlock.match(/^\s*\['([a-z]+)',/gm) || [])
+        .map((m) => m.replace(/^\s*\['|',$/g, ''));
+      check('the topical notes are still a named list', topics.length >= 15,
+        'found ' + topics.length);
+      topics.concat(['everyday']).forEach((t) => {
+        const key = 'ui.vb.topic.' + t;
+        if (!en[key]) vbGaps.push(key + ' (no English)');
+        else if (!table[key]) vbGaps.push(key);
+      });
+      check(`every word-detail label is answered in ${lang}`, vbGaps.length === 0,
+        vbGaps.slice(0, 6).join('\n      '));
     });
   }
 }());

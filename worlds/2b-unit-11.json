@@ -16,184 +16,1250 @@
     "world": true,
     "pack": "snu-2b",
     "worldId": "2b-unit-11",
-    "map": { "extras": [], "stations": ["desk", "cassette"] },
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk",
+        "cassette"
+      ]
+    },
     "target": 9,
     "words": [
-      { "ko": "어디가 아프다", "en": "to hurt somewhere / where it hurts", "hint": "🩹", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "속이 안 좋다", "en": "to have an upset stomach", "hint": "🤢", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "몸살이 나다", "en": "to ache all over", "hint": "🤒", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "다리를 다치다", "en": "to injure one's leg", "hint": "🦵", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "소화가 안되다", "en": "to have indigestion", "hint": "😖", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "배탈이 나다", "en": "to have stomach trouble", "hint": "🚽", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "토하다", "en": "to vomit", "hint": "🤮", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "어지럽다", "en": "to be dizzy", "hint": "💫", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "멀미를 하다", "en": "to get motion sickness", "hint": "🚌", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "얼굴에 뭐가 나다", "en": "to break out on one's face", "hint": "🧴", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "입맛이 없다", "en": "to have no appetite", "hint": "🍽️", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "기운이 없다", "en": "to have no energy", "hint": "🔋", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "잠을 잘 못 자다", "en": "to sleep badly", "hint": "😴", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "열이 나다", "en": "to have a fever", "hint": "🌡️", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "목이 붓다", "en": "to have a swollen, sore throat", "hint": "🗣️", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "기침이 나다", "en": "to have a cough", "hint": "😷", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "감기에 걸리다", "en": "to catch a cold", "hint": "🤧", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "머리가 아프다", "en": "to have a headache", "hint": "🤕", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "배가 아프다", "en": "to have a stomachache", "hint": "😣", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "눈이 아프다", "en": "to have sore eyes", "hint": "👁️", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "이가 아프다", "en": "to have a toothache", "hint": "🦷", "category": "증상", "categoryEn": "Symptoms" },
-      { "ko": "피곤하다", "en": "to be tired", "hint": "😪", "category": "증상", "categoryEn": "Symptoms" },
-
-      { "ko": "병원", "en": "hospital / doctor's office", "hint": "🏥", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "의원", "en": "clinic (small practice)", "hint": "🏩", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "내과", "en": "internal medicine", "hint": "🩺", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "안과", "en": "eye clinic / ophthalmology", "hint": "👓", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "치과", "en": "dental clinic", "hint": "🦷", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "피부과", "en": "skin clinic / dermatology", "hint": "🧖", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "정형외과", "en": "orthopedic clinic", "hint": "🦴", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "이비인후과", "en": "ear, nose & throat clinic", "hint": "👂", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "의사", "en": "doctor", "hint": "🧑‍⚕️", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "환자", "en": "patient", "hint": "🤒", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "진료를 받다", "en": "to receive medical treatment", "hint": "📋", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "처방", "en": "prescription", "hint": "📄", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "주의사항", "en": "precautions / things to watch for", "hint": "⚠️", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "설명하다", "en": "to explain", "hint": "💬", "category": "병원", "categoryEn": "Hospital & clinics" },
-      { "ko": "역할극", "en": "role-play", "hint": "🎭", "category": "병원", "categoryEn": "Hospital & clinics" },
-
-      { "ko": "약", "en": "medicine", "hint": "💊", "category": "약", "categoryEn": "Medication" },
-      { "ko": "약국", "en": "pharmacy", "hint": "🏪", "category": "약", "categoryEn": "Medication" },
-      { "ko": "약사", "en": "pharmacist", "hint": "👩‍⚕️", "category": "약", "categoryEn": "Medication" },
-      { "ko": "감기약", "en": "cold medicine", "hint": "🤧", "category": "약", "categoryEn": "Medication" },
-      { "ko": "두통약", "en": "headache medicine", "hint": "🤕", "category": "약", "categoryEn": "Medication" },
-      { "ko": "멀미약", "en": "motion-sickness medicine", "hint": "🚗", "category": "약", "categoryEn": "Medication" },
-      { "ko": "소화제", "en": "digestive medicine", "hint": "😌", "category": "약", "categoryEn": "Medication" },
-      { "ko": "해열제", "en": "fever reducer", "hint": "🌡️", "category": "약", "categoryEn": "Medication" },
-      { "ko": "안약", "en": "eye drops", "hint": "💧", "category": "약", "categoryEn": "Medication" },
-      { "ko": "파스", "en": "medicated patch", "hint": "🩹", "category": "약", "categoryEn": "Medication" },
-      { "ko": "연고", "en": "ointment", "hint": "🧴", "category": "약", "categoryEn": "Medication" },
-      { "ko": "먹다", "en": "to take (medicine) by mouth", "hint": "💊", "category": "약", "categoryEn": "Medication" },
-      { "ko": "넣다", "en": "to put in (eye drops)", "hint": "💧", "category": "약", "categoryEn": "Medication" },
-      { "ko": "붙이다", "en": "to stick on (a patch)", "hint": "🩹", "category": "약", "categoryEn": "Medication" },
-      { "ko": "바르다", "en": "to apply, rub on (ointment)", "hint": "🧴", "category": "약", "categoryEn": "Medication" },
-      { "ko": "식후", "en": "after a meal", "hint": "🍽️", "category": "약", "categoryEn": "Medication" },
-      { "ko": "하루", "en": "one day / a day", "hint": "📅", "category": "약", "categoryEn": "Medication" },
-
-      { "ko": "낫다", "en": "to recover, get better", "hint": "💚", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "붓다", "en": "to swell", "hint": "🎈", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "짓다", "en": "to build; to name", "hint": "🏠", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "젓다", "en": "to stir", "hint": "🥄", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "마다", "en": "every, each (N마다)", "hint": "♻️", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "씩", "en": "each, apiece (per unit)", "hint": "🔢", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "계속", "en": "continuously", "hint": "➡️", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "설탕", "en": "sugar", "hint": "🍬", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "걱정", "en": "worry", "hint": "😟", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "푹 쉬다", "en": "to get plenty of rest", "hint": "🛌", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "쉬는 시간", "en": "break time", "hint": "⏸️", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "방학", "en": "school vacation", "hint": "🏖️", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "심심하다", "en": "to be bored", "hint": "🥱", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "시간이 나다", "en": "to have free time", "hint": "🕓", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "계획을 세우다", "en": "to make a plan", "hint": "🗒️", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "발표하다", "en": "to present, give a talk", "hint": "🎤", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "춘천", "en": "Chuncheon (city)", "hint": "🚞", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "싱겁다", "en": "to be bland", "hint": "🥣", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "소금", "en": "salt", "hint": "🧂", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "자꾸", "en": "repeatedly, again and again", "hint": "🔁", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "생활비", "en": "living expenses", "hint": "💰", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "돈이 들다", "en": "to cost money", "hint": "💸", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "화해하다", "en": "to make up, reconcile", "hint": "🤝", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "싸우다", "en": "to quarrel, fight", "hint": "💢", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "가볍다", "en": "to be light", "hint": "🪶", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "따뜻하다", "en": "to be warm", "hint": "☕", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-
-      { "ko": "어떻게 오셨어요?", "en": "What brings you here?", "hint": "🚪", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "언제부터", "en": "since when", "hint": "⏱️", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "이틀", "en": "two days", "hint": "2️⃣", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "정도", "en": "about, approximately", "hint": "📏", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "그래도", "en": "even so, still", "hint": "🔄", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "운동", "en": "exercise", "hint": "🏃", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "운동을 하다", "en": "to exercise, work out", "hint": "💪", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "건강", "en": "health", "hint": "💚", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "을/를 위해서", "en": "for the sake of, in order to", "hint": "🎯", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "특별히", "en": "particularly, especially", "hint": "✨", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "기분이 좋다", "en": "to feel good", "hint": "😊", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "스트레스가 풀리다", "en": "for stress to be relieved", "hint": "😮‍💨", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "스트레스가 많다", "en": "to be under a lot of stress", "hint": "😫", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "수영장", "en": "swimming pool", "hint": "🏊", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "태권도", "en": "taekwondo", "hint": "🥋", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "태권도장", "en": "taekwondo gym", "hint": "🏯", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "동호회", "en": "club, hobby society", "hint": "👥", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "나가다", "en": "to go out; to attend", "hint": "🚶", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "시간을 내다", "en": "to make time", "hint": "⏳", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "고민", "en": "worry, something on one's mind", "hint": "😔", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "조언", "en": "advice", "hint": "💡", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "여행을 다녀오다", "en": "to go on a trip and come back", "hint": "✈️", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "무슨 일 있어요?", "en": "Is something the matter?", "hint": "❓", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "우유", "en": "milk", "hint": "🥛", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "낮", "en": "daytime", "hint": "☀️", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-      { "ko": "밤", "en": "night", "hint": "🌙", "category": "회화", "categoryEn": "Speaking · symptoms & advice" },
-
-      { "ko": "사흘", "en": "three days", "hint": "3️⃣", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "기사", "en": "news article", "hint": "📰", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "나이", "en": "age", "hint": "🎂", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "마라톤", "en": "marathon", "hint": "🏅", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "완주", "en": "running the full course", "hint": "🏁", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "대회", "en": "competition, meet", "hint": "🏆", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "참가하다", "en": "to take part, participate", "hint": "🙋", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "선수", "en": "athlete, competitor", "hint": "🏃", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "달리다", "en": "to run", "hint": "💨", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "달리기", "en": "running (as an event)", "hint": "👟", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "상을 받다", "en": "to win a prize", "hint": "🥇", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "기자", "en": "reporter", "hint": "🎙️", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "인터뷰", "en": "interview", "hint": "🎤", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "축하하다", "en": "to congratulate", "hint": "🎉", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "평소", "en": "ordinary times, usually", "hint": "📆", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "식사", "en": "a meal", "hint": "🍚", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "여러 번", "en": "several times", "hint": "🔢", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "세계", "en": "the world", "hint": "🌍", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "가장", "en": "the most, -est", "hint": "🔝", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "빠르다", "en": "to be fast", "hint": "⚡", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "특별하다", "en": "to be special", "hint": "⭐", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-      { "ko": "건강 비결", "en": "the secret of good health", "hint": "🔑", "category": "듣고 말하기", "categoryEn": "Listening & interview" },
-
-      { "ko": "생활", "en": "life, living", "hint": "🏡", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "습관", "en": "habit", "hint": "🔄", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "생활 습관", "en": "lifestyle habits", "hint": "📋", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "건강하다", "en": "to be healthy", "hint": "🌱", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "영양제", "en": "nutritional supplement", "hint": "💊", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "몸에 좋다", "en": "to be good for the body", "hint": "🥗", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "그러나", "en": "however", "hint": "↩️", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "바꾸다", "en": "to change", "hint": "🔀", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "중요하다", "en": "to be important", "hint": "❗", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "웃다", "en": "to laugh, to smile", "hint": "😄", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "모든", "en": "all, every", "hint": "🌐", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "좋은 쪽으로 생각하다", "en": "to look on the bright side", "hint": "🌤️", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "노력하다", "en": "to make an effort", "hint": "💪", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "채소", "en": "vegetables", "hint": "🥬", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "과일", "en": "fruit", "hint": "🍎", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "오래", "en": "for a long time", "hint": "⏳", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "매일", "en": "every day", "hint": "📅", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "한 번에", "en": "all at once, in one go", "hint": "1️⃣", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "외출하다", "en": "to go out (leave the house)", "hint": "🚪", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "돌아오다", "en": "to come back", "hint": "🔙", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "바로", "en": "right away", "hint": "⚡", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "손을 씻다", "en": "to wash one's hands", "hint": "🧼", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "예방하다", "en": "to prevent", "hint": "🛡️", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "꼭", "en": "without fail, be sure to", "hint": "✅", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "아침", "en": "morning; breakfast", "hint": "🌅", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-      { "ko": "저녁", "en": "evening; dinner", "hint": "🌆", "category": "읽고 쓰기", "categoryEn": "Reading · healthy habits" },
-
-      { "ko": "인삼", "en": "Korean ginseng", "hint": "🌿", "category": "문화", "categoryEn": "Culture · Korean ginseng" }
+      {
+        "ko": "어디가 아프다",
+        "en": "to hurt somewhere / where it hurts",
+        "hint": "🩹",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "속이 안 좋다",
+        "en": "to have an upset stomach",
+        "hint": "🤢",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "몸살이 나다",
+        "en": "to ache all over",
+        "hint": "🤒",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "다리를 다치다",
+        "en": "to injure one's leg",
+        "hint": "🦵",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "소화가 안되다",
+        "en": "to have indigestion",
+        "hint": "😖",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "배탈이 나다",
+        "en": "to have stomach trouble",
+        "hint": "🚽",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "토하다",
+        "en": "to vomit",
+        "hint": "🤮",
+        "category": "증상",
+        "categoryEn": "Symptoms",
+        "example": "네, 속도 안 좋고 토할 것 같아요.",
+        "exampleEn": "Yes, my stomach is bad and I feel like throwing up."
+      },
+      {
+        "ko": "어지럽다",
+        "en": "to be dizzy",
+        "hint": "💫",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "멀미를 하다",
+        "en": "to get motion sickness",
+        "hint": "🚌",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "얼굴에 뭐가 나다",
+        "en": "to break out on one's face",
+        "hint": "🧴",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "입맛이 없다",
+        "en": "to have no appetite",
+        "hint": "🍽️",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "기운이 없다",
+        "en": "to have no energy",
+        "hint": "🔋",
+        "category": "증상",
+        "categoryEn": "Symptoms",
+        "example": "왜 이렇게 기운이 없어요?",
+        "exampleEn": "Why are you so low on energy?"
+      },
+      {
+        "ko": "잠을 잘 못 자다",
+        "en": "to sleep badly",
+        "hint": "😴",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "열이 나다",
+        "en": "to have a fever",
+        "hint": "🌡️",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "목이 붓다",
+        "en": "to have a swollen, sore throat",
+        "hint": "🗣️",
+        "category": "증상",
+        "categoryEn": "Symptoms",
+        "example": "목이 많이 부었네요.",
+        "exampleEn": "Your throat is quite swollen."
+      },
+      {
+        "ko": "기침이 나다",
+        "en": "to have a cough",
+        "hint": "😷",
+        "category": "증상",
+        "categoryEn": "Symptoms",
+        "example": "네, 기침이 계속 나요.",
+        "exampleEn": "Yes, I keep coughing."
+      },
+      {
+        "ko": "감기에 걸리다",
+        "en": "to catch a cold",
+        "hint": "🤧",
+        "category": "증상",
+        "categoryEn": "Symptoms",
+        "example": "아이가 감기에 걸려 밤새 큰 소리로 울었다."
+      },
+      {
+        "ko": "머리가 아프다",
+        "en": "to have a headache",
+        "hint": "🤕",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "배가 아프다",
+        "en": "to have a stomachache",
+        "hint": "😣",
+        "category": "증상",
+        "categoryEn": "Symptoms",
+        "example": "배가 아파서 왔는데요.",
+        "exampleEn": "I came because my stomach hurts."
+      },
+      {
+        "ko": "눈이 아프다",
+        "en": "to have sore eyes",
+        "hint": "👁️",
+        "category": "증상",
+        "categoryEn": "Symptoms"
+      },
+      {
+        "ko": "이가 아프다",
+        "en": "to have a toothache",
+        "hint": "🦷",
+        "category": "증상",
+        "categoryEn": "Symptoms",
+        "example": "요즘 이가 계속 아파요.",
+        "exampleEn": "My tooth keeps hurting these days."
+      },
+      {
+        "ko": "피곤하다",
+        "en": "to be tired",
+        "hint": "😪",
+        "category": "증상",
+        "categoryEn": "Symptoms",
+        "example": "요즘 계속 피곤하고 입맛도 없어요.",
+        "exampleEn": "Lately I'm tired all the time and have no appetite."
+      },
+      {
+        "ko": "병원",
+        "en": "hospital / doctor's office",
+        "hint": "🏥",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics",
+        "example": "그래도 안 나으면 병원에 가세요.",
+        "exampleEn": "If it still doesn't get better, go to the hospital."
+      },
+      {
+        "ko": "의원",
+        "en": "clinic (small practice)",
+        "hint": "🏩",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "내과",
+        "en": "internal medicine",
+        "hint": "🩺",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "안과",
+        "en": "eye clinic / ophthalmology",
+        "hint": "👓",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "치과",
+        "en": "dental clinic",
+        "hint": "🦷",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics",
+        "example": "치과에 가 보는 게 어때요?",
+        "exampleEn": "How about going to the dentist?"
+      },
+      {
+        "ko": "피부과",
+        "en": "skin clinic / dermatology",
+        "hint": "🧖",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "정형외과",
+        "en": "orthopedic clinic",
+        "hint": "🦴",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "이비인후과",
+        "en": "ear, nose & throat clinic",
+        "hint": "👂",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "의사",
+        "en": "doctor",
+        "hint": "🧑‍⚕️",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics",
+        "example": "의사 선생님을 '의사님'이라고 불러서 사람들이 웃었어.",
+        "exampleEn": "I called the doctor 'uisanim' and everyone laughed."
+      },
+      {
+        "ko": "환자",
+        "en": "patient",
+        "hint": "🤒",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics",
+        "example": "의사는 위염 환자에게 식사량을 ( )."
+      },
+      {
+        "ko": "진료를 받다",
+        "en": "to receive medical treatment",
+        "hint": "📋",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "처방",
+        "en": "prescription",
+        "hint": "📄",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "주의사항",
+        "en": "precautions / things to watch for",
+        "hint": "⚠️",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "설명하다",
+        "en": "to explain",
+        "hint": "💬",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "역할극",
+        "en": "role-play",
+        "hint": "🎭",
+        "category": "병원",
+        "categoryEn": "Hospital & clinics"
+      },
+      {
+        "ko": "약",
+        "en": "medicine",
+        "hint": "💊",
+        "category": "약",
+        "categoryEn": "Medication",
+        "example": "이 약을 하루에 몇 번 먹어야 돼요?",
+        "exampleEn": "How many times a day do I take this medicine?"
+      },
+      {
+        "ko": "약국",
+        "en": "pharmacy",
+        "hint": "🏪",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "약사",
+        "en": "pharmacist",
+        "hint": "👩‍⚕️",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "감기약",
+        "en": "cold medicine",
+        "hint": "🤧",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "두통약",
+        "en": "headache medicine",
+        "hint": "🤕",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "멀미약",
+        "en": "motion-sickness medicine",
+        "hint": "🚗",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "소화제",
+        "en": "digestive medicine",
+        "hint": "😌",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "해열제",
+        "en": "fever reducer",
+        "hint": "🌡️",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "안약",
+        "en": "eye drops",
+        "hint": "💧",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "파스",
+        "en": "medicated patch",
+        "hint": "🩹",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "연고",
+        "en": "ointment",
+        "hint": "🧴",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "먹다",
+        "en": "to take (medicine) by mouth",
+        "hint": "💊",
+        "category": "약",
+        "categoryEn": "Medication",
+        "example": "이 약을 하루에 몇 번 먹어야 돼요?",
+        "exampleEn": "How many times a day do I take this medicine?"
+      },
+      {
+        "ko": "넣다",
+        "en": "to put in (eye drops)",
+        "hint": "💧",
+        "category": "약",
+        "categoryEn": "Medication",
+        "example": "네, 저도 시간 내서 한번 가 볼게요.",
+        "exampleEn": "Sure, I'll make time and give it a go."
+      },
+      {
+        "ko": "붙이다",
+        "en": "to stick on (a patch)",
+        "hint": "🩹",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "바르다",
+        "en": "to apply, rub on (ointment)",
+        "hint": "🧴",
+        "category": "약",
+        "categoryEn": "Medication"
+      },
+      {
+        "ko": "식후",
+        "en": "after a meal",
+        "hint": "🍽️",
+        "category": "약",
+        "categoryEn": "Medication",
+        "example": "식후 세 번, 여덟 시간마다 드시면 돼요.",
+        "exampleEn": "Three times after meals, every eight hours."
+      },
+      {
+        "ko": "하루",
+        "en": "one day / a day",
+        "hint": "📅",
+        "category": "약",
+        "categoryEn": "Medication",
+        "example": "이 약을 하루에 몇 번 먹어야 돼요?",
+        "exampleEn": "How many times a day do I take this medicine?"
+      },
+      {
+        "ko": "낫다",
+        "en": "to recover, get better",
+        "hint": "💚",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "감기 아직 안 나았어요?",
+        "exampleEn": "Hasn't your cold got better yet?"
+      },
+      {
+        "ko": "붓다",
+        "en": "to swell",
+        "hint": "🎈",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "목이 많이 부었네요.",
+        "exampleEn": "Your throat is quite swollen."
+      },
+      {
+        "ko": "짓다",
+        "en": "to build; to name",
+        "hint": "🏠",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "요즘 새로 지은 원룸이 많으니까",
+        "exampleEn": "There are a lot of newly built studios these days, so…"
+      },
+      {
+        "ko": "젓다",
+        "en": "to stir",
+        "hint": "🥄",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "마다",
+        "en": "every, each (N마다)",
+        "hint": "♻️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "씩",
+        "en": "each, apiece (per unit)",
+        "hint": "🔢",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "계속",
+        "en": "continuously",
+        "hint": "➡️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "네, 기침이 계속 나요.",
+        "exampleEn": "Yes, I keep coughing."
+      },
+      {
+        "ko": "설탕",
+        "en": "sugar",
+        "hint": "🍬",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "그럼 우유나 설탕을 좀 넣으세요."
+      },
+      {
+        "ko": "걱정",
+        "en": "worry",
+        "hint": "😟",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "걱정하지 마세요. 처음에는 힘들겠지만 곧 익숙해질 거예요.",
+        "exampleEn": "Don't worry. It'll be hard at first, but you'll soon get used to it."
+      },
+      {
+        "ko": "푹 쉬다",
+        "en": "to get plenty of rest",
+        "hint": "🛌",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "쉬는 시간",
+        "en": "break time",
+        "hint": "⏸️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "방학",
+        "en": "school vacation",
+        "hint": "🏖️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "방학에 어디 갈 거야?",
+        "exampleEn": "Where are you going in the holidays?"
+      },
+      {
+        "ko": "심심하다",
+        "en": "to be bored",
+        "hint": "🥱",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "시간이 나다",
+        "en": "to have free time",
+        "hint": "🕓",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "계획을 세우다",
+        "en": "to make a plan",
+        "hint": "🗒️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "발표하다",
+        "en": "to present, give a talk",
+        "hint": "🎤",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "발표할 때 원고를 보면서 하면 안 돼요?"
+      },
+      {
+        "ko": "춘천",
+        "en": "Chuncheon (city)",
+        "hint": "🚞",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "싱겁다",
+        "en": "to be bland",
+        "hint": "🥣",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "소금",
+        "en": "salt",
+        "hint": "🧂",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "소금을 좀 많이 넣은 것 같아요."
+      },
+      {
+        "ko": "자꾸",
+        "en": "repeatedly, again and again",
+        "hint": "🔁",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "생활비",
+        "en": "living expenses",
+        "hint": "💰",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "아니요, 생활비가 많이 안 들어서 좋기는 한데 룸메이트 때문에 좀 힘들어요. 그래서 다음 학기에 이사를 가려고 생각 중이에요."
+      },
+      {
+        "ko": "돈이 들다",
+        "en": "to cost money",
+        "hint": "💸",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "화해하다",
+        "en": "to make up, reconcile",
+        "hint": "🤝",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "싸우다",
+        "en": "to quarrel, fight",
+        "hint": "💢",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "가볍다",
+        "en": "to be light",
+        "hint": "🪶",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "따뜻하다",
+        "en": "to be warm",
+        "hint": "☕",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "요즘 감기가 유행이에요. 약 잘 드시고 따뜻한 물을 자주 드세요."
+      },
+      {
+        "ko": "어떻게 오셨어요?",
+        "en": "What brings you here?",
+        "hint": "🚪",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "언제부터",
+        "en": "since when",
+        "hint": "⏱️",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "언제부터 아프셨어요?",
+        "exampleEn": "Since when has it hurt?"
+      },
+      {
+        "ko": "이틀",
+        "en": "two days",
+        "hint": "2️⃣",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "이틀 전부터 아팠어요.",
+        "exampleEn": "It's hurt since two days ago."
+      },
+      {
+        "ko": "정도",
+        "en": "about, approximately",
+        "hint": "📏",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "5,000원이에요. 이 약을 이틀 정도 드셔 보시고 그래도 안 나으면 병원에 가세요."
+      },
+      {
+        "ko": "그래도",
+        "en": "even so, still",
+        "hint": "🔄",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "그래도 안 나으면 병원에 가세요.",
+        "exampleEn": "If it still doesn't get better, go to the hospital."
+      },
+      {
+        "ko": "운동",
+        "en": "exercise",
+        "hint": "🏃",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "그럼 운동을 좀 해 보는 게 어때요?",
+        "exampleEn": "Then how about getting some exercise?"
+      },
+      {
+        "ko": "운동을 하다",
+        "en": "to exercise, work out",
+        "hint": "💪",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다."
+      },
+      {
+        "ko": "건강",
+        "en": "health",
+        "hint": "💚",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "민수 씨는 건강을 위해서 특별히 하는 운동이 있어요?",
+        "exampleEn": "Minsu, is there any exercise you do particularly for your health?"
+      },
+      {
+        "ko": "을/를 위해서",
+        "en": "for the sake of, in order to",
+        "hint": "🎯",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "특별히",
+        "en": "particularly, especially",
+        "hint": "✨",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "민수 씨는 건강을 위해서 특별히 하는 운동이 있어요?",
+        "exampleEn": "Minsu, is there any exercise you do particularly for your health?"
+      },
+      {
+        "ko": "기분이 좋다",
+        "en": "to feel good",
+        "hint": "😊",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "스트레스가 풀리다",
+        "en": "for stress to be relieved",
+        "hint": "😮‍💨",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "스트레스가 많다",
+        "en": "to be under a lot of stress",
+        "hint": "😫",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "수영장",
+        "en": "swimming pool",
+        "hint": "🏊",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "회사 근처에 있는 수영장에서 해요.",
+        "exampleEn": "At the pool near my office."
+      },
+      {
+        "ko": "태권도",
+        "en": "taekwondo",
+        "hint": "🥋",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "태권도장",
+        "en": "taekwondo gym",
+        "hint": "🏯",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "동호회",
+        "en": "club, hobby society",
+        "hint": "👥",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "나가다",
+        "en": "to go out; to attend",
+        "hint": "🚶",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "공연이 시작하면 밖으로 나가면 안 됩니다."
+      },
+      {
+        "ko": "시간을 내다",
+        "en": "to make time",
+        "hint": "⏳",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "고민",
+        "en": "worry, something on one's mind",
+        "hint": "😔",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "취업 준비생의 70% 이상이 면접시험 준비를 할 때 외모로 말미암아 고민해 본 적이 있다고 말했다."
+      },
+      {
+        "ko": "조언",
+        "en": "advice",
+        "hint": "💡",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "여행을 다녀오다",
+        "en": "to go on a trip and come back",
+        "hint": "✈️",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "무슨 일 있어요?",
+        "en": "Is something the matter?",
+        "hint": "❓",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice"
+      },
+      {
+        "ko": "우유",
+        "en": "milk",
+        "hint": "🥛",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "그럼 우유나 설탕을 좀 넣으세요."
+      },
+      {
+        "ko": "낮",
+        "en": "daytime",
+        "hint": "☀️",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "낮에는 좀 더운데 아침, 저녁은 시원해."
+      },
+      {
+        "ko": "밤",
+        "en": "night",
+        "hint": "🌙",
+        "category": "회화",
+        "categoryEn": "Speaking · symptoms & advice",
+        "example": "밤에 큰 소리로 음악을 듣거나 시끄럽게 떠들면 안 됩니다.",
+        "exampleEn": "You must not play music loudly at night or make a racket."
+      },
+      {
+        "ko": "사흘",
+        "en": "three days",
+        "hint": "3️⃣",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "기사",
+        "en": "news article",
+        "hint": "📰",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "나이",
+        "en": "age",
+        "hint": "🎂",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "저는 지금까지 나이가 많은 사람에게는 항상 높임말을 썼습니다.",
+        "exampleEn": "Up to now I have always used polite speech with people older than me."
+      },
+      {
+        "ko": "마라톤",
+        "en": "marathon",
+        "hint": "🏅",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "마라톤에 처음 참가하신 건가요?",
+        "exampleEn": "Is this your first marathon?"
+      },
+      {
+        "ko": "완주",
+        "en": "running the full course",
+        "hint": "🏁",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "대회",
+        "en": "competition, meet",
+        "hint": "🏆",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "참가하다",
+        "en": "to take part, participate",
+        "hint": "🙋",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "선수",
+        "en": "athlete, competitor",
+        "hint": "🏃",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다."
+      },
+      {
+        "ko": "달리다",
+        "en": "to run",
+        "hint": "💨",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "더 달릴 수 있을 것 같은데요.",
+        "exampleEn": "I feel like I could run further."
+      },
+      {
+        "ko": "달리기",
+        "en": "running (as an event)",
+        "hint": "👟",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "상을 받다",
+        "en": "to win a prize",
+        "hint": "🥇",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "기자",
+        "en": "reporter",
+        "hint": "🎙️",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "인터뷰",
+        "en": "interview",
+        "hint": "🎤",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "축하하다",
+        "en": "to congratulate",
+        "hint": "🎉",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "입학을 축하합니다.",
+        "exampleEn": "Congratulations on starting school."
+      },
+      {
+        "ko": "평소",
+        "en": "ordinary times, usually",
+        "hint": "📆",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "평소에 운동을 많이 하십니까?",
+        "exampleEn": "Do you exercise a lot ordinarily?"
+      },
+      {
+        "ko": "식사",
+        "en": "a meal",
+        "hint": "🍚",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "식사는 어떻게 하십니까?",
+        "exampleEn": "What about your meals?"
+      },
+      {
+        "ko": "여러 번",
+        "en": "several times",
+        "hint": "🔢",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "세계",
+        "en": "the world",
+        "hint": "🌍",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "세계 인구가 늘었어요."
+      },
+      {
+        "ko": "가장",
+        "en": "the most, -est",
+        "hint": "🔝",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "제주도가 가장 큰 섬이에요."
+      },
+      {
+        "ko": "빠르다",
+        "en": "to be fast",
+        "hint": "⚡",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "특별하다",
+        "en": "to be special",
+        "hint": "⭐",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview",
+        "example": "여름철에 음식을 보관하려면 특별한 냉장고를 마련해야 한다."
+      },
+      {
+        "ko": "건강 비결",
+        "en": "the secret of good health",
+        "hint": "🔑",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening & interview"
+      },
+      {
+        "ko": "생활",
+        "en": "life, living",
+        "hint": "🏡",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "아키라 씨, 회사 생활에 익숙해졌어요?",
+        "exampleEn": "Akira, have you got used to life at the company?"
+      },
+      {
+        "ko": "습관",
+        "en": "habit",
+        "hint": "🔄",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "생활 습관",
+        "en": "lifestyle habits",
+        "hint": "📋",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "건강하다",
+        "en": "to be healthy",
+        "hint": "🌱",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다."
+      },
+      {
+        "ko": "영양제",
+        "en": "nutritional supplement",
+        "hint": "💊",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "몸에 좋다",
+        "en": "to be good for the body",
+        "hint": "🥗",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "그러나",
+        "en": "however",
+        "hint": "↩️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "바꾸다",
+        "en": "to change",
+        "hint": "🔀",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다."
+      },
+      {
+        "ko": "중요하다",
+        "en": "to be important",
+        "hint": "❗",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "가격을 중요하게 생각하는 사람이 전체의 반을 넘는다."
+      },
+      {
+        "ko": "웃다",
+        "en": "to laugh, to smile",
+        "hint": "😄",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "모든",
+        "en": "all, every",
+        "hint": "🌐",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "여름에는 모든 음식을 냉장고에 보관해야 한다."
+      },
+      {
+        "ko": "좋은 쪽으로 생각하다",
+        "en": "to look on the bright side",
+        "hint": "🌤️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "노력하다",
+        "en": "to make an effort",
+        "hint": "💪",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "채소",
+        "en": "vegetables",
+        "hint": "🥬",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "과일",
+        "en": "fruit",
+        "hint": "🍎",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "여기 과일을 좀 사 왔어요.",
+        "exampleEn": "I brought some fruit."
+      },
+      {
+        "ko": "오래",
+        "en": "for a long time",
+        "hint": "⏳",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "아키라 씨, 오래간만이에요.",
+        "exampleEn": "Akira, it's been a long time."
+      },
+      {
+        "ko": "매일",
+        "en": "every day",
+        "hint": "📅",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "저는 매일 아침 운동을 해요."
+      },
+      {
+        "ko": "한 번에",
+        "en": "all at once, in one go",
+        "hint": "1️⃣",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "외출하다",
+        "en": "to go out (leave the house)",
+        "hint": "🚪",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "돌아오다",
+        "en": "to come back",
+        "hint": "🔙",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "바로",
+        "en": "right away",
+        "hint": "⚡",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "네, 지금 바로 가겠습니다.",
+        "exampleEn": "I'll come right now."
+      },
+      {
+        "ko": "손을 씻다",
+        "en": "to wash one's hands",
+        "hint": "🧼",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "예방하다",
+        "en": "to prevent",
+        "hint": "🛡️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits"
+      },
+      {
+        "ko": "꼭",
+        "en": "without fail, be sure to",
+        "hint": "✅",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "내일까지 숙제를 꼭 해야 돼요."
+      },
+      {
+        "ko": "아침",
+        "en": "morning; breakfast",
+        "hint": "🌅",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "저는 아침마다 두 시간씩 운동을 합니다.",
+        "exampleEn": "I exercise for two hours every morning."
+      },
+      {
+        "ko": "저녁",
+        "en": "evening; dinner",
+        "hint": "🌆",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · healthy habits",
+        "example": "어제 저녁부터 계속 아파요.",
+        "exampleEn": "It's been hurting since yesterday evening."
+      },
+      {
+        "ko": "인삼",
+        "en": "Korean ginseng",
+        "hint": "🌿",
+        "category": "문화",
+        "categoryEn": "Culture · Korean ginseng"
+      }
     ]
   },
   "notebook": {
     "title": "Unit 11 · Why don't you exercise?",
     "groups": [
-      { "ko": "증상", "en": "Symptoms", "cat": "증상" },
-      { "ko": "병원", "en": "Hospital & clinics", "cat": "병원" },
-      { "ko": "약", "en": "Medication", "cat": "약" },
-      { "ko": "문법과 표현", "en": "Grammar & expressions", "cat": "문법과 표현" },
-      { "ko": "회화", "en": "Speaking · symptoms & advice", "cat": "회화" },
-      { "ko": "듣고 말하기", "en": "Listening & interview", "cat": "듣고 말하기" },
-      { "ko": "읽고 쓰기", "en": "Reading · healthy habits", "cat": "읽고 쓰기" },
-      { "ko": "문화", "en": "Culture · Korean ginseng", "cat": "문화" }
+      {
+        "ko": "증상",
+        "en": "Symptoms",
+        "cat": "증상"
+      },
+      {
+        "ko": "병원",
+        "en": "Hospital & clinics",
+        "cat": "병원"
+      },
+      {
+        "ko": "약",
+        "en": "Medication",
+        "cat": "약"
+      },
+      {
+        "ko": "문법과 표현",
+        "en": "Grammar & expressions",
+        "cat": "문법과 표현"
+      },
+      {
+        "ko": "회화",
+        "en": "Speaking · symptoms & advice",
+        "cat": "회화"
+      },
+      {
+        "ko": "듣고 말하기",
+        "en": "Listening & interview",
+        "cat": "듣고 말하기"
+      },
+      {
+        "ko": "읽고 쓰기",
+        "en": "Reading · healthy habits",
+        "cat": "읽고 쓰기"
+      },
+      {
+        "ko": "문화",
+        "en": "Culture · Korean ginseng",
+        "cat": "문화"
+      }
     ]
   }
 }

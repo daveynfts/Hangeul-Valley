@@ -11,6 +11,9 @@
 const vbTr = (obj, field) => (typeof tr === 'function'
   ? tr(obj, field)
   : String((obj && obj[field]) || ''));
+// hvT, guarded the same way and for the same reason. Outside a page there is no catalogue,
+// so the key comes back and the caller sees which string was wanted.
+const vbT = (key, vars) => (typeof hvT === 'function' ? hvT(key, vars) : key);
 
 const VB_INITIAL_JAMO = [
   'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
@@ -94,28 +97,38 @@ function vbEndingRule(text) {
     // ㄹ is the exception: a noun ending in ㄹ takes 로, not 으로.
     direction: closed && last.final !== 'ㄹ' ? '으로' : '로',
     label: closed
-      ? `${last.char} ends with batchim ${last.final}`
-      : `${last.char} is an open syllable (no batchim)`
+      ? vbT('ui.vb.ending.closed', { block: last.char, batchim: last.final })
+      : vbT('ui.vb.ending.open', { block: last.char })
   };
 }
 
+/**
+ * Which kind of entry this is — as an id, not as a label.
+ *
+ * vbStudyNote below chooses its advice from this, and it used to choose by matching the
+ * English words: `type === 'Multi-word expression'`. That works in exactly one language, so
+ * the identity and the wording are now two different things.
+ */
 function vbStudyType(word, fact) {
   const ko = String((word && word.ko) || '').trim();
   const en = String((word && vbTr(word, 'en')) || '').trim().toLowerCase();
   const category = `${(word && vbTr(word, 'categoryEn')) || ''} ${(word && word.category) || ''}`.toLowerCase();
   const origin = fact && fact.o;
-  if (origin === 'idiom') return 'Idiom';
-  if (origin === 'discourse') return 'Discourse marker';
-  if (!vbHangulBlocks(ko).length && /^[A-Z0-9][A-Z0-9.&/+\-]*$/i.test(ko)) return 'Abbreviation';
-  if (/grammar|expression|문법/.test(category)) return 'Grammar form';
-  if (/\s/.test(ko)) return 'Multi-word expression';
+  if (origin === 'idiom') return 'idiom';
+  if (origin === 'discourse') return 'discourse';
+  if (!vbHangulBlocks(ko).length && /^[A-Z0-9][A-Z0-9.&/+\-]*$/i.test(ko)) return 'abbreviation';
+  if (/grammar|expression|문법/.test(category)) return 'grammar';
+  if (/\s/.test(ko)) return 'multiword';
   if (/다$/.test(ko)) {
-    return /^(to be|be |become |seem )/.test(en)
-      ? 'Descriptive predicate'
-      : 'Dictionary-form predicate';
+    return /^(to be|be |become |seem )/.test(en) ? 'descriptive' : 'dictionary';
   }
-  if (origin === 'sino-noun') return 'Noun';
-  return 'Vocabulary word';
+  if (origin === 'sino-noun') return 'noun';
+  return 'vocab';
+}
+
+/** The same thing in words, for the card that shows it. */
+function vbStudyTypeLabel(id) {
+  return vbT('ui.vb.type.' + (id || 'vocab'));
 }
 
 function vbStudyNote(word, type, ending) {
@@ -123,27 +136,19 @@ function vbStudyNote(word, type, ending) {
   const forms = Array.isArray(word && word.forms)
     ? [...new Set(word.forms.map(v => String(v || '').trim()).filter(Boolean))]
     : [];
-  if (/predicate/.test(type)) {
+  if (type === 'descriptive' || type === 'dictionary') {
     const stem = ko.endsWith('다') ? ko.slice(0, -1) : ko;
-    return `This is a dictionary form. Remove -다 to see the stem ${stem}-. Endings attach to the stem; irregular predicates may change shape, so compare the audio and a curated example before producing a new form.`;
+    return vbT('ui.vb.note.predicate', { stem });
   }
-  if (type === 'Multi-word expression') {
-    return 'Learn this as one chunk. Keep the spacing shown in the headword, then practise recalling the whole expression instead of translating it word by word.';
-  }
-  if (type === 'Grammar form') {
-    return 'Study the words immediately before and after this form. Its meaning depends on the sentence pattern, so reuse it from a complete example rather than in isolation.';
-  }
-  if (type === 'Discourse marker') {
-    return 'This expression connects ideas in a text or conversation. Notice its position in a sentence and the relationship it signals between clauses.';
-  }
-  if (type === 'Idiom') {
-    return 'Treat the complete expression as one meaning unit. The literal origin helps memory, but the idiomatic meaning is what belongs in a sentence.';
-  }
-  if (type === 'Abbreviation') {
-    return 'This entry is written as a Latin-letter abbreviation. Learn its Korean reading from the audio; particle choice follows the final spoken sound, not the last printed letter.';
-  }
-  const seen = forms.length ? ` Forms recorded in this level include ${forms.join(', ')}.` : '';
-  return `The final written block is ${ending.closed ? 'closed' : 'open'}. If this word is used as a noun phrase, that spelling selects ${ending.topic}, ${ending.subject}, ${ending.object} and ${ending.direction} from the common particle pairs.${seen}`;
+  if (type === 'multiword') return vbT('ui.vb.note.multiword');
+  if (type === 'grammar') return vbT('ui.vb.note.grammar');
+  if (type === 'discourse') return vbT('ui.vb.note.discourse');
+  if (type === 'idiom') return vbT('ui.vb.note.idiom');
+  if (type === 'abbreviation') return vbT('ui.vb.note.abbreviation');
+  const seen = forms.length ? ' ' + vbT('ui.vb.note.forms', { forms: forms.join(', ') }) : '';
+  return vbT(ending.closed ? 'ui.vb.note.closed' : 'ui.vb.note.open', {
+    topic: ending.topic, subject: ending.subject, object: ending.object, direction: ending.direction
+  }) + seen;
 }
 
 function vbDetailModel(word, fact) {
@@ -159,7 +164,8 @@ function vbDetailModel(word, fact) {
     blocks,
     syllableCount: blocks.length,
     ending,
-    type,
+    type: vbStudyTypeLabel(type),
+    typeId: type,
     forms,
     studyNote: vbStudyNote(safeWord, type, ending)
   };
@@ -172,6 +178,7 @@ if (typeof module !== 'undefined' && module.exports) {
     vbRomanize,
     vbEndingRule,
     vbStudyType,
+    vbStudyTypeLabel,
     vbStudyNote,
     vbDetailModel
   };

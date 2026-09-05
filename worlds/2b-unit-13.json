@@ -16,133 +16,863 @@
     "world": true,
     "pack": "snu-2b",
     "worldId": "2b-unit-13",
-    "map": { "extras": [], "stations": ["desk", "cassette"] },
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk",
+        "cassette"
+      ]
+    },
     "target": 9,
     "words": [
-      { "ko": "주거", "en": "housing, living arrangements", "hint": "🏘️", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "기숙사", "en": "dormitory", "hint": "🏢", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "아파트", "en": "apartment block flat", "hint": "🏬", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "주택", "en": "a house (detached)", "hint": "🏡", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "빌라", "en": "villa — a low-rise flat block", "hint": "🏘️", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "원룸", "en": "studio flat (one-room)", "hint": "🚪", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "오피스텔", "en": "officetel — a studio-office flat", "hint": "🏙️", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "하숙집", "en": "boarding house (room with meals)", "hint": "🍚", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "고시원", "en": "gosiwon — a tiny single room", "hint": "📚", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "한옥", "en": "hanok — a traditional Korean house", "hint": "🏯", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "방", "en": "room", "hint": "🛏️", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "거실", "en": "living room", "hint": "🛋️", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "부엌", "en": "kitchen", "hint": "🍳", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "화장실", "en": "bathroom, toilet", "hint": "🚽", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "베란다", "en": "balcony", "hint": "🪟", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "현관", "en": "entrance hall", "hint": "🚪", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "빈방", "en": "a vacant room", "hint": "🔓", "category": "주거", "categoryEn": "Housing & rooms" },
-      { "ko": "1인실", "en": "single room (for one)", "hint": "1️⃣", "category": "주거", "categoryEn": "Housing & rooms" },
-
-      { "ko": "방이 넓다", "en": "the room is spacious", "hint": "📐", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "방이 좁다", "en": "the room is cramped", "hint": "📏", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "방값이 싸다", "en": "the rent is cheap", "hint": "💰", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "새로 지었다", "en": "newly built", "hint": "🏗️", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "시설이 잘되어 있다", "en": "well equipped, good facilities", "hint": "⚙️", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "교통이 편리하다", "en": "the transport links are good", "hint": "🚇", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "교통이 불편하다", "en": "the transport links are poor", "hint": "🚏", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "주변이 조용하다", "en": "the area around is quiet", "hint": "🤫", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "전망이 좋다", "en": "there is a good view", "hint": "🌄", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "집주인이 좋다", "en": "the landlord is good", "hint": "🧑", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "살기 좋다", "en": "good to live in", "hint": "🏠", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "시끄럽다", "en": "to be noisy", "hint": "📢", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "어둡다", "en": "to be dark", "hint": "🌑", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "깨끗하다", "en": "to be clean", "hint": "✨", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "마음에 들다", "en": "to like it, for it to suit you", "hint": "💚", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "주변 환경", "en": "the surroundings, the neighbourhood", "hint": "🌳", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "교통편", "en": "transport, the way to get about", "hint": "🚌", "category": "집 조건", "categoryEn": "What makes a place good" },
-      { "ko": "크기", "en": "size", "hint": "📦", "category": "집 조건", "categoryEn": "What makes a place good" },
-
-      { "ko": "집세", "en": "rent", "hint": "🧾", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "월세", "en": "monthly rent", "hint": "📅", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "전세", "en": "jeonse — a lump-sum deposit lease", "hint": "🏦", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "보증금", "en": "deposit", "hint": "💵", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "식비", "en": "food costs", "hint": "🍽️", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "교통비", "en": "transport costs", "hint": "🚌", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "관리비", "en": "maintenance fee", "hint": "🧹", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "전기 요금", "en": "electricity bill", "hint": "💡", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "가스 요금", "en": "gas bill", "hint": "🔥", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "수도 요금", "en": "water bill", "hint": "🚰", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "전화 요금", "en": "phone bill", "hint": "📞", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "매매", "en": "buying and selling (property)", "hint": "🤝", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "이하", "en": "or less, no more than", "hint": "⬇️", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "포함되다", "en": "to be included", "hint": "➕", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "반씩", "en": "half each", "hint": "🌗", "category": "생활비", "categoryEn": "Rent & bills" },
-      { "ko": "나오다", "en": "to come to (of a bill)", "hint": "🧮", "category": "생활비", "categoryEn": "Rent & bills" },
-
-      { "ko": "부동산", "en": "estate agency; real estate", "hint": "🏢", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "중개인", "en": "agent, broker", "hint": "🧑‍💼", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "계약", "en": "contract", "hint": "📄", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "계약 기간", "en": "the term of the contract", "hint": "⏳", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "조건", "en": "conditions, terms", "hint": "📋", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "위치", "en": "location", "hint": "📍", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "기타", "en": "other, anything else", "hint": "🗂️", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "구하다", "en": "to look for, to find (a place)", "hint": "🔍", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "이사하다", "en": "to move house", "hint": "📦", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "알아보다", "en": "to look into, to ask around", "hint": "🔎", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "결정하다", "en": "to decide", "hint": "✅", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "구경하다", "en": "to look round, to view", "hint": "👀", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "광고", "en": "advertisement", "hint": "📰", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "문의하다", "en": "to enquire", "hint": "❓", "category": "부동산", "categoryEn": "Finding a place" },
-      { "ko": "거리", "en": "distance; a walk away", "hint": "📐", "category": "부동산", "categoryEn": "Finding a place" },
-
-      { "ko": "떠들다", "en": "to make a racket", "hint": "🗣️", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "공기", "en": "air", "hint": "💨", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "마침", "en": "as it happens, just then", "hint": "⏰", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "회사를 옮기다", "en": "to move to another company", "hint": "🏢", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "장을 보다", "en": "to do the grocery shopping", "hint": "🛒", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "편하다", "en": "to be comfortable, easy", "hint": "😌", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "불편하다", "en": "to be inconvenient", "hint": "😖", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "힘들다", "en": "to be hard going", "hint": "😓", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "연락하다", "en": "to get in touch", "hint": "📱", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "그렇지 않아도", "en": "as it happens, I was going to anyway", "hint": "🙂", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "높은 곳", "en": "a high spot, up high", "hint": "⛰️", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-      { "ko": "길이 막히다", "en": "for the road to be jammed", "hint": "🚗", "category": "문법과 표현", "categoryEn": "Grammar & expressions" },
-
-      { "ko": "대부분", "en": "mostly, most of them", "hint": "📊", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-      { "ko": "바뀌다", "en": "to be turned into, to change", "hint": "🔄", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-      { "ko": "유학", "en": "studying abroad", "hint": "✈️", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-      { "ko": "생활하다", "en": "to live, to get by day to day", "hint": "🏠", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-      { "ko": "아주머니", "en": "ma’am — an older woman", "hint": "👩", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-      { "ko": "가족처럼", "en": "like family", "hint": "👨‍👩‍👧", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-      { "ko": "소개하다", "en": "to introduce, to put on to", "hint": "🤝", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-      { "ko": "나중에", "en": "later on", "hint": "⏭️", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-      { "ko": "좋은 점", "en": "the good points", "hint": "👍", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-      { "ko": "나쁜 점", "en": "the bad points", "hint": "👎", "category": "읽고 쓰기", "categoryEn": "Reading · the place I live" },
-
-      { "ko": "룸메이트", "en": "roommate", "hint": "👥", "category": "과제", "categoryEn": "Task · finding a roommate" },
-      { "ko": "규칙", "en": "a rule", "hint": "📜", "category": "과제", "categoryEn": "Task · finding a roommate" },
-      { "ko": "청소", "en": "cleaning", "hint": "🧽", "category": "과제", "categoryEn": "Task · finding a roommate" },
-      { "ko": "궁금하다", "en": "to wonder, to be curious", "hint": "🤔", "category": "과제", "categoryEn": "Task · finding a roommate" },
-      { "ko": "혹시", "en": "by any chance", "hint": "❔", "category": "과제", "categoryEn": "Task · finding a roommate" },
-      { "ko": "잘됐다", "en": "that works out well", "hint": "🎉", "category": "과제", "categoryEn": "Task · finding a roommate" },
-
-      { "ko": "북촌 한옥마을", "en": "Bukchon Hanok Village", "hint": "🏘️", "category": "문화와 발음", "categoryEn": "Culture & pronunciation" },
-      { "ko": "민속촌", "en": "folk village", "hint": "🎎", "category": "문화와 발음", "categoryEn": "Culture & pronunciation" },
-      { "ko": "바람이 통하다", "en": "to be well ventilated", "hint": "🌬️", "category": "문화와 발음", "categoryEn": "Culture & pronunciation" },
-      { "ko": "느끼다", "en": "to feel", "hint": "💭", "category": "문화와 발음", "categoryEn": "Culture & pronunciation" },
-      { "ko": "시원하다", "en": "to be cool, refreshing", "hint": "🧊", "category": "문화와 발음", "categoryEn": "Culture & pronunciation" },
-      { "ko": "놀러 가다", "en": "to go round to visit", "hint": "🚶", "category": "문화와 발음", "categoryEn": "Culture & pronunciation" },
-      { "ko": "입학", "en": "entering a school", "hint": "🎓", "category": "문화와 발음", "categoryEn": "Culture & pronunciation" },
-      { "ko": "어울리다", "en": "to suit, to go well with", "hint": "👔", "category": "문화와 발음", "categoryEn": "Culture & pronunciation" },
-      { "ko": "반찬", "en": "side dish", "hint": "🥗", "category": "문화와 발음", "categoryEn": "Culture & pronunciation" }
+      {
+        "ko": "주거",
+        "en": "housing, living arrangements",
+        "hint": "🏘️",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "기숙사",
+        "en": "dormitory",
+        "hint": "🏢",
+        "category": "주거",
+        "categoryEn": "Housing & rooms",
+        "example": "지금 살고 있는 기숙사가 마음에 안 들어요?",
+        "exampleEn": "Don't you like the dorm you're in?"
+      },
+      {
+        "ko": "아파트",
+        "en": "apartment block flat",
+        "hint": "🏬",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "주택",
+        "en": "a house (detached)",
+        "hint": "🏡",
+        "category": "주거",
+        "categoryEn": "Housing & rooms",
+        "example": "주택이 많이 줄었습니다."
+      },
+      {
+        "ko": "빌라",
+        "en": "villa — a low-rise flat block",
+        "hint": "🏘️",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "원룸",
+        "en": "studio flat (one-room)",
+        "hint": "🚪",
+        "category": "주거",
+        "categoryEn": "Housing & rooms",
+        "example": "요즘 새로 지은 원룸이 많으니까",
+        "exampleEn": "There are a lot of newly built studios these days, so…"
+      },
+      {
+        "ko": "오피스텔",
+        "en": "officetel — a studio-office flat",
+        "hint": "🏙️",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "하숙집",
+        "en": "boarding house (room with meals)",
+        "hint": "🍚",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "고시원",
+        "en": "gosiwon — a tiny single room",
+        "hint": "📚",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "한옥",
+        "en": "hanok — a traditional Korean house",
+        "hint": "🏯",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "방",
+        "en": "room",
+        "hint": "🛏️",
+        "category": "주거",
+        "categoryEn": "Housing & rooms",
+        "example": "방이 아직 있습니까?",
+        "exampleEn": "Is the room still available?"
+      },
+      {
+        "ko": "거실",
+        "en": "living room",
+        "hint": "🛋️",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "부엌",
+        "en": "kitchen",
+        "hint": "🍳",
+        "category": "주거",
+        "categoryEn": "Housing & rooms",
+        "example": "음식을 만들고 싶으면 2층에 있는 부엌을 이용해 주세요."
+      },
+      {
+        "ko": "화장실",
+        "en": "bathroom, toilet",
+        "hint": "🚽",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "베란다",
+        "en": "balcony",
+        "hint": "🪟",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "현관",
+        "en": "entrance hall",
+        "hint": "🚪",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "빈방",
+        "en": "a vacant room",
+        "hint": "🔓",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "1인실",
+        "en": "single room (for one)",
+        "hint": "1️⃣",
+        "category": "주거",
+        "categoryEn": "Housing & rooms"
+      },
+      {
+        "ko": "방이 넓다",
+        "en": "the room is spacious",
+        "hint": "📐",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good",
+        "example": "지금 사는 집은 방이 넓어서 좋기는 하지만 학교에서 너무 멀어요."
+      },
+      {
+        "ko": "방이 좁다",
+        "en": "the room is cramped",
+        "hint": "📏",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "방값이 싸다",
+        "en": "the rent is cheap",
+        "hint": "💰",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "새로 지었다",
+        "en": "newly built",
+        "hint": "🏗️",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "시설이 잘되어 있다",
+        "en": "well equipped, good facilities",
+        "hint": "⚙️",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good",
+        "example": "시설이 잘되어 있는 원룸을 구했으면 좋겠어요.",
+        "exampleEn": "I'd like to find a studio flat with good facilities."
+      },
+      {
+        "ko": "교통이 편리하다",
+        "en": "the transport links are good",
+        "hint": "🚇",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "교통이 불편하다",
+        "en": "the transport links are poor",
+        "hint": "🚏",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "주변이 조용하다",
+        "en": "the area around is quiet",
+        "hint": "🤫",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good",
+        "example": "근처에 공원도 있고 주변이 조용해서 살기 좋아요.",
+        "exampleEn": "There's a park nearby and the area is quiet, so it's good to live in."
+      },
+      {
+        "ko": "전망이 좋다",
+        "en": "there is a good view",
+        "hint": "🌄",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "집주인이 좋다",
+        "en": "the landlord is good",
+        "hint": "🧑",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "살기 좋다",
+        "en": "good to live in",
+        "hint": "🏠",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good",
+        "example": "근처에 공원도 있고 주변이 조용해서 살기 좋아요.",
+        "exampleEn": "There's a park nearby and the area is quiet, so it's good to live in."
+      },
+      {
+        "ko": "시끄럽다",
+        "en": "to be noisy",
+        "hint": "📢",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good",
+        "example": "역이 가까워서 편하기는 하지만 좀 시끄러워요.",
+        "exampleEn": "The station's close so it's handy, but it is a bit noisy."
+      },
+      {
+        "ko": "어둡다",
+        "en": "to be dark",
+        "hint": "🌑",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "깨끗하다",
+        "en": "to be clean",
+        "hint": "✨",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good",
+        "example": "집이 참 밝고 깨끗하네요.",
+        "exampleEn": "The place is really bright and clean."
+      },
+      {
+        "ko": "마음에 들다",
+        "en": "to like it, for it to suit you",
+        "hint": "💚",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good",
+        "example": "지금 사는 집이 마음에 안 들어요?",
+        "exampleEn": "You don't like the place you're in?"
+      },
+      {
+        "ko": "주변 환경",
+        "en": "the surroundings, the neighbourhood",
+        "hint": "🌳",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good",
+        "example": "주변 환경은 어때요?",
+        "exampleEn": "What's the area like?"
+      },
+      {
+        "ko": "교통편",
+        "en": "transport, the way to get about",
+        "hint": "🚌",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "크기",
+        "en": "size",
+        "hint": "📦",
+        "category": "집 조건",
+        "categoryEn": "What makes a place good"
+      },
+      {
+        "ko": "집세",
+        "en": "rent",
+        "hint": "🧾",
+        "category": "생활비",
+        "categoryEn": "Rent & bills",
+        "example": "집세는 어떻게 돼요?",
+        "exampleEn": "What's the rent?"
+      },
+      {
+        "ko": "월세",
+        "en": "monthly rent",
+        "hint": "📅",
+        "category": "생활비",
+        "categoryEn": "Rent & bills",
+        "example": "보증금 천만 원에 월세 삼십오만 원입니다.",
+        "exampleEn": "A ten-million deposit and three hundred and fifty thousand a month."
+      },
+      {
+        "ko": "전세",
+        "en": "jeonse — a lump-sum deposit lease",
+        "hint": "🏦",
+        "category": "생활비",
+        "categoryEn": "Rent & bills",
+        "example": "전세는 7,000만 원이고 월세는 보증금 1,000만 원에 50만 원이에요."
+      },
+      {
+        "ko": "보증금",
+        "en": "deposit",
+        "hint": "💵",
+        "category": "생활비",
+        "categoryEn": "Rent & bills",
+        "example": "보증금 천만 원에 월세 삼십오만 원입니다.",
+        "exampleEn": "A ten-million deposit and three hundred and fifty thousand a month."
+      },
+      {
+        "ko": "식비",
+        "en": "food costs",
+        "hint": "🍽️",
+        "category": "생활비",
+        "categoryEn": "Rent & bills"
+      },
+      {
+        "ko": "교통비",
+        "en": "transport costs",
+        "hint": "🚌",
+        "category": "생활비",
+        "categoryEn": "Rent & bills"
+      },
+      {
+        "ko": "관리비",
+        "en": "maintenance fee",
+        "hint": "🧹",
+        "category": "생활비",
+        "categoryEn": "Rent & bills",
+        "example": "관리비는 얼마나 나오나요?",
+        "exampleEn": "How much is the maintenance fee?"
+      },
+      {
+        "ko": "전기 요금",
+        "en": "electricity bill",
+        "hint": "💡",
+        "category": "생활비",
+        "categoryEn": "Rent & bills"
+      },
+      {
+        "ko": "가스 요금",
+        "en": "gas bill",
+        "hint": "🔥",
+        "category": "생활비",
+        "categoryEn": "Rent & bills",
+        "example": "수도 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요. 한번 직접 와서 구경해 보세요."
+      },
+      {
+        "ko": "수도 요금",
+        "en": "water bill",
+        "hint": "🚰",
+        "category": "생활비",
+        "categoryEn": "Rent & bills",
+        "example": "수도 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요. 한번 직접 와서 구경해 보세요."
+      },
+      {
+        "ko": "전화 요금",
+        "en": "phone bill",
+        "hint": "📞",
+        "category": "생활비",
+        "categoryEn": "Rent & bills",
+        "example": "전화 요금이 내렸어요."
+      },
+      {
+        "ko": "매매",
+        "en": "buying and selling (property)",
+        "hint": "🤝",
+        "category": "생활비",
+        "categoryEn": "Rent & bills"
+      },
+      {
+        "ko": "이하",
+        "en": "or less, no more than",
+        "hint": "⬇️",
+        "category": "생활비",
+        "categoryEn": "Rent & bills"
+      },
+      {
+        "ko": "포함되다",
+        "en": "to be included",
+        "hint": "➕",
+        "category": "생활비",
+        "categoryEn": "Rent & bills"
+      },
+      {
+        "ko": "반씩",
+        "en": "half each",
+        "hint": "🌗",
+        "category": "생활비",
+        "categoryEn": "Rent & bills"
+      },
+      {
+        "ko": "나오다",
+        "en": "to come to (of a bill)",
+        "hint": "🧮",
+        "category": "생활비",
+        "categoryEn": "Rent & bills",
+        "example": "눈물샘을 담당하는 신경과 턱을 움직이는 신경이 연결되어 있기 때문에 음식을 씹을 때면 눈물이 나오는 것이다."
+      },
+      {
+        "ko": "부동산",
+        "en": "estate agency; real estate",
+        "hint": "🏢",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "부동산에 가서 한번 물어보세요.",
+        "exampleEn": "Go to an estate agency and ask."
+      },
+      {
+        "ko": "중개인",
+        "en": "agent, broker",
+        "hint": "🧑‍💼",
+        "category": "부동산",
+        "categoryEn": "Finding a place"
+      },
+      {
+        "ko": "계약",
+        "en": "contract",
+        "hint": "📄",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "5월에 계약이 끝나기 때문에 그 전에 집을 구해야 해요."
+      },
+      {
+        "ko": "계약 기간",
+        "en": "the term of the contract",
+        "hint": "⏳",
+        "category": "부동산",
+        "categoryEn": "Finding a place"
+      },
+      {
+        "ko": "조건",
+        "en": "conditions, terms",
+        "hint": "📋",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "따라서 소비자는 구매 전에 반품 비용과 조건을 잘 확인해야 한다."
+      },
+      {
+        "ko": "위치",
+        "en": "location",
+        "hint": "📍",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "거기 위치가 어떻게 돼요?",
+        "exampleEn": "Whereabouts is it?"
+      },
+      {
+        "ko": "기타",
+        "en": "other, anything else",
+        "hint": "🗂️",
+        "category": "부동산",
+        "categoryEn": "Finding a place"
+      },
+      {
+        "ko": "구하다",
+        "en": "to look for, to find (a place)",
+        "hint": "🔍",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "어떤 집을 구하는데요?",
+        "exampleEn": "What sort of place are you after?"
+      },
+      {
+        "ko": "이사하다",
+        "en": "to move house",
+        "hint": "📦",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "학교 근처로 이사하고 싶은데 괜찮은 집이 있을지 모르겠어요."
+      },
+      {
+        "ko": "알아보다",
+        "en": "to look into, to ask around",
+        "hint": "🔎",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "개를 키우기 전에 개의 특성에 대해서 알아봐야 한다."
+      },
+      {
+        "ko": "결정하다",
+        "en": "to decide",
+        "hint": "✅",
+        "category": "부동산",
+        "categoryEn": "Finding a place"
+      },
+      {
+        "ko": "구경하다",
+        "en": "to look round, to view",
+        "hint": "👀",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "한번 구경해 보세요.",
+        "exampleEn": "Have a look round."
+      },
+      {
+        "ko": "광고",
+        "en": "advertisement",
+        "hint": "📰",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "저, 원룸 광고 보고 전화했는데요.",
+        "exampleEn": "I'm calling about the studio advert."
+      },
+      {
+        "ko": "문의하다",
+        "en": "to enquire",
+        "hint": "❓",
+        "category": "부동산",
+        "categoryEn": "Finding a place"
+      },
+      {
+        "ko": "거리",
+        "en": "distance; a walk away",
+        "hint": "📐",
+        "category": "부동산",
+        "categoryEn": "Finding a place",
+        "example": "그럼 사거리에 있는 서울식당이 어때?",
+        "exampleEn": "How about the Seoul Restaurant at the crossroads?"
+      },
+      {
+        "ko": "떠들다",
+        "en": "to make a racket",
+        "hint": "🗣️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "공기",
+        "en": "air",
+        "hint": "💨",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "마침",
+        "en": "as it happens, just then",
+        "hint": "⏰",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "아, 그러세요? 마침 좋은 원룸이 하나 있는데 근처에 공원도 있고 주변이 조용해서 살기 좋아요."
+      },
+      {
+        "ko": "회사를 옮기다",
+        "en": "to move to another company",
+        "hint": "🏢",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "장을 보다",
+        "en": "to do the grocery shopping",
+        "hint": "🛒",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "편하다",
+        "en": "to be comfortable, easy",
+        "hint": "😌",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "주변에 시장도 있고 지하철역도 가까워서 살기 편해요.",
+        "exampleEn": "There's a market nearby and the subway station is close, so it's easy to live here."
+      },
+      {
+        "ko": "불편하다",
+        "en": "to be inconvenient",
+        "hint": "😖",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "한국은 지하철이나 버스에 몸이 불편한 사람들을 위한 자리가 있습니다.",
+        "exampleEn": "Korean subways and buses have seats for people whose bodies give them difficulty."
+      },
+      {
+        "ko": "힘들다",
+        "en": "to be hard going",
+        "hint": "😓",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "집 찾기 힘들지요?",
+        "exampleEn": "Was the place hard to find?"
+      },
+      {
+        "ko": "연락하다",
+        "en": "to get in touch",
+        "hint": "📱",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "그렇지 않아도",
+        "en": "as it happens, I was going to anyway",
+        "hint": "🙂",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "그렇지 않아도 수업 후에 가 보려고요.",
+        "exampleEn": "As it happens I was going to go after class anyway."
+      },
+      {
+        "ko": "높은 곳",
+        "en": "a high spot, up high",
+        "hint": "⛰️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "길이 막히다",
+        "en": "for the road to be jammed",
+        "hint": "🚗",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "길이 막히니까 택시 타고 갈래."
+      },
+      {
+        "ko": "대부분",
+        "en": "mostly, most of them",
+        "hint": "📊",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live",
+        "example": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다."
+      },
+      {
+        "ko": "바뀌다",
+        "en": "to be turned into, to change",
+        "hint": "🔄",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live"
+      },
+      {
+        "ko": "유학",
+        "en": "studying abroad",
+        "hint": "✈️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live",
+        "example": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데 거기에서 한번 찾아보세요."
+      },
+      {
+        "ko": "생활하다",
+        "en": "to live, to get by day to day",
+        "hint": "🏠",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live"
+      },
+      {
+        "ko": "아주머니",
+        "en": "ma’am — an older woman",
+        "hint": "👩",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live",
+        "example": "아주머니, 여기 감자탕 2인분 주세요."
+      },
+      {
+        "ko": "가족처럼",
+        "en": "like family",
+        "hint": "👨‍👩‍👧",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live"
+      },
+      {
+        "ko": "소개하다",
+        "en": "to introduce, to put on to",
+        "hint": "🤝",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live"
+      },
+      {
+        "ko": "나중에",
+        "en": "later on",
+        "hint": "⏭️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live",
+        "example": "지금 하기 싫은데 나중에 하면 안 돼요?"
+      },
+      {
+        "ko": "좋은 점",
+        "en": "the good points",
+        "hint": "👍",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live"
+      },
+      {
+        "ko": "나쁜 점",
+        "en": "the bad points",
+        "hint": "👎",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the place I live"
+      },
+      {
+        "ko": "룸메이트",
+        "en": "roommate",
+        "hint": "👥",
+        "category": "과제",
+        "categoryEn": "Task · finding a roommate",
+        "example": "아니요, 생활비가 많이 안 들어서 좋기는 한데 룸메이트 때문에 좀 힘들어요. 그래서 다음 학기에 이사를 가려고 생각 중이에요."
+      },
+      {
+        "ko": "규칙",
+        "en": "a rule",
+        "hint": "📜",
+        "category": "과제",
+        "categoryEn": "Task · finding a roommate"
+      },
+      {
+        "ko": "청소",
+        "en": "cleaning",
+        "hint": "🧽",
+        "category": "과제",
+        "categoryEn": "Task · finding a roommate"
+      },
+      {
+        "ko": "궁금하다",
+        "en": "to wonder, to be curious",
+        "hint": "🤔",
+        "category": "과제",
+        "categoryEn": "Task · finding a roommate"
+      },
+      {
+        "ko": "혹시",
+        "en": "by any chance",
+        "hint": "❔",
+        "category": "과제",
+        "categoryEn": "Task · finding a roommate"
+      },
+      {
+        "ko": "잘됐다",
+        "en": "that works out well",
+        "hint": "🎉",
+        "category": "과제",
+        "categoryEn": "Task · finding a roommate"
+      },
+      {
+        "ko": "북촌 한옥마을",
+        "en": "Bukchon Hanok Village",
+        "hint": "🏘️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "민속촌",
+        "en": "folk village",
+        "hint": "🎎",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "바람이 통하다",
+        "en": "to be well ventilated",
+        "hint": "🌬️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "느끼다",
+        "en": "to feel",
+        "hint": "💭",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다."
+      },
+      {
+        "ko": "시원하다",
+        "en": "to be cool, refreshing",
+        "hint": "🧊",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "어제는 더웠는데 오늘은 시원하네요."
+      },
+      {
+        "ko": "놀러 가다",
+        "en": "to go round to visit",
+        "hint": "🚶",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "입학",
+        "en": "entering a school",
+        "hint": "🎓",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "입학을 축하합니다.",
+        "exampleEn": "Congratulations on starting school."
+      },
+      {
+        "ko": "어울리다",
+        "en": "to suit, to go well with",
+        "hint": "👔",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "그 신발이 이 옷하고 잘 어울려요.",
+        "exampleEn": "Those shoes go well with this outfit."
+      },
+      {
+        "ko": "반찬",
+        "en": "side dish",
+        "hint": "🥗",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "반찬이 없는데 어떡하죠?",
+        "exampleEn": "There are no side dishes — what shall we do?"
+      }
     ]
   },
   "notebook": {
     "title": "Unit 13 · Good to live in, because it’s quiet",
     "groups": [
-      { "ko": "주거", "en": "Housing & rooms", "cat": "주거" },
-      { "ko": "집 조건", "en": "What makes a place good", "cat": "집 조건" },
-      { "ko": "생활비", "en": "Rent & bills", "cat": "생활비" },
-      { "ko": "부동산", "en": "Finding a place", "cat": "부동산" },
-      { "ko": "문법과 표현", "en": "Grammar & expressions", "cat": "문법과 표현" },
-      { "ko": "읽고 쓰기", "en": "Reading · the place I live", "cat": "읽고 쓰기" },
-      { "ko": "과제", "en": "Task · finding a roommate", "cat": "과제" },
-      { "ko": "문화와 발음", "en": "Culture & pronunciation", "cat": "문화와 발음" }
+      {
+        "ko": "주거",
+        "en": "Housing & rooms",
+        "cat": "주거"
+      },
+      {
+        "ko": "집 조건",
+        "en": "What makes a place good",
+        "cat": "집 조건"
+      },
+      {
+        "ko": "생활비",
+        "en": "Rent & bills",
+        "cat": "생활비"
+      },
+      {
+        "ko": "부동산",
+        "en": "Finding a place",
+        "cat": "부동산"
+      },
+      {
+        "ko": "문법과 표현",
+        "en": "Grammar & expressions",
+        "cat": "문법과 표현"
+      },
+      {
+        "ko": "읽고 쓰기",
+        "en": "Reading · the place I live",
+        "cat": "읽고 쓰기"
+      },
+      {
+        "ko": "과제",
+        "en": "Task · finding a roommate",
+        "cat": "과제"
+      },
+      {
+        "ko": "문화와 발음",
+        "en": "Culture & pronunciation",
+        "cat": "문화와 발음"
+      }
     ]
   }
 }
