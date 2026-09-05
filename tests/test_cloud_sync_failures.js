@@ -260,6 +260,31 @@ function tokenExpiringAt(msEpoch) {
   assert(calls === 0, 'no request is sent with a token that is already spent');
   assert(res.status === 401 && res.expired === true, 'and the caller is told why');
 
+  // ── 9b. A refusal is remembered for a while ────────────────────────────────
+  // flushSave() awaits the cloud push, so a renewal that waits out its timeout on every save
+  // would sit the Save button there for eight seconds at a time. Google will not change its
+  // mind in a second, so a refusal buys a minute of not asking.
+  console.log('\n--- 9b. A failed renewal is not retried on every write ---');
+  let prompts = 0;
+  sb.google = { accounts: { id: { prompt: (cb) => { prompts++; if (cb) cb({ isNotDisplayed: () => true, isSkippedMoment: () => false }); } } } };
+  R('_renewBlockedUntil = 0;');
+  sb.sessionStorage.setItem('hv_google_token', tokenExpiringAt(Date.now() + 5 * 1000));
+  R('googleAuth.token = ""; googleAuth.exp = 0;');
+  await R('cloudSaveRequest("GET")');
+  assert(prompts === 1, 'the first stale request asks Google (' + prompts + ')');
+  // The stub above answers synchronously, which is allowed and is what broke this: finish()
+  // ran inside the promise executor and cleared the in-flight slot a moment before the
+  // promise was written into it, so the slot stayed full and renewal was off for good.
+  assert(R('_renewInFlight') === null,
+    'the in-flight slot is released even when Google answers synchronously');
+  await R('cloudSaveRequest("GET")');
+  await R('cloudSaveRequest("PUT", { a: 1 })');
+  assert(prompts === 1, 'the next two do not ask again (' + prompts + ')');
+  R('setGoogleSession("' + tokenExpiringAt(Date.now() + 5 * 1000) + '", { sub: "1" });');
+  await R('cloudSaveRequest("GET")');
+  assert(prompts === 2, 'signing in by hand clears the cooldown (' + prompts + ')');
+  delete sb.google;
+
   // ── 10. The sync state reaches the screen ──────────────────────────────────
   console.log('\n--- 10. "not synced" is visible, not just recorded ---');
   R('googleAuth.user = { sub: "1", email: "a@b.c" }; googleAuth.token = "t"; googleAuth.exp = 0;');

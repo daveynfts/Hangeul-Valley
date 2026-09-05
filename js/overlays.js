@@ -1442,12 +1442,15 @@ function renderLeaderboardTable() {
 
   const mine = lbRemote.you ? lbRemote.you.id : null;
   const row = (r) => {
-    const badge = r.rank === 1 ? '🥇 1st' : r.rank === 2 ? '🥈 2nd' : r.rank === 3 ? '🥉 3rd' : String(r.rank);
+    const badge = r.rank === 1 ? '🥇 ' + hvT('ui.lb.first')
+      : r.rank === 2 ? '🥈 ' + hvT('ui.lb.second')
+        : r.rank === 3 ? '🥉 ' + hvT('ui.lb.third')
+          : String(r.rank);
     const cls = (mine && r.id === mine) ? ' class="lb-row-player"' : '';
     return `<tr${cls}>
-        <td style="font-family:'Press Start 2P',monospace; font-size:10px">${vbEsc(badge)}</td>
+        <td style="font-family:var(--font-pixel); font-size-adjust:var(--font-pixel-adjust); font-size:10px">${vbEsc(badge)}</td>
         <td>${vbEsc(r.name)}</td>
-        <td class="lb-title-cell">Lv.${vbEsc(r.rankLv)}</td>
+        <td class="lb-title-cell">${vbEsc(hvT('ui.rank.short', { n: r.rankLv }))}</td>
         <td class="lb-val">${vbEsc(col.val(r))}</td>
       </tr>`;
   };
@@ -1464,15 +1467,16 @@ function renderLeaderboardTable() {
     <table class="lb-table">
       <thead>
         <tr>
-          <th style="width:10%">Rank</th>
-          <th style="width:35%">Valley Resident</th>
-          <th style="width:25%">Level</th>
+          <th style="width:10%">${vbEsc(hvT('ui.lb.col.rankNo'))}</th>
+          <th style="width:35%">${vbEsc(hvT('ui.lb.col.player'))}</th>
+          <th style="width:25%">${vbEsc(hvT('ui.lb.col.level'))}</th>
           <th style="width:30%">${vbEsc(col.header())}</th>
         </tr>
       </thead>
       <tbody>${body}</tbody>
     </table>
-    <div class="lb-foot">${vbEsc(lbRemote.total + ' player' + (lbRemote.total === 1 ? '' : 's') + ' on the board · scores come from each player’s own save')}</div>
+    <div class="lb-foot">${vbEsc(hvT(lbRemote.total === 1 ? 'ui.lb.foot.one' : 'ui.lb.foot',
+      { n: lbRemote.total }))}</div>
   `;
 }
 

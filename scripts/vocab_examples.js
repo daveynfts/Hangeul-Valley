@@ -272,8 +272,70 @@ function matchesForm(text, form, edges) {
   return false;
 }
 
-/** Does this sentence use this headword? Every space-separated part has to be in it. */
+/**
+ * The forms that belong to more than one headword, and so prove nothing about either.
+ *
+ * 듣다 and 들다 both give 들어요 — Korean rebuilds a ㄷ stem into a ㄹ one, landing exactly on
+ * a verb that had ㄹ all along. Matching on it gave 듣다 (to listen) the sentence "지금 사는
+ * 집이 마음에 안 들어요?", which is 마음에 들다, and handed the same sentence to both words.
+ * The same trap is set by 걷다/걸다, 싣다/실다 and every other pair of that shape.
+ *
+ * Built once from the shipped lists, because ambiguity is a property of the vocabulary as a
+ * whole and not of the word being looked at. A form used by one headword stays usable; a
+ * form two of them can wear is refused, and the word gets an example only from a form that
+ * can only be its own — 듣고, 듣는, 들으면 — or no example at all.
+ */
+let _ambiguous = null;
+function ambiguousForms() {
+  if (_ambiguous) return _ambiguous;
+  const owners = new Map();
+  const seen = new Set();
+  const note = (ko) => {
+    const w = String(ko || '').trim();
+    if (!w || seen.has(w)) return;
+    seen.add(w);
+    String(w).split(/\s+/).filter(Boolean).forEach((part) => {
+      surfaceForms(part).forEach((f) => {
+        if (!owners.has(f)) owners.set(f, new Set());
+        owners.get(f).add(part);
+      });
+    });
+  };
+  WORD_FILES.forEach((wf) => {
+    let doc;
+    try { doc = JSON.parse(fs.readFileSync(path.join(ROOT, wf.rel.split('/').join(path.sep)), 'utf8')); }
+    catch (e) { return; }
+    wordsOf(doc, wf.rel).forEach(({ w }) => note(w && w.ko));
+  });
+  _ambiguous = new Map();
+  owners.forEach((set, form) => { if (set.size > 1) _ambiguous.set(form, set); });
+  return _ambiguous;
+}
+
+/**
+ * Could this sentence be using this headword? Every space-separated part has to be in it.
+ *
+ * Lenient on purpose. This is the question a checker asks of a sentence somebody chose —
+ * including the ones written by hand long before this script existed, where "매일 아침
+ * 공원에서 걸어요" is 걷다 and a reader can see that at a glance. Refusing it because a
+ * machine cannot tell it from 걸다 would be the tool overruling the author.
+ *
+ * sentenceProvesUse below is the stricter question, and it is the one the picker asks.
+ */
 function sentenceUses(text, headword) {
+  return matchParts(text, headword, false);
+}
+
+/**
+ * Is this sentence *evidence* of this headword? The picker's question, and a harder one:
+ * a form that another headword also wears proves nothing, so it does not count here.
+ */
+function sentenceProvesUse(text, headword) {
+  return matchParts(text, headword, true);
+}
+
+function matchParts(text, headword, strictAboutAmbiguity) {
+  const shared = strictAboutAmbiguity ? ambiguousForms() : null;
   const parts = String(headword).trim().split(/\s+/).filter(Boolean);
   return parts.every((part) => {
     const dictionaryForm = part.length >= 2 && part.endsWith('다');
@@ -281,7 +343,14 @@ function sentenceUses(text, headword) {
     // other words: 셔서 is in 주셔서, where the 시 is the honorific infix and not 시다 at all.
     // So for those, every form has to start where a word starts.
     const shortStem = dictionaryForm && part.length === 2;
+    // Which of the two reached the shared form honestly. 들다 builds 들어요 straight off its
+    // own stem; 듣다 only gets there by turning its ㄷ into a ㄹ — landing on a word that had
+    // one all along. So a shared form stays with the headword it is a plain extension of,
+    // and is refused to the one that had to be rebuilt into it.
+    const stem = dictionaryForm ? part.slice(0, -1) : part;
     return surfaceForms(part).some((f) => {
+      const owners = shared && shared.get(f);
+      if (owners && !(owners.size === 1 && owners.has(part)) && f.indexOf(stem) !== 0) return false;
       // Both edges for the two shapes that hide inside longer words: a dictionary form
       // (쓰다 inside 쓰다듬은) and a single syllable (상 inside 항상). A two-syllable noun is
       // specific enough on its own — 사항 has to be allowed to be followed by 입니다.
@@ -486,7 +555,7 @@ function main() {
       let bestScore = -Infinity;
       for (const s of corpus) {
         if (s.text === w.ko) continue;            // the headword alone is not a sentence
-        if (!sentenceUses(s.text, w.ko)) continue;
+        if (!sentenceProvesUse(s.text, w.ko)) continue;
         const sc = score(s, wf.unit, w.ko);
         if (sc > bestScore) { bestScore = sc; best = s; }
       }
@@ -538,4 +607,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { surfaceForms, sentenceUses, collect, matchesForm };
+module.exports = { surfaceForms, sentenceUses, sentenceProvesUse, collect, matchesForm, ambiguousForms };

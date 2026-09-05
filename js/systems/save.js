@@ -825,7 +825,10 @@ function setGoogleSession(token, user) {
     if (user) localStorage.setItem('hv_google_user', JSON.stringify(user));
     else localStorage.removeItem('hv_google_user');
   } catch {}
-  if (token) _cloudLastError = '';
+  // A token in hand clears both kinds of memory of the last failure: the error on the chip,
+  // and the cooldown that stops us pestering Google. Signing in by hand is the strongest
+  // evidence there is that asking again would now work.
+  if (token) { _cloudLastError = ''; _renewBlockedUntil = 0; }
   renderAuthUI();
   // A fresh token means whatever was waiting on the old one can go now.
   if (token && typeof _resolveRenew === 'function') { const f = _resolveRenew; _resolveRenew = null; f(true); }
@@ -862,21 +865,32 @@ function googleTokenIsFresh() {
 // to re-issue silently; whether it can depends on the browser's One Tap rules, so this
 // resolves false rather than waiting on something that may never come.
 const RENEW_TIMEOUT_MS = 8000;
+// Once Google has declined to re-issue, it will keep declining for a while — the reasons are
+// things like a dismissed prompt or a cooled-off One Tap, none of which change in a second.
+// Without this, every queued write would wait out the timeout again, and flushSave() awaits
+// the cloud push: the Save button would sit there for eight seconds per save, repeatedly.
+const RENEW_COOLDOWN_MS = 60 * 1000;
 let _renewInFlight = null;
 let _resolveRenew = null;
+let _renewBlockedUntil = 0;
 
 function renewGoogleToken() {
   if (_renewInFlight) return _renewInFlight;
+  if (Date.now() < _renewBlockedUntil) return Promise.resolve(false);
   const gis = (typeof window !== 'undefined' && window.google
     && google.accounts && google.accounts.id) || null;
   if (!gis || typeof gis.prompt !== 'function') return Promise.resolve(false);
-  _renewInFlight = new Promise((resolve) => {
+  // The in-flight slot is cleared after the promise settles, not from inside it. GIS may call
+  // its notification callback synchronously, and then finish() ran while this assignment was
+  // still on its way — nulling the slot a moment before the promise was written into it. The
+  // slot stayed full for ever and renewal was silently off for the rest of the session.
+  const attempt = new Promise((resolve) => {
     let done = false;
     const finish = (ok) => {
       if (done) return;
       done = true;
       _resolveRenew = null;
-      _renewInFlight = null;
+      if (!ok) _renewBlockedUntil = Date.now() + RENEW_COOLDOWN_MS;
       resolve(!!ok);
     };
     // onGoogleCredential calls setGoogleSession, which calls this when a token arrives.
@@ -895,7 +909,9 @@ function renewGoogleToken() {
       finish(false);
     }
   });
-  return _renewInFlight;
+  _renewInFlight = attempt;
+  attempt.then(() => { if (_renewInFlight === attempt) _renewInFlight = null; });
+  return attempt;
 }
 
 // A hung request must not wedge the Save button, which now awaits this.

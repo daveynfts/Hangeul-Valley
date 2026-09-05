@@ -903,8 +903,7 @@
           "넣는",
           "넣으면"
         ],
-        "example": "네, 저도 시간 내서 한번 가 볼게요.",
-        "exampleEn": "Sure, I'll make time and give it a go."
+        "example": "나는 칼국수 먹을래. 너는?"
       },
       {
         "ko": "믿다",
@@ -2920,8 +2919,7 @@
         "forms": [
           "놓으니"
         ],
-        "example": "네, 저도 시간 내서 한번 가 볼게요.",
-        "exampleEn": "Sure, I'll make time and give it a go."
+        "example": "그랬어? 오늘 휴대폰을 집에 놓고 왔어."
       },
       {
         "ko": "봄",
@@ -3521,11 +3519,11 @@
         "hint": "🛋️",
         "category": "일상생활",
         "categoryEn": "Daily routines & home",
-        "example": "이 신발은 발이 편해요.",
-        "exampleEn": "These shoes are comfortable on my feet.",
         "forms": [
           "편하고"
-        ]
+        ],
+        "example": "이 신발은 발이 편해요.",
+        "exampleEn": "These shoes are comfortable on my feet."
       },
       {
         "ko": "가볍다",

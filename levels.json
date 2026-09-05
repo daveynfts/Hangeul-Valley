@@ -204,8 +204,8 @@
         "hint": "🎧",
         "category": "일상 동작",
         "categoryEn": "Everyday Actions",
-        "example": "지금 사는 집이 마음에 안 들어요?",
-        "exampleEn": "You don't like the place you're in?"
+        "example": "밤에 큰 소리로 음악을 듣거나 시끄럽게 떠들면 안 됩니다.",
+        "exampleEn": "You must not play music loudly at night or make a racket."
       },
       {
         "ko": "읽다",
@@ -237,8 +237,7 @@
         "en": "to walk",
         "hint": "🚶",
         "category": "일상 동작",
-        "categoryEn": "Everyday Actions",
-        "example": "대학동에 있는데 서울대학교에서 걸어서 10분 정도 걸려요. 하나빌딩 3층으로 오시면 됩니다."
+        "categoryEn": "Everyday Actions"
       },
       {
         "ko": "달리다",
