@@ -2429,6 +2429,107 @@ const overlayIds = [
     'a scene that draws before the font arrives keeps the fallback permanently');
 }());
 
+// ── A panel that covers the screen says so, and can be got out of ───────────
+// Ten overlays declared role="dialog" and aria-modal and eighteen did not, which is the
+// shape a convention takes when it is applied by hand: the screens written on the day it was
+// decided have it and the rest never got it. Nothing breaks — the panels look identical — and
+// a screen reader is simply not told that the page behind them is gone.
+//
+// The same held for the ✕ in their corners. Three carried an aria-label and a translation key
+// for it; the other eleven were a glyph with no name, announced as "button" and nothing more.
+//
+// So both are checked rather than remembered. A new overlay that skips them fails here.
+(function checkOverlaysAreDialogs() {
+  const html = read('index.html');
+
+  // Every id that exists in the markup, to resolve aria-labelledby against.
+  const ids = new Set((html.match(/\bid="([^"]+)"/g) || []).map((m) => m.slice(4, -1)));
+
+  const overlays = [...new Set((html.match(/\bid="([a-zA-Z-]+-overlay)"/g) || [])
+    .map((m) => m.slice(4, -1)))];
+  check('index.html still has the overlay screens', overlays.length > 20, overlays.length + ' found');
+
+  const tagOf = (id) => {
+    const at = html.indexOf('id="' + id + '"');
+    if (at < 0) return '';
+    const open = html.lastIndexOf('<', at);
+    const close = html.indexOf('>', at);
+    return open < 0 || close < 0 ? '' : html.slice(open, close + 1);
+  };
+
+  const notDialog = overlays.filter((id) => !/role="dialog"/.test(tagOf(id)));
+  check('every overlay is a dialog', notDialog.length === 0, notDialog.join(', '));
+
+  const notModal = overlays.filter((id) => !/aria-modal="true"/.test(tagOf(id)));
+  check('every overlay is a modal one', notModal.length === 0, notModal.join(', '));
+
+  // A dialog with no name is announced as "dialog" and nothing else. labelledby is preferred
+  // — it points at the heading the screen already shows, so a retitled panel cannot end up
+  // announced by a name that is no longer on it.
+  const unnamed = [];
+  const dangling = [];
+  overlays.forEach((id) => {
+    const tag = tagOf(id);
+    const by = (tag.match(/aria-labelledby="([^"]+)"/) || [])[1];
+    if (by) { if (!ids.has(by)) dangling.push(id + ' -> #' + by); return; }
+    if (!/aria-label="/.test(tag)) unnamed.push(id);
+  });
+  check('every overlay has a name', unnamed.length === 0, unnamed.join(', '));
+  check('every aria-labelledby points at an element that exists', dangling.length === 0,
+    dangling.join(', '));
+
+  // A button whose whole content is a glyph carries no name of its own.
+  const GLYPH_ONLY = /^[\s×✕✖←-⇿◀▶]*$/;
+  const nameless = [];
+  const re = /<button\b([^>]*)>([\s\S]{0,60}?)<\/button>/g;
+  let m;
+  while ((m = re.exec(html))) {
+    const attrs = m[1];
+    const text = m[2].replace(/<[^>]*>/g, '').trim();
+    if (/aria-label=|title=/.test(attrs)) continue;
+    if (!GLYPH_ONLY.test(text)) continue;
+    nameless.push((attrs.match(/id="([^"]+)"/) || attrs.match(/class="([^"]+)"/) || [, '?'])[1]);
+  }
+  check('no button is only a glyph with no name', nameless.length === 0,
+    nameless.slice(0, 6).join(', ') + ' — add aria-label and data-i18n-aria-label');
+
+  // Focus is the third thing the modal stack decides, after Escape and the music. Without
+  // these the caret stays out on the farm while a panel covers it, and Tab walks the HUD
+  // underneath — which aria-modal has just told a screen reader is not there.
+  const ui = read(path.join('js', 'ui.js'));
+  check('opening a modal moves focus into it',
+    ui.indexOf('modalReturnFocus') >= 0 && ui.indexOf('function focusModal(') >= 0
+    && /setTimeout\(\(\) => \{ if \(activeModalStack\.includes\(overlayId\)\) focusModal/.test(ui));
+  check('closing one gives focus back to what opened it',
+    ui.indexOf('modalReturnFocus.get(overlayId)') >= 0
+    && ui.indexOf('modalReturnFocus.delete(overlayId)') >= 0);
+  check('Tab stays inside the open panel',
+    /e\.key === 'Tab' && activeModalStack\.length > 0/.test(ui)
+    && ui.indexOf('function focusablesIn(') >= 0);
+
+  // The level cards: a locked one keeps its role so it is still announced, and says it
+  // cannot be used rather than silently refusing focus. And the blurb — clamped on the card
+  // and unreachable inside a control that carries its own aria-label — is described.
+  check('a locked level card says it is disabled',
+    ui.indexOf("c.setAttribute('aria-disabled', 'true')") >= 0);
+  check('a level card describes itself with its blurb',
+    ui.indexOf("c.setAttribute('aria-describedby', descId)") >= 0
+    && ui.indexOf("const descId = 'lc-desc-'") >= 0);
+
+  // And the clamped blurb is reachable by eye as well, which is the half aria cannot do.
+  const css = read(path.join('css', 'game.css'));
+  check('hovering or focusing a card shows the whole blurb',
+    /\.level-card:hover \.lc-desc[\s\S]{0,80}\.level-card:focus-visible \.lc-desc/.test(css)
+    && /-webkit-line-clamp: unset/.test(css));
+
+  // 44px is what a finger needs. The ✕ on six panels was about 35x31 and the memory game's
+  // was 15x32 — narrower than the glyph inside it. The hit area grew; the button did not.
+  check('the small close buttons have something to aim at',
+    /#memory-close-btn::after/.test(css) && /width: 44px; height: 44px/.test(css));
+  check('the buy buttons are tall enough to press',
+    /\.shop-buy-btn, \.trophy-buy-btn \{[\s\S]{0,60}min-height: 44px/.test(css));
+}());
+
 // ── vercel.json says only what Vercel understands ───────────────────────────
 // JSON has no comments, and Vercel validates this file against a closed schema: an extra key
 // on a rewrite is not ignored, it fails the build. The failure surfaces nowhere useful — CI

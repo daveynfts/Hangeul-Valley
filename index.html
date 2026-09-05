@@ -8,15 +8,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;700;900&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/game.css?v=20260904-topik-art-v5" />
+  <link rel="stylesheet" href="css/game.css?v=20260906-a11y-v1" />
 </head>
-<body data-ui-release="20260904-topik-art-v5">
+<body data-ui-release="20260906-a11y-v1">
 
   <!-- ══════════════ LEVEL SELECT ═════════════════════════════════ -->
-  <div id="level-select-overlay">
+  <div id="level-select-overlay" role="dialog" aria-modal="true" aria-labelledby="ls-title">
     <div class="ls-title-wrap">
       <div class="ls-logo">🌾</div>
-      <div class="ls-title" data-i18n="ui.level.select.overlay.hangeulValley">Hangeul Valley</div>
+      <div id="ls-title" class="ls-title" data-i18n="ui.level.select.overlay.hangeulValley">Hangeul Valley</div>
       <div class="ls-subtitle" data-i18n="ui.level.select.overlay.selectALevelTo">SELECT A LEVEL TO BEGIN</div>
     </div>
     <div id="ls-auth" class="hidden">
@@ -140,11 +140,11 @@
   </div>
 
   <!-- ══════════ PROGRESS / SRS DASHBOARD ══════════ -->
-  <div id="progress-overlay" class="hidden">
+  <div id="progress-overlay" role="dialog" aria-modal="true" aria-labelledby="progress-title" class="hidden">
     <div id="progress-panel">
       <div id="progress-header">
         <span id="progress-title" data-i18n="ui.progress.title"><span data-hud-icon="progress" data-hud-size="18">📊</span> Review Progress</span>
-        <button type="button" class="prog-close" onclick="closeProgressOverlay()">✕</button>
+        <button type="button" class="prog-close" onclick="closeProgressOverlay()" aria-label="Close progress" data-i18n-aria-label="ui.progress.close.aria">✕</button>
       </div>
       <div id="progress-body">
         <div id="prog-stat-grid"></div>
@@ -271,7 +271,7 @@
   </div>
 
   <!-- ══════════════ FISH ENCYCLOPEDIA ALBUM ═════════════════════ -->
-  <div id="fish-album-overlay">
+  <div id="fish-album-overlay" role="dialog" aria-modal="true" aria-labelledby="fish-album-title">
     <div id="fish-album-panel">
       <div id="fish-album-header">
         <div style="font-size:28px">🐟</div>
@@ -279,7 +279,7 @@
           <div id="fish-album-title" data-i18n="ui.fish.album.title">Crystal Pond Fish Album</div>
           <div id="fish-album-sub" data-i18n="ui.fish.album.sub">Collect rare fish & learn Korean aquatic vocabulary!</div>
         </div>
-        <button id="fish-album-close-btn" onclick="closeFishAlbum()">✕</button>
+        <button id="fish-album-close-btn" onclick="closeFishAlbum()" aria-label="Close fish album" data-i18n-aria-label="ui.fish.close.aria">✕</button>
       </div>
       <div id="fish-album-grid"></div>
     </div>
@@ -323,10 +323,10 @@
   </div>
 
   <!-- ══════════════ LEVEL-UP ══════════════════════════════════════ -->
-  <div id="levelup-overlay">
+  <div id="levelup-overlay" role="dialog" aria-modal="true" aria-labelledby="levelup-title">
     <div id="levelup-card">
       <div class="trophy">🏆</div>
-      <h1 data-i18n="ui.levelup.card.complete">Complete!</h1>
+      <h1 id="levelup-title" data-i18n="ui.levelup.card.complete">Complete!</h1>
       <p id="levelup-msg" data-i18n="ui.levelup.msg">Excellent!</p>
       <div class="levelup-btns">
         <button id="levelup-next-btn" data-i18n="ui.levelup.next.btn">Next Level →</button>
@@ -336,7 +336,7 @@
   </div>
 
   <!-- ══════════════ SHOP OVERLAY ════════════════════════════════ -->
-  <div id="shop-overlay">
+  <div id="shop-overlay" role="dialog" aria-modal="true" aria-labelledby="shop-title">
     <div id="shop-panel">
       <div id="shop-header">
         <div>
@@ -345,7 +345,7 @@
         </div>
         <div style="display:flex;align-items:center;gap:10px">
           <div id="shop-gold-badge">💰 <span id="shop-gold-val">0</span></div>
-          <button id="shop-close-btn">✕</button>
+          <button id="shop-close-btn" aria-label="Close shop" data-i18n-aria-label="ui.shop.close.aria">✕</button>
         </div>
       </div>
       <div id="shop-level-grid"></div>
@@ -481,7 +481,7 @@
     <div id="cat-dialog-inner">
       <div id="cat-dialog-header">
         <span id="cat-dialog-name" data-i18n="ui.cat.dialog.name">🐱 Ginger Cat says...</span>
-        <button id="cat-dialog-close" onclick="closeCatDialog()">✕</button>
+        <button id="cat-dialog-close" onclick="closeCatDialog()" aria-label="Close" data-i18n-aria-label="ui.cat.close.aria">✕</button>
       </div>
       <div id="cat-dialog-body">
         <div id="cat-portrait-wrap">
@@ -505,20 +505,20 @@
       </div>
       <div id="cat-dialog-footer">
         <button id="cat-another-btn" onclick="catAnotherWord()" data-i18n="ui.cat.another.btn">🎲 New Word</button>
-        <button id="cat-close-btn2" onclick="closeCatDialog()" data-i18n="ui.cat.close.btn2">👋 Thanks!</button>
+        <button id="cat-close-btn2" onclick="closeCatDialog()" data-i18n="ui.cat.close.btn2" aria-label="Close" data-i18n-aria-label="ui.cat.close.aria">👋 Thanks!</button>
       </div>
     </div>
   </div>
 
   <!-- ══════════ MEMORY MINIGAME ══════════ -->
-  <div id="memory-overlay">
+  <div id="memory-overlay" role="dialog" aria-modal="true" aria-labelledby="memory-title">
     <div id="memory-panel">
       <div id="memory-header">
         <div>
           <div id="memory-title" data-i18n="ui.memory.title">🧠 Memory Match</div>
           <div style="font-size:14px;color:rgba(255,255,255,.5);margin-top:4px" data-i18n="ui.memory.header.matchKoreanWordsWith">Match Korean words with English</div>
         </div>
-        <button id="memory-close-btn" onclick="closeMemoryGame()">✕</button>
+        <button id="memory-close-btn" onclick="closeMemoryGame()" aria-label="Close memory game" data-i18n-aria-label="ui.memory.close.aria">✕</button>
       </div>
       <div id="memory-stats">
         <span id="memory-matches" data-i18n="ui.memory.matches">Matches: 0/8</span>
@@ -531,10 +531,10 @@
   </div>
 
   <!-- All-done -->
-  <div id="alldone-overlay">
+  <div id="alldone-overlay" role="dialog" aria-modal="true" aria-labelledby="alldone-title">
     <div id="alldone-card">
       <div class="star">🌟</div>
-      <h1 data-i18n="ui.alldone.card.excellent">Excellent!</h1>
+      <h1 id="alldone-title" data-i18n="ui.alldone.card.excellent">Excellent!</h1>
       <p data-i18n="ui.alldone.card.youHaveCompletedAll">You have completed all levels! Your Korean is blossoming.</p>
       <div class="alldone-btns">
         <button id="replay-btn" data-i18n="ui.replay.btn">🔄 Play Again</button>
@@ -544,7 +544,7 @@
   </div>
 
   <!-- ══════════════ TROPHIES ════════════════════════════════════ -->
-  <div id="trophy-overlay">
+  <div id="trophy-overlay" role="dialog" aria-modal="true" aria-labelledby="trophy-title">
     <div id="trophy-panel">
       <div id="trophy-header">
         <div>
@@ -553,7 +553,7 @@
         </div>
         <div style="display:flex; gap:12px; align-items:center;">
            <div id="trophy-gold-badge"><span data-hud-icon="coin" data-hud-size="18">🪙</span> <span id="trophy-gold-val">0</span></div>
-           <button class="hud-btn" id="trophy-close-btn" style="padding:4px 10px">✕</button>
+           <button class="hud-btn" id="trophy-close-btn" style="padding:4px 10px" aria-label="Close trophies" data-i18n-aria-label="ui.trophy.close.aria">✕</button>
         </div>
       </div>
       <div class="trophy-grid" id="trophy-grid">
@@ -563,11 +563,11 @@
   </div>
 
   <!-- ══════════════ QUEST LOG OVERLAY ═════════════════════════════ -->
-  <div id="quest-overlay">
+  <div id="quest-overlay" role="dialog" aria-modal="true" aria-labelledby="quest-title">
     <div id="quest-panel">
       <div id="quest-header">
         <span id="quest-title" data-i18n="ui.quest.title"><span data-hud-icon="quest" data-hud-size="18">📜</span> Quest Log</span>
-        <button type="button" class="prog-close" onclick="closeQuestOverlay()">✕</button>
+        <button type="button" class="prog-close" onclick="closeQuestOverlay()" aria-label="Close quest log" data-i18n-aria-label="ui.quest.close.aria">✕</button>
       </div>
       <div id="quest-body">
         <div class="quest-tabs" role="tablist">
@@ -582,7 +582,7 @@
   </div>
 
   <!-- ══════════════ SHOP QUIZ GATE CHALLENGE OVERLAY ══════════════ -->
-  <div id="shop-quiz-overlay">
+  <div id="shop-quiz-overlay" role="dialog" aria-modal="true" aria-labelledby="sq-title">
     <div id="shop-quiz-panel" class="glass-modal">
       <div style="font-size:36px; margin-bottom:8px" data-i18n="ui.shop.quiz.panel.quizGateChallenge">🛍️ Quiz Gate Challenge</div>
       <div style="font-family:var(--font-pixel);font-size-adjust:var(--font-pixel-adjust); font-size:14px; color:var(--neon-cyan); margin-bottom:12px" id="sq-title" data-i18n="ui.sq.title">Unlock Pack Quiz Gate</div>
@@ -603,7 +603,7 @@
   </div>
 
   <!-- ══════════════ BOSS ENTRANCE GATE OVERLAY ════════════════════ -->
-  <div id="boss-gate-overlay">
+  <div id="boss-gate-overlay" role="dialog" aria-modal="true" aria-labelledby="bg-title">
     <div id="boss-gate-panel" class="glass-modal">
       <div style="font-size:42px; margin-bottom:8px" data-i18n="ui.boss.gate.panel.gateChallenge">👑 Gate Challenge</div>
       <div style="font-family:var(--font-pixel);font-size-adjust:var(--font-pixel-adjust); font-size:15px; color:var(--neon-pink); margin-bottom:10px" id="bg-title" data-i18n="ui.bg.title">BOSS ENTRANCE GATE</div>
@@ -624,17 +624,17 @@
   </div>
 
   <!-- ══════════════ RECIPE BOOK (요리책) OVERLAY ══════════════ -->
-  <div id="recipe-overlay">
+  <div id="recipe-overlay" role="dialog" aria-modal="true" aria-labelledby="recipe-title">
     <div id="recipe-panel" class="glass-modal" style="max-width:780px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
       <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1.5px solid rgba(245,158,11,0.3); padding-bottom:14px; margin-bottom:16px;">
         <div style="display:flex; align-items:center; gap:10px;">
           <span data-hud-icon="recipe" data-hud-size="36">🍳</span>
           <div>
-            <div style="font-family:var(--font-pixel);font-size-adjust:var(--font-pixel-adjust); font-size:16px; color:var(--neon-gold)" data-i18n="ui.recipe.panel.koreanRecipeBook">Korean Recipe Book</div>
+            <div id="recipe-title" style="font-family:var(--font-pixel);font-size-adjust:var(--font-pixel-adjust); font-size:16px; color:var(--neon-gold)" data-i18n="ui.recipe.panel.koreanRecipeBook">Korean Recipe Book</div>
             <div style="font-size:11px; color:rgba(255,255,255,0.6); margin-top:4px;" data-i18n="ui.recipe.panel.cookHansikDishesAnd">Cook Hansik dishes and gain farm buffs</div>
           </div>
         </div>
-        <button onclick="closeRecipeBook()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:4px 12px; font-size:16px; cursor:pointer;">✕</button>
+        <button onclick="closeRecipeBook()" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); color:#fff; border-radius:4px; padding:4px 12px; font-size:16px; cursor:pointer;" aria-label="Close recipe book" data-i18n-aria-label="ui.recipe.close.aria">✕</button>
       </div>
 
       <!-- Ingredient Inventory Summary Bar -->
@@ -649,7 +649,7 @@
   </div>
 
   <!-- ══════════════ COOKING MINIGAME OVERLAY ══════════════ -->
-  <div id="cooking-minigame-overlay">
+  <div id="cooking-minigame-overlay" role="dialog" aria-modal="true" aria-labelledby="cmg-dish-name">
     <div id="cooking-minigame-panel" class="glass-modal" style="max-width:540px; width:92%; padding:24px; text-align:center;">
       <div style="font-size:42px; margin-bottom:8px" id="cmg-dish-icon">🍳</div>
       <div style="font-family:var(--font-pixel);font-size-adjust:var(--font-pixel-adjust); font-size:15px; color:var(--neon-gold); margin-bottom:8px" id="cmg-dish-name" data-i18n="ui.cmg.dish.name">COOKING DISH</div>
@@ -664,7 +664,7 @@
   </div>
 
   <!-- ══════════════ CULTURAL FACT OVERLAY ══════════════ -->
-  <div id="cultural-fact-overlay">
+  <div id="cultural-fact-overlay" role="dialog" aria-modal="true" aria-labelledby="cf-title">
     <div class="glass-modal" style="max-width:560px; width:92%; padding:24px; text-align:center;">
       <div style="font-size:44px; margin-bottom:8px" id="cf-icon">🏺</div>
       <div style="font-family:var(--font-pixel);font-size-adjust:var(--font-pixel-adjust); font-size:14px; color:var(--neon-gold); margin-bottom:10px" id="cf-title" data-i18n="ui.cf.title">Korean Culinary Culture</div>
@@ -675,17 +675,17 @@
 
 
   <!-- ══════════════ LOCAL LEADERBOARD MODAL ══════════════ -->
-  <div id="leaderboard-overlay">
+  <div id="leaderboard-overlay" role="dialog" aria-modal="true" aria-labelledby="lb-title">
     <div id="leaderboard-panel" class="glass-modal" style="max-width:800px; width:94%; max-height:88vh; overflow-y:auto; padding:24px;">
       <div class="lb-head">
         <div class="lb-head-copy">
           <span class="lb-seal" data-hud-icon="ranks" data-hud-size="28">🏅</span>
           <div>
-            <div class="lb-title" data-i18n="ui.leaderboard.panel.valleyRankings">Valley Rankings</div>
+            <div id="lb-title" class="lb-title" data-i18n="ui.leaderboard.panel.valleyRankings">Valley Rankings</div>
             <div class="lb-sub" data-i18n="ui.leaderboard.panel.signedInPlayersYour">Signed-in players · your records stay on this device</div>
           </div>
         </div>
-        <button type="button" class="lb-close" onclick="closeLeaderboard()">✕</button>
+        <button type="button" class="lb-close" onclick="closeLeaderboard()" aria-label="Close leaderboard" data-i18n-aria-label="ui.leaderboard.close.aria">✕</button>
       </div>
 
       <div id="lb-pb-summary">
@@ -836,13 +836,13 @@
     </div>
   </div>
 
-  <div id="desk-quiz-overlay">
+  <div id="desk-quiz-overlay" role="dialog" aria-modal="true" aria-labelledby="desk-title">
     <div id="desk-quiz-panel" class="glass-modal">
       <div id="desk-lamp"></div>
       <div id="desk-head">
         <span id="desk-title" data-i18n="ui.desk.title">학습 책상 · Quiz</span>
         <span id="desk-progress">1 / 5</span>
-        <button type="button" onclick="closeDeskQuiz()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:4px;padding:2px 10px;cursor:pointer">✕</button>
+        <button type="button" onclick="closeDeskQuiz()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:4px;padding:2px 10px;cursor:pointer" aria-label="Close quiz" data-i18n-aria-label="ui.deskquiz.close.aria">✕</button>
       </div>
       <img id="desk-art" alt="" hidden>
       <div id="desk-q"></div>
@@ -1038,7 +1038,7 @@
     </div>
   </div>
 
-  <div id="rank-card-overlay">
+  <div id="rank-card-overlay" role="dialog" aria-modal="true" aria-labelledby="rank-title-en">
     <div id="rank-card">
       <div id="rank-seal">🌱</div>
       <div id="rank-lv" data-i18n="ui.rank.lv">LV. 1</div>
@@ -1058,7 +1058,7 @@
     </div>
   </div>
 
-  <div id="rankup-overlay">
+  <div id="rankup-overlay" role="dialog" aria-modal="true" aria-labelledby="rankup-kicker">
     <div id="rankup-card">
       <div id="rankup-kicker" data-i18n="ui.rankup.kicker">LEVEL UP</div>
       <div id="rankup-icon">🌱</div>
@@ -1069,13 +1069,13 @@
     </div>
   </div>
 
-  <div id="taste-overlay">
+  <div id="taste-overlay" role="dialog" aria-modal="true" aria-labelledby="taste-title">
     <div id="taste-panel" class="glass-modal">
       <div id="taste-awning"></div>
       <div id="taste-bar">
-        <span>한 입 포장마차</span>
+        <span id="taste-title">한 입 포장마차</span>
         <span id="taste-progress">1 / 10</span>
-        <button type="button" onclick="closeTasteGame()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:4px;padding:2px 10px;cursor:pointer">✕</button>
+        <button type="button" onclick="closeTasteGame()" style="background:#fff8e8;border:2px solid #8b5a2b;border-radius:4px;padding:2px 10px;cursor:pointer" aria-label="Close the food stall" data-i18n-aria-label="ui.taste.close.aria">✕</button>
       </div>
       <div id="taste-dish">
         <div id="taste-icon">🍲</div>
@@ -1123,36 +1123,36 @@
   <script src="vendor/phaser-3.70.0.min.js"></script>
   <!-- Interface language. Loaded before everything: js/i18n.js decides which language the
        page is in, and the level select paints synchronously from these tags. -->
-  <script src="js/i18n.js?v=20260904-topik-art-v5"></script>
-  <script src="js/locales/en.js?v=20260904-topik-art-v5"></script>
-  <script src="js/locales/vi.js?v=20260904-topik-art-v5"></script>
-  <script src="js/locales/catalogs.js?v=20260904-topik-art-v5"></script>
-  <script src="js/state.js?v=20260904-topik-art-v5"></script>
-  <script src="js/audio.js?v=20260904-topik-art-v5"></script>
-  <script src="js/systems/music.js?v=20260904-topik-art-v5"></script>
-  <script src="js/renderer.js?v=20260904-topik-art-v5"></script>
-  <script src="js/systems/srs.js?v=20260904-topik-art-v5"></script>
-  <script src="js/systems/save.js?v=20260904-topik-art-v5"></script>
-  <script src="js/systems/economy.js?v=20260904-topik-art-v5"></script>
-  <script src="js/vocabArt.js?v=20260904-topik-art-v5"></script>
-  <script src="js/vocabArtUnit14.js?v=20260904-topik-art-v5"></script>
-  <script src="js/vocabArtMore.js?v=20260904-topik-art-v5"></script>
-  <script src="js/hudArt.js?v=20260904-topik-art-v5"></script>
-  <script src="js/trophyArt.js?v=20260904-topik-art-v5"></script>
-  <script src="js/workbookArt.js?v=20260904-topik-art-v5"></script>
-  <script src="js/vocabStudy.js?v=20260904-topik-art-v5"></script>
-  <script src="js/data.js?v=20260904-topik-art-v5"></script>
-  <script src="js/ui.js?v=20260904-topik-art-v5"></script>
-  <script src="js/systems/atmosphere.js?v=20260904-topik-art-v5"></script>
-  <script src="js/skins.js?v=20260904-topik-art-v5"></script>
-  <script src="js/systems/pointer.js?v=20260904-topik-art-v5"></script>
-  <script src="js/scenes/farm.js?v=20260904-topik-art-v5"></script>
-  <script src="js/scenes/arcade.js?v=20260904-topik-art-v5"></script>
-  <script src="js/scenes/dungeon.js?v=20260904-topik-art-v5"></script>
-  <script src="js/scenes/fishing.js?v=20260904-topik-art-v5"></script>
-  <script src="js/scenes/bee.js?v=20260904-topik-art-v5"></script>
-  <script src="js/overlays.js?v=20260904-topik-art-v5"></script>
-  <script src="js/boot.js?v=20260904-topik-art-v5"></script>
+  <script src="js/i18n.js?v=20260906-a11y-v1"></script>
+  <script src="js/locales/en.js?v=20260906-a11y-v1"></script>
+  <script src="js/locales/vi.js?v=20260906-a11y-v1"></script>
+  <script src="js/locales/catalogs.js?v=20260906-a11y-v1"></script>
+  <script src="js/state.js?v=20260906-a11y-v1"></script>
+  <script src="js/audio.js?v=20260906-a11y-v1"></script>
+  <script src="js/systems/music.js?v=20260906-a11y-v1"></script>
+  <script src="js/renderer.js?v=20260906-a11y-v1"></script>
+  <script src="js/systems/srs.js?v=20260906-a11y-v1"></script>
+  <script src="js/systems/save.js?v=20260906-a11y-v1"></script>
+  <script src="js/systems/economy.js?v=20260906-a11y-v1"></script>
+  <script src="js/vocabArt.js?v=20260906-a11y-v1"></script>
+  <script src="js/vocabArtUnit14.js?v=20260906-a11y-v1"></script>
+  <script src="js/vocabArtMore.js?v=20260906-a11y-v1"></script>
+  <script src="js/hudArt.js?v=20260906-a11y-v1"></script>
+  <script src="js/trophyArt.js?v=20260906-a11y-v1"></script>
+  <script src="js/workbookArt.js?v=20260906-a11y-v1"></script>
+  <script src="js/vocabStudy.js?v=20260906-a11y-v1"></script>
+  <script src="js/data.js?v=20260906-a11y-v1"></script>
+  <script src="js/ui.js?v=20260906-a11y-v1"></script>
+  <script src="js/systems/atmosphere.js?v=20260906-a11y-v1"></script>
+  <script src="js/skins.js?v=20260906-a11y-v1"></script>
+  <script src="js/systems/pointer.js?v=20260906-a11y-v1"></script>
+  <script src="js/scenes/farm.js?v=20260906-a11y-v1"></script>
+  <script src="js/scenes/arcade.js?v=20260906-a11y-v1"></script>
+  <script src="js/scenes/dungeon.js?v=20260906-a11y-v1"></script>
+  <script src="js/scenes/fishing.js?v=20260906-a11y-v1"></script>
+  <script src="js/scenes/bee.js?v=20260906-a11y-v1"></script>
+  <script src="js/overlays.js?v=20260906-a11y-v1"></script>
+  <script src="js/boot.js?v=20260906-a11y-v1"></script>
 </body>
 
 </html>

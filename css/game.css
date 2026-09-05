@@ -569,15 +569,42 @@
       min-height: 2.6em;
     }
     /* Kept, not deleted — it is the only thing that says what a pack is about. Clamped
-       to two lines so 28 cards stay the same height and the grid can be scanned. */
+       to three lines so 28 cards stay the same height and the grid can be scanned. */
     #level-select-overlay .lc-desc {
       font-family: 'Be Vietnam Pro', sans-serif; font-size: 11.5px;
       color: #6b4a24; margin: 9px 0 0; line-height: 1.42;
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-      /* Two lines' worth of space whether the text fills it or not, so every card in the
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+      /* Three lines' worth of space whether the text fills it or not, so every card in the
          grid is the same height and the rows line up. A ragged grid is its own kind of noise. */
-      min-height: 2.84em;
+      min-height: 4.26em;
       overflow: hidden;
+    }
+    /* The clamp keeps the grid scannable and hid most of what some packs say — the TOPIK
+       description runs fifteen lines and three of them showed, with nothing to say the rest
+       existed. Hovering the card, or reaching it with Tab, lifts the clamp and floats the
+       full text over the cards below.
+
+       Floated rather than grown: the card keeps its place, so the grid does not reflow under
+       the pointer. And floated rather than opened by a button inside the card, because the
+       card is itself one button and a button inside a button is not markup a browser honours.
+       Screen readers never see this — they are given the same text through aria-describedby,
+       which is the one channel a hover cannot serve. */
+    /* The lift on hover is a transform, and a transform makes the card a stacking context of
+       its own — which traps the panel below at whatever z-index it asks for, and lets the
+       next card in the DOM paint straight over it. The card itself has to rise. */
+    #level-select-overlay .level-card:hover,
+    #level-select-overlay .level-card:focus-visible { overflow: visible; z-index: 6; }
+    #level-select-overlay .level-card:hover .lc-desc,
+    #level-select-overlay .level-card:focus-visible .lc-desc {
+      -webkit-line-clamp: unset; display: block;
+      /* Below the card, not over it. An absolutely positioned child of a flex container
+         takes its static position from the container's content box rather than from where
+         its siblings left off, so with `top` unset this landed on top of the icon and the
+         unit name — hiding the one thing that says which card you are reading. */
+      position: absolute; top: calc(100% + 6px); left: 10px; right: 10px; z-index: 6;
+      margin: 0; padding: 9px 11px; max-height: 24em; overflow-y: auto;
+      background: #fff6e2; border: 2px solid #8b5a2b; border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .34);
     }
 
     /* Progress is what a course chooser should show and this one never did. Owned packs
@@ -4276,3 +4303,31 @@
     }
     .lb-foot { margin-top: 8px; font-size: 11px; color: #8b5a2b; text-align: center; }
 
+
+    /* ── Something to aim at ─────────────────────────────────────────────────
+       These are the controls that came in under the 44px a finger needs: the ✕ on six
+       panels sat at roughly 35x31, and the one on the memory game at 15x32 — narrower
+       than the glyph it draws.
+
+       The hit area grows, the button does not. A ::after box centred on the control takes
+       the press, so the parchment squares stay the size the panels were drawn around and
+       the target underneath them is the size a thumb expects. The buy buttons are the
+       exception: they are the primary action on a card and had room to grow honestly. */
+    #shop-close-btn, #fish-album-close-btn, #memory-close-btn, #trophy-close-btn,
+    #cat-dialog-close, .prog-close, .lb-close, .audio-close, #vocab-close-btn,
+    #vff-header-close {
+      position: relative;
+    }
+    #shop-close-btn::after, #fish-album-close-btn::after, #memory-close-btn::after,
+    #trophy-close-btn::after, #cat-dialog-close::after, .prog-close::after,
+    .lb-close::after, .audio-close::after, #vocab-close-btn::after,
+    #vff-header-close::after {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      width: 44px; height: 44px; transform: translate(-50%, -50%);
+      /* Behind the glyph so it never covers it, and above nothing else — the button is
+         already the top of its own stacking context. */
+      z-index: 0;
+    }
+    .shop-buy-btn, .trophy-buy-btn {
+      min-height: 44px;
+    }

@@ -289,6 +289,16 @@ function buildLevelSelectScreen() {
       + (owned
         ? (done ? hvT('ui.ls.card.aria.complete') : hvT('ui.ls.card.aria.learned', { pct }))
         : hvT('ui.ls.card.aria.locked', { n: cost })));
+    // A locked card keeps its role so it is still announced as the control it looks like,
+    // and says it cannot be used rather than simply refusing to take focus. Skipping it in
+    // the tab order is the right call — there is nothing to do there — but a button that
+    // cannot be reached and does not say why is the reader's problem, not the design's.
+    if (!(owned || canAfford)) c.setAttribute('aria-disabled', 'true');
+    // The description is clamped to two lines on the card, and the card carries an explicit
+    // aria-label, which stops a reader from reaching the text inside it at all. So the blurb
+    // — the only thing on the screen that says what a unit teaches — was invisible twice
+    // over: cut off for the eye and unreachable for the ear. describedby gives it back.
+    const descId = 'lc-desc-' + idx;
 
     c.innerHTML = `
       <div class="lc-top">
@@ -299,7 +309,7 @@ function buildLevelSelectScreen() {
           <span class="lc-name">${vbEsc(heroEn)}</span>
         </div>
       </div>
-      <span class="lc-desc">${vbEsc(tr(lvl, 'descriptionEn') || lvl.description || '')}</span>
+      <span class="lc-desc" id="${descId}">${vbEsc(tr(lvl, 'descriptionEn') || lvl.description || '')}</span>
       <div class="lc-progress">
         <div class="lc-progress-track${pct > 0 ? '' : ' empty'}" role="presentation">
           <div class="lc-progress-fill" style="width:${pct}%"></div>
@@ -309,6 +319,7 @@ function buildLevelSelectScreen() {
         <span class="lc-stat">${hvT('ui.ls.card.words', { n: `<b>${wordCount}</b>` })}</span>
         <span class="lc-state${stateClass}">${vbEsc(stateLabel)}</span>
       </div>`;
+    c.setAttribute('aria-describedby', descId);
 
     const open = () => {
       if (owned) {
@@ -388,15 +399,55 @@ function syncStudyQuiet() {
     });
 }
 
+// ── Focus, while a modal owns the screen ────────────────────────────────────
+//
+// The stack already decides what Escape closes and what the music does; focus is the third
+// thing it should decide and did not. A modal opened with the keyboard used to leave the
+// caret out on the farm behind it, so Tab walked the HUD under the panel — the learner could
+// hear a screen reader read buttons that were not on screen, and the trip back to where they
+// had been was a long one.
+//
+// Where focus came from, per overlay rather than one slot: the desk chains — the chooser
+// opens the workbook, the workbook goes back to the chooser — and a single slot would hand
+// the learner back to the farm instead of the screen they came from.
+const modalReturnFocus = new Map();
+
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]),'
+  + ' textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function focusablesIn(root) {
+  if (!root || !root.querySelectorAll) return [];
+  return [...root.querySelectorAll(FOCUSABLE)]
+    .filter((el) => el.offsetParent !== null || el === document.activeElement);
+}
+
+// The panel itself takes focus rather than its first button. A screen reader then reads the
+// dialog and its name before anything else, and Tab walks the panel from the top — where
+// jumping straight to a control announces that control and never says what opened.
+function focusModal(overlay) {
+  if (!overlay || typeof overlay.focus !== 'function') return;
+  if (typeof overlay.hasAttribute === 'function' && !overlay.hasAttribute('tabindex')
+      && typeof overlay.setAttribute === 'function') {
+    overlay.setAttribute('tabindex', '-1');
+  }
+  try { overlay.focus({ preventScroll: true }); } catch (e) { try { overlay.focus(); } catch (e2) {} }
+}
+
 function setModalState(overlayId, isOpen) {
   const overlay = document.getElementById(overlayId);
   if (!overlay) return;
   if (isOpen) {
+    const wasOpen = activeModalStack.includes(overlayId);
     overlay.classList.add('visible');
     overlay.classList.remove('hidden');
     playerLocked = true;
-    if (!activeModalStack.includes(overlayId)) {
+    if (!wasOpen) {
       activeModalStack.push(overlayId);
+      const from = document.activeElement;
+      if (from && from !== document.body) modalReturnFocus.set(overlayId, from);
+      // A tick late on purpose: several screens are populated after this call, and focusing
+      // a panel that is still empty gives the reader nothing to announce.
+      setTimeout(() => { if (activeModalStack.includes(overlayId)) focusModal(overlay); }, 0);
     }
   } else {
     overlay.classList.remove('visible');
@@ -406,6 +457,21 @@ function setModalState(overlayId, isOpen) {
     activeModalStack = activeModalStack.filter(id => id !== overlayId);
     if (activeModalStack.length === 0) {
       playerLocked = false;
+    }
+    const back = modalReturnFocus.get(overlayId);
+    modalReturnFocus.delete(overlayId);
+    // Only if it is still on the page and still reachable — a card that closed with the
+    // screen it lived on would throw the caret back to the top of the document instead.
+    //
+    // Feature-checked rather than assumed: the test harnesses evaluate this file against a
+    // hand-built document that has getElementById and not much else, and a modal stack that
+    // throws on close is a worse bug than a caret that does not move.
+    const stillThere = back && typeof document.contains === 'function'
+      && document.contains(back) && back.offsetParent !== null;
+    if (stillThere && typeof back.focus === 'function') {
+      try { back.focus({ preventScroll: true }); } catch (e) {}
+    } else if (activeModalStack.length) {
+      focusModal(document.getElementById(activeModalStack[activeModalStack.length - 1]));
     }
   }
   syncStudyQuiet();
@@ -455,6 +521,24 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 
     if (e.key === 'Escape' && activeModalStack.length > 0) {
       closeTopModal();
+      return;
+    }
+
+    // Tab stays inside the panel that is open. Without this the caret leaves the dialog at
+    // its last button and carries on through the HUD and the farm behind it — which are
+    // covered, unreachable by mouse, and still in the tab order. aria-modal tells a screen
+    // reader the rest of the page is not there; this makes that true for the keyboard.
+    if (e.key === 'Tab' && activeModalStack.length > 0) {
+      const top = document.getElementById(activeModalStack[activeModalStack.length - 1]);
+      if (!top) return;
+      const stops = focusablesIn(top);
+      if (!stops.length) { e.preventDefault(); focusModal(top); return; }
+      const first = stops[0];
+      const last = stops[stops.length - 1];
+      const here = document.activeElement;
+      if (!top.contains(here)) { e.preventDefault(); (e.shiftKey ? last : first).focus(); return; }
+      if (e.shiftKey && here === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && here === last) { e.preventDefault(); first.focus(); }
       return;
     }
 
