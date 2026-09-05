@@ -4150,6 +4150,37 @@
       line-height: 1.5; color: #5b3412; margin: 2px 0 0;
     }
 
+    /* ── Interface language ────────────────────────────────────────────────
+       Two columns rather than the three a volume row uses: there is no numeric
+       readout, and the buttons want the width. Be Vietnam Pro is already the UI
+       face throughout, so Vietnamese diacritics need nothing added here. */
+    .audio-row-lang { grid-template-columns: 118px 1fr; }
+    .hv-lang-picker { display: flex; gap: 6px; flex-wrap: wrap; }
+    .hv-lang-btn {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 13px; font-weight: 700;
+      color: #5b3412; background: #ffe9b8; border: 1.5px solid var(--wood-l);
+      border-radius: 4px; padding: 6px 10px; cursor: pointer;
+      box-shadow: inset 0 1px 0 #fff; transition: background .12s, transform .12s;
+    }
+    .hv-lang-btn:hover { background: #fff3d6; transform: translateY(-1px); }
+    .hv-lang-btn.active {
+      background: var(--wood-d, #7a3e12); color: #ffe9b8; border-color: var(--wood-d, #7a3e12);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
+    }
+
+    /* On the level select the picker floats under the grid, on the dark backdrop
+       rather than on the panel's parchment, so it takes its own colours. */
+    #ls-lang { justify-content: center; margin: 18px auto 4px; }
+    #ls-lang .hv-lang-btn {
+      background: rgba(15, 23, 42, .55); color: #e2e8f0;
+      border-color: rgba(226, 232, 240, .28);
+      box-shadow: none; backdrop-filter: blur(4px);
+    }
+    #ls-lang .hv-lang-btn:hover { background: rgba(30, 41, 59, .8); }
+    #ls-lang .hv-lang-btn.active {
+      background: #4ade80; color: #0f172a; border-color: #4ade80; font-weight: 800;
+    }
+
     @media (max-width: 560px) {
       .audio-row { grid-template-columns: 92px 1fr 38px; gap: 8px; padding: 8px 9px; }
       .audio-row-name { font-size: 12px; }

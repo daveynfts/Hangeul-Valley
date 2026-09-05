@@ -116,7 +116,7 @@ class BeeScene extends Phaser.Scene {
 
     const currentTarget = this.roundWords[this.currentWordIndex];
     const hintEmoji = currentTarget.hint ? ` ${currentTarget.hint}` : '';
-    this.targetText.setText(`TARGET: "${currentTarget.en.toUpperCase()}"${hintEmoji}`);
+    this.targetText.setText(`${hvT('ui.bee.target')}: "${String(tr(currentTarget, 'en')).toUpperCase()}"${hintEmoji}`);
     this.updateHUD();
 
     // The target is announced in English and the bees carry Korean, so a decoy sharing the

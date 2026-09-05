@@ -100,8 +100,11 @@ assert(/#vff-emoji img\.vocab-art-icon\s*\{[^}]*height:\s*96px/s.test(css),
   'word details also keep TOPIK artwork at its native 96px height');
 assert(/#vff-inner\s*\{[^}]*height:\s*100vh;\s*height:\s*100dvh/s.test(css),
   'individual word details also fill the viewport');
-assert(ui.includes('[w.ko, w.en, w.category, w.categoryEn, romanized]'),
-  'book search covers Korean, English, categories and romanization');
+// The English stays in the haystack alongside the translation rather than being replaced by
+// it. A learner reading a Vietnamese interface may still know a dish by its English name —
+// searching "kimchi stew" has to keep working after the interface language changes.
+assert(ui.includes("[w.ko, w.en, tr(w, 'en'), w.category, w.categoryEn, tr(w, 'categoryEn'), romanized]"),
+  'book search covers Korean, English, the translation, categories and romanization');
 assert(ui.includes("setModalState('vocab-overlay', true)")
   && ui.includes("setModalState('vocab-ff-modal', true)"),
   'book and detail page participate in the modal stack');

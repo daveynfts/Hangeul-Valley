@@ -11,6 +11,7 @@ const workbookLib = require('./lib/workbook');
 const artLib = require('./lib/art');
 const skinsLib = require('./lib/skins');
 const contentLib = require('./lib/content');
+const i18nLib = require('./lib/i18n');
 
 const app = express();
 
@@ -378,6 +379,33 @@ function saveContent(key, req, res, next) {
     res.json({ success: true, data: { key: entry.key, rel: entry.rel, body: normalised, live: false, note: 'Written to the working tree. Commit and publish to ship it.' } });
   } catch (err) { next(err); }
 }
+
+// ── Translations ────────────────────────────────────────────────────────────
+// Under /api/admin/ deliberately: on Vercel every admin route is dispatched by the one
+// catch-all function, because the Hobby plan's twelve-function ceiling is already at
+// eleven. A route added anywhere else here would work locally and 404 on production —
+// which is the exact failure the content registry exists to prevent, and it applies to
+// translations just as much.
+app.get('/api/admin/i18n', (req, res, next) => {
+  try {
+    const lang = req.query.lang || 'vi';
+    if (!req.query.source) { res.json({ success: true, data: i18nLib.report(getRootDir(), lang) }); return; }
+    res.json({ success: true, data: i18nLib.rows(getRootDir(), req.query.source, lang) });
+  } catch (err) { next(err); }
+});
+app.put('/api/admin/i18n', (req, res, next) => {
+  try {
+    const body = req.body || {};
+    if (body.prune) {
+      res.json({ success: true, data: i18nLib.pruneStale(getRootDir(), body.source, body.lang || 'vi') });
+      return;
+    }
+    res.json({
+      success: true,
+      data: i18nLib.saveRows(getRootDir(), body.source, body.lang || 'vi', body.entries || {})
+    });
+  } catch (err) { next(err); }
+});
 
 app.get('/api/admin-host', (req, res) => {
   res.json({

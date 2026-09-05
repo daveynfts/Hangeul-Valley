@@ -308,7 +308,7 @@ class FishingScene extends Phaser.Scene {
       const cx = (idx % 2 === 0 ? -85 : 85);
       const cy = (idx < 2 ? -30 : 30);
       const btnBg = this.add.rectangle(cx, cy, 150, 44, 0x1E293B).setStrokeStyle(2, 0x0284C7).setInteractive({useHandCursor:true});
-      const txt = this.add.text(cx, cy, c.en, {fontFamily:'"Be Vietnam Pro",sans-serif', fontSize:'15px', color:'#FFFFFF', fontWeight:'bold'}).setOrigin(0.5);
+      const txt = this.add.text(cx, cy, tr(c, 'en'), {fontFamily:'"Be Vietnam Pro",sans-serif', fontSize:'15px', color:'#FFFFFF', fontWeight:'bold'}).setOrigin(0.5);
       
       btnBg.on('pointerdown', () => {
         if(c.ko === fish.ko){
@@ -339,9 +339,9 @@ class FishingScene extends Phaser.Scene {
 
     if (fish.rarity === 'Legendary' || fish.ko === '황금물고기') {
       addGems(5);
-      showToast(`🌟 LEGENDARY CATCH! ${fish.hint} ${fish.ko} (${fish.en})! +35 Coins & +5 Gems!`, 4500);
+      showToast(`🌟 LEGENDARY CATCH! ${fish.hint} ${fish.ko} (${tr(fish, 'en')})! +35 Coins & +5 Gems!`, 4500);
     } else {
-      showToast(`🎉 Caught ${fish.hint} ${fish.ko} (${fish.en})! +35 Coins!`, 4000);
+      showToast(`🎉 Caught ${fish.hint} ${fish.ko} (${tr(fish, 'en')})! +35 Coins!`, 4000);
     }
 
     checkQuestProgress('fish', { count: 1 });

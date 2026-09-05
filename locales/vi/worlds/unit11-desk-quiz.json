@@ -1,0 +1,22 @@
+{
+  "lang": "vi",
+  "source": "worlds/unit11-desk-quiz.json",
+  "note": "Keys are field|English-source. Editing the English orphans its translation on purpose.",
+  "entries": {
+    "A|A medicated patch for aching muscles": "Miếng dán giảm đau cơ",
+    "A|A sore throat and a cough": "Đau họng và ho",
+    "A|How did you get here — by bus or by subway?": "Bạn đến đây bằng gì — xe buýt hay tàu điện ngầm?",
+    "B|A rice porridge eaten for an upset stomach": "Món cháo ăn khi đau bụng",
+    "B|An upset stomach and dizziness": "Khó chịu trong bụng và chóng mặt",
+    "B|What brings you here? / What seems to be the problem?": "Bạn đến khám vì chuyện gì? / Bạn thấy khó chịu ở đâu?",
+    "C|A fever and aches all over": "Sốt và đau nhức khắp người",
+    "C|Korean ginseng, a root taken for health": "Nhân sâm Hàn Quốc, loại củ dùng để bồi bổ",
+    "C|When did you get here?": "Bạn đến đây khi nào?",
+    "D|A green tea drunk after meals": "Trà xanh uống sau bữa ăn",
+    "D|No appetite and no energy": "Chán ăn và không có sức",
+    "D|Who did you come with?": "Bạn đến cùng ai?",
+    "q|At the doctor's office you say: \"속이 안 좋고 어지러워요.\" What are you describing?": "Ở phòng khám bạn nói: \"속이 안 좋고 어지러워요.\" Bạn đang mô tả điều gì?",
+    "q|You already arranged with 유진 to go see a film this weekend. Which sentence reports that arrangement with V-기로 하다?": "Bạn đã hẹn với 유진 đi xem phim cuối tuần này. Câu nào thuật lại lời hẹn đó bằng V-기로 하다?",
+    "titleEn|Health & exercise quiz": "Bài kiểm tra sức khoẻ & thể dục"
+  }
+}

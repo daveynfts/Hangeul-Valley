@@ -14,7 +14,7 @@ window.openFishAlbum = function(){
     card.innerHTML = `
       <div class="fish-card-icon">${f.hint}</div>
       <div class="fish-card-ko">${unlocked ? f.ko : '???'}</div>
-      <div class="fish-card-en">${unlocked ? f.en : 'Locked'}</div>
+      <div class="fish-card-en">${unlocked ? tr(f, 'en') : hvT('ui.fish.locked')}</div>
       <div class="fish-card-catches">${unlocked ? `Caught ×${count}` : '🔒 Uncaught'}</div>`;
     grid.appendChild(card);
   });
@@ -59,7 +59,7 @@ window.openMemoryGame = function(){
   memoryCards = [];
   selected.forEach((w, id) => {
      memoryCards.push({ text: w.ko, type: 'ko', id });
-     memoryCards.push({ text: w.en, type: 'en', id });
+     memoryCards.push({ text: tr(w, 'en'), type: 'en', id });
   });
   memoryCards.sort(()=>Math.random()-0.5);
   
@@ -645,7 +645,7 @@ function renderCookingGrid(selectId) {
   if (cookingSearch) {
     view = view.filter(function (x) {
       return String(x.r.nameKo).toLowerCase().indexOf(cookingSearch) >= 0
-        || String(x.r.nameEn).toLowerCase().indexOf(cookingSearch) >= 0;
+        || String(x.r.nameEn + ' ' + tr(x.r, 'nameEn')).toLowerCase().indexOf(cookingSearch) >= 0;
     });
   }
   view.sort(function (a, b) {
@@ -682,7 +682,7 @@ function renderCookingGrid(selectId) {
       // Tab plus Enter and Space for free.
       card.setAttribute('aria-pressed', isSelected ? 'true' : 'false');
       card.setAttribute('aria-label',
-        `${r.nameKo}, ${r.nameEn}, ${row.st.canCook ? 'ready to cook' : row.st.missing.length + ' ingredients missing'}${row.cooked ? ', already mastered' : ''}`);
+        `${r.nameKo}, ${tr(r, 'nameEn')}, ${row.st.canCook ? 'ready to cook' : row.st.missing.length + ' ingredients missing'}${row.cooked ? ', already mastered' : ''}`);
     }
 
     const tags = [];
@@ -695,7 +695,7 @@ function renderCookingGrid(selectId) {
       <span class="ck-card-icon">${ckArt(r.nameKo, r.icon, 30)}</span>
       <span class="ck-card-body">
         <span class="ck-card-ko">${ckEsc(r.nameKo)}</span>
-        <span class="ck-card-en">${ckEsc(r.nameEn)}</span>
+        <span class="ck-card-en">${ckEsc(tr(r, 'nameEn'))}</span>
       </span>
       <span class="ck-card-tags">${tags.join('')}</span>
     `;
@@ -737,7 +737,7 @@ function renderCookingGrid(selectId) {
           <span class="ck-detail-icon">${ckArt(recipe.nameKo, recipe.icon, 48)}</span>
           <div>
             <div class="ck-detail-ko">${ckEsc(recipe.nameKo)}</div>
-            <div class="ck-detail-en">${ckEsc(recipe.nameEn)}</div>
+            <div class="ck-detail-en">${ckEsc(tr(recipe, 'nameEn'))}</div>
           </div>
         </div>
         ${recipe.description ? `<div class="ck-detail-desc">${ckEsc(recipe.description)}</div>` : ''}
@@ -801,7 +801,7 @@ function cookRecipe(recipeId) {
     const have = ingMap[key] || 0;
     if (have < req.count) {
       if (typeof showToast === 'function') {
-        showToast(`⚠️ Missing ingredient for ${recipe.nameKo || recipe.nameEn}: Need ${req.count}x ${info.nameKo || key} (have ${have})`);
+        showToast(`⚠️ Missing ingredient for ${recipe.nameKo || tr(recipe, 'nameEn')}: Need ${req.count}x ${info.nameKo || key} (have ${have})`);
       }
       return false;
     }
@@ -847,7 +847,7 @@ function cookRecipe(recipeId) {
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('complete');
 
   if (typeof showToast === 'function') {
-    showToast(`🍳 Cooked ${recipe.nameKo || recipe.nameEn}! +${goldReward} Gold 🪙, +${xpReward} XP ⭐`);
+    showToast(`🍳 Cooked ${recipe.nameKo || tr(recipe, 'nameEn')}! +${goldReward} Gold 🪙, +${xpReward} XP ⭐`);
   }
 
   if (typeof renderInventoryGrid === 'function') renderInventoryGrid();
@@ -1291,7 +1291,7 @@ function updateLeaderboardMetrics() {
   leaderboardState.personalBests.highestCookingTier = computeCookingTier();
   ensurePlayerRank();
   leaderboardState.personalBests.valleyLevel = playerRank.level;
-  leaderboardState.personalBests.valleyTitle = rankTitleFor(playerRank.level).en;
+  leaderboardState.personalBests.valleyTitle = tr(rankTitleFor(playerRank.level), 'en');
   
 
   if (typeof leaderboardState.personalBests.arcadeHighScore !== 'number') {

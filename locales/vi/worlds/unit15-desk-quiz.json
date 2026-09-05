@@ -1,0 +1,30 @@
+{
+  "lang": "vi",
+  "source": "worlds/unit15-desk-quiz.json",
+  "note": "Keys are field|English-source. Editing the English orphans its translation on purpose.",
+  "entries": {
+    "A|-게 되다 with adjectives, -아/어지다 with verbs": "-게 되다 với tính từ, -아/어지다 với động từ",
+    "A|The child 태어나다, the mother 낳다": "Đứa con 태어나다, người mẹ 낳다",
+    "B|Both attach to either": "Cả hai đều gắn được với cả hai loại",
+    "B|The mother 태어나다, the child 낳다": "Người mẹ 태어나다, đứa con 낳다",
+    "C|-아/어지다 with adjectives, -게 되다 with verbs": "-아/어지다 với tính từ, -게 되다 với động từ",
+    "C|Both take 에": "Cả hai đều đi với 에",
+    "C|They are interchangeable": "Hai mẫu dùng thay nhau được",
+    "D|Both need an object": "Cả hai đều cần tân ngữ",
+    "D|Both take 를": "Cả hai đều đi với 를",
+    "D|Neither attaches to a verb": "Không mẫu nào gắn được với động từ",
+    "q|An empty lot now has a library on it. Which verb?": "Khu đất trống giờ đã có thư viện. Dùng động từ nào?",
+    "q|The price of goods went from 500원 to 1,000원. Which verb?": "Giá hàng tăng từ 500원 lên 1.000원. Dùng động từ nào?",
+    "q|Which is correct for \"after class finishes\"?": "Câu nào đúng cho \"sau khi tan học\"?",
+    "q|Which is correct for \"before I came to Korea\"?": "Câu nào đúng cho \"trước khi tôi đến Hàn Quốc\"?",
+    "q|Which pattern goes with an adjective, and which with a verb?": "Mẫu nào đi với tính từ, mẫu nào đi với động từ?",
+    "q|덥다 is a ㅂ-irregular. What is \"to get hotter\"?": "덥다 là bất quy tắc ㅂ. \"Trở nên nóng hơn\" nói thế nào?",
+    "q|많아져요 is pronounced how?": "많아져요 được phát âm thế nào?",
+    "q|살다 before -기 전에. Which is right?": "살다 đứng trước -기 전에. Dạng nào đúng?",
+    "q|시골에서 사는 사람의 수가 ____. The subject is a count, so:": "시골에서 사는 사람의 수가 ____. Chủ ngữ là một con số đếm, vậy:",
+    "q|익숙하다 becomes which form when it describes a change?": "익숙하다 chuyển thành dạng nào khi diễn tả sự thay đổi?",
+    "q|입학하다 and 졸업하다 take which particles?": "입학하다 và 졸업하다 đi với tiểu từ nào?",
+    "q|태어나다 and 낳다 — who does which?": "태어나다 và 낳다 — ai làm hành động nào?",
+    "titleEn|Life & change quiz": "Bài kiểm tra về đời người & đổi thay"
+  }
+}

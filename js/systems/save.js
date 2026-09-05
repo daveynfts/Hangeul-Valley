@@ -87,7 +87,7 @@ function updateRankHUD() {
   }
   if (lv) lv.textContent = 'Lv.' + playerRank.level;
   if (fill) fill.style.width = pct + '%';
-  if (chip) chip.title = t.ko + ' · ' + t.en + ' · ' + playerRank.xp + '/' + need + ' EXP';
+  if (chip) chip.title = t.ko + ' · ' + tr(t, 'en') + ' · ' + playerRank.xp + '/' + need + ' EXP';
 }
 function renderRankCard() {
   ensurePlayerRank();
@@ -100,7 +100,7 @@ function renderRankCard() {
   set('rank-seal', t.icon);
   set('rank-lv', 'LV. ' + playerRank.level);
   set('rank-title-ko', t.ko);
-  set('rank-title-en', t.en);
+  set('rank-title-en', tr(t, 'en'));
   set('rank-xp-num', playerRank.level >= RANK_MAX ? 'MAX' : (playerRank.xp + ' / ' + need + ' EXP'));
   const fill = document.getElementById('rank-xp-fill');
   if (fill) fill.style.width = pct + '%';
@@ -124,7 +124,7 @@ function showRankUp(title, hops) {
   set('rankup-icon', t.icon);
   set('rankup-lv', 'LV. ' + playerRank.level);
   set('rankup-ko', t.ko);
-  set('rankup-en', t.en + (hops > 1 ? '  (+' + hops + ')' : ''));
+  set('rankup-en', tr(t, 'en') + (hops > 1 ? '  (+' + hops + ')' : ''));
   if (typeof playChiptuneSFX === 'function') playChiptuneSFX('levelup');
   setModalState('rankup-overlay', true);
 }

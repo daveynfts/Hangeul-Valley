@@ -1,0 +1,9 @@
+{
+  "lang": "vi",
+  "source": "worlds/unit13-desk-quiz.json",
+  "note": "Keys are field|English-source. Editing the English orphans its translation on purpose.",
+  "entries": {
+    "q|\"The station is close so it's handy, but it's a bit noisy.\" A/V-기는 하지만 으로 말해 보세요.": "\"Ga gần nên tiện, nhưng hơi ồn.\" Hãy nói bằng mẫu A/V-기는 하지만.",
+    "titleEn|Housing quiz": "Bài kiểm tra về nhà ở"
+  }
+}

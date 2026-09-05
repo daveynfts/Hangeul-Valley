@@ -40,6 +40,9 @@
         <button class="nav-btn" data-tab="unit14" id="tab-btn-unit14">
           <span class="nav-icon">🙇</span> Workbooks
         </button>
+        <button class="nav-btn" data-tab="i18n" id="tab-btn-i18n">
+          <span class="nav-icon">🌐</span> Translate
+        </button>
         <button class="nav-btn" data-tab="art" id="tab-btn-art">
           <span class="nav-icon">🎨</span> Art
         </button>
@@ -615,6 +618,53 @@
       </div>
     </section>
 
+    <!-- ========================================== -->
+    <!-- TAB: TRANSLATE                             -->
+    <!-- ========================================== -->
+    <section id="tab-i18n" class="tab-content">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="section-title">Translate</h2>
+          <p class="section-desc">
+            The language the game <em>explains</em> Korean in. Korean itself never changes.
+            Nothing here edits a curriculum file — translations live beside them under
+            <code>locales/</code>, keyed by the English they replace, so editing an English
+            sentence marks its translation stale instead of silently keeping the old one.
+          </p>
+        </div>
+        <div class="dash-quick-actions">
+          <label class="tr-lang-label" for="tr-lang">Language</label>
+          <select id="tr-lang" class="tr-select"></select>
+          <button class="btn btn-secondary" id="btn-tr-refresh">🔄 Refresh</button>
+        </div>
+      </div>
+
+      <div class="tr-totals" id="tr-totals"></div>
+
+      <div class="content-layout">
+        <aside class="card content-side" id="tr-files"></aside>
+        <div class="card content-pane">
+          <div class="content-head" id="tr-head"></div>
+          <div class="content-status" id="tr-status"></div>
+          <div class="tr-toolbar" id="tr-toolbar" hidden>
+            <input type="search" id="tr-search" class="tr-search" placeholder="Search the English or the translation…" aria-label="Search strings">
+            <div class="tr-filters" role="group" aria-label="Filter strings">
+              <button type="button" class="tr-filter active" data-tr-filter="todo">Untranslated</button>
+              <button type="button" class="tr-filter" data-tr-filter="done">Translated</button>
+              <button type="button" class="tr-filter" data-tr-filter="all">All</button>
+              <button type="button" class="tr-filter" data-tr-filter="stale">Stale</button>
+            </div>
+          </div>
+          <div class="tr-rows" id="tr-rows"></div>
+          <div class="content-actions">
+            <span class="tr-dirty" id="tr-dirty"></span>
+            <button type="button" class="btn btn-secondary" id="tr-revert" disabled>Revert</button>
+            <button type="button" class="btn btn-primary" id="tr-save" disabled>Save</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="tab-skins" class="tab-content">
       <div class="dashboard-header">
         <div>
@@ -668,5 +718,6 @@
   <script src="js/workbook.js"></script>
   <script src="js/art.js"></script>
   <script src="js/skins.js"></script>
+  <script src="js/i18n.js"></script>
 </body>
 </html>

@@ -263,6 +263,20 @@ check('index.html script tags match js/manifest.json',
   // "js/manifest.json lists X, which is not on disk" rather than throwing a bare ENOENT.
 }());
 
+// Where Vietnamese belongs, and nowhere else.
+//
+// The game speaks Vietnamese now, so the blanket rule below had to make room — but it is
+// worth more after that change, not less. The failure it guards against was never "a file
+// contains Vietnamese"; it was Vietnamese ending up in a field the game renders as English,
+// where it reads as a broken gloss rather than as a translation. That can still happen, and
+// there is now a second language sitting right next to the first for it to happen from.
+//
+// So: the catalogues are exempt, because holding Vietnamese is their entire job, and the
+// language table in js/i18n.js is exempt, because "Tiếng Việt" is the one label that must
+// never be translated or transliterated. Everything else stays under the rule.
+const VIETNAMESE_ALLOWED = new Set(
+  ['js/i18n.js'].concat(GAME_SCRIPTS.filter((f) => f.indexOf('js/locales/') === 0))
+);
 ['index.html', path.join('css', 'game.css'), path.join('sprites', 'catalog.json'), path.join('skins', 'catalog.json')]
   .concat(GAME_SCRIPTS)
   .forEach((f) => {
@@ -272,6 +286,7 @@ check('index.html script tags match js/manifest.json',
       check(`readable ${f}`, false, e.message);
       return;
     }
+    if (VIETNAMESE_ALLOWED.has(String(f).split(path.sep).join('/'))) return;
     const hits = src.split('\n')
       .map((line, i) => ({ line, n: i + 1 }))
       .filter(({ line }) => VIETNAMESE.test(line))
@@ -2015,6 +2030,150 @@ const overlayIds = [
   if (fs.existsSync(dir)) walk(dir, '');
   check(`api/ holds at most ${LIMIT} serverless functions (found ${found.length})`,
     found.length <= LIMIT, found.join(', '));
+}());
+
+// ── The interface language holds together ───────────────────────────────────
+//
+// Every one of these is a way the translation can be broken without anything crashing.
+// hvT() falls back to printing its key, tr() falls back to English, and a catalogue that
+// 404s is indistinguishable from a unit nobody has translated yet — so all three failures
+// are silent, and all three look fine to whoever made them. That is precisely the shape of
+// bug this file exists to catch, so they are checked here rather than trusted.
+(function checkInterfaceLanguage() {
+  const i18nLib = require(path.join(ROOT, 'admin', 'lib', 'i18n.js'));
+  const rule = require(path.join(ROOT, 'js', 'i18n.js'));
+  const extract = require(path.join(ROOT, 'scripts', 'i18n_extract.js'));
+
+  let en;
+  try { en = i18nLib.readChromeTable(ROOT, 'en'); }
+  catch (e) { check('js/locales/en.js parses', false, e.message); return; }
+  check('js/locales/en.js holds the interface strings', Object.keys(en).length > 100,
+    Object.keys(en).length + ' keys');
+
+  // 1. Markup asks for keys the catalogue answers.
+  const html = read('index.html');
+  const asked = new Set();
+  (html.match(/data-i18n(?:-[a-z-]+)?="[^"]+"/g) || [])
+    .forEach((m) => asked.add(m.slice(m.indexOf('"') + 1, -1)));
+  const unanswered = [...asked].filter((k) => !Object.prototype.hasOwnProperty.call(en, k));
+  check('every data-i18n key in index.html has English text', unanswered.length === 0,
+    unanswered.slice(0, 6).join(', ') + ' — run node scripts/i18n_extract.js');
+
+  // 2. So does the game code. A missing key here paints the key itself on screen.
+  const codeKeys = extract.scanCodeKeys();
+  const codeMissing = codeKeys.filter((k) => !Object.prototype.hasOwnProperty.call(en, k));
+  check('every hvT() key in the game code has English text', codeMissing.length === 0,
+    codeMissing.slice(0, 6).join(', '));
+
+  // 3. The English catalogue is English. This is the old rule, applied where it now matters:
+  //    a Vietnamese string reaching en.js is shown to English players as their interface.
+  const viInEn = Object.keys(en).filter((k) => VIETNAMESE.test(String(en[k])));
+  check('js/locales/en.js carries no Vietnamese', viInEn.length === 0, viInEn.slice(0, 5).join(', '));
+
+  // 4. Every translation answers a key that exists. An orphan is work that will never appear.
+  i18nLib.LANG_CODES.forEach((lang) => {
+    let table;
+    try { table = i18nLib.readChromeTable(ROOT, lang); }
+    catch (e) { check(`js/locales/${lang}.js parses`, false, e.message); return; }
+    const orphan = Object.keys(table).filter((k) => !Object.prototype.hasOwnProperty.call(en, k));
+    check(`every key in js/locales/${lang}.js exists in en.js`, orphan.length === 0,
+      orphan.slice(0, 6).join(', '));
+  });
+
+  // 5. The files the runtime will fetch catalogues for are files that exist. A typo here is a
+  //    404 the game swallows, and the unit stays English with no error anywhere.
+  const missingSources = rule.HV_CATALOG_SOURCES
+    .filter((rel) => !fs.existsSync(path.join(ROOT, rel.split('/').join(path.sep))));
+  check('every source in HV_CATALOG_SOURCES is on disk', missingSources.length === 0,
+    missingSources.join(', '));
+
+  // 6. Catalogue entries still match their English. The key IS the English, so an edit to a
+  //    sentence orphans its translation by design — that is the staleness detector working,
+  //    but only if somebody is told. Counted, not failed: a stale entry harms nothing, and
+  //    failing the build on it would mean an English typo fix could not be committed alone.
+  let stale = 0;
+  let translated = 0;
+  let translatable = 0;
+  rule.HV_CATALOG_SOURCES.forEach((rel) => {
+    const scanned = i18nLib.scanSource(ROOT, rel);
+    translatable += scanned.strings.length;
+    i18nLib.LANG_CODES.forEach((lang) => {
+      const { entries } = i18nLib.readCatalog(ROOT, rel, lang);
+      const live = new Set(scanned.strings.map((s) => s.key));
+      Object.keys(entries).forEach((k) => { if (live.has(k)) translated++; else stale++; });
+    });
+  });
+  check('no translation catalogue has drifted from its English', stale === 0,
+    stale + ' orphaned entr' + (stale === 1 ? 'y' : 'ies')
+    + ' — the English moved on. Re-check them in the admin Translate tab, or run'
+    + ' node scripts/i18n_report.js --prune');
+  console.log(`      translation coverage: ${translated}/${translatable} strings`);
+
+  // 7. The catalogues actually reach the browser. Loading js/i18n.js without the locale files
+  //    leaves hvT() printing keys; loading the locales without js/i18n.js throws.
+  const manifest = JSON.parse(read(path.join('js', 'manifest.json')));
+  ['js/i18n.js', 'js/locales/en.js'].concat(i18nLib.LANG_CODES.map((l) => 'js/locales/' + l + '.js'))
+    .forEach((rel) => {
+      check(`${rel} is in js/manifest.json`, manifest.indexOf(rel) >= 0);
+      check(`${rel} has a <script> tag in index.html`, html.indexOf('src="' + rel) >= 0);
+    });
+  check('js/i18n.js loads before the locale catalogues that register into it',
+    manifest.indexOf('js/i18n.js') < manifest.indexOf('js/locales/en.js'));
+
+  // 8. Publishing carries the catalogues. vercel.json rewrites /locales/* to the CDN, so a
+  //    catalogue absent from the upload batch 404s rather than falling back to the repo copy.
+  const cfg = JSON.parse(read('vercel.json'));
+  check('vercel.json rewrites /locales/* to the CDN',
+    (cfg.rewrites || []).some((r) => r.source === '/locales/:path*'));
+  const { collectUploadFiles } = require(path.join(ROOT, 'scripts', 'r2Content.js'));
+  const uploads = collectUploadFiles(ROOT).map((f) => f.rel);
+  const onDisk = [];
+  (function walk(dir, prefix) {
+    const full = path.join(ROOT, dir);
+    if (!fs.existsSync(full)) return;
+    fs.readdirSync(full, { withFileTypes: true }).forEach((e) => {
+      if (e.isDirectory()) return walk(path.join(dir, e.name), prefix + e.name + '/');
+      if (e.name.endsWith('.json')) onDisk.push('locales/' + prefix + e.name);
+    });
+  }('locales', ''));
+  const unpublished = onDisk.filter((rel) => uploads.indexOf(rel) < 0);
+  check('every translation catalogue is in the publish batch', unpublished.length === 0,
+    unpublished.slice(0, 5).join(', '));
+
+  // 9. The generated index agrees with the disk. The game asks only for catalogues this
+  //    file lists, so a catalogue missing from it is a unit that silently stays English —
+  //    no 404, no error, just untranslated text on a screen the tab reports as done.
+  const index = i18nLib.readCatalogIndex(ROOT);
+  const live = i18nLib.listCatalogs(ROOT);
+  i18nLib.LANG_CODES.forEach((lang) => {
+    const listed = (index[lang] || []).slice().sort().join(',');
+    const actual = (live[lang] || []).slice().sort().join(',');
+    check(`js/locales/catalogs.js lists every ${lang} catalogue that exists`, listed === actual,
+      listed === actual ? '' : 'run node scripts/i18n_report.js --reindex');
+  });
+
+  // 10. Two headwords must not share a translated gloss, for the same reason they must not
+  //     share an English one: a four-option recognition question then shows the same button
+  //     twice and marks one of them wrong. The English rule is checked far above; this is
+  //     the half that only exists once a translation does.
+  const levelsFile = JSON.parse(read('levels.json'));
+  i18nLib.LANG_CODES.forEach((lang) => {
+    const entries = i18nLib.readCatalog(ROOT, 'levels.json', lang).entries;
+    const byGloss = new Map();
+    Object.values(levelsFile).forEach((lvl) => {
+      if (!lvl || !Array.isArray(lvl.words)) return;
+      lvl.words.forEach((w) => {
+        if (!w || !w.en) return;
+        const t = entries[rule.hvKey('en', w.en)];
+        if (!t) return;
+        byGloss.set(t, [...(byGloss.get(t) || []), w.ko]);
+      });
+    });
+    const shared = [...byGloss.entries()].filter(([, kos]) => kos.length > 1)
+      .map(([t, kos]) => `"${t}" = ${kos.join(' / ')}`);
+    check(`no two headwords share a ${lang} gloss`, shared.length === 0,
+      shared.slice(0, 5).join('\n      '));
+  });
 }());
 
 // ── vercel.json says only what Vercel understands ───────────────────────────

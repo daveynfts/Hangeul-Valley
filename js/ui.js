@@ -173,7 +173,8 @@ function buildLevelSelectScreen() {
     }
     if(!levelsData || !levelsData.length){
       lsGrid.innerHTML = '<div class="ls-sep">Loading levels…</div>';
-      fetch('levels.json').then(r => r.ok ? r.json() : Promise.reject(new Error('levels '+r.status))).then(d => {
+      fetch('levels.json').then(r => r.ok ? r.json() : Promise.reject(new Error('levels '+r.status)))
+        .then(d => hvLocalizeAsync('levels.json', d)).then(d => {
         levelsData = Array.isArray(d) ? d : [];
         loadTextbookWorlds(() => buildLevelSelectScreen());
       }).catch(err => {
@@ -287,7 +288,7 @@ function buildLevelSelectScreen() {
           <span class="lc-name">${vbEsc(heroEn)}</span>
         </div>
       </div>
-      <span class="lc-desc">${vbEsc(lvl.descriptionEn || lvl.description || '')}</span>
+      <span class="lc-desc">${vbEsc(tr(lvl, 'descriptionEn') || lvl.description || '')}</span>
       <div class="lc-progress">
         <div class="lc-progress-track${pct > 0 ? '' : ' empty'}" role="presentation">
           <div class="lc-progress-fill" style="width:${pct}%"></div>
@@ -573,7 +574,7 @@ function collectInventoryItems() {
       if (!(qty > 0)) continue;
       const rec = invResolveRecipe(recipeId);
       const nameKo = rec ? (rec.nameKo || rec.name) : recipeId;
-      const nameEn = rec ? (rec.nameEn || rec.enName || rec.name) : recipeId;
+      const nameEn = rec ? (tr(rec, 'nameEn') || rec.enName || rec.name) : recipeId;
       items.push({
         itemId: recipeId,
         name: nameEn,
@@ -1202,7 +1203,7 @@ function openQuiz(word, plot, phase=1){
     }
   }
   hintCategory.textContent  = wordCategory(word);
-  enWordDisplay.textContent = word.en;
+  enWordDisplay.textContent = tr(word, 'en');
   quizLevelTag.textContent  = 'P'+phase+'/3';
   // Phase 3: shape tiles only — one square per syllable, grouped like the vocab is
   // written. Word-class (native / Sino / loan) never spells the word.
@@ -1361,7 +1362,7 @@ function answerChoice(opt, btn){
   if(correct){
     playChiptuneSFX('quiz_correct');
     speakKorean(currentWord.ko);
-    feedbackText.textContent = `✅ ${currentWord.ko} — ${currentWord.en}`;
+    feedbackText.textContent = `✅ ${currentWord.ko} — ${tr(currentWord, 'en')}`;
     feedbackText.className = 'correct';
     const cp=currentPlot, cw=currentWord, ph=currentPhase;
     const grade = deriveGrade();
@@ -1384,7 +1385,7 @@ function answerChoice(opt, btn){
     playChiptuneSFX('quiz_wrong');
     if (typeof checkQuestProgress === 'function') checkQuestProgress('miss');
     currentQuizMeta.attempts++;
-    feedbackText.textContent = `❌ It's ${currentWord.ko} — ${currentWord.en}`;
+    feedbackText.textContent = `❌ ${hvT('ui.quiz.itIs')} ${currentWord.ko} — ${tr(currentWord, 'en')}`;
     feedbackText.className = '';
     // Re-ask rather than punishing: this is a teaching step, not the graded recall.
     setTimeout(()=>{
@@ -1673,6 +1674,16 @@ $('shop-overlay').addEventListener('keydown', e => e.stopPropagation());
 
 // ═══════════════ VOCAB BOOK ══════════════════════════════════════════════════
 let activeCat = 'all';
+
+// The learning-stage chips in the vocabulary book. The id is what the filter matches on and
+// never changes; the icon is not language; the key is what gets translated.
+const VOCAB_STAGE_FILTERS = [
+  { id: 'srs:due', icon: '⏰', key: 'ui.vocab.filter.due' },
+  { id: 'srs:new', icon: '⚪', key: 'ui.vocab.filter.new' },
+  { id: 'srs:learning', icon: '🌱', key: 'ui.vocab.filter.learning' },
+  { id: 'srs:review', icon: '🍎', key: 'ui.vocab.filter.review' },
+  { id: 'srs:mature', icon: '🌟', key: 'ui.vocab.filter.mature' }
+];
 let activeMasteryFilter = 'all';
 let visibleVocabWords = [];
 let activeVocabDetailWord = null;
@@ -1682,9 +1693,19 @@ function buildVocabBook() {
   if(!levelsData.length) return;
   const lvl = levelsData[currentLevelIndex];
   const ko = levelNameKo(lvl);
-  vocabSubtitle.textContent = `Level ${lvl.level} – ${levelName(lvl)}${ko ? ` (${ko})` : ''}`;
-  const cats = ['all', '⏰ Due', '⚪ New', '🌱 Learning', '🍎 Review', '🌟 Mature', ...new Set(lvl.words.map(wordCategory).filter(Boolean))];
-  if (!cats.includes(activeCat)) activeCat = 'all';
+  vocabSubtitle.textContent = `${hvT('ui.vocab.levelPrefix')} ${lvl.level} – ${levelName(lvl)}${ko ? ` (${ko})` : ''}`;
+  // Stage chips carry an id, and the label is looked up from it.
+  //
+  // They used to be their own label — activeCat held "⚪ New" and the filter below matched
+  // on .includes('New'). That is fine in one language and silently wrong in two: once the
+  // chip is translated the substring is no longer in it, every stage filter matches nothing,
+  // and the vocabulary book comes back empty with no error anywhere. A category chip still
+  // uses its own text as the id, because a category IS what it filters on, and tr() gives
+  // both halves the same value for a given word.
+  const cats = [{ id: 'all', label: hvT('ui.vocab.filter.all') }]
+    .concat(VOCAB_STAGE_FILTERS.map((f) => ({ id: f.id, label: f.icon + ' ' + hvT(f.key) })))
+    .concat([...new Set(lvl.words.map(wordCategory).filter(Boolean))].map((c) => ({ id: c, label: c })));
+  if (!cats.some((c) => c.id === activeCat)) activeCat = 'all';
   const started = lvl.words.filter(w => {
     const e = peekSrs(w.ko);
     return e && e.st !== 'new';
@@ -1692,16 +1713,17 @@ function buildVocabBook() {
   const mature = lvl.words.filter(w => srsIsMature(peekSrs(w.ko))).length;
   const due = lvl.words.filter(w => wordIsDue(w.ko)).length;
   const summary = $('vocab-progress-summary');
-  if (summary) summary.textContent = `${started} started · ${mature} mature${due ? ` · ${due} due now` : ''}`;
+  if (summary) summary.textContent = hvT('ui.vocab.progressSummary', { started: started, mature: mature })
+    + (due ? ' · ' + hvT('ui.vocab.progressDue', { due: due }) : '');
   const filterScrollTop = catFiltersEl.scrollTop;
   catFiltersEl.innerHTML = '';
   cats.forEach(cc => {
     const b = document.createElement('button');
-    b.className = 'cat-filter-btn' + (cc === activeCat ? ' active' : '');
-    b.setAttribute('aria-pressed', String(cc === activeCat));
-    b.textContent = cc === 'all' ? '🌐 All' : cc;
+    b.className = 'cat-filter-btn' + (cc.id === activeCat ? ' active' : '');
+    b.setAttribute('aria-pressed', String(cc.id === activeCat));
+    b.textContent = cc.label;
     b.onclick = () => {
-      activeCat = cc;
+      activeCat = cc.id;
       buildVocabBook();
       $('vocab-grid-wrap').scrollTop = 0;
     };
@@ -1983,7 +2005,7 @@ function vocabSkillDescription(entry) {
   if (srsIsMature(entry)) parts.push('Mature');
   else if (entry.st === 'review') parts.push('In review');
   else if (entry.st === 'relearn') parts.push('Relearning');
-  else if (entry.st === 'learn') parts.push('Learning');
+  else if (entry.st === 'learn') parts.push(hvT('ui.vocab.filter.learning'));
   else parts.push(entry.st);
   if (srsIsGraduated(entry)) parts.push(`interval ${srsIntervalLabel(entry)}`);
   if (srsIsDue(entry)) parts.push('due now');
@@ -2058,7 +2080,7 @@ function vocabRenderRelatedWords(word) {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'vff-related-word';
-    button.setAttribute('aria-label', `Open ${candidate.ko}, ${candidate.en}`);
+    button.setAttribute('aria-label', `${hvT('ui.vff.open')} ${candidate.ko}, ${tr(candidate, 'en')}`);
 
     const art = document.createElement('span');
     art.className = 'vff-related-art';
@@ -2073,7 +2095,7 @@ function vocabRenderRelatedWords(word) {
     ko.textContent = candidate.ko;
     const en = document.createElement('span');
     en.className = 'vff-related-en';
-    en.textContent = candidate.en;
+    en.textContent = tr(candidate, 'en');
     copy.appendChild(ko);
     copy.appendChild(en);
     const arrow = document.createElement('span');
@@ -2130,7 +2152,7 @@ function showVocabFunFact(word) {
   $('vff-emoji').innerHTML = (typeof vocabIconHtml === 'function')
     ? vocabIconHtml(word.ko, word.hint || '📝', 126)
     : (word.hint || '📝');
-  $('vff-en').textContent = word.en;
+  $('vff-en').textContent = tr(word, 'en');
   $('vff-ko').textContent = word.ko;
   $('vff-romanization').textContent = model.romanization
     ? `Written-form guide · ${model.romanization}`
@@ -2160,7 +2182,7 @@ function showVocabFunFact(word) {
   const example = String(word.example || '').trim();
   const exSec = $('vff-example-section');
   $('vff-fact-example').textContent = example;
-  $('vff-example-en').textContent = example ? (word.exampleEn || '') : '';
+  $('vff-example-en').textContent = example ? (tr(word, 'exampleEn') || '') : '';
   const say = $('vff-example-speak');
   say.disabled = !example;
   say.onclick = example ? () => speakKorean(example, { force: true }) : null;
@@ -2334,7 +2356,7 @@ function renderTasteRound() {
       b.className = 'taste-btn';
       b.textContent = t.ko;
       b.setAttribute('data-t', t.ko);
-      b.title = t.en;
+      b.title = tr(t, 'en');
       b.onclick = () => answerTaste(t.ko === d.answer, b);
       box.appendChild(b);
     });
@@ -2404,6 +2426,7 @@ function loadDeskQuiz() {
   if (typeof fetch !== 'function') return Promise.resolve(null);
   return fetch(url)
     .then(r => r.ok ? r.json() : null)
+    .then(d => hvLocalizeAsync(url, d))
     .then(d => {
       if (d) d._url = url;
       deskQuizBank = d;
@@ -2433,7 +2456,7 @@ function pickDeskSession(bank) {
 
 function deskQuizTitle(bank) {
   const ko = (bank && bank.titleKo) || '학습 책상';
-  const en = (bank && bank.titleEn) || 'Quiz';
+  const en = (bank && tr(bank, 'titleEn')) || hvT('ui.desk.quiz');
   return ko + ' · ' + en;
 }
 
@@ -2617,6 +2640,7 @@ function loadDeskBank(url) {
   if (typeof fetch !== 'function') return Promise.resolve(null);
   return fetch(url)
     .then(r => r.ok ? r.json() : null)
+    .then(d => hvLocalizeAsync(url, d))
     .then(d => {
       if (d) {
         d._url = url;
@@ -2697,7 +2721,7 @@ function renderDeskMenu() {
       '<span class="desk-mode-icon">' + vbEsc(opt.icon) + '</span>' +
       '<span class="desk-mode-text">' +
         '<span class="desk-mode-ko">' + vbEsc(opt.ko) + '</span>' +
-        '<span class="desk-mode-en">' + vbEsc(opt.en) + '</span>' +
+        '<span class="desk-mode-en">' + vbEsc(tr(opt, 'en')) + '</span>' +
       '</span>';
     b.onclick = () => runDeskMode(i);
     box.appendChild(b);
@@ -2818,6 +2842,7 @@ function loadCassette() {
   if (typeof fetch !== 'function') return Promise.resolve(null);
   return fetch(url)
     .then(r => r.ok ? r.json() : null)
+    .then(d => hvLocalizeAsync(url, d))
     .then(d => { if (d) d._url = url; cassetteBank = d; return d; })
     .catch(() => null);
 }
@@ -3330,7 +3355,7 @@ function openCassette() {
     const head = $('cassette-title');
     if (head) head.textContent = '📻 ' + (bank.titleKo || '카세트 플레이어');
     const sub = $('cassette-sub');
-    if (sub) sub.textContent = bank.titleEn || '';
+    if (sub) sub.textContent = tr(bank, 'titleEn') || '';
     const foot = $('cassette-foot');
     if (foot) {
       const n = (bank.tracks || []).length;
@@ -3374,7 +3399,7 @@ function renderCassetteMenu() {
       '<span class="cs-mode-top"><span class="cs-mode-icon">' + vbEsc(m.icon) + '</span>' +
         '<span class="cs-mode-key">' + (i + 1) + '</span></span>' +
       '<span class="cs-mode-title">' + vbEsc(m.ko) + '<small>' + vbEsc(m.label) + '</small></span>' +
-      '<span class="cs-mode-desc">' + vbEsc(m.en) + '</span>' +
+      '<span class="cs-mode-desc">' + vbEsc(tr(m, 'en')) + '</span>' +
       '<span class="cs-mode-meta"><span>' + p.done + ' / ' + p.total + ' practised</span>' +
         '<span>' + vbEsc(second) + '</span></span>' +
       '<span class="cs-mode-progress" aria-hidden="true"><span style="width:' + p.pct + '%"></span></span>';
@@ -3566,7 +3591,7 @@ function renderListen() {
   const query = String(st.query || '').toLowerCase();
   const visible = tracks.map((t, i) => ({ t: t, i: i })).filter((row) => {
     if (!query) return true;
-    const hay = [row.t.n, row.t.sec, row.t.secEn].map((v) => String(v || '').toLowerCase()).join(' ');
+    const hay = [row.t.n, row.t.sec, row.t.secEn, tr(row.t, 'secEn')].map((v) => String(v || '').toLowerCase()).join(' ');
     return hay.indexOf(query) >= 0;
   });
 
@@ -3583,7 +3608,7 @@ function renderListen() {
       b.innerHTML =
         '<span class="cs-tn">' + t.n + '</span>' +
         '<span class="cs-tt"><span class="cs-tko">' + vbEsc(t.sec) + '</span>' +
-        '<span class="cs-ten">' + vbEsc(t.secEn) + '</span></span>' +
+        '<span class="cs-ten">' + vbEsc(tr(t, 'secEn')) + '</span></span>' +
         '<span class="cs-td">' + csClock(t.dur)
           + csPracticeBadge('trk', bank.unit, t.n) + '</span>';
       b.onclick = () => listenPick(i);
@@ -3605,7 +3630,7 @@ function renderListen() {
   const nm = $('listen-now');
   if (nm) nm.textContent = cur.sec;
   const nowEn = $('listen-now-en');
-  if (nowEn) nowEn.textContent = cur.secEn || '';
+  if (nowEn) nowEn.textContent = tr(cur, 'secEn') || '';
   const nowKicker = $('listen-now-kicker');
   if (nowKicker) nowKicker.textContent = 'TRK ' + cur.n + ' · ' + (st.i + 1) + ' / ' + tracks.length;
   const play = $('listen-play');
@@ -3652,7 +3677,7 @@ function renderListen() {
       // questions and not its script, so an empty pane would read as a bug.
       pane.className = 'cs-script empty' + (st.showScript ? '' : ' is-hidden');
       pane.innerHTML = '<div class="cs-none"><span class="cs-none-ko">대본이 없는 트랙</span>'
-        + '<span class="cs-none-en">' + vbEsc(cur.noteEn || '') + '</span></div>';
+        + '<span class="cs-none-en">' + vbEsc(tr(cur, 'noteEn') || '') + '</span></div>';
     }
     if (!st.showScript) {
       pane.innerHTML += '<div class="cs-script-cover"><b>대본을 가렸습니다.</b><br>'
@@ -3979,7 +4004,7 @@ function renderDictation() {
             + got.map((c) => '<span class="' + (c.ok ? 'ok' : 'extra') + '">' + vbEsc(c.ch) + '</span>').join('')
             + '</div></div>'
           : '')
-        + '<div class="cs-why"><span class="cs-en">' + vbEsc(it.en) + '</span>'
+        + '<div class="cs-why"><span class="cs-en">' + vbEsc(tr(it, 'en')) + '</span>'
         + '<span class="cs-note">' + vbEsc(it.why) + '</span></div>';
     }
   }
@@ -4326,7 +4351,7 @@ function wbGlossTable() {
   if (wbGlossFor === words) return wbGlossIndex;
   const map = new Map();
   words.forEach((w) => {
-    const gloss = String((w && w.en) || '').trim();
+    const gloss = String((w && tr(w, 'en')) || '').trim();
     if (!gloss) return;
     // A word may list the shapes it actually wears in a sentence. 썰렁하다 never appears as
     // 썰렁하다 — it turns up as 썰렁한 — and deriving that by rule would need a conjugator,
@@ -4674,7 +4699,7 @@ function wbTopikWhyHtml(ex, item, view) {
         plain: true, own: view.own, second: view.correct2 ? wbAnswerText(view.correct2) : ''
       }) + '</div>' +
     (view.ok ? '' : '<div class="wb-why-yours">내 답 · YOU PUT: ' + vbEsc(view.yours) + '</div>') +
-    '<div class="wb-topik-meaning"><span>뜻 · MEANING</span><p>' + vbEsc(item.en || '') + '</p></div>' +
+    '<div class="wb-topik-meaning"><span>뜻 · MEANING</span><p>' + vbEsc(tr(item, 'en') || '') + '</p></div>' +
     '<div class="wb-learn-grid">' +
       (lead ? '<section class="wb-learn-card wb-learn-clue"><span>01 · 핵심 단서 · WHAT TO NOTICE</span>' +
         '<p>' + vbEsc(lead) + '</p></section>' : '') +
@@ -4699,8 +4724,8 @@ function renderWorkbook() {
   // called 연습 1. The pattern is what actually tells them apart.
   if (sub) {
     sub.textContent = ex.pattern
-      ? ex.pattern + ' · ' + (ex.sectionEn || '')
-      : (ex.sectionEn || '') + ' — ' + (st.bank.titleEn || 'Workbook');
+      ? ex.pattern + ' · ' + (tr(ex, 'sectionEn') || '')
+      : (tr(ex, 'sectionEn') || '') + ' — ' + (tr(st.bank, 'titleEn') || hvT('ui.wb.workbook'));
   }
   const count = $('wb-count');
   if (count) {
@@ -4715,8 +4740,8 @@ function renderWorkbook() {
   if (inst) {
     inst.innerHTML =
       '<div class="wb-inst-ko">' + vbEsc(ex.instructionKo || '') + '</div>' +
-      '<div class="wb-inst-en">' + vbEsc(ex.instructionEn || '') + '</div>' +
-      (ex.noteEn ? '<div class="wb-inst-note">' + vbEsc(ex.noteEn) + '</div>' : '');
+      '<div class="wb-inst-en">' + vbEsc(tr(ex, 'instructionEn') || '') + '</div>' +
+      (ex.noteEn ? '<div class="wb-inst-note">' + vbEsc(tr(ex, 'noteEn')) + '</div>' : '');
   }
 
   const exBox = $('wb-example');
@@ -4733,7 +4758,7 @@ function renderWorkbook() {
         '<span class="wb-example-tag">[보기]</span> ' +
         wbLineHtml(ex, ex.example, filled,
           { plain: true, second: ex.example.answer2Ko || '' }) +
-        '<div class="wb-example-en">' + vbEsc(ex.example.en || '') + '</div>';
+        '<div class="wb-example-en">' + vbEsc(tr(ex.example, 'en') || '') + '</div>';
       // The worked example is the one place the finished Korean is already on
       // screen, so hearing it gives nothing away.
       if (ex.type === 'build') {
@@ -4825,7 +4850,7 @@ function renderWorkbook() {
         const holdGloss = !!(st.bank && st.bank.holdGloss) && !st.checked;
         head.innerHTML = art +
           '<span class="wb-exp-phrase">' + vbEsc(item.phraseKo || '') + '</span>' +
-          (holdGloss ? '' : '<span class="wb-exp-en">' + vbEsc(item.en || '') + '</span>');
+          (holdGloss ? '' : '<span class="wb-exp-en">' + vbEsc(tr(item, 'en') || '') + '</span>');
         const say = wbSayButton(wbRowSpeech(ex, item), item.audio);
         if (say) head.appendChild(say);
         const line = document.createElement('div');
@@ -4986,7 +5011,7 @@ function renderWorkbook() {
               { plain: true, own: st.own && st.own[i],
                 second: correct2 ? wbAnswerText(correct2) : '' }) + '</div>' +
           (ok ? '' : '<div class="wb-why-yours">You put: ' + vbEsc(yours) + '</div>') +
-          '<div class="wb-why-en">' + vbEsc(item.en || '') + '</div>' +
+          '<div class="wb-why-en">' + vbEsc(tr(item, 'en') || '') + '</div>' +
           '<div class="wb-why-body">' + vbEsc(item.why || '') + '</div>' +
           '<div class="wb-why-gram">📐 ' + vbEsc(item.grammar || '') + '</div>' +
         '</div>';
@@ -5021,7 +5046,7 @@ function renderWorkbook() {
       btn.onclick = drawn ? () => openWorkbookExercise(st.ex.id) : resetWorkbook;
       btn.disabled = false;
     } else {
-      btn.textContent = (st.bank.checkKo || '확인') + ' ' + (st.bank.checkEn || 'Check');
+      btn.textContent = (st.bank.checkKo || '확인') + ' ' + (tr(st.bank, 'checkEn') || hvT('ui.wb.checkWord'));
       btn.onclick = checkWorkbook;
       btn.disabled = !wbComplete();
     }
@@ -5038,7 +5063,7 @@ function renderWorkbookPicker() {
   const title = $('wb-title');
   if (title) title.textContent = st.bank.titleKo || '연습 문제';
   const sub = $('wb-sub');
-  if (sub) sub.textContent = st.bank.source || st.bank.titleEn || '';
+  if (sub) sub.textContent = tr(st.bank, 'source') || tr(st.bank, 'titleEn') || '';
   const count = $('wb-count');
   if (count) { count.textContent = exercises.length + ' 연습'; count.className = ''; }
 
@@ -5046,7 +5071,7 @@ function renderWorkbookPicker() {
   if (inst) {
     inst.innerHTML =
       '<div class="wb-inst-ko">' + vbEsc(st.bank.pickKo || '어떤 연습을 할까요?') + '</div>' +
-      '<div class="wb-inst-en">' + vbEsc(st.bank.pickEn || '') + '</div>';
+      '<div class="wb-inst-en">' + vbEsc(tr(st.bank, 'pickEn') || '') + '</div>';
   }
   const exBox = $('wb-example');
   if (exBox) { exBox.innerHTML = ''; exBox.className = 'wb-hidden'; }
@@ -5069,7 +5094,7 @@ function renderWorkbookPicker() {
         const h = document.createElement('div');
         h.className = 'wb-group';
         h.innerHTML = '<span class="wb-group-ko">' + vbEsc(group) + '</span>' +
-          '<span class="wb-group-en">' + vbEsc(ex.sectionEn || '') + '</span>';
+          '<span class="wb-group-en">' + vbEsc(tr(ex, 'sectionEn') || '') + '</span>';
         list.appendChild(h);
       }
       const b = document.createElement('button');
@@ -5092,7 +5117,7 @@ function renderWorkbookPicker() {
                 '<span class="wb-pick-no">' + vbEsc(ex.no || '') + '</span>'
               : '<b class="wb-pick-name">' + vbEsc(ex.no || '') + '</b>') +
           '</span>' +
-          '<span class="wb-pick-en">' + vbEsc(ex.blurbEn || ex.instructionEn || '') + '</span>' +
+          '<span class="wb-pick-en">' + vbEsc(tr(ex, 'blurbEn') || tr(ex, 'instructionEn') || '') + '</span>' +
         '</span>' +
         '<span class="wb-pick-count">' +
           (st.bank.drawOne && (ex.items || []).length > 1
@@ -5326,18 +5351,19 @@ function renderVocabCards() {
 
   // Filter by learning stage / category. Stages come from the scheduler now, so they mean
   // something about retention rather than counting how often a plot was farmed.
+  // Matched on the chip's id, not on its label — see buildVocabBook for why.
   if(activeCat !== 'all'){
-    if(activeCat.includes('New')) words = words.filter(w => { const e=peekSrs(w.ko); return !e || e.st === 'new'; });
-    else if(activeCat.includes('Learning')) words = words.filter(w => srsIsLearning(peekSrs(w.ko)));
-    else if(activeCat.includes('Review')) words = words.filter(w => { const e=peekSrs(w.ko); return e && e.st==='review' && !srsIsMature(e); });
-    else if(activeCat.includes('Mature')) words = words.filter(w => srsIsMature(peekSrs(w.ko)));
-    else if(activeCat.includes('Due')) words = words.filter(w => wordIsDue(w.ko));
+    if(activeCat === 'srs:new') words = words.filter(w => { const e=peekSrs(w.ko); return !e || e.st === 'new'; });
+    else if(activeCat === 'srs:learning') words = words.filter(w => srsIsLearning(peekSrs(w.ko)));
+    else if(activeCat === 'srs:review') words = words.filter(w => { const e=peekSrs(w.ko); return e && e.st==='review' && !srsIsMature(e); });
+    else if(activeCat === 'srs:mature') words = words.filter(w => srsIsMature(peekSrs(w.ko)));
+    else if(activeCat === 'srs:due') words = words.filter(w => wordIsDue(w.ko));
     else words = words.filter(w => wordCategory(w) === activeCat);
   }
 
   if(q) words = words.filter(w => {
     const romanized = (typeof vbRomanize === 'function') ? vbRomanize(w.ko) : '';
-    return [w.ko, w.en, w.category, w.categoryEn, romanized]
+    return [w.ko, w.en, tr(w, 'en'), w.category, w.categoryEn, tr(w, 'categoryEn'), romanized]
       .filter(Boolean)
       .some(value => String(value).toLowerCase().includes(q));
   });
@@ -5370,7 +5396,7 @@ function renderVocabCards() {
     // number that actually tells a learner how well they know the word.
     let mBadgeClass = 'novice', mBadgeLabel = '⚪ New', mBadgeSuffix = '';
     if(srsIsMature(e))        { mBadgeClass='legendary'; mBadgeLabel='🌟 Mature'; }
-    else if(e && e.st==='review'){ mBadgeClass='mastered';  mBadgeLabel='🍎 Review'; }
+    else if(e && e.st==='review'){ mBadgeClass='mastered';  mBadgeLabel='🍎 ' + hvT('ui.vocab.filter.review'); }
     else if(srsIsLearning(e)) { mBadgeClass='practicing'; mBadgeLabel = e.st==='relearn' ? '🔁 Relearning' : '🌱 Learning'; }
     if(srsIsGraduated(e)) mBadgeSuffix = ` (${srsIntervalLabel(e)})`;
     if(srsIsDue(e, now))  mBadgeSuffix += ' ⏰';
@@ -5379,24 +5405,24 @@ function renderVocabCards() {
     div.className = `vocab-card ${mBadgeClass}` + (times > 0 || srsIsGraduated(e) ? ' planted' : '') + (planted ? ' growing' : '');
     // The gloss is clamped to three lines on the card, so the full text has to stay
     // reachable somewhere — the tooltip carries it, and so does the fun-fact panel.
-    div.title = `${w.ko} — ${w.en}\nOpen the complete study page`;
+    div.title = `${w.ko} — ${tr(w, 'en')}\n${hvT('ui.vocab.openStudyPage')}`;
     // A div rather than a button: the speak control is itself a button, and a button
     // inside a button is invalid markup. role + tabindex + a key handler gets the same
     // keyboard behaviour without nesting one inside the other.
     div.setAttribute('role', 'button');
     div.setAttribute('tabindex', '0');
-    div.setAttribute('aria-label', `${w.ko}, ${w.en}. ${mBadgeLabel}${mBadgeSuffix}. Open word details`);
+    div.setAttribute('aria-label', `${w.ko}, ${tr(w, 'en')}. ${mBadgeLabel}${mBadgeSuffix}. ${hvT('ui.vocab.openWordDetails')}`);
     div.innerHTML = `
       <button type="button" class="speak-btn vc-speak tts-only" title="Hear this word" aria-label="Hear ${vbEsc(w.ko)}">🔊</button>
       <span class="vc-category" title="${vbEsc(wordCategory(w))}">${vbEsc(wordCategory(w))}</span>
       <span class="vc-emoji">${(typeof vocabIconHtml === 'function') ? vocabIconHtml(w.ko, w.hint || '📝', 86) : (w.hint || '📝')}</span>
       <span class="vc-ko${vbKoSizeClass(w.ko)}" lang="ko">${vbEsc(w.ko)}</span>
-      <span class="vc-en">${vbEsc(w.en)}</span>
+      <span class="vc-en">${vbEsc(tr(w, 'en'))}</span>
       <span class="vc-meta">
         <span class="vc-chosung" title="Initial consonants (초성)">${vbEsc(chosung)}</span>
         <span class="mastery-badge ${mBadgeClass}">${mBadgeLabel}${mBadgeSuffix}</span>
       </span>
-      <span class="vc-open-hint">Study this word →</span>`;
+      <span class="vc-open-hint">${hvT('ui.vocab.studyThisWord')}</span>`;
     // Free here: the vocab book already shows the answer, so audio adds nothing to give away.
     div.querySelector('.vc-speak').addEventListener('click', (ev) => {
       ev.stopPropagation();          // don't also open the fun-fact modal

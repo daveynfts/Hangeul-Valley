@@ -5,6 +5,9 @@ class FarmScene extends Phaser.Scene {
     PixelArtRenderer.generateAllTextures(this);
     PixelArtRenderer.generateTilemapTextures(this);
     this.load.json('levels','levels.json');
+    // Translation catalogues, loaded here rather than fetched separately so that
+    // create() below can fold them in synchronously. English preloads none.
+    if (typeof hvPreloadCatalogs === 'function') hvPreloadCatalogs(this);
     // Read from the same list the runtime loader uses, not typed out again. A world absent
     // here still attaches — loadTextbookWorlds fetches it — but it arrives after the level
     // select has painted, so its card is simply missing from a screen that looks complete.
@@ -51,9 +54,12 @@ class FarmScene extends Phaser.Scene {
       // Reviews can fall due while the player is off in a minigame.
       this._refreshDueReviews();
     });
-    levelsData = this.cache.json.get('levels') || [];
+    if (typeof hvAdoptPhaserCatalogs === 'function') hvAdoptPhaserCatalogs(this);
+    levelsData = hvLocalize('levels.json', this.cache.json.get('levels') || []);
     TEXTBOOK_WORLD_FILES.forEach((spec) => {
-      if (this.cache.json.exists(spec.cache)) attachTextbookWorld(this.cache.json.get(spec.cache));
+      if (this.cache.json.exists(spec.cache)) {
+        attachTextbookWorld(hvLocalize(spec.file, this.cache.json.get(spec.cache)));
+      }
     });
     applyDebugSkinQuery();
     if(!levelsData.length){

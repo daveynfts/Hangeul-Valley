@@ -46,8 +46,15 @@ const worldFor = (spec) => ({ id: spec.cache.replace(/^world-/, ''), level: { le
 function run(opts) {
   const attached = [];
   const pending = [];
+  // The loader folds a translation catalogue into each world as it arrives, so the context
+  // has to carry that too. Taken from the real js/i18n.js rather than stubbed: with the
+  // language left at English both are no-ops, which is exactly what this test wants, and a
+  // stub would stop testing the thing that actually runs.
+  const i18n = require('../js/i18n.js');
   const ctx = {
     console,
+    hvLocalize: i18n.hvLocalize,
+    hvLocalizeAsync: i18n.hvLocalizeAsync,
     TEXTBOOK_WORLD_FILES: specs,
     attachTextbookWorld: (w) => { attached.push(w.id); return attached.length - 1; },
     IS_NODE: false,

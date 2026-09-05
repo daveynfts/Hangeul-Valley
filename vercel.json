@@ -41,6 +41,10 @@
       "destination": "https://cdn.daveynfts.com/hangeul-valley/worlds/:path*"
     },
     {
+      "source": "/locales/:path*",
+      "destination": "https://cdn.daveynfts.com/hangeul-valley/locales/:path*"
+    },
+    {
       "source": "/sprites/:path*",
       "destination": "https://cdn.daveynfts.com/hangeul-valley/sprites/:path*"
     },
@@ -57,61 +61,100 @@
     {
       "source": "/",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, max-age=0" }
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
       ]
     },
     {
       "source": "/index.html",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, max-age=0" }
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
       ]
     },
     {
       "source": "/css/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, max-age=0" }
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
       ]
     },
     {
       "source": "/js/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-store, max-age=0" }
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
       ]
     },
     {
       "source": "/sprites/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
       ]
     },
     {
       "source": "/sprites/catalog.json",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/(levels|facts).json",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/worlds/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, stale-while-revalidate=600"
+        }
+      ]
+    },
+    {
+      "source": "/locales/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/skins/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=60, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, stale-while-revalidate=600"
+        }
       ]
     },
     {
       "source": "/audio/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
       ]
     }
   ],
@@ -136,7 +179,9 @@
     },
     "api/skins/catalog.js": {
       "includeFiles": "skins/catalog.json"
+    },
+    "api/admin/[...path].js": {
+      "includeFiles": "{levels.json,worlds/**,locales/**,js/locales/**}"
     }
   }
 }
-

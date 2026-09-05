@@ -1,4 +1,8 @@
 [
+  "js/i18n.js",
+  "js/locales/en.js",
+  "js/locales/vi.js",
+  "js/locales/catalogs.js",
   "js/state.js",
   "js/audio.js",
   "js/systems/music.js",

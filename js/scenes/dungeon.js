@@ -387,7 +387,7 @@ class DungeonScene extends Phaser.Scene {
     const card = this.add.container(this.W/2, 70).setDepth(200);
     const bg = this.add.rectangle(0, 0, 280, 70, 0x1E1B4B, 0.95).setStrokeStyle(3, 0xA855F7).setOrigin(0.5);
     const tk = this.add.text(0, -12, w.ko, {fontFamily:'"Noto Sans KR", sans-serif', fontSize:'28px', color:'#FFFFFF', fontWeight:'bold'}).setOrigin(0.5);
-    const te = this.add.text(0, 16, w.en, {fontFamily:'"Be Vietnam Pro", sans-serif', fontSize:'15px', color:'#C084FC', fontWeight:'bold'}).setOrigin(0.5);
+    const te = this.add.text(0, 16, tr(w, 'en'), {fontFamily:'"Be Vietnam Pro", sans-serif', fontSize:'15px', color:'#C084FC', fontWeight:'bold'}).setOrigin(0.5);
     card.add([bg, tk, te]);
 
     this.currentCard = card;

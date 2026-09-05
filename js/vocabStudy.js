@@ -3,6 +3,15 @@
 // They deliberately do not invent example sentences or pretend that spelling-based
 // romanisation captures every sound change in spoken Korean.
 
+// tr() is a global from js/i18n.js in the browser, and this is the one file in js/ that is
+// also `require`d on its own — tests/test_vocab_book.js loads it as a module, with no page
+// and no other script around it. Reaching for the global there is a ReferenceError, so the
+// fallback reads the English field directly, which is what tr() would have returned anyway
+// for a caller that has no interface language.
+const vbTr = (obj, field) => (typeof tr === 'function'
+  ? tr(obj, field)
+  : String((obj && obj[field]) || ''));
+
 const VB_INITIAL_JAMO = [
   'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ', 'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
 ];
@@ -92,8 +101,8 @@ function vbEndingRule(text) {
 
 function vbStudyType(word, fact) {
   const ko = String((word && word.ko) || '').trim();
-  const en = String((word && word.en) || '').trim().toLowerCase();
-  const category = `${(word && word.categoryEn) || ''} ${(word && word.category) || ''}`.toLowerCase();
+  const en = String((word && vbTr(word, 'en')) || '').trim().toLowerCase();
+  const category = `${(word && vbTr(word, 'categoryEn')) || ''} ${(word && word.category) || ''}`.toLowerCase();
   const origin = fact && fact.o;
   if (origin === 'idiom') return 'Idiom';
   if (origin === 'discourse') return 'Discourse marker';

@@ -86,7 +86,7 @@ function catSetWord(){
   const w=allWords[Math.floor(Math.random()*allWords.length)];
   document.getElementById('cat-emoji').textContent = w.hint||'📝';
   document.getElementById('cat-ko').textContent    = w.ko;
-  document.getElementById('cat-en').textContent    = w.en;
+  document.getElementById('cat-en').textContent    = tr(w, 'en');
   // Show the word's origin OR its pronunciation shape — whichever is richer
   const fact = getFunFact(w);
   // Alternate between origin and pronunciation for variety

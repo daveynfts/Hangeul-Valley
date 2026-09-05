@@ -3,12 +3,18 @@ var unlockedLevels = [0];  // Level indices the player has bought
 var unlockedTrophies = []; // IDs of the trophies the player has bought
 const harvestCounts = new Map(); // word.ko → how many times harvested
 
-// ── Display labels: English primary, Korean kept alongside ───────────────────
+// ── Display labels: the interface language first, Korean kept alongside ──────
 // levels.json carries both (`name`/`nameEn`, `category`/`categoryEn`); the Korean
 // topic label is itself learnable content, so it is shown rather than discarded.
-function levelName(lvl)   { return (lvl && (lvl.nameEn || lvl.name)) || ''; }
+//
+// tr() rather than a bare field read, and here rather than at the twenty-five call
+// sites: these three are where the whole game asks what a level or a category is
+// called, so making them language-aware translates the level select, the shop, the
+// vocabulary book, the HUD and the quiz grouping in one edit. tr() falls back to the
+// English field, so an untranslated level reads exactly as it did.
+function levelName(lvl)   { return (lvl && (tr(lvl, 'nameEn') || lvl.name)) || ''; }
 function levelNameKo(lvl) { return (lvl && lvl.nameEn && lvl.name) ? lvl.name : ''; }
-function wordCategory(w)  { return (w && (w.categoryEn || w.category)) || ''; }
+function wordCategory(w)  { return (w && (tr(w, 'categoryEn') || w.category)) || ''; }
 
 function isWorldLevel(lvl) {
   return !!(lvl && (lvl.world || lvl.worldId || lvl.pack === 'snu-2b'));
@@ -244,7 +250,7 @@ function attachTextbookWorld(world) {
     upcoming: world.upcoming || [],
     source: world.source || '',
     pages: world.pages || '',
-    title: world.title || world.level.nameEn,
+    title: tr(world, 'title') || tr(world.level, 'nameEn'),
     titleKo: world.titleKo || world.level.name
   });
   const existing = levelsData.findIndex(l => l && l.worldId === world.id);
@@ -274,7 +280,7 @@ function loadTextbookWorlds(done) {
   };
   specs.forEach((spec, i) => {
     if (typeof sceneRef !== 'undefined' && sceneRef?.cache?.json?.exists?.(spec.cache)) {
-      one(sceneRef.cache.json.get(spec.cache), i);
+      one(hvLocalize(spec.file, sceneRef.cache.json.get(spec.cache)), i);
       return;
     }
     if ((typeof IS_NODE !== 'undefined' && IS_NODE) || typeof fetch !== 'function') {
@@ -283,6 +289,7 @@ function loadTextbookWorlds(done) {
     }
     fetch(spec.file)
       .then(r => r && r.ok ? r.json() : null)
+      .then((d) => hvLocalizeAsync(spec.file, d))
       .then((d) => one(d, i))
       .catch(() => one(null, i));
   });
@@ -472,7 +479,7 @@ function buildOptionSet(target, pool, count, labelOf){
   return shuffleInPlace([target, ...picked]);
 }
 
-const labelEn = w => String(w && w.en || '');
+const labelEn = w => String((w && tr(w, 'en')) || '');
 const labelKo = w => String(w && w.ko || '');
 
 // ═══════════════ R2: SHOP PURCHASE QUIZ GATE ══════════════════════════════════

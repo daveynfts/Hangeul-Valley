@@ -303,7 +303,7 @@ class ArcadeScene extends Phaser.Scene {
     // Show Spell Prompt Banner
     this.spellBanner = this.add.container(this.W/2, 170).setDepth(40);
     const sBg = this.add.rectangle(0, 0, 480, 45, 0x0F172A, 0.95).setStrokeStyle(3, 0x38BDF8);
-    const sTxt = this.add.text(0, 0, `🎯 SHOOT THE KOREAN WORD FOR: "${targetWord.en}"`, {
+    const sTxt = this.add.text(0, 0, `🎯 ${hvT('ui.arcade.shootTarget')} "${tr(targetWord, 'en')}"`, {
       fontFamily:'"Press Start 2P",monospace', fontSize:'11px', color:'#FDE047'
     }).setOrigin(0.5);
     this.spellBanner.add([sBg, sTxt]);
@@ -353,7 +353,7 @@ class ArcadeScene extends Phaser.Scene {
       this.bossHP = Math.max(0, this.bossHP - 120);
       this.updateBossHPBar();
 
-      showToast(`🎯 CRITICAL HIT! "${w.ko}" (${w.en}) SHATTERED SHIELD! +120 DMG!`, 3500);
+      showToast(`🎯 CRITICAL HIT! "${w.ko}" (${tr(w, 'en')}) SHATTERED SHIELD! +120 DMG!`, 3500);
       this.cameras.main.flash(200, 56, 189, 248);
     } else {
       playChiptuneSFX('quiz_wrong');

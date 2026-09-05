@@ -214,6 +214,16 @@ window.apiFetch.getContent = (key) =>
 window.apiFetch.saveContent = (key, body) =>
   window.apiFetch('/api/admin/content?key=' + encodeURIComponent(key), { method: 'PUT', body });
 
+// Translations. Under /api/admin/ for the same reason as the content registry: on Vercel
+// there is one admin function, and a route anywhere else works locally and 404s live.
+window.apiFetch.i18nReport = (lang) =>
+  window.apiFetch('/api/admin/i18n?lang=' + encodeURIComponent(lang || 'vi'));
+window.apiFetch.i18nRows = (source, lang) =>
+  window.apiFetch('/api/admin/i18n?lang=' + encodeURIComponent(lang || 'vi')
+    + '&source=' + encodeURIComponent(source));
+window.apiFetch.i18nSave = (source, lang, entries) =>
+  window.apiFetch('/api/admin/i18n', { method: 'PUT', body: { source: source, lang: lang, entries: entries } });
+
 // 5. Data Refresh & Synchronization Manager
 window.AppController = {
   applyHost(host) {
@@ -377,6 +387,7 @@ window.AppRouter = {
     'vocab': () => window.VocabView && window.VocabView.render(),
     'unit10': () => window.Unit10View && window.Unit10View.render(),
     'unit14': () => window.Unit14View && window.Unit14View.render(),
+    'i18n': () => window.I18nView && window.I18nView.render(),
     'art': () => window.ArtView && window.ArtView.render(),
     'skins': () => window.SkinsView && window.SkinsView.render()
   },

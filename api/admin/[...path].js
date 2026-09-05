@@ -232,6 +232,79 @@ async function handleWrite(req, res, key) {
   });
 }
 
+// ── Translations ────────────────────────────────────────────────────────────
+//
+// Reads scan the repo copy bundled with this function rather than the CDN, which is a
+// deliberate difference from handleRead above. The two are asking different questions: a
+// content read wants the file as the game currently sees it, while the translator wants
+// the English that the catalogue keys were built against — and after an English edit those
+// are the same thing only until the next deploy. Scanning the bundle keeps the key, the
+// English on screen and the catalogue in agreement; the alternative shows new English
+// against keys nothing will match, which reads as "everything went stale at once".
+//
+// vercel.json's `functions` block bundles levels.json and worlds/** for this route.
+async function handleI18n(req, res) {
+  const i18n = require('../../admin/lib/i18n');
+  const root = repoRoot();
+  const lang = String((req.query && req.query.lang) || 'vi');
+
+  if (req.method === 'GET') {
+    const source = req.query && req.query.source;
+    if (!source) return json(res, 200, { success: true, data: i18n.report(root, lang) });
+    return json(res, 200, { success: true, data: i18n.rows(root, String(source), lang) });
+  }
+
+  if (req.method !== 'PUT') return fail(res, 405, 'Method Not Allowed');
+
+  const { user, owner } = await whoami(req);
+  if (!user) return fail(res, 401, 'Unauthorized', 'Sign in with Google to edit.');
+  if (!owner) return fail(res, 403, 'Forbidden', 'This account is not allowed to edit content.');
+
+  let gh;
+  try { gh = githubConfig(); } catch (e) { return fail(res, 503, 'Not configured', e.message); }
+  if (!gh) return fail(res, 503, 'Not configured', 'GITHUB_TOKEN and GITHUB_REPO are not set.');
+
+  const body = req.body || {};
+  const source = i18n.assertSource(body.source);
+  const code = i18n.assertLang(body.lang || lang);
+
+  // Merged and validated in the library, against the same scan the read used. Written to
+  // the function's own (ephemeral) filesystem first, then read back as bytes: the file on
+  // disk is what has to reach GitHub and R2, and re-serialising it here would be a second
+  // implementation of the writer that could disagree with the local one.
+  const result = i18n.saveRows(root, source, code, body.entries || {});
+  const relNative = i18n.catalogPathFor(root, source, code);
+  const rel = relNative.slice(root.length).replace(/^[\\/]+/, '').split(path.sep).join('/');
+  const text = require('fs').readFileSync(relNative, 'utf8');
+
+  const message = `i18n: ${source} → ${code} via admin\n\nEdited by ${user.email || user.sub}`
+    + ` at ${new Date().toISOString()}.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>`;
+  let commit;
+  try { commit = await commitFile(gh, rel, text, message); }
+  catch (e) {
+    if (e.status === 409) return fail(res, 409, 'Conflict', e.message);
+    return fail(res, 502, 'GitHub write failed', e.message);
+  }
+
+  let published = null;
+  try { published = await putContent(rel, text); }
+  catch (e) { published = null; }
+
+  return json(res, 200, {
+    success: true,
+    data: Object.assign({}, result, {
+      rel,
+      commit: commit.commit || null,
+      commitUrl: commit.url || null,
+      branch: gh.branch,
+      live: !!published,
+      note: published
+        ? 'Live on the CDN now — players on ' + code + ' see it on their next load.'
+        : 'Committed, but the CDN upload failed — it will catch up on the next publish.'
+    })
+  });
+}
+
 module.exports = async (req, res) => {
   setCors(req, res);
   if (req.method === 'OPTIONS') { res.status(204).end(); return; }
@@ -245,6 +318,7 @@ module.exports = async (req, res) => {
       if (req.method !== 'GET') return fail(res, 405, 'Method Not Allowed');
       return await handleHost(req, res);
     }
+    if (head === 'i18n') return await handleI18n(req, res);
     if (head === 'content') {
       if (!key) {
         if (req.method !== 'GET') return fail(res, 405, 'Method Not Allowed');

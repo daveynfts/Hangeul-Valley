@@ -126,6 +126,23 @@ function collectUploadFiles(root) {
       .forEach((f) => addFile(out, seen, 'worlds/' + f, 'application/json'));
   }
 
+  // Translation catalogues. Walked rather than listed, for the same reason the worlds are:
+  // vercel.json rewrites /locales/* to the CDN, so a catalogue left off this batch does not
+  // fall back to the repo copy — it 404s, and the unit silently reverts to English with
+  // nothing anywhere saying why. A new language is a new directory and publishes itself.
+  const localesDir = path.join(base, 'locales');
+  if (fs.existsSync(localesDir)) {
+    const walkLocales = (dir, prefix) => {
+      fs.readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))
+        .forEach((e) => {
+          if (e.isDirectory()) { walkLocales(path.join(dir, e.name), prefix + e.name + '/'); return; }
+          if (!e.name.endsWith('.json')) return;
+          addFile(out, seen, 'locales/' + prefix + e.name, 'application/json');
+        });
+    };
+    walkLocales(localesDir, '');
+  }
+
   const spriteCat = path.join(base, 'sprites', 'catalog.json');
   if (fs.existsSync(spriteCat)) {
     const pack = JSON.parse(fs.readFileSync(spriteCat, 'utf8'));

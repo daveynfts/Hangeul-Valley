@@ -279,7 +279,10 @@ assert(badForms.length === 0, 'every listed surface form is long enough to match
 const glossSrc = src.slice(src.indexOf('let wbGlossIndex = null;'), src.indexOf('function wbApplyGloss('));
 assert(glossSrc.length > 0 && glossSrc.indexOf('function wbGlossTable(') >= 0,
   'the gloss index builder is where it is expected to be');
-const gctx = { console, currentLesson: () => ({ words }) };
+// tr() comes from the real js/i18n.js rather than a stub: the gloss index reads a word
+// through it now, and a hand-written stand-in here could quietly disagree with the
+// fallback the shipped one actually performs.
+const gctx = { console, currentLesson: () => ({ words }), tr: require('../js/i18n.js').tr };
 vm.createContext(gctx);
 vm.runInContext(glossSrc, gctx);
 const idx = vm.runInContext('wbGlossTable()', gctx);

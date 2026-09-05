@@ -1,0 +1,26 @@
+{
+  "lang": "vi",
+  "source": "worlds/unit14-desk-quiz.json",
+  "note": "Keys are field|English-source. Editing the English orphans its translation on purpose.",
+  "entries": {
+    "A|Parking": "Đỗ xe",
+    "A|You cannot take photos of the performers.": "Không được chụp ảnh người biểu diễn.",
+    "B|Smoking": "Hút thuốc",
+    "B|You cannot bring food or drinks inside.": "Không được mang đồ ăn thức uống vào trong.",
+    "C|Taking photos": "Chụp ảnh",
+    "C|You must turn off your mobile phone.": "Phải tắt điện thoại di động.",
+    "D|Using mobile phones": "Dùng điện thoại di động",
+    "D|You must not talk loudly.": "Không được nói to.",
+    "q|Choose the correct Korean translation for: \"May I take a picture here?\"": "Chọn câu tiếng Hàn đúng cho: \"Tôi chụp ảnh ở đây được không?\"",
+    "q|Complete the sentence to express prohibition: \"In the library, you must not make noise.\" 도서관에서 시끄럽게 ____________.": "Hoàn thành câu diễn tả sự cấm đoán: \"Trong thư viện không được gây ồn.\" 도서관에서 시끄럽게 ____________.",
+    "q|Conjugate the verb \"끄다\" (to turn off) correctly with the prohibition grammar \"-(으)면 안 되다\" (You must not turn off...).": "Hãy chia đúng động từ \"끄다\" (tắt) với mẫu ngữ pháp cấm đoán \"-(으)면 안 되다\" (Không được tắt…).",
+    "q|If someone asks you: \"여기 앉아도 돼요?\" (May I sit here?), and you want to politely say \"Yes, you may sit,\" how should you reply?": "Nếu ai đó hỏi \"여기 앉아도 돼요?\" (Tôi ngồi đây được không?) và bạn muốn lịch sự đáp \"Vâng, mời anh/chị ngồi\", bạn nên trả lời thế nào?",
+    "q|If you see a public sign that says \"금연\" at a bus station, what does it prohibit?": "Nếu thấy biển \"금연\" ở bến xe buýt, biển đó cấm điều gì?",
+    "q|Minji accidentally handed a document to her boss with only one hand. She felt very embarrassed about her mistake. Which Korean word best describes her feeling?": "Minji lỡ đưa tài liệu cho sếp bằng một tay. Cô ấy thấy rất ngượng vì sơ suất đó. Từ tiếng Hàn nào diễn tả đúng nhất cảm giác của cô?",
+    "q|What is the Korean term for \"respect or preferential treatment for senior citizens,\" such as reserving special seats for them on subways?": "Thuật ngữ tiếng Hàn cho \"sự kính trọng, ưu tiên người cao tuổi\" — như dành ghế riêng trên tàu điện ngầm — là gì?",
+    "q|When drinking alcohol with seniors in Korea, what is the polite way to drink?": "Khi uống rượu cùng người lớn tuổi ở Hàn Quốc, cách uống lịch sự là thế nào?",
+    "q|Which of the following actions is considered polite when handing an object to an elderly person in Korea?": "Hành động nào sau đây được coi là lịch sự khi đưa đồ cho người lớn tuổi ở Hàn Quốc?",
+    "q|You are entering a concert hall and see a sign: \"음식물 반입 금지\". What does this mean?": "Bạn vào một khán phòng và thấy biển \"음식물 반입 금지\". Biển đó nghĩa là gì?",
+    "titleEn|Etiquette quiz": "Bài kiểm tra về lễ nghi"
+  }
+}
