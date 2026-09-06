@@ -48,6 +48,7 @@ const WORKBOOKS = {
   'unit14-textbook': path.join('worlds', 'unit14-textbook.json'),
   unit15: path.join('worlds', 'unit15-workbook.json'),
   'unit15-textbook': path.join('worlds', 'unit15-textbook.json'),
+  unit13: path.join('worlds', 'unit13-workbook.json'),
   unit10: path.join('worlds', 'unit10-workbook.json'),
   'unit10-textbook': path.join('worlds', 'unit10-textbook.json'),
   // Not a unit at all: the exam world's bank, which grows a question at a time rather than
@@ -446,6 +447,13 @@ function validateWorkbook(body, rel) {
     // A bank may hold its English gloss back until the row is checked. Off unless asked for,
     // because on a textbook page the gloss beside the sentence is a help, not a giveaway.
     holdGloss: body.holdGloss === true,
+    // These two say what the bank does NOT have: which of the book's pictures are missing,
+    // and which printed exercises are not here because the key gives them no answer. They
+    // were not on this list, so every save through the Workbooks tab deleted them — silently,
+    // and from Unit 15 as much as from Unit 13. A note about a gap is the one kind of text a
+    // save must not lose, because nothing else records that the gap was deliberate.
+    artNote: str(body.artNote) || undefined,
+    omittedNote: str(body.omittedNote) || undefined,
     exercises
   };
 }

@@ -2137,6 +2137,21 @@ const overlayIds = [
   const rule = require(path.join(ROOT, 'js', 'i18n.js'));
   const extract = require(path.join(ROOT, 'scripts', 'i18n_extract.js'));
 
+  // A content bank missing from HV_CATALOG_SOURCES is the quietest failure of the lot: the
+  // game never asks for its catalogue, so the unit stays English, and the coverage report
+  // does not count what it was never told about — so it reads 100% while a whole workbook is
+  // untranslated. That is exactly what happened to Unit 15's, which shipped and was invisible
+  // for a week. The list is hand-kept on purpose; this is what keeps it honest.
+  const banked = fs.readdirSync(path.join(ROOT, 'worlds'))
+    .filter((f) => /-(workbook|textbook|cassette|desk-quiz|questions)\.json$/.test(f))
+    .map((f) => 'worlds/' + f);
+  const unlisted = banked.filter((rel) => rule.HV_CATALOG_SOURCES.indexOf(rel) < 0);
+  check('every content bank on disk is listed for translation',
+    unlisted.length === 0, unlisted.join(', '));
+  const phantom = rule.HV_CATALOG_SOURCES
+    .filter((rel) => rel.indexOf('worlds/') === 0 && !fs.existsSync(path.join(ROOT, rel)));
+  check('and nothing is listed that is not there', phantom.length === 0, phantom.join(', '));
+
   let en;
   try { en = i18nLib.readChromeTable(ROOT, 'en'); }
   catch (e) { check('js/locales/en.js parses', false, e.message); return; }

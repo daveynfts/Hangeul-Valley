@@ -397,7 +397,27 @@ clip where one exists and the browser's voice otherwise.
 
 ---
 
-## Two traps that fail silently
+## Three traps that fail silently
+
+**Translation.** A new bank has to be added to `HV_CATALOG_SOURCES` in `js/i18n.js`
+by hand, and nothing used to notice if it was not. The game then never asks for
+that catalogue, so the unit stays English — and, worse, the coverage report does
+not count what it was never told about, so `node scripts/i18n_report.js` reads
+100% while a whole workbook is untranslated. `unit15-workbook.json` shipped that
+way and was invisible for a week; adding Unit 13's found it. The list is
+hand-kept on purpose — the admin and the sync script both need it and neither can
+run the game to find out what it fetched — so `checkInterfaceLanguage` now walks
+`worlds/` and asserts that every `-workbook`, `-textbook`, `-cassette`,
+`-desk-quiz` and `-questions` file on disk is listed, and that nothing is listed
+which is not there. Adding a bank is four steps, not three: the JSON, the
+`workbookUrl()` line, the `WORKBOOKS` entry, **and this list**.
+
+A second, smaller one lives beside it. `validateWorkbook` in
+`admin/lib/workbook.js` rebuilds the document field by field, so a doc-level key
+missing from that return object is deleted by any save through the Workbooks tab.
+`artNote` and `omittedNote` were both missing, which meant one save would silently
+drop the only record that a bank's gaps were deliberate. They are on the list now
+and `tests/test_unit13_workbook.js` runs a save round-trip to keep them there.
 
 **Publishing.** `vercel.json` rewrites `/worlds/*` and `/audio/*` to the CDN, so
 on the deployed site the checked-in copy is never read — only the uploaded one
@@ -441,10 +461,13 @@ Unit 10 was the second, and most of the hard-coding went with it. A workbook is
 
 **Neither needs touching for a new unit.** Do not go back to listing files.
 
-Two places still name a unit, and both should:
+Three places still name a unit, and all three should:
 
 - `js/ui.js` — `workbookUrl()` maps world to path, one line per unit, the same
   shape `deskQuizUrl()` already had
+- `js/i18n.js` — `HV_CATALOG_SOURCES` lists every bank that carries
+  translatable text. Leave it out and the unit ships in English while the coverage
+  report still says 100%; the validator now refuses that
 - `admin/lib/workbook.js` — `WORKBOOKS` maps a unit key to its path;
   `getWorkbook(root, unit)` and `saveWorkbook(body, root, unit)` take that key
   and default to Unit 14
@@ -455,8 +478,8 @@ to be `/api/unit14/workbook`, which meant the editor showed Unit 14's exercises
 whichever unit you had in mind.
 
 A new unit therefore needs: the JSON, a line in `workbookUrl()`, an entry in
-`WORKBOOKS`, and its own test suite. Art and audio only if the unit has them.
-The panel picks it up from `WORKBOOKS` on its own.
+`WORKBOOKS`, a line in `HV_CATALOG_SOURCES`, and its own test suite. Art and audio
+only if the unit has them. The panel picks it up from `WORKBOOKS` on its own.
 
 Other things that scale with the list:
 
@@ -518,6 +541,44 @@ signal, and the test says so rather than implying a stronger check than it has.
 with 0.12s of lead, then 1.15s where the student's four seconds were, then the model answer
 with its own pauses left as recorded, then 0.30s of tail. `askEnd` lands halfway across that
 1.15s gap.
+
+---
+
+## Unit 13, and an item the tape gives no pause for
+
+Track 9, four drills, twenty exchanges, cut with the block grouping written above. Three
+things it added.
+
+**One item has no student pause at all.** Drill 3's fourth item runs teacher then model
+answer with 1.05s between them where every other item on the track leaves four seconds, so
+the two sides group into a single block and the drill comes out one exchange short. Splitting
+on the largest internal gap would be guesswork — the gaps inside that block are 1.04, 1.02,
+1.05 and 0.45, and the real boundary is the 1.05 in the middle rather than the 1.04 at the
+front. What is not guesswork is the drill's own shape: every item in a drill has the same
+number of teacher segments, measured off the first item, so a block carrying more than that
+is carrying the answer too and the split is arithmetic. Read the shape from the drill, never
+from the block in front of you.
+
+**Whether the teacher reads the bracketed prompt is answerable, not assumable.** The book
+prints drill 2's prompt on the student's line, which suggests the student reads it — but the
+teacher's side of every clip in that drill is two segments, and the pace settles which. With
+the prompt counted the teacher reads 4.24-4.80 syl/s, against drill 1's prompt-free 4.61-5.40;
+without it, 1.98-3.32, which is nobody's reading speed. So the teacher reads it, and the JSON
+puts it on the teacher's line where the tape puts it rather than where the page does. The
+same measurement settles the segment order inside the block: question first at 4.19, prompt
+second at 4.55, against 1.80 and 10.6 the other way round.
+
+**Sixteen items at 4.55 ±0.30 on the teacher's side and 5.17 ±0.16 on the answer's**, and the
+shift-by-one widens both to ±1.1. Per-drill bands are [4.5, 5.3], [4.3, 5.2], [4.4, 5.1] and
+[4.4, 5.1]; drill 3's shift breaks only one row of three and the test says so rather than
+implying a stronger check than it has.
+
+**A distractor that differs only by a space is not a decision.** Four rows first shipped with
+one — 올지 against 올 지, 살지 against 살 지 — which is a real orthography point and a terrible
+button: on a phone the two are indistinguishable, so the learner is guessing rather than
+choosing. `tests/test_unit13_workbook.js` asserts that no wrong choice is the right one
+respaced, and it caught all four. The point survives in the `grammar` note, where prose can
+say "written closed up, never 올 지" without asking anyone to spot a space.
 
 ---
 
