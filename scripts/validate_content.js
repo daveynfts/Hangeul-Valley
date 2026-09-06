@@ -887,7 +887,19 @@ const overlayIds = [
   const dir = path.join(ROOT, 'audio', 'book');
   const present = fs.readdirSync(dir).filter((f) => f.indexOf('2b-u15-') === 0)
     .map((f) => 'audio/book/' + f);
-  const used = new Set(srcs.map((p) => String(p).replace(/\\/g, '/')));
+  // The workbook names Unit 15 clips too — the four 문형 연습 drills off track 11 — and they
+  // live in the same folder under the same prefix. Counting only the tape's own would have
+  // called all twenty of them orphans.
+  const wbRel = path.join('worlds', 'unit15-workbook.json');
+  const wbSrcs = [];
+  if (fs.existsSync(path.join(ROOT, wbRel))) {
+    (JSON.parse(read(wbRel)).exercises || []).forEach((ex) => {
+      [].concat(ex.items || [], ex.example ? [ex.example] : []).forEach((row) => {
+        if (row && row.audio && row.audio.src) wbSrcs.push(row.audio.src);
+      });
+    });
+  }
+  const used = new Set(srcs.concat(wbSrcs).map((p) => String(p).replace(/\\/g, '/')));
   const orphans = present.filter((p) => !used.has(p));
   check('and no Unit 15 recording ships that nothing can play',
     orphans.length === 0, orphans.slice(0, 4).join(', '));

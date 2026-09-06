@@ -480,6 +480,47 @@ needs adding to that list.
 
 ---
 
+## Unit 15, and finding the drills without knowing where they start
+
+Track 11 holds Unit 15's four 문형 연습 drills, twenty exchanges, and none of the thresholds
+written above was enough on its own to find them.
+
+**Group into blocks before looking for anything.** A model answer is often two segments —
+아니요, then the rest — and a teacher's cue is often three, because two of these drills read a
+bracketed prompt word by word: 요즘 과일값이 어때요? / 겨울 / 싸다. Grouping consecutive
+segments whose gaps stay under 1.5s puts each side of an exchange in one block, and the blocks
+then alternate teacher, answer, teacher, answer straight down the drill. Searching for answers
+segment by segment found fourteen of the twenty and no pattern; searching for blocks found all
+twenty and the pattern as well.
+
+**An announcement is not told from a teacher block by size.** Both can be four segments. What
+separates them is the opening: a teacher block opens on the cue tone at 0.28-0.45s and an
+answer block on 아니요 at 0.5-0.6s, while an announcement opens on a full second and more of
+speech. Four bursts or more, opening above 0.7s, finds exactly four drills.
+
+**And not by the gap in front of it either.** The track's own opening title sits 2.05s ahead
+of the first drill's announcement, not the 4s that separates the later ones — so a gap test
+tuned on drills two, three and four puts drill one's boundary in the wrong place, and every
+exchange in it comes out shifted by one.
+
+**The [보기] is read faster than the items it models.** Drill 2's runs at 4.9 syl/s against
+3.4-3.7 for its own four rows, which is the model being demonstrated rather than left for you.
+Banding all five together widens the band to [3.3, 5.0] and it then accepts almost anything;
+`tests/test_unit15_workbook.js` bands the four items tightly and checks the model only for
+being copyable.
+
+**The shift-by-one check discriminates by spread here, not by absurdity.** The four items of a
+drill are one sentence with a word changed, so a wrong pairing produces 3-5 syl/s rather than
+the 20 a cassette dialogue gives. Two of three rows falling outside the band is the real
+signal, and the test says so rather than implying a stronger check than it has.
+
+**Clip construction, measured off the shipped Unit 14 clips rather than invented.** Teacher
+with 0.12s of lead, then 1.15s where the student's four seconds were, then the model answer
+with its own pauses left as recorded, then 0.30s of tail. `askEnd` lands halfway across that
+1.15s gap.
+
+---
+
 ## The order to do it in
 
 Everything above is what to write. This is when to write it, and the order is

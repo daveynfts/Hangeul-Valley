@@ -1,0 +1,2454 @@
+{
+  "id": "unit15-workbook",
+  "source": "Seoul National University Korean 2B, Unit 15 · 인생과 변화",
+  "titleKo": "연습 문제",
+  "titleEn": "Workbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "One exercise at a time — pick where to start.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "artNote": "Every row runs on its text: the book’s own drawings are not here and the art keys point at the vocabulary art where a headword happens to match, so a row without one simply shows no picture. Two exercises lean on pictures the hardest — A-아지다/어지다 연습 2 is four pairs of paintings with nothing written, and V-기 전에 연습 1 is five before-and-after frames — and both had their subject written into the prompt so the row can be answered while the illustrations are still to be drawn.",
+  "omittedNote": "Two of the printed exercises are not here. V-게 되다 연습 3 asks 어떻게 …게 되었어요? and leaves the answer to you, and V-(으)ㄴ 후에 연습 2 is Akira’s day told aloud from twelve pictures — the key at the back gives an answer for neither, so there is nothing a screen could mark. Thirteen of the fifteen are here; the count says thirteen rather than implying the page had thirteen.",
+  "exercises": [
+    {
+      "id": "u15-vocab-1",
+      "type": "build",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 1",
+      "icon": "🎓",
+      "pattern": "인생의 사건",
+      "blurbEn": "The events a life is measured in, and the tense each one is told in.",
+      "instructionKo": "그림을 보고 [보기]와 같이 알맞은 단어를 골라 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue using the word from the box.",
+      "noteEn": "The book prints one word box — 입학하다, 태어나다, 결혼하다, 취직하다, 승진하다, 은퇴하다, 사귀다 — and a blank that takes the conjugated form. Choosing from the box would drop a dictionary form into the sentence, so each row offers its own conjugations instead. Three of the six put the verb in the honorific, which is what the printed 아버님 and 축하드려요 are there to signal.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "무슨 사진이에요?"
+          },
+          {
+            "who": "B",
+            "ko": "초등학교 {} 날 찍은 사진이에요."
+          }
+        ],
+        "answerKo": "입학하는",
+        "phraseKo": "입학하다",
+        "en": "A: What photo is that? — B: It was taken the day I started primary school."
+      },
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "사귀다",
+          "art": "사귀다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "한국에 와서 친구를 많이 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 새로운 친구를 많이 만났어요."
+            }
+          ],
+          "answer": "sagwieo",
+          "choices": [
+            {
+              "id": "sagwieo",
+              "ko": "사귀었어요"
+            },
+            {
+              "id": "sagwyeo",
+              "ko": "사겼어요"
+            },
+            {
+              "id": "sagwiha",
+              "ko": "사귀했어요"
+            }
+          ],
+          "en": "Have you made a lot of friends since coming to Korea?",
+          "why": "B answers with 만났어요 — met — so the blank has to be the making of friends rather than the meeting of them. 사귀다 is the one verb in the box about a relationship forming.",
+          "grammar": "사귀- ends in ㅟ, which does not contract with 었, so the past is 사귀었어요. 사겼어요 applies the ㅣ+어 → ㅕ rule that belongs to 마시다, not here."
+        },
+        {
+          "n": 2,
+          "phraseKo": "태어나다",
+          "art": "태어나다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "고향이 어디예요?"
+            },
+            {
+              "who": "B",
+              "ko": "제 고향은 서울이에요. 서울에서 {}."
+            }
+          ],
+          "answer": "taeeona",
+          "choices": [
+            {
+              "id": "taeeona",
+              "ko": "태어났어요"
+            },
+            {
+              "id": "taeeonahae",
+              "ko": "태어나했어요"
+            },
+            {
+              "id": "taeeonaeo",
+              "ko": "태어나었어요"
+            }
+          ],
+          "en": "My home town is Seoul. I was born in Seoul.",
+          "why": "고향 is where you are from, and the verb that says so is 태어나다 — the sentence is not about living there now but about starting there.",
+          "grammar": "태어나- ends in ㅏ, and ㅏ swallows the 아 of the past ending: 태어나 + 았어요 → 태어났어요. 태어나었어요 keeps both vowels, which Korean does not."
+        },
+        {
+          "n": 3,
+          "phraseKo": "취직하다",
+          "art": "취직하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어떤 회사에 {} 싶어요?"
+            },
+            {
+              "who": "B",
+              "ko": "저는 방송국에서 일하고 싶어요."
+            }
+          ],
+          "answer": "chwijikhago",
+          "choices": [
+            {
+              "id": "chwijikhago",
+              "ko": "취직하고"
+            },
+            {
+              "id": "chwijikhae",
+              "ko": "취직해"
+            },
+            {
+              "id": "chwijikhaseo",
+              "ko": "취직해서"
+            }
+          ],
+          "en": "What sort of company do you want to get a job at?",
+          "why": "The answer names a 방송국 — a broadcasting company — so the question is about where you want to be hired, not where you want to visit.",
+          "grammar": "-고 싶다 needs the plain stem in front of it: 취직하 + 고 싶어요. 취직해 is the 아/어 form and cannot carry -고."
+        },
+        {
+          "n": 4,
+          "phraseKo": "승진하다",
+          "art": "승진하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이번에 {} 것 축하드려요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 감사합니다."
+            }
+          ],
+          "answer": "seungjinhasin",
+          "choices": [
+            {
+              "id": "seungjinhasin",
+              "ko": "승진하신"
+            },
+            {
+              "id": "seungjinhan",
+              "ko": "승진한"
+            },
+            {
+              "id": "seungjinhaneun",
+              "ko": "승진하는"
+            }
+          ],
+          "en": "Congratulations on your promotion.",
+          "why": "축하드려요 is the humble form of 축하하다, so the person being congratulated is above you — and the verb describing what they did takes the honorific too.",
+          "grammar": "승진하 + 시 + ㄴ → 승진하신, the past modifier with 시 inside it. 승진한 is the same modifier with the honorific dropped, which the 드려요 has already ruled out."
+        },
+        {
+          "n": 5,
+          "phraseKo": "은퇴하다",
+          "art": "은퇴하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "아버님은 아직도 그 회사에 다니세요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 작년에 {}."
+            }
+          ],
+          "answer": "euntoehasyeo",
+          "choices": [
+            {
+              "id": "euntoehasyeo",
+              "ko": "은퇴하셨어요"
+            },
+            {
+              "id": "euntoehae",
+              "ko": "은퇴했어요"
+            },
+            {
+              "id": "euntoehasin",
+              "ko": "은퇴하신어요"
+            }
+          ],
+          "en": "No, he retired last year.",
+          "why": "아버님 is somebody else’s father, named with the honorific 님, so the answer about him keeps the honorific as well.",
+          "grammar": "하 + 시 + 었어요 contracts twice: 하시 → 하셔, then 하셨어요. 은퇴했어요 is correct Korean and the wrong register for a 아버님."
+        },
+        {
+          "n": 6,
+          "phraseKo": "결혼하다",
+          "art": "결혼하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "혹시 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "어떻게 아셨어요?"
+            },
+            {
+              "who": "A",
+              "ko": "손에 낀 반지를 보고 알았어요."
+            }
+          ],
+          "answer": "gyeolhonhasyeo",
+          "choices": [
+            {
+              "id": "gyeolhonhasyeo",
+              "ko": "결혼하셨어요"
+            },
+            {
+              "id": "gyeolhonhae",
+              "ko": "결혼했어요"
+            },
+            {
+              "id": "gyeolhonhal",
+              "ko": "결혼하실래요"
+            }
+          ],
+          "en": "Are you married, by any chance?",
+          "why": "A has worked it out from a ring, and B asks 어떻게 아셨어요 — how did you know — so the question was about something already true, not a plan.",
+          "grammar": "결혼하셨어요 is a past honorific used as a question; 결혼하실래요 would be an invitation to marry, which the ring makes an odd thing to ask."
+        }
+      ]
+    },
+    {
+      "id": "u15-vocab-2",
+      "type": "build",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 2",
+      "icon": "📈",
+      "pattern": "변화를 말하는 동사",
+      "blurbEn": "Six verbs for things going up, down, or appearing at all.",
+      "instructionKo": "그림을 보고 [보기]와 같이 알맞은 단어를 골라 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue using the appropriate word from the box.",
+      "noteEn": "The box is 발전하다, 늘다, 줄다, 오르다, 내리다, 생기다, and the pairs matter more than the words: 늘다/줄다 count things, 오르다/내리다 move prices. Choosing the right half of a pair is the exercise, so each row offers both.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "고향 잘 다녀왔어요?"
+          },
+          {
+            "who": "B",
+            "ko": "네, 5년 전에 갔을 때보다 많이 {}."
+          }
+        ],
+        "answerKo": "발전한 것 같아요",
+        "phraseKo": "발전하다",
+        "en": "A: How was the trip home? — B: It seemed to have developed a lot since I went five years ago."
+      },
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "생기다",
+          "art": "생기다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 점심은 어디서 먹을까요?"
+            },
+            {
+              "who": "B",
+              "ko": "얼마 전에 새로 {} 식당이 있는데 거기로 가요."
+            }
+          ],
+          "answer": "saenggin",
+          "choices": [
+            {
+              "id": "saenggin",
+              "ko": "생긴"
+            },
+            {
+              "id": "saenggineun",
+              "ko": "생기는"
+            },
+            {
+              "id": "neuleun",
+              "ko": "는"
+            }
+          ],
+          "en": "There’s a restaurant that opened recently — let’s go there.",
+          "why": "새로 생기다 is how Korean says a shop came into existence. 새로 만든 would be about who built it; 생기다 is about it simply now being there.",
+          "grammar": "생기 + ㄴ → 생긴, the past modifier on a vowel stem. 생기는 is the present one and would mean a restaurant in the act of appearing."
+        },
+        {
+          "n": 2,
+          "phraseKo": "늘다",
+          "art": "늘다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "한국에 사는 외국인이 많은가요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 10년 전보다 많이 {}."
+            }
+          ],
+          "answer": "neureo",
+          "choices": [
+            {
+              "id": "neureo",
+              "ko": "늘었어요"
+            },
+            {
+              "id": "jureo",
+              "ko": "줄었어요"
+            },
+            {
+              "id": "olla",
+              "ko": "올랐어요"
+            }
+          ],
+          "en": "Yes, a lot more than ten years ago.",
+          "why": "A asks whether there are many, and B agrees with 네 — so the number went up. 줄었어요 would be agreeing with a question nobody asked.",
+          "grammar": "늘다 is a ㄹ stem, and the ㄹ survives before 었: 늘었어요. Numbers of people 늘다; prices 오르다, which is the pair to keep apart."
+        },
+        {
+          "n": 3,
+          "phraseKo": "오르다",
+          "art": "오르다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "요즘 물가가 너무 비싼 것 같아요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 버스 요금도 100원 {}."
+            }
+          ],
+          "answer": "olla",
+          "choices": [
+            {
+              "id": "olla",
+              "ko": "올랐어요"
+            },
+            {
+              "id": "neureo",
+              "ko": "늘었어요"
+            },
+            {
+              "id": "naeryeo",
+              "ko": "내렸어요"
+            }
+          ],
+          "en": "Yes, the bus fare went up by 100 won too.",
+          "why": "물가 is the price level, so the verb has to be the one that moves a price. 늘다 would say there are more fares, not dearer ones.",
+          "grammar": "오르다 is a 르 irregular: the ㄹ doubles back onto the syllable before, 오르 + 았어요 → 올랐어요. 오르았어요 is the form the rule replaces."
+        },
+        {
+          "n": 4,
+          "phraseKo": "줄다",
+          "art": "줄다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "퇴근 시간인데 길이 안 막히네요. 요즘 길에 차가 좀 {} 것 같아요."
+            },
+            {
+              "who": "B",
+              "ko": "휴가철이라서 그래요."
+            }
+          ],
+          "answer": "jun",
+          "choices": [
+            {
+              "id": "jun",
+              "ko": "준"
+            },
+            {
+              "id": "neun",
+              "ko": "는"
+            },
+            {
+              "id": "naerin",
+              "ko": "내린"
+            }
+          ],
+          "en": "The traffic seems to have thinned out lately.",
+          "why": "안 막히네요 says the road is clear, and 휴가철 explains it — people are away, so there are fewer cars. Cars are counted, so 줄다 and not 내리다.",
+          "grammar": "줄다 is a ㄹ stem and the ㄹ drops before the ㄴ of the modifier: 줄 + ㄴ → 준. The same rule turns 살다 into 산 and 알다 into 아는."
+        },
+        {
+          "n": 5,
+          "phraseKo": "내리다",
+          "art": "내리다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "컴퓨터 가격이 지난달보다 싸네요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 가격이 많이 {}."
+            }
+          ],
+          "answer": "naeryeo",
+          "choices": [
+            {
+              "id": "naeryeo",
+              "ko": "내렸어요"
+            },
+            {
+              "id": "jureo",
+              "ko": "줄었어요"
+            },
+            {
+              "id": "olla",
+              "ko": "올랐어요"
+            }
+          ],
+          "en": "Yes, the price has come down a lot.",
+          "why": "싸네요 says it is cheap, so the price moved down. 줄었어요 would be about the number of computers.",
+          "grammar": "내리 + 었어요 → 내렸어요: ㅣ and 어 contract to ㅕ. 가격이 내리다 is the price falling; 가격을 내리다 would be a shop lowering it."
+        }
+      ]
+    },
+    {
+      "id": "u15-grammar-1-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 1",
+      "icon": "📉",
+      "pattern": "A-아지다/어지다",
+      "blurbEn": "An adjective that has started happening: it became so rather than simply being so.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "Every answer is one adjective plus 아/어지다, so what is being tested is the vowel join and nothing else. The wrong choices are the joins that do not happen: 좋아졌어요 against 좋어졌어요, 쉬워졌어요 against 쉽어졌어요.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "커피값이 많이 {}."
+          },
+          {
+            "who": "B",
+            "ko": "맞아요. 작년보다 천 원쯤 오른 것 같아요."
+          }
+        ],
+        "answerKo": "비싸졌어요",
+        "phraseKo": "비싸다",
+        "en": "A: Coffee has got a lot dearer. — B: It has. About a thousand won up on last year."
+      },
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "좋다",
+          "art": "좋다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "감기 다 나았어요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 어제 잘 쉬어서 {}."
+            }
+          ],
+          "answer": "joa",
+          "choices": [
+            {
+              "id": "joa",
+              "ko": "좋아졌어요"
+            },
+            {
+              "id": "joeo",
+              "ko": "좋어졌어요"
+            },
+            {
+              "id": "joha",
+              "ko": "좋하졌어요"
+            }
+          ],
+          "en": "Yes, I rested well yesterday so I’m better.",
+          "why": "나았어요 asks whether the cold has gone; 좋아졌어요 answers about the state improving rather than the illness ending.",
+          "grammar": "좋- has ㅗ, a bright vowel, so it takes 아 and not 어: 좋아졌어요. And the ㅎ goes silent between vowels — [조아저써요] — which is this chapter’s own 발음 point."
+        },
+        {
+          "n": 2,
+          "phraseKo": "편하다",
+          "art": "편하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "집 앞에 지하철역이 생겨서 교통이 {}."
+            },
+            {
+              "who": "B",
+              "ko": "그래요? 학교 다니기 좋겠네요."
+            }
+          ],
+          "answer": "pyeonhae",
+          "choices": [
+            {
+              "id": "pyeonhae",
+              "ko": "편해졌어요"
+            },
+            {
+              "id": "pyeonhaa",
+              "ko": "편하아졌어요"
+            },
+            {
+              "id": "pyeonhi",
+              "ko": "편히졌어요"
+            }
+          ],
+          "en": "A station opened by my house so getting around has got easier.",
+          "why": "A station appearing is the cause; 교통이 편해지다 is the standard way to say the getting-about improved because of it.",
+          "grammar": "하다 adjectives go to 해: 편하 + 아지다 → 편해졌어요. That contraction is the one 하다 always makes and never the two vowels written out."
+        },
+        {
+          "n": 3,
+          "phraseKo": "쉽다",
+          "art": "쉽다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "요즘 듣는 수업이 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "처음에는 어려워서 좀 힘들었는데 이제는 {}."
+            }
+          ],
+          "answer": "swiwo",
+          "choices": [
+            {
+              "id": "swiwo",
+              "ko": "쉬워졌어요"
+            },
+            {
+              "id": "swipeo",
+              "ko": "쉽어졌어요"
+            },
+            {
+              "id": "swiweo",
+              "ko": "쉽워졌어요"
+            }
+          ],
+          "en": "It was hard at first, but now it’s got easier.",
+          "why": "처음에는 … 이제는 is the frame this pattern lives in: something was one way and has become another.",
+          "grammar": "쉽다 is a ㅂ irregular — the ㅂ leaves and 워 takes its place: 쉬워졌어요. 쉽어졌어요 keeps a ㅂ that the ending removes."
+        },
+        {
+          "n": 4,
+          "phraseKo": "복잡하다",
+          "art": "복잡하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오전에는 차가 많지 않았는데 지금은 왜 이렇게 길이 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "퇴근 시간이라서 그래요."
+            }
+          ],
+          "answer": "bokjaphae",
+          "choices": [
+            {
+              "id": "bokjaphae",
+              "ko": "복잡해졌어요"
+            },
+            {
+              "id": "bokjaphaa",
+              "ko": "복잡하아졌어요"
+            },
+            {
+              "id": "bokjapeo",
+              "ko": "복잡어졌어요"
+            }
+          ],
+          "en": "Why has the road got so busy now?",
+          "why": "The question compares 오전 with 지금, so it asks about a change and not a state — which is why 복잡해요 alone would not answer it.",
+          "grammar": "Another 하다 adjective: 복잡하 → 복잡해졌어요. 복잡하- is said [복짜파-], with the ㄱ tensing the ㅈ and the ㅂ meeting the ㅎ, and none of that is written."
+        },
+        {
+          "n": 5,
+          "phraseKo": "많다",
+          "art": "많다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "정우 씨, 요즘도 바쁘세요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 전보다 일이 더 {}."
+            }
+          ],
+          "answer": "mana",
+          "choices": [
+            {
+              "id": "mana",
+              "ko": "많아졌어요"
+            },
+            {
+              "id": "maneo",
+              "ko": "많어졌어요"
+            },
+            {
+              "id": "manha",
+              "ko": "많하졌어요"
+            }
+          ],
+          "en": "Yes, I’ve got even more work than before.",
+          "why": "전보다 sets the comparison, so the sentence is about the amount rising rather than about it being large.",
+          "grammar": "많- has ㅏ so it takes 아: 많아졌어요, said [마나저써요]. The ㅎ of ㄶ drops and the ㄴ carries across — the chapter’s 발음 point again."
+        }
+      ]
+    },
+    {
+      "id": "u15-grammar-1-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 2",
+      "icon": "🖼️",
+      "pattern": "A-아지다/어지다",
+      "blurbEn": "Two pictures of the same thing. Say what changed.",
+      "instructionKo": "어떻게 달라졌습니까? 그림을 보고 [보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "What has changed? Look at the pictures and create sentences as shown in the example.",
+      "noteEn": "On the page this is four pairs of paintings with nothing written at all — the before and after are the whole prompt. The subject is given here in the stem so the row has something to read, and the choice is the adjective and its join, which is what the book is asking for. The pictures still want drawing.",
+      "example": {
+        "answerKo": "많아졌어요",
+        "phraseKo": "많다",
+        "en": "There are more people than there were.",
+        "lines": [
+          {
+            "ko": "사람이 {}."
+          }
+        ]
+      },
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "작다",
+          "art": "작다",
+          "answer": "jaga",
+          "choices": [
+            {
+              "id": "jaga",
+              "ko": "작아졌어요"
+            },
+            {
+              "id": "jageo",
+              "ko": "작어졌어요"
+            },
+            {
+              "id": "jakha",
+              "ko": "작하졌어요"
+            }
+          ],
+          "en": "He has got shorter.",
+          "why": "The flute player is drawn twice and the second one is smaller, so the sentence is about height falling rather than about him being short.",
+          "grammar": "작- has ㅏ and takes 아: 작아졌어요, said [자가저써요] with the ㄱ carrying over.",
+          "lines": [
+            {
+              "ko": "키가 {}."
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "phraseKo": "길다",
+          "art": "길다",
+          "answer": "gireo",
+          "choices": [
+            {
+              "id": "gireo",
+              "ko": "길어졌어요"
+            },
+            {
+              "id": "gira",
+              "ko": "길아졌어요"
+            },
+            {
+              "id": "gin",
+              "ko": "긴졌어요"
+            }
+          ],
+          "en": "His hair has got longer.",
+          "why": "Van Gogh appears twice with more hair the second time, and 머리 covers both the head and the hair on it.",
+          "grammar": "길- has ㅣ, a dark vowel, so it takes 어 and not 아: 길어졌어요. The ㄹ stays because 어 is a vowel and there is no ㄴ or ㅂ to drop it before.",
+          "lines": [
+            {
+              "ko": "머리가 {}."
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "phraseKo": "크다",
+          "art": "크다",
+          "answer": "keo",
+          "choices": [
+            {
+              "id": "keo",
+              "ko": "커졌어요"
+            },
+            {
+              "id": "keuo",
+              "ko": "크어졌어요"
+            },
+            {
+              "id": "keua",
+              "ko": "크아졌어요"
+            }
+          ],
+          "en": "Her nose has got bigger.",
+          "why": "The Mona Lisa twice, the second with a larger nose. 크다 is the size adjective; 커지다 is it growing.",
+          "grammar": "크다 loses its ㅡ before an ending that starts with a vowel: 크 + 어 → 커. 크어졌어요 keeps a vowel that Korean deletes.",
+          "lines": [
+            {
+              "ko": "코가 {}."
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "phraseKo": "없다",
+          "art": "없다",
+          "answer": "eopseo",
+          "choices": [
+            {
+              "id": "eopseo",
+              "ko": "없어졌어요"
+            },
+            {
+              "id": "eopsa",
+              "ko": "없아졌어요"
+            },
+            {
+              "id": "eopneun",
+              "ko": "없는졌어요"
+            }
+          ],
+          "en": "The stars have gone.",
+          "why": "Starry Night with its stars painted out. 없어지다 is the standard way to say something that was there no longer is.",
+          "grammar": "없- has ㅓ and takes 어: 없어졌어요, said [업써저써요]. 없어지다 has hardened into one verb meaning to disappear.",
+          "lines": [
+            {
+              "ko": "별이 {}."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "u15-grammar-2-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 1",
+      "icon": "🔄",
+      "pattern": "V-게 되다",
+      "blurbEn": "Something came about. Nobody decided it — it simply ended up that way.",
+      "instructionKo": "[보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue as shown in the example.",
+      "noteEn": "Five of the six answer 아니요 to a question about home, and the sixth answers 네 — so the pattern is the same every time and the verb is the only thing to get right. What the exercise is really drilling is that -게 되다 attaches to the plain stem: 배우게, 알게, 가르치게, never to a conjugated form.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "고향에서도 한국말을 배웠어요?"
+          },
+          {
+            "who": "B",
+            "ko": "아니요, 한국에 와서 {}."
+          }
+        ],
+        "answerKo": "배우게 되었어요",
+        "phraseKo": "배우다",
+        "en": "A: Did you learn Korean back home too? — B: No, I came to Korea and ended up learning it."
+      },
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "알다",
+          "art": "알다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "고향에서도 샤오밍 씨를 알았어요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 한국에 와서 {}."
+            }
+          ],
+          "answer": "alge",
+          "choices": [
+            {
+              "id": "alge",
+              "ko": "알게 되었어요"
+            },
+            {
+              "id": "age",
+              "ko": "아게 되었어요"
+            },
+            {
+              "id": "alge2",
+              "ko": "알으게 되었어요"
+            }
+          ],
+          "en": "No, I got to know him after coming to Korea.",
+          "why": "알게 되다 is not deciding to know somebody — it is finding that you now do. That is the whole difference from 알았어요.",
+          "grammar": "알- keeps its ㄹ before 게: 알게. The ㄹ only drops before ㄴ, ㅂ and ㅅ, which is why 아는 loses it and 알게 does not."
+        },
+        {
+          "n": 2,
+          "phraseKo": "하다",
+          "art": "하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "결혼하고 나서 집안일을 많이 해요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 결혼 전보다 많이 {}."
+            }
+          ],
+          "answer": "hage",
+          "choices": [
+            {
+              "id": "hage",
+              "ko": "하게 되었어요"
+            },
+            {
+              "id": "haege",
+              "ko": "해게 되었어요"
+            },
+            {
+              "id": "hage2",
+              "ko": "하기 되었어요"
+            }
+          ],
+          "en": "Yes, a lot more than before I married.",
+          "why": "The one 네 in the set. Marriage was not a decision to do housework, but the housework followed from it — which is exactly what this pattern is for.",
+          "grammar": "-게 되다 takes the plain stem: 하 + 게. 해게 borrows the 아/어 form, which no -게 ending ever uses."
+        },
+        {
+          "n": 3,
+          "phraseKo": "가르치다",
+          "art": "가르치다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "고향에서도 영어를 가르쳤어요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 한국에 와서 {}."
+            }
+          ],
+          "answer": "gareuchige",
+          "choices": [
+            {
+              "id": "gareuchige",
+              "ko": "가르치게 되었어요"
+            },
+            {
+              "id": "gareuchyeoge",
+              "ko": "가르쳐게 되었어요"
+            },
+            {
+              "id": "gareuchige2",
+              "ko": "가르칠게 되었어요"
+            }
+          ],
+          "en": "No, I started teaching it after coming to Korea.",
+          "why": "가르치다 is to teach somebody; 배우다 in the example is the other side of it. The pair is the point of putting them next to each other.",
+          "grammar": "가르치 + 게 → 가르치게, with no contraction because 게 begins with a consonant. 가르쳐 is the 아/어 form and belongs to 가르쳤어요."
+        },
+        {
+          "n": 4,
+          "phraseKo": "좋아하다",
+          "art": "좋아하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "마리코 씨는 원래 한국 음식을 좋아했어요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 한국에 와서 {}."
+            }
+          ],
+          "answer": "joahage",
+          "choices": [
+            {
+              "id": "joahage",
+              "ko": "좋아하게 되었어요"
+            },
+            {
+              "id": "joage",
+              "ko": "좋아게 되었어요"
+            },
+            {
+              "id": "joahaege",
+              "ko": "좋아해게 되었어요"
+            }
+          ],
+          "en": "No, I came to like it after arriving in Korea.",
+          "why": "원래 — originally — is what makes 되다 necessary: the taste is not how it always was but how it became.",
+          "grammar": "좋아하 + 게 → 좋아하게, said [조아하게] with the ㅎ of 좋 silent between vowels. 좋아게 drops the 하 that carries the verb."
+        },
+        {
+          "n": 5,
+          "phraseKo": "사귀다",
+          "art": "사귀다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "히엔 씨, 고향에서도 외국 친구들을 많이 사귀었어요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 한국에 와서 {}."
+            }
+          ],
+          "answer": "sagwige",
+          "choices": [
+            {
+              "id": "sagwige",
+              "ko": "사귀게 되었어요"
+            },
+            {
+              "id": "sagyeoge",
+              "ko": "사겨게 되었어요"
+            },
+            {
+              "id": "sagwiege",
+              "ko": "사귀어게 되었어요"
+            }
+          ],
+          "en": "No, I made foreign friends after coming to Korea.",
+          "why": "The same 사귀다 as the 어휘 page, now in the pattern: making friends abroad is something that happens to you rather than something you set out to do.",
+          "grammar": "사귀 + 게 → 사귀게. The ㅟ that refused to contract with 었 has nothing to contract with here either."
+        },
+        {
+          "n": 6,
+          "phraseKo": "쓰다",
+          "art": "쓰다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "아키라 씨, 요즘 한국말을 많이 써요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 회사를 옮기고 나서 많이 {}."
+            }
+          ],
+          "answer": "sseuge",
+          "choices": [
+            {
+              "id": "sseuge",
+              "ko": "쓰게 되었어요"
+            },
+            {
+              "id": "sseoge",
+              "ko": "써게 되었어요"
+            },
+            {
+              "id": "sseuige",
+              "ko": "쓰이게 되었어요"
+            }
+          ],
+          "en": "Yes, a lot more since I changed companies.",
+          "why": "쓰다 here is to use, not to write — 한국말을 쓰다 is using the language. The new job made it happen; he did not choose it.",
+          "grammar": "쓰 + 게 → 쓰게, with the ㅡ intact because 게 is a consonant ending. It is 써 that loses it, before 어요."
+        }
+      ]
+    },
+    {
+      "id": "u15-grammar-2-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 2",
+      "icon": "🕰️",
+      "pattern": "V-게 되다",
+      "blurbEn": "Then and now, in one sentence: 처음에는 … 이제는.",
+      "instructionKo": "[보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "Complete each sentence as shown in the example.",
+      "noteEn": "The book prints 되었어요 in 연습 1 and 됐어요 here. Both are right and the book uses both on purpose — 됐어요 is the contraction — so the rows keep whichever the key gives and the wrong choices never turn on that difference.",
+      "example": {
+        "answerKo": "잘하게 됐어요",
+        "phraseKo": "잘하다",
+        "en": "I could not cook when we first married, but now I have got good at it.",
+        "lines": [
+          {
+            "ko": "결혼하고 나서 처음에는 요리를 못했는데 이제는 {}."
+          }
+        ]
+      },
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "좋아하다",
+          "art": "좋아하다",
+          "answer": "joahage",
+          "choices": [
+            {
+              "id": "joahage",
+              "ko": "좋아하게 됐어요"
+            },
+            {
+              "id": "joage",
+              "ko": "좋아게 됐어요"
+            },
+            {
+              "id": "joahaejyeo",
+              "ko": "좋아해졌어요"
+            }
+          ],
+          "en": "I did not like him at first, but I gradually came to.",
+          "why": "점점 — gradually — is the word that rules out a decision, and 되다 is how Korean says a feeling arrived on its own.",
+          "grammar": "좋아하다 is a verb, so it takes V-게 되다. 좋아해지다 would apply the adjective pattern from the previous page to a verb, which is the trap the two pages set together.",
+          "lines": [
+            {
+              "ko": "처음에는 그 사람을 안 좋아했는데 점점 {}."
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "phraseKo": "먹다",
+          "art": "먹다",
+          "answer": "jalmeokge",
+          "choices": [
+            {
+              "id": "jalmeokge",
+              "ko": "잘 먹게 됐어요"
+            },
+            {
+              "id": "jalmeogeo",
+              "ko": "잘 먹어 됐어요"
+            },
+            {
+              "id": "jalmeokgi",
+              "ko": "잘 먹기 됐어요"
+            }
+          ],
+          "en": "I could not eat spicy food at first, but now I can.",
+          "why": "잘 먹다 is not eating well but being able to eat something — the 잘 has to come along or the sentence says he eats a lot.",
+          "grammar": "먹 + 게 → 먹게, said [먹께]: the ㄱ tenses the following consonant and nothing in the spelling shows it.",
+          "lines": [
+            {
+              "ko": "처음에는 매운 음식을 잘 안 먹었는데 이제는 {}."
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "phraseKo": "끼다",
+          "art": "끼다",
+          "answer": "kkige",
+          "choices": [
+            {
+              "id": "kkige",
+              "ko": "끼게 됐어요"
+            },
+            {
+              "id": "kkyeoge",
+              "ko": "껴게 됐어요"
+            },
+            {
+              "id": "kkige2",
+              "ko": "끼우게 됐어요"
+            }
+          ],
+          "en": "My eyes got much worse, so I ended up wearing glasses.",
+          "why": "나빠져서 in front is the A-아/어지다 from two pages back, and it is the cause; the glasses are the consequence. The two patterns in one sentence is the point.",
+          "grammar": "안경을 끼다 is the verb for glasses — 입다 is for clothes, 신다 for shoes, 쓰다 also works for glasses. 끼 + 게 → 끼게.",
+          "lines": [
+            {
+              "ko": "눈이 많이 나빠져서 안경을 {}."
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "phraseKo": "알다",
+          "art": "알다",
+          "answer": "alge",
+          "choices": [
+            {
+              "id": "alge",
+              "ko": "알게 됐어요"
+            },
+            {
+              "id": "age",
+              "ko": "아게 됐어요"
+            },
+            {
+              "id": "alge2",
+              "ko": "알으게 됐어요"
+            }
+          ],
+          "en": "I have lived in Korea a long time, so now I understand the culture well.",
+          "why": "Living somewhere long enough is not studying it; the understanding accumulates. That is why 알았어요 would be wrong here.",
+          "grammar": "알게 again, and 오랫동안 is said [오랟똥안] — the ㅅ closes to ㄷ and the ㄷ of 동 tenses behind it.",
+          "lines": [
+            {
+              "ko": "한국에서 오랫동안 살아서 지금은 한국 문화를 잘 {}."
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "phraseKo": "가다",
+          "art": "가다",
+          "answer": "motgage",
+          "choices": [
+            {
+              "id": "motgage",
+              "ko": "못 가게 됐어요"
+            },
+            {
+              "id": "angage",
+              "ko": "안 가게 됐어요"
+            },
+            {
+              "id": "gage",
+              "ko": "가게 됐어요"
+            }
+          ],
+          "en": "Something came up, so I could not go to my friend’s birthday.",
+          "why": "갑자기 일이 생기다 is something coming up that you did not arrange — so the not-going is 못, outside your control, and not 안, which would be choosing not to.",
+          "grammar": "못 가다 is said [몯까다] with the ㄱ tensed. 못 and 안 both negate, but 못 is about being unable and 안 about being unwilling.",
+          "lines": [
+            {
+              "ko": "갑자기 일이 생겨서 친구 생일 파티에 {}."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "u15-grammar-3-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 1",
+      "icon": "⏪",
+      "pattern": "V-기 전에",
+      "blurbEn": "The thing you do first, said as the thing that comes before the other.",
+      "instructionKo": "그림을 보고 [보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each sentence as shown in the example.",
+      "noteEn": "The gap is at the front of the sentence and the rest is printed, so the row reads as a clause plus its tail. Two of the five put the honorific inside the clause — 주무시기, 오시기 — because the person doing the earlier thing is a 할머니 or a 손님.",
+      "example": {
+        "answerKo": "라면을 넣기 전에",
+        "phraseKo": "넣다",
+        "en": "Boil the water before you put the noodles in.",
+        "lines": [
+          {
+            "ko": "먼저 물을 끓여요 {}."
+          }
+        ]
+      },
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "수영을 하다",
+          "art": "수영을 하다",
+          "answer": "suyeonghagi",
+          "choices": [
+            {
+              "id": "suyeonghagi",
+              "ko": "수영을 하기 전에"
+            },
+            {
+              "id": "suyeonghangi",
+              "ko": "수영을 한 전에"
+            },
+            {
+              "id": "suyeonghaegi",
+              "ko": "수영을 해기 전에"
+            }
+          ],
+          "en": "Warm up before you swim.",
+          "why": "The two pictures are stretching and then diving in, and the printed half is the stretching — so the gap is the swimming, the later thing.",
+          "grammar": "-기 전에 takes the plain stem: 하 + 기. It never takes a tense, because the clause is about order and not about when.",
+          "lines": [
+            {
+              "ko": "{} 준비 운동을 해요."
+            }
+          ]
+        },
+        {
+          "n": 2,
+          "phraseKo": "주무시다",
+          "art": "주무시다",
+          "answer": "halmeonijumusigi",
+          "choices": [
+            {
+              "id": "halmeonijumusigi",
+              "ko": "할머니가 주무시기 전에"
+            },
+            {
+              "id": "halmeonijagi",
+              "ko": "할머니가 자기 전에"
+            },
+            {
+              "id": "halmeonijumugi",
+              "ko": "할머니가 주무기 전에"
+            }
+          ],
+          "en": "Ring your grandmother before she goes to sleep.",
+          "why": "It is the grandmother who sleeps, so she is the subject of the clause and the honorific belongs there — not on 전화하세요, which is aimed at you.",
+          "grammar": "주무시다 is the honorific of 자다, a separate word rather than 자 + 시. Its stem already ends in 시, so the clause is 주무시 + 기 전에.",
+          "lines": [
+            {
+              "ko": "{} 전화하세요."
+            }
+          ]
+        },
+        {
+          "n": 3,
+          "phraseKo": "물건을 사다",
+          "art": "물건을 사다",
+          "answer": "mulgeoneulsagi",
+          "choices": [
+            {
+              "id": "mulgeoneulsagi",
+              "ko": "물건을 사기 전에"
+            },
+            {
+              "id": "mulgeoneulsangi",
+              "ko": "물건을 산 전에"
+            },
+            {
+              "id": "mulgeoneulsagi2",
+              "ko": "물건을 살기 전에"
+            }
+          ],
+          "en": "Think it over before you buy something.",
+          "why": "A camera held up in one frame and handed over in the next: the thinking is what should come first.",
+          "grammar": "사 + 기 → 사기. 살기 would be from 살다, to live, which is a different verb entirely.",
+          "lines": [
+            {
+              "ko": "{} 잘 생각해야 돼요."
+            }
+          ]
+        },
+        {
+          "n": 4,
+          "phraseKo": "식당에 가다",
+          "art": "식당에 가다",
+          "answer": "sikdangegagi",
+          "choices": [
+            {
+              "id": "sikdangegagi",
+              "ko": "식당에 가기 전에"
+            },
+            {
+              "id": "sikdanggan",
+              "ko": "식당에 간 전에"
+            },
+            {
+              "id": "sikdanggagi",
+              "ko": "식당에 갈기 전에"
+            }
+          ],
+          "en": "Book before you go to the restaurant.",
+          "why": "The second frame is a queue outside the restaurant, which is what the booking is meant to avoid.",
+          "grammar": "가 + 기 → 가기. 예약해야 돼요 is obligation — you have to — and pairs with 전에 to make advice rather than a rule.",
+          "lines": [
+            {
+              "ko": "{} 예약해야 돼요."
+            }
+          ]
+        },
+        {
+          "n": 5,
+          "phraseKo": "손님들이 오시다",
+          "art": "손님들이 오시다",
+          "answer": "sonnimdeurosigi",
+          "choices": [
+            {
+              "id": "sonnimdeurosigi",
+              "ko": "손님들이 오시기 전에"
+            },
+            {
+              "id": "sonnimdeurogi",
+              "ko": "손님들이 오기 전에"
+            },
+            {
+              "id": "sonnimdeurosin",
+              "ko": "손님들이 오신 전에"
+            }
+          ],
+          "en": "Get the food ready before the guests arrive.",
+          "why": "손님 are guests you are hosting, so they take 시 — the same reason the grandmother did two rows up.",
+          "grammar": "오 + 시 + 기 → 오시기. 손님들이 is said [손님드리], with the ㄹ of 들 carrying into the 이.",
+          "lines": [
+            {
+              "ko": "{} 음식을 준비해야 돼요."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "u15-grammar-3-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 2",
+      "icon": "↔️",
+      "pattern": "V-기 전에",
+      "blurbEn": "Not only 전에 — 전부터 and 전까지 as well, and each answers a different question.",
+      "instructionKo": "[보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue as shown in the example.",
+      "noteEn": "This is the exercise the grammar point is really for. 전에 is a point, 전부터 is everything leading up to it, and 전까지 is a deadline — and which one to use is decided by the question, not by the verb. 언제부터 asks for 전부터, 언제까지 for 전까지.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "두 사람은 2급에 와서 처음 만났어요?"
+          },
+          {
+            "who": "B",
+            "ko": "아니요, {} 알았어요."
+          }
+        ],
+        "answerKo": "한국에 오기 전부터",
+        "phraseKo": "한국에 오다",
+        "en": "A: Did you two first meet in level 2? — B: No, we knew each other before I came to Korea."
+      },
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "졸업하다",
+          "art": "졸업하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "졸업하고 나서부터 취직 준비를 했어요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, {} 준비했어요."
+            }
+          ],
+          "answer": "joreophagijeonbuteo",
+          "choices": [
+            {
+              "id": "joreophagijeonbuteo",
+              "ko": "졸업하기 전부터"
+            },
+            {
+              "id": "joreophagijeone",
+              "ko": "졸업하기 전에"
+            },
+            {
+              "id": "joreophagijeonkkaji",
+              "ko": "졸업하기 전까지"
+            }
+          ],
+          "en": "No, I was getting ready before I graduated.",
+          "why": "A asks whether it started after graduating; 아니요 means it started earlier and carried on — which is 전부터 and not the single point 전에.",
+          "grammar": "전부터 is 전 with the from-marker: everything from that moment backwards. 졸업하다 is said [조러파다], the ㅂ meeting the ㅎ."
+        },
+        {
+          "n": 2,
+          "phraseKo": "한국에서 살다",
+          "art": "한국에서 살다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "고향에서도 김치를 잘 먹었어요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, {} 김치를 잘 먹었어요."
+            }
+          ],
+          "answer": "hangugeseosalgijeonedo",
+          "choices": [
+            {
+              "id": "hangugeseosalgijeonedo",
+              "ko": "한국에서 살기 전에도"
+            },
+            {
+              "id": "hangugeseosalgijeonbuteo",
+              "ko": "한국에서 살기 전부터"
+            },
+            {
+              "id": "hangugeseosangijeon",
+              "ko": "한국에서 산 전에"
+            }
+          ],
+          "en": "Yes, I ate kimchi well even before I lived in Korea.",
+          "why": "The 네 is what picks 전에도 — the 도 is agreeing that it was true then as well, which 전부터 would not say.",
+          "grammar": "살 + 기 → 살기, the ㄹ staying because 기 is not one of ㄴ/ㅂ/ㅅ. 전에도 is 전에 with 도 stacked on it."
+        },
+        {
+          "n": 3,
+          "phraseKo": "초등학교에 입학하다",
+          "art": "초등학교에 입학하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제부터 피아노를 배웠어요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 피아노를 배웠어요."
+            }
+          ],
+          "answer": "ipakhagijeonbuteo",
+          "choices": [
+            {
+              "id": "ipakhagijeonbuteo",
+              "ko": "초등학교에 입학하기 전부터"
+            },
+            {
+              "id": "ipakhagijeone",
+              "ko": "초등학교에 입학하기 전에"
+            },
+            {
+              "id": "ipakhagijeonkkaji",
+              "ko": "초등학교에 입학하기 전까지"
+            }
+          ],
+          "en": "I have been learning piano since before I started primary school.",
+          "why": "언제부터 asks from when, so the answer has to carry 부터 as well. A question and its answer match their markers.",
+          "grammar": "입학하다 is said [이파카다]: the ㅂ meets the ㅎ and again the ㄱ meets the ㅎ, two aspirates in one word and neither of them written."
+        },
+        {
+          "n": 4,
+          "phraseKo": "저녁 먹다",
+          "art": "저녁 먹다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 몇 시까지 집에 올 수 있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 갈 수 있어요."
+            }
+          ],
+          "answer": "jeonyeokmeokgijeonkkaji",
+          "choices": [
+            {
+              "id": "jeonyeokmeokgijeonkkaji",
+              "ko": "저녁 먹기 전까지"
+            },
+            {
+              "id": "jeonyeokmeokgijeone",
+              "ko": "저녁 먹기 전에"
+            },
+            {
+              "id": "jeonyeokmeokgijeonbuteo",
+              "ko": "저녁 먹기 전부터"
+            }
+          ],
+          "en": "I can be back before dinner.",
+          "why": "몇 시까지 asks for a deadline, so the answer is 전까지 — up to that point at the latest.",
+          "grammar": "B says 갈 수 있어요 where A said 올 수 있어요: 오다 from the house’s point of view, 가다 from the speaker’s. Korean picks the verb by where the speaker is."
+        },
+        {
+          "n": 5,
+          "phraseKo": "결혼하다",
+          "art": "결혼하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제까지 부산에 살았어요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 부산에 살았어요."
+            }
+          ],
+          "answer": "gyeolhonhagijeonkkaji",
+          "choices": [
+            {
+              "id": "gyeolhonhagijeonkkaji",
+              "ko": "결혼하기 전까지"
+            },
+            {
+              "id": "gyeolhonhagijeone",
+              "ko": "결혼하기 전에"
+            },
+            {
+              "id": "gyeolhonhagijeonbuteo",
+              "ko": "결혼하기 전부터"
+            }
+          ],
+          "en": "I lived in Busan until I got married.",
+          "why": "언제까지 again, and again 전까지 — the marriage is the end of the living there, not a moment inside it.",
+          "grammar": "결혼하다 is said [겨로나다]: the ㄹ carries into 혼 and the ㅎ goes silent between the ㄴ and the vowel."
+        },
+        {
+          "n": 6,
+          "phraseKo": "퇴근하다",
+          "art": "퇴근하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이 일을 언제까지 끝내야 돼요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 끝내야 돼요."
+            }
+          ],
+          "answer": "toegeunhagijeonkkaji",
+          "choices": [
+            {
+              "id": "toegeunhagijeonkkaji",
+              "ko": "퇴근하기 전까지"
+            },
+            {
+              "id": "toegeunhagijeone",
+              "ko": "퇴근하기 전에"
+            },
+            {
+              "id": "toegeunhagijeonbuteo",
+              "ko": "퇴근하기 전부터"
+            }
+          ],
+          "en": "It has to be finished before I leave the office.",
+          "why": "The deadline reading once more, and 끝내야 돼요 is repeated back from the question — Korean answers by reusing the verb rather than saying yes.",
+          "grammar": "퇴근 is leaving work and 출근 is arriving at it; the pair is worth learning together. 끝내다 is said [끈내다], the ㅌ closing to ㄴ before the ㄴ."
+        }
+      ]
+    },
+    {
+      "id": "u15-grammar-4-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 1",
+      "icon": "⏩",
+      "pattern": "V-(으)ㄴ 후에",
+      "blurbEn": "The other half of the pair: what happens after the first thing is done.",
+      "instructionKo": "그림을 보고 [보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "The modifier is the whole exercise: -(으)ㄴ is the past one, so a vowel stem takes a bare ㄴ (본, 온) and a consonant stem takes 은 (먹은, 끝난). Putting -기 전에’s plain stem here instead is the mistake the previous page sets up.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "오후에 같이 영화 보러 갈래?"
+          },
+          {
+            "who": "B",
+            "ko": "오늘은 안 돼. {} 아르바이트하러 가야 돼."
+          }
+        ],
+        "answerKo": "수업 끝난 후에",
+        "phraseKo": "수업이 끝나다",
+        "en": "A: Want to see a film this afternoon? — B: Not today. I have to go to work after class."
+      },
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "밥 먹다",
+          "art": "밥 먹다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "엄마, 텔레비전 봐도 돼요?"
+            },
+            {
+              "who": "B",
+              "ko": "먼저 {} 봐."
+            }
+          ],
+          "answer": "babmeogeun",
+          "choices": [
+            {
+              "id": "babmeogeun",
+              "ko": "밥 먹은 후에"
+            },
+            {
+              "id": "babmeokneun",
+              "ko": "밥 먹는 후에"
+            },
+            {
+              "id": "babmeokgi",
+              "ko": "밥 먹기 후에"
+            }
+          ],
+          "en": "Eat first, then watch.",
+          "why": "먼저 is already in the printed half, so the sentence is ordering two things and the gap is the earlier one.",
+          "grammar": "먹- ends in a consonant so the modifier needs its 으: 먹 + 은 → 먹은, said [머근]. 먹는 is the present modifier and would mean while eating."
+        },
+        {
+          "n": 2,
+          "phraseKo": "시험이 끝나다",
+          "art": "시험이 끝나다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "{} 뭐 할 거예요?"
+            },
+            {
+              "who": "B",
+              "ko": "친구들하고 영화 보러 갈 거예요."
+            }
+          ],
+          "answer": "siheomikkeutnan",
+          "choices": [
+            {
+              "id": "siheomikkeutnan",
+              "ko": "시험이 끝난 후에"
+            },
+            {
+              "id": "siheomikkeutnaneun",
+              "ko": "시험이 끝나는 후에"
+            },
+            {
+              "id": "siheomikkeutnagi",
+              "ko": "시험이 끝나기 후에"
+            }
+          ],
+          "en": "What will you do after the exams?",
+          "why": "B answers with a plan — 갈 거예요 — so the question is about a time still to come, which -(으)ㄴ 후에 can still describe.",
+          "grammar": "끝나- is a vowel stem, so the modifier is a bare ㄴ: 끝난. Said [끈난], the ㅌ closing to ㄴ before the ㄴ that follows."
+        },
+        {
+          "n": 3,
+          "phraseKo": "영화 보다",
+          "art": "영화 보다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "영화 보기 전에 커피 마시러 갈까요?"
+            },
+            {
+              "who": "B",
+              "ko": "시간이 별로 없으니까 {} 마시는 게 어때요?"
+            }
+          ],
+          "answer": "yeonghwabon",
+          "choices": [
+            {
+              "id": "yeonghwabon",
+              "ko": "영화 본 후에"
+            },
+            {
+              "id": "yeonghwabwan",
+              "ko": "영화 봔 후에"
+            },
+            {
+              "id": "yeonghwabogi",
+              "ko": "영화 보기 후에"
+            }
+          ],
+          "en": "There’s not much time — how about after the film instead?",
+          "why": "A proposes 전에 and B counters with 후에; the two patterns face each other in one exchange, which is why this row is worth doing slowly.",
+          "grammar": "보 + ㄴ → 본. The past modifier of a vowel stem is just the ㄴ, with nothing of 봤 in it — 봔 borrows a past marker the modifier does not use."
+        },
+        {
+          "n": 4,
+          "phraseKo": "퇴근하다",
+          "art": "퇴근하다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제 만날까요?"
+            },
+            {
+              "who": "B",
+              "ko": "{}."
+            }
+          ],
+          "answer": "toegeunhanhuemannayo",
+          "choices": [
+            {
+              "id": "toegeunhanhuemannayo",
+              "ko": "퇴근한 후에 만나요"
+            },
+            {
+              "id": "toegeunhagihuemannayo",
+              "ko": "퇴근하기 후에 만나요"
+            },
+            {
+              "id": "toegeunhaneunhuemannayo",
+              "ko": "퇴근하는 후에 만나요"
+            }
+          ],
+          "en": "Let’s meet after work.",
+          "why": "The whole answer is the gap here, so the reply has to carry its own verb — 만나요 — and not just the clause.",
+          "grammar": "퇴근하 + ㄴ → 퇴근한. 하다 verbs are vowel stems, so they never take the 은."
+        },
+        {
+          "n": 5,
+          "phraseKo": "한국에 오다",
+          "art": "한국에 오다",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제부터 한국어를 배웠어요?"
+            },
+            {
+              "who": "B",
+              "ko": "{}."
+            }
+          ],
+          "answer": "hangugeonhubuteo",
+          "choices": [
+            {
+              "id": "hangugeonhubuteo",
+              "ko": "한국에 온 후부터 한국어를 배웠어요"
+            },
+            {
+              "id": "hangugeonhue",
+              "ko": "한국에 온 후에 한국어를 배웠어요"
+            },
+            {
+              "id": "hangugeogihu",
+              "ko": "한국에 오기 후부터 한국어를 배웠어요"
+            }
+          ],
+          "en": "I have been learning Korean since after I came to Korea.",
+          "why": "언제부터 asks from when, so 후 takes 부터 the same way 전 did on the previous page. The two pages answer each other.",
+          "grammar": "오 + ㄴ → 온, then 후부터. 후에 would name a single moment and leave the 부터 of the question unanswered."
+        }
+      ]
+    },
+    {
+      "id": "u15-pattern-1",
+      "type": "build",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 1",
+      "icon": "🎧",
+      "pattern": "A-아지다/어지다",
+      "blurbEn": "Hear the prompt, say the comparison. The teacher gives you two words.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "On the tape the teacher reads the question and then the bracketed prompt word by word, so the clip has three bursts before the model answer. The clip plays the model too: 문형 연습 is listen-and-repeat and the model is the thing being copied.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "한국어 수업이 어때요? (1급, 어렵다)"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "1급보다 어려워졌어요",
+        "en": "The model exchange, played through.",
+        "audio": {
+          "src": "audio/book/2b-u15-p1-0.mp3",
+          "askEnd": 5.8
+        },
+        "why": "Played through so the shape of the exchange is heard once before you answer one yourself."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "요즘 과일값이 어때요? (겨울, 싸다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "ssa",
+          "choices": [
+            {
+              "id": "ssa",
+              "ko": "겨울보다 싸졌어요"
+            },
+            {
+              "id": "ssao",
+              "ko": "겨울보다 싸아졌어요"
+            },
+            {
+              "id": "ssaeo",
+              "ko": "겨울보다 싸어졌어요"
+            }
+          ],
+          "en": "Fruit is cheaper than it was in winter.",
+          "grammar": "싸- ends in ㅏ, which swallows the 아 of the ending: 싸 + 아지다 → 싸지다. Nothing is left of the join to write.",
+          "audio": {
+            "src": "audio/book/2b-u15-p1-1.mp3",
+            "askEnd": 6
+          },
+          "why": "The teacher gives 겨울 and 싸다, so the comparison is against winter and the adjective is cheap. 보다 hangs on the thing compared against, never on the thing being described."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "요즘 회사 일이 어때요? (작년, 바쁘다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "bappa",
+          "choices": [
+            {
+              "id": "bappa",
+              "ko": "작년보다 바빠졌어요"
+            },
+            {
+              "id": "bapeu",
+              "ko": "작년보다 바쁘졌어요"
+            },
+            {
+              "id": "bappeueo",
+              "ko": "작년보다 바쁘어졌어요"
+            }
+          ],
+          "en": "Work is busier than last year.",
+          "grammar": "바쁘다 loses its ㅡ and takes 아 because the syllable before has ㅏ: 바쁘 + 아 → 바빠. 예쁘다 does the same and 크다 takes 어 instead.",
+          "audio": {
+            "src": "audio/book/2b-u15-p1-2.mp3",
+            "askEnd": 6.09
+          },
+          "why": "작년 is the yardstick and 바쁘다 the adjective. The answer says the work became busier than it was, which is more than saying it is busy."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "요즘 건강이 어때요? (전, 좋다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "joa",
+          "choices": [
+            {
+              "id": "joa",
+              "ko": "전보다 좋아졌어요"
+            },
+            {
+              "id": "joeo",
+              "ko": "전보다 좋어졌어요"
+            },
+            {
+              "id": "joha",
+              "ko": "전보다 좋하졌어요"
+            }
+          ],
+          "en": "My health is better than before.",
+          "grammar": "좋아졌어요 is said [조아저써요]: the ㅎ falls silent between vowels, which is this chapter’s 발음 point.",
+          "audio": {
+            "src": "audio/book/2b-u15-p1-3.mp3",
+            "askEnd": 5.63
+          },
+          "why": "전 is simply “before”, with no noun in front of it — which is why it can stand where 겨울 and 작년 stood and still take 보다."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "오늘 날씨가 어때요? (어제, 춥다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "chuwo",
+          "choices": [
+            {
+              "id": "chuwo",
+              "ko": "어제보다 추워졌어요"
+            },
+            {
+              "id": "chubeo",
+              "ko": "어제보다 춥어졌어요"
+            },
+            {
+              "id": "chuweo",
+              "ko": "어제보다 춥워졌어요"
+            }
+          ],
+          "en": "It is colder than yesterday.",
+          "grammar": "춥다 is a ㅂ irregular: the ㅂ goes and 워 replaces it, 추워졌어요. 덥다 does exactly the same.",
+          "audio": {
+            "src": "audio/book/2b-u15-p1-4.mp3",
+            "askEnd": 5.72
+          },
+          "why": "The question is about today and the prompt is yesterday, so the sentence sets two days against each other rather than describing one."
+        }
+      ]
+    },
+    {
+      "id": "u15-pattern-2",
+      "type": "build",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 2",
+      "icon": "🎧",
+      "pattern": "V-게 되다",
+      "blurbEn": "Every question is about home, and every answer is what Korea changed.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "The model answers all begin 아니요, which the tape reads as its own burst before the rest of the sentence — the clip keeps that pause because it is how the answer is actually said.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "고향에서도 김치를 좋아했어요?"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "아니요, 한국에 와서 좋아하게 되었어요",
+        "en": "The model exchange, played through.",
+        "audio": {
+          "src": "audio/book/2b-u15-p2-0.mp3",
+          "askEnd": 3.4
+        },
+        "why": "Played through so the shape of the exchange is heard once before you answer one yourself."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "고향에서도 한국어를 배웠어요?"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "baeuge",
+          "choices": [
+            {
+              "id": "baeuge",
+              "ko": "배우게 되었어요"
+            },
+            {
+              "id": "baewoge",
+              "ko": "배워게 되었어요"
+            },
+            {
+              "id": "baeugi",
+              "ko": "배우기 되었어요"
+            }
+          ],
+          "en": "No, I came to Korea and ended up learning it.",
+          "grammar": "배우 + 게 → 배우게. -게 되다 always takes the plain stem, never the 아/어 form.",
+          "audio": {
+            "src": "audio/book/2b-u15-p2-1.mp3",
+            "askEnd": 3.31
+          },
+          "why": "The question is about home and the answer is 아니요, so the learning belongs to Korea. 되다 says it followed from being here rather than being decided."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "고향에서도 영어를 가르쳤어요?"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "gareuchige",
+          "choices": [
+            {
+              "id": "gareuchige",
+              "ko": "가르치게 되었어요"
+            },
+            {
+              "id": "gareuchyeoge",
+              "ko": "가르쳐게 되었어요"
+            },
+            {
+              "id": "gareuchilge",
+              "ko": "가르칠게 되었어요"
+            }
+          ],
+          "en": "No, I started teaching it after coming to Korea.",
+          "grammar": "가르치게, with no contraction: 게 begins with a consonant so the ㅣ has nothing to merge with.",
+          "audio": {
+            "src": "audio/book/2b-u15-p2-2.mp3",
+            "askEnd": 3.2
+          },
+          "why": "Teaching English is the work the country produced, not a plan brought along — which is the difference between 가르쳤어요 and 가르치게 되었어요."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "고향에서도 요리를 했어요?"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "hage",
+          "choices": [
+            {
+              "id": "hage",
+              "ko": "하게 되었어요"
+            },
+            {
+              "id": "haege",
+              "ko": "해게 되었어요"
+            },
+            {
+              "id": "hagi",
+              "ko": "하기 되었어요"
+            }
+          ],
+          "en": "No, I took it up after coming to Korea.",
+          "grammar": "The shortest answer in the drill, and the one where the plain stem is most obviously not 해.",
+          "audio": {
+            "src": "audio/book/2b-u15-p2-3.mp3",
+            "askEnd": 2.96
+          },
+          "why": "요리를 하다 is the whole verb, so what the ending attaches to is 하 and nothing more. The 요리를 stays where it is."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "고향에서도 혼자 살았어요?"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "salge",
+          "choices": [
+            {
+              "id": "salge",
+              "ko": "혼자 살게 되었어요"
+            },
+            {
+              "id": "sage",
+              "ko": "혼자 사게 되었어요"
+            },
+            {
+              "id": "salge2",
+              "ko": "혼자 살으게 되었어요"
+            }
+          ],
+          "en": "No, I ended up living alone after coming to Korea.",
+          "grammar": "살- keeps its ㄹ before 게: 살게, said [살께]. The ㄹ only leaves before ㄴ, ㅂ and ㅅ.",
+          "audio": {
+            "src": "audio/book/2b-u15-p2-4.mp3",
+            "askEnd": 2.82
+          },
+          "why": "혼자 belongs to the answer rather than to the pattern: it survives the move from question to answer untouched while the verb takes the ending."
+        }
+      ]
+    },
+    {
+      "id": "u15-pattern-3",
+      "type": "build",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 3",
+      "icon": "🎧",
+      "pattern": "V-기 전에",
+      "blurbEn": "Two verbs, one order. The teacher gives them the wrong way round on purpose.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "The teacher reads two dictionary forms a second apart and you put them in order: the first becomes the 전에 clause and the second the main verb. The clip keeps the pause between them because it is what makes them two prompts and not one phrase.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "자다, 이를 닦다"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "자기 전에 이를 닦아요",
+        "en": "The model exchange, played through.",
+        "audio": {
+          "src": "audio/book/2b-u15-p3-0.mp3",
+          "askEnd": 3.13
+        },
+        "why": "Played through so the shape of the exchange is heard once before you answer one yourself."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "밥 먹다, 손을 씻다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "ssiseo",
+          "choices": [
+            {
+              "id": "ssiseo",
+              "ko": "밥 먹기 전에 손을 씻어요"
+            },
+            {
+              "id": "ssiseul",
+              "ko": "밥 먹은 전에 손을 씻어요"
+            },
+            {
+              "id": "ssiseoyo",
+              "ko": "밥 먹기 후에 손을 씻어요"
+            }
+          ],
+          "en": "Wash your hands before you eat.",
+          "grammar": "씻어요 is said [씨서요], the ㅅ carrying into the next syllable. 먹기 전에 keeps the plain stem.",
+          "audio": {
+            "src": "audio/book/2b-u15-p3-1.mp3",
+            "askEnd": 3.39
+          },
+          "why": "The teacher reads eating first and washing second, and the sentence reverses them: the 전에 clause names the later event, so 밥 먹기 전에 puts the washing before it."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "결혼식에 가다, 선물을 준비하다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "junbi",
+          "choices": [
+            {
+              "id": "junbi",
+              "ko": "결혼식에 가기 전에 선물을 준비해요"
+            },
+            {
+              "id": "junbi2",
+              "ko": "결혼식에 간 전에 선물을 준비해요"
+            },
+            {
+              "id": "junbi3",
+              "ko": "결혼식에 가기 후에 선물을 준비해요"
+            }
+          ],
+          "en": "Get a present before you go to the wedding.",
+          "grammar": "결혼식 is said [겨론식]; the ㄹ carries and the ㅎ goes. 가기 전에 is the plain stem again.",
+          "audio": {
+            "src": "audio/book/2b-u15-p3-2.mp3",
+            "askEnd": 4.39
+          },
+          "why": "Going to the wedding is the later thing, so it takes 전에 and the present-buying becomes the main verb."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "방학이 끝나다, 여행을 가고 싶다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "gago",
+          "choices": [
+            {
+              "id": "gago",
+              "ko": "방학이 끝나기 전에 여행을 가고 싶어요"
+            },
+            {
+              "id": "gago2",
+              "ko": "방학이 끝난 전에 여행을 가고 싶어요"
+            },
+            {
+              "id": "gago3",
+              "ko": "방학이 끝나기 후에 여행을 가고 싶어요"
+            }
+          ],
+          "en": "I want to travel before the holidays end.",
+          "grammar": "The only row whose main clause is a wish rather than a habit — 전에 works the same either way.",
+          "audio": {
+            "src": "audio/book/2b-u15-p3-3.mp3",
+            "askEnd": 4.3
+          },
+          "why": "The holidays ending is what the travelling has to beat, so 끝나기 전에 holds the deadline and the wish is the main clause."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "친구들이 오다, 음식을 준비해야 하다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "junbihae",
+          "choices": [
+            {
+              "id": "junbihae",
+              "ko": "친구들이 오기 전에 음식을 준비해야 해요"
+            },
+            {
+              "id": "junbihae2",
+              "ko": "친구들이 온 전에 음식을 준비해야 해요"
+            },
+            {
+              "id": "junbihae3",
+              "ko": "친구들이 오기 후에 음식을 준비해야 해요"
+            }
+          ],
+          "en": "Get the food ready before your friends arrive.",
+          "grammar": "준비해야 해요 is obligation stacked on 하다: 준비하 + 아야 하다 → 준비해야 해요.",
+          "audio": {
+            "src": "audio/book/2b-u15-p3-4.mp3",
+            "askEnd": 4.77
+          },
+          "why": "The friends arriving is the later event again, and the main clause carries the obligation — 준비해야 해요 rather than a plain 준비해요."
+        }
+      ]
+    },
+    {
+      "id": "u15-pattern-4",
+      "type": "build",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 4",
+      "icon": "🎧",
+      "pattern": "V-(으)ㄴ 후에",
+      "blurbEn": "When will you? After the other thing — and the modifier has to be the past one.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "Question then bracketed prompt again, two bursts this time rather than three, because the prompt is one phrase and not two words.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "언제 영화를 볼 거예요? (일을 끝내다)"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "일을 끝낸 후에 볼 거예요",
+        "en": "The model exchange, played through.",
+        "audio": {
+          "src": "audio/book/2b-u15-p4-0.mp3",
+          "askEnd": 4.95
+        },
+        "why": "Played through so the shape of the exchange is heard once before you answer one yourself."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "언제 친구를 만날 거예요? (점심을 먹다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "meogeun",
+          "choices": [
+            {
+              "id": "meogeun",
+              "ko": "점심을 먹은 후에 만날 거예요"
+            },
+            {
+              "id": "meokneun",
+              "ko": "점심을 먹는 후에 만날 거예요"
+            },
+            {
+              "id": "meokgi",
+              "ko": "점심을 먹기 후에 만날 거예요"
+            }
+          ],
+          "en": "I’ll meet them after lunch.",
+          "grammar": "먹- is a consonant stem so the modifier takes 은: 먹은, said [머근].",
+          "audio": {
+            "src": "audio/book/2b-u15-p4-1.mp3",
+            "askEnd": 5.25
+          },
+          "why": "Lunch comes first and the meeting after it, so lunch takes the 후에 clause. The question 언제 is answered by the clause, not by a time of day."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "언제 청소를 할 거예요? (설거지하다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "seolgeojihan",
+          "choices": [
+            {
+              "id": "seolgeojihan",
+              "ko": "설거지한 후에 할 거예요"
+            },
+            {
+              "id": "seolgeojihaneun",
+              "ko": "설거지하는 후에 할 거예요"
+            },
+            {
+              "id": "seolgeojihagi",
+              "ko": "설거지하기 후에 할 거예요"
+            }
+          ],
+          "en": "I’ll clean after the washing-up.",
+          "grammar": "설거지하 + ㄴ → 설거지한. A 하다 verb is a vowel stem, so no 으 is needed.",
+          "audio": {
+            "src": "audio/book/2b-u15-p4-2.mp3",
+            "askEnd": 4.91
+          },
+          "why": "The washing-up is done first, so it is what 후에 hangs on, and the cleaning is what will happen."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "언제 고향에 돌아갈 거예요? (한국어 공부를 마치다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "machin",
+          "choices": [
+            {
+              "id": "machin",
+              "ko": "한국어 공부를 마친 후에 돌아갈 거예요"
+            },
+            {
+              "id": "machineun",
+              "ko": "한국어 공부를 마치는 후에 돌아갈 거예요"
+            },
+            {
+              "id": "machigi",
+              "ko": "한국어 공부를 마치기 후에 돌아갈 거예요"
+            }
+          ],
+          "en": "I’ll go home after I finish studying Korean.",
+          "grammar": "마치다 is to finish something you were doing; 끝나다 is a thing finishing by itself. The subject decides which.",
+          "audio": {
+            "src": "audio/book/2b-u15-p4-3.mp3",
+            "askEnd": 5.96
+          },
+          "why": "Finishing the course is the condition for going home, and 마친 is the past modifier because the finishing is complete before the leaving starts."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "언제 저녁을 먹을 거예요? (숙제를 다 하다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "han",
+          "choices": [
+            {
+              "id": "han",
+              "ko": "숙제를 다 한 후에 먹을 거예요"
+            },
+            {
+              "id": "haneun",
+              "ko": "숙제를 다 하는 후에 먹을 거예요"
+            },
+            {
+              "id": "hagi",
+              "ko": "숙제를 다 하기 후에 먹을 거예요"
+            }
+          ],
+          "en": "I’ll eat after I finish all my homework.",
+          "grammar": "다 하다 is to do all of it, with 다 as an adverb. 숙제 is said [숙쩨], the ㄱ tensing the ㅈ.",
+          "audio": {
+            "src": "audio/book/2b-u15-p4-4.mp3",
+            "askEnd": 5.2
+          },
+          "why": "All the homework first, then dinner. 다 is inside the 후에 clause because it is the homework that has to be finished completely, not the eating."
+        }
+      ]
+    }
+  ]
+}
