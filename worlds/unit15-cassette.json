@@ -121,7 +121,44 @@
       "secEn": "Jeongu and Hien on settling into Korea",
       "dur": 54.2,
       "src": "audio/book/2b-u15-trk57.mp3",
-      "noteEn": "The 말하기 2 page was not among the photographs of this chapter, and the 번역 page gives the conversation in English only — so there is no Korean to check a dictation against. Listen with the translation beside you."
+      "lines": [
+        {
+          "who": "정우",
+          "ko": "히엔 씨, 요즘 잘 지내요? 아직도 한국 생활이 많이 힘들어요?"
+        },
+        {
+          "who": "히엔",
+          "ko": "아니요, 처음 왔을 때는 힘들었지만 지금은 익숙해졌어요."
+        },
+        {
+          "who": "정우",
+          "ko": "처음에 뭐가 제일 힘들었어요?"
+        },
+        {
+          "who": "히엔",
+          "ko": "매운 음식을 잘 못 먹어서 고생했는데 지금은 잘 먹게 되었어요."
+        },
+        {
+          "who": "정우",
+          "ko": "그래요? 다행이네요. 그런데 히엔 씨는 한국에 오기 전에 어떤 일을 했어요?"
+        },
+        {
+          "who": "히엔",
+          "ko": "회사에 다녔어요."
+        },
+        {
+          "who": "정우",
+          "ko": "한국어 공부를 마친 후에는 뭘 할 거예요?"
+        },
+        {
+          "who": "히엔",
+          "ko": "한국에서 취직하려고 하는데 할 수 있을지 모르겠어요."
+        },
+        {
+          "who": "정우",
+          "ko": "히엔 씨는 열심히 하니까 잘될 거예요."
+        }
+      ]
     },
     {
       "n": 58,
@@ -274,7 +311,8 @@
         "a whole sentence someone would actually say",
         "carries something you cannot write from the sound alone — this chapter's grammar (A-아지다/어지다, V-게 되다, V-기 전에, V-(으)ㄴ 후에), or its 발음 point, which is the ㅎ of ㅎ/ㄶ/ㅀ falling silent before a vowel and leaving nothing behind to hear",
         "tracks 58 and 59 joined the set when the 듣기 지문 page arrived, 9 sentences each",
-        "the band is 7-25 rather than 7-24, one syllable wider than it shipped at. Both sentences carrying this chapter’s own grammar — 달라졌어요 for A-아지다/어지다 and 졸업한 후에 for V-(으)ㄴ 후에 — land at exactly 25, and a cap that excludes the grammar it was drawn around is the wrong cap"
+        "the band is 7-25 rather than 7-24, one syllable wider than it shipped at. Both sentences carrying this chapter’s own grammar — 달라졌어요 for A-아지다/어지다 and 졸업한 후에 for V-(으)ㄴ 후에 — land at exactly 25, and a cap that excludes the grammar it was drawn around is the wrong cap",
+        "track 57 joined last, when the 말하기 2 page turned up — nine sentences, and the tape is scripted end to end"
       ],
       "drop": [
         "bare acknowledgements — 네, 잘 지냈어요, 아, 그래요?, 네, 전화할게요. Nothing to decide when you write them",
@@ -285,7 +323,8 @@
         "유진 씨는 어렸을 때 꿈이 뭐였어요? — the second half of track 58’s fourth turn, and word for word the first line of the same track",
         "공부하는 것도 좋은데 대학원에 들어가기 전에… at 28 syllables, which carries V-기 전에 and is a loss worth naming: the narrator does not pause at a sentence boundary inside it",
         "그래요?, 글쎄요., 네. and 네, 감사합니다. — under the band or nothing to decide",
-        "track 57, which still has no printed script here: there is nothing to check an answer against"
+        "히엔 씨, 요즘 잘 지내요? — a greeting, and there is nothing in it to decide",
+        "그래요? and 다행이네요. — an acknowledgement and a five-syllable set phrase, both under the band"
       ],
       "splitAtClause": "Two printed turns are split, and only because the narrator pauses inside them — they are the only two lines in the unit whose voiced span has a gap. Each child is cut from the recording’s own break rather than from the punctuation, and the opener of each (네, 잘 지냈어요 and 아, 그래요?) is dropped as an acknowledgement."
     },
@@ -1000,8 +1039,170 @@
           "rate": 5.6
         },
         "splitFrom": "멋진 계획이시네요. 그럼 여행 잘 다녀오시고 건강하시기를 바라겠습니다."
+      },
+      {
+        "id": 40,
+        "track": 57,
+        "who": "정우",
+        "ko": "아직도 한국 생활이 많이 힘들어요?",
+        "en": "Is life in Korea still hard for you?",
+        "syl": 14,
+        "why": "많이 is [마니]: the ㅎ of ㄶ goes silent and the ㄴ carries onto the 이, which is this chapter’s own 발음 point. 생활이 links the same way, to [생화리], and neither 받침 leaves anything behind to hear.",
+        "tags": [
+          "ㅎ 탈락",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d42.mp3",
+          "voiced": 2.763,
+          "rate": 5.1
+        },
+        "splitFrom": "히엔 씨, 요즘 잘 지내요? 아직도 한국 생활이 많이 힘들어요?"
+      },
+      {
+        "id": 41,
+        "track": 57,
+        "who": "히엔",
+        "ko": "아니요, 처음 왔을 때는 힘들었지만 지금은 익숙해졌어요.",
+        "en": "No — it was hard when I first came, but I’ve got used to it now.",
+        "syl": 23,
+        "why": "왔을 is [와쓸] and 힘들었지만 is [힘드럳찌만] — the ㅆ closes to a ㄷ and the ㅈ tenses behind it. The 었 of both has to come from the tense rather than from anything you can hear.",
+        "tags": [
+          "-지만",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d43.mp3",
+          "voiced": 4.418,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 42,
+        "track": 57,
+        "who": "정우",
+        "ko": "처음에 뭐가 제일 힘들었어요?",
+        "en": "What was hardest at first?",
+        "syl": 12,
+        "why": "처음에 is [처으메] and 힘들었어요 is [힘드러써요] — two liaisons in one short question, each moving a 받침 onto the vowel after it and leaving the syllable you have to write with no sound of its own.",
+        "tags": [
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d44.mp3",
+          "voiced": 2.381,
+          "rate": 5
+        }
+      },
+      {
+        "id": 43,
+        "track": 57,
+        "who": "히엔",
+        "ko": "매운 음식을 잘 못 먹어서 고생했는데 지금은 잘 먹게 되었어요.",
+        "en": "I had a hard time because I couldn’t eat spicy food, but now I’ve come to eat it well.",
+        "syl": 25,
+        "why": "The chapter’s V-게 되다: 먹게 되었어요 says the eating came about, not that it was decided. 못 먹어서 is [몬 머거서] — the ㅅ closes and then turns to ㄴ before the ㅁ — and 못 still stands as its own word on the page.",
+        "tags": [
+          "V-게 되다",
+          "못 + V"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d45.mp3",
+          "voiced": 5.069,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 44,
+        "track": 57,
+        "who": "정우",
+        "ko": "그런데 히엔 씨는 한국에 오기 전에 어떤 일을 했어요?",
+        "en": "By the way, what work did you do before you came to Korea?",
+        "syl": 21,
+        "why": "The chapter’s V-기 전에 hangs on the plain stem 오- and never on a tense — 왔기 전에 is not Korean, however past the coming is. 일을 is [이를] and 했어요 [해써요].",
+        "tags": [
+          "V-기 전에",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d46.mp3",
+          "voiced": 3.983,
+          "rate": 5.3
+        },
+        "splitFrom": "그래요? 다행이네요. 그런데 히엔 씨는 한국에 오기 전에 어떤 일을 했어요?"
+      },
+      {
+        "id": 45,
+        "track": 57,
+        "who": "히엔",
+        "ko": "회사에 다녔어요.",
+        "en": "I worked at a company.",
+        "syl": 7,
+        "why": "다녔어요 is 다니었어요 contracted, and the contraction is the whole exercise: it is said [다녀써요], which gives you 다녀써요 or 다녓어요 if you write what you hear.",
+        "tags": [
+          "다니다 → 다녔다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d47.mp3",
+          "voiced": 1.283,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 46,
+        "track": 57,
+        "who": "정우",
+        "ko": "한국어 공부를 마친 후에는 뭘 할 거예요?",
+        "en": "What will you do after you finish studying Korean?",
+        "syl": 16,
+        "why": "The chapter’s V-(으)ㄴ 후에 takes the past modifier 마친 rather than 마치는, because the finishing is complete before the rest begins. 할 거예요 is said [할 꺼예요] and the tensing is not written.",
+        "tags": [
+          "V-(으)ㄴ 후에",
+          "V-(으)ㄹ 거예요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d48.mp3",
+          "voiced": 3.457,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 47,
+        "track": 57,
+        "who": "히엔",
+        "ko": "한국에서 취직하려고 하는데 할 수 있을지 모르겠어요.",
+        "en": "I mean to find a job in Korea, but I don’t know whether I can.",
+        "syl": 22,
+        "why": "있을지 is [이쓸찌], the ㅈ tensing after the ㄹ. 취직하려고 hides a ㄱ the same way: 취직 + 하 is said [취지카], so the 받침 has become an aspirate by the time you hear it.",
+        "tags": [
+          "V-(으)려고 하다",
+          "V-(으)ㄹ지"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d49.mp3",
+          "voiced": 4.067,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 48,
+        "track": 57,
+        "who": "정우",
+        "ko": "히엔 씨는 열심히 하니까 잘될 거예요.",
+        "en": "You work hard, Hien, so it will go well.",
+        "syl": 15,
+        "why": "열심히 is [열씨미]: the ㅅ tenses, then the ㅎ falls silent between vowels and the ㅁ carries over — the chapter’s 발음 point inside a word nobody thinks of as difficult. 잘될 거예요 tenses again, [잘될 꺼예요].",
+        "tags": [
+          "ㅎ 탈락",
+          "잘되다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d50.mp3",
+          "voiced": 3.123,
+          "rate": 4.8
+        }
       }
     ]
-  },
-  "listenOnly": "Track 57 is the only one left without a script: 말하기 2’s Korean page was not among the photographs of this chapter and the 번역 page gives it in English only, so no dictation sentence can be drawn from it yet. Tracks 58 and 59 were listen-only until the 듣기 지문 pages at the back of the book supplied their transcripts."
+  }
 }

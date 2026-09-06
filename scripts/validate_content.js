@@ -882,6 +882,15 @@ const overlayIds = [
   const gone = srcs.filter((p) => !p || !fs.existsSync(path.join(ROOT, p)));
   check('every recording the Unit 15 tape names is on disk',
     gone.length === 0, gone.slice(0, 4).join(', '));
+  // A row's id and its clip's number are not the same sequence and never were: row 39 plays
+  // d41, three rows play s-stems left by an older pass, and d07/d08/d10/d11/d14 belong to no
+  // row at all. Numbering a new batch of clips from the row id therefore lands on top of two
+  // that already ship, and the tape would not notice: both rows would play, and one of them
+  // would play the wrong sentence. Two rows sharing a clip is what that looks like from here.
+  const clipSrcs = ((c.dictation || {}).items || []).map((i) => (i.audio || {}).src);
+  const shared = clipSrcs.filter((p, k) => clipSrcs.indexOf(p) !== k);
+  check('and no two Unit 15 dictation rows play the same clip',
+    shared.length === 0, shared.slice(0, 4).join(', '));
   // The other direction: a clip nothing points at still ships, because publish uploads
   // whatever is in audio/book. Five were left behind by the keep/drop pass the first time.
   const dir = path.join(ROOT, 'audio', 'book');
@@ -906,17 +915,21 @@ const overlayIds = [
 
   const scripted = tracks.filter((t) => (t.lines || []).length);
   const silent = tracks.filter((t) => !(t.lines || []).length);
-  // Was seven-and-three; the 듣기 지문 pages at the back arrived (p.148) and moved 58 and 59
-  // across, the same pages that had already settled Units 11, 13 and 14. This count is a
-  // description and not a pin — 57 moves too when its 말하기 2 page turns up.
-  check('nine Unit 15 tracks carry their printed script',
-    scripted.length === 9, String(scripted.length));
-  // 57 has no Korean here: 말하기 2's page was not among the photographs of this chapter and
-  // the 번역 page gives it in English only. A track with no script has to say so on screen
-  // rather than open an empty pane, and that is the rule that must not be relaxed.
+  // Seven-and-three, then nine-and-one when the 듣기 지문 pages arrived (p.148), and now ten
+  // and nothing: the 말하기 2 page turned up (p.146) and carried 57. The count was written
+  // down as a description rather than a pin precisely so it could end here.
+  check('every Unit 15 track carries its printed script',
+    scripted.length === tracks.length, scripted.length + ' of ' + tracks.length);
+  // The rule that was never relaxed while it had work to do: a track with no script says on
+  // screen which page it is waiting for, rather than opening an empty pane. Nothing is
+  // waiting now, so what it guards is the other direction — a scripted track must not keep
+  // the note that explains a blank, and the tape must not still announce one.
   check('and the one without one explains why, on the track itself',
-    silent.length === 1 && silent.every((t) => String(t.noteEn || '').length > 40),
+    silent.every((t) => String(t.noteEn || '').length > 40),
     silent.map((t) => t.n).join(','));
+  check('a scripted track does not carry the note that explains an empty pane',
+    scripted.every((t) => !t.noteEn), scripted.filter((t) => t.noteEn).map((t) => t.n).join(','));
+  check('and the tape no longer says a track is listen-only', c.listenOnly === undefined);
   check('no dictation line is drawn from a track with no script',
     ((c.dictation || {}).items || []).every((i) => silent.map((t) => t.n).indexOf(i.track) < 0));
 

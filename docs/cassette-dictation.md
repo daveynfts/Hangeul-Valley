@@ -313,11 +313,12 @@ is what keeps a later unit's clips consistent with the earlier ones.
 ## Unit 15, and the difference between silent and not yet scripted
 
 Tracks 52-61. Three of the ten shipped listen-only, the largest share of any unit here, and
-the reason is not Unit 14's reason. **One is left.** The 듣기 지문 pages arrived — p.148 —
+the reason is not Unit 14's reason. **None is left.** The 듣기 지문 pages arrived — p.148 —
 and moved 58 and 59 across, twenty printed lines between them: a conversation about what two
 students wanted to be as children, and an interview with a man retiring after forty years.
-Track 57 is still waiting on its own page, and the paragraph below is why that distinction
-was worth writing down in the first place.
+Then the 말하기 2 page arrived too — p.146 — and carried 57: nine turns of 정우 asking 히엔 how
+she has settled into Korea, nine dictation rows, and a tape that is scripted end to end. The
+paragraph below is why that distinction was worth writing down in the first place.
 
 Unit 14's track 47 is silent **permanently**: the conversation is drawn on the unit page and
 the 번역 page gives it in English, so the Korean was never printed anywhere and no dictation
@@ -325,22 +326,30 @@ answer could ever be checked against it. The count is pinned at nine-and-one bec
 always be nine-and-one.
 
 Unit 15's were silent **pending a page**, which is a different thing, and the difference has
-now shown itself. Tracks 58 and 59 (듣기 1 and 듣기 2) needed the 듣기 지문 pages at the back,
-the same pages that supplied Units 11, 13 and 14; those arrived and both moved across. Track
-57 (말하기 2) needs the Korean 말하기 2 page and is still waiting. All three conversations
-were on the tape in full the whole time and played.
+now played out to the end. Tracks 58 and 59 (듣기 1 and 듣기 2) needed the 듣기 지문 pages at
+the back, the same pages that supplied Units 11, 13 and 14. Track 57 (말하기 2) needed its own
+unit page, which is a different page in a different place, and it came last. All three
+conversations were on the tape in full the whole time and played.
 
-So the count in the invariants is a **description, not a pin**. It has already gone from
-seven-and-three to nine-and-one, and it will go to ten-and-nothing. Changing it is expected;
-the check beside it is the one that must not be relaxed — every scriptless track carries a
-`noteEn` saying which page it is waiting for. That is what stops "no script yet" from
-decaying into "no script", and it is why the learner sees a reason rather than a gap.
+So the count in the invariants was a **description, not a pin**, and it went from
+seven-and-three to nine-and-one to ten-and-nothing exactly as the description said it might.
+The check beside it was the one that must not be relaxed — every scriptless track carries a
+`noteEn` saying which page it is waiting for. Nothing is waiting now, so that check has been
+turned around to guard the other direction: a **scripted** track must not keep the note that
+explains a blank, and the bank must not still announce a listen-only track. A stale apology
+for a pane that now has content in it is the same bug as a blank pane with no apology.
 
-**A transcript arriving is two steps, not one.** The lines go in and the script pane fills
-immediately — that is the half a reader notices. The dictation rows are the other half and
-need the audio cut per sentence, with the pace check that verifies the alignment. Both steps
-are done for these four tracks: Unit 10 went 27 → 41 rows and Unit 15 21 → 39, and the cut is
-written up under "Cutting four 듣기 tracks" below.
+**A transcript arriving is three steps, not one.** The lines go in and the script pane fills
+immediately — that is the part a reader notices. The dictation rows are the second and need
+the audio cut per sentence, with the pace check that verifies the alignment: Unit 10 went
+27 → 41 rows and Unit 15 21 → 39 → 48, written up under "Cutting four 듣기 tracks" and
+"Track 57" below. The third is the **translation catalogue**: `en` and `why` are shipped strings, so every row added is
+two more strings a Vietnamese reader would otherwise meet in English. Adding five tracks
+across two units this session put the project's only remaining VI gap there — 82 strings, and
+the whole of it — while `npm run validate` stayed green, because a missing translation is not
+drift and nothing counts it but `node scripts/i18n_report.js`. Run it after a content commit.
+Deleting the English **is** drift: removing 57's `noteEn` orphaned its Vietnamese, which is
+the report doing its job, and `--prune` is the answer once the English is really gone.
 
 Two consequences worth knowing before editing this unit:
 
@@ -441,6 +450,47 @@ all say so.
 Thirty-two clips, 831 KB, 26 KB each, reading at 5.21 ±0.50 syl/s across all four tracks.
 Every clip's duration matches voiced + 0.12 + 0.15 + 0.18 × (spans − 1) exactly, which is the
 same arithmetic the Unit 13 clips were cut with.
+
+---
+
+## Track 57, and the announcement every track opens with
+
+Nine turns, 172 syllables, nine dictation rows at 5.09 ±0.26 syl/s. Two things went wrong
+first, and both were caught by checks that already existed.
+
+**Every track in this book opens on the same 2.69 second recording.** Not the track number —
+the same audio, on all ten of Unit 15's tracks and on Unit 10's and Unit 14's too, at r =
+1.000 on an energy envelope against a control of −0.27 for unrelated speech from the middle
+of the same files. The preamble rule written above looks for three spans and a two-second
+gap, which is what a 듣기 track's opening looks like; this is one span with a 1.20s gap after
+it, and the rule returned zero. The alignment that produced was wrong in the way the rule
+predicted: line 1 came out at 3.24 syl/s against a track pace of 4.90, and the shift-by-one
+control fitted **better** than the true alignment, ±0.58 against ±0.65. Dropping the one
+announcement span moved the pace to 5.12 ±0.27 with every line between 4.63 and 5.46, and
+the shift then broke properly at ±0.56.
+
+The proof did not need a listener. Track 54 is a 말하기 track that was cut and shipped long
+ago, and its first printed turn is not its first span — correlating the shipped clip `d05`
+against the source put it at 3.90s, r = 0.986, against r = −0.147 for the opening. The
+earlier pass had already dropped that span. Reading what shipped is cheaper than re-deriving
+what it should have been.
+
+**A row's id is not its clip's number, and never was.** Row 39 plays `d41`, three rows play
+`s`-stems from an older pass, and `d07`, `d08`, `d10`, `d11` and `d14` belong to no row at
+all. Numbering nine new clips from the row id therefore started at `d40` and overwrote two
+that ship — `git status` caught it, and `git checkout --` put them back. The builder now
+takes the next stem past the highest that exists and refuses to write over a file whatever
+the arithmetic says, and the validator asserts no two rows play the same clip, which is what
+that mistake would have looked like from inside the content if the ids had been renumbered
+to match. Do not fill the gaps either: a `d07` sitting next to an `s07` is a trap for
+whoever reads it next.
+
+Both splits in this track land on the narrator's own pauses — 히엔 씨, 요즘 잘 지내요? from
+아직도 한국 생활이 많이 힘들어요?, and 그래요? / 다행이네요. from 그런데 히엔 씨는 한국에 오기
+전에 어떤 일을 했어요? — and the sub-spans read 5.44/5.07 and 5.75/5.77/5.27, so the pace
+check confirms the cut rather than merely permitting it. All three openers are dropped as
+acknowledgements or as under-the-band, which is the same fate as every other opener in the
+unit. Nine clips, 34.2 seconds of audio, and the tape is scripted end to end.
 
 ---
 
