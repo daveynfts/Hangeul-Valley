@@ -272,14 +272,20 @@
     "filter": {
       "keep": [
         "a whole sentence someone would actually say",
-        "7-24 syllables: long enough that you have to listen, short enough to hold in your head",
-        "carries something you cannot write from the sound alone — this chapter's grammar (A-아지다/어지다, V-게 되다, V-기 전에, V-(으)ㄴ 후에), or its 발음 point, which is the ㅎ of ㅎ/ㄶ/ㅀ falling silent before a vowel and leaving nothing behind to hear"
+        "carries something you cannot write from the sound alone — this chapter's grammar (A-아지다/어지다, V-게 되다, V-기 전에, V-(으)ㄴ 후에), or its 발음 point, which is the ㅎ of ㅎ/ㄶ/ㅀ falling silent before a vowel and leaving nothing behind to hear",
+        "tracks 58 and 59 joined the set when the 듣기 지문 page arrived, 9 sentences each",
+        "the band is 7-25 rather than 7-24, one syllable wider than it shipped at. Both sentences carrying this chapter’s own grammar — 달라졌어요 for A-아지다/어지다 and 졸업한 후에 for V-(으)ㄴ 후에 — land at exactly 25, and a cap that excludes the grammar it was drawn around is the wrong cap"
       ],
       "drop": [
         "bare acknowledgements — 네, 잘 지냈어요, 아, 그래요?, 네, 전화할게요. Nothing to decide when you write them",
         "네, 회사 일에도 익숙해지고 한국 음식도 잘 먹게 됐어요. 지훈 씨도 별일 없지요? — 31 syllables, and the narrator runs it as one unbroken span, so it can be neither kept whole nor split on a pause of the recording’s own",
         "2년 동안 있을 거예요. 그런데 지금까지 한 번도 외국에서 지내 본 적이 없어서 좀 걱정이에요. — 36 syllables, unbroken, and it opens with a numeral read aloud, so the syllable count cannot be derived from the text and the pace check has nothing to measure against",
-        "tracks 57, 58 and 59, which have no printed script here: there is nothing to check an answer against"
+        "from track 59, three turns of 26-32 syllables whose internal pauses fall mid-clause, and one the narrator ran together entirely: 글쎄요. 특별한 방법은 없고요. 회사가 잘되는 것을 보면… splits at 2.4 and 12.3 syl/s against a track pace of 5.2, which is the pace check refusing a cut rather than a threshold being tuned until it agreed",
+        "two lines with numerals read aloud — 벌써 40년이 되었네요 and 지금은 300명이 넘는 큰 회사가 되었습니다 — unmeasurable for the same reason as Unit 10’s",
+        "유진 씨는 어렸을 때 꿈이 뭐였어요? — the second half of track 58’s fourth turn, and word for word the first line of the same track",
+        "공부하는 것도 좋은데 대학원에 들어가기 전에… at 28 syllables, which carries V-기 전에 and is a loss worth naming: the narrator does not pause at a sentence boundary inside it",
+        "그래요?, 글쎄요., 네. and 네, 감사합니다. — under the band or nothing to decide",
+        "track 57, which still has no printed script here: there is nothing to check an answer against"
       ],
       "splitAtClause": "Two printed turns are split, and only because the narrator pauses inside them — they are the only two lines in the unit whose voiced span has a gap. Each child is cut from the recording’s own break rather than from the punctuation, and the opener of each (네, 잘 지냈어요 and 아, 그래요?) is dropped as an acknowledgement."
     },
@@ -662,6 +668,338 @@
           "voiced": 1.767,
           "rate": 5.09
         }
+      },
+      {
+        "id": 22,
+        "track": 58,
+        "who": "여",
+        "ko": "샤오밍 씨는 어렸을 때 꿈이 뭐였어요?",
+        "en": "Xiaoming, what was your dream when you were little?",
+        "syl": 15,
+        "why": "어렸을 is said [어려쓸] — the ㅆ moves across — and 뭐였어요 is 뭐이었어요 contracted twice over.",
+        "tags": [
+          "A-았/었을 때",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d24.mp3",
+          "voiced": 3.248,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 23,
+        "track": 58,
+        "who": "남",
+        "ko": "저는 어렸을 때 농구 선수가 되고 싶었어요.",
+        "en": "When I was little I wanted to be a basketball player.",
+        "syl": 17,
+        "why": "되고 싶었어요 puts the past on 싶다 and not on 되다, which is the opposite of what the English suggests.",
+        "tags": [
+          "V-고 싶다",
+          "N이/가 되다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d25.mp3",
+          "voiced": 3.258,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 24,
+        "track": 58,
+        "who": "여",
+        "ko": "그런데 왜 농구를 계속 안 했어요?",
+        "en": "So why did you stop playing basketball?",
+        "syl": 13,
+        "why": "했어요 is [해써요] and 안 stays its own word. 안했어요 written closed up is the commonest version of this sentence and the wrong one.",
+        "tags": [
+          "안 + V",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d26.mp3",
+          "voiced": 2.89,
+          "rate": 4.5
+        },
+        "splitFrom": "그래요? 그런데 왜 농구를 계속 안 했어요?"
+      },
+      {
+        "id": 25,
+        "track": 58,
+        "who": "남",
+        "ko": "중학생 때 다리를 다쳐서 농구를 그만두게 되었어요.",
+        "en": "I hurt my leg in middle school and ended up giving up basketball.",
+        "syl": 21,
+        "why": "The chapter's own V-게 되다: something came about rather than being chosen. 되었어요 is written in full here and would be 됐어요 spoken faster.",
+        "tags": [
+          "V-게 되다",
+          "V-아/어서"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d27.mp3",
+          "voiced": 4.064,
+          "rate": 5.2
+        },
+        "splitFrom": "중학생 때 다리를 다쳐서 농구를 그만두게 되었어요. 유진 씨는 어렸을 때 꿈이 뭐였어요?"
+      },
+      {
+        "id": 26,
+        "track": 58,
+        "who": "여",
+        "ko": "어렸을 때는 선생님이 되고 싶었는데 지금은 꿈이 달라졌어요.",
+        "en": "When I was little I wanted to be a teacher, but now my dream has changed.",
+        "syl": 25,
+        "why": "The chapter's A-아/어지다 on 다르다: 달라졌어요, with the 르 doubling its ㄹ onto the syllable before. 달라요 would be the plain adjective and says something else.",
+        "tags": [
+          "A-아지다/어지다",
+          "V-는데"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d28.mp3",
+          "voiced": 4.875,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 27,
+        "track": 58,
+        "who": "남",
+        "ko": "그럼 지금은 꿈이 뭐예요?",
+        "en": "So what's your dream now?",
+        "syl": 10,
+        "why": "뭐예요 after a vowel, never 뭐에요. Both are said the same and only one is written.",
+        "tags": [
+          "N이에요/예요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d29.mp3",
+          "voiced": 2.335,
+          "rate": 4.3
+        }
+      },
+      {
+        "id": 28,
+        "track": 58,
+        "who": "여",
+        "ko": "좋은 변호사가 돼서 힘든 사람들을 도와주고 싶어요.",
+        "en": "I want to become a good lawyer and help people who are struggling.",
+        "syl": 21,
+        "why": "The chapter's 발음 point twice: 좋은 is [조은] and 힘든 keeps its ㄷ. 돼서 is 되어서, and 되서 is what the sound gives you.",
+        "tags": [
+          "ㅎ 탈락",
+          "되다 → 돼서"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d30.mp3",
+          "voiced": 4.149,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 29,
+        "track": 58,
+        "who": "남",
+        "ko": "저는 대학교를 졸업한 후에 뭘 해야 할지 아직 결정을 못 했어요.",
+        "en": "I still haven't decided what to do after I graduate.",
+        "syl": 25,
+        "why": "The chapter's V-(으)ㄴ 후에. 못 했어요 is two words said as [모태써요], with the ㅅ and the ㅎ making an aspirate that neither letter shows.",
+        "tags": [
+          "V-(으)ㄴ 후에",
+          "V-(으)ㄹ지"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d31.mp3",
+          "voiced": 5.523,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 30,
+        "track": 58,
+        "who": "여",
+        "ko": "샤오밍 씨는 공부하는 걸 좋아하니까 대학원에 가면 어때요?",
+        "en": "You like studying, Xiaoming — how about graduate school?",
+        "syl": 24,
+        "why": "좋아하니까 is [조아하니까] again, and 걸 is 것을 worn down to one syllable — the full form is what gets written.",
+        "tags": [
+          "ㅎ 탈락",
+          "V-(으)면 어때요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d32.mp3",
+          "voiced": 4.357,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 31,
+        "track": 59,
+        "who": "여",
+        "ko": "몇 년 동안 이 회사에서 일하셨습니까?",
+        "en": "How many years did you work at this company?",
+        "syl": 15,
+        "why": "몇 년 is said [면 년] — the ㅊ becomes ㄴ before the ㄴ — and 일하셨습니까 carries the honorific into a formal question.",
+        "tags": [
+          "N 동안",
+          "V-(으)시-"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d33.mp3",
+          "voiced": 2.871,
+          "rate": 5.2
+        },
+        "splitFrom": "오늘은 다음 달에 은퇴하시는 김정민 씨를 모시고 이야기를 나누어 보겠습니다. 몇 년 동안 이 회사에서 일하셨습니까?"
+      },
+      {
+        "id": 32,
+        "track": 59,
+        "who": "남",
+        "ko": "시간이 정말 빨리 지난 것 같습니다.",
+        "en": "The time really does seem to have gone quickly.",
+        "syl": 14,
+        "why": "지난 것 같습니다 is [지난 걷 깜니다]: the ㅅ of 것 closes to a ㄷ and the ㄱ tenses after it, and none of that is written.",
+        "tags": [
+          "V-(으)ㄴ 것 같다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d34.mp3",
+          "voiced": 2.511,
+          "rate": 5.6
+        },
+        "splitFrom": "고등학교 졸업한 후에 바로 일하기 시작했으니까 벌써 40년이 되었네요. 시간이 정말 빨리 지난 것 같습니다."
+      },
+      {
+        "id": 33,
+        "track": 59,
+        "who": "여",
+        "ko": "처음 회사에 들어오셨을 때와 지금 회사가 많이 달라졌지요?",
+        "en": "The company has changed a lot since you first joined, hasn't it?",
+        "syl": 24,
+        "why": "달라졌지요 again, and 많이 is [마니] — the ㅎ of ㄶ goes silent and the ㄴ carries over, which is this chapter's own 발음 point.",
+        "tags": [
+          "A-아지다/어지다",
+          "V-지요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d35.mp3",
+          "voiced": 4.561,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 34,
+        "track": 59,
+        "who": "남",
+        "ko": "정말 많이 발전했지요.",
+        "en": "It really has developed a great deal.",
+        "syl": 9,
+        "why": "많이 [마니] once more, and 발전했지요 is [발쩐핻찌요] — two tensings and a closed ㅅ, in a word written with none of them.",
+        "tags": [
+          "ㅎ 탈락",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d36.mp3",
+          "voiced": 1.934,
+          "rate": 4.7
+        },
+        "splitFrom": "네, 그때는 직원이 다섯 명밖에 없는 작은 회사여서 모두 가족같이 지냈습니다. 지금은 300명이 넘는 큰 회사가 되었습니다. 정말 많이 발전했지요."
+      },
+      {
+        "id": 35,
+        "track": 59,
+        "who": "여",
+        "ko": "네, 은퇴하신 후에 어떤 계획이 있으세요?",
+        "en": "And what are your plans after you retire?",
+        "syl": 16,
+        "why": "The chapter's V-(으)ㄴ 후에 with the honorific inside it — 은퇴하신 — and 계획이 said [계회기].",
+        "tags": [
+          "V-(으)ㄴ 후에",
+          "V-(으)세요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d37.mp3",
+          "voiced": 2.833,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 36,
+        "track": 59,
+        "who": "남",
+        "ko": "그래서 은퇴 후에 아내와 같이 여행을 많이 하기로 했습니다.",
+        "en": "So after retiring we decided to travel a lot together.",
+        "syl": 24,
+        "why": "같이 is [가치] — the ㅌ before 이 becomes ㅊ — and it is one of the words most often written the way it sounds.",
+        "tags": [
+          "V-기로 하다",
+          "N와/과 같이"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d38.mp3",
+          "voiced": 4.838,
+          "rate": 5
+        },
+        "splitFrom": "일을 하는 동안 너무 바빠서 아내와 시간을 많이 보내지 못했습니다. 그래서 은퇴 후에 아내와 같이 여행을 많이 하기로 했습니다. 여행을 다녀온 후에는 봉사 활동을 하려고 합니다."
+      },
+      {
+        "id": 37,
+        "track": 59,
+        "who": "남",
+        "ko": "여행을 다녀온 후에는 봉사 활동을 하려고 합니다.",
+        "en": "After the travelling I plan to do volunteer work.",
+        "syl": 20,
+        "why": "후에는 takes the topic marker onto a time phrase, and 활동을 is [활똥을] with a tensing the spelling does not carry.",
+        "tags": [
+          "V-(으)ㄴ 후에",
+          "V-(으)려고 하다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d39.mp3",
+          "voiced": 3.199,
+          "rate": 6.3
+        },
+        "splitFrom": "일을 하는 동안 너무 바빠서 아내와 시간을 많이 보내지 못했습니다. 그래서 은퇴 후에 아내와 같이 여행을 많이 하기로 했습니다. 여행을 다녀온 후에는 봉사 활동을 하려고 합니다."
+      },
+      {
+        "id": 38,
+        "track": 59,
+        "who": "여",
+        "ko": "멋진 계획이시네요.",
+        "en": "That's a wonderful plan.",
+        "syl": 8,
+        "why": "멋진 is [먿찐]: the ㅅ closes to ㄷ and the ㅈ tenses behind it. The adjective is 멋지다 and neither change is written.",
+        "tags": [
+          "V-시네요",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d40.mp3",
+          "voiced": 1.395,
+          "rate": 5.7
+        },
+        "splitFrom": "멋진 계획이시네요. 그럼 여행 잘 다녀오시고 건강하시기를 바라겠습니다."
+      },
+      {
+        "id": 39,
+        "track": 59,
+        "who": "여",
+        "ko": "그럼 여행 잘 다녀오시고 건강하시기를 바라겠습니다.",
+        "en": "Then travel well, and I hope you stay in good health.",
+        "syl": 22,
+        "why": "-기를 바라겠습니다 is the formal well-wish, and 건강하시기를 runs five syllables of honorific and nominaliser with nothing to break them up.",
+        "tags": [
+          "V-기를 바라다",
+          "V-(으)시-"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u15-d41.mp3",
+          "voiced": 3.903,
+          "rate": 5.6
+        },
+        "splitFrom": "멋진 계획이시네요. 그럼 여행 잘 다녀오시고 건강하시기를 바라겠습니다."
       }
     ]
   },

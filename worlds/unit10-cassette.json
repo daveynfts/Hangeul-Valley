@@ -310,14 +310,18 @@
       "keep": [
         "a whole sentence someone would actually say",
         "5-24 syllables, the same band Unit 14 settled on",
-        "carries something you can only write correctly if you know something — this chapter's grammar (N 중에(서), 반말, V-(으)ㄹ래요, A-(으)ㄴ데/V-는데), a gap between sound and spelling, or a unit headword"
+        "carries something you can only write correctly if you know something — this chapter's grammar (N 중에(서), 반말, V-(으)ㄹ래요, A-(으)ㄴ데/V-는데), a gap between sound and spelling, or a unit headword",
+        "tracks 08 and 09 joined the set when the 듣기 지문 page arrived: 9 sentences from the 반말 lunch dialogue and 5 from the 존댓말 phone order, which is the same chapter said twice in two registers and is why both are worth writing"
       ],
       "drop": [
         "fixed courtesies and bare acknowledgements — 아니요, 그래?, 좋아, 응, 음",
         "anything under 5 syllables: 식당은 왜, 뭐 먹을래, 맛이 어때, 입에 맞아 all fall here, and the last two are a loss worth naming — 입에 맞다 is a unit headword, but four syllables leaves nothing to decide",
         "a printed line with a numeral read aloud — 감자탕 2인분 주세요. The syllable count cannot be derived from the text, so the pace check that verifies the cut has nothing to measure",
         "three turns of 28-43 syllables whose internal pauses fall mid-clause: 다음 주 토요일이…, 서울식당은 갈비가 유명한데…, and 음, 난 닭고기는… — the last of which also repeats track 06 almost word for word in a different register",
-        "the two tracks with no printed script, 08 and 09"
+        "from track 09, four lines whose numerals are read aloud — the phone number and address, 18,000원 and 30분 — because the syllable count cannot be derived from the text and the pace check that verifies the cut has nothing to measure against",
+        "감사합니다. 피자나라입니다. — two sentences the narrator runs as one span, so it can be neither kept whole (a fixed courtesy and a shop name decide nothing) nor split",
+        "네, 알겠습니다. twice and 모두 얼마지요? — bare acknowledgements at six syllables",
+        "그래, 좋아. at four syllables, under the band"
       ],
       "splitAtClause": "Nine printed turns open with something the row does not want — 아니요, 그래?, 좋아, 응, 음 — or run two sentences together, and in every case the narrator pauses at that boundary, so the split lands on the recording’s own break rather than on the punctuation. Each child names its parent in splitFrom."
     },
@@ -831,6 +835,259 @@
           "voiced": 1.091,
           "rate": 5.5
         }
+      },
+      {
+        "id": 28,
+        "track": 8,
+        "who": "남",
+        "ko": "벌써 두 시야.",
+        "en": "It's two o'clock already.",
+        "syl": 5,
+        "why": "반말 -이야 after a consonant-final noun. 시야 is said as it is written, but the tense is carried by 벌써 alone — there is no verb to hear.",
+        "tags": [
+          "반말"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d28.mp3",
+          "voiced": 0.982,
+          "rate": 5.1
+        },
+        "splitFrom": "벌써 두 시야. 우리 점심 먹자."
+      },
+      {
+        "id": 29,
+        "track": 8,
+        "who": "남",
+        "ko": "우리 점심 먹자.",
+        "en": "Let's have lunch.",
+        "syl": 6,
+        "why": "먹자 is the 반말 propositive, and it is said [먹짜] — the ㅈ tenses after ㄱ. Write what you hear and you get 먹짜.",
+        "tags": [
+          "반말",
+          "경음화 (받침 ㅁ 뒤)"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d29.mp3",
+          "voiced": 1.109,
+          "rate": 5.4
+        },
+        "splitFrom": "벌써 두 시야. 우리 점심 먹자."
+      },
+      {
+        "id": 30,
+        "track": 8,
+        "who": "여",
+        "ko": "아, 벌써 그렇게 됐어?",
+        "en": "Oh, is it that time already?",
+        "syl": 8,
+        "why": "됐어 is 되었어 contracted, and the contraction is what has to be written: 되써 and 됬어 are both what the sound suggests and both wrong.",
+        "tags": [
+          "반말",
+          "되다 → 됐어"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d30.mp3",
+          "voiced": 1.48,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 31,
+        "track": 8,
+        "who": "남",
+        "ko": "그럼 우리 지금 바쁘니까 피자 시켜 먹을까?",
+        "en": "Then shall we order pizza, since we're busy?",
+        "syl": 17,
+        "why": "시켜 is 시키다 before -어, and 먹을까 is said [머글까] — the ㄱ carries over to the next syllable and the ㄲ is tensed.",
+        "tags": [
+          "V-(으)ㄹ까",
+          "시키다 → 시켜"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d31.mp3",
+          "voiced": 3.735,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 32,
+        "track": 8,
+        "who": "남",
+        "ko": "무슨 피자 먹을래?",
+        "en": "What pizza do you want?",
+        "syl": 7,
+        "why": "The chapter's own V-(으)ㄹ래요, in 반말. 먹을래 is said [머글래]: the 받침 ㄱ moves across and the ㄹ assimilates.",
+        "tags": [
+          "V-(으)ㄹ래요",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d32.mp3",
+          "voiced": 1.123,
+          "rate": 6.2
+        }
+      },
+      {
+        "id": 33,
+        "track": 8,
+        "who": "여",
+        "ko": "글쎄, 불고기피자 어때?",
+        "en": "Hmm, how about bulgogi pizza?",
+        "syl": 9,
+        "why": "어때 is 어떻다 with its ㅎ gone before the ending — nothing of it is left to hear, and 어떄 or 어태 are what the ear offers instead.",
+        "tags": [
+          "어떻다 → 어때"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d33.mp3",
+          "voiced": 1.934,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 34,
+        "track": 8,
+        "who": "남",
+        "ko": "난 불고기는 좋아하는데 불고기피자는 별로 안 좋아해.",
+        "en": "I like bulgogi but I don't much like bulgogi pizza.",
+        "syl": 22,
+        "why": "The chapter's V-는데, and 좋아하는데 / 좋아해 are both said with the ㅎ silent between vowels — [조아하는데], [조아해]. The ㅎ has to be written from the verb, not from the sound.",
+        "tags": [
+          "V-는데",
+          "ㅎ 탈락"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d34.mp3",
+          "voiced": 4.786,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 35,
+        "track": 8,
+        "who": "여",
+        "ko": "그럼 치즈피자 시키자.",
+        "en": "Then let's order cheese pizza.",
+        "syl": 9,
+        "why": "시키자, the 반말 propositive again and this time on an open stem, so there is no tensing — the pair with 먹자 is the point.",
+        "tags": [
+          "반말"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d35.mp3",
+          "voiced": 1.827,
+          "rate": 4.9
+        },
+        "splitFrom": "그럼 치즈피자 시키자. 내가 주문할게."
+      },
+      {
+        "id": 36,
+        "track": 8,
+        "who": "여",
+        "ko": "내가 주문할게.",
+        "en": "I'll order.",
+        "syl": 6,
+        "why": "-(으)ㄹ게 is said [ㄹ께] and never written that way. 주문할게 against 주문할께 is the whole exercise.",
+        "tags": [
+          "V-(으)ㄹ게"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d36.mp3",
+          "voiced": 0.975,
+          "rate": 6.2
+        },
+        "splitFrom": "그럼 치즈피자 시키자. 내가 주문할게."
+      },
+      {
+        "id": 37,
+        "track": 9,
+        "who": "손님",
+        "ko": "주문 좀 하려고 하는데요.",
+        "en": "I'd like to place an order.",
+        "syl": 10,
+        "why": "The softening -는데요 that ends a request without finishing it. 하려고 keeps its ㅎ; the 좀 is not 조금 and is not written as it.",
+        "tags": [
+          "V-(으)려고 하다",
+          "-는데요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d37.mp3",
+          "voiced": 1.702,
+          "rate": 5.9
+        }
+      },
+      {
+        "id": 38,
+        "track": 9,
+        "who": "점원",
+        "ko": "주소와 전화번호를 말씀해 주세요.",
+        "en": "Please give me your address and phone number.",
+        "syl": 14,
+        "why": "말씀해 주세요 is two words and sounds like one. 말씀 also tenses to [말씀] with no change, which is the trap: nothing happens here, and learners often write 말쓰메.",
+        "tags": [
+          "N와/과",
+          "V-아/어 주세요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d38.mp3",
+          "voiced": 2.669,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 39,
+        "track": 9,
+        "who": "점원",
+        "ko": "네, 무슨 피자로 하시겠어요?",
+        "en": "Right, which pizza would you like?",
+        "syl": 11,
+        "why": "하시겠어요 is said [하시게써요]: the ㅆ of 겠 carries into the next syllable and the 어 disappears into it.",
+        "tags": [
+          "V-시겠어요",
+          "N(으)로"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d39.mp3",
+          "voiced": 2.15,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 40,
+        "track": 9,
+        "who": "손님",
+        "ko": "치즈피자 큰 거 한 판하고 콜라 한 병 갖다 주세요.",
+        "en": "One large cheese pizza and a bottle of cola, please.",
+        "syl": 19,
+        "why": "Two counters in one breath — 판 for a flat round thing, 병 for a bottle — and 갖다 is 가지다 shortened, not 갔다.",
+        "tags": [
+          "단위 명사",
+          "갖다 주다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d40.mp3",
+          "voiced": 3.65,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 41,
+        "track": 9,
+        "who": "손님",
+        "ko": "그런데 시간이 얼마나 걸리나요?",
+        "en": "By the way, how long will it take?",
+        "syl": 13,
+        "why": "시간이 is said [시가니] and 걸리나요 asks softly where 걸려요 would just ask. The 이 is a particle and stays separate on the page.",
+        "tags": [
+          "V-나요",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u10-d41.mp3",
+          "voiced": 2.512,
+          "rate": 5.2
+        },
+        "splitFrom": "네. 그런데 시간이 얼마나 걸리나요?"
       }
     ]
   }

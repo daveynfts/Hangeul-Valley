@@ -338,8 +338,9 @@ decaying into "no script", and it is why the learner sees a reason rather than a
 
 **A transcript arriving is two steps, not one.** The lines go in and the script pane fills
 immediately — that is the half a reader notices. The dictation rows are the other half and
-need the audio cut per sentence, with the pace check that verifies the alignment. Twenty
-lines each for Units 10 and 15 are readable now and not yet in either dictation set.
+need the audio cut per sentence, with the pace check that verifies the alignment. Both steps
+are done for these four tracks: Unit 10 went 27 → 41 rows and Unit 15 21 → 39, and the cut is
+written up under "Cutting four 듣기 tracks" below.
 
 Two consequences worth knowing before editing this unit:
 
@@ -393,6 +394,53 @@ the five-syllable floor, and 입에 맞다 is a unit headword. They are in
 `dictation.filter.drop` by name, because a drop list that only mentions courtesies reads
 as though nothing of value was left out. The same list records 감자탕 2인분 주세요, dropped
 under the numeral rule from Unit 14.
+
+---
+
+## Cutting four 듣기 tracks, and what the objective caught
+
+The 듣기 지문 pages supplied Unit 10's tracks 08 and 09 and Unit 15's 58 and 59, and cutting
+them ran into the failure this document had already predicted and one it had not.
+
+**All four open the same way.** Three spans — the recorded track number, the section heading,
+the printed instruction — then a gap of about two seconds, twice anything inside the dialogue.
+That boundary is read from the gap list rather than assumed, and it has to be a floor rather
+than a parameter. Left free, the search dropped one span on track 08 instead of three and gave
+line 1 the section heading being read aloud; the spread came out at ±0.53 against the correct
+alignment's ±0.56, so minimising spread alone preferred the wrong answer. Reading the preamble
+from the gap and searching only above it fixes that.
+
+**Track 09 opens on a ring tone**, exactly as track 39 did — two spans of it, above the floor
+and indistinguishable from speech by amplitude. The search found them: five leading spans
+dropped, and line 1 went from 2.08 syl/s to 5.08.
+
+**A numeral is unmeasurable in one direction only**, which is the new part. 사십 is two
+syllables the printed 40 does not show, so the printed count always understates what was said
+and the computed rate can only be lower than the truth. A numeral line whose computed rate is
+already above the track's pace has therefore been given too few spans — track 59 line 2 came
+out at 14.6 against a pace of 4.1 before that constraint existed. Excluding numerals from the
+objective without also constraining them is what let a wrong partition hide behind them.
+
+**The gap heuristic still worked on one of the four.** Track 08's two kinds of pause separate
+cleanly — 0.39-0.79s within a turn, 1.00-1.21s between — and grouping at 0.90s gives eight
+turns for eight printed lines, the same answer the pace search reaches. Where both methods
+agree, that agreement is worth more than either alone.
+
+**The splitter refused one row and it was right to.** Track 59's sixth turn is three printed
+sentences over four spans, and every partition of it lands at 2.4 and 12.3 syl/s against a
+track pace of 5.2. The narrator ran them together; there is no pause to cut on. A split is
+accepted only when every part the pace can measure lands inside the track's own band, which is
+the rule that turned that row into a drop rather than into three bad clips.
+
+**The band moved by one syllable, and the reason is written down.** Unit 15 shipped at 7-24.
+Both sentences carrying this chapter's own grammar — 달라졌어요 for A-아지다/어지다 and 졸업한
+후에 for V-(으)ㄴ 후에 — land at exactly 25. A cap that excludes the grammar it was drawn
+around is the wrong cap, so the band is 7-25 and the invariant, the filter and this paragraph
+all say so.
+
+Thirty-two clips, 831 KB, 26 KB each, reading at 5.21 ±0.50 syl/s across all four tracks.
+Every clip's duration matches voiced + 0.12 + 0.15 + 0.18 × (spans − 1) exactly, which is the
+same arithmetic the Unit 13 clips were cut with.
 
 ---
 

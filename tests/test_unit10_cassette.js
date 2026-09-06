@@ -113,7 +113,7 @@ assert(badLine.length === 0, 'every printed line has a speaker slot and Korean'
 
 // ── 3. The curated set ───────────────────────────────────────────────────────
 console.log('\n--- 3. The curated set ---');
-assert(items.length === 27, '27 dictation sentences (found ' + items.length + ')');
+assert(items.length === 41, '41 dictation sentences (found ' + items.length + ')');
 const filter = (cass.dictation && cass.dictation.filter) || {};
 assert(Array.isArray(filter.keep) && filter.keep.length >= 3
   && Array.isArray(filter.drop) && filter.drop.length >= 3,
@@ -142,7 +142,7 @@ assert(fromSilent.length === 0, 'no sentence is drawn from a listen-only track'
   + (fromSilent.length ? ' — id ' + fromSilent.join(',') : ''));
 // A split row makes a claim about the turn it came out of, and the claim is checkable.
 const splits = items.filter((i) => i.splitFrom);
-assert(splits.length === 9, 'nine rows are pieces of a longer printed turn (found ' + splits.length + ')');
+assert(splits.length === 14, 'fourteen rows are pieces of a longer printed turn (found ' + splits.length + ')');
 const liars = splits.filter((i) => nfc(i.splitFrom).indexOf(nfc(i.ko)) < 0).map((i) => i.id);
 assert(liars.length === 0, 'and each really is a substring of the turn it names'
   + (liars.length ? ' — id ' + liars.join(',') : ''));
@@ -208,12 +208,12 @@ assert(new Set(items.map((i) => i.audio.src)).size === items.length, 'no two sen
 const onDisk = fs.readdirSync(path.join(ROOT, 'audio', 'book'));
 assert(onDisk.filter((f) => f.indexOf('2b-u10-trk') === 0).length === 10,
   'ten whole-track files on disk and no more');
-assert(onDisk.filter((f) => /^2b-u10-d\d\d\.mp3$/.test(f)).length === 27,
-  'twenty-seven dictation clips on disk and no more');
+assert(onDisk.filter((f) => /^2b-u10-d\d\d\.mp3$/.test(f)).length === 41,
+  'forty-one dictation clips on disk and no more');
 // The pace bands, per track. These are the numbers the cut was verified at; a re-cut at the
 // wrong silence threshold or the wrong turn gap lands outside them.
 const BAND = { 2: [4.2, 4.8], 3: [4.7, 5.0], 4: [4.5, 6.1], 5: [4.2, 4.3],
-  6: [4.8, 5.1], 7: [4.2, 5.7], 10: [4.3, 4.4], 11: [4.5, 5.5] };
+  6: [4.8, 5.1], 7: [4.2, 5.7], 8: [4.5, 6.3], 9: [5.1, 5.9], 10: [4.3, 4.4], 11: [4.5, 5.5] };
 const byTrack = {};
 items.forEach((i) => {
   const rate = syl(i.ko) / i.audio.voiced;

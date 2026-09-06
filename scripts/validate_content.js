@@ -928,9 +928,15 @@ const overlayIds = [
   }).map((i) => i.id + ' (' + (i.syl / i.audio.voiced).toFixed(1) + '/s)');
   check('and a length that matches the words it claims to hold',
     off.length === 0, off.slice(0, 5).join(', '));
-  const long = items.filter((i) => i.syl > 24 || i.syl < 7).map((i) => i.id + ':' + i.syl);
-  check('every line is between 7 and 24 syllables, as the filter says',
+  // 25 rather than 24, one syllable wider than the set shipped at. Both sentences carrying
+  // this chapter's own grammar — 달라졌어요 for A-아지다/어지다 and 졸업한 후에 for V-(으)ㄴ 후에
+  // — land at exactly 25, and a cap that excludes the grammar it was drawn around is the
+  // wrong cap. The band is still a band; it is the filter that has to agree with it.
+  const long = items.filter((i) => i.syl > 25 || i.syl < 7).map((i) => i.id + ':' + i.syl);
+  check('every line is between 7 and 25 syllables, as the filter says',
     long.length === 0, long.join(', '));
+  check('and the filter says so too',
+    (((c.dictation || {}).filter || {}).keep || []).some((k) => /7-25/.test(k)));
   const ids = items.map((i) => i.id);
   check('and the ids run without a gap or a repeat',
     ids.join(',') === ids.map((_, k) => k + 1).join(','));
