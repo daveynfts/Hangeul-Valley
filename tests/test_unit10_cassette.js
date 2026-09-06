@@ -80,16 +80,23 @@ assert(tracks.every((t) => typeof t.dur === 'number' && t.dur > 0), 'and each re
 assert(tracks.every((t) => !!t.sec && !!t.secEn), 'each says which section of the book it is');
 const scriptedTracks = tracks.filter((t) => Array.isArray(t.lines));
 const silent = tracks.filter((t) => !Array.isArray(t.lines));
-assert(scriptedTracks.length === 8, 'eight tracks carry a script (' + scriptedTracks.map((t) => t.n).join(',') + ')');
-assert(silent.map((t) => t.n).join(',') === '8,9',
-  'and the two without one are 08 and 09, the 듣기 pages whose transcript is at the back of the book');
-assert(silent.every((t) => typeof t.noteEn === 'string' && t.noteEn.length > 20),
-  'each listen-only track says why it has no script rather than going blank');
-assert(scriptedTracks.every((t) => !t.noteEn), 'and a scripted track does not carry that note');
-assert(typeof cass.listenOnly === 'string' && cass.listenOnly.length > 20,
-  'the bank as a whole explains the two silent tracks');
+// Tracks 08 and 09 shipped listen-only, waiting on the 듣기 지문 pages at the back of the
+// book. Those pages arrived — p.36 — so every track on this tape now carries its script and
+// the bank has nothing left to explain.
+assert(scriptedTracks.length === 10, 'all ten tracks carry a script (' + scriptedTracks.map((t) => t.n).join(',') + ')');
+assert(silent.length === 0,
+  'and none is listen-only any more (' + silent.map((t) => t.n).join(',') + ')');
+assert(scriptedTracks.every((t) => !t.noteEn),
+  'a scripted track does not carry the note that explains an empty pane');
+assert(cass.listenOnly === undefined,
+  'and the bank drops the note about silent tracks rather than keeping one that describes none');
 const lineCount = scriptedTracks.reduce((s, t) => s + t.lines.length, 0);
-assert(lineCount === 32, 'the eight scripts hold 32 printed lines (found ' + lineCount + ')');
+assert(lineCount === 52, 'the ten scripts hold 52 printed lines (found ' + lineCount + ')');
+// The two 듣기 pages are the ones that just arrived: a lunch order between friends and a
+// phone order to a pizza shop.
+assert(scriptedTracks.find((t) => t.n === 8).lines.length === 8
+  && scriptedTracks.find((t) => t.n === 9).lines.length === 12,
+  'the two 듣기 conversations are 8 and 12 turns');
 // The two 말하기 pages are the long ones; the 문법과 표현 boxes are two lines each.
 assert(scriptedTracks.find((t) => t.n === 4).lines.length === 8
   && scriptedTracks.find((t) => t.n === 7).lines.length === 9,

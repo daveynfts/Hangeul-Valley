@@ -894,16 +894,19 @@ const overlayIds = [
 
   const scripted = tracks.filter((t) => (t.lines || []).length);
   const silent = tracks.filter((t) => !(t.lines || []).length);
-  check('seven Unit 15 tracks carry their printed script',
-    scripted.length === 7, String(scripted.length));
-  // 57, 58 and 59 have no Korean here — 말하기 2's page was not photographed and the two
-  // 듣기 transcripts live on the 듣기 지문 pages. A track with no script has to say so on
-  // screen rather than open an empty pane.
-  check('and the three without one explain why, on the track itself',
-    silent.length === 3 && silent.every((t) => String(t.noteEn || '').length > 40),
+  // Was seven-and-three; the 듣기 지문 pages at the back arrived (p.148) and moved 58 and 59
+  // across, the same pages that had already settled Units 11, 13 and 14. This count is a
+  // description and not a pin — 57 moves too when its 말하기 2 page turns up.
+  check('nine Unit 15 tracks carry their printed script',
+    scripted.length === 9, String(scripted.length));
+  // 57 has no Korean here: 말하기 2's page was not among the photographs of this chapter and
+  // the 번역 page gives it in English only. A track with no script has to say so on screen
+  // rather than open an empty pane, and that is the rule that must not be relaxed.
+  check('and the one without one explains why, on the track itself',
+    silent.length === 1 && silent.every((t) => String(t.noteEn || '').length > 40),
     silent.map((t) => t.n).join(','));
   check('no dictation line is drawn from a track with no script',
-    ((c.dictation || {}).items || []).every((i) => [57, 58, 59].indexOf(i.track) < 0));
+    ((c.dictation || {}).items || []).every((i) => silent.map((t) => t.n).indexOf(i.track) < 0));
 
   const items = (c.dictation || {}).items || [];
   check('the Unit 15 dictation set is worth sitting down to', items.length >= 20,

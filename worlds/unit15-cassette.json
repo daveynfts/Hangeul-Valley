@@ -129,7 +129,48 @@
       "secEn": "What did you want to be when you were small?",
       "dur": 70.5,
       "src": "audio/book/2b-u15-trk58.mp3",
-      "noteEn": "A listening exercise: its transcript lives on the 듣기 지문 pages at the back of the book, which have not been supplied. The tape plays; the dictation set waits."
+      "lines": [
+        {
+          "who": "여",
+          "ko": "샤오밍 씨는 어렸을 때 꿈이 뭐였어요?"
+        },
+        {
+          "who": "남",
+          "ko": "저는 어렸을 때 농구 선수가 되고 싶었어요."
+        },
+        {
+          "who": "여",
+          "ko": "그래요? 그런데 왜 농구를 계속 안 했어요?"
+        },
+        {
+          "who": "남",
+          "ko": "중학생 때 다리를 다쳐서 농구를 그만두게 되었어요. 유진 씨는 어렸을 때 꿈이 뭐였어요?"
+        },
+        {
+          "who": "여",
+          "ko": "어렸을 때는 선생님이 되고 싶었는데 지금은 꿈이 달라졌어요."
+        },
+        {
+          "who": "남",
+          "ko": "그럼 지금은 꿈이 뭐예요?"
+        },
+        {
+          "who": "여",
+          "ko": "좋은 변호사가 돼서 힘든 사람들을 도와주고 싶어요."
+        },
+        {
+          "who": "남",
+          "ko": "저는 대학교를 졸업한 후에 뭘 해야 할지 아직 결정을 못 했어요."
+        },
+        {
+          "who": "여",
+          "ko": "샤오밍 씨는 공부하는 걸 좋아하니까 대학원에 가면 어때요?"
+        },
+        {
+          "who": "남",
+          "ko": "공부하는 것도 좋은데 대학원에 들어가기 전에 일을 해 보고 싶어서요."
+        }
+      ]
     },
     {
       "n": 59,
@@ -137,7 +178,48 @@
       "secEn": "An interview about life after retirement",
       "dur": 104.4,
       "src": "audio/book/2b-u15-trk59.mp3",
-      "noteEn": "The same — 듣기 2 is on the tape in full, and its sentences join the dictation set when the 듣기 지문 page arrives."
+      "lines": [
+        {
+          "who": "여",
+          "ko": "오늘은 다음 달에 은퇴하시는 김정민 씨를 모시고 이야기를 나누어 보겠습니다. 몇 년 동안 이 회사에서 일하셨습니까?"
+        },
+        {
+          "who": "남",
+          "ko": "고등학교 졸업한 후에 바로 일하기 시작했으니까 벌써 40년이 되었네요. 시간이 정말 빨리 지난 것 같습니다."
+        },
+        {
+          "who": "여",
+          "ko": "처음 회사에 들어오셨을 때와 지금 회사가 많이 달라졌지요?"
+        },
+        {
+          "who": "남",
+          "ko": "네, 그때는 직원이 다섯 명밖에 없는 작은 회사여서 모두 가족같이 지냈습니다. 지금은 300명이 넘는 큰 회사가 되었습니다. 정말 많이 발전했지요."
+        },
+        {
+          "who": "여",
+          "ko": "다른 분들보다 승진을 빨리 하신 편인데 특별한 방법이 있습니까?"
+        },
+        {
+          "who": "남",
+          "ko": "글쎄요. 특별한 방법은 없고요. 회사가 잘되는 것을 보면 저도 발전하는 것 같아서 그냥 열심히 한 것밖에 없습니다."
+        },
+        {
+          "who": "여",
+          "ko": "네, 은퇴하신 후에 어떤 계획이 있으세요?"
+        },
+        {
+          "who": "남",
+          "ko": "일을 하는 동안 너무 바빠서 아내와 시간을 많이 보내지 못했습니다. 그래서 은퇴 후에 아내와 같이 여행을 많이 하기로 했습니다. 여행을 다녀온 후에는 봉사 활동을 하려고 합니다."
+        },
+        {
+          "who": "여",
+          "ko": "멋진 계획이시네요. 그럼 여행 잘 다녀오시고 건강하시기를 바라겠습니다."
+        },
+        {
+          "who": "남",
+          "ko": "네, 감사합니다."
+        }
+      ]
     },
     {
       "n": 60,
@@ -583,5 +665,5 @@
       }
     ]
   },
-  "listenOnly": "Tracks 57, 58 and 59 play in full but draw no dictation. 말하기 2’s Korean page was not among the photographs of this chapter and the 번역 page gives it in English only; 듣기 1 and 듣기 2 are listening exercises whose transcripts live on the 듣기 지문 pages at the back of the book. All three join the dictation set when their text arrives."
+  "listenOnly": "Track 57 is the only one left without a script: 말하기 2’s Korean page was not among the photographs of this chapter and the 번역 page gives it in English only, so no dictation sentence can be drawn from it yet. Tracks 58 and 59 were listen-only until the 듣기 지문 pages at the back of the book supplied their transcripts."
 }

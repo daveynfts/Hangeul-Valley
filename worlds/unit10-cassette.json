@@ -166,7 +166,40 @@
       "secEn": "Choosing from a menu",
       "dur": 41.9,
       "src": "audio/book/2b-u10-trk08.mp3",
-      "noteEn": "The unit page prints the three comprehension statements, not the conversation itself. The 듣기 지문 at the back of the book carries the transcript; until it is in, this is listen-only."
+      "lines": [
+        {
+          "who": "남",
+          "ko": "벌써 두 시야. 우리 점심 먹자."
+        },
+        {
+          "who": "여",
+          "ko": "아, 벌써 그렇게 됐어?"
+        },
+        {
+          "who": "남",
+          "ko": "그럼 우리 지금 바쁘니까 피자 시켜 먹을까?"
+        },
+        {
+          "who": "여",
+          "ko": "그래, 좋아."
+        },
+        {
+          "who": "남",
+          "ko": "무슨 피자 먹을래?"
+        },
+        {
+          "who": "여",
+          "ko": "글쎄, 불고기피자 어때?"
+        },
+        {
+          "who": "남",
+          "ko": "난 불고기는 좋아하는데 불고기피자는 별로 안 좋아해."
+        },
+        {
+          "who": "여",
+          "ko": "그럼 치즈피자 시키자. 내가 주문할게."
+        }
+      ]
     },
     {
       "n": 9,
@@ -174,7 +207,56 @@
       "secEn": "Ordering food on the phone",
       "dur": 62.5,
       "src": "audio/book/2b-u10-trk09.mp3",
-      "noteEn": "Same as track 08: the page asks what was ordered and what it cost but does not print the words. Waiting on the 듣기 지문 page."
+      "lines": [
+        {
+          "who": "점원",
+          "ko": "감사합니다. 피자나라입니다."
+        },
+        {
+          "who": "손님",
+          "ko": "주문 좀 하려고 하는데요."
+        },
+        {
+          "who": "점원",
+          "ko": "주소와 전화번호를 말씀해 주세요."
+        },
+        {
+          "who": "손님",
+          "ko": "전화번호는 880-5488이고, 주소는 서울아파트 103동 808호예요."
+        },
+        {
+          "who": "점원",
+          "ko": "네, 무슨 피자로 하시겠어요?"
+        },
+        {
+          "who": "손님",
+          "ko": "치즈피자 큰 거 한 판하고 콜라 한 병 갖다 주세요."
+        },
+        {
+          "who": "점원",
+          "ko": "네, 알겠습니다."
+        },
+        {
+          "who": "손님",
+          "ko": "모두 얼마지요?"
+        },
+        {
+          "who": "점원",
+          "ko": "모두 18,000원입니다."
+        },
+        {
+          "who": "손님",
+          "ko": "네. 그런데 시간이 얼마나 걸리나요?"
+        },
+        {
+          "who": "점원",
+          "ko": "30분쯤 걸립니다."
+        },
+        {
+          "who": "손님",
+          "ko": "네, 알겠습니다."
+        }
+      ]
     },
     {
       "n": 10,
@@ -751,6 +833,5 @@
         }
       }
     ]
-  },
-  "listenOnly": "Tracks 08 and 09 have no printed script. The pane says so rather than going blank, and no dictation sentence is drawn from them."
+  }
 }

@@ -312,24 +312,34 @@ is what keeps a later unit's clips consistent with the earlier ones.
 
 ## Unit 15, and the difference between silent and not yet scripted
 
-Tracks 52-61. Three of the ten ship listen-only, the largest share of any unit here, and the
-reason is not Unit 14's reason.
+Tracks 52-61. Three of the ten shipped listen-only, the largest share of any unit here, and
+the reason is not Unit 14's reason. **One is left.** The 듣기 지문 pages arrived — p.148 —
+and moved 58 and 59 across, twenty printed lines between them: a conversation about what two
+students wanted to be as children, and an interview with a man retiring after forty years.
+Track 57 is still waiting on its own page, and the paragraph below is why that distinction
+was worth writing down in the first place.
 
 Unit 14's track 47 is silent **permanently**: the conversation is drawn on the unit page and
 the 번역 page gives it in English, so the Korean was never printed anywhere and no dictation
 answer could ever be checked against it. The count is pinned at nine-and-one because it will
 always be nine-and-one.
 
-Unit 15's three are silent **pending a page**. Track 57 (말하기 2) needs the Korean 말하기 2
-page; tracks 58 and 59 (듣기 1 and 듣기 2) need the 듣기 지문 pages at the back, the same
-pages that supplied Units 11, 13 and 14. All three conversations are on the tape in full and
-already play. Each page that arrives moves one or two tracks across, in whatever order the
-pages turn up.
+Unit 15's were silent **pending a page**, which is a different thing, and the difference has
+now shown itself. Tracks 58 and 59 (듣기 1 and 듣기 2) needed the 듣기 지문 pages at the back,
+the same pages that supplied Units 11, 13 and 14; those arrived and both moved across. Track
+57 (말하기 2) needs the Korean 말하기 2 page and is still waiting. All three conversations
+were on the tape in full the whole time and played.
 
-So the seven-and-three in the invariants is a **description, not a pin**. Changing it is
-expected; the check beside it is the one that must not be relaxed — every scriptless track
-carries a `noteEn` saying which page it is waiting for. That is what stops "no script yet"
-from decaying into "no script", and it is why the learner sees a reason rather than a gap.
+So the count in the invariants is a **description, not a pin**. It has already gone from
+seven-and-three to nine-and-one, and it will go to ten-and-nothing. Changing it is expected;
+the check beside it is the one that must not be relaxed — every scriptless track carries a
+`noteEn` saying which page it is waiting for. That is what stops "no script yet" from
+decaying into "no script", and it is why the learner sees a reason rather than a gap.
+
+**A transcript arriving is two steps, not one.** The lines go in and the script pane fills
+immediately — that is the half a reader notices. The dictation rows are the other half and
+need the audio cut per sentence, with the pace check that verifies the alignment. Twenty
+lines each for Units 10 and 15 are readable now and not yet in either dictation set.
 
 Two consequences worth knowing before editing this unit:
 
@@ -343,8 +353,15 @@ Two consequences worth knowing before editing this unit:
 
 ## Unit 10, and a unit whose 발음 page leaves no trace
 
-Tracks 02-11: eight scripted, two listen-only (08 and 09, the 듣기 pages, waiting on the
-듣기 지문 like every other unit's), thirty-two printed lines, twenty-seven dictation rows.
+Tracks 02-11: **all ten scripted**, fifty-two printed lines, twenty-seven dictation rows.
+Tracks 08 and 09 shipped listen-only, waiting on the 듣기 지문 like every other unit's; the
+page arrived — p.36 — and carried both. 듣기 1 is eight turns of two friends deciding on
+pizza, 듣기 2 is a twelve-turn phone order. The bank no longer carries a `listenOnly` note,
+because there is nothing left for it to explain.
+
+The twenty-seven dictation rows are still drawn from the eight originally scripted tracks:
+these twenty new lines are readable and playable but not yet cut into clips, so they are on
+the tape and out of the set until the audio is cut.
 The cut itself was uneventful — the Unit 13 silencedetect settings held again, and the
 clips read at 4.23-6.04 syl/s with nothing flagged. One thing about the *set* is new.
 
