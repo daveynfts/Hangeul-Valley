@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;700;900&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/game.css?v=20260906-a11y-v1" />
+  <link rel="stylesheet" href="css/game.css?v=20260906-listen-v1" />
 </head>
-<body data-ui-release="20260906-a11y-v1">
+<body data-ui-release="20260906-listen-v1">
 
   <!-- ══════════════ LEVEL SELECT ═════════════════════════════════ -->
   <div id="level-select-overlay" role="dialog" aria-modal="true" aria-labelledby="ls-title">
@@ -879,7 +879,7 @@
           <div id="listen-title">듣기 연습</div>
           <div id="listen-context"></div>
         </div>
-        <button type="button" class="cs-x cs-back" onclick="closeListen()" aria-label="Back to the cassette player" data-i18n-aria-label="ui.listen.panel.backToTheCassette.aria">← 메뉴</button>
+        <button type="button" class="cs-x cs-back" onclick="closeListen()" aria-label="Back to the cassette player" data-i18n-aria-label="ui.listen.panel.backToTheCassette.aria" data-i18n="ui.cs.back.menu">← Menu</button>
       </div>
       <div id="listen-body">
         <aside id="listen-tracknav">
@@ -899,7 +899,7 @@
               <span id="listen-now-en"></span>
             </div>
             <button type="button" id="listen-script-toggle" class="cs-script-toggle"
-                    onclick="listenToggleScript()" aria-pressed="false">대본 숨기기</button>
+                    onclick="listenToggleScript()" aria-pressed="false" data-i18n="ui.listen.script.hide">Hide script</button>
           </div>
           <div id="listen-transport">
             <div class="cs-main-controls" aria-label="Playback controls" data-i18n-aria-label="ui.listen.transport.playbackControls.aria">
@@ -923,16 +923,16 @@
                     aria-label="Waveform — click to seek, drag to mark a loop" data-i18n-aria-label="ui.listen.wave.aria"></canvas>
             <div id="listen-loopbar">
               <button type="button" id="listen-loop" class="cs-lb" onclick="listenToggleLoop()"
-                      aria-label="Repeat the whole track" data-i18n-aria-label="ui.listen.loop.aria">↻ 전체 반복</button>
+                      aria-label="Repeat the whole track" data-i18n-aria-label="ui.listen.loop.aria" data-i18n="ui.listen.loop.btn">↻ Loop all</button>
               <span class="cs-lbsep"></span>
               <button type="button" id="listen-seta" class="cs-lb" onclick="listenSetA()"
-                      aria-label="Mark the start of the loop" data-i18n-aria-label="ui.listen.seta.aria">A 시작</button>
+                      aria-label="Mark the start of the loop" data-i18n-aria-label="ui.listen.seta.aria" data-i18n="ui.listen.seta.btn">A start</button>
               <button type="button" id="listen-setb" class="cs-lb" onclick="listenSetB()"
-                      aria-label="Mark the end of the loop" data-i18n-aria-label="ui.listen.setb.aria">B 끝</button>
+                      aria-label="Mark the end of the loop" data-i18n-aria-label="ui.listen.setb.aria" data-i18n="ui.listen.setb.btn">B end</button>
               <button type="button" id="listen-abplay" class="cs-lb" onclick="listenReplayAB()"
-                      aria-label="Play the marked section from its start" data-i18n-aria-label="ui.listen.abplay.aria">↺ 구간 재생</button>
+                      aria-label="Play the marked section from its start" data-i18n-aria-label="ui.listen.abplay.aria" data-i18n="ui.listen.abplay.btn">↺ Play A–B</button>
               <button type="button" id="listen-abclear" class="cs-lb" onclick="listenClearAB()"
-                      aria-label="Clear the marked section" data-i18n-aria-label="ui.listen.abclear.aria">지우기</button>
+                      aria-label="Clear the marked section" data-i18n-aria-label="ui.listen.abclear.aria" data-i18n="ui.listen.abclear.btn">Clear</button>
               <span id="listen-abinfo"></span>
             </div>
             <div class="cs-hotkeys" data-i18n="ui.listen.waverow.space2">Space 재생 · ← → 2초 이동 · ↑ ↓ 트랙 · 파형을 드래그하면 구간 반복</div>
@@ -954,7 +954,7 @@
         </div>
         <div class="cs-headright">
           <span id="dict-pos"></span><span id="dict-log"></span>
-          <button type="button" class="cs-x cs-back" onclick="closeDictation()" aria-label="Back to the cassette player" data-i18n-aria-label="ui.dictation.panel.backToTheCassette.aria">← 메뉴</button>
+          <button type="button" class="cs-x cs-back" onclick="closeDictation()" aria-label="Back to the cassette player" data-i18n-aria-label="ui.dictation.panel.backToTheCassette.aria" data-i18n="ui.cs.back.menu">← Menu</button>
         </div>
       </div>
       <div id="dict-body">
@@ -962,7 +962,7 @@
         <div id="dict-transport">
           <button type="button" class="cs-skip" onclick="dictPrev()" aria-label="Previous sentence" data-i18n-aria-label="ui.dict.transport.previousSentence.aria">‹</button>
           <button type="button" id="dict-play" class="cs-play big cs-play-primary" onclick="dictPlay()" aria-label="Play the sentence" data-i18n-aria-label="ui.dict.play.aria">▶</button>
-          <button type="button" class="cs-again" onclick="dictPlay()">↻ 문장 다시</button>
+          <button type="button" class="cs-again" onclick="dictPlay()" data-i18n="ui.dict.again.btn">↻ Sentence again</button>
           <div id="dict-rates">
             <button type="button" class="cs-rate on" data-rate="1" onclick="dictPlay(1)">1.0×</button>
             <button type="button" class="cs-rate" data-rate="0.75" onclick="dictPlay(0.75)">0.75×</button>
@@ -975,7 +975,7 @@
                   aria-label="Waveform — click to seek, drag to mark a loop" data-i18n-aria-label="ui.dict.wave.aria"></canvas>
           <div id="dict-loopbar">
             <button type="button" id="dict-loop" class="cs-lb" onclick="dictToggleLoop()"
-                    aria-label="Repeat the sentence" data-i18n-aria-label="ui.dict.loop.aria">↻ 반복</button>
+                    aria-label="Repeat the sentence" data-i18n-aria-label="ui.dict.loop.aria" data-i18n="ui.dict.loop.btn">↻ Repeat</button>
             <span class="cs-lbsep"></span>
             <button type="button" id="dict-seta" class="cs-lb" onclick="dictSetA()"
                     aria-label="Mark the start of the loop" data-i18n-aria-label="ui.dict.seta.aria">A</button>
@@ -988,8 +988,8 @@
           </div>
         </div>
         <div id="dict-inputrow">
-          <input id="dict-input" type="text" autocomplete="off" spellcheck="false" placeholder="들리는 대로 쓰세요">
-          <button type="button" id="dict-check">확인</button>
+          <input id="dict-input" type="text" autocomplete="off" spellcheck="false" placeholder="Write what you hear" data-i18n-placeholder="ui.dict.input.placeholder">
+          <button type="button" id="dict-check" data-i18n="ui.dict.check.btn">Check</button>
         </div>
         <div class="cs-input-help" data-i18n="ui.dict.body.tabEnterReplayWith">Tab으로 다시 듣고 Enter로 확인 · Replay with Tab, check with Enter</div>
         <div id="dict-result" class="cs-result"></div>
@@ -1123,36 +1123,36 @@
   <script src="vendor/phaser-3.70.0.min.js"></script>
   <!-- Interface language. Loaded before everything: js/i18n.js decides which language the
        page is in, and the level select paints synchronously from these tags. -->
-  <script src="js/i18n.js?v=20260906-a11y-v1"></script>
-  <script src="js/locales/en.js?v=20260906-a11y-v1"></script>
-  <script src="js/locales/vi.js?v=20260906-a11y-v1"></script>
-  <script src="js/locales/catalogs.js?v=20260906-a11y-v1"></script>
-  <script src="js/state.js?v=20260906-a11y-v1"></script>
-  <script src="js/audio.js?v=20260906-a11y-v1"></script>
-  <script src="js/systems/music.js?v=20260906-a11y-v1"></script>
-  <script src="js/renderer.js?v=20260906-a11y-v1"></script>
-  <script src="js/systems/srs.js?v=20260906-a11y-v1"></script>
-  <script src="js/systems/save.js?v=20260906-a11y-v1"></script>
-  <script src="js/systems/economy.js?v=20260906-a11y-v1"></script>
-  <script src="js/vocabArt.js?v=20260906-a11y-v1"></script>
-  <script src="js/vocabArtUnit14.js?v=20260906-a11y-v1"></script>
-  <script src="js/vocabArtMore.js?v=20260906-a11y-v1"></script>
-  <script src="js/hudArt.js?v=20260906-a11y-v1"></script>
-  <script src="js/trophyArt.js?v=20260906-a11y-v1"></script>
-  <script src="js/workbookArt.js?v=20260906-a11y-v1"></script>
-  <script src="js/vocabStudy.js?v=20260906-a11y-v1"></script>
-  <script src="js/data.js?v=20260906-a11y-v1"></script>
-  <script src="js/ui.js?v=20260906-a11y-v1"></script>
-  <script src="js/systems/atmosphere.js?v=20260906-a11y-v1"></script>
-  <script src="js/skins.js?v=20260906-a11y-v1"></script>
-  <script src="js/systems/pointer.js?v=20260906-a11y-v1"></script>
-  <script src="js/scenes/farm.js?v=20260906-a11y-v1"></script>
-  <script src="js/scenes/arcade.js?v=20260906-a11y-v1"></script>
-  <script src="js/scenes/dungeon.js?v=20260906-a11y-v1"></script>
-  <script src="js/scenes/fishing.js?v=20260906-a11y-v1"></script>
-  <script src="js/scenes/bee.js?v=20260906-a11y-v1"></script>
-  <script src="js/overlays.js?v=20260906-a11y-v1"></script>
-  <script src="js/boot.js?v=20260906-a11y-v1"></script>
+  <script src="js/i18n.js?v=20260906-listen-v1"></script>
+  <script src="js/locales/en.js?v=20260906-listen-v1"></script>
+  <script src="js/locales/vi.js?v=20260906-listen-v1"></script>
+  <script src="js/locales/catalogs.js?v=20260906-listen-v1"></script>
+  <script src="js/state.js?v=20260906-listen-v1"></script>
+  <script src="js/audio.js?v=20260906-listen-v1"></script>
+  <script src="js/systems/music.js?v=20260906-listen-v1"></script>
+  <script src="js/renderer.js?v=20260906-listen-v1"></script>
+  <script src="js/systems/srs.js?v=20260906-listen-v1"></script>
+  <script src="js/systems/save.js?v=20260906-listen-v1"></script>
+  <script src="js/systems/economy.js?v=20260906-listen-v1"></script>
+  <script src="js/vocabArt.js?v=20260906-listen-v1"></script>
+  <script src="js/vocabArtUnit14.js?v=20260906-listen-v1"></script>
+  <script src="js/vocabArtMore.js?v=20260906-listen-v1"></script>
+  <script src="js/hudArt.js?v=20260906-listen-v1"></script>
+  <script src="js/trophyArt.js?v=20260906-listen-v1"></script>
+  <script src="js/workbookArt.js?v=20260906-listen-v1"></script>
+  <script src="js/vocabStudy.js?v=20260906-listen-v1"></script>
+  <script src="js/data.js?v=20260906-listen-v1"></script>
+  <script src="js/ui.js?v=20260906-listen-v1"></script>
+  <script src="js/systems/atmosphere.js?v=20260906-listen-v1"></script>
+  <script src="js/skins.js?v=20260906-listen-v1"></script>
+  <script src="js/systems/pointer.js?v=20260906-listen-v1"></script>
+  <script src="js/scenes/farm.js?v=20260906-listen-v1"></script>
+  <script src="js/scenes/arcade.js?v=20260906-listen-v1"></script>
+  <script src="js/scenes/dungeon.js?v=20260906-listen-v1"></script>
+  <script src="js/scenes/fishing.js?v=20260906-listen-v1"></script>
+  <script src="js/scenes/bee.js?v=20260906-listen-v1"></script>
+  <script src="js/overlays.js?v=20260906-listen-v1"></script>
+  <script src="js/boot.js?v=20260906-listen-v1"></script>
 </body>
 
 </html>

@@ -3699,7 +3699,10 @@ function renderListen() {
   const heading = $('listen-title');
   if (heading) heading.textContent = (bank.titleKo || '카세트') + ' · 듣기';
   const context = $('listen-context');
-  if (context) context.textContent = (bank.unitKo || '') + ' · 이어서 듣는 위치와 속도를 자동으로 기억합니다';
+  // The unit's Korean name, then what the screen promises — in the reader's language. The
+  // promise is worth making: it is why closing the panel mid-track is safe, and it was
+  // written in Korean under a Korean title, where a beginner would read neither.
+  if (context) context.textContent = (bank.unitKo || '') + ' · ' + hvT('ui.listen.context.remembers');
 
   const query = String(st.query || '').toLowerCase();
   const visible = tracks.map((t, i) => ({ t: t, i: i })).filter((row) => {
@@ -3771,8 +3774,13 @@ function renderListen() {
     info.classList.toggle('on', !!range);
     // csWaveLabel also reports WAVEFORM… / NO WAVEFORM, which is half the point: a strip
     // still decoding says so in words rather than looking like a waveform that came out flat.
-    info.textContent = csWaveLabel('listen-wave')
-      + (range || halfMark ? '' : ' · ' + hvT('ui.listen.wave.dragPhrase'));
+    //
+    // It used to have "drag a phrase to loop" appended under exactly the condition where the
+    // label it returns is already "drag to loop", so the instruction printed twice — and a
+    // third time in the keyboard row underneath, which also says to drag on the waveform. The
+    // dictation screen calls the same function and never appended, which is the version that
+    // reads right. Said once here too.
+    info.textContent = csWaveLabel('listen-wave');
   }
   csWaveBind('listen-wave');
   csPaintWave('listen-wave');
@@ -3795,14 +3803,18 @@ function renderListen() {
         + '<span class="cs-none-en">' + vbEsc(tr(cur, 'noteEn') || '') + '</span></div>';
     }
     if (!st.showScript) {
+      // The Korean headline stays — this is a Korean cassette deck and that is the flavour.
+      // The instruction under it does not: it is the one line telling a learner how the
+      // screen is meant to be used, and it was written only in the language they came here
+      // to learn. Two sentences of advice on listening first are no use in Korean to someone
+      // on Unit 10.
       pane.innerHTML += '<div class="cs-script-cover"><b>대본을 가렸습니다.</b><br>'
-        + '먼저 소리에 집중하고, 막히면 위의 “대본 보기”를 누르세요.<br>'
-        + '<span>Transcript hidden for a listening-first pass.</span></div>';
+        + '<span>' + vbEsc(hvT('ui.listen.script.cover')) + '</span></div>';
     }
   }
   const scriptToggle = $('listen-script-toggle');
   if (scriptToggle) {
-    scriptToggle.textContent = st.showScript ? '대본 숨기기' : '대본 보기';
+    scriptToggle.textContent = hvT(st.showScript ? 'ui.listen.script.hide' : 'ui.listen.script.show');
     scriptToggle.setAttribute('aria-pressed', st.showScript ? 'false' : 'true');
   }
   csPaintPlaying();
@@ -4086,7 +4098,10 @@ function renderDictation() {
   renderDictationWave();
   const check = $('dict-check');
   if (check) {
-    check.textContent = st.checked ? '다음 ›' : '확인';
+    // Set here as well as in the markup, because this button says two different things and
+    // the second one only exists once an answer has been checked. Translating the markup
+    // alone left the Korean back on screen the moment the screen first rendered.
+    check.textContent = hvT(st.checked ? 'ui.dict.next.btn' : 'ui.dict.check.btn');
     check.onclick = st.checked ? dictNext : dictCheck;
   }
 

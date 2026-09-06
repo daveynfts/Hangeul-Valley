@@ -2530,6 +2530,85 @@ const overlayIds = [
     /\.shop-buy-btn, \.trophy-buy-btn \{[\s\S]{0,60}min-height: 44px/.test(css));
 }());
 
+// ── The listening screens ───────────────────────────────────────────────────
+// Two failures, both silent, both on the screen a learner opens to listen.
+//
+// The first was a grid column written `1fr` instead of `minmax(0, 1fr)` in the narrow-screen
+// rules. A bare fr track is floored at the min-content width of its contents, and the
+// contents were the track rail: ten cards at a fixed 232px, so the column grew to 2,416px
+// inside a 545px panel and took the rest of the column with it. The play button, the skip
+// buttons and the speed control ended up a page and a half past the right edge, on every
+// screen 720px and under. The panel clips its overflow, so nothing spilled and nothing
+// scrolled — the controls were simply not there, and the only way left to start a track was
+// the spacebar, which nothing on the screen mentions. The wide rules already said
+// minmax(0, …); the narrow ones are the ones nobody looked at on a narrow screen.
+//
+// The second: every control in the A/B loop row was Korean, with no translation key. The
+// aria-labels beside them were translated, so a screen reader was better served than a
+// reader with eyes — a learner on Unit 10 could not read 전체 반복, 시작, 끝, 구간 재생 or
+// 지우기, which is the whole of the loop tool, the most useful thing on the screen.
+//
+// The Korean that is the lesson — track names, grammar points, the transcript, the panel's
+// own title — stays. The rule is about controls.
+(function checkListeningScreens() {
+  const css = read(path.join('css', 'game.css'));
+
+  // Any rule that sizes these grids has to guard the track, wide or narrow.
+  const GRIDS = ['#listen-body', '#listen-transport'];
+  GRIDS.forEach((sel) => {
+    const re = new RegExp(sel.replace('#', '#') + '\\s*\\{[^}]*grid-template-columns:\\s*([^;}]+)', 'g');
+    const bad = [];
+    let m;
+    while ((m = re.exec(css))) {
+      const value = m[1].trim();
+      // A bare fr track is floored at min-content and will grow to whatever it holds. Inside
+      // a minmax() the minimum is stated — minmax(0, 1fr) collapses, minmax(150px, 1fr) is a
+      // deliberate floor — so those are stripped before looking for one that is on its own.
+      if (/\d*\.?\d*fr/.test(value.replace(/minmax\([^)]*\)/g, ''))) bad.push(value);
+    }
+    check('every ' + sel + ' column is floored at zero', bad.length === 0,
+      bad.join(' / ') + ' — a bare fr track grows to its content and pushes the rest off screen');
+  });
+
+  // Every control on the two cassette screens says what it does in a language the reader
+  // chose. Content keeps its Korean; a button does not get to.
+  const html = read('index.html');
+  const region = (startId, endId) => {
+    const a = html.indexOf('id="' + startId + '"');
+    const b = endId ? html.indexOf('id="' + endId + '"') : html.length;
+    return a < 0 ? '' : html.slice(a, b > a ? b : html.length);
+  };
+  const HANGUL_TEXT = /[가-힣]/;
+  const unkeyed = [];
+  [['listen-overlay', 'dictation-overlay'], ['dictation-overlay', 'workbook-overlay']].forEach(([s, e]) => {
+    const block = region(s, e);
+    const re = /<button\b([^>]*)>([\s\S]{0,80}?)<\/button>/g;
+    let m;
+    while ((m = re.exec(block))) {
+      const text = m[2].replace(/<[^>]*>/g, '').trim();
+      if (!HANGUL_TEXT.test(text)) continue;
+      if (/data-i18n="/.test(m[1])) continue;
+      unkeyed.push(s + ': "' + text.slice(0, 20) + '"');
+    }
+  });
+  check('every button on the listening screens can be read in the reader\'s language',
+    unkeyed.length === 0, unkeyed.join(', ') + ' — add data-i18n and an English label');
+
+  // The instructions the screens give about themselves, which are the reason the features
+  // get used at all, are set from js and were written only in Korean.
+  const ui = read(path.join('js', 'ui.js'));
+  check('the listening screens explain themselves through the catalogue',
+    ui.indexOf("hvT('ui.listen.script.cover')") >= 0
+    && ui.indexOf("hvT('ui.listen.context.remembers')") >= 0
+    && /hvT\(st\.showScript \? 'ui\.listen\.script\.hide' : 'ui\.listen\.script\.show'\)/.test(ui)
+    && /hvT\(st\.checked \? 'ui\.dict\.next\.btn' : 'ui\.dict\.check\.btn'\)/.test(ui));
+
+  // And the waveform says how to use itself once, not three times over.
+  check('the drag-to-loop hint is given once',
+    ui.indexOf('ui.listen.wave.dragPhrase') < 0,
+    'csWaveLabel already returns the drag prompt, and the keyboard row says it again below');
+}());
+
 // ── vercel.json says only what Vercel understands ───────────────────────────
 // JSON has no comments, and Vercel validates this file against a closed schema: an extra key
 // on a rewrite is not ignored, it fails the build. The failure surfaces nowhere useful — CI

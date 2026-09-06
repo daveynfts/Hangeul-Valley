@@ -2904,7 +2904,17 @@
       #listen-panel, #dictation-panel {
         width: 100vw; max-width: 100vw; max-height: 100vh; height: 100vh; border-radius: 0;
       }
-      #listen-body { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); }
+      /* minmax(0, …) on the column, not only on the rows. A bare 1fr track is floored at the
+         min-content width of what it holds, and what it holds is the track rail: ten cards at
+         a fixed 232px, which comes to 2,416px. The column grew to fit them instead of letting
+         them scroll, and everything else in the column went with it — the play button, the
+         skip buttons and the speed control were pushed a page and a half off the right edge,
+         on every screen 720px and under.
+
+         Nothing looked broken. The panel has overflow-x: hidden, so the controls did not
+         spill or scroll into view; they were simply not there, and the only way left to start
+         a track was the spacebar, which nothing on the screen mentions. */
+      #listen-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
       #listen-tracknav { border-right: none; border-bottom: 2px solid var(--wood-l); }
       .cs-rail-head { padding-top: 9px; }
       #listen-tracks {
@@ -2912,7 +2922,7 @@
         padding: 4px 12px 12px; scroll-snap-type: x proximity;
       }
       .cs-track { flex: 0 0 232px; scroll-snap-align: start; }
-      #listen-transport { grid-template-columns: 1fr; }
+      #listen-transport { grid-template-columns: minmax(0, 1fr); }
       .cs-main-controls, #listen-rates { justify-content: center; }
       .cs-meterrow { justify-content: center; }
       .cs-hotkeys { text-align: center; }
