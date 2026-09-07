@@ -526,6 +526,146 @@
       "file": "sprites/items/emoji_1f3af.png",
       "reviewed": true,
       "standIn": true
+    },
+    {
+      "index": 861,
+      "ko": "밤하늘",
+      "file": "sprites/items/emoji_1f30c.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 862,
+      "ko": "일반",
+      "file": "sprites/items/emoji_26aa.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 863,
+      "ko": "카메라",
+      "file": "sprites/items/emoji_1f4f7.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 864,
+      "ko": "빛",
+      "file": "sprites/items/emoji_1f4a1.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 865,
+      "ko": "별빛",
+      "file": "sprites/items/emoji_2728.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 866,
+      "ko": "흐릿하다",
+      "file": "sprites/items/emoji_1f32b.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 867,
+      "ko": "흐리다",
+      "file": "sprites/items/emoji_2601.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 868,
+      "ko": "렌즈",
+      "file": "sprites/items/emoji_1f50e.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 869,
+      "ko": "들어오다",
+      "file": "sprites/items/emoji_1f6aa.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 870,
+      "ko": "시간",
+      "file": "sprites/items/emoji_23f0.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 871,
+      "ko": "밝다",
+      "file": "sprites/items/emoji_1f506.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 872,
+      "ko": "진하다",
+      "file": "sprites/items/emoji_1f58d.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 873,
+      "ko": "선명하다",
+      "file": "sprites/items/emoji_1f50d.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 874,
+      "ko": "차단하다",
+      "file": "sprites/items/emoji_1f6ab.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 875,
+      "ko": "오래",
+      "file": "sprites/items/emoji_23f3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 876,
+      "ko": "비추다",
+      "file": "sprites/items/emoji_1f526.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 877,
+      "ko": "잇다",
+      "file": "sprites/items/emoji_1f517.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 878,
+      "ko": "여러 장",
+      "file": "sprites/items/emoji_1f5bc.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 879,
+      "ko": "-(으)ㄹ수록",
+      "file": "sprites/items/emoji_1f4c8.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 880,
+      "ko": "-아/어지다",
+      "file": "sprites/items/emoji_1f504.png",
+      "reviewed": true,
+      "standIn": true
     }
   ],
   "entries": [

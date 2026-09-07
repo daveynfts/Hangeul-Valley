@@ -5138,7 +5138,7 @@ const TOPIK_VOCAB_ART_ROWS = [
     "ko": "모으다",
     "slug": "topik_gather_people_together",
     "folder": "items",
-    "nameEn": "to gather people together",
+    "nameEn": "to gather into one place — people, or light into a lens",
     "family": "topik-vocabulary"
   },
   {
@@ -5607,7 +5607,7 @@ const TOPIK_VOCAB_ART_ROWS = [
     "ko": "촬영하다",
     "slug": "topik_film_shoot_footage",
     "folder": "items",
-    "nameEn": "to film, to shoot footage",
+    "nameEn": "to shoot — a photograph or footage",
     "family": "topik-vocabulary"
   },
   {
@@ -6987,6 +6987,146 @@ const TOPIK_VOCAB_ART_ROWS = [
     "slug": "emoji_1f3af",
     "folder": "items",
     "nameEn": "for the sake of N — the noun twin of -기 위해",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "밤하늘",
+    "slug": "emoji_1f30c",
+    "folder": "items",
+    "nameEn": "the night sky",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "일반",
+    "slug": "emoji_26aa",
+    "folder": "items",
+    "nameEn": "ordinary, of the general run",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "카메라",
+    "slug": "emoji_1f4f7",
+    "folder": "items",
+    "nameEn": "a camera",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "빛",
+    "slug": "emoji_1f4a1",
+    "folder": "items",
+    "nameEn": "light",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "별빛",
+    "slug": "emoji_2728",
+    "folder": "items",
+    "nameEn": "starlight",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "흐릿하다",
+    "slug": "emoji_1f32b",
+    "folder": "items",
+    "nameEn": "to look blurred rather than sharp",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "흐리다",
+    "slug": "emoji_2601",
+    "folder": "items",
+    "nameEn": "(of a picture) to be faint, washed out",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "렌즈",
+    "slug": "emoji_1f50e",
+    "folder": "items",
+    "nameEn": "a lens",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "들어오다",
+    "slug": "emoji_1f6aa",
+    "folder": "items",
+    "nameEn": "to come in, to enter",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "시간",
+    "slug": "emoji_23f0",
+    "folder": "items",
+    "nameEn": "time; an hour of it",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "밝다",
+    "slug": "emoji_1f506",
+    "folder": "items",
+    "nameEn": "to be bright",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "진하다",
+    "slug": "emoji_1f58d",
+    "folder": "items",
+    "nameEn": "(of a colour) to be deep and strong",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "선명하다",
+    "slug": "emoji_1f50d",
+    "folder": "items",
+    "nameEn": "to be sharp, with every edge clear",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "차단하다",
+    "slug": "emoji_1f6ab",
+    "folder": "items",
+    "nameEn": "to block something off",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "오래",
+    "slug": "emoji_23f3",
+    "folder": "items",
+    "nameEn": "for a long while",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "비추다",
+    "slug": "emoji_1f526",
+    "folder": "items",
+    "nameEn": "to shine light onto something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "잇다",
+    "slug": "emoji_1f517",
+    "folder": "items",
+    "nameEn": "to join one thing onto the next",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "여러 장",
+    "slug": "emoji_1f5bc",
+    "folder": "items",
+    "nameEn": "several sheets — 장 is the counter for flat things",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-(으)ㄹ수록",
+    "slug": "emoji_1f4c8",
+    "folder": "items",
+    "nameEn": "the more it does, the more",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-아/어지다",
+    "slug": "emoji_1f504",
+    "folder": "items",
+    "nameEn": "to get more so — a gradual change in a quality",
     "family": "topik-vocabulary"
   }
 ];

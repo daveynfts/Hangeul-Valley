@@ -5652,12 +5652,13 @@
       },
       {
         "ko": "모으다",
-        "en": "to gather people together",
+        "en": "to gather into one place — people, or light into a lens",
         "hint": "👥",
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "모아"
+          "모아",
+          "모으면"
         ],
         "example": "그래서 고인돌은 사람들을 불러 모아 무덤 만드는 일을 시킬 수 있을 정도로 대단한 권력을 가진 사람의 무덤이었을 것으로 보인다."
       },
@@ -5701,7 +5702,8 @@
         "category": "건강",
         "categoryEn": "Health & the body",
         "forms": [
-          "약한"
+          "약한",
+          "약해서"
         ]
       },
       {
@@ -6214,7 +6216,9 @@
         "categoryEn": "Culture & entertainment",
         "forms": [
           "찍거나",
-          "찍는"
+          "찍는",
+          "찍으면",
+          "찍을"
         ],
         "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
@@ -6236,12 +6240,13 @@
       },
       {
         "ko": "촬영하다",
-        "en": "to film, to shoot footage",
+        "en": "to shoot — a photograph or footage",
         "hint": "🎥",
         "category": "문화",
         "categoryEn": "Culture & entertainment",
         "forms": [
-          "촬영하는"
+          "촬영하는",
+          "촬영하면"
         ],
         "example": "그런데 차량 통행을 막고 길 한가운데에서 사진을 찍거나 횡단보도 위에서 삼각대를 세우고 촬영하는 등 일부 방문객의 행동이 눈살을 찌푸리게 한다."
       },
@@ -8012,6 +8017,183 @@
         "forms": [
           "을 위해",
           "를 위해"
+        ]
+      },
+      {
+        "ko": "밤하늘",
+        "en": "the night sky",
+        "hint": "🌌",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "일반",
+        "en": "ordinary, of the general run",
+        "hint": "⚪",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "카메라",
+        "en": "a camera",
+        "hint": "📷",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "빛",
+        "en": "light",
+        "hint": "💡",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons",
+        "forms": [
+          "빛이",
+          "빛을"
+        ]
+      },
+      {
+        "ko": "별빛",
+        "en": "starlight",
+        "hint": "✨",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons"
+      },
+      {
+        "ko": "흐릿하다",
+        "en": "to look blurred rather than sharp",
+        "hint": "🌫️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "흐릿하게"
+        ]
+      },
+      {
+        "ko": "흐리다",
+        "en": "(of a picture) to be faint, washed out",
+        "hint": "☁️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "흐린"
+        ]
+      },
+      {
+        "ko": "렌즈",
+        "en": "a lens",
+        "hint": "🔎",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "들어오다",
+        "en": "to come in, to enter",
+        "hint": "🚪",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "들어오는"
+        ]
+      },
+      {
+        "ko": "시간",
+        "en": "time; an hour of it",
+        "hint": "⏰",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "밝다",
+        "en": "to be bright",
+        "hint": "🔆",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons",
+        "forms": [
+          "밝고"
+        ]
+      },
+      {
+        "ko": "진하다",
+        "en": "(of a colour) to be deep and strong",
+        "hint": "🖍️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "진하게"
+        ]
+      },
+      {
+        "ko": "선명하다",
+        "en": "to be sharp, with every edge clear",
+        "hint": "🔍",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "선명한"
+        ]
+      },
+      {
+        "ko": "차단하다",
+        "en": "to block something off",
+        "hint": "🚫",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "차단하면"
+        ]
+      },
+      {
+        "ko": "오래",
+        "en": "for a long while",
+        "hint": "⏳",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "비추다",
+        "en": "to shine light onto something",
+        "hint": "🔦",
+        "category": "자연",
+        "categoryEn": "Nature & the seasons",
+        "forms": [
+          "비추면"
+        ]
+      },
+      {
+        "ko": "잇다",
+        "en": "to join one thing onto the next",
+        "hint": "🔗",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "이어서"
+        ]
+      },
+      {
+        "ko": "여러 장",
+        "en": "several sheets — 장 is the counter for flat things",
+        "hint": "🖼️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-(으)ㄹ수록",
+        "en": "the more it does, the more",
+        "hint": "📈",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "길수록"
+        ]
+      },
+      {
+        "ko": "-아/어지다",
+        "en": "to get more so — a gradual change in a quality",
+        "hint": "🔄",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "진해진다"
         ]
       }
     ]

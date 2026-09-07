@@ -2015,6 +2015,49 @@
           "en": "Designers working in a wide range of fields are making an effort on behalf of society. That is to say, they have started spending their own talent and time on the places where help is needed. They decorate public spaces for nothing, or design T-shirts to be sold at a charity bazaar, and in ways like these they take an active part in social projects.",
           "why": "자신의 재능과 시간을 ( ) 쓰기 시작한 것이다 — and 것이다 is the question. A sentence that ends that way is not adding a fact; it is saying the sentence before it again, in plainer words. The sentence before it is 사회를 위해 노력하고 있다, so whatever fills the gap has to be another way of writing 사회를 위해, and only ② points the purpose away from the designers and at somebody else.\n\nThe third sentence is the evidence, and it is built out of 주다. 꾸며 주거나 … 디자인해 주는 — the auxiliary says twice over that the work is done for someone other than the person doing it, and 무료로 says nobody paid for it. A paragraph whose verbs all hand something away cannot be completed by a purpose that keeps the benefit at home.\n\n① and ④ are the same wrong answer written twice, and ① wears the passage’s own vocabulary: 자신의 is lifted straight out of 자신의 재능과 시간. But that phrase names what the designers spend, not who they spend it on, and nowhere does the paragraph measure what they get back. Reusing a word from the text is what makes an option look like a summary; it is not evidence that it is one.\n\n③ is the idea a reader brings from outside. 사회사업 makes anyone think of volunteering and volunteering makes anyone think of teaching, but nothing in this paragraph is teaching. Decorating a public space and designing a T-shirt are doing the work for people, not showing them how to do it themselves.\n\nWorth noticing that all four options end in 위해, so nothing about the grammar can separate them; what differs is only who the purpose serves. Sort them into two piles before reading closely — ① and ④ serve the designer, ② and ③ serve someone else — and the paragraph has only the second pile left to settle.",
           "grammar": "-는 것이다 restates rather than reports. 쓰기 시작한 것이다 is not they will start; it is that is to say, they started. The same 것이다 also builds a plain prediction — 변해 갈 것이다 — and only its position tells the two apart: a 것이다 that adds no new fact is restating the sentence in front of it.\n\nN을/를 위해 and -기 위해 are one meaning with two left-hand sides. A noun takes the first — 사회를 위해, 도움이 필요한 곳을 위해 — and a verb has to become -기 before it can go there: 경력을 쌓기 위해, 다른 사람을 가르치기 위해. This question puts both shapes among the four options, which is why none of them can be ruled out on grammar.\n\nN 중이다 is in the middle of N, and it wants a noun that names an activity: 활동 중인 디자이너, 회의 중, 공사 중. With a verb it is -는 중 instead.\n\n-아/어 주다 does the action for somebody else. 꾸며 주다 is to decorate it for them and 디자인해 주다 to design it for them, and here the auxiliary carries more of the argument than any content word does: it is what makes the third sentence evidence for the second.\n\n-는 등 closes a list of examples — 꾸며 주거나 … 디자인해 주는 등, decorating, or designing, or things of that kind. The verb in front of 등 is a modifier, so it is always -는 or -(으)ㄴ.\n\n경력을 쌓다 is the set phrase for building a career, and 쌓다 keeps its shape for anything that accumulates: 경험을 쌓다, 신뢰를 쌓다. 가르치다 is the plain verb to teach, and the person taught takes 을/를."
+        },
+        {
+          "n": 2,
+          "art": "",
+          "instructionKo": "( )에 들어갈 말로 가장 알맞은 것을 고르십시오.",
+          "instructionEn": "Choose the phrase that best fits the blank.",
+          "phraseKo": "밤하늘을 일반 카메라로 찍으면 빛이 너무 약해서 사진이 흐릿하게 보인다.",
+          "lines": [
+            {
+              "ko": "밤하늘을 일반 카메라로 찍으면 빛이 너무 약해서 사진이 흐릿하게 보인다."
+            },
+            {
+              "ko": "빛이 렌즈에 들어오는 시간이 길수록 사진의 색은 밝고 진해진다."
+            },
+            {
+              "ko": "그래서 카메라에 빛을 충분히 모으면 더 선명한 사진을 찍을 수 있다."
+            },
+            {
+              "ko": "밤하늘을 찍을 때도 {} 흐린 사진을 진하게 할 수 있다."
+            }
+          ],
+          "answer": "starlight",
+          "choices": [
+            {
+              "id": "block",
+              "ko": "렌즈에 빛을 차단하면"
+            },
+            {
+              "id": "ordinary",
+              "ko": "일반 카메라로 촬영하면"
+            },
+            {
+              "id": "starlight",
+              "ko": "별빛을 렌즈에 오래 비추면"
+            },
+            {
+              "id": "stack",
+              "ko": "여러 장을 이어서 촬영하면"
+            }
+          ],
+          "en": "Photograph the night sky with an ordinary camera and the light is so weak that the picture looks blurred. The longer light comes into the lens, the brighter and deeper the colour of the photograph. So gathering enough light in the camera lets you take a sharper picture. When photographing the night sky too, shining starlight into the lens for a long time can turn a faint picture into a strong one.",
+          "why": "The second sentence is the rule and the fourth applies it. 빛이 렌즈에 들어오는 시간이 길수록 사진의 색은 밝고 진해진다 — the cause is time, and the effect is depth of colour. The blank sits in front of 흐린 사진을 진하게 할 수 있다, which is that same effect written again, so what goes in the gap has to be that same cause: light coming into the lens for a long while. ③ is the only option that says it, and it names the light the night sky actually gives — 별빛.\n\n도 in 밤하늘을 찍을 때도 is worth reading rather than skipping. The paragraph has just made a general claim about photographs, and 도 says the night sky is one more case of that claim rather than an exception to it. So the answer cannot be a new technique brought in for this one subject; it has to be the same mechanism pointed at stars.\n\n① is the mechanism reversed. 차단하다 is to cut light off, and every sentence here is about letting more of it in — 들어오는 시간이 길수록, 빛을 충분히 모으면. An option assembled from the passage’s own nouns and run the other way is the commonest wrong answer in this type, and the way to catch it is to check the direction before the vocabulary.\n\n② offers the problem as the solution. 일반 카메라로 찍으면 … 흐릿하게 보인다 is the first sentence of the paragraph, so shooting with an ordinary camera is what makes the picture blurred; the same act cannot also be what makes it strong.\n\n④ is the one that catches people who know the subject. Stacking frames really is how astrophotography is done, and 촬영하면 is even borrowed from the passage — but this paragraph argues from one thing only, how long the light comes in, and 여러 장 appears nowhere in it. True of the topic and absent from the text is not an answer.",
+          "grammar": "-(으)ㄹ수록 is the more … the more, and it attaches to the stem: 길수록, 많을수록. Spoken Korean usually doubles it with -(으)면 in front — 시간이 길면 길수록 — and written Korean, as here, does not.\n\n-아/어지다 on an adjective is that quality increasing: 진하다 → 진해진다, 밝다 → 밝아진다, 많다 → 많아진다. Keep it apart from the same ending on a transitive verb, where it makes a passive instead.\n\n-아/어서 gives a cause and the clause after it states the result: 빛이 너무 약해서 사진이 흐릿하게 보인다. It cannot carry a command or a suggestion, which is what separates it from -(으)니까.\n\n흐릿하다 and 흐리다 both turn up here, a sentence apart. 흐릿하다 is of an outline that will not come sharp; 흐리다 is the wider word — a faint picture, and also an overcast sky.\n\n잇다 is a ㅅ-irregular: the ㅅ drops before a vowel, so 잇다 becomes 이어서, 이으면. 여러 장을 이어서 is joining frame to frame, one after the next.\n\n비추다 and 비치다 are the transitive and intransitive halves of one action. 별빛을 렌즈에 비추다 is shining the light onto something; 별빛이 비치다 is the light falling on it. The pair to learn beside 바꾸다/바뀌다."
         }
       ]
     }
