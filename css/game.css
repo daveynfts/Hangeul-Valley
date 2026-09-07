@@ -1361,6 +1361,23 @@
       position: absolute; left: 5px; right: 5px; bottom: 4px;
       height: 5px; background: #c4893a; border-radius: 1px;
     }
+    /* Pattern notation, printed rather than boxed: the hyphen of an ending, the slash of
+       을/를, the brackets and bare jamo of -(으)ㄴ, the N or V that says what the pattern
+       attaches to. A box is what the learner still owes; this is what they are given, so it
+       is ink on the card and not a tile. Noto Sans KR leads the stack because the jamo are
+       the whole point and a Latin face has none of them. */
+    .recall-literal {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 10px; height: 28px;
+      font-family: 'Noto Sans KR', 'Be Vietnam Pro', sans-serif;
+      font-weight: 700; font-size: 18px; line-height: 1;
+      color: #6b4a24;
+      flex-shrink: 0;
+    }
+    /* .recall-word spaces its children by 3px, which is right between two boxes and wrong
+       inside a run of notation: `V-` is two characters of one marker, not `V - `. Cancel the
+       gap where two literals meet so the run reads as the string it is. */
+    .recall-literal + .recall-literal { margin-left: -3px; }
     /* The illustration is the point of this card, so the stage is sized to the
        art rather than the art squeezed into the stage. Every vocabulary tile is
        96px tall (the older farm set is 48px), so a 192px stage renders both at a

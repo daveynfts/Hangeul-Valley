@@ -1904,17 +1904,39 @@ function decomposeHangulWord(str) {
 }
 
 // Same walk, but split on whitespace so tile groups match how the vocab is written.
-function hangulSyllableGroups(str) {
+//
+// A headword is not always pure Hangul. Grammar patterns are carried by their notation —
+// `V-기 전에`, `N을/를 비롯해서`, `-(으)ㄴ 후에` — and this dropped every character
+// that was not a syllable. So `V-기 전에` came out as one box beside two: the marker the
+// learner has to type was nowhere on screen, and `을/를` read as a single two-syllable word.
+// Most of a TOPIK grammar list is written this way, and none of it was drawn.
+//
+// Every character is therefore one of two things now.
+//
+//   A box, to be recalled: a Hangul syllable (marked when it closes on a batchim), a digit,
+//   and a letter standing next to another letter or digit. That last clause is what keeps
+//   `SNS`, `PD`, `IT산업`, `3D 프린팅` and `1인실` covered — there the Latin is the answer,
+//   and printing it would hand the word over.
+//
+//   Notation, to be read: everything else. The hyphen, the slash, the brackets, the bare
+//   jamo of `-(으)ㄴ`, and a lone letter — which in this notation is only ever a part of
+//   speech, never a word.
+function recallShapeGroups(str) {
   const groups = [];
   let current = [];
   const raw = String(str || '').normalize('NFC');
+  const alnum = (ch) => ch !== undefined && /[0-9A-Za-z]/.test(ch);
   for (let i = 0; i < raw.length; i++) {
+    const ch = raw[i];
     const code = raw.charCodeAt(i);
     if (code >= 0xac00 && code <= 0xd7a3) {
-      const s = code - 0xac00;
-      current.push({ hasBatchim: (s % 28) > 0 });
-    } else if (/\s/.test(raw[i])) {
+      current.push({ tile: true, hangul: true, hasBatchim: ((code - 0xac00) % 28) > 0 });
+    } else if (/\s/.test(ch)) {
       if (current.length) { groups.push(current); current = []; }
+    } else if (/[0-9]/.test(ch) || (/[A-Za-z]/.test(ch) && (alnum(raw[i - 1]) || alnum(raw[i + 1])))) {
+      current.push({ tile: true, hangul: false, hasBatchim: false });
+    } else {
+      current.push({ tile: false, ch });
     }
   }
   if (current.length) groups.push(current);
@@ -2031,19 +2053,23 @@ function recallOriginClass(ko) {
   }
 }
 function renderRecallScaffold(ko) {
-  const groups = hangulSyllableGroups(ko);
-  const n = groups.reduce((acc, g) => acc + g.length, 0);
+  const groups = recallShapeGroups(ko);
+  // "Blocks" means Hangul blocks, so notation and masked Latin do not inflate the count.
+  const n = groups.reduce((acc, g) => acc + g.filter(t => t.hangul).length, 0);
   if (!n) return '';
   const cls = recallOriginClass(ko);
   return [hvT(n === 1 ? 'ui.vb.blocks.one' : 'ui.vb.blocks', { n }), cls]
     .filter(Boolean).join(' · ');
 }
 function renderRecallScaffoldHtml(ko) {
-  const groups = hangulSyllableGroups(ko);
-  if (!groups.length) return { html: '', note: '' };
+  const groups = recallShapeGroups(ko);
+  // Notation alone is not a scaffold — there has to be something left to recall.
+  if (!groups.some(g => g.some(t => t.tile))) return { html: '', note: '' };
   const words = groups.map(g =>
     '<span class="recall-word">' +
-    g.map(s => '<span class="recall-tile' + (s.hasBatchim ? ' batchim' : '') + '"></span>').join('') +
+    g.map(t => t.tile
+      ? '<span class="recall-tile' + (t.hasBatchim ? ' batchim' : '') + '"></span>'
+      : '<span class="recall-literal">' + vbEsc(t.ch) + '</span>').join('') +
     '</span>'
   ).join('');
   return {

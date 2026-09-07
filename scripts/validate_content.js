@@ -246,12 +246,18 @@ check('phase 3 recall uses shape tiles, not category essays',
   gameJs.indexOf('function renderRecallScaffoldHtml') >= 0
   && gameJs.indexOf('recall-tile') >= 0
   && !/ffCulture\.textContent = getFunFact\(word\)\.hint/.test(gameJs));
-check('recall scaffold never prints syllable characters',
-  /function renderRecallScaffoldHtml[\s\S]{0,900}s\.hasBatchim/.test(gameJs)
-  && !/function renderRecallScaffoldHtml[\s\S]{0,1200}s\.char/.test(gameJs));
+// The scaffold prints the pattern notation a grammar headword is written with — the V-, the
+// slash of 을/를, the jamo of -(으)ㄴ — and never a syllable. Only the first half of that can
+// be read off the source; tests/test_phase3_recall.js asserts the second half against the
+// rendered HTML for every shape of headword the content actually holds.
+check('recall scaffold boxes syllables and prints only notation',
+  /function renderRecallScaffoldHtml[\s\S]{0,900}t\.hasBatchim/.test(gameJs)
+  && /function recallShapeGroups[\s\S]{0,1400}tile: true, hangul: true/.test(gameJs)
+  && !/function renderRecallScaffoldHtml[\s\S]{0,1200}\.char/.test(gameJs));
 check('recall tiles group by vocab spacing, no open/closed caption',
-  gameJs.indexOf('function hangulSyllableGroups') >= 0
+  gameJs.indexOf('function recallShapeGroups') >= 0
   && gameJs.indexOf('recall-word') >= 0
+  && gameJs.indexOf('recall-literal') >= 0
   && !/function renderRecallScaffoldHtml[\s\S]{0,800}closed/.test(gameJs)
   && !/function renderRecallScaffoldHtml[\s\S]{0,800}recall-caption/.test(gameJs));
 check('study desk does not spawn the stool',
