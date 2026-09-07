@@ -50,6 +50,20 @@ assert(!rule.hvIsTranslatable('quiz/unit10_q01.png'), 'a sprite path is not tran
 assert(!rule.hvIsTranslatable('🍲'), 'an emoji is not translatable');
 assert(!rule.hvIsTranslatable(''), 'an empty string is not translatable');
 
+// The Hangul-ratio guard keeps a Korean vocabulary list out on the strength of an acronym,
+// and it has to go on doing that.
+const acronymList = '스마트폰, 인터넷, SNS, 언론 및 미디어 어휘';
+assert(!rule.hvIsTranslatable(acronymList, 'noteEn'), 'a Korean list with an acronym stays out');
+// But a grammar note is prose *about* Korean, so it is Hangul-heavy by construction, and the
+// ratio held seven of them back from ever being offered. The exemption is per field, and it
+// has to be the exemption doing the work rather than a loosened rule: the same string is
+// still refused when the field is not one of the two that are always English prose.
+const note = 'A-(으)ㄴ데 but 있다/없다-는데. 좋은데, 바쁜데, but 맛있는데, 재미있는데.';
+assert(!rule.hvIsTranslatable(note), 'the ratio alone would refuse a Hangul-heavy grammar note');
+assert(rule.hvIsTranslatable(note, 'grammar'), 'and the grammar field takes it anyway');
+assert(rule.hvIsTranslatable('다니 reports 오르다니, 먹다니', 'why'), 'why is prose on the same terms');
+assert(!rule.hvIsTranslatable(note, 'noteEn'), 'and no other field is loosened by it');
+
 // The key is field + '|' + English, split on the FIRST separator only, because English
 // sentences do contain pipes and field names never do.
 eq(rule.hvKey('en', ' kimchi stew '), 'en|kimchi stew', 'the key trims its English');

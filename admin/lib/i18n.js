@@ -96,7 +96,7 @@ function scanSource(rootDir, rel) {
       if (value && typeof value === 'object') { walk(value, here); return; }
       if (typeof value !== 'string') return;
       if (HV_TEXT_FIELDS.indexOf(field) < 0) return;
-      if (!hvIsTranslatable(value)) return;
+      if (!hvIsTranslatable(value, field)) return;
       const key = hvKey(field, value);
       const hit = byKey.get(key);
       if (hit) { hit.count++; if (hit.paths.length < 8) hit.paths.push(here); return; }

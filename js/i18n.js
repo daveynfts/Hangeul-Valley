@@ -100,7 +100,15 @@ const HV_NEVER_TRANSLATE = ['id', 'src', 'art', 'answer', 'answer2', 'o', 'h', '
  * this one is — a Korean headword, a snake_case id or a sprite path all reach these
  * fields and none of them wants translating.
  */
-function hvIsTranslatable(value) {
+// Fields that are always English written for the learner, never a Korean string. The
+// Hangul-ratio guard below is a guess about what a value is, and on these two it guesses
+// wrong: a grammar note is prose *about* Korean, so it is Hangul-heavy by construction —
+// "A-(으)ㄴ데 but 있다/없다-는데. 좋은데, 바쁜데, but 맛있는데, 재미있는데." is 24 Hangul against
+// six Latin, and the two "but"s are exactly what a reader who does not read English needs
+// turned over. Seven notes were held back by the ratio alone.
+const HV_PROSE_FIELDS = ['why', 'grammar'];
+
+function hvIsTranslatable(value, field) {
   if (typeof value !== 'string') return false;
   const s = value.trim();
   if (!s) return false;
@@ -110,6 +118,7 @@ function hvIsTranslatable(value) {
   if (!/\s/.test(s) && (s.indexOf('_') >= 0 || s.indexOf('/') >= 0)) return false;
   if (/^https?:/i.test(s)) return false;
   if (/\.(png|jpe?g|webp|gif|mp3|ogg|wav|json|js)$/i.test(s)) return false;
+  if (HV_PROSE_FIELDS.indexOf(field) >= 0) return true;
   // Mostly Korean, with a Latin acronym in it, is a Korean string — not English prose that
   // happens to mention Korean. A bare "has Latin letters" test offered
   // "스마트폰, 인터넷, SNS, 언론 및 미디어 어휘" for translation on the strength of "SNS".
@@ -395,7 +404,7 @@ function hvLocalize(rel, data, lang) {
       if (value && typeof value === 'object') { walk(value); continue; }
       if (typeof value !== 'string') continue;
       if (HV_TEXT_FIELDS.indexOf(field) < 0) continue;
-      if (!hvIsTranslatable(value)) continue;
+      if (!hvIsTranslatable(value, field)) continue;
       const hit = entries[hvKey(field, value)];
       if (typeof hit === 'string' && hit.trim()) node[hvLangField(field, code)] = hit;
     }
@@ -580,7 +589,7 @@ if (typeof module !== 'undefined' && module.exports) {
     HV_LANGS, HV_DEFAULT_LANG, HV_LANG_STORAGE_KEY,
     HV_TEXT_FIELDS, HV_NEVER_TRANSLATE, HV_GENERATED_SOURCES, HV_CATALOG_SOURCES,
     HV_KEY_SEP, hvKey, hvSplitKey, hvCatalogPath,
-    hvLangField, hvIsTranslatable, hvIsKnownLang,
+    hvLangField, hvIsTranslatable, hvIsKnownLang, HV_PROSE_FIELDS,
     hvLang, hvSetLang, hvLangInfo, hvRegisterLocale, hvT, hvHasKey,
     tr, trPair, hvLocalize, hvLocalizeAsync, hvRegisterCatalog, hvCatalogFor, hvRel,
     hvPreloadCatalogs, hvAdoptPhaserCatalogs, hvCatalogsFor, applyI18n, hvRenderLangPickers,
