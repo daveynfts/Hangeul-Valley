@@ -2393,8 +2393,9 @@ class FarmScene extends Phaser.Scene {
     this.plots.forEach(p=>{
       if(!p.ko) return;
       // getSrs resolves to the production track, which is the one the learning cycle
-      // advances — phase 1 seeds it even when the question shown was recognition. So the crop
-      // timer follows production regardless of which modality each phase tests.
+      // advances — phases 1 and 2 mirror their grade onto it even when the question shown was
+      // recognition or listening. So the crop timer follows production regardless of which
+      // modality each phase tests, and both legs of the cycle get their full step.
       const s=getSrs(p.ko);
       if(p.sState==='1' && srsIsDue(s, now)){ this._setState(p,'2',p.ko); changed=true; }
       if(p.sState==='3' && srsIsDue(s, now)){ this._setState(p,'4',p.ko); changed=true; }

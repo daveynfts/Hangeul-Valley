@@ -491,6 +491,48 @@ assert(vm.runInContext('srsMatureWordCount()', cntCtx) === 2,
 eq(vm.runInContext('(function(){ srsData = {}; return srsMatureWordCount(); })()', cntCtx), 0,
   'an empty schedule counts 0 rather than throwing');
 
+// ── 15. The three-touch cycle graduates the production track ────────────────
+console.log('\n--- 15. Plant → water → harvest lands on the production schedule ---');
+// Production is what the crop timer and "mature" are read off, but only phase 3 is answered
+// in production: phase 1 is recognition and phase 2 is listening whenever a Korean voice is
+// available. Each phase therefore has to mirror its grade onto production explicitly, and
+// phase 2 was missing that mirror. The cost was not subtle — watering scheduled `listen` and
+// left production on the 30s due date phase 1 had given it, already in the past, so the plot
+// went from sprout to ripe on _checkSRS's next 8s tick (the 90s growing sprite never showed),
+// and the harvest advanced production to learning step 1 instead of graduating it, so the
+// word never entered day-scale review at all.
+const answerChoiceSrc = extract('function answerChoice(', 'function closeQuiz(', 'answerChoice');
+assert(answerChoiceSrc.indexOf('gradeWord(cw.ko, grade, PRIMARY_MODALITY)') > 0,
+  'answerChoice mirrors the grade onto production');
+const mirrorGuard = answerChoiceSrc.slice(0, answerChoiceSrc.indexOf('gradeWord(cw.ko, grade, PRIMARY_MODALITY)'));
+const lastIf = mirrorGuard.lastIndexOf('if(');
+assert(lastIf > 0, 'and the mirror is guarded by a phase check');
+const guard = mirrorGuard.slice(lastIf);
+assert(guard.indexOf('ph===1') > 0, 'phase 1 (recognition) mirrors onto production');
+assert(guard.indexOf('ph===2') > 0, 'phase 2 (listening) mirrors onto production too');
+
+// Why it matters, at the scheduler: LEARN_STEPS has two entries, so three GOOD answers on
+// the production track are what it takes to graduate — one per touch of the cycle.
+eq(CFG.LEARN_STEPS.length, 2, 'the learning ladder is two steps long');
+let touch = newEntry();
+touch = sched(touch, G.GOOD, T0);                 // plant
+eq(touch.st, 'learn', 'planting starts the learning ladder');
+eq(touch.due - T0, CFG.LEARN_STEPS[0], 'and the seedling waits out the first step');
+touch = sched(touch, G.GOOD, T0 + CFG.LEARN_STEPS[0]);   // water
+eq(touch.st, 'learn', 'watering advances the ladder rather than ending it');
+eq(touch.step, 1, 'to step 2');
+eq(touch.due - (T0 + CFG.LEARN_STEPS[0]), CFG.LEARN_STEPS[1],
+  'so the sprout has the full second step to grow in — the stage the missing mirror skipped');
+touch = sched(touch, G.GOOD, T0 + CFG.LEARN_STEPS[0] + CFG.LEARN_STEPS[1]);  // harvest
+eq(touch.st, 'review', 'harvesting graduates the word into day-scale review');
+eq(touch.ivl, CFG.GRADUATE_IVL, 'at the graduating interval');
+
+// Skipping the watering grade — what the bug did — leaves the word short of graduation.
+let skipped = sched(newEntry(), G.GOOD, T0);
+skipped = sched(skipped, G.GOOD, T0 + CFG.LEARN_STEPS[0]);
+eq(skipped.st, 'learn', 'two production answers are not enough to graduate');
+assert(skipped.ivl === 0, 'and the word still has no review interval');
+
 // ── Summary ─────────────────────────────────────────────────────────────────
 console.log('\n====================================================');
 console.log(`TEST RESULTS: ${passed} PASSED, ${failed} FAILED`);

@@ -817,7 +817,12 @@
       border: 1px solid rgba(232, 192, 122, 0.35);
       border-radius: 3px;
     }
-    #hud-auth-status .auth-name { max-width: 110px; }
+    /* When the bar is tight this label is the give: the avatar and the sign-out button stay
+       whole, the email ellipsizes further, and below ~1040px it steps aside entirely rather
+       than pushing the groups into each other. */
+    #hud-auth-status .auth-name { max-width: 110px; flex: 0 1 auto; }
+    #hud-auth-status .auth-photo, #hud-auth-status .auth-out { flex: 0 0 auto; }
+    @media (max-width: 1040px) { #hud-auth-status .auth-name { display: none; } }
 
     #rank-card-overlay, #rankup-overlay {
       position: fixed; inset: 0; z-index: 890; display: none;
@@ -1020,14 +1025,30 @@
       display: flex; align-items: center; gap: 6px; flex-shrink: 0;
     }
 
+    /* The neighbouring groups were both `flex-shrink: 0`, so on a ~1035px window this group
+       was handed 112px to hold 140px of children. Nothing here could give — the level name
+       was already crushed to zero and the bar and badge have fixed widths — so the children
+       simply spilled past the group's right edge, and the amber due badge painted itself
+       over the rank chip in the next group.
+       Two things stop that. `overflow: hidden` means a spill can only ever clip inside this
+       group rather than reach a neighbour, and the shrink order below decides what gives
+       first: the level name (it ellipsizes), then the progress bar, and the due badge last,
+       because a review count is the one thing here that is unreadable when partly drawn. */
     #hud-status-group {
-      min-width: 0; flex: 1 1 auto;
+      min-width: 0; flex: 1 1 auto; overflow: hidden;
       font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #f6deaa;
     }
+    #hud-due, #hud-progress, #active-buff-bar { flex: 0 0 auto; }
 
+    /* The floor above only holds if something else can yield. The currency group's slack is
+       the signed-in email, which is already clamped and ellipsized, so let the group shrink
+       and pin the chips that must stay whole. */
     #hud-currency-group {
       padding: 0 4px;
+      flex-shrink: 1;
     }
+    #hud-currency-group > #hud-rank,
+    #hud-currency-group > .hud-chip { flex: 0 0 auto; }
 
     #hud-actions-group {
       position: relative;
@@ -1079,7 +1100,7 @@
       font-family: 'Be Vietnam Pro', sans-serif; font-weight: 800;
       font-size: 13px; color: #f6deaa; letter-spacing: 0;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      max-width: 180px;
+      max-width: 180px; flex: 1 1 auto; min-width: 0;
     }
     #hud-sep { display: none; }
     #hud-progress {
@@ -1140,9 +1161,10 @@
        end of the bar. In the flow it can never occlude anything. */
     #progress-bar-wrap {
       display: flex; align-items: center; gap: 6px; pointer-events: none;
+      flex: 0 1 auto; min-width: 0;
     }
     #progress-bar-bg {
-      width: 72px; height: 6px;
+      flex: 0 1 72px; min-width: 0; height: 6px;
       background: rgba(0, 0, 0, 0.45); border-radius: 2px; overflow: hidden;
       border: 0;
     }
@@ -2302,7 +2324,7 @@
       .hud-btn:not(.hud-overflow-item) .hud-art-icon { width: 20px; height: 20px; }
 
       /* No top/right here any more — it is a HUD group, so it moves with the bar. */
-      #progress-bar-bg { width: 80px; height: 10px; }
+      #progress-bar-bg { flex-basis: 80px; height: 10px; }
 
       #controls-tip { bottom: 6px; font-size: 14px; padding: 4px 10px; }
 

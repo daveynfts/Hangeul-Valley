@@ -1473,11 +1473,21 @@ function answerChoice(opt, btn){
     const cp=currentPlot, cw=currentWord, ph=currentPhase;
     const grade = deriveGrade();
     gradeWord(cw.ko, grade);            // schedules whichever modality is on screen
+    // Phases 1 and 2 teach through a modality that is not production — recognition on first
+    // contact, listening at the watering step — but the crop timer and the graduation the
+    // cycle ends on are both read off the production track. So mirror the grade there as
+    // well; the modality on screen keeps its own record either way.
+    //
+    // Phase 2 used to be left out. Watering therefore scheduled `listen` and nothing else,
+    // production stayed on the 30s due date phase 1 gave it — already in the past — and
+    // _checkSRS promoted the plot from sprout to ripe on its next 8s tick. The 90s growing
+    // stage never elapsed, so the crop skipped its middle sprite and appeared never to grow,
+    // and the harvest at phase 3 advanced production to step 1 instead of graduating it, so
+    // the word never entered day-scale review at all.
+    if((ph===1 || ph===2) && currentQuizMode !== PRIMARY_MODALITY){
+      gradeWord(cw.ko, grade, PRIMARY_MODALITY);
+    }
     if(ph===1){
-      // Phase 1 teaches by recognition, but the crop timer and the rest of the cycle are
-      // production. Start the production track here too so phases 2 and 3 have a schedule to
-      // advance and the 30s/90s pacing is unchanged — recognition keeps its own record.
-      if(currentQuizMode !== PRIMARY_MODALITY) gradeWord(cw.ko, grade, PRIMARY_MODALITY);
       plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();
     }
     showQuizSuccess({

@@ -8,9 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@400;700;900&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/game.css?v=20260906-listen-v1" />
+  <link rel="stylesheet" href="css/game.css?v=20260907-hud-crops-v2" />
 </head>
-<body data-ui-release="20260906-listen-v1">
+<body data-ui-release="20260907-hud-crops-v2">
 
   <!-- ══════════════ LEVEL SELECT ═════════════════════════════════ -->
   <div id="level-select-overlay" role="dialog" aria-modal="true" aria-labelledby="ls-title">
@@ -62,6 +62,7 @@
       <button class="hud-btn" id="vocab-btn" title="Vocabulary book" data-hud-icon="vocab" data-hud-size="22" data-i18n-title="ui.vocab.btn.title">📖</button>
       <button class="hud-btn" id="shop-btn" title="Shop" data-hud-icon="shop" data-hud-size="22" data-i18n-title="ui.shop.btn.title">🏪</button>
       <button class="hud-btn" id="inventory-btn" title="Inventory (I / E)" onclick="openInventoryUI()" data-hud-icon="bag" data-hud-size="22" data-i18n-title="ui.inventory.btn.title">🎒</button>
+      <button class="hud-btn" id="save-btn" title="Save game" onclick="saveAllGame()" data-hud-icon="save" data-hud-size="22" data-i18n-title="ui.save.btn.title">💾</button>
       <button class="hud-btn" id="hud-more-btn" title="More" onclick="toggleHudOverflow(event)" data-hud-icon="more" data-hud-size="22" data-i18n-title="ui.hud.more.btn.title">⋯</button>
       <button class="hud-btn hud-btn-menu" id="hud-menu-btn" title="Level menu" data-hud-icon="menu" data-hud-size="22" data-i18n-title="ui.hud.menu.btn.title">☰</button>
 
@@ -70,7 +71,6 @@
         <button class="hud-btn hud-overflow-item" id="cooking-btn" title="Cooking (C)" onclick="openCookingUI(); toggleHudOverflow(false);" data-hud-icon="cook" data-hud-label="Cooking" data-hud-size="18" data-i18n="ui.cooking.btn" data-i18n-title="ui.cooking.btn.title">🍳 Cooking</button>
         <button class="hud-btn hud-overflow-item" id="recipe-btn" title="Recipe Book" onclick="openRecipeBook(); toggleHudOverflow(false);" data-hud-icon="recipe" data-hud-label="Recipes" data-hud-size="18" data-i18n="ui.recipe.btn" data-i18n-title="ui.recipe.btn.title">🍱 Recipes</button>
         <button class="hud-btn hud-overflow-item" id="tts-toggle-btn" title="Sound settings" onclick="openAudioSettings(); toggleHudOverflow(false);" data-hud-icon="audio" data-hud-label="Audio" data-hud-size="18" data-i18n="ui.tts.toggle.btn" data-i18n-title="ui.tts.toggle.btn.title">🔊 Audio</button>
-        <button class="hud-btn hud-overflow-item" id="save-btn" title="Save game" onclick="saveAllGame()" data-hud-icon="save" data-hud-label="Save" data-hud-size="18" data-i18n="ui.save.btn" data-i18n-title="ui.save.btn.title">💾 Save</button>
         <button class="hud-btn hud-overflow-item" id="progress-btn" title="Review schedule" onclick="openProgressOverlay(); toggleHudOverflow(false);" data-hud-icon="progress" data-hud-label="Progress" data-hud-size="18" data-i18n="ui.progress.btn" data-i18n-title="ui.progress.btn.title">📊 Progress</button>
         <button class="hud-btn hud-overflow-item" id="leaderboard-btn" title="Leaderboard" onclick="openLeaderboard(); toggleHudOverflow(false);" data-hud-icon="ranks" data-hud-label="Ranks" data-hud-size="18" data-i18n="ui.leaderboard.btn" data-i18n-title="ui.leaderboard.btn.title">🏅 Ranks</button>
         <button class="hud-btn hud-overflow-item" id="fish-album-btn" title="Fish album" onclick="openFishAlbum(); toggleHudOverflow(false);" data-hud-icon="fish" data-hud-label="Fish" data-hud-size="18" data-i18n="ui.fish.album.btn" data-i18n-title="ui.fish.album.btn.title">🐟 Fish</button>
@@ -1123,36 +1123,36 @@
   <script src="vendor/phaser-3.70.0.min.js"></script>
   <!-- Interface language. Loaded before everything: js/i18n.js decides which language the
        page is in, and the level select paints synchronously from these tags. -->
-  <script src="js/i18n.js?v=20260906-listen-v1"></script>
-  <script src="js/locales/en.js?v=20260906-listen-v1"></script>
-  <script src="js/locales/vi.js?v=20260906-listen-v1"></script>
-  <script src="js/locales/catalogs.js?v=20260906-listen-v1"></script>
-  <script src="js/state.js?v=20260906-listen-v1"></script>
-  <script src="js/audio.js?v=20260906-listen-v1"></script>
-  <script src="js/systems/music.js?v=20260906-listen-v1"></script>
-  <script src="js/renderer.js?v=20260906-listen-v1"></script>
-  <script src="js/systems/srs.js?v=20260906-listen-v1"></script>
-  <script src="js/systems/save.js?v=20260906-listen-v1"></script>
-  <script src="js/systems/economy.js?v=20260906-listen-v1"></script>
-  <script src="js/vocabArt.js?v=20260906-listen-v1"></script>
-  <script src="js/vocabArtUnit14.js?v=20260906-listen-v1"></script>
-  <script src="js/vocabArtMore.js?v=20260906-listen-v1"></script>
-  <script src="js/hudArt.js?v=20260906-listen-v1"></script>
-  <script src="js/trophyArt.js?v=20260906-listen-v1"></script>
-  <script src="js/workbookArt.js?v=20260906-listen-v1"></script>
-  <script src="js/vocabStudy.js?v=20260906-listen-v1"></script>
-  <script src="js/data.js?v=20260906-listen-v1"></script>
-  <script src="js/ui.js?v=20260906-listen-v1"></script>
-  <script src="js/systems/atmosphere.js?v=20260906-listen-v1"></script>
-  <script src="js/skins.js?v=20260906-listen-v1"></script>
-  <script src="js/systems/pointer.js?v=20260906-listen-v1"></script>
-  <script src="js/scenes/farm.js?v=20260906-listen-v1"></script>
-  <script src="js/scenes/arcade.js?v=20260906-listen-v1"></script>
-  <script src="js/scenes/dungeon.js?v=20260906-listen-v1"></script>
-  <script src="js/scenes/fishing.js?v=20260906-listen-v1"></script>
-  <script src="js/scenes/bee.js?v=20260906-listen-v1"></script>
-  <script src="js/overlays.js?v=20260906-listen-v1"></script>
-  <script src="js/boot.js?v=20260906-listen-v1"></script>
+  <script src="js/i18n.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/locales/en.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/locales/vi.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/locales/catalogs.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/state.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/audio.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/systems/music.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/renderer.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/systems/srs.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/systems/save.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/systems/economy.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/vocabArt.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/vocabArtUnit14.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/vocabArtMore.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/hudArt.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/trophyArt.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/workbookArt.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/vocabStudy.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/data.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/ui.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/systems/atmosphere.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/skins.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/systems/pointer.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/scenes/farm.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/scenes/arcade.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/scenes/dungeon.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/scenes/fishing.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/scenes/bee.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/overlays.js?v=20260907-hud-crops-v2"></script>
+  <script src="js/boot.js?v=20260907-hud-crops-v2"></script>
 </body>
 
 </html>
