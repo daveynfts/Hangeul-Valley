@@ -1960,6 +1960,63 @@
           "source": "제102회 TOPIK II 읽기"
         }
       ]
+    },
+    {
+      "id": "topik2-mixed",
+      "type": "build",
+      "no": "종합 · 유형 섞임",
+      "pattern": "여러 유형이 섞인 연습 문제",
+      "section": "종합 문제",
+      "sectionEn": "Mixed practice",
+      "icon": "🎲",
+      "mixedTypes": true,
+      "instructionKo": "다음을 읽고 물음에 답하십시오.",
+      "instructionEn": "Read the passage and answer the question.",
+      "blurbEn": "Questions from practice sheets rather than from a paper anyone can name, of whatever type they happen to be. Each one prints its own instruction, because the next one may not be the same kind of question.",
+      "noteEn": "A set that does not tell you what kind of question is coming. On a real paper the type is given away by the 문항 number and by the instruction printed above the whole block; here it is not, so naming the type is the first move rather than something already done for you.\n\nThree things name it before you have read a word of the passage.\n\nThe shape of the options. Four endings hanging off the same verb is the 빈칸 of 문항 1-2. Four orderings of (가)(나)(다)(라) is 순서 배열. Four whole ideas, each of them already grammatical, is a blank inside a passage. Four statements about a poster or a chart is 안내문·도표.\n\nWhere the gap is. A gap in a single free-standing sentence is asking about grammar. A gap in the third or fourth sentence of a paragraph is asking what the paragraph has spent its other sentences establishing, and the vocabulary is not the question.\n\nWhether anything is underlined. An underlined phrase with four expressions under it is 유사 표현, and the answer is the one that keeps the whole sentence true rather than the one that shares a word with it.\n\nOnce the type is named the work is the same as in the grouped sets, and the note on that group is the one to read.",
+      "bank": [],
+      "items": [
+        {
+          "n": 1,
+          "art": "",
+          "instructionKo": "( )에 들어갈 말로 가장 알맞은 것을 고르십시오.",
+          "instructionEn": "Choose the phrase that best fits the blank.",
+          "phraseKo": "다양한 분야에서 활동 중인 디자이너들이 사회를 위해 노력하고 있다.",
+          "lines": [
+            {
+              "ko": "다양한 분야에서 활동 중인 디자이너들이 사회를 위해 노력하고 있다."
+            },
+            {
+              "ko": "자신의 재능과 시간을 {} 쓰기 시작한 것이다."
+            },
+            {
+              "ko": "그들은 무료로 공공장소를 꾸며 주거나 바자회에서 판매할 티셔츠를 디자인해 주는 등 사회사업에 활발히 참여하고 있다."
+            }
+          ],
+          "answer": "needy",
+          "choices": [
+            {
+              "id": "career",
+              "ko": "자신의 경력을 쌓기 위해"
+            },
+            {
+              "id": "needy",
+              "ko": "도움이 필요한 곳을 위해"
+            },
+            {
+              "id": "teach",
+              "ko": "다른 사람을 가르치기 위해"
+            },
+            {
+              "id": "enjoy",
+              "ko": "자기가 하는 일을 즐기기 위해"
+            }
+          ],
+          "en": "Designers working in a wide range of fields are making an effort on behalf of society. That is to say, they have started spending their own talent and time on the places where help is needed. They decorate public spaces for nothing, or design T-shirts to be sold at a charity bazaar, and in ways like these they take an active part in social projects.",
+          "why": "자신의 재능과 시간을 ( ) 쓰기 시작한 것이다 — and 것이다 is the question. A sentence that ends that way is not adding a fact; it is saying the sentence before it again, in plainer words. The sentence before it is 사회를 위해 노력하고 있다, so whatever fills the gap has to be another way of writing 사회를 위해, and only ② points the purpose away from the designers and at somebody else.\n\nThe third sentence is the evidence, and it is built out of 주다. 꾸며 주거나 … 디자인해 주는 — the auxiliary says twice over that the work is done for someone other than the person doing it, and 무료로 says nobody paid for it. A paragraph whose verbs all hand something away cannot be completed by a purpose that keeps the benefit at home.\n\n① and ④ are the same wrong answer written twice, and ① wears the passage’s own vocabulary: 자신의 is lifted straight out of 자신의 재능과 시간. But that phrase names what the designers spend, not who they spend it on, and nowhere does the paragraph measure what they get back. Reusing a word from the text is what makes an option look like a summary; it is not evidence that it is one.\n\n③ is the idea a reader brings from outside. 사회사업 makes anyone think of volunteering and volunteering makes anyone think of teaching, but nothing in this paragraph is teaching. Decorating a public space and designing a T-shirt are doing the work for people, not showing them how to do it themselves.\n\nWorth noticing that all four options end in 위해, so nothing about the grammar can separate them; what differs is only who the purpose serves. Sort them into two piles before reading closely — ① and ④ serve the designer, ② and ③ serve someone else — and the paragraph has only the second pile left to settle.",
+          "grammar": "-는 것이다 restates rather than reports. 쓰기 시작한 것이다 is not they will start; it is that is to say, they started. The same 것이다 also builds a plain prediction — 변해 갈 것이다 — and only its position tells the two apart: a 것이다 that adds no new fact is restating the sentence in front of it.\n\nN을/를 위해 and -기 위해 are one meaning with two left-hand sides. A noun takes the first — 사회를 위해, 도움이 필요한 곳을 위해 — and a verb has to become -기 before it can go there: 경력을 쌓기 위해, 다른 사람을 가르치기 위해. This question puts both shapes among the four options, which is why none of them can be ruled out on grammar.\n\nN 중이다 is in the middle of N, and it wants a noun that names an activity: 활동 중인 디자이너, 회의 중, 공사 중. With a verb it is -는 중 instead.\n\n-아/어 주다 does the action for somebody else. 꾸며 주다 is to decorate it for them and 디자인해 주다 to design it for them, and here the auxiliary carries more of the argument than any content word does: it is what makes the third sentence evidence for the second.\n\n-는 등 closes a list of examples — 꾸며 주거나 … 디자인해 주는 등, decorating, or designing, or things of that kind. The verb in front of 등 is a modifier, so it is always -는 or -(으)ㄴ.\n\n경력을 쌓다 is the set phrase for building a career, and 쌓다 keeps its shape for anything that accumulates: 경험을 쌓다, 신뢰를 쌓다. 가르치다 is the plain verb to teach, and the person taught takes 을/를."
+        }
+      ]
     }
   ]
 }

@@ -1733,6 +1733,22 @@ const overlayIds = [
         });
         check('every exam question is complete, four-choice and explained', thin.length === 0,
           thin.slice(0, 6).join(', '));
+        // 종합 문제 takes whatever type the next practice sheet turns out to be, so its
+        // instruction cannot sit on the group the way a type group's does: one sitting draws
+        // one question and the heading above it has to belong to that question. renderWorkbook
+        // prefers an item's own instructionKo whenever the bank draws one at a time, and a
+        // mixed question that forgot to carry one would quietly inherit the umbrella line and
+        // tell the learner to do a different exercise. Declared with `mixedTypes` rather than
+        // sniffed from the items, so a group that has only ever held one type is still held to
+        // it the moment a second arrives.
+        const mute = [];
+        exs.filter((ex) => ex.mixedTypes === true).forEach((ex) => {
+          (ex.items || []).forEach((it) => {
+            if (!String(it.instructionKo || '').trim()) mute.push(ex.id + ' q' + it.n);
+          });
+        });
+        check('every question in a mixed-type group carries its own instruction',
+          mute.length === 0, mute.slice(0, 6).join(', '));
         // A sitting at the exam desk is one question drawn from the whole paper. That is a
         // property of the content and the renderer together — the bank opts in, the renderer
         // honours it, and the button afterwards offers the next question rather than the same

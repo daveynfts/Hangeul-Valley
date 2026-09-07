@@ -482,7 +482,8 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "다양하게"
+          "다양하게",
+          "다양한"
         ],
         "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
       },
@@ -1396,7 +1397,8 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "자신의"
+          "자신의",
+          "자기가"
         ],
         "example": "자신의 반려견은 물지 않는다고 확신하는 것은 잘못된 것이다."
       },
@@ -3735,7 +3737,8 @@
         "forms": [
           "참여해요",
           "참여할",
-          "참여했습니다"
+          "참여했습니다",
+          "참여하고"
         ],
         "example": "친구와 함께 환경 보호 활동에 참여했어요.",
         "exampleEn": "I took part in an environmental protection activity with a friend."
@@ -3908,7 +3911,8 @@
           "읽어 주는",
           "읽어 줄",
           "주고",
-          "주셨다"
+          "주셨다",
+          "주거나"
         ]
       },
       {
@@ -5630,7 +5634,8 @@
         "category": "사회",
         "categoryEn": "Society & everyday life",
         "forms": [
-          "필요했다"
+          "필요했다",
+          "필요한"
         ],
         "example": "이와 같이 거대한 돌을 운반하고 세우려면 그만큼 많은 사람들의 힘이 필요했다."
       },
@@ -7059,7 +7064,8 @@
         "category": "경제",
         "categoryEn": "Economy & business",
         "forms": [
-          "판매했다"
+          "판매했다",
+          "판매할"
         ],
         "example": "그리고 이를 판화에 새긴 후 일정한 기간을 두고 순서대로 인쇄해 판매했다."
       },
@@ -7835,6 +7841,178 @@
         "category": "경제",
         "categoryEn": "Economy & business",
         "example": "TV 프로그램 제작자들이 관광객을 촬영하러 인주시로 모여들었다."
+      },
+      {
+        "ko": "분야",
+        "en": "a field, one of the areas a person can work in",
+        "hint": "🗂️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "활동",
+        "en": "activity — the work someone is engaged in",
+        "hint": "🏃",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "활동 중인"
+        ]
+      },
+      {
+        "ko": "디자이너",
+        "en": "a designer",
+        "hint": "🎨",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "디자인하다",
+        "en": "to design something",
+        "hint": "✏️",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment",
+        "forms": [
+          "디자인해"
+        ]
+      },
+      {
+        "ko": "사회",
+        "en": "society",
+        "hint": "🏙️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "노력하다",
+        "en": "to make an effort at something",
+        "hint": "💪",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "노력하고"
+        ]
+      },
+      {
+        "ko": "재능",
+        "en": "a natural talent",
+        "hint": "⭐",
+        "category": "문화",
+        "categoryEn": "Culture & entertainment"
+      },
+      {
+        "ko": "무료",
+        "en": "free of charge",
+        "hint": "🆓",
+        "category": "경제",
+        "categoryEn": "Economy & business",
+        "forms": [
+          "무료로"
+        ]
+      },
+      {
+        "ko": "공공장소",
+        "en": "a public place",
+        "hint": "🏛️",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "꾸미다",
+        "en": "to decorate a place, to do it up",
+        "hint": "🎀",
+        "category": "사회",
+        "categoryEn": "Society & everyday life",
+        "forms": [
+          "꾸며"
+        ]
+      },
+      {
+        "ko": "바자회",
+        "en": "a charity bazaar",
+        "hint": "🎪",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "티셔츠",
+        "en": "a T-shirt",
+        "hint": "👕",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "사회사업",
+        "en": "social work — projects run for the public good",
+        "hint": "🤝",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "활발히",
+        "en": "actively, with visible energy",
+        "hint": "⚡",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "경력",
+        "en": "a career record, the experience one has built up",
+        "hint": "📄",
+        "category": "경제",
+        "categoryEn": "Economy & business"
+      },
+      {
+        "ko": "쌓다",
+        "en": "to build up, to pile one thing on another",
+        "hint": "🧱",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "도움",
+        "en": "help",
+        "hint": "🆘",
+        "category": "봉사·모집",
+        "categoryEn": "Volunteering & applications"
+      },
+      {
+        "ko": "가르치다",
+        "en": "to teach",
+        "hint": "🏫",
+        "category": "사회",
+        "categoryEn": "Society & everyday life"
+      },
+      {
+        "ko": "-는 것이다",
+        "en": "that is to say — a sentence that says the one before it again",
+        "hint": "📘",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "시작한 것이다"
+        ]
+      },
+      {
+        "ko": "-는 등",
+        "en": "doing this, doing that, and so on — it closes a list of examples",
+        "hint": "📑",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "주는 등"
+        ]
+      },
+      {
+        "ko": "N을/를 위해",
+        "en": "for the sake of N — the noun twin of -기 위해",
+        "hint": "🎯",
+        "category": "문법",
+        "categoryEn": "Grammar & expressions",
+        "forms": [
+          "을 위해",
+          "를 위해"
+        ]
       }
     ]
   },

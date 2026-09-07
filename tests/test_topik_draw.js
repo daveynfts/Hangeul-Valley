@@ -127,6 +127,13 @@ assert(one.id === ex.id, 'it keeps its id, so the picker and the practice record
 assert(one.type === ex.type && one.instructionKo === ex.instructionKo,
   'and everything else the renderer reads');
 assert(one.drawnFrom === N, 'it records how big the paper was (' + one.drawnFrom + ')');
+// A group may hold more than one type of question — 종합 문제 does — and then the drawn
+// question's own instruction is the heading, not the group's umbrella line. The content side
+// of this is an invariant in validate_content.js; what is asserted here is that the renderer
+// looks at the item at all, since a group instruction is a plausible-looking wrong answer.
+assert(/const drawn = \(st\.bank && st\.bank\.drawOne\)/.test(ui)
+  && /head\.instructionKo/.test(ui),
+  'renderWorkbook prefers the drawn question\'s instruction over the group\'s');
 assert(typeof one.items[0].why === 'string' && one.items[0].why.length > 200,
   'the drawn question brings its explanation with it');
 assert((one.items[0].choices || []).length === 4, 'and its four options');

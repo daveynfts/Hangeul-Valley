@@ -6841,6 +6841,153 @@ const TOPIK_VOCAB_ART_ROWS = [
     "folder": "items",
     "nameEn": "manufacture, the making of a thing",
     "family": "topik-vocabulary"
+  },
+  {
+    "ko": "분야",
+    "slug": "emoji_1f5c2",
+    "folder": "items",
+    "nameEn": "a field, one of the areas a person can work in",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "활동",
+    "slug": "emoji_1f3c3",
+    "folder": "items",
+    "nameEn": "activity — the work someone is engaged in",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "디자이너",
+    "slug": "emoji_1f3a8",
+    "folder": "items",
+    "nameEn": "a designer",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "디자인하다",
+    "slug": "emoji_270f",
+    "folder": "items",
+    "nameEn": "to design something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사회",
+    "slug": "emoji_1f3d9",
+    "folder": "items",
+    "nameEn": "society",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "노력하다",
+    "slug": "emoji_1f4aa",
+    "folder": "items",
+    "nameEn": "to make an effort at something",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "재능",
+    "slug": "emoji_2b50",
+    "folder": "items",
+    "nameEn": "a natural talent",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "무료",
+    "slug": "emoji_1f193",
+    "folder": "items",
+    "nameEn": "free of charge",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "공공장소",
+    "slug": "emoji_1f3db",
+    "folder": "items",
+    "nameEn": "a public place",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "꾸미다",
+    "slug": "emoji_1f380",
+    "folder": "items",
+    "nameEn": "to decorate a place, to do it up",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "바자회",
+    "slug": "emoji_1f3aa",
+    "folder": "items",
+    "nameEn": "a charity bazaar",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "티셔츠",
+    "slug": "emoji_1f455",
+    "folder": "items",
+    "nameEn": "a T-shirt",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "사회사업",
+    "slug": "emoji_1f91d",
+    "folder": "items",
+    "nameEn": "social work — projects run for the public good",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "활발히",
+    "slug": "emoji_26a1",
+    "folder": "items",
+    "nameEn": "actively, with visible energy",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "경력",
+    "slug": "emoji_1f4c4",
+    "folder": "items",
+    "nameEn": "a career record, the experience one has built up",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "쌓다",
+    "slug": "emoji_1f9f1",
+    "folder": "items",
+    "nameEn": "to build up, to pile one thing on another",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "도움",
+    "slug": "emoji_1f198",
+    "folder": "items",
+    "nameEn": "help",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "가르치다",
+    "slug": "emoji_1f3eb",
+    "folder": "items",
+    "nameEn": "to teach",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-는 것이다",
+    "slug": "emoji_1f4d8",
+    "folder": "items",
+    "nameEn": "that is to say — a sentence that says the one before it again",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "-는 등",
+    "slug": "emoji_1f4d1",
+    "folder": "items",
+    "nameEn": "doing this, doing that, and so on — it closes a list of examples",
+    "family": "topik-vocabulary"
+  },
+  {
+    "ko": "N을/를 위해",
+    "slug": "emoji_1f3af",
+    "folder": "items",
+    "nameEn": "for the sake of N — the noun twin of -기 위해",
+    "family": "topik-vocabulary"
   }
 ];
 if (typeof VOCAB_ART_ROWS !== 'undefined' && Array.isArray(VOCAB_ART_ROWS)) {

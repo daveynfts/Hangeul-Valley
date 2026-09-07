@@ -17,6 +17,22 @@ rather than by the day a question arrived. The types so far:
 | `topik2-order` | 순서 배열 | four sentences out of order, and four orderings of them |
 | `topik2-passage` | 지문 빈칸 | a passage with one phrase cut out, and four ideas to fill it (16-18, 28-31) |
 | `topik2-double` | 읽고 답하기 | one passage, two questions on `choices2` — a gap, then 주제 or 내용 일치 |
+| `topik2-mixed` | 종합 문제 | whatever type the next practice sheet turns out to be |
+
+**New questions go in `topik2-mixed`.** The seven type groups above are closed sets holding the
+제102회 questions; the photographs that arrive now come from teachers' practice sheets, whose
+numbers are drill positions rather than positions in a sitting, and a set that hands the learner
+the type for free has given away half of what it was for.
+
+That group declares `mixedTypes: true`, and one question of an unknown type per sitting means the
+instruction cannot sit on the group: `renderWorkbook` prefers the drawn item's own `instructionKo`
+/ `instructionEn` whenever the bank sets `drawOne`, and `validate_content.js` requires every item
+in a `mixedTypes` group to carry one. The group's own `instructionKo` is the umbrella line
+다음을 읽고 물음에 답하십시오, which is what shows if a question ever forgets — hence the check.
+
+A 순서 배열 question landing here is the one shape to think about before filing it, because
+`labelOptions` exempts a whole group from the per-option gloss rule and this group must not be
+exempt. Give it its own group, or split the flag per item first.
 
 The bank sets `drawOne: true`, so a sitting is one question drawn from the whole
 paper rather than the paper worked through. The draw is a bag, not `Math.random()` —
@@ -192,6 +208,23 @@ node -e "require('./docs/topik-art-manifest.json').retained.filter(e=>e.standIn)
 
 Replacing one later means editing that entry and re-running the apply script; nothing in the
 questions or the word list has to move.
+
+### When the artwork is being deferred
+
+Picking a free sprite by hand only works while unclaimed ones exist that are anywhere near the
+word, and that supply ran out. A question can still land without any artwork being made:
+
+```bash
+node scripts/make_emoji_tiles.js --new --dry-run   # every word in the world not yet declared
+node scripts/make_emoji_tiles.js --new
+npm run art:topik:apply && npm run art:words
+```
+
+`--new` draws each undeclared word's own `hint` emoji as a tile, registers it, and files the
+word as `retained` with `standIn: true` — so the word is unique in the manifest, hoverable in
+the question, and already in the redesign backlog the query above prints. Write the words into
+`worlds/topik-2.json` first and append them at the end, because the entries it creates carry
+the index it finds them at. It runs on Windows only, and its output is committed.
 
 ### Then make it findable
 

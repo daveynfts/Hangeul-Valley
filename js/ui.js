@@ -4870,9 +4870,15 @@ function renderWorkbook() {
 
   const inst = $('wb-instruction');
   if (inst) {
+    // A bank that draws one question a sitting can hold questions of different types in a
+    // single group — 종합 문제 does, on purpose — and then the instruction belongs to the
+    // question and not to the group above it. Every other bank shows a whole exercise at
+    // once, where one instruction covers every row, so those keep the group's.
+    const drawn = (st.bank && st.bank.drawOne) ? (ex.items || [])[0] : null;
+    const head = (drawn && drawn.instructionKo) ? drawn : ex;
     inst.innerHTML =
-      '<div class="wb-inst-ko">' + vbEsc(ex.instructionKo || '') + '</div>' +
-      '<div class="wb-inst-en">' + vbEsc(tr(ex, 'instructionEn') || '') + '</div>' +
+      '<div class="wb-inst-ko">' + vbEsc(head.instructionKo || '') + '</div>' +
+      '<div class="wb-inst-en">' + vbEsc(tr(head, 'instructionEn') || '') + '</div>' +
       (ex.noteEn ? '<div class="wb-inst-note">' + vbEsc(tr(ex, 'noteEn')) + '</div>' : '');
   }
 

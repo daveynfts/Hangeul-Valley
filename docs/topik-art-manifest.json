@@ -379,6 +379,153 @@
       "ko": "활기차다",
       "file": "sprites/items/lively_farmer.png",
       "reviewed": true
+    },
+    {
+      "index": 840,
+      "ko": "분야",
+      "file": "sprites/items/emoji_1f5c2.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 841,
+      "ko": "활동",
+      "file": "sprites/items/emoji_1f3c3.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 842,
+      "ko": "디자이너",
+      "file": "sprites/items/emoji_1f3a8.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 843,
+      "ko": "디자인하다",
+      "file": "sprites/items/emoji_270f.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 844,
+      "ko": "사회",
+      "file": "sprites/items/emoji_1f3d9.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 845,
+      "ko": "노력하다",
+      "file": "sprites/items/emoji_1f4aa.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 846,
+      "ko": "재능",
+      "file": "sprites/items/emoji_2b50.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 847,
+      "ko": "무료",
+      "file": "sprites/items/emoji_1f193.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 848,
+      "ko": "공공장소",
+      "file": "sprites/items/emoji_1f3db.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 849,
+      "ko": "꾸미다",
+      "file": "sprites/items/emoji_1f380.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 850,
+      "ko": "바자회",
+      "file": "sprites/items/emoji_1f3aa.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 851,
+      "ko": "티셔츠",
+      "file": "sprites/items/emoji_1f455.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 852,
+      "ko": "사회사업",
+      "file": "sprites/items/emoji_1f91d.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 853,
+      "ko": "활발히",
+      "file": "sprites/items/emoji_26a1.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 854,
+      "ko": "경력",
+      "file": "sprites/items/emoji_1f4c4.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 855,
+      "ko": "쌓다",
+      "file": "sprites/items/emoji_1f9f1.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 856,
+      "ko": "도움",
+      "file": "sprites/items/emoji_1f198.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 857,
+      "ko": "가르치다",
+      "file": "sprites/items/emoji_1f3eb.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 858,
+      "ko": "-는 것이다",
+      "file": "sprites/items/emoji_1f4d8.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 859,
+      "ko": "-는 등",
+      "file": "sprites/items/emoji_1f4d1.png",
+      "reviewed": true,
+      "standIn": true
+    },
+    {
+      "index": 860,
+      "ko": "N을/를 위해",
+      "file": "sprites/items/emoji_1f3af.png",
+      "reviewed": true,
+      "standIn": true
     }
   ],
   "entries": [
