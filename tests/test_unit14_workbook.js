@@ -17,6 +17,7 @@ const vm = require('vm');
 
 const ROOT = path.join(__dirname, '..');
 const wb = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', 'unit14-workbook.json'), 'utf8'));
+const i18nSrc = fs.readFileSync(path.join(ROOT, 'js', 'i18n.js'), 'utf8');
 const uiSrc = fs.readFileSync(path.join(ROOT, 'js', 'ui.js'), 'utf8');
 const artSrc = fs.readFileSync(path.join(ROOT, 'js', 'workbookArt.js'), 'utf8');
 const farm = fs.readFileSync(path.join(ROOT, 'js', 'scenes', 'farm.js'), 'utf8');
@@ -140,6 +141,10 @@ function loadUi() {
   // The grammar exercise draws its own icons, so the art module has to be in the
   // sandbox before ui.js renders a row that calls workbookIconSvg.
   vm.runInContext(artSrc, sandbox);
+  // The renderers read curriculum prose through tr(). Without js/i18n.js in here the
+  // sandbox proxy answers `tr` with its no-op, so every explanation renders empty and
+  // the assertions below pass or fail on nothing.
+  vm.runInContext(i18nSrc, sandbox);
   vm.runInContext(uiSrc, sandbox);
   return {
     els, sfx, quests,

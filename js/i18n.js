@@ -75,7 +75,11 @@ const HV_TEXT_FIELDS = [
   'categoryEn', 'nameEn', 'descriptionEn', 'titleEn', 'instructionEn', 'blurbEn',
   'noteEn', 'exampleEn', 'sectionEn', 'secEn', 'pickEn', 'checkEn', 'againEn',
   'backEn', 'doneEn', 'hintEn', 'promptEn', 'subtitleEn', 'labelEn',
-  'why', 'q', 'A', 'B', 'C', 'D',
+  // `grammar` is the RULE card beside `why` in the TOPIK explanation — the same prose by the
+  // same hand, for the same reader. Leaving it off this list meant it was never extracted,
+  // so it had no translations to be missing: the panel's coverage read 100% while half of
+  // every explanation on it was still in English.
+  'why', 'grammar', 'q', 'A', 'B', 'C', 'D',
   'note', 'l', 'description', 'source', 'title',
   // The eyebrow on a level-select card — "Unit 10", "TOPIK II". Two words on a card is easy
   // to mistake for an identifier and leave out; it is the first thing on the first screen,

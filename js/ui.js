@@ -4173,7 +4173,7 @@ function renderDictation() {
             + '</div></div>'
           : '')
         + '<div class="cs-why"><span class="cs-en">' + vbEsc(tr(it, 'en')) + '</span>'
-        + '<span class="cs-note">' + vbEsc(it.why) + '</span></div>';
+        + '<span class="cs-note">' + vbEsc(tr(it, 'why')) + '</span></div>';
     }
   }
   renderDictationRates();
@@ -4848,7 +4848,10 @@ function wbWhyParagraphs(value) {
 }
 
 function wbTopikWhyHtml(ex, item, view) {
-  const parts = wbWhyParagraphs(item.why);
+  // Through tr(), not off the object. Both cards are curriculum prose with a catalogue
+  // behind them, and reading the raw field is how a fully translated explanation still
+  // arrived in English.
+  const parts = wbWhyParagraphs(tr(item, 'why'));
   const lead = parts.shift() || '';
   const detail = parts;
   const state = view.ok ? '정답 · CORRECT' : '다시 보기 · REVIEW';
@@ -4871,8 +4874,8 @@ function wbTopikWhyHtml(ex, item, view) {
     '<div class="wb-learn-grid">' +
       (lead ? '<section class="wb-learn-card wb-learn-clue"><span>01 · 핵심 단서 · WHAT TO NOTICE</span>' +
         '<p>' + vbEsc(lead) + '</p></section>' : '') +
-      (item.grammar ? '<section class="wb-learn-card wb-learn-rule"><span>02 · 문법 포인트 · RULE</span>' +
-        '<p>' + vbEsc(item.grammar) + '</p></section>' : '') +
+      (tr(item, 'grammar') ? '<section class="wb-learn-card wb-learn-rule"><span>02 · 문법 포인트 · RULE</span>' +
+        '<p>' + vbEsc(tr(item, 'grammar')) + '</p></section>' : '') +
     '</div>' + detailHtml +
   '</article>';
 }
@@ -5186,8 +5189,8 @@ function renderWorkbook() {
                 second: correct2 ? wbAnswerText(correct2) : '' }) + '</div>' +
           (ok ? '' : '<div class="wb-why-yours">You put: ' + vbEsc(yours) + '</div>') +
           '<div class="wb-why-en">' + vbEsc(tr(item, 'en') || '') + '</div>' +
-          '<div class="wb-why-body">' + vbEsc(item.why || '') + '</div>' +
-          '<div class="wb-why-gram">📐 ' + vbEsc(item.grammar || '') + '</div>' +
+          '<div class="wb-why-body">' + vbEsc(tr(item, 'why')) + '</div>' +
+          '<div class="wb-why-gram">📐 ' + vbEsc(tr(item, 'grammar')) + '</div>' +
         '</div>';
       }).join('');
       // Every headword this world teaches becomes hoverable inside the explanation.

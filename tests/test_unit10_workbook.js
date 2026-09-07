@@ -23,6 +23,7 @@ const ROOT = path.join(__dirname, '..');
 const wb = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', 'unit10-workbook.json'), 'utf8'));
 const world = JSON.parse(fs.readFileSync(path.join(ROOT, 'worlds', '2b-unit-10.json'), 'utf8'));
 const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, 'sprites', 'catalog.json'), 'utf8'));
+const i18nSrc = fs.readFileSync(path.join(ROOT, 'js', 'i18n.js'), 'utf8');
 const uiSrc = fs.readFileSync(path.join(ROOT, 'js', 'ui.js'), 'utf8');
 const { collectUploadFiles } = require('../scripts/r2Content.js');
 const css = fs.readFileSync(path.join(ROOT, 'css', 'game.css'), 'utf8');
@@ -102,6 +103,10 @@ function loadUi() {
   });
   vm.createContext(sandbox);
   vm.runInContext(fs.readFileSync(path.join(ROOT, 'js', 'workbookArt.js'), 'utf8'), sandbox);
+  // The renderers read curriculum prose through tr(). Without js/i18n.js in here the
+  // sandbox proxy answers `tr` with its no-op, so every explanation renders empty and
+  // the assertions below pass or fail on nothing.
+  vm.runInContext(i18nSrc, sandbox);
   vm.runInContext(uiSrc, sandbox);
   return {
     els,
