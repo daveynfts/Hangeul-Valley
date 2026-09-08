@@ -2547,7 +2547,12 @@
     .cs-ten { font-size: 10.5px; color: #6b4a22; }
     .cs-td { flex: 0 0 auto; margin-left: auto; font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 8px; color: var(--wood-m); }
 
-    #listen-right { display: flex; flex-direction: column; min-width: 0; }
+    /* min-height: 0 is doing real work here, not tidying. This is a grid item, so its
+       default min-height:auto refuses to shrink below its content — it grew to 1016px inside
+       a 614px row, .cs-script never overflowed and so never scrolled, and #listen-panel
+       clips at overflow:hidden. The last few lines of a long transcript were simply gone,
+       with no way to reach them. */
+    #listen-right { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
     #listen-transport {
       display: flex; align-items: center; gap: 12px; padding: 14px 16px;
       border-bottom: 2px solid var(--wood-l); flex: 0 0 auto;

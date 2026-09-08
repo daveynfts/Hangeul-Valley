@@ -122,25 +122,60 @@ console.log('\n--- 3. The waveform does not change scale when playback starts --
   assert(dictFn.indexOf('csDurCache') > 0, 'the dictation strip does the same');
 }
 
-// ── 4. A line preview is not the transport ───────────────────────────────────
-console.log('\n--- 4. Playing a line does not move the track playhead ---');
+// ── 4. Pressing a line hands it to the transport ─────────────────────────────
+console.log('\n--- 4. A line with a span becomes the armed stretch ---');
 {
+  // This started out the other way round: a line previewed on a private element that left the
+  // transport alone, so a press could not move somebody's place in the recording. That made
+  // the line a dead end — the waveform showed nothing, and repeat, ↺ Play A–B and the 0.75×
+  // / 0.5× buttons, all of which exist for exactly this, could not reach what was playing.
+  // Arming the range instead hands the line to every one of them.
   const ui = fs.readFileSync(path.join(ROOT, 'js', 'ui.js'), 'utf8');
+  const fn = ui.slice(ui.indexOf('function listenPlayLine('), ui.indexOf('function csArmedScriptLine('));
+  assert(fn.length > 200, 'found listenPlayLine');
+  assert(/st\.a = line\.at;/.test(fn) && /st\.b = end > line\.at \? end : null;/.test(fn),
+    'a line with a span arms A–B to exactly that span');
+  assert(/listenReplayAB\(\);/.test(fn),
+    'and starts through listenReplayAB, so there is one way an armed stretch begins');
+
+  // The line a stretch belongs to is read back off the marks rather than remembered, so
+  // clearing them, moving them, or changing track cannot leave a stale highlight behind.
+  assert(/function csArmedScriptLine\(\)/.test(ui), 'the armed line is derived from the marks');
+  const paint = ui.slice(ui.indexOf('function csPaintScriptPlaying()'), ui.indexOf('function listenReplayAB('));
+  assert(/csArmedScriptLine\(\)/.test(paint) && /csClipLine/.test(paint),
+    'and the highlight follows either route');
+  const playing = ui.slice(ui.indexOf('function csPaintPlaying()'), ui.indexOf('function csPaintProgress('));
+  assert(/csPaintScriptPlaying\(\)/.test(playing),
+    'the script buttons repaint whenever the transport starts or stops');
+
+  // The other route is still there for the lines that have no span: their sentence exists
+  // only as a separate dictation clip, which is not in this track and cannot be pointed at.
   assert(/function csClipPlay\(/.test(ui) && /function csClipStop\(/.test(ui),
-    'a line plays on its own element');
+    'a line with no span still previews from its own clip');
   const stop = ui.slice(ui.indexOf('function csStop()'), ui.indexOf('function csPlay('));
-  assert(stop.indexOf('csClipStop()') > 0, 'starting the transport stops a line preview');
+  assert(stop.indexOf('csClipStop()') > 0, 'starting the transport stops such a preview');
   const clipPlay = ui.slice(ui.indexOf('function csClipPlay('), ui.indexOf('function csIsPlaying('));
-  assert(clipPlay.indexOf('csStop()') > 0, 'and starting a line preview stops the transport');
+  assert(clipPlay.indexOf('csStop()') > 0, 'and the preview stops the transport — never both at once');
   assert(/to > 0 && \(el\.currentTime \|\| 0\) >= to/.test(clipPlay),
-    'a line stops where the line stops, rather than reading on into the next one');
+    'a clip stops where the line stops rather than reading on');
+
   assert(/window\.listenPlayLine = listenPlayLine;/.test(ui),
     'the button in the script pane resolves to an export, like every other onclick');
   assert(/class="cs-lineplay cs-lineplay-off"/.test(ui),
     'a line with no audio gets a spacer rather than a button that does nothing');
+
   const css = fs.readFileSync(path.join(ROOT, 'css', 'game.css'), 'utf8');
   assert(/\.cs-lineplay \{/.test(css) && /\.cs-line\.playing \{/.test(css),
     'the button and the line it is playing are styled');
+  // A long transcript has to scroll. #listen-right is a grid item, and its default
+  // min-height:auto refused to shrink below its content: it grew to 1016px inside a 614px
+  // row, .cs-script never overflowed and so never scrolled, and #listen-panel clips at
+  // overflow:hidden — the last lines of unit 15's interview were unreachable.
+  const right = css.slice(css.indexOf('#listen-right {'), css.indexOf('#listen-right {') + 200);
+  assert(/min-height:\s*0/.test(right), 'the script column can shrink below its content');
+  const script = css.slice(css.indexOf('.cs-script { padding'), css.indexOf('.cs-script { padding') + 160);
+  assert(/overflow-y:\s*auto/.test(script) && /min-height:\s*0/.test(script),
+    'so the transcript itself is what scrolls');
 }
 
 // ── 5. Re-running the measuring script cannot undo hand work ─────────────────

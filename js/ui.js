@@ -3217,6 +3217,9 @@ function csPaintPlaying() {
     b.classList.toggle('on', on);
     b.textContent = on ? '❙❙' : '▶';
   });
+  // The script's own buttons follow the transport now that a line can arm it, so they are
+  // repainted by whatever starts or stops it rather than only by the line that was pressed.
+  if (typeof csPaintScriptPlaying === 'function') csPaintScriptPlaying();
 }
 
 // The clock only. The playhead moved to #listen-wave, which the ticker repaints — a bar and
@@ -3922,25 +3925,73 @@ function listenPlayLine(li) {
   const t = (bank.tracks || [])[st.i];
   const line = t && (t.lines || [])[li];
   if (!line) return;
-  // A second press on the line that is sounding stops it, the way the transport does.
-  if (csClipLine === li) { csClipStop(); csPaintScriptPlaying(); return; }
-  const done = () => csPaintScriptPlaying();
-  let started = false;
+
+  // A line with a measured span becomes the armed A–B stretch, and plays through the ordinary
+  // transport.
+  //
+  // It used to preview on a private element that deliberately left the transport alone, so a
+  // press would not move somebody's place in the recording. That was the wrong trade: it made
+  // the line a dead end. The waveform showed nothing, and none of the controls built for
+  // exactly this — repeat, ↺ Play A–B, 0.75× and 0.5× — could reach what you were listening
+  // to. Arming the range instead means pressing a line hands it to all of them.
   if (typeof line.at === 'number') {
-    started = csClipPlay(t.src, line.at, typeof line.end === 'number' ? line.end : 0, st.rate, done);
-  } else {
-    started = csClipPlay(listenLineClip(line), 0, 0, st.rate, done);
+    csClipStop();
+    // A second press on the line already armed and sounding stops it, the way the transport
+    // button does.
+    if (csArmedScriptLine() === li && csIsPlaying()) { csStop(); renderListen(); return; }
+    const end = typeof line.end === 'number' ? line.end : 0;
+    st.a = line.at;
+    st.b = end > line.at ? end : null;
+    st.at = line.at;
+    // Through listenReplayAB so there is one place that starts an armed stretch, rather than
+    // this growing a second, subtly different copy of it.
+    listenReplayAB();
+    return;
   }
+
+  // No span, so there is nothing to point at on the strip — these play their own dictation
+  // clip, off to the side, exactly as before.
+  if (csClipLine === li) { csClipStop(); csPaintScriptPlaying(); return; }
+  const started = csClipPlay(listenLineClip(line), 0, 0, st.rate, () => csPaintScriptPlaying());
   if (started) csClipLine = li;
   csPaintScriptPlaying();
 }
 
 // Repainted rather than re-rendered: rebuilding the script pane on every state change would
 // throw away the reader's scroll position mid-sentence.
+/**
+ * Which script line the armed A–B stretch is, or -1.
+ *
+ * Derived rather than remembered. A second variable would have to be cleared when the track
+ * changes, when Clear empties the marks, when A or B is moved by hand, and when the strip is
+ * dragged — four places to forget. Reading it back off the marks cannot go stale: move them
+ * and the answer moves with them.
+ */
+function csArmedScriptLine() {
+  const st = listenState, bank = cassetteBank;
+  if (!st || !bank || typeof st.a !== 'number') return -1;
+  const t = (bank.tracks || [])[st.i];
+  const lines = (t && t.lines) || [];
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i];
+    if (typeof l.at !== 'number') continue;
+    // A hundredth is what the spans are rounded to, so anything closer than two of them is
+    // the same mark rather than a coincidence.
+    if (Math.abs(l.at - st.a) > 0.02) continue;
+    if (typeof l.end === 'number' && typeof st.b === 'number' && Math.abs(l.end - st.b) > 0.02) continue;
+    return i;
+  }
+  return -1;
+}
+
 function csPaintScriptPlaying() {
   if (typeof document === 'undefined' || !document.querySelectorAll) return;
+  // Two ways a line can be the one sounding: armed on the strip and played by the transport,
+  // or previewed from its own dictation clip because it has no span to arm.
+  const armed = csIsPlaying() ? csArmedScriptLine() : -1;
   document.querySelectorAll('#listen-script .cs-line').forEach((row) => {
-    const on = Number(row.getAttribute('data-li')) === csClipLine;
+    const i = Number(row.getAttribute('data-li'));
+    const on = i === csClipLine || i === armed;
     row.classList.toggle('playing', on);
     const btn = row.querySelector('.cs-lineplay');
     if (btn) { btn.classList.toggle('on', on); btn.textContent = on ? '❙❙' : '▶'; }
