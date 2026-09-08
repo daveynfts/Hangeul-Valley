@@ -6,6 +6,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 // Lazy so consumers that never touch R2 (tests/test_r2_content.js, CI's test job
 // with no root node_modules) can load this module without @aws-sdk/client-s3.
@@ -17,6 +18,11 @@ function sdk() {
 
 const ROOT = path.resolve(__dirname, '..');
 const PREFIX = 'hangeul-valley/';
+// How many R2 requests are in flight at once. Publish used to PUT one file and then HEAD one
+// at a time — 3406 sequential round-trips to Cloudflare for 1703 files, which cost 19 minutes
+// of upload and 6 of verify inside a job capped at 40. The files are 8-80KB, so none of that
+// was bandwidth; it was latency, paid 3406 times over.
+const UPLOAD_CONCURRENCY = Math.max(1, Number(process.env.R2_UPLOAD_CONCURRENCY) || 16);
 const REQUIRED_RELS = [
   'levels.json',
   'facts.json',
@@ -63,6 +69,7 @@ function parsePublishArgs(argv) {
     skipValidate: false,
     skipUpload: false,
     skipVerify: false,
+    forceUpload: false,
     skipDeploy: false,
     skipTts: false,
     envFile: '',
@@ -74,6 +81,7 @@ function parsePublishArgs(argv) {
     if (a === '--dry-run') flags.dryRun = true;
     else if (a === '--skip-validate') flags.skipValidate = true;
     else if (a === '--skip-upload') flags.skipUpload = true;
+    else if (a === '--force-upload') flags.forceUpload = true;
     else if (a === '--skip-verify') flags.skipVerify = true;
     else if (a === '--skip-deploy') flags.skipDeploy = true;
     else if (a === '--skip-tts') flags.skipTts = true;
@@ -82,6 +90,33 @@ function parsePublishArgs(argv) {
     else throw new Error('Unknown flag: ' + a);
   }
   return flags;
+}
+
+// Bounded parallelism, results in the input's order. It stops handing out work once
+// something has thrown, so a publish that is about to fail does not go on issuing hundreds of
+// requests behind the error it is going to report.
+async function pooled(items, limit, worker) {
+  const list = Array.isArray(items) ? items : [];
+  const out = new Array(list.length);
+  const width = Math.max(1, Math.min(limit || 1, list.length));
+  let next = 0;
+  let failure = null;
+  const runner = async () => {
+    for (;;) {
+      if (failure) return;
+      const i = next++;
+      if (i >= list.length) return;
+      try {
+        out[i] = await worker(list[i], i);
+      } catch (e) {
+        if (!failure) failure = e;
+        return;
+      }
+    }
+  };
+  await Promise.all(Array.from({ length: width }, runner));
+  if (failure) throw failure;
+  return out;
 }
 
 function cacheControl(ctype) {
@@ -226,7 +261,11 @@ function createR2Client() {
     client: new S3Client({
       region: 'auto',
       endpoint: 'https://' + c.accountId + '.r2.cloudflarestorage.com',
-      credentials: { accessKeyId: c.accessKeyId, secretAccessKey: c.secretAccessKey }
+      credentials: { accessKeyId: c.accessKeyId, secretAccessKey: c.secretAccessKey },
+      // Above the SDK's default of 3, because UPLOAD_CONCURRENCY requests now race where one
+      // used to go at a time, and a throttle under that load must cost a retry rather than
+      // the whole publish.
+      maxAttempts: 6
     }),
     bucket: c.bucket
   };
@@ -248,32 +287,53 @@ function objectKey(rel) {
   return PREFIX + String(rel).replace(/\\/g, '/');
 }
 
-// Which Korean clips the CDN already holds: Map of repo-relative path
-// ('audio/ko/<hex>.mp3') to object size.
+// An object's ETag is the MD5 of its body — but only for an object written whole. A
+// multipart upload's is '<md5>-<parts>', which is not the body's MD5 at all, so a suffixed
+// ETag is reported as unknown rather than guessed at. Everything here is PUT in one piece,
+// so in practice the hex form is what comes back.
+function etagHex(etag) {
+  const s = String(etag || '').replace(/^"|"$/g, '').trim();
+  return /^[0-9a-f]{32}$/i.test(s) ? s.toLowerCase() : '';
+}
+
+// What the bucket already holds: Map of repo-relative path to { size, etag }.
 //
-// The clip filename hashes the phrase, so an existing object is definitively the clip for
-// that text — which is what lets the render step skip it. The size is what distinguishes
-// "same clip, already published" from "same phrase, re-rendered differently" (a voice or
-// rate change keeps the filename but changes the bytes), so a forced re-render still
-// uploads instead of being silently filtered out.
-async function listRemoteTtsRels(client, bucket) {
+// One listing answers three questions that used to cost a request per file — whether a
+// Korean clip needs rendering, whether it needs uploading, and whether anything else has
+// changed since the last publish. Paginated because the bucket holds ~6000 objects and a
+// listing returns 1000 at a time.
+async function listRemoteObjects(client, bucket, relPrefix) {
   const { ListObjectsV2Command } = sdk();
-  const { TTS_DIR_REL } = require('./ttsClips');
-  const prefix = PREFIX + TTS_DIR_REL + '/';
-  const rels = new Map();
+  const prefix = PREFIX + String(relPrefix || '').replace(/\\/g, '/');
+  const out = new Map();
   let token;
   do {
-    const out = await client.send(new ListObjectsV2Command({
+    const res = await client.send(new ListObjectsV2Command({
       Bucket: bucket,
       Prefix: prefix,
       ContinuationToken: token
     }));
-    (out.Contents || []).forEach((o) => {
-      if (o && o.Key && o.Size > 0) rels.set(o.Key.slice(PREFIX.length), o.Size);
+    (res.Contents || []).forEach((o) => {
+      if (!o || !o.Key || !(o.Size > 0)) return;
+      out.set(o.Key.slice(PREFIX.length), { size: Number(o.Size), etag: etagHex(o.ETag) });
     });
-    token = out.IsTruncated ? out.NextContinuationToken : undefined;
+    token = res.IsTruncated ? res.NextContinuationToken : undefined;
   } while (token);
-  return rels;
+  return out;
+}
+
+// The Korean clips out of that listing, as the Map of path to size that the render step and
+// dropPublishedClips both read. Derived rather than fetched again: the clip filename hashes
+// the phrase, so an object on R2 is definitively that phrase's clip, and the size is what
+// tells "already published" apart from "re-rendered since" — a voice or rate change keeps
+// the filename and changes the bytes.
+function ttsSizes(remote) {
+  const { TTS_DIR_REL } = require('./ttsClips');
+  const dir = TTS_DIR_REL + '/';
+  const out = new Map();
+  if (!remote) return out;
+  remote.forEach((o, rel) => { if (rel.indexOf(dir) === 0) out.set(rel, o.size); });
+  return out;
 }
 
 // Drop the clips that are byte-for-byte already on the CDN. A clip missing locally is
@@ -288,15 +348,47 @@ function dropPublishedClips(files, onCdn, base) {
   });
 }
 
+// Drop the files R2 already holds byte for byte, and say how many. The comparison is the
+// local body's MD5 against the object's ETag rather than its length: an edit that swaps one
+// character of JSON for another keeps the size, and a size check would call that published.
+// Length is still read first, from stat, so only a file that could match is opened at all.
+//
+// A file missing locally is deliberately *kept* in the plan rather than dropped —
+// uploadFiles throws on it, which is the right answer for a sprite the catalogue names and
+// nobody shipped. Clips are the one exception, and dropPublishedClips has already taken
+// them out before this runs.
+function dropUnchanged(files, remote, base) {
+  const list = Array.isArray(files) ? files.slice() : [];
+  if (!remote || !remote.size) return { files: list, skipped: 0 };
+  const root = base || ROOT;
+  const kept = [];
+  let skipped = 0;
+  list.forEach((f) => {
+    const r = remote.get(f.rel);
+    if (!r || !r.etag) { kept.push(f); return; }
+    const full = path.join(root, f.rel);
+    if (!fs.existsSync(full)) { kept.push(f); return; }
+    if (fs.statSync(full).size !== r.size) { kept.push(f); return; }
+    const md5 = crypto.createHash('md5').update(fs.readFileSync(full)).digest('hex');
+    if (md5 !== r.etag) { kept.push(f); return; }
+    skipped++;
+  });
+  return { files: kept, skipped };
+}
+
 async function uploadFiles(client, bucket, files, root) {
   const { PutObjectCommand } = sdk();
   const base = root || ROOT;
-  const uploaded = [];
-  for (const { rel, ctype } of files) {
+  // Resolved before anything is written, so a plan naming a file that is not on disk fails
+  // the publish instead of half-uploading the rest of it first.
+  const list = (files || []).map(({ rel, ctype }) => {
     const full = path.join(base, rel);
     if (!fs.existsSync(full)) {
       throw new Error('Missing upload file: ' + rel);
     }
+    return { rel, ctype, full };
+  });
+  return pooled(list, UPLOAD_CONCURRENCY, async ({ rel, ctype, full }) => {
     const Body = fs.readFileSync(full);
     const Key = objectKey(rel);
     await client.send(new PutObjectCommand({
@@ -306,21 +398,23 @@ async function uploadFiles(client, bucket, files, root) {
       ContentType: ctype,
       CacheControl: cacheControl(ctype)
     }));
-    uploaded.push({ rel, key: Key, bytes: Body.length, type: ctype });
     console.log('PUT', Key, Body.length + 'B');
-  }
-  return uploaded;
+    return { rel, key: Key, bytes: Body.length, type: ctype };
+  });
 }
 
+// Only what was actually uploaded needs this. Everything dropUnchanged skipped was skipped
+// on the strength of the object's own ETag, which is a stronger statement about the bytes
+// on R2 than the length this compares.
 async function verifyS3(client, bucket, uploaded) {
   const { HeadObjectCommand } = sdk();
-  for (const row of uploaded) {
+  await pooled(uploaded || [], UPLOAD_CONCURRENCY, async (row) => {
     const head = await client.send(new HeadObjectCommand({ Bucket: bucket, Key: row.key }));
     const remote = Number(head.ContentLength);
     if (remote !== row.bytes) {
       throw new Error('S3 size mismatch for ' + row.key + ': local ' + row.bytes + ' remote ' + remote);
     }
-  }
+  });
 }
 
 function sleep(ms) {
@@ -404,6 +498,9 @@ async function runUpload(argv, root) {
     PUBLIC: publicContentBase().length
   });
 
+  // No dropUnchanged here: upload:r2 is the force path, and re-pushing every object is
+  // what it is for — a metadata change, or an object suspected of being wrong on R2. It
+  // still gets the pool, so "everything" is minutes rather than twenty of them.
   const uploaded = await uploadFiles(client, bucket, files, root);
   const { ListObjectsV2Command } = sdk();
   const listed = await client.send(new ListObjectsV2Command({ Bucket: bucket, Prefix: PREFIX }));
@@ -427,6 +524,7 @@ Flags:
   --dry-run          print the file list; no network
   --skip-validate    skip scripts/validate_content.js
   --skip-upload      do not PUT to R2
+  --force-upload     PUT every file, including ones R2 already holds byte for byte
   --skip-verify      do not HeadObject / CDN GET
   --skip-deploy      do not POST VERCEL_DEPLOY_HOOK_URL
   --skip-tts         do not render missing Korean MP3 clips
@@ -469,15 +567,21 @@ async function runPublish(argv, root) {
     bucket = created.bucket;
   }
 
-  // What the CDN already holds. Asked for once and reused by both the render step and the
-  // upload plan, because a clip already on R2 needs neither.
+  // What the bucket already holds. Asked for once and read three ways: a clip already on R2
+  // needs neither rendering nor uploading, and anything else whose bytes have not changed
+  // needs no uploading either. A listing that fails is not fatal — the publish falls back to
+  // the old behaviour of sending everything.
+  let remote = null;
   let onCdn = null;
   if (useR2) {
     try {
-      onCdn = await listRemoteTtsRels(client, bucket);
+      remote = await listRemoteObjects(client, bucket);
+      onCdn = ttsSizes(remote);
+      console.log('R2_LISTED', remote.size, 'objects');
       console.log('TTS_ON_CDN', onCdn.size, 'clips');
     } catch (e) {
-      console.log('TTS_ON_CDN unavailable (' + (e && e.message) + ') — falling back to the local check');
+      console.log('R2_LISTED unavailable (' + (e && e.message) + ') — falling back to the local check');
+      remote = null;
       onCdn = null;
     }
   }
@@ -490,12 +594,22 @@ async function runPublish(argv, root) {
 
   let files = collectUploadFiles(base);
   if (onCdn && onCdn.size) {
-    // Re-PUTting identical clip bytes on every publish is pure cost. Everything else —
-    // the JSON, the sprites — changes in place and always uploads.
+    // Re-PUTting identical clip bytes on every publish is pure cost.
     const before = files.length;
     files = dropPublishedClips(files, onCdn, base);
     const skipped = before - files.length;
     if (skipped) console.log('UPLOAD_SKIP', skipped, 'clips already on the CDN');
+  }
+  // And nor is re-PUTting everything else. This used to read "the JSON, the sprites change
+  // in place and always upload", which meant 1703 objects went up on every publish whatever
+  // the commit had touched — 19 minutes of it, for a commit that often changed none of them.
+  // --force-upload is the way back, for a change that alters an object's metadata rather
+  // than its bytes: ContentType and CacheControl are not in the listing, so a change to
+  // cacheControl() is invisible to this and needs the whole plan sent again.
+  if (remote && !flags.forceUpload) {
+    const pruned = dropUnchanged(files, remote, base);
+    if (pruned.skipped) console.log('UPLOAD_SKIP', pruned.skipped, 'objects already on R2, byte for byte');
+    files = pruned.files;
   }
   console.log('UPLOAD_PLAN', files.length, 'files');
 
@@ -557,8 +671,11 @@ module.exports = {
   publicContentBase,
   objectKey,
   createR2Client,
-  listRemoteTtsRels,
+  pooled,
+  listRemoteObjects,
+  ttsSizes,
   dropPublishedClips,
+  dropUnchanged,
   uploadFiles,
   verifyS3,
   verifyPublicJson,
