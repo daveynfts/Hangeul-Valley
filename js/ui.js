@@ -3094,11 +3094,63 @@ function loadCassette() {
     .catch(() => null);
 }
 
+// ── Previewing one line of the script ────────────────────────────────────────
+// A line preview is deliberately not the transport. It sounds on its own element, so the
+// strip goes on showing where the track is and pressing ▶ beside a sentence does not move
+// the playhead out from under somebody who was working through the recording. The two never
+// sound together: each stops the other.
+let csClipEl = null;
+let csClipLine = -1;
+
+function csClipStop() {
+  const el = csClipEl;
+  csClipEl = null;
+  csClipLine = -1;
+  if (!el) return;
+  try { el.pause(); el.src = ''; } catch (e) {}
+  if (typeof AudioMixer !== 'undefined' && AudioMixer.voiceEnd) AudioMixer.voiceEnd();
+}
+
+/** Play `src` from `from` to `to` seconds; `to` of 0 means to the end of the file. */
+function csClipPlay(src, from, to, rate, onEnd) {
+  csStop();
+  csClipStop();
+  if (!src || typeof Audio !== 'function') return false;
+  let el = null;
+  try { el = new Audio('/' + src); } catch (e) { return false; }
+  csClipEl = el;
+  try {
+    if (typeof AudioMixer !== 'undefined') {
+      if (AudioMixer.voiceLevel) el.volume = AudioMixer.voiceLevel();
+      if (AudioMixer.voiceStart) AudioMixer.voiceStart();
+    }
+    el.playbackRate = rate || 1;
+    if (from > 0) {
+      // Same reason csPlay waits: currentTime before metadata is ignored or throws.
+      const seek = () => { try { el.currentTime = from; } catch (e) {} };
+      if (el.readyState >= 1) seek();
+      else if (typeof el.addEventListener === 'function') el.addEventListener('loadedmetadata', seek, { once: true });
+    }
+    // A line ends where the next one begins, so stopping is ours to do — left alone the
+    // element reads happily on through the rest of the track.
+    el.ontimeupdate = () => {
+      if (csClipEl !== el) return;
+      if (to > 0 && (el.currentTime || 0) >= to) { csClipStop(); if (onEnd) onEnd(); }
+    };
+    el.onended = () => { if (csClipEl === el) { csClipStop(); if (onEnd) onEnd(); } };
+    el.onerror = () => { if (csClipEl === el) csClipStop(); };
+    const p = el.play();
+    if (p && typeof p.catch === 'function') p.catch(() => { csClipStop(); if (onEnd) onEnd(); });
+    return true;
+  } catch (e) { csClipStop(); return false; }
+}
+
 // One player for every cassette screen. Switching tracks or sentences has to stop
 // what is playing rather than layer on top of it — two recordings at once is the
 // one thing a listening station must never do.
 function csStop() {
   csTickStop();
+  csClipStop();
   if (!cassetteTrack) return;
   const el = cassetteTrack.el;
   cassetteTrack = null;
@@ -3211,6 +3263,17 @@ const CS_AB_MIN = 0.25;          // a shorter loop than this is a stutter, not a
 const CS_TICK_MS = 30;           // fine enough that an A-B jump is not heard as an overshoot
 const CS_DRAG_PX = 4;            // below this a pointer gesture is a seek, not a selection
 const csPeakCache = {};          // src → number[] , or null for "tried and could not"
+// src → the track's exact length in seconds, taken from the same decode as the peaks.
+//
+// The strip has to answer "how long is this?" before anything has played, and the only
+// answer it had was the `dur` written into the cassette JSON by hand. That number is a
+// rounded label, and on unit 15 it was out by up to 19% — so a stretch selected before
+// pressing play was mapped through one scale and then, the moment the <audio> element
+// reported its real duration, redrawn and played through another. The selection moved.
+//
+// The decode that draws the bars already knows the true length, so nothing new is fetched
+// here: it is the same AudioBuffer, one field further on.
+const csDurCache = {};
 const csPeakPending = {};
 let csTicker = null;
 let csWaveDrag = null;
@@ -3288,10 +3351,15 @@ function csPracticeBadge(kind, unit, id) {
   return practiceBadge(typeof practiceKey === 'function' ? practiceKey(kind, unit, id) : '');
 }
 
+// Three answers, best first: what the element is playing, what the decode measured, and
+// only then the number written in the JSON. The middle one is the addition — without it
+// the strip changed scale under the player the instant playback began.
 function csWaveDur() {
   const st = listenState;
   if (cassetteTrack && cassetteTrack.el.duration > 0) return cassetteTrack.el.duration;
   const cur = st && cassetteBank ? (cassetteBank.tracks || [])[st.i] : null;
+  const decoded = cur && cur.src ? csDurCache[cur.src] : 0;
+  if (decoded > 0) return decoded;
   return (cur && cur.dur) || 0;
 }
 
@@ -3326,6 +3394,10 @@ function csLoadPeaks(src) {
       let peaks = null;
       try { peaks = audio ? csPeaksFrom(audio.getChannelData(0), CS_PEAK_BUCKETS) : null; }
       catch (e) { peaks = null; }
+      // Recorded even when the peaks come out null: a decode that produced a buffer but no
+      // usable channel data still knows how long the track is, and that is the number the
+      // strip is mapped through.
+      if (audio && audio.duration > 0) csDurCache[src] = audio.duration;
       csPeakCache[src] = peaks;
       delete csPeakPending[src];
       return peaks;
@@ -3815,6 +3887,66 @@ function listenClearAB() {
 
 // Play the marked stretch from its start — the button a listener reaches for after dragging
 // one out. With nothing marked it is a plain replay from the top, which is what ↺ says.
+// ── Playing one line of the transcript ───────────────────────────────────────
+// Two sources, and the content decides which. A line whose span inside the track was
+// measured is played out of the track itself, stopping where the line stops; a line whose
+// sentence also exists as an isolated dictation clip is played from that clip. Both are the
+// book's own voice. Nothing here reads a line out with a synthesised one: half a transcript
+// in a different voice teaches the wrong prosody, which is the opposite of the point.
+//
+// Where neither is available the line simply has no button. See docs/cassette-timings.md —
+// scripts/cassette_timings.js measures what it can prove and says what is left.
+function csNormKo(s) {
+  return String(s || '').replace(/\s+/g, '').replace(/[.,!?~…"'‘’“”]/g, '');
+}
+
+/** The dictation clip holding this sentence on its own, or '' if the set has none. */
+function listenLineClip(line) {
+  const items = (cassetteBank && cassetteBank.dictation && cassetteBank.dictation.items) || [];
+  const want = csNormKo(line && line.ko);
+  if (!want) return '';
+  for (let i = 0; i < items.length; i++) {
+    const it = items[i];
+    if (it && it.audio && it.audio.src && csNormKo(it.ko) === want) return it.audio.src;
+  }
+  return '';
+}
+
+function listenLinePlayable(line) {
+  return (line && typeof line.at === 'number') || !!listenLineClip(line);
+}
+
+function listenPlayLine(li) {
+  const bank = cassetteBank, st = listenState;
+  if (!bank || !st) return;
+  const t = (bank.tracks || [])[st.i];
+  const line = t && (t.lines || [])[li];
+  if (!line) return;
+  // A second press on the line that is sounding stops it, the way the transport does.
+  if (csClipLine === li) { csClipStop(); csPaintScriptPlaying(); return; }
+  const done = () => csPaintScriptPlaying();
+  let started = false;
+  if (typeof line.at === 'number') {
+    started = csClipPlay(t.src, line.at, typeof line.end === 'number' ? line.end : 0, st.rate, done);
+  } else {
+    started = csClipPlay(listenLineClip(line), 0, 0, st.rate, done);
+  }
+  if (started) csClipLine = li;
+  csPaintScriptPlaying();
+}
+
+// Repainted rather than re-rendered: rebuilding the script pane on every state change would
+// throw away the reader's scroll position mid-sentence.
+function csPaintScriptPlaying() {
+  if (typeof document === 'undefined' || !document.querySelectorAll) return;
+  document.querySelectorAll('#listen-script .cs-line').forEach((row) => {
+    const on = Number(row.getAttribute('data-li')) === csClipLine;
+    row.classList.toggle('playing', on);
+    const btn = row.querySelector('.cs-lineplay');
+    if (btn) { btn.classList.toggle('on', on); btn.textContent = on ? '❙❙' : '▶'; }
+  });
+}
+
 function listenReplayAB() {
   const bank = cassetteBank, st = listenState;
   if (!bank || !st) return;
@@ -3929,9 +4061,21 @@ function renderListen() {
   if (pane) {
     if (Array.isArray(cur.lines)) {
       pane.className = 'cs-script' + (st.showScript ? '' : ' is-hidden');
-      pane.innerHTML = cur.lines.map((l) =>
-        '<div class="cs-line"><span class="cs-who">' + vbEsc(l.who) + '</span>' +
-        '<span class="cs-ko">' + vbEsc(l.ko) + '</span></div>').join('');
+      // The index goes on the row because csPaintScriptPlaying addresses rows by it rather
+      // than rebuilding this pane — a rebuild mid-sentence would throw away the scroll.
+      // A line with no audio of its own gets a spacer, not a dead button: an inert ▶ that
+      // does nothing when pressed is a worse answer than no ▶ at all.
+      pane.innerHTML = cur.lines.map((l, li) => {
+        const head = listenLinePlayable(l)
+          ? '<button type="button" class="cs-lineplay" onclick="listenPlayLine(' + li + ')"'
+            + ' title="' + vbEsc(hvT('ui.cassette.line.play')) + '"'
+            + ' aria-label="' + vbEsc(hvT('ui.cassette.line.play')) + '">▶</button>'
+          : '<span class="cs-lineplay cs-lineplay-off" aria-hidden="true"></span>';
+        return '<div class="cs-line" data-li="' + li + '">' + head
+          + '<span class="cs-who">' + vbEsc(l.who) + '</span>'
+          + '<span class="cs-ko">' + vbEsc(l.ko) + '</span></div>';
+      }).join('');
+      csPaintScriptPlaying();
     } else {
       // Said rather than left blank. The book prints this track's comprehension
       // questions and not its script, so an empty pane would read as a bug.
@@ -4049,6 +4193,8 @@ function dictWaveDur() {
   const st = dictState;
   if (cassetteTrack && cassetteTrack.el.duration > 0) return cassetteTrack.el.duration;
   const it = st ? dictItems()[st.i] : null;
+  const decoded = it && it.audio && it.audio.src ? csDurCache[it.audio.src] : 0;
+  if (decoded > 0) return decoded;
   // A dictation row declares no duration, but `voiced` plus the pads the cut added is the
   // length of the file to within a few hundredths — enough to click on before it has played.
   if (it && it.audio && it.audio.voiced > 0) return it.audio.voiced + 0.27;
@@ -5562,6 +5708,7 @@ if (typeof window !== 'undefined') {
   window.listenSetB = listenSetB;
   window.listenClearAB = listenClearAB;
   window.listenReplayAB = listenReplayAB;
+  window.listenPlayLine = listenPlayLine;
   window.listenSeek = listenSeek;
   window.listenNudge = listenNudge;
   window.listenStep = listenStep;

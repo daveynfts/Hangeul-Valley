@@ -142,6 +142,7 @@
   "ui.cancel.btn": "Bỏ qua",
   "ui.cassette.accuracy": "chính xác {n}%",
   "ui.cassette.foot": "{tracks} BÀI · {lines} CÂU · 1/2 VÀO NHANH",
+  "ui.cassette.line.play": "Phát câu này",
   "ui.cassette.list.aria": "Các chế độ luyện với băng cassette",
   "ui.cassette.panel.closeTheCassettePlayer.aria": "Đóng máy cassette",
   "ui.cassette.panel.dailyListeningStation": "TRẠM NGHE MỖI NGÀY",

@@ -142,6 +142,7 @@
   "ui.cancel.btn": "Skip",
   "ui.cassette.accuracy": "{n}% accuracy",
   "ui.cassette.foot": "{tracks} TRACKS · {lines} LINES · 1/2 QUICK START",
+  "ui.cassette.line.play": "Play this line",
   "ui.cassette.list.aria": "Cassette practice modes",
   "ui.cassette.panel.closeTheCassettePlayer.aria": "Close the cassette player",
   "ui.cassette.panel.dailyListeningStation": "DAILY LISTENING STATION",
