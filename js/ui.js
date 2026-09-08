@@ -1132,7 +1132,7 @@ function showQuizSuccess({ message, ko, en, continueLabel, delay, onDone }){
       : '';
   }
   if (go) {
-    go.textContent = continueLabel || 'Continue';
+    go.textContent = continueLabel || hvT('ui.quiz.result.continue');
     go.onclick = closeQuiz;
   }
   paintQuizResultExample();
@@ -1189,7 +1189,7 @@ function showQuizReveal({ message, ko, en, typed, note, continueLabel, onDone })
       : '';
   }
   if (go) {
-    go.textContent = continueLabel || 'Continue';
+    go.textContent = continueLabel || hvT('ui.quiz.result.continue');
     go.onclick = closeQuiz;
   }
   paintQuizResultExample();
@@ -1366,9 +1366,14 @@ function openQuiz(word, plot, phase=1){
   const cfg=PHASE_CFG[phase-1];
   // Phase bar UI
   const pi=$('quiz-phase-icon'); if(pi) pi.textContent=cfg.icon;
-  const pt=$('quiz-phase-title'); if(pt) pt.textContent=cfg.title;
+  // The key goes back onto the element beside the text, as in paintRecallScaffold: the
+  // markup carries the phase-1 default, and leaving that attribute in place would have a
+  // language switch repaint a phase-2 or phase-3 panel as "Plant Seed".
+  const pt=$('quiz-phase-title');
+  if(pt){ pt.setAttribute('data-i18n', cfg.titleKey); pt.textContent=hvT(cfg.titleKey); }
   const gr=$('quiz-gold-reward'); if(gr) gr.textContent=cfg.reward || '';
-  const sb=$('submit-btn'); if(sb) sb.textContent=cfg.btn;
+  const sb=$('submit-btn');
+  if(sb){ sb.setAttribute('data-i18n', cfg.btnKey); sb.textContent=hvT(cfg.btnKey); }
   const qui=$('quiz-ui'); if(qui) qui.className='phase-'+phase;
   paintQuizSteps(phase);
   const resultBox=$('quiz-result'); if(resultBox) resultBox.classList.add('hidden');
@@ -1553,7 +1558,8 @@ function answerChoice(opt, btn){
     showQuizSuccess({
       message: ph === 1 ? 'Planted!' : (ph === 2 ? 'Watered!' : 'Harvested!'),
       ko: cw.ko, en: cw.en,
-      continueLabel: ph === 3 ? 'Collect harvest' : (ph === 2 ? 'Keep growing' : 'Plant it'),
+      continueLabel: hvT(ph === 3 ? 'ui.quiz.result.continue.harvest'
+        : (ph === 2 ? 'ui.quiz.result.continue.water' : 'ui.quiz.result.continue.plant')),
       delay: ph === 3 ? 0 : 1800,
       onDone: () => { if (sceneRef) sceneRef.advancePlot(cp, cw, ph, grade); }
     });
@@ -1622,7 +1628,7 @@ function submitAnswer(){
       showQuizSuccess({
         message: 'Harvested!',
         ko: harvested.ko, en: harvested.en,
-        continueLabel: 'Collect apples',
+        continueLabel: hvT('ui.quiz.result.continue.apples'),
         delay: 0,
         onDone: () => { if (sceneRef) sceneRef.onAppleHarvested(); }
       });
@@ -1647,7 +1653,8 @@ function submitAnswer(){
     showQuizSuccess({
       message,
       ko: cw.ko, en: cw.en,
-      continueLabel: ph === 3 ? 'Collect harvest' : (ph === 2 ? 'Keep growing' : 'Plant it'),
+      continueLabel: hvT(ph === 3 ? 'ui.quiz.result.continue.harvest'
+        : (ph === 2 ? 'ui.quiz.result.continue.water' : 'ui.quiz.result.continue.plant')),
       delay: ph === 3 ? 0 : 1800,
       onDone: () => { if (sceneRef) sceneRef.advancePlot(cp, cw, ph, grade); }
     });
@@ -1683,7 +1690,7 @@ function submitAnswer(){
         note: after.lapses > 0
           ? `Back to Phase 2 · next review in ${srsIntervalLabel(after)} after relearning.`
           : 'Back to Phase 2 — water it again to bring it back.',
-        continueLabel: 'Got it — back to Phase 2',
+        continueLabel: hvT('ui.quiz.result.continue.lapse'),
         onDone: () => { if(sceneRef) sceneRef.regressionPlot(cp,cw); }
       });
     }

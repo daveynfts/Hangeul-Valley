@@ -1313,10 +1313,15 @@ function claimReadySideQuests(tab) {
   renderQuestList();
 }
 
+// The phase header and the button that submits it. Keys rather than text, resolved by
+// openQuiz through hvT(): written here as literals they stayed English under every language —
+// a Vietnamese player read "HARVEST" and "🍎 Harvest" with the translated step chips right
+// beside them — and nothing reported it, because the coverage count reads the content
+// catalogues and not the interface table in js/locales/.
 const PHASE_CFG = [
-  {icon:'🌱', title:'Plant Seed', dots:'●○○', reward:'',    btn:'🌱 Plant Seed'},
-  {icon:'💧', title:'Water',      dots:'●●○', reward:'',    btn:'💧 Water'},
-  {icon:'🍎', title:'Harvest',    dots:'●●●', reward:'+🪙', btn:'🍎 Harvest'},
+  {icon:'🌱', titleKey:'ui.quiz.phase.plant.title',   dots:'●○○', reward:'',    btnKey:'ui.quiz.phase.plant.btn'},
+  {icon:'💧', titleKey:'ui.quiz.phase.water.title',   dots:'●●○', reward:'',    btnKey:'ui.quiz.phase.water.btn'},
+  {icon:'🍎', titleKey:'ui.quiz.phase.harvest.title', dots:'●●●', reward:'+🪙', btnKey:'ui.quiz.phase.harvest.btn'},
 ];
 
 // The button used to report success the instant it was pressed: flushSave() was called
