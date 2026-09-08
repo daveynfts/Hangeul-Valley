@@ -42,6 +42,25 @@ assert(actionRow.indexOf('id="inventory-btn"') < actionRow.indexOf('id="save-btn
   && actionRow.indexOf('id="save-btn"') < actionRow.indexOf('id="hud-more-btn"'),
   'Save sits between Inventory and More');
 assert(html.indexOf('data-hud-label="Save"') < 0, 'Save no longer renders an overflow label');
+
+// Save is the one HUD icon a click rewrites: saveAllGame() swaps in ⏳/✅/⚠ as status and
+// then restores. The restore used to assign textContent, which drops the <img> the boot
+// paint installed — so one save left an emoji sitting beside the inventory basket's pixel
+// art for the rest of the session, with nothing to repaint the bar again. The restore must
+// repaint, and must do so before any emoji fallback.
+const economy = fs.readFileSync(path.join(ROOT, 'js', 'systems', 'economy.js'), 'utf8');
+const saveFn = economy.slice(economy.indexOf('async function saveAllGame('),
+  economy.indexOf('function initSave('));
+assert(saveFn.length > 0, 'saveAllGame is where the save button is repainted');
+const restoreSrc = saveFn.slice(saveFn.indexOf('const restore = ()'), saveFn.indexOf('let res;'));
+assert(restoreSrc.indexOf('paintHudIcons()') >= 0, 'the save button restore repaints the HUD art');
+// The precise shape of the old bug: the repaint sat inside an `inMenu &&` branch, so the
+// HUD-bar placement — the one the button actually has — fell through to the emoji. Ordering
+// alone does not catch that, since the broken version also named paintHudIcons first. What
+// has to hold is that nothing gates the repaint on the placement.
+const beforeRepaint = restoreSrc.slice(0, restoreSrc.indexOf('paintHudIcons()'));
+assert(beforeRepaint.indexOf('inMenu') < 0,
+  'and the repaint is not gated on inMenu — the HUD-bar button must reach it too');
 assert(html.indexOf('data-hud-icon="duel"') < 0, 'Duel HUD button is gone');
 assert(html.indexOf('duel-overlay') < 0, 'Duel overlay is gone');
 assert(hudArt.indexOf("id: 'duel'") < 0, 'HUD art table has no duel row');

@@ -1334,14 +1334,22 @@ async function saveAllGame(){
       btn.textContent = inMenu ? icon + ' ' + label : icon;
     }
   };
+  // Restoring has to put the *art* back, not an emoji. The overflow branch already
+  // repainted; the HUD-bar branch assigned textContent, which drops the <img> the boot paint
+  // put there and leaves 💾 sitting next to the inventory basket's pixel art — permanently,
+  // since nothing repaints the bar again. paintHudIcons() is the same path that drew the
+  // button in the first place, and it honours data-hud-size and the overflow label, so it is
+  // right for both placements.
   const restore = () => {
     if (!btn) return;
-    if (inMenu && typeof hudIconHtml === 'function') {
-      if (typeof paintHudIcons === 'function') paintHudIcons();
-      else btn.innerHTML = hudIconHtml('save', '💾', 18) + '<span class="hud-overflow-label">Save</span>';
-    } else {
-      btn.textContent = inMenu ? '💾 Save' : '💾';
+    if (typeof paintHudIcons === 'function') { paintHudIcons(); return; }
+    if (typeof hudIconHtml === 'function') {
+      const px = Number(btn.getAttribute('data-hud-size')) || (inMenu ? 18 : 22);
+      btn.innerHTML = hudIconHtml('save', '💾', px) +
+        (inMenu ? '<span class="hud-overflow-label">Save</span>' : '');
+      return;
     }
+    btn.textContent = inMenu ? '💾 Save' : '💾';
   };
 
   paint('⏳', 'Saving');
