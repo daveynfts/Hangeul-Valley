@@ -1328,6 +1328,11 @@ const PHASE_CFG = [
 // without awaiting it, so "Game saved successfully!" appeared even when the file write or
 // the cloud upload went on to fail. It now waits for the real outcome and says which leg
 // failed, because "saved" is the one message a player has to be able to trust.
+//
+// Every word of that outcome goes through hvT(). It was written here as English literals —
+// "Saving", "Saved", "⚠ Could not save to the cloud (timed out)" — so the one button whose
+// job is to tell a player whether their progress is safe was the one that said it in a
+// language they might not read.
 async function saveAllGame(){
   const btn = $('save-btn');
   const inMenu = btn ? btn.classList.contains('hud-overflow-item') : false;
@@ -1351,34 +1356,40 @@ async function saveAllGame(){
     if (typeof hudIconHtml === 'function') {
       const px = Number(btn.getAttribute('data-hud-size')) || (inMenu ? 18 : 22);
       btn.innerHTML = hudIconHtml('save', '💾', px) +
-        (inMenu ? '<span class="hud-overflow-label">Save</span>' : '');
+        (inMenu ? '<span class="hud-overflow-label">' + hvT('ui.save.label') + '</span>' : '');
       return;
     }
-    btn.textContent = inMenu ? '💾 Save' : '💾';
+    btn.textContent = inMenu ? hvT('ui.save.btn') : '💾';
   };
 
-  paint('⏳', 'Saving');
+  paint('⏳', hvT('ui.save.state.saving'));
   let res;
   try {
     res = await flushSave();   // explicit user action — write through, don't debounce
   } catch (e) {
     console.warn('Save failed:', e);
-    res = { local: false, file: false, cloud: { ok: false, reason: 'unexpected error' } };
+    res = { local: false, file: false, cloud: { ok: false, reason: 'unexpected' } };
   }
 
+  // Which destinations went wrong, named the way a player would name them. A cloud push
+  // that was skipped because nobody is signed in is not a failure — there is nowhere for it
+  // to go — so it never reaches this list.
   const failed = [];
-  if (!res.local) failed.push('this device');
-  if (res.file === false) failed.push('the save file');
+  if (!res.local) failed.push(hvT('ui.save.dest.device'));
+  if (res.file === false) failed.push(hvT('ui.save.dest.file'));
   if (res.cloud && res.cloud.ok === false && res.cloud.reason !== 'signed-out') {
-    failed.push('the cloud (' + res.cloud.reason + ')');
+    failed.push(hvT('ui.save.dest.cloud', { reason: cloudReasonText(res.cloud.reason) }));
   }
 
   if (failed.length) {
-    paint('⚠', 'Not saved');
-    showToast('⚠ Could not save to ' + failed.join(' or ') + '.', 4200);
+    paint('⚠', hvT('ui.save.state.failed'));
+    // The joiner is stored as a bare word, not " or " — a catalogue string whose meaning
+    // lives in its leading and trailing spaces is one trim away from "this deviceorthe cloud".
+    const where = failed.join(' ' + hvT('ui.save.dest.join') + ' ');
+    showToast(hvT('ui.save.failed', { where }), 4200);
   } else {
-    paint('✅', 'Saved');
-    showToast('💾 Game saved successfully!', 2200);
+    paint('✅', hvT('ui.save.state.done'));
+    showToast(hvT('ui.save.ok'), 2200);
   }
   setTimeout(restore, 1800);
 }

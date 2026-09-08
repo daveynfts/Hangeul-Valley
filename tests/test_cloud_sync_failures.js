@@ -179,17 +179,17 @@ function tokenExpiringAt(msEpoch) {
   assert(r.toasts.length === 1, 'the player gets a message rather than silence');
   assert(/trouble|safe/i.test(r.toasts[0] || ''),
     'and it says the local progress is safe: ' + JSON.stringify(r.toasts[0]));
-  assert(r.lastError === 'HTTP 500', 'the failure is recorded, not swallowed (' + r.lastError + ')');
+  assert(r.lastError === 'http:500', 'the failure is recorded as a code, not swallowed (' + r.lastError + ')');
 
   // ── 4. The request never arrived ───────────────────────────────────────────
   console.log('\n--- 4. A thrown fetch is reported too ---');
   r = await run(() => throwFrom('TypeError'));
   assert(r.token === 'test-token', 'offline does not sign anybody out');
-  assert(r.lastError === 'network error', 'recorded as a network error (' + r.lastError + ')');
+  assert(r.lastError === 'network', 'recorded as a network error (' + r.lastError + ')');
   assert(r.toasts.length === 1, 'and said out loud');
 
   r = await run(() => throwFrom('AbortError'));
-  assert(r.lastError === 'timed out', 'a timeout is named as one (' + r.lastError + ')');
+  assert(r.lastError === 'timeout', 'a timeout is named as one (' + r.lastError + ')');
 
   // ── 5. The happy path still is one ─────────────────────────────────────────
   console.log('\n--- 5. 200 with no cloud copy yet says nothing alarming ---');
@@ -232,7 +232,7 @@ function tokenExpiringAt(msEpoch) {
   r = await run(() => { answerWith(500); sb.fetch = ((f) => () => { calls++; return f(); })(sb.fetch); });
   assert(calls === 3, 'three attempts in total (' + calls + ')');
   assert(r.toasts.length === 1, 'one message, not one per attempt');
-  assert(r.lastError === 'HTTP 500', 'and the reason is recorded (' + r.lastError + ')');
+  assert(r.lastError === 'http:500', 'and the reason is recorded (' + r.lastError + ')');
 
   // ── 8. An expired token is spotted before the request, not after ───────────
   // Google's tokens last an hour. The old code found out by sending the request anyway and

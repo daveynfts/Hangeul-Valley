@@ -153,7 +153,7 @@ const push = vm.runInContext('pushCloudSave', cctx);
   vm.runInContext(cloudBlock, fctx);
   const failRes = await vm.runInContext('pushCloudSave', fctx)({ tag: 'X' });
   eq(failRes.ok, false, 'a network error is reported, not swallowed');
-  eq(failRes.reason, 'network error', 'and it says what went wrong');
+  eq(failRes.reason, 'network', 'and it says what went wrong');
 
   const sctx = {
     console,
@@ -166,7 +166,7 @@ const push = vm.runInContext('pushCloudSave', cctx);
   vm.runInContext(cloudBlock, sctx);
   const staleRes = await vm.runInContext('pushCloudSave', sctx)({ tag: 'Y' });
   eq(staleRes.ok, false, 'a 409 from the server is a failure, not a silent success');
-  eq(staleRes.reason, 'cloud has newer progress', 'and it names the other device as the reason');
+  eq(staleRes.reason, 'stale', 'and it names the other device as the reason');
 })().then(runSignedOut).catch((e) => {
   console.error('  [FAIL] cloud chain test threw: ' + (e && e.message));
   failed++;

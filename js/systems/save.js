@@ -960,6 +960,21 @@ let _cloudChain = Promise.resolve({ ok: true, skipped: true });
 let _cloudPending = null;
 let _cloudLastError = '';
 
+// A failure reason is a code, never a sentence. It is compared in code — economy.js lets a
+// 'signed-out' push count as a success rather than telling the player the save failed — and
+// it is shown to the player in two places, the Save button's toast and the "not synced" chip
+// beside their name. Prose could not do both: it read as English under every language, which
+// is what put "the cloud (timed out)" in the middle of a Vietnamese sentence.
+//
+// 'http' carries its status after a colon. Nothing else takes an argument.
+function cloudReasonText(reason) {
+  const s = String(reason || '');
+  const at = s.indexOf(':');
+  const code = at < 0 ? s : s.slice(0, at);
+  if (!code) return '';
+  return hvT('ui.save.reason.' + code, { status: at < 0 ? '' : s.slice(at + 1) });
+}
+
 function pushCloudSave(data) {
   if (!getGoogleToken()) return { ok: true, skipped: true, reason: 'signed-out' };
   _cloudPending = data;
@@ -980,14 +995,14 @@ function pushCloudSave(data) {
         // The server is holding a newer save than the one being pushed — another device
         // got there first. Do not overwrite it, and do not yank the current session out
         // from under the player either; syncCloudSave() reconciles on the next load.
-        _cloudLastError = 'cloud has newer progress';
+        _cloudLastError = 'stale';
         if (typeof showToast === 'function') {
           showToast('☁ ' + hvT('ui.cloud.newerElsewhere'), 4200);
         }
         return { ok: false, status, reason: _cloudLastError };
       }
       if (status !== 200) {
-        _cloudLastError = 'HTTP ' + status;
+        _cloudLastError = 'http:' + status;
         console.warn('Cloud save rejected:', status);
         return { ok: false, status, reason: _cloudLastError };
       }
@@ -995,7 +1010,7 @@ function pushCloudSave(data) {
       return { ok: true, status };
     } catch (e) {
       // Swallowing this was how a week of offline play could look like it was syncing.
-      _cloudLastError = (e && e.name === 'AbortError') ? 'timed out' : 'network error';
+      _cloudLastError = (e && e.name === 'AbortError') ? 'timeout' : 'network';
       console.warn('Cloud save failed:', _cloudLastError, e);
       return { ok: false, reason: _cloudLastError };
     }
@@ -1053,17 +1068,17 @@ async function fetchCloudSave() {
       status = r.status;
       json = r.json;
     } catch (e) {
-      const why = (e && e.name === 'AbortError') ? 'timed out' : 'network error';
+      const why = (e && e.name === 'AbortError') ? 'timeout' : 'network';
       if (attempt < CLOUD_RETRY_DELAYS.length) { await _cloudSleep(CLOUD_RETRY_DELAYS[attempt]); continue; }
       return { ok: false, why, toast: 'ui.cloud.offline' };
     }
     if (status === 200) return { ok: true, json };
     // 401 and 503 are settled answers: the token is no good, or the feature is off. Asking
     // again changes neither, and the retry would only delay telling the player.
-    if (status === 401) return { ok: false, why: 'signed out', signedOut: true, toast: 'ui.cloud.signInAgain' };
-    if (status === 503) return { ok: false, why: 'cloud save unavailable', toast: 'ui.cloud.unavailable' };
+    if (status === 401) return { ok: false, why: 'signed-out', signedOut: true, toast: 'ui.cloud.signInAgain' };
+    if (status === 503) return { ok: false, why: 'unavailable', toast: 'ui.cloud.unavailable' };
     if (attempt < CLOUD_RETRY_DELAYS.length) { await _cloudSleep(CLOUD_RETRY_DELAYS[attempt]); continue; }
-    return { ok: false, why: 'HTTP ' + status, status, json, toast: 'ui.cloud.syncFailed' };
+    return { ok: false, why: 'http:' + status, status, json, toast: 'ui.cloud.syncFailed' };
   }
 }
 
@@ -1181,7 +1196,7 @@ function renderAuthUI() {
       // "signed in but nothing has reached the cloud for an hour" looked identical — which
       // is the same silence this whole path had, one layer up.
       const warn = _cloudLastError
-        ? '<span class="auth-sync-warn" title="' + escapeAuthText(_cloudLastError) + '">⚠ '
+        ? '<span class="auth-sync-warn" title="' + escapeAuthText(cloudReasonText(_cloudLastError)) + '">⚠ '
           + escapeAuthText(hvT('ui.cloud.notSynced')) + '</span>'
         : '';
       el.innerHTML = photo + '<span class="auth-name">' + label + '</span>' + warn +

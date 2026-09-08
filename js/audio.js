@@ -812,15 +812,18 @@ function syncTTSButton() {
     if (!btn) return;
     const on = !AudioMixer.isMuted();
     const inMenu = btn.classList && btn.classList.contains('hud-overflow-item');
-    const label = on ? 'Audio' : 'Muted';
+    // This row has two states, so paintHudIcons() cannot label it from its data-i18n key
+    // alone and hands it over here. Both states are catalogue strings: written as literals
+    // they made this the one ⋯ row still reading English once the others were translated.
+    const label = hvT(on ? 'ui.tts.toggle.label' : 'ui.tts.toggle.muted');
     if (typeof hudIconHtml === 'function' && inMenu) {
       btn.setAttribute('data-hud-label', label);
       btn.innerHTML = hudIconHtml('audio', on ? '🔊' : '🔇', 18) +
         '<span class="hud-overflow-label">' + label + '</span>';
     } else {
       btn.textContent = on
-        ? (inMenu ? '🔊 Audio' : '🔊')
-        : (inMenu ? '🔇 Muted' : '🔇');
+        ? (inMenu ? '🔊 ' + label : '🔊')
+        : (inMenu ? '🔇 ' + label : '🔇');
     }
     if (btn.classList && btn.classList.toggle) btn.classList.toggle('hud-btn-off', !on);
   } catch {}

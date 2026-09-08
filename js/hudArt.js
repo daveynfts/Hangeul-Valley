@@ -39,6 +39,28 @@ function hudIconHtml(id, fallbackEmoji, px) {
   const row = hudArtRow(id);
   return fallbackEmoji || (row && row.fallback) || '';
 }
+// The text beside the icon on a ⋯ row.
+//
+// It has to be resolved here rather than left to applyI18n(). Both run on DOMContentLoaded
+// and i18n.js is the earlier <script>, so applyI18n() translated these rows first and then
+// paintHudIcons() replaced their innerHTML with the English `data-hud-label` — every row in
+// the overflow menu read English under a Vietnamese interface, from boot, and again after
+// every press of Save, which repaints the bar through this same function.
+//
+// The catalogue string leads with an emoji ("📜 Quests") from when the row was text only.
+// The pixel icon has replaced it, so it is dropped; `data-hud-label` stays the fallback for
+// a row with no key, and row.label for one with neither.
+function hudIconLabel(el, row) {
+  const key = el.getAttribute && el.getAttribute('data-i18n');
+  if (key && typeof hvT === 'function') {
+    const s = hvT(key);
+    if (s && s !== key) {
+      const trimmed = String(s).replace(/^[^\p{L}\p{N}]+/u, '').trim();
+      if (trimmed) return trimmed;
+    }
+  }
+  return el.getAttribute('data-hud-label') || (row && row.label) || '';
+}
 function paintHudIcons() {
   if (typeof document === 'undefined' || !document.querySelectorAll) return;
   HUD_ART_ROWS.forEach(function (row) {
@@ -47,9 +69,11 @@ function paintHudIcons() {
       const px = Number(el.getAttribute('data-hud-size')) || (el.classList && el.classList.contains('hud-overflow-item') ? 18 : 20);
       const icon = hudIconHtml(row.id, row.fallback, px);
       const isOverflow = el.classList && el.classList.contains('hud-overflow-item');
-      const label = el.getAttribute('data-hud-label') || (isOverflow ? row.label : '');
+      // Whether the row carries a label at all is still decided by the markup; only the
+      // words come from the catalogue. Nothing is written back onto the element, because
+      // caching the resolved text would pin the row to whatever language painted it first.
+      const label = (el.getAttribute('data-hud-label') || isOverflow) ? hudIconLabel(el, row) : '';
       if (label) {
-        if (!el.getAttribute('data-hud-label')) el.setAttribute('data-hud-label', label);
         el.innerHTML = icon + '<span class="hud-overflow-label">' + label + '</span>';
       } else {
         el.innerHTML = icon;

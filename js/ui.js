@@ -989,7 +989,7 @@ function resumeGame(){
   hideLevelSelect();
   updateHUD(); updateVocabBook();
   if (sceneRef && typeof sceneRef.syncUnit10World === 'function') sceneRef.syncUnit10World();
-  showToast('▶ Resumed previous session!');
+  showToast(hvT('ui.session.resumed'));
 }
 
 // ────── HANGUL CHOSUNG & ROMANIZATION HELPERS ─────────────────────────
