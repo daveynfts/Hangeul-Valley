@@ -33,7 +33,8 @@
         "hint": "🍲",
         "category": "음식",
         "categoryEn": "Food",
-        "example": "김치는 좋아해요. 김치찌개는 안 좋아해요."
+        "example": "김치는 좋아해요. 김치찌개는 안 좋아해요.",
+        "exampleEn": "I like kimchi. I don't like kimchi stew."
       },
       {
         "ko": "된장찌개",
@@ -78,7 +79,8 @@
         "hint": "🍜",
         "category": "음식",
         "categoryEn": "Food",
-        "example": "냉면 맛이 어때요?"
+        "example": "냉면 맛이 어때요?",
+        "exampleEn": "How does the cold noodle dish taste?"
       },
       {
         "ko": "칼국수",
@@ -143,7 +145,8 @@
         "hint": "🦴",
         "category": "음식",
         "categoryEn": "Food",
-        "example": "그럼 사거리에 있는 서울식당이 어때? 서울식당은 갈비가 유명한데 다른 음식도 다 맛있고 값도 비싸지 않아."
+        "example": "그럼 사거리에 있는 서울식당이 어때? 서울식당은 갈비가 유명한데 다른 음식도 다 맛있고 값도 비싸지 않아.",
+        "exampleEn": "Then how about Seoul Restaurant at the crossroads? It is famous for its short ribs, but all the other dishes are good too and it is not expensive."
       },
       {
         "ko": "김밥",
@@ -168,7 +171,8 @@
         "category": "음식",
         "categoryEn": "Food",
         "artPending": true,
-        "example": "이 식당은 생선회가 유명한데 한번 먹어 볼래?"
+        "example": "이 식당은 생선회가 유명한데 한번 먹어 볼래?",
+        "exampleEn": "This restaurant is famous for its raw fish — do you want to try it?"
       },
       {
         "ko": "케밥",
@@ -177,7 +181,8 @@
         "category": "음식",
         "categoryEn": "Food",
         "artPending": true,
-        "example": "터키는 케밥이 유명한데 드셔 보셨어요?"
+        "example": "터키는 케밥이 유명한데 드셔 보셨어요?",
+        "exampleEn": "Turkey is famous for kebab — have you ever had it?"
       },
       {
         "ko": "달다",
@@ -246,7 +251,8 @@
         "hint": "😋",
         "category": "식당 평가",
         "categoryEn": "Restaurant reviews",
-        "example": "냉면 맛이 어때요?"
+        "example": "냉면 맛이 어때요?",
+        "exampleEn": "How does the cold noodle dish taste?"
       },
       {
         "ko": "값",
@@ -263,7 +269,8 @@
         "hint": "🚇",
         "category": "식당 평가",
         "categoryEn": "Restaurant reviews",
-        "example": "교통이 훨씬 편리해졌습니다."
+        "example": "교통이 훨씬 편리해졌습니다.",
+        "exampleEn": "Transport has become far more convenient."
       },
       {
         "ko": "서비스",
@@ -271,7 +278,8 @@
         "hint": "🛎️",
         "category": "식당 평가",
         "categoryEn": "Restaurant reviews",
-        "example": "분위기와 서비스가 좋습니다."
+        "example": "분위기와 서비스가 좋습니다.",
+        "exampleEn": "The atmosphere and the service are good."
       },
       {
         "ko": "분위기",
@@ -279,7 +287,8 @@
         "hint": "🕯️",
         "category": "식당 평가",
         "categoryEn": "Restaurant reviews",
-        "example": "그 식당은 분위기가 좋아."
+        "example": "그 식당은 분위기가 좋아.",
+        "exampleEn": "That restaurant has a nice atmosphere."
       },
       {
         "ko": "맛집",
@@ -295,7 +304,8 @@
         "category": "식당 평가",
         "categoryEn": "Restaurant reviews",
         "artPending": true,
-        "example": "원기둥을 선택하는 가장 큰 이유는 용기의 제작 비용을 줄이기 위해서이다."
+        "example": "원기둥을 선택하는 가장 큰 이유는 용기의 제작 비용을 줄이기 위해서이다.",
+        "exampleEn": "The main reason for choosing a cylinder is to reduce the cost of making the container."
       },
       {
         "ko": "그중에서",
@@ -399,7 +409,8 @@
         "hint": "🌈",
         "category": "읽기",
         "categoryEn": "Reading",
-        "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다."
+        "example": "남자를 위한 화장품도 다양하게 만들 필요가 있다.",
+        "exampleEn": "Cosmetics for men also need to be made in a wider variety."
       },
       {
         "ko": "처음",
@@ -407,7 +418,8 @@
         "hint": "1️⃣",
         "category": "읽기",
         "categoryEn": "Reading",
-        "example": "저, 터키 식당에 처음 왔는데 뭐가 맛있어요?"
+        "example": "저, 터키 식당에 처음 왔는데 뭐가 맛있어요?",
+        "exampleEn": "Excuse me, this is my first time at a Turkish restaurant — what is good here?"
       },
       {
         "ko": "놀라다",
@@ -431,7 +443,8 @@
         "hint": "👉",
         "category": "읽기",
         "categoryEn": "Reading",
-        "example": "이 글은 좋은 식당을 추천하는 글입니다."
+        "example": "이 글은 좋은 식당을 추천하는 글입니다.",
+        "exampleEn": "This piece is a recommendation for a good restaurant."
       },
       {
         "ko": "피자나라",
@@ -544,7 +557,8 @@
         "hint": "👥",
         "category": "주문",
         "categoryEn": "Ordering",
-        "example": "아주머니, 여기 감자탕 2인분 주세요."
+        "example": "아주머니, 여기 감자탕 2인분 주세요.",
+        "exampleEn": "Excuse me, could we have two servings of gamjatang over here, please."
       },
       {
         "ko": "갖다 주다",
@@ -583,7 +597,8 @@
         "category": "주문",
         "categoryEn": "Ordering",
         "artPending": true,
-        "example": "이 글은 좋은 식당을 추천하는 글입니다."
+        "example": "이 글은 좋은 식당을 추천하는 글입니다.",
+        "exampleEn": "This piece is a recommendation for a good restaurant."
       },
       {
         "ko": "이상",
@@ -592,7 +607,8 @@
         "category": "주문",
         "categoryEn": "Ordering",
         "artPending": true,
-        "example": "이용 후기가 여행 상품의 다양성보다 중요하다는 응답이 두 배 이상 많다."
+        "example": "이용 후기가 여행 상품의 다양성보다 중요하다는 응답이 두 배 이상 많다.",
+        "exampleEn": "More than twice as many respondents said that user reviews matter more than the range of travel products."
       },
       {
         "ko": "음식값",
@@ -601,7 +617,8 @@
         "category": "주문",
         "categoryEn": "Ordering",
         "artPending": true,
-        "example": "음식값이 비싸지 않습니다."
+        "example": "음식값이 비싸지 않습니다.",
+        "exampleEn": "The food is not expensive."
       },
       {
         "ko": "꼬꼬치킨",
@@ -648,7 +665,8 @@
         "hint": "⏳",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다."
+        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다.",
+        "exampleEn": "With Kim's medal, fencing produced a medal for the first time in a long while."
       },
       {
         "ko": "말을 놓다",
@@ -758,7 +776,8 @@
         "hint": "🎂",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "example": "내일은 제 친구 생일이에요."
+        "example": "내일은 제 친구 생일이에요.",
+        "exampleEn": "Tomorrow is my friend's birthday."
       },
       {
         "ko": "주말",
@@ -791,7 +810,8 @@
         "hint": "🤔",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "example": "글쎄요, 켈리 씨인 것 같아요."
+        "example": "글쎄요, 켈리 씨인 것 같아요.",
+        "exampleEn": "Well, I think it is Kelly."
       },
       {
         "ko": "약속",
@@ -852,7 +872,8 @@
         "category": "회화",
         "categoryEn": "Dialogue",
         "artPending": true,
-        "example": "내일은 늦지 마세요."
+        "example": "내일은 늦지 마세요.",
+        "exampleEn": "Please don't be late tomorrow."
       },
       {
         "ko": "키가 크다",
@@ -885,7 +906,8 @@
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
         "artPending": true,
-        "example": "김 선수가 펜싱 대표팀에서 메달을 목표로 열심히 훈련했다."
+        "example": "김 선수가 펜싱 대표팀에서 메달을 목표로 열심히 훈련했다.",
+        "exampleEn": "Kim trained hard with the national fencing team, aiming for a medal."
       },
       {
         "ko": "자유 여행",
@@ -920,7 +942,8 @@
         "category": "과제",
         "categoryEn": "Task · the food festival",
         "artPending": true,
-        "example": "오늘 점심은 전통 음식 축제에 가서 먹을까?"
+        "example": "오늘 점심은 전통 음식 축제에 가서 먹을까?",
+        "exampleEn": "Shall we go to the traditional food festival for lunch today?"
       },
       {
         "ko": "주인",
@@ -929,7 +952,8 @@
         "category": "과제",
         "categoryEn": "Task · the food festival",
         "artPending": true,
-        "example": "집주인을 만났을 때를 '주인님'이라고 불러서 사람들이 웃었어."
+        "example": "집주인을 만났을 때를 '주인님'이라고 불러서 사람들이 웃었어.",
+        "exampleEn": "When I met the landlord I addressed him as 'my lord', and everyone laughed."
       },
       {
         "ko": "터키",
@@ -938,7 +962,8 @@
         "category": "과제",
         "categoryEn": "Task · the food festival",
         "artPending": true,
-        "example": "터키 식당에 한번 가 보자."
+        "example": "터키 식당에 한번 가 보자.",
+        "exampleEn": "Let's try going to a Turkish restaurant."
       },
       {
         "ko": "전통 음식",
@@ -947,7 +972,8 @@
         "category": "과제",
         "categoryEn": "Task · the food festival",
         "artPending": true,
-        "example": "오늘 점심은 전통 음식 축제에 가서 먹을까?"
+        "example": "오늘 점심은 전통 음식 축제에 가서 먹을까?",
+        "exampleEn": "Shall we go to the traditional food festival for lunch today?"
       },
       {
         "ko": "메뉴를 만들다",
@@ -964,7 +990,8 @@
         "category": "발음",
         "categoryEn": "Pronunciation · question intonation",
         "artPending": true,
-        "example": "요즘은 의문사가 있는 의문문도 문장의 끝을 약간 올려서 말하는 사람이 많습니다."
+        "example": "요즘은 의문사가 있는 의문문도 문장의 끝을 약간 올려서 말하는 사람이 많습니다.",
+        "exampleEn": "These days many people raise the end of the sentence slightly even in questions that already contain a question word."
       },
       {
         "ko": "억양",
@@ -981,7 +1008,8 @@
         "category": "발음",
         "categoryEn": "Pronunciation · question intonation",
         "artPending": true,
-        "example": "이 영화를 처음 봐요?"
+        "example": "이 영화를 처음 봐요?",
+        "exampleEn": "Is this the first time you have seen this film?"
       }
     ]
   },

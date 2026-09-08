@@ -151,7 +151,8 @@
         "hint": "🤧",
         "category": "증상",
         "categoryEn": "Symptoms",
-        "example": "아이가 감기에 걸려 밤새 큰 소리로 울었다."
+        "example": "아이가 감기에 걸려 밤새 큰 소리로 울었다.",
+        "exampleEn": "The child caught a cold and cried loudly all night."
       },
       {
         "ko": "머리가 아프다",
@@ -269,7 +270,8 @@
         "hint": "🤒",
         "category": "병원",
         "categoryEn": "Hospital & clinics",
-        "example": "의사는 위염 환자에게 식사량을 ( )."
+        "example": "의사는 위염 환자에게 식사량을 ( ).",
+        "exampleEn": "The doctor ( ) the amount of food for the gastritis patient."
       },
       {
         "ko": "진료를 받다",
@@ -400,7 +402,8 @@
         "hint": "💧",
         "category": "약",
         "categoryEn": "Medication",
-        "example": "나는 칼국수 먹을래. 너는?"
+        "example": "나는 칼국수 먹을래. 너는?",
+        "exampleEn": "I'll have the knife-cut noodles. What about you?"
       },
       {
         "ko": "붙이다",
@@ -497,7 +500,8 @@
         "hint": "🍬",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "example": "그럼 우유나 설탕을 좀 넣으세요."
+        "example": "그럼 우유나 설탕을 좀 넣으세요.",
+        "exampleEn": "Then add a little milk or sugar."
       },
       {
         "ko": "걱정",
@@ -558,7 +562,8 @@
         "hint": "🎤",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "example": "발표할 때 원고를 보면서 하면 안 돼요?"
+        "example": "발표할 때 원고를 보면서 하면 안 돼요?",
+        "exampleEn": "Can't I read from my script while I present?"
       },
       {
         "ko": "춘천",
@@ -580,7 +585,8 @@
         "hint": "🧂",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "example": "소금을 좀 많이 넣은 것 같아요."
+        "example": "소금을 좀 많이 넣은 것 같아요.",
+        "exampleEn": "I think I put in a bit too much salt."
       },
       {
         "ko": "자꾸",
@@ -595,7 +601,8 @@
         "hint": "💰",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "example": "아니요, 생활비가 많이 안 들어서 좋기는 한데 룸메이트 때문에 좀 힘들어요. 그래서 다음 학기에 이사를 가려고 생각 중이에요."
+        "example": "아니요, 생활비가 많이 안 들어서 좋기는 한데 룸메이트 때문에 좀 힘들어요. 그래서 다음 학기에 이사를 가려고 생각 중이에요.",
+        "exampleEn": "No — it is nice that living costs are low, but my roommate makes it rather hard. So I am thinking of moving next semester."
       },
       {
         "ko": "돈이 들다",
@@ -631,7 +638,8 @@
         "hint": "☕",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "example": "요즘 감기가 유행이에요. 약 잘 드시고 따뜻한 물을 자주 드세요."
+        "example": "요즘 감기가 유행이에요. 약 잘 드시고 따뜻한 물을 자주 드세요.",
+        "exampleEn": "Colds are going around at the moment. Take your medicine properly and drink warm water often."
       },
       {
         "ko": "어떻게 오셨어요?",
@@ -664,7 +672,8 @@
         "hint": "📏",
         "category": "회화",
         "categoryEn": "Speaking · symptoms & advice",
-        "example": "5,000원이에요. 이 약을 이틀 정도 드셔 보시고 그래도 안 나으면 병원에 가세요."
+        "example": "5,000원이에요. 이 약을 이틀 정도 드셔 보시고 그래도 안 나으면 병원에 가세요.",
+        "exampleEn": "That is 5,000 won. Try taking this medicine for about two days, and if you still don't get better, go to the hospital."
       },
       {
         "ko": "그래도",
@@ -690,7 +699,8 @@
         "hint": "💪",
         "category": "회화",
         "categoryEn": "Speaking · symptoms & advice",
-        "example": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다."
+        "example": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다.",
+        "exampleEn": "I exercise for two hours every morning. I think I am this healthy because I have kept it up for twenty years."
       },
       {
         "ko": "건강",
@@ -774,7 +784,8 @@
         "hint": "🚶",
         "category": "회화",
         "categoryEn": "Speaking · symptoms & advice",
-        "example": "공연이 시작하면 밖으로 나가면 안 됩니다."
+        "example": "공연이 시작하면 밖으로 나가면 안 됩니다.",
+        "exampleEn": "Once the performance has started, you must not go outside."
       },
       {
         "ko": "시간을 내다",
@@ -789,7 +800,8 @@
         "hint": "😔",
         "category": "회화",
         "categoryEn": "Speaking · symptoms & advice",
-        "example": "취업 준비생의 70% 이상이 면접시험 준비를 할 때 외모로 말미암아 고민해 본 적이 있다고 말했다."
+        "example": "취업 준비생의 70% 이상이 면접시험 준비를 할 때 외모로 말미암아 고민해 본 적이 있다고 말했다.",
+        "exampleEn": "More than 70% of job seekers said they had worried about their appearance while preparing for interviews."
       },
       {
         "ko": "조언",
@@ -818,7 +830,8 @@
         "hint": "🥛",
         "category": "회화",
         "categoryEn": "Speaking · symptoms & advice",
-        "example": "그럼 우유나 설탕을 좀 넣으세요."
+        "example": "그럼 우유나 설탕을 좀 넣으세요.",
+        "exampleEn": "Then add a little milk or sugar."
       },
       {
         "ko": "낮",
@@ -826,7 +839,8 @@
         "hint": "☀️",
         "category": "회화",
         "categoryEn": "Speaking · symptoms & advice",
-        "example": "낮에는 좀 더운데 아침, 저녁은 시원해."
+        "example": "낮에는 좀 더운데 아침, 저녁은 시원해.",
+        "exampleEn": "It is a bit hot during the day, but the mornings and evenings are cool."
       },
       {
         "ko": "밤",
@@ -896,7 +910,8 @@
         "hint": "🏃",
         "category": "듣고 말하기",
         "categoryEn": "Listening & interview",
-        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다."
+        "example": "김 선수가 메달을 따면서 오랜만에 펜싱 종목에서 메달이 나왔다.",
+        "exampleEn": "With Kim's medal, fencing produced a medal for the first time in a long while."
       },
       {
         "ko": "달리다",
@@ -975,7 +990,8 @@
         "hint": "🌍",
         "category": "듣고 말하기",
         "categoryEn": "Listening & interview",
-        "example": "세계 인구가 늘었어요."
+        "example": "세계 인구가 늘었어요.",
+        "exampleEn": "The world population has grown."
       },
       {
         "ko": "가장",
@@ -983,7 +999,8 @@
         "hint": "🔝",
         "category": "듣고 말하기",
         "categoryEn": "Listening & interview",
-        "example": "제주도가 가장 큰 섬이에요."
+        "example": "제주도가 가장 큰 섬이에요.",
+        "exampleEn": "Jeju is the largest island."
       },
       {
         "ko": "빠르다",
@@ -998,7 +1015,8 @@
         "hint": "⭐",
         "category": "듣고 말하기",
         "categoryEn": "Listening & interview",
-        "example": "여름철에 음식을 보관하려면 특별한 냉장고를 마련해야 한다."
+        "example": "여름철에 음식을 보관하려면 특별한 냉장고를 마련해야 한다.",
+        "exampleEn": "To store food in the summer months you have to get a special refrigerator."
       },
       {
         "ko": "건강 비결",
@@ -1036,7 +1054,8 @@
         "hint": "🌱",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · healthy habits",
-        "example": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다."
+        "example": "저는 아침마다 두 시간씩 운동을 합니다. 20년 동안 계속 운동을 해서 이렇게 건강한 것 같습니다.",
+        "exampleEn": "I exercise for two hours every morning. I think I am this healthy because I have kept it up for twenty years."
       },
       {
         "ko": "영양제",
@@ -1065,7 +1084,8 @@
         "hint": "🔀",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · healthy habits",
-        "example": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다."
+        "example": "북극여우는 계절에 따라 털 색깔을 바꾸는 동물이다.",
+        "exampleEn": "The Arctic fox is an animal that changes the colour of its coat with the seasons."
       },
       {
         "ko": "중요하다",
@@ -1073,7 +1093,8 @@
         "hint": "❗",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · healthy habits",
-        "example": "가격을 중요하게 생각하는 사람이 전체의 반을 넘는다."
+        "example": "가격을 중요하게 생각하는 사람이 전체의 반을 넘는다.",
+        "exampleEn": "People who consider price important make up more than half of the total."
       },
       {
         "ko": "웃다",
@@ -1088,7 +1109,8 @@
         "hint": "🌐",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · healthy habits",
-        "example": "여름에는 모든 음식을 냉장고에 보관해야 한다."
+        "example": "여름에는 모든 음식을 냉장고에 보관해야 한다.",
+        "exampleEn": "In summer all food has to be kept in the refrigerator."
       },
       {
         "ko": "좋은 쪽으로 생각하다",
@@ -1135,7 +1157,8 @@
         "hint": "📅",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · healthy habits",
-        "example": "저는 매일 아침 운동을 해요."
+        "example": "저는 매일 아침 운동을 해요.",
+        "exampleEn": "I exercise every morning."
       },
       {
         "ko": "한 번에",
@@ -1187,7 +1210,8 @@
         "hint": "✅",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · healthy habits",
-        "example": "내일까지 숙제를 꼭 해야 돼요."
+        "example": "내일까지 숙제를 꼭 해야 돼요.",
+        "exampleEn": "You must be sure to finish the homework by tomorrow."
       },
       {
         "ko": "아침",

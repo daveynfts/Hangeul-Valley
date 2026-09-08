@@ -54,7 +54,8 @@
         "hint": "🏡",
         "category": "주거",
         "categoryEn": "Housing & rooms",
-        "example": "주택이 많이 줄었습니다."
+        "example": "주택이 많이 줄었습니다.",
+        "exampleEn": "The number of houses has fallen sharply."
       },
       {
         "ko": "빌라",
@@ -122,7 +123,8 @@
         "hint": "🍳",
         "category": "주거",
         "categoryEn": "Housing & rooms",
-        "example": "음식을 만들고 싶으면 2층에 있는 부엌을 이용해 주세요."
+        "example": "음식을 만들고 싶으면 2층에 있는 부엌을 이용해 주세요.",
+        "exampleEn": "If you want to cook, please use the kitchen on the second floor."
       },
       {
         "ko": "화장실",
@@ -165,7 +167,8 @@
         "hint": "📐",
         "category": "집 조건",
         "categoryEn": "What makes a place good",
-        "example": "지금 사는 집은 방이 넓어서 좋기는 하지만 학교에서 너무 멀어요."
+        "example": "지금 사는 집은 방이 넓어서 좋기는 하지만 학교에서 너무 멀어요.",
+        "exampleEn": "The place I live in now is nice because the rooms are spacious, but it is too far from school."
       },
       {
         "ko": "방이 좁다",
@@ -324,7 +327,8 @@
         "hint": "🏦",
         "category": "생활비",
         "categoryEn": "Rent & bills",
-        "example": "전세는 7,000만 원이고 월세는 보증금 1,000만 원에 50만 원이에요."
+        "example": "전세는 7,000만 원이고 월세는 보증금 1,000만 원에 50만 원이에요.",
+        "exampleEn": "The jeonse deposit is 70 million won, and the monthly rent is 500,000 won on a 10 million won deposit."
       },
       {
         "ko": "보증금",
@@ -371,7 +375,8 @@
         "hint": "🔥",
         "category": "생활비",
         "categoryEn": "Rent & bills",
-        "example": "수도 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요. 한번 직접 와서 구경해 보세요."
+        "example": "수도 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요. 한번 직접 와서 구경해 보세요.",
+        "exampleEn": "Including the water and gas bills it comes to about 50,000 won, so it is cheaper than other places. Come and see it for yourself."
       },
       {
         "ko": "수도 요금",
@@ -379,7 +384,8 @@
         "hint": "🚰",
         "category": "생활비",
         "categoryEn": "Rent & bills",
-        "example": "수도 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요. 한번 직접 와서 구경해 보세요."
+        "example": "수도 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요. 한번 직접 와서 구경해 보세요.",
+        "exampleEn": "Including the water and gas bills it comes to about 50,000 won, so it is cheaper than other places. Come and see it for yourself."
       },
       {
         "ko": "전화 요금",
@@ -387,7 +393,8 @@
         "hint": "📞",
         "category": "생활비",
         "categoryEn": "Rent & bills",
-        "example": "전화 요금이 내렸어요."
+        "example": "전화 요금이 내렸어요.",
+        "exampleEn": "The phone bill has gone down."
       },
       {
         "ko": "매매",
@@ -423,7 +430,8 @@
         "hint": "🧮",
         "category": "생활비",
         "categoryEn": "Rent & bills",
-        "example": "눈물샘을 담당하는 신경과 턱을 움직이는 신경이 연결되어 있기 때문에 음식을 씹을 때면 눈물이 나오는 것이다."
+        "example": "눈물샘을 담당하는 신경과 턱을 움직이는 신경이 연결되어 있기 때문에 음식을 씹을 때면 눈물이 나오는 것이다.",
+        "exampleEn": "Because the nerve serving the tear glands is connected to the nerve that moves the jaw, tears come out whenever you chew food."
       },
       {
         "ko": "부동산",
@@ -447,7 +455,8 @@
         "hint": "📄",
         "category": "부동산",
         "categoryEn": "Finding a place",
-        "example": "5월에 계약이 끝나기 때문에 그 전에 집을 구해야 해요."
+        "example": "5월에 계약이 끝나기 때문에 그 전에 집을 구해야 해요.",
+        "exampleEn": "The contract ends in May, so I have to find a place before then."
       },
       {
         "ko": "계약 기간",
@@ -462,7 +471,8 @@
         "hint": "📋",
         "category": "부동산",
         "categoryEn": "Finding a place",
-        "example": "따라서 소비자는 구매 전에 반품 비용과 조건을 잘 확인해야 한다."
+        "example": "따라서 소비자는 구매 전에 반품 비용과 조건을 잘 확인해야 한다.",
+        "exampleEn": "Consumers should therefore check the return costs and conditions carefully before buying."
       },
       {
         "ko": "위치",
@@ -495,7 +505,8 @@
         "hint": "📦",
         "category": "부동산",
         "categoryEn": "Finding a place",
-        "example": "학교 근처로 이사하고 싶은데 괜찮은 집이 있을지 모르겠어요."
+        "example": "학교 근처로 이사하고 싶은데 괜찮은 집이 있을지 모르겠어요.",
+        "exampleEn": "I want to move near the school, but I am not sure whether there will be a decent place."
       },
       {
         "ko": "알아보다",
@@ -503,7 +514,8 @@
         "hint": "🔎",
         "category": "부동산",
         "categoryEn": "Finding a place",
-        "example": "개를 키우기 전에 개의 특성에 대해서 알아봐야 한다."
+        "example": "개를 키우기 전에 개의 특성에 대해서 알아봐야 한다.",
+        "exampleEn": "You should find out about a dog's characteristics before you keep one."
       },
       {
         "ko": "결정하다",
@@ -564,7 +576,8 @@
         "hint": "⏰",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "example": "아, 그러세요? 마침 좋은 원룸이 하나 있는데 근처에 공원도 있고 주변이 조용해서 살기 좋아요."
+        "example": "아, 그러세요? 마침 좋은 원룸이 하나 있는데 근처에 공원도 있고 주변이 조용해서 살기 좋아요.",
+        "exampleEn": "Oh, is that so? As it happens there is one good studio flat, and with a park nearby and quiet surroundings it is a good place to live."
       },
       {
         "ko": "회사를 옮기다",
@@ -636,7 +649,8 @@
         "hint": "🚗",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "example": "길이 막히니까 택시 타고 갈래."
+        "example": "길이 막히니까 택시 타고 갈래.",
+        "exampleEn": "The traffic is jammed, so I'll take a taxi."
       },
       {
         "ko": "대부분",
@@ -644,7 +658,8 @@
         "hint": "📊",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · the place I live",
-        "example": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다."
+        "example": "음료수 병과 같이 액체를 담는 용기들은 대부분 원기둥 모양이다.",
+        "exampleEn": "Containers that hold liquids, such as drink bottles, are mostly cylindrical."
       },
       {
         "ko": "바뀌다",
@@ -659,7 +674,8 @@
         "hint": "✈️",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · the place I live",
-        "example": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데 거기에서 한번 찾아보세요."
+        "example": "그럼 유학생들이 많이 보는 인터넷 사이트가 있는데 거기에서 한번 찾아보세요.",
+        "exampleEn": "Well, there is a website that many international students use, so try looking there."
       },
       {
         "ko": "생활하다",
@@ -674,7 +690,8 @@
         "hint": "👩",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · the place I live",
-        "example": "아주머니, 여기 감자탕 2인분 주세요."
+        "example": "아주머니, 여기 감자탕 2인분 주세요.",
+        "exampleEn": "Excuse me, could we have two servings of gamjatang over here, please."
       },
       {
         "ko": "가족처럼",
@@ -696,7 +713,8 @@
         "hint": "⏭️",
         "category": "읽고 쓰기",
         "categoryEn": "Reading · the place I live",
-        "example": "지금 하기 싫은데 나중에 하면 안 돼요?"
+        "example": "지금 하기 싫은데 나중에 하면 안 돼요?",
+        "exampleEn": "I don't feel like doing it now — can't I do it later?"
       },
       {
         "ko": "좋은 점",
@@ -718,7 +736,8 @@
         "hint": "👥",
         "category": "과제",
         "categoryEn": "Task · finding a roommate",
-        "example": "아니요, 생활비가 많이 안 들어서 좋기는 한데 룸메이트 때문에 좀 힘들어요. 그래서 다음 학기에 이사를 가려고 생각 중이에요."
+        "example": "아니요, 생활비가 많이 안 들어서 좋기는 한데 룸메이트 때문에 좀 힘들어요. 그래서 다음 학기에 이사를 가려고 생각 중이에요.",
+        "exampleEn": "No — it is nice that living costs are low, but my roommate makes it rather hard. So I am thinking of moving next semester."
       },
       {
         "ko": "규칙",
@@ -782,7 +801,8 @@
         "hint": "💭",
         "category": "문화와 발음",
         "categoryEn": "Culture & pronunciation",
-        "example": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다."
+        "example": "요즘 연필을 잡고 글씨를 반듯하게 쓰는 것에 어려움을 느끼는 아이가 많다.",
+        "exampleEn": "These days many children find it hard to hold a pencil and write neatly."
       },
       {
         "ko": "시원하다",
@@ -790,7 +810,8 @@
         "hint": "🧊",
         "category": "문화와 발음",
         "categoryEn": "Culture & pronunciation",
-        "example": "어제는 더웠는데 오늘은 시원하네요."
+        "example": "어제는 더웠는데 오늘은 시원하네요.",
+        "exampleEn": "It was hot yesterday, but today is pleasantly cool."
       },
       {
         "ko": "놀러 가다",
