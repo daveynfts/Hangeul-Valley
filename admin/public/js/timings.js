@@ -265,17 +265,32 @@ window.TimingsView = {
     // its `dur` corrected on the way out. The game reads that number before it can decode.
     if (t && this.dur > 0) t.dur = Math.round(this.dur * 100) / 100;
     const btn = document.getElementById('timings-save');
+    // Put back by hand, in a finally, and that is the point rather than an aside. The button
+    // lives in the header row, which only paintShell() writes; paintTransport() repaints the
+    // row below it. So the first version set "Saving…" and nothing ever cleared it — the save
+    // landed, the toast appeared, and the button sat there reading Saving… for the rest of the
+    // session, which looks exactly like a request that never came back.
+    const restore = (label) => {
+      if (!btn) return;
+      btn.disabled = false;
+      btn.textContent = label;
+      if (label !== 'Save') setTimeout(() => { if (btn.textContent === label) btn.textContent = 'Save'; }, 2400);
+    };
     if (btn) { btn.disabled = true; btn.textContent = 'Saving…'; }
     try {
       await window.apiFetch.saveContent('cassette/' + this.unit, this.bank);
       this.dirty = false;
       window.Toast.show(this.unit + ' timings written to worlds/' + this.unit + '-cassette.json',
         'Saved', 'success');
+      restore('Save');
     } catch (e) {
-      // The validator's message is the useful part: it names the line and what is wrong.
-      window.Toast.show(String((e && e.message) || e), 'Not saved', 'error', 9000);
+      // No toast here. apiFetch already raised one carrying the validator's message, which is
+      // the useful part — it names the line and what is wrong — and a second copy of the same
+      // sentence under a different title is noise. The button carries the state instead.
+      restore('Not saved');
+    } finally {
+      this.paintTransport();
     }
-    this.paintTransport();
   },
 
   // ── Painting ───────────────────────────────────────────────────────────────

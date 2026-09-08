@@ -188,6 +188,48 @@ async function runTests() {
     assert(fs.existsSync(path.join(publicDir, 'js', 'timings.js')), 'the file exists');
   });
 
+  await test('the Save button is put back after a save, and after a refused one', () => {
+    // It reads "Saving…" while the request is out, and it lives in the header row — which only
+    // paintShell() writes, while the save path repaints the row below it. So the first version
+    // set the label and nothing ever cleared it: the file was written, the toast appeared, and
+    // the button sat reading Saving… for the rest of the session, which is indistinguishable
+    // from a request that never came back. Both exits have to restore it.
+    const js = fs.readFileSync(path.join(publicDir, 'js', 'timings.js'), 'utf8');
+    const save = js.slice(js.indexOf('async save()'), js.indexOf('── Painting'));
+    assert(save.length > 200, 'found the save method');
+    assert(/finally\s*\{/.test(save), 'the save path has a finally');
+    const restore = save.indexOf('const restore =');
+    assert(restore > 0, 'it defines a restore');
+    assert(restore < save.indexOf("btn.textContent = 'Saving…'"),
+      'declared before the label is set, so no throw can skip past it');
+    assert(/restore\('Save'\)/.test(save), 'the success path restores it');
+    assert(/restore\('Not saved'\)/.test(save), 'and so does the failure path');
+  });
+
+  await test('a refused save raises one message, not two', () => {
+    // apiFetch already toasts the validator's sentence, which is the useful part. A second
+    // copy of it under a different title is noise, so the button carries the state instead.
+    const js = fs.readFileSync(path.join(publicDir, 'js', 'timings.js'), 'utf8');
+    const save = js.slice(js.indexOf('async save()'), js.indexOf('── Painting'));
+    const katch = save.slice(save.indexOf('} catch'));
+    assert(!/Toast\.show/.test(katch), 'the catch does not raise a toast of its own');
+    assert(/Toast\.show/.test(save.slice(0, save.indexOf('} catch'))),
+      'while a save that worked still says so');
+  });
+
+  await test('the tab finds the recordings on both hosts it is served from', () => {
+    // /audio-preview is an Express route and only that. The deployed panel runs on Vercel,
+    // whose rewrites send /audio to the CDN and know nothing about /audio-preview, so a tab
+    // that only knew the first drew a flat line there with no way to tell why.
+    const js = fs.readFileSync(path.join(publicDir, 'js', 'timings.js'), 'utf8');
+    assert(/audioUrl\(src\)/.test(js), 'there is a resolver');
+    assert(/'\/audio-preview\/' \+ rel/.test(js) && /'\/' \+ String\(src\)/.test(js),
+      'it knows both candidates');
+    const vercel = JSON.parse(fs.readFileSync(path.join(rootDir, 'vercel.json'), 'utf8'));
+    assert((vercel.rewrites || []).some((r) => r.source === '/audio/:path*'),
+      'and the second one is a rewrite that actually exists');
+  });
+
   await test('the tab styles itself from the panel tokens, not from colours of its own', () => {
     // The first draft hardcoded a light card and reached for var(--border, …), which does not
     // exist here — so it fell back to the light default on an admin that is dark throughout.
