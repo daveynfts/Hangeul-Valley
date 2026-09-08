@@ -1234,13 +1234,21 @@ function normalizeKorean(value){
 // `acceptedAnswers: ['아버님']`, which is unambiguous. The delimiter split on `ko` stays as a
 // fallback for entries that inline alternates as "가다 / 걷다", but new data should use the
 // field — splitting a text field guesses at intent, a list states it.
+//
+// That guess has to be a narrow one. A bare slash is not a delimiter in Korean, it is
+// spelling: 을/를, 아/어, (ㄴ/는) write one form together with both of its allomorphs.
+// Splitting there left `N을/를 위해` accepting only `N을`, so a learner who typed the whole
+// form correctly was told they were wrong. A comma is sentence punctuation for the same
+// reason (`모두 18,000원입니다.`). So only a *spaced* slash separates alternates — and the
+// split never replaces the string it came from: the written form is always acceptable,
+// and the pieces are extra tolerance on top of it, never instead of it.
 function acceptableAnswers(word){
   if (!word) return [];
   const out = [String(word.ko || '')];
   ['acceptedAnswers', 'answersKo', 'variantsKo'].forEach(key => {
     if (Array.isArray(word[key])) out.push(...word[key]);
   });
-  const expanded = out.flatMap(s => String(s).split(/[\/,]/));
+  const expanded = out.flatMap(s => [String(s), ...String(s).split(/\s+\/\s+/)]);
   return [...new Set(expanded.map(normalizeKorean).filter(Boolean))];
 }
 
