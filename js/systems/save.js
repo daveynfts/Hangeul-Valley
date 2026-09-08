@@ -848,15 +848,54 @@ async function loadSave(){
   console.log('[Save] No save found – fresh start.');
 }
 
+// ── Cloud sign-in ────────────────────────────────────────────────────────────
+// Everything from the token in hand to the button that asks for one. Extracted whole by
+// tests/test_persistent_signin.js, which is why the boundary markers are here.
 let googleAuth = { clientId: '', token: '', user: null, ready: false, exp: 0 };
 
 function peekLocalSave() {
   try { return JSON.parse(localStorage.getItem('hv_save_v2') || 'null'); } catch { return null; }
 }
 
+// ── Where a sign-in lives between visits ─────────────────────────────────────
+//
+// The token used to be kept in sessionStorage, which the browser empties when the tab
+// closes. So every restart — and every new tab — began signed out, although nobody had
+// signed out: the player was simply asked to sign in again, and until they did, that visit's
+// progress went nowhere but this device.
+//
+// Keeping the token for longer is not by itself the fix. A Google ID token is good for about
+// an hour and api/save.js verifies it against Google, so a stored one is worthless the moment
+// it expires. Staying signed in is two things:
+//
+//   the token       kept in localStorage, so a reload or a second tab uses the one already
+//                   in hand instead of asking for another
+//   the intent      the remembered profile, which does not expire. It says this browser
+//                   holds a sign-in nobody has ended, and it is what lets restoreGoogleSession
+//                   ask Google at boot for a token to replace the expired one.
+//
+// signOutGoogle is the only thing that removes the intent, and it also calls
+// disableAutoSelect() so Google itself stops answering those quiet requests.
+const GOOGLE_TOKEN_KEY = 'hv_google_token';
+const GOOGLE_USER_KEY = 'hv_google_user';
+
 function getGoogleToken() {
   if (googleAuth.token) return googleAuth.token;
-  try { return sessionStorage.getItem('hv_google_token') || ''; } catch { return ''; }
+  try {
+    const stored = localStorage.getItem(GOOGLE_TOKEN_KEY);
+    if (stored) return stored;
+    // Left where the old build put it. Honoured for the rest of this tab's life so that
+    // shipping this change does not itself sign everybody out — the thing it exists to stop.
+    return sessionStorage.getItem(GOOGLE_TOKEN_KEY) || '';
+  } catch { return ''; }
+}
+
+/** Does this browser hold a sign-in nobody has ended? The remembered profile is the record:
+ *  written when a credential arrives, removed only by signOutGoogle or by the server refusing
+ *  the token outright, and — unlike the token — it does not expire. */
+function hasGoogleSignIn() {
+  if (googleAuth.user) return true;
+  try { return !!localStorage.getItem(GOOGLE_USER_KEY); } catch { return false; }
 }
 
 function setGoogleSession(token, user) {
@@ -864,10 +903,13 @@ function setGoogleSession(token, user) {
   googleAuth.user = user || null;
   googleAuth.exp = token ? tokenExpiry(token) : 0;
   try {
-    if (token) sessionStorage.setItem('hv_google_token', token);
-    else sessionStorage.removeItem('hv_google_token');
-    if (user) localStorage.setItem('hv_google_user', JSON.stringify(user));
-    else localStorage.removeItem('hv_google_user');
+    if (token) localStorage.setItem(GOOGLE_TOKEN_KEY, token);
+    else localStorage.removeItem(GOOGLE_TOKEN_KEY);
+    // Cleared and never written. The only reason to touch sessionStorage now is so that a
+    // sign-out cannot leave the pre-upgrade copy behind for getGoogleToken to find.
+    sessionStorage.removeItem(GOOGLE_TOKEN_KEY);
+    if (user) localStorage.setItem(GOOGLE_USER_KEY, JSON.stringify(user));
+    else localStorage.removeItem(GOOGLE_USER_KEY);
   } catch {}
   // A token in hand clears both kinds of memory of the last failure: the error on the chip,
   // and the cooldown that stops us pestering Google. Signing in by hand is the strongest
@@ -1032,8 +1074,19 @@ function pushCloudSave(data) {
     if (!payload) return { ok: true, skipped: true, reason: 'superseded' };
     _cloudPending = null;
     try {
-      const { status } = await cloudSaveRequest('PUT', payload);
+      const { status, expired } = await cloudSaveRequest('PUT', payload);
       if (status === 401) {
+        // Two unrelated things arrive here as 401, and treating them alike is what made a
+        // sign-in so easy to lose. The server refusing the token means Google will not vouch
+        // for this player any more, and the session really is over. Failing to *obtain* a
+        // token — offline, or One Tap inside its cool-off — says nothing about the player at
+        // all, and ending the session over it turned a dropped connection into "sign in
+        // again" and, on the next load, a guest. The sign-in is kept, and the push takes its
+        // place in the retry backoff like any other blip.
+        if (expired) {
+          _cloudLastError = 'expired';
+          return { ok: false, status, reason: 'expired' };
+        }
         setGoogleSession('', null);
         if (typeof showToast === 'function') showToast(hvT('ui.cloud.signInAgain'));
         return { ok: false, status, reason: 'signed-out' };
@@ -1091,7 +1144,7 @@ let _cloudRetryAt = 0;
 // Everything else here is a blip: no network, a timeout, a 5xx, a rate limit.
 function cloudPushIsRetryable(reason) {
   if (!reason) return false;
-  if (reason === 'network' || reason === 'timeout') return true;
+  if (reason === 'network' || reason === 'timeout' || reason === 'expired') return true;
   const m = /^http:(\d+)$/.exec(reason);
   return !!m && (Number(m[1]) >= 500 || Number(m[1]) === 429);
 }
@@ -1218,10 +1271,12 @@ async function fetchCloudSave() {
   for (let attempt = 0; ; attempt++) {
     let status;
     let json;
+    let expired;
     try {
       const r = await cloudSaveRequest('GET');
       status = r.status;
       json = r.json;
+      expired = r.expired;
     } catch (e) {
       const why = (e && e.name === 'AbortError') ? 'timeout' : 'network';
       if (attempt < CLOUD_RETRY_DELAYS.length) { await _cloudSleep(CLOUD_RETRY_DELAYS[attempt]); continue; }
@@ -1230,6 +1285,9 @@ async function fetchCloudSave() {
     if (status === 200) return { ok: true, json };
     // 401 and 503 are settled answers: the token is no good, or the feature is off. Asking
     // again changes neither, and the retry would only delay telling the player.
+    // Same split as the write path: only the server refusing the token ends the session.
+    // Not being able to refresh one is a state to wait out, not a reason to sign anybody out.
+    if (status === 401 && expired) return { ok: false, why: 'expired', toast: 'ui.cloud.sessionStale' };
     if (status === 401) return { ok: false, why: 'signed-out', signedOut: true, toast: 'ui.cloud.signInAgain' };
     if (status === 503) return { ok: false, why: 'unavailable', toast: 'ui.cloud.unavailable' };
     if (attempt < CLOUD_RETRY_DELAYS.length) { await _cloudSleep(CLOUD_RETRY_DELAYS[attempt]); continue; }
@@ -1371,14 +1429,49 @@ function renderAuthUI() {
 function onGoogleCredential(resp) {
   const token = resp && resp.credential;
   if (!token) return;
+  // Whether anybody asked for this. A credential that answers a renewal we started — at boot,
+  // or when a request found the token stale — is the same session continuing, and announcing
+  // it would tell a player who never signed out that they had just signed in. Read before
+  // setGoogleSession, which is what resolves the waiting renewal and clears the slot.
+  const silent = typeof _resolveRenew === 'function';
   let user = { email: '', name: '', picture: '' };
   try {
     const payload = decodeJwtPayload(token);
     user = { email: payload.email || '', name: payload.name || '', picture: payload.picture || '', sub: payload.sub };
   } catch {}
   setGoogleSession(token, user);
-  if (typeof showToast === 'function') showToast(hvT('ui.cloud.signedIn'));
+  if (!silent && typeof showToast === 'function') showToast(hvT('ui.cloud.signedIn'));
   syncCloudSave();
+}
+
+/**
+ * Put the player back where they were, without a tap.
+ *
+ * boot() used to do `if (getGoogleToken()) syncCloudSave()`, and the token was in
+ * sessionStorage — so on a fresh browser start there was nothing to find and the visit began
+ * signed out. Three cases now:
+ *
+ *   a token still inside its hour   used as it stands; no request to Google at all
+ *   an expired token, or none, but
+ *     a sign-in nobody ended        ask Google to re-issue quietly
+ *   no sign-in on this browser      nothing to restore; the sign-in button stands
+ *
+ * The quiet request only succeeds while the player still has a Google session in this browser
+ * and has not signed out of the game. It is not awaited by anything the page needs, and a
+ * refusal costs the player nothing: the sign-in button is already on screen, and the intent
+ * is kept so the next load tries again.
+ */
+async function restoreGoogleSession() {
+  if (getGoogleToken() && googleTokenIsFresh()) {
+    renderAuthUI();
+    syncCloudSave();
+    return;
+  }
+  if (!hasGoogleSignIn()) { renderAuthUI(); return; }
+  // onGoogleCredential has already stored the token and started the sync by the time a
+  // successful renewal resolves, so there is nothing to do on that branch but stay quiet.
+  const renewed = await renewGoogleToken();
+  if (!renewed) renderAuthUI();
 }
 
 function signOutGoogle() {
@@ -1400,9 +1493,9 @@ async function initGoogleAuth() {
   googleAuth.ready = true;
   if (!googleAuth.clientId) { renderAuthUI(); return; }
   try {
-    const raw = localStorage.getItem('hv_google_user');
+    const raw = localStorage.getItem(GOOGLE_USER_KEY);
     if (raw) googleAuth.user = JSON.parse(raw);
-    googleAuth.token = sessionStorage.getItem('hv_google_token') || '';
+    googleAuth.token = getGoogleToken();
   } catch {}
   const boot = () => {
     if (!window.google || !google.accounts || !google.accounts.id) return false;
@@ -1410,7 +1503,12 @@ async function initGoogleAuth() {
       google.accounts.id.initialize({
         client_id: googleAuth.clientId,
         callback: onGoogleCredential,
-        auto_select: false,
+        // The flag that lets Google answer restoreGoogleSession's request without putting an
+        // account chooser in front of someone who has already chosen. With it false, every
+        // renewal — at boot and mid-session — needed a tap, which is most of the reason a
+        // sign-in never survived a restart. signOutGoogle's disableAutoSelect() is what
+        // turns it back off, so this cannot re-sign-in anyone who signed out.
+        auto_select: true,
         cancel_on_tap_outside: true,
         ux_mode: 'popup'
       });
@@ -1424,8 +1522,7 @@ async function initGoogleAuth() {
           text: 'signin_with'
         });
       });
-      renderAuthUI();
-      if (getGoogleToken()) syncCloudSave();
+      restoreGoogleSession();
     } catch (e) {
       console.warn('Google Sign-In init failed', e);
       renderAuthUI();
@@ -1458,6 +1555,7 @@ function loadGoogleIdentityScript() {
   };
   document.head.appendChild(s);
 }
+// ── Cloud sign-in end ────────────────────────────────────────────────────────
 
 if (typeof window !== 'undefined') {
   window.signOutGoogle = signOutGoogle;

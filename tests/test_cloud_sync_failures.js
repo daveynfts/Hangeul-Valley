@@ -114,7 +114,7 @@ const toasts = [];
 sb.showToast = (msg) => { toasts.push(String(msg)); };
 
 function signedIn() {
-  sb.sessionStorage.setItem('hv_google_token', 'test-token');
+  sb.localStorage.setItem('hv_google_token', 'test-token');
   R('googleAuth.token = "test-token"; googleAuth.user = { sub: "1", email: "a@b.c" };');
 }
 function answerWith(status, body) {
@@ -139,7 +139,7 @@ async function run(setup) {
   await R('syncCloudSave()');
   return {
     toasts: toasts.slice(),
-    token: sb.sessionStorage.getItem('hv_google_token') || '',
+    token: R('getGoogleToken()'),
     lastError: R('_cloudLastError'),
     slept: slept.slice()
   };
@@ -239,12 +239,12 @@ function tokenExpiringAt(msEpoch) {
   // being signed out by the answer; now the expiry in the token itself is read first.
   console.log('\n--- 8. Expiry is read from the token ---');
   assert(R('typeof googleTokenIsFresh') === 'function', 'the freshness check is shipped');
-  sb.sessionStorage.setItem('hv_google_token', tokenExpiringAt(Date.now() + 60 * 60 * 1000));
+  sb.localStorage.setItem('hv_google_token', tokenExpiringAt(Date.now() + 60 * 60 * 1000));
   R('googleAuth.token = ""; googleAuth.exp = 0;');
   assert(R('googleTokenIsFresh()') === true, 'an hour of life left counts as fresh');
-  sb.sessionStorage.setItem('hv_google_token', tokenExpiringAt(Date.now() + 10 * 1000));
+  sb.localStorage.setItem('hv_google_token', tokenExpiringAt(Date.now() + 10 * 1000));
   assert(R('googleTokenIsFresh()') === false, 'ten seconds of life left does not');
-  sb.sessionStorage.setItem('hv_google_token', 'not-a-jwt');
+  sb.localStorage.setItem('hv_google_token', 'not-a-jwt');
   assert(R('googleTokenIsFresh()') === true,
     'an unreadable token is left to the server to refuse, not guessed at');
 
@@ -253,7 +253,7 @@ function tokenExpiringAt(msEpoch) {
   // refused locally rather than sent with a token the server will reject.
   calls = 0;
   toasts.length = 0;
-  sb.sessionStorage.setItem('hv_google_token', tokenExpiringAt(Date.now() + 5 * 1000));
+  sb.localStorage.setItem('hv_google_token', tokenExpiringAt(Date.now() + 5 * 1000));
   R('googleAuth.token = ""; googleAuth.exp = 0;');
   sb.fetch = () => { calls++; return Promise.resolve({ status: 200, json: () => Promise.resolve({}) }); };
   const res = await R('cloudSaveRequest("GET")');
@@ -268,7 +268,7 @@ function tokenExpiringAt(msEpoch) {
   let prompts = 0;
   sb.google = { accounts: { id: { prompt: (cb) => { prompts++; if (cb) cb({ isNotDisplayed: () => true, isSkippedMoment: () => false }); } } } };
   R('_renewBlockedUntil = 0;');
-  sb.sessionStorage.setItem('hv_google_token', tokenExpiringAt(Date.now() + 5 * 1000));
+  sb.localStorage.setItem('hv_google_token', tokenExpiringAt(Date.now() + 5 * 1000));
   R('googleAuth.token = ""; googleAuth.exp = 0;');
   await R('cloudSaveRequest("GET")');
   assert(prompts === 1, 'the first stale request asks Google (' + prompts + ')');
@@ -288,14 +288,17 @@ function tokenExpiringAt(msEpoch) {
   // ── 10. The sync state reaches the screen ──────────────────────────────────
   console.log('\n--- 10. "not synced" is visible, not just recorded ---');
   R('googleAuth.user = { sub: "1", email: "a@b.c" }; googleAuth.token = "t"; googleAuth.exp = 0;');
-  sb.sessionStorage.setItem('hv_google_token', 't');
+  sb.localStorage.setItem('hv_google_token', 't');
   R('_cloudLastError = ""; renderAuthUI();');
   const clean = sb.document.getElementById('ls-auth-status').innerHTML;
   assert(!/auth-sync-warn/.test(clean), 'a healthy session shows no warning');
-  R('_cloudLastError = "HTTP 500"; renderAuthUI();');
+  R('_cloudLastError = "http:500"; renderAuthUI();');
   const warned = sb.document.getElementById('ls-auth-status').innerHTML;
   assert(/auth-sync-warn/.test(warned), 'a failed sync puts a marker on the auth chip');
-  assert(/HTTP 500/.test(warned), 'with the reason on hover');
+  // In words, not in the code the chain passes around. Asserting on the code let this pass
+  // against hvT's own fallback — a missing key paints itself, and 'ui.save.reason.HTTP 500'
+  // contains the string this used to look for.
+  assert(/server error 500/.test(warned), 'with the reason on hover, in words: ' + warned.slice(0, 160));
   assert(/Not synced/.test(warned), 'and words a player can read: ' + warned.slice(0, 120));
 
   // ── 11. The server side, read from the source ──────────────────────────────
