@@ -498,7 +498,7 @@ console.log('\n--- 15. Plant → water → harvest lands on the production sched
 // available. Each phase therefore has to mirror its grade onto production explicitly, and
 // phase 2 was missing that mirror. The cost was not subtle — watering scheduled `listen` and
 // left production on the first-step due date phase 1 had given it, already past, so the plot
-// went from sprout to ripe on _checkSRS's next 8s tick (the second growing sprite never showed),
+// went from sprout to ripe on the growth tick 8s later (the second growing sprite never showed),
 // and the harvest advanced production to learning step 1 instead of graduating it, so the
 // word never entered day-scale review at all.
 const answerChoiceSrc = extract('function answerChoice(', 'function closeQuiz(', 'answerChoice');

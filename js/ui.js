@@ -1545,7 +1545,7 @@ function answerChoice(opt, btn){
     //
     // Phase 2 used to be left out. Watering therefore scheduled `listen` and nothing else,
     // production stayed on the first-step due date phase 1 gave it — already in the past —
-    // and _checkSRS promoted the plot from sprout to ripe on its next 8s tick. The second
+    // and the growth tick promoted the plot from sprout to ripe 8s later. The second
     // growing step never elapsed, so the crop skipped its middle sprite and never grew,
     // and the harvest at phase 3 advanced production to step 1 instead of graduating it, so
     // the word never entered day-scale review at all.

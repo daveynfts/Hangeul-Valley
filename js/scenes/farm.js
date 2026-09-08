@@ -1950,7 +1950,7 @@ class FarmScene extends Phaser.Scene {
       this.plots.push({
         tile, shad, body, x: px, y: py, sState: '', ko: null, word: null,
         index: i, plant: null, glow: null, hintLabel: null, active, plantedAt: 0,
-        lockIcon, lockText
+        readyAt: 0, lockIcon, lockText
       });
     }
     this._restorePlots();
@@ -2170,9 +2170,9 @@ class FarmScene extends Phaser.Scene {
     }
 
     if(!pointerBusy && this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey)) this._interact();
-    // SRS timer: check every 8s if any plant needs state advance
+    // Growth timer: check every 8s whether any crop is due to advance a stage
     this._timerAcc=(this._timerAcc||0)+(dt||16);
-    if(this._timerAcc>8000){this._timerAcc=0;this._checkSRS();}
+    if(this._timerAcc>8000){this._timerAcc=0;this._checkGrowth();}
     // Apple tree timer: update every second
     this._appleAcc=(this._appleAcc||0)+(dt||16);
     if(this._appleAcc>1000){this._appleAcc=0;this._tickAppleTree();}
@@ -2388,17 +2388,15 @@ class FarmScene extends Phaser.Scene {
     this._tLbl.setPosition(hx, hy-hh/2-14).setText(lbl).setAlpha(0.9+pulse*0.1);
   }
 
-  _checkSRS(){
+  // Seedling -> wilting and sprout -> ripe, the two waits the player does not drive. The
+  // deadline is the plot's own (see plotReadyAt); reading it off the word's SRS due date
+  // stranded every crop whose word had left the learning steps.
+  _checkGrowth(){
     const now=Date.now(); let changed=false;
     this.plots.forEach(p=>{
-      if(!p.ko) return;
-      // getSrs resolves to the production track, which is the one the learning cycle
-      // advances — phases 1 and 2 mirror their grade onto it even when the question shown was
-      // recognition or listening. So the crop timer follows production regardless of which
-      // modality each phase tests, and both legs of the cycle get their full step.
-      const s=getSrs(p.ko);
-      if(p.sState==='1' && srsIsDue(s, now)){ this._setState(p,'2',p.ko); changed=true; }
-      if(p.sState==='3' && srsIsDue(s, now)){ this._setState(p,'4',p.ko); changed=true; }
+      if(!p.ko || !p.readyAt || now < p.readyAt) return;
+      if(p.sState==='1'){ this._setState(p,'2',p.ko); changed=true; }
+      else if(p.sState==='3'){ this._setState(p,'4',p.ko); changed=true; }
     });
     if(changed) savePlotsFn();
   }
@@ -2895,9 +2893,11 @@ class FarmScene extends Phaser.Scene {
     savePlotsFn();
   }
 
-  // Apply visual state to a plot
-  _setState(plot, s, ko){
+  // Apply visual state to a plot. `readyAt` is the growth deadline: pass one to restore a
+  // wait already in progress, otherwise entering the state starts its timer fresh.
+  _setState(plot, s, ko, readyAt){
     plot.sState=s;
+    plot.readyAt = (readyAt == null) ? plotReadyAt(s, Date.now()) : readyAt;
     const t=plot.index%5;
     if (plot.cropShadow) {
       if (this.shadows && this.shadows.removeShadow) this.shadows.removeShadow(plot.cropShadow);
@@ -2953,7 +2953,7 @@ class FarmScene extends Phaser.Scene {
     if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
     if(plot.cropShadow){if(plot.cropShadow.destroy) plot.cropShadow.destroy(); plot.cropShadow=null;}
     if(plot.plant){plot.plant.destroy();plot.plant=null;}
-    plot.sState=''; plot.ko=null; plot.word=null; plot.reviewModality=null;
+    plot.sState=''; plot.ko=null; plot.word=null; plot.reviewModality=null; plot.readyAt=0;
     plot.tile.setTexture('drt_dry').setAlpha(1).setDisplaySize(PLOT_SIZE,PLOT_SIZE).clearTint();
     plot.shad.setAlpha(0.3);
   }
@@ -2966,16 +2966,21 @@ class FarmScene extends Phaser.Scene {
       const plot=this.plots[pd.i]; if(!plot) return;
       const word=this._findWord(pd.ko); if(!word) return;
       plot.word=word; plot.ko=pd.ko; plot.plantedAt=pd.plantedAt||0;
-      const srs=getSrs(pd.ko);
       // Advance state if timers expired while offline
       let st=pd.sState||pd.state||'1';
-      if(st==='1'&&srsIsDue(srs,now)) st='2';
-      if(st==='3'&&srsIsDue(srs,now)) st='4';
+      // Saves written before the plot carried its own clock have no readyAt. Anchoring the
+      // wait to the plant time rather than to `now` keeps a crop that has been standing for
+      // hours from being handed a fresh timer, and lets the sprouts the old srsIsDue check
+      // stranded ripen on the next load instead of waiting out a review interval.
+      let readyAt = pd.readyAt || (plot.plantedAt ? plot.plantedAt + plotGrowMs(st) : now + plotGrowMs(st));
+      if(st==='1'&&now>=readyAt) st='2';
+      else if(st==='3'&&now>=readyAt) st='4';
+      if(st!=='1'&&st!=='3') readyAt=0;
       const t=plot.index%5;
       const tex={1:cropTex(this,t,1),2:cropTex(this,t,1),3:cropTex(this,t,2),4:cropTex(this,t,3)}[st]||cropTex(this,t,1);
       plot.plant=this.add.image(plot.x,plot.y-4,tex).setOrigin(0.5,0.85).setDepth(plot.y+5);
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
-      this._setState(plot,st,pd.ko);
+      this._setState(plot,st,pd.ko,readyAt);
       plantedWords.add(pd.ko);
     });
   }
@@ -3118,7 +3123,7 @@ class FarmScene extends Phaser.Scene {
       // plantedAt and reviewModality belong to the crop that was standing here. Leaving
       // them behind meant the next crop to land on this plot inherited the previous one's
       // review modality, so a word restored from a save could be quizzed on the wrong skill.
-      p.sState=''; p.ko=null; p.word=null; p.plantedAt=0; p.reviewModality=null;
+      p.sState=''; p.ko=null; p.word=null; p.plantedAt=0; p.reviewModality=null; p.readyAt=0;
       p.tile.setTexture('drt_dry').setAlpha(p.active?1:0.25).setDisplaySize(PLOT_SIZE,PLOT_SIZE).clearTint();
       p.shad.setAlpha(p.active?0.3:0.1);
     });

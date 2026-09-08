@@ -160,6 +160,31 @@ function srsIsMature(e)    { return !!e && e.st === 'review' && e.ivl >= SRS_CFG
 function srsIsDue(e, now)  { return !!e && e.st !== 'new' && e.due > 0 && now >= e.due; }
 function srsIsLearning(e)  { return !!e && (e.st === 'learn' || e.st === 'relearn'); }
 
+// ── The crop clock ───────────────────────────────────────────────────────────
+// The learning steps double as the plot's growth timers — 15s standing as a seedling, 45s
+// as a sprout — but only while the word is still inside those steps. The plot used to read
+// the timer straight off the production track's `due`, and on a word past the learning
+// ladder that field is a review date days away, so the crop simply stopped growing:
+//
+//   harvest answered wrong -> the word lapses into relearn, the plot drops back to '2'
+//   watered again          -> the mirrored grade walks off the single relearn step and
+//                             re-graduates the word: due = now + interval, a day out, or
+//                             ten days for a word that was already mature
+//   plot set to '3'        -> the sprout waits on that due date and never ripens
+//
+// A sprout is not interactable, so the plot was simply gone: no phase 3, no harvest, and
+// the word stayed in plantedWords holding the tile against the next day's reviews. Growth
+// is a property of the crop, not of the review schedule, so the plot carries its own
+// deadline now and this is where it comes from.
+function plotGrowMs(sState) {
+  return sState === '1' ? SRS_CFG.LEARN_STEPS[0] : SRS_CFG.LEARN_STEPS[1];
+}
+// 0 for the states that wait on the player rather than on the clock: '' empty, '2' needs
+// watering, '4' ripe.
+function plotReadyAt(sState, now) {
+  return (sState === '1' || sState === '3') ? now + plotGrowMs(sState) : 0;
+}
+
 // Human-readable interval, for the vocab book and dashboard.
 function srsIntervalLabel(e) {
   if (!e || e.st === 'new') return 'new';
@@ -200,7 +225,7 @@ const PRIMARY_MODALITY = 'type';
 
 // Plot sState codes: ''=empty '1'=seedling '2'=wilting '3'=sprout '4'=ripe
 let srsData  = {}; // { ko: { m: { <modality>: srsNewEntry() } } }
-let plotSave = []; // [{ i, ko, sState, plantedAt }]
+let plotSave = []; // [{ i, ko, sState, plantedAt, readyAt }]
 let droppedItemsSave = []; // [{ itemId, nameKo, x, y }] persisted ground drops buffer
 var PLOT_UNLOCK_COSTS = [100, 200, 350, 500, 750, 1000];
 var BASE_PLOT_COUNT = 9;              // plots 0-8 are free from the start

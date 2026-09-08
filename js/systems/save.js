@@ -564,7 +564,7 @@ function collectSave(){
   const hcObj={}; harvestCounts.forEach((v,k)=>hcObj[k]=v);
   const isFarm = sceneRef && Array.isArray(sceneRef.plots);
   const plots = isFarm
-    ? sceneRef.plots.filter(p => p && p.ko).map(p => ({ i: p.index, ko: p.ko, sState: p.sState, plantedAt: p.plantedAt || 0 }))
+    ? sceneRef.plots.filter(p => p && p.ko).map(p => ({ i: p.index, ko: p.ko, sState: p.sState, plantedAt: p.plantedAt || 0, readyAt: p.readyAt || 0 }))
     : plotSave;
   const apple = (sceneRef && typeof sceneRef.appleRipeAt !== 'undefined')
     ? { ripeAt: sceneRef.appleRipeAt, ripe: sceneRef.appleRipe }
