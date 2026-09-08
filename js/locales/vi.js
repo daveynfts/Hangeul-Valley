@@ -489,6 +489,8 @@
   "ui.quiz.ko.speak.title": "Nghe từ này",
   "ui.quiz.listen.replay": "▶ Nghe lại",
   "ui.quiz.listen.replay.title": "Phát lại từ này",
+  "ui.quiz.notation.note": "Nhập các chữ cái và dấu đúng như hiển thị — chỉ những ô trống mới là Hangul.",
+  "ui.quiz.notation.title": "Ký hiệu ngữ pháp",
   "ui.quiz.phase.title": "Gieo hạt",
   "ui.quiz.prompt.listen": "Nghe xem — vừa rồi là từ nào?",
   "ui.quiz.prompt.recognise": "Từ này nghĩa là gì?",

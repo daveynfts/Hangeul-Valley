@@ -489,6 +489,8 @@
   "ui.quiz.ko.speak.title": "Hear this word",
   "ui.quiz.listen.replay": "▶ Hear again",
   "ui.quiz.listen.replay.title": "Play the word again",
+  "ui.quiz.notation.note": "Type the letters and marks exactly as shown — only the blank tiles are Hangul.",
+  "ui.quiz.notation.title": "Grammar notation",
   "ui.quiz.phase.title": "Plant Seed",
   "ui.quiz.prompt.listen": "Listen — which word was that?",
   "ui.quiz.prompt.recognise": "What does this word mean?",

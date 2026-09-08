@@ -50,7 +50,8 @@ vm.runInNewContext([
   vbEscSrc,
   ui.slice(start, end),
   'this.shape = (ko) => recallShapeGroups(ko);',
-  'this.html = (ko) => renderRecallScaffoldHtml(ko).html;'
+  'this.html = (ko) => renderRecallScaffoldHtml(ko).html;',
+  'this.notation = (ko) => recallHasNotation(ko);'
 ].join('\n'), gctx);
 
 const lits   = (ko) => gctx.shape(ko).flat().filter(t => !t.tile).map(t => t.ch).join('');
@@ -82,7 +83,6 @@ assert(lits('3D 프린팅') === '', '3D is a word, not a D-marker standing after
 });
 assert(gctx.html('V-기 전에').indexOf('recall-literal') > 0, 'notation renders as its own span');
 
-
 assert(ctx.kimchi.indexOf('김치찌개') < 0, 'text scaffold does not spell 김치찌개');
 assert(ctx.kimchi.indexOf('open') < 0 && ctx.kimchi.indexOf('closed') < 0, 'text scaffold has no open/closed caption');
 assert(ctx.kimchi.indexOf('Sino-Korean') >= 0, '김치찌개 class is Sino-Korean');
@@ -96,5 +96,35 @@ assert((ctx.naeng.html.match(/class="recall-tile batchim"/g) || []).length === 2
 assert(ctx.dal.note === 'Native Korean', '달다 is native');
 assert((ctx.phrase.html.match(/class="recall-word"/g) || []).length === 2, 'spaced vocab splits into two tile groups');
 assert((ctx.phrase.html.match(/class="recall-tile(?: batchim)?"/g) || []).length === 4, '김치 찌개 still has 4 tiles');
+
+// ── Phase 1: the notation scaffold ──────────────────────────────────────────
+// Past first contact, phase 1 is answered by typing. For a grammar headword the notation is
+// the one part that cannot be inferred from an English gloss, so a learner who knew the
+// grammar could still not produce `N을/를 위해` — nothing said it held a Latin letter and a
+// slash. Phase 1 therefore shows the scaffold, but only where there is notation to show.
+assert(gctx.notation('N을/를 위해'), 'a part-of-speech placeholder counts as notation');
+assert(gctx.notation('A-(으)ㄴ데'), 'so do the hyphen and parentheses of an ending');
+assert(gctx.notation('V-고 싶다'), 'and notation is found across a word-space');
+assert(!gctx.notation('어머니'), 'a plain Hangul headword carries none');
+assert(!gctx.notation('김치찌개'), 'nor does a compound noun');
+assert(!gctx.notation('SNS'), 'nor a Latin initialism, which is tiled rather than disclosed');
+
+const paint = ui.slice(ui.indexOf('function paintRecallScaffold('), ui.indexOf('function openQuiz('));
+assert(paint.length > 0, 'paintRecallScaffold is in js/ui.js');
+assert(paint.indexOf('recallHasNotation') > 0, 'the scaffold asks whether there is notation');
+assert(paint.indexOf('phase === 1') > 0 && paint.indexOf('phase === 3') > 0,
+  'and distinguishes the two phases that show it');
+assert(paint.indexOf("currentQuizMode === 'type'") > 0,
+  'phase 1 shows it only when the phase is actually answered by typing');
+assert(paint.indexOf("'ui.quiz.notation.title'") > 0 && paint.indexOf("'ui.quiz.notation.note'") > 0,
+  'and the panel is retitled and re-noted for notation rather than word class');
+assert(paint.indexOf("setAttribute('data-i18n'") > 0,
+  'the title key is written back so a language switch repaints it');
+
+// Order matters: currentQuizMode is set by applyQuizMode, so painting first would read the
+// mode left over from the previous quiz.
+const openSrc = ui.slice(ui.indexOf('function openQuiz('), ui.indexOf('// ── Question modes'));
+assert(openSrc.indexOf('applyQuizMode(word, phase, plot)') < openSrc.indexOf('paintRecallScaffold(word, phase)'),
+  'openQuiz paints the scaffold after choosing the quiz mode');
 
 console.log('\ntest_phase3_recall: all passed');

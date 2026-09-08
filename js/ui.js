@@ -1290,6 +1290,41 @@ function deriveGrade(wasClose = false){
   return elapsed <= EASY_ANSWER_MS ? GRADE.EASY : GRADE.GOOD;
 }
 
+// The panel under the question: one blank square per syllable, with notation left literal.
+//
+// Phase 3 has always had it — production recall against nothing but an English gloss is a
+// memory test with no shape to aim at.
+//
+// Phase 1 now gets it too, but only for a headword carrying notation that is not Hangul: the
+// N/V/A part-of-speech placeholders and the slash in an entry like `N을/를 위해`. Past first
+// contact phase 1 is answered by typing, and until now nothing on the screen said the answer
+// contained a Latin letter and a slash at all — so a learner who knew the grammar perfectly
+// still could not produce the headword, for a reason that had nothing to do with the grammar.
+// Pure-Hangul words are left exactly as they were: they have no notation to disclose, and the
+// tiles would only hand over the syllable count a phase-1 typing question is meant to ask for.
+function paintRecallScaffold(word, phase){
+  const ffText = $('quiz-funfact-text'), ffCulture = $('quiz-funfact-culture');
+  const ffBox = $('quiz-funfact-box'), ffTitle = $('quiz-funfact-title');
+  if (!ffText || !ffCulture) return;
+  const ko = (word && word.ko) || '';
+  const notationOnly = phase === 1 && currentQuizMode === 'type' && recallHasNotation(ko);
+  const sc = (phase === 3 || notationOnly) ? renderRecallScaffoldHtml(ko) : { html: '', note: '' };
+  if (!sc.html) {
+    ffText.textContent = ''; ffCulture.textContent = '';
+    if (ffBox) ffBox.classList.add('hidden');
+    return;
+  }
+  ffText.innerHTML = sc.html;
+  // Phase 1's reason for showing this is the notation, so the note tells the learner to type
+  // it as written rather than naming the word class. The key is written back onto the element
+  // as well as the text, so switching language repaints this title instead of reverting it to
+  // the phase-3 one.
+  const titleKey = notationOnly ? 'ui.quiz.notation.title' : 'ui.quiz.funfact.title';
+  if (ffTitle) { ffTitle.setAttribute('data-i18n', titleKey); ffTitle.textContent = hvT(titleKey); }
+  ffCulture.textContent = notationOnly ? hvT('ui.quiz.notation.note') : (sc.note || '');
+  if (ffBox) ffBox.classList.remove('hidden');
+}
+
 function openQuiz(word, plot, phase=1){
   if(quizOpen) return;
   currentWord=word; currentPlot=plot; currentPhase=phase;
@@ -1319,23 +1354,11 @@ function openQuiz(word, plot, phase=1){
   hintCategory.textContent  = wordCategory(word);
   enWordDisplay.textContent = tr(word, 'en');
   quizLevelTag.textContent  = 'P'+phase+'/3';
-  // Phase 3: shape tiles only — one square per syllable, grouped like the vocab is
-  // written. Word-class (native / Sino / loan) never spells the word.
-  const ffText=$('quiz-funfact-text'), ffCulture=$('quiz-funfact-culture');
-  const ffBox=$('quiz-funfact-box');
-  if(ffText && ffCulture){
-    if(phase===3){
-      const sc = renderRecallScaffoldHtml(word.ko || '');
-      ffText.innerHTML = sc.html || '';
-      ffCulture.textContent = sc.note || '';
-      if (ffBox) ffBox.classList.remove('hidden');
-    } else {
-      ffText.textContent = ''; ffCulture.textContent = '';
-      if (ffBox) ffBox.classList.add('hidden');
-    }
-  }
   answerInput.value=''; feedbackText.textContent=''; feedbackText.className='';
   applyQuizMode(word, phase, plot);
+  // After applyQuizMode, not before: whether phase 1 is answered by typing or by picking
+  // decides whether it needs a scaffold at all, and currentQuizMode is what says so.
+  paintRecallScaffold(word, phase);
   quizBackdrop.classList.add('visible');
   if(currentQuizMode === 'type') setTimeout(()=>answerInput.focus(),80);
 }
@@ -2084,6 +2107,15 @@ function renderRecallScaffoldHtml(ko) {
     html: '<div class="recall-tiles" aria-hidden="true">' + words + '</div>',
     note: recallOriginClass(ko)
   };
+}
+
+// Does this headword carry a character the learner has to type but cannot guess — the `N`,
+// the `/` and the `~` of grammar notation? recallShapeGroups already draws exactly that
+// line: anything it does not turn into a tile is a literal, reproduced as written. Asking
+// the same function twice keeps one definition of "not Hangul" instead of a second regex
+// that would drift from it.
+function recallHasNotation(ko) {
+  return recallShapeGroups(ko).some(g => g.some(t => !t.tile));
 }
 
 // Which topical note a word gets, as an id. The note itself is in the catalogue: it is a
