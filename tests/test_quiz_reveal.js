@@ -54,7 +54,8 @@ function makeEl(id) {
 }
 
 const PANEL_IDS = ['quiz-result', 'quiz-result-art', 'quiz-result-msg', 'quiz-result-ko',
-  'quiz-result-en', 'quiz-result-typed', 'quiz-result-note', 'quiz-result-continue', 'quiz-ui'];
+  'quiz-result-en', 'quiz-result-typed', 'quiz-result-note', 'quiz-result-continue', 'quiz-ui',
+  'quiz-result-example-box', 'quiz-result-example', 'quiz-result-example-tr'];
 
 // The shipped English table, loaded into the shipped hvT. js/locales/en.js is a browser
 // script; its payload is plain JSON between markers, which is what admin/lib/i18n.js reads.
@@ -68,7 +69,8 @@ function englishHvT() {
   return englishHvTCached;
 }
 
-function harness() {
+function harness(opts) {
+  const o = opts || {};
   const els = {};
   PANEL_IDS.forEach((id) => { els[id] = makeEl(id); });
   const spoke = [];
@@ -92,7 +94,10 @@ function harness() {
       ctx.pendingQuizAdvance = null;
       if (typeof run === 'function') run();
     },
-    currentPhase: 3,
+    // The real tr(), so the exampleEn → exampleVi fallback is exercised rather than mimed.
+    tr: require('../js/i18n.js').tr,
+    currentPhase: ('currentPhase' in o) ? o.currentPhase : 3,
+    currentWord: ('currentWord' in o) ? o.currentWord : null,
     currentQuizMode: 'type',
     pendingQuizAdvance: null,
     quizFinishTimer: null,
@@ -221,6 +226,87 @@ assert(css.indexOf('#quiz-ui.quiz-lapsed #quiz-result-continue') >= 0,
   'the lapse has its own button colour, so it does not read as a reward');
 assert(css.indexOf('#quiz-result-typed') >= 0 && css.indexOf('#quiz-result-note') >= 0,
   'both new rows are styled');
+
+// ── 9. The curated example, after the answer, at phase 3 ────────────────────
+// 1033 of the 1132 curated examples contain the headword they illustrate, so the sentence
+// cannot sit beside a phase-3 question without being the answer to it. It belongs to the
+// result panel, and to both paths out of it — a miss is the moment the word is learned.
+console.log('\n--- 9. The curated example ---');
+assert(html.indexOf('id="quiz-result-example-box"') >= 0, 'index.html has the example box');
+assert(html.indexOf('id="quiz-result-example-tr"') >= 0, 'and a row for its translation');
+assert(css.indexOf('#quiz-result-example-box') >= 0 && css.indexOf('#quiz-result-example-tr') >= 0,
+  'both example rows are styled');
+
+const EX_WORD = {
+  ko: '저축률', en: 'the savings rate',
+  example: '저축률이 작년보다 크게 떨어졌습니다.',
+  exampleEn: 'The savings rate fell sharply compared with last year.'
+};
+
+{
+  const h = harness({ currentWord: EX_WORD, currentPhase: 3 });
+  h.ctx.showQuizSuccess({ message: 'Harvested!', ko: EX_WORD.ko, en: EX_WORD.en, delay: 0 });
+  assert(h.els['quiz-result-example'].textContent === EX_WORD.example,
+    'a harvest shows the sentence the word came from');
+  assert(h.els['quiz-result-example-tr'].textContent === EX_WORD.exampleEn,
+    'with its translation under it');
+  assert(!h.els['quiz-result-example-box']._classes.has('hidden'), 'and the box is revealed');
+}
+{
+  const h = harness({ currentWord: EX_WORD, currentPhase: 3 });
+  h.ctx.showQuizReveal({ message: 'Wrong', ko: EX_WORD.ko, en: EX_WORD.en, typed: '저축양' });
+  assert(h.els['quiz-result-example'].textContent === EX_WORD.example,
+    'a lapse shows it too, where it is most of the point');
+  assert(!h.els['quiz-result-example-box']._classes.has('hidden'), 'and its box is revealed');
+}
+// Phases 1 and 2 are the plant and water touches. The example is not theirs, and at phase 1
+// — answered by typing once the word is past first contact — it would hand over the headword.
+[1, 2].forEach((ph) => {
+  const h = harness({ currentWord: EX_WORD, currentPhase: ph });
+  h.ctx.showQuizSuccess({ message: 'ok', ko: EX_WORD.ko, en: EX_WORD.en, delay: 0 });
+  assert(h.els['quiz-result-example'].textContent === '', 'phase ' + ph + ' shows no example');
+  assert(h.els['quiz-result-example-box']._classes.has('hidden'),
+    'and keeps the box hidden at phase ' + ph);
+});
+// A sentence whose translation has not been written yet is still worth reading in Korean;
+// an empty line under it only looks like a rendering fault.
+{
+  const h = harness({ currentWord: { ko: '저축률', en: 'x', example: '저축률이 떨어졌습니다.' }, currentPhase: 3 });
+  h.ctx.showQuizSuccess({ message: 'ok', ko: '저축률', en: 'x', delay: 0 });
+  assert(h.els['quiz-result-example'].textContent === '저축률이 떨어졌습니다.',
+    'an untranslated sentence still shows in Korean');
+  assert(h.els['quiz-result-example-tr']._classes.has('hidden'),
+    'and the empty translation row is hidden rather than blank');
+}
+// A word with no curated example at all leaves no empty panel behind.
+{
+  const h = harness({ currentWord: { ko: '저축률', en: 'x' }, currentPhase: 3 });
+  h.ctx.showQuizSuccess({ message: 'ok', ko: '저축률', en: 'x', delay: 0 });
+  assert(h.els['quiz-result-example-box']._classes.has('hidden'),
+    'a word with no example shows no example box');
+}
+// The Vietnamese path. exampleEn is a translatable field, so the locales/vi catalogue folds
+// its Vietnamese onto the word as exampleVi at load, and tr() prefers that. Set and restored
+// inside the block: the panel's own wording is read from the English table registered above,
+// and leaving the language switched would have hvT answering with bare keys.
+{
+  const i18n = require('../js/i18n.js');
+  const w = {
+    ko: '저축률', en: 'the savings rate', example: '저축률이 떨어졌습니다.',
+    exampleEn: 'The savings rate fell.', exampleVi: 'Tỷ lệ tiết kiệm đã giảm.'
+  };
+  i18n._setLangForTest('vi');
+  try {
+    const h = harness({ currentWord: w, currentPhase: 3 });
+    h.ctx.showQuizSuccess({ message: 'ok', ko: w.ko, en: w.en, delay: 0 });
+    assert(h.els['quiz-result-example-tr'].textContent === w.exampleVi,
+      'a Vietnamese interface shows the Vietnamese translation, not the English one');
+    assert(h.els['quiz-result-example'].textContent === w.example,
+      'and the Korean sentence is the same either way');
+  } finally {
+    i18n._setLangForTest('en');
+  }
+}
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 if (failed) process.exit(1);

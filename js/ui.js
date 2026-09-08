@@ -1080,6 +1080,33 @@ function settleQuizAdvance(){
   closeQuiz();
   if (typeof run === 'function') run();
 }
+// The curated example, under the answer, at phase 3 only.
+//
+// It cannot go beside the question: 1033 of the 1132 curated examples contain the headword
+// they illustrate, so at phase 3 — where the task is to produce that headword from an English
+// gloss — showing the sentence first would be showing the answer. After the answer it is the
+// thing the panel is for: the word in a real sentence from the question banks rather than
+// alone in a list, at the one moment the learner is looking straight at it.
+//
+// Painted from the globals, like the quest-progress block in showQuizSuccess, so the four
+// call sites do not each have to thread the word through.
+function paintQuizResultExample(){
+  const box = $('quiz-result-example-box');
+  const koEl = $('quiz-result-example'), trEl = $('quiz-result-example-tr');
+  if (!box || !koEl || !trEl) return;
+  const word = (typeof currentWord !== 'undefined') ? currentWord : null;
+  const atPhase3 = (typeof currentPhase === 'number') && currentPhase === 3;
+  const sentence = (atPhase3 && word) ? String(word.example || '').trim() : '';
+  koEl.textContent = sentence;
+  // tr() resolves exampleVi when the interface is Vietnamese and the catalogue has it, and
+  // falls back to exampleEn. A sentence whose translation has not been written yet is still
+  // worth reading in Korean; an empty line under it only looks like a rendering fault.
+  const gloss = sentence ? String(tr(word, 'exampleEn') || '').trim() : '';
+  trEl.textContent = gloss;
+  trEl.classList.toggle('hidden', !gloss);
+  box.classList.toggle('hidden', !sentence);
+}
+
 function showQuizSuccess({ message, ko, en, continueLabel, delay, onDone }){
   if (typeof checkQuestProgress === 'function') {
     checkQuestProgress('quiz');
@@ -1108,6 +1135,7 @@ function showQuizSuccess({ message, ko, en, continueLabel, delay, onDone }){
     go.textContent = continueLabel || 'Continue';
     go.onclick = closeQuiz;
   }
+  paintQuizResultExample();
   if (box) box.classList.remove('hidden');
   const qui = $('quiz-ui');
   if (qui) { qui.classList.add('quiz-done'); qui.classList.add('quiz-success'); }
@@ -1164,6 +1192,7 @@ function showQuizReveal({ message, ko, en, typed, note, continueLabel, onDone })
     go.textContent = continueLabel || 'Continue';
     go.onclick = closeQuiz;
   }
+  paintQuizResultExample();
   if (box) box.classList.remove('hidden');
   const qui = $('quiz-ui');
   if (qui) { qui.classList.add('quiz-done'); qui.classList.add('quiz-lapsed'); }

@@ -261,6 +261,14 @@
         <!-- Only the lapse reveal fills these two: what was typed, and what it cost. -->
         <div id="quiz-result-typed" class="hidden"></div>
         <div id="quiz-result-note" class="hidden"></div>
+        <!-- Phase 3 only, and only once the answer is in: the headword in a real sentence.
+             Almost every curated example contains the headword, so before the answer this
+             would simply be the answer. -->
+        <div id="quiz-result-example-box" class="hidden">
+          <div id="quiz-result-example-label" data-i18n="ui.vff.example.section.curatedExample">Curated example</div>
+          <div id="quiz-result-example" lang="ko"></div>
+          <div id="quiz-result-example-tr"></div>
+        </div>
         <button type="button" id="quiz-result-continue" data-i18n="ui.quiz.result.continue">Continue</button>
       </div>
       <div class="quiz-buttons">

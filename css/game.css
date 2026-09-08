@@ -1543,6 +1543,27 @@
     }
     #quiz-result-typed.hidden, #quiz-result-note.hidden { display: none !important; }
 
+    /* The curated example, shown under the answer at phase 3. Quieter than #quiz-result-ko
+       above it — that is the answer, this is the sentence it lives in — but the Korean still
+       leads, with the translation under it in the gloss colour the panel already uses. */
+    #quiz-result-example-box {
+      margin-top: 8px; padding: 7px 10px; text-align: left;
+      background: #fffbeb; border: 1px solid #fcd34d; border-radius: 6px;
+    }
+    #quiz-result-example-label {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 10px; font-weight: 800;
+      letter-spacing: .06em; text-transform: uppercase; color: #a16207; margin-bottom: 3px;
+    }
+    #quiz-result-example {
+      font-family: 'Noto Sans KR', sans-serif; font-size: 15px; font-weight: 700;
+      color: #2a1a0a; line-height: 1.45;
+    }
+    #quiz-result-example-tr {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; color: #7a3e12;
+      line-height: 1.4; margin-top: 2px;
+    }
+    #quiz-result-example-box.hidden, #quiz-result-example-tr.hidden { display: none !important; }
+
     /* An answered question hides the question, whether it was answered right or wrong —
        so the hiding hangs on .quiz-done, and .quiz-success / .quiz-lapsed carry only the
        colour. Before the lapse reveal existed the two were the same thing and the list
