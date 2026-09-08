@@ -26,6 +26,7 @@ window.TimingsView = {
   drag: null,
   raf: 0,
   _peakCache: {},
+  _urlCache: {},
 
   esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => (
@@ -90,6 +91,31 @@ window.TimingsView = {
   },
 
   /**
+   * Where this recording can actually be fetched from.
+   *
+   * Two answers, because the panel is served from two places. Locally the Express server
+   * hands the file over at /audio-preview; on the deployed panel that route does not exist —
+   * Vercel rewrites /audio to the CDN instead. Shipping only the first made the tab work in
+   * one of the two places and draw nothing in the other.
+   *
+   * Resolved once per track and remembered, so the decode and the playback element agree.
+   */
+  audioUrl(src) {
+    if (this._urlCache[src]) return Promise.resolve(this._urlCache[src]);
+    const rel = String(src).replace(/^audio\//, '');
+    const tries = ['/audio-preview/' + rel, '/' + String(src)];
+    const next = (i) => {
+      if (i >= tries.length) return Promise.resolve('');
+      // HEAD, not GET: this only has to learn which one answers, and whichever does is about
+      // to be fetched in full anyway.
+      return fetch(tries[i], { method: 'HEAD' })
+        .then((r) => (r.ok ? tries[i] : next(i + 1)))
+        .catch(() => next(i + 1));
+    };
+    return next(0).then((u) => { if (u) this._urlCache[src] = u; return u; });
+  },
+
+  /**
    * Decode the track for its peaks and its true length.
    *
    * The length comes from the decode rather than from the JSON on purpose: the `dur` in the
@@ -102,12 +128,13 @@ window.TimingsView = {
     this.dur = 0;
     this.head = 0;
     if (!t || !t.src) return;
-    const url = '/audio-preview/' + String(t.src).replace(/^audio\//, '');
-    const cached = this._peakCache[url];
+    const cached = this._peakCache[t.src];
     if (cached) { this.peaks = cached.peaks; this.dur = cached.dur; this.draw(); return; }
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
-    fetch(url).then((r) => (r.ok ? r.arrayBuffer() : null)).then((buf) => {
+    this.audioUrl(t.src)
+      .then((url) => (url ? fetch(url) : null))
+      .then((r) => (r && r.ok ? r.arrayBuffer() : null)).then((buf) => {
       if (!buf) return null;
       const ctx = new AC();
       return new Promise((res) => {
@@ -129,7 +156,7 @@ window.TimingsView = {
       let max = 0;
       for (let i = 0; i < N; i++) if (peaks[i] > max) max = peaks[i];
       if (max > 0) for (let i = 0; i < N; i++) peaks[i] /= max;
-      this._peakCache[url] = { peaks: peaks, dur: audio.duration };
+      this._peakCache[t.src] = { peaks: peaks, dur: audio.duration };
       if (this.track() !== t) return;
       this.peaks = peaks;
       this.dur = audio.duration;
@@ -155,8 +182,9 @@ window.TimingsView = {
     const t = this.track();
     if (!t) return;
     this.stop();
-    const url = '/audio-preview/' + String(t.src).replace(/^audio\//, '');
-    const el = new Audio(url);
+    // The decode has normally resolved this already; the fallback keeps a play from being
+    // silent when a track is played before its waveform has finished loading.
+    const el = new Audio(this._urlCache[t.src] || ('/audio-preview/' + String(t.src).replace(/^audio\//, '')));
     this.audio = el;
     this.stopAt = to || 0;
     el.addEventListener('loadedmetadata', () => { try { el.currentTime = from || 0; } catch (e) {} }, { once: true });
