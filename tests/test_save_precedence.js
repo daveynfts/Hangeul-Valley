@@ -108,8 +108,20 @@ const cloudBlock = extract(
 const sent = [];
 let inFlight = 0;
 let maxConcurrent = 0;
+
+// A failed push now schedules its own retry, so the block needs a clock. It gets one that
+// records instead of scheduling: a real timer would keep the suite alive through the shipped
+// backoff, and all that matters here is that the chain survives the bookkeeping. The retry
+// itself is covered in test_autosave.js.
+const scheduled = [];
+const timerStub = {
+  setTimeout: (fn, ms) => { scheduled.push({ fn, ms }); return scheduled.length; },
+  clearTimeout: () => {},
+  collectSave: () => ({ v: 10, tag: 'retry' })
+};
+
 const cctx = {
-  console,
+  console, ...timerStub,
   getGoogleToken: () => 'stub-token',
   setGoogleSession: () => {},
   showToast: () => {}, hvT,
@@ -143,7 +155,7 @@ const push = vm.runInContext('pushCloudSave', cctx);
 
   // A failure has to reach the caller — this is what the Save button reads.
   const fctx = {
-    console,
+    console, ...timerStub,
     getGoogleToken: () => 'stub-token',
     setGoogleSession: () => {},
     showToast: () => {}, hvT,
@@ -154,9 +166,10 @@ const push = vm.runInContext('pushCloudSave', cctx);
   const failRes = await vm.runInContext('pushCloudSave', fctx)({ tag: 'X' });
   eq(failRes.ok, false, 'a network error is reported, not swallowed');
   eq(failRes.reason, 'network', 'and it says what went wrong');
+  eq(scheduled.length, 1, 'and the write is queued for another go rather than dropped');
 
   const sctx = {
-    console,
+    console, ...timerStub,
     getGoogleToken: () => 'stub-token',
     setGoogleSession: () => {},
     showToast: () => {}, hvT,
@@ -167,6 +180,7 @@ const push = vm.runInContext('pushCloudSave', cctx);
   const staleRes = await vm.runInContext('pushCloudSave', sctx)({ tag: 'Y' });
   eq(staleRes.ok, false, 'a 409 from the server is a failure, not a silent success');
   eq(staleRes.reason, 'stale', 'and it names the other device as the reason');
+  eq(scheduled.length, 1, 'and nothing is queued: resending the same payload would lose again');
 })().then(runSignedOut).catch((e) => {
   console.error('  [FAIL] cloud chain test threw: ' + (e && e.message));
   failed++;
@@ -175,7 +189,7 @@ const push = vm.runInContext('pushCloudSave', cctx);
 
 function runSignedOut() {
   const octx = {
-    console,
+    console, ...timerStub,
     getGoogleToken: () => '',
     setGoogleSession: () => {},
     showToast: () => {}, hvT,

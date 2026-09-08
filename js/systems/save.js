@@ -705,6 +705,7 @@ function applySave(d){
   return true;
 }
 
+// ── Autosave scheduling ──────────────────────────────────────────────────────
 // Write to file (pywebview) AND localStorage backup.
 //
 // collectSave() serializes the entire game state — currencies, SRS for every word in the
@@ -714,8 +715,16 @@ function applySave(d){
 // are coalesced behind a trailing debounce. Use flushSave() when the state must reach
 // disk immediately (scene shutdown, page unload, explicit Save button).
 const SAVE_DEBOUNCE_MS = 800;
+// A ceiling on how long the debounce may keep deferring. Every persistSave() cleared the
+// pending timer and started a fresh 800ms, so a run of changes closer together than that
+// postponed the write indefinitely — and answering a quiz question is one of the ~35 callers.
+// A player working through a listening drill at a steady clip could go minutes with nothing
+// written anywhere, and a tab crash took all of it. The trailing debounce still coalesces a
+// burst; it just can no longer starve the write.
+const SAVE_MAX_WAIT_MS = 10000;
 let _saveTimer = null;
 let _savePending = false;
+let _saveDirtySince = 0;
 
 // Resolves to a per-destination report so a caller that cares — the Save button — can
 // tell the player the truth instead of a hardcoded tick. localStorage is written first and
@@ -723,6 +732,7 @@ let _savePending = false;
 async function flushSave(){
   if(_saveTimer){ clearTimeout(_saveTimer); _saveTimer = null; }
   _savePending = false;
+  _saveDirtySince = 0;
   const data = collectSave();
   const result = { local: false, file: null, cloud: null };
 
@@ -739,24 +749,58 @@ async function flushSave(){
 }
 
 function persistSave(){
+  const now = Date.now();
+  if(!_savePending) _saveDirtySince = now;
   _savePending = true;
   if(_saveTimer) clearTimeout(_saveTimer);
-  _saveTimer = setTimeout(() => { _saveTimer = null; flushSave(); }, SAVE_DEBOUNCE_MS);
+  // Trailing debounce, but never past SAVE_MAX_WAIT_MS from the change that started this
+  // run of dirt. A steady stream of changes shortens the wait rather than extending it.
+  const deadline = _saveDirtySince + SAVE_MAX_WAIT_MS;
+  const wait = Math.max(0, Math.min(SAVE_DEBOUNCE_MS, deadline - now));
+  _saveTimer = setTimeout(() => { _saveTimer = null; flushSave(); }, wait);
 }
 
 // Never drop a pending write when the page goes away. pagehide covers the mobile and
 // Safari case where beforeunload does not fire; the synchronous localStorage leg of
 // flushSave is what reliably lands during teardown.
+//
+// The cloud leg does not: flushSave() only *starts* the PUT, and a document being torn down
+// takes its pending requests with it. So the tail of every session — everything since the
+// last write that had time to finish — reached localStorage and nowhere else, and turned up
+// missing on the player's other device. beaconCloudSave() sends that last write with
+// `keepalive`, which is the one thing the browser promises to finish after the page is gone.
 if(typeof window !== 'undefined' && window.addEventListener){
-  const flushIfPending = () => { if(_savePending) flushSave(); };
-  window.addEventListener('beforeunload', flushIfPending);
-  window.addEventListener('pagehide', flushIfPending);
+  const flushIfPending = (viaBeacon) => {
+    if(!_savePending) return;
+    if(viaBeacon && typeof beaconCloudSave === 'function'){
+      // Read the state once and hand the same snapshot to both legs, so the copy that
+      // leaves the machine is the copy that was stored.
+      const data = collectSave();
+      if(_saveTimer){ clearTimeout(_saveTimer); _saveTimer = null; }
+      _savePending = false;
+      _saveDirtySince = 0;
+      try{ localStorage.setItem('hv_save_v2', JSON.stringify(data)); }
+      catch(e){ console.warn('localStorage save failed:', e); }
+      if(window.pywebview?.api){
+        try{ window.pywebview.api.save(data); } catch(e){ /* the bridge is already going */ }
+      }
+      beaconCloudSave(data);
+      return;
+    }
+    flushSave();
+  };
+  window.addEventListener('beforeunload', () => flushIfPending(true));
+  window.addEventListener('pagehide', () => flushIfPending(true));
   if(typeof document !== 'undefined' && document.addEventListener){
+    // Hidden is not gone — a backgrounded tab often comes back — so this one takes the
+    // ordinary path and leaves the beacon for teardown.
     document.addEventListener('visibilitychange', () => {
-      if(document.visibilityState === 'hidden') flushIfPending();
+      if(document.visibilityState === 'hidden') flushIfPending(false);
     });
   }
 }
+
+// ── Autosave scheduling end ──────────────────────────────────────────────────
 
 // ── Save precedence (pure) ───────────────────────────────────────────────────
 // Read BOTH copies and apply whichever is newer.
@@ -829,6 +873,9 @@ function setGoogleSession(token, user) {
   // and the cooldown that stops us pestering Google. Signing in by hand is the strongest
   // evidence there is that asking again would now work.
   if (token) { _cloudLastError = ''; _renewBlockedUntil = 0; }
+  // Losing the token ends the retry. There is nowhere to send it, and a timer that fires
+  // into a signed-out session would only rediscover that.
+  if (!token && typeof cancelCloudRetry === 'function') cancelCloudRetry();
   renderAuthUI();
   // A fresh token means whatever was waiting on the old one can go now.
   if (token && typeof _resolveRenew === 'function') { const f = _resolveRenew; _resolveRenew = null; f(true); }
@@ -1015,7 +1062,115 @@ function pushCloudSave(data) {
       return { ok: false, reason: _cloudLastError };
     }
   });
+  // Whatever the outcome, decide here whether the upload gets another go on its own. Doing
+  // it inside the chain would mean scheduling the retry before the chain had settled. The
+  // catch keeps the chain's one invariant: it never rejects, or every later push inherits
+  // the rejection and the cloud goes quiet for the rest of the session.
+  _cloudChain = _cloudChain.then((r) => {
+    try { afterCloudPush(r); } catch (e) { console.warn('Cloud retry bookkeeping failed:', e); }
+    return r;
+  });
   return _cloudChain;
+}
+
+// ── Cloud writes that retry themselves ───────────────────────────────────────
+// A failed upload used to be retried only by the next thing the player did. During a session
+// that is enough — persistSave() fires from ~35 places. At the end of one it is not: go
+// offline, plant one more crop, put the tablet down, and the last push is simply lost, with
+// the "not synced" chip the only trace. Nothing calls the cloud again until the next load.
+//
+// So a retryable failure now schedules its own next attempt, backing off, and gives up after
+// the last delay rather than pestering a dead endpoint for the rest of the session. Coming
+// back online short-circuits the wait, which is the case this is really for.
+const CLOUD_PUSH_RETRY_MS = [5000, 15000, 45000, 120000];
+let _cloudRetryTimer = null;
+let _cloudRetryAt = 0;
+
+// 401 needs the player, and 409 means another device is ahead — sending the same payload
+// again would only be refused again, and syncCloudSave() is what settles that on next load.
+// Everything else here is a blip: no network, a timeout, a 5xx, a rate limit.
+function cloudPushIsRetryable(reason) {
+  if (!reason) return false;
+  if (reason === 'network' || reason === 'timeout') return true;
+  const m = /^http:(\d+)$/.exec(reason);
+  return !!m && (Number(m[1]) >= 500 || Number(m[1]) === 429);
+}
+
+function cancelCloudRetry() {
+  if (_cloudRetryTimer) { clearTimeout(_cloudRetryTimer); _cloudRetryTimer = null; }
+  _cloudRetryAt = 0;
+}
+
+function scheduleCloudRetry() {
+  if (_cloudRetryTimer || _cloudRetryAt >= CLOUD_PUSH_RETRY_MS.length) return;
+  const delay = CLOUD_PUSH_RETRY_MS[_cloudRetryAt++];
+  _cloudRetryTimer = setTimeout(() => {
+    _cloudRetryTimer = null;
+    if (!getGoogleToken()) return;
+    // The live state, not the payload that failed: by now the player may have gone on
+    // playing, and the newer snapshot is the one worth the request.
+    pushCloudSave(collectSave());
+  }, delay);
+  // A retry timer must not hold a desktop process open, where this is a real window.
+  if (_cloudRetryTimer && typeof _cloudRetryTimer.unref === 'function') _cloudRetryTimer.unref();
+}
+
+function afterCloudPush(result) {
+  if (!result || result.skipped) return;
+  if (result.ok) {
+    const recovering = _cloudRetryAt > 0;
+    cancelCloudRetry();
+    // Only worth saying when there was something to recover. A player who never saw a
+    // failure does not need to be told an upload worked.
+    if (recovering && typeof showToast === 'function') showToast(hvT('ui.autosave.recovered'), 3200);
+    return;
+  }
+  if (cloudPushIsRetryable(result.reason)) scheduleCloudRetry();
+  else cancelCloudRetry();
+}
+
+// Back online is the signal worth acting on immediately: the backoff may have just reached
+// two minutes over a hiccup that is already over.
+if (typeof window !== 'undefined' && window.addEventListener) {
+  window.addEventListener('online', () => {
+    if (!getGoogleToken() || !_cloudLastError) return;
+    cancelCloudRetry();
+    pushCloudSave(collectSave());
+  });
+}
+
+// The last write of a session, sent so that closing the tab does not take it with it.
+//
+// `keepalive` is what makes the request outlive the document; sendBeacon cannot be used
+// because this endpoint authenticates on an Authorization header and a beacon carries none.
+// The 64KiB cap is the spec's, and a long-lived account's save can pass it — that one falls
+// back to an ordinary request, which is exactly as likely to land as it was before.
+//
+// This deliberately bypasses the serialized chain: the page is going away and there is no
+// later turn to take. It is safe to race an in-flight PUT because the server refuses a save
+// whose updatedAt is older than the one it holds (api/save.js), so the loser of the race is
+// the older payload either way.
+const CLOUD_BEACON_MAX = 64 * 1024;
+function beaconCloudSave(data) {
+  const token = getGoogleToken();
+  if (!token || typeof fetch !== 'function') return false;
+  let body;
+  try { body = JSON.stringify(data); } catch { return false; }
+  const opts = {
+    method: 'PUT',
+    headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+    body
+  };
+  // Byte length, not character count: Korean headwords are three bytes each in UTF-8, so
+  // the two numbers are nowhere near the same for this payload.
+  const bytes = (typeof TextEncoder === 'function') ? new TextEncoder().encode(body).length : body.length * 3;
+  if (bytes <= CLOUD_BEACON_MAX) opts.keepalive = true;
+  try {
+    fetch('/api/save', opts).catch(() => {});
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 // ── Cloud writes end ─────────────────────────────────────────────────────────

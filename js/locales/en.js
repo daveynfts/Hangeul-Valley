@@ -129,6 +129,7 @@
   "ui.audio.vol.music.aria": "Music volume",
   "ui.audio.vol.sfx.aria": "Effects volume",
   "ui.audio.vol.voice.aria": "Korean voice volume",
+  "ui.autosave.recovered": "☁ Progress that had not reached the cloud is uploaded.",
   "ui.bee.complete": "BEEHIVE HARVEST COMPLETE!",
   "ui.bee.return": "[ RETURN TO FARM ]",
   "ui.bee.target": "TARGET",

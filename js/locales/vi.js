@@ -129,6 +129,7 @@
   "ui.audio.vol.music.aria": "Âm lượng nhạc",
   "ui.audio.vol.sfx.aria": "Âm lượng hiệu ứng",
   "ui.audio.vol.voice.aria": "Âm lượng giọng đọc tiếng Hàn",
+  "ui.autosave.recovered": "☁ Đã tải lên phần tiến độ chưa kịp lên đám mây.",
   "ui.bee.complete": "ĐÃ THU HOẠCH XONG TỔ ONG!",
   "ui.bee.return": "[ VỀ NÔNG TRẠI ]",
   "ui.bee.target": "MỤC TIÊU",
