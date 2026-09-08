@@ -8,10 +8,11 @@ unit and most of it happens by itself; the rest is a person with headphones, and
 which lines those are and how to do them.
 
 ```bash
-node scripts/cassette_timings.js              # measure and write
+node scripts/cassette_timings.js              # fill in the lines that have no span
 node scripts/cassette_timings.js --report     # what it would do, and the coverage
 node scripts/cassette_timings.js --unit 16    # one unit
 node scripts/cassette_timings.js --check      # fail if the JSON is out of date
+node scripts/cassette_timings.js --redo       # DESTRUCTIVE: clear every span, re-measure
 ```
 
 Needs `ffmpeg` and `ffprobe` on PATH. CI has neither, so `--check` is not a CI gate;
@@ -100,11 +101,18 @@ has been opened here stops disagreeing with its own audio.
 By hand instead, if you prefer: write the pair onto the line in the unit's `-cassette.json` and
 run `node tests/test_cassette_timings.js`, which checks the same things.
 
-Re-running the tool is safe: it clears every `at`/`end` on a track before measuring it, so
-its own results never go stale after a transcript edit. **It will also clear yours.** Hand
-timings in a run of two or more are the one thing it cannot re-derive, so either finish a
-track's runs only after its anchors have settled, or re-add them after a re-run — the report
-tells you which tracks are affected.
+Re-running the tool is safe. It fills in lines that have no span and never touches one that
+has, so a unit you finished by hand cannot be undone by running it — the report counts what it
+left alone as `kept`.
+
+That was not true at first. It used to clear every span on a track before measuring, which
+kept its own output honest after a transcript edit and was fine while its output was the only
+output. It stopped being fine the moment units 10 and 15 were finished in the Timings tab: a
+re-run would have thrown away 55 lines of listening and put back the 49 it can derive.
+
+`--redo` is that old behaviour, kept because it is the only answer when a transcript edit has
+made the script's own spans stale. It clears hand-placed spans too, which is why it has to be
+asked for by name.
 
 ## A new unit
 

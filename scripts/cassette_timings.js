@@ -31,10 +31,15 @@
  * were out by up to 19%, which is what made a stretch selected before pressing play jump the
  * moment playback started and the real duration replaced the label.
  *
- *   node scripts/cassette_timings.js                 measure and write
- *   node scripts/cassette_timings.js --check         fail if the files are out of date
+ * Safe to re-run. It fills in lines that have no span and never touches one that has — so a
+ * unit finished by hand in the admin's Timings tab cannot be undone by running this.
+ *
+ *   node scripts/cassette_timings.js                 fill in what is missing
  *   node scripts/cassette_timings.js --report        print coverage, write nothing
- *   node scripts/cassette_timings.js --unit 15       one unit
+ *   node scripts/cassette_timings.js --unit 16       one unit
+ *   node scripts/cassette_timings.js --check         fail if the files are out of date
+ *   node scripts/cassette_timings.js --redo          DESTRUCTIVE: clear every span first,
+ *                                                    hand-placed included, and re-measure
  *
  * Needs ffmpeg and ffprobe on PATH. CI has neither, which is why --check is not a CI gate;
  * tests/test_cassette_timings.js checks the shape of what this wrote without decoding audio.
@@ -157,7 +162,7 @@ function serialize(data, eol) {
  * span was established — the account is the point, not a by-product: it is what says which
  * lines a person still has to do.
  */
-function measureUnit(unit, log) {
+function measureUnit(unit, log, redo) {
   const relPath = 'worlds/unit' + unit + '-cassette.json';
   const { data, eol } = readJson(relPath);
   const items = ((data.dictation || {}).items) || [];
@@ -177,9 +182,29 @@ function measureUnit(unit, log) {
     t.dur = round2(dur);
     if (!Array.isArray(t.lines) || !t.lines.length) continue;
 
-    // Every line starts from nothing, so a re-run cannot leave a stale span behind after a
-    // transcript edit — the whole point of being able to run this again.
-    t.lines.forEach((l) => { delete l.at; delete l.end; });
+    // Additive by default: a line that already has a span keeps it, and this only fills in
+    // the ones that have none.
+    //
+    // It used to clear every span on the track first, which kept its own output honest after
+    // a transcript edit and was fine while its output was the only output. It stopped being
+    // fine the moment units 10 and 15 were finished by hand in the admin's Timings tab: a
+    // re-run would have thrown away 55 lines of listening and quietly put back the 49 it can
+    // derive. A tool whose ordinary use destroys the work it exists to complement is a trap,
+    // and the fix is not to delete the tool — a new unit still wants it — but to make its
+    // ordinary use safe.
+    //
+    // --redo is the old behaviour, for when a transcript edit really has made this script's
+    // own spans stale. It takes hand-placed ones with it, which is why it has to be asked for.
+    let kept = 0;
+    if (redo) {
+      t.lines.forEach((l) => { delete l.at; delete l.end; });
+    } else {
+      t.lines.forEach((l, li) => {
+        if (typeof l.at !== 'number') return;
+        kept++;
+        account.push({ unit, trk: t.n, li, how: 'kept' });
+      });
+    }
 
     const wanted = t.lines.filter((l) => clipFor.has(normKo(l.ko)));
     let trackEnv = null;
@@ -187,6 +212,9 @@ function measureUnit(unit, log) {
 
     // 1. Anchors.
     t.lines.forEach((l, li) => {
+      // Already placed — by an earlier run, or by hand in the Timings tab. Left alone, and
+      // still usable as a fence by the bracket step below.
+      if (typeof l.at === 'number') return;
       const it = clipFor.get(normKo(l.ko));
       if (!it || !fs.existsSync(rel(it.audio.src))) return;
       const ce = envelope(pcm(it.audio.src));
@@ -246,6 +274,10 @@ function main() {
   const check = argv.includes('--check');
   const report = argv.includes('--report');
   const only = argv.indexOf('--unit') >= 0 ? Number(argv[argv.indexOf('--unit') + 1]) : 0;
+  // Clears every span on a track before measuring it, hand-placed ones included. Only for
+  // when a transcript edit has made this script's own spans stale, which is why it has to be
+  // asked for by name.
+  const redo = argv.includes('--redo');
   const units = only ? [only] : UNITS;
   const quiet = (s) => { if (!check) console.log(s); };
 
@@ -253,7 +285,7 @@ function main() {
   const all = [];
   for (const u of units) {
     quiet('unit ' + u);
-    const res = measureUnit(u, quiet);
+    const res = measureUnit(u, quiet, redo);
     all.push(...res.account);
     const text = serialize(res.data, res.eol);
     const had = fs.readFileSync(rel(res.relPath), 'utf8');
@@ -266,9 +298,11 @@ function main() {
   const by = (how) => all.filter((a) => a.how === how).length;
   const runs = all.filter((a) => /^run of /.test(a.how)).length;
   console.log('\nlines, by how the span was established');
+  if (!redo) console.log('  kept    (already placed, left alone) : ' + by('kept'));
   console.log('  anchor  (clip matched in the track) : ' + by('anchor'));
   console.log('  bracket (alone between two anchors) : ' + by('bracket'));
-  console.log('  ---- timed: ' + (by('anchor') + by('bracket')) + ' of ' + all.length);
+  console.log('  ---- timed: ' + (by('kept') + by('anchor') + by('bracket')) + ' of ' + all.length
+    + (redo ? '' : '   (' + (by('anchor') + by('bracket')) + ' placed by this run)'));
   console.log('  retake  (clip is a separate take)   : ' + by('retake'));
   console.log('  run of 2+ unclaimed lines           : ' + runs);
   console.log('  silent gap                          : ' + by('silent gap'));

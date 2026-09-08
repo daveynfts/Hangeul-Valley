@@ -143,8 +143,31 @@ console.log('\n--- 4. Playing a line does not move the track playhead ---');
     'the button and the line it is playing are styled');
 }
 
-// ── 5. The written durations match the files ─────────────────────────────────
-console.log('\n--- 5. Each track says how long it really is ---');
+// ── 5. Re-running the measuring script cannot undo hand work ─────────────────
+console.log('\n--- 5. The measuring script fills gaps rather than clearing them ---');
+{
+  // It used to clear every span on a track before measuring it. That was fine while its own
+  // output was the only output; once units 10 and 15 were finished by hand in the admin's
+  // Timings tab, an ordinary re-run would have thrown away 55 lines of listening and put back
+  // the 49 it can derive. Deleting the script was the other way to stop that, and the wrong
+  // one — a new unit still wants it. Asserted at source, because the behaviour needs ffmpeg
+  // and CI has none.
+  const src = fs.readFileSync(path.join(ROOT, 'scripts', 'cassette_timings.js'), 'utf8');
+  const clears = /t\.lines\.forEach\(\(l\) => \{ delete l\.at; delete l\.end; \}\);/.exec(src);
+  assert(!!clears, 'the clearing step still exists — it is what --redo is');
+  const before = src.slice(0, clears.index);
+  assert(/if \(redo\) \{\s*$/m.test(before.slice(-40)) || /if \(redo\)/.test(before.slice(-80)),
+    'and it is reachable only under --redo');
+  assert(/const redo = argv\.includes\('--redo'\)/.test(src), '--redo is a named flag');
+  // The anchor step must not overwrite either, or the flag alone would not be enough.
+  const anchors = src.slice(src.indexOf('// 1. Anchors.'), src.indexOf('// 2. Brackets'));
+  assert(/if \(typeof l\.at === 'number'\) return;/.test(anchors),
+    'a line that already has a span is skipped rather than re-measured');
+  assert(/how: 'kept'/.test(src), 'and what was left alone is counted in the report');
+}
+
+// ── 6. The written durations match the files ─────────────────────────────────
+console.log('\n--- 6. Each track says how long it really is ---');
 {
   const durOf = (rel) => Number(execFileSync('ffprobe',
     ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', path.join(ROOT, rel)],
