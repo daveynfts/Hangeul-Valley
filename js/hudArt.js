@@ -15,7 +15,7 @@ const HUD_ART_ROWS = [
   { id: 'cook', slug: 'cooking_pot', nameEn: 'Cooking pot', fallback: '🍳', label: 'Cooking' },
   { id: 'recipe', slug: 'recipe_board', nameEn: 'Recipe board', fallback: '🍱', label: 'Recipes' },
   { id: 'audio', slug: 'wooden_bell', nameEn: 'Wooden bell', fallback: '🔊', label: 'Audio' },
-  { id: 'save', slug: 'save_chest', nameEn: 'Save chest', fallback: '💾', label: 'Save' },
+  { id: 'save', slug: 'save_disk', nameEn: 'Save disk', fallback: '💾', label: 'Save' },
   { id: 'progress', slug: 'progress_sunflower', nameEn: 'Sunflower', fallback: '📊', label: 'Progress' },
   { id: 'ranks', slug: 'trophy_cup', nameEn: 'Trophy cup', fallback: '🏅', label: 'Ranks' },
   { id: 'fish', slug: 'koi_fish', nameEn: 'Koi fish', fallback: '🐟', label: 'Fish' },
