@@ -49,6 +49,9 @@
         <button class="nav-btn" data-tab="skins" id="tab-btn-skins">
           <span class="nav-icon">🧑</span> Skins
         </button>
+        <button class="nav-btn" data-tab="timings" id="tab-btn-timings">
+          <span class="nav-icon">🎚️</span> Timings
+        </button>
       </nav>
 
       <div class="header-actions">
@@ -701,6 +704,18 @@
         </div>
       </div>
     </section>
+
+    <section id="tab-timings" class="tab-content">
+      <div class="dashboard-header">
+        <div>
+          <h2 class="section-title">Line timings</h2>
+          <p class="section-sub">Pick a line, drag its stretch on the waveform, listen, save.
+            The spans drive the &#9654; beside each line of the 듣기 transcript in the game.
+            scripts/cassette_timings.js fills in what the audio can prove; this is for the rest.</p>
+        </div>
+      </div>
+      <div id="timings-body"></div>
+    </section>
   </main>
 
   <!-- Global Toast Notification Container -->
@@ -725,5 +740,6 @@
   <script src="js/art.js"></script>
   <script src="js/skins.js"></script>
   <script src="js/i18n.js"></script>
+  <script src="js/timings.js"></script>
 </body>
 </html>

@@ -47,12 +47,46 @@ function validateCassette(body) {
     if (!str(t.sec) || !str(t.secEn)) throw new Error(`${at}: needs to say which section of the book it is`);
     if (Array.isArray(t.lines)) {
       if (!t.lines.length) throw new Error(`${at}: a scripted track needs at least one line`);
+      // Where the previous line's span ended, so a run of spans can be checked for order in
+      // the same pass. -1 rather than 0: a first line legitimately starts at 0.
+      let prevEnd = -1;
       t.lines.forEach((l, k) => {
         if (!str(l && l.ko)) throw new Error(`${at} line ${k + 1}: needs Korean`);
         // The speaker slot has to exist so the two-column layout stays put, but it may be
         // empty: Unit 14's track 48 is a announcement read by one unnamed voice, and giving
         // it a speaker would invent a person the book never names. Present, possibly blank.
         if (typeof (l && l.who) !== 'string') throw new Error(`${at} line ${k + 1}: needs a speaker slot`);
+
+        // The optional span, in seconds, that the 듣기 screen's per-line ▶ plays. Optional
+        // because most lines still have none; but a span that is present and wrong is a
+        // button that plays the wrong sentence, so the shapes are refused here rather than
+        // discovered by a learner. The timings tab writes these, and hand-editing the JSON
+        // is expected too — see docs/cassette-timings.md.
+        const hasAt = l && Object.prototype.hasOwnProperty.call(l, 'at');
+        const hasEnd = l && Object.prototype.hasOwnProperty.call(l, 'end');
+        const where = `${at} line ${k + 1}`;
+        if (hasAt !== hasEnd) {
+          throw new Error(`${where}: a span needs both at and end (has only ${hasAt ? 'at' : 'end'})`);
+        }
+        if (hasAt) {
+          const a = l.at;
+          const b = l.end;
+          if (typeof a !== 'number' || typeof b !== 'number' || !isFinite(a) || !isFinite(b)) {
+            throw new Error(`${where}: at and end must be numbers of seconds`);
+          }
+          if (a < 0) throw new Error(`${where}: at cannot be negative`);
+          if (!(b > a)) throw new Error(`${where}: end (${b}) must come after at (${a})`);
+          // A quarter-second is below anything a sentence can be, and it is the floor the
+          // player's own A-B loop already refuses for the same reason.
+          if (b - a < 0.25) throw new Error(`${where}: ${(b - a).toFixed(2)}s is too short to be a line`);
+          // A tenth of slack past the stated duration: the track length is measured to the
+          // hundredth and a span may legitimately run to the last sound.
+          if (b > t.dur + 0.1) throw new Error(`${where}: end ${b} is past the ${t.dur}s track`);
+          if (a < prevEnd - 0.05) {
+            throw new Error(`${where}: starts at ${a}, before line ${k} ended at ${prevEnd}`);
+          }
+          prevEnd = b;
+        }
       });
       // A note explaining the absence of a script, on a track that has one, is left over from
       // an edit and will be shown to the learner under a script they can plainly see.

@@ -389,7 +389,8 @@ window.AppRouter = {
     'unit14': () => window.Unit14View && window.Unit14View.render(),
     'i18n': () => window.I18nView && window.I18nView.render(),
     'art': () => window.ArtView && window.ArtView.render(),
-    'skins': () => window.SkinsView && window.SkinsView.render()
+    'skins': () => window.SkinsView && window.SkinsView.render(),
+    'timings': () => window.TimingsView && window.TimingsView.render()
   },
 
   init() {

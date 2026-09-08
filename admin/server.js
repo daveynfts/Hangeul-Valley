@@ -422,6 +422,19 @@ app.use('/sprite-preview', (req, res, next) => {
   express.static(path.join(getRootDir(), 'sprites'), { fallthrough: true })(req, res, next);
 });
 
+// The recordings, for the timings tab. It draws a waveform from the decoded mp3 and plays
+// stretches of it, and neither works cross-origin against the game's own server — the decode
+// needs the bytes, so a <audio> tag pointed elsewhere would not do.
+//
+// Read-only and scoped to audio/, the same shape as the sprites line above. express.static
+// resolves the path before serving, so a `..` in the URL cannot climb out of that directory;
+// the extension check is the second lock, because the only thing this exists to hand out is
+// mp3s and a wildcard under the repo root is not what was wanted.
+app.use('/audio-preview', (req, res, next) => {
+  if (!/\.mp3$/i.test(req.path)) { res.status(404).end(); return; }
+  express.static(path.join(getRootDir(), 'audio'), { fallthrough: true })(req, res, next);
+});
+
 // 12. POST /api/sync (Manual Trigger Resync)
 app.post('/api/sync', (req, res, next) => {
   try {

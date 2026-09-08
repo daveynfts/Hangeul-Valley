@@ -74,18 +74,31 @@ a play button.
 
 ## Finishing a run by hand
 
-For the lines the tool leaves, work one track at a time.
+Use the admin panel's **Timings** tab — `npm --prefix admin start`, then `#timings`. It exists
+for exactly this job.
 
-1. `node scripts/cassette_timings.js --report` lists them as `unit<NN> trk<NN>: n line(s)`.
-2. Open the track in an audio editor, or in the game: the 듣기 screen's waveform shows the
-   playhead clock to hundredths, and dragging on the strip arms an A–B loop over exactly the
-   stretch you are about to write down.
-3. Note where the sentence starts and where it stops. Take `at` a hair *before* the first
-   sound — about 0.1s — or the play clips the onset. Take `end` at the last sound, not at the
-   start of the next line, or the button plays the silence too.
-4. Write the pair onto the line in the unit's `-cassette.json`.
-5. `node tests/test_cassette_timings.js` — it checks the span runs forwards, lies inside the
-   track, and starts after the line above it ended.
+1. Pick the unit, then a track. The rail shows `n/n` per track and turns green when a track is
+   finished, so the work left is visible without opening anything.
+2. Pick a line. Lines with no span carry an amber edge and read `not set`; the spans that do
+   exist are drawn on the waveform, so the gap you are filling is the gap you can see.
+3. Drag across the strip to set the span. A click without a drag only moves the playhead, so a
+   mis-click cannot silently retime the selected line.
+4. **▶ Line** plays exactly the span and stops at its end — that is the check. `start ±` and
+   `end ±` trim by 0.05s, and `snap to previous` starts this line where the one above ended,
+   which is most of a dialogue.
+5. Save. The write goes through the same validator as everything else in the panel, so a span
+   that runs backwards, is under a quarter-second, overruns the track or crosses the line above
+   is refused with a message naming the line rather than written.
+
+Take `at` a hair *before* the first sound — a tenth is about right — or the play clips the
+onset. Take `end` at the last sound rather than at the start of the next line, or the button
+plays the silence too.
+
+The tab also corrects the track's `dur` from the decoded file when it saves, so a track that
+has been opened here stops disagreeing with its own audio.
+
+By hand instead, if you prefer: write the pair onto the line in the unit's `-cassette.json` and
+run `node tests/test_cassette_timings.js`, which checks the same things.
 
 Re-running the tool is safe: it clears every `at`/`end` on a track before measuring it, so
 its own results never go stale after a transcript edit. **It will also clear yours.** Hand

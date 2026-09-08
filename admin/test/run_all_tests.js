@@ -6,6 +6,7 @@ const testEdgeCases = require('./test_edge_cases');
 const testVercelContract = require('./test_vercel_contract');
 const testCorsOrigin = require('./test_cors_origin');
 const testUnit14Workbook = require('./test_unit14_workbook');
+const testTimings = require('./test_timings');
 
 function padRight(str, len) {
   str = String(str);
@@ -37,7 +38,8 @@ async function runAllSuites() {
     { label: 'Edge Cases & Data Integrity', module: testEdgeCases },
     { label: 'Vercel vs Express GET contract', module: testVercelContract },
     { label: 'CORS & bind hardening', module: testCorsOrigin },
-    { label: 'Unit 14 Workbook API', module: testUnit14Workbook }
+    { label: 'Unit 14 Workbook API', module: testUnit14Workbook },
+    { label: 'Timings tab', module: testTimings }
   ];
 
   const results = [];
