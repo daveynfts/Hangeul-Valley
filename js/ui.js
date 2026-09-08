@@ -1487,9 +1487,9 @@ function answerChoice(opt, btn){
     // well; the modality on screen keeps its own record either way.
     //
     // Phase 2 used to be left out. Watering therefore scheduled `listen` and nothing else,
-    // production stayed on the 30s due date phase 1 gave it — already in the past — and
-    // _checkSRS promoted the plot from sprout to ripe on its next 8s tick. The 90s growing
-    // stage never elapsed, so the crop skipped its middle sprite and appeared never to grow,
+    // production stayed on the first-step due date phase 1 gave it — already in the past —
+    // and _checkSRS promoted the plot from sprout to ripe on its next 8s tick. The second
+    // growing step never elapsed, so the crop skipped its middle sprite and never grew,
     // and the harvest at phase 3 advanced production to step 1 instead of graduating it, so
     // the word never entered day-scale review at all.
     if((ph===1 || ph===2) && currentQuizMode !== PRIMARY_MODALITY){

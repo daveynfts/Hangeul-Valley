@@ -14,9 +14,9 @@ const LEVEL_COST = (idx) => idx === 0 ? 0 : Math.floor(50 * Math.pow(1.8, idx - 
 // pacing, not spaced repetition — a player could reach "100% mastery" on the game's whole
 // vocabulary in one sitting and remember none of it the next day.
 //
-// The fix keeps the game feel intact by recognising that the existing three-touch loop
-// (plant → 30s → water → 90s → harvest) is exactly Anki's *learning steps*. So those
-// timers stay, and a day-scale review layer sits on top:
+// The fix keeps the game feel intact by recognising that the three-touch loop
+// (plant → wait → water → wait → harvest) is exactly Anki's *learning steps*. So those
+// timers stay in that role, and a day-scale review layer sits on top:
 //
 //   new ──plant──> learn ──steps──> review ──due in N days──> review ...
 //                    ↑                  │
@@ -26,7 +26,11 @@ const LEVEL_COST = (idx) => idx === 0 ? 0 : Math.floor(50 * Math.pow(1.8, idx - 
 // then on it resurfaces when due, as a single recall rather than the full three-touch
 // cycle. Scheduling is deliberately un-fuzzed so behaviour is reproducible and testable.
 const SRS_CFG = {
-  LEARN_STEPS:   [30 * 1000, 90 * 1000],  // matches the seedling → wilt → ripe pacing
+  // These double as the crop clock: step 0 is the seedling's wait, step 1 the sprout's, and
+  // the harvest ends both. Halved from 30s/90s — two minutes of staring at an unfinished
+  // plot was the single most common complaint, and at a one-day graduating interval the
+  // learning ladder is scaffolding for the first sitting, not the thing doing the teaching.
+  LEARN_STEPS:   [15 * 1000, 45 * 1000],  // matches the seedling → wilt → ripe pacing
   RELEARN_STEPS: [60 * 1000],
   GRADUATE_IVL: 1,     // days — every word enters review here, no shortcuts
   MATURE_IVL:   21,    // days — Anki's mature-card threshold, used for the Mastery stat

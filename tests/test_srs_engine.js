@@ -63,8 +63,8 @@ const T0 = 1_700_000_000_000;   // fixed epoch; nothing here depends on the real
 // ── 1. Config sanity ────────────────────────────────────────────────────────
 console.log('--- 1. Configuration ---');
 eq(CFG.LEARN_STEPS.length, 2, 'two learning steps, matching the plant/water/harvest loop');
-eq(CFG.LEARN_STEPS[0], 30 * 1000, 'first learning step is the existing 30s seedling timer');
-eq(CFG.LEARN_STEPS[1], 90 * 1000, 'second learning step is the existing 90s sprout timer');
+eq(CFG.LEARN_STEPS[0], 15 * 1000, 'first learning step is the 15s seedling timer');
+eq(CFG.LEARN_STEPS[1], 45 * 1000, 'second learning step is the 45s sprout timer');
 eq(CFG.MATURE_IVL, 21, 'maturity threshold is 21 days');
 assert(CFG.MIN_EASE < CFG.START_EASE && CFG.START_EASE < CFG.MAX_EASE, 'ease bounds bracket the start ease');
 
@@ -83,14 +83,14 @@ console.log('\n--- 3. Learning steps (the three-touch loop) ---');
 let e = sched(newEntry(), G.GOOD, T0);            // plant
 eq(e.st, 'learn', 'planting moves the word into learning');
 eq(e.step, 0, 'sits on the first step');
-eq(e.due, T0 + CFG.LEARN_STEPS[0], 'due after the 30s step');
+eq(e.due, T0 + CFG.LEARN_STEPS[0], 'due after the first step');
 assert(!isDue(e, T0 + 1000), 'not due one second later');
 assert(isDue(e, T0 + 31_000), 'due once the step elapses');
 
 e = sched(e, G.GOOD, T0 + 31_000);                 // water
 eq(e.st, 'learn', 'still learning after the second touch');
 eq(e.step, 1, 'advanced to the second step');
-eq(e.due, T0 + 31_000 + CFG.LEARN_STEPS[1], 'due after the 90s step');
+eq(e.due, T0 + 31_000 + CFG.LEARN_STEPS[1], 'due after the second step');
 
 e = sched(e, G.GOOD, T0 + 125_000);                // harvest
 eq(e.st, 'review', 'harvesting graduates the word into review');
@@ -497,8 +497,8 @@ console.log('\n--- 15. Plant → water → harvest lands on the production sched
 // in production: phase 1 is recognition and phase 2 is listening whenever a Korean voice is
 // available. Each phase therefore has to mirror its grade onto production explicitly, and
 // phase 2 was missing that mirror. The cost was not subtle — watering scheduled `listen` and
-// left production on the 30s due date phase 1 had given it, already in the past, so the plot
-// went from sprout to ripe on _checkSRS's next 8s tick (the 90s growing sprite never showed),
+// left production on the first-step due date phase 1 had given it, already past, so the plot
+// went from sprout to ripe on _checkSRS's next 8s tick (the second growing sprite never showed),
 // and the harvest advanced production to learning step 1 instead of graduating it, so the
 // word never entered day-scale review at all.
 const answerChoiceSrc = extract('function answerChoice(', 'function closeQuiz(', 'answerChoice');
