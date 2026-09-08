@@ -1015,27 +1015,27 @@ function revealQuizHint(tier){
   if(!box) return;
 
   if(tier === 'chosung'){
-    if(!spendCoins(5)){ showToast('Need 5 Coins 🪙 for Chosung hint!'); return; }
+    if(!spendCoins(5)){ showToast(hvT('ui.quiz.hint.need5')); return; }
     currentQuizMeta.paidHints++;
     const ch = getChosung(currentWord.ko);
-    box.innerHTML = `🔠 <b>Initial consonants (초성):</b> <span style="color:#fde047; font-size:18px; font-weight:bold; letter-spacing:3px">${ch}</span>`;
+    box.innerHTML = `🔠 <b>${vbEsc(hvT('ui.quiz.hint.initials'))}</b> <span style="color:#fde047; font-size:18px; font-weight:bold; letter-spacing:3px">${ch}</span>`;
   } else if(tier === 'audio'){
     // Hearing the word is effectively hearing the answer, so it is priced like the
     // origin hint.
-    if(!KoreanTTS.isAvailable()){ showToast('🔇 No Korean voice available on this device.'); return; }
-    if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 to hear the word!'); return; }
+    if(!KoreanTTS.isAvailable()){ showToast(hvT('ui.quiz.hint.noVoice')); return; }
+    if(!spendCoins(10)){ showToast(hvT('ui.quiz.hint.need10Audio')); return; }
     currentQuizMeta.paidHints++;
     const ko = currentWord.ko;
     speakKorean(ko, { force: true });
     // The word is embedded rather than read from `currentWord` at click time: the quiz
     // may have moved on, and inline handlers should not depend on mutable globals.
-    box.innerHTML = `🔊 <b>Listen:</b>
-      <button type="button" class="speak-btn" data-ko="${ko}">▶ Again</button>
-      <button type="button" class="speak-btn" data-ko="${ko}" data-spell="1">🐢 Syllable by syllable</button>`;
+    box.innerHTML = `🔊 <b>${vbEsc(hvT('ui.quiz.hint.listen'))}</b>
+      <button type="button" class="speak-btn" data-ko="${ko}">▶ ${vbEsc(hvT('ui.quiz.replay'))}</button>
+      <button type="button" class="speak-btn" data-ko="${ko}" data-spell="1">🐢 ${vbEsc(hvT('ui.quiz.hint.spell'))}</button>`;
     box.querySelectorAll('.speak-btn').forEach(b => b.addEventListener('click', () =>
       b.dataset.spell ? spellKorean(b.dataset.ko, { force: true }) : speakKorean(b.dataset.ko, { force: true })));
   } else if(tier === 'fact'){
-    if(!spendCoins(10)){ showToast('Need 10 Coins 🪙 for the origin hint!'); return; }
+    if(!spendCoins(10)){ showToast(hvT('ui.quiz.hint.need10Origin')); return; }
     currentQuizMeta.paidHints++;
     const fact = getFunFact(currentWord);
     box.innerHTML = `💡 <b>${vbEsc(hvT('ui.quiz.wordOrigin'))}</b> ${fact.origin || fact.hint}`;
@@ -1466,7 +1466,7 @@ function bindListenReplay(word, show){
     if (ev) ev.stopPropagation();
     const ok = speakKorean(word.ko, { force: true });
     if (!ok && typeof showToast === 'function') {
-      showToast('🔇 Could not play Korean audio on this device.', 2600);
+      showToast(hvT('ui.quiz.audio.failed'), 2600);
     }
   };
   box.classList.toggle('hidden', !show);
@@ -1556,8 +1556,9 @@ function answerChoice(opt, btn){
       plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();
     }
     showQuizSuccess({
-      message: ph === 1 ? 'Planted!' : (ph === 2 ? 'Watered!' : 'Harvested!'),
-      ko: cw.ko, en: cw.en,
+      message: hvT(ph === 1 ? 'ui.quiz.result.planted'
+        : (ph === 2 ? 'ui.quiz.result.watered' : 'ui.quiz.result.harvested')),
+      ko: cw.ko, en: tr(cw, 'en'),
       continueLabel: hvT(ph === 3 ? 'ui.quiz.result.continue.harvest'
         : (ph === 2 ? 'ui.quiz.result.continue.water' : 'ui.quiz.result.continue.plant')),
       delay: ph === 3 ? 0 : 1800,
@@ -1622,12 +1623,12 @@ function submitAnswer(){
     setTimeout(() => speakKorean(spokenWord), 180);
     // ── Apple Tree harvest (special Phase 3 quiz) ─────────────────────────
     if(appleTreeQuizPending){
-      feedbackText.textContent='🍎 Harvested! Excellent Korean!'; feedbackText.className='correct';
+      feedbackText.textContent=hvT('ui.quiz.feedback.appleHarvested'); feedbackText.className='correct';
       appleTreeQuizPending=false;
       const harvested = currentWord;
       showQuizSuccess({
-        message: 'Harvested!',
-        ko: harvested.ko, en: harvested.en,
+        message: hvT('ui.quiz.result.harvested'),
+        ko: harvested.ko, en: tr(harvested, 'en'),
         continueLabel: hvT('ui.quiz.result.continue.apples'),
         delay: 0,
         onDone: () => { if (sceneRef) sceneRef.onAppleHarvested(); }
@@ -1635,24 +1636,25 @@ function submitAnswer(){
       return;
     }
     // ── Normal crop quiz ──────────────────────────────────────────────────
-    const msgs=['Planted! Remember to water.','Watered! Almost ripe.','Excellent! +Gold earned.'];
+    const msgKeys=['ui.quiz.result.planted.note','ui.quiz.result.watered.note','ui.quiz.result.harvested.gold'];
     const cp=currentPlot, cw=currentWord, ph=currentPhase;
     // Grade before the state changes, while the attempt/hint counters still describe
     // this answer. gradeWord is the single entry point into the scheduler.
     const grade = deriveGrade(verdict==='close');
     const srsAfter = gradeWord(cw.ko, grade);
     let message = verdict==='close'
-      ? `Close enough — ${cw.ko}`
-      : msgs[ph-1];
+      ? hvT('ui.quiz.result.close', { ko: cw.ko })
+      : hvT(msgKeys[ph-1]);
     if(ph===3 && srsAfter.st==='review'){
-      message = (srsAfter.reps===1 ? 'Learned!' : 'Reviewed!') + ' Next review in ' + srsIntervalLabel(srsAfter);
+      message = hvT(srsAfter.reps===1 ? 'ui.quiz.result.learned' : 'ui.quiz.result.reviewed',
+        { interval: srsIntervalLabel(srsAfter) });
     }
     feedbackText.textContent = message;
     feedbackText.className='correct';
     if(ph===1){plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();}
     showQuizSuccess({
       message,
-      ko: cw.ko, en: cw.en,
+      ko: cw.ko, en: tr(cw, 'en'),
       continueLabel: hvT(ph === 3 ? 'ui.quiz.result.continue.harvest'
         : (ph === 2 ? 'ui.quiz.result.continue.water' : 'ui.quiz.result.continue.plant')),
       delay: ph === 3 ? 0 : 1800,
@@ -1668,7 +1670,8 @@ function submitAnswer(){
     // Captured before the box is cleared: the reveal shows it back, and seeing the near-miss
     // beside the word is most of what there is to learn from a lapse.
     const typedRaw = answerInput.value;
-    const wrong = isApple ? '❌ Wrong! Try again to harvest!' : (currentPhase===3?'❌ Wrong! Plant regressed to Phase 2!':'❌ Wrong! Try again.');
+    const wrong = hvT(isApple ? 'ui.quiz.feedback.wrongApple'
+      : (currentPhase===3 ? 'ui.quiz.feedback.wrongRegressed' : 'ui.quiz.feedback.wrong'));
     feedbackText.textContent=wrong; feedbackText.className='';
     answerInput.value=''; answerInput.focus();
     answerInput.animate(
@@ -1684,12 +1687,12 @@ function submitAnswer(){
       // The apple-tree quiz is the exception and keeps its retry: it is answered again for
       // the same reward, so showing the word there would be handing over the payout.
       showQuizReveal({
-        message: after.lapses > 0 ? 'Lapsed' : 'The answer was',
-        ko: cw.ko, en: cw.en,
+        message: hvT(after.lapses > 0 ? 'ui.quiz.result.lapsed' : 'ui.quiz.result.answerWas'),
+        ko: cw.ko, en: tr(cw, 'en'),
         typed: typedRaw,
         note: after.lapses > 0
-          ? `Back to Phase 2 · next review in ${srsIntervalLabel(after)} after relearning.`
-          : 'Back to Phase 2 — water it again to bring it back.',
+          ? hvT('ui.quiz.result.note.lapsed', { interval: srsDaysLabel(after.ivl) })
+          : hvT('ui.quiz.result.note.regressed'),
         continueLabel: hvT('ui.quiz.result.continue.lapse'),
         onDone: () => { if(sceneRef) sceneRef.regressionPlot(cp,cw); }
       });
@@ -2011,7 +2014,16 @@ function recallShapeGroups(str) {
 }
 
 // ── Origin / structure renderers ─────────────────────────────────────────────
-const SINO = 'Sino-Korean (한자어)';
+//
+// Whole sentences out of the catalogue rather than fragments joined up: the head carries
+// "verb" or "adjective" as one phrase, and a language that puts that word before the head
+// rather than after it cannot be served by any one concatenation order.
+//
+// What stays English here is the substance rather than the frame — the hanja glosses in
+// `p` and the curated `note`. Those come from facts.json, which scripts/build_facts_json.js
+// generates and HV_GENERATED_SOURCES names: its Vietnamese has to come from that generator,
+// because a catalogue entry would be dropped by the next build.
+
 
 // [char, reading, meaning] → 父 (부) "father"
 function _hanjaParts(parts) {
@@ -2022,54 +2034,65 @@ function _hanjaParts(parts) {
 function renderOrigin(f) {
   if (!f) return '';
   const parts = _hanjaParts(f.p);
+  // 兄 = 兄 (형) “elder brother”, and the same shape plus a suffix for the verb and
+  // adjective forms. Built here so that each sentence below takes one placeholder.
+  const breakdown = (suffix) =>
+    (suffix ? f.h + ' + ' + suffix : f.h) + (parts ? ' = ' + parts : '');
   switch (f.o) {
     case 'sino':
-      return `${SINO} — ${f.h}${parts ? ' = ' + parts : ''}`;
+      return hvT('ui.origin.o.sino', { breakdown: breakdown() });
     case 'sino-partial':
-      return `${SINO} — built on ${f.h}${parts ? ' = ' + parts : ''}`;
+      return hvT('ui.origin.o.sinoPartial', { breakdown: breakdown() });
     case 'sino-verb':
       return f.h
-        ? `${SINO} verb — ${f.h} + ${f.s || '하다'}${parts ? ' = ' + parts : ''}`
-        : `${SINO} verb — 하다 attaches to a Sino-Korean root`;
+        ? hvT('ui.origin.o.sinoVerb', { breakdown: breakdown(f.s || '하다') })
+        : hvT('ui.origin.o.sinoVerbBare');
     case 'sino-passive':
       return f.h
-        ? `${SINO} verb — ${f.h} + ${f.s || '되다'}${parts ? ' = ' + parts : ''}`
-        : `${SINO} verb — 되다 / 시키다 forms the passive or causative`;
+        ? hvT('ui.origin.o.sinoVerb', { breakdown: breakdown(f.s || '되다') })
+        : hvT('ui.origin.o.sinoPassiveBare');
     case 'sino-adj':
       return f.h
-        ? `${SINO} adjective — ${f.h} + ${f.s || '적'}${parts ? ' = ' + parts : ''}`
-        : `${SINO} adjective — the suffix -적 turns a noun into a descriptive`;
+        ? hvT('ui.origin.o.sinoAdj', { breakdown: breakdown(f.s || '적') })
+        : hvT('ui.origin.o.sinoAdjBare');
     case 'sino-noun':
-      return `${SINO} noun — formed with the suffix -성 / -력 / -감`;
+      return hvT('ui.origin.o.sinoNoun');
     case 'mixed':
-      return `${SINO} + native Korean — ${parts} + ${f.n} (native Korean)`;
+      return hvT('ui.origin.o.mixed', { parts, native: f.n });
     // Same thing with the halves the other way round. `mixed` prints the hanja first, which is
     // right for 남동생 (男 + 동생) and wrong for 옷장 (옷 + 欌) — and a breakdown in the wrong
     // order is worse than none, because the learner reads it as the word's actual shape.
     case 'mixed-native':
-      return `native Korean + ${SINO} — ${f.n} (native Korean) + ${parts}`;
+      return hvT('ui.origin.o.mixedNative', { native: f.n, parts });
     case 'mixed-loan':
-      return `${SINO} + loanword — ${f.h}${parts ? ' = ' + parts : ''}, plus English “${f.l}”`;
+      return hvT('ui.origin.o.mixedLoan',
+        { breakdown: breakdown(), english: hvT('ui.origin.loanEnglish', { loan: f.l }) });
     // 가스비 and 마케팅부 put the borrowed half first, and the same reasoning as mixed-native
     // applies: printing the halves in the wrong order misreads the word's shape.
     case 'loan-mixed':
-      return `loanword + ${SINO} — English “${f.l}”, plus ${f.h}${parts ? ' = ' + parts : ''}`;
+      return hvT('ui.origin.o.loanMixed',
+        { english: hvT('ui.origin.loanEnglish', { loan: f.l }), breakdown: breakdown() });
     case 'loan':
-      return `Loanword (외래어) — from ${f.l.includes('(') ? f.l : `English “${f.l}”`}`;
+      // A source already in brackets names its own language ("French (café)"); a bare one
+      // is always English, and only that case needs the word "English" supplying.
+      return hvT('ui.origin.o.loan', {
+        source: f.l.includes('(') ? f.l : hvT('ui.origin.loanEnglish', { loan: f.l })
+      });
     case 'loan-partial':
-      return `Loanword (외래어) — built on ${f.l}`;
+      return hvT('ui.origin.o.loanPartial', { loan: f.l });
     case 'native':
-      return `Native Korean (고유어)${f.note ? ' — ' + f.note : ''}`;
+      return f.note
+        ? hvT('ui.origin.o.nativeNote', { note: f.note })
+        : hvT('ui.origin.o.native');
     case 'idiom':
-      return `Idiom (관용구) — ${f.note}`;
+      return hvT('ui.origin.o.idiom', { note: f.note });
     case 'discourse':
-      return `Discourse marker (담화 표지) — ${f.note}`;
+      return hvT('ui.origin.o.discourse', { note: f.note });
     default:
       return '';
   }
 }
 
-// Syllable shape, always derived from the Hangul itself. No Latin romanization.
 function renderStructure(ko) {
   const syl = decomposeHangulWord(ko);
   const n = syl.length;
@@ -2100,21 +2123,21 @@ function recallOriginClass(ko) {
     case 'sino-adj':
     case 'sino-verb':
     case 'sino-passive':
-      return 'Sino-Korean';
+      return hvT('ui.origin.sino');
     case 'native':
-      return 'Native Korean';
+      return hvT('ui.origin.native');
     case 'loan':
     case 'loan-partial':
-      return 'Loanword';
+      return hvT('ui.origin.loan');
     case 'mixed':
     case 'mixed-native':
     case 'mixed-loan':
     case 'loan-mixed':
-      return 'Mixed origin';
+      return hvT('ui.origin.mixed');
     case 'idiom':
-      return 'Idiom';
+      return hvT('ui.origin.idiom');
     case 'discourse':
-      return 'Discourse marker';
+      return hvT('ui.origin.discourse');
     default:
       return '';
   }

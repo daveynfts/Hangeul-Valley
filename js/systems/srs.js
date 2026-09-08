@@ -164,9 +164,21 @@ function srsIsLearning(e)  { return !!e && (e.st === 'learn' || e.st === 'relear
 function srsIntervalLabel(e) {
   if (!e || e.st === 'new') return 'new';
   if (srsIsLearning(e)) return 'learning';
-  if (e.ivl >= 365) return (e.ivl / 365).toFixed(1) + 'y';
-  if (e.ivl >= 30) return Math.round(e.ivl / 30) + 'mo';
-  return e.ivl + 'd';
+  return srsDaysLabel(e.ivl);
+}
+
+// Just the interval, with no opinion about the state the entry is in.
+//
+// A word in relearning steps still carries the interval waiting on the other side of them:
+// the AGAIN branch above halves e.ivl and stores it *before* enterLearning sets
+// st='relearn'. srsIntervalLabel answers 'learning' for that entry, which is true of its
+// state and not what the phase-3 lapse panel was asking — so that panel read "next review
+// in learning after relearning" for every mature word that lapsed.
+function srsDaysLabel(days) {
+  const d = Number(days) || 0;
+  if (d >= 365) return (d / 365).toFixed(1) + 'y';
+  if (d >= 30) return Math.round(d / 30) + 'mo';
+  return d + 'd';
 }
 
 // ── Per-modality records ─────────────────────────────────────────────────────
