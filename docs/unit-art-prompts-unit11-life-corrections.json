@@ -1,0 +1,30 @@
+[
+  {
+    "index": 208,
+    "prompt": "Edit target: attached Chuncheon pixel-art vocabulary game sprite. Preserve the entire landmark, river, mountain, outlines and exact Korean sign 춘천. Only replace ALL exterior white background with genuinely transparent alpha. No white matte, checkerboard pattern, glow, floor shadow or backdrop. Keep crisp pixel edges and original rich colors. Output one isolated transparent PNG."
+  },
+  {
+    "index": 213,
+    "prompt": "Background replacement ONLY. Preserve the attached girl paying vegetable vendor sprite. Replace the checkerboard with ONE SOLID FLAT #FF00FF MAGENTA color in EVERY exterior background pixel and every internal gap. Absolutely no gradient, no glow, no shadow, no vignette, no transparency simulation. Flat magenta touches the hard dark pixel outline directly. Character colors and edges unchanged. Full sprite with margin."
+  },
+  {
+    "index": 220,
+    "prompt": "Correct this Korean vocabulary sprite for 이틀 TWO DAYS. Preserve two calendar pages numbered 1 and 2, crisp cozy pixel art, arrow and warm colors. Change the second calendar illustration to the SAME SUN AND CLOUDS as the first calendar, so each represents one full day. Replace ALL exterior background and orange glow with uniform flat #FF00FF magenta, also inside ring holes. No gradients, shadows, halo, vignette, checkerboard. Sharp dark pixel outlines meet solid magenta directly. Keep full object inside generous margin."
+  },
+  {
+    "index": 224,
+    "prompt": "Background replacement only for attached exercising character pixel sprite. Preserve character, pose, face, TWO arms, dumbbells and solid yellow motion marks. Replace entire dark background AND ALL glow with perfectly uniform solid #FF00FF magenta, including between legs and arms. No gradient, halo, shadow or vignette. Hard pixel outlines directly against flat magenta. Preserve sprite colors and full body with small margin."
+  },
+  {
+    "index": 225,
+    "prompt": "Background replacement ONLY. Preserve attached healthy stretching girl, fruit basket, water bottle, heart symbol and crisp cozy pixel art. Replace ALL background and ALL glow with perfectly flat solid #FF00FF magenta, including gap over head inside raised arms, between legs, basket handle and bottle handle. No gradient, halo, vignette or shadow. Sprite dark pixel outlines directly touch flat magenta. Do not change anatomy, colors or composition."
+  },
+  {
+    "index": 227,
+    "prompt": "Background replacement ONLY for attached girl admiring one special red apple beside green apples sprite. Keep character and apples, anatomy, pixel art and all subject colors. Replace every dark background pixel and ALL glow with completely flat solid #FF00FF magenta, including gaps inside basket handle and between body and basket. No gradient halo shadow vignette. Hard pixel outline directly against magenta."
+  },
+  {
+    "index": 228,
+    "prompt": "Background replacement ONLY. Preserve happy walking girl pixel art sprite, sun and musical notes. Replace ALL dark background and ALL glow with perfectly flat solid #FF00FF magenta, including between legs, around hair and arms. No shadow halo gradient vignette. Preserve crisp pixel edges, character colors and complete full body. Dark outline directly touches flat magenta."
+  }
+]

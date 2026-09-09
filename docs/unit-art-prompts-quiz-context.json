@@ -1,0 +1,20 @@
+{
+  "tool": "built-in Imagegen edit",
+  "edits": [
+    {
+      "index": 121,
+      "path": "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_pork_bone_potato_stew.png",
+      "prompt": "Edit this approved pixel-art gamjatang as an educational ingredient illustration. Preserve the beautiful dark-outlined warm pixel style and recognizable black bowl of spicy pork-bone potato stew. Recompose with the bowl toward the back and, clearly visible in the foreground, two whole potatoes with one cut potato and a small clean plate of pork neck bones with meat, non-graphic culinary ingredients. These ingredients must be large and unmistakable at 192px height. One compact composition, transparent background, no floor, no cast shadow, no writing, no labels, no photorealism."
+    },
+    {
+      "index": 123,
+      "path": "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_ox_bone_soup.png",
+      "prompt": "Edit this approved pixel-art seolleongtang as an educational ingredient illustration. Preserve its warm deliberate pixel clusters, umber outlines, black bowl and milky white broth. Remove the small side dishes to simplify. Next to the soup show a compact small simmering stockpot with two large clean ivory beef marrow bones, visibly cut circular bone ends, emerging from the creamy broth, and gentle steam. Make the beef bones and milky broth the defining feature, non-graphic food preparation. Compact centered readable silhouette, transparent background, no floor, no cast shadow, no text or labels."
+    },
+    {
+      "index": 126,
+      "path": "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_spicy_mixed_noodles.png",
+      "prompt": "Edit this approved pixel-art bibim-guksu into an educational taste illustration. Preserve the recognizable bowl of thin noodles mixed in red sauce with cucumber and egg, its premium cozy chunky pixel-art style and umber outlines. Add three small but clearly distinct sauce ingredients clustered neatly in the foreground: a spoon of white sugar crystals, a small clear cruet of golden vinegar with an apple beside it, and a vivid red chilli pepper beside a tiny bowl of gochujang. They communicate sweet, sour and spicy. Keep the noodles dominant, compact and legible at 192px tall, transparent background, no labels, letters, text, floor or shadow."
+    }
+  ]
+}

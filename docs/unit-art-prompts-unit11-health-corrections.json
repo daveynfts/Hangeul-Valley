@@ -1,0 +1,12 @@
+[
+  {
+    "index": 175,
+    "source": "docs/unit-art-sources/unit11_medicine.png",
+    "prompt": "Edit this sprite only: preserve the amber medicine bottle, green plus label, cream cap and tablet blister. Replace the purple/magenta interior of the measuring cup with neutral pale blue-gray clear glass and amber liquid; absolutely no purple or pink anywhere on the object. Preserve cozy pixel style and sharp silhouette. Genuine transparent alpha background; if unavailable flat #FF00FF reserved solely for backdrop. No black/white checkerboard background, no added text."
+  },
+  {
+    "index": 187,
+    "source": "docs/unit-art-sources/unit11_to_put_in_eye_drops.png",
+    "prompt": "Correct this educational pixel-art sprite of putting eye drops in. Recompose in a simple side profile so only ONE eye is visible and receives a clearly visible tiny droplet from a bottle held a short distance ABOVE it, without touching the eye. One hand holds bottle; the other gently pulls the lower lid of THAT SAME eye, not the opposite eye. Keep green-and-cream clothing, brown bun, warm cozy pixel-art family and exactly two arms. No extra fingers or hands. Genuine transparent alpha background or flat uniform #FF00FF reserved exclusively for background; no purple matte trapped inside gaps, floor, text or frame."
+  }
+]

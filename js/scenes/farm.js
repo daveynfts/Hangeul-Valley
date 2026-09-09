@@ -1537,6 +1537,10 @@ class FarmScene extends Phaser.Scene {
     const iconText = (hdKey && this.textures && this.textures.exists(hdKey))
       ? this.add.image(0, -4, hdKey).setOrigin(0.5, 0.5)
       : this.add.text(0, -4, info.icon || '🥬', { fontSize: '24px' }).setOrigin(0.5, 0.5);
+    // High-resolution vocabulary sources keep the same pickup footprint.
+    if (iconText && iconText.type === 'Image' && iconText.height > 48) {
+      iconText.setScale(48 / iconText.height);
+    }
 
     // Korean Label
     const labelText = this.add.text(0, 16, nameKo, {

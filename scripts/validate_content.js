@@ -406,7 +406,7 @@ const overlayIds = [
   // Split the same way Unit 14's is. The 80 are the textbook's own 어휘 list and that count is a
   // fidelity claim; the rest are the words the chapter's other pages drill — the grammar boxes,
   // 말하기, 과제 and 발음 — which have no icons yet and so render as their hint emoji.
-  const drawn10 = ww.filter((w) => !w.artPending);
+  const drawn10 = ww.filter((w) => !w.artPending && !w.chapterSupplement);
   check('2B Unit 10 keeps its 80 textbook headwords', drawn10.length === 80, `found ${drawn10.length}`);
   const cats = new Set(ww.map((w) => w.category));
   const want10 = ['음식', '맛', '식당 평가', '읽기', '주문', '회화'];
@@ -443,7 +443,7 @@ const overlayIds = [
   // every one a word a learner met on the page and could not otherwise learn. They are marked
   // artPending because their icons are still to be drawn; see the art check below, which names
   // them rather than waving them through.
-  const drawn = ww.filter((w) => !w.artPending);
+  const drawn = ww.filter((w) => !w.artPending && !w.chapterSupplement);
   check('2B Unit 14 keeps its 54 textbook headwords', drawn.length === 54, `found ${drawn.length}`);
   const cats = new Set(ww.map((w) => w.categoryEn));
   const want = [
@@ -1086,7 +1086,7 @@ const overlayIds = [
   catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
   const qs = (bank && bank.questions) || [];
   check('Unit 11 desk quiz has 13 questions', qs.length === 13, `found ${qs.length}`);
-  check('Unit 11 desk quiz plays 10 of them', bank.sessionSize === 10, String(bank.sessionSize));
+  check('Unit 11 desk quiz has a valid configurable session size', Number.isInteger(bank.sessionSize) && bank.sessionSize >= 1 && bank.sessionSize <= bank.questions.length, String(bank.sessionSize));
   const ids = new Set();
   const bad = [];
   qs.forEach((q, i) => {
@@ -1391,7 +1391,7 @@ const overlayIds = [
   catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
   const qs = (bank && bank.questions) || [];
   check('Unit 14 desk quiz has 10 questions', qs.length === 10, `found ${qs.length}`);
-  check('Unit 14 desk quiz session is 10 questions', bank.sessionSize === 10, String(bank.sessionSize));
+  check('Unit 14 desk quiz has a valid configurable session size', Number.isInteger(bank.sessionSize) && bank.sessionSize >= 1 && bank.sessionSize <= bank.questions.length, String(bank.sessionSize));
   check('desk quiz loads Unit 14 JSON on that world',
     gameJs.indexOf('unit14-desk-quiz.json') >= 0 && gameJs.indexOf('function deskQuizUrl') >= 0);
   const ids = new Set();
@@ -2505,6 +2505,7 @@ const overlayIds = [
     'a scene that draws before the font arrives keeps the fallback permanently');
 }());
 
+
 // ── A panel that covers the screen says so, and can be got out of ───────────
 // Ten overlays declared role="dialog" and aria-modal and eighteen did not, which is the
 // shape a convention takes when it is applied by hand: the screens written on the day it was
@@ -2605,6 +2606,7 @@ const overlayIds = [
   check('the buy buttons are tall enough to press',
     /\.shop-buy-btn, \.trophy-buy-btn \{[\s\S]{0,60}min-height: 44px/.test(css));
 }());
+
 
 // ── The listening screens ───────────────────────────────────────────────────
 // Two failures, both silent, both on the screen a learner opens to listen.

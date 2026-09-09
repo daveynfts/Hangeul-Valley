@@ -8,19 +8,31 @@ const path = require('path');
 const vm = require('vm');
 const crypto = require('crypto');
 
-function loadRows(root) {
+function loadUnitRows(root) {
+  const file = path.join(root, 'js/vocabArtUnits.js');
+  if (!fs.existsSync(file)) return [];
+  const context = vm.createContext({});
+  vm.runInContext(fs.readFileSync(file, 'utf8'), context);
+  return vm.runInContext('UNIT_VOCAB_ART_ROWS', context);
+}
+
+function loadRows(root, options = {}) {
   const context = vm.createContext({});
   ['vocabArt.js', 'vocabArtUnit14.js', 'vocabArtMore.js'].forEach((file) => {
     vm.runInContext(fs.readFileSync(path.join(root, 'js', file), 'utf8'), context);
   });
-  return vm.runInContext('VOCAB_ART_ROWS', context);
+  const rows = vm.runInContext('VOCAB_ART_ROWS', context);
+  if (options.world && /^2b-unit-\d+$/.test(options.world)) {
+    return loadUnitRows(root).filter(row => row.worldId === options.world).concat(rows);
+  }
+  return rows;
 }
 
 function auditVocabArt(root, options = {}) {
   // Match vocabArtRow's first-match lookup exactly; one word shared across
   // worlds is not a collision between different vocabulary entries.
   const byWord = new Map();
-  loadRows(root).forEach((row) => { if (!byWord.has(row.ko)) byWord.set(row.ko, row); });
+  loadRows(root, options).forEach((row) => { if (!byWord.has(row.ko)) byWord.set(row.ko, row); });
   let words = options.words;
   if (options.world) {
     if (!/^[a-z0-9-]+$/.test(options.world)) throw new Error('Invalid world id');
@@ -83,4 +95,4 @@ if (require.main === module) {
   if (args.includes('--strict') && !report.structurallyUnique) process.exitCode = 1;
 }
 
-module.exports = { auditVocabArt, loadRows };
+module.exports = { auditVocabArt, loadRows, loadUnitRows };

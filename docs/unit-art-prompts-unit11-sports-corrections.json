@@ -1,0 +1,14 @@
+[
+  {
+    "index": 239,
+    "prompt": "Correct anatomy in attached traveler returning home pixel sprite. She must have exactly TWO arms: one raised waving on image LEFT, the other hangs down holding suitcase on image RIGHT. REMOVE the extra bent arm/hand currently gripping backpack strap near chest; restore ordinary dress torso and backpack strap there. Preserve smiling face, backpack, suitcase, doorway, pixel style and solid magenta backdrop. No extra hands or limbs. Clean hard outlines, flat #FF00FF background all gaps, no glow."
+  },
+  {
+    "index": 241,
+    "prompt": "Edit this milk bottle and glass pixel sprite. Remove the pink/purple reflections inside glass neck and drinking glass; replace those interior areas with neutral ivory and pale blue-gray glass. Keep creamy white milk, bottle, cap, composition and crisp pixel art. Keep exterior flat solid #FF00FF magenta only for background, no subject magenta/purple, no glow or gradients."
+  },
+  {
+    "index": 251,
+    "prompt": "Using attached pixel-art girl only as style and identity reference, create a new vocabulary sprite for 선수 athlete/competitor. One confident adult female track athlete standing upright in green sports tank and shorts, numbered race bib 7, medal around neck, holding a relay baton in one hand and other hand on hip. Exactly TWO arms and TWO legs, full body and shoes, no running action, no podium. Premium cozy 16-bit pixel art, warm colors, strong dark umber outline, readable at 192px tall. Uniform flat #FF00FF magenta background everywhere including gaps, no glow, gradient, shadow, text except numeral 7. Safe margin."
+  }
+]

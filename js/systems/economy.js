@@ -122,7 +122,8 @@ const TEXTBOOK_WORLD_FILES = [
   { cache: 'world-2b-15', file: 'worlds/2b-unit-15.json' },
   // Not from a textbook, but it loads the same way and the list is what attaches a world.
   { cache: 'world-topik-2', file: 'worlds/topik-2.json' }
-];
+// Keep preload and fetch fallback on the same content revision.
+].map(spec => ({ ...spec, file: spec.file + '?v=20260909-unit-art-complete' }));
 const UNIT10_LAYOUT_DEFAULT = {
   stations: [
     { id: 'desk', nameKo: '학습 책상', ox: -28, oy: 480, scale: 1, originX: 0.52, interact: 80 },
@@ -155,7 +156,7 @@ function hdStationScale(spec) {
 }
 const CROP_HD_NAMES = ['blossom', 'cabbage', 'strawberry', 'corn', 'sunflower'];
 const ART_DIR = 'sprites/';
-const ART_CACHE_KEY = 'art-topik-778-extra-12-61c50d46520f';
+const ART_CACHE_KEY = 'art-topik-778-extra-708-3189341dcabf';
 function artUrl(file) {
   return ART_DIR + file + '?v=' + encodeURIComponent(ART_CACHE_KEY);
 }

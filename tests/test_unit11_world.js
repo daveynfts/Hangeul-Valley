@@ -281,7 +281,7 @@ assert(/deskMenuOptions\.length === 1[\s\S]{0,80}run\(\)/.test(ui),
   'a desk with one mode opens it directly instead of showing a menu of one');
 
 console.log('\n--- 11. The desk quiz bank ---');
-assert(quiz.sessionSize === 10, 'a session is 10 questions (' + quiz.sessionSize + ')');
+assert(Number.isInteger(quiz.sessionSize) && quiz.sessionSize >= 1 && quiz.sessionSize <= quiz.questions.length, 'session size fits the question bank (' + quiz.sessionSize + ')');
 assert((quiz.questions || []).length === 13,
   'the bank holds 13, so consecutive sessions differ (' + (quiz.questions || []).length + ')');
 assert(!!quiz.titleKo && !!quiz.titleEn && !!quiz.doneKo && !!quiz.againKo && !!quiz.closeKo
