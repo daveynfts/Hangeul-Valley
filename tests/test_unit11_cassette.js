@@ -57,8 +57,8 @@ console.log('====================================================');
 
 // ── 1. The recordings ────────────────────────────────────────────────────────
 console.log('\n--- 1. The recordings ---');
-assert(tracks.length === 8, 'eight tracks, 12 through 19 (' + tracks.length + ')');
-assert(tracks.map((t) => t.n).join(',') === '12,13,14,15,16,17,18,19', 'in the book’s own order');
+assert(tracks.length === 10, 'ten tracks, 12 through 21 (' + tracks.length + ')');
+assert(tracks.map((t) => t.n).join(',') === '12,13,14,15,16,17,18,19,20,21', 'in the book’s own order');
 tracks.forEach((t) => {
   assert(fs.existsSync(path.join(ROOT, t.src)), 'track ' + t.n + ' mp3 is on disk');
 });
@@ -111,7 +111,7 @@ assert(items.every((i) => i.audio.voiced > 0.5), 'every clip carries at least ha
 
 // ── 3. The curated set ───────────────────────────────────────────────────────
 console.log('\n--- 3. The curated set ---');
-assert(items.length === 47, '47 sentences (' + items.length + ')');
+assert(items.length === 53, '53 sentences (' + items.length + ')');
 const ids = items.map((i) => i.id);
 assert(new Set(ids).size === ids.length && ids.every((v, k) => v === k + 1), 'ids are unique and sequential');
 const incomplete = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length || !i.audio).map((i) => i.id);
@@ -173,12 +173,16 @@ if (ffprobe) {
 // spread actually measured when the clips were cut; shifting the pairing by one puts
 // four of eight and four of nine outside them, which is what makes them worth having.
 //
-// Honest limit: tracks 12, 13, 15 and 16 hold two clips each, and on 12 and 15 the
+// Honest limit: tracks 12, 13, 15, 16 and 20 hold two clips each, and on 12 and 15 the
 // two lines are close enough in length that swapping them stays inside the band. What
 // pins those is structure rather than pace — the recording plays the announcement,
 // then A, then B, in the order the book prints, and there is no third possibility.
+// The two 발음 tracks are pinned by structure as well, and more tightly: the tape puts a
+// ~0.35s number cue and then a 1.02s gap in front of every printed item, so its groups come
+// out 1+1 on track 20 and 1+1+1+2 on track 21 — which is the page, the A/B exchange under
+// 4) included.
 const BAND = { 12: [3.0, 5.5], 13: [4.5, 5.8], 14: [3.8, 6.5], 15: [3.8, 6.8], 16: [5.0, 6.0],
-  17: [4.3, 6.6], 18: [3.6, 6.6], 19: [3.6, 6.4] };
+  17: [4.3, 6.6], 18: [3.6, 6.6], 19: [3.6, 6.4], 20: [4.0, 4.8], 21: [3.7, 5.9] };
 if (ffprobe) {
   const byTrack = {};
   items.forEach((i) => {
@@ -200,7 +204,7 @@ if (ffprobe) {
   // 12 and 15 hold two clips each whose lines are close enough in length that a swap
   // stays in band — the limit named at the top of this file. The four multi-clip tracks
   // do break, and 18 and 19 are the new ones, cut from the 듣기 지문.
-  [14, 17, 18, 19].forEach((n) => {
+  [14, 17, 18, 19, 21].forEach((n) => {
     const list = items.filter((i) => i.track === n);
     const [lo, hi] = BAND[n];
     const shifted = list.map((it, k) => syl(list[(k + 1) % list.length].ko) / it.audio.voiced);

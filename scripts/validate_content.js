@@ -1121,9 +1121,9 @@ const overlayIds = [
   check('cassette content belongs to Unit 11', c.unit === '2b-unit-11', String(c.unit));
 
   const tracks = c.tracks || [];
-  check('all eight Unit 11 tracks are listed', tracks.length === 8, `found ${tracks.length}`);
-  check('the tracks are 12 through 19',
-    tracks.map((t) => t.n).join(',') === '12,13,14,15,16,17,18,19', tracks.map((t) => t.n).join(','));
+  check('all ten Unit 11 tracks are listed', tracks.length === 10, `found ${tracks.length}`);
+  check('the tracks are 12 through 21',
+    tracks.map((t) => t.n).join(',') === '12,13,14,15,16,17,18,19,20,21', tracks.map((t) => t.n).join(','));
   const noFile = tracks.filter((t) => !fs.existsSync(path.join(ROOT, t.src || ''))).map((t) => t.n);
   check('every track has its mp3 on disk', noFile.length === 0, 'missing for track ' + noFile.join(','));
   // 18 and 19 are the listening sections: the book prints their questions but not
@@ -1136,7 +1136,7 @@ const overlayIds = [
     tracks.filter((t) => t.noteEn).map((t) => t.n).join(','));
 
   const items = (c.dictation && c.dictation.items) || [];
-  check('47 dictation sentences', items.length === 47, `found ${items.length}`);
+  check('53 dictation sentences', items.length === 53, `found ${items.length}`);
   const bad = items.filter((i) => !i.ko || !i.en || !i.why || !i.tags || !i.audio || !i.audio.src).map((i) => i.id);
   check('every sentence has text, gloss, reason, tags and a clip', bad.length === 0, 'id ' + bad.join(','));
   const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);
