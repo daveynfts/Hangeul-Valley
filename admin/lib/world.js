@@ -88,6 +88,9 @@ function validateQuiz(body) {
     const id = typeof q.id === 'number' ? q.id : i + 1;
     if (ids.has(id)) throw new Error(`Duplicate question id ${id}`);
     ids.add(id);
+    if (q.art !== undefined && (typeof q.art !== 'string' || !/^quiz\/[a-z0-9_]+\.png$/.test(q.art))) {
+      throw new Error(`Question ${i + 1} art must name a local quiz PNG`);
+    }
   });
   return {
     titleKo: body.titleKo || '학습 책상',
@@ -102,6 +105,7 @@ function validateQuiz(body) {
       id: typeof q.id === 'number' ? q.id : i + 1,
       q: String(q.q),
       a: q.a,
+      ...(q.art ? { art: q.art } : {}),
       choices: { A: String(q.choices.A), B: String(q.choices.B), C: String(q.choices.C), D: String(q.choices.D) }
     }))
   };

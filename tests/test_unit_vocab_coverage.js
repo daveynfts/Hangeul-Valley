@@ -41,6 +41,7 @@ for (const [key, u] of Object.entries(UNITS)) {
   const world = read(u.world);
   state[key] = {
     label: u.label,
+    worldId: world.id,
     words: (world.level.words || []).map((w) => ({ ...w, ko: nfc(w.ko) })),
     ko: new Set((world.level.words || []).map((w) => nfc(w.ko))),
     wb: read(u.wb)
@@ -147,21 +148,22 @@ for (const [, s] of Object.entries(state)) {
     console.log(`      ${s.label} awaiting art (${pending.length}): ${pending.map((w) => w.ko).join(', ')}`);
   }
 }
-// Counted rather than enumerated. This line used to name all seven pending headwords, back
-// when artPending meant "a word an exercise drills that the 어휘 list forgot". Unit 14 now
-// carries its whole chapter — the grammar boxes, 말하기, 듣고 말하기, 읽고 쓰기, 과제 and 발음 —
-// and none of those words have icons yet. Unit 10 has since done the same, so enumerating
-// them would be a 109-line list that grows with every unit and says nothing.
-//
-// The guarantee the list stood for is not lost, because it lives where it belongs: the
-// per-unit drawn-headword checks in validate_content.js — 54 for Unit 14, 80 for Unit 10 —
-// each paired with 'every drawn headword has a catalogued PNG'. Flipping a shipped 어휘 word
-// to artPending to dodge its picture drops that count and fails there. What is left for this
-// line is the thing a count still catches: pending growing without anyone deciding it should.
-const PENDING_TOTAL = 109;
+// The 109 chapter supplements retain their provenance when their artwork lands.
+// Clearing artPending requires a dedicated, shipped mapping for the same world.
+const SUPPLEMENT_TOTAL = 109;
 const actualPending = Object.values(state).flatMap((s) => s.words.filter((w) => w.artPending).map((w) => w.ko));
-assert(actualPending.length === pendingTotal && pendingTotal === PENDING_TOTAL,
-  `exactly ${PENDING_TOTAL} words await art (found ${actualPending.length})`);
+const unitArt = require('../scripts/audit_vocab_art').loadUnitRows(ROOT);
+let completedSupplements = 0;
+for (const s of Object.values(state)) {
+  for (const word of s.words.filter(w => w.chapterSupplement)) {
+    completedSupplements++;
+    const row = unitArt.find(r => r.ko === word.ko && r.worldId === s.worldId);
+    assert(!word.artPending && row && fs.existsSync(path.join(ROOT, 'sprites', row.folder, row.slug + '.png')),
+      `${s.label}: ${word.ko} cleared its pending flag only after Unit artwork shipped`);
+  }
+}
+assert(actualPending.length === pendingTotal && pendingTotal + completedSupplements === SUPPLEMENT_TOTAL,
+  `${SUPPLEMENT_TOTAL} chapter supplements accounted for: ${completedSupplements} illustrated, ${pendingTotal} awaiting art`);
 
 // The seven 금지 actions are a different case from the rest, and the difference is the whole
 // reason they were allowed to ship without art: they are not on the 어휘 pages at all. They

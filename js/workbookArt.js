@@ -512,6 +512,9 @@ function workbookPngHtml(file, px) {
 }
 function workbookIconSvg(key, px) {
   if (!key) return '';
+  if (typeof UNIT_WORKBOOK_ART_FILES !== 'undefined' && UNIT_WORKBOOK_ART_FILES[key]) {
+    return workbookPngHtml(UNIT_WORKBOOK_ART_FILES[key], px);
+  }
   if (/\.png$/i.test(key) || String(key).indexOf('/') !== -1) {
     return workbookPngHtml(key, px);
   }

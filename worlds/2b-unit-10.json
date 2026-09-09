@@ -154,7 +154,7 @@
         "hint": "🍙",
         "category": "음식",
         "categoryEn": "Food",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "짜장면",
@@ -162,7 +162,7 @@
         "hint": "🍜",
         "category": "음식",
         "categoryEn": "Food",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "생선회",
@@ -170,9 +170,9 @@
         "hint": "🐟",
         "category": "음식",
         "categoryEn": "Food",
-        "artPending": true,
         "example": "이 식당은 생선회가 유명한데 한번 먹어 볼래?",
-        "exampleEn": "This restaurant is famous for its raw fish — do you want to try it?"
+        "exampleEn": "This restaurant is famous for its raw fish — do you want to try it?",
+        "chapterSupplement": true
       },
       {
         "ko": "케밥",
@@ -180,9 +180,9 @@
         "hint": "🥙",
         "category": "음식",
         "categoryEn": "Food",
-        "artPending": true,
         "example": "터키는 케밥이 유명한데 드셔 보셨어요?",
-        "exampleEn": "Turkey is famous for kebab — have you ever had it?"
+        "exampleEn": "Turkey is famous for kebab — have you ever had it?",
+        "chapterSupplement": true
       },
       {
         "ko": "달다",
@@ -227,7 +227,7 @@
         "hint": "🫙",
         "category": "맛",
         "categoryEn": "Taste",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "고추장",
@@ -235,7 +235,7 @@
         "hint": "🌶️",
         "category": "맛",
         "categoryEn": "Taste",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "식초",
@@ -243,7 +243,7 @@
         "hint": "🍶",
         "category": "맛",
         "categoryEn": "Taste",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "맛",
@@ -303,9 +303,9 @@
         "hint": "✅",
         "category": "식당 평가",
         "categoryEn": "Restaurant reviews",
-        "artPending": true,
         "example": "원기둥을 선택하는 가장 큰 이유는 용기의 제작 비용을 줄이기 위해서이다.",
-        "exampleEn": "The main reason for choosing a cylinder is to reduce the cost of making the container."
+        "exampleEn": "The main reason for choosing a cylinder is to reduce the cost of making the container.",
+        "chapterSupplement": true
       },
       {
         "ko": "그중에서",
@@ -313,9 +313,9 @@
         "hint": "👉",
         "category": "식당 평가",
         "categoryEn": "Restaurant reviews",
-        "artPending": true,
         "example": "그중에서 떡갈비가 제 입에 제일 잘 맞았습니다.",
-        "exampleEn": "Of them all, the tteokgalbi suited my taste best."
+        "exampleEn": "Of them all, the tteokgalbi suited my taste best.",
+        "chapterSupplement": true
       },
       {
         "ko": "한정식",
@@ -580,7 +580,7 @@
         "hint": "🍵",
         "category": "주문",
         "categoryEn": "Ordering",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "녹차",
@@ -588,7 +588,7 @@
         "hint": "🍵",
         "category": "주문",
         "categoryEn": "Ordering",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "추천",
@@ -596,9 +596,9 @@
         "hint": "👍",
         "category": "주문",
         "categoryEn": "Ordering",
-        "artPending": true,
         "example": "이 글은 좋은 식당을 추천하는 글입니다.",
-        "exampleEn": "This piece is a recommendation for a good restaurant."
+        "exampleEn": "This piece is a recommendation for a good restaurant.",
+        "chapterSupplement": true
       },
       {
         "ko": "이상",
@@ -606,9 +606,9 @@
         "hint": "➕",
         "category": "주문",
         "categoryEn": "Ordering",
-        "artPending": true,
         "example": "이용 후기가 여행 상품의 다양성보다 중요하다는 응답이 두 배 이상 많다.",
-        "exampleEn": "More than twice as many respondents said that user reviews matter more than the range of travel products."
+        "exampleEn": "More than twice as many respondents said that user reviews matter more than the range of travel products.",
+        "chapterSupplement": true
       },
       {
         "ko": "음식값",
@@ -616,9 +616,9 @@
         "hint": "💰",
         "category": "주문",
         "categoryEn": "Ordering",
-        "artPending": true,
         "example": "음식값이 비싸지 않습니다.",
-        "exampleEn": "The food is not expensive."
+        "exampleEn": "The food is not expensive.",
+        "chapterSupplement": true
       },
       {
         "ko": "꼬꼬치킨",
@@ -626,7 +626,7 @@
         "hint": "🍗",
         "category": "주문",
         "categoryEn": "Ordering",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "엄마손식당",
@@ -634,7 +634,7 @@
         "hint": "🏠",
         "category": "주문",
         "categoryEn": "Ordering",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "동갑",
@@ -819,7 +819,7 @@
         "hint": "🤝",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "전화를 걸다",
@@ -827,7 +827,7 @@
         "hint": "📞",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "서로",
@@ -835,7 +835,7 @@
         "hint": "🔁",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "지내다",
@@ -843,9 +843,9 @@
         "hint": "🗓️",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "artPending": true,
         "example": "네, 안녕하세요? 지훈 씨, 그동안 잘 지냈어요?",
-        "exampleEn": "Hello, Jihun. How have you been keeping?"
+        "exampleEn": "Hello, Jihun. How have you been keeping?",
+        "chapterSupplement": true
       },
       {
         "ko": "친하다",
@@ -853,9 +853,9 @@
         "hint": "💛",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "artPending": true,
         "example": "친구가 \"난 저 선배랑 친해서 반말로 이야기해.\"라고 말했습니다.",
-        "exampleEn": "My friend said, \"I am close to that senior, so I speak banmal with him.\""
+        "exampleEn": "My friend said, \"I am close to that senior, so I speak banmal with him.\"",
+        "chapterSupplement": true
       },
       {
         "ko": "빨리",
@@ -863,7 +863,7 @@
         "hint": "🏃",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "늦다",
@@ -871,9 +871,9 @@
         "hint": "⏰",
         "category": "회화",
         "categoryEn": "Dialogue",
-        "artPending": true,
         "example": "내일은 늦지 마세요.",
-        "exampleEn": "Please don't be late tomorrow."
+        "exampleEn": "Please don't be late tomorrow.",
+        "chapterSupplement": true
       },
       {
         "ko": "키가 크다",
@@ -881,7 +881,7 @@
         "hint": "📏",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "쇼핑하다",
@@ -889,7 +889,7 @@
         "hint": "🛍️",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "산에 가다",
@@ -897,7 +897,7 @@
         "hint": "⛰️",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "열심히",
@@ -905,9 +905,9 @@
         "hint": "💪",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "artPending": true,
         "example": "김 선수가 펜싱 대표팀에서 메달을 목표로 열심히 훈련했다.",
-        "exampleEn": "Kim trained hard with the national fencing team, aiming for a medal."
+        "exampleEn": "Kim trained hard with the national fencing team, aiming for a medal.",
+        "chapterSupplement": true
       },
       {
         "ko": "자유 여행",
@@ -915,7 +915,7 @@
         "hint": "🎒",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "패키지여행",
@@ -923,7 +923,7 @@
         "hint": "🚌",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "고향",
@@ -931,9 +931,9 @@
         "hint": "🏡",
         "category": "문법과 표현",
         "categoryEn": "Grammar & expressions",
-        "artPending": true,
         "example": "나나 씨는 샤오밍 씨와 고향 친구예요?",
-        "exampleEn": "Nana, are you and Xiaoming friends from back home?"
+        "exampleEn": "Nana, are you and Xiaoming friends from back home?",
+        "chapterSupplement": true
       },
       {
         "ko": "축제",
@@ -941,9 +941,9 @@
         "hint": "🎪",
         "category": "과제",
         "categoryEn": "Task · the food festival",
-        "artPending": true,
         "example": "오늘 점심은 전통 음식 축제에 가서 먹을까?",
-        "exampleEn": "Shall we go to the traditional food festival for lunch today?"
+        "exampleEn": "Shall we go to the traditional food festival for lunch today?",
+        "chapterSupplement": true
       },
       {
         "ko": "주인",
@@ -951,9 +951,9 @@
         "hint": "🧑‍🍳",
         "category": "과제",
         "categoryEn": "Task · the food festival",
-        "artPending": true,
         "example": "집주인을 만났을 때를 '주인님'이라고 불러서 사람들이 웃었어.",
-        "exampleEn": "When I met the landlord I addressed him as 'my lord', and everyone laughed."
+        "exampleEn": "When I met the landlord I addressed him as 'my lord', and everyone laughed.",
+        "chapterSupplement": true
       },
       {
         "ko": "터키",
@@ -961,9 +961,9 @@
         "hint": "🇹🇷",
         "category": "과제",
         "categoryEn": "Task · the food festival",
-        "artPending": true,
         "example": "터키 식당에 한번 가 보자.",
-        "exampleEn": "Let's try going to a Turkish restaurant."
+        "exampleEn": "Let's try going to a Turkish restaurant.",
+        "chapterSupplement": true
       },
       {
         "ko": "전통 음식",
@@ -971,9 +971,9 @@
         "hint": "🍢",
         "category": "과제",
         "categoryEn": "Task · the food festival",
-        "artPending": true,
         "example": "오늘 점심은 전통 음식 축제에 가서 먹을까?",
-        "exampleEn": "Shall we go to the traditional food festival for lunch today?"
+        "exampleEn": "Shall we go to the traditional food festival for lunch today?",
+        "chapterSupplement": true
       },
       {
         "ko": "메뉴를 만들다",
@@ -981,7 +981,7 @@
         "hint": "📋",
         "category": "과제",
         "categoryEn": "Task · the food festival",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "의문문",
@@ -989,9 +989,9 @@
         "hint": "❓",
         "category": "발음",
         "categoryEn": "Pronunciation · question intonation",
-        "artPending": true,
         "example": "요즘은 의문사가 있는 의문문도 문장의 끝을 약간 올려서 말하는 사람이 많습니다.",
-        "exampleEn": "These days many people raise the end of the sentence slightly even in questions that already contain a question word."
+        "exampleEn": "These days many people raise the end of the sentence slightly even in questions that already contain a question word.",
+        "chapterSupplement": true
       },
       {
         "ko": "억양",
@@ -999,7 +999,7 @@
         "hint": "🎵",
         "category": "발음",
         "categoryEn": "Pronunciation · question intonation",
-        "artPending": true
+        "chapterSupplement": true
       },
       {
         "ko": "영화를 보다",
@@ -1007,9 +1007,9 @@
         "hint": "🎬",
         "category": "발음",
         "categoryEn": "Pronunciation · question intonation",
-        "artPending": true,
         "example": "이 영화를 처음 봐요?",
-        "exampleEn": "Is this the first time you have seen this film?"
+        "exampleEn": "Is this the first time you have seen this film?",
+        "chapterSupplement": true
       }
     ]
   },

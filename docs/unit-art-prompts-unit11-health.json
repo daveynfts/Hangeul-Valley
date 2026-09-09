@@ -1,0 +1,325 @@
+{
+  "tool": "built-in Imagegen, shared parent style",
+  "prompts": [
+    {
+      "index": 150,
+      "ko": "잠을 잘 못 자다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 잠을 잘 못 자다: Restless person sitting awake in a small bed, rumpled blanket and a bedside clock showing late night, sleepy worried eyes and a small crescent moon outside a tiny window. No sleeping smile. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 151,
+      "ko": "열이 나다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 열이 나다: Flushed young adult holding a thermometer while a cool cloth rests on forehead, little heat waves above head; no text or numbers on thermometer. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 152,
+      "ko": "목이 붓다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 목이 붓다: Young adult touching the front of the throat with a pained swallowing expression, small red soreness marks at neck, a cup of warm water nearby. Do not show a cough. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 153,
+      "ko": "기침이 나다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 기침이 나다: Young adult coughing into bent elbow, eyes squeezed, two short cough motion marks from mouth. Clear hygienic elbow-cough pose, exactly two arms. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 154,
+      "ko": "감기에 걸리다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 감기에 걸리다: Young adult bundled in scarf and cardigan, runny nose being dabbed with tissue, nearby tissue box, visibly under the weather. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 155,
+      "ko": "머리가 아프다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 머리가 아프다: Young adult pressing one temple, furrowed eyebrows, red pain zigzags at temple, other arm resting at side. No orbiting stars so distinct from dizziness. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 156,
+      "ko": "배가 아프다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 배가 아프다: Young adult seated hunched, both hands pressing belly with red cramp zigzags centered on belly, no bathroom door or food. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 157,
+      "ko": "눈이 아프다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 눈이 아프다: Young adult with irritated reddish watery eyes, gently touching below one eye, worried expression, clean non-graphic close-up. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 158,
+      "ko": "이가 아프다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 이가 아프다: Young adult holding swollen cheek with pained expression, a small cutaway-style tooth pictogram with a red pain spark above shoulder. No blood. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 159,
+      "ko": "피곤하다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 피곤하다: Sleepy tired young adult yawning and stretching after work, shoulder bag on stool beside them, drooping eyelids. Full body. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 160,
+      "ko": "병원",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 병원: Welcoming small hospital building with two floors, clear entrance, ambulance parked beside it and a green medical plus sign; warm brick and timber accents, no lettering. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 161,
+      "ko": "의원",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 의원: Small neighborhood single-story medical clinic storefront, one doctor visible in doorway and simple green plus sign, compact waiting bench, no ambulance, no text. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 162,
+      "ko": "내과",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 내과: Friendly internal-medicine doctor listening with a stethoscope to a seated clothed patient's upper chest; compact examination scene, exactly two people. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 163,
+      "ko": "안과",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 안과: Eye-clinic doctor using a slit-lamp instrument to examine a seated patient's eye, large eye pictogram above as a specialty cue, no letters. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 164,
+      "ko": "치과",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 치과: Dentist with a dental mirror next to patient reclining in dental chair, small tooth sign, compact dental examination equipment, non-graphic. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 165,
+      "ko": "피부과",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 피부과: Dermatologist looking through a magnifier at small red spots on patient's forearm, both calm, small lotion bottle on tray; no wounds. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 166,
+      "ko": "정형외과",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 정형외과: Orthopedic doctor inspecting a patient's bandaged lower leg, crutch nearby and a simple bone image on a small x-ray viewer; no text. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 167,
+      "ko": "이비인후과",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 이비인후과: ENT doctor gently examining a seated patient's ear using an otoscope, large simple ear pictogram behind doctor; no text. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 168,
+      "ko": "의사",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 의사: Friendly doctor in white coat with stethoscope and medical clipboard, full character, clearly a clinician, no patient or building. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 169,
+      "ko": "환자",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 환자: Seated patient in clean striped hospital gown, wrist band and neatly wrapped forearm, concerned but calm; no clinician. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 170,
+      "ko": "진료를 받다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 진료를 받다: Patient seated on examination bench actively receiving a checkup from a doctor taking blood pressure with cuff and gauge; two clear people. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 171,
+      "ko": "처방",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 처방: Doctor's hand giving a signed prescription sheet to a patient hand, simple illustrated pill and timing pictograms on paper, tiny pen beside it. No readable written instructions or letters. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 172,
+      "ko": "주의사항",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 주의사항: Pharmacist pointing out a triangular caution pictogram on a medicine information leaflet to a listening adult patient; no readable text. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 173,
+      "ko": "설명하다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 설명하다: One teacher pointing step-by-step to a simple plant-growth diagram on a small board while one student listens attentively; two people, no writing. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 174,
+      "ko": "역할극",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 역할극: Two students practicing doctor-and-patient roles, one wearing a costume white coat with toy stethoscope, one seated pretending to be patient, simple theater curtains on sides and a pair of small stage masks; compact. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 175,
+      "ko": "약",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 약: Neat medicine still life: amber medicine bottle with a plain green medical plus label, blister pack with round tablets, small measuring cup. No brand or dosage. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 176,
+      "ko": "약국",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 약국: Cozy neighborhood pharmacy storefront with green mortar-and-pestle sign and visible medicine shelves, inviting wooden door, no writing or red cross. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 177,
+      "ko": "약사",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 약사: Friendly pharmacist in white coat behind small wooden counter holding a medicine packet and pointing to a simple pill pictogram, mortar and pestle nearby. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 178,
+      "ko": "감기약",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 감기약: A cold-medicine packet and small amber bottle together with a clear illustration of a scarf-wearing face using a tissue on packet. No brand, written claims or dosage. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 179,
+      "ko": "두통약",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 두통약: A medicine blister pack beside an upright package bearing a clear head silhouette with small red ache marks at temple, no lettering. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 180,
+      "ko": "멀미약",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 멀미약: A medicine packet bearing a bus and winding-road pictogram, small blister pack next to it and a folded paper sick bag; no text. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 181,
+      "ko": "소화제",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 소화제: Digestive medicine packet with a simple recognizable stomach pictogram, small tablet blister pack and glass of water; no text or dosage. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 182,
+      "ko": "해열제",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 해열제: Fever-reducer bottle and tablet packet bearing a thermometer pictogram with warm red upper column and cooling blue arrow downward; no numbers or text. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 183,
+      "ko": "안약",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 안약: An eye-drop bottle with pointed nozzle, one clear droplet at tip, cap beside bottle and a large clean eye pictogram on label. No text. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 184,
+      "ko": "파스",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 파스: A large rectangular medicated adhesive patch with one corner of backing peeled away, sleeve packet beside it with a simple shoulder pictogram. No lettering. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 185,
+      "ko": "연고",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 연고: A small ointment tube with cap removed, tiny dab of white cream at nozzle and a neatly folded gauze square; no text. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 186,
+      "ko": "먹다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 먹다: An adult taking one small tablet by mouth with one hand, holding glass of water in other hand. Medicine blister packet nearby. Clear exactly two hands, no dosage text. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 187,
+      "ko": "넣다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 넣다: An adult tilting head back and carefully putting one eye drop into an open eye with bottle held above it, free hand gently lowers eyelid; close-up and exactly two hands. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 188,
+      "ko": "붙이다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 붙이다: An adult applying a rectangular medicated patch to own exposed forearm, backing paper partly peeled, exactly two arms; no wounds. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    },
+    {
+      "index": 189,
+      "ko": "바르다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Create a new sprite in the reference family's premium cozy 16-bit pixel-art style, warm colors and crisp dark umber outlines. Replace the reference's entire action and props. Korean headword 바르다: An adult using a fingertip to spread a small dab of white ointment onto intact forearm skin, open ointment tube on small tray. No injury or dosing instructions. One compact centered isolated illustration, strong readable silhouette at 192px tall. Deliberate chunky pixel clusters, not noisy photorealism. BACKGROUND MUST BE UNIFORM SOLID MAGENTA #FF00FF for chroma key, no checkerboard, black or white background, no gradient, floor or cast shadow. No extra limbs. Leave safe margin on all sides. No writing, letters, watermark or decorative book."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "corrections": [
+    {
+      "index": 71,
+      "prompt": "Redesign this single educational sprite for 이상 meaning 'at least / or more'. Keep the lunchbox style but change the composition into a compact square icon: exactly THREE lunchboxes clustered in the bottom half. Above them one large readable cream speech-bubble badge containing ONLY the mathematical text '≥3' (greater-than-or-equal-to symbol and numeral three). Remove the existing arrow, bracket and two extra boxes completely. This must unambiguously mean THREE OR MORE, not three becoming two. Crisp cozy pixel art and dark umber outlines. Flat solid #FF00FF magenta technical background, no gradient, no shadows, safe margins.",
+      "outputHint": "Generated images are saved to C:\\Users\\NCPC\\.codex\\generated_images\\01a058ad-0267-7370-958f-344df576b58e as C:\\Users\\NCPC\\.codex\\generated_images\\01a058ad-0267-7370-958f-344df576b58e\\exec-7e139508-6e54-47e1-93a7-0228b3b90fb9.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "index": 123,
+      "prompt": "Fix only the background of this sprite. Preserve the two vessels, beef marrow bones, milky soup, ladle, steam and pixel-art composition. Replace ALL white and gray checkerboard background with uniform pure flat MAGENTA #FF00FF, including holes and gaps outside objects. No checkerboard remains anywhere. Steam must be opaque cream pixels with crisp edge, not blended into background. Do not add magenta to the bowls, broth or bones. No shadow, no gradient. Give 30 pixels clear margin on every side. This is a chroma-key game sprite.",
+      "outputHint": "Generated images are saved to C:\\Users\\NCPC\\.codex\\generated_images\\01a058ad-0267-7370-958f-344df576b58e as C:\\Users\\NCPC\\.codex\\generated_images\\01a058ad-0267-7370-958f-344df576b58e\\exec-3908767b-3fb4-4c0e-a943-2deabd56dac5.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    },
+    {
+      "index": 145,
+      "prompt": "Recompose the reference character for Korean 어지럽다 (dizzy). Use the same cozy pixel-art young woman and green dress, but remove all nausea symbols. She sits securely on a plain wooden stool, BOTH hands pressing her two temples, eyes unfocused and a ring of three stars circling above her head. EXACTLY TWO ARMS and TWO HANDS, each arm connected visibly from shoulder to wrist. Full figure with two feet, no additional arms or floating hands. Compact clear silhouette with generous margin, warm umber outlines, premium deliberate chunky pixel clusters. Keep the background uniform solid MAGENTA #FF00FF, with no checkerboard, gradient, shadow, floor or lettering.",
+      "outputHint": "Generated images are saved to C:\\Users\\NCPC\\.codex\\generated_images\\01a058ad-0267-7370-958f-344df576b58e as C:\\Users\\NCPC\\.codex\\generated_images\\01a058ad-0267-7370-958f-344df576b58e\\exec-d39b15fa-1504-4f5e-89cf-6582877067ef.png by default.\nIf you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.\nThe generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link."
+    }
+  ]
+}
