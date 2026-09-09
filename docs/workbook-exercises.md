@@ -419,6 +419,17 @@ missing from that return object is deleted by any save through the Workbooks tab
 drop the only record that a bank's gaps were deliberate. They are on the list now
 and `tests/test_unit13_workbook.js` runs a save round-trip to keep them there.
 
+A third, smaller still. `hvIsTranslatable` in `js/i18n.js` treats an `en` value with
+more Hangul than Latin letters as a Korean string rather than English prose — which is
+right for a category name like `스마트폰, 인터넷, SNS` and wrong for a gloss. Unit 13's
+발음 규칙 rows gloss the sound, and two of the five were written `예약하세요 is said
+[예야카세요].` — eleven Hangul against six Latin letters, so they were never offered for
+translation and would have shipped with `is said` in English on a Vietnamese screen, at
+100% coverage, for ever. Nothing catches this; the fix is to notice that the row count
+and the `en` count do not match. Writing the gloss so the English carries its weight —
+`예약하세요, please make a reservation, is pronounced [예야카세요].` — puts it back in the
+catalogue and is a better gloss anyway.
+
 **Publishing.** `vercel.json` rewrites `/worlds/*` and `/audio/*` to the CDN, so
 on the deployed site the checked-in copy is never read — only the uploaded one
 is. A file missing from the upload batch does not fall back to the repo version,
@@ -675,9 +686,13 @@ chosen so that the steps which can invalidate earlier work come first.
    maps `wordKo` to a path, so the icon for a word is a lookup. Unit 10 needed no
    new art at all. Draw a 16×16 only when nothing fits.
 6. **Wire it**: a line in `workbookUrl()` (or `textbookUrl()`), an entry in
-   `WORKBOOKS`, and the unit's own test suite. Upload and TTS harvest both find the
-   file by name, so there is nothing to list — but nothing catches a missing
-   `workbookUrl()` line either, so do the three together.
+   `WORKBOOKS`, an entry in `HV_CATALOG_SOURCES`, and the unit's own test suite —
+   plus, for a 교과서 bank, a row in the `BANKS` list inside `checkTextbookBanks` in
+   `scripts/validate_content.js`, which is where the exercise and row counts are spelled
+   out per unit. Upload and TTS harvest find the file by name and need no line, but
+   nothing catches a missing `workbookUrl()` line, so do them together. The `BANKS` row
+   is what makes the shared checks run at all: a bank left off it is validated by its own
+   suite and by nothing else.
 7. **Run the suite, then play it wrong on purpose.** The tests check the key, the
    art, the clips, the pace, and now that every recurring wrong answer is spoken
    to. What they cannot check is whether an explanation reads as help. Pick the
@@ -778,6 +793,128 @@ stands in for Unit 14's clip-text comparison: `말하기 1 · track 04` over an 
 `trk02` sends the learner to the wrong page of the book and nothing on screen shows it.
 `validate_content.js` and the test both require the number in the label to match the number
 in the filename, and both require the track to be one the cassette actually carries.
+
+### Unit 13, the whole chapter rather than what was left
+
+`worlds/unit13-textbook.json`: sixteen exercises, seventy-eight rows, ids prefixed
+`u13sgk-`. Units 14 and 10 both took what the 익힘책 had not, and the result skips 어휘
+and 문법과 표현 entirely. This one covers all eleven headed sections of the chapter,
+including both, and the reason is worth stating: the 익힘책 for this chapter has
+seventeen exercises on the same four grammar points, so "what is left" would have been
+nothing. Overlap had to be managed rather than avoided.
+
+What managing it looks like:
+
+- **The 어휘 pages the two books have are different pages.** The 익힘책 drills 생활비 —
+  집세, 교통비, 식비 and the four 요금 words. The 교과서 drills the six kinds of place to
+  live and the six rooms of a flat, and the 익힘책 has neither. Where the sets would have
+  met, they do not.
+- **The four grammar points each get a page here as well, and the sentences are the
+  book's own.** Every row is a 대화, a 예문 or a printed 보기 with the ending taken out,
+  so the 교과서 rows are the sentences the chapter itself uses and the 익힘책 rows are its
+  own exercises. The gapped-line check is what keeps that honest, and it fired once:
+  `이 옷이 {} 모르겠어요` is 문법 1 연습 1 row 3 of the 익힘책 and was the fourth 예문
+  here. It was replaced by the book's other 예문, and the `grammar` note now says where
+  the missing one is drilled instead — which a learner comparing the two books will want
+  to know.
+- **An open question is still an exercise if the words are the point.** 어휘 1 is six
+  photographs under 여러분은 지금 어떤 집에 살고 있습니까?, which cannot be marked. The
+  six words can be: each row describes one and the other five stand as the wrong answers.
+  The distinction is never the size of the building, so the descriptions say what actually
+  separates them — 주택 has a yard, 빌라 is four or five floors, 오피스텔 is a building you
+  may work in.
+- **A floor plan cannot be drawn as a row of buttons.** 어휘 2 is one cutaway plan with
+  six arrows into six boxes. Each arrow became a row described by the furniture the
+  drawing puts in it — the shower and basin, the hob and sink, the sofa, the railing, the
+  bed, the step where the shoes come off — in the order the arrows leave the plan. Same
+  move as Unit 11's conjugation table, for the same reason.
+- **A 모두 고르세요 question has no single answer, so turn it round.** 듣기 1 asks which
+  of six statements about the woman's flat are true, and three of them are. Asking which
+  of three is *false* keeps the book's own options and the recording still settles it.
+  Question 2 is a single choice already and is used as printed.
+
+The 발음 page is the one to copy. This chapter's rule is 유기음화 — a 받침 [ㄱ ㄷ ㅂ]
+and a following ㅎ fuse into [ㅋ ㅌ ㅍ] — and it has a spelling consequence in both
+directions, so the section became two exercises that face opposite ways:
+
+- **규칙** prints the spelling and asks for the sound: `축하[{}]` → 추카. On every row
+  the spelling itself is one of the wrong buttons, because the whole point is that what
+  is written is not what is said.
+- **연습** plays the tape and asks for the spelling: [바파고] → 밥하고. That is the
+  direction that costs marks in a dictation, and it is the direction the book's
+  listen-and-repeat cannot mark.
+
+Both are checked from the rule rather than from the key, the way Unit 10's intonation
+page is. `test_unit13_textbook.js` section 5 decomposes each keyed answer into jamo and
+asserts that 규칙 keys a form carrying ㅋ, ㅌ or ㅍ and no surviving 받침-plus-ㅎ, and that
+연습 keys the only choice that still has both. An exercise that can contradict its own
+rule is the failure worth a test; neither of these can.
+
+Two counts worth knowing before copying the shape. Thirty rows name a recording and
+twenty-two of them a single cut line from `worlds/unit13-cassette.json`, which is what
+makes the clip-text comparison possible on most of the bank rather than a sixth of it —
+the sixty dictation clips were already there. And 생활비 is the one word two rows lean on
+that is *not* a Unit 13 headword: it belongs to Unit 11's farm, with this chapter's own
+track 38 line as its example sentence, and `validate_content.js` asserts the two units
+share no headword. The test pins that as deliberate, so "a row uses a word with nowhere
+to learn it" stays a false alarm instead of becoming one.
+
+---
+
+### Unit 11, and the overlap the gapped-line check cannot see
+
+`worlds/unit11-textbook.json`: fourteen exercises, sixty-three rows, ids prefixed
+`u11sgk-`. Ten of the chapter's eleven headed sections; 과제 is the one left out, and it
+is left out because it has no key of any kind — see below.
+
+The thing worth carrying forward is a **third** comparison between the two banks. Unit 13
+showed that a shared *gapped sentence* is a collision. Unit 11 shows that two banks can
+reach the same **answer** by two different sentences, and the gapped-line check sees
+nothing:
+
+- 익힘책 `u11-grammar-3-1` row 4: `토요일에는 사람이 많으니까 다른 날 {}?` → 보는 게 어때요
+- 교과서 `u11sgk-gram-3` row 1 as first written: `치과에 가 {}?` → 보는 게 어때요
+
+Different sentences, different gaps, same button. A learner who presses 보는 게 어때요 twice
+has done one exercise. The builder now compares answer texts as well as gapped lines, and
+`test_unit11_textbook.js` section 3 keeps it — the fix was to move the gap so the answer is
+가 보는 게 어때요, which the 익힘책 does not have.
+
+One overlap survives, and the difference between a decision and a gap is that it is named:
+the 자기 평가 answer key printed at the foot of p.66 gives 병원에 가는 게 어때요, and the
+익힘책 uses that exact sentence for 문형 연습 3. The book chose it, so it stays — in an
+allow-list of one, with a second assertion that the overlap is *still real*, so the
+allowance cannot outlive the reason for it.
+
+Three more things this unit settled:
+
+- **Sometimes the right move is to leave a whole section out.** 과제 is a role-play from the
+  activity sheets at the back: the 환자 sheet (printed p.226) is fifteen pictures with no
+  words at all, and the 의사 sheet (p.227) is twelve prescription cards — a department, a
+  dosage in words, a 주의사항 picture marked ○ or ✗. The two sets are drawn at random and
+  the book prints no pairing between them, so there is nothing a screen could mark.
+  Inventing a pairing would have been inventing a key. 어휘 2 and 어휘 3 are absent for the
+  opposite reason — the 익힘책 has all six hospital departments and the whole medicine set
+  with its four verbs — and `omittedNote` says which and why for all three.
+- **A 발음 rule with two steps can still be checked from the rule.** Unit 11's is 종성 규칙
+  후 연음: the 받침 is pronounced [ㄱ], [ㄷ] or [ㅂ] *first*, and only then crosses to the
+  vowel after it — so 잎 위 is [이뷔] and not [이퓌]. That is computable. Decompose each
+  keyed answer into jamo and look for a stop 받침 immediately before a syllable whose
+  initial is ㅇ: the spelling has that boundary and the pronunciation cannot, because the
+  boundary is exactly what the liaison consumed. Strip spaces first — the whole point is
+  that the rule crosses a word boundary. 규칙 keys a form without the boundary and offers
+  the spelling as a wrong button; 연습 goes the other way and keys the spelling, with
+  exactly one wrong button being the sound written down. Both directions are asserted, and
+  injecting a swapped key breaks both.
+- **A missing tape can be the reason a page does not exist yet.** Unit 11's cassette stopped
+  at track 19 and the 발음 page plays 20 and 21, so 발음 연습 was unbuildable until those
+  two were cut. Nothing had flagged it: the cassette's own dictation filter already named
+  종성 규칙 후 연음 as the unit's 발음 point, so the page had been read and the recordings
+  simply never made. Before starting a 교과서, check the cassette covers every track the
+  chapter's pages name — `worlds/<unit>-cassette.json` against the track numbers printed
+  beside each 준비 and 연습.
+
+---
 
 ---
 

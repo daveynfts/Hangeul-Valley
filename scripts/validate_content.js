@@ -1121,9 +1121,9 @@ const overlayIds = [
   check('cassette content belongs to Unit 11', c.unit === '2b-unit-11', String(c.unit));
 
   const tracks = c.tracks || [];
-  check('all eight Unit 11 tracks are listed', tracks.length === 8, `found ${tracks.length}`);
-  check('the tracks are 12 through 19',
-    tracks.map((t) => t.n).join(',') === '12,13,14,15,16,17,18,19', tracks.map((t) => t.n).join(','));
+  check('all ten Unit 11 tracks are listed', tracks.length === 10, `found ${tracks.length}`);
+  check('the tracks are 12 through 21',
+    tracks.map((t) => t.n).join(',') === '12,13,14,15,16,17,18,19,20,21', tracks.map((t) => t.n).join(','));
   const noFile = tracks.filter((t) => !fs.existsSync(path.join(ROOT, t.src || ''))).map((t) => t.n);
   check('every track has its mp3 on disk', noFile.length === 0, 'missing for track ' + noFile.join(','));
   // 18 and 19 are the listening sections: the book prints their questions but not
@@ -1136,7 +1136,7 @@ const overlayIds = [
     tracks.filter((t) => t.noteEn).map((t) => t.n).join(','));
 
   const items = (c.dictation && c.dictation.items) || [];
-  check('47 dictation sentences', items.length === 47, `found ${items.length}`);
+  check('53 dictation sentences', items.length === 53, `found ${items.length}`);
   const bad = items.filter((i) => !i.ko || !i.en || !i.why || !i.tags || !i.audio || !i.audio.src).map((i) => i.id);
   check('every sentence has text, gloss, reason, tags and a clip', bad.length === 0, 'id ' + bad.join(','));
   const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);
@@ -1414,7 +1414,7 @@ const overlayIds = [
   check('Unit 14 desk quiz items are well-formed with art', bad.length === 0, bad.slice(0, 8).join(', '));
 }());
 
-// ── 2B 교과서 pages (Units 10 and 14) ───────────────────────────────
+// ── 2B 교과서 pages (Units 10, 13 and 14) ───────────────────────────
 // The study desk carries two sets of pages from two different books: 연습 문제 is the
 // 익힘책, and this is the 교과서's own 말하기 / 읽기 / 과제 / 문화 산책 / 발음 / 자기 평가.
 // Same file format, same renderer, one desk — which is precisely why the two have to be
@@ -1422,12 +1422,17 @@ const overlayIds = [
 // sentence unless something says they may not, and a learner who meets 먹으면 안 돼요 twice
 // under two names has been given one exercise and charged for two.
 //
-// Both units run the same checks. Unit 14 came first and Unit 10 followed; the counts are
-// the only thing that differs between them, so they are the only thing spelled out per unit.
+// Every unit here runs the same checks. Unit 14 came first, then Unit 10, then Unit 13; the
+// counts are the only thing that differs between them, so they are the only thing spelled out
+// per unit. Unit 15 is not on the list: its bank calls itself 교과서 페이지 rather than 교과서 and
+// has its own block further up, so adding it here would fail on the label rather than on anything
+// that matters.
 (function checkTextbookBanks() {
   const BANKS = [
     { unit: 'unit14', label: 'Unit 14', world: 'isUnit14World', exs: 9, rows: 41 },
-    { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 }
+    { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 },
+    { unit: 'unit13', label: 'Unit 13', world: 'isUnit13World', exs: 16, rows: 78 },
+    { unit: 'unit11', label: 'Unit 11', world: 'isUnit11World', exs: 14, rows: 63 }
   ];
   const TYPES = ['fill', 'match', 'dialogue', 'experience', 'build'];
   const gameJs = readGameSource();

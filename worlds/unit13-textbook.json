@@ -1,0 +1,2691 @@
+{
+  "id": "unit13-textbook",
+  "source": "Seoul National University Korean 2B (교과서), Unit 13 · 주변이 조용해서 살기 좋아요",
+  "titleKo": "교과서",
+  "titleEn": "Textbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "The chapter's own pages — one exercise at a time.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "holdGloss": false,
+  "artNote": "The book’s own drawings and photographs are not here. Where a row is about a word the game already has an icon for the row points at that icon — 기숙사, 아파트, 주택, 원룸, 화장실, 부엌, 거실, 베란다, 현관 and the rest come out of sprites/catalog.json — and a row with nothing that fits shows no picture at all. Two exercises want the book’s pictures most: 어휘 연습 2 is one cutaway floor plan with six arrows, and each arrow is a row here described by the furniture in it, and 문법 1 on page 94 is six situation drawings that the rows replace with the printed 예문.",
+  "omittedNote": "Nothing that has a key is left out, and everything left out has none. The open pages are 어휘 1 and 말하기 1 연습 2 (여러분은 지금 어떤 집에 살고 있습니까?), 말하기 2 연습 1 and 문법 1 연습 1 and 문법 2 연습 1 in 문법과 표현 2, the 쓰기 box on page 105, the whole of 과제 except the model advert and the two printed exchanges, 생각 나누기 on page 108, and the tick-box word list in 자기 평가 1. Where a page prints a 보기 or a 예문 the row uses that; where it prints only a prompt there is nothing a screen could mark.",
+  "exercises": [
+    {
+      "id": "u13sgk-vocab-1",
+      "type": "build",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 1",
+      "icon": "🏘️",
+      "blurbEn": "Six kinds of place to live, and what actually tells them apart.",
+      "instructionKo": "설명을 읽고 알맞은 집을 고르세요.",
+      "instructionEn": "Read each description and choose the kind of place it names.",
+      "noteEn": "The page prints six photographs under one open question — 여러분은 지금 어떤 집에 살고 있습니까? — and an open question cannot be marked. The six words are the whole point of it, so each row here describes one of them and the other five stand as the wrong answers. The distinction is never the size of the building: 주택 is one family on its own, 아파트 and 빌라 are both shared blocks and differ only in how tall, and 오피스텔 is a building you may either work in or live in.",
+      "pattern": "기숙사 · 아파트 · 주택 · 빌라 · 원룸 · 오피스텔",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/dormitory.png",
+          "phraseKo": "학교 안, 방값이 싸다",
+          "lines": [
+            {
+              "ko": "학교 안에 있고 방값이 싸서 유학생들이 많이 사는 집은 {}입니다."
+            }
+          ],
+          "answer": "gisuksa",
+          "choices": [
+            {
+              "id": "gisuksa",
+              "ko": "기숙사"
+            },
+            {
+              "id": "opiseutel",
+              "ko": "오피스텔"
+            },
+            {
+              "id": "billa",
+              "ko": "빌라"
+            }
+          ],
+          "en": "A place inside the university where the rent is low and many international students live is a dormitory.",
+          "why": "기숙사 is the one of the six that belongs to the school rather than to a landlord, which is why it is cheap and why the 듣기 1 speaker is in one. 오피스텔 and 빌라 are both rented on the open market at market prices, so neither can answer a row whose whole cue is 학교 안 and 방값이 싸다.",
+          "grammar": "기숙사 = 기숙 (lodging) + 사 (building). The same 사 is in 회사 and 대사관. A room in one is a 1인실 or a 2인실 depending on how many share it."
+        },
+        {
+          "n": 2,
+          "art": "items/apartment_block.png",
+          "phraseKo": "여러 층, 큰 공동 주택",
+          "lines": [
+            {
+              "ko": "여러 층으로 높이 지은 큰 공동 주택은 {}입니다."
+            }
+          ],
+          "answer": "apateu",
+          "choices": [
+            {
+              "id": "apateu",
+              "ko": "아파트"
+            },
+            {
+              "id": "jutaek",
+              "ko": "주택"
+            },
+            {
+              "id": "wonrum",
+              "ko": "원룸"
+            }
+          ],
+          "en": "A large shared block built up over many floors is an apartment.",
+          "why": "아파트 is a tall block of many households, and it is where most people in Korea live. 주택 is the opposite arrangement — one family, its own ground — and 원룸 is one room rather than a building at all, so neither answers 여러 층으로 높이 지은.",
+          "grammar": "Korean 아파트 is the whole block, not one flat in it; the flat is 우리 집 or ○○호. 아파트를 샀어요 means you bought a unit, not the building."
+        },
+        {
+          "n": 3,
+          "art": "items/detached_house.png",
+          "phraseKo": "마당, 한 가족",
+          "lines": [
+            {
+              "ko": "마당이 있고 한 가족만 따로 사는 집은 {}입니다."
+            }
+          ],
+          "answer": "jutaek",
+          "choices": [
+            {
+              "id": "jutaek",
+              "ko": "주택"
+            },
+            {
+              "id": "apateu",
+              "ko": "아파트"
+            },
+            {
+              "id": "gisuksa",
+              "ko": "기숙사"
+            }
+          ],
+          "en": "A house with a yard where one family lives on its own is a house.",
+          "why": "주택 in this list is the standalone house — 단독주택 in full — and 마당 is the give-away, because a shared block has no yard of its own. 아파트 and 기숙사 both put many households under one roof, which is what 따로 rules out.",
+          "grammar": "주택 on its own can mean housing in general (주택 정책, housing policy). In a list beside 아파트 and 빌라 it always means the detached kind."
+        },
+        {
+          "n": 4,
+          "art": "",
+          "phraseKo": "4~5층, 작은 공동 주택",
+          "lines": [
+            {
+              "ko": "4~5층 정도로 지은 작은 공동 주택은 {}입니다."
+            }
+          ],
+          "answer": "billa",
+          "choices": [
+            {
+              "id": "billa",
+              "ko": "빌라"
+            },
+            {
+              "id": "apateu",
+              "ko": "아파트"
+            },
+            {
+              "id": "opiseutel",
+              "ko": "오피스텔"
+            }
+          ],
+          "en": "A small shared building of four or five floors is a villa.",
+          "why": "빌라 and 아파트 are the same idea at two sizes, and the number of floors is the only thing that separates them — four or five is 빌라, a tower is 아파트. 오피스텔 is sorted by what the building is for, not by how tall it is, so it cannot be read off 4~5층.",
+          "grammar": "Korean 빌라 is not the English villa. It is a low-rise block of flats, usually without a lift, and it is cheaper than an 아파트 in the same area."
+        },
+        {
+          "n": 5,
+          "art": "items/studio_oneroom.png",
+          "phraseKo": "방과 부엌이 한 칸",
+          "lines": [
+            {
+              "ko": "방과 부엌이 한 칸으로 되어 있는 작은 집은 {}입니다."
+            }
+          ],
+          "answer": "wonrum",
+          "choices": [
+            {
+              "id": "wonrum",
+              "ko": "원룸"
+            },
+            {
+              "id": "billa",
+              "ko": "빌라"
+            },
+            {
+              "id": "jutaek",
+              "ko": "주택"
+            }
+          ],
+          "en": "A small place where the room and the kitchen are one space is a studio flat.",
+          "why": "원룸 says it outright — one room, with the kitchen in it and nothing walled off but the 화장실. 빌라 and 주택 are both whole buildings with rooms divided up inside them, so 한 칸으로 되어 있는 rules them out. This is the kind the chapter spends most of its pages looking for.",
+          "grammar": "원룸 is built from English one + room but is a Korean word: 원룸에 살아요, 원룸을 구해요. The rent shape that goes with it is 보증금 + 월세."
+        },
+        {
+          "n": 6,
+          "art": "",
+          "phraseKo": "사무실처럼, 살 수도 있다",
+          "lines": [
+            {
+              "ko": "사무실처럼 쓸 수도 있고 살 수도 있는 건물은 {}입니다."
+            }
+          ],
+          "answer": "opiseutel",
+          "choices": [
+            {
+              "id": "opiseutel",
+              "ko": "오피스텔"
+            },
+            {
+              "id": "gisuksa",
+              "ko": "기숙사"
+            },
+            {
+              "id": "wonrum",
+              "ko": "원룸"
+            }
+          ],
+          "en": "A building you can use as an office or live in is an officetel.",
+          "why": "오피스텔 is office + hotel, and the two halves are the definition: the same unit can be an office or a home. 기숙사 can only be lived in and 원룸 is a kind of home rather than a kind of building, so neither can be used 사무실처럼.",
+          "grammar": "오피스텔 is a Korean coinage from English parts, like 아파트 and 원룸 above it. Words built this way take no 하다 and behave as plain nouns: 오피스텔이 비싸요."
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-vocab-2",
+      "type": "build",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 2",
+      "icon": "🛋️",
+      "blurbEn": "Six rooms of a Korean flat, named by what is in them.",
+      "instructionKo": "설명을 읽고 빈칸에 알맞은 단어를 고르세요.",
+      "instructionEn": "Read each description and choose the room it names.",
+      "noteEn": "On the page this is one cutaway floor plan with six arrows into six empty boxes, and a floor plan cannot be drawn as a row of buttons. Each arrow is a row here instead, described by the furniture the drawing puts in it — the shower and basin, the hob and sink, the sofa, the railing, the bed, the step where the shoes come off — and the pictures are the game’s own icons rather than the book’s plan. The rows keep the order the arrows come off it.",
+      "pattern": "방 · 거실 · 부엌 · 화장실 · 베란다 · 현관",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/toilet.png",
+          "phraseKo": "샤워기와 세면대",
+          "lines": [
+            {
+              "ko": "샤워기와 세면대가 있는 칸은 {}입니다."
+            }
+          ],
+          "answer": "hwajangsil",
+          "choices": [
+            {
+              "id": "hwajangsil",
+              "ko": "화장실"
+            },
+            {
+              "id": "bueok",
+              "ko": "부엌"
+            },
+            {
+              "id": "beranda",
+              "ko": "베란다"
+            }
+          ],
+          "en": "The space with the shower and the washbasin is the bathroom.",
+          "why": "화장실 is the one room of the six that holds a 샤워기, and in a Korean flat the bath, the basin and the lavatory are all in it. 부엌 has a sink too, which is why it is the distractor worth ruling out — but a 세면대 is for washing yourself and a 싱크대 is for washing up.",
+          "grammar": "화장실 = 화장 (making up one’s face) + 실 (room). The same 실 is in 사무실, 교실, 1인실. Korean asks 화장실이 어디예요? for both senses of the English word."
+        },
+        {
+          "n": 2,
+          "art": "items/kitchen_stove.png",
+          "phraseKo": "가스레인지와 싱크대",
+          "lines": [
+            {
+              "ko": "가스레인지와 싱크대가 있어서 밥을 하는 곳은 {}입니다."
+            }
+          ],
+          "answer": "bueok",
+          "choices": [
+            {
+              "id": "bueok",
+              "ko": "부엌"
+            },
+            {
+              "id": "geosil",
+              "ko": "거실"
+            },
+            {
+              "id": "hyeongwan",
+              "ko": "현관"
+            }
+          ],
+          "en": "The place with the hob and the sink, where you cook, is the kitchen.",
+          "why": "부엌 is where 밥을 하다 happens, and the 가스레인지 fixes it — nothing else on the plan has one. 거실 is next to it and open to it in this flat, which is exactly why the row names the appliances rather than the position.",
+          "grammar": "부엌 is one of the few pure Korean room words here; the rest are Sino-Korean with 실 or 관. Its final ㅋ is pronounced [ㄱ] on its own — [부억] — but comes back before a vowel: 부엌에서 [부어케서]."
+        },
+        {
+          "n": 3,
+          "art": "items/green_sofa.png",
+          "phraseKo": "소파와 탁자",
+          "lines": [
+            {
+              "ko": "소파와 탁자가 놓여 있는, 가족이 함께 모이는 넓은 공간은 {}입니다."
+            }
+          ],
+          "answer": "geosil",
+          "choices": [
+            {
+              "id": "geosil",
+              "ko": "거실"
+            },
+            {
+              "id": "bang",
+              "ko": "방"
+            },
+            {
+              "id": "hwajangsil",
+              "ko": "화장실"
+            }
+          ],
+          "en": "The wide space with the sofa and the low table, where the family gathers, is the living room.",
+          "why": "거실 is the shared middle of the flat and has no door of its own, which is what 함께 모이는 and 넓은 공간 are describing. 방 is a room the door closes on and belongs to one person, so the two are told apart by who uses them rather than by what is in them.",
+          "grammar": "거실 = 거 (to dwell) + 실 (room). A flat is counted by its 방: 방 2개, 거실, 화장실 1 — the 거실 is listed but never counted in the number of 방."
+        },
+        {
+          "n": 4,
+          "art": "items/balcony_rail.png",
+          "phraseKo": "난간, 빨래를 말리다",
+          "lines": [
+            {
+              "ko": "거실 밖에 있고 난간이 있어서 빨래를 말리는 좁고 긴 곳은 {}입니다."
+            }
+          ],
+          "answer": "beranda",
+          "choices": [
+            {
+              "id": "beranda",
+              "ko": "베란다"
+            },
+            {
+              "id": "bueok",
+              "ko": "부엌"
+            },
+            {
+              "id": "hyeongwan",
+              "ko": "현관"
+            }
+          ],
+          "en": "The narrow strip outside the living room, with a railing, where the washing dries, is the balcony.",
+          "why": "베란다 is outside the wall of the flat and has a 난간 rather than a door, which is what tells it from every room on the plan. 현관 is also a threshold but faces inward off the corridor, and it is where shoes come off, not where washing goes up.",
+          "grammar": "베란다 is from English veranda and, like 아파트, means the Korean thing rather than the English one: the glazed strip along the outside of a flat. 전망이 좋다 is normally said standing on it."
+        },
+        {
+          "n": 5,
+          "art": "items/white_pillow.png",
+          "phraseKo": "침대와 옷장",
+          "lines": [
+            {
+              "ko": "침대와 옷장이 있어서 잠을 자는 칸은 {}입니다."
+            }
+          ],
+          "answer": "bang",
+          "choices": [
+            {
+              "id": "bang",
+              "ko": "방"
+            },
+            {
+              "id": "geosil",
+              "ko": "거실"
+            },
+            {
+              "id": "beranda",
+              "ko": "베란다"
+            }
+          ],
+          "en": "The space with the bed and the wardrobe, where you sleep, is the room.",
+          "why": "방 is a room with a door on it, and the 침대 and 옷장 say it is somebody’s own. 거실 holds the sofa and belongs to everyone, so the plan draws two 방 and one 거실 — and the advert on page 106 counts them that way: 방 2개, 부엌, 화장실.",
+          "grammar": "방 is the counting unit for a home: 방 2개 means two bedrooms. It also builds words — 빈방 an empty room, 원룸 one room, 1인실 a single. 방값 is what a room costs."
+        },
+        {
+          "n": 6,
+          "art": "quiz/unit13_q02_entryway.png",
+          "phraseKo": "신발을 벗는 곳",
+          "lines": [
+            {
+              "ko": "문을 열고 들어와서 신발을 벗는 곳은 {}입니다."
+            }
+          ],
+          "answer": "hyeongwan",
+          "choices": [
+            {
+              "id": "hyeongwan",
+              "ko": "현관"
+            },
+            {
+              "id": "bang",
+              "ko": "방"
+            },
+            {
+              "id": "hwajangsil",
+              "ko": "화장실"
+            }
+          ],
+          "en": "The place just inside the door, where you take your shoes off, is the entrance hall.",
+          "why": "현관 is the step between outside and inside, and taking the shoes off there is what makes it a room rather than a doorway — the floor is lower than the rest of the flat for exactly that reason. 방 and 화장실 are both past it, and you are already in socks by the time you reach either.",
+          "grammar": "현관 = 현 (to show) + 관 (gateway); the same 관 is in 대사관 and 도서관. 현관에서 신발을 벗어요 is what the plan’s lowest square is for."
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-gram-1",
+      "type": "build",
+      "section": "문법과 표현 1",
+      "sectionEn": "Grammar and expression 1",
+      "no": "문법 1",
+      "icon": "🤷",
+      "blurbEn": "Saying you cannot tell how something will turn out.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The page gives the pattern, a 대화, four 예문 and then six pictures to build your own sentences from, which nothing can mark. The rows here are the 대화 and the 예문 with the ending taken out, so what is being decided is the join: -(으)ㄹ지 takes 을지 after a consonant and 지 straight onto the ㄹ after a vowel. Dropping the ㄹ altogether — 좋지 모르겠어요, 좋아하지 모르겠어요 — is a wrong button on three of the four rows, and it is wrong outright: that 지 is the one that belongs before 않다.",
+      "pattern": "A/V-(으)ㄹ지 모르겠다",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/moving_boxes.png",
+          "phraseKo": "어디가 ___ (좋다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이사해야 하는데 어디가 {} 모르겠어요."
+            },
+            {
+              "who": "B",
+              "ko": "부동산에 가서 한번 물어보세요."
+            }
+          ],
+          "answer": "joheulji",
+          "choices": [
+            {
+              "id": "joheulji",
+              "ko": "좋을지"
+            },
+            {
+              "id": "johji",
+              "ko": "좋지"
+            },
+            {
+              "id": "joheuji",
+              "ko": "좋으지"
+            }
+          ],
+          "en": "I have to move but I have no idea where would be good. — Try asking at an estate agent.",
+          "why": "좋다 ends in a consonant, so the ending arrives in full: 좋 + 을지. 좋지 has dropped the ㄹ, and 좋지 모르겠어요 is not a sentence — that 좋지 is the shape that goes before 않다. 좋으지 has taken the 으 and left the ㄹ behind, which is the half-remembered version of the same rule.",
+          "grammar": "A/V-(으)ㄹ지 모르겠다: consonant stem → -을지, vowel stem → -ㄹ지. The 지 here is the one in 언제 갈지, 뭘 먹을지 — an indirect question, which is why 모르겠다 can take it as its object.",
+          "audio": {
+            "src": "audio/book/2b-u13-d01.mp3",
+            "labelEn": "문법 1 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/wrapped_gift.png",
+          "phraseKo": "히엔 씨가 ___ (좋아하다)",
+          "lines": [
+            {
+              "ko": "히엔 씨 선물을 샀는데 {} 모르겠어요."
+            }
+          ],
+          "answer": "johahalji",
+          "choices": [
+            {
+              "id": "johahalji",
+              "ko": "좋아할지"
+            },
+            {
+              "id": "johahaeulji",
+              "ko": "좋아하을지"
+            },
+            {
+              "id": "johahaji",
+              "ko": "좋아하지"
+            }
+          ],
+          "en": "I bought Hien a present but I do not know whether she will like it.",
+          "why": "좋아하다 ends in the vowel ㅏ, so no 으 goes in: 좋아하 + ㄹ지 → 좋아할지. 좋아하을지 is the 으 inserted where only a consonant stem would need it, and 좋아하지 has lost the ㄹ, which leaves the shape that belongs in 좋아하지 않아요.",
+          "grammar": "The (으) of -(으)ㄹ지 exists only to give the ㄹ something to sit on. After a vowel there is already a syllable to sit on, so 가다 → 갈지, 하다 → 할지, 좋아하다 → 좋아할지."
+        },
+        {
+          "n": 3,
+          "art": "items/dormitory.png",
+          "phraseKo": "하숙집을 ___ (구할 수 있다)",
+          "lines": [
+            {
+              "ko": "요즘 하숙집이 별로 없어서 {} 모르겠어요."
+            }
+          ],
+          "answer": "guhalsu",
+          "choices": [
+            {
+              "id": "guhalsu",
+              "ko": "구할 수 있을지"
+            },
+            {
+              "id": "guhalsu_no_eu",
+              "ko": "구할 수 있를지"
+            },
+            {
+              "id": "guhalsu_bare",
+              "ko": "구할 수 있지"
+            }
+          ],
+          "en": "There are hardly any boarding houses these days, so I do not know whether I will be able to find one.",
+          "why": "The ending lands on 있다, not on 구하다, and 있 ends in a consonant — so 있 + 을지 gives 구할 수 있을지. 구할 수 있를지 has put the ㄹ straight onto a consonant with no 으 to carry it, and 구할 수 있지 has dropped the ending. The ㄹ earlier in the sentence belongs to -(으)ㄹ 수 있다 and is already spent.",
+          "grammar": "V-(으)ㄹ 수 있다 + -(으)ㄹ지 stacks two ㄹ endings, and only the second one is being chosen here: 구할 (can) + 수 있을지 (whether). The same stack is in 갈 수 있을지, 볼 수 있을지."
+        },
+        {
+          "n": 4,
+          "art": "items/topik_takes_time.png",
+          "phraseKo": "몇 시까지 ___ (갈 수 있다)",
+          "lines": [
+            {
+              "ko": "오늘 집에 몇 시까지 {} 모르겠어요."
+            }
+          ],
+          "answer": "galsu",
+          "choices": [
+            {
+              "id": "galsu",
+              "ko": "갈 수 있을지"
+            },
+            {
+              "id": "gaeulsu",
+              "ko": "가을 수 있을지"
+            },
+            {
+              "id": "galsu_bare",
+              "ko": "갈 수 있지"
+            }
+          ],
+          "en": "I do not know what time I will be able to get home today.",
+          "why": "There are two ㄹ endings in this answer and each follows its own half of the rule: 가다 is a vowel stem so the modifier is -ㄹ, giving 갈 수, and 있다 is a consonant stem so the second ending is -을지 — 갈 수 있을지. 가을 수 있을지 has put the 으 on the vowel stem, which is the mistake row 2 makes. 갈 수 있지 has dropped the ending, which is the mistake rows 1 and 3 make.",
+          "grammar": "The book’s fourth 예문. The other one, 이 옷이 맞을지 모르겠어요, is drilled in the 익힘책 instead, so it is not repeated here. Same rule, two joins in one sentence: 갈 (vowel) and 있을지 (consonant)."
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-gram-2",
+      "type": "build",
+      "section": "문법과 표현 1",
+      "sectionEn": "Grammar and expression 1",
+      "no": "문법 2",
+      "icon": "⚖️",
+      "blurbEn": "Granting one thing before saying the other.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The 연습 on the page is six questions to ask each other — 한국어 공부가 어때요?, 요즘 건강이 어때요? — with no answers printed, so it cannot be marked. The rows here are the 대화, the two 예문 and the printed 보기 answer, with the ending removed. -기는 하지만 goes on the plain stem and never changes shape: the wrong buttons either drop the 는, which is the part that concedes anything, or bend a stem that has no business bending before a consonant.",
+      "pattern": "A/V-기는 하지만",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/subway_station.png",
+          "phraseKo": "역이 가까워서 ___ (편하다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금 살고 있는 집은 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "역이 가까워서 {} 좀 시끄러워요."
+            }
+          ],
+          "answer": "pyeonhagineun",
+          "choices": [
+            {
+              "id": "pyeonhagineun",
+              "ko": "편하기는 하지만"
+            },
+            {
+              "id": "pyeonhaneun",
+              "ko": "편하는 하지만"
+            },
+            {
+              "id": "pyeonhagi",
+              "ko": "편하기 하지만"
+            }
+          ],
+          "en": "What is the place you live in like? — The station is close so it is handy, but it is a bit noisy.",
+          "why": "The pattern is 기 + 는 + 하지만 and all three parts are needed: 편하기는 하지만. 편하는 하지만 has swapped the noun-making 기 for the modifier 는, which leaves nothing for the sentence to hang on. 편하기 하지만 has dropped the 는, and without it nothing is being granted — the 는 is what makes this \"handy, yes, but\".",
+          "grammar": "A/V-기는 하지만: 기 turns the verb into a noun, 는 marks it as the thing being granted, 하지만 turns against it. Nothing agrees with the stem, so 편하기는, 좋기는 and 멀기는 all look the same.",
+          "audio": {
+            "src": "audio/book/2b-u13-d04.mp3",
+            "labelEn": "문법 2 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/popular_restaurant.png",
+          "phraseKo": "음식이 ___ (맛있다)",
+          "lines": [
+            {
+              "ko": "이 식당은 음식이 {} 값이 비싸요."
+            }
+          ],
+          "answer": "masitgineun",
+          "choices": [
+            {
+              "id": "masitgineun",
+              "ko": "맛있기는 하지만"
+            },
+            {
+              "id": "masinneun",
+              "ko": "맛있는 하지만"
+            },
+            {
+              "id": "masitgiga",
+              "ko": "맛있기가 하지만"
+            }
+          ],
+          "en": "The food at this restaurant is good, but it is expensive.",
+          "why": "맛있다 takes the ending exactly as written: 맛있기는 하지만. 맛있는 하지만 is a modifier with no noun after it. 맛있기가 하지만 has put the subject particle on the nominalised verb — 기가 belongs with an adjective of its own, as in 살기가 좋아요 on page 99, and never in front of 하지만.",
+          "grammar": "Two patterns in this chapter start with 기 and are worth keeping apart: -기는 하지만 concedes, -기(가) A judges. The particle after 기 is what tells them apart — 는 for the first, 가 for the second."
+        },
+        {
+          "n": 3,
+          "art": "items/chili_pepper.png",
+          "phraseKo": "가끔 ___ (먹다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "히엔 씨, 떡볶이 좋아해요?"
+            },
+            {
+              "who": "B",
+              "ko": "가끔 {} 좋아하지는 않아요."
+            }
+          ],
+          "answer": "meokgineun",
+          "choices": [
+            {
+              "id": "meokgineun",
+              "ko": "먹기는 하지만"
+            },
+            {
+              "id": "meogeun",
+              "ko": "먹은 하지만"
+            },
+            {
+              "id": "meokgineundo",
+              "ko": "먹기는도 하지만"
+            }
+          ],
+          "en": "Hien, do you like tteokbokki? — I do eat it now and then, but I would not say I like it.",
+          "why": "먹기는 하지만 grants the eating and then takes back the liking, which is why the reply ends 좋아하지는 않아요 rather than a plain 아니요. 먹은 하지만 is a modifier with nothing to modify, and 먹기는도 하지만 stacks 도 on top of 는 — Korean allows one particle in that slot, not two.",
+          "grammar": "The 는 of -기는 하지만 and the 는 of 좋아하지는 않아요 are the same particle doing the same job: marking the part being conceded or denied. That is why the two halves of this answer mirror each other."
+        },
+        {
+          "n": 4,
+          "art": "items/homework_notebook.png",
+          "phraseKo": "좀 ___ (어렵다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "한국어 공부가 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "좀 {} 재미있어요."
+            }
+          ],
+          "answer": "eoryeopgineun",
+          "choices": [
+            {
+              "id": "eoryeopgineun",
+              "ko": "어렵기는 하지만"
+            },
+            {
+              "id": "eoryeougineun",
+              "ko": "어려우기는 하지만"
+            },
+            {
+              "id": "eoryeogineun",
+              "ko": "어려기는 하지만"
+            }
+          ],
+          "en": "How is studying Korean? — It is a bit hard, but it is fun.",
+          "why": "어렵다 is a ㅂ-irregular, and the irregular only fires before a vowel: 어려워요, 어려운. 기 begins with a consonant, so the ㅂ stays put and the answer is 어렵기는 하지만. 어려우기는 하지만 is the irregular applied where nothing asked for it, and 어려기는 하지만 has lost the ㅂ without replacing it.",
+          "grammar": "ㅂ-irregular adjectives keep the ㅂ before a consonant-initial ending: 어렵기, 춥기, 쉽기, 시끄럽기. Before a vowel they turn to 우: 어려워요, 추워서, 쉬워지다. -기는 하지만 always sees the consonant side."
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-speak-1",
+      "type": "build",
+      "section": "말하기 1",
+      "sectionEn": "Speaking 1",
+      "no": "말하기 1",
+      "icon": "🗣️",
+      "blurbEn": "Nana wants to move closer to school, and Julien knows where to ask.",
+      "instructionKo": "대화를 듣고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Listen to the dialogue and choose what belongs in each gap.",
+      "noteEn": "The page prints the dialogue and then two columns of substitutions to say it again with, which nothing can mark. The rows here are the four slots the book colours in the dialogue itself, so the exchange stays whole and the decision is the form the colour is hiding. Each row plays the line it came from off the tape rather than a reading of the finished sentence.",
+      "pattern": "나나와 줄리앙 · 학교 근처로 이사하고 싶은데",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/be_empty.png",
+          "phraseKo": "괜찮은 집이 ___ (있다)",
+          "lines": [
+            {
+              "who": "나나",
+              "ko": "학교 근처로 이사하고 싶은데 {} 모르겠어요."
+            }
+          ],
+          "answer": "itseulji",
+          "choices": [
+            {
+              "id": "itseulji",
+              "ko": "괜찮은 집이 있을지"
+            },
+            {
+              "id": "itji",
+              "ko": "괜찮은 집이 있지"
+            },
+            {
+              "id": "gwaenchanneun",
+              "ko": "괜찮는 집이 있을지"
+            }
+          ],
+          "en": "I want to move nearer the school, but I do not know whether there will be anywhere decent.",
+          "why": "Two joins have to be right at once and only 괜찮은 집이 있을지 gets both. 괜찮은 집이 있지 has dropped the ㄹ that -(으)ㄹ지 is built on, and 괜찮는 집이 있을지 has modified a noun with 는, which only verbs take — 괜찮다 is an adjective, so it goes to 괜찮은.",
+          "grammar": "Adjective + noun takes -(으)ㄴ: 괜찮은 집, 좋은 집, 넓은 방. Verb + noun takes -는: 사는 집, 구하는 집. 있다 sits with the verbs: 있는 집.",
+          "audio": {
+            "src": "audio/book/2b-u13-d06.mp3",
+            "labelEn": "말하기 1 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/detached_house.png",
+          "phraseKo": "방이 넓어서 ___ (좋다)",
+          "lines": [
+            {
+              "who": "줄리앙",
+              "ko": "왜요? 지금 사는 집이 마음에 안 들어요?"
+            },
+            {
+              "who": "나나",
+              "ko": "지금 사는 집은 방이 넓어서 {} 학교에서 너무 멀어요."
+            }
+          ],
+          "answer": "johgineun",
+          "choices": [
+            {
+              "id": "johgineun",
+              "ko": "좋기는 하지만"
+            },
+            {
+              "id": "johneun",
+              "ko": "좋는 하지만"
+            },
+            {
+              "id": "johgi",
+              "ko": "좋기 하지만"
+            }
+          ],
+          "en": "Why? Do you not like the place you live in now? — The room is big, which is good, but it is much too far from school.",
+          "why": "Nana grants the big room and then says the real problem, which is what 좋기는 하지만 is for. 좋는 하지만 has put the verb modifier on an adjective and then left it with no noun; 좋기 하지만 has dropped the 는, and the 는 is the part that does the granting.",
+          "grammar": "This is the answer the book prints in colour, and the two columns underneath swap 방이 넓어서 좋다 for 주변이 조용해서 괜찮다 — the ending never changes when they do: 괜찮기는 하지만.",
+          "audio": {
+            "src": "audio/book/2b-u13-d08.mp3",
+            "labelEn": "말하기 1 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/light_bulb.png",
+          "phraseKo": "시설이 ___ 원룸 (잘되어 있다)",
+          "lines": [
+            {
+              "who": "줄리앙",
+              "ko": "어떤 집을 구하는데요?"
+            },
+            {
+              "who": "나나",
+              "ko": "{} 원룸을 구했으면 좋겠어요."
+            }
+          ],
+          "answer": "jaldoeeo_itneun",
+          "choices": [
+            {
+              "id": "jaldoeeo_itneun",
+              "ko": "시설이 잘되어 있는"
+            },
+            {
+              "id": "jaldoeeo_iteun",
+              "ko": "시설이 잘되어 있은"
+            },
+            {
+              "id": "jaldoego_itneun",
+              "ko": "시설이 잘되고 있는"
+            }
+          ],
+          "en": "What sort of place are you after? — I would like to find a studio with good facilities.",
+          "why": "있다 modifies a noun with -는, never -은, so 시설이 잘되어 있는 is the only shape that can sit in front of 원룸. 시설이 잘되고 있는 is the progressive: it says the fitting-out is under way, which is not what you want in a flat you are about to move into. -어 있다 is the state something was left in; -고 있다 is the work still going on.",
+          "grammar": "잘되어 있다 (to be well fitted out) is -어 있다 on 잘되다: the result stays. Compare 문이 열려 있다, 불이 켜져 있다. The advert on page 106 uses the same phrase: 시설이 잘되어 있습니다.",
+          "audio": {
+            "src": "audio/book/2b-u13-d13.mp3",
+            "labelEn": "말하기 1 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "items/estate_broker.png",
+          "phraseKo": "부동산에 한번 ___ (가 보다)",
+          "lines": [
+            {
+              "who": "줄리앙",
+              "ko": "그래요? 그럼 학교 근처에 있는 부동산에 한번 {}."
+            }
+          ],
+          "answer": "gaboseyo",
+          "choices": [
+            {
+              "id": "gaboseyo",
+              "ko": "가 보세요"
+            },
+            {
+              "id": "gaboyo",
+              "ko": "가 보요"
+            },
+            {
+              "id": "gaaboseyo",
+              "ko": "가아 보세요"
+            }
+          ],
+          "en": "Really? Then try going to the estate agent near the school.",
+          "why": "V-아/어 보다 needs the -아/어 form in front of 보다, and 가 + 아 contracts to 가 — so 가 보세요. 가아 보세요 is the contraction left undone, and 가 보요 has put the polite ending straight on 보 without the 세, which is not a form of 보다: it is 봐요 or 보세요, never 보요.",
+          "grammar": "V-아/어 보다, to give something a try. 가 보다, 물어보다, 구경해 보다 — all three are in this chapter, and 물어보다 is written closed up because it has become one word.",
+          "audio": {
+            "src": "audio/book/2b-u13-d10.mp3",
+            "labelEn": "말하기 1 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-gram-3",
+      "type": "build",
+      "section": "문법과 표현 2",
+      "sectionEn": "Grammar and expression 2",
+      "no": "문법 1",
+      "icon": "🧱",
+      "blurbEn": "Five things about a flat, and the five things that follow from them.",
+      "instructionKo": "A와 B에서 알맞은 것을 골라 [보기]와 같이 이야기해 보세요.",
+      "instructionEn": "Make a sentence from column A and column B, as in the example.",
+      "noteEn": "The page prints two columns of five and asks you to pair them off out loud. The pairing is fixed by the sense — a subway station gives you 교통이 편리하다 and a mountain next door gives you 공기가 좋다 — so each row here writes the pair out and leaves the join blank. Two wrong shapes recur: 는기 때문에, which puts a verb modifier where a noun-maker belongs, and a bare 기 on a noun, where N(이)기 is needed. Row 4 is the one the page has for the second of those.",
+      "pattern": "A/V-기 때문에, N(이)기 때문에",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/topik_house_prices.png",
+          "phraseKo": "새로 지은 집이다 → 집세가 비싸다",
+          "lines": [
+            {
+              "ko": "제가 사는 집은 얼마 전에 새로 지은 {} 집세가 좀 비싸요."
+            }
+          ],
+          "answer": "jibigi",
+          "choices": [
+            {
+              "id": "jibigi",
+              "ko": "집이기 때문에"
+            },
+            {
+              "id": "jibgi",
+              "ko": "집기 때문에"
+            },
+            {
+              "id": "jibiragi",
+              "ko": "집이라기 때문에"
+            }
+          ],
+          "en": "The place I live in was built not long ago, so the rent is a bit high.",
+          "why": "The thing before 때문에 is the noun 집, and a noun needs 이다 before the 기 can go on: 집 + 이 + 기 → 집이기 때문에. 집기 때문에 has skipped the 이다 and put a verb ending on a noun. 집이라기 때문에 has reached for 이라고 하다, which reports what somebody said rather than stating a fact.",
+          "grammar": "N(이)기 때문에 is 이다 + -기 때문에. After a consonant the 이 shows: 집이기, 방학이기, 기숙사이기. This is the 보기 the page prints, and it is a noun clause, not a verb one."
+        },
+        {
+          "n": 2,
+          "art": "items/subway_access.png",
+          "phraseKo": "지하철역에서 가깝다 → 교통이 편리하다",
+          "lines": [
+            {
+              "ko": "지하철역에서 {} 교통이 편리해요."
+            }
+          ],
+          "answer": "gakkapgi",
+          "choices": [
+            {
+              "id": "gakkapgi",
+              "ko": "가깝기 때문에"
+            },
+            {
+              "id": "gakkaugi",
+              "ko": "가까우기 때문에"
+            },
+            {
+              "id": "gakkagi",
+              "ko": "가까기 때문에"
+            }
+          ],
+          "en": "It is close to the subway station, so getting about is easy.",
+          "why": "가깝다 is a ㅂ-irregular and 기 is a consonant, so the ㅂ stays: 가깝기 때문에. 가까우기 때문에 is the 우 of 가까워요 dragged in where no vowel follows, and 가까기 때문에 has dropped the ㅂ and put nothing in its place.",
+          "grammar": "Same rule as 어렵기는 하지만 two pages earlier: a ㅂ-irregular only changes before a vowel. 가깝기, 가까워서, 가까운 — three endings, one stem, two shapes."
+        },
+        {
+          "n": 3,
+          "art": "items/oak_rings.png",
+          "phraseKo": "바로 옆에 산이 있다 → 공기가 좋다",
+          "lines": [
+            {
+              "ko": "바로 옆에 산이 {} 공기가 좋아요."
+            }
+          ],
+          "answer": "itgi",
+          "choices": [
+            {
+              "id": "itgi",
+              "ko": "있기 때문에"
+            },
+            {
+              "id": "itneungi",
+              "ko": "있는기 때문에"
+            },
+            {
+              "id": "itigi",
+              "ko": "있이기 때문에"
+            }
+          ],
+          "en": "There is a mountain right beside it, so the air is good.",
+          "why": "있다 takes 기 straight onto the stem: 있기 때문에. 있는기 때문에 has slipped the verb modifier 는 in front of 기, which is the commonest wrong shape on this page — 기 is already the noun-maker and needs no help. 있이기 때문에 has added the 이 of 이다, which belongs after a noun and not after a verb stem.",
+          "grammar": "A/V-기 때문에 goes on the bare stem with no tense and no modifier: 있기, 멀기, 가깝기, 끝나기. Tense goes on the second half of the sentence, or on 았/었 inside the 기 clause when the reason is already over."
+        },
+        {
+          "n": 4,
+          "art": "items/dormitory.png",
+          "phraseKo": "기숙사이다 → 시끄럽게 떠들면 안 되다",
+          "lines": [
+            {
+              "ko": "{} 시끄럽게 떠들면 안 돼요."
+            }
+          ],
+          "answer": "gisuksaigi",
+          "choices": [
+            {
+              "id": "gisuksaigi",
+              "ko": "기숙사이기 때문에"
+            },
+            {
+              "id": "gisuksaitgi",
+              "ko": "기숙사있기 때문에"
+            },
+            {
+              "id": "gisuksaingi",
+              "ko": "기숙사인기 때문에"
+            }
+          ],
+          "en": "It is a dormitory, so you must not make a lot of noise.",
+          "why": "기숙사 ends in a vowel, and 이다 still goes in before 기: 기숙사이기 때문에. 기숙사있기 때문에 has used 있다, which would say a dormitory exists rather than that this is one. 기숙사인기 때문에 has taken the modifier 인 — that belongs before a noun, as in 기숙사인 집, not before 기.",
+          "grammar": "Compare row 1: 집이기 (consonant) and 기숙사이기 (vowel) both keep the 이, because it is the stem of 이다 and not an inserted vowel. Only the spoken language shortens 기숙사기."
+        },
+        {
+          "n": 5,
+          "art": "items/balcony_rail.png",
+          "phraseKo": "높은 곳에 있다 → 전망이 좋다",
+          "lines": [
+            {
+              "ko": "집이 {} 때문에 전망이 좋아요."
+            }
+          ],
+          "answer": "nopeun",
+          "choices": [
+            {
+              "id": "nopeun",
+              "ko": "높은 곳에 있기"
+            },
+            {
+              "id": "nopneun",
+              "ko": "높는 곳에 있기"
+            },
+            {
+              "id": "nopeun_neungi",
+              "ko": "높은 곳에 있는기"
+            }
+          ],
+          "en": "The place is high up, so the view is good.",
+          "why": "Two joins again: 높다 is an adjective, so the noun 곳 takes -은, and 있다 takes a bare 기. 높는 곳에 있기 has modified 곳 with the verb ending 는, and 높은 곳에 있는기 is the 는기 shape from row 3 back again — 기 is the noun-maker and takes nothing in front of it.",
+          "grammar": "높은 곳 is one of this unit’s headwords and shows the adjective modifier -은 in the middle of a 기 때문에 clause. The two endings never interfere: 높은 곳에 있기 때문에, 좋은 집이기 때문에."
+        },
+        {
+          "n": 6,
+          "art": "items/contract_seal.png",
+          "phraseKo": "계약이 ___ (끝나다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제까지 집을 구해야 해요?"
+            },
+            {
+              "who": "B",
+              "ko": "5월에 계약이 {} 그 전에 집을 구해야 해요."
+            }
+          ],
+          "answer": "kkeutnagi",
+          "choices": [
+            {
+              "id": "kkeutnagi",
+              "ko": "끝나기 때문에"
+            },
+            {
+              "id": "kkeutgi",
+              "ko": "끝기 때문에"
+            },
+            {
+              "id": "kkeutnaneungi",
+              "ko": "끝나는기 때문에"
+            }
+          ],
+          "en": "By when do you have to find a place? — My lease ends in May, so I have to find somewhere before then.",
+          "why": "The verb is 끝나다, to come to an end by itself, and 기 goes straight on: 끝나기 때문에. 끝기 때문에 has cut the stem back to 끝, which is the noun. 끝나는기 때문에 is the 는기 shape once more. Note the tense: the lease ends in the future and the clause is still in the plain stem, because 기 때문에 carries no tense of its own.",
+          "grammar": "끝나다 (to end) against 끝내다 (to finish something): 계약이 끝나다, 일을 끝내다. The 대화 uses the first, so 계약이 takes 이/가 and not 을/를.",
+          "audio": {
+            "src": "audio/book/2b-u13-trk35.mp3",
+            "labelEn": "문법 1 · track 35"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-gram-4",
+      "type": "build",
+      "section": "문법과 표현 2",
+      "sectionEn": "Grammar and expression 2",
+      "no": "문법 2",
+      "icon": "📐",
+      "blurbEn": "Judging the doing of a thing rather than the thing itself.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The page gives the pattern, a 대화, two 예문, and then four photographs and eight adjectives to build your own sentences from — any pairing works, so there is nothing to mark. The rows here are the 대화, the two 예문 and the printed 보기 sentences, with the 기 taken out. The 가 is optional in this pattern and the book prints it both ways, so no row turns on whether it is there; what the wrong buttons do is bend the stem or put a modifier in front of the 기.",
+      "pattern": "V-기(가) A",
+      "items": [
+        {
+          "n": 1,
+          "art": "quiz/unit13_q06_convenient.png",
+          "phraseKo": "___ 편하다 (살다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "새로 이사한 집은 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "주변에 시장도 있고 지하철역도 가까워서 {} 편해요."
+            }
+          ],
+          "answer": "salgi",
+          "choices": [
+            {
+              "id": "salgi",
+              "ko": "살기"
+            },
+            {
+              "id": "sagi",
+              "ko": "사기"
+            },
+            {
+              "id": "saleugi",
+              "ko": "살으기"
+            }
+          ],
+          "en": "What is the new place like? — There is a market nearby and the subway is close, so it is comfortable to live in.",
+          "why": "살다 is a ㄹ-stem, and the ㄹ only drops before ㄴ, ㅂ, ㅅ and the modifier 는 — 기 is none of those, so it stays: 살기. 사기 is the ㄹ dropped where nothing asked for it, and it is a different word besides. 살으기 has inserted the 으 that -(으) endings need, but 기 is not one of them.",
+          "grammar": "ㄹ-stems before 기: 살기, 멀기, 만들기, 알기. The ㄹ drops in 삽니다, 사는, 사세요 — that is the list, and 기 is not on it.",
+          "audio": {
+            "src": "audio/book/2b-u13-d18.mp3",
+            "labelEn": "문법 2 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/running_shoe.png",
+          "phraseKo": "___ 좋다 (운동하다)",
+          "lines": [
+            {
+              "ko": "요즘 춥지 않아서 {} 좋아요."
+            }
+          ],
+          "answer": "undonghagiga",
+          "choices": [
+            {
+              "id": "undonghagiga",
+              "ko": "운동하기가"
+            },
+            {
+              "id": "undonghaga",
+              "ko": "운동하가"
+            },
+            {
+              "id": "undonghaneungiga",
+              "ko": "운동하는기가"
+            }
+          ],
+          "en": "It is not cold these days, so it is good for exercising.",
+          "why": "운동하기가 좋아요 judges the exercising, and the 기 is what turns the verb into the thing being judged. 운동하가 has put the subject particle straight on the stem with nothing to carry it, and 운동하는기가 has slid the modifier 는 in front of the 기, which needs no help to make a noun.",
+          "grammar": "V-기(가) A: the 가 is a subject particle on the nominalised verb, so the adjective is describing the doing. 운동하기가 좋다, 살기가 좋다 — and with the particle left out, 운동하기 좋다, which the book also prints."
+        },
+        {
+          "n": 3,
+          "art": "items/walking_farmer.png",
+          "phraseKo": "___ 힘들다 (걷다)",
+          "lines": [
+            {
+              "ko": "발이 아파서 {} 힘들어요."
+            }
+          ],
+          "answer": "geotgi",
+          "choices": [
+            {
+              "id": "geotgi",
+              "ko": "걷기"
+            },
+            {
+              "id": "geolgi",
+              "ko": "걸기"
+            },
+            {
+              "id": "geodeugi",
+              "ko": "걷으기"
+            }
+          ],
+          "en": "My feet hurt, so walking is hard.",
+          "why": "걷다 is a ㄷ-irregular: the ㄷ becomes ㄹ before a vowel — 걸어요, 걸으면 — and stays ㄷ before a consonant. 기 is a consonant, so the answer is 걷기. 걸기 is the irregular fired early, and 걸기 is also a real word meaning hanging something up. 걷으기 has supplied a vowel that 기 never wanted.",
+          "grammar": "ㄷ-irregulars: 걷다 → 걸어요 but 걷기, 걷고, 걷지. Same for 듣다 → 들어요 but 듣기. The 듣기 on page 102 is that very form."
+        },
+        {
+          "n": 4,
+          "art": "items/make_phone_call.png",
+          "phraseKo": "___ 불편하다 (연락하다)",
+          "lines": [
+            {
+              "ko": "지금 휴대 전화가 없어서 친구와 {} 불편해요."
+            }
+          ],
+          "answer": "yeonrakhagiga",
+          "choices": [
+            {
+              "id": "yeonrakhagiga",
+              "ko": "연락하기가"
+            },
+            {
+              "id": "yeonrakhagireul",
+              "ko": "연락하기를"
+            },
+            {
+              "id": "yeonrakgiga",
+              "ko": "연락기가"
+            }
+          ],
+          "en": "I have no mobile at the moment, so getting in touch with friends is awkward.",
+          "why": "불편하다 is an adjective and takes a subject, not an object, so the 기 clause is marked with 가: 연락하기가 불편해요. 연락하기를 has given it the object particle, which needs a verb to be the object of. 연락기가 has dropped the 하 — 연락 is the noun and 연락하다 is the verb, and only a verb stem can take 기.",
+          "grammar": "N하다 verbs keep the 하 before 기: 연락하기, 운동하기, 생활하기, 공부하기. The bare noun takes a particle instead: 연락이 왔어요."
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-speak-2",
+      "type": "build",
+      "section": "말하기 2",
+      "sectionEn": "Speaking 2",
+      "no": "말하기 2",
+      "icon": "🏢",
+      "blurbEn": "Akira walks into an estate agent, and the numbers come out.",
+      "instructionKo": "대화를 듣고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Listen to the dialogue and choose what belongs in each gap.",
+      "noteEn": "The page prints the dialogue and two columns to say it again with, which nothing can mark. Five slots from the dialogue itself are the rows here, and they are not the four the book colours: the coloured ones are the two grammar points already drilled on the pages before this, so the rows take the estate agent’s own language instead — the -는데요 that opens an enquiry, the honorific on 이사하시다, the ㄹ that drops in 드실, the word for the lump sum, and the ending that is almost always misspelt.",
+      "pattern": "아키라와 중개인 · 부동산에서",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/estate_broker.png",
+          "phraseKo": "원룸을 하나 ___ (찾고 있다)",
+          "lines": [
+            {
+              "who": "중개인",
+              "ko": "어서 오세요."
+            },
+            {
+              "who": "아키라",
+              "ko": "원룸을 하나 {}."
+            }
+          ],
+          "answer": "chatgoitneundeyo",
+          "choices": [
+            {
+              "id": "chatgoitneundeyo",
+              "ko": "찾고 있는데요"
+            },
+            {
+              "id": "chatgoiteundeyo",
+              "ko": "찾고 있은데요"
+            },
+            {
+              "id": "chatgoiteuneundeyo",
+              "ko": "찾고 있으는데요"
+            }
+          ],
+          "en": "Come in. — I am looking for a studio flat.",
+          "why": "-는데요 goes on a verb stem as it is, and 있다 counts as a verb: 찾고 있는데요. 찾고 있은데요 has used -은데요, which belongs to adjectives — 좋은데요, 비싼데요. 찾고 있으는데요 has inserted an 으 that -는데요 never takes. The ending is what makes this an opening rather than a demand: it hands the conversation over.",
+          "grammar": "A-(으)ㄴ데요 for adjectives, V-는데요 for verbs, and 있다/없다 with the verbs: 있는데요, 없는데요. It is how a request is put politely — 방이 아직 있는데요 on the tape is the same ending.",
+          "audio": {
+            "src": "audio/book/2b-u13-d19.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/wall_calendar.png",
+          "phraseKo": "언제쯤 ___ 계획 (이사하시다)",
+          "lines": [
+            {
+              "who": "중개인",
+              "ko": "언제쯤 {} 계획인가요?"
+            }
+          ],
+          "answer": "isahasil",
+          "choices": [
+            {
+              "id": "isahasil",
+              "ko": "이사하실"
+            },
+            {
+              "id": "isahasin",
+              "ko": "이사하신"
+            },
+            {
+              "id": "isahasileun",
+              "ko": "이사하실은"
+            }
+          ],
+          "en": "About when are you planning to move?",
+          "why": "A 계획 is something not done yet, so the modifier in front of it is the future -(으)ㄹ: 이사하실 계획. 이사하신 계획 is the past modifier and would make it a plan already carried out. 이사하실은 has stacked a second modifier ending on top of the first, which Korean never does.",
+          "grammar": "V-(으)ㄹ 계획이다, to be planning to. The honorific -시- goes in before the modifier: 이사하다 → 이사하시다 → 이사하실. The agent uses it because the customer is the one moving.",
+          "audio": {
+            "src": "audio/book/2b-u13-d20.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/red_heart.png",
+          "phraseKo": "마음에 ___ 거예요 (들다 + -시-)",
+          "lines": [
+            {
+              "who": "중개인",
+              "ko": "좀 비싸기는 하지만 깨끗하고 시설도 잘되어 있기 때문에 마음에 {}."
+            }
+          ],
+          "answer": "deusil",
+          "choices": [
+            {
+              "id": "deusil",
+              "ko": "드실 거예요"
+            },
+            {
+              "id": "deulsil",
+              "ko": "들실 거예요"
+            },
+            {
+              "id": "deusieul",
+              "ko": "드시을 거예요"
+            }
+          ],
+          "en": "It is a bit pricey, but it is clean and well fitted out, so I think you will like it.",
+          "why": "마음에 들다 is a ㄹ-stem, and the ㄹ drops before -시-: 들 + 시 → 드시. Then the future modifier goes on a stem that now ends in a vowel, so it is -ㄹ and not -을: 드실 거예요. 들실 거예요 has kept the ㄹ that should have gone, and 드시을 거예요 has added the 을 that only a consonant stem needs.",
+          "grammar": "ㄹ drops before ㄴ, ㅂ, ㅅ: 삽니다, 삽시다, 드시다, 압니다. That is the same short list that left the ㄹ alone in 살기 on the previous page.",
+          "audio": {
+            "src": "audio/book/2b-u13-d28.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "quiz/unit13_q07_deposit_rent.png",
+          "phraseKo": "월세는 ___ 1,000만 원에 50만 원",
+          "lines": [
+            {
+              "who": "아키라",
+              "ko": "집세는 어떻게 돼요?"
+            },
+            {
+              "who": "중개인",
+              "ko": "전세는 7,000만 원이고 월세는 {} 1,000만 원에 50만 원이에요."
+            }
+          ],
+          "answer": "bojeunggeum",
+          "choices": [
+            {
+              "id": "bojeunggeum",
+              "ko": "보증금"
+            },
+            {
+              "id": "gwanribi",
+              "ko": "관리비"
+            },
+            {
+              "id": "saenghwalbi",
+              "ko": "생활비"
+            }
+          ],
+          "en": "What is the rent? — A jeonse lease is 70 million won, or a monthly let is 10 million deposit plus 500,000 a month.",
+          "why": "A 월세 is quoted as a lump sum held against the tenancy plus a figure each month, and the lump sum is the 보증금 — 관리비 is the monthly service charge and would never be ten million, and 생활비 is what you spend on living and is not paid to a landlord at all. The 전세 figure beside it is the same idea with no monthly part.",
+          "grammar": "Three money words on one line: 전세 a lump sum returned at the end, 월세 rent by the month, 보증금 the deposit that backs a 월세. 집세 covers all of it.",
+          "audio": {
+            "src": "audio/book/2b-u13-trk37.mp3",
+            "labelEn": "말하기 2 · track 37"
+          }
+        },
+        {
+          "n": 5,
+          "art": "items/topik_terms_conditions.png",
+          "phraseKo": "보고 ___ (결정하다)",
+          "lines": [
+            {
+              "who": "아키라",
+              "ko": "네, 그럼 보고 {}."
+            }
+          ],
+          "answer": "gyeoljeonghalgeyo",
+          "choices": [
+            {
+              "id": "gyeoljeonghalgeyo",
+              "ko": "결정할게요"
+            },
+            {
+              "id": "gyeoljeonghalkkeyo",
+              "ko": "결정할께요"
+            },
+            {
+              "id": "gyeoljeonghageyo",
+              "ko": "결정하게요"
+            }
+          ],
+          "en": "All right, I will have a look and then decide.",
+          "why": "-(으)ㄹ게요 is written 게 and said [께], and 결정할게요 is the spelling. 결정할께요 writes down the sound, which is the commonest misspelling in the whole ending — and one nothing on the tape can help with, because the tape says [께] either way. 결정하게요 has dropped the ㄹ and is not a form of anything.",
+          "grammar": "V-(으)ㄹ게요, announcing what you will do about it. Always 게 in writing, always [께] out loud: 할게요 [할께요], 갈게요 [갈께요], 전화 드릴게요 [드릴께요] — the last one is on this tape too.",
+          "audio": {
+            "src": "audio/book/2b-u13-d30.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-listen-1",
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "no": "듣기 1",
+      "icon": "🎧",
+      "blurbEn": "A visit to a friend’s new flat, and why the visitor wants to move.",
+      "instructionKo": "잘 듣고 질문에 답하세요.",
+      "instructionEn": "Listen carefully and answer the questions.",
+      "noteEn": "The book asks two questions about this tape. The second is a single choice and is row 1 here as printed. The first says 맞는 것을 모두 고르세요 — pick all that apply, out of six — and a row of buttons has only one answer, so row 2 turns it round and asks which of three is wrong instead; the three are the book’s own options and the recording settles it. Rows 3 to 5 are the lines those answers turn on, so the page can be answered off the tape rather than guessed.",
+      "pattern": "집에 놀러 간 이야기",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/topik_cost_of_living.png",
+          "phraseKo": "남자에 대한 설명",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "남자에 대한 설명으로 맞지 않는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "saenghwalbi",
+          "choices": [
+            {
+              "id": "saenghwalbi",
+              "ko": "생활비 때문에 이사하려고 합니다."
+            },
+            {
+              "id": "gisuksa",
+              "ko": "지금 기숙사에 살고 있습니다."
+            },
+            {
+              "id": "notyet",
+              "ko": "아직 이사할 집을 구하지 못했습니다."
+            }
+          ],
+          "en": "Which of these does not match what is said about the man? — That he is moving because of the cost of living.",
+          "why": "생활비 때문에 이사하려고 합니다. is the one the tape contradicts: he says 생활비가 많이 안 들어서 좋기는 한데 룸메이트 때문에 좀 힘들어요 — the money is the good part and the roommate is the problem. The other two are said outright: 지금 살고 있는 기숙사 puts him in a dormitory, and 좋은 집을 찾을 수 있을지 모르겠어요 says he has not found anywhere yet. Hearing 생활비 and 이사 in the same breath is what makes the wrong answer feel right.",
+          "grammar": "N 때문에 with a noun means because of that thing: 룸메이트 때문에, 생활비 때문에. It is the same 때문에 as the chapter’s grammar point, minus the 기 — which is why the noun needs no 이다 in front of it here.",
+          "audio": {
+            "src": "audio/book/2b-u13-trk38.mp3",
+            "labelEn": "듣기 1 · track 38"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/topik_house_prices.png",
+          "phraseKo": "여자의 집에 대한 설명",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "여자의 집에 대한 설명으로 맞지 않는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "cheap",
+          "choices": [
+            {
+              "id": "cheap",
+              "ko": "집세가 싸다"
+            },
+            {
+              "id": "subway",
+              "ko": "지하철역이 가깝다"
+            },
+            {
+              "id": "park",
+              "ko": "근처에 공원이 있다"
+            }
+          ],
+          "en": "Which of these does not match what is said about the woman’s flat? — That the rent is cheap.",
+          "why": "She says 좀 비싼 편이에요, and gives the reason: 시설도 잘되어 있고 지하철역에서 가깝기 때문에. That same sentence confirms the subway, and 공원도 가까워서 살기 좋아요 confirms the park — so 집세가 싸다 is the one the tape contradicts. Rent going up because the station is close is the trade the whole chapter turns on.",
+          "grammar": "A-(으)ㄴ 편이다, to be on the … side. 비싼 편이에요 is softer than 비싸요 and is what Korean reaches for when a figure is high but not outrageous.",
+          "audio": {
+            "src": "audio/book/2b-u13-trk38.mp3",
+            "labelEn": "듣기 1 · track 38"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/topik_library.png",
+          "phraseKo": "공원도 ___ (가깝다)",
+          "lines": [
+            {
+              "who": "여",
+              "ko": "근처에 시장도 있고 공원도 {} 살기 좋아요."
+            }
+          ],
+          "answer": "gakkawoseo",
+          "choices": [
+            {
+              "id": "gakkawoseo",
+              "ko": "가까워서"
+            },
+            {
+              "id": "gakkapaseo",
+              "ko": "가깝아서"
+            },
+            {
+              "id": "gakkawaseo",
+              "ko": "가까와서"
+            }
+          ],
+          "en": "There is a market nearby and the park is close too, so it is a good place to live.",
+          "why": "가깝다 is a ㅂ-irregular, and -아서/어서 begins with a vowel, so this time the irregular does fire: ㅂ becomes 우 and joins as 워 — 가까워서. 가깝아서 is the irregular ignored, which is what the same stem asked for in front of 기 two pages back. 가까와서 is the old spelling, replaced by 워 for every ㅂ-irregular except 돕다 and 곱다.",
+          "grammar": "One stem, two shapes, and the ending decides which: 가깝기 때문에 keeps the ㅂ, 가까워서 does not. Same for 어렵기 / 어려워서 and 춥기 / 추워서.",
+          "audio": {
+            "src": "audio/book/2b-u13-d43.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "items/price_coins.png",
+          "phraseKo": "좀 ___ (비싸다 + -(으)ㄴ 편이다)",
+          "lines": [
+            {
+              "who": "여",
+              "ko": "네, 시설도 잘되어 있고 지하철역에서 가깝기 때문에 좀 {}."
+            }
+          ],
+          "answer": "bissan",
+          "choices": [
+            {
+              "id": "bissan",
+              "ko": "비싼 편이에요"
+            },
+            {
+              "id": "bissaneun",
+              "ko": "비싸는 편이에요"
+            },
+            {
+              "id": "bissal",
+              "ko": "비쌀 편이에요"
+            }
+          ],
+          "en": "Yes — it is well fitted out and close to the station, so it is on the pricey side.",
+          "why": "비싸다 is an adjective, so the modifier in front of 편 is -(으)ㄴ: 비싼 편이에요. 비싸는 편이에요 has used the verb modifier 는, and 비쌀 편이에요 has used the future -(으)ㄹ, which would put the expense in the future when the rent is being paid now.",
+          "grammar": "A-(으)ㄴ 편이다 / V-는 편이다. The adjective takes -(으)ㄴ and the verb takes -는: 비싼 편이다, 자주 가는 편이다. 편 is a noun meaning side, so it needs a modifier and cannot follow a bare stem.",
+          "audio": {
+            "src": "audio/book/2b-u13-trk38.mp3",
+            "labelEn": "듣기 1 · track 38"
+          }
+        },
+        {
+          "n": 5,
+          "art": "items/red_heart.png",
+          "phraseKo": "기숙사가 ___ (마음에 들다)",
+          "lines": [
+            {
+              "who": "여",
+              "ko": "왜요? 지금 살고 있는 기숙사가 {}?"
+            }
+          ],
+          "answer": "maeume",
+          "choices": [
+            {
+              "id": "maeume",
+              "ko": "마음에 안 들어요"
+            },
+            {
+              "id": "maeumi",
+              "ko": "마음이 안 들어요"
+            },
+            {
+              "id": "maeume_deureo",
+              "ko": "마음에 안 드러요"
+            }
+          ],
+          "en": "Why? Do you not like the dormitory you are living in now?",
+          "why": "마음에 들다 is fixed: the thing you like takes 이/가 and 마음 takes 에, so it is 기숙사가 마음에 안 들어요. 마음이 안 들어요 has moved the subject particle onto 마음, which leaves the dormitory with two subject markers and nothing for 들다 to enter. 마음에 안 드러요 has dropped the ㄹ of 들다, which only goes before ㄴ, ㅂ and ㅅ — and -어요 is none of those.",
+          "grammar": "N이/가 마음에 들다, literally for something to enter the heart. Negated with 안 in front of 들다: 마음에 안 들어요. The honorific is 마음에 드세요 — the ㄹ drops there, as in 드실 거예요 on page 100.",
+          "audio": {
+            "src": "audio/book/2b-u13-d47.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-listen-2",
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "no": "듣기 2",
+      "icon": "📞",
+      "blurbEn": "Steven rings about a studio, and the advert fills itself in.",
+      "instructionKo": "잘 듣고 빈칸에 알맞은 말을 쓰세요.",
+      "instructionEn": "Listen carefully and fill in the blanks.",
+      "noteEn": "The book prints the advert with five gaps in it — the walk from the university, the two words in front of the two figures, and the two utilities inside the service charge — and asks you to write them in. The rows here put each gap back in the sentence the landlord actually says it in, so the answer comes off the recording rather than off a form; row 2 keeps the book’s pair of gaps as one row with two blanks, because the two figures are only meaningful together.",
+      "pattern": "원룸 광고 · 전화 문의",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/topik_street.png",
+          "phraseKo": "걸어서 ___ 정도 걸려요",
+          "lines": [
+            {
+              "who": "집주인",
+              "ko": "대학동에 있는데 서울대학교에서 걸어서 {} 정도 걸려요."
+            }
+          ],
+          "answer": "ten",
+          "choices": [
+            {
+              "id": "ten",
+              "ko": "10분"
+            },
+            {
+              "id": "five",
+              "ko": "5분"
+            },
+            {
+              "id": "twenty",
+              "ko": "20분"
+            }
+          ],
+          "en": "It is in Daehak-dong, about ten minutes on foot from Seoul National University.",
+          "why": "The landlord says 10분 정도, and the advert’s gap wants that number. 5분 is the figure in one of the notices on the 말하기 page — 지하철역 5분 거리 — and 20분 appears nowhere; both are here because the number is the one thing on this page that only listening can supply.",
+          "grammar": "걸어서 N분 정도 걸리다, to take about N minutes on foot. 걸려요 is 걸리다 (to take time), not 걷다 (to walk) — the walking is already in 걸어서.",
+          "audio": {
+            "src": "audio/book/2b-u13-trk39.mp3",
+            "labelEn": "듣기 2 · track 39"
+          }
+        },
+        {
+          "n": 2,
+          "art": "quiz/unit13_q07_deposit_rent.png",
+          "phraseKo": "___ 1000만 원, ___ 35만 원",
+          "lines": [
+            {
+              "who": "집주인",
+              "ko": "{} 천만 원에 {} 삼십오만 원입니다."
+            }
+          ],
+          "answer": "bojeunggeum",
+          "choices": [
+            {
+              "id": "bojeunggeum",
+              "ko": "보증금"
+            },
+            {
+              "id": "gwanribi",
+              "ko": "관리비"
+            },
+            {
+              "id": "gyotongbi",
+              "ko": "교통비"
+            }
+          ],
+          "answer2": "wolse",
+          "choices2": [
+            {
+              "id": "wolse",
+              "ko": "월세"
+            },
+            {
+              "id": "jeonse",
+              "ko": "전세"
+            },
+            {
+              "id": "maemae",
+              "ko": "매매"
+            }
+          ],
+          "en": "A deposit of ten million won and monthly rent of three hundred and fifty thousand.",
+          "why": "The big figure held against the tenancy is the 보증금 and the figure paid every month is the 월세, and the two always come in that order with 에 between them. 관리비 and 교통비 are monthly costs of a few tens of thousands and could never be the ten million. 전세 is a lump sum with no monthly part, so it cannot be the 삼십오만 원, and 매매 is buying the place outright.",
+          "grammar": "Written 보증금 1000만 원에 월세 35만 원 and read out in native Sino-Korean numbers: 천만 원, 삼십오만 원. The 에 is the one used for rates — 한 달에, 만 원에.",
+          "audio": {
+            "src": "audio/book/2b-u13-d55.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/water_faucet.png",
+          "phraseKo": "___ 요금, 가스 요금 포함",
+          "lines": [
+            {
+              "who": "집주인",
+              "ko": "{} 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요."
+            }
+          ],
+          "answer": "sudo",
+          "choices": [
+            {
+              "id": "sudo",
+              "ko": "수도"
+            },
+            {
+              "id": "jeonhwa",
+              "ko": "전화"
+            },
+            {
+              "id": "jeongi",
+              "ko": "전기"
+            }
+          ],
+          "en": "Including water and gas it comes to about fifty thousand, so it is cheaper than elsewhere.",
+          "why": "The landlord names 수도 요금 and 가스 요금, so the gap is 수도. 전기 요금 and 전화 요금 are the other two 요금 words the 익힘책 drills on the same page of the workbook, and neither is in the service charge here — which is the point of the question: the answer is what was said, not what a flat usually includes.",
+          "grammar": "Metered utilities take 요금: 수도 요금, 가스 요금, 전기 요금, 전화 요금. Costs you run up take 비: 교통비, 식비, 생활비, 관리비. Rent takes 세: 집세, 월세, 전세.",
+          "audio": {
+            "src": "audio/book/2b-u13-trk39.mp3",
+            "labelEn": "듣기 2 · track 39"
+          }
+        },
+        {
+          "n": 4,
+          "art": "quiz/unit13_q12_new_studio.png",
+          "phraseKo": "얼마 전에 새로 ___ (짓다)",
+          "lines": [
+            {
+              "who": "집주인",
+              "ko": "얼마 전에 새로 {} 시설도 잘되어 있고 아주 깨끗합니다."
+            }
+          ],
+          "answer": "jieotgi",
+          "choices": [
+            {
+              "id": "jieotgi",
+              "ko": "지었기 때문에"
+            },
+            {
+              "id": "jiseotgi",
+              "ko": "짓었기 때문에"
+            },
+            {
+              "id": "jieotgi_bad",
+              "ko": "지엇기 때문에"
+            }
+          ],
+          "en": "It was built not long ago, so it is well fitted out and very clean.",
+          "why": "짓다 is a ㅅ-irregular: the ㅅ drops before a vowel, so 짓 + 었 → 지었기 때문에. 짓었기 때문에 keeps the ㅅ, which is the irregular ignored. 지엇기 때문에 has the drop right and the vowel wrong — past tense is written 었, never 엇. The reason is already finished, so 았/었 goes inside the 기 clause here even though the plain stem was enough in 끝나기 때문에.",
+          "grammar": "ㅅ-irregular: 짓다 → 지어요, 지었어요, 지은 집; but 짓고, 짓기, 짓지 keep the ㅅ. 새로 지은 집 and 새로 지었기 때문에 are the two shapes this chapter uses.",
+          "audio": {
+            "src": "audio/book/2b-u13-trk39.mp3",
+            "labelEn": "듣기 2 · track 39"
+          }
+        },
+        {
+          "n": 5,
+          "art": "items/topik_come_appear.png",
+          "phraseKo": "관리비는 얼마나 ___ (나오다)",
+          "lines": [
+            {
+              "who": "스티븐",
+              "ko": "관리비는 얼마나 {}?"
+            }
+          ],
+          "answer": "naonayo",
+          "choices": [
+            {
+              "id": "naonayo",
+              "ko": "나오나요"
+            },
+            {
+              "id": "naoneunnayo",
+              "ko": "나오는나요"
+            },
+            {
+              "id": "naopnayo",
+              "ko": "나옵나요"
+            }
+          ],
+          "en": "How much does the service charge come to?",
+          "why": "-나요 goes straight onto a verb stem, so 나오 + 나요 → 나오나요. 나오는나요 has put the modifier 는 in first, and 나옵나요 has used the ㅂ of 나옵니다, which belongs only with -니다. The verb itself is worth noticing: a bill in Korean 나오다, comes out, rather than being something you pay.",
+          "grammar": "V-나요 is a softened question, gentler than -아요/어요 and less flat than -습니까. 관리비가 나오다 is the fixed phrase for a bill arriving; page 107 says it too — 관리비가 한 달에 10만 원쯤 나오는데.",
+          "audio": {
+            "src": "audio/book/2b-u13-d56.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-read-1",
+      "type": "build",
+      "section": "읽고 쓰기",
+      "sectionEn": "Reading and writing",
+      "no": "읽기",
+      "icon": "📖",
+      "blurbEn": "How one student ended up in a studio flat, and why it suits.",
+      "instructionKo": "다음을 읽고 질문에 답하세요.",
+      "instructionEn": "Read the passage and answer the following questions.",
+      "noteEn": "The two printed questions are rows 1 and 2 with the book’s own three options each. The 쓰기 box underneath them is eight blank lines about your own place and the key gives no answer for it, so it is not here. Rows 3 to 6 are the sentences of the passage the two answers turn on, with one join taken out of each — which is also where the chapter’s four grammar points all happen to land inside one paragraph.",
+      "pattern": "지금 살고 있는 집",
+      "items": [
+        {
+          "n": 1,
+          "art": "quiz/unit13_q12_new_studio.png",
+          "phraseKo": "맞지 않는 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "이 사람이 지금 살고 있는 집에 대한 설명으로 맞지 않는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "near",
+          "choices": [
+            {
+              "id": "near",
+              "ko": "학교에서 가깝다"
+            },
+            {
+              "id": "facil",
+              "ko": "시설이 좋다"
+            },
+            {
+              "id": "owner",
+              "ko": "집주인이 좋다"
+            }
+          ],
+          "en": "Which of these does not match the passage? — That it is close to the school.",
+          "why": "학교에서 가깝다 is what the passage contradicts in so many words: 이 집은 학교에서 좀 멀기는 하지만. The other two are there — 새로 지어서 시설이 잘되어 있습니다 gives 시설이 좋다, and 집주인 아주머니가 가족처럼 도와주셔서 참 좋습니다 gives 집주인이 좋다. The 기는 하지만 is what carries the trap: it grants the distance before the good news, and a quick read takes in only the good news.",
+          "grammar": "멀기는 하지만 concedes the distance, and the sentence goes straight on to what is good about the place. The writer never says 가깝다 anywhere."
+        },
+        {
+          "n": 2,
+          "art": "quiz/unit13_q11_boarding_to_studio.png",
+          "phraseKo": "내용과 같은 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "이 글의 내용과 같은 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "hard",
+          "choices": [
+            {
+              "id": "hard",
+              "ko": "요즘 하숙집을 찾기가 쉽지 않습니다."
+            },
+            {
+              "id": "friend",
+              "ko": "친구가 하숙집을 소개해 주었습니다."
+            },
+            {
+              "id": "dorm",
+              "ko": "이 사람은 처음에 기숙사에 살았습니다."
+            }
+          ],
+          "en": "Which of these matches the passage? — Boarding houses are not easy to find these days.",
+          "why": "요즘 하숙집을 찾기가 쉽지 않습니다. is the passage in different words: 하숙집을 알아봤는데 구하기가 쉽지 않았습니다, and the reason is 하숙집이 대부분 원룸으로 바뀌었기 때문입니다. What the friend introduced was a 원룸, so 친구가 하숙집을 소개해 주었습니다 swaps one for the other. And 처음에 학교 기숙사에 살고 싶었지만 빈방이 없었습니다 — he wanted the dormitory and never got in, which is not 기숙사에 살았습니다.",
+          "grammar": "살고 싶었지만 … 없었습니다 is a wish that did not come off, and reading 살고 싶었다 as 살았다 is the trap. 바뀌다 in the reason sentence is the intransitive one — 하숙집이 바뀌었다, a thing changing by itself, against 하숙집을 바꿨다, somebody changing it."
+        },
+        {
+          "n": 3,
+          "art": "items/dormitory.png",
+          "phraseKo": "값이 싸고 ___ 편하다 (생활하다)",
+          "lines": [
+            {
+              "ko": "학교 기숙사가 값이 싸고 {} 편하기 때문에 기숙사에 살고 싶어 하는 학생들이 많습니다."
+            }
+          ],
+          "answer": "saenghwalhagiga",
+          "choices": [
+            {
+              "id": "saenghwalhagiga",
+              "ko": "생활하기가"
+            },
+            {
+              "id": "saenghwalgiga",
+              "ko": "생활기가"
+            },
+            {
+              "id": "saenghwalhaegiga",
+              "ko": "생활해기가"
+            }
+          ],
+          "en": "University dormitories are cheap and comfortable to live in, so a lot of students want a place in one.",
+          "why": "생활하다 is the verb and only a verb stem takes 기: 생활하기가 편하다. 생활기가 has dropped the 하 and left the bare noun 생활, which needs a particle rather than a 기. 생활해기가 has used the -여/해 form, which belongs before 요 and 서 — 생활해요, 생활해서 — and never in front of 기.",
+          "grammar": "Two patterns nested here: 생활하기가 편하다 is V-기(가) A, and 편하기 때문에 is A-기 때문에 on top of it. The same 기 twice, doing two different jobs."
+        },
+        {
+          "n": 4,
+          "art": "items/topik_investigate.png",
+          "phraseKo": "구하기가 ___ (쉽지 않다)",
+          "lines": [
+            {
+              "ko": "그래서 하숙집을 알아봤는데 구하기가 {}."
+            }
+          ],
+          "answer": "swipji",
+          "choices": [
+            {
+              "id": "swipji",
+              "ko": "쉽지 않았습니다"
+            },
+            {
+              "id": "swipji_an",
+              "ko": "쉽지 안았습니다"
+            },
+            {
+              "id": "swiji",
+              "ko": "쉬지 않았습니다"
+            }
+          ],
+          "en": "So I looked into boarding houses, but they were not easy to find.",
+          "why": "The long negative is -지 않다, written 않 with the ㅎ: 쉽지 않았습니다. 쉽지 안았습니다 writes 안, which is the short negative that goes in front of a verb and cannot take an ending. 쉬지 않았습니다 has lost the ㅂ of 쉽다 and turned it into 쉬다, to rest — so the sentence would say he did not rest.",
+          "grammar": "안 goes before the verb and never conjugates; 않다 goes after -지 and does. 안 쉬웠습니다 and 쉽지 않았습니다 mean the same; 쉽지 안았습니다 means nothing."
+        },
+        {
+          "n": 5,
+          "art": "items/topik_worry.png",
+          "phraseKo": "어떻게 해야 ___ 몰라서 (하다)",
+          "lines": [
+            {
+              "ko": "어떻게 해야 {} 몰라서 걱정을 했는데 친구가 지금 사는 원룸을 소개해 주었습니다."
+            }
+          ],
+          "answer": "halji",
+          "choices": [
+            {
+              "id": "halji",
+              "ko": "할지"
+            },
+            {
+              "id": "haeulji",
+              "ko": "하을지"
+            },
+            {
+              "id": "haji",
+              "ko": "하지"
+            }
+          ],
+          "en": "I did not know what to do and was worried, but a friend introduced me to the studio I live in now.",
+          "why": "하다 ends in a vowel, so the ending is just -ㄹ지: 어떻게 해야 할지 몰라서. 하을지 has inserted the 으 that only a consonant stem needs. 하지 has dropped the ㄹ and leaves the shape that belongs in 하지 않다. This is the chapter’s first grammar point turning up in the reading, and it is 몰라서 rather than 모르겠어요 because the not-knowing is the reason for the worry.",
+          "grammar": "-(으)ㄹ지 모르다 as a reason clause: 할지 몰라서, 갈지 몰라서. 모르다 is a 르-irregular, so 모르 + 아서 gives 몰라서. The 어떻게 해야 in front of it is 해야 하다 with the 하다 folded into 할지."
+        },
+        {
+          "n": 6,
+          "art": "items/topik_street.png",
+          "phraseKo": "학교에서 좀 ___ (멀다)",
+          "lines": [
+            {
+              "ko": "이 집은 학교에서 좀 {} 새로 지어서 시설이 잘되어 있습니다."
+            }
+          ],
+          "answer": "meolgineun",
+          "choices": [
+            {
+              "id": "meolgineun",
+              "ko": "멀기는 하지만"
+            },
+            {
+              "id": "meogineun",
+              "ko": "머기는 하지만"
+            },
+            {
+              "id": "meolneun",
+              "ko": "멀는 하지만"
+            }
+          ],
+          "en": "This place is a bit far from school, but it is newly built and well fitted out.",
+          "why": "멀다 is a ㄹ-stem and 기 is not on the short list of endings the ㄹ drops before, so it stays: 멀기는 하지만. 머기는 하지만 has dropped it anyway. 멀는 하지만 has used the verb modifier 는 on an adjective and then left it with no noun — and the ㄹ would have gone in that shape, giving 먼.",
+          "grammar": "The ㄹ drops before ㄴ, ㅂ, ㅅ and nothing else: 멉니다, 먼 집, 머세요 — against 멀기, 멀고, 멀지, 멀어서. Compare 살기 on page 99, which is the same stem type and the same ending."
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-task-1",
+      "type": "build",
+      "section": "과제",
+      "sectionEn": "Task",
+      "no": "과제",
+      "icon": "📄",
+      "blurbEn": "The advert on the wall, the terms agreed, and what gets announced.",
+      "instructionKo": "광고와 대화를 보고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Read the advertisement and the exchanges, and choose what belongs in each gap.",
+      "noteEn": "The task itself is a role-play: one of you writes an advert, the other lists what they are looking for, and then you agree house rules and present them. None of that can be marked. What the pages do print in full is the model advert, two exchanges between the flat-sharers and the speech from the front of the class — so the rows here are the four sentences those give outright. The book writes the block of flats as ○○아파트; the row leaves the circles out.",
+      "pattern": "룸메이트를 찾습니다 · 주거 규칙",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/school_backpack.png",
+          "phraseKo": "룸메이트를 ___ (찾다)",
+          "lines": [
+            {
+              "ko": "저는 서울대학교 근처에 있는 아파트에서 살고 있는데 같이 살 룸메이트를 {}."
+            }
+          ],
+          "answer": "chatseumnida",
+          "choices": [
+            {
+              "id": "chatseumnida",
+              "ko": "찾습니다"
+            },
+            {
+              "id": "chatsipnida",
+              "ko": "찾십니다"
+            },
+            {
+              "id": "chateupnida",
+              "ko": "찾읍니다"
+            }
+          ],
+          "en": "I live in an apartment near Seoul National University and am looking for a flatmate to share with.",
+          "why": "찾다 ends in a consonant, so the formal ending is -습니다: 찾습니다. 찾십니다 has borrowed the 시 of the honorific, which would be about somebody else and is not how you advertise for yourself. 찾읍니다 has inserted an 으, which -습니다 never takes — that 으 belongs to -읍시다 and to older spelling.",
+          "grammar": "Consonant stem → -습니다, vowel stem → -ㅂ니다: 찾습니다, 삽니다, 구합니다. A notice on a wall is written in this style throughout, which is why the advert says 찾습니다 and not 찾아요."
+        },
+        {
+          "n": 2,
+          "art": "items/soap_bar.png",
+          "phraseKo": "관리비를 ___ 어때요? (반씩 내다)",
+          "lines": [
+            {
+              "ko": "관리비가 한 달에 10만 원쯤 나오는데 {} 어때요?"
+            }
+          ],
+          "answer": "bansikk",
+          "choices": [
+            {
+              "id": "bansikk",
+              "ko": "반씩 내면"
+            },
+            {
+              "id": "bansikk_myeo",
+              "ko": "반씩 내며"
+            },
+            {
+              "id": "bansikk_eu",
+              "ko": "반씩 내으면"
+            }
+          ],
+          "en": "The service charge comes to about a hundred thousand a month — how about paying half each?",
+          "why": "-(으)면 어때요? is how a suggestion is put, and 내다 ends in a vowel so the 으 stays out: 반씩 내면 어때요? 반씩 내으면 is that 으 put in anyway. 반씩 내며 uses -(으)며, which joins two facts — while paying half — and cannot be the thing being suggested.",
+          "grammar": "씩 distributes: 반씩 half each, 5만 원씩 fifty thousand each, 하나씩 one each. It goes on the amount, not on the people, and the page uses it twice — 반씩 내면 and 5만 원씩 내기로."
+        },
+        {
+          "n": 3,
+          "art": "items/soap_bar.png",
+          "phraseKo": "일요일마다 같이 ___ 했습니다 (하다)",
+          "lines": [
+            {
+              "ko": "청소는 일요일마다 같이 {} 했습니다."
+            }
+          ],
+          "answer": "hagiro",
+          "choices": [
+            {
+              "id": "hagiro",
+              "ko": "하기로"
+            },
+            {
+              "id": "hagireul",
+              "ko": "하기를"
+            },
+            {
+              "id": "hagoro",
+              "ko": "하고로"
+            }
+          ],
+          "en": "We have agreed to do the cleaning together every Sunday.",
+          "why": "V-기로 하다 is the pattern for something settled between people, and the sentence needs its 로: 하기로 했습니다. 하기를 했습니다 has put the object particle on the 기, which leaves 하다 with a noun it cannot take. 하고로 has spliced the connector -고 into the middle and is not a form at all.",
+          "grammar": "V-기로 하다, to agree or decide to. The past 했습니다 is what makes it an agreement already reached: 5만 원씩 내기로 했습니다, 같이 하기로 했습니다. Unit 11 drilled this ending; here it is what house rules are written in."
+        },
+        {
+          "n": 4,
+          "art": "items/topik_cost_of_living.png",
+          "phraseKo": "생활비가 많이 ___ 좋습니다 (들지 않다)",
+          "lines": [
+            {
+              "ko": "이 집은 월세가 좀 비싸기는 하지만 집에서 학교까지 걸어서 갈 수 있기 때문에 생활비가 많이 {} 좋습니다."
+            }
+          ],
+          "answer": "deuljianaseo",
+          "choices": [
+            {
+              "id": "deuljianaseo",
+              "ko": "들지 않아서"
+            },
+            {
+              "id": "deuljianaseo_bad",
+              "ko": "들지 안아서"
+            },
+            {
+              "id": "deujianaseo",
+              "ko": "드지 않아서"
+            }
+          ],
+          "en": "The rent on this place is a bit high, but you can walk to school from it, so living costs are low and that is good.",
+          "why": "The long negative is 않다 with the ㅎ, and 들다 keeps its ㄹ in front of -지: 들지 않아서. 들지 안아서 writes 안, which is the short negative and takes no endings. 드지 않아서 has dropped the ㄹ where nothing calls for it — the ㄹ goes before ㄴ, ㅂ and ㅅ, and 지 is none of them.",
+          "grammar": "돈이 들다, for money to be needed. 생활비가 많이 들다 / 안 들다 is the fixed pair, and it is 들다 rather than 쓰다 because the cost arises rather than being spent by anyone."
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-culture-1",
+      "type": "build",
+      "section": "문화 산책",
+      "sectionEn": "Culture note",
+      "no": "알아보기",
+      "icon": "🏯",
+      "blurbEn": "A hanok somebody actually lives in, and how it stays cool.",
+      "instructionKo": "다음을 읽고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Read the passage and choose what belongs in each gap.",
+      "noteEn": "The page has three photographs, one short passage and then 생각 나누기 — introduce the traditional houses of your own country to the class — which nothing can mark. The five rows are the five sentences of the passage with one join taken out of each. Two of them are endings the chapter has already taught, met here in a paragraph that is not about renting anything, which is the only way to find out whether they have stuck.",
+      "pattern": "한옥 · 북촌 한옥마을",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/hanok_house.png",
+          "phraseKo": "한옥마을에 ___ 친구 (살다)",
+          "lines": [
+            {
+              "ko": "지난 주말에 북촌 한옥마을에 {} 친구 집에 놀러 갔습니다."
+            }
+          ],
+          "answer": "saneun",
+          "choices": [
+            {
+              "id": "saneun",
+              "ko": "사는"
+            },
+            {
+              "id": "salneun",
+              "ko": "살는"
+            },
+            {
+              "id": "saleun",
+              "ko": "살은"
+            }
+          ],
+          "en": "Last weekend I went to visit a friend who lives in the Bukchon hanok village.",
+          "why": "살다 modifies 친구 with -는, and this is one of the places the ㄹ does drop: 살 + 는 → 사는. 살는 has kept the ㄹ in front of the ㄴ, which is exactly the join the rule removes it for. 살은 has used the adjective modifier -은, and 살다 is a verb.",
+          "grammar": "The ㄹ drops before ㄴ, ㅂ and ㅅ: 사는, 삽니다, 사세요. It stays everywhere else: 살기, 살고, 살아서, 살지. Both halves of that rule are in this chapter — 사는 집 on page 96 and 살기 좋다 on page 99."
+        },
+        {
+          "n": 2,
+          "art": "items/traditional_hanok.png",
+          "phraseKo": "한옥을 ___ (보다)",
+          "lines": [
+            {
+              "ko": "남산 한옥마을과 민속촌에서 한옥을 {} 사람이 살고 있는 한옥에는 처음 가 봤습니다."
+            }
+          ],
+          "answer": "bogineun",
+          "choices": [
+            {
+              "id": "bogineun",
+              "ko": "보기는 했지만"
+            },
+            {
+              "id": "boneun",
+              "ko": "보는 했지만"
+            },
+            {
+              "id": "bogi",
+              "ko": "보기 했지만"
+            }
+          ],
+          "en": "I had seen hanok at the Namsan hanok village and the folk village, but this was the first time I had been inside one somebody lives in.",
+          "why": "보기는 했지만 grants the earlier visits and then says what was new, which is what the sentence needs — the writer is not denying having seen hanok, only saying those were empty ones. 보는 했지만 has swapped the noun-making 기 for a modifier, and 보기 했지만 has dropped the 는 that does the granting.",
+          "grammar": "A/V-기는 하지만 in its written form 기는 했지만: the tense goes on 하다, not on the verb in front of 기. 보기는 했지만, 가기는 했지만, 먹기는 했지만."
+        },
+        {
+          "n": 3,
+          "art": "items/topik_refreshingly_cool.png",
+          "phraseKo": "바람이 잘 ___ (통하다)",
+          "lines": [
+            {
+              "ko": "밖은 아주 더웠는데 집 안은 바람이 잘 {} 시원했습니다."
+            }
+          ],
+          "answer": "tonghaeseo",
+          "choices": [
+            {
+              "id": "tonghaeseo",
+              "ko": "통해서"
+            },
+            {
+              "id": "tonghaseo",
+              "ko": "통하서"
+            },
+            {
+              "id": "tonghaetseoseo",
+              "ko": "통했어서"
+            }
+          ],
+          "en": "Outside it was very hot, but inside the house the air moved through and it was cool.",
+          "why": "통하다 is a 하다 verb, and -아서/어서 needs the 해 form: 통해서. 통하서 has joined the ending straight onto 하, which no 하다 verb does. 통했어서 has put the past tense in front of -서, and -아서/어서 never carries tense of its own — the tense sits on 시원했습니다 at the end.",
+          "grammar": "바람이 통하다, for air to pass through, is why a hanok stays cool: the doors open front and back. 잘 통해서 with -아서/어서 gives the reason, and the reason clause stays in the plain present."
+        },
+        {
+          "n": 4,
+          "art": "items/topik_feel_actively.png",
+          "phraseKo": "아파트에서 ___ 분위기 (느낄 수 없다)",
+          "lines": [
+            {
+              "ko": "한옥은 보통 아파트에서 {} 특별한 분위기가 있었습니다."
+            }
+          ],
+          "answer": "neukkil",
+          "choices": [
+            {
+              "id": "neukkil",
+              "ko": "느낄 수 없는"
+            },
+            {
+              "id": "neukkil_eun",
+              "ko": "느낄 수 없은"
+            },
+            {
+              "id": "neukki",
+              "ko": "느끼 수 없는"
+            }
+          ],
+          "en": "A hanok has a particular feel to it that you do not usually get in an apartment.",
+          "why": "없다 modifies a noun with -는, never -은, so the answer is 느낄 수 없는 분위기. 느낄 수 없은 is that mistake made. 느끼 수 없는 has dropped the -(으)ㄹ that 수 needs in front of it: it is 느낄 수, 갈 수, 볼 수 — the 수 is a noun and must be modified.",
+          "grammar": "V-(으)ㄹ 수 있다/없다, then -는 to hang the whole thing on a noun: 느낄 수 없는 분위기, 갈 수 없는 곳. 있다 and 없다 both take -는, which is why 재미있는 and 맛있는 look the way they do."
+        },
+        {
+          "n": 5,
+          "art": "items/hanok_house.png",
+          "phraseKo": "한번 ___ 좋겠습니다 (살아 보다)",
+          "lines": [
+            {
+              "ko": "저도 나중에 한옥에서 한번 {} 좋겠습니다."
+            }
+          ],
+          "answer": "sarabwatseumyeon",
+          "choices": [
+            {
+              "id": "sarabwatseumyeon",
+              "ko": "살아 봤으면"
+            },
+            {
+              "id": "sarabatseumyeon",
+              "ko": "살아 밨으면"
+            },
+            {
+              "id": "salbwatseumyeon",
+              "ko": "살 봤으면"
+            }
+          ],
+          "en": "I would like to try living in a hanok myself one day.",
+          "why": "-았으면/었으면 좋겠다 is the wish pattern and it goes on 보다: 보 + 았 contracts to 봤, giving 살아 봤으면 좋겠습니다. 살아 밨으면 has contracted the wrong way — 보 + 았 is 봤, not 밨. 살 봤으면 has dropped the -아 that V-아/어 보다 needs between the two verbs.",
+          "grammar": "V-아/어 보다 + -았으면/었으면 좋겠다, a wish to try something. 살아 봤으면 좋겠어요, 가 봤으면 좋겠어요. The past tense inside it is what makes it a wish rather than a plan."
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-pron-1",
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "no": "규칙",
+      "icon": "🔊",
+      "blurbEn": "A final consonant and a following ㅎ fuse into one aspirated sound.",
+      "instructionKo": "잘 듣고 발음을 골라 보세요.",
+      "instructionEn": "Listen and choose how each word is actually pronounced.",
+      "noteEn": "The book prints the rule, plays two sentences for 준비 and lists three worked examples. Rows here go the way the page goes: spelling on the left, sound in the brackets on the right. The two 준비 sentences come with the recording; the three examples have none, because the tape does not read them. On every row the spelling itself is one of the wrong buttons — the whole point is that what is written is not what is said.",
+      "pattern": "받침 [ㄱ, ㄷ, ㅂ] + ㅎ → [ㅋ, ㅌ, ㅍ]",
+      "items": [
+        {
+          "n": 1,
+          "art": "quiz/unit13_q09_celebrate.png",
+          "phraseKo": "생일 축하해요",
+          "lines": [
+            {
+              "ko": "생일 축하해요. → 축하[{}]"
+            }
+          ],
+          "answer": "chuka",
+          "choices": [
+            {
+              "id": "chuka",
+              "ko": "추카"
+            },
+            {
+              "id": "chukha",
+              "ko": "축하"
+            },
+            {
+              "id": "chukka",
+              "ko": "축카"
+            }
+          ],
+          "en": "Happy birthday. — 축하 is said [추카].",
+          "why": "The 받침 ㄱ of 축 and the ㅎ of 하 merge into a single [ㅋ], and the ㄱ leaves the first syllable altogether: [추카]. 축하 read as written would keep both consonants, which no Korean speaker does here. 축카 keeps the ㄱ in place and adds a ㅋ as well, which is one sound too many.",
+          "grammar": "ㄱ + ㅎ → [ㅋ] is the first line of the rule. The aspirated consonant takes the place of both, so the syllable count stays the same but the boundary moves.",
+          "audio": {
+            "src": "audio/book/2b-u13-d31.mp3",
+            "labelEn": "발음 준비 1 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "quiz/unit13_q10_clean.png",
+          "phraseKo": "깨끗한 집",
+          "lines": [
+            {
+              "ko": "깨끗한 집을 찾고 있어요. → 깨끗한[{}]"
+            }
+          ],
+          "answer": "kkaekkeutan",
+          "choices": [
+            {
+              "id": "kkaekkeutan",
+              "ko": "깨끄탄"
+            },
+            {
+              "id": "kkaekkeuthan",
+              "ko": "깨끗한"
+            },
+            {
+              "id": "kkaekkeudhan",
+              "ko": "깨끋한"
+            }
+          ],
+          "en": "I am looking for a clean place. — 깨끗한 is said [깨끄탄].",
+          "why": "The 받침 ㅅ is pronounced [ㄷ] before a consonant, and that [ㄷ] plus the ㅎ gives [ㅌ]: [깨끄탄]. 깨끗한 read as written is the spelling, not the sound. 깨끋한 has got as far as turning the ㅅ into ㄷ and then stopped, leaving the ㅎ separate — which is the halfway house this rule exists to get past.",
+          "grammar": "ㄷ in this rule covers every 받침 that is pronounced [ㄷ]: ㄷ, ㅌ, ㅅ, ㅆ, ㅈ, ㅊ, ㅎ. That is why 깨끗하다 behaves like 깨끋하다 and comes out [깨끄타다].",
+          "audio": {
+            "src": "audio/book/2b-u13-d32.mp3",
+            "labelEn": "발음 준비 2 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/reservation.png",
+          "phraseKo": "예약하세요",
+          "lines": [
+            {
+              "ko": "예약하세요[{}]"
+            }
+          ],
+          "answer": "yeyakase",
+          "choices": [
+            {
+              "id": "yeyakase",
+              "ko": "예야카세요"
+            },
+            {
+              "id": "yeyakhase",
+              "ko": "예약하세요"
+            },
+            {
+              "id": "yeyakkase",
+              "ko": "예약카세요"
+            }
+          ],
+          "en": "예약하세요, please make a reservation, is pronounced [예야카세요].",
+          "why": "The 받침 ㄱ of 약 goes across to the 하 and the two become [카], so 약하 is heard as [야카] — the whole word is [예야카세요]. 예약하세요 is the spelling read letter by letter. 예약카세요 has left the ㄱ where it was and put a ㅋ in as well, which doubles the consonant.",
+          "grammar": "This is the first of the book’s three worked examples. It is the same ㄱ + ㅎ join as 축하[추카], met inside a longer word where the shifted boundary is easier to hear."
+        },
+        {
+          "n": 4,
+          "art": "items/soap_bar.png",
+          "phraseKo": "깨끗해요",
+          "lines": [
+            {
+              "ko": "깨끗해요[{}]"
+            }
+          ],
+          "answer": "kkaekkeutae",
+          "choices": [
+            {
+              "id": "kkaekkeutae",
+              "ko": "깨끄태요"
+            },
+            {
+              "id": "kkaekkeuthae",
+              "ko": "깨끗해요"
+            },
+            {
+              "id": "kkaekkeudhae",
+              "ko": "깨끋해요"
+            }
+          ],
+          "en": "깨끗해요, it is clean, is pronounced [깨끄태요].",
+          "why": "Same stem as row 2 with a different ending, and the rule does not care which ending it is: [깨끄태요]. 깨끗해요 is the spelling. 깨끋해요 again stops halfway, with the ㅅ turned to ㄷ but the ㅎ still standing on its own. Hearing it as three clean syllables — 깨·끄·태 — is what tells you the rule has been applied.",
+          "grammar": "깨끗하다 is the most common word in this chapter that the rule touches: 깨끗해요 [깨끄태요], 깨끗한 [깨끄탄], 깨끗하고 [깨끄타고]. The advert on page 106 and the landlord on track 39 both use it."
+        },
+        {
+          "n": 5,
+          "art": "items/diploma_scroll.png",
+          "phraseKo": "입학",
+          "lines": [
+            {
+              "ko": "입학[{}]"
+            }
+          ],
+          "answer": "ipak",
+          "choices": [
+            {
+              "id": "ipak",
+              "ko": "이팍"
+            },
+            {
+              "id": "iphak",
+              "ko": "입학"
+            },
+            {
+              "id": "ippak",
+              "ko": "입팍"
+            }
+          ],
+          "en": "입학, entrance into school, is pronounced [이팍].",
+          "why": "This is the third line of the rule, ㅂ + ㅎ → [ㅍ], and it works the same way: the ㅂ of 입 crosses to the 학 and the two make [파], giving [이팍]. 입학 is the spelling. 입팍 keeps the ㅂ and adds the ㅍ, which is the mistake the other two rows make with ㄱ and ㅌ.",
+          "grammar": "ㅂ + ㅎ → [ㅍ] completes the set. 입학 [이팍], 밥하고 [바파고], 잡화 [자파]. The 연습 sentences on the same page use two of the three."
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-pron-2",
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "no": "연습",
+      "icon": "✍️",
+      "blurbEn": "The tape gives the sound; the blank wants the spelling.",
+      "instructionKo": "잘 듣고 빈칸에 알맞은 말을 쓰세요.",
+      "instructionEn": "Listen carefully and write the word you hear.",
+      "noteEn": "The book has you listen and repeat these four lines aloud, which nothing can mark. Turned round instead: the tape supplies the sound and the blank wants the spelling, which is the direction that costs marks in a dictation — every one of these words is written with a consonant that is not heard. Each row plays the line it came from, and the fourth line of the book is split into two rows so both halves get their own clip.",
+      "pattern": "들은 것을 받아 적기",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/diploma_scroll.png",
+          "phraseKo": "입학을 [추카함니다]",
+          "lines": [
+            {
+              "ko": "입학을 {}."
+            }
+          ],
+          "answer": "chukhahamnida",
+          "choices": [
+            {
+              "id": "chukhahamnida",
+              "ko": "축하합니다"
+            },
+            {
+              "id": "chukahamnida",
+              "ko": "추카합니다"
+            },
+            {
+              "id": "chukkahamnida",
+              "ko": "축카합니다"
+            }
+          ],
+          "en": "Congratulations on getting in.",
+          "why": "The tape says [추카함니다] and the spelling is 축하합니다 — the ㄱ that is not heard has to be written back in. 추카합니다 is the sound written down, which is the mistake this row exists for. 축카합니다 has both consonants and would be said [축카], with a beat too many.",
+          "grammar": "Sino-Korean words hold their spelling however they are said: 축하, 입학, 백화점. Learning the sound first and the spelling later is what makes the ㅎ disappear from the page as well as from the mouth.",
+          "audio": {
+            "src": "audio/book/2b-u13-d33.mp3",
+            "labelEn": "발음 연습 1 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/topik_outer_coat.png",
+          "phraseKo": "이 [오타고] 잘 어울려요",
+          "lines": [
+            {
+              "ko": "그 신발이 이 {} 잘 어울려요."
+            }
+          ],
+          "answer": "othago",
+          "choices": [
+            {
+              "id": "othago",
+              "ko": "옷하고"
+            },
+            {
+              "id": "otago",
+              "ko": "오타고"
+            },
+            {
+              "id": "ottago",
+              "ko": "옷타고"
+            }
+          ],
+          "en": "Those shoes go well with these clothes.",
+          "why": "It is 옷 plus the particle 하고, and the join is heard as [오타고]: the ㅅ becomes [ㄷ] and merges with the ㅎ. 오타고 is that sound written down and hides the noun. 옷타고 keeps the ㅅ and writes the ㅌ as well, which is one consonant too many — and 하고 is a particle, so it is written closed up to 옷.",
+          "grammar": "N하고 N, and: 옷하고 신발, 밥하고 김치. Two of this page’s five sentences use it, and both times the 하고 is where the rule fires.",
+          "audio": {
+            "src": "audio/book/2b-u13-d34.mp3",
+            "labelEn": "발음 연습 2 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/crossroads.png",
+          "phraseKo": "길이 많이 [마켜]",
+          "lines": [
+            {
+              "ko": "이 시간에는 길이 많이 {}."
+            }
+          ],
+          "answer": "makhyeo",
+          "choices": [
+            {
+              "id": "makhyeo",
+              "ko": "막혀"
+            },
+            {
+              "id": "makyeo",
+              "ko": "마켜"
+            },
+            {
+              "id": "makkyeo",
+              "ko": "막켜"
+            }
+          ],
+          "en": "The roads are very busy at this time of day.",
+          "why": "The verb is 막히다, to be blocked, and 막혀 is said [마켜] — the ㄱ of 막 crossing into the 혀. 마켜 is the sound written down and loses the stem. 막켜 has the ㄱ twice over. Note the ending too: 막혀 with no 요, because the book prints this line in 반말.",
+          "grammar": "막히다 is the passive of 막다: 길을 막다 to block a road, 길이 막히다 for a road to be blocked. It is one of this unit’s headwords and always appears with 길이.",
+          "audio": {
+            "src": "audio/book/2b-u13-d35.mp3",
+            "labelEn": "발음 연습 3 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "items/vegetable_pile.png",
+          "phraseKo": "반찬이 없는데 [어떠카죠]",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "반찬이 없는데 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "밥하고 김치만 있으면 돼요."
+            }
+          ],
+          "answer": "eotteokhajyo",
+          "choices": [
+            {
+              "id": "eotteokhajyo",
+              "ko": "어떡하죠"
+            },
+            {
+              "id": "eotteokajyo",
+              "ko": "어떠카죠"
+            },
+            {
+              "id": "eotteokkajyo",
+              "ko": "어떡카죠"
+            }
+          ],
+          "en": "There is nothing to go with the rice — what shall we do? — Rice and kimchi will do.",
+          "why": "It is 어떡하다 — 어떻게 하다 worn down into one word — and the ㄱ of 떡 merges with the ㅎ, so it is said [어떠카죠]. 어떠카죠 is that sound written down. 어떡카죠 has the ㄱ and the ㅋ both. The 죠 is -지요 contracted, which is what makes it a shared worry rather than a question.",
+          "grammar": "어떡하죠? What are we to do? Written 어떡하다 when it is this fixed expression, and 어떻게 하다 when the two words are still doing their own work: 어떻게 할까요?",
+          "audio": {
+            "src": "audio/book/2b-u13-d36.mp3",
+            "labelEn": "발음 연습 4 · the line itself"
+          }
+        },
+        {
+          "n": 5,
+          "art": "items/rice_grain.png",
+          "phraseKo": "[바파고] 김치만 있으면",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "반찬이 없는데 어떡하죠?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 김치만 있으면 돼요."
+            }
+          ],
+          "answer": "baphago",
+          "choices": [
+            {
+              "id": "baphago",
+              "ko": "밥하고"
+            },
+            {
+              "id": "bapago",
+              "ko": "바파고"
+            },
+            {
+              "id": "bappago",
+              "ko": "밥파고"
+            }
+          ],
+          "en": "Rice and kimchi will do.",
+          "why": "The ㅂ of 밥 crosses into the 하고 and the two become [파], so it is said [바파고] and written 밥하고. 바파고 is the sound written down and hides 밥. 밥파고 writes the ㅂ and the ㅍ both. This is the ㅂ line of the rule, and it is the same particle as 옷하고 two rows up.",
+          "grammar": "밥하고 김치만 있으면 돼요 — the minimum a Korean meal is allowed to be. 만 있으면 돼요, if there is only … that will do, is the frame; 하고 joins the two nouns inside it.",
+          "audio": {
+            "src": "audio/book/2b-u13-d37.mp3",
+            "labelEn": "발음 연습 4 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u13sgk-check-2",
+      "type": "build",
+      "section": "자기 평가",
+      "sectionEn": "Self-check",
+      "no": "2",
+      "icon": "✅",
+      "blurbEn": "Four patterns in one box, and four exchanges that each want one.",
+      "instructionKo": "알맞은 것을 골라 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue using the word in parentheses and the right pattern from the box.",
+      "noteEn": "The chapter’s own self-check, and the only page that puts all four patterns side by side: -(으)ㄹ지 모르겠다, -기는 하지만, -기 때문에 and -기(가). The verb is printed in brackets on the page and appears above each row here; what you are choosing is which of the four the exchange is asking for, so every wrong button is a correctly formed pattern that answers the wrong question. The answers are the ones printed upside down at the foot of the page. The word list in 자기 평가 1 is a tick-box and is not here.",
+      "pattern": "네 가지 문형을 한자리에서",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/exam_papers.png",
+          "phraseKo": "(잘 볼 수 있다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "내일 시험이지요? 시험 잘 보세요."
+            },
+            {
+              "who": "B",
+              "ko": "네. 그런데 공부를 많이 못 해서 {}."
+            }
+          ],
+          "answer": "moreugesseoyo",
+          "choices": [
+            {
+              "id": "moreugesseoyo",
+              "ko": "시험을 잘 볼 수 있을지 모르겠어요"
+            },
+            {
+              "id": "gineun",
+              "ko": "시험을 잘 볼 수 있기는 하지만"
+            },
+            {
+              "id": "ttaemune",
+              "ko": "시험을 잘 볼 수 있기 때문에"
+            }
+          ],
+          "en": "Your exam is tomorrow, isn’t it? Good luck. — Thanks. But I have not studied much, so I am not sure I will do well.",
+          "why": "B has to finish the exchange, and only 모르겠어요 can end a sentence — 시험을 잘 볼 수 있을지 모르겠어요 is the key the book prints. 기는 하지만 and 기 때문에 are both connectors: they hand on to a second clause that never comes, so either one leaves B talking with the sentence open.",
+          "grammar": "Of the four patterns in the box, one ends a sentence and three do not. 모르겠다 is a verb and can be the last word; -기는 하지만, -기 때문에 and -기(가) all need something after them."
+        },
+        {
+          "n": 2,
+          "art": "items/wall_calendar.png",
+          "phraseKo": "(방학이다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 왜 학교에 안 갔어요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 수업이 없어요."
+            }
+          ],
+          "answer": "banghagigi",
+          "choices": [
+            {
+              "id": "banghagigi",
+              "ko": "방학이기 때문에"
+            },
+            {
+              "id": "banghagigineun",
+              "ko": "방학이기는 하지만"
+            },
+            {
+              "id": "banghagilji",
+              "ko": "방학일지 모르겠지만"
+            }
+          ],
+          "en": "Why did you not go to school today? — There are no classes, because it is the holidays.",
+          "why": "A has asked why, so B owes a reason, and that is 기 때문에: 방학이기 때문에 수업이 없어요. 방학이기는 하지만 would concede the holidays and then say something that goes against them, which 수업이 없어요 does not. 방학일지 모르겠지만 says B does not know whether it is the holidays, and somebody who stayed home knows.",
+          "grammar": "The cue in brackets is a noun, 방학이다, so whichever pattern is chosen has to go on 이다: 방학이기 때문에, 방학이기는, 방학일지. This is the row the box has for N(이)기 때문에."
+        },
+        {
+          "n": 3,
+          "art": "items/topik_uncomfortable.png",
+          "phraseKo": "(다니다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "왜 이사하려고 해요?"
+            },
+            {
+              "who": "B",
+              "ko": "집이 너무 멀어서 학교 {} 불편해요."
+            }
+          ],
+          "answer": "daniigiga",
+          "choices": [
+            {
+              "id": "daniigiga",
+              "ko": "다니기가"
+            },
+            {
+              "id": "daniigineun",
+              "ko": "다니기는 하지만"
+            },
+            {
+              "id": "daniigi",
+              "ko": "다니기 때문에"
+            }
+          ],
+          "en": "Why are you thinking of moving? — My place is too far away, so getting to school is awkward.",
+          "why": "불편해요 is an adjective waiting for a subject, and the blank has to supply it: 학교 다니기가 불편해요. 다니기는 하지만 would concede the commuting and turn against it, leaving 불편해요 as the thing conceded to. 다니기 때문에 makes the commuting the reason, and then 불편해요 has nothing to be about.",
+          "grammar": "V-기(가) A. The adjective decides the particle: 불편하다, 편하다, 좋다 and 힘들다 all take a subject, so the 기 takes 가. 학교에 다니다 loses its 에 here because 학교 다니다 is fixed as a phrase."
+        },
+        {
+          "n": 4,
+          "art": "items/running_shoe.png",
+          "phraseKo": "(좋아하다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "운동 자주 하세요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, {} 시간이 없어서 자주 못해요."
+            }
+          ],
+          "answer": "johahagineun",
+          "choices": [
+            {
+              "id": "johahagineun",
+              "ko": "좋아하기는 하지만"
+            },
+            {
+              "id": "johahagi",
+              "ko": "좋아하기 때문에"
+            },
+            {
+              "id": "johahalji",
+              "ko": "좋아할지 모르겠지만"
+            }
+          ],
+          "en": "Do you exercise often? — No. I do like it, but I have no time, so I cannot do it much.",
+          "why": "B says 아니요 and then softens it, which is what 기는 하지만 is for: 좋아하기는 하지만 시간이 없어서 자주 못해요. 좋아하기 때문에 would make liking exercise the reason for not doing it. 좋아할지 모르겠지만 says B is unsure whether they like it, and 아니요 was about the frequency, not the liking.",
+          "grammar": "The last of the four patterns, and the one this chapter uses most: it grants what the question assumed before giving the real answer. Compare 가끔 먹기는 하지만 좋아하지는 않아요 on page 95 — the same move in the other direction."
+        }
+      ]
+    }
+  ]
+}
