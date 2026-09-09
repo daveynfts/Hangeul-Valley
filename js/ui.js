@@ -2868,6 +2868,7 @@ function textbookUrl() {
   if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/unit15-textbook.json';
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-textbook.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-textbook.json';
+  if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-textbook.json';
   return null;
 }
 

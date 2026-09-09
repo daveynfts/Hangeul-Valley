@@ -1431,7 +1431,8 @@ const overlayIds = [
   const BANKS = [
     { unit: 'unit14', label: 'Unit 14', world: 'isUnit14World', exs: 9, rows: 41 },
     { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 },
-    { unit: 'unit13', label: 'Unit 13', world: 'isUnit13World', exs: 16, rows: 78 }
+    { unit: 'unit13', label: 'Unit 13', world: 'isUnit13World', exs: 16, rows: 78 },
+    { unit: 'unit11', label: 'Unit 11', world: 'isUnit11World', exs: 14, rows: 63 }
   ];
   const TYPES = ['fill', 'match', 'dialogue', 'experience', 'build'];
   const gameJs = readGameSource();

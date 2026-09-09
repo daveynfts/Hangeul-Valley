@@ -1,0 +1,2239 @@
+{
+  "id": "unit11-textbook",
+  "source": "Seoul National University Korean 2B (교과서), Unit 11 · 운동을 좀 해 보는 게 어때요?",
+  "titleKo": "교과서",
+  "titleEn": "Textbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "The chapter's own pages — one exercise at a time.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "holdGloss": false,
+  "artNote": "The book’s own drawings and photographs are not here. Where a row is about a word the game already has an icon for the row points at that icon — the symptoms, the pharmacy, the thermometer, the ginseng root and the rest come out of sprites/catalog.json — and a row with nothing that fits shows no picture at all. Two exercises want the book’s pictures most: 어휘 연습 1 is twelve symptom drawings and the rows describe the situation in words instead, and 듣기 1 question 2 is four wordless pictures of a throat, a nose, a thermometer and a cough, which the row names in Korean because a picture cannot be a button.",
+  "omittedNote": "One printed section is left out whole, and it has no key of any kind. 과제 is a role-play from the activity sheets on p.226–227: the 환자 sheet is fifteen wordless pictures and the 의사 sheet is twelve prescription cards — a department, a dosage in words and a 주의사항 picture marked ○ or ✗ — and the two sets are drawn at random with no printed pairing between them, so there is nothing a screen could mark. 어휘 2 and 어휘 3 are also absent, for the opposite reason: the 익힘책 already drills all six hospital departments and the whole medicine set with its four verbs, so repeating them here would charge a learner twice for one exercise. Everything else that has a key is here — the 대화 and 예문 of all four grammar points, both 말하기 dialogues, both 듣기 question sets, the reading and its two questions, the culture passage, both halves of 발음, and 자기 평가 2 with the answers printed at the foot of its page.",
+  "exercises": [
+    {
+      "id": "u11sgk-vocab-1",
+      "type": "build",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 1",
+      "icon": "🤒",
+      "blurbEn": "Seven ways of telling a doctor what is wrong.",
+      "instructionKo": "어디가 아픈지 이야기해 보세요.",
+      "instructionEn": "Say what is wrong, as the patient would.",
+      "noteEn": "The page prints twelve symptom pictures under an open instruction — go to the doctor and explain — which cannot be marked. Five of the twelve are already the 익힘책’s 어휘 연습 1, so these are the other seven, and the five turn up here as wrong answers instead. Every symptom is a whole phrase rather than a word, and which noun takes 나다, which takes 없다 and which takes 하다 is not guessable: 몸살이 나다 but 기운이 없다 but 멀미를 하다.",
+      "pattern": "증상 · 어디가 아파서 오셨어요?",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/bandaged_boot.png",
+          "phraseKo": "계단에서 넘어졌다",
+          "lines": [
+            {
+              "who": "의사",
+              "ko": "어디가 아파서 오셨어요?"
+            },
+            {
+              "who": "환자",
+              "ko": "계단에서 넘어져서 {}."
+            }
+          ],
+          "answer": "dari",
+          "choices": [
+            {
+              "id": "dari",
+              "ko": "다리를 다쳤어요"
+            },
+            {
+              "id": "eojireop",
+              "ko": "어지러웠어요"
+            },
+            {
+              "id": "tohae",
+              "ko": "토했어요"
+            }
+          ],
+          "en": "What brings you in? — I fell on the stairs and hurt my leg.",
+          "why": "넘어져서 is the cause, so the answer has to be the injury it caused: 다리를 다쳤어요. 다치다 takes the part of the body as its object with 을/를 — 다리를 다치다, 팔을 다치다. 어지러웠어요 and 토했어요 are both things a fall could lead to, but neither is what falling down a staircase does to a leg.",
+          "grammar": "다치다 is transitive here: N을/를 다치다, to hurt a part of oneself. The passive 다리가 다쳤어요 is not said; what is said with 이/가 is 다리를 다쳐서 아파요."
+        },
+        {
+          "n": 2,
+          "art": "quiz/unit11_q12_motion_sickness.png",
+          "phraseKo": "버스를 오래 타다",
+          "lines": [
+            {
+              "who": "환자",
+              "ko": "버스를 오래 타면 {}."
+            }
+          ],
+          "answer": "meolmi",
+          "choices": [
+            {
+              "id": "meolmi",
+              "ko": "멀미를 해요"
+            },
+            {
+              "id": "baetal",
+              "ko": "배탈이 나요"
+            },
+            {
+              "id": "momsal",
+              "ko": "몸살이 나요"
+            }
+          ],
+          "en": "If I am on a bus for a long time I get travel sick.",
+          "why": "멀미 is the sickness that comes from moving — a bus, a boat, a plane — and it takes 하다: 멀미를 해요. 배탈이 나요 comes from something you ate and 몸살이 나요 is the whole-body ache of a coming illness; neither is caused by riding.",
+          "grammar": "Three symptom verbs, three patterns: 멀미를 하다 (object), 배탈이 나다 (subject), 몸살이 나다 (subject). The particle is part of the word — 멀미가 하다 and 배탈을 나다 are not said."
+        },
+        {
+          "n": 3,
+          "art": "items/toilet.png",
+          "phraseKo": "음식을 잘못 먹었다",
+          "lines": [
+            {
+              "who": "환자",
+              "ko": "음식을 잘못 먹어서 아까 두 번 {}."
+            }
+          ],
+          "answer": "toha",
+          "choices": [
+            {
+              "id": "toha",
+              "ko": "토했어요"
+            },
+            {
+              "id": "eojireop",
+              "ko": "어지러웠어요"
+            },
+            {
+              "id": "ipmat",
+              "ko": "입맛이 없었어요"
+            }
+          ],
+          "en": "I ate something bad and have been sick twice.",
+          "why": "두 번 counts an event, and only 토하다 is an event you can count: 두 번 토했어요. 어지럽다 and 입맛이 없다 are both states — you are dizzy for a while, you have no appetite for a while — so 두 번 어지러웠어요 counts something that has no separate occurrences.",
+          "grammar": "토하다 is a plain verb and takes no particle of its own: 토했어요, 토할 것 같아요. The 말하기 1 dialogue uses the second of those — 토할 것 같아요, I think I am going to be sick."
+        },
+        {
+          "n": 4,
+          "art": "items/empty_plate.png",
+          "phraseKo": "밥을 봐도 먹고 싶지 않다",
+          "lines": [
+            {
+              "who": "환자",
+              "ko": "요즘 밥을 봐도 먹고 싶지 않아요. {}."
+            }
+          ],
+          "answer": "ipmat",
+          "choices": [
+            {
+              "id": "ipmat",
+              "ko": "입맛이 없어요"
+            },
+            {
+              "id": "sohwa",
+              "ko": "소화가 안돼요"
+            },
+            {
+              "id": "baetal",
+              "ko": "배탈이 났어요"
+            }
+          ],
+          "en": "These days I do not want to eat even when I see food. I have no appetite.",
+          "why": "입맛 is the wanting of food, so 입맛이 없어요 restates 먹고 싶지 않아요 in the words a doctor expects. 소화가 안돼요 is about food that has already gone down and 배탈이 났어요 is a stomach upset — both come after eating, and the cue is that nothing has been eaten.",
+          "grammar": "입맛이 없다 / 입맛이 있다, and 기운이 없다 beside it: 없다 with 이/가 is how Korean says a faculty is missing. That is why the answer cannot be 입맛을 없어요."
+        },
+        {
+          "n": 5,
+          "art": "items/white_pillow.png",
+          "phraseKo": "아픈 곳은 없는데 힘이 없다",
+          "lines": [
+            {
+              "who": "환자",
+              "ko": "특별히 아픈 곳은 없는데 {}."
+            }
+          ],
+          "answer": "giun",
+          "choices": [
+            {
+              "id": "giun",
+              "ko": "기운이 없어요"
+            },
+            {
+              "id": "toha",
+              "ko": "토할 것 같아요"
+            },
+            {
+              "id": "dari",
+              "ko": "다리를 다쳤어요"
+            }
+          ],
+          "en": "Nothing hurts in particular, but I have no energy.",
+          "why": "아픈 곳은 없는데 rules out anything with a place to point at, which is what leaves 기운이 없어요 — no strength, and nowhere it hurts. 토할 것 같아요 and 다리를 다쳤어요 both name a place or a feeling the cue has just denied. The 문화 산책 passage opens on this same complaint.",
+          "grammar": "기운 is bodily energy, and it goes with 없다 / 나다: 기운이 없어요, 기운이 나요. It is not 힘 — 힘이 없다 works too, but a doctor writes 기운."
+        },
+        {
+          "n": 6,
+          "art": "quiz/unit11_q03_dermatology.png",
+          "phraseKo": "거울을 보니 얼굴에",
+          "lines": [
+            {
+              "who": "환자",
+              "ko": "며칠 전부터 {}. 피부과에 가야 할까요?"
+            }
+          ],
+          "answer": "eolgul",
+          "choices": [
+            {
+              "id": "eolgul",
+              "ko": "얼굴에 뭐가 났어요"
+            },
+            {
+              "id": "yeol",
+              "ko": "열이 났어요"
+            },
+            {
+              "id": "giun",
+              "ko": "기운이 없어요"
+            }
+          ],
+          "en": "Something has come up on my face over the last few days. Should I go to a dermatologist?",
+          "why": "피부과 is the department for skin, so the symptom has to be on the skin: 얼굴에 뭐가 났어요. 열이 났어요 would send you to 내과 and 기운이 없어요 to no department in particular. 뭐가 is deliberately vague — Korean names the spot only if it has to.",
+          "grammar": "나다 covers anything appearing: 얼굴에 뭐가 나다, 열이 나다, 기침이 나다, 몸살이 나다. The place takes 에 and the thing that appears takes 이/가."
+        },
+        {
+          "n": 7,
+          "art": "items/topik_stomach_inside.png",
+          "phraseKo": "배 속이 편하지 않다",
+          "lines": [
+            {
+              "who": "의사",
+              "ko": "어디가 아파서 오셨어요?"
+            },
+            {
+              "who": "환자",
+              "ko": "{} 어지러워요."
+            }
+          ],
+          "answer": "sok",
+          "choices": [
+            {
+              "id": "sok",
+              "ko": "속이 안 좋고"
+            },
+            {
+              "id": "sok_bad",
+              "ko": "속을 안 좋고"
+            },
+            {
+              "id": "sok_ha",
+              "ko": "속이 안 좋하고"
+            }
+          ],
+          "en": "What brings you in? — My stomach is off and I feel dizzy.",
+          "why": "속 is the inside of the body, and it takes 이/가 with 좋다: 속이 안 좋고 어지러워요, which is the answer the page prints under 보기. 속을 안 좋고 has given an adjective an object, and 속이 안 좋하고 has stuck a 하 into 좋다, which is not a 하다 word.",
+          "grammar": "속이 안 좋다 is the polite way to say it; 배가 아프다 names the pain instead. The 말하기 1 dialogue has the pharmacist ask 속도 안 좋으세요? — the same phrase with 도 and the honorific."
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-gram-1",
+      "type": "build",
+      "section": "문법과 표현 1",
+      "sectionEn": "Grammar and expression 1",
+      "no": "문법 1",
+      "icon": "🩹",
+      "blurbEn": "A ㅅ that leaves before a vowel and stays before a consonant.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The 익힘책 owns the conjugation table for this point — sixteen cells of 낫다 짓다 붓다 젓다, plus six sentences — so the 교과서 rows are the 대화, two of the four 예문 and one of the printed 보기 bubbles, and they take the endings the table does not. 커피에 설탕을 넣었으니까 잘 저어서 드세요 is deliberately not here: the 익힘책 drills that sentence almost word for word. On every row the wrong buttons are the ㅅ kept where it drops and a vowel put where none belongs.",
+      "pattern": "'ㅅ' 불규칙",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/tissue_box.png",
+          "phraseKo": "감기 아직 ___ (안 낫다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "감기 아직 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 기침이 계속 나요."
+            }
+          ],
+          "answer": "annaat",
+          "choices": [
+            {
+              "id": "annaat",
+              "ko": "안 나았어요"
+            },
+            {
+              "id": "annat",
+              "ko": "안 낫았어요"
+            },
+            {
+              "id": "annas",
+              "ko": "안 나셨어요"
+            }
+          ],
+          "en": "Has your cold still not got better? — No, I keep coughing.",
+          "why": "낫다 is a ㅅ-irregular: before a vowel the ㅅ goes, so 낫 + 았어요 becomes 나았어요. 안 낫았어요 keeps the ㅅ that should have gone. 안 나셨어요 has read the 시 of the honorific into it, which would be about the listener rather than about the cold. Note that 안 goes in front of the whole thing and never inside it.",
+          "grammar": "ㅅ-irregular: 낫다 → 나아요, 나았어요, 나으면, 나을 거예요 — but 낫고, 낫지, 낫는데 keep the ㅅ. The vowel decides, not the tense.",
+          "audio": {
+            "src": "audio/book/2b-u11-d01.mp3",
+            "labelEn": "문법 1 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/ice_pack.png",
+          "phraseKo": "눈이 좀 ___ 것 같아요 (붓다)",
+          "lines": [
+            {
+              "ko": "눈이 좀 {} 것 같아요."
+            }
+          ],
+          "answer": "bueun",
+          "choices": [
+            {
+              "id": "bueun",
+              "ko": "부은"
+            },
+            {
+              "id": "buseun",
+              "ko": "붓은"
+            },
+            {
+              "id": "buseun2",
+              "ko": "부슨"
+            }
+          ],
+          "en": "My eyes look a bit puffy.",
+          "why": "붓다 takes -(으)ㄴ to modify 것, and the 으 is a vowel, so the ㅅ drops: 붓 + 은 → 부은. 붓은 is the ㅅ kept in front of that vowel, and 부슨 is not a form of anything. The 듣기 1 recording has the doctor say 목이 많이 부었네요 — the same stem with the past instead.",
+          "grammar": "붓다 → 부어요, 부었어요, 부은. Not to be confused with 붓다 meaning to pour, which is the same word and the same irregular: 물을 부어요."
+        },
+        {
+          "n": 3,
+          "art": "items/teal_gem.png",
+          "phraseKo": "이 집은 30년 전에 ___ (짓다)",
+          "lines": [
+            {
+              "ko": "이 집은 30년 전에 {}."
+            }
+          ],
+          "answer": "jieot",
+          "choices": [
+            {
+              "id": "jieot",
+              "ko": "지었어요"
+            },
+            {
+              "id": "jiseot",
+              "ko": "짓었어요"
+            },
+            {
+              "id": "jieos",
+              "ko": "지엇어요"
+            }
+          ],
+          "en": "This house was built thirty years ago.",
+          "why": "짓 + 었어요 loses the ㅅ before the vowel: 지었어요. 짓었어요 keeps it. 지엇어요 drops the ㅅ correctly and then misspells the past — 었 is written with ㅆ, never with ㅅ, so the two mistakes look alike and are not.",
+          "grammar": "짓다 covers building and naming: 집을 짓다, 이름을 짓다. Unit 13 uses the modifier of it — 새로 지은 집 — and the past inside a reason clause, 새로 지었기 때문에."
+        },
+        {
+          "n": 4,
+          "art": "items/topik_health.png",
+          "phraseKo": "푹 쉬면 감기가 빨리 ___ (낫다)",
+          "lines": [
+            {
+              "ko": "푹 쉬면 감기가 빨리 {}."
+            }
+          ],
+          "answer": "naa",
+          "choices": [
+            {
+              "id": "naa",
+              "ko": "나아요"
+            },
+            {
+              "id": "nat",
+              "ko": "낫아요"
+            },
+            {
+              "id": "na",
+              "ko": "나요"
+            }
+          ],
+          "en": "If you get plenty of rest your cold will clear up quickly.",
+          "why": "낫 + 아요 → 나아요, with the ㅅ gone and both vowels written. 낫아요 keeps the ㅅ. 나요 is the whole other verb 나다, which is what 기침이 나요 in row 1 uses — a cough comes out, a cold gets better, and the two are one letter apart.",
+          "grammar": "나아요 (from 낫다, to get better) against 나요 (from 나다, to come out). 감기가 나아요 and 기침이 나요 are both on this page, one line apart."
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-gram-2",
+      "type": "build",
+      "section": "문법과 표현 1",
+      "sectionEn": "Grammar and expression 1",
+      "no": "문법 2",
+      "icon": "⏱️",
+      "blurbEn": "Every one of them, and how many each time.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The 연습 on the page is six cues to talk about with a partner — 아침, 주말, 쉬는 시간 — with nothing printed to mark. The rows here are the 대화 and two of the three 예문, and they avoid every noun the 익힘책 already answers with 마다. Two rows come off the one tape line, because that line is where 씩 and 마다 stand side by side and the pair is what the page is for: 마다 says how often, 씩 says how many each time.",
+      "pattern": "N마다",
+      "items": [
+        {
+          "n": 1,
+          "art": "quiz/unit11_q07_medicine_schedule.png",
+          "phraseKo": "___ 드세요 (여덟 시간)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이 약을 하루에 몇 번 먹어야 돼요?"
+            },
+            {
+              "who": "B",
+              "ko": "하루에 세 번씩, {} 드세요."
+            }
+          ],
+          "answer": "yeodeol",
+          "choices": [
+            {
+              "id": "yeodeol",
+              "ko": "여덟 시간마다"
+            },
+            {
+              "id": "yeodeol_e",
+              "ko": "여덟 시간에마다"
+            },
+            {
+              "id": "yeodeol_i",
+              "ko": "여덟 시간이마다"
+            }
+          ],
+          "en": "How many times a day do I have to take this? — Three times a day, every eight hours.",
+          "why": "마다 goes straight onto the noun with no particle in front of it: 여덟 시간마다. 여덟 시간에마다 has kept the 에 of 여덟 시간에 and stacked 마다 on top, and 여덟 시간이마다 has put a subject particle there. 마다 is itself the particle, so nothing else may share the slot.",
+          "grammar": "N마다, every N. 날마다, 아침마다, 나라마다, 여덟 시간마다 — the noun never changes shape and no particle survives in front of it.",
+          "audio": {
+            "src": "audio/book/2b-u11-d04.mp3",
+            "labelEn": "문법 2 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/medicine_capsule.png",
+          "phraseKo": "하루에 ___ (세 번)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이 약을 하루에 몇 번 먹어야 돼요?"
+            },
+            {
+              "who": "B",
+              "ko": "하루에 {}, 여덟 시간마다 드세요."
+            }
+          ],
+          "answer": "sebeonssik",
+          "choices": [
+            {
+              "id": "sebeonssik",
+              "ko": "세 번씩"
+            },
+            {
+              "id": "sebeonsik",
+              "ko": "세 번식"
+            },
+            {
+              "id": "sebeonmada",
+              "ko": "세 번마다"
+            }
+          ],
+          "en": "Three times a day, every eight hours.",
+          "why": "씩 says how many go to each occasion, so 하루에 세 번씩 is three times per day. 세 번마다 would mean every third time, which is not a dose. 세 번식 is 씩 misspelt — 식 is the 식 of 식사 and 한국식, a different word entirely.",
+          "grammar": "씩 and 마다 answer different questions and this one line uses both: 여덟 시간마다 how often, 세 번씩 how many each time. 씩 goes on the amount — 한 시간씩, 두 알씩, 5만 원씩."
+        },
+        {
+          "n": 3,
+          "art": "items/topik_every_all.png",
+          "phraseKo": "___ 문화가 달라요 (나라)",
+          "lines": [
+            {
+              "ko": "{} 문화가 달라요."
+            }
+          ],
+          "answer": "naramada",
+          "choices": [
+            {
+              "id": "naramada",
+              "ko": "나라마다"
+            },
+            {
+              "id": "naraemada",
+              "ko": "나라에마다"
+            },
+            {
+              "id": "naradeulmada",
+              "ko": "나라들마다"
+            }
+          ],
+          "en": "Every country has its own culture.",
+          "why": "나라마다 문화가 달라요 is every country taken one at a time, which is what 다르다 needs to compare. 나라에마다 has kept a 에 that 마다 leaves no room for. 나라들마다 has pluralised first, and 마다 already means each one, so the 들 says the same thing twice.",
+          "grammar": "마다 never takes 들 in front of it: 사람마다, not 사람들마다. It is one at a time by definition, which is also why it cannot go with 모든 — 모든 나라 or 나라마다, never both."
+        },
+        {
+          "n": 4,
+          "art": "items/running_shoe.png",
+          "phraseKo": "저는 ___ 수영을 해요 (아침)",
+          "lines": [
+            {
+              "ko": "저는 {} 수영을 해요."
+            }
+          ],
+          "answer": "achimmada",
+          "choices": [
+            {
+              "id": "achimmada",
+              "ko": "아침마다"
+            },
+            {
+              "id": "achimemada",
+              "ko": "아침에마다"
+            },
+            {
+              "id": "achimmadae",
+              "ko": "아침마다에"
+            }
+          ],
+          "en": "I swim every morning.",
+          "why": "아침마다, with no 에 on either side of the 마다. 아침에마다 keeps the time particle in front and 아침마다에 puts it behind; 마다 has already made the phrase a time expression, so a second one is one too many. This is the line 민수 says in 말하기 2, and the marathon runner says it again in 듣기 2 with 두 시간씩 after it.",
+          "grammar": "A time noun normally takes 에 — 아침에 일어나요 — and 마다 replaces it rather than joining it: 아침마다 수영을 해요."
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-speak-1",
+      "type": "build",
+      "section": "말하기 1",
+      "sectionEn": "Speaking 1",
+      "no": "말하기 1",
+      "icon": "💊",
+      "blurbEn": "Nana describes a stomach ache and the pharmacist works out the dose.",
+      "instructionKo": "대화를 듣고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Listen to the dialogue and choose what belongs in each gap.",
+      "noteEn": "The page prints the dialogue and then an open pharmacy role-play with two boxes of cues, which nothing can mark. The rows here are four slots from the dialogue itself, and they are the pharmacist’s language rather than the grammar points: this is the only page of the chapter where the honorific does the work, and 속도 안 좋으세요? and 언제부터 아프셨어요? are both -시- on an adjective, which the 익힘책 never asks for. Each row plays the line it came from off the tape.",
+      "pattern": "약국에서 · 약사와 나나",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/pharmacy_shop.png",
+          "phraseKo": "배가 아파서 ___ (오다)",
+          "lines": [
+            {
+              "who": "약사",
+              "ko": "어떻게 오셨어요?"
+            },
+            {
+              "who": "나나",
+              "ko": "배가 아파서 {}."
+            }
+          ],
+          "answer": "watneundeyo",
+          "choices": [
+            {
+              "id": "watneundeyo",
+              "ko": "왔는데요"
+            },
+            {
+              "id": "wateundeyo",
+              "ko": "왔은데요"
+            },
+            {
+              "id": "wateuneundeyo",
+              "ko": "왔으는데요"
+            }
+          ],
+          "en": "What can I do for you? — I have come in because my stomach hurts.",
+          "why": "-는데요 goes on a verb stem as it stands, past tense included: 왔는데요. 왔은데요 has used -은데요, which belongs to adjectives — 좋은데요, 아픈데요. 왔으는데요 has inserted an 으 that -는데요 never takes. The ending is what makes this an opening rather than a statement: it hands the turn to the pharmacist.",
+          "grammar": "A-(으)ㄴ데요 for adjectives, V-는데요 for verbs, and the past always joins the verb side: 왔는데요, 아팠는데요. Unit 13’s estate agent opens the same way — 원룸을 하나 찾고 있는데요.",
+          "audio": {
+            "src": "audio/book/2b-u11-d05.mp3",
+            "labelEn": "말하기 1 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/topik_stomach_inside.png",
+          "phraseKo": "속도 ___ (안 좋다 + -(으)시-)",
+          "lines": [
+            {
+              "who": "약사",
+              "ko": "{}?"
+            },
+            {
+              "who": "나나",
+              "ko": "네, 속도 안 좋고 토할 것 같아요."
+            }
+          ],
+          "answer": "joheuseyo",
+          "choices": [
+            {
+              "id": "joheuseyo",
+              "ko": "속도 안 좋으세요"
+            },
+            {
+              "id": "johseyo",
+              "ko": "속도 안 좋세요"
+            },
+            {
+              "id": "johsiseyo",
+              "ko": "속도 안 좋시세요"
+            }
+          ],
+          "en": "Is your stomach off as well? — Yes, and I feel like being sick.",
+          "why": "좋다 ends in a consonant, so the honorific needs its 으: 좋 + 으시 + 어요 → 속도 안 좋으세요? 속도 안 좋세요 has left the 으 out, which only a vowel stem may do, and 속도 안 좋시세요 has the 시 twice over. The honorific is on an adjective here, which is what makes it easy to skip — it is the customer’s stomach, so it gets the respect.",
+          "grammar": "-(으)시- goes on adjectives as readily as on verbs: 좋으세요, 바쁘세요, 아프세요. Consonant stem takes 으시, vowel stem takes 시 — 좋으세요 against 바쁘세요.",
+          "audio": {
+            "src": "audio/book/2b-u11-d06.mp3",
+            "labelEn": "말하기 1 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/wall_calendar.png",
+          "phraseKo": "언제부터 ___ (아프다 + -(으)시-)",
+          "lines": [
+            {
+              "who": "약사",
+              "ko": "언제부터 {}?"
+            },
+            {
+              "who": "나나",
+              "ko": "어제 저녁부터 계속 아파요."
+            }
+          ],
+          "answer": "apeusyeot",
+          "choices": [
+            {
+              "id": "apeusyeot",
+              "ko": "아프셨어요"
+            },
+            {
+              "id": "apatseuse",
+              "ko": "아팠으세요"
+            },
+            {
+              "id": "apeuseot",
+              "ko": "아프섰어요"
+            }
+          ],
+          "en": "Since when has it been hurting? — Since yesterday evening, without a break.",
+          "why": "The honorific goes on before the tense, never after: 아프 + 시 + 었어요 → 아프셨어요. 아팠으세요 has put the past first and then tried to add the respect, which Korean does not allow. 아프섰어요 has the order right and the vowel wrong — 시 + 었 contracts to 셨, not 섰.",
+          "grammar": "Order inside a verb: stem, then -(으)시-, then tense, then ending. 아프셨어요, 가셨어요, 드셨어요. The reply drops the honorific because Nana is talking about herself.",
+          "audio": {
+            "src": "audio/book/2b-u11-d08.mp3",
+            "labelEn": "말하기 1 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "items/doctor.png",
+          "phraseKo": "그래도 안 ___ 병원에 가세요 (낫다)",
+          "lines": [
+            {
+              "who": "약사",
+              "ko": "이 약을 이틀 정도 드셔 보시고 그래도 안 {} 병원에 가세요."
+            }
+          ],
+          "answer": "naeumyeon",
+          "choices": [
+            {
+              "id": "naeumyeon",
+              "ko": "나으면"
+            },
+            {
+              "id": "nateumyeon",
+              "ko": "낫으면"
+            },
+            {
+              "id": "namyeon",
+              "ko": "나면"
+            }
+          ],
+          "en": "Take this for a couple of days, and if it still does not clear up, go to a doctor.",
+          "why": "낫다 is the ㅅ-irregular from two pages earlier, and -(으)면 begins with a vowel, so the ㅅ goes: 낫 + 으면 → 나으면. 낫으면 keeps it. 나면 is the other verb 나다 — 기침이 나면 would be a cough starting, not a cold ending. The 듣기 1 doctor says the same thing with 지 않다: 낫지 않으면.",
+          "grammar": "낫다 → 나으면 (vowel ending, ㅅ drops) against 낫지 (consonant ending, ㅅ stays). Both are in this chapter, three pages apart.",
+          "audio": {
+            "src": "audio/book/2b-u11-d12.mp3",
+            "labelEn": "말하기 1 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-gram-3",
+      "type": "build",
+      "section": "문법과 표현 2",
+      "sectionEn": "Grammar and expression 2",
+      "no": "문법 1",
+      "icon": "💡",
+      "blurbEn": "Suggesting something without telling anyone to do it.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The 연습 is six worries to advise a classmate about, with the advice left to you. The rows here are the 대화, the two 예문 and one of the printed worries — and they take the joins the 익힘책 does not: it drills the pattern four times over but always on the 는 게 어때요 itself, so these rows put the decision on what comes in front of it instead. The modifier is always -는, because 게 is 것이 and a verb modifies a noun with -는.",
+      "pattern": "V-는 게 어때요?",
+      "items": [
+        {
+          "n": 1,
+          "art": "quiz/unit11_q02_dentist.png",
+          "phraseKo": "치과에 가 ___ (보다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "요즘 이가 계속 아파요."
+            },
+            {
+              "who": "B",
+              "ko": "치과에 {}?"
+            }
+          ],
+          "answer": "boneunge",
+          "choices": [
+            {
+              "id": "boneunge",
+              "ko": "가 보는 게 어때요"
+            },
+            {
+              "id": "bonge",
+              "ko": "가 본 게 어때요"
+            },
+            {
+              "id": "bolge",
+              "ko": "가 볼 게 어때요"
+            }
+          ],
+          "en": "My tooth has been hurting lately. — Why not try going to a dentist?",
+          "why": "게 is 것이 worn down, so the verb in front of it takes a modifier, and for advice not yet taken that modifier is -는: 가 보는 게 어때요? 가 본 게 어때요 is the past modifier and would ask about a visit already made. 가 볼 게 어때요 is the future modifier, which this pattern never uses.",
+          "grammar": "V-는 게 어때요? = V-는 것이 어때요?, how would it be to do it. The modifier is fixed at -는 whatever the advice is: 가 보는 게, 쉬는 게, 마시는 게.",
+          "audio": {
+            "src": "audio/book/2b-u11-d14.mp3",
+            "labelEn": "문법 1 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/stethoscope.png",
+          "phraseKo": "진료를 ___ (받아 보다)",
+          "lines": [
+            {
+              "ko": "많이 아프면 병원에 가서 진료를 {}?"
+            }
+          ],
+          "answer": "badabo",
+          "choices": [
+            {
+              "id": "badabo",
+              "ko": "받아 보는 게 어때요"
+            },
+            {
+              "id": "badabon",
+              "ko": "받아 보은 게 어때요"
+            },
+            {
+              "id": "badgi",
+              "ko": "받아 보기 게 어때요"
+            }
+          ],
+          "en": "If it hurts a lot, why not go to a hospital and get it looked at?",
+          "why": "보다 is a verb, so the modifier is -는: 받아 보는 게 어때요? 받아 보은 게 has used the adjective modifier -은, and 받아 보기 게 has used the noun-maker 기, which cannot then be modified by 게 — 기 and 게 both turn a verb into a noun, and only one of them fits in the slot.",
+          "grammar": "V-아/어 보다 nests inside the pattern: 받아 보는 게, 가 보는 게, 해 보는 게. 진료를 받다 is the fixed phrase — you receive treatment rather than take it."
+        },
+        {
+          "n": 3,
+          "art": "items/wooden_spoon.png",
+          "phraseKo": "좀 ___ 것 같아요 (싱겁다)",
+          "lines": [
+            {
+              "ko": "좀 {} 것 같아요."
+            },
+            {
+              "ko": "그럼 소금을 더 넣는 게 어때요?"
+            }
+          ],
+          "answer": "singgeoun",
+          "choices": [
+            {
+              "id": "singgeoun",
+              "ko": "싱거운"
+            },
+            {
+              "id": "singgeopeun",
+              "ko": "싱겁은"
+            },
+            {
+              "id": "singgeowoun",
+              "ko": "싱거워운"
+            }
+          ],
+          "en": "It tastes a bit bland. — Then why not add more salt?",
+          "why": "싱겁다 is a ㅂ-irregular, and -(으)ㄴ begins with a vowel, so the ㅂ becomes 우 and the two join as 운: 싱거운. 싱겁은 is the irregular ignored, and 싱거워운 has applied it twice — once to make 싱거워 and again to add the 운.",
+          "grammar": "ㅂ-irregular before a vowel: 싱겁다 → 싱거워요, 싱거운. Before a consonant the ㅂ stays: 싱겁고, 싱겁지. Unit 13 has the same stem type in 가깝기 / 가까워서."
+        },
+        {
+          "n": 4,
+          "art": "items/piggy_bank.png",
+          "phraseKo": "생활비가 많이 ___ (들다)",
+          "lines": [
+            {
+              "ko": "요즘 생활비가 많이 {}."
+            }
+          ],
+          "answer": "deureoyo",
+          "choices": [
+            {
+              "id": "deureoyo",
+              "ko": "들어요"
+            },
+            {
+              "id": "deureoyo_bad",
+              "ko": "드러요"
+            },
+            {
+              "id": "nayo",
+              "ko": "나요"
+            }
+          ],
+          "en": "My living costs are high at the moment.",
+          "why": "돈이 들다 is the fixed phrase for money being needed, and 들다 keeps its ㄹ before -어요: 들어요. 드러요 has dropped the ㄹ, which only goes before ㄴ, ㅂ and ㅅ. 나요 is the wrong verb: money 들다, but a cough or a fever 나다, and this page has both.",
+          "grammar": "돈이 들다 / 생활비가 들다, for a cost to arise — the money is the subject and nobody spends it. Unit 13 uses the negative of the same phrase: 생활비가 많이 안 들어서 좋기는 한데."
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-gram-4",
+      "type": "build",
+      "section": "문법과 표현 2",
+      "sectionEn": "Grammar and expression 2",
+      "no": "문법 2",
+      "icon": "🤝",
+      "blurbEn": "Something settled with somebody else, reported back.",
+      "instructionKo": "[보기]와 같이 알맞은 형태를 고르세요.",
+      "instructionEn": "Choose the right form, as in the example.",
+      "noteEn": "The 연습 is a weekend trip to plan with a partner and present, so nothing is printed to mark. Three rows: the 대화, one 예문, and the 말하기 2 line where the same ending carries on into -는데. The 로 is the part that gets lost — it is what turns the 기 clause into the terms of an agreement, and without it 하다 is left holding a noun it cannot take.",
+      "pattern": "V-기로 하다",
+      "items": [
+        {
+          "n": 1,
+          "art": "quiz/unit11_q09_movie_plan.png",
+          "phraseKo": "영화 보러 ___ (가다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이번 주말에 뭐 해요?"
+            },
+            {
+              "who": "B",
+              "ko": "유진 씨랑 영화 보러 {}."
+            }
+          ],
+          "answer": "gagiro",
+          "choices": [
+            {
+              "id": "gagiro",
+              "ko": "가기로 했어요"
+            },
+            {
+              "id": "garo",
+              "ko": "가로 했어요"
+            },
+            {
+              "id": "gagi",
+              "ko": "가기 했어요"
+            }
+          ],
+          "en": "What are you doing this weekend? — I am going to a film with Yujin.",
+          "why": "The pattern is 기 + 로 + 하다 and all three parts are needed: 가기로 했어요. 가로 했어요 has dropped the 기, leaving 로 on a bare stem. 가기 했어요 has dropped the 로, and then 하다 has a noun in front of it with nothing saying what the noun is doing there.",
+          "grammar": "V-기로 하다, to agree or decide to. The past 했어요 is what makes it settled rather than intended; the present 하기로 해요 is a suggestion, not a report.",
+          "audio": {
+            "src": "audio/book/2b-u11-d16.mp3",
+            "labelEn": "문법 2 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/dining_table.png",
+          "phraseKo": "저녁을 ___ (먹다)",
+          "lines": [
+            {
+              "ko": "내일 민수 씨와 저녁을 {}."
+            }
+          ],
+          "answer": "meokgiro",
+          "choices": [
+            {
+              "id": "meokgiro",
+              "ko": "먹기로 했어요"
+            },
+            {
+              "id": "meogeugiro",
+              "ko": "먹으기로 했어요"
+            },
+            {
+              "id": "meokro",
+              "ko": "먹로 했어요"
+            }
+          ],
+          "en": "I am having dinner with Minsu tomorrow.",
+          "why": "기 goes straight onto the stem with no linking vowel: 먹 + 기로 → 먹기로 했어요. 먹으기로 했어요 has inserted the 으 that -(으)면 and -(으)니까 need and 기 does not. 먹로 했어요 has lost the 기 altogether.",
+          "grammar": "기 takes no (으) whatever the stem ends in: 먹기로, 가기로, 만나기로, 하기로. That is what tells it from -(으)려고 and -(으)면."
+        },
+        {
+          "n": 3,
+          "art": "items/topik_athlete.png",
+          "phraseKo": "지호 씨도 같이 ___ (하다)",
+          "lines": [
+            {
+              "who": "민수",
+              "ko": "다음 주부터 지호 씨도 같이 {} 아키라 씨도 같이 할래요?"
+            }
+          ],
+          "answer": "hagiro",
+          "choices": [
+            {
+              "id": "hagiro",
+              "ko": "하기로 했는데"
+            },
+            {
+              "id": "hagiro_eun",
+              "ko": "하기로 했은데"
+            },
+            {
+              "id": "hagi_han",
+              "ko": "하기 했는데"
+            }
+          ],
+          "en": "Jiho has agreed to join in from next week too — do you want to come along, Akira?",
+          "why": "했 is a verb stem, so -는데 goes on it as it stands: 하기로 했는데. 하기로 했은데 has used -은데, which belongs to adjectives. 하기 했는데 has dropped the 로 again. The -는데 is doing the invitation’s work: it sets the scene and leaves the question to follow.",
+          "grammar": "V-기로 하다 + -는데: 하기로 했는데, 가기로 했는데. The tense sits on 하다 and the connector on top of it, which is why the ending is -는데 and not -은데.",
+          "audio": {
+            "src": "audio/book/2b-u11-d24.mp3",
+            "labelEn": "문법 2 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-speak-2",
+      "type": "build",
+      "section": "말하기 2",
+      "sectionEn": "Speaking 2",
+      "no": "말하기 2",
+      "icon": "🏊",
+      "blurbEn": "Akira has no energy, and Minsu has a pool near the office.",
+      "instructionKo": "대화를 듣고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Listen to the dialogue and choose what belongs in each gap.",
+      "noteEn": "The page prints the dialogue and an open 연습 to say it again with your own advice. The four rows here are slots from the dialogue, and they deliberately skip the two the book colours — 운동을 좀 해 보는 게 어때요 and 같이 하기로 했는데 are the chapter’s two grammar points, already drilled on the pages before this and on the 문법 pages here. What is left is the vocabulary of feeling unwell and the ending that is almost always misspelt.",
+      "pattern": "운동을 권하다 · 민수와 아키라",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/topik_tired.png",
+          "phraseKo": "왜 이렇게 ___ (기운이 없다)",
+          "lines": [
+            {
+              "who": "민수",
+              "ko": "아키라 씨, 왜 이렇게 {}?"
+            }
+          ],
+          "answer": "giuni",
+          "choices": [
+            {
+              "id": "giuni",
+              "ko": "기운이 없어요"
+            },
+            {
+              "id": "giuneul",
+              "ko": "기운을 없어요"
+            },
+            {
+              "id": "giuni_anit",
+              "ko": "기운이 안 있어요"
+            }
+          ],
+          "en": "Akira, why are you so out of sorts?",
+          "why": "없다 takes a subject and not an object, so it is 기운이 없어요. 기운을 없어요 has given an adjective something to act on. 기운이 안 있어요 is the short negative put on 있다, and Korean has a separate word for that — 없다 is 있다 already negated, so 안 있다 is not said.",
+          "grammar": "있다 / 없다 are a pair rather than a verb and its negation: 기운이 있어요 / 기운이 없어요. 안 있어요 and 없지 않아요 are both avoided.",
+          "audio": {
+            "src": "audio/book/2b-u11-d17.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/topik_tired.png",
+          "phraseKo": "요즘 계속 ___ (피곤하다)",
+          "lines": [
+            {
+              "who": "아키라",
+              "ko": "모르겠어요. 요즘 계속 {} 입맛도 없어요."
+            }
+          ],
+          "answer": "pigonhago",
+          "choices": [
+            {
+              "id": "pigonhago",
+              "ko": "피곤하고"
+            },
+            {
+              "id": "pigongo",
+              "ko": "피곤고"
+            },
+            {
+              "id": "pigonhaego",
+              "ko": "피곤해고"
+            }
+          ],
+          "en": "I do not know. I have been tired all the time lately and have no appetite either.",
+          "why": "피곤하다 joins the next clause with -고 straight onto the stem: 피곤하 + 고 → 피곤하고. 피곤고 has cut the 하 off, and 피곤해고 has used the 해 form, which belongs before 요 and 서 — 피곤해요, 피곤해서 — and never before 고.",
+          "grammar": "A/V-고 goes on the plain stem with no tense and no 해: 피곤하고, 좋고, 아프고. The 해 form appears only where a vowel ending demands it.",
+          "audio": {
+            "src": "audio/book/2b-u11-d18.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/running_shoe.png",
+          "phraseKo": "아침마다 수영을 ___ (하다)",
+          "lines": [
+            {
+              "who": "민수",
+              "ko": "네, 저는 아침마다 수영을 {} 기분도 좋고 스트레스도 풀려요."
+            }
+          ],
+          "answer": "haneunde",
+          "choices": [
+            {
+              "id": "haneunde",
+              "ko": "하는데"
+            },
+            {
+              "id": "hande",
+              "ko": "한데"
+            },
+            {
+              "id": "haeunde",
+              "ko": "하은데"
+            }
+          ],
+          "en": "Yes — I swim every morning, and it puts me in a good mood and works the stress off.",
+          "why": "하다 is a verb, so the connector is -는데: 하는데. 한데 is the shape an adjective would take, and 하은데 has inserted an 으 that -는데 never wants. The clause is background rather than a reason: it says what he does, and then what comes of it.",
+          "grammar": "V-는데 / A-(으)ㄴ데, setting something up before the point of the sentence. 하는데, 가는데, 좋은데, 바쁜데.",
+          "audio": {
+            "src": "audio/book/2b-u11-d21.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "items/topik_health.png",
+          "phraseKo": "한번 가 ___ (보다)",
+          "lines": [
+            {
+              "who": "아키라",
+              "ko": "네, 저도 시간 내서 한번 가 {}."
+            }
+          ],
+          "answer": "bolgeyo",
+          "choices": [
+            {
+              "id": "bolgeyo",
+              "ko": "볼게요"
+            },
+            {
+              "id": "bolkkeyo",
+              "ko": "볼께요"
+            },
+            {
+              "id": "bogeyo",
+              "ko": "보게요"
+            }
+          ],
+          "en": "All right, I will make time and give it a go.",
+          "why": "-(으)ㄹ게요 is written 게 and said [께], so the spelling is 볼게요. 볼께요 writes the sound down, and the tape cannot help with it because the tape says [께] either way. 보게요 has dropped the ㄹ, which is the ending itself.",
+          "grammar": "V-(으)ㄹ게요, announcing what you will do about it. Always 게 on the page, always [께] in the mouth: 볼게요 [볼께요], 갈게요 [갈께요], 할게요 [할께요].",
+          "audio": {
+            "src": "audio/book/2b-u11-d25.mp3",
+            "labelEn": "말하기 2 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-listen-1",
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "no": "듣기 1",
+      "icon": "🩺",
+      "blurbEn": "Kelly at a clinic she has not been to before, and what she has not got.",
+      "instructionKo": "잘 듣고 질문에 답하세요.",
+      "instructionEn": "Listen carefully and answer the questions.",
+      "noteEn": "The book asks two questions. The first is three printed statements and is row 1 as it stands. The second is four pictures with no words — throat, runny nose, thermometer, cough — and asks which is NOT one of her symptoms; pictures cannot be buttons, so row 2 names three of the four in words, keeping the cough that the tape rules out and two the tape confirms. The fourth, 열이 나다, is confirmed by the same line as the throat. Rows 3 to 5 are the lines those answers turn on.",
+      "pattern": "의사와 환자 · 켈리의 감기",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/topik_patient.png",
+          "phraseKo": "여자에 대한 설명",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "여자에 대한 설명으로 맞는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "first",
+          "choices": [
+            {
+              "id": "first",
+              "ko": "이 병원에 처음 왔습니다."
+            },
+            {
+              "id": "threeday",
+              "ko": "사흘 전부터 아팠습니다."
+            },
+            {
+              "id": "again",
+              "ko": "내일 병원에 다시 와야 합니다."
+            }
+          ],
+          "en": "Which of these matches what is said about the woman? — That this is her first visit to the clinic.",
+          "why": "이 병원에 처음 왔습니다. is said twice over: the nurse asks 저희 병원에 처음 오셨나요? and Kelly answers 네, 처음이에요. 사흘 전부터 아팠습니다 is one day out — the tape says 이틀 전부터 아팠어요. And the doctor answers 내일 또 와야 하나요? with 아니요, so 내일 병원에 다시 와야 합니다 is what the tape denies.",
+          "grammar": "이틀 is two days and 사흘 is three, and both are native-Korean counts of days rather than 2일 and 3일. 하루, 이틀, 사흘, 나흘 — the list has to be learned as a list.",
+          "audio": {
+            "src": "audio/book/2b-u11-trk18.mp3",
+            "labelEn": "듣기 1 · track 18"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/thermometer.png",
+          "phraseKo": "여자의 증상",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "여자의 증상으로 맞지 않는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "cough",
+          "choices": [
+            {
+              "id": "cough",
+              "ko": "기침을 하다"
+            },
+            {
+              "id": "throat",
+              "ko": "목이 아프다"
+            },
+            {
+              "id": "runny",
+              "ko": "콧물이 나다"
+            }
+          ],
+          "en": "Which of these is not one of her symptoms? — Coughing.",
+          "why": "기침을 하다 is the one the tape rules out, and it rules it out in the same breath as confirming another: 기침은 안 하는데 콧물이 나요. 목이 아프다 comes from 열도 나고 목도 많이 아파요, which the doctor then confirms with 목이 많이 부었네요. Hearing 기침 and 콧물 in one sentence is what makes the wrong answer feel right.",
+          "grammar": "기침을 하다 and 기침이 나다 are both said, and this chapter uses both — 기침이 계속 나요 on p.50 and 기침은 안 하세요? on the tape. 나다 is the cough arriving; 하다 is the coughing.",
+          "audio": {
+            "src": "audio/book/2b-u11-trk18.mp3",
+            "labelEn": "듣기 1 · track 18"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/ice_pack.png",
+          "phraseKo": "목이 많이 ___ (붓다)",
+          "lines": [
+            {
+              "who": "의사",
+              "ko": "목이 많이 {}."
+            }
+          ],
+          "answer": "bueot",
+          "choices": [
+            {
+              "id": "bueot",
+              "ko": "부었네요"
+            },
+            {
+              "id": "buseot",
+              "ko": "붓었네요"
+            },
+            {
+              "id": "bueos",
+              "ko": "부엇네요"
+            }
+          ],
+          "en": "Your throat is very swollen.",
+          "why": "붓다 loses its ㅅ before a vowel, so 붓 + 었네요 → 부었네요 — the same stem the 예문 on p.50 uses as 부은. 붓었네요 keeps the ㅅ. 부엇네요 drops it and then writes the past with a single ㅅ, which is never how 었 is spelt.",
+          "grammar": "-네요 is what a doctor says on seeing something for the first time: 부었네요, 열이 있네요. It reports the moment of noticing rather than the fact.",
+          "audio": {
+            "src": "audio/book/2b-u11-d33.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "items/tissue_box.png",
+          "phraseKo": "기침은 안 하는데 ___ (콧물)",
+          "lines": [
+            {
+              "who": "켈리",
+              "ko": "네, 기침은 안 하는데 {}."
+            }
+          ],
+          "answer": "konmuri",
+          "choices": [
+            {
+              "id": "konmuri",
+              "ko": "콧물이 나요"
+            },
+            {
+              "id": "konmureul",
+              "ko": "콧물을 나요"
+            },
+            {
+              "id": "konmuri_wa",
+              "ko": "콧물이 와요"
+            }
+          ],
+          "en": "No, I am not coughing, but my nose is running.",
+          "why": "나다 takes the thing that appears as its subject: 콧물이 나요. 콧물을 나요 has given it an object, and 나다 never has one. 콧물이 와요 uses 오다, which moves something from somewhere else — a runny nose comes out rather than arriving.",
+          "grammar": "나다 with 이/가 covers everything the body produces: 콧물이 나다, 기침이 나다, 열이 나다, 땀이 나다. The 은 on 기침은 is the contrast — coughing, no; nose, yes.",
+          "audio": {
+            "src": "audio/book/2b-u11-d35.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        },
+        {
+          "n": 5,
+          "art": "items/prescription_slip.png",
+          "phraseKo": "약을 다 드시고 ___ (낫지 않다)",
+          "lines": [
+            {
+              "who": "의사",
+              "ko": "아니요, 약을 다 드시고 {} 그때 다시 오세요."
+            }
+          ],
+          "answer": "natji",
+          "choices": [
+            {
+              "id": "natji",
+              "ko": "낫지 않으면"
+            },
+            {
+              "id": "natji_an",
+              "ko": "낫지 안으면"
+            },
+            {
+              "id": "naji",
+              "ko": "나지 않으면"
+            }
+          ],
+          "en": "No — finish the medicine, and if it has not cleared up by then, come back.",
+          "why": "-지 begins with a consonant, so this time 낫다 keeps its ㅅ: 낫지 않으면. 낫지 안으면 writes 안, which is the short negative and goes in front of a verb rather than after -지. 나지 않으면 has used 나다 — a cough not starting, which is not what the doctor means.",
+          "grammar": "One stem, two shapes, and the ending decides: 나으면 (vowel, ㅅ drops) against 낫지 (consonant, ㅅ stays). The pharmacist on p.52 says the first and the doctor here says the second.",
+          "audio": {
+            "src": "audio/book/2b-u11-d37.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-listen-2",
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "no": "듣기 2",
+      "icon": "🏅",
+      "blurbEn": "The oldest runner in the race, interviewed at the finish.",
+      "instructionKo": "잘 듣고 질문에 답하세요.",
+      "instructionEn": "Listen carefully and answer the questions.",
+      "noteEn": "The book’s first question is a form with two gaps — 남자는 ____마다 ____씩 운동을 합니다 — and its second is three printed statements. Row 1 keeps both gaps as one row, because 마다 and 씩 are only meaningful together, and it puts them back in the sentence the runner actually says rather than in the third person the form uses. Rows 3 and 4 are the interviewer’s own language, which is the most formal Korean in the chapter.",
+      "pattern": "마라톤 인터뷰 · 여든여덟 살의 선수",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/running_shoe.png",
+          "phraseKo": "___마다 ___씩 운동을 합니다",
+          "lines": [
+            {
+              "who": "선수",
+              "ko": "저는 {}마다 {}씩 운동을 합니다."
+            }
+          ],
+          "answer": "achim",
+          "choices": [
+            {
+              "id": "achim",
+              "ko": "아침"
+            },
+            {
+              "id": "jeonyeok",
+              "ko": "저녁"
+            },
+            {
+              "id": "jumal",
+              "ko": "주말"
+            }
+          ],
+          "answer2": "dusigan",
+          "choices2": [
+            {
+              "id": "dusigan",
+              "ko": "두 시간"
+            },
+            {
+              "id": "hansigan",
+              "ko": "한 시간"
+            },
+            {
+              "id": "sesigan",
+              "ko": "세 시간"
+            }
+          ],
+          "en": "I exercise for two hours every morning.",
+          "why": "The tape says 아침마다 두 시간씩, and both halves have to come off the recording: 저녁 and 주말 are the other times a runner might train, and 한 시간 is the figure the 예문 on p.51 uses — 날마다 한 시간씩 운동해요 — so it is the one that feels already heard. 마다 takes the time and 씩 takes the amount, never the other way round.",
+          "grammar": "N마다 N씩, every N and N each time. The page’s own form writes it in the third person — 남자는 아침마다 두 시간씩 운동을 합니다 — and the runner says it in the first.",
+          "audio": {
+            "src": "audio/book/2b-u11-d44.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/topik_athlete.png",
+          "phraseKo": "이 사람에 대한 설명",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "이 사람에 대한 설명으로 맞는 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "oldest",
+          "choices": [
+            {
+              "id": "oldest",
+              "ko": "참가한 선수 중에서 나이가 가장 많습니다."
+            },
+            {
+              "id": "often",
+              "ko": "마라톤 대회에 여러 번 참가해 봤습니다."
+            },
+            {
+              "id": "food",
+              "ko": "건강을 위해 먹는 특별한 음식이 있습니다."
+            }
+          ],
+          "en": "Which of these matches what is said? — He is the oldest of the runners who took part.",
+          "why": "참가한 선수 중에서 나이가 가장 많습니다. is how the interviewer introduces him: 이번 대회에 참가한 선수 중에 가장 연세가 많으신 김인창 씨. The other two are both denied outright — 마라톤은 이번이 처음입니다 rules out the first, and 특별히 먹는 음식은 없고 rules out the third.",
+          "grammar": "연세 is the honorific for 나이 and only ever describes somebody else: 연세가 많으시다. The statement uses 나이 because it is the question talking, not the interviewer.",
+          "audio": {
+            "src": "audio/book/2b-u11-trk19.mp3",
+            "labelEn": "듣기 2 · track 19"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/topik_special.png",
+          "phraseKo": "정말 ___ (대단하다 + -(으)시-)",
+          "lines": [
+            {
+              "who": "기자",
+              "ko": "연세가 여든 여덟이신데 정말 {}."
+            }
+          ],
+          "answer": "daedanhasim",
+          "choices": [
+            {
+              "id": "daedanhasim",
+              "ko": "대단하십니다"
+            },
+            {
+              "id": "daedanhapsim",
+              "ko": "대단합십니다"
+            },
+            {
+              "id": "daedanhasiseum",
+              "ko": "대단하시습니다"
+            }
+          ],
+          "en": "You are eighty-eight and it is truly remarkable.",
+          "why": "대단하 + 시 + ㅂ니다 → 대단하십니다: the honorific goes on first and then the formal ending, and after 시 the ending is -ㅂ니다 rather than -습니다, because 시 ends in a vowel. 대단합십니다 has the two the wrong way round, and 대단하시습니다 has kept -습니다 where the vowel calls for -ㅂ니다.",
+          "grammar": "Vowel stem → -ㅂ니다, consonant stem → -습니다, and -(으)시- always leaves a vowel: 하십니다, 가십니다, 드십니다. This whole interview is in that register.",
+          "audio": {
+            "src": "audio/book/2b-u11-d40.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "items/vitamin_bottle.png",
+          "phraseKo": "특별히 ___ 있습니까? (드시다)",
+          "lines": [
+            {
+              "who": "기자",
+              "ko": "건강을 위해서 특별히 {} 있습니까?"
+            }
+          ],
+          "answer": "deusineun",
+          "choices": [
+            {
+              "id": "deusineun",
+              "ko": "드시는 것이"
+            },
+            {
+              "id": "deusieun",
+              "ko": "드시은 것이"
+            },
+            {
+              "id": "deusigi",
+              "ko": "드시기 것이"
+            }
+          ],
+          "en": "Is there anything in particular you eat for your health?",
+          "why": "드시다 is a verb, so 것 takes the verb modifier -는: 드시는 것이. 드시은 것이 has used the adjective modifier, and 드시기 것이 has put the noun-maker 기 in front of a noun, which leaves two nouns and nothing joining them. 드시다 is the honorific of 먹다, and the runner answers in the plain form: 특별히 먹는 음식은 없고.",
+          "grammar": "먹다 → 드시다 for somebody else, and the modifier follows the honorific: 드시는 것, 드신 것. 잡수시다 is the same idea one step more formal.",
+          "audio": {
+            "src": "audio/book/2b-u11-d46.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-read-1",
+      "type": "build",
+      "section": "읽고 쓰기",
+      "sectionEn": "Reading and writing",
+      "no": "읽기",
+      "icon": "📖",
+      "blurbEn": "Five habits doctors recommend, and the one thing they matter more than.",
+      "instructionKo": "다음을 읽고 질문에 답하세요.",
+      "instructionEn": "Read the passage and answer the following questions.",
+      "noteEn": "The two printed questions are rows 1 and 2 — the first is a gap to fill from the passage and the second is three statements. The 쓰기 box under them asks for a healthy habit of your own on eight blank lines, and the key gives no answer, so it is not here. Rows 3 to 6 are sentences of the passage with one join taken out of each, and one of them is the trap the chapter is built around: 씻다 ends in ㅅ and is perfectly regular.",
+      "pattern": "건강한 생활 습관",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/topik_health.png",
+          "phraseKo": "무엇보다 ___ 것이 중요합니다",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "건강을 위해 어떻게 하는 것이 좋습니까?"
+            },
+            {
+              "who": "A",
+              "ko": "건강을 위해서 무엇보다 {} 것이 중요합니다."
+            }
+          ],
+          "answer": "bakkuneun",
+          "choices": [
+            {
+              "id": "bakkuneun",
+              "ko": "생활 습관을 바꾸는"
+            },
+            {
+              "id": "bakkun",
+              "ko": "생활 습관을 바꾼"
+            },
+            {
+              "id": "bakkul",
+              "ko": "생활 습관을 바꿀"
+            }
+          ],
+          "en": "What is good for your health? — More than anything, changing your habits is what matters.",
+          "why": "The passage says 그것보다 생활 습관을 바꾸는 것이 더 중요합니다, and the modifier has to stay -는: it is the changing in general that matters, not one change already made or one still to come. 바꾼 것 would be a change completed and 바꿀 것 one intended.",
+          "grammar": "바꾸다 is transitive — 습관을 바꾸다, somebody changes something — against 바뀌다, which changes by itself. Unit 13 uses the other one: 하숙집이 대부분 원룸으로 바뀌었기 때문입니다."
+        },
+        {
+          "n": 2,
+          "art": "quiz/unit11_q10_wash_hands.png",
+          "phraseKo": "내용과 같은 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "이 글의 내용과 같은 것은 무엇입니까?"
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "wash",
+          "choices": [
+            {
+              "id": "wash",
+              "ko": "감기에 안 걸리려면 손을 자주 씻어야 합니다."
+            },
+            {
+              "id": "much",
+              "ko": "운동을 할 때는 한 번에 많이 하는 것이 좋습니다."
+            },
+            {
+              "id": "supp",
+              "ko": "좋은 음식보다 영양제를 먹는 것이 건강에 더 좋습니다."
+            }
+          ],
+          "en": "Which of these matches the passage? — To avoid catching cold you should wash your hands often.",
+          "why": "감기에 안 걸리려면 손을 자주 씻어야 합니다. is habit 4 turned round: 손을 자주 씻으면 감기를 예방할 수 있습니다. 운동을 할 때는 한 번에 많이 하는 것이 좋습니다 is the opposite of habit 3, which says 한 번에 오래 하는 것보다 매일 하는 것이 더 중요합니다. And the opening paragraph puts 영양제 below 생활 습관, not above 좋은 음식.",
+          "grammar": "예방하다 and -지 않으려면 are two ways to say the same thing: 감기를 예방할 수 있습니다 and 감기에 안 걸리려면. The question uses the second, the passage the first."
+        },
+        {
+          "n": 3,
+          "art": "items/birthday_cake.png",
+          "phraseKo": "좋은 쪽으로 ___ 노력합니다 (생각하다)",
+          "lines": [
+            {
+              "ko": "자주 웃고 모든 일을 좋은 쪽으로 {} 노력합니다."
+            }
+          ],
+          "answer": "saenggakharyeogo",
+          "choices": [
+            {
+              "id": "saenggakharyeogo",
+              "ko": "생각하려고"
+            },
+            {
+              "id": "saenggakhareogo",
+              "ko": "생각하러고"
+            },
+            {
+              "id": "saenggakharyeomyeon",
+              "ko": "생각하려면"
+            }
+          ],
+          "en": "They laugh often and try to look on the bright side of everything.",
+          "why": "노력하다 needs a purpose in front of it, and the purpose ending is -(으)려고: 생각하려고 노력합니다. 생각하러고 is -(으)러 with a 고 stuck on; -(으)러 goes with verbs of going and never takes anything after it. 생각하려면 is the conditional — if you intend to think that way — and 노력합니다 is then left with nothing to be an effort toward.",
+          "grammar": "V-(으)려고 노력하다, to try to. Compare -(으)러 가다, to go in order to: 영화 보러 가다 on p.55. The two look alike and only one of them takes 고."
+        },
+        {
+          "n": 4,
+          "art": "items/vegetable_pile.png",
+          "phraseKo": "너무 ___ 매운 음식 (짜다)",
+          "lines": [
+            {
+              "ko": "너무 {} 매운 음식을 먹지 않고 고기보다 채소, 과일, 생선을 많이 먹습니다."
+            }
+          ],
+          "answer": "jjageona",
+          "choices": [
+            {
+              "id": "jjageona",
+              "ko": "짜거나"
+            },
+            {
+              "id": "jjagona",
+              "ko": "짜고나"
+            },
+            {
+              "id": "jjageoni",
+              "ko": "짜거니"
+            }
+          ],
+          "en": "They avoid food that is too salty or too spicy, and eat more vegetables, fruit and fish than meat.",
+          "why": "-거나 joins two things either of which counts, and it goes straight onto the stem: 짜거나 매운. 짜고나 has spliced -고 and -나 together, and 짜거니 is not a form of anything. Both wrong answers keep the sense and lose the word.",
+          "grammar": "A/V-거나 A/V, either … or. On the plain stem with no tense: 짜거나, 매우거나, 가거나. The 보다 later in the sentence is comparison — 고기보다 채소, more vegetables than meat."
+        },
+        {
+          "n": 5,
+          "art": "items/water_faucet.png",
+          "phraseKo": "바로 손을 ___ (씻다)",
+          "lines": [
+            {
+              "ko": "외출하고 나서 집에 돌아오면 바로 손을 {}."
+            }
+          ],
+          "answer": "ssitseum",
+          "choices": [
+            {
+              "id": "ssitseum",
+              "ko": "씻습니다"
+            },
+            {
+              "id": "siseum",
+              "ko": "시습니다"
+            },
+            {
+              "id": "ssiteup",
+              "ko": "씻읍니다"
+            }
+          ],
+          "en": "As soon as they get home after going out, they wash their hands.",
+          "why": "씻다 ends in ㅅ and is **regular**, which is the trap this chapter sets: the ㅅ never goes anywhere, so 씻 + 습니다 → 씻습니다. 시습니다 has dropped it as though 씻다 were 낫다 or 붓다. 씻읍니다 has inserted an 으 that -습니다 does not take.",
+          "grammar": "ㅅ-final stems split two ways: 낫다, 짓다, 붓다, 젓다 are irregular; 씻다, 웃다, 벗다 are regular. Nothing in the spelling says which, so the list is the rule — and the 익힘책 puts 씻으세요 and 웃었어요 in beside the irregulars for exactly this reason."
+        },
+        {
+          "n": 6,
+          "art": "items/vitamin_bottle.png",
+          "phraseKo": "비싼 영양제___ 몸에 좋은 음식",
+          "lines": [
+            {
+              "ko": "많은 사람들이 비싼 영양제{} 몸에 좋은 음식을 먹습니다."
+            }
+          ],
+          "answer": "na",
+          "choices": [
+            {
+              "id": "na",
+              "ko": "나"
+            },
+            {
+              "id": "ina",
+              "ko": "이나"
+            },
+            {
+              "id": "hago",
+              "ko": "하고"
+            }
+          ],
+          "en": "A lot of people take expensive supplements or eat food that is good for them.",
+          "why": "영양제 ends in a vowel, so the particle is 나 rather than 이나: 영양제나 몸에 좋은 음식. 이나 belongs after a consonant — 약이나, 밥이나. 하고 means and rather than or, and the sentence is listing alternatives, not both together.",
+          "grammar": "N(이)나 N, either … or, with the vowel rule every Korean particle pair follows: 나 after a vowel, 이나 after a consonant. The verb-level equivalent is the -거나 two lines above."
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-culture-1",
+      "type": "build",
+      "section": "문화 산책",
+      "sectionEn": "Culture note",
+      "no": "알아보기",
+      "icon": "🌿",
+      "blurbEn": "A friend worries, brings ginseng, and it seems to help a little.",
+      "instructionKo": "다음을 읽고 빈칸에 알맞은 말을 고르세요.",
+      "instructionEn": "Read the passage and choose what belongs in each gap.",
+      "noteEn": "The page has three photographs, one short passage and then 생각 나누기 — is there a health food in your own country — which nothing can mark. The five rows are the five sentences of the passage with one join taken out of each. Two of the symptoms from the 어휘 page open it, so the writer’s complaint is the chapter’s own vocabulary met in a paragraph that is not a doctor’s surgery.",
+      "pattern": "인삼 · 친구가 걱정하면서 선물해 주었습니다",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/empty_plate.png",
+          "phraseKo": "소화도 잘 ___ (안되다)",
+          "lines": [
+            {
+              "ko": "요즘 저는 소화도 잘 {} 입맛도 없습니다."
+            }
+          ],
+          "answer": "andoego",
+          "choices": [
+            {
+              "id": "andoego",
+              "ko": "안되고"
+            },
+            {
+              "id": "andwaego",
+              "ko": "안돼고"
+            },
+            {
+              "id": "anhdoego",
+              "ko": "않되고"
+            }
+          ],
+          "en": "Lately my digestion has been off and I have had no appetite.",
+          "why": "안되다 is written 되 before a consonant ending: 안되 + 고 → 안되고. 안돼고 uses 돼, which is 되어 contracted and only appears before an ending that starts with a vowel — 안돼요, 안됐어요. 않되고 writes 않, the long negative, which goes after -지 and never in front of a verb.",
+          "grammar": "Three spellings, one sound: 되 before a consonant (안되고, 안되지), 돼 before a vowel (안돼요, 안됐어요), and 안 rather than 않 in front of the verb."
+        },
+        {
+          "n": 2,
+          "art": "items/topik_worry.png",
+          "phraseKo": "아픈 곳은 ___ (없다)",
+          "lines": [
+            {
+              "ko": "특별히 아픈 곳은 {} 힘이 없어서 공부하는 것이 힘들 때가 있습니다."
+            }
+          ],
+          "answer": "eopjiman",
+          "choices": [
+            {
+              "id": "eopjiman",
+              "ko": "없지만"
+            },
+            {
+              "id": "eopchiman",
+              "ko": "없치만"
+            },
+            {
+              "id": "aneopjiman",
+              "ko": "안없지만"
+            }
+          ],
+          "en": "Nothing hurts in particular, but I have no energy, and there are times when studying is hard.",
+          "why": "-지만 goes straight onto the stem: 없 + 지만 → 없지만. 없치만 has written the sound — the ㅅ of 없 and the 지 fuse to something like [업찌만] — instead of the letters. 안없지만 has put the short negative on 없다, which is already the negative of 있다.",
+          "grammar": "A/V-지만, but. It concedes the same way -기는 하지만 does in Unit 13, with one clause instead of two: 없지만, 좋지만, 힘들지만."
+        },
+        {
+          "n": 3,
+          "art": "items/ginseng_root.png",
+          "phraseKo": "친구가 저를 ___ (걱정하다)",
+          "lines": [
+            {
+              "ko": "그래서 친구가 저를 {} 인삼을 선물해 주었습니다."
+            }
+          ],
+          "answer": "geokjeonghamyeonseo",
+          "choices": [
+            {
+              "id": "geokjeonghamyeonseo",
+              "ko": "걱정하면서"
+            },
+            {
+              "id": "geokjeonghamyeoseo",
+              "ko": "걱정하며서"
+            },
+            {
+              "id": "geokjeonghamyeonso",
+              "ko": "걱정하면소"
+            }
+          ],
+          "en": "So a friend, worried about me, gave me ginseng as a present.",
+          "why": "-(으)면서 says the two things happen together: worrying and giving at once. 걱정하며서 has crossed -(으)면서 with the written -(으)며, which is a real ending but has no 서. 걱정하면소 is not a form of anything. The 를 on 저를 belongs to 걱정하다, which takes an object.",
+          "grammar": "V-(으)면서, while doing. On a vowel stem there is no 으: 걱정하면서, 보면서, 웃으면서 — the last one takes it because 웃 ends in a consonant."
+        },
+        {
+          "n": 4,
+          "art": "items/light_feather.png",
+          "phraseKo": "그전보다 좀 ___ 피곤합니다",
+          "lines": [
+            {
+              "ko": "며칠 동안 계속 먹었는데 그전보다 좀 {} 피곤합니다."
+            }
+          ],
+          "answer": "deol",
+          "choices": [
+            {
+              "id": "deol",
+              "ko": "덜"
+            },
+            {
+              "id": "deo",
+              "ko": "더"
+            },
+            {
+              "id": "an",
+              "ko": "안"
+            }
+          ],
+          "en": "I have been taking it for a few days and I am a little less tired than before.",
+          "why": "그전보다 sets up a comparison, so the word in front of 피곤합니다 has to be a comparative, and the passage is about ginseng helping: 좀 덜 피곤합니다. 더 is the comparative in the other direction and would say the ginseng made things worse. 안 is not comparative at all — 그전보다 안 피곤합니다 leaves the 보다 with nothing to compare.",
+          "grammar": "덜 and 더 are a pair: 덜 피곤하다 less tired, 더 피곤하다 more tired. Both need something to be measured against, which is what N보다 supplies."
+        },
+        {
+          "n": 5,
+          "art": "items/topik_health.png",
+          "phraseKo": "고향에 ___ 부모님 (계시다)",
+          "lines": [
+            {
+              "ko": "고향에 {} 부모님께도 선물하면 좋을 것 같습니다."
+            }
+          ],
+          "answer": "gyesin",
+          "choices": [
+            {
+              "id": "gyesin",
+              "ko": "계신"
+            },
+            {
+              "id": "itneun",
+              "ko": "있는"
+            },
+            {
+              "id": "gyesil",
+              "ko": "계실"
+            }
+          ],
+          "en": "I think it would be good to send some to my parents back home as well.",
+          "why": "부모님 takes the honorific throughout the sentence — 부모님께도, not 부모님에게도 — so the verb in front of it has to be 계시다 rather than 있다: 고향에 계신 부모님. 있는 부모님 is grammatical and drops the respect the rest of the sentence keeps. 계실 is the future modifier and would put the parents somewhere they are not yet.",
+          "grammar": "있다 → 계시다 for a person you respect, and 에게/한테 → 께 with it: 부모님께 선물하다. The whole sentence agrees or none of it does."
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-pron-1",
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "no": "규칙",
+      "icon": "🔊",
+      "blurbEn": "A final consonant changes sound, and then moves to the next syllable.",
+      "instructionKo": "잘 듣고 발음을 골라 보세요.",
+      "instructionEn": "Listen and choose how each word is actually pronounced.",
+      "noteEn": "Two rules run one after the other here, which is what makes this the hardest 발음 page in the book: the 받침 is first pronounced as [ㄱ], [ㄷ] or [ㅂ], and only then does that new sound cross to the vowel after it. So 잎 위 is not [이퓌] — the ㅍ becomes [ㅂ] first and the answer is [이뷔]. Rows 1 and 2 are the 준비 sentences and come with the recording; rows 3 to 5 are the book’s worked examples, which the tape does not read. On every row the spelling itself is one of the wrong buttons, and the halfway house — the 받침 changed but not yet moved — is the other.",
+      "pattern": "종성 규칙 후 연음",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/topik_cannot.png",
+          "phraseKo": "못 왔어요",
+          "lines": [
+            {
+              "ko": "어제 아파서 못 왔어요. → 못 왔어요[{}]"
+            }
+          ],
+          "answer": "modwass",
+          "choices": [
+            {
+              "id": "modwass",
+              "ko": "모돠써요"
+            },
+            {
+              "id": "motwass",
+              "ko": "못 왔어요"
+            },
+            {
+              "id": "modwass_half",
+              "ko": "몯 왔어요"
+            }
+          ],
+          "en": "I could not come yesterday because I was ill. — 못 왔어요 is said [모돠써요].",
+          "why": "The ㅅ of 못 is pronounced [ㄷ] before a consonant, and then that [ㄷ] moves onto the 와: [모돠써요]. 못 왔어요 is the spelling read letter by letter. 몯 왔어요 has done the first rule and stopped — the ㅅ has become ㄷ and has not crossed over, which is the halfway house this page exists to get past. The book prints the same join as 못 와요 → [모돠요].",
+          "grammar": "The 받침 rule runs before the liaison, in that order: 못 → [몯] → [모ㄷ + 와] → [모돠]. Doing them the other way round gives [모솨], which is not Korean.",
+          "audio": {
+            "src": "audio/book/2b-u11-d48.mp3",
+            "labelEn": "발음 준비 1 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/medicine_capsule.png",
+          "phraseKo": "몇 알",
+          "lines": [
+            {
+              "ko": "이 약을 몇 알씩 먹어야 돼요? → 몇 알[{}]"
+            }
+          ],
+          "answer": "myeodal",
+          "choices": [
+            {
+              "id": "myeodal",
+              "ko": "며달"
+            },
+            {
+              "id": "myeotal",
+              "ko": "몇 알"
+            },
+            {
+              "id": "myeondal",
+              "ko": "면달"
+            }
+          ],
+          "en": "How many of these pills do I have to take at a time? — 몇 알 is said [며달].",
+          "why": "몇 ends in ㅊ, which is pronounced [ㄷ] on its own, and the 알 then takes that [ㄷ]: [며달]. 몇 알 is the spelling. 면달 has turned the 받침 into [ㄴ], which is what happens before ㄴ or ㅁ — 몇 명 is [면 명] — but 알 begins with a vowel, so the liaison applies instead.",
+          "grammar": "ㅊ is one of the seven 받침 pronounced [ㄷ]: ㄷ, ㅌ, ㅅ, ㅆ, ㅈ, ㅊ, ㅎ. Whichever it is on the page, [ㄷ] is what crosses over.",
+          "audio": {
+            "src": "audio/book/2b-u11-d49.mp3",
+            "labelEn": "발음 준비 2 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/rice_grain.png",
+          "phraseKo": "맛없어요 (맛 + 없어요)",
+          "lines": [
+            {
+              "ko": "맛없어요[{}]"
+            }
+          ],
+          "answer": "madeopss",
+          "choices": [
+            {
+              "id": "madeopss",
+              "ko": "마덥써요"
+            },
+            {
+              "id": "maseopss",
+              "ko": "맛없어요"
+            },
+            {
+              "id": "madeopss_half",
+              "ko": "맏없어요"
+            }
+          ],
+          "en": "맛없어요, it does not taste good, is pronounced [마덥써요].",
+          "why": "Two words that have become one: 맛 + 없어요. The ㅅ is pronounced [ㄷ] and moves onto the 없, whose own ㅂㅅ cluster then gives [ㅂ] plus [ㅆ] — so the whole thing is [마덥써요]. 맛없어요 is the spelling, and 맏없어요 has changed the ㅅ to ㄷ and left it there.",
+          "grammar": "This is why 맛없다 is [마덥따] and 맛있다 is [마딛따] rather than [마싣따] — the two words fused long enough ago for the 받침 rule to apply first."
+        },
+        {
+          "n": 4,
+          "art": "items/first_meeting.png",
+          "phraseKo": "첫인상 (첫 + 인상)",
+          "lines": [
+            {
+              "ko": "첫인상[{}]"
+            }
+          ],
+          "answer": "cheodinsang",
+          "choices": [
+            {
+              "id": "cheodinsang",
+              "ko": "처딘상"
+            },
+            {
+              "id": "cheosinsang",
+              "ko": "첫인상"
+            },
+            {
+              "id": "cheodinsang_half",
+              "ko": "첟인상"
+            }
+          ],
+          "en": "첫인상, a first impression, is pronounced [처딘상].",
+          "why": "첫 + 인상, and the ㅅ becomes [ㄷ] before crossing to the 인: [처딘상]. 첫인상 is the spelling. 첟인상 is the 받침 changed and not moved. Reading it as [처신상] is the other mistake — that would be the liaison done first, without the 받침 rule.",
+          "grammar": "첫 is the native-Korean first: 첫인상, 첫날, 첫사랑. The Sino-Korean 제일 and 처음 behave differently and neither triggers this rule."
+        },
+        {
+          "n": 5,
+          "art": "items/forsythia_spray.png",
+          "phraseKo": "잎 위",
+          "lines": [
+            {
+              "ko": "잎 위[{}]"
+            }
+          ],
+          "answer": "ibwi",
+          "choices": [
+            {
+              "id": "ibwi",
+              "ko": "이뷔"
+            },
+            {
+              "id": "ipwi",
+              "ko": "잎 위"
+            },
+            {
+              "id": "ibwi_half",
+              "ko": "입 위"
+            }
+          ],
+          "en": "잎 위, on top of a leaf, is pronounced [이뷔].",
+          "why": "The ㅍ of 잎 is pronounced [ㅂ] and then moves onto the 위: [이뷔]. 잎 위 is the spelling. 입 위 has the 받침 changed and not moved. And [이퓌] — the liaison without the 받침 rule — is the mistake the page is built to prevent, which is why the answer sounds like the word 입 rather than like 잎.",
+          "grammar": "ㅍ is pronounced [ㅂ] as a 받침, so 잎 on its own is [입] and 잎이 is [이피]. The difference is whether the vowel belongs to a particle, which keeps the original letter, or to a separate word, which does not."
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-pron-2",
+      "type": "build",
+      "section": "발음",
+      "sectionEn": "Pronunciation",
+      "no": "연습",
+      "icon": "✍️",
+      "blurbEn": "The tape gives the sound; the blank wants the spelling.",
+      "instructionKo": "잘 듣고 빈칸에 알맞은 말을 쓰세요.",
+      "instructionEn": "Listen carefully and write the word you hear.",
+      "noteEn": "The book has you listen and repeat these four lines, which nothing can mark. Turned round instead: the tape supplies the sound and the blank wants the spelling, which is the direction a dictation costs marks in — every word here is written with a consonant that is not heard, and one of them, 앉았어요, hides a whole cluster. The fourth line of the book is an A/B exchange and its two halves are two rows, so both get their own clip. Every row plays the line it came from.",
+      "pattern": "들은 것을 받아 적기",
+      "items": [
+        {
+          "n": 1,
+          "art": "items/medicine_capsule.png",
+          "phraseKo": "한 번에 [며달]씩 먹어요",
+          "lines": [
+            {
+              "ko": "이 약은 한 번에 {} 먹어요?"
+            }
+          ],
+          "answer": "myeotal",
+          "choices": [
+            {
+              "id": "myeotal",
+              "ko": "몇 알씩"
+            },
+            {
+              "id": "myeodal",
+              "ko": "며달씩"
+            },
+            {
+              "id": "myeondal",
+              "ko": "면 알씩"
+            }
+          ],
+          "en": "How many of these pills do you take at once?",
+          "why": "The tape says [며달씩] and the spelling is 몇 알씩 — two words, so a space, and the ㅊ written back in. 며달씩 is the sound written down and loses both words. 면 알씩 has the 받침 as [ㄴ], which is right before ㄴ or ㅁ and wrong before a vowel.",
+          "grammar": "알 is the counter for anything small and round: 한 알, 두 알, 몇 알. It is a separate word from 몇, which is why the space survives even though the sound does not.",
+          "audio": {
+            "src": "audio/book/2b-u11-d50.mp3",
+            "labelEn": "발음 연습 1 · the line itself"
+          }
+        },
+        {
+          "n": 2,
+          "art": "items/forsythia_spray.png",
+          "phraseKo": "[이뷔]에 나비가 앉았어요",
+          "lines": [
+            {
+              "ko": "{} 나비가 앉았어요."
+            }
+          ],
+          "answer": "ipwie",
+          "choices": [
+            {
+              "id": "ipwie",
+              "ko": "잎 위에"
+            },
+            {
+              "id": "ibwie",
+              "ko": "이뷔에"
+            },
+            {
+              "id": "ipwie_half",
+              "ko": "입 위에"
+            }
+          ],
+          "en": "A butterfly landed on the leaf.",
+          "why": "The tape says [이뷔에] and the spelling is 잎 위에 — the ㅍ is written even though [ㅂ] is heard. 이뷔에 is the sound written down and the leaf disappears with it. 입 위에 hears the [ㅂ] and writes the word it belongs to, which is 입, the mouth — a butterfly on somebody’s mouth.",
+          "grammar": "잎 [입] and 입 [입] are pronounced the same and are different words. Only the spelling tells them apart, which is what this exercise is for.",
+          "audio": {
+            "src": "audio/book/2b-u11-d51.mp3",
+            "labelEn": "발음 연습 2 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "art": "items/kitchen_stove.png",
+          "phraseKo": "[부어간]으로 들어가 보세요",
+          "lines": [
+            {
+              "ko": "{} 들어가 보세요."
+            }
+          ],
+          "answer": "bueokaneuro",
+          "choices": [
+            {
+              "id": "bueokaneuro",
+              "ko": "부엌 안으로"
+            },
+            {
+              "id": "bueoganeuro",
+              "ko": "부어간으로"
+            },
+            {
+              "id": "bueoganeuro_half",
+              "ko": "부억 안으로"
+            }
+          ],
+          "en": "Try going into the kitchen.",
+          "why": "The tape says [부어가느로] and the spelling is 부엌 안으로: the ㅋ is written even though [ㄱ] is heard, and 부엌 and 안 stay two words. 부어간으로 is the sound written down. 부억 안으로 keeps the space and writes the sound of the 받침 instead of its letter.",
+          "grammar": "부엌 is one of very few words ending in ㅋ, and its 받침 is [ㄱ] every time it stands alone or before a consonant: 부엌 [부억], 부엌도 [부억또]. Before a particle the ㅋ comes back: 부엌에서 [부어케서].",
+          "audio": {
+            "src": "audio/book/2b-u11-d52.mp3",
+            "labelEn": "발음 연습 3 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "art": "items/pine_tree.png",
+          "phraseKo": "나비가 [안자써요]",
+          "lines": [
+            {
+              "ko": "잎 위에 나비가 {}."
+            }
+          ],
+          "answer": "anjat",
+          "choices": [
+            {
+              "id": "anjat",
+              "ko": "앉았어요"
+            },
+            {
+              "id": "anjat_sound",
+              "ko": "안자써요"
+            },
+            {
+              "id": "anjat_half",
+              "ko": "앉았써요"
+            }
+          ],
+          "en": "A butterfly landed on the leaf.",
+          "why": "The tape says [안자써요] and the spelling is 앉았어요 — the ㄴㅈ cluster of 앉 is written in full and only the ㄴ is heard, and the 았 is written with ㅆ. 안자써요 is the sound written down and loses the cluster. 앉았써요 has the cluster right and then doubles the ㅅ, which is the 았 already spelt once.",
+          "grammar": "앉다 [안따], 앉아요 [안자요], 앉았어요 [안자써요]. The ㅈ of the cluster is only ever heard when a vowel follows it — which it does here, and it still comes out as the 자 rather than as a separate sound.",
+          "audio": {
+            "src": "audio/book/2b-u11-d51.mp3",
+            "labelEn": "발음 연습 2 · the line itself"
+          }
+        },
+        {
+          "n": 5,
+          "art": "items/topik_cannot.png",
+          "phraseKo": "바빠서 [모돠써요]",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어제 왜 안 왔어요?"
+            },
+            {
+              "who": "B",
+              "ko": "바빠서 {}."
+            }
+          ],
+          "answer": "motwat",
+          "choices": [
+            {
+              "id": "motwat",
+              "ko": "못 왔어요"
+            },
+            {
+              "id": "modwat",
+              "ko": "모돠써요"
+            },
+            {
+              "id": "modwat_half",
+              "ko": "몯 왔어요"
+            }
+          ],
+          "en": "Why did you not come yesterday? — I was busy and could not.",
+          "why": "The tape says [모돠써요] and the spelling is 못 왔어요, two words with the ㅅ written back in. 모돠써요 is the sound written down. 몯 왔어요 writes the sound of the 받침 and keeps the space, which is the halfway house again. Note the question uses 안 and the answer uses 못 — a choice not to against not being able to — and the sound gives away neither.",
+          "grammar": "안 for choosing not to, 못 for not being able to: 안 왔어요 and 못 왔어요. Both are separate words in front of the verb, and both keep their spelling however they are said.",
+          "audio": {
+            "src": "audio/book/2b-u11-d53.mp3",
+            "labelEn": "발음 연습 4 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u11sgk-check-2",
+      "type": "build",
+      "section": "자기 평가",
+      "sectionEn": "Self-check",
+      "no": "2",
+      "icon": "✅",
+      "blurbEn": "Three patterns in one box, and three exchanges that each want one.",
+      "instructionKo": "알맞은 것을 골라 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue using the word in parentheses and the right pattern from the box.",
+      "noteEn": "The chapter’s own self-check, and the only page that puts the three patterns side by side: 마다, -기로 하다 and -는 게 어때요. The word is printed in brackets on the page and appears above each row here; what you choose is which of the three the exchange is asking for, so on rows 2 and 3 every wrong button is a correctly formed pattern answering the wrong question. The answers are the ones printed upside down at the foot of the page. The tick-box word list in 자기 평가 1 is not here.",
+      "pattern": "세 가지 문형을 한자리에서",
+      "items": [
+        {
+          "n": 1,
+          "art": "quiz/unit11_q07_medicine_schedule.png",
+          "phraseKo": "(여섯 시간)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이 약은 하루에 몇 번 먹어야 해요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 두 알씩 드세요."
+            }
+          ],
+          "answer": "mada",
+          "choices": [
+            {
+              "id": "mada",
+              "ko": "여섯 시간마다"
+            },
+            {
+              "id": "ssik",
+              "ko": "여섯 시간씩"
+            },
+            {
+              "id": "emada",
+              "ko": "여섯 시간에마다"
+            }
+          ],
+          "en": "How many times a day do I take this? — Two tablets every six hours.",
+          "why": "A asks how often, so the answer is 마다 on the interval: 여섯 시간마다 두 알씩. 여섯 시간씩 would say six hours of it each time, and the 씩 is already spent on 두 알씩 later in the line. 여섯 시간에마다 has stacked 마다 on a particle that 마다 replaces.",
+          "grammar": "The pair from p.51 in one sentence: 마다 for how often, 씩 for how many each time. 여섯 시간마다 두 알씩 — swap them and the dose becomes nonsense."
+        },
+        {
+          "n": 2,
+          "art": "quiz/unit11_q09_movie_plan.png",
+          "phraseKo": "(영화 보러 가다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 저녁에 뭐 해요?"
+            },
+            {
+              "who": "B",
+              "ko": "민수 씨하고 {}."
+            }
+          ],
+          "answer": "giro",
+          "choices": [
+            {
+              "id": "giro",
+              "ko": "영화 보러 가기로 했어요"
+            },
+            {
+              "id": "neunge",
+              "ko": "영화 보러 가는 게 어때요"
+            },
+            {
+              "id": "mada",
+              "ko": "영화 보러 가마다"
+            }
+          ],
+          "en": "What are you doing this evening? — Going to a film with Minsu.",
+          "why": "A has asked what B is doing, so B reports something already arranged: 영화 보러 가기로 했어요. 영화 보러 가는 게 어때요 is a correctly formed suggestion, and B was asked rather than asking. 영화 보러 가마다 has put 마다 on a verb, and 마다 only ever goes on a noun.",
+          "grammar": "V-기로 하다 reports; V-는 게 어때요 proposes. Both are in the box and only one of them answers a question about your own evening."
+        },
+        {
+          "n": 3,
+          "art": "items/doctor.png",
+          "phraseKo": "(병원에 가다)",
+          "lines": [
+            {
+              "who": "A",
+              "ko": "음식을 잘못 먹어서 배탈이 난 것 같아요."
+            },
+            {
+              "who": "B",
+              "ko": "계속 아프면 {}?"
+            }
+          ],
+          "answer": "neunge",
+          "choices": [
+            {
+              "id": "neunge",
+              "ko": "병원에 가는 게 어때요"
+            },
+            {
+              "id": "giro",
+              "ko": "병원에 가기로 했어요"
+            },
+            {
+              "id": "mada",
+              "ko": "병원에 가마다"
+            }
+          ],
+          "en": "I think I have an upset stomach from something I ate. — If it keeps hurting, why not go to a doctor?",
+          "why": "A has a complaint and B gives advice, which is 병원에 가는 게 어때요? The question mark on the page settles it: 병원에 가기로 했어요 is a report and cannot be asked, and it would be B announcing B’s own arrangement in answer to A’s stomach. 병원에 가마다 is 마다 on a verb again.",
+          "grammar": "The whole chapter turns on this move — a symptom, then advice — and 계속 아프면 is the frame the 말하기 1 pharmacist uses too: 그래도 안 나으면 병원에 가세요."
+        }
+      ]
+    }
+  ]
+}

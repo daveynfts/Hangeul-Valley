@@ -861,6 +861,61 @@ to learn it" stays a false alarm instead of becoming one.
 
 ---
 
+### Unit 11, and the overlap the gapped-line check cannot see
+
+`worlds/unit11-textbook.json`: fourteen exercises, sixty-three rows, ids prefixed
+`u11sgk-`. Ten of the chapter's eleven headed sections; 과제 is the one left out, and it
+is left out because it has no key of any kind — see below.
+
+The thing worth carrying forward is a **third** comparison between the two banks. Unit 13
+showed that a shared *gapped sentence* is a collision. Unit 11 shows that two banks can
+reach the same **answer** by two different sentences, and the gapped-line check sees
+nothing:
+
+- 익힘책 `u11-grammar-3-1` row 4: `토요일에는 사람이 많으니까 다른 날 {}?` → 보는 게 어때요
+- 교과서 `u11sgk-gram-3` row 1 as first written: `치과에 가 {}?` → 보는 게 어때요
+
+Different sentences, different gaps, same button. A learner who presses 보는 게 어때요 twice
+has done one exercise. The builder now compares answer texts as well as gapped lines, and
+`test_unit11_textbook.js` section 3 keeps it — the fix was to move the gap so the answer is
+가 보는 게 어때요, which the 익힘책 does not have.
+
+One overlap survives, and the difference between a decision and a gap is that it is named:
+the 자기 평가 answer key printed at the foot of p.66 gives 병원에 가는 게 어때요, and the
+익힘책 uses that exact sentence for 문형 연습 3. The book chose it, so it stays — in an
+allow-list of one, with a second assertion that the overlap is *still real*, so the
+allowance cannot outlive the reason for it.
+
+Three more things this unit settled:
+
+- **Sometimes the right move is to leave a whole section out.** 과제 is a role-play from the
+  activity sheets at the back: the 환자 sheet (printed p.226) is fifteen pictures with no
+  words at all, and the 의사 sheet (p.227) is twelve prescription cards — a department, a
+  dosage in words, a 주의사항 picture marked ○ or ✗. The two sets are drawn at random and
+  the book prints no pairing between them, so there is nothing a screen could mark.
+  Inventing a pairing would have been inventing a key. 어휘 2 and 어휘 3 are absent for the
+  opposite reason — the 익힘책 has all six hospital departments and the whole medicine set
+  with its four verbs — and `omittedNote` says which and why for all three.
+- **A 발음 rule with two steps can still be checked from the rule.** Unit 11's is 종성 규칙
+  후 연음: the 받침 is pronounced [ㄱ], [ㄷ] or [ㅂ] *first*, and only then crosses to the
+  vowel after it — so 잎 위 is [이뷔] and not [이퓌]. That is computable. Decompose each
+  keyed answer into jamo and look for a stop 받침 immediately before a syllable whose
+  initial is ㅇ: the spelling has that boundary and the pronunciation cannot, because the
+  boundary is exactly what the liaison consumed. Strip spaces first — the whole point is
+  that the rule crosses a word boundary. 규칙 keys a form without the boundary and offers
+  the spelling as a wrong button; 연습 goes the other way and keys the spelling, with
+  exactly one wrong button being the sound written down. Both directions are asserted, and
+  injecting a swapped key breaks both.
+- **A missing tape can be the reason a page does not exist yet.** Unit 11's cassette stopped
+  at track 19 and the 발음 page plays 20 and 21, so 발음 연습 was unbuildable until those
+  two were cut. Nothing had flagged it: the cassette's own dictation filter already named
+  종성 규칙 후 연음 as the unit's 발음 point, so the page had been read and the recordings
+  simply never made. Before starting a 교과서, check the cassette covers every track the
+  chapter's pages name — `worlds/<unit>-cassette.json` against the track numbers printed
+  beside each 준비 and 연습.
+
+---
+
 ---
 
 ## A third kind of bank: the exam world
