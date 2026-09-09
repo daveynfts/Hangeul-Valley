@@ -582,6 +582,73 @@ say "written closed up, never 올 지" without asking anyone to spot a space.
 
 ---
 
+## The books are on disk, so stop asking for photographs
+
+Every unit up to here was transcribed from photographs of the page. It did not have to be.
+Both source books are on the machine already:
+
+```
+Downloads/Korean/2B Giao Trinh/서울대 2B student book.pdf   교과서, 266 pages
+Downloads/Korean/2B WB/서울대 2B workbook.pdf               익힘책, 208 pages
+Downloads/Korean/2B WB/Seoul_SBT_2B_Audio/Track01..22.mp3   the 문형 연습 audio
+```
+
+They are **scans with no text layer**, so `pdftotext` returns five bytes, and neither
+`pdftoppm` nor `pdfimages` nor ImageMagick is installed here. None of that matters: each page
+is a single DCTDecode JPEG at about 2360×3300, so scanning the file for `FF D8 FF` … `FF D9`
+and only counting a marker with `stream` shortly before it pulls the pages out with no
+dependency at all. Verified against a page already transcribed from a photograph — identical,
+and legible enough to read the small print under the dashed line.
+
+Two things to know before trusting an index. The image index is **close to but not** the
+printed page number, and the offset drifts — image 46 was printed 46, image 80 was printed 82,
+image 200 was printed 204. Probe one page, read the number in its margin, then adjust. And
+the useful pages are not the exercise pages alone: **교재 구성표** near the front lists every
+unit with its vocabulary and its four grammar points, and the **모범 답안** at the back prints
+the page number beside each exercise's answers. One read of each settles what a unit contains
+and where it is, which is faster than hunting.
+
+The book is **10~18과, nine units**, plus 복습 4~6. Each 익힘책 unit is twelve pages.
+
+---
+
+## Unit 11, and a table that cannot be drawn as buttons
+
+Track 3, four drills, twenty exchanges, cut with the block grouping above and no surprises in
+it. What Unit 11 added was on the page rather than on the tape.
+
+**A conjugation table is not a row of buttons.** 'ㅅ' 불규칙 연습 1 is four verbs across five
+endings with one cell of each row pre-filled — sixteen cells to fill, in a grid. A `build`
+row draws at most two blanks, so the table becomes sixteen rows, each one stem-plus-ending on
+the left and three shapes on the right. The four pre-filled cells are not asked again, and
+`noteEn` says all of this, because a learner who has the book open will otherwise wonder where
+the grid went. The sixteen rows' `en` and `why` are generated from five column templates
+rather than typed out, which is the only way sixteen near-identical notes stay identical.
+
+**A `fill` chip needs both forms even when they are the same word.** The admin validator
+refuses a `fill` bank entry without `dict` and `polite`, and 어휘 연습 2's chips — 내과, 안과,
+치과 — go into the blank unchanged. Setting both to the same string is the answer; the
+validator is right to insist, because the field means "what the sentence takes" and a bank
+that omits it is a bank nobody checked.
+
+**The prompt-on-the-teacher's-line question came back, and the pace settled it again.** Drills
+3 and 4 print their bracketed prompt on the student's line, exactly as Unit 13's drill 2 did.
+With the prompt counted the teacher reads 4.51 and 4.89 syllables a second, against drills 1
+and 2 at 4.53 and 4.87; without it, 2.92 and 2.78. That is not a close call, and it is worth
+running every time rather than assuming the book and the tape agree about who says what.
+
+Sixteen items at **4.70 ±0.27** on the teacher's side and **5.33 ±0.38** on the answer's, with
+the shift-by-one widening both to ±1.0 or worse. Per-drill bands are [4.4, 5.1], [4.7, 5.4],
+[4.5, 5.0] and [4.4, 5.6].
+
+**And one assertion had to be turned around rather than deleted.**
+`tests/test_unit11_world.js` said "no workbook is claimed for Unit 11 yet" — true when the
+desk shipped with only a quiz and a tape. It now asserts the opposite, that `workbookUrl()`
+resolves the unit and the file it names exists, because the pairing is what matters: a bank on
+disk that nothing claims means the desk quietly serves the fallback unit's exercises.
+
+---
+
 ## The order to do it in
 
 Everything above is what to write. This is when to write it, and the order is

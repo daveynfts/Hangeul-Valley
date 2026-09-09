@@ -1,0 +1,2795 @@
+{
+  "id": "unit11-workbook",
+  "source": "Seoul National University Korean 2B, Unit 11 · 운동을 좀 해 보는 게 어때요?",
+  "titleKo": "연습 문제",
+  "titleEn": "Workbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "One exercise at a time — pick where to start.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "artNote": "The book’s own drawings are not here. Several rows lean on a picture that carried the answer — a bus timetable, a museum notice, a calendar with 청소 marked on the Thursdays — so where a picture held the answer the noun has been moved into the choices instead, and 어휘 연습 1 and 연습 3 name the symptom or the medicine in the buttons rather than expecting you to read it off a drawing. Those rows want the book’s pictures drawn before they read as the book reads.",
+  "omittedNote": "One of the printed exercises is not here. V-기로 하다 연습 3 on page 39 asks you to write three plans of your own — 여러분은 어떤 계획이 있습니까? — and the key at the back gives no answer for it, so there is nothing a screen could mark. Eleven of the twelve are here, plus the four 문형 연습 drills.",
+  "exercises": [
+    {
+      "id": "u11-vocab-1",
+      "type": "build",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 1",
+      "icon": "🤒",
+      "pattern": "증상",
+      "blurbEn": "What you tell the doctor is wrong, in the words Korean uses for it.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and answer each question as shown in the example.",
+      "noteEn": "The book gives a picture and an opening half-sentence, and the answer completes it. The symptom words are the exercise, so each row offers three of them rather than a bank shared across the page — the wrong ones are always symptoms too, just the wrong symptom for that picture.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "어디가 아프세요?"
+          },
+          {
+            "who": "B",
+            "ko": "요즘 입맛이 없고 {}."
+          }
+        ],
+        "answerKo": "속이 안 좋아요",
+        "en": "A: What seems to be the trouble? — B: I have no appetite lately and my stomach is off.",
+        "why": "입맛이 없다 and 속이 안 좋다 go together, which is why the book pairs them in the model."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어떻게 오셨어요?"
+            },
+            {
+              "who": "B",
+              "ko": "음식을 먹으면 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "소화가 안돼요"
+            },
+            {
+              "id": "b",
+              "ko": "소화가 안 되요"
+            },
+            {
+              "id": "c",
+              "ko": "소화를 안돼요"
+            }
+          ],
+          "en": "A: What brings you in? — B: When I eat, it doesn’t go down.",
+          "grammar": "되다 → 돼요, never 되요: 되 + 어 contracts to 돼. And 소화 is the subject of 안되다, so it takes 가.",
+          "why": "안 되요 is the commonest misspelling in Korean, and it is the same 되/돼 decision every time. 소화를 makes the digestion an object of a verb that has none."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어디가 아프세요?"
+            },
+            {
+              "who": "B",
+              "ko": "음식을 잘못 먹어서 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "배탈이 났어요"
+            },
+            {
+              "id": "b",
+              "ko": "배탈이 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "배탈을 났어요"
+            }
+          ],
+          "en": "A: What seems to be the trouble? — B: I ate something bad and my stomach is upset.",
+          "grammar": "나다 is the verb for a symptom appearing: 배탈이 나다, 몸살이 나다, 열이 나다. The symptom is the subject, so 이/가.",
+          "why": "되다 would say the upset stomach turned into something. 배탈을 makes it an object, and 나다 does not take one."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어디가 아프세요?"
+            },
+            {
+              "who": "B",
+              "ko": "기운이 없고 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "어지러워요"
+            },
+            {
+              "id": "b",
+              "ko": "어지럽어요"
+            },
+            {
+              "id": "c",
+              "ko": "어지러어요"
+            }
+          ],
+          "en": "A: What seems to be the trouble? — B: I have no energy and I feel dizzy.",
+          "grammar": "어지럽다 is ㅂ-irregular: the ㅂ becomes 우 before a vowel ending, giving 어지러워요.",
+          "why": "어지럽어요 leaves the ㅂ in front of a vowel, where it always changes. 어지러어요 drops it instead of turning it into 우."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어떻게 오셨어요?"
+            },
+            {
+              "who": "B",
+              "ko": "요즘 밤에 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "잠을 잘 못 자요"
+            },
+            {
+              "id": "b",
+              "ko": "잠을 잘 안 자요"
+            },
+            {
+              "id": "c",
+              "ko": "잠이 잘 못 자요"
+            }
+          ],
+          "en": "A: What brings you in? — B: I haven’t been sleeping well at night.",
+          "grammar": "잠을 자다 — sleep is slept, an object of its own verb. 잘 못 하다 is being unable to do something well, as against 잘 안 하다, which is choosing not to.",
+          "why": "잘 안 자요 says you decline to sleep, which is not why you would see a doctor. 잠이 would make the sleep the subject and leave 자다 with no object."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어디가 아프세요?"
+            },
+            {
+              "who": "B",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "몸살이 났어요"
+            },
+            {
+              "id": "b",
+              "ko": "몸살이 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "몸살을 났어요"
+            }
+          ],
+          "en": "A: What seems to be the trouble? — B: I have body aches and a fever.",
+          "grammar": "몸살 is the aching, feverish exhaustion that follows overwork or a chill, and like 배탈 it 나다 rather than 있다.",
+          "why": "몸살이 있어요 is not how Korean reports it — a symptom appears rather than being possessed. 몸살을 is the object marker on a subject again."
+        }
+      ]
+    },
+    {
+      "id": "u11-vocab-2",
+      "type": "fill",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 2",
+      "icon": "🏥",
+      "pattern": "병원",
+      "blurbEn": "Which department of the hospital the complaint belongs to.",
+      "instructionKo": "빈칸에 알맞은 단어를 골라 문장을 만들어 보세요.",
+      "instructionEn": "Complete each sentence using the word from the box.",
+      "noteEn": "Six departments and six sentences, one chip each, so the box empties exactly. Every 과 here is Sino-Korean and reads as its parts — 내 inside, 안 eye, 치 tooth, 피부 skin, 정형외 orthopaedic, 이비인후 ear-nose-throat.",
+      "bank": [
+        {
+          "id": "internal",
+          "dict": "내과",
+          "polite": "내과"
+        },
+        {
+          "id": "eye",
+          "dict": "안과",
+          "polite": "안과"
+        },
+        {
+          "id": "dental",
+          "dict": "치과",
+          "polite": "치과"
+        },
+        {
+          "id": "skin",
+          "dict": "피부과",
+          "polite": "피부과"
+        },
+        {
+          "id": "ortho",
+          "dict": "정형외과",
+          "polite": "정형외과"
+        },
+        {
+          "id": "ent",
+          "dict": "이비인후과",
+          "polite": "이비인후과"
+        }
+      ],
+      "items": [
+        {
+          "n": 1,
+          "answer": "internal",
+          "stemKo": "속이 좋지 않으면 {}에 가요.",
+          "en": "If your stomach is off, you go to internal medicine.",
+          "why": "속 is what is inside you, and 내과 is the department for exactly that — 내 is the same 內 as in 내부.",
+          "grammar": "-(으)면 sets the condition. 좋지 않다 is the long negative of 좋다, a shade more formal than 안 좋다."
+        },
+        {
+          "n": 2,
+          "answer": "eye",
+          "stemKo": "눈이 아프면 {}에 가요.",
+          "en": "If your eyes hurt, you go to ophthalmology.",
+          "why": "안 in 안과 is 眼, the Sino-Korean for eye — not the 안 of 안 가요. The two are homophones and nothing else.",
+          "grammar": "아프다 is ㅡ-irregular, but -(으)면 begins with a consonant here, so the ㅡ stays: 아프면."
+        },
+        {
+          "n": 3,
+          "answer": "skin",
+          "stemKo": "얼굴에 뭐가 많이 나면 {}에 가요.",
+          "en": "If you break out on the face, you go to dermatology.",
+          "why": "뭐가 나다 is the polite way to say a rash or spots appear — the same 나다 as 배탈이 나다 on the page before.",
+          "grammar": "피부 is skin and 과 is the department, so the word is read as two pieces rather than learnt whole."
+        },
+        {
+          "n": 4,
+          "answer": "ortho",
+          "stemKo": "다리를 다치면 {}에 가요.",
+          "en": "If you injure your leg, you go to orthopaedics.",
+          "why": "정형외과 handles bones and joints, so an injured leg goes there rather than to 내과.",
+          "grammar": "다치다 takes the injured part as its object: 다리를 다치다. English puts it the other way round."
+        },
+        {
+          "n": 5,
+          "answer": "dental",
+          "stemKo": "이가 아프면 {}에 가요.",
+          "en": "If your tooth hurts, you go to the dentist.",
+          "why": "치 is 齒, tooth. 치과 is said [치꽈] — the ㄱ tenses — and the spelling shows none of it.",
+          "grammar": "이 here is the noun for tooth, and the subject marker after it is 가: 이가 아프다."
+        },
+        {
+          "n": 6,
+          "answer": "ent",
+          "stemKo": "목과 귀가 아프면 {}에 가요.",
+          "en": "If your throat and ears hurt, you go to ENT.",
+          "why": "이비인후과 is 耳鼻咽喉 — ear, nose, throat, larynx — all four in one word, which is why it is the longest name on the page.",
+          "grammar": "과 joins two nouns as “and”: 목과 귀. After a vowel it would be 와, as in 귀와 목."
+        }
+      ]
+    },
+    {
+      "id": "u11-vocab-3",
+      "type": "build",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 3",
+      "icon": "💊",
+      "pattern": "약",
+      "blurbEn": "Every medicine has its own verb, and it is not the one you would guess.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "Two blanks in the book — the medicine and the verb — and they are one decision, because in Korean each medicine picks its own verb: 먹다 for a pill, 넣다 for drops, 바르다 for ointment, 붙이다 for a patch. So each row offers the pair.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "감기에 걸려서 왔는데요."
+          },
+          {
+            "who": "B",
+            "ko": "네, 그럼 이 {} 하루에 세 번, 식후에 드세요."
+          }
+        ],
+        "answerKo": "감기약을",
+        "en": "A: I’ve come because I’ve caught a cold. — B: Right, take this cold medicine three times a day, after meals.",
+        "why": "드세요 is the honorific of 먹다, which is what a pharmacist says to a customer."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "소화가 잘 안돼서 왔는데요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 그럼 이 {} 식사 후에 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "소화제를"
+            },
+            {
+              "id": "b",
+              "ko": "소화약을"
+            },
+            {
+              "id": "c",
+              "ko": "안약을"
+            }
+          ],
+          "answer2": "x",
+          "choices2": [
+            {
+              "id": "x",
+              "ko": "드세요"
+            },
+            {
+              "id": "y",
+              "ko": "바르세요"
+            },
+            {
+              "id": "z",
+              "ko": "붙이세요"
+            }
+          ],
+          "en": "A: I’ve come because my digestion is bad. — B: Right, take this digestive after meals.",
+          "grammar": "-제 is the suffix for a preparation that does something: 소화제, 진통제, 수면제. 약 is the general word and does not compound this way.",
+          "why": "소화약 is not a word — the pattern is 소화제. Eye drops are for eyes, and a pill is swallowed rather than spread or stuck on."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "눈이 아파서 왔는데요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 그럼 이 {} 하루에 세 번 눈에 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "안약을"
+            },
+            {
+              "id": "b",
+              "ko": "눈약을"
+            },
+            {
+              "id": "c",
+              "ko": "안연고를"
+            }
+          ],
+          "answer2": "x",
+          "choices2": [
+            {
+              "id": "x",
+              "ko": "넣으세요"
+            },
+            {
+              "id": "y",
+              "ko": "바르세요"
+            },
+            {
+              "id": "z",
+              "ko": "드세요"
+            }
+          ],
+          "en": "A: I’ve come because my eyes hurt. — B: Right, put these eye drops in three times a day.",
+          "grammar": "안약 uses the same 안 as 안과 two rows up. Drops go 넣다 — put in — because they go inside the eye.",
+          "why": "눈약 is the everyday word but the book teaches 안약. 바르다 is for something spread on a surface, and 드세요 would have you swallow them."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "팔에 뭐가 났는데요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 그럼 이 {} 하루에 한 번 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "연고를"
+            },
+            {
+              "id": "b",
+              "ko": "파스를"
+            },
+            {
+              "id": "c",
+              "ko": "소화제를"
+            }
+          ],
+          "answer2": "x",
+          "choices2": [
+            {
+              "id": "x",
+              "ko": "바르세요"
+            },
+            {
+              "id": "y",
+              "ko": "붙이세요"
+            },
+            {
+              "id": "z",
+              "ko": "넣으세요"
+            }
+          ],
+          "en": "A: Something has come up on my arm. — B: Right, spread this ointment on once a day.",
+          "grammar": "연고 is ointment and it 바르다 — is spread. The verb is the same one used for sun cream and for lipstick.",
+          "why": "파스 is a medicated patch and is stuck on, not spread. 넣다 would put the ointment inside something."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "발목이 좀 아픈데요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 그럼 이 {} 아픈 곳에 잘 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "파스를"
+            },
+            {
+              "id": "b",
+              "ko": "연고를"
+            },
+            {
+              "id": "c",
+              "ko": "안약을"
+            }
+          ],
+          "answer2": "x",
+          "choices2": [
+            {
+              "id": "x",
+              "ko": "붙이세요"
+            },
+            {
+              "id": "y",
+              "ko": "바르세요"
+            },
+            {
+              "id": "z",
+              "ko": "드세요"
+            }
+          ],
+          "en": "A: My ankle is a bit sore. — B: Right, stick this patch firmly on the sore spot.",
+          "grammar": "파스 is the adhesive pain patch on sale in every Korean pharmacy, and it 붙이다 — is stuck on. 아픈 곳 is “the place that hurts”, a past-less modifier on 아프다.",
+          "why": "연고 would be spread rather than stuck, and eye drops have no business on an ankle."
+        }
+      ]
+    },
+    {
+      "id": "u11-grammar-1-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 2",
+      "icon": "🔤",
+      "pattern": "'ㅅ' 불규칙",
+      "blurbEn": "Six sentences, and only some of the ㅅ verbs are irregular.",
+      "instructionKo": "빈칸에 알맞은 단어를 골라 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue using the correct verb from the box.",
+      "noteEn": "The box is 낫다, 짓다, 붓다, 젓다, 웃다, 씻다 — and the last two are the point of the exercise: they end in ㅅ and are perfectly regular. Choosing the verb and conjugating it are one decision here, so each row offers the conjugated forms.",
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "커피가 좀 쓰네요."
+            },
+            {
+              "who": "B",
+              "ko": "설탕을 넣었으니까 잘 {} 드세요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "저어서"
+            },
+            {
+              "id": "b",
+              "ko": "젓어서"
+            },
+            {
+              "id": "c",
+              "ko": "저서"
+            }
+          ],
+          "en": "A: This coffee is a bit bitter. — B: I put sugar in, so stir it well before you drink.",
+          "grammar": "젓다 is ㅅ-irregular: the ㅅ drops before a vowel ending and the 어 stays, giving 저어서 — two vowels in a row, which is what the irregular looks like.",
+          "why": "젓어서 keeps the ㅅ where it always goes. 저서 drops the ㅅ and then swallows the 어 as well, leaving one syllable where there should be two."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "목소리가 왜 그래요?"
+            },
+            {
+              "who": "B",
+              "ko": "감기에 걸려서 목이 많이 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "부었어요"
+            },
+            {
+              "id": "b",
+              "ko": "붓었어요"
+            },
+            {
+              "id": "c",
+              "ko": "부웠어요"
+            }
+          ],
+          "en": "A: What’s happened to your voice? — B: I caught a cold and my throat is very swollen.",
+          "grammar": "붓다 → 부어요 → 부었어요. The ㅅ goes and nothing takes its place, so the stem is left as a bare 부.",
+          "why": "붓었어요 keeps the ㅅ. 부웠어요 adds a ㅜ that belongs to the ㅂ-irregular, not this one."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "어제 본 영화 어땠어요?"
+            },
+            {
+              "who": "B",
+              "ko": "정말 재미있었어요. 영화 보면서 계속 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "웃었어요"
+            },
+            {
+              "id": "b",
+              "ko": "우었어요"
+            },
+            {
+              "id": "c",
+              "ko": "웃엇어요"
+            }
+          ],
+          "en": "A: How was the film you saw yesterday? — B: Really good. I laughed all the way through.",
+          "grammar": "웃다 ends in ㅅ and is **regular** — the ㅅ stays: 웃어요, 웃었어요. That is what this row is for.",
+          "why": "우었어요 applies the irregular to a verb that does not take it, which is the mistake the box is baited for. 웃엇어요 spells the past tense with a plain ㅅ instead of ㅆ."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금도 많이 아파요?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 약을 먹고 쉬어서 다 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "나았어요"
+            },
+            {
+              "id": "b",
+              "ko": "낫았어요"
+            },
+            {
+              "id": "c",
+              "ko": "나왔어요"
+            }
+          ],
+          "en": "A: Are you still in a lot of pain? — B: No — I took the medicine and rested, so I’m better.",
+          "grammar": "낫다 → 나아요 → 나았어요, the same irregular as 붓다 and 젓다. 다 here means completely, not all of them.",
+          "why": "낫았어요 keeps the ㅅ. 나왔어요 is 나오다 — came out — a different verb that the ear can confuse with this one."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이사 간 집은 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "새로 {} 건물이라서 깨끗해요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "지은"
+            },
+            {
+              "id": "b",
+              "ko": "짓은"
+            },
+            {
+              "id": "c",
+              "ko": "지는"
+            }
+          ],
+          "en": "A: How’s the place you moved to? — B: It’s a newly built block, so it’s clean.",
+          "grammar": "짓다 → 지은, the past modifier in front of 건물. The ㅅ goes before the 은 because 은 is a vowel ending.",
+          "why": "짓은 keeps the ㅅ. 지는 is the present modifier, which would say the building is being built now."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "감기에 걸리지 않으려면 손을 자주 {}."
+            },
+            {
+              "who": "B",
+              "ko": "네, 알겠습니다."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "씻으세요"
+            },
+            {
+              "id": "b",
+              "ko": "시으세요"
+            },
+            {
+              "id": "c",
+              "ko": "씻세요"
+            }
+          ],
+          "en": "A: Wash your hands often so you don’t catch a cold. — B: Right, I will.",
+          "grammar": "씻다 is the other regular ㅅ verb: 씻어요, 씻으세요. The ㅅ stays and the 으 goes in because the stem ends in a consonant.",
+          "why": "시으세요 drops the ㅅ as if the verb were irregular. 씻세요 leaves out the 으 that a consonant stem needs."
+        }
+      ]
+    },
+    {
+      "id": "u11-grammar-1-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 1",
+      "icon": "🔤",
+      "pattern": "'ㅅ' 불규칙",
+      "blurbEn": "Four verbs across five endings — the ㅅ goes before a vowel and stays before a consonant.",
+      "instructionKo": "빈칸에 알맞게 쓰세요.",
+      "instructionEn": "Complete the table as shown in the example.",
+      "noteEn": "On the page this is a four-by-five table with one cell of each row already filled in, so sixteen cells are left. A table cannot be drawn as a row of buttons, so each cell is its own row here — stem plus ending on the left, three shapes to choose from on the right. The four cells the book fills in are not asked again.",
+      "example": {
+        "lines": [
+          {
+            "who": "",
+            "ko": "낫다 + -아요/어요 → {}"
+          }
+        ],
+        "answerKo": "나아요",
+        "en": "낫다 (to get better), polite form",
+        "why": "The one the book fills in for you. The ㅅ goes before the vowel ending and 나 + 아요 stays as two syllables."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "",
+              "ko": "낫다 + -습니다/ㅂ니다 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "낫습니다"
+            },
+            {
+              "id": "b",
+              "ko": "나습니다"
+            },
+            {
+              "id": "c",
+              "ko": "낫읍니다"
+            }
+          ],
+          "en": "낫다 (to get better), formal form",
+          "grammar": "The formal ending. It is the one column where a ㅅ-irregular verb looks entirely ordinary.",
+          "why": "The ending begins with a consonant, so the ㅅ stays exactly where it is. 나습니다 does the opposite of what this column asks, and 낫읍니다 is a shape the verb never takes."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "",
+              "ko": "낫다 + -(으)니까 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "나으니까"
+            },
+            {
+              "id": "b",
+              "ko": "낫으니까"
+            },
+            {
+              "id": "c",
+              "ko": "나니까"
+            }
+          ],
+          "en": "낫다 (to get better), because form",
+          "grammar": "-(으)니까 gives a reason. The 으 is there because the ㅅ has left a consonant-less stem behind.",
+          "why": "A vowel ending again — the ㅅ goes, and the 으 still appears because the stem now ends in a vowel it has to be joined to. 낫으니까 does the opposite of what this column asks, and 나니까 is a shape the verb never takes."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "",
+              "ko": "낫다 + -아서/어서 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "나아서"
+            },
+            {
+              "id": "b",
+              "ko": "낫아서"
+            },
+            {
+              "id": "c",
+              "ko": "나서"
+            }
+          ],
+          "en": "낫다 (to get better), and then form",
+          "grammar": "-아서/어서 chains two events or gives a reason, and it joins to the stem exactly as -아요/어요 does.",
+          "why": "Same as -아요/어요: a vowel ending, so the ㅅ goes and nothing fills the gap. 낫아서 does the opposite of what this column asks, and 나서 is a shape the verb never takes."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "",
+              "ko": "낫다 + -(으)ㄴ데/는데 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "낫는데"
+            },
+            {
+              "id": "b",
+              "ko": "나는데"
+            },
+            {
+              "id": "c",
+              "ko": "나은데"
+            }
+          ],
+          "en": "낫다 (to get better), but form",
+          "grammar": "-는데 sets something up before the point is made. Verbs take 는데; adjectives take -(으)ㄴ데.",
+          "why": "A consonant ending, so the ㅅ stays. And a verb takes -는데 rather than -(으)ㄴ데. 나는데 does the opposite of what this column asks, and 나은데 is a shape the verb never takes."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "",
+              "ko": "짓다 + -아요/어요 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "지어요"
+            },
+            {
+              "id": "b",
+              "ko": "짓어요"
+            },
+            {
+              "id": "c",
+              "ko": "져요"
+            }
+          ],
+          "en": "짓다 (to build), polite form",
+          "grammar": "The everyday polite ending. Which vowel it takes is decided by the stem: 나 and 저 are both bright, so it is 아요 for one and 어요 for the other once the ㅅ has gone.",
+          "why": "The ending begins with a vowel, so the ㅅ goes and the two vowels sit side by side. 짓어요 does the opposite of what this column asks, and 져요 is a shape the verb never takes."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "who": "",
+              "ko": "짓다 + -(으)니까 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "지으니까"
+            },
+            {
+              "id": "b",
+              "ko": "짓으니까"
+            },
+            {
+              "id": "c",
+              "ko": "지니까"
+            }
+          ],
+          "en": "짓다 (to build), because form",
+          "grammar": "-(으)니까 gives a reason. The 으 is there because the ㅅ has left a consonant-less stem behind.",
+          "why": "A vowel ending again — the ㅅ goes, and the 으 still appears because the stem now ends in a vowel it has to be joined to. 짓으니까 does the opposite of what this column asks, and 지니까 is a shape the verb never takes."
+        },
+        {
+          "n": 7,
+          "lines": [
+            {
+              "who": "",
+              "ko": "짓다 + -아서/어서 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "지어서"
+            },
+            {
+              "id": "b",
+              "ko": "짓어서"
+            },
+            {
+              "id": "c",
+              "ko": "져서"
+            }
+          ],
+          "en": "짓다 (to build), and then form",
+          "grammar": "-아서/어서 chains two events or gives a reason, and it joins to the stem exactly as -아요/어요 does.",
+          "why": "Same as -아요/어요: a vowel ending, so the ㅅ goes and nothing fills the gap. 짓어서 does the opposite of what this column asks, and 져서 is a shape the verb never takes."
+        },
+        {
+          "n": 8,
+          "lines": [
+            {
+              "who": "",
+              "ko": "짓다 + -(으)ㄴ데/는데 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "짓는데"
+            },
+            {
+              "id": "b",
+              "ko": "지는데"
+            },
+            {
+              "id": "c",
+              "ko": "지은데"
+            }
+          ],
+          "en": "짓다 (to build), but form",
+          "grammar": "-는데 sets something up before the point is made. Verbs take 는데; adjectives take -(으)ㄴ데.",
+          "why": "A consonant ending, so the ㅅ stays. And a verb takes -는데 rather than -(으)ㄴ데. 지는데 does the opposite of what this column asks, and 지은데 is a shape the verb never takes."
+        },
+        {
+          "n": 9,
+          "lines": [
+            {
+              "who": "",
+              "ko": "붓다 + -아요/어요 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "부어요"
+            },
+            {
+              "id": "b",
+              "ko": "붓어요"
+            },
+            {
+              "id": "c",
+              "ko": "봐요"
+            }
+          ],
+          "en": "붓다 (to swell), polite form",
+          "grammar": "The everyday polite ending. Which vowel it takes is decided by the stem: 나 and 저 are both bright, so it is 아요 for one and 어요 for the other once the ㅅ has gone.",
+          "why": "The ending begins with a vowel, so the ㅅ goes and the two vowels sit side by side. 붓어요 does the opposite of what this column asks, and 봐요 is a shape the verb never takes."
+        },
+        {
+          "n": 10,
+          "lines": [
+            {
+              "who": "",
+              "ko": "붓다 + -습니다/ㅂ니다 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "붓습니다"
+            },
+            {
+              "id": "b",
+              "ko": "부습니다"
+            },
+            {
+              "id": "c",
+              "ko": "붓읍니다"
+            }
+          ],
+          "en": "붓다 (to swell), formal form",
+          "grammar": "The formal ending. It is the one column where a ㅅ-irregular verb looks entirely ordinary.",
+          "why": "The ending begins with a consonant, so the ㅅ stays exactly where it is. 부습니다 does the opposite of what this column asks, and 붓읍니다 is a shape the verb never takes."
+        },
+        {
+          "n": 11,
+          "lines": [
+            {
+              "who": "",
+              "ko": "붓다 + -아서/어서 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "부어서"
+            },
+            {
+              "id": "b",
+              "ko": "붓어서"
+            },
+            {
+              "id": "c",
+              "ko": "부서"
+            }
+          ],
+          "en": "붓다 (to swell), and then form",
+          "grammar": "-아서/어서 chains two events or gives a reason, and it joins to the stem exactly as -아요/어요 does.",
+          "why": "Same as -아요/어요: a vowel ending, so the ㅅ goes and nothing fills the gap. 붓어서 does the opposite of what this column asks, and 부서 is a shape the verb never takes."
+        },
+        {
+          "n": 12,
+          "lines": [
+            {
+              "who": "",
+              "ko": "붓다 + -(으)ㄴ데/는데 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "붓는데"
+            },
+            {
+              "id": "b",
+              "ko": "부는데"
+            },
+            {
+              "id": "c",
+              "ko": "부은데"
+            }
+          ],
+          "en": "붓다 (to swell), but form",
+          "grammar": "-는데 sets something up before the point is made. Verbs take 는데; adjectives take -(으)ㄴ데.",
+          "why": "A consonant ending, so the ㅅ stays. And a verb takes -는데 rather than -(으)ㄴ데. 부는데 does the opposite of what this column asks, and 부은데 is a shape the verb never takes."
+        },
+        {
+          "n": 13,
+          "lines": [
+            {
+              "who": "",
+              "ko": "젓다 + -아요/어요 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "저어요"
+            },
+            {
+              "id": "b",
+              "ko": "젓어요"
+            },
+            {
+              "id": "c",
+              "ko": "져요"
+            }
+          ],
+          "en": "젓다 (to stir), polite form",
+          "grammar": "The everyday polite ending. Which vowel it takes is decided by the stem: 나 and 저 are both bright, so it is 아요 for one and 어요 for the other once the ㅅ has gone.",
+          "why": "The ending begins with a vowel, so the ㅅ goes and the two vowels sit side by side. 젓어요 does the opposite of what this column asks, and 져요 is a shape the verb never takes."
+        },
+        {
+          "n": 14,
+          "lines": [
+            {
+              "who": "",
+              "ko": "젓다 + -습니다/ㅂ니다 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "젓습니다"
+            },
+            {
+              "id": "b",
+              "ko": "저습니다"
+            },
+            {
+              "id": "c",
+              "ko": "젓읍니다"
+            }
+          ],
+          "en": "젓다 (to stir), formal form",
+          "grammar": "The formal ending. It is the one column where a ㅅ-irregular verb looks entirely ordinary.",
+          "why": "The ending begins with a consonant, so the ㅅ stays exactly where it is. 저습니다 does the opposite of what this column asks, and 젓읍니다 is a shape the verb never takes."
+        },
+        {
+          "n": 15,
+          "lines": [
+            {
+              "who": "",
+              "ko": "젓다 + -(으)니까 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "저으니까"
+            },
+            {
+              "id": "b",
+              "ko": "젓으니까"
+            },
+            {
+              "id": "c",
+              "ko": "저니까"
+            }
+          ],
+          "en": "젓다 (to stir), because form",
+          "grammar": "-(으)니까 gives a reason. The 으 is there because the ㅅ has left a consonant-less stem behind.",
+          "why": "A vowel ending again — the ㅅ goes, and the 으 still appears because the stem now ends in a vowel it has to be joined to. 젓으니까 does the opposite of what this column asks, and 저니까 is a shape the verb never takes."
+        },
+        {
+          "n": 16,
+          "lines": [
+            {
+              "who": "",
+              "ko": "젓다 + -(으)ㄴ데/는데 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "젓는데"
+            },
+            {
+              "id": "b",
+              "ko": "저는데"
+            },
+            {
+              "id": "c",
+              "ko": "저은데"
+            }
+          ],
+          "en": "젓다 (to stir), but form",
+          "grammar": "-는데 sets something up before the point is made. Verbs take 는데; adjectives take -(으)ㄴ데.",
+          "why": "A consonant ending, so the ㅅ stays. And a verb takes -는데 rather than -(으)ㄴ데. 저는데 does the opposite of what this column asks, and 저은데 is a shape the verb never takes."
+        }
+      ]
+    },
+    {
+      "id": "u11-grammar-2-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 1",
+      "icon": "🔁",
+      "pattern": "N마다",
+      "blurbEn": "Every one of them, read off a timetable or a sign.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "Each row has a picture holding the answer — a timetable, an opening-hours notice, a calendar — and the number or day has to be read off it. The pictures here are not the book’s, so the noun is given in the choices and what is being decided is the 마다 and the noun it attaches to.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "이 약을 어떻게 먹어야 돼요?"
+          },
+          {
+            "who": "B",
+            "ko": "{} 드세요."
+          }
+        ],
+        "answerKo": "여섯 시간마다",
+        "en": "A: How should I take this medicine? — B: Take it every six hours.",
+        "why": "마다 goes straight onto the noun with no space and no particle in front of it."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "춘천 가는 버스가 자주 있나요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, {} 있어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "30분마다"
+            },
+            {
+              "id": "b",
+              "ko": "30분에마다"
+            },
+            {
+              "id": "c",
+              "ko": "30분씩"
+            }
+          ],
+          "en": "A: Is there a bus to Chuncheon often? — B: Yes, every thirty minutes.",
+          "grammar": "마다 attaches to the bare noun. No 에 in front of it, even though a time would normally take one.",
+          "why": "30분에마다 stacks a particle under 마다, which it never takes. 씩 distributes an amount to each person, not an interval to a timetable."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이 박물관은 쉬는 날이 언제예요?"
+            },
+            {
+              "who": "B",
+              "ko": "여기는 {} 문을 닫아요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "월요일마다"
+            },
+            {
+              "id": "b",
+              "ko": "월요일에마다"
+            },
+            {
+              "id": "c",
+              "ko": "월요일부터"
+            }
+          ],
+          "en": "A: When is this museum closed? — B: It closes every Monday.",
+          "grammar": "문을 닫다 — to shut the door — is how Korean says a shop or museum is closed.",
+          "why": "부터 would say it closes from Monday onward and never opens again."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제 수영을 배워요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 수영을 배워요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "평일 저녁마다"
+            },
+            {
+              "id": "b",
+              "ko": "평일마다 저녁"
+            },
+            {
+              "id": "c",
+              "ko": "평일 저녁에마다"
+            }
+          ],
+          "en": "A: When do you have your swimming lessons? — B: Every weekday evening.",
+          "grammar": "평일 저녁 is one phrase and 마다 goes on the end of the whole thing, not in the middle of it.",
+          "why": "평일마다 저녁 splits the phrase and leaves 저녁 hanging. The third adds the 에 again."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제 청소해요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 해요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "목요일마다"
+            },
+            {
+              "id": "b",
+              "ko": "목요일이마다"
+            },
+            {
+              "id": "c",
+              "ko": "목요일도"
+            }
+          ],
+          "en": "A: When do you clean? — B: Every Thursday.",
+          "grammar": "The calendar in the picture marks 청소 on each Thursday, which is what makes it 마다 rather than a single date.",
+          "why": "목요일이마다 puts a subject marker under 마다. 도 would say Thursday as well as something else."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "한국어 공부는 얼마나 하세요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 두 시간씩 해요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "날마다"
+            },
+            {
+              "id": "b",
+              "ko": "날에마다"
+            },
+            {
+              "id": "c",
+              "ko": "하루마다"
+            }
+          ],
+          "en": "A: How much Korean study do you do? — B: Two hours every day.",
+          "grammar": "날마다 and 매일 mean the same thing; 마다 is the native way of building it. 씩 in the second half distributes the two hours across those days.",
+          "why": "하루마다 is understandable but not idiomatic — 하루 is a span of a day, 날 the day itself."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "화장실이 몇 층에 있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "{} 있어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "층마다"
+            },
+            {
+              "id": "b",
+              "ko": "층에마다"
+            },
+            {
+              "id": "c",
+              "ko": "몇 층마다"
+            }
+          ],
+          "en": "A: What floor is the toilet on? — B: There’s one on every floor.",
+          "grammar": "The answer refuses the question’s premise: not one floor but all of them. 마다 does that in one syllable.",
+          "why": "몇 층마다 would mean “every so many floors”, which is a different answer and one the picture does not give."
+        }
+      ]
+    },
+    {
+      "id": "u11-grammar-2-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 2",
+      "icon": "🔁",
+      "pattern": "N마다",
+      "blurbEn": "항상 comes out and 마다 goes in — and it lands on 때, not on the verb.",
+      "instructionKo": "[보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "Rewrite the sentences as shown in the example.",
+      "noteEn": "Every sentence has 때 in it and 항상 somewhere else, and the rewrite drops 항상 and puts 마다 on 때. That is one decision repeated six times, so what varies is the shape of the clause in front of 때.",
+      "example": {
+        "lines": [
+          {
+            "who": "",
+            "ko": "저는 여름휴가 때 항상 제주도에 가요. → 저는 {} 제주도에 가요."
+          }
+        ],
+        "answerKo": "여름휴가 때마다",
+        "en": "I go to Jeju every summer holiday.",
+        "why": "항상 and 마다 say the same thing, so the rewrite trades one for the other rather than keeping both."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "",
+              "ko": "저는 방학 때 항상 고향에 가요. → 저는 {} 고향에 가요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "방학 때마다"
+            },
+            {
+              "id": "b",
+              "ko": "방학마다 때"
+            },
+            {
+              "id": "c",
+              "ko": "방학 때 항상마다"
+            }
+          ],
+          "en": "I go home every holiday.",
+          "grammar": "마다 goes on 때, the last noun of the phrase, and 방학 stays in front of it as a modifier.",
+          "why": "방학마다 때 splits a phrase that has to stay together. The third keeps 항상 as well, and the two say the same thing."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "",
+              "ko": "저는 시험 때 항상 도서관에서 공부해요. → 저는 {} 도서관에서 공부해요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "시험 때마다"
+            },
+            {
+              "id": "b",
+              "ko": "시험마다"
+            },
+            {
+              "id": "c",
+              "ko": "시험 때에마다"
+            }
+          ],
+          "en": "I study in the library every exam period.",
+          "grammar": "시험 때 is the time around the exams. Dropping 때 changes it to each individual exam.",
+          "why": "시험마다 would count exams; the sentence is about the period around them. The third puts 에 under 마다 again."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "",
+              "ko": "저는 시간이 있을 때 항상 등산을 가요. → 저는 {} 등산을 가요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "시간이 있을 때마다"
+            },
+            {
+              "id": "b",
+              "ko": "시간이 있는 때마다"
+            },
+            {
+              "id": "c",
+              "ko": "시간이 있을 때에마다"
+            }
+          ],
+          "en": "I go hiking whenever I have time.",
+          "grammar": "때 takes the -(으)ㄹ modifier, not -는: 있을 때, 갈 때, 먹을 때. This is the shape the whole exercise turns on.",
+          "why": "있는 때 uses the present modifier, which 때 does not take."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "",
+              "ko": "저는 한국어로 발표를 할 때 항상 긴장돼요. → 저는 {} 긴장돼요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "한국어로 발표를 할 때마다"
+            },
+            {
+              "id": "b",
+              "ko": "한국어로 발표를 하는 때마다"
+            },
+            {
+              "id": "c",
+              "ko": "한국어로 발표를 했을 때마다"
+            }
+          ],
+          "en": "I get nervous every time I present in Korean.",
+          "grammar": "긴장되다 — to become nervous — is what happens to you rather than something you do, which is why it is 되다 and not 하다.",
+          "why": "하는 때 is the wrong modifier again. 했을 때 puts it in the past, and the sentence is about a habit."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "",
+              "ko": "저는 고향 음식을 먹을 때 항상 부모님 생각이 나요. → 저는 {} 부모님 생각이 나요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "고향 음식을 먹을 때마다"
+            },
+            {
+              "id": "b",
+              "ko": "고향 음식을 먹는 때마다"
+            },
+            {
+              "id": "c",
+              "ko": "고향 음식 먹을 때마다"
+            }
+          ],
+          "en": "I think of my parents every time I eat food from home.",
+          "grammar": "생각이 나다 — a thought comes up — is the same 나다 as 배탈이 나다 on the 어휘 page. The thought is the subject.",
+          "why": "먹는 때 is the wrong modifier. The third drops 을, which is allowed in speech but not what the book is asking you to write."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "who": "",
+              "ko": "저는 저녁을 먹을 때 항상 와인을 한 잔씩 마셔요. → 저는 {} 와인을 한 잔씩 마셔요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "저녁을 먹을 때마다"
+            },
+            {
+              "id": "b",
+              "ko": "저녁을 먹을 때에마다"
+            },
+            {
+              "id": "c",
+              "ko": "저녁마다 먹을 때"
+            }
+          ],
+          "en": "I have a glass of wine every time I eat dinner.",
+          "grammar": "씩 survives the rewrite untouched: 마다 counts the occasions and 씩 counts what is had on each. The two work together rather than competing.",
+          "why": "때에마다 puts a particle under 마다. The third scrambles the phrase."
+        }
+      ]
+    },
+    {
+      "id": "u11-grammar-3-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 1",
+      "icon": "💡",
+      "pattern": "V-는 게 어때요?",
+      "blurbEn": "Suggesting something without telling anyone what to do.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "게 is 것이 worn down, so the pattern is really “how would the doing of it be?”. Every answer takes -는 on the plain stem, which is why the wrong choices reach for -(으)ㄴ and -(으)ㄹ instead.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "속이 안 좋고 어지러워요."
+          },
+          {
+            "who": "B",
+            "ko": "그럼 {}?"
+          }
+        ],
+        "answerKo": "병원에 가 보는 게 어때요",
+        "en": "A: My stomach is off and I feel dizzy. — B: How about going to the doctor?",
+        "why": "가 보다 softens it further — try going — which is why the model uses it rather than a plain 가다."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "요즘 밤에 잠이 안 와요."
+            },
+            {
+              "who": "B",
+              "ko": "커피를 줄이고 {}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "운동을 해 보는 게 어때요"
+            },
+            {
+              "id": "b",
+              "ko": "운동을 해 본 게 어때요"
+            },
+            {
+              "id": "c",
+              "ko": "운동을 해 볼 게 어때요"
+            }
+          ],
+          "en": "A: I haven’t been able to get to sleep lately. — B: How about cutting down on coffee and trying some exercise?",
+          "grammar": "-는 게 is the present modifier plus 것이. A suggestion is about something not yet done, but the modifier is still -는, because what is being weighed is the doing itself.",
+          "why": "해 본 게 asks how the already-having-tried was. 해 볼 게 is the promise ending -(으)ㄹ게 and belongs to a different sentence entirely."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "요즘 일도 많고 좀 피곤해요."
+            },
+            {
+              "who": "B",
+              "ko": "휴가를 내서 {}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "좀 쉬는 게 어때요"
+            },
+            {
+              "id": "b",
+              "ko": "좀 쉰 게 어때요"
+            },
+            {
+              "id": "c",
+              "ko": "좀 쉬게 어때요"
+            }
+          ],
+          "en": "A: There’s a lot on at work and I’m tired. — B: How about taking some leave and resting?",
+          "grammar": "휴가를 내다 — to put in for leave — is the fixed phrase, and it is 내다 rather than 하다 or 가지다.",
+          "why": "쉰 게 puts the resting in the past. 쉬게 어때요 drops the 것이 that the pattern is built on."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "치마하고 바지 중에서 어느 걸 살까요?"
+            },
+            {
+              "who": "B",
+              "ko": "바지는 많으니까 {}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "치마를 사는 게 어때요"
+            },
+            {
+              "id": "b",
+              "ko": "치마를 산 게 어때요"
+            },
+            {
+              "id": "c",
+              "ko": "치마를 사는 것이 어떻게요"
+            }
+          ],
+          "en": "A: Skirt or trousers — which should I buy? — B: You’ve got plenty of trousers, so how about the skirt?",
+          "grammar": "어느 걸 is 어느 것을 contracted, the same 것 that 게 comes from. The two turn up in one exchange here.",
+          "why": "산 게 asks about a skirt already bought. 어떻게요 is “how” as a manner, not 어때요."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이번 토요일에 영화 보러 갈까요?"
+            },
+            {
+              "who": "B",
+              "ko": "토요일에는 사람이 많으니까 다른 날 {}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "보는 게 어때요"
+            },
+            {
+              "id": "b",
+              "ko": "볼 게 어때요"
+            },
+            {
+              "id": "c",
+              "ko": "보는 게 어땠어요"
+            }
+          ],
+          "en": "A: Shall we go to a film this Saturday? — B: Saturday will be busy, so how about another day?",
+          "grammar": "다른 날 stands on its own with no particle — a bare time phrase, which Korean allows when the meaning is clear.",
+          "why": "볼 게 is the promise ending again. 어땠어요 asks how it was, which is a question about the past."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "버스를 타고 갈까요?"
+            },
+            {
+              "who": "B",
+              "ko": "퇴근 시간이라서 길이 막히니까 {}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "지하철을 타는 게 어때요"
+            },
+            {
+              "id": "b",
+              "ko": "지하철을 타은 게 어때요"
+            },
+            {
+              "id": "c",
+              "ko": "지하철에 타는 게 어때요"
+            }
+          ],
+          "en": "A: Shall we take the bus? — B: It’s rush hour and the roads are jammed, so how about the subway?",
+          "grammar": "타다 takes 을/를 for what you get on: 지하철을 타다, 버스를 타다. English uses no object there at all.",
+          "why": "타은 게 puts the 으 on a vowel stem and uses the past modifier at once. 지하철에 marks it as a destination rather than the thing ridden."
+        }
+      ]
+    },
+    {
+      "id": "u11-grammar-4-1",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 1",
+      "icon": "📝",
+      "pattern": "V-기로 하다",
+      "blurbEn": "Something settled between people, reported back the same way it was asked.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "Both halves of every row take the same verb, because Korean answers a question by reusing its verb rather than saying yes. The book prints two blanks; here the question’s blank is the row’s decision and the answer’s repeats it, so the two are one choice.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "나나 씨하고 어디에서 만나기로 했어요?"
+          },
+          {
+            "who": "B",
+            "ko": "강남역 3번 출구 앞에서 {}."
+          }
+        ],
+        "answerKo": "만나기로 했어요",
+        "en": "A: Where did you arrange to meet Nana? — B: In front of exit 3 at Gangnam station.",
+        "why": "The question already contains the verb; the answer hands it straight back with the place changed."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "나나 씨 생일 케이크는 누가 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "아키라 씨가 준비하기로 했어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "준비하기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "준비기로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "준비하기로 해요"
+            }
+          ],
+          "en": "A: Who’s arranged to get Nana’s birthday cake? — B: Akira is.",
+          "grammar": "-기로 하다 is nearly always in the past — 했어요 — because the arranging is over even though the doing is not.",
+          "why": "준비기로 cuts the 하 out of 준비하다. 준비하기로 해요 is the present, which would say the arrangement is being made as you speak."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "부산에 갈 때 뭘 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "KTX를 타고 가기로 했어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "타고 가기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "타고 갈 기로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "타고 가기로 됐어요"
+            }
+          ],
+          "en": "A: What are you taking to Busan? — B: We’ve decided on the KTX.",
+          "grammar": "-기 goes on the plain stem, so 가다 gives 가기 and never 갈 기. 타고 가다 is one verb phrase and the ending lands on the second half.",
+          "why": "갈 기로 uses the future modifier where the noun-maker belongs. 됐어요 says the decision made itself."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제부터 그 회사에서 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "다음 달부터 일하기로 했어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "일하기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "일기로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "일하로 했어요"
+            }
+          ],
+          "en": "A: When did you arrange to start at that company? — B: From next month.",
+          "grammar": "언제부터 in the question is answered by 다음 달부터 — the marker is handed back along with the verb.",
+          "why": "일기로 cuts out the 하. 일하로 loses the 기 that makes the verb into something 로 can attach to."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "언제 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "다음 주 토요일에 이사 가기로 했어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "이사 가기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "이사 가기로 하겠어요"
+            },
+            {
+              "id": "c",
+              "ko": "이사 갈기로 했어요"
+            }
+          ],
+          "en": "A: When are you moving? — B: Next Saturday.",
+          "grammar": "이사 가다 is “to move house” — 이사 is the noun and 가다 the verb, and the ending goes on 가다.",
+          "why": "하겠어요 turns a settled arrangement into a guess. 갈기로 puts a ㄹ where the plain stem belongs."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "집들이 때 무슨 음식을 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "갈비하고 잡채를 만들기로 했어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "만들기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "만드기로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "만들으기로 했어요"
+            }
+          ],
+          "en": "A: What food have you arranged for the housewarming? — B: Galbi and japchae.",
+          "grammar": "만들다 keeps its ㄹ in front of -기, because -기 begins with a consonant. The ㄹ only drops before ㄴ, ㅂ and ㅅ.",
+          "why": "만드기로 drops the ㄹ where nothing asked it to. 만들으기로 adds a 으 that -기 never takes."
+        }
+      ]
+    },
+    {
+      "id": "u11-grammar-4-2",
+      "type": "build",
+      "section": "문법과 표현",
+      "sectionEn": "Grammar and Expression",
+      "no": "연습 2",
+      "icon": "📝",
+      "pattern": "V-기로 하다",
+      "blurbEn": "A plan already made with somebody, given as the answer to a plain question.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "Here the question does not contain the verb, so the answer has to supply it — which is what makes these four harder than 연습 1. The picture gives the activity and the sentence already names who it was arranged with.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "이번 주말에 뭐 할 거예요?"
+          },
+          {
+            "who": "B",
+            "ko": "켈리 씨하고 {}."
+          }
+        ],
+        "answerKo": "여행 가기로 했어요",
+        "en": "A: What are you doing this weekend? — B: Kelly and I have arranged to go travelling.",
+        "why": "A asks with -(으)ㄹ 거예요 and B answers with -기로 했어요: the plan is not just intended but agreed with somebody."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 수업 끝나고 뭐 해요?"
+            },
+            {
+              "who": "B",
+              "ko": "친구하고 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "쇼핑하기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "쇼핑기로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "쇼핑하기로 할 거예요"
+            }
+          ],
+          "en": "A: What are you doing after class today? — B: I’m going shopping with a friend.",
+          "grammar": "끝나고 is 끝나다 — to end by itself — rather than 끝내다, to bring to an end. The class ends; nobody ends it.",
+          "why": "쇼핑기로 cuts the 하 out. The third puts the arranging in the future, and it has already happened."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "방학 때 뭐 할 거예요?"
+            },
+            {
+              "who": "B",
+              "ko": "친구하고 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "태권도를 배우기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "태권도를 배기로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "태권도를 배울기로 했어요"
+            }
+          ],
+          "en": "A: What are you doing in the holidays? — B: A friend and I are going to learn taekwondo.",
+          "grammar": "배우다 is a vowel stem, so -기 goes straight on: 배우기. Nothing is added and nothing drops.",
+          "why": "배기로 loses a syllable of the stem. 배울기로 uses the future modifier instead of the plain stem."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "내일 마리코 씨 만나요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 만나서 같이 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "공부하기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "공부하기로 했다"
+            },
+            {
+              "id": "c",
+              "ko": "공부기로 했어요"
+            }
+          ],
+          "en": "A: Are you seeing Mariko tomorrow? — B: Yes, we’re meeting to study together.",
+          "grammar": "만나서 chains the meeting to the studying: first one, then the other, with the same subject doing both.",
+          "why": "했다 is the plain style, which does not belong in this polite exchange. 공부기로 cuts the 하 out again."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이번 토요일에 약속 있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 샤오밍 씨하고 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "농구하기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "농구하로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "농구하기로 하겠어요"
+            }
+          ],
+          "en": "A: Do you have plans this Saturday? — B: Yes, I’m playing basketball with Xiaoming.",
+          "grammar": "농구하다 is one verb, so the object marker is not needed. The book’s key writes it closed up.",
+          "why": "농구하로 loses the 기 that turns the verb into something 로 can attach to. 하겠어요 turns a settled arrangement into a guess about one."
+        }
+      ]
+    },
+    {
+      "id": "u11-pattern-1",
+      "type": "build",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 1",
+      "icon": "🎧",
+      "pattern": "N마다",
+      "blurbEn": "Two cues, one sentence: the time takes 마다 and the verb takes the polite ending.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "The teacher reads a time and a verb with a pause between them, and the answer joins them. Every wrong choice on this drill is a particle stacked under 마다 or the ending got wrong, because the 마다 itself never varies.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "아침, 운동을 하다"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "아침마다 운동을 해요",
+        "en": "T: morning, exercise — S: I exercise every morning.",
+        "why": "Played through so the shape of the exchange is heard once before you answer one yourself.",
+        "audio": {
+          "src": "audio/book/2b-u11-p1-0.mp3",
+          "askEnd": 3.31
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "주말, 등산을 가다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "주말마다 등산을 가요"
+            },
+            {
+              "id": "b",
+              "ko": "주말에마다 등산을 가요"
+            },
+            {
+              "id": "c",
+              "ko": "주말마다 등산을 가아요"
+            }
+          ],
+          "en": "I go hiking every weekend.",
+          "grammar": "가다 + 아요 contracts to 가요, because the ㅏ is already there.",
+          "why": "주말에마다 puts a particle under 마다. 가아요 writes out the vowel the contraction swallows.",
+          "audio": {
+            "src": "audio/book/2b-u11-p1-1.mp3",
+            "askEnd": 3.24
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "수요일, 태권도를 배우다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "수요일마다 태권도를 배워요"
+            },
+            {
+              "id": "b",
+              "ko": "수요일마다 태권도를 배우어요"
+            },
+            {
+              "id": "c",
+              "ko": "수요일이마다 태권도를 배워요"
+            }
+          ],
+          "en": "I learn taekwondo every Wednesday.",
+          "grammar": "배우다 + 어요 → 배워요: the ㅜ and the ㅓ fuse into ㅝ.",
+          "why": "배우어요 leaves them apart. 수요일이마다 puts a subject marker under 마다.",
+          "audio": {
+            "src": "audio/book/2b-u11-p1-2.mp3",
+            "askEnd": 3.87
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "쉬는 시간, 친구를 만나다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "쉬는 시간마다 친구를 만나요"
+            },
+            {
+              "id": "b",
+              "ko": "쉬는 시간에마다 친구를 만나요"
+            },
+            {
+              "id": "c",
+              "ko": "쉬마다 는 시간 친구를 만나요"
+            }
+          ],
+          "en": "I see friends every break.",
+          "grammar": "쉬는 시간 is a modifier plus a noun and 마다 goes on the end of the whole phrase.",
+          "why": "시간에마다 stacks the particle again. The third breaks the phrase apart, which is what putting 마다 anywhere but the end does.",
+          "audio": {
+            "src": "audio/book/2b-u11-p1-3.mp3",
+            "askEnd": 4.03
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "여섯 시간, 약을 먹다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "여섯 시간마다 약을 먹어요"
+            },
+            {
+              "id": "b",
+              "ko": "여섯 시간마다 약을 먹아요"
+            },
+            {
+              "id": "c",
+              "ko": "여섯 시간씩 약을 먹어요"
+            }
+          ],
+          "en": "I take the medicine every six hours.",
+          "grammar": "먹다 has ㅓ in its stem, so the ending is 어요 and not 아요.",
+          "why": "먹아요 picks the wrong vowel. 씩 would distribute six hours to each person rather than setting an interval.",
+          "audio": {
+            "src": "audio/book/2b-u11-p1-4.mp3",
+            "askEnd": 3.53
+          }
+        }
+      ]
+    },
+    {
+      "id": "u11-pattern-2",
+      "type": "build",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 2",
+      "icon": "🎧",
+      "pattern": "V-(으)ㄹ 때마다",
+      "blurbEn": "Now the thing that repeats is a whole clause, so 때 comes in to carry it.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "The same drill one step harder: the first cue is a clause rather than a time, so it needs 때 before 마다 can attach — and 때 takes the -(으)ㄹ modifier every time.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "시간이 있다, 음악을 듣다"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "시간이 있을 때마다 음악을 들어요",
+        "en": "T: have time, listen to music — S: I listen to music whenever I have time.",
+        "why": "Played through once so the -(으)ㄹ 때마다 shape is in your ear before you build one.",
+        "audio": {
+          "src": "audio/book/2b-u11-p2-0.mp3",
+          "askEnd": 3.92
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "영화를 보다, 팝콘을 먹다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "영화를 볼 때마다 팝콘을 먹어요"
+            },
+            {
+              "id": "b",
+              "ko": "영화를 보는 때마다 팝콘을 먹어요"
+            },
+            {
+              "id": "c",
+              "ko": "영화를 보을 때마다 팝콘을 먹어요"
+            }
+          ],
+          "en": "I eat popcorn every time I watch a film.",
+          "grammar": "보다 is a vowel stem, so the modifier is a bare ㄹ: 보 + ㄹ → 볼.",
+          "why": "보는 때 uses the present modifier, which 때 does not take. 보을 gives a vowel stem the 으.",
+          "audio": {
+            "src": "audio/book/2b-u11-p2-1.mp3",
+            "askEnd": 3.96
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "눈이 아프다, 안약을 넣다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "눈이 아플 때마다 안약을 넣어요"
+            },
+            {
+              "id": "b",
+              "ko": "눈이 아프을 때마다 안약을 넣어요"
+            },
+            {
+              "id": "c",
+              "ko": "눈이 아플 때마다 안약을 넣아요"
+            }
+          ],
+          "en": "I put drops in every time my eyes hurt.",
+          "grammar": "아프다 is a vowel stem too, so 아프 + ㄹ → 아플. The ㅡ-irregular does not fire in front of a consonant.",
+          "why": "아프을 adds the 으. 넣아요 picks the wrong vowel for a ㅓ-less stem — 넣다 takes 어요.",
+          "audio": {
+            "src": "audio/book/2b-u11-p2-2.mp3",
+            "askEnd": 3.7
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "이 음악을 듣다, 고향 생각이 나다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "이 음악을 들을 때마다 고향 생각이 나요"
+            },
+            {
+              "id": "b",
+              "ko": "이 음악을 듣을 때마다 고향 생각이 나요"
+            },
+            {
+              "id": "c",
+              "ko": "이 음악을 들를 때마다 고향 생각이 나요"
+            }
+          ],
+          "en": "I think of home every time I hear this song.",
+          "grammar": "듣다 is ㄷ-irregular: the ㄷ becomes ㄹ before a vowel ending, so 듣 + 을 → 들을.",
+          "why": "듣을 leaves the ㄷ where it always changes. 들를 doubles the ㄹ, which is a different verb — 들르다, to drop by.",
+          "audio": {
+            "src": "audio/book/2b-u11-p2-3.mp3",
+            "askEnd": 4.37
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "가족이 보고 싶다, 전화를 하다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "가족이 보고 싶을 때마다 전화를 해요"
+            },
+            {
+              "id": "b",
+              "ko": "가족이 보고 싶은 때마다 전화를 해요"
+            },
+            {
+              "id": "c",
+              "ko": "가족이 보고 싶을 때마다 전화를 하요"
+            }
+          ],
+          "en": "I ring every time I miss my family.",
+          "grammar": "보고 싶다 is an adjective, and 때 takes -(으)ㄹ from adjectives too: 싶을 때.",
+          "why": "싶은 때 uses the adjective present modifier, which 때 still does not take. 하요 leaves 하다 uncontracted.",
+          "audio": {
+            "src": "audio/book/2b-u11-p2-4.mp3",
+            "askEnd": 4.14
+          }
+        }
+      ]
+    },
+    {
+      "id": "u11-pattern-3",
+      "type": "build",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 3",
+      "icon": "🎧",
+      "pattern": "V-는 게 어때요?",
+      "blurbEn": "The teacher has a complaint; you have a suggestion.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "The book prints the bracketed prompt on the student’s line; the tape has the teacher read it, straight after the complaint, and the pace confirms it — 4.51 syllables a second with the prompt counted against 2.92 without. The lines here follow the tape.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "어제부터 머리가 계속 아파요. (약을 먹다)"
+          },
+          {
+            "who": "S",
+            "ko": "{}?"
+          }
+        ],
+        "answerKo": "약을 먹는 게 어때요",
+        "en": "T: My head has been aching since yesterday. (take medicine) — S: How about taking something for it?",
+        "why": "Played through once so the shape of the suggestion is heard before you make one.",
+        "audio": {
+          "src": "audio/book/2b-u11-p3-0.mp3",
+          "askEnd": 5.26
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "약을 먹었는데 안 나아요. (병원에 가다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "병원에 가는 게 어때요"
+            },
+            {
+              "id": "b",
+              "ko": "병원에 간 게 어때요"
+            },
+            {
+              "id": "c",
+              "ko": "병원에 가는 것이 어때세요"
+            }
+          ],
+          "en": "T: I took the medicine but I’m not better. — S: How about going to the doctor?",
+          "grammar": "안 나아요 is 낫다 with the ㅅ gone, the irregular from two pages earlier turning up in the drill.",
+          "why": "간 게 asks about a visit already made. 어때세요 puts an honorific on 어떻다, which does not take one.",
+          "audio": {
+            "src": "audio/book/2b-u11-p3-1.mp3",
+            "askEnd": 5.05
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "요즘 밤에 잠이 안 와요. (커피를 줄이다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "커피를 줄이는 게 어때요"
+            },
+            {
+              "id": "b",
+              "ko": "커피를 줄인 게 어때요"
+            },
+            {
+              "id": "c",
+              "ko": "커피를 줄일 게 어때요"
+            }
+          ],
+          "en": "T: I can’t get to sleep at night lately. — S: How about cutting down on coffee?",
+          "grammar": "잠이 오다 — sleep comes — is how Korean says you get sleepy. It is the sleep that does the arriving.",
+          "why": "줄인 게 puts the cutting-down in the past. 줄일 게 is the promise ending -(으)ㄹ게.",
+          "audio": {
+            "src": "audio/book/2b-u11-p3-2.mp3",
+            "askEnd": 5.14
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "항상 피곤하고 힘이 없어요. (운동을 좀 해 보다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "운동을 좀 해 보는 게 어때요"
+            },
+            {
+              "id": "b",
+              "ko": "운동을 좀 해 본 게 어때요"
+            },
+            {
+              "id": "c",
+              "ko": "운동을 좀 해 보는 게 어땠어요"
+            }
+          ],
+          "en": "T: I’m always tired and have no energy. — S: How about trying a bit of exercise?",
+          "grammar": "-아/어 보다 is to try something, and the suggestion ending goes on 보다 rather than on 하다.",
+          "why": "해 본 게 asks about exercise already tried. 어땠어요 asks how it was, which is a question about the past.",
+          "audio": {
+            "src": "audio/book/2b-u11-p3-3.mp3",
+            "askEnd": 5.73
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "나나 씨가 이틀 동안 학교에 안 왔어요. (전화를 해 보다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "전화를 해 보는 게 어때요"
+            },
+            {
+              "id": "b",
+              "ko": "전화를 해 보는 게 어떻아요"
+            },
+            {
+              "id": "c",
+              "ko": "전화를 해 볼 게 어때요"
+            }
+          ],
+          "en": "T: Nana hasn’t been to school for two days. — S: How about giving her a ring?",
+          "grammar": "이틀 동안 is “for two days”, with 동안 taking the bare number-plus-counter in front of it.",
+          "why": "어떻아요 conjugates 어떻다 as if it were regular; it is ㅎ-irregular and gives 어때요. 볼 게 is the promise ending again.",
+          "audio": {
+            "src": "audio/book/2b-u11-p3-4.mp3",
+            "askEnd": 6.34
+          }
+        }
+      ]
+    },
+    {
+      "id": "u11-pattern-4",
+      "type": "build",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 4",
+      "icon": "🎧",
+      "pattern": "V-기로 하다",
+      "blurbEn": "A question about the future, answered with something already settled.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "Question then bracketed prompt again, and the prompt is on the teacher’s line because that is where the tape puts it. Every answer is in the past — 했어요 — even though every question is about what is still to come.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "이번 방학에 뭐 할 거예요? (친구와 여행 가다)"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "친구와 여행 가기로 했어요",
+        "en": "T: What are you doing this holiday? (go travelling with a friend) — S: I’ve arranged to go travelling with a friend.",
+        "why": "Played through once so the question-to-answer tense change is heard rather than reasoned out.",
+        "audio": {
+          "src": "audio/book/2b-u11-p4-0.mp3",
+          "askEnd": 5.37
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "어디로 여행 갈 거예요? (제주도로 가다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "제주도로 가기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "제주도로 갈기로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "제주도에 가기로 했어요"
+            }
+          ],
+          "en": "We’ve decided on Jeju.",
+          "grammar": "-기 goes on the plain stem: 가기, never 갈기. 로 marks the direction, matching the 어디로 of the question.",
+          "why": "갈기로 uses the future modifier. 제주도에 marks a destination arrived at rather than a direction chosen, and the question asked 어디로.",
+          "audio": {
+            "src": "audio/book/2b-u11-p4-1.mp3",
+            "askEnd": 4.54
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "몇 시에 만날 거예요? (열 시에 만나다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "열 시에 만나기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "열 시에 만나기로 해요"
+            },
+            {
+              "id": "c",
+              "ko": "열 시에 만날기로 했어요"
+            }
+          ],
+          "en": "We’ve arranged to meet at ten.",
+          "grammar": "열 시 is the native number for the hour. 몇 시 in the question is answered with the same counter.",
+          "why": "해요 is the present, and the arranging is over. 만날기로 is the future modifier again.",
+          "audio": {
+            "src": "audio/book/2b-u11-p4-2.mp3",
+            "askEnd": 4.61
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "이번 주말에 뭐 할 거예요? (가족들과 저녁을 먹다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "가족들과 저녁을 먹기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "가족들과 저녁을 먹으기로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "가족들과 저녁을 먹기로 됐어요"
+            }
+          ],
+          "en": "I’m having dinner with my family.",
+          "grammar": "들 marks the plural on 가족, which Korean uses only when the plurality matters. 과 joins it to you after a consonant.",
+          "why": "먹으기로 adds a 으 that -기 never takes. 됐어요 says the arrangement made itself.",
+          "audio": {
+            "src": "audio/book/2b-u11-p4-3.mp3",
+            "askEnd": 5.64
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "생일에 뭐 할 거예요? (친구들과 놀다)"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "친구들과 놀기로 했어요"
+            },
+            {
+              "id": "b",
+              "ko": "친구들과 노기로 했어요"
+            },
+            {
+              "id": "c",
+              "ko": "친구들과 놀으기로 했어요"
+            }
+          ],
+          "en": "I’m spending my birthday with friends.",
+          "grammar": "놀다 keeps its ㄹ in front of -기, the same rule as 만들기 in 연습 1 of the grammar pages.",
+          "why": "노기로 drops the ㄹ where nothing asked it to. 놀으기로 adds the 으 on top of it.",
+          "audio": {
+            "src": "audio/book/2b-u11-p4-4.mp3",
+            "askEnd": 4.84
+          }
+        }
+      ]
+    }
+  ]
+}

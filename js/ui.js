@@ -2859,6 +2859,7 @@ function workbookUrl() {
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-workbook.json';
   if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/unit15-workbook.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-workbook.json';
+  if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-workbook.json';
   return null;
 }
 

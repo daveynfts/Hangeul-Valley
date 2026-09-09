@@ -267,10 +267,16 @@ assert(/isUnit11World\(\)\) return '\/worlds\/unit11-desk-quiz\.json'/.test(ui),
   'and it is guarded by isUnit11World, not by the fallback');
 assert(ui.indexOf("if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-desk-quiz.json';") >= 0,
   'the Unit 14 branch is untouched');
-// No workbook yet, so openStudyDesk finds one mode and opens it rather than drawing a
-// one-row menu. That behaviour is what makes shipping the desk without exercises fine.
-assert(ui.indexOf('function workbookUrl') >= 0 && ui.indexOf('unit11-workbook.json') < 0,
-  'no workbook is claimed for Unit 11 yet');
+// The 익힘책 arrived — pages 32-41, off the workbook PDF rather than photographs — so the
+// desk now has three modes and draws the menu. This assertion used to say the opposite, and
+// it is left here rather than deleted because the pairing is what matters: a bank that exists
+// has to be claimed by workbookUrl(), or the desk silently offers the fallback unit's.
+assert(/isUnit11World\(\)\) return '\/worlds\/unit11-workbook\.json'/.test(ui),
+  'workbookUrl resolves Unit 11 to its own 익힘책');
+assert(fs.existsSync(path.join(ROOT, 'worlds', 'unit11-workbook.json')),
+  'and the bank it names is on disk');
+// The one-mode path stays asserted because it is the renderer's behaviour, not this unit's:
+// a desk that finds a single mode opens it rather than drawing a menu of one.
 assert(/deskMenuOptions\.length === 1[\s\S]{0,80}run\(\)/.test(ui),
   'a desk with one mode opens it directly instead of showing a menu of one');
 
