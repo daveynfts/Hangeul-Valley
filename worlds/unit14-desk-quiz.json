@@ -1,7 +1,7 @@
 {
   "titleKo": "학습 책상",
   "titleEn": "Etiquette quiz",
-  "sessionSize": 10,
+  "sessionSize": 5,
   "doneKo": "오늘 공부 끝!",
   "againKo": "한 번 더",
   "closeKo": "책상 닫기",
@@ -17,8 +17,7 @@
         "B": "이름을 부르다",
         "C": "두 손으로 드리다",
         "D": "다리를 꼬고 앉다"
-      },
-      "art": "quiz/unit14_q01_two_hands.png"
+      }
     },
     {
       "id": 2,
@@ -29,8 +28,7 @@
         "B": "Smoking",
         "C": "Taking photos",
         "D": "Using mobile phones"
-      },
-      "art": "quiz/unit14_q02_no_smoking.png"
+      }
     },
     {
       "id": 3,
@@ -41,8 +39,7 @@
         "B": "여기서 사진을 찍어도 돼요?",
         "C": "여기서 사진을 찍는 것 같아요.",
         "D": "여기서 사진을 찍고 싶어요."
-      },
-      "art": "quiz/unit14_q03_may_i_photo.png"
+      }
     },
     {
       "id": 4,
@@ -53,8 +50,7 @@
         "B": "하면 안 돼요",
         "C": "하는 것 같아요",
         "D": "하고 싶어요"
-      },
-      "art": "quiz/unit14_q04_library_quiet.png"
+      }
     },
     {
       "id": 5,
@@ -65,8 +61,7 @@
         "B": "비슷하다",
         "C": "편리하다",
         "D": "가깝다"
-      },
-      "art": "quiz/unit14_q05_embarrassed.png"
+      }
     },
     {
       "id": 6,
@@ -77,8 +72,7 @@
         "B": "기숙사 규칙",
         "C": "경로 우대",
         "D": "공중도덕"
-      },
-      "art": "quiz/unit14_q06_priority_seat.png"
+      }
     },
     {
       "id": 7,
@@ -89,8 +83,7 @@
         "B": "You cannot bring food or drinks inside.",
         "C": "You must turn off your mobile phone.",
         "D": "You must not talk loudly."
-      },
-      "art": "quiz/unit14_q07_no_food.png"
+      }
     },
     {
       "id": 8,
@@ -101,8 +94,7 @@
         "B": "끄으면 안 돼요",
         "C": "끄면 안 돼요",
         "D": "껐으면 안 돼요"
-      },
-      "art": "quiz/unit14_q08_turn_off.png"
+      }
     },
     {
       "id": 9,
@@ -113,8 +105,7 @@
         "B": "고개를 돌리고 마시다",
         "C": "한 손으로 마시다",
         "D": "이름을 부르며 마시다"
-      },
-      "art": "quiz/unit14_q09_turn_head_drink.png"
+      }
     },
     {
       "id": 10,
@@ -125,8 +116,7 @@
         "B": "네, 앉아도 돼요.",
         "C": "네, 앉는 것 같아요.",
         "D": "네, 앉지 마세요."
-      },
-      "art": "quiz/unit14_q10_may_sit.png"
+      }
     }
   ]
 }
