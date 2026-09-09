@@ -50,6 +50,7 @@ const WORKBOOKS = {
   'unit15-textbook': path.join('worlds', 'unit15-textbook.json'),
   unit11: path.join('worlds', 'unit11-workbook.json'),
   unit13: path.join('worlds', 'unit13-workbook.json'),
+  'unit13-textbook': path.join('worlds', 'unit13-textbook.json'),
   unit10: path.join('worlds', 'unit10-workbook.json'),
   'unit10-textbook': path.join('worlds', 'unit10-textbook.json'),
   // Not a unit at all: the exam world's bank, which grows a question at a time rather than

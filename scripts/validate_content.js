@@ -1414,7 +1414,7 @@ const overlayIds = [
   check('Unit 14 desk quiz items are well-formed with art', bad.length === 0, bad.slice(0, 8).join(', '));
 }());
 
-// ── 2B 교과서 pages (Units 10 and 14) ───────────────────────────────
+// ── 2B 교과서 pages (Units 10, 13 and 14) ───────────────────────────
 // The study desk carries two sets of pages from two different books: 연습 문제 is the
 // 익힘책, and this is the 교과서's own 말하기 / 읽기 / 과제 / 문화 산책 / 발음 / 자기 평가.
 // Same file format, same renderer, one desk — which is precisely why the two have to be
@@ -1422,12 +1422,16 @@ const overlayIds = [
 // sentence unless something says they may not, and a learner who meets 먹으면 안 돼요 twice
 // under two names has been given one exercise and charged for two.
 //
-// Both units run the same checks. Unit 14 came first and Unit 10 followed; the counts are
-// the only thing that differs between them, so they are the only thing spelled out per unit.
+// Every unit here runs the same checks. Unit 14 came first, then Unit 10, then Unit 13; the
+// counts are the only thing that differs between them, so they are the only thing spelled out
+// per unit. Unit 15 is not on the list: its bank calls itself 교과서 페이지 rather than 교과서 and
+// has its own block further up, so adding it here would fail on the label rather than on anything
+// that matters.
 (function checkTextbookBanks() {
   const BANKS = [
     { unit: 'unit14', label: 'Unit 14', world: 'isUnit14World', exs: 9, rows: 41 },
-    { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 }
+    { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 },
+    { unit: 'unit13', label: 'Unit 13', world: 'isUnit13World', exs: 16, rows: 78 }
   ];
   const TYPES = ['fill', 'match', 'dialogue', 'experience', 'build'];
   const gameJs = readGameSource();
