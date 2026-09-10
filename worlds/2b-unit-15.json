@@ -57,7 +57,9 @@
         "en": "to fall in love",
         "hint": "💘",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "우리는 대학교에서 처음 만나 사랑에 빠졌습니다.",
+        "exampleEn": "We first met at university and fell in love."
       },
       {
         "ko": "졸업하다",
@@ -73,7 +75,9 @@
         "en": "to get a job",
         "hint": "💼",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "열심히 준비해서 원하는 회사에 취직하게 되었어요.",
+        "exampleEn": "I prepared hard and ended up getting a job at my desired company."
       },
       {
         "ko": "결혼하다",
