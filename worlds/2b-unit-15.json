@@ -31,8 +31,8 @@
         "hint": "👶",
         "category": "인생",
         "categoryEn": "Life events & milestones",
-        "example": "저는 1992년에 중국에서 태어났습니다.",
-        "exampleEn": "I was born in China in 1992."
+        "example": "저는 베트남에서 태어났어요.",
+        "exampleEn": "I was born in Vietnam."
       },
       {
         "ko": "입학하다",
@@ -40,8 +40,8 @@
         "hint": "🎒",
         "category": "인생",
         "categoryEn": "Life events & milestones",
-        "example": "8살 때 초등학교에 입학했습니다.",
-        "exampleEn": "I started primary school at the age of eight."
+        "example": "동생이 올해 초등학교에 입학했어요.",
+        "exampleEn": "My younger sibling started elementary school this year."
       },
       {
         "ko": "친구를 사귀다",
@@ -49,8 +49,8 @@
         "hint": "🤝",
         "category": "인생",
         "categoryEn": "Life events & milestones",
-        "example": "학교에서 좋은 친구들을 많이 사귀었어요.",
-        "exampleEn": "I made a lot of good friends at school."
+        "example": "한국에 와서 새 친구를 사귀었어요.",
+        "exampleEn": "I made a new friend after coming to Korea."
       },
       {
         "ko": "사랑에 빠지다",
@@ -58,8 +58,8 @@
         "hint": "💘",
         "category": "인생",
         "categoryEn": "Life events & milestones",
-        "example": "우리는 대학교에서 처음 만나 사랑에 빠졌습니다.",
-        "exampleEn": "We first met at university and fell in love."
+        "example": "두 사람은 대학에서 만나 사랑에 빠졌어요.",
+        "exampleEn": "The two met at university and fell in love."
       },
       {
         "ko": "졸업하다",
@@ -67,8 +67,8 @@
         "hint": "🎓",
         "category": "인생",
         "categoryEn": "Life events & milestones",
-        "example": "졸업하고 나서 외국으로 유학을 갈 거예요.",
-        "exampleEn": "After I graduate I am going to study abroad."
+        "example": "대학교를 졸업한 후에 취직했어요.",
+        "exampleEn": "I got a job after graduating from university."
       },
       {
         "ko": "취직하다",
@@ -76,57 +76,71 @@
         "hint": "💼",
         "category": "인생",
         "categoryEn": "Life events & milestones",
-        "example": "열심히 준비해서 원하는 회사에 취직하게 되었어요.",
-        "exampleEn": "I prepared hard and ended up getting a job at my desired company."
+        "example": "언니가 여행 회사에 취직했어요.",
+        "exampleEn": "My older sister got a job at a travel company."
       },
       {
         "ko": "결혼하다",
         "en": "to marry",
         "hint": "💍",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "두 사람은 작년에 결혼했어요.",
+        "exampleEn": "The two got married last year."
       },
       {
         "ko": "아기를 낳다",
         "en": "to give birth to a child",
         "hint": "🍼",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "언니가 지난달에 아기를 낳았어요.",
+        "exampleEn": "My older sister had a baby last month."
       },
       {
         "ko": "승진하다",
         "en": "to get a promotion",
         "hint": "📈",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "아버지가 부장으로 승진하셨어요.",
+        "exampleEn": "My father was promoted to department head."
       },
       {
         "ko": "은퇴하다",
         "en": "to retire",
         "hint": "🎁",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "아버지는 은퇴하신 후에 여행을 다니세요.",
+        "exampleEn": "My father travels after retiring."
       },
       {
         "ko": "죽다",
         "en": "to die",
         "hint": "🕯️",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "죽기 전에 꼭 해 보고 싶은 일이 있어요?",
+        "exampleEn": "Is there something you really want to try before you die?"
       },
       {
         "ko": "인생",
         "en": "a life, a lifetime",
         "hint": "🛤️",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "한국에 온 후에 제 인생이 많이 달라졌어요.",
+        "exampleEn": "My life changed a lot after I came to Korea."
       },
       {
         "ko": "고생하다",
         "en": "to go through a hard time",
         "hint": "😓",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "처음에는 한국말을 몰라서 고생했어요.",
+        "exampleEn": "At first I had a hard time because I did not know Korean."
       },
       {
         "ko": "꿈",
@@ -134,36 +148,44 @@
         "hint": "💭",
         "category": "인생",
         "categoryEn": "Life events & milestones",
-        "example": "\"어린이들에게 꿈과 희망을 선물하세요.\"",
-        "exampleEn": "\"Give children the gift of dreams and hope.\""
+        "example": "제 꿈은 한국어 선생님이 되는 거예요.",
+        "exampleEn": "My dream is to become a Korean teacher."
       },
       {
         "ko": "변호사",
         "en": "a lawyer",
         "hint": "⚖️",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "언니는 변호사가 되려고 공부하고 있어요.",
+        "exampleEn": "My older sister is studying to become a lawyer."
       },
       {
         "ko": "대학원",
         "en": "graduate school",
         "hint": "🏛️",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "대학교를 졸업한 후에 대학원에 갈 거예요.",
+        "exampleEn": "I will go to graduate school after university."
       },
       {
         "ko": "중학생",
         "en": "a middle-school student",
         "hint": "🎒",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "동생은 중학생이에요.",
+        "exampleEn": "My younger sibling is a middle school student."
       },
       {
         "ko": "고등학교",
         "en": "high school",
         "hint": "🏫",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "고등학교에 입학한 후에 친구가 많아졌어요.",
+        "exampleEn": "I made more friends after starting high school."
       },
       {
         "ko": "봉사 활동",
@@ -171,15 +193,17 @@
         "hint": "🧡",
         "category": "인생",
         "categoryEn": "Life events & milestones",
-        "example": "봉사 활동은 두 달 동안 하게 된다.",
-        "exampleEn": "The volunteer work runs for two months."
+        "example": "주말마다 봉사 활동을 하게 됐어요.",
+        "exampleEn": "I have started volunteering every weekend."
       },
       {
         "ko": "은퇴",
         "en": "retirement",
         "hint": "🌅",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "은퇴 후에 시골에서 살고 싶어요.",
+        "exampleEn": "I want to live in the countryside after retirement."
       },
       {
         "ko": "늘다",
@@ -187,8 +211,8 @@
         "hint": "📈",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "세계 인구가 늘었어요.",
-        "exampleEn": "The world population has grown."
+        "example": "매일 연습해서 한국어 실력이 늘었어요.",
+        "exampleEn": "My Korean improved because I practiced every day."
       },
       {
         "ko": "줄다",
@@ -196,8 +220,8 @@
         "hint": "📉",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "시골에서 사는 사람의 수가 줄었어요.",
-        "exampleEn": "The number of people living in the countryside has fallen."
+        "example": "시골에 사는 사람의 수가 줄었어요.",
+        "exampleEn": "The number of people living in the countryside decreased."
       },
       {
         "ko": "오르다",
@@ -205,8 +229,8 @@
         "hint": "⬆️",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "물건값이 올랐어요.",
-        "exampleEn": "Prices have gone up."
+        "example": "버스 요금이 작년보다 올랐어요.",
+        "exampleEn": "Bus fares have risen compared with last year."
       },
       {
         "ko": "내리다",
@@ -214,8 +238,8 @@
         "hint": "⬇️",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "전화 요금이 내렸어요.",
-        "exampleEn": "The phone bill has gone down."
+        "example": "과일값이 지난주보다 내렸어요.",
+        "exampleEn": "Fruit prices have fallen compared with last week."
       },
       {
         "ko": "생기다",
@@ -223,8 +247,8 @@
         "hint": "🆕",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "도서관이 생겼어요.",
-        "exampleEn": "A library has opened."
+        "example": "집 앞에 새 도서관이 생겼어요.",
+        "exampleEn": "A new library opened in front of my house."
       },
       {
         "ko": "발전하다",
@@ -232,8 +256,8 @@
         "hint": "🏗️",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "서울이 많이 발전했어요.",
-        "exampleEn": "Seoul has developed a great deal."
+        "example": "제 고향은 많이 발전했어요.",
+        "exampleEn": "My hometown has developed a lot."
       },
       {
         "ko": "인구",
@@ -241,8 +265,8 @@
         "hint": "👥",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "세계 인구가 늘었어요.",
-        "exampleEn": "The world population has grown."
+        "example": "이 도시의 인구가 늘었어요.",
+        "exampleEn": "The population of this city has grown."
       },
       {
         "ko": "물건값",
@@ -250,8 +274,8 @@
         "hint": "🏷️",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "물건값이 올랐어요.",
-        "exampleEn": "Prices have gone up."
+        "example": "요즘 물건값이 많이 올랐어요.",
+        "exampleEn": "The price of goods has risen a lot lately."
       },
       {
         "ko": "시골",
@@ -259,8 +283,8 @@
         "hint": "🌾",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "시골에서 사는 사람의 수가 줄었어요.",
-        "exampleEn": "The number of people living in the countryside has fallen."
+        "example": "할머니는 시골에 사세요.",
+        "exampleEn": "My grandmother lives in the countryside."
       },
       {
         "ko": "수",
@@ -268,8 +292,8 @@
         "hint": "🔢",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "시골에서 사는 사람의 수가 줄었어요.",
-        "exampleEn": "The number of people living in the countryside has fallen."
+        "example": "한국어를 배우는 학생의 수가 늘었어요.",
+        "exampleEn": "The number of students learning Korean has grown."
       },
       {
         "ko": "과일값",
@@ -277,8 +301,8 @@
         "hint": "🍎",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "과일값이 많이 비싸졌어요.",
-        "exampleEn": "Fruit has become much more expensive."
+        "example": "겨울에는 과일값이 비싸요.",
+        "exampleEn": "Fruit is expensive in winter."
       },
       {
         "ko": "점점",
@@ -286,8 +310,8 @@
         "hint": "🐢",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "날씨가 점점 더워지네요.",
-        "exampleEn": "The weather is gradually getting hotter."
+        "example": "한국 생활에 점점 익숙해지고 있어요.",
+        "exampleEn": "I am gradually getting used to life in Korea."
       },
       {
         "ko": "달라지다",
@@ -295,8 +319,8 @@
         "hint": "🔀",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "서울이 어떻게 달라졌습니까?",
-        "exampleEn": "How has Seoul changed?"
+        "example": "취직한 후에 생활이 많이 달라졌어요.",
+        "exampleEn": "My daily life changed a lot after I got a job."
       },
       {
         "ko": "옛날",
@@ -304,22 +328,26 @@
         "hint": "📜",
         "category": "변화",
         "categoryEn": "Change & figures",
-        "example": "고인돌은 옛날 청동기 시대의 무덤이다.",
-        "exampleEn": "A dolmen is a tomb from the ancient Bronze Age."
+        "example": "옛날에는 이곳에 학교가 없었어요.",
+        "exampleEn": "Long ago there was no school here."
       },
       {
         "ko": "A-아지다/어지다",
         "en": "to get / to become — an adjective turning into a change",
         "hint": "🔁",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "매일 운동해서 건강이 좋아졌어요.",
+        "exampleEn": "My health improved because I exercised every day."
       },
       {
         "ko": "V-게 되다",
         "en": "to end up doing it, to come to do it",
         "hint": "🎯",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "한국 친구 덕분에 한국 음식을 좋아하게 됐어요.",
+        "exampleEn": "Thanks to my Korean friend, I came to like Korean food."
       },
       {
         "ko": "익숙하다",
@@ -327,8 +355,8 @@
         "hint": "🧭",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "한국 생활에 ___ (익숙하다)",
-        "exampleEn": "___ with life in Korea (익숙하다 — to be accustomed)"
+        "example": "이제 한국 생활에 익숙해졌어요.",
+        "exampleEn": "I have now got used to life in Korea."
       },
       {
         "ko": "이제",
@@ -336,15 +364,17 @@
         "hint": "⏰",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "이제 한국 생활에 익숙해졌어요?",
-        "exampleEn": "Have you got used to life in Korea by now?"
+        "example": "이제 매운 음식도 잘 먹게 됐어요.",
+        "exampleEn": "I can now eat spicy food well too."
       },
       {
         "ko": "친해지다",
         "en": "to become close",
         "hint": "🫂",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "같이 공부하면서 친구와 더 친해졌어요.",
+        "exampleEn": "I grew closer to my friend as we studied together."
       },
       {
         "ko": "알게 되다",
@@ -352,8 +382,8 @@
         "hint": "💡",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "아니요, 한국에 와서 알게 됐어요.",
-        "exampleEn": "No, we got to know each other after coming to Korea."
+        "example": "한국에 와서 민수 씨를 알게 됐어요.",
+        "exampleEn": "I got to know Minsu after coming to Korea."
       },
       {
         "ko": "건강해지다",
@@ -361,15 +391,17 @@
         "hint": "💪",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "그때 아주 힘들었지만 그 후로 건강해졌습니다.",
-        "exampleEn": "It was very hard at the time, but I have been healthier ever since."
+        "example": "운동을 시작한 후에 건강해졌어요.",
+        "exampleEn": "I became healthier after starting to exercise."
       },
       {
         "ko": "오래간만이다",
         "en": "it's been a long time",
         "hint": "👋",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "민수 씨, 오래간만이에요. 잘 지냈어요?",
+        "exampleEn": "Minsu, long time no see. Have you been well?"
       },
       {
         "ko": "별일 없다",
@@ -377,8 +409,8 @@
         "hint": "🙂",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "네, 회사 일에도 익숙해지고 한국 음식도 잘 먹게 됐어요. 지훈 씨도 별일 없지요?",
-        "exampleEn": "Yes, I have got used to the work and I can eat Korean food well now. Nothing new with you either, Jihun?"
+        "example": "저는 별일 없어요. 잘 지내고 있어요.",
+        "exampleEn": "Nothing unusual is happening with me. I am doing well."
       },
       {
         "ko": "그동안",
@@ -386,8 +418,8 @@
         "hint": "⏳",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "네, 안녕하세요? 지훈 씨, 그동안 잘 지냈어요?",
-        "exampleEn": "Hello, Jihun. How have you been keeping?"
+        "example": "그동안 어떻게 지냈어요?",
+        "exampleEn": "How have you been all this time?"
       },
       {
         "ko": "걱정하다",
@@ -395,8 +427,8 @@
         "hint": "😰",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "걱정하지 마세요. 처음에는 힘들겠지만 곧 익숙해질 거예요.",
-        "exampleEn": "Don't worry. It'll be hard at first, but you'll soon get used to it."
+        "example": "걱정하지 마세요. 곧 익숙해질 거예요.",
+        "exampleEn": "Do not worry. You will get used to it soon."
       },
       {
         "ko": "곧",
@@ -404,29 +436,35 @@
         "hint": "⏭️",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "걱정하지 마세요. 처음에는 힘들겠지만 곧 익숙해질 거예요.",
-        "exampleEn": "Don't worry. It'll be hard at first, but you'll soon get used to it."
+        "example": "수업이 곧 끝날 거예요.",
+        "exampleEn": "Class will finish soon."
       },
       {
         "ko": "안부",
         "en": "how someone is keeping",
         "hint": "💌",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "부모님께 제 안부를 전해 주세요.",
+        "exampleEn": "Please give my regards to your parents."
       },
       {
         "ko": "안부를 묻다",
         "en": "to ask after someone",
         "hint": "🙋",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "친구에게 전화해서 안부를 물었어요.",
+        "exampleEn": "I called my friend and asked how they were."
       },
       {
         "ko": "근황",
         "en": "what someone has been up to lately",
         "hint": "📰",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "오래간만에 만나서 서로 근황을 이야기했어요.",
+        "exampleEn": "We met after a long time and talked about our recent lives."
       },
       {
         "ko": "얼마나",
@@ -434,8 +472,8 @@
         "hint": "❓",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "얼마나 있을 건데요?",
-        "exampleEn": "How long will you be there?"
+        "example": "한국에서 얼마나 살았어요?",
+        "exampleEn": "How long have you lived in Korea?"
       },
       {
         "ko": "처음에는",
@@ -443,8 +481,8 @@
         "hint": "🚪",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "네, 처음에는 힘들었는데 이제는 조금 편해졌어요.",
-        "exampleEn": "Yes — it was hard at first, but it's got a bit easier now."
+        "example": "처음에는 어려웠지만 이제는 쉬워졌어요.",
+        "exampleEn": "It was difficult at first, but now it has become easier."
       },
       {
         "ko": "외국",
@@ -452,36 +490,44 @@
         "hint": "🌐",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "졸업하고 나서 외국으로 유학을 갈 거예요.",
-        "exampleEn": "After I graduate I am going to study abroad."
+        "example": "졸업한 후에 외국에서 공부하고 싶어요.",
+        "exampleEn": "I want to study abroad after graduating."
       },
       {
         "ko": "V-기 전에",
         "en": "before doing it",
         "hint": "⏮️",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "밥을 먹기 전에 손을 씻어요.",
+        "exampleEn": "I wash my hands before eating."
       },
       {
         "ko": "V-(으)ㄴ 후에",
         "en": "after doing it",
         "hint": "⏭️",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "숙제를 한 후에 친구를 만날 거예요.",
+        "exampleEn": "I will meet my friend after doing my homework."
       },
       {
         "ko": "출발하다",
         "en": "to set off",
         "hint": "🚌",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "출발하기 전에 표를 확인하세요.",
+        "exampleEn": "Check your ticket before leaving."
       },
       {
         "ko": "준비 운동",
         "en": "a warm-up",
         "hint": "🤸",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "수영을 하기 전에 준비 운동을 해요.",
+        "exampleEn": "I warm up before swimming."
       },
       {
         "ko": "다니다",
@@ -490,7 +536,7 @@
         "category": "회화",
         "categoryEn": "Conversation & grammar",
         "example": "한국에 오기 전에 회사에 다녔어요.",
-        "exampleEn": "Before I came to Korea I worked at a company."
+        "exampleEn": "I worked at a company before coming to Korea."
       },
       {
         "ko": "먼저",
@@ -498,8 +544,8 @@
         "hint": "1️⃣",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "지금 배고픈데 밥 먼저 먹은 후에 가면 어때요?",
-        "exampleEn": "I'm hungry — how about we eat first and go afterwards?"
+        "example": "밥을 먹기 전에 먼저 손을 씻으세요.",
+        "exampleEn": "Wash your hands first, before eating."
       },
       {
         "ko": "숙제",
@@ -507,15 +553,17 @@
         "hint": "📝",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "숙제하는 중이었어.",
-        "exampleEn": "I was in the middle of my homework."
+        "example": "숙제를 마친 후에 텔레비전을 봐요.",
+        "exampleEn": "I watch television after finishing my homework."
       },
       {
         "ko": "놀다",
         "en": "to hang out, to play",
         "hint": "🎈",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "숙제를 한 후에 친구와 놀았어요.",
+        "exampleEn": "I played with my friend after doing my homework."
       },
       {
         "ko": "마치다",
@@ -523,29 +571,35 @@
         "hint": "🏁",
         "category": "회화",
         "categoryEn": "Conversation & grammar",
-        "example": "한국어 공부를 마친 후에 뭐 할 거예요?",
-        "exampleEn": "What will you do after you finish studying Korean?"
+        "example": "한국어 공부를 마친 후에 취직할 거예요.",
+        "exampleEn": "I will get a job after finishing my Korean studies."
       },
       {
         "ko": "-고 나서",
         "en": "and then, once that is done",
         "hint": "➡️",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "밥을 먹고 나서 이를 닦아요.",
+        "exampleEn": "I brush my teeth after eating."
       },
       {
         "ko": "-기로 하다",
         "en": "to arrange to, to decide to",
         "hint": "🤝",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "주말에 친구와 영화를 보기로 했어요.",
+        "exampleEn": "I decided to watch a movie with my friend this weekend."
       },
       {
         "ko": "-려고 하다",
         "en": "to be planning to",
         "hint": "🎯",
         "category": "회화",
-        "categoryEn": "Conversation & grammar"
+        "categoryEn": "Conversation & grammar",
+        "example": "내년에 한국으로 유학을 가려고 해요.",
+        "exampleEn": "I plan to study in Korea next year."
       },
       {
         "ko": "곳",
@@ -553,29 +607,35 @@
         "hint": "📍",
         "category": "서울",
         "categoryEn": "Reading · 내 고향 서울",
-        "example": "머리는 그 사람의 영혼이 있는 곳이기 때문입니다.",
-        "exampleEn": "Because the head is where that person's soul is."
+        "example": "여기는 제가 태어난 곳이에요.",
+        "exampleEn": "This is the place where I was born."
       },
       {
         "ko": "프랑스",
         "en": "France",
         "hint": "🇫🇷",
         "category": "서울",
-        "categoryEn": "Reading · 내 고향 서울"
+        "categoryEn": "Reading · 내 고향 서울",
+        "example": "제 친구는 프랑스에서 왔어요.",
+        "exampleEn": "My friend is from France."
       },
       {
         "ko": "파리",
         "en": "Paris",
         "hint": "🗼",
         "category": "서울",
-        "categoryEn": "Reading · 내 고향 서울"
+        "categoryEn": "Reading · 내 고향 서울",
+        "example": "프랑스의 수도는 파리예요.",
+        "exampleEn": "The capital of France is Paris."
       },
       {
         "ko": "거의",
         "en": "almost, hardly any",
         "hint": "➖",
         "category": "서울",
-        "categoryEn": "Reading · 내 고향 서울"
+        "categoryEn": "Reading · 내 고향 서울",
+        "example": "숙제를 거의 다 했어요.",
+        "exampleEn": "I have almost finished all my homework."
       },
       {
         "ko": "예전에",
@@ -583,8 +643,8 @@
         "hint": "🕰️",
         "category": "서울",
         "categoryEn": "Reading · 내 고향 서울",
-        "example": "예전에는 1호선만 있었는데 지금은 9호선까지 생겼습니다.",
-        "exampleEn": "There used to be only Line 1, but now there are as many as nine lines."
+        "example": "예전에는 이곳에 작은 집이 많았어요.",
+        "exampleEn": "There used to be many small houses here."
       },
       {
         "ko": "근처",
@@ -592,8 +652,8 @@
         "hint": "📌",
         "category": "서울",
         "categoryEn": "Reading · 내 고향 서울",
-        "example": "회사 근처에 있는 수영장에서 해요.",
-        "exampleEn": "At the pool near my office."
+        "example": "학교 근처에 새 카페가 생겼어요.",
+        "exampleEn": "A new cafe opened near the school."
       },
       {
         "ko": "호선",
@@ -601,8 +661,8 @@
         "hint": "9️⃣",
         "category": "서울",
         "categoryEn": "Reading · 내 고향 서울",
-        "example": "예전에는 1호선만 있었는데 지금은 9호선까지 생겼습니다.",
-        "exampleEn": "There used to be only Line 1, but now there are as many as nine lines."
+        "example": "지하철 2호선을 타고 학교에 가요.",
+        "exampleEn": "I take subway Line 2 to school."
       },
       {
         "ko": "훨씬",
@@ -610,15 +670,17 @@
         "hint": "📈",
         "category": "서울",
         "categoryEn": "Reading · 내 고향 서울",
-        "example": "교통이 훨씬 편리해졌습니다.",
-        "exampleEn": "Transport has become far more convenient."
+        "example": "지하철이 생겨서 교통이 훨씬 편리해졌어요.",
+        "exampleEn": "Transport became much more convenient after the subway opened."
       },
       {
         "ko": "편리하다",
         "en": "to be convenient",
         "hint": "✅",
         "category": "서울",
-        "categoryEn": "Reading · 내 고향 서울"
+        "categoryEn": "Reading · 내 고향 서울",
+        "example": "이 동네는 교통이 편리해요.",
+        "exampleEn": "Transport is convenient in this neighborhood."
       },
       {
         "ko": "외국인",
@@ -626,15 +688,17 @@
         "hint": "🌏",
         "category": "서울",
         "categoryEn": "Reading · 내 고향 서울",
-        "example": "서울에 사는 외국인이 많아졌습니다.",
-        "exampleEn": "The number of foreigners living in Seoul has risen."
+        "example": "우리 반에는 외국인 학생이 많아요.",
+        "exampleEn": "There are many foreign students in our class."
       },
       {
         "ko": "어디에서나",
         "en": "anywhere at all",
         "hint": "🧭",
         "category": "서울",
-        "categoryEn": "Reading · 내 고향 서울"
+        "categoryEn": "Reading · 내 고향 서울",
+        "example": "요즘은 어디에서나 인터넷을 쓸 수 있어요.",
+        "exampleEn": "These days you can use the internet anywhere."
       },
       {
         "ko": "앞으로",
@@ -642,29 +706,35 @@
         "hint": "➡️",
         "category": "서울",
         "categoryEn": "Reading · 내 고향 서울",
-        "example": "앞으로 날씨가 따뜻해지면서 산이 점점 푸르게 변해 갈 것이다.",
-        "exampleEn": "From now on, as the weather warms, the mountains will gradually turn green."
+        "example": "앞으로 한국어를 더 열심히 공부할 거예요.",
+        "exampleEn": "From now on I will study Korean harder."
       },
       {
         "ko": "기대가 되다",
         "en": "to be something to look forward to",
         "hint": "🤞",
         "category": "서울",
-        "categoryEn": "Reading · 내 고향 서울"
+        "categoryEn": "Reading · 내 고향 서울",
+        "example": "내일 여행이 기대가 돼요.",
+        "exampleEn": "I am looking forward to tomorrow's trip."
       },
       {
         "ko": "N에 대한",
         "en": "about N, concerning N",
         "hint": "📎",
         "category": "서울",
-        "categoryEn": "Reading · 내 고향 서울"
+        "categoryEn": "Reading · 내 고향 서울",
+        "example": "한국 생활에 대한 책을 읽었어요.",
+        "exampleEn": "I read a book about life in Korea."
       },
       {
         "ko": "N(이)나",
         "en": "N or something like it",
         "hint": "➗",
         "category": "서울",
-        "categoryEn": "Reading · 내 고향 서울"
+        "categoryEn": "Reading · 내 고향 서울",
+        "example": "친구를 한 시간이나 기다렸어요.",
+        "exampleEn": "I waited for my friend for a whole hour."
       },
       {
         "ko": "강남",
@@ -672,8 +742,8 @@
         "hint": "🌆",
         "category": "문화",
         "categoryEn": "Culture · 서울의 변화",
-        "example": "강남 근처가 제일 복잡한 것 같아요.",
-        "exampleEn": "I think the area around Gangnam is the most crowded."
+        "example": "주말에 강남에서 친구를 만났어요.",
+        "exampleEn": "I met my friend in Gangnam on the weekend."
       },
       {
         "ko": "한강",
@@ -681,15 +751,17 @@
         "hint": "🌊",
         "category": "문화",
         "categoryEn": "Culture · 서울의 변화",
-        "example": "한강 다리가 1개에서 약 30개로 늘었습니다.",
-        "exampleEn": "The bridges over the Han River have gone from one to about thirty."
+        "example": "친구와 한강에서 산책했어요.",
+        "exampleEn": "I took a walk by the Han River with my friend."
       },
       {
         "ko": "1970년대",
         "en": "the 1970s — N년대 is the decade",
         "hint": "📅",
         "category": "문화",
-        "categoryEn": "Culture · 서울의 변화"
+        "categoryEn": "Culture · 서울의 변화",
+        "example": "부모님은 1970년대에 태어나셨어요.",
+        "exampleEn": "My parents were born in the 1970s."
       },
       {
         "ko": "수도",
@@ -697,15 +769,17 @@
         "hint": "🏛️",
         "category": "문화",
         "categoryEn": "Culture · 서울의 변화",
-        "example": "수도 요금, 가스 요금 포함해서 5만 원 정도니까 다른 곳보다 싼 편이에요. 한번 직접 와서 구경해 보세요.",
-        "exampleEn": "Including the water and gas bills it comes to about 50,000 won, so it is cheaper than other places. Come and see it for yourself."
+        "example": "한국의 수도는 서울이에요.",
+        "exampleEn": "The capital of South Korea is Seoul."
       },
       {
         "ko": "과거",
         "en": "the past",
         "hint": "🕰️",
         "category": "문화",
-        "categoryEn": "Culture · 서울의 변화"
+        "categoryEn": "Culture · 서울의 변화",
+        "example": "과거와 현재의 사진을 비교해 보세요.",
+        "exampleEn": "Compare photos from the past and the present."
       },
       {
         "ko": "명",
@@ -713,15 +787,17 @@
         "hint": "🧍",
         "category": "문화",
         "categoryEn": "Culture · 서울의 변화",
-        "example": "서울의 인구가 569만 명에서 1,046만 명으로 늘었습니다.",
-        "exampleEn": "Seoul's population has grown from 5.69 million to 10.46 million."
+        "example": "우리 반에는 학생이 열 명 있어요.",
+        "exampleEn": "There are ten students in our class."
       },
       {
         "ko": "그래프",
         "en": "a graph",
         "hint": "📉",
         "category": "과제",
-        "categoryEn": "Task · 인생 그래프"
+        "categoryEn": "Task · 인생 그래프",
+        "example": "인생 그래프를 보고 이야기해 보세요.",
+        "exampleEn": "Look at your life graph and talk about it."
       },
       {
         "ko": "초등학교",
@@ -729,8 +805,8 @@
         "hint": "🏫",
         "category": "과제",
         "categoryEn": "Task · 인생 그래프",
-        "example": "8살 때 초등학교에 입학했습니다.",
-        "exampleEn": "I started primary school at the age of eight."
+        "example": "일곱 살 때 초등학교에 입학했어요.",
+        "exampleEn": "I started elementary school when I was seven."
       },
       {
         "ko": "행복",
@@ -738,29 +814,35 @@
         "hint": "😊",
         "category": "과제",
         "categoryEn": "Task · 인생 그래프",
-        "example": "현재 '행복 열차'라는 책이 큰 인기를 얻고 있다.",
-        "exampleEn": "A book called 'Happiness Train' is very popular at the moment."
+        "example": "가족과 함께 있는 시간이 제 행복이에요.",
+        "exampleEn": "Time with my family is my happiness."
       },
       {
         "ko": "불행",
         "en": "unhappiness",
         "hint": "😞",
         "category": "과제",
-        "categoryEn": "Task · 인생 그래프"
+        "categoryEn": "Task · 인생 그래프",
+        "example": "인생에는 행복도 있고 불행도 있어요.",
+        "exampleEn": "There is both happiness and unhappiness in life."
       },
       {
         "ko": "점을 찍다",
         "en": "to mark a dot",
         "hint": "🔵",
         "category": "과제",
-        "categoryEn": "Task · 인생 그래프"
+        "categoryEn": "Task · 인생 그래프",
+        "example": "그래프에 점을 찍으세요.",
+        "exampleEn": "Mark a point on the graph."
       },
       {
         "ko": "연결하다",
         "en": "to join up, to connect",
         "hint": "🔗",
         "category": "과제",
-        "categoryEn": "Task · 인생 그래프"
+        "categoryEn": "Task · 인생 그래프",
+        "example": "점을 선으로 연결하세요.",
+        "exampleEn": "Connect the points with lines."
       },
       {
         "ko": "부모님",
@@ -768,8 +850,8 @@
         "hint": "👨‍👩‍👦",
         "category": "과제",
         "categoryEn": "Task · 인생 그래프",
-        "example": "제가 태어났을 때 부모님이 정말 좋아하셨습니다.",
-        "exampleEn": "When I was born my parents were really delighted."
+        "example": "부모님께서는 제가 태어났을 때 기뻐하셨어요.",
+        "exampleEn": "My parents were happy when I was born."
       },
       {
         "ko": "그때",
@@ -777,8 +859,8 @@
         "hint": "⏳",
         "category": "과제",
         "categoryEn": "Task · 인생 그래프",
-        "example": "그때 아주 힘들었지만 그 후로 건강해졌습니다.",
-        "exampleEn": "It was very hard at the time, but I have been healthier ever since."
+        "example": "처음 한국에 왔을 때는 겨울이었어요. 그때는 정말 추웠어요.",
+        "exampleEn": "It was winter when I first came to Korea. It was very cold then."
       },
       {
         "ko": "그 후로",
@@ -786,8 +868,8 @@
         "hint": "➡️",
         "category": "과제",
         "categoryEn": "Task · 인생 그래프",
-        "example": "그때 아주 힘들었지만 그 후로 건강해졌습니다.",
-        "exampleEn": "It was very hard at the time, but I have been healthier ever since."
+        "example": "운동을 시작했어요. 그 후로 건강이 좋아졌어요.",
+        "exampleEn": "I started exercising. My health has improved since then."
       },
       {
         "ko": "아프다",
@@ -795,8 +877,8 @@
         "hint": "🤒",
         "category": "과제",
         "categoryEn": "Task · 인생 그래프",
-        "example": "어제부터 배가 아프네요.",
-        "exampleEn": "My stomach has been hurting since yesterday."
+        "example": "어제는 배가 아팠지만 오늘은 괜찮아졌어요.",
+        "exampleEn": "My stomach hurt yesterday, but it is better today."
       },
       {
         "ko": "기다리다",
@@ -804,22 +886,26 @@
         "hint": "⌛",
         "category": "과제",
         "categoryEn": "Task · 인생 그래프",
-        "example": "네, 기다리고 있겠습니다.",
-        "exampleEn": "I'll be waiting."
+        "example": "수업이 끝난 후에 문 앞에서 기다릴게요.",
+        "exampleEn": "I will wait at the door after class ends."
       },
       {
         "ko": "탈락",
         "en": "dropping — a sound that stops being pronounced",
         "hint": "🔇",
         "category": "발음",
-        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락",
+        "example": "많아요를 발음할 때 ㅎ이 탈락해요.",
+        "exampleEn": "The sound ㅎ drops out when pronouncing 많아요."
       },
       {
         "ko": "모음",
         "en": "a vowel",
         "hint": "🅰️",
         "category": "발음",
-        "categoryEn": "Pronunciation · 'ㅎ' 탈락"
+        "categoryEn": "Pronunciation · 'ㅎ' 탈락",
+        "example": "ㅏ와 ㅓ는 모음이에요.",
+        "exampleEn": "ㅏ and ㅓ are vowels."
       },
       {
         "ko": "싫다",
@@ -827,8 +913,8 @@
         "hint": "🙅",
         "category": "발음",
         "categoryEn": "Pronunciation · 'ㅎ' 탈락",
-        "example": "싫어요 → [시러요]",
-        "exampleEn": "싫어요 is pronounced [시러요]."
+        "example": "저는 추운 날씨가 싫어요.",
+        "exampleEn": "I dislike cold weather."
       },
       {
         "ko": "끓다",
@@ -836,8 +922,8 @@
         "hint": "♨️",
         "category": "발음",
         "categoryEn": "Pronunciation · 'ㅎ' 탈락",
-        "example": "물이 끓으면 넣으세요.",
-        "exampleEn": "Put them in once the water boils."
+        "example": "물이 끓으면 라면을 넣으세요.",
+        "exampleEn": "Add the noodles when the water boils."
       },
       {
         "ko": "극장",
@@ -845,8 +931,8 @@
         "hint": "🎬",
         "category": "발음",
         "categoryEn": "Pronunciation · 'ㅎ' 탈락",
-        "example": "주말에는 극장에 사람이 많아요.",
-        "exampleEn": "There are a lot of people at the cinema at weekends."
+        "example": "영화를 본 후에 극장 앞에서 만나요.",
+        "exampleEn": "Let us meet in front of the cinema after the movie."
       },
       {
         "ko": "기분",
@@ -854,8 +940,8 @@
         "hint": "🎭",
         "category": "발음",
         "categoryEn": "Pronunciation · 'ㅎ' 탈락",
-        "example": "기분이 좀 괜찮아졌어요?",
-        "exampleEn": "Are you feeling a bit better?"
+        "example": "친구를 만나서 기분이 좋아졌어요.",
+        "exampleEn": "I felt better after meeting my friend."
       },
       {
         "ko": "낳다",
@@ -863,8 +949,8 @@
         "hint": "👶",
         "category": "발음",
         "categoryEn": "Pronunciation · 'ㅎ' 탈락",
-        "example": "나는 칼국수 먹을래.",
-        "exampleEn": "I will have kalguksu."
+        "example": "언니가 아기를 낳았어요.",
+        "exampleEn": "My older sister gave birth to a baby."
       },
       {
         "ko": "괜찮아지다",
@@ -872,8 +958,8 @@
         "hint": "👌",
         "category": "발음",
         "categoryEn": "Pronunciation · 'ㅎ' 탈락",
-        "example": "기분이 좀 괜찮아졌어요?",
-        "exampleEn": "Are you feeling a bit better?"
+        "example": "푹 쉬어서 몸이 괜찮아졌어요.",
+        "exampleEn": "I felt better after resting well."
       }
     ]
   },
