@@ -257,7 +257,7 @@
       "blurbEn": "Six verbs for things going up, down, or appearing at all.",
       "instructionKo": "그림을 보고 [보기]와 같이 알맞은 단어를 골라 대화를 만들어 보세요.",
       "instructionEn": "Look at the pictures and complete each dialogue using the appropriate word from the box.",
-      "noteEn": "The box is 발전하다, 늘다, 줄다, 오르다, 내리다, 생기다, and the pairs matter more than the words: 늘다/줄다 count things, 오르다/내리다 move prices. Choosing the right half of a pair is the exercise, so each row offers both.",
+      "noteEn": "Use 늘다/줄다 for an increase/decrease in number, amount or ability; 오르다/내리다 commonly describe prices or levels rising/falling. 생기다 means something new appears, and 발전하다 means development. Compare 학생 수가 늘었어요, 요금이 내렸어요, 도서관이 생겼어요. These are typical pairings, not absolute limits on usage.",
       "example": {
         "lines": [
           {
@@ -1184,7 +1184,7 @@
         "en": "Boil the water before you put the noodles in.",
         "lines": [
           {
-            "ko": "먼저 물을 끓여요 {}."
+            "ko": "{} 먼저 물을 끓여요."
           }
         ]
       },
@@ -1570,7 +1570,7 @@
       "blurbEn": "The other half of the pair: what happens after the first thing is done.",
       "instructionKo": "그림을 보고 [보기]와 같이 문장을 만들어 보세요.",
       "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
-      "noteEn": "The modifier is the whole exercise: -(으)ㄴ is the past one, so a vowel stem takes a bare ㄴ (본, 온) and a consonant stem takes 은 (먹은, 끝난). Putting -기 전에’s plain stem here instead is the mistake the previous page sets up.",
+      "noteEn": "Use the completed-action modifier before 후에: 먹다 → 먹은 후에; 끝나다 → 끝난 후에. A vowel stem takes ㄴ, another consonant takes 은, and ㄹ drops before ㄴ: 만들다 → 만든 후에. The first action finishes before the next; the whole sentence can still refer to the future: 밥을 먹은 후에 갈 거예요.",
       "example": {
         "lines": [
           {

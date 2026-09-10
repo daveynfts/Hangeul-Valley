@@ -61,6 +61,7 @@ const T_RIEUL = 8;
 const T_BIEUP = 17;
 const T_SIOT = 19;
 const T_HIEUT = 27;
+const REGULAR_H_STEMS = new Set(['좋', '낳', '놓', '넣', '쌓', '찧']);
 // Vowel indices, in the order the block puts them:
 //   ㅏ0 ㅐ1 ㅑ2 ㅒ3 ㅓ4 ㅔ5 ㅕ6 ㅖ7 ㅗ8 ㅘ9 ㅙ10 ㅚ11 ㅛ12 ㅜ13 ㅝ14 ㅞ15 ㅟ16 ㅠ17 ㅡ18 ㅢ19 ㅣ20
 const V_A = 0;
@@ -107,7 +108,7 @@ function infinitiveStem(stem) {
   if (T === T_SIOT) return head + compose(L, V, T_GIYEOK_S) + (isBright(V) ? '아' : '어');
   // ㅎ irregular: 그렇다 → 그래, 빨갛다 → 빨개, 하얗다 → 하얘. The vowel becomes ㅐ, or ㅒ
   // where it was ㅑ. 좋다 is the exception that keeps its ㅎ, and is handled below.
-  if (T === T_HIEUT && stem !== '좋') {
+  if (T === T_HIEUT && !REGULAR_H_STEMS.has(stem)) {
     return head + compose(L, V === V_YA ? V_YAE : V_AE, T_GIYEOK_S);
   }
   // 르 irregular: 모르다 → 몰라, 부르다 → 불러. The ㄹ doubles onto the syllable before.
@@ -169,11 +170,23 @@ function surfaceForms(headword) {
   if (inf) {
     // -아/어요, -았/었-, -아/어서, -아/어야, -아/어 보다: the whole polite and past family.
     ['요', '서', '야', ' '].forEach((e) => forms.add(inf + e));
+    ['지', '졌', '져', '질'].forEach((e) => forms.add(inf + e));
     const li = decompose(inf[inf.length - 1]);
     if (isSyllable(inf[inf.length - 1]) && li.T === T_GIYEOK_S) {
       forms.add(inf.slice(0, -1) + compose(li.L, li.V, 20 /* ㅆ */));   // 먹었, 매웠, 했
     }
   }
+  // ㅟ does not contract to ㅕ: 사귀다 → 사귀어요 / 사귀었어요.
+  if (T === 0 && V === 16) {
+    forms.add(stem + '어요');
+    forms.add(stem + '었');
+  }
+  forms.add(stem + '기');
+  if (w.endsWith('이다')) forms.add(stem.slice(0, -1) + '이에요');
+  const honorificStem = T === 0 ? stem : T === T_RIEUL
+    ? stem.slice(0, -1) + compose(L, V, 0) : stem + '으';
+  ['세요', '셨어', '신 '].forEach(e => forms.add(honorificStem + e));
+  if (T === 0) forms.add(stem.slice(0, -1) + compose(L, V, T_RIEUL) + '게요');
   // A one-syllable stem ending in a vowel stops here. 가, 시, 쓰, 다 sit inside so much of
   // the language that anything built on them is a coin toss — 가고 is in 나가고, 가게 is a
   // shop, 시- is the honorific infix, 다는 is the quotative. A stem that ends in a consonant
@@ -233,7 +246,7 @@ function surfaceForms(headword) {
     ['으면', '으니까', '은 ', '을 '].forEach((e) => forms.add(soft + e));
     forms.add(stem + '는');
     forms.add(stem + '습니다');
-  } else if (T === T_HIEUT && stem !== '좋') {
+  } else if (T === T_HIEUT && !REGULAR_H_STEMS.has(stem)) {
     vowelLike(head + compose(L, V, T_GIYEOK_S));           // 그렇 → 그러 → 그런, 그러면
   } else {
     ['으면', '으니까', '는', '은 ', '을 ', '습니다'].forEach((e) => forms.add(stem + e));
@@ -366,6 +379,23 @@ function ambiguousForms() {
  * sentenceProvesUse below is the stricter question, and it is the one the picker asks.
  */
 function sentenceUses(text, headword) {
+  if (headword === 'V-(으)ㄴ 후에') {
+    return [...String(text).matchAll(/([가-힣]+) 후에/g)]
+      .some(m => decompose(m[1].slice(-1)).T === 4); // completed-action modifier ㄴ
+  }
+  // Grammar labels are notation, not words a Korean sentence contains literally.
+  // Keep this out of sentenceProvesUse: it must not select examples automatically.
+  const patterns = {
+    'A-아지다/어지다': /[가-힣]+(?:아|어|해|워|빠|커|싸)(?:졌|져|지|질)/,
+    'V-게 되다': /[가-힣]+게 (?:되|돼|됐)/,
+    'V-기 전에': /[가-힣]+기 전에/,
+    '-고 나서': /[가-힣]+고 나서/,
+    '-기로 하다': /[가-힣]+기로 (?:하|해|했)/,
+    '-려고 하다': /[가-힣]+려고 (?:하|해|했)/,
+    'N에 대한': /[가-힣]+에 대한/,
+    'N(이)나': /[가-힣]+(?:이나|나)\s/
+  };
+  if (patterns[headword]) return patterns[headword].test(text);
   return matchParts(text, headword, false);
 }
 
