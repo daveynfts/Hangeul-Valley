@@ -48,7 +48,9 @@
         "en": "to make a friend",
         "hint": "🤝",
         "category": "인생",
-        "categoryEn": "Life events & milestones"
+        "categoryEn": "Life events & milestones",
+        "example": "학교에서 좋은 친구들을 많이 사귀었어요.",
+        "exampleEn": "I made a lot of good friends at school."
       },
       {
         "ko": "사랑에 빠지다",
