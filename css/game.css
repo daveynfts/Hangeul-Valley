@@ -1815,6 +1815,19 @@
       border-radius: 5px; padding: 3px 7px; letter-spacing: 2px;
       max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
+    /* How many times this word has been studied through to a harvest. Green, because it is
+       the one number on the card that only ever goes up — the mastery badge beside it can
+       move backwards when a word lapses, and the two should not read as the same kind of
+       fact. Hidden entirely at zero: a word you have never finished says so with its badge,
+       and a row of "x0" would be noise on every new level. */
+    .vc-studied {
+      display: inline-flex; align-items: center; gap: 3px;
+      font-family: var(--font-pixel); font-size-adjust: var(--font-pixel-adjust); font-size: 7px;
+      font-weight: 700; line-height: 1.5; padding: 4px 8px; border-radius: 5px;
+      background: #dcfce7; color: #14532d; border: 1.5px solid #16a34a;
+      max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
     .vc-open-hint {
       margin-top: 9px; color: #166534; font-size: 11px; font-weight: 800;
       letter-spacing: .15px;

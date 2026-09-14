@@ -5864,6 +5864,12 @@ function renderVocabCards() {
 
   const now = Date.now();
   words.forEach(w => {
+    // How many times this word has been studied through to the end. A harvest is the third
+    // and last answer of the plant/water/harvest cycle, and a due review is the same cycle
+    // entered at its last step, so one harvest is one complete pass whichever it was. A
+    // failed review does not count and neither does a crop still growing — measured, not
+    // assumed: reps on the SRS entry looked like the obvious counter and is not one, it
+    // moves by four over a single cycle because every reschedule credits a rep.
     const times   = harvestCounts.get(w.ko) || 0;
     const planted = plantedWords.has(w.ko);
     const chosung = getChosung(w.ko);
@@ -5890,7 +5896,16 @@ function renderVocabCards() {
     // keyboard behaviour without nesting one inside the other.
     div.setAttribute('role', 'button');
     div.setAttribute('tabindex', '0');
-    div.setAttribute('aria-label', `${w.ko}, ${tr(w, 'en')}. ${mBadgeLabel}${mBadgeSuffix}. ${hvT('ui.vocab.openWordDetails')}`);
+    // Read out as well as drawn: the count is the answer to "how well do I know this", and
+    // a badge a screen reader cannot reach does not answer it.
+    // "Studied 1 times" is the kind of thing a catalogue with no plural forms writes by
+    // itself. Same shape as ui.ls.resume.crops.one beside it: the count stays outside the
+    // string so a language that does not inflect can point both keys at one wording.
+    const studiedKey = (base) => (times === 1 ? base + '.one' : base);
+    const studiedLabel = times > 0 ? hvT('ui.vocab.card.studied', { n: times }) : '';
+    const studiedAria = times > 0
+      ? ' ' + hvT(studiedKey('ui.vocab.card.studied.aria'), { n: times }) + '.' : '';
+    div.setAttribute('aria-label', `${w.ko}, ${tr(w, 'en')}. ${mBadgeLabel}${mBadgeSuffix}.${studiedAria} ${hvT('ui.vocab.openWordDetails')}`);
     div.innerHTML = `
       <button type="button" class="speak-btn vc-speak tts-only" title="${vbEsc(hvT('ui.vocab.speak.title'))}" aria-label="${vbEsc(hvT('ui.vocab.speak.aria', { word: w.ko }))}">🔊</button>
       <span class="vc-category" title="${vbEsc(wordCategory(w))}">${vbEsc(wordCategory(w))}</span>
@@ -5900,6 +5915,9 @@ function renderVocabCards() {
       <span class="vc-meta">
         <span class="vc-chosung" title="Initial consonants (초성)">${vbEsc(chosung)}</span>
         <span class="mastery-badge ${mBadgeClass}">${mBadgeLabel}${mBadgeSuffix}</span>
+        ${times > 0
+          ? `<span class="vc-studied" title="${vbEsc(hvT(studiedKey('ui.vocab.card.studied.title'), { n: times }))}">${vbEsc(studiedLabel)}</span>`
+          : ''}
       </span>
       <span class="vc-open-hint">${hvT('ui.vocab.studyThisWord')}</span>`;
     // Free here: the vocab book already shows the answer, so audio adds nothing to give away.
