@@ -93,6 +93,12 @@ assert(/workflow_run:/.test(publishYml), 'publish.yml auto-runs after CI');
 assert(/workflows:\s*\[CI\]/.test(publishYml), 'publish.yml listens for the CI workflow');
 assert(/workflow_dispatch:/.test(publishYml), 'publish.yml still allows a manual run');
 assert(/head_branch == 'main'/.test(publishYml), 'auto-publish is limited to main');
+// Not only a scope gate any more. actions/checkout refuses to check out a fork PR's head
+// under workflow_run, and it decides by reading workflow_run.event: anything that does not
+// start with `pull_request` returns before the fork check. This clause is what keeps the
+// checkout step below uncontested, so it is asserted rather than left to a reader.
+assert(/workflow_run\.event == 'push'/.test(publishYml),
+  'auto-publish only follows a push, which is also what keeps checkout out of its fork-PR guard');
 assert(/npm run publish:prod/.test(publishYml), 'publish job runs publish:prod');
 assert(/github\.event\.workflow_run\.head_sha/.test(publishYml), 'auto-publish checks out the CI commit');
 assert(!/Require Vercel deploy hook/.test(publishYml), 'missing deploy hook does not fail the job');
