@@ -2834,9 +2834,17 @@ class FarmScene extends Phaser.Scene {
         // Anti-farm diminishing returns formula:
         // Decays smoothly down to 1 coin if harvested >= 15 times
         const reward = Math.max(1, Math.floor(10 * Math.pow(0.85, prev)));
+        // Rank XP for the same moment. The rank bar in the HUD used to move only at the
+        // study desk and in the workbook, so the loop the game is actually made of —
+        // plant, water, harvest — paid coins and left the bar exactly where it was. A
+        // harvest is a recall answered at the production step: the same kind of work the
+        // desk pays XP for, and the one the player spends most of their time doing.
+        const xpGain = typeof harvestXp === 'function' ? harvestXp(prev) : 0;
         plantedWords.delete(ko);
         this._sparkle(plot.x,plot.y);
-        this._label(plot.x,plot.y,prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`);
+        this._label(plot.x,plot.y,
+          (prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`)
+          + (xpGain ? `\n+${xpGain} XP` : ''));
 
         // Legendary tier mastery check (>= 10 harvests) -> +10 Honor
         if (newHarvests === 10) {
@@ -2853,6 +2861,17 @@ class FarmScene extends Phaser.Scene {
 
         this.time.delayedCall(350,()=>{
           addCoins(reward);
+          // Paid on the same beat as the coins so the two HUD chips pop together. A rank-up
+          // earned here gets the same card the study desk shows — reaching a new title in
+          // the middle of the farm loop is the moment worth interrupting for, and it was
+          // unreachable from here before.
+          if (typeof addPlayerXp === 'function') {
+            const after = addPlayerXp(xpGain);
+            const hops = (after.leveled && after.leveled.length) || 0;
+            if (hops && typeof showRankUp === 'function') {
+              showRankUp(after.leveled[hops - 1], hops);
+            }
+          }
           updateVocabBook();
           checkQuestProgress('harvest', { count: 1 });
           if (prev === 0) checkQuestProgress('newHarvest', { count: 1 });

@@ -73,6 +73,23 @@ function studySessionXp(score, total) {
   else if (score === total - 1) xp += 8;
   return xp;
 }
+// What one harvest is worth in rank XP. `prev` is how many times this word has been
+// harvested before, which is the same number the coin payout decays on — one anti-farm
+// rule, applied to both currencies, so a word replanted for the fifteenth time stops
+// paying in both at once. The first harvest of a word carries a bonus: that is the run
+// through the cycle that taught it.
+//
+// It lives here beside studySessionXp rather than in the farm scene because the two are
+// the same decision — what a piece of work is worth against the curve in xpToNextLevel —
+// and they were only ever comparable when read together.
+const HARVEST_XP_BASE = 12;
+const HARVEST_XP_FIRST_BONUS = 6;
+const HARVEST_XP_FLOOR = 2;
+function harvestXp(prev) {
+  const n = Math.max(0, prev | 0);
+  return Math.max(HARVEST_XP_FLOOR, Math.floor(HARVEST_XP_BASE * Math.pow(0.85, n)))
+    + (n === 0 ? HARVEST_XP_FIRST_BONUS : 0);
+}
 function updateRankHUD() {
   ensurePlayerRank();
   const t = rankTitleFor(playerRank.level);
@@ -851,7 +868,7 @@ async function loadSave(){
 // ── Cloud sign-in ────────────────────────────────────────────────────────────
 // Everything from the token in hand to the button that asks for one. Extracted whole by
 // tests/test_persistent_signin.js, which is why the boundary markers are here.
-let googleAuth = { clientId: '', token: '', user: null, ready: false, exp: 0 };
+let googleAuth = { clientId: '', token: '', user: null, ready: false, exp: 0, configFailed: false };
 
 function peekLocalSave() {
   try { return JSON.parse(localStorage.getItem('hv_save_v2') || 'null'); } catch { return null; }
@@ -878,6 +895,116 @@ function peekLocalSave() {
 // disableAutoSelect() so Google itself stops answering those quiet requests.
 const GOOGLE_TOKEN_KEY = 'hv_google_token';
 const GOOGLE_USER_KEY = 'hv_google_user';
+// Whether this browser is allowed to keep the sign-in at all. Absent means yes: remembering
+// is what the rest of this section exists to do, and a player who has never touched the
+// switch is asking for the behaviour it defaults to.
+const GOOGLE_REMEMBER_KEY = 'hv_google_remember';
+
+function rememberSignIn() {
+  try {
+    const raw = localStorage.getItem(GOOGLE_REMEMBER_KEY);
+    return raw === null ? true : raw === '1';
+  } catch { return true; }
+}
+
+/**
+ * Turn remembering on or off, from the switch on the level select.
+ *
+ * Off has to mean off *now*, not from the next sign-in: the remembered profile is the one
+ * thing that survives a restart, so leaving it in place would keep the browser signed in
+ * for exactly as long as the player believed they had stopped that. The token moves to
+ * sessionStorage instead of being thrown away, so the session in front of them is not
+ * interrupted by a setting about future ones — it simply ends when the tab does.
+ */
+function setRememberSignIn(on) {
+  const keep = !!on;
+  try { localStorage.setItem(GOOGLE_REMEMBER_KEY, keep ? '1' : '0'); } catch {}
+  if (!keep) {
+    const tok = getGoogleToken();
+    try {
+      localStorage.removeItem(GOOGLE_USER_KEY);
+      localStorage.removeItem(GOOGLE_TOKEN_KEY);
+      if (tok) sessionStorage.setItem(GOOGLE_TOKEN_KEY, tok);
+    } catch {}
+    // Google's own memory of the choice, which is what answers the quiet renewals. Leaving
+    // it on would let One Tap sign the player back in on the next visit regardless.
+    try {
+      if (typeof window !== 'undefined' && window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.disableAutoSelect();
+      }
+    } catch {}
+  } else if (googleAuth.user) {
+    // Writes back what is already in hand, so switching it on takes effect without asking
+    // the player to sign in again just to register the choice.
+    setGoogleSession(getGoogleToken(), googleAuth.user);
+  }
+  renderAuthUI();
+}
+
+/** The account this browser last signed in as, if it remembers one. Names the Google button
+ *  as a way back to the same account rather than an account chooser to work through. */
+function rememberedAccountLabel() {
+  const fromMemory = googleAuth.user && (googleAuth.user.email || googleAuth.user.name);
+  if (fromMemory) return fromMemory;
+  try {
+    const raw = localStorage.getItem(GOOGLE_USER_KEY);
+    if (!raw) return '';
+    const u = JSON.parse(raw);
+    return (u && (u.email || u.name)) || '';
+  } catch { return ''; }
+}
+
+// ── Staying signed in while the tab is open ──────────────────────────────────
+//
+// A Google ID token dies after an hour and nothing used to notice. The first thing that
+// found out was a save going out and coming back 401, by which point the only way forward
+// was a renewal Google frequently declines — so an afternoon of play meant signing in
+// again, and again. The token is now replaced *before* it expires, while the browser still
+// holds the Google session that can answer quietly, and the player never sees it happen.
+//
+// The lead is five minutes: long enough that a refusal still leaves time for the
+// visibility handler or a request's own renewal to try again before anything breaks.
+const RENEW_LEAD_MS = 5 * 60 * 1000;
+const RENEW_MIN_DELAY_MS = 15 * 1000;
+let _renewTimer = null;
+
+function clearTokenRenewal() {
+  if (_renewTimer && typeof clearTimeout === 'function') clearTimeout(_renewTimer);
+  _renewTimer = null;
+}
+
+function scheduleTokenRenewal() {
+  clearTokenRenewal();
+  if (typeof setTimeout !== 'function') return;
+  if (!googleAuth.token || !googleAuth.exp) return;
+  const delay = Math.max(RENEW_MIN_DELAY_MS, googleAuth.exp - RENEW_LEAD_MS - Date.now());
+  _renewTimer = setTimeout(() => { _renewTimer = null; renewGoogleToken(); }, delay);
+  // Node's timers are objects that hold the process open; the browser's are numbers. Without
+  // this, a test that signs in would sit on a fifty-minute timer before it could exit.
+  if (_renewTimer && typeof _renewTimer.unref === 'function') _renewTimer.unref();
+}
+
+/** Is the token inside its last `ms`? Unlike googleTokenIsFresh this is asked ahead of time,
+ *  to decide whether to renew, not to decide whether a request can be sent. */
+function tokenExpiresWithin(ms) {
+  const exp = googleAuth.exp || tokenExpiry(getGoogleToken());
+  if (!exp) return false;
+  return Date.now() >= exp - ms;
+}
+
+/** Coming back to a tab that has been in the background. A machine that slept through the
+ *  renewal timer wakes with a dead token and no timer left to fix it. */
+function refreshSignInIfStale() {
+  if (!hasGoogleSignIn()) return;
+  if (getGoogleToken() && !tokenExpiresWithin(RENEW_LEAD_MS)) { scheduleTokenRenewal(); return; }
+  renewGoogleToken();
+}
+
+if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') refreshSignInIfStale();
+  });
+}
 
 function getGoogleToken() {
   if (googleAuth.token) return googleAuth.token;
@@ -902,15 +1029,27 @@ function setGoogleSession(token, user) {
   googleAuth.token = token || '';
   googleAuth.user = user || null;
   googleAuth.exp = token ? tokenExpiry(token) : 0;
+  const keep = rememberSignIn();
   try {
-    if (token) localStorage.setItem(GOOGLE_TOKEN_KEY, token);
-    else localStorage.removeItem(GOOGLE_TOKEN_KEY);
-    // Cleared and never written. The only reason to touch sessionStorage now is so that a
-    // sign-out cannot leave the pre-upgrade copy behind for getGoogleToken to find.
-    sessionStorage.removeItem(GOOGLE_TOKEN_KEY);
-    if (user) localStorage.setItem(GOOGLE_USER_KEY, JSON.stringify(user));
+    if (token && keep) {
+      localStorage.setItem(GOOGLE_TOKEN_KEY, token);
+      // Cleared whenever localStorage is written. The only reason to touch sessionStorage
+      // on this branch is so a sign-out cannot leave the pre-upgrade copy behind for
+      // getGoogleToken to find.
+      sessionStorage.removeItem(GOOGLE_TOKEN_KEY);
+    } else if (token) {
+      // Remembering is switched off, so the token lives exactly as long as the tab does.
+      localStorage.removeItem(GOOGLE_TOKEN_KEY);
+      sessionStorage.setItem(GOOGLE_TOKEN_KEY, token);
+    } else {
+      localStorage.removeItem(GOOGLE_TOKEN_KEY);
+      sessionStorage.removeItem(GOOGLE_TOKEN_KEY);
+    }
+    if (user && keep) localStorage.setItem(GOOGLE_USER_KEY, JSON.stringify(user));
     else localStorage.removeItem(GOOGLE_USER_KEY);
   } catch {}
+  // Line up the replacement now rather than finding out from a 401 in an hour's time.
+  scheduleTokenRenewal();
   // A token in hand clears both kinds of memory of the last failure: the error on the chip,
   // and the cooldown that stops us pestering Google. Signing in by hand is the strongest
   // evidence there is that asking again would now work.
@@ -987,11 +1126,33 @@ function renewGoogleToken() {
     setTimeout(() => finish(false), RENEW_TIMEOUT_MS);
     try {
       // A notification that the prompt was not displayed is an answer, not an error.
+      //
+      // The notification arrives in one of two shapes. The original one answers
+      // isNotDisplayed(); the FedCM one does not carry that method at all and reports a
+      // skipped or dismissed moment instead. Asking an object only what it actually offers
+      // matters because the alternative is silence: with no readable answer, the
+      // eight-second timeout becomes the only thing that ever resolves this, and every
+      // queued save waits it out.
+      //
+      // A dismissal because the credential came back is the success path — the callback is
+      // already on its way — so it must not be read as a refusal and must not start the
+      // cool-off.
       gis.prompt((n) => {
         if (!n) return;
-        const skipped = (typeof n.isNotDisplayed === 'function' && n.isNotDisplayed())
-          || (typeof n.isSkippedMoment === 'function' && n.isSkippedMoment());
-        if (skipped) finish(false);
+        let declined = false;
+        try {
+          if (typeof n.isNotDisplayed === 'function' && n.isNotDisplayed()) declined = true;
+          else if (typeof n.isSkippedMoment === 'function' && n.isSkippedMoment()) declined = true;
+          else if (typeof n.isDismissedMoment === 'function' && n.isDismissedMoment()) {
+            const why = typeof n.getDismissedReason === 'function' ? n.getDismissedReason() : '';
+            declined = why !== 'credential_returned';
+          }
+        } catch (e) {
+          // Reading a method this build of GIS has retired throws. Treat it as no answer
+          // rather than as a refusal, and let the timeout or the credential decide.
+          declined = false;
+        }
+        if (declined) finish(false);
       });
     } catch (e) {
       console.warn('Could not ask Google for a fresh token', e);
@@ -999,7 +1160,13 @@ function renewGoogleToken() {
     }
   });
   _renewInFlight = attempt;
-  attempt.then(() => { if (_renewInFlight === attempt) _renewInFlight = null; });
+  attempt.then((ok) => {
+    if (_renewInFlight === attempt) _renewInFlight = null;
+    // A refusal is the moment the sign-in row has to change: the token in hand is past its
+    // hour, nothing is going to replace it quietly, and the button is the way back in. On
+    // success setGoogleSession has already repainted.
+    if (!ok) renderAuthUI();
+  });
   return attempt;
 }
 
@@ -1393,12 +1560,23 @@ function decodeJwtPayload(token) {
 
 function renderAuthUI() {
   const user = googleAuth.user;
-  const signed = !!(user && getGoogleToken());
+  const token = getGoogleToken();
+  // Two different questions, and answering only the first is what made the sign-in button
+  // vanish. `identified` is "this browser knows whose account this is". `usable` is "and the
+  // token in hand will still be accepted". A token past its hour satisfies the first and not
+  // the second — and the old code hid the Google button on the first alone, so an expired
+  // session looked signed in, synced nothing, and left no way back in short of noticing the
+  // Sign out button and using it before you could sign in.
+  const identified = !!(user && token);
+  const usable = identified && googleTokenIsFresh();
+  // Does this row have anything to offer? Either Google is configured, or finding that out
+  // failed and there is a retry to show, or somebody is signed in.
+  const canSignIn = !!googleAuth.clientId || !!googleAuth.configFailed;
   const slots = ['ls-auth-status', 'hud-auth-status'];
   slots.forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
-    if (signed) {
+    if (identified) {
       // Escaped as well as validated, for the same reason the name beside it is: this is a
       // string being concatenated into HTML, and safeGooglePhoto having to be perfect was
       // how the attribute got broken out of once already.
@@ -1408,22 +1586,81 @@ function renderAuthUI() {
       // Whether the last sync worked. It was recorded and never shown, so "signed in" and
       // "signed in but nothing has reached the cloud for an hour" looked identical — which
       // is the same silence this whole path had, one layer up.
-      const warn = _cloudLastError
-        ? '<span class="auth-sync-warn" title="' + escapeAuthText(cloudReasonText(_cloudLastError)) + '">⚠ '
-          + escapeAuthText(hvT('ui.cloud.notSynced')) + '</span>'
-        : '';
+      //
+      // An expired token is reported ahead of the sync error rather than beside it: it is
+      // the cause of every sync error that follows from it, and saying both would be the
+      // same fact twice with the useful half second.
+      const warn = !usable
+        ? '<span class="auth-sync-warn" title="' + escapeAuthText(hvT('ui.cloud.sessionStale')) + '">⚠ '
+          + escapeAuthText(hvT('ui.cloud.sessionExpired')) + '</span>'
+        : (_cloudLastError
+          ? '<span class="auth-sync-warn" title="' + escapeAuthText(cloudReasonText(_cloudLastError)) + '">⚠ '
+            + escapeAuthText(hvT('ui.cloud.notSynced')) + '</span>'
+          : '');
       el.innerHTML = photo + '<span class="auth-name">' + label + '</span>' + warn +
         '<button type="button" class="auth-out" onclick="signOutGoogle()">'
         + escapeAuthText(hvT('ui.cloud.signOut')) + '</button>';
+    } else if (id === 'ls-auth-status' && canSignIn && rememberedAccountLabel()) {
+      // Nobody is signed in, but this browser remembers who was. Saying so is what turns
+      // the generic Google button into one tap back into the same account — auto_select
+      // picks it — rather than an account chooser to work through again. Only on the level
+      // select: the HUD chip is for a session in progress.
+      el.innerHTML = '<span class="auth-remembered">'
+        + escapeAuthText(hvT('ui.cloud.continueAs', { account: rememberedAccountLabel() }))
+        + '</span>';
     } else {
       el.innerHTML = '';
     }
   });
   document.querySelectorAll('.google-signin-slot').forEach(el => {
-    el.classList.toggle('hidden', signed || !googleAuth.clientId);
+    el.classList.toggle('hidden', usable || !canSignIn);
   });
   const wrap = document.getElementById('ls-auth');
-  if (wrap) wrap.classList.toggle('hidden', !googleAuth.clientId && !signed);
+  if (wrap) wrap.classList.toggle('hidden', !canSignIn && !identified);
+  renderRememberToggle();
+}
+
+/** The switch that decides whether any of this survives the tab closing. Shown only when
+ *  there is a sign-in to remember — beside a retry button it would be a setting for a
+ *  feature that is not currently reachable. */
+function renderRememberToggle() {
+  if (typeof document === 'undefined') return;
+  const box = document.getElementById('ls-remember');
+  if (box) box.classList.toggle('hidden', !googleAuth.clientId);
+  const input = document.getElementById('ls-remember-input');
+  if (input) input.checked = rememberSignIn();
+}
+
+// Nothing to sign in with and nothing that asks again is the one state this row must never
+// settle into, and there were two ways into it: the config request never answering, and the
+// Google script never arriving. Both left a level select with no sign-in on it at all, for
+// the rest of the visit, and nothing anywhere that retried.
+function showAuthRetryButton() {
+  if (typeof document === 'undefined' || !document.querySelectorAll) return;
+  document.querySelectorAll('.google-signin-slot').forEach(el => {
+    el.innerHTML = '<button type="button" class="auth-retry" onclick="retryGoogleAuth()">'
+      + escapeAuthText(hvT('ui.cloud.signInRetry')) + '</button>';
+    el.classList.remove('hidden');
+  });
+  const wrap = document.getElementById('ls-auth');
+  if (wrap) wrap.classList.remove('hidden');
+}
+
+let _authRetrying = false;
+async function retryGoogleAuth() {
+  if (_authRetrying) return;
+  _authRetrying = true;
+  if (typeof document !== 'undefined' && document.querySelectorAll) {
+    document.querySelectorAll('.google-signin-slot').forEach(el => { el.innerHTML = ''; });
+  }
+  // Let the script be requested again — but only if it genuinely is not here. The retry is
+  // also reachable when the config was the thing that failed, and a second <script> tag for
+  // a library that already loaded is one more thing to go wrong.
+  const gisHere = typeof window !== 'undefined' && window.google
+    && window.google.accounts && window.google.accounts.id;
+  if (!gisHere) _gisRequested = false;
+  googleAuth.configFailed = false;
+  try { await initGoogleAuth(); } finally { _authRetrying = false; }
 }
 
 function onGoogleCredential(resp) {
@@ -1464,10 +1701,17 @@ function onGoogleCredential(resp) {
 async function restoreGoogleSession() {
   if (getGoogleToken() && googleTokenIsFresh()) {
     renderAuthUI();
+    // Set the replacement going before this one runs out, rather than waiting for a save to
+    // discover the expiry an hour into the session.
+    scheduleTokenRenewal();
     syncCloudSave();
     return;
   }
   if (!hasGoogleSignIn()) { renderAuthUI(); return; }
+  // Paint what is already known before asking Google anything. The row is hidden in the
+  // markup and renewal can take the full eight seconds, so waiting for the answer to draw
+  // it meant the level select spent that time with no sign-in on it at all.
+  renderAuthUI();
   // onGoogleCredential has already stored the token and started the sync by the time a
   // successful renewal resolves, so there is nothing to do on that branch but stay quiet.
   const renewed = await renewGoogleToken();
@@ -1482,21 +1726,54 @@ function signOutGoogle() {
   if (typeof showToast === 'function') showToast(hvT('ui.cloud.signedOut'));
 }
 
+// The config request is the single gate on every sign-in in the game: no client id, no
+// button anywhere. One attempt with no retry meant a blip during the first seconds of a
+// load — the worst-served moment a page has — took the sign-in away for the whole visit.
+const AUTH_CONFIG_TRIES = 3;
+async function fetchAuthConfig() {
+  for (let i = 0; i < AUTH_CONFIG_TRIES; i++) {
+    try {
+      const r = await fetch('/api/config');
+      if (r.ok) return { reached: true, cfg: await r.json() };
+      // A build that serves no such endpoint is answering, not failing. The desktop shell is
+      // one, and offering it a retry would be offering to retry nothing.
+      if (r.status === 404) return { reached: true, cfg: null };
+    } catch (e) {}
+    if (i < AUTH_CONFIG_TRIES - 1) {
+      await new Promise(res => setTimeout(res, 400 * Math.pow(2, i)));
+    }
+  }
+  return { reached: false, cfg: null };
+}
+
+// Ten seconds of asking whether the Google script has landed.
+const GIS_POLL_MS = 250;
+const GIS_POLL_TRIES = 40;
+
 async function initGoogleAuth() {
   if (typeof IS_NODE !== 'undefined' && IS_NODE) return;
-  try {
-    const cfg = await fetch('/api/config').then(r => r.ok ? r.json() : null);
-    googleAuth.clientId = (cfg && cfg.googleClientId) || '';
-  } catch {
-    googleAuth.clientId = '';
-  }
+  const got = await fetchAuthConfig();
+  googleAuth.clientId = (got.cfg && got.cfg.googleClientId) || '';
+  googleAuth.configFailed = !got.reached;
   googleAuth.ready = true;
-  if (!googleAuth.clientId) { renderAuthUI(); return; }
+  if (!googleAuth.clientId) {
+    renderAuthUI();
+    if (googleAuth.configFailed) showAuthRetryButton();
+    return;
+  }
   try {
     const raw = localStorage.getItem(GOOGLE_USER_KEY);
     if (raw) googleAuth.user = JSON.parse(raw);
     googleAuth.token = getGoogleToken();
+    // Read once, here, rather than left at zero until the next sign-in. The renewal timer
+    // is scheduled off this, and a stored token whose expiry nobody had parsed could not be
+    // replaced before it died.
+    googleAuth.exp = googleAuth.token ? tokenExpiry(googleAuth.token) : 0;
   } catch {}
+  // Before the Google script is anywhere near ready. What is known about the session is
+  // already enough to paint the row, and leaving it hidden until GIS lands is how a slow
+  // connection came to look like a missing feature.
+  renderAuthUI();
   const boot = () => {
     if (!window.google || !google.accounts || !google.accounts.id) return false;
     try {
@@ -1507,8 +1784,15 @@ async function initGoogleAuth() {
         // account chooser in front of someone who has already chosen. With it false, every
         // renewal — at boot and mid-session — needed a tap, which is most of the reason a
         // sign-in never survived a restart. signOutGoogle's disableAutoSelect() is what
-        // turns it back off, so this cannot re-sign-in anyone who signed out.
-        auto_select: true,
+        // turns it back off, so this cannot re-sign-in anyone who signed out — and neither
+        // can it re-sign-in anyone who switched remembering off, which is why the switch
+        // is read here rather than assumed.
+        auto_select: rememberSignIn(),
+        // Chrome no longer lets One Tap read third-party cookies, so prompt() without this
+        // is refused before it reaches the player. Every quiet renewal in this file goes
+        // through prompt(), which makes this the difference between a sign-in that lasts
+        // and one that asks again every hour.
+        use_fedcm_for_prompt: true,
         cancel_on_tap_outside: true,
         ux_mode: 'popup'
       });
@@ -1522,6 +1806,10 @@ async function initGoogleAuth() {
           text: 'signin_with'
         });
       });
+      // The button exists now, so the row can say so. restoreGoogleSession repaints again
+      // once it knows what the session is; this is what covers the case where it does not
+      // get that far.
+      renderAuthUI();
       restoreGoogleSession();
     } catch (e) {
       console.warn('Google Sign-In init failed', e);
@@ -1532,7 +1820,16 @@ async function initGoogleAuth() {
   if (boot()) return;
   loadGoogleIdentityScript();
   let n = 0;
-  const t = setInterval(() => { if (boot() || ++n > 40) clearInterval(t); }, 250);
+  const t = setInterval(() => {
+    if (boot()) { clearInterval(t); return; }
+    if (++n <= GIS_POLL_TRIES) return;
+    clearInterval(t);
+    // Ten seconds and no Google script: blocked by an extension, or a connection that is
+    // not coming back on its own. Stopping quietly was the bug — it left the sign-in row
+    // empty for the rest of the visit with nothing on the page that would try again.
+    console.warn('Google Sign-In did not load — offering a retry.');
+    showAuthRetryButton();
+  }, GIS_POLL_MS);
 }
 
 // Google Identity Services, injected on demand rather than from a <script> tag in
@@ -1549,9 +1846,11 @@ function loadGoogleIdentityScript() {
   s.defer = true;
   s.onerror = () => {
     // Offline, or the domain is blocked. Cloud save is simply unavailable; local play
-    // is unaffected, so say nothing louder than a warning.
+    // is unaffected, so say nothing louder than a warning — but leave something on the row
+    // that will try again, because this is the state the player is stuck in otherwise.
     console.warn('Google Sign-In unavailable — playing with local save only.');
     renderAuthUI();
+    showAuthRetryButton();
   };
   document.head.appendChild(s);
 }
@@ -1560,6 +1859,10 @@ function loadGoogleIdentityScript() {
 if (typeof window !== 'undefined') {
   window.signOutGoogle = signOutGoogle;
   window.onGoogleCredential = onGoogleCredential;
+  // Both are reached from inline onclick/onchange handlers this file writes, so they have
+  // to be on window rather than only in module scope.
+  window.setRememberSignIn = setRememberSignIn;
+  window.retryGoogleAuth = retryGoogleAuth;
 }
 
 // Legacy aliases

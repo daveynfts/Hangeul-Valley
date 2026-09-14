@@ -784,6 +784,34 @@
       #ls-auth { justify-content: center; }
       #ls-auth .ls-auth-hint { display: none; }
     }
+    /* The switch that decides whether a sign-in survives the tab closing. Sits between the
+       explanation and the button, in the same muted voice as the hint: it is a setting, not
+       one of the two things on this row you might want to click. */
+    #ls-auth .ls-auth-remember {
+      order: -1;
+      display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; font-weight: 500;
+      color: rgba(232, 192, 122, 0.7); white-space: nowrap;
+    }
+    #ls-auth .ls-auth-remember.hidden { display: none !important; }
+    #ls-auth .ls-auth-remember input { accent-color: #e8c07a; cursor: pointer; margin: 0; }
+    @media (max-width: 560px) { #ls-auth .ls-auth-remember { display: none; } }
+    /* Names the account this browser last used, so the Google button beside it reads as a
+       way back to that account rather than a chooser to work through again. */
+    .auth-remembered {
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; font-weight: 600;
+      color: rgba(232, 192, 122, 0.82); max-width: 220px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    /* Shown in place of the Google button when the script or the config never arrived.
+       Deliberately looks like the sign-out button rather than like Google's: it is ours, and
+       it does something different. */
+    .auth-retry {
+      background: transparent; border: 1px solid rgba(232, 192, 122, 0.45);
+      color: #e8c07a; border-radius: 3px; padding: 6px 12px;
+      font-family: 'Be Vietnam Pro', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer;
+    }
+    .auth-retry:hover { background: rgba(232, 192, 122, 0.12); }
     #ls-auth-status, #hud-auth-status {
       display: flex; align-items: center; gap: 8px;
     }

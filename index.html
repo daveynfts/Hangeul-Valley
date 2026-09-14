@@ -22,6 +22,11 @@
     <div id="ls-auth" class="hidden">
       <div id="ls-auth-status"></div>
       <div class="google-signin-slot"></div>
+      <label id="ls-remember" class="ls-auth-remember hidden">
+        <input type="checkbox" id="ls-remember-input" checked
+               onchange="setRememberSignIn(this.checked)" />
+        <span data-i18n="ui.cloud.rememberMe">Stay signed in on this device</span>
+      </label>
       <div class="ls-auth-hint" data-i18n="ui.levelSelect.auth.keepYourProgressOn">Keep your progress on every device</div>
     </div>
     <div class="ls-grid" id="ls-grid">
