@@ -14,6 +14,7 @@
     "levels.json",
     "worlds/2b-unit-10.json",
     "worlds/2b-unit-11.json",
+    "worlds/2b-unit-12.json",
     "worlds/2b-unit-13.json",
     "worlds/2b-unit-14.json",
     "worlds/2b-unit-15.json",

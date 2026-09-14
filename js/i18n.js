@@ -450,8 +450,9 @@ function hvCatalogsReady() {
 // neither of them can run the game to find out what it fetched.
 const HV_CATALOG_SOURCES = [
   'levels.json',
-  'worlds/2b-unit-10.json', 'worlds/2b-unit-11.json', 'worlds/2b-unit-13.json',
-  'worlds/2b-unit-14.json', 'worlds/2b-unit-15.json', 'worlds/topik-2.json',
+  'worlds/2b-unit-10.json', 'worlds/2b-unit-11.json', 'worlds/2b-unit-12.json',
+  'worlds/2b-unit-13.json', 'worlds/2b-unit-14.json', 'worlds/2b-unit-15.json',
+  'worlds/topik-2.json',
   'worlds/unit10-workbook.json', 'worlds/unit10-textbook.json',
   'worlds/unit11-workbook.json', 'worlds/unit11-textbook.json', 'worlds/unit13-workbook.json', 'worlds/unit13-textbook.json',
   'worlds/unit14-workbook.json', 'worlds/unit14-textbook.json',

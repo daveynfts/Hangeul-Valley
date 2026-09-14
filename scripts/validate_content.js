@@ -146,7 +146,7 @@ check('no two headwords share an English gloss', sharedGlosses.length === 0,
   // Every list, not just the valley packs: the units and the TOPIK bank are where most of
   // these sentences came from and where a bad one would be seen first.
   const everyWord = words.slice();
-  ['2b-unit-10', '2b-unit-11', '2b-unit-13', '2b-unit-14', '2b-unit-15', 'topik-2']
+  ['2b-unit-10', '2b-unit-11', '2b-unit-12', '2b-unit-13', '2b-unit-14', '2b-unit-15', 'topik-2']
     .forEach((id) => {
       const doc = JSON.parse(read(path.join('worlds', id + '.json')));
       (((doc || {}).level || {}).words || []).forEach((w) => everyWord.push(w));
@@ -1215,6 +1215,72 @@ const overlayIds = [
 // ── 2B Unit 13 (주변이 조용해서 살기 좋아요) ─────────────────────────────────
 // Same shape as Unit 11: the whole-chapter word list, the desk, and the cassette
 // player with the book's own recordings behind it.
+// ── 2B Unit 12 (저는 좀 조용한 편이에요) ──────────────────────────────────────
+// The chapter's own grammar point is 편이다, and the two 어휘 pages are 외모 and 성격, so
+// the words this unit teaches are the ones every other unit's 읽고 쓰기 reaches for when it
+// describes a person. Two of them were already taken — Unit 10 farms 키가 크다 and Unit 15
+// farms 생기다 in its other sense — and both absences are asserted below rather than left
+// to look like an oversight, together with the fact that the earlier unit still has them.
+(function checkUnit12World() {
+  const rel = path.join('worlds', '2b-unit-12.json');
+  if (!check(`${rel} exists`, fs.existsSync(path.join(ROOT, rel)))) return;
+  let world;
+  try { world = JSON.parse(read(rel)); } catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('2B Unit 12 has an id and a level',
+    !!(world.id === '2b-unit-12' && world.level && Array.isArray(world.level.words)));
+  const ww = world.level.words || [];
+  const missing = ww.filter((w) => !w.ko || !w.en || !w.category || !w.categoryEn).map((w) => w.ko || '?');
+  check('2B Unit 12 words have ko / en / category / categoryEn', missing.length === 0, missing.slice(0, 5).join(', '));
+  check('2B Unit 12 carries the whole-unit word list', ww.length === 140, `found ${ww.length}`);
+  const noHint = ww.filter((w) => !w.hint).map((w) => w.ko);
+  check('every Unit 12 word renders as a hint emoji until its icon is drawn',
+    noHint.length === 0, noHint.slice(0, 8).join(', '));
+  const want = ['외모', '성격', '미용실', '문법과 표현', '말하기', '읽고 쓰기', '과제', '문화와 발음'];
+  const cats = new Set(ww.map((w) => w.category));
+  check('2B Unit 12 has eight vocab groups, one per textbook section',
+    want.length === cats.size && want.every((c) => cats.has(c)), [...cats].join(', '));
+  const dups = ww.map((w) => w.ko).filter((k, i, a) => a.indexOf(k) !== i);
+  check('2B Unit 12 has no repeated headword', dups.length === 0, dups.join(', '));
+  const mine = new Set(ww.map((w) => w.ko));
+  ['2b-unit-10', '2b-unit-11', '2b-unit-13', '2b-unit-14', '2b-unit-15'].forEach((other) => {
+    const owned = new Set((JSON.parse(read(path.join('worlds', other + '.json'))).level.words || []).map((w) => w.ko));
+    const shared = ww.map((w) => w.ko).filter((ko) => owned.has(ko));
+    check(`2B Unit 12 shares no headword with ${other}`, shared.length === 0, shared.join(', '));
+  });
+  // The two the chapter prints and this farm deliberately does not own. Each is checked
+  // twice: that Unit 12 still leaves it alone, and that the unit it was left to still has
+  // it — so the day that one moves, this says so instead of quietly being satisfied.
+  const heldBy = (unit, ko) => (JSON.parse(read(path.join('worlds', unit + '.json'))).level.words || [])
+    .some((w) => w.ko === ko);
+  check('키가 크다 is left to Unit 10, which still farms it',
+    !mine.has('키가 크다') && heldBy('2b-unit-10', '키가 크다'));
+  check('생기다 is left to Unit 15, which still farms it in its other sense',
+    !mine.has('생기다') && heldBy('2b-unit-15', '생기다'));
+  // What is left in their place, so the chapter is not short of the thing it teaches.
+  check('Unit 12 still teaches both halves of the pair, as 커 보이다 and 키가 작다',
+    mine.has('커 보이다') && mine.has('키가 작다'));
+  check('and both of 생기다’s printed collocations',
+    mine.has('어떻게 생기다') && mine.has('인형같이 생기다'));
+  // The four grammar points are the chapter, not decoration on it.
+  ['A-아/어 보이다', 'N처럼', 'N같이', 'A-(으)ㄴ 편이다', 'V-는 편이다', 'A-게'].forEach((g) => {
+    check(`2B Unit 12 farms the grammar point ${g}`, mine.has(g));
+  });
+}());
+
+(function checkUnit12Wiring() {
+  const gameJs = readGameSource();
+  check('textbook load path lists Unit 12 JSON', gameJs.indexOf('worlds/2b-unit-12.json') >= 0);
+  check('farm preload cache key world-2b-12', gameJs.indexOf('world-2b-12') >= 0);
+  check('isUnit12World is declared and Unit-12-only',
+    /function isUnit12World\(\)[\s\S]{0,180}worldId === '2b-unit-12'/.test(gameJs));
+  check('Unit 12 is the basic farm plus the desk and the cassette player',
+    /'2b-unit-12': \{ extras: \[\], stations: \['desk', 'cassette'\] \}/.test(gameJs));
+  const ttsSrc = read(path.join('scripts', 'ttsClips.js'));
+  check('TTS harvest covers Unit 12', ttsSrc.indexOf('worlds/2b-unit-12.json') >= 0);
+  const i18nSrc = read(path.join('js', 'i18n.js'));
+  check('Unit 12 is a translatable source', i18nSrc.indexOf("'worlds/2b-unit-12.json'") >= 0);
+}());
+
 (function checkUnit13World() {
   const rel = path.join('worlds', '2b-unit-13.json');
   if (!check(`${rel} exists`, fs.existsSync(path.join(ROOT, rel)))) return;

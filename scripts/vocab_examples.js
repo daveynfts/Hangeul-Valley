@@ -599,6 +599,7 @@ function score(sentence, wordUnit, headword) {
 const WORD_FILES = [
   { rel: 'worlds/2b-unit-10.json', unit: '2b-unit-10', label: 'Unit 10' },
   { rel: 'worlds/2b-unit-11.json', unit: '2b-unit-11', label: 'Unit 11' },
+  { rel: 'worlds/2b-unit-12.json', unit: '2b-unit-12', label: 'Unit 12' },
   { rel: 'worlds/2b-unit-13.json', unit: '2b-unit-13', label: 'Unit 13' },
   { rel: 'worlds/2b-unit-14.json', unit: '2b-unit-14', label: 'Unit 14' },
   { rel: 'worlds/2b-unit-15.json', unit: '2b-unit-15', label: 'Unit 15' },

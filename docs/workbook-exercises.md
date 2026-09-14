@@ -658,6 +658,87 @@ desk shipped with only a quiz and a tape. It now asserts the opposite, that `wor
 resolves the unit and the file it names exists, because the pairing is what matters: a bank on
 disk that nothing claims means the desk quietly serves the fallback unit's exercises.
 
+## Unit 12, a word list that had to give three headwords back
+
+`worlds/2b-unit-12.json`: 140 words in eight groups, one per printed section. The chapter
+is 저는 좀 조용한 편이에요 — a face on p.70, a personality on p.71, a hair salon on p.80 —
+and describing people is what every *other* unit reaches for too, so this is the first word
+list where the collisions were the work rather than a footnote.
+
+SRS state is keyed by the Korean. A headword owned by two farms is **one review schedule
+shared between them**, with nothing on screen to say so, and the rule has been that the
+earlier unit keeps it. Unit 12 loses three that its own 어휘 pages print:
+
+- **키가 크다** — Unit 10 farms it, off its 문법과 표현 page.
+- **생기다** — Unit 15 farms it, meaning *to come into being*. Unit 12 means *to look*.
+  Same spelling, different word, one schedule.
+- **어리다** — Unit 14 farms it, and it is on Unit 12's 자기 평가 checklist.
+
+Absence is indistinguishable from an oversight, so each one is written down twice in
+`tests/test_unit12_world.js`: that Unit 12 still leaves it alone, **and that the unit it
+was left to still has it**. A line that only checked the absence would pass on the day the
+word was dropped from both. Nineteen words are deferred that way in all, listed per unit.
+
+The other half of the rule is that giving a word up cannot cost the chapter the thing it
+teaches. 키가 크다 is half of a printed pair, and the 보기 under it is 키가 커 보여요 — so the
+tall half survives as **커 보이다**, and the test asserts that too. 생기다 never appears bare
+in 12과: it is 어떻게 생겼어요 and 인형같이 생겼어요, and both collocations are headwords.
+
+### The example gate is the repo's, and it is deliberately conservative
+
+`scripts/vocab_examples.js` `sentenceUses()` is what `validate_content.js` runs over every
+word list in CI, so it is the only opinion that matters — writing a second one in a builder
+just moves the disagreement. It refuses more than it has to:
+
+- `surfaceForms()` stops early on a one-syllable open stem, because 가, 시, 쓰 and 하 sit
+  inside too much of the language. So 하다, 주다, 보다 and 크다 generate only the 아/어
+  family — 해요, 줘요, 봐요, 커요 — and a sentence with 하는, 줄까요, 볼래요 or 큰 is
+  unprovable however plainly it uses the word.
+- The ㅂ irregular is applied where it does not belong: 뽑다 yields 뽀워요 and 입다 yields
+  이워요, so 뽑아 보세요 and 예쁘게 입었어요 do not match either.
+- Every whitespace-separated part of a phrase headword has to be present, particle and all.
+  앞머리를 다듬다 is not proven by 앞머리는 조금만 다듬어 주세요.
+
+The repo already answers this and the answer is on disk: **a row it cannot verify carries
+no example at all**. Unit 14's 야단(을) 맞다 is bare; so is every one of Unit 15's grammar
+labels. Unit 12 ships 68 examples of 140 words for that reason, and the six grammar labels
+(A-아/어 보이다, N처럼, N같이, A-(으)ㄴ 편이다, V-는 편이다, A-게) are asserted to have none —
+a form is not a word, and a sentence beside it illustrates whichever adjective was picked.
+
+### Wiring a world, which is not the same list as wiring a bank
+
+A bank needs the five places in "The order to do it in". A **world** — a farm with its own
+word list — needs these, and a missing one fails by never mentioning the unit:
+
+| file | what it is |
+|---|---|
+| `js/systems/economy.js` | `isUnit12World()`, a `WORLD_PACKS` entry, the desk-art branch, and `TEXTBOOK_WORLD_FILES` |
+| `js/i18n.js` | `HV_CATALOG_SOURCES`, or the unit ships in English at 100% coverage |
+| `scripts/ttsClips.js` | the harvest list, or no word gets a clip |
+| `scripts/vocab_examples.js` | `WORD_FILES`, or the example picker cannot see the unit |
+| `admin/lib/i18n.js` | a translator-facing label, or the tab shows a file stem |
+| `admin/lib/content.js`, `admin/public/js/world.js` | the world picker and the word-list editor |
+| `scripts/validate_content.js` | its own world + wiring block, and the unit id in the example sweep |
+| `README.md` | the world count and the total word count, which `checkReadmeCounts` pins |
+
+`js/scenes/farm.js` is **not** on that list and must stay off it: it walks
+`TEXTBOOK_WORLD_FILES` for both the preload and the attach, so naming a world there a
+second time is how the two lists drift apart.
+
+One trap worth knowing before it costs an hour. The desk-art branch in `economy.js` is
+matched by a regex in `validate_content.js` that allows no newline inside the condition:
+
+```js
+const branches = [...gameJs.matchAll(/if \((id === '2b-unit-[0-9]+'(?: \|\| id === '2b-unit-[0-9]+')*)\) \{\s*return \[([\s\S]*?)\];/g)];
+```
+
+Wrapping that condition onto two lines — the obvious thing to do once it holds five unit
+ids — makes the branch invisible to the matcher, and what fails is **a check about Unit
+11**: "Unit 11 loads the study desk art and nothing else, 1 art branches, 0 desk-only". The
+line stays long.
+
+---
+
 ---
 
 ## The order to do it in

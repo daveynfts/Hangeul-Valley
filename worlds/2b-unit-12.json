@@ -1,0 +1,1191 @@
+{
+  "id": "2b-unit-12",
+  "pack": "snu-2b",
+  "source": "Seoul National University Korean 2B, Unit 12",
+  "title": "2B Unit 12",
+  "titleKo": "12과 저는 좀 조용한 편이에요",
+  "icon": "🙂",
+  "pages": "Unit 12",
+  "level": {
+    "level": "2B-12",
+    "name": "저는 좀 조용한 편이에요",
+    "nameEn": "2B Unit 12 · I am a little on the quiet side",
+    "icon": "🙂",
+    "description": "Farm the Unit 12 word list — faces, personalities, the hair salon, and how to say someone looks a certain way.",
+    "descriptionEn": "Basic farm plus the study desk. Every word the textbook teaches in 12과 저는 좀 조용한 편이에요, from 어휘 through 문화 산책. Icons and minigames come later.",
+    "world": true,
+    "pack": "snu-2b",
+    "worldId": "2b-unit-12",
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk",
+        "cassette"
+      ]
+    },
+    "target": 9,
+    "words": [
+      {
+        "ko": "외모",
+        "en": "appearance",
+        "hint": "👤",
+        "category": "외모",
+        "categoryEn": "Appearance",
+        "example": "사진에 있는 사람의 외모와 성격에 대해서 자세히 설명하세요.",
+        "exampleEn": "Describe in detail the appearance and the personality of the person in the photo."
+      },
+      {
+        "ko": "눈이 크다",
+        "en": "to have big eyes",
+        "hint": "👁️",
+        "category": "외모",
+        "categoryEn": "Appearance",
+        "example": "우리 둘 다 이마가 넓고 눈이 커서 그런 것 같아.",
+        "exampleEn": "I think it is because we both have wide foreheads and big eyes."
+      },
+      {
+        "ko": "눈이 작다",
+        "en": "to have small eyes",
+        "hint": "👁️",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "눈썹이 진하다",
+        "en": "to have thick eyebrows",
+        "hint": "🤨",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "눈썹이 연하다",
+        "en": "to have thin eyebrows",
+        "hint": "😌",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "쌍꺼풀이 있다",
+        "en": "to have double eyelids",
+        "hint": "👀",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "쌍꺼풀이 없다",
+        "en": "to not have double eyelids",
+        "hint": "😑",
+        "category": "외모",
+        "categoryEn": "Appearance",
+        "example": "쌍꺼풀이 없고 좀 작은 편이에요.",
+        "exampleEn": "She has no double eyelids, and they are a little on the small side."
+      },
+      {
+        "ko": "코가 높다",
+        "en": "to have a high nose",
+        "hint": "👃",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "코가 낮다",
+        "en": "to have a flat nose",
+        "hint": "👃",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "입이 크다",
+        "en": "to have a wide mouth",
+        "hint": "👄",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "입이 작다",
+        "en": "to have a small mouth",
+        "hint": "👄",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "입술이 두껍다",
+        "en": "to have thick lips",
+        "hint": "💋",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "입술이 얇다",
+        "en": "to have thin lips",
+        "hint": "💋",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "이마가 넓다",
+        "en": "to have a wide forehead",
+        "hint": "🙂",
+        "category": "외모",
+        "categoryEn": "Appearance",
+        "example": "우리 둘 다 이마가 넓고 눈이 커서 그런 것 같아.",
+        "exampleEn": "I think it is because we both have wide foreheads and big eyes."
+      },
+      {
+        "ko": "이마가 좁다",
+        "en": "to have a narrow forehead",
+        "hint": "🙂",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "어깨가 넓다",
+        "en": "to have broad shoulders",
+        "hint": "🧍",
+        "category": "외모",
+        "categoryEn": "Appearance",
+        "example": "저는 어깨가 넓은 남자를 좋아해요.",
+        "exampleEn": "I like men with broad shoulders."
+      },
+      {
+        "ko": "어깨가 좁다",
+        "en": "to have narrow shoulders",
+        "hint": "🧍",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "키가 작다",
+        "en": "to be short",
+        "hint": "📏",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "얼굴",
+        "en": "face",
+        "hint": "😀",
+        "category": "외모",
+        "categoryEn": "Appearance",
+        "example": "언니하고 얼굴도 닮은 것 같아요.",
+        "exampleEn": "Your face looks like your older sister’s, too."
+      },
+      {
+        "ko": "날씬하다",
+        "en": "to be slim",
+        "hint": "🩰",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "뚱뚱하다",
+        "en": "to be fat",
+        "hint": "🧸",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "마르다",
+        "en": "to be skinny",
+        "hint": "🍂",
+        "category": "외모",
+        "categoryEn": "Appearance",
+        "example": "제 동생은 좀 마른 편이에요.",
+        "exampleEn": "My younger sibling is a little on the skinny side."
+      },
+      {
+        "ko": "멋있다",
+        "en": "to be good-looking; to be stylish",
+        "hint": "😎",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "똑똑하다",
+        "en": "to be smart",
+        "hint": "🧠",
+        "category": "외모",
+        "categoryEn": "Appearance"
+      },
+      {
+        "ko": "성격",
+        "en": "personality",
+        "hint": "🧩",
+        "category": "성격",
+        "categoryEn": "Personality",
+        "example": "유진 씨는 성격이 어때요?",
+        "exampleEn": "What is Yujin like?"
+      },
+      {
+        "ko": "활발하다",
+        "en": "to be active; to be outgoing",
+        "hint": "🎉",
+        "category": "성격",
+        "categoryEn": "Personality",
+        "example": "나는 활발한 성격인데 내 친구는 내성적이야.",
+        "exampleEn": "I have an outgoing personality, but my friend is introverted."
+      },
+      {
+        "ko": "내성적이다",
+        "en": "to be introverted; to be reserved",
+        "hint": "📖",
+        "category": "성격",
+        "categoryEn": "Personality"
+      },
+      {
+        "ko": "꼼꼼하다",
+        "en": "to be meticulous; to be detailed",
+        "hint": "🔍",
+        "category": "성격",
+        "categoryEn": "Personality",
+        "example": "꼼꼼한 것 같아요.",
+        "exampleEn": "She seems meticulous."
+      },
+      {
+        "ko": "남성적이다",
+        "en": "to be masculine",
+        "hint": "🥋",
+        "category": "성격",
+        "categoryEn": "Personality",
+        "example": "우리 형은 성격이 급하고 남성적인 편이에요.",
+        "exampleEn": "My older brother is hasty and on the masculine side."
+      },
+      {
+        "ko": "여성적이다",
+        "en": "to be feminine",
+        "hint": "🎀",
+        "category": "성격",
+        "categoryEn": "Personality",
+        "example": "여성적이고 조용한 편이에요.",
+        "exampleEn": "She is feminine and on the quiet side."
+      },
+      {
+        "ko": "성격이 급하다",
+        "en": "to be hasty",
+        "hint": "⏳",
+        "category": "성격",
+        "categoryEn": "Personality"
+      },
+      {
+        "ko": "조용하다",
+        "en": "to be quiet",
+        "hint": "🤫",
+        "category": "성격",
+        "categoryEn": "Personality",
+        "example": "제가 좀 조용한 편이라서 활발한 사람이 좋아요.",
+        "exampleEn": "I am on the quiet side, so I like outgoing people."
+      },
+      {
+        "ko": "친절하게 도와주다",
+        "en": "to help kindly",
+        "hint": "🤝",
+        "category": "성격",
+        "categoryEn": "Personality",
+        "example": "켈리 씨는 다른 사람들을 항상 친절하게 도와줘요.",
+        "exampleEn": "Kelly always helps other people kindly."
+      },
+      {
+        "ko": "말이 없다",
+        "en": "to be a person of few words",
+        "hint": "🤐",
+        "category": "성격",
+        "categoryEn": "Personality"
+      },
+      {
+        "ko": "성격이 좋다",
+        "en": "to have a good nature",
+        "hint": "😊",
+        "category": "성격",
+        "categoryEn": "Personality"
+      },
+      {
+        "ko": "이상형",
+        "en": "ideal type",
+        "hint": "💘",
+        "category": "성격",
+        "categoryEn": "Personality",
+        "example": "켈리 씨의 이상형은 어떤 사람이에요?",
+        "exampleEn": "What sort of person is Kelly’s ideal type?"
+      },
+      {
+        "ko": "분위기를 편하게 만들다",
+        "en": "to make the mood relaxed",
+        "hint": "🌤️",
+        "category": "성격",
+        "categoryEn": "Personality"
+      },
+      {
+        "ko": "미용실",
+        "en": "hair salon",
+        "hint": "💇",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "한국에서 미용실에 가 봤습니까?",
+        "exampleEn": "Have you been to a hair salon in Korea?"
+      },
+      {
+        "ko": "머리 모양",
+        "en": "hairstyle",
+        "hint": "💁",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "마리코는 머리 모양을 바꿨습니다.",
+        "exampleEn": "Mariko changed her hairstyle."
+      },
+      {
+        "ko": "머리를 자르다",
+        "en": "to cut one’s hair",
+        "hint": "✂️",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "머리를 좀 잘라 주세요.",
+        "exampleEn": "Please cut my hair a bit."
+      },
+      {
+        "ko": "자르다",
+        "en": "to cut",
+        "hint": "🔪",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "네, 더워서 짧게 잘랐어요.",
+        "exampleEn": "Yes, it was hot, so I cut it short."
+      },
+      {
+        "ko": "파마를 하다",
+        "en": "to perm",
+        "hint": "💈",
+        "category": "미용실",
+        "categoryEn": "At the hair salon"
+      },
+      {
+        "ko": "앞머리를 다듬다",
+        "en": "to trim one’s bangs",
+        "hint": "✂️",
+        "category": "미용실",
+        "categoryEn": "At the hair salon"
+      },
+      {
+        "ko": "염색을 하다",
+        "en": "to dye one’s hair",
+        "hint": "🎨",
+        "category": "미용실",
+        "categoryEn": "At the hair salon"
+      },
+      {
+        "ko": "앞머리",
+        "en": "bangs",
+        "hint": "💇",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "앞머리도 좀 잘라 드릴까요?",
+        "exampleEn": "Shall I cut your bangs a bit as well?"
+      },
+      {
+        "ko": "다듬다",
+        "en": "to trim",
+        "hint": "🪒",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "많이 자르지 말고 조금만 다듬어 주세요.",
+        "exampleEn": "Do not cut much — just trim it a little."
+      },
+      {
+        "ko": "길이",
+        "en": "length",
+        "hint": "📐",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "길이는 어떻게 해 드릴까요?",
+        "exampleEn": "How would you like the length?"
+      },
+      {
+        "ko": "파마머리",
+        "en": "permed hair",
+        "hint": "🌀",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "파마머리가 저한테 어울릴까요?",
+        "exampleEn": "Would permed hair suit me?"
+      },
+      {
+        "ko": "미용사",
+        "en": "hairdresser",
+        "hint": "💇‍♀️",
+        "category": "미용실",
+        "categoryEn": "At the hair salon"
+      },
+      {
+        "ko": "긴 머리",
+        "en": "long hair",
+        "hint": "👩",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "긴 머리가 무거워 보여서 좀 자르고 싶은데요.",
+        "exampleEn": "My long hair looks heavy, so I would like to cut it a bit."
+      },
+      {
+        "ko": "짧은 머리",
+        "en": "short hair",
+        "hint": "👦",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "짧은 머리가 잘 어울리네요.",
+        "exampleEn": "Short hair really suits you."
+      },
+      {
+        "ko": "기분 전환",
+        "en": "a change of mood",
+        "hint": "🔄",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "여러분은 기분 전환을 하고 싶을 때 무엇을 합니까?",
+        "exampleEn": "What do you do when you want a change of mood?"
+      },
+      {
+        "ko": "기분을 바꾸다",
+        "en": "to change one’s mood",
+        "hint": "🔃",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "네, 기분을 바꿔 보려고 머리를 잘랐어요.",
+        "exampleEn": "Yes, I cut my hair to change my mood."
+      },
+      {
+        "ko": "잘 어울리다",
+        "en": "to suit someone well",
+        "hint": "👍",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "짧은 머리가 잘 어울리네요.",
+        "exampleEn": "Short hair really suits you."
+      },
+      {
+        "ko": "소개해 주다",
+        "en": "to tell someone about; to introduce",
+        "hint": "🙋",
+        "category": "미용실",
+        "categoryEn": "At the hair salon"
+      },
+      {
+        "ko": "값이 비싸다",
+        "en": "to be pricey",
+        "hint": "💰",
+        "category": "미용실",
+        "categoryEn": "At the hair salon",
+        "example": "마리코가 간 미용실은 값이 비싼 편입니다.",
+        "exampleEn": "The salon Mariko went to is on the pricey side."
+      },
+      {
+        "ko": "예약을 하다",
+        "en": "to make a booking",
+        "hint": "🗓️",
+        "category": "미용실",
+        "categoryEn": "At the hair salon"
+      },
+      {
+        "ko": "시간이 걸리다",
+        "en": "to take time",
+        "hint": "⏱️",
+        "category": "미용실",
+        "categoryEn": "At the hair salon"
+      },
+      {
+        "ko": "A-아/어 보이다",
+        "en": "to look ~; to seem ~",
+        "hint": "👀",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "좋아 보이다",
+        "en": "to look happy; to look well",
+        "hint": "😃",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "스티븐 씨, 오늘 기분이 아주 좋아 보이네요.",
+        "exampleEn": "Steven, you look in a really good mood today."
+      },
+      {
+        "ko": "편해 보이다",
+        "en": "to look comfortable",
+        "hint": "👟",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "저 신발이 편해 보여요.",
+        "exampleEn": "Those shoes look comfortable."
+      },
+      {
+        "ko": "무거워 보이다",
+        "en": "to look heavy",
+        "hint": "🎒",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "가방이 무거워 보이는데 제가 들어 드릴까요?",
+        "exampleEn": "Your bag looks heavy — shall I carry it for you?"
+      },
+      {
+        "ko": "커 보이다",
+        "en": "to look tall; to look big",
+        "hint": "📏",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "그 구두를 신으니까 키가 커 보여요.",
+        "exampleEn": "Those shoes make you look tall."
+      },
+      {
+        "ko": "어려 보이다",
+        "en": "to look young",
+        "hint": "🧒",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "시원해 보이다",
+        "en": "to look cool and fresh",
+        "hint": "🍧",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "그렇게 자르니까 시원해 보여요.",
+        "exampleEn": "Cutting it like that makes you look cool and fresh."
+      },
+      {
+        "ko": "즐거워 보이다",
+        "en": "to look like you are enjoying yourself",
+        "hint": "🎈",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "참 즐거워 보여요.",
+        "exampleEn": "You look like you were really enjoying yourselves."
+      },
+      {
+        "ko": "피곤해 보이다",
+        "en": "to look tired",
+        "hint": "😪",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "왜 이렇게 피곤해 보여요?",
+        "exampleEn": "Why do you look so tired?"
+      },
+      {
+        "ko": "N처럼",
+        "en": "like N; the way N does",
+        "hint": "🔁",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "N같이",
+        "en": "just like N — the book prints the two together",
+        "hint": "🔂",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "어떻게 생기다",
+        "en": "to look a certain way",
+        "hint": "🎭",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "눈이 어떻게 생겼어요?",
+        "exampleEn": "What do the eyes look like?"
+      },
+      {
+        "ko": "인형같이 생기다",
+        "en": "to look like a doll",
+        "hint": "🎎",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "나나 씨는 인형같이 생겼어요.",
+        "exampleEn": "Nana looks like a doll."
+      },
+      {
+        "ko": "인형",
+        "en": "doll",
+        "hint": "🧸",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "모델",
+        "en": "model",
+        "hint": "💃",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "수영 선수",
+        "en": "swimmer",
+        "hint": "🏊",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "요리사",
+        "en": "cook; chef",
+        "hint": "👨‍🍳",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "가수",
+        "en": "singer",
+        "hint": "🎤",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "A-(으)ㄴ 편이다",
+        "en": "to be on the ~ side",
+        "hint": "⚖️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "V-는 편이다",
+        "en": "to tend to ~",
+        "hint": "⚖️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "사람이 많다",
+        "en": "to be crowded",
+        "hint": "👥",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "이 식당은 사람이 많은 편이에요.",
+        "exampleEn": "This restaurant is on the crowded side."
+      },
+      {
+        "ko": "A-게",
+        "en": "in a ~ way (adverb form)",
+        "hint": "➡️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "예쁘게 입다",
+        "en": "to dress up nicely",
+        "hint": "👗",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "재미있게 놀다",
+        "en": "to have a fun time",
+        "hint": "🎊",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "주말에 친구들과 재미있게 놀았어요.",
+        "exampleEn": "I had a fun time with friends at the weekend."
+      },
+      {
+        "ko": "즐겁게 공부하다",
+        "en": "to study happily",
+        "hint": "📗",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "친구들이 재미있어서 아주 즐겁게 공부하고 있어요.",
+        "exampleEn": "My classmates are fun, so I am studying very happily."
+      },
+      {
+        "ko": "시간을 지키다",
+        "en": "to be on time; to keep to a time",
+        "hint": "⌚",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "정확하다",
+        "en": "to be accurate",
+        "hint": "🎯",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "글씨",
+        "en": "handwriting",
+        "hint": "✍️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "귀엽다",
+        "en": "to be cute",
+        "hint": "🐣",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "늦게 오다",
+        "en": "to come late",
+        "hint": "🐌",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "자매",
+        "en": "sisters",
+        "hint": "👭",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "자매처럼 지내다",
+        "en": "to be like sisters",
+        "hint": "👯",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types",
+        "example": "어릴 때부터 자매처럼 지냈어.",
+        "exampleEn": "We have been like sisters since we were little."
+      },
+      {
+        "ko": "닮다",
+        "en": "to resemble; to take after",
+        "hint": "🧬",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types",
+        "example": "언니하고 얼굴도 닮은 것 같아요.",
+        "exampleEn": "You look like your older sister, too."
+      },
+      {
+        "ko": "친한 친구",
+        "en": "a close friend",
+        "hint": "🫂",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types",
+        "example": "제일 친한 친구예요.",
+        "exampleEn": "She is my closest friend."
+      },
+      {
+        "ko": "졸업식",
+        "en": "graduation ceremony",
+        "hint": "🎓",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "행복하다",
+        "en": "to be happy",
+        "hint": "🥰",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "즐겁다",
+        "en": "to be enjoyable; to be fun",
+        "hint": "😄",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "크리스마스",
+        "en": "Christmas",
+        "hint": "🎄",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types",
+        "example": "응, 작년 크리스마스 때 찍었어.",
+        "exampleEn": "Yeah, I took it last Christmas."
+      },
+      {
+        "ko": "성격이 비슷하다",
+        "en": "to have similar personalities",
+        "hint": "🧩",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "성격이 다르다",
+        "en": "to have a different personality",
+        "hint": "↔️",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "머리 모양이 비슷하다",
+        "en": "to have similar hairstyles",
+        "hint": "💇",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "안경을 쓰다",
+        "en": "to wear glasses",
+        "hint": "👓",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "말을 재미있게 하다",
+        "en": "to tell things in a fun way",
+        "hint": "😂",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "만나 보다",
+        "en": "to meet someone and see",
+        "hint": "🤝",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "연락(을) 주다",
+        "en": "to get in touch",
+        "hint": "📞",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "회사원",
+        "en": "office worker",
+        "hint": "🧑‍💼",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types",
+        "example": "아니요, 회사원이에요.",
+        "exampleEn": "No, he is an office worker."
+      },
+      {
+        "ko": "한국 생활",
+        "en": "life in Korea",
+        "hint": "🇰🇷",
+        "category": "말하기",
+        "categoryEn": "Speaking · photos and ideal types"
+      },
+      {
+        "ko": "새롭다",
+        "en": "to be new",
+        "hint": "✨",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test",
+        "example": "새로운 사람을 만나는 것이 재미있습니다.",
+        "exampleEn": "Meeting new people is fun."
+      },
+      {
+        "ko": "제스처",
+        "en": "gesture",
+        "hint": "🙌",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test",
+        "example": "말할 때 제스처가 큰 편입니다.",
+        "exampleEn": "I tend to gesture a lot when I talk."
+      },
+      {
+        "ko": "표현하다",
+        "en": "to express",
+        "hint": "🗣️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test",
+        "example": "내 생각을 사람들에게 표현하는 것을 좋아합니다.",
+        "exampleEn": "I like expressing my thoughts to people."
+      },
+      {
+        "ko": "외롭다",
+        "en": "to be lonely",
+        "hint": "🕯️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test",
+        "example": "혼자 오랫동안 일하면 외롭고 심심합니다.",
+        "exampleEn": "Working alone for a long time makes me lonely and bored."
+      },
+      {
+        "ko": "오랫동안",
+        "en": "for a long time",
+        "hint": "⏳",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test"
+      },
+      {
+        "ko": "목소리가 크다",
+        "en": "to have a loud voice",
+        "hint": "📢",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test"
+      },
+      {
+        "ko": "정리(를) 하다",
+        "en": "to organize; to sort out",
+        "hint": "🗂️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test"
+      },
+      {
+        "ko": "스트레스가 쌓이다",
+        "en": "to get stressed",
+        "hint": "😫",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test",
+        "example": "문제가 있거나 스트레스가 쌓일 때 혼자 시간을 보냅니다.",
+        "exampleEn": "When I have a problem or get stressed, I spend time alone."
+      },
+      {
+        "ko": "속마음",
+        "en": "inner thoughts",
+        "hint": "💭",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test",
+        "example": "속마음을 잘 표현하지 않습니다.",
+        "exampleEn": "They do not express their inner thoughts easily."
+      },
+      {
+        "ko": "실수를 하다",
+        "en": "to make a mistake",
+        "hint": "😬",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test"
+      },
+      {
+        "ko": "말이 많다",
+        "en": "to talk a lot",
+        "hint": "💬",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test",
+        "example": "E형을 보고 말이 많은 사람이라고 생각합니다.",
+        "exampleEn": "They see E types as people who talk a lot."
+      },
+      {
+        "ko": "혼자 시간을 보내다",
+        "en": "to spend time alone",
+        "hint": "🧘",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test"
+      },
+      {
+        "ko": "E형",
+        "en": "the E (extraversion) type",
+        "hint": "🎤",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test",
+        "example": "E형을 보고 말이 많은 사람이라고 생각합니다.",
+        "exampleEn": "They see E types as people who talk a lot."
+      },
+      {
+        "ko": "I형",
+        "en": "the I (introversion) type",
+        "hint": "📕",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test",
+        "example": "I형을 보고 마음을 잘 알 수 없는 사람이라고 생각합니다.",
+        "exampleEn": "They see I types as people whose feelings are hard to read."
+      },
+      {
+        "ko": "좋아하는 것",
+        "en": "the things you like",
+        "hint": "❤️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test"
+      },
+      {
+        "ko": "싫어하는 것",
+        "en": "the things you dislike",
+        "hint": "💔",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · the E/I personality test"
+      },
+      {
+        "ko": "묘사하다",
+        "en": "to describe",
+        "hint": "🖍️",
+        "category": "과제",
+        "categoryEn": "Task · describing a person",
+        "example": "사진을 보고 외모와 성격을 묘사해 보세요.",
+        "exampleEn": "Look at the photo and describe the appearance and the personality."
+      },
+      {
+        "ko": "보통이다",
+        "en": "to be average",
+        "hint": "➖",
+        "category": "과제",
+        "categoryEn": "Task · describing a person"
+      },
+      {
+        "ko": "자세히",
+        "en": "in detail",
+        "hint": "🔬",
+        "category": "과제",
+        "categoryEn": "Task · describing a person"
+      },
+      {
+        "ko": "대학생처럼 보이다",
+        "en": "to look like a university student",
+        "hint": "🎓",
+        "category": "과제",
+        "categoryEn": "Task · describing a person",
+        "example": "이 사람은 여자인데 대학생처럼 보여요.",
+        "exampleEn": "This person is a woman, but she looks like a university student."
+      },
+      {
+        "ko": "기분 좋게 웃다",
+        "en": "to smile happily",
+        "hint": "😄",
+        "category": "과제",
+        "categoryEn": "Task · describing a person",
+        "example": "친절해 보여요. 지금 기분 좋게 웃고 있어요.",
+        "exampleEn": "She looks kind. She is smiling happily right now."
+      },
+      {
+        "ko": "그림을 그리다",
+        "en": "to draw a picture",
+        "hint": "🎨",
+        "category": "과제",
+        "categoryEn": "Task · describing a person"
+      },
+      {
+        "ko": "비교하다",
+        "en": "to compare",
+        "hint": "🔎",
+        "category": "과제",
+        "categoryEn": "Task · describing a person",
+        "example": "그림을 다 그린 후 사진과 그림을 비교해 보세요.",
+        "exampleEn": "When you have finished drawing, compare the photo with the drawing."
+      },
+      {
+        "ko": "뽑다",
+        "en": "to pick; to vote for",
+        "hint": "🗳️",
+        "category": "과제",
+        "categoryEn": "Task · describing a person"
+      },
+      {
+        "ko": "팀별로",
+        "en": "by team",
+        "hint": "👥",
+        "category": "과제",
+        "categoryEn": "Task · describing a person",
+        "example": "팀별로 모여서 사진을 설명해 줄 사람을 한 명 정하세요.",
+        "exampleEn": "Get into teams and choose one person to describe the photo."
+      },
+      {
+        "ko": "붕어빵",
+        "en": "fish-shaped bread; the spitting image of someone",
+        "hint": "🐟",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "너, 아버지하고 진짜 많이 닮았다. 완전히 붕어빵이네.",
+        "exampleEn": "You really take after your father — you are the spitting image of him."
+      },
+      {
+        "ko": "완전히",
+        "en": "completely",
+        "hint": "💯",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "연세",
+        "en": "age (honorific)",
+        "hint": "🎂",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "아버지는 연세보다 젊어 보이시고 키도 저와 비슷합니다.",
+        "exampleEn": "My father looks younger than his age, and he is about my height too."
+      },
+      {
+        "ko": "가족사진",
+        "en": "family photo",
+        "hint": "🖼️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "한국 친구가 제 가족사진을 보고 이렇게 말했습니다.",
+        "exampleEn": "A Korean friend looked at my family photo and said this."
+      },
+      {
+        "ko": "표현",
+        "en": "expression; turn of phrase",
+        "hint": "💬",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "아주 재미있는 표현인 것 같습니다.",
+        "exampleEn": "I think it is a very interesting expression."
+      },
+      {
+        "ko": "젊다",
+        "en": "to be young",
+        "hint": "🌱",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "형이 참 젊네요.",
+        "exampleEn": "Your brother looks so young."
+      },
+      {
+        "ko": "젊게 살다",
+        "en": "to live youthfully",
+        "hint": "🕺",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "부모",
+        "en": "parents",
+        "hint": "👪",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "아이는 부모를 닮는 것 같아요.",
+        "exampleEn": "Children seem to take after their parents."
+      },
+      {
+        "ko": "닮지 않다",
+        "en": "to not take after",
+        "hint": "🚫",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "동생과 저는 닮지 않았어요.",
+        "exampleEn": "My younger sibling and I do not look alike."
+      },
+      {
+        "ko": "받침 ㄻ",
+        "en": "the final cluster ㄻ",
+        "hint": "🔤",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "받침 ‘ㄻ’ 뒤에 자음이 오면 ‘ㅁ’만 발음됩니다.",
+        "exampleEn": "When a consonant follows the final ‘ㄻ’, only ‘ㅁ’ is pronounced."
+      }
+    ]
+  },
+  "notebook": {
+    "title": "Unit 12 · I am a little on the quiet side",
+    "groups": [
+      {
+        "ko": "외모",
+        "en": "Appearance",
+        "cat": "외모"
+      },
+      {
+        "ko": "성격",
+        "en": "Personality",
+        "cat": "성격"
+      },
+      {
+        "ko": "미용실",
+        "en": "At the hair salon",
+        "cat": "미용실"
+      },
+      {
+        "ko": "문법과 표현",
+        "en": "Grammar & expressions",
+        "cat": "문법과 표현"
+      },
+      {
+        "ko": "말하기",
+        "en": "Speaking · photos and ideal types",
+        "cat": "말하기"
+      },
+      {
+        "ko": "읽고 쓰기",
+        "en": "Reading · the E/I personality test",
+        "cat": "읽고 쓰기"
+      },
+      {
+        "ko": "과제",
+        "en": "Task · describing a person",
+        "cat": "과제"
+      },
+      {
+        "ko": "문화와 발음",
+        "en": "Culture & pronunciation",
+        "cat": "문화와 발음"
+      }
+    ]
+  }
+}

@@ -386,6 +386,7 @@ const LABELS = {
   'levels.json': 'Core 1500 words',
   'worlds/2b-unit-10.json': 'Unit 10 · word list',
   'worlds/2b-unit-11.json': 'Unit 11 · word list',
+  'worlds/2b-unit-12.json': 'Unit 12 · word list',
   'worlds/2b-unit-13.json': 'Unit 13 · word list',
   'worlds/2b-unit-14.json': 'Unit 14 · word list',
   'worlds/2b-unit-15.json': 'Unit 15 · word list',
