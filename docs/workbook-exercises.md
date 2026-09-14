@@ -739,6 +739,60 @@ line stays long.
 
 ---
 
+## Unit 12, and a workbook that prints its own answers
+
+`worlds/unit12-workbook.json`: fourteen exercises, seventy rows, ids prefixed `u12-`. Pages
+44-55 print seventeen, and the three that are missing are missing for one reason, written into
+`omittedNote`: the 정답 pages give them no answer. Write five sentences about someone you envy;
+ask a classmate six questions; score yourself on a ten-question health quiz. All three are real
+exercises and none of them has a right answer, so there is nothing a screen could mark.
+
+### Read the 정답 before writing a single row
+
+The 익힘책 prints its own answer key — **printed p.203, image 199** in the workbook PDF, under
+부록 → 정답 — and it settles in one page what otherwise has to be argued from pictures. Two rows
+of this unit turn entirely on a drawing: on p.46, room A against room B, and two dresses under
+it. Both were read off the picture as 넓어 보여요 and 날씬해 보여요, and both were then *confirmed*
+rather than assumed. Where the two disagree the key wins, and where the key is silent the row
+does not ship. `test_unit12_workbook.js` section 2 holds all seventy answers verbatim.
+
+The 듣기 지문 for the 복습 sections is in the same appendix, a few pages earlier.
+
+### The 문형 연습 track number is not arithmetic
+
+This cost a wrong turn. The note in the earlier units said *unit N → Track N−4*, which is true
+of 13, 14 and 15 and of nothing else. The workbook CD is grouped, not offset:
+
+| units | 문형 연습 | 복습 |
+|---|---|---|
+| 10, 11, 12 | Track02, Track03, Track04 | Track05 |
+| 13, 14, 15 | Track09, Track10, Track11 | Track12 |
+| 16, 17, 18 | Track16, Track17, Track18 | Track19 |
+
+The durations say it without opening one: the 문형 연습 tracks run 300-350s and the 복습 tracks
+570-690s, with the short 25-65s files in between being the 복습 listening exercises. **The page
+prints its own track number** — Unit 12's says "track 4" — and that number is the file name.
+Under the old rule it would have been Track08, which is 61s of 복습 listening and would have
+segmented into nothing that matched.
+
+### Two checks that were quietly vacuous
+
+Both were written, both passed, and neither was testing anything. They are worth naming because
+the shape is easy to reproduce:
+
+- **A duplicate-answer check keyed on the answer alone.** 어휘 연습 1 keys 넓어요 ↔ 좁아요 for a
+  forehead *and* for a pair of shoulders, and 커요 ↔ 작아요 three times over, because the book
+  does. The check has to compare the sentence as well as the answer, or it fires on the book.
+- **A "drill keeps one ending" check.** True of three drills and false of the fourth: 연습 4 takes
+  its verb from the teacher every time — 먹었어요, 샀어요, 구했어요, 했어요. What a drill actually
+  shares is the pattern it practises, so that is what gets asserted, one regex per drill.
+
+And one that was worse than vacuous: a pace-band block whose filter always returned empty, so it
+asserted `0 === 0` four times and printed four passes. If a check cannot fail, it is decoration.
+The replacement measures the model answer against what is left of its clip after `askEnd`.
+
+---
+
 ---
 
 ## The order to do it in

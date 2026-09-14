@@ -23,6 +23,7 @@
     "worlds/unit10-textbook.json",
     "worlds/unit11-workbook.json",
     "worlds/unit11-textbook.json",
+    "worlds/unit12-workbook.json",
     "worlds/unit13-workbook.json",
     "worlds/unit13-textbook.json",
     "worlds/unit14-workbook.json",
