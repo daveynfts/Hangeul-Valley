@@ -1407,9 +1407,10 @@
        gap where two literals meet so the run reads as the string it is. */
     .recall-literal + .recall-literal { margin-left: -3px; }
     /* The illustration is the point of this card, so the stage is sized to the
-       art rather than the art squeezed into the stage. Every vocabulary tile is
-       96px tall (the older farm set is 48px), so a 192px stage renders both at a
-       whole-number scale — 2× and 4× — and pixel edges stay square. */
+       art rather than the art squeezed into the stage. A 192px stage clears every
+       source generation at a whole-number scale: the Unit illustrations are 192px
+       tall and land at 1:1, TOPIK's 96px tiles at 2×, the old farm set at 4×.
+       Do not set this to a height the tallest generation does not divide. */
     #hint-emoji {
       font-size: 130px; line-height: 1;
       display: flex; align-items: center; justify-content: center;
@@ -1422,13 +1423,19 @@
       filter: none; vertical-align: middle;
     }
     /* On a window tall enough that even the shape-card phase still fits without
-       scrolling, the stage steps up one whole multiple — 3× the 96px tile. The
-       step is deliberate: half-scales would smear a pixel row across 1.5 screen
-       pixels, so the art either grows by a whole tile pixel or not at all. */
-    @media (min-width: 820px) and (min-height: 1000px) {
+       scrolling, the stage steps up one whole multiple of the largest source —
+       2× the 192px illustration. It used to step to 288px, which was 3× the
+       96px tile this rule was written for and 1.5× once 192px artwork arrived:
+       every second row of the new illustrations was drawn twice and the rest once.
+       The art grows by a whole source pixel or not at all. */
+    /* The threshold moved with the step. At 1000px tall the old 288px stage fitted the harvest
+       phase exactly; 384px does not, and the panel it overflows by 25px puts the submit button
+       behind a scrollbar. 192px is already 1:1 for the artwork, so there is nothing to lose by
+       waiting for a window that can hold the whole doubled card. */
+    @media (min-width: 820px) and (min-height: 1200px) {
       #quiz-ui { width: min(680px, 94vw); }
-      #hint-emoji { min-height: 288px; font-size: 190px; }
-      #hint-emoji .vocab-art-icon, #hint-emoji img { height: 288px; }
+      #hint-emoji { min-height: 384px; font-size: 190px; }
+      #hint-emoji .vocab-art-icon, #hint-emoji img { height: 384px; }
     }
     /* Short window: the stage keeps its 2× art, and the room for it comes out of
        the padding instead. The Harvest phase is the tallest — art card, shape
@@ -1539,8 +1546,13 @@
       padding: 12px 8px 4px; text-align: center;
     }
     #quiz-result.hidden { display: none !important; }
+    /* The word is being shown to be read, so this is sized like the question stage
+       above it: 192px is 1:1 for a Unit illustration and a whole multiple for the
+       two older tile sizes. The 72px square it replaces cropped nothing — object-fit
+       kept the aspect — but it painted a 192px drawing at roughly a third of its
+       own resolution at the exact moment the learner looks at it. */
     #quiz-result-art .vocab-art-icon, #quiz-result-art img {
-      width: 72px; height: 72px; object-fit: contain;
+      width: auto; max-width: 100%; height: 192px; object-fit: contain;
       image-rendering: pixelated; image-rendering: crisp-edges;
     }
     #quiz-result-msg {
@@ -1738,7 +1750,7 @@
       transition: transform .15s, border-color .15s, box-shadow .15s;
       cursor: pointer; position: relative; overflow: hidden;
       display: flex; flex-direction: column; align-items: center;
-      min-height: 286px;
+      min-height: 382px;
       box-shadow: inset 0 1px 0 #fff, 0 4px 0 #8b5a2b, 0 9px 18px rgba(91,52,18,.12);
     }
     .vocab-card::after {
@@ -1767,10 +1779,18 @@
     }
     .vc-emoji {
       font-size: 52px; display: flex; align-items: center; justify-content: center;
-      line-height: 1; margin: 1px 0 10px; width: 100%; min-height: 96px;
+      line-height: 1; margin: 1px 0 10px; width: 100%; min-height: 192px;
     }
+    /* 192px, not 96px: a desktop pixel is one device pixel, so a 96px box halved
+       every Unit illustration on the way to the screen. The narrower layouts below
+       keep 96px on purpose — a phone or tablet renders at 2× or better, where 96
+       CSS pixels already is the full 192px source.
+       object-fit is load-bearing rather than decorative: max-width clamps the box
+       for a wide illustration while the explicit height stands, and without a fit
+       rule the browser answers that by stretching the picture. */
     .vc-emoji img.vocab-art-icon {
-      width: auto; max-width: 100%; height: 96px; display: inline-block;
+      width: auto; max-width: 100%; height: 192px; display: inline-block;
+      object-fit: contain;
       filter: none; image-rendering: pixelated; image-rendering: crisp-edges;
     }
     .vc-ko {
@@ -2081,19 +2101,22 @@
     #vff-scroll::-webkit-scrollbar-track { background: rgba(139,90,43,.14); }
     #vff-scroll::-webkit-scrollbar-thumb { background: #8b5a2b; border: 2px solid #efd39a; border-radius: 9px; }
     #vff-word-row {
-      display: grid; grid-template-columns: 150px minmax(0, 1fr) minmax(220px, 300px);
+      display: grid; grid-template-columns: 208px minmax(0, 1fr) minmax(220px, 300px);
       align-items: center; gap: clamp(18px, 3vw, 42px);
       padding: clamp(22px, 3vw, 42px) clamp(18px, 5vw, 76px);
       background: rgba(255,250,240,.68); border-bottom: 2px dashed #c4893a;
     }
     #vff-emoji {
-      width: 150px; height: 150px; flex-shrink: 0; display: flex;
+      width: 208px; height: 208px; flex-shrink: 0; display: flex;
       align-items: center; justify-content: center; font-size: 86px;
       background: #fffdf7; border: 2px solid #c4893a; border-radius: 18px;
       box-shadow: inset 0 1px #fff, 0 5px 0 #8b5a2b, 0 14px 24px rgba(91,52,18,.13);
     }
+    /* The one screen in the app whose whole job is to show the picture, and it was
+       the one painting a 192px illustration at 96px inside a 150px frame — half the
+       artwork, and 54px of frame left empty to do it. */
     #vff-emoji img.vocab-art-icon {
-      width: auto; max-width: 132px; height: 96px;
+      width: auto; max-width: 100%; height: 192px;
       image-rendering: pixelated; image-rendering: crisp-edges; object-fit: contain;
     }
     .vff-word-copy { min-width: 0; }

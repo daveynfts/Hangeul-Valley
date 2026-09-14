@@ -84,6 +84,10 @@ class AmbientLightingSystem {
       .setAlpha(alpha)
       .setBlendMode(blendMode)
       .setDepth(9985);
+    // A glow is a radial gradient, and lights are placed at whatever fraction of the source
+    // the scene asks for — 0.55 and 0.7 here. Nearest-neighbour turns a smooth falloff into
+    // rings at those ratios.
+    if (typeof hvFitTextureFilter === 'function') hvFitTextureFilter(light);
     this.lights.push(light);
     return light;
   }

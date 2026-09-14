@@ -10,6 +10,7 @@
   "js/systems/srs.js",
   "js/systems/save.js",
   "js/systems/economy.js",
+  "js/artScale.js",
   "js/vocabArt.js",
   "js/vocabArtUnit14.js",
   "js/vocabArtMore.js",
