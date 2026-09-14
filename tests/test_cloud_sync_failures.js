@@ -307,11 +307,24 @@ function tokenExpiringAt(msEpoch) {
   // that used to produce an unexplained 500 are still closed.
   console.log('\n--- 11. api/save.js keeps its two 500s closed ---');
   const saveSrc = fs.readFileSync(path.join(ROOT, 'api', 'save.js'), 'utf8');
-  const authBlock = saveSrc.slice(saveSrc.indexOf('user = await verifyGoogleIdToken'),
-    saveSrc.indexOf('if (!user)'));
+  // Bounded by `let Key;`, the first thing past the auth block, rather than by `if (!user)`.
+  // The cookie path put an `if (!user) {` *before* the Google call, so that end marker moved
+  // behind the start and the slice came back empty -- and an empty string satisfies a
+  // "does not contain throw" assertion perfectly well. The length check is here so a slice
+  // that stops matching fails loudly instead of passing on nothing.
+  const authStart = saveSrc.indexOf('user = await verifyGoogleIdToken');
+  const authEnd = saveSrc.indexOf('let Key;', authStart);
+  assert(authStart > 0 && authEnd > authStart, 'the auth block is still where this test looks');
+  const authBlock = saveSrc.slice(authStart, authEnd);
+  assert(authBlock.length > 200, 'and it is a block, not an empty slice (' + authBlock.length + ' chars)');
   assert(!/\bthrow e;/.test(authBlock),
     'a failure reaching Google is answered, not rethrown past the handler');
   assert(/502/.test(authBlock), 'and answered as 502, which says whose side it was');
+  // The cookie is read before the token is ever sent to Google, which is what makes an
+  // ordinary save cost no round trip to Google at all.
+  const beforeGoogle = saveSrc.slice(saveSrc.indexOf('module.exports'), authStart);
+  assert(/sessionUser\(req/.test(beforeGoogle),
+    'the session cookie is read before the token is sent to Google');
 
   const readBlock = saveSrc.slice(saveSrc.indexOf('async function getObjectJson'),
     saveSrc.indexOf('module.exports'));

@@ -920,6 +920,8 @@ function setRememberSignIn(on) {
   const keep = !!on;
   try { localStorage.setItem(GOOGLE_REMEMBER_KEY, keep ? '1' : '0'); } catch {}
   if (!keep) {
+    // The cookie is the longest-lived thing here by far, so it is the first thing to go.
+    endServerSession();
     const tok = getGoogleToken();
     try {
       localStorage.removeItem(GOOGLE_USER_KEY);
@@ -952,6 +954,89 @@ function rememberedAccountLabel() {
     const u = JSON.parse(raw);
     return (u && (u.email || u.name)) || '';
   } catch { return ''; }
+}
+
+// ── The session the server keeps for us ──────────────────────────────────────
+//
+// A Google ID token lives one hour and the One Tap flow issues no refresh token, so the
+// only way to get another was google.accounts.id.prompt() — which Google declines often
+// enough that "signed in" quietly meant "for the next hour, maybe". /api/session exchanges
+// one verified token for a cookie of ours that lasts thirty days, and from then on the
+// browser authenticates every save by itself. See api/_session.js.
+//
+// The cookie is HttpOnly, so nothing here can read it. What is kept in its place is the
+// expiry it was issued with — a hint, not the truth. When the hint and the cookie disagree
+// the request comes back 401 and the Google path takes over, which is the same fallback
+// this file already had.
+const SESSION_UNTIL_KEY = 'hv_session_until';
+// A deployment with no SESSION_SECRET answers 501. Asked once per load, then left alone.
+let _sessionsOff = false;
+
+function serverSessionAlive() {
+  try { return Number(localStorage.getItem(SESSION_UNTIL_KEY) || 0) > Date.now(); }
+  catch { return false; }
+}
+function rememberServerSession(expiresAt) {
+  const until = Number(expiresAt) || 0;
+  if (!until) return;
+  try { localStorage.setItem(SESSION_UNTIL_KEY, String(until)); } catch {}
+}
+function forgetServerSession() {
+  try { localStorage.removeItem(SESSION_UNTIL_KEY); } catch {}
+}
+
+/** Anything at all that will authenticate a save: our cookie, or a Google token. */
+function hasCloudCredential() {
+  return !!getGoogleToken() || serverSessionAlive();
+}
+
+/** Trade a freshly verified Google token for the long session. Once, at sign-in. */
+async function startServerSession(token) {
+  if (_sessionsOff || !token || typeof fetch !== 'function') return false;
+  // A player who turned remembering off is asking for the opposite of a thirty-day cookie.
+  if (!rememberSignIn()) return false;
+  try {
+    const r = await fetch('/api/session', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + token }
+    });
+    if (r && r.status === 501) { _sessionsOff = true; return false; }
+    if (!r || !r.ok) return false;
+    const json = await r.json();
+    rememberServerSession(json && json.expiresAt);
+    return true;
+  } catch (e) {
+    // Nothing is lost: the Google token in hand still works, and the next sign-in tries again.
+    return false;
+  }
+}
+
+/** Who the cookie says we are, without involving Google. This is the whole point. */
+async function resumeServerSession() {
+  if (_sessionsOff || typeof fetch !== 'function') return null;
+  try {
+    const r = await fetch('/api/session');
+    if (r && r.status === 501) { _sessionsOff = true; return null; }
+    if (!r || !r.ok) { forgetServerSession(); return null; }
+    const json = await r.json();
+    const u = json && json.user;
+    if (!u || !u.sub) { forgetServerSession(); return null; }
+    rememberServerSession(json.expiresAt);
+    return u;
+  } catch (e) {
+    // Offline. The cookie is very likely still there and still good, and forgetting it here
+    // would turn a dropped connection into a sign-out — the exact mistake this section of
+    // the file exists to stop making.
+    return null;
+  }
+}
+
+/** End it server-side. Called for a sign-out and for switching remembering off, because
+ *  both mean the same thing to a cookie that would otherwise outlive the intent. */
+async function endServerSession() {
+  forgetServerSession();
+  if (typeof fetch !== 'function') return;
+  try { await fetch('/api/session', { method: 'DELETE' }); } catch (e) {}
 }
 
 // ── Staying signed in while the tab is open ──────────────────────────────────
@@ -1022,6 +1107,7 @@ function getGoogleToken() {
  *  the token outright, and — unlike the token — it does not expire. */
 function hasGoogleSignIn() {
   if (googleAuth.user) return true;
+  if (serverSessionAlive()) return true;
   try { return !!localStorage.getItem(GOOGLE_USER_KEY); } catch { return false; }
 }
 
@@ -1175,20 +1261,30 @@ const CLOUD_TIMEOUT_MS = 15000;
 
 async function cloudSaveRequest(method, body) {
   let token = getGoogleToken();
-  if (!token) return { status: 401, json: null };
+  const session = serverSessionAlive();
+  if (!token && !session) return { status: 401, json: null };
   // Spend the last minute of a token asking for a new one rather than on a request that is
   // already refused. If Google will not re-issue quietly, the 401 below is the honest answer
   // and the caller says so — which is better than sending it and being told the same thing
   // a round trip later.
-  if (!googleTokenIsFresh()) {
-    const renewed = await renewGoogleToken();
-    token = getGoogleToken();
-    if (!renewed || !token || !googleTokenIsFresh()) return { status: 401, json: null, expired: true };
+  //
+  // None of which applies once there is a session cookie: it authenticates this request by
+  // itself, so a dead Google token is simply dropped rather than chased. That is the whole
+  // difference between asking Google every hour and asking it once a month.
+  if (token && !googleTokenIsFresh()) {
+    if (session) {
+      token = '';
+    } else {
+      const renewed = await renewGoogleToken();
+      token = getGoogleToken();
+      if (!renewed || !token || !googleTokenIsFresh()) return { status: 401, json: null, expired: true };
+    }
   }
   const opts = {
     method,
-    headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' }
   };
+  if (token) opts.headers.Authorization = 'Bearer ' + token;
   if (body) opts.body = JSON.stringify(body);
   let timer = null;
   if (typeof AbortController === 'function') {
@@ -1232,7 +1328,7 @@ function cloudReasonText(reason) {
 }
 
 function pushCloudSave(data) {
-  if (!getGoogleToken()) return { ok: true, skipped: true, reason: 'signed-out' };
+  if (!hasCloudCredential()) return { ok: true, skipped: true, reason: 'signed-out' };
   _cloudPending = data;
   _cloudChain = _cloudChain.then(async () => {
     const payload = _cloudPending;
@@ -1254,6 +1350,10 @@ function pushCloudSave(data) {
           _cloudLastError = 'expired';
           return { ok: false, status, reason: 'expired' };
         }
+        // The server refused every credential this request carried, so the cookie is no
+        // better than the token. Leaving the hint behind would keep every later push
+        // thinking it still had a way in.
+        forgetServerSession();
         setGoogleSession('', null);
         if (typeof showToast === 'function') showToast(hvT('ui.cloud.signInAgain'));
         return { ok: false, status, reason: 'signed-out' };
@@ -1326,7 +1426,7 @@ function scheduleCloudRetry() {
   const delay = CLOUD_PUSH_RETRY_MS[_cloudRetryAt++];
   _cloudRetryTimer = setTimeout(() => {
     _cloudRetryTimer = null;
-    if (!getGoogleToken()) return;
+    if (!hasCloudCredential()) return;
     // The live state, not the payload that failed: by now the player may have gone on
     // playing, and the newer snapshot is the one worth the request.
     pushCloudSave(collectSave());
@@ -1353,7 +1453,7 @@ function afterCloudPush(result) {
 // two minutes over a hiccup that is already over.
 if (typeof window !== 'undefined' && window.addEventListener) {
   window.addEventListener('online', () => {
-    if (!getGoogleToken() || !_cloudLastError) return;
+    if (!hasCloudCredential() || !_cloudLastError) return;
     cancelCloudRetry();
     pushCloudSave(collectSave());
   });
@@ -1361,8 +1461,10 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 
 // The last write of a session, sent so that closing the tab does not take it with it.
 //
-// `keepalive` is what makes the request outlive the document; sendBeacon cannot be used
-// because this endpoint authenticates on an Authorization header and a beacon carries none.
+// `keepalive` is what makes the request outlive the document. sendBeacon is still not used:
+// it carries no Authorization header, so it could only ever work for a player who already
+// holds a session cookie — and a path that silently does nothing for everyone else is worse
+// than one request shape that works for both.
 // The 64KiB cap is the spec's, and a long-lived account's save can pass it — that one falls
 // back to an ordinary request, which is exactly as likely to land as it was before.
 //
@@ -1373,14 +1475,16 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 const CLOUD_BEACON_MAX = 64 * 1024;
 function beaconCloudSave(data) {
   const token = getGoogleToken();
-  if (!token || typeof fetch !== 'function') return false;
+  if (typeof fetch !== 'function') return false;
+  if (!token && !serverSessionAlive()) return false;
   let body;
   try { body = JSON.stringify(data); } catch { return false; }
   const opts = {
     method: 'PUT',
-    headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     body
   };
+  if (token) opts.headers.Authorization = 'Bearer ' + token;
   // Byte length, not character count: Korean headwords are three bytes each in UTF-8, so
   // the two numbers are nowhere near the same for this payload.
   const bytes = (typeof TextEncoder === 'function') ? new TextEncoder().encode(body).length : body.length * 3;
@@ -1463,11 +1567,11 @@ async function fetchCloudSave() {
 }
 
 async function syncCloudSave() {
-  if (!getGoogleToken()) return;
+  if (!hasCloudCredential()) return;
   const got = await fetchCloudSave();
   if (!got.ok) {
     _cloudLastError = got.why;
-    if (got.signedOut) setGoogleSession('', null);
+    if (got.signedOut) { forgetServerSession(); setGoogleSession('', null); }
     console.warn('Cloud sync failed:', got.why, got.json || '');
     if (typeof showToast === 'function') showToast(hvT(got.toast), got.signedOut ? 5000 : 6000);
     renderAuthUI();
@@ -1567,8 +1671,12 @@ function renderAuthUI() {
   // the second — and the old code hid the Google button on the first alone, so an expired
   // session looked signed in, synced nothing, and left no way back in short of noticing the
   // Sign out button and using it before you could sign in.
-  const identified = !!(user && token);
-  const usable = identified && googleTokenIsFresh();
+  // A session cookie is a credential in its own right, so it counts for both: it identifies
+  // the player and it still works. Without this the chip would vanish the moment the Google
+  // token expired, on a session that is in fact perfectly alive.
+  const session = serverSessionAlive();
+  const identified = !!(user && (token || session));
+  const usable = identified && (session || googleTokenIsFresh());
   // Does this row have anything to offer? Either Google is configured, or finding that out
   // failed and there is a retry to show, or somebody is signed in.
   const canSignIn = !!googleAuth.clientId || !!googleAuth.configFailed;
@@ -1678,6 +1786,10 @@ function onGoogleCredential(resp) {
   } catch {}
   setGoogleSession(token, user);
   if (!silent && typeof showToast === 'function') showToast(hvT('ui.cloud.signedIn'));
+  // The one moment a verified Google token exists, which is the only thing /api/session will
+  // trade for a cookie. Not awaited: the sync below works on the token either way, and the
+  // cookie is for the visits after this one.
+  startServerSession(token);
   syncCloudSave();
 }
 
@@ -1707,6 +1819,23 @@ async function restoreGoogleSession() {
     syncCloudSave();
     return;
   }
+  // The cookie, before Google. This is the case the server session exists for: a visit that
+  // begins more than an hour after the last one, where the stored token is already dead and
+  // asking Google for another is the step that so often fails. Only attempted when there is
+  // some reason to think a session exists — a player who has never signed in should not pay
+  // for a request on every load.
+  if (serverSessionAlive() || hasGoogleSignIn()) {
+    const resumed = await resumeServerSession();
+    if (resumed) {
+      googleAuth.user = resumed;
+      try {
+        if (rememberSignIn()) localStorage.setItem(GOOGLE_USER_KEY, JSON.stringify(resumed));
+      } catch {}
+      renderAuthUI();
+      syncCloudSave();
+      return;
+    }
+  }
   if (!hasGoogleSignIn()) { renderAuthUI(); return; }
   // Paint what is already known before asking Google anything. The row is hidden in the
   // markup and renewal can take the full eight seconds, so waiting for the answer to draw
@@ -1719,6 +1848,9 @@ async function restoreGoogleSession() {
 }
 
 function signOutGoogle() {
+  // Before setGoogleSession, which repaints: a cookie that outlived the sign-out would put
+  // the player back in on the next load, having watched them ask not to be.
+  endServerSession();
   setGoogleSession('', null);
   try {
     if (window.google && google.accounts && google.accounts.id) google.accounts.id.disableAutoSelect();

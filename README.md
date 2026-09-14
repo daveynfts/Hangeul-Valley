@@ -692,6 +692,29 @@ still uploads R2 and leaves the Git-connected Vercel deploy to ship JS.
 
 `npm run upload:r2` still uploads without deploying Vercel, if you only need the CDN.
 
+### Staying signed in
+
+`/api/save` used to authenticate on a raw Google ID token. Those live one hour, and the One
+Tap flow issues no refresh token — it proves who somebody is once. So every hour the game
+had to ask Google for a replacement through `google.accounts.id.prompt()`, which Google
+declines routinely: a cooldown after a couple of dismissals, no auto-select when several
+accounts are signed in, no FedCM at all on Safari or Firefox. Each refusal put the sign-in
+button back in front of a player who had never signed out.
+
+`POST /api/session` now trades one verified token for the game's own cookie — HttpOnly,
+Secure, `SameSite=Lax`, thirty days, re-issued once it is five days old so the clock runs
+from the last visit. `/api/save` takes the cookie or the Bearer token, whichever a request
+carries, so a client that has not got a session yet is unaffected. See `api/_session.js`.
+
+**Vercel env var: `SESSION_SECRET`** — any long random string, e.g.
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
+```
+
+Without it `/api/session` answers `501` and the game falls back to the one-hour token,
+exactly as before. Changing it signs everybody out. It is never sent to the browser.
+
 ---
 
 ## Roadmap
