@@ -38,6 +38,7 @@
     "worlds/topik2-desk-quiz.json",
     "worlds/unit10-cassette.json",
     "worlds/unit11-cassette.json",
+    "worlds/unit12-cassette.json",
     "worlds/unit13-cassette.json",
     "worlds/unit14-cassette.json",
     "worlds/unit15-cassette.json"

@@ -462,7 +462,7 @@ const HV_CATALOG_SOURCES = [
   'worlds/unit13-desk-quiz.json', 'worlds/unit14-desk-quiz.json',
   'worlds/unit15-desk-quiz.json', 'worlds/topik2-desk-quiz.json',
   'worlds/unit10-cassette.json', 'worlds/unit11-cassette.json',
-  'worlds/unit13-cassette.json', 'worlds/unit14-cassette.json',
+  'worlds/unit12-cassette.json', 'worlds/unit13-cassette.json', 'worlds/unit14-cassette.json',
   'worlds/unit15-cassette.json'
 ];
 

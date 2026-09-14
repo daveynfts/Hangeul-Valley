@@ -50,7 +50,7 @@ const path = require('path');
 const { spawnSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
-const UNITS = [10, 11, 13, 14, 15];
+const UNITS = [10, 11, 12, 13, 14, 15];
 const SR = 8000;            // envelope work needs no more than this
 const HOP = 80;             // one envelope point per 10 ms
 const MATCH_MIN = 0.95;     // below the gap in the score distribution, so it rejects re-takes

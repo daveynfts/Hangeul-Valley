@@ -3079,6 +3079,7 @@ function cassetteModeProgress(bank, mode) {
 function cassetteUrl() {
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-cassette.json';
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-cassette.json';
+  if (typeof isUnit12World === 'function' && isUnit12World()) return '/worlds/unit12-cassette.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-cassette.json';
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-cassette.json';
   if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/unit15-cassette.json';
@@ -3752,7 +3753,7 @@ function openListen() {
     // box, which is a thin thing to land on. Named per unit because the track numbers
     // are the book's, not ours.
     const tracks = bank.tracks || [];
-    const OPEN_ON = { '2b-unit-10': 4, '2b-unit-11': 14, '2b-unit-13': 34, '2b-unit-14': 44 };
+    const OPEN_ON = { '2b-unit-10': 4, '2b-unit-11': 14, '2b-unit-12': 24, '2b-unit-13': 34, '2b-unit-14': 44 };
     const pref = csUnitPrefs(bank.unit);
     const want = pref.track !== undefined ? pref.track : OPEN_ON[bank.unit];
     const start = tracks.findIndex((t) => t.n === want);

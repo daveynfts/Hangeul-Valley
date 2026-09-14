@@ -1,0 +1,1544 @@
+{
+  "unit": "2b-unit-12",
+  "titleKo": "카세트 플레이어",
+  "titleEn": "The book's own recordings",
+  "unitKo": "12과 저는 좀 조용한 편이에요",
+  "source": "Seoul National University Korean 2B, Unit 12, tracks 22-31",
+  "closeKo": "닫기",
+  "tracks": [
+    {
+      "n": 22,
+      "sec": "문법과 표현 1-1",
+      "secEn": "A-아/어 보이다",
+      "dur": 13.9,
+      "src": "audio/book/2b-u12-trk22.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "스티븐 씨, 오늘 기분이 아주 좋아 보이네요.",
+          "at": 3.79,
+          "end": 8.96
+        },
+        {
+          "who": "B",
+          "ko": "네, 수업 끝나고 데이트가 있어요.",
+          "at": 9.37,
+          "end": 11.84
+        }
+      ]
+    },
+    {
+      "n": 23,
+      "sec": "문법과 표현 1-2",
+      "secEn": "N처럼[같이]",
+      "dur": 13.71,
+      "src": "audio/book/2b-u12-trk23.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "이 사람은 누구예요?",
+          "at": 3.79,
+          "end": 5.34
+        },
+        {
+          "who": "B",
+          "ko": "제일 친한 친구예요. 어릴 때부터 가족처럼 지냈어요.",
+          "at": 6.22,
+          "end": 11.66
+        }
+      ]
+    },
+    {
+      "n": 24,
+      "sec": "말하기 1",
+      "secEn": "Describing someone in a photo",
+      "dur": 49.16,
+      "src": "audio/book/2b-u12-trk24.mp3",
+      "lines": [
+        {
+          "who": "마리코",
+          "ko": "여기가 내 방이야.",
+          "at": 3.77,
+          "end": 5.38
+        },
+        {
+          "who": "나나",
+          "ko": "책이 많네요. 이건 친구들 사진이에요?",
+          "at": 6.29,
+          "end": 10.32
+        },
+        {
+          "who": "마리코",
+          "ko": "응, 작년 크리스마스 때 찍었어.",
+          "at": 11.22,
+          "end": 14.35
+        },
+        {
+          "who": "나나",
+          "ko": "참 즐거워 보여요. 언니 옆에 있는 사람은 누구예요?",
+          "at": 15.24,
+          "end": 19.87
+        },
+        {
+          "who": "마리코",
+          "ko": "나하고 제일 친한 친구야. 어릴 때부터 자매처럼 지냈어.",
+          "at": 20.76,
+          "end": 25.82
+        },
+        {
+          "who": "나나",
+          "ko": "그래요? 언니하고 얼굴도 닮은 것 같아요.",
+          "at": 26.72,
+          "end": 30.74
+        },
+        {
+          "who": "마리코",
+          "ko": "그런 말 많이 들어. 우리 둘 다 이마가 넓고 눈이 커서 그런 것 같아.",
+          "at": 31.65,
+          "end": 36.63
+        },
+        {
+          "who": "나나",
+          "ko": "성격도 비슷해요?",
+          "at": 37.58,
+          "end": 39.05
+        },
+        {
+          "who": "마리코",
+          "ko": "아니, 성격은 정말 달라. 나는 활발한 성격인데 내 친구는 내성적이야.",
+          "at": 39.93,
+          "end": 47.08
+        }
+      ]
+    },
+    {
+      "n": 25,
+      "sec": "문법과 표현 2-1",
+      "secEn": "A-(으)ㄴ 편이다, V-는 편이다",
+      "dur": 11.57,
+      "src": "audio/book/2b-u12-trk25.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "나나 씨는 성격이 어때요?",
+          "at": 3.78,
+          "end": 6.12
+        },
+        {
+          "who": "B",
+          "ko": "여성적이고 조용한 편이에요.",
+          "at": 7.02,
+          "end": 9.52
+        }
+      ]
+    },
+    {
+      "n": 26,
+      "sec": "문법과 표현 2-2",
+      "secEn": "A-게",
+      "dur": 10.84,
+      "src": "audio/book/2b-u12-trk26.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "머리를 잘랐네요?",
+          "at": 3.78,
+          "end": 5.2
+        },
+        {
+          "who": "B",
+          "ko": "네, 더워서 짧게 잘랐어요.",
+          "at": 6.12,
+          "end": 8.79
+        }
+      ]
+    },
+    {
+      "n": 27,
+      "sec": "말하기 2",
+      "secEn": "Talking about the sort of person you like",
+      "dur": 52.17,
+      "src": "audio/book/2b-u12-trk27.mp3",
+      "lines": [
+        {
+          "who": "스티븐",
+          "ko": "켈리 씨의 이상형은 어떤 사람이에요?",
+          "at": 3.78,
+          "end": 6.79
+        },
+        {
+          "who": "켈리",
+          "ko": "제가 좀 조용한 편이라서 활발한 사람이 좋아요. 말을 재미있게 하는 사람이면 더 좋고요.",
+          "at": 7.72,
+          "end": 15.76
+        },
+        {
+          "who": "스티븐",
+          "ko": "그래요? 제 친구 중에 괜찮은 친구가 있는데 한번 만나 볼래요?",
+          "at": 16.66,
+          "end": 23.2
+        },
+        {
+          "who": "켈리",
+          "ko": "어떤 사람인데요?",
+          "at": 24.11,
+          "end": 25.45
+        },
+        {
+          "who": "스티븐",
+          "ko": "한국어 공부할 때 저를 많이 도와준 한국 친구인데 활발하고 재미있어요. 켈리 씨와 잘 어울릴 것 같아요.",
+          "at": 26.34,
+          "end": 36.96
+        },
+        {
+          "who": "켈리",
+          "ko": "그래요? 학생이에요?",
+          "at": 37.85,
+          "end": 40.03
+        },
+        {
+          "who": "스티븐",
+          "ko": "아니요, 회사원이에요. 편하게 한번 만나 보세요.",
+          "at": 40.93,
+          "end": 46.08
+        },
+        {
+          "who": "켈리",
+          "ko": "좋아요. 그럼 나중에 연락 주세요.",
+          "at": 47.01,
+          "end": 50.12
+        }
+      ]
+    },
+    {
+      "n": 28,
+      "sec": "듣기 1",
+      "secEn": "A haircut, and why",
+      "dur": 59.98,
+      "src": "audio/book/2b-u12-trk28.mp3",
+      "lines": [
+        {
+          "who": "여1",
+          "ko": "마리코 씨, 머리를 짧게 잘랐네요.",
+          "at": 9.16,
+          "end": 12.56
+        },
+        {
+          "who": "여2",
+          "ko": "네, 기분을 바꿔 보려고 머리를 잘랐어요.",
+          "at": 13.44,
+          "end": 17.49
+        },
+        {
+          "who": "여1",
+          "ko": "무슨 일 있어요?",
+          "at": 18.39,
+          "end": 19.96
+        },
+        {
+          "who": "여2",
+          "ko": "아니요, 공부를 열심히 했는데 시험을 못 봐서 기분이 좀 안 좋았어요.",
+          "at": 20.84,
+          "end": 27.29
+        },
+        {
+          "who": "여1",
+          "ko": "아, 그래요? 짧은 머리가 잘 어울리네요. 그렇게 자르니까 시원해 보여요.",
+          "at": 28.19,
+          "end": 35.06
+        },
+        {
+          "who": "여2",
+          "ko": "고마워요.",
+          "at": 35.95,
+          "end": 36.85
+        },
+        {
+          "who": "여1",
+          "ko": "저도 마리코 씨처럼 머리를 짧게 자르고 싶은데 한국에서는 아직 미용실에 못 가 봤어요.",
+          "at": 37.74,
+          "end": 45.19
+        },
+        {
+          "who": "여2",
+          "ko": "그래요? 그럼 어제 제가 간 미용실을 소개해 줄까요? 값도 비싸지 않고 잘하는 편이에요.",
+          "at": 46.09,
+          "end": 54.34
+        },
+        {
+          "who": "여1",
+          "ko": "네, 소개해 주세요.",
+          "at": 55.26,
+          "end": 56.91
+        }
+      ]
+    },
+    {
+      "n": 29,
+      "sec": "듣기 2",
+      "secEn": "At the hair salon",
+      "dur": 66.17,
+      "src": "audio/book/2b-u12-trk29.mp3",
+      "lines": [
+        {
+          "who": "직원",
+          "ko": "어서 오세요. 예약하셨나요?",
+          "at": 8.35,
+          "end": 10.99
+        },
+        {
+          "who": "손님",
+          "ko": "아니요. 안 했는데요. 많이 기다려야 하나요?",
+          "at": 11.89,
+          "end": 16.14
+        },
+        {
+          "who": "직원",
+          "ko": "20분 정도만 기다리시면 돼요. 저쪽에 앉아서 잠깐만 기다려 주세요.",
+          "at": 17.02,
+          "end": 23.24
+        },
+        {
+          "who": "미용사",
+          "ko": "이쪽으로 앉으세요. 머리 어떻게 해 드릴까요?",
+          "at": 25.67,
+          "end": 29.9
+        },
+        {
+          "who": "손님",
+          "ko": "긴 머리가 무거워 보여서 좀 자르고 싶은데요.",
+          "at": 30.82,
+          "end": 34.37
+        },
+        {
+          "who": "미용사",
+          "ko": "그러면 머리를 좀 짧게 자르고 파마를 해 보시는 게 어때요?",
+          "at": 35.26,
+          "end": 40.69
+        },
+        {
+          "who": "손님",
+          "ko": "파마머리가 저한테 어울릴까요?",
+          "at": 41.73,
+          "end": 44.34
+        },
+        {
+          "who": "미용사",
+          "ko": "네, 아주 잘 어울리실 것 같은데요.",
+          "at": 45.23,
+          "end": 48.63
+        },
+        {
+          "who": "손님",
+          "ko": "그럼 그렇게 해 주세요.",
+          "at": 49.52,
+          "end": 51.23
+        },
+        {
+          "who": "미용사",
+          "ko": "앞머리도 좀 잘라 드릴까요?",
+          "at": 52.12,
+          "end": 54.47
+        },
+        {
+          "who": "손님",
+          "ko": "앞머리는 조금만 다듬어 주세요. 그런데 시간은 얼마나 걸려요?",
+          "at": 55.36,
+          "end": 60.89
+        },
+        {
+          "who": "미용사",
+          "ko": "두 시간쯤 걸려요.",
+          "at": 61.79,
+          "end": 63.11
+        }
+      ]
+    },
+    {
+      "n": 30,
+      "sec": "발음 준비",
+      "secEn": "받침 'ㄻ' — listen",
+      "dur": 17.42,
+      "src": "audio/book/2b-u12-trk30.mp3",
+      "lines": [
+        {
+          "who": "1",
+          "ko": "형이 참 젊네요.",
+          "at": 7.85,
+          "end": 9.69
+        },
+        {
+          "who": "2",
+          "ko": "저는 아버지를 닮고 싶어요.",
+          "at": 12.91,
+          "end": 15.37
+        }
+      ]
+    },
+    {
+      "n": 31,
+      "sec": "발음 연습",
+      "secEn": "받침 'ㄻ' — repeat",
+      "dur": 41.2,
+      "src": "audio/book/2b-u12-trk31.mp3",
+      "lines": [
+        {
+          "who": "1",
+          "ko": "동생과 저는 닮지 않았어요.",
+          "at": 9.09,
+          "end": 11.81
+        },
+        {
+          "who": "2",
+          "ko": "우리 할아버지는 참 젊게 사세요.",
+          "at": 16,
+          "end": 19.01
+        },
+        {
+          "who": "3",
+          "ko": "아이는 부모를 닮는 것 같아요.",
+          "at": 23.32,
+          "end": 25.96
+        },
+        {
+          "who": "4A",
+          "ko": "켈리 씨는 누구를 닮았어요?",
+          "at": 30.28,
+          "end": 32.9
+        },
+        {
+          "who": "4B",
+          "ko": "눈은 아빠를 닮고 코는 엄마를 닮았어요.",
+          "at": 33.79,
+          "end": 38.15
+        }
+      ]
+    }
+  ],
+  "dictation": {
+    "filter": {
+      "keep": [
+        "a whole sentence someone would actually say",
+        "5-22 syllables: long enough to need listening, short enough to hold in your head",
+        "carries at least one thing you can only write correctly if you know something — the unit's grammar (A-아/어 보이다, N처럼[같이], A-(으)ㄴ 편이다 / V-는 편이다, A-게), a gap between sound and spelling (this unit's 발음 point is 받침 'ㄻ': a consonant after it leaves only [ㅁ] and tenses ㄱ/ㄷ/ㅅ/ㅈ, so 닮고 is [담꼬] — but a vowel after it keeps both, so 닮았어요 is [달마써요]), or a unit headword"
+      ],
+      "drop": [
+        "fixed courtesies — 어서 오세요, 고마워요",
+        "bare reactions — 그래요?, 어떤 사람인데요?",
+        "anything with a figure read aloud: 20분 정도만 기다리시면 돼요 would have the learner guessing whether to write 20 or 이십",
+        "anything under ~5 syllables: nothing to decide when you write it"
+      ],
+      "splitAtClause": "Printed turns past 22 syllables are cut at a boundary the recording itself pauses on — never mid-clause and never trimmed — and each part names its parent in splitFrom."
+    },
+    "items": [
+      {
+        "id": 1,
+        "track": 22,
+        "who": "A",
+        "ko": "스티븐 씨, 오늘 기분이 아주 좋아 보이네요.",
+        "en": "Steven, you look in a really good mood today.",
+        "syl": 17,
+        "why": "The page’s own A-아/어 보이다. 좋아 is said [조아] — the ㅎ of 좋다 disappears between vowels and leaves nothing to hear, so the ㅎ has to come from the adjective and not from the sound.",
+        "tags": [
+          "A-아/어 보이다",
+          "ㅎ 탈락"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d01.mp3",
+          "voiced": 3.33,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 2,
+        "track": 22,
+        "who": "B",
+        "ko": "네, 수업 끝나고 데이트가 있어요.",
+        "en": "Yes, I have a date after class.",
+        "syl": 13,
+        "why": "끝나고 is said [끈나고]: the 받침 ㅌ becomes [ㄷ] and then turns into ㄴ in front of the ㄴ. Write what you hear and the 끝 is gone.",
+        "tags": [
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d02.mp3",
+          "voiced": 2.35,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 3,
+        "track": 23,
+        "who": "A",
+        "ko": "이 사람은 누구예요?",
+        "en": "Who is this person?",
+        "syl": 8,
+        "why": "누구 ends in a vowel, so it takes 예요 and never 에요. Both are said the same way and only one of them is written.",
+        "tags": [
+          "N예요/이에요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d03.mp3",
+          "voiced": 1.43,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 4,
+        "track": 23,
+        "who": "B",
+        "ko": "어릴 때부터 가족처럼 지냈어요.",
+        "en": "We have been like family since we were little.",
+        "syl": 13,
+        "why": "The page’s own N처럼. 지냈어요 is said [지내써요] — the ㅆ crosses into the next syllable — and 가족처럼 keeps its ㄱ, where 가족 alone would tense the 처럼 for nobody.",
+        "tags": [
+          "N처럼",
+          "연음"
+        ],
+        "splitFrom": "제일 친한 친구예요. 어릴 때부터 가족처럼 지냈어요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d04.mp3",
+          "voiced": 2.65,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 5,
+        "track": 24,
+        "who": "마리코",
+        "ko": "여기가 내 방이야.",
+        "en": "This is my room.",
+        "syl": 7,
+        "why": "반말 -이야 after a consonant-final noun. Nothing changes in the sound, which is the point: 방이야 is what it looks like, and 방야 is what a learner writes who has not met the 이.",
+        "tags": [
+          "반말",
+          "N이야"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d05.mp3",
+          "voiced": 1.49,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 6,
+        "track": 24,
+        "who": "나나",
+        "ko": "책이 많네요.",
+        "en": "You have a lot of books.",
+        "syl": 5,
+        "why": "많네요 is said [만네요]. The ㅎ of 많다 drops in front of the ㄴ and only the ㄴ of the cluster is left, so there is no sound anywhere that tells you the ㅎ is written.",
+        "tags": [
+          "ㅎ 탈락",
+          "비음화"
+        ],
+        "splitFrom": "책이 많네요. 이건 친구들 사진이에요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d06.mp3",
+          "voiced": 1.27,
+          "rate": 3.9
+        }
+      },
+      {
+        "id": 7,
+        "track": 24,
+        "who": "나나",
+        "ko": "이건 친구들 사진이에요?",
+        "en": "Are these your friends?",
+        "syl": 10,
+        "why": "사진 ends in a consonant, so this one is 이에요 — the opposite of 누구예요 two tracks earlier. 사진이에요 runs together as [사지니에요].",
+        "tags": [
+          "N예요/이에요",
+          "연음"
+        ],
+        "splitFrom": "책이 많네요. 이건 친구들 사진이에요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d07.mp3",
+          "voiced": 1.87,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 8,
+        "track": 24,
+        "who": "마리코",
+        "ko": "응, 작년 크리스마스 때 찍었어.",
+        "en": "Yeah, I took it last Christmas.",
+        "syl": 12,
+        "why": "작년 is said [장년]: the ㄱ turns into ㅇ in front of the ㄴ. 찍었어 is [찌거써], with the ㄱ carrying across, and the 어 of the 반말 past is the only thing marking it as past.",
+        "tags": [
+          "반말",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d08.mp3",
+          "voiced": 2.31,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 9,
+        "track": 24,
+        "who": "나나",
+        "ko": "참 즐거워 보여요.",
+        "en": "You look like you really enjoyed it.",
+        "syl": 7,
+        "why": "즐겁다 is a ㅂ irregular, so A-아/어 보이다 gives 즐거워 보여요 and never 즐겁어. The ㅂ is not there to hear and not there to write.",
+        "tags": [
+          "A-아/어 보이다"
+        ],
+        "splitFrom": "참 즐거워 보여요. 언니 옆에 있는 사람은 누구예요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d09.mp3",
+          "voiced": 1.63,
+          "rate": 4.3
+        }
+      },
+      {
+        "id": 10,
+        "track": 24,
+        "who": "나나",
+        "ko": "언니 옆에 있는 사람은 누구예요?",
+        "en": "Who is the person next to you?",
+        "syl": 13,
+        "why": "옆에 is said [여페] — the ㅍ moves onto the 에 — and 있는 is [인는]. Neither syllable is written anything like the way it sounds.",
+        "tags": [
+          "연음"
+        ],
+        "splitFrom": "참 즐거워 보여요. 언니 옆에 있는 사람은 누구예요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d10.mp3",
+          "voiced": 2.08,
+          "rate": 6.2
+        }
+      },
+      {
+        "id": 11,
+        "track": 24,
+        "who": "마리코",
+        "ko": "나하고 제일 친한 친구야.",
+        "en": "She is my closest friend.",
+        "syl": 10,
+        "why": "친한 is said [치난]: the ㅎ between two voiced sounds thins almost to nothing. 친구야 is the 반말 of 친구예요, and the 야 goes on a vowel-final noun.",
+        "tags": [
+          "반말",
+          "ㅎ 약화"
+        ],
+        "splitFrom": "나하고 제일 친한 친구야. 어릴 때부터 자매처럼 지냈어.",
+        "audio": {
+          "src": "audio/book/2b-u12-d11.mp3",
+          "voiced": 1.78,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 12,
+        "track": 24,
+        "who": "나나",
+        "ko": "언니하고 얼굴도 닮은 것 같아요.",
+        "en": "You look like your older sister, too.",
+        "syl": 13,
+        "why": "This unit’s 발음 point, in the direction nobody expects: 닮은 is said [달믄], with **both** consonants surviving because a vowel follows. Compare 닮고 [담꼬] on track 30, where the ㄹ is lost — the spelling is the same and the sound is not.",
+        "tags": [
+          "받침 ㄻ",
+          "연음"
+        ],
+        "splitFrom": "그래요? 언니하고 얼굴도 닮은 것 같아요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d12.mp3",
+          "voiced": 2.64,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 13,
+        "track": 24,
+        "who": "마리코",
+        "ko": "그런 말 많이 들어.",
+        "en": "I get told that a lot.",
+        "syl": 7,
+        "why": "많이 is said [마니]: the ㅎ of the cluster drops and the ㄴ moves across. There is nothing in [마니] that asks for a ㅎ, which is why it is the commonest mis-spelling in the chapter.",
+        "tags": [
+          "ㅎ 탈락",
+          "반말"
+        ],
+        "splitFrom": "그런 말 많이 들어. 우리 둘 다 이마가 넓고 눈이 커서 그런 것 같아.",
+        "audio": {
+          "src": "audio/book/2b-u12-d13.mp3",
+          "voiced": 1.15,
+          "rate": 6.1
+        }
+      },
+      {
+        "id": 14,
+        "track": 24,
+        "who": "마리코",
+        "ko": "우리 둘 다 이마가 넓고 눈이 커서 그런 것 같아.",
+        "en": "I think it is because we both have wide foreheads and big eyes.",
+        "syl": 18,
+        "why": "넓고 is said [널꼬] — the same shape as this unit’s ㄻ rule on a different cluster: one of the two consonants goes, and the ㄱ after it tenses. 이마가 넓다 is a 어휘 headword and both syllables are written in full.",
+        "tags": [
+          "받침 ㄼ",
+          "어휘"
+        ],
+        "splitFrom": "그런 말 많이 들어. 우리 둘 다 이마가 넓고 눈이 커서 그런 것 같아.",
+        "audio": {
+          "src": "audio/book/2b-u12-d14.mp3",
+          "voiced": 3.11,
+          "rate": 5.8
+        }
+      },
+      {
+        "id": 15,
+        "track": 24,
+        "who": "나나",
+        "ko": "성격도 비슷해요?",
+        "en": "Are your personalities similar too?",
+        "syl": 7,
+        "why": "성격도 is said [성껵또]: the ㄱ of 격 tenses after ㅇ and then tenses the 도 after it. Two changes, neither written.",
+        "tags": [
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d15.mp3",
+          "voiced": 1.35,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 16,
+        "track": 24,
+        "who": "마리코",
+        "ko": "아니, 성격은 정말 달라.",
+        "en": "No, our personalities are really different.",
+        "syl": 9,
+        "why": "다르다 is a 르 irregular: the 르 goes and its ㄹ lands on the syllable before, giving 달라. Nothing of 다르 survives, so 달라 has to be written from the verb rather than from the sound.",
+        "tags": [
+          "르 불규칙",
+          "반말"
+        ],
+        "splitFrom": "아니, 성격은 정말 달라. 나는 활발한 성격인데 내 친구는 내성적이야.",
+        "audio": {
+          "src": "audio/book/2b-u12-d16.mp3",
+          "voiced": 1.96,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 17,
+        "track": 24,
+        "who": "마리코",
+        "ko": "나는 활발한 성격인데 내 친구는 내성적이야.",
+        "en": "I have an outgoing personality, but my friend is introverted.",
+        "syl": 18,
+        "why": "Two 성격 headwords in one breath. 활발한 is [활발한] with nothing to change, and 내성적이야 is 내성적이다 in 반말 — the 이 is part of the word and not a particle.",
+        "tags": [
+          "어휘",
+          "반말"
+        ],
+        "splitFrom": "아니, 성격은 정말 달라. 나는 활발한 성격인데 내 친구는 내성적이야.",
+        "audio": {
+          "src": "audio/book/2b-u12-d17.mp3",
+          "voiced": 3.31,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 18,
+        "track": 25,
+        "who": "A",
+        "ko": "나나 씨는 성격이 어때요?",
+        "en": "What is Nana like?",
+        "syl": 10,
+        "why": "성격이 is said [성껴기]: the ㄱ of 격 tenses, and then the 받침 ㄱ carries onto the 이. The question the whole page answers.",
+        "tags": [
+          "경음화",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d18.mp3",
+          "voiced": 2.22,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 19,
+        "track": 25,
+        "who": "B",
+        "ko": "여성적이고 조용한 편이에요.",
+        "en": "She is feminine and on the quiet side.",
+        "syl": 12,
+        "why": "The page’s own A-(으)ㄴ 편이다, and the unit title is made of it. 조용한 is the -(으)ㄴ form of 조용하다, so the ㅎ that is not pronounced is still written.",
+        "tags": [
+          "A-(으)ㄴ 편이다",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d19.mp3",
+          "voiced": 2.38,
+          "rate": 5
+        }
+      },
+      {
+        "id": 20,
+        "track": 26,
+        "who": "A",
+        "ko": "머리를 잘랐네요?",
+        "en": "You have had your hair cut?",
+        "syl": 7,
+        "why": "자르다 is a 르 irregular — 잘랐 — and 잘랐네요 is said [잘란네요], the ㅆ turning into ㄴ before the ㄴ. Two things gone from the sound, both written.",
+        "tags": [
+          "르 불규칙",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d20.mp3",
+          "voiced": 1.3,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 21,
+        "track": 26,
+        "who": "B",
+        "ko": "네, 더워서 짧게 잘랐어요.",
+        "en": "Yes, it was hot, so I cut it short.",
+        "syl": 10,
+        "why": "The page’s own A-게, and 짧게 is said [짤께]: the ㅂ of the cluster goes, the ㄹ stays, the ㄱ tenses. Track 28 has 짧은 [짤븐], where the ㅂ survives because a vowel follows it.",
+        "tags": [
+          "A-게",
+          "받침 ㄼ"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d21.mp3",
+          "voiced": 2.55,
+          "rate": 3.9
+        }
+      },
+      {
+        "id": 22,
+        "track": 27,
+        "who": "스티븐",
+        "ko": "켈리 씨의 이상형은 어떤 사람이에요?",
+        "en": "What sort of person is Kelly’s ideal type?",
+        "syl": 15,
+        "why": "씨의 is said [씨에] — the 의 of possession is pronounced [에] and written 의. 이상형 is a 말하기 headword.",
+        "tags": [
+          "어휘",
+          "의 [에]"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d22.mp3",
+          "voiced": 2.89,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 23,
+        "track": 27,
+        "who": "켈리",
+        "ko": "제가 좀 조용한 편이라서 활발한 사람이 좋아요.",
+        "en": "I am on the quiet side, so I like outgoing people.",
+        "syl": 19,
+        "why": "편이라서 is 편이다 with -라서 on it, and 좋아요 is said [조아요] with the ㅎ gone. The sentence the chapter is named after, with a reason attached.",
+        "tags": [
+          "A-(으)ㄴ 편이다",
+          "ㅎ 탈락"
+        ],
+        "splitFrom": "제가 좀 조용한 편이라서 활발한 사람이 좋아요. 말을 재미있게 하는 사람이면 더 좋고요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d23.mp3",
+          "voiced": 3.92,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 24,
+        "track": 27,
+        "who": "켈리",
+        "ko": "말을 재미있게 하는 사람이면 더 좋고요.",
+        "en": "It would be even better if he tells things in a fun way.",
+        "syl": 16,
+        "why": "A-게 on 재미있다. 좋고요 is said [조코요]: the ㅎ of 좋다 meets the ㄱ and the two come out as one aspirated [ㅋ] — the ㅎ is audible only in what it does to the next consonant.",
+        "tags": [
+          "A-게",
+          "유기음화"
+        ],
+        "splitFrom": "제가 좀 조용한 편이라서 활발한 사람이 좋아요. 말을 재미있게 하는 사람이면 더 좋고요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d24.mp3",
+          "voiced": 2.82,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 25,
+        "track": 27,
+        "who": "스티븐",
+        "ko": "제 친구 중에 괜찮은 친구가 있는데 한번 만나 볼래요?",
+        "en": "I have a friend who is quite something — would you like to meet him?",
+        "syl": 21,
+        "why": "괜찮은 is said [괜차는]: the ㅎ of the cluster drops and the ㄴ moves onto the 은. 있는데 is [인는데]. Neither of them sounds like the word it is.",
+        "tags": [
+          "ㅎ 탈락",
+          "연음"
+        ],
+        "splitFrom": "그래요? 제 친구 중에 괜찮은 친구가 있는데 한번 만나 볼래요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d25.mp3",
+          "voiced": 4.31,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 26,
+        "track": 27,
+        "who": "스티븐",
+        "ko": "켈리 씨와 잘 어울릴 것 같아요.",
+        "en": "I think he would suit you well.",
+        "syl": 12,
+        "why": "어울릴 것 같아요 is said [어울릴 껃 까타요] — the 것 tenses after the ㄹ and tenses the 같 after it. 잘 어울리다 is a 미용실 headword this dialogue borrows.",
+        "tags": [
+          "어휘",
+          "경음화"
+        ],
+        "splitFrom": "한국어 공부할 때 저를 많이 도와준 한국 친구인데 활발하고 재미있어요. 켈리 씨와 잘 어울릴 것 같아요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d26.mp3",
+          "voiced": 2.21,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 27,
+        "track": 27,
+        "who": "스티븐",
+        "ko": "아니요, 회사원이에요.",
+        "en": "No, he is an office worker.",
+        "syl": 9,
+        "why": "회사원 ends in a consonant, so 이에요, and the whole thing runs as [회사워니에요]. The 이 belongs to the ending and not to 회사원.",
+        "tags": [
+          "N예요/이에요",
+          "연음"
+        ],
+        "splitFrom": "아니요, 회사원이에요. 편하게 한번 만나 보세요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d27.mp3",
+          "voiced": 1.57,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 28,
+        "track": 27,
+        "who": "스티븐",
+        "ko": "편하게 한번 만나 보세요.",
+        "en": "Just meet him once, no pressure.",
+        "syl": 10,
+        "why": "A-게 again, on 편하다. 한번 written closed up means \"once, some time\"; 한 번 with a space counts the times, and this sentence means the first.",
+        "tags": [
+          "A-게",
+          "한번"
+        ],
+        "splitFrom": "아니요, 회사원이에요. 편하게 한번 만나 보세요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d28.mp3",
+          "voiced": 1.77,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 29,
+        "track": 27,
+        "who": "켈리",
+        "ko": "어떤 사람인데요?",
+        "en": "What sort of person is he?",
+        "syl": 7,
+        "why": "-(으)ㄴ데요 asks without finishing the question, which is why it invites an answer where 어떤 사람이에요? would demand one. 사람인데요 runs together as [사라민데요].",
+        "tags": [
+          "-(으)ㄴ데요",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d29.mp3",
+          "voiced": 1.22,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 30,
+        "track": 28,
+        "who": "여1",
+        "ko": "마리코 씨, 머리를 짧게 잘랐네요.",
+        "en": "Mariko, you have cut your hair short.",
+        "syl": 13,
+        "why": "짧게 [짤께] and 잘랐네요 [잘란네요] in one sentence: a cluster losing half of itself and tensing what follows, then a ㅆ turning into ㄴ. Four of the eleven syllables are said as something else.",
+        "tags": [
+          "받침 ㄼ",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d30.mp3",
+          "voiced": 2.7,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 31,
+        "track": 28,
+        "who": "여2",
+        "ko": "네, 기분을 바꿔 보려고 머리를 잘랐어요.",
+        "en": "Yes, I cut my hair to change my mood.",
+        "syl": 16,
+        "why": "기분을 is [기부늘] and 바꿔 is 바꾸다 before -어, which is written 꿔 and not 꾸어. 기분을 바꾸다 is a 미용실 headword.",
+        "tags": [
+          "V-(으)려고",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d31.mp3",
+          "voiced": 3.4,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 32,
+        "track": 28,
+        "who": "여1",
+        "ko": "무슨 일 있어요?",
+        "en": "Is something the matter?",
+        "syl": 6,
+        "why": "무슨 일 is said [무슨 닐] — a ㄴ appears between the two words that neither of them contains. 있어요 is [이써요]. Six syllables, two inventions.",
+        "tags": [
+          "ㄴ 첨가",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d32.mp3",
+          "voiced": 1.45,
+          "rate": 4.1
+        }
+      },
+      {
+        "id": 33,
+        "track": 28,
+        "who": "여2",
+        "ko": "공부를 열심히 했는데 시험을 못 봐서",
+        "en": "I studied hard but did badly on the exam, so…",
+        "syl": 15,
+        "why": "열심히 is said [열씨미]: the ㅅ tenses after the ㄹ and the ㅎ drops, taking its own syllable with it. 못 봐서 is [몯뽜서], with the ㅂ tensed after the [ㄷ].",
+        "tags": [
+          "유기음화",
+          "경음화"
+        ],
+        "splitFrom": "아니요, 공부를 열심히 했는데 시험을 못 봐서 기분이 좀 안 좋았어요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d33.mp3",
+          "voiced": 2.87,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 34,
+        "track": 28,
+        "who": "여2",
+        "ko": "기분이 좀 안 좋았어요.",
+        "en": "I was in a bit of a bad mood.",
+        "syl": 9,
+        "why": "좋았어요 is said [조아써요] with the ㅎ gone entirely. 안 stays its own word in front of the adjective — 안좋았어요 written closed up is the commonest version of this sentence and the wrong one.",
+        "tags": [
+          "ㅎ 탈락",
+          "안 + A"
+        ],
+        "splitFrom": "아니요, 공부를 열심히 했는데 시험을 못 봐서 기분이 좀 안 좋았어요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d34.mp3",
+          "voiced": 1.67,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 35,
+        "track": 28,
+        "who": "여1",
+        "ko": "짧은 머리가 잘 어울리네요.",
+        "en": "Short hair really suits you.",
+        "syl": 11,
+        "why": "짧은 is said [짤븐] — with a vowel after it, **both** consonants of the cluster survive. Two tracks earlier 짧게 was [짤께] and the ㅂ was gone. Same spelling, different sound, and only the ending decides.",
+        "tags": [
+          "받침 ㄼ",
+          "어휘"
+        ],
+        "splitFrom": "아, 그래요? 짧은 머리가 잘 어울리네요. 그렇게 자르니까 시원해 보여요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d35.mp3",
+          "voiced": 1.98,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 36,
+        "track": 28,
+        "who": "여1",
+        "ko": "그렇게 자르니까 시원해 보여요.",
+        "en": "Cutting it like that makes you look cool and fresh.",
+        "syl": 13,
+        "why": "그렇게 is said [그러케]: the ㅎ of 그렇다 and the ㄱ after it come out as one aspirated [ㅋ]. The ㅎ is written and never heard on its own.",
+        "tags": [
+          "유기음화",
+          "A-아/어 보이다"
+        ],
+        "splitFrom": "아, 그래요? 짧은 머리가 잘 어울리네요. 그렇게 자르니까 시원해 보여요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d36.mp3",
+          "voiced": 2.42,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 37,
+        "track": 28,
+        "who": "여1",
+        "ko": "저도 마리코 씨처럼 머리를 짧게 자르고 싶은데",
+        "en": "I want to cut my hair short like you, Mariko, but…",
+        "syl": 19,
+        "why": "N처럼 on a person’s name, and 짧게 [짤께] once more. 싶은데 is [시픈데], with the ㅍ moving onto the 은.",
+        "tags": [
+          "N처럼",
+          "받침 ㄼ"
+        ],
+        "splitFrom": "저도 마리코 씨처럼 머리를 짧게 자르고 싶은데 한국에서는 아직 미용실에 못 가 봤어요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d37.mp3",
+          "voiced": 3.67,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 38,
+        "track": 28,
+        "who": "여1",
+        "ko": "한국에서는 아직 미용실에 못 가 봤어요.",
+        "en": "I have not managed to go to a salon in Korea yet.",
+        "syl": 16,
+        "why": "못 가 is said [몯까]: the 받침 ㅅ of 못 becomes [ㄷ] and tenses the ㄱ after it. 못 is a word of its own and keeps its ㅅ on the page.",
+        "tags": [
+          "경음화",
+          "어휘"
+        ],
+        "splitFrom": "저도 마리코 씨처럼 머리를 짧게 자르고 싶은데 한국에서는 아직 미용실에 못 가 봤어요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d38.mp3",
+          "voiced": 3.02,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 39,
+        "track": 28,
+        "who": "여2",
+        "ko": "그럼 어제 제가 간 미용실을 소개해 줄까요?",
+        "en": "Then shall I tell you about the salon I went to yesterday?",
+        "syl": 17,
+        "why": "-(으)ㄹ까요 is said [ㄹ까요] and the tensing is part of the ending, so 줄까요 is right and 줄가요 is what the spelling would be if the sound decided. 미용실을 runs as [미용시를].",
+        "tags": [
+          "V-(으)ㄹ까요",
+          "연음"
+        ],
+        "splitFrom": "그래요? 그럼 어제 제가 간 미용실을 소개해 줄까요? 값도 비싸지 않고 잘하는 편이에요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d39.mp3",
+          "voiced": 3.07,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 40,
+        "track": 28,
+        "who": "여2",
+        "ko": "값도 비싸지 않고 잘하는 편이에요.",
+        "en": "It is not expensive either, and they are good at it.",
+        "syl": 14,
+        "why": "값도 is said [갑또]: the ㅅ of the cluster goes, the ㅂ stays, the ㄷ tenses — the same shape as this unit’s ㄻ rule on another cluster. And the sentence ends on the chapter’s own V-는 편이다.",
+        "tags": [
+          "받침 ㅄ",
+          "V-는 편이다"
+        ],
+        "splitFrom": "그래요? 그럼 어제 제가 간 미용실을 소개해 줄까요? 값도 비싸지 않고 잘하는 편이에요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d40.mp3",
+          "voiced": 2.52,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 41,
+        "track": 29,
+        "who": "직원",
+        "ko": "예약하셨나요?",
+        "en": "Did you make a booking?",
+        "syl": 6,
+        "why": "예약하셨나요 is said [예야카션나요]: the 받침 ㄱ meets the ㅎ and the two come out as [ㅋ], then the ㅆ turns into ㄴ before the ㄴ. Nothing between the first syllable and the last is written the way it sounds.",
+        "tags": [
+          "유기음화",
+          "비음화"
+        ],
+        "splitFrom": "어서 오세요. 예약하셨나요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d41.mp3",
+          "voiced": 1.02,
+          "rate": 5.9
+        }
+      },
+      {
+        "id": 42,
+        "track": 29,
+        "who": "손님",
+        "ko": "많이 기다려야 하나요?",
+        "en": "Will I have to wait long?",
+        "syl": 9,
+        "why": "많이 is [마니] again — the ㅎ of the cluster drops and the ㄴ carries across. The ㅎ is in the word 많다 and nowhere in the sound.",
+        "tags": [
+          "ㅎ 탈락",
+          "V-아/어야"
+        ],
+        "splitFrom": "아니요. 안 했는데요. 많이 기다려야 하나요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d42.mp3",
+          "voiced": 1.36,
+          "rate": 6.6
+        }
+      },
+      {
+        "id": 43,
+        "track": 29,
+        "who": "직원",
+        "ko": "저쪽에 앉아서 잠깐만 기다려 주세요.",
+        "en": "Please sit over there and wait a moment.",
+        "syl": 15,
+        "why": "앉아서 is said [안자서]: with a vowel after it the ㄵ splits, the ㄴ staying and the ㅈ moving across. 저쪽에 is [저쪼게].",
+        "tags": [
+          "연음",
+          "받침 ㄵ"
+        ],
+        "splitFrom": "20분 정도만 기다리시면 돼요. 저쪽에 앉아서 잠깐만 기다려 주세요.",
+        "audio": {
+          "src": "audio/book/2b-u12-d43.mp3",
+          "voiced": 2.8,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 44,
+        "track": 29,
+        "who": "미용사",
+        "ko": "이쪽으로 앉으세요.",
+        "en": "Please sit over here.",
+        "syl": 8,
+        "why": "앉으세요 is [안즈세요], the same split as 앉아서 — and the reason both are written with the whole cluster is that 앉다 on its own is [안따].",
+        "tags": [
+          "받침 ㄵ",
+          "연음"
+        ],
+        "splitFrom": "이쪽으로 앉으세요. 머리 어떻게 해 드릴까요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d44.mp3",
+          "voiced": 1.3,
+          "rate": 6.2
+        }
+      },
+      {
+        "id": 45,
+        "track": 29,
+        "who": "미용사",
+        "ko": "머리 어떻게 해 드릴까요?",
+        "en": "How would you like your hair done?",
+        "syl": 10,
+        "why": "어떻게 is said [어떠케] — the ㅎ and the ㄱ fuse into an aspirate. The salon’s own opening question, and the one a learner has to answer.",
+        "tags": [
+          "유기음화",
+          "V-(으)ㄹ까요"
+        ],
+        "splitFrom": "이쪽으로 앉으세요. 머리 어떻게 해 드릴까요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d45.mp3",
+          "voiced": 2,
+          "rate": 5
+        }
+      },
+      {
+        "id": 46,
+        "track": 29,
+        "who": "손님",
+        "ko": "긴 머리가 무거워 보여서 좀 자르고 싶은데요.",
+        "en": "My long hair looks heavy, so I would like to cut it a bit.",
+        "syl": 18,
+        "why": "무겁다 is a ㅂ irregular, so it is 무거워 보여서 and never 무겁어. The ㅂ is neither heard nor written here, and it comes back in 무겁다.",
+        "tags": [
+          "A-아/어 보이다",
+          "ㅂ 불규칙"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d46.mp3",
+          "voiced": 3.43,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 47,
+        "track": 29,
+        "who": "미용사",
+        "ko": "파마를 해 보시는 게 어때요?",
+        "en": "How about getting a perm?",
+        "syl": 11,
+        "why": "게 is 것이 worn down to one syllable, and the full form is what would be written if it were written out. 파마를 하다 is a 미용실 headword.",
+        "tags": [
+          "V-아/어 보다",
+          "어휘"
+        ],
+        "splitFrom": "그러면 머리를 좀 짧게 자르고 파마를 해 보시는 게 어때요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d47.mp3",
+          "voiced": 1.82,
+          "rate": 6
+        }
+      },
+      {
+        "id": 48,
+        "track": 29,
+        "who": "손님",
+        "ko": "파마머리가 저한테 어울릴까요?",
+        "en": "Would permed hair suit me?",
+        "syl": 13,
+        "why": "어울릴까요 is said [어울릴까요] with the ending already tense; 저한테 is [저한테], where the ㅎ survives because it opens its own syllable. The contrast with 좋고 [조코] is the whole ㅎ story in one dialogue.",
+        "tags": [
+          "경음화",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d48.mp3",
+          "voiced": 2.49,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 49,
+        "track": 29,
+        "who": "미용사",
+        "ko": "네, 아주 잘 어울리실 것 같은데요.",
+        "en": "Yes, I think it will suit you very well.",
+        "syl": 13,
+        "why": "것 같은데요 is said [걷 까튼데요]: the 것 is [걷] on its own and then tenses the 같 after it. The honorific -시- is in 어울리실 and has no sound of its own to give it away.",
+        "tags": [
+          "경음화",
+          "V-(으)실"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d49.mp3",
+          "voiced": 2.44,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 50,
+        "track": 29,
+        "who": "손님",
+        "ko": "그럼 그렇게 해 주세요.",
+        "en": "Then please do it that way.",
+        "syl": 9,
+        "why": "그렇게 is [그러케] once more. Nine syllables written, eight heard — the ㅎ has become a feature of the ㄱ instead of a sound of its own.",
+        "tags": [
+          "유기음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d50.mp3",
+          "voiced": 1.59,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 51,
+        "track": 29,
+        "who": "미용사",
+        "ko": "앞머리도 좀 잘라 드릴까요?",
+        "en": "Shall I cut your bangs a bit as well?",
+        "syl": 11,
+        "why": "앞머리 is said [암머리]: the ㅍ becomes [ㅁ] in front of the ㅁ, so the word sounds like it begins with the wrong letter. 잘라 is the 르 irregular of 자르다.",
+        "tags": [
+          "비음화",
+          "르 불규칙"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d51.mp3",
+          "voiced": 2.23,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 52,
+        "track": 29,
+        "who": "손님",
+        "ko": "앞머리는 조금만 다듬어 주세요.",
+        "en": "Just trim the bangs a little.",
+        "syl": 13,
+        "why": "앞머리는 is [암머리는] again, and 다듬어 is [다드머]. 앞머리를 다듬다 is the 어휘 page’s own phrase, printed under the picture of it.",
+        "tags": [
+          "비음화",
+          "어휘"
+        ],
+        "splitFrom": "앞머리는 조금만 다듬어 주세요. 그런데 시간은 얼마나 걸려요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d52.mp3",
+          "voiced": 2.31,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 53,
+        "track": 29,
+        "who": "손님",
+        "ko": "그런데 시간은 얼마나 걸려요?",
+        "en": "By the way, how long will it take?",
+        "syl": 12,
+        "why": "시간은 is said [시가는] — the ㄴ carries onto the 은 and the word looks briefly like a different one. 걸려요 is 걸리다, not the 르 irregular it resembles.",
+        "tags": [
+          "연음",
+          "르 불규칙"
+        ],
+        "splitFrom": "앞머리는 조금만 다듬어 주세요. 그런데 시간은 얼마나 걸려요?",
+        "audio": {
+          "src": "audio/book/2b-u12-d53.mp3",
+          "voiced": 2.3,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 54,
+        "track": 30,
+        "who": "1",
+        "ko": "형이 참 젊네요.",
+        "en": "Your brother looks so young.",
+        "syl": 6,
+        "why": "The rule this page teaches: 젊네요 is said [점네요]. A consonant follows the ㄻ, so only the ㅁ is pronounced and the ㄹ is gone — and the ㄴ of 네 is what makes it happen.",
+        "tags": [
+          "받침 ㄻ",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d54.mp3",
+          "voiced": 1.72,
+          "rate": 3.5
+        }
+      },
+      {
+        "id": 55,
+        "track": 30,
+        "who": "2",
+        "ko": "저는 아버지를 닮고 싶어요.",
+        "en": "I want to take after my father.",
+        "syl": 11,
+        "why": "닮고 is said [담꼬]. The ㄻ loses its ㄹ and then tenses the ㄱ after it — two changes from one cluster, and the page prints both halves of the rule for exactly this word.",
+        "tags": [
+          "받침 ㄻ",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d55.mp3",
+          "voiced": 2.34,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 56,
+        "track": 31,
+        "who": "1",
+        "ko": "동생과 저는 닮지 않았어요.",
+        "en": "My younger sibling and I do not look alike.",
+        "syl": 11,
+        "why": "닮지 is said [담찌]: ㄹ gone, ㅈ tensed. 않았어요 is [아나써요], with its own ㅎ dropping — two different clusters losing two different consonants in one sentence.",
+        "tags": [
+          "받침 ㄻ",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d56.mp3",
+          "voiced": 2.6,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 57,
+        "track": 31,
+        "who": "2",
+        "ko": "우리 할아버지는 참 젊게 사세요.",
+        "en": "My grandfather lives very youthfully.",
+        "syl": 13,
+        "why": "젊게 is said [점께], and it is the chapter’s A-게 on the chapter’s own 발음 point. 할아버지 is [하라버지], the ㄹ carrying across.",
+        "tags": [
+          "받침 ㄻ",
+          "A-게"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d57.mp3",
+          "voiced": 2.59,
+          "rate": 5
+        }
+      },
+      {
+        "id": 58,
+        "track": 31,
+        "who": "3",
+        "ko": "아이는 부모를 닮는 것 같아요.",
+        "en": "Children seem to take after their parents.",
+        "syl": 12,
+        "why": "닮는 is said [담는]: the ㄹ goes before the ㄴ and only the ㅁ is left. Nothing tenses here, because ㄴ is not one of the four consonants the second half of the rule applies to.",
+        "tags": [
+          "받침 ㄻ",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d58.mp3",
+          "voiced": 2.52,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 59,
+        "track": 31,
+        "who": "4A",
+        "ko": "켈리 씨는 누구를 닮았어요?",
+        "en": "Who do you take after, Kelly?",
+        "syl": 11,
+        "why": "The other direction: 닮았어요 is said [달마써요], with **both** consonants surviving because a vowel follows. The rule on this page is about a ㄻ meeting a consonant, and this is what happens when it does not.",
+        "tags": [
+          "받침 ㄻ",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d59.mp3",
+          "voiced": 2.5,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 60,
+        "track": 31,
+        "who": "4B",
+        "ko": "눈은 아빠를 닮고 코는 엄마를 닮았어요.",
+        "en": "I have my father’s eyes and my mother’s nose.",
+        "syl": 16,
+        "why": "Both halves in one sentence, which is why the book puts it last: 닮고 is [담꼬] and 닮았어요 is [달마써요]. Same four letters, and the only difference is whether what follows is a consonant or a vowel.",
+        "tags": [
+          "받침 ㄻ",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u12-d60.mp3",
+          "voiced": 3.75,
+          "rate": 4.3
+        }
+      }
+    ]
+  },
+  "listenOnly": "Every track carries a script: the unit pages print them for the grammar, 말하기 and 발음 tracks, and the 듣기 지문 at the back of the book prints the two 듣기 conversations."
+}

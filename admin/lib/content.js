@@ -44,7 +44,7 @@ const WORLD_IDS = [
 ];
 
 const QUIZ_UNITS = ['unit10', 'unit11', 'unit13', 'unit14', 'unit15', 'topik2'];
-const CASSETTE_UNITS = ['unit10', 'unit11', 'unit13', 'unit14', 'unit15'];
+const CASSETTE_UNITS = ['unit10', 'unit11', 'unit12', 'unit13', 'unit14', 'unit15'];
 
 // Human names for the bank keys, which are otherwise file stems. Derived from WORKBOOKS
 // rather than listed again, so a bank added there cannot be missed here.

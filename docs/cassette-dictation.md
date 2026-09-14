@@ -492,6 +492,76 @@ check confirms the cut rather than merely permitting it. All three openers are d
 acknowledgements or as under-the-band, which is the same fate as every other opener in the
 unit. Nine clips, 34.2 seconds of audio, and the tape is scripted end to end.
 
+## Unit 12, the first tape scripted end to end on the first day
+
+Ten tracks, 53 placed lines, 60 dictation rows at 5.17 ±0.60 syl/s. Units 11, 13 and 14 all
+shipped their two 듣기 tracks listen-only and filled them in a release later, because the
+unit page prints only the comprehension questions. This one did not, and the only reason is
+that **the 듣기 지문 page was read before the bank was written** rather than after.
+
+It is worth knowing where those pages are, because the offset is not the one the units use.
+In the student-book PDF the image index equals the printed page all through the chapters and
+is **+10 in the back matter**: 듣기 지문 runs images 252-255 (printed 262-265), with 10/11과
+on 252, **12/13과 on 253** and 16/17과 on 255, and 모범 답안 is image 257 (printed 267). The
+answer key is a useful cross-check on a listening exercise you have just transcribed: 12과
+듣고 말하기 is `1. ② · 2. 1) ④`, and both fall out of the transcript.
+
+### A 듣기 track reads its own instruction aloud, and it looks like speech
+
+Tracks 28 and 29 open on the 2.69s announcement every track in this book opens on, and then
+read out 잘 듣고 맞지 않는 것을 고르세요 before the dialogue starts. That is not in the
+transcript, and it is two spans of ordinary speech at an ordinary pace — nothing about the
+audio says it is an instruction.
+
+What says so is the gap after it. Inside these dialogues every turn boundary is 1.00-1.06s.
+The gap between the instruction and the first line is **2.01s on track 28 and 2.04s on track
+29**, and no within-dialogue gap comes near it. So the boundary is read off the recording:
+drop the announcement, then look for a gap of 1.8s or more in the first few spans and drop
+everything before it.
+
+Leaving it in does not fail loudly. It fits: the partition simply assigns the instruction to
+the first line and slides everything along by a fraction. The tell was the pace — lines 1 and
+2 of track 28 came out at **3.52 and 3.04 syl/s against a track that runs at 5.2**, and the
+spread was ±0.97 where every other track sat under ±0.45. Dropping the two spans gave 5.10
+±0.52 with nothing below 4.1. The same fix moved track 29 from ±0.45 to ±0.35.
+
+This is the same failure the announcement caused on track 57 and the ring tone caused on
+track 39, and it is now three for three: **whatever is at the front of a track that is not a
+printed line will be absorbed by the first line, and the only symptom is that the first line
+reads slow.** Check the opening pace before believing an alignment.
+
+### A 발음 rule with two directions has to be drilled in both
+
+Unit 12's 발음 page is 받침 'ㄻ', and it is two rules, not one:
+
+- a consonant after the cluster leaves only [ㅁ] and tenses ㄱ/ㄷ/ㅅ/ㅈ — 닮고 [담꼬], 젊네요
+  [점네요], 닮지 [담찌], 젊게 [점께], 닮는 [담는]
+- a vowel after it keeps **both** — 닮았어요 [달마써요], 닮은 [달믄]
+
+A set built only from the 발음 page drills the first half seven times and the second not at
+all, and what that teaches is: *when you hear [담], write 담.* The learner comes out of it
+writing 담았어요. So the two keeping rows are pulled in from elsewhere in the chapter — 닮은
+from the 말하기 1 dialogue, 닮았어요 from the 발음 연습 itself — and `test_unit12_cassette.js`
+section 5 computes the direction from the spelling rather than trusting a tag: decompose the
+syllable after a 닮/젊 and look at its onset, ㅇ meaning a bare vowel. Both directions are
+required, and one row has to carry both at once. That row is the book's own last 발음 연습
+line, 눈은 아빠를 닮고 코는 엄마를 닮았어요, which is presumably why the book puts it last.
+
+The same shape turns up three more times in the chapter on other clusters, and the notes say
+so rather than treating each as a new fact: 넓고 [널꼬] and 짧게 [짤께] against 짧은 [짤븐],
+and 값도 [갑또]. One rule, four clusters, and the contrast pair is what makes it learnable.
+
+### Every one of the notes, not one of them somewhere
+
+The first version of the sound-note check read: *for each word, find a row whose text has it
+and whose note names the sound.* It passed with a note deliberately blanked, because a
+different row five ids later carried the same word and the same note. A check that quantifies
+over "some row" is satisfied by the row you did not break. It now reads *every row carrying
+the word names its sound*, and the injected fault is caught. Worth watching for wherever a
+test uses `find` where it means `filter`.
+
+---
+
 ---
 
 ## The waveform, and looping a stretch of it

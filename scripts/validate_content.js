@@ -1277,8 +1277,11 @@ const overlayIds = [
     /'2b-unit-12': \{ extras: \[\], stations: \['desk', 'cassette'\] \}/.test(gameJs));
   const ttsSrc = read(path.join('scripts', 'ttsClips.js'));
   check('TTS harvest covers Unit 12', ttsSrc.indexOf('worlds/2b-unit-12.json') >= 0);
+  check('cassette url resolves Unit 12 to its own bank',
+    /isUnit12World\(\)\) return '\/worlds\/unit12-cassette\.json'/.test(read(path.join('js', 'ui.js'))));
   const i18nSrc = read(path.join('js', 'i18n.js'));
   check('Unit 12 is a translatable source', i18nSrc.indexOf("'worlds/2b-unit-12.json'") >= 0);
+  check('and so is its cassette', i18nSrc.indexOf("'worlds/unit12-cassette.json'") >= 0);
 }());
 
 (function checkUnit13World() {
@@ -1325,6 +1328,56 @@ const overlayIds = [
   const ttsSrc = read(path.join('scripts', 'ttsClips.js'));
   check('TTS harvest covers Unit 13',
     ttsSrc.indexOf('worlds/2b-unit-13.json') >= 0 && ttsSrc.indexOf('worlds/unit13-desk-quiz.json') >= 0);
+}());
+
+// ── 2B Unit 12 cassette (저는 좀 조용한 편이에요, tracks 22-31) ───────────────
+// All ten scripted from the first day, which no other unit managed: the unit pages print
+// the grammar, 말하기 and 발음 tracks, and the 듣기 지문 at the back printed 28 and 29 before
+// the bank was written rather than a release later. The 발음 point is 받침 'ㄻ', so the set
+// leans on it — 닮고 [담꼬] against 닮았어요 [달마써요] is the whole page in two words.
+(function checkUnit12Cassette() {
+  const rel = path.join('worlds', 'unit12-cassette.json');
+  if (!check(`${rel} exists`, fs.existsSync(path.join(ROOT, rel)))) return;
+  const c = JSON.parse(read(rel));
+  check('cassette content belongs to Unit 12', c.unit === '2b-unit-12', String(c.unit));
+  const tracks = c.tracks || [];
+  check('all ten Unit 12 tracks are listed', tracks.length === 10, `found ${tracks.length}`);
+  check('the tracks are 22 through 31',
+    tracks.map((t) => t.n).join(',') === '22,23,24,25,26,27,28,29,30,31', tracks.map((t) => t.n).join(','));
+  const noFile = tracks.filter((t) => !fs.existsSync(path.join(ROOT, t.src || ''))).map((t) => t.n);
+  check('every Unit 12 track has its mp3 on disk', noFile.length === 0, 'missing for ' + noFile.join(','));
+  check('every Unit 12 track carries a script',
+    tracks.every((t) => Array.isArray(t.lines)), tracks.filter((t) => !t.lines).map((t) => t.n).join(','));
+  check('so no Unit 12 track needs a no-script note', tracks.every((t) => !t.noteEn),
+    tracks.filter((t) => t.noteEn).map((t) => t.n).join(','));
+  const lines = tracks.reduce((a, t) => a.concat(t.lines || []), []);
+  check('53 transcript lines in all', lines.length === 53, `found ${lines.length}`);
+  const untimed = lines.filter((l) => !(l.at >= 0) || !(l.end > l.at)).map((l) => l.ko);
+  check('every Unit 12 line carries a forward span, so every line has a ▶',
+    untimed.length === 0, untimed.slice(0, 4).join(' | '));
+  const items = (c.dictation && c.dictation.items) || [];
+  check('60 dictation sentences', items.length === 60, `found ${items.length}`);
+  const bad = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length || !i.audio || !i.audio.src).map((i) => i.id);
+  check('every Unit 12 sentence is complete', bad.length === 0, 'id ' + bad.join(','));
+  const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);
+  check('every Unit 12 dictation clip is on disk', clipMiss.length === 0, clipMiss.slice(0, 5).join(', '));
+  const scripted = new Set(tracks.filter((t) => Array.isArray(t.lines)).map((t) => t.n));
+  check('no Unit 12 sentence comes from a listen-only track', items.every((i) => scripted.has(i.track)));
+  const syl = (t) => [...String(t).normalize('NFC')].filter((ch) => ch >= '가' && ch <= '힣').length;
+  const off = items.filter((i) => syl(i.ko) !== i.syl || syl(i.ko) < 5 || syl(i.ko) > 22).map((i) => i.id);
+  check('every Unit 12 sentence is 5-22 syllables and says so truthfully', off.length === 0, 'id ' + off.join(','));
+  // A part of a printed turn has to name the turn, and be a part of it.
+  const orphan = items.filter((i) => i.splitFrom
+    && String(i.splitFrom).replace(/\s+/g, '').indexOf(String(i.ko).replace(/\s+/g, '')) < 0).map((i) => i.id);
+  check('every split row really is a part of the turn it names', orphan.length === 0, 'id ' + orphan.join(','));
+  // The unit's own 발음 page is 받침 'ㄻ', so the set should lean on it — that is the point
+  // of choosing these sentences rather than any others.
+  const rieulMieum = items.filter((i) => (i.tags || []).indexOf("받침 ㄻ") >= 0).length;
+  check('the set leans on this unit’s own 받침 ㄻ rule', rieulMieum >= 7, rieulMieum + ' of ' + items.length);
+  // And it has to show both directions of it, or it teaches half a rule.
+  const flat = (s) => String(s).replace(/\s+/g, '');
+  check('including a 닮 before a consonant and a 닮 before a vowel',
+    items.some((i) => flat(i.ko).indexOf('닮고') >= 0) && items.some((i) => flat(i.ko).indexOf('닮았') >= 0));
 }());
 
 (function checkUnit13Cassette() {
