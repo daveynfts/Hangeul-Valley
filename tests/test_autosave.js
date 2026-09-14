@@ -275,6 +275,11 @@ function cloudContext(request) {
     toasts: [],
     fetches: [],
     getGoogleToken: () => ctx.token,
+    // Lives in the sign-in region, which this block is extracted away from. A credential is
+    // either a Google token or the server's session cookie; this sandbox only has the former.
+    hasCloudCredential: () => !!ctx.token,
+    serverSessionAlive: () => false,
+    forgetServerSession: () => {},
     setGoogleSession: () => {},
     showToast: (t) => ctx.toasts.push(t),
     collectSave: () => ({ v: 10, tag: 'live', updatedAt: Date.now() }),

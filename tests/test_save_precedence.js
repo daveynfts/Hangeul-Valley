@@ -123,6 +123,9 @@ const timerStub = {
 const cctx = {
   console, ...timerStub,
   getGoogleToken: () => 'stub-token',
+  hasCloudCredential: () => true,
+  serverSessionAlive: () => false,
+  forgetServerSession: () => {},
   setGoogleSession: () => {},
   showToast: () => {}, hvT,
   // Slower for the first call, so a naive implementation would let #2 overtake #1.
@@ -157,6 +160,9 @@ const push = vm.runInContext('pushCloudSave', cctx);
   const fctx = {
     console, ...timerStub,
     getGoogleToken: () => 'stub-token',
+    hasCloudCredential: () => true,
+    serverSessionAlive: () => false,
+    forgetServerSession: () => {},
     setGoogleSession: () => {},
     showToast: () => {}, hvT,
     cloudSaveRequest: async () => { throw new Error('offline'); }
@@ -171,6 +177,9 @@ const push = vm.runInContext('pushCloudSave', cctx);
   const sctx = {
     console, ...timerStub,
     getGoogleToken: () => 'stub-token',
+    hasCloudCredential: () => true,
+    serverSessionAlive: () => false,
+    forgetServerSession: () => {},
     setGoogleSession: () => {},
     showToast: () => {}, hvT,
     cloudSaveRequest: async () => ({ status: 409, json: { error: 'stale save' } })
@@ -191,6 +200,10 @@ function runSignedOut() {
   const octx = {
     console, ...timerStub,
     getGoogleToken: () => '',
+    // No token and no cookie: this is the signed-out case, and pushCloudSave must not send.
+    hasCloudCredential: () => false,
+    serverSessionAlive: () => false,
+    forgetServerSession: () => {},
     setGoogleSession: () => {},
     showToast: () => {}, hvT,
     cloudSaveRequest: async () => { throw new Error('must not be called when signed out'); }

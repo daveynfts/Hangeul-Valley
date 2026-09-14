@@ -1,6 +1,7 @@
 const { GetObjectCommand, PutObjectCommand } = require('@aws-sdk/client-s3');
 const { r2Client, r2Bucket, saveKey, setCors, verifyGoogleIdToken, readBearer } = require('./_r2');
 const { stampSave, trustedStamp } = require('./_stamp');
+const { sessionUser, sessionNeedsRefresh, signSession, setSessionCookie } = require('./_session');
 const { PREFIX: LB_PREFIX, entryFromSave } = require('./_leaderboard');
 
 // Same sanitising as saveKey: the sub reaches a bucket key, so nothing but the safe alphabet
@@ -85,25 +86,40 @@ module.exports = async (req, res) => {
     return;
   }
 
-  let user;
-  try {
-    user = await verifyGoogleIdToken(readBearer(req));
-  } catch (e) {
-    if (e && (e.code === 'AUTH_NOT_CONFIGURED' || e.status === 503)) {
-      res.status(503).json({ error: 'sign in not configured' });
+  // The cookie first, and it answers without leaving the machine: the signature is checked
+  // locally, so an authenticated save costs no round trip to Google at all. The Bearer path
+  // below is what a client uses before it has a session — and what every client used before
+  // sessions existed, which is why it stays.
+  const now = Date.now();
+  const session = sessionUser(req, now);
+  let user = session;
+  if (!user) {
+    try {
+      user = await verifyGoogleIdToken(readBearer(req));
+    } catch (e) {
+      if (e && (e.code === 'AUTH_NOT_CONFIGURED' || e.status === 503)) {
+        res.status(503).json({ error: 'sign in not configured' });
+        return;
+      }
+      // Anything else here is a failure to reach Google, not a failure of the save. It used to
+      // be rethrown from outside the try below, so it escaped the handler entirely: the platform
+      // turned it into a 500 with nothing in the log to say why, and the client read that as
+      // "the save is broken" rather than "try again". 502 says which side it was.
+      console.error('[save] token check failed:', e && e.name, e && e.message);
+      res.status(502).json({ error: 'could not reach the sign-in service' });
       return;
     }
-    // Anything else here is a failure to reach Google, not a failure of the save. It used to
-    // be rethrown from outside the try below, so it escaped the handler entirely: the platform
-    // turned it into a 500 with nothing in the log to say why, and the client read that as
-    // "the save is broken" rather than "try again". 502 says which side it was.
-    console.error('[save] token check failed:', e && e.name, e && e.message);
-    res.status(502).json({ error: 'could not reach the sign-in service' });
-    return;
   }
   if (!user) {
     res.status(401).json({ error: 'sign in required' });
     return;
+  }
+  // Extend a session the player is plainly still using, so thirty days runs from the last
+  // time they played rather than from the day they signed in. Written here so it rides
+  // whatever this request answers with.
+  if (session && sessionNeedsRefresh(session, now)) {
+    const fresh = signSession(session, now);
+    if (fresh) setSessionCookie(req, res, fresh);
   }
 
   // saveKey throws on an id that sanitises to nothing. That cannot come from a verified
@@ -121,7 +137,12 @@ module.exports = async (req, res) => {
     if (req.method === 'GET') {
       const data = await getObjectJson(client, Key);
       res.setHeader('Cache-Control', 'private, no-store');
-      res.status(200).json({ user, data });
+      // Only the four fields the auth chip draws. A session user also carries iat and exp,
+      // and the client writes whatever this returns straight into its stored profile.
+      res.status(200).json({
+        user: { sub: user.sub, email: user.email || '', name: user.name || '', picture: user.picture || '' },
+        data
+      });
       return;
     }
     if (req.method === 'PUT') {
