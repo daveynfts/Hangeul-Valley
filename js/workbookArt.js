@@ -502,13 +502,18 @@ function workbookArtKeys() {
 // One <rect> per opaque pixel. Runs of the same colour on a row are merged into
 // a single rect, which cuts a 16x16 icon from ~200 nodes to a few dozen — worth
 // it when six of them are on screen at once.
+// Height only. The size argument comes from the 16x16 pixel matrices below, where a square
+// box is the shape of the icon; the photographic art is not square, and boxing a 306x192
+// illustration into 64x64 painted it 40px tall — two thirds of the height the row had already
+// made room for, thrown away on letterboxing. Giving the height and letting the width follow
+// the aspect fills the row the icon was allotted.
 function workbookPngHtml(file, px) {
   const size = (px || 4) * 16;
   if (!file) return '';
   const rel = String(file).replace(/^sprites\//, '');
   const src = (typeof artUrl === 'function') ? artUrl(rel) : ('sprites/' + rel);
-  return '<img class="wb-art vocab-art-icon" src="' + src + '" width="' + size + '" height="' + size +
-    '" alt="" style="image-rendering:pixelated;image-rendering:crisp-edges;vertical-align:middle;object-fit:contain">';
+  return '<img class="wb-art vocab-art-icon" src="' + src + '" height="' + size +
+    '" alt="" style="width:auto;max-width:100%;image-rendering:pixelated;image-rendering:crisp-edges;vertical-align:middle;object-fit:contain">';
 }
 function workbookIconSvg(key, px) {
   if (!key) return '';

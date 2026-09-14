@@ -103,11 +103,19 @@ assert(!!release
 assert(/#vocab-grid\s*\{[^}]*minmax\(232px,\s*1fr\)/s.test(css),
   'desktop vocabulary cards use a large readable minimum width');
 assert(topikArtManifest.outputHeight === 96, 'reviewed TOPIK artwork keeps a sharp 96px production source');
-assert(/\.vc-emoji img\.vocab-art-icon\s*\{[^}]*height:\s*96px/s.test(css)
-  && !/\.vc-emoji img\.vocab-art-icon\s*\{[^}]*height:\s*(?:62|72|86)px/s.test(css),
-  'word cards render artwork at one consistent 96px size without fractional enlargement');
-assert(/#vff-emoji img\.vocab-art-icon\s*\{[^}]*height:\s*96px/s.test(css),
-  'word details also keep TOPIK artwork at its native 96px height');
+// These two used to read 96px, the TOPIK source height, and that was right until Unit artwork
+// arrived at 192px and the same boxes started halving it. Both rules are matched at their
+// first occurrence on purpose: that is the desktop rule, where one CSS pixel is one device
+// pixel. The narrower rules further down keep 96px deliberately — a phone renders at 2x or
+// better, where 96 CSS pixels is already the whole 192px source.
+const vcArtRule = (css.match(/\.vc-emoji img\.vocab-art-icon\s*\{[^}]*\}/s) || [''])[0];
+assert(/height:\s*192px/.test(vcArtRule),
+  'word cards render artwork at the full height of the largest source');
+assert(/object-fit:\s*contain/.test(vcArtRule),
+  'a wide illustration is fitted rather than stretched when max-width clamps the card');
+const vffArtRule = (css.match(/#vff-emoji img\.vocab-art-icon\s*\{[^}]*\}/s) || [''])[0];
+assert(/height:\s*192px/.test(vffArtRule),
+  'word details show the artwork at its full height');
 assert(/#vff-inner\s*\{[^}]*height:\s*100vh;\s*height:\s*100dvh/s.test(css),
   'individual word details also fill the viewport');
 // The English stays in the haystack alongside the translation rather than being replaced by
