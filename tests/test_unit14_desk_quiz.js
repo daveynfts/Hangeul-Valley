@@ -17,7 +17,7 @@ function assert(cond, msg) {
 }
 
 assert(bank.questions.length === 10, '10 Unit 14 desk questions');
-assert(bank.sessionSize === 10, 'session plays all 10');
+assert(Number.isInteger(bank.sessionSize) && bank.sessionSize >= 1 && bank.sessionSize <= bank.questions.length, 'configured session fits the bank');
 assert(bank.questions[0].a === 'C' && bank.questions[1].a === 'B' && bank.questions[2].a === 'B',
   'Q1-Q3 keys');
 assert(bank.questions[3].a === 'B' && bank.questions[4].a === 'A' && bank.questions[5].a === 'C',

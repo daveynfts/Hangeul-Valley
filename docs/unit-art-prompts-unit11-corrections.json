@@ -1,0 +1,75 @@
+{
+  "tool": "built-in Imagegen edit",
+  "edits": [
+    {
+      "index": 138,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_hurt_somewhere_where_it_hurts.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. Opaque crisp object edges. Do not include any writing or watermark."
+    },
+    {
+      "index": 139,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_an_upset_stomach.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. Opaque crisp object edges. Do not include any writing or watermark."
+    },
+    {
+      "index": 140,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_ache_all_over.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. Opaque crisp object edges. Do not include any writing or watermark."
+    },
+    {
+      "index": 141,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_injure_one_s_leg.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. Opaque crisp object edges. Do not include any writing or watermark."
+    },
+    {
+      "index": 142,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_indigestion.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. Opaque crisp object edges. Do not include any writing or watermark."
+    },
+    {
+      "index": 144,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_vomit.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. Replace the long stream of vomit with only three small discreet droplets between mouth and basin. Keep the retching posture, no gross detail. Opaque crisp object edges. Do not include any writing or watermark."
+    },
+    {
+      "index": 145,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_be_dizzy.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. ANATOMY FIX: the girl currently has three arms. She must have EXACTLY TWO arms: one hand touches her forehead, the other hand rests on the stool for balance. Remove the extra arm and hand hanging over her skirt entirely. Preserve the dizziness stars and unsteady pose. Opaque crisp object edges. Do not include any writing or watermark."
+    },
+    {
+      "index": 147,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_break_out_on_one_s_face.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. Opaque crisp object edges. Do not include any writing or watermark."
+    },
+    {
+      "index": 148,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_no_appetite.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. Remove the disembodied hand offering rice. Instead the untouched rice bowl sits next to the meal while her hand declines the food. Opaque crisp object edges. Do not include any writing or watermark."
+    },
+    {
+      "index": 149,
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit11_to_have_no_energy.png"
+      ],
+      "prompt": "Correct this game sprite, preserving its character, action, clothing colors and deliberate pixel-art style. Replace EVERY outside background pixel with uniform solid bright MAGENTA #FF00FF, including all internal gaps. Absolutely no black, white, gray or checkerboard background. No gradient or cast shadow. Keep object interior colors. Add safe margins so all objects are fully within the canvas. The empty battery interior must be solid pale cream with just one narrow red low-charge bar, never pink or magenta. Opaque crisp object edges. Do not include any writing or watermark."
+    }
+  ]
+}

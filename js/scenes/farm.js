@@ -814,7 +814,7 @@ class FarmScene extends Phaser.Scene {
       const rail = this.add.image(x, y, railTex).setOrigin(0.5, 0.5).setDepth(depth);
       if (hdRail) rail.setDisplaySize(28, 10);
       else rail.setDisplaySize(28, 8);
-      if (hdRail && rail.texture) rail.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+      if (hdRail && typeof hvFitTextureFilter === 'function') hvFitTextureFilter(rail);
       return rail;
     };
     for (let fx = this.farm.x; fx <= this.farm.x + this.farm.w; fx += 28) {
@@ -1534,9 +1534,18 @@ class FarmScene extends Phaser.Scene {
     glow.fillCircle(0, 0, 16);
 
     const hdKey = (typeof vocabArtKey === 'function') ? vocabArtKey(nameKo) : '';
-    const iconText = (hdKey && this.textures && this.textures.exists(hdKey))
-      ? this.add.image(0, -4, hdKey).setOrigin(0.5, 0.5)
+    // High-resolution vocabulary sources keep the same pickup footprint — but they reach it by
+    // being resampled once into a 48px texture and drawn at 1:1, rather than by asking the
+    // nearest-neighbour filter to shrink a 192px illustration to a quarter size every frame.
+    const dropKey = (hdKey && this.textures && this.textures.exists(hdKey))
+      ? (typeof hvDownsampledTexture === 'function' ? hvDownsampledTexture(this, hdKey, 48) : hdKey)
+      : '';
+    const iconText = dropKey
+      ? this.add.image(0, -4, dropKey).setOrigin(0.5, 0.5)
       : this.add.text(0, -4, info.icon || '🥬', { fontSize: '24px' }).setOrigin(0.5, 0.5);
+    if (iconText && iconText.type === 'Image' && iconText.height > 48) {
+      iconText.setScale(48 / iconText.height);
+    }
 
     // Korean Label
     const labelText = this.add.text(0, 16, nameKo, {
@@ -1939,6 +1948,7 @@ class FarmScene extends Phaser.Scene {
       if(!active){
         tile.setAlpha(0.35).setTint(0x666666);
         lockIcon = this.add.image(px, py - 4, this._propTex('wooden_crate_hd', 'pixel_crate')).setDisplaySize(24, 24).setAlpha(0.7).setDepth(3);
+        if (typeof hvFitTextureFilter === 'function') hvFitTextureFilter(lockIcon);
         lockText = this.add.text(px, py, '🔒', { fontSize: '18px' }).setOrigin(0.5).setDepth(4);
       } else {
         tile.setAlpha(1.0).clearTint();
@@ -2560,7 +2570,10 @@ class FarmScene extends Phaser.Scene {
       .setOrigin(spec.originX || 0.5, 1)
       .setScale(hdStationScale(spec))
       .setDepth(pos.y + 6);
-    if (spr.texture) spr.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
+    // Not unconditionally NEAREST: a station's layout scale is per building, and the cassette
+    // player stands at 0.72 of its source.
+    if (typeof hvFitTextureFilter === 'function') hvFitTextureFilter(spr);
+    else if (spr.texture) spr.texture.setFilter(Phaser.Textures.FilterMode.NEAREST);
     const hdShadowW = typeof shadowW === 'function' ? shadowW(spr) : shadowW;
     if (this.shadows) this.shadows.createShadow(spr, hdShadowW, 16, 1);
     const label = this.add.text(pos.x, pos.y + 8, (spec.nameKo || id) + '\n' + worldClickHint(), {
@@ -2830,9 +2843,17 @@ class FarmScene extends Phaser.Scene {
         // Anti-farm diminishing returns formula:
         // Decays smoothly down to 1 coin if harvested >= 15 times
         const reward = Math.max(1, Math.floor(10 * Math.pow(0.85, prev)));
+        // Rank XP for the same moment. The rank bar in the HUD used to move only at the
+        // study desk and in the workbook, so the loop the game is actually made of —
+        // plant, water, harvest — paid coins and left the bar exactly where it was. A
+        // harvest is a recall answered at the production step: the same kind of work the
+        // desk pays XP for, and the one the player spends most of their time doing.
+        const xpGain = typeof harvestXp === 'function' ? harvestXp(prev) : 0;
         plantedWords.delete(ko);
         this._sparkle(plot.x,plot.y);
-        this._label(plot.x,plot.y,prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`);
+        this._label(plot.x,plot.y,
+          (prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`)
+          + (xpGain ? `\n+${xpGain} XP` : ''));
 
         // Legendary tier mastery check (>= 10 harvests) -> +10 Honor
         if (newHarvests === 10) {
@@ -2849,6 +2870,17 @@ class FarmScene extends Phaser.Scene {
 
         this.time.delayedCall(350,()=>{
           addCoins(reward);
+          // Paid on the same beat as the coins so the two HUD chips pop together. A rank-up
+          // earned here gets the same card the study desk shows — reaching a new title in
+          // the middle of the farm loop is the moment worth interrupting for, and it was
+          // unreachable from here before.
+          if (typeof addPlayerXp === 'function') {
+            const after = addPlayerXp(xpGain);
+            const hops = (after.leveled && after.leveled.length) || 0;
+            if (hops && typeof showRankUp === 'function') {
+              showRankUp(after.leveled[hops - 1], hops);
+            }
+          }
           updateVocabBook();
           checkQuestProgress('harvest', { count: 1 });
           if (prev === 0) checkQuestProgress('newHarvest', { count: 1 });

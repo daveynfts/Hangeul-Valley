@@ -1,0 +1,181 @@
+{
+  "reason": "Identical vocabulary and desk-quiz concepts share the newly redesigned source to reinforce recognition. Ingredient and taste-combination questions receive separate contextual edits.",
+  "pairs": [
+    {
+      "quiz": 118,
+      "vocabulary": 0
+    },
+    {
+      "quiz": 119,
+      "vocabulary": 1
+    },
+    {
+      "quiz": 120,
+      "vocabulary": 2
+    },
+    {
+      "quiz": 122,
+      "vocabulary": 4
+    },
+    {
+      "quiz": 124,
+      "vocabulary": 6
+    },
+    {
+      "quiz": 125,
+      "vocabulary": 7
+    },
+    {
+      "quiz": 127,
+      "vocabulary": 9
+    },
+    {
+      "quiz": 128,
+      "vocabulary": 10
+    },
+    {
+      "quiz": 129,
+      "vocabulary": 11
+    },
+    {
+      "quiz": 130,
+      "vocabulary": 12
+    },
+    {
+      "quiz": 131,
+      "vocabulary": 13
+    },
+    {
+      "quiz": 132,
+      "vocabulary": 19
+    },
+    {
+      "quiz": 133,
+      "vocabulary": 20
+    },
+    {
+      "quiz": 134,
+      "vocabulary": 21
+    },
+    {
+      "quiz": 135,
+      "vocabulary": 22
+    },
+    {
+      "quiz": 136,
+      "vocabulary": 23
+    },
+    {
+      "quiz": 137,
+      "vocabulary": 27
+    },
+    {
+      "quiz": 294,
+      "vocabulary": 164
+    },
+    {
+      "quiz": 295,
+      "vocabulary": 165
+    },
+    {
+      "quiz": 296,
+      "vocabulary": 189
+    },
+    {
+      "quiz": 297,
+      "vocabulary": 192
+    },
+    {
+      "quiz": 302,
+      "vocabulary": 288
+    },
+    {
+      "quiz": 303,
+      "vocabulary": 218
+    },
+    {
+      "quiz": 304,
+      "vocabulary": 180
+    },
+    {
+      "quiz": 305,
+      "vocabulary": 292
+    },
+    {
+      "quiz": 410,
+      "vocabulary": 311
+    },
+    {
+      "quiz": 411,
+      "vocabulary": 321
+    },
+    {
+      "quiz": 416,
+      "vocabulary": 343
+    },
+    {
+      "quiz": 417,
+      "vocabulary": 348
+    },
+    {
+      "quiz": 419,
+      "vocabulary": 337
+    },
+    {
+      "quiz": 548,
+      "vocabulary": 427
+    },
+    {
+      "quiz": 549,
+      "vocabulary": 441
+    },
+    {
+      "quiz": 550,
+      "vocabulary": 452
+    },
+    {
+      "quiz": 552,
+      "vocabulary": 470
+    },
+    {
+      "quiz": 553,
+      "vocabulary": 514
+    },
+    {
+      "quiz": 554,
+      "vocabulary": 444
+    },
+    {
+      "quiz": 556,
+      "vocabulary": 430
+    },
+    {
+      "quiz": 685,
+      "vocabulary": 473
+    },
+    {
+      "quiz": 690,
+      "vocabulary": 489
+    },
+    {
+      "quiz": 691,
+      "vocabulary": 445
+    },
+    {
+      "quiz": 692,
+      "vocabulary": 444
+    },
+    {
+      "quiz": 693,
+      "vocabulary": 443
+    },
+    {
+      "quiz": 694,
+      "vocabulary": 441
+    },
+    {
+      "quiz": 686,
+      "vocabulary": 652
+    }
+  ]
+}

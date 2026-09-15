@@ -19,7 +19,7 @@
 const fs = require('fs');
 const path = require('path');
 const { loadCatalog, saveCatalog } = require('./art_library');
-const { loadRows } = require('./audit_vocab_art');
+const { loadRows, loadUnitRows } = require('./audit_vocab_art');
 
 function indexArtWords(root, options = {}) {
   const pack = loadCatalog(root);
@@ -31,6 +31,11 @@ function indexArtWords(root, options = {}) {
     if (!row || !row.ko || !row.slug || !row.folder) return;
     if (seen.has(row.ko)) return;
     seen.add(row.ko);
+    const rel = row.folder + '/' + row.slug + '.png';
+    if (!byPath.has(rel)) byPath.set(rel, new Set());
+    byPath.get(rel).add(row.ko);
+  });
+  loadUnitRows(root).forEach((row) => {
     const rel = row.folder + '/' + row.slug + '.png';
     if (!byPath.has(rel)) byPath.set(rel, new Set());
     byPath.get(rel).add(row.ko);

@@ -124,6 +124,14 @@ const VOCAB_ART_ROWS = [
 ];
 
 function vocabArtRow(ko) {
+  const lesson = typeof currentLesson === 'function' ? currentLesson() : null;
+  if (lesson && /^2b-unit-\d+$/.test(lesson.worldId || '')
+      && typeof UNIT_VOCAB_ART_ROWS !== 'undefined') {
+    const unitRow = UNIT_VOCAB_ART_ROWS.find(function (r) {
+      return r.ko === ko && r.worldId === lesson.worldId;
+    });
+    if (unitRow) return unitRow;
+  }
   return VOCAB_ART_ROWS.find(function (r) { return r && r.ko === ko; }) || null;
 }
 function vocabArtFile(ko) {
@@ -144,7 +152,8 @@ function vocabIconHtml(ko, fallbackEmoji, px) {
   return fallbackEmoji || '';
 }
 function vocabArtLoadEntries() {
-  return VOCAB_ART_ROWS.filter(function (r) { return r && r.cooking; }).map(function (r) {
+  const rows = VOCAB_ART_ROWS.concat(typeof UNIT_VOCAB_ART_ROWS !== 'undefined' ? UNIT_VOCAB_ART_ROWS : []);
+  return rows.filter(function (r) { return r && r.cooking; }).map(function (r) {
     return { key: r.slug + '_hd', file: r.folder + '/' + r.slug + '.png' };
   });
 }

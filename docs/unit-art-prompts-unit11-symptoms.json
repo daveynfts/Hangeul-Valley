@@ -1,0 +1,101 @@
+{
+  "tool": "built-in Imagegen",
+  "prompts": [
+    {
+      "index": 138,
+      "ko": "어디가 아프다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 어디가 아프다: A patient showing a clinician exactly where she hurts by pointing to her elbow; clinician listening attentively, small red zigzag by elbow. This depicts asking/indicating the location of pain. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 139,
+      "ko": "속이 안 좋다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 속이 안 좋다: One queasy young adult sitting on a stool, one hand on upper abdomen, other near mouth, gentle pale face and a small nausea swirl, no food, no vomit. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 140,
+      "ko": "몸살이 나다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 몸살이 나다: One tired young adult wrapped in a blanket on a chair, hunched sore shoulders, tiny red ache zigzags at both shoulders and knees to clearly convey whole-body aching, no injury. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 141,
+      "ko": "다리를 다치다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 다리를 다치다: One young adult with a neatly bandaged lower leg, using a wooden crutch, full body so bandage and crutch are clear. No blood. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 142,
+      "ko": "소화가 안되다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 소화가 안되다: One uncomfortable diner after a heavy meal, rubbing a bloated upper belly at a compact table with an almost empty rice bowl and plates, concerned expression. Show indigestion without vomiting. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 143,
+      "ko": "배탈이 나다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 배탈이 나다: One young adult bent forward clutching lower belly with both hands, pained expression and small red cramp zigzags, a small closed bathroom door behind one shoulder; clean non-graphic stomach trouble. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 144,
+      "ko": "토하다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 토하다: One queasy young adult bending over a small wash basin, visibly retching with a few simple pale droplets going into basin. Discreet non-graphic educational depiction, no food detail, no blood. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 145,
+      "ko": "어지럽다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 어지럽다: One young adult unsteady on her feet, hand to forehead and other reaching for support on a stool, a ring of little stars around head and wavy balance marks to convey dizziness. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 146,
+      "ko": "멀미를 하다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 멀미를 하다: One nauseated passenger sitting in a bus seat holding a paper sick bag, a bus window with a tilted winding road symbol and curved motion strokes. Clearly motion sickness while traveling, no vomiting. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 147,
+      "ko": "얼굴에 뭐가 나다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 얼굴에 뭐가 나다: One young adult looking in a small hand mirror, worriedly pointing to a few visible small red spots on cheek, close waist-up composition so facial skin breakout reads, non-graphic. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 148,
+      "ko": "입맛이 없다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 입맛이 없다: One listless diner turning away from an untouched appealing meal, one hand gently declining the offered bowl, no smiling, no nausea symbols. No appetite. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    },
+    {
+      "index": 149,
+      "ko": "기운이 없다",
+      "referenced_image_paths": [
+        "D:/VibeCode/Hangeul Valley/docs/unit-art-sources/unit10_to_be_bitter.png"
+      ],
+      "prompt": "Use the reference as the parent style for a new Korean vocabulary sprite, replacing its entire action and all food props. Keep the same premium cozy 16-bit pixel-art character proportions, cream shirt, warm palette and dark umber outlines. Headword 기운이 없다: One exhausted young adult slumped forward on a low stool, arms hanging loosely and tired drooping eyes, small empty battery pictogram overhead with no text, no sleep bed. One compact isolated composition, at most two people, readable at 192px tall. True transparent alpha background; if unavailable use only flat solid #FF00FF, NEVER white/gray checkerboard. No backdrop, floor, cast shadow, written text, labels or watermark. Clear safe margins and crisp deliberate pixel clusters."
+    }
+  ]
+}

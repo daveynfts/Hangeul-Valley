@@ -1,0 +1,4 @@
+{
+  "index": 194,
+  "prompt": "Edit this exact pixel-art sprite, preserving the carpenter and timber frame. Remove ALL magenta/pink background and give true transparent alpha: outside silhouette AND every enclosed hole between wooden beams, roof truss, windows, under arms and hair gaps. No magenta or purple reflections anywhere. Preserve crisp warm pixel colors and full shapes. Do not paint checkerboard, white or black backdrop; output genuine alpha transparency."
+}

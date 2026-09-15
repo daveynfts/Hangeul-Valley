@@ -29,6 +29,11 @@ jobs:
     timeout-minutes: 40
 
     steps:
+      # checkout v7 refuses to check out a fork PR's head under workflow_run unless the
+      # workflow opts in. The `workflow_run.event == 'push'` half of the gate above is what
+      # keeps that guard dormant here — it returns before it looks at anything else. Loosen
+      # that gate to accept pull_request runs and this step needs re-reading, not just the
+      # `if:`.
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}

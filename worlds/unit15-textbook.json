@@ -22,12 +22,12 @@
       "instructionKo": "그림을 보고 [보기]와 같이 알맞은 단어를 골라 문장을 만들어 보세요.",
       "instructionEn": "Choose the right word from the box for each picture, as in the example.",
       "blurbEn": "Six verbs of change, and each picture decides which one.",
-      "noteEn": "The six are not interchangeable. 늘다 and 줄다 count things; 오르다 and 내리다 move a figure up or down, which in practice means prices; 생기다 is something appearing that was not there; 발전하다 is a place or an organisation getting bigger and better. The pictures are the test: an empty lot with a library on it is 생기다, not 늘다.",
+      "noteEn": "Use 늘다/줄다 for an increase/decrease in number, amount or ability; 오르다/내리다 commonly describe prices or levels rising/falling. 생기다 means something new appears, and 발전하다 means development. Compare 학생 수가 늘었어요, 요금이 내렸어요, 도서관이 생겼어요. These are typical pairings, not absolute limits on usage.",
       "bank": [],
       "items": [
         {
           "n": 1,
-          "art": "quiz/unit15_q01_change_paths.png",
+          "art": "quiz/unit15_q06_library_appears.png",
           "phraseKo": "도서관이 ___ (빈터 → 도서관)",
           "lines": [
             {
@@ -60,7 +60,7 @@
         },
         {
           "n": 2,
-          "art": "quiz/unit15_q02_spicy_food.png",
+          "art": "items/price_coins.png",
           "phraseKo": "전화 요금이 ___ (1분 300원 → 100원)",
           "lines": [
             {
@@ -76,7 +76,7 @@
             },
             {
               "id": "jureotda",
-              "ko": "줄었어요"
+              "ko": "생겼어요"
             },
             {
               "id": "olatda",
@@ -84,8 +84,8 @@
             }
           ],
           "en": "The phone charges have come down.",
-          "why": "300원 to 100원 is a price falling, and a price falls with 내리다. 줄었어요 counts a quantity — fewer calls, not cheaper ones — and 올랐어요 is the direction the picture rules out.",
-          "grammar": "오르다 / 내리다 pair up for figures: 값이 오르다, 요금이 내리다. 늘다 / 줄다 pair up for counts. Prices take the first pair."
+          "why": "The rate per minute fell from 300 won to 100 won, so 내렸어요 fits. 올랐어요 reverses the change; 생겼어요 describes a new charge appearing. 줄다 can describe a reduced total bill, so it is not used as a wrong answer here.",
+          "grammar": "요금이 내리다 describes a rate falling; 요금이 줄다 can describe a bill becoming smaller. Check whether the sentence compares a rate or a total amount."
         },
         {
           "n": 3,
@@ -174,7 +174,18 @@
           "why": "Low buildings become towers: the city as a whole has come on. 발전하다 is what a city or a company does; 늘다 would need Seouls to be counted.",
           "grammar": "발전하다 takes a place or an organisation as its subject and needs no object. 많이 발전했어요 is the standard collocation — the same one the reading uses of Seoul."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "우리 반 학생 수가 {}."
+          }
+        ],
+        "answerKo": "늘었어요",
+        "en": "Our class has more students now."
+      }
     },
     {
       "id": "u15sgk-gram-1",
@@ -276,7 +287,18 @@
           "why": "덥다 is a ㅂ-irregular: before a vowel the ㅂ becomes 우, giving 더워-. 덥어지다 is the irregular ignored. 덥네요 would just report that it is hot, and 점점 needs a change to modify.",
           "grammar": "ㅂ-irregular adjectives: 덥다 → 더워요 → 더워지다, 춥다 → 추워지다, 쉽다 → 쉬워지다. 점점 (little by little) only makes sense with a change verb."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "매일 연습해서 한국어 공부가 {}."
+          }
+        ],
+        "answerKo": "쉬워졌어요",
+        "en": "Studying Korean became easier because I practiced every day."
+      }
     },
     {
       "id": "u15sgk-gram-2",
@@ -287,8 +309,8 @@
       "icon": "🎯",
       "instructionKo": "[보기]와 같이 알맞은 것을 고르세요.",
       "instructionEn": "Choose the right form, as in the example.",
-      "blurbEn": "Something you did not set out to do, and now do.",
-      "noteEn": "V-게 되다 says a situation brought you here rather than a decision. 배우게 되었어요 is \"I ended up learning\" — the liking came first and the studying followed. Compare 배웠어요, which reports the studying and says nothing about how it started. This is why the dialogue uses it for a posting to China and for getting to know someone.",
+      "blurbEn": "A change in what you do or in your circumstances.",
+      "noteEn": "V-게 되다 describes a change in what someone does or a situation that comes about, often through circumstances. It does not always mean an accident or an unwanted result. Compare 한국어를 배웠어요 (I studied Korean) and 한국어를 배우게 됐어요 (I came to study Korean). 되었어요 and 됐어요 mean the same thing.",
       "bank": [],
       "items": [
         {
@@ -367,7 +389,7 @@
             },
             {
               "id": "al_plain",
-              "ko": "알았어요"
+              "ko": "알기 됐어요"
             },
             {
               "id": "al_know",
@@ -375,10 +397,21 @@
             }
           ],
           "en": "No, we got to know each other after coming to Korea.",
-          "why": "The question asks whether they knew each other back home. 알게 됐어요 answers it exactly: the knowing started here. 알았어요 means realised or found out, which is a different verb sense, and 알아요 says only that they know each other now.",
-          "grammar": "알다 + -게 되다 → 알게 되다, to get to know. Note 알았어요 on its own usually means \"got it, understood\" — a trap worth knowing."
+          "why": "알게 됐어요 emphasizes that the two came to know each other in Korea. 알아요 only states that they know each other now. 알기 됐어요 does not form this pattern. 알았어요 can mean knew, found out or understood depending on context.",
+          "grammar": "알다 + -게 되다 → 알게 되다. Keep ㄹ before 게. 알았어요 is also a valid form of 알다, but does not by itself emphasize the start of a relationship."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "회사 일 때문에 서울에서 {}."
+          }
+        ],
+        "answerKo": "살게 됐어요",
+        "en": "Because of my work, I came to live in Seoul."
+      }
     },
     {
       "id": "u15sgk-speak-1",
@@ -547,7 +580,18 @@
           "why": "The second column of the book runs the same shape with different words. 편하다 is a 하다 adjective, so it goes to 편해지다 — never 편하아지다.",
           "grammar": "편하다 → 편해지다, and 알다 → 알게 되다. The pair -아/어지다 for how things feel and -게 되다 for what you now do is the division this chapter is built on."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "A: 요즘 어떻게 지내세요? B: 한국 생활에 {}."
+          }
+        ],
+        "answerKo": "익숙해졌어요",
+        "en": "A: How are you these days? B: I have got used to life in Korea."
+      }
     },
     {
       "id": "u15sgk-gram-3",
@@ -682,7 +726,18 @@
           "why": "The other two are the patterns this chapter contrasts, and both are wrong here: 죽은 후에 puts the wish after death, and 죽을 때 puts it at the moment of dying.",
           "grammar": "전에 and 후에 are the pair: V-기 전에 before, V-(으)ㄴ 후에 after. Note the asymmetry — 전에 takes -기 and 후에 takes -(으)ㄴ."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "{} 손을 씻어요."
+          }
+        ],
+        "answerKo": "밥을 먹기 전에",
+        "en": "I wash my hands before eating."
+      }
     },
     {
       "id": "u15sgk-gram-4",
@@ -694,7 +749,7 @@
       "instructionKo": "[보기]와 같이 이야기해 보세요.",
       "instructionEn": "Ask and answer as in the example.",
       "blurbEn": "After doing something — and here the verb does take a past modifier.",
-      "noteEn": "V-(으)ㄴ 후에 takes the past modifier: 먹은 후에, 끝난 후에. That is the opposite of 전에, which takes the bare -기, and the asymmetry is the whole difficulty. A stem ending in a vowel or ㄹ takes -ㄴ; a stem ending in another consonant takes -은.",
+      "noteEn": "Use the completed-action modifier before 후에: 먹다 → 먹은 후에; 끝나다 → 끝난 후에. A vowel stem takes ㄴ, another consonant takes 은, and ㄹ drops before ㄴ: 만들다 → 만든 후에. The first action finishes before the next; the whole sentence can still refer to the future: 밥을 먹은 후에 갈 거예요.",
       "bank": [],
       "items": [
         {
@@ -821,7 +876,18 @@
           "why": "A 하다 verb takes -ㄴ: 졸업한. 졸업할 후에 uses the future modifier, and 후에 always looks back at something finished.",
           "grammar": "The answer uses -고 나서, which is the everyday spoken alternative to -(으)ㄴ 후에 and means the same thing: 졸업하고 나서 = 졸업한 후에."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "{} 친구에게 줄 거예요."
+          }
+        ],
+        "answerKo": "선물을 만든 후에",
+        "en": "After making the gift, I will give it to my friend."
+      }
     },
     {
       "id": "u15sgk-read-1",
@@ -830,10 +896,10 @@
       "pattern": "내 고향 서울 · 줄리앙 김",
       "section": "읽고 쓰기",
       "icon": "📖",
-      "instructionKo": "다음을 읽고 질문에 답하세요.",
-      "instructionEn": "Read the passage and answer the questions.",
+      "instructionKo": "각 문항의 읽기 요약을 읽고 알맞은 답을 고르세요.",
+      "instructionEn": "Read the learning summary supplied with each question and choose the answer.",
       "blurbEn": "A Seoul-born writer comes back and finds the city rearranged.",
-      "noteEn": "Two questions. The first asks which statement does NOT match, which is the shape that catches people who read for gist — all three sound plausible and one contradicts a sentence in the text. The second asks how Seoul changed, and every answer is a -아/어지다 or a change verb from 어휘 2, which is the chapter closing its own loop.",
+      "noteEn": "The summaries are learning aids, not a full transcript of the book passage. For question 1, choose the statement that contradicts the summary. In the remaining questions, express the changes with 줄다, 편리해지다 and 많아지다.",
       "bank": [],
       "items": [
         {
@@ -842,12 +908,16 @@
           "phraseKo": "이 사람에 대한 설명으로 맞지 않는 것",
           "lines": [
             {
-              "who": "질문",
-              "ko": "이 사람에 대한 설명으로 맞지 {} 것을 고르세요."
+              "who": "읽기 요약",
+              "ko": "줄리앙 김은 서울에서 태어났습니다. 여섯 살에 프랑스로 이사했고 한국어를 배우러 한국에 왔습니다."
             },
             {
-              "who": "보기",
-              "ko": "① 서울에서 태어났습니다  ② 여섯 살까지 프랑스에서 살았습니다  ③ 한국어를 배우려고 한국에 왔습니다"
+              "who": "질문",
+              "ko": "이 사람에 대한 설명으로 맞지 않는 것을 고르세요."
+            },
+            {
+              "who": "답",
+              "ko": "{}"
             }
           ],
           "answer": "ans2",
@@ -874,6 +944,10 @@
           "art": "quiz/unit15_q02_spicy_food.png",
           "phraseKo": "주택이 많이 ___",
           "lines": [
+            {
+              "who": "읽기 요약",
+              "ko": "서울에는 예전보다 주택이 적습니다. 교통은 더 편리하고 외국인도 더 많습니다."
+            },
             {
               "who": "질문",
               "ko": "서울이 어떻게 달라졌습니까?"
@@ -908,6 +982,10 @@
           "phraseKo": "교통이 ___",
           "lines": [
             {
+              "who": "읽기 요약",
+              "ko": "서울에는 예전보다 주택이 적습니다. 교통은 더 편리하고 외국인도 더 많습니다."
+            },
+            {
               "who": "답",
               "ko": "교통이 {}."
             }
@@ -937,6 +1015,10 @@
           "phraseKo": "서울에 사는 외국인이 ___",
           "lines": [
             {
+              "who": "읽기 요약",
+              "ko": "서울에는 예전보다 주택이 적습니다. 교통은 더 편리하고 외국인도 더 많습니다."
+            },
+            {
               "who": "답",
               "ko": "서울에 사는 외국인이 {}."
             }
@@ -960,7 +1042,18 @@
           "why": "서울에 사는 외국인도 많아져서 … is the sentence. 많습니다 is the state without the change, and the question asked what is different.",
           "grammar": "많다 → 많아지다: ㅏ in the stem, so -아지다. It is also the 발음 example on the last page — 많아져요 is said [마나져요], with the ㅎ dropped."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "민수는 부산에서 태어났어요. 민수의 고향은 {}."
+          }
+        ],
+        "answerKo": "부산이에요",
+        "en": "Minsu was born in Busan. His hometown is Busan."
+      }
     },
     {
       "id": "u15sgk-task-1",
@@ -1091,7 +1184,18 @@
           "why": "부모님 takes the honorific: 께서 in the subject and -시- in the verb. 좋아지셨습니다 is the change verb, which would say they became better, not that they were pleased.",
           "grammar": "좋다 (to be good) → 좋아지다 (to get better); 좋아하다 (to like) is a different verb. -았을 때 = when it happened: 태어났을 때."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "대학교에 입학한 후에 새 친구를 {}."
+          }
+        ],
+        "answerKo": "사귀게 됐어요",
+        "en": "After starting university, I came to make new friends."
+      }
     },
     {
       "id": "u15sgk-culture-1",
@@ -1102,8 +1206,8 @@
       "icon": "🌆",
       "instructionKo": "서울의 변화를 보고 어떻게 달라졌는지 이야기해 보세요.",
       "instructionEn": "Look at the figures and say how Seoul has changed.",
-      "blurbEn": "Four numbers, forty years apart, and each one takes a different change verb.",
-      "noteEn": "The page gives 1970s and 2010s figures side by side. Which verb each takes is the chapter’s point: people are counted, so 늘다; bridges and subway lines did not exist and now do, so 생기다; and the city as a whole 발전하다.",
+      "blurbEn": "Compare historical figures using verbs of change.",
+      "noteEn": "These are the textbook comparison figures for the 1970s and 2010s, not present-day statistics. Both population and bridge counts increase with 늘다; new subway lines appear with 생기다; the city develops with 발전하다. The supplementary model uses invented practice figures.",
       "bank": [],
       "items": [
         {
@@ -1132,7 +1236,7 @@
             }
           ],
           "en": "The population of Seoul rose from 5.69 million to 10.46 million.",
-          "why": "인구 is a count of people, and counts take 늘다. 올랐습니다 would price them; 발전했습니다 says the population improved, which is not a thing a population does.",
+          "why": "The number of residents increased, so 늘었습니다 is the natural choice here. 발전했습니다 describes development rather than a change in headcount.",
           "grammar": "N에서 N(으)로 marks the range of a change: 569만 명에서 1,046만 명으로. 만 = ten thousand, so 1,046만 is 10.46 million."
         },
         {
@@ -1222,7 +1326,18 @@
           "why": "The schools 늘다 because they are counted; the city 발전하다 because that is what a place does when everything in it grows at once. Both verbs in one sentence is the distinction the page is drawing.",
           "grammar": "-고 joins the two clauses and leaves the tense on the second: 늘고 … 발전했습니다."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "이 마을의 인구가 100명에서 80명으로 {}."
+          }
+        ],
+        "answerKo": "줄었어요",
+        "en": "The population of this village fell from 100 to 80. (Practice figures.)"
+      }
     },
     {
       "id": "u15sgk-pron-1",
@@ -1386,7 +1501,18 @@
           "why": "끓다 ends in ㅀ, and the spelling keeps it: 끓으면, said [끄르면]. 끌으면 drops the ㅎ from the writing as well, which is the mistake this rule produces.",
           "grammar": "-(으)면 = if, when. After a ㅀ stem it is -으면: 끓으면, 싫으면."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "좋아요 → [{}]"
+          }
+        ],
+        "answerKo": "조아요",
+        "en": "In 좋아요, ㅎ is not pronounced before the vowel ending."
+      }
     },
     {
       "id": "u15sgk-check-2",
@@ -1533,7 +1659,18 @@
           "why": "B worked 고향에서 — back home — which can only be before coming. 온 후에 would put the home-town job after the arrival.",
           "grammar": "오다 → 오기 전에. This is the same sentence as 문법 3, which is the book checking whether the pattern stuck."
         }
-      ]
+      ],
+      "example": {
+        "phraseKo": "추가 예문",
+        "lines": [
+          {
+            "who": "예",
+            "ko": "{} 이를 닦아요."
+          }
+        ],
+        "answerKo": "밥을 먹은 후에",
+        "en": "I brush my teeth after eating."
+      }
     }
   ]
 }

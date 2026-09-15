@@ -63,9 +63,9 @@ console.log('====================================================');
 console.log('\n--- 1. The word list ---');
 const words = (world.level && world.level.words) || [];
 assert(words.length === 125, 'the chapter list is 125 words (found ' + words.length + ')');
-const drawn = words.filter((w) => !w.artPending);
-assert(drawn.length === 54, 'exactly 54 of them are the drawn 어휘 headwords (found ' + drawn.length + ')');
-assert(words.length - drawn.length === 71, '71 are the later pages, still waiting on art');
+const drawn = words.filter((w) => !w.artPending && !w.chapterSupplement);
+assert(drawn.length === 54, 'exactly 54 of them are the original 어휘 headwords (found ' + drawn.length + ')');
+assert(words.length - drawn.length === 71, '71 come from the later chapter pages');
 const incomplete = words.filter((w) => !w.ko || !w.en || !w.category || !w.categoryEn || !w.hint).map((w) => w.ko || '?');
 assert(incomplete.length === 0, 'every word has ko / en / category / categoryEn / hint'
   + (incomplete.length ? ' — ' + incomplete.slice(0, 6).join(', ') : ''));

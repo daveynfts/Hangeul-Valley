@@ -14,15 +14,16 @@ const END = '// END REVIEWED TOPIK ART';
 function appendReviewedArtFingerprint(root, fingerprint) {
   // TOPIK owns the shared runtime cache key, so other reviewed sprite batches must
   // participate in its fingerprint or the next TOPIK sync would roll their cache bust back.
-  const files = ['docs/valley-map-art-manifest.json'];
+  const files = ['docs/valley-map-art-manifest.json', 'docs/unit-art-redesign.json'];
   let count = 0;
   files.forEach((manifestFile) => {
     const fullManifest = path.join(root, manifestFile);
     if (!fs.existsSync(fullManifest)) return;
     const manifest = JSON.parse(fs.readFileSync(fullManifest, 'utf8'));
-    const entries = Array.isArray(manifest.entries) ? manifest.entries.filter(entry => entry.reviewed === true) : [];
+    const entries = Array.isArray(manifest.entries) ? manifest.entries.filter(entry => entry.reviewed === true
+      && (manifestFile !== 'docs/unit-art-redesign.json' || entry.file)) : [];
     entries.sort((a, b) => String(a.file || '').localeCompare(String(b.file || ''))).forEach((entry) => {
-      if (!/^sprites\/(characters|decorations|furniture|stalls)\/[a-z][a-z0-9_]*\.png$/.test(entry.file || '')) {
+      if (!/^sprites\/(characters|decorations|furniture|stalls|foods|items|quiz)\/[a-z][a-z0-9_]*\.png$/.test(entry.file || '')) {
         throw new Error('Invalid reviewed art path in ' + manifestFile + ': ' + (entry.file || 'missing'));
       }
       const full = path.join(root, entry.file);

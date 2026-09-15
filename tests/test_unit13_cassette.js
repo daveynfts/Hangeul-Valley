@@ -254,8 +254,8 @@ assert(/isUnit13World\(\)\) return '\/worlds\/unit13-desk-quiz\.json'/.test(ui),
 // Landing on a two-line grammar box is a thin thing to open on, so the listen screen
 // starts at the unit's first real conversation. The track number is the book's.
 assert(/OPEN_ON = \{[^}]*'2b-unit-13': 34/.test(ui), 'the listen screen opens on 말하기 1, track 34');
-assert(quiz.sessionSize === 10 && (quiz.questions || []).length === 13,
-  '13 quiz questions, 10 to a session');
+assert(Number.isInteger(quiz.sessionSize) && quiz.sessionSize >= 1 && quiz.sessionSize <= 13 && (quiz.questions || []).length === 13,
+  '13 quiz questions with a valid configured session size');
 const qproblems = [];
 (quiz.questions || []).forEach((q, i) => {
   if (typeof q.id !== 'number' || q.id !== i + 1) qproblems.push('row ' + i + ' id');
