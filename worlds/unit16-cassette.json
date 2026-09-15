@@ -1,0 +1,1659 @@
+{
+  "unit": "2b-unit-16",
+  "titleKo": "카세트 플레이어",
+  "titleEn": "The book's own recordings",
+  "unitKo": "16과 설날에는 밥 대신 떡국을 먹어요",
+  "source": "Seoul National University Korean 2B, Unit 16, tracks 62-71",
+  "closeKo": "닫기",
+  "tracks": [
+    {
+      "n": 62,
+      "sec": "문법과 표현 1-1",
+      "secEn": "V-아/어 놓다",
+      "dur": 12.46,
+      "src": "audio/book/2b-u16-trk62.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "주말인데 표가 있을까요?",
+          "at": 3.77,
+          "end": 6.06
+        },
+        {
+          "who": "B",
+          "ko": "걱정하지 마세요. 제가 예매해 놓았어요.",
+          "at": 6.96,
+          "end": 10.41
+        }
+      ]
+    },
+    {
+      "n": 63,
+      "sec": "문법과 표현 1-2",
+      "secEn": "N 대신",
+      "dur": 14,
+      "src": "audio/book/2b-u16-trk63.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "설날에 먹는 특별한 음식이 있어요?",
+          "at": 3.77,
+          "end": 6.8
+        },
+        {
+          "who": "B",
+          "ko": "네, 설날에는 밥 대신 떡국을 먹어요.",
+          "at": 7.69,
+          "end": 11.95
+        }
+      ]
+    },
+    {
+      "n": 64,
+      "sec": "말하기 1",
+      "secEn": "Going home for the holiday",
+      "dur": 58.98,
+      "src": "audio/book/2b-u16-trk64.mp3",
+      "lines": [
+        {
+          "who": "스티븐",
+          "ko": "지연 씨, 이번 연휴에 고향에 내려가요?",
+          "at": 3.77,
+          "end": 7.89
+        },
+        {
+          "who": "지연",
+          "ko": "네, 한 달 전에 미리 기차표를 예매해 놓았어요.",
+          "at": 8.81,
+          "end": 13.74
+        },
+        {
+          "who": "스티븐",
+          "ko": "그렇게 빨리 예매를 해야 돼요?",
+          "at": 14.63,
+          "end": 17.2
+        },
+        {
+          "who": "지연",
+          "ko": "네, 명절에는 고향에 가는 사람들이 많아서 서두르지 않으면 표 사기가 힘들어요.",
+          "at": 18.08,
+          "end": 26
+        },
+        {
+          "who": "스티븐",
+          "ko": "그런데 한국에서는 설날에 보통 뭘 해요?",
+          "at": 26.88,
+          "end": 31.28
+        },
+        {
+          "who": "지연",
+          "ko": "아침에 음식을 차려 놓고 차례를 지내요. 그리고 어른들께 세배를 해요.",
+          "at": 32.19,
+          "end": 39.53
+        },
+        {
+          "who": "스티븐",
+          "ko": "설날에 먹는 특별한 음식이 있어요?",
+          "at": 40.42,
+          "end": 43.49
+        },
+        {
+          "who": "지연",
+          "ko": "설날에는 밥 대신 떡국을 먹어요.",
+          "at": 44.38,
+          "end": 47.78
+        },
+        {
+          "who": "스티븐",
+          "ko": "지연 씨도 떡국 끓일 줄 알아요?",
+          "at": 48.68,
+          "end": 51.41
+        },
+        {
+          "who": "지연",
+          "ko": "그럼요. 나중에 우리 집에 오면 제가 해 줄게요.",
+          "at": 52.31,
+          "end": 56.93
+        }
+      ]
+    },
+    {
+      "n": 65,
+      "sec": "문법과 표현 2-1",
+      "secEn": "V-(으)ㄹ까 하다",
+      "dur": 12.67,
+      "src": "audio/book/2b-u16-trk65.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "이번 연휴에 뭐 할 거예요?",
+          "at": 3.78,
+          "end": 6.03
+        },
+        {
+          "who": "B",
+          "ko": "글쎄요. 가까운 곳으로 여행 갈까 해요.",
+          "at": 6.98,
+          "end": 10.52
+        }
+      ]
+    },
+    {
+      "n": 66,
+      "sec": "문법과 표현 2-2",
+      "secEn": "A/V-(으)ㄹ 테니까",
+      "dur": 12.41,
+      "src": "audio/book/2b-u16-trk66.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "제가 청소를 할까요?",
+          "at": 3.77,
+          "end": 5.64
+        },
+        {
+          "who": "B",
+          "ko": "청소는 제가 할 테니까 설거지 좀 해 주세요.",
+          "at": 6.57,
+          "end": 10.38
+        }
+      ]
+    },
+    {
+      "n": 67,
+      "sec": "말하기 2",
+      "secEn": "Inviting the class over for Chuseok",
+      "dur": 53.68,
+      "src": "audio/book/2b-u16-trk67.mp3",
+      "lines": [
+        {
+          "who": "줄리앙",
+          "ko": "이번 추석 연휴에 뭐 할 거야?",
+          "at": 3.78,
+          "end": 6.64
+        },
+        {
+          "who": "켈리",
+          "ko": "글쎄, 아직 잘 모르겠는데.",
+          "at": 7.53,
+          "end": 10.32
+        },
+        {
+          "who": "줄리앙",
+          "ko": "그럼, 토요일에 반 친구들을 초대할까 하는데 너도 올래?",
+          "at": 11.21,
+          "end": 16.93
+        },
+        {
+          "who": "켈리",
+          "ko": "재미있겠다. 나도 갈게. 내가 뭐 도와줄 거 있어?",
+          "at": 17.82,
+          "end": 22.87
+        },
+        {
+          "who": "줄리앙",
+          "ko": "그럼 음식 준비하는 것 좀 도와줄래?",
+          "at": 23.75,
+          "end": 26.8
+        },
+        {
+          "who": "켈리",
+          "ko": "그래. 뭘 만들 건데?",
+          "at": 27.69,
+          "end": 29.92
+        },
+        {
+          "who": "줄리앙",
+          "ko": "송편을 만들까 하는데 해 본 적이 없어서 잘할 수 있을지 모르겠어.",
+          "at": 30.8,
+          "end": 37.04
+        },
+        {
+          "who": "켈리",
+          "ko": "나 송편 만들 줄 알아. 내가 도와줄 테니까 걱정하지 마.",
+          "at": 37.93,
+          "end": 43.06
+        },
+        {
+          "who": "줄리앙",
+          "ko": "잘됐다. 그럼 내가 장을 미리 봐 놓을게.",
+          "at": 43.98,
+          "end": 48.28
+        },
+        {
+          "who": "켈리",
+          "ko": "그래, 그럼 토요일에 보자.",
+          "at": 49.23,
+          "end": 51.62
+        }
+      ]
+    },
+    {
+      "n": 68,
+      "sec": "듣기 1",
+      "secEn": "Live from Seoul Station on the eve of Chuseok",
+      "dur": 84.06,
+      "src": "audio/book/2b-u16-trk68.mp3",
+      "lines": [
+        {
+          "who": "앵커",
+          "ko": "오늘부터 추석 연휴가 시작되는데요. 서울역에 나가 있는 김혜경 기자를 불러 보겠습니다. 김혜경 기자!",
+          "at": 9.27,
+          "end": 18.52
+        },
+        {
+          "who": "기자",
+          "ko": "예, 저는 지금 서울역에 나와 있습니다. 서울역은 지금 고향에 내려가는 사람들로 복잡합니다. 그럼 고향에 가시는 한 분과 이야기 나눠 보겠습니다. 고향이 어디십니까?",
+          "at": 19.41,
+          "end": 34.96
+        },
+        {
+          "who": "시민",
+          "ko": "부산입니다.",
+          "at": 35.9,
+          "end": 36.83
+        },
+        {
+          "who": "기자",
+          "ko": "고향에는 누가 계십니까?",
+          "at": 37.72,
+          "end": 39.84
+        },
+        {
+          "who": "시민",
+          "ko": "부모님과 형님이 계십니다.",
+          "at": 40.73,
+          "end": 42.93
+        },
+        {
+          "who": "기자",
+          "ko": "고향에 내려가는 기분이 어떠십니까?",
+          "at": 43.86,
+          "end": 46.55
+        },
+        {
+          "who": "시민",
+          "ko": "오랫동안 고향에 못 내려갔는데 가족들을 만날 생각을 하니까 아주 기쁩니다. 부모님께서 맛있는 음식도 많이 해 놓고 기다리고 계실 겁니다.",
+          "at": 47.44,
+          "end": 60.41
+        },
+        {
+          "who": "기자",
+          "ko": "연휴가 긴데, 특별한 계획 있으십니까?",
+          "at": 61.32,
+          "end": 64.63
+        },
+        {
+          "who": "시민",
+          "ko": "부모님 일도 좀 도와 드리고 가까운 곳으로 여행도 갈까 합니다.",
+          "at": 65.54,
+          "end": 70.89
+        },
+        {
+          "who": "기자",
+          "ko": "네, 말씀 감사합니다. 고향 잘 다녀오시기 바랍니다. 지금까지 서울역에서 김혜경이었습니다.",
+          "at": 71.78,
+          "end": 81.01
+        }
+      ]
+    },
+    {
+      "n": 69,
+      "sec": "듣기 2",
+      "secEn": "Finding someone to mind the cat",
+      "dur": 97.36,
+      "src": "audio/book/2b-u16-trk69.mp3",
+      "lines": [
+        {
+          "who": "여1",
+          "ko": "정우 씨, 저 나나인데요. 부탁 하나만 해도 돼요?",
+          "at": 8.54,
+          "end": 13.41
+        },
+        {
+          "who": "남",
+          "ko": "무슨 일인데요?",
+          "at": 14.3,
+          "end": 15.37
+        },
+        {
+          "who": "여1",
+          "ko": "제가 추석 연휴에 이틀 정도 여행을 가는데 고양이를 맡길 곳이 없어서요. 미안하지만 고양이 좀 맡아 줄 수 있어요?",
+          "at": 16.27,
+          "end": 27.55
+        },
+        {
+          "who": "남",
+          "ko": "아, 어떻게 하죠? 저도 그러고 싶은데 우리 가족도 고향에 내려가요.",
+          "at": 28.45,
+          "end": 35.22
+        },
+        {
+          "who": "여1",
+          "ko": "그래요? 부탁할 사람이 없어서 큰일이네요.",
+          "at": 36.12,
+          "end": 40.14
+        },
+        {
+          "who": "남",
+          "ko": "지연 씨한테 연락해 보면 어때요? 지연 씨 집에도 고양이가 있어요.",
+          "at": 41.04,
+          "end": 46.9
+        },
+        {
+          "who": "여1",
+          "ko": "아, 그래요? 그럼 한번 전화해 볼게요.",
+          "at": 47.81,
+          "end": 51.48
+        },
+        {
+          "who": "여1",
+          "ko": "여보세요? 지연 씨? 저 나나인데요. 혹시 이번 연휴에 고향에 내려가요?",
+          "at": 58.32,
+          "end": 66.21
+        },
+        {
+          "who": "여2",
+          "ko": "아니요, 이번에는 연휴가 짧아서 안 내려가요.",
+          "at": 67.1,
+          "end": 71.33
+        },
+        {
+          "who": "여1",
+          "ko": "그럼 미안하지만 제 고양이 이틀만 맡아 줄 수 있어요? 여행을 가는데 고양이를 맡길 곳이 없어서요.",
+          "at": 72.23,
+          "end": 82.48
+        },
+        {
+          "who": "여2",
+          "ko": "네, 좋아요. 제가 잘 봐 줄 테니까 걱정 마세요.",
+          "at": 83.39,
+          "end": 88.09
+        },
+        {
+          "who": "여1",
+          "ko": "정말 고마워요. 필요한 건 제가 다 준비해서 내일 갈게요.",
+          "at": 88.97,
+          "end": 94.32
+        }
+      ]
+    },
+    {
+      "n": 70,
+      "sec": "발음 준비",
+      "secEn": "유음화 — listen",
+      "dur": 18.55,
+      "src": "audio/book/2b-u16-trk70.mp3",
+      "lines": [
+        {
+          "who": "1",
+          "ko": "설날 아침에는 세배를 해요.",
+          "at": 7.92,
+          "end": 10.79
+        },
+        {
+          "who": "2",
+          "ko": "일 년 전에 한국에 왔어요.",
+          "at": 14.03,
+          "end": 16.51
+        }
+      ]
+    },
+    {
+      "n": 71,
+      "sec": "발음 연습",
+      "secEn": "유음화 — repeat",
+      "dur": 40.28,
+      "src": "audio/book/2b-u16-trk71.mp3",
+      "lines": [
+        {
+          "who": "1",
+          "ko": "일 년 후에 다시 만나요.",
+          "at": 9.13,
+          "end": 11.45
+        },
+        {
+          "who": "2",
+          "ko": "사물놀이 공연을 본 적이 있어요.",
+          "at": 15.67,
+          "end": 18.69
+        },
+        {
+          "who": "3",
+          "ko": "사진이 잘 나왔네요.",
+          "at": 23.03,
+          "end": 25.22
+        },
+        {
+          "who": "4A",
+          "ko": "이번 설날에 고향에 가요?",
+          "at": 29.52,
+          "end": 32.41
+        },
+        {
+          "who": "4B",
+          "ko": "네, 고향 갈 날만 기다리고 있어요.",
+          "at": 33.3,
+          "end": 37.22
+        }
+      ]
+    }
+  ],
+  "dictation": {
+    "filter": {
+      "keep": [
+        "a whole sentence someone would actually say",
+        "5-22 syllables: long enough to need listening, short enough to hold in your head",
+        "carries at least one thing you can only write correctly if you know something — the unit's grammar (V-아/어 놓다, N 대신, V-(으)ㄹ까 하다, A/V-(으)ㄹ 테니까), a gap between sound and spelling (this unit's 발음 point is 유음화: an initial ㄴ next to a ㄹ is read [ㄹ], so 설날 is [설랄], 일 년 is [일련], 연락 is [열락] and 서울역 is [서울력] — and the rule runs both ways round the ㄹ), or a unit headword"
+      ],
+      "drop": [
+        "fixed courtesies — 네, 말씀 감사합니다, 여보세요",
+        "bare reactions — 무슨 일인데요?, 아, 어떻게 하죠?",
+        "proper nouns standing alone: 부산입니다 is five syllables of place name with nothing to decide",
+        "anything under ~5 syllables: nothing to decide when you write it"
+      ],
+      "splitAtClause": "Printed turns past 22 syllables are cut at a boundary the recording itself pauses on — never mid-clause and never trimmed — and each part names its parent in splitFrom. One sentence of track 68 is dropped rather than cut: 부모님께서 맛있는 음식도 많이 해 놓고 기다리고 계실 겁니다 is 25 syllables read in a single unbroken span, so there is nowhere the recording agrees to cut it."
+    },
+    "items": [
+      {
+        "id": 1,
+        "track": 62,
+        "who": "A",
+        "ko": "주말인데 표가 있을까요?",
+        "en": "It’s the weekend — do you think there are any tickets?",
+        "syl": 10,
+        "why": "있을까요 is said [이쓸까요]. The ㄹ of the ending tenses the ㄱ behind it, so the 까 you hear is already a 까 — but the ㅆ of 있다 has crossed into the next syllable and is not where it sounds.",
+        "tags": [
+          "V-(으)ㄹ까요",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d01.mp3",
+          "voiced": 2.17,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 2,
+        "track": 62,
+        "who": "B",
+        "ko": "걱정하지 마세요. 제가 예매해 놓았어요.",
+        "en": "Don’t worry. I booked it in advance.",
+        "syl": 16,
+        "why": "The page’s own V-아/어 놓다 — the booking is done and the ticket is still there. 걱정 is said [걱쩡], the ㄱ tensing the ㅈ behind it, and 놓았어요 is said [노아써요] with the ㅎ gone between vowels.",
+        "tags": [
+          "V-아/어 놓다",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d02.mp3",
+          "voiced": 2.84,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 3,
+        "track": 63,
+        "who": "A",
+        "ko": "설날에 먹는 특별한 음식이 있어요?",
+        "en": "Is there any special food eaten on Seollal?",
+        "syl": 14,
+        "why": "The chapter’s 발음 point in its commonest word: 설날 is said [설랄], the ㄴ turning into [ㄹ] after the 받침 ㄹ. 먹는 is said [멍는] on top of it, so two of the four words are spelt nothing like they sound.",
+        "tags": [
+          "유음화",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d03.mp3",
+          "voiced": 2.91,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 4,
+        "track": 63,
+        "who": "B",
+        "ko": "네, 설날에는 밥 대신 떡국을 먹어요.",
+        "en": "On Seollal we eat rice-cake soup instead of rice.",
+        "syl": 14,
+        "why": "The chapter title, and its own N 대신. 설날 is [설랄] again and 떡국 is [떡꾹] — the ㄱ tenses after the 받침 ㄱ — so the second half is written with plain letters and heard with tense ones.",
+        "tags": [
+          "N 대신",
+          "유음화",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d04.mp3",
+          "voiced": 3.47,
+          "rate": 4
+        }
+      },
+      {
+        "id": 5,
+        "track": 64,
+        "who": "스티븐",
+        "ko": "지연 씨, 이번 연휴에 고향에 내려가요?",
+        "en": "Jiyeon, are you going down to your hometown this long weekend?",
+        "syl": 15,
+        "why": "연휴 and 고향 are both chapter headwords, and both lose a consonant to the vowel after it: 연휴에 runs as [여뉴에] and 고향에 as [고향에] with the ㅇ carrying over. What you hear gives no clue where the word boundaries are.",
+        "tags": [
+          "연음",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d05.mp3",
+          "voiced": 3.08,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 6,
+        "track": 64,
+        "who": "지연",
+        "ko": "네, 한 달 전에 미리 기차표를 예매해 놓았어요.",
+        "en": "Yes, I booked the train tickets a month ago.",
+        "syl": 18,
+        "why": "V-아/어 놓다 again, this time with the state it leaves behind spelled out: the booking was a month ago and the ticket is still booked. 기차표 is a chapter headword and 놓았어요 is heard as [노아써요].",
+        "tags": [
+          "V-아/어 놓다",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d06.mp3",
+          "voiced": 3.97,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 7,
+        "track": 64,
+        "who": "스티븐",
+        "ko": "그렇게 빨리 예매를 해야 돼요?",
+        "en": "Do you need to book that early?",
+        "syl": 12,
+        "why": "그렇게 is said [그러케]: the ㅎ of 그렇다 and the ㄱ of 게 fuse into one aspirated [ㅋ]. Neither letter survives in the sound, so both have to come from knowing the word.",
+        "tags": [
+          "ㅎ 축약",
+          "V-아/어야 되다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d07.mp3",
+          "voiced": 2.45,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 8,
+        "track": 64,
+        "who": "지연",
+        "ko": "네, 명절에는 고향에 가는 사람들이 많아서",
+        "en": "Yes, because so many people go to their hometown for the holidays,",
+        "syl": 17,
+        "why": "많아서 is said [마나서] — the ㅎ of 많다 goes between vowels and the ㄴ of the cluster carries over — so nothing in the sound says there is an ㅎ to write. 명절 is the chapter’s own headword.",
+        "tags": [
+          "ㅎ 탈락",
+          "어휘"
+        ],
+        "splitFrom": "네, 명절에는 고향에 가는 사람들이 많아서 서두르지 않으면 표 사기가 힘들어요.",
+        "audio": {
+          "src": "audio/book/2b-u16-d08.mp3",
+          "voiced": 3.6,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 9,
+        "track": 64,
+        "who": "지연",
+        "ko": "서두르지 않으면 표 사기가 힘들어요.",
+        "en": "if we don’t hurry it will be hard to get a ticket.",
+        "syl": 15,
+        "why": "않으면 is said [아느면], the ㅎ lost between vowels for the second time in one turn. 서두르지 is a 르 stem written out in full here, which is the only place it looks like its dictionary form.",
+        "tags": [
+          "ㅎ 탈락",
+          "어휘"
+        ],
+        "splitFrom": "네, 명절에는 고향에 가는 사람들이 많아서 서두르지 않으면 표 사기가 힘들어요.",
+        "audio": {
+          "src": "audio/book/2b-u16-d09.mp3",
+          "voiced": 3.02,
+          "rate": 5
+        }
+      },
+      {
+        "id": 10,
+        "track": 64,
+        "who": "스티븐",
+        "ko": "그런데 한국에서는 설날에 보통 뭘 해요?",
+        "en": "By the way, what do Koreans normally do on Seollal?",
+        "syl": 16,
+        "why": "설날 [설랄] once more, and 뭘 is 무엇을 squeezed into one syllable — a contraction that is written the short way and can only be expanded by someone who knows what it came from.",
+        "tags": [
+          "유음화",
+          "축약"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d10.mp3",
+          "voiced": 3.9,
+          "rate": 4.1
+        }
+      },
+      {
+        "id": 11,
+        "track": 64,
+        "who": "지연",
+        "ko": "아침에 음식을 차려 놓고 차례를 지내요.",
+        "en": "In the morning we set the table with food and perform the ancestral rites.",
+        "syl": 16,
+        "why": "Two chapter headwords in one clause, and V-아/어 놓다 doing its real work: the food is set out and then left set out while the rites are held. 놓고 is heard as [노코], the ㅎ fusing with the ㄱ.",
+        "tags": [
+          "V-아/어 놓다",
+          "음식을 차리다",
+          "차례를 지내다"
+        ],
+        "splitFrom": "아침에 음식을 차려 놓고 차례를 지내요. 그리고 어른들께 세배를 해요.",
+        "audio": {
+          "src": "audio/book/2b-u16-d11.mp3",
+          "voiced": 3.31,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 12,
+        "track": 64,
+        "who": "지연",
+        "ko": "그리고 어른들께 세배를 해요.",
+        "en": "And we do the New Year’s bow to our elders.",
+        "syl": 12,
+        "why": "어른들께 takes 께 and not 에게, because the elders are the ones being honoured — a choice you can only write correctly if you know who is being spoken about. 세배 is the chapter headword.",
+        "tags": [
+          "세배(를) 하다",
+          "높임"
+        ],
+        "splitFrom": "아침에 음식을 차려 놓고 차례를 지내요. 그리고 어른들께 세배를 해요.",
+        "audio": {
+          "src": "audio/book/2b-u16-d12.mp3",
+          "voiced": 2.42,
+          "rate": 5
+        }
+      },
+      {
+        "id": 13,
+        "track": 64,
+        "who": "스티븐",
+        "ko": "지연 씨도 떡국 끓일 줄 알아요?",
+        "en": "Jiyeon, do you know how to make tteokguk?",
+        "syl": 12,
+        "why": "끓일 is said [끄릴]. The cluster 받침 ㅀ keeps only its ㄹ, which then crosses into the next syllable, so two of the three letters written in 끓 are silent.",
+        "tags": [
+          "V-(으)ㄹ 줄 알다",
+          "겹받침"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d13.mp3",
+          "voiced": 2.61,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 14,
+        "track": 64,
+        "who": "지연",
+        "ko": "그럼요. 나중에 우리 집에 오면 제가 해 줄게요.",
+        "en": "Of course. I’ll make it for you when you come to my place next time.",
+        "syl": 18,
+        "why": "그럼요 is said [그럼뇨] — a ㄴ appears out of nowhere between the 받침 ㅁ and the 요 — and 줄게요 is said [줄께요]. Both are heard with a sound the spelling does not have.",
+        "tags": [
+          "ㄴ 첨가",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d14.mp3",
+          "voiced": 3.55,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 15,
+        "track": 65,
+        "who": "A",
+        "ko": "이번 연휴에 뭐 할 거예요?",
+        "en": "What are you going to do this long weekend?",
+        "syl": 10,
+        "why": "할 거예요 is said [할 꺼예요]: the ㄹ of the ending tenses the ㄱ of 거. The tense sound is the rule doing its work, and writing 꺼 would be writing the sound instead of the word.",
+        "tags": [
+          "V-(으)ㄹ 거예요",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d15.mp3",
+          "voiced": 2.13,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 16,
+        "track": 65,
+        "who": "B",
+        "ko": "글쎄요. 가까운 곳으로 여행 갈까 해요.",
+        "en": "Well, I am thinking of travelling somewhere close by.",
+        "syl": 15,
+        "why": "The page’s own V-(으)ㄹ까 하다 — a plan that is still only a thought. 곳으로 is said [고스로], the 받침 ㅅ crossing over as a plain [ㅅ] where 곳 on its own would end in [ㄷ].",
+        "tags": [
+          "V-(으)ㄹ까 하다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d16.mp3",
+          "voiced": 2.99,
+          "rate": 5
+        }
+      },
+      {
+        "id": 17,
+        "track": 66,
+        "who": "A",
+        "ko": "제가 청소를 할까요?",
+        "en": "Shall I do the cleaning?",
+        "syl": 8,
+        "why": "할까요 is said [할까요] with the ㄱ already tense, so the ㄹ has done its work before you write anything. The 까 is the offer, and 하까요 is what it sounds like it could be.",
+        "tags": [
+          "V-(으)ㄹ까요",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d17.mp3",
+          "voiced": 1.75,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 18,
+        "track": 66,
+        "who": "B",
+        "ko": "청소는 제가 할 테니까 설거지 좀 해 주세요.",
+        "en": "I will do the cleaning, so could you wash the dishes.",
+        "syl": 17,
+        "why": "The page’s own A/V-(으)ㄹ 테니까: I will take one job, so you take the other. 할 테니까 is said [할 떼니까] with the ㅌ tensed after the ㄹ, and 설거지 is a chapter headword heard as [설거지].",
+        "tags": [
+          "A/V-(으)ㄹ 테니까",
+          "설거지(를) 하다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d18.mp3",
+          "voiced": 3.26,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 19,
+        "track": 67,
+        "who": "줄리앙",
+        "ko": "이번 추석 연휴에 뭐 할 거야?",
+        "en": "What are you going to do this Chuseok holiday?",
+        "syl": 11,
+        "why": "거야 is the 반말 of 거예요, and the two are a syllable apart in sound and a whole register apart in use. 추석 is said [추석] but tenses nothing after it here, where 추석도 would.",
+        "tags": [
+          "반말",
+          "어휘"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d19.mp3",
+          "voiced": 2.74,
+          "rate": 4
+        }
+      },
+      {
+        "id": 20,
+        "track": 67,
+        "who": "켈리",
+        "ko": "글쎄, 아직 잘 모르겠는데.",
+        "en": "Well, I don’t know yet.",
+        "syl": 10,
+        "why": "모르겠는데 is said [모르겐는데]: the ㅆ of 겠 becomes [ㄷ] and then a [ㄴ] in front of the ㄴ. The 겠 that carries the whole guess is the part that disappears.",
+        "tags": [
+          "비음화",
+          "르 불규칙"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d20.mp3",
+          "voiced": 2.11,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 21,
+        "track": 67,
+        "who": "줄리앙",
+        "ko": "그럼, 토요일에 반 친구들을 초대할까 하는데 너도 올래?",
+        "en": "Then I’m thinking of inviting my classmates over — do you want to come?",
+        "syl": 22,
+        "why": "V-(으)ㄹ까 하다 with 하는데 rather than 해요, which is how the plan gets offered instead of just announced. 친구들을 runs as [친구드를] and 올래 as [올래], the ㄹ doubling across the seam.",
+        "tags": [
+          "V-(으)ㄹ까 하다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d21.mp3",
+          "voiced": 4.45,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 22,
+        "track": 67,
+        "who": "켈리",
+        "ko": "재미있겠다. 나도 갈게. 내가 뭐 도와줄 거 있어?",
+        "en": "That sounds fun. I’ll go. Is there anything I can help with?",
+        "syl": 18,
+        "why": "재미있겠다 is said [재미읻께따] and 갈게 is said [갈께] — three tensed consonants in a row that are all written plain. Nothing in the sound tells you where the 있 or the 겠 ends.",
+        "tags": [
+          "된소리되기",
+          "반말"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d22.mp3",
+          "voiced": 3.56,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 23,
+        "track": 67,
+        "who": "줄리앙",
+        "ko": "그럼 음식 준비하는 것 좀 도와줄래?",
+        "en": "Then will you come and help me get the food ready?",
+        "syl": 14,
+        "why": "것 좀 is said [걷쫌]: the 받침 ㅅ closes as [ㄷ] and tenses the ㅈ behind it. Two syllables, two changes, and the 것 is a bound noun that has to be written separately.",
+        "tags": [
+          "된소리되기",
+          "음식 준비"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d23.mp3",
+          "voiced": 2.63,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 24,
+        "track": 67,
+        "who": "켈리",
+        "ko": "그래. 뭘 만들 건데?",
+        "en": "All right. What are you making?",
+        "syl": 7,
+        "why": "만들 건데 is said [만들 껀데], the ㄹ tensing the ㄱ across the space. 뭘 is 무엇을 again, and the space before 건데 is the one thing the sound cannot tell you.",
+        "tags": [
+          "된소리되기",
+          "축약"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d24.mp3",
+          "voiced": 1.3,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 25,
+        "track": 67,
+        "who": "줄리앙",
+        "ko": "송편을 만들까 하는데 해 본 적이 없어서",
+        "en": "I’m thinking of making songpyeon, but I have never made it,",
+        "syl": 16,
+        "why": "V-(으)ㄹ까 하다 with a chapter headword in front of it. 적이 is said [저기] — the 받침 ㄱ crosses over — so the bound noun 적 and the particle 이 sound like one word that is not either of them.",
+        "tags": [
+          "V-(으)ㄹ까 하다",
+          "연음",
+          "송편"
+        ],
+        "splitFrom": "송편을 만들까 하는데 해 본 적이 없어서 잘할 수 있을지 모르겠어.",
+        "audio": {
+          "src": "audio/book/2b-u16-d25.mp3",
+          "voiced": 3.17,
+          "rate": 5
+        }
+      },
+      {
+        "id": 26,
+        "track": 67,
+        "who": "줄리앙",
+        "ko": "잘할 수 있을지 모르겠어.",
+        "en": "so I’m not sure I can do it well.",
+        "syl": 10,
+        "why": "잘할 수 is said [잘할 쑤] and 있을지 is said [이쓸찌]: the ㄹ tenses whatever follows it twice in five syllables, and both are written with the plain letter.",
+        "tags": [
+          "V-(으)ㄹ지",
+          "된소리되기"
+        ],
+        "splitFrom": "송편을 만들까 하는데 해 본 적이 없어서 잘할 수 있을지 모르겠어.",
+        "audio": {
+          "src": "audio/book/2b-u16-d26.mp3",
+          "voiced": 1.84,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 27,
+        "track": 67,
+        "who": "켈리",
+        "ko": "나 송편 만들 줄 알아. 내가 도와줄 테니까 걱정하지 마.",
+        "en": "I know how to make songpyeon. I’ll help you, so don’t worry.",
+        "syl": 21,
+        "why": "Both of the chapter’s promise forms in one turn: 만들 줄 알아 for the skill and 도와줄 테니까 for the offer. 줄 테니까 is said [줄 떼니까], tensed after the ㄹ like everything else in this unit.",
+        "tags": [
+          "A/V-(으)ㄹ 테니까",
+          "V-(으)ㄹ 줄 알다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d27.mp3",
+          "voiced": 4.05,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 28,
+        "track": 67,
+        "who": "줄리앙",
+        "ko": "잘됐다. 그럼 내가 장을 미리 봐 놓을게.",
+        "en": "That’s great. Then I’ll do the shopping in advance.",
+        "syl": 15,
+        "why": "장을 미리 봐 놓다 is the chapter’s own phrase and its own grammar at once — the shopping gets done early and stays done. 잘됐다 is said [잘뒏따] with the ㅆ closing as [ㄷ] and tensing the ㄷ behind it.",
+        "tags": [
+          "V-아/어 놓다",
+          "장을 미리 보다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d28.mp3",
+          "voiced": 3.5,
+          "rate": 4.3
+        }
+      },
+      {
+        "id": 29,
+        "track": 67,
+        "who": "켈리",
+        "ko": "그래, 그럼 토요일에 보자.",
+        "en": "All right, see you on Saturday then.",
+        "syl": 10,
+        "why": "보자 is the 반말 suggestion, one syllable away from 보자고 and from 봐요, and none of the three sounds like the others. 토요일에 runs as [토요이레].",
+        "tags": [
+          "반말",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d29.mp3",
+          "voiced": 1.75,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 30,
+        "track": 68,
+        "who": "앵커",
+        "ko": "오늘부터 추석 연휴가 시작되는데요.",
+        "en": "The Chuseok holiday starts today.",
+        "syl": 15,
+        "why": "연휴가 runs as [여뉴가] — the 받침 ㄴ crosses into the 휴 and the word boundary vanishes. 시작되는데요 is the news register’s -는데요, which softens a statement into an opening.",
+        "tags": [
+          "어휘",
+          "연음"
+        ],
+        "splitFrom": "오늘부터 추석 연휴가 시작되는데요. 서울역에 나가 있는 김혜경 기자를 불러 보겠습니다. 김혜경 기자!",
+        "audio": {
+          "src": "audio/book/2b-u16-d30.mp3",
+          "voiced": 2.69,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 31,
+        "track": 68,
+        "who": "기자",
+        "ko": "예, 저는 지금 서울역에 나와 있습니다.",
+        "en": "Yes, I am at Seoul Station now.",
+        "syl": 15,
+        "why": "서울역 is said [서울력]: the chapter’s 유음화 turning the ㅇ-initial 역 into [력] after the 받침 ㄹ. With 에 behind it the whole thing runs as [서울려게], and not one syllable is where it sounds.",
+        "tags": [
+          "유음화",
+          "연음"
+        ],
+        "splitFrom": "예, 저는 지금 서울역에 나와 있습니다. 서울역은 지금 고향에 내려가는 사람들로 복잡합니다. 그럼 고향에 가시는 한 분과 이야기 나눠 보겠습니다. 고향이 어디십니까?",
+        "audio": {
+          "src": "audio/book/2b-u16-d31.mp3",
+          "voiced": 2.84,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 32,
+        "track": 68,
+        "who": "기자",
+        "ko": "서울역은 지금 고향에 내려가는 사람들로 복잡합니다.",
+        "en": "Seoul Station is busy right now with people heading down to their hometowns.",
+        "syl": 22,
+        "why": "서울역 is [서울력] first, so 서울역은 comes out [서울려근], and 복잡합니다 is [복짜팜니다] — the ㄱ tenses the ㅈ, the ㅂ fuses with the ㅎ, and the ㅂ of 합 becomes [ㅁ] before the ㄴ. Four letters change and none of them may be written as heard.",
+        "tags": [
+          "유음화",
+          "된소리되기"
+        ],
+        "splitFrom": "예, 저는 지금 서울역에 나와 있습니다. 서울역은 지금 고향에 내려가는 사람들로 복잡합니다. 그럼 고향에 가시는 한 분과 이야기 나눠 보겠습니다. 고향이 어디십니까?",
+        "audio": {
+          "src": "audio/book/2b-u16-d32.mp3",
+          "voiced": 4.09,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 33,
+        "track": 68,
+        "who": "기자",
+        "ko": "그럼 고향에 가시는 한 분과 이야기 나눠 보겠습니다.",
+        "en": "Let me talk to one of the people going home.",
+        "syl": 21,
+        "why": "가시는 carries the 시 that honours the traveller and 보겠습니다 the 겠 that offers the action — two grammatical syllables that change nothing audible about the verbs they sit on.",
+        "tags": [
+          "높임",
+          "V-아/어 보다"
+        ],
+        "splitFrom": "예, 저는 지금 서울역에 나와 있습니다. 서울역은 지금 고향에 내려가는 사람들로 복잡합니다. 그럼 고향에 가시는 한 분과 이야기 나눠 보겠습니다. 고향이 어디십니까?",
+        "audio": {
+          "src": "audio/book/2b-u16-d33.mp3",
+          "voiced": 3.74,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 34,
+        "track": 68,
+        "who": "기자",
+        "ko": "고향이 어디십니까?",
+        "en": "Where is your hometown?",
+        "syl": 8,
+        "why": "어디십니까 is 어디 plus the honorific 시 plus the 합쇼체 question ending, and it is said [어디심니까] with the ㅂ turning into [ㅁ]. The ㅂ that is written is the one you never hear.",
+        "tags": [
+          "높임",
+          "합쇼체"
+        ],
+        "splitFrom": "예, 저는 지금 서울역에 나와 있습니다. 서울역은 지금 고향에 내려가는 사람들로 복잡합니다. 그럼 고향에 가시는 한 분과 이야기 나눠 보겠습니다. 고향이 어디십니까?",
+        "audio": {
+          "src": "audio/book/2b-u16-d34.mp3",
+          "voiced": 1.32,
+          "rate": 6.1
+        }
+      },
+      {
+        "id": 35,
+        "track": 68,
+        "who": "기자",
+        "ko": "고향에는 누가 계십니까?",
+        "en": "Who is there in your hometown?",
+        "syl": 10,
+        "why": "계십니까 is said [계심니까]: the 받침 ㅂ becomes [ㅁ] in front of the ㄴ, the same change as in 합니다. 계시다 is the honorific of 있다 and shares none of its letters.",
+        "tags": [
+          "높임",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d35.mp3",
+          "voiced": 2,
+          "rate": 5
+        }
+      },
+      {
+        "id": 36,
+        "track": 68,
+        "who": "시민",
+        "ko": "부모님과 형님이 계십니다.",
+        "en": "My parents and my older brother are there.",
+        "syl": 11,
+        "why": "형님이 runs as [형니미] and 계십니다 is [계심니다]. 님 is the honorific suffix on both nouns, and it is the part a learner writing by ear leaves off.",
+        "tags": [
+          "높임",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d36.mp3",
+          "voiced": 2.08,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 37,
+        "track": 68,
+        "who": "기자",
+        "ko": "고향에 내려가는 기분이 어떠십니까?",
+        "en": "How does it feel to be going home?",
+        "syl": 15,
+        "why": "내려가다 is the chapter’s own word for going home — down from the capital, whatever the map says. 어떠십니까 is 어떻다 with the ㅎ gone before the 시, so the adjective it comes from is not visible in it.",
+        "tags": [
+          "높임",
+          "고향에 내려가다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d37.mp3",
+          "voiced": 2.57,
+          "rate": 5.8
+        }
+      },
+      {
+        "id": 38,
+        "track": 68,
+        "who": "시민",
+        "ko": "오랫동안 고향에 못 내려갔는데",
+        "en": "I have not been able to go home for a long time,",
+        "syl": 13,
+        "why": "못 내려갔는데 is said [몬 내려간는데]: the 받침 ㅅ of 못 becomes [ㄴ] before the ㄴ, and the ㅆ of 갔 does the same. 오랫동안 is [오랟똥안] with a tensed ㄷ. Nothing is spelt as it sounds.",
+        "tags": [
+          "비음화",
+          "된소리되기"
+        ],
+        "splitFrom": "오랫동안 고향에 못 내려갔는데 가족들을 만날 생각을 하니까 아주 기쁩니다. 부모님께서 맛있는 음식도 많이 해 놓고 기다리고 계실 겁니다.",
+        "audio": {
+          "src": "audio/book/2b-u16-d38.mp3",
+          "voiced": 2.68,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 39,
+        "track": 68,
+        "who": "시민",
+        "ko": "가족들을 만날 생각을 하니까 아주 기쁩니다.",
+        "en": "so I am very glad at the thought of seeing my family.",
+        "syl": 18,
+        "why": "생각을 runs as [생가글] and 기쁩니다 is said [기쁨니다]. 만날 is the future-modifier form of 만나다, one letter away from the plain 만나 and carrying the whole \"about to\" of the sentence.",
+        "tags": [
+          "연음",
+          "된소리되기"
+        ],
+        "splitFrom": "오랫동안 고향에 못 내려갔는데 가족들을 만날 생각을 하니까 아주 기쁩니다. 부모님께서 맛있는 음식도 많이 해 놓고 기다리고 계실 겁니다.",
+        "audio": {
+          "src": "audio/book/2b-u16-d39.mp3",
+          "voiced": 3.15,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 40,
+        "track": 68,
+        "who": "기자",
+        "ko": "연휴가 긴데, 특별한 계획 있으십니까?",
+        "en": "The holiday is long — do you have any special plans?",
+        "syl": 15,
+        "why": "있으십니까 is said [이쓰심니까]: the ㅆ crosses over, the honorific 시 sits inside, and the ㅂ becomes [ㅁ]. 특별한 is [특뼈란], the ㅂ tensed after the ㄱ and the ㅎ gone.",
+        "tags": [
+          "높임",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d40.mp3",
+          "voiced": 3.19,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 41,
+        "track": 68,
+        "who": "시민",
+        "ko": "부모님 일도 좀 도와 드리고",
+        "en": "I am going to help my parents with their work a bit,",
+        "syl": 11,
+        "why": "도와 드리다 is the humble half of 도와주다 — the same help, offered upwards — and the 드 is the only thing on the page that says so. 일도 runs as [일또] with the ㄷ tensed after the ㄹ.",
+        "tags": [
+          "도와 드리다",
+          "높임"
+        ],
+        "splitFrom": "부모님 일도 좀 도와 드리고 가까운 곳으로 여행도 갈까 합니다.",
+        "audio": {
+          "src": "audio/book/2b-u16-d41.mp3",
+          "voiced": 2.05,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 42,
+        "track": 68,
+        "who": "시민",
+        "ko": "가까운 곳으로 여행도 갈까 합니다.",
+        "en": "and travel somewhere close by as well.",
+        "syl": 14,
+        "why": "The chapter’s V-(으)ㄹ까 하다 in its 합쇼체 form, which is the register the whole interview is in. 곳으로 is said [고스로], the 받침 ㅅ crossing as a plain [ㅅ] where 곳 alone would end in [ㄷ].",
+        "tags": [
+          "V-(으)ㄹ까 하다",
+          "연음"
+        ],
+        "splitFrom": "부모님 일도 좀 도와 드리고 가까운 곳으로 여행도 갈까 합니다.",
+        "audio": {
+          "src": "audio/book/2b-u16-d42.mp3",
+          "voiced": 2.35,
+          "rate": 6
+        }
+      },
+      {
+        "id": 43,
+        "track": 68,
+        "who": "기자",
+        "ko": "고향 잘 다녀오시기 바랍니다.",
+        "en": "I hope you have a good trip home.",
+        "syl": 12,
+        "why": "다녀오시기 바랍니다 is a wish, not an instruction: the 기 turns the verb into a noun and 바라다 does the hoping. 바랍니다 is said [바람니다], the ㅂ becoming [ㅁ] again.",
+        "tags": [
+          "높임",
+          "V-기 바라다"
+        ],
+        "splitFrom": "네, 말씀 감사합니다. 고향 잘 다녀오시기 바랍니다. 지금까지 서울역에서 김혜경이었습니다.",
+        "audio": {
+          "src": "audio/book/2b-u16-d43.mp3",
+          "voiced": 2.22,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 44,
+        "track": 68,
+        "who": "기자",
+        "ko": "지금까지 서울역에서 김혜경이었습니다.",
+        "en": "That was Kim Hyegyeong, reporting from Seoul Station.",
+        "syl": 17,
+        "why": "서울역에서 is said [서울려게서]: 유음화 makes 서울역 into [서울력] first, and then the ㄱ crosses into the 에, so the one word runs five syllables with no seam you can hear.",
+        "tags": [
+          "유음화",
+          "연음"
+        ],
+        "splitFrom": "네, 말씀 감사합니다. 고향 잘 다녀오시기 바랍니다. 지금까지 서울역에서 김혜경이었습니다.",
+        "audio": {
+          "src": "audio/book/2b-u16-d44.mp3",
+          "voiced": 3.04,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 45,
+        "track": 69,
+        "who": "여1",
+        "ko": "정우 씨, 저 나나인데요. 부탁 하나만 해도 돼요?",
+        "en": "Jeongu, it’s Nana. May I ask you a favour?",
+        "syl": 18,
+        "why": "해도 돼요 is permission asked, and 돼요 is 되어요 contracted — one syllable that two have been folded into. 부탁 is the chapter headword the whole conversation turns on.",
+        "tags": [
+          "V-아/어도 되다",
+          "부탁"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d45.mp3",
+          "voiced": 3.64,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 46,
+        "track": 69,
+        "who": "여1",
+        "ko": "제가 추석 연휴에 이틀 정도 여행을 가는데",
+        "en": "I am going away for about two days over Chuseok,",
+        "syl": 17,
+        "why": "여행을 runs as [여행을] with the ㅇ carrying nothing, but 연휴에 runs as [여뉴에] and 이틀 as [이틀]. 정도 is \"about\", and writing 정도 rather than 쯤 is a choice the sound does not make for you.",
+        "tags": [
+          "이틀 동안",
+          "연음"
+        ],
+        "splitFrom": "제가 추석 연휴에 이틀 정도 여행을 가는데 고양이를 맡길 곳이 없어서요. 미안하지만 고양이 좀 맡아 줄 수 있어요?",
+        "audio": {
+          "src": "audio/book/2b-u16-d46.mp3",
+          "voiced": 3.52,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 47,
+        "track": 69,
+        "who": "여1",
+        "ko": "미안하지만 고양이 좀 맡아 줄 수 있어요?",
+        "en": "I am sorry to ask, but could you look after my cat?",
+        "syl": 16,
+        "why": "맡아 is said [마타]: the 받침 ㅌ crosses into the vowel and stays aspirated, so the ㅌ is heard in the wrong syllable. 맡다 and 막다 and 맞다 all end up [마−] somewhere, and only the spelling separates them.",
+        "tags": [
+          "맡아 주다",
+          "연음"
+        ],
+        "splitFrom": "제가 추석 연휴에 이틀 정도 여행을 가는데 고양이를 맡길 곳이 없어서요. 미안하지만 고양이 좀 맡아 줄 수 있어요?",
+        "audio": {
+          "src": "audio/book/2b-u16-d47.mp3",
+          "voiced": 2.9,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 48,
+        "track": 69,
+        "who": "남",
+        "ko": "저도 그러고 싶은데 우리 가족도 고향에 내려가요.",
+        "en": "I would like to, but my family is going home too.",
+        "syl": 20,
+        "why": "싶은데 runs as [시픈데], the 받침 ㅍ crossing over, and 가족도 is [가족또] with the ㄷ tensed after the ㄱ. The refusal is done entirely with 도 — me too, us too — and never with a no.",
+        "tags": [
+          "고향에 내려가다",
+          "연음"
+        ],
+        "splitFrom": "아, 어떻게 하죠? 저도 그러고 싶은데 우리 가족도 고향에 내려가요.",
+        "audio": {
+          "src": "audio/book/2b-u16-d48.mp3",
+          "voiced": 3.51,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 49,
+        "track": 69,
+        "who": "여1",
+        "ko": "그래요? 부탁할 사람이 없어서 큰일이네요.",
+        "en": "Really? It’s a real problem — there is no one left to ask.",
+        "syl": 17,
+        "why": "큰일이네요 is said [큰니리네요]. A ㄴ appears between 큰 and 일 that neither word contains, and then the ㄹ of 일 crosses into the 이. The chapter headword is the hardest word here to write from the sound.",
+        "tags": [
+          "ㄴ 첨가",
+          "큰일이다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d49.mp3",
+          "voiced": 3.24,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 50,
+        "track": 69,
+        "who": "남",
+        "ko": "지연 씨한테 연락해 보면 어때요?",
+        "en": "Why not try getting in touch with Jiyeon?",
+        "syl": 13,
+        "why": "연락 is said [열락]: the chapter’s 유음화 running the other way round, with the 받침 ㄴ turning into [ㄹ] before the ㄹ that follows. Write what you hear and the word becomes 열락, which is not a word.",
+        "tags": [
+          "유음화",
+          "연락(을) 하다"
+        ],
+        "splitFrom": "지연 씨한테 연락해 보면 어때요? 지연 씨 집에도 고양이가 있어요.",
+        "audio": {
+          "src": "audio/book/2b-u16-d50.mp3",
+          "voiced": 2.32,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 51,
+        "track": 69,
+        "who": "남",
+        "ko": "지연 씨 집에도 고양이가 있어요.",
+        "en": "Jiyeon has a cat at her place too.",
+        "syl": 13,
+        "why": "집에도 runs as [지베도] — the 받침 ㅂ crosses into the 에 — so the 집 that carries the meaning is the syllable you cannot hear the end of.",
+        "tags": [
+          "연음",
+          "고양이"
+        ],
+        "splitFrom": "지연 씨한테 연락해 보면 어때요? 지연 씨 집에도 고양이가 있어요.",
+        "audio": {
+          "src": "audio/book/2b-u16-d51.mp3",
+          "voiced": 2.38,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 52,
+        "track": 69,
+        "who": "여1",
+        "ko": "아, 그래요? 그럼 한번 전화해 볼게요.",
+        "en": "Oh, really? Then I’ll try phoning her.",
+        "syl": 14,
+        "why": "볼게요 is said [볼께요] and 한번 is said [한번] as one word, where 한 번 with a space would be \"one time\". The space is the whole difference and there is none of it in the sound.",
+        "tags": [
+          "된소리되기",
+          "V-아/어 보다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d52.mp3",
+          "voiced": 2.78,
+          "rate": 5
+        }
+      },
+      {
+        "id": 53,
+        "track": 69,
+        "who": "여1",
+        "ko": "혹시 이번 연휴에 고향에 내려가요?",
+        "en": "Are you by any chance going home this holiday?",
+        "syl": 14,
+        "why": "혹시 is said [혹씨], the ㅅ tensed after the 받침 ㄱ, and it is the word that turns a question into a careful one. 연휴에 runs as [여뉴에] again.",
+        "tags": [
+          "고향에 내려가다",
+          "된소리되기"
+        ],
+        "splitFrom": "여보세요? 지연 씨? 저 나나인데요. 혹시 이번 연휴에 고향에 내려가요?",
+        "audio": {
+          "src": "audio/book/2b-u16-d53.mp3",
+          "voiced": 2.91,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 54,
+        "track": 69,
+        "who": "여2",
+        "ko": "아니요, 이번에는 연휴가 짧아서 안 내려가요.",
+        "en": "No, the holiday is short this time, so I am not going.",
+        "syl": 18,
+        "why": "짧아서 is said [짤바서]. The cluster 받침 ㄼ sounds only its ㄹ on its own, but a vowel behind it wakes the ㅂ and sends it into the next syllable — so both letters are heard, in the wrong places.",
+        "tags": [
+          "겹받침",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d54.mp3",
+          "voiced": 3.61,
+          "rate": 5
+        }
+      },
+      {
+        "id": 55,
+        "track": 69,
+        "who": "여1",
+        "ko": "그럼 미안하지만 제 고양이 이틀만 맡아 줄 수 있어요?",
+        "en": "Then I am sorry to ask, but could you mind my cat for two days?",
+        "syl": 21,
+        "why": "이틀만 is [이틀만] and 맡아 is [마타] once more. 줄 수 있어요 is the whole ability construction spelt out, and it is said [줄 쑤 이써요] with two tensings and a crossing.",
+        "tags": [
+          "맡아 주다",
+          "연음"
+        ],
+        "splitFrom": "그럼 미안하지만 제 고양이 이틀만 맡아 줄 수 있어요? 여행을 가는데 고양이를 맡길 곳이 없어서요.",
+        "audio": {
+          "src": "audio/book/2b-u16-d55.mp3",
+          "voiced": 4.78,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 56,
+        "track": 69,
+        "who": "여1",
+        "ko": "여행을 가는데 고양이를 맡길 곳이 없어서요.",
+        "en": "I am going away and have nowhere to leave my cat.",
+        "syl": 18,
+        "why": "맡길 is said [맏낄]: the 받침 ㅌ closes as [ㄷ] and tenses the ㄱ behind it, so neither of the two letters written is the one you hear. 곳이 runs as [고시].",
+        "tags": [
+          "고양이를 맡기다",
+          "연음"
+        ],
+        "splitFrom": "그럼 미안하지만 제 고양이 이틀만 맡아 줄 수 있어요? 여행을 가는데 고양이를 맡길 곳이 없어서요.",
+        "audio": {
+          "src": "audio/book/2b-u16-d56.mp3",
+          "voiced": 3.35,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 57,
+        "track": 69,
+        "who": "여2",
+        "ko": "네, 좋아요. 제가 잘 봐 줄 테니까 걱정 마세요.",
+        "en": "Yes, of course. I’ll take good care of it, so don’t worry.",
+        "syl": 17,
+        "why": "The chapter’s A/V-(으)ㄹ 테니까 used to reassure rather than to divide work. 좋아요 is said [조아요] with the ㅎ gone between vowels, and 줄 테니까 is [줄 떼니까].",
+        "tags": [
+          "A/V-(으)ㄹ 테니까",
+          "ㅎ 탈락"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d57.mp3",
+          "voiced": 4.02,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 58,
+        "track": 69,
+        "who": "여1",
+        "ko": "정말 고마워요. 필요한 건 제가 다 준비해서 내일 갈게요.",
+        "en": "Thank you so much. I’ll get everything it needs ready and come tomorrow.",
+        "syl": 22,
+        "why": "필요한 is said [피료한], the ㄹ crossing into the 요, and 건 is 것은 contracted to one syllable. 갈게요 is [갈께요] with the ㄱ tensed after the ㄹ.",
+        "tags": [
+          "필요한 것",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d58.mp3",
+          "voiced": 4.52,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 59,
+        "track": 70,
+        "who": "1",
+        "ko": "설날 아침에는 세배를 해요.",
+        "en": "On Seollal morning we do the New Year’s bow.",
+        "syl": 11,
+        "why": "The 발음 page’s first example. 설날 is said [설랄]: the ㄴ of 날 becomes [ㄹ] after the 받침 ㄹ of 설. Write the sound and you get 설랄, which is not the holiday.",
+        "tags": [
+          "유음화",
+          "세배(를) 하다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d59.mp3",
+          "voiced": 2.44,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 60,
+        "track": 70,
+        "who": "2",
+        "ko": "일 년 전에 한국에 왔어요.",
+        "en": "I came to Korea a year ago.",
+        "syl": 10,
+        "why": "일 년 is said [일련] — the same rule across a space this time, which is why the space survives in writing and not in sound. 한국에 runs as [한구게].",
+        "tags": [
+          "유음화",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d60.mp3",
+          "voiced": 2.36,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 61,
+        "track": 71,
+        "who": "1",
+        "ko": "일 년 후에 다시 만나요.",
+        "en": "Let’s meet again a year from now.",
+        "syl": 9,
+        "why": "일 년 [일련] again, and 후에 runs straight on after it, so the three words are heard as one five-syllable run with no boundary anywhere in it.",
+        "tags": [
+          "유음화",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d61.mp3",
+          "voiced": 2.2,
+          "rate": 4.1
+        }
+      },
+      {
+        "id": 62,
+        "track": 71,
+        "who": "2",
+        "ko": "사물놀이 공연을 본 적이 있어요.",
+        "en": "I have seen a samulnori performance.",
+        "syl": 13,
+        "why": "사물놀이 is said [사물로리]: 유음화 turns the 놀 into [롤], and then its ㄹ crosses into the 이. Four syllables written, four heard, and not one of them the same.",
+        "tags": [
+          "유음화",
+          "V-(으)ㄴ 적이 있다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d62.mp3",
+          "voiced": 2.9,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 63,
+        "track": 71,
+        "who": "3",
+        "ko": "사진이 잘 나왔네요.",
+        "en": "The photo came out well.",
+        "syl": 8,
+        "why": "잘 나왔네요 is said [잘라완네요]. The ㄴ of 나 becomes [ㄹ] after the 받침 ㄹ of 잘, and then the ㅆ of 왔 becomes [ㄴ] before the 네 — two different rules inside four syllables.",
+        "tags": [
+          "유음화",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d63.mp3",
+          "voiced": 2.07,
+          "rate": 3.9
+        }
+      },
+      {
+        "id": 64,
+        "track": 71,
+        "who": "4A",
+        "ko": "이번 설날에 고향에 가요?",
+        "en": "Are you going to your hometown this Seollal?",
+        "syl": 10,
+        "why": "설날에 is said [설라레]: 유음화 makes 설날 into [설랄] first, and then the new [ㄹ] crosses into the 에. The 날 that is written has neither of its letters left where they started.",
+        "tags": [
+          "유음화",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d64.mp3",
+          "voiced": 2.77,
+          "rate": 3.6
+        }
+      },
+      {
+        "id": 65,
+        "track": 71,
+        "who": "4B",
+        "ko": "네, 고향 갈 날만 기다리고 있어요.",
+        "en": "Yes, I am just waiting for the day I go home.",
+        "syl": 13,
+        "why": "갈 날만 is said [갈랄만]: 유음화 across the space, and then the 받침 ㄹ of 날 holds while the ㅁ follows. 날 is the chapter headword and the hardest three syllables on the page.",
+        "tags": [
+          "유음화",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u16-d65.mp3",
+          "voiced": 3.11,
+          "rate": 4.2
+        }
+      }
+    ]
+  },
+  "listenOnly": "Every track carries a script: the unit pages print them for the grammar, 말하기 and 발음 tracks, and the 듣기 지문 at the back of the book prints the two 듣기 conversations."
+}

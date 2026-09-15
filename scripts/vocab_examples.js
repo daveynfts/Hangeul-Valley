@@ -423,10 +423,13 @@ const SOURCES = [
   { rel: 'worlds/unit10-cassette.json', label: 'Unit 10 · 듣기', unit: '2b-unit-10' },
   { rel: 'worlds/unit11-cassette.json', label: 'Unit 11 · 듣기', unit: '2b-unit-11' },
   { rel: 'worlds/unit12-workbook.json', label: 'Unit 12 · 익힘책', unit: '2b-unit-12' },
+  { rel: 'worlds/unit16-workbook.json', label: 'Unit 16 · 익힘책', unit: '2b-unit-16' },
+  { rel: 'worlds/unit16-textbook.json', label: 'Unit 16 · 교과서', unit: '2b-unit-16' },
   { rel: 'worlds/unit12-cassette.json', label: 'Unit 12 · 듣기', unit: '2b-unit-12' },
   { rel: 'worlds/unit13-cassette.json', label: 'Unit 13 · 듣기', unit: '2b-unit-13' },
   { rel: 'worlds/unit14-cassette.json', label: 'Unit 14 · 듣기', unit: '2b-unit-14' },
-  { rel: 'worlds/unit15-cassette.json', label: 'Unit 15 · 듣기', unit: '2b-unit-15' }
+  { rel: 'worlds/unit15-cassette.json', label: 'Unit 15 · 듣기', unit: '2b-unit-15' },
+  { rel: 'worlds/unit16-cassette.json', label: 'Unit 16 · 듣기', unit: '2b-unit-16' }
 ];
 
 const HANGUL = /[가-힣]/;
@@ -605,6 +608,7 @@ const WORD_FILES = [
   { rel: 'worlds/2b-unit-13.json', unit: '2b-unit-13', label: 'Unit 13' },
   { rel: 'worlds/2b-unit-14.json', unit: '2b-unit-14', label: 'Unit 14' },
   { rel: 'worlds/2b-unit-15.json', unit: '2b-unit-15', label: 'Unit 15' },
+  { rel: 'worlds/2b-unit-16.json', unit: '2b-unit-16', label: 'Unit 16' },
   { rel: 'worlds/topik-2.json', unit: 'topik-2', label: 'TOPIK II' },
   { rel: 'levels.json', unit: 'valley', label: 'Valley packs' }
 ];

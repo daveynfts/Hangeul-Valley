@@ -562,6 +562,116 @@ test uses `find` where it means `filter`.
 
 ---
 
+## Unit 16, and the two things pace cannot tell you
+
+Ten tracks, 57 placed lines, 65 dictation rows at 4.97 ±0.54 syl/s. The 듣기 지문 page was
+read first again — printed p.265, image 255 — so tracks 68 and 69 arrived scripted with the
+rest. What is new here is that the pace objective, which has placed every line since Unit 11,
+got one wrong and had to be given a second signal.
+
+### The gap histogram, and why 네 belongs to B
+
+Measure every gap between voiced spans across all ten tracks and it comes out in clumps with
+almost nothing between them:
+
+| gap | count | what it is |
+|---|---|---|
+| 0.30 – 0.96s | 61 | a pause inside one speaker’s turn |
+| 1.00 – 1.08s | 54 | the editor’s turn gap, a flat 1.0s |
+| 1.11 – 1.23s | 11 | the gap after the fixed announcement |
+| 2.00 – 3.01s | 9 | a read-aloud instruction, a scene break, a repeat pause |
+
+Nothing at all between 0.96 and 1.00. So a line boundary may only be placed where the gap is
+**at least 0.98s**, and the pace DP chooses among those rather than among all of them.
+
+Track 63 is why this matters. Two printed lines, 14 syllables each:
+
+```
+A  설날에 먹는 특별한 음식이 있어요?
+B  네, 설날에는 밥 대신 떡국을 먹어요.
+```
+
+and three spans: 2.91s, then a 0.38s one, then 3.10s. The 0.38s span is 네. Pace on its own
+puts it at the **end of A** — 14/3.29 and 14/3.10 is a spread of ±0.13, against ±0.40 for the
+right answer — because two lines of the same length can be split almost anywhere and still
+look even. The gap settles it in one line: 1.01s in front of the 네 and 0.66s behind it, so
+네 opens B’s turn. `test_unit16_cassette.js` section 3 now checks all 57 boundaries against
+the 0.98s floor, and `validate_content.js` does the same.
+
+### The telephone is not a voice, and it can be measured
+
+Track 69 is a phone call, and after the scene break the recording **rings** before 나나 gets
+through. `silencedetect` cannot tell a ringback from a voice — both are sound — so two spans
+of it were counted as the first two sentences of her line, and that line came out at 3.08
+syl/s against a track running at 5.1. Same symptom as the announcement on track 57 and the
+instruction on track 28: whatever is not a printed line gets absorbed, and the only tell is
+that a line reads slow.
+
+This one is separable by measurement rather than by ear. A Korean ringback is 440 Hz and
+480 Hz together and nothing else; speech puts most of its energy elsewhere. Filter everything
+outside a narrow band around 470 Hz and compare the mean volume before and after:
+
+```
+ffmpeg -ss <at> -t <len> -i trk.mp3 -af volumedetect -f null -
+ffmpeg -ss <at> -t <len> -i trk.mp3 -af bandpass=f=470:width_type=h:w=120,volumedetect -f null -
+```
+
+Across all 134 spans in this pack the result is bimodal with a wide gap: **the two ringback
+spans lose 0.3 and 0.4 dB, and the quietest speech span loses 3.5.** A threshold of 3 dB has
+three decibels of margin on either side. Dropping the two spans put the line at 5.02 syl/s
+and 여보세요 where it belongs, at 58.4s rather than 53.4s.
+
+### Two tracks the pace band cannot bite on, said out loud
+
+The band test — shift the clip-to-text pairing by one and require a clip to fall outside its
+track’s band — bites on eight of the ten tracks. It cannot bite on 63 and 70, whose two lines
+are 14/14 and 11/10 syllables and take almost the same time to say: a swap moves the pace by
+less than the band is wide. The suite asserts **that they do not bite**, rather than quietly
+excluding them, so the day someone widens a band far enough to blunt a third track the line
+that was supposed to catch it is already failing. Those two are placed by the gap instead,
+which is checked for every line in the bank.
+
+### A sentence that cannot be cut and will not fit
+
+One printed sentence of track 68 is not in the dictation set: 부모님께서 맛있는 음식도 많이
+해 놓고 기다리고 계실 겁니다. It is 25 syllables, over the filter’s own 22-syllable ceiling,
+and the narrator reads it in a **single unbroken span** — so there is nowhere inside it that
+the recording agrees to cut. Trimming it to fit would mean inventing a boundary, so it stays
+out, the `splitAtClause` note says which sentence and why, and the suite asserts both that it
+is still in the transcript and that no row holds it.
+
+### 유음화 has two directions too, and one of them has one sentence
+
+Unit 12’s lesson was that a 발음 rule with two directions has to be drilled in both. Unit 16’s
+rule is 유음화 — a ㄴ next to a ㄹ is read [ㄹ] whichever side the ㄹ is on:
+
+- **ㄹ then ㄴ** — 설날 [설랄], 일 년 [일련], 사물놀이 [사물로리], 잘 나왔네요 [잘라완네요],
+  갈 날만 [갈랄만]. Ten rows.
+- **ㄴ then ㄹ** — 연락 [열락]. One row.
+
+Both are computable from the spelling — 받침 ㄹ (final index 8) before an onset ㄴ (2), and
+받침 ㄴ (4) before an onset ㄹ (5) — so the suite reads the spelling rather than trusting a
+tag, the way Unit 12’s does for 받침 ㄻ.
+
+The one-row side is a limit of the material, not of the curation: **연락 is the only ㄴ+ㄹ word
+anyone says on any of the ten tracks.** That is asserted as `backward.length === 1` rather
+than as `>= 1`, so if another one ever arrives the note above it gets rewritten instead of
+silently becoming untrue. 서울역 [서울력] belongs to the same rule but reaches it through
+ㄴ-insertion, so the spelling test does not see it; its three rows are tagged and their notes
+name the sound.
+
+### The alignment, cross-checked against a different instrument
+
+`scripts/cassette_timings.js --redo` places lines by correlating each dictation clip’s
+loudness envelope against the track — evidence that shares nothing with the syllable-pace
+partition. Run over Unit 16 it placed 24 lines on its own, and **23 of them agree with the
+pace alignment to within 0.20s.** The twenty-fourth is track 70 line 1, which it gave
+0.00 → 13.12 because there is no anchor in front of it to bracket against — the announcement,
+the instruction and the number cue all swallowed. Two instruments, one disagreement, and the
+disagreement is on the one line the second instrument had no evidence for.
+
+---
+
 ---
 
 ## The waveform, and looping a stretch of it

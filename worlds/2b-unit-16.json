@@ -1,0 +1,1190 @@
+{
+  "id": "2b-unit-16",
+  "pack": "snu-2b",
+  "source": "Seoul National University Korean 2B, Unit 16",
+  "title": "2B Unit 16",
+  "titleKo": "16과 설날에는 밥 대신 떡국을 먹어요",
+  "icon": "🎎",
+  "pages": "Unit 16",
+  "level": {
+    "level": "2B-16",
+    "name": "설날에는 밥 대신 떡국을 먹어요",
+    "nameEn": "2B Unit 16 · We eat tteokguk instead of rice on New Year’s Day",
+    "icon": "🎎",
+    "description": "Farm the Unit 16 word list — the two big holidays, the food they are kept with, and the housework that gets them ready.",
+    "descriptionEn": "Basic farm plus the study desk. Every word the textbook teaches in 16과 설날에는 밥 대신 떡국을 먹어요, from 어휘 through 문화 산책. Icons and minigames come later.",
+    "world": true,
+    "pack": "snu-2b",
+    "worldId": "2b-unit-16",
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk",
+        "cassette"
+      ]
+    },
+    "target": 9,
+    "words": [
+      {
+        "ko": "명절",
+        "en": "traditional holidays",
+        "hint": "🎎",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "명절에는 고향에 가는 사람들이 많아서 서두르지 않으면 표 사기가 힘들어요.",
+        "exampleEn": "So many people go to their hometown for the holidays that it is hard to get a ticket unless you hurry."
+      },
+      {
+        "ko": "설날",
+        "en": "Seollal, the lunar New Year",
+        "hint": "🎆",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "설날에는 밥 대신 떡국을 먹어요.",
+        "exampleEn": "On Seollal we eat rice-cake soup instead of rice."
+      },
+      {
+        "ko": "추석",
+        "en": "Chuseok, the autumn harvest holiday",
+        "hint": "🍂",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "추석은 음력 8월 15일로 한국의 중요한 명절입니다.",
+        "exampleEn": "Chuseok falls on the fifteenth day of the eighth lunar month and is an important Korean holiday."
+      },
+      {
+        "ko": "한복을 입다",
+        "en": "to wear Korean traditional dress",
+        "hint": "👘",
+        "category": "명절",
+        "categoryEn": "Traditional holidays"
+      },
+      {
+        "ko": "고향에 가다",
+        "en": "to go to one’s hometown",
+        "hint": "🏡",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "민수 씨는 이번 설날에 고향에 가요?",
+        "exampleEn": "Minsu, are you going to your hometown this Seollal?"
+      },
+      {
+        "ko": "세배(를) 하다",
+        "en": "to give a New Year’s bow",
+        "hint": "🙇",
+        "category": "명절",
+        "categoryEn": "Traditional holidays"
+      },
+      {
+        "ko": "성묘(를) 하다",
+        "en": "to visit and tend an ancestor’s grave",
+        "hint": "⛰️",
+        "category": "명절",
+        "categoryEn": "Traditional holidays"
+      },
+      {
+        "ko": "차례를 지내다",
+        "en": "to perform the ancestral rites",
+        "hint": "🍶",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "아침에 음식을 차려 놓고 차례를 지내요.",
+        "exampleEn": "In the morning we set the table with food and perform the ancestral rites."
+      },
+      {
+        "ko": "윷놀이(를) 하다",
+        "en": "to play Yut",
+        "hint": "🎲",
+        "category": "명절",
+        "categoryEn": "Traditional holidays"
+      },
+      {
+        "ko": "음식을 차리다",
+        "en": "to set the table with food",
+        "hint": "🍽️",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "아침에 음식을 차려 놓고 차례를 지내요.",
+        "exampleEn": "In the morning we set the table with food and perform the ancestral rites."
+      },
+      {
+        "ko": "어른들께 세배를 하다",
+        "en": "to bow to one’s elders at New Year",
+        "hint": "👵",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "아침에 음식을 차려 놓고 차례를 지내요. 그리고 어른들께 세배를 해요.",
+        "exampleEn": "In the morning we set the table and perform the rites. And we bow to our elders."
+      },
+      {
+        "ko": "연휴",
+        "en": "a long holiday weekend",
+        "hint": "📆",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "지연 씨, 이번 연휴에 고향에 내려가요?",
+        "exampleEn": "Jiyeon, are you going down to your hometown this long weekend?"
+      },
+      {
+        "ko": "떡국",
+        "en": "rice-cake soup",
+        "hint": "🍲",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "떡국은 떡을 넣고 끓인 음식인데 보통 설날에 먹어요.",
+        "exampleEn": "Tteokguk is a dish boiled with rice cakes in it, usually eaten on Seollal."
+      },
+      {
+        "ko": "빈대떡",
+        "en": "mung-bean pancake",
+        "hint": "🥞",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "빈대떡은 한국의 전통 음식인데 고기와 야채를 넣어서 만들어요.",
+        "exampleEn": "Bindaetteok is a traditional Korean dish made with meat and vegetables in it."
+      },
+      {
+        "ko": "송편",
+        "en": "half-moon-shaped rice cake",
+        "hint": "🥟",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "송편은 추석에 먹는 떡인데 보통 추석 전날 가족들과 같이 만들어요.",
+        "exampleEn": "Songpyeon is the rice cake eaten at Chuseok, usually made with the family the day before."
+      },
+      {
+        "ko": "한과",
+        "en": "Korean traditional sweets",
+        "hint": "🍬",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "한과는 한국의 전통 과자인데 명절에 많이 먹어요.",
+        "exampleEn": "Hangwa are traditional Korean sweets, eaten a lot at the holidays."
+      },
+      {
+        "ko": "식혜",
+        "en": "sweet rice punch",
+        "hint": "🥤",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "식혜는 한국의 전통 음료수인데 맛이 달아요.",
+        "exampleEn": "Sikhye is a traditional Korean drink, and it tastes sweet."
+      },
+      {
+        "ko": "음력",
+        "en": "the lunar calendar",
+        "hint": "🌙",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "음력 1월 1일이에요.",
+        "exampleEn": "It is the first day of the first month by the lunar calendar."
+      },
+      {
+        "ko": "전통",
+        "en": "tradition",
+        "hint": "🏮",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "추석에 하는 전통 놀이에는 씨름, 강강술래 등이 있습니다.",
+        "exampleEn": "The traditional games played at Chuseok include ssireum and ganggangsullae."
+      },
+      {
+        "ko": "전날",
+        "en": "the day before",
+        "hint": "🗓️",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "송편은 추석에 먹는 떡인데 보통 추석 전날 가족들과 같이 만들어요.",
+        "exampleEn": "Songpyeon is the rice cake eaten at Chuseok, usually made with the family the day before."
+      },
+      {
+        "ko": "기차표",
+        "en": "a train ticket",
+        "hint": "🎫",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "네, 한 달 전에 미리 기차표를 예매해 놓았어요.",
+        "exampleEn": "Yes, I booked the train tickets a month ago."
+      },
+      {
+        "ko": "서두르다",
+        "en": "to hurry",
+        "hint": "⏱️",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "명절에는 고향에 가는 사람들이 많아서 서두르지 않으면 표 사기가 힘들어요.",
+        "exampleEn": "So many people go to their hometown for the holidays that it is hard to get a ticket unless you hurry."
+      },
+      {
+        "ko": "특별한 음식",
+        "en": "a special dish for the day",
+        "hint": "🍱",
+        "category": "명절",
+        "categoryEn": "Traditional holidays",
+        "example": "설날에 먹는 특별한 음식이 있어요?",
+        "exampleEn": "Is there any special food eaten on Seollal?"
+      },
+      {
+        "ko": "집안일",
+        "en": "housework",
+        "hint": "🏘️",
+        "category": "집안일",
+        "categoryEn": "Housework"
+      },
+      {
+        "ko": "방을 닦다",
+        "en": "to wipe the room clean",
+        "hint": "🧽",
+        "category": "집안일",
+        "categoryEn": "Housework",
+        "example": "제가 청소기를 돌릴 테니까 민호 씨는 방을 좀 닦아 주세요.",
+        "exampleEn": "I will run the vacuum, so Minho, could you wipe the room down."
+      },
+      {
+        "ko": "장을 미리 보다",
+        "en": "to do the grocery shopping in advance",
+        "hint": "🛒",
+        "category": "집안일",
+        "categoryEn": "Housework"
+      },
+      {
+        "ko": "설거지(를) 하다",
+        "en": "to wash the dishes",
+        "hint": "🍴",
+        "category": "집안일",
+        "categoryEn": "Housework"
+      },
+      {
+        "ko": "세탁기를 돌리다",
+        "en": "to run the washing machine",
+        "hint": "🌀",
+        "category": "집안일",
+        "categoryEn": "Housework",
+        "example": "내일 입을 옷이 없어서 오늘 꼭 세탁기를 돌려야 돼요.",
+        "exampleEn": "I have nothing to wear tomorrow, so I really have to run the washing machine today."
+      },
+      {
+        "ko": "청소기를 돌리다",
+        "en": "to vacuum",
+        "hint": "🧹",
+        "category": "집안일",
+        "categoryEn": "Housework",
+        "example": "아파트에 살기 때문에 밤늦게 청소기를 돌리면 안 돼요.",
+        "exampleEn": "I live in a flat, so I must not run the vacuum late at night."
+      },
+      {
+        "ko": "대청소를 하다",
+        "en": "to do a big clean-up",
+        "hint": "🧼",
+        "category": "집안일",
+        "categoryEn": "Housework",
+        "example": "다음 주에 부모님이 오시니까 대청소를 할까 해요.",
+        "exampleEn": "My parents are coming next week, so I am thinking of doing a big clean-up."
+      },
+      {
+        "ko": "밤늦게",
+        "en": "late at night",
+        "hint": "🌃",
+        "category": "집안일",
+        "categoryEn": "Housework",
+        "example": "아파트에 살기 때문에 밤늦게 청소기를 돌리면 안 돼요.",
+        "exampleEn": "I live in a flat, so I must not run the vacuum late at night."
+      },
+      {
+        "ko": "마트",
+        "en": "a supermarket",
+        "hint": "🏬",
+        "category": "집안일",
+        "categoryEn": "Housework",
+        "example": "저는 큰 마트보다 시장에 가는 것을 더 좋아해요.",
+        "exampleEn": "I like going to the market more than to a big supermarket."
+      },
+      {
+        "ko": "청소를 하다",
+        "en": "to clean up",
+        "hint": "🪣",
+        "category": "집안일",
+        "categoryEn": "Housework",
+        "example": "저는 보통 아침에 청소를 해요.",
+        "exampleEn": "I usually clean up in the morning."
+      },
+      {
+        "ko": "V-아/어 놓다",
+        "en": "to do something and leave it done",
+        "hint": "🧩",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "예매하다",
+        "en": "to book a ticket in advance",
+        "hint": "🎟️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "걱정하지 마세요. 제가 예매해 놓았어요.",
+        "exampleEn": "Don’t worry. I booked it in advance."
+      },
+      {
+        "ko": "창문을 열다",
+        "en": "to open the window",
+        "hint": "🪟",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "더우니까 창문을 열어 놓으세요.",
+        "exampleEn": "It’s hot, so leave the window open."
+      },
+      {
+        "ko": "미리 사다",
+        "en": "to buy something in advance",
+        "hint": "🛍️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "문을 닫다",
+        "en": "to close for the day",
+        "hint": "🚪",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "명절에는 문을 닫는 가게가 많으니까 필요한 것을 미리 사 놓아야 돼요.",
+        "exampleEn": "A lot of shops close for the holidays, so you have to buy what you need in advance."
+      },
+      {
+        "ko": "돈을 찾다",
+        "en": "to withdraw money",
+        "hint": "🏧",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "내일은 휴일이라서 은행 문을 열지 않기 때문에 오늘 돈을 찾아 놓아야 돼요.",
+        "exampleEn": "Tomorrow is a holiday and the bank will not open, so I have to withdraw money today."
+      },
+      {
+        "ko": "종이에 쓰다",
+        "en": "to write it down on paper",
+        "hint": "📝",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "냉장고에 넣다",
+        "en": "to put something in the fridge",
+        "hint": "🧊",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "N 대신",
+        "en": "instead of N",
+        "hint": "🔁",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "소금을 넣다",
+        "en": "to add salt",
+        "hint": "🧂",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "간장을 넣다",
+        "en": "to use soy sauce",
+        "hint": "🫗",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "여권을 보여 주다",
+        "en": "to show one’s passport",
+        "hint": "🛂",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "여권을 보여 줘야 하는데 여권이 없습니다.",
+        "exampleEn": "I have to show my passport, but I do not have it."
+      },
+      {
+        "ko": "택시비",
+        "en": "the taxi fare",
+        "hint": "🚕",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "택시비를 내야 하는데 현금이 없습니다.",
+        "exampleEn": "I have to pay the taxi fare, but I have no cash."
+      },
+      {
+        "ko": "현금",
+        "en": "cash",
+        "hint": "💵",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "택시비를 내야 하는데 현금이 없습니다.",
+        "exampleEn": "I have to pay the taxi fare, but I have no cash."
+      },
+      {
+        "ko": "주소를 쓰다",
+        "en": "to write down an address",
+        "hint": "✉️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "주소를 써야 하는데 주소를 모릅니다.",
+        "exampleEn": "I have to write down the address, but I do not know it."
+      },
+      {
+        "ko": "해외여행",
+        "en": "overseas travel",
+        "hint": "🌏",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "해외여행 대신 국내 여행을 했어요.",
+        "exampleEn": "We travelled inside the country instead of going abroad."
+      },
+      {
+        "ko": "국내 여행",
+        "en": "domestic travel",
+        "hint": "🚄",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "해외여행 대신 국내 여행을 했어요.",
+        "exampleEn": "We travelled inside the country instead of going abroad."
+      },
+      {
+        "ko": "문자",
+        "en": "a text message",
+        "hint": "📱",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "전화 대신 문자를 보냈어요.",
+        "exampleEn": "I sent a text message instead of calling."
+      },
+      {
+        "ko": "V-(으)ㄹ까 하다",
+        "en": "to be thinking of doing something",
+        "hint": "💭",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "여름휴가",
+        "en": "the summer holiday",
+        "hint": "🏖️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "이번 여름휴가는 바다로 갈까 해요.",
+        "exampleEn": "I am thinking of going to the sea for this summer holiday."
+      },
+      {
+        "ko": "가까운 곳",
+        "en": "somewhere close by",
+        "hint": "📍",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "A/V-(으)ㄹ 테니까",
+        "en": "since it will be ~, so …",
+        "hint": "➡️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "두껍다",
+        "en": "to be thick",
+        "hint": "🧥",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "거기는 한국보다 추울 테니까 두꺼운 옷을 준비해 가세요.",
+        "exampleEn": "It will be colder there than in Korea, so take thick clothes with you."
+      },
+      {
+        "ko": "수업 중",
+        "en": "in the middle of a class",
+        "hint": "🏫",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "지금은 수업 중이라서 전화를 못 받을 테니까 나중에 거세요.",
+        "exampleEn": "He is in class now and will not be able to answer, so call later."
+      },
+      {
+        "ko": "호텔을 알아보다",
+        "en": "to look into a hotel",
+        "hint": "🔍",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "여행 준비",
+        "en": "trip preparations",
+        "hint": "🎒",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "우리 여행 준비는 어떻게 할까?",
+        "exampleEn": "How shall we get ready for our trip?"
+      },
+      {
+        "ko": "비행기 표",
+        "en": "a plane ticket",
+        "hint": "✈️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "그래. 그럼 비행기 표는 내가 예매할 테니까 너는 호텔을 좀 알아봐 줘.",
+        "exampleEn": "All right. Then I’ll book the plane tickets, so you look into a hotel."
+      },
+      {
+        "ko": "환전",
+        "en": "changing money",
+        "hint": "💱",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "가이드북",
+        "en": "a guidebook",
+        "hint": "📖",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "모자라다",
+        "en": "to run short",
+        "hint": "➖",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "음식이 모자라지 않을까요?",
+        "exampleEn": "Won’t the food run short?"
+      },
+      {
+        "ko": "졸리다",
+        "en": "to be sleepy",
+        "hint": "😴",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "좀 졸리네요.",
+        "exampleEn": "I’m feeling a bit sleepy."
+      },
+      {
+        "ko": "고향에 내려가다",
+        "en": "to go down to one’s hometown",
+        "hint": "🚉",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "지연 씨, 이번 연휴에 고향에 내려가요?",
+        "exampleEn": "Jiyeon, are you going down to your hometown this long weekend?"
+      },
+      {
+        "ko": "표",
+        "en": "a ticket",
+        "hint": "🧾",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "주말인데 표가 있을까요?",
+        "exampleEn": "It’s the weekend — do you think there are any tickets?"
+      },
+      {
+        "ko": "끓이다",
+        "en": "to boil something",
+        "hint": "♨️",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "지연 씨도 떡국 끓일 줄 알아요?",
+        "exampleEn": "Jiyeon, do you know how to make tteokguk?"
+      },
+      {
+        "ko": "초대하다",
+        "en": "to invite someone over",
+        "hint": "💌",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party"
+      },
+      {
+        "ko": "반 친구",
+        "en": "a classmate",
+        "hint": "👥",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "그럼, 토요일에 반 친구들을 초대할까 하는데 너도 올래?",
+        "exampleEn": "Then I’m thinking of inviting my classmates over on Saturday — do you want to come?"
+      },
+      {
+        "ko": "빈대떡을 부치다",
+        "en": "to fry mung-bean pancakes",
+        "hint": "🍳",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party"
+      },
+      {
+        "ko": "재료를 미리 사다",
+        "en": "to buy the ingredients in advance",
+        "hint": "🧺",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party"
+      },
+      {
+        "ko": "만들 줄 알다",
+        "en": "to know how to make something",
+        "hint": "🧑‍🍳",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party"
+      },
+      {
+        "ko": "도와주다",
+        "en": "to give someone a hand",
+        "hint": "🤝",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "내가 도와줄 테니까 걱정하지 마.",
+        "exampleEn": "I’ll help you, so don’t worry."
+      },
+      {
+        "ko": "가르쳐 주다",
+        "en": "to show someone how",
+        "hint": "👩‍🏫",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party"
+      },
+      {
+        "ko": "음식 준비",
+        "en": "getting the food ready",
+        "hint": "🥘",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "그럼 음식 준비하는 것 좀 도와줄래?",
+        "exampleEn": "Then will you help me get the food ready?"
+      },
+      {
+        "ko": "송별회",
+        "en": "a farewell party",
+        "hint": "🎉",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "고향으로 돌아가는 친구를 위해 송별회를 해 주려고 합니다.",
+        "exampleEn": "You are planning a farewell party for a classmate who is going home."
+      },
+      {
+        "ko": "의논하다",
+        "en": "to talk something over",
+        "hint": "🗣️",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "송별회 준비에 대해서 친구들과 의논해 보세요.",
+        "exampleEn": "Talk over the preparations for the farewell party with your classmates."
+      },
+      {
+        "ko": "전화로 예약하다",
+        "en": "to book by telephone",
+        "hint": "📞",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "그럼 내가 전화로 예약해 놓을 테니까 친구들에게 연락 좀 해 줄래?",
+        "exampleEn": "Then I’ll book it by phone, so will you get in touch with everyone?"
+      },
+      {
+        "ko": "연락(을) 하다",
+        "en": "to get in touch",
+        "hint": "☎️",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party"
+      },
+      {
+        "ko": "발표 원고",
+        "en": "a presentation script",
+        "hint": "📄",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "내가 내일 발표 원고를 가져올 테니까 한번 봐 줘.",
+        "exampleEn": "I’ll bring my presentation script tomorrow, so have a look at it for me."
+      },
+      {
+        "ko": "부탁",
+        "en": "a favour to ask",
+        "hint": "🙏",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party",
+        "example": "한 사람은 부탁하고 다른 한 사람은 그 부탁을 들어주거나 거절해 보세요.",
+        "exampleEn": "One of you asks a favour and the other grants it or turns it down."
+      },
+      {
+        "ko": "부탁을 들어주다",
+        "en": "to grant someone’s request",
+        "hint": "👍",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party"
+      },
+      {
+        "ko": "거절을 하다",
+        "en": "to turn a request down",
+        "hint": "✋",
+        "category": "말하기",
+        "categoryEn": "Speaking · the journey home and the party"
+      },
+      {
+        "ko": "서울역",
+        "en": "Seoul Station",
+        "hint": "🚆",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour",
+        "example": "서울역은 지금 고향에 내려가는 사람들로 복잡합니다.",
+        "exampleEn": "Seoul Station is busy right now with people heading down to their hometowns."
+      },
+      {
+        "ko": "앵커",
+        "en": "a news anchor",
+        "hint": "📺",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour"
+      },
+      {
+        "ko": "형님",
+        "en": "one’s older brother",
+        "hint": "👨",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour",
+        "example": "부모님과 형님이 계십니다.",
+        "exampleEn": "My parents and my older brother are there."
+      },
+      {
+        "ko": "도와 드리다",
+        "en": "to help someone senior",
+        "hint": "🙌",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour",
+        "example": "부모님 일도 좀 도와 드리고 가까운 곳으로 여행도 갈까 합니다.",
+        "exampleEn": "I am thinking of helping my parents with their work and travelling somewhere nearby."
+      },
+      {
+        "ko": "다녀오다",
+        "en": "to go somewhere and come back",
+        "hint": "🧳",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour"
+      },
+      {
+        "ko": "말씀",
+        "en": "what someone says, honorific",
+        "hint": "💬",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour",
+        "example": "네, 말씀 감사합니다.",
+        "exampleEn": "Yes, thank you for talking to us."
+      },
+      {
+        "ko": "곤란한 부탁",
+        "en": "a request that is hard to grant",
+        "hint": "😰",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour",
+        "example": "여러분은 친구가 곤란한 부탁을 할 때 어떻게 거절을 합니까?",
+        "exampleEn": "How do you say no when a friend asks something awkward of you?"
+      },
+      {
+        "ko": "고양이",
+        "en": "a cat",
+        "hint": "🐱",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour",
+        "example": "미안하지만 고양이 좀 맡아 줄 수 있어요?",
+        "exampleEn": "I am sorry to ask, but could you look after my cat?"
+      },
+      {
+        "ko": "맡아 주다",
+        "en": "to look after something for someone",
+        "hint": "🐈",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour"
+      },
+      {
+        "ko": "고양이를 맡기다",
+        "en": "to leave a cat in someone’s care",
+        "hint": "📥",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour",
+        "example": "제가 추석 연휴에 이틀 정도 여행을 가는데 고양이를 맡길 곳이 없어서요.",
+        "exampleEn": "I am going away for about two days over Chuseok and have nowhere to leave my cat."
+      },
+      {
+        "ko": "이틀 동안",
+        "en": "for two days",
+        "hint": "2️⃣",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour",
+        "example": "나나는 이틀 동안 여행을 가려고 합니다.",
+        "exampleEn": "Nana is going away for two days."
+      },
+      {
+        "ko": "큰일이다",
+        "en": "to be a real problem",
+        "hint": "😱",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour",
+        "example": "그래요? 부탁할 사람이 없어서 큰일이네요.",
+        "exampleEn": "Really? It’s a real problem — there is no one left to ask."
+      },
+      {
+        "ko": "잘 봐 주다",
+        "en": "to take good care of something",
+        "hint": "🤗",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour"
+      },
+      {
+        "ko": "필요한 것",
+        "en": "the things that are needed",
+        "hint": "📦",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour"
+      },
+      {
+        "ko": "명절을 보내다",
+        "en": "to spend the holidays",
+        "hint": "🎊",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · going home, and a favour"
+      },
+      {
+        "ko": "농사",
+        "en": "farming",
+        "hint": "🌾",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "추석은 한 해 농사가 잘 끝난 것을 조상들께 감사하는 날입니다.",
+        "exampleEn": "Chuseok is the day for thanking the ancestors that the year’s farming has ended well."
+      },
+      {
+        "ko": "조상",
+        "en": "an ancestor",
+        "hint": "🕯️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "추석은 한 해 농사가 잘 끝난 것을 조상들께 감사하는 날입니다.",
+        "exampleEn": "Chuseok is the day for thanking the ancestors that the year’s farming has ended well."
+      },
+      {
+        "ko": "한 해",
+        "en": "a year",
+        "hint": "📅",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "추석은 한 해 농사가 잘 끝난 것을 조상들께 감사하는 날입니다.",
+        "exampleEn": "Chuseok is the day for thanking the ancestors that the year’s farming has ended well."
+      },
+      {
+        "ko": "추수하다",
+        "en": "to bring in the harvest",
+        "hint": "🌽",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "추석 아침에는 새로 추수한 곡식과 과일로 차례를 지낸 후 성묘를 하러 갑니다.",
+        "exampleEn": "On Chuseok morning the rites are held with newly harvested grain and fruit, and then people visit the graves."
+      },
+      {
+        "ko": "곡식",
+        "en": "grain; crops",
+        "hint": "🌿",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "추석 아침에는 새로 추수한 곡식과 과일로 차례를 지낸 후 성묘를 하러 갑니다.",
+        "exampleEn": "On Chuseok morning the rites are held with newly harvested grain and fruit, and then people visit the graves."
+      },
+      {
+        "ko": "나눠 먹다",
+        "en": "to share food out",
+        "hint": "🤲",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "그리고 송편을 만들어서 이웃들과 나눠 먹고 오랜만에 만난 친척들과 이야기를 하면서 즐거운 시간을 보냅니다.",
+        "exampleEn": "People make songpyeon and share it with the neighbours, and enjoy talking with relatives they have not seen for a long time."
+      },
+      {
+        "ko": "오랜만에 만나다",
+        "en": "to meet after a long time",
+        "hint": "🕰️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "그리고 송편을 만들어서 이웃들과 나눠 먹고 오랜만에 만난 친척들과 이야기를 하면서 즐거운 시간을 보냅니다.",
+        "exampleEn": "People make songpyeon and share it with the neighbours, and enjoy talking with relatives they have not seen for a long time."
+      },
+      {
+        "ko": "친척",
+        "en": "a relative",
+        "hint": "👨‍👩‍👧",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "그리고 송편을 만들어서 이웃들과 나눠 먹고 오랜만에 만난 친척들과 이야기를 하면서 즐거운 시간을 보냅니다.",
+        "exampleEn": "People make songpyeon and share it with the neighbours, and enjoy talking with relatives they have not seen for a long time."
+      },
+      {
+        "ko": "즐거운 시간을 보내다",
+        "en": "to have a good time",
+        "hint": "😄",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for"
+      },
+      {
+        "ko": "전통 놀이",
+        "en": "a traditional game",
+        "hint": "🎏",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "추석에 하는 전통 놀이에는 씨름, 강강술래 등이 있습니다.",
+        "exampleEn": "The traditional games played at Chuseok include ssireum and ganggangsullae."
+      },
+      {
+        "ko": "씨름",
+        "en": "ssireum, Korean wrestling",
+        "hint": "🤼",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "추석에 하는 전통 놀이에는 씨름, 강강술래 등이 있습니다.",
+        "exampleEn": "The traditional games played at Chuseok include ssireum and ganggangsullae."
+      },
+      {
+        "ko": "보름달",
+        "en": "the full moon",
+        "hint": "🌕",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "추석날 밤에는 일 년 중에서 가장 크고 밝은 보름달을 볼 수 있는데 사람들은 그 달을 보면서 소원을 빕니다.",
+        "exampleEn": "On Chuseok night you can see the biggest, brightest full moon of the year, and people make a wish on it."
+      },
+      {
+        "ko": "소원을 빌다",
+        "en": "to make a wish",
+        "hint": "🌠",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for"
+      },
+      {
+        "ko": "추석날",
+        "en": "Chuseok day",
+        "hint": "🍁",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · what Chuseok is for",
+        "example": "추석날 밤에는 일 년 중에서 가장 크고 밝은 보름달을 볼 수 있는데 사람들은 그 달을 보면서 소원을 빕니다.",
+        "exampleEn": "On Chuseok night you can see the biggest, brightest full moon of the year, and people make a wish on it."
+      },
+      {
+        "ko": "윷",
+        "en": "the four yut sticks",
+        "hint": "🪵",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "윷을 던져서 나온 윷의 면에 따라 윷말을 옮깁니다.",
+        "exampleEn": "You move your tokens according to the faces that come up when you throw the yut sticks."
+      },
+      {
+        "ko": "윷말",
+        "en": "a yut token",
+        "hint": "⚪",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "윷을 던져서 나온 윷의 면에 따라 윷말을 옮깁니다.",
+        "exampleEn": "You move your tokens according to the faces that come up when you throw the yut sticks."
+      },
+      {
+        "ko": "칸",
+        "en": "a space on the board",
+        "hint": "⬜",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut"
+      },
+      {
+        "ko": "던지다",
+        "en": "to throw",
+        "hint": "🤾",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "윷을 던져서 나온 윷의 면에 따라 윷말을 옮깁니다.",
+        "exampleEn": "You move your tokens according to the faces that come up when you throw the yut sticks."
+      },
+      {
+        "ko": "옮기다",
+        "en": "to move something along",
+        "hint": "↔️",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "윷을 던져서 나온 윷의 면에 따라 윷말을 옮깁니다.",
+        "exampleEn": "You move your tokens according to the faces that come up when you throw the yut sticks."
+      },
+      {
+        "ko": "상대방",
+        "en": "the other side; one’s opponent",
+        "hint": "🧑‍🤝‍🧑",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "상대방 말에게 잡히지 않고 먼저 나오는 쪽이 이깁니다.",
+        "exampleEn": "Whichever side gets home first without being caught by the other side’s tokens wins."
+      },
+      {
+        "ko": "잡히다",
+        "en": "to be caught",
+        "hint": "🪤",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "상대방 말에게 잡히지 않고 먼저 나오는 쪽이 이깁니다.",
+        "exampleEn": "Whichever side gets home first without being caught by the other side’s tokens wins."
+      },
+      {
+        "ko": "편을 나누다",
+        "en": "to split into teams",
+        "hint": "🚩",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "편을 나누고 윷놀이를 해 보세요.",
+        "exampleEn": "Split into teams and play Yut."
+      },
+      {
+        "ko": "윷놀이 규칙",
+        "en": "the rules of Yut",
+        "hint": "📏",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "윷놀이 규칙을 배우세요.",
+        "exampleEn": "Learn the rules of Yut."
+      },
+      {
+        "ko": "이긴 팀",
+        "en": "the winning team",
+        "hint": "🏆",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "진 팀은 이긴 팀의 부탁을 들어주세요.",
+        "exampleEn": "The losing team grants the winning team’s request."
+      },
+      {
+        "ko": "진 팀",
+        "en": "the losing team",
+        "hint": "🥈",
+        "category": "과제",
+        "categoryEn": "Task · a game of Yut",
+        "example": "진 팀은 이긴 팀의 부탁을 들어주세요.",
+        "exampleEn": "The losing team grants the winning team’s request."
+      },
+      {
+        "ko": "강강술래",
+        "en": "ganggangsullae, the circle dance",
+        "hint": "💃",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "추석에 하는 전통 놀이에는 씨름, 강강술래 등이 있습니다.",
+        "exampleEn": "The traditional games played at Chuseok include ssireum and ganggangsullae."
+      },
+      {
+        "ko": "전통 놀이나 노래",
+        "en": "a traditional game or song",
+        "hint": "🎶",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "여러분이 알고 있는 한국의 전통 놀이나 노래가 있습니까?",
+        "exampleEn": "Do you know any Korean traditional game or song?"
+      },
+      {
+        "ko": "진도",
+        "en": "Jindo, the island the song comes from",
+        "hint": "🏝️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "유음화",
+        "en": "lateralisation — ㄴ read as [ㄹ] beside ㄹ",
+        "hint": "🔤",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "생일날",
+        "en": "one’s birthday, the day itself",
+        "hint": "🎂",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "실내",
+        "en": "indoors; the inside of a building",
+        "hint": "🏠",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "사물놀이 공연",
+        "en": "a samulnori performance",
+        "hint": "🥁",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "사물놀이 공연을 본 적이 있어요.",
+        "exampleEn": "I have seen a samulnori performance."
+      },
+      {
+        "ko": "일 년",
+        "en": "one year",
+        "hint": "🗓️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "일 년 후에 다시 만나요.",
+        "exampleEn": "Let’s meet again a year from now."
+      },
+      {
+        "ko": "사진이 잘 나오다",
+        "en": "for a photo to come out well",
+        "hint": "📷",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "사진이 잘 나왔네요.",
+        "exampleEn": "The photo came out well."
+      },
+      {
+        "ko": "날",
+        "en": "a day",
+        "hint": "☀️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "네, 고향 갈 날만 기다리고 있어요.",
+        "exampleEn": "Yes, I am just waiting for the day I go home."
+      }
+    ]
+  },
+  "notebook": {
+    "title": "Unit 16 · We eat tteokguk instead of rice on New Year’s Day",
+    "groups": [
+      {
+        "ko": "명절",
+        "en": "Traditional holidays",
+        "cat": "명절"
+      },
+      {
+        "ko": "집안일",
+        "en": "Housework",
+        "cat": "집안일"
+      },
+      {
+        "ko": "문법과 표현",
+        "en": "Grammar & expressions",
+        "cat": "문법과 표현"
+      },
+      {
+        "ko": "말하기",
+        "en": "Speaking · the journey home and the party",
+        "cat": "말하기"
+      },
+      {
+        "ko": "듣고 말하기",
+        "en": "Listening · going home, and a favour",
+        "cat": "듣고 말하기"
+      },
+      {
+        "ko": "읽고 쓰기",
+        "en": "Reading · what Chuseok is for",
+        "cat": "읽고 쓰기"
+      },
+      {
+        "ko": "과제",
+        "en": "Task · a game of Yut",
+        "cat": "과제"
+      },
+      {
+        "ko": "문화와 발음",
+        "en": "Culture & pronunciation",
+        "cat": "문화와 발음"
+      }
+    ]
+  }
+}

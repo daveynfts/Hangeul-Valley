@@ -1330,6 +1330,156 @@ const overlayIds = [
     ttsSrc.indexOf('worlds/2b-unit-13.json') >= 0 && ttsSrc.indexOf('worlds/unit13-desk-quiz.json') >= 0);
 }());
 
+
+// ── 2B Unit 16 word list (설날에는 밥 대신 떡국을 먹어요) ────────────────────
+// The holidays chapter, and the one that collides hardest with its neighbours: 소금, 간장,
+// 여권, 어른, 장을 보다 and 정리(를) 하다 are all printed again here and all belong to an
+// earlier farm. Every one is left where it is; where p.160-176 prints a longer collocation,
+// this farm takes that instead. tests/test_unit16_world.js names all eighteen pairs.
+(function checkUnit16World() {
+  const rel = path.join('worlds', '2b-unit-16.json');
+  if (!check(`${rel} exists`, fs.existsSync(path.join(ROOT, rel)))) return;
+  let world;
+  try { world = JSON.parse(read(rel)); } catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('2B Unit 16 has an id and a level',
+    !!(world.id === '2b-unit-16' && world.level && Array.isArray(world.level.words)));
+  const ww = world.level.words || [];
+  const missing = ww.filter((w) => !w.ko || !w.en || !w.category || !w.categoryEn).map((w) => w.ko || '?');
+  check('2B Unit 16 words have ko / en / category / categoryEn', missing.length === 0, missing.slice(0, 5).join(', '));
+  check('2B Unit 16 carries the whole-unit word list', ww.length === 133, `found ${ww.length}`);
+  const noHint = ww.filter((w) => !w.hint).map((w) => w.ko);
+  check('every Unit 16 word renders as a hint emoji until its icon is drawn',
+    noHint.length === 0, noHint.slice(0, 8).join(', '));
+  const want = ['명절', '집안일', '문법과 표현', '말하기', '듣고 말하기', '읽고 쓰기', '과제', '문화와 발음'];
+  const cats = new Set(ww.map((w) => w.category));
+  check('2B Unit 16 has eight vocab groups, one per textbook section',
+    want.length === cats.size && want.every((c) => cats.has(c)), [...cats].join(', '));
+  const dups = ww.map((w) => w.ko).filter((k, i, a) => a.indexOf(k) !== i);
+  check('2B Unit 16 has no repeated headword', dups.length === 0, dups.join(', '));
+  const mine = new Set(ww.map((w) => w.ko));
+  ['2b-unit-10', '2b-unit-11', '2b-unit-12', '2b-unit-13', '2b-unit-14', '2b-unit-15'].forEach((other) => {
+    const owned = new Set((JSON.parse(read(path.join('worlds', other + '.json'))).level.words || []).map((w) => w.ko));
+    const shared = ww.map((w) => w.ko).filter((ko) => owned.has(ko));
+    check(`2B Unit 16 shares no headword with ${other}`, shared.length === 0, shared.join(', '));
+  });
+  // The eighteen the chapter prints and this farm deliberately does not own, each with the
+  // collocation taken in its place. Checked in both directions — that Unit 16 leaves the bare
+  // word alone, that the unit it was left to still teaches it, and that the substitute is
+  // here — so the day one of them moves, this says so instead of quietly being satisfied.
+  const heldBy = (unit, ko) => (JSON.parse(read(path.join('worlds', unit + '.json'))).level.words || [])
+    .some((w) => w.ko === ko);
+  const INSTEAD = [
+    ['2b-unit-10', '간장', '간장을 넣다'],
+    ['2b-unit-10', '예약하다', '전화로 예약하다'],
+    ['2b-unit-11', '소금', '소금을 넣다'],
+    ['2b-unit-11', '이틀', '이틀 동안'],
+    ['2b-unit-13', '장을 보다', '장을 미리 보다'],
+    ['2b-unit-13', '알아보다', '호텔을 알아보다'],
+    ['2b-unit-13', '규칙', '윷놀이 규칙'],
+    ['2b-unit-14', '어른', '어른들께 세배를 하다'],
+    ['2b-unit-14', '여권', '여권을 보여 주다'],
+    ['2b-unit-14', '곤란하다', '곤란한 부탁'],
+    ['2b-unit-14', '공연', '사물놀이 공연'],
+    ['topik-2', '내려가다', '고향에 내려가다'],
+    ['topik-2', '거절하다', '거절을 하다'],
+    ['topik-2', '맡다', '맡아 주다'],
+    ['topik-2', '맡기다', '고양이를 맡기다'],
+    ['topik-2', '나누다', '나눠 먹다'],
+    ['topik-2', '재료', '재료를 미리 사다'],
+    ['2b-unit-10', '오랜만에', '오랜만에 만나다']
+  ];
+  INSTEAD.forEach(([unit, bare, sub]) => {
+    check(`${bare} is left to ${unit}, which still farms it, and Unit 16 teaches ${sub}`,
+      !mine.has(bare) && heldBy(unit, bare) && mine.has(sub));
+  });
+  check('정리(를) 하다 stays with Unit 12, which is why 16과 is one 어휘 item short',
+    !mine.has('정리(를) 하다') && heldBy('2b-unit-12', '정리(를) 하다'));
+  // The four grammar points are the chapter, not decoration on it.
+  ['V-아/어 놓다', 'N 대신', 'V-(으)ㄹ까 하다', 'A/V-(으)ㄹ 테니까'].forEach((g) => {
+    check(`2B Unit 16 farms the grammar point ${g}`, mine.has(g));
+  });
+}());
+
+(function checkUnit16Wiring() {
+  const gameJs = readGameSource();
+  check('textbook load path lists Unit 16 JSON', gameJs.indexOf('worlds/2b-unit-16.json') >= 0);
+  check('farm preload cache key world-2b-16', gameJs.indexOf('world-2b-16') >= 0);
+  check('isUnit16World is declared and Unit-16-only',
+    /function isUnit16World\(\)[\s\S]{0,180}worldId === '2b-unit-16'/.test(gameJs));
+  check('Unit 16 is the basic farm plus the desk and the cassette player',
+    /'2b-unit-16': \{ extras: \[\], stations: \['desk', 'cassette'\] \}/.test(gameJs));
+  const ttsSrc = read(path.join('scripts', 'ttsClips.js'));
+  check('TTS harvest covers Unit 16', ttsSrc.indexOf('worlds/2b-unit-16.json') >= 0);
+  const i18nSrc = read(path.join('js', 'i18n.js'));
+  check('Unit 16 is a translatable source', i18nSrc.indexOf("'worlds/2b-unit-16.json'") >= 0);
+  check('desk quiz url resolves Unit 16 to its own bank',
+    /isUnit16World\(\)\) return '\/worlds\/unit16-desk-quiz\.json'/.test(gameJs));
+  check('TTS harvest and the translation list both carry the Unit 16 quiz',
+    ttsSrc.indexOf('worlds/unit16-desk-quiz.json') >= 0
+    && i18nSrc.indexOf("'worlds/unit16-desk-quiz.json'") >= 0);
+}());
+// ── 2B Unit 16 desk quiz (13 rows, 10 to a sitting) ──────────────────────────
+// The quiz is revision: every row turns on something the chapter taught, and no row is a
+// sentence either bank already gaps. It ships without art, which is a decision rather than
+// an omission and `artNote` records it — and that note is checked, because admin/lib/world.js
+// validateQuiz rebuilds a quiz from a fixed field list and drops everything else, which is
+// how three other units lost the `art` on every row of theirs.
+(function checkUnit16DeskQuiz() {
+  const rel = path.join('worlds', 'unit16-desk-quiz.json');
+  if (!check(rel + ' exists', fs.existsSync(path.join(ROOT, rel)))) return;
+  let bank;
+  try { bank = JSON.parse(read(rel)); }
+  catch (e) { check(rel + ' is valid JSON', false, e.message); return; }
+  const qs = bank.questions || [];
+  check('Unit 16 desk quiz has 13 questions', qs.length === 13, `found ${qs.length}`);
+  check('Unit 16 desk quiz plays 10 of them', bank.sessionSize === 10, String(bank.sessionSize));
+  check('so two sittings are not the same ten', qs.length > bank.sessionSize,
+    qs.length + ' rows, session ' + bank.sessionSize);
+  const ids = new Set();
+  const bad = [];
+  qs.forEach((q, i) => {
+    if (!q || typeof q.id !== 'number') bad.push(`q${i} missing id`);
+    else if (ids.has(q.id)) bad.push(`duplicate id ${q.id}`);
+    else ids.add(q.id);
+    if (!q.q) bad.push(`q${q && q.id} has no prompt`);
+    const keys = Object.keys((q && q.choices) || {}).sort().join('');
+    if (keys !== 'ABCD') bad.push(`q${q && q.id} choices are ${keys || 'missing'}`);
+    if (!q || !q.choices || !q.choices[q.a]) bad.push(`q${q && q.id} answer ${q && q.a} is not a choice`);
+    const vals = Object.keys((q && q.choices) || {}).map((k) => q.choices[k]);
+    if (new Set(vals).size !== vals.length) bad.push(`q${q && q.id} repeats a choice`);
+  });
+  check('Unit 16 desk quiz rows are complete', bad.length === 0, bad.slice(0, 6).join(', '));
+  const letters = qs.map((q) => q.a).join('');
+  check('and its answers are spread over at least three letters',
+    new Set(letters.split('')).size >= 3, letters);
+  // Revision, not a third copy of a row the learner has already done twice.
+  const flatq = (s) => String(s == null ? '' : s).normalize('NFC').replace(/[\s.,?!()]/g, '');
+  const drilled = new Set();
+  ['worlds/unit16-textbook.json', 'worlds/unit16-workbook.json'].forEach((r) => {
+    const full = path.join(ROOT, r);
+    if (!fs.existsSync(full)) return;
+    const b = JSON.parse(fs.readFileSync(full, 'utf8'));
+    (b.exercises || []).forEach((ex) => (ex.items || []).forEach((it) => {
+      const one = ((it.choices || []).find((c) => c.id === it.answer) || {}).ko || '';
+      const two = ((it.choices2 || []).find((c) => c.id === it.answer2) || {}).ko || '';
+      const words = [one, two].filter(Boolean);
+      let k = 0;
+      drilled.add(flatq((it.lines || [])
+        .map((l) => String(l.ko).replace(/\{\}/g, () => words[k++] || '')).join(' ')));
+    }));
+  });
+  const repeats = [];
+  qs.forEach((q) => Object.keys(q.choices || {}).forEach((k) => {
+    if (drilled.has(flatq(q.choices[k]))) repeats.push(`q${q.id}${k}`);
+  }));
+  check('and no quiz button is a sentence the 교과서 or 익힘책 already drills',
+    repeats.length === 0, repeats.join(', '));
+  check('the Unit 16 quiz says why it has no art',
+    String(bank.artNote || '').length > 200, String(bank.artNote || '').length + ' chars');
+  const claimsArt = qs.filter((q) => q.art).map((q) => q.id);
+  check('and no row claims a picture it does not have', claimsArt.length === 0, claimsArt.join(', '));
+}());
+
 // ── 2B Unit 12 cassette (저는 좀 조용한 편이에요, tracks 22-31) ───────────────
 // All ten scripted from the first day, which no other unit managed: the unit pages print
 // the grammar, 말하기 and 발음 tracks, and the 듣기 지문 at the back printed 28 and 29 before
@@ -1378,6 +1528,149 @@ const overlayIds = [
   const flat = (s) => String(s).replace(/\s+/g, '');
   check('including a 닮 before a consonant and a 닮 before a vowel',
     items.some((i) => flat(i.ko).indexOf('닮고') >= 0) && items.some((i) => flat(i.ko).indexOf('닮았') >= 0));
+}());
+
+
+
+// ── 2B Unit 16 익힘책 (설날에는 밥 대신 떡국을 먹어요, printed pp.138-149) ────
+// Fifteen exercises and 74 rows, every answer taken from the workbook’s own 정답 on printed
+// pp.207-208. One printed item is deliberately absent — 문법과 표현 3 연습 1 item 5 is an
+// empty picture box with no answer — and the bank says so in omittedNote.
+// tests/test_unit16_workbook.js holds all 74 answers verbatim; this checks the shape.
+(function checkUnit16Workbook() {
+  const rel = path.join('worlds', 'unit16-workbook.json');
+  if (!check(`${rel} exists`, fs.existsSync(path.join(ROOT, rel)))) return;
+  let wb;
+  try { wb = JSON.parse(read(rel)); } catch (e) { check(`${rel} is valid JSON`, false, e.message); return; }
+  check('the Unit 16 익힘책 knows which book it is from',
+    wb.id === 'unit16-workbook' && /Unit 16/.test(wb.source || ''), String(wb.id) + ' | ' + String(wb.source));
+  check('and the desk labels it 연습 문제', wb.titleKo === '연습 문제' && wb.titleEn === 'Workbook');
+  const exs = wb.exercises || [];
+  check('15 Unit 16 익힘책 exercises', exs.length === 15, 'found ' + exs.length);
+  const rows = exs.reduce((n, e) => n + ((e.items || []).length), 0);
+  check('74 rows across them', rows === 74, 'found ' + rows);
+  const ids = exs.map((e) => e.id);
+  check('every Unit 16 익힘책 exercise id opens with u16-', ids.every((id) => /^u16-/.test(id)),
+    ids.filter((id) => !/^u16-/.test(id)).join(', '));
+  check('and no id is used twice', new Set(ids).size === ids.length);
+  // A row a learner cannot answer is worse than a row that is missing: the right answer has
+  // to be one of the buttons, no two buttons may read the same, and there has to be a blank
+  // for it to go into.
+  const broken = [];
+  exs.forEach((e) => (e.items || []).forEach((it) => {
+    const where = e.id + ":" + it.n;
+    const gaps = (it.lines || []).reduce((n, l) => n + String(l.ko || '').split('{}').length - 1, 0);
+    const sets = it.choices2 ? 2 : 1;
+    if (gaps !== sets) broken.push(where + ' has ' + gaps + ' blanks for ' + sets + ' answers');
+    const opts = it.choices || [];
+    if (opts.length < 3) broken.push(where + ' has ' + opts.length + ' buttons');
+    if (!opts.some((c) => c.id === it.answer)) broken.push(where + ' keys a button that is not there');
+    if (new Set(opts.map((c) => String(c.ko).normalize('NFC'))).size !== opts.length) {
+      broken.push(where + ' has two buttons with the same text');
+    }
+    if (!it.en || !it.why || !it.grammar) broken.push(where + ' is missing its prose');
+  }));
+  check('every Unit 16 익힘책 row is answerable and explained', broken.length === 0, broken.slice(0, 6).join(', '));
+  // The four 문형 연습 drills are cut from Track16 — the page prints its own track number and
+  // that is the file name; the workbook CD is grouped, not offset.
+  const drills = exs.filter((e) => e.section === '문형 연습');
+  check('four Unit 16 문형 연습 drills', drills.length === 4, 'found ' + drills.length);
+  const clips = [];
+  drills.forEach((e) => {
+    if (e.example && e.example.audio) clips.push(e.example.audio);
+    (e.items || []).forEach((it) => { if (it.audio) clips.push(it.audio); });
+  });
+  check('twenty Unit 16 drill clips — a 보기 and four items each', clips.length === 20, 'found ' + clips.length);
+  const clipMiss = clips.filter((a) => !fs.existsSync(path.join(ROOT, a.src))).map((a) => a.src);
+  check('every Unit 16 drill clip is on disk', clipMiss.length === 0, clipMiss.slice(0, 4).join(', '));
+  check('each is named for its drill and its item',
+    clips.every((a) => /^audio\/book\/2b-u16-p\d-\d\.mp3$/.test(a.src)));
+  check('and every one stops for an answer somewhere in the middle of itself',
+    clips.every((a) => a.askEnd > 1 && a.askEnd < 6));
+  // The one item the book prints and this bank does not.
+  check('the Unit 16 익힘책 says what it leaves out, and why',
+    typeof wb.omittedNote === 'string' && wb.omittedNote.length > 120
+    && wb.omittedNote.indexOf('연습 1') >= 0 && /정답/.test(wb.omittedNote));
+}());
+
+// ── 2B Unit 16 cassette (설날에는 밥 대신 떡국을 먹어요, tracks 62-71) ────────
+// The 발음 point is 유음화 — a ㄴ next to a ㄹ is read [ㄹ] whichever side it is on — and it
+// is computable from the spelling, so the check below reads the spelling rather than the
+// tags. Track 69 is a phone call: two spans after the scene break are a 440/480 Hz ringback
+// rather than a voice, and the line after them starts at 58.3s and not at 53.4s because of
+// it. tests/test_unit16_cassette.js carries the whole argument.
+(function checkUnit16Cassette() {
+  const rel = path.join('worlds', 'unit16-cassette.json');
+  if (!check(`${rel} exists`, fs.existsSync(path.join(ROOT, rel)))) return;
+  const c = JSON.parse(read(rel));
+  check('cassette content belongs to Unit 16', c.unit === '2b-unit-16', String(c.unit));
+  const tracks = c.tracks || [];
+  check('all ten Unit 16 tracks are listed', tracks.length === 10, `found ${tracks.length}`);
+  check('the tracks are 62 through 71',
+    tracks.map((t) => t.n).join(',') === '62,63,64,65,66,67,68,69,70,71', tracks.map((t) => t.n).join(','));
+  const noFile = tracks.filter((t) => !fs.existsSync(path.join(ROOT, t.src || ''))).map((t) => t.n);
+  check('every Unit 16 track has its mp3 on disk', noFile.length === 0, 'missing for ' + noFile.join(','));
+  check('every Unit 16 track carries a script',
+    tracks.every((t) => Array.isArray(t.lines)), tracks.filter((t) => !t.lines).map((t) => t.n).join(','));
+  check('so no Unit 16 track needs a no-script note', tracks.every((t) => !t.noteEn),
+    tracks.filter((t) => t.noteEn).map((t) => t.n).join(','));
+  const lines = tracks.reduce((a, t) => a.concat(t.lines || []), []);
+  check('57 transcript lines in all', lines.length === 57, `found ${lines.length}`);
+  const untimed = lines.filter((l) => !(l.at >= 0) || !(l.end > l.at)).map((l) => l.ko);
+  check('every Unit 16 line carries a forward span, so every line has a ▶',
+    untimed.length === 0, untimed.slice(0, 4).join(' | '));
+  // Every boundary in this bank is a recorded pause of at least 0.98s, the floor of the
+  // editor's flat 1.0s turn gap; every pause inside a turn is 0.96s or less. The 0.12s the
+  // player pulls each start back by is added in before the comparison.
+  const tooClose = [];
+  tracks.forEach((t) => (t.lines || []).forEach((l, i, a) => {
+    if (i && (l.at + 0.12) - a[i - 1].end < 0.98) tooClose.push(t.n + ':' + (i + 1));
+  }));
+  check('every Unit 16 line opens on a gap of 0.98s or more, which is what a new speaker sounds like',
+    tooClose.length === 0, tooClose.join(', '));
+  const items = (c.dictation && c.dictation.items) || [];
+  check('65 dictation sentences', items.length === 65, `found ${items.length}`);
+  const bad = items.filter((i) => !i.ko || !i.en || !i.why || !(i.tags || []).length || !i.audio || !i.audio.src).map((i) => i.id);
+  check('every Unit 16 sentence is complete', bad.length === 0, 'id ' + bad.join(','));
+  const clipMiss = items.filter((i) => !fs.existsSync(path.join(ROOT, i.audio.src))).map((i) => i.audio.src);
+  check('every Unit 16 dictation clip is on disk', clipMiss.length === 0, clipMiss.slice(0, 5).join(', '));
+  const scripted = new Set(tracks.filter((t) => Array.isArray(t.lines)).map((t) => t.n));
+  check('no Unit 16 sentence comes from a listen-only track', items.every((i) => scripted.has(i.track)));
+  const syl = (t) => [...String(t).normalize('NFC')].filter((ch) => ch >= '가' && ch <= '힣').length;
+  const off = items.filter((i) => syl(i.ko) !== i.syl || syl(i.ko) < 5 || syl(i.ko) > 22).map((i) => i.id);
+  check('every Unit 16 sentence is 5-22 syllables and says so truthfully', off.length === 0, 'id ' + off.join(','));
+  // A part of a printed turn has to name the turn, and be a part of it.
+  const flat = (s) => String(s).normalize('NFC').replace(/\s+/g, '');
+  const orphan = items.filter((i) => i.splitFrom
+    && flat(i.splitFrom).indexOf(flat(i.ko)) < 0).map((i) => i.id);
+  check('every Unit 16 split row really is a part of the turn it names', orphan.length === 0, 'id ' + orphan.join(','));
+  // This chapter repeats itself across tracks and inside single turns, so equality is not
+  // enough: no row may contain another one either.
+  const flats = items.map((i) => flat(i.ko));
+  const dup = [];
+  flats.forEach((a, i) => flats.forEach((b, j) => {
+    if (i !== j && (a === b ? i < j : a.indexOf(b) >= 0)) dup.push(items[j].id + ' inside ' + items[i].id);
+  }));
+  check('no Unit 16 sentence is drilled twice, and none contains another', dup.length === 0, dup.slice(0, 4).join(', '));
+  // 유음화, read off the spelling: 받침 ㄹ (final 8) before an onset ㄴ (2), and 받침 ㄴ (4)
+  // before an onset ㄹ (5). Both directions have to be there or the tape teaches half a rule.
+  const seam = (s) => {
+    const t = flat(s);
+    const out = { forward: 0, backward: 0 };
+    for (let i = 0; i + 1 < t.length; i++) {
+      const a = t[i], b = t[i + 1];
+      if (a < '가' || a > '힣' || b < '가' || b > '힣') continue;
+      const fin = (a.charCodeAt(0) - 0xac00) % 28;
+      const onset = Math.floor((b.charCodeAt(0) - 0xac00) / 588);
+      if (fin === 8 && onset === 2) out.forward++;
+      if (fin === 4 && onset === 5) out.backward++;
+    }
+    return out;
+  };
+  const forward = items.filter((i) => seam(i.ko).forward).length;
+  const backward = items.filter((i) => seam(i.ko).backward).length;
+  check('the Unit 16 set leans on its own 유음화 rule, ㄹ before ㄴ', forward >= 10, forward + ' of ' + items.length);
+  check('and carries the one ㄴ-before-ㄹ sentence the ten tracks contain', backward === 1, String(backward));
 }());
 
 (function checkUnit13Cassette() {
@@ -1551,7 +1844,8 @@ const overlayIds = [
     { unit: 'unit14', label: 'Unit 14', world: 'isUnit14World', exs: 9, rows: 41 },
     { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 },
     { unit: 'unit13', label: 'Unit 13', world: 'isUnit13World', exs: 16, rows: 78 },
-    { unit: 'unit11', label: 'Unit 11', world: 'isUnit11World', exs: 14, rows: 63 }
+    { unit: 'unit11', label: 'Unit 11', world: 'isUnit11World', exs: 14, rows: 63 },
+    { unit: 'unit16', label: 'Unit 16', world: 'isUnit16World', exs: 14, rows: 59 }
   ];
   const TYPES = ['fill', 'match', 'dialogue', 'experience', 'build'];
   const gameJs = readGameSource();

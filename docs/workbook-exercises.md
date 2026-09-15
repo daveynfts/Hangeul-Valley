@@ -793,6 +793,99 @@ The replacement measures the model answer against what is left of its clip after
 
 ---
 
+## Unit 16, and a page number that is not the image number
+
+`worlds/unit16-workbook.json`: fifteen exercises, seventy-four rows, ids prefixed `u16-`.
+Printed pages 138-149 hold sixteen, and the one that is missing is missing for the usual
+reason, written into `omittedNote`: 문법과 표현 3 연습 1 item 5 is an empty picture box and a
+blank B line — 이번 방학에 뭐 할 거예요? and answer whatever you like — so the 정답 pages give
+it nothing and there is nothing a screen could mark.
+
+### The workbook PDF has an offset too, and it is not the student book’s
+
+The note under Unit 12 said the 정답 for that unit was printed p.203 at image 199, and left
+the relationship at that. It is worth stating: in the 익힘책 PDF the **image index is the
+printed page minus four**, all through the body and the 부록 alike. Unit 16 is printed pages
+136-149 and that is images 132-145; its 정답 is printed pp.207-208 at images 203-204.
+
+This is not the student book’s offset, which is 0 through the chapters and +10 in the back
+matter. Two books, two offsets, and the only safe procedure is the one the earlier note gave:
+probe one page, read the number printed on it, and work out the rest from there.
+
+### Reading the 정답 first changes what the distractors can be
+
+Three rows of this unit turn on something a drawing would otherwise have had to settle, and
+all three were read off the key instead:
+
+- 어휘 연습 3 item 4 — the picture is a man wiping a floor, and the sentence in front of it is
+  며칠 동안 청소를 안 해서. Either tense would fit the drawing; the key says 방을 닦았어요.
+- 어휘 연습 3 item 1 — 밤늦게 rules out the vacuum, but whether the answer is a prohibition or
+  a plain statement is not in the picture. The key says 청소기를 돌리면 안 돼요.
+- 문법과 표현 2 연습 2 item 3 — the answer is a fragment, 주소 대신 전화번호를, and the rest of
+  the line is already printed. Guessing the particle would have been guessing.
+
+### One exercise where the distractors have to be the other answers
+
+Every other exercise in this bank obeys the rule that a wrong button must not be another
+row’s right answer — otherwise one of the two is marked wrong for being correct. 어휘 연습 2
+cannot obey it and should not: the book prints five foods in one box and five definitions
+under it, so the four wrong buttons on each row are the other four foods and could be nothing
+else. The suite **names the exception and checks it from the other side** — inside that one
+exercise, every button has to be one of the five foods the box prints:
+
+```js
+const SHARED_BOX = 'u16-vocab-2';
+ex.filter((e) => e.id !== SHARED_BOX).forEach(/* … no cross-row answers … */);
+// and inside it: every button is one of the five foods, and there are exactly five
+```
+
+Skipping it silently would have been the easy move, and would have left nothing checking the
+one exercise where a stray button is hardest to notice.
+
+### A length check on a note is not a check on the note
+
+The first version required every `grammar` line to be forty characters. Half of Unit 16’s are
+shorter than that and complete — `보다 takes -ㄹ까: 볼까.` says everything there is to say — so
+the check was padding prose rather than improving it. What replaced it is the property that
+actually matters: **the note has to quote something from its own row.** A note written for a
+different item is the real failure, and a word count never sees it. Four notes failed the new
+check and all four were genuinely about a row other than the one they sat under.
+
+The `why` note keeps its floor of eighty characters, and keeps the Unit 11 rule that it has to
+quote at least one of its own buttons — it is shown after checking, so it has to talk about
+what was on screen.
+
+### 까 해요 and 까 하는데 are one form, and a regex that forgets it finds six of fourteen
+
+The coverage check counted rows drilling V-(으)ㄹ까 하다 with `/까 하/`. That matches 갈까 하는데
+and misses 갈까 해요, because 하 and 해 are different syllables — so fourteen rows read as six
+and the assertion failed on a bank that was correct. The fix is `/까 하|까 해/`, and the lesson
+is that a Korean pattern with a 하다 in it needs both the stem and the contraction whenever it
+is matched by text.
+
+### The 문형 연습 track, and a number that is not a beep
+
+Track16, 321s, four drills of a 보기 and four items. The block structure comes out clean —
+group segments whose gaps stay under 1.5s and each drill is one head block plus nine,
+alternating answer and prompt — but the segment in front of every teacher prompt needed
+explaining before it could be dropped.
+
+It is not a cue tone. Measured for periodicity it sits at 0.24-0.57 where a pure tone is
+above 0.95, so it is speech. What identifies it is that **its length does not depend on the
+sentence after it**: across all four drills the four item slots come out at 0.29, 0.31, 0.41
+and 0.38 seconds, in that order, every time. A sound whose duration is the same in four
+different sentences is not part of any of them — it is 일, 이, 삼, 사 being read. `cut_pattern16.js`
+asserts that reproducibility, because it is the only evidence that dropping the span is right.
+
+And the reason position rather than length decides what to drop: drill 2’s answers all open
+on 네, which is 0.37-0.43s — exactly the length of the number. A rule of "skip a short span at
+the front" would have eaten the 네 off five model answers.
+
+With the numbers dropped, all forty groups read at 4.13-5.27 syl/s against their printed text,
+which is the tightest band any unit has produced.
+
+---
+
 ---
 
 ## The order to do it in
@@ -1048,6 +1141,120 @@ Three more things this unit settled:
   simply never made. Before starting a 교과서, check the cassette covers every track the
   chapter's pages name — `worlds/<unit>-cassette.json` against the track numbers printed
   beside each 준비 and 연습.
+
+### Unit 16, where the 익힘책’s own check was the wrong check
+
+`worlds/unit16-textbook.json`: fourteen pages, fifty-nine rows, ids prefixed `u16sgk-`, all
+eleven headed sections of the chapter, twenty-five rows carrying a recording. Four things
+this unit settled that the earlier ones did not.
+
+**A grammar note that quotes nothing can still be about its own row.** The 익힘책 suite for
+this unit checks that every `grammar` line quotes something from the sentence or the buttons
+above it, matched on two-syllable runs, and that check earned its place — it found four notes
+genuinely written for a different item. Carried across to the 교과서 it fails on fifteen rows
+and **every one of the fifteen is correct**: the textbook’s notes name a verb in the
+dictionary form where the row prints it inflected (맡기다 against 맡길, 옮기다 against 옮깁니다,
+보다 against 봐), or a single-syllable piece of the Yut board (도, 개, 걸, 모), or a bare jamo on
+the 발음 rule row. Loosening the match to one syllable passes everything and means nothing. A
+discriminative version — no note fits another row better than its own, counted in shared
+bigrams — fails on twelve, because on a page where five rows drill 대신 a note that says 대신
+fits all five equally well.
+
+So the property is **not checkable in a bank whose pages each drill one form**, and the honest
+move was to say that in the suite header rather than pad fifteen accurate notes until a regex
+went quiet. What replaced it checks the content instead of the prose: every keyed answer on a
+문법과 표현 page uses that page’s own form, and the four 자기 평가 rows use the four different
+forms one each. Plus the cheap one the prose version was really reaching for — no two rows
+carry the same note.
+
+**A dictation clip is not always a line.** `tb_build.js` attaches audio by filling each row
+with its own answer and matching the result against the sixty-five clips already cut for the
+cassette, so a row can never point at a clip of a different sentence. Two rows came out
+silent, and the reason is worth knowing: both print a sentence the cassette’s `splitAtClause`
+had already cut in two —
+
+```
+부모님 일도 좀 도와 드리고 | 가까운 곳으로 여행도 갈까 합니다.        d41 + d42
+제가 추석 연휴에 이틀 정도 여행을 가는데 | 고양이를 맡길 곳이 없어서요.  d46 + d56
+```
+
+The clips are right and the rows are right; there is simply no single clip holding what the row
+prints. Both were given the whole track instead, and both `noteEn` lines now say so. **Half a
+sentence labelled as the line is worse than the whole tape**, and cutting a fresh clip just for
+the 교과서 would have broken the invariant the build script exists for: every clip a 교과서 row
+names is one the cassette suite already checks.
+
+**발음 is checkable arithmetically.** Unit 16’s page is 유음화 — a ㄴ next to a ㄹ is read [ㄹ].
+The suite reads the 받침 and the following initial straight off the Unicode syllable index
+(`(initial × 21 + medial) × 28 + final`, based at U+AC00) and asserts three things per row: the
+printed spelling has a ㄹ beside a ㄴ, the keyed reading has the ㄹㄹ run the rule produces, and
+**no wrong button has it**. The third is what makes the page a pronunciation question rather
+than a spelling one — the same shape as the ㅎ check in Unit 13. Spaces are stripped before the
+syllables are read, because 일 년 and 갈 날만 are two words in writing and one run in sound,
+which is exactly what two of the four rows are for.
+
+**Translate by fragment, not by retyping the key.** The catalogue for this bank is 250 strings
+and fourteen of them are three-hundred-character notes with Korean inside them. Retyping one as
+a key, one character out, is a silent miss: the entry answers nothing, the string stays English,
+and only `i18n_report` ever notices. So the Vietnamese is written as
+`[field, a fragment of the English, the Vietnamese]` and a generator resolves each fragment
+against the scan — refusing anything that matches zero or more than one string, refusing a
+string claimed twice, and refusing to write anything at all until every scanned string is
+accounted for. It emits the part files with **exact** keys, so the both-directions check in the
+build script stays a real check rather than a tautology.
+
+And one thing no structural check would ever have caught: the 과제’s grammar note listed the
+five Yut throws as 도 걸 개 윷 모 against distances 1 to 5, where the page prints 도 (한 칸),
+개 (두 칸), 걸 (세 칸). The row’s own `why` had it right and the `grammar` line beside it had it
+wrong. It surfaced because the page image was opened again before the note was translated —
+which is the argument for translating from the book rather than from the English.
+
+### The fourth thing on the desk, and why three units’ quizzes lost their pictures
+
+Unit 16 is the first unit whose 퀴즈 was written after both exercise banks rather than before
+either, and that changes what it should contain. A quiz written first is a syllabus; written
+last it is **revision**, which gives it one obligation the banks do not have — not to be a third
+copy of a row already done twice. `worlds/unit16-desk-quiz.json` is thirteen rows, ten to a
+sitting, and both `tests/test_unit16_desk_quiz.js` and `validate_content.js` compare every
+button against every filled sentence in the 교과서 and the 익힘책.
+
+The suite also checks the direction that matters more, and that nothing else was checking:
+**no wrong button in the quiz is a keyed answer in either bank.** A distractor that is correct
+somewhere else on the same desk means one of the two is lying, and the learner meets both in
+the same session.
+
+Two smaller properties worth copying to the next unit’s quiz. The key has to use all four
+letters with no letter carrying more than five of thirteen — a key that reads BBBBCBBB teaches
+the shape of the answer rather than the answer. And **the harvest must never speak a form the
+quiz prints only to be rejected**: `walkKo` collects `node.ko`, a quiz’s choices are plain A-D
+strings, so nothing of a quiz is spoken and nothing should be — 만드까 and 춥을 테니까 are on
+those buttons precisely because they are wrong. The suite names the nine and asserts they are
+still printed and still silent.
+
+#### validateQuiz drops what it does not know, and that is where the art went
+
+Units 11, 14 and 15 have `art` on no row of their desk quizzes and `sessionSize` 5 where they
+were written with 10 — five of `validate_content.js`’s failures on main are exactly this. The
+PNGs were never deleted. `validateQuiz` in `admin/lib/world.js` rebuilds a quiz from a fixed
+field list:
+
+```js
+questions: qs.map((q, i) => ({ id: …, q: String(q.q), a: q.a, choices: { A, B, C, D } }))
+```
+
+`art` is not in that list, so one save through the admin panel drops it from every row in
+silence, and `sessionSize` is clamped by `Number(body.sessionSize) || 5`. `validateWorkbook`
+has the same shape and drops `example.why` the same way, which is why the 익힘책 banks are
+written directly and the validator is run as an acceptance check rather than as a filter.
+
+So: **write the JSON, run the validator over it; do not round-trip a bank through the panel.**
+And because a note can vanish the same way an `art` field did, Unit 16’s quiz carries an
+`artNote` saying why it has no pictures and which four would go where — and the suite asserts
+that note is still there, so the next silent strip fails rather than passes.
+
+[docs/unit16-art-notes.md](unit16-art-notes.md) collects every deferred drawing for this unit
+in one place: what to draw, which bank wants it, and what it would replace.
+
 
 ---
 

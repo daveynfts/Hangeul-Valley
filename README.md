@@ -3,7 +3,7 @@
 A Stardew-Valley-flavoured Korean vocabulary game. You plant a Korean word, answer a
 three-phase quiz as the crop grows, harvest it for Gold, and spend the Gold on new
 vocabulary packs, farm plots and cosmetics. 25 levels of 1,500 words in the TOPIK 1–3
-range, plus seven textbook and exam worlds that carry their own vocabulary — 2,865 unique
+range, plus eight textbook and exam worlds that carry their own vocabulary — 2,989 unique
 words across the game. (`checkReadmeCounts` in `scripts/validate_content.js` fails if any
 figure in this paragraph drifts from the content.)
 
@@ -465,7 +465,7 @@ admin/           Express admin panel (writable locally; read-only on Vercel)
 api/             Vercel serverless functions (save, admin GET, Unit 10)
 ```
 
-The study desk offers up to three things, and Units 10 and 14 carry all
+The study desk offers up to three things, and every unit but 12 now carries all
 three: 퀴즈 (multiple choice), 교과서 — the 교과서's own 말하기 / 듣기 / 읽기 / 과제 /
 문화 산책 / 발음 / 자기 평가 pages — and 연습 문제, the 익힘책's 어휘, 문법과 표현
 and 문형 연습 with the book's own audio on the pattern drills. Both exercise banks

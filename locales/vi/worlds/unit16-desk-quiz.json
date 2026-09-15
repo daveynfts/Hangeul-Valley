@@ -1,0 +1,32 @@
+{
+  "lang": "vi",
+  "source": "worlds/unit16-desk-quiz.json",
+  "note": "Keys are field|English-source. Editing the English orphans its translation on purpose.",
+  "entries": {
+    "A|The one that was actually used": "Danh từ thực sự được dùng",
+    "A|The ㄹ has become a ㄴ": "ㄹ đã biến thành ㄴ",
+    "A|a guess about the weather": "một phỏng đoán về thời tiết",
+    "B|The one that was not used": "Danh từ đã không được dùng",
+    "B|The ㄴ has become a ㄹ": "ㄴ đã biến thành ㄹ",
+    "B|an offer": "một lời đề nghị",
+    "C|Both have become ㄴ": "Cả hai đều biến thành ㄴ",
+    "C|Whichever comes first": "Danh từ nào đứng trước cũng được",
+    "C|an order": "một câu mệnh lệnh",
+    "D|Both of them at once": "Cả hai cùng một lúc",
+    "D|The 받침 has been dropped": "받침 đã bị lược bỏ",
+    "D|a report of something already finished": "một lời kể về việc đã xong",
+    "q|A 제가 in front of -(으)ㄹ 테니까 turns the sentence into —": "Chữ 제가 đứng trước -(으)ㄹ 테니까 biến câu thành —",
+    "q|In 윷놀이, which throw moves you the furthest?": "Trong 윷놀이, kiểu gieo nào đi được xa nhất?",
+    "q|On 설날 morning, who is 세배 made to?": "Sáng mùng một Tết, 세배 được làm với ai?",
+    "q|When 대신 sits between two nouns, which one does it attach to?": "Khi 대신 đứng giữa hai danh từ, nó gắn vào danh từ nào?",
+    "q|Which of the chapter’s four patterns says a thing was done early and is still done?": "Trong bốn mẫu câu của bài, mẫu nào nói việc đã làm sẵn từ trước và đến giờ vẫn còn?",
+    "q|Which of these is a plan the speaker might still change their mind about?": "Câu nào là dự định mà người nói vẫn còn có thể đổi ý?",
+    "q|Which word means a traditional holiday rather than just a run of days off?": "Từ nào có nghĩa là ngày lễ truyền thống, chứ không chỉ là chuỗi ngày được nghỉ?",
+    "q|만들다 takes -(으)ㄹ까 as —": "만들다 kết hợp với -(으)ㄹ까 thành —",
+    "q|설날 is said [설랄]. What has happened to it?": "설날 được đọc là [설랄]. Điều gì đã xảy ra?",
+    "q|차례 goes with which verb?": "차례 đi với động từ nào?",
+    "q|추석 falls on —": "추석 rơi vào —",
+    "q|춥다 takes -(으)ㄹ 테니까 as —": "춥다 kết hợp với -(으)ㄹ 테니까 thành —",
+    "titleEn|Holidays quiz": "Đố vui ngày lễ"
+  }
+}

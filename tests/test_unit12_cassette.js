@@ -259,7 +259,11 @@ assert(/isUnit12World\(\)\) return '\/worlds\/unit12-cassette\.json'/.test(ui),
 assert(/OPEN_ON = \{[^}]*'2b-unit-12': 24/.test(ui), 'the listen screen opens on 말하기 1, track 24');
 assert(read('js/i18n.js').indexOf("'worlds/unit12-cassette.json'") >= 0,
   'the bank is a translatable source, or it ships in English at 100% coverage');
-assert(read('scripts/cassette_timings.js').indexOf('const UNITS = [10, 11, 12, 13, 14, 15]') >= 0,
+// Membership rather than the whole literal: the first version of this named every unit in
+// the array, so adding the next unit broke the suite of the unit before it.
+const timingUnits = ((/const UNITS = \[([^\]]*)\]/.exec(read('scripts/cassette_timings.js')) || [])[1] || '')
+  .split(',').map((s) => s.trim());
+assert(timingUnits.indexOf('12') >= 0,
   'the timings tool knows about Unit 12');
 assert(read('admin/lib/content.js').indexOf("'unit12'") >= 0, 'and so does the admin panel');
 assert(read('scripts/vocab_examples.js').indexOf('worlds/unit12-cassette.json') >= 0,

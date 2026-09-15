@@ -1,0 +1,156 @@
+{
+  "titleKo": "학습 책상",
+  "titleEn": "Holidays quiz",
+  "sessionSize": 10,
+  "doneKo": "오늘 공부 끝!",
+  "againKo": "한 번 더",
+  "closeKo": "책상 닫기",
+  "correctKo": "맞아요!",
+  "wrongKo": "Answer:",
+  "artNote": "No row carries a picture. The chapter’s own drawings are deferred with the rest of this unit’s design, and none of these thirteen rows needs one: every question turns on a word, a form or a date, all of which a row of buttons can print. If pictures are drawn later the obvious four are 떡국 and 송편 for rows 3 and 9, the 세배 bow for row 11 and the five yut throws for row 13 — the same drawings the 교과서’s 어휘 and 과제 pages are waiting on, so they should be made once and used in both.",
+  "questions": [
+    {
+      "id": 1,
+      "q": "Which of the chapter’s four patterns says a thing was done early and is still done?",
+      "a": "C",
+      "choices": {
+        "A": "-(으)ㄹ까 하다",
+        "B": "-(으)ㄹ 테니까",
+        "C": "-아/어 놓다",
+        "D": "-기 때문에"
+      }
+    },
+    {
+      "id": 2,
+      "q": "When 대신 sits between two nouns, which one does it attach to?",
+      "a": "B",
+      "choices": {
+        "A": "The one that was actually used",
+        "B": "The one that was not used",
+        "C": "Whichever comes first",
+        "D": "Both of them at once"
+      }
+    },
+    {
+      "id": 3,
+      "q": "\"설날에는 밥 ___ 떡국을 먹어요.\" Which fits?",
+      "a": "A",
+      "choices": {
+        "A": "대신",
+        "B": "대신에는",
+        "C": "을 대신",
+        "D": "대신으로"
+      }
+    },
+    {
+      "id": 4,
+      "q": "Which of these is a plan the speaker might still change their mind about?",
+      "a": "C",
+      "choices": {
+        "A": "갈 거예요",
+        "B": "가세요",
+        "C": "갈까 해요",
+        "D": "갔어요"
+      }
+    },
+    {
+      "id": 5,
+      "q": "A 제가 in front of -(으)ㄹ 테니까 turns the sentence into —",
+      "a": "B",
+      "choices": {
+        "A": "a guess about the weather",
+        "B": "an offer",
+        "C": "an order",
+        "D": "a report of something already finished"
+      }
+    },
+    {
+      "id": 6,
+      "q": "춥다 takes -(으)ㄹ 테니까 as —",
+      "a": "D",
+      "choices": {
+        "A": "춥을 테니까",
+        "B": "추워 테니까",
+        "C": "춥 테니까",
+        "D": "추울 테니까"
+      }
+    },
+    {
+      "id": 7,
+      "q": "만들다 takes -(으)ㄹ까 as —",
+      "a": "A",
+      "choices": {
+        "A": "만들까",
+        "B": "만드까",
+        "C": "만들을까",
+        "D": "만듦까"
+      }
+    },
+    {
+      "id": 8,
+      "q": "설날 is said [설랄]. What has happened to it?",
+      "a": "B",
+      "choices": {
+        "A": "The ㄹ has become a ㄴ",
+        "B": "The ㄴ has become a ㄹ",
+        "C": "Both have become ㄴ",
+        "D": "The 받침 has been dropped"
+      }
+    },
+    {
+      "id": 9,
+      "q": "Which word means a traditional holiday rather than just a run of days off?",
+      "a": "C",
+      "choices": {
+        "A": "연휴",
+        "B": "휴일",
+        "C": "명절",
+        "D": "방학"
+      }
+    },
+    {
+      "id": 10,
+      "q": "차례 goes with which verb?",
+      "a": "D",
+      "choices": {
+        "A": "하다",
+        "B": "보다",
+        "C": "받다",
+        "D": "지내다"
+      }
+    },
+    {
+      "id": 11,
+      "q": "On 설날 morning, who is 세배 made to?",
+      "a": "B",
+      "choices": {
+        "A": "조상들께",
+        "B": "어른들께",
+        "C": "이웃들과",
+        "D": "친구들에게"
+      }
+    },
+    {
+      "id": 12,
+      "q": "추석 falls on —",
+      "a": "A",
+      "choices": {
+        "A": "음력 8월 15일",
+        "B": "양력 8월 15일",
+        "C": "음력 1월 1일",
+        "D": "양력 1월 1일"
+      }
+    },
+    {
+      "id": 13,
+      "q": "In 윷놀이, which throw moves you the furthest?",
+      "a": "D",
+      "choices": {
+        "A": "도",
+        "B": "걸",
+        "C": "윷",
+        "D": "모"
+      }
+    }
+  ]
+}
