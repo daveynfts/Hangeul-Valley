@@ -7,7 +7,7 @@
   "closeKo": "책상 닫기",
   "correctKo": "맞아요!",
   "wrongKo": "Answer:",
-  "artNote": "No row carries a picture. The chapter’s own drawings are deferred with the rest of this unit’s design, and none of these thirteen rows needs one: every question turns on a word, a form or a date, all of which a row of buttons can print. If pictures are drawn later the obvious four are 떡국 and 송편 for rows 3 and 9, the 세배 bow for row 11 and the five yut throws for row 13 — the same drawings the 교과서’s 어휘 and 과제 pages are waiting on, so they should be made once and used in both.",
+  "artNote": "Reviewed original Hangeul Valley illustrations clarify the holiday context. All thirteen questions keep their original wording and answer keys. The yut-throw pictures have been checked for four sticks and the correct flat-face counts.",
   "questions": [
     {
       "id": 1,
@@ -40,7 +40,8 @@
         "B": "대신에는",
         "C": "을 대신",
         "D": "대신으로"
-      }
+      },
+      "art": "foods/unit16_013_rice_cake_soup.png"
     },
     {
       "id": 4,
@@ -95,7 +96,8 @@
         "B": "The ㄴ has become a ㄹ",
         "C": "Both have become ㄴ",
         "D": "The 받침 has been dropped"
-      }
+      },
+      "art": "items/unit16_002_seollal_the_lunar_new_year.png"
     },
     {
       "id": 9,
@@ -106,7 +108,8 @@
         "B": "휴일",
         "C": "명절",
         "D": "방학"
-      }
+      },
+      "art": "items/unit16_001_traditional_holidays.png"
     },
     {
       "id": 10,
@@ -117,7 +120,8 @@
         "B": "보다",
         "C": "받다",
         "D": "지내다"
-      }
+      },
+      "art": "items/unit16_008_to_perform_the_ancestral_rites.png"
     },
     {
       "id": 11,
@@ -128,7 +132,8 @@
         "B": "어른들께",
         "C": "이웃들과",
         "D": "친구들에게"
-      }
+      },
+      "art": "items/unit16_011_to_bow_to_one_s_elders_at_new_year.png"
     },
     {
       "id": 12,
@@ -139,7 +144,8 @@
         "B": "양력 8월 15일",
         "C": "음력 1월 1일",
         "D": "양력 1월 1일"
-      }
+      },
+      "art": "items/unit16_003_chuseok_the_autumn_harvest_holiday.png"
     },
     {
       "id": 13,
@@ -150,7 +156,8 @@
         "B": "걸",
         "C": "윷",
         "D": "모"
-      }
+      },
+      "art": "quiz/unit16_yut_mo.png"
     }
   ]
 }

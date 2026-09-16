@@ -15,11 +15,8 @@
  *      no wrong button here is a right answer over there. A distractor that is keyed elsewhere
  *      means one of the two banks is lying, and the learner meets both in the same session.
  *
- * It ships with no art. That is a decision — this unit's design is deferred — and `artNote`
- * records it, including which four drawings would go where if they are made. The note is
- * asserted, because admin/lib/world.js validateQuiz rebuilds a quiz from a fixed field list and
- * silently drops everything else: that is how Units 11, 14 and 15 lost the `art` on every row of
- * theirs, and a note that vanishes the same way should fail rather than pass quietly.
+ * Reviewed illustrations now accompany the holiday questions. The source note and image
+ * paths must survive an admin save; test_unit16_artwork.js verifies the complete art set.
  *
  * Run: node tests/test_unit16_desk_quiz.js
  */
@@ -79,10 +76,10 @@ assert(new Set(letters.split('')).size === 4,
   'and the answers use all four letters, so the shape of the key teaches nothing (' + letters + ')');
 const commonest = Math.max(...['A', 'B', 'C', 'D'].map((L) => letters.split(L).length - 1));
 assert(commonest <= 5, 'with no letter carrying more than five of the thirteen (most is ' + commonest + ')');
-assert(String(quiz.artNote || '').length > 200, 'the art note says why no row carries a picture');
+assert(String(quiz.artNote || '').length > 200, 'the art note records reviewed illustrations');
 assert(/떡국|송편|세배|yut/i.test(String(quiz.artNote || '')),
-  'and which drawings would go where if they are made');
-const claimsArt = rows.filter((q) => q.art).map((q) => q.id);
+  'and identifies the illustrated holiday concepts');
+const claimsArt = rows.filter((q) => q.art && !fs.existsSync(path.join(ROOT, 'sprites', q.art))).map((q) => q.id);
 assert(claimsArt.length === 0, 'and no row claims a picture it does not have'
   + (claimsArt.length ? ' — q' + claimsArt.join(', q') : ''));
 

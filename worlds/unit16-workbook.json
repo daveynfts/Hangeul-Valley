@@ -11,7 +11,7 @@
   "againKo": "다시 풀기",
   "backKo": "연습 목록",
   "doneKo": "닫기",
-  "artNote": "The book’s own drawings are not here, and 16과 needs them less than most: every picture in this unit’s 익힘책 illustrates a sentence that already names the thing — a vacuum cleaner beside 청소기를 돌리다, a bowl of tteokguk beside a definition that says 떡을 넣고 끓인 음식. The one place a picture decides rather than illustrates is 어휘 연습 3 item 4, where the drawing is a man wiping a floor and the workbook’s own 정답 (printed p.207) is 방을 닦았어요 — so that row was read off the answer key rather than off the drawing, and its note says so.",
+  "artNote": "Reviewed original Hangeul Valley illustrations are linked to the matching vocabulary and exercise rows. Original answer keys and audio are preserved. Vocabulary illustration coverage: 133/133. The floor-cleaning row keeps 닦았어요 from the printed answer key on p.207.",
   "omittedNote": "One printed item is not here: 문법과 표현 3 연습 1 item 5 (p.144) prints an empty picture box and an empty B line — 이번 방학에 뭐 할 거예요? and answer whatever you like. The 정답 pages give it no answer because there is not one, so there is nothing a screen could mark. Everything else the chapter prints is here, including all four 문형 연습 drills off Track16.",
   "exercises": [
     {
@@ -69,7 +69,8 @@
           ],
           "en": "A: Jiyeong, did you wear hanbok when you got married? — B: Yes, and my family did too.",
           "grammar": "입다 takes -었- for the past: 입었어요.",
-          "why": "B answers 입었어요, so the question is about a wedding that has happened. 입어요 asks about a habit and 입을 거예요 about one still to come, and neither of those can be answered with 가족들도 입었어요."
+          "why": "B answers 입었어요, so the question is about a wedding that has happened. 입어요 asks about a habit and 입을 거예요 about one still to come, and neither of those can be answered with 가족들도 입었어요.",
+          "art": "items/unit16_004_to_wear_korean_traditional_dress.png"
         },
         {
           "n": 2,
@@ -100,7 +101,8 @@
           ],
           "en": "A: When do Korean people play Yut? — B: At Seollal or Chuseok.",
           "grammar": "언제 with the plain present asks about a habit rather than about one occasion.",
-          "why": "B answers 해요, and 설날이나 추석에 is a rule about every year, not a report of one day. 했어요 would be asking when it happened once; 하고 있어요 would be asking about right now."
+          "why": "B answers 해요, and 설날이나 추석에 is a rule about every year, not a report of one day. 했어요 would be asking when it happened once; 하고 있어요 would be asking about right now.",
+          "art": "items/unit16_009_to_play_yut.png"
         },
         {
           "n": 3,
@@ -131,7 +133,8 @@
           ],
           "en": "A: What do people usually do on Seollal morning? — B: First we bow to our elders.",
           "grammar": "세배 goes with 하다, and the respect is carried by 께 on the elders rather than by the verb.",
-          "why": "세배를 드려요 puts the honorific on the wrong word — 께 has already done that job, and 세배를 드리다 is not the collocation the book prints. 성묘 is done at a grave, which is not where anyone is on Seollal morning."
+          "why": "세배를 드려요 puts the honorific on the wrong word — 께 has already done that job, and 세배를 드리다 is not the collocation the book prints. 성묘 is done at a grave, which is not where anyone is on Seollal morning.",
+          "art": "items/unit16_011_to_bow_to_one_s_elders_at_new_year.png"
         },
         {
           "n": 4,
@@ -162,7 +165,8 @@
           ],
           "en": "A: Does your family perform the ancestral rites at Chuseok too? — B: Yes, so we have to prepare a lot of food.",
           "grammar": "차례 takes 지내다, the verb for keeping a rite, and never 하다.",
-          "why": "차례를 해요 is the wrong verb: a 차례 is 지내다, the way a 생일 is 보내다. 지냈어요 is about one past Chuseok, but B answers with 준비해야 해요, which is about every year."
+          "why": "차례를 해요 is the wrong verb: a 차례 is 지내다, the way a 생일 is 보내다. 지냈어요 is about one past Chuseok, but B answers with 준비해야 해요, which is about every year.",
+          "art": "items/unit16_008_to_perform_the_ancestral_rites.png"
         },
         {
           "n": 5,
@@ -193,7 +197,8 @@
           ],
           "en": "A: Minsu, are you going to your hometown this Seollal? — B: Yes, I booked the train tickets last week.",
           "grammar": "이번 설날 is still ahead, so the plain present carries the future: 가요.",
-          "why": "The ticket was booked 지난주에 and the journey has not happened — 갔어요 would mean it already had. 가고 있어요 would have Minsu on the train while he is answering."
+          "why": "The ticket was booked 지난주에 and the journey has not happened — 갔어요 would mean it already had. 가고 있어요 would have Minsu on the train while he is answering.",
+          "art": "items/unit16_005_to_go_to_one_s_hometown.png"
         }
       ],
       "type": "build"
@@ -234,7 +239,8 @@
           ],
           "en": "Sikhye is a traditional Korean drink, and it tastes sweet.",
           "grammar": "음료수 is a drink, which narrows five foods down to one.",
-          "why": "한과 is a sweet you eat and 떡국 is a soup you eat with a spoon. Only 식혜 is drunk, and 달아요 is the taste the book gives it."
+          "why": "한과 is a sweet you eat and 떡국 is a soup you eat with a spoon. Only 식혜 is drunk, and 달아요 is the taste the book gives it.",
+          "art": "foods/unit16_017_sweet_rice_punch.png"
         },
         {
           "n": 2,
@@ -260,7 +266,8 @@
           ],
           "en": "Hangwa are traditional Korean sweets, eaten a lot at the holidays.",
           "grammar": "과자 is a confection — biscuits and sweets — and not a 떡 or a 전.",
-          "why": "송편 is a 떡 and 빈대떡 is fried in a pan; neither is a 과자. 한과 is the one the word was invented for."
+          "why": "송편 is a 떡 and 빈대떡 is fried in a pan; neither is a 과자. 한과 is the one the word was invented for.",
+          "art": "foods/unit16_016_korean_traditional_sweets.png"
         },
         {
           "n": 3,
@@ -286,7 +293,8 @@
           ],
           "en": "Tteokguk is a dish boiled with rice cakes in it, usually eaten on Seollal.",
           "grammar": "끓인 is 끓이다 in its past-modifier form — the dish has been boiled, not is boiling.",
-          "why": "송편 is also made of 떡 but it is steamed and eaten whole, not put into something and boiled. 국 in the name is the giveaway, and 설날 is the day the chapter title names."
+          "why": "송편 is also made of 떡 but it is steamed and eaten whole, not put into something and boiled. 국 in the name is the giveaway, and 설날 is the day the chapter title names.",
+          "art": "foods/unit16_013_rice_cake_soup.png"
         },
         {
           "n": 4,
@@ -312,7 +320,8 @@
           ],
           "en": "Bindaetteok is a traditional Korean dish made with meat and vegetables in it.",
           "grammar": "넣어서 만들어요 — the ingredients go in and then it is made, which is a batter.",
-          "why": "Nothing goes into 식혜 but rice and water, and 한과 has no meat in it. 빈대떡 is the only one of the five with 고기와 야채 in it."
+          "why": "Nothing goes into 식혜 but rice and water, and 한과 has no meat in it. 빈대떡 is the only one of the five with 고기와 야채 in it.",
+          "art": "foods/unit16_014_mung_bean_pancake.png"
         },
         {
           "n": 5,
@@ -338,7 +347,8 @@
           ],
           "en": "Songpyeon is the rice cake eaten at Chuseok, usually made with the family the day before.",
           "grammar": "먹는 떡 says the thing itself is a 떡, which 떡국 is not — 떡국 is a soup with 떡 in it.",
-          "why": "떡국 belongs to 설날 and is a dish rather than a 떡. 빈대떡 has 떡 in its name and is not one, which is exactly why it is here."
+          "why": "떡국 belongs to 설날 and is a dish rather than a 떡. 빈대떡 has 떡 in its name and is not one, which is exactly why it is here.",
+          "art": "foods/unit16_015_half_moon_shaped_rice_cake.png"
         }
       ],
       "type": "build"
@@ -388,7 +398,8 @@
           ],
           "en": "I usually clean up in the morning. I live in a flat, so I must not run the vacuum late at night.",
           "grammar": "V-(으)면 안 되다 is the prohibition the 아파트에 살기 때문에 is a reason for.",
-          "why": "청소기를 돌려요 says the opposite of what 아침에 청소를 해요 has just established. 돌리고 싶어요 is a wish, and a wish is not a reason to clean in the morning."
+          "why": "청소기를 돌려요 says the opposite of what 아침에 청소를 해요 has just established. 돌리고 싶어요 is a wish, and a wish is not a reason to clean in the morning.",
+          "art": "items/unit16_029_to_vacuum.png"
         },
         {
           "n": 2,
@@ -440,7 +451,8 @@
           ],
           "en": "I have nothing to wear tomorrow, so I really have to run the washing machine today.",
           "grammar": "V-아/어야 되다 is what 꼭 is waiting for: 세탁기를 돌려야 돼요 is an obligation, not a report.",
-          "why": "꼭 sets up something that has to happen, so a plain 돌려요 leaves the 꼭 with nothing to attach to. 돌렸어요 has the washing already done, which contradicts 내일 입을 옷이 없어서."
+          "why": "꼭 sets up something that has to happen, so a plain 돌려요 leaves the 꼭 with nothing to attach to. 돌렸어요 has the washing already done, which contradicts 내일 입을 옷이 없어서.",
+          "art": "items/unit16_028_to_run_the_washing_machine.png"
         },
         {
           "n": 4,
@@ -466,7 +478,8 @@
           ],
           "en": "I had not cleaned for a few days, so I wiped the room down.",
           "grammar": "-아서 with a past main clause: 청소를 안 해서 came first and 방을 닦았어요 followed.",
-          "why": "The workbook’s own 정답 is 닦았어요 — the room got wiped, and the days of not cleaning are why. 닦아요 and 닦을 거예요 leave the floor still dirty."
+          "why": "The workbook’s own 정답 is 닦았어요 — the room got wiped, and the days of not cleaning are why. 닦아요 and 닦을 거예요 leave the floor still dirty.",
+          "art": "items/unit16_025_to_wipe_the_room_clean.png"
         },
         {
           "n": 5,
@@ -542,7 +555,8 @@
           ],
           "en": "There are no tickets at the weekend, so you have to book in advance.",
           "grammar": "하다 becomes 해 before 놓다: 해 놓다, never 하 놓다.",
-          "why": "예매를 해야 돼요 loses the 놓다, and with it the whole point — the booking has to be done *and left done* before the weekend. 해 놓았어요 reports it as already finished, where 없으니까 is giving a reason for something still to do."
+          "why": "예매를 해야 돼요 loses the 놓다, and with it the whole point — the booking has to be done *and left done* before the weekend. 해 놓았어요 reports it as already finished, where 없으니까 is giving a reason for something still to do.",
+          "art": "items/unit16_035_to_book_a_ticket_in_advance.png"
         },
         {
           "n": 2,
@@ -568,7 +582,8 @@
           ],
           "en": "You have to clean up before your friends arrive.",
           "grammar": "V-기 전에 sets a deadline, and 놓다 is what says the result is still there when it passes.",
-          "why": "청소를 해요 has no deadline in it at all. 하고 있어야 돼요 would have you still vacuuming when the doorbell goes, which is the opposite of the point."
+          "why": "청소를 해요 has no deadline in it at all. 하고 있어야 돼요 would have you still vacuuming when the doorbell goes, which is the opposite of the point.",
+          "art": "items/unit16_033_to_clean_up.png"
         },
         {
           "n": 3,
@@ -594,7 +609,8 @@
           ],
           "en": "If you don’t want to forget it, you had better write it down on paper.",
           "grammar": "쓰다 drops its ㅡ before the ending: 써 놓다.",
-          "why": "쓰 놓아야 돼요 is the contraction not made — 쓰다 cannot keep its ㅡ in front of 놓다. 썼어요 answers a different question: -(으)려면 is asking what to do, not what was done."
+          "why": "쓰 놓아야 돼요 is the contraction not made — 쓰다 cannot keep its ㅡ in front of 놓다. 썼어요 answers a different question: -(으)려면 is asking what to do, not what was done.",
+          "art": "items/unit16_040_to_write_it_down_on_paper.png"
         },
         {
           "n": 4,
@@ -620,7 +636,8 @@
           ],
           "en": "If you are going to make the holiday food tomorrow, you have to do the shopping today.",
           "grammar": "보다 becomes 봐 before 놓다, so it is 장을 봐 놓다.",
-          "why": "보 놓아야 돼요 keeps the stem where the 아/어 form is needed. 장을 보러 가야 돼요 is good Korean and says nothing about tomorrow — the shopping would be done, but not sitting there waiting for the cooking."
+          "why": "보 놓아야 돼요 keeps the stem where the 아/어 form is needed. 장을 보러 가야 돼요 is good Korean and says nothing about tomorrow — the shopping would be done, but not sitting there waiting for the cooking.",
+          "art": "items/unit16_026_to_do_the_grocery_shopping_in_advance.png"
         },
         {
           "n": 5,
@@ -646,7 +663,8 @@
           ],
           "en": "Tomorrow is a holiday and the bank will not open, so you have to withdraw money today.",
           "grammar": "찾다 has a bright ㅏ, so it takes 아: 찾아 놓다.",
-          "why": "찾아 놓았어요 turns the advice into a report of what someone already did. 찾고 있어야 돼요 would have you standing at the machine all day tomorrow, when the bank is shut."
+          "why": "찾아 놓았어요 turns the advice into a report of what someone already did. 찾고 있어야 돼요 would have you standing at the machine all day tomorrow, when the bank is shut.",
+          "art": "items/unit16_039_to_withdraw_money.png"
         },
         {
           "n": 6,
@@ -732,7 +750,8 @@
           ],
           "en": "A: The house is cool. — B: Yes, it was hot, so I left the window open.",
           "grammar": "열다 has a dark stem vowel, so it takes 어: 열어 놓다.",
-          "why": "닫아 놓았어요 would make the house hotter, not cooler. 열고 있어요 has B still opening the window while A is admiring the result."
+          "why": "닫아 놓았어요 would make the house hotter, not cooler. 열고 있어요 has B still opening the window while A is admiring the result.",
+          "art": "items/unit16_036_to_open_the_window.png"
         },
         {
           "n": 2,
@@ -887,7 +906,8 @@
           ],
           "en": "A: Where is the water? — B: I put it in the fridge so it would be cold to drink.",
           "grammar": "넣다 has a dark stem vowel, so it takes 어: 넣어 놓다.",
-          "why": "넣 놓았어요 has no ending. 넣고 있어요 would have B holding the bottle in the fridge door while answering the question."
+          "why": "넣 놓았어요 has no ending. 넣고 있어요 would have B holding the bottle in the fridge door while answering the question.",
+          "art": "items/unit16_041_to_put_something_in_the_fridge.png"
         }
       ],
       "type": "build"
@@ -1315,7 +1335,7 @@
             }
           ],
           "en": "A: What will you do when you meet your friend? — B: We both like shopping, so I’m thinking of going shopping.",
-          "grammar": "하다 takes -ㄹ까: 할까 해요.",
+          "grammar": "The verb 하다 takes -ㄹ까: 할까 해요.",
           "why": "하까 해요 is missing the ㄹ that carries the whole form. 할 거예요 is a decision already taken, and 좋아하니까 is offered as a reason for still thinking about it."
         },
         {
@@ -1377,7 +1397,7 @@
             }
           ],
           "en": "A: Where are you going on holiday? — B: I have never been to Jeju, so I’m thinking of going there.",
-          "grammar": "가다 takes -ㄹ까: 갈까 해요.",
+          "grammar": "The verb 가다 takes -ㄹ까: 갈까 해요.",
           "why": "가까 해요 is missing the ㄹ. 부산 is not the place the reason names — 아직 제주도에 안 가 봐서 is a reason to go to Jeju and to nowhere else."
         },
         {
@@ -1530,7 +1550,7 @@
             }
           ],
           "en": "A: I’m thinking of hiking at the weekend — can you come? — B: Sure. Which mountain?",
-          "grammar": "등산하다 is a 하다 verb: 등산할까.",
+          "grammar": "The verb 등산하다 is a 하다 verb: 등산할까.",
           "why": "B asks 어느 산, so the plan has to be a mountain. 여행 could be anywhere, and 등산하까 loses the ㄹ."
         },
         {
@@ -1683,7 +1703,7 @@
             }
           ],
           "en": "A: I’ll do the washing-up, so could you clean the room. — B: All right.",
-          "grammar": "하다 takes -ㄹ 테니까: 할 테니까.",
+          "grammar": "The verb 하다 takes -ㄹ 테니까: 할 테니까.",
           "why": "하 테니까 has no ㄹ. 했으니까 is a reason drawn from something already done, and the dishes are still in the sink."
         },
         {
@@ -1714,7 +1734,7 @@
             }
           ],
           "en": "A: I’ll buy lunch. — B: No, I’ll get it today, so you buy next time.",
-          "grammar": "사다 takes -ㄹ 테니까: 살 테니까.",
+          "grammar": "The verb 사다 takes -ㄹ 테니까: 살 테니까.",
           "why": "사 테니까 has no ㄹ. 살 거니까 is a plain reason and loses the offering tone the grammar carries — and the book prints 테니까."
         },
         {
@@ -2230,7 +2250,7 @@
             }
           ],
           "en": "T: Did you take the photos? — S: Yes, I already took them.",
-          "grammar": "찍다 takes 어: 찍어 놓다.",
+          "grammar": "The verb 찍다 takes 어: 찍어 놓다.",
           "why": "찍 놓았어요 has no ending on the verb. 찍고 있어요 has the photographing still going on, where 벌써 says it is finished.",
           "audio": {
             "src": "audio/book/2b-u16-p2-1.mp3",
@@ -2439,7 +2459,7 @@
             }
           ],
           "en": "T: What will you do at the weekend? (see a film) — S: I’m thinking of seeing a film.",
-          "grammar": "보다 takes -ㄹ까: 볼까.",
+          "grammar": "The verb 보다 takes -ㄹ까: 볼까.",
           "why": "보까 해요 loses the ㄹ. 볼 거예요 is a decision already made, and this drill is about plans that are not.",
           "audio": {
             "src": "audio/book/2b-u16-p3-2.mp3",

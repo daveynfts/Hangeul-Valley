@@ -80,7 +80,7 @@ assert(typeof wb.omittedNote === 'string' && wb.omittedNote.length > 120, 'the b
 });
 assert(/정답|no answer|not one/.test(wb.omittedNote), 'and says why — the 정답 pages give it none');
 assert(typeof wb.artNote === 'string' && wb.artNote.length > 80,
-  'the bank says what it does about the book’s pictures, which are not here yet');
+  'the bank records its illustrations and source answer key');
 assert(/닦았어요/.test(wb.artNote) && /p\.207/.test(wb.artNote),
   'and names the one row a picture would otherwise have decided, and where the key that settled it is');
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "cacheKey": "art-topik-778-extra-708-3189341dcabf",
+  "cacheKey": "art-topik-778-extra-847-42217a8799a8",
   "assets": [
     {
       "id": "character.valley_farmer.walk.down.0",
@@ -39544,6 +39544,2895 @@
       "status": "shipped",
       "heightClass": "quiz",
       "parentId": "quiz.unit14_workbook_no_swimming",
+      "usedBy": [
+        "study-desk",
+        "workbook"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json."
+    },
+    {
+      "id": "item.unit16_001_traditional_holidays",
+      "nameEn": "traditional holidays",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_001_traditional_holidays",
+      "path": "items/unit16_001_traditional_holidays.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_001_traditional_holidays",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "명절",
+      "words": [
+        "명절"
+      ]
+    },
+    {
+      "id": "item.unit16_002_seollal_the_lunar_new_year",
+      "nameEn": "Seollal, the lunar New Year",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_002_seollal_the_lunar_new_year",
+      "path": "items/unit16_002_seollal_the_lunar_new_year.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_002_seollal_the_lunar_new_year",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "설날",
+      "words": [
+        "설날"
+      ]
+    },
+    {
+      "id": "item.unit16_003_chuseok_the_autumn_harvest_holiday",
+      "nameEn": "Chuseok, the autumn harvest holiday",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_003_chuseok_the_autumn_harvest_holiday",
+      "path": "items/unit16_003_chuseok_the_autumn_harvest_holiday.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_003_chuseok_the_autumn_harvest_holiday",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "추석",
+      "words": [
+        "추석"
+      ]
+    },
+    {
+      "id": "item.unit16_004_to_wear_korean_traditional_dress",
+      "nameEn": "to wear Korean traditional dress",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_004_to_wear_korean_traditional_dress",
+      "path": "items/unit16_004_to_wear_korean_traditional_dress.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_004_to_wear_korean_traditional_dress",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "한복을 입다",
+      "words": [
+        "한복을 입다"
+      ]
+    },
+    {
+      "id": "item.unit16_005_to_go_to_one_s_hometown",
+      "nameEn": "to go to one’s hometown",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_005_to_go_to_one_s_hometown",
+      "path": "items/unit16_005_to_go_to_one_s_hometown.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_005_to_go_to_one_s_hometown",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "고향에 가다",
+      "words": [
+        "고향에 가다"
+      ]
+    },
+    {
+      "id": "item.unit16_006_to_give_a_new_year_s_bow",
+      "nameEn": "to give a New Year’s bow",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_006_to_give_a_new_year_s_bow",
+      "path": "items/unit16_006_to_give_a_new_year_s_bow.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_006_to_give_a_new_year_s_bow",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "세배(를) 하다",
+      "words": [
+        "세배(를) 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_007_to_visit_and_tend_an_ancestor_s_grave",
+      "nameEn": "to visit and tend an ancestor’s grave",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_007_to_visit_and_tend_an_ancestor_s_grave",
+      "path": "items/unit16_007_to_visit_and_tend_an_ancestor_s_grave.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_007_to_visit_and_tend_an_ancestor_s_grave",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "성묘(를) 하다",
+      "words": [
+        "성묘(를) 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_008_to_perform_the_ancestral_rites",
+      "nameEn": "to perform the ancestral rites",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_008_to_perform_the_ancestral_rites",
+      "path": "items/unit16_008_to_perform_the_ancestral_rites.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_008_to_perform_the_ancestral_rites",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "차례를 지내다",
+      "words": [
+        "차례를 지내다"
+      ]
+    },
+    {
+      "id": "item.unit16_009_to_play_yut",
+      "nameEn": "to play Yut",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_009_to_play_yut",
+      "path": "items/unit16_009_to_play_yut.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_009_to_play_yut",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "윷놀이(를) 하다",
+      "words": [
+        "윷놀이(를) 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_010_to_set_the_table_with_food",
+      "nameEn": "to set the table with food",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_010_to_set_the_table_with_food",
+      "path": "items/unit16_010_to_set_the_table_with_food.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_010_to_set_the_table_with_food",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "음식을 차리다",
+      "words": [
+        "음식을 차리다"
+      ]
+    },
+    {
+      "id": "item.unit16_011_to_bow_to_one_s_elders_at_new_year",
+      "nameEn": "to bow to one’s elders at New Year",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_011_to_bow_to_one_s_elders_at_new_year",
+      "path": "items/unit16_011_to_bow_to_one_s_elders_at_new_year.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_011_to_bow_to_one_s_elders_at_new_year",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "어른들께 세배를 하다",
+      "words": [
+        "어른들께 세배를 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_012_a_long_holiday_weekend",
+      "nameEn": "a long holiday weekend",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_012_a_long_holiday_weekend",
+      "path": "items/unit16_012_a_long_holiday_weekend.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_012_a_long_holiday_weekend",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "연휴",
+      "words": [
+        "연휴"
+      ]
+    },
+    {
+      "id": "food.unit16_013_rice_cake_soup",
+      "nameEn": "rice-cake soup",
+      "kind": "food",
+      "family": "unit16-vocabulary",
+      "role": "unit16_013_rice_cake_soup",
+      "path": "foods/unit16_013_rice_cake_soup.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.unit16_013_rice_cake_soup",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "떡국",
+      "words": [
+        "떡국"
+      ]
+    },
+    {
+      "id": "food.unit16_014_mung_bean_pancake",
+      "nameEn": "mung-bean pancake",
+      "kind": "food",
+      "family": "unit16-vocabulary",
+      "role": "unit16_014_mung_bean_pancake",
+      "path": "foods/unit16_014_mung_bean_pancake.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.unit16_014_mung_bean_pancake",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "빈대떡",
+      "words": [
+        "빈대떡"
+      ]
+    },
+    {
+      "id": "food.unit16_015_half_moon_shaped_rice_cake",
+      "nameEn": "half-moon-shaped rice cake",
+      "kind": "food",
+      "family": "unit16-vocabulary",
+      "role": "unit16_015_half_moon_shaped_rice_cake",
+      "path": "foods/unit16_015_half_moon_shaped_rice_cake.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.unit16_015_half_moon_shaped_rice_cake",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "송편",
+      "words": [
+        "송편"
+      ]
+    },
+    {
+      "id": "food.unit16_016_korean_traditional_sweets",
+      "nameEn": "Korean traditional sweets",
+      "kind": "food",
+      "family": "unit16-vocabulary",
+      "role": "unit16_016_korean_traditional_sweets",
+      "path": "foods/unit16_016_korean_traditional_sweets.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.unit16_016_korean_traditional_sweets",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "한과",
+      "words": [
+        "한과"
+      ]
+    },
+    {
+      "id": "food.unit16_017_sweet_rice_punch",
+      "nameEn": "sweet rice punch",
+      "kind": "food",
+      "family": "unit16-vocabulary",
+      "role": "unit16_017_sweet_rice_punch",
+      "path": "foods/unit16_017_sweet_rice_punch.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.unit16_017_sweet_rice_punch",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "식혜",
+      "words": [
+        "식혜"
+      ]
+    },
+    {
+      "id": "item.unit16_018_the_lunar_calendar",
+      "nameEn": "the lunar calendar",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_018_the_lunar_calendar",
+      "path": "items/unit16_018_the_lunar_calendar.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_018_the_lunar_calendar",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "음력",
+      "words": [
+        "음력"
+      ]
+    },
+    {
+      "id": "item.unit16_019_tradition",
+      "nameEn": "tradition",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_019_tradition",
+      "path": "items/unit16_019_tradition.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_019_tradition",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "전통",
+      "words": [
+        "전통"
+      ]
+    },
+    {
+      "id": "item.unit16_020_the_day_before",
+      "nameEn": "the day before",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_020_the_day_before",
+      "path": "items/unit16_020_the_day_before.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_020_the_day_before",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "전날",
+      "words": [
+        "전날"
+      ]
+    },
+    {
+      "id": "item.unit16_021_a_train_ticket",
+      "nameEn": "a train ticket",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_021_a_train_ticket",
+      "path": "items/unit16_021_a_train_ticket.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_021_a_train_ticket",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "기차표",
+      "words": [
+        "기차표"
+      ]
+    },
+    {
+      "id": "item.unit16_022_to_hurry",
+      "nameEn": "to hurry",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_022_to_hurry",
+      "path": "items/unit16_022_to_hurry.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_022_to_hurry",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "서두르다",
+      "words": [
+        "서두르다"
+      ]
+    },
+    {
+      "id": "food.unit16_023_a_special_dish_for_the_day",
+      "nameEn": "a special dish for the day",
+      "kind": "food",
+      "family": "unit16-vocabulary",
+      "role": "unit16_023_a_special_dish_for_the_day",
+      "path": "foods/unit16_023_a_special_dish_for_the_day.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "food.unit16_023_a_special_dish_for_the_day",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "특별한 음식",
+      "words": [
+        "특별한 음식"
+      ]
+    },
+    {
+      "id": "item.unit16_024_housework",
+      "nameEn": "housework",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_024_housework",
+      "path": "items/unit16_024_housework.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_024_housework",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "집안일",
+      "words": [
+        "집안일"
+      ]
+    },
+    {
+      "id": "item.unit16_025_to_wipe_the_room_clean",
+      "nameEn": "to wipe the room clean",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_025_to_wipe_the_room_clean",
+      "path": "items/unit16_025_to_wipe_the_room_clean.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_025_to_wipe_the_room_clean",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "방을 닦다",
+      "words": [
+        "방을 닦다"
+      ]
+    },
+    {
+      "id": "item.unit16_026_to_do_the_grocery_shopping_in_advance",
+      "nameEn": "to do the grocery shopping in advance",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_026_to_do_the_grocery_shopping_in_advance",
+      "path": "items/unit16_026_to_do_the_grocery_shopping_in_advance.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_026_to_do_the_grocery_shopping_in_advance",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "장을 미리 보다",
+      "words": [
+        "장을 미리 보다"
+      ]
+    },
+    {
+      "id": "item.unit16_027_to_wash_the_dishes",
+      "nameEn": "to wash the dishes",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_027_to_wash_the_dishes",
+      "path": "items/unit16_027_to_wash_the_dishes.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_027_to_wash_the_dishes",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "설거지(를) 하다",
+      "words": [
+        "설거지(를) 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_028_to_run_the_washing_machine",
+      "nameEn": "to run the washing machine",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_028_to_run_the_washing_machine",
+      "path": "items/unit16_028_to_run_the_washing_machine.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_028_to_run_the_washing_machine",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "세탁기를 돌리다",
+      "words": [
+        "세탁기를 돌리다"
+      ]
+    },
+    {
+      "id": "item.unit16_029_to_vacuum",
+      "nameEn": "to vacuum",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_029_to_vacuum",
+      "path": "items/unit16_029_to_vacuum.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_029_to_vacuum",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "청소기를 돌리다",
+      "words": [
+        "청소기를 돌리다"
+      ]
+    },
+    {
+      "id": "item.unit16_030_to_do_a_big_clean_up",
+      "nameEn": "to do a big clean-up",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_030_to_do_a_big_clean_up",
+      "path": "items/unit16_030_to_do_a_big_clean_up.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_030_to_do_a_big_clean_up",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "대청소를 하다",
+      "words": [
+        "대청소를 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_031_late_at_night",
+      "nameEn": "late at night",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_031_late_at_night",
+      "path": "items/unit16_031_late_at_night.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_031_late_at_night",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "밤늦게",
+      "words": [
+        "밤늦게"
+      ]
+    },
+    {
+      "id": "item.unit16_032_a_supermarket",
+      "nameEn": "a supermarket",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_032_a_supermarket",
+      "path": "items/unit16_032_a_supermarket.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_032_a_supermarket",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "마트",
+      "words": [
+        "마트"
+      ]
+    },
+    {
+      "id": "item.unit16_033_to_clean_up",
+      "nameEn": "to clean up",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_033_to_clean_up",
+      "path": "items/unit16_033_to_clean_up.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_033_to_clean_up",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "청소를 하다",
+      "words": [
+        "청소를 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_034_to_do_something_and_leave_it_done",
+      "nameEn": "to do something and leave it done",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_034_to_do_something_and_leave_it_done",
+      "path": "items/unit16_034_to_do_something_and_leave_it_done.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_034_to_do_something_and_leave_it_done",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "V-아/어 놓다",
+      "words": [
+        "V-아/어 놓다"
+      ]
+    },
+    {
+      "id": "item.unit16_035_to_book_a_ticket_in_advance",
+      "nameEn": "to book a ticket in advance",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_035_to_book_a_ticket_in_advance",
+      "path": "items/unit16_035_to_book_a_ticket_in_advance.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_035_to_book_a_ticket_in_advance",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "예매하다",
+      "words": [
+        "예매하다"
+      ]
+    },
+    {
+      "id": "item.unit16_036_to_open_the_window",
+      "nameEn": "to open the window",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_036_to_open_the_window",
+      "path": "items/unit16_036_to_open_the_window.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_036_to_open_the_window",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "창문을 열다",
+      "words": [
+        "창문을 열다"
+      ]
+    },
+    {
+      "id": "item.unit16_037_to_buy_something_in_advance",
+      "nameEn": "to buy something in advance",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_037_to_buy_something_in_advance",
+      "path": "items/unit16_037_to_buy_something_in_advance.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_037_to_buy_something_in_advance",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "미리 사다",
+      "words": [
+        "미리 사다"
+      ]
+    },
+    {
+      "id": "item.unit16_038_to_close_for_the_day",
+      "nameEn": "to close for the day",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_038_to_close_for_the_day",
+      "path": "items/unit16_038_to_close_for_the_day.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_038_to_close_for_the_day",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "문을 닫다",
+      "words": [
+        "문을 닫다"
+      ]
+    },
+    {
+      "id": "item.unit16_039_to_withdraw_money",
+      "nameEn": "to withdraw money",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_039_to_withdraw_money",
+      "path": "items/unit16_039_to_withdraw_money.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_039_to_withdraw_money",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "돈을 찾다",
+      "words": [
+        "돈을 찾다"
+      ]
+    },
+    {
+      "id": "item.unit16_040_to_write_it_down_on_paper",
+      "nameEn": "to write it down on paper",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_040_to_write_it_down_on_paper",
+      "path": "items/unit16_040_to_write_it_down_on_paper.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_040_to_write_it_down_on_paper",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "종이에 쓰다",
+      "words": [
+        "종이에 쓰다"
+      ]
+    },
+    {
+      "id": "item.unit16_041_to_put_something_in_the_fridge",
+      "nameEn": "to put something in the fridge",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_041_to_put_something_in_the_fridge",
+      "path": "items/unit16_041_to_put_something_in_the_fridge.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_041_to_put_something_in_the_fridge",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "냉장고에 넣다",
+      "words": [
+        "냉장고에 넣다"
+      ]
+    },
+    {
+      "id": "item.unit16_042_instead_of_n",
+      "nameEn": "instead of N",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_042_instead_of_n",
+      "path": "items/unit16_042_instead_of_n.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_042_instead_of_n",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "N 대신",
+      "words": [
+        "N 대신"
+      ]
+    },
+    {
+      "id": "item.unit16_043_to_add_salt",
+      "nameEn": "to add salt",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_043_to_add_salt",
+      "path": "items/unit16_043_to_add_salt.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_043_to_add_salt",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "소금을 넣다",
+      "words": [
+        "소금을 넣다"
+      ]
+    },
+    {
+      "id": "item.unit16_044_to_use_soy_sauce",
+      "nameEn": "to use soy sauce",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_044_to_use_soy_sauce",
+      "path": "items/unit16_044_to_use_soy_sauce.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_044_to_use_soy_sauce",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "간장을 넣다",
+      "words": [
+        "간장을 넣다"
+      ]
+    },
+    {
+      "id": "item.unit16_045_to_show_one_s_passport",
+      "nameEn": "to show one’s passport",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_045_to_show_one_s_passport",
+      "path": "items/unit16_045_to_show_one_s_passport.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_045_to_show_one_s_passport",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "여권을 보여 주다",
+      "words": [
+        "여권을 보여 주다"
+      ]
+    },
+    {
+      "id": "item.unit16_046_the_taxi_fare",
+      "nameEn": "the taxi fare",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_046_the_taxi_fare",
+      "path": "items/unit16_046_the_taxi_fare.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_046_the_taxi_fare",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "택시비",
+      "words": [
+        "택시비"
+      ]
+    },
+    {
+      "id": "item.unit16_047_cash",
+      "nameEn": "cash",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_047_cash",
+      "path": "items/unit16_047_cash.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_047_cash",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "현금",
+      "words": [
+        "현금"
+      ]
+    },
+    {
+      "id": "item.unit16_048_to_write_down_an_address",
+      "nameEn": "to write down an address",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_048_to_write_down_an_address",
+      "path": "items/unit16_048_to_write_down_an_address.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_048_to_write_down_an_address",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "주소를 쓰다",
+      "words": [
+        "주소를 쓰다"
+      ]
+    },
+    {
+      "id": "item.unit16_049_overseas_travel",
+      "nameEn": "overseas travel",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_049_overseas_travel",
+      "path": "items/unit16_049_overseas_travel.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_049_overseas_travel",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "해외여행",
+      "words": [
+        "해외여행"
+      ]
+    },
+    {
+      "id": "item.unit16_050_domestic_travel",
+      "nameEn": "domestic travel",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_050_domestic_travel",
+      "path": "items/unit16_050_domestic_travel.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_050_domestic_travel",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "국내 여행",
+      "words": [
+        "국내 여행"
+      ]
+    },
+    {
+      "id": "item.unit16_051_a_text_message",
+      "nameEn": "a text message",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_051_a_text_message",
+      "path": "items/unit16_051_a_text_message.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_051_a_text_message",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "문자",
+      "words": [
+        "문자"
+      ]
+    },
+    {
+      "id": "item.unit16_052_to_be_thinking_of_doing_something",
+      "nameEn": "to be thinking of doing something",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_052_to_be_thinking_of_doing_something",
+      "path": "items/unit16_052_to_be_thinking_of_doing_something.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_052_to_be_thinking_of_doing_something",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "V-(으)ㄹ까 하다",
+      "words": [
+        "V-(으)ㄹ까 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_053_the_summer_holiday",
+      "nameEn": "the summer holiday",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_053_the_summer_holiday",
+      "path": "items/unit16_053_the_summer_holiday.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_053_the_summer_holiday",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "여름휴가",
+      "words": [
+        "여름휴가"
+      ]
+    },
+    {
+      "id": "item.unit16_054_somewhere_close_by",
+      "nameEn": "somewhere close by",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_054_somewhere_close_by",
+      "path": "items/unit16_054_somewhere_close_by.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_054_somewhere_close_by",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "가까운 곳",
+      "words": [
+        "가까운 곳"
+      ]
+    },
+    {
+      "id": "item.unit16_055_since_it_will_be_so",
+      "nameEn": "since it will be ~, so …",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_055_since_it_will_be_so",
+      "path": "items/unit16_055_since_it_will_be_so.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_055_since_it_will_be_so",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "A/V-(으)ㄹ 테니까",
+      "words": [
+        "A/V-(으)ㄹ 테니까"
+      ]
+    },
+    {
+      "id": "item.unit16_056_to_be_thick",
+      "nameEn": "to be thick",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_056_to_be_thick",
+      "path": "items/unit16_056_to_be_thick.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_056_to_be_thick",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "두껍다",
+      "words": [
+        "두껍다"
+      ]
+    },
+    {
+      "id": "item.unit16_057_in_the_middle_of_a_class",
+      "nameEn": "in the middle of a class",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_057_in_the_middle_of_a_class",
+      "path": "items/unit16_057_in_the_middle_of_a_class.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_057_in_the_middle_of_a_class",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "수업 중",
+      "words": [
+        "수업 중"
+      ]
+    },
+    {
+      "id": "item.unit16_058_to_look_into_a_hotel",
+      "nameEn": "to look into a hotel",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_058_to_look_into_a_hotel",
+      "path": "items/unit16_058_to_look_into_a_hotel.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_058_to_look_into_a_hotel",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "호텔을 알아보다",
+      "words": [
+        "호텔을 알아보다"
+      ]
+    },
+    {
+      "id": "item.unit16_059_trip_preparations",
+      "nameEn": "trip preparations",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_059_trip_preparations",
+      "path": "items/unit16_059_trip_preparations.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_059_trip_preparations",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "여행 준비",
+      "words": [
+        "여행 준비"
+      ]
+    },
+    {
+      "id": "item.unit16_060_a_plane_ticket",
+      "nameEn": "a plane ticket",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_060_a_plane_ticket",
+      "path": "items/unit16_060_a_plane_ticket.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_060_a_plane_ticket",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "비행기 표",
+      "words": [
+        "비행기 표"
+      ]
+    },
+    {
+      "id": "item.unit16_061_changing_money",
+      "nameEn": "changing money",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_061_changing_money",
+      "path": "items/unit16_061_changing_money.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_061_changing_money",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "환전",
+      "words": [
+        "환전"
+      ]
+    },
+    {
+      "id": "item.unit16_062_a_guidebook",
+      "nameEn": "a guidebook",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_062_a_guidebook",
+      "path": "items/unit16_062_a_guidebook.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_062_a_guidebook",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "가이드북",
+      "words": [
+        "가이드북"
+      ]
+    },
+    {
+      "id": "item.unit16_063_to_run_short",
+      "nameEn": "to run short",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_063_to_run_short",
+      "path": "items/unit16_063_to_run_short.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_063_to_run_short",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "모자라다",
+      "words": [
+        "모자라다"
+      ]
+    },
+    {
+      "id": "item.unit16_064_to_be_sleepy",
+      "nameEn": "to be sleepy",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_064_to_be_sleepy",
+      "path": "items/unit16_064_to_be_sleepy.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_064_to_be_sleepy",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "졸리다",
+      "words": [
+        "졸리다"
+      ]
+    },
+    {
+      "id": "item.unit16_065_to_go_down_to_one_s_hometown",
+      "nameEn": "to go down to one’s hometown",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_065_to_go_down_to_one_s_hometown",
+      "path": "items/unit16_065_to_go_down_to_one_s_hometown.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_065_to_go_down_to_one_s_hometown",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "고향에 내려가다",
+      "words": [
+        "고향에 내려가다"
+      ]
+    },
+    {
+      "id": "item.unit16_066_a_ticket",
+      "nameEn": "a ticket",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_066_a_ticket",
+      "path": "items/unit16_066_a_ticket.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_066_a_ticket",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "표",
+      "words": [
+        "표"
+      ]
+    },
+    {
+      "id": "item.unit16_067_to_boil_something",
+      "nameEn": "to boil something",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_067_to_boil_something",
+      "path": "items/unit16_067_to_boil_something.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_067_to_boil_something",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "끓이다",
+      "words": [
+        "끓이다"
+      ]
+    },
+    {
+      "id": "item.unit16_068_to_invite_someone_over",
+      "nameEn": "to invite someone over",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_068_to_invite_someone_over",
+      "path": "items/unit16_068_to_invite_someone_over.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_068_to_invite_someone_over",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "초대하다",
+      "words": [
+        "초대하다"
+      ]
+    },
+    {
+      "id": "item.unit16_069_a_classmate",
+      "nameEn": "a classmate",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_069_a_classmate",
+      "path": "items/unit16_069_a_classmate.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_069_a_classmate",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "반 친구",
+      "words": [
+        "반 친구"
+      ]
+    },
+    {
+      "id": "item.unit16_070_to_fry_mung_bean_pancakes",
+      "nameEn": "to fry mung-bean pancakes",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_070_to_fry_mung_bean_pancakes",
+      "path": "items/unit16_070_to_fry_mung_bean_pancakes.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_070_to_fry_mung_bean_pancakes",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "빈대떡을 부치다",
+      "words": [
+        "빈대떡을 부치다"
+      ]
+    },
+    {
+      "id": "item.unit16_071_to_buy_the_ingredients_in_advance",
+      "nameEn": "to buy the ingredients in advance",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_071_to_buy_the_ingredients_in_advance",
+      "path": "items/unit16_071_to_buy_the_ingredients_in_advance.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_071_to_buy_the_ingredients_in_advance",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "재료를 미리 사다",
+      "words": [
+        "재료를 미리 사다"
+      ]
+    },
+    {
+      "id": "item.unit16_072_to_know_how_to_make_something",
+      "nameEn": "to know how to make something",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_072_to_know_how_to_make_something",
+      "path": "items/unit16_072_to_know_how_to_make_something.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_072_to_know_how_to_make_something",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "만들 줄 알다",
+      "words": [
+        "만들 줄 알다"
+      ]
+    },
+    {
+      "id": "item.unit16_073_to_give_someone_a_hand",
+      "nameEn": "to give someone a hand",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_073_to_give_someone_a_hand",
+      "path": "items/unit16_073_to_give_someone_a_hand.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_073_to_give_someone_a_hand",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "도와주다",
+      "words": [
+        "도와주다"
+      ]
+    },
+    {
+      "id": "item.unit16_074_to_show_someone_how",
+      "nameEn": "to show someone how",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_074_to_show_someone_how",
+      "path": "items/unit16_074_to_show_someone_how.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_074_to_show_someone_how",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "가르쳐 주다",
+      "words": [
+        "가르쳐 주다"
+      ]
+    },
+    {
+      "id": "item.unit16_075_getting_the_food_ready",
+      "nameEn": "getting the food ready",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_075_getting_the_food_ready",
+      "path": "items/unit16_075_getting_the_food_ready.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_075_getting_the_food_ready",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "음식 준비",
+      "words": [
+        "음식 준비"
+      ]
+    },
+    {
+      "id": "item.unit16_076_a_farewell_party",
+      "nameEn": "a farewell party",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_076_a_farewell_party",
+      "path": "items/unit16_076_a_farewell_party.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_076_a_farewell_party",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "송별회",
+      "words": [
+        "송별회"
+      ]
+    },
+    {
+      "id": "item.unit16_077_to_talk_something_over",
+      "nameEn": "to talk something over",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_077_to_talk_something_over",
+      "path": "items/unit16_077_to_talk_something_over.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_077_to_talk_something_over",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "의논하다",
+      "words": [
+        "의논하다"
+      ]
+    },
+    {
+      "id": "item.unit16_078_to_book_by_telephone",
+      "nameEn": "to book by telephone",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_078_to_book_by_telephone",
+      "path": "items/unit16_078_to_book_by_telephone.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_078_to_book_by_telephone",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "전화로 예약하다",
+      "words": [
+        "전화로 예약하다"
+      ]
+    },
+    {
+      "id": "item.unit16_079_to_get_in_touch",
+      "nameEn": "to get in touch",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_079_to_get_in_touch",
+      "path": "items/unit16_079_to_get_in_touch.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_079_to_get_in_touch",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "연락(을) 하다",
+      "words": [
+        "연락(을) 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_080_a_presentation_script",
+      "nameEn": "a presentation script",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_080_a_presentation_script",
+      "path": "items/unit16_080_a_presentation_script.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_080_a_presentation_script",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "발표 원고",
+      "words": [
+        "발표 원고"
+      ]
+    },
+    {
+      "id": "item.unit16_081_a_favour_to_ask",
+      "nameEn": "a favour to ask",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_081_a_favour_to_ask",
+      "path": "items/unit16_081_a_favour_to_ask.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_081_a_favour_to_ask",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "부탁",
+      "words": [
+        "부탁"
+      ]
+    },
+    {
+      "id": "item.unit16_082_to_grant_someone_s_request",
+      "nameEn": "to grant someone’s request",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_082_to_grant_someone_s_request",
+      "path": "items/unit16_082_to_grant_someone_s_request.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_082_to_grant_someone_s_request",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "부탁을 들어주다",
+      "words": [
+        "부탁을 들어주다"
+      ]
+    },
+    {
+      "id": "item.unit16_083_to_turn_a_request_down",
+      "nameEn": "to turn a request down",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_083_to_turn_a_request_down",
+      "path": "items/unit16_083_to_turn_a_request_down.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_083_to_turn_a_request_down",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "거절을 하다",
+      "words": [
+        "거절을 하다"
+      ]
+    },
+    {
+      "id": "item.unit16_084_seoul_station",
+      "nameEn": "Seoul Station",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_084_seoul_station",
+      "path": "items/unit16_084_seoul_station.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_084_seoul_station",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "서울역",
+      "words": [
+        "서울역"
+      ]
+    },
+    {
+      "id": "item.unit16_085_a_news_anchor",
+      "nameEn": "a news anchor",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_085_a_news_anchor",
+      "path": "items/unit16_085_a_news_anchor.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_085_a_news_anchor",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "앵커",
+      "words": [
+        "앵커"
+      ]
+    },
+    {
+      "id": "item.unit16_086_one_s_older_brother",
+      "nameEn": "one’s older brother",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_086_one_s_older_brother",
+      "path": "items/unit16_086_one_s_older_brother.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_086_one_s_older_brother",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "형님",
+      "words": [
+        "형님"
+      ]
+    },
+    {
+      "id": "item.unit16_087_to_help_someone_senior",
+      "nameEn": "to help someone senior",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_087_to_help_someone_senior",
+      "path": "items/unit16_087_to_help_someone_senior.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_087_to_help_someone_senior",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "도와 드리다",
+      "words": [
+        "도와 드리다"
+      ]
+    },
+    {
+      "id": "item.unit16_088_to_go_somewhere_and_come_back",
+      "nameEn": "to go somewhere and come back",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_088_to_go_somewhere_and_come_back",
+      "path": "items/unit16_088_to_go_somewhere_and_come_back.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_088_to_go_somewhere_and_come_back",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "다녀오다",
+      "words": [
+        "다녀오다"
+      ]
+    },
+    {
+      "id": "item.unit16_089_what_someone_says_honorific",
+      "nameEn": "what someone says, honorific",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_089_what_someone_says_honorific",
+      "path": "items/unit16_089_what_someone_says_honorific.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_089_what_someone_says_honorific",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "말씀",
+      "words": [
+        "말씀"
+      ]
+    },
+    {
+      "id": "item.unit16_090_a_request_that_is_hard_to_grant",
+      "nameEn": "a request that is hard to grant",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_090_a_request_that_is_hard_to_grant",
+      "path": "items/unit16_090_a_request_that_is_hard_to_grant.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_090_a_request_that_is_hard_to_grant",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "곤란한 부탁",
+      "words": [
+        "곤란한 부탁"
+      ]
+    },
+    {
+      "id": "item.unit16_091_a_cat",
+      "nameEn": "a cat",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_091_a_cat",
+      "path": "items/unit16_091_a_cat.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_091_a_cat",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "고양이",
+      "words": [
+        "고양이"
+      ]
+    },
+    {
+      "id": "item.unit16_092_to_look_after_something_for_someone",
+      "nameEn": "to look after something for someone",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_092_to_look_after_something_for_someone",
+      "path": "items/unit16_092_to_look_after_something_for_someone.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_092_to_look_after_something_for_someone",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "맡아 주다",
+      "words": [
+        "맡아 주다"
+      ]
+    },
+    {
+      "id": "item.unit16_093_to_leave_a_cat_in_someone_s_care",
+      "nameEn": "to leave a cat in someone’s care",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_093_to_leave_a_cat_in_someone_s_care",
+      "path": "items/unit16_093_to_leave_a_cat_in_someone_s_care.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_093_to_leave_a_cat_in_someone_s_care",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "고양이를 맡기다",
+      "words": [
+        "고양이를 맡기다"
+      ]
+    },
+    {
+      "id": "item.unit16_094_for_two_days",
+      "nameEn": "for two days",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_094_for_two_days",
+      "path": "items/unit16_094_for_two_days.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_094_for_two_days",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "이틀 동안",
+      "words": [
+        "이틀 동안"
+      ]
+    },
+    {
+      "id": "item.unit16_095_to_be_a_real_problem",
+      "nameEn": "to be a real problem",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_095_to_be_a_real_problem",
+      "path": "items/unit16_095_to_be_a_real_problem.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_095_to_be_a_real_problem",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "큰일이다",
+      "words": [
+        "큰일이다"
+      ]
+    },
+    {
+      "id": "item.unit16_096_to_take_good_care_of_something",
+      "nameEn": "to take good care of something",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_096_to_take_good_care_of_something",
+      "path": "items/unit16_096_to_take_good_care_of_something.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_096_to_take_good_care_of_something",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "잘 봐 주다",
+      "words": [
+        "잘 봐 주다"
+      ]
+    },
+    {
+      "id": "item.unit16_097_the_things_that_are_needed",
+      "nameEn": "the things that are needed",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_097_the_things_that_are_needed",
+      "path": "items/unit16_097_the_things_that_are_needed.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_097_the_things_that_are_needed",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "필요한 것",
+      "words": [
+        "필요한 것"
+      ]
+    },
+    {
+      "id": "item.unit16_098_to_spend_the_holidays",
+      "nameEn": "to spend the holidays",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_098_to_spend_the_holidays",
+      "path": "items/unit16_098_to_spend_the_holidays.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_098_to_spend_the_holidays",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "명절을 보내다",
+      "words": [
+        "명절을 보내다"
+      ]
+    },
+    {
+      "id": "item.unit16_099_farming",
+      "nameEn": "farming",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_099_farming",
+      "path": "items/unit16_099_farming.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_099_farming",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "농사",
+      "words": [
+        "농사"
+      ]
+    },
+    {
+      "id": "item.unit16_100_an_ancestor",
+      "nameEn": "an ancestor",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_100_an_ancestor",
+      "path": "items/unit16_100_an_ancestor.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_100_an_ancestor",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "조상",
+      "words": [
+        "조상"
+      ]
+    },
+    {
+      "id": "item.unit16_101_a_year",
+      "nameEn": "a year",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_101_a_year",
+      "path": "items/unit16_101_a_year.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_101_a_year",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "한 해",
+      "words": [
+        "한 해"
+      ]
+    },
+    {
+      "id": "item.unit16_102_to_bring_in_the_harvest",
+      "nameEn": "to bring in the harvest",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_102_to_bring_in_the_harvest",
+      "path": "items/unit16_102_to_bring_in_the_harvest.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_102_to_bring_in_the_harvest",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "추수하다",
+      "words": [
+        "추수하다"
+      ]
+    },
+    {
+      "id": "item.unit16_103_grain_crops",
+      "nameEn": "grain; crops",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_103_grain_crops",
+      "path": "items/unit16_103_grain_crops.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_103_grain_crops",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "곡식",
+      "words": [
+        "곡식"
+      ]
+    },
+    {
+      "id": "item.unit16_104_to_share_food_out",
+      "nameEn": "to share food out",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_104_to_share_food_out",
+      "path": "items/unit16_104_to_share_food_out.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_104_to_share_food_out",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "나눠 먹다",
+      "words": [
+        "나눠 먹다"
+      ]
+    },
+    {
+      "id": "item.unit16_105_to_meet_after_a_long_time",
+      "nameEn": "to meet after a long time",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_105_to_meet_after_a_long_time",
+      "path": "items/unit16_105_to_meet_after_a_long_time.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_105_to_meet_after_a_long_time",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "오랜만에 만나다",
+      "words": [
+        "오랜만에 만나다"
+      ]
+    },
+    {
+      "id": "item.unit16_106_a_relative",
+      "nameEn": "a relative",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_106_a_relative",
+      "path": "items/unit16_106_a_relative.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_106_a_relative",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "친척",
+      "words": [
+        "친척"
+      ]
+    },
+    {
+      "id": "item.unit16_107_to_have_a_good_time",
+      "nameEn": "to have a good time",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_107_to_have_a_good_time",
+      "path": "items/unit16_107_to_have_a_good_time.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_107_to_have_a_good_time",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "즐거운 시간을 보내다",
+      "words": [
+        "즐거운 시간을 보내다"
+      ]
+    },
+    {
+      "id": "item.unit16_108_a_traditional_game",
+      "nameEn": "a traditional game",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_108_a_traditional_game",
+      "path": "items/unit16_108_a_traditional_game.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_108_a_traditional_game",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "전통 놀이",
+      "words": [
+        "전통 놀이"
+      ]
+    },
+    {
+      "id": "item.unit16_109_ssireum_korean_wrestling",
+      "nameEn": "ssireum, Korean wrestling",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_109_ssireum_korean_wrestling",
+      "path": "items/unit16_109_ssireum_korean_wrestling.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_109_ssireum_korean_wrestling",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "씨름",
+      "words": [
+        "씨름"
+      ]
+    },
+    {
+      "id": "item.unit16_110_the_full_moon",
+      "nameEn": "the full moon",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_110_the_full_moon",
+      "path": "items/unit16_110_the_full_moon.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_110_the_full_moon",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "보름달",
+      "words": [
+        "보름달"
+      ]
+    },
+    {
+      "id": "item.unit16_111_to_make_a_wish",
+      "nameEn": "to make a wish",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_111_to_make_a_wish",
+      "path": "items/unit16_111_to_make_a_wish.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_111_to_make_a_wish",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "소원을 빌다",
+      "words": [
+        "소원을 빌다"
+      ]
+    },
+    {
+      "id": "item.unit16_112_chuseok_day",
+      "nameEn": "Chuseok day",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_112_chuseok_day",
+      "path": "items/unit16_112_chuseok_day.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_112_chuseok_day",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "추석날",
+      "words": [
+        "추석날"
+      ]
+    },
+    {
+      "id": "item.unit16_113_the_four_yut_sticks",
+      "nameEn": "the four yut sticks",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_113_the_four_yut_sticks",
+      "path": "items/unit16_113_the_four_yut_sticks.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_113_the_four_yut_sticks",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "윷",
+      "words": [
+        "윷"
+      ]
+    },
+    {
+      "id": "item.unit16_114_a_yut_token",
+      "nameEn": "a yut token",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_114_a_yut_token",
+      "path": "items/unit16_114_a_yut_token.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_114_a_yut_token",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "윷말",
+      "words": [
+        "윷말"
+      ]
+    },
+    {
+      "id": "item.unit16_115_a_space_on_the_board",
+      "nameEn": "a space on the board",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_115_a_space_on_the_board",
+      "path": "items/unit16_115_a_space_on_the_board.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_115_a_space_on_the_board",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "칸",
+      "words": [
+        "칸"
+      ]
+    },
+    {
+      "id": "item.unit16_116_to_throw",
+      "nameEn": "to throw",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_116_to_throw",
+      "path": "items/unit16_116_to_throw.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_116_to_throw",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "던지다",
+      "words": [
+        "던지다"
+      ]
+    },
+    {
+      "id": "item.unit16_117_to_move_something_along",
+      "nameEn": "to move something along",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_117_to_move_something_along",
+      "path": "items/unit16_117_to_move_something_along.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_117_to_move_something_along",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "옮기다",
+      "words": [
+        "옮기다"
+      ]
+    },
+    {
+      "id": "item.unit16_118_the_other_side_one_s_opponent",
+      "nameEn": "the other side; one’s opponent",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_118_the_other_side_one_s_opponent",
+      "path": "items/unit16_118_the_other_side_one_s_opponent.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_118_the_other_side_one_s_opponent",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "상대방",
+      "words": [
+        "상대방"
+      ]
+    },
+    {
+      "id": "item.unit16_119_to_be_caught",
+      "nameEn": "to be caught",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_119_to_be_caught",
+      "path": "items/unit16_119_to_be_caught.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_119_to_be_caught",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "잡히다",
+      "words": [
+        "잡히다"
+      ]
+    },
+    {
+      "id": "item.unit16_120_to_split_into_teams",
+      "nameEn": "to split into teams",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_120_to_split_into_teams",
+      "path": "items/unit16_120_to_split_into_teams.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_120_to_split_into_teams",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "편을 나누다",
+      "words": [
+        "편을 나누다"
+      ]
+    },
+    {
+      "id": "item.unit16_121_the_rules_of_yut",
+      "nameEn": "the rules of Yut",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_121_the_rules_of_yut",
+      "path": "items/unit16_121_the_rules_of_yut.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_121_the_rules_of_yut",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "윷놀이 규칙",
+      "words": [
+        "윷놀이 규칙"
+      ]
+    },
+    {
+      "id": "item.unit16_122_the_winning_team",
+      "nameEn": "the winning team",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_122_the_winning_team",
+      "path": "items/unit16_122_the_winning_team.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_122_the_winning_team",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "이긴 팀",
+      "words": [
+        "이긴 팀"
+      ]
+    },
+    {
+      "id": "item.unit16_123_the_losing_team",
+      "nameEn": "the losing team",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_123_the_losing_team",
+      "path": "items/unit16_123_the_losing_team.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_123_the_losing_team",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "진 팀",
+      "words": [
+        "진 팀"
+      ]
+    },
+    {
+      "id": "item.unit16_124_ganggangsullae_the_circle_dance",
+      "nameEn": "ganggangsullae, the circle dance",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_124_ganggangsullae_the_circle_dance",
+      "path": "items/unit16_124_ganggangsullae_the_circle_dance.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_124_ganggangsullae_the_circle_dance",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "강강술래",
+      "words": [
+        "강강술래"
+      ]
+    },
+    {
+      "id": "item.unit16_125_a_traditional_game_or_song",
+      "nameEn": "a traditional game or song",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_125_a_traditional_game_or_song",
+      "path": "items/unit16_125_a_traditional_game_or_song.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_125_a_traditional_game_or_song",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "전통 놀이나 노래",
+      "words": [
+        "전통 놀이나 노래"
+      ]
+    },
+    {
+      "id": "item.unit16_126_jindo_the_island_the_song_comes_from",
+      "nameEn": "Jindo, the island the song comes from",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_126_jindo_the_island_the_song_comes_from",
+      "path": "items/unit16_126_jindo_the_island_the_song_comes_from.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_126_jindo_the_island_the_song_comes_from",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "진도",
+      "words": [
+        "진도"
+      ]
+    },
+    {
+      "id": "item.unit16_127_lateralisation_read_as_beside",
+      "nameEn": "lateralisation — ㄴ read as [ㄹ] beside ㄹ",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_127_lateralisation_read_as_beside",
+      "path": "items/unit16_127_lateralisation_read_as_beside.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_127_lateralisation_read_as_beside",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "유음화",
+      "words": [
+        "유음화"
+      ]
+    },
+    {
+      "id": "item.unit16_128_one_s_birthday_the_day_itself",
+      "nameEn": "one’s birthday, the day itself",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_128_one_s_birthday_the_day_itself",
+      "path": "items/unit16_128_one_s_birthday_the_day_itself.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_128_one_s_birthday_the_day_itself",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "생일날",
+      "words": [
+        "생일날"
+      ]
+    },
+    {
+      "id": "item.unit16_129_indoors_the_inside_of_a_building",
+      "nameEn": "indoors; the inside of a building",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_129_indoors_the_inside_of_a_building",
+      "path": "items/unit16_129_indoors_the_inside_of_a_building.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_129_indoors_the_inside_of_a_building",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "실내",
+      "words": [
+        "실내"
+      ]
+    },
+    {
+      "id": "item.unit16_130_a_samulnori_performance",
+      "nameEn": "a samulnori performance",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_130_a_samulnori_performance",
+      "path": "items/unit16_130_a_samulnori_performance.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_130_a_samulnori_performance",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "사물놀이 공연",
+      "words": [
+        "사물놀이 공연"
+      ]
+    },
+    {
+      "id": "item.unit16_131_one_year",
+      "nameEn": "one year",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_131_one_year",
+      "path": "items/unit16_131_one_year.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_131_one_year",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "일 년",
+      "words": [
+        "일 년"
+      ]
+    },
+    {
+      "id": "item.unit16_132_for_a_photo_to_come_out_well",
+      "nameEn": "for a photo to come out well",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_132_for_a_photo_to_come_out_well",
+      "path": "items/unit16_132_for_a_photo_to_come_out_well.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_132_for_a_photo_to_come_out_well",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "사진이 잘 나오다",
+      "words": [
+        "사진이 잘 나오다"
+      ]
+    },
+    {
+      "id": "item.unit16_133_a_day",
+      "nameEn": "a day",
+      "kind": "item",
+      "family": "unit16-vocabulary",
+      "role": "unit16_133_a_day",
+      "path": "items/unit16_133_a_day.png",
+      "status": "shipped",
+      "heightClass": "item",
+      "parentId": "item.unit16_133_a_day",
+      "usedBy": [
+        "vocabulary-book",
+        "word-detail",
+        "farm"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json.",
+      "wordKo": "날",
+      "words": [
+        "날"
+      ]
+    },
+    {
+      "id": "quiz.unit16_yut_do",
+      "nameEn": "Yut throw: do",
+      "kind": "quiz",
+      "family": "unit16-quiz",
+      "role": "unit16_yut_do",
+      "path": "quiz/unit16_yut_do.png",
+      "status": "shipped",
+      "heightClass": "quiz",
+      "parentId": "quiz.unit16_yut_do",
+      "usedBy": [
+        "study-desk",
+        "workbook"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json."
+    },
+    {
+      "id": "quiz.unit16_yut_gae",
+      "nameEn": "Yut throw: gae",
+      "kind": "quiz",
+      "family": "unit16-quiz",
+      "role": "unit16_yut_gae",
+      "path": "quiz/unit16_yut_gae.png",
+      "status": "shipped",
+      "heightClass": "quiz",
+      "parentId": "quiz.unit16_yut_gae",
+      "usedBy": [
+        "study-desk",
+        "workbook"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json."
+    },
+    {
+      "id": "quiz.unit16_yut_geol",
+      "nameEn": "Yut throw: geol",
+      "kind": "quiz",
+      "family": "unit16-quiz",
+      "role": "unit16_yut_geol",
+      "path": "quiz/unit16_yut_geol.png",
+      "status": "shipped",
+      "heightClass": "quiz",
+      "parentId": "quiz.unit16_yut_geol",
+      "usedBy": [
+        "study-desk",
+        "workbook"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json."
+    },
+    {
+      "id": "quiz.unit16_yut_yut",
+      "nameEn": "Yut throw: yut",
+      "kind": "quiz",
+      "family": "unit16-quiz",
+      "role": "unit16_yut_yut",
+      "path": "quiz/unit16_yut_yut.png",
+      "status": "shipped",
+      "heightClass": "quiz",
+      "parentId": "quiz.unit16_yut_yut",
+      "usedBy": [
+        "study-desk",
+        "workbook"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json."
+    },
+    {
+      "id": "quiz.unit16_yut_mo",
+      "nameEn": "Yut throw: mo",
+      "kind": "quiz",
+      "family": "unit16-quiz",
+      "role": "unit16_yut_mo",
+      "path": "quiz/unit16_yut_mo.png",
+      "status": "shipped",
+      "heightClass": "quiz",
+      "parentId": "quiz.unit16_yut_mo",
+      "usedBy": [
+        "study-desk",
+        "workbook"
+      ],
+      "notes": "Unit redesign: individually reviewed 192px PNG. Source and brief: docs/unit-art-redesign.json."
+    },
+    {
+      "id": "quiz.unit16_cat_vet",
+      "nameEn": "Taking a cat to the vet",
+      "kind": "quiz",
+      "family": "unit16-quiz",
+      "role": "unit16_cat_vet",
+      "path": "quiz/unit16_cat_vet.png",
+      "status": "shipped",
+      "heightClass": "quiz",
+      "parentId": "quiz.unit16_cat_vet",
       "usedBy": [
         "study-desk",
         "workbook"
