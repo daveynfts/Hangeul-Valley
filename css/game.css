@@ -4484,3 +4484,11 @@
     .shop-buy-btn, .trophy-buy-btn {
       min-height: 44px;
     }
+
+/* Picture references and listening choices in illustrated textbook lessons. */
+.wb-visual-guide { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; margin:16px 0 4px; }
+.wb-visual-guide figure { margin:0; padding:10px 6px; text-align:center; background:#fff9e9; border:1px solid #cfb582; border-radius:10px; color:#49351f; }
+.wb-visual-guide .wb-art { display:block; width:100%; height:112px; margin:0 auto 8px; object-fit:contain; }
+.wb-visual-guide figcaption { font-weight:700; line-height:1.45; overflow-wrap:anywhere; }
+.wb-pick-form.wb-pick-picture { display:flex; flex:1 1 150px; flex-direction:column; align-items:center; gap:8px; max-width:240px; white-space:normal; text-align:center; padding:12px; }
+.wb-pick-picture .wb-art { width:100%; height:112px; object-fit:contain; }

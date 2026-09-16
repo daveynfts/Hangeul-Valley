@@ -36,7 +36,7 @@ for (const unit of [10, 11, 13, 14, 15]) {
   assert.deepEqual(saved.questions.map(q => q.art), bank.questions.map(q => q.art));
 }
 const question = { id: 1, q: 'Prompt', a: 'A', choices: { A: 'A', B: 'B', C: 'C', D: 'D' } };
-assert.throws(() => validateQuiz({ questions: [{ ...question, art: '../private.png' }] }), /local quiz PNG/);
-assert.throws(() => validateQuiz({ questions: [{ ...question, art: 'https://example.com/image.png' }] }), /local quiz PNG/);
+assert.throws(() => validateQuiz({ questions: [{ ...question, art: '../private.png' }] }), /local sprite PNG/);
+assert.throws(() => validateQuiz({ questions: [{ ...question, art: 'https://example.com/image.png' }] }), /local sprite PNG/);
 assert.equal(validateQuiz({ questions: [question] }).questions[0].art, undefined);
 console.log('Unit artwork: admin save preserves illustrations and rejects unsafe paths');

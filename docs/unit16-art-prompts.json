@@ -1,0 +1,975 @@
+[
+  {
+    "index": 696,
+    "ko": "명절",
+    "en": "traditional holidays",
+    "slug": "unit16_001_traditional_holidays",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 명절. Meaning: traditional holidays. Scene: A Korean multigenerational family in hanbok gathered around a holiday table; rice cake soup and a small plate of songpyeon communicate traditional family holidays."
+  },
+  {
+    "index": 697,
+    "ko": "설날",
+    "en": "Seollal, the lunar New Year",
+    "slug": "unit16_002_seollal_the_lunar_new_year",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 설날. Meaning: Seollal, the lunar New Year. Scene: Korean Lunar New Year: a family in winter hanbok sharing steaming bowls of white oval rice-cake soup, with one child giving a formal deep New Year bow to a seated grandparent."
+  },
+  {
+    "index": 698,
+    "ko": "추석",
+    "en": "Chuseok, the autumn harvest holiday",
+    "slug": "unit16_003_chuseok_the_autumn_harvest_holiday",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 추석. Meaning: Chuseok, the autumn harvest holiday. Scene: Korean Chuseok: a family in hanbok sharing half-moon songpyeon beside harvested rice stalks and autumn persimmons, with a full moon overhead."
+  },
+  {
+    "index": 699,
+    "ko": "한복을 입다",
+    "en": "to wear Korean traditional dress",
+    "slug": "unit16_004_to_wear_korean_traditional_dress",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 한복을 입다. Meaning: to wear Korean traditional dress. Scene: A Korean woman and man standing in full traditional hanbok, showing the tied jeogori jacket, wide flowing chima skirt and loose baji trousers clearly, front three-quarter view."
+  },
+  {
+    "index": 700,
+    "ko": "고향에 가다",
+    "en": "to go to one’s hometown",
+    "slug": "unit16_005_to_go_to_one_s_hometown",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 고향에 가다. Meaning: to go to one’s hometown. Scene: A traveler carrying a suitcase walking toward a small hometown house where a parent waits at the gate, with a little bus behind; make the homecoming the central action."
+  },
+  {
+    "index": 701,
+    "ko": "세배(를) 하다",
+    "en": "to give a New Year’s bow",
+    "slug": "unit16_006_to_give_a_new_year_s_bow",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 세배(를) 하다. Meaning: to give a New Year’s bow. Scene: A child in colorful hanbok kneeling and making a respectful deep forehead-down Korean sebae bow toward a seated elder in hanbok; two people with correct limbs, compact side view."
+  },
+  {
+    "index": 702,
+    "ko": "성묘(를) 하다",
+    "en": "to visit and tend an ancestor’s grave",
+    "slug": "unit16_007_to_visit_and_tend_an_ancestor_s_grave",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 성묘(를) 하다. Meaning: to visit and tend an ancestor’s grave. Scene: A family tending a traditional Korean grassy rounded burial mound outdoors, one adult kneeling placing flowers and another clearing grass; peaceful and respectful, no Western cross."
+  },
+  {
+    "index": 703,
+    "ko": "차례를 지내다",
+    "en": "to perform the ancestral rites",
+    "slug": "unit16_008_to_perform_the_ancestral_rites",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 차례를 지내다. Meaning: to perform the ancestral rites. Scene: A family bowing respectfully before a Korean ancestral rite table with neatly arranged bowls, fruit and food on raised dishes; a simple ancestral tablet centered behind the food. No readable writing."
+  },
+  {
+    "index": 704,
+    "ko": "윷놀이(를) 하다",
+    "en": "to play Yut",
+    "slug": "unit16_009_to_play_yut",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 윷놀이(를) 하다. Meaning: to play Yut. Scene: Two people seated opposite each other playing Korean yutnori: a square board with perimeter spaces and diagonal routes, red and blue tokens, and exactly four wooden half-cylinder throwing sticks beside it."
+  },
+  {
+    "index": 705,
+    "ko": "음식을 차리다",
+    "en": "to set the table with food",
+    "slug": "unit16_010_to_set_the_table_with_food",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 음식을 차리다. Meaning: to set the table with food. Scene: A person placing a final steaming bowl on a low table already arranged with rice and several side dishes, visibly setting out a meal."
+  },
+  {
+    "index": 706,
+    "ko": "어른들께 세배를 하다",
+    "en": "to bow to one’s elders at New Year",
+    "slug": "unit16_011_to_bow_to_one_s_elders_at_new_year",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 어른들께 세배를 하다. Meaning: to bow to one’s elders at New Year. Scene: A young adult in hanbok performing a deep kneeling New Year bow in front of two seated elderly family members; elders smile gently and hands rest naturally in laps."
+  },
+  {
+    "index": 707,
+    "ko": "연휴",
+    "en": "a long holiday weekend",
+    "slug": "unit16_012_a_long_holiday_weekend",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 연휴. Meaning: a long holiday weekend. Scene: A compact calendar with three consecutive days highlighted together and a packed weekend travel bag alongside; simple date numbers only, no headings, clearly a multi-day break."
+  },
+  {
+    "index": 708,
+    "ko": "떡국",
+    "en": "rice-cake soup",
+    "slug": "unit16_013_rice_cake_soup",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 떡국. Meaning: rice-cake soup. Scene: A single ceramic bowl of Korean tteokguk soup with numerous thin white oval diagonally sliced rice cakes in pale clear broth, delicate yellow egg strips, dark seaweed strips and green scallions; slightly overhead view, no other food."
+  },
+  {
+    "index": 709,
+    "ko": "빈대떡",
+    "en": "mung-bean pancake",
+    "slug": "unit16_014_mung_bean_pancake",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 빈대떡. Meaning: mung-bean pancake. Scene: A plate of golden mung-bean bindaetteok pancakes, round and thick with visible green mung-bean sprouts and vegetable flecks, crisp rough fried edges, one cut wedge revealing the dense filling."
+  },
+  {
+    "index": 710,
+    "ko": "송편",
+    "en": "half-moon-shaped rice cake",
+    "slug": "unit16_015_half_moon_shaped_rice_cake",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 송편. Meaning: half-moon-shaped rice cake. Scene: A shallow plate of Korean songpyeon, plump small half-moon rice cakes with smoothly sealed curved edges in white, muted green and pale pink, resting on pine needles. Not crescent bread or dumplings with pleated ridges."
+  },
+  {
+    "index": 711,
+    "ko": "한과",
+    "en": "Korean traditional sweets",
+    "slug": "unit16_016_korean_traditional_sweets",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 한과. Meaning: Korean traditional sweets. Scene: A small traditional serving tray of assorted Korean hangwa sweets: flower-shaped golden yakgwa and rectangular puffed rice-coated yugwa; distinct honey brown and ivory textures, no Western candy."
+  },
+  {
+    "index": 712,
+    "ko": "식혜",
+    "en": "sweet rice punch",
+    "slug": "unit16_017_sweet_rice_punch",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 식혜. Meaning: sweet rice punch. Scene: A clear glass bowl of pale golden Korean sikhye sweet rice punch, with individual cooked white rice grains visibly floating, a few pine nuts and a spoon beside it; no milk, no citrus."
+  },
+  {
+    "index": 713,
+    "ko": "음력",
+    "en": "the lunar calendar",
+    "slug": "unit16_018_the_lunar_calendar",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 음력. Meaning: the lunar calendar. Scene: A simple lunar calendar page paired with a clear sequence of new moon, half moon and full moon discs; show the calendar follows moon phases, no invented Korean text."
+  },
+  {
+    "index": 714,
+    "ko": "전통",
+    "en": "tradition",
+    "slug": "unit16_019_tradition",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 전통. Meaning: tradition. Scene: An elderly Korean artisan teaching a child to tie the ribbon of a traditional hanbok garment, an intergenerational transfer of a cultural custom, no abstract badge."
+  },
+  {
+    "index": 715,
+    "ko": "전날",
+    "en": "the day before",
+    "slug": "unit16_020_the_day_before",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 전날. Meaning: the day before. Scene: Two adjacent calendar pages with consecutive date numbers 14 and 15; the 14 page is emphasized and a small backward arrow points from 15 to 14. Only these date numbers as text."
+  },
+  {
+    "index": 716,
+    "ko": "기차표",
+    "en": "a train ticket",
+    "slug": "unit16_021_a_train_ticket",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 기차표. Meaning: a train ticket. Scene: A paper railway ticket in the foreground, featuring a tiny train pictogram and perforated edge, with a compact passenger train behind it; no airline imagery or fake readable text."
+  },
+  {
+    "index": 717,
+    "ko": "서두르다",
+    "en": "to hurry",
+    "slug": "unit16_022_to_hurry",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 서두르다. Meaning: to hurry. Scene: A person hurrying toward a departing bus while looking at a wristwatch, one hand holding a small bag, motion in the stride and worried expression, no injury."
+  },
+  {
+    "index": 718,
+    "ko": "특별한 음식",
+    "en": "a special dish for the day",
+    "slug": "unit16_023_a_special_dish_for_the_day",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 특별한 음식. Meaning: a special dish for the day. Scene: A carefully presented special holiday dish on a small raised tray with rice-cake soup and festive garnish, an expectant family member placing it at the celebration table."
+  },
+  {
+    "index": 719,
+    "ko": "집안일",
+    "en": "housework",
+    "slug": "unit16_024_housework",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 집안일. Meaning: housework. Scene: A person doing household chores with a laundry basket, broom and dishes nearby; one central person tidying a room, not a collage of unrelated icons."
+  },
+  {
+    "index": 720,
+    "ko": "방을 닦다",
+    "en": "to wipe the room clean",
+    "slug": "unit16_025_to_wipe_the_room_clean",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 방을 닦다. Meaning: to wipe the room clean. Scene: A man kneeling on a small patch of wooden floor wiping it with a cloth held in his hand, visible clean streak following the cloth and a little bucket nearby. No standing mop."
+  },
+  {
+    "index": 721,
+    "ko": "장을 미리 보다",
+    "en": "to do the grocery shopping in advance",
+    "slug": "unit16_026_to_do_the_grocery_shopping_in_advance",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 장을 미리 보다. Meaning: to do the grocery shopping in advance. Scene: A shopper bringing groceries home and putting them away beside a calendar with tomorrow's gathering circled; show ingredients ready a day early, only simple calendar date numerals."
+  },
+  {
+    "index": 722,
+    "ko": "설거지(를) 하다",
+    "en": "to wash the dishes",
+    "slug": "unit16_027_to_wash_the_dishes",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 설거지(를) 하다. Meaning: to wash the dishes. Scene: A person at a sink washing a ceramic plate with a soapy sponge, a few bubbles and a small drying rack of clean plates, hands and tap clearly visible."
+  },
+  {
+    "index": 723,
+    "ko": "세탁기를 돌리다",
+    "en": "to run the washing machine",
+    "slug": "unit16_028_to_run_the_washing_machine",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 세탁기를 돌리다. Meaning: to run the washing machine. Scene: A person pressing the start button of a front-loading washing machine with clothes visible inside the round drum, laundry basket beside it, no text."
+  },
+  {
+    "index": 724,
+    "ko": "청소기를 돌리다",
+    "en": "to vacuum",
+    "slug": "unit16_029_to_vacuum",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 청소기를 돌리다. Meaning: to vacuum. Scene: A person using a vacuum cleaner on a rug, visible floor nozzle connected by hose to the machine, active cleaning posture."
+  },
+  {
+    "index": 725,
+    "ko": "대청소를 하다",
+    "en": "to do a big clean-up",
+    "slug": "unit16_030_to_do_a_big_clean_up",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 대청소를 하다. Meaning: to do a big clean-up. Scene: Two family members doing a thorough house clean together, one wiping a high shelf and another moving furniture to clean beneath it, cleaning supplies nearby."
+  },
+  {
+    "index": 726,
+    "ko": "밤늦게",
+    "en": "late at night",
+    "slug": "unit16_031_late_at_night",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 밤늦게. Meaning: late at night. Scene: A sleepy person still awake at a desk under a small lamp, a dark window with moon and a clock showing near midnight; compact room vignette without rectangular background."
+  },
+  {
+    "index": 727,
+    "ko": "마트",
+    "en": "a supermarket",
+    "slug": "unit16_032_a_supermarket",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 마트. Meaning: a supermarket. Scene: A small modern supermarket storefront with a shopping cart and clearly displayed vegetables and packaged groceries through the window, no invented shop lettering."
+  },
+  {
+    "index": 728,
+    "ko": "청소를 하다",
+    "en": "to clean up",
+    "slug": "unit16_033_to_clean_up",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 청소를 하다. Meaning: to clean up. Scene: A person sweeping scattered dust and paper into a dustpan with a broom; focus on the active cleaning action, unlike wiping or vacuuming."
+  },
+  {
+    "index": 729,
+    "ko": "V-아/어 놓다",
+    "en": "to do something and leave it done",
+    "slug": "unit16_034_to_do_something_and_leave_it_done",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: V-아/어 놓다. Meaning: to do something and leave it done. Scene: Two connected moments: hands open a window, then the same window remains open beside a prepared room while the person steps away. A small arrow links action to its lasting result. No grammar lettering."
+  },
+  {
+    "index": 730,
+    "ko": "예매하다",
+    "en": "to book a ticket in advance",
+    "slug": "unit16_035_to_book_a_ticket_in_advance",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 예매하다. Meaning: to book a ticket in advance. Scene: A person buying a train ticket on a phone beside a calendar with a later travel day circled and a suitcase not yet packed; focus on advance booking."
+  },
+  {
+    "index": 731,
+    "ko": "창문을 열다",
+    "en": "to open the window",
+    "slug": "unit16_036_to_open_the_window",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 창문을 열다. Meaning: to open the window. Scene: A person turning a window handle and pushing the casement outward, a small breeze moving the curtain; visibly open window."
+  },
+  {
+    "index": 732,
+    "ko": "미리 사다",
+    "en": "to buy something in advance",
+    "slug": "unit16_037_to_buy_something_in_advance",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 미리 사다. Meaning: to buy something in advance. Scene: A shopper setting purchased ingredients in a basket next to tomorrow's cooking plan pictured as a pan; clear preparation before cooking starts, no text."
+  },
+  {
+    "index": 733,
+    "ko": "문을 닫다",
+    "en": "to close for the day",
+    "slug": "unit16_038_to_close_for_the_day",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 문을 닫다. Meaning: to close for the day. Scene: A shopkeeper closing a storefront shutter at sunset, store lights being turned off; clearly closing business for the day, not merely a house door."
+  },
+  {
+    "index": 734,
+    "ko": "돈을 찾다",
+    "en": "to withdraw money",
+    "slug": "unit16_039_to_withdraw_money",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 돈을 찾다. Meaning: to withdraw money. Scene: A person withdrawing paper banknotes from an ATM cash slot, bank card in other hand, clear machine and money, no legible card numbers."
+  },
+  {
+    "index": 735,
+    "ko": "종이에 쓰다",
+    "en": "to write it down on paper",
+    "slug": "unit16_040_to_write_it_down_on_paper",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 종이에 쓰다. Meaning: to write it down on paper. Scene: A hand using a pen to write short visible strokes on a sheet of paper, with the paper and active writing gesture central; no readable paragraphs."
+  },
+  {
+    "index": 736,
+    "ko": "냉장고에 넣다",
+    "en": "to put something in the fridge",
+    "slug": "unit16_041_to_put_something_in_the_fridge",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 냉장고에 넣다. Meaning: to put something in the fridge. Scene: A person placing a covered food container onto a shelf inside an open refrigerator, visible cold shelves and other neatly stored food."
+  },
+  {
+    "index": 737,
+    "ko": "N 대신",
+    "en": "instead of N",
+    "slug": "unit16_042_instead_of_n",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: N 대신. Meaning: instead of N. Scene: A person choosing an umbrella in place of a raincoat: raincoat set aside with a small cross, umbrella in hand and a clear substitution arrow. No words, no unrelated symbols."
+  },
+  {
+    "index": 738,
+    "ko": "소금을 넣다",
+    "en": "to add salt",
+    "slug": "unit16_043_to_add_salt",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 소금을 넣다. Meaning: to add salt. Scene: A hand sprinkling a small pinch of white salt from a small salt dish into a steaming pot, clearly white crystals falling, not sugar in a dessert."
+  },
+  {
+    "index": 739,
+    "ko": "간장을 넣다",
+    "en": "to use soy sauce",
+    "slug": "unit16_044_to_use_soy_sauce",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 간장을 넣다. Meaning: to use soy sauce. Scene: A hand pouring dark brown soy sauce from a little ceramic sauce bottle into a cooking bowl, a thin dark stream visible; no label."
+  },
+  {
+    "index": 740,
+    "ko": "여권을 보여 주다",
+    "en": "to show one’s passport",
+    "slug": "unit16_045_to_show_one_s_passport",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 여권을 보여 주다. Meaning: to show one’s passport. Scene: A traveler holding an open passport toward an airport staff member, passport photo page represented by a tiny portrait and simple lines, no real names or numbers."
+  },
+  {
+    "index": 741,
+    "ko": "택시비",
+    "en": "the taxi fare",
+    "slug": "unit16_046_the_taxi_fare",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 택시비. Meaning: the taxi fare. Scene: A passenger paying a taxi driver with banknotes beside the taxi meter, view through an open car window, yellow taxi roof light without words."
+  },
+  {
+    "index": 742,
+    "ko": "현금",
+    "en": "cash",
+    "slug": "unit16_047_cash",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 현금. Meaning: cash. Scene: A tidy small stack of paper banknotes with several coins, unmistakable physical cash, no credit card and no real personal data."
+  },
+  {
+    "index": 743,
+    "ko": "주소를 쓰다",
+    "en": "to write down an address",
+    "slug": "unit16_048_to_write_down_an_address",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 주소를 쓰다. Meaning: to write down an address. Scene: A person writing a house address on an envelope while looking at a small house with its house number; include only house number 24 and simple line strokes on envelope."
+  },
+  {
+    "index": 744,
+    "ko": "해외여행",
+    "en": "overseas travel",
+    "slug": "unit16_049_overseas_travel",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 해외여행. Meaning: overseas travel. Scene: A traveler with suitcase and passport boarding an airplane, small globe beside the boarding gate suggesting travel between countries; no flags or written destination names."
+  },
+  {
+    "index": 745,
+    "ko": "국내 여행",
+    "en": "domestic travel",
+    "slug": "unit16_050_domestic_travel",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 국내 여행. Meaning: domestic travel. Scene: A traveler with a backpack taking a train to a Korean countryside destination, a schematic single-country travel route on a folded map; no globe or plane."
+  },
+  {
+    "index": 746,
+    "ko": "문자",
+    "en": "a text message",
+    "slug": "unit16_051_a_text_message",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 문자. Meaning: a text message. Scene: A phone held in a hand showing two simple short message bubbles, one incoming and one outgoing, no social media feed and no long readable text."
+  },
+  {
+    "index": 747,
+    "ko": "V-(으)ㄹ까 하다",
+    "en": "to be thinking of doing something",
+    "slug": "unit16_052_to_be_thinking_of_doing_something",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: V-(으)ㄹ까 하다. Meaning: to be thinking of doing something. Scene: A thoughtful traveler with hand at chin considering a beach trip inside a small thought bubble, suitcase still open and unpacked; communicate tentative intention, not a firm reservation."
+  },
+  {
+    "index": 748,
+    "ko": "여름휴가",
+    "en": "the summer holiday",
+    "slug": "unit16_053_the_summer_holiday",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 여름휴가. Meaning: the summer holiday. Scene: A person relaxing on a sunny beach beneath an umbrella with a small travel bag, warm summer light and a little wave; compact isolated holiday vignette."
+  },
+  {
+    "index": 749,
+    "ko": "가까운 곳",
+    "en": "somewhere close by",
+    "slug": "unit16_054_somewhere_close_by",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 가까운 곳. Meaning: somewhere close by. Scene: A person pointing from their front door toward a nearby small park just a few footsteps away; short dotted path, no long-distance transport."
+  },
+  {
+    "index": 750,
+    "ko": "A/V-(으)ㄹ 테니까",
+    "en": "since it will be ~, so …",
+    "slug": "unit16_055_since_it_will_be_so",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: A/V-(으)ㄹ 테니까. Meaning: since it will be ~, so …. Scene: A person sees rain clouds approaching and offers an umbrella to a friend who is about to go out; anticipated rain is the reason for the helpful suggestion. No grammar text."
+  },
+  {
+    "index": 751,
+    "ko": "두껍다",
+    "en": "to be thick",
+    "slug": "unit16_056_to_be_thick",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 두껍다. Meaning: to be thick. Scene: A hand holding a visibly thick closed book in profile, broad stack of pages contrasted with a thin booklet beside it; emphasize physical thickness."
+  },
+  {
+    "index": 752,
+    "ko": "수업 중",
+    "en": "in the middle of a class",
+    "slug": "unit16_057_in_the_middle_of_a_class",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 수업 중. Meaning: in the middle of a class. Scene: A teacher at a small classroom board explaining a lesson to two attentive students seated at desks; lesson visibly underway, no readable board text."
+  },
+  {
+    "index": 753,
+    "ko": "호텔을 알아보다",
+    "en": "to look into a hotel",
+    "slug": "unit16_058_to_look_into_a_hotel",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 호텔을 알아보다. Meaning: to look into a hotel. Scene: A traveler comparing two hotel listing cards on a laptop, each showing a bed and building thumbnail, thoughtful checking gesture; no booking confirmation or prices."
+  },
+  {
+    "index": 754,
+    "ko": "여행 준비",
+    "en": "trip preparations",
+    "slug": "unit16_059_trip_preparations",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 여행 준비. Meaning: trip preparations. Scene: A person packing a suitcase with folded clothes beside passport, guidebook and travel toiletries, visibly preparing for a trip."
+  },
+  {
+    "index": 755,
+    "ko": "비행기 표",
+    "en": "a plane ticket",
+    "slug": "unit16_060_a_plane_ticket",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 비행기 표. Meaning: a plane ticket. Scene: A paper airline boarding pass with an airplane pictogram and perforated stub, a small passenger plane behind it; no train, no readable flight data."
+  },
+  {
+    "index": 756,
+    "ko": "환전",
+    "en": "changing money",
+    "slug": "unit16_061_changing_money",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 환전. Meaning: changing money. Scene: A currency exchange counter where a hand gives one color of banknotes and receives a different color, small two-direction exchange arrow, no invented exchange rates."
+  },
+  {
+    "index": 757,
+    "ko": "가이드북",
+    "en": "a guidebook",
+    "slug": "unit16_062_a_guidebook",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 가이드북. Meaning: a guidebook. Scene: An open travel guidebook showing a destination illustration on one page and a simple route map on the other, a bookmark and tiny sightseeing pictograms, no readable text."
+  },
+  {
+    "index": 758,
+    "ko": "모자라다",
+    "en": "to run short",
+    "slug": "unit16_063_to_run_short",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 모자라다. Meaning: to run short. Scene: A cook holding an almost-empty ingredient jar above a mixing bowl, concerned at not having enough; beside it a measuring cup only partly filled below the needed mark."
+  },
+  {
+    "index": 759,
+    "ko": "졸리다",
+    "en": "to be sleepy",
+    "slug": "unit16_064_to_be_sleepy",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 졸리다. Meaning: to be sleepy. Scene: A student yawning with drooping eyelids at a desk, one hand covering mouth, head gently tilted, clear sleepiness without illness."
+  },
+  {
+    "index": 760,
+    "ko": "고향에 내려가다",
+    "en": "to go down to one’s hometown",
+    "slug": "unit16_065_to_go_down_to_one_s_hometown",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 고향에 내려가다. Meaning: to go down to one’s hometown. Scene: A traveler stepping off a train into a rural hometown where a parent waves beside a small house, luggage in hand and a downhill village path; homecoming focus."
+  },
+  {
+    "index": 761,
+    "ko": "표",
+    "en": "a ticket",
+    "slug": "unit16_066_a_ticket",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 표. Meaning: a ticket. Scene: A single general admission ticket with scalloped perforated edges, two tear-off parts and a simple star pictogram, no specific train or airplane."
+  },
+  {
+    "index": 762,
+    "ko": "끓이다",
+    "en": "to boil something",
+    "slug": "unit16_067_to_boil_something",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 끓이다. Meaning: to boil something. Scene: A cooking pot of soup actively boiling on a stove, bubbles breaking the surface and wisps of steam, a cook stirring carefully with a long spoon."
+  },
+  {
+    "index": 763,
+    "ko": "초대하다",
+    "en": "to invite someone over",
+    "slug": "unit16_068_to_invite_someone_over",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 초대하다. Meaning: to invite someone over. Scene: A smiling host opening a front door and welcoming a friend toward a table set inside, warm inviting hand gesture."
+  },
+  {
+    "index": 764,
+    "ko": "반 친구",
+    "en": "a classmate",
+    "slug": "unit16_069_a_classmate",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 반 친구. Meaning: a classmate. Scene: Two students of similar age at neighboring classroom desks sharing a workbook and smiling, clearly classmates rather than teacher and pupil."
+  },
+  {
+    "index": 765,
+    "ko": "빈대떡을 부치다",
+    "en": "to fry mung-bean pancakes",
+    "slug": "unit16_070_to_fry_mung_bean_pancakes",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 빈대떡을 부치다. Meaning: to fry mung-bean pancakes. Scene: A cook turning one golden round mung-bean pancake in a shallow frying pan using a spatula, visible vegetable flecks in batter and a bowl of remaining batter nearby."
+  },
+  {
+    "index": 766,
+    "ko": "재료를 미리 사다",
+    "en": "to buy the ingredients in advance",
+    "slug": "unit16_071_to_buy_the_ingredients_in_advance",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 재료를 미리 사다. Meaning: to buy the ingredients in advance. Scene: A cook unpacking purchased vegetables and mung beans on the counter before cooking, an empty pan ready beside them and a small calendar indicating preparation ahead."
+  },
+  {
+    "index": 767,
+    "ko": "만들 줄 알다",
+    "en": "to know how to make something",
+    "slug": "unit16_072_to_know_how_to_make_something",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 만들 줄 알다. Meaning: to know how to make something. Scene: A confident cook demonstrating a completed carefully folded rice cake while another unshaped portion sits on the board; skillful hands and finished result make knowing how clear."
+  },
+  {
+    "index": 768,
+    "ko": "도와주다",
+    "en": "to give someone a hand",
+    "slug": "unit16_073_to_give_someone_a_hand",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 도와주다. Meaning: to give someone a hand. Scene: One friend helping another lift a heavy box together, both carrying the load with natural hands, cooperative smiles, no seniority markers."
+  },
+  {
+    "index": 769,
+    "ko": "가르쳐 주다",
+    "en": "to show someone how",
+    "slug": "unit16_074_to_show_someone_how",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 가르쳐 주다. Meaning: to show someone how. Scene: A patient adult demonstrating to another adult how to fold a rice cake at a kitchen table, learner watching the teacher's hands closely."
+  },
+  {
+    "index": 770,
+    "ko": "음식 준비",
+    "en": "getting the food ready",
+    "slug": "unit16_075_getting_the_food_ready",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 음식 준비. Meaning: getting the food ready. Scene: Two people preparing a meal by chopping vegetables and arranging ingredients on a kitchen counter before the meal is served."
+  },
+  {
+    "index": 771,
+    "ko": "송별회",
+    "en": "a farewell party",
+    "slug": "unit16_076_a_farewell_party",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 송별회. Meaning: a farewell party. Scene: A small farewell gathering: friends give a bouquet and wave to a departing friend holding a suitcase, affectionate bittersweet expressions, no birthday cake or text banner."
+  },
+  {
+    "index": 772,
+    "ko": "의논하다",
+    "en": "to talk something over",
+    "slug": "unit16_077_to_talk_something_over",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 의논하다. Meaning: to talk something over. Scene: Two adults seated at a table discussing a simple party plan, one points to a paper layout while the other listens and considers, balanced cooperative conversation."
+  },
+  {
+    "index": 773,
+    "ko": "전화로 예약하다",
+    "en": "to book by telephone",
+    "slug": "unit16_078_to_book_by_telephone",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 전화로 예약하다. Meaning: to book by telephone. Scene: A person making a phone call while pointing at a reservation date on a small calendar, a tiny hotel reception shown in a thought bubble; no readable writing."
+  },
+  {
+    "index": 774,
+    "ko": "연락(을) 하다",
+    "en": "to get in touch",
+    "slug": "unit16_079_to_get_in_touch",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 연락(을) 하다. Meaning: to get in touch. Scene: A person happily initiating a phone call to reconnect with a friend, the friend's friendly face appears in a small inset call bubble; no text."
+  },
+  {
+    "index": 775,
+    "ko": "발표 원고",
+    "en": "a presentation script",
+    "slug": "unit16_080_a_presentation_script",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 발표 원고. Meaning: a presentation script. Scene: A presenter holding several neatly ordered pages beside a lectern and microphone, script pages with simple short lines, focus on prepared presentation notes."
+  },
+  {
+    "index": 776,
+    "ko": "부탁",
+    "en": "a favour to ask",
+    "slug": "unit16_081_a_favour_to_ask",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 부탁. Meaning: a favour to ask. Scene: A person politely asking another for help while holding a heavy parcel, slight bow and open asking hand, the other listens; no completed assistance yet."
+  },
+  {
+    "index": 777,
+    "ko": "부탁을 들어주다",
+    "en": "to grant someone’s request",
+    "slug": "unit16_082_to_grant_someone_s_request",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 부탁을 들어주다. Meaning: to grant someone’s request. Scene: A friend agreeing to a request by accepting a parcel from the asking person, reassuring smile and nod, clear supportive response."
+  },
+  {
+    "index": 778,
+    "ko": "거절을 하다",
+    "en": "to turn a request down",
+    "slug": "unit16_083_to_turn_a_request_down",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 거절을 하다. Meaning: to turn a request down. Scene: A person politely declining another person's request with a gentle raised palm and apologetic expression, the requester holding a parcel, respectful social interaction."
+  },
+  {
+    "index": 779,
+    "ko": "서울역",
+    "en": "Seoul Station",
+    "slug": "unit16_084_seoul_station",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 서울역. Meaning: Seoul Station. Scene: A recognizable simplified historic Seoul Station building: red brick facade, central green copper dome, arched windows and symmetrical wings; a small train front beside it, no invented lettering."
+  },
+  {
+    "index": 780,
+    "ko": "앵커",
+    "en": "a news anchor",
+    "slug": "unit16_085_a_news_anchor",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 앵커. Meaning: a news anchor. Scene: A professional television news anchor seated behind a news desk facing the viewer, papers and small microphone, a camera at the side and subtle screen frame, no words."
+  },
+  {
+    "index": 781,
+    "ko": "형님",
+    "en": "one’s older brother",
+    "slug": "unit16_086_one_s_older_brother",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 형님. Meaning: one’s older brother. Scene: Two Korean adult brothers, the older slightly taller and mature, affectionately placing a hand on the younger brother's shoulder; family-photo intimacy rather than employer relation."
+  },
+  {
+    "index": 782,
+    "ko": "도와 드리다",
+    "en": "to help someone senior",
+    "slug": "unit16_087_to_help_someone_senior",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 도와 드리다. Meaning: to help someone senior. Scene: A young adult helping an elderly person carry a grocery bag up a low step, respectful posture and attentive support."
+  },
+  {
+    "index": 783,
+    "ko": "다녀오다",
+    "en": "to go somewhere and come back",
+    "slug": "unit16_088_to_go_somewhere_and_come_back",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 다녀오다. Meaning: to go somewhere and come back. Scene: A compact two-moment scene: traveler leaves home carrying a bag and returns to the same home, a clear curved return arrow connecting the journey; no text."
+  },
+  {
+    "index": 784,
+    "ko": "말씀",
+    "en": "what someone says, honorific",
+    "slug": "unit16_089_what_someone_says_honorific",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 말씀. Meaning: what someone says, honorific. Scene: An elderly person speaking gently while a younger listener leans in respectfully, small simple speech bubble with line strokes only; emphasis on elder's words and respectful listening."
+  },
+  {
+    "index": 785,
+    "ko": "곤란한 부탁",
+    "en": "a request that is hard to grant",
+    "slug": "unit16_090_a_request_that_is_hard_to_grant",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 곤란한 부탁. Meaning: a request that is hard to grant. Scene: A busy person holding a stack of work papers looks apologetic as a friend asks them to look after a pet carrier; strained but polite expression communicates a difficult favour."
+  },
+  {
+    "index": 786,
+    "ko": "고양이",
+    "en": "a cat",
+    "slug": "unit16_091_a_cat",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 고양이. Meaning: a cat. Scene: A single friendly orange-and-white domestic cat sitting upright with curling tail, natural four legs, alert ears and whiskers, no costume or pet accessories."
+  },
+  {
+    "index": 787,
+    "ko": "맡아 주다",
+    "en": "to look after something for someone",
+    "slug": "unit16_092_to_look_after_something_for_someone",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 맡아 주다. Meaning: to look after something for someone. Scene: A person looking after a friend's small potted plant and cat, carefully providing water while the friend with a travel bag waves goodbye at the edge; responsible temporary care."
+  },
+  {
+    "index": 788,
+    "ko": "고양이를 맡기다",
+    "en": "to leave a cat in someone’s care",
+    "slug": "unit16_093_to_leave_a_cat_in_someone_s_care",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 고양이를 맡기다. Meaning: to leave a cat in someone’s care. Scene: A traveler handing an orange cat in a secure open-topped carrier to a trusted friend, both carefully supporting the carrier; cat calm, no veterinary equipment."
+  },
+  {
+    "index": 789,
+    "ko": "이틀 동안",
+    "en": "for two days",
+    "slug": "unit16_094_for_two_days",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 이틀 동안. Meaning: for two days. Scene: A calendar with exactly two consecutive days, 12 and 13, highlighted together by a single bracket, a small overnight bag nearby; no third highlighted day."
+  },
+  {
+    "index": 790,
+    "ko": "큰일이다",
+    "en": "to be a real problem",
+    "slug": "unit16_095_to_be_a_real_problem",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 큰일이다. Meaning: to be a real problem. Scene: A worried traveler discovering a missing passport in an open bag just before departure, hands at head and concerned expression; a tangible serious problem, no text."
+  },
+  {
+    "index": 791,
+    "ko": "잘 봐 주다",
+    "en": "to take good care of something",
+    "slug": "unit16_096_to_take_good_care_of_something",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 잘 봐 주다. Meaning: to take good care of something. Scene: A gentle person carefully feeding and brushing a content orange cat, bowls neat and fresh, close attentive caregiving gesture."
+  },
+  {
+    "index": 792,
+    "ko": "필요한 것",
+    "en": "the things that are needed",
+    "slug": "unit16_097_the_things_that_are_needed",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 필요한 것. Meaning: the things that are needed. Scene: An open travel bag with a neatly arranged essential set ready to pack: passport, toothbrush, folded shirt and wallet; a hand checking the set against simple checkmarks."
+  },
+  {
+    "index": 793,
+    "ko": "명절을 보내다",
+    "en": "to spend the holidays",
+    "slug": "unit16_098_to_spend_the_holidays",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 명절을 보내다. Meaning: to spend the holidays. Scene: A Korean family spending a traditional holiday together at home, elders and children sharing food and conversation at a low table, warm relaxed celebration."
+  },
+  {
+    "index": 794,
+    "ko": "농사",
+    "en": "farming",
+    "slug": "unit16_099_farming",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 농사. Meaning: farming. Scene: A farmer in a straw hat tending neat rows of young crops with a hoe, small cultivated soil patch, farming action clearly visible."
+  },
+  {
+    "index": 795,
+    "ko": "조상",
+    "en": "an ancestor",
+    "slug": "unit16_100_an_ancestor",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 조상. Meaning: an ancestor. Scene: A respectful family looking at an old sepia portrait of an ancestor on a low wooden stand; portrait depicts an older Korean person in traditional dress, no ghost or supernatural imagery."
+  },
+  {
+    "index": 796,
+    "ko": "한 해",
+    "en": "a year",
+    "slug": "unit16_101_a_year",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 한 해. Meaning: a year. Scene: A compact circular sequence of four small branches of the same tree through spring blossoms, summer leaves, autumn fruit and bare winter twigs; one complete annual cycle, no text."
+  },
+  {
+    "index": 797,
+    "ko": "추수하다",
+    "en": "to bring in the harvest",
+    "slug": "unit16_102_to_bring_in_the_harvest",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 추수하다. Meaning: to bring in the harvest. Scene: A farmer harvesting ripe golden rice with a short sickle and gathering cut stalks into a bundle, a small harvested field patch, safe natural posture."
+  },
+  {
+    "index": 798,
+    "ko": "곡식",
+    "en": "grain; crops",
+    "slug": "unit16_103_grain_crops",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 곡식. Meaning: grain; crops. Scene: A bundle of golden rice stalks with full grain heads next to a small sack of harvested grain and a few kernels; focus on crops and grain, no flour."
+  },
+  {
+    "index": 799,
+    "ko": "나눠 먹다",
+    "en": "to share food out",
+    "slug": "unit16_104_to_share_food_out",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 나눠 먹다. Meaning: to share food out. Scene: Three friends dividing a plate of small rice cakes into equal portions and passing them to each other, sharing action and hands clear."
+  },
+  {
+    "index": 800,
+    "ko": "오랜만에 만나다",
+    "en": "to meet after a long time",
+    "slug": "unit16_105_to_meet_after_a_long_time",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 오랜만에 만나다. Meaning: to meet after a long time. Scene: Two old friends joyfully recognizing each other and greeting after time apart, one carrying travel luggage and both with delighted surprised expressions."
+  },
+  {
+    "index": 801,
+    "ko": "친척",
+    "en": "a relative",
+    "slug": "unit16_106_a_relative",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 친척. Meaning: a relative. Scene: A multigenerational extended Korean family portrait including grandparents, two adult couples and a child, friendly family resemblance, simple relaxed poses."
+  },
+  {
+    "index": 802,
+    "ko": "즐거운 시간을 보내다",
+    "en": "to have a good time",
+    "slug": "unit16_107_to_have_a_good_time",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 즐거운 시간을 보내다. Meaning: to have a good time. Scene: Three friends laughing together over a small picnic and a board game, relaxed joyful expressions and a clear shared enjoyable activity."
+  },
+  {
+    "index": 803,
+    "ko": "전통 놀이",
+    "en": "a traditional game",
+    "slug": "unit16_108_a_traditional_game",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 전통 놀이. Meaning: a traditional game. Scene: A traditional Korean game set with a yut board, exactly four wooden sticks and a small jegi shuttlecock, tangible cultural toys without modern electronics."
+  },
+  {
+    "index": 804,
+    "ko": "씨름",
+    "en": "ssireum, Korean wrestling",
+    "slug": "unit16_109_ssireum_korean_wrestling",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 씨름. Meaning: ssireum, Korean wrestling. Scene: Two Korean ssireum wrestlers on a small sand patch, each gripping the other's red or blue satba belt wrapped around waist and thigh, balanced bent-knee grappling stance, no boxing gloves."
+  },
+  {
+    "index": 805,
+    "ko": "보름달",
+    "en": "the full moon",
+    "slug": "unit16_110_the_full_moon",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 보름달. Meaning: the full moon. Scene: A large fully round luminous moon above a small patch of autumn grass and rice stalks, no crescent, no planet rings, no face on moon."
+  },
+  {
+    "index": 806,
+    "ko": "소원을 빌다",
+    "en": "to make a wish",
+    "slug": "unit16_111_to_make_a_wish",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 소원을 빌다. Meaning: to make a wish. Scene: A person beneath a full moon holding hands together near chest, eyes closed in a hopeful wish-making expression, a small rice field patch below."
+  },
+  {
+    "index": 807,
+    "ko": "추석날",
+    "en": "Chuseok day",
+    "slug": "unit16_112_chuseok_day",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 추석날. Meaning: Chuseok day. Scene: A Chuseok calendar day accented by a full moon, freshly harvested rice stalks and a small plate of songpyeon, autumn leaves, no invented lunar date."
+  },
+  {
+    "index": 808,
+    "ko": "윷",
+    "en": "the four yut sticks",
+    "slug": "unit16_113_the_four_yut_sticks",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 윷. Meaning: the four yut sticks. Scene: Exactly four Korean yut sticks, wooden half-cylinders with flat cut faces and rounded honey-brown backs, neatly laid side by side, no board or dice."
+  },
+  {
+    "index": 809,
+    "ko": "윷말",
+    "en": "a yut token",
+    "slug": "unit16_114_a_yut_token",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 윷말. Meaning: a yut token. Scene: A close-up of one red round wooden playing token sitting on a yut board point, a few neutral board lines give context; focus on a movable game piece, not a coin."
+  },
+  {
+    "index": 810,
+    "ko": "칸",
+    "en": "a space on the board",
+    "slug": "unit16_115_a_space_on_the_board",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 칸. Meaning: a space on the board. Scene: A small close-up of a board game's connected spaces, one empty space emphasized by a subtle glow while a token sits in the adjacent space; illustrate one board position."
+  },
+  {
+    "index": 811,
+    "ko": "던지다",
+    "en": "to throw",
+    "slug": "unit16_116_to_throw",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 던지다. Meaning: to throw. Scene: A player tossing exactly four wooden yut sticks upward from an open hand, sticks in mid-air with subtle motion arcs, no additional sticks lying elsewhere."
+  },
+  {
+    "index": 812,
+    "ko": "옮기다",
+    "en": "to move something along",
+    "slug": "unit16_117_to_move_something_along",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 옮기다. Meaning: to move something along. Scene: A hand moving a red game token from one board space to the next, single short directional arrow between the two spaces, other spaces faint and unobtrusive."
+  },
+  {
+    "index": 813,
+    "ko": "상대방",
+    "en": "the other side; one’s opponent",
+    "slug": "unit16_118_the_other_side_one_s_opponent",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 상대방. Meaning: the other side; one’s opponent. Scene: Two players facing each other across a yut board, one on each side with different red and blue tokens; balanced opposing sides without aggression."
+  },
+  {
+    "index": 814,
+    "ko": "잡히다",
+    "en": "to be caught",
+    "slug": "unit16_119_to_be_caught",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 잡히다. Meaning: to be caught. Scene: A red yut token landing on a space occupied by a blue token, the blue token lifted off the board by a hand; show a captured playing piece, not an animal trap."
+  },
+  {
+    "index": 815,
+    "ko": "편을 나누다",
+    "en": "to split into teams",
+    "slug": "unit16_120_to_split_into_teams",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 편을 나누다. Meaning: to split into teams. Scene: Four friends separating into two pairs beside a yut board, each pair holds matching red or blue ribbons, visible two-team grouping without words."
+  },
+  {
+    "index": 816,
+    "ko": "윷놀이 규칙",
+    "en": "the rules of Yut",
+    "slug": "unit16_121_the_rules_of_yut",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 윷놀이 규칙. Meaning: the rules of Yut. Scene: A player pointing to a yut board route and four sticks while explaining to a listener, a small reference sheet has five simple rows of stick pictograms, no readable instructions."
+  },
+  {
+    "index": 817,
+    "ko": "이긴 팀",
+    "en": "the winning team",
+    "slug": "unit16_122_the_winning_team",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 이긴 팀. Meaning: the winning team. Scene: Two teammates raising hands together in victory beside a completed yut board path with their red tokens at the finish, happy expressions, opposing team not needed."
+  },
+  {
+    "index": 818,
+    "ko": "진 팀",
+    "en": "the losing team",
+    "slug": "unit16_123_the_losing_team",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 진 팀. Meaning: the losing team. Scene: Two teammates looking mildly disappointed beside a yut board after the match, their tokens still on the path and their opponents' finish tokens visible; no humiliation or despair."
+  },
+  {
+    "index": 819,
+    "ko": "강강술래",
+    "en": "ganggangsullae, the circle dance",
+    "slug": "unit16_124_ganggangsullae_the_circle_dance",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 강강술래. Meaning: ganggangsullae, the circle dance. Scene: Eight Korean women in traditional hanbok holding hands in a clear closed circle, dancing beneath a full moon, three-quarter overhead view showing continuous ring and no crossed or extra limbs. Ganggangsullae harvest circle dance."
+  },
+  {
+    "index": 820,
+    "ko": "전통 놀이나 노래",
+    "en": "a traditional game or song",
+    "slug": "unit16_125_a_traditional_game_or_song",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 전통 놀이나 노래. Meaning: a traditional game or song. Scene: A small group in hanbok singing together while one taps a traditional hand drum and a yut set rests nearby; convey a traditional game or song gathering, no modern microphone."
+  },
+  {
+    "index": 821,
+    "ko": "진도",
+    "en": "Jindo, the island the song comes from",
+    "slug": "unit16_126_jindo_the_island_the_song_comes_from",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 진도. Meaning: Jindo, the island the song comes from. Scene: A small scenic view of Jindo island's coastal hills and blue tidal shore with a Korean folk dancer in hanbok in the foreground, conceptual landscape rather than a geographic map, no invented outline or lettering."
+  },
+  {
+    "index": 822,
+    "ko": "유음화",
+    "en": "lateralisation — ㄴ read as [ㄹ] beside ㄹ",
+    "slug": "unit16_127_lateralisation_read_as_beside",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 유음화. Meaning: lateralisation — ㄴ read as [ㄹ] beside ㄹ. Scene: An educational Korean pronunciation mini-illustration with exact text '신라 → 실라' on two small plain paper strips, a speaker's mouth and a gentle sound arrow between them. Clearly readable Hangul, no extra letters; illustrates ㄴ becoming ㄹ beside ㄹ."
+  },
+  {
+    "index": 823,
+    "ko": "생일날",
+    "en": "one’s birthday, the day itself",
+    "slug": "unit16_128_one_s_birthday_the_day_itself",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 생일날. Meaning: one’s birthday, the day itself. Scene: A birthday calendar date marked by a small birthday cake with candles and a wrapped present, focus on the special day rather than a large party, only simple date number 8."
+  },
+  {
+    "index": 824,
+    "ko": "실내",
+    "en": "indoors; the inside of a building",
+    "slug": "unit16_129_indoors_the_inside_of_a_building",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 실내. Meaning: indoors; the inside of a building. Scene: A cozy cutaway room with a person sitting safely inside by a window while rain falls outdoors, roof and room boundary visible; emphasize interior space."
+  },
+  {
+    "index": 825,
+    "ko": "사물놀이 공연",
+    "en": "a samulnori performance",
+    "slug": "unit16_130_a_samulnori_performance",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 사물놀이 공연. Meaning: a samulnori performance. Scene: Exactly four Korean samulnori performers in white traditional clothing with colored sashes, each playing a distinct instrument: small hand gong kkwaenggwari, large hanging gong jing, hourglass janggu drum, barrel buk drum. Instruments clearly differentiated, compact ensemble, no extra instruments."
+  },
+  {
+    "index": 826,
+    "ko": "일 년",
+    "en": "one year",
+    "slug": "unit16_131_one_year",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 일 년. Meaning: one year. Scene: Two adjacent calendar sheets with the same month and date, years '2026' and '2027', linked by a forward arrow; one complete year elapsed, only those two year numbers and small date marks."
+  },
+  {
+    "index": 827,
+    "ko": "사진이 잘 나오다",
+    "en": "for a photo to come out well",
+    "slug": "unit16_132_for_a_photo_to_come_out_well",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 사진이 잘 나오다. Meaning: for a photo to come out well. Scene: A happy photographer showing a sharp well-composed portrait on a camera's rear screen to the smiling subject standing beside them; successful clear photo, no duplicated faces or garbled text."
+  },
+  {
+    "index": 828,
+    "ko": "날",
+    "en": "a day",
+    "slug": "unit16_133_a_day",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Korean headword: 날. Meaning: a day. Scene: A single daily calendar leaf with date number 15, small sun rising and setting as a gentle arc behind it; one ordinary day, no birthday or holiday decorations."
+  },
+  {
+    "index": 829,
+    "ko": "",
+    "en": "Yut throw: do",
+    "slug": "unit16_yut_do",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Exactly FOUR separate Korean yut wooden half-cylinder sticks laid parallel with clear gaps, in a slightly overhead view. Exactly 1 sticks with the FLAT cut face facing UP (broad pale flat rectangle, visible straight edges) and exactly 3 sticks with the ROUNDED bark face UP (curved honey-brown ridge and shaded sides). All four same size and fully visible. No other objects, no text, no X marks, no numbers. Make flat and rounded faces unambiguous. This teaches the do throw."
+  },
+  {
+    "index": 830,
+    "ko": "",
+    "en": "Yut throw: gae",
+    "slug": "unit16_yut_gae",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Exactly FOUR separate Korean yut wooden half-cylinder sticks laid parallel with clear gaps, in a slightly overhead view. Exactly 2 sticks with the FLAT cut face facing UP (broad pale flat rectangle, visible straight edges) and exactly 2 sticks with the ROUNDED bark face UP (curved honey-brown ridge and shaded sides). All four same size and fully visible. No other objects, no text, no X marks, no numbers. Make flat and rounded faces unambiguous. This teaches the gae throw."
+  },
+  {
+    "index": 831,
+    "ko": "",
+    "en": "Yut throw: geol",
+    "slug": "unit16_yut_geol",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Exactly FOUR separate Korean yut wooden half-cylinder sticks laid parallel with clear gaps, in a slightly overhead view. Exactly 3 sticks with the FLAT cut face facing UP (broad pale flat rectangle, visible straight edges) and exactly 1 sticks with the ROUNDED bark face UP (curved honey-brown ridge and shaded sides). All four same size and fully visible. No other objects, no text, no X marks, no numbers. Make flat and rounded faces unambiguous. This teaches the geol throw."
+  },
+  {
+    "index": 832,
+    "ko": "",
+    "en": "Yut throw: yut",
+    "slug": "unit16_yut_yut",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Exactly FOUR separate Korean yut wooden half-cylinder sticks laid parallel with clear gaps, in a slightly overhead view. Exactly 4 sticks with the FLAT cut face facing UP (broad pale flat rectangle, visible straight edges) and exactly 0 sticks with the ROUNDED bark face UP (curved honey-brown ridge and shaded sides). All four same size and fully visible. No other objects, no text, no X marks, no numbers. Make flat and rounded faces unambiguous. This teaches the yut throw."
+  },
+  {
+    "index": 833,
+    "ko": "",
+    "en": "Yut throw: mo",
+    "slug": "unit16_yut_mo",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. Exactly FOUR separate Korean yut wooden half-cylinder sticks laid parallel with clear gaps, in a slightly overhead view. Exactly 0 sticks with the FLAT cut face facing UP (broad pale flat rectangle, visible straight edges) and exactly 4 sticks with the ROUNDED bark face UP (curved honey-brown ridge and shaded sides). All four same size and fully visible. No other objects, no text, no X marks, no numbers. Make flat and rounded faces unambiguous. This teaches the mo throw."
+  },
+  {
+    "index": 834,
+    "ko": "",
+    "en": "Taking a cat to the vet",
+    "slug": "unit16_cat_vet",
+    "prompt": "Single production vocabulary sprite for Hangeul Valley. Premium cozy 16-bit pixel art, crisp deliberate square pixel clusters, warm natural colors, dark umber outlines, charming readable chibi people when needed. Simple isolated composition understandable at 192px height. Entire subject visible with generous margins. Genuinely transparent background, no painted checkerboard, no badges or decorative frames, no labels unless explicitly requested. Not a spritesheet. A friendly veterinarian wearing a white coat and stethoscope gently examines a calm orange cat on a low veterinary examination table. Clearly a veterinary visit, no human patient, no medicine being forced, no text."
+  }
+]

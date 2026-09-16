@@ -1,3 +1,9 @@
+# Unit 16 — historical artwork brief
+
+> **Completed 2026-09-16:** All 139 illustrations are reviewed and integrated (133 vocabulary + six exercise images). See [current design record](unit16-design.md). The text below records the original pre-design requirements; its missing-art counts are historical.
+
+---
+
 # Unit 16 · the art that is not here yet
 
 Unit 16 (16과 설날에는 밥 대신 떡국을 먹어요) shipped complete except for its pictures: word

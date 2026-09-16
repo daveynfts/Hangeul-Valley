@@ -159,6 +159,24 @@ function cleanItem(item, i, where, type, chipIds) {
 // single choice is not a question. Distractors are the whole point here: the
 // learner should be choosing between 들은 and 듣은, not picking the only button
 // on the row.
+function cleanLocalArt(raw, at) {
+  const art = str(raw);
+  if (art && !/^(foods|items|quiz)\/[a-z0-9_]+\.png$/.test(art)) {
+    throw new Error(`${at}: art must name a local sprite`);
+  }
+  return art;
+}
+
+function cleanVisualGuide(raw, at) {
+  if (!Array.isArray(raw) || raw.length > 16) throw new Error(`${at}: visual guide needs at most 16 pictures`);
+  return raw.map(p => {
+    const art = cleanLocalArt(p && p.art, at);
+    const ko = str(p && p.ko);
+    if (!art || !ko) throw new Error(`${at}: guide pictures need art and Korean labels`);
+    return { art, ko };
+  });
+}
+
 function cleanChoiceList(raw, at, what) {
   const list = Array.isArray(raw) ? raw : [];
   if (list.length < 2) throw new Error(`${at}: ${what}needs at least two choices`);
@@ -170,7 +188,10 @@ function cleanChoiceList(raw, at, what) {
     if (!ko) throw new Error(`${at}: choice "${id}" needs Korean text`);
     if (ids.has(id)) throw new Error(`${at}: duplicate choice id "${id}"`);
     ids.add(id);
-    return { id, ko };
+    const out = { id, ko };
+    const art = cleanLocalArt(c.art, at);
+    if (art) out.art = art;
+    return out;
   });
   return { choices, ids };
 }
@@ -328,6 +349,7 @@ function cleanExercise(ex, i, seenIds) {
         no: str(ex.ownLabels && ex.ownLabels.no) || '없어요'
       };
     }
+    if (ex.visualGuide) out.visualGuide = cleanVisualGuide(ex.visualGuide, where);
     out.items = cleaned;
     if (ex.example && type === 'build') {
       // A 'build' example has no shared box to borrow its answer from, so the
@@ -401,6 +423,7 @@ function cleanExercise(ex, i, seenIds) {
   // for the two per-question types only and dropped for everything else, so a
   // 문법과 표현 page built out of one shared box came back without it.
   const pattern = str(ex.pattern);
+  if (ex.visualGuide) out.visualGuide = cleanVisualGuide(ex.visualGuide, where);
   if (pattern) out.pattern = pattern;
   out.bank = chips;
   out.items = cleaned;

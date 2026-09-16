@@ -5223,7 +5223,11 @@ function renderWorkbook() {
     inst.innerHTML =
       '<div class="wb-inst-ko">' + vbEsc(head.instructionKo || '') + '</div>' +
       '<div class="wb-inst-en">' + vbEsc(tr(head, 'instructionEn') || '') + '</div>' +
-      (ex.noteEn ? '<div class="wb-inst-note">' + vbEsc(tr(ex, 'noteEn')) + '</div>' : '');
+      (ex.noteEn ? '<div class="wb-inst-note">' + vbEsc(tr(ex, 'noteEn')) + '</div>' : '') +
+      ((ex.visualGuide && typeof workbookIconSvg === 'function')
+        ? '<div class="wb-visual-guide">' + ex.visualGuide.map(p =>
+          '<figure>' + workbookIconSvg(p.art, 7) + '<figcaption>' + vbEsc(p.ko) + '</figcaption></figure>'
+        ).join('') + '</div>' : '');
   }
 
   const exBox = $('wb-example');
@@ -5373,6 +5377,11 @@ function renderWorkbook() {
               + (st.checked && c.id === answer ? ' key' : '');
             b.disabled = st.checked;
             b.innerHTML = '<span class="wb-chip-key">' + (++key) + '</span>' + vbEsc(c.ko);
+            if (c.art && typeof workbookIconSvg === 'function') {
+              b.className += ' wb-pick-picture';
+              b.innerHTML = '<span class="wb-chip-key">' + key + '</span>' +
+                workbookIconSvg(c.art, 7) + '<span>' + vbEsc(c.ko) + '</span>';
+            }
             b.onclick = () => wbPickChoice(i, c.id, slot);
             picks.appendChild(b);
           });

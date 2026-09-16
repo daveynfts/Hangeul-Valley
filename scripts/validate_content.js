@@ -1474,9 +1474,9 @@ const overlayIds = [
   }));
   check('and no quiz button is a sentence the 교과서 or 익힘책 already drills',
     repeats.length === 0, repeats.join(', '));
-  check('the Unit 16 quiz says why it has no art',
+  check('the Unit 16 quiz records reviewed artwork',
     String(bank.artNote || '').length > 200, String(bank.artNote || '').length + ' chars');
-  const claimsArt = qs.filter((q) => q.art).map((q) => q.id);
+  const claimsArt = qs.filter((q) => q.art && !fs.existsSync(path.join(ROOT, 'sprites', q.art))).map((q) => q.id);
   check('and no row claims a picture it does not have', claimsArt.length === 0, claimsArt.join(', '));
 }());
 

@@ -4847,6 +4847,1070 @@ const UNIT_VOCAB_ART_ROWS = [
     "slug": "unit15_to_get_better_to_come_right",
     "worldId": "2b-unit-15",
     "cooking": false
+  },
+  {
+    "ko": "명절",
+    "nameEn": "traditional holidays",
+    "folder": "items",
+    "slug": "unit16_001_traditional_holidays",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "설날",
+    "nameEn": "Seollal, the lunar New Year",
+    "folder": "items",
+    "slug": "unit16_002_seollal_the_lunar_new_year",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "추석",
+    "nameEn": "Chuseok, the autumn harvest holiday",
+    "folder": "items",
+    "slug": "unit16_003_chuseok_the_autumn_harvest_holiday",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "한복을 입다",
+    "nameEn": "to wear Korean traditional dress",
+    "folder": "items",
+    "slug": "unit16_004_to_wear_korean_traditional_dress",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "고향에 가다",
+    "nameEn": "to go to one’s hometown",
+    "folder": "items",
+    "slug": "unit16_005_to_go_to_one_s_hometown",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "세배(를) 하다",
+    "nameEn": "to give a New Year’s bow",
+    "folder": "items",
+    "slug": "unit16_006_to_give_a_new_year_s_bow",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "성묘(를) 하다",
+    "nameEn": "to visit and tend an ancestor’s grave",
+    "folder": "items",
+    "slug": "unit16_007_to_visit_and_tend_an_ancestor_s_grave",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "차례를 지내다",
+    "nameEn": "to perform the ancestral rites",
+    "folder": "items",
+    "slug": "unit16_008_to_perform_the_ancestral_rites",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "윷놀이(를) 하다",
+    "nameEn": "to play Yut",
+    "folder": "items",
+    "slug": "unit16_009_to_play_yut",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "음식을 차리다",
+    "nameEn": "to set the table with food",
+    "folder": "items",
+    "slug": "unit16_010_to_set_the_table_with_food",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "어른들께 세배를 하다",
+    "nameEn": "to bow to one’s elders at New Year",
+    "folder": "items",
+    "slug": "unit16_011_to_bow_to_one_s_elders_at_new_year",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "연휴",
+    "nameEn": "a long holiday weekend",
+    "folder": "items",
+    "slug": "unit16_012_a_long_holiday_weekend",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "떡국",
+    "nameEn": "rice-cake soup",
+    "folder": "foods",
+    "slug": "unit16_013_rice_cake_soup",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "빈대떡",
+    "nameEn": "mung-bean pancake",
+    "folder": "foods",
+    "slug": "unit16_014_mung_bean_pancake",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "송편",
+    "nameEn": "half-moon-shaped rice cake",
+    "folder": "foods",
+    "slug": "unit16_015_half_moon_shaped_rice_cake",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "한과",
+    "nameEn": "Korean traditional sweets",
+    "folder": "foods",
+    "slug": "unit16_016_korean_traditional_sweets",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "식혜",
+    "nameEn": "sweet rice punch",
+    "folder": "foods",
+    "slug": "unit16_017_sweet_rice_punch",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "음력",
+    "nameEn": "the lunar calendar",
+    "folder": "items",
+    "slug": "unit16_018_the_lunar_calendar",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "전통",
+    "nameEn": "tradition",
+    "folder": "items",
+    "slug": "unit16_019_tradition",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "전날",
+    "nameEn": "the day before",
+    "folder": "items",
+    "slug": "unit16_020_the_day_before",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "기차표",
+    "nameEn": "a train ticket",
+    "folder": "items",
+    "slug": "unit16_021_a_train_ticket",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "서두르다",
+    "nameEn": "to hurry",
+    "folder": "items",
+    "slug": "unit16_022_to_hurry",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "특별한 음식",
+    "nameEn": "a special dish for the day",
+    "folder": "foods",
+    "slug": "unit16_023_a_special_dish_for_the_day",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "집안일",
+    "nameEn": "housework",
+    "folder": "items",
+    "slug": "unit16_024_housework",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "방을 닦다",
+    "nameEn": "to wipe the room clean",
+    "folder": "items",
+    "slug": "unit16_025_to_wipe_the_room_clean",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "장을 미리 보다",
+    "nameEn": "to do the grocery shopping in advance",
+    "folder": "items",
+    "slug": "unit16_026_to_do_the_grocery_shopping_in_advance",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "설거지(를) 하다",
+    "nameEn": "to wash the dishes",
+    "folder": "items",
+    "slug": "unit16_027_to_wash_the_dishes",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "세탁기를 돌리다",
+    "nameEn": "to run the washing machine",
+    "folder": "items",
+    "slug": "unit16_028_to_run_the_washing_machine",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "청소기를 돌리다",
+    "nameEn": "to vacuum",
+    "folder": "items",
+    "slug": "unit16_029_to_vacuum",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "대청소를 하다",
+    "nameEn": "to do a big clean-up",
+    "folder": "items",
+    "slug": "unit16_030_to_do_a_big_clean_up",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "밤늦게",
+    "nameEn": "late at night",
+    "folder": "items",
+    "slug": "unit16_031_late_at_night",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "마트",
+    "nameEn": "a supermarket",
+    "folder": "items",
+    "slug": "unit16_032_a_supermarket",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "청소를 하다",
+    "nameEn": "to clean up",
+    "folder": "items",
+    "slug": "unit16_033_to_clean_up",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "V-아/어 놓다",
+    "nameEn": "to do something and leave it done",
+    "folder": "items",
+    "slug": "unit16_034_to_do_something_and_leave_it_done",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "예매하다",
+    "nameEn": "to book a ticket in advance",
+    "folder": "items",
+    "slug": "unit16_035_to_book_a_ticket_in_advance",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "창문을 열다",
+    "nameEn": "to open the window",
+    "folder": "items",
+    "slug": "unit16_036_to_open_the_window",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "미리 사다",
+    "nameEn": "to buy something in advance",
+    "folder": "items",
+    "slug": "unit16_037_to_buy_something_in_advance",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "문을 닫다",
+    "nameEn": "to close for the day",
+    "folder": "items",
+    "slug": "unit16_038_to_close_for_the_day",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "돈을 찾다",
+    "nameEn": "to withdraw money",
+    "folder": "items",
+    "slug": "unit16_039_to_withdraw_money",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "종이에 쓰다",
+    "nameEn": "to write it down on paper",
+    "folder": "items",
+    "slug": "unit16_040_to_write_it_down_on_paper",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "냉장고에 넣다",
+    "nameEn": "to put something in the fridge",
+    "folder": "items",
+    "slug": "unit16_041_to_put_something_in_the_fridge",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "N 대신",
+    "nameEn": "instead of N",
+    "folder": "items",
+    "slug": "unit16_042_instead_of_n",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "소금을 넣다",
+    "nameEn": "to add salt",
+    "folder": "items",
+    "slug": "unit16_043_to_add_salt",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "간장을 넣다",
+    "nameEn": "to use soy sauce",
+    "folder": "items",
+    "slug": "unit16_044_to_use_soy_sauce",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "여권을 보여 주다",
+    "nameEn": "to show one’s passport",
+    "folder": "items",
+    "slug": "unit16_045_to_show_one_s_passport",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "택시비",
+    "nameEn": "the taxi fare",
+    "folder": "items",
+    "slug": "unit16_046_the_taxi_fare",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "현금",
+    "nameEn": "cash",
+    "folder": "items",
+    "slug": "unit16_047_cash",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "주소를 쓰다",
+    "nameEn": "to write down an address",
+    "folder": "items",
+    "slug": "unit16_048_to_write_down_an_address",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "해외여행",
+    "nameEn": "overseas travel",
+    "folder": "items",
+    "slug": "unit16_049_overseas_travel",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "국내 여행",
+    "nameEn": "domestic travel",
+    "folder": "items",
+    "slug": "unit16_050_domestic_travel",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "문자",
+    "nameEn": "a text message",
+    "folder": "items",
+    "slug": "unit16_051_a_text_message",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "V-(으)ㄹ까 하다",
+    "nameEn": "to be thinking of doing something",
+    "folder": "items",
+    "slug": "unit16_052_to_be_thinking_of_doing_something",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "여름휴가",
+    "nameEn": "the summer holiday",
+    "folder": "items",
+    "slug": "unit16_053_the_summer_holiday",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "가까운 곳",
+    "nameEn": "somewhere close by",
+    "folder": "items",
+    "slug": "unit16_054_somewhere_close_by",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "A/V-(으)ㄹ 테니까",
+    "nameEn": "since it will be ~, so …",
+    "folder": "items",
+    "slug": "unit16_055_since_it_will_be_so",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "두껍다",
+    "nameEn": "to be thick",
+    "folder": "items",
+    "slug": "unit16_056_to_be_thick",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "수업 중",
+    "nameEn": "in the middle of a class",
+    "folder": "items",
+    "slug": "unit16_057_in_the_middle_of_a_class",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "호텔을 알아보다",
+    "nameEn": "to look into a hotel",
+    "folder": "items",
+    "slug": "unit16_058_to_look_into_a_hotel",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "여행 준비",
+    "nameEn": "trip preparations",
+    "folder": "items",
+    "slug": "unit16_059_trip_preparations",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "비행기 표",
+    "nameEn": "a plane ticket",
+    "folder": "items",
+    "slug": "unit16_060_a_plane_ticket",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "환전",
+    "nameEn": "changing money",
+    "folder": "items",
+    "slug": "unit16_061_changing_money",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "가이드북",
+    "nameEn": "a guidebook",
+    "folder": "items",
+    "slug": "unit16_062_a_guidebook",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "모자라다",
+    "nameEn": "to run short",
+    "folder": "items",
+    "slug": "unit16_063_to_run_short",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "졸리다",
+    "nameEn": "to be sleepy",
+    "folder": "items",
+    "slug": "unit16_064_to_be_sleepy",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "고향에 내려가다",
+    "nameEn": "to go down to one’s hometown",
+    "folder": "items",
+    "slug": "unit16_065_to_go_down_to_one_s_hometown",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "표",
+    "nameEn": "a ticket",
+    "folder": "items",
+    "slug": "unit16_066_a_ticket",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "끓이다",
+    "nameEn": "to boil something",
+    "folder": "items",
+    "slug": "unit16_067_to_boil_something",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "초대하다",
+    "nameEn": "to invite someone over",
+    "folder": "items",
+    "slug": "unit16_068_to_invite_someone_over",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "반 친구",
+    "nameEn": "a classmate",
+    "folder": "items",
+    "slug": "unit16_069_a_classmate",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "빈대떡을 부치다",
+    "nameEn": "to fry mung-bean pancakes",
+    "folder": "items",
+    "slug": "unit16_070_to_fry_mung_bean_pancakes",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "재료를 미리 사다",
+    "nameEn": "to buy the ingredients in advance",
+    "folder": "items",
+    "slug": "unit16_071_to_buy_the_ingredients_in_advance",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "만들 줄 알다",
+    "nameEn": "to know how to make something",
+    "folder": "items",
+    "slug": "unit16_072_to_know_how_to_make_something",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "도와주다",
+    "nameEn": "to give someone a hand",
+    "folder": "items",
+    "slug": "unit16_073_to_give_someone_a_hand",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "가르쳐 주다",
+    "nameEn": "to show someone how",
+    "folder": "items",
+    "slug": "unit16_074_to_show_someone_how",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "음식 준비",
+    "nameEn": "getting the food ready",
+    "folder": "items",
+    "slug": "unit16_075_getting_the_food_ready",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "송별회",
+    "nameEn": "a farewell party",
+    "folder": "items",
+    "slug": "unit16_076_a_farewell_party",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "의논하다",
+    "nameEn": "to talk something over",
+    "folder": "items",
+    "slug": "unit16_077_to_talk_something_over",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "전화로 예약하다",
+    "nameEn": "to book by telephone",
+    "folder": "items",
+    "slug": "unit16_078_to_book_by_telephone",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "연락(을) 하다",
+    "nameEn": "to get in touch",
+    "folder": "items",
+    "slug": "unit16_079_to_get_in_touch",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "발표 원고",
+    "nameEn": "a presentation script",
+    "folder": "items",
+    "slug": "unit16_080_a_presentation_script",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "부탁",
+    "nameEn": "a favour to ask",
+    "folder": "items",
+    "slug": "unit16_081_a_favour_to_ask",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "부탁을 들어주다",
+    "nameEn": "to grant someone’s request",
+    "folder": "items",
+    "slug": "unit16_082_to_grant_someone_s_request",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "거절을 하다",
+    "nameEn": "to turn a request down",
+    "folder": "items",
+    "slug": "unit16_083_to_turn_a_request_down",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "서울역",
+    "nameEn": "Seoul Station",
+    "folder": "items",
+    "slug": "unit16_084_seoul_station",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "앵커",
+    "nameEn": "a news anchor",
+    "folder": "items",
+    "slug": "unit16_085_a_news_anchor",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "형님",
+    "nameEn": "one’s older brother",
+    "folder": "items",
+    "slug": "unit16_086_one_s_older_brother",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "도와 드리다",
+    "nameEn": "to help someone senior",
+    "folder": "items",
+    "slug": "unit16_087_to_help_someone_senior",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "다녀오다",
+    "nameEn": "to go somewhere and come back",
+    "folder": "items",
+    "slug": "unit16_088_to_go_somewhere_and_come_back",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "말씀",
+    "nameEn": "what someone says, honorific",
+    "folder": "items",
+    "slug": "unit16_089_what_someone_says_honorific",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "곤란한 부탁",
+    "nameEn": "a request that is hard to grant",
+    "folder": "items",
+    "slug": "unit16_090_a_request_that_is_hard_to_grant",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "고양이",
+    "nameEn": "a cat",
+    "folder": "items",
+    "slug": "unit16_091_a_cat",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "맡아 주다",
+    "nameEn": "to look after something for someone",
+    "folder": "items",
+    "slug": "unit16_092_to_look_after_something_for_someone",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "고양이를 맡기다",
+    "nameEn": "to leave a cat in someone’s care",
+    "folder": "items",
+    "slug": "unit16_093_to_leave_a_cat_in_someone_s_care",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "이틀 동안",
+    "nameEn": "for two days",
+    "folder": "items",
+    "slug": "unit16_094_for_two_days",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "큰일이다",
+    "nameEn": "to be a real problem",
+    "folder": "items",
+    "slug": "unit16_095_to_be_a_real_problem",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "잘 봐 주다",
+    "nameEn": "to take good care of something",
+    "folder": "items",
+    "slug": "unit16_096_to_take_good_care_of_something",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "필요한 것",
+    "nameEn": "the things that are needed",
+    "folder": "items",
+    "slug": "unit16_097_the_things_that_are_needed",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "명절을 보내다",
+    "nameEn": "to spend the holidays",
+    "folder": "items",
+    "slug": "unit16_098_to_spend_the_holidays",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "농사",
+    "nameEn": "farming",
+    "folder": "items",
+    "slug": "unit16_099_farming",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "조상",
+    "nameEn": "an ancestor",
+    "folder": "items",
+    "slug": "unit16_100_an_ancestor",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "한 해",
+    "nameEn": "a year",
+    "folder": "items",
+    "slug": "unit16_101_a_year",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "추수하다",
+    "nameEn": "to bring in the harvest",
+    "folder": "items",
+    "slug": "unit16_102_to_bring_in_the_harvest",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "곡식",
+    "nameEn": "grain; crops",
+    "folder": "items",
+    "slug": "unit16_103_grain_crops",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "나눠 먹다",
+    "nameEn": "to share food out",
+    "folder": "items",
+    "slug": "unit16_104_to_share_food_out",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "오랜만에 만나다",
+    "nameEn": "to meet after a long time",
+    "folder": "items",
+    "slug": "unit16_105_to_meet_after_a_long_time",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "친척",
+    "nameEn": "a relative",
+    "folder": "items",
+    "slug": "unit16_106_a_relative",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "즐거운 시간을 보내다",
+    "nameEn": "to have a good time",
+    "folder": "items",
+    "slug": "unit16_107_to_have_a_good_time",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "전통 놀이",
+    "nameEn": "a traditional game",
+    "folder": "items",
+    "slug": "unit16_108_a_traditional_game",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "씨름",
+    "nameEn": "ssireum, Korean wrestling",
+    "folder": "items",
+    "slug": "unit16_109_ssireum_korean_wrestling",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "보름달",
+    "nameEn": "the full moon",
+    "folder": "items",
+    "slug": "unit16_110_the_full_moon",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "소원을 빌다",
+    "nameEn": "to make a wish",
+    "folder": "items",
+    "slug": "unit16_111_to_make_a_wish",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "추석날",
+    "nameEn": "Chuseok day",
+    "folder": "items",
+    "slug": "unit16_112_chuseok_day",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "윷",
+    "nameEn": "the four yut sticks",
+    "folder": "items",
+    "slug": "unit16_113_the_four_yut_sticks",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "윷말",
+    "nameEn": "a yut token",
+    "folder": "items",
+    "slug": "unit16_114_a_yut_token",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "칸",
+    "nameEn": "a space on the board",
+    "folder": "items",
+    "slug": "unit16_115_a_space_on_the_board",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "던지다",
+    "nameEn": "to throw",
+    "folder": "items",
+    "slug": "unit16_116_to_throw",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "옮기다",
+    "nameEn": "to move something along",
+    "folder": "items",
+    "slug": "unit16_117_to_move_something_along",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "상대방",
+    "nameEn": "the other side; one’s opponent",
+    "folder": "items",
+    "slug": "unit16_118_the_other_side_one_s_opponent",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "잡히다",
+    "nameEn": "to be caught",
+    "folder": "items",
+    "slug": "unit16_119_to_be_caught",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "편을 나누다",
+    "nameEn": "to split into teams",
+    "folder": "items",
+    "slug": "unit16_120_to_split_into_teams",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "윷놀이 규칙",
+    "nameEn": "the rules of Yut",
+    "folder": "items",
+    "slug": "unit16_121_the_rules_of_yut",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "이긴 팀",
+    "nameEn": "the winning team",
+    "folder": "items",
+    "slug": "unit16_122_the_winning_team",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "진 팀",
+    "nameEn": "the losing team",
+    "folder": "items",
+    "slug": "unit16_123_the_losing_team",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "강강술래",
+    "nameEn": "ganggangsullae, the circle dance",
+    "folder": "items",
+    "slug": "unit16_124_ganggangsullae_the_circle_dance",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "전통 놀이나 노래",
+    "nameEn": "a traditional game or song",
+    "folder": "items",
+    "slug": "unit16_125_a_traditional_game_or_song",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "진도",
+    "nameEn": "Jindo, the island the song comes from",
+    "folder": "items",
+    "slug": "unit16_126_jindo_the_island_the_song_comes_from",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "유음화",
+    "nameEn": "lateralisation — ㄴ read as [ㄹ] beside ㄹ",
+    "folder": "items",
+    "slug": "unit16_127_lateralisation_read_as_beside",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "생일날",
+    "nameEn": "one’s birthday, the day itself",
+    "folder": "items",
+    "slug": "unit16_128_one_s_birthday_the_day_itself",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "실내",
+    "nameEn": "indoors; the inside of a building",
+    "folder": "items",
+    "slug": "unit16_129_indoors_the_inside_of_a_building",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "사물놀이 공연",
+    "nameEn": "a samulnori performance",
+    "folder": "items",
+    "slug": "unit16_130_a_samulnori_performance",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "일 년",
+    "nameEn": "one year",
+    "folder": "items",
+    "slug": "unit16_131_one_year",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "사진이 잘 나오다",
+    "nameEn": "for a photo to come out well",
+    "folder": "items",
+    "slug": "unit16_132_for_a_photo_to_come_out_well",
+    "worldId": "2b-unit-16",
+    "cooking": false
+  },
+  {
+    "ko": "날",
+    "nameEn": "a day",
+    "folder": "items",
+    "slug": "unit16_133_a_day",
+    "worldId": "2b-unit-16",
+    "cooking": false
   }
 ];
 const UNIT_WORKBOOK_ART_FILES = {

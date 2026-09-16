@@ -133,7 +133,7 @@ assert(Object.keys(vi.entries || {}).length === 250,
   'with a line for all 250 strings (found ' + Object.keys(vi.entries || {}).length + ')');
 // Two notes that say what the bank does NOT have. A save through the Workbooks tab used to
 // drop both, so they are asserted rather than assumed.
-assert(String(tb.artNote || '').length > 200, 'the art note says which pictures are missing');
+assert(String(tb.artNote || '').length > 200, 'the art note records the illustrated textbook pages');
 assert(String(tb.omittedNote || '').length > 200, 'and the omitted note says which pages have no key');
 assert(/어휘/.test(tb.artNote) && /과제/.test(tb.artNote) && /듣기 2/.test(tb.artNote),
   'and it names all three pages that leaned on a picture');
