@@ -19,6 +19,7 @@
     "worlds/2b-unit-14.json",
     "worlds/2b-unit-15.json",
     "worlds/2b-unit-16.json",
+    "worlds/2b-unit-17.json",
     "worlds/topik-2.json",
     "worlds/unit10-workbook.json",
     "worlds/unit10-textbook.json",
@@ -27,6 +28,8 @@
     "worlds/unit12-workbook.json",
     "worlds/unit16-workbook.json",
     "worlds/unit16-textbook.json",
+    "worlds/unit17-workbook.json",
+    "worlds/unit17-textbook.json",
     "worlds/unit13-workbook.json",
     "worlds/unit13-textbook.json",
     "worlds/unit14-workbook.json",
@@ -40,6 +43,7 @@
     "worlds/unit14-desk-quiz.json",
     "worlds/unit15-desk-quiz.json",
     "worlds/unit16-desk-quiz.json",
+    "worlds/unit17-desk-quiz.json",
     "worlds/topik2-desk-quiz.json",
     "worlds/unit10-cassette.json",
     "worlds/unit11-cassette.json",
@@ -47,7 +51,8 @@
     "worlds/unit13-cassette.json",
     "worlds/unit14-cassette.json",
     "worlds/unit15-cassette.json",
-    "worlds/unit16-cassette.json"
+    "worlds/unit16-cassette.json",
+    "worlds/unit17-cassette.json"
   ]
 }
 /* @hv-catalog-index-end */

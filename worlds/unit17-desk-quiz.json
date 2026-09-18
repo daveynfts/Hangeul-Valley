@@ -1,0 +1,167 @@
+{
+  "titleKo": "학습 책상",
+  "titleEn": "Lost and found quiz",
+  "sessionSize": 10,
+  "doneKo": "오늘 공부 끝!",
+  "againKo": "한 번 더",
+  "closeKo": "책상 닫기",
+  "correctKo": "맞아요!",
+  "wrongKo": "Answer:",
+  "artNote": "Original illustrations for 17과 are still to be drawn, so no question carries art yet. None of them needs one to be answerable: the two questions that come off the chapter’s picture pages — the colour forms and the dot pattern — are asked in words, and every other question is about a form rather than about a thing.",
+  "questions": [
+    {
+      "id": 1,
+      "q": "Which of the chapter’s four forms says that something very nearly happened and then did not?",
+      "a": "B",
+      "choices": {
+        "A": "V-아다/어다 주다",
+        "B": "V-(으)ㄹ 뻔하다",
+        "C": "V-아/어 있다",
+        "D": "A-아/어지다"
+      }
+    },
+    {
+      "id": 2,
+      "q": "뻔하다 attaches to which form of the verb in front of it?",
+      "a": "C",
+      "choices": {
+        "A": "-(으)ㄴ",
+        "B": "-았/었을",
+        "C": "-(으)ㄹ",
+        "D": "-는"
+      }
+    },
+    {
+      "id": 3,
+      "q": "\"길이 너무 막혀서 비행기를 ___ 뻔했어요.\" Which fits?",
+      "a": "A",
+      "choices": {
+        "A": "놓칠",
+        "B": "놓친",
+        "C": "놓쳐",
+        "D": "놓쳤을"
+      }
+    },
+    {
+      "id": 4,
+      "q": "뻔하다 is used in which tense?",
+      "a": "D",
+      "choices": {
+        "A": "the present — 뻔해요",
+        "B": "the future — 뻔할 거예요",
+        "C": "either present or past, as you like",
+        "D": "always the past — 뻔했어요"
+      }
+    },
+    {
+      "id": 5,
+      "q": "You drove your grandmother home. Which pair does the chapter use?",
+      "a": "B",
+      "choices": {
+        "A": "데려다 주었어요",
+        "B": "모셔다 드렸어요",
+        "C": "가져다 주었어요",
+        "D": "데려다 드렸어요"
+      }
+    },
+    {
+      "id": 6,
+      "q": "\"아이를 학교에 ___ 주고 왔어요.\" Which fits?",
+      "a": "A",
+      "choices": {
+        "A": "데려다",
+        "B": "모셔다",
+        "C": "가져다",
+        "D": "데리고"
+      }
+    },
+    {
+      "id": 7,
+      "q": "What does 가져다 주다 become when it is said quickly, as in ordering a pizza?",
+      "a": "C",
+      "choices": {
+        "A": "가지다 주다",
+        "B": "가져 주다",
+        "C": "갖다 주다",
+        "D": "가지고 주다"
+      }
+    },
+    {
+      "id": 8,
+      "q": "까맣다 with -(으)ㄴ in front of a noun gives which form?",
+      "a": "A",
+      "choices": {
+        "A": "까만",
+        "B": "까맣은",
+        "C": "까매",
+        "D": "까마는"
+      }
+    },
+    {
+      "id": 9,
+      "q": "하얗다 with -아요/어요 gives which form?",
+      "a": "D",
+      "choices": {
+        "A": "하얗아요",
+        "B": "하야요",
+        "C": "하애요",
+        "D": "하얘요"
+      }
+    },
+    {
+      "id": 10,
+      "q": "Which ending leaves the ㅎ of 빨갛다 exactly where it is?",
+      "a": "B",
+      "choices": {
+        "A": "-아요/어요",
+        "B": "-고",
+        "C": "-(으)ㄴ",
+        "D": "-(으)니까"
+      }
+    },
+    {
+      "id": 11,
+      "q": "\"창문이 ___ 있어요.\" The window is open. Which fits?",
+      "a": "C",
+      "choices": {
+        "A": "열고",
+        "B": "열어",
+        "C": "열려",
+        "D": "여는"
+      }
+    },
+    {
+      "id": 12,
+      "q": "What does 옷을 걸고 있어요 say that 옷이 걸려 있어요 does not?",
+      "a": "A",
+      "choices": {
+        "A": "that somebody is doing the hanging right now",
+        "B": "that the clothes have been there a long time",
+        "C": "that the clothes are in a wardrobe rather than on a hook",
+        "D": "nothing — the two mean the same thing"
+      }
+    },
+    {
+      "id": 13,
+      "q": "The chapter’s 발음 rule: a 받침 ㄴ standing in front of a ㄹ is read how?",
+      "a": "B",
+      "choices": {
+        "A": "[ㄴ], as written",
+        "B": "[ㄹ]",
+        "C": "[ㅇ]",
+        "D": "it is not said at all"
+      }
+    },
+    {
+      "id": 14,
+      "q": "Which of these is the pattern of scattered round dots?",
+      "a": "D",
+      "choices": {
+        "A": "줄무늬",
+        "B": "체크무늬",
+        "C": "꽃무늬",
+        "D": "물방울무늬"
+      }
+    }
+  ]
+}

@@ -1,0 +1,2858 @@
+{
+  "id": "unit17-workbook",
+  "source": "Seoul National University Korean 2B Workbook, Unit 17 (printed pp.150-163), with the 정답 on printed pp.208-209",
+  "titleKo": "연습 문제",
+  "titleEn": "Workbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "One exercise at a time — pick where to start.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "artNote": "Four of the sixteen exercises are printed with drawings doing part of the asking. 어휘 연습 1 is entirely pictures — three greyscale things a row, and you write the colour they share — so each row here names the three instead and the answers come from the 정답 on printed p.208. 어휘 연습 2 and 문법과 표현 4 연습 1 print the pattern or the place in the drawing, and both are given in the dialogue here so the row can still be answered. The one row a picture genuinely decides is 문법과 표현 3 연습 3 item 4, which has two blanks and a photo of two garments: the 정답 on printed p.209 settles it as 하얀 셔츠 and 까만 바지, the same way Unit 16’s 방을 닦았어요 was settled.",
+  "omittedNote": "Nothing is left out. Every one of the sixteen exercises the 익힘책 prints for 17과 has an answer in the 정답 at the back, including the eight-by-six conjugation table at 문법과 표현 3 연습 1 — that one is taken a cell at a time rather than as forty-eight buttons, one cell per stem, covering every ending the table has a column for.",
+  "exercises": [
+    {
+      "id": "u17-vocab-1",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 1",
+      "icon": "🎨",
+      "pattern": "색깔",
+      "blurbEn": "Three things with a colour in common, four times over.",
+      "instructionKo": "그림을 보고 [보기]와 같이 공통적으로 떠오르는 색을 써 보세요.",
+      "instructionEn": "Write the colour that the three things have in common, as in the example.",
+      "noteEn": "The page gives each row as three greyscale drawings and nothing else, which is a colour question printed in the one medium that cannot show colour — the scan settles nothing and the answers come from the 정답 on p.208. The drawings are all nameable, so each row here lists what they are instead: milk, a snowman and a cloud rather than three grey shapes. The thing being decided is unchanged; only the looking is gone. This is also the one exercise in the bank whose wrong buttons have to be the other rows’ right answers, because the four rows share one set of five colours.",
+      "example": {
+        "lines": [
+          {
+            "ko": "머리, 타이어, 밤하늘의 공통된 색은 {}이에요."
+          }
+        ],
+        "answerKo": "까만색",
+        "en": "Hair, a tyre and the night sky have black in common."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "우유, 눈사람, 구름의 공통된 색은 {}이에요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "하얀색"
+            },
+            {
+              "id": "b",
+              "ko": "노란색"
+            },
+            {
+              "id": "c",
+              "ko": "초록색"
+            }
+          ],
+          "en": "Milk, a snowman and a cloud have white in common.",
+          "grammar": "하얀색 is the ㅎ-irregular 하얗다 with -ㄴ on it and 색 after: 하얀 + 색.",
+          "why": "노란색 is the banana row and 초록색 the leaf row. Milk, a snowman and a cloud are the three things in this unit that are white, and the 정답 on p.208 gives 하얀색."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "딸기, 사과, 우체통의 공통된 색은 {}이에요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "하얀색"
+            },
+            {
+              "id": "b",
+              "ko": "빨간색"
+            },
+            {
+              "id": "c",
+              "ko": "갈색"
+            }
+          ],
+          "en": "A strawberry, an apple and a postbox have red in common.",
+          "grammar": "빨간색 is 빨갛다 + -ㄴ + 색, the same ㅎ-irregular as 하얀색.",
+          "why": "A Korean postbox is red, which is what fixes this row — 갈색 would do for the strawberry stem and 하얀색 for nothing here. The 정답 gives 빨간색."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "바나나, 병아리, 레몬의 공통된 색은 {}이에요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "주황색"
+            },
+            {
+              "id": "b",
+              "ko": "초록색"
+            },
+            {
+              "id": "c",
+              "ko": "노란색"
+            }
+          ],
+          "en": "A banana, a chick and a lemon have yellow in common.",
+          "grammar": "노란색 is 노랗다 + -ㄴ + 색 — the third ㅎ-irregular colour in three rows.",
+          "why": "주황색 is the near miss: an orange is not a lemon and a chick is not orange. All three of these are yellow, and the 정답 gives 노란색."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "나뭇잎, 신호등, 완두콩의 공통된 색은 {}이에요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "초록색"
+            },
+            {
+              "id": "b",
+              "ko": "연두색"
+            },
+            {
+              "id": "c",
+              "ko": "파란색"
+            }
+          ],
+          "en": "A leaf, a traffic light and a pea have green in common.",
+          "grammar": "초록색 is the plain noun — no ㅎ-irregular in it, unlike the three rows above.",
+          "why": "연두색 is the lighter yellow-green and would fit a new leaf but not a traffic light; 파란색 is what a Korean green light is often called in speech, but the 정답 gives 초록색."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-vocab-2",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 2",
+      "icon": "👕",
+      "pattern": "무늬",
+      "blurbEn": "Four patterns, and the clothes each of them is on.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue as shown in the example.",
+      "noteEn": "Each row prints a garment and asks for its pattern, and the pattern is the only thing the drawing has to give — a stripe, a flower, a check, a dot. The colour is already written into the line, so the row can be answered from the sentence plus the name of the garment, which is how it is asked here. The four pattern words all end in 무늬, so what is being decided is the first half of a compound.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "어떤 게 저한테 더 어울려요?"
+          },
+          {
+            "who": "B",
+            "ko": "회색 {} 셔츠가 잘 어울리는 것 같은데요."
+          }
+        ],
+        "answerKo": "체크무늬",
+        "en": "A: Which suits me better? — B: I think the grey checked shirt suits you."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이 디자인으로 다른 바지는 없어요?"
+            },
+            {
+              "who": "B",
+              "ko": "노란색 {} 바지가 있어요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "줄무늬"
+            },
+            {
+              "id": "b",
+              "ko": "꽃무늬"
+            },
+            {
+              "id": "c",
+              "ko": "물방울무늬"
+            }
+          ],
+          "en": "A: Do you have these trousers in another design? — B: We have yellow floral ones.",
+          "grammar": "꽃무늬 is 꽃 + 무늬, said [꼰무니] — the ㅊ closes as [ㄷ] and the ㅁ turns it into [ㄴ].",
+          "why": "이 디자인으로 means the customer is asking for the same design in something else, and the trousers on the page are covered in flowers. 줄무늬 and 물방울무늬 are the other two rows; the 정답 gives 꽃무늬."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "저 티셔츠 좀 보여 주세요."
+            },
+            {
+              "who": "B",
+              "ko": "어떤 거요? 까만색 {} 티셔츠요?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "줄무늬"
+            },
+            {
+              "id": "b",
+              "ko": "체크무늬"
+            },
+            {
+              "id": "c",
+              "ko": "꽃무늬"
+            }
+          ],
+          "en": "A: Could you show me that t-shirt. — B: Which one? The black striped one?",
+          "grammar": "줄무늬 is 줄 + 무늬: a line and a pattern, so stripes.",
+          "why": "체크무늬 is the example’s own answer and 꽃무늬 is row 1’s, so neither can be this row’s. The t-shirt on the page is striped and the 정답 gives 줄무늬."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이 원피스 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "파란색 {}가 시원해 보이네요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "체크무늬"
+            },
+            {
+              "id": "b",
+              "ko": "줄무늬"
+            },
+            {
+              "id": "c",
+              "ko": "물방울무늬"
+            }
+          ],
+          "en": "A: How about this dress? — B: The blue polka dots look nice and cool.",
+          "grammar": "물방울무늬 is 물방울 (a droplet) + 무늬 — the dots are named after water, not after a dot.",
+          "why": "The blank takes 가 rather than 를, so the pattern is the subject of 시원해 보이다 — it is the dots that look cool, not the dress. 줄무늬 and 체크무늬 belong to the other rows, and the 정답 gives 물방울무늬."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-vocab-3",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 3",
+      "icon": "💥",
+      "pattern": "사고",
+      "blurbEn": "Seven things going wrong, and the word for each.",
+      "instructionKo": "그림을 보고 [보기]와 같이 알맞은 것을 골라 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue using the appropriate expression from the box.",
+      "noteEn": "The whole 어휘 page in one exercise: eight mishap verbs in a box and seven dialogues to put them in. What makes it harder than it looks is that the box gives dictionary forms and every blank wants something else — a guess (놓칠 것 같아요), a reason (잃어버려서), a past (불이 났어요), a cause (고장이 나서). The vocabulary is half the exercise and the ending is the other half.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "뭘 도와 드릴까요?"
+          },
+          {
+            "who": "B",
+            "ko": "아까 휴대 전화를 {} 전화가 잘 안돼요."
+          }
+        ],
+        "answerKo": "떨어뜨렸는데",
+        "en": "A: How can I help? — B: I dropped my mobile earlier and now it does not work."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "아저씨, 기차를 {}. 조금만 빨리 가 주세요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 알겠습니다."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "놓칠 것 같아요"
+            },
+            {
+              "id": "b",
+              "ko": "놓쳤어요"
+            },
+            {
+              "id": "c",
+              "ko": "놓칠 뻔했어요"
+            }
+          ],
+          "en": "A: Driver, I think I am going to miss my train. Could you go a little faster. — B: Certainly.",
+          "grammar": "놓치다 + -(으)ㄹ 것 같다 is a guess about what has not happened yet.",
+          "why": "조금만 빨리 가 주세요 only makes sense if the train can still be caught, so 놓쳤어요 is too late and 놓칠 뻔했어요 is already over. The 정답 gives 놓칠 것 같아요."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지갑 새로 샀네요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 지난주에 지갑을 {} 다시 샀어요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "잃어버렸는데"
+            },
+            {
+              "id": "b",
+              "ko": "잃어버리면"
+            },
+            {
+              "id": "c",
+              "ko": "잃어버려서"
+            }
+          ],
+          "en": "A: You have bought a new wallet. — B: Yes, I lost mine last week so I bought another.",
+          "grammar": "잃어버리다 + -아/어서 gives the reason the second thing happened.",
+          "why": "잃어버리면 makes it a condition that has not happened, and the wallet is already bought. 잃어버렸는데 would only set the scene; 지난주에 and 다시 샀어요 want a cause, and the 정답 gives 잃어버려서."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "거기 119지요? 여기 {}. 빨리 좀 와 주세요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 주소를 말씀해 주십시오."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "불이 날 뻔했어요"
+            },
+            {
+              "id": "b",
+              "ko": "불이 났어요"
+            },
+            {
+              "id": "c",
+              "ko": "불이 나요"
+            }
+          ],
+          "en": "A: Is that 119? There is a fire here. Please come quickly. — B: Yes, tell me the address.",
+          "grammar": "불(이) 나다 puts 이/가 on the fire: 불이 났어요, never 불을 냈어요.",
+          "why": "You do not ring the fire brigade about a fire that almost happened, so 불이 날 뻔했어요 is out; 불이 나요 states a habit. The 정답 gives 불이 났어요."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이마가 왜 그래요?"
+            },
+            {
+              "who": "B",
+              "ko": "식당 문에 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "부딪혔어요"
+            },
+            {
+              "id": "b",
+              "ko": "부딪힐 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "부딪혀요"
+            }
+          ],
+          "en": "A: What happened to your forehead? — B: I walked into the restaurant door.",
+          "grammar": "부딪히다 is the passive of 부딪다, and the thing you hit takes 에.",
+          "why": "이마가 왜 그래요 is asked about a mark that is there now, so it happened: 부딪힐 뻔했어요 leaves no mark and 부딪혀요 is a habit. The 정답 gives 부딪혔어요."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "왜 이렇게 길이 막히지요?"
+            },
+            {
+              "who": "B",
+              "ko": "저쪽에 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "사고가 날 뻔했어요"
+            },
+            {
+              "id": "b",
+              "ko": "사고가 나요"
+            },
+            {
+              "id": "c",
+              "ko": "사고가 났어요"
+            }
+          ],
+          "en": "A: Why is the traffic so bad? — B: There has been an accident over there.",
+          "grammar": "사고가 나다 takes 이/가 like 불이 나다 — both are things that happen rather than things you do.",
+          "why": "The traffic is stopped now, so the accident has happened: 사고가 날 뻔했어요 would not block a road and 사고가 나요 is a general statement. The 정답 gives 사고가 났어요."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "왜 다리를 다쳤어요?"
+            },
+            {
+              "who": "B",
+              "ko": "어제 길에서 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "넘어질 뻔했어요"
+            },
+            {
+              "id": "b",
+              "ko": "넘어졌어요"
+            },
+            {
+              "id": "c",
+              "ko": "넘어져요"
+            }
+          ],
+          "en": "A: How did you hurt your leg? — B: I fell over in the street yesterday.",
+          "grammar": "넘어지다 is falling over by yourself; 떨어뜨리다 is dropping something else.",
+          "why": "어제 and a hurt leg both say it happened, so 넘어질 뻔했어요 cannot be the answer — an almost-fall leaves nothing to treat. 넘어져요 is a habit. The 정답 gives 넘어졌어요."
+        },
+        {
+          "n": 7,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "왜 숙제를 못 했어요?"
+            },
+            {
+              "who": "B",
+              "ko": "노트북이 {} 못 했어요. 오늘 고쳐야 돼요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "고장이 나서"
+            },
+            {
+              "id": "b",
+              "ko": "고장이 났는데"
+            },
+            {
+              "id": "c",
+              "ko": "고장이 나면"
+            }
+          ],
+          "en": "A: Why could you not do the homework? — B: My laptop broke down so I could not. I have to get it fixed today.",
+          "grammar": "고장이 나다 takes 이/가 — the third 나다 in this exercise built the same way.",
+          "why": "왜 asks for a reason, and only -아/어서 gives one: 고장이 났는데 sets a scene and 고장이 나면 makes it a condition that has not happened, though 오늘 고쳐야 돼요 says it has. The 정답 gives 고장이 나서."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-grammar-1-1",
+      "section": "문법과 표현 1",
+      "sectionEn": "V-아다/어다 주다",
+      "no": "연습 1",
+      "icon": "🤝",
+      "pattern": "V-아다/어다 주다",
+      "blurbEn": "Five people taken somewhere, and who you may say 모시다 about.",
+      "instructionKo": "그림을 보고 [보기]와 같이 문장을 만들어 보세요.",
+      "instructionEn": "Create a sentence for each picture as shown in the example.",
+      "noteEn": "Each row prints two pictures with the two nouns written under them — 여자 친구 and 집, 할머니 and 댁 — so the row is buildable from the page without the drawings. The exercise is not really the ending, which is the same every time; it is choosing between 데려다 주다 and 모셔다 드리다, and that choice is made by who the person is. 할머니 and 아버지 take the humble pair, 여자 친구 and 동생 and 아이 take the plain one.",
+      "example": {
+        "lines": [
+          {
+            "ko": "부모님, 공항 → {}"
+          }
+        ],
+        "answerKo": "부모님을 공항에 모셔다 드렸어요",
+        "en": "My parents, the airport → I took my parents to the airport."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "여자 친구, 집 → {}"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "여자 친구를 집에 모셔다 드렸어요"
+            },
+            {
+              "id": "b",
+              "ko": "여자 친구를 집에 데려다 주었어요"
+            },
+            {
+              "id": "c",
+              "ko": "여자 친구를 집에 가져다 주었어요"
+            }
+          ],
+          "en": "I took my girlfriend home.",
+          "grammar": "데려다 주다 is for a person you do not have to be humble about; 모셔다 드리다 is for one you do.",
+          "why": "모셔다 드렸어요 would be talking about your girlfriend as if she were your grandmother. 가져다 주었어요 is for objects — 가지다 cannot take a person. The 정답 gives 여자 친구를 집에 데려다 주었어요."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "할머니, 댁 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "할머니를 댁에 모셔다 드렸어요"
+            },
+            {
+              "id": "b",
+              "ko": "할머니를 댁에 데려다 주었어요"
+            },
+            {
+              "id": "c",
+              "ko": "할머니를 집에 모셔다 드렸어요"
+            }
+          ],
+          "en": "I took my grandmother home.",
+          "grammar": "댁 is the honorific of 집, so it has to travel with 모셔다 드리다.",
+          "why": "데려다 주었어요 drops the respect the 할머니 and the 댁 have both already asked for. 할머니를 집에 모셔다 드렸어요 is only half-polite — the honorific verb with the plain noun. The 정답 gives 할머니를 댁에 모셔다 드렸어요."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "아버지, 병원 → {}"
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "아버지를 병원에 데려다 주었어요"
+            },
+            {
+              "id": "b",
+              "ko": "아버지가 병원에 모셔다 드렸어요"
+            },
+            {
+              "id": "c",
+              "ko": "아버지를 병원에 모셔다 드렸어요"
+            }
+          ],
+          "en": "I took my father to the hospital.",
+          "grammar": "모시다 takes 을/를 for the person being taken: 아버지를, not 아버지가.",
+          "why": "아버지가 makes the father the one doing the taking, which reverses the sentence. 데려다 주었어요 is the plain pair and 아버지 does not take it. The 정답 gives 아버지를 병원에 모셔다 드렸어요."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "동생, 학교 → {}"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "동생을 학교에 모셔다 드렸어요"
+            },
+            {
+              "id": "b",
+              "ko": "동생을 학교에 데려다 주었어요"
+            },
+            {
+              "id": "c",
+              "ko": "동생을 학교에 데려다 드렸어요"
+            }
+          ],
+          "en": "I took my younger sibling to school.",
+          "grammar": "데려다 주다 and 데려다 드리다 differ only in who is above you; 동생 is not.",
+          "why": "모셔다 드렸어요 is two steps too polite for a younger sibling. 데려다 드렸어요 is the half-step — the plain verb with the humble 드리다 — and is the same mistake in smaller form. The 정답 gives 동생을 학교에 데려다 주었어요."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "ko": "아이, 엄마 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "아이를 엄마에게 데려다 주었어요"
+            },
+            {
+              "id": "b",
+              "ko": "아이를 엄마에 데려다 주었어요"
+            },
+            {
+              "id": "c",
+              "ko": "아이를 엄마한테 모셔다 드렸어요"
+            }
+          ],
+          "en": "I took the child to its mother.",
+          "grammar": "에게 goes to a person and 에 to a place — the destination here is a person.",
+          "why": "엄마에 puts the place particle on a person. 모셔다 드렸어요 would be about the child, who is the one being carried, not the mother. The 정답 gives 아이를 엄마에게 데려다 주었어요."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-grammar-1-2",
+      "section": "문법과 표현 1",
+      "sectionEn": "V-아다/어다 주다",
+      "no": "연습 2",
+      "icon": "🛍️",
+      "pattern": "V-아다/어다 주다",
+      "blurbEn": "Four errands asked of someone who is already out.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Complete each dialogue as shown in the example.",
+      "noteEn": "The place is printed in B’s line — 마트, 도서관, 세탁소 — and the errand follows from it, which is what makes the row answerable without the picture. Each answer pairs a different verb with 주다: 사다 at the shop, 빌리다 at the library, 찾다 at the cleaner’s. The fourth row leaves the pattern behind and asks for delivery instead, which is why it is 갖다 주세요 rather than anything -아다/어다.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "지금 어디예요?"
+          },
+          {
+            "who": "B",
+            "ko": "커피숍에 있어요."
+          },
+          {
+            "who": "A",
+            "ko": "그럼 미안하지만 올 때 커피 한 잔만 {}."
+          }
+        ],
+        "answerKo": "사다 주세요",
+        "en": "A: Where are you? — B: At the coffee shop. — A: Then sorry, but could you buy me a coffee on your way."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금 어디예요?"
+            },
+            {
+              "who": "B",
+              "ko": "마트에 있어요."
+            },
+            {
+              "who": "A",
+              "ko": "그럼 미안하지만 올 때 우유 하나만 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "사다 주세요"
+            },
+            {
+              "id": "b",
+              "ko": "사 주세요"
+            },
+            {
+              "id": "c",
+              "ko": "사고 주세요"
+            }
+          ],
+          "en": "A: Where are you? — B: At the supermarket. — A: Then sorry, but could you buy a milk on your way.",
+          "grammar": "사다 주다 buys it there and carries it here; 사 주다 only buys it for you.",
+          "why": "사 주세요 is the form without the coming — it would be right if you were both in the shop. 사고 주세요 puts two finished actions side by side and loses the errand altogether. The 정답 gives 사다 주세요."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금 어디예요?"
+            },
+            {
+              "who": "B",
+              "ko": "도서관에 있어요."
+            },
+            {
+              "who": "A",
+              "ko": "그럼 미안하지만 올 때 책 한 권만 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "빌려 주세요"
+            },
+            {
+              "id": "b",
+              "ko": "빌려다 주세요"
+            },
+            {
+              "id": "c",
+              "ko": "빌리다 주세요"
+            }
+          ],
+          "en": "A: Where are you? — B: At the library. — A: Then sorry, but could you borrow a book for me on your way.",
+          "grammar": "빌리다 becomes 빌려 before -다 주다: 빌려다 주다, not 빌리다 주다.",
+          "why": "빌려 주세요 means lend me one of yours, which is not what somebody standing in a library is being asked. 빌리다 주세요 leaves the stem unconjugated. The 정답 gives 빌려다 주세요."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금 어디예요?"
+            },
+            {
+              "who": "B",
+              "ko": "세탁소에 있어요."
+            },
+            {
+              "who": "A",
+              "ko": "그럼 미안하지만 올 때 제 옷 좀 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "찾아 주세요"
+            },
+            {
+              "id": "b",
+              "ko": "찾고 주세요"
+            },
+            {
+              "id": "c",
+              "ko": "찾아다 주세요"
+            }
+          ],
+          "en": "A: Where are you? — B: At the dry cleaner’s. — A: Then sorry, but could you pick my clothes up on your way.",
+          "grammar": "찾아다 주다 here is collecting something left at a counter, not searching for something lost.",
+          "why": "찾아 주세요 is asking them to search, which is what you say when a thing is missing rather than waiting at a counter. 찾고 주세요 is two actions with no errand between them. The 정답 gives 찾아다 주세요."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "여보세요. 거기 피자나라지요? 피자 좀 주문하려고 하는데요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 뭐로 주문하시겠어요?"
+            },
+            {
+              "who": "A",
+              "ko": "치즈피자 한 판 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "갖다 드리세요"
+            },
+            {
+              "id": "b",
+              "ko": "갖다 주세요"
+            },
+            {
+              "id": "c",
+              "ko": "가지다 주세요"
+            }
+          ],
+          "en": "A: Hello, is that Pizza Nara? I would like to order a pizza. — B: What would you like? — A: One cheese pizza, please.",
+          "grammar": "갖다 주다 is the contraction of 가져다 주다, and it is what you say to a shop that delivers.",
+          "why": "갖다 드리세요 raises the person receiving the pizza, and that person is you — you cannot be humble towards yourself. 가지다 주세요 leaves 가지다 unconjugated, where the whole point is that it becomes 갖다. The 정답 gives 갖다 주세요."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-grammar-2-1",
+      "section": "문법과 표현 2",
+      "sectionEn": "V-(으)ㄹ 뻔하다",
+      "no": "연습 1",
+      "icon": "😰",
+      "pattern": "V-(으)ㄹ 뻔하다",
+      "blurbEn": "Five things that did not quite happen.",
+      "instructionKo": "[보기]와 같이 대화를 완성해 보세요.",
+      "instructionEn": "Complete each dialogue as in the example.",
+      "noteEn": "Every answer here is -(으)ㄹ 뻔했어요, so the vocabulary is not the question — what the rows keep testing is the shape of the form. 뻔하다 attaches to the plain -(으)ㄹ and never to a past stem, it is itself always past, and the two 나다 phrases keep their 이/가. The partner’s reply settles each row: 기차를 타서 다행이에요 and 큰일 날 뻔했네요 both say the thing did not happen.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "아까 계단에서 {}."
+          },
+          {
+            "who": "B",
+            "ko": "그래요? 큰일 날 뻔했네요."
+          }
+        ],
+        "answerKo": "넘어질 뻔했어요",
+        "en": "A: I nearly fell on the stairs earlier. — B: Really? That could have been serious."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "죄송해요. 저 때문에 기차를 {}."
+            },
+            {
+              "who": "B",
+              "ko": "아니에요. 기차를 타서 다행이에요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "놓쳤어요"
+            },
+            {
+              "id": "b",
+              "ko": "놓칠 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "놓칠 것 같아요"
+            }
+          ],
+          "en": "A: Sorry. You nearly missed the train because of me. — B: Not at all. I am glad we caught it.",
+          "grammar": "놓치다 is a 치 stem, so the form is 놓칠 — no 으 goes in.",
+          "why": "B says 기차를 타서 다행이에요, so the train was caught: 놓쳤어요 contradicts the very next line. 놓칠 것 같아요 is a guess about a train still to come, and A is apologising for something over. The 정답 gives 놓칠 뻔했어요."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "학생, 가방 가져가요."
+            },
+            {
+              "who": "B",
+              "ko": "고맙습니다. 가방을 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "놓고 갔어요"
+            },
+            {
+              "id": "b",
+              "ko": "가지고 갈 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "놓고 갈 뻔했어요"
+            }
+          ],
+          "en": "A: Student, take your bag. — B: Thank you. I nearly left it behind.",
+          "grammar": "뻔하다 hangs off the last verb of 놓고 가다, so it is 놓고 갈 뻔했어요.",
+          "why": "놓고 갔어요 would mean the bag is still on the desk, but B is holding it and saying 고맙습니다. 가지고 갈 뻔했어요 has it the wrong way round — taking the bag is what B is doing, not what B nearly failed to do. The 정답 gives 놓고 갈 뻔했어요."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 아침에 늦게 일어나서 회사에 {}."
+            },
+            {
+              "who": "B",
+              "ko": "그래요? 회사에 몇 시에 도착했어요?"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "늦은 뻔했어요"
+            },
+            {
+              "id": "b",
+              "ko": "늦을 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "늦을 뻔했네요"
+            }
+          ],
+          "en": "A: I got up late this morning and nearly got to work late. — B: Really? What time did you arrive?",
+          "grammar": "뻔하다 takes -(으)ㄹ and nothing else: 늦을, never 늦은.",
+          "why": "늦은 뻔했어요 puts -(으)ㄴ where only -(으)ㄹ goes. 늦을 뻔했네요 is the ending B uses in the 보기 — -네요 is for something you have just been told, and A is telling their own morning. The 정답 gives 늦을 뻔했어요."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "학교에 오다가 {}."
+            },
+            {
+              "who": "B",
+              "ko": "그래요? 안 다쳤어요?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "사고가 날 뻔했어요"
+            },
+            {
+              "id": "b",
+              "ko": "사고를 날 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "사고가 났을 뻔했어요"
+            }
+          ],
+          "en": "A: I nearly had an accident on the way to school. — B: Really? You were not hurt?",
+          "grammar": "사고가 나다 takes 이/가 — the accident happens, nobody does it.",
+          "why": "사고를 날 뻔했어요 puts the object particle on something 나다 can never take. 사고가 났을 뻔했어요 hangs 뻔하다 off a past stem, and it only ever attaches to the plain -(으)ㄹ. The 정답 gives 사고가 날 뻔했어요."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "오늘 가스레인지 불을 안 끄고 나와서 집에 {}."
+            },
+            {
+              "who": "B",
+              "ko": "정말 큰일 날 뻔했네요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "불이 났어요"
+            },
+            {
+              "id": "b",
+              "ko": "불이 날 뻔해요"
+            },
+            {
+              "id": "c",
+              "ko": "불이 날 뻔했어요"
+            }
+          ],
+          "en": "A: I left the gas on when I went out today and the house nearly caught fire. — B: That really could have been serious.",
+          "grammar": "뻔하다 is always past: 뻔했어요. There is no 뻔해요 about something that did not happen.",
+          "why": "B replies 큰일 날 뻔했네요, which says the fire did not happen — so 불이 났어요 is out. 불이 날 뻔해요 leaves 뻔하다 in the present, where it never stands. The 정답 gives 불이 날 뻔했어요."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-grammar-2-2",
+      "section": "문법과 표현 2",
+      "sectionEn": "V-(으)ㄹ 뻔하다",
+      "no": "연습 2",
+      "icon": "📖",
+      "pattern": "V-(으)ㄹ 뻔하다",
+      "blurbEn": "One very bad morning, told in five near misses.",
+      "instructionKo": "[보기]에서 알맞은 것을 골라 글을 완성해 보세요.",
+      "instructionEn": "Complete the passage with the appropriate verb from the box.",
+      "noteEn": "The page prints this as one continuous diary entry with five blanks in it; here each blank gets the sentences around it, so the row can be answered without scrolling back. The whole passage is in 합니다체 — 일어났습니다, 뛰어갔습니다, 도착했습니다 — which is what rules out the -어요 endings the same forms would take anywhere else in this bank. 울다 is the row to watch: a ㄹ stem drops its ㄹ rather than adding 으.",
+      "example": {
+        "lines": [
+          {
+            "ko": "너무 급하게 이를 닦아서 치약을 {}."
+          }
+        ],
+        "answerKo": "먹을 뻔했습니다",
+        "en": "I brushed my teeth in such a hurry that I nearly swallowed the toothpaste."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "다 씻고 나서 버스 정류장으로 뛰어갔습니다. 뛰어가다가 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "넘어졌습니다"
+            },
+            {
+              "id": "b",
+              "ko": "넘어질 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "넘어질 뻔했습니다"
+            }
+          ],
+          "en": "After washing I ran to the bus stop. While running I nearly fell over.",
+          "grammar": "-다가 marks an action interrupted by another: 뛰어가다가 is mid-run.",
+          "why": "넘어졌습니다 would have him on the pavement, and he keeps running. 넘어질 뻔했어요 is the right grammar in the wrong register — every other sentence here ends in -습니다. The 정답 gives 넘어질 뻔했습니다."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "그리고 길을 건너다가 차에 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "부딪힐 뻔했습니다"
+            },
+            {
+              "id": "b",
+              "ko": "부딪혔습니다"
+            },
+            {
+              "id": "c",
+              "ko": "부딪힐 뻔합니다"
+            }
+          ],
+          "en": "Then, while crossing the road, I was nearly hit by a car.",
+          "grammar": "차에 부딪히다 — the thing you collide with takes 에, not 을/를.",
+          "why": "부딪혔습니다 would be a real collision, and he walks on to the cinema. 부딪힐 뻔합니다 leaves 뻔하다 in the present, which it never takes. The 정답 gives 부딪힐 뻔했습니다."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "여자 친구에게 전화를 하려고 휴대 전화를 꺼내다가 바닥에 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "떨어질 뻔했습니다"
+            },
+            {
+              "id": "b",
+              "ko": "떨어뜨릴 뻔했습니다"
+            },
+            {
+              "id": "c",
+              "ko": "떨어뜨렸습니다"
+            }
+          ],
+          "en": "Taking my phone out to ring my girlfriend, I nearly dropped it on the floor.",
+          "grammar": "떨어지다 is what a thing does; 떨어뜨리다 is what you do to it.",
+          "why": "떨어질 뻔했습니다 makes the phone the subject, but the sentence already has one — he is the one 꺼내다가. 떨어뜨렸습니다 drops it for real. The 정답 gives 떨어뜨릴 뻔했습니다."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "그리고 영화를 볼 때 너무 슬퍼서 여자 친구 앞에서 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "울을 뻔했습니다"
+            },
+            {
+              "id": "b",
+              "ko": "울었습니다"
+            },
+            {
+              "id": "c",
+              "ko": "울 뻔했습니다"
+            }
+          ],
+          "en": "And during the film it was so sad that I nearly cried in front of my girlfriend.",
+          "grammar": "울다 is a ㄹ stem: the ㄹ is already there, so -(으)ㄹ adds nothing — 울 뻔했습니다.",
+          "why": "울을 뻔했습니다 is the mistake this row exists for, an 으 pushed into a stem that ends in ㄹ already. 울었습니다 would have him in tears, and 앞에서 says he managed not to be. The 정답 gives 울 뻔했습니다."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "ko": "집에 올 때는 피곤해서 버스에서 잤습니다. 그래서 집 앞 정류장에서 못 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "내릴 뻔했습니다"
+            },
+            {
+              "id": "b",
+              "ko": "내렸습니다"
+            },
+            {
+              "id": "c",
+              "ko": "내릴 뻔했어요"
+            }
+          ],
+          "en": "On the way home I was so tired I fell asleep on the bus, so I nearly missed my stop.",
+          "grammar": "못 sits in front of the whole thing: 못 내릴 뻔했습니다 is almost failing to get off.",
+          "why": "못 is already printed, so 못 내렸습니다 would mean he really did ride past his stop. 내릴 뻔했어요 is the -어요 ending again in a passage written throughout in -습니다. The 정답 gives 내릴 뻔했습니다."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-grammar-3-1",
+      "section": "문법과 표현 3",
+      "sectionEn": "‘ㅎ’ 불규칙",
+      "no": "연습 1",
+      "icon": "🔤",
+      "pattern": "‘ㅎ’ 불규칙",
+      "blurbEn": "Eight ㅎ stems, and the six endings that give them away.",
+      "instructionKo": "[보기]와 같이 표를 완성해 보세요.",
+      "instructionEn": "Complete the conjugation table as in the example.",
+      "noteEn": "The page prints this as an eight-by-six grid — 파랗다 노랗다 빨갛다 까맣다 하얗다 이렇다 그렇다 저렇다 down the side, -습니다 · -고 · -아요/어요 · -아서/어서 · -(으)ㄴ · -(으)니까 across the top, with six cells filled in as examples. Forty-eight buttons would be a spreadsheet rather than an exercise, so the grid is taken one cell at a time: every stem appears once, every column appears at least once, and each row is the cell that stem is most often got wrong at. The rule the whole grid teaches is a three-way split — the ㅎ survives before a consonant (-습니다, -고), it vanishes and pulls the vowel with it before -아/어, and it vanishes silently before -(으)ㄴ and -(으)니까, which then add no 으 at all.",
+      "example": {
+        "lines": [
+          {
+            "ko": "하얗다 + -(으)ㄴ → {}"
+          }
+        ],
+        "answerKo": "하얀",
+        "en": "하얗다 with -(으)ㄴ gives 하얀 — the ㅎ goes and no 으 replaces it."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "파랗다 + -아요/어요 → {}"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "파랗아요"
+            },
+            {
+              "id": "b",
+              "ko": "파래요"
+            },
+            {
+              "id": "c",
+              "ko": "파라요"
+            }
+          ],
+          "en": "파랗다 → 파래요.",
+          "grammar": "파랗 + -아요 loses the ㅎ and the ㅏ fuses with the ending into ㅐ: 파래요.",
+          "why": "파랗아요 keeps a ㅎ that never survives before a vowel ending. 파라요 drops the ㅎ but stops there, leaving the two ㅏ unfused — the fusion is the whole irregularity. The 정답 table gives 파래요."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "노랗다 + -(으)ㄴ → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "노란"
+            },
+            {
+              "id": "b",
+              "ko": "노랗은"
+            },
+            {
+              "id": "c",
+              "ko": "노라는"
+            }
+          ],
+          "en": "노랗다 → 노란.",
+          "grammar": "노랗다 + -(으)ㄴ takes no 으 at all: the ㅎ leaves, the ㄴ takes its place, and 노란 is what is left.",
+          "why": "노랗은 treats ㅎ as an ordinary 받침 that wants 으 after it. 노라는 uses -는, which is the verb ending, and 노랗다 is an adjective. The 정답 table gives 노란."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "빨갛다 + -습니다 → {}"
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "빨갑니다"
+            },
+            {
+              "id": "b",
+              "ko": "빨개습니다"
+            },
+            {
+              "id": "c",
+              "ko": "빨갛습니다"
+            }
+          ],
+          "en": "빨갛다 → 빨갛습니다.",
+          "grammar": "Before a consonant ending the ㅎ stays put: 빨갛습니다.",
+          "why": "빨갑니다 drops the ㅎ and then takes -ㅂ니다 as if the stem ended in a vowel. 빨개습니다 glues the -아요 stem onto -습니다. Half of this table is the reminder that nothing happens here at all, and the 정답 gives 빨갛습니다."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "까맣다 + -(으)니까 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "까마니까"
+            },
+            {
+              "id": "b",
+              "ko": "까맣으니까"
+            },
+            {
+              "id": "c",
+              "ko": "까매니까"
+            }
+          ],
+          "en": "까맣다 → 까마니까.",
+          "grammar": "-(으)니까 behaves like -(으)ㄴ: the ㅎ goes and the 으 never appears.",
+          "why": "까맣으니까 is the 으 that a ㅎ stem never takes. 까매니까 borrows the fused vowel from 까매요, but fusion only happens before -아/어, and -(으)니까 is not that. The 정답 table gives 까마니까."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "ko": "하얗다 + -아서/어서 → {}"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "하얗아서"
+            },
+            {
+              "id": "b",
+              "ko": "하얘서"
+            },
+            {
+              "id": "c",
+              "ko": "하야서"
+            }
+          ],
+          "en": "하얗다 → 하얘서.",
+          "grammar": "하얗다 has ㅑ, so its fusion lands on ㅒ: 하얘요, 하얘서.",
+          "why": "하얗아서 keeps the ㅎ before a vowel. 하야서 drops it without fusing, which is the same half-step as 파라요 — and this is the one stem where the result is ㅒ rather than ㅐ. The 정답 table gives 하얘서."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "ko": "이렇다 + -고 → {}"
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "이러고"
+            },
+            {
+              "id": "b",
+              "ko": "이래고"
+            },
+            {
+              "id": "c",
+              "ko": "이렇고"
+            }
+          ],
+          "en": "이렇다 → 이렇고.",
+          "grammar": "-고 is a consonant ending, so the ㅎ stays: 이렇고.",
+          "why": "이러고 exists in speech as 이러고 있다, but it is not the -고 form of 이렇다. 이래고 puts the fused vowel in front of a consonant ending, where nothing fuses. The 정답 table gives 이렇고."
+        },
+        {
+          "n": 7,
+          "lines": [
+            {
+              "ko": "그렇다 + -아요/어요 → {}"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "그래요"
+            },
+            {
+              "id": "b",
+              "ko": "그렇어요"
+            },
+            {
+              "id": "c",
+              "ko": "그러요"
+            }
+          ],
+          "en": "그렇다 → 그래요.",
+          "grammar": "그렇다 fuses to 그래 — the everyday 그래, 그래요, 그래서 all come from this stem.",
+          "why": "그렇어요 keeps the ㅎ, and 그러요 drops it without fusing. This is the one cell in the table whose answer the learner already says ten times a day without knowing which verb it came from, and the 정답 gives 그래요."
+        },
+        {
+          "n": 8,
+          "lines": [
+            {
+              "ko": "저렇다 + -(으)ㄴ → {}"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "저렇은"
+            },
+            {
+              "id": "b",
+              "ko": "저런"
+            },
+            {
+              "id": "c",
+              "ko": "저러는"
+            }
+          ],
+          "en": "저렇다 → 저런.",
+          "grammar": "저렇다 + -(으)ㄴ is 저런, the same shape as 이런 and 그런.",
+          "why": "저렇은 adds the 으 a ㅎ stem never takes, and 저러는 uses the verb ending -는 on an adjective. The three demonstratives run exactly parallel here, so getting 저런 right means 이런 and 그런 are right too. The 정답 table gives 저런."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-grammar-3-2",
+      "section": "문법과 표현 3",
+      "sectionEn": "‘ㅎ’ 불규칙",
+      "no": "연습 2",
+      "icon": "💬",
+      "pattern": "‘ㅎ’ 불규칙",
+      "blurbEn": "이렇다, 그렇다, 저렇다, 어떻다 — the four in conversation.",
+      "instructionKo": "[보기]와 같이 알맞은 형태로 바꿔서 대화를 완성해 보세요.",
+      "instructionEn": "Put the verb in brackets into the right form to complete the dialogue.",
+      "noteEn": "These four are the ㅎ-irregulars nobody notices are irregular, because they are learnt whole: 어떤, 그래서, 이런, 저렇게. The exercise prints the dictionary form in brackets and asks for the shape the sentence needs, so the work is choosing an ending as much as applying the rule — 어떤 before a noun, 저렇게 before a clause, and 그랬는데 when the sentence needs a past and a contrast at once.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "어제 본 영화가 {}? (어떻다)"
+          },
+          {
+            "who": "B",
+            "ko": "재미있었어요. 스티븐 씨도 꼭 보세요."
+          }
+        ],
+        "answerKo": "어땠어요",
+        "en": "A: How was the film you saw yesterday? — B: It was good. You should see it too."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "샤오밍 씨는 나중에 {} 일을 하고 싶어요? (어떻다)"
+            },
+            {
+              "who": "B",
+              "ko": "저는 여행을 많이 할 수 있는 일을 하고 싶어요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "어떻은"
+            },
+            {
+              "id": "b",
+              "ko": "어떤"
+            },
+            {
+              "id": "c",
+              "ko": "어때"
+            }
+          ],
+          "en": "A: What sort of work do you want to do later, Xiaoming? — B: Work that lets me travel a lot.",
+          "grammar": "어떻다 + -(으)ㄴ = 어떤, and 어떤 goes in front of a noun.",
+          "why": "The blank sits before 일, so it has to be the form that modifies a noun. 어떻은 adds the 으 a ㅎ stem refuses, and 어때 is the sentence-final form — it can end a question but not lead into 일. The 정답 gives 어떤."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "저는 한국 생활이 좀 힘들어요. 나나 씨는 어때요?"
+            },
+            {
+              "who": "B",
+              "ko": "저도 처음에는 {} 지금은 많이 괜찮아졌어요. (그렇다)"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "그랬는데"
+            },
+            {
+              "id": "b",
+              "ko": "그런데"
+            },
+            {
+              "id": "c",
+              "ko": "그래서"
+            }
+          ],
+          "en": "A: Life in Korea is a bit hard for me. How about you, Nana? — B: I was like that at first too, but now it is much better.",
+          "grammar": "그렇다 in the past plus -는데 gives 그랬는데: it was so, and then something changed.",
+          "why": "처음에는 … 지금은 sets up a contrast between two times, which needs a past in the first half. 그런데 is the present and starts a new sentence rather than joining these two; 그래서 gives a cause, and being fine now is not caused by struggling then. The 정답 gives 그랬는데."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "저는 이 옷이 마음에 들어요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 저도 {} 디자인을 좋아해요. (이렇다)"
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "이렇게"
+            },
+            {
+              "id": "b",
+              "ko": "이래서"
+            },
+            {
+              "id": "c",
+              "ko": "이런"
+            }
+          ],
+          "en": "A: I like this outfit. — B: Yes, I like this kind of design too.",
+          "grammar": "이런 modifies a noun; 이렇게 modifies a verb. The blank is followed by 디자인.",
+          "why": "이렇게 would need a verb after it, and what follows is a noun. 이래서 means for this reason and leaves 디자인을 좋아해요 with nothing to attach to. The 정답 gives 이런."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "저기 좀 보세요. 백화점 앞에 차가 정말 많네요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 세일을 하면 항상 {} 길이 막혀요. (저렇다)"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "저렇게"
+            },
+            {
+              "id": "b",
+              "ko": "저런"
+            },
+            {
+              "id": "c",
+              "ko": "저래요"
+            }
+          ],
+          "en": "A: Look over there. There are so many cars in front of the department store. — B: Yes, whenever there is a sale the traffic is always like that.",
+          "grammar": "저렇게 is the adverb: it tells you how 막혀요 is happening.",
+          "why": "What follows the blank is 길이 막혀요, a clause, so the adverb is what fits. 저런 would want a noun, and 길 is not the noun being pointed at — the jam is. 저래요 ends a sentence in the middle of one. The 정답 gives 저렇게."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-grammar-3-3",
+      "section": "문법과 표현 3",
+      "sectionEn": "‘ㅎ’ 불규칙",
+      "no": "연습 3",
+      "icon": "🌈",
+      "pattern": "‘ㅎ’ 불규칙",
+      "blurbEn": "Five colours put into sentences, one row wanting two at once.",
+      "instructionKo": "[보기]에서 알맞은 것을 골라 알맞은 형태로 바꿔서 대화를 완성해 보세요.",
+      "instructionEn": "Choose from the box and change the form to complete each dialogue.",
+      "noteEn": "The box gives 빨갛다 노랗다 파랗다 까맣다 하얗다 in the dictionary form and every blank wants something else — a 연결 (파랗고), a 종결 (빨개요), a noun (노란색), a 관형형 twice in one line (하얀 … 까만), and a change of state (하얘졌어요). Row 4 is the one row on the page where a picture decides which garment is which; the 정답 on p.209 settles it as 하얀 셔츠 and 까만 바지, the same way Unit 16’s 방을 닦았어요 was settled.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "어떤 색 우산을 살까요?"
+          },
+          {
+            "who": "B",
+            "ko": "비 오는 날에는 {} 우산이 예뻐요."
+          }
+        ],
+        "answerKo": "빨간",
+        "en": "A: What colour umbrella shall we buy? — B: A red one looks nice on a rainy day."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "하늘도 {} 바람도 시원해서 좋네요."
+            },
+            {
+              "who": "B",
+              "ko": "저도 이런 날씨를 정말 좋아해요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "파랗고"
+            },
+            {
+              "id": "b",
+              "ko": "파래서"
+            },
+            {
+              "id": "c",
+              "ko": "파란"
+            }
+          ],
+          "en": "A: The sky is blue and the breeze is cool — lovely. — B: I really like this kind of weather.",
+          "grammar": "-고 joins two equal statements: 하늘도 파랗고, 바람도 시원하고.",
+          "why": "The two 도 are a pair — the sky as well, the breeze as well — so the blank has to join rather than explain. 파래서 makes the blue sky the reason for the cool breeze. 파란 wants a noun after it, and 바람도 is a new subject. The 정답 gives 파랗고."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "나나 씨, 어디 아파요? 얼굴이 {}."
+            },
+            {
+              "who": "B",
+              "ko": "감기에 걸려서 열이 나요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "빨갛아요"
+            },
+            {
+              "id": "b",
+              "ko": "빨가요"
+            },
+            {
+              "id": "c",
+              "ko": "빨개요"
+            }
+          ],
+          "en": "A: Nana, are you ill? Your face is red. — B: I have a cold and a temperature.",
+          "grammar": "빨갛 + -아요 fuses to 빨개요, the same way 파래요 and 그래요 do.",
+          "why": "빨갛아요 keeps the ㅎ in front of a vowel ending, and 빨가요 drops it without fusing. A red face with 열이 나요 after it is this unit’s stock example of the form. The 정답 gives 빨개요."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "무슨 색을 좋아해요?"
+            },
+            {
+              "who": "B",
+              "ko": "분홍색, {}처럼 밝은 색을 좋아해요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "노란"
+            },
+            {
+              "id": "b",
+              "ko": "노란색"
+            },
+            {
+              "id": "c",
+              "ko": "노래요"
+            }
+          ],
+          "en": "A: What colours do you like? — B: Bright ones, like pink and yellow.",
+          "grammar": "처럼 attaches to a noun, so the blank has to be 노란색 rather than 노란.",
+          "why": "The blank sits in a list beside 분홍색, which is a noun, and 처럼 follows it — 노란 alone is a modifier with nothing to modify. 노래요 ends a sentence in the middle of one. The 정답 gives 노란색."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "저한테 어떤 옷이 어울릴까요?"
+            },
+            {
+              "who": "B",
+              "ko": "이 {} 셔츠하고 {} 바지가 어울릴 것 같은데 어때요?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "하얀"
+            },
+            {
+              "id": "b",
+              "ko": "하얗은"
+            },
+            {
+              "id": "c",
+              "ko": "하얘"
+            }
+          ],
+          "answer2": "f",
+          "choices2": [
+            {
+              "id": "d",
+              "ko": "까맣은"
+            },
+            {
+              "id": "e",
+              "ko": "까매"
+            },
+            {
+              "id": "f",
+              "ko": "까만"
+            }
+          ],
+          "en": "A: What sort of clothes would suit me? — B: I think this white shirt and these black trousers would suit you — what do you think?",
+          "grammar": "-(으)ㄴ on a ㅎ stem: 하얀 셔츠, 까만 바지, both in front of their noun.",
+          "why": "Both blanks come before a noun, so both want the 관형형: 하얗은 and 까맣은 add the 으 a ㅎ stem never takes, and 하얘 and 까매 are sentence-final. Which garment is which is the one thing on this page that only the picture shows, and the 정답 on p.209 gives 하얀 for the shirt and 까만 for the trousers."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "밖을 보세요. 눈이 많이 왔어요."
+            },
+            {
+              "who": "B",
+              "ko": "와, 눈이 와서 밖이 다 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "하얘요"
+            },
+            {
+              "id": "b",
+              "ko": "하얘졌어요"
+            },
+            {
+              "id": "c",
+              "ko": "하얗아졌어요"
+            }
+          ],
+          "en": "A: Look outside. It has snowed a lot. — B: Wow, the snow has turned everything white.",
+          "grammar": "-아/어지다 on 하얗다 gives 하얘지다: not white, but gone white.",
+          "why": "눈이 와서 says something changed, and 다 counts that change across everything outside — 하얘요 would just describe a white world with no snowfall behind it. 하얗아졌어요 keeps the ㅎ before -아지다. The 정답 gives 하얘졌어요."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-grammar-4-1",
+      "section": "문법과 표현 4",
+      "sectionEn": "V-아/어 있다",
+      "no": "연습 1",
+      "icon": "🪟",
+      "pattern": "V-아/어 있다",
+      "blurbEn": "Six things left in the state somebody put them in.",
+      "instructionKo": "그림을 보고 [보기]와 같이 문장을 완성해 보세요.",
+      "instructionEn": "Complete each sentence for the picture, as in the example.",
+      "noteEn": "The book prints a picture and the dictionary form of its verb, and the place — on the wall, on the desk, on the bed — is in the drawing only. Here the partner’s question carries the place instead, so every row can be answered from what is on the screen and still keys exactly what the 정답 on p.209 gives. Four of the six verbs are passives — 열리다, 놓이다, 달리다, 붙다 — and pairing the passive with -아/어 있다 is the whole point: 창문을 열고 있어요 is somebody opening a window, 창문이 열려 있어요 is the window standing open afterwards. Row 6 adds the honorific: a grandfather lying down is 누워 계세요, not 누워 있어요.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "저 벽에 뭐가 있어요?"
+          },
+          {
+            "who": "B",
+            "ko": "시계가 {}. (걸리다)"
+          }
+        ],
+        "answerKo": "벽에 걸려 있어요",
+        "en": "A: What is on that wall? — B: A clock is hanging on the wall."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "방이 왜 이렇게 시원해요?"
+            },
+            {
+              "who": "B",
+              "ko": "창문이 {}. (열리다)"
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "열고 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "열어 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "열려 있어요"
+            }
+          ],
+          "en": "A: Why is the room so cool? — B: The window is open.",
+          "grammar": "열리다 is the passive of 열다, and -아/어 있다 keeps it in that state.",
+          "why": "열고 있어요 has somebody standing there opening the window. 열어 있어요 tries to put -아/어 있다 on the transitive 열다, which it never takes — the passive has to come first. The 정답 gives 열려 있어요."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "교실 벽에 뭐가 있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "사진이 {}. (붙다)"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "벽에 붙어 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "벽에 붙였어요"
+            },
+            {
+              "id": "c",
+              "ko": "벽에 붙고 있어요"
+            }
+          ],
+          "en": "A: What is on the classroom wall? — B: Photos are stuck on the wall.",
+          "grammar": "붙다 is already the intransitive one; 붙이다 is what a person does to a photo.",
+          "why": "벽에 붙였어요 names whoever stuck it up, and the question asked what is there now. 벽에 붙고 있어요 is the sticking in progress. The 정답 gives 벽에 붙어 있어요."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "책상 위에 뭐가 있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "꽃이 {}. (놓이다)"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "책상 위에 놓고 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "책상 위에 놓여 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "책상 위에 놓아 있어요"
+            }
+          ],
+          "en": "A: What is on the desk? — B: Flowers are sitting on the desk.",
+          "grammar": "놓이다 is the passive of 놓다: the flowers are placed, nobody is placing them.",
+          "why": "책상 위에 놓고 있어요 has a person mid-placement. 책상 위에 놓아 있어요 is the same mistake as 열어 있어요 — the transitive 놓다 with -아/어 있다 straight on it. The 정답 gives 책상 위에 놓여 있어요."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "가방을 어떻게 찾아요?"
+            },
+            {
+              "who": "B",
+              "ko": "이름표가 {}. (달리다)"
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "가방에 달았어요"
+            },
+            {
+              "id": "b",
+              "ko": "가방에 달고 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "가방에 달려 있어요"
+            }
+          ],
+          "en": "A: How do you spot your bag? — B: There is a name tag on it.",
+          "grammar": "달리다 is the passive of 달다, and 인형이 달려 있다 is how the 말하기 2 page describes a bag.",
+          "why": "가방에 달았어요 tells you who attached the tag rather than that it is there. 가방에 달고 있어요 is the attaching in progress. The 정답 gives 가방에 달려 있어요."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금 교실이 조용하네요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 학생들이 {}. (앉다)"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "교실에 앉아 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "교실에 앉고 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "교실에 앉았어요"
+            }
+          ],
+          "en": "A: The classroom is quiet now. — B: Yes, the students are sitting in the classroom.",
+          "grammar": "앉다 needs no passive — it is already something you do to yourself, so -아/어 있다 goes straight on.",
+          "why": "교실에 앉고 있어요 would be twenty students in the act of lowering themselves onto chairs. 교실에 앉았어요 reports the moment they sat down rather than the quiet that followed. The 정답 gives 교실에 앉아 있어요."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "할아버지가 침대에 계세요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, {}. (눕다)"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "침대에 누워 있으세요"
+            },
+            {
+              "id": "b",
+              "ko": "침대에 누워 계세요"
+            },
+            {
+              "id": "c",
+              "ko": "침대에 눕고 계세요"
+            }
+          ],
+          "en": "A: Is grandfather in bed? — B: Yes, he is lying down.",
+          "grammar": "눕다 is a ㅂ-irregular: 눕 + -어 gives 누워. And 있다 becomes 계시다 for a grandfather.",
+          "why": "A has already said 계세요, so the answer has to stay honorific. 침대에 누워 있으세요 keeps 있다 and only makes the ending polite, which is not the same thing; 침대에 눕고 계세요 has him lowering himself over and over. The 정답 gives 침대에 누워 계세요."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-grammar-4-2",
+      "section": "문법과 표현 4",
+      "sectionEn": "V-아/어 있다",
+      "no": "연습 2",
+      "icon": "🧍",
+      "pattern": "V-아/어 있다",
+      "blurbEn": "Five conversations that need a state, and the ending that carries it.",
+      "instructionKo": "[보기]와 같이 대화를 완성해 보세요.",
+      "instructionEn": "Complete each dialogue as in the example.",
+      "noteEn": "Where 연습 1 was one shape five times, this page changes the ending every row: a 관형형 in front of a noun (서 있는, 놓여 있는), a plain statement (앉아 있어요), a -네요 for something just noticed, and a -(으)니까 leading into an instruction. The last is the one worth slowing down for — Korean will not let -아/어서 stand in front of an imperative, so a reason given before 읽어 보세요 has to be -(으)니까.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "어떤 옷을 보여 드릴까요?"
+          },
+          {
+            "who": "B",
+            "ko": "저기 {} 옷 좀 보여 주세요."
+          }
+        ],
+        "answerKo": "걸려 있는",
+        "en": "A: Which clothes shall I show you? — B: Could you show me the ones hanging over there."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "김민수 씨가 누구예요?"
+            },
+            {
+              "who": "B",
+              "ko": "저기 창문 옆에 {} 사람이 민수 씨예요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "서 있은"
+            },
+            {
+              "id": "b",
+              "ko": "서 있는"
+            },
+            {
+              "id": "c",
+              "ko": "서고 있는"
+            }
+          ],
+          "en": "A: Which one is Kim Minsu? — B: The person standing by the window is Minsu.",
+          "grammar": "있다 takes -는 for the present 관형형: 있는, never 있은.",
+          "why": "The blank sits in front of 사람, so it has to modify a noun. 서 있은 uses -(으)ㄴ, which 있다 never takes; 서고 있는 would be somebody in the act of rising to their feet. The 정답 gives 서 있는."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지훈 씨, 저 지금 도착했는데 어디에 있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "커피숍 안에 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "앉고 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "앉아 있는"
+            },
+            {
+              "id": "c",
+              "ko": "앉아 있어요"
+            }
+          ],
+          "en": "A: Jihoon, I have just arrived — where are you? — B: I am sitting inside the coffee shop.",
+          "grammar": "어디에 있어요 is answered with a state, and 앉아 있다 is the state of being seated.",
+          "why": "앉고 있어요 answers a question nobody asked — A wants to know where Jihoon is, not what he is in the middle of doing. 앉아 있는 is the 관형형 with no noun after it. The 정답 gives 앉아 있어요."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "저기 책상 위에 {} 모자는 누구 거예요?"
+            },
+            {
+              "who": "B",
+              "ko": "저도 잘 모르겠어요. 어제도 있었어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "놓여 있는"
+            },
+            {
+              "id": "b",
+              "ko": "놓여 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "놓고 있는"
+            }
+          ],
+          "en": "A: Whose is the hat sitting on that desk over there? — B: I have no idea. It was there yesterday too.",
+          "grammar": "놓여 있는 모자 — the 관형형 goes between the place and the noun it describes.",
+          "why": "모자는 follows the blank, so the sentence is still running and needs a modifier. 놓여 있어요 would end it a clause early. 놓고 있는 has somebody putting the hat down, and B says it has been there since yesterday. The 정답 gives 놓여 있는."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "방이 좀 춥네요."
+            },
+            {
+              "who": "B",
+              "ko": "창문이 {}. 제가 창문을 닫을게요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "열어 있네요"
+            },
+            {
+              "id": "b",
+              "ko": "열리고 있네요"
+            },
+            {
+              "id": "c",
+              "ko": "열려 있네요"
+            }
+          ],
+          "en": "A: The room is a bit cold. — B: Oh, the window is open. I will close it.",
+          "grammar": "-네요 is for something you notice as you say it, which is why 닫을게요 follows.",
+          "why": "열어 있네요 puts -아/어 있다 on the transitive 열다 again. 열리고 있네요 would be a window swinging open by itself while they watch. The 정답 gives 열려 있네요."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "동호회에 가입하려면 어떻게 해야 돼요?"
+            },
+            {
+              "who": "B",
+              "ko": "교실 벽에 안내문이 {} 한번 읽어 보세요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "붙어 있어서"
+            },
+            {
+              "id": "b",
+              "ko": "붙어 있으니까"
+            },
+            {
+              "id": "c",
+              "ko": "붙고 있으니까"
+            }
+          ],
+          "en": "A: How do I join the club? — B: There is a notice on the classroom wall, so have a read of it.",
+          "grammar": "A reason in front of an order or a suggestion is -(으)니까; -아/어서 cannot go there.",
+          "why": "붙어 있어서 is the rule this row exists for — 읽어 보세요 is a suggestion, and -아/어서 will not stand in front of one however true the reason is. 붙고 있으니까 has someone sticking the notice up as they speak. The 정답 gives 붙어 있으니까."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-pattern-1",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 1",
+      "icon": "🎧",
+      "pattern": "V-아다/어다 주다",
+      "blurbEn": "Two nouns from the teacher; who you took where, and how politely.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "The teacher reads a person and a place and you build the sentence, which means supplying three things the cue does not give: 을/를 on the person, 에 on the place, and the choice between 데려다 주었어요 and 모셔다 드렸어요. Two of the four cues are people you must be humble about and two are not, so the drill alternates rather than settling into one shape.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "부모님, 공항"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "부모님을 공항에 모셔다 드렸어요",
+        "en": "T: my parents, the airport — S: I took my parents to the airport.",
+        "why": "Played through once so the shape of the exchange is heard before you answer one yourself.",
+        "audio": {
+          "src": "audio/book/2b-u17-p1-0.mp3",
+          "askEnd": 2.83
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "동생, 유치원"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "동생을 유치원에 데려다 주었어요"
+            },
+            {
+              "id": "b",
+              "ko": "동생을 유치원에 모셔다 드렸어요"
+            },
+            {
+              "id": "c",
+              "ko": "동생이 유치원에 데려다 주었어요"
+            }
+          ],
+          "en": "T: little brother, nursery — S: I took my little brother to nursery.",
+          "grammar": "데려다 주다 is the plain pair, and a 동생 takes it.",
+          "why": "동생을 유치원에 모셔다 드렸어요 is the humble pair aimed downwards. 동생이 유치원에 데려다 주었어요 makes the younger sibling the one doing the taking.",
+          "audio": {
+            "src": "audio/book/2b-u17-p1-1.mp3",
+            "askEnd": 3.05
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "어머니, 병원"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "어머니를 병원에 데려다 주었어요"
+            },
+            {
+              "id": "b",
+              "ko": "어머니를 병원에 모셔다 드렸어요"
+            },
+            {
+              "id": "c",
+              "ko": "어머니를 병원에 모셔다 주었어요"
+            }
+          ],
+          "en": "T: mother, hospital — S: I took my mother to the hospital.",
+          "grammar": "모시다 and 드리다 travel together: 모셔다 드리다, never 모셔다 주다.",
+          "why": "어머니를 병원에 데려다 주었어요 is the plain pair for someone who takes the humble one. 어머니를 병원에 모셔다 주었어요 is the half-step — the humble verb finished off with the plain 주다.",
+          "audio": {
+            "src": "audio/book/2b-u17-p1-2.mp3",
+            "askEnd": 2.92
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "할아버지, 댁"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "할아버지를 집에 모셔다 드렸어요"
+            },
+            {
+              "id": "b",
+              "ko": "할아버지를 댁에 데려다 주었어요"
+            },
+            {
+              "id": "c",
+              "ko": "할아버지를 댁에 모셔다 드렸어요"
+            }
+          ],
+          "en": "T: grandfather, home — S: I took my grandfather home.",
+          "grammar": "댁 is the honorific of 집, so the cue itself is already asking for 모셔다 드리다.",
+          "why": "할아버지를 집에 모셔다 드렸어요 swaps the honorific noun back for the plain one, and 할아버지를 댁에 데려다 주었어요 does the same to the verb. The teacher said 댁.",
+          "audio": {
+            "src": "audio/book/2b-u17-p1-3.mp3",
+            "askEnd": 2.66
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "아이, 학교"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "아이를 학교에 데려다 주었어요"
+            },
+            {
+              "id": "b",
+              "ko": "아이를 학교에 모셔다 드렸어요"
+            },
+            {
+              "id": "c",
+              "ko": "아이를 학교에서 데려다 주었어요"
+            }
+          ],
+          "en": "T: child, school — S: I took the child to school.",
+          "grammar": "에 marks where you end up; 에서 marks where something happens.",
+          "why": "아이를 학교에 모셔다 드렸어요 is the humble pair for a child. 아이를 학교에서 데려다 주었어요 makes the school the place the taking happened rather than where it finished.",
+          "audio": {
+            "src": "audio/book/2b-u17-p1-4.mp3",
+            "askEnd": 2.73
+          }
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-pattern-2",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 2",
+      "icon": "🎧",
+      "pattern": "V-(으)ㄹ 뻔하다",
+      "blurbEn": "Two verbs from the teacher, joined by -다가 and finished with 뻔했어요.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "The teacher gives two verbs in the dictionary form and you have to do two things to them at once: the first becomes -다가, and the second takes -(으)ㄹ 뻔했어요. Both of the 나다 cues keep their 이/가, and the last item is the only one whose verb takes a bare -ㄹ rather than -을, because 죽다 ends in a consonant and 죽을 is what comes out.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "영화를 보다, 울다"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "영화를 보다가 울 뻔했어요",
+        "en": "T: watch a film, cry — S: I nearly cried while watching a film.",
+        "why": "Played through once so the shape of the exchange is heard before you answer one yourself.",
+        "audio": {
+          "src": "audio/book/2b-u17-p2-0.mp3",
+          "askEnd": 3.31
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "요리를 하다, 불이 나다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "요리를 하다가 불을 날 뻔했어요"
+            },
+            {
+              "id": "b",
+              "ko": "요리를 하다가 불이 날 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "요리를 해서 불이 날 뻔했어요"
+            }
+          ],
+          "en": "T: cook, a fire starts — S: I nearly started a fire while cooking.",
+          "grammar": "-다가 is the join this drill wants: one action broken off by another.",
+          "why": "요리를 하다가 불을 날 뻔했어요 puts 을 on something 나다 cannot take. 요리를 해서 불이 날 뻔했어요 turns the cooking into the cause rather than the thing interrupted.",
+          "audio": {
+            "src": "audio/book/2b-u17-p2-1.mp3",
+            "askEnd": 3.55
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "길을 건너다, 사고가 나다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "길을 건너다가 사고가 났을 뻔했어요"
+            },
+            {
+              "id": "b",
+              "ko": "길을 건너고 사고가 날 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "길을 건너다가 사고가 날 뻔했어요"
+            }
+          ],
+          "en": "T: cross the road, an accident happens — S: I nearly had an accident crossing the road.",
+          "grammar": "뻔했어요 attaches to the plain -(으)ㄹ — 날 뻔했어요 — and never to a past stem.",
+          "why": "길을 건너다가 사고가 났을 뻔했어요 hangs it off 났, which is already past. 길을 건너고 사고가 날 뻔했어요 puts the two side by side instead of interrupting one with the other.",
+          "audio": {
+            "src": "audio/book/2b-u17-p2-2.mp3",
+            "askEnd": 3.93
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "버스에서 내리다, 넘어지다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "버스에서 내리다가 넘어질 뻔했어요"
+            },
+            {
+              "id": "b",
+              "ko": "버스에서 내리다가 넘어진 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "버스에서 내려서 넘어질 뻔했어요"
+            }
+          ],
+          "en": "T: get off the bus, fall over — S: I nearly fell over getting off the bus.",
+          "grammar": "넘어지다 is a vowel stem, so -(으)ㄹ is just ㄹ: 넘어질.",
+          "why": "버스에서 내리다가 넘어진 뻔했어요 uses -(으)ㄴ where only -(으)ㄹ goes. 버스에서 내려서 넘어질 뻔했어요 makes getting off the reason rather than the moment it happened in.",
+          "audio": {
+            "src": "audio/book/2b-u17-p2-3.mp3",
+            "askEnd": 3.8
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "바다에서 수영을 하다, 죽다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "바다에서 수영을 하다가 죽는 뻔했어요"
+            },
+            {
+              "id": "b",
+              "ko": "바다에서 수영을 하다가 죽 뻔했어요"
+            },
+            {
+              "id": "c",
+              "ko": "바다에서 수영을 하다가 죽을 뻔했어요"
+            }
+          ],
+          "en": "T: swim in the sea, die — S: I nearly drowned swimming in the sea.",
+          "grammar": "죽다 ends in a consonant, so the 으 does appear: 죽을 뻔했어요.",
+          "why": "바다에서 수영을 하다가 죽는 뻔했어요 uses the verb ending -는. 바다에서 수영을 하다가 죽 뻔했어요 leaves the stem bare, which only works for a stem already ending in ㄹ the way 울 뻔했어요 does.",
+          "audio": {
+            "src": "audio/book/2b-u17-p2-4.mp3",
+            "askEnd": 4.04
+          }
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-pattern-3",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 3",
+      "icon": "🎧",
+      "pattern": "‘ㅎ’ 불규칙",
+      "blurbEn": "A body part and a colour, turned into a worried question.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "Four cues, four fusions: 까매요, 빨개요, 파래요, 하얘요. Three of them land on ㅐ and 하얗다 lands on ㅒ, which is the whole reason this drill has four items rather than two. The frame 왜 그렇게 …이/가 …? is fixed, so the particle is part of the answer as well — 팔이 and 눈이 take 이, 입술이 takes 이, 얼굴이 takes 이.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "얼굴, 노랗다"
+          },
+          {
+            "who": "S",
+            "ko": "{}?"
+          }
+        ],
+        "answerKo": "왜 그렇게 얼굴이 노래요",
+        "en": "T: face, yellow — S: Why is your face so yellow?",
+        "why": "Played through once so the shape of the exchange is heard before you answer one yourself.",
+        "audio": {
+          "src": "audio/book/2b-u17-p3-0.mp3",
+          "askEnd": 2.96
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "팔, 까맣다"
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "왜 그렇게 팔이 까맣아요"
+            },
+            {
+              "id": "b",
+              "ko": "왜 그렇게 팔이 까매요"
+            },
+            {
+              "id": "c",
+              "ko": "왜 그렇게 팔을 까매요"
+            }
+          ],
+          "en": "T: arm, black — S: Why are your arms so tanned?",
+          "grammar": "까맣 + -아요 fuses to 까매요.",
+          "why": "왜 그렇게 팔이 까맣아요 keeps the ㅎ in front of a vowel ending. 왜 그렇게 팔을 까매요 puts 을 on the thing being described, and a colour takes 이/가.",
+          "audio": {
+            "src": "audio/book/2b-u17-p3-1.mp3",
+            "askEnd": 2.77
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "눈, 빨갛다"
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "왜 그렇게 눈이 빨가요"
+            },
+            {
+              "id": "b",
+              "ko": "왜 그렇게 눈이 빨간색이에요"
+            },
+            {
+              "id": "c",
+              "ko": "왜 그렇게 눈이 빨개요"
+            }
+          ],
+          "en": "T: eyes, red — S: Why are your eyes so red?",
+          "grammar": "빨갛 + -아요 fuses to 빨개요, one syllable shorter than it looks.",
+          "why": "왜 그렇게 눈이 빨가요 drops the ㅎ without fusing the vowel. 왜 그렇게 눈이 빨간색이에요 answers with a noun where the teacher gave a describing word.",
+          "audio": {
+            "src": "audio/book/2b-u17-p3-2.mp3",
+            "askEnd": 2.89
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "입술, 파랗다"
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "왜 그렇게 입술이 파래요"
+            },
+            {
+              "id": "b",
+              "ko": "왜 그렇게 입술이 파랗어요"
+            },
+            {
+              "id": "c",
+              "ko": "왜 그렇게 입술이 파랬어요"
+            }
+          ],
+          "en": "T: lips, blue — S: Why are your lips so blue?",
+          "grammar": "파랗다 has ㅏ, so it fuses to ㅐ: 파래요.",
+          "why": "왜 그렇게 입술이 파랗어요 keeps the ㅎ and picks -어요 into the bargain. 왜 그렇게 입술이 파랬어요 is the past, and the lips are blue now.",
+          "audio": {
+            "src": "audio/book/2b-u17-p3-3.mp3",
+            "askEnd": 2.99
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "얼굴, 하얗다"
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "왜 그렇게 얼굴이 하야요"
+            },
+            {
+              "id": "b",
+              "ko": "왜 그렇게 얼굴이 하얘요"
+            },
+            {
+              "id": "c",
+              "ko": "왜 그렇게 얼굴이 하얗아요"
+            }
+          ],
+          "en": "T: face, white — S: Why is your face so pale?",
+          "grammar": "하얗다 has ㅑ, so the fusion is ㅒ: 하얘요, not 하애요.",
+          "why": "왜 그렇게 얼굴이 하야요 drops the ㅎ and stops. 왜 그렇게 얼굴이 하얗아요 keeps it. This is the item the drill is really for — the other three all land on ㅐ and this one does not.",
+          "audio": {
+            "src": "audio/book/2b-u17-p3-4.mp3",
+            "askEnd": 2.99
+          }
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u17-pattern-4",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 4",
+      "icon": "🎧",
+      "pattern": "V-아/어 있다",
+      "blurbEn": "A thing, a place and a verb — and the state they add up to.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "Three cues this time, and the third is a dictionary form that has to be conjugated twice over: 걸리다 to 걸려, 눕다 to 누워 through the ㅂ-irregular, 앉다 to 앉아. The particles are yours too — 이/가 on the thing and 에 on the place — and the verb the teacher gives is already the intransitive or passive one, so nothing has to be turned round on the way.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "꽃병, 책상 위, 놓이다"
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "꽃병이 책상 위에 놓여 있어요",
+        "en": "T: vase, on the desk, be placed — S: A vase is sitting on the desk.",
+        "why": "Played through once so the shape of the exchange is heard before you answer one yourself.",
+        "audio": {
+          "src": "audio/book/2b-u17-p4-0.mp3",
+          "askEnd": 4.87
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "시계, 벽, 걸리다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "시계가 벽에 걸려 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "시계가 벽에 걸고 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "시계를 벽에 걸려 있어요"
+            }
+          ],
+          "en": "T: clock, wall, hang — S: A clock is hanging on the wall.",
+          "grammar": "걸리다 + -어 있다 gives 걸려 있다, the state a hung clock stays in.",
+          "why": "시계가 벽에 걸고 있어요 has the clock hanging something else up. 시계를 벽에 걸려 있어요 puts 를 on a subject — with the passive verb the clock is what the sentence is about.",
+          "audio": {
+            "src": "audio/book/2b-u17-p4-1.mp3",
+            "askEnd": 4.13
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "인형, 가방, 달리다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "인형이 가방에 달고 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "인형이 가방에 달았어요"
+            },
+            {
+              "id": "c",
+              "ko": "인형이 가방에 달려 있어요"
+            }
+          ],
+          "en": "T: doll, bag, be attached — S: A doll is hanging off the bag.",
+          "grammar": "달리다 is the passive of 달다 — this is the line 켈리 uses to describe her lost backpack.",
+          "why": "인형이 가방에 달고 있어요 has the doll doing the attaching. 인형이 가방에 달았어요 reports the moment it was attached rather than the state it is in now.",
+          "audio": {
+            "src": "audio/book/2b-u17-p4-2.mp3",
+            "askEnd": 4.36
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "아이, 침대, 눕다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "아이가 침대에 눕어 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "아이가 침대에 누워 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "아이가 침대에 눕고 있어요"
+            }
+          ],
+          "en": "T: child, bed, lie down — S: A child is lying on the bed.",
+          "grammar": "눕다 is a ㅂ-irregular: the ㅂ becomes 우 and 눕 + -어 comes out 누워.",
+          "why": "아이가 침대에 눕어 있어요 conjugates it as if the ㅂ were ordinary. 아이가 침대에 눕고 있어요 is the child in the act of lying down. A child rather than a grandfather, so 있어요 stays plain here.",
+          "audio": {
+            "src": "audio/book/2b-u17-p4-3.mp3",
+            "askEnd": 4.45
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "동생, 아버지 옆, 앉다"
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "동생이 아버지 옆에 앉아 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "동생이 아버지 옆에 앉고 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "동생이 아버지 옆에서 앉아 있어요"
+            }
+          ],
+          "en": "T: little brother, next to father, sit — S: My little brother is sitting next to our father.",
+          "grammar": "옆 needs 에 for a position: 아버지 옆에 앉아 있어요.",
+          "why": "동생이 아버지 옆에 앉고 있어요 is the act of sitting down. 동생이 아버지 옆에서 앉아 있어요 uses 에서, which marks where something is done rather than where somebody is.",
+          "audio": {
+            "src": "audio/book/2b-u17-p4-4.mp3",
+            "askEnd": 4.62
+          }
+        }
+      ],
+      "type": "build"
+    }
+  ]
+}

@@ -1,0 +1,1705 @@
+{
+  "unit": "2b-unit-17",
+  "titleKo": "카세트 플레이어",
+  "titleEn": "The book's own recordings",
+  "unitKo": "17과 비행기를 놓칠 뻔했어요",
+  "source": "Seoul National University Korean 2B, Unit 17, tracks 72-81",
+  "closeKo": "닫기",
+  "tracks": [
+    {
+      "n": 72,
+      "sec": "문법과 표현 1-1",
+      "secEn": "V-아다/어다 주다",
+      "dur": 15.73,
+      "src": "audio/book/2b-u17-trk72.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "어머니는 언제 중국으로 돌아가셨어요?",
+          "at": 3.78,
+          "end": 7.4
+        },
+        {
+          "who": "B",
+          "ko": "오늘 가셨어요. 아침에 공항까지 모셔다 드리고 왔어요.",
+          "at": 8.31,
+          "end": 13.67
+        }
+      ]
+    },
+    {
+      "n": 73,
+      "sec": "문법과 표현 1-2",
+      "secEn": "V-(으)ㄹ 뻔하다",
+      "dur": 13.43,
+      "src": "audio/book/2b-u17-trk73.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "오늘 다른 때보다 늦게 왔네요.",
+          "at": 3.77,
+          "end": 6.63
+        },
+        {
+          "who": "B",
+          "ko": "네, 길이 막혀서 지각할 뻔했어요.",
+          "at": 7.53,
+          "end": 11.39
+        }
+      ]
+    },
+    {
+      "n": 74,
+      "sec": "말하기 1",
+      "secEn": "Almost missing the flight",
+      "dur": 44.72,
+      "src": "audio/book/2b-u17-trk74.mp3",
+      "lines": [
+        {
+          "who": "켈리",
+          "ko": "오늘은 다른 때보다 늦게 왔네요.",
+          "at": 3.77,
+          "end": 6.65
+        },
+        {
+          "who": "샤오밍",
+          "ko": "오늘 부모님이 고향으로 돌아가셔서 공항에 모셔다 드리고 왔어요.",
+          "at": 7.55,
+          "end": 13.48
+        },
+        {
+          "who": "켈리",
+          "ko": "아, 그래요? 잘 모셔다 드렸어요?",
+          "at": 14.38,
+          "end": 17.61
+        },
+        {
+          "who": "샤오밍",
+          "ko": "네. 그런데 비행기를 놓칠 뻔했어요.",
+          "at": 18.5,
+          "end": 23.09
+        },
+        {
+          "who": "켈리",
+          "ko": "왜요? 무슨 일 있었어요?",
+          "at": 23.99,
+          "end": 26.64
+        },
+        {
+          "who": "샤오밍",
+          "ko": "길이 너무 막혀서 공항에 늦게 도착했어요.",
+          "at": 27.53,
+          "end": 31.55
+        },
+        {
+          "who": "켈리",
+          "ko": "아침부터 바빴겠네요.",
+          "at": 32.44,
+          "end": 34.58
+        },
+        {
+          "who": "샤오밍",
+          "ko": "네, 정말 정신이 없었어요. 그래도 비행기를 안 놓쳐서 다행이에요.",
+          "at": 35.48,
+          "end": 42.69
+        }
+      ]
+    },
+    {
+      "n": 75,
+      "sec": "문법과 표현 2-1",
+      "secEn": "‘ㅎ’ 불규칙",
+      "dur": 13.87,
+      "src": "audio/book/2b-u17-trk75.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "새로 산 가방을 잃어버렸어요.",
+          "at": 3.77,
+          "end": 6.73
+        },
+        {
+          "who": "B",
+          "ko": "아, 그 까만 가방요? 속상하겠어요.",
+          "at": 7.63,
+          "end": 11.83
+        }
+      ]
+    },
+    {
+      "n": 76,
+      "sec": "문법과 표현 2-2",
+      "secEn": "V-아/어 있다",
+      "dur": 12.07,
+      "src": "audio/book/2b-u17-trk76.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "저기 걸려 있는 옷 좀 보여 주세요.",
+          "at": 3.77,
+          "end": 6.72
+        },
+        {
+          "who": "B",
+          "ko": "네, 저 파란색 원피스요?",
+          "at": 7.63,
+          "end": 10.02
+        }
+      ]
+    },
+    {
+      "n": 77,
+      "sec": "말하기 2",
+      "secEn": "At the lost-property office",
+      "dur": 49.61,
+      "src": "audio/book/2b-u17-trk77.mp3",
+      "lines": [
+        {
+          "who": "직원",
+          "ko": "어떻게 오셨습니까?",
+          "at": 3.77,
+          "end": 5.26
+        },
+        {
+          "who": "켈리",
+          "ko": "가방을 잃어버려서 왔는데요.",
+          "at": 6.17,
+          "end": 8.34
+        },
+        {
+          "who": "직원",
+          "ko": "어디서 잃어버리셨습니까?",
+          "at": 9.27,
+          "end": 11.04
+        },
+        {
+          "who": "켈리",
+          "ko": "오늘 아침에 지하철 2호선에 놓고 내렸어요.",
+          "at": 11.96,
+          "end": 15.29
+        },
+        {
+          "who": "직원",
+          "ko": "가방이 어떻게 생겼습니까?",
+          "at": 16.25,
+          "end": 18.49
+        },
+        {
+          "who": "켈리",
+          "ko": "까만색 배낭인데 하얀색 인형이 달려 있어요.",
+          "at": 19.39,
+          "end": 23.12
+        },
+        {
+          "who": "직원",
+          "ko": "가방 안에 뭐가 들어 있습니까?",
+          "at": 24.02,
+          "end": 26.71
+        },
+        {
+          "who": "켈리",
+          "ko": "책 두 권하고 지갑이 들어 있어요.",
+          "at": 27.64,
+          "end": 30.2
+        },
+        {
+          "who": "직원",
+          "ko": "잠깐만요. 그런 가방은 없는데요.",
+          "at": 31.1,
+          "end": 35.55
+        },
+        {
+          "who": "켈리",
+          "ko": "그래요? 꼭 찾아야 하는데 큰일 났네요.",
+          "at": 36.46,
+          "end": 40.65
+        },
+        {
+          "who": "직원",
+          "ko": "찾으면 연락 드릴 테니까 여기에 전화번호를 써 놓고 가세요.",
+          "at": 41.58,
+          "end": 47.57
+        }
+      ]
+    },
+    {
+      "n": 78,
+      "sec": "듣기 1",
+      "secEn": "A bag left in a restaurant, and the card inside it",
+      "dur": 78.55,
+      "src": "audio/book/2b-u17-trk78.mp3",
+      "lines": [
+        {
+          "who": "여",
+          "ko": "스티븐 씨, 무슨 안 좋은 일 있어요? 기분이 안 좋아 보여요.",
+          "at": 8.59,
+          "end": 14.46
+        },
+        {
+          "who": "남",
+          "ko": "새로 산 하얀색 가방을 잃어버렸어요. 식당에 두고 온 것 같은데 못 찾았어요.",
+          "at": 15.36,
+          "end": 23
+        },
+        {
+          "who": "여",
+          "ko": "식당에 물어봤어요?",
+          "at": 23.96,
+          "end": 25.67
+        },
+        {
+          "who": "남",
+          "ko": "네. 찾으면 연락해 주기로 했는데 아직 연락이 안 왔어요. 다른 건 잃어버려도 괜찮은데 가방 안에 외국인등록증이 들어 있어서 큰일이에요.",
+          "at": 26.56,
+          "end": 41.95
+        },
+        {
+          "who": "여",
+          "ko": "외국인등록증은 다시 받을 수 있으니까 너무 걱정하지 마세요.",
+          "at": 42.84,
+          "end": 48.1
+        },
+        {
+          "who": "남",
+          "ko": "그래요? 다시 받으려면 어떻게 해야 돼요?",
+          "at": 48.99,
+          "end": 53.35
+        },
+        {
+          "who": "여",
+          "ko": "출입국관리사무소에 가 본 적 있지요? 거기에 가서 다시 신청하면 돼요.",
+          "at": 54.25,
+          "end": 60.85
+        },
+        {
+          "who": "남",
+          "ko": "혹시 신청할 때 뭐가 필요한지 알아요?",
+          "at": 61.74,
+          "end": 65.54
+        },
+        {
+          "who": "여",
+          "ko": "여권을 가지고 가야 돼요. 여권은 가지고 있어요?",
+          "at": 66.44,
+          "end": 70.91
+        },
+        {
+          "who": "남",
+          "ko": "네, 있어요. 알려 줘서 고마워요.",
+          "at": 71.8,
+          "end": 75.5
+        }
+      ]
+    },
+    {
+      "n": 79,
+      "sec": "듣기 2",
+      "secEn": "Reporting a burglary",
+      "dur": 104.15,
+      "src": "audio/book/2b-u17-trk79.mp3",
+      "lines": [
+        {
+          "who": "여",
+          "ko": "거기 경찰서죠? 집에 도둑이 든 것 같아요. 빨리 좀 와 주세요.",
+          "at": 13.55,
+          "end": 20.41
+        },
+        {
+          "who": "경찰",
+          "ko": "네, 주소를 말씀해 주세요.",
+          "at": 21.3,
+          "end": 24.2
+        },
+        {
+          "who": "여",
+          "ko": "여기는 신림동 33번지 1층이에요.",
+          "at": 25.1,
+          "end": 29.57
+        },
+        {
+          "who": "경찰",
+          "ko": "네, 지금 바로 가겠습니다.",
+          "at": 30.47,
+          "end": 32.87
+        },
+        {
+          "who": "경찰",
+          "ko": "경찰서에서 나왔는데요.",
+          "at": 39.8,
+          "end": 41.64
+        },
+        {
+          "who": "여",
+          "ko": "네, 들어오세요.",
+          "at": 42.52,
+          "end": 44.21
+        },
+        {
+          "who": "경찰",
+          "ko": "다치신 분은 없습니까?",
+          "at": 45.11,
+          "end": 46.76
+        },
+        {
+          "who": "여",
+          "ko": "네, 다행히 다친 사람은 없어요.",
+          "at": 47.65,
+          "end": 50.8
+        },
+        {
+          "who": "경찰",
+          "ko": "없어진 물건이 뭐지요?",
+          "at": 51.68,
+          "end": 53.57
+        },
+        {
+          "who": "여",
+          "ko": "아직 정확하게 모르겠는데 시계하고 노트북이 없어진 것 같아요.",
+          "at": 54.47,
+          "end": 60.73
+        },
+        {
+          "who": "경찰",
+          "ko": "처음 집에 오셨을 때 어땠습니까? 좀 자세하게 말씀해 주세요.",
+          "at": 61.63,
+          "end": 67.05
+        },
+        {
+          "who": "여",
+          "ko": "제가 아침에 외출해서 조금 전에 집에 돌아왔는데 현관문이 열려 있었어요. 그리고 집 안으로 들어오려고 하는데 어떤 남자가 뛰어나왔어요.",
+          "at": 67.97,
+          "end": 81.68
+        },
+        {
+          "who": "경찰",
+          "ko": "혹시 얼굴을 보셨습니까?",
+          "at": 82.56,
+          "end": 84.83
+        },
+        {
+          "who": "여",
+          "ko": "아니요, 밤이라서 얼굴은 잘 보지 못했는데 키가 큰 편이었어요. 하얀색 티셔츠와 까만색 바지를 입었고, 회색 모자를 썼어요.",
+          "at": 85.74,
+          "end": 98.64
+        },
+        {
+          "who": "경찰",
+          "ko": "네, 알겠습니다.",
+          "at": 99.52,
+          "end": 101.12
+        }
+      ]
+    },
+    {
+      "n": 80,
+      "sec": "발음 준비",
+      "secEn": "유음화 — listen",
+      "dur": 18.13,
+      "src": "audio/book/2b-u17-trk80.mp3",
+      "lines": [
+        {
+          "who": "1",
+          "ko": "고향에 도착하면 연락하세요.",
+          "at": 7.8,
+          "end": 10.4
+        },
+        {
+          "who": "2",
+          "ko": "저는 신림동에서 살아요.",
+          "at": 13.57,
+          "end": 16.07
+        }
+      ]
+    },
+    {
+      "n": 81,
+      "sec": "발음 연습",
+      "secEn": "유음화 — repeat",
+      "dur": 41.27,
+      "src": "audio/book/2b-u17-trk81.mp3",
+      "lines": [
+        {
+          "who": "1",
+          "ko": "한라산에 가 봤어요?",
+          "at": 9.62,
+          "end": 11.54
+        },
+        {
+          "who": "2",
+          "ko": "지하철이 버스보다 편리해요.",
+          "at": 15.8,
+          "end": 18.63
+        },
+        {
+          "who": "3",
+          "ko": "여기서 신림동까지 얼마나 걸려요?",
+          "at": 23.02,
+          "end": 26.42
+        },
+        {
+          "who": "4A",
+          "ko": "아키라 씨 전화번호를 알면 좀 연락해 주세요.",
+          "at": 30.75,
+          "end": 34.85
+        },
+        {
+          "who": "4B",
+          "ko": "네, 제가 연락할게요.",
+          "at": 35.75,
+          "end": 38.21
+        }
+      ]
+    }
+  ],
+  "dictation": {
+    "filter": {
+      "keep": [
+        "a whole sentence someone would actually say",
+        "5-22 syllables: long enough to need listening, short enough to hold in your head",
+        "carries at least one thing you can only write correctly if you know something — the unit's grammar (V-아다/어다 주다, V-(으)ㄹ 뻔하다, the ㅎ-irregular, V-아/어 있다), a gap between sound and spelling (this unit's 발음 point is the other half of 유음화: a 받침 ㄴ before a ㄹ is read [ㄹ], so 연락 is [열락], 한라산 is [할라산], 편리 is [펼리] and 신림동 is [실림동] — Unit 16 taught the ㄹ pulling a ㄴ across, and this is the ㄴ being pulled), or a unit headword"
+      ],
+      "drop": [
+        "fixed courtesies — 네, 말씀 감사합니다, 여보세요",
+        "bare reactions — 무슨 일인데요?, 아, 어떻게 하죠?",
+        "proper nouns standing alone: 부산입니다 is five syllables of place name with nothing to decide",
+        "anything under ~5 syllables: nothing to decide when you write it"
+      ],
+      "splitAtClause": "Printed turns past 22 syllables are cut at a boundary the recording itself pauses on — never mid-clause and never trimmed — and each part names its parent in splitFrom. Track 79 has the two longest turns in the unit at 56 and 49 syllables, each read over five or seven spans, so both are cut twice and the connecting fragments — 제가 아침에 외출해서, 아니요 밤이라서 얼굴은 잘 보지 못했는데 — are left out rather than shipped as sentences they are not."
+    },
+    "items": [
+      {
+        "id": 1,
+        "track": 72,
+        "who": "A",
+        "ko": "어머니는 언제 중국으로 돌아가셨어요?",
+        "en": "When did your mother go back to China?",
+        "syl": 16,
+        "why": "돌아가시다 is the honorific of 돌아가다, so the -시- is not optional politeness — it is how you speak about someone else’s mother. 중국으로 is said [중구그로]: the ㄱ of 국 has already crossed into 으로, which is why the ear gives you no help with the space.",
+        "tags": [
+          "높임말",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d01.mp3",
+          "voiced": 3.5,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 2,
+        "track": 72,
+        "who": "B",
+        "ko": "오늘 가셨어요. 아침에 공항까지 모셔다 드리고 왔어요.",
+        "en": "She went today. I took her to the airport this morning.",
+        "syl": 22,
+        "why": "The page’s own V-아다/어다 주다, in the humble half of it: 모셔다 드리다 is 데려다 주다 said about someone you are looking up to. 아침에 is said [아치메] — the ㅁ of 침 has moved into 에 and the boundary you can hear is not the one you write.",
+        "tags": [
+          "V-아다/어다 주다",
+          "높임말"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d02.mp3",
+          "voiced": 4.54,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 3,
+        "track": 73,
+        "who": "A",
+        "ko": "오늘 다른 때보다 늦게 왔네요.",
+        "en": "You came later than usual today.",
+        "syl": 12,
+        "why": "늦게 is said [늗께]. The ㅈ of 늦 is pronounced [ㄷ] at the end of a syllable and then tenses the ㄱ behind it, so what you hear is 께 and what you write is 게 — twice over, neither letter is where it sounds.",
+        "tags": [
+          "N보다",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d03.mp3",
+          "voiced": 2.74,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 4,
+        "track": 73,
+        "who": "B",
+        "ko": "네, 길이 막혀서 지각할 뻔했어요.",
+        "en": "Yes, the traffic was bad so I was almost late.",
+        "syl": 13,
+        "why": "The chapter’s V-(으)ㄹ 뻔하다: it did not happen, and saying it this way is how you say so. 막혀서 is said [마켜서] — the ㄱ of 막 and the ㅎ of 혀 have fused into a single aspirated ㅋ, and neither letter survives in the sound.",
+        "tags": [
+          "V-(으)ㄹ 뻔하다",
+          "격음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d04.mp3",
+          "voiced": 2.91,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 5,
+        "track": 74,
+        "who": "샤오밍",
+        "ko": "오늘 부모님이 고향으로 돌아가셔서",
+        "en": "My parents went back to their hometown today, so",
+        "syl": 15,
+        "why": "고향으로 is said [고향으로] with no change, but 부모님이 is [부모니미] — the ㅁ crosses into 이 and then the 이 itself is a particle, so three written pieces arrive as one run of sound.",
+        "tags": [
+          "V-아/어서",
+          "연음"
+        ],
+        "splitFrom": "오늘 부모님이 고향으로 돌아가셔서 공항에 모셔다 드리고 왔어요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d05.mp3",
+          "voiced": 3.11,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 6,
+        "track": 74,
+        "who": "샤오밍",
+        "ko": "공항에 모셔다 드리고 왔어요.",
+        "en": "I took them to the airport and came back.",
+        "syl": 12,
+        "why": "공항에 is said [공항에] — the ㅇ of 항 is the one 받침 that does not move, so this is one of the few places the space you hear is the space you write. 왔어요 is [와써요], where the ㅆ has crossed.",
+        "tags": [
+          "V-아다/어다 주다",
+          "연음"
+        ],
+        "splitFrom": "오늘 부모님이 고향으로 돌아가셔서 공항에 모셔다 드리고 왔어요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d06.mp3",
+          "voiced": 2.12,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 7,
+        "track": 74,
+        "who": "켈리",
+        "ko": "아, 그래요? 잘 모셔다 드렸어요?",
+        "en": "Oh, really? Did you get them there all right?",
+        "syl": 12,
+        "why": "드렸어요 is said [드려써요]. The ㅆ of 렸 has moved into 어요 and the syllable you hear as 써 is written across two — the commonest place a past tense is misspelt.",
+        "tags": [
+          "V-아다/어다 주다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d07.mp3",
+          "voiced": 2.42,
+          "rate": 5
+        }
+      },
+      {
+        "id": 8,
+        "track": 74,
+        "who": "샤오밍",
+        "ko": "네. 그런데 비행기를 놓칠 뻔했어요.",
+        "en": "Yes. But I almost missed the flight.",
+        "syl": 14,
+        "why": "The chapter’s title sentence. 놓칠 is said [노칠] — the ㅎ of 놓 has fused with the ㅊ behind it, so the ㅎ you write is not a sound of its own; and 뻔했어요 is [뻔해써요].",
+        "tags": [
+          "V-(으)ㄹ 뻔하다",
+          "격음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d08.mp3",
+          "voiced": 3.06,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 9,
+        "track": 74,
+        "who": "샤오밍",
+        "ko": "길이 너무 막혀서 공항에 늦게 도착했어요.",
+        "en": "The traffic was so bad that I got to the airport late.",
+        "syl": 17,
+        "why": "길이 is said [기리] and 막혀서 is [마켜서] — the first moves a ㄹ across, the second burns a ㄱ and a ㅎ into one ㅋ. Two different things happen to two 받침 in one short sentence.",
+        "tags": [
+          "V-아/어서",
+          "격음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d09.mp3",
+          "voiced": 3.45,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 10,
+        "track": 74,
+        "who": "켈리",
+        "ko": "아침부터 바빴겠네요.",
+        "en": "You must have been busy from the morning.",
+        "syl": 9,
+        "why": "-겠- is the guess: you were not there, so you say 바빴겠네요 rather than 바빴네요. It is said [바빧껜네요] — the ㅆ closes as [ㄷ], tenses the ㄱ, and then the ㄴ turns that closed ㄷ into [ㄴ].",
+        "tags": [
+          "A/V-겠-",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d10.mp3",
+          "voiced": 2.02,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 11,
+        "track": 74,
+        "who": "샤오밍",
+        "ko": "네, 정말 정신이 없었어요.",
+        "en": "Yes, I was really in a whirl.",
+        "syl": 10,
+        "why": "없었어요 is said [업써써요]: the ㅄ of 없 keeps only its ㅂ, the ㅅ tenses and crosses into 었, and the ㅆ of 었 crosses again. Three letters of the spelling and none of them where you hear them.",
+        "tags": [
+          "정신(이) 없다",
+          "된소리되기"
+        ],
+        "splitFrom": "네, 정말 정신이 없었어요. 그래도 비행기를 안 놓쳐서 다행이에요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d11.mp3",
+          "voiced": 2.27,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 12,
+        "track": 74,
+        "who": "샤오밍",
+        "ko": "그래도 비행기를 안 놓쳐서 다행이에요.",
+        "en": "Still, it is a relief I did not miss the flight.",
+        "syl": 16,
+        "why": "놓쳐서 is said [노쳐서], the ㅎ gone into the ㅊ. 다행이에요 is [다행이에요] — the ㅇ stays put — so the sentence has one 받침 that vanishes and one that does not, side by side.",
+        "tags": [
+          "안 + V",
+          "격음화"
+        ],
+        "splitFrom": "네, 정말 정신이 없었어요. 그래도 비행기를 안 놓쳐서 다행이에요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d12.mp3",
+          "voiced": 3.07,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 13,
+        "track": 75,
+        "who": "A",
+        "ko": "새로 산 가방을 잃어버렸어요.",
+        "en": "I lost the bag I had just bought.",
+        "syl": 12,
+        "why": "산 is the past modifier of 사다 — the bag was bought, and the buying is finished. 잃어버렸어요 is said [이러버려써요]: the ㅀ of 잃 gives up its ㅎ entirely and lets the ㄹ cross, so five written syllables arrive as five you would spell quite differently.",
+        "tags": [
+          "V-(으)ㄴ",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d13.mp3",
+          "voiced": 2.84,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 14,
+        "track": 75,
+        "who": "B",
+        "ko": "아, 그 까만 가방요? 속상하겠어요.",
+        "en": "Oh, that black bag? You must be upset.",
+        "syl": 13,
+        "why": "The page’s own ㅎ-irregular: 까맣다 loses its ㅎ before a vowel and the ending swallows what is left, giving 까만 rather than 까맣은. 속상하겠어요 is the guess again — you are reading it off their face.",
+        "tags": [
+          "‘ㅎ’ 불규칙",
+          "A/V-겠-"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d14.mp3",
+          "voiced": 3.47,
+          "rate": 3.7
+        }
+      },
+      {
+        "id": 15,
+        "track": 76,
+        "who": "A",
+        "ko": "저기 걸려 있는 옷 좀 보여 주세요.",
+        "en": "Could you show me the clothes hanging over there.",
+        "syl": 13,
+        "why": "The page’s V-아/어 있다: 걸려 있다 is not someone hanging something, it is the thing still hanging. 옷 좀 is said [옫쫌] — the ㅅ closes as [ㄷ] and tenses the ㅈ behind it.",
+        "tags": [
+          "V-아/어 있다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d15.mp3",
+          "voiced": 2.83,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 16,
+        "track": 76,
+        "who": "B",
+        "ko": "네, 저 파란색 원피스요?",
+        "en": "Yes, that blue dress?",
+        "syl": 9,
+        "why": "파란색 is the ㅎ-irregular again, sitting inside a noun: 파랗다 + -ㄴ gives 파란, and 색 is bolted on after. 원피스요 is said [원피스요] — nothing moves, which is worth noticing in a chapter where most things do.",
+        "tags": [
+          "색깔",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d16.mp3",
+          "voiced": 2.27,
+          "rate": 4
+        }
+      },
+      {
+        "id": 17,
+        "track": 77,
+        "who": "직원",
+        "ko": "어떻게 오셨습니까?",
+        "en": "How can I help you?",
+        "syl": 8,
+        "why": "The counter speaks in 하십시오체 all through this dialogue, and the customer answers in 해요체 — the gap between them is the whole register of the scene. 어떻게 is said [어떠케], the ㅎ fusing with the ㄱ.",
+        "tags": [
+          "하십시오체",
+          "격음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d17.mp3",
+          "voiced": 1.37,
+          "rate": 5.8
+        }
+      },
+      {
+        "id": 18,
+        "track": 77,
+        "who": "켈리",
+        "ko": "가방을 잃어버려서 왔는데요.",
+        "en": "I have come because I lost my bag.",
+        "syl": 12,
+        "why": "왔는데요 is said [완는데요]: the ㅆ of 왔 closes as [ㄷ] and is then turned into [ㄴ] by the ㄴ behind it. The -는데요 leaves the sentence open, which is how you ask for help without asking.",
+        "tags": [
+          "V-아/어서",
+          "V-는데요"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d18.mp3",
+          "voiced": 2.05,
+          "rate": 5.9
+        }
+      },
+      {
+        "id": 19,
+        "track": 77,
+        "who": "직원",
+        "ko": "어디서 잃어버리셨습니까?",
+        "en": "Where did you lose it?",
+        "syl": 11,
+        "why": "잃어버리셨습니까 stacks -시- onto 잃어버리다 and then the formal ending on top, and it is said [이러버리셛씀니까] — the ㅀ drops its ㅎ, the ㅆ closes, and the ㅂ of 습 becomes [ㅁ] before the ㄴ.",
+        "tags": [
+          "높임말",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d19.mp3",
+          "voiced": 1.65,
+          "rate": 6.7
+        }
+      },
+      {
+        "id": 20,
+        "track": 77,
+        "who": "켈리",
+        "ko": "오늘 아침에 지하철 2호선에 놓고 내렸어요.",
+        "en": "I left it on subway line 2 this morning and got off.",
+        "syl": 17,
+        "why": "놓고 is said [노코] — the ㅎ of 놓 fuses with the ㄱ and neither letter is heard as written. 놓고 내리다 is the phrase the chapter wants: you put it down and then you got off, which is how a bag is lost on a train.",
+        "tags": [
+          "놓고 내리다",
+          "격음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d20.mp3",
+          "voiced": 3.21,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 21,
+        "track": 77,
+        "who": "직원",
+        "ko": "가방이 어떻게 생겼습니까?",
+        "en": "What does the bag look like?",
+        "syl": 11,
+        "why": "생겼습니까 is said [생겯씀니까]. This is the question the whole 말하기 turns on, and the answer to it is a colour and a pattern — which is why the 어휘 page taught twelve colours before this page arrived.",
+        "tags": [
+          "하십시오체",
+          "격음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d21.mp3",
+          "voiced": 2.12,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 22,
+        "track": 77,
+        "who": "켈리",
+        "ko": "까만색 배낭인데 하얀색 인형이 달려 있어요.",
+        "en": "It is a black backpack with a white doll hanging off it.",
+        "syl": 18,
+        "why": "Two ㅎ-irregulars as colour names and one V-아/어 있다 in a single sentence — 까만, 하얀, 달려 있어요. 인형이 is said [인형이] with the ㅇ holding, and 있어요 is [이써요].",
+        "tags": [
+          "V-아/어 있다",
+          "색깔"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d22.mp3",
+          "voiced": 3.61,
+          "rate": 5
+        }
+      },
+      {
+        "id": 23,
+        "track": 77,
+        "who": "직원",
+        "ko": "가방 안에 뭐가 들어 있습니까?",
+        "en": "What is inside the bag?",
+        "syl": 12,
+        "why": "안에 is said [아네] — the ㄴ crosses into 에 and the two words arrive as one. 들어 있다 is the same V-아/어 있다 the page teaches, used of a thing that was put in and is still in.",
+        "tags": [
+          "들어 있다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d23.mp3",
+          "voiced": 2.57,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 24,
+        "track": 77,
+        "who": "켈리",
+        "ko": "책 두 권하고 지갑이 들어 있어요.",
+        "en": "There are two books and a wallet inside.",
+        "syl": 13,
+        "why": "권 is the counter for books. 권하고 is said [궈나고] — the ㅎ is squeezed out between the ㄴ and the vowel, and the ㄴ crosses into its place. 지갑이 is [지가비], the ㅂ moving into 이, which is why the particle is so easy to lose when writing.",
+        "tags": [
+          "단위 명사",
+          "격음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d24.mp3",
+          "voiced": 2.44,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 25,
+        "track": 77,
+        "who": "직원",
+        "ko": "잠깐만요. 그런 가방은 없는데요.",
+        "en": "One moment. We do not have a bag like that.",
+        "syl": 13,
+        "why": "없는데요 is said [엄는데요]: the ㅄ of 없 keeps its ㅂ, and the ㄴ behind it turns that ㅂ into [ㅁ]. The -는데요 is doing the softening — it is a refusal that leaves the door open.",
+        "tags": [
+          "V-는데요",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d25.mp3",
+          "voiced": 2.73,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 26,
+        "track": 77,
+        "who": "켈리",
+        "ko": "그래요? 꼭 찾아야 하는데 큰일 났네요.",
+        "en": "Really? I have to find it — this is a disaster.",
+        "syl": 15,
+        "why": "큰일 is said [큰닐] — a ㄴ appears between the two words that neither of them writes — and then 났네요 is [난네요]. 큰일 나다 is the chapter’s own phrase for something going badly wrong.",
+        "tags": [
+          "큰일이 나다",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d26.mp3",
+          "voiced": 3.56,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 27,
+        "track": 77,
+        "who": "직원",
+        "ko": "찾으면 연락 드릴 테니까",
+        "en": "We will be in touch if we find it, so",
+        "syl": 10,
+        "why": "The chapter’s 발음 point, right here: 연락 is said [열락]. The ㄴ of 연 is pulled across by the ㄹ of 락 and both come out as [ㄹ] — the mirror of Unit 16’s 설날 [설랄], where the ㄹ did the pulling.",
+        "tags": [
+          "A/V-(으)ㄹ 테니까",
+          "유음화"
+        ],
+        "splitFrom": "찾으면 연락 드릴 테니까 여기에 전화번호를 써 놓고 가세요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d27.mp3",
+          "voiced": 2.06,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 28,
+        "track": 77,
+        "who": "직원",
+        "ko": "여기에 전화번호를 써 놓고 가세요.",
+        "en": "Write your number here before you go.",
+        "syl": 14,
+        "why": "Unit 16’s V-아/어 놓다 turning up in Unit 17: you write it and it stays written. 놓고 is [노코] again — the same fusion as 지하철에 놓고 내렸어요 four turns earlier, and the same word.",
+        "tags": [
+          "V-아/어 놓다",
+          "격음화"
+        ],
+        "splitFrom": "찾으면 연락 드릴 테니까 여기에 전화번호를 써 놓고 가세요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d28.mp3",
+          "voiced": 2.66,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 29,
+        "track": 78,
+        "who": "여",
+        "ko": "스티븐 씨, 무슨 안 좋은 일 있어요? 기분이 안 좋아 보여요.",
+        "en": "Steven, has something bad happened? You look like you are in a bad mood.",
+        "syl": 22,
+        "why": "좋은 is said [조은] and 좋아 is [조아] — the ㅎ of 좋다 disappears completely between vowels, twice in one sentence, and neither time is there anything left of it to hear.",
+        "tags": [
+          "A/V-아/어 보이다",
+          "ㅎ 탈락"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d29.mp3",
+          "voiced": 4.15,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 30,
+        "track": 78,
+        "who": "남",
+        "ko": "새로 산 하얀색 가방을 잃어버렸어요.",
+        "en": "I lost the white bag I had just bought.",
+        "syl": 15,
+        "why": "하얀색 is the ㅎ-irregular inside a colour name: 하얗다 + -ㄴ gives 하얀, not 하얗은. 가방을 is said [가방을] — the ㅇ does not move — but 잃어버렸어요 is [이러버려써요], which does.",
+        "tags": [
+          "‘ㅎ’ 불규칙",
+          "연음"
+        ],
+        "splitFrom": "새로 산 하얀색 가방을 잃어버렸어요. 식당에 두고 온 것 같은데 못 찾았어요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d30.mp3",
+          "voiced": 3.47,
+          "rate": 4.3
+        }
+      },
+      {
+        "id": 31,
+        "track": 78,
+        "who": "남",
+        "ko": "식당에 두고 온 것 같은데 못 찾았어요.",
+        "en": "I think I left it in a restaurant, but I could not find it.",
+        "syl": 15,
+        "why": "못 찾았어요 is said [몯찌자써요]: the ㅅ of 못 closes as [ㄷ], tenses the ㅊ behind it, and the ㅆ of 찾았 crosses into 어요. 것 같은데 is [걷까튼데] for the same reason.",
+        "tags": [
+          "A/V-(으)ㄴ 것 같다",
+          "된소리되기"
+        ],
+        "splitFrom": "새로 산 하얀색 가방을 잃어버렸어요. 식당에 두고 온 것 같은데 못 찾았어요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d31.mp3",
+          "voiced": 2.73,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 32,
+        "track": 78,
+        "who": "여",
+        "ko": "식당에 물어봤어요?",
+        "en": "Did you ask at the restaurant?",
+        "syl": 8,
+        "why": "물어봤어요 is said [무러봐써요] — the ㄹ crosses into 어 and the ㅆ into 어요. 식당에 is [식땅에], the ㄱ tensing the ㄷ behind it, which is a change the spelling never shows.",
+        "tags": [
+          "V-아/어 보다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d32.mp3",
+          "voiced": 1.59,
+          "rate": 5
+        }
+      },
+      {
+        "id": 33,
+        "track": 78,
+        "who": "남",
+        "ko": "찾으면 연락해 주기로 했는데 아직 연락이 안 왔어요.",
+        "en": "They said they would ring me if they found it, but no call has come yet.",
+        "syl": 21,
+        "why": "연락 twice, and both times it is said [열락] — the ㄴ pulled across by the ㄹ. 연락해 is then [열라캐], the ㅎ fusing with the ㄱ on top of that, so one written word takes two changes before you hear it.",
+        "tags": [
+          "유음화",
+          "V-기로 하다"
+        ],
+        "splitFrom": "네. 찾으면 연락해 주기로 했는데 아직 연락이 안 왔어요. 다른 건 잃어버려도 괜찮은데 가방 안에 외국인등록증이 들어 있어서 큰일이에요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d33.mp3",
+          "voiced": 4.18,
+          "rate": 5
+        }
+      },
+      {
+        "id": 34,
+        "track": 78,
+        "who": "남",
+        "ko": "가방 안에 외국인등록증이 들어 있어서 큰일이에요.",
+        "en": "My alien registration card is in the bag, which is a serious problem.",
+        "syl": 21,
+        "why": "외국인등록증이 is a long compound and every boundary inside it moves: [외구긴등녹쯩이]. 큰일이에요 is [크니리에요] — the ㄴ and the ㄹ both cross, and the 큰일 you write is not a shape you would guess from the sound.",
+        "tags": [
+          "들어 있다",
+          "연음"
+        ],
+        "splitFrom": "네. 찾으면 연락해 주기로 했는데 아직 연락이 안 왔어요. 다른 건 잃어버려도 괜찮은데 가방 안에 외국인등록증이 들어 있어서 큰일이에요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d34.mp3",
+          "voiced": 4.49,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 35,
+        "track": 78,
+        "who": "여",
+        "ko": "외국인등록증은 다시 받을 수 있으니까",
+        "en": "You can get another alien registration card, so",
+        "syl": 16,
+        "why": "받을 수 is said [바들 쑤] — the ㄹ of the modifier tenses the ㅅ behind it, which is the same rule that makes 갈 데 into [갈 떼]. 있으니까 is [이쓰니까].",
+        "tags": [
+          "V-(으)ㄹ 수 있다",
+          "된소리되기"
+        ],
+        "splitFrom": "외국인등록증은 다시 받을 수 있으니까 너무 걱정하지 마세요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d35.mp3",
+          "voiced": 3.08,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 36,
+        "track": 78,
+        "who": "여",
+        "ko": "너무 걱정하지 마세요.",
+        "en": "So do not worry too much.",
+        "syl": 9,
+        "why": "걱정 is said [걱쩡]: the ㄱ of 걱 tenses the ㅈ behind it. The negative command is -지 마세요, never 안 -세요, and this is the sentence the whole exchange has been heading for.",
+        "tags": [
+          "V-지 마세요",
+          "된소리되기"
+        ],
+        "splitFrom": "외국인등록증은 다시 받을 수 있으니까 너무 걱정하지 마세요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d36.mp3",
+          "voiced": 1.61,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 37,
+        "track": 78,
+        "who": "남",
+        "ko": "그래요? 다시 받으려면 어떻게 해야 돼요?",
+        "en": "Really? What do I have to do to get another one?",
+        "syl": 16,
+        "why": "받으려면 is said [바드려면], the ㄷ crossing into 으. 어떻게 is [어떠케] — the ㅎ and the ㄱ fusing — and this is the third time that word has been said in the unit, always the same way.",
+        "tags": [
+          "V-(으)려면",
+          "격음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d37.mp3",
+          "voiced": 3.14,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 38,
+        "track": 78,
+        "who": "여",
+        "ko": "출입국관리사무소에 가 본 적 있지요?",
+        "en": "You have been to the immigration office, haven’t you?",
+        "syl": 15,
+        "why": "관리 is said [괄리] — the ㄴ of 관 pulled across by the ㄹ of 리, the unit’s own rule buried in the middle of a six-syllable office name. 적 있지요 is [저긷찌요].",
+        "tags": [
+          "유음화",
+          "V-(으)ㄴ 적 있다"
+        ],
+        "splitFrom": "출입국관리사무소에 가 본 적 있지요? 거기에 가서 다시 신청하면 돼요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d38.mp3",
+          "voiced": 3,
+          "rate": 5
+        }
+      },
+      {
+        "id": 39,
+        "track": 78,
+        "who": "여",
+        "ko": "거기에 가서 다시 신청하면 돼요.",
+        "en": "Go there and apply again.",
+        "syl": 13,
+        "why": "신청하면 is said [신청하면] with the ㅇ holding its place, and 돼요 is [돼요]. -(으)면 되다 is the answer to a \"what do I have to do\" question: that is all there is to it.",
+        "tags": [
+          "V-(으)면 되다",
+          "연음"
+        ],
+        "splitFrom": "출입국관리사무소에 가 본 적 있지요? 거기에 가서 다시 신청하면 돼요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d39.mp3",
+          "voiced": 2.7,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 40,
+        "track": 78,
+        "who": "남",
+        "ko": "혹시 신청할 때 뭐가 필요한지 알아요?",
+        "en": "Do you happen to know what you need when you apply?",
+        "syl": 15,
+        "why": "신청할 때 is said [신청할 때] — the ㄹ tensing the ㄷ again — and 필요한지 is [피료한지], the ㄹ crossing into 요. -(으)ㄴ지 알다 is asking about the content of a question rather than the answer.",
+        "tags": [
+          "A/V-(으)ㄴ지 알다",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d40.mp3",
+          "voiced": 3.23,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 41,
+        "track": 78,
+        "who": "여",
+        "ko": "여권을 가지고 가야 돼요.",
+        "en": "You have to take your passport.",
+        "syl": 10,
+        "why": "여권을 is said [여꿔늘] — the ㄱ of 권 is already tense after the ㅕ, and the ㄴ crosses into 을. This is the sentence the answer to the whole listening turns on.",
+        "tags": [
+          "V-아/어야 되다",
+          "연음"
+        ],
+        "splitFrom": "여권을 가지고 가야 돼요. 여권은 가지고 있어요?",
+        "audio": {
+          "src": "audio/book/2b-u17-d41.mp3",
+          "voiced": 1.84,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 42,
+        "track": 78,
+        "who": "여",
+        "ko": "여권은 가지고 있어요?",
+        "en": "Do you have your passport?",
+        "syl": 9,
+        "why": "가지고 있다 is holding something now, which is not the V-아/어 있다 the chapter teaches two pages later — that one is about the thing, this one about the person. The two are a syllable apart and mean different things.",
+        "tags": [
+          "V-고 있다",
+          "연음"
+        ],
+        "splitFrom": "여권을 가지고 가야 돼요. 여권은 가지고 있어요?",
+        "audio": {
+          "src": "audio/book/2b-u17-d42.mp3",
+          "voiced": 1.73,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 43,
+        "track": 78,
+        "who": "남",
+        "ko": "네, 있어요. 알려 줘서 고마워요.",
+        "en": "Yes, I do. Thanks for letting me know.",
+        "syl": 12,
+        "why": "알려 줘서 is 알리다 + -어 주다: the telling was done for the other person’s sake, which is why the thanks follows. 있어요 is [이써요] and 고마워요 is [고마워요] — one crosses, one does not.",
+        "tags": [
+          "V-아/어 주다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d43.mp3",
+          "voiced": 2.85,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 44,
+        "track": 79,
+        "who": "여",
+        "ko": "거기 경찰서죠? 집에 도둑이 든 것 같아요.",
+        "en": "Is that the police station? I think my house has been broken into.",
+        "syl": 16,
+        "why": "도둑이 든 것 같아요 — 들다 is what a thief does to a house, and it takes 이/가 for the thief rather than 을/를. 집에 is said [지베], the ㅂ crossing into 에.",
+        "tags": [
+          "A/V-(으)ㄴ 것 같다",
+          "연음"
+        ],
+        "splitFrom": "거기 경찰서죠? 집에 도둑이 든 것 같아요. 빨리 좀 와 주세요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d44.mp3",
+          "voiced": 3.86,
+          "rate": 4.1
+        }
+      },
+      {
+        "id": 45,
+        "track": 79,
+        "who": "여",
+        "ko": "빨리 좀 와 주세요.",
+        "en": "Please come quickly.",
+        "syl": 7,
+        "why": "빨리 좀 is said [빨리 쫌] — the ㄹ tenses the ㅈ behind it, the same rule as 받을 수 [바들 쑤] four lines earlier in the other 듣기.",
+        "tags": [
+          "V-아/어 주세요",
+          "된소리되기"
+        ],
+        "splitFrom": "거기 경찰서죠? 집에 도둑이 든 것 같아요. 빨리 좀 와 주세요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d45.mp3",
+          "voiced": 1.4,
+          "rate": 5
+        }
+      },
+      {
+        "id": 46,
+        "track": 79,
+        "who": "경찰",
+        "ko": "네, 주소를 말씀해 주세요.",
+        "en": "Yes, please tell me the address.",
+        "syl": 10,
+        "why": "말씀하다 is the humble word for 말하다 used about your own speaking and the honorific one used about someone else’s — here the officer is asking, so it is respect pointed outward. 말씀해 is [말쓰매].",
+        "tags": [
+          "높임말",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d46.mp3",
+          "voiced": 1.97,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 47,
+        "track": 79,
+        "who": "여",
+        "ko": "여기는 신림동 33번지 1층이에요.",
+        "en": "This is 33 Sillim-dong, first floor.",
+        "syl": 12,
+        "why": "신림동 is said [실림동] — the ㄴ of 신 pulled across by the ㄹ of 림, this unit’s rule in a place name. The numbers are read 삼십삼번지 일층, which is why this line takes longer to say than its twelve written syllables suggest.",
+        "tags": [
+          "유음화",
+          "숫자"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d47.mp3",
+          "voiced": 4.35,
+          "rate": 2.8
+        }
+      },
+      {
+        "id": 48,
+        "track": 79,
+        "who": "경찰",
+        "ko": "네, 지금 바로 가겠습니다.",
+        "en": "Yes, I will come right away.",
+        "syl": 10,
+        "why": "가겠습니다 is said [가겓씀니다]: the ㅆ closes as [ㄷ], tenses the ㅅ, and the ㅂ of 습 becomes [ㅁ] before the ㄴ. Here -겠- is not a guess but a promise — the speaker is deciding.",
+        "tags": [
+          "V-겠-",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d48.mp3",
+          "voiced": 1.65,
+          "rate": 6.1
+        }
+      },
+      {
+        "id": 49,
+        "track": 79,
+        "who": "경찰",
+        "ko": "경찰서에서 나왔는데요.",
+        "en": "I am from the police station.",
+        "syl": 10,
+        "why": "나왔는데요 is said [나완는데요], the ㅆ closing and then being turned into [ㄴ]. The -는데요 is how you announce yourself at a door without finishing the sentence.",
+        "tags": [
+          "V-는데요",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d49.mp3",
+          "voiced": 1.72,
+          "rate": 5.8
+        }
+      },
+      {
+        "id": 50,
+        "track": 79,
+        "who": "여",
+        "ko": "네, 다행히 다친 사람은 없어요.",
+        "en": "No, fortunately nobody was hurt.",
+        "syl": 12,
+        "why": "다행히 is said [다행이] — the ㅎ is squeezed out between the ㅇ and the vowel. 다친 is the past modifier of 다치다, so the hurt would already have happened; it did not.",
+        "tags": [
+          "V-(으)ㄴ",
+          "ㅎ 탈락"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d50.mp3",
+          "voiced": 2.43,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 51,
+        "track": 79,
+        "who": "경찰",
+        "ko": "없어진 물건이 뭐지요?",
+        "en": "What has gone missing?",
+        "syl": 9,
+        "why": "없어진 is said [업써진]: the ㅄ gives up its ㅅ to the next syllable, where it tenses. 물건이 is [물거니], the ㄴ crossing — so both words hand a consonant forward.",
+        "tags": [
+          "V-(으)ㄴ",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d51.mp3",
+          "voiced": 1.77,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 52,
+        "track": 79,
+        "who": "여",
+        "ko": "시계하고 노트북이 없어진 것 같아요.",
+        "en": "I think a watch and a laptop have gone.",
+        "syl": 15,
+        "why": "노트북이 is said [노트부기] — the ㄱ crosses into 이. The -것 같다 is doing real work: she has not checked, and the sentence says so.",
+        "tags": [
+          "A/V-(으)ㄴ 것 같다",
+          "연음"
+        ],
+        "splitFrom": "아직 정확하게 모르겠는데 시계하고 노트북이 없어진 것 같아요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d52.mp3",
+          "voiced": 3.2,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 53,
+        "track": 79,
+        "who": "경찰",
+        "ko": "처음 집에 오셨을 때 어땠습니까?",
+        "en": "What was it like when you first got home?",
+        "syl": 13,
+        "why": "오셨을 때 is said [오셔쓸 때] — the ㄹ of the modifier tensing the ㄷ. 어땠습니까 is the ㅎ-irregular 어떻다 in the past: 어때- + -었-, with the ㅎ long gone.",
+        "tags": [
+          "V-(으)ㄹ 때",
+          "된소리되기"
+        ],
+        "splitFrom": "처음 집에 오셨을 때 어땠습니까? 좀 자세하게 말씀해 주세요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d53.mp3",
+          "voiced": 2.62,
+          "rate": 5
+        }
+      },
+      {
+        "id": 54,
+        "track": 79,
+        "who": "경찰",
+        "ko": "좀 자세하게 말씀해 주세요.",
+        "en": "Please tell me in a little more detail.",
+        "syl": 11,
+        "why": "자세하게 turns the adjective into how the telling should be done, which is what -게 is for. 말씀해 주세요 puts the asking back onto the officer’s side — he is asking for a favour, not giving an order.",
+        "tags": [
+          "A-게",
+          "연음"
+        ],
+        "splitFrom": "처음 집에 오셨을 때 어땠습니까? 좀 자세하게 말씀해 주세요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d54.mp3",
+          "voiced": 2,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 55,
+        "track": 79,
+        "who": "여",
+        "ko": "조금 전에 집에 돌아왔는데 현관문이 열려 있었어요.",
+        "en": "I came home a moment ago and the front door was open.",
+        "syl": 21,
+        "why": "The chapter’s V-아/어 있다 doing the work of the whole scene: 열려 있었어요 says the door had been opened and was still open when she arrived. 현관문이 is said [현관무니].",
+        "tags": [
+          "V-아/어 있다",
+          "연음"
+        ],
+        "splitFrom": "제가 아침에 외출해서 조금 전에 집에 돌아왔는데 현관문이 열려 있었어요. 그리고 집 안으로 들어오려고 하는데 어떤 남자가 뛰어나왔어요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d55.mp3",
+          "voiced": 3.83,
+          "rate": 5.5
+        }
+      },
+      {
+        "id": 56,
+        "track": 79,
+        "who": "여",
+        "ko": "어떤 남자가 뛰어나왔어요.",
+        "en": "A man came running out.",
+        "syl": 11,
+        "why": "어떤 is the ㅎ-irregular 어떻다 again, worn down to a determiner — and it means \"some, unidentified\" here rather than \"which\". 뛰어나왔어요 is said [뛰어나와써요].",
+        "tags": [
+          "V-아/어 나오다",
+          "연음"
+        ],
+        "splitFrom": "제가 아침에 외출해서 조금 전에 집에 돌아왔는데 현관문이 열려 있었어요. 그리고 집 안으로 들어오려고 하는데 어떤 남자가 뛰어나왔어요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d56.mp3",
+          "voiced": 2.23,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 57,
+        "track": 79,
+        "who": "경찰",
+        "ko": "혹시 얼굴을 보셨습니까?",
+        "en": "Did you happen to see his face?",
+        "syl": 10,
+        "why": "혹시 is said [혹씨], the ㄱ tensing the ㅅ. 얼굴을 is [얼구를] — the ㄹ crossing — so the sentence has one consonant that tenses and one that moves.",
+        "tags": [
+          "높임말",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d57.mp3",
+          "voiced": 2.15,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 58,
+        "track": 79,
+        "who": "여",
+        "ko": "키가 큰 편이었어요.",
+        "en": "He was on the tall side.",
+        "syl": 8,
+        "why": "-(으)ㄴ 편이다 is how you say roughly rather than exactly — she saw him in the dark and will not commit to 컸어요. 편이었어요 is said [펴니어써요], the ㄴ crossing into 이.",
+        "tags": [
+          "A-(으)ㄴ 편이다",
+          "연음"
+        ],
+        "splitFrom": "아니요, 밤이라서 얼굴은 잘 보지 못했는데 키가 큰 편이었어요. 하얀색 티셔츠와 까만색 바지를 입었고, 회색 모자를 썼어요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d58.mp3",
+          "voiced": 1.62,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 59,
+        "track": 79,
+        "who": "여",
+        "ko": "하얀색 티셔츠와 까만색 바지를 입었고",
+        "en": "He had on a white t-shirt and black trousers, and",
+        "syl": 16,
+        "why": "Two colours in one clause, both ㅎ-irregulars worn down to 하얀 and 까만. 입었고 is said [이벋꼬] — the ㅂ crosses into 었, the ㅆ closes as [ㄷ] and tenses the ㄱ behind it.",
+        "tags": [
+          "색깔",
+          "된소리되기"
+        ],
+        "splitFrom": "아니요, 밤이라서 얼굴은 잘 보지 못했는데 키가 큰 편이었어요. 하얀색 티셔츠와 까만색 바지를 입었고, 회색 모자를 썼어요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d59.mp3",
+          "voiced": 3.48,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 60,
+        "track": 79,
+        "who": "여",
+        "ko": "회색 모자를 썼어요.",
+        "en": "And a grey cap.",
+        "syl": 8,
+        "why": "쓰다 is the verb for a hat, where a shirt takes 입다 and shoes take 신다 — the two halves of this turn use both. 썼어요 is said [써써요]. Together with the clause before it, this is the sentence the second question is answered from.",
+        "tags": [
+          "쓰다",
+          "연음"
+        ],
+        "splitFrom": "아니요, 밤이라서 얼굴은 잘 보지 못했는데 키가 큰 편이었어요. 하얀색 티셔츠와 까만색 바지를 입었고, 회색 모자를 썼어요.",
+        "audio": {
+          "src": "audio/book/2b-u17-d60.mp3",
+          "voiced": 1.35,
+          "rate": 5.9
+        }
+      },
+      {
+        "id": 61,
+        "track": 80,
+        "who": "1",
+        "ko": "고향에 도착하면 연락하세요.",
+        "en": "Give me a ring when you get to your hometown.",
+        "syl": 12,
+        "why": "The unit’s sound point, stated plainly: 연락 is said [열락]. The ㄴ of 연 is not pronounced where it is written — the ㄹ of 락 pulls it across and both arrive as [ㄹ]. 연락하세요 is then [열라카세요].",
+        "tags": [
+          "유음화",
+          "V-(으)면"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d61.mp3",
+          "voiced": 2.48,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 62,
+        "track": 80,
+        "who": "2",
+        "ko": "저는 신림동에서 살아요.",
+        "en": "I live in Sillim-dong.",
+        "syl": 10,
+        "why": "신림동 is said [실림동] — the same rule inside a place name, where there is no meaning to help you guess it. 살아요 is [사라요], the ㄹ crossing into 아요.",
+        "tags": [
+          "유음화",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d62.mp3",
+          "voiced": 2.38,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 63,
+        "track": 81,
+        "who": "1",
+        "ko": "한라산에 가 봤어요?",
+        "en": "Have you been to Hallasan?",
+        "syl": 8,
+        "why": "한라산 is said [할라산]. This is the clearest case in the unit: the ㄴ and the ㄹ are next to each other with nothing between them, and the ㄹ wins. Write 한라, hear [할라].",
+        "tags": [
+          "유음화",
+          "V-아/어 보다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d63.mp3",
+          "voiced": 1.8,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 64,
+        "track": 81,
+        "who": "2",
+        "ko": "지하철이 버스보다 편리해요.",
+        "en": "The underground is more convenient than the bus.",
+        "syl": 12,
+        "why": "편리 is said [펼리] — the ㄴ of 편 pulled across by the ㄹ of 리. The book prints the sound as [펼리하다], which is worth looking at twice: the vowel is written ㅕ and stays ㅕ; it is only the consonant that moves.",
+        "tags": [
+          "유음화",
+          "N보다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d64.mp3",
+          "voiced": 2.71,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 65,
+        "track": 81,
+        "who": "3",
+        "ko": "여기서 신림동까지 얼마나 걸려요?",
+        "en": "How long does it take from here to Sillim-dong?",
+        "syl": 14,
+        "why": "신림동 [실림동] again, and this time a second ㄹㄹ right behind it in 걸려요 — one made by the rule, one written that way from the start. The two sound identical, which is the whole difficulty.",
+        "tags": [
+          "유음화",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d65.mp3",
+          "voiced": 3.28,
+          "rate": 4.3
+        }
+      },
+      {
+        "id": 66,
+        "track": 81,
+        "who": "4A",
+        "ko": "아키라 씨 전화번호를 알면 좀 연락해 주세요.",
+        "en": "If you know Akira’s number, please get in touch.",
+        "syl": 18,
+        "why": "연락해 is [열라카세요]’s stem — [열라캐] — with the 유음화 and then the ㅎ fusing into the ㄱ. 전화번호를 is said [전화버노를], the ㅎ weakening between voiced sounds.",
+        "tags": [
+          "유음화",
+          "V-(으)면"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d66.mp3",
+          "voiced": 3.66,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 67,
+        "track": 81,
+        "who": "4B",
+        "ko": "네, 제가 연락할게요.",
+        "en": "Yes, I will get in touch.",
+        "syl": 8,
+        "why": "연락할게요 takes three changes at once: 유음화 gives [열락], the ㅎ fuses to [열라칼], and the ㄹ tenses the ㄱ of 게 — [열라칼께요]. Five written syllables, none of them said as written.",
+        "tags": [
+          "유음화",
+          "된소리되기"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u17-d67.mp3",
+          "voiced": 1.68,
+          "rate": 4.8
+        }
+      }
+    ]
+  },
+  "listenOnly": "Every track carries a script: the unit pages print them for the grammar, 말하기 and 발음 tracks, and the 듣기 지문 at the back of the book prints the two 듣기 conversations."
+}

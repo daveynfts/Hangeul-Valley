@@ -455,11 +455,14 @@ const SOURCES = [
   { rel: 'worlds/unit12-workbook.json', label: 'Unit 12 · 익힘책', unit: '2b-unit-12' },
   { rel: 'worlds/unit16-workbook.json', label: 'Unit 16 · 익힘책', unit: '2b-unit-16' },
   { rel: 'worlds/unit16-textbook.json', label: 'Unit 16 · 교과서', unit: '2b-unit-16' },
+  { rel: 'worlds/unit17-workbook.json', label: 'Unit 17 · 익힘책', unit: '2b-unit-17' },
+  { rel: 'worlds/unit17-textbook.json', label: 'Unit 17 · 교과서', unit: '2b-unit-17' },
   { rel: 'worlds/unit12-cassette.json', label: 'Unit 12 · 듣기', unit: '2b-unit-12' },
   { rel: 'worlds/unit13-cassette.json', label: 'Unit 13 · 듣기', unit: '2b-unit-13' },
   { rel: 'worlds/unit14-cassette.json', label: 'Unit 14 · 듣기', unit: '2b-unit-14' },
   { rel: 'worlds/unit15-cassette.json', label: 'Unit 15 · 듣기', unit: '2b-unit-15' },
-  { rel: 'worlds/unit16-cassette.json', label: 'Unit 16 · 듣기', unit: '2b-unit-16' }
+  { rel: 'worlds/unit16-cassette.json', label: 'Unit 16 · 듣기', unit: '2b-unit-16' },
+  { rel: 'worlds/unit17-cassette.json', label: 'Unit 17 · 듣기', unit: '2b-unit-17' }
 ];
 
 const HANGUL = /[가-힣]/;

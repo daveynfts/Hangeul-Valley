@@ -888,6 +888,68 @@ which is the tightest band any unit has produced.
 
 ---
 
+## Unit 17, and a table that is not an exercise
+
+Sixteen exercises, 77 rows, printed pp.150-163 with the 정답 on pp.208-209. Nothing is
+omitted — every exercise the book prints has an answer at the back — but three of them needed
+a decision before a row could be written.
+
+### Forty-eight cells is a spreadsheet, not an exercise
+
+문법과 표현 3 연습 1 is an eight-by-six conjugation grid: 파랗다 노랗다 빨갛다 까맣다 하얗다
+이렇다 그렇다 저렇다 down the side, -습니다 · -고 · -아요/어요 · -아서/어서 · -(으)ㄴ ·
+-(으)니까 across the top, six cells pre-filled. Shipping it whole would be 42 blanks in one
+exercise, which is data entry.
+
+It is taken **one cell at a time instead**: eight rows, every stem once, every column at least
+once, each stem at the cell it is most often got wrong at. That keeps what the grid is
+teaching — the ㅎ survives before a consonant, vanishes and fuses before -아/어, vanishes
+silently before -(으)ㄴ and -(으)니까 — without asking anyone to fill in 파랗고 as well as
+이렇고. The 정답 for all eight cells is in the suite verbatim.
+
+### Two exercises where the distractors have to be the other answers, not one
+
+Unit 16 had one shared-box exercise and named it. Unit 17 has two, for the same reason twice:
+어휘 연습 1 answers four rows out of one set of colours, and 어휘 연습 2 answers three rows
+out of one set of four patterns. In both, every wrong button is necessarily some other row's
+right answer, and the check runs from the other side instead — every button in the first ends
+in 색, every button in the second ends in 무늬. Naming two is not worse than naming one; what
+would be worse is a rule quietly relaxed for the whole bank.
+
+### A 보기 printed already complete is rejected by the shared validator
+
+문법과 표현 2 연습 1 prints its example filled in: A 아까 계단에서 넘어질 뻔했어요. The
+renderer fills a 보기's gap from `answerKo`, so a 보기 with no `{}` in it fails
+`validateWorkbook` with *"1 blank(s) to fill, but the lines carry 0 {}"*. The fix is to gap
+the example the way the items are gapped and let `answerKo` put the words back. The build
+script now checks it, so the failure arrives in the source file rather than three steps later.
+
+### A two-blank row numbers its buttons in one run
+
+문법과 표현 3 연습 3 item 4 has two blanks — 이 ___ 셔츠하고 ___ 바지 — and the keypad numbers
+every button on the row left to right across both groups. So the two `choices` lists cannot
+share an id: `validateWorkbook` rejects *"choice id 'a' is used by both blanks"*, and it is
+right to, because otherwise the number picks one and the check reads the other. Unit 17 uses
+a/b/c for the first and d/e/f for the second. This is also the one row on the page a picture
+decides — which garment is white, which black — and the 정답 on p.209 settles it, exactly as
+Unit 16's 방을 닦았어요 was settled.
+
+### A drill cue that is a list of nouns, not a sentence
+
+The 문형 연습 cutter for Unit 16 found the start of the 보기 cue by taking the last span under
+half a second, which was the 보기 marker there. Unit 17's cues are lists of bare nouns —
+부모님, 공항 — and the reader **pauses between them**, so a cue arrives as two or three spans
+and the last short one is the last word of the cue rather than the marker in front of it.
+
+The rule that replaced it counts: a cue has as many spans as the printed cue has
+comma-separated parts, they are the last spans in the head block, and the span immediately in
+front of them has to be the 보기 marker. That marker measures 0.43-0.44s in all four drills,
+which is the evidence the count landed in the right place. The item numbers still reproduce
+across drills the way Unit 16's did — 0.286, 0.288, 0.385, 0.378 seconds for items 1 to 4,
+spread under 0.04 — which is what says they are 일 이 삼 사 and not part of a cue.
+
+All four pace bands bite, where Unit 16's drill 2 could not be bitten.
+
 ## The order to do it in
 
 Everything above is what to write. This is when to write it, and the order is
@@ -1208,6 +1270,52 @@ five Yut throws as 도 걸 개 윷 모 against distances 1 to 5, where the page 
 개 (두 칸), 걸 (세 칸). The row’s own `why` had it right and the `grammar` line beside it had it
 wrong. It surfaced because the page image was opened again before the note was translated —
 which is the argument for translating from the book rather than from the English.
+
+### Unit 17, a chapter whose questions are pictures
+
+Fourteen pages, 60 rows, printed pp.180-199. More of this chapter lives in its illustrations
+than in any unit so far: 어휘 1 is eight drawings of things going wrong, 어휘 2 and 3 are
+colour and pattern swatches, and three of the exercises on pp.192-195 ask the learner to pick
+a photograph. A greyscale scan settles none of it.
+
+**The rule that came out of it:** a question carried by a picture is asked in the words that
+separate the pictures, and the answer comes from 모범 답안 rather than from the scan. The
+three photographs of a camera become 까만색 카메라에 빨간색 끈이 달려 있는 사진 against two
+others that differ in exactly those two colours; the three drawings of a burglar become three
+outfits that differ in which garment is which colour. What is being decided is unchanged —
+the notice says 색깔은 까만색이고 … 빨간색 끈이 달려 있습니다, and that is still what decides
+it — and only the looking is gone. Both `artNote` and the suite record which questions those
+are.
+
+For the 어휘 pages there is nothing to convert, because the drawings *are* the exercise. Those
+two pages are rebuilt out of sentences the chapter later says out loud: 가방을 잃어버려서
+왔는데요 off track 77, 비행기를 놓칠 뻔했어요 off track 74, the two examples under 문법과 표현
+1·2, a substitution column from 말하기 1, the first sentence of the 읽기 notice.
+
+### "The row's line" is not always the line with the gap
+
+The audio rule from Unit 16 — fill the row's gap with its own keyed answer and require the
+result to be the dictation row's sentence — fails on a 발음 page, which prints the sentence on
+one line and asks for its pronunciation on the next:
+
+```
+  한라산에 가 봤어요?
+  발음  한라산 ⟶ {}
+```
+
+The clip plays the sentence, which is line 1, and the gap is in line 2. So the check became
+*one of the row's lines, with the gap filled if that line holds it* — and the speaker
+comparison moved to whichever line matched. Two rows that were longer than their clip were
+split into the two printed lines instead of being left half-matched, which is the same
+decision Unit 16 made when a dictation cut had halved a sentence.
+
+### 과제 with no answer to any part of it
+
+Unit 16's 과제 page had content to gap. Unit 17's (p.196) is a group activity: receive a set
+of picture cards from the worksheet pages, arrange them into a story, tell it to the class.
+The book prints the instructions and nothing else — no key, no model, not even a 보기 bubble.
+It is left out whole and `omittedNote` names it alongside the five other pages with no
+answer, so the bank has thirteen sections and not fourteen.
 
 ### The fourth thing on the desk, and why three units’ quizzes lost their pictures
 

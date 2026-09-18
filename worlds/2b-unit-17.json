@@ -1,0 +1,1107 @@
+{
+  "id": "2b-unit-17",
+  "pack": "snu-2b",
+  "source": "Seoul National University Korean 2B, Unit 17",
+  "title": "2B Unit 17",
+  "titleKo": "17과 비행기를 놓칠 뻔했어요",
+  "icon": "🧳",
+  "pages": "Unit 17",
+  "notebook": {
+    "title": "Unit 17 · I almost missed the flight",
+    "groups": [
+      {
+        "ko": "사고",
+        "en": "Accidents",
+        "cat": "사고"
+      },
+      {
+        "ko": "색과 무늬",
+        "en": "Colours and patterns",
+        "cat": "색과 무늬"
+      },
+      {
+        "ko": "문법과 표현",
+        "en": "Grammar & expressions",
+        "cat": "문법과 표현"
+      },
+      {
+        "ko": "말하기",
+        "en": "Speaking · the airport and the lost-property office",
+        "cat": "말하기"
+      },
+      {
+        "ko": "듣고 말하기",
+        "en": "Listening · a card gone missing, and a burglary",
+        "cat": "듣고 말하기"
+      },
+      {
+        "ko": "읽고 쓰기",
+        "en": "Reading · a notice for a lost camera",
+        "cat": "읽고 쓰기"
+      },
+      {
+        "ko": "과제",
+        "en": "Task · telling the story from picture cards",
+        "cat": "과제"
+      },
+      {
+        "ko": "문화와 발음",
+        "en": "Culture & pronunciation",
+        "cat": "문화와 발음"
+      }
+    ]
+  },
+  "level": {
+    "level": "2B-17",
+    "name": "비행기를 놓칠 뻔했어요",
+    "nameEn": "2B Unit 17 · I almost missed the flight",
+    "icon": "🧳",
+    "description": "Farm the Unit 17 word list — the things that go wrong in a day, the colours and patterns you describe a lost bag with, and the words for getting it back.",
+    "descriptionEn": "Learn to say what almost happened, describe a lost item by its colour and pattern, and report it — with illustrated vocabulary, listening practice and workbook exercises.",
+    "world": true,
+    "pack": "snu-2b",
+    "worldId": "2b-unit-17",
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk",
+        "cassette"
+      ]
+    },
+    "target": 9,
+    "words": [
+      {
+        "ko": "잃어버리다",
+        "en": "to lose (something)",
+        "hint": "😱",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "새로 산 하얀색 가방을 잃어버렸어요.",
+        "exampleEn": "I lost the white bag I had just bought."
+      },
+      {
+        "ko": "비행기를 놓치다",
+        "en": "to miss the flight",
+        "hint": "✈️",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "네. 그런데 비행기를 놓칠 뻔했어요.",
+        "exampleEn": "Yes. But I almost missed the flight."
+      },
+      {
+        "ko": "계단에서 넘어지다",
+        "en": "to fall over on the stairs",
+        "hint": "🪜",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "아까 계단에서 넘어질 뻔했어요.",
+        "exampleEn": "I almost fell over on the stairs earlier."
+      },
+      {
+        "ko": "부딪히다",
+        "en": "to bump into",
+        "hint": "💥",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "식당 문에 부딪혔어요.",
+        "exampleEn": "I bumped into the restaurant door."
+      },
+      {
+        "ko": "떨어뜨리다",
+        "en": "to drop",
+        "hint": "📱",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "아까 휴대 전화를 떨어뜨렸는데 전화가 잘 안돼요.",
+        "exampleEn": "I dropped my mobile earlier and now it does not work properly."
+      },
+      {
+        "ko": "불(이) 나다",
+        "en": "a fire breaks out",
+        "hint": "🔥",
+        "category": "사고",
+        "categoryEn": "Accidents"
+      },
+      {
+        "ko": "사고가 나다",
+        "en": "an accident happens",
+        "hint": "🚗",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "저쪽에 사고가 났어요.",
+        "exampleEn": "There has been an accident over there."
+      },
+      {
+        "ko": "고장이 나다",
+        "en": "to break down",
+        "hint": "🔧",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "노트북이 고장이 나서 못 했어요. 오늘 고쳐야 돼요.",
+        "exampleEn": "My laptop broke down so I could not do it. I have to get it fixed today."
+      },
+      {
+        "ko": "큰일이 나다",
+        "en": "to have a big problem",
+        "hint": "😨",
+        "category": "사고",
+        "categoryEn": "Accidents"
+      },
+      {
+        "ko": "깜빡 졸다",
+        "en": "to nod off",
+        "hint": "😴",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "운전하다가 깜빡 졸아서 사고가 날 뻔했어요.",
+        "exampleEn": "I nodded off while driving and almost had an accident."
+      },
+      {
+        "ko": "정신(이) 없다",
+        "en": "to be out of one’s senses; to be in a whirl",
+        "hint": "🌀",
+        "category": "사고",
+        "categoryEn": "Accidents"
+      },
+      {
+        "ko": "지각할 뻔하다",
+        "en": "to almost be late",
+        "hint": "⏰",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "네, 길이 막혀서 지각할 뻔했어요.",
+        "exampleEn": "Yes, the traffic was bad so I was almost late."
+      },
+      {
+        "ko": "다치다",
+        "en": "to get hurt",
+        "hint": "🤕",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "네, 다행히 다친 사람은 없어요.",
+        "exampleEn": "Yes, fortunately nobody was hurt."
+      },
+      {
+        "ko": "계단",
+        "en": "stairs",
+        "hint": "🪜",
+        "category": "사고",
+        "categoryEn": "Accidents"
+      },
+      {
+        "ko": "가스레인지",
+        "en": "gas stove",
+        "hint": "🔥",
+        "category": "사고",
+        "categoryEn": "Accidents"
+      },
+      {
+        "ko": "고치다",
+        "en": "to fix",
+        "hint": "🛠️",
+        "category": "사고",
+        "categoryEn": "Accidents"
+      },
+      {
+        "ko": "치약",
+        "en": "toothpaste",
+        "hint": "🪥",
+        "category": "사고",
+        "categoryEn": "Accidents"
+      },
+      {
+        "ko": "꺼내다",
+        "en": "to take out",
+        "hint": "🤲",
+        "category": "사고",
+        "categoryEn": "Accidents"
+      },
+      {
+        "ko": "바닥에 떨어뜨리다",
+        "en": "to drop on the floor",
+        "hint": "⬇️",
+        "category": "사고",
+        "categoryEn": "Accidents",
+        "example": "여자 친구에게 전화를 하려고 휴대 전화를 꺼내다가 바닥에 떨어뜨릴 뻔했습니다.",
+        "exampleEn": "I almost dropped my mobile on the floor as I took it out to ring my girlfriend."
+      },
+      {
+        "ko": "머리 색깔",
+        "en": "hair colour",
+        "hint": "💇",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "한국 사람의 머리 색깔은 까매요.",
+        "exampleEn": "Korean people’s hair is black."
+      },
+      {
+        "ko": "하얀색",
+        "en": "white",
+        "hint": "⬜",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "새로 산 하얀색 가방을 잃어버렸어요.",
+        "exampleEn": "I lost the white bag I had just bought."
+      },
+      {
+        "ko": "까만색",
+        "en": "black",
+        "hint": "⬛",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "까만색 배낭인데 하얀색 인형이 달려 있어요.",
+        "exampleEn": "It is a black backpack with a white doll hanging off it."
+      },
+      {
+        "ko": "검은색",
+        "en": "black (the other word for it)",
+        "hint": "🖤",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns"
+      },
+      {
+        "ko": "회색",
+        "en": "grey",
+        "hint": "🩶",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "카메라는 줄무늬가 있는 작은 회색 가방 안에 들어 있었습니다.",
+        "exampleEn": "The camera was inside a small grey bag with stripes on it."
+      },
+      {
+        "ko": "빨간색",
+        "en": "red",
+        "hint": "🟥",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "색깔은 까만색이고 카메라에는 빨간색 끈이 달려 있습니다.",
+        "exampleEn": "It is black, and the camera has a red strap on it."
+      },
+      {
+        "ko": "노란색",
+        "en": "yellow",
+        "hint": "🟨",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "저는 노란색이 잘 안 어울려요.",
+        "exampleEn": "Yellow does not suit me."
+      },
+      {
+        "ko": "파란색",
+        "en": "blue",
+        "hint": "🟦",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "네, 저 파란색 원피스요?",
+        "exampleEn": "Yes, that blue dress?"
+      },
+      {
+        "ko": "녹색",
+        "en": "green",
+        "hint": "🟩",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns"
+      },
+      {
+        "ko": "초록색",
+        "en": "green (the other word for it)",
+        "hint": "💚",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns"
+      },
+      {
+        "ko": "연두색",
+        "en": "yellow-green",
+        "hint": "🌱",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns"
+      },
+      {
+        "ko": "분홍색",
+        "en": "pink",
+        "hint": "🌸",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "분홍색, 노란색처럼 밝은 색을 좋아해요.",
+        "exampleEn": "I like bright colours, like pink and yellow."
+      },
+      {
+        "ko": "주황색",
+        "en": "orange",
+        "hint": "🟧",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns"
+      },
+      {
+        "ko": "갈색",
+        "en": "brown",
+        "hint": "🟫",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns"
+      },
+      {
+        "ko": "보라색",
+        "en": "purple",
+        "hint": "🟪",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns"
+      },
+      {
+        "ko": "무늬",
+        "en": "pattern",
+        "hint": "🎨",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns"
+      },
+      {
+        "ko": "줄무늬",
+        "en": "stripes",
+        "hint": "📏",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "어떤 거요? 까만색 줄무늬 티셔츠요?",
+        "exampleEn": "Which one? The black striped t-shirt?"
+      },
+      {
+        "ko": "꽃무늬",
+        "en": "a floral pattern",
+        "hint": "🌺",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "저는 꽃무늬를 좋아해요.",
+        "exampleEn": "I like floral patterns."
+      },
+      {
+        "ko": "체크무늬",
+        "en": "a check pattern",
+        "hint": "🔲",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "회색 체크무늬 셔츠가 잘 어울리는 것 같은데요.",
+        "exampleEn": "I think the grey checked shirt suits you."
+      },
+      {
+        "ko": "물방울무늬",
+        "en": "polka dots",
+        "hint": "⚪",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "파란색 물방울무늬가 시원해 보이네요.",
+        "exampleEn": "The blue polka dots look nice and cool."
+      },
+      {
+        "ko": "빨갛다",
+        "en": "to be red",
+        "hint": "🔴",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "저는 창피하면 얼굴이 빨개져요.",
+        "exampleEn": "My face goes red when I am embarrassed."
+      },
+      {
+        "ko": "노랗다",
+        "en": "to be yellow",
+        "hint": "🟡",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "왜 그렇게 얼굴이 노래요?",
+        "exampleEn": "Why is your face so yellow?"
+      },
+      {
+        "ko": "파랗다",
+        "en": "to be blue",
+        "hint": "🔵",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "오늘 하늘이 참 파래요.",
+        "exampleEn": "The sky is really blue today."
+      },
+      {
+        "ko": "까맣다",
+        "en": "to be black",
+        "hint": "⚫",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "왜 그렇게 팔이 까매요?",
+        "exampleEn": "Why are your arms so dark?"
+      },
+      {
+        "ko": "하얗다",
+        "en": "to be white",
+        "hint": "⚪",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "하얀 눈이 내리는 것을 보면 기분이 좋아요.",
+        "exampleEn": "It cheers me up to watch the white snow coming down."
+      },
+      {
+        "ko": "이렇다",
+        "en": "to be like this",
+        "hint": "👉",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "네, 저도 이런 디자인을 좋아해요.",
+        "exampleEn": "Yes, I like this kind of design too."
+      },
+      {
+        "ko": "그렇다",
+        "en": "to be like that",
+        "hint": "👌",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "저도 처음에는 그랬는데 지금은 많이 괜찮아졌어요.",
+        "exampleEn": "I was like that at first too, but I am much better now."
+      },
+      {
+        "ko": "저렇다",
+        "en": "to be like that over there",
+        "hint": "👆",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "네, 세일을 하면 항상 저렇게 길이 막혀요.",
+        "exampleEn": "Yes, the traffic is always backed up like that when there is a sale."
+      },
+      {
+        "ko": "하얀색 티셔츠",
+        "en": "a white t-shirt",
+        "hint": "👕",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns",
+        "example": "하얀색 티셔츠와 까만색 바지를 입었고, 회색 모자를 썼어요.",
+        "exampleEn": "He had on a white t-shirt and black trousers, and a grey cap."
+      },
+      {
+        "ko": "밝은 색",
+        "en": "a bright colour",
+        "hint": "🌈",
+        "category": "색과 무늬",
+        "categoryEn": "Colours and patterns"
+      },
+      {
+        "ko": "V-아다/어다 주다",
+        "en": "take/bring it there and do it for someone",
+        "hint": "🤝",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "V-(으)ㄹ 뻔하다",
+        "en": "to almost do something",
+        "hint": "😅",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "‘ㅎ’ 불규칙",
+        "en": "the ㅎ-irregular",
+        "hint": "📐",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "V-아/어 있다",
+        "en": "it was done and it is still that way",
+        "hint": "🪟",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "모시다",
+        "en": "to take an elder somewhere",
+        "hint": "🙇",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "데리다",
+        "en": "to take someone somewhere",
+        "hint": "👫",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "가지다",
+        "en": "to have; to take",
+        "hint": "🎒",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "여권은 가지고 있어요?",
+        "exampleEn": "Do you have your passport?"
+      },
+      {
+        "ko": "사다 주다",
+        "en": "to buy it and bring it for someone",
+        "hint": "🛍️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "미안하지만 집에 올 때 신문 좀 사다 주세요.",
+        "exampleEn": "Sorry, but could you buy a newspaper on your way home."
+      },
+      {
+        "ko": "책을 빌려다 주다",
+        "en": "to borrow a book and bring it",
+        "hint": "📚",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "옷을 찾아다 주다",
+        "en": "to collect the clothes and bring them",
+        "hint": "👔",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "치즈피자를 갖다 주다",
+        "en": "to bring the cheese pizza over",
+        "hint": "🍕",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "놓이다",
+        "en": "to be put (somewhere)",
+        "hint": "🏺",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "책상 아래에 가방이 놓여 있어요.",
+        "exampleEn": "There is a bag sitting under the desk."
+      },
+      {
+        "ko": "열리다",
+        "en": "to be open",
+        "hint": "🚪",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "창문이 열려 있네요. 제가 창문을 닫을게요.",
+        "exampleEn": "The window is open. I will close it."
+      },
+      {
+        "ko": "벽에 걸려 있다",
+        "en": "to be hanging on the wall",
+        "hint": "🕰️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "시계가 벽에 걸려 있어요.",
+        "exampleEn": "There is a clock hanging on the wall."
+      },
+      {
+        "ko": "인형이 달려 있다",
+        "en": "a doll is hanging off it",
+        "hint": "🧸",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "인형이 가방에 달려 있어요.",
+        "exampleEn": "There is a doll hanging off the bag."
+      },
+      {
+        "ko": "붙다",
+        "en": "to be stuck on",
+        "hint": "📌",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "교실 벽에 안내문이 붙어 있으니까 한번 읽어 보세요.",
+        "exampleEn": "There is a notice up on the classroom wall, so have a read of it."
+      },
+      {
+        "ko": "서다",
+        "en": "to stand",
+        "hint": "🧍",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "교실에 앉아 있다",
+        "en": "to be sitting in the classroom",
+        "hint": "🪑",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "학생들이 교실에 앉아 있어요.",
+        "exampleEn": "The students are sitting in the classroom."
+      },
+      {
+        "ko": "눕다",
+        "en": "to lie down",
+        "hint": "🛏️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "아이가 침대에 누워 있어요.",
+        "exampleEn": "The child is lying on the bed."
+      },
+      {
+        "ko": "공항",
+        "en": "airport",
+        "hint": "🛫",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office",
+        "example": "길이 너무 막혀서 공항에 늦게 도착했어요.",
+        "exampleEn": "The traffic was so bad that I got to the airport late."
+      },
+      {
+        "ko": "탑승구",
+        "en": "boarding gate",
+        "hint": "🚪",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office"
+      },
+      {
+        "ko": "비행기",
+        "en": "aeroplane",
+        "hint": "✈️",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office",
+        "example": "그래도 비행기를 안 놓쳐서 다행이에요.",
+        "exampleEn": "Still, it is a relief I did not miss the flight."
+      },
+      {
+        "ko": "고향으로 돌아가다",
+        "en": "to go back to one’s hometown",
+        "hint": "🏡",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office"
+      },
+      {
+        "ko": "배낭",
+        "en": "a backpack",
+        "hint": "🎒",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office",
+        "example": "까만색 배낭인데 하얀색 인형이 달려 있어요.",
+        "exampleEn": "It is a black backpack with a white doll hanging off it."
+      },
+      {
+        "ko": "지갑을 잃어버리다",
+        "en": "to lose one’s wallet",
+        "hint": "👛",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office",
+        "example": "지갑을 잃어버렸어요.",
+        "exampleEn": "I have lost my wallet."
+      },
+      {
+        "ko": "수첩",
+        "en": "a pocket notebook",
+        "hint": "📓",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office"
+      },
+      {
+        "ko": "이름표",
+        "en": "a name tag",
+        "hint": "🏷️",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office",
+        "example": "이름표가 가방에 달려 있어요.",
+        "exampleEn": "There is a name tag on the bag."
+      },
+      {
+        "ko": "유실물 센터",
+        "en": "the lost-property office",
+        "hint": "🧳",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office"
+      },
+      {
+        "ko": "놓고 내리다",
+        "en": "to leave it behind and get off",
+        "hint": "🚇",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office",
+        "example": "오늘 아침에 지하철 2호선에 놓고 내렸어요.",
+        "exampleEn": "I left it on subway line 2 this morning and got off."
+      },
+      {
+        "ko": "두고 나오다",
+        "en": "to leave it behind and come out",
+        "hint": "🚻",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office",
+        "example": "7월 20일 저녁 7시쯤 4층 교실에 카메라를 두고 나왔습니다.",
+        "exampleEn": "On 20 July at about seven in the evening I left my camera in the fourth-floor classroom."
+      },
+      {
+        "ko": "들어 있다",
+        "en": "to be inside",
+        "hint": "📦",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office",
+        "example": "책 두 권하고 지갑이 들어 있어요.",
+        "exampleEn": "There are two books and a wallet inside."
+      },
+      {
+        "ko": "원피스",
+        "en": "a dress",
+        "hint": "👗",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office"
+      },
+      {
+        "ko": "셔츠",
+        "en": "a shirt",
+        "hint": "👔",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office"
+      },
+      {
+        "ko": "바지",
+        "en": "trousers",
+        "hint": "👖",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office"
+      },
+      {
+        "ko": "모자",
+        "en": "a hat; a cap",
+        "hint": "🧢",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office"
+      },
+      {
+        "ko": "옷이 어울리다",
+        "en": "the clothes suit you",
+        "hint": "🪞",
+        "category": "말하기",
+        "categoryEn": "Speaking · the airport and the lost-property office"
+      },
+      {
+        "ko": "외국인등록증",
+        "en": "alien registration card",
+        "hint": "🪪",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "가방 안에 외국인등록증이 들어 있어서 큰일이에요.",
+        "exampleEn": "My alien registration card is in the bag, which is a serious problem."
+      },
+      {
+        "ko": "여권을 가지고 가다",
+        "en": "to take one’s passport along",
+        "hint": "🛂",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "여권을 가지고 가야 돼요. 여권은 가지고 있어요?",
+        "exampleEn": "You have to take your passport. Do you have your passport?"
+      },
+      {
+        "ko": "출입국관리사무소",
+        "en": "the immigration office",
+        "hint": "🏛️",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "출입국관리사무소에 가 본 적 있지요? 거기에 가서 다시 신청하면 돼요.",
+        "exampleEn": "You have been to the immigration office, haven’t you? Go there and apply again."
+      },
+      {
+        "ko": "신청하다",
+        "en": "to apply",
+        "hint": "📝",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "혹시 신청할 때 뭐가 필요한지 알아요?",
+        "exampleEn": "Do you happen to know what you need when you apply?"
+      },
+      {
+        "ko": "경찰서",
+        "en": "a police station",
+        "hint": "🚓",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "거기 경찰서죠? 집에 도둑이 든 것 같아요. 빨리 좀 와 주세요.",
+        "exampleEn": "Is that the police station? I think my house has been broken into. Please come quickly."
+      },
+      {
+        "ko": "경찰관",
+        "en": "a police officer",
+        "hint": "👮",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary"
+      },
+      {
+        "ko": "도둑이 들다",
+        "en": "to be burgled",
+        "hint": "🦹",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "집에 돌아왔는데 도둑이 들었습니다.",
+        "exampleEn": "I came home to find the place had been broken into."
+      },
+      {
+        "ko": "현관문",
+        "en": "the front door",
+        "hint": "🚪",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "제가 아침에 외출해서 조금 전에 집에 돌아왔는데 현관문이 열려 있었어요.",
+        "exampleEn": "I went out in the morning and came home a moment ago, and the front door was open."
+      },
+      {
+        "ko": "뛰어나오다",
+        "en": "to come running out",
+        "hint": "🏃",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "그리고 집 안으로 들어오려고 하는데 어떤 남자가 뛰어나왔어요.",
+        "exampleEn": "And as I was about to go inside, a man came running out."
+      },
+      {
+        "ko": "없어지다",
+        "en": "to go missing",
+        "hint": "🫥",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "아직 정확하게 모르겠는데 시계하고 노트북이 없어진 것 같아요.",
+        "exampleEn": "I am not sure yet, but I think a watch and a laptop have gone."
+      },
+      {
+        "ko": "자세하다",
+        "en": "to be detailed",
+        "hint": "🔍",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "처음 집에 오셨을 때 어땠습니까? 좀 자세하게 말씀해 주세요.",
+        "exampleEn": "What was it like when you first got home? Please tell me in a little more detail."
+      },
+      {
+        "ko": "외출",
+        "en": "going out",
+        "hint": "🚶",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary"
+      },
+      {
+        "ko": "시계",
+        "en": "a watch; a clock",
+        "hint": "⌚",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary"
+      },
+      {
+        "ko": "노트북이 고장이 나다",
+        "en": "the laptop breaks down",
+        "hint": "💻",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary"
+      },
+      {
+        "ko": "기분이 안 좋다",
+        "en": "to be in a bad mood",
+        "hint": "🙁",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a card gone missing, and a burglary",
+        "example": "스티븐 씨, 무슨 안 좋은 일 있어요? 기분이 안 좋아 보여요.",
+        "exampleEn": "Steven, has something bad happened? You look like you are in a bad mood."
+      },
+      {
+        "ko": "분실물",
+        "en": "a lost article",
+        "hint": "🧤",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera"
+      },
+      {
+        "ko": "분실물 센터",
+        "en": "the lost-property centre",
+        "hint": "🏢",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera"
+      },
+      {
+        "ko": "신고",
+        "en": "a report (to the authorities)",
+        "hint": "📋",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera"
+      },
+      {
+        "ko": "끈",
+        "en": "a strap",
+        "hint": "🎗️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera",
+        "example": "색깔은 까만색이고 카메라에는 빨간색 끈이 달려 있습니다.",
+        "exampleEn": "It is black, and the camera has a red strap on it."
+      },
+      {
+        "ko": "추억",
+        "en": "a memory",
+        "hint": "💭",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera",
+        "example": "저와 친구들의 추억이 들어 있는 아주 소중한 카메라입니다.",
+        "exampleEn": "It is a very precious camera with my memories of my friends in it."
+      },
+      {
+        "ko": "소중하다",
+        "en": "to be precious",
+        "hint": "💎",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera"
+      },
+      {
+        "ko": "돌려주다",
+        "en": "to give it back",
+        "hint": "↩️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera",
+        "example": "가져가신 분은 꼭 돌려주세요.",
+        "exampleEn": "If you took it, please do give it back."
+      },
+      {
+        "ko": "연락처",
+        "en": "contact details",
+        "hint": "📞",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera",
+        "example": "혹시 제 카메라를 보신 분은 아래 연락처로 전화해 주세요.",
+        "exampleEn": "If you have seen my camera, please ring the number below."
+      },
+      {
+        "ko": "가져가다",
+        "en": "to take it away",
+        "hint": "🫳",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera"
+      },
+      {
+        "ko": "잃어버린 카메라",
+        "en": "the camera that was lost",
+        "hint": "📷",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera",
+        "example": "잃어버린 카메라는 서울전자에서 나온 ASD500입니다.",
+        "exampleEn": "The camera I lost is an ASD500 made by Seoul Electronics."
+      },
+      {
+        "ko": "광고를 만들다",
+        "en": "to make a notice",
+        "hint": "📢",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · a notice for a lost camera"
+      },
+      {
+        "ko": "그림 카드",
+        "en": "a picture card",
+        "hint": "🃏",
+        "category": "과제",
+        "categoryEn": "Task · telling the story from picture cards"
+      },
+      {
+        "ko": "상황을 설명하다",
+        "en": "to explain the situation",
+        "hint": "🗣️",
+        "category": "과제",
+        "categoryEn": "Task · telling the story from picture cards",
+        "example": "그림을 보고 상황을 설명해 보세요.",
+        "exampleEn": "Look at the pictures and explain them."
+      },
+      {
+        "ko": "배열하다",
+        "en": "to arrange in order",
+        "hint": "🔢",
+        "category": "과제",
+        "categoryEn": "Task · telling the story from picture cards",
+        "example": "그림 카드를 배열해서 하나의 이야기로 만들어 보세요.",
+        "exampleEn": "Arrange the picture cards to make a story."
+      },
+      {
+        "ko": "조카",
+        "en": "a nephew or niece",
+        "hint": "👶",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "주말에 친구 조카의 돌잔치에 다녀왔습니다.",
+        "exampleEn": "At the weekend I went to my friend’s nephew’s first-birthday party."
+      },
+      {
+        "ko": "돌잔치",
+        "en": "a first-birthday party",
+        "hint": "🎂",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "무지개",
+        "en": "a rainbow",
+        "hint": "🌈",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "아이는 예쁜 한복을 입고 있었는데 색동저고리의 색깔이 무지개처럼 아름다웠습니다.",
+        "exampleEn": "The child was wearing a lovely hanbok, and the saekdong jacket’s colours were as beautiful as a rainbow."
+      },
+      {
+        "ko": "색동저고리",
+        "en": "a saekdong jacket, striped in many colours",
+        "hint": "👘",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "색동저고리는 여러 가지 한국의 전통 색을 써서 만든 것입니다.",
+        "exampleEn": "A saekdong jacket is made using several of Korea’s traditional colours."
+      },
+      {
+        "ko": "전통 색",
+        "en": "a traditional colour",
+        "hint": "🎎",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "건강을 바라다",
+        "en": "to wish someone health",
+        "hint": "🙏",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "여기에는 아이의 건강을 바라는 뜻이 있습니다.",
+        "exampleEn": "There is a wish for the child’s health in it."
+      },
+      {
+        "ko": "한라산",
+        "en": "Hallasan, the mountain on Jeju",
+        "hint": "⛰️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "한라산에 가 봤어요?",
+        "exampleEn": "Have you been to Hallasan?"
+      },
+      {
+        "ko": "지하철이 편리하다",
+        "en": "the underground is convenient",
+        "hint": "🚇",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "지하철이 버스보다 편리해요.",
+        "exampleEn": "The underground is more convenient than the bus."
+      },
+      {
+        "ko": "신림동",
+        "en": "Sillim-dong, a Seoul neighbourhood",
+        "hint": "🏙️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "여기서 신림동까지 얼마나 걸려요?",
+        "exampleEn": "How long does it take from here to Sillim-dong?"
+      },
+      {
+        "ko": "연락",
+        "en": "contact; getting in touch",
+        "hint": "☎️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "고향에 도착하면 연락하세요.",
+        "exampleEn": "Give me a ring when you get to your hometown."
+      },
+      {
+        "ko": "동호회에 가입하다",
+        "en": "to join a club",
+        "hint": "🎽",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "안내문",
+        "en": "a notice",
+        "hint": "📄",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      }
+    ]
+  }
+}

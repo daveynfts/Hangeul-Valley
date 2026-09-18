@@ -53,6 +53,8 @@ const WORKBOOKS = {
   unit12: path.join('worlds', 'unit12-workbook.json'),
   unit16: path.join('worlds', 'unit16-workbook.json'),
   'unit16-textbook': path.join('worlds', 'unit16-textbook.json'),
+  unit17: path.join('worlds', 'unit17-workbook.json'),
+  'unit17-textbook': path.join('worlds', 'unit17-textbook.json'),
   unit13: path.join('worlds', 'unit13-workbook.json'),
   'unit13-textbook': path.join('worlds', 'unit13-textbook.json'),
   unit10: path.join('worlds', 'unit10-workbook.json'),

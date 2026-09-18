@@ -1,0 +1,30 @@
+{
+  "lang": "vi",
+  "source": "worlds/unit17-desk-quiz.json",
+  "note": "Keys are field|English-source. Editing the English orphans its translation on purpose.",
+  "entries": {
+    "A|[ㄴ], as written": "[ㄴ], đúng như chữ viết",
+    "A|that somebody is doing the hanging right now": "rằng ngay lúc này có người đang treo quần áo lên",
+    "A|the present — 뻔해요": "thì hiện tại — 뻔해요",
+    "B|that the clothes have been there a long time": "rằng quần áo đã ở đó từ lâu",
+    "B|the future — 뻔할 거예요": "thì tương lai — 뻔할 거예요",
+    "C|either present or past, as you like": "hiện tại hay quá khứ đều được",
+    "C|that the clothes are in a wardrobe rather than on a hook": "rằng quần áo nằm trong tủ chứ không phải trên móc",
+    "D|always the past — 뻔했어요": "luôn luôn là quá khứ — 뻔했어요",
+    "D|it is not said at all": "không đọc ra âm nào cả",
+    "D|nothing — the two mean the same thing": "không gì cả — hai câu nghĩa như nhau",
+    "q|\"창문이 ___ 있어요.\" The window is open. Which fits?": "\"창문이 ___ 있어요.\" Cửa sổ đang mở. Chỗ trống điền gì?",
+    "q|The chapter’s 발음 rule: a 받침 ㄴ standing in front of a ㄹ is read how?": "Quy tắc 발음 của bài: 받침 ㄴ đứng trước ㄹ thì đọc thế nào?",
+    "q|What does 가져다 주다 become when it is said quickly, as in ordering a pizza?": "가져다 주다 rút gọn thành gì khi nói nhanh, chẳng hạn lúc gọi pizza?",
+    "q|What does 옷을 걸고 있어요 say that 옷이 걸려 있어요 does not?": "옷을 걸고 있어요 nói thêm điều gì mà 옷이 걸려 있어요 không nói?",
+    "q|Which ending leaves the ㅎ of 빨갛다 exactly where it is?": "Đuôi nào giữ nguyên chữ ㅎ của 빨갛다?",
+    "q|Which of the chapter’s four forms says that something very nearly happened and then did not?": "Trong bốn mẫu câu của bài, mẫu nào nói việc suýt xảy ra nhưng rốt cuộc đã không xảy ra?",
+    "q|Which of these is the pattern of scattered round dots?": "Hoa văn nào là những chấm tròn rải rác?",
+    "q|You drove your grandmother home. Which pair does the chapter use?": "Bạn đưa bà về nhà. Bài học dùng cặp từ nào?",
+    "q|까맣다 with -(으)ㄴ in front of a noun gives which form?": "까맣다 kết hợp -(으)ㄴ đứng trước danh từ thì thành dạng nào?",
+    "q|뻔하다 attaches to which form of the verb in front of it?": "뻔하다 gắn vào dạng nào của động từ đứng trước nó?",
+    "q|뻔하다 is used in which tense?": "뻔하다 được dùng ở thì nào?",
+    "q|하얗다 with -아요/어요 gives which form?": "하얗다 kết hợp -아요/어요 thì thành dạng nào?",
+    "titleEn|Lost and found quiz": "Đố vui đồ thất lạc"
+  }
+}

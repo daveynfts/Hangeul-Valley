@@ -674,6 +674,94 @@ disagreement is on the one line the second instrument had no evidence for.
 
 ---
 
+## Unit 17, and a doorbell that looked like a sentence
+
+Ten tracks, 72 to 81, all ten scripted — eight on the unit pages and the two 듣기
+conversations on the 듣기 지문 at printed p.265. 59 lines placed, 67 dictation rows. The
+pipeline is the one Unit 16 left: `lines.js` → `align.js` → `spans.js` → `dict_*.js` →
+`cut.js`, with the gap-restricted DP and the 0.98s turn floor unchanged.
+
+### The 발음 rule is the other half of Unit 16's
+
+Unit 16 taught 유음화 as a 받침 ㄹ pulling the ㄴ after it across: 설날 → [설랄]. 17과 teaches
+the same change running the other way, a 받침 ㄴ in front of a ㄹ being itself read [ㄹ]:
+한라산 → [할라산], 연락 → [열락], 편리 → [펼리], 신림동 → [실림동]. Both directions are read
+off the spelling — final index 8 before onset 2, final index 4 before onset 5 — so the check
+is about what a learner can see rather than about a tag somebody typed. This pack leans the
+other way from Unit 16's: 11 of its 67 sentences carry ㄴ-before-ㄹ and 2 carry ㄹ-before-ㄴ,
+which is the mirror image of 16's 10-and-1.
+
+### The scene break is a front door, and the aligner spent it on a sentence
+
+Track 79 is a burglary: a phone call, a scene break, then the police at the door. The
+recording marks that break the way a radio play would — a buzzer, then the door. Both are
+sound, so `silencedetect` called them speech, and the DP spent them on 경찰서에서 나왔는데요.
+That pushed that line and the two after it one span early each, and left dictation clip d49
+playing a doorbell.
+
+The ringback test from Unit 16 did not catch it. A Korean ringback is 440 and 480 Hz, so a
+narrow band at 470 finds it; this buzzer is a steady **151 Hz** with its energy piled into the
+fourth harmonic near 600, and at 470 Hz it loses 9 dB — as much as a voice.
+
+**What found it** was a check that had been sitting in the suite doing nothing: no line may
+take longer than 0.45 seconds a syllable. 다치신 분은 없습니까? came out at 0.47 and nothing
+else on ten tracks was over 0.37.
+
+**What settled it** was pitch. 듣기 2 alternates a female caller and a male officer, and
+estimating F0 frame by frame separates them without any reference to the alignment — 여 at
+193-225 Hz, 경찰 at 147-151, with nothing in between. Thirteen of the fifteen lines matched
+the speaker the script names. The two that did not were exactly the two the pace check had
+flagged.
+
+**What fixed it** is two measurements, neither of which has to know what note a doorbell is:
+
+* **Flatness.** Whatever frequency a tone sits at, it does not move. The interquartile spread
+  of per-frame F0, as a fraction of the median, is 0.000 for the buzzer and 0.017 for the
+  ringback; the narrowest real utterance longer than 0.7s is 0.124. Spans under 0.7s are
+  exempt — a single 네 has one syllable and nothing to vary.
+* **The speech band.** The thud after the buzzer is not a tone at all; its energy is below
+  300 Hz. Stripping everything outside 300-3400 Hz costs it **13.4 dB** and costs the
+  quietest real utterance on the track 3.5.
+
+Both are in `align.js` beside the 470 Hz test, which stays — it is still what catches a
+telephone. Re-running moved exactly three lines and nothing else in the pack, and the one
+dictation clip that had to be re-cut went from 3.22s at 3.6 syl/s to 1.99s at 5.8.
+
+The lesson is not about doorbells. It is that **"not speech" is a bigger category than
+"ringback"**, and a filter written against one instance of it will keep passing while the
+next instance walks through. Ask what the class has in common — a tone holds a pitch, a voice
+does not — rather than what the example measured.
+
+### A numeral is one character and several syllables
+
+여기는 신림동 33번지 1층이에요 is twelve written syllables and sixteen spoken ones: 33 is
+삼십삼 and 1 is 일. The shipped `rate` counts hangul, the way every other unit's does and the
+way `scripts/validate_content.js` recomputes it, so that row reads 2.75 syl/s on paper — and
+track 79's pace band has to be wide enough to hold it. `cut.js` keeps a second, digit-aware
+count for its own sanity band, and the suite checks the numeral rows separately: once 33 and
+1 are counted as spoken, every one of them is inside the same 3.2-7.5 band as the rest.
+
+### All ten bands bite
+
+Unit 16 had two tracks the band could not bite on and said so out loud. Unit 17 has none:
+shifting the clip-to-text pairing by one inside any of the ten tracks puts at least one clip
+outside its band. The suite asserts that as a flat statement rather than as a list of
+exceptions, so a future re-cut that blunts one will fail rather than quietly stop testing.
+
+### The alignment, falsified rather than admired
+
+Same procedure as Unit 16. A copy of the bank verified at 59 of 59 lines placed had every
+span stripped out, and an envelope correlator that had never seen the timings was run against
+the raw audio: it placed **27 of the 59 from the sound alone, and all 27 agreed within
+0.20s, with no disagreement anywhere.**
+
+The first attempt at this was invalid and it is worth writing down why. The backup had been
+taken *after* running `scripts/cassette_timings.js --redo`, so the correlator was being
+compared against its own output and scored 27/27 for free. **`--redo` is global and
+destructive** — its own header says so — and it cleared every span on units 10 to 16 as well.
+They were restored from HEAD and checked byte-identical with `git hash-object`. Take the
+backup first, verify the backup is complete, and only then strip.
+
 ## The waveform, and looping a stretch of it
 
 A listening station needs three things a play button cannot give you: repeat the track,
