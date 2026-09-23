@@ -30,7 +30,7 @@ const path = require('path');
 const {
   setCors, verifyGoogleIdToken, readBearer, env, putContent, CONTENT_CDN
 } = require('../_r2');
-const { githubConfig, commitFile, probe } = require('../_github');
+const { githubConfig, commitFile, readFile, blobSha, probe } = require('../_github');
 const { repoRoot } = require('../_repoRoot');
 const content = require('../../admin/lib/content');
 
@@ -85,15 +85,18 @@ async function whoami(req) {
 // Read the file as the game currently sees it, which after an admin save is the copy on the
 // CDN and not the one in this deployment's bundle. Reading from the bundle would hand back
 // yesterday's file, and the next save would quietly undo the last one.
+//
+// Returned as the text as well as the parsed body: the text's blob SHA is the version the
+// editor saves against (see handleWrite).
 async function readCurrent(rel) {
   const url = CONTENT_CDN + rel.split(path.sep).join('/') + '?t=' + Date.now();
   const r = await fetch(url, { cache: 'no-store' });
-  if (r.ok) return r.json();
+  if (r.ok) { const text = await r.text(); return { text, body: JSON.parse(text) }; }
   // Only reached if the CDN has never had this file — a world added to the registry before
   // its first publish.
   const fs = require('fs');
   const full = path.join(repoRoot(), rel);
-  if (fs.existsSync(full)) return JSON.parse(fs.readFileSync(full, 'utf8'));
+  if (fs.existsSync(full)) { const text = fs.readFileSync(full, 'utf8'); return { text, body: JSON.parse(text) }; }
   const err = new Error(`${rel} is neither on the CDN nor in this build`);
   err.status = 404;
   throw err;
@@ -152,10 +155,12 @@ async function handleHost(req, res) {
 async function handleRead(req, res, key) {
   const entry = content.byKey(key);
   if (!entry) return fail(res, 404, 'Not Found', `No content registered under "${key}"`);
-  const body = await readCurrent(entry.rel);
+  const { text, body } = await readCurrent(entry.rel);
   return json(res, 200, {
     success: true,
-    data: { key: entry.key, label: entry.label, group: entry.group, rel: entry.rel, body }
+    // `version` is the git blob SHA of exactly the bytes shown. The editor sends it back as
+    // If-Match, and a file that has changed on GitHub since is not saved over.
+    data: { key: entry.key, label: entry.label, group: entry.group, rel: entry.rel, body, version: blobSha(text) }
   });
 }
 
@@ -185,9 +190,13 @@ async function handleWrite(req, res, key) {
   const rel = entry.rel.split(path.sep).join('/');
   const message = `content: ${entry.label} via admin\n\nEdited by ${user.email || user.sub} at ${new Date().toISOString()}.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>`;
 
+  // The version the editor opened (see handleRead). A copy opened an hour ago must not be
+  // saved over a commit made since — by a second tab, by the local admin, by hand.
+  const expectedSha = String(req.headers['if-match'] || '').replace(/^W\//, '').replace(/"/g, '') || undefined;
+
   let commit;
   try {
-    commit = await commitFile(gh, rel, text, message);
+    commit = await commitFile(gh, rel, text, message, { expectedSha });
   } catch (e) {
     if (e.status === 409) return fail(res, 409, 'Conflict', e.message);
     // A 403 here is almost always the token's permissions, and GitHub's own wording — "Resource
@@ -215,6 +224,8 @@ async function handleWrite(req, res, key) {
       key: entry.key,
       rel,
       body: normalised,
+      // What the next save from this editor is made against.
+      version: blobSha(text),
       unchanged: commit.unchanged === true,
       commit: commit.commit || null,
       commitUrl: commit.url || null,
@@ -232,7 +243,7 @@ async function handleWrite(req, res, key) {
   });
 }
 
-// ── Translations ────────────────────────────────────────────────────────────
+/// ── Translations ────────────────────────────────────────────────────────────
 //
 // Reads scan the repo copy bundled with this function rather than the CDN, which is a
 // deliberate difference from handleRead above. The two are asking different questions: a
@@ -242,16 +253,73 @@ async function handleWrite(req, res, key) {
 // English on screen and the catalogue in agreement; the alternative shows new English
 // against keys nothing will match, which reads as "everything went stale at once".
 //
+// The catalogue is another matter. The bundle's copy is as old as the deployment, so a
+// save's merge runs on the copy GitHub holds, and the rows a translator reads come from the
+// CDN copy the last save uploaded — otherwise a second save before the next deploy merged
+// into the deployment's copy and quietly dropped the first, and the tab went on showing the
+// translations as missing after they had been saved.
+//
+// Both run in a scratch directory under the OS temp dir. The function's own filesystem is
+// read-only on Vercel, which the save used to write straight into — so it never worked there.
+//
 // vercel.json's `functions` block bundles levels.json and worlds/** for this route.
+const I18N_INDEX_REL = 'js/locales/catalogs.js';
+
+function bundleText(root, rel) {
+  const fs = require('fs');
+  const full = path.join(root, rel.split('/').join(path.sep));
+  return fs.existsSync(full) ? fs.readFileSync(full, 'utf8') : null;
+}
+
+async function cdnText(rel) {
+  try {
+    const r = await fetch(CONTENT_CDN + rel + '?t=' + Date.now(), { cache: 'no-store' });
+    return r.ok ? await r.text() : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/** A scratch root holding `files` ({ rel: text }), for the i18n library to read and write. */
+function scratchRoot(files) {
+  const fs = require('fs');
+  const os = require('os');
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'hv-i18n-'));
+  Object.keys(files).forEach((rel) => {
+    if (files[rel] === null || files[rel] === undefined) return;
+    const dest = path.join(tmp, rel.split('/').join(path.sep));
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, files[rel]);
+  });
+  return tmp;
+}
+
+function dropScratch(tmp) {
+  try { require('fs').rmSync(tmp, { recursive: true, force: true }); } catch (e) {}
+}
+
 async function handleI18n(req, res) {
   const i18n = require('../../admin/lib/i18n');
   const root = repoRoot();
   const lang = String((req.query && req.query.lang) || 'vi');
+  const englishOf = (src) => (src === i18n.CHROME_KEY ? 'js/locales/en.js' : src);
+  const catalogOf = (src, code) =>
+    path.relative(root, i18n.catalogPathFor(root, src, code)).split(path.sep).join('/');
 
   if (req.method === 'GET') {
     const source = req.query && req.query.source;
     if (!source) return json(res, 200, { success: true, data: i18n.report(root, lang) });
-    return json(res, 200, { success: true, data: i18n.rows(root, String(source), lang) });
+    const src = i18n.assertSource(String(source));
+    const code = i18n.assertLang(lang);
+    const fresh = await cdnText(catalogOf(src, code));
+    if (fresh === null) return json(res, 200, { success: true, data: i18n.rows(root, src, code) });
+    const tmp = scratchRoot({
+      [englishOf(src)]: bundleText(root, englishOf(src)),
+      [catalogOf(src, code)]: fresh
+    });
+    try {
+      return json(res, 200, { success: true, data: i18n.rows(tmp, src, code) });
+    } finally { dropScratch(tmp); }
   }
 
   if (req.method !== 'PUT') return fail(res, 405, 'Method Not Allowed');
@@ -265,44 +333,92 @@ async function handleI18n(req, res) {
   if (!gh) return fail(res, 503, 'Not configured', 'GITHUB_TOKEN and GITHUB_REPO are not set.');
 
   const body = req.body || {};
-  const source = i18n.assertSource(body.source);
+  const src = i18n.assertSource(body.source);
   const code = i18n.assertLang(body.lang || lang);
+  const rel = catalogOf(src, code);
+  const chrome = src === i18n.CHROME_KEY;
 
-  // Merged and validated in the library, against the same scan the read used. Written to
-  // the function's own (ephemeral) filesystem first, then read back as bytes: the file on
-  // disk is what has to reach GitHub and R2, and re-serialising it here would be a second
-  // implementation of the writer that could disagree with the local one.
-  const result = i18n.saveRows(root, source, code, body.entries || {});
-  const relNative = i18n.catalogPathFor(root, source, code);
-  const rel = relNative.slice(root.length).replace(/^[\\/]+/, '').split(path.sep).join('/');
-  const text = require('fs').readFileSync(relNative, 'utf8');
+  let latest;
+  try { latest = await readFile(gh, rel); }
+  catch (e) { return fail(res, 502, 'GitHub read failed', e.message); }
 
-  const message = `i18n: ${source} → ${code} via admin\n\nEdited by ${user.email || user.sub}`
-    + ` at ${new Date().toISOString()}.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>`;
-  let commit;
-  try { commit = await commitFile(gh, rel, text, message); }
-  catch (e) {
-    if (e.status === 409) return fail(res, 409, 'Conflict', e.message);
-    return fail(res, 502, 'GitHub write failed', e.message);
-  }
-
-  let published = null;
-  try { published = await putContent(rel, text); }
-  catch (e) { published = null; }
-
-  return json(res, 200, {
-    success: true,
-    data: Object.assign({}, result, {
-      rel,
-      commit: commit.commit || null,
-      commitUrl: commit.url || null,
-      branch: gh.branch,
-      live: !!published,
-      note: published
-        ? 'Live on the CDN now — players on ' + code + ' see it on their next load.'
-        : 'Committed, but the CDN upload failed — it will catch up on the next publish.'
-    })
+  const tmp = scratchRoot({
+    [englishOf(src)]: bundleText(root, englishOf(src)),
+    [rel]: latest ? latest.text : bundleText(root, rel)
   });
+  try {
+    // Merged and validated in the library, against the same scan the read used. Written to
+    // the scratch copy first, then read back as bytes: the file on disk is what has to reach
+    // GitHub and R2, and re-serialising it here would be a second implementation of the
+    // writer that could disagree with the local one. The index is left to the code below,
+    // since the scratch copy holds this one catalogue and a rescan would list nothing else.
+    const result = i18n.saveRows(tmp, src, code, body.entries || {}, { index: false });
+    const text = require('fs').readFileSync(path.join(tmp, rel.split('/').join(path.sep)), 'utf8');
+
+    const message = `i18n: ${src} → ${code} via admin\n\nEdited by ${user.email || user.sub}`
+      + ` at ${new Date().toISOString()}.\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>`;
+    let commit;
+    // Against the copy the merge ran on: a save that lands in between is not written over.
+    try { commit = await commitFile(gh, rel, text, message, { expectedSha: latest ? latest.sha : undefined }); }
+    catch (e) {
+      if (e.status === 409) return fail(res, 409, 'Conflict', 'Another save of this catalogue landed a moment ago — save again.');
+      return fail(res, 502, 'GitHub write failed', e.message);
+    }
+
+    // A curriculum catalogue the game has never loaded needs its line in js/locales/catalogs.js,
+    // or the game never asks for it; one that has just been emptied loses its line. Only that
+    // one entry is changed, against the index GitHub holds, so a catalogue created by an
+    // earlier save that this deployment has not seen stays listed.
+    let indexed = null;
+    if (!chrome) {
+      try {
+        const idx = await readFile(gh, I18N_INDEX_REL);
+        const idxText = idx ? idx.text : bundleText(root, I18N_INDEX_REL);
+        const present = Object.keys(i18n.readCatalog(tmp, src, code).entries).length > 0;
+        const next = i18n.renderCatalogIndex(
+          i18n.setCatalogIndexed(i18n.parseCatalogIndex(idxText), src, code, present));
+        if (next !== idxText) {
+          indexed = await commitFile(gh, I18N_INDEX_REL, next,
+            `i18n: index ${present ? 'adds' : 'drops'} ${src} → ${code}`
+            + '\n\nCo-Authored-By: Claude Opus 5 <noreply@anthropic.com>',
+            { expectedSha: idx ? idx.sha : undefined });
+        }
+      } catch (e) {
+        return fail(res, 502, 'The catalogue was saved, but the index was not',
+          e.message + ' — save again to retry.');
+      }
+    }
+
+    let published = null;
+    try { published = await putContent(rel, text); }
+    catch (e) { published = null; }
+
+    // Said per kind of file, because they reach players by different roads. A curriculum
+    // catalogue is read from the CDN, so the upload makes it live. The interface table and
+    // the index are part of the site itself and ship with the next deploy, after CI.
+    const note = chrome
+      ? 'Committed. Interface strings are part of the site, so players on ' + code
+        + ' see them after the next deploy, once CI has passed.'
+      : (published
+        ? 'Live on the CDN now — players on ' + code + ' see it on their next load.'
+          + (indexed ? ' This catalogue is new, though: the game starts asking for it with the next deploy.' : '')
+        : 'Committed, but the CDN upload failed — it will catch up on the next publish.');
+
+    return json(res, 200, {
+      success: true,
+      data: Object.assign({}, result, {
+        rel,
+        commit: commit.commit || null,
+        commitUrl: commit.url || null,
+        indexCommit: (indexed && indexed.commit) || null,
+        branch: gh.branch,
+        live: !chrome && !!published,
+        note
+      })
+    });
+  } finally {
+    dropScratch(tmp);
+  }
 }
 
 module.exports = async (req, res) => {

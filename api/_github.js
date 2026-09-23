@@ -43,32 +43,53 @@ function api(cfg, pathPart, init) {
 const contentUrl = (rel, branch) =>
   '/contents/' + rel.split('/').map(encodeURIComponent).join('/') + '?ref=' + encodeURIComponent(branch);
 
-// The blob SHA of the file as it stands, or null if it does not exist yet. This is the whole
-// concurrency story: GitHub refuses a write whose SHA is stale, so two people editing the
-// same bank cannot silently overwrite one another — the second gets a conflict and re-reads.
-async function currentSha(cfg, rel) {
+// The git blob SHA of some text: what GitHub calls the file's `sha`. Computed locally so a
+// version can be handed out for bytes that came from somewhere other than GitHub — the CDN
+// copy the editor actually opened — and still be compared with GitHub's own.
+function blobSha(text) {
+  const buf = Buffer.from(String(text), 'utf8');
+  return require('crypto').createHash('sha1')
+    .update('blob ' + buf.length + '\0').update(buf).digest('hex');
+}
+
+/** The file as it stands on the branch, `{ text, sha }`, or null if it does not exist yet. */
+async function readFile(cfg, rel) {
   const r = await api(cfg, contentUrl(rel, cfg.branch), { method: 'GET' });
   if (r.status === 404) return null;
   if (!r.ok) throw new Error('GitHub read failed: ' + r.status + ' ' + (await r.text()).slice(0, 200));
   const j = await r.json();
-  return j.sha || null;
+  return { text: Buffer.from(String(j.content || ''), 'base64').toString('utf8'), sha: j.sha || null };
+}
+
+// The blob SHA of the file as it stands, or null if it does not exist yet.
+async function currentSha(cfg, rel) {
+  const f = await readFile(cfg, rel);
+  return f ? f.sha : null;
 }
 
 /**
  * Commit `text` to `rel`. Returns { committed: false } when the bytes already match, so
  * pressing Save on an untouched file does not add an empty commit to the history — and does
  * not spend a CI run on nothing.
+ *
+ * `opts.expectedSha` is the version the edit was made against. This used to claim that GitHub
+ * refusing a stale SHA meant two editors could not overwrite one another — but the SHA sent
+ * was the one read a moment before the write, inside this same request, so a save made on a
+ * copy opened an hour earlier went straight over every commit made since. The version now
+ * comes from the editor: the file changed since it was opened, the write is refused, and the
+ * editor re-reads. Without it the old behaviour stands, for callers that have none to give.
  */
-async function commitFile(cfg, rel, text, message) {
-  const sha = await currentSha(cfg, rel);
-  if (sha) {
-    const cur = await api(cfg, contentUrl(rel, cfg.branch), { method: 'GET' });
-    if (cur.ok) {
-      const j = await cur.json();
-      const existing = Buffer.from(String(j.content || ''), 'base64').toString('utf8');
-      if (existing === text) return { committed: false, sha, unchanged: true };
-    }
+async function commitFile(cfg, rel, text, message, opts) {
+  const o = opts || {};
+  const cur = await readFile(cfg, rel);
+  const sha = cur ? cur.sha : null;
+  if (typeof o.expectedSha === 'string' && o.expectedSha && o.expectedSha !== sha) {
+    const err = new Error('That file changed since you opened it — reload and reapply your edit.');
+    err.status = 409;
+    err.currentSha = sha;
+    throw err;
   }
+  if (cur && cur.text === text) return { committed: false, sha, unchanged: true };
   const body = {
     message,
     content: Buffer.from(text, 'utf8').toString('base64'),
@@ -126,4 +147,4 @@ async function probe(cfg) {
   return out;
 }
 
-module.exports = { githubConfig, commitFile, currentSha, probe };
+module.exports = { githubConfig, commitFile, currentSha, readFile, blobSha, probe };
