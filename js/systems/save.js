@@ -930,6 +930,97 @@ if(typeof window !== 'undefined' && window.addEventListener){
 
 // ── Autosave scheduling end ──────────────────────────────────────────────────
 
+// ── One tab at a time ────────────────────────────────────────────────────────
+//
+// Two tabs of the game in one browser each held the whole game in memory and each wrote it
+// whole — to the same localStorage slot and the same cloud save — so whichever saved last put
+// its own copy over everything the other had done. Nothing noticed: no storage event was
+// listened for, and neither tab knew the other existed.
+//
+// The tab opened last takes over, because it is the one in front of the player. It says so on
+// a BroadcastChannel. The tab it replaces folds what it has into the stored copy, stops saving
+// for the rest of its life, and puts a card over itself with a way to take the game back; the
+// new tab then takes in what was handed over, the same way it takes in another device's
+// progress (absorbCloudProgress). The stored copy's game-in-the-moment is the one kept, since
+// by the time the handover lands it may already be the new tab's.
+const TAB_CHANNEL_NAME = 'hv-game';
+const TAB_ID = Math.random().toString(36).slice(2) + Date.now().toString(36);
+let _tabChannel = null;
+let _tabRetired = false;
+
+function claimThisTab() {
+  if (_tabChannel || typeof BroadcastChannel !== 'function') return false;
+  try {
+    _tabChannel = new BroadcastChannel(TAB_CHANNEL_NAME);
+    // Node has a BroadcastChannel of its own, and an open one keeps the process alive — a
+    // harness that runs this file outside a vm then never exits (test_m1_challenger_harness
+    // did exactly that). The browser's has no unref and needs none.
+    if (typeof _tabChannel.unref === 'function') _tabChannel.unref();
+    _tabChannel.onmessage = (ev) => {
+      const msg = ev && ev.data;
+      if (!msg || msg.id === TAB_ID) return;
+      if (msg.type === 'claim') retireThisTab();
+      else if (msg.type === 'released') takeTabHandover();
+    };
+    _tabChannel.postMessage({ type: 'claim', id: TAB_ID });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function retireThisTab() {
+  if (_tabRetired) return;
+  _tabRetired = true;
+  if (!_savesFrozen) {
+    try {
+      const mine = collectSave();
+      const stored = peekLocalSave();
+      const handed = (stored && typeof mergeSaves === 'function')
+        ? mergeSaves(stored, mine, { prefer: 'a' }) : mine;
+      localStorage.setItem('hv_save_v2', JSON.stringify(handed));
+    } catch (e) {
+      console.warn('Could not hand this tab\'s progress over:', e);
+    }
+  }
+  freezeSaves();
+  try { if (_tabChannel) _tabChannel.postMessage({ type: 'released', id: TAB_ID }); } catch (e) {}
+  showTabElsewhere();
+}
+
+function takeTabHandover() {
+  if (_tabRetired || _savesFrozen) return;
+  const stored = peekLocalSave();
+  if (!stored || typeof mergeSaves !== 'function') return;
+  absorbCloudProgress(mergeSaves(collectSave(), stored, { prefer: 'a' }));
+  persistSave();
+}
+
+function showTabElsewhere() {
+  if (typeof document === 'undefined' || !document.createElement || !document.body) return;
+  let el = document.getElementById('tab-elsewhere-overlay');
+  if (!el || !el.parentNode) {
+    el = document.createElement('div');
+    el.id = 'tab-elsewhere-overlay';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-modal', 'true');
+    el.innerHTML = '<div id="tab-elsewhere-card"><div id="tab-elsewhere-title"></div>'
+      + '<p id="tab-elsewhere-body"></p>'
+      + '<button type="button" class="desk-opt" id="tab-elsewhere-here"></button></div>';
+    document.body.appendChild(el);
+  }
+  const put = (id, key) => { const n = document.getElementById(id); if (n) n.textContent = hvT(key); };
+  put('tab-elsewhere-title', 'ui.tab.elsewhere.title');
+  put('tab-elsewhere-body', 'ui.tab.elsewhere.body');
+  put('tab-elsewhere-here', 'ui.tab.elsewhere.here');
+  const here = document.getElementById('tab-elsewhere-here');
+  // Reloading is what taking the game back is: this tab boots on the stored copy, which holds
+  // everything the other tab did, and its own claim retires that one in turn.
+  if (here) here.onclick = () => { try { location.reload(); } catch (e) {} };
+  el.classList.add('visible');
+}
+// ── One tab at a time end ────────────────────────────────────────────────────
+
 // ── Save precedence (pure) ───────────────────────────────────────────────────
 // Read BOTH copies and apply whichever is newer.
 //

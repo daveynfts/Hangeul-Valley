@@ -800,6 +800,14 @@ plus the small game-in-the-moment fields, as a `PATCH` that `api/save.js` merges
 it holds with the same `mergeSaves`; a session's tail is a few kilobytes. A save small enough
 still goes whole, and a visit that never read the cloud copy sends nothing on the way out.
 
+**One tab at a time.** Two tabs of the game in one browser each wrote the whole game to the
+same `localStorage` slot and cloud save, so whichever saved last erased the other. The tab
+opened last now takes over: it announces itself on a `BroadcastChannel`, the tab it replaces
+folds its unsaved progress into the stored copy, freezes its saving and shows a "Play here
+instead" card (which reloads it and takes the game back), and the new tab absorbs the handover.
+The channel is `unref()`ed where the runtime offers it — Node has a `BroadcastChannel` too, and
+an open one kept `test_m1_challenger_harness.js` from ever exiting.
+
 ---
 
 ## Roadmap

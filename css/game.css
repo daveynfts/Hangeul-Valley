@@ -857,6 +857,20 @@
       background: rgba(10, 15, 30, 0.72); align-items: center; justify-content: center;
     }
     #rank-card-overlay.visible, #rankup-overlay.visible { display: flex; }
+    /* The card a tab shows once another tab of the game has taken over (claimThisTab in
+       js/systems/save.js). Above every other layer: nothing behind it saves any more. */
+    #tab-elsewhere-overlay {
+      position: fixed; inset: 0; z-index: 5000; display: none;
+      background: rgba(10, 15, 30, 0.86); align-items: center; justify-content: center;
+    }
+    #tab-elsewhere-overlay.visible { display: flex; }
+    #tab-elsewhere-card {
+      width: min(420px, 92vw); padding: 24px; text-align: center; color: #fff8e8;
+      background: linear-gradient(180deg, #2a1a0a 0%, #1a1008 100%);
+      border: 3px solid #f59e0b; border-radius: 8px;
+    }
+    #tab-elsewhere-title { font-family: 'Be Vietnam Pro', sans-serif; font-size: 18px; font-weight: 800; color: #fde68a; }
+    #tab-elsewhere-body { font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; line-height: 1.5; margin: 12px 0 18px; }
     #rank-card {
       width: min(420px, 92vw); padding: 28px 24px 22px; text-align: center; color: #fff8e8;
       background:

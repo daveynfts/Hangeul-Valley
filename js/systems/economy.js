@@ -1507,6 +1507,9 @@ function _afterLoad(){
   updateGoldHUD();
   buildLevelSelectScreen();
   if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
+  // After the stored copy is in memory: another tab of the game hands over what it has and
+  // stops saving (see claimThisTab in js/systems/save.js).
+  if (typeof claimThisTab === 'function') claimThisTab();
   initGoogleAuth();
 }
 // pywebview fires this event when API is ready; otherwise we init on DOMLoaded.
