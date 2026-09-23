@@ -5,6 +5,8 @@ const { sessionUser, sessionNeedsRefresh, signSession, setSessionCookie } = requ
 const { PREFIX: LB_PREFIX, entryFromSave } = require('./_leaderboard');
 // How large a save may be, and how a compressed one is read. See api/_saveBody.js.
 const { readSaveBody, saveClaimsOtherAccount } = require('./_saveBody');
+// The same merge the client runs, for a closing tab's tail (PATCH below).
+const { mergeSaves } = require('../js/systems/saveMerge.js');
 
 // Same sanitising as saveKey: the sub reaches a bucket key, so nothing but the safe alphabet
 // gets through. Kept next to the write rather than in _leaderboard.js, which stays free of
@@ -13,6 +15,38 @@ function leaderboardKey(sub) {
   const id = String(sub || '').replace(/[^a-zA-Z0-9._-]/g, '');
   if (!id) throw new Error('bad user id');
   return LB_PREFIX + id + '.json';
+}
+
+// The save, then its leaderboard row.
+//
+// The leaderboard row is a byproduct of the save rather than something the client posts
+// separately. This endpoint already knows who the player is, and the numbers are already
+// here, so a second route would only add another thing to authenticate and another place
+// for the board to disagree with the save it came from.
+//
+// It is written after the save and never allowed to fail it. A player whose progress was
+// stored but whose board row was not is behind by one save; a player told their save
+// failed when it did not would go looking for lost progress. entryFromSave clamps and
+// strips everything it reads — see api/_leaderboard.js.
+async function storeSave(client, Key, payload, user, writeNow) {
+  await client.send(new PutObjectCommand({
+    Bucket: r2Bucket(),
+    Key,
+    Body: JSON.stringify(payload),
+    ContentType: 'application/json',
+    CacheControl: 'private, no-store'
+  }));
+  try {
+    await client.send(new PutObjectCommand({
+      Bucket: r2Bucket(),
+      Key: leaderboardKey(user.sub),
+      Body: JSON.stringify(entryFromSave(payload, user, writeNow)),
+      ContentType: 'application/json',
+      CacheControl: 'public, max-age=30'
+    }));
+  } catch (e) {
+    console.warn('[save] leaderboard row not written:', e && e.name, e && e.message);
+  }
 }
 
 // The revision a stored save is at. Saves written before revisions existed have none, and
@@ -194,37 +228,51 @@ module.exports = async (req, res) => {
       }
       delete payload.baseRev;
       payload.rev = currentRev + 1;
-
-      await client.send(new PutObjectCommand({
-        Bucket: r2Bucket(),
-        Key,
-        Body: JSON.stringify(payload),
-        ContentType: 'application/json',
-        CacheControl: 'private, no-store'
-      }));
-
-      // The leaderboard row is a byproduct of the save rather than something the client posts
-      // separately. This endpoint already knows who the player is, and the numbers are already
-      // here, so a second route would only add another thing to authenticate and another place
-      // for the board to disagree with the save it came from.
-      //
-      // It is written after the save and never allowed to fail it. A player whose progress was
-      // stored but whose board row was not is behind by one save; a player told their save
-      // failed when it did not would go looking for lost progress. entryFromSave clamps and
-      // strips everything it reads — see api/_leaderboard.js.
-      try {
-        await client.send(new PutObjectCommand({
-          Bucket: r2Bucket(),
-          Key: leaderboardKey(user.sub),
-          Body: JSON.stringify(entryFromSave(payload, user, writeNow)),
-          ContentType: 'application/json',
-          CacheControl: 'public, max-age=30'
-        }));
-      } catch (e) {
-        console.warn('[save] leaderboard row not written:', e && e.name, e && e.message);
-      }
-
+      await storeSave(client, Key, payload, user, writeNow);
       res.status(200).json({ ok: true, updatedAt: payload.updatedAt, rev: payload.rev });
+      return;
+    }
+    // A closing tab's tail: only what changed since that tab's last upload landed, merged into
+    // the copy held here. The whole save is past keepalive's 64 KiB for nearly everyone who
+    // plays, and the ordinary request a closing page falls back to is the one it cancels, so
+    // without this the end of every session reached that device and nowhere else. It is a
+    // merge (js/systems/saveMerge.js), so it needs no base revision: records keep their most
+    // recent answer whichever side they came from, and the tail's game-in-the-moment wins only
+    // if it is the newer of the two.
+    if (req.method === 'PATCH') {
+      let tail;
+      try {
+        tail = await readSaveBody(req);
+      } catch (e) {
+        if (e && e.status === 413) { res.status(413).json({ error: 'save too large' }); return; }
+        throw e;
+      }
+      if (!tail || typeof tail !== 'object' || !tail.patch) {
+        res.status(400).json({ error: 'patch body required' });
+        return;
+      }
+      if (saveClaimsOtherAccount(tail, user.sub)) {
+        res.status(409).json({ error: 'account mismatch' });
+        return;
+      }
+      const current = await getObjectJson(client, Key);
+      if (!current) {
+        // A tail needs something to land on. This device's copy still holds the progress, and
+        // its next visit writes it whole.
+        res.status(409).json({ error: 'nothing to patch' });
+        return;
+      }
+      const writeNow = Date.now();
+      const tailAt = stampSave(tail.updatedAt, writeNow);
+      const currentAt = trustedStamp(current.updatedAt, writeNow);
+      const merged = mergeSaves(current, tail, { prefer: tailAt >= currentAt ? 'b' : 'a' });
+      delete merged.patch;
+      delete merged.baseRev;
+      merged.updatedAt = Math.max(tailAt, currentAt);
+      merged.cloudUser = user.sub;
+      merged.rev = storedRev(current) + 1;
+      await storeSave(client, Key, merged, user, writeNow);
+      res.status(200).json({ ok: true, updatedAt: merged.updatedAt, rev: merged.rev });
       return;
     }
     res.status(405).json({ error: 'method not allowed' });

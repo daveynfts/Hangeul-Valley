@@ -154,6 +154,7 @@ function device(name, sub) {
   sb.localStorage.setItem('hv_google_token', 'tok-' + sub);
   R('googleAuth.token = "tok-' + sub + '"; googleAuth.user = { sub: "' + sub + '" };');
   d.R = R;
+  d.sb = sb;
   d.sync = () => R('syncCloudSave()');
   d.learn = (ko, t) => R('gradeWord(' + JSON.stringify(ko) + ', GRADE.GOOD, "type", ' + t + '); gradeWord(' + JSON.stringify(ko) + ', GRADE.GOOD, "type", ' + (t + 16000) + '); gradeWord(' + JSON.stringify(ko) + ', GRADE.GOOD, "type", ' + (t + 62000) + ');');
   d.push = () => R('pushCloudSave(collectSave())');
@@ -291,6 +292,71 @@ const cloudKnows = (sub, ko) => { const c = cloudCopy(sub); return !!(c && c.srs
   eq(fresh.R('_cloudRev') !== null, true, 'and asking to write started the read it was waiting for');
   assert(fresh.knows(W[0]) && fresh.knows(W[10]), 'which brought the account’s progress to the fresh browser');
   assert(JSON.stringify(cloudCopy('amy').srs) === before, 'still without the blank game going anywhere');
+
+  // ── 6. The tail of a session, on the way out ───────────────────────────────
+  console.log('\n--- 6. Closing the tab ---');
+  bucket.clear();
+  const big = device('big-laptop', 'ben');
+  // A long-lived account: a few hundred words on every modality, far past keepalive's 64 KiB.
+  const all = [];
+  LEVELS.forEach((l) => l.words.forEach((w) => all.push(w.ko)));
+  big.R('srsData = {};');
+  all.slice(0, 400).forEach((ko, i) => big.learn(ko, T + i * 100000));
+  await big.sync();
+  const seeded = cloudCopy('ben');
+  assert(seeded && Object.keys(seeded.srs).length === 400, 'the long-lived account is in the cloud (400 words)');
+  const full = Buffer.byteLength(big.R('JSON.stringify(collectSave())'));
+  assert(full > 64 * 1024, 'and its save is far past keepalive’s cap (' + Math.round(full / 1024) + ' KB)');
+
+  // The last few answers of the session, then the page goes away before the debounce fires.
+  big.learn(all[500], T + 1e6);
+  big.learn(all[501], T + 1e6 + 1000);
+  big.R('playerCurrencies.coins = 777;');
+  // Route the beacon through a spy that records it and then hands it to the endpoint.
+  const sentOut = [];
+  big.sb.__spy = async (url, opts) => { sentOut.push(opts); const rr = await callSave({ method: opts.method, headers: opts.headers, body: opts.body }); return { status: rr.status, json: async () => rr.json }; };
+  big.R('fetch = __spy;');
+  big.R('beaconCloudSave(collectSave())');
+  await new Promise((r) => setTimeout(r, 20));
+  const beacon = sentOut[0];
+  eq(beacon && beacon.method, 'PATCH', 'what goes out is the tail, not the whole save');
+  eq(beacon && beacon.keepalive, true, 'with keepalive, so it outlives the page');
+  assert(beacon && Buffer.byteLength(beacon.body) < 64 * 1024, 'inside the cap (' + Math.round(Buffer.byteLength(beacon.body) / 1024) + ' KB)');
+  const tailBody = JSON.parse(beacon.body);
+  eq(Object.keys(tailBody.srs).length, 2, 'carrying only the two words answered since the last upload');
+  assert(cloudKnows('ben', all[500]) && cloudKnows('ben', all[501]), 'and the endpoint merged them into the stored save');
+  eq(Object.keys(cloudCopy('ben').srs).length, 402, 'next to every word already there');
+  eq(cloudCopy('ben').currencies.coins, 777, 'with the game as it stood when the tab closed');
+  eq(cloudCopy('ben').rev, seeded.rev + 1, 'as the next revision, so the other devices notice');
+
+  // A small save still goes whole.
+  bucket.clear();
+  const small = device('small', 'cat');
+  await small.sync();
+  const smallSent = [];
+  small.sb.__spy = (async (url, opts) => { smallSent.push(opts); const rr = await callSave({ method: opts.method, headers: opts.headers, body: opts.body }); return { status: rr.status, json: async () => rr.json }; });
+  small.R('fetch = __spy; beaconCloudSave(collectSave());');
+  await new Promise((r) => setTimeout(r, 20));
+  eq(smallSent[0] && smallSent[0].method, 'PUT', 'a save that fits goes out whole');
+  eq(smallSent[0] && JSON.parse(smallSent[0].body).baseRev, 1, 'named against the revision it was built on');
+
+  // A page that never read the cloud copy writes nothing on the way out.
+  const unread = device('unread', 'cat');
+  const unreadSent = [];
+  unread.sb.__spy = (async (url, opts) => { unreadSent.push(opts); return { status: 200, json: async () => ({}) }; });
+  unread.R('fetch = __spy; beaconCloudSave(collectSave());');
+  eq(unreadSent.length, 0, 'a visit that never read the cloud copy sends nothing as it closes');
+
+  // The endpoint's side of a tail.
+  bucket.clear();
+  let pr = await callSave({ method: 'PATCH', headers: { Authorization: 'Bearer tok-dan', 'Content-Type': 'application/json' }, body: JSON.stringify({ patch: 1, srs: {} }) });
+  eq(pr.status, 409, 'a tail with nothing stored to land on is refused');
+  eq(pr.json.error, 'nothing to patch', 'and says so');
+  pr = await callSave({ method: 'PATCH', headers: { Authorization: 'Bearer tok-dan', 'Content-Type': 'application/json' }, body: JSON.stringify({ srs: {} }) });
+  eq(pr.status, 400, 'a body that is not a tail is not taken as one');
+  await put('dan', { v: 11, baseRev: 0, updatedAt: Date.now(), srs: {} });
+  pr = await callSave({ method: 'PATCH', headers: { Authorization: 'Bearer tok-dan', 'Content-Type': 'application/json' }, body: JSON.stringify({ patch: 1, owner: 'eve', srs: {} }) });
+  eq(pr.json && pr.json.error, 'account mismatch', 'and a tail naming another account is refused like a whole save');
 
   global.fetch = realFetch;
   Module._load = realLoad;

@@ -1773,40 +1773,92 @@ if (typeof window !== 'undefined' && window.addEventListener) {
 // it carries no Authorization header, so it could only ever work for a player who already
 // holds a session cookie — and a path that silently does nothing for everyone else is worse
 // than one request shape that works for both.
-// The 64KiB cap is the spec's, and a long-lived account's save can pass it — that one falls
-// back to an ordinary request, which is exactly as likely to land as it was before.
+//
+// keepalive has a 64 KiB cap, the spec's, and a save passes it at around a hundred words
+// studied — so for nearly everyone who plays, the whole save could never go out this way, and
+// the ordinary request it fell back to is the one a closing page cancels. What goes instead is
+// the tail: only the records that changed since the last upload that landed, plus the small
+// fields that describe the game in the moment, as a PATCH the endpoint merges into the copy it
+// holds (js/systems/saveMerge.js). A session's tail is a handful of words, so it fits.
 //
 // This deliberately bypasses the serialized chain: the page is going away and there is no
-// later turn to take. It is safe to race an in-flight PUT because the server refuses a save
-// whose updatedAt is older than the one it holds (api/save.js), so the loser of the race is
-// the older payload either way.
+// later turn to take. A full write is safe to race an in-flight PUT because it names the
+// revision it was built on (api/save.js), and a tail is safe because it is a merge.
 const CLOUD_BEACON_MAX = 64 * 1024;
+// The big record maps, sent only where they changed. Everything else in a save is small.
+const TAIL_RECORD_FIELDS = ['srs', 'harvests', 'practice', 'fishAlbum'];
+// What the cloud holds of this device's records, as of the last upload that landed.
+let _cloudBase = null;
+
+/** After an upload lands (or a read adopts the cloud copy): what the cloud now holds. */
+function rememberCloudBase(save) {
+  if (!save || typeof save !== 'object') return;
+  const base = { attemptsAt: 0 };
+  TAIL_RECORD_FIELDS.forEach((f) => {
+    const m = new Map();
+    const src = save[f] && typeof save[f] === 'object' ? save[f] : {};
+    Object.keys(src).forEach((k) => m.set(k, JSON.stringify(src[k])));
+    base[f] = m;
+  });
+  (Array.isArray(save.attempts) ? save.attempts : []).forEach((a) => {
+    if (a && Number(a.at) > base.attemptsAt) base.attemptsAt = Number(a.at);
+  });
+  _cloudBase = base;
+}
+
+/** The changes since the last upload that landed, as a partial save. null without a base. */
+function buildTailPatch(data) {
+  if (!_cloudBase || !data) return null;
+  const patch = { patch: 1 };
+  Object.keys(data).forEach((k) => {
+    if (TAIL_RECORD_FIELDS.indexOf(k) < 0 && k !== 'attempts' && data[k] !== undefined) patch[k] = data[k];
+  });
+  TAIL_RECORD_FIELDS.forEach((f) => {
+    const src = data[f] && typeof data[f] === 'object' ? data[f] : {};
+    const changed = {};
+    Object.keys(src).forEach((k) => {
+      if (_cloudBase[f].get(k) !== JSON.stringify(src[k])) changed[k] = src[k];
+    });
+    patch[f] = changed;
+  });
+  patch.attempts = (Array.isArray(data.attempts) ? data.attempts : [])
+    .filter((a) => a && Number(a.at) > _cloudBase.attemptsAt);
+  return patch;
+}
+
 function beaconCloudSave(data) {
   const token = getGoogleToken();
   if (typeof fetch !== 'function') return false;
   if (!token && !serverSessionAlive()) return false;
   // The same two rules as every other write: only as the account the save names, and only on
-  // top of the cloud copy this visit read (api/save.js refuses a stale base with 409, which a
-  // page on its way out cannot answer — the tail then waits in this device's copy, and the
-  // next visit merges it). A visit that never read the cloud copy writes nothing on the way out.
+  // top of the cloud copy this visit read. A visit that never read it writes nothing on the
+  // way out; its progress waits in this device's copy, and the next visit merges it.
   const signedAs = (typeof googleAuth !== 'undefined' && googleAuth && googleAuth.user && googleAuth.user.sub) || '';
   if (data && data.owner && signedAs && data.owner !== signedAs) return false;
   if (typeof _cloudRev !== 'undefined') {
     if (_cloudRev === null) return false;
     data = Object.assign({}, data, { baseRev: _cloudRev });
   }
-  let body;
-  try { body = JSON.stringify(data); } catch { return false; }
-  const opts = {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body
-  };
-  if (token) opts.headers.Authorization = 'Bearer ' + token;
   // Byte length, not character count: Korean headwords are three bytes each in UTF-8, so
   // the two numbers are nowhere near the same for this payload.
-  const bytes = (typeof TextEncoder === 'function') ? new TextEncoder().encode(body).length : body.length * 3;
-  if (bytes <= CLOUD_BEACON_MAX) opts.keepalive = true;
+  const sizeOf = (s) => ((typeof TextEncoder === 'function') ? new TextEncoder().encode(s).length : s.length * 3);
+  let body;
+  try { body = JSON.stringify(data); } catch { return false; }
+  let method = 'PUT';
+  let keepalive = sizeOf(body) <= CLOUD_BEACON_MAX;
+  if (!keepalive) {
+    const tail = buildTailPatch(data);
+    let tailBody = '';
+    try { tailBody = tail ? JSON.stringify(tail) : ''; } catch { tailBody = ''; }
+    if (tailBody && sizeOf(tailBody) <= CLOUD_BEACON_MAX) {
+      method = 'PATCH';
+      body = tailBody;
+      keepalive = true;
+    }
+  }
+  const opts = { method, headers: { 'Content-Type': 'application/json' }, body };
+  if (token) opts.headers.Authorization = 'Bearer ' + token;
+  if (keepalive) opts.keepalive = true;
   try {
     fetch('/api/save', opts).catch(() => {});
     return true;
@@ -1956,7 +2008,12 @@ async function syncCloudSaveOnce() {
       if (typeof updateGoldHUD === 'function') updateGoldHUD();
       if (typeof updateRankHUD === 'function') updateRankHUD();
       if (typeof buildLevelSelectScreen === 'function') buildLevelSelectScreen();
-      if (!added) return;
+      if (!added) {
+        // Nothing to upload: the cloud already holds all of it, and a closing tab's tail is
+        // measured against that copy.
+        if (typeof rememberCloudBase === 'function') rememberCloudBase(remote);
+        return;
+      }
     } else if (typeof absorbCloudProgress === 'function') {
       absorbCloudProgress(merged);
     }

@@ -43,8 +43,8 @@ function setCors(req, res) {
   res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Save-Encoding');
   // POST and DELETE are /api/session's — starting a sign-in and ending one. The cookie it
   // sets is never sent cross-origin regardless: no Access-Control-Allow-Credentials is
-  // offered here, and it is SameSite=Lax.
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  // offered here, and it is SameSite=Lax. PATCH is a closing tab's tail (api/save.js).
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
   res.setHeader('Vary', 'Origin');
 }
 

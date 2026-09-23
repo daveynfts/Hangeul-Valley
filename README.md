@@ -792,6 +792,14 @@ while that read was in flight. A build that sends no `baseRev` keeps the old tim
 and its writes still move the revision on. `tests/test_cloud_merge.js` runs the real
 `api/save.js` over an in-memory bucket with three devices on one account.
 
+Closing the tab sends the session's **tail**. `keepalive` — the one request a closing page is
+promised to finish — is capped at 64 KiB, and a save passes that at around a hundred words, so
+for nearly everyone the last write fell back to an ordinary request that the closing page then
+cancelled. The beacon now sends only the records changed since the last upload that landed,
+plus the small game-in-the-moment fields, as a `PATCH` that `api/save.js` merges into the copy
+it holds with the same `mergeSaves`; a session's tail is a few kilobytes. A save small enough
+still goes whole, and a visit that never read the cloud copy sends nothing on the way out.
+
 ---
 
 ## Roadmap
