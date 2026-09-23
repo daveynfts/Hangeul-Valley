@@ -645,7 +645,13 @@ function collectSave(){
     attempts: attemptLog,
     practice: practiceLog,
     plots,
+    // lastLevel stays for builds that read only it. lastWorld and visitedWorlds are what this
+    // build trusts: a world's number changes with the list, its id does not. Both are left out
+    // while a save from before them has not been read against the world list yet — writing
+    // guesses in their place would make that save look as though it had always had ids.
     lastLevel: currentLevelIndex,
+    lastWorld: _worldRefsFromIndex ? undefined : (currentWorldId || null),
+    visitedWorlds: (!_worldRefsFromIndex && Array.isArray(visitedWorlds)) ? visitedWorlds.slice() : undefined,
     playerRank: ensurePlayerRank(),
     apple,
     fishAlbum: fishAlbumSave,
@@ -707,6 +713,13 @@ function applySave(d){
     && !Array.isArray(migrated.practice)) ? migrated.practice : {};
   if(migrated.plots) plotSave = migrated.plots;
   if(typeof migrated.lastLevel==='number') currentLevelIndex = migrated.lastLevel;
+  // Worlds by id (see resolveWorldRefs). A save without visitedWorlds predates ids, and its
+  // numbers are read once against this build's world list when that list has settled.
+  currentWorldId = (typeof migrated.lastWorld === 'string' && migrated.lastWorld) ? migrated.lastWorld : null;
+  visitedWorlds = Array.isArray(migrated.visitedWorlds)
+    ? migrated.visitedWorlds.filter(id => typeof id === 'string' && id) : null;
+  _worldRefsFromIndex = !Array.isArray(migrated.visitedWorlds);
+  if (typeof resolveWorldRefs === 'function') resolveWorldRefs(_worldsSettled);
   if (migrated.playerRank && typeof migrated.playerRank === 'object') {
     playerRank = Object.assign(defaultPlayerRank(), migrated.playerRank);
     ensurePlayerRank();
@@ -2267,12 +2280,17 @@ function gradeWord(ko, grade, mod = currentQuizMode, now = Date.now()){
   return next;
 }
 
-// Words the player owns that are due right now, soonest first, each tagged with the modality
-// that fell due so the review can test the right skill.
+// Words that are due right now, soonest first, each tagged with the modality that fell due so
+// the review can test the right skill.
+//
+// Every loaded list is scanned, not only `unlockedLevels`. Being due is a fact about srsData —
+// a word has a record only because it was studied — and the lists are just where the word
+// object is found. Reading them through `unlockedLevels` tied a world's reviews to the number
+// that world happened to have, which is how a world whose number moved lost its reviews.
 function srsDueWords(now = Date.now()){
   const seen = new Set();
   const out = [];
-  unlockedLevels.forEach(idx => (levelsData[idx]?.words || []).forEach(w => {
+  (Array.isArray(levelsData) ? levelsData : []).forEach(lvl => (lvl?.words || []).forEach(w => {
     if (seen.has(w.ko)) return;
     seen.add(w.ko);
     const mod = dueModality(w.ko, now);

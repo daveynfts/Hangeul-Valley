@@ -966,10 +966,9 @@ function hideLevelSelect() {
 
 // ═══════════════ START LEVEL / RESUME ═════════════════════════════════════════
 function startLevel(idx, resetCrops=true) {
-  currentLevelIndex = idx;
-  const lvl = levelsData[idx];
+  // By id as well as by number: the number is only this session's (see resolveWorldRefs).
+  selectLesson(idx);
   hideLevelSelect();
-  if (isWorldLevel(lvl) && Array.isArray(unlockedLevels) && !unlockedLevels.includes(idx)) unlockedLevels.push(idx);
   if(resetCrops){
     progress = 0; plantedWords.clear();
     if(sceneRef && typeof sceneRef.resetPlots === 'function') {
@@ -984,8 +983,10 @@ function startLevel(idx, resetCrops=true) {
   }
 }
 // Resume last session WITHOUT resetting crops
+// Nothing to look up: the save's lastWorld has already put currentLevelIndex on the right
+// world. This used to read `hv_lastLevel` first — a key nothing has written for a long time —
+// so a browser still holding one from an old build resumed there, whatever the save said.
 function resumeGame(){
-  currentLevelIndex = parseInt(localStorage.getItem('hv_lastLevel')||'0') || currentLevelIndex;
   hideLevelSelect();
   updateHUD(); updateVocabBook();
   if (sceneRef && typeof sceneRef.syncUnit10World === 'function') sceneRef.syncUnit10World();

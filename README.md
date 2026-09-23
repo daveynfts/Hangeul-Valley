@@ -584,6 +584,18 @@ the evidence. They start at the one-day graduating interval, with their first du
 deterministically across the next two weeks so a save holding hundreds of learned words does
 not have them all land on one afternoon.
 
+Worlds are saved **by id** — `lastWorld` for where the player was and `visitedWorlds` for
+where they have been — alongside the old `lastLevel` number, which older builds still read. A
+world's index in `levelsData` is only this session's: the 25 levels, then every file in
+`TEXTBOOK_WORLD_FILES` order that loaded. Units 11–18 were each inserted mid-list, and after
+each release a player who had been in a later world resumed in a different one; a single
+world failing to load shifted every world after it. `resolveWorldRefs()` in
+`js/systems/economy.js` turns the ids back into this session's numbers whenever the world
+list settles, rebuilding the world half of `unlockedLevels` (the quest board and progress
+panel read it by number). A save from before ids has its numbers read once against the
+current list, then keeps them by id. `srsDueWords()` scans every loaded list rather than
+`unlockedLevels`, since being due is a fact about `srsData`.
+
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
 (currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs,
 leaderboards, ground drops) and `persistSave()` is called from ~35 places including

@@ -55,12 +55,16 @@ class FarmScene extends Phaser.Scene {
       this._refreshDueReviews();
     });
     if (typeof hvAdoptPhaserCatalogs === 'function') hvAdoptPhaserCatalogs(this);
+    // levelsData is rebuilt below, and a world's index in it is only this session's. Where the
+    // player is goes by the world's id across the rebuild — see resolveWorldRefs.
+    if (typeof noteCurrentWorld === 'function') noteCurrentWorld();
     levelsData = hvLocalize('levels.json', this.cache.json.get('levels') || []);
     TEXTBOOK_WORLD_FILES.forEach((spec) => {
       if (this.cache.json.exists(spec.cache)) {
         attachTextbookWorld(hvLocalize(spec.file, this.cache.json.get(spec.cache)));
       }
     });
+    if (typeof resolveWorldRefs === 'function') resolveWorldRefs(true);
     applyDebugSkinQuery();
     if(!levelsData.length){
       console.error('levels.json missing');
