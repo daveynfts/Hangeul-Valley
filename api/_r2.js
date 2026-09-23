@@ -39,7 +39,8 @@ function setCors(req, res) {
     origin === 'http://localhost:8742' ||
     origin === 'http://127.0.0.1:8742';
   if (ok) res.setHeader('Access-Control-Allow-Origin', origin);
-  res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+  // X-Save-Encoding marks a compressed save body (api/_saveBody.js).
+  res.setHeader('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Save-Encoding');
   // POST and DELETE are /api/session's — starting a sign-in and ending one. The cookie it
   // sets is never sent cross-origin regardless: no Access-Control-Allow-Credentials is
   // offered here, and it is SameSite=Lax.

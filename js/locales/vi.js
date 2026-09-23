@@ -620,6 +620,7 @@
   "ui.save.reason.signed-out": "đã đăng xuất",
   "ui.save.reason.stale": "thiết bị khác đang có tiến độ mới hơn",
   "ui.save.reason.timeout": "quá thời gian chờ",
+  "ui.save.reason.too-large": "bản lưu quá lớn cho đám mây",
   "ui.save.reason.unavailable": "lưu đám mây đang tắt",
   "ui.save.reason.unexpected": "lỗi không xác định",
   "ui.save.state.done": "Đã lưu",

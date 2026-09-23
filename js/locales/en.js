@@ -620,6 +620,7 @@
   "ui.save.reason.signed-out": "signed out",
   "ui.save.reason.stale": "another device is ahead",
   "ui.save.reason.timeout": "timed out",
+  "ui.save.reason.too-large": "save too large for the cloud",
   "ui.save.reason.unavailable": "cloud save is off",
   "ui.save.reason.unexpected": "unexpected error",
   "ui.save.state.done": "Saved",

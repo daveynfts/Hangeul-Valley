@@ -1314,6 +1314,29 @@ function renewGoogleToken() {
 // A hung request must not wedge the Save button, which now awaits this.
 const CLOUD_TIMEOUT_MS = 15000;
 
+// A save is the same handful of keys repeated for every word studied, and gzip takes it down
+// about twelvefold — the whole game learned on every modality is around 100 KB instead of
+// 1.3 MB. That matters twice: the endpoint used to refuse anything past 256 KB, which a learner
+// reaches at a few hundred words, and this upload goes out every time the debounce fires.
+// Sent as octet-stream with X-Save-Encoding so the platform does not try to parse the bytes as
+// JSON first (api/_saveBody.js). Anything that cannot compress sends the JSON as before.
+async function encodeSaveBody(body) {
+  const text = JSON.stringify(body);
+  const plain = { body: text, headers: { 'Content-Type': 'application/json' } };
+  if (typeof CompressionStream !== 'function' || typeof Blob !== 'function'
+    || typeof Response !== 'function') return plain;
+  try {
+    const stream = new Blob([text]).stream().pipeThrough(new CompressionStream('gzip'));
+    const bytes = new Uint8Array(await new Response(stream).arrayBuffer());
+    return {
+      body: bytes,
+      headers: { 'Content-Type': 'application/octet-stream', 'X-Save-Encoding': 'gzip' }
+    };
+  } catch (e) {
+    return plain;
+  }
+}
+
 async function cloudSaveRequest(method, body) {
   let token = getGoogleToken();
   const session = serverSessionAlive();
@@ -1340,7 +1363,11 @@ async function cloudSaveRequest(method, body) {
     headers: { 'Content-Type': 'application/json' }
   };
   if (token) opts.headers.Authorization = 'Bearer ' + token;
-  if (body) opts.body = JSON.stringify(body);
+  if (body) {
+    const enc = await encodeSaveBody(body);
+    opts.body = enc.body;
+    Object.assign(opts.headers, enc.headers);
+  }
   let timer = null;
   if (typeof AbortController === 'function') {
     const ac = new AbortController();
@@ -1421,6 +1448,14 @@ function pushCloudSave(data) {
         if (typeof showToast === 'function') {
           showToast('☁ ' + hvT('ui.cloud.newerElsewhere'), 4200);
         }
+        return { ok: false, status, reason: _cloudLastError };
+      }
+      // Its own reason rather than 'http:413'. The endpoint's ceiling was once low enough for a
+      // learner to reach, and a bare status code on the chip is no way to find that out. Not
+      // retryable: the same save is the same size a minute from now.
+      if (status === 413) {
+        _cloudLastError = 'too-large';
+        console.warn('Cloud save refused as too large');
         return { ok: false, status, reason: _cloudLastError };
       }
       if (status !== 200) {
@@ -2143,8 +2178,10 @@ let attemptLog = [];   // [{ ko, g, m, at, ivl, st }]
 // Unbounded in time but bounded by content: the three shapes above are one entry per exercise,
 // one per track and one per dictation sentence, so the log stops growing when the units stop
 // being added. That composition is the durable statement; with everything shipped so far seen
-// once it weighed 18.7 KB against a cloud cap of 256 KB, measured 2026-08-28. Growth is linear
-// in content, so a unit costs roughly what the last one did and the headroom stays in multiples.
+// once it weighed 18.7 KB, measured 2026-08-28. Growth is linear in content, so a unit costs
+// roughly what the last one did. The cloud cap it was measured against then, 256 KB, turned
+// out to be reachable by srsData alone and is 4 MB of inflated JSON now (api/_saveBody.js,
+// tests/test_save_size.js).
 //
 // Two wrong figures have stood here. It said "13 KB across three units" while five had shipped,
 // and then "501 entries" — a probe that counted wb: per item rather than per exercise and

@@ -48,6 +48,11 @@ const GRADE = { AGAIN: 0, HARD: 1, GOOD: 2, EASY: 3 };
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 const _clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+// Ease moves in steps of 0.15 and 0.20, which binary floating point cannot hold: a few answers
+// in, 2.5 had become 2.1499999999999995. Harmless to the arithmetic, but it is written into the
+// save for every modality of every word studied, three times over for a word learned on the
+// farm, and the digits were a measurable share of a save that has a size ceiling.
+const _easeOf = (v) => Math.round(_clamp(v, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE) * 100) / 100;
 
 function srsNewEntry() {
   return { st: 'new', step: 0, ivl: 0, ease: SRS_CFG.START_EASE, reps: 0, lapses: 0, due: 0, last: 0 };
@@ -119,7 +124,7 @@ function srsSchedule(entry, grade, now) {
   // Failing is always a lapse, whether or not the review was due.
   if (g === GRADE.AGAIN) {
     e.lapses++;
-    e.ease = _clamp(e.ease - 0.20, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+    e.ease = _easeOf(e.ease - 0.20);
     e.ivl = _clamp(Math.round(e.ivl * SRS_CFG.LAPSE_IVL_MULT), 1, SRS_CFG.MAX_IVL);
     enterLearning(SRS_CFG.RELEARN_STEPS, 'relearn');
     return e;
@@ -141,12 +146,12 @@ function srsSchedule(entry, grade, now) {
 
   // Each branch advances by at least a day so an interval can never stall.
   if (g === GRADE.HARD) {
-    e.ease = _clamp(e.ease - 0.15, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+    e.ease = _easeOf(e.ease - 0.15);
     graduate(Math.max(e.ivl + 1, e.ivl * 1.2));
   } else if (g === GRADE.GOOD) {
     graduate(Math.max(e.ivl + 1, e.ivl * e.ease));
   } else {
-    e.ease = _clamp(e.ease + 0.15, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+    e.ease = _easeOf(e.ease + 0.15);
     graduate(Math.max(e.ivl + 1, e.ivl * e.ease * 1.3));
   }
   return e;

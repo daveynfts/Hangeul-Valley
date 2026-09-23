@@ -3,6 +3,8 @@ const { r2Client, r2Bucket, saveKey, setCors, verifyGoogleIdToken, readBearer } 
 const { stampSave, trustedStamp } = require('./_stamp');
 const { sessionUser, sessionNeedsRefresh, signSession, setSessionCookie } = require('./_session');
 const { PREFIX: LB_PREFIX, entryFromSave } = require('./_leaderboard');
+// How large a save may be, and how a compressed one is read. See api/_saveBody.js.
+const { readSaveBody } = require('./_saveBody');
 
 // Same sanitising as saveKey: the sub reaches a bucket key, so nothing but the safe alphabet
 // gets through. Kept next to the write rather than in _leaderboard.js, which stays free of
@@ -11,40 +13,6 @@ function leaderboardKey(sub) {
   const id = String(sub || '').replace(/[^a-zA-Z0-9._-]/g, '');
   if (!id) throw new Error('bad user id');
   return LB_PREFIX + id + '.json';
-}
-
-const SAVE_BODY_MAX = 256 * 1024;
-
-async function readBody(req) {
-  if (req.body && typeof req.body === 'object') {
-    if (Buffer.byteLength(JSON.stringify(req.body)) > SAVE_BODY_MAX) {
-      const err = new Error('save too large');
-      err.status = 413;
-      throw err;
-    }
-    return req.body;
-  }
-  if (typeof req.body === 'string') {
-    if (Buffer.byteLength(req.body) > SAVE_BODY_MAX) {
-      const err = new Error('save too large');
-      err.status = 413;
-      throw err;
-    }
-    try { return JSON.parse(req.body); } catch { return null; }
-  }
-  const chunks = [];
-  let size = 0;
-  for await (const c of req) {
-    size += c.length;
-    if (size > SAVE_BODY_MAX) {
-      const err = new Error('save too large');
-      err.status = 413;
-      throw err;
-    }
-    chunks.push(c);
-  }
-  if (!chunks.length) return null;
-  try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { return null; }
 }
 
 async function getObjectJson(client, Key) {
@@ -148,7 +116,7 @@ module.exports = async (req, res) => {
     if (req.method === 'PUT') {
       let body;
       try {
-        body = await readBody(req);
+        body = await readSaveBody(req);
       } catch (e) {
         if (e && e.status === 413) {
           res.status(413).json({ error: 'save too large' });
