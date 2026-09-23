@@ -752,6 +752,9 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
 Without it `/api/session` answers `501` and the game falls back to the one-hour token,
 exactly as before. Changing it signs everybody out. It is never sent to the browser.
 
+`/api/leaderboard` reads the cookie too, before any Bearer token: it used to look only at the
+token, so a player an hour into a visit still saved fine and lost their own row off the board.
+
 ### Whose progress this is
 
 `localStorage` holds one save, and it used to not say whose it was. Signing out left it in

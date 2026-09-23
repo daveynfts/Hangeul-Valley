@@ -12,6 +12,7 @@
 const { ListObjectsV2Command, GetObjectCommand } = require('@aws-sdk/client-s3');
 const { r2Client, r2Bucket, setCors, verifyGoogleIdToken, readBearer } = require('./_r2');
 const { PREFIX, rankBoard, publicRow, publicId } = require('./_leaderboard');
+const { sessionUser } = require('./_session');
 
 const LIMIT_DEFAULT = 20;
 const LIMIT_MAX = 100;
@@ -63,9 +64,14 @@ module.exports = async (req, res) => {
 
   // Identifying the caller is a convenience, never a requirement. A bad or expired token means
   // no `you` block, not a failed read — a signed-out player still gets to see the board.
+  //
+  // The game's own session cookie first. This read only ever looked at a Bearer token, and a
+  // Google token lives an hour — since the thirty-day cookie replaced it for saving, a player
+  // an hour into a visit still saved fine and simply lost their own row off the board. The
+  // cookie is checked locally, so it also costs no round trip to Google.
   let me = null;
   try {
-    const user = await verifyGoogleIdToken(readBearer(req));
+    const user = sessionUser(req) || await verifyGoogleIdToken(readBearer(req));
     if (user && user.sub) me = publicId(user.sub);
   } catch { me = null; }
 
@@ -84,8 +90,8 @@ module.exports = async (req, res) => {
     }
 
     // `you` is the caller's own standing, so a shared cache must not hand it to the next
-    // reader. Vary on Authorization for the same reason.
-    res.setHeader('Vary', 'Origin, Authorization');
+    // reader. Vary on Authorization and on Cookie for the same reason.
+    res.setHeader('Vary', 'Origin, Authorization, Cookie');
     res.setHeader('Cache-Control', me ? 'private, no-store' : 'public, max-age=30');
     res.status(200).json({
       tab, total: ranked.length, truncated,

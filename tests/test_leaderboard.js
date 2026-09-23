@@ -175,7 +175,65 @@ assert(/private, no-store/.test(lbApi) && /Vary/.test(lbApi),
 assert(/trust: 'client-reported'/.test(lbApi),
   'and the response says plainly where the numbers came from');
 
-console.log('\n====================================================');
-console.log(passed + ' passed, ' + failed + ' failed');
-console.log('====================================================');
-process.exit(failed ? 1 : 0);
+// ── 7. The player finds their own row an hour in ─────────────────────────────
+// The read looked only at a Bearer token, and a Google token lives an hour. Once the game's
+// thirty-day cookie took over saving, a player past their first hour still saved fine and
+// simply lost their own row. The real handler, over an in-memory bucket (the AWS SDK is
+// swapped for one here, since the CI test job installs nothing).
+console.log('\n--- 7. Recognised by the session cookie ---');
+(async () => {
+  const Module = require('module');
+  const rows = new Map();
+  class Cmd { constructor(input) { this.input = input; } }
+  const fakeS3 = {
+    S3Client: class { async send(cmd) { return cmd.run(); } },
+    ListObjectsV2Command: class extends Cmd {
+      run() { return { Contents: [...rows.keys()].map((Key) => ({ Key })), IsTruncated: false }; }
+    },
+    GetObjectCommand: class extends Cmd {
+      run() { const t = rows.get(this.input.Key); return { Body: { transformToString: async () => t } }; }
+    }
+  };
+  const realLoad = Module._load;
+  Module._load = function (request) {
+    if (request === '@aws-sdk/client-s3') return fakeS3;
+    return realLoad.apply(this, arguments);
+  };
+  Object.assign(process.env, {
+    R2_ACCOUNT_ID: 'a', R2_ACCESS_KEY_ID: 'k', R2_SECRET_ACCESS_KEY: 's',
+    SESSION_SECRET: 'a-long-enough-session-secret-for-tests'
+  });
+  const S = require(path.join('..', 'api', '_session.js'));
+  const handler = require(path.join('..', 'api', 'leaderboard.js'));
+  // A board of three, the caller in the middle.
+  [['u-top', 900], ['u-me', 500], ['u-low', 100]].forEach(([sub, words]) => {
+    rows.set(L.PREFIX + sub + '.json', JSON.stringify(Object.assign(
+      L.entryFromSave({ leaderboards: { personalBests: { totalWordsMastered: words } } }, { sub, name: sub }, 1), {})));
+  });
+  const call = (headers) => new Promise((resolve) => {
+    const res = {
+      headers: {}, statusCode: 200,
+      setHeader(k, v) { this.headers[k.toLowerCase()] = v; }, getHeader(k) { return this.headers[k.toLowerCase()]; },
+      status(c) { this.statusCode = c; return this; },
+      json(o) { resolve({ status: this.statusCode, json: o, headers: this.headers }); },
+      end() { resolve({ status: this.statusCode, json: null, headers: this.headers }); }
+    };
+    handler({ method: 'GET', headers: headers || {}, query: { tab: 'vocab' } }, res);
+  });
+  const cookie = S.COOKIE_BASE + '=' + S.signSession({ sub: 'u-me', name: 'me' }, Date.now());
+  const withCookie = await call({ cookie });
+  eq(withCookie.status, 200, 'the board answers');
+  eq(withCookie.json.you && withCookie.json.you.rank, 2, 'and a caller holding only the session cookie gets their own row back');
+  eq(withCookie.headers['cache-control'], 'private, no-store', 'which is not cacheable by anybody else');
+  assert(/Cookie/.test(withCookie.headers.vary || ''), 'and varies on the cookie it was read from');
+  const anon = await call({});
+  eq(anon.json.you, null, 'a signed-out caller still gets the board, with no row of their own');
+  const forged = await call({ cookie: S.COOKIE_BASE + '=forged.sig' });
+  eq(forged.json.you, null, 'a cookie that does not verify identifies nobody');
+  Module._load = realLoad;
+
+  console.log('\n====================================================');
+  console.log(passed + ' passed, ' + failed + ' failed');
+  console.log('====================================================');
+  process.exit(failed ? 1 : 0);
+})().catch((e) => { console.error(e); process.exit(1); });
