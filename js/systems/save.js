@@ -1361,12 +1361,25 @@ function clearTokenRenewal() {
   _renewTimer = null;
 }
 
+// None of this is needed while the game's own session is alive. The cookie authenticates every
+// save by itself for thirty days, and cloudSaveRequest already drops a dead Google token when
+// it has one — but the renewal timer and the tab-refocus check went on calling
+// google.accounts.id.prompt() every hour regardless. Each call is a chance for Google to show
+// a prompt nobody needed, and each refusal feeds the cool-off that the next real sign-in has
+// to wait out.
+function tokenRenewalNeeded() {
+  return !serverSessionAlive();
+}
+
 function scheduleTokenRenewal() {
   clearTokenRenewal();
   if (typeof setTimeout !== 'function') return;
   if (!googleAuth.token || !googleAuth.exp) return;
   const delay = Math.max(RENEW_MIN_DELAY_MS, googleAuth.exp - RENEW_LEAD_MS - Date.now());
-  _renewTimer = setTimeout(() => { _renewTimer = null; renewGoogleToken(); }, delay);
+  _renewTimer = setTimeout(() => {
+    _renewTimer = null;
+    if (tokenRenewalNeeded()) renewGoogleToken();
+  }, delay);
   // Node's timers are objects that hold the process open; the browser's are numbers. Without
   // this, a test that signs in would sit on a fifty-minute timer before it could exit.
   if (_renewTimer && typeof _renewTimer.unref === 'function') _renewTimer.unref();
@@ -1385,7 +1398,7 @@ function tokenExpiresWithin(ms) {
 function refreshSignInIfStale() {
   if (!hasGoogleSignIn()) return;
   if (getGoogleToken() && !tokenExpiresWithin(RENEW_LEAD_MS)) { scheduleTokenRenewal(); return; }
-  renewGoogleToken();
+  if (tokenRenewalNeeded()) renewGoogleToken();
 }
 
 if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {

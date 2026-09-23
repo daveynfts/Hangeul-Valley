@@ -242,6 +242,30 @@ const R = (c, expr) => vm.runInContext(expr, c);
     assert(c.toasts.some((t) => /sign in again/i.test(t)), 'and the player is told');
   }
 
+  // ── 7. The hourly renewal, once there is a session ─────────────────────────
+  // The thirty-day cookie authenticates every save by itself, and cloudSaveRequest already
+  // drops a dead Google token when it holds one. The renewal timer and the refocus check went
+  // on calling prompt() every hour regardless — each call a chance for Google to show a prompt
+  // nobody needed, and each refusal feeding the cool-off the next real sign-in waits out.
+  console.log('\n--- 7. No hourly prompt while the session cookie is alive ---');
+  for (const withSession of [true, false]) {
+    const local = { hv_google_token: tokenExpiringAt(Date.now() + 2 * 60 * 1000), hv_google_user: '{"sub":"1"}' };
+    if (withSession) local.hv_session_until = String(Date.now() + 20 * 24 * 3600 * 1000);
+    const c = ctx({ gis: 'refuse', local });
+    const timers = [];
+    c.setTimeout = (fn, ms) => { timers.push({ fn, ms }); return { unref() {} }; };
+    R(c, 'googleAuth.token = getGoogleToken(); googleAuth.exp = tokenExpiry(googleAuth.token);');
+    R(c, 'scheduleTokenRenewal()');
+    assert(timers.length > 0, 'a renewal is scheduled for the token in hand');
+    timers.forEach((t) => t.fn());
+    R(c, 'refreshSignInIfStale()');
+    if (withSession) {
+      eq(c.promptCalls, 0, 'with a live session neither the timer nor a refocus asks Google for anything');
+    } else {
+      assert(c.promptCalls >= 1, 'without one the token is still renewed, as before (' + c.promptCalls + ' asks)');
+    }
+  }
+
   console.log('\n' + passed + ' passed, ' + failed + ' failed');
   if (failed) process.exit(1);
   console.log('\ntest_persistent_signin: all passed');
