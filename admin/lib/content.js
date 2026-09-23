@@ -42,11 +42,12 @@ const WORLD_IDS = [
   { id: '2b-unit-15', label: '2B Unit 15 · 인생과 변화' },
   { id: '2b-unit-16', label: '2B Unit 16 · 설날에는 밥 대신 떡국을 먹어요' },
   { id: '2b-unit-17', label: '2B Unit 17 · 비행기를 놓칠 뻔했어요' },
+  { id: '2b-unit-18', label: '2B Unit 18 · 한국에 온 지 벌써 6개월이 되었어요' },
   { id: 'topik-2', label: 'TOPIK II · exam practice' }
 ];
 
-const QUIZ_UNITS = ['unit10', 'unit11', 'unit13', 'unit14', 'unit15', 'unit16', 'unit17', 'topik2'];
-const CASSETTE_UNITS = ['unit10', 'unit11', 'unit12', 'unit13', 'unit14', 'unit15', 'unit16', 'unit17'];
+const QUIZ_UNITS = ['unit10', 'unit11', 'unit13', 'unit14', 'unit15', 'unit16', 'unit17', 'unit18', 'topik2'];
+const CASSETTE_UNITS = ['unit10', 'unit11', 'unit12', 'unit13', 'unit14', 'unit15', 'unit16', 'unit17', 'unit18'];
 
 // Human names for the bank keys, which are otherwise file stems. Derived from WORKBOOKS
 // rather than listed again, so a bank added there cannot be missed here.

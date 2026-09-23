@@ -2651,6 +2651,7 @@ function deskQuizUrl() {
   if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/unit15-desk-quiz.json';
   if (typeof isUnit16World === 'function' && isUnit16World()) return '/worlds/unit16-desk-quiz.json';
   if (typeof isUnit17World === 'function' && isUnit17World()) return '/worlds/unit17-desk-quiz.json';
+  if (typeof isUnit18World === 'function' && isUnit18World()) return '/worlds/unit18-desk-quiz.json';
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-desk-quiz.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-desk-quiz.json';
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-desk-quiz.json';
@@ -2865,6 +2866,7 @@ function workbookUrl() {
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-workbook.json';
   if (typeof isUnit16World === 'function' && isUnit16World()) return '/worlds/unit16-workbook.json';
   if (typeof isUnit17World === 'function' && isUnit17World()) return '/worlds/unit17-workbook.json';
+  if (typeof isUnit18World === 'function' && isUnit18World()) return '/worlds/unit18-workbook.json';
   return null;
 }
 
@@ -2876,6 +2878,7 @@ function textbookUrl() {
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-textbook.json';
   if (typeof isUnit16World === 'function' && isUnit16World()) return '/worlds/unit16-textbook.json';
   if (typeof isUnit17World === 'function' && isUnit17World()) return '/worlds/unit17-textbook.json';
+  if (typeof isUnit18World === 'function' && isUnit18World()) return '/worlds/unit18-textbook.json';
   return null;
 }
 
@@ -3092,6 +3095,7 @@ function cassetteUrl() {
   if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/unit15-cassette.json';
   if (typeof isUnit16World === 'function' && isUnit16World()) return '/worlds/unit16-cassette.json';
   if (typeof isUnit17World === 'function' && isUnit17World()) return '/worlds/unit17-cassette.json';
+  if (typeof isUnit18World === 'function' && isUnit18World()) return '/worlds/unit18-cassette.json';
   return null;
 }
 
@@ -3762,7 +3766,7 @@ function openListen() {
     // box, which is a thin thing to land on. Named per unit because the track numbers
     // are the book's, not ours.
     const tracks = bank.tracks || [];
-    const OPEN_ON = { '2b-unit-10': 4, '2b-unit-11': 14, '2b-unit-12': 24, '2b-unit-13': 34, '2b-unit-14': 44, '2b-unit-16': 64, '2b-unit-17': 74 };
+    const OPEN_ON = { '2b-unit-10': 4, '2b-unit-11': 14, '2b-unit-12': 24, '2b-unit-13': 34, '2b-unit-14': 44, '2b-unit-16': 64, '2b-unit-17': 74, '2b-unit-18': 84 };
     const pref = csUnitPrefs(bank.unit);
     const want = pref.track !== undefined ? pref.track : OPEN_ON[bank.unit];
     const start = tracks.findIndex((t) => t.n === want);

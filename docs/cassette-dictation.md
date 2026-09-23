@@ -762,6 +762,108 @@ destructive** — its own header says so — and it cleared every span on units 
 They were restored from HEAD and checked byte-identical with `git hash-object`. Take the
 backup first, verify the backup is complete, and only then strip.
 
+## Unit 18, and a radio programme with music under it
+
+Nine tracks, 82 to 90 — one fewer than the two chapters before it, because the book's last
+chapter teaches no new pronunciation rule and has a single 발음 track where the others had a 준비
+and a 연습. All nine are scripted: seven on the unit pages, and the radio programme on tracks 88
+and 89 on the 듣기 지문 at printed p.266. 62 lines placed, 80 dictation rows. The pipeline is Unit
+17's — `lines.js` → `align.js` → `spans.js` → `dict_*.js` → `cut.js` — and this tape broke two
+of the filters the last two units added to it, in the same direction both times: each one threw
+away speech.
+
+### The ringback test ate a word
+
+Track 87's 또 장마가 있어서 비가 많이 온다 opens on 또, a single 0.30s /o/. An /o/ puts its first formant
+straight through the 470 Hz band that finds a telephone, so the span lost only 2.3 dB to it
+where every real utterance on the track lost 8-10. It was thrown away as a ringback, and the
+line came out at 5.24 syl/s against a track mean of 4.55, missing its first word.
+
+A narrowband test only means anything about something sustained. A Korean ringback is one
+second on and two off, and the buzzer Unit 17 found ran 1.3s, so nothing this test exists for
+is shorter than 0.7s — the floor the flatness test already had. The tone test now needs it too.
+
+### The flatness test ate a track
+
+Track 86 is one sentence, 내일부터 방학이다, read in the plain style by a male voice that barely moves.
+Its interquartile pitch spread is 0.074, and Unit 17 had set the threshold at 0.08 because the
+narrowest real utterance it had seen was 0.124. One chapter later the margin was gone: the
+filter ate the only span on the track and there was nothing left to align.
+
+Moving the number would have been the wrong fix. It had just been shown to sit on top of the
+data, and the next flat reader would land on the other side of it. The fix asks a second
+question that a tone and a sentence answer differently however flat the sentence is read: a
+sentence is made of syllables, and syllables are amplitude. Counting the dips in the voice-band
+envelope gives Unit 17's buzzer 1.97 a second and every real utterance measured on either tape
+5.3 to 6.9. A span is now a tone only if it is flat in pitch **and** has fewer than 3.0 dips a
+second.
+
+And one guard over all three tests, because two failures on one tape is a pattern: whatever
+they believe, they may not take a track below the number of spans its printed script needs. If
+they would, the aligner keeps every span and says so. A tone that survives costs one line its
+opening word; a real utterance thrown away costs the track its alignment.
+
+### A music bed, and a silence that is not silence
+
+Tracks 88 and 89 are a radio programme with music under the whole of it. The broadband level
+never falls to -40 dB between one sentence and the next, so `silencedetect` heard a single
+61-second utterance and there was nothing to partition.
+
+The music is mostly below 300 Hz and sits 15-20 dB under the presenter. The segmenter for those
+two tracks measures the voice band alone, 300-3400 Hz, against a quantile of the track itself —
+the 62nd percentile, above the bed and below the voice — rather than an absolute dBFS figure,
+with a 0.20s minimum quiet run. That puts the pauses back, and it reads a track recorded in a
+dead room the same way, because nothing absolute is assumed. A threshold set above the music
+also cuts it into slivers wherever it peaks; no Korean syllable is 20 ms long, so spans under
+0.10s are dropped — track 88 left seven, from 0.01 to 0.08s.
+
+Two more things follow from the bed:
+
+* **Finding the programme.** On these tracks the announcement and the read-aloud instruction
+  come out as eight or nine spans rather than two, so counting spans cannot find where the
+  programme starts. Nothing else on the track is quiet for as long as the gap in front of it —
+  7.4s on both, against 1.3s for anything inside — so the widest gap in the first 30% of the
+  track marks it.
+* **Cutting in one piece.** Inside a sentence read over music, the dips the threshold finds are
+  the bed showing through, not the reader stopping. Voiced time on those tracks is the whole
+  window from first span to last, and their clips are cut in one piece rather than spliced from
+  spans: the bank marks both tracks `contiguous`, and the suite checks both halves of that
+  rule. The clips have the music in them, because it is on the tape and taking it out would
+  take the presenter with it.
+
+Tracks 85 and 86 hold one row each and are checked on their own; every other track's pace band
+fails when the clip-to-text pairing is shifted by one, and the suite asserts it that way.
+
+### The keep filter has no rule to name
+
+Every unit before this one had a 발음 rule of its own for the dictation filter to name, or, in
+Unit 10's case, one it could not catch and said so — intonation changes no letter. Unit 18
+teaches nothing new at all. Track 90 re-reads the 읽기 passage in 합니다체 with twenty-two words
+underlined, each a change an earlier unit taught, so the filter says the chapter has no new
+rule and names the ones the sound notes lean on instead — 일 년 [일련], 연락 [열락], 작년 [장년], 나뭇잎이
+[나문니피] — rather than inventing one to fill the slot.
+
+### The notes, read a second time
+
+Every dictation row carries a `why`, and translating all eighty into Vietnamese meant reading
+each one again, slowly, beside its transcript line. That second reading found some thirty
+claims the first had let through, and each was fixed in the English before any Vietnamese was
+written:
+
+* **Wrong.** 나뭇잎이 [나문니피] was explained by "the ㄴ of the next syllable" — 잎 has none; one is
+  added — and "not one of the four syllables is said as spelt", when 나 is. 영하로 "takes 으로"; 영하
+  ends in a vowel, so it takes 로. The ㅆ of 겨울이었는데 "turns the ㄴ behind it", which is the wrong
+  way round. 주디's sentence was "나나's with only 같아요 changed", when 고향에 가면 had become 고향으로 돌아가면
+  as well. 6개월 was "three spoken syllables"; the numeral is one, 육.
+* **Too strong.** 오후의 "has a syllable nobody pronounces" — the 의 is said [에], and [의] is
+  standard too. 사 시 "is not Korean" — it is not how Korean tells the hour. "This book's last
+  유음화" — nobody had checked.
+* **A gender the Korean never gives.** 주디 and the 읽기 narrator were "she". The notes now use the
+  name or say the writer, which also spares the Vietnamese a pronoun the book never chose.
+
+A note is read twice — once when it is written and once when it is translated — and only the
+second reading is slow enough to catch this. Write it to survive the second.
+
 ## The waveform, and looping a stretch of it
 
 A listening station needs three things a play button cannot give you: repeat the track,

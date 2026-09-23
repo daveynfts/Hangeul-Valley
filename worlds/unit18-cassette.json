@@ -1,0 +1,1959 @@
+{
+  "unit": "2b-unit-18",
+  "titleKo": "카세트 플레이어",
+  "titleEn": "The book's own recordings",
+  "unitKo": "18과 한국에 온 지 벌써 6개월이 되었어요",
+  "source": "Seoul National University Korean 2B, Unit 18, tracks 82-90",
+  "closeKo": "닫기",
+  "tracks": [
+    {
+      "n": 82,
+      "sec": "문법과 표현 1-1",
+      "secEn": "V-(으)ㄴ 지",
+      "dur": 12.49,
+      "src": "audio/book/2b-u18-trk82.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "한국에 온 지 얼마나 됐어요?",
+          "at": 3.77,
+          "end": 6.24
+        },
+        {
+          "who": "B",
+          "ko": "한국에 온 지 벌써 네 달 됐어요.",
+          "at": 7.12,
+          "end": 10.43
+        }
+      ]
+    },
+    {
+      "n": 83,
+      "sec": "문법과 표현 1-2",
+      "secEn": "N(이)나 2",
+      "dur": 10.87,
+      "src": "audio/book/2b-u18-trk83.mp3",
+      "lines": [
+        {
+          "who": "A",
+          "ko": "좀 더 드세요.",
+          "at": 3.78,
+          "end": 4.96
+        },
+        {
+          "who": "B",
+          "ko": "아니에요. 두 그릇이나 먹었어요.",
+          "at": 5.85,
+          "end": 8.83
+        }
+      ]
+    },
+    {
+      "n": 84,
+      "sec": "말하기 1",
+      "secEn": "Six months already, and one of them leaving",
+      "dur": 57.23,
+      "src": "audio/book/2b-u18-trk84.mp3",
+      "lines": [
+        {
+          "who": "스티븐",
+          "ko": "우리가 한국에 온 지 벌써 6개월이나 됐네요.",
+          "at": 3.77,
+          "end": 8.11
+        },
+        {
+          "who": "나나",
+          "ko": "맞아요. 시간이 정말 빨리 지나간 것 같아요.",
+          "at": 9.01,
+          "end": 13.57
+        },
+        {
+          "who": "스티븐",
+          "ko": "나나 씨, 다음 학기에도 계속 공부하지요?",
+          "at": 14.48,
+          "end": 18.67
+        },
+        {
+          "who": "나나",
+          "ko": "아니요, 다음 학기에 고향으로 돌아가요.",
+          "at": 19.57,
+          "end": 23.4
+        },
+        {
+          "who": "스티븐",
+          "ko": "그래요? 왜 갑자기 돌아가게 됐어요?",
+          "at": 24.29,
+          "end": 28.46
+        },
+        {
+          "who": "나나",
+          "ko": "사정이 좀 있어서요.",
+          "at": 29.36,
+          "end": 31.27
+        },
+        {
+          "who": "스티븐",
+          "ko": "그래요? 같이 공부할 수 없게 돼서 아쉽네요.",
+          "at": 32.17,
+          "end": 36.99
+        },
+        {
+          "who": "나나",
+          "ko": "고향에 가면 친구들이 많이 그리울 것 같아요. 정이 많이 들었는데…….",
+          "at": 37.88,
+          "end": 44.07
+        },
+        {
+          "who": "스티븐",
+          "ko": "그래도 고향에 가니까 좋지 않아요?",
+          "at": 44.99,
+          "end": 48.07
+        },
+        {
+          "who": "나나",
+          "ko": "가족을 만날 수 있어서 좋기는 하지만 한국을 떠나는 건 아쉬워요.",
+          "at": 48.97,
+          "end": 55.19
+        }
+      ]
+    },
+    {
+      "n": 85,
+      "sec": "문법과 표현 2-1",
+      "secEn": "A-다, V-ㄴ다/는다",
+      "dur": 8.2,
+      "src": "audio/book/2b-u18-trk85.mp3",
+      "lines": [
+        {
+          "who": "글",
+          "ko": "시간이 빨리 지나간다.",
+          "at": 3.77,
+          "end": 6.14
+        }
+      ]
+    },
+    {
+      "n": 86,
+      "sec": "문법과 표현 2-2",
+      "secEn": "N(이)다",
+      "dur": 7.78,
+      "src": "audio/book/2b-u18-trk86.mp3",
+      "lines": [
+        {
+          "who": "글",
+          "ko": "내일부터 방학이다.",
+          "at": 3.78,
+          "end": 5.72
+        }
+      ]
+    },
+    {
+      "n": 87,
+      "sec": "말하기 2",
+      "secEn": "A year of Korean seasons, written in the plain style",
+      "dur": 81.92,
+      "src": "audio/book/2b-u18-trk87.mp3",
+      "lines": [
+        {
+          "who": "글",
+          "ko": "시간이 참 빨리 지나간다.",
+          "at": 3.77,
+          "end": 6.41
+        },
+        {
+          "who": "글",
+          "ko": "처음 한국에 왔을 때 겨울이었는데 지금은 봄, 여름이 지나고 가을이 되었다.",
+          "at": 7.29,
+          "end": 14.84
+        },
+        {
+          "who": "글",
+          "ko": "한국의 계절은 우리 나라와 아주 다르다.",
+          "at": 15.78,
+          "end": 19.39
+        },
+        {
+          "who": "글",
+          "ko": "우리 나라는 계절의 변화가 거의 없고 일 년 내내 따뜻한 편이다.",
+          "at": 20.27,
+          "end": 26.69
+        },
+        {
+          "who": "글",
+          "ko": "하지만 한국은 사계절이 있다.",
+          "at": 27.58,
+          "end": 30.68
+        },
+        {
+          "who": "글",
+          "ko": "한국은 봄에 날씨가 따뜻하고 꽃이 많이 핀다.",
+          "at": 31.58,
+          "end": 36.74
+        },
+        {
+          "who": "글",
+          "ko": "여름에는 날씨가 매우 덥고 습도가 높다.",
+          "at": 37.63,
+          "end": 42.15
+        },
+        {
+          "who": "글",
+          "ko": "또 장마가 있어서 비가 많이 온다.",
+          "at": 43.04,
+          "end": 46.69
+        },
+        {
+          "who": "글",
+          "ko": "내가 제일 좋아하는 계절은 가을이다.",
+          "at": 47.58,
+          "end": 50.81
+        },
+        {
+          "who": "글",
+          "ko": "10월이 되면 날씨가 쌀쌀해지고 단풍이 든다.",
+          "at": 51.7,
+          "end": 56.31
+        },
+        {
+          "who": "글",
+          "ko": "사람들은 단풍을 구경하러 산에 간다.",
+          "at": 57.19,
+          "end": 61.04
+        },
+        {
+          "who": "글",
+          "ko": "겨울에는 기온이 영하로 내려가는 날이 많고 눈이 자주 내린다.",
+          "at": 61.93,
+          "end": 67.83
+        },
+        {
+          "who": "글",
+          "ko": "나는 스키를 타 본 적이 없어서 이번 겨울에 친구들과 스키장에 가 보려고 한다.",
+          "at": 68.72,
+          "end": 76.26
+        },
+        {
+          "who": "글",
+          "ko": "빨리 겨울이 왔으면 좋겠다.",
+          "at": 77.15,
+          "end": 79.86
+        }
+      ]
+    },
+    {
+      "n": 88,
+      "sec": "듣기 1",
+      "secEn": "A radio programme, one year on air",
+      "dur": 72.65,
+      "src": "audio/book/2b-u18-trk88.mp3",
+      "lines": [
+        {
+          "who": "진행자",
+          "ko": "‘오후의 라디오’ 가족 여러분 안녕하세요?",
+          "at": 15.27,
+          "end": 18.33
+        },
+        {
+          "who": "진행자",
+          "ko": "오늘은 저희 방송을 시작한 지 일 년이 되는 날입니다.",
+          "at": 19.3,
+          "end": 23.45
+        },
+        {
+          "who": "진행자",
+          "ko": "오늘도 처음 시작한 날처럼 바람도 시원하고 창밖으로 보이는 단풍도 참 아름답네요.",
+          "at": 24.44,
+          "end": 32.54
+        },
+        {
+          "who": "진행자",
+          "ko": "여러분과 나뭇잎이 떨어지는 가을, 눈 내리는 겨울, 꽃 피는 봄, 그리고 뜨거운 여름을 보냈는데요.",
+          "at": 33.93,
+          "end": 44.29
+        },
+        {
+          "who": "진행자",
+          "ko": "그동안 여러분이 보내 주신 글을 보며 울고 웃으면서 행복한 일 년을 보냈습니다.",
+          "at": 45.28,
+          "end": 52.44
+        },
+        {
+          "who": "진행자",
+          "ko": "함께해 주셔서 정말 감사합니다.",
+          "at": 53.94,
+          "end": 56.66
+        },
+        {
+          "who": "진행자",
+          "ko": "앞으로도 매일 오후 4시, 잊지 말고 찾아 주세요.",
+          "at": 57.65,
+          "end": 62.36
+        },
+        {
+          "who": "진행자",
+          "ko": "그럼 오늘의 첫 노래 듣겠습니다. ‘가을이 오면’.",
+          "at": 63.31,
+          "end": 67.33
+        }
+      ]
+    },
+    {
+      "n": 89,
+      "sec": "듣기 2",
+      "secEn": "A listener’s letter, read on air",
+      "dur": 111.15,
+      "src": "audio/book/2b-u18-trk89.mp3",
+      "lines": [
+        {
+          "who": "진행자",
+          "ko": "다음은 한국에서 공부하고 계시는 주디 씨의 사연인데요.",
+          "at": 13.63,
+          "end": 18.4
+        },
+        {
+          "who": "진행자",
+          "ko": "멀리 독일에서 오셨군요.",
+          "at": 19.42,
+          "end": 21.18
+        },
+        {
+          "who": "진행자",
+          "ko": "그럼 편지를 읽어 드리겠습니다.",
+          "at": 22.41,
+          "end": 24.81
+        },
+        {
+          "who": "주디",
+          "ko": "내일은 제가 한국에 온 지 일 년이 되는 날입니다.",
+          "at": 29.6,
+          "end": 33.36
+        },
+        {
+          "who": "주디",
+          "ko": "그동안 참 많은 일들이 있었는데요.",
+          "at": 34.84,
+          "end": 37.83
+        },
+        {
+          "who": "주디",
+          "ko": "가장 기억에 남는 것은 한 달 전에 친구들과 같이 부산 여행을 한 것입니다.",
+          "at": 38.85,
+          "end": 45.34
+        },
+        {
+          "who": "주디",
+          "ko": "여행을 하면서 서로 하고 싶은 것이 달라서 싸운 적도 있지만 그 여행 때문에 정도 많이 들고 서로를 더 잘 알게 되었습니다.",
+          "at": 46.67,
+          "end": 57.6
+        },
+        {
+          "who": "주디",
+          "ko": "고향으로 돌아가면 친구들이 많이 그리울 것 같습니다.",
+          "at": 59.1,
+          "end": 63
+        },
+        {
+          "who": "주디",
+          "ko": "이제 고향으로 돌아갈 날이 일주일밖에 남지 않았습니다.",
+          "at": 64.5,
+          "end": 69.36
+        },
+        {
+          "who": "주디",
+          "ko": "고향에 가는 것은 좋지만 친구들과 헤어지는 것이 정말 아쉽습니다.",
+          "at": 70.7,
+          "end": 76.94
+        },
+        {
+          "who": "주디",
+          "ko": "그리고 공부를 더 열심히 하지 않은 것이 좀 후회됩니다.",
+          "at": 78.53,
+          "end": 83.27
+        },
+        {
+          "who": "주디",
+          "ko": "한국에 남아 있는 친구들에게 이 말을 꼭 하고 싶습니다.",
+          "at": 84.6,
+          "end": 89.36
+        },
+        {
+          "who": "주디",
+          "ko": "“열심히 공부하고 열심히 놀아! 그리고 앞으로도 계속 연락하자!”",
+          "at": 90.35,
+          "end": 97.16
+        },
+        {
+          "who": "진행자",
+          "ko": "네, 주디 씨.",
+          "at": 99.12,
+          "end": 99.78
+        },
+        {
+          "who": "진행자",
+          "ko": "남은 한국 생활 잘 보내시고 고향에 가서도 건강하고 행복하게 잘 지내세요.",
+          "at": 100.73,
+          "end": 108.02
+        }
+      ]
+    },
+    {
+      "n": 90,
+      "sec": "발음",
+      "secEn": "The reading passage again, in 합니다체",
+      "dur": 60.92,
+      "src": "audio/book/2b-u18-trk90.mp3",
+      "lines": [
+        {
+          "who": "나",
+          "ko": "아버지, 어머니 감사했습니다.",
+          "at": 9.32,
+          "end": 12.39
+        },
+        {
+          "who": "나",
+          "ko": "나는 작년 여름에 한국에 온 적이 있습니다.",
+          "at": 14.28,
+          "end": 18.09
+        },
+        {
+          "who": "나",
+          "ko": "3주 동안 한국말을 배우러 왔는데 그때 홈스테이를 했습니다.",
+          "at": 18.99,
+          "end": 24.66
+        },
+        {
+          "who": "나",
+          "ko": "홈스테이 가족들은 나를 진짜 가족처럼 대해 주셨습니다.",
+          "at": 25.55,
+          "end": 30.74
+        },
+        {
+          "who": "나",
+          "ko": "헤어질 때 가족들은 눈물을 흘리셨습니다.",
+          "at": 31.65,
+          "end": 35.15
+        },
+        {
+          "who": "나",
+          "ko": "내가 한국말을 잘했으면 “감사했습니다. 잊지 않을게요.”라고 했을 것입니다.",
+          "at": 36.04,
+          "end": 42.68
+        },
+        {
+          "who": "나",
+          "ko": "하지만 그때는 할 수가 없었습니다.",
+          "at": 43.57,
+          "end": 46.63
+        },
+        {
+          "who": "나",
+          "ko": "지금은 한국어 실력이 많이 늘었습니다.",
+          "at": 47.51,
+          "end": 51.04
+        },
+        {
+          "who": "나",
+          "ko": "홈스테이 가족과 다시 만나면 그때 하지 못한 말을 꼭 하고 싶습니다.",
+          "at": 51.92,
+          "end": 57.89
+        }
+      ]
+    }
+  ],
+  "dictation": {
+    "filter": {
+      "keep": [
+        "a whole sentence someone would actually say",
+        "5-22 syllables: long enough to need listening, short enough to hold in your head",
+        "carries at least one thing you can only write correctly if you know something — the unit's grammar (V-(으)ㄴ 지 with its space, the second N(이)나, and the plain style, where 지나간다 and 지나가요 are the same sentence in two registers and only one of them is what was said), a gap between sound and spelling, or a unit headword. This chapter teaches no new 발음 rule — its 발음 page is a closing review of the whole book — so the sound notes name rules the learner already has: 일 년 [일련], 연락 [열락], 작년 [장년], 나뭇잎이 [나문니피]."
+      ],
+      "drop": [
+        "fixed courtesies — 네, 말씀 감사합니다, 여보세요",
+        "bare reactions — 무슨 일인데요?, 아, 어떻게 하죠?",
+        "proper nouns standing alone: 부산입니다 is five syllables of place name with nothing to decide",
+        "anything under ~5 syllables: nothing to decide when you write it"
+      ],
+      "splitAtClause": "Printed turns past 22 syllables are cut at a boundary the recording itself pauses on — never mid-clause and never trimmed — and each part names its parent in splitFrom. The longest turn in the unit is 주디's 48-syllable 여행을 하면서… on track 89, read over seven spans and cut into three. Connecting fragments that are not sentences — 겨울에는, 홈스테이 가족들은, 네 주디 씨 — are left out rather than shipped as sentences they are not."
+    },
+    "items": [
+      {
+        "id": 1,
+        "track": 82,
+        "who": "A",
+        "ko": "한국에 온 지 얼마나 됐어요?",
+        "en": "How long has it been since you came to Korea?",
+        "syl": 11,
+        "why": "The chapter’s own form, and the space in it is the whole difference: 온 지 is two words, where the 지 of 하지 마세요 is one ending welded to its verb. 한국에 is said [한구게] — the ㄱ has already crossed into 에, so the boundary you hear is not the boundary you write.",
+        "tags": [
+          "V-(으)ㄴ 지",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d01.mp3",
+          "voiced": 2.35,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 2,
+        "track": 82,
+        "who": "B",
+        "ko": "한국에 온 지 벌써 네 달 됐어요.",
+        "en": "It has already been four months since I came to Korea.",
+        "syl": 12,
+        "why": "The answer names the length and then 됐어요, not 있어요 — time in Korean becomes rather than is. 됐어요 is said [돼써요], the ㅆ crossing into 어, and 네 달 takes the native four because 달 counts with native numbers.",
+        "tags": [
+          "V-(으)ㄴ 지",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d02.mp3",
+          "voiced": 3.19,
+          "rate": 3.8
+        }
+      },
+      {
+        "id": 3,
+        "track": 83,
+        "who": "A",
+        "ko": "좀 더 드세요.",
+        "en": "Do have some more.",
+        "syl": 5,
+        "why": "드시다 is the honorific of 먹다, and 드세요 is how you press food on somebody. 좀 here is not \"a little\" — it is the softener that makes an order into an offer.",
+        "tags": [
+          "높임말"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d03.mp3",
+          "voiced": 1.06,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 4,
+        "track": 83,
+        "who": "B",
+        "ko": "아니에요. 두 그릇이나 먹었어요.",
+        "en": "No thank you. I have had two whole bowls.",
+        "syl": 13,
+        "why": "This is the second N(이)나, the one that means the amount is more than you would expect — the same syllables as the 이나 that means \"or\", and only the sentence tells you which. 그릇이나 is said [그르시나]: the ㅅ of 릇 crosses into 이나 and arrives as [시].",
+        "tags": [
+          "N(이)나 2",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d04.mp3",
+          "voiced": 2.27,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 5,
+        "track": 84,
+        "who": "스티븐",
+        "ko": "우리가 한국에 온 지 벌써 6개월이나 됐네요.",
+        "en": "It has already been six whole months since we came to Korea.",
+        "syl": 17,
+        "why": "Both of the chapter’s first two points in one sentence: 온 지 measures the time and 6개월이나 says it is more than expected. The numeral is read 육, the Sino-Korean six, because 개월 takes the Sino-Korean set — 여섯 개월 is not the standard reading.",
+        "tags": [
+          "V-(으)ㄴ 지",
+          "N(이)나 2"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d05.mp3",
+          "voiced": 3.8,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 6,
+        "track": 84,
+        "who": "나나",
+        "ko": "맞아요. 시간이 정말 빨리 지나간 것 같아요.",
+        "en": "You are right. Time really does seem to have gone quickly.",
+        "syl": 17,
+        "why": "지나간 것 같아요 is how speech puts what track 85 states as 지나간다 — 것 같아요 hedges it, the plain style simply says it. 맞아요 is said [마자요] and 같아요 is [가타요]: in both, a 받침 crosses into the vowel behind it.",
+        "tags": [
+          "V-(으)ㄴ 것 같다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d06.mp3",
+          "voiced": 3.79,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 7,
+        "track": 84,
+        "who": "스티븐",
+        "ko": "나나 씨, 다음 학기에도 계속 공부하지요?",
+        "en": "Nana, you are carrying on studying next semester too, aren’t you?",
+        "syl": 16,
+        "why": "-지요 asks for agreement with something you already believe, and the 아니요 that answers it here is that belief turning out wrong. 학기에도 is said [학끼에도], the ㄱ tensing the ㄱ behind it.",
+        "tags": [
+          "V-지요?",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d07.mp3",
+          "voiced": 3.41,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 8,
+        "track": 84,
+        "who": "나나",
+        "ko": "아니요, 다음 학기에 고향으로 돌아가요.",
+        "en": "No — I am going back home next semester.",
+        "syl": 16,
+        "why": "고향으로 puts 으로 where 에 would also do: 으로 names the direction of the going, 에 the place it ends. 고향으로 runs together as [고향으로] because ㅇ is the one 받침 that stays where it is.",
+        "tags": [
+          "N(으)로",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d08.mp3",
+          "voiced": 3.13,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 9,
+        "track": 84,
+        "who": "스티븐",
+        "ko": "그래요? 왜 갑자기 돌아가게 됐어요?",
+        "en": "Really? What made you go back all of a sudden?",
+        "syl": 14,
+        "why": "V-게 되다 is how you say a thing came about without saying who decided it — 돌아가요 would be a plan, 돌아가게 됐어요 is a turn of events. 갑자기 is said [갑짜기].",
+        "tags": [
+          "V-게 되다",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d09.mp3",
+          "voiced": 3.03,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 10,
+        "track": 84,
+        "who": "나나",
+        "ko": "사정이 좀 있어서요.",
+        "en": "Something has come up.",
+        "syl": 8,
+        "why": "사정이 있다 is the polite way of not saying what the reason is, and the sentence stops at 있어서요 on purpose: the -아서/어서 leaves the consequence unspoken. 사정이 is [사정이], 있어서요 is [이써서요].",
+        "tags": [
+          "V-아서/어서요",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d10.mp3",
+          "voiced": 1.79,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 11,
+        "track": 84,
+        "who": "스티븐",
+        "ko": "그래요? 같이 공부할 수 없게 돼서 아쉽네요.",
+        "en": "Really? It is a shame we will not be able to study together.",
+        "syl": 17,
+        "why": "같이 is said [가치] — the ㅌ in front of 이 turns into [ㅊ], the rule that also gives 해돋이 [해도지]. 아쉽네요 is this chapter’s word for a regret about something you cannot help.",
+        "tags": [
+          "V-(으)ㄹ 수 없다",
+          "구개음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d11.mp3",
+          "voiced": 3.9,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 12,
+        "track": 84,
+        "who": "나나",
+        "ko": "고향에 가면 친구들이 많이 그리울 것 같아요.",
+        "en": "I think I will miss my friends a lot when I go home.",
+        "syl": 18,
+        "why": "그립다 is a ㅂ-irregular: the ㅂ becomes 우 before a vowel, so the future modifier is 그리울 and never 그립을. 많이 is said [마니] — the ㅎ of 많 is not pronounced at all.",
+        "tags": [
+          "그립다",
+          "ㅂ 불규칙"
+        ],
+        "splitFrom": "고향에 가면 친구들이 많이 그리울 것 같아요. 정이 많이 들었는데…….",
+        "audio": {
+          "src": "audio/book/2b-u18-d12.mp3",
+          "voiced": 3.87,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 13,
+        "track": 84,
+        "who": "나나",
+        "ko": "정이 많이 들었는데…….",
+        "en": "I have grown so attached to it all…",
+        "syl": 8,
+        "why": "정이 들다 takes 이 on the 정 and 들다 for the verb — the attachment enters you, you do not make it. The sentence is left open on -는데 because what follows is the part nobody says.",
+        "tags": [
+          "정(이) 들다",
+          "V-는데"
+        ],
+        "splitFrom": "고향에 가면 친구들이 많이 그리울 것 같아요. 정이 많이 들었는데…….",
+        "audio": {
+          "src": "audio/book/2b-u18-d13.mp3",
+          "voiced": 1.37,
+          "rate": 5.8
+        }
+      },
+      {
+        "id": 14,
+        "track": 84,
+        "who": "스티븐",
+        "ko": "그래도 고향에 가니까 좋지 않아요?",
+        "en": "Still, isn’t it good that you are going home?",
+        "syl": 14,
+        "why": "-(으)니까 gives the reason the question rests on, which is why 좋지 않아요 arrives as a nudge rather than a doubt. 좋지 is said [조치] and 않아요 is [아나요]: the ㅎ of 좋 fuses forward, the ㅎ of 않 disappears.",
+        "tags": [
+          "V-(으)니까",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d14.mp3",
+          "voiced": 2.96,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 15,
+        "track": 84,
+        "who": "나나",
+        "ko": "가족을 만날 수 있어서 좋기는 하지만",
+        "en": "It is good that I get to see my family, but",
+        "syl": 15,
+        "why": "좋기는 하지만 concedes the point before turning it — the 기는 하다 frame is how Korean says \"it is good, yes, but\". 가족을 is said [가조글].",
+        "tags": [
+          "A-기는 하지만",
+          "연음"
+        ],
+        "splitFrom": "가족을 만날 수 있어서 좋기는 하지만 한국을 떠나는 건 아쉬워요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d15.mp3",
+          "voiced": 2.89,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 16,
+        "track": 84,
+        "who": "나나",
+        "ko": "한국을 떠나는 건 아쉬워요.",
+        "en": "leaving Korea is a shame.",
+        "syl": 11,
+        "why": "아쉽다 is a ㅂ-irregular like 그립다, so the 해요체 is 아쉬워요. 건 is 것은 contracted, the shape speech usually gives it.",
+        "tags": [
+          "아쉽다",
+          "ㅂ 불규칙"
+        ],
+        "splitFrom": "가족을 만날 수 있어서 좋기는 하지만 한국을 떠나는 건 아쉬워요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d16.mp3",
+          "voiced": 2.42,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 17,
+        "track": 85,
+        "who": "글",
+        "ko": "시간이 빨리 지나간다.",
+        "en": "Time goes by quickly.",
+        "syl": 9,
+        "why": "The chapter’s register, in one sentence. A verb in the plain style takes -ㄴ다 after a vowel stem, so 지나가다 becomes 지나간다 — not 지나가다, which is the dictionary, and not 지나가요, which is somebody speaking. 시간이 is said [시가니].",
+        "tags": [
+          "A-다/V-ㄴ다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d17.mp3",
+          "voiced": 2.25,
+          "rate": 4
+        }
+      },
+      {
+        "id": 18,
+        "track": 86,
+        "who": "글",
+        "ko": "내일부터 방학이다.",
+        "en": "The holidays start tomorrow.",
+        "syl": 8,
+        "why": "The plain style of 이에요 is 이다, with the 이 kept after a consonant and usually dropped after a vowel — 방학이다 beside 학교다. 방학이다 is said [방하기다].",
+        "tags": [
+          "N(이)다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d18.mp3",
+          "voiced": 1.82,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 19,
+        "track": 87,
+        "who": "글",
+        "ko": "시간이 참 빨리 지나간다.",
+        "en": "Time really does go by quickly.",
+        "syl": 10,
+        "why": "The passage opens on the same sentence track 85 taught, with 참 pushed into the middle of it. 참 and 정말 both mean \"really\", and 참 is the one that sits more naturally in writing like this.",
+        "tags": [
+          "A-다/V-ㄴ다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d19.mp3",
+          "voiced": 2.52,
+          "rate": 4
+        }
+      },
+      {
+        "id": 20,
+        "track": 87,
+        "who": "글",
+        "ko": "처음 한국에 왔을 때 겨울이었는데",
+        "en": "When I first came to Korea it was winter, and",
+        "syl": 14,
+        "why": "왔을 때 is the past inside the 때 frame — the arriving is over, the winter is the setting it happened in. 겨울이었는데 is [겨우리언는데]: the ㄹ crosses, and then the ㅆ of 었 closes and is turned into [ㄴ] by the ㄴ behind it.",
+        "tags": [
+          "V-았/었을 때",
+          "연음"
+        ],
+        "splitFrom": "처음 한국에 왔을 때 겨울이었는데 지금은 봄, 여름이 지나고 가을이 되었다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d20.mp3",
+          "voiced": 2.87,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 21,
+        "track": 87,
+        "who": "글",
+        "ko": "지금은 봄, 여름이 지나고 가을이 되었다.",
+        "en": "now spring and summer have passed and it has become autumn.",
+        "syl": 16,
+        "why": "되었다 is how the passage writes it, both syllables kept; speech usually contracts it to 됐다. 가을이 is said [가으리].",
+        "tags": [
+          "A-다/V-ㄴ다",
+          "연음"
+        ],
+        "splitFrom": "처음 한국에 왔을 때 겨울이었는데 지금은 봄, 여름이 지나고 가을이 되었다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d21.mp3",
+          "voiced": 3.57,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 22,
+        "track": 87,
+        "who": "글",
+        "ko": "한국의 계절은 우리 나라와 아주 다르다.",
+        "en": "The seasons in Korea are very different from the ones at home.",
+        "syl": 16,
+        "why": "다르다 takes 와/과 and not 보다: things differ *from* each other, they are not more or less. 한국의 is said [한구긔] in careful speech and usually [한구게] — the 의 of a possessive may be read [에].",
+        "tags": [
+          "N와/과 다르다",
+          "A-다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d22.mp3",
+          "voiced": 3.49,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 23,
+        "track": 87,
+        "who": "글",
+        "ko": "우리 나라는 계절의 변화가 거의 없고",
+        "en": "My country has almost no change of season, and",
+        "syl": 15,
+        "why": "없고 is said [업꼬] — the ㅄ of 없 is read as [ㅂ] at the end of a syllable and then tenses the ㄱ. 계절의 is usually [계저레], the 의 again read [에].",
+        "tags": [
+          "A/V-고",
+          "연음"
+        ],
+        "splitFrom": "우리 나라는 계절의 변화가 거의 없고 일 년 내내 따뜻한 편이다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d23.mp3",
+          "voiced": 3.08,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 24,
+        "track": 87,
+        "who": "글",
+        "ko": "일 년 내내 따뜻한 편이다.",
+        "en": "it is warm all year round.",
+        "syl": 10,
+        "why": "-(으)ㄴ 편이다 is the hedge: not \"it is warm\" but \"it is on the warm side\". 따뜻한 is said [따뜨탄], the ㅅ of 뜻 read [ㄷ] and then fused with the ㅎ.",
+        "tags": [
+          "A-(으)ㄴ 편이다",
+          "연음"
+        ],
+        "splitFrom": "우리 나라는 계절의 변화가 거의 없고 일 년 내내 따뜻한 편이다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d24.mp3",
+          "voiced": 2.17,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 25,
+        "track": 87,
+        "who": "글",
+        "ko": "하지만 한국은 사계절이 있다.",
+        "en": "Korea, though, has four distinct seasons.",
+        "syl": 12,
+        "why": "있다 is the plain style of 있어요 and takes no -ㄴ다, because 있다 meaning “there is” counts as an adjective — as 없다 does. 집에 있는다, staying at home, is the other 있다. 사계절이 is said [사계저리].",
+        "tags": [
+          "N이/가 있다",
+          "A-다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d25.mp3",
+          "voiced": 2.54,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 26,
+        "track": 87,
+        "who": "글",
+        "ko": "한국은 봄에 날씨가 따뜻하고 꽃이 많이 핀다.",
+        "en": "In Korea the weather is warm in spring and a lot of flowers come out.",
+        "syl": 18,
+        "why": "핀다, from 피다 — a vowel stem takes -ㄴ다. 꽃이 is said [꼬치]: the ㅊ of 꽃 crosses into 이, which is why the flower and its particle arrive as one word.",
+        "tags": [
+          "꽃이 피다",
+          "V-ㄴ다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d26.mp3",
+          "voiced": 4.19,
+          "rate": 4.3
+        }
+      },
+      {
+        "id": 27,
+        "track": 87,
+        "who": "글",
+        "ko": "여름에는 날씨가 매우 덥고 습도가 높다.",
+        "en": "In summer the weather is very hot and the humidity is high.",
+        "syl": 16,
+        "why": "높다 is said [놉따] and 덥고 is [덥꼬] — a ㅂ or a ㅍ closing a syllable tenses a ㄱ, ㄷ, ㅂ, ㅅ or ㅈ behind it. 매우 is a more formal 아주, at home in writing.",
+        "tags": [
+          "습도가 높다",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d27.mp3",
+          "voiced": 3.95,
+          "rate": 4.1
+        }
+      },
+      {
+        "id": 28,
+        "track": 87,
+        "who": "글",
+        "ko": "또 장마가 있어서 비가 많이 온다.",
+        "en": "There is also a rainy season, so it rains a great deal.",
+        "syl": 13,
+        "why": "온다 from 오다, a vowel stem again. 장마 is one word for the long rain of late June and July — not any rain, and not a storm.",
+        "tags": [
+          "장마",
+          "V-ㄴ다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d28.mp3",
+          "voiced": 2.78,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 29,
+        "track": 87,
+        "who": "글",
+        "ko": "내가 제일 좋아하는 계절은 가을이다.",
+        "en": "My favourite season is autumn.",
+        "syl": 15,
+        "why": "In the plain style 저는 becomes 나는 and 제가 becomes 내가 — it changes the pronoun as well as the ending. 좋아하는 is said [조아하는], the ㅎ silent between vowels.",
+        "tags": [
+          "N(이)다",
+          "V-는"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d29.mp3",
+          "voiced": 3.11,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 30,
+        "track": 87,
+        "who": "글",
+        "ko": "10월이 되면 날씨가 쌀쌀해지고 단풍이 든다.",
+        "en": "Come October the weather turns chilly and the leaves change colour.",
+        "syl": 17,
+        "why": "쌀쌀해지다 is 쌀쌀하다 becoming, not being. 단풍이 들다 takes 이 and 들다, the same shape as 정이 들다: the colour enters the hills. 10월 is read 시월, not 십월.",
+        "tags": [
+          "단풍이 들다",
+          "A-아지다/어지다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d30.mp3",
+          "voiced": 4.12,
+          "rate": 4.1
+        }
+      },
+      {
+        "id": 31,
+        "track": 87,
+        "who": "글",
+        "ko": "사람들은 단풍을 구경하러 산에 간다.",
+        "en": "People go up into the mountains to look at the autumn colours.",
+        "syl": 15,
+        "why": "-(으)러 가다 is going in order to do something, and only ever with a verb of going. 단풍을 is said [단풍을] and 간다 is 가다 in the plain style.",
+        "tags": [
+          "V-(으)러 가다",
+          "V-ㄴ다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d31.mp3",
+          "voiced": 3.27,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 32,
+        "track": 87,
+        "who": "글",
+        "ko": "기온이 영하로 내려가는 날이 많고 눈이 자주 내린다.",
+        "en": "there are many days below zero and it snows often.",
+        "syl": 21,
+        "why": "영하로 has 로, the (으)로 of direction after a vowel: the temperature goes *down to* below zero. 내린다 from 내리다, and 많고 is said [만코] — the ㅎ of 많 fuses into the ㄱ instead of disappearing.",
+        "tags": [
+          "기온이 영하로 내려가다",
+          "V-ㄴ다"
+        ],
+        "splitFrom": "겨울에는 기온이 영하로 내려가는 날이 많고 눈이 자주 내린다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d32.mp3",
+          "voiced": 4.66,
+          "rate": 4.5
+        }
+      },
+      {
+        "id": 33,
+        "track": 87,
+        "who": "글",
+        "ko": "나는 스키를 타 본 적이 없어서",
+        "en": "I have never skied, so",
+        "syl": 12,
+        "why": "타 본 적이 없다 is three pieces that only mean this together: tried it, the experience of it, and none. 적이 is said [저기].",
+        "tags": [
+          "V-아/어 본 적이 없다",
+          "연음"
+        ],
+        "splitFrom": "나는 스키를 타 본 적이 없어서 이번 겨울에 친구들과 스키장에 가 보려고 한다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d33.mp3",
+          "voiced": 2.36,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 34,
+        "track": 87,
+        "who": "글",
+        "ko": "이번 겨울에 친구들과 스키장에 가 보려고 한다.",
+        "en": "this winter I mean to go to a ski resort with my friends.",
+        "syl": 19,
+        "why": "-(으)려고 하다 is an intention rather than a plan, and in the plain style it ends 한다. 친구들과 is [친구들과] — 과 after a consonant, 와 after a vowel.",
+        "tags": [
+          "V-(으)려고 하다",
+          "V-ㄴ다"
+        ],
+        "splitFrom": "나는 스키를 타 본 적이 없어서 이번 겨울에 친구들과 스키장에 가 보려고 한다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d34.mp3",
+          "voiced": 3.7,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 35,
+        "track": 87,
+        "who": "글",
+        "ko": "빨리 겨울이 왔으면 좋겠다.",
+        "en": "I wish winter would hurry up.",
+        "syl": 11,
+        "why": "왔으면 좋겠다 wants something that has not happened yet, and puts the wished-for thing in the past — 왔으면 — with the wanting in 좋겠다. 좋겠다 is said [조켇따].",
+        "tags": [
+          "V-았/었으면 좋겠다",
+          "A-다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d35.mp3",
+          "voiced": 2.59,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 36,
+        "track": 88,
+        "who": "진행자",
+        "ko": "‘오후의 라디오’ 가족 여러분 안녕하세요?",
+        "en": "Hello to all the ‘Afternoon Radio’ family.",
+        "syl": 16,
+        "why": "오후의 is usually said [오후에]: the possessive 의 may be read 에, so the title has a syllable that is seldom said the way it is spelt. 가족 여러분 is how a broadcast addresses its listeners — the family is the audience, not anybody’s relatives.",
+        "tags": [
+          "N의",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d36.mp3",
+          "voiced": 2.94,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 37,
+        "track": 88,
+        "who": "진행자",
+        "ko": "오늘은 저희 방송을 시작한 지 일 년이 되는 날입니다.",
+        "en": "Today marks a year since we first went on air.",
+        "syl": 21,
+        "why": "The chapter’s 한 지 in its natural home — how long the programme has been running. 저희 is the humble 우리, used because the speaker is talking to the people they serve. 일 년이 is said [일려니]: the ㄹ pulls the ㄴ across into [ㄹㄹ].",
+        "tags": [
+          "V-(으)ㄴ 지",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d37.mp3",
+          "voiced": 4.03,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 38,
+        "track": 88,
+        "who": "진행자",
+        "ko": "오늘도 처음 시작한 날처럼 바람도 시원하고",
+        "en": "Today, like that first day, the breeze is cool, and",
+        "syl": 18,
+        "why": "처럼 compares this day to that one without saying they are the same. 날처럼 is said [날처럼] but 시작한 is [시자칸], the ㄱ and the ㅎ fused into one aspirated sound.",
+        "tags": [
+          "N처럼",
+          "경음화"
+        ],
+        "splitFrom": "오늘도 처음 시작한 날처럼 바람도 시원하고 창밖으로 보이는 단풍도 참 아름답네요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d38.mp3",
+          "voiced": 4.15,
+          "rate": 4.3
+        }
+      },
+      {
+        "id": 39,
+        "track": 88,
+        "who": "진행자",
+        "ko": "창밖으로 보이는 단풍도 참 아름답네요.",
+        "en": "and the autumn colours out of the window really are lovely.",
+        "syl": 16,
+        "why": "창밖으로 is said [창바끄로]: the ㄲ of 밖 crosses whole into 으로, so three written pieces arrive as one run. 아름답네요 is [아름담네요], the ㅂ turned into [ㅁ] by the ㄴ behind it.",
+        "tags": [
+          "단풍",
+          "연음"
+        ],
+        "splitFrom": "오늘도 처음 시작한 날처럼 바람도 시원하고 창밖으로 보이는 단풍도 참 아름답네요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d39.mp3",
+          "voiced": 3.14,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 40,
+        "track": 88,
+        "who": "진행자",
+        "ko": "여러분과 나뭇잎이 떨어지는 가을, 눈 내리는 겨울,",
+        "en": "With you we have been through the autumn of falling leaves, the snowy winter,",
+        "syl": 20,
+        "why": "나뭇잎이 is said [나문니피] — a ㄴ is added in front of 잎, that ㄴ turns the ㅅ into [ㄴ], and then the ㅍ crosses into 이. Four written syllables, and only the first is said the way it is spelt.",
+        "tags": [
+          "나뭇잎이 떨어지다",
+          "연음"
+        ],
+        "splitFrom": "여러분과 나뭇잎이 떨어지는 가을, 눈 내리는 겨울, 꽃 피는 봄, 그리고 뜨거운 여름을 보냈는데요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d40.mp3",
+          "voiced": 4.84,
+          "rate": 4.1
+        }
+      },
+      {
+        "id": 41,
+        "track": 88,
+        "who": "진행자",
+        "ko": "꽃 피는 봄, 그리고 뜨거운 여름을 보냈는데요.",
+        "en": "the spring of blossom and the hot summer.",
+        "syl": 18,
+        "why": "꽃 피는 is said [꼳피는] with the ㅊ closing as [ㄷ], and 보냈는데요 is [보낸는데요] with the ㅆ closing and then turning into [ㄴ]. 뜨겁다 is a ㅂ-irregular, so its modifier is 뜨거운.",
+        "tags": [
+          "꽃이 피다",
+          "비음화"
+        ],
+        "splitFrom": "여러분과 나뭇잎이 떨어지는 가을, 눈 내리는 겨울, 꽃 피는 봄, 그리고 뜨거운 여름을 보냈는데요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d41.mp3",
+          "voiced": 4.56,
+          "rate": 3.9
+        }
+      },
+      {
+        "id": 42,
+        "track": 88,
+        "who": "진행자",
+        "ko": "그동안 여러분이 보내 주신 글을 보며",
+        "en": "All this time, reading the letters you have sent us,",
+        "syl": 15,
+        "why": "보내 주신 is the listeners’ sending, raised: 주다 for the favour and -시- because the favour came from them. -(으)며 is the written counterpart of -(으)면서.",
+        "tags": [
+          "V-아/어 주다",
+          "높임말"
+        ],
+        "splitFrom": "그동안 여러분이 보내 주신 글을 보며 울고 웃으면서 행복한 일 년을 보냈습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d42.mp3",
+          "voiced": 3.07,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 43,
+        "track": 88,
+        "who": "진행자",
+        "ko": "울고 웃으면서 행복한 일 년을 보냈습니다.",
+        "en": "we have cried and laughed through a happy year.",
+        "syl": 17,
+        "why": "웃으면서 is said [우스면서], the ㅅ crossing into 으. 보내다 twice over in one sentence in two different senses — sending a letter and spending a year — and only the object tells them apart.",
+        "tags": [
+          "V-(으)면서",
+          "연음"
+        ],
+        "splitFrom": "그동안 여러분이 보내 주신 글을 보며 울고 웃으면서 행복한 일 년을 보냈습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d43.mp3",
+          "voiced": 3.41,
+          "rate": 5
+        }
+      },
+      {
+        "id": 44,
+        "track": 88,
+        "who": "진행자",
+        "ko": "함께해 주셔서 정말 감사합니다.",
+        "en": "Thank you so much for being with us.",
+        "syl": 13,
+        "why": "주셔서 is 주시다 plus -아/어서: you are thanked for the favour, and the reason comes before the thanks. 함께 is a more formal 같이.",
+        "tags": [
+          "V-아/어 주시다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d44.mp3",
+          "voiced": 2.6,
+          "rate": 5
+        }
+      },
+      {
+        "id": 45,
+        "track": 88,
+        "who": "진행자",
+        "ko": "앞으로도 매일 오후 4시, 잊지 말고 찾아 주세요.",
+        "en": "Do not forget us — every day at four in the afternoon, from now on too.",
+        "syl": 18,
+        "why": "잊지 말고 is a negative command folded into the middle of a sentence. 앞으로도 is said [아프로도], the ㅍ crossing into 으. 4시 is read 네 시, with the native number — 사 시 is not how Korean tells the hour.",
+        "tags": [
+          "V-지 말다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d45.mp3",
+          "voiced": 4.59,
+          "rate": 3.9
+        }
+      },
+      {
+        "id": 46,
+        "track": 88,
+        "who": "진행자",
+        "ko": "그럼 오늘의 첫 노래 듣겠습니다. ‘가을이 오면’.",
+        "en": "And now today’s first song: ‘When Autumn Comes’.",
+        "syl": 18,
+        "why": "듣겠습니다 is said [듣껟씀니다] — the ㄷ tenses the ㄱ, the ㅆ closes, and the ㅂ of 습 turns into [ㅁ] before the ㄴ. -겠- here is not a prediction but the speaker announcing what they are about to do.",
+        "tags": [
+          "V-겠-",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d46.mp3",
+          "voiced": 3.9,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 47,
+        "track": 89,
+        "who": "진행자",
+        "ko": "다음은 한국에서 공부하고 계시는",
+        "en": "Next, from someone studying here in Korea,",
+        "syl": 14,
+        "why": "계시다 is the honorific of 있다, so 공부하고 계시는 raises the person being talked about. 다음은 is said [다으믄].",
+        "tags": [
+          "V-고 계시다",
+          "연음"
+        ],
+        "splitFrom": "다음은 한국에서 공부하고 계시는 주디 씨의 사연인데요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d47.mp3",
+          "voiced": 2.84,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 48,
+        "track": 89,
+        "who": "진행자",
+        "ko": "주디 씨의 사연인데요.",
+        "en": "this is Judy’s story.",
+        "syl": 9,
+        "why": "사연 is the word a radio programme uses for a letter from a listener — the story behind it, not the paper. 씨의 is usually read [씨에].",
+        "tags": [
+          "사연",
+          "N인데요"
+        ],
+        "splitFrom": "다음은 한국에서 공부하고 계시는 주디 씨의 사연인데요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d48.mp3",
+          "voiced": 1.55,
+          "rate": 5.8
+        }
+      },
+      {
+        "id": 49,
+        "track": 89,
+        "who": "진행자",
+        "ko": "멀리 독일에서 오셨군요.",
+        "en": "You have come all the way from Germany.",
+        "syl": 10,
+        "why": "-군요 is the ending for something you have just found out, which is why it cannot be used about your own plans. 독일에서 is said [도기레서]: the ㄱ crosses, then the ㄹ crosses again.",
+        "tags": [
+          "V-군요",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d49.mp3",
+          "voiced": 1.64,
+          "rate": 6.1
+        }
+      },
+      {
+        "id": 50,
+        "track": 89,
+        "who": "진행자",
+        "ko": "그럼 편지를 읽어 드리겠습니다.",
+        "en": "Let me read the letter to you.",
+        "syl": 13,
+        "why": "드리다 is the humble 주다: the reading is a favour done for the listeners. 읽어 is said [일거] — of the two consonants in the ㄺ, it is the ㄱ that crosses and the ㄹ that stays.",
+        "tags": [
+          "V-아/어 드리다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d50.mp3",
+          "voiced": 2.28,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 51,
+        "track": 89,
+        "who": "주디",
+        "ko": "내일은 제가 한국에 온 지 일 년이 되는 날입니다.",
+        "en": "Tomorrow it will be a year since I came to Korea.",
+        "syl": 19,
+        "why": "The same 온 지 as the chapter’s first page, this time in a student’s own letter. 일 년이 is said [일려니], the ㄹ pulling the ㄴ across — the rule Unit 17 taught, one chapter on.",
+        "tags": [
+          "V-(으)ㄴ 지",
+          "유음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d51.mp3",
+          "voiced": 3.64,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 52,
+        "track": 89,
+        "who": "주디",
+        "ko": "그동안 참 많은 일들이 있었는데요.",
+        "en": "A great many things have happened in that time.",
+        "syl": 14,
+        "why": "많은 is said [마는], the ㅎ silent. 일들이 is [일드리]. The sentence ends on -는데요 because it is an opening, not a conclusion: something is coming after it.",
+        "tags": [
+          "V-는데요",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d52.mp3",
+          "voiced": 2.87,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 53,
+        "track": 89,
+        "who": "주디",
+        "ko": "가장 기억에 남는 것은",
+        "en": "What stays with me most is",
+        "syl": 9,
+        "why": "기억에 남다 puts 에 on the memory and 남다 for the staying — the thing remains *in* the memory, you do not hold it. 기억에 is said [기어게].",
+        "tags": [
+          "가장 기억에 남다",
+          "V-는 것"
+        ],
+        "splitFrom": "가장 기억에 남는 것은 한 달 전에 친구들과 같이 부산 여행을 한 것입니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d53.mp3",
+          "voiced": 1.69,
+          "rate": 5.3
+        }
+      },
+      {
+        "id": 54,
+        "track": 89,
+        "who": "주디",
+        "ko": "한 달 전에 친구들과 같이 부산 여행을 한 것입니다.",
+        "en": "the trip to Busan I took with friends a month ago.",
+        "syl": 20,
+        "why": "같이 is said [가치]. 한 달 전에 is the time before now, where 한 달 동안 would be the time it lasted, and one word is all that tells them apart.",
+        "tags": [
+          "N와/과 같이",
+          "구개음화"
+        ],
+        "splitFrom": "가장 기억에 남는 것은 한 달 전에 친구들과 같이 부산 여행을 한 것입니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d54.mp3",
+          "voiced": 3.93,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 55,
+        "track": 89,
+        "who": "주디",
+        "ko": "여행을 하면서 서로 하고 싶은 것이 달라서",
+        "en": "On the trip we each wanted to do different things, so",
+        "syl": 17,
+        "why": "다르다 is a 르-irregular: before 아/어 the 르 doubles its ㄹ and drops its 으, giving 달라서 and never 다라서. 것이 is said [거시].",
+        "tags": [
+          "V-(으)면서",
+          "르 불규칙"
+        ],
+        "splitFrom": "여행을 하면서 서로 하고 싶은 것이 달라서 싸운 적도 있지만 그 여행 때문에 정도 많이 들고 서로를 더 잘 알게 되었습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d55.mp3",
+          "voiced": 3.55,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 56,
+        "track": 89,
+        "who": "주디",
+        "ko": "싸운 적도 있지만 그 여행 때문에",
+        "en": "there were times we argued, but because of that trip",
+        "syl": 13,
+        "why": "적도 is 적이 with 도 in place of 이 — the arguing is one more thing that happened, not the thing being pointed at. 있지만 is said [읻찌만].",
+        "tags": [
+          "V-(으)ㄴ 적이 있다",
+          "N 때문에"
+        ],
+        "splitFrom": "여행을 하면서 서로 하고 싶은 것이 달라서 싸운 적도 있지만 그 여행 때문에 정도 많이 들고 서로를 더 잘 알게 되었습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d56.mp3",
+          "voiced": 3.1,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 57,
+        "track": 89,
+        "who": "주디",
+        "ko": "정도 많이 들고 서로를 더 잘 알게 되었습니다.",
+        "en": "we grew close and came to know each other much better.",
+        "syl": 18,
+        "why": "정도 is 정이 with 도, the same swap as 적도 a moment earlier — and the reason the sentence does not look like the 정이 들다 on page 204. 알게 되었습니다 is a coming-to-know that nobody arranged.",
+        "tags": [
+          "정(이) 들다",
+          "V-게 되다"
+        ],
+        "splitFrom": "여행을 하면서 서로 하고 싶은 것이 달라서 싸운 적도 있지만 그 여행 때문에 정도 많이 들고 서로를 더 잘 알게 되었습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d57.mp3",
+          "voiced": 3.52,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 58,
+        "track": 89,
+        "who": "주디",
+        "ko": "고향으로 돌아가면 친구들이 많이 그리울 것 같습니다.",
+        "en": "I think I will miss my friends a lot when I go back home.",
+        "syl": 22,
+        "why": "Nearly the sentence 나나 says on page 208, in writing and one register up: 같아요 becomes 같습니다, and 고향에 가면 becomes 고향으로 돌아가면. 그리울 is the ㅂ-irregular modifier of 그립다.",
+        "tags": [
+          "그립다",
+          "V-(으)면"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d58.mp3",
+          "voiced": 3.78,
+          "rate": 5.8
+        }
+      },
+      {
+        "id": 59,
+        "track": 89,
+        "who": "주디",
+        "ko": "이제 고향으로 돌아갈 날이",
+        "en": "The day I go home is now",
+        "syl": 11,
+        "why": "돌아갈 is the future modifier — the day has not come yet, so 돌아간 날 would be a different day altogether. 날이 is said [나리], the ㄹ crossing into the particle, and 이제 sets the counting from now rather than from the arrival.",
+        "tags": [
+          "V-(으)ㄹ 날",
+          "연음"
+        ],
+        "splitFrom": "이제 고향으로 돌아갈 날이 일주일밖에 남지 않았습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d59.mp3",
+          "voiced": 2.19,
+          "rate": 5
+        }
+      },
+      {
+        "id": 60,
+        "track": 89,
+        "who": "주디",
+        "ko": "일주일밖에 남지 않았습니다.",
+        "en": "only a week away.",
+        "syl": 12,
+        "why": "밖에 always takes a negative behind it — 일주일밖에 남았습니다 is not Korean. 남지 않았습니다 is said [남찌 아낟씀니다].",
+        "tags": [
+          "N밖에",
+          "V-지 않다"
+        ],
+        "splitFrom": "이제 고향으로 돌아갈 날이 일주일밖에 남지 않았습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d60.mp3",
+          "voiced": 2.04,
+          "rate": 5.9
+        }
+      },
+      {
+        "id": 61,
+        "track": 89,
+        "who": "주디",
+        "ko": "고향에 가는 것은 좋지만",
+        "en": "Going home is good, but",
+        "syl": 10,
+        "why": "가는 것은 turns the going into a thing the sentence can talk about. 좋지만 is said [조치만].",
+        "tags": [
+          "V-는 것",
+          "A-지만"
+        ],
+        "splitFrom": "고향에 가는 것은 좋지만 친구들과 헤어지는 것이 정말 아쉽습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d61.mp3",
+          "voiced": 1.79,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 62,
+        "track": 89,
+        "who": "주디",
+        "ko": "친구들과 헤어지는 것이 정말 아쉽습니다.",
+        "en": "parting from my friends is a real shame.",
+        "syl": 17,
+        "why": "헤어지다 is parting from someone, and takes 와/과 for the person. 아쉽습니다 keeps its ㅂ in front of 습니다 — the irregular only shows up before a vowel.",
+        "tags": [
+          "헤어지다",
+          "아쉽다"
+        ],
+        "splitFrom": "고향에 가는 것은 좋지만 친구들과 헤어지는 것이 정말 아쉽습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d62.mp3",
+          "voiced": 3.28,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 63,
+        "track": 89,
+        "who": "주디",
+        "ko": "그리고 공부를 더 열심히 하지 않은 것이 좀 후회됩니다.",
+        "en": "And I rather regret not having studied harder.",
+        "syl": 22,
+        "why": "열심히 is said [열씨미] — the ㅁ crosses into 히 and the ㅎ goes. 하지 않은 것 makes the not-doing into the thing regretted, which is why the 것 cannot be left out.",
+        "tags": [
+          "후회가 되다",
+          "V-지 않다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d63.mp3",
+          "voiced": 4.62,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 64,
+        "track": 89,
+        "who": "주디",
+        "ko": "한국에 남아 있는 친구들에게 이 말을 꼭 하고 싶습니다.",
+        "en": "There is something I really want to say to the friends staying on in Korea.",
+        "syl": 22,
+        "why": "남아 있는 is a state, not an action: they are not in the middle of remaining, they simply are still here. 남아 is said [나마].",
+        "tags": [
+          "V-아/어 있다",
+          "V-고 싶다"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d64.mp3",
+          "voiced": 4.64,
+          "rate": 4.7
+        }
+      },
+      {
+        "id": 65,
+        "track": 89,
+        "who": "주디",
+        "ko": "열심히 공부하고 열심히 놀아!",
+        "en": "Study hard and play hard!",
+        "syl": 12,
+        "why": "Written to friends, so 반말: 놀아, not 놀아요 and not 노세요. 놀아 is said [노라] — the ㄹ crosses into 아.",
+        "tags": [
+          "반말",
+          "연음"
+        ],
+        "splitFrom": "“열심히 공부하고 열심히 놀아! 그리고 앞으로도 계속 연락하자!”",
+        "audio": {
+          "src": "audio/book/2b-u18-d65.mp3",
+          "voiced": 2.84,
+          "rate": 4.2
+        }
+      },
+      {
+        "id": 66,
+        "track": 89,
+        "who": "주디",
+        "ko": "그리고 앞으로도 계속 연락하자!",
+        "en": "And let’s keep in touch from now on!",
+        "syl": 13,
+        "why": "-자 is the 반말 of -(으)ㅂ시다. 연락 is said [열락], the ㄴ turned into [ㄹ] by the ㄹ behind it — the 유음화 Unit 17 built a whole 발음 page on.",
+        "tags": [
+          "V-자",
+          "유음화"
+        ],
+        "splitFrom": "“열심히 공부하고 열심히 놀아! 그리고 앞으로도 계속 연락하자!”",
+        "audio": {
+          "src": "audio/book/2b-u18-d66.mp3",
+          "voiced": 2.98,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 67,
+        "track": 89,
+        "who": "진행자",
+        "ko": "남은 한국 생활 잘 보내시고",
+        "en": "Enjoy the rest of your time in Korea,",
+        "syl": 11,
+        "why": "남은 is the past modifier of 남다 — the part that is left is the part that has already been left over. 보내시고 raises Judy with -시-.",
+        "tags": [
+          "V-(으)ㄴ",
+          "높임말"
+        ],
+        "splitFrom": "남은 한국 생활 잘 보내시고 고향에 가서도 건강하고 행복하게 잘 지내세요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d67.mp3",
+          "voiced": 2.2,
+          "rate": 5
+        }
+      },
+      {
+        "id": 68,
+        "track": 89,
+        "who": "진행자",
+        "ko": "고향에 가서도 건강하고 행복하게 잘 지내세요.",
+        "en": "and keep well and happy back home too.",
+        "syl": 19,
+        "why": "가서도 is 가서 with 도: even after going. 행복하게 is 행복하다 with -게, the ending that turns an adjective into how something is done.",
+        "tags": [
+          "V-아서/어서도",
+          "A-게"
+        ],
+        "splitFrom": "남은 한국 생활 잘 보내시고 고향에 가서도 건강하고 행복하게 잘 지내세요.",
+        "audio": {
+          "src": "audio/book/2b-u18-d68.mp3",
+          "voiced": 4.33,
+          "rate": 4.4
+        }
+      },
+      {
+        "id": 69,
+        "track": 90,
+        "who": "나",
+        "ko": "아버지, 어머니 감사했습니다.",
+        "en": "Father, Mother — thank you.",
+        "syl": 12,
+        "why": "감사했습니다 is said [감사핻씀니다]: the ㅆ closes as [ㄷ] and the ㅂ of 습 becomes [ㅁ] in front of the ㄴ. The past tense is doing real work — the thanks is for something that is over.",
+        "tags": [
+          "감사하다",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d69.mp3",
+          "voiced": 2.5,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 70,
+        "track": 90,
+        "who": "나",
+        "ko": "나는 작년 여름에 한국에 온 적이 있습니다.",
+        "en": "I came to Korea once, last summer.",
+        "syl": 17,
+        "why": "작년 is said [장년] — the ㄱ becomes [ㅇ] in front of the ㄴ. 온 적이 있다 is having done it once, which is not the same as 왔습니다.",
+        "tags": [
+          "V-(으)ㄴ 적이 있다",
+          "비음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d70.mp3",
+          "voiced": 3.28,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 71,
+        "track": 90,
+        "who": "나",
+        "ko": "3주 동안 한국말을 배우러 왔는데",
+        "en": "I came for three weeks to learn Korean, and",
+        "syl": 13,
+        "why": "왔는데 is said [완는데], the ㅆ closing and then turning into [ㄴ]. 한국말을 is [한궁마를]: the ㄱ becomes [ㅇ] before the ㅁ, then the ㄹ crosses.",
+        "tags": [
+          "V-(으)러 오다",
+          "비음화"
+        ],
+        "splitFrom": "3주 동안 한국말을 배우러 왔는데 그때 홈스테이를 했습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d71.mp3",
+          "voiced": 2.83,
+          "rate": 4.6
+        }
+      },
+      {
+        "id": 72,
+        "track": 90,
+        "who": "나",
+        "ko": "그때 홈스테이를 했습니다.",
+        "en": "and I did a homestay then.",
+        "syl": 11,
+        "why": "홈스테이를 하다 takes 를 — in Korean a homestay is something you do, which is why the passage says 홈스테이를 했습니다 and not anything with 에. 했습니다 is said [핻씀니다]: the ㅆ closes as [ㄷ] and the ㅂ of 습 becomes [ㅁ] in front of the ㄴ.",
+        "tags": [
+          "홈스테이를 하다",
+          "경음화"
+        ],
+        "splitFrom": "3주 동안 한국말을 배우러 왔는데 그때 홈스테이를 했습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d72.mp3",
+          "voiced": 2.23,
+          "rate": 4.9
+        }
+      },
+      {
+        "id": 73,
+        "track": 90,
+        "who": "나",
+        "ko": "나를 진짜 가족처럼 대해 주셨습니다.",
+        "en": "they treated me like real family.",
+        "syl": 15,
+        "why": "대해 주셨습니다 is the favour and the honorific together: they did it, and they are being looked up to for it. 가족처럼 compares without claiming.",
+        "tags": [
+          "대하다",
+          "V-아/어 주시다"
+        ],
+        "splitFrom": "홈스테이 가족들은 나를 진짜 가족처럼 대해 주셨습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d73.mp3",
+          "voiced": 3.11,
+          "rate": 4.8
+        }
+      },
+      {
+        "id": 74,
+        "track": 90,
+        "who": "나",
+        "ko": "헤어질 때 가족들은 눈물을 흘리셨습니다.",
+        "en": "When we said goodbye the family were in tears.",
+        "syl": 17,
+        "why": "눈물을 흘리다 is how writing says someone cried: the tears take 을, and the family are the ones shedding them, honoured with -시-. 눈물을 is said [눈무를].",
+        "tags": [
+          "눈물을 흘리다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d74.mp3",
+          "voiced": 2.98,
+          "rate": 5.7
+        }
+      },
+      {
+        "id": 75,
+        "track": 90,
+        "who": "나",
+        "ko": "내가 한국말을 잘했으면",
+        "en": "If my Korean had been good enough,",
+        "syl": 10,
+        "why": "잘했으면 is said [잘해쓰면]. The past inside -(으)면 is what makes this a wish about something that did not happen rather than a plan for something that might.",
+        "tags": [
+          "V-았/었으면",
+          "경음화"
+        ],
+        "splitFrom": "내가 한국말을 잘했으면 “감사했습니다. 잊지 않을게요.”라고 했을 것입니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d75.mp3",
+          "voiced": 1.95,
+          "rate": 5.1
+        }
+      },
+      {
+        "id": 76,
+        "track": 90,
+        "who": "나",
+        "ko": "“감사했습니다. 잊지 않을게요.”라고 했을 것입니다.",
+        "en": "I would have said, “Thank you. I will not forget.”",
+        "syl": 20,
+        "why": "했을 것입니다 is the half of the sentence that did not happen — the counterfactual sits in the ending, not in a separate word. 않을게요 is said [아늘께요].",
+        "tags": [
+          "N(이)라고 하다",
+          "V-았/었을 것이다"
+        ],
+        "splitFrom": "내가 한국말을 잘했으면 “감사했습니다. 잊지 않을게요.”라고 했을 것입니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d76.mp3",
+          "voiced": 3.47,
+          "rate": 5.8
+        }
+      },
+      {
+        "id": 77,
+        "track": 90,
+        "who": "나",
+        "ko": "하지만 그때는 할 수가 없었습니다.",
+        "en": "But at the time I could not.",
+        "syl": 14,
+        "why": "할 수가 is said [할 쑤가] — the ㄹ tenses the ㅅ behind it. The 가 in place of 는 puts the weight on the not-being-able.",
+        "tags": [
+          "V-(으)ㄹ 수 없다",
+          "경음화"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d77.mp3",
+          "voiced": 2.61,
+          "rate": 5.4
+        }
+      },
+      {
+        "id": 78,
+        "track": 90,
+        "who": "나",
+        "ko": "지금은 한국어 실력이 많이 늘었습니다.",
+        "en": "My Korean has come on a lot since then.",
+        "syl": 16,
+        "why": "실력이 늘다 takes 이 and 늘다: the ability grows, you do not grow it. 늘었습니다 is said [느럳씀니다], the ㄹ crossing before the ㅆ closes.",
+        "tags": [
+          "실력이 늘다",
+          "연음"
+        ],
+        "audio": {
+          "src": "audio/book/2b-u18-d78.mp3",
+          "voiced": 3.09,
+          "rate": 5.2
+        }
+      },
+      {
+        "id": 79,
+        "track": 90,
+        "who": "나",
+        "ko": "홈스테이 가족과 다시 만나면",
+        "en": "If I meet the homestay family again,",
+        "syl": 12,
+        "why": "만나다 takes 와/과 or 를 and never 에게 — you meet a person, you do not meet to a person. 가족과 has 과 rather than 와 because 족 ends in a consonant, and 다시 만나면 is a condition rather than a plan: it may not happen.",
+        "tags": [
+          "N와/과 만나다",
+          "V-(으)면"
+        ],
+        "splitFrom": "홈스테이 가족과 다시 만나면 그때 하지 못한 말을 꼭 하고 싶습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d79.mp3",
+          "voiced": 2.13,
+          "rate": 5.6
+        }
+      },
+      {
+        "id": 80,
+        "track": 90,
+        "who": "나",
+        "ko": "그때 하지 못한 말을 꼭 하고 싶습니다.",
+        "en": "I really want to say what I could not say then.",
+        "syl": 15,
+        "why": "못한 is said [모탄], the ㅅ closing as [ㄷ] and fusing with the ㅎ. 하지 못한 말 is what the writer was not able to say — 안 한 말 would mean the writer chose not to.",
+        "tags": [
+          "V-지 못하다",
+          "경음화"
+        ],
+        "splitFrom": "홈스테이 가족과 다시 만나면 그때 하지 못한 말을 꼭 하고 싶습니다.",
+        "audio": {
+          "src": "audio/book/2b-u18-d80.mp3",
+          "voiced": 2.68,
+          "rate": 5.6
+        }
+      }
+    ]
+  },
+  "listenOnly": "Every track carries a script: the unit pages print them for the grammar, 말하기 and 발음 tracks, and the 듣기 지문 at the back of the book prints the radio programme on tracks 88 and 89. Those two are the only recordings in the pack with music under them, so their clips have the bed in them — it is on the tape, and taking it out would take the presenter with it."
+}

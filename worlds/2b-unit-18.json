@@ -1,0 +1,997 @@
+{
+  "id": "2b-unit-18",
+  "pack": "snu-2b",
+  "source": "Seoul National University Korean 2B, Unit 18",
+  "title": "2B Unit 18",
+  "titleKo": "18과 한국에 온 지 벌써 6개월이 되었어요",
+  "icon": "🍂",
+  "pages": "Unit 18",
+  "notebook": {
+    "title": "Unit 18 · Six months already",
+    "groups": [
+      {
+        "ko": "감정",
+        "en": "Feelings on leaving",
+        "cat": "감정"
+      },
+      {
+        "ko": "계절과 날씨",
+        "en": "Seasons and weather",
+        "cat": "계절과 날씨"
+      },
+      {
+        "ko": "문법과 표현",
+        "en": "Grammar & expressions",
+        "cat": "문법과 표현"
+      },
+      {
+        "ko": "말하기",
+        "en": "Speaking · the semester ending, and a year of seasons",
+        "cat": "말하기"
+      },
+      {
+        "ko": "듣고 말하기",
+        "en": "Listening · a radio show turns one, and a letter home",
+        "cat": "듣고 말하기"
+      },
+      {
+        "ko": "읽고 쓰기",
+        "en": "Reading · thanking a homestay family",
+        "cat": "읽고 쓰기"
+      },
+      {
+        "ko": "과제",
+        "en": "Task · how to enjoy living in Korea",
+        "cat": "과제"
+      },
+      {
+        "ko": "문화와 발음",
+        "en": "Culture & pronunciation",
+        "cat": "문화와 발음"
+      }
+    ]
+  },
+  "level": {
+    "level": "2B-18",
+    "name": "한국에 온 지 벌써 6개월이 되었어요",
+    "nameEn": "2B Unit 18 · Six months in Korea already",
+    "icon": "🍂",
+    "description": "Farm the Unit 18 word list — how long it has been since you did something, a year of Korean weather, and the plain style you write it all down in.",
+    "descriptionEn": "Learn to say how long something has been going on, describe each season’s weather, and write in the plain style — with the last chapter’s listening, reading and workbook exercises.",
+    "world": true,
+    "pack": "snu-2b",
+    "worldId": "2b-unit-18",
+    "map": {
+      "extras": [],
+      "stations": [
+        "desk",
+        "cassette"
+      ]
+    },
+    "target": 9,
+    "words": [
+      {
+        "ko": "그립다",
+        "en": "to miss; to long for",
+        "hint": "🥺",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving",
+        "example": "고향에 가면 친구들이 많이 그리울 것 같아요.",
+        "exampleEn": "I think I will miss my friends a lot when I go home."
+      },
+      {
+        "ko": "아쉽다",
+        "en": "to be a pity; to feel sorry to lose",
+        "hint": "😔",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving",
+        "example": "가족을 만날 수 있어서 좋기는 하지만 한국을 떠나는 건 아쉬워요.",
+        "exampleEn": "I am glad I get to see my family, but it is a shame to leave Korea."
+      },
+      {
+        "ko": "정(이) 들다",
+        "en": "to grow attached to",
+        "hint": "💞",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving"
+      },
+      {
+        "ko": "후회가 되다",
+        "en": "to regret",
+        "hint": "😞",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving",
+        "example": "그 말을 한 것이 정말 후회가 돼요.",
+        "exampleEn": "I really regret having said that."
+      },
+      {
+        "ko": "가장 기억에 남다",
+        "en": "to stay in one’s memory most of all",
+        "hint": "🧠",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving",
+        "example": "그중에서 친구와 여행 간 일이 가장 기억에 남아요.",
+        "exampleEn": "Of all of it, the trip I took with a friend is what stays with me most."
+      },
+      {
+        "ko": "사정이 있다",
+        "en": "to have a reason; to have something come up",
+        "hint": "🤷",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving",
+        "example": "다음 주에 우리 반 친구들이 같이 여행을 가는데 저는 사정이 있어서 못 가게 됐어요.",
+        "exampleEn": "My class is going on a trip next week, but something has come up and I cannot go."
+      },
+      {
+        "ko": "헤어지다",
+        "en": "to part; to say goodbye",
+        "hint": "👋",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving",
+        "example": "고향에 가는 것은 좋지만 친구들과 헤어지는 것이 정말 아쉽습니다.",
+        "exampleEn": "Going home is good, but parting from my friends is a real shame."
+      },
+      {
+        "ko": "사귀다",
+        "en": "to make friends; to go out with",
+        "hint": "🤝",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving",
+        "example": "두 사람이 사귄 지 얼마나 됐어요?",
+        "exampleEn": "How long have the two of them been going out?"
+      },
+      {
+        "ko": "익숙해지다",
+        "en": "to get used to",
+        "hint": "🌱",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving",
+        "example": "처음보다 한국 생활에 많이 익숙해졌다.",
+        "exampleEn": "I have got much more used to life in Korea than at the start."
+      },
+      {
+        "ko": "떠나다",
+        "en": "to leave",
+        "hint": "🚪",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving"
+      },
+      {
+        "ko": "시간이 지나가다",
+        "en": "time goes by",
+        "hint": "⏳",
+        "category": "감정",
+        "categoryEn": "Feelings on leaving",
+        "example": "맞아요. 시간이 정말 빨리 지나간 것 같아요.",
+        "exampleEn": "You are right. Time really does seem to have gone quickly."
+      },
+      {
+        "ko": "사계절",
+        "en": "the four seasons",
+        "hint": "🍀",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "하지만 한국은 사계절이 있다.",
+        "exampleEn": "Korea, though, has four distinct seasons."
+      },
+      {
+        "ko": "가을",
+        "en": "autumn",
+        "hint": "🍂",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "내가 제일 좋아하는 계절은 가을이다.",
+        "exampleEn": "My favourite season is autumn."
+      },
+      {
+        "ko": "꽃이 피다",
+        "en": "flowers bloom",
+        "hint": "🌸",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather"
+      },
+      {
+        "ko": "바람이 불다",
+        "en": "the wind blows",
+        "hint": "🌬️",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "바람이 불어서 시원하다.",
+        "exampleEn": "There is a breeze, so it is cool."
+      },
+      {
+        "ko": "건조하다",
+        "en": "to be dry",
+        "hint": "🏜️",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "오랫동안 비가 안 와서 요즘 너무 건조해요.",
+        "exampleEn": "It has not rained for ages, so it is terribly dry at the moment."
+      },
+      {
+        "ko": "장마가 시작되다",
+        "en": "the rainy season begins",
+        "hint": "☔",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "보통 언제 장마가 시작돼요?",
+        "exampleEn": "When does the rainy season usually start?"
+      },
+      {
+        "ko": "장마",
+        "en": "the summer rainy season",
+        "hint": "🌧️",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "또 장마가 있어서 비가 많이 온다.",
+        "exampleEn": "There is also a rainy season, so it rains a great deal."
+      },
+      {
+        "ko": "태풍이 오다",
+        "en": "a typhoon comes",
+        "hint": "🌀",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather"
+      },
+      {
+        "ko": "태풍",
+        "en": "a typhoon",
+        "hint": "🌊",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather"
+      },
+      {
+        "ko": "습도가 높다",
+        "en": "the humidity is high",
+        "hint": "💧",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "여름에는 날씨가 매우 덥고 습도가 높다.",
+        "exampleEn": "In summer the weather is very hot and the humidity is high."
+      },
+      {
+        "ko": "습도",
+        "en": "humidity",
+        "hint": "💦",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather"
+      },
+      {
+        "ko": "단풍이 들다",
+        "en": "the leaves turn colour",
+        "hint": "🍁",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "요즘 산에 단풍이 들어서 참 아름다워요.",
+        "exampleEn": "The hills have turned colour lately and they are really lovely."
+      },
+      {
+        "ko": "단풍",
+        "en": "autumn colours",
+        "hint": "🧡",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "사람들은 단풍을 구경하러 산에 간다.",
+        "exampleEn": "People go up into the mountains to look at the autumn colours."
+      },
+      {
+        "ko": "나뭇잎이 떨어지다",
+        "en": "the leaves fall",
+        "hint": "🍃",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather"
+      },
+      {
+        "ko": "나뭇잎",
+        "en": "a leaf",
+        "hint": "🌿",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "여러분과 나뭇잎이 떨어지는 가을, 눈 내리는 겨울, 꽃 피는 봄, 그리고 뜨거운 여름을 보냈는데요.",
+        "exampleEn": "With you we have been through the autumn of falling leaves, the snowy winter, the spring of blossom and the hot summer."
+      },
+      {
+        "ko": "쌀쌀하다",
+        "en": "to be chilly",
+        "hint": "🧣",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "낮에는 따뜻한데 아침저녁에는 날씨가 쌀쌀해서 긴 옷을 입어야 돼요.",
+        "exampleEn": "It is warm in the daytime, but chilly morning and evening, so you need long sleeves."
+      },
+      {
+        "ko": "아침저녁",
+        "en": "morning and evening",
+        "hint": "🌅",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "낮에는 따뜻한데 아침저녁에는 날씨가 쌀쌀해서 긴 옷을 입어야 돼요.",
+        "exampleEn": "It is warm in the daytime, but chilly morning and evening, so you need long sleeves."
+      },
+      {
+        "ko": "얼음이 얼다",
+        "en": "ice forms",
+        "hint": "🧊",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "길에 얼음이 얼어서 미끄러우니까 조심해서 가세요.",
+        "exampleEn": "The road has iced over and is slippery, so mind how you go."
+      },
+      {
+        "ko": "얼음",
+        "en": "ice",
+        "hint": "🥶",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather"
+      },
+      {
+        "ko": "미끄럽다",
+        "en": "to be slippery",
+        "hint": "⚠️",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "길에 얼음이 얼어서 미끄러우니까 조심해서 가세요.",
+        "exampleEn": "The road has iced over and is slippery, so mind how you go."
+      },
+      {
+        "ko": "눈이 내리다",
+        "en": "snow falls",
+        "hint": "❄️",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "지금도 눈이 내려요? 아니요, 지금은 안 와요.",
+        "exampleEn": "Is it still snowing? No, it has stopped now."
+      },
+      {
+        "ko": "기온이 영하로 내려가다",
+        "en": "the temperature drops below zero",
+        "hint": "🌡️",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "1월에는 기온이 영하로 내려가는 날이 많아서 아주 추워요.",
+        "exampleEn": "In January there are a lot of days below zero, so it is very cold."
+      },
+      {
+        "ko": "기온",
+        "en": "temperature",
+        "hint": "📉",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather"
+      },
+      {
+        "ko": "영하",
+        "en": "below zero",
+        "hint": "➖",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather"
+      },
+      {
+        "ko": "빨래",
+        "en": "the washing",
+        "hint": "🧺",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "비가 많이 오고 습도가 높아서 빨래가 잘 안 말라요.",
+        "exampleEn": "It rains a lot and the air is humid, so the washing does not dry well."
+      },
+      {
+        "ko": "등산",
+        "en": "hiking; going up a mountain",
+        "hint": "🥾",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "이번 주말에 같이 등산 갈래요?",
+        "exampleEn": "Shall we go hiking together this weekend?"
+      },
+      {
+        "ko": "스키장",
+        "en": "a ski resort",
+        "hint": "⛷️",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "나는 스키를 타 본 적이 없어서 이번 겨울에 친구들과 스키장에 가 보려고 한다.",
+        "exampleEn": "I have never skied, so this winter I mean to go to a ski resort with my friends."
+      },
+      {
+        "ko": "내내",
+        "en": "all through; the whole time",
+        "hint": "🔁",
+        "category": "계절과 날씨",
+        "categoryEn": "Seasons and weather",
+        "example": "우리 나라는 계절의 변화가 거의 없고 일 년 내내 따뜻한 편이다.",
+        "exampleEn": "My country has almost no change of season and is warm all year round."
+      },
+      {
+        "ko": "V-(으)ㄴ 지",
+        "en": "how long it has been since you did it",
+        "hint": "📆",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "한국에 온 지 벌써 네 달 됐어요.",
+        "exampleEn": "It has already been four months since I came to Korea."
+      },
+      {
+        "ko": "N(이)나 2",
+        "en": "as many as — surprise at the amount",
+        "hint": "😲",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "아니에요. 두 그릇이나 먹었어요.",
+        "exampleEn": "No thank you. I have had two whole bowls."
+      },
+      {
+        "ko": "A-다, V-ㄴ다/는다",
+        "en": "the plain style, for writing and diaries",
+        "hint": "✍️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "시간이 빨리 지나간다.",
+        "exampleEn": "Time goes by quickly."
+      },
+      {
+        "ko": "N(이)다",
+        "en": "the plain style of 이에요/예요",
+        "hint": "📝",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "내일부터 방학이다.",
+        "exampleEn": "The holidays start tomorrow."
+      },
+      {
+        "ko": "마리",
+        "en": "counter for animals",
+        "hint": "🐕",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "민영 씨는 개가 다섯 마리나 있어요.",
+        "exampleEn": "Minyeong has five whole dogs."
+      },
+      {
+        "ko": "그릇",
+        "en": "a bowl; counter for bowls",
+        "hint": "🍚",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "배가 고파서 밥을 두 그릇 먹었어요.",
+        "exampleEn": "I was hungry so I ate two bowls of rice."
+      },
+      {
+        "ko": "잔",
+        "en": "a glass; counter for drinks",
+        "hint": "☕",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "저는 안 마실래요. 벌써 세 잔이나 마셨어요.",
+        "exampleEn": "None for me. I have had three cups already."
+      },
+      {
+        "ko": "지나가다",
+        "en": "to pass; to go by",
+        "hint": "🚶",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "피다",
+        "en": "to bloom",
+        "hint": "🌷",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "여러 가지",
+        "en": "all sorts of; various",
+        "hint": "🎨",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "봄에는 여러 가지 꽃이 핀다.",
+        "exampleEn": "All sorts of flowers bloom in spring."
+      },
+      {
+        "ko": "주차장",
+        "en": "a car park",
+        "hint": "🅿️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "여기는 주차장이 아니다.",
+        "exampleEn": "This is not a car park."
+      },
+      {
+        "ko": "월요일",
+        "en": "Monday",
+        "hint": "📅",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "오늘은 월요일이다.",
+        "exampleEn": "Today is Monday."
+      },
+      {
+        "ko": "설 연휴",
+        "en": "the Lunar New Year holidays",
+        "hint": "🎊",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "내일부터 설 연휴다.",
+        "exampleEn": "The New Year holidays start tomorrow."
+      },
+      {
+        "ko": "세배",
+        "en": "the New Year bow to one’s elders",
+        "hint": "🙇",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "설날 아침에는 어른들께 세배를 한다.",
+        "exampleEn": "On New Year’s morning you bow to your elders."
+      },
+      {
+        "ko": "별일",
+        "en": "anything in particular",
+        "hint": "🤔",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "한국 사람들은 설날에 별일이 없으면 모두 고향에 내려간다.",
+        "exampleEn": "Unless something comes up, Koreans all go down to their home towns for New Year."
+      },
+      {
+        "ko": "막히다",
+        "en": "to be blocked; to be jammed",
+        "hint": "🚗",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "신발",
+        "en": "shoes",
+        "hint": "👟",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "신발이 참 편해 보인다.",
+        "exampleEn": "Those shoes look really comfortable."
+      },
+      {
+        "ko": "시장",
+        "en": "a market",
+        "hint": "🏪",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "남대문시장은 서울에서 제일 큰 시장이다.",
+        "exampleEn": "Namdaemun Market is the biggest market in Seoul."
+      },
+      {
+        "ko": "물건",
+        "en": "goods; a thing",
+        "hint": "📦",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "남대문시장에 가면 싸고 좋은 물건을 살 수 있다.",
+        "exampleEn": "At Namdaemun Market you can buy good things cheaply."
+      },
+      {
+        "ko": "감기",
+        "en": "a cold",
+        "hint": "🤧",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "감기에 걸리지 않으려면 먼저 손을 깨끗하게 씻어야 한다.",
+        "exampleEn": "To avoid catching a cold you first have to wash your hands properly."
+      },
+      {
+        "ko": "씻다",
+        "en": "to wash",
+        "hint": "🧼",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "약을 먹다",
+        "en": "to take medicine",
+        "hint": "💊",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "이 약을 먹은 지 한 시간쯤 됐어요.",
+        "exampleEn": "It has been about an hour since I took this medicine."
+      },
+      {
+        "ko": "술을 마시다",
+        "en": "to drink alcohol",
+        "hint": "🍶",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "술을 안 마신 지 오래됐어요.",
+        "exampleEn": "It has been a long time since I last drank."
+      },
+      {
+        "ko": "안경을 끼다",
+        "en": "to wear glasses",
+        "hint": "👓",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "대학교를 졸업하다",
+        "en": "to graduate from university",
+        "hint": "🎓",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "대학교를 졸업한 지 일 년 되었어요.",
+        "exampleEn": "It has been a year since I graduated from university."
+      },
+      {
+        "ko": "기차를 놓치다",
+        "en": "to miss the train",
+        "hint": "🚆",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "늦게 일어나서 아홉 시 기차를 놓쳤다.",
+        "exampleEn": "I got up late and missed the nine o’clock train."
+      },
+      {
+        "ko": "데려다 주다",
+        "en": "to see someone home; to take someone there",
+        "hint": "🚕",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "인터넷을 하다",
+        "en": "to be online",
+        "hint": "💻",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "지난가을",
+        "en": "last autumn",
+        "hint": "🗓️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "나는 지난가을에 제주도에 갔다.",
+        "exampleEn": "I went to Jeju last autumn."
+      },
+      {
+        "ko": "오래되다",
+        "en": "to be a long time since",
+        "hint": "🕰️",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions",
+        "example": "술을 안 마신 지 오래됐어요.",
+        "exampleEn": "It has been a long time since I last drank."
+      },
+      {
+        "ko": "쯤",
+        "en": "about; around",
+        "hint": "➰",
+        "category": "문법과 표현",
+        "categoryEn": "Grammar & expressions"
+      },
+      {
+        "ko": "계절의 변화",
+        "en": "the change of the seasons",
+        "hint": "🔄",
+        "category": "말하기",
+        "categoryEn": "Speaking · the semester ending, and a year of seasons",
+        "example": "우리 나라는 계절의 변화가 거의 없고 일 년 내내 따뜻한 편이다.",
+        "exampleEn": "My country has almost no change of season and is warm all year round."
+      },
+      {
+        "ko": "갑자기",
+        "en": "suddenly",
+        "hint": "⚡",
+        "category": "말하기",
+        "categoryEn": "Speaking · the semester ending, and a year of seasons",
+        "example": "그래요? 왜 갑자기 돌아가게 됐어요?",
+        "exampleEn": "Really? What made you go back all of a sudden?"
+      },
+      {
+        "ko": "학기",
+        "en": "a semester",
+        "hint": "🏫",
+        "category": "말하기",
+        "categoryEn": "Speaking · the semester ending, and a year of seasons",
+        "example": "나나 씨, 다음 학기에도 계속 공부하지요?",
+        "exampleEn": "Nana, you are carrying on studying next semester too, aren’t you?"
+      },
+      {
+        "ko": "돌아가다",
+        "en": "to go back",
+        "hint": "🔙",
+        "category": "말하기",
+        "categoryEn": "Speaking · the semester ending, and a year of seasons",
+        "example": "아니요, 다음 학기에 고향으로 돌아가요.",
+        "exampleEn": "No — I am going back home next semester."
+      },
+      {
+        "ko": "머리가 짧다",
+        "en": "to have short hair",
+        "hint": "💇",
+        "category": "말하기",
+        "categoryEn": "Speaking · the semester ending, and a year of seasons",
+        "example": "나는 머리가 짧다.",
+        "exampleEn": "I have short hair."
+      },
+      {
+        "ko": "밖에",
+        "en": "only; nothing but",
+        "hint": "🚫",
+        "category": "말하기",
+        "categoryEn": "Speaking · the semester ending, and a year of seasons"
+      },
+      {
+        "ko": "한 단어로 말하다",
+        "en": "to put it in a single word",
+        "hint": "🔤",
+        "category": "말하기",
+        "categoryEn": "Speaking · the semester ending, and a year of seasons",
+        "example": "여러분의 한국 생활을 한 단어로 말하면 뭐라고 할 수 있습니까?",
+        "exampleEn": "If you had to put your life in Korea in a single word, what would it be?"
+      },
+      {
+        "ko": "방송을 시작하다",
+        "en": "to go on air; to start broadcasting",
+        "hint": "📻",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "오늘은 저희 방송을 시작한 지 일 년이 되는 날입니다.",
+        "exampleEn": "Today marks a year since we first went on air."
+      },
+      {
+        "ko": "프로그램",
+        "en": "a programme; a show",
+        "hint": "📺",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "이 프로그램은 매일 오후 4시에 방송을 한다.",
+        "exampleEn": "This programme goes out every day at four in the afternoon."
+      },
+      {
+        "ko": "오후",
+        "en": "the afternoon",
+        "hint": "🕓",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "앞으로도 매일 오후 4시, 잊지 말고 찾아 주세요.",
+        "exampleEn": "Do not forget us — every day at four in the afternoon, from now on too."
+      },
+      {
+        "ko": "창밖",
+        "en": "outside the window",
+        "hint": "🪟",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "오늘도 처음 시작한 날처럼 바람도 시원하고 창밖으로 보이는 단풍도 참 아름답네요.",
+        "exampleEn": "Today, like that first day, the breeze is cool and the autumn colours out of the window are lovely."
+      },
+      {
+        "ko": "아름답다",
+        "en": "to be beautiful",
+        "hint": "✨",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "창밖으로 보이는 단풍도 참 아름답네요.",
+        "exampleEn": "The autumn colours out of the window really are lovely."
+      },
+      {
+        "ko": "뜨겁다",
+        "en": "to be hot",
+        "hint": "🔥",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "여러분과 나뭇잎이 떨어지는 가을, 눈 내리는 겨울, 꽃 피는 봄, 그리고 뜨거운 여름을 보냈는데요.",
+        "exampleEn": "With you we have been through the autumn of falling leaves, the snowy winter, the spring of blossom and the hot summer."
+      },
+      {
+        "ko": "글",
+        "en": "a piece of writing; a letter in",
+        "hint": "📄",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "그동안 여러분이 보내 주신 글을 보며 울고 웃으면서 행복한 일 년을 보냈습니다.",
+        "exampleEn": "All this time your letters have made us cry and laugh through a happy year."
+      },
+      {
+        "ko": "울고 웃다",
+        "en": "to laugh and cry",
+        "hint": "😂",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home"
+      },
+      {
+        "ko": "함께하다",
+        "en": "to be together with; to join in",
+        "hint": "🤗",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "함께해 주셔서 정말 감사합니다.",
+        "exampleEn": "Thank you so much for being with us."
+      },
+      {
+        "ko": "잊다",
+        "en": "to forget",
+        "hint": "🙈",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "앞으로도 매일 오후 4시, 잊지 말고 찾아 주세요.",
+        "exampleEn": "Do not forget us — every day at four in the afternoon, from now on too."
+      },
+      {
+        "ko": "사연",
+        "en": "a listener’s story; the tale behind it",
+        "hint": "💌",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "다음은 한국에서 공부하고 계시는 주디 씨의 사연인데요.",
+        "exampleEn": "Next is the story of Judy, who is studying here in Korea."
+      },
+      {
+        "ko": "독일",
+        "en": "Germany",
+        "hint": "🇩🇪",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "멀리 독일에서 오셨군요.",
+        "exampleEn": "You have come all the way from Germany."
+      },
+      {
+        "ko": "멀리",
+        "en": "far away",
+        "hint": "🛫",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "멀리 독일에서 오셨군요.",
+        "exampleEn": "You have come all the way from Germany."
+      },
+      {
+        "ko": "일주일",
+        "en": "a week",
+        "hint": "📆",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home",
+        "example": "이제 고향으로 돌아갈 날이 일주일밖에 남지 않았습니다.",
+        "exampleEn": "There is only a week left now before I go home."
+      },
+      {
+        "ko": "계속 연락하다",
+        "en": "to keep in touch",
+        "hint": "📞",
+        "category": "듣고 말하기",
+        "categoryEn": "Listening · a radio show turns one, and a letter home"
+      },
+      {
+        "ko": "홈스테이를 하다",
+        "en": "to do a homestay",
+        "hint": "🏠",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · thanking a homestay family",
+        "example": "여름 방학에 3주 동안 한국어를 배우러 왔는데 그때 홈스테이를 했다.",
+        "exampleEn": "I came for three weeks in the summer holidays to learn Korean, and I did a homestay then."
+      },
+      {
+        "ko": "대하다",
+        "en": "to treat; to behave towards",
+        "hint": "🫱",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · thanking a homestay family",
+        "example": "홈스테이 가족들은 나를 진짜 가족처럼 대해 주셨다.",
+        "exampleEn": "The homestay family treated me like real family."
+      },
+      {
+        "ko": "진짜",
+        "en": "real; really",
+        "hint": "💯",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · thanking a homestay family",
+        "example": "홈스테이 가족들은 나를 진짜 가족처럼 대해 주셨다.",
+        "exampleEn": "The homestay family treated me like real family."
+      },
+      {
+        "ko": "배(가) 부르다",
+        "en": "to be full",
+        "hint": "🍽️",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · thanking a homestay family"
+      },
+      {
+        "ko": "눈물을 흘리다",
+        "en": "to shed tears",
+        "hint": "😭",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · thanking a homestay family"
+      },
+      {
+        "ko": "실력이 늘다",
+        "en": "to improve; one’s ability grows",
+        "hint": "📈",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · thanking a homestay family",
+        "example": "한국에 처음 왔을 때보다 한국어 실력이 많이 늘었다.",
+        "exampleEn": "My Korean has come on a lot since I first arrived."
+      },
+      {
+        "ko": "실력",
+        "en": "ability; proficiency",
+        "hint": "💪",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · thanking a homestay family",
+        "example": "한국에 처음 왔을 때보다 한국어 실력이 많이 늘었다.",
+        "exampleEn": "My Korean has come on a lot since I first arrived."
+      },
+      {
+        "ko": "감사하다",
+        "en": "to be grateful",
+        "hint": "🙏",
+        "category": "읽고 쓰기",
+        "categoryEn": "Reading · thanking a homestay family",
+        "example": "가족처럼 대해 주셔서 정말 감사했습니다.",
+        "exampleEn": "Thank you so much for treating me like family."
+      },
+      {
+        "ko": "즐겁게 생활하다",
+        "en": "to enjoy living somewhere",
+        "hint": "🎉",
+        "category": "과제",
+        "categoryEn": "Task · how to enjoy living in Korea",
+        "example": "한국에서 즐겁게 생활하는 방법을 이야기해 봅시다.",
+        "exampleEn": "Let’s talk about ways to enjoy living in Korea."
+      },
+      {
+        "ko": "방법",
+        "en": "a way; a method",
+        "hint": "🧭",
+        "category": "과제",
+        "categoryEn": "Task · how to enjoy living in Korea",
+        "example": "한국에서 즐겁게 생활하는 방법을 이야기해 봅시다.",
+        "exampleEn": "Let’s talk about ways to enjoy living in Korea."
+      },
+      {
+        "ko": "가입하다",
+        "en": "to join; to sign up",
+        "hint": "✍️",
+        "category": "과제",
+        "categoryEn": "Task · how to enjoy living in Korea"
+      },
+      {
+        "ko": "시",
+        "en": "a poem",
+        "hint": "📜",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "여러분은 한국 시를 읽어 본 적이 있습니까?",
+        "exampleEn": "Have you ever read a Korean poem?"
+      },
+      {
+        "ko": "계절에 어울리다",
+        "en": "to suit the season",
+        "hint": "🎐",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "위 시와 같이 계절에 어울리는 시를 써 보세요.",
+        "exampleEn": "Write a poem that suits a season, like the one above."
+      },
+      {
+        "ko": "말없이",
+        "en": "without a word",
+        "hint": "🤫",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation"
+      },
+      {
+        "ko": "밑줄",
+        "en": "an underline",
+        "hint": "✏️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "밑줄 친 곳의 발음에 주의해서 읽어 보세요.",
+        "exampleEn": "Read it aloud, minding the pronunciation of the underlined parts."
+      },
+      {
+        "ko": "주의하다",
+        "en": "to pay attention; to take care",
+        "hint": "⚠️",
+        "category": "문화와 발음",
+        "categoryEn": "Culture & pronunciation",
+        "example": "밑줄 친 곳의 발음에 주의해서 읽어 보세요.",
+        "exampleEn": "Read it aloud, minding the pronunciation of the underlined parts."
+      }
+    ]
+  }
+}

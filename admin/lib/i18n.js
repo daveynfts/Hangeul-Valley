@@ -392,6 +392,7 @@ const LABELS = {
   'worlds/2b-unit-15.json': 'Unit 15 · word list',
   'worlds/2b-unit-16.json': 'Unit 16 · word list',
   'worlds/2b-unit-17.json': 'Unit 17 · word list',
+  'worlds/2b-unit-18.json': 'Unit 18 · word list',
   'worlds/topik-2.json': 'TOPIK II · word list',
   'worlds/unit10-workbook.json': 'Unit 10 · workbook',
   'worlds/unit10-textbook.json': 'Unit 10 · textbook',

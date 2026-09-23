@@ -26,7 +26,7 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
-const UNITS = [10, 11, 12, 13, 14, 15, 16, 17];
+const UNITS = [10, 11, 12, 13, 14, 15, 16, 17, 18];
 
 let passed = 0, failed = 0;
 function assert(cond, msg) {

@@ -1,0 +1,3059 @@
+{
+  "id": "unit18-workbook",
+  "source": "Seoul National University Korean 2B Workbook, Unit 18 (printed pp.166-175), with the 정답 on printed pp.209-210",
+  "titleKo": "연습 문제",
+  "titleEn": "Workbook",
+  "pickKo": "어떤 연습을 할까요?",
+  "pickEn": "One exercise at a time — pick where to start.",
+  "hintKo": "숫자 키로 고르고, 화살표로 옮기고, Enter로 확인해요.",
+  "checkKo": "확인",
+  "checkEn": "Check",
+  "againKo": "다시 풀기",
+  "backKo": "연습 목록",
+  "doneKo": "닫기",
+  "artNote": "Two of the fourteen exercises lean on their drawings for something the words do not say. 문법과 표현 1 연습 1 prints only B’s answer and a picture of the activity, so each row names the activity on its own line — 한국어를 공부하다, 안경을 끼다 — and the question can still be built. 문법과 표현 2 연습 1 keeps four of its six numbers in the drawing only — three cups, a pair of clocks, four dogs, a calendar with its months torn off — and those rows name the count the same way. In both, the 정답 on printed pp.209-210 settles what the picture shows. 어휘 연습 3 prints a drawing beside each dialogue too, but every one of those rows is settled by the words on the page.",
+  "omittedNote": "Nothing is left out. Every one of the fourteen exercises the 익힘책 prints for 18과 has an answer in the 정답 at the back, including 문법과 표현 3 연습 4 — four short passages with seventeen blanks and no word box — which is taken one blank at a time, the way Unit 17 took its conjugation table. The 복습 6 that follows the unit on printed p.176 reviews Units 16-18 together and belongs to none of them.",
+  "exercises": [
+    {
+      "id": "u18-vocab-1",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 1",
+      "icon": "💭",
+      "pattern": "감정",
+      "blurbEn": "A small story, and the feeling it leaves you with.",
+      "instructionKo": "빈칸에 알맞은 것을 골라 문장을 만들어 보세요.",
+      "instructionEn": "Complete each sentence using the appropriate expression from the box.",
+      "noteEn": "No pictures and no 보기: the page is the box and five rows, each printing a situation in one sentence and asking for the feeling in the next, so it is fully answerable as printed and nothing is put in front of it here. The five box words are the five the 교과서 teaches on printed p.204, and the 정답 on printed p.209 gives the form each row wants — 그리워요, not 그립다.",
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "가장 친한 친구가 외국에 있어서 오랫동안 못 만났어요."
+            },
+            {
+              "ko": "그 친구가 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "그리워요"
+            },
+            {
+              "id": "b",
+              "ko": "아쉬워요"
+            },
+            {
+              "id": "c",
+              "ko": "후회가 돼요"
+            }
+          ],
+          "en": "My closest friend is abroad and I have not seen them for a long time. I miss them.",
+          "grammar": "그립다 is a ㅂ-irregular, so the 해요체 is 그리워요 and never 그립어요.",
+          "why": "그리워요 is for a person or a place you want back. 아쉬워요 is for something that did not work out, and 후회가 돼요 is for something you did — neither of them is about missing somebody who is simply far away."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "다음 주에 우리 반 친구들이 같이 여행을 가는데 저는 사정이 있어서 못 가게 됐어요."
+            },
+            {
+              "ko": "여행을 같이 못 가서 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "기억에 남아요"
+            },
+            {
+              "id": "b",
+              "ko": "아쉬워요"
+            },
+            {
+              "id": "c",
+              "ko": "그리워요"
+            }
+          ],
+          "en": "My class is going on a trip next week but something has come up and I cannot go. It is a shame.",
+          "grammar": "아쉽다 is also a ㅂ-irregular: 아쉬워요, matching 그리워요 in shape.",
+          "why": "아쉬워요 is the word for a chance missed through nobody’s fault. 그리워요 would miss the trip as if it had already happened, and 기억에 남아요 would remember a trip the speaker never went on."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "샤오밍과 기숙사에서 1년 동안 같은 방을 썼어요."
+            },
+            {
+              "ko": "가끔 작은 일로 싸울 때도 있었지만 샤오밍과 정말 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "기억에 남아요"
+            },
+            {
+              "id": "b",
+              "ko": "후회가 돼요"
+            },
+            {
+              "id": "c",
+              "ko": "정이 들었어요"
+            }
+          ],
+          "en": "I shared a room with Xiaoming in the dormitory for a year. We argued sometimes, but I really did grow attached to Xiaoming.",
+          "grammar": "정이 들다 takes 이 on the 정 and 들다 for the verb — the attachment enters you.",
+          "why": "정이 들었어요 is what a year of sharing a room produces, arguments and all. 기억에 남아요 would make it a memory rather than a bond, and 후회가 돼요 would say the speaker regrets the year."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "어제 친구와 싸우다가 친구에게 나쁜 말을 했어요."
+            },
+            {
+              "ko": "그 말을 한 것이 정말 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "후회가 돼요"
+            },
+            {
+              "id": "b",
+              "ko": "그리워요"
+            },
+            {
+              "id": "c",
+              "ko": "정이 들었어요"
+            }
+          ],
+          "en": "I said something unkind to a friend while we were arguing yesterday. I really regret saying it.",
+          "grammar": "후회가 되다 takes 가 on the 후회: the regret comes to you.",
+          "why": "후회가 돼요 is regret for something you did and could have left undone, which is what 그 말을 한 것 is. 그리워요 would be longing for the unkind words, and 정이 들었어요 would be growing fond of them."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "ko": "한국에서 지내는 동안 여러 가지 일이 있었어요."
+            },
+            {
+              "ko": "그중에서 친구와 여행 간 일이 가장 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "아쉬워요"
+            },
+            {
+              "id": "b",
+              "ko": "기억에 남아요"
+            },
+            {
+              "id": "c",
+              "ko": "정이 들었어요"
+            }
+          ],
+          "en": "All sorts of things happened while I was in Korea. Of all of them, the trip with a friend is what stays with me most.",
+          "grammar": "기억에 남다 puts 에 on the memory: the thing remains in it.",
+          "why": "기억에 남아요 is what 가장 is asking for — one thing picked out of many. 아쉬워요 would make the best memory the biggest disappointment, and 정이 들었어요 is about people, not about a single day."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-vocab-2",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 2",
+      "icon": "🌡️",
+      "pattern": "날씨",
+      "blurbEn": "Weather, and the consequence the sentence hangs on it.",
+      "instructionKo": "빈칸에 알맞은 것을 골라 문장을 만들어 보세요.",
+      "instructionEn": "Complete each sentence using the appropriate expression from the box.",
+      "noteEn": "Each row gives a consequence — long sleeves, washing that will not dry — and the weather word has to be the one that causes it. The form changes from row to row: two want -아서/어서, one ends the sentence and one is the -는 modifier in front of 날, which is why every button is conjugated for its own row. Like 연습 1 the page prints no 보기, and the 정답 on printed p.209 gives each answer already conjugated.",
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "낮에는 따뜻한데 아침저녁에는 날씨가 {} 긴 옷을 입어야 돼요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "쌀쌀해서"
+            },
+            {
+              "id": "b",
+              "ko": "건조해서"
+            },
+            {
+              "id": "c",
+              "ko": "습도가 높아서"
+            }
+          ],
+          "en": "It is warm in the daytime but chilly morning and evening, so you need long sleeves.",
+          "grammar": "쌀쌀하다 is a 하다 adjective, so -아서/어서 gives 쌀쌀해서.",
+          "why": "쌀쌀해서 is cold enough for long sleeves and no colder. 건조해서 is about dry air and would not send you for a jumper, and 습도가 높아서 is the opposite season."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "비가 많이 오고 {} 빨래가 잘 안 말라요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "건조해서"
+            },
+            {
+              "id": "b",
+              "ko": "습도가 높아요"
+            },
+            {
+              "id": "c",
+              "ko": "습도가 높아서"
+            }
+          ],
+          "en": "It rains a lot and the humidity is high, so the washing does not dry well.",
+          "grammar": "습도가 높다 takes 가 on the 습도: the humidity is what is high.",
+          "why": "습도가 높아서 is exactly why washing will not dry. 건조해서 would dry it faster, not slower, and 습도가 높아요 ends the sentence in the middle, where the -아서 has to join the cause to 빨래가 잘 안 말라요."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "오랫동안 비가 안 와서 요즘 너무 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "쌀쌀해요"
+            },
+            {
+              "id": "b",
+              "ko": "건조해요"
+            },
+            {
+              "id": "c",
+              "ko": "습도가 높아요"
+            }
+          ],
+          "en": "It has not rained for ages, so it is terribly dry at the moment.",
+          "grammar": "건조하다 ends the sentence here, so it takes 해요 and not 해서.",
+          "why": "건조해요 is what no rain produces. 습도가 높아요 is what rain produces, so the row would contradict its own first half."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "1월에는 {} 날이 많아서 아주 추워요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "기온이 영하로 내려가는"
+            },
+            {
+              "id": "b",
+              "ko": "기온이 영하로 내려가서"
+            },
+            {
+              "id": "c",
+              "ko": "쌀쌀해서"
+            }
+          ],
+          "en": "In January there are a lot of days below zero, so it is very cold.",
+          "grammar": "날 is a noun, so the verb in front of it takes the -는 modifier, not -아서/어서.",
+          "why": "기온이 영하로 내려가는 날 is \"days when the temperature drops below zero\" — the blank is describing 날. 기온이 영하로 내려가서 would leave 날이 많아서 with nothing to attach to."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-vocab-3",
+      "section": "어휘",
+      "sectionEn": "Vocabulary",
+      "no": "연습 3",
+      "icon": "🍁",
+      "pattern": "계절",
+      "blurbEn": "Short exchanges, each blank settled by the words around it.",
+      "instructionKo": "그림을 보고 [보기]와 같이 알맞은 것을 골라 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue using the appropriate expression from the box.",
+      "noteEn": "The page prints a small drawing beside each dialogue, but nothing here rests on it: each blank is settled by words on the page — B’s 지금은 안 와요 or 6월 말쯤 시작돼요, or the 미끄러우니까 that follows the gap. The 정답 on printed p.209 confirms all five. The box circles 꽃이 피다 as the one the 보기 has used, and it is never offered as a button.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "공원에 사람들이 많네요."
+          },
+          {
+            "who": "B",
+            "ko": "네, 요즘 {} 사람들이 구경하러 많이 와요."
+          }
+        ],
+        "answerKo": "꽃이 많이 피어서",
+        "en": "A: There are a lot of people in the park. B: Yes, lots of flowers are out, so people come to see them."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "지금도 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "아니요, 지금은 안 와요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "바람이 불어요"
+            },
+            {
+              "id": "b",
+              "ko": "눈이 내려요"
+            },
+            {
+              "id": "c",
+              "ko": "얼음이 얼어요"
+            }
+          ],
+          "en": "A: Is it still snowing? B: No, it has stopped now.",
+          "grammar": "눈이 내리다 takes 이 on the 눈 — the snow is what falls.",
+          "why": "B answers 안 와요, and 오다 is the verb that stands in for 내리다 when snow or rain is the subject. 바람이 불어요 would be answered 안 불어요 and 얼음이 얼어요 would be answered 안 얼어요."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "이번 주말에 같이 등산 갈래요? 요즘 산에 {} 참 아름다워요."
+            },
+            {
+              "who": "B",
+              "ko": "좋아요. 저도 가고 싶었어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "단풍이 들어서"
+            },
+            {
+              "id": "b",
+              "ko": "태풍이 와서"
+            },
+            {
+              "id": "c",
+              "ko": "장마가 시작돼서"
+            }
+          ],
+          "en": "A: Shall we go hiking this weekend? The hills have turned colour and are really lovely. B: Yes, I have been wanting to go.",
+          "grammar": "단풍이 들다 takes 이 and 들다: the colour enters the hills.",
+          "why": "단풍이 들어서 is what makes a mountain 아름다워요 in autumn, and it is why A is suggesting a hike. 태풍이 와서 and 장마가 시작돼서 would both keep everybody indoors."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "길에 {} 미끄러우니까 조심해서 가세요."
+            },
+            {
+              "who": "B",
+              "ko": "네, 안녕히 계세요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "단풍이 들어서"
+            },
+            {
+              "id": "b",
+              "ko": "바람이 불어서"
+            },
+            {
+              "id": "c",
+              "ko": "얼음이 얼어서"
+            }
+          ],
+          "en": "A: The road has iced over and is slippery, so mind how you go. B: I will. Goodbye.",
+          "grammar": "얼음이 얼다 takes 이 and 얼다 — the ice freezes, nobody freezes it.",
+          "why": "얼음이 얼어서 is what makes a road 미끄러워요. 바람이 불어서 makes nothing slippery, and 단풍이 들어서 belongs to the hills in autumn, not to an icy street in winter."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "보통 언제 {}?"
+            },
+            {
+              "who": "B",
+              "ko": "6월 말쯤 시작돼요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "장마가 시작돼요"
+            },
+            {
+              "id": "b",
+              "ko": "태풍이 와요"
+            },
+            {
+              "id": "c",
+              "ko": "단풍이 들어요"
+            }
+          ],
+          "en": "A: When does the rainy season usually start? B: Around the end of June.",
+          "grammar": "장마가 시작되다 is the passive 시작되다, so the 장마 takes 가 and not 를.",
+          "why": "B answers 시작돼요, which repeats the verb the blank needs — 장마가 시작돼요. 태풍이 와요 would be answered 와요 and 단풍이 들어요 would be answered 들어요."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "날씨가 아직 좀 덥지요?"
+            },
+            {
+              "who": "B",
+              "ko": "네. 하지만 아침저녁에는 {} 시원해요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "눈이 내려서"
+            },
+            {
+              "id": "b",
+              "ko": "바람이 불어서"
+            },
+            {
+              "id": "c",
+              "ko": "나뭇잎이 떨어져서"
+            }
+          ],
+          "en": "A: Still a bit hot, isn’t it? B: Yes, but there is a breeze morning and evening, so it is cool.",
+          "grammar": "바람이 불다 takes 이 on the 바람 — the wind is what blows.",
+          "why": "바람이 불어서 is the only one of the three that makes a hot day 시원해요. 나뭇잎이 떨어져서 describes the season without cooling anything, and 눈이 내려서 contradicts 아직 좀 덥지요."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-grammar-1-1",
+      "section": "문법과 표현 1",
+      "sectionEn": "Grammar 1",
+      "no": "연습 1",
+      "icon": "📆",
+      "pattern": "V-(으)ㄴ 지",
+      "blurbEn": "Their answer is printed; you have to ask the question that fits it.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "This is the one exercise in the unit where the drawing does the whole of the asking: the page gives B’s answer and a picture of the activity, and nothing on the page says in words what the activity is. Each row here names it on its own line the way the drawing does, so the question can still be built — the 정답 on printed pp.209-210 gives all five, and they differ only in which verb takes the -(으)ㄴ.",
+      "example": {
+        "lines": [
+          {
+            "who": "그림",
+            "ko": "기숙사에 살다"
+          },
+          {
+            "who": "A",
+            "ko": "{}?"
+          },
+          {
+            "who": "B",
+            "ko": "일주일밖에 안 됐어요."
+          }
+        ],
+        "answerKo": "기숙사에 산 지 얼마나 됐어요",
+        "en": "Picture: living in the dormitory. A: How long have you been living in the dormitory? B: Only a week."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "한국어를 공부하다"
+            },
+            {
+              "who": "A",
+              "ko": "{}?"
+            },
+            {
+              "who": "B",
+              "ko": "6개월 됐어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "한국어를 공부한 지 얼마나 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "한국어를 공부하는 지 얼마나 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "한국어를 공부할 지 얼마나 됐어요"
+            }
+          ],
+          "en": "A: How long have you been studying Korean? B: Six months.",
+          "grammar": "V-(으)ㄴ 지 takes the past modifier: 공부한 지, never 공부하는 지.",
+          "why": "공부한 지 counts from the moment the studying started, which is why the modifier is the past one even though the studying is still going on. 공부하는 지 and 공부할 지 are not forms this pattern has."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "두 사람이 사귀다"
+            },
+            {
+              "who": "A",
+              "ko": "{}?"
+            },
+            {
+              "who": "B",
+              "ko": "일 년 정도 됐어요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "두 사람이 사귀는 지 얼마나 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "두 사람이 사귄 지 얼마나 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "두 사람을 사귄 지 얼마나 됐어요"
+            }
+          ],
+          "en": "A: How long have the two of them been going out? B: About a year.",
+          "grammar": "사귀다 is a vowel stem, so the past modifier is 사귄 — 사귀 + ㄴ.",
+          "why": "두 사람이 사귄 지 keeps 이 on 두 사람 because they are the ones doing it together. 두 사람을 사귄 지 would make somebody else the one going out with them."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "태권도를 배우다"
+            },
+            {
+              "who": "A",
+              "ko": "{}?"
+            },
+            {
+              "who": "B",
+              "ko": "한 달쯤 됐어요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "태권도를 배우는 지 얼마나 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "태권도를 배웠은 지 얼마나 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "태권도를 배운 지 얼마나 됐어요"
+            }
+          ],
+          "en": "A: How long have you been learning taekwondo? B: About a month.",
+          "grammar": "배우다 is a vowel stem: 배운 지, with nothing between the stem and the ㄴ.",
+          "why": "배운 지 is the whole form. 배웠은 지 puts the past twice — once in 었 and once in the ㄴ — and the pattern only ever carries it once."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "안경을 끼다"
+            },
+            {
+              "who": "A",
+              "ko": "{}?"
+            },
+            {
+              "who": "B",
+              "ko": "아주 오래됐어요."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "안경을 낀 지 얼마나 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "안경을 끼는 지 얼마나 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "안경이 낀 지 얼마나 됐어요"
+            }
+          ],
+          "en": "A: How long have you been wearing glasses? B: A very long time.",
+          "grammar": "끼다 is a vowel stem, so the past modifier is 낀 — 끼 + ㄴ.",
+          "why": "안경을 낀 지 takes 을 because the glasses are what you put on. 안경이 낀 지 would make the glasses do the wearing, and 끼는 지 is the wrong modifier for this pattern."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "약을 먹다"
+            },
+            {
+              "who": "A",
+              "ko": "{}?"
+            },
+            {
+              "who": "B",
+              "ko": "얼마 안 됐어요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "약을 먹는 지 얼마나 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "약을 먹은 지 얼마나 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "약을 먹으는 지 얼마나 됐어요"
+            }
+          ],
+          "en": "A: How long ago did you take the medicine? B: Not long at all.",
+          "grammar": "먹다 ends in a consonant, so the modifier is 은 and the form is 먹은 지.",
+          "why": "먹은 지 is the consonant-stem half of the same rule that gives 배운 지 for a vowel stem. 먹으는 지 invents a form that joins both halves, and 먹는 지 is the present."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-grammar-1-2",
+      "section": "문법과 표현 1",
+      "sectionEn": "Grammar 1",
+      "no": "연습 2",
+      "icon": "⏳",
+      "pattern": "V-(으)ㄴ 지",
+      "blurbEn": "동안 on the left, 한 지 on the right — the same stretch of time said the other way round.",
+      "instructionKo": "[보기]와 같이 문장을 바꿔 써 보세요.",
+      "instructionEn": "Rewrite the sentences as shown in the example.",
+      "noteEn": "Every row here is negative — 못 먹었어요, 안 했어요 — and that is where the pattern is hardest: the negation has to stay inside the modifier, so 안 한 지 and not 한 지 안. The 정답 on printed p.210 gives all five, and the last one answers with 오래됐어요 rather than a number.",
+      "example": {
+        "lines": [
+          {
+            "ko": "저는 1년 동안 가족을 못 만났어요."
+          },
+          {
+            "ko": "→ 저는 {}."
+          }
+        ],
+        "answerKo": "가족을 못 만난 지 1년 됐어요",
+        "en": "I have not seen my family for a year. → It has been a year since I last saw my family."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "6개월 동안 고향 음식을 못 먹었어요."
+            },
+            {
+              "ko": "→ {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "고향 음식을 못 먹은 지 6개월 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "고향 음식을 못 먹은 지 6개월 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "고향 음식을 안 먹는 지 6개월 됐어요"
+            }
+          ],
+          "en": "It has been six months since I last ate food from home.",
+          "grammar": "The length is followed by 되다, not 있다: 6개월 됐어요.",
+          "why": "고향 음식을 못 먹은 지 6개월 됐어요 keeps 못 inside the modifier. 고향 음식을 못 먹은 지 6개월 있어요 uses the wrong verb for elapsed time — in Korean time becomes rather than is."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "2주일 동안 부모님께 전화를 못 드렸어요."
+            },
+            {
+              "ko": "→ {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "부모님께 전화를 못 드는 지 2주일 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "부모님을 전화를 못 드린 지 2주일 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "부모님께 전화를 못 드린 지 2주일 됐어요"
+            }
+          ],
+          "en": "It has been two weeks since I last phoned my parents.",
+          "grammar": "드리다 is the humble 주다, and its past modifier is 드린.",
+          "why": "부모님께 전화를 못 드린 지 keeps 께, the honorific 에게 — a call goes *to* one’s parents. 부모님을 would make them the thing being phoned rather than the people receiving it."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "한 달 동안 청소를 안 했어요."
+            },
+            {
+              "ko": "→ {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "청소를 안 한 지 한 달 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "청소를 안 한 지 한 달 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "청소를 안 하는 지 한 달 됐어요"
+            }
+          ],
+          "en": "It has been a month since I last cleaned.",
+          "grammar": "안 sits in front of the verb and stays there under the modifier: 안 한 지.",
+          "why": "청소를 안 한 지 한 달 됐어요 keeps 안 in front of the verb it negates. 청소를 안 한 지 한 달 있어요 measures the time with the wrong verb, and 안 하는 지 is the present."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "세 달 전부터 담배를 안 피웠어요."
+            },
+            {
+              "ko": "→ {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "담배를 안 피운 지 세 달 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "담배를 안 피는 지 세 달 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "담배가 안 피운 지 세 달 됐어요"
+            }
+          ],
+          "en": "It has been three months since I stopped smoking.",
+          "grammar": "담배를 피우다 is the whole phrase — 피다 on its own is what a flower does.",
+          "why": "담배를 안 피운 지 세 달 됐어요 uses 피우다, the verb for smoking. 담배를 안 피는 지 uses 피다, which is the verb in 꽃이 피다 and cannot take 담배."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "ko": "오래 전부터 술을 안 마셨어요."
+            },
+            {
+              "ko": "→ {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "술을 안 마신 지 오래했어요"
+            },
+            {
+              "id": "b",
+              "ko": "술을 안 마시는 지 오래됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "술을 안 마신 지 오래됐어요"
+            }
+          ],
+          "en": "It has been a long time since I last drank.",
+          "grammar": "오래되다 is one word, so it is written 오래됐어요 with no space.",
+          "why": "술을 안 마신 지 오래됐어요 is the one row that answers with a word instead of a number, and the word is 오래되다 — a length of time becomes, so 술을 안 마신 지 오래했어요 swaps in a verb that does not measure it, and 마시는 지 is the present."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-grammar-2-1",
+      "section": "문법과 표현 2",
+      "sectionEn": "Grammar 2",
+      "no": "연습 1",
+      "icon": "😲",
+      "pattern": "N(이)나 2",
+      "blurbEn": "A number the speaker thinks is a lot, and the particle that says so.",
+      "instructionKo": "그림을 보고 [보기]와 같이 대화를 만들어 보세요.",
+      "instructionEn": "Look at the pictures and complete each dialogue as shown in the example.",
+      "noteEn": "The first four rows keep their number in the drawing only — three cups on the desk, a clock at bedtime and another at waking, four dogs, a calendar with its months torn off — and nothing in the dialogue says it. Each of those rows names what the picture shows on its own line, the way 문법과 표현 1 연습 1 names the activity, and the 정답 on printed p.210 settles the count. The last two rows print their numbers and turn the pattern round: B says 밖에 and A answers with 이나 about the same figure.",
+      "example": {
+        "lines": [
+          {
+            "who": "A",
+            "ko": "밥을 좀 더 드릴까요?"
+          },
+          {
+            "who": "B",
+            "ko": "아니요, 벌써 {}."
+          }
+        ],
+        "answerKo": "두 그릇이나 먹었어요",
+        "en": "A: Shall I give you some more rice? B: No thank you, I have had two whole bowls."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "커피 세 잔"
+            },
+            {
+              "who": "A",
+              "ko": "커피 마시러 갈까요?"
+            },
+            {
+              "who": "B",
+              "ko": "저는 안 마실래요. 벌써 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "세 잔이나 마셨어요"
+            },
+            {
+              "id": "b",
+              "ko": "세 잔밖에 안 마셨어요"
+            },
+            {
+              "id": "c",
+              "ko": "세 잔이 마셨어요"
+            }
+          ],
+          "en": "A: Shall we go for a coffee? B: Not for me. I have had three cups already.",
+          "grammar": "잔 is the counter for a drink, and 이나 goes after the counter.",
+          "why": "세 잔이나 마셨어요 is a reason to refuse a fourth. 세 잔밖에 안 마셨어요 says three is hardly any, which would be a reason to accept, and 세 잔이 마셨어요 makes the cups the ones doing the drinking."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "열두 시간"
+            },
+            {
+              "who": "A",
+              "ko": "어제 잘 잤어요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, 피곤해서 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "열두 시간밖에 못 잤어요"
+            },
+            {
+              "id": "b",
+              "ko": "열두 시간이나 잤어요"
+            },
+            {
+              "id": "c",
+              "ko": "열두 시간이 잤어요"
+            }
+          ],
+          "en": "A: Did you sleep well last night? B: Yes — I was so tired I slept twelve hours.",
+          "grammar": "After a vowel the particle is 나; after a consonant, 이나 — 시간이나.",
+          "why": "열두 시간이나 잤어요 makes twelve hours the surprise it is. 열두 시간이 잤어요 turns the hours into the subject, as if the time had done the sleeping."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "강아지 네 마리"
+            },
+            {
+              "who": "A",
+              "ko": "집에 강아지가 있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "네, {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "네 마리이나 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "네 마리나 없어요"
+            },
+            {
+              "id": "c",
+              "ko": "네 마리나 있어요"
+            }
+          ],
+          "en": "A: Do you have a dog at home? B: Yes — four of them.",
+          "grammar": "마리 is the counter for animals, and 이나 follows it as 나 after the vowel.",
+          "why": "네 마리나 있어요 answers a yes-or-no question with four dogs. 네 마리이나 puts the consonant form after a vowel, and 네 마리나 없어요 contradicts the 네 in front of it."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "그림",
+              "ko": "5개월"
+            },
+            {
+              "who": "A",
+              "ko": "한국어 배운 지 얼마나 됐어요?"
+            },
+            {
+              "who": "B",
+              "ko": "벌써 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "5개월이나 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "5개월이나 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "5개월밖에 안 됐어요"
+            }
+          ],
+          "en": "A: How long have you been learning Korean? B: Five whole months already.",
+          "grammar": "개월 is the Sino-Korean month counter, so 5개월 is read 오개월.",
+          "why": "5개월이나 됐어요 answers the chapter’s own 한 지 question with the chapter’s own particle. 5개월밖에 안 됐어요 is the same five months counted as not much."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "하루에 몇 시간 공부해요?"
+            },
+            {
+              "who": "B",
+              "ko": "시간이 없어서 두 시간밖에 못해요."
+            },
+            {
+              "who": "A",
+              "ko": "{}? 저는 30분밖에 안 해요."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "두 시간밖에 공부해요"
+            },
+            {
+              "id": "b",
+              "ko": "두 시간이나 공부해요"
+            },
+            {
+              "id": "c",
+              "ko": "두 시간이 공부해요"
+            }
+          ],
+          "en": "A: How many hours a day do you study? B: I have no time — only two hours. A: Two whole hours? I only manage thirty minutes.",
+          "grammar": "밖에 and 이나 are the same number seen from two sides, and only 이나 takes a positive verb.",
+          "why": "두 시간이나 공부해요 is A finding a lot in what B called a little. 두 시간밖에 공부해요 is not Korean at all: 밖에 always needs a negative behind it."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "who": "A",
+              "ko": "모자가 정말 많네요. 모자가 몇 개 있어요?"
+            },
+            {
+              "who": "B",
+              "ko": "별로 많지 않아요. 열두 개밖에 없어요."
+            },
+            {
+              "who": "A",
+              "ko": "{}? 저는 두 개밖에 없어요."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "열두 개밖에 있어요"
+            },
+            {
+              "id": "b",
+              "ko": "열두 개이나 있어요"
+            },
+            {
+              "id": "c",
+              "ko": "열두 개나 있어요"
+            }
+          ],
+          "en": "A: What a lot of hats. How many have you got? B: Not that many — only twelve. A: Twelve? I have only got two.",
+          "grammar": "개 ends in a vowel, so the particle is 나 and not 이나: 열두 개나.",
+          "why": "열두 개나 있어요 is the same twelve B has just called 별로 많지 않아요. 열두 개밖에 있어요 breaks the rule that 밖에 needs a negative, and 열두 개이나 puts the consonant form of the particle after the vowel of 개."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-grammar-3-1",
+      "section": "문법과 표현 3",
+      "sectionEn": "Grammar 3",
+      "no": "연습 1",
+      "icon": "✍️",
+      "pattern": "A-다",
+      "blurbEn": "Adjectives into the plain style, where the ending is simply 다.",
+      "instructionKo": "[보기]와 같이 문장을 바꿔 써 보세요.",
+      "instructionEn": "Rewrite the sentences as shown in the example.",
+      "noteEn": "An adjective in the plain style is its dictionary form and nothing else — no -ㄴ다, no -는다. Nearly every row turns on that, and the traps in it are the irregular stems: 아름답다 is a ㅂ-irregular whose 해요체 hides the ㅂ, 까맣다 is a ㅎ-irregular, and 다르다 is a 르-irregular. The 정답 on printed p.210 gives all six.",
+      "example": {
+        "lines": [
+          {
+            "ko": "봄은 따뜻합니다."
+          },
+          {
+            "ko": "→ 봄은 {}."
+          }
+        ],
+        "answerKo": "따뜻하다",
+        "en": "Spring is warm. → (plain style) Spring is warm."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "제주도는 아름다워요."
+            },
+            {
+              "ko": "→ 제주도는 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "아름다웁다"
+            },
+            {
+              "id": "b",
+              "ko": "아름답다"
+            },
+            {
+              "id": "c",
+              "ko": "아름다운다"
+            }
+          ],
+          "en": "Jeju is beautiful.",
+          "grammar": "아름답다 is a ㅂ-irregular: the ㅂ only becomes 우 in front of a vowel.",
+          "why": "아름답다 is the dictionary form, and the plain style of an adjective is exactly that. 아름다웁다 keeps the 우 that only belongs in 아름다워요, and 아름다운다 puts a verb ending on an adjective."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "한국 사람의 눈은 까매요."
+            },
+            {
+              "ko": "→ 한국 사람의 눈은 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "까맣다"
+            },
+            {
+              "id": "b",
+              "ko": "까매다"
+            },
+            {
+              "id": "c",
+              "ko": "까만다"
+            }
+          ],
+          "en": "Koreans have dark eyes.",
+          "grammar": "까맣다 is a ㅎ-irregular, and the ㅎ is back in the dictionary form.",
+          "why": "까맣다 restores the ㅎ that 까매요 swallowed. 까매다 keeps the contracted vowel of the 해요체, which never appears in front of 다."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "저는 동생과 성격이 아주 달라요."
+            },
+            {
+              "ko": "→ {} 동생과 성격이 아주 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "저는"
+            },
+            {
+              "id": "b",
+              "ko": "제가"
+            },
+            {
+              "id": "c",
+              "ko": "나는"
+            }
+          ],
+          "answer2": "e",
+          "choices2": [
+            {
+              "id": "d",
+              "ko": "달르다"
+            },
+            {
+              "id": "e",
+              "ko": "다르다"
+            },
+            {
+              "id": "f",
+              "ko": "다른다"
+            }
+          ],
+          "en": "My brother and I have very different personalities.",
+          "grammar": "In the plain style 저는 becomes 나는, and 다르다 is the dictionary form the 르-irregular hides.",
+          "why": "The plain style changes the pronoun as well as the ending, so 나는 and not 저는. 달르다 copies the doubled ㄹ out of 달라요, which only appears in front of 아/어."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "동생은 지금 인터넷을 하고 있어요."
+            },
+            {
+              "ko": "→ 동생은 지금 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "인터넷을 하고 있는다"
+            },
+            {
+              "id": "b",
+              "ko": "인터넷을 하고 있다"
+            },
+            {
+              "id": "c",
+              "ko": "인터넷을 하고 있는다고"
+            }
+          ],
+          "en": "My brother is on the internet at the moment.",
+          "grammar": "The 있다 of -고 있다 stays 있다 in the plain style: 하고 있다.",
+          "why": "하고 있다 is how the 정답 and ordinary written Korean both give it — the 있다 of -고 있다 keeps its shape. 인터넷을 하고 있는다 gives it the -는다 of a plain verb, and 인터넷을 하고 있는다고 adds a quoting ending nobody asked for."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "ko": "비빔밥을 먹어 본 적이 없습니다."
+            },
+            {
+              "ko": "→ 비빔밥을 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "먹어 본 적이 없다"
+            },
+            {
+              "id": "b",
+              "ko": "먹어 본 적이 없는다"
+            },
+            {
+              "id": "c",
+              "ko": "먹어 본 적이 안 있다"
+            }
+          ],
+          "en": "I have never tried bibimbap.",
+          "grammar": "없다 is an adjective in Korean grammar, so the plain style is 없다, not 없는다.",
+          "why": "먹어 본 적이 없다 is the plain style of 없습니다, and 없다 is already the negative of this 있다, so 먹어 본 적이 안 있다 is not Korean."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "ko": "할머니가 조금 피곤하신 것 같습니다."
+            },
+            {
+              "ko": "→ 할머니가 조금 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "피곤하신 것 같는다"
+            },
+            {
+              "id": "b",
+              "ko": "피곤하신 것 같은다"
+            },
+            {
+              "id": "c",
+              "ko": "피곤하신 것 같다"
+            }
+          ],
+          "en": "Grandmother seems a little tired.",
+          "grammar": "같다 is an adjective, so the plain style is 같다 and the -시- stays in 피곤하신.",
+          "why": "What has to go into the plain style is the last word, 같습니다, and 같다 is an adjective. 피곤하신 것 같는다 treats it as a verb; the honorific -시- is untouched either way."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-grammar-3-2",
+      "section": "문법과 표현 3",
+      "sectionEn": "Grammar 3",
+      "no": "연습 2",
+      "icon": "🏃",
+      "pattern": "V-ㄴ다/는다",
+      "blurbEn": "Verbs, where the plain style does add something — and which thing depends on the stem.",
+      "instructionKo": "[보기]와 같이 문장을 바꿔 써 보세요.",
+      "instructionEn": "Rewrite the sentences as shown in the example.",
+      "noteEn": "A verb takes -ㄴ다 after a vowel and -는다 after a consonant, and one row is there to catch the consonant stem that still takes -ㄴ다: 놀다 drops its ㄹ in front of the ㄴ and comes out 논다. The 정답 on printed p.210 gives all six, including 난 for 전 in the second row.",
+      "example": {
+        "lines": [
+          {
+            "ko": "저는 여름을 좋아해요."
+          },
+          {
+            "ko": "→ 나는 {}."
+          }
+        ],
+        "answerKo": "여름을 좋아한다",
+        "en": "I like summer. → (plain style) I like summer."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "우리 형은 회사에 다녀요."
+            },
+            {
+              "ko": "→ 우리 형은 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "회사에 다닌다"
+            },
+            {
+              "id": "b",
+              "ko": "회사에 다니는다"
+            },
+            {
+              "id": "c",
+              "ko": "회사에 다니다"
+            }
+          ],
+          "en": "My older brother works at a company.",
+          "grammar": "다니다 is a vowel stem, so it takes -ㄴ다: 다니 + ㄴ다.",
+          "why": "다닌다 is the vowel-stem form. 회사에 다니는다 uses the consonant-stem ending on a vowel stem, and 다니다 is the dictionary form, which for a verb is not the plain style at all."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "전 그 사람의 말을 믿지 않아요."
+            },
+            {
+              "ko": "→ {} 그 사람의 말을 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "전"
+            },
+            {
+              "id": "b",
+              "ko": "난"
+            },
+            {
+              "id": "c",
+              "ko": "제가"
+            }
+          ],
+          "answer2": "e",
+          "choices2": [
+            {
+              "id": "d",
+              "ko": "믿지 않다"
+            },
+            {
+              "id": "e",
+              "ko": "믿지 않는다"
+            },
+            {
+              "id": "f",
+              "ko": "믿지 않은다"
+            }
+          ],
+          "en": "I do not believe what that person says.",
+          "grammar": "전 is 저는 contracted and its plain-style twin is 난; 믿지 않아요 becomes 믿지 않는다.",
+          "why": "않다 behaves as a verb here because 믿다 is one, so it takes -는다 and gives 믿지 않는다. 믿지 않다 leaves it in the dictionary form."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "신발이 참 편해 보이네요."
+            },
+            {
+              "ko": "→ 신발이 참 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "편해 보이는다"
+            },
+            {
+              "id": "b",
+              "ko": "편해 보이다"
+            },
+            {
+              "id": "c",
+              "ko": "편해 보인다"
+            }
+          ],
+          "en": "Those shoes look really comfortable.",
+          "grammar": "보이다 is a vowel stem: 보인다.",
+          "why": "편해 보인다 is 보이다 with -ㄴ다. The -네요 of the original is a reaction ending and simply disappears; 편해 보이는다 uses the wrong half of the rule."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "아이들이 밖에서 놀아요."
+            },
+            {
+              "ko": "→ 아이들이 밖에서 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "논다"
+            },
+            {
+              "id": "b",
+              "ko": "놀는다"
+            },
+            {
+              "id": "c",
+              "ko": "놀다"
+            }
+          ],
+          "en": "The children are playing outside.",
+          "grammar": "놀다 drops its ㄹ in front of the ㄴ, the same way 놀다 gives 노는 and 놉니다.",
+          "why": "논다 is 놀다 with the ㄹ gone. 놀는다 treats the ㄹ as an ordinary consonant, which is the mistake this row exists to catch — a ㄹ stem takes -ㄴ다 like a vowel stem and loses its ㄹ doing it — and 놀다 is the dictionary form, which for a verb is never the plain style."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "ko": "나나는 긴 머리가 잘 어울려요."
+            },
+            {
+              "ko": "→ 나나는 긴 머리가 잘 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "어울려다"
+            },
+            {
+              "id": "b",
+              "ko": "어울린다"
+            },
+            {
+              "id": "c",
+              "ko": "어울리는다"
+            }
+          ],
+          "en": "Long hair really suits Nana.",
+          "grammar": "어울리다 is a vowel stem, so the plain style is 어울린다.",
+          "why": "어울린다 comes from the stem 어울리, not from the 해요체 — 어울려다 keeps the 려 that only exists in 어울려요."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "ko": "길이 복잡할 테니까 서둘러야 돼요."
+            },
+            {
+              "ko": "→ 길이 복잡할 테니까 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "서둘러야 돼다"
+            },
+            {
+              "id": "b",
+              "ko": "서둘러야 되는다"
+            },
+            {
+              "id": "c",
+              "ko": "서둘러야 된다"
+            }
+          ],
+          "en": "The roads will be busy, so we have to hurry.",
+          "grammar": "되다 is a vowel stem, so 돼요 becomes 된다 and not 돼다.",
+          "why": "서둘러야 된다 puts the plain style on 되다, the last word of the sentence. 서둘러야 돼다 keeps the contracted 돼, which only forms where 되 meets 어, as in 돼요 and 됐어요."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-grammar-3-3",
+      "section": "문법과 표현 3",
+      "sectionEn": "Grammar 3",
+      "no": "연습 3",
+      "icon": "📝",
+      "pattern": "A-다, V-ㄴ다/는다, N(이)다",
+      "blurbEn": "Past, future and the copula, ten rows with all three mixed together.",
+      "instructionKo": "[보기]와 같이 문장을 바꿔 써 보세요.",
+      "instructionEn": "Rewrite the sentences as shown in the example.",
+      "noteEn": "Past tense takes no -ㄴ다 at all — 놓쳤다, not 놓쳤는다 — because the -았/었- has already closed the verb. The future is 것이다 in full rather than 거예요, and the copula is usually 다 after a vowel and 이다 after a consonant. Two rows also swap 저희 for 우리 and 저는 for 나는. The 정답 on printed p.210 gives all ten.",
+      "example": {
+        "lines": [
+          {
+            "ko": "눈이 많이 내렸어요."
+          },
+          {
+            "ko": "→ 눈이 많이 {}."
+          }
+        ],
+        "answerKo": "내렸다",
+        "en": "It snowed a lot. → (plain style) It snowed a lot."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "ko": "늦게 일어나서 아홉 시 기차를 놓쳤어요."
+            },
+            {
+              "ko": "→ 늦게 일어나서 아홉 시 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "기차를 놓쳤다"
+            },
+            {
+              "id": "b",
+              "ko": "기차를 놓친다"
+            },
+            {
+              "id": "c",
+              "ko": "기차를 놓쳤는다"
+            }
+          ],
+          "en": "I got up late and missed the nine o’clock train.",
+          "grammar": "The past takes no -ㄴ다: 놓쳤어요 → 놓쳤다.",
+          "why": "놓쳤다 is the past with 어요 simply removed. 기차를 놓친다 is the present, and 놓쳤는다 adds an ending the past never takes."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "ko": "친구를 집까지 데려다 주었어요."
+            },
+            {
+              "ko": "→ 친구를 집까지 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "데려다 준다"
+            },
+            {
+              "id": "b",
+              "ko": "데려다 주었는다"
+            },
+            {
+              "id": "c",
+              "ko": "데려다 주었다"
+            }
+          ],
+          "en": "I saw my friend home.",
+          "grammar": "주었어요 is past, so the plain style is 주었다 — the 어요 goes and nothing is added.",
+          "why": "데려다 주었다 is the past with 어요 removed. 데려다 준다 turns it into the present, and 데려다 주었는다 adds an ending the past never takes."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "ko": "2급에서 공부한 지 벌써 세 달이 되었습니다."
+            },
+            {
+              "ko": "→ 2급에서 공부한 지 벌써 세 달이 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "된다"
+            },
+            {
+              "id": "b",
+              "ko": "되었다"
+            },
+            {
+              "id": "c",
+              "ko": "되었는다"
+            }
+          ],
+          "en": "It has already been three months since I started studying in level 2.",
+          "grammar": "되었습니다 is past, so the plain style is 되었다 with no added ending.",
+          "why": "되었다 keeps the past and drops only the 습니다. 된다 is the plain style of 됩니다, not of 되었습니다, and 되었는다 adds -는다 to a past."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "ko": "어제 저희 부모님이 한국에 오셨어요."
+            },
+            {
+              "ko": "→ 어제 {} 부모님이 한국에 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "우리"
+            },
+            {
+              "id": "b",
+              "ko": "저희"
+            },
+            {
+              "id": "c",
+              "ko": "제"
+            }
+          ],
+          "answer2": "e",
+          "choices2": [
+            {
+              "id": "d",
+              "ko": "오신다"
+            },
+            {
+              "id": "e",
+              "ko": "오셨다"
+            },
+            {
+              "id": "f",
+              "ko": "오셨는다"
+            }
+          ],
+          "en": "My parents came to Korea yesterday.",
+          "grammar": "저희 is the humble 우리, and the plain style trades it back for 우리; -시- stays.",
+          "why": "The plain style drops the humility but keeps the honour: 우리 부모님 for the speaker’s own side, and 오셨다 with the -시- for the parents. 오신다 is the present, and 오셨는다 adds -는다 to a past."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "ko": "방학 때 여행을 했으면 좋겠어요."
+            },
+            {
+              "ko": "→ 방학 때 여행을 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "했으면 좋겠는다"
+            },
+            {
+              "id": "b",
+              "ko": "했으면 좋는다"
+            },
+            {
+              "id": "c",
+              "ko": "했으면 좋겠다"
+            }
+          ],
+          "en": "I would like to travel during the holidays.",
+          "grammar": "좋다 is an adjective, and 좋겠다 keeps it one — no -는다.",
+          "why": "했으면 좋겠다 is the whole wish with only 어요 removed. 좋겠는다 puts a verb ending on an adjective — an easy slip, with the verb 했으면 just in front of it."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "ko": "저는 조금 후에 집에 갈 거예요."
+            },
+            {
+              "ko": "→ {} 조금 후에 집에 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "저는"
+            },
+            {
+              "id": "b",
+              "ko": "나는"
+            },
+            {
+              "id": "c",
+              "ko": "제가"
+            }
+          ],
+          "answer2": "d",
+          "choices2": [
+            {
+              "id": "d",
+              "ko": "갈 것이다"
+            },
+            {
+              "id": "e",
+              "ko": "갈 것다"
+            },
+            {
+              "id": "f",
+              "ko": "갈 거이다"
+            }
+          ],
+          "en": "I am going home in a little while.",
+          "grammar": "거예요 is 것이에요 contracted, and writing puts it back: 것이다.",
+          "why": "갈 것이다 is 갈 거예요 written out in full: 거 is 것 contracted and 예요 is 이에요. 갈 것다 drops the copula’s 이 after a consonant, 갈 거이다 undoes only half the contraction, and 나는 replaces 저는 in the same move."
+        },
+        {
+          "n": 7,
+          "lines": [
+            {
+              "ko": "지금 떠나면 늦지 않을 거예요."
+            },
+            {
+              "ko": "→ 지금 떠나면 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "늦지 않을 것이다"
+            },
+            {
+              "id": "b",
+              "ko": "늦지 않을 것인다"
+            },
+            {
+              "id": "c",
+              "ko": "늦지 않았다"
+            }
+          ],
+          "en": "If we leave now we will not be late.",
+          "grammar": "것이다 again, this time behind a negative: 않을 것이다.",
+          "why": "늦지 않을 것이다 keeps the future that 지금 떠나면 looks forward to. 늦지 않았다 puts it in the past, and 늦지 않을 것인다 treats the copula as a verb."
+        },
+        {
+          "n": 8,
+          "lines": [
+            {
+              "ko": "내일부터 설 연휴예요."
+            },
+            {
+              "ko": "→ 내일부터 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "설 연휴한다"
+            },
+            {
+              "id": "b",
+              "ko": "설 연휴인다"
+            },
+            {
+              "id": "c",
+              "ko": "설 연휴다"
+            }
+          ],
+          "en": "The New Year holidays start tomorrow.",
+          "grammar": "연휴 ends in a vowel, so the copula usually drops its 이: 연휴다.",
+          "why": "설 연휴다 is how the 정답 prints it: after a vowel the copula usually drops its 이, the rule that gives 학교다 beside 방학이다. 설 연휴인다 treats the copula as a verb, and 설 연휴한다 turns the holiday into something you do."
+        },
+        {
+          "n": 9,
+          "lines": [
+            {
+              "ko": "여기는 주차장이 아니에요."
+            },
+            {
+              "ko": "→ 여기는 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "주차장이 아니는다"
+            },
+            {
+              "id": "b",
+              "ko": "주차장이 아니다"
+            },
+            {
+              "id": "c",
+              "ko": "주차장이 아닌다"
+            }
+          ],
+          "en": "This is not a car park.",
+          "grammar": "아니다 is already the dictionary form of the negative copula.",
+          "why": "주차장이 아니다 changes nothing but the ending, because 아니다 is an adjective-like word that takes no -ㄴ다. 아닌다 applies the verb rule to it."
+        },
+        {
+          "n": 10,
+          "lines": [
+            {
+              "ko": "히엔 씨는 한국에 오기 전에 회사원이었습니다."
+            },
+            {
+              "ko": "→ 히엔 씨는 한국에 오기 전에 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "회사원이었다"
+            },
+            {
+              "id": "b",
+              "ko": "회사원이다"
+            },
+            {
+              "id": "c",
+              "ko": "회사원였다"
+            }
+          ],
+          "en": "Before coming to Korea, Hien was an office worker.",
+          "grammar": "회사원 ends in a consonant, so the past copula is 이었다.",
+          "why": "회사원이었다 is the copula in the past with the 이 kept, because 원 ends in a consonant. 회사원였다 is the contraction that only works after a vowel, as in 가수였다."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-grammar-3-4",
+      "section": "문법과 표현 3",
+      "sectionEn": "Grammar 3",
+      "no": "연습 4",
+      "icon": "📖",
+      "pattern": "A-다, V-ㄴ다/는다, N(이)다",
+      "blurbEn": "Four short pieces of writing, seventeen blanks, and no word box to choose from.",
+      "instructionKo": "[보기]와 같이 알맞는 단어를 넣어 글을 완성해 보세요.",
+      "instructionEn": "Complete the text with the words as shown in the example.",
+      "noteEn": "The hardest exercise in the unit, and the page gives no help at all: there is no word box, so the verb has to come from the sense of the passage and then be put into the plain style. It is taken one blank at a time here, the way Unit 17 took its eight-by-six conjugation table, so a learner who gets one wrong finds out which one. The 정답 on printed p.210 lists the seventeen answers passage by passage.",
+      "example": {
+        "lines": [
+          {
+            "who": "글 0",
+            "ko": "남대문시장은 서울에서 제일 큰 시장이다. 물건이 많고 값도 싸기 때문에 사람들이 많이 {}."
+          }
+        ],
+        "answerKo": "간다",
+        "en": "Namdaemun Market is the biggest market in Seoul. It has plenty of goods and low prices, so a lot of people go there."
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "글 1",
+              "ko": "한국에 온 지 벌써 두 학기가 다 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "되었다"
+            },
+            {
+              "id": "b",
+              "ko": "되는다"
+            },
+            {
+              "id": "c",
+              "ko": "되었는다"
+            }
+          ],
+          "en": "Two semesters have already gone by since I came to Korea.",
+          "grammar": "되다 is a vowel stem, so its plain style is 된다 now and 되었다 in the past; the 정답 takes the past.",
+          "why": "되었다 is the past the 정답 prints: the two semesters are complete. 되는다 puts the consonant-stem ending on the vowel stem 되, and 되었는다 adds -는다 to a past."
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "글 1",
+              "ko": "처음보다 한국 생활에 많이 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "익숙해졌는다"
+            },
+            {
+              "id": "b",
+              "ko": "익숙해졌다"
+            },
+            {
+              "id": "c",
+              "ko": "익숙해다"
+            }
+          ],
+          "en": "I have got much more used to life in Korea than at the start.",
+          "grammar": "익숙해지다 is 익숙하다 becoming, and 처음보다 needs the becoming to be done.",
+          "why": "익숙해졌다 is the change completed, which is what 처음보다 compares against. 익숙해졌는다 adds -는다 to a past, and 익숙해다 has lost the 지 that makes it a change."
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "글 1",
+              "ko": "좋은 친구도 많이 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "사귀는다"
+            },
+            {
+              "id": "b",
+              "ko": "사겼다"
+            },
+            {
+              "id": "c",
+              "ko": "사귀었다"
+            }
+          ],
+          "en": "I have made a lot of good friends too.",
+          "grammar": "사귀다 in the past is 사귀었다: 귀 and 었 have no standard contraction, so both are written.",
+          "why": "사귀었다 keeps both syllables. 사겼다 is a contraction the spelling rules do not allow, and 사귀는다 puts the consonant-stem ending on a vowel stem."
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "글 1",
+              "ko": "한국에서 생활하는 것이 아주 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "즐겁다"
+            },
+            {
+              "id": "b",
+              "ko": "즐거운다"
+            },
+            {
+              "id": "c",
+              "ko": "즐겁는다"
+            }
+          ],
+          "en": "Living in Korea is great fun.",
+          "grammar": "즐겁다 is an adjective, so the plain style is the dictionary form.",
+          "why": "즐겁다 stands as it is. 즐겁는다 and 즐거운다 both put verb endings on an adjective, and the ㅂ-irregular only shows up in front of a vowel anyway."
+        },
+        {
+          "n": 5,
+          "lines": [
+            {
+              "who": "글 2",
+              "ko": "한국에서 1월 1일은 큰 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "명절다"
+            },
+            {
+              "id": "b",
+              "ko": "명절이다"
+            },
+            {
+              "id": "c",
+              "ko": "명절인다"
+            }
+          ],
+          "en": "The first of January is a big holiday in Korea.",
+          "grammar": "명절 ends in a consonant, so the copula keeps its 이: 명절이다.",
+          "why": "명절이다 is the copula after a consonant. 명절다 drops a 이 that 절 needs, and 명절인다 treats the copula as a verb."
+        },
+        {
+          "n": 6,
+          "lines": [
+            {
+              "who": "글 2",
+              "ko": "한국 사람들은 설날에 별일이 없으면 모두 고향에 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "내려가다"
+            },
+            {
+              "id": "b",
+              "ko": "내려간는다"
+            },
+            {
+              "id": "c",
+              "ko": "내려간다"
+            }
+          ],
+          "en": "Unless something comes up, Koreans all go down to their home towns at New Year.",
+          "grammar": "내려가다 is a vowel stem, so the plain style is 내려간다.",
+          "why": "내려간다 is the vowel-stem -ㄴ다. 내려가다 is the dictionary form, which for a verb is never the plain style."
+        },
+        {
+          "n": 7,
+          "lines": [
+            {
+              "who": "글 2",
+              "ko": "그래서 길이 많이 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "막힌다"
+            },
+            {
+              "id": "b",
+              "ko": "막히다"
+            },
+            {
+              "id": "c",
+              "ko": "막힌는다"
+            }
+          ],
+          "en": "So the roads get very busy.",
+          "grammar": "막히다 is the passive of 막다 and a vowel stem: 막힌다.",
+          "why": "막힌다 is what roads do. 막히다 leaves it in the dictionary, and 막힌는다 doubles the ending."
+        },
+        {
+          "n": 8,
+          "lines": [
+            {
+              "who": "글 2",
+              "ko": "설날 아침에는 어른들께 세배를 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "하는다"
+            },
+            {
+              "id": "b",
+              "ko": "한다"
+            },
+            {
+              "id": "c",
+              "ko": "하다"
+            }
+          ],
+          "en": "On New Year’s morning you bow to your elders.",
+          "grammar": "하다 is a vowel stem, so the plain style is 한다.",
+          "why": "한다 is 하다 with -ㄴ다. 하는다 uses the consonant-stem ending, which is the slip this row and the next both test."
+        },
+        {
+          "n": 9,
+          "lines": [
+            {
+              "who": "글 2",
+              "ko": "그리고 떡국을 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "먹은다"
+            },
+            {
+              "id": "b",
+              "ko": "먹다"
+            },
+            {
+              "id": "c",
+              "ko": "먹는다"
+            }
+          ],
+          "en": "And you eat tteokguk.",
+          "grammar": "먹다 ends in a consonant, so the ending is -는다: 먹는다.",
+          "why": "먹는다 is the consonant-stem half of the rule that gives 한다 for a vowel stem. 먹은다 invents a form out of the modifier 먹은."
+        },
+        {
+          "n": 10,
+          "lines": [
+            {
+              "who": "글 3",
+              "ko": "감기에 걸리지 않으려면 먼저 손을 깨끗하게 씻어야 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "한다"
+            },
+            {
+              "id": "b",
+              "ko": "하는다"
+            },
+            {
+              "id": "c",
+              "ko": "하다"
+            }
+          ],
+          "en": "To avoid catching a cold you first have to wash your hands properly.",
+          "grammar": "-아야/어야 하다 keeps 하다, and the plain style makes it 한다.",
+          "why": "씻어야 한다 is the obligation frame with 하다 at the end of it, put in the plain style. 하는다 is the consonant-stem ending on a vowel stem, and 하다 is the dictionary form, which for a verb is never the plain style."
+        },
+        {
+          "n": 11,
+          "lines": [
+            {
+              "who": "글 3",
+              "ko": "그리고 사람이 많은 곳에 가지 않는 것이 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "좋는다"
+            },
+            {
+              "id": "b",
+              "ko": "좋다"
+            },
+            {
+              "id": "c",
+              "ko": "좋은다"
+            }
+          ],
+          "en": "And it is better not to go where there are a lot of people.",
+          "grammar": "좋다 is an adjective: the plain style is 좋다 itself.",
+          "why": "좋다 needs no ending at all. 좋는다 is the easy slip here, because the sentence in front of it is full of verbs."
+        },
+        {
+          "n": 12,
+          "lines": [
+            {
+              "who": "글 3",
+              "ko": "아주 추운 날에는 두꺼운 옷을 하나 입는 것보다 얇은 옷을 많이 입는 것이 더 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "따뜻한다"
+            },
+            {
+              "id": "b",
+              "ko": "따뜻하는다"
+            },
+            {
+              "id": "c",
+              "ko": "따뜻하다"
+            }
+          ],
+          "en": "On a very cold day, several thin layers keep you warmer than one thick coat.",
+          "grammar": "따뜻하다 is a 하다 adjective, so it stays 따뜻하다.",
+          "why": "따뜻하다 is an adjective even though it ends in 하다, and 따뜻한다 is what happens if you treat it as the verb 하다. The 더 in front of it does not change the ending."
+        },
+        {
+          "n": 13,
+          "lines": [
+            {
+              "who": "글 4",
+              "ko": "나는 지난가을에 제주도에 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "갔다"
+            },
+            {
+              "id": "b",
+              "ko": "간다"
+            },
+            {
+              "id": "c",
+              "ko": "갔는다"
+            }
+          ],
+          "en": "I went to Jeju last autumn.",
+          "grammar": "지난가을 puts it in the past, and the past takes no -ㄴ다: 갔다.",
+          "why": "갔다 is the past on its own. 간다 is a present tense and would contradict 지난가을 in the same sentence."
+        },
+        {
+          "n": 14,
+          "lines": [
+            {
+              "who": "글 4",
+              "ko": "제주도에 도착해서 먼저 한라산에 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "올라가는다"
+            },
+            {
+              "id": "b",
+              "ko": "올라갔다"
+            },
+            {
+              "id": "c",
+              "ko": "올라갔는다"
+            }
+          ],
+          "en": "When I arrived in Jeju I went up Hallasan first.",
+          "grammar": "올라가다 in the past is 올라갔다 — the 아 of 가 absorbs the 았.",
+          "why": "올라갔다 follows 갔다 from the row before. 올라가는다 puts the consonant-stem ending on the vowel stem 가, and 올라갔는다 adds -는다 to a past."
+        },
+        {
+          "n": 15,
+          "lines": [
+            {
+              "who": "글 4",
+              "ko": "한라산은 높아서 올라가기가 {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "힘든다"
+            },
+            {
+              "id": "b",
+              "ko": "힘들었는다"
+            },
+            {
+              "id": "c",
+              "ko": "힘들었다"
+            }
+          ],
+          "en": "Hallasan is high, so climbing it was hard work.",
+          "grammar": "힘들다 is an adjective, and the past of an adjective is still just -았/었다.",
+          "why": "힘들었다 is the past the climb needs. 힘든다 puts a verb ending on the adjective 힘들다, and 힘들었는다 adds one to a past that has already closed."
+        },
+        {
+          "n": 16,
+          "lines": [
+            {
+              "who": "글 4",
+              "ko": "한라산에서 본 바다가 참 {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "아름다웠다"
+            },
+            {
+              "id": "b",
+              "ko": "아름다운다"
+            },
+            {
+              "id": "c",
+              "ko": "아름다웠는다"
+            }
+          ],
+          "en": "The sea seen from Hallasan was really beautiful.",
+          "grammar": "아름답다 is a ㅂ-irregular, so the past is 아름다웠다.",
+          "why": "아름다웠다 shows the ㅂ turning into 우 in front of the vowel of 었 — the same change that gives 아름다워요. 아름다운다 treats the adjective as a verb, and 아름다웠는다 puts -는다 on a past."
+        },
+        {
+          "n": 17,
+          "lines": [
+            {
+              "who": "글 4",
+              "ko": "다음에 또 가고 {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "싶는다"
+            },
+            {
+              "id": "b",
+              "ko": "싶다"
+            },
+            {
+              "id": "c",
+              "ko": "싶은다"
+            }
+          ],
+          "en": "I want to go again.",
+          "grammar": "싶다 is an adjective, so the plain style is 싶다 with nothing added.",
+          "why": "싶다 closes the passage in the present, because the wanting is now even though the trip was last autumn. 싶는다 treats it as a verb, which 가고 싶다 never is."
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-pattern-1",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 1",
+      "icon": "🎧",
+      "pattern": "V-(으)ㄴ 지",
+      "blurbEn": "A question about when, and a length of time in brackets to answer it with.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "The cue is printed in brackets on the student’s line — (5년), (3개월), (세 시간) — and the answer has to read it aloud with the right set of numbers for its counter: 년 and 개월 take Sino-Korean, so 오 년 and 삼 개월, while 시간 and 달 take native numbers, so 세 시간 and 두 달. The 정답 on printed p.210 writes all four out that way.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "언제 한국에 왔어요?"
+          },
+          {
+            "who": "S",
+            "ko": "(5달) {}."
+          }
+        ],
+        "answerKo": "한국에 온 지 다섯 달 됐어요",
+        "en": "T: When did you come to Korea? — S: (5 months) It has been five months since I came to Korea.",
+        "why": "Played through once so the shape of the exchange is heard before you answer one yourself.",
+        "audio": {
+          "src": "audio/book/2b-u18-p1-0.mp3",
+          "askEnd": 4.4
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "언제 아침을 먹었어요?"
+            },
+            {
+              "who": "S",
+              "ko": "(세 시간) {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "아침을 먹은 지 세 시간 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "아침을 먹는 지 세 시간 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "아침을 먹은 지 세 시간 있어요"
+            }
+          ],
+          "en": "T: When did you have breakfast? — S: (three hours) It has been three hours since I had breakfast.",
+          "grammar": "먹다 is a consonant stem, so the modifier is 먹은.",
+          "why": "아침을 먹은 지 세 시간 됐어요 turns a question about when into an answer about how long. 아침을 먹은 지 세 시간 있어요 would say the speaker has three hours, not that three have passed.",
+          "audio": {
+            "src": "audio/book/2b-u18-p1-1.mp3",
+            "askEnd": 4.52
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "언제부터 안경을 썼어요?"
+            },
+            {
+              "who": "S",
+              "ko": "(5년) {}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "안경을 쓴 지 다섯 년 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "안경을 썼은 지 오 년 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "안경을 쓴 지 오 년 됐어요"
+            }
+          ],
+          "en": "T: How long have you worn glasses? — S: (5 years) It has been five years since I started wearing glasses.",
+          "grammar": "년 takes Sino-Korean numbers, so 5년 is 오 년 and never 다섯 년.",
+          "why": "안경을 쓴 지 오 년 됐어요 reads the digit the way the recording does. 안경을 쓴 지 다섯 년 puts a native number on a counter that only takes the Sino-Korean set, and 썼은 지 carries the past twice.",
+          "audio": {
+            "src": "audio/book/2b-u18-p1-2.mp3",
+            "askEnd": 4.73
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "언제부터 서울에서 살았어요?"
+            },
+            {
+              "who": "S",
+              "ko": "(3개월) {}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "서울에서 살은 지 삼 개월 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "서울에서 산 지 삼 개월 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "서울에서 산 지 세 개월 됐어요"
+            }
+          ],
+          "en": "T: How long have you lived in Seoul? — S: (3 months) It has been three months since I came to live in Seoul.",
+          "grammar": "살다 drops its ㄹ in front of the ㄴ: 산 지, not 살은 지.",
+          "why": "서울에서 산 지 삼 개월 됐어요 has both traps in one line — the ㄹ that disappears and the 개월 that takes Sino-Korean numbers. 서울에서 살은 지 keeps a ㄹ the modifier removes, and 세 개월 is the wrong set of numbers.",
+          "audio": {
+            "src": "audio/book/2b-u18-p1-3.mp3",
+            "askEnd": 5.07
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "언제부터 그 친구를 안 만났어요?"
+            },
+            {
+              "who": "S",
+              "ko": "(두 달) {}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "그 친구를 안 만난 지 두 달 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "그 친구를 만난 지 두 달 안 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "그 친구를 안 만나는 지 두 달 됐어요"
+            }
+          ],
+          "en": "T: How long since you last saw that friend? — S: (two months) It has been two months since I last saw that friend.",
+          "grammar": "안 stays in front of the verb and inside the modifier: 안 만난 지.",
+          "why": "그 친구를 안 만난 지 두 달 됐어요 counts from the last meeting. Moving the negative to the end, as 그 친구를 만난 지 두 달 안 됐어요 does, says they met less than two months ago — the opposite fact.",
+          "audio": {
+            "src": "audio/book/2b-u18-p1-4.mp3",
+            "askEnd": 5.27
+          }
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-pattern-2",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 2",
+      "icon": "🎧",
+      "pattern": "N(이)나 2",
+      "blurbEn": "The teacher states a number; you say it back as more than you expected.",
+      "instructionKo": "[보기]와 같이 대답해 보세요.",
+      "instructionEn": "Answer as shown in the example.",
+      "noteEn": "Every answer is the teacher’s own number and verb with 이나 dropped in after the counter, said back as a question, which makes the drill entirely about where the particle goes and which of 이나 and 나 the counter takes. The 정답 on printed p.210 gives all four.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "교실에 학생이 스무 명 있어요."
+          },
+          {
+            "who": "S",
+            "ko": "{}?"
+          }
+        ],
+        "answerKo": "스무 명이나 있어요",
+        "en": "T: There are twenty students in the classroom. — S: Twenty of them?",
+        "why": "Played through once so the shape of the exchange is heard before you answer one yourself.",
+        "audio": {
+          "src": "audio/book/2b-u18-p2-0.mp3",
+          "askEnd": 3.39
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "저는 매일 세 시간 운동해요."
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "세 시간나 운동해요"
+            },
+            {
+              "id": "b",
+              "ko": "세 시간이나 운동해요"
+            },
+            {
+              "id": "c",
+              "ko": "세 시간밖에 운동해요"
+            }
+          ],
+          "en": "T: I exercise for three hours every day. — S: Three whole hours?",
+          "grammar": "시간 ends in a consonant, so the particle is 이나.",
+          "why": "세 시간이나 운동해요 takes 이나 after a consonant. 세 시간나 uses the vowel form, and 세 시간밖에 운동해요 needs a negative verb that is not there.",
+          "audio": {
+            "src": "audio/book/2b-u18-p2-1.mp3",
+            "askEnd": 3.3
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "한국에 온 지 십 년 됐어요."
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "십 년이나 됐어요"
+            },
+            {
+              "id": "b",
+              "ko": "십 년나 됐어요"
+            },
+            {
+              "id": "c",
+              "ko": "십 년이나 있어요"
+            }
+          ],
+          "en": "T: It has been ten years since I came to Korea. — S: Ten whole years?",
+          "grammar": "년 ends in a consonant, so again 이나 — and the verb stays 되다.",
+          "why": "십 년이나 됐어요 keeps the teacher’s 됐어요. 십 년이나 있어요 swaps in the verb that does not measure elapsed time, and 십 년나 is the vowel form after a consonant.",
+          "audio": {
+            "src": "audio/book/2b-u18-p2-2.mp3",
+            "askEnd": 3.18
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "배가 고파서 밥을 두 그릇 먹었어요."
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "두 그릇나 먹었어요"
+            },
+            {
+              "id": "b",
+              "ko": "두 그릇이나 먹어요"
+            },
+            {
+              "id": "c",
+              "ko": "두 그릇이나 먹었어요"
+            }
+          ],
+          "en": "T: I was hungry, so I ate two bowls of rice. — S: Two whole bowls?",
+          "grammar": "그릇 ends in a consonant: 그릇이나, said [그르시나].",
+          "why": "두 그릇이나 먹었어요 keeps the past the teacher used. 두 그릇이나 먹어요 answers a finished meal in the present tense.",
+          "audio": {
+            "src": "audio/book/2b-u18-p2-3.mp3",
+            "askEnd": 4.05
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "어제 피곤해서 열두 시간 잤어요."
+            },
+            {
+              "who": "S",
+              "ko": "{}?"
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "열두 시간이나 잤어요"
+            },
+            {
+              "id": "b",
+              "ko": "열두 시간나 잤어요"
+            },
+            {
+              "id": "c",
+              "ko": "열두 시간이나 자요"
+            }
+          ],
+          "en": "T: I was tired yesterday, so I slept twelve hours. — S: Twelve whole hours?",
+          "grammar": "시간 takes 이나, and 어제 keeps the verb in the past.",
+          "why": "열두 시간이나 잤어요 echoes both the number and the tense. 열두 시간이나 자요 loses the 어제 that the teacher put in front of it.",
+          "audio": {
+            "src": "audio/book/2b-u18-p2-4.mp3",
+            "askEnd": 3.99
+          }
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-pattern-3",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 3",
+      "icon": "🎧",
+      "pattern": "A-다, V-ㄴ다/는다",
+      "blurbEn": "A sentence about the seasons, said back in the written style.",
+      "instructionKo": "[보기]와 같이 바꿔 말해 보세요.",
+      "instructionEn": "Say each sentence again in the plain style, as in the example.",
+      "noteEn": "Four sentences, one per season, and each one tests a different half of the rule: 피다 and 내리다 are vowel stems that take -ㄴ다, 들다 is a ㄹ stem that loses its ㄹ, and 덥다 is an adjective that takes nothing at all. The student’s line is left blank on the page, so the buttons are whole sentences, as the 정답 on printed p.210 gives them.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "봄은 따뜻해요."
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "봄은 따뜻하다",
+        "en": "T: Spring is warm. — S: (in the plain style) Spring is warm.",
+        "why": "Played through once so the shape of the exchange is heard before you answer one yourself.",
+        "audio": {
+          "src": "audio/book/2b-u18-p3-0.mp3",
+          "askEnd": 2.19
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "봄에는 여러 가지 꽃이 피어요."
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "봄에는 여러 가지 꽃이 핀다"
+            },
+            {
+              "id": "b",
+              "ko": "봄에는 여러 가지 꽃이 피는다"
+            },
+            {
+              "id": "c",
+              "ko": "봄에는 여러 가지 꽃이 피다"
+            }
+          ],
+          "en": "T: All sorts of flowers bloom in spring. — S: (in the plain style) All sorts of flowers bloom in spring.",
+          "grammar": "피다 is a vowel stem, so the plain style is 핀다.",
+          "why": "꽃이 핀다 is 피다 with -ㄴ다. 꽃이 피는다 uses the consonant-stem ending, and 꽃이 피다 leaves the verb in the dictionary.",
+          "audio": {
+            "src": "audio/book/2b-u18-p3-1.mp3",
+            "askEnd": 3.5
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "여름은 아주 더워요."
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "여름은 아주 더운다"
+            },
+            {
+              "id": "b",
+              "ko": "여름은 아주 더워다"
+            },
+            {
+              "id": "c",
+              "ko": "여름은 아주 덥다"
+            }
+          ],
+          "en": "T: Summer is very hot. — S: (in the plain style) Summer is very hot.",
+          "grammar": "덥다 is a ㅂ-irregular adjective, and the ㅂ comes back in the plain style.",
+          "why": "여름은 아주 덥다 restores the ㅂ that 더워요 turned into 우. 여름은 아주 더워다 keeps the 워, which only exists in front of a vowel ending.",
+          "audio": {
+            "src": "audio/book/2b-u18-p3-2.mp3",
+            "askEnd": 2.85
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "가을에는 단풍이 들어요."
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "가을에는 단풍이 들는다"
+            },
+            {
+              "id": "b",
+              "ko": "가을에는 단풍이 든다"
+            },
+            {
+              "id": "c",
+              "ko": "가을에는 단풍이 들다"
+            }
+          ],
+          "en": "T: The leaves turn colour in autumn. — S: (in the plain style) The leaves turn colour in autumn.",
+          "grammar": "들다 is a ㄹ stem, so it drops the ㄹ and takes -ㄴ다: 든다.",
+          "why": "단풍이 든다 loses the ㄹ the way 놀다 gives 논다. 단풍이 들는다 keeps a ㄹ that cannot stand in front of the ㄴ.",
+          "audio": {
+            "src": "audio/book/2b-u18-p3-3.mp3",
+            "askEnd": 2.95
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "겨울에는 하얀 눈이 내려요."
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "겨울에는 하얀 눈이 내린다"
+            },
+            {
+              "id": "b",
+              "ko": "겨울에는 하얀 눈이 내려다"
+            },
+            {
+              "id": "c",
+              "ko": "겨울에는 하얀 눈이 내리는다"
+            }
+          ],
+          "en": "T: White snow falls in winter. — S: (in the plain style) White snow falls in winter.",
+          "grammar": "내리다 is a vowel stem: 내린다, from the stem and not from 내려요.",
+          "why": "눈이 내린다 builds on 내리, the stem. 눈이 내려다 builds on 내려, which belongs only to the 해요체, and 하얀 is already a modifier and does not change.",
+          "audio": {
+            "src": "audio/book/2b-u18-p3-4.mp3",
+            "askEnd": 3.43
+          }
+        }
+      ],
+      "type": "build"
+    },
+    {
+      "id": "u18-pattern-4",
+      "section": "문형 연습",
+      "sectionEn": "Pattern Practice",
+      "no": "연습 4",
+      "icon": "🎧",
+      "pattern": "N(이)다",
+      "blurbEn": "The copula, four times: after a consonant, in the negative and in the past.",
+      "instructionKo": "[보기]와 같이 바꿔 말해 보세요.",
+      "instructionEn": "Say each sentence again in the plain style, as in the example.",
+      "noteEn": "Whether the copula keeps its 이 depends on the last letter of the noun in front of it, and these four rows walk through the cases: a consonant ending twice, the negative 아니다, and the past 이었다. The student’s line is blank on the page, so the buttons are whole sentences, as the 정답 on printed p.210 gives them.",
+      "example": {
+        "lines": [
+          {
+            "who": "T",
+            "ko": "여기는 서울대학교예요."
+          },
+          {
+            "who": "S",
+            "ko": "{}."
+          }
+        ],
+        "answerKo": "여기는 서울대학교다",
+        "en": "T: This is Seoul National University. — S: (in the plain style) This is Seoul National University.",
+        "why": "Played through once so the shape of the exchange is heard before you answer one yourself.",
+        "audio": {
+          "src": "audio/book/2b-u18-p4-0.mp3",
+          "askEnd": 2.69
+        }
+      },
+      "items": [
+        {
+          "n": 1,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "오늘은 월요일이에요."
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "오늘은 월요일다"
+            },
+            {
+              "id": "b",
+              "ko": "오늘은 월요일이다"
+            },
+            {
+              "id": "c",
+              "ko": "오늘은 월요일인다"
+            }
+          ],
+          "en": "T: Today is Monday. — S: (in the plain style) Today is Monday.",
+          "grammar": "월요일 ends in a consonant, so the copula keeps its 이.",
+          "why": "오늘은 월요일이다 keeps the 이 because 일 ends in ㄹ. 오늘은 월요일다 drops it, which is what a vowel-final noun does, as the 보기’s 서울대학교다 shows — and this one is not.",
+          "audio": {
+            "src": "audio/book/2b-u18-p4-1.mp3",
+            "askEnd": 2.51
+          }
+        },
+        {
+          "n": 2,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "이 사진은 우리 가족사진이에요."
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "a",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "이 사진은 우리 가족사진이다"
+            },
+            {
+              "id": "b",
+              "ko": "이 사진은 우리 가족사진다"
+            },
+            {
+              "id": "c",
+              "ko": "이 사진은 우리 가족사진인다"
+            }
+          ],
+          "en": "T: This photo is our family photo. — S: (in the plain style) This is our family photo.",
+          "grammar": "사진 ends in ㄴ, so again the copula is 이다.",
+          "why": "가족사진이다 keeps the 이 after the consonant ㄴ. 이 사진은 우리 가족사진다 drops it, and 가족사진인다 treats the copula as a verb.",
+          "audio": {
+            "src": "audio/book/2b-u18-p4-2.mp3",
+            "askEnd": 3.49
+          }
+        },
+        {
+          "n": 3,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "이것은 내 가방이 아니에요."
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "c",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "이것은 내 가방이 아닌다"
+            },
+            {
+              "id": "b",
+              "ko": "이것은 내 가방이 아니이다"
+            },
+            {
+              "id": "c",
+              "ko": "이것은 내 가방이 아니다"
+            }
+          ],
+          "en": "T: This is not my bag. — S: (in the plain style) This is not my bag.",
+          "grammar": "아니다 is already a dictionary form and takes nothing further.",
+          "why": "이것은 내 가방이 아니다 is the negative copula unchanged. 가방이 아니이다 adds a second 이 to a word that already contains it, and 가방이 아닌다 treats it as a verb.",
+          "audio": {
+            "src": "audio/book/2b-u18-p4-3.mp3",
+            "askEnd": 3.08
+          }
+        },
+        {
+          "n": 4,
+          "lines": [
+            {
+              "who": "T",
+              "ko": "그 사람은 전에 회사원이었어요."
+            },
+            {
+              "who": "S",
+              "ko": "{}."
+            }
+          ],
+          "answer": "b",
+          "choices": [
+            {
+              "id": "a",
+              "ko": "그 사람은 전에 회사원였다"
+            },
+            {
+              "id": "b",
+              "ko": "그 사람은 전에 회사원이었다"
+            },
+            {
+              "id": "c",
+              "ko": "그 사람은 전에 회사원이다"
+            }
+          ],
+          "en": "T: That person used to be an office worker. — S: (in the plain style) That person used to be an office worker.",
+          "grammar": "이었다 after a consonant; 였다 is the contraction that only follows a vowel.",
+          "why": "회사원이었다 keeps the full 이었 because 원 ends in a consonant. 그 사람은 전에 회사원였다 uses the contraction that belongs to words like 가수, and 그 사람은 전에 회사원이다 loses the 전에.",
+          "audio": {
+            "src": "audio/book/2b-u18-p4-4.mp3",
+            "askEnd": 3.46
+          }
+        }
+      ],
+      "type": "build"
+    }
+  ]
+}

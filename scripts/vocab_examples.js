@@ -383,6 +383,13 @@ function sentenceUses(text, headword) {
     return [...String(text).matchAll(/([가-힣]+) 후에/g)]
       .some(m => decompose(m[1].slice(-1)).T === 4); // completed-action modifier ㄴ
   }
+
+  // 18과's V-(으)ㄴ 지 wears the same completed-action ㄴ, in front of 지 rather than 후에:
+  // 한국에 온 지, 술을 안 마신 지. A bare 지 would also take 하지 않다 and 먹지 마세요.
+  if (headword === 'V-(으)ㄴ 지') {
+    return [...String(text).matchAll(/([가-힣]+) 지/g)]
+      .some(m => decompose(m[1].slice(-1)).T === 4);
+  }
   // Grammar labels are notation, not words a Korean sentence contains literally.
   // Keep this out of sentenceProvesUse: it must not select examples automatically.
   const patterns = {
@@ -393,7 +400,15 @@ function sentenceUses(text, headword) {
     '-기로 하다': /[가-힣]+기로 (?:하|해|했)/,
     '-려고 하다': /[가-힣]+려고 (?:하|해|했)/,
     'N에 대한': /[가-힣]+에 대한/,
-    'N(이)나': /[가-힣]+(?:이나|나)\s/
+    'N(이)나': /[가-힣]+(?:이나|나)\s/,
+    // 18과 teaches the second N(이)나 — surprise at a large amount — which wears exactly the
+    // same surface as Unit 15's 'or'. Only the meaning differs, so the test is the same one.
+    'N(이)나 2': /[가-힣]+(?:이나|나)\s/,
+    // The plain style is known by where it sits, not by what it is made of: a sentence whose
+    // last word ends in a bare 다 is in it. 합니다 and 습니다 end in 다 too, which is what the
+    // lookbehind is for, and 해요체 ends in 요 and never reaches here.
+    'A-다, V-ㄴ다/는다': /[가-힣](?<!니)다[.!?]?\s*$/,
+    'N(이)다': /[가-힣]+(?:이다|이었다|였다)[.!?]?\s*$/
   };
   if (patterns[headword]) return patterns[headword].test(text);
   return matchParts(text, headword, false);
@@ -457,12 +472,15 @@ const SOURCES = [
   { rel: 'worlds/unit16-textbook.json', label: 'Unit 16 · 교과서', unit: '2b-unit-16' },
   { rel: 'worlds/unit17-workbook.json', label: 'Unit 17 · 익힘책', unit: '2b-unit-17' },
   { rel: 'worlds/unit17-textbook.json', label: 'Unit 17 · 교과서', unit: '2b-unit-17' },
+  { rel: 'worlds/unit18-workbook.json', label: 'Unit 18 · 익힘책', unit: '2b-unit-18' },
+  { rel: 'worlds/unit18-textbook.json', label: 'Unit 18 · 교과서', unit: '2b-unit-18' },
   { rel: 'worlds/unit12-cassette.json', label: 'Unit 12 · 듣기', unit: '2b-unit-12' },
   { rel: 'worlds/unit13-cassette.json', label: 'Unit 13 · 듣기', unit: '2b-unit-13' },
   { rel: 'worlds/unit14-cassette.json', label: 'Unit 14 · 듣기', unit: '2b-unit-14' },
   { rel: 'worlds/unit15-cassette.json', label: 'Unit 15 · 듣기', unit: '2b-unit-15' },
   { rel: 'worlds/unit16-cassette.json', label: 'Unit 16 · 듣기', unit: '2b-unit-16' },
-  { rel: 'worlds/unit17-cassette.json', label: 'Unit 17 · 듣기', unit: '2b-unit-17' }
+  { rel: 'worlds/unit17-cassette.json', label: 'Unit 17 · 듣기', unit: '2b-unit-17' },
+  { rel: 'worlds/unit18-cassette.json', label: 'Unit 18 · 듣기', unit: '2b-unit-18' }
 ];
 
 const HANGUL = /[가-힣]/;

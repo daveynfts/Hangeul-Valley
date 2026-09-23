@@ -950,6 +950,74 @@ spread under 0.04 — which is what says they are 일 이 삼 사 and not part o
 
 All four pace bands bite, where Unit 16's drill 2 could not be bitten.
 
+## Unit 18, and seventeen blanks with no box
+
+Fourteen exercises, 85 rows, printed pp.166-175 with the 정답 on pp.209-210 — images 162-171 and
+205-206, the same printed − 4 offset as Unit 17. Nothing is omitted. The unit's 익힘책 is ten
+pages of exercises, not fourteen: printed 176 starts 복습 6, the review of Units 16-18, which
+belongs to none of them.
+
+### Seventeen blanks, no box, taken one at a time
+
+문법과 표현 3 연습 4 is four short passages with seventeen blanks and no word box. The learner has to
+find the verb from the sense of the passage and then put it into the plain style, so it is the
+hardest exercise in the unit and the page gives no help at all. Like Unit 17's conjugation
+table it is taken one blank at a time — each blank is its own row, on the passage line it sits
+in — so a learner who gets one wrong finds out which one. The 정답 lists only the changed forms,
+passage by passage, and all seventeen are in the suite verbatim.
+
+### A wrong button that is right, in a passage that leaves the tense open
+
+The first draft offered twenty mistakes a Korean speaker would accept — 데려다 줬다, 갈 거다, 씻어야 된다, 설
+연휴이다, and 힘들다 after 한라산은 높아서 올라가기가 among them — and they were replaced and pinned. A second
+reading, done while the notes were being translated, found three more, all in 연습 4: 된다 after
+한국에 온 지 벌써 두 학기가 다, 사귄다 after 좋은 친구도 많이, and 올라간다 after 제주도에 도착해서 먼저 한라산에. Each is good Korean
+on its own line. They are wrong only against the tense the 정답 chose, and in a passage with no
+box that is not wrong enough.
+
+The distinction that came out of it is between two kinds of row. In a **conversion** row —
+되었습니다 → ___ — a tense-changed form is a fair mistake, because it is not the sentence the row
+gave you. In a **fill** row whose passage leaves the tense open, the same form is a second
+right answer. The three replacements are forms nobody writes — 되는다, 사귀는다, 올라가는다, the
+consonant-stem ending on a vowel stem — and the pinned list is addressed by exercise and row,
+so 된다 stays available where it is a mistake and is refused where it is not. The list's first
+version matched a form anywhere in the bank, which flagged 된다 on the conversion row where it is
+a fair mistake; addressing by row is what made the check mean something.
+
+### Pictures that carry a number
+
+Two exercises lean on their drawings for something the words do not say. 문법과 표현 1 연습 1 prints
+only B's answer and a picture of the activity, and 문법과 표현 2 연습 1 keeps four of its six numbers
+in the drawing only. Both name what the picture shows on its own 그림 line — 한국어를 공부하다, 커피 세 잔 —
+and the 정답 settles it. 어휘 연습 3 prints a drawing beside each dialogue as well, but every blank
+there is settled by words on the page. The first note on that exercise said "by the other
+speaker's reply", which is true of two of its rows and not of the three whose cue is on the
+gapped line itself: 아름다워요, 미끄러우니까, 시원해요.
+
+### The drill cue is read aloud after the question
+
+The 문형 연습 cutter needed one change from Unit 17's. 연습 1 prints its cue in brackets on the
+student's line — (세 시간) — but the teacher reads it aloud straight after the question, so that
+half of each exchange is two spans; the other three drills read one sentence in one breath. The
+cutter is told how many spans each teacher half takes, and the check that the count landed
+right is Unit 17's: the span in front of the 보기's cue has to be the 보기 marker, and it is —
+0.44-0.46s in all four drills, a spread of 0.018. The item numbers reproduce across drills as
+before, 0.288, 0.287, 0.384 and 0.392 seconds for items 1 to 4, each spread under 0.042. All
+four pace bands bite.
+
+### A note has to survive being translated
+
+The same second reading rewrote about twenty notes that claimed more than the row shows. Two
+kinds are worth watching for in the next unit:
+
+* **A count that nobody made.** "The single most common slip in this exercise" and "the
+  commonest wrong answer" were guesses dressed as measurements. They now say what can be seen:
+  좋는다 is an easy slip because the sentence in front of it is full of verbs.
+* **A gender the Korean never gives.** 그 사람, 히엔 씨 and 샤오밍 had become he and she in the English.
+  The Korean does not say, so neither does the English: the name, or that person. Vietnamese
+  pronouns carry gender and age, so an English "she" forces the translator into a choice the
+  book never made.
+
 ## The order to do it in
 
 Everything above is what to write. This is when to write it, and the order is
@@ -1362,6 +1430,48 @@ that note is still there, so the next silent strip fails rather than passes.
 
 [docs/unit16-art-notes.md](unit16-art-notes.md) collects every deferred drawing for this unit
 in one place: what to draw, which bank wants it, and what it would replace.
+
+### Unit 18, the book's last chapter, and a poem that stays in the book
+
+Thirteen pages, 57 rows, printed pp.202-221, with 모범 답안 on printed p.268. The page map holds at
+printed = image + 8, as it did for Unit 17, but images 192-193 are a two-page 번역 insert that
+carries Unit 17's vocabulary, so the first page checked after Unit 17 looks like back matter
+and suggests the book ends there. It does not. The chapter has no 자기 평가, its 과제 takes two
+pages, and it closes on 발음.
+
+**The poem.** 문화 산책 on p.220 prints 「눈 내리는 밤」 by 강소천, who died in 1963, so it is in copyright
+in Korea until 2033. The page is built from its frame alone — the 준비 question, the 생각 나누기
+instruction and the title, which is all a learner needs to know the season — and both
+`validate_content.js` and the suite hold it to a closed list of those three sentences, so no
+line of verse can be added by a later edit. Unit 16 made the same call about the 강강술래 lyric,
+which was there to be read aloud rather than answered.
+
+**Write-in answers become choices.** 듣기 1 asks for three words to be written in and 듣기 2's last
+question for a sentence; 모범 답안 gives all of them, and they are offered as choices. For the
+sentence, the wrong choices are two other lines off the same tape — the presenter's farewell
+and 주디's own regret — so a learner who picks one has heard it, just not as the answer.
+
+**One passage, two pages, two registers.** The 읽기 on p.216 is written in the plain style, and
+the 발음 page on p.221 reprints it in 합니다체: 나는 작년에 한국에 온 적이 있다 on one, 나는 작년 여름에 한국에 온 적이 있습니다 on
+the other. A note that quotes "the first line" has to quote the page its own row is on. One
+draft quoted the 발음 page's line in a note on the 읽기 page, and it was the transcription in the
+unit's notes that caught it, not a check.
+
+**A wrong button that is right Korean.** The suite pins six: 기억에 남은 것, 지나가는 것 같아요, 학교이다, 대하셨다
+and 늘어났다, turned down while the pages were written, and 친구들이 많이 아쉬울 것 같아요, which shipped in the
+first build and came out on the second reading. 아쉽다 can take the people you will be short of,
+so it is not wrong enough to be a wrong button; 후회될, which cannot take friends at all, is.
+
+**The 발음 page teaches nothing new.** Every chapter before this one had a 발음 rule of its own,
+even where Unit 10's — intonation — was one no dictation could catch. This one reprints the 읽기
+passage with twenty-two words underlined, each a change an earlier unit taught, so the rows
+take five of them, one per rule — 비음화, the tensing after -(으)ㄹ, ㅎ 탈락, 격음화 and the tensing after
+a closed ㄱ — each with its own line off track 90.
+
+The unit's 퀴즈 is sixteen rows, ten to a sitting, written after both banks the way Unit 16's
+was, and no button on it is a sentence either bank already gaps.
+[docs/unit18-art-notes.md](unit18-art-notes.md) lists every row that currently works around a
+missing picture.
 
 
 ---
