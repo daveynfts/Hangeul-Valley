@@ -729,6 +729,22 @@ Merging to `main` publishes automatically. `.github/workflows/publish.yml` waits
 (validate → R2 upload → CDN verify → Vercel Deploy Hook). Manual rerun is still
 Actions → Publish → Run workflow.
 
+**As configured today that last step does not run.** The repository has no
+`VERCEL_DEPLOY_HOOK_URL` or `VERCEL_TOKEN` secret, so the Publish log says
+`No Vercel hook or token; skipping deploy (Git still ships JS)` (checked on the 2026-09-23
+run), and the JavaScript reaches production through Vercel's Git integration — on the push,
+before CI has finished and before the R2 upload. So the order is Vercel first, then R2, and a
+push whose CI fails is deployed anyway. To get the order described above:
+
+1. In Vercel, create a Deploy Hook for the production branch, and add its URL to the GitHub
+   repository secrets as `VERCEL_DEPLOY_HOOK_URL`.
+2. Only then, stop Git from deploying `main` by itself, by adding
+   `"git": { "deploymentEnabled": { "main": false } }` to `vercel.json` (preview deployments of
+   other branches carry on). Doing this before step 1 would leave production never updating.
+
+Since worlds are kept by id (see Saves), a world whose file is not on the CDN yet costs only
+that world until the upload lands; it no longer moves the others.
+
 Locally, the same command is:
 
 ```bash
@@ -835,14 +851,19 @@ an open one kept `test_m1_challenger_harness.js` from ever exiting.
 ## Roadmap
 
 1. **PWA install and offline.** The touch controls have landed, so the farm is playable on a
-   phone; installability is what is left. It needs Phaser vendored into the repo first — the
-   game loads it from a CDN, so a service worker cannot make the app work offline while its
-   engine still comes over the wire.
-2. **Cloud save.** Losing SRS history when changing machines is a dealbreaker now that
-   the history is the product.
-3. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the
+   phone; installability is what is left. Phaser is vendored now (`vendor/`), so what remains
+   is the manifest and a service worker — and deciding which of the CDN-served content
+   (worlds, catalogues, audio) it caches.
+2. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the
    exact timestamp they were scheduled; a real study tool batches by day boundary and
-   caps how many land at once so a backlog cannot become unmanageable.
+   caps how many land at once so a backlog cannot become unmanageable. More pressing than it
+   was: until the daily review loop was fixed no farm review was ever planted, so a player
+   who learned on the farm comes back to every one of those reviews overdue at once.
+3. **Cloud save through the desktop build.** Cloud save itself is done — Google sign-in,
+   per-account saves on R2, revisions and merging across devices (see Saves). The desktop
+   wrapper serves no `/api/*`, so it has none; proxying `/api/save` and `/api/session` to the
+   deployed site from `main.py` would give it one, once `http://127.0.0.1:8742` is an
+   authorised origin of the Google client.
 4. **Vite / PWA modules.** Script-tag split of the engine is done (`js/*` + `js/manifest.json`).
    Vite remains a later PR if we need minify, code-split, or a service worker.
 5. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
@@ -852,7 +873,8 @@ an open one kept `test_m1_challenger_harness.js` from ever exiting.
    rather than live — a hash of `ko` + part of speech fixes it. The v6 → v7 respelling made
    the cost of the current scheme concrete: correcting a headword's spelling means a save
    migration, a facts regeneration and a curated-map update, all because the spelling *is*
-   the identity. A stable ID would have made it a one-line data edit.
+   the identity. A stable ID would have made it a one-line data edit. Worlds already have
+   this — the save keeps them by `worldId`, not by their place in the list.
 
 ### Review history
 
