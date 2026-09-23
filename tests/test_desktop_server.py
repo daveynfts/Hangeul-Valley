@@ -111,6 +111,10 @@ try:
         '/vendor/phaser-3.70.0.min.js',   # vendored so the desktop build runs offline
         '/worlds/2b-unit-10.json',
         '/skins/catalog.json',
+        # The translation catalogues. Missing from the allowlist, every one 404'd and the
+        # desktop build stayed English under the Vietnamese interface.
+        '/locales/vi/levels.json',
+        '/locales/vi/worlds/2b-unit-10.json',
     ]
     for path in must_serve:
         check(status_of(PORT, path) == 200, 'served: ' + path)
@@ -130,10 +134,18 @@ try:
     check(not remote_srcs, 'index.html loads no third-party script: ' + str(remote_srcs))
 
     print('\n--- 2. /api/config answers instead of 404ing ---')
-    with urllib.request.urlopen('http://127.0.0.1:%d/api/config' % PORT, timeout=10) as r:
-        cfg = json.loads(r.read().decode('utf-8'))
-        check(r.status == 200, '/api/config returns 200, so boot logs no console error')
-        check('googleClientId' in cfg, 'and it carries a googleClientId field')
+    # Set on purpose: the desktop build has no /api/save, so a client id here would put a
+    # sign-in on screen whose every upload 404s.
+    os.environ['GOOGLE_CLIENT_ID'] = 'set-in-the-environment'
+    try:
+        with urllib.request.urlopen('http://127.0.0.1:%d/api/config' % PORT, timeout=10) as r:
+            cfg = json.loads(r.read().decode('utf-8'))
+            check(r.status == 200, '/api/config returns 200, so boot logs no console error')
+            check('googleClientId' in cfg, 'and it carries a googleClientId field')
+            check(cfg.get('googleClientId') == '', 'which is empty even with GOOGLE_CLIENT_ID set: no sign-in without a save endpoint')
+            check(cfg.get('cloudSave') is False, 'and it says there is no cloud save here')
+    finally:
+        del os.environ['GOOGLE_CLIENT_ID']
 finally:
     httpd.shutdown()
     for p in planted:
@@ -166,8 +178,35 @@ with tempfile.TemporaryDirectory() as tmp:
         check(api.load() == payload, 'and the previous good save is still intact')
         leftovers = [f for f in os.listdir(tmp) if f.startswith('.save_data-')]
         check(not leftovers, 'no temp files are left behind: ' + str(leftovers))
+
+        # A save that will not parse is set aside, not left for the next save to replace.
+        with open(target, 'w', encoding='utf-8') as f:
+            f.write('{"v": 9, "currencies": {"coins": 42')
+        check(api.load() is None, 'a save that does not parse loads as no save')
+        aside = [f for f in os.listdir(tmp) if f.startswith('save_data.json.corrupt-')]
+        check(len(aside) == 1, 'and is kept beside it under a new name: ' + str(aside))
+        check(not os.path.exists(target), 'so the next save cannot overwrite the only copy')
+        if aside:
+            with open(os.path.join(tmp, aside[0]), encoding='utf-8') as f:
+                check('"coins": 42' in f.read(), 'with its contents untouched')
     finally:
         main.SAVE_FILE = real_save_file
+
+# ── 3b. A port that is already taken ─────────────────────────────────────────
+print('\n--- 3b. Port in use ---')
+first = main._make_server(0)
+taken = first.server_address[1]
+try:
+    try:
+        second = main._make_server(taken)
+        second.server_close()
+        check(False, 'binding a port that is already listening fails')
+    except OSError:
+        check(True, 'binding a port that is already listening fails, rather than sharing it')
+    check(main._GameServer.allow_reuse_address is (os.name != 'nt'),
+          'SO_REUSEADDR is off on Windows, where it lets two sockets share a listening port')
+finally:
+    first.server_close()
 
 # ── 4. The allowlist predicate itself ────────────────────────────────────────
 print('\n--- 4. _is_game_path ---')

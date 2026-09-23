@@ -46,6 +46,14 @@ python main.py
 Or double-click `run.bat`. Note `run.bat` hardcodes a Python path and falls back to
 `python` on `PATH`.
 
+The desktop build has no cloud save — that lives behind `/api/save`, which only Vercel serves —
+so its `/api/config` offers no Google client id and no sign-in appears. `main.py` serves an
+allowlist of folders, and `tests/test_desktop_allowlist.js` requires it to cover every folder
+`vercel.json` serves from the CDN (`locales/` was missing, so the desktop build stayed English
+under the Vietnamese interface). The port is bound before the window opens: a second copy of
+the game on 8742 is an error, not a shared port. A `save_data.json` that will not parse is kept
+as `save_data.json.corrupt-<time>` instead of being overwritten by the next save.
+
 ### Admin panel
 
 The dashboard (levels, word origins, Unit 10, art library) is a local Express app

@@ -3,9 +3,9 @@ Hangeul Valley – Desktop Wrapper
 Uses PyWebView to host the Phaser 3 HTML5 game as a native Windows window.
 
 Offline: Phaser is vendored (vendor/phaser-3.70.0.min.js), so nothing is fetched over the
-network to start the game. Cloud save is the one optional online feature — set
-GOOGLE_CLIENT_ID and /api/config below will hand it to the page; leave it unset and no
-third-party script is loaded at all.
+network to start the game, and no third-party script is loaded at all. There is no cloud
+save here: it lives behind /api/save, which only the Vercel deployment serves. The file
+save below is what persists progress on this machine.
 
 Run with:
     python main.py
@@ -16,6 +16,7 @@ Run with:
 import os
 import sys
 import json
+import time
 import posixpath
 import tempfile
 import threading
@@ -57,6 +58,11 @@ ALLOWED_DIRS = frozenset({
     'audio',
     'skins',
     'worlds',
+    # The translation catalogues (locales/<lang>/levels.json, locales/<lang>/worlds/...). Left
+    # off this list, every one of them 404'd, and the desktop build showed level names, glosses
+    # and whole units in English under the Vietnamese interface with nothing saying why.
+    # tests/test_desktop_allowlist.js checks this list against every folder vercel.json serves.
+    'locales',
 })
 
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -110,8 +116,17 @@ class GameSaveAPI:
             with self._lock:
                 if not os.path.exists(SAVE_FILE):
                     return None
-                with open(SAVE_FILE, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
+                try:
+                    with open(SAVE_FILE, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                except (ValueError, UnicodeDecodeError) as e:
+                    # A save that will not parse is set aside, not left to be overwritten. The
+                    # game starts from localStorage (or fresh) when this returns None, and its
+                    # first save would replace the only copy of whatever the file still held.
+                    aside = SAVE_FILE + '.corrupt-' + time.strftime('%Y%m%d-%H%M%S')
+                    os.replace(SAVE_FILE, aside)
+                    print(f"[Load ERROR] {SAVE_FILE} could not be read ({e}); kept as {aside}")
+                    return None
             print(f"[Load] Game loaded <- {SAVE_FILE}")
             return data
         except Exception as e:
@@ -155,12 +170,15 @@ class _QuietHandler(http.server.SimpleHTTPRequestHandler):
 
         initGoogleAuth() fetches this on boot to learn the Google client id. On desktop
         there is no serverless runtime, so the request 404'd and logged an error on every
-        launch. Answering it here keeps the console clean, and honours GOOGLE_CLIENT_ID
-        when it is set so cloud save can work from the desktop build too.
+        launch. Answering it here keeps the console clean.
+
+        It answers with no client id, always. It used to pass GOOGLE_CLIENT_ID through "so
+        cloud save can work from the desktop build too", but cloud save is /api/save and
+        /api/session, which this server does not have: a player who signed in here got a
+        sign-in that worked and uploads that 404'd, with the chip saying "not synced" for
+        ever. No client id means no sign-in button, which is the truth about this build.
         """
-        body = json.dumps(
-            {'googleClientId': os.environ.get('GOOGLE_CLIENT_ID', '')}
-        ).encode('utf-8')
+        body = json.dumps({'googleClientId': '', 'cloudSave': False}).encode('utf-8')
         self.send_response(200)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
         self.send_header('Content-Length', str(len(body)))
@@ -192,11 +210,17 @@ class _QuietHandler(http.server.SimpleHTTPRequestHandler):
             super().do_HEAD()
 
 
-def _start_server():
-    # Allow address reuse so rapid restarts don't fail
-    socketserver.TCPServer.allow_reuse_address = True
-    with socketserver.TCPServer(('127.0.0.1', PORT), _QuietHandler) as httpd:
-        httpd.serve_forever()
+class _GameServer(socketserver.TCPServer):
+    # SO_REUSEADDR is what lets a quick restart rebind a port still in TIME_WAIT on POSIX. On
+    # Windows it means something else: a second socket may bind a port that is already
+    # *listening*. With it on, a second copy of the game — or anything else on 8742 — shared
+    # the port instead of failing, and the window loaded whichever server the OS picked.
+    allow_reuse_address = os.name != 'nt'
+
+
+def _make_server(port=PORT):
+    """Bound before the window opens, so a port in use is an error the player can read."""
+    return _GameServer(('127.0.0.1', port), _QuietHandler)
 
 
 # ─── Entry point ───────────────────────────────────────────────────────────────
@@ -215,8 +239,16 @@ def main():
             print(f"[ERROR] Missing file: {path}")
             sys.exit(1)
 
-    # Start HTTP server in background thread
-    threading.Thread(target=_start_server, daemon=True).start()
+    # Bound here rather than inside the thread. A failed bind in the thread used to kill only
+    # the thread, silently, and the window then opened on whatever else was answering 8742 —
+    # a second copy of the game, or a dev server serving the whole repo root.
+    try:
+        httpd = _make_server()
+    except OSError as e:
+        print(f"[ERROR] Port {PORT} is already in use ({e}).")
+        print("        Close the other copy of Hangeul Valley, or whatever is using the port, and start again.")
+        sys.exit(1)
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
     print(f"[Hangeul Valley] Server -> http://127.0.0.1:{PORT}")
     if os.path.exists(SAVE_FILE):
         print(f"[Hangeul Valley] Save file found: {SAVE_FILE}")
