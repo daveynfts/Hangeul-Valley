@@ -73,6 +73,17 @@ curriculum without running Node locally:
 Edits (save layout, add words, Sync Files) stay on the local server. The Vercel
 copy shows a Read-only badge and hides those buttons.
 
+Content and translation saves are made **against the version that was opened**. Every read of
+`/api/admin/content` returns the git blob SHA of the bytes it showed, the editor sends it back
+as `If-Match`, and both servers refuse a save with `409` when the file has changed since — the
+Vercel copy used to compare against a SHA read a moment before the write, which protected
+nothing. The Translate tab's save on Vercel runs in a scratch directory (the deployment's
+filesystem is read-only, and the save used to write straight into it), merges on GitHub's copy
+of the catalogue rather than the deployment's, adds a new catalogue to `js/locales/catalogs.js`,
+and says that interface strings reach players with the next deploy instead of calling them
+live. `tests/test_admin_vercel_writes.js` runs the real handler with GitHub and the CDN answered
+in memory.
+
 ---
 
 ## Controls
