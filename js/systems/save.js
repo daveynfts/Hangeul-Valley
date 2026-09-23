@@ -664,6 +664,9 @@ function collectSave(){
     cooking: cookingState,
     equippedSkinId,
     ownedSkinIds,
+    // Whose progress this is — the Google account it was synced with, or nothing for a guest.
+    // See saveOwnerOf: the copy left on a shared browser has to say whose it is.
+    owner: (typeof saveOwner !== 'undefined' && saveOwner) || undefined,
     updatedAt: Date.now()
   };
 }
@@ -753,6 +756,7 @@ function applySave(d){
     cookingState = { cookedRecipes: [], totalDishesCooked: 0, recipeStats: {} };
   }
 
+  if (typeof saveOwnerOf === 'function') saveOwner = saveOwnerOf(migrated);
   equippedSkinId = migrated.equippedSkinId;
   ownedSkinIds = migrated.ownedSkinIds;
   if (typeof sanitizeSkinState === 'function') sanitizeSkinState();
@@ -798,10 +802,23 @@ let _saveTimer = null;
 let _savePending = false;
 let _saveDirtySince = 0;
 
+// Saving can be switched off for the rest of a page's life. Handing this browser to another
+// account needs it: the page reloads onto that account's progress, and the teardown flush
+// below would otherwise write the previous account's state straight back over it — and beacon
+// it to the account that just signed in.
+let _savesFrozen = false;
+function freezeSaves(){
+  _savesFrozen = true;
+  if(_saveTimer){ clearTimeout(_saveTimer); _saveTimer = null; }
+  _savePending = false;
+  _saveDirtySince = 0;
+}
+
 // Resolves to a per-destination report so a caller that cares — the Save button — can
 // tell the player the truth instead of a hardcoded tick. localStorage is written first and
 // synchronously, because it is the only leg that reliably lands during page teardown.
 async function flushSave(){
+  if(_savesFrozen) return { local: false, file: null, cloud: null, frozen: true };
   if(_saveTimer){ clearTimeout(_saveTimer); _saveTimer = null; }
   _savePending = false;
   _saveDirtySince = 0;
@@ -821,6 +838,7 @@ async function flushSave(){
 }
 
 function persistSave(){
+  if(_savesFrozen) return;
   const now = Date.now();
   if(!_savePending) _saveDirtySince = now;
   _savePending = true;
@@ -843,7 +861,7 @@ function persistSave(){
 // `keepalive`, which is the one thing the browser promises to finish after the page is gone.
 if(typeof window !== 'undefined' && window.addEventListener){
   const flushIfPending = (viaBeacon) => {
-    if(!_savePending) return;
+    if(_savesFrozen || !_savePending) return;
     if(viaBeacon && typeof beaconCloudSave === 'function'){
       // Read the state once and hand the same snapshot to both legs, so the copy that
       // leaves the machine is the copy that was stored.
@@ -927,6 +945,87 @@ let googleAuth = { clientId: '', token: '', user: null, ready: false, exp: 0, co
 
 function peekLocalSave() {
   try { return JSON.parse(localStorage.getItem('hv_save_v2') || 'null'); } catch { return null; }
+}
+
+// ── Whose progress this is ───────────────────────────────────────────────────
+//
+// localStorage holds one save, and it did not say whose it was. Signing out left it in place,
+// so on a shared browser the next account to sign in met the previous one's progress as if it
+// were its own: syncCloudSave saw a local copy "newer and with more progress" than that
+// account's cloud save and uploaded it, replacing the newcomer's progress with somebody else's.
+// A brand-new account simply adopted it.
+//
+// A save now names the account it belongs to (`owner`; a copy pulled from the cloud also
+// carries the server's `cloudUser`). Nothing names a guest, and a guest's progress is still
+// adopted by whoever signs in first — that is what signing in after playing is for. Progress
+// that belongs to another account is set aside under that account's own key instead, and the
+// page reloads onto the incoming account's progress: the one way to be sure no module-level
+// state from the previous account survives into the next.
+let saveOwner = '';
+const ACCOUNT_STASH_PREFIX = 'hv_save_v2:';
+// Set before the reload, so the page that comes up knows to say what happened — and so a
+// browser that will not store the swap cannot reload for ever.
+const ACCOUNT_SWITCH_KEY = 'hv_account_switched';
+// The cookie is asked for as soon as a credential arrives; a reload has to wait for that answer
+// or the next page would have neither the cookie nor a reason to ask again.
+let _sessionStarting = null;
+
+function saveOwnerOf(s) {
+  if (!s || typeof s !== 'object') return '';
+  return String(s.owner || s.cloudUser || '');
+}
+
+/** This browser's progress is `sub`'s from now on — after it was pulled from, or pushed to,
+ *  that account. Written through at once, so a sign-out a moment later leaves it named. */
+function adoptSaveOwner(sub) {
+  if (!sub) return;
+  saveOwner = sub;
+  try { localStorage.setItem('hv_save_v2', JSON.stringify(collectSave())); } catch {}
+}
+
+async function switchSaveAccount(localOwner, remote, sub) {
+  let tried = '';
+  try { tried = sessionStorage.getItem(ACCOUNT_SWITCH_KEY) || ''; } catch {}
+  if (tried === sub) {
+    // Reloaded for this account once already and the other account's progress is still what
+    // this browser holds: storage is refusing the writes. Nothing is uploaded anywhere, and
+    // cloud save stays idle for the rest of the visit rather than mixing the two.
+    _cloudLastError = 'wrong-account';
+    if (typeof freezeSaves === 'function') freezeSaves();
+    renderAuthUI();
+    return false;
+  }
+  // The live state, not the stored copy: it is the freshest version of the other account's
+  // progress, including anything the debounce had not written yet.
+  const theirs = (typeof collectSave === 'function') ? collectSave() : peekLocalSave();
+  try {
+    localStorage.setItem(ACCOUNT_STASH_PREFIX + localOwner, JSON.stringify(theirs));
+    const mine = localStorage.getItem(ACCOUNT_STASH_PREFIX + sub);
+    if (mine) {
+      localStorage.setItem('hv_save_v2', mine);
+      localStorage.removeItem(ACCOUNT_STASH_PREFIX + sub);
+    } else if (remote) {
+      localStorage.setItem('hv_save_v2', JSON.stringify(remote));
+    } else {
+      localStorage.removeItem('hv_save_v2');
+    }
+    sessionStorage.setItem(ACCOUNT_SWITCH_KEY, sub);
+  } catch (e) {
+    console.warn('Could not set the other account\'s progress aside:', e);
+  }
+  if (typeof freezeSaves === 'function') freezeSaves();
+  if (_sessionStarting) { try { await _sessionStarting; } catch (e) {} }
+  if (typeof location !== 'undefined' && location && typeof location.reload === 'function') location.reload();
+  return true;
+}
+
+/** After the reload a switch asked for: say where the other account's progress went. */
+function announceAccountSwitch(sub) {
+  let switched = '';
+  try { switched = sessionStorage.getItem(ACCOUNT_SWITCH_KEY) || ''; } catch {}
+  if (!switched || switched !== sub) return;
+  try { sessionStorage.removeItem(ACCOUNT_SWITCH_KEY); } catch {}
+  if (typeof showToast === 'function') showToast('☁ ' + hvT('ui.cloud.switchedAccount'), 6000);
 }
 
 // ── Where a sign-in lives between visits ─────────────────────────────────────
@@ -1198,6 +1297,10 @@ function setGoogleSession(token, user) {
   // Losing the token ends the retry. There is nowhere to send it, and a timer that fires
   // into a signed-out session would only rediscover that.
   if (!token && typeof cancelCloudRetry === 'function') cancelCloudRetry();
+  // And a write still waiting its turn on the chain belongs to the session that just ended.
+  // Left there, it would go out under the next sign-in's credential. The progress it carried
+  // is in this device's copy, which says whose it is, and reaches that account next time.
+  if (!token && typeof _cloudPending !== 'undefined') _cloudPending = null;
   renderAuthUI();
   // A fresh token means whatever was waiting on the old one can go now.
   if (token && typeof _resolveRenew === 'function') { const f = _resolveRenew; _resolveRenew = null; f(true); }
@@ -1410,6 +1513,7 @@ function cloudReasonText(reason) {
 }
 
 function pushCloudSave(data) {
+  if (typeof _savesFrozen !== 'undefined' && _savesFrozen) return { ok: true, skipped: true, reason: 'frozen' };
   if (!hasCloudCredential()) return { ok: true, skipped: true, reason: 'signed-out' };
   _cloudPending = data;
   _cloudChain = _cloudChain.then(async () => {
@@ -1418,8 +1522,16 @@ function pushCloudSave(data) {
     // of it. Either way there is nothing left to send.
     if (!payload) return { ok: true, skipped: true, reason: 'superseded' };
     _cloudPending = null;
+    // The credential is read when the request is built, not when it was queued, so a payload
+    // that waited — on the chain, or on the retry backoff — goes out as whoever is signed in
+    // by then. On a shared browser that can be the next account. A save that names its owner
+    // is only ever sent as that owner.
+    const signedAs = (typeof googleAuth !== 'undefined' && googleAuth && googleAuth.user && googleAuth.user.sub) || '';
+    if (payload.owner && signedAs && payload.owner !== signedAs) {
+      return { ok: false, skipped: true, reason: 'wrong-account' };
+    }
     try {
-      const { status, expired } = await cloudSaveRequest('PUT', payload);
+      const { status, expired, json } = await cloudSaveRequest('PUT', payload);
       if (status === 401) {
         // Two unrelated things arrive here as 401, and treating them alike is what made a
         // sign-in so easy to lose. The server refusing the token means Google will not vouch
@@ -1439,6 +1551,13 @@ function pushCloudSave(data) {
         setGoogleSession('', null);
         if (typeof showToast === 'function') showToast(hvT('ui.cloud.signInAgain'));
         return { ok: false, status, reason: 'signed-out' };
+      }
+      // The save names a different account from the one signed in (api/_saveBody.js). The
+      // shared-browser switch should have caught it first; if it did not, nothing is sent again.
+      if (status === 409 && json && json.error === 'account mismatch') {
+        _cloudLastError = 'wrong-account';
+        console.warn('Cloud save refused: it belongs to another account');
+        return { ok: false, status, reason: _cloudLastError };
       }
       if (status === 409) {
         // The server is holding a newer save than the one being pushed — another device
@@ -1672,7 +1791,15 @@ async function syncCloudSave() {
   if (json && json.user) googleAuth.user = json.user;
   _cloudLastError = '';
   renderAuthUI();
+  const sub = (json && json.user && json.user.sub) || '';
   const local = peekLocalSave();
+  // Somebody else's progress is not a guest's to adopt. See saveOwnerOf.
+  const localOwner = saveOwnerOf(local) || saveOwner;
+  if (sub && localOwner && localOwner !== sub) {
+    await switchSaveAccount(localOwner, remote, sub);
+    return;
+  }
+  announceAccountSwitch(sub);
   const remoteAt = (remote && remote.updatedAt) || 0;
   const localAt = (local && local.updatedAt) || 0;
 
@@ -1684,6 +1811,7 @@ async function syncCloudSave() {
 
   if (remote && (remoteAt >= localAt || pullBecauseEmptier)) {
     if (applySave(remote)) {
+      if (sub) saveOwner = sub;
       try { localStorage.setItem('hv_save_v2', JSON.stringify(remote)); } catch {}
       // Said differently when this device's copy is being discarded, because it is — someone
       // who had played here as a guest deserves to be told where it went.
@@ -1699,8 +1827,12 @@ async function syncCloudSave() {
   }
   // Through pushCloudSave, not cloudSaveRequest directly, so this upload takes its turn
   // on the same chain as gameplay saves instead of racing them.
-  if (local) await pushCloudSave(local);
-  else if (!remote) await pushCloudSave(collectSave());
+  let pushed = null;
+  if (local) pushed = await pushCloudSave(local);
+  else if (!remote) pushed = await pushCloudSave(collectSave());
+  // A guest's progress now belongs to this account — or already did. Either way the copy on
+  // this device says so from here on.
+  if (sub && pushed && (pushed.ok || pushed.reason === 'superseded')) adoptSaveOwner(sub);
 }
 
 function escapeAuthText(s) {
@@ -1878,8 +2010,8 @@ function onGoogleCredential(resp) {
   if (!silent && typeof showToast === 'function') showToast(hvT('ui.cloud.signedIn'));
   // The one moment a verified Google token exists, which is the only thing /api/session will
   // trade for a cookie. Not awaited: the sync below works on the token either way, and the
-  // cookie is for the visits after this one.
-  startServerSession(token);
+  // cookie is for the visits after this one. Kept, so an account switch can wait for it.
+  _sessionStarting = startServerSession(token);
   syncCloudSave();
 }
 
@@ -1938,6 +2070,14 @@ async function restoreGoogleSession() {
 }
 
 function signOutGoogle() {
+  // The progress on screen was played signed in, so it is this account's — and the copy left on
+  // this device has to say so, or the next account to sign in here takes it for a guest's.
+  const who = (googleAuth.user && googleAuth.user.sub) || '';
+  if (who && !saveOwner) saveOwner = who;
+  const frozen = typeof _savesFrozen !== 'undefined' && _savesFrozen;
+  if (saveOwner && !frozen && typeof collectSave === 'function') {
+    try { localStorage.setItem('hv_save_v2', JSON.stringify(collectSave())); } catch {}
+  }
   // Before setGoogleSession, which repaints: a cookie that outlived the sign-out would put
   // the player back in on the next load, having watched them ask not to be.
   endServerSession();

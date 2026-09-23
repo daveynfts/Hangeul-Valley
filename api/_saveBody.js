@@ -83,4 +83,19 @@ async function readSaveBody(req) {
   try { return JSON.parse(buf.toString('utf8')); } catch { return null; }
 }
 
-module.exports = { SAVE_JSON_MAX, SAVE_WIRE_MAX, readSaveBody };
+/**
+ * Does this save say it belongs to somebody other than `sub`?
+ *
+ * The client writes `owner` into every save once it knows whose it is, and a copy pulled from
+ * this endpoint carries the `cloudUser` stamped on the way in. A body naming another account
+ * is progress from a shared browser on its way into the wrong cloud save — the client sets
+ * such progress aside before syncing, and this is the check behind that. A save naming nobody
+ * is a guest's, and adopting it is what signing in after playing is for.
+ */
+function saveClaimsOtherAccount(body, sub) {
+  if (!body || typeof body !== 'object' || !sub) return false;
+  const claimed = String(body.owner || body.cloudUser || '');
+  return !!claimed && claimed !== String(sub);
+}
+
+module.exports = { SAVE_JSON_MAX, SAVE_WIRE_MAX, readSaveBody, saveClaimsOtherAccount };

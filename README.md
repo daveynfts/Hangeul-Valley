@@ -752,6 +752,24 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
 Without it `/api/session` answers `501` and the game falls back to the one-hour token,
 exactly as before. Changing it signs everybody out. It is never sent to the browser.
 
+### Whose progress this is
+
+`localStorage` holds one save, and it used to not say whose it was. Signing out left it in
+place, so on a shared browser the next account to sign in met the previous one's progress as
+its own: `syncCloudSave()` saw a local copy newer and richer than that account's cloud save and
+uploaded it over the newcomer's progress, and a brand-new account simply adopted it.
+
+A save now names its account (`owner`; a copy pulled from the cloud also carries the server's
+`cloudUser`), and signing out writes that name into the copy left behind. When a different
+account signs in, the other account's progress is set aside under `hv_save_v2:<sub>`, the
+incoming account's own copy (or its cloud save, or nothing) takes its place, saving is frozen
+so a teardown flush cannot write the old state back, and the page reloads — the one way to be
+sure no module-level state crosses over. Signing back in as the first account restores its
+copy the same way. A guest's save names nobody and is still adopted by whoever signs in first.
+Behind that, a queued or retried push is only ever sent as the account its save names, a
+sign-out drops whatever was still queued, and `/api/save` answers `409 account mismatch` to a
+save naming somebody else (`saveClaimsOtherAccount` in `api/_saveBody.js`).
+
 ---
 
 ## Roadmap

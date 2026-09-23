@@ -4,7 +4,7 @@ const { stampSave, trustedStamp } = require('./_stamp');
 const { sessionUser, sessionNeedsRefresh, signSession, setSessionCookie } = require('./_session');
 const { PREFIX: LB_PREFIX, entryFromSave } = require('./_leaderboard');
 // How large a save may be, and how a compressed one is read. See api/_saveBody.js.
-const { readSaveBody } = require('./_saveBody');
+const { readSaveBody, saveClaimsOtherAccount } = require('./_saveBody');
 
 // Same sanitising as saveKey: the sub reaches a bucket key, so nothing but the safe alphabet
 // gets through. Kept next to the write rather than in _leaderboard.js, which stays free of
@@ -126,6 +126,13 @@ module.exports = async (req, res) => {
       }
       if (!body || typeof body !== 'object') {
         res.status(400).json({ error: 'save body required' });
+        return;
+      }
+      // Somebody else's progress, on its way into this account from a shared browser. The
+      // stored copy is left alone; see saveClaimsOtherAccount.
+      if (saveClaimsOtherAccount(body, user.sub)) {
+        res.setHeader('Cache-Control', 'private, no-store');
+        res.status(409).json({ error: 'account mismatch' });
         return;
       }
       // One clock reading for both stamps below. Two Date.now() calls would leave the stored
