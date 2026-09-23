@@ -537,6 +537,41 @@ function migrateSaveData(d) {
     data.v = 10;
   }
 
+  // v10 -> v11: the recognition and listening tracks every crop left stranded in 'learn'.
+  // graduateCompanionModalities() carries them into review at the harvest now; this does the
+  // same for the words harvested before it existed — only where production has graduated,
+  // since that harvest is the evidence the step rests on. The graduating interval is a day,
+  // and a save holding hundreds of learned words would otherwise have every one of those
+  // reviews land on the same afternoon, so the first due date is spread across two weeks,
+  // deterministically, as the v5 step spread its own.
+  if (!data.v || data.v < 11) {
+    const now = Date.now();
+    const srs = (data.srs && typeof data.srs === 'object') ? data.srs : {};
+    const spread = (s) => {
+      let h = 0x811c9dc5;
+      for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+      return 1 + (h % 14);
+    };
+    let carried = 0;
+    Object.keys(srs).forEach((ko) => {
+      const m = srs[ko] && srs[ko].m;
+      const prim = m && m[PRIMARY_MODALITY];
+      if (!prim || (prim.st !== 'review' && prim.st !== 'relearn')) return;
+      MODALITIES.forEach((mod) => {
+        const e = m[mod];
+        if (mod === PRIMARY_MODALITY || !e || e.st !== 'learn') return;
+        m[mod] = Object.assign({}, e, {
+          st: 'review', step: 0, ivl: SRS_CFG.GRADUATE_IVL,
+          reps: (e.reps | 0) + 1, last: now,
+          due: now + spread(ko + '|' + mod) * DAY_MS
+        });
+        carried++;
+      });
+    });
+    if (carried) console.log(`[Save Migration] Carried ${carried} stranded recognition/listening tracks into review v${data.v || 10} -> v11`);
+    data.v = 11;
+  }
+
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
     data.inventory.maxSlots = 20;
   }
@@ -580,8 +615,15 @@ function migrateSaveData(d) {
 function collectSave(){
   const hcObj={}; harvestCounts.forEach((v,k)=>hcObj[k]=v);
   const isFarm = sceneRef && Array.isArray(sceneRef.plots);
+  // reviewModality rides along: a due-review crop tests the skill that fell due, and without it
+  // a reload turned every recognition or listening review back into a typed one — which graded
+  // production, left the modality that was actually due untouched, and so planted it again.
   const plots = isFarm
-    ? sceneRef.plots.filter(p => p && p.ko).map(p => ({ i: p.index, ko: p.ko, sState: p.sState, plantedAt: p.plantedAt || 0, readyAt: p.readyAt || 0 }))
+    ? sceneRef.plots.filter(p => p && p.ko).map(p => {
+      const row = { i: p.index, ko: p.ko, sState: p.sState, plantedAt: p.plantedAt || 0, readyAt: p.readyAt || 0 };
+      if (p.reviewModality) row.reviewModality = p.reviewModality;
+      return row;
+    })
     : plotSave;
   const apple = (sceneRef && typeof sceneRef.appleRipeAt !== 'undefined')
     ? { ripeAt: sceneRef.appleRipeAt, ripe: sceneRef.appleRipe }
@@ -591,7 +633,7 @@ function collectSave(){
     : droppedItemsSave;
   droppedItemsSave = drops;
   return {
-    v: 10,
+    v: 11,
     currencies: playerCurrencies,
     gold: playerCurrencies.coins,
     unlockedLevels,
@@ -2049,8 +2091,11 @@ function startedModalities(ko){
   return MODALITIES.filter(m => rec.m[m] && rec.m[m].st !== 'new');
 }
 
+// Only modalities that have left their learning steps count (srsReviewDue). A track still
+// in 'learn' belongs to a crop that is growing, or that was cleared before it finished; its
+// step date is the crop's clock, and letting it compete here is what hid every real review.
 function dueModality(ko, now = Date.now()){
-  const started = startedModalities(ko).filter(m => srsIsDue(srsData[ko].m[m], now));
+  const started = startedModalities(ko).filter(m => srsReviewDue(srsData[ko].m[m], now));
   if (!started.length) return null;
   // Soonest due first; production wins a tie because it is the skill that matters most.
   started.sort((a, b) => (srsData[ko].m[a].due - srsData[ko].m[b].due)
@@ -2167,12 +2212,48 @@ function dailyActivity(days = 14, now = Date.now()){
   return out;
 }
 
+// The recognition and listening tracks a crop started, carried into review with it.
+//
+// A crop asks each of them exactly once — recognition when the seed goes in, listening at
+// the watering — and a learning step needs two correct answers to clear, so neither could
+// ever leave 'learn' by itself. Nothing asks them again: the next planting of that word types
+// it, because its production track is no longer new. They were stranded there for good, and
+// until srsReviewDue existed that stranding also hid the word's real reviews.
+//
+// The harvest is the evidence that closes them out: the word has now been recognised, heard
+// and produced in one cycle. Each goes into review at the same graduating interval as
+// production — a day, so nothing is claimed that has not been shown — and from there
+// schedules on its own. Walked through the scheduler rather than written by hand, so a
+// graduate made here is exactly what answering it would have made.
+function graduateCompanionModalities(ko, now = Date.now()){
+  const rec = srsData[ko];
+  if (!rec || !rec.m) return 0;
+  let moved = 0;
+  MODALITIES.forEach((m) => {
+    if (m === PRIMARY_MODALITY) return;
+    let e = rec.m[m];
+    if (!e || e.st !== 'learn') return;
+    for (let i = 0; i <= SRS_CFG.LEARN_STEPS.length && e.st === 'learn'; i++) {
+      e = srsSchedule(e, GRADE.GOOD, now);
+    }
+    rec.m[m] = e;
+    moved++;
+  });
+  return moved;
+}
+
 // Advances one modality's schedule. `mod` defaults to whichever question mode is on screen,
 // so a recognition answer can never move the production interval.
 function gradeWord(ko, grade, mod = currentQuizMode, now = Date.now()){
   const modality = MODALITIES.includes(mod) ? mod : PRIMARY_MODALITY;
-  const next = srsSchedule(getSrsMod(ko, modality), grade, now);
+  const prev = getSrsMod(ko, modality);
+  const next = srsSchedule(prev, grade, now);
   srsData[ko].m[modality] = next;
+  // The crop finishing is the word finishing its learning steps, and that is true of every
+  // modality the crop taught, not only the one its harvest is graded on.
+  if (modality === PRIMARY_MODALITY && srsIsLearning(prev) && next.st === 'review') {
+    graduateCompanionModalities(ko, now);
+  }
   attemptLog.push({
     ko,
     g: grade,                     // 0 Again … 3 Easy

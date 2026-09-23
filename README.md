@@ -227,7 +227,23 @@ because the crop timer and phases 2–3 run on it — but only the modality actu
 its interval moved.
 
 When a word comes due, the review tests **whichever modality expired**, not always typing.
-Ties go to production.
+Ties go to production. Only a track that has left its learning steps can be *due*: a step
+date is the crop's clock, not a review anybody owes (`srsReviewDue` in `js/systems/srs.js`).
+
+The harvest that graduates production also graduates the recognition and listening tracks
+the same crop started, at the same one-day interval. A crop asks each of them exactly once,
+and a learning step needs two correct answers, so on their own they could never leave it —
+they sat in `learn` with a due date fifteen seconds after they were answered, the review
+picker always chose one of them, and the farm (which plants reviews only) dropped the word.
+No production review was ever planted and the HUD's due count never went down.
+`tests/test_review_loop.js` drives a word through the real quiz functions to pin this.
+
+A recognition or listening review answered wrong **lapses**, like a typed one. It used to be
+re-asked with the right button lit up, the second try scored Hard, and Hard on a review grows
+the interval. Its plot is cleared rather than sent back to watering — watering and the harvest
+grade other skills — and the lapsed track comes back to the farm a minute later for another
+try. A review crop saves the skill it tests (`reviewModality`), so a reload does not turn a
+listening review into a typed one.
 
 ### Two progress metrics, deliberately
 
@@ -508,7 +524,7 @@ serve those files; there is no `assets/` mirror.
 ## Saves
 
 State is written to `localStorage` under `hv_save_v2`, and additionally to
-`save_data.json` via the PyWebView bridge on desktop. Save format is **v9**, with the
+`save_data.json` via the PyWebView bridge on desktop. Save format is **v11**, with the
 migration chain in `migrateSaveData()`.
 
 Both copies are read on load and the newer `updatedAt` wins. Preferring the file
@@ -558,6 +574,15 @@ The v8 → v9 step adds the character-skin fields, defaulting `equippedSkinId` t
 making sure `farmer` is in `ownedSkinIds`. It is field-fill only and deliberately does not
 read the live skins catalog, because `test_srs_engine.js` extracts `migrateSaveData()` into a
 VM that has only the rename tables.
+
+The v9 → v10 step adds the practice log (`practice`), empty for everyone who came before: a
+count that was never recorded cannot be reconstructed.
+
+The v10 → v11 step carries the recognition and listening tracks every earlier crop left
+stranded in `learn` into review — only where production has graduated, since that harvest is
+the evidence. They start at the one-day graduating interval, with their first due date spread
+deterministically across the next two weeks so a save holding hundreds of learned words does
+not have them all land on one afternoon.
 
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
 (currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs,

@@ -1518,6 +1518,12 @@ function applyQuizMode(word, phase, plot){
   });
 }
 
+// A ripe crop the review loop planted, asked in the skill that fell due. Everything else a
+// four-option question can be is a teaching step inside the crop cycle.
+function isReviewQuiz(plot, phase){
+  return phase === 3 && !!plot && !!plot.reviewModality && plot.reviewModality === currentQuizMode;
+}
+
 function answerChoice(opt, btn){
   if(!currentWord || !quizOpen || pendingQuizAdvance) return;
   const correct = opt.ko === currentWord.ko;
@@ -1570,6 +1576,25 @@ function answerChoice(opt, btn){
     currentQuizMeta.attempts++;
     feedbackText.textContent = `❌ ${hvT('ui.quiz.itIs')} ${currentWord.ko} — ${tr(currentWord, 'en')}`;
     feedbackText.className = '';
+    // A due review is the graded recall, not a teaching step. Re-asking it — with the right
+    // button just lit up — let the second try score Hard, and Hard on a review *grows* the
+    // interval, so failing a recognition review pushed it further out. It lapses instead,
+    // exactly as a typed harvest answered wrong does.
+    if (isReviewQuiz(currentPlot, currentPhase)) {
+      const cp = currentPlot, cw = currentWord;
+      const after = gradeWord(cw.ko, GRADE.AGAIN);   // the modality on screen, which fell due
+      showQuizReveal({
+        message: hvT(after.lapses > 0 ? 'ui.quiz.result.lapsed' : 'ui.quiz.result.answerWas'),
+        ko: cw.ko, en: tr(cw, 'en'),
+        typed: '',
+        note: hvT('ui.quiz.result.note.relearnSoon', { interval: srsDaysLabel(after.ivl) }),
+        continueLabel: hvT('ui.quiz.result.continue.relearn'),
+        onDone: () => {
+          if (sceneRef && typeof sceneRef.failReviewPlot === 'function') sceneRef.failReviewPlot(cp, cw);
+        }
+      });
+      return;
+    }
     // Re-ask rather than punishing: this is a teaching step, not the graded recall.
     setTimeout(()=>{
       if(!quizOpen || !currentWord) return;
@@ -2244,7 +2269,9 @@ function vocabSkillDescription(entry) {
   else if (entry.st === 'learn') parts.push(hvT('ui.vocab.filter.learning'));
   else parts.push(entry.st);
   if (srsIsGraduated(entry)) parts.push(hvT('ui.vb.interval', { n: srsIntervalLabel(entry) }));
-  if (srsIsDue(entry)) parts.push(hvT('ui.vb.dueNow'));
+  // Asked with a clock: srsIsDue(entry) with no `now` compared against undefined, so "due now"
+  // was never printed for anything. And a review question, since a learning step is not one.
+  if (srsReviewDue(entry, Date.now())) parts.push(hvT('ui.vb.dueNow'));
   if (entry.lapses) {
     parts.push(hvT(entry.lapses === 1 ? 'ui.vb.lapses.one' : 'ui.vb.lapses', { n: entry.lapses }));
   }
@@ -5907,7 +5934,7 @@ function renderVocabCards() {
       ? '🔁 ' + hvT('ui.vocab.stage.relearning')
       : '🌱 ' + hvT('ui.vocab.filter.learning'); }
     if(srsIsGraduated(e)) mBadgeSuffix = ` (${srsIntervalLabel(e)})`;
-    if(srsIsDue(e, now))  mBadgeSuffix += ' ⏰';
+    if(srsReviewDue(e, now))  mBadgeSuffix += ' ⏰';
 
     const div = document.createElement('div');
     div.className = `vocab-card ${mBadgeClass}` + (times > 0 || srsIsGraduated(e) ? ' planted' : '') + (planted ? ' growing' : '');

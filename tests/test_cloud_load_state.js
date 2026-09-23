@@ -435,7 +435,7 @@ async function reconcile(local, remote) {
   // It has to survive the round trip, or the count resets every time the game is closed.
   R(`practiceLog = {}; recordPractice(practiceKey('wb', 'bk', 'ex9'), 3, 4, 500);`);
   const round = R('migrateSaveData(JSON.parse(JSON.stringify(collectSave())))');
-  eq(round.v, 10, 'collectSave writes v10');
+  eq(round.v, 11, 'collectSave writes v11');
   // The round trip. collectSave has been replaced by a stub in section 6, so this asserts on
   // the shipped source for the write side and drives applySave for the read side — the two
   // halves that decide whether a count survives closing the game.

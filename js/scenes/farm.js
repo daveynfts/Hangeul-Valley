@@ -2182,7 +2182,13 @@ class FarmScene extends Phaser.Scene {
     if(!pointerBusy && this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey)) this._interact();
     // Growth timer: check every 8s whether any crop is due to advance a stage
     this._timerAcc=(this._timerAcc||0)+(dt||16);
-    if(this._timerAcc>8000){this._timerAcc=0;this._checkGrowth();}
+    // The due check rides the same tick. It only ever ran on entering the farm, so a review
+    // coming due mid-session — a relearning step is a minute — waited for the next visit.
+    // Quiet while a quiz is open: a toast over the question would read as feedback on it.
+    if(this._timerAcc>8000){
+      this._timerAcc=0;this._checkGrowth();
+      this._refreshDueReviews(!(typeof quizOpen !== 'undefined' && quizOpen));
+    }
     // Apple tree timer: update every second
     this._appleAcc=(this._appleAcc||0)+(dt||16);
     if(this._appleAcc>1000){this._appleAcc=0;this._tickAppleTree();}
@@ -2925,6 +2931,20 @@ class FarmScene extends Phaser.Scene {
     savePlotsFn();
   }
 
+  // A recognition or listening review answered wrong. Regressing it the way regressionPlot
+  // does would put the word back into the crop cycle, whose watering and harvest grade
+  // listening and production — skills that were not the ones that lapsed, and whose schedules
+  // the extra answers would then move. So the plot is simply cleared: no harvest, no coins,
+  // and the lapsed track (now relearning, a minute out) is planted again by the review loop
+  // for another try at the skill that actually failed.
+  failReviewPlot(plot, word){
+    quizStreak = 0;
+    const ko = (word && word.ko) || plot.ko;
+    if(ko) plantedWords.delete(ko);
+    this._clearPlot(plot);
+    savePlotsFn();
+  }
+
   // Apply visual state to a plot. `readyAt` is the growth deadline: pass one to restore a
   // wait already in progress, otherwise entering the state starts its timer fresh.
   _setState(plot, s, ko, readyAt){
@@ -3013,6 +3033,9 @@ class FarmScene extends Phaser.Scene {
       plot.plant=this.add.image(plot.x,plot.y-4,tex).setOrigin(0.5,0.85).setDepth(plot.y+5);
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
       this._setState(plot,st,pd.ko,readyAt);
+      // Only a ripe crop is a review; anything else is a word still in its crop cycle.
+      plot.reviewModality = (st === '4' && MODALITIES.indexOf(pd.reviewModality) >= 0)
+        ? pd.reviewModality : null;
       plantedWords.add(pd.ko);
     });
   }
@@ -3038,10 +3061,16 @@ class FarmScene extends Phaser.Scene {
   //
   // Some plots are always left free, otherwise a large review backlog would lock the
   // player out of learning anything new.
+  //
+  // 'relearn' is planted as well as 'review'. A lapse normally keeps its crop — a typed review
+  // answered wrong regresses to watering — but a recognition or listening review answered
+  // wrong clears its plot (failReviewPlot), and a relearning word whose crop was lost to a level
+  // change would otherwise wait for good. srsDueWords only offers words that have left their
+  // learning steps, so nothing still growing is planted twice.
   _plantDueReviews(){
     if(!this.plots) return 0;
     const now = Date.now();
-    const due = srsDueWords(now).filter(d => d.entry.st === 'review' && !plantedWords.has(d.word.ko));
+    const due = srsDueWords(now).filter(d => srsIsGraduated(d.entry) && !plantedWords.has(d.word.ko));
     if(!due.length) return 0;
 
     const freePlots = this.plots.filter(p => p.active && !p.ko);
@@ -3068,8 +3097,8 @@ class FarmScene extends Phaser.Scene {
     return { planted: planting.length, remaining: due.length - planting.length };
   }
 
-  // Called on farm entry and again when the player returns from a minigame, since reviews
-  // can come due while they are away.
+  // Called on farm entry, when the player returns from a minigame, and on the growth tick —
+  // reviews come due during a session too, and a relearning step is only a minute long.
   _refreshDueReviews(announce = true){
     const res = this._plantDueReviews();
     if(!res || !res.planted) return;

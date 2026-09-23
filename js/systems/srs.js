@@ -160,6 +160,20 @@ function srsIsMature(e)    { return !!e && e.st === 'review' && e.ivl >= SRS_CFG
 function srsIsDue(e, now)  { return !!e && e.st !== 'new' && e.due > 0 && now >= e.due; }
 function srsIsLearning(e)  { return !!e && (e.st === 'learn' || e.st === 'relearn'); }
 
+// Owed a *review*, which is a narrower question than srsIsDue asks. srsIsDue is the
+// scheduler's: has this entry's next step come round. A word inside its learning steps says
+// yes fifteen seconds after it is planted — and that is the crop's clock, driven by the plot,
+// not a review anybody owes.
+//
+// Treating the two as one question is what emptied the daily review loop. Planting a word
+// answers recognition and watering it answers listening, so both of those tracks entered
+// their learning steps and nothing ever advanced them again. They sat in 'learn' with a due
+// date fifteen seconds after they were answered, the review picker always chose the soonest
+// due modality — one of those two — and the farm, which plants reviews only, then dropped the
+// whole word. A production review that had come due was never planted, and the HUD's due
+// count held every word the player had ever learned.
+function srsReviewDue(e, now) { return srsIsGraduated(e) && e.due > 0 && now >= e.due; }
+
 // ── The crop clock ───────────────────────────────────────────────────────────
 // The learning steps double as the plot's growth timers — 15s standing as a seedling, 45s
 // as a sprout — but only while the word is still inside those steps. The plot used to read
