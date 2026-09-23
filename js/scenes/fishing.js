@@ -189,7 +189,7 @@ class FishingScene extends Phaser.Scene {
       try { this.splashEmitter.explode(12, this.bobber.x, this.bobber.y); } catch(e) {}
     }
 
-    const ex = this.add.text(this.bobber.x, this.bobber.y - 35, '💦 BITE!', {
+    const ex = this.add.text(this.bobber.x, this.bobber.y - 35, hvT('ui.fish.bite'), {
       fontFamily: hvPixelFont(), fontSize: hvPixelSize(24), color:'#EF4444', stroke:'#000', strokeThickness:4
     }).setOrigin(0.5);
     this.tweens.add({ targets:ex, scale:1.4, alpha:0, duration:800, onComplete:()=>ex.destroy() });
@@ -339,9 +339,9 @@ class FishingScene extends Phaser.Scene {
 
     if (fish.rarity === 'Legendary' || fish.ko === '황금물고기') {
       addGems(5);
-      showToast(`🌟 LEGENDARY CATCH! ${fish.hint} ${fish.ko} (${tr(fish, 'en')})! +35 Coins & +5 Gems!`, 4500);
+      showToast(hvT('ui.toast.fish.legendary', { hint: fish.hint, ko: fish.ko, en: tr(fish, 'en') }), 4500);
     } else {
-      showToast(`🎉 Caught ${fish.hint} ${fish.ko} (${tr(fish, 'en')})! +35 Coins!`, 4000);
+      showToast(hvT('ui.toast.fish.caught', { hint: fish.hint, ko: fish.ko, en: tr(fish, 'en') }), 4000);
     }
 
     checkQuestProgress('fish', { count: 1 });
@@ -357,7 +357,7 @@ class FishingScene extends Phaser.Scene {
     this.state = 'CASTING';
     this.hideTensionBar();
     if(this.bobber) this.bobber.destroy();
-    showToast('💨 The fish got away! Try again.');
+    showToast(hvT('ui.toast.fish.escaped'));
     this.infoTxt.setText('🎣 ' + hvT('ui.fishing.again'));
   }
 

@@ -280,9 +280,9 @@ class DungeonScene extends Phaser.Scene {
       addHonor(50);
       if (this.playerHP >= 100) {
         addGems(15);
-        showToast('🛡️ ZERO-DAMAGE DUNGEON BOSS KILL! +15 Bonus Gems!', 4500);
+        showToast(hvT('ui.toast.dungeon.flawless'), 4500);
       }
-      showToast('🎉 DUNGEON BOSS DEFEATED! +200 Coins, +10 Gems, +50 Honor!', 5000);
+      showToast(hvT('ui.toast.dungeon.bossDown'), 5000);
     }
 
     if (this.monstersKilled >= 5 && !this.bossPortal) {
@@ -355,7 +355,7 @@ class DungeonScene extends Phaser.Scene {
       { key: 'dungeon_boss', name: '👹 KING SEJONG\'S CORRUPTED SENTINEL' }
     ];
     const chosen = Phaser.Utils.Array.GetRandom(bossList);
-    showToast(`👹 ${chosen.name} SPAWNED!`, 4000);
+    showToast(hvT('ui.toast.dungeon.spawned', { name: chosen.name }), 4000);
     const boss = this.add.sprite(this.W/2, 120, chosen.key).setOrigin(0.5).setDepth(30);
     this.physics.add.existing(boss);
     boss.setDisplaySize(64, 64);
@@ -442,9 +442,9 @@ class DungeonScene extends Phaser.Scene {
     }
 
     if(failed){
-      showToast(`💀 Defeated in Dungeon! Earned +${this.lootedGold} Coins & ${this.lootedScrolls} Vocab Scrolls!`, 4000);
+      showToast(hvT('ui.toast.dungeon.defeated', { gold: this.lootedGold, scrolls: this.lootedScrolls }), 4000);
     } else {
-      showToast(`⚔️ Dungeon Cleared! Defeated ${this.monstersKilled} Monsters & Looted +${this.lootedGold} Coins!`, 4000);
+      showToast(hvT('ui.toast.dungeon.cleared', { kills: this.monstersKilled, gold: this.lootedGold }), 4000);
     }
 
     this.cameras.main.fadeOut(300, 0, 0, 0);

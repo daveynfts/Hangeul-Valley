@@ -262,16 +262,16 @@ class ArcadeScene extends Phaser.Scene {
 
     if(type === '🔫'){
       this.hasTripleShot = true;
-      showToast('🔫 TRIPLE SHOT POWER-UP!', 2000);
+      showToast(hvT('ui.toast.arcade.triple'), 2000);
       this.time.delayedCall(8000, () => this.hasTripleShot = false);
     } else if(type === '🛡️'){
       this.hasShield = true;
       this.shieldAura.setVisible(true);
-      showToast('🛡️ ENERGY SHIELD ACTIVATED!', 2000);
+      showToast(hvT('ui.toast.arcade.shieldOn'), 2000);
     } else if(type === '💣'){
       this.nukeCount++;
       this.powerText.setText('💣 ' + hvT('ui.arcade.nukes', { n: this.nukeCount }));
-      showToast('💣 ATOMIC BOMB ACQUIRED!', 2000);
+      showToast(hvT('ui.toast.arcade.bombGot'), 2000);
     }
   }
 
@@ -284,7 +284,7 @@ class ArcadeScene extends Phaser.Scene {
     // Clear all boss bullets & minions
     this.bossBullets.clear(true, true);
     this.minions.clear(true, true);
-    showToast('💣 BOOM! SCREEN CLEARED!', 2500);
+    showToast(hvT('ui.toast.arcade.boom'), 2500);
   }
 
   triggerShieldSpellLock(){
@@ -353,11 +353,11 @@ class ArcadeScene extends Phaser.Scene {
       this.bossHP = Math.max(0, this.bossHP - 120);
       this.updateBossHPBar();
 
-      showToast(`🎯 CRITICAL HIT! "${w.ko}" (${tr(w, 'en')}) SHATTERED SHIELD! +120 DMG!`, 3500);
+      showToast(hvT('ui.toast.arcade.crit', { ko: w.ko, en: tr(w, 'en') }), 3500);
       this.cameras.main.flash(200, 56, 189, 248);
     } else {
       playChiptuneSFX('quiz_wrong');
-      showToast(`❌ WRONG WORD! Shield Reflected Damage!`, 2000);
+      showToast(hvT('ui.toast.arcade.wrong'), 2000);
       this.bossShielded = false;
       this.bossBarrier.setVisible(false);
     }
@@ -366,7 +366,7 @@ class ArcadeScene extends Phaser.Scene {
   hitBoss(laser, boss){
     laser.destroy();
     if(this.bossShielded){
-      showToast('🛡️ BOSS IS SHIELDED! SHOOT THE CORRECT WORD ORB!');
+      showToast(hvT('ui.toast.arcade.bossShielded'));
       return;
     }
 
@@ -397,7 +397,7 @@ class ArcadeScene extends Phaser.Scene {
     this.cameras.main.shake(400, 0.03);
 
     addGold(150);
-    showToast('🎉 BOSS DEFEATED! VICTORY! +150 GOLD REWARD!', 5000);
+    showToast(hvT('ui.toast.arcade.bossDown'), 5000);
 
     this.time.delayedCall(3000, () => this.exitGame());
   }
@@ -407,7 +407,7 @@ class ArcadeScene extends Phaser.Scene {
     if(this.hasShield){
       this.hasShield = false;
       this.shieldAura.setVisible(false);
-      showToast('🛡️ SHIELD ABSORBED HIT!');
+      showToast(hvT('ui.toast.arcade.absorbed'));
       return;
     }
 
@@ -419,7 +419,7 @@ class ArcadeScene extends Phaser.Scene {
     this.time.delayedCall(150, () => this.ship.clearTint());
 
     if(this.playerHP <= 0){
-      showToast('💀 SHIP DESTROYED IN SPACE!');
+      showToast(hvT('ui.toast.arcade.destroyed'));
       this.exitGame();
     }
   }
@@ -435,7 +435,7 @@ class ArcadeScene extends Phaser.Scene {
     const earned = Math.floor(this.score / 15);
     if(earned > 0){
       addGold(earned);
-      showToast(`🕹️ Arcade Cleared: +${earned} Gold!`);
+      showToast(hvT('ui.toast.arcade.cleared', { n: earned }));
     }
     this.cameras.main.fadeOut(300, 0, 0, 0);
     this.cameras.main.once('camerafadeoutcomplete', () => {

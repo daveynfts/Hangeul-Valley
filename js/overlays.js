@@ -51,7 +51,7 @@ window.openMemoryGame = function(){
   // Pick 8 random words
   const all = getUnlockedWords();
   if(all.length < 8) {
-     showToast('Not enough words unlocked! Buy more levels first.', 3000);
+     showToast(hvT('ui.toast.memory.needWords'), 3000);
      memoryOpen = false; return;
   }
   let shuffledAll = [...all].sort(()=>Math.random()-0.5);
@@ -110,7 +110,7 @@ window.onMemoryCardClick = function(idx, cardEl){
            if (typeof checkQuestProgress === 'function') checkQuestProgress('memory', { count: 1 });
            setTimeout(()=>{
              addGold(reward);
-             showToast(`🎉 You matched all cards! +${reward} Gold!`);
+             showToast(hvT('ui.toast.memory.won', { n: reward }));
              window.closeMemoryGame();
            }, 800);
         }
@@ -795,7 +795,7 @@ function cookRecipe(recipeId) {
 
   const recipe = recipes.find(r => r.id === recipeId);
   if (!recipe) {
-    if (typeof showToast === 'function') showToast(`⚠️ Recipe '${recipeId}' not found!`);
+    if (typeof showToast === 'function') showToast(hvT('ui.toast.cook.noRecipe', { id: recipeId }));
     return false;
   }
 
@@ -825,7 +825,7 @@ function cookRecipe(recipeId) {
   for (const req of reqs) {
     const ok = removeItemFromInventory(req.itemId, req.count);
     if (!ok) {
-      if (typeof showToast === 'function') showToast(`⚠️ Failed to remove ingredient ${req.itemId}`);
+      if (typeof showToast === 'function') showToast(hvT('ui.toast.cook.removeFailed', { id: req.itemId }));
       return false;
     }
   }
@@ -890,7 +890,7 @@ function checkCookingAchievements() {
   if (totalCookedTypes >= recipes.length && !unlockedTrophies.includes('master_chef')) {
     unlockedTrophies.push('master_chef');
     if (typeof showToast === 'function') {
-      showToast('🏆 ACHIEVEMENT UNLOCKED: Master Chef (요리 왕)! (100% Recipes Cooked! 🍳⭐)');
+      showToast(hvT('ui.toast.cook.masterChef'));
     }
     if (typeof playChiptuneSFX === 'function') {
       playChiptuneSFX('fanfare');
@@ -1000,7 +1000,7 @@ function applyBuff(type, name, durationMs, value, icon) {
   };
   persistSave();
   updateBuffHUD();
-  showToast(`✨ Active Buff: ${name}!`);
+  showToast(hvT('ui.toast.buff.active', { name }));
 }
 
 function updateBuffHUD() {
@@ -1121,7 +1121,7 @@ window.startCookingMinigame = function(recipeId) {
   const ingMap = inventoryState.ingredients || {};
   for (const [ing, needed] of Object.entries(recipe.req)) {
     if ((ingMap[ing] || 0) < needed) {
-      showToast(`⚠️ Missing required ingredient: ${ing}!`);
+      showToast(hvT('ui.toast.cook.missing', { name: ing }));
       return;
     }
   }

@@ -1485,7 +1485,7 @@ class FarmScene extends Phaser.Scene {
       this.appleRipe = true;
       _saveAppleTree(this);
       this._updateAppleTree();
-      showToast('🍎 Apple Tree is ripe! Go harvest it!');
+      showToast(hvT('ui.toast.apple.ripe'));
       return;
     }
     const secs = Math.ceil(rem / 1000);
@@ -1508,7 +1508,7 @@ class FarmScene extends Phaser.Scene {
       const bonus = 15 + Math.floor(Math.random() * 6); // 15-20 gold
       addGold(bonus);
       this._flyCoins(this.appleX, this.appleY - 30, Math.min(bonus, 8));
-      this._label(this.appleX, this.appleY - 30, `+${bonus} 🍎 BONUS!`);
+      this._label(this.appleX, this.appleY - 30, hvT('ui.farm.label.appleBonus', { n: bonus }));
 
       this.spawnDroppedItem('사과', this.appleX, this.appleY);
 
@@ -1517,7 +1517,7 @@ class FarmScene extends Phaser.Scene {
       this.appleRipeAt  = Date.now() + FarmScene.APPLE_RIPEN_MS;
       _saveAppleTree(this);
       this._updateAppleTree();
-      showToast(`🍎 Harvested! +${bonus} gold! Tree will regrow in 2 min.`, 4000);
+      showToast(hvT('ui.toast.apple.harvested', { n: bonus }), 4000);
     });
   }
 
@@ -1659,7 +1659,7 @@ class FarmScene extends Phaser.Scene {
             this.droppedItems.splice(i, 1);
           } else {
             if (typeof showToast === 'function') {
-              showToast("🎒 Inventory Full! Cannot pick up " + item.nameKo, 2500);
+              showToast(hvT('ui.toast.inv.fullPickup', { name: item.nameKo }), 2500);
             }
             item.pickupCooldown = now + 3000;
           }
@@ -1987,7 +1987,7 @@ class FarmScene extends Phaser.Scene {
 
     if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_correct');
     this._sparkle(p.x, p.y);
-    this._label(p.x, p.y, 'Plot Unlocked! 🔓');
+    this._label(p.x, p.y, hvT('ui.farm.label.plotUnlocked'));
     persistSave();
     if(typeof buildShopGrid === 'function' && shopOpen) buildShopGrid();
   }
@@ -2227,7 +2227,7 @@ class FarmScene extends Phaser.Scene {
       const now = Date.now();
       if (!this._tooFarAt || now - this._tooFarAt > 1400) {
         this._tooFarAt = now;
-        if (typeof showToast === 'function') showToast('Walk closer');
+        if (typeof showToast === 'function') showToast(hvT('ui.toast.walkCloser'));
       }
     }
   }
@@ -2738,7 +2738,7 @@ class FarmScene extends Phaser.Scene {
           this.unlockPlot(p);
         } else {
           if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
-          showToast(`Need ${cost} Gold 🪙 to unlock Farm Plot #${p.index + 1}!`);
+          showToast(hvT('ui.shop.plot.needGold', { cost, n: p.index + 1 }));
         }
         return;
       }
@@ -2828,7 +2828,7 @@ class FarmScene extends Phaser.Scene {
       const crop=this.add.image(plot.x,plot.y-4,cropTex(this,t,1)).setOrigin(0.5,0.85).setScale(0).setDepth(plot.y+5);
       plot.plant=crop;
       this.tweens.add({targets:crop,scale:1,duration:300,ease:'Back.Out(3)'});
-      this._sparkle(plot.x,plot.y); this._label(plot.x,plot.y,'Planted!');
+      this._sparkle(plot.x,plot.y); this._label(plot.x,plot.y,hvT('ui.quiz.result.planted'));
       this._setState(plot,'1',ko);
     } else if(phase===2){
       // P2 correct: grow to sprout, set P3 timer, play watering animation
@@ -2838,7 +2838,7 @@ class FarmScene extends Phaser.Scene {
           onComplete:()=>this.tweens.add({targets:plot.plant,scale:1,duration:150})});
         if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
         if(plot.glow){plot.glow.destroy();plot.glow=null;}
-        this._leaves(plot.x,plot.y-8); this._label(plot.x,plot.y,'Watered!');
+        this._leaves(plot.x,plot.y-8); this._label(plot.x,plot.y,hvT('ui.quiz.result.watered'));
         this._setState(plot,'3',ko);
         savePlotsFn();
       });
@@ -2862,20 +2862,20 @@ class FarmScene extends Phaser.Scene {
         plantedWords.delete(ko);
         this._sparkle(plot.x,plot.y);
         this._label(plot.x,plot.y,
-          (prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`)
-          + (xpGain ? `\n+${xpGain} XP` : ''));
+          hvT(prev === 0 ? 'ui.farm.label.coinsNew' : 'ui.farm.label.coins', { n: reward })
+          + (xpGain ? '\n' + hvT('ui.farm.label.xp', { n: xpGain }) : ''));
 
         // Legendary tier mastery check (>= 10 harvests) -> +10 Honor
         if (newHarvests === 10) {
           addHonor(10);
-          showToast(`👑 Word "${ko}" reached Legendary Tier! +10 Honor!`, 4500);
+          showToast(hvT('ui.toast.word.legendary', { ko }), 4500);
         }
 
         // Quiz streak tracking: +3 Gems every 10 consecutive correct answers
         quizStreak++;
         if (quizStreak % 10 === 0) {
           addGems(3);
-          showToast(`🔥 10-Quiz Perfect Streak! +3 Gems!`, 4000);
+          showToast(hvT('ui.toast.streak10'), 4000);
         }
 
         this.time.delayedCall(350,()=>{
@@ -2931,7 +2931,7 @@ class FarmScene extends Phaser.Scene {
       }});
     this._setState(plot,'2',ko);
     plot.reviewModality = null;
-    showToast('Plant regressed! Water it again.');
+    showToast(hvT('ui.toast.plantRegressed'));
     savePlotsFn();
   }
 
@@ -3107,8 +3107,8 @@ class FarmScene extends Phaser.Scene {
     const res = this._plantDueReviews();
     if(!res || !res.planted) return;
     const msg = res.remaining > 0
-      ? `⏰ ${res.planted} word${res.planted===1?'':'s'} due for review — ${res.remaining} more waiting for free plots`
-      : `⏰ ${res.planted} word${res.planted===1?'':'s'} due for review!`;
+      ? hvT(res.planted === 1 ? 'ui.toast.review.dueMore.one' : 'ui.toast.review.dueMore', { n: res.planted, more: res.remaining })
+      : hvT(res.planted === 1 ? 'ui.toast.review.due.one' : 'ui.toast.review.due', { n: res.planted });
     if(announce) showToast(msg, 4200);
     updateHUD();
   }

@@ -1751,18 +1751,18 @@ function closeShop() {
 
 function _doLevelPurchase(idx) {
   const cost = LEVEL_COST(idx);
-  if(unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return false; }
-  if(!spendCoins(cost)) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return false; }
+  if(unlockedLevels.includes(idx)) { showToast(hvT('ui.toast.shop.owned')); return false; }
+  if(!spendCoins(cost)) { showToast(hvT('ui.toast.shop.needCoins', { cost, have: playerCurrencies.coins })); return false; }
   unlockedLevels.push(idx);
   if(sceneRef) sceneRef.refreshPlotAccess();
-  showToast(`🎉 Unlocked "${levelName(levelsData[idx])}"! Welcome to Level ${levelsData[idx].level}!`, 4500);
+  showToast(hvT('ui.toast.shop.unlocked', { name: levelName(levelsData[idx]), level: levelsData[idx].level }), 4500);
   return true;
 }
 function buyLevel(idx) {
   playChiptuneSFX('click');
   const cost = LEVEL_COST(idx);
-  if (unlockedLevels.includes(idx)) { showToast('You already own this pack!'); return; }
-  if (playerCurrencies.coins < cost) { showToast(`Need ${cost} Coins! You have ${playerCurrencies.coins} 🪙`); return; }
+  if (unlockedLevels.includes(idx)) { showToast(hvT('ui.toast.shop.owned')); return; }
+  if (playerCurrencies.coins < cost) { showToast(hvT('ui.toast.shop.needCoins', { cost, have: playerCurrencies.coins })); return; }
   startShopQuizGate(idx);
 }
 // Expansions must be bought in order, cheapest first. Without this the shop happily
@@ -1777,7 +1777,7 @@ function buyPlotExpansion(idx) {
   const cost = PLOT_UNLOCK_COSTS[idx] || 1000;
 
   if (isPlotUnlocked(plotIndex)) {
-    showToast('You already unlocked this farm plot!');
+    showToast(hvT('ui.toast.shop.plotOwned'));
     return;
   }
 
@@ -2980,7 +2980,7 @@ function openStudyDesk() {
     // is added, and an empty menu overlay would read as a broken screen rather than an empty
     // one.
     if (!deskMenuOptions.length) {
-      if (typeof showToast === 'function') showToast('📭 아직 문제가 없어요 — no questions here yet', 3200);
+      if (typeof showToast === 'function') showToast(hvT('ui.toast.desk.noQuestions'), 3200);
       return;
     }
     if (deskMenuOptions.length === 1) { deskMenuOptions[0].run(); return; }

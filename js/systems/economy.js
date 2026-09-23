@@ -438,7 +438,7 @@ function addGems(amount) {
   syncGoldAlias();
   persistSave();
   updateCurrencyHUD(true);
-  showToast(`💎 Earned +${finalGems} Gem${finalGems > 1 ? 's' : ''}!`);
+  showToast(hvT(finalGems > 1 ? 'ui.toast.gems' : 'ui.toast.gems.one', { n: finalGems }));
 }
 
 function addHonor(amount) {
@@ -447,7 +447,7 @@ function addHonor(amount) {
   syncGoldAlias();
   persistSave();
   updateCurrencyHUD(true);
-  showToast(`🎖️ Earned +${finalHonor} Honor!`);
+  showToast(hvT('ui.toast.honor', { n: finalHonor }));
   checkQuestProgress('honor', { total: playerCurrencies.honor });
   if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
 }
@@ -497,7 +497,7 @@ function checkAffordablePacks() {
   if (levelsData && levelsData.length) {
     const affordable = levelsData.findIndex((_, i) =>
       !unlockedLevels.includes(i) && playerCurrencies.coins >= LEVEL_COST(i));
-    if (affordable >= 0) showToast(`💡 You can afford "${levelName(levelsData[affordable])}"! Visit 🏪 Shop!`);
+    if (affordable >= 0) showToast(hvT('ui.toast.shop.affordable', { name: levelName(levelsData[affordable]) }));
   }
 }
 
@@ -541,7 +541,7 @@ function isZoneUnlocked(zoneKey) {
 function showHardLockToast(zoneKey) {
   const check = isZoneUnlocked(zoneKey);
   playChiptuneSFX('denied');
-  showToast(`🔒 LOCKED: Learn ${check.targetPct}% of ${check.reqName} first! (Current: ${check.pct}%)`, 4000);
+  showToast(hvT('ui.toast.zone.locked', { target: check.targetPct, name: check.reqName, pct: check.pct }), 4000);
 }
 
 // ═══════════════ MULTIPLE-CHOICE OPTION BUILDING ═════════════════════════════
@@ -600,7 +600,7 @@ function startShopQuizGate(idx) {
   // An empty pool means levelsData never loaded. Opening the overlay anyway locked the
   // player behind a gate with no questions in it.
   if (!questions.length) {
-    showToast('Vocabulary is still loading — try again in a moment.');
+    showToast(hvT('ui.toast.vocabLoading'));
     return;
   }
 
@@ -664,14 +664,14 @@ function answerShopQuiz(isCorrect) {
     playChiptuneSFX('quiz_wrong');
     document.getElementById('shop-quiz-overlay').classList.remove('visible');
     playerLocked = false;
-    showToast(`❌ Quiz Gate Failed! 0 Coins deducted. Practice in farm to unlock!`, 4000);
+    showToast(hvT('ui.toast.gate.shopFailed'), 4000);
   }
 }
 
 function cancelShopQuizGate() {
   document.getElementById('shop-quiz-overlay').classList.remove('visible');
   playerLocked = false;
-  showToast('Purchase challenge cancelled.');
+  showToast(hvT('ui.toast.gate.shopCancelled'));
 }
 
 // ═══════════════ R2: BOSS ENTRANCE GATE CHALLENGE ═════════════════════════════
@@ -730,7 +730,7 @@ function answerBossGate(isCorrect) {
     playChiptuneSFX('quiz_wrong');
     document.getElementById('boss-gate-overlay').classList.remove('visible');
     playerLocked = false;
-    showToast(`❌ Entrance Gate Challenge Failed! Defeat review minions to try again.`, 4000);
+    showToast(hvT('ui.toast.gate.bossFailed'), 4000);
     if (bossGateState.callback) bossGateState.callback(false);
   }
 }
@@ -738,7 +738,7 @@ function answerBossGate(isCorrect) {
 function cancelBossGate() {
   document.getElementById('boss-gate-overlay').classList.remove('visible');
   playerLocked = false;
-  showToast('Retreated from Entrance Gate.');
+  showToast(hvT('ui.toast.gate.bossRetreat'));
 }
 
 // ═══════════════ R2: QUEST SYSTEM ═════════════════════════════════════════════
@@ -1067,8 +1067,8 @@ function checkQuestProgress(type, data = {}) {
   if (questOverlayOpen) renderQuestList();
   if (!questOverlayOpen && readyTitles.length && typeof showToast === 'function') {
     const first = readyTitles[0];
-    const extra = readyTitles.length > 1 ? ' (+' + (readyTitles.length - 1) + ' more)' : '';
-    showToast('📜 Ready to claim: ' + first + extra, 3200);
+    const extra = readyTitles.length > 1 ? ' ' + hvT('ui.toast.quest.readyMore', { n: readyTitles.length - 1 }) : '';
+    showToast(hvT('ui.toast.quest.ready', { title: first }) + extra, 3200);
   }
 }
 
@@ -1358,7 +1358,7 @@ function claimMainQuest(actNum) {
   const curr = mainQuestProgress(act);
   const srsPct = typeof calcLevelProgress === 'function' ? calcLevelProgress(act.reqLevel) : 0;
   if (curr < act.target || srsPct < act.minPct) {
-    showToast('Quest requirements not met yet.');
+    showToast(hvT('ui.toast.quest.notMet'));
     return;
   }
 
@@ -1406,7 +1406,7 @@ function claimReadySideQuests(tab) {
   addCoins(coins);
   addGems(gems);
   addHonor(honor);
-  showToast('Claimed ' + ready.length + ' quest' + (ready.length === 1 ? '' : 's') + '  ·  +' + coins + ' coins', 4000);
+  showToast(hvT(ready.length === 1 ? 'ui.toast.quest.claimed.one' : 'ui.toast.quest.claimed', { n: ready.length, coins }), 4000);
   updateQuestHudBadge();
   renderQuestList();
 }
