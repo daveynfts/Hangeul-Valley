@@ -15,6 +15,13 @@ function leaderboardKey(sub) {
   return LB_PREFIX + id + '.json';
 }
 
+// The revision a stored save is at. Saves written before revisions existed have none, and
+// count as revision 0 — which is also what a client that read nothing sends as its base.
+function storedRev(save) {
+  const r = save && Number(save.rev);
+  return Number.isInteger(r) && r > 0 ? r : 0;
+}
+
 async function getObjectJson(client, Key) {
   let text;
   try {
@@ -160,7 +167,22 @@ module.exports = async (req, res) => {
       // nothing. Clamping it to `now` instead would be worse than doing nothing, because
       // `now` outranks the timestamp the client just sent.
       const currentAt = trustedStamp(current && current.updatedAt, writeNow);
-      if (currentAt > payload.updatedAt) {
+      const currentRev = storedRev(current);
+
+      // The revision is what decides now. A timestamp only says when a device wrote, not what
+      // it had seen: a laptop whose tab had been open since yesterday wrote a newer stamp than
+      // the phone that played this morning, and so won, putting yesterday back over the
+      // morning's reviews. `baseRev` is the revision the client's state was built on. If
+      // somebody has written since, the client is handed the current copy, merges the two
+      // (js/systems/saveMerge.js) and sends again on top of it.
+      if (Object.prototype.hasOwnProperty.call(body, 'baseRev')) {
+        if (current && Number(body.baseRev) !== currentRev) {
+          res.setHeader('Cache-Control', 'private, no-store');
+          res.status(409).json({ error: 'conflict', rev: currentRev, updatedAt: currentAt, data: current });
+          return;
+        }
+      } else if (currentAt > payload.updatedAt) {
+        // A build that predates revisions: the timestamp rule it was written against.
         res.setHeader('Cache-Control', 'private, no-store');
         res.status(409).json({
           error: 'stale save',
@@ -170,6 +192,8 @@ module.exports = async (req, res) => {
         });
         return;
       }
+      delete payload.baseRev;
+      payload.rev = currentRev + 1;
 
       await client.send(new PutObjectCommand({
         Bucket: r2Bucket(),
@@ -200,7 +224,7 @@ module.exports = async (req, res) => {
         console.warn('[save] leaderboard row not written:', e && e.name, e && e.message);
       }
 
-      res.status(200).json({ ok: true, updatedAt: payload.updatedAt });
+      res.status(200).json({ ok: true, updatedAt: payload.updatedAt, rev: payload.rev });
       return;
     }
     res.status(405).json({ error: 'method not allowed' });

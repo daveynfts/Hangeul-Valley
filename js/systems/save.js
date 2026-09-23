@@ -781,6 +781,44 @@ function applySave(d){
   return true;
 }
 
+// Take in the progress another device made, in the middle of play on this one.
+//
+// `m` is mergeSaves(this device's live state, the cloud's copy), so its records already hold
+// everything this device has done as well. Only those records are replaced. The whole-state
+// fields — coins, the plots, the bag, the quest board — are this device's by construction, and
+// running applySave instead would rebuild the farm under a player who is mid-harvest.
+function absorbCloudProgress(m) {
+  if (!m || typeof m !== 'object') return false;
+  if (m.srs && typeof m.srs === 'object') srsData = m.srs;
+  if (m.harvests && typeof m.harvests === 'object') {
+    harvestCounts.clear();
+    Object.entries(m.harvests).forEach(([k, v]) => harvestCounts.set(k, v));
+  }
+  if (Array.isArray(m.attempts)) attemptLog = m.attempts.slice(-ATTEMPT_LOG_MAX);
+  if (m.practice && typeof m.practice === 'object' && !Array.isArray(m.practice)) practiceLog = m.practice;
+  if (m.fishAlbum && typeof m.fishAlbum === 'object') fishAlbumSave = m.fishAlbum;
+  if (Array.isArray(m.unlockedLevels)) unlockedLevels = m.unlockedLevels.slice();
+  if (Array.isArray(m.unlockedTrophies)) unlockedTrophies = m.unlockedTrophies.slice();
+  if (Array.isArray(m.unlockedPlots)) {
+    unlockedPlots = m.unlockedPlots.slice().sort((a, b) => a - b);
+    unlockedPlotCount = unlockedPlots.length;
+  }
+  if (Array.isArray(m.ownedSkinIds)) ownedSkinIds = m.ownedSkinIds.slice();
+  if (Array.isArray(m.visitedWorlds) && typeof visitedWorlds !== 'undefined') visitedWorlds = m.visitedWorlds.slice();
+  if (m.playerRank && typeof m.playerRank === 'object') {
+    playerRank = Object.assign(defaultPlayerRank(), m.playerRank);
+    ensurePlayerRank();
+  }
+  if (m.leaderboards && typeof m.leaderboards === 'object') leaderboardState = m.leaderboards;
+  if (m.cooking && typeof m.cooking === 'object') cookingState = m.cooking;
+  if (typeof resolveWorldRefs === 'function') resolveWorldRefs(_worldsSettled);
+  if (typeof sanitizeSkinState === 'function') sanitizeSkinState();
+  updateRankHUD();
+  if (sceneRef && typeof sceneRef.refreshPlotAccess === 'function') sceneRef.refreshPlotAccess();
+  if (typeof updateHUD === 'function') { try { updateHUD(); } catch (e) {} }
+  return true;
+}
+
 // ── Autosave scheduling ──────────────────────────────────────────────────────
 // Write to file (pywebview) AND localStorage backup.
 //
@@ -942,6 +980,26 @@ async function loadSave(){
 // Everything from the token in hand to the button that asks for one. Extracted whole by
 // tests/test_persistent_signin.js, which is why the boundary markers are here.
 let googleAuth = { clientId: '', token: '', user: null, ready: false, exp: 0, configFailed: false };
+
+// The revision of the cloud copy this device's state was built on (api/save.js keeps one per
+// save). null until the cloud copy has been read this visit — and nothing is uploaded before it
+// has: a write that goes out before the read cannot know what it is replacing. That was a real
+// window at sign-in, where the first autosave could land a fresh browser's blank game over the
+// account while the read that would have caught it was still in flight.
+let _cloudRev = null;
+let _syncRunning = null;
+let _syncAskedAt = 0;
+const SYNC_ASK_COOLDOWN_MS = 30 * 1000;
+
+/** A write found the cloud copy unread: read it, which merges and uploads in one go. Asked for
+ *  at most every half minute, so a cloud that keeps failing is not asked on every autosave. */
+function requestCloudSync() {
+  if (_syncRunning) return _syncRunning;
+  const now = Date.now();
+  if (now - _syncAskedAt < SYNC_ASK_COOLDOWN_MS) return null;
+  _syncAskedAt = now;
+  return syncCloudSave();
+}
 
 function peekLocalSave() {
   try { return JSON.parse(localStorage.getItem('hv_save_v2') || 'null'); } catch { return null; }
@@ -1512,6 +1570,66 @@ function cloudReasonText(reason) {
   return hvT('ui.save.reason.' + code, { status: at < 0 ? '' : s.slice(at + 1) });
 }
 
+// Rounds of merge-and-resend one write may take before it gives up and waits for the next.
+const CLOUD_MERGE_ROUNDS = 3;
+
+// What one PUT's answer means. Returns a result for the chain, or `null` for a 409 conflict the
+// caller can resolve by merging — that one is the caller's, because it needs the payload.
+function classifyCloudWrite(status, expired, json) {
+  if (status === 401) {
+    // Two unrelated things arrive here as 401, and treating them alike is what made a
+    // sign-in so easy to lose. The server refusing the token means Google will not vouch
+    // for this player any more, and the session really is over. Failing to *obtain* a
+    // token — offline, or One Tap inside its cool-off — says nothing about the player at
+    // all, and ending the session over it turned a dropped connection into "sign in
+    // again" and, on the next load, a guest. The sign-in is kept, and the push takes its
+    // place in the retry backoff like any other blip.
+    if (expired) {
+      _cloudLastError = 'expired';
+      return { ok: false, status, reason: 'expired' };
+    }
+    // The server refused every credential this request carried, so the cookie is no
+    // better than the token. Leaving the hint behind would keep every later push
+    // thinking it still had a way in.
+    forgetServerSession();
+    setGoogleSession('', null);
+    if (typeof showToast === 'function') showToast(hvT('ui.cloud.signInAgain'));
+    return { ok: false, status, reason: 'signed-out' };
+  }
+  // The save names a different account from the one signed in (api/_saveBody.js). The
+  // shared-browser switch should have caught it first; if it did not, nothing is sent again.
+  if (status === 409 && json && json.error === 'account mismatch') {
+    _cloudLastError = 'wrong-account';
+    console.warn('Cloud save refused: it belongs to another account');
+    return { ok: false, status, reason: _cloudLastError };
+  }
+  if (status === 409) {
+    // Still ahead of this device after every merge round, or an endpoint that predates
+    // revisions refusing on its timestamp rule. Do not overwrite it, and do not yank the
+    // session out from under the player; the next write, or the next load, merges again.
+    _cloudLastError = 'stale';
+    if (typeof showToast === 'function') {
+      showToast('☁ ' + hvT('ui.cloud.newerElsewhere'), 4200);
+    }
+    return { ok: false, status, reason: _cloudLastError };
+  }
+  // Its own reason rather than 'http:413'. The endpoint's ceiling was once low enough for a
+  // learner to reach, and a bare status code on the chip is no way to find that out. Not
+  // retryable: the same save is the same size a minute from now.
+  if (status === 413) {
+    _cloudLastError = 'too-large';
+    console.warn('Cloud save refused as too large');
+    return { ok: false, status, reason: _cloudLastError };
+  }
+  if (status !== 200) {
+    _cloudLastError = 'http:' + status;
+    console.warn('Cloud save rejected:', status);
+    return { ok: false, status, reason: _cloudLastError };
+  }
+  _cloudLastError = '';
+  return { ok: true, status };
+}
+
 function pushCloudSave(data) {
   if (typeof _savesFrozen !== 'undefined' && _savesFrozen) return { ok: true, skipped: true, reason: 'frozen' };
   if (!hasCloudCredential()) return { ok: true, skipped: true, reason: 'signed-out' };
@@ -1530,60 +1648,41 @@ function pushCloudSave(data) {
     if (payload.owner && signedAs && payload.owner !== signedAs) {
       return { ok: false, skipped: true, reason: 'wrong-account' };
     }
+    // Not before the cloud copy has been read (see _cloudRev). The read merges and uploads.
+    const revs = typeof _cloudRev !== 'undefined';
+    if (revs && _cloudRev === null) {
+      if (typeof requestCloudSync === 'function') requestCloudSync();
+      return { ok: false, skipped: true, reason: 'unsynced' };
+    }
     try {
-      const { status, expired, json } = await cloudSaveRequest('PUT', payload);
-      if (status === 401) {
-        // Two unrelated things arrive here as 401, and treating them alike is what made a
-        // sign-in so easy to lose. The server refusing the token means Google will not vouch
-        // for this player any more, and the session really is over. Failing to *obtain* a
-        // token — offline, or One Tap inside its cool-off — says nothing about the player at
-        // all, and ending the session over it turned a dropped connection into "sign in
-        // again" and, on the next load, a guest. The sign-in is kept, and the push takes its
-        // place in the retry backoff like any other blip.
-        if (expired) {
-          _cloudLastError = 'expired';
-          return { ok: false, status, reason: 'expired' };
+      let body = payload;
+      let merged = false;
+      for (let round = 0; ; round++) {
+        const sent = revs ? Object.assign({}, body, { baseRev: _cloudRev }) : body;
+        const { status, expired, json } = await cloudSaveRequest('PUT', sent);
+        // Another device has written since this one last read. Take in what it did, keep what
+        // this one did, and send the two together on top of it — a few rounds at most, in case
+        // the other device is saving too. See js/systems/saveMerge.js.
+        if (revs && status === 409 && json && json.error === 'conflict' && json.data
+          && round < CLOUD_MERGE_ROUNDS && typeof mergeSaves === 'function') {
+          const mine = (typeof collectSave === 'function') ? collectSave() : body;
+          body = mergeSaves(mine, json.data, { prefer: 'a' });
+          if (typeof absorbCloudProgress === 'function') absorbCloudProgress(body);
+          _cloudRev = Number(json.rev) || 0;
+          merged = true;
+          continue;
         }
-        // The server refused every credential this request carried, so the cookie is no
-        // better than the token. Leaving the hint behind would keep every later push
-        // thinking it still had a way in.
-        forgetServerSession();
-        setGoogleSession('', null);
-        if (typeof showToast === 'function') showToast(hvT('ui.cloud.signInAgain'));
-        return { ok: false, status, reason: 'signed-out' };
-      }
-      // The save names a different account from the one signed in (api/_saveBody.js). The
-      // shared-browser switch should have caught it first; if it did not, nothing is sent again.
-      if (status === 409 && json && json.error === 'account mismatch') {
-        _cloudLastError = 'wrong-account';
-        console.warn('Cloud save refused: it belongs to another account');
-        return { ok: false, status, reason: _cloudLastError };
-      }
-      if (status === 409) {
-        // The server is holding a newer save than the one being pushed — another device
-        // got there first. Do not overwrite it, and do not yank the current session out
-        // from under the player either; syncCloudSave() reconciles on the next load.
-        _cloudLastError = 'stale';
-        if (typeof showToast === 'function') {
-          showToast('☁ ' + hvT('ui.cloud.newerElsewhere'), 4200);
+        const result = classifyCloudWrite(status, expired, json);
+        if (result.ok) {
+          if (revs && json && typeof json.rev === 'number') _cloudRev = json.rev;
+          if (typeof rememberCloudBase === 'function') rememberCloudBase(sent);
+          if (merged) {
+            result.merged = true;
+            if (typeof showToast === 'function') showToast('☁ ' + hvT('ui.cloud.mergedElsewhere'), 4200);
+          }
         }
-        return { ok: false, status, reason: _cloudLastError };
+        return result;
       }
-      // Its own reason rather than 'http:413'. The endpoint's ceiling was once low enough for a
-      // learner to reach, and a bare status code on the chip is no way to find that out. Not
-      // retryable: the same save is the same size a minute from now.
-      if (status === 413) {
-        _cloudLastError = 'too-large';
-        console.warn('Cloud save refused as too large');
-        return { ok: false, status, reason: _cloudLastError };
-      }
-      if (status !== 200) {
-        _cloudLastError = 'http:' + status;
-        console.warn('Cloud save rejected:', status);
-        return { ok: false, status, reason: _cloudLastError };
-      }
-      _cloudLastError = '';
-      return { ok: true, status };
     } catch (e) {
       // Swallowing this was how a week of offline play could look like it was syncing.
       _cloudLastError = (e && e.name === 'AbortError') ? 'timeout' : 'network';
@@ -1686,6 +1785,16 @@ function beaconCloudSave(data) {
   const token = getGoogleToken();
   if (typeof fetch !== 'function') return false;
   if (!token && !serverSessionAlive()) return false;
+  // The same two rules as every other write: only as the account the save names, and only on
+  // top of the cloud copy this visit read (api/save.js refuses a stale base with 409, which a
+  // page on its way out cannot answer — the tail then waits in this device's copy, and the
+  // next visit merges it). A visit that never read the cloud copy writes nothing on the way out.
+  const signedAs = (typeof googleAuth !== 'undefined' && googleAuth && googleAuth.user && googleAuth.user.sub) || '';
+  if (data && data.owner && signedAs && data.owner !== signedAs) return false;
+  if (typeof _cloudRev !== 'undefined') {
+    if (_cloudRev === null) return false;
+    data = Object.assign({}, data, { baseRev: _cloudRev });
+  }
   let body;
   try { body = JSON.stringify(data); } catch { return false; }
   const opts = {
@@ -1776,6 +1885,15 @@ async function fetchCloudSave() {
 }
 
 async function syncCloudSave() {
+  // One read at a time. A credential arriving, a restore at boot and a write that found the
+  // cloud copy unread can all ask at once, and two reads each merging and uploading is a
+  // device in conflict with itself.
+  if (_syncRunning) return _syncRunning;
+  _syncRunning = syncCloudSaveOnce();
+  try { return await _syncRunning; } finally { _syncRunning = null; }
+}
+
+async function syncCloudSaveOnce() {
   if (!hasCloudCredential()) return;
   const got = await fetchCloudSave();
   if (!got.ok) {
@@ -1800,36 +1918,56 @@ async function syncCloudSave() {
     return;
   }
   announceAccountSwitch(sub);
+  // The copy this device's state is built on from here on; every write names it (api/save.js).
+  _cloudRev = remote ? (Number(remote.rev) || 0) : 0;
   const remoteAt = (remote && remote.updatedAt) || 0;
   const localAt = (local && local.updatedAt) || 0;
 
   // A newer local save only outranks the cloud when it actually holds more progress. Newer
   // and emptier means a fresh session on a machine that has not synced yet, and the cloud
   // copy is the one to keep. Newer and equal-or-richer is genuine offline play, which wins.
+  //
+  // "Wins" now decides only the state of the game in the moment — coins, plots, the bag, the
+  // quest board. The records of what happened are merged either way (js/systems/saveMerge.js),
+  // so a review answered on this device while it was offline is not thrown away because the
+  // other device's coins are the ones kept, and a guest's first plantings survive signing in
+  // to an account that has more.
   const pullBecauseEmptier = !!(remote && localAt > remoteAt
     && saveProgressWeight(local) < saveProgressWeight(remote));
+  const remoteWins = !!remote && (remoteAt >= localAt || pullBecauseEmptier);
 
-  if (remote && (remoteAt >= localAt || pullBecauseEmptier)) {
-    if (applySave(remote)) {
+  if (remote) {
+    // The live state rather than the stored copy: it is the freshest version of what this
+    // device did, including anything the debounce had not written yet.
+    const mine = local ? collectSave() : null;
+    const merged = (mine && typeof mergeSaves === 'function')
+      ? mergeSaves(mine, remote, { prefer: remoteWins ? 'b' : 'a' })
+      : remote;
+    const added = !!mine && typeof saveProgressDiffers === 'function' && saveProgressDiffers(merged, remote);
+    if (remoteWins) {
+      if (!applySave(merged)) return;
       if (sub) saveOwner = sub;
-      try { localStorage.setItem('hv_save_v2', JSON.stringify(remote)); } catch {}
-      // Said differently when this device's copy is being discarded, because it is — someone
-      // who had played here as a guest deserves to be told where it went.
+      try { localStorage.setItem('hv_save_v2', JSON.stringify(merged)); } catch {}
       if (typeof showToast === 'function') {
-        if (pullBecauseEmptier) showToast('☁ ' + hvT('ui.cloud.restored'), 5000);
+        if (added) showToast('☁ ' + hvT('ui.cloud.loadedMerged'), 5000);
+        else if (pullBecauseEmptier) showToast('☁ ' + hvT('ui.cloud.restored'), 5000);
         else showToast('☁ ' + hvT('ui.cloud.loaded'));
       }
       if (typeof updateGoldHUD === 'function') updateGoldHUD();
       if (typeof updateRankHUD === 'function') updateRankHUD();
       if (typeof buildLevelSelectScreen === 'function') buildLevelSelectScreen();
+      if (!added) return;
+    } else if (typeof absorbCloudProgress === 'function') {
+      absorbCloudProgress(merged);
     }
+    // Through pushCloudSave, not cloudSaveRequest directly, so this upload takes its turn
+    // on the same chain as gameplay saves instead of racing them.
+    const pushed = await pushCloudSave(collectSave());
+    if (sub && pushed && (pushed.ok || pushed.reason === 'superseded')) adoptSaveOwner(sub);
     return;
   }
-  // Through pushCloudSave, not cloudSaveRequest directly, so this upload takes its turn
-  // on the same chain as gameplay saves instead of racing them.
-  let pushed = null;
-  if (local) pushed = await pushCloudSave(local);
-  else if (!remote) pushed = await pushCloudSave(collectSave());
+  // No cloud copy yet: this device's progress is the account's first.
+  const pushed = await pushCloudSave(collectSave());
   // A guest's progress now belongs to this account — or already did. Either way the copy on
   // this device says so from here on.
   if (sub && pushed && (pushed.ok || pushed.reason === 'superseded')) adoptSaveOwner(sub);

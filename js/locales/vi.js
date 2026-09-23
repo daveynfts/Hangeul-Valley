@@ -169,6 +169,8 @@
   "ui.ck.title": "Bếp Hàn (요리)",
   "ui.cloud.continueAs": "Lần trước đăng nhập bằng {account}",
   "ui.cloud.loaded": "Đã tải bản lưu trên đám mây",
+  "ui.cloud.loadedMerged": "Đã tải bản lưu đám mây và gộp cả tiến độ bạn làm trên thiết bị này.",
+  "ui.cloud.mergedElsewhere": "Đã gộp tiến độ từ thiết bị khác của bạn.",
   "ui.cloud.newerElsewhere": "Một thiết bị khác có tiến độ mới hơn — không ghi đè lên đó.",
   "ui.cloud.notSynced": "Chưa đồng bộ",
   "ui.cloud.offline": "Không kết nối được tới bản lưu đám mây. Tiến độ của bạn vẫn an toàn trên máy này.",

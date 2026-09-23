@@ -770,6 +770,28 @@ Behind that, a queued or retried push is only ever sent as the account its save 
 sign-out drops whatever was still queued, and `/api/save` answers `409 account mismatch` to a
 save naming somebody else (`saveClaimsOtherAccount` in `api/_saveBody.js`).
 
+### Two devices
+
+The cloud used to keep whichever copy was written last, whole. A laptop whose tab had been
+open since yesterday wrote a newer timestamp than the phone that played this morning, so its
+first autosave put yesterday back over the morning's reviews; the 409 only caught a request
+arriving out of order.
+
+Every stored save now carries a revision (`rev`), and every write names the revision its state
+was built on (`baseRev`). A write on an old base is answered `409 conflict` with the current
+copy; the client merges it with its live state (`mergeSaves` in `js/systems/saveMerge.js`),
+takes the other device's progress into memory without rebuilding the farm
+(`absorbCloudProgress`), and sends the merge on top — up to three rounds. The merge keeps the
+most recent answer per word and modality, the larger harvest and practice counts, the union of
+the attempt log and of every unlock, the higher rank and personal bests; coins, plots, the bag
+and the quest board are one game's state in the moment and come whole from the live copy.
+Signing in merges the same way instead of picking one copy, with the old newer-and-richer rule
+deciding only whose game-in-the-moment is kept. Nothing is uploaded before the visit has read
+the cloud copy — the first autosave on a fresh browser used to be able to land a blank game
+while that read was in flight. A build that sends no `baseRev` keeps the old timestamp rule,
+and its writes still move the revision on. `tests/test_cloud_merge.js` runs the real
+`api/save.js` over an in-memory bucket with three devices on one account.
+
 ---
 
 ## Roadmap

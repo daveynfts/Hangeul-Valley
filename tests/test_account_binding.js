@@ -252,7 +252,7 @@ function cloudSave(sub, coinCount, srsWords) {
   page = openPage();
   page.signedInAs = 'bob';
   browser.local.setItem('hv_google_token', 'tok-bob');
-  page.R('googleAuth.token = "tok-bob"; googleAuth.user = { sub: "bob" };');
+  page.R('googleAuth.token = "tok-bob"; googleAuth.user = { sub: "bob" }; _cloudRev = 0;');
   const sentBefore = cloud.puts.length;
   const r = await page.R('pushCloudSave({ v: 11, owner: "alice", updatedAt: 5 })');
   eq(r.reason, 'wrong-account', 'a save naming its owner is never sent as anybody else');

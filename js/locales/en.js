@@ -169,6 +169,8 @@
   "ui.ck.title": "Korean Cooking Kitchen (요리)",
   "ui.cloud.continueAs": "Last signed in as {account}",
   "ui.cloud.loaded": "Cloud save loaded",
+  "ui.cloud.loadedMerged": "Cloud save loaded, with what you did on this device merged in.",
+  "ui.cloud.mergedElsewhere": "Progress from your other device was merged in.",
   "ui.cloud.newerElsewhere": "Another device has newer progress — not overwriting it.",
   "ui.cloud.notSynced": "Not synced",
   "ui.cloud.offline": "Could not reach the cloud save. Your progress is safe on this device.",

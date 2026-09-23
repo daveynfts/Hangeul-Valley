@@ -8,6 +8,7 @@
   "js/systems/music.js",
   "js/renderer.js",
   "js/systems/srs.js",
+  "js/systems/saveMerge.js",
   "js/systems/save.js",
   "js/systems/economy.js",
   "js/artScale.js",

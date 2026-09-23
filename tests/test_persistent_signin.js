@@ -217,6 +217,9 @@ const R = (c, expr) => vm.runInContext(expr, c);
     // request: it answers 401 with expired set. That is a local condition, not a verdict.
     const c = ctx({ gis: 'refuse', local: { hv_google_token: EXPIRED(), hv_google_user: '{"sub":"1"}' } });
     R(c, 'CLOUD_PUSH_RETRY_MS.length = 0;');   // no live timer once the case is made
+    // A write only goes out once this visit has read the cloud copy (_cloudRev); the cases here
+    // are about what a write is told, so that read is taken as done.
+    R(c, '_cloudRev = 0;');
     const r = await R(c, 'pushCloudSave')({ v: 10 });
     eq(r.ok, false, 'the push fails');
     eq(r.reason, 'expired', 'and says why in a way the caller can act on');
@@ -232,6 +235,7 @@ const R = (c, expr) => vm.runInContext(expr, c);
       fetch: () => Promise.resolve({ status: 401, json: async () => ({ error: 'sign in required' }) })
     });
     R(c, 'CLOUD_PUSH_RETRY_MS.length = 0;');
+    R(c, '_cloudRev = 0;');
     const r = await R(c, 'pushCloudSave')({ v: 10 });
     eq(r.reason, 'signed-out', 'a 401 from the server is a sign-out');
     eq(R(c, 'hasGoogleSignIn')(), false, 'the session is ended');
