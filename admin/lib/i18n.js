@@ -231,7 +231,15 @@ function listCatalogs(rootDir) {
 
 function writeCatalogIndex(rootDir) {
   const index = listCatalogs(rootDir);
-  const text = `/**
+  atomicWriteText(path.join(rootDir, INDEX_REL), renderCatalogIndex(index));
+  return index;
+}
+
+// The index file's exact text for a given index. Split out of writeCatalogIndex so a writer
+// that cannot see every catalogue on disk — the Vercel admin, which works in a scratch copy —
+// can produce the same bytes from an index it has edited rather than one it has scanned.
+function renderCatalogIndex(index) {
+  return `/**
  * Which translation catalogues exist, per language. Generated — see admin/lib/i18n.js.
  *
  * The game reads this before FarmScene.preload() so it asks only for catalogues that are
@@ -247,8 +255,6 @@ ${INDEX_END}
   ;
 }(typeof window !== 'undefined' ? window : globalThis));
 `;
-  atomicWriteText(path.join(rootDir, INDEX_REL), text);
-  return index;
 }
 
 // Delimited the same way the chrome catalogues are, and for the same reason: the payload has
@@ -258,15 +264,31 @@ ${INDEX_END}
 function readCatalogIndex(rootDir) {
   const full = path.join(rootDir, INDEX_REL);
   if (!fs.existsSync(full)) return {};
-  const src = fs.readFileSync(full, 'utf8');
-  const open = src.indexOf(INDEX_BEGIN);
-  const close = src.indexOf(INDEX_END, open);
+  return parseCatalogIndex(fs.readFileSync(full, 'utf8'));
+}
+
+function parseCatalogIndex(src) {
+  const text = String(src || '');
+  const open = text.indexOf(INDEX_BEGIN);
+  const close = text.indexOf(INDEX_END, open);
   if (open < 0 || close < 0) return {};
-  try { return JSON.parse(src.slice(open + INDEX_BEGIN.length, close).trim()); }
+  try { return JSON.parse(text.slice(open + INDEX_BEGIN.length, close).trim()); }
   catch (e) { return {}; }
 }
 
-function writeCatalog(rootDir, source, lang, entries) {
+/** The index with one catalogue marked present or absent, in the order listCatalogs uses. */
+function setCatalogIndexed(index, source, lang, present) {
+  const next = JSON.parse(JSON.stringify(index || {}));
+  const have = new Set(next[lang] || []);
+  if (present) have.add(source); else have.delete(source);
+  const list = HV_CATALOG_SOURCES.filter((rel) => have.has(rel));
+  if (list.length) next[lang] = list; else delete next[lang];
+  return next;
+}
+
+// `opts.index === false` leaves js/locales/catalogs.js alone — for a writer working in a
+// scratch copy that holds only this one catalogue, where a rescan would list nothing else.
+function writeCatalog(rootDir, source, lang, entries, opts) {
   const src = assertSource(source);
   const code = assertLang(lang);
   if (src === CHROME_KEY) {
@@ -291,7 +313,7 @@ function writeCatalog(rootDir, source, lang, entries) {
   };
   atomicWriteJson(catalogPathFor(rootDir, src, code), JSON.stringify(body, null, 2) + '\n');
   // Rewritten on every save, so the index can never describe a state the disk is not in.
-  writeCatalogIndex(rootDir);
+  if (!(opts && opts.index === false)) writeCatalogIndex(rootDir);
   return { lang: code, source: src, entries: clean };
 }
 
@@ -425,7 +447,7 @@ function groupFor(src) {
  * English has since changed is refused by name rather than written into a catalogue where
  * nothing would ever read it again.
  */
-function saveRows(rootDir, source, lang, edits) {
+function saveRows(rootDir, source, lang, edits, opts) {
   const src = assertSource(source);
   const code = assertLang(lang);
   if (isGenerated(src)) {
@@ -453,7 +475,7 @@ function saveRows(rootDir, source, lang, edits) {
     if (next[key] !== value.trim()) written++;
     next[key] = value.trim();
   });
-  const saved = writeCatalog(rootDir, src, code, next);
+  const saved = writeCatalog(rootDir, src, code, next, opts);
   return {
     source: src, lang: code, written, cleared, rejected,
     total: strings.length,
@@ -477,6 +499,7 @@ function pruneStale(rootDir, source, lang) {
 
 module.exports = {
   INDEX_REL, listCatalogs, writeCatalogIndex, readCatalogIndex,
+  renderCatalogIndex, parseCatalogIndex, setCatalogIndexed,
   CHROME_KEY, CHROME_REL, CHROME_BEGIN, CHROME_END, LANG_CODES,
   assertLang, assertSource, scan, scanSource, scanChrome,
   readCatalog, writeCatalog, readChromeTable, writeChromeTable,

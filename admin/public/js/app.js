@@ -209,10 +209,26 @@ window.apiFetch.getAdminHost = () => window.apiFetch('/api/admin-host');
 window.apiFetch.listContent = () => window.apiFetch('/api/admin/content');
 // ?key= rather than a path segment: Vercel matches only one segment after /api/admin/, so
 // /api/admin/content/world/topik-2 never reaches the function at all.
+//
+// Every read hands back the version of the file it showed, and the next save of that file
+// sends it as If-Match. Remembered here, per key, so no editor screen has to thread it
+// through: a save made on a copy opened before somebody else's change is refused with a 409
+// rather than written over that change.
+const contentVersions = {};
 window.apiFetch.getContent = (key) =>
-  window.apiFetch('/api/admin/content?key=' + encodeURIComponent(key));
+  window.apiFetch('/api/admin/content?key=' + encodeURIComponent(key)).then((r) => {
+    if (r && r.data && r.data.version) contentVersions[key] = r.data.version;
+    return r;
+  });
 window.apiFetch.saveContent = (key, body) =>
-  window.apiFetch('/api/admin/content?key=' + encodeURIComponent(key), { method: 'PUT', body });
+  window.apiFetch('/api/admin/content?key=' + encodeURIComponent(key), {
+    method: 'PUT',
+    body,
+    headers: contentVersions[key] ? { 'If-Match': contentVersions[key] } : {}
+  }).then((r) => {
+    if (r && r.data && r.data.version) contentVersions[key] = r.data.version;
+    return r;
+  });
 
 // Translations. Under /api/admin/ for the same reason as the content registry: on Vercel
 // there is one admin function, and a route anywhere else works locally and 404s live.

@@ -283,7 +283,7 @@ class BeeScene extends Phaser.Scene {
     }
     if (typeof checkQuestProgress === 'function') checkQuestProgress('bee', { count: 1 });
     if (typeof showToast === 'function') {
-      showToast('🍯 + ' + totalHoney + ' Honey added to inventory!');
+      showToast(hvT('ui.toast.bee.honey', { n: totalHoney }));
     }
 
     this.add.rectangle(this.W / 2, this.H / 2, this.W, this.H, 0x000000, 0.6).setDepth(200);

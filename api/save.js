@@ -3,6 +3,10 @@ const { r2Client, r2Bucket, saveKey, setCors, verifyGoogleIdToken, readBearer } 
 const { stampSave, trustedStamp } = require('./_stamp');
 const { sessionUser, sessionNeedsRefresh, signSession, setSessionCookie } = require('./_session');
 const { PREFIX: LB_PREFIX, entryFromSave } = require('./_leaderboard');
+// How large a save may be, and how a compressed one is read. See api/_saveBody.js.
+const { readSaveBody, saveClaimsOtherAccount } = require('./_saveBody');
+// The same merge the client runs, for a closing tab's tail (PATCH below).
+const { mergeSaves } = require('../js/systems/saveMerge.js');
 
 // Same sanitising as saveKey: the sub reaches a bucket key, so nothing but the safe alphabet
 // gets through. Kept next to the write rather than in _leaderboard.js, which stays free of
@@ -13,38 +17,43 @@ function leaderboardKey(sub) {
   return LB_PREFIX + id + '.json';
 }
 
-const SAVE_BODY_MAX = 256 * 1024;
+// The save, then its leaderboard row.
+//
+// The leaderboard row is a byproduct of the save rather than something the client posts
+// separately. This endpoint already knows who the player is, and the numbers are already
+// here, so a second route would only add another thing to authenticate and another place
+// for the board to disagree with the save it came from.
+//
+// It is written after the save and never allowed to fail it. A player whose progress was
+// stored but whose board row was not is behind by one save; a player told their save
+// failed when it did not would go looking for lost progress. entryFromSave clamps and
+// strips everything it reads — see api/_leaderboard.js.
+async function storeSave(client, Key, payload, user, writeNow) {
+  await client.send(new PutObjectCommand({
+    Bucket: r2Bucket(),
+    Key,
+    Body: JSON.stringify(payload),
+    ContentType: 'application/json',
+    CacheControl: 'private, no-store'
+  }));
+  try {
+    await client.send(new PutObjectCommand({
+      Bucket: r2Bucket(),
+      Key: leaderboardKey(user.sub),
+      Body: JSON.stringify(entryFromSave(payload, user, writeNow)),
+      ContentType: 'application/json',
+      CacheControl: 'public, max-age=30'
+    }));
+  } catch (e) {
+    console.warn('[save] leaderboard row not written:', e && e.name, e && e.message);
+  }
+}
 
-async function readBody(req) {
-  if (req.body && typeof req.body === 'object') {
-    if (Buffer.byteLength(JSON.stringify(req.body)) > SAVE_BODY_MAX) {
-      const err = new Error('save too large');
-      err.status = 413;
-      throw err;
-    }
-    return req.body;
-  }
-  if (typeof req.body === 'string') {
-    if (Buffer.byteLength(req.body) > SAVE_BODY_MAX) {
-      const err = new Error('save too large');
-      err.status = 413;
-      throw err;
-    }
-    try { return JSON.parse(req.body); } catch { return null; }
-  }
-  const chunks = [];
-  let size = 0;
-  for await (const c of req) {
-    size += c.length;
-    if (size > SAVE_BODY_MAX) {
-      const err = new Error('save too large');
-      err.status = 413;
-      throw err;
-    }
-    chunks.push(c);
-  }
-  if (!chunks.length) return null;
-  try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch { return null; }
+// The revision a stored save is at. Saves written before revisions existed have none, and
+// count as revision 0 — which is also what a client that read nothing sends as its base.
+function storedRev(save) {
+  const r = save && Number(save.rev);
+  return Number.isInteger(r) && r > 0 ? r : 0;
 }
 
 async function getObjectJson(client, Key) {
@@ -148,7 +157,7 @@ module.exports = async (req, res) => {
     if (req.method === 'PUT') {
       let body;
       try {
-        body = await readBody(req);
+        body = await readSaveBody(req);
       } catch (e) {
         if (e && e.status === 413) {
           res.status(413).json({ error: 'save too large' });
@@ -158,6 +167,13 @@ module.exports = async (req, res) => {
       }
       if (!body || typeof body !== 'object') {
         res.status(400).json({ error: 'save body required' });
+        return;
+      }
+      // Somebody else's progress, on its way into this account from a shared browser. The
+      // stored copy is left alone; see saveClaimsOtherAccount.
+      if (saveClaimsOtherAccount(body, user.sub)) {
+        res.setHeader('Cache-Control', 'private, no-store');
+        res.status(409).json({ error: 'account mismatch' });
         return;
       }
       // One clock reading for both stamps below. Two Date.now() calls would leave the stored
@@ -185,7 +201,22 @@ module.exports = async (req, res) => {
       // nothing. Clamping it to `now` instead would be worse than doing nothing, because
       // `now` outranks the timestamp the client just sent.
       const currentAt = trustedStamp(current && current.updatedAt, writeNow);
-      if (currentAt > payload.updatedAt) {
+      const currentRev = storedRev(current);
+
+      // The revision is what decides now. A timestamp only says when a device wrote, not what
+      // it had seen: a laptop whose tab had been open since yesterday wrote a newer stamp than
+      // the phone that played this morning, and so won, putting yesterday back over the
+      // morning's reviews. `baseRev` is the revision the client's state was built on. If
+      // somebody has written since, the client is handed the current copy, merges the two
+      // (js/systems/saveMerge.js) and sends again on top of it.
+      if (Object.prototype.hasOwnProperty.call(body, 'baseRev')) {
+        if (current && Number(body.baseRev) !== currentRev) {
+          res.setHeader('Cache-Control', 'private, no-store');
+          res.status(409).json({ error: 'conflict', rev: currentRev, updatedAt: currentAt, data: current });
+          return;
+        }
+      } else if (currentAt > payload.updatedAt) {
+        // A build that predates revisions: the timestamp rule it was written against.
         res.setHeader('Cache-Control', 'private, no-store');
         res.status(409).json({
           error: 'stale save',
@@ -195,37 +226,53 @@ module.exports = async (req, res) => {
         });
         return;
       }
-
-      await client.send(new PutObjectCommand({
-        Bucket: r2Bucket(),
-        Key,
-        Body: JSON.stringify(payload),
-        ContentType: 'application/json',
-        CacheControl: 'private, no-store'
-      }));
-
-      // The leaderboard row is a byproduct of the save rather than something the client posts
-      // separately. This endpoint already knows who the player is, and the numbers are already
-      // here, so a second route would only add another thing to authenticate and another place
-      // for the board to disagree with the save it came from.
-      //
-      // It is written after the save and never allowed to fail it. A player whose progress was
-      // stored but whose board row was not is behind by one save; a player told their save
-      // failed when it did not would go looking for lost progress. entryFromSave clamps and
-      // strips everything it reads — see api/_leaderboard.js.
+      delete payload.baseRev;
+      payload.rev = currentRev + 1;
+      await storeSave(client, Key, payload, user, writeNow);
+      res.status(200).json({ ok: true, updatedAt: payload.updatedAt, rev: payload.rev });
+      return;
+    }
+    // A closing tab's tail: only what changed since that tab's last upload landed, merged into
+    // the copy held here. The whole save is past keepalive's 64 KiB for nearly everyone who
+    // plays, and the ordinary request a closing page falls back to is the one it cancels, so
+    // without this the end of every session reached that device and nowhere else. It is a
+    // merge (js/systems/saveMerge.js), so it needs no base revision: records keep their most
+    // recent answer whichever side they came from, and the tail's game-in-the-moment wins only
+    // if it is the newer of the two.
+    if (req.method === 'PATCH') {
+      let tail;
       try {
-        await client.send(new PutObjectCommand({
-          Bucket: r2Bucket(),
-          Key: leaderboardKey(user.sub),
-          Body: JSON.stringify(entryFromSave(payload, user, writeNow)),
-          ContentType: 'application/json',
-          CacheControl: 'public, max-age=30'
-        }));
+        tail = await readSaveBody(req);
       } catch (e) {
-        console.warn('[save] leaderboard row not written:', e && e.name, e && e.message);
+        if (e && e.status === 413) { res.status(413).json({ error: 'save too large' }); return; }
+        throw e;
       }
-
-      res.status(200).json({ ok: true, updatedAt: payload.updatedAt });
+      if (!tail || typeof tail !== 'object' || !tail.patch) {
+        res.status(400).json({ error: 'patch body required' });
+        return;
+      }
+      if (saveClaimsOtherAccount(tail, user.sub)) {
+        res.status(409).json({ error: 'account mismatch' });
+        return;
+      }
+      const current = await getObjectJson(client, Key);
+      if (!current) {
+        // A tail needs something to land on. This device's copy still holds the progress, and
+        // its next visit writes it whole.
+        res.status(409).json({ error: 'nothing to patch' });
+        return;
+      }
+      const writeNow = Date.now();
+      const tailAt = stampSave(tail.updatedAt, writeNow);
+      const currentAt = trustedStamp(current.updatedAt, writeNow);
+      const merged = mergeSaves(current, tail, { prefer: tailAt >= currentAt ? 'b' : 'a' });
+      delete merged.patch;
+      delete merged.baseRev;
+      merged.updatedAt = Math.max(tailAt, currentAt);
+      merged.cloudUser = user.sub;
+      merged.rev = storedRev(current) + 1;
+      await storeSave(client, Key, merged, user, writeNow);
+      res.status(200).json({ ok: true, updatedAt: merged.updatedAt, rev: merged.rev });
       return;
     }
     res.status(405).json({ error: 'method not allowed' });

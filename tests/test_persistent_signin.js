@@ -217,6 +217,9 @@ const R = (c, expr) => vm.runInContext(expr, c);
     // request: it answers 401 with expired set. That is a local condition, not a verdict.
     const c = ctx({ gis: 'refuse', local: { hv_google_token: EXPIRED(), hv_google_user: '{"sub":"1"}' } });
     R(c, 'CLOUD_PUSH_RETRY_MS.length = 0;');   // no live timer once the case is made
+    // A write only goes out once this visit has read the cloud copy (_cloudRev); the cases here
+    // are about what a write is told, so that read is taken as done.
+    R(c, '_cloudRev = 0;');
     const r = await R(c, 'pushCloudSave')({ v: 10 });
     eq(r.ok, false, 'the push fails');
     eq(r.reason, 'expired', 'and says why in a way the caller can act on');
@@ -232,10 +235,35 @@ const R = (c, expr) => vm.runInContext(expr, c);
       fetch: () => Promise.resolve({ status: 401, json: async () => ({ error: 'sign in required' }) })
     });
     R(c, 'CLOUD_PUSH_RETRY_MS.length = 0;');
+    R(c, '_cloudRev = 0;');
     const r = await R(c, 'pushCloudSave')({ v: 10 });
     eq(r.reason, 'signed-out', 'a 401 from the server is a sign-out');
     eq(R(c, 'hasGoogleSignIn')(), false, 'the session is ended');
     assert(c.toasts.some((t) => /sign in again/i.test(t)), 'and the player is told');
+  }
+
+  // ── 7. The hourly renewal, once there is a session ─────────────────────────
+  // The thirty-day cookie authenticates every save by itself, and cloudSaveRequest already
+  // drops a dead Google token when it holds one. The renewal timer and the refocus check went
+  // on calling prompt() every hour regardless — each call a chance for Google to show a prompt
+  // nobody needed, and each refusal feeding the cool-off the next real sign-in waits out.
+  console.log('\n--- 7. No hourly prompt while the session cookie is alive ---');
+  for (const withSession of [true, false]) {
+    const local = { hv_google_token: tokenExpiringAt(Date.now() + 2 * 60 * 1000), hv_google_user: '{"sub":"1"}' };
+    if (withSession) local.hv_session_until = String(Date.now() + 20 * 24 * 3600 * 1000);
+    const c = ctx({ gis: 'refuse', local });
+    const timers = [];
+    c.setTimeout = (fn, ms) => { timers.push({ fn, ms }); return { unref() {} }; };
+    R(c, 'googleAuth.token = getGoogleToken(); googleAuth.exp = tokenExpiry(googleAuth.token);');
+    R(c, 'scheduleTokenRenewal()');
+    assert(timers.length > 0, 'a renewal is scheduled for the token in hand');
+    timers.forEach((t) => t.fn());
+    R(c, 'refreshSignInIfStale()');
+    if (withSession) {
+      eq(c.promptCalls, 0, 'with a live session neither the timer nor a refocus asks Google for anything');
+    } else {
+      assert(c.promptCalls >= 1, 'without one the token is still renewed, as before (' + c.promptCalls + ' asks)');
+    }
   }
 
   console.log('\n' + passed + ' passed, ' + failed + ' failed');

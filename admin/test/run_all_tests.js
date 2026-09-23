@@ -7,6 +7,7 @@ const testVercelContract = require('./test_vercel_contract');
 const testCorsOrigin = require('./test_cors_origin');
 const testUnit14Workbook = require('./test_unit14_workbook');
 const testTimings = require('./test_timings');
+const testContentVersions = require('./test_content_versions');
 
 function padRight(str, len) {
   str = String(str);
@@ -39,7 +40,8 @@ async function runAllSuites() {
     { label: 'Vercel vs Express GET contract', module: testVercelContract },
     { label: 'CORS & bind hardening', module: testCorsOrigin },
     { label: 'Unit 14 Workbook API', module: testUnit14Workbook },
-    { label: 'Timings tab', module: testTimings }
+    { label: 'Timings tab', module: testTimings },
+    { label: 'Content versions (If-Match)', module: testContentVersions }
   ];
 
   const results = [];

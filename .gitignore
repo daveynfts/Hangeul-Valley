@@ -4,6 +4,8 @@
 __pycache__/
 *.pyc
 save_data.json
+# A desktop save that would not parse, set aside by main.py rather than overwritten.
+save_data.json.corrupt-*
 webview_data/
 node_modules/
 .DS_Store

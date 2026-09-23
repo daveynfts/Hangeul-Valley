@@ -46,6 +46,14 @@ python main.py
 Or double-click `run.bat`. Note `run.bat` hardcodes a Python path and falls back to
 `python` on `PATH`.
 
+The desktop build has no cloud save — that lives behind `/api/save`, which only Vercel serves —
+so its `/api/config` offers no Google client id and no sign-in appears. `main.py` serves an
+allowlist of folders, and `tests/test_desktop_allowlist.js` requires it to cover every folder
+`vercel.json` serves from the CDN (`locales/` was missing, so the desktop build stayed English
+under the Vietnamese interface). The port is bound before the window opens: a second copy of
+the game on 8742 is an error, not a shared port. A `save_data.json` that will not parse is kept
+as `save_data.json.corrupt-<time>` instead of being overwritten by the next save.
+
 ### Admin panel
 
 The dashboard (levels, word origins, Unit 10, art library) is a local Express app
@@ -64,6 +72,17 @@ curriculum without running Node locally:
 
 Edits (save layout, add words, Sync Files) stay on the local server. The Vercel
 copy shows a Read-only badge and hides those buttons.
+
+Content and translation saves are made **against the version that was opened**. Every read of
+`/api/admin/content` returns the git blob SHA of the bytes it showed, the editor sends it back
+as `If-Match`, and both servers refuse a save with `409` when the file has changed since — the
+Vercel copy used to compare against a SHA read a moment before the write, which protected
+nothing. The Translate tab's save on Vercel runs in a scratch directory (the deployment's
+filesystem is read-only, and the save used to write straight into it), merges on GitHub's copy
+of the catalogue rather than the deployment's, adds a new catalogue to `js/locales/catalogs.js`,
+and says that interface strings reach players with the next deploy instead of calling them
+live. `tests/test_admin_vercel_writes.js` runs the real handler with GitHub and the CDN answered
+in memory.
 
 ---
 
@@ -227,7 +246,23 @@ because the crop timer and phases 2–3 run on it — but only the modality actu
 its interval moved.
 
 When a word comes due, the review tests **whichever modality expired**, not always typing.
-Ties go to production.
+Ties go to production. Only a track that has left its learning steps can be *due*: a step
+date is the crop's clock, not a review anybody owes (`srsReviewDue` in `js/systems/srs.js`).
+
+The harvest that graduates production also graduates the recognition and listening tracks
+the same crop started, at the same one-day interval. A crop asks each of them exactly once,
+and a learning step needs two correct answers, so on their own they could never leave it —
+they sat in `learn` with a due date fifteen seconds after they were answered, the review
+picker always chose one of them, and the farm (which plants reviews only) dropped the word.
+No production review was ever planted and the HUD's due count never went down.
+`tests/test_review_loop.js` drives a word through the real quiz functions to pin this.
+
+A recognition or listening review answered wrong **lapses**, like a typed one. It used to be
+re-asked with the right button lit up, the second try scored Hard, and Hard on a review grows
+the interval. Its plot is cleared rather than sent back to watering — watering and the harvest
+grade other skills — and the lapsed track comes back to the farm a minute later for another
+try. A review crop saves the skill it tests (`reviewModality`), so a reload does not turn a
+listening review into a typed one.
 
 ### Two progress metrics, deliberately
 
@@ -508,7 +543,7 @@ serve those files; there is no `assets/` mirror.
 ## Saves
 
 State is written to `localStorage` under `hv_save_v2`, and additionally to
-`save_data.json` via the PyWebView bridge on desktop. Save format is **v9**, with the
+`save_data.json` via the PyWebView bridge on desktop. Save format is **v11**, with the
 migration chain in `migrateSaveData()`.
 
 Both copies are read on load and the newer `updatedAt` wins. Preferring the file
@@ -558,6 +593,27 @@ The v8 → v9 step adds the character-skin fields, defaulting `equippedSkinId` t
 making sure `farmer` is in `ownedSkinIds`. It is field-fill only and deliberately does not
 read the live skins catalog, because `test_srs_engine.js` extracts `migrateSaveData()` into a
 VM that has only the rename tables.
+
+The v9 → v10 step adds the practice log (`practice`), empty for everyone who came before: a
+count that was never recorded cannot be reconstructed.
+
+The v10 → v11 step carries the recognition and listening tracks every earlier crop left
+stranded in `learn` into review — only where production has graduated, since that harvest is
+the evidence. They start at the one-day graduating interval, with their first due date spread
+deterministically across the next two weeks so a save holding hundreds of learned words does
+not have them all land on one afternoon.
+
+Worlds are saved **by id** — `lastWorld` for where the player was and `visitedWorlds` for
+where they have been — alongside the old `lastLevel` number, which older builds still read. A
+world's index in `levelsData` is only this session's: the 25 levels, then every file in
+`TEXTBOOK_WORLD_FILES` order that loaded. Units 11–18 were each inserted mid-list, and after
+each release a player who had been in a later world resumed in a different one; a single
+world failing to load shifted every world after it. `resolveWorldRefs()` in
+`js/systems/economy.js` turns the ids back into this session's numbers whenever the world
+list settles, rebuilding the world half of `unlockedLevels` (the quest board and progress
+panel read it by number). A save from before ids has its numbers read once against the
+current list, then keeps them by id. `srsDueWords()` scans every loaded list rather than
+`unlockedLevels`, since being due is a fact about `srsData`.
 
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
 (currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs,
@@ -673,6 +729,22 @@ Merging to `main` publishes automatically. `.github/workflows/publish.yml` waits
 (validate → R2 upload → CDN verify → Vercel Deploy Hook). Manual rerun is still
 Actions → Publish → Run workflow.
 
+**As configured today that last step does not run.** The repository has no
+`VERCEL_DEPLOY_HOOK_URL` or `VERCEL_TOKEN` secret, so the Publish log says
+`No Vercel hook or token; skipping deploy (Git still ships JS)` (checked on the 2026-09-23
+run), and the JavaScript reaches production through Vercel's Git integration — on the push,
+before CI has finished and before the R2 upload. So the order is Vercel first, then R2, and a
+push whose CI fails is deployed anyway. To get the order described above:
+
+1. In Vercel, create a Deploy Hook for the production branch, and add its URL to the GitHub
+   repository secrets as `VERCEL_DEPLOY_HOOK_URL`.
+2. Only then, stop Git from deploying `main` by itself, by adding
+   `"git": { "deploymentEnabled": { "main": false } }` to `vercel.json` (preview deployments of
+   other branches carry on). Doing this before step 1 would leave production never updating.
+
+Since worlds are kept by id (see Saves), a world whose file is not on the CDN yet costs only
+that world until the upload lands; it no longer moves the others.
+
 Locally, the same command is:
 
 ```bash
@@ -715,19 +787,83 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
 Without it `/api/session` answers `501` and the game falls back to the one-hour token,
 exactly as before. Changing it signs everybody out. It is never sent to the browser.
 
+`/api/leaderboard` reads the cookie too, before any Bearer token: it used to look only at the
+token, so a player an hour into a visit still saved fine and lost their own row off the board.
+
+### Whose progress this is
+
+`localStorage` holds one save, and it used to not say whose it was. Signing out left it in
+place, so on a shared browser the next account to sign in met the previous one's progress as
+its own: `syncCloudSave()` saw a local copy newer and richer than that account's cloud save and
+uploaded it over the newcomer's progress, and a brand-new account simply adopted it.
+
+A save now names its account (`owner`; a copy pulled from the cloud also carries the server's
+`cloudUser`), and signing out writes that name into the copy left behind. When a different
+account signs in, the other account's progress is set aside under `hv_save_v2:<sub>`, the
+incoming account's own copy (or its cloud save, or nothing) takes its place, saving is frozen
+so a teardown flush cannot write the old state back, and the page reloads — the one way to be
+sure no module-level state crosses over. Signing back in as the first account restores its
+copy the same way. A guest's save names nobody and is still adopted by whoever signs in first.
+Behind that, a queued or retried push is only ever sent as the account its save names, a
+sign-out drops whatever was still queued, and `/api/save` answers `409 account mismatch` to a
+save naming somebody else (`saveClaimsOtherAccount` in `api/_saveBody.js`).
+
+### Two devices
+
+The cloud used to keep whichever copy was written last, whole. A laptop whose tab had been
+open since yesterday wrote a newer timestamp than the phone that played this morning, so its
+first autosave put yesterday back over the morning's reviews; the 409 only caught a request
+arriving out of order.
+
+Every stored save now carries a revision (`rev`), and every write names the revision its state
+was built on (`baseRev`). A write on an old base is answered `409 conflict` with the current
+copy; the client merges it with its live state (`mergeSaves` in `js/systems/saveMerge.js`),
+takes the other device's progress into memory without rebuilding the farm
+(`absorbCloudProgress`), and sends the merge on top — up to three rounds. The merge keeps the
+most recent answer per word and modality, the larger harvest and practice counts, the union of
+the attempt log and of every unlock, the higher rank and personal bests; coins, plots, the bag
+and the quest board are one game's state in the moment and come whole from the live copy.
+Signing in merges the same way instead of picking one copy, with the old newer-and-richer rule
+deciding only whose game-in-the-moment is kept. Nothing is uploaded before the visit has read
+the cloud copy — the first autosave on a fresh browser used to be able to land a blank game
+while that read was in flight. A build that sends no `baseRev` keeps the old timestamp rule,
+and its writes still move the revision on. `tests/test_cloud_merge.js` runs the real
+`api/save.js` over an in-memory bucket with three devices on one account.
+
+Closing the tab sends the session's **tail**. `keepalive` — the one request a closing page is
+promised to finish — is capped at 64 KiB, and a save passes that at around a hundred words, so
+for nearly everyone the last write fell back to an ordinary request that the closing page then
+cancelled. The beacon now sends only the records changed since the last upload that landed,
+plus the small game-in-the-moment fields, as a `PATCH` that `api/save.js` merges into the copy
+it holds with the same `mergeSaves`; a session's tail is a few kilobytes. A save small enough
+still goes whole, and a visit that never read the cloud copy sends nothing on the way out.
+
+**One tab at a time.** Two tabs of the game in one browser each wrote the whole game to the
+same `localStorage` slot and cloud save, so whichever saved last erased the other. The tab
+opened last now takes over: it announces itself on a `BroadcastChannel`, the tab it replaces
+folds its unsaved progress into the stored copy, freezes its saving and shows a "Play here
+instead" card (which reloads it and takes the game back), and the new tab absorbs the handover.
+The channel is `unref()`ed where the runtime offers it — Node has a `BroadcastChannel` too, and
+an open one kept `test_m1_challenger_harness.js` from ever exiting.
+
 ---
 
 ## Roadmap
 
 1. **PWA install and offline.** The touch controls have landed, so the farm is playable on a
-   phone; installability is what is left. It needs Phaser vendored into the repo first — the
-   game loads it from a CDN, so a service worker cannot make the app work offline while its
-   engine still comes over the wire.
-2. **Cloud save.** Losing SRS history when changing machines is a dealbreaker now that
-   the history is the product.
-3. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the
+   phone; installability is what is left. Phaser is vendored now (`vendor/`), so what remains
+   is the manifest and a service worker — and deciding which of the CDN-served content
+   (worlds, catalogues, audio) it caches.
+2. **Daily review cap and a "day rollover" notion.** Reviews currently come due at the
    exact timestamp they were scheduled; a real study tool batches by day boundary and
-   caps how many land at once so a backlog cannot become unmanageable.
+   caps how many land at once so a backlog cannot become unmanageable. More pressing than it
+   was: until the daily review loop was fixed no farm review was ever planted, so a player
+   who learned on the farm comes back to every one of those reviews overdue at once.
+3. **Cloud save through the desktop build.** Cloud save itself is done — Google sign-in,
+   per-account saves on R2, revisions and merging across devices (see Saves). The desktop
+   wrapper serves no `/api/*`, so it has none; proxying `/api/save` and `/api/session` to the
+   deployed site from `main.py` would give it one, once `http://127.0.0.1:8742` is an
+   authorised origin of the Google client.
 4. **Vite / PWA modules.** Script-tag split of the engine is done (`js/*` + `js/manifest.json`).
    Vite remains a later PR if we need minify, code-split, or a service worker.
 5. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
@@ -737,7 +873,8 @@ exactly as before. Changing it signs everybody out. It is never sent to the brow
    rather than live — a hash of `ko` + part of speech fixes it. The v6 → v7 respelling made
    the cost of the current scheme concrete: correcting a headword's spelling means a save
    migration, a facts regeneration and a curated-map update, all because the spelling *is*
-   the identity. A stable ID would have made it a one-line data edit.
+   the identity. A stable ID would have made it a one-line data edit. Worlds already have
+   this — the save keeps them by `worldId`, not by their place in the list.
 
 ### Review history
 

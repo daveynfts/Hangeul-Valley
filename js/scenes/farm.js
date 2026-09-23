@@ -55,12 +55,16 @@ class FarmScene extends Phaser.Scene {
       this._refreshDueReviews();
     });
     if (typeof hvAdoptPhaserCatalogs === 'function') hvAdoptPhaserCatalogs(this);
+    // levelsData is rebuilt below, and a world's index in it is only this session's. Where the
+    // player is goes by the world's id across the rebuild — see resolveWorldRefs.
+    if (typeof noteCurrentWorld === 'function') noteCurrentWorld();
     levelsData = hvLocalize('levels.json', this.cache.json.get('levels') || []);
     TEXTBOOK_WORLD_FILES.forEach((spec) => {
       if (this.cache.json.exists(spec.cache)) {
         attachTextbookWorld(hvLocalize(spec.file, this.cache.json.get(spec.cache)));
       }
     });
+    if (typeof resolveWorldRefs === 'function') resolveWorldRefs(true);
     applyDebugSkinQuery();
     if(!levelsData.length){
       console.error('levels.json missing');
@@ -1481,7 +1485,7 @@ class FarmScene extends Phaser.Scene {
       this.appleRipe = true;
       _saveAppleTree(this);
       this._updateAppleTree();
-      showToast('🍎 Apple Tree is ripe! Go harvest it!');
+      showToast(hvT('ui.toast.apple.ripe'));
       return;
     }
     const secs = Math.ceil(rem / 1000);
@@ -1504,7 +1508,7 @@ class FarmScene extends Phaser.Scene {
       const bonus = 15 + Math.floor(Math.random() * 6); // 15-20 gold
       addGold(bonus);
       this._flyCoins(this.appleX, this.appleY - 30, Math.min(bonus, 8));
-      this._label(this.appleX, this.appleY - 30, `+${bonus} 🍎 BONUS!`);
+      this._label(this.appleX, this.appleY - 30, hvT('ui.farm.label.appleBonus', { n: bonus }));
 
       this.spawnDroppedItem('사과', this.appleX, this.appleY);
 
@@ -1513,7 +1517,7 @@ class FarmScene extends Phaser.Scene {
       this.appleRipeAt  = Date.now() + FarmScene.APPLE_RIPEN_MS;
       _saveAppleTree(this);
       this._updateAppleTree();
-      showToast(`🍎 Harvested! +${bonus} gold! Tree will regrow in 2 min.`, 4000);
+      showToast(hvT('ui.toast.apple.harvested', { n: bonus }), 4000);
     });
   }
 
@@ -1655,7 +1659,7 @@ class FarmScene extends Phaser.Scene {
             this.droppedItems.splice(i, 1);
           } else {
             if (typeof showToast === 'function') {
-              showToast("🎒 Inventory Full! Cannot pick up " + item.nameKo, 2500);
+              showToast(hvT('ui.toast.inv.fullPickup', { name: item.nameKo }), 2500);
             }
             item.pickupCooldown = now + 3000;
           }
@@ -1983,7 +1987,7 @@ class FarmScene extends Phaser.Scene {
 
     if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_correct');
     this._sparkle(p.x, p.y);
-    this._label(p.x, p.y, 'Plot Unlocked! 🔓');
+    this._label(p.x, p.y, hvT('ui.farm.label.plotUnlocked'));
     persistSave();
     if(typeof buildShopGrid === 'function' && shopOpen) buildShopGrid();
   }
@@ -2182,7 +2186,13 @@ class FarmScene extends Phaser.Scene {
     if(!pointerBusy && this.spaceKey && Phaser.Input.Keyboard.JustDown(this.spaceKey)) this._interact();
     // Growth timer: check every 8s whether any crop is due to advance a stage
     this._timerAcc=(this._timerAcc||0)+(dt||16);
-    if(this._timerAcc>8000){this._timerAcc=0;this._checkGrowth();}
+    // The due check rides the same tick. It only ever ran on entering the farm, so a review
+    // coming due mid-session — a relearning step is a minute — waited for the next visit.
+    // Quiet while a quiz is open: a toast over the question would read as feedback on it.
+    if(this._timerAcc>8000){
+      this._timerAcc=0;this._checkGrowth();
+      this._refreshDueReviews(!(typeof quizOpen !== 'undefined' && quizOpen));
+    }
     // Apple tree timer: update every second
     this._appleAcc=(this._appleAcc||0)+(dt||16);
     if(this._appleAcc>1000){this._appleAcc=0;this._tickAppleTree();}
@@ -2217,7 +2227,7 @@ class FarmScene extends Phaser.Scene {
       const now = Date.now();
       if (!this._tooFarAt || now - this._tooFarAt > 1400) {
         this._tooFarAt = now;
-        if (typeof showToast === 'function') showToast('Walk closer');
+        if (typeof showToast === 'function') showToast(hvT('ui.toast.walkCloser'));
       }
     }
   }
@@ -2728,7 +2738,7 @@ class FarmScene extends Phaser.Scene {
           this.unlockPlot(p);
         } else {
           if (typeof playChiptuneSFX === 'function') playChiptuneSFX('quiz_wrong');
-          showToast(`Need ${cost} Gold 🪙 to unlock Farm Plot #${p.index + 1}!`);
+          showToast(hvT('ui.shop.plot.needGold', { cost, n: p.index + 1 }));
         }
         return;
       }
@@ -2818,7 +2828,7 @@ class FarmScene extends Phaser.Scene {
       const crop=this.add.image(plot.x,plot.y-4,cropTex(this,t,1)).setOrigin(0.5,0.85).setScale(0).setDepth(plot.y+5);
       plot.plant=crop;
       this.tweens.add({targets:crop,scale:1,duration:300,ease:'Back.Out(3)'});
-      this._sparkle(plot.x,plot.y); this._label(plot.x,plot.y,'Planted!');
+      this._sparkle(plot.x,plot.y); this._label(plot.x,plot.y,hvT('ui.quiz.result.planted'));
       this._setState(plot,'1',ko);
     } else if(phase===2){
       // P2 correct: grow to sprout, set P3 timer, play watering animation
@@ -2828,7 +2838,7 @@ class FarmScene extends Phaser.Scene {
           onComplete:()=>this.tweens.add({targets:plot.plant,scale:1,duration:150})});
         if(plot.hintLabel){plot.hintLabel.destroy();plot.hintLabel=null;}
         if(plot.glow){plot.glow.destroy();plot.glow=null;}
-        this._leaves(plot.x,plot.y-8); this._label(plot.x,plot.y,'Watered!');
+        this._leaves(plot.x,plot.y-8); this._label(plot.x,plot.y,hvT('ui.quiz.result.watered'));
         this._setState(plot,'3',ko);
         savePlotsFn();
       });
@@ -2852,20 +2862,20 @@ class FarmScene extends Phaser.Scene {
         plantedWords.delete(ko);
         this._sparkle(plot.x,plot.y);
         this._label(plot.x,plot.y,
-          (prev===0?`+${reward} COINS! NEW!`:`+${reward} COINS!`)
-          + (xpGain ? `\n+${xpGain} XP` : ''));
+          hvT(prev === 0 ? 'ui.farm.label.coinsNew' : 'ui.farm.label.coins', { n: reward })
+          + (xpGain ? '\n' + hvT('ui.farm.label.xp', { n: xpGain }) : ''));
 
         // Legendary tier mastery check (>= 10 harvests) -> +10 Honor
         if (newHarvests === 10) {
           addHonor(10);
-          showToast(`👑 Word "${ko}" reached Legendary Tier! +10 Honor!`, 4500);
+          showToast(hvT('ui.toast.word.legendary', { ko }), 4500);
         }
 
         // Quiz streak tracking: +3 Gems every 10 consecutive correct answers
         quizStreak++;
         if (quizStreak % 10 === 0) {
           addGems(3);
-          showToast(`🔥 10-Quiz Perfect Streak! +3 Gems!`, 4000);
+          showToast(hvT('ui.toast.streak10'), 4000);
         }
 
         this.time.delayedCall(350,()=>{
@@ -2921,7 +2931,21 @@ class FarmScene extends Phaser.Scene {
       }});
     this._setState(plot,'2',ko);
     plot.reviewModality = null;
-    showToast('Plant regressed! Water it again.');
+    showToast(hvT('ui.toast.plantRegressed'));
+    savePlotsFn();
+  }
+
+  // A recognition or listening review answered wrong. Regressing it the way regressionPlot
+  // does would put the word back into the crop cycle, whose watering and harvest grade
+  // listening and production — skills that were not the ones that lapsed, and whose schedules
+  // the extra answers would then move. So the plot is simply cleared: no harvest, no coins,
+  // and the lapsed track (now relearning, a minute out) is planted again by the review loop
+  // for another try at the skill that actually failed.
+  failReviewPlot(plot, word){
+    quizStreak = 0;
+    const ko = (word && word.ko) || plot.ko;
+    if(ko) plantedWords.delete(ko);
+    this._clearPlot(plot);
     savePlotsFn();
   }
 
@@ -3013,6 +3037,9 @@ class FarmScene extends Phaser.Scene {
       plot.plant=this.add.image(plot.x,plot.y-4,tex).setOrigin(0.5,0.85).setDepth(plot.y+5);
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
       this._setState(plot,st,pd.ko,readyAt);
+      // Only a ripe crop is a review; anything else is a word still in its crop cycle.
+      plot.reviewModality = (st === '4' && MODALITIES.indexOf(pd.reviewModality) >= 0)
+        ? pd.reviewModality : null;
       plantedWords.add(pd.ko);
     });
   }
@@ -3038,10 +3065,16 @@ class FarmScene extends Phaser.Scene {
   //
   // Some plots are always left free, otherwise a large review backlog would lock the
   // player out of learning anything new.
+  //
+  // 'relearn' is planted as well as 'review'. A lapse normally keeps its crop — a typed review
+  // answered wrong regresses to watering — but a recognition or listening review answered
+  // wrong clears its plot (failReviewPlot), and a relearning word whose crop was lost to a level
+  // change would otherwise wait for good. srsDueWords only offers words that have left their
+  // learning steps, so nothing still growing is planted twice.
   _plantDueReviews(){
     if(!this.plots) return 0;
     const now = Date.now();
-    const due = srsDueWords(now).filter(d => d.entry.st === 'review' && !plantedWords.has(d.word.ko));
+    const due = srsDueWords(now).filter(d => srsIsGraduated(d.entry) && !plantedWords.has(d.word.ko));
     if(!due.length) return 0;
 
     const freePlots = this.plots.filter(p => p.active && !p.ko);
@@ -3068,14 +3101,14 @@ class FarmScene extends Phaser.Scene {
     return { planted: planting.length, remaining: due.length - planting.length };
   }
 
-  // Called on farm entry and again when the player returns from a minigame, since reviews
-  // can come due while they are away.
+  // Called on farm entry, when the player returns from a minigame, and on the growth tick —
+  // reviews come due during a session too, and a relearning step is only a minute long.
   _refreshDueReviews(announce = true){
     const res = this._plantDueReviews();
     if(!res || !res.planted) return;
     const msg = res.remaining > 0
-      ? `⏰ ${res.planted} word${res.planted===1?'':'s'} due for review — ${res.remaining} more waiting for free plots`
-      : `⏰ ${res.planted} word${res.planted===1?'':'s'} due for review!`;
+      ? hvT(res.planted === 1 ? 'ui.toast.review.dueMore.one' : 'ui.toast.review.dueMore', { n: res.planted, more: res.remaining })
+      : hvT(res.planted === 1 ? 'ui.toast.review.due.one' : 'ui.toast.review.due', { n: res.planted });
     if(announce) showToast(msg, 4200);
     updateHUD();
   }

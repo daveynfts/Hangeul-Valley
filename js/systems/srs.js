@@ -48,6 +48,11 @@ const GRADE = { AGAIN: 0, HARD: 1, GOOD: 2, EASY: 3 };
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 const _clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+// Ease moves in steps of 0.15 and 0.20, which binary floating point cannot hold: a few answers
+// in, 2.5 had become 2.1499999999999995. Harmless to the arithmetic, but it is written into the
+// save for every modality of every word studied, three times over for a word learned on the
+// farm, and the digits were a measurable share of a save that has a size ceiling.
+const _easeOf = (v) => Math.round(_clamp(v, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE) * 100) / 100;
 
 function srsNewEntry() {
   return { st: 'new', step: 0, ivl: 0, ease: SRS_CFG.START_EASE, reps: 0, lapses: 0, due: 0, last: 0 };
@@ -119,7 +124,7 @@ function srsSchedule(entry, grade, now) {
   // Failing is always a lapse, whether or not the review was due.
   if (g === GRADE.AGAIN) {
     e.lapses++;
-    e.ease = _clamp(e.ease - 0.20, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+    e.ease = _easeOf(e.ease - 0.20);
     e.ivl = _clamp(Math.round(e.ivl * SRS_CFG.LAPSE_IVL_MULT), 1, SRS_CFG.MAX_IVL);
     enterLearning(SRS_CFG.RELEARN_STEPS, 'relearn');
     return e;
@@ -141,12 +146,12 @@ function srsSchedule(entry, grade, now) {
 
   // Each branch advances by at least a day so an interval can never stall.
   if (g === GRADE.HARD) {
-    e.ease = _clamp(e.ease - 0.15, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+    e.ease = _easeOf(e.ease - 0.15);
     graduate(Math.max(e.ivl + 1, e.ivl * 1.2));
   } else if (g === GRADE.GOOD) {
     graduate(Math.max(e.ivl + 1, e.ivl * e.ease));
   } else {
-    e.ease = _clamp(e.ease + 0.15, SRS_CFG.MIN_EASE, SRS_CFG.MAX_EASE);
+    e.ease = _easeOf(e.ease + 0.15);
     graduate(Math.max(e.ivl + 1, e.ivl * e.ease * 1.3));
   }
   return e;
@@ -159,6 +164,20 @@ function srsIsGraduated(e) { return !!e && (e.st === 'review' || e.st === 'relea
 function srsIsMature(e)    { return !!e && e.st === 'review' && e.ivl >= SRS_CFG.MATURE_IVL; }
 function srsIsDue(e, now)  { return !!e && e.st !== 'new' && e.due > 0 && now >= e.due; }
 function srsIsLearning(e)  { return !!e && (e.st === 'learn' || e.st === 'relearn'); }
+
+// Owed a *review*, which is a narrower question than srsIsDue asks. srsIsDue is the
+// scheduler's: has this entry's next step come round. A word inside its learning steps says
+// yes fifteen seconds after it is planted — and that is the crop's clock, driven by the plot,
+// not a review anybody owes.
+//
+// Treating the two as one question is what emptied the daily review loop. Planting a word
+// answers recognition and watering it answers listening, so both of those tracks entered
+// their learning steps and nothing ever advanced them again. They sat in 'learn' with a due
+// date fifteen seconds after they were answered, the review picker always chose the soonest
+// due modality — one of those two — and the farm, which plants reviews only, then dropped the
+// whole word. A production review that had come due was never planted, and the HUD's due
+// count held every word the player had ever learned.
+function srsReviewDue(e, now) { return srsIsGraduated(e) && e.due > 0 && now >= e.due; }
 
 // ── The crop clock ───────────────────────────────────────────────────────────
 // The learning steps double as the plot's growth timers — 15s standing as a seedling, 45s

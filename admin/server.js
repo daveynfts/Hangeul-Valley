@@ -12,6 +12,8 @@ const artLib = require('./lib/art');
 const skinsLib = require('./lib/skins');
 const contentLib = require('./lib/content');
 const i18nLib = require('./lib/i18n');
+// The git blob SHA, which is what an editor's version token is on both halves of the admin.
+const { blobSha } = require('../api/_github');
 
 const app = express();
 
@@ -353,13 +355,17 @@ app.get('/api/admin/content', (req, res, next) => {
   serveContent(req.query.key, res, next);
 });
 app.get('/api/admin/content/*', (req, res, next) => serveContent(req.params[0], res, next));
+// `version` is the git blob SHA of the bytes read, the same token the Vercel copy hands out.
+// The editor sends it back as If-Match, so a file changed on disk since it was opened — by a
+// second tab, a script, a `git pull` — is not saved over with a copy that never saw the change.
 function serveContent(key, res, next) {
   try {
     const entry = contentLib.byKey(key);
     if (!entry) { const e = new Error(`No content registered under "${key}"`); e.status = 404; throw e; }
     const full = path.join(getRootDir(), entry.rel);
-    const body = JSON.parse(fs.readFileSync(full, 'utf8'));
-    res.json({ success: true, data: { key: entry.key, label: entry.label, group: entry.group, rel: entry.rel, body } });
+    const text = fs.readFileSync(full, 'utf8');
+    const body = JSON.parse(text);
+    res.json({ success: true, data: { key: entry.key, label: entry.label, group: entry.group, rel: entry.rel, body, version: blobSha(text) } });
   } catch (err) { next(err); }
 }
 app.put('/api/admin/content', (req, res, next) => saveContent(req.query.key, req, res, next));
@@ -369,14 +375,22 @@ function saveContent(key, req, res, next) {
     const entry = contentLib.byKey(key);
     if (!entry) { const e = new Error(`No content registered under "${key}"`); e.status = 404; throw e; }
     const root = getRootDir();
+    const full = path.join(root, entry.rel);
+    const expected = String(req.headers['if-match'] || '').replace(/^W\//, '').replace(/"/g, '');
+    if (expected && fs.existsSync(full) && blobSha(fs.readFileSync(full, 'utf8')) !== expected) {
+      const e = new Error('That file changed since you opened it — reload and reapply your edit.');
+      e.status = 409;
+      throw e;
+    }
     let normalised;
     try { normalised = entry.validate(req.body, { rootDir: root, rel: entry.rel }); }
     catch (e) { e.status = 400; throw e; }
     // Locally the write is the write — there is no commit and no CDN, because the repo on this
     // machine is the thing being edited.
     const { atomicWriteJson } = require('./lib/atomicWrite');
-    atomicWriteJson(path.join(root, entry.rel), JSON.stringify(normalised, null, 2) + '\n');
-    res.json({ success: true, data: { key: entry.key, rel: entry.rel, body: normalised, live: false, note: 'Written to the working tree. Commit and publish to ship it.' } });
+    const text = JSON.stringify(normalised, null, 2) + '\n';
+    atomicWriteJson(full, text);
+    res.json({ success: true, data: { key: entry.key, rel: entry.rel, body: normalised, version: blobSha(text), live: false, note: 'Written to the working tree. Commit and publish to ship it.' } });
   } catch (err) { next(err); }
 }
 

@@ -282,6 +282,82 @@ function attachTextbookWorld(world) {
   levelsData.push(lvl);
   return levelsData.length - 1;
 }
+
+// ── Worlds are named, not numbered ───────────────────────────────────────────
+// A world's place in levelsData is an accident of this session: the 25 levels, then every
+// world file in TEXTBOOK_WORLD_FILES order that managed to load. The save used to keep that
+// place — `lastLevel` for where the player was, and a world's index in `unlockedLevels` for
+// having been there — so the meaning of a saved number changed whenever the list did. Units
+// 11, 12, 13, 15, 16, 17 and 18 were each inserted in the middle of it, and after every one of
+// those releases a player who had been in a later world resumed in a different one; a single
+// world failing to load shifted every world after it for that session. srsDueWords() scanned
+// `unlockedLevels`, so a world whose number moved also dropped out of the review queue.
+//
+// The id is what the save keeps now. `unlockedLevels` still holds each visited world's index,
+// because the quest board and the progress panel read it that way — but it is rebuilt from
+// `visitedWorlds` whenever the world list settles, so it always means this session's numbers.
+let currentWorldId = null;          // the world the player is in; null on a numbered level
+let visitedWorlds = null;           // every world entered, by id; null until a save says
+let _worldRefsFromIndex = false;    // a save from before ids — read its numbers once, at settle
+let _worldsSettled = false;         // every world this session will attach has attached
+
+function worldIndexOf(id) {
+  if (!id || !Array.isArray(levelsData)) return -1;
+  return levelsData.findIndex(l => l && l.worldId === id);
+}
+
+/** Before levelsData is rebuilt: keep hold of where the player is by name, not by number. */
+function noteCurrentWorld() {
+  const cur = currentLesson();
+  if (cur) currentWorldId = isWorldLevel(cur) ? cur.worldId : null;
+  _worldsSettled = false;
+}
+
+/** The player chose a level or a world. Supersedes whatever the save said. */
+function selectLesson(idx) {
+  currentLevelIndex = idx;
+  const lvl = levelsData[idx];
+  _worldRefsFromIndex = false;
+  currentWorldId = isWorldLevel(lvl) ? lvl.worldId : null;
+  if (!currentWorldId) return;
+  visitedWorlds = Array.isArray(visitedWorlds) ? visitedWorlds : [];
+  if (visitedWorlds.indexOf(currentWorldId) < 0) visitedWorlds.push(currentWorldId);
+  if (Array.isArray(unlockedLevels) && unlockedLevels.indexOf(idx) < 0) unlockedLevels.push(idx);
+}
+
+/**
+ * Point the numbers back at the names. `settled` says every world this session will attach
+ * is attached: only then is a world that cannot be found really missing rather than not here
+ * yet, and only then may a save from before ids have its numbers read.
+ */
+function resolveWorldRefs(settled) {
+  if (settled) _worldsSettled = true;
+  if (!Array.isArray(levelsData) || !levelsData.length) return;
+  if (!Array.isArray(unlockedLevels)) unlockedLevels = [0];
+  if (_worldRefsFromIndex) {
+    if (!settled) return;
+    // The best reading there is of a number written under some older list: this build's.
+    // It is taken once and then kept by name, so the next insertion cannot move it again.
+    _worldRefsFromIndex = false;
+    const cur = levelsData[currentLevelIndex];
+    currentWorldId = isWorldLevel(cur) ? cur.worldId : null;
+    visitedWorlds = unlockedLevels.map(i => levelsData[i]).filter(isWorldLevel).map(l => l.worldId);
+  }
+  if (currentWorldId) {
+    const at = worldIndexOf(currentWorldId);
+    // A world that did not load this session: not the number it used to have, which now
+    // belongs to some other world or to nothing. The id is kept so the save still says it.
+    if (at >= 0) currentLevelIndex = at;
+    else if (settled) currentLevelIndex = 0;
+  } else if (settled && (!levelsData[currentLevelIndex] || isWorldLevel(levelsData[currentLevelIndex]))) {
+    currentLevelIndex = 0;
+  }
+  if (Array.isArray(visitedWorlds)) {
+    const levels = unlockedLevels.filter(i => levelsData[i] && !isWorldLevel(levelsData[i]));
+    const worlds = visitedWorlds.map(worldIndexOf).filter(i => i >= 0);
+    unlockedLevels = Array.from(new Set(levels.concat(worlds)));
+  }
+}
 let textbookWorldsTried = false;
 function loadTextbookWorlds(done) {
   const specs = TEXTBOOK_WORLD_FILES;
@@ -299,6 +375,7 @@ function loadTextbookWorlds(done) {
     if (remaining <= 0) {
       got.forEach((w) => { if (w) attachTextbookWorld(w); });
       textbookWorldsTried = true;
+      if (typeof resolveWorldRefs === 'function') resolveWorldRefs(true);
       if (typeof done === 'function') done();
     }
   };
@@ -361,7 +438,7 @@ function addGems(amount) {
   syncGoldAlias();
   persistSave();
   updateCurrencyHUD(true);
-  showToast(`💎 Earned +${finalGems} Gem${finalGems > 1 ? 's' : ''}!`);
+  showToast(hvT(finalGems > 1 ? 'ui.toast.gems' : 'ui.toast.gems.one', { n: finalGems }));
 }
 
 function addHonor(amount) {
@@ -370,7 +447,7 @@ function addHonor(amount) {
   syncGoldAlias();
   persistSave();
   updateCurrencyHUD(true);
-  showToast(`🎖️ Earned +${finalHonor} Honor!`);
+  showToast(hvT('ui.toast.honor', { n: finalHonor }));
   checkQuestProgress('honor', { total: playerCurrencies.honor });
   if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
 }
@@ -420,7 +497,7 @@ function checkAffordablePacks() {
   if (levelsData && levelsData.length) {
     const affordable = levelsData.findIndex((_, i) =>
       !unlockedLevels.includes(i) && playerCurrencies.coins >= LEVEL_COST(i));
-    if (affordable >= 0) showToast(`💡 You can afford "${levelName(levelsData[affordable])}"! Visit 🏪 Shop!`);
+    if (affordable >= 0) showToast(hvT('ui.toast.shop.affordable', { name: levelName(levelsData[affordable]) }));
   }
 }
 
@@ -464,7 +541,7 @@ function isZoneUnlocked(zoneKey) {
 function showHardLockToast(zoneKey) {
   const check = isZoneUnlocked(zoneKey);
   playChiptuneSFX('denied');
-  showToast(`🔒 LOCKED: Learn ${check.targetPct}% of ${check.reqName} first! (Current: ${check.pct}%)`, 4000);
+  showToast(hvT('ui.toast.zone.locked', { target: check.targetPct, name: check.reqName, pct: check.pct }), 4000);
 }
 
 // ═══════════════ MULTIPLE-CHOICE OPTION BUILDING ═════════════════════════════
@@ -523,7 +600,7 @@ function startShopQuizGate(idx) {
   // An empty pool means levelsData never loaded. Opening the overlay anyway locked the
   // player behind a gate with no questions in it.
   if (!questions.length) {
-    showToast('Vocabulary is still loading — try again in a moment.');
+    showToast(hvT('ui.toast.vocabLoading'));
     return;
   }
 
@@ -587,14 +664,14 @@ function answerShopQuiz(isCorrect) {
     playChiptuneSFX('quiz_wrong');
     document.getElementById('shop-quiz-overlay').classList.remove('visible');
     playerLocked = false;
-    showToast(`❌ Quiz Gate Failed! 0 Coins deducted. Practice in farm to unlock!`, 4000);
+    showToast(hvT('ui.toast.gate.shopFailed'), 4000);
   }
 }
 
 function cancelShopQuizGate() {
   document.getElementById('shop-quiz-overlay').classList.remove('visible');
   playerLocked = false;
-  showToast('Purchase challenge cancelled.');
+  showToast(hvT('ui.toast.gate.shopCancelled'));
 }
 
 // ═══════════════ R2: BOSS ENTRANCE GATE CHALLENGE ═════════════════════════════
@@ -653,7 +730,7 @@ function answerBossGate(isCorrect) {
     playChiptuneSFX('quiz_wrong');
     document.getElementById('boss-gate-overlay').classList.remove('visible');
     playerLocked = false;
-    showToast(`❌ Entrance Gate Challenge Failed! Defeat review minions to try again.`, 4000);
+    showToast(hvT('ui.toast.gate.bossFailed'), 4000);
     if (bossGateState.callback) bossGateState.callback(false);
   }
 }
@@ -661,7 +738,7 @@ function answerBossGate(isCorrect) {
 function cancelBossGate() {
   document.getElementById('boss-gate-overlay').classList.remove('visible');
   playerLocked = false;
-  showToast('Retreated from Entrance Gate.');
+  showToast(hvT('ui.toast.gate.bossRetreat'));
 }
 
 // ═══════════════ R2: QUEST SYSTEM ═════════════════════════════════════════════
@@ -990,8 +1067,8 @@ function checkQuestProgress(type, data = {}) {
   if (questOverlayOpen) renderQuestList();
   if (!questOverlayOpen && readyTitles.length && typeof showToast === 'function') {
     const first = readyTitles[0];
-    const extra = readyTitles.length > 1 ? ' (+' + (readyTitles.length - 1) + ' more)' : '';
-    showToast('📜 Ready to claim: ' + first + extra, 3200);
+    const extra = readyTitles.length > 1 ? ' ' + hvT('ui.toast.quest.readyMore', { n: readyTitles.length - 1 }) : '';
+    showToast(hvT('ui.toast.quest.ready', { title: first }) + extra, 3200);
   }
 }
 
@@ -1281,7 +1358,7 @@ function claimMainQuest(actNum) {
   const curr = mainQuestProgress(act);
   const srsPct = typeof calcLevelProgress === 'function' ? calcLevelProgress(act.reqLevel) : 0;
   if (curr < act.target || srsPct < act.minPct) {
-    showToast('Quest requirements not met yet.');
+    showToast(hvT('ui.toast.quest.notMet'));
     return;
   }
 
@@ -1329,7 +1406,7 @@ function claimReadySideQuests(tab) {
   addCoins(coins);
   addGems(gems);
   addHonor(honor);
-  showToast('Claimed ' + ready.length + ' quest' + (ready.length === 1 ? '' : 's') + '  ·  +' + coins + ' coins', 4000);
+  showToast(hvT(ready.length === 1 ? 'ui.toast.quest.claimed.one' : 'ui.toast.quest.claimed', { n: ready.length, coins }), 4000);
   updateQuestHudBadge();
   renderQuestList();
 }
@@ -1430,6 +1507,9 @@ function _afterLoad(){
   updateGoldHUD();
   buildLevelSelectScreen();
   if (typeof updateLeaderboardMetrics === 'function') updateLeaderboardMetrics();
+  // After the stored copy is in memory: another tab of the game hands over what it has and
+  // stops saving (see claimThisTab in js/systems/save.js).
+  if (typeof claimThisTab === 'function') claimThisTab();
   initGoogleAuth();
 }
 // pywebview fires this event when API is ready; otherwise we init on DOMLoaded.
