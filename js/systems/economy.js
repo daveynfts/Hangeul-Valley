@@ -277,6 +277,9 @@ function attachTextbookWorld(world) {
     title: tr(world, 'title') || tr(world.level, 'nameEn'),
     titleKo: world.titleKo || world.level.name
   });
+  // A word spelled like another world's but not the same word gets its own identity
+  // (js/systems/wordSenses.js). Every world joins the list through here.
+  if (typeof stampWordKeys === 'function') stampWordKeys(lvl.words, world.id);
   const existing = levelsData.findIndex(l => l && l.worldId === world.id);
   if (existing >= 0) { levelsData[existing] = lvl; return existing; }
   levelsData.push(lvl);
@@ -514,7 +517,7 @@ function _levelPct(levelIdx, predicate) {
   const words = levelsData[levelIdx].words;
   if (words.length === 0) return 100;
   let n = 0;
-  words.forEach(w => { if (predicate(peekSrs(w.ko))) n++; });
+  words.forEach(w => { if (predicate(peekSrs(wordKey(w)))) n++; });
   return Math.floor((n / words.length) * 100);
 }
 

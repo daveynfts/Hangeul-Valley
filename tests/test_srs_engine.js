@@ -502,9 +502,9 @@ console.log('\n--- 15. Plant → water → harvest lands on the production sched
 // and the harvest advanced production to learning step 1 instead of graduating it, so the
 // word never entered day-scale review at all.
 const answerChoiceSrc = extract('function answerChoice(', 'function closeQuiz(', 'answerChoice');
-assert(answerChoiceSrc.indexOf('gradeWord(cw.ko, grade, PRIMARY_MODALITY)') > 0,
+assert(answerChoiceSrc.indexOf('gradeWord(wordKey(cw), grade, PRIMARY_MODALITY)') > 0,
   'answerChoice mirrors the grade onto production');
-const mirrorGuard = answerChoiceSrc.slice(0, answerChoiceSrc.indexOf('gradeWord(cw.ko, grade, PRIMARY_MODALITY)'));
+const mirrorGuard = answerChoiceSrc.slice(0, answerChoiceSrc.indexOf('gradeWord(wordKey(cw), grade, PRIMARY_MODALITY)'));
 const lastIf = mirrorGuard.lastIndexOf('if(');
 assert(lastIf > 0, 'and the mirror is guarded by a phase check');
 const guard = mirrorGuard.slice(lastIf);

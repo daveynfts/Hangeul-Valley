@@ -163,7 +163,8 @@ function mergeSaves(a, b, opts) {
   out.fishAlbum = mergeCountMaps(a.fishAlbum, b.fishAlbum);
   out.attempts = mergeAttemptLogs(a.attempts, b.attempts);
   out.practice = mergePracticeLogs(a.practice, b.practice);
-  ['unlockedLevels', 'unlockedTrophies', 'unlockedPlots', 'ownedSkinIds', 'visitedWorlds'].forEach((k) => {
+  // senseSplits: a spelling split either copy has had applied stays applied (wordSenses.js).
+  ['unlockedLevels', 'unlockedTrophies', 'unlockedPlots', 'ownedSkinIds', 'visitedWorlds', 'senseSplits'].forEach((k) => {
     const merged = mergeIdLists(a[k], b[k]);
     if (merged !== undefined) out[k] = merged;
   });

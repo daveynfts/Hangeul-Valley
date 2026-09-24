@@ -1426,7 +1426,7 @@ function pickQuizMode(word, phase, plot){
     return (m === 'listen' && !KoreanTTS.isAvailable()) ? 'type' : m;
   }
   if (phase === 3) return 'type';                       // graded recall stays production
-  const e = peekSrs(word.ko);
+  const e = peekSrs(wordKey(word));
   const firstContact = !e || e.st === 'new';
   if (phase === 1 && firstContact) return 'recognise';
   return 'type';
@@ -1545,7 +1545,7 @@ function answerChoice(opt, btn){
     feedbackText.className = 'correct';
     const cp=currentPlot, cw=currentWord, ph=currentPhase;
     const grade = deriveGrade();
-    gradeWord(cw.ko, grade);            // schedules whichever modality is on screen
+    gradeWord(wordKey(cw), grade);      // schedules whichever modality is on screen
     // Phases 1 and 2 teach through a modality that is not production — recognition on first
     // contact, listening at the watering step — but the crop timer and the graduation the
     // cycle ends on are both read off the production track. So mirror the grade there as
@@ -1558,10 +1558,10 @@ function answerChoice(opt, btn){
     // and the harvest at phase 3 advanced production to step 1 instead of graduating it, so
     // the word never entered day-scale review at all.
     if((ph===1 || ph===2) && currentQuizMode !== PRIMARY_MODALITY){
-      gradeWord(cw.ko, grade, PRIMARY_MODALITY);
+      gradeWord(wordKey(cw), grade, PRIMARY_MODALITY);
     }
     if(ph===1){
-      plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();
+      plantedWords.add(wordKey(cw)); progress++; updateHUD(); updateVocabBook();
     }
     showQuizSuccess({
       message: hvT(ph === 1 ? 'ui.quiz.result.planted'
@@ -1584,7 +1584,7 @@ function answerChoice(opt, btn){
     // exactly as a typed harvest answered wrong does.
     if (isReviewQuiz(currentPlot, currentPhase)) {
       const cp = currentPlot, cw = currentWord;
-      const after = gradeWord(cw.ko, GRADE.AGAIN);   // the modality on screen, which fell due
+      const after = gradeWord(wordKey(cw), GRADE.AGAIN);   // the modality on screen, which fell due
       showQuizReveal({
         message: hvT(after.lapses > 0 ? 'ui.quiz.result.lapsed' : 'ui.quiz.result.answerWas'),
         ko: cw.ko, en: tr(cw, 'en'),
@@ -1668,7 +1668,7 @@ function submitAnswer(){
     // Grade before the state changes, while the attempt/hint counters still describe
     // this answer. gradeWord is the single entry point into the scheduler.
     const grade = deriveGrade(verdict==='close');
-    const srsAfter = gradeWord(cw.ko, grade);
+    const srsAfter = gradeWord(wordKey(cw), grade);
     let message = verdict==='close'
       ? hvT('ui.quiz.result.close', { ko: cw.ko })
       : hvT(msgKeys[ph-1]);
@@ -1678,7 +1678,7 @@ function submitAnswer(){
     }
     feedbackText.textContent = message;
     feedbackText.className='correct';
-    if(ph===1){plantedWords.add(cw.ko); progress++; updateHUD(); updateVocabBook();}
+    if(ph===1){plantedWords.add(wordKey(cw)); progress++; updateHUD(); updateVocabBook();}
     showQuizSuccess({
       message,
       ko: cw.ko, en: tr(cw, 'en'),
@@ -1710,7 +1710,7 @@ function submitAnswer(){
       appleTreeQuizPending=false;
       // Failing at phase 3 is a lapse: a mature word drops to relearning and loses half
       // its interval, a learning word restarts its steps.
-      const after = gradeWord(cw.ko, GRADE.AGAIN);
+      const after = gradeWord(wordKey(cw), GRADE.AGAIN);
       // The apple-tree quiz is the exception and keeps its retry: it is answered again for
       // the same reward, so showing the word there would be handing over the payout.
       showQuizReveal({
@@ -1922,11 +1922,11 @@ function buildVocabBook() {
     .concat([...new Set(lvl.words.map(wordCategory).filter(Boolean))].map((c) => ({ id: c, label: c })));
   if (!cats.some((c) => c.id === activeCat)) activeCat = 'all';
   const started = lvl.words.filter(w => {
-    const e = peekSrs(w.ko);
+    const e = peekSrs(wordKey(w));
     return e && e.st !== 'new';
   }).length;
-  const mature = lvl.words.filter(w => srsIsMature(peekSrs(w.ko))).length;
-  const due = lvl.words.filter(w => wordIsDue(w.ko)).length;
+  const mature = lvl.words.filter(w => srsIsMature(peekSrs(wordKey(w)))).length;
+  const due = lvl.words.filter(w => wordIsDue(wordKey(w))).length;
   const summary = $('vocab-progress-summary');
   if (summary) summary.textContent = hvT('ui.vocab.progressSummary', { started: started, mature: mature })
     + (due ? ' · ' + hvT('ui.vocab.progressDue', { due: due }) : '');
@@ -2244,8 +2244,10 @@ function renderCategoryHint(cat) {
 function getFunFact(word) {
   if (!word) word = {};
   const ko = (word.ko || '').normalize('NFC');
+  // By identity: a word spelled like another has no entry of its own yet, and showing the
+  // other word's origin (思考 on the accident 사고) is worse than showing none.
   return {
-    origin: renderOrigin(factsData[ko]),
+    origin: renderOrigin(factsData[wordKey(word).normalize('NFC')]),
     structure: renderStructure(ko),
     hint: renderCategoryHint(`${word.categoryEn || ''} ${word.category || ''}`)
   };
@@ -2302,7 +2304,7 @@ function vocabRenderSkillGrid(word) {
     name.textContent = labels[modality].name;
     const state = document.createElement('div');
     state.className = 'vff-skill-state';
-    state.textContent = vocabSkillDescription(peekSrs(word.ko, modality));
+    state.textContent = vocabSkillDescription(peekSrs(wordKey(word), modality));
     copy.appendChild(name);
     copy.appendChild(state);
     row.appendChild(icon);
@@ -2403,12 +2405,11 @@ function showVocabFunFact(word) {
   if (!wasOpen && typeof document !== 'undefined') vocabDetailReturnFocus = document.activeElement;
   activeVocabDetailWord = word;
 
-  const normalizedKo = word.ko.normalize('NFC');
-  const originData = factsData[normalizedKo] || null;
+  const originData = factsData[wordKey(word).normalize('NFC')] || null;
   const fact = getFunFact(word);
   const model = vbDetailModel(word, originData);
-  const srs = getSrs(word.ko);
-  const harvests = harvestCounts.get(word.ko) || 0;
+  const srs = getSrs(wordKey(word));
+  const harvests = harvestCounts.get(wordKey(word)) || 0;
 
   let stageLabel = hvT('ui.ls.card.notStarted');
   if (srsIsMature(srs))          stageLabel = '🌟 ' + hvT('ui.vocab.filter.mature');
@@ -2428,7 +2429,7 @@ function showVocabFunFact(word) {
   $('vff-phase').textContent = stageLabel;
 
   const studiedSkills = MODALITIES
-    .map(modality => peekSrs(word.ko, modality))
+    .map(modality => peekSrs(wordKey(word), modality))
     .filter(entry => entry && entry.st !== 'new').length;
   $('vff-harvests').textContent = studiedSkills
     ? hvT('ui.vb.skills.started', { n: studiedSkills, total: MODALITIES.length })
@@ -5882,11 +5883,11 @@ function renderVocabCards() {
   // something about retention rather than counting how often a plot was farmed.
   // Matched on the chip's id, not on its label — see buildVocabBook for why.
   if(activeCat !== 'all'){
-    if(activeCat === 'srs:new') words = words.filter(w => { const e=peekSrs(w.ko); return !e || e.st === 'new'; });
-    else if(activeCat === 'srs:learning') words = words.filter(w => srsIsLearning(peekSrs(w.ko)));
-    else if(activeCat === 'srs:review') words = words.filter(w => { const e=peekSrs(w.ko); return e && e.st==='review' && !srsIsMature(e); });
-    else if(activeCat === 'srs:mature') words = words.filter(w => srsIsMature(peekSrs(w.ko)));
-    else if(activeCat === 'srs:due') words = words.filter(w => wordIsDue(w.ko));
+    if(activeCat === 'srs:new') words = words.filter(w => { const e=peekSrs(wordKey(w)); return !e || e.st === 'new'; });
+    else if(activeCat === 'srs:learning') words = words.filter(w => srsIsLearning(peekSrs(wordKey(w))));
+    else if(activeCat === 'srs:review') words = words.filter(w => { const e=peekSrs(wordKey(w)); return e && e.st==='review' && !srsIsMature(e); });
+    else if(activeCat === 'srs:mature') words = words.filter(w => srsIsMature(peekSrs(wordKey(w))));
+    else if(activeCat === 'srs:due') words = words.filter(w => wordIsDue(wordKey(w)));
     else words = words.filter(w => wordCategory(w) === activeCat);
   }
 
@@ -5922,10 +5923,10 @@ function renderVocabCards() {
     // failed review does not count and neither does a crop still growing — measured, not
     // assumed: reps on the SRS entry looked like the obvious counter and is not one, it
     // moves by four over a single cycle because every reschedule credits a rep.
-    const times   = harvestCounts.get(w.ko) || 0;
-    const planted = plantedWords.has(w.ko);
+    const times   = harvestCounts.get(wordKey(w)) || 0;
+    const planted = plantedWords.has(wordKey(w));
     const chosung = getChosung(w.ko);
-    const e       = peekSrs(w.ko);
+    const e       = peekSrs(wordKey(w));
 
     // Badge reflects scheduler state; the suffix shows the current interval, which is the
     // number that actually tells a learner how well they know the word.

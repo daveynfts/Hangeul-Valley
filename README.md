@@ -631,6 +631,22 @@ panel read it by number). A save from before ids has its numbers read once again
 current list, then keeps them by id. `srsDueWords()` scans every loaded list rather than
 `unlockedLevels`, since being due is a fact about `srsData`.
 
+**Two words spelled the same keep two records.** `srsData`, `harvestCounts`, the plots and the
+origin cards find a word by its spelling, and the worlds brought four headwords spelled like
+another word without being it: 쓰다 "to write" / "to be bitter", 배가 아프다 "to be envious" /
+"to have a stomachache", 거리 "distance" / "a street" and 사고 "thinking" / "an accident". Each
+pair shared one record — learning one sense marked the other as learned, a review could test the
+sense never met, and TOPIK's accident showed the origin of 思考. `WORD_SENSES` in
+`js/systems/wordSenses.js` names the second sense by the world that teaches it, and that word's
+identity becomes `<spelling>#<tag>`, stamped as the world joins `levelsData`; everything shown,
+typed, spoken or illustrated still reads `ko`. The table lives in code rather than in the world
+files so that it ships with the build that reads it. An old save's shared record is copied onto
+the second sense only if the player has been in that world (a save from before world ids keeps
+it on both), once per pair, recorded in `senseSplits` — so a pair added later needs no version
+step. `npm run validate` fails on a new shared spelling whose glosses have no word in common
+until it is named in `WORD_SENSES` or listed as one word in `scripts/sharedHeadwords.js`.
+`tests/test_word_senses.js` drives the Unit 10 쓰다 through the real quiz functions.
+
 Writes are debounced 800 ms because `collectSave()` serializes the entire state
 (currencies, SRS for 1,500 words, plots, inventory, quests, recipes, buffs,
 leaderboards, ground drops) and `persistSave()` is called from ~35 places including
@@ -879,13 +895,14 @@ an open one kept `test_m1_challenger_harness.js` from ever exiting.
    Vite remains a later PR if we need minify, code-split, or a service worker.
 4. **Consider FSRS.** SM-2 is a solid baseline, but FSRS fits intervals to the learner's own
    review log — and the log it needs is now being recorded (see below), so the input is there.
-5. **Stable item IDs.** `facts.json` and `srsData` key on `ko` alone, so two entries sharing
-   a spelling would collide. All 1,500 headwords are currently unique, making this latent
-   rather than live — a hash of `ko` + part of speech fixes it. The v6 → v7 respelling made
-   the cost of the current scheme concrete: correcting a headword's spelling means a save
-   migration, a facts regeneration and a curated-map update, all because the spelling *is*
-   the identity. A stable ID would have made it a one-line data edit. Worlds already have
-   this — the save keeps them by `worldId`, not by their place in the list.
+5. **Stable item IDs.** Progress still keys on the spelling. The words that share one across
+   worlds without being the same word are named in `WORD_SENSES` (see Saves), and the
+   validator stops the next such pair arriving unnoticed; what stable IDs would still buy is
+   cheaper corrections. The v6 → v7 respelling made the cost of the current scheme concrete:
+   correcting a headword's spelling means a save migration, a facts regeneration and a
+   curated-map update, all because the spelling *is* the identity. A stable ID would have made
+   it a one-line data edit. Worlds already have this — the save keeps them by `worldId`, not
+   by their place in the list.
 
 ### Review history
 

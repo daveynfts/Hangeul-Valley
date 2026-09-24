@@ -1,5 +1,8 @@
 // ── Unified File-Based Save (pywebview API → file, localStorage as backup) ─────
 let fishAlbumSave = {}; // { ko: count }
+// Which spelling splits this save has had applied (js/systems/wordSenses.js). A game that
+// starts on this build separates the senses from its first answer, so it starts with all.
+let senseSplitsDone = (typeof senseSplitIds === 'function') ? senseSplitIds() : [];
 
 // ═══════════════ R1: TRIPLE CURRENCY ECONOMY & SAVE V4 ═══════════════════════
 var playerCurrencies = { coins: 85, gems: 10, honor: 0 };
@@ -572,6 +575,15 @@ function migrateSaveData(d) {
     data.v = 11;
   }
 
+  // Words spelled like another world's word without being it get their own record
+  // (js/systems/wordSenses.js). Not a version step: each pair is applied once and named in
+  // `senseSplits`, so a pair added later reaches every save the same way. Absent where only
+  // part of this file is loaded (tests/test_srs_engine.js extracts this function alone).
+  if (typeof applySenseSplits === 'function') {
+    const carried = applySenseSplits(data);
+    if (carried) console.log(`[Save Migration] Gave ${carried} words that share a spelling a record of their own`);
+  }
+
   if (data.inventory && typeof data.inventory.maxSlots !== 'number') {
     data.inventory.maxSlots = 20;
   }
@@ -652,6 +664,7 @@ function collectSave(){
     lastLevel: currentLevelIndex,
     lastWorld: _worldRefsFromIndex ? undefined : (currentWorldId || null),
     visitedWorlds: (!_worldRefsFromIndex && Array.isArray(visitedWorlds)) ? visitedWorlds.slice() : undefined,
+    senseSplits: senseSplitsDone.slice(),
     playerRank: ensurePlayerRank(),
     apple,
     fishAlbum: fishAlbumSave,
@@ -722,6 +735,7 @@ function applySave(d){
   visitedWorlds = Array.isArray(migrated.visitedWorlds)
     ? migrated.visitedWorlds.filter(id => typeof id === 'string' && id) : null;
   _worldRefsFromIndex = !Array.isArray(migrated.visitedWorlds);
+  senseSplitsDone = Array.isArray(migrated.senseSplits) ? migrated.senseSplits.filter(s => typeof s === 'string') : [];
   if (typeof resolveWorldRefs === 'function') resolveWorldRefs(_worldsSettled);
   if (migrated.playerRank && typeof migrated.playerRank === 'object') {
     playerRank = Object.assign(defaultPlayerRank(), migrated.playerRank);
@@ -2771,10 +2785,11 @@ function srsDueWords(now = Date.now()){
   const seen = new Set();
   const out = [];
   (Array.isArray(levelsData) ? levelsData : []).forEach(lvl => (lvl?.words || []).forEach(w => {
-    if (seen.has(w.ko)) return;
-    seen.add(w.ko);
-    const mod = dueModality(w.ko, now);
-    if (mod) out.push({ word: w, modality: mod, entry: srsData[w.ko].m[mod] });
+    const key = wordKey(w);
+    if (seen.has(key)) return;
+    seen.add(key);
+    const mod = dueModality(key, now);
+    if (mod) out.push({ word: w, modality: mod, entry: srsData[key].m[mod] });
   }));
   out.sort((a, b) => a.entry.due - b.entry.due);
   return out;
@@ -2802,7 +2817,7 @@ function srsReviewQueue(now = Date.now()){
   const cap = SRS_CFG.DAILY_REVIEW_CAP;
   const answered = reviewsAnsweredToday(now);
   const left = Math.max(0, cap - answered);
-  const onPlot = (d) => (typeof plantedWords !== 'undefined' && plantedWords && plantedWords.has(d.word.ko)) ? 1 : 0;
+  const onPlot = (d) => (typeof plantedWords !== 'undefined' && plantedWords && plantedWords.has(wordKey(d.word))) ? 1 : 0;
   const due = srsDueWords(now);
   const relearn = due.filter((d) => d.entry.st !== 'review');
   const reviews = due.filter((d) => d.entry.st === 'review')

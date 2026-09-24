@@ -2820,10 +2820,12 @@ class FarmScene extends Phaser.Scene {
   // `grade` is the SM-2 grade already applied by submitAnswer; the scheduler owns all
   // timing now, so this method only drives visuals and rewards.
   advancePlot(plot, word, phase, grade = GRADE.GOOD){
-    const ko=word.ko, now=Date.now(), t=plot.index%5;
+    // `ko` is the spelling (shown, and matched against ingredients); `key` is the identity the
+    // records use, which differs only for a word spelled like another (js/systems/wordSenses.js).
+    const ko=word.ko, key=wordKey(word), now=Date.now(), t=plot.index%5;
     if(phase===1){
       // P1 correct: plant seedling. The next-step timer already lives in srsData.due.
-      plot.word=word; plot.ko=ko; plot.plantedAt=now;
+      plot.word=word; plot.ko=key; plot.plantedAt=now;
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
       const crop=this.add.image(plot.x,plot.y-4,cropTex(this,t,1)).setOrigin(0.5,0.85).setScale(0).setDepth(plot.y+5);
       plot.plant=crop;
@@ -2846,9 +2848,9 @@ class FarmScene extends Phaser.Scene {
       // P3 correct: HARVEST! Coins, Gems, Honor! Play harvesting animation
       this.playPlayerAction('harvest', plot.x, plot.y, () => {
         playChiptuneSFX('harvest');
-        const prev=harvestCounts.get(ko)||0;
+        const prev=harvestCounts.get(key)||0;
         const newHarvests = prev + 1;
-        harvestCounts.set(ko, newHarvests);
+        harvestCounts.set(key, newHarvests);
 
         // Anti-farm diminishing returns formula:
         // Decays smoothly down to 1 coin if harvested >= 15 times
@@ -2859,7 +2861,7 @@ class FarmScene extends Phaser.Scene {
         // harvest is a recall answered at the production step: the same kind of work the
         // desk pays XP for, and the one the player spends most of their time doing.
         const xpGain = typeof harvestXp === 'function' ? harvestXp(prev) : 0;
-        plantedWords.delete(ko);
+        plantedWords.delete(key);
         this._sparkle(plot.x,plot.y);
         this._label(plot.x,plot.y,
           hvT(prev === 0 ? 'ui.farm.label.coinsNew' : 'ui.farm.label.coins', { n: reward })
@@ -2943,8 +2945,8 @@ class FarmScene extends Phaser.Scene {
   // for another try at the skill that actually failed.
   failReviewPlot(plot, word){
     quizStreak = 0;
-    const ko = (word && word.ko) || plot.ko;
-    if(ko) plantedWords.delete(ko);
+    const key = (word && wordKey(word)) || plot.ko;
+    if(key) plantedWords.delete(key);
     this._clearPlot(plot);
     savePlotsFn();
   }
@@ -3078,7 +3080,7 @@ class FarmScene extends Phaser.Scene {
     if(!this.plots) return 0;
     const now = Date.now();
     const queue = srsReviewQueue(now);
-    const due = queue.today.filter(d => srsIsGraduated(d.entry) && !plantedWords.has(d.word.ko));
+    const due = queue.today.filter(d => srsIsGraduated(d.entry) && !plantedWords.has(wordKey(d.word)));
     if(!due.length) return { planted: 0, remaining: 0, waiting: queue.waiting, left: queue.left, cap: queue.cap };
 
     const freePlots = this.plots.filter(p => p.active && !p.ko);
@@ -3089,16 +3091,16 @@ class FarmScene extends Phaser.Scene {
     planting.forEach((d, i) => {
       const plot = freePlots[i];
       const t = plot.index % 5;
-      plot.word = d.word; plot.ko = d.word.ko; plot.plantedAt = now;
+      plot.word = d.word; plot.ko = wordKey(d.word); plot.plantedAt = now;
       plot.plant = this.add.image(plot.x, plot.y-4, cropTex(this, t, 3))
         .setOrigin(0.5,0.85).setDepth(plot.y+5).setScale(0);
       plot.tile.setTexture('drt_wet').setDisplaySize(PLOT_SIZE,PLOT_SIZE);
       this.tweens.add({ targets: plot.plant, scale: 1, duration: 260, delay: i*70, ease:'Back.Out(2)' });
-      this._setState(plot, '4', d.word.ko);   // ripe: next interact opens the recall quiz
+      this._setState(plot, '4', plot.ko);   // ripe: next interact opens the recall quiz
       // Remember which skill fell due, so the review tests that one rather than defaulting to
       // typing when it was recognition or listening that went stale.
       plot.reviewModality = d.modality;
-      plantedWords.add(d.word.ko);
+      plantedWords.add(plot.ko);
     });
 
     if(planting.length) savePlotsFn();
@@ -3131,8 +3133,9 @@ class FarmScene extends Phaser.Scene {
     updateHUD();
   }
 
-  _findWord(ko){
-    for(const lvl of levelsData){ const w=lvl.words.find(w=>w.ko===ko); if(w) return w; }
+  // By identity, which is what a plot keeps: the spelling alone would find the other sense.
+  _findWord(key){
+    for(const lvl of levelsData){ const w=lvl.words.find(w=>wordKey(w)===key); if(w) return w; }
     return null;
   }
 
@@ -3161,16 +3164,16 @@ class FarmScene extends Phaser.Scene {
   }
   _pickWord(){
     const all=getUnlockedWords();
-    let pool=all.filter(w=>!plantedWords.has(w.ko));
+    let pool=all.filter(w=>!plantedWords.has(wordKey(w)));
     // Manual planting is for learning new material; anything already in the review queue
     // resurfaces on its own schedule via _plantDueReviews, so it is excluded here rather
     // than letting the player grind a known word ahead of its due date.
-    const unlearned=pool.filter(w=>!srsIsGraduated(peekSrs(w.ko)));
+    const unlearned=pool.filter(w=>!srsIsGraduated(peekSrs(wordKey(w))));
     if(unlearned.length) pool=unlearned;
     const arr=pool.length?pool:all;
     // Weighted random: untouched ×5, mid-learning ×3, everything else ×1
     const weighted=arr.map(w=>{
-      const e=peekSrs(w.ko);
+      const e=peekSrs(wordKey(w));
       return {word:w, weight: !e||e.st==='new' ? 5 : srsIsLearning(e) ? 3 : 1};
     });
     const total=weighted.reduce((s,w)=>s+w.weight,0);
