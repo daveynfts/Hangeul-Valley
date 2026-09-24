@@ -1172,15 +1172,31 @@ Two smaller things worth copying:
   other rows are substitutions and models, which the book prints but the tape never reads;
   those are not asserted against the tape and should not be.
 
-The 듣기 pages are still missing for the same reason as Unit 14's: tracks 08 and 09 print
-comprehension questions and not words, so nothing can key an answer until the 듣기 지문
-page at the back is in.
+The 듣기 pages were missing at first for the same reason as Unit 14's: tracks 08 and 09
+print comprehension questions and not words, so nothing could key an answer until the 듣기
+지문 page at the back was in. They arrived with Unit 15's on 2026-09-24 as three pages under
+듣고 말하기 (printed pp.36-37), and the bank went from seven exercises to ten:
 
-Every clip a row names here is a whole track, never a dictation clip, so a label check
-stands in for Unit 14's clip-text comparison: `말하기 1 · track 04` over an mp3 that is
-`trk02` sends the learner to the wrong page of the book and nothing on screen shows it.
-`validate_content.js` and the test both require the number in the label to match the number
-in the filename, and both require the track to be one the cassette actually carries.
+- **듣기 1** is the book's one question with its own ①②③ — 모범 답안 on printed p.267
+  keys ② — and one row for each option's line on the tape: 피자 시켜 먹을까? (not in a
+  restaurant), 불고기피자는 별로 안 좋아해 (he likes 불고기), 내가 주문할게 (she orders).
+- **듣기 2** asks for three write-ins, and 모범 답안 gives all of them — 치즈피자, 콜라 /
+  18,000 / 30 — so they are choices, and the wrong ones are the numbers a listener mishears:
+  8,000 and 80,000 for 만 팔천, 13 and 40 for 삼십. The caller's order itself is a two-blank
+  row on the counting words 판 and 병, since the page glosses 판 as the unit for pizza.
+- **말하기** is a role-play with three menus, which has no key, and a box of four phrases
+  for ordering by phone, which does. Three of them are rows, and two of the three are the
+  pair that teaches 되 and 돼 from both sides — 지금 배달되나요?, 1인분도 배달돼요? — each
+  offering its own key with the vowel swapped as the mistake.
+
+Every clip a row named here used to be a whole track, so a label check stood in for Unit
+14's clip-text comparison: `말하기 1 · track 04` over an mp3 that is `trk02` sends the learner
+to the wrong page of the book and nothing on screen shows it. `validate_content.js` and the
+test both require the number in a whole-track label to match the number in the filename, and
+the track to be one the cassette carries. The 듣기 rows are the first here to play a single
+line, so the suite now does both: a row names a whole track or one of the cassette's
+dictation clips, and a clip has to say one of its row's filled lines in the voice that line is
+printed in.
 
 ### Unit 13, the whole chapter rather than what was left
 
@@ -1598,6 +1614,10 @@ gives ②") and a fourth listed the three answers of its first three rows.
   모범 답안 on printed p.267 as its key" tells the learner where the key comes from without
   quoting it. A note may name a row's buttons — "long or short, permed or straight" — so long
   as it names them all.
+- **Watch the other rows as well.** A context line that quotes the tape can answer a different
+  row. 모두 18,000원입니다 is the natural lead-in to Unit 10's time question, and it would have
+  answered the price, two rows above; so that row has no lead-in. Every row is on screen at
+  once.
 
 `tests/test_listening_pages.js` drives the shipped renderer and checks all of it: no gloss on a
 듣기 page until the page is checked, all of them afterwards, the gloss still up front on a

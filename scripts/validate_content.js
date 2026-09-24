@@ -2633,7 +2633,7 @@ const overlayIds = [
 (function checkTextbookBanks() {
   const BANKS = [
     { unit: 'unit14', label: 'Unit 14', world: 'isUnit14World', exs: 9, rows: 41 },
-    { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 },
+    { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 10, rows: 43 },
     { unit: 'unit13', label: 'Unit 13', world: 'isUnit13World', exs: 16, rows: 78 },
     { unit: 'unit11', label: 'Unit 11', world: 'isUnit11World', exs: 14, rows: 63 },
     { unit: 'unit16', label: 'Unit 16', world: 'isUnit16World', exs: 14, rows: 59 },
@@ -2773,7 +2773,7 @@ const overlayIds = [
         if (/^듣기/.test(String(ex.no || ''))) pages.push({ b, ex });
       });
     });
-  check(`the unit banks carry their 듣기 pages (${pages.length})`, pages.length >= 14, String(pages.length));
+  check(`the unit banks carry their 듣기 pages (${pages.length})`, pages.length >= 16, String(pages.length));
   const open = pages.filter(({ b, ex }) => !(ex.holdGloss === true || b.holdGloss === true)).map(({ ex }) => ex.id);
   check('every 듣기 page holds its English until the row is checked', open.length === 0, open.join(', '));
   const told = pages.filter(({ ex }) => /\b(?:gives|is|keys)\s*[①-⑩]/.test(String(ex.noteEn || '')))
