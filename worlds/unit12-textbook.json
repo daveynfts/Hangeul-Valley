@@ -1404,7 +1404,8 @@
       "blurbEn": "Mariko has had her hair cut short after a bad exam, and knows a good salon.",
       "instructionKo": "잘 듣고 맞지 않는 것을 고르세요.",
       "instructionEn": "Listen carefully and choose the one that is different from the conversation.",
-      "noteEn": "The book asks one question about this tape — which of three statements it contradicts — and 모범 답안 on printed p.267 gives ②: the salon 마리코 went to is not expensive. That is row 1, with the book’s own three options in the book’s own order. Rows 2 to 4 are three lines the conversation turns on, one for each option, so the answer can be worked out from the recording rather than guessed: 시험을 못 봐서 is why 마리코 was down, 시원해 보여요 is what the new hair looks like, and 비싸지 않고 is the line that makes ② wrong. Row 1 plays the whole of track 28; the others play their own lines.",
+      "noteEn": "The book asks one question about this tape — which of three statements it contradicts — and row 1 is that question, with the book’s own three options in the book’s own order and 모범 답안 on printed p.267 as its key. Rows 2 to 4 are the three lines the options turn on, one each, so the answer can be worked out from the recording rather than guessed: why 마리코 was feeling down, how the short hair looks, and what the salon is like. Row 1 plays the whole of track 28; the others play their own lines.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
@@ -1563,7 +1564,8 @@
       "blurbEn": "A customer without a booking, a short wait, and a perm.",
       "instructionKo": "잘 듣고 질문에 답하세요.",
       "instructionEn": "Listen carefully and answer the questions.",
-      "noteEn": "The book asks one question here, with four drawings of hair to choose from, and 모범 답안 on printed p.267 gives ④. The drawings differ in two things only — long or short, permed or straight — so the four options are those two things said in words, in the page’s order. Rows 2 to 4 are the lines the answer turns on, each playing its own clip off track 29, and row 5 asks how long it will take, which the tape answers twice over: twenty minutes to wait, two hours in the chair.",
+      "noteEn": "The book asks one question here, with four drawings of hair to choose from, and 모범 답안 on printed p.267 is its key. The drawings differ in two things only — long or short, permed or straight — so the four options are those two things said in words, in the page’s order. Rows 2 to 4 are the lines the answer turns on, each playing its own clip off track 29, and row 5 asks how long the perm will take — listen closely, because the tape gives two lengths of time and only one of them is the perm.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,

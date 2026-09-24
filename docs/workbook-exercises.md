@@ -1579,6 +1579,33 @@ letter, and the suite refuses a key that repeats with a period of four or less. 
 how often the right answer is the single longest option — the oldest test-taking trick — and
 refuses more than chance would give; five options were rebalanced to get there.
 
+## A 듣기 page is answered off the tape, not off the screen
+
+Every unit bank draws a row's English gloss beside it before the row is checked. On a grammar
+page that is the help it was written as: the learner knows what the sentence means and has to
+build the form. On a 듣기 page it is a transcript of what the tape is about to say — "I studied
+hard, but I did badly in the exam" beside a blank whose buttons are 잘 봐서 / 안 봐서 / 못 봐서
+— so every one of the fourteen 듣기 pages could be done with the sound off. And the note above
+the rows is read before anything, so three of them handed over the key outright ("모범 답안
+gives ②") and a fourth listed the three answers of its first three rows.
+
+- **`holdGloss` on the page.** The exam bank already held its gloss back until the row was
+  checked, bank-wide. A page can now ask for the same: `ex.holdGloss` is read by the renderer
+  beside `bank.holdGloss`, and `validateWorkbook` keeps it on a page, since it rebuilds each
+  page from a fixed field list and would otherwise drop it on the first save. Every 듣기 page
+  carries it; no other page does, because elsewhere the gloss is the help.
+- **The note says what the page is, not what the answers are.** "Row 1 is that question, with
+  모범 답안 on printed p.267 as its key" tells the learner where the key comes from without
+  quoting it. A note may name a row's buttons — "long or short, permed or straight" — so long
+  as it names them all.
+
+`tests/test_listening_pages.js` drives the shipped renderer and checks all of it: no gloss on a
+듣기 page until the page is checked, all of them afterwards, the gloss still up front on a
+grammar page, no note stating a circled key or quoting an answer without its other buttons, and
+the flag surviving a save. Against the old renderer it fails on the three hold checks, and
+against the old notes on four pages. `validate_content.js` holds every 듣기 page to the flag
+and to a recording on every row.
+
 ## A third kind of bank: the exam world
 
 `worlds/topik2-questions.json` is the same file format again, but the world behind it is not

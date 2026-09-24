@@ -2756,6 +2756,42 @@ const overlayIds = [
   }
 }());
 
+// ── 듣기 pages ───────────────────────────────────────────────────────
+// A 듣기 page is answered off the tape, and two things on screen can answer it first. The
+// English gloss beside each row is drawn before the row is checked — an aid on a grammar page,
+// and on a 듣기 page a transcript of what the tape was about to say: "I studied hard, but I did
+// badly in the exam" beside a blank whose buttons are 잘 봐서 / 안 봐서 / 못 봐서. And the
+// note above the rows is read first of all, so "모범 답안 gives ②" there is the key. All
+// fourteen pages showed the first and three the second until 2026-09-24. A new 듣기 page has
+// to hold its gloss (holdGloss on the page, or on the bank) to get past this.
+(function checkListeningPages() {
+  const pages = [];
+  fs.readdirSync(path.join(ROOT, 'worlds')).filter((f) => /-(?:text|work)book\.json$/.test(f)).sort()
+    .forEach((f) => {
+      const b = JSON.parse(read(path.join('worlds', f)));
+      (b.exercises || []).forEach((ex) => {
+        if (/^듣기/.test(String(ex.no || ''))) pages.push({ b, ex });
+      });
+    });
+  check(`the unit banks carry their 듣기 pages (${pages.length})`, pages.length >= 14, String(pages.length));
+  const open = pages.filter(({ b, ex }) => !(ex.holdGloss === true || b.holdGloss === true)).map(({ ex }) => ex.id);
+  check('every 듣기 page holds its English until the row is checked', open.length === 0, open.join(', '));
+  const told = pages.filter(({ ex }) => /\b(?:gives|is|keys)\s*[①-⑩]/.test(String(ex.noteEn || '')))
+    .map(({ ex }) => ex.id);
+  check('and no note above a 듣기 page states its key', told.length === 0, told.join(', '));
+  const silent = [];
+  pages.forEach(({ ex }) => (ex.items || []).forEach((it) => {
+    if (!(it.audio && it.audio.src)) silent.push(ex.id + ' row ' + it.n);
+  }));
+  check('every row on a 듣기 page plays a recording', silent.length === 0, silent.slice(0, 6).join(', '));
+  // The flag is only worth anything if the renderer reads it off the page and a save through
+  // the admin does not drop it — validateWorkbook rebuilds each page from a fixed field list.
+  check('the renderer honours holdGloss on a page as well as on a bank',
+    readGameSource().indexOf('(st.bank && st.bank.holdGloss) || ex.holdGloss') >= 0);
+  check('and the admin validator keeps it',
+    read(path.join('admin', 'lib', 'workbook.js')).indexOf('if (ex.holdGloss === true) out.holdGloss = true;') >= 0);
+}());
+
 // ── The exam world ───────────────────────────────────────────────────
 // TOPIK II is not a chapter of anything, so this world breaks the shape every other world
 // keeps: no fixed word list, no 퀴즈, no tape. Questions arrive one at a time and the word list

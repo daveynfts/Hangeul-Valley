@@ -1159,7 +1159,8 @@
       "blurbEn": "A reporter at Seoul Station on the eve of Chuseok, and a passenger going home.",
       "instructionKo": "잘 듣고 맞지 않는 것을 고르세요.",
       "instructionEn": "Listen carefully and choose the one that is different from the passage.",
-      "noteEn": "The book asks one question about this tape — which of three statements the recording contradicts — and 모범 답안 on printed p.267 gives ①. That is row 1, with the book’s own three options. Rows 2 and 3 are the two lines the answer turns on, so the page can be worked out from the recording rather than guessed. Row 2 plays its own line; rows 1 and 3 play the whole track, row 3 because the dictation cut its sentence in two at the clause and half a sentence is not the line the row prints.",
+      "noteEn": "The book asks one question about this tape — which of three statements the recording contradicts — and row 1 is that question, with the book’s own three options and 모범 답안 on printed p.267 as its key. Rows 2 and 3 are the two lines the answer turns on, so the page can be worked out from the recording rather than guessed. Row 2 plays its own line; rows 1 and 3 play the whole track, row 3 because the dictation cut its sentence in two at the clause and half a sentence is not the line the row prints.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
@@ -1278,6 +1279,7 @@
       "instructionKo": "잘 듣고 질문에 답하세요.",
       "instructionEn": "Listen carefully and answer the questions.",
       "noteEn": "Listen and choose what Nana will do tomorrow. Question 2 pairs each Korean option with an original illustration: handing the cat over, calling, or visiting a vet. The textbook answer keys are preserved. Rows 3 and 4 practise the lines that explain the answers; row 4 plays its own clip.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,

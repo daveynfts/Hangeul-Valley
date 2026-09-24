@@ -175,6 +175,7 @@
       "instructionKo": "잘 듣고 맞지 않는 것을 고르세요.",
       "instructionEn": "Listen carefully and choose the statement that is different from the announcement.",
       "noteEn": "The book prints only the three statements; the announcement itself is on the 듣기 지문 page at the back, and track 48 is on the deck. Row 1 is the book's question with the book's three options. Rows 2-4 are the lines the answer turns on, so the page is answerable from the recording rather than from a guess — the announcement says to switch a phone off, which is not the same as not bringing one in.",
+      "holdGloss": true,
       "pattern": "서울아트센터 안내 방송",
       "items": [
         {
@@ -323,6 +324,7 @@
       "instructionKo": "잘 듣고 질문에 답하세요.",
       "instructionEn": "Listen carefully and answer the questions.",
       "noteEn": "The book asks two multiple-choice questions and prints three pictures for the first, which is why row 1 names the three in words instead. Both are the book's own questions with its own options; the transcript from the 듣기 지문 page settles them, and rows 3-6 are the lines that do the settling. Note row 2: the staff member says the gym is 50% cheaper for residents, not free, which is what makes 기숙사에 사는 사람은 운동 시설을 무료로 이용할 수 있습니다 wrong.",
+      "holdGloss": true,
       "pattern": "기숙사 규칙 안내",
       "items": [
         {

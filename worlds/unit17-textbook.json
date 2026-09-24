@@ -1257,6 +1257,7 @@
       "instructionKo": "잘 듣고 맞는 것을 고르세요.",
       "instructionEn": "Listen carefully and choose the statement that matches.",
       "noteEn": "The book asks two questions about this tape and 모범 답안 on printed p.268 gives (3) for the first and (1) and (3) together for the second. Both are here with the book’s own options, the second rewritten as one choice of a pair because the page prints it as three pictures to tick. Rows 3 and 4 are the two lines those answers turn on, so the page can be worked out from the recording instead of guessed.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
@@ -1412,6 +1413,7 @@
       "instructionKo": "잘 듣고 맞는 것을 고르세요.",
       "instructionEn": "Listen carefully and choose the statement that matches.",
       "noteEn": "Sixteen turns in two scenes — the phone call, then the officer at the door. The book asks two questions and 모범 답안 on printed p.268 gives (3) for both. The second is printed as three drawings of a man in different clothes; here the three are written out, because the sentence that decides them names all three garments and their colours. Rows 3 and 4 are the two lines the answers come from.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
