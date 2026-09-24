@@ -1539,11 +1539,13 @@ function renderProgressOverlay() {
   if (pbox) {
     const sum = typeof practiceSummary === 'function' ? practiceSummary() : null;
     const ROWS = [
-      { k: 'wb', icon: '✍️', lbl: 'Exercises', unit: 'page' },
-      { k: 'trk', icon: '🎧', lbl: 'Listening', unit: 'track' },
-      { k: 'dic', icon: '✏️', lbl: 'Dictation', unit: 'line' }
+      { k: 'wb', icon: '✍️', lbl: hvT('ui.prog.prac.exercises'),
+        across: (n) => hvT(n === 1 ? 'ui.prog.prac.pages.one' : 'ui.prog.prac.pages', { n }) },
+      { k: 'trk', icon: '🎧', lbl: hvT('ui.prog.prac.listening'),
+        across: (n) => hvT(n === 1 ? 'ui.prog.prac.tracks.one' : 'ui.prog.prac.tracks', { n }) },
+      { k: 'dic', icon: '✏️', lbl: hvT('ui.prog.prac.dictation'),
+        across: (n) => hvT(n === 1 ? 'ui.prog.prac.lines.one' : 'ui.prog.prac.lines', { n }) }
     ];
-    const plural = (n, word) => n + ' ' + word + (n === 1 ? '' : 's');
     const total = sum ? ROWS.reduce((n, r) => n + sum[r.k].n, 0) : 0;
     pbox.innerHTML = !total
       ? '<div class="prac-empty">' + vbEsc(hvT('ui.prog.prac.empty')) + '</div>'
@@ -1553,9 +1555,9 @@ function renderProgressOverlay() {
         // twelve exercises once are not the same week of study.
         return `<div class="prac-row">
             <span class="prac-icon">${r.icon}</span>
-            <span class="prac-lbl">${r.lbl}</span>
+            <span class="prac-lbl">${vbEsc(r.lbl)}</span>
             <span class="prac-n">${v.n}</span>
-            <span class="prac-sub">${v.items ? 'across ' + plural(v.items, r.unit) : '—'}</span>
+            <span class="prac-sub">${v.items ? vbEsc(r.across(v.items)) : '—'}</span>
             <span class="prac-pct${v.pct !== null && v.pct < 70 ? ' low' : ''}">${v.pct === null ? '' : v.pct + '%'}</span>
           </div>`;
       }).join('');
@@ -1580,7 +1582,11 @@ function renderProgressOverlay() {
   // between "I recognise it" and "I can produce it" becomes visible.
   const modWrap = $('prog-modalities');
   if (modWrap) {
-    const LBL = { type: '⌨️ Type (production)', recognise: '👁 Recognise', listen: '👂 Listen' };
+    const LBL = {
+      type: hvT('ui.prog.skill.type'),
+      recognise: hvT('ui.prog.skill.recognise'),
+      listen: hvT('ui.prog.skill.listen')
+    };
     const any = MODALITIES.some(m => s.byModality[m].started > 0);
     modWrap.parentElement.style.display = any ? '' : 'none';
     if (any) {
@@ -1589,7 +1595,7 @@ function renderProgressOverlay() {
         const gradPct = b.started ? Math.round((b.graduated / b.started) * 100) : 0;
         const matPct  = b.started ? Math.round((b.mature / b.started) * 100) : 0;
         return `<div class="prog-level-row">
-          <span class="prog-level-name">${LBL[m]}</span>
+          <span class="prog-level-name">${vbEsc(LBL[m])}</span>
           <span class="prog-level-track">
             <span class="prog-level-learned" style="width:${gradPct}%"></span>
             <span class="prog-level-mature" style="width:${matPct}%"></span>
@@ -1609,8 +1615,9 @@ function renderProgressOverlay() {
     actWrap.parentElement.style.display = total ? '' : 'none';
     if (total) {
       const peakA = Math.max(1, ...act);
+      const answers = (n) => hvT(n === 1 ? 'ui.prog.activity.answers.one' : 'ui.prog.activity.answers', { n });
       actWrap.innerHTML = act.map((n, i) =>
-        `<span class="prog-day ${n ? 'has' : ''}" title="${n} answer${n === 1 ? '' : 's'}"
+        `<span class="prog-day ${n ? 'has' : ''}" title="${vbEsc(answers(n))}"
                style="opacity:${n ? (0.35 + 0.65 * (n / peakA)).toFixed(2) : 1}">${
           i === act.length - 1 ? '<b>·</b>' : ''}</span>`
       ).join('');
