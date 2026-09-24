@@ -4595,6 +4595,57 @@ function wbDrawOne(bank, ex) {
   return Object.assign({}, ex, { items: [items[i]], drawnFrom: items.length, drawnAt: i });
 }
 
+// A sitting deals the buttons in an order of its own. The banks are written with the right
+// answer first on nearly every row — all 57 of Unit 18's 교과서 rows, all 70 of Unit 12's
+// 익힘책 — and the buttons used to be drawn in exactly that order, so pressing 1 on every row
+// scored full marks without reading a word. Five shared boxes had the same fault the other way
+// round: their chips were listed in the order of the rows they answer, so a picture page could
+// be matched straight across.
+//
+// The order is fixed for the length of a sitting, so a re-render never moves a button out from
+// under the cursor, and 다시 풀기 deals again. Two orders mean something and are kept: an exam
+// bank's (drawOne), whose explanations cite options by the number the paper prints them under,
+// and a row whose every button opens on the book's own ①②③, which is laid out in that order.
+const WB_CIRCLED = '①②③④⑤⑥⑦⑧⑨⑩';
+function wbShuffled(list) {
+  const out = (list || []).slice();
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const t = out[i]; out[i] = out[j]; out[j] = t;
+  }
+  return out;
+}
+function wbDealIds(list, keep) {
+  const all = list || [];
+  if (keep || all.length < 2) return all.map(c => c.id);
+  const rank = (c) => WB_CIRCLED.indexOf(String((c && c.ko) || '').trim().charAt(0));
+  if (all.every(c => rank(c) >= 0)) {
+    return all.slice().sort((a, b) => rank(a) - rank(b)).map(c => c.id);
+  }
+  return wbShuffled(all).map(c => c.id);
+}
+function wbDeal(st) {
+  const keep = !!(st.bank && st.bank.drawOne);
+  const items = (st.ex && st.ex.items) || [];
+  const chips = ((st.ex && st.ex.bank) || []).filter(c => !c.usedByExample);
+  st.chips = keep ? chips : wbShuffled(chips);
+  st.order = items.map(it => wbDealIds(it.choices, keep));
+  st.order2 = items.map(it => wbDealIds(it.choices2, keep));
+}
+
+// One blank's buttons on row i, in the order this sitting dealt them. The renderer and the
+// number keys both read this, so the badge on a button and the key that presses it agree.
+function wbRowChoices(item, i, slot) {
+  const list = ((slot === 2 ? item && item.choices2 : item && item.choices) || []);
+  const st = workbookState;
+  const orders = st ? (slot === 2 ? st.order2 : st.order) : null;
+  const ids = orders && orders[i];
+  if (!ids || ids.length !== list.length) return list;
+  const byId = new Map(list.map(c => [c.id, c]));
+  const out = ids.map(id => byId.get(id)).filter(Boolean);
+  return out.length === list.length ? out : list;
+}
+
 function openWorkbookExercise(id) {
   const st = workbookState;
   if (!st) return;
@@ -4606,7 +4657,7 @@ function openWorkbookExercise(id) {
   if (!st.ex || st.ex.id !== ex.id) wbStopTrack();
   st.mode = 'exercise';
   st.ex = ex;
-  st.chips = (ex.bank || []).filter(c => !c.usedByExample);
+  wbDeal(st);
   st.fill = new Array((ex.items || []).length).fill(null);
   // 'build' can put a second blank in the same script, because the book drills
   // 해도 돼요? and -면 안 돼요 as one exchange and marking only half of it would
@@ -4825,6 +4876,8 @@ function checkWorkbook() {
 function resetWorkbook() {
   const st = workbookState;
   if (!wbInExercise()) return;
+  // A second go that puts every button back where it was is a memory test of the first.
+  wbDeal(st);
   st.fill = new Array((st.ex.items || []).length).fill(null);
   st.fill2 = new Array((st.ex.items || []).length).fill(null);
   st.own = new Array((st.ex.items || []).length).fill(null);
@@ -5453,14 +5506,14 @@ function renderWorkbook() {
             picks.appendChild(t);
           };
           tag(gapWho[0], 0);
-          addForms(item.choices, 1);
+          addForms(wbRowChoices(item, i, 1), 1);
           const brk = document.createElement('i');
           brk.className = 'wb-picks-break';
           picks.appendChild(brk);
           tag(gapWho[1], 1);
-          addForms(item.choices2, 2);
+          addForms(wbRowChoices(item, i, 2), 2);
         } else {
-          addForms(item.choices, 1);
+          addForms(wbRowChoices(item, i, 1), 1);
         }
         if (ex.type === 'experience') {
           rule();
@@ -5780,11 +5833,11 @@ if (typeof window !== 'undefined' && window.addEventListener) {
         // forms, then the second blank's, then 있어요 and 없어요.
         const item = (st.ex.items || [])[st.focus];
         if (!item) return;
-        const first = item.choices || [];
+        const first = wbRowChoices(item, st.focus, 1);
         if (num <= first.length) {
           e.preventDefault(); wbPickChoice(st.focus, first[num - 1].id, 1); return;
         }
-        const second = item.choices2 || [];
+        const second = wbRowChoices(item, st.focus, 2);
         if (num <= first.length + second.length) {
           e.preventDefault();
           wbPickChoice(st.focus, second[num - first.length - 1].id, 2);

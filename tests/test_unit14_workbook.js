@@ -929,7 +929,9 @@ const exP3 = wb.exercises.find(e => e.id === 'u14-grammar-4-3');
   keys.call('wbPickChoice', 0, exP1.items[0].choices2[0].id, 2);
   assert(keys.run('workbookState.fill2[0]') === exP1.items[0].choices2[0].id,
     'slot 2 takes its own choices');
-  assert(kb.indexOf('choices2') >= 0 && kb.indexOf('first.length + second.length') >= 0,
+  // The keys read each blank's buttons in the order the sitting dealt them — the same list
+  // the renderer draws — so the badge on a button and the key that presses it agree.
+  assert(kb.indexOf('wbRowChoices(item, st.focus, 2)') >= 0 && kb.indexOf('first.length + second.length') >= 0,
     'and the key handler counts past the first blank to reach them');
   assert(n1 === 3, 'each blank offers three forms, so 1-6 covers the row');
 }

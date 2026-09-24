@@ -234,7 +234,37 @@ same syllable on both sides of the slash, where 아/었 was meant. A pair is whe
 typo is least visible and most misleading, because the shape of the sentence
 around it still reads as a contrast.
 
+**Never point at a button by its position.** A sitting deals the buttons in an order of its
+own (see *Button order* below), so "the third button" in a note is whichever button the deal
+put third, and a learner reading it after a wrong answer is sent to the wrong one. Name the
+button by its text: 잠을 못 자 보이네요 cannot be right, not "the third button cannot be right".
+Two such notes, in Unit 14 and Unit 17, were rewritten when the deal arrived. The book's own
+numbers are different: "모범 답안 gives ②" is about the page, and a row whose buttons carry the
+book's ①②③ is laid out in that order.
+
 The apostrophe is the curly one.
+
+### Button order
+
+The banks are written with the right answer first — every row of Units 11, 13, 14, 15, 17
+and 18's 교과서, all 70 of Unit 12's 익힘책 — and until the deal arrived the renderer drew the
+buttons in exactly that order and the number keys pressed them in it, so a learner could
+press 1 on every row and score full marks without reading a word. Five shared boxes had the
+fault the other way round: their chips were listed in the order of the rows they answer.
+
+`wbDeal` in `js/ui.js` now deals every row's buttons and every box's chips when an exercise
+opens, and again on 다시 풀기. The renderer and the number keys both read `wbRowChoices`, so
+a badge and its key cannot disagree, and the order holds still for the sitting so a re-render
+never moves a button under the cursor. Two orders are kept because they mean something: an
+exam bank (`drawOne`), whose explanations cite option 1 to 4 as the paper prints them, and a
+row whose every button opens on a circled number, which is laid out ① ② ③ however the
+sitting deals. `tests/test_workbook_button_order.js` drives the shipped renderer with a
+seeded random source and was checked against the old renderer, where it reads "1×60".
+
+So the order a bank is written in no longer reaches the screen, and nothing needs rewriting
+to benefit. A new bank can still vary it, so the file does not teach
+"the first one" to any reader that bypasses the renderer — but the deal is what protects the
+learner.
 
 ### Worked examples
 

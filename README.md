@@ -526,6 +526,14 @@ of the desk menu that opened them, so nothing drills the same sentence twice.
 the exercise types, cutting a drill track, and what to change when a second unit
 lands.
 
+A sitting deals each row's buttons, and each shared box's chips, in an order of its own
+(`wbDeal` in `js/ui.js`). The banks are written with the right answer first on nearly every
+row, and the renderer used to draw them in that order, so pressing 1 on every row scored full
+marks without reading a word. The order holds for the sitting and is dealt again on 다시 풀기;
+an exam bank (`drawOne`) keeps the paper's order, because its explanations cite options by
+number, and a row whose every button opens on the book's ①②③ is laid out in that order.
+`tests/test_workbook_button_order.js` drives the renderer with a seeded random source.
+
 The cassette player beside the desk plays the book's own tracks with the script alongside,
 and takes dictation one sentence at a time. Both screens draw the recording as a waveform:
 click to seek, drag out a stretch to loop it, `↻ 반복` to repeat the whole thing, and
