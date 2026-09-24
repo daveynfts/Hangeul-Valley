@@ -1087,6 +1087,7 @@
       "instructionKo": "잘 듣고 질문에 답하세요.",
       "instructionEn": "Listen carefully and answer the questions.",
       "noteEn": "The book asks two questions. The first is three printed statements and is row 1 as it stands. The second is four pictures with no words — throat, runny nose, thermometer, cough — and asks which is NOT one of her symptoms; pictures cannot be buttons, so row 2 names three of the four in words, keeping the cough that the tape rules out and two the tape confirms. The fourth, 열이 나다, is confirmed by the same line as the throat. Rows 3 to 5 are the lines those answers turn on.",
+      "holdGloss": true,
       "pattern": "의사와 환자 · 켈리의 감기",
       "items": [
         {
@@ -1275,6 +1276,7 @@
       "instructionKo": "잘 듣고 질문에 답하세요.",
       "instructionEn": "Listen carefully and answer the questions.",
       "noteEn": "The book’s first question is a form with two gaps — 남자는 ____마다 ____씩 운동을 합니다 — and its second is three printed statements. Row 1 keeps both gaps as one row, because 마다 and 씩 are only meaningful together, and it puts them back in the sentence the runner actually says rather than in the third person the form uses. Rows 3 and 4 are the interviewer’s own language, which is the most formal Korean in the chapter.",
+      "holdGloss": true,
       "pattern": "마라톤 인터뷰 · 여든여덟 살의 선수",
       "items": [
         {

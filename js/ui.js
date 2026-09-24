@@ -5425,8 +5425,10 @@ function renderWorkbook() {
         // A bank may hold its translation back until the row is checked. On a textbook page
         // the gloss beside the sentence is an aid; on an exam question it is the answer —
         // "put on thick clothes AND went out" hands over the sequence the blank is testing.
-        // Opt-in per bank so the units keep the behaviour they were written for.
-        const holdGloss = !!(st.bank && st.bank.holdGloss) && !st.checked;
+        // Opt-in per bank so the units keep the behaviour they were written for. An exercise
+        // can ask for it too: on a 듣기 page the gloss is what the tape was going to say, so
+        // "I did badly in the exam" beside the row answers it before anyone presses play.
+        const holdGloss = !!((st.bank && st.bank.holdGloss) || ex.holdGloss) && !st.checked;
         head.innerHTML = art +
           '<span class="wb-exp-phrase">' + vbEsc(item.phraseKo || '') + '</span>' +
           (holdGloss ? '' : '<span class="wb-exp-en">' + vbEsc(tr(item, 'en') || '') + '</span>');

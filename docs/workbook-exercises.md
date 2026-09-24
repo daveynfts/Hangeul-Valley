@@ -1172,15 +1172,31 @@ Two smaller things worth copying:
   other rows are substitutions and models, which the book prints but the tape never reads;
   those are not asserted against the tape and should not be.
 
-The 듣기 pages are still missing for the same reason as Unit 14's: tracks 08 and 09 print
-comprehension questions and not words, so nothing can key an answer until the 듣기 지문
-page at the back is in.
+The 듣기 pages were missing at first for the same reason as Unit 14's: tracks 08 and 09
+print comprehension questions and not words, so nothing could key an answer until the 듣기
+지문 page at the back was in. They arrived with Unit 15's on 2026-09-24 as three pages under
+듣고 말하기 (printed pp.36-37), and the bank went from seven exercises to ten:
 
-Every clip a row names here is a whole track, never a dictation clip, so a label check
-stands in for Unit 14's clip-text comparison: `말하기 1 · track 04` over an mp3 that is
-`trk02` sends the learner to the wrong page of the book and nothing on screen shows it.
-`validate_content.js` and the test both require the number in the label to match the number
-in the filename, and both require the track to be one the cassette actually carries.
+- **듣기 1** is the book's one question with its own ①②③ — 모범 답안 on printed p.267
+  keys ② — and one row for each option's line on the tape: 피자 시켜 먹을까? (not in a
+  restaurant), 불고기피자는 별로 안 좋아해 (he likes 불고기), 내가 주문할게 (she orders).
+- **듣기 2** asks for three write-ins, and 모범 답안 gives all of them — 치즈피자, 콜라 /
+  18,000 / 30 — so they are choices, and the wrong ones are the numbers a listener mishears:
+  8,000 and 80,000 for 만 팔천, 13 and 40 for 삼십. The caller's order itself is a two-blank
+  row on the counting words 판 and 병, since the page glosses 판 as the unit for pizza.
+- **말하기** is a role-play with three menus, which has no key, and a box of four phrases
+  for ordering by phone, which does. Three of them are rows, and two of the three are the
+  pair that teaches 되 and 돼 from both sides — 지금 배달되나요?, 1인분도 배달돼요? — each
+  offering its own key with the vowel swapped as the mistake.
+
+Every clip a row named here used to be a whole track, so a label check stood in for Unit
+14's clip-text comparison: `말하기 1 · track 04` over an mp3 that is `trk02` sends the learner
+to the wrong page of the book and nothing on screen shows it. `validate_content.js` and the
+test both require the number in a whole-track label to match the number in the filename, and
+the track to be one the cassette carries. The 듣기 rows are the first here to play a single
+line, so the suite now does both: a row names a whole track or one of the cassette's
+dictation clips, and a clip has to say one of its row's filled lines in the voice that line is
+printed in.
 
 ### Unit 13, the whole chapter rather than what was left
 
@@ -1578,6 +1594,58 @@ patternless key is the safer thing to ship, so the builder moves each answer to 
 letter, and the suite refuses a key that repeats with a period of four or less. It also counts
 how often the right answer is the single longest option — the oldest test-taking trick — and
 refuses more than chance would give; five options were rebalanced to get there.
+
+## A 듣기 page is answered off the tape, not off the screen
+
+Every unit bank draws a row's English gloss beside it before the row is checked. On a grammar
+page that is the help it was written as: the learner knows what the sentence means and has to
+build the form. On a 듣기 page it is a transcript of what the tape is about to say — "I studied
+hard, but I did badly in the exam" beside a blank whose buttons are 잘 봐서 / 안 봐서 / 못 봐서
+— so every one of the fourteen 듣기 pages could be done with the sound off. And the note above
+the rows is read before anything, so three of them handed over the key outright ("모범 답안
+gives ②") and a fourth listed the three answers of its first three rows.
+
+- **`holdGloss` on the page.** The exam bank already held its gloss back until the row was
+  checked, bank-wide. A page can now ask for the same: `ex.holdGloss` is read by the renderer
+  beside `bank.holdGloss`, and `validateWorkbook` keeps it on a page, since it rebuilds each
+  page from a fixed field list and would otherwise drop it on the first save. Every 듣기 page
+  carries it; no other page does, because elsewhere the gloss is the help.
+- **The note says what the page is, not what the answers are.** "Row 1 is that question, with
+  모범 답안 on printed p.267 as its key" tells the learner where the key comes from without
+  quoting it. A note may name a row's buttons — "long or short, permed or straight" — so long
+  as it names them all.
+- **Watch the other rows as well.** A context line that quotes the tape can answer a different
+  row. 모두 18,000원입니다 is the natural lead-in to Unit 10's time question, and it would have
+  answered the price, two rows above; so that row has no lead-in. Every row is on screen at
+  once.
+
+`tests/test_listening_pages.js` drives the shipped renderer and checks all of it: no gloss on a
+듣기 page until the page is checked, all of them afterwards, the gloss still up front on a
+grammar page, no note stating a circled key or quoting an answer without its other buttons, and
+the flag surviving a save. Against the old renderer it fails on the three hold checks, and
+against the old notes on four pages. `validate_content.js` holds every 듣기 page to the flag
+and to a recording on every row.
+
+## Unit 15, 듣고 말하기, and two pages the scan does not have
+
+`worlds/unit15-textbook.json` gains 듣기 1 and 듣기 2 (printed pp.148-149, tracks 58 and 59),
+thirteen pages and fifty-five rows in all. Two things were particular to it.
+
+- **The chapter's grammar was already drilled five times over.** Between the 익힘책, 문법과
+  표현 1-2, 말하기 1 and 자기 평가, 오기 전에, 졸업한 후에, 먹게 됐어요 and 익숙해졌어요 are keyed
+  again and again, and the tape uses all of them. So the 듣기 rows gap what the tape is
+  *about* — which dream, whose, how many staff, how many years — and leave the grammar in the
+  line around the gap, where it is heard in use instead of chosen a sixth time.
+- **The wrong buttons include the 준비 pictures.** The page opens on drawings of a police
+  officer, a scientist and a doctor, and a learner who has just talked about them half
+  expects to hear them; 경찰이 and 과학자가 sit among the dreams the tape does mention.
+
+The one printed section still missing is **말하기 2 on pp.146-147**, and it is missing from
+the scan, not from the book: the two pages were stuck to p.148 when the student book was
+scanned, and the edge of p.146 shows under the page number on image 140. Its dialogue is on
+the tape and in `worlds/unit15-cassette.json` (track 57, from a photograph of the page that
+arrived on 2026-09-06), but the 연습 columns under it are not, and a 말하기 page without its
+연습 is a transcript. Build it from the page, not from the tape.
 
 ## A third kind of bank: the exam world
 

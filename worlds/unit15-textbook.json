@@ -890,6 +890,452 @@
       }
     },
     {
+      "id": "u15sgk-listen-1",
+      "type": "build",
+      "no": "듣기 1",
+      "pattern": "어렸을 때의 꿈",
+      "section": "듣고 말하기",
+      "icon": "🏀",
+      "instructionKo": "잘 듣고 맞는 것을 고르세요.",
+      "instructionEn": "Listen carefully and choose the correct statement.",
+      "blurbEn": "Two childhood dreams: one given up, one changed.",
+      "noteEn": "The book asks one question about this tape — which of three statements is true — and row 1 is that question, with the book’s own three options and 모범 답안 on printed p.267 as its key. Rows 2 to 4 are the lines the options turn on, in the order the tape says them: what 샤오밍 wanted to be as a child, what 유진 wants to be now, and what 샤오밍 says when graduate school comes up. The dreams drawn in the 준비 pictures above 듣기 1 are among the wrong buttons, because a learner who has just talked about them half expects to hear them. Rows 2 and 3 play their own lines; row 4’s sentence was never cut as a clip of its own, so it plays the whole of track 58.",
+      "holdGloss": true,
+      "bank": [],
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "맞는 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "잘 듣고 맞는 것을 고르세요."
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "lawyer",
+          "choices": [
+            {
+              "id": "lawyer",
+              "ko": "① 여자의 꿈은 변호사가 되는 것입니다."
+            },
+            {
+              "id": "gradschool",
+              "ko": "② 남자는 지금 대학원에 다니고 있습니다."
+            },
+            {
+              "id": "teacher",
+              "ko": "③ 남자는 중학생 때 선생님이 되고 싶었습니다."
+            }
+          ],
+          "en": "Which of these is true? — The woman’s dream is to become a lawyer.",
+          "why": "① 여자의 꿈은 변호사가 되는 것입니다 is what 유진 says of her dream now: 좋은 변호사가 돼서 힘든 사람들을 도와주고 싶어요. ② is wrong because 샤오밍 has not gone on to graduate school — 대학원에 가면 어때요? is 유진’s suggestion, and 대학원에 들어가기 전에 일을 해 보고 싶어서요 is his answer to it. ③ is wrong twice over: 샤오밍’s dream was 농구 선수, and the teacher was 유진’s childhood dream, since changed.",
+          "grammar": "N이/가 되다 is to become: 변호사가 되다, 선생님이 되다. 되는 것 turns it into a noun — the dream is becoming one.",
+          "audio": {
+            "src": "audio/book/2b-u15-trk58.mp3",
+            "labelEn": "듣기 1 · track 58"
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "저는 어렸을 때 ___ 되고 싶었어요",
+          "lines": [
+            {
+              "who": "남",
+              "ko": "저는 어렸을 때 {} 되고 싶었어요."
+            }
+          ],
+          "answer": "nonggu_seonsuga",
+          "choices": [
+            {
+              "id": "nonggu_seonsuga",
+              "ko": "농구 선수가"
+            },
+            {
+              "id": "seonsaengnimi",
+              "ko": "선생님이"
+            },
+            {
+              "id": "gyeongchali",
+              "ko": "경찰이"
+            }
+          ],
+          "en": "When I was little I wanted to be a basketball player.",
+          "why": "농구 선수가 is 샤오밍’s answer, and it is why ③ is wrong: his dream was basketball, not teaching. 선생님이 is on the tape, but it is 유진’s childhood dream, and 경찰이 is one of the dreams drawn in the 준비 pictures above 듣기 1 that nobody on the tape mentions.",
+          "grammar": "어렸을 때 is when I was small — 어리다 with the past -았/었을 때 — and V-고 싶었어요 is a wish in the past. The particle goes with the noun: 선수가, 선생님이, 경찰이.",
+          "audio": {
+            "src": "audio/book/2b-u15-d25.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "좋은 ___ 돼서 힘든 사람들을 도와주고 싶어요",
+          "lines": [
+            {
+              "who": "남",
+              "ko": "그럼 지금은 꿈이 뭐예요?"
+            },
+            {
+              "who": "여",
+              "ko": "좋은 {} 돼서 힘든 사람들을 도와주고 싶어요."
+            }
+          ],
+          "answer": "byeonhosaga",
+          "choices": [
+            {
+              "id": "seonsaengnimi",
+              "ko": "선생님이"
+            },
+            {
+              "id": "byeonhosaga",
+              "ko": "변호사가"
+            },
+            {
+              "id": "gwahagjaga",
+              "ko": "과학자가"
+            }
+          ],
+          "en": "So what’s your dream now? — I want to become a good lawyer and help people who are struggling.",
+          "why": "변호사가 is 유진’s dream now, and it is ① said aloud. 선생님이 was her dream as a child — 어렸을 때는 선생님이 되고 싶었는데 지금은 꿈이 달라졌어요 — which is why the question says 지금은, and 과학자가 is drawn in the 준비 pictures but never said.",
+          "grammar": "돼서 is 되어서, become and then: 변호사가 돼서 도와주고 싶어요 — become a lawyer, and then help. The -아/어서 of sequence joins two steps that belong together.",
+          "audio": {
+            "src": "audio/book/2b-u15-d30.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "phraseKo": "공부하는 것도 좋은데 대학원에 들어가기 전에 ___",
+          "lines": [
+            {
+              "who": "여",
+              "ko": "샤오밍 씨는 공부하는 걸 좋아하니까 대학원에 가면 어때요?"
+            },
+            {
+              "who": "남",
+              "ko": "공부하는 것도 좋은데 대학원에 들어가기 전에 {}."
+            }
+          ],
+          "answer": "ileul_hae_bogo_sipeoseoyo",
+          "choices": [
+            {
+              "id": "yeohaengeul_hae_bogo_sipeoseoyo",
+              "ko": "여행을 해 보고 싶어서요"
+            },
+            {
+              "id": "jom_swigo_sipeoseoyo",
+              "ko": "좀 쉬고 싶어서요"
+            },
+            {
+              "id": "ileul_hae_bogo_sipeoseoyo",
+              "ko": "일을 해 보고 싶어서요"
+            }
+          ],
+          "en": "You like studying, Xiaoming — how about graduate school? — Studying is fine too, but I’d like to try working before I go on to graduate school.",
+          "why": "일을 해 보고 싶어서요 is his reason, and it is why ② is wrong: 대학원에 들어가기 전에 — before going to graduate school — so he is not there yet. 여행을 해 보고 and 좀 쉬고 would be reasons of the same shape, but the tape says 일, work. -아/어서요 on its own gives a reason for what was just said, here for not taking up 유진’s idea straight away.",
+          "grammar": "V-아/어 보다 is to try something: 일을 해 보다, to try working. 공부하는 것도 좋은데 agrees first and then turns the suggestion down — -는데 softens the no.",
+          "audio": {
+            "src": "audio/book/2b-u15-trk58.mp3",
+            "labelEn": "듣기 1 · track 58"
+          }
+        }
+      ],
+      "example": {
+        "phraseKo": "녹음에서",
+        "lines": [
+          {
+            "who": "여",
+            "ko": "샤오밍 씨는 {} 꿈이 뭐였어요?"
+          }
+        ],
+        "answerKo": "어렸을 때",
+        "en": "Xiaoming, what was your dream when you were little?",
+        "audio": {
+          "src": "audio/book/2b-u15-d24.mp3",
+          "labelEn": "듣기 1 · the line itself"
+        }
+      }
+    },
+    {
+      "id": "u15sgk-listen-2",
+      "type": "build",
+      "no": "듣기 2",
+      "pattern": "은퇴를 앞두고",
+      "section": "듣고 말하기",
+      "icon": "🎙️",
+      "instructionKo": "잘 듣고 질문에 답하세요.",
+      "instructionEn": "Listen carefully and answer the questions.",
+      "blurbEn": "An interview with a man who retires next month: the company, and what comes after.",
+      "noteEn": "The book asks two questions about this interview. The first is a single choice — which statement is not true — and is row 1 with the book’s own options. The second says 맞는 것을 모두 고르세요, pick all that apply, and a row of buttons has one answer, so row 5 turns it round and asks which of the book’s three options is not one of his plans; 모범 답안 on printed p.267 keys both. The other rows are the lines those answers turn on. Rows 6 and 7 play their own clips off track 59; the rest play the whole track, since no clip holds exactly the sentence they print.",
+      "holdGloss": true,
+      "bank": [],
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "맞지 않는 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "맞지 않는 것을 고르세요."
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "family",
+          "choices": [
+            {
+              "id": "grown",
+              "ko": "① 이 회사는 옛날보다 아주 많이 발전했습니다."
+            },
+            {
+              "id": "family",
+              "ko": "② 이 사람은 가족들과 같이 이 회사를 만들었습니다."
+            },
+            {
+              "id": "highschool",
+              "ko": "③ 이 사람은 고등학교를 마친 후에 이 회사에 취직했습니다."
+            }
+          ],
+          "en": "Which of these is not true? — That he started this company with his family.",
+          "why": "② 이 사람은 가족들과 같이 이 회사를 만들었습니다 is the one the tape contradicts. What he says is 모두 가족같이 지냈습니다 — everyone got on like a family, back when there were only five staff — and nothing on the tape says who founded the company. ① is true, 정말 많이 발전했지요, and so is ③: 고등학교 졸업한 후에 바로 일하기 시작했으니까.",
+          "grammar": "가족같이, closed up, is like a family; 가족들과 같이, with its 과 and a space, is together with the family. The whole question hangs on that one particle.",
+          "audio": {
+            "src": "audio/book/2b-u15-trk59.mp3",
+            "labelEn": "듣기 2 · track 59"
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "네, 그때는 직원이 다섯 명밖에 없는 작은 회사여서 모두 ___ 지냈습니다",
+          "lines": [
+            {
+              "who": "여",
+              "ko": "처음 회사에 들어오셨을 때와 지금 회사가 많이 달라졌지요?"
+            },
+            {
+              "who": "남",
+              "ko": "네, 그때는 직원이 다섯 명밖에 없는 작은 회사여서 모두 {} 지냈습니다."
+            }
+          ],
+          "answer": "gajoggati",
+          "choices": [
+            {
+              "id": "gajoggwa_gati",
+              "ko": "가족과 같이"
+            },
+            {
+              "id": "gajoggati",
+              "ko": "가족같이"
+            },
+            {
+              "id": "gajog_gateun",
+              "ko": "가족 같은"
+            }
+          ],
+          "en": "The company has changed a lot since you first joined, hasn’t it? — Yes. Back then it was a small company with only five staff, so we all got on like a family.",
+          "why": "가족같이 is what he says: 같이 closed up onto a noun means like — 가족같이, like a family — and it is the line that makes ② wrong. 가족과 같이 is together with the family, which is what ② turns it into, and 가족 같은 is the modifier, which needs a noun after it — 가족 같은 회사 — and cannot stand in front of 지냈습니다.",
+          "grammar": "N밖에 없다 is only, with a negative: 다섯 명밖에 없는, only five people. -(이)어서 gives the reason: 작은 회사여서, being a small company.",
+          "audio": {
+            "src": "audio/book/2b-u15-trk59.mp3",
+            "labelEn": "듣기 2 · track 59"
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "지금은 ___이 넘는 큰 회사가 되었습니다",
+          "lines": [
+            {
+              "who": "남",
+              "ko": "지금은 {}이 넘는 큰 회사가 되었습니다."
+            },
+            {
+              "who": "남",
+              "ko": "정말 많이 발전했지요."
+            }
+          ],
+          "answer": "sambaek",
+          "choices": [
+            {
+              "id": "samsip",
+              "ko": "30명"
+            },
+            {
+              "id": "samcheon",
+              "ko": "3,000명"
+            },
+            {
+              "id": "sambaek",
+              "ko": "300명"
+            }
+          ],
+          "en": "Now it’s a big company of more than 300 people. It really has grown a great deal.",
+          "why": "300명 is the figure — 삼백 명 — and set against the five staff of the early days it is why ① is true: 정말 많이 발전했지요. 30명 is 삼십 명, a tenth of it, and 3,000명 is 삼천 명; 백 is the hundreds, 천 the thousands.",
+          "grammar": "N이/가 넘다 is to be over a number: 300명이 넘는 회사, a company of over three hundred. N이/가 되다 is what it has become.",
+          "audio": {
+            "src": "audio/book/2b-u15-trk59.mp3",
+            "labelEn": "듣기 2 · track 59"
+          }
+        },
+        {
+          "n": 4,
+          "phraseKo": "고등학교 졸업한 후에 바로 일하기 시작했으니까 벌써 ___이 되었네요",
+          "lines": [
+            {
+              "who": "남",
+              "ko": "고등학교 졸업한 후에 바로 일하기 시작했으니까 벌써 {}이 되었네요."
+            }
+          ],
+          "answer": "sasip",
+          "choices": [
+            {
+              "id": "sasip",
+              "ko": "40년"
+            },
+            {
+              "id": "sipsa",
+              "ko": "14년"
+            },
+            {
+              "id": "sa",
+              "ko": "4년"
+            }
+          ],
+          "en": "I started work straight after finishing high school, so it’s already been 40 years.",
+          "why": "40년 is his answer to 몇 년 동안 이 회사에서 일하셨습니까?, said 사십 년, and the start of the line is why ③ is true: 고등학교 졸업한 후에 바로 일하기 시작했으니까 — straight from high school to this company. 14년 is 십사 년 and 4년 is 사 년, both built from the same sounds.",
+          "grammar": "년 counts years with Sino-Korean numbers: 사십 년, 십사 년. -았/었으니까 gives the reason for the reckoning, and 벌써 is already — sooner than it feels.",
+          "audio": {
+            "src": "audio/book/2b-u15-trk59.mp3",
+            "labelEn": "듣기 2 · track 59"
+          }
+        },
+        {
+          "n": 5,
+          "phraseKo": "맞지 않는 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "남자가 은퇴한 후에 하고 싶은 일로 맞지 않는 것을 고르세요."
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "study",
+          "choices": [
+            {
+              "id": "study",
+              "ko": "① 공부를 하려고 합니다."
+            },
+            {
+              "id": "travel",
+              "ko": "② 여행을 하려고 합니다."
+            },
+            {
+              "id": "volunteer",
+              "ko": "③ 봉사 활동을 하려고 합니다."
+            }
+          ],
+          "en": "Which is not one of the things he wants to do after he retires? — Study.",
+          "why": "① 공부를 하려고 합니다 is the one he never mentions. His plans are the other two, in order: 은퇴 후에 아내와 같이 여행을 많이 하기로 했습니다, and 여행을 다녀온 후에는 봉사 활동을 하려고 합니다. The book asks for all that apply, and 모범 답안 gives the two he does say — so the one left over is this row’s answer.",
+          "grammar": "V-(으)려고 하다 is a plan: 여행을 하려고 합니다. V-기로 하다 is a decision already made — 여행을 많이 하기로 했습니다 — which is why he says it that way about the travel.",
+          "audio": {
+            "src": "audio/book/2b-u15-trk59.mp3",
+            "labelEn": "듣기 2 · track 59"
+          }
+        },
+        {
+          "n": 6,
+          "phraseKo": "그래서 은퇴 후에 아내와 같이 ___ 많이 하기로 했습니다",
+          "lines": [
+            {
+              "who": "남",
+              "ko": "일을 하는 동안 너무 바빠서 아내와 시간을 많이 보내지 못했습니다."
+            },
+            {
+              "who": "남",
+              "ko": "그래서 은퇴 후에 아내와 같이 {} 많이 하기로 했습니다."
+            }
+          ],
+          "answer": "yeohaengeul",
+          "choices": [
+            {
+              "id": "gongbureul",
+              "ko": "공부를"
+            },
+            {
+              "id": "undongeul",
+              "ko": "운동을"
+            },
+            {
+              "id": "yeohaengeul",
+              "ko": "여행을"
+            }
+          ],
+          "en": "While I was working I was too busy to spend much time with my wife. So we have decided to travel a lot together after I retire.",
+          "why": "여행을 is on the tape, and it is ② of the second question: the travel is what the first line gives the reason for — 너무 바빠서 아내와 시간을 많이 보내지 못했습니다, 그래서 … 여행을. 공부를 is the plan he never mentions, which is why it answers row 5, and 운동을 is not on the tape at all.",
+          "grammar": "V-는 동안 is while: 일을 하는 동안, while working. 그래서 carries the reason across the full stop into the decision that follows.",
+          "audio": {
+            "src": "audio/book/2b-u15-d38.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        },
+        {
+          "n": 7,
+          "phraseKo": "여행을 다녀온 후에는 ___ 하려고 합니다",
+          "lines": [
+            {
+              "who": "남",
+              "ko": "여행을 다녀온 후에는 {} 하려고 합니다."
+            }
+          ],
+          "answer": "bongsa_hwaldongeul",
+          "choices": [
+            {
+              "id": "bongsa_hwaldongeul",
+              "ko": "봉사 활동을"
+            },
+            {
+              "id": "gongbureul",
+              "ko": "공부를"
+            },
+            {
+              "id": "hoesa_ileul",
+              "ko": "회사 일을"
+            }
+          ],
+          "en": "After the travelling I plan to do volunteer work.",
+          "why": "봉사 활동을 is his second plan, and it is ③ of the second question. 공부를 never comes up, and 회사 일을 is the one thing retiring means leaving behind.",
+          "grammar": "봉사 활동을 하다 is to do volunteer work — the page’s own gloss. V-(으)ㄴ 후에는 puts the order of the two plans into the sentence: the trip first, then the volunteering.",
+          "audio": {
+            "src": "audio/book/2b-u15-d39.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        }
+      ],
+      "example": {
+        "phraseKo": "녹음에서",
+        "lines": [
+          {
+            "who": "여",
+            "ko": "몇 년 동안 이 회사에서 {}?"
+          }
+        ],
+        "answerKo": "일하셨습니까",
+        "en": "How many years did you work at this company?",
+        "audio": {
+          "src": "audio/book/2b-u15-d33.mp3",
+          "labelEn": "듣기 2 · the line itself"
+        }
+      }
+    },
+    {
       "id": "u15sgk-read-1",
       "type": "build",
       "no": "읽기",

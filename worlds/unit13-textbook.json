@@ -1345,6 +1345,7 @@
       "instructionKo": "잘 듣고 질문에 답하세요.",
       "instructionEn": "Listen carefully and answer the questions.",
       "noteEn": "The book asks two questions about this tape. The second is a single choice and is row 1 here as printed. The first says 맞는 것을 모두 고르세요 — pick all that apply, out of six — and a row of buttons has only one answer, so row 2 turns it round and asks which of three is wrong instead; the three are the book’s own options and the recording settles it. Rows 3 to 5 are the lines those answers turn on, so the page can be answered off the tape rather than guessed.",
+      "holdGloss": true,
       "pattern": "집에 놀러 간 이야기",
       "items": [
         {
@@ -1533,6 +1534,7 @@
       "instructionKo": "잘 듣고 빈칸에 알맞은 말을 쓰세요.",
       "instructionEn": "Listen carefully and fill in the blanks.",
       "noteEn": "The book prints the advert with five gaps in it — the walk from the university, the two words in front of the two figures, and the two utilities inside the service charge — and asks you to write them in. The rows here put each gap back in the sentence the landlord actually says it in, so the answer comes off the recording rather than off a form; row 2 keeps the book’s pair of gaps as one row with two blanks, because the two figures are only meaningful together.",
+      "holdGloss": true,
       "pattern": "원룸 광고 · 전화 문의",
       "items": [
         {

@@ -1250,7 +1250,8 @@
       "blurbEn": "A radio programme a year on air — the season, the anniversary and the time slot.",
       "instructionKo": "잘 듣고 빈칸에 알맞은 말을 고르세요.",
       "instructionEn": "Listen carefully and choose the right word for each blank.",
-      "noteEn": "The page prints three sentences with a gap each and asks for the word to be written in — 써넣으세요 — and 모범 답안 on printed p.268 gives 가을, 1년 and 오후 4시. They are here as the book prints them, with a choice for the writing, and a fourth row gives the presenter’s own 한 지 line off track 88. The music under the whole tape is on the tape.",
+      "noteEn": "The page prints three sentences with a gap each and asks for the word to be written in — 써넣으세요 — and 모범 답안 on printed p.268 has all three. They are here as the book prints them, with a choice for the writing, and a fourth row gives the presenter’s own line about how long the programme has been on air, off track 88. The music under the whole tape is on the tape.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,
@@ -1391,6 +1392,7 @@
       "instructionKo": "잘 듣고 질문에 답하세요.",
       "instructionEn": "Listen carefully and answer the questions.",
       "noteEn": "The book asks three questions about this tape, and 모범 답안 on printed p.268 gives (1), (3) and the sentence 주디 wants to say to the friends staying on. All three are here with the book’s own options — the third, which the page leaves for the learner to write, as a choice between 주디’s message and two other lines from the same tape. A fourth row is the line the first answer turns on.",
+      "holdGloss": true,
       "items": [
         {
           "n": 1,

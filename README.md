@@ -534,6 +534,12 @@ an exam bank (`drawOne`) keeps the paper's order, because its explanations cite 
 number, and a row whose every button opens on the book's ①②③ is laid out in that order.
 `tests/test_workbook_button_order.js` drives the renderer with a seeded random source.
 
+A 듣기 page holds each row's English back until the page is checked (`holdGloss` on the
+page), because there the gloss is a transcript of what the tape is about to say; everywhere
+else it stays beside the row as the help it was written as. The note above a 듣기 page says
+where its key comes from and never what it is. `tests/test_listening_pages.js` drives the
+renderer to check both.
+
 The cassette player beside the desk plays the book's own tracks with the script alongside,
 and takes dictation one sentence at a time. Both screens draw the recording as a waveform:
 click to seek, drag out a stretch to loop it, `↻ 반복` to repeat the whole thing, and

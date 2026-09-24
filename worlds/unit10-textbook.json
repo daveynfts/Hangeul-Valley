@@ -280,6 +280,504 @@
       ]
     },
     {
+      "id": "u10sgk-listen-1",
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "no": "듣기 1",
+      "icon": "🍕",
+      "blurbEn": "Two o’clock, no lunch yet, and no time to go out for it.",
+      "instructionKo": "잘 듣고 맞는 것을 고르세요.",
+      "instructionEn": "Listen carefully and choose the correct statement.",
+      "noteEn": "The book asks one question about this tape — which of three statements is true — and row 1 is that question, with the book’s own three options in the book’s own order and 모범 답안 on printed p.267 as its key. Rows 2 to 4 are the three lines the options turn on, one each, so the answer can be worked out from the recording rather than guessed: where the two of them are going to eat, what the man thinks of 불고기, and who is going to place the order. Row 1 plays the whole of track 08; the others play their own lines.",
+      "holdGloss": true,
+      "pattern": "점심 메뉴 정하기",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "맞는 것",
+          "lines": [
+            {
+              "who": "Q",
+              "ko": "잘 듣고 맞는 것을 고르세요."
+            },
+            {
+              "who": "A",
+              "ko": "{}"
+            }
+          ],
+          "answer": "ordering",
+          "choices": [
+            {
+              "id": "restaurant",
+              "ko": "① 두 사람은 지금 식당에 있습니다."
+            },
+            {
+              "id": "ordering",
+              "ko": "② 여자가 음식을 주문하려고 합니다."
+            },
+            {
+              "id": "bulgogi",
+              "ko": "③ 남자는 불고기를 좋아하지 않습니다."
+            }
+          ],
+          "en": "Which of these is true? — The woman is going to order the food.",
+          "why": "② 여자가 음식을 주문하려고 합니다 is the one the tape bears out: the conversation ends on her 내가 주문할게 — I’ll order. ① is wrong because they are not in a restaurant at all — 바쁘니까 피자 시켜 먹을까? is a pizza ordered in because there is no time to go out — and ③ is wrong the other way: 난 불고기는 좋아하는데 불고기피자는 별로 안 좋아해. It is the 불고기 on a pizza he does not care for.",
+          "grammar": "맞는 것 asks for the true statement. V-(으)려고 하다 is an intention — 주문하려고 합니다, is going to order — which is exactly what 내가 주문할게 announces.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk08.mp3",
+            "labelEn": "듣기 1 · track 08"
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "그럼 우리 지금 바쁘니까 피자 ___",
+          "lines": [
+            {
+              "who": "여",
+              "ko": "아, 벌써 그렇게 됐어?"
+            },
+            {
+              "who": "남",
+              "ko": "그럼 우리 지금 바쁘니까 피자 {}?"
+            }
+          ],
+          "answer": "sikyeo_meogeulkka",
+          "choices": [
+            {
+              "id": "sikyeo_meogeulkka",
+              "ko": "시켜 먹을까"
+            },
+            {
+              "id": "meogeureo_galkka",
+              "ko": "먹으러 갈까"
+            },
+            {
+              "id": "mandeuleo_meogeulkka",
+              "ko": "만들어 먹을까"
+            }
+          ],
+          "en": "Oh, is it that late already? — Then we’re busy, so shall we order in a pizza?",
+          "why": "시켜 먹을까 is what the tape says, and it is why ① is wrong: 시켜 먹다 is to have food brought to you, so the two of them are staying where they are rather than going to a restaurant. 먹으러 갈까 would send them out to eat, which is exactly what 바쁘니까 rules out, and 만들어 먹을까 would have them cooking it themselves.",
+          "grammar": "시키다 is to order, and 시켜 먹다 — order, then eat — is how Korean says ordering in. -(으)ㄹ까? makes it a suggestion to the listener: 피자 시켜 먹을까?",
+          "audio": {
+            "src": "audio/book/2b-u10-d31.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "난 불고기는 좋아하는데 ___는 별로 안 좋아해",
+          "lines": [
+            {
+              "who": "여",
+              "ko": "글쎄, 불고기피자 어때?"
+            },
+            {
+              "who": "남",
+              "ko": "난 불고기는 좋아하는데 {}는 별로 안 좋아해."
+            }
+          ],
+          "answer": "bulgogipija",
+          "choices": [
+            {
+              "id": "chijeupija",
+              "ko": "치즈피자"
+            },
+            {
+              "id": "bulgogipija",
+              "ko": "불고기피자"
+            },
+            {
+              "id": "pija",
+              "ko": "피자"
+            }
+          ],
+          "en": "Hmm, how about a bulgogi pizza? — I like bulgogi, but bulgogi pizza I’m not really keen on.",
+          "why": "불고기피자 is the one he turns down, and the line is why ③ is wrong: 난 불고기는 좋아하는데 — he does like 불고기 — and it is only on a pizza that he does not. 치즈피자 is what they end up ordering, so it cannot be what he dislikes, and 피자 was his own idea a moment earlier.",
+          "grammar": "-는데 sets two things side by side: 불고기는 좋아하는데 불고기피자는 별로 안 좋아해. The 는 on each noun marks the contrast, and 별로 goes with a negative — 별로 안 좋아해, not really.",
+          "audio": {
+            "src": "audio/book/2b-u10-d34.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        },
+        {
+          "n": 4,
+          "phraseKo": "그럼 치즈피자 시키자. ___",
+          "lines": [
+            {
+              "who": "여",
+              "ko": "그럼 치즈피자 시키자."
+            },
+            {
+              "who": "여",
+              "ko": "{}"
+            }
+          ],
+          "answer": "naega_jumunhalge",
+          "choices": [
+            {
+              "id": "nega_jumunhae",
+              "ko": "네가 주문해."
+            },
+            {
+              "id": "nega_jumunhalrae",
+              "ko": "네가 주문할래?"
+            },
+            {
+              "id": "naega_jumunhalge",
+              "ko": "내가 주문할게."
+            }
+          ],
+          "en": "Then let’s get a cheese pizza. — I’ll order it.",
+          "why": "내가 주문할게 is what she says, and it is ② said aloud: the woman is the one who will place the order. 네가 주문해 would hand the job to the man, and 네가 주문할래? would ask him whether he wants to. -(으)ㄹ게 is a promise about what the speaker will do, which is why it answers ②.",
+          "grammar": "내가 is 나 + 가 and 네가 is 너 + 가. The two sound almost alike, which is why 네가 is often said [니가] in everyday speech. -(으)ㄹ게 promises; -(으)ㄹ래? asks what the other person wants.",
+          "audio": {
+            "src": "audio/book/2b-u10-d36.mp3",
+            "labelEn": "듣기 1 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u10sgk-listen-2",
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "no": "듣기 2",
+      "icon": "📞",
+      "blurbEn": "An order placed by phone: what, how much, and how long.",
+      "instructionKo": "잘 듣고 빈칸에 알맞은 답을 쓰세요.",
+      "instructionEn": "Listen carefully and complete the sentences.",
+      "noteEn": "The book prints three sentences with gaps and asks for the answers to be written in; 모범 답안 on printed p.267 has all of them, and here they are choices instead of writing. The first sentence keeps both of its gaps in one row, because what was ordered is the pizza and the drink together. Rows 4 and 5 are two of the caller’s own lines, each playing its clip: the order itself, with the counting words for a pizza and a bottle, and the question about time. Rows 1 to 3 play the whole of track 09, which is full of numbers — a phone number and a flat number as well as the price and the time — so listen for which is which.",
+      "holdGloss": true,
+      "pattern": "전화로 피자 주문하기",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "이 사람은 지금 ___와 ___를 시켰습니다",
+          "lines": [
+            {
+              "ko": "이 사람은 지금 {}와 {}를 시켰습니다."
+            }
+          ],
+          "answer": "cheese",
+          "choices": [
+            {
+              "id": "cheese",
+              "ko": "치즈피자"
+            },
+            {
+              "id": "bulgogi",
+              "ko": "불고기피자"
+            },
+            {
+              "id": "goguma",
+              "ko": "고구마피자"
+            }
+          ],
+          "answer2": "cola",
+          "choices2": [
+            {
+              "id": "cider",
+              "ko": "사이다"
+            },
+            {
+              "id": "cola",
+              "ko": "콜라"
+            },
+            {
+              "id": "juice",
+              "ko": "주스"
+            }
+          ],
+          "en": "This person has just ordered a cheese pizza and a cola.",
+          "why": "치즈피자 and 콜라 are what the caller asks for: 치즈피자 큰 거 한 판하고 콜라 한 병 갖다 주세요. 불고기피자 is from the first conversation on this page, where it was turned down; 고구마피자 and 사이다 are on the 피자나라 menu on p.37 but not in this order, and 주스 is not mentioned at all.",
+          "grammar": "와/과 and 을/를 follow the last sound of the noun: 치즈피자와 and 콜라를, because both end in a vowel; a noun ending in a consonant takes 과 and 을 — 냉면과 김밥을. 시키다 is to order food, and 시켰습니다 says it is done.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk09.mp3",
+            "labelEn": "듣기 2 · track 09"
+          }
+        },
+        {
+          "n": 2,
+          "phraseKo": "음식값은 모두 ___원입니다",
+          "lines": [
+            {
+              "ko": "음식값은 모두 {}원입니다."
+            }
+          ],
+          "answer": "manpalcheon",
+          "choices": [
+            {
+              "id": "palcheon",
+              "ko": "8,000"
+            },
+            {
+              "id": "manpalcheon",
+              "ko": "18,000"
+            },
+            {
+              "id": "palman",
+              "ko": "80,000"
+            }
+          ],
+          "en": "The food comes to 18,000 won in all.",
+          "why": "18,000 is the answer to 모두 얼마지요?: 모두 18,000원입니다, said 만 팔천 원. 8,000 is what is left if the 만 is missed, and 80,000 is 팔만 — the two sound nothing alike once 만 is heard as the unit it is: Korean counts large numbers in ten-thousands, so 18,000 is one 만 and eight 천.",
+          "grammar": "만 is ten thousand and 천 a thousand: 18,000 is 만 팔천, 80,000 is 팔만, and 8,000 is 팔천. 모두 before a price is in all, the total.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk09.mp3",
+            "labelEn": "듣기 2 · track 09"
+          }
+        },
+        {
+          "n": 3,
+          "phraseKo": "___분쯤 후에 주문한 음식이 올 것입니다",
+          "lines": [
+            {
+              "ko": "{}분쯤 후에 주문한 음식이 올 것입니다."
+            }
+          ],
+          "answer": "samsip",
+          "choices": [
+            {
+              "id": "sipsam",
+              "ko": "13"
+            },
+            {
+              "id": "sasip",
+              "ko": "40"
+            },
+            {
+              "id": "samsip",
+              "ko": "30"
+            }
+          ],
+          "en": "The food that was ordered will arrive in about 30 minutes.",
+          "why": "30 is the shop’s answer to 시간이 얼마나 걸리나요?: 30분쯤 걸립니다, said 삼십 분. 13 is 십삼, the same two numbers the other way round, and 40 is 사십, which starts almost like 삼십 — Sino-Korean numbers say the tens first, so 삼십 is three tens.",
+          "grammar": "분 counts minutes with Sino-Korean numbers — 삼십 분 — while 시간 takes native ones: 한 시간, 두 시간. 쯤 is about. 올 것입니다 is the written form of 올 거예요.",
+          "audio": {
+            "src": "audio/book/2b-u10-trk09.mp3",
+            "labelEn": "듣기 2 · track 09"
+          }
+        },
+        {
+          "n": 4,
+          "phraseKo": "치즈피자 큰 거 한 ___하고 콜라 한 ___ 갖다 주세요",
+          "lines": [
+            {
+              "who": "점원",
+              "ko": "네, 무슨 피자로 하시겠어요?"
+            },
+            {
+              "who": "손님",
+              "ko": "치즈피자 큰 거 한 {}하고 콜라 한 {} 갖다 주세요."
+            }
+          ],
+          "answer": "pan",
+          "choices": [
+            {
+              "id": "pan",
+              "ko": "판"
+            },
+            {
+              "id": "byeong",
+              "ko": "병"
+            },
+            {
+              "id": "geureut",
+              "ko": "그릇"
+            }
+          ],
+          "answer2": "byeong_2",
+          "choices2": [
+            {
+              "id": "pan_2",
+              "ko": "판"
+            },
+            {
+              "id": "byeong_2",
+              "ko": "병"
+            },
+            {
+              "id": "geureut_2",
+              "ko": "그릇"
+            }
+          ],
+          "en": "Right, which pizza would you like? — One large cheese pizza and a bottle of cola, please.",
+          "why": "판 and 병 are the counting words the caller uses: 한 판 is one whole pizza — the word the page glosses as the unit noun for pizza — and 한 병 one bottle. 병 on the pizza or 판 on the cola swaps the two, and 그릇 counts bowls, as in 비빔밥 한 그릇, which neither of these comes in.",
+          "grammar": "Korean counts with a number and a counting word: 피자 한 판, 콜라 한 병, 비빔밥 한 그릇. 갖다 주다 is to bring, and 갖다 주세요 is how a delivery is asked for.",
+          "audio": {
+            "src": "audio/book/2b-u10-d40.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        },
+        {
+          "n": 5,
+          "phraseKo": "그런데 시간이 얼마나 ___",
+          "lines": [
+            {
+              "who": "손님",
+              "ko": "그런데 시간이 얼마나 {}?"
+            }
+          ],
+          "answer": "geolrinayo",
+          "choices": [
+            {
+              "id": "geolringayo",
+              "ko": "걸린가요"
+            },
+            {
+              "id": "geolrinayo",
+              "ko": "걸리나요"
+            },
+            {
+              "id": "geolrinyayo",
+              "ko": "걸리냐요"
+            }
+          ],
+          "en": "And how long will it take?",
+          "why": "걸리나요 is right: 걸리다 is a verb, and a verb takes -나요 for a soft, polite question — 걸리나요, 먹나요, 가나요. 걸린가요 gives it -ㄴ가요, which belongs to adjectives and 이다 (비싼가요, 학생인가요), and 걸리냐요 adds 요 to -냐, a 반말 question ending that has no polite form of its own.",
+          "grammar": "The tip box on p.37 asks the same thing as 시간이 얼마나 걸려요?; -나요 is a shade softer, which suits a stranger on the phone. 얼마나 걸리다 is how long something takes.",
+          "audio": {
+            "src": "audio/book/2b-u10-d41.mp3",
+            "labelEn": "듣기 2 · the line itself"
+          }
+        }
+      ]
+    },
+    {
+      "id": "u10sgk-speak-3",
+      "type": "build",
+      "section": "듣고 말하기",
+      "sectionEn": "Listening and speaking",
+      "no": "말하기",
+      "icon": "☎️",
+      "blurbEn": "The phrases for ordering by phone — and the 되 and 돼 in them.",
+      "instructionKo": "식당에 전화해서 직접 음식을 주문해 보세요.",
+      "instructionEn": "Call a restaurant and order food on the phone.",
+      "noteEn": "The book closes 듣고 말하기 with a role-play — three menus to order from by phone, a greeting and an opening line, and a box of four expressions for ordering on the phone — and a role-play has no answer to mark. The rows are the shop’s greeting and three of the box’s expressions, each with the word it exists for taken out; the fourth, 시간이 얼마나 걸려요?, is the question the caller asks on track 09, and 듣기 2 drills it. Two rows turn on 되 and 돼, which sound alike and are spelled by a rule: where 하 would fit, write 되; where 해 would, write 돼.",
+      "pattern": "전화로 음식 주문하기",
+      "items": [
+        {
+          "n": 1,
+          "phraseKo": "전화 ___ 감사합니다. 피자나라입니다",
+          "lines": [
+            {
+              "who": "점원",
+              "ko": "전화 {} 감사합니다. 피자나라입니다."
+            },
+            {
+              "who": "손님",
+              "ko": "주문 좀 하려고 하는데요."
+            }
+          ],
+          "answer": "jusyeoseo",
+          "choices": [
+            {
+              "id": "jusinikka",
+              "ko": "주시니까"
+            },
+            {
+              "id": "jusyeoseo",
+              "ko": "주셔서"
+            },
+            {
+              "id": "jusyeosseoseo",
+              "ko": "주셨어서"
+            }
+          ],
+          "en": "Thank you for calling. This is Pizza Nara. — I’d like to place an order.",
+          "why": "주셔서 is right: thanks and apologies take their reason with -아/어서 — 전화 주셔서 감사합니다, 늦어서 미안합니다 — and 시 is the shop’s politeness to the caller. 주시니까 gives the reason with -(으)니까, which does not go in front of 감사합니다, and 주셨어서 puts the past tense before -어서, which never carries it.",
+          "grammar": "전화(를) 주다 is to give someone a call; from the shop it is 주시다. The same -아/어서 closes most thanks: 와 주셔서 감사합니다, 도와줘서 고마워."
+        },
+        {
+          "n": 2,
+          "phraseKo": "피자 한 판 ___",
+          "lines": [
+            {
+              "who": "손님",
+              "ko": "피자 한 판 {}."
+            }
+          ],
+          "answer": "gajda_juseyo",
+          "choices": [
+            {
+              "id": "gajda_deurilgeyo",
+              "ko": "갖다 드릴게요"
+            },
+            {
+              "id": "gajda_julgeyo",
+              "ko": "갖다 줄게요"
+            },
+            {
+              "id": "gajda_juseyo",
+              "ko": "갖다 주세요"
+            }
+          ],
+          "en": "Please deliver one pizza.",
+          "why": "갖다 주세요 is the caller’s line: -아/어 주세요 asks someone to do something for you, and 갖다 주다 is to bring. 갖다 드릴게요 is the shop’s answer to it — 드리다 is the humble 주다, and -(으)ㄹ게요 a promise — and 갖다 줄게요 is the same promise without the politeness, as a friend would make it. The customer is asking, not offering.",
+          "grammar": "갖다 is short for 가져다, so 갖다 주세요 and 가져다 주세요 are the same request. 판 counts pizzas: 피자 한 판, 두 판."
+        },
+        {
+          "n": 3,
+          "phraseKo": "지금 ___",
+          "lines": [
+            {
+              "who": "손님",
+              "ko": "지금 {}?"
+            }
+          ],
+          "answer": "baedaldoenayo",
+          "choices": [
+            {
+              "id": "baedaldoenayo",
+              "ko": "배달되나요"
+            },
+            {
+              "id": "baedaldwaenayo",
+              "ko": "배달돼나요"
+            },
+            {
+              "id": "baedaldoengayo",
+              "ko": "배달된가요"
+            }
+          ],
+          "en": "Are you delivering right now?",
+          "why": "배달되나요 is right: -나요 goes on the stem, and the stem is 되 — 배달하나요 would fit the same slot, so the rule in the note gives 되. 배달돼나요 writes 돼, which is 되어 and already carries an ending, and 배달된가요 gives a verb the adjective question -ㄴ가요.",
+          "grammar": "배달되다 is to be delivered, the 되다 partner of 배달하다. 지금 배달되나요? asks whether delivery is running at this hour."
+        },
+        {
+          "n": 4,
+          "phraseKo": "1인분도 ___",
+          "lines": [
+            {
+              "who": "손님",
+              "ko": "1인분도 {}?"
+            }
+          ],
+          "answer": "baedaldwaeyo",
+          "choices": [
+            {
+              "id": "baedaldoeyo",
+              "ko": "배달되요"
+            },
+            {
+              "id": "baedaldwaeyo",
+              "ko": "배달돼요"
+            },
+            {
+              "id": "baedaldaeyo",
+              "ko": "배달대요"
+            }
+          ],
+          "en": "Do you deliver a single portion too?",
+          "why": "배달돼요 is right: 요 goes on 되어, and 되어 is written 돼 — 배달해요 would fit the slot, so the rule gives 돼. 배달되요 puts 요 straight on the stem, a mistake native writers make all the time, and 배달대요 writes the sound down with the wrong vowel.",
+          "grammar": "1인분 is one portion — 2인분, 3인분 for two and three. 되나요 and 돼요 sound almost the same in quick speech, which is why the spelling needs a rule rather than an ear."
+        }
+      ]
+    },
+    {
       "id": "u10sgk-read-1",
       "type": "build",
       "section": "읽고 쓰기",

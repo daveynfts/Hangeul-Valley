@@ -355,6 +355,9 @@ function cleanExercise(ex, i, seenIds) {
       };
     }
     if (ex.visualGuide) out.visualGuide = cleanVisualGuide(ex.visualGuide, where);
+    // The bank-wide holdGloss below, asked for by one page: a 듣기 page whose English would
+    // answer its rows before the tape is played. Dropped here, a save would hand them back.
+    if (ex.holdGloss === true) out.holdGloss = true;
     out.items = cleaned;
     if (ex.example && type === 'build') {
       // A 'build' example has no shared box to borrow its answer from, so the

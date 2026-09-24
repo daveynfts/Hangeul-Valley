@@ -4,8 +4,10 @@
  *
  * The desk carries two sets of pages from two different books. 연습 문제 is the 익힘책 and has
  * its own suite (tests/test_unit10_workbook.js); this is the 교과서's own 말하기 1, 말하기 2,
- * 읽고 쓰기, 과제, 문화 산책, 발음 and 자기 평가. They share a file format and a renderer, so the
- * renderer itself is not retested here. What is:
+ * 듣고 말하기, 읽고 쓰기, 과제, 문화 산책, 발음 and 자기 평가. 듣고 말하기 came last, once the
+ * 듣기 지문 page at the back had been read: its two 듣기 pages are keyed from 모범 답안 and
+ * played off tracks 08 and 09, and its 말하기 is the page's box of phone-ordering phrases.
+ * They share a file format and a renderer, so the renderer itself is not retested here. What is:
  *
  *   1. That the two banks stay apart. The 익힘책 already drills this chapter's 어휘 and all four
  *      grammar patterns across 20 exercises; a 교과서 bank that reached for the same gapped
@@ -75,16 +77,18 @@ console.log('\n--- 1. The bank and the desk row ---');
 assert(tb.id === 'unit10-textbook', 'the bank names itself unit10-textbook');
 assert(tb.titleKo === '교과서' && tb.titleEn === 'Textbook', 'and the desk labels it 교과서 / Textbook');
 assert(/교과서/.test(tb.source || ''), 'its source line says which of the two books it is');
-assert(exs.length === 7, 'seven exercises (found ' + exs.length + ')');
-assert(rows.length === 30, '30 rows across them (found ' + rows.length + ')');
+assert(exs.length === 10, 'ten exercises (found ' + exs.length + ')');
+assert(rows.length === 43, '43 rows across them (found ' + rows.length + ')');
+const SECTIONS = ['말하기 1', '말하기 2', '듣고 말하기', '읽고 쓰기', '과제', '문화 산책', '발음', '자기 평가'];
 const sections = exs.map((ex) => ex.section);
-assert(new Set(sections).size === 7,
-  'seven sections of the chapter are covered (' + [...new Set(sections)].join(', ') + ')');
-['말하기 1', '말하기 2', '읽고 쓰기', '과제', '문화 산책', '발음', '자기 평가'].forEach((s) =>
-  assert(sections.includes(s), 'including ' + s));
+assert(new Set(sections).size === 8,
+  'eight sections of the chapter are covered (' + [...new Set(sections)].join(', ') + ')');
+SECTIONS.forEach((s) => assert(sections.includes(s), 'including ' + s));
 // The list is read top to bottom, so it follows the book rather than the order the exercises
-// were written in.
-assert(sections.join('|') === ['말하기 1', '말하기 2', '읽고 쓰기', '과제', '문화 산책', '발음', '자기 평가'].join('|'),
+// were written in. 듣고 말하기 has three pages, so it is the one section listed more than once.
+assert([...new Set(sections)].join('|') === SECTIONS.join('|')
+  && sections.filter((s) => s === '듣고 말하기').length === 3
+  && sections.join('|').indexOf('듣고 말하기|듣고 말하기|듣고 말하기') >= 0,
   'and they are listed in the order the chapter prints them');
 assert(/isUnit10World\(\)\) return '\/worlds\/unit10-textbook\.json'/.test(ui),
   'textbookUrl resolves Unit 10 to this bank');
@@ -182,30 +186,44 @@ assert(quizClash.length === 0, 'and no filled sentence is already a desk-quiz ch
 console.log('\n--- 4. The audio on a row is the audio of that row ---');
 const trackOf = {};
 (cass.tracks || []).forEach((t) => { trackOf[t.src] = t; });
+const clipOf = {};
+((cass.dictation || {}).items || []).forEach((d) => { if (d.audio && d.audio.src) clipOf[d.audio.src] = d; });
 const withAudio = rows.filter(({ it }) => it.audio && it.audio.src);
-assert(withAudio.length === 17, 'seventeen rows carry a recording (found ' + withAudio.length + ')');
+assert(withAudio.length === 26, 'twenty-six rows carry a recording (found ' + withAudio.length + ')');
 const onDisk = withAudio.filter(({ it }) => !fs.existsSync(path.join(ROOT, it.audio.src)))
   .map(({ ex, it }) => ex.id + ':' + it.n);
 assert(onDisk.length === 0, 'every one of them is on disk' + (onDisk.length ? ' — ' + onDisk.join(', ') : ''));
-const stray = withAudio.filter(({ it }) => !trackOf[it.audio.src])
+// The 듣기 pages are the first rows here to play a single line rather than a whole track, and
+// every such line is one the cassette's dictation set already cut and checks.
+const stray = withAudio.filter(({ it }) => !trackOf[it.audio.src] && !clipOf[it.audio.src])
   .map(({ ex, it }) => ex.id + ':' + it.n + ' → ' + it.audio.src);
-assert(stray.length === 0, 'and each names a whole track the cassette carries'
+assert(stray.length === 0, 'and each names a whole track or a dictation clip the cassette carries'
   + (stray.length ? ' — ' + stray.join(', ') : ''));
 // A label reading "track 06" over an mp3 that is trk02 sends the learner to the wrong page,
 // and nothing on screen gives that away.
-const drift = withAudio.filter(({ it }) => {
+const drift = withAudio.filter(({ it }) => trackOf[it.audio.src]).filter(({ it }) => {
   const a = /-trk(\d+)\.mp3$/.exec(it.audio.src);
   const b = /track\s*(\d+)/.exec(String(it.audio.labelEn || ''));
   return !a || !b || Number(a[1]) !== Number(b[1]);
 }).map(({ ex, it }) => ex.id + ':' + it.n + ' "' + it.audio.labelEn + '"');
-assert(drift.length === 0, 'and every label names the track it actually plays'
+assert(drift.length === 0, 'and every whole-track label names the track it actually plays'
   + (drift.length ? ' — ' + drift.join(', ') : ''));
-// Four filled lines are printed turns, word for word. That is the strongest claim this bank
+// A clip has to say one of its row's lines, once the row is filled in, and in the mouth that
+// line is printed in — a clip of the shop's line under the caller's would still play.
+const offClip = withAudio.filter(({ it }) => clipOf[it.audio.src]).filter(({ it }) => {
+  const d = clipOf[it.audio.src];
+  const k = filledLines(it).indexOf(nfc(d.ko));
+  return k < 0 || (it.lines[k].who || '') !== (d.who || '');
+}).map(({ ex, it }) => ex.id + ':' + it.n + ' plays «' + clipOf[it.audio.src].ko + '»');
+assert(withAudio.some(({ it }) => clipOf[it.audio.src]) && offClip.length === 0,
+  'and every dictation clip says one of its row’s lines, in that line’s own voice'
+  + (offClip.length ? ' — ' + offClip.join(', ') : ''));
+// Eleven filled lines are printed turns, word for word. That is the strongest claim this bank
 // makes about the tape, so it gets checked against the tape rather than against itself.
 const printed = new Set((cass.tracks || []).flatMap((t) => (t.lines || []).map((l) => nfc(l.ko))));
 const verbatim = rows.flatMap(({ ex, it }) => filledLines(it)
   .filter((s) => printed.has(s)).map((s) => ex.id + '#' + it.n));
-assert(verbatim.length === 4, 'four filled lines are printed turns word for word (found '
+assert(verbatim.length === 11, 'eleven filled lines are printed turns word for word (found '
   + verbatim.length + ': ' + verbatim.join(', ') + ')');
 [['u10sgk-speak-1', 1], ['u10sgk-speak-2', 1]].forEach(([id, n]) => {
   const { it } = rows.find((r) => r.ex.id === id && r.it.n === n);
@@ -270,8 +288,45 @@ assert(keyMiss.length === 0, 'and every keyed answer is the one the book prints 
 const banmal = (check ? check.items : []).slice(3).flatMap((it) => filledLines(it));
 assert(banmal.every((s) => !/요[?.!]?$/.test(s)), '3번 comes out in 반말 with no 요 left on either turn — ' + banmal.join(' / '));
 
-// ── 7. It publishes, and its silent rows have a voice ────────────────────────
-console.log('\n--- 7. It publishes, and its silent rows have a voice ---');
+// ── 7. 듣고 말하기 answers to 모범 답안 and to the tape ─────────────────────────
+// The two 듣기 pages print questions and no words, so their keys come from 모범 답안 on
+// printed p.267 and nowhere else: 1. ② and 2. 치즈피자, 콜라 / 18,000 / 30.
+console.log('\n--- 7. 듣고 말하기 matches 모범 답안 ---');
+const page = (id) => exs.find((ex) => ex.id === id) || { items: [] };
+const keyedKo = (it, second) => {
+  const c = ((second ? it.choices2 : it.choices) || []).find((x) => x.id === (second ? it.answer2 : it.answer));
+  return c ? nfc(c.ko) : '';
+};
+const listen1 = page('u10sgk-listen-1');
+const listen2 = page('u10sgk-listen-2');
+const phone = page('u10sgk-speak-3');
+assert(/^②/.test(keyedKo(listen1.items[0] || {})), '듣기 1 keys ②, as 모범 답안 prints it');
+assert((listen1.items[0] || {}).choices.every((c) => /^[①-③]/.test(c.ko)),
+  'with the book’s own three options on the buttons');
+const want2 = [['치즈피자', '콜라'], ['18,000'], ['30']];
+const got2 = listen2.items.slice(0, 3).map((it) => [keyedKo(it), keyedKo(it, true)].filter(Boolean));
+assert(JSON.stringify(got2) === JSON.stringify(want2),
+  '듣기 2 keys 치즈피자 and 콜라, 18,000 and 30, as 모범 답안 prints them (' + JSON.stringify(got2) + ')');
+// Each page's whole-track rows play that page's own track: 08 for 듣기 1, 09 for 듣기 2.
+[[listen1, 'trk08'], [listen2, 'trk09']].forEach(([ex, trk]) => {
+  const off = ex.items.filter((it) => /-trk\d+\.mp3$/.test((it.audio || {}).src || '') && it.audio.src.indexOf(trk) < 0);
+  assert(ex.items.length > 0 && off.length === 0, ex.id + ' plays ' + trk + ' and no other track');
+});
+assert(listen1.holdGloss === true && listen2.holdGloss === true && phone.holdGloss !== true,
+  'both 듣기 pages hold their English until checked; the 말하기 page, a phrasebook, does not');
+// The 말하기 page's two 되/돼 rows are its point, and each offers the key with 되 and 돼
+// swapped as its mistake, so the rule the note states is what decides them.
+const dwKeys = phone.items.map((it) => keyedKo(it)).filter((k) => /되|돼/.test(k));
+assert(dwKeys.join(',') === '배달되나요,배달돼요', 'the 되/돼 pair is keyed 배달되나요 and 배달돼요 (' + dwKeys.join(',') + ')');
+const swapped = phone.items.filter((it) => /되|돼/.test(keyedKo(it))).every((it) => {
+  const k = keyedKo(it);
+  const flip = k.indexOf('되') >= 0 ? k.replace('되', '돼') : k.replace('돼', '되');
+  return (it.choices || []).some((c) => c.id !== it.answer && nfc(c.ko) === flip);
+});
+assert(swapped, 'and each of the two offers its own key with 되 and 돼 swapped as a wrong button');
+
+// ── 8. It publishes, and its silent rows have a voice ────────────────────────
+console.log('\n--- 8. It publishes, and its silent rows have a voice ---');
 const { collectUploadFiles } = require(path.join(ROOT, 'scripts', 'r2Content.js'));
 const batch = new Set(collectUploadFiles(ROOT).map((x) => x.rel.split(path.sep).join('/')));
 assert(batch.has('worlds/unit10-textbook.json'), 'worlds/unit10-textbook.json publishes');
@@ -283,7 +338,7 @@ assert(absent.length === 0, 'and so does every recording it names'
 const { collectTtsPhrases, ttsClipRel } = require(path.join(ROOT, 'scripts', 'ttsClips.js'));
 const wanted = new Set(collectTtsPhrases(ROOT).map((t) => ttsClipRel(t)));
 const spoken = rows.filter(({ it }) => !(it.audio && it.audio.src)).map(({ it }) => nfc(filled(it)));
-assert(spoken.length === 13, 'thirteen rows have no book recording (found ' + spoken.length + ')');
+assert(spoken.length === 17, 'seventeen rows have no book recording (found ' + spoken.length + ')');
 const unharvested = spoken.filter((s) => s && !wanted.has(ttsClipRel(s)));
 assert(unharvested.length === 0, 'and every one of them is in the TTS harvest'
   + (unharvested.length ? ' — ' + unharvested.slice(0, 3).join(' | ') : ''));

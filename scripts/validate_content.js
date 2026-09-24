@@ -853,16 +853,14 @@ const overlayIds = [
   });
   check('every Unit 15 교과서 row is complete and its answer is among its choices',
     thin.length === 0, thin.slice(0, 6).join(', '));
-  // 듣기 1 and 듣기 2 are absent on purpose — both ask the learner to choose after
-  // listening, and the recording has not been supplied. Writing an answer key for a
-  // conversation nobody can hear would mean inventing one. If a 듣기 page ever appears
-  // here it has to bring an audio source with it.
+  // 듣기 1 and 듣기 2 were absent at first on purpose — both ask the learner to choose after
+  // listening, and until tracks 58 and 59 were scripted there was nothing to hear. Writing
+  // an answer key for a conversation nobody can hear would have meant inventing one. They
+  // arrived on 2026-09-24 with the tape behind every row, and this is what keeps it there:
+  // a 듣기 page here has to bring an audio source on every row.
   //
-  // This is a tripwire for a page that does not exist yet, so `listen` is empty and the
-  // check passes over nothing. That is intended, but an empty pass and a real pass read
-  // identically, and a filter that quietly stopped matching would look the same again —
-  // so the count goes in the message. `exs` is asserted non-empty above, which is what
-  // keeps the emptiness a fact about the content rather than about the filter.
+  // The count goes in the message, because an empty pass and a real pass read identically
+  // and a filter that quietly stopped matching would look like either.
   const listen = exs.filter((e) => String(e.section || '').indexOf('듣기') >= 0
     || String(e.no || '').indexOf('듣기') >= 0);
   check(`no Unit 15 듣기 page ships without a recording (${listen.length} on the page)`,
@@ -2633,7 +2631,7 @@ const overlayIds = [
 (function checkTextbookBanks() {
   const BANKS = [
     { unit: 'unit14', label: 'Unit 14', world: 'isUnit14World', exs: 9, rows: 41 },
-    { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 7, rows: 30 },
+    { unit: 'unit10', label: 'Unit 10', world: 'isUnit10World', exs: 10, rows: 43 },
     { unit: 'unit13', label: 'Unit 13', world: 'isUnit13World', exs: 16, rows: 78 },
     { unit: 'unit11', label: 'Unit 11', world: 'isUnit11World', exs: 14, rows: 63 },
     { unit: 'unit16', label: 'Unit 16', world: 'isUnit16World', exs: 14, rows: 59 },
@@ -2754,6 +2752,42 @@ const overlayIds = [
     check('the TTS harvest reads -textbook.json as well as -workbook.json',
       /-\(\?:work\|text\)book\\\.json\$/.test(ttsSrc));
   }
+}());
+
+// ── 듣기 pages ───────────────────────────────────────────────────────
+// A 듣기 page is answered off the tape, and two things on screen can answer it first. The
+// English gloss beside each row is drawn before the row is checked — an aid on a grammar page,
+// and on a 듣기 page a transcript of what the tape was about to say: "I studied hard, but I did
+// badly in the exam" beside a blank whose buttons are 잘 봐서 / 안 봐서 / 못 봐서. And the
+// note above the rows is read first of all, so "모범 답안 gives ②" there is the key. All
+// fourteen pages showed the first and three the second until 2026-09-24. A new 듣기 page has
+// to hold its gloss (holdGloss on the page, or on the bank) to get past this.
+(function checkListeningPages() {
+  const pages = [];
+  fs.readdirSync(path.join(ROOT, 'worlds')).filter((f) => /-(?:text|work)book\.json$/.test(f)).sort()
+    .forEach((f) => {
+      const b = JSON.parse(read(path.join('worlds', f)));
+      (b.exercises || []).forEach((ex) => {
+        if (/^듣기/.test(String(ex.no || ''))) pages.push({ b, ex });
+      });
+    });
+  check(`the unit banks carry their 듣기 pages (${pages.length})`, pages.length >= 18, String(pages.length));
+  const open = pages.filter(({ b, ex }) => !(ex.holdGloss === true || b.holdGloss === true)).map(({ ex }) => ex.id);
+  check('every 듣기 page holds its English until the row is checked', open.length === 0, open.join(', '));
+  const told = pages.filter(({ ex }) => /\b(?:gives|is|keys)\s*[①-⑩]/.test(String(ex.noteEn || '')))
+    .map(({ ex }) => ex.id);
+  check('and no note above a 듣기 page states its key', told.length === 0, told.join(', '));
+  const silent = [];
+  pages.forEach(({ ex }) => (ex.items || []).forEach((it) => {
+    if (!(it.audio && it.audio.src)) silent.push(ex.id + ' row ' + it.n);
+  }));
+  check('every row on a 듣기 page plays a recording', silent.length === 0, silent.slice(0, 6).join(', '));
+  // The flag is only worth anything if the renderer reads it off the page and a save through
+  // the admin does not drop it — validateWorkbook rebuilds each page from a fixed field list.
+  check('the renderer honours holdGloss on a page as well as on a bank',
+    readGameSource().indexOf('(st.bank && st.bank.holdGloss) || ex.holdGloss') >= 0);
+  check('and the admin validator keeps it',
+    read(path.join('admin', 'lib', 'workbook.js')).indexOf('if (ex.holdGloss === true) out.holdGloss = true;') >= 0);
 }());
 
 // ── The exam world ───────────────────────────────────────────────────
