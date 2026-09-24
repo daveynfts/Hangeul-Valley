@@ -156,10 +156,17 @@ const elsewhere = new Set(levels.flatMap((l) => (l.words || []).map((w) => nfc(w
 const overlap = kos.filter((k) => elsewhere.has(k));
 assert(true, 'the exam world repeats ' + overlap.length + ' word(s) taught elsewhere — allowed by design');
 
-// srsData is keyed by the Korean word alone, so the same word in two lists is one card.
+// srsData is keyed by the Korean word, so the same word in two lists is one card. The one
+// exception is a different word that happens to be spelled the same, which
+// js/systems/wordSenses.js names — and it names only those.
 const srsKeyed = extract('let srsData  = {}', ';', 'srsData declaration');
 assert(/srsData\s+=\s+\{\}/.test(srsKeyed) && src.indexOf('srsData[ko]') >= 0,
   'srsData is keyed by the Korean word, so a repeat shares one card rather than making a second');
+const senses = require('../js/systems/wordSenses.js');
+const topikCopy = JSON.parse(JSON.stringify(world.level.words));
+const ownKeys = senses.stampWordKeys(topikCopy, 'topik-2');
+assert(ownKeys === Object.keys(senses.WORD_SENSES['topik-2'] || {}).length && ownKeys <= 2,
+  'only the words WORD_SENSES names get a card of their own (' + topikCopy.filter((w) => w.key).map((w) => w.key).join(', ') + ')');
 
 // And srsDueWords() dedupes before planting, so a repeat is never planted twice.
 const dueSrc = extract('function srsDueWords(', 'return out;', 'srsDueWords') + '\n}';
@@ -175,7 +182,8 @@ const ctx = {
     '학교': { m: { type: { due: 20 } } },
     '시험': { m: { type: { due: 5 } } }
   },
-  dueModality: (ko) => (ctx.srsData[ko] ? 'type' : null)
+  dueModality: (ko) => (ctx.srsData[ko] ? 'type' : null),
+  wordKey: senses.wordKey
 };
 vm.createContext(ctx);
 vm.runInContext(dueSrc, ctx);

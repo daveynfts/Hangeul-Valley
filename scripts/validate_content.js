@@ -4475,6 +4475,19 @@ STATIC_FILES.forEach(([rel]) => {
     'these require a JSON but are not in vercel.json functions: ' + undeclared.join(', '));
 }());
 
+// ── A spelling two places share is one word, unless wordSenses.js says otherwise ──
+// Progress is kept per spelling, so 쓰다 "to write" (level 1) and 쓰다 "to be bitter" (Unit 10)
+// shared one record until the second sense was named — and nothing said so when Unit 10 brought
+// it in. A shared spelling whose glosses have nothing in common has to be named as a second
+// sense or listed as one word (scripts/sharedHeadwords.js).
+(function sharedHeadwords() {
+  const { vocabularyPlaces, sharedHeadwordProblems } = require('./sharedHeadwords');
+  const { WORD_SENSES, senseKeyFor } = require('../js/systems/wordSenses.js');
+  const problems = sharedHeadwordProblems(vocabularyPlaces(ROOT), WORD_SENSES, senseKeyFor);
+  check('a spelling two places share is one word, or a second sense WORD_SENSES names',
+    problems.length === 0, problems.join('\n      '));
+}());
+
 // ── Report ───────────────────────────────────────────────────────────────────
 console.log(`\nvalidate_content: ${checks - failures.length}/${checks} invariants hold`);
 if (failures.length) {
