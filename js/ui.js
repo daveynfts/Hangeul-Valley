@@ -5592,7 +5592,7 @@ function renderWorkbook() {
             wbLineHtml(ex, item, wbAnswerText(correct),
               { plain: true, own: st.own && st.own[i],
                 second: correct2 ? wbAnswerText(correct2) : '' }) + '</div>' +
-          (ok ? '' : '<div class="wb-why-yours">You put: ' + vbEsc(yours) + '</div>') +
+          (ok ? '' : '<div class="wb-why-yours">' + vbEsc(hvT('ui.wb.youPut')) + ' ' + vbEsc(yours) + '</div>') +
           '<div class="wb-why-en">' + vbEsc(tr(item, 'en') || '') + '</div>' +
           '<div class="wb-why-body">' + vbEsc(tr(item, 'why')) + '</div>' +
           '<div class="wb-why-gram">📐 ' + vbEsc(tr(item, 'grammar')) + '</div>' +

@@ -876,6 +876,7 @@
   "ui.wb.head.closeWorkbook.aria": "Close workbook",
   "ui.wb.perfect": "Perfect set!",
   "ui.wb.workbook": "Workbook",
+  "ui.wb.youPut": "You put:",
   "ui.world.click": "Click",
   "ui.world.tooFar": "Walk closer"
 }
