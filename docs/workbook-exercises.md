@@ -262,7 +262,7 @@ sitting deals. `tests/test_workbook_button_order.js` drives the shipped renderer
 seeded random source and was checked against the old renderer, where it reads "1×60".
 
 So the order a bank is written in no longer reaches the screen, and nothing needs rewriting
-to benefit. A new bank can still vary it, so the file does not teach
+to benefit. A new bank can still vary it — Unit 12's 교과서 does, so the file does not teach
 "the first one" to any reader that bypasses the renderer — but the deal is what protects the
 learner.
 
@@ -1507,6 +1507,77 @@ missing picture.
 ---
 
 ---
+
+## Unit 12, the 교과서 and the 퀴즈 that closed the desk
+
+Unit 12 was the one unit of nine whose desk offered a 익힘책 and nothing else. Two banks close
+that gap: `worlds/unit12-textbook.json`, sixteen pages and 73 rows with ids prefixed
+`u12sgk-`, covering all eleven headed sections of printed pp.68-87; and
+`worlds/unit12-desk-quiz.json`, seventeen rows, ten to a sitting, written after both banks.
+In the student book the image index is the printed page here (image 70 is printed 70), and
+모범 답안 on printed p.267 (image 257) answers 12과 twice: ② for 듣기 1, ④ for 듣기 2.
+
+### An answer key printed upside down
+
+The 자기 평가 page prints its four answers upside down at the foot of p.87 and they are hard
+to read at display size. PowerShell's `System.Drawing` is on every Windows machine and crops
+and rotates a page JPEG in a few lines (`Graphics.DrawImage` onto a new bitmap, then
+`RotateFlip(Rotate180FlipNone)`), so there is no need for an image tool or a photograph. The
+key is 피곤해 보여요, 즐겁게, 잘 먹는 편이에요, 한국 사람처럼 — one per form in the page's box.
+
+### A cue in brackets goes in the headline, not the line
+
+Several pages give the word a row starts from in brackets — (진하다), (피곤하다) — and a line
+that carries it gets the bracket read aloud by the TTS harvest, which speaks every filled
+line. The cue goes in `phraseKo` instead: `저는 눈썹이 ___ 사람이 좋아요 (진하다)`. The learner
+sees it above the row, and the line speaks as a sentence.
+
+### Wrong buttons that are right Korean
+
+The 익힘책 for this unit offered A-게 보이다 as a mistake on six rows — 길게 보여요, 넓게 보여요,
+맛있게 보이네요, 피곤하게 보이네요, 힘들게 보이네요, 재미있게 보여요 — with notes saying it
+describes "how the looking is done". It does not: the National Institute of Korean Language
+answers that -게 보이다 and -아/어 보이다 are both correct (온라인가나다, qna_seq 316972), and
+native speakers say 날씬하게 보이는 옷 every day. The chapter practises -아/어 보이다, which is a
+reason to key it, not to mark the other wrong. The same pass found five more sayable
+distractors — 방이 커 보여요, 말라 보여요, 옷이 두꺼워 보이네요, 단어가 많아 보이네요 (B's 네
+answers either remark), and 못 먹는 편이에요 after 시간이 없어서, which is if anything the more
+natural of the two. All eleven were replaced with forms that are wrong in their slot — the
+wrong vowel (길아), the modifier before 보이다 (넓은 보여요), 보다 for 보이다 (피곤해 보네요),
+the honorific on oneself (안 먹는 편이세요) — and both suites pin them out.
+
+Some forms were considered for the 교과서 and turned down for the same reason, and
+`tests/test_unit12_textbook.js` pins them too: 정확히 beside 정확하게, 편이어서 beside 편이라서,
+멋지게 beside 멋있게, 대학생으로 보여요, and 어리어 beside 어려 — 한글 맞춤법 제36항 lets ㅣ + 어
+be written either way, so the uncontracted form is not a mistake, where 비싸아 (ㅏ + 아) and 크어
+(ㅡ dropped) are.
+
+### 받침 ㄻ, checked from the syllables
+
+The 발음 page's two rules are 표준 발음법 제11항 (ㄻ before a consonant is [ㅁ]) and 제24항 (a
+ㄱ ㄷ ㅅ ㅈ after a ㄴ- or ㅁ-final *stem* is tensed — which is why the noun 삶과 is [삼과] and
+the verb 닮고 is [담꼬]). The page does not state the vowel case, but prints it in red:
+before a vowel both letters are heard and the ㅁ moves across, 닮았어요 [달마써요] (제14항).
+The suite recomputes every keyed sound from the spelling's syllable index, and every row
+offers the spelling itself as a wrong sound. The 연습 page runs the other way, sound to
+spelling, and has a trap of its own: [담꼬] and [담는] are also 담다, to put something in, so
+the sentence has to decide — 담고 is a wrong button that is a real word.
+
+### One page whose wrong buttons are its other rows' answers
+
+어휘 2 puts six personality words under six drawings. The drawings are 그림 lines saying what
+each shows, and a row's wrong word is the drawing opposite it — 남성적이다 against 여성적이다 —
+so on this one page a wrong button can be another row's right answer. It is named in the suite,
+as Unit 16 and 17 named theirs, and checked from the other side: every button is one of the
+page's six words.
+
+### A quiz key with no pattern and no longest answer
+
+The quiz key first came out B D A C four times over. The desk shuffles questions, but a
+patternless key is the safer thing to ship, so the builder moves each answer to a chosen
+letter, and the suite refuses a key that repeats with a period of four or less. It also counts
+how often the right answer is the single longest option — the oldest test-taking trick — and
+refuses more than chance would give; five options were rebalanced to get there.
 
 ## A third kind of bank: the exam world
 

@@ -516,7 +516,7 @@ admin/           Express admin panel (writable locally; read-only on Vercel)
 api/             Vercel serverless functions (save, admin GET, Unit 10)
 ```
 
-The study desk offers up to three things, and every unit but 12 now carries all
+The study desk offers up to three things, and every unit, 10 to 18, now carries all
 three: 퀴즈 (multiple choice), 교과서 — the 교과서's own 말하기 / 듣기 / 읽기 / 과제 /
 문화 산책 / 발음 / 자기 평가 pages — and 연습 문제, the 익힘책's 어휘, 문법과 표현
 and 문형 연습 with the book's own audio on the pattern drills. Both exercise banks

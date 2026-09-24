@@ -2683,6 +2683,7 @@ function deskQuizUrl() {
   if (typeof isUnit17World === 'function' && isUnit17World()) return '/worlds/unit17-desk-quiz.json';
   if (typeof isUnit18World === 'function' && isUnit18World()) return '/worlds/unit18-desk-quiz.json';
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-desk-quiz.json';
+  if (typeof isUnit12World === 'function' && isUnit12World()) return '/worlds/unit12-desk-quiz.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-desk-quiz.json';
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-desk-quiz.json';
   // The exam desk had the paper and nothing beside it, while every other desk offers a quiz
@@ -2904,6 +2905,7 @@ function textbookUrl() {
   if (typeof isUnit14World === 'function' && isUnit14World()) return '/worlds/unit14-textbook.json';
   if (typeof isUnit15World === 'function' && isUnit15World()) return '/worlds/unit15-textbook.json';
   if (typeof isUnit10World === 'function' && isUnit10World()) return '/worlds/unit10-textbook.json';
+  if (typeof isUnit12World === 'function' && isUnit12World()) return '/worlds/unit12-textbook.json';
   if (typeof isUnit13World === 'function' && isUnit13World()) return '/worlds/unit13-textbook.json';
   if (typeof isUnit11World === 'function' && isUnit11World()) return '/worlds/unit11-textbook.json';
   if (typeof isUnit16World === 'function' && isUnit16World()) return '/worlds/unit16-textbook.json';
